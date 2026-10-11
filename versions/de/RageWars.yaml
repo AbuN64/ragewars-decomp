@@ -4233,7 +4233,7 @@ segments:
       - [0xDF4A0, data, "src/rw_video_mode_counts_E34F0_us_rev1.c"]
       - [0xDF660, data, "rodata/writable/800E2AB0"]
       - [0xDF680, .data, "rodata/unresolved/800DEA80"]
-      - [0xDFE30, data, "rodata/writable/800E3280"]
+      - [0xDFE30, .data, "rodata/writable/800E3280"]
       - [0xDFE51, data, "rodata/unresolved/800DF251"]
       - [0xDFE54, data, "rodata/writable/800E32A4"]
       - [0xDFEB0, .data, "rodata/unresolved/800DF2B0"]
