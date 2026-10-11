@@ -5794,7 +5794,7 @@ segments:
       - [0xE409C, .data, "rodata/unresolved/800E3300_unclaimed_E409C"]
       - [0xE4110, data, "rodata/writable/800E3510"]
       - [0xE411C, data, "src/ragewars_event_handlers_E411C_us_rev1.c"]
-      - [0xE4170, data, "rodata/unresolved/800E351C_unclaimed_E4170"]
+      - [0xE4170, .data, "rodata/unresolved/800E351C_unclaimed_E4170"]
       - [0xE4190, data, "rodata/writable/800E3590"]
       - [0xE4194, data, "rodata/unresolved/800E3594"]
       - [0xE4324, .data, "src/ragewars_event_handlers_E4324_us_rev1.c"]
