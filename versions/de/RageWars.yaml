@@ -3839,7 +3839,7 @@ segments:
       - [0xCDFE0, data, "rodata/writable/800D2630"]
       - [0xCDFF8, .data, "src/ragewars_distance_attenuation_us_rev1.c"]
       - [0xCE2B4, rodata, "src/rw_pool_802800C0_D3504_us_rev1.c"]
-      - [0xCE2B8, data, "rodata/unresolved/800CD6B8"]
+      - [0xCE2B8, .data, "rodata/unresolved/800CD6B8"]
       - [0xCE2E0, data, "rodata/writable/800D2930"]
       - [0xCE2E4, data, "rodata/unresolved/800D2934"]
       - [0xCE300, data, "rodata/writable/800D2950"]
