@@ -4058,6 +4058,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D0068"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800CF5C0_unclaimed_D0C30_unclaimed_D0C68"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D0510"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF5C0_unclaimed_D1110", "src/ragewars_weapon_resource_directory_us_rev1.c", "rodata/unresolved/800CF5C0_unclaimed_D1184"]
@@ -45980,6 +45988,17 @@ path = "src/rodata.unresolved.800CF5C0_unclaimed_D0C30.c"
 kind = "data"
 group = "data_800D0030"
 members = ["rodata/unresolved/800CF5C0_unclaimed_D0C30"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800CF5C0_unclaimed_D0C30_unclaimed_D0C68.c"
+kind = "data"
+group = "data_800D0068"
+members = ["rodata/unresolved/800CF5C0_unclaimed_D0C30_unclaimed_D0C68"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
