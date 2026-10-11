@@ -5255,7 +5255,7 @@ segments:
       - [0xD8FE0, .data, "src/ragewars_vi_contexts_us_rev1.c"]
       - [0xD9040, data, "src/ragewars_vi_context_selectors_us_rev1.c"]
       - [0xD9048, data, "rodata/writable/800D8440_unclaimed_D9048"]
-      - [0xD9050, data, "src/ragewars_vi_manager_us_rev1.c"]
+      - [0xD9050, .data, "src/ragewars_vi_manager_us_rev1.c"]
       - [0xD906C, data, "rodata/unresolved/800D8450_unclaimed_D906C"]
       - [0xD9070, .data, "src/ragewars_vi_modes_us_rev1.c"]
       - [0xD9E80, data, "src/ragewars_audio_interface_clock_us_rev1.c"]
