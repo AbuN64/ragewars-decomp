@@ -5914,6 +5914,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E2910"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510", "src/rw_video_arguments_r0_m1_E3514_us_rev1.c", "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E2948"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548"]
@@ -51808,6 +51816,17 @@ path = "src/rw_video_arguments_r0_m0_E34F8_us_rev1.c"
 kind = "data"
 group = "data_800E28F8"
 members = ["src/rw_video_arguments_r0_m0_E34F8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_video_arguments_r0_m1_E3514_us_rev1.c"
+kind = "data"
+group = "data_800E2910"
+members = ["src/rw_video_arguments_r0_m1_E3514_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
