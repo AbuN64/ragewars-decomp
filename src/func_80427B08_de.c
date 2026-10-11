@@ -1,6 +1,7 @@
 #include "span_C76B0/data.h"
 
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "types.h"
 /* Writes the heading of the results screen D_800E4690 into item 0x153: in one-player mode the
    label 0x69 followed by the name of the character in the player's status record; in three-player
@@ -16,8 +17,6 @@ extern char D_800DD9BC[];
 extern char D_800DD9C8[];
 extern char D_800DD9D0_de[];
 
-extern struct Label *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(struct Label *, s32);
 extern char *func_80411D78_de(s32);
 extern void func_802A025C_de(char *, char *);
 extern s32 func_8041F140_de(s32);
@@ -32,7 +31,8 @@ void func_80427B08_de(void) {
     u8 best;
     char buffer[32];
 
-    func_8040EC30_de(D_800E4690->window, 0x153)->text = D_800E4690->heading;
+    /* the hub lookup returns its Item view; the Label view names the text pointer this unit writes */
+    ((struct Label *) func_8040EC30_de(D_800E4690->window, 0x153))->text = D_800E4690->heading;
     settings = &D_801462C8;
     switch (settings->players) {
     case 1:
@@ -42,7 +42,7 @@ void func_80427B08_de(void) {
         break;
     case 3:
         func_802A025C_de(D_800E4690->time, func_80411D78_de(0x3D));
-        item = func_8040EC30_de(D_800E4690->window, 0x156);
+        item = (struct Label *) func_8040EC30_de(D_800E4690->window, 0x156);
         func_8040E8D8_de(item, 1);
         item->text = D_800E4690->time;
         time = D_80102B00[D_800E4690->record].times[D_800E4690->stage];

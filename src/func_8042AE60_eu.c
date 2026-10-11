@@ -1,6 +1,7 @@
 #include "span_16E000/code_80429C10.h"
 #include "types.h"
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 /* Advances the menu transition state and updates its visual effects. */
 
@@ -27,8 +28,6 @@ s32 func_8025DF34_de(s32);
 void func_8029973C_de(void);
 void func_802A2360_de(void);
 
-void func_8040E8D8_de(void *, int);
-void * func_8040EC30_de(void *, unsigned short);
 void func_80419F24_de(void *);
 s32 func_80419F38_de(void *);
 void func_80419F58_de(void *, int);

@@ -42,10 +42,11 @@ void func_8042854C_de(u32 arg0, s32 arg1, s32 arg2) {
         id = 0x149 + OPTION_SHIFT;
         break;
     }
-    element = func_8040EC30_de(D_800E4690->root, id);
+    /* the hub's Item view shares the MenuWidget prefix; this unit reads alpha and value through it */
+    element = (MenuWidget *) func_8040EC30_de(D_800E4690->root, id);
     func_8040E8D8_de(func_8040EC30_de(element, 0x14B + OPTION_SHIFT), 0);
     value = func_8042863C_de(arg1);
-    field = func_8040EC30_de(element, 0x14A + OPTION_SHIFT);
+    field = (MenuWidget *) func_8040EC30_de(element, 0x14A + OPTION_SHIFT);
     field->alpha = 0x64;
     field->value = value;
 }

@@ -2,6 +2,7 @@
 #include "span_16E000/code_8042BD40.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "types.h"
 
 /* Builds screen state D_800E5430: allocates 0x24 bytes, sets up the handle for resources
@@ -10,13 +11,10 @@
 
 extern struct State_func_8042D9E8_de *D_800E5430;
 
-extern void *func_8025305C_de(s32 size);
 extern void func_802A2360_de(void);
 extern s32 func_8041A280_de(s32, s32);
 extern void func_8041A47C_de(s32);
 extern void func_8041B110_de(s32);
-extern struct MenuWidget *func_8040EC30_de(s32, s32);
-extern s32 func_80419E54_de(s32, s32);
 extern void func_802A0C08_de(void *, void *, s32);
 
 s32 func_8042DBD0_us_rev1(s32 arg0) {
@@ -25,14 +23,16 @@ s32 func_8042DBD0_us_rev1(s32 arg0) {
     struct MenuWidget *node;
     void *text;
 
-    D_800E5430 = func_8025305C_de(0x24);
+    /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own state type */
+    D_800E5430 = (struct State_func_8042D9E8_de *) func_8025305C_de(0x24);
     func_802A2360_de();
     handle = func_8041A280_de(0x398, 0x399);
     state = D_800E5430;
     state->menu = handle;
     func_8041A47C_de(handle);
     func_8041B110_de(0x39C);
-    node = func_8040EC30_de(arg0, 0x39A);
+    /* the MenuWidget view names the alpha byte at +0x10 and the text pointer at +0x34 that the hub's Item omits */
+    node = (struct MenuWidget *) func_8040EC30_de((void *) arg0, 0x39A);
     state = D_800E5430;
     state->window = node;
     node->alpha = 0xF;
@@ -40,7 +40,7 @@ s32 func_8042DBD0_us_rev1(s32 arg0) {
     state = D_800E5430;
     state->button = handle;
     state->delay = 3;
-    node = func_8040EC30_de(arg0, 0x39D);
+    node = (struct MenuWidget *) func_8040EC30_de((void *) arg0, 0x39D);
     state = D_800E5430;
     text = &state->text;
     node->text = text;
