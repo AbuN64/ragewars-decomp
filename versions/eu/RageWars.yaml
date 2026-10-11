@@ -3580,7 +3580,7 @@ segments:
       - [0xC6E50, rodata, "src/rw_pool_802A84F8_CBD40_us_rev1.c"]
       - [0xC6E54, .rodata, "rodata/unresolved/800C6254"]
       - [0xC6EB4, rodata, "src/rw_tail_802A88F0_CBDA4_us_rev1.c"]
-      - [0xC6ECC, rodata, "rodata/unresolved/800C62CC"]
+      - [0xC6ECC, .rodata, "rodata/unresolved/800C62CC"]
       - [0xC6EEC, rodata, "src/rw_tail_802A88F0_CBDDC_us_rev1.c"]
       - [0xC6F04, .rodata, "rodata/unresolved/800C6304"]
       - [0xC6FC4, rodata, "src/rw_tail_802A88F0_CBEB4_us_rev1.c"]
