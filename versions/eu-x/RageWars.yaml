@@ -3849,7 +3849,7 @@ segments:
       - [0xCDDC1, data, "rodata/unresolved/800D0E51"]
       - [0xCDDC2, data, "rodata/writable/800D0E52"]
       - [0xCDDE0, data, "rodata/unresolved/800D0E70"]
-      - [0xCDE30, data, "rodata/writable/800CBC80"]
+      - [0xCDE30, .data, "rodata/writable/800CBC80"]
       - [0xCDE54, data, "rodata/unresolved/800CD254"]
       - [0xCDE58, rodata, "rodata/shared/800D0EF8"]
       - [0xCDE5C, rodata, "rodata/shared/800CD25C"]

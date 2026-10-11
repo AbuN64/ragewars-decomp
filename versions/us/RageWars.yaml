@@ -3799,7 +3799,7 @@ segments:
       - [0xCC721, data, "rodata/unresolved/800D0E51"]
       - [0xCC722, data, "rodata/writable/800D0E52"]
       - [0xCC740, data, "rodata/unresolved/800D0E70"]
-      - [0xCC790, data, "rodata/writable/800CBC80"]
+      - [0xCC790, .data, "rodata/writable/800CBC80"]
       - [0xCC7B4, data, "rodata/unresolved/800CBBB4"]
       - [0xCC7B8, rodata, "rodata/shared/800D0EF8"]
       - [0xCC7BC, rodata, "rodata/shared/800CBBBC"]
