@@ -4272,7 +4272,7 @@ segments:
       - [0xFEEEC, .data, "rodata/unresolved/801002EC"]
       - [0xFEFE0, data, "rodata/writable/800FE3E0"]
       - [0xFEFE4, .data, "rodata/unresolved/800FE3E4"]
-      - [0xFF018, data, "rodata/writable/800FE418"]
+      - [0xFF018, .data, "rodata/writable/800FE418"]
       - [0xFF038, .data, "rodata/unresolved/800FE438"]
       - [0xFF130, data, "rodata/writable/800FE530"]
       - [0xFF140, data, "rodata/unresolved/800FE540"]
