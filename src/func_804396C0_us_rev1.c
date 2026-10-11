@@ -26,6 +26,12 @@ typedef struct {
 } GameBlock48_func_804396C0_us_rev1;
 
 typedef struct {
+    char pad0[0x24];
+    s8 unk24;
+    s8 unk25;
+} Settings_func_804396C0_us_rev1;
+
+typedef struct {
     s32 window;
     s32 unk4;
 } PulseScreen_func_804396C0_us_rev1;
@@ -37,7 +43,6 @@ typedef struct {
 extern void func_8022EF30_de(void *arg0);
 extern int func_8025477C_de(void);
 extern void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2);
-extern void func_802A2394_de(void);
 extern void func_802A2400_de(float value);
 extern void func_8040C428_de(s32 value);
 extern void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active);
@@ -48,6 +53,7 @@ extern PulseScreen_func_804396C0_us_rev1 *D_800E5950;
 
 s32 func_804396C0_us_rev1(struct Tree *arg0) {
     s32 i;
+    Settings_func_804396C0_us_rev1 *settings;
     struct Record_func_804396C0_us_rev1 *rec;
     GameBlock48_func_804396C0_us_rev1 *game;
 
@@ -70,8 +76,9 @@ s32 func_804396C0_us_rev1(struct Tree *arg0) {
     } while (i >= 0);
     D_800E5950->window = (s32) func_8040EC30_de(arg0, 0x397);
     D_800E5950->unk4 = 0;
-    D_801462C8.unknown1F[0x24 - 0x1F] = 10;
-    D_801462C8.unknown1F[0x25 - 0x1F] = 10;
+    settings = (Settings_func_804396C0_us_rev1 *) (&D_801462C8);
+    settings->unk24 = 10;
+    settings->unk25 = 10;
     for (i = 0; i < 4; i++) {
         func_8022EF30_de(&D_80102B00[i]);
     }
