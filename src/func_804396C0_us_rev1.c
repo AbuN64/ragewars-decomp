@@ -16,11 +16,13 @@ struct Record_func_804396C0_us_rev1 {
     char pad79[0x96 - 0x79];
 };
 
+/* Every address in the original unit folds against the block's 0x48 member: the first materialized
+ * pointer is lui 0x8014 / addiu 20616, the pool base is that anchor minus 72, and the record table
+ * sits on the same anchor at 5930. A view whose offset 0 is the 0x48 member reproduces that order. */
 typedef struct {
-    char pad0[0x48];
     char unk48[0x1310];
     struct Record_func_804396C0_us_rev1 records[8];
-} GameRecords_func_804396C0_us_rev1;
+} GameBlock48_func_804396C0_us_rev1;
 
 typedef struct {
     char pad0[0x24];
@@ -58,12 +60,12 @@ s32 func_804396C0_us_rev1(struct Tree *arg0) {
     s32 i;
     Settings_func_804396C0_us_rev1 *settings;
     struct Record_func_804396C0_us_rev1 *rec;
-    GameRecords_func_804396C0_us_rev1 *game;
+    GameBlock48_func_804396C0_us_rev1 *game;
 
     D_800E5950 = (PulseScreen_func_804396C0_us_rev1 *) func_8025305C_de(8);
-    game = (GameRecords_func_804396C0_us_rev1 *) (&D_80145040);
+    game = (GameBlock48_func_804396C0_us_rev1 *) &(&D_80145040)[18];
     func_8044A370_de(game->unk48, 0);
-    func_804499B0_de((ObjectPool *) (&D_80145040), 0, 0);
+    func_804499B0_de((ObjectPool *) &D_80145040, 0, 0);
     func_80286AA8_de(&D_8011FE88, 0, 0);
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
