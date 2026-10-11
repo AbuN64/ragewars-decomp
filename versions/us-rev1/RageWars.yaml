@@ -4090,7 +4090,7 @@ segments:
       - [0xCF010, .data, "rodata/unresolved/800CE410"]
       - [0xcf21c, data, "src/rw_hud_lives_motion_script_us_rev1.c"]
       - [0xcf230, .data, "rodata/unresolved/800CE410_unclaimed_CF230"]
-      - [0xcf280, data, "src/rw_hud_score_motion_script_us_rev1.c"]
+      - [0xcf280, .data, "src/rw_hud_score_motion_script_us_rev1.c"]
       - [0xcf29c, data, "rodata/unresolved/800CE410_unclaimed_CF230_unclaimed_CF29C"]
       - [0xcf2ac, .data, "src/rw_hud_count_motion_script_us_rev1.c"]
       - [0xcf2d8, data, "rodata/unresolved/800CE410_unclaimed_CF230_unclaimed_CF29C_unclaimed_CF2D8"]
