@@ -42451,6 +42451,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/ragewars_resident_strings_E6C3C_us_rev1.c"
+kind = "data"
+group = "data_800E5F70"
+members = ["src/ragewars_resident_strings_E6C3C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/ragewars_spinner_states_us_rev1.c"
 kind = "data"
 group = "data_800E63C0"

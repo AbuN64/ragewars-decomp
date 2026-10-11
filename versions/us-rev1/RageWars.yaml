@@ -6112,7 +6112,7 @@ segments:
       - [0xE6A48, data, "rodata/writable/800E5E48"]
       - [0xe6a74, data, "src/rw_menu_font_presets_us_rev1.c"]
       - [0xe6b70, .data, "rodata/unresolved/800E5E74_unclaimed_E6B70"]
-      - [0xE6C3C, data, "src/ragewars_resident_strings_E6C3C_us_rev1.c"]
+      - [0xE6C3C, .data, "src/ragewars_resident_strings_E6C3C_us_rev1.c"]
       - [0xE6C58, data, "rodata/unresolved/800E5E74_unclaimed_E6C58"]
       - [0xE6C5C, data, "src/ragewars_resident_strings_E6C5C_us_rev1.c"]
       - [0xE6C74, data, "rodata/unresolved/800E5E74_unclaimed_E6C74"]
