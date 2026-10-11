@@ -3906,6 +3906,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D7A6C"
+segment = "span_C76B0"
+members = ["src/ragewars_confirmation_label_slots_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D7A98"
 segment = "span_C76B0"
 members = ["src/ragewars_option_label_slots_us_rev1.c"]
@@ -39940,6 +39948,17 @@ path = "src/ragewars_cone_attenuation_us_rev1.c"
 kind = "data"
 group = "data_800D274C"
 members = ["src/ragewars_cone_attenuation_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_confirmation_label_slots_us_rev1.c"
+kind = "data"
+group = "data_800D7A6C"
+members = ["src/ragewars_confirmation_label_slots_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

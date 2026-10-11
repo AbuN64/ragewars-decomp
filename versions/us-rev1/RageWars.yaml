@@ -5221,7 +5221,7 @@ segments:
       - [0xD83CC, .data, "src/ragewars_pak_note_label_slots_us_rev1.c"]
       - [0xD8424, data, "src/ragewars_pak_ok_label_slot_us_rev1.c"]
       - [0xD8428, .data, "rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D8424_unclaimed_D8428"]
-      - [0xD866C, data, "src/ragewars_confirmation_label_slots_us_rev1.c"]
+      - [0xD866C, .data, "src/ragewars_confirmation_label_slots_us_rev1.c"]
       - [0xD8694, data, "rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8260_unclaimed_D8424_unclaimed_D8694"]
       - [0xD8698, .data, "src/ragewars_option_label_slots_us_rev1.c"]
       - [0xD8A18, data, "rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8A18"]
