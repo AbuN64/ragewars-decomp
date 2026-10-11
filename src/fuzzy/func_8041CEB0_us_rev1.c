@@ -61,25 +61,23 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
 
     D_800E3590->unk216 = 1;
     D_800E3590->unk220 = 4;
-    item = func_8040EC30_de(arg0, 492);
-    D_800E3590->item492 = item;
-    item->x = item->x - item->w;
+    D_800E3590->item492 = func_8040EC30_de(arg0, 492);
+    D_800E3590->item492->x = D_800E3590->item492->x - D_800E3590->item492->w;
     shift = D_800E3590->item492->w;
     if (shift < 0) {
         shift += 3;
     }
     D_800E3590->round492 = shift >> 2;
-    D_800E3590->item492->x = D_800E3590->item492->x + D_800E3590->item492->w - (shift << 2);
+    D_800E3590->item492->x = D_800E3590->item492->x + (D_800E3590->item492->w - ((shift >> 2) << 2));
 
-    item = func_8040EC30_de(arg0, 491);
-    D_800E3590->item491 = item;
-    item->x = item->x + item->w;
+    D_800E3590->item491 = func_8040EC30_de(arg0, 491);
+    D_800E3590->item491->x = D_800E3590->item491->x + D_800E3590->item491->w;
     shift = D_800E3590->item491->w;
     if (shift < 0) {
         shift += 3;
     }
     D_800E3590->round491 = shift >> 2;
-    D_800E3590->item491->x = D_800E3590->item491->x - (D_800E3590->item491->w - (shift << 2));
+    D_800E3590->item491->x = D_800E3590->item491->x - (D_800E3590->item491->w - ((shift >> 2) << 2));
 
     func_8040EC30_de(arg0, 488)->alpha = 110;
     D_800E3590->lookup486 = func_80419E54_de(486, 255);
