@@ -2,6 +2,7 @@
  * state, resets the world record when no mode flag is set, opens window 0x397 on the tree given by
  * arg0, marks the settings bytes at 0x24/0x25 of the match block D_801462C8 with 10, and resets the
  * four player slots. */
+#include "common/types_1dc8418c21db.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "shared/func_80286080_de_closed.h"
 #include "shared/world.h"
@@ -36,10 +37,6 @@ typedef struct {
     s32 unk4;
 } PulseScreen_func_804396C0_us_rev1;
 
-typedef struct {
-    char pad0[0x190];
-} PlayerSlot_func_804396C0_us_rev1;
-
 extern void func_8022EF30_de(void *arg0);
 extern int func_8025477C_de(void);
 extern void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2);
@@ -48,7 +45,7 @@ extern void func_8040C428_de(s32 value);
 extern void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active);
 extern void func_8044A370_de(void *, s32);
 
-extern PlayerSlot_func_804396C0_us_rev1 D_80102B00[];
+extern Profile_func_80229554_de D_80102B00[];
 extern PulseScreen_func_804396C0_us_rev1 *D_800E5950;
 
 s32 func_804396C0_us_rev1(struct Tree *arg0) {
