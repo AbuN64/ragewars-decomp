@@ -3060,7 +3060,7 @@ segments:
       - [0xC49ED, data, "rodata/unresolved/800C3DED"]
       - [0xC49F0, rodata, "src/rw_pool_8024F4A0_C9AE0_us_rev1.c"]
       - [0xC4A00, rodata, "src/rw_pool_8024F5A0_C9AF0_us_rev1.c"]
-      - [0xC4A10, rodata, "rodata/func_8024F950_de/800C3E10"]
+      - [0xC4A10, .rodata, "rodata/func_8024F950_de/800C3E10"]
       - [0xC4A30, rodata, "rodata/func_8024FD80_de/800C3E30"]
       - [0xC4A40, rodata, "rodata/shared/800C8F30"]
       - [0xC4A4D, data, "rodata/unresolved/800C3E4D"]
