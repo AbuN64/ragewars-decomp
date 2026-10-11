@@ -33789,7 +33789,6 @@ kind = "c"
 group = "code_8041BEA8"
 members = ["func_8041C494_de"]
 toolchain = "gcc-2.8.1-sn64"
-withheld = ["de", "eu-x"]
 
 [unit.options]
 add = []
