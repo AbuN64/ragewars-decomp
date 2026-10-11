@@ -7,27 +7,27 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [█████████████▒░░░░░░]  67.26% (~68.83%)  4,612,927 of 6,857,872 bytes</code><br><code>de       [█████████████▒░░░░░░]  67.70% (~69.25%)  936,053 of 1,382,608 bytes</code><br><code>eu       [████████████▒░░░░░░░]  63.67% (~65.26%)  883,428 of 1,387,504 bytes</code><br><code>eu-x     [████████████▒░░░░░░░]  63.19% (~64.81%)  832,988 of 1,318,176 bytes</code><br><code>us       [██████████████▒░░░░░]  70.68% (~72.07%)  977,525 of 1,382,992 bytes</code><br><code>us-rev1  [██████████████▒░░░░░]  70.89% (~72.54%)  982,933 of 1,386,592 bytes</code></pre>
+<pre><code>all      [█████████████▒░░░░░░]  67.27% (~68.83%)  4,613,092 of 6,857,872 bytes</code><br><code>de       [█████████████▒░░░░░░]  67.70% (~69.25%)  936,086 of 1,382,608 bytes</code><br><code>eu       [████████████▒░░░░░░░]  63.67% (~65.26%)  883,461 of 1,387,504 bytes</code><br><code>eu-x     [████████████▒░░░░░░░]  63.19% (~64.82%)  833,021 of 1,318,176 bytes</code><br><code>us       [██████████████▒░░░░░]  70.68% (~72.07%)  977,558 of 1,382,992 bytes</code><br><code>us-rev1  [██████████████▒░░░░░]  70.89% (~72.55%)  982,966 of 1,386,592 bytes</code></pre>
 
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  66.60% (~68.52%)  735,928 of 1,104,964</code><br><code>data      [██████████████▒░░░░░]  72.08% (~72.17%)  200,125 of 277,644</code><br><code>functions [███████████████░░░░░]  78.84%  2,888 of 3,663</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  66.60% (~68.52%)  735,928 of 1,104,964</code><br><code>data      [██████████████▒░░░░░]  72.09% (~72.18%)  200,158 of 277,644</code><br><code>functions [███████████████░░░░░]  78.84%  2,888 of 3,663</code></pre> |
 
 | eu (NUS-NRWP-0, Europe). PAL release. SHA256 `d763cbbe485a5f9e1b7be97d5ac16735087e23d0bb62c05dc844e01b7e1156d1` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  66.63% (~68.59%)  740,932 of 1,111,996</code><br><code>data      [██████████▒░░░░░░░░░]  51.72% (~51.81%)  142,496 of 275,508</code><br><code>functions [███████████████░░░░░]  78.68%  2,889 of 3,672</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  66.63% (~68.59%)  740,932 of 1,111,996</code><br><code>data      [██████████▒░░░░░░░░░]  51.73% (~51.82%)  142,529 of 275,508</code><br><code>functions [███████████████░░░░░]  78.68%  2,889 of 3,672</code></pre> |
 
 | eu-x (NUS-NRWX-0, Europe). PAL multi-language release. SHA256 `511f6c876586bf401faf01a270c67f26fcb7db55ed3f35759c71ab15a29de750` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  66.57% (~68.46%)  741,628 of 1,114,140</code><br><code>data      [████████▒░░░░░░░░░░░]  44.78% (~44.90%)  91,360 of 204,036</code><br><code>functions [███████████████░░░░░]  78.77%  2,894 of 3,674</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  66.57% (~68.46%)  741,628 of 1,114,140</code><br><code>data      [████████▒░░░░░░░░░░░]  44.79% (~44.91%)  91,393 of 204,036</code><br><code>functions [███████████████░░░░░]  78.77%  2,894 of 3,674</code></pre> |
 
 | us (NUS-NRWE-0, North America). First NTSC release (black cartridge). SHA256 `0433043aaba2649bdd1fe717c4020550ac663c0362527aa082490f5977a3e46b` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  68.70% (~70.49%)  729,808 of 1,062,244</code><br><code>data      [███████████████▒░░░░]  77.23% (~77.31%)  247,717 of 320,748</code><br><code>functions [████████████████░░░░]  82.53%  2,848 of 3,451</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  68.70% (~70.49%)  729,808 of 1,062,244</code><br><code>data      [███████████████▒░░░░]  77.24% (~77.32%)  247,750 of 320,748</code><br><code>functions [████████████████░░░░]  82.53%  2,848 of 3,451</code></pre> |
 
 | us-rev1 (NUS-NRWE-1, North America). Revised NTSC release (grey cartridge). SHA256 `5dfbae59e4a3860b740ccbb28f33aad624315e30bfca6d60abd62d12a89e0089` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  68.51% (~70.53%)  775,616 of 1,132,124</code><br><code>data      [████████████████▒░░░]  81.47% (~81.50%)  207,317 of 254,468</code><br><code>functions [████████████████░░░░]  80.17%  2,971 of 3,706</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  68.51% (~70.53%)  775,616 of 1,132,124</code><br><code>data      [████████████████▒░░░]  81.48% (~81.52%)  207,350 of 254,468</code><br><code>functions [████████████████░░░░]  80.17%  2,971 of 3,706</code></pre> |
 <!-- /progress -->
 
 ## Development & Contributions

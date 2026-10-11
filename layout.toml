@@ -4194,6 +4194,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D92E0"
+segment = "span_C76B0"
+members = ["src/rw_text_802BD430_D9EE0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D937C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800D9370_unclaimed_D9F7C", "src/ragewars_decoder_bit_masks_us_rev1.c", "rodata/unresolved/800D9370_unclaimed_D9FA2"]
@@ -47505,6 +47513,17 @@ path = "src/rw_text_8024C294_C9520_us_rev1.c"
 kind = "data"
 group = "data_800C8920"
 members = ["src/rw_text_8024C294_C9520_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_text_802BD430_D9EE0_us_rev1.c"
+kind = "data"
+group = "data_800D92E0"
+members = ["src/rw_text_802BD430_D9EE0_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

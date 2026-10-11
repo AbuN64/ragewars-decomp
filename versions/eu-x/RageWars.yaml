@@ -3908,7 +3908,7 @@ segments:
       - [0xE16A0, data, "src/ragewars_scheduler_queue_seed_us_rev1.c"]
       - [0xE16A8, data, "rodata/writable/800D5268"]
       - [0xE16C0, data, "src/ragewars_scheduler_exception_queue_us_rev1.c"]
-      - [0xE16F0, rodata, "src/rw_text_802BD430_D9EE0_us_rev1.c"]
+      - [0xE16F0, .rodata, "src/rw_text_802BD430_D9EE0_us_rev1.c"]
       - [0xE1711, data, "rodata/unresolved/800E0B11"]
       - [0xE1714, rodata, "src/rw_text_802BD430_D9F04_us_rev1.c"]
       - [0xE1735, data, "rodata/unresolved/800E0B35"]
