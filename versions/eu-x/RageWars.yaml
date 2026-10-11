@@ -3839,7 +3839,7 @@ segments:
       - [0xCDA98, rodata, "src/rw_pool_8025AA2C_D1728_us_rev1.c"]
       - [0xCDA9C, .data, "src/ragewars_interpolated_ratio_curve_us_rev1.c"]
       - [0xCDC80, data, "rodata/writable/800D0D10"]
-      - [0xCDC84, data, "rodata/unresolved/800D0D14"]
+      - [0xCDC84, .data, "rodata/unresolved/800D0D14"]
       - [0xCDCAC, data, "rodata/writable/800D0D3C"]
       - [0xCDCE8, data, "rodata/unresolved/800D0D78"]
       - [0xCDD00, data, "rodata/writable/800D0D90"]

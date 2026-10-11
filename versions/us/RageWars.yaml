@@ -3789,7 +3789,7 @@ segments:
       - [0xCC3F8, rodata, "src/rw_pool_8025AA2C_D1728_us_rev1.c"]
       - [0xCC3FC, .data, "src/ragewars_interpolated_ratio_curve_us_rev1.c"]
       - [0xCC5E0, data, "rodata/writable/800D0D10"]
-      - [0xCC5E4, data, "rodata/unresolved/800D0D14"]
+      - [0xCC5E4, .data, "rodata/unresolved/800D0D14"]
       - [0xCC60C, data, "rodata/writable/800D0D3C"]
       - [0xCC648, data, "rodata/unresolved/800D0D78"]
       - [0xCC660, data, "rodata/writable/800D0D90"]

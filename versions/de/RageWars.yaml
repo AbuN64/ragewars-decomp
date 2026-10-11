@@ -3815,7 +3815,7 @@ segments:
       - [0xCC4E8, rodata, "src/rw_pool_8025AA2C_D1728_us_rev1.c"]
       - [0xCC4EC, .data, "src/ragewars_interpolated_ratio_curve_us_rev1.c"]
       - [0xCC6D0, data, "rodata/writable/800D0D10"]
-      - [0xCC6D4, data, "rodata/unresolved/800D0D14"]
+      - [0xCC6D4, .data, "rodata/unresolved/800D0D14"]
       - [0xCC6FC, data, "rodata/writable/800D0D3C"]
       - [0xCC738, data, "rodata/unresolved/800D0D78"]
       - [0xCC750, data, "rodata/writable/800D0D90"]

@@ -5076,7 +5076,7 @@ segments:
       - [0xD1728, rodata, "src/rw_pool_8025AA2C_D1728_us_rev1.c"]
       - [0xD172C, .data, "src/ragewars_interpolated_ratio_curve_us_rev1.c"]
       - [0xD1910, data, "rodata/writable/800D0D10"]
-      - [0xD1914, data, "rodata/unresolved/800D0D14"]
+      - [0xD1914, .data, "rodata/unresolved/800D0D14"]
       - [0xD193C, data, "rodata/writable/800D0D3C"]
       - [0xD1978, data, "rodata/unresolved/800D0D78"]
       - [0xD1990, data, "rodata/writable/800D0D90"]

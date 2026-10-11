@@ -3418,6 +3418,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D0D14"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800D0D14"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D0DA4"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800D0DA4", "src/ragewars_controller_button_remap_us_rev1.c", "rodata/unresolved/800D0DA4_unclaimed_D1A48"]
@@ -43602,6 +43610,17 @@ path = "src/rodata.unresolved.800D0678.c"
 kind = "data"
 group = "data_800D0678"
 members = ["rodata/unresolved/800D0678"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800D0D14.c"
+kind = "data"
+group = "data_800D0D14"
+members = ["rodata/unresolved/800D0D14"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
