@@ -9076,6 +9076,7 @@ schema = 1
 "D_E0470" = { declaration = "extern char D_E0470;", evidence = "authored" }
 "D_auto_800D2AE4" = { declaration = "extern s32 D_auto_800D2AE4;", evidence = "authored" }
 "D_auto_800D2AE8" = { declaration = "extern s32 D_auto_800D2AE8;", evidence = "authored" }
+"D_auto_800D2AF4" = { declaration = "extern s32 D_auto_800D2AF4;", evidence = "authored" }
 "jtbl_800C19C0" = { declaration = "extern char jtbl_800C19C0;", evidence = "authored" }
 "jtbl_800C1AA0" = { declaration = "extern int jtbl_800C1AA0[];", evidence = "authored" }
 "jtbl_800C1AF0" = { declaration = "extern int jtbl_800C1AF0[];", evidence = "authored" }
