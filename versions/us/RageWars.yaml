@@ -2701,7 +2701,7 @@ segments:
       - [0xC2D18, rodata, "src/rw_pool_8021740C_C7ED8_us_rev1.c"]
       - [0xC2D1C, rodata, "src/rw_pool_80217594_C7EDC_us_rev1.c"]
       - [0xC2D24, data, "rodata/unresolved/800C2124"]
-      - [0xC2D30, rodata, "src/rw_pool_80217630_C7EF0_us_rev1.c"]
+      - [0xC2D30, .rodata, "src/rw_pool_80217630_C7EF0_us_rev1.c"]
       - [0xC2D50, rodata, "rodata/func_80217928_de/800C7310"]
       - [0xC2D64, rodata, "src/rw_pool_80217F4C_C7F24_us_rev1.c"]
       - [0xC2D78, rodata, "src/rw_pool_802181FC_C7F38_us_rev1.c"]
