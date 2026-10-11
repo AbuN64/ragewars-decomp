@@ -1,10 +1,10 @@
-/* Handles one held press of the menu "previous page" key: D_800D2AF4 counts the held presses, and on
+/* Handles one held press of the menu "previous page" key: D_auto_800D2AF4 counts the held presses, and on
  * the fourth one the selection index D_8014AEBC is stepped down by five modulo the menu item count,
  * the change flag word at +8 from the index is set, and a negative remainder is folded back to a
  * positive display index. Ported verbatim from the legacy branch source (byte-exact in that build). */
 #include "types.h"
 
-extern s32 D_800D2AF4;
+extern s32 D_auto_800D2AF4;
 extern s32 D_8014AEBC;
 
 void func_802959BC_us_rev1(void) {
@@ -14,7 +14,7 @@ void func_802959BC_us_rev1(void) {
     s32 *p;
     s32 old;
 
-    old = D_800D2AF4++;
+    old = D_auto_800D2AF4++;
     if (old >= 3) {
         p = &D_8014AEBC;
         temp_a0 = p[0] - 5;
@@ -27,6 +27,6 @@ void func_802959BC_us_rev1(void) {
         }
         p[0] = var_v1;
         p[2] = 1;
-        D_800D2AF4 = 0;
+        D_auto_800D2AF4 = 0;
     }
 }
