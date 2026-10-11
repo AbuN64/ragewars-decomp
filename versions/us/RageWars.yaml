@@ -3375,7 +3375,7 @@ segments:
       - [0xC5C96, data, "rodata/unresolved/800C5096"]
       - [0xC5C98, rodata, "src/ragewars_resident_strings_CAE58_us_rev1.c"]
       - [0xC5CAF, data, "rodata/unresolved/800C50AF"]
-      - [0xC5CB0, rodata, "src/ragewars_resident_strings_CAE70_us_rev1.c"]
+      - [0xC5CB0, .rodata, "src/ragewars_resident_strings_CAE70_us_rev1.c"]
       - [0xC5CE1, data, "rodata/unresolved/800C50E1"]
       - [0xC5CE4, rodata, "src/rw_text_80286AA8_CAEA4_us_rev1.c"]
       - [0xC5CEF, data, "rodata/unresolved/800C50EF"]

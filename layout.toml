@@ -2850,6 +2850,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA270"
+segment = "span_C76B0"
+members = ["src/ragewars_resident_strings_CAE70_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA290"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800CA290"]
@@ -41262,6 +41270,18 @@ path = "src/ragewars_resident_strings_CAE18_us_rev1.c"
 kind = "data"
 group = "data_800CA218"
 members = ["src/ragewars_resident_strings_CAE18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu", "eu-x", "us"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_resident_strings_CAE70_us_rev1.c"
+kind = "data"
+group = "data_800CA270"
+members = ["src/ragewars_resident_strings_CAE70_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 withheld = ["de", "eu", "eu-x", "us"]
 

@@ -3464,7 +3464,7 @@ segments:
       - [0xCAE58, rodata, "src/ragewars_resident_strings_CAE58_us_rev1.c"]
       - [0xCAE64, rodata, "rodata/func_80286AA8_de/800CA258_unclaimed_CAE64"]
       - [0xCAE6F, data, "rodata/unresolved/800CA26F"]
-      - [0xCAE70, rodata, "src/ragewars_resident_strings_CAE70_us_rev1.c"]
+      - [0xCAE70, .rodata, "src/ragewars_resident_strings_CAE70_us_rev1.c"]
       - [0xCAE90, rodata, "rodata/func_80286AA8_de/800CA270_unclaimed_CAE90"]
       - [0xCAEA1, data, "rodata/unresolved/800CA2A1"]
       - [0xCAEA4, rodata, "src/rw_text_80286AA8_CAEA4_us_rev1.c"]
