@@ -3373,7 +3373,7 @@ segments:
       - [0xC5F0A, data, "rodata/unresolved/800C530A"]
       - [0xC5F0C, rodata, "src/rw_text_8044B7C0_CAD4C_us_rev1.c"]
       - [0xC5F1D, data, "rodata/unresolved/800C531D"]
-      - [0xC5F20, rodata, "src/rw_text_8044B7C0_CAD60_us_rev1.c"]
+      - [0xC5F20, .rodata, "src/rw_text_8044B7C0_CAD60_us_rev1.c"]
       - [0xC5F45, data, "rodata/unresolved/800C5345"]
       - [0xC5F48, rodata, "src/rw_text_8044B7C0_CAD88_us_rev1.c"]
       - [0xC5F5E, data, "rodata/unresolved/800C535E"]
