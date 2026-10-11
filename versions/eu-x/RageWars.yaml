@@ -3812,7 +3812,7 @@ segments:
       - [0xCC128, rodata, "src/rw_pool_8021EEFC_CFDB8_us_rev1.c"]
       - [0xCC12C, data, "rodata/unresolved/800CB52C"]
       - [0xCC138, rodata, "rodata/func_8021EEFC_de/800CB538"]
-      - [0xCC13C, data, "rodata/unresolved/800CB53C"]
+      - [0xCC13C, .data, "rodata/unresolved/800CB53C"]
       - [0xCC154, data, "rodata/writable/800CF1E4"]
       - [0xCC15C, .data, "rodata/unresolved/800CF1EC"]
       - [0xCC198, data, "rodata/writable/800CF228"]
