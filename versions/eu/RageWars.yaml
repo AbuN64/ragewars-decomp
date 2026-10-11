@@ -4099,7 +4099,7 @@ segments:
       - [0xEF1F0, rodata, "rodata/func_80439D58_de/800E1FA0"]
       - [0xEF204, data, "rodata/unresolved/800EE604"]
       - [0xEF210, rodata, "src/rw_pool_80439EC4_E2BC0_us_rev1.c"]
-      - [0xEF214, rodata, "rodata/func_8043A330_de/800EE614"]
+      - [0xEF214, .rodata, "rodata/func_8043A330_de/800EE614"]
       - [0xEF230, rodata, "rodata/func_8043A5F8_de/800E1FE0"]
       - [0xEF24C, rodata, "rodata/func_8043A890_de/800E1FFC"]
       - [0xEF260, rodata, "rodata/func_8043AE5C_de/800E2010"]
