@@ -4333,7 +4333,7 @@ segments:
       - [0x100EE0, data, "rodata/writable/801002E0"]
       - [0x100EEC, .data, "rodata/unresolved/801002EC"]
       - [0x100FE0, data, "rodata/writable/801003E0"]
-      - [0x100FE4, data, "rodata/unresolved/801003E4"]
+      - [0x100FE4, .data, "rodata/unresolved/801003E4"]
   - name: "retained_101000"
     type: bin
     start: 0x101000
