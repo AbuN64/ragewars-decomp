@@ -5626,7 +5626,7 @@ segments:
       - [0xE2C80, rodata, "rodata/func_8043C500_us_rev1/800E2080"]
       - [0xE2D04, data, "rodata/unresolved/800E2104"]
       - [0xE2D10, .data, "src/ragewars_resident_strings_E2D10_us_rev1.c"]
-      - [0xE2D3C, data, "rodata/unresolved/800E2104_unclaimed_E2D3C"]
+      - [0xE2D3C, .data, "rodata/unresolved/800E2104_unclaimed_E2D3C"]
       - [0xE2D5C, .data, "src/ragewars_resident_strings_E2D5C_us_rev1.c"]
       - [0xE2D88, .data, "rodata/unresolved/800E2104_unclaimed_E2D88"]
       - [0xE2DB8, rodata, "rodata/func_8043C730_us_rev1/800E21B8"]
