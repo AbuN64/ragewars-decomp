@@ -4099,7 +4099,7 @@ segments:
       - [0xDDBA0, rodata, "src/rw_text_8043E2D8_E2F20_us_rev1.c"]
       - [0xDDBA5, data, "rodata/unresolved/800DCFA5"]
       - [0xDDBA8, rodata, "src/rw_text_8043E7AC_E2F28_us_rev1.c"]
-      - [0xDDBAC, rodata, "rodata/unresolved/800DCFAC"]
+      - [0xDDBAC, .rodata, "rodata/unresolved/800DCFAC"]
       - [0xDDBD0, rodata, "src/rw_pool_8043DF34_E2F50_us_rev1.c"]
       - [0xDDBD8, rodata, "rodata/func_8043E134_de/800E2358"]
       - [0xDDBDC, rodata, "src/rw_pool_8043E6A4_E2F5C_us_rev1.c"]
