@@ -5282,7 +5282,7 @@ segments:
       - [0xD9F7C, data, "rodata/unresolved/800D9370_unclaimed_D9F7C"]
       - [0xD9F80, .data, "src/ragewars_decoder_bit_masks_us_rev1.c"]
       - [0xD9FA2, data, "rodata/unresolved/800D9370_unclaimed_D9FA2"]
-      - [0xD9FA4, data, "src/ragewars_decoder_sign_bits_us_rev1.c"]
+      - [0xD9FA4, .data, "src/ragewars_decoder_sign_bits_us_rev1.c"]
       - [0xD9FC6, data, "rodata/unresolved/800D9370_unclaimed_D9FC6"]
       - [0xD9FC8, data, "src/ragewars_decoder_band_ends_us_rev1.c"]
       - [0xD9FE8, .data, "src/ragewars_decoder_quantizer_steps_us_rev1.c"]
