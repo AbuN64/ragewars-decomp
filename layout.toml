@@ -4186,6 +4186,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CE874"
+segment = "span_C76B0"
+members = ["src/ragewars_view_tuning_CF474_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CE8A4"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4"]
@@ -43086,6 +43094,17 @@ path = "src/ragewars_view_tuning_CF3FC_us_rev1.c"
 kind = "data"
 group = "data_800CE7FC"
 members = ["src/ragewars_view_tuning_CF3FC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_view_tuning_CF474_us_rev1.c"
+kind = "data"
+group = "data_800CE874"
+members = ["src/ragewars_view_tuning_CF474_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
