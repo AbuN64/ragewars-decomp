@@ -4092,7 +4092,7 @@ segments:
       - [0xEF1B8, rodata, "rodata/unresolved/800E1F68"]
       - [0xEF1BC, rodata, "src/rw_pool_80438828_E2B6C_us_rev1.c"]
       - [0xEF1C0, rodata, "rodata/func_80439628_de/800E1F70"]
-      - [0xEF1D0, rodata, "src/rw_pool_804397F0_E2B80_us_rev1.c"]
+      - [0xEF1D0, .rodata, "src/rw_pool_804397F0_E2B80_us_rev1.c"]
       - [0xEF1D4, rodata, "rodata/func_804397F0_de/800DDF54"]
       - [0xEF1D8, rodata, "rodata/unresolved/800DDF58"]
       - [0xEF1E8, data, "rodata/unresolved/800EE5E8"]
