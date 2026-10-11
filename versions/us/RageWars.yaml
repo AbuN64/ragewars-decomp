@@ -3730,7 +3730,7 @@ segments:
       - [0xC8C40, rodata, "rodata/__floatdisf/800CD370"]
       - [0xC8C58, data, "rodata/unresolved/800C8058"]
       - [0xC8C64, data, "rodata/writable/800CD394"]
-      - [0xC8C90, data, "rodata/unresolved/800CD3C0"]
+      - [0xC8C90, .data, "rodata/unresolved/800CD3C0"]
       - [0xC8D90, data, "rodata/writable/800CD4C0"]
       - [0xC8D94, data, "rodata/unresolved/800CD4C4"]
       - [0xC9300, rodata, "rodata/func_80209DAC_de/800CDA30"]
