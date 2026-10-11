@@ -3329,7 +3329,7 @@ segments:
       - [0xC5B03, data, "rodata/unresolved/800C4F03"]
       - [0xC5B04, .rodata, "rodata/func_8044B600_de/800C4F04"]
       - [0xC5B4F, data, "rodata/unresolved/800C4F4F"]
-      - [0xC5B50, rodata, "rodata/func_8044B7C0_de/800C4F50"]
+      - [0xC5B50, .rodata, "rodata/func_8044B7C0_de/800C4F50"]
       - [0xC5B6D, data, "rodata/unresolved/800C4F6D"]
       - [0xC5B70, rodata, "src/rw_text_8044B7C0_CAC60_us_rev1.c"]
       - [0xC5B83, data, "rodata/unresolved/800C4F83"]
