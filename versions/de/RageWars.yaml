@@ -3409,7 +3409,7 @@ segments:
       - [0xC5E8F, data, "rodata/unresolved/800C528F"]
       - [0xC5E90, .rodata, "rodata/shared/800CA380"]
       - [0xC5EBB, data, "rodata/unresolved/800C52BB"]
-      - [0xC5EBC, rodata, "rodata/shared/800CA3AC"]
+      - [0xC5EBC, .rodata, "rodata/shared/800CA3AC"]
       - [0xC5EE1, data, "rodata/unresolved/800C52E1"]
       - [0xC5EE4, rodata, "src/rw_formats_8028A948_CAFD4_us_rev1.c"]
       - [0xC5EE7, data, "rodata/unresolved/800C52E7"]

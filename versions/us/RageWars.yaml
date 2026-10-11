@@ -3400,7 +3400,7 @@ segments:
       - [0xC5DBF, data, "rodata/unresolved/800C51BF"]
       - [0xC5DC0, .rodata, "rodata/shared/800CA380"]
       - [0xC5DEB, data, "rodata/unresolved/800C51EB"]
-      - [0xC5DEC, rodata, "rodata/shared/800CA3AC"]
+      - [0xC5DEC, .rodata, "rodata/shared/800CA3AC"]
       - [0xC5E11, data, "rodata/unresolved/800C5211"]
       - [0xC5E14, rodata, "src/rw_formats_8028A948_CAFD4_us_rev1.c"]
       - [0xC5E17, data, "rodata/unresolved/800C5217"]

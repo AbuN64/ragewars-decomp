@@ -3436,7 +3436,7 @@ segments:
       - [0xC617F, data, "rodata/unresolved/800C557F"]
       - [0xC6180, .rodata, "rodata/shared/800CA380"]
       - [0xC61AB, data, "rodata/unresolved/800C55AB"]
-      - [0xC61AC, rodata, "rodata/shared/800CA3AC"]
+      - [0xC61AC, .rodata, "rodata/shared/800CA3AC"]
       - [0xC61D1, data, "rodata/unresolved/800C55D1"]
       - [0xC61D4, rodata, "rodata/func_8028A948_de/800C5594"]
       - [0xC61D7, data, "rodata/unresolved/800C55D7"]

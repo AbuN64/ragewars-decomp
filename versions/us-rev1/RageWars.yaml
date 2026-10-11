@@ -3490,7 +3490,7 @@ segments:
       - [0xCAF7F, data, "rodata/unresolved/800CA37F"]
       - [0xCAF80, .rodata, "rodata/shared/800CA380"]
       - [0xCAFAB, data, "rodata/unresolved/800CA3AB"]
-      - [0xCAFAC, rodata, "rodata/shared/800CA3AC"]
+      - [0xCAFAC, .rodata, "rodata/shared/800CA3AC"]
       - [0xCAFD1, data, "rodata/unresolved/800CA3D1"]
       - [0xCAFD4, rodata, "src/rw_formats_8028A948_CAFD4_us_rev1.c"]
       - [0xCAFD7, data, "rodata/unresolved/800CA3D7"]
