@@ -3779,7 +3779,7 @@ segments:
       - [0xC9D80, data, "rodata/unresolved/800C9180"]
       - [0xC9D90, rodata, "rodata/shared/800CE3E0"]
       - [0xC9D94, rodata, "rodata/shared/800CE3E4"]
-      - [0xC9D98, data, "rodata/unresolved/800CE3E8"]
+      - [0xC9D98, .data, "rodata/unresolved/800CE3E8"]
       - [0xC9DB8, data, "rodata/writable/800CE408"]
       - [0xC9DC0, .data, "rodata/unresolved/800C91C0"]
       - [0xCA114, rodata, "src/rw_pool_80225F44_CF358_us_rev1.c"]

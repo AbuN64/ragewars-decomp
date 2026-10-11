@@ -4085,7 +4085,7 @@ segments:
       - [0xCEFD0, data, "rodata/unresolved/800CE3D0"]
       - [0xCEFE0, rodata, "rodata/shared/800CE3E0"]
       - [0xCEFE4, rodata, "rodata/shared/800CE3E4"]
-      - [0xCEFE8, data, "rodata/unresolved/800CE3E8"]
+      - [0xCEFE8, .data, "rodata/unresolved/800CE3E8"]
       - [0xCF008, data, "rodata/writable/800CE408"]
       - [0xCF010, .data, "rodata/unresolved/800CE410"]
       - [0xcf21c, data, "src/rw_hud_lives_motion_script_us_rev1.c"]

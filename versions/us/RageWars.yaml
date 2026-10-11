@@ -3745,7 +3745,7 @@ segments:
       - [0xC9CA0, data, "rodata/unresolved/800C90A0"]
       - [0xC9CB0, rodata, "rodata/shared/800CE3E0"]
       - [0xC9CB4, rodata, "rodata/shared/800CE3E4"]
-      - [0xC9CB8, data, "rodata/unresolved/800CE3E8"]
+      - [0xC9CB8, .data, "rodata/unresolved/800CE3E8"]
       - [0xC9CD8, data, "rodata/writable/800CE408"]
       - [0xC9CE0, .data, "rodata/unresolved/800C90E0"]
       - [0xCA028, rodata, "src/rw_pool_80225F44_CF358_us_rev1.c"]
