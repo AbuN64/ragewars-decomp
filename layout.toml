@@ -2322,6 +2322,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C82C8"
+segment = "span_C76B0"
+members = ["src/rw_pool_802343C8_C8EC8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C83E0"
 segment = "span_C76B0"
 members = ["src/rw_pool_8023660C_C8FE0_us_rev1.c"]
@@ -47440,6 +47448,17 @@ path = "src/rw_pool_802343C8_C8E90_us_rev1.c"
 kind = "data"
 group = "data_800C8290"
 members = ["src/rw_pool_802343C8_C8E90_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802343C8_C8EC8_us_rev1.c"
+kind = "data"
+group = "data_800C82C8"
+members = ["src/rw_pool_802343C8_C8EC8_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
