@@ -4205,7 +4205,7 @@ segments:
       - [0xF07B0, data, "rodata/writable/800E3590"]
       - [0xF07B4, data, "rodata/unresolved/800E3594"]
       - [0xF0BE0, data, "rodata/writable/800E39C0"]
-      - [0xF0BE4, data, "rodata/unresolved/800E39C4"]
+      - [0xF0BE4, .data, "rodata/unresolved/800E39C4"]
       - [0xF0C8C, rodata, "src/rw_viewport_scalar_E466C_us_rev1.c"]
       - [0xF0C8F, data, "rodata/unresolved/800F008F"]
       - [0xF0C90, data, "data/unresolved/800F0090"]

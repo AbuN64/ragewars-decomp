@@ -4261,7 +4261,7 @@ segments:
       - [0xEB970, data, "rodata/writable/800E3590"]
       - [0xEB974, data, "rodata/unresolved/800E3594"]
       - [0xEBDA0, data, "rodata/writable/800E39C0"]
-      - [0xEBDA4, data, "rodata/unresolved/800E39C4"]
+      - [0xEBDA4, .data, "rodata/unresolved/800E39C4"]
       - [0xEBE4C, rodata, "src/rw_viewport_scalar_E466C_us_rev1.c"]
       - [0xEBE4F, data, "rodata/unresolved/800EB24F"]
       - [0xEBE50, data, "data/unresolved/800EB250"]

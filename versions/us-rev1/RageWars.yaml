@@ -5803,7 +5803,7 @@ segments:
       - [0xe441c, .data, "src/rw_reward_item_tiers_us_rev1.c"]
       - [0xe45b4, data, "rodata/unresolved/800E3594_unclaimed_E4390_unclaimed_E441C_unclaimed_E45B4"]
       - [0xE45C0, data, "rodata/writable/800E39C0"]
-      - [0xE45C4, data, "rodata/unresolved/800E39C4"]
+      - [0xE45C4, .data, "rodata/unresolved/800E39C4"]
       - [0xE4650, data, "src/ragewars_character_preview_keys_00_us_rev1.c"]
       - [0xE4658, data, "rodata/unresolved/800E39C4_unclaimed_E4658"]
       - [0xE465C, data, "src/ragewars_character_preview_scales_00_us_rev1.c"]

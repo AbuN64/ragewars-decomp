@@ -5138,6 +5138,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E39C4"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E39C4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E3A80"
 segment = "span_E1720"
 members = ["src/ragewars_character_preview_positions_00_us_rev1.c"]
@@ -46031,6 +46039,18 @@ kind = "data"
 group = "data_800E3570"
 members = ["rodata/unresolved/800E351C_unclaimed_E4170"]
 toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E39C4.c"
+kind = "data"
+group = "data_800E39C4"
+members = ["rodata/unresolved/800E39C4"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu", "eu-x", "us"]
 
 [unit.options]
 add = []
