@@ -3702,7 +3702,7 @@ segments:
       - [0xC8404, data, "data/unresolved/800C7804"]
       - [0xC8418, .rodata, "rodata/func_802B6560_de/800C7818"]
       - [0xC8454, data, "rodata/unresolved/800C7854"]
-      - [0xC8458, rodata, "src/rw_pool_802B6560_CD6A8_us_rev1.c"]
+      - [0xC8458, .rodata, "src/rw_pool_802B6560_CD6A8_us_rev1.c"]
       - [0xC8470, rodata, "src/rw_constants_802B6664_CD6C0_us_rev1.c"]
       - [0xC8474, rodata, "rodata/func_802B6664_de/800C7874"]
       - [0xC8478, rodata, "src/rw_pool_802B6900_CD6C8_us_rev1.c"]
