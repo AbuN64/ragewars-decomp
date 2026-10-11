@@ -3986,6 +3986,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D8218"
+segment = "span_C76B0"
+members = ["src/ragewars_audio_effect_D8E18_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D8240"
 segment = "span_C76B0"
 members = ["src/ragewars_audio_equal_power_us_rev1.c", "rodata/unresolved/800D80A0_unclaimed_D8F40"]
@@ -39770,6 +39778,17 @@ path = "src/ragewars_audio_effect_D8DF0_us_rev1.c"
 kind = "data"
 group = "data_800D81F0"
 members = ["src/ragewars_audio_effect_D8DF0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_audio_effect_D8E18_us_rev1.c"
+kind = "data"
+group = "data_800D8218"
+members = ["src/ragewars_audio_effect_D8E18_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
