@@ -3,9 +3,9 @@
  * the change flag word at +8 from the index is set, and a negative remainder is folded back to a
  * positive display index. Ported verbatim from the legacy branch source (byte-exact in that build). */
 #include "types.h"
+#include "common/unused.h"
+#include "span_1000/code_80294C64.h"
 
-extern s32 D_auto_800D2AE4;
-extern s32 D_8014AEBC;
 
 void func_802957EC_us_rev1(void) {
     s32 temp_a0;

@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80294C64_H
 #define UNBAKE_SPAN_1000_CODE_80294C64_H
 #include "../types.h"
+#include "resident_event_handler.h"
 struct ResidentState;
 /* unbake published declaration: published_0072273f0620a80a3dd1b162 */
 struct ResidentState {
@@ -170,5 +171,7 @@ struct Resource_func_80294C8C_de;
 extern void func_80294C8C_de(s32 index, struct Resource_func_80294C8C_de *resource);
 
 extern s32 D_auto_800D2AE8;
+
+extern s32 D_auto_800D2AE4;
 
 #endif

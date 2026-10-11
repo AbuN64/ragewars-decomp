@@ -1873,7 +1873,7 @@ segments:
       - [0x961EC, c, "func_802955EC_us_rev1"]
       - [0x962AC, c, "func_802956AC_us_rev1"]
       - [0x9636C, c, "func_8029576C_us_rev1"]
-      - [0x963EC, asm, "func_802957EC_us_rev1"]
+      - [0x963EC, c, "func_802957EC_us_rev1"]
       - [0x96490, c, "func_80295890_us_rev1"]
       - [0x965BC, asm, "func_802959BC_us_rev1"]
       - [0x96660, asm, "func_80295A60_us_rev1"]
