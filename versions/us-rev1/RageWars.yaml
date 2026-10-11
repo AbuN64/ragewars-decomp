@@ -5238,7 +5238,7 @@ segments:
       - [0xD8DF0, .data, "src/ragewars_audio_effect_D8DF0_us_rev1.c"]
       - [0xD8E18, .data, "src/ragewars_audio_effect_D8E18_us_rev1.c"]
       - [0xD8E40, .data, "src/ragewars_audio_equal_power_us_rev1.c"]
-      - [0xD8F40, data, "rodata/unresolved/800D80A0_unclaimed_D8F40"]
+      - [0xD8F40, .data, "rodata/unresolved/800D80A0_unclaimed_D8F40"]
       - [0xD8F60, data, "src/ragewars_ai_boundary_flag_us_rev1.c"]
       - [0xD8F61, data, "rodata/unresolved/800D80A0_unclaimed_D8F40_unclaimed_D8F61"]
       - [0xD8F64, data, "data/unresolved/800D8364"]
