@@ -17,8 +17,6 @@
 /* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
  * them define them: func_8041B968_de writes the word at +0x6C of the object it is handed, and
  * func_8041DA5C_de takes the style word this block keeps at +0x0FC. */
-extern void func_8041B968_de(struct Object6C *object, s32 value);
-extern void func_8041DA5C_de(s32 style);
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
  * tree as a pointer; the cast carries that pointer through unchanged. */

@@ -8502,6 +8502,7 @@ schema = 1
 "D_800E351C" = { declaration = "extern s32 D_800E351C;", evidence = "authored" }
 "D_800E3520" = { declaration = "extern s32 D_800E3520;", evidence = "authored" }
 "D_800E3524" = { declaration = "extern Handler802A2B50 D_800E3524;", evidence = "authored" }
+"D_800E3590" = { declaration = "extern func_8041F2A0_MenuBlock *D_800E3590;", evidence = "authored" }
 "D_800E3724" = { declaration = "extern s32 D_800E3724;", evidence = "authored" }
 "D_800E3728" = { declaration = "extern s32 D_800E3728;", evidence = "authored" }
 "D_800E372C" = { declaration = "extern Handler802A2B50 D_800E372C;", evidence = "authored" }
@@ -13551,6 +13552,7 @@ schema = 1
 "func_8041F2A0_Config" = { declaration = "struct func_8041F2A0_Config { char pad0[0x78]; u8 active; char pad79[0x96 - 0x79]; };", evidence = "authored" }
 "func_8041F2A0_Item" = { declaration = "struct func_8041F2A0_Item { char pad0[0x10]; u8 alpha; char pad11[3]; s16 x; s16 y; s16 w; };", evidence = "authored" }
 "func_8041F2A0_Layout" = { declaration = "struct func_8041F2A0_Layout { s32 kind; u16 pad4[3]; u16 title; func_8041F2A0_Cell cells[3]; func_8041F2A0_Cell options[3]; };", evidence = "authored" }
+"func_8041F2A0_MenuBlock" = { declaration = "struct func_8041F2A0_MenuBlock { void *root; s32 list; char pad8[0xC8 - 0x08]; func_8041F2A0_Item *item492; s32 round492; func_8041F2A0_Item *item491; s32 round491; s32 unk216; s32 unk220; s32 lookup486; func_8041F2A0_Item *item486; func_8041F2A0_Item *item563; s32 focus; func_8041F2A0_Item *item510; func_8041F2A0_Item *item512; s32 unk248; s32 style; func_8041F2A0_Item *item511; s32 unk260; s32 player; s32 unk268; };", evidence = "authored" }
 "func_8041F2A0_Player" = { declaration = "struct func_8041F2A0_Player { func_8041F2A0_Item *highlight; s32 unk4; s32 kind; s32 unkC; s32 choice; char pad14[4]; char model[0x4C0 - 0x18]; s32 unk4C0; s32 pad4C4; };", evidence = "authored" }
 "func_8041F2A0_Row" = { declaration = "struct func_8041F2A0_Row { s32 pad; f32 scale[4]; f32 distance[4]; func_8041F2A0_Vec3 position[4]; s32 light[4]; char tail[12]; };", evidence = "authored" }
 "func_8041F2A0_Vec3" = { declaration = "struct func_8041F2A0_Vec3 { f32 x; f32 y; f32 z; };", evidence = "authored" }
