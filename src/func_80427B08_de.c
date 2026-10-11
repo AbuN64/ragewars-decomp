@@ -9,6 +9,15 @@
    time when set, else the stage default from func_80425C70_de) and the heading D_800D34DC; in
    four-player mode the heading D_800D34D8. */
 
+/* The results screen item and phrase ids renumber on the de cartridge: its heading item is 0x151,
+   its name phrase 0x6B, its time phrase 0x3F and its time item 0x154. eu and eu-x use heading
+   strings this unit cannot name, so those cartridges keep their own screen code. */
+#if defined(VERSION_DE)
+enum { HEADING_ITEM = 0x151, NAME_PHRASE = 0x6B, TIME_PHRASE = 0x3F, TIME_ITEM = 0x154 };
+#else
+enum { HEADING_ITEM = 0x153, NAME_PHRASE = 0x69, TIME_PHRASE = 0x3D, TIME_ITEM = 0x156 };
+#endif
+
 extern struct ResultsHeadingScreen *D_800E4690;
 extern struct ResultsHeadingSettings D_801462C8;
 extern struct ResultsHeadingRecord D_80102B00[];
@@ -32,17 +41,17 @@ void func_80427B08_de(void) {
     char buffer[32];
 
     /* the hub lookup returns its Item view; the Label view names the text pointer this unit writes */
-    ((struct Label *) func_8040EC30_de(D_800E4690->window, 0x153))->text = D_800E4690->heading;
+    ((struct Label *) func_8040EC30_de(D_800E4690->window, HEADING_ITEM))->text = D_800E4690->heading;
     settings = &D_801462C8;
     switch (settings->players) {
     case 1:
-        func_802A025C_de(D_800E4690->heading, func_80411D78_de(0x69));
+        func_802A025C_de(D_800E4690->heading, func_80411D78_de(NAME_PHRASE));
         func_8042E9B4_de(D_800E4690->heading, D_800DD9BC,
                       D_800DFA6C[func_8041F140_de(settings->status[D_800E4690->record].kind)].name->text);
         break;
     case 3:
-        func_802A025C_de(D_800E4690->time, func_80411D78_de(0x3D));
-        item = (struct Label *) func_8040EC30_de(D_800E4690->window, 0x156);
+        func_802A025C_de(D_800E4690->time, func_80411D78_de(TIME_PHRASE));
+        item = (struct Label *) func_8040EC30_de(D_800E4690->window, TIME_ITEM);
         func_8040E8D8_de(item, 1);
         item->text = D_800E4690->time;
         time = D_80102B00[D_800E4690->record].times[D_800E4690->stage];
