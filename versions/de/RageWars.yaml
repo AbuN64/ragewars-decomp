@@ -3842,7 +3842,7 @@ segments:
       - [0xCE2B8, .data, "rodata/unresolved/800CD6B8"]
       - [0xCE2E0, data, "rodata/writable/800D2930"]
       - [0xCE2E4, data, "rodata/unresolved/800D2934"]
-      - [0xCE300, data, "rodata/writable/800D2950"]
+      - [0xCE300, .data, "rodata/writable/800D2950"]
       - [0xCE32B, data, "rodata/unresolved/800D297B"]
       - [0xCE32C, data, "rodata/writable/800D297C"]
       - [0xCE338, rodata, "rodata/func_8028D67C_de/800D2988"]

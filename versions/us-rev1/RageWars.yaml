@@ -5122,7 +5122,7 @@ segments:
       - [0xD3508, .data, "rodata/unresolved/800D2908"]
       - [0xD3530, data, "rodata/writable/800D2930"]
       - [0xD3534, data, "rodata/unresolved/800D2934"]
-      - [0xD3550, data, "rodata/writable/800D2950"]
+      - [0xD3550, .data, "rodata/writable/800D2950"]
       - [0xD3568, data, "src/ragewars_resident_strings_D3568_us_rev1.c"]
       - [0xD3574, data, "rodata/writable/800D2950_unclaimed_D3574"]
       - [0xD357B, data, "rodata/unresolved/800D297B"]
