@@ -3750,7 +3750,7 @@ segments:
       - [0xC9CE0, .data, "rodata/unresolved/800C90E0"]
       - [0xCA028, rodata, "src/rw_pool_80225F44_CF358_us_rev1.c"]
       - [0xCA02C, .data, "rodata/unresolved/800C942C"]
-      - [0x0CA06C, data, "src/ragewars_movement_tuning_CF39C_us_rev1.c"]
+      - [0x0CA06C, .data, "src/ragewars_movement_tuning_CF39C_us_rev1.c"]
       - [0x0CA08C, data, "rodata/unresolved/800C942C_0CA08C"]
       - [0x0CA090, data, "src/ragewars_movement_tuning_CF3C0_us_rev1.c"]
       - [0x0CA0B0, .data, "rodata/unresolved/800C942C_0CA08C_0CA0B0"]

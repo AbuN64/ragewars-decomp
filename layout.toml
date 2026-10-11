@@ -41116,6 +41116,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/ragewars_movement_tuning_CF39C_us_rev1.c"
+kind = "data"
+group = "data_800CE75C"
+members = ["src/ragewars_movement_tuning_CF39C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/ragewars_option_label_slots_us_rev1.c"
 kind = "data"
 group = "data_800D7A98"
