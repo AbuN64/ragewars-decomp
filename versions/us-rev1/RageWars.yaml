@@ -5705,7 +5705,7 @@ segments:
       - [0xE3390, rodata, "rodata/shared/800E2790"]
       - [0xE3396, data, "rodata/unresolved/800E2796"]
       - [0xE3398, rodata, "src/rw_pool_80445074_eu_E3398_us_rev1.c"]
-      - [0xE339C, rodata, "rodata/unresolved/800E279C"]
+      - [0xE339C, .rodata, "rodata/unresolved/800E279C"]
       - [0xE33C0, rodata, "rodata/func_80444CF8_de/800E27C0"]
       - [0xE33C4, data, "rodata/unresolved/800E27C4"]
       - [0xE33D0, rodata, "src/rw_text_80444FA0_us_rev1_E33D0_us_rev1.c"]

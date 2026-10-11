@@ -4546,6 +4546,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E279C"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E279C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E285C"
 segment = "span_E1720"
 members = ["src/rw_controller_pak_filename_alphabet_us_rev1.c", "rodata/unresolved/800E285C_unclaimed_E349E"]
@@ -44467,6 +44475,17 @@ path = "src/rodata.unresolved.800E2104_unclaimed_E2D88.c"
 kind = "data"
 group = "data_800E2188"
 members = ["rodata/unresolved/800E2104_unclaimed_E2D88"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E279C.c"
+kind = "data"
+group = "data_800E279C"
+members = ["rodata/unresolved/800E279C"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
