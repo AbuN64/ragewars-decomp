@@ -2829,7 +2829,7 @@ segments:
       - [0xC39D4, rodata, "src/rw_pool_8022DBC4_C8AC4_us_rev1.c"]
       - [0xC39D8, rodata, "src/rw_pool_8022DBE4_C8AC8_us_rev1.c"]
       - [0xC39DC, rodata, "src/rw_pool_8022DC1C_C8ACC_us_rev1.c"]
-      - [0xC39E0, rodata, "src/rw_pool_8022DC44_C8AD0_us_rev1.c"]
+      - [0xC39E0, .rodata, "src/rw_pool_8022DC44_C8AD0_us_rev1.c"]
       - [0xC39F8, rodata, "src/rw_pool_8022DD94_C8AE8_us_rev1.c"]
       - [0xC3A04, rodata, "src/rw_pool_8022DFA8_C8AF4_us_rev1.c"]
       - [0xC3A0C, rodata, "src/rw_pool_8022E0B0_C8AFC_us_rev1.c"]
