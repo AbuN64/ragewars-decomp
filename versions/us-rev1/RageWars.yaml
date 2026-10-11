@@ -5034,7 +5034,7 @@ segments:
       - [0xD1016, data, "rodata/unresolved/800CF5C0_unclaimed_D0FF0_unclaimed_D1016"]
       - [0xD1018, data, "data/unresolved/800D0418"]
       - [0xD1024, data, "src/ragewars_weapon_impulse_scale_D100C_us_rev1.c"]
-      - [0xD1028, data, "rodata/unresolved/800CF5C0_unclaimed_D0FF0_unclaimed_D1028"]
+      - [0xD1028, .data, "rodata/unresolved/800CF5C0_unclaimed_D0FF0_unclaimed_D1028"]
       - [0xD1044, data, "src/ragewars_weapon_view_offset_D100C_us_rev1.c"]
       - [0xD1050, data, "rodata/unresolved/800CF5C0_unclaimed_D1050"]
       - [0xD106C, data, "src/ragewars_weapon_presentation_D106C_us_rev1.c"]
