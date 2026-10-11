@@ -2812,7 +2812,7 @@ segments:
       - [0xC80A4, rodata, "src/rw_pool_8021D774_C80A4_us_rev1.c"]
       - [0xC80C4, rodata, "rodata/func_8021E08C_de/800C74C4"]
       - [0xC80D0, rodata, "rodata/func_8021E2A0_de/800C74D0"]
-      - [0xC828C, rodata, "src/rw_pool_8021E5F8_C828C_us_rev1.c"]
+      - [0xC828C, .rodata, "src/rw_pool_8021E5F8_C828C_us_rev1.c"]
       - [0xC82B4, .rodata, "src/rw_pool_8021EA54_C82B4_us_rev1.c"]
       - [0xC82EC, rodata, "src/rw_formats_8021EEFC_C82EC_us_rev1.c"]
       - [0xC82EF, data, "rodata/unresolved/800C76EF"]
