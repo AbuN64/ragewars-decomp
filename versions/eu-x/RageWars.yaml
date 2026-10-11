@@ -2623,7 +2623,7 @@ segments:
       - [0xC2968, data, "rodata/unresolved/800C1D68"]
       - [0xC2970, rodata, "rodata/func_802050C0_eu_x/800C6B80"]
       - [0xC2978, data, "rodata/unresolved/800C1D78"]
-      - [0xC2980, rodata, "rodata/func_80205720_de/800C6B90"]
+      - [0xC2980, .rodata, "rodata/func_80205720_de/800C6B90"]
       - [0xC29A8, rodata, "src/rw_pool_80205F18_C77B8_us_rev1.c"]
       - [0xC29B0, rodata, "src/rw_pool_80206080_C77C0_us_rev1.c"]
       - [0xC29B4, data, "rodata/unresolved/800C1DB4"]
