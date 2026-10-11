@@ -5510,7 +5510,7 @@ segments:
       - [0xE20C8, data, "rodata/unresolved/800E14C8"]
       - [0xE20D0, rodata, "rodata/func_8041D134_de/800E14D0"]
       - [0xE20FC, data, "rodata/unresolved/800E14FC"]
-      - [0xE2100, rodata, "rodata/func_8041D4E0_de/800E1500"]
+      - [0xE2100, .rodata, "rodata/func_8041D4E0_de/800E1500"]
       - [0xE2138, rodata, "src/rw_text_8041D6A8_E2138_us_rev1.c"]
       - [0xE213F, data, "rodata/unresolved/800E153F"]
       - [0xE2140, rodata, "rodata/func_8041DBCC_de/800E1540"]
