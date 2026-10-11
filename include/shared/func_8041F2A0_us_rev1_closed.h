@@ -85,6 +85,34 @@ struct func_8041F2A0_Config {
 };
 typedef struct func_8041F2A0_Config func_8041F2A0_Config;
 
+/* The 528-byte menu block at D_800E3590 that func_8041CEB0_us_rev1 allocates: its owner names each
+   slot it writes, and the neighbouring menu units keep their own view structs over the same block,
+   so consumers reach it through casts from this canonical spelling. */
+struct func_8041F2A0_MenuBlock {
+    void *root;
+    s32 list;
+    char pad8[0xC8 - 0x08];
+    func_8041F2A0_Item *item492;
+    s32 round492;
+    func_8041F2A0_Item *item491;
+    s32 round491;
+    s32 unk216;
+    s32 unk220;
+    s32 lookup486;
+    func_8041F2A0_Item *item486;
+    func_8041F2A0_Item *item563;
+    s32 focus;
+    func_8041F2A0_Item *item510;
+    func_8041F2A0_Item *item512;
+    s32 unk248;
+    s32 style;
+    func_8041F2A0_Item *item511;
+    s32 unk260;
+    s32 player;
+    s32 unk268;
+};
+typedef struct func_8041F2A0_MenuBlock func_8041F2A0_MenuBlock;
+
 
 
 
@@ -97,6 +125,9 @@ extern SelectionScreenState *D_800E42D0;
 extern func_8041F2A0_Layout D_800E42D4[];
 
 
+/* func_8041DB30_de advances the cursor word it is handed, the menu block's slot at +0x10C. */
+extern func_8041F2A0_MenuBlock *D_800E3590;
+extern void func_8041DB30_de(int *cursor);
 extern func_8041F2A0_Config D_80146398[];
 extern SelectionScreenState *func_8025305C_de(s32);
 extern s32 func_8041B610_de(s32, s32);

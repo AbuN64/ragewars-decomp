@@ -1,4 +1,5 @@
 #include "common/types_8a8189af7b05.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041BEA8.h"
 #include "types.h"
 /* Enables mode 1 through func_802A23C4_de, places the menu model at (17, -10, -50) with uniform scale 0.14, zero rotation and a (0, 5, 0) offset, then issues request 0xE78 through func_8025DF34_de; returns zero. */
@@ -7,8 +8,8 @@
 
 
 
-extern Menu_func_8041DBCC_de *D_800E3590;
-
+/* The hub spells D_800E3590 as the padded menu block; this unit reaches the model name at +0x08
+ * through its own view, so each use casts back to it. */
 extern void func_80439B5C_de(char *model, s32 arg1, Vec3 scale, Vec3 position);
 extern void func_80439BE0_de(char *model, Vec3 rotation);
 extern void func_80439C30_de(char *model, Vec3 offset);
@@ -33,9 +34,9 @@ s32 func_8041DBCC_de(void) {
     position.x = 17.0f;
     position.y = -10.0f;
     position.z = -50.0f;
-    func_80439B5C_de(D_800E3590->model, 0, scale, position);
-    func_80439BE0_de(D_800E3590->model, rotation);
-    func_80439C30_de(D_800E3590->model, offset);
+    func_80439B5C_de(((Menu_func_8041DBCC_de *) D_800E3590)->model, 0, scale, position);
+    func_80439BE0_de(((Menu_func_8041DBCC_de *) D_800E3590)->model, rotation);
+    func_80439C30_de(((Menu_func_8041DBCC_de *) D_800E3590)->model, offset);
     func_8025DF34_de(0xE78);
     return 0;
 }

@@ -10,41 +10,14 @@
 #include "span_16E000/code_8041BEA8.h"
 #include "types.h"
 
-/* The block six neighbouring units keep as Menu_func_8041D960_de, Menu_func_8041DA5C_de and
- * Menu_func_8041D134_de views; here every slot this unit writes is named, with the focus, item and
- * player slots matching the names those views already publish. */
-struct Menu_func_8041CEB0_us_rev1 {
-    void *root;                      /* +0x000 the menu tree this unit was called for */
-    s32 list;                        /* +0x004 the pool func_8041B610_de(root, 4) returns, as a word */
-    char pad8[0xC8 - 0x08];
-    func_8041F2A0_Item *item492;    /* +0x0C8 window id 492 */
-    s32 round492;                    /* +0x0CC item492's y extent in groups of four pixels */
-    func_8041F2A0_Item *item491;    /* +0x0D0 window id 491 */
-    s32 round491;                    /* +0x0D4 item491's y extent in groups of four pixels */
-    s32 unk216;                      /* +0x0D8 set to 1 */
-    s32 unk220;                      /* +0x0DC set to 4 */
-    s32 lookup486;                   /* +0x0E0 func_80419E54_de(486, 255) */
-    func_8041F2A0_Item *item486;    /* +0x0E4 window id 486 */
-    func_8041F2A0_Item *item563;    /* +0x0E8 window id 563 */
-    s32 focus;                       /* +0x0EC cleared; neighbours read it as a focus node */
-    func_8041F2A0_Item *item510;    /* +0x0F0 window id 510 */
-    func_8041F2A0_Item *item512;    /* +0x0F4 window id 512 */
-    s32 unk248;                      /* +0x0F8 set to 27 */
-    s32 style;                       /* +0x0FC cleared and read back by func_8041DA5C_de */
-    func_8041F2A0_Item *item511;    /* +0x100 window id 511 */
-    s32 unk260;                      /* +0x104 set to 25 */
-    s32 player;                      /* +0x108 cleared; neighbours read it as a player index */
-    s32 unk268;                      /* +0x10C set to -1, then func_8041DB30_de writes through it */
-};
+/* D_800E3590 and its 528-byte block layout are spelled once in the closed hub as
+ * func_8041F2A0_MenuBlock, shared with the neighbouring menu units that keep their own views over
+ * the same block. */
 
-extern struct Menu_func_8041CEB0_us_rev1 *D_800E3590;
-
-/* No header declares these three; the spellings match how the landed units that own them define
- * them: func_8041B968_de writes the word at +0x6C of the object it is handed, func_8041DB30_de
- * advances the cursor it is handed through, and func_8041DA5C_de takes the style word this block
- * keeps at +0x0FC. */
+/* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
+ * them define them: func_8041B968_de writes the word at +0x6C of the object it is handed, and
+ * func_8041DA5C_de takes the style word this block keeps at +0x0FC. */
 extern void func_8041B968_de(struct Object6C *object, s32 value);
-extern void func_8041DB30_de(int *cursor);
 extern void func_8041DA5C_de(s32 style);
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
@@ -54,7 +27,7 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
     s32 shift;
     s32 adjust;
 
-    D_800E3590 = (struct Menu_func_8041CEB0_us_rev1 *) func_8025305C_de(528);
+    D_800E3590 = (func_8041F2A0_MenuBlock *) func_8025305C_de(528);
     D_800E3590->root = arg0;
     D_800E3590->list = func_8041B610_de((s32) arg0, 4);
     func_8041B6E8_de((s32) arg0, 0, 513);
