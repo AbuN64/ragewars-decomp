@@ -3425,7 +3425,7 @@ segments:
       - [0xC5ED4, rodata, "src/rw_pool_80290424_CB094_us_rev1.c"]
       - [0xC5ED8, rodata, "src/rw_pool_802905F4_CB098_us_rev1.c"]
       - [0xC5EE0, rodata, "src/rw_pool_8044DC60_CB0A0_us_rev1.c"]
-      - [0xC5EEC, data, "rodata/unresolved/800C52EC"]
+      - [0xC5EEC, .data, "rodata/unresolved/800C52EC"]
       - [0xC5F04, rodata, "rodata/func_80290E6C_de/800CA4C4"]
       - [0xC5F20, rodata, "src/rw_pool_80291074_CB0E0_us_rev1.c"]
       - [0xC5F30, rodata, "src/rw_text_80293534_CB0F0_us_rev1.c"]
