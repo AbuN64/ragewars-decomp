@@ -3330,7 +3330,7 @@ segments:
       - [0xCA650, rodata, "src/rw_pool_802746A0_CA650_us_rev1.c"]
       - [0xCA654, rodata, "src/rw_pool_80274870_CA654_us_rev1.c"]
       - [0xCA658, rodata, "src/rw_pool_80274944_CA658_us_rev1.c"]
-      - [0xCA668, rodata, "src/rw_pool_802749B4_CA668_us_rev1.c"]
+      - [0xCA668, .rodata, "src/rw_pool_802749B4_CA668_us_rev1.c"]
       - [0xCA688, rodata, "src/rw_pool_80274A90_CA688_us_rev1.c"]
       - [0xCA690, rodata, "src/rw_pool_80274BF4_CA690_us_rev1.c"]
       - [0xCA694, rodata, "src/rw_pool_80274C7C_CA694_us_rev1.c"]
