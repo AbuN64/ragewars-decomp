@@ -20,8 +20,8 @@ DFtype func_802C6970_us_rev1(DItype u)
   if (u < 0)
     u = -u, negate = 1;
 
-  d = (SItype) (u >> WORD_SIZE);
-  if ((SItype) (u >> WORD_SIZE) < 0)
+  d = (SItype) (u >> 32);
+  if ((SItype) (u >> 32) < 0)
     d += D_800C8100_de;
   d *= D_800C8108_de;
   d *= D_800C8108_de;
