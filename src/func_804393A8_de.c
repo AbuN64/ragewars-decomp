@@ -8,6 +8,7 @@
 #include "common/unused.h"
 #include "decomp/argb_color.h"
 #include "gfx.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "shared/func_80421E70_eu_closed.h"
 #include "shared/func_804235A8_eu_closed.h"
 #include "shared/func_804235A8_eu_layout.h"

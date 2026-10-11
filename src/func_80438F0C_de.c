@@ -1,6 +1,7 @@
 #include "span_16E000/code_804366C4.h"
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "types.h"
 
 
@@ -9,7 +10,6 @@ extern struct HudCue *D_800E58A0;
 
 
 
-extern struct HudCue *func_8025305C_de(s32 size);
 extern s32 func_8041A280_de(s32 a0, s32 a1);
 extern s32 func_8041A580_de(s32 a0, s32 a1, s32 a2);
 extern void func_8041A6EC_de(s32 cue, s32 volume);
@@ -20,7 +20,8 @@ extern s32 func_80419E54_de(s32 a0, s32 a1);
 s32 func_80438F0C_de(void) {
     s32 cue;
 
-    D_800E58A0 = func_8025305C_de(0x1C);
+    /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own HudCue view */
+    D_800E58A0 = (struct HudCue *) func_8025305C_de(0x1C);
     D_800E58A0->handle = func_8041A280_de(0x6C, 0x6D);
     cue = func_8041A580_de(0x6F, 0x70, 0xFF);
     D_800E58A0->cue0 = cue;

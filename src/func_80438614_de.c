@@ -11,7 +11,8 @@ void func_80438614_de(void) {
  displacement=index*20;
  model=D_800E5830->rows[index].unk0;
  if(model>=0) {
-  item=func_8040EC30_de(D_800E5830->window,MENU_804387F4_642);
+  /* the hub's Item view shares the MenuWidget prefix; this unit writes alpha and image through its own view */
+  item=(MenuWidget *)func_8040EC30_de(D_800E5830->window,MENU_804387F4_642);
   func_8040E8D8_de(item,1);
   item->alpha=0xAF;
   item->image=D_800E5830->rows[index].unk10;

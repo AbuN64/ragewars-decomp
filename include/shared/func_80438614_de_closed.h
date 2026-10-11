@@ -4,13 +4,12 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 
 
 extern ModelPreviewScreen *D_800E5830;
 
-extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(MenuWidget *,s32);
 extern void func_80439B5C_de(void *,s32,Vec3,Vec3);
 extern void func_80439BE0_de(void *,Vec3);
 extern void func_80439C30_de(void *,Vec3);

@@ -1,5 +1,6 @@
 #ifndef FUNC_80443B3C_DE_CLOSED_H
 #define FUNC_80443B3C_DE_CLOSED_H
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "shared/func_8043E444_de_closed.h"
 #include "shared/func_804235A8_eu_layout.h"
 #include "shared/func_8043F294_de_closed.h"
@@ -28,7 +29,6 @@ struct PlayerRankInner;
 
 
 extern Shared_MenuData D_80145040;
-extern s16 D_80146398[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_800EED80[];
 #else

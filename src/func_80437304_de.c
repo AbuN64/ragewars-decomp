@@ -1,14 +1,13 @@
 #include "types.h"
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 typedef struct Shared_MenuWidgetState { s32 unk0; s32 unk4; void *unk8; s32 unkC; s32 unk10; s32 unk14; } Shared_MenuWidgetState;
 extern Shared_MenuWidgetState *D_800E5780;
 extern char D_80102B7E[];
 
-extern s32 func_8025305C_de(s32);
 extern s32 func_8041A280_de(s32, s32);
 extern s32 func_80265650_de(char *, s32);
-extern void *func_8040EC30_de(void *, s32);
 extern void func_8040E950_de(void *, s32);
 extern s32 func_80419E54_de(s32, s32);
 
