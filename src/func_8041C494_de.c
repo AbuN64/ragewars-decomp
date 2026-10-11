@@ -29,20 +29,47 @@ extern void func_8041C244_de(void);
 extern void func_80434FB4_de(s32);
 extern void func_80298368_de(s32);
 
+/* The dialog-event codes func_80299A08_de reports differ per cartridge family: the European
+   eu-x cart numbers them 0x3C9..0x3CF, the de cart 0x3C1..0x3C5, and eu/us/us-rev1 0x3C6..0x3CB.
+   Each case below carries the same work in every family, only its label changes. */
 s32 func_8041C494_de(void) {
     func_8029973C_de();
     switch (func_80299A08_de()) {
+#if defined(VERSION_EU_X)
+    case 0x3CF:
+#elif defined(VERSION_DE)
+    case 0x3C4:
+#else
     case 0x3CB:
+#endif
         func_8040E8D8_de((void *)D_800E3518->absent, 0);
         func_8041BE90_de();
         break;
+#if defined(VERSION_EU_X)
+    case 0x3CE:
+#elif defined(VERSION_DE)
+    case 0x3C5:
+#else
     case 0x3CA:
+#endif
         func_8041C164_de();
         break;
+#if defined(VERSION_EU_X)
+    case 0x3CA:
+#elif defined(VERSION_DE)
+    case 0x3C2:
+#else
     case 0x3C7:
+#endif
         func_8041C244_de();
         break;
+#if defined(VERSION_EU_X)
+    case 0x3C9:
+#elif defined(VERSION_DE)
+    case 0x3C1:
+#else
     case 0x3C6:
+#endif
         D_80146D60 = 1;
         D_800E28CC = 1;
         D_8014AD94 = 0;
