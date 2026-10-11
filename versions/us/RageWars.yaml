@@ -4287,7 +4287,7 @@ segments:
       - [0xFFD34, data, "rodata/writable/800FF134"]
       - [0xFFD40, .data, "rodata/unresolved/800FF140"]
       - [0xFFD5C, data, "rodata/writable/800FF15C"]
-      - [0xFFD60, data, "rodata/unresolved/800FF160"]
+      - [0xFFD60, .data, "rodata/unresolved/800FF160"]
       - [0xFFD7C, .data, "rodata/writable/800FF17C"]
       - [0xFFDA0, .data, "rodata/unresolved/800FF1A0"]
   - name: "retained_101000"
