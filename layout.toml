@@ -49785,10 +49785,6 @@ member = "rodata/writable/800D94E8"
 path = "src/fuzzy/rodata.writable.800D4168.c"
 scores = {de = 0.9534883720930233, eu = 0.9534883720930233, eu-x = 0.9534883720930233, us = 0.9534883720930233}
 
-[[fuzzy]]
-member = "rodata/writable/800E32A4"
-path = "src/fuzzy/rodata.writable.800DDF04.c"
-scores = {de = 0.8695652173913043, eu = 0.8695652173913043, eu-x = 0.8695652173913043, us = 0.8695652173913043, us-rev1 = 0.8695652173913043}
 
 [[fuzzy]]
 member = "src/rw_menu_event_handlers_E6554_us_rev1.c"
