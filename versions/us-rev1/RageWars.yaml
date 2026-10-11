@@ -3016,7 +3016,7 @@ segments:
       - [0xC93C8, rodata, "src/rw_pool_8023ED64_C93C8_us_rev1.c"]
       - [0xC93CC, data, "rodata/unresolved/800C87CC"]
       - [0xC93D0, rodata, "src/rw_pool_8023EF00_C93D0_us_rev1.c"]
-      - [0xC93D8, rodata, "rodata/unresolved/800C87D8"]
+      - [0xC93D8, .rodata, "rodata/unresolved/800C87D8"]
       - [0xC93F8, rodata, "src/rw_text_8023FD18_C93F8_us_rev1.c"]
       - [0xC9409, data, "rodata/unresolved/800C8809"]
       - [0xC940C, rodata, "src/rw_pool_8023FD18_C940C_us_rev1.c"]
