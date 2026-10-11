@@ -6040,7 +6040,7 @@ segments:
       - [0xe5210, data, "src/rw_menu_event_match_E5210_us_rev1.c"]
       - [0xe5218, data, "rodata/unresolved/800E4604_unclaimed_E5210_unclaimed_E5218"]
       - [0xe521c, .data, "src/rw_menu_event_handlers_E521C_us_rev1.c"]
-      - [0xe5258, data, "rodata/unresolved/800E4604_unclaimed_E5210_unclaimed_E5258"]
+      - [0xe5258, .data, "rodata/unresolved/800E4604_unclaimed_E5210_unclaimed_E5258"]
       - [0xE5280, data, "rodata/writable/800E4680"]
       - [0xE5294, data, "src/ragewars_arena_menu_slots_us_rev1.c"]
       - [0xE5684, .data, "src/ragewars_arena_compatibility_us_rev1.c"]
