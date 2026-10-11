@@ -4012,7 +4012,7 @@ segments:
       - [0xDCECC, .data, "rodata/unresolved/800DC2CC"]
       - [0xDCEE8, rodata, "rodata/func_80423828_de/800E1668"]
       - [0xDCF10, rodata, "rodata/func_80423F48_de/800E1690"]
-      - [0xDCF30, rodata, "src/rw_pool_804243E0_E22B0_us_rev1.c"]
+      - [0xDCF30, .rodata, "src/rw_pool_804243E0_E22B0_us_rev1.c"]
       - [0xDCF48, rodata, "rodata/func_80424DE8_de/800E16C8"]
       - [0xDD010, rodata, "rodata/func_80425014_de/800E1790"]
       - [0xDD0F8, rodata, "rodata/func_804253C8_de/800E1878"]

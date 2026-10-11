@@ -4043,7 +4043,7 @@ segments:
       - [0xDE238, rodata, "rodata/func_80423828_de/800E1668"]
       - [0xDE258, data, "rodata/unresolved/800DD658"]
       - [0xDE260, rodata, "rodata/func_80423F48_de/800E1690"]
-      - [0xDE280, rodata, "src/rw_pool_804243E0_E22B0_us_rev1.c"]
+      - [0xDE280, .rodata, "src/rw_pool_804243E0_E22B0_us_rev1.c"]
       - [0xDE298, rodata, "rodata/func_80424DE8_de/800E16C8"]
       - [0xDE360, rodata, "rodata/func_80425014_de/800E1790"]
       - [0xDE448, rodata, "rodata/func_804253C8_de/800E1878"]
