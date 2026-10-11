@@ -40,7 +40,7 @@ extern void func_802AAB68_de(float arg0, float arg1);
 extern void func_80294CA0_us_rev1(void);
 extern int D_8010B3D8;
 extern Shared_ControlManager D_80145088;
-extern MenuGlobal_func_80294F1C_us_rev1 D_8014AEB0;
+extern struct MenuGlobal_func_80294F1C_us_rev1 D_8014AEB0;
 extern s32 D_8014AEC0;
 extern s32 D_8014AEBC;
 extern s32 D_8014AEC4;
