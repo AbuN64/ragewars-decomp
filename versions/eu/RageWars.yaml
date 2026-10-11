@@ -2589,7 +2589,7 @@ segments:
     align: 1
     subalign: 1
     subsegments:
-      - [0xC2860, rodata, "rodata/shared/800C6AB0"]
+      - [0xC2860, .rodata, "rodata/shared/800C6AB0"]
       - [0xC289C, rodata, "src/rw_pool_80202CA0_C76EC_us_rev1.c"]
       - [0xC28B0, rodata, "src/rw_pool_80202E4C_C7700_us_rev1.c"]
       - [0xC28BC, rodata, "rodata/func_80202FDC_de/800C6B0C"]
