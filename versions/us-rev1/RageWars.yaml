@@ -5742,7 +5742,7 @@ segments:
       - [0xe3510, data, "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510"]
       - [0xe3514, .data, "src/rw_video_arguments_r0_m1_E3514_us_rev1.c"]
       - [0xe352c, data, "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C"]
-      - [0xe3530, data, "src/rw_video_arguments_r0_m2_E3530_us_rev1.c"]
+      - [0xe3530, .data, "src/rw_video_arguments_r0_m2_E3530_us_rev1.c"]
       - [0xe3548, .data, "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548"]
       - [0xe3584, data, "src/rw_video_arguments_r1_m0_E3584_us_rev1.c"]
       - [0xe359c, data, "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548_unclaimed_E359C"]
