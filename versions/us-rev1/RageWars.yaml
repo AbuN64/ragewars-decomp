@@ -2757,7 +2757,7 @@ segments:
       - [0xC7DD8, data, "rodata/unresolved/800C71D8"]
       - [0xC7DE0, rodata, "src/rw_pool_8021321C_C7DE0_us_rev1.c"]
       - [0xC7DE4, data, "rodata/unresolved/800C71E4"]
-      - [0xC7DF0, rodata, "src/rw_pool_802138F0_C7DF0_us_rev1.c"]
+      - [0xC7DF0, .rodata, "src/rw_pool_802138F0_C7DF0_us_rev1.c"]
       - [0xC7E18, rodata, "src/rw_pool_80213AAC_us_rev1_C7E18_us_rev1.c"]
       - [0xC7E1C, data, "rodata/unresolved/800C721C"]
       - [0xC7E20, rodata, "src/rw_pool_80213ED4_C7E20_us_rev1.c"]
