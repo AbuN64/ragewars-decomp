@@ -5119,7 +5119,7 @@ segments:
       - [0xD34AE, data, "rodata/unresolved/800D2648_unclaimed_D34AE"]
       - [0xD34B0, .data, "data/unresolved/800D28B0"]
       - [0xD3504, rodata, "src/rw_pool_802800C0_D3504_us_rev1.c"]
-      - [0xD3508, data, "rodata/unresolved/800D2908"]
+      - [0xD3508, .data, "rodata/unresolved/800D2908"]
       - [0xD3530, data, "rodata/writable/800D2930"]
       - [0xD3534, data, "rodata/unresolved/800D2934"]
       - [0xD3550, data, "rodata/writable/800D2950"]
