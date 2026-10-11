@@ -3338,6 +3338,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CADC0"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800CADC0"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CAE14"
 segment = "span_C76B0"
 members = ["src/rw_constants_8029E1D4_CBA14_us_rev1.c"]
@@ -45790,6 +45798,17 @@ path = "src/rodata.unresolved.800CABD0.c"
 kind = "data"
 group = "data_800CABD0"
 members = ["rodata/unresolved/800CABD0"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800CADC0.c"
+kind = "data"
+group = "data_800CADC0"
+members = ["rodata/unresolved/800CADC0"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
