@@ -3743,7 +3743,7 @@ segments:
       - [0xC9204, .data, "rodata/unresolved/800C8604"]
       - [0xC92E0, rodata, "src/rw_text_802BD430_CD940_us_rev1.c"]
       - [0xC92E6, data, "rodata/unresolved/800C86E6"]
-      - [0xC92E8, data, "data/unresolved/800C86E8"]
+      - [0xC92E8, .data, "data/unresolved/800C86E8"]
       - [0xC9300, rodata, "src/rw_text_802BD430_CD960_us_rev1.c"]
       - [0xC9304, data, "rodata/unresolved/800C8704"]
       - [0xC9308, rodata, "rodata/func_802BD974_de/800CCD68"]
