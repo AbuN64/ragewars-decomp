@@ -3739,7 +3739,7 @@ segments:
       - [0xC9A54, data, "rodata/unresolved/800C8E54"]
       - [0xC9A60, rodata, "src/rw_constants_802B6DEC_CD6F0_us_rev1.c"]
       - [0xC9A74, rodata, "rodata/func_802B6DF0_de/800CCB04"]
-      - [0xC9A78, rodata, "src/rw_pool_802B6F9C_CD708_us_rev1.c"]
+      - [0xC9A78, .rodata, "src/rw_pool_802B6F9C_CD708_us_rev1.c"]
       - [0xC9A90, data, "rodata/unresolved/800CCB20"]
       - [0xC9A98, .rodata, "rodata/func_802B7130_de/800C8E98"]
       - [0xC9ADC, data, "rodata/unresolved/800C8EDC"]

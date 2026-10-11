@@ -3713,7 +3713,7 @@ segments:
       - [0xC8494, data, "rodata/unresolved/800C7894"]
       - [0xC84A0, rodata, "src/rw_constants_802B6DEC_CD6F0_us_rev1.c"]
       - [0xC84B4, rodata, "rodata/func_802B6DF0_de/800CCB04"]
-      - [0xC84B8, rodata, "src/rw_pool_802B6F9C_CD708_us_rev1.c"]
+      - [0xC84B8, .rodata, "src/rw_pool_802B6F9C_CD708_us_rev1.c"]
       - [0xC84D0, data, "rodata/unresolved/800CCB20"]
       - [0xC84D8, .rodata, "rodata/func_802B7130_de/800C78D8"]
       - [0xC851C, data, "rodata/unresolved/800C791C"]
