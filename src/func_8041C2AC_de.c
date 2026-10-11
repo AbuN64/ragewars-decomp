@@ -1,5 +1,6 @@
 #include "span_16E000/code_8041BEA8.h"
 #include "types.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 /* Builds screen state D_800E3518 under a parent window: allocates its 0x2C bytes, keeps the parent,
    opens windows 0x3C3 (shown), 0x3C9, 0x3C4 and 0x3C5 (hidden) at 0x4 to 0x10, clears the words at
    0x14 and 0x18, resets through func_8040C428_de(0) and func_802A2394_de, sets D_800E28C8 to -1 and
@@ -9,9 +10,6 @@ extern struct Screen_func_8041C2AC_de *D_800E3518;
 extern s32 D_800E28C8;
 extern s32 D_80146D70;
 extern char D_8011FAC0[];
-extern struct Screen_func_8041C2AC_de *func_8025305C_de(s32);
-extern void *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(void *, s32);
 extern void func_8040C428_de(s32);
 extern void func_802A2394_de(void);
 extern void func_80293334_de(void *, s32, s32);

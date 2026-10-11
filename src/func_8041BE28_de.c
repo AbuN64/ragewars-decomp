@@ -5,6 +5,7 @@
 #include "span_16E000/code_80434F4C.h"
 #include "span_16E000/code_8041BEA8.h"
 #include "types.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "common/unused.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -53,11 +54,9 @@ extern s32 func_80404BE8_de(s32, s32, s32 *);
 extern s32 func_80404F04_de(s32);
 extern s32 func_80435384_de(s32,u32 *);
 extern void func_80404E28_de(s32);
-extern void func_8040E8D8_de(s32,s32);
 
 extern void func_8041C244_de(void);
 extern void func_80434FB4_de(s32);
-extern Label *func_8040EC30_de(s32,s32);
 extern s32 D_800D36D4, D_800E28CC, D_800DF4C0,D_8010F190,D_80146D60,D_8014AD94;
 
 #if defined(VERSION_DE)

@@ -40,6 +40,7 @@
 #include "span_1000/code_80255BEC.h"
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
@@ -53,7 +54,6 @@ extern int func_80245784_de();
 extern void func_80246E44_de();
 extern void func_8024B2D0_de();
 extern void func_8024BE3C_de();
-extern Record * func_8025305C_de();
 extern struct Shape_typemap_165 * func_8025343C_de();
 extern void func_80253838_de();
 extern void func_80253908_de();

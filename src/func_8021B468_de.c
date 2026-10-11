@@ -5,6 +5,7 @@
 /* Player state, projectiles, effects and linked-actor transitions. */
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 /* Update player state, effects, projectiles, and linked actors according to control input and world transitions. */
 
 
@@ -63,7 +64,6 @@ extern s32 D_8013B364;
 extern struct Shared_GlobalPlayers D_80145040;
 extern s32 D_80145088;
 extern u8 D_801462E5;
-extern s32 D_80146398;
 
 extern struct Shared_GlobalRuntimeState D_80145060;
 
