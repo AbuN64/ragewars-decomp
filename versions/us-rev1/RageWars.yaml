@@ -4101,7 +4101,7 @@ segments:
       - [0xCF39C, .data, "src/ragewars_movement_tuning_CF39C_us_rev1.c"]
       - [0xCF3BC, data, "rodata/unresolved/800CE75C_unclaimed_CF3BC"]
       - [0xCF3BE, data, "src/ragewars_movement_sound_CF39C_us_rev1.c"]
-      - [0xCF3C0, data, "src/ragewars_movement_tuning_CF3C0_us_rev1.c"]
+      - [0xCF3C0, .data, "src/ragewars_movement_tuning_CF3C0_us_rev1.c"]
       - [0xCF3E0, data, "rodata/unresolved/800CE75C_unclaimed_CF3E0"]
       - [0xCF3E2, data, "src/ragewars_movement_sound_CF3C0_us_rev1.c"]
       - [0xCF3E4, data, "src/ragewars_view_tuning_CF3E4_us_rev1.c"]

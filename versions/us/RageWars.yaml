@@ -3752,7 +3752,7 @@ segments:
       - [0xCA02C, .data, "rodata/unresolved/800C942C"]
       - [0x0CA06C, .data, "src/ragewars_movement_tuning_CF39C_us_rev1.c"]
       - [0x0CA08C, data, "rodata/unresolved/800C942C_0CA08C"]
-      - [0x0CA090, data, "src/ragewars_movement_tuning_CF3C0_us_rev1.c"]
+      - [0x0CA090, .data, "src/ragewars_movement_tuning_CF3C0_us_rev1.c"]
       - [0x0CA0B0, .data, "rodata/unresolved/800C942C_0CA08C_0CA0B0"]
       - [0x0CA0FC, data, "src/ragewars_movement_tuning_CF42C_us_rev1.c"]
       - [0x0CA11C, data, "rodata/unresolved/800C942C_0CA08C_0CA0B0_0CA11C"]
