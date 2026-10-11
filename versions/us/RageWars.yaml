@@ -2770,7 +2770,7 @@ segments:
       - [0xC36AC, data, "rodata/unresolved/800C2AAC"]
       - [0xC36B0, rodata, "rodata/func_80227038_de/800C7C70"]
       - [0xC36D0, .rodata, "src/rw_tail_80227038_C8890_us_rev1.c"]
-      - [0xC36F0, rodata, "src/ragewars_resident_strings_C88B0_us_rev1.c"]
+      - [0xC36F0, .rodata, "src/ragewars_resident_strings_C88B0_us_rev1.c"]
       - [0xC3708, data, "rodata/unresolved/800C7CC8"]
       - [0xC370C, .rodata, "src/rw_pool_80228AF4_C88CC_us_rev1.c"]
       - [0xC3744, rodata, "src/rw_pool_80228DC4_C8904_us_rev1.c"]
