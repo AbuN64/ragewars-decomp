@@ -4227,7 +4227,7 @@ segments:
       - [0xDF40C, .data, "src/rw_controller_pak_filename_alphabet_us_rev1.c"]
       - [0xDF450, data, "rodata/writable/800E28A0"]
       - [0xDF454, data, "rodata/unresolved/800E28A4"]
-      - [0xDF460, data, "rodata/writable/800E28B0"]
+      - [0xDF460, .data, "rodata/writable/800E28B0"]
       - [0xDF48B, data, "rodata/unresolved/800DE88B"]
       - [0xDF48C, data, "src/rw_video_previous_mode_E34DC_us_rev1.c"]
       - [0xDF4A0, data, "src/rw_video_mode_counts_E34F0_us_rev1.c"]

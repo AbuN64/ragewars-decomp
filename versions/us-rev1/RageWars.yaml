@@ -5731,7 +5731,7 @@ segments:
       - [0xe349e, data, "rodata/unresolved/800E285C_unclaimed_E349E"]
       - [0xE34A0, data, "rodata/writable/800E28A0"]
       - [0xE34A4, data, "rodata/unresolved/800E28A4"]
-      - [0xE34B0, data, "rodata/writable/800E28B0"]
+      - [0xE34B0, .data, "rodata/writable/800E28B0"]
       - [0xe34d0, data, "src/rw_video_buffer_width_E34D0_us_rev1.c"]
       - [0xe34d4, data, "src/rw_video_buffer_height_E34D4_us_rev1.c"]
       - [0xe34d8, data, "src/rw_video_selected_mode_E34D8_us_rev1.c"]
