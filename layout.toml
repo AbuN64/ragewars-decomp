@@ -3642,6 +3642,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D3368"
+segment = "span_C76B0"
+members = ["src/ragewars_pickup_life_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D3390"
 segment = "span_C76B0"
 members = ["src/ragewars_pickup_special_us_rev1.c"]
@@ -40404,6 +40412,17 @@ path = "src/ragewars_pickup_label_directory_us_rev1.c"
 kind = "data"
 group = "data_800D7070"
 members = ["src/ragewars_pickup_label_directory_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_pickup_life_us_rev1.c"
+kind = "data"
+group = "data_800D3368"
+members = ["src/ragewars_pickup_life_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

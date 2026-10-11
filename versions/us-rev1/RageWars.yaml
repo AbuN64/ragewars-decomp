@@ -5167,7 +5167,7 @@ segments:
       - [0xD3DD0, .data, "src/ragewars_pickup_powerups_us_rev1.c"]
       - [0xD3E30, .data, "src/ragewars_pickup_weapons_us_rev1.c"]
       - [0xD3EA8, .data, "src/ragewars_pickup_health_us_rev1.c"]
-      - [0xD3F68, data, "src/ragewars_pickup_life_us_rev1.c"]
+      - [0xD3F68, .data, "src/ragewars_pickup_life_us_rev1.c"]
       - [0xD3F90, .data, "src/ragewars_pickup_special_us_rev1.c"]
       - [0xD3FC0, .data, "src/ragewars_pickup_targeted_us_rev1.c"]
       - [0xD40C0, .data, "src/ragewars_pickup_ammo_us_rev1.c"]
