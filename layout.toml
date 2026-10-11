@@ -4298,6 +4298,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800DC718"
+segment = "span_C24F0"
+members = ["rodata/unresolved/800DC718"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800DC830"
 segment = "span_C76B0"
 members = ["src/huffman_signed_small_nodes.c"]
@@ -44204,6 +44212,17 @@ path = "src/rodata.unresolved.800DC6B4.c"
 kind = "data"
 group = "data_800DC6B4"
 members = ["rodata/unresolved/800DC6B4"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800DC718.c"
+kind = "data"
+group = "data_800DC718"
+members = ["rodata/unresolved/800DC718"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
