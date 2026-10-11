@@ -2952,7 +2952,7 @@ segments:
       - [0xC42D8, rodata, "src/rw_pool_8023ED64_C93C8_us_rev1.c"]
       - [0xC42DC, data, "rodata/unresolved/800C36DC"]
       - [0xC42E0, rodata, "src/rw_pool_8023EF00_C93D0_us_rev1.c"]
-      - [0xC42E8, rodata, "rodata/unresolved/800C36E8"]
+      - [0xC42E8, .rodata, "rodata/unresolved/800C36E8"]
       - [0xC4308, rodata, "src/rw_text_8023FD18_C93F8_us_rev1.c"]
       - [0xC4319, data, "rodata/unresolved/800C3719"]
       - [0xC431C, rodata, "src/rw_pool_8023FD18_C940C_us_rev1.c"]
