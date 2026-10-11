@@ -7386,7 +7386,7 @@ segments:
       - [0x1BCE60, data, "rodata/unresolved/80154018"]
       - [0x1BCE68, .data, "rodata/writable/80154020"]
       - [0x1BCE98, .data, "rodata/unresolved/80154050"]
-      - [0x1BCF28, data, "rodata/writable/801540E0"]
+      - [0x1BCF28, .data, "rodata/writable/801540E0"]
       - [0x1BCF4C, .data, "rodata/unresolved/80154104"]
       - [0x1BCF94, .data, "src/resident_menu_pak_options.c"]
       - [0x1BEE48, .data, "src/resident_menu_inventory_settings.c"]
