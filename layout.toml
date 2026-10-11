@@ -35245,7 +35245,7 @@ kind = "c"
 group = "code_804264F0"
 members = ["func_80427B08_de"]
 toolchain = "gcc-2.8.1-sn64"
-withheld = ["de", "eu", "eu-x"]
+withheld = ["eu", "eu-x"]
 
 [unit.options]
 add = []
