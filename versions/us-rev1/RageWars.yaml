@@ -4964,7 +4964,7 @@ segments:
       - [0xD0CC4, data, "src/ragewars_weapon_impulse_scale_D0CAC_us_rev1.c"]
       - [0xD0CC8, .data, "rodata/unresolved/800CF5C0_unclaimed_D0C90_unclaimed_D0CC8"]
       - [0xD0CE4, data, "src/ragewars_weapon_view_offset_D0CAC_us_rev1.c"]
-      - [0xD0CF0, data, "rodata/unresolved/800CF5C0_unclaimed_D0CF0"]
+      - [0xD0CF0, .data, "rodata/unresolved/800CF5C0_unclaimed_D0CF0"]
       - [0xD0D0C, data, "src/ragewars_weapon_presentation_D0D0C_us_rev1.c"]
       - [0xD0D14, data, "src/ragewars_weapon_availability_D0D0C_us_rev1.c"]
       - [0xD0D16, data, "rodata/unresolved/800CF5C0_unclaimed_D0CF0_unclaimed_D0D16"]
