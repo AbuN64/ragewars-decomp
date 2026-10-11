@@ -5836,7 +5836,7 @@ segments:
 
       - [0xE4738, data, "rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E471C_unclaimed_E4738"]
 
-      - [0xE473C, data, "src/ragewars_character_preview_scale_distance_02_us_rev1.c"]
+      - [0xE473C, .data, "src/ragewars_character_preview_scale_distance_02_us_rev1.c"]
 
       - [0xE475C, .data, "src/ragewars_character_preview_positions_02_us_rev1.c"]
 
