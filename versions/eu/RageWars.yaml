@@ -4170,7 +4170,7 @@ segments:
       - [0xEF9DF, data, "rodata/unresolved/800EEDDF"]
       - [0xEF9E0, rodata, "rodata/shared/800EEDE0"]
       - [0xEF9E6, rodata, "rodata/unresolved/800EEDE6"]
-      - [0xEF9E8, rodata, "rodata/unresolved/800EEDE8"]
+      - [0xEF9E8, .rodata, "rodata/unresolved/800EEDE8"]
       - [0xEFA08, rodata, "src/rw_pool_80445074_eu_E3398_us_rev1.c"]
       - [0xEFA0C, rodata, "rodata/func_80444CF8_de/800E27C0"]
       - [0xEFA10, rodata, "rodata/shared/800EEE10"]
