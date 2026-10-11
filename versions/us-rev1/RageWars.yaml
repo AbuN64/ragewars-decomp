@@ -4496,7 +4496,7 @@ segments:
       - [0xCFDB8, rodata, "src/rw_pool_8021EEFC_CFDB8_us_rev1.c"]
       - [0xCFDBC, data, "rodata/unresolved/800CF1BC"]
       - [0xCFDC8, rodata, "src/rw_hud_flash_offset_CFDC8_us_rev1.c"]
-      - [0xCFDCC, data, "rodata/unresolved/800CF1CC"]
+      - [0xCFDCC, .data, "rodata/unresolved/800CF1CC"]
       - [0xCFDE4, data, "rodata/writable/800CF1E4"]
       - [0xCFDEC, .data, "rodata/unresolved/800CF1EC"]
       - [0xCFE28, data, "rodata/writable/800CF228"]
