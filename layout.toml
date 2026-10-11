@@ -5066,6 +5066,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E32A1"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E32A1", "rodata/writable/800E32A4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E3300"
 segment = "span_E1720"
 members = ["src/ragewars_event_handlers_E3F00_us_rev1.c", "rodata/unresolved/800E3300_unclaimed_E3F24"]
@@ -47775,6 +47783,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.writable.800E32A4.c"
+kind = "data"
+group = "data_800E32A1"
+members = ["rodata/writable/800E32A4"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.writable.800E45F0.c"
 kind = "data"
 group = "code_802AD608"
@@ -49784,7 +49803,6 @@ scores = {de = 0.9999999999999999, eu = 1.0, eu-x = 1.0, us = 1.0, us-rev1 = 1.0
 member = "rodata/writable/800D94E8"
 path = "src/fuzzy/rodata.writable.800D4168.c"
 scores = {de = 0.9534883720930233, eu = 0.9534883720930233, eu-x = 0.9534883720930233, us = 0.9534883720930233}
-
 
 [[fuzzy]]
 member = "src/rw_menu_event_handlers_E6554_us_rev1.c"

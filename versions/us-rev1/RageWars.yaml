@@ -5783,7 +5783,7 @@ segments:
       - [0xE3E70, data, "rodata/unresolved/800E2AD0_unclaimed_E3718_unclaimed_E3E70"]
       - [0xE3E80, .data, "rodata/writable/800E3280"]
       - [0xE3EA1, data, "rodata/unresolved/800E32A1"]
-      - [0xE3EA4, data, "rodata/writable/800E32A4"]
+      - [0xE3EA4, .data, "rodata/writable/800E32A4"]
       - [0xE3F00, .data, "src/ragewars_event_handlers_E3F00_us_rev1.c"]
       - [0xE3F24, .data, "rodata/unresolved/800E3300_unclaimed_E3F24"]
       - [0xE3F90, .data, "src/ragewars_event_handlers_E3F90_us_rev1.c"]

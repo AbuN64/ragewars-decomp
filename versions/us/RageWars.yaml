@@ -4171,7 +4171,7 @@ segments:
       - [0x0DEAD0, data, "rodata/unresolved/800DD730_0DEAD0"]
       - [0xDEAE0, .data, "rodata/writable/800E3280"]
       - [0xDEB01, data, "rodata/unresolved/800DDF01"]
-      - [0xDEB04, data, "rodata/writable/800E32A4"]
+      - [0xDEB04, .data, "rodata/writable/800E32A4"]
       - [0xDEB60, .data, "rodata/unresolved/800DDF60"]
       - [0xDED70, data, "rodata/writable/800E3510"]
       - [0xDED7C, data, "src/ragewars_event_handlers_E411C_us_rev1.c"]
