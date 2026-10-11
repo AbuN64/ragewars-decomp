@@ -5233,7 +5233,7 @@ segments:
       - [0xD8CA0, data, "rodata/unresolved/800D80A0"]
       - [0xD8CB0, .data, "src/ragewars_audio_effect_D8CB0_us_rev1.c"]
       - [0xD8D18, .data, "src/ragewars_audio_effect_D8D18_us_rev1.c"]
-      - [0xD8DA0, data, "src/ragewars_audio_effect_D8DA0_us_rev1.c"]
+      - [0xD8DA0, .data, "src/ragewars_audio_effect_D8DA0_us_rev1.c"]
       - [0xD8DC8, data, "src/ragewars_audio_effect_D8DC8_us_rev1.c"]
       - [0xD8DF0, data, "src/ragewars_audio_effect_D8DF0_us_rev1.c"]
       - [0xD8E18, data, "src/ragewars_audio_effect_D8E18_us_rev1.c"]
