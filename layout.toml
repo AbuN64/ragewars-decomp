@@ -6754,6 +6754,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E633C"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E5E74_unclaimed_E6F3C", "src/ragewars_resident_strings_E6F40_us_rev1.c", "rodata/unresolved/800E5E74_unclaimed_E6F58"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E6374"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E5E74_unclaimed_E6F74"]
@@ -43312,6 +43320,17 @@ path = "src/ragewars_resident_strings_E6F24_us_rev1.c"
 kind = "data"
 group = "data_800E6304"
 members = ["src/ragewars_resident_strings_E6F24_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_resident_strings_E6F40_us_rev1.c"
+kind = "data"
+group = "data_800E633C"
+members = ["src/ragewars_resident_strings_E6F40_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
