@@ -3873,7 +3873,7 @@ segments:
       - [0xE64D4, data, "rodata/unresolved/800E58D4"]
       - [0xE64D8, data, "src/ragewars_scheduler_interrupt_mask_us_rev1.c"]
       - [0xE64E0, data, "src/ragewars_scheduler_queue_seed_us_rev1.c"]
-      - [0xE64E8, data, "rodata/writable/800D5268"]
+      - [0xE64E8, .data, "rodata/writable/800D5268"]
       - [0xE6500, data, "src/ragewars_scheduler_exception_queue_us_rev1.c"]
       - [0xE6530, .rodata, "src/rw_text_802BD430_D9EE0_us_rev1.c"]
       - [0xE6551, data, "rodata/unresolved/800E5951"]
