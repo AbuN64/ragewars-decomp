@@ -5136,7 +5136,7 @@ segments:
       - [0xD3604, data, "rodata/unresolved/800D29D8_unclaimed_D3604"]
       - [0xD3608, .data, "src/ragewars_mode_lifecycle_handlers_D3608_us_rev1.c"]
       - [0xD36D4, data, "rodata/writable/800D2AD4"]
-      - [0xD3710, data, "rodata/unresolved/800D2B10"]
+      - [0xD3710, .data, "rodata/unresolved/800D2B10"]
       - [0xD3750, data, "rodata/writable/800D2B50"]
       - [0xD3760, data, "rodata/unresolved/800D2B60"]
       - [0xD3770, data, "rodata/writable/800D2B70"]

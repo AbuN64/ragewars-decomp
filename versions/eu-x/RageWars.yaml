@@ -3875,7 +3875,7 @@ segments:
       - [0xCF8FC, data, "rodata/writable/800D299C"]
       - [0xCF938, data, "src/ragewars_mode_lifecycle_handlers_D35D8_us_rev1.c"]
       - [0xCFA34, data, "rodata/writable/800D2AD4"]
-      - [0xCFA50, data, "rodata/unresolved/800D2B10"]
+      - [0xCFA50, .data, "rodata/unresolved/800D2B10"]
       - [0xCFA90, data, "rodata/writable/800D2B50"]
       - [0xCFAA0, data, "rodata/unresolved/800D2B60"]
       - [0xCFAB0, .data, "rodata/writable/800CEEB0"]
