@@ -1,4 +1,5 @@
 #include "common/types_1dc8418c21db.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041BEA8.h"
 #include "types.h"
 /* Updates every node of the 50-entry id table: nodes whose unlock bit the current player has set are enabled through func_8040E8D8_de and given the style byte, the rest are disabled. */
@@ -11,11 +12,10 @@
 
 
 
-extern Menu_func_8041DA5C_de *D_800E3590;
+/* The hub names the block's root word and the Item* helpers func_8040EC30_de/func_8040E8D8_de;
+   this view's player word sits at +0x10C, beyond what the hub names here, so that use casts. */
 extern TextEntry D_800DF544[];
 extern PlayerRecord D_800FEB4A[];
-extern Node_func_8041DA5C_de *func_8040EC30_de(void *root, u16 id);
-extern void func_8040E8D8_de(Node_func_8041DA5C_de *node, s32 enabled);
 extern s32 func_80265650_de(PlayerRecord *bits, s32 bit);
 
 void func_8041DA5C_de(s32 style) {
@@ -23,8 +23,8 @@ void func_8041DA5C_de(s32 style) {
     Node_func_8041DA5C_de *node;
 
     for (i = 0; i < 50; i++) {
-        node = func_8040EC30_de(D_800E3590->root, D_800DF544[i].id);
-        if (func_80265650_de(&D_800FEB4A[D_800E3590->player], i) == 1) {
+        node = (Node_func_8041DA5C_de *) func_8040EC30_de(D_800E3590->root, D_800DF544[i].id);
+        if (func_80265650_de(&D_800FEB4A[((Menu_func_8041DA5C_de *) D_800E3590)->player], i) == 1) {
             func_8040E8D8_de(node, 1);
             node->style = style;
         } else {

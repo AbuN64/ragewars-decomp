@@ -1,4 +1,5 @@
 #include "common/types_8a8189af7b05.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_80405DC0.h"
 #include "types.h"
 #include "common/unused.h"
@@ -23,7 +24,6 @@ extern s32 D_800DE174;
 #endif
 extern void func_8029973C_de(void);
 extern s32 func_80299A08_de(void);
-extern void func_8040E8D8_de(void *, s32);
 extern void func_8041BE90_de(void);
 extern void func_8041C244_de(void);
 extern void func_80434FB4_de(s32);
