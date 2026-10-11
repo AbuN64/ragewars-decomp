@@ -4115,7 +4115,7 @@ segments:
       - [0xCF472, data, "src/ragewars_movement_sound_CF450_us_rev1.c"]
       - [0xCF474, data, "src/ragewars_view_tuning_CF474_us_rev1.c"]
       - [0xCF48C, data, "src/ragewars_view_tuning_CF48C_us_rev1.c"]
-      - [0xCF4A4, data, "rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4"]
+      - [0xCF4A4, .data, "rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4"]
       - [0xcf4c8, data, "src/rw_player_state_normal_callbacks_00_us_rev1.c"]
       - [0xcf4d0, data, "rodata/unresolved/800CE75C_unclaimed_CF474_unclaimed_CF4A4_unclaimed_CF4D0"]
       - [0xcf4d4, data, "src/rw_player_state_normal_timing_00_us_rev1.c"]
