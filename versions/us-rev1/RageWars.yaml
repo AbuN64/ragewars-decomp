@@ -3864,7 +3864,7 @@ segments:
       - [0xCD864, .data, "rodata/unresolved/800CCC64"]
       - [0xCD940, rodata, "src/rw_text_802BD430_CD940_us_rev1.c"]
       - [0xCD946, data, "rodata/unresolved/800CCD46"]
-      - [0xCD948, data, "data/unresolved/800CCD48"]
+      - [0xCD948, .data, "data/unresolved/800CCD48"]
       - [0xCD960, rodata, "src/rw_text_802BD430_CD960_us_rev1.c"]
       - [0xCD964, data, "rodata/unresolved/800CCD64"]
       - [0xCD968, rodata, "rodata/func_802BD974_de/800CCD68"]
