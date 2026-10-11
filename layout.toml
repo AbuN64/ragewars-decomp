@@ -47603,6 +47603,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8026641C_CA0B0_us_rev1.c"
+kind = "data"
+group = "data_800C94B0"
+members = ["src/rw_pool_8026641C_CA0B0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80266810_CA0D0_us_rev1.c"
 kind = "data"
 group = "data_800C94D0"
