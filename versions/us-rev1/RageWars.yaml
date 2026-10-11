@@ -5738,7 +5738,7 @@ segments:
       - [0xe34dc, data, "src/rw_video_previous_mode_E34DC_us_rev1.c"]
       - [0xe34e0, data, "rodata/writable/800E28DC_unclaimed_E34E0"]
       - [0xe34f0, data, "src/rw_video_mode_counts_E34F0_us_rev1.c"]
-      - [0xe34f8, data, "src/rw_video_arguments_r0_m0_E34F8_us_rev1.c"]
+      - [0xe34f8, .data, "src/rw_video_arguments_r0_m0_E34F8_us_rev1.c"]
       - [0xe3510, data, "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510"]
       - [0xe3514, data, "src/rw_video_arguments_r0_m1_E3514_us_rev1.c"]
       - [0xe352c, data, "rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C"]
