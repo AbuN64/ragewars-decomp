@@ -369,7 +369,7 @@ schema = 1
 "func_802138F0_de" = { evidence = "landed", signature = "void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 arg4, u8 *out)" }
 "func_80213AAC_de" = { evidence = "declared", signature = "void func_80213AAC_de(char *, char *, void *)" }
 "func_80213AAC_us" = { evidence = "declared", signature = "void func_80213AAC_us(char *, char *, void *)" }
-"func_80213AAC_us_rev1" = { evidence = "declared", signature = "void func_80213AAC_us_rev1(char *, char *, void *)" }
+"func_80213AAC_us_rev1" = { evidence = "landed", signature = "void func_80213AAC_us_rev1(struct BodyParams_func_80213AAC_us_rev1 *params, struct VoiceRecord_func_80213AAC_us_rev1 *voice, struct BodySetup_func_80213AAC_us_rev1 *setup)" }
 "func_80213ACC_eu" = { evidence = "declared", signature = "void func_80213ACC_eu(char *, char *, void *)" }
 "func_80213ACC_eu_x" = { evidence = "declared", signature = "void func_80213ACC_eu_x(char *, char *, void *)" }
 "func_80213CF8_de" = { evidence = "landed", signature = "void func_80213CF8_de(Source *arg0, void *arg1)" }
@@ -2615,6 +2615,7 @@ schema = 1
 "func_802AEA2C_de" = { evidence = "landed", signature = "s32 func_802AEA2C_de(s32 arg0, s32 arg1)" }
 "func_802AEAA0_de" = { evidence = "landed", signature = "int func_802AEAA0_de(void *object)" }
 "func_802AEAB0_de" = { evidence = "landed", signature = "void func_802AEAB0_de(void *arg0, InitParams *arg1)" }
+"func_802AEAB4_us_rev1" = { evidence = "landed", signature = "s32 func_802AEAB4_us_rev1(u8 *stream, s32 count)" }
 "func_802AEC20_de" = { evidence = "landed", signature = "ALMicroTime func_802AEC20_de(void *node)" }
 "func_802AEE48_us_rev1" = { evidence = "landed", signature = "s32 func_802AEE48_us_rev1(void)" }
 "func_802AEF84_us_rev1" = { evidence = "landed", signature = "s32 func_802AEF84_us_rev1(void)" }
@@ -3440,6 +3441,7 @@ schema = 1
 "func_8041CE08_de" = { evidence = "landed", signature = "void func_8041CE08_de(Obj_func_8041CE08_de *arg0, s32 arg1)" }
 "func_8041CE10_de" = { evidence = "landed", signature = "void func_8041CE10_de(struct Object49C *object, s32 value)" }
 "func_8041CE18_de" = { evidence = "landed", signature = "void func_8041CE18_de(Unk8041CE88 *arg0)" }
+"func_8041CEB0_us_rev1" = { evidence = "landed", signature = "s32 func_8041CEB0_us_rev1(void *arg0)" }
 "func_8041D134_de" = { evidence = "landed", signature = "s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2)" }
 "func_8041D4E0_de" = { evidence = "authored", signature = "void func_8041D4E0_de()" }
 "func_8041D6A8_de" = { evidence = "landed", signature = "void func_8041D6A8_de(void)" }
@@ -3452,6 +3454,7 @@ schema = 1
 "func_8041DE5C_de" = { evidence = "landed", signature = "s32 func_8041DE5C_de(void)" }
 "func_8041DE94_de" = { evidence = "landed", signature = "s32 func_8041DE94_de(void)" }
 "func_8041DEB4_de" = { evidence = "landed", signature = "s32 func_8041DEB4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
+"func_8041DFC0_us_rev1" = { evidence = "landed", signature = "s32 func_8041DFC0_us_rev1(void *arg0)" }
 "func_8041E100_de" = { evidence = "landed", signature = "s32 func_8041E100_de(void *arg0, void *arg1, void *arg2, s32 event)" }
 "func_8041E280_de" = { evidence = "landed", signature = "s32 func_8041E280_de(void *arg0, void *arg1, void *arg2, s32 event)" }
 "func_8041E408_de" = { evidence = "declared", signature = "void func_8041E408_de(s32)" }
@@ -3529,6 +3532,7 @@ schema = 1
 "func_80422414_de" = { evidence = "landed", signature = "s32 func_80422414_de(void)" }
 "func_8042242C_de" = { evidence = "landed", signature = "s32 func_8042242C_de(void)" }
 "func_8042244C_de" = { evidence = "landed", signature = "s32 func_8042244C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
+"func_8042250C_us_rev1" = { evidence = "landed", signature = "s32 func_8042250C_us_rev1(void)" }
 "func_80422728_us_rev1" = { evidence = "landed", signature = "s32 func_80422728_us_rev1(void *node)" }
 "func_80422960_de" = { evidence = "landed", signature = "s32 func_80422960_de(void *item, s32 arg1, s32 event)" }
 "func_80422F9C_de" = { evidence = "landed", signature = "void func_80422F9C_de(void)" }
