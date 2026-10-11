@@ -5111,7 +5111,7 @@ segments:
       - [0xD2220, .data, "src/ragewars_arccos_table_us_rev1.c"]
       - [0xD3228, rodata, "src/rw_pool_802745D0_D3228_us_rev1.c"]
       - [0xD322C, data, "rodata/unresolved/800D262C"]
-      - [0xD3230, data, "rodata/writable/800D2630"]
+      - [0xD3230, .data, "rodata/writable/800D2630"]
       - [0xD3248, .data, "src/ragewars_distance_attenuation_us_rev1.c"]
       - [0xD334C, .data, "src/ragewars_cone_attenuation_us_rev1.c"]
       - [0xD3450, data, "rodata/unresolved/800D2648_unclaimed_D3450"]

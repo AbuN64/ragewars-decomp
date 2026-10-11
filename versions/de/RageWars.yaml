@@ -3836,7 +3836,7 @@ segments:
       - [0xCCFD0, .data, "rodata/unresolved/800CC3D0"]
       - [0xCDFD8, rodata, "src/rw_pool_802745D0_D3228_us_rev1.c"]
       - [0xCDFDC, data, "rodata/unresolved/800CD3DC"]
-      - [0xCDFE0, data, "rodata/writable/800D2630"]
+      - [0xCDFE0, .data, "rodata/writable/800D2630"]
       - [0xCDFF8, .data, "src/ragewars_distance_attenuation_us_rev1.c"]
       - [0xCE2B4, rodata, "src/rw_pool_802800C0_D3504_us_rev1.c"]
       - [0xCE2B8, .data, "rodata/unresolved/800CD6B8"]

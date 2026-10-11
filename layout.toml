@@ -4794,6 +4794,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D262C"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800D262C", "rodata/writable/800D2630"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D2648"
 segment = "span_C76B0"
 members = ["src/ragewars_distance_attenuation_us_rev1.c"]
@@ -49535,6 +49543,17 @@ path = "src/rodata.writable.800D15B0.c"
 kind = "data"
 group = "code_80268160"
 members = ["rodata/writable/800D15B0"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.writable.800D2630.c"
+kind = "data"
+group = "data_800D262C"
+members = ["rodata/writable/800D2630"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

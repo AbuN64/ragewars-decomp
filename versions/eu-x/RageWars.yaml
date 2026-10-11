@@ -3860,7 +3860,7 @@ segments:
       - [0xCE580, .data, "rodata/unresolved/800CD980"]
       - [0xCF588, rodata, "src/rw_pool_802745D0_D3228_us_rev1.c"]
       - [0xCF58C, data, "rodata/unresolved/800CE98C"]
-      - [0xCF590, data, "rodata/writable/800D2630"]
+      - [0xCF590, .data, "rodata/writable/800D2630"]
       - [0xCF5A8, .data, "src/ragewars_distance_attenuation_us_rev1.c"]
       - [0xCF864, rodata, "src/rw_pool_802800C0_D3504_us_rev1.c"]
       - [0xCF868, .data, "rodata/unresolved/800CEC68"]
