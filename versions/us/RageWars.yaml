@@ -4009,7 +4009,7 @@ segments:
       - [0xDCEC0, rodata, "rodata/func_80422020_de/800E1640"]
       - [0xDCEC4, rodata, "rodata/unresolved/800DC2C4"]
       - [0xDCEC8, rodata, "rodata/func_80422170_de/800E1648"]
-      - [0xDCECC, data, "rodata/unresolved/800DC2CC"]
+      - [0xDCECC, .data, "rodata/unresolved/800DC2CC"]
       - [0xDCEE8, rodata, "rodata/func_80423828_de/800E1668"]
       - [0xDCF10, rodata, "rodata/func_80423F48_de/800E1690"]
       - [0xDCF30, rodata, "src/rw_pool_804243E0_E22B0_us_rev1.c"]
