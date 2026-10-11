@@ -3732,7 +3732,7 @@ segments:
       - [0xC8C64, data, "rodata/writable/800CD394"]
       - [0xC8C90, .data, "rodata/unresolved/800CD3C0"]
       - [0xC8D90, data, "rodata/writable/800CD4C0"]
-      - [0xC8D94, data, "rodata/unresolved/800CD4C4"]
+      - [0xC8D94, .data, "rodata/unresolved/800CD4C4"]
       - [0xC9300, rodata, "rodata/func_80209DAC_de/800CDA30"]
       - [0xC930C, data, "rodata/unresolved/800C870C"]
       - [0x0C9310, .data, "src/ragewars_actor_mode_dispatch_us_rev1.c"]

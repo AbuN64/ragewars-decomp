@@ -3761,7 +3761,7 @@ segments:
       - [0xC9934, data, "rodata/writable/800CD394"]
       - [0xC9960, .data, "rodata/unresolved/800CD3C0"]
       - [0xC9A60, data, "rodata/writable/800CD4C0"]
-      - [0xC9A64, data, "rodata/unresolved/800CD4C4"]
+      - [0xC9A64, .data, "rodata/unresolved/800CD4C4"]
       - [0xC9FD0, rodata, "rodata/func_80209DAC_de/800CDA30"]
       - [0xC9FDC, data, "rodata/unresolved/800C93DC"]
       - [0xCA92C, rodata, "rodata/shared/800CE38C"]

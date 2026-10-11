@@ -3902,7 +3902,7 @@ segments:
       - [0xce080, data, "src/rw_actor_state_end_CE080_us_rev1.c"]
       - [0xce084, .data, "rodata/unresolved/800CD3C0_unclaimed_CDFEC_unclaimed_CE000_unclaimed_CE00C_unclaimed_CE020_unclaimed_CE02C_unclaimed_CE040_unclaimed_CE04C_unclaimed_CE060_unclaimed_CE06C_unclaimed_CE080_unclaimed_CE084"]
       - [0xCE0C0, data, "rodata/writable/800CD4C0"]
-      - [0xCE0C4, data, "rodata/unresolved/800CD4C4"]
+      - [0xCE0C4, .data, "rodata/unresolved/800CD4C4"]
       - [0xce0e4, data, "src/rw_actor_state_entry_CE0E4_us_rev1.c"]
       - [0xce0f0, data, "rodata/unresolved/800CD4C4_unclaimed_CE0F0"]
       - [0xce0f8, data, "src/rw_actor_state_animation_CE0F8_us_rev1.c"]
