@@ -4217,7 +4217,7 @@ segments:
       - [0xEAB45, data, "rodata/unresolved/800E9F45"]
       - [0xEAB48, .rodata, "rodata/unresolved/800EED88"]
       - [0xEAB64, data, "rodata/unresolved/800E9F64"]
-      - [0xEAB68, rodata, "rodata/func_804434E0_de/800E9F68"]
+      - [0xEAB68, .rodata, "rodata/func_804434E0_de/800E9F68"]
       - [0xEAB84, rodata, "rodata/func_80443734_de/800E9F84"]
       - [0xEAB88, data, "rodata/unresolved/800E9F88"]
       - [0xEAB90, rodata, "src/rw_text_8044488C_E3380_us_rev1.c"]
