@@ -3870,7 +3870,7 @@ segments:
       - [0xD4B20, data, "src/ragewars_scheduler_current_threads_us_rev1.c"]
       - [0xD4B60, .rodata, "src/rw_text_802BD430_D9EE0_us_rev1.c"]
       - [0xD4B81, data, "rodata/unresolved/800D3F81"]
-      - [0xD4B84, rodata, "src/rw_text_802BD430_D9F04_us_rev1.c"]
+      - [0xD4B84, .rodata, "src/rw_text_802BD430_D9F04_us_rev1.c"]
       - [0xD4BA5, data, "rodata/unresolved/800D3FA5"]
       - [0xD4BA8, data, "data/unresolved/800D3FA8"]
       - [0xD4BB0, rodata, "src/rw_text_802BDDE0_D9F30_us_rev1.c"]
