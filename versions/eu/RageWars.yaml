@@ -4059,7 +4059,7 @@ segments:
       - [0xEEDB3, rodata, "rodata/unresolved/800EE1B3"]
       - [0xEEDB4, .rodata, "rodata/unresolved/800EE1B4"]
       - [0xEEDD4, rodata, "src/rw_pool_8042ED70_E2784_us_rev1.c"]
-      - [0xEEDE0, data, "rodata/unresolved/800EE1E0"]
+      - [0xEEDE0, .data, "rodata/unresolved/800EE1E0"]
       - [0xEEE00, rodata, "rodata/func_8042F7A8_de/800E1BB0"]
       - [0xEEE14, data, "rodata/unresolved/800EE214"]
       - [0xEEE18, rodata, "rodata/func_8042F91C_de/800E1BC8"]
