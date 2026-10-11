@@ -3000,7 +3000,7 @@ segments:
       - [0xC45A1, data, "rodata/unresolved/800C39A1"]
       - [0xC45A4, rodata, "src/rw_pool_8024A7A0_C9764_us_rev1.c"]
       - [0xC45AC, rodata, "rodata/func_8024AA18_de/800C8B6C"]
-      - [0xC45E8, rodata, "src/rw_pool_8024ADD0_C97A8_us_rev1.c"]
+      - [0xC45E8, .rodata, "src/rw_pool_8024ADD0_C97A8_us_rev1.c"]
       - [0xC4610, rodata, "rodata/func_8024B06C_de/800C8BD0"]
       - [0xC4618, .rodata, "src/rw_text_8024BF24_C97D8_us_rev1.c"]
       - [0xC4656, data, "rodata/unresolved/800C3A56"]
