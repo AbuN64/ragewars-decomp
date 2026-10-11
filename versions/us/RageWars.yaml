@@ -4151,7 +4151,7 @@ segments:
       - [0xDE010, rodata, "rodata/shared/800E2790"]
       - [0xDE016, data, "rodata/unresolved/800DD416"]
       - [0xDE018, rodata, "src/rw_pool_80445074_eu_E3398_us_rev1.c"]
-      - [0xDE01C, rodata, "rodata/unresolved/800DD41C"]
+      - [0xDE01C, .rodata, "rodata/unresolved/800DD41C"]
       - [0xDE040, rodata, "rodata/func_80444CF8_de/800E27C0"]
       - [0xDE044, .data, "rodata/unresolved/800DD444"]
       - [0xDE098, data, "rodata/writable/800E2838"]
