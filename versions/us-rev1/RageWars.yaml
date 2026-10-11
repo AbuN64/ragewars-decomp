@@ -5495,7 +5495,7 @@ segments:
       - [0xE2034, rodata, "src/rw_constants_804181A4_E2034_us_rev1.c"]
       - [0xE2040, rodata, "src/rw_pool_80418DA0_E2040_us_rev1.c"]
       - [0xE2044, data, "rodata/unresolved/800E1444"]
-      - [0xE2050, rodata, "src/rw_pool_8041A05C_E2050_us_rev1.c"]
+      - [0xE2050, .rodata, "src/rw_pool_8041A05C_E2050_us_rev1.c"]
       - [0xE2070, rodata, "src/rw_pool_8041A280_E2070_us_rev1.c"]
       - [0xE2078, data, "rodata/unresolved/800E1478"]
       - [0xE2080, rodata, "src/rw_formats_8041BE90_E2080_us_rev1.c"]
