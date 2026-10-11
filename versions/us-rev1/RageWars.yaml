@@ -6120,7 +6120,7 @@ segments:
       - [0xE6C90, data, "rodata/unresolved/800E5E74_unclaimed_E6C90"]
       - [0xE6C94, .data, "src/ragewars_resident_strings_E6C94_us_rev1.c"]
       - [0xE6CAC, data, "rodata/unresolved/800E5E74_unclaimed_E6CAC"]
-      - [0xE6CB0, data, "src/ragewars_resident_strings_E6CB0_us_rev1.c"]
+      - [0xE6CB0, .data, "src/ragewars_resident_strings_E6CB0_us_rev1.c"]
       - [0xE6CC8, data, "rodata/unresolved/800E5E74_unclaimed_E6CC8"]
       - [0xE6CCC, data, "src/ragewars_resident_strings_E6CCC_us_rev1.c"]
       - [0xE6CE4, data, "rodata/unresolved/800E5E74_unclaimed_E6CE4"]
