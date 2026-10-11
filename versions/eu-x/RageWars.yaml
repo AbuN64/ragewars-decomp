@@ -4052,7 +4052,7 @@ segments:
       - [0xE99B4, rodata, "rodata/func_8041FC50_de/800E15A4"]
       - [0xE99CC, data, "rodata/unresolved/800E8DCC"]
       - [0xE99D0, rodata, "rodata/func_804213DC_de/800E15C0"]
-      - [0xE99F8, rodata, "rodata/func_80421568_de/800E15E8"]
+      - [0xE99F8, .rodata, "rodata/func_80421568_de/800E15E8"]
       - [0xE9A20, rodata, "rodata/func_80421CE8_de/800E1610"]
       - [0xE9A38, data, "rodata/unresolved/800E8E38"]
       - [0xE9A40, rodata, "src/rw_pool_80421E9C_E2230_us_rev1.c"]

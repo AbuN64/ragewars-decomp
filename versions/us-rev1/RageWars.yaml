@@ -5525,7 +5525,7 @@ segments:
       - [0xE21A4, rodata, "rodata/func_8041FC50_de/800E15A4"]
       - [0xE21BC, data, "rodata/unresolved/800E15BC"]
       - [0xE21C0, rodata, "rodata/func_804213DC_de/800E15C0"]
-      - [0xE21E8, rodata, "rodata/func_80421568_de/800E15E8"]
+      - [0xE21E8, .rodata, "rodata/func_80421568_de/800E15E8"]
       - [0xE2210, rodata, "rodata/func_80421CE8_de/800E1610"]
       - [0xE2228, data, "rodata/unresolved/800E1628"]
       - [0xE2230, rodata, "src/rw_pool_80421E9C_E2230_us_rev1.c"]
