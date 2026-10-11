@@ -4062,7 +4062,7 @@ segments:
       - [0xDE624, data, "data/unresolved/800DDA24"]
       - [0xDE630, rodata, "rodata/func_8042972C_de/800E1A60"]
       - [0xDE668, data, "rodata/unresolved/800DDA68"]
-      - [0xDE670, rodata, "src/rw_pool_80429A24_E26A0_us_rev1.c"]
+      - [0xDE670, .rodata, "src/rw_pool_80429A24_E26A0_us_rev1.c"]
       - [0xDE68C, rodata, "rodata/func_80429FF0_de/800E1ABC"]
       - [0xDE69C, data, "rodata/unresolved/800DDA9C"]
       - [0xDE6A0, .rodata, "rodata/func_8042A2B0_de/800DDAA0"]

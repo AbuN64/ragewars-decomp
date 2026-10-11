@@ -4083,7 +4083,7 @@ segments:
       - [0xE9E64, data, "rodata/unresolved/800E9264"]
       - [0xE9E70, rodata, "rodata/func_8042972C_de/800E1A60"]
       - [0xE9EA8, data, "rodata/unresolved/800E92A8"]
-      - [0xE9EB0, rodata, "src/rw_pool_80429A24_E26A0_us_rev1.c"]
+      - [0xE9EB0, .rodata, "src/rw_pool_80429A24_E26A0_us_rev1.c"]
       - [0xE9ECC, rodata, "rodata/func_80429FF0_de/800E1ABC"]
       - [0xE9EDC, data, "rodata/unresolved/800E92DC"]
       - [0xE9EE0, .rodata, "rodata/func_8042AFB0_eu_x/800E92E0"]
