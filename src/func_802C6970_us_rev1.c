@@ -5,13 +5,11 @@
    own constants (already covered as data at 0x800CD350/0x800CD358/0x800CD360), so the code loads
    them by reference instead of emitting a constant pool. */
 #include "span_1000/code_802C074C.h"
-typedef int SItype;
-typedef long long DItype;
-typedef double DFtype;
+#include "common/data.h"
 
-extern double D_800C8100_de; /* 2^32 */
-extern double D_800C8108_de; /* 2^16, HIGH_HALFWORD_COEFF */
-extern double D_800C8110_de; /* 2^32 */
+ /* 2^32 */
+ /* 2^16, HIGH_HALFWORD_COEFF */
+ /* 2^32 */
 
 double func_802C6970_us_rev1(long long u)
 {

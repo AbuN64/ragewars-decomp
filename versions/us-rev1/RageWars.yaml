@@ -2627,7 +2627,7 @@ segments:
       - [0xC7514, data, "rodata/unresolved/802C6914"]
       - [0xC7520, c, "__cmpdi2"]
       - [0xC7568, data, "rodata/unresolved/802C6968"]
-      - [0x0C7570, asm, "func_802C6970_us_rev1"]
+      - [0x0C7570, c, "func_802C6970_us_rev1"]
       - [0x0C75F8, data, "rodata/unresolved/802C6968_0C75F8"]
       - [0xC7600, c, "__floatdisf"]
   - name: span_C76B0

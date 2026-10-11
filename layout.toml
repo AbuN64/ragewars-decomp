@@ -28098,6 +28098,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_802C6970_us_rev1.c"
+kind = "c"
+group = "code_802C074C"
+members = ["func_802C6970_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = ["-mfp32"]
+omit = []
+
+[[unit]]
 path = "src/func_80400000_de.c"
 kind = "c"
 group = "code_80400000"
