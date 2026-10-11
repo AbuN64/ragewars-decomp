@@ -1,0 +1,9 @@
+#ifndef UNBAKE_SPAN_1000_CODE_802C074C_H
+#define UNBAKE_SPAN_1000_CODE_802C074C_H
+#include "../types.h"
+
+/* The conversion helpers this cartridge keeps in one code group at 0x802C074C. Each helper owns its
+ * own bytes; only the ones written as C need a declaration here. */
+double func_802C6970_us_rev1(long long u);
+
+#endif
