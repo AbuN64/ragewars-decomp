@@ -1,5 +1,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041A4B0.h"
 #include "types.h"
 #include "types.h"
@@ -69,13 +70,10 @@ extern char *D_800D213C;
 extern s32 D_80146894;
 extern s32 D_80154020[2];
 
-extern Shared_OptionsScreen *func_8025305C_de(s32);
 extern s32 func_8025E2C4_de(void);
 
 extern void func_8025E384_de(void);
 
-extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(void *, s32);
 extern void func_8040E950_de(MenuWidget *, s32);
 extern s32 func_80419E54_de(s32, s32);
 extern void func_8041B110_de(s32);
@@ -105,37 +103,39 @@ s32 func_80422728_us_rev1(void *node) {
     s32 i;
     s32 rem;
 
-    D_800E4518 = func_8025305C_de(0x6C);
+    /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own OptionsScreen view */
+    D_800E4518 = (Shared_OptionsScreen *) func_8025305C_de(0x6C);
     D_800E4518->sound = func_8025E2C4_de();
     func_8025E2D4_de(0x34);
     func_8025E384_de();
     func_8025E214_de(-1);
     D_800E4518->page = 1;
     D_800E4518->pages = 4;
-    D_800E4518->leftTab = func_8040EC30_de(node, 0x381);
+    D_800E4518->leftTab = (MenuWidget *) func_8040EC30_de(node, 0x381);
     D_800E4518->leftTab->x -= D_800E4518->leftTab->width;
     D_800E4518->leftStep = D_800E4518->leftTab->width / 4;
     rem = D_800E4518->leftTab->width - D_800E4518->leftStep * 4;
     D_800E4518->leftTab->x += rem;
-    D_800E4518->rightTab = func_8040EC30_de(node, 0x388);
+    D_800E4518->rightTab = (MenuWidget *) func_8040EC30_de(node, 0x388);
     D_800E4518->rightTab->x += D_800E4518->rightTab->width;
     D_800E4518->rightStep = D_800E4518->rightTab->width / 4;
     rem = D_800E4518->rightTab->width - D_800E4518->rightStep * 4;
     D_800E4518->rightTab->x -= rem;
     D_800E4518->title = func_80419E54_de(0x373, 0x6E);
-    marker = func_8040EC30_de(node, 0x372);
+    marker = (MenuWidget *) func_8040EC30_de(node, 0x372);
     D_800E4518->marker = marker;
     func_8040E8D8_de(marker, 0);
-    func_8040EC30_de(node, 0x386)->alpha = 0x6E;
-    header = func_8040EC30_de(node, 0x387);
+    /* the hub's Item view shares the MenuWidget prefix; the cast names the alpha byte the menu sets */
+    ((MenuWidget *) func_8040EC30_de(node, 0x386))->alpha = 0x6E;
+    header = (MenuWidget *) func_8040EC30_de(node, 0x387);
     D_800E4518->header = header;
     header->alpha = 0x8C;
-    D_800E4518->footer = func_8040EC30_de(node, 0x370);
-    rumble = func_8040EC30_de(node, 0x384);
+    D_800E4518->footer = (MenuWidget *) func_8040EC30_de(node, 0x370);
+    rumble = (MenuWidget *) func_8040EC30_de(node, 0x384);
     D_800E4518->rumbleIcon = rumble;
     func_8040E8D8_de(rumble, 1);
-    func_8040EC30_de(node, 0x385)->alpha = 0x6E;
-    pak = func_8040EC30_de(node, 0x374);
+    ((MenuWidget *) func_8040EC30_de(node, 0x385))->alpha = 0x6E;
+    pak = (MenuWidget *) func_8040EC30_de(node, 0x374);
     D_800E4518->pakIcon = pak;
     func_8040E8D8_de(pak, 0);
     func_8041B110_de(0x377);
@@ -164,7 +164,7 @@ s32 func_80422728_us_rev1(void *node) {
         if (func_8042AF28_de() == 0) {
             func_8040E950_de(func_8040EC30_de(node, 0x37E), 1);
         }
-        handle = func_8040EC30_de(node, 0x380);
+        handle = (MenuWidget *) func_8040EC30_de(node, 0x380);
         func_8040E950_de(handle, 1);
         for (i = 0; i < 8; i++) {
             if (settings->slots[i].enabled == 1 && settings->slots[i].controller == 1) {
@@ -196,7 +196,7 @@ s32 func_80422728_us_rev1(void *node) {
     D_80154020[1] = 0;
     D_80154020[0] = -1;
     func_804221E8_de();
-    prompt = func_8040EC30_de(node, 0x371);
+    prompt = (MenuWidget *) func_8040EC30_de(node, 0x371);
     D_800E4518->prompt = prompt;
     func_8040E8D8_de(prompt, 1);
     return 0;

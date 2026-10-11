@@ -1,6 +1,7 @@
 #include "span_1000/code_8025A3EC.h"
 #include "common/unused.h"
 #include "span_16E000/code_804221A0.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "shared/func_804235A8_eu_closed.h"
 
 s32 func_804235A8_eu(void) {

@@ -38,6 +38,7 @@
 #include "span_16E000/code_8040F1E0.h"
 #include "span_16E000/code_804143D8.h"
 #include "span_16E000/code_8041BEA8.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041F1FC.h"
 #include "span_16E000/code_804251F4.h"
 #include "span_16E000/code_8042BD40.h"
@@ -58,7 +59,6 @@ extern s32 D_80154020[];
 extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);
 extern void func_8025DF34_de(s32);
-extern void func_8040E8D8_de(void *, s32);
 extern void func_80419F58_de(void *, s32);
 extern void func_802A2360_de(void);
 extern s32 func_80419F38_de(void *);

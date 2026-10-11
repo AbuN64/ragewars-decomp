@@ -25,8 +25,8 @@ struct ArenaChoiceState {
 extern struct ArenaChoiceState *D_800E4600;
 extern s32 D_800E4680;
 extern Shared_Game D_801462C8;
-/* Symbol 80146398, Game+0xD0, is the existing 0x96-byte settings-record array. */
-extern Shared_PlayerSettingsRecord D_80146398[];
+/* D_80146398 is the hub's func_8041F2A0_Config array: eight 0x96-byte records at Game+0xD0.
+   This unit reaches them only as settings->playerSettings and declares nothing here. */
 extern Record_func_80433914_de D_80102B00[];
 
 extern void func_8029973C_de(void);

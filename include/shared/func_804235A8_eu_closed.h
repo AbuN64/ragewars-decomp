@@ -11,7 +11,6 @@ s32 func_8025DF34_de(s32);
 void func_802991D4_de(s32);
 void func_8029973C_de(void);
 void func_802A2360_de(void);
-void func_8040E8D8_de(void *, int);
 void func_80419F24_de(void *);
 s32 func_80419F38_de(void *);
 void func_80419F58_de(void *, int);
