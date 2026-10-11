@@ -13,7 +13,8 @@
 
 
 /* The hub names the block's root word and the Item* helpers func_8040EC30_de/func_8040E8D8_de;
-   this view's player word sits at +0x10C, beyond what the hub names here, so that use casts. */
+   this view's player word sits at +0x10C, beyond what the hub names here, so that use casts.
+   The (u16) on each id reproduces the byte-exact halfword load the original lookup used. */
 extern TextEntry D_800DF544[];
 extern PlayerRecord D_800FEB4A[];
 extern s32 func_80265650_de(PlayerRecord *bits, s32 bit);
@@ -23,7 +24,7 @@ void func_8041DA5C_de(s32 style) {
     Node_func_8041DA5C_de *node;
 
     for (i = 0; i < 50; i++) {
-        node = (Node_func_8041DA5C_de *) func_8040EC30_de(D_800E3590->root, D_800DF544[i].id);
+        node = (Node_func_8041DA5C_de *) func_8040EC30_de(D_800E3590->root, (u16) D_800DF544[i].id);
         if (func_80265650_de(&D_800FEB4A[((Menu_func_8041DA5C_de *) D_800E3590)->player], i) == 1) {
             func_8040E8D8_de(node, 1);
             node->style = style;
