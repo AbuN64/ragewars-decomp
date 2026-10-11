@@ -5245,7 +5245,7 @@ segments:
       - [0xD8F70, data, "src/ragewars_controller_initialization_us_rev1.c"]
       - [0xD8F74, data, "rodata/unresolved/800D80A0_unclaimed_D8F40_unclaimed_D8F74"]
       - [0xD8F80, data, "src/ragewars_controller_pak_initialized_us_rev1.c"]
-      - [0xD8F90, data, "src/ragewars_pi_manager_and_handles_us_rev1.c"]
+      - [0xD8F90, .data, "src/ragewars_pi_manager_and_handles_us_rev1.c"]
       - [0xD8FB0, data, "src/ragewars_pi_domain_handles_us_rev1.c"]
       - [0xD8FB8, data, "rodata/unresolved/800D83B0_unclaimed_D8FB8"]
       - [0xD8FC0, data, "src/ragewars_pi_access_queue_initialized_us_rev1.c"]
