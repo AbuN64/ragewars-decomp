@@ -4073,7 +4073,7 @@ segments:
       - [0xE9DBC, data, "rodata/unresolved/800E91BC"]
       - [0xE9DC0, rodata, "rodata/func_80426918_de/800E19B0"]
       - [0xE9DF4, rodata, "rodata/func_80426CE4_de/800E19E4"]
-      - [0xE9DFC, rodata, "src/rw_formats_80427B08_E25EC_us_rev1.c"]
+      - [0xE9DFC, .rodata, "src/rw_formats_80427B08_E25EC_us_rev1.c"]
       - [0xE9E17, data, "rodata/unresolved/800E9217"]
       - [0xE9E18, rodata, "rodata/func_8042854C_de/800E1A08"]
       - [0xE9E2C, data, "rodata/unresolved/800E922C"]

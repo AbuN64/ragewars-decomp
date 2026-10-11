@@ -4019,7 +4019,7 @@ segments:
       - [0xDD1DC, data, "rodata/unresolved/800DC5DC"]
       - [0xDD1E0, rodata, "rodata/func_80425674_de/800E1960"]
       - [0xDD22C, .data, "rodata/unresolved/800DC62C"]
-      - [0xDD26C, rodata, "src/rw_formats_80427B08_E25EC_us_rev1.c"]
+      - [0xDD26C, .rodata, "src/rw_formats_80427B08_E25EC_us_rev1.c"]
       - [0xDD287, data, "rodata/unresolved/800DC687"]
       - [0xDD288, rodata, "rodata/func_8042854C_de/800E1A08"]
       - [0xDD29C, data, "rodata/unresolved/800DC69C"]
