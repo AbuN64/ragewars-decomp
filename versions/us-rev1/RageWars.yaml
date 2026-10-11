@@ -5663,7 +5663,7 @@ segments:
       - [0xE2FC0, rodata, "src/rw_formats_8043F120_E2FC0_us_rev1.c"]
       - [0xE2FC3, data, "rodata/unresolved/800E23C3"]
       - [0xE2FC4, data, "data/unresolved/800E23C4"]
-      - [0xE2FC8, rodata, "rodata/func_8043F120_de/800E23C8"]
+      - [0xE2FC8, .rodata, "rodata/func_8043F120_de/800E23C8"]
       - [0xE2FEC, data, "rodata/unresolved/800E23EC"]
       - [0xE2FF0, rodata, "src/rw_pool_8043F120_E2FF0_us_rev1.c"]
       - [0xE2FF8, rodata, "rodata/func_8043F294_de/800E23F8"]

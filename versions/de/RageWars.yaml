@@ -4165,7 +4165,7 @@ segments:
       - [0xDEF90, rodata, "src/rw_formats_8043F120_E2FC0_us_rev1.c"]
       - [0xDEF93, data, "rodata/unresolved/800DE393"]
       - [0xDEF94, data, "data/unresolved/800DE394"]
-      - [0xDEF98, rodata, "rodata/func_8043F120_de/800E23C8"]
+      - [0xDEF98, .rodata, "rodata/func_8043F120_de/800E23C8"]
       - [0xDEFBC, data, "rodata/unresolved/800DE3BC"]
       - [0xDEFC0, rodata, "src/rw_pool_8043F120_E2FF0_us_rev1.c"]
       - [0xDEFC8, rodata, "rodata/func_8043F294_de/800E23F8"]
