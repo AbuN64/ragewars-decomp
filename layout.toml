@@ -4258,6 +4258,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800DBD2C"
+segment = "span_C24F0"
+members = ["rodata/unresolved/800DBD2C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800DBFE4"
 segment = "span_C76B0"
 members = ["src/huffman_delta_nine_zero_runs_nodes.c"]
@@ -44152,6 +44160,17 @@ path = "src/rodata.unresolved.800DBA6C.c"
 kind = "data"
 group = "data_800DBA6C"
 members = ["rodata/unresolved/800DBA6C"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800DBD2C.c"
+kind = "data"
+group = "data_800DBD2C"
+members = ["rodata/unresolved/800DBD2C"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
