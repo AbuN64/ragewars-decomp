@@ -5670,7 +5670,7 @@ segments:
       - [0xE3058, rodata, "src/rw_pool_8043F52C_E3058_us_rev1.c"]
       - [0xE305C, data, "rodata/unresolved/800E245C"]
       - [0xE3060, rodata, "rodata/func_8043F52C_de/800E2460"]
-      - [0xE3078, rodata, "src/rw_pool_cells_8043F52C_E3078_us_rev1.c"]
+      - [0xE3078, .rodata, "src/rw_pool_cells_8043F52C_E3078_us_rev1.c"]
       - [0xE3090, rodata, "rodata/func_8043FE3C_de/800E2490"]
       - [0xE30AC, rodata, "src/rw_pool_804402DC_E30AC_us_rev1.c"]
       - [0xE30B0, rodata, "src/rw_pool_80440838_E30B0_us_rev1.c"]
