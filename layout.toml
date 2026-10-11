@@ -49551,7 +49551,7 @@ scores = {de = 0.75, eu = 1.0, eu-x = 0.9074074074074074, us = 1.0, us-rev1 = 1.
 [[fuzzy]]
 member = "func_8041CEB0_us_rev1"
 path = "src/fuzzy/func_8041CEB0_us_rev1.c"
-scores = {us-rev1 = 0.8306878306878307}
+scores = {us-rev1 = 0.9153439153439153}
 
 [[fuzzy]]
 member = "func_80421568_de"

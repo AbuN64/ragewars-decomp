@@ -49,6 +49,7 @@ extern void func_8041DA5C_de(s32 style);
 s32 func_8041CEB0_us_rev1(void *arg0) {
     func_8041F2A0_Item *item;
     s32 shift;
+    s32 width;
 
     D_800E3590 = (struct Menu_func_8041CEB0_us_rev1 *) func_8025305C_de(528);
     D_800E3590->root = arg0;
@@ -68,7 +69,8 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
         shift += 3;
     }
     D_800E3590->round492 = shift >> 2;
-    D_800E3590->item492->x = D_800E3590->item492->x + (D_800E3590->item492->w - ((shift >> 2) << 2));
+    width = D_800E3590->item492->w;
+    D_800E3590->item492->x = D_800E3590->item492->x + (width - ((shift >> 2) << 2));
 
     D_800E3590->item491 = func_8040EC30_de(arg0, 491);
     D_800E3590->item491->x = D_800E3590->item491->x + D_800E3590->item491->w;
@@ -77,7 +79,8 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
         shift += 3;
     }
     D_800E3590->round491 = shift >> 2;
-    D_800E3590->item491->x = D_800E3590->item491->x - (D_800E3590->item491->w - ((shift >> 2) << 2));
+    width = D_800E3590->item491->w;
+    D_800E3590->item491->x = D_800E3590->item491->x - (width - ((shift >> 2) << 2));
 
     func_8040EC30_de(arg0, 488)->alpha = 110;
     D_800E3590->lookup486 = func_80419E54_de(486, 255);
