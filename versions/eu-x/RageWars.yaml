@@ -2639,7 +2639,7 @@ segments:
       - [0xC2A90, rodata, "rodata/func_80208158_de/800C6CA0"]
       - [0xC2A98, .rodata, "src/rw_pool_80208410_C78A8_us_rev1.c"]
       - [0xC2ABC, .rodata, "src/rw_pool_80208AAC_C78CC_us_rev1.c"]
-      - [0xC2AE0, rodata, "src/rw_pool_80208EB0_C78F0_us_rev1.c"]
+      - [0xC2AE0, .rodata, "src/rw_pool_80208EB0_C78F0_us_rev1.c"]
       - [0xC2B04, rodata, "rodata/func_80209308_de/800C6D14"]
       - [0xC2B54, rodata, "src/rw_pool_802095F8_C7964_us_rev1.c"]
       - [0xC2B68, rodata, "src/rw_pool_80209910_C7978_us_rev1.c"]
