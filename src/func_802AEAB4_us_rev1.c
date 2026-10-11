@@ -31,8 +31,8 @@ s32 func_802AEAB4_us_rev1(u8 *stream, s32 count) {
 
     result = 0;
     retries = D_800D3650;
-    timeout = 0x4E20;
     mask = 0x40;
+    timeout = 0x4E20;
     expected = 0x40;
     do {
         do {
@@ -67,9 +67,9 @@ first_done:
         do {
         } while (func_802BDEA0_us_rev1() & 3);
         D_auto_B2000014 = 0;
-        mask = 0x40;
-        expected = 0x40;
         while (count-- != 0) {
+            mask = 0x40;
+            expected = 0x40;
             retries = D_800D3650;
             timeout = 0x4E20;
             do {
