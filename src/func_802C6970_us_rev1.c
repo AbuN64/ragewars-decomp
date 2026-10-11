@@ -10,9 +10,9 @@ typedef double DFtype;
 
 #define WORD_SIZE 32
 
-extern DFtype D_800C8100_de; /* 2^32 */
-extern DFtype D_800C8108_de; /* 2^16, HIGH_HALFWORD_COEFF */
-extern DFtype D_800C8110_de; /* 2^32 */
+extern double D_800C8100_de; /* 2^32 */
+extern double D_800C8108_de; /* 2^16, HIGH_HALFWORD_COEFF */
+extern double D_800C8110_de; /* 2^32 */
 
 DFtype func_802C6970_us_rev1(DItype u)
 {

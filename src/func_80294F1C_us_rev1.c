@@ -14,7 +14,7 @@ struct MenuGlobal_func_80294F1C_us_rev1;
 struct MenuGlobal_func_80294F1C_us_rev1 {
     u8 alternateTitle; /* +0x0 */
     u8 unused0[11]; /* +0x1 */
-    volatile s32 selectionIndex; /* +0xC: == D_8014AEBC */
+    s32 selectionIndex; /* +0xC: == D_8014AEBC */
     s32 selectionValue; /* +0x10: == D_8014AEC0 */
     s32 titleWasShown; /* +0x14: == D_8014AEC4 */
     u8 unused1[8480]; /* +0x18 */
@@ -25,7 +25,7 @@ struct MenuGlobal_func_80294F1C_us_rev1 {
 
 struct Selection_func_80294F1C_us_rev1;
 struct Selection_func_80294F1C_us_rev1 {
-    volatile s32 index; /* +0x0: == D_8014AEBC */
+    s32 index; /* +0x0: == D_8014AEBC */
     s32 value; /* +0x4 */
     s32 changed; /* +0x8: == D_8014AEC4 */
 };
