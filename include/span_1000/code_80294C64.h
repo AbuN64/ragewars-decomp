@@ -176,4 +176,6 @@ extern s32 D_auto_800D2AE4;
 
 extern s32 D_auto_800D2AF4;
 
+extern s32 D_auto_800D2AF8;
+
 #endif

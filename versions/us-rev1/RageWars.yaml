@@ -1876,7 +1876,7 @@ segments:
       - [0x963EC, c, "func_802957EC_us_rev1"]
       - [0x96490, c, "func_80295890_us_rev1"]
       - [0x965BC, c, "func_802959BC_us_rev1"]
-      - [0x96660, asm, "func_80295A60_us_rev1"]
+      - [0x96660, c, "func_80295A60_us_rev1"]
       - [0x966E0, c, "func_80295AE0_us_rev1"]
       - [0x966F0, c, "func_80295AF0_us_rev1"]
       - [0x96700, c, "func_80295B00_us_rev1"]
