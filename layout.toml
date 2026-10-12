@@ -12597,6 +12597,18 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8020D364_de_padding_DF64.c"
+kind = "data"
+group = "data_8020D364"
+members = ["func_8020D364_de_padding_DF64"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8020D370_de.c"
 kind = "c"
 group = "code_8020D370"
