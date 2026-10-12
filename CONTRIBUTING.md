@@ -3,7 +3,7 @@
 ## Install
 
 ```sh
-python3 -m pip install git+https://github.com/melalawi/abu-cake-unbake-64
+python3 -m pip install git+https://github.com/AbuN64/cake-unbake-64
 ```
 
 ## New project

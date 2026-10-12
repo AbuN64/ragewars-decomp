@@ -42,7 +42,7 @@ For detailed instructions please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 AI is used in the decompilation process and every function is verified by compiling it against the original ROM. A match can still be a fakematch or use odd C semantics. I try to mark these in source as they are discovered.
 
-I turned these efforts into a repeatable process with [AbuCakeUnbake64](https://github.com/melalawi/abu-cake-unbake-64). It is built so AI can drive it against any N64 ROM.
+I turned these efforts into a repeatable process with [AbuCakeUnbake64](https://github.com/AbuN64/cake-unbake-64). It is built so AI can drive it against any N64 ROM.
 
 ### Personal Thoughts
 
@@ -56,5 +56,5 @@ While recompilations can be a fine short-term way to play a favourite game, I be
 
 ## Dependencies
 
-- [AbuCakeUnbake64](https://github.com/melalawi/abu-cake-unbake-64)
+- [AbuCakeUnbake64](https://github.com/AbuN64/cake-unbake-64)
 - [GCC 2.8.1 for mips-nintendo-nu64](https://github.com/pmret/gcc-papermario) at `d97824ffc7517675646960442b3f512a473e4404`, the compiler of toolchain `gcc-2.8.1`, assembled by SN ASN64 version 2.81
