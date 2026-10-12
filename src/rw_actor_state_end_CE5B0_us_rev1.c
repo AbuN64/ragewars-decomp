@@ -1,3 +1,4 @@
-unsigned int D_auto_src_rw_actor_state_end_CE5B0_us_rev1[1] = {
+/* ROM-grounded data: src/rw_actor_state_end_CE5B0_us_rev1.c */
+unsigned int D_blob_4124346e5b0f3fa3d9d3[1] = {
     0xFFFFFFFF,
 };
