@@ -221,7 +221,7 @@ extern char D_8010BC40;
 extern char D_801462C8;
 extern char D_800F91F0;
 extern char D_800F41F0;
-extern char D_801468A0;
+extern RenderCounters D_801468A0;
 s32 func_802A7554_de(u32 address) {
     address |= 0x80000000;
     if (((address) >= (u32)&(D_800CDD10) && (address) < (u32)&(D_800CDD10) + (0x10)) || address == (u32)&D_801470B0) {

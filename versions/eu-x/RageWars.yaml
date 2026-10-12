@@ -1804,7 +1804,7 @@ segments:
       - [0x91974, c, "func_80290C24_de"]
       - [0x91BBC, c, "func_80290E6C_de"]
       - [0x91DD4, asm, "func_80291074_de"]
-      - [0x91F78, asm, "func_80291208_de"]
+      - [0x91F78, c, "func_80291208_de"]
       - [0x92194, asm, "func_80291424_de"]
       - [0x92548, asm, "func_802917D8_de"]
       - [0x9269C, asm, "func_8029192C_de"]

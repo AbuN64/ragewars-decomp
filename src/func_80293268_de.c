@@ -11,7 +11,7 @@ void func_80293268_de(void) {
 
 
 extern s32 func_8044D220_de(s8 *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4);
-extern s32 D_801468A0;
+extern RenderCounters D_801468A0;
 
 
 
@@ -26,11 +26,11 @@ void func_80293284_de(void *arg0, s32 arg1) {
     if (func_8044D220_de((s8 *)&D_8011FE88, -1, var_s0, sp18, 1) == 0) {
         var_s0 = 0;
     }
-    ((func_80293268_S1 *)(&D_801468A0))->unk0 = 0;
-    ((func_80293268_S1 *)(&D_801468A0))->unk4 = 0;
-    ((func_80293268_S1 *)(&D_801468A0))->unk8 = 0;
-    ((func_80293268_S1 *)(&D_801468A0))->unkC = 0;
-    ((func_80293268_S1 *)(&D_801468A0))->unk88 = 0;
+    D_801468A0.unk0 = 0;
+    D_801468A0.unk4 = 0;
+    D_801468A0.unk8 = 0;
+    D_801468A0.unkC = 0;
+    D_801468A0.first = 0;
     ((func_80293268_S2 *)(arg0))->unk26DC1 = 2;
     ((func_80293268_S2 *)(arg0))->unk26DD8 = var_s0;
     ((func_80293268_S2 *)(arg0))->unk26DDC = 1;

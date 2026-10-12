@@ -2,6 +2,9 @@
 #define UNBAKE_SPAN_1000_CODE_80291054_H
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
+#include "gfx.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_8028DF6C.h"
 struct Display;
 /* unbake published declaration: published_0fd98bf960b45acfd833434e */
 typedef struct Display Display;
@@ -148,5 +151,31 @@ typedef struct func_80293904_S1 {
     char pad26DC0[1];
     s8 unk26DC1;
 } func_80293904_S1;
+
+typedef struct RenderView {
+    char pad00[0xF0]; s16 kind; char padF2[0x1E]; void *buffer;
+    char pad114[0x18]; struct RenderView *previous, *next; char pad134[0xC];
+} RenderView;
+typedef struct RenderState {
+    union { RenderView views[4]; Display display; } ring; char pad500[0x2688C]; char settings[0x28]; s32 handle;
+    char pad26DB8[0x10]; s32 enabled, field26DCC, field26DD0, field26DD4;
+} RenderState;
+typedef struct RenderCounters { s32 unk0, unk4, unk8, unkC; char pad10[0x78]; s32 first, second; } RenderCounters;
+extern char D_801428C0[];
+extern char D_80142CB8[];
+extern char D_80146CC0[];
+extern RenderCounters D_801468A0;
+extern Gfx *D_80110634;
+extern s32 D_800CD8C8_de;
+extern u32 D_800DE850;
+extern void *D_8014D468_de[];
+extern void func_802BAC60_de(void *, s32, s32);
+extern void func_8028F754_de(Panel *, s32, s32, s32, u8);
+extern void func_8028F864_de(void *, void *, s32);
+extern void func_80293590_de(void *);
+extern void func_802B6B80_de(s32 *);
+extern void func_80445074_eu(void *);
+extern void func_8044DC60_de(void *);
+extern void func_80293054_de(Display *);
 
 #endif
