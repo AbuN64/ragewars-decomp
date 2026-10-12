@@ -53385,6 +53385,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_constants_802B2120_CD344_us_rev1.c"
+kind = "data"
+group = "data_800CC744"
+members = ["src/rw_constants_802B2120_CD344_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_constants_802B6560_CD668_us_rev1.c"
 kind = "data"
 group = "data_800CCA68"
