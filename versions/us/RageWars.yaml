@@ -3907,7 +3907,7 @@ segments:
       - [0xDC570, rodata, "src/ragewars_resident_strings_E18F0_us_rev1.c"]
       - [0xDC580, rodata, "rodata/shared/800E0D00"]
       - [0xDC596, data, "rodata/unresolved/800DB996"]
-      - [0xDC598, rodata, "src/rw_text_80404958_E1918_us_rev1.c"]
+      - [0xDC598, .rodata, "src/rw_text_80404958_E1918_us_rev1.c"]
       - [0xDC5AF, data, "rodata/unresolved/800DB9AF"]
       - [0xDC5B0, rodata, "src/rw_text_804058B0_E1930_us_rev1.c"]
       - [0xDC5B9, data, "rodata/unresolved/800DB9B9"]
