@@ -3822,7 +3822,7 @@ segments:
       - [0xCD48C, rodata, "rodata/shared/800CC88C"]
       - [0xCD490, .data, "rodata/unresolved/800CC890"]
       - [0xCDB40, .data, "rodata/writable/800CCF40"]
-      - [0xCDB90, data, "rodata/unresolved/800CCF90"]
+      - [0xCDB90, .data, "rodata/unresolved/800CCF90"]
       - [0xCDBA0, data, "rodata/writable/800D1610"]
       - [0xCDBB0, .data, "rodata/unresolved/800CCFB0"]
       - [0xCEBB8, rodata, "src/rw_pool_802745D0_D3228_us_rev1.c"]
