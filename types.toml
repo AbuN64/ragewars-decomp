@@ -98,6 +98,7 @@ schema = 1
 "func_80200AD8_de" = { evidence = "landed", signature = "void func_80200AD8_de(s32 arg0, s32 arg1)" }
 "func_80200B14_de" = { evidence = "landed", signature = "void func_80200B14_de(s32 source, s32 destination, u32 count)" }
 "func_802016DC_de" = { evidence = "landed", signature = "s32 func_802016DC_de(u8 *arg0)" }
+"func_802017E8_de" = { evidence = "declared", signature = "s32 func_802017E8_de(s32,s32,u32,s32)" }
 "func_802022E0_de" = { evidence = "authored", signature = "void func_802022E0_de()" }
 "func_8020238C_de" = { evidence = "authored", signature = "void func_8020238C_de(void)" }
 "func_802023A8_de" = { evidence = "authored", signature = "void func_802023A8_de(void)" }
@@ -2948,6 +2949,7 @@ schema = 1
 "func_802BE514_de" = { evidence = "landed", signature = "Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)" }
 "func_802BEAA4_de" = { evidence = "landed", signature = "s32 func_802BEAA4_de(void *filter, s32 paramID, void *param)" }
 "func_802BEC34_de" = { evidence = "landed", signature = "Acmd *func_802BEC34_de(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16 outp, s16 inp, u32 flags)" }
+"func_802BEDB0_de" = { evidence = "declared", signature = "u16 func_802BEDB0_de(u16 *,u16,s32,s32,void *)" }
 "func_802BF514_de" = { evidence = "landed", signature = "void func_802BF514_de(void)" }
 "func_802BF67C_de" = { evidence = "landed", signature = "FftTables *func_802BF67C_de(s32 n)" }
 "func_802BF804_de" = { evidence = "landed", signature = "s32 func_802BF804_de(f32 *out, s16 *in)" }
@@ -13552,7 +13554,7 @@ schema = 1
 "func_8041C864_S1" = { declaration = "typedef struct func_8041C864_S1 func_8041C864_S1;", evidence = "authored" }
 "func_8041F2A0_Cell" = { declaration = "struct func_8041F2A0_Cell { u16 pad; u16 id; };", evidence = "authored" }
 "func_8041F2A0_Config" = { declaration = "struct func_8041F2A0_Config { char pad0[0x78]; u8 active; char pad79[0x96 - 0x79]; };", evidence = "authored" }
-"func_8041F2A0_Item" = { declaration = "struct func_8041F2A0_Item { char pad0[0x10]; u8 alpha; char pad11[3]; s16 x; s16 y; s16 w; };", evidence = "authored" }
+"func_8041F2A0_Item" = { declaration = "struct func_8041F2A0_Item { char pad0[0x10]; u8 alpha; char pad11[3]; s16 x; s16 y; s16 w; char pad1A[0x2C - 0x1A]; s32 value; char pad30[8]; void *text; };", evidence = "authored" }
 "func_8041F2A0_Layout" = { declaration = "struct func_8041F2A0_Layout { s32 kind; u16 pad4[3]; u16 title; func_8041F2A0_Cell cells[3]; func_8041F2A0_Cell options[3]; };", evidence = "authored" }
 "func_8041F2A0_MenuBlock" = { declaration = "struct func_8041F2A0_MenuBlock { void *root; s32 list; char pad8[0xC8 - 0x08]; func_8041F2A0_Item *item492; s32 round492; func_8041F2A0_Item *item491; s32 round491; s32 unk216; s32 unk220; s32 lookup486; func_8041F2A0_Item *item486; func_8041F2A0_Item *item563; s32 focus; func_8041F2A0_Item *item510; func_8041F2A0_Item *item512; s32 unk248; s32 style; func_8041F2A0_Item *item511; s32 unk260; s32 player; s32 unk268; };", evidence = "authored" }
 "func_8041F2A0_Player" = { declaration = "struct func_8041F2A0_Player { func_8041F2A0_Item *highlight; s32 unk4; s32 kind; s32 unkC; s32 choice; char pad14[4]; char model[0x4C0 - 0x18]; s32 unk4C0; s32 pad4C4; };", evidence = "authored" }

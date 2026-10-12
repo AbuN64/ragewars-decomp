@@ -5375,7 +5375,7 @@ segments:
     resource_cppflags: "-P -Iresources/rsp/graphics/PR -Iresources/rsp/graphics/rsp -Iresources/rsp/graphics -D_LANGUAGE_ASSEMBLY -DF3DEX_GBI_2 -DCFG_NoN=0 -DCFG_OLD_TRI_WRITE=1 -DBUG_CLIPPING_FAIL_WHEN_SUM_ZERO=1 -DBUG_FAIL_IF_CARRY_SET_AT_INIT=1"
     resource_asflags: "-strequ ID_STR 'RSP Gfx ucode L3DEX       fifo 2.05  Yoshitaka Yasumoto 1998 Nintendo.'"
     subsegments:
-      - [0xE1070, resource, "resources/rsp/graphics/800E0470"]
+      - [0xE1070, .data, "resources/rsp/graphics/800E0470"]
   - name: rsp_audio_data
     type: resource
     start: 0xE1460
