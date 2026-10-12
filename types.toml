@@ -3550,7 +3550,7 @@ schema = 1
 "func_804210E8_de" = { evidence = "landed", signature = "void func_804210E8_de(void)" }
 "func_80421234_de" = { evidence = "landed", signature = "void func_80421234_de(void)" }
 "func_804213DC_de" = { evidence = "landed", signature = "void func_804213DC_de(void)" }
-"func_80421568_de" = { evidence = "declared", signature = "void func_80421568_de()" }
+"func_80421568_de" = { evidence = "landed", signature = "void func_80421568_de(void)" }
 "func_8042177C_de" = { evidence = "landed", signature = "void func_8042177C_de(void)" }
 "func_804217D4_de" = { evidence = "landed", signature = "void func_804217D4_de(void)" }
 "func_80421854_de" = { evidence = "landed", signature = "s32 func_80421854_de(void)" }

@@ -4848,7 +4848,7 @@ segments:
       - [0x111610, c, "func_804210E8_de"]
       - [0x11175C, c, "func_80421234_de"]
       - [0x111904, c, "func_804213DC_de"]
-      - [0x111A90, asm, "func_80421568_de"]
+      - [0x111A90, c, "func_80421568_de"]
       - [0x111CC4, c, "func_8042177C_de"]
       - [0x111D1C, c, "func_804217D4_de"]
       - [0x111D9C, c, "func_80421854_de"]

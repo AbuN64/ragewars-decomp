@@ -4797,7 +4797,7 @@ segments:
       - [0x197610, c, "func_804210E8_de"]
       - [0x19775C, c, "func_80421234_de"]
       - [0x197904, c, "func_804213DC_de"]
-      - [0x197A90, asm, "func_80421568_de"]
+      - [0x197A90, c, "func_80421568_de"]
       - [0x197CC4, c, "func_8042177C_de"]
       - [0x197D1C, c, "func_804217D4_de"]
       - [0x197D9C, c, "func_80421854_de"]
