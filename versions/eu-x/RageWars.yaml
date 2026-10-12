@@ -3749,7 +3749,7 @@ segments:
       - [0xC9B10, rodata, "src/rw_formats_802B9590_CD7A0_us_rev1.c"]
       - [0xC9B13, data, "rodata/unresolved/800C8F13"]
       - [0xC9B14, rodata, "src/ragewars_resident_strings_CD7A4_us_rev1.c"]
-      - [0xC9B24, data, "rodata/unresolved/800C8F24"]
+      - [0xC9B24, .data, "rodata/unresolved/800C8F24"]
       - [0xC9B30, rodata, "src/rw_formats_802B9B20_CD7C0_us_rev1.c"]
       - [0xC9B33, data, "rodata/unresolved/800C8F33"]
       - [0xC9B34, rodata, "src/rw_text_802B9B20_CD7C4_us_rev1.c"]
