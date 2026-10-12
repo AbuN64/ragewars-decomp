@@ -6610,6 +6610,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800DE0A0"
+segment = "rsp_graphics_l3dex2_code"
+members = ["resources/rsp/graphics/l3dex2.s"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800DE0D4"
 segment = "span_C25C0"
 members = ["rodata/unresolved/800DE0D4"]
@@ -44922,6 +44930,17 @@ path = "src/resources.rsp.graphics.f3dex2.s.c"
 kind = "data"
 group = "data_800DCD10"
 members = ["resources/rsp/graphics/f3dex2.s"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/resources.rsp.graphics.l3dex2.s.c"
+kind = "data"
+group = "data_800DE0A0"
+members = ["resources/rsp/graphics/l3dex2.s"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
