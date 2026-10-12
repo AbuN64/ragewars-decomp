@@ -89051,3 +89051,11 @@ us-rev1 = 0x00446230
 [symbol.rw_menu_paged_func_80446330_us_rev1]
 kind = "data"
 us-rev1 = 0x00446330
+
+[symbol.rw_boot_entry]
+kind = "function"
+de = 0x80000400
+eu = 0x80000400
+eu-x = 0x80000400
+us = 0x80000400
+us-rev1 = 0x80000400
