@@ -1602,7 +1602,7 @@ segments:
       - [0x7A5F4, asm, "func_802799F4_de"]
       - [0x7A600, c, "func_80279A00_de"]
       - [0x7A9D0, asm, "func_80279DD0_de"]
-      - [0x7AC84, asm, "func_8027A084_de"]
+      - [0x7AC84, c, "func_8027A084_de"]
       - [0x7B0D0, asm, "func_8027A4D0_de"]
       - [0x7B548, asm, "func_8027A948_de"]
       - [0x7B7F4, asm, "func_8027ABF4_de"]

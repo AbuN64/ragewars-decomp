@@ -48,6 +48,7 @@ schema = 1
 "accepts" = { evidence = "landed", signature = "static inline s32 accepts(Ray_func_8023E8D4_de *ray, Polygon_func_8023E8D4_de *poly)" }
 "acquire" = { evidence = "landed", signature = "static inline void acquire(void)" }
 "activeCount" = { evidence = "landed", signature = "static inline s32 activeCount(void)" }
+"addImpulse" = { evidence = "landed", signature = "static inline void addImpulse(Vec3 *v,Vec3 *impulse)" }
 "addref" = { evidence = "landed", signature = "static inline void addref(Node_func_80251F6C_de *node)" }
 "aimAbs" = { evidence = "landed", signature = "static inline f32 aimAbs(f32 value)" }
 "alCSeqNew" = { evidence = "landed", signature = "static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)" }
@@ -1879,7 +1880,7 @@ schema = 1
 "func_80279A00_de" = { evidence = "landed", signature = "void func_80279A00_de(void *arg0)" }
 "func_80279B40_de" = { evidence = "landed", signature = "void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 flags)" }
 "func_80279DD0_de" = { evidence = "landed", signature = "void func_80279DD0_de(void *arg0, f32 arg1)" }
-"func_8027A084_de" = { evidence = "authored", signature = "void func_8027A084_de(void *)" }
+"func_8027A084_de" = { evidence = "landed", signature = "void func_8027A084_de(void *particle)" }
 "func_8027A4D0_de" = { evidence = "authored", signature = "void func_8027A4D0_de(void *)" }
 "func_8027AD4C_de" = { evidence = "landed", signature = "void func_8027AD4C_de(Shared_Particle *arg0)" }
 "func_8027B428_de" = { evidence = "landed", signature = "void func_8027B428_de(Actor_func_8027B428_de *actor)" }
@@ -4331,6 +4332,7 @@ schema = 1
 "levelBit" = { evidence = "landed", signature = "static inline s32 levelBit(s32 level)" }
 "load" = { evidence = "landed", signature = "static inline s32 load(Anim *anim, s32 table, s32 key, s32 id)" }
 "lock" = { evidence = "landed", signature = "static inline void lock(void)" }
+"makeImpulse" = { evidence = "landed", signature = "static inline void makeImpulse(Vec3 *input,f32 scale,Vec3 *out)" }
 "make_plane" = { evidence = "landed", signature = "static inline void make_plane(Plane_func_802965B0_de *plane, Vec3 *from, Vec3 *through, Vec3 *to, Vec3 *point)" }
 "map_category" = { evidence = "landed", signature = "static inline int map_category(int mode)" }
 "max_ammo" = { evidence = "landed", signature = "static inline s32 max_ammo(SharedPlayer_func_80229554_de *player, s32 type)" }
@@ -12507,6 +12509,11 @@ schema = 1
 "StatusStep" = { declaration = "typedef struct StatusStep StatusStep;", evidence = "authored" }
 "StatusView" = { declaration = "struct StatusView { char pad[336]; s8 active; };", evidence = "authored" }
 "Status_func_8042DEA0_de" = { declaration = "struct Status_func_8042DEA0_de { char pad0[0x78]; u8 joined; u8 unk79; u8 unk7A; u8 unk7B; char pad7C; u8 unk7D; char pad7E[2]; s8 kind; char pad81; u8 unk82; char pad83; char name[0x91 - 0x84]; u8 computer; u8 team; char pad93; u8 lives; u8 score; };", evidence = "authored" }
+"SteeringDescriptor" = { declaration = "typedef struct SteeringDescriptor {u8 pad0[0x30];SteeringSettings *motion;} SteeringDescriptor;", evidence = "authored" }
+"SteeringParticle" = { declaration = "typedef struct SteeringParticle {u8 pad0[8];Vec3 position;u8 pad14[8];Vec3 velocity;u8 pad28[0x34];u32 flags;u8 pad60[0xB8];SteeringDescriptor *descriptor;u8 pad11C[0x18];SteeringTarget *target;u8 pad138[8];f32 time;u8 pad144[0x30];Vec3 direction;u8 pad180[0x5C];SteeringSound *sound;} SteeringParticle;", evidence = "authored" }
+"SteeringSettings" = { declaration = "typedef struct SteeringSettings {u8 pad0[0x10];u16 acceleration,speed;} SteeringSettings;", evidence = "authored" }
+"SteeringSound" = { declaration = "typedef struct SteeringSound {u32 header[2];s32 handle,id;} SteeringSound;", evidence = "authored" }
+"SteeringTarget" = { declaration = "typedef struct SteeringTarget {u8 pad0[0x248];Vec3 position;} SteeringTarget;", evidence = "authored" }
 "StickInput" = { declaration = "typedef struct StickInput { char pad00[0xC6]; s8 x, y; } StickInput;", evidence = "authored" }
 "StickPlayer" = { declaration = "typedef struct StickPlayer { char pad00[0x698]; StickInput *input; } StickPlayer;", evidence = "authored" }
 "Stream" = { declaration = "typedef struct Stream Stream;", evidence = "authored" }

@@ -4,6 +4,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct Actor_func_80281A9C_de;
 /* unbake published declaration: published_01c1540c780b0945aeeb4574 */
 typedef struct Actor_func_80281A9C_de Actor_func_80281A9C_de;
@@ -621,5 +624,12 @@ struct Actor_func_80281A9C_de {
 struct World_func_80281A9C_de;
 /* unbake published declaration: published_fcaeb83c38037bde687b826b */
 typedef struct World_func_80281A9C_de World_func_80281A9C_de;
+
+typedef struct SteeringSound {u32 header[2];s32 handle,id;} SteeringSound;
+typedef struct SteeringTarget {u8 pad0[0x248];Vec3 position;} SteeringTarget;
+typedef struct SteeringSettings {u8 pad0[0x10];u16 acceleration,speed;} SteeringSettings;
+typedef struct SteeringDescriptor {u8 pad0[0x30];SteeringSettings *motion;} SteeringDescriptor;
+typedef struct SteeringParticle {u8 pad0[8];Vec3 position;u8 pad14[8];Vec3 velocity;u8 pad28[0x34];u32 flags;u8 pad60[0xB8];SteeringDescriptor *descriptor;u8 pad11C[0x18];SteeringTarget *target;u8 pad138[8];f32 time;u8 pad144[0x30];Vec3 direction;u8 pad180[0x5C];SteeringSound *sound;} SteeringParticle;
+extern void *func_8025C95C_de(void *,s32,void *,void *,s32);
 
 #endif

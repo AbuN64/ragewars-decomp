@@ -1602,7 +1602,7 @@ segments:
       - [0x7A5E4, data, "rodata/unresolved/802799E4"]
       - [0x7A5F0, c, "func_80279A00_de"]
       - [0x7A9C0, asm, "func_80279DD0_de"]
-      - [0x7AC74, asm, "func_8027A084_de"]
+      - [0x7AC74, c, "func_8027A084_de"]
       - [0x7B0C0, asm, "func_8027A4D0_de"]
       - [0x7B538, asm, "func_8027A948_de"]
       - [0x7B7E4, asm, "func_8027ABF4_de"]

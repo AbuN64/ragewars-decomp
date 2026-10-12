@@ -71,11 +71,8 @@ void func_80274244_de(f32 *, f32 *);
 
 
 void func_80279DD0_de(void *, f32);
-#if defined(VERSION_EU)
 float func_802AD520_eu(int);
-#else
 float func_802B2350(int);
-#endif
 f32 func_802B72B0_de(f32);
 void func_80271818_de(void *, f32 *);            /* extern */
 void func_8027A084_de(void *);                      /* extern */
