@@ -7361,7 +7361,7 @@ segments:
       - [0x1BC910, c, "func_8044DCC0_de"]
       - [0x1BCA24, c, "func_8044DDD4_de"]
       - [0x1BCACC, asm, "func_8044DE7C_de"]
-      - [0x1BCBA4, data, "rodata/unresolved/8044EBA4"]
+      - [0x1BCBA4, .data, "rodata/unresolved/8044EBA4"]
   - name: span_1BCBB0
     type: code
     start: 0x1BCBB0
