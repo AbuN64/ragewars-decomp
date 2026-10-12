@@ -39615,6 +39615,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80429A24_de_padding_197C04.c"
+kind = "data"
+group = "data_80429C04"
+members = ["func_80429A24_de_padding_197C04"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80429B00_eu.c"
 kind = "c"
 group = "code_80405DC4"

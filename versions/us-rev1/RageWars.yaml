@@ -6839,7 +6839,7 @@ segments:
       - [0x197B2C, c, "func_8042994C_de"]
       - [0x197B50, c, "func_80429970_de"]
       - [0x197B74, c, "func_80429994_de"]
-      - [0x197C04, data, "func_80429A24_de_padding_197C04"]
+      - [0x197C04, .data, "func_80429A24_de_padding_197C04"]
       - [0x197C10, c, "func_80429A24_de"]
       - [0x1981D0, c, "func_80429FF0_de"]
       - [0x198490, c, "func_8042AE60_eu"]
