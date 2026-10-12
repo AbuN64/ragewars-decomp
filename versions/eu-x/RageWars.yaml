@@ -3663,7 +3663,7 @@ segments:
       - [0xC9604, .rodata, "rodata/shared/800CC694"]
       - [0xC9616, data, "rodata/unresolved/800C8A16"]
       - [0xC9618, rodata, "rodata/func_802B0554_de/800CC6A8"]
-      - [0xC9680, rodata, "src/rw_pool_802B0C94_CD310_us_rev1.c"]
+      - [0xC9680, .rodata, "src/rw_pool_802B0C94_CD310_us_rev1.c"]
       - [0xC968C, rodata, "src/rw_pool_802B1990_CD31C_us_rev1.c"]
       - [0xC9690, rodata, "src/rw_pool_802B1A40_CD320_us_rev1.c"]
       - [0xC9694, data, "rodata/unresolved/800C8A94"]
