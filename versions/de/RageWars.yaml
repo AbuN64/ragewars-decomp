@@ -3052,7 +3052,7 @@ segments:
       - [0xC499C, rodata, "rodata/func_8024EF28_de/800C8E8C"]
       - [0xC49AC, .rodata, "rodata/shared/800C8E9C"]
       - [0xC49BE, data, "rodata/unresolved/800C3DBE"]
-      - [0xC49C0, rodata, "rodata/shared/800C8EB0"]
+      - [0xC49C0, .rodata, "rodata/shared/800C8EB0"]
       - [0xC49D2, data, "rodata/unresolved/800C3DD2"]
       - [0xC49D4, rodata, "rodata/shared/800C8EC4"]
       - [0xC49DF, data, "rodata/unresolved/800C3DDF"]

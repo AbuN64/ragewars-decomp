@@ -3060,7 +3060,7 @@ segments:
       - [0xC4C4C, rodata, "rodata/func_8024EF28_de/800C8E8C"]
       - [0xC4C5C, .rodata, "rodata/shared/800C8E9C"]
       - [0xC4C6E, data, "rodata/unresolved/800C406E"]
-      - [0xC4C70, rodata, "rodata/shared/800C8EB0"]
+      - [0xC4C70, .rodata, "rodata/shared/800C8EB0"]
       - [0xC4C82, data, "rodata/unresolved/800C4082"]
       - [0xC4C84, rodata, "rodata/shared/800C8EC4"]
       - [0xC4C8F, data, "rodata/unresolved/800C408F"]
