@@ -53574,6 +53574,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_text_8023FD18_C93F8_us_rev1.c"
+kind = "data"
+group = "data_800C87D8"
+members = ["src/rw_text_8023FD18_C93F8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_text_80246BE8_C958C_us_rev1.c"
 kind = "data"
 group = "data_800C898C"
