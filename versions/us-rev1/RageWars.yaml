@@ -6796,7 +6796,7 @@ segments:
       - [0x1951E8, c, "func_80427008_de"]
       - [0x195430, asm, "func_80427250_de"]
       - [0x1955B4, c, "func_804273D4_de"]
-      - [0x195690, asm, "func_804274B0_de"]
+      - [0x195690, c, "func_804274B0_de"]
       - [0x195B98, asm, "func_804279B8_de"]
       - [0x195CE8, c, "func_80427B08_de"]
       - [0x195F50, c, "func_80427D70_de"]

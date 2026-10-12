@@ -317,4 +317,6 @@ struct Record_func_804284C0_de;
 /* unbake published declaration: published_f3baa0147f402ee7063fe9c7 */
 typedef struct Record_func_804284C0_de Record_func_804284C0_de;
 
+extern void func_80427D70_de(void *);
+
 #endif

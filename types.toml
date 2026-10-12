@@ -3607,7 +3607,7 @@ schema = 1
 "func_80426CE4_de" = { evidence = "landed", signature = "s32 func_80426CE4_de(void *arg0, void *arg1, s32 event)" }
 "func_80427008_de" = { evidence = "landed", signature = "void func_80427008_de(void)" }
 "func_804273D4_de" = { evidence = "landed", signature = "void func_804273D4_de(void)" }
-"func_804274B0_de" = { evidence = "authored", signature = "void func_804274B0_de()" }
+"func_804274B0_de" = { evidence = "landed", signature = "void func_804274B0_de(void)" }
 "func_804279B8_de" = { evidence = "authored", signature = "void func_804279B8_de()" }
 "func_80427B08_de" = { evidence = "landed", signature = "void func_80427B08_de(void)" }
 "func_80427D70_de" = { evidence = "landed", signature = "void func_80427D70_de(void *arg0)" }
