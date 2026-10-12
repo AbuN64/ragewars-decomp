@@ -74932,7 +74932,7 @@ us = 0x802BF9DC
 us-rev1 = 0x802C4B9C
 
 [symbol.func_802BFD74_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x802BFD74
 
 [symbol.func_802BFE3C_de]

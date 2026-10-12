@@ -51377,6 +51377,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_802BFD74_us_rev1.c"
+kind = "data"
+group = "code_802BAC58"
+members = ["func_802BFD74_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_802BFE3C_de.c"
 kind = "c"
 group = "code_802BE0D0"
