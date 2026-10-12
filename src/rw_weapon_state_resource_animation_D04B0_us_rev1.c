@@ -1,3 +1,3 @@
-unsigned int D_auto_src_rw_weapon_state_resource_animation_D04B0_us_rev1[4] = {
+unsigned int D_d1_01b920ad688388c6[4] = {
     0x00004E8E, 0x3F800000, 0x00000000, 0x00000000,
 };
