@@ -3882,7 +3882,7 @@ segments:
       - [0xE6578, data, "data/unresolved/800E5978"]
       - [0xE6580, .rodata, "src/rw_text_802BDDE0_D9F30_us_rev1.c"]
       - [0xE6591, data, "rodata/unresolved/800E5991"]
-      - [0xE6594, rodata, "src/rw_text_802BDDE0_D9F44_us_rev1.c"]
+      - [0xE6594, .rodata, "src/rw_text_802BDDE0_D9F44_us_rev1.c"]
       - [0xE65A5, data, "rodata/unresolved/800E59A5"]
       - [0xE65A8, data, "data/unresolved/800E59A8"]
       - [0xE65B0, data, "rodata/writable/800D9360"]
