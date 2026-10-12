@@ -4219,7 +4219,7 @@ segments:
       - [0xDF3C0, rodata, "rodata/func_80445964_de/800E2810"]
       - [0xDF3C4, rodata, "src/rw_pool_80445BC0_E3414_us_rev1.c"]
       - [0xDF3CC, rodata, "rodata/func_80445BC0_de/800E281C"]
-      - [0xDF3D4, data, "rodata/unresolved/800DE7D4"]
+      - [0xDF3D4, .data, "rodata/unresolved/800DE7D4"]
       - [0xDF3E8, data, "rodata/writable/800E2838"]
       - [0xDF3F8, rodata, "src/rw_constants_8040170C_E3448_us_rev1.c"]
       - [0xDF3FC, data, "rodata/unresolved/800DE7FC"]
