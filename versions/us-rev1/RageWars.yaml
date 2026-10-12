@@ -3707,7 +3707,7 @@ segments:
       - [0xCC08A, data, "rodata/unresolved/800CB48A"]
       - [0xCC08C, data, "data/unresolved/800CB48C"]
       - [0xCC090, rodata, "rodata/func_802AF990_us_rev1/800CB490"]
-      - [0xCC150, data, "src/ragewars_resident_strings_CC150_us_rev1.c"]
+      - [0xCC150, .data, "src/ragewars_resident_strings_CC150_us_rev1.c"]
       - [0xCC160, data, "src/ragewars_credits_label_blank_us_rev1.c"]
       - [0xCC161, data, "rodata/unresolved/800CB550_unclaimed_CC160_unclaimed_CC161"]
       - [0xCC164, .data, "src/ragewars_resident_strings_CC164_us_rev1.c"]
