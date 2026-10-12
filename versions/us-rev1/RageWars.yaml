@@ -983,7 +983,7 @@ segments:
       - [0x4DC18, c, "func_8024D028_de"]
       - [0x4DD50, asm, "func_8024D160_de"]
       - [0x4DE74, asm, "func_8024D284_de"]
-      - [0x4DF88, asm, "func_8024D398_de"]
+      - [0x4DF88, c, "func_8024D398_de"]
       - [0x4E09C, c, "func_8024D4AC_de"]
       - [0x4E318, c, "func_8024D728_de"]
       - [0x4E460, c, "func_8024D870_de"]

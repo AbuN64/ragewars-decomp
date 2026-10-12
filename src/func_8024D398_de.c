@@ -1,30 +1,8 @@
 #include "types.h"
+#include "span_1000/code_8024D018.h"
 
-typedef struct {
-    s32 kind;
-    u8 pad4[0x14];
-    union { f32 value; u16 mode; } at18;
-    f32 value1C;
-    f32 value20;
-    u8 pad24[4];
-    f32 value28;
-    u8 pad2C[0xC0];
-    f32 valueEC;
-} Resource_u1;
 
-typedef struct { u8 pad0[0x80C]; s32 active; } State_u1;
-typedef struct {
-    u8 kind;
-    u8 pad1[0x17];
-    Resource_u1 *resource;
-    u8 pad1C[0xE4];
-    u32 flags;
-    u8 pad104[0xD4];
-    State_u1 *state;
-} Actor_u1;
 
-extern f32 D_800C3C7C_de;
-extern f32 D_800C3C80_de;
 
 f32 func_8024D398_de(Actor_u1 *actor)
 {

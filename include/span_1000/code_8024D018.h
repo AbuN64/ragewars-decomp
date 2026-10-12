@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_1000_CODE_8024D018_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct func_8024DEF8_S1;
 /* unbake published declaration: published_09be9b328381970f7dffdc1a */
 struct func_8024DEF8_S1 {
@@ -157,4 +159,29 @@ struct SoundRequest;
 typedef struct SoundRequest SoundRequest;
 
 extern int func_8024D264_de(void * arg0);
+
+typedef struct {
+    s32 kind;
+    u8 pad4[0x14];
+    union { f32 value; u16 mode; } at18;
+    f32 value1C;
+    f32 value20;
+    u8 pad24[4];
+    f32 value28;
+    u8 pad2C[0xC0];
+    f32 valueEC;
+} Resource_u1;
+typedef struct { u8 pad0[0x80C]; s32 active; } State_u1;
+typedef struct {
+    u8 kind;
+    u8 pad1[0x17];
+    Resource_u1 *resource;
+    u8 pad1C[0xE4];
+    u32 flags;
+    u8 pad104[0xD4];
+    State_u1 *state;
+} Actor_u1;
+extern f32 D_800C3C7C_de;
+extern f32 D_800C3C80_de;
+
 #endif
