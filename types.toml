@@ -499,7 +499,7 @@ schema = 1
 "func_80224F5C_de" = { evidence = "landed", signature = "void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_de *body)" }
 "func_80225940_de" = { evidence = "landed", signature = "void func_80225940_de(SharedPlayer_func_80225940_de *player, Body_func_80225940_de *body)" }
 "func_80225B98_de" = { evidence = "landed", signature = "void func_80225B98_de(void *arg0, void *arg1, s32 arg2)" }
-"func_80225F44_de" = { evidence = "authored", signature = "void func_80225F44_de()" }
+"func_80225F44_de" = { evidence = "landed", signature = "void func_80225F44_de(SharedPlayer_func_802233F0_de *player,func_802165F8_S1 *body)" }
 "func_80226340_de" = { evidence = "landed", signature = "void func_80226340_de(SharedPlayer_func_80226340_de *player)" }
 "func_80226548_de" = { evidence = "landed", signature = "void func_80226548_de(void *arg0, void *arg1)" }
 "func_80226950_de" = { evidence = "landed", signature = "void func_80226950_de(PlayerList *list, int count)" }
@@ -7512,15 +7512,18 @@ schema = 1
 "D_800C943C" = { declaration = "extern char D_800C943C;", evidence = "authored" }
 "D_800C9468" = { declaration = "extern char D_800C9468;", evidence = "authored" }
 "D_800C94A4_de" = { declaration = "extern char D_800C94A4_de;", evidence = "authored" }
-"D_800C94DC_de" = { declaration = "extern int D_800C94DC_de;", evidence = "authored" }
+"D_800C94D0_de" = { declaration = "extern Vec3 D_800C94D0_de;", evidence = "authored" }
+"D_800C94DC_de" = { declaration = "extern Triple D_800C94DC_de;", evidence = "authored" }
 "D_800C94E8_de" = { declaration = "extern s32 D_800C94E8_de;", evidence = "authored" }
 "D_800C94EC_de" = { declaration = "extern char D_800C94EC_de;", evidence = "authored" }
+"D_800C9510_de" = { declaration = "extern SharedMovement D_800C9510_de[2];", evidence = "authored" }
 "D_800C9514_de" = { declaration = "extern float D_800C9514_de;", evidence = "authored" }
 "D_800C9538" = { declaration = "extern float D_800C9538;", evidence = "authored" }
 "D_800C9558_de" = { declaration = "extern char D_800C9558_de;", evidence = "authored" }
 "D_800C9560" = { declaration = "extern float D_800C9560;", evidence = "authored" }
 "D_800C9564" = { declaration = "extern float D_800C9564;", evidence = "authored" }
 "D_800C9570" = { declaration = "extern f32 D_800C9570[];", evidence = "authored" }
+"D_800C95D0" = { declaration = "extern char D_800C95D0;", evidence = "authored" }
 "D_800C98C4" = { declaration = "extern float D_800C98C4;", evidence = "authored" }
 "D_800C98C8" = { declaration = "extern float D_800C98C8;", evidence = "authored" }
 "D_800C9A38" = { declaration = "extern float D_800C9A38;", evidence = "authored" }
@@ -10767,6 +10770,7 @@ schema = 1
 "Morph_func_802A2B58_de" = { declaration = "struct Morph_func_802A2B58_de { s32 count; Blend *blends; Key *first; Key *second; void *firstFrame; void *secondFrame; f32 scaleS; f32 scaleT; f32 step; };", evidence = "authored" }
 "Motion" = { declaration = "typedef struct Motion Motion;", evidence = "authored" }
 "Motion_func_8025AB94_de" = { declaration = "typedef struct Motion_func_8025AB94_de Motion_func_8025AB94_de;", evidence = "authored" }
+"Mount" = { declaration = "struct Mount { char pad0[0x170]; char animation[0x34]; s8 animationId; };", evidence = "authored" }
 "MovementDescriptor" = { declaration = "typedef struct MovementDescriptor MovementDescriptor;", evidence = "authored" }
 "Mover" = { declaration = "typedef struct Mover Mover;", evidence = "authored" }
 "Msg" = { declaration = "struct Msg { s16 f0; s16 f2; s16 f4; s16 f6; s32 f8; s16 fC; s16 fE; s16 f10; s16 f12; };", evidence = "authored" }

@@ -82,6 +82,13 @@ struct Shared_Quad {
     s32 w[4];
 };
 
+/* A mount's embedded animation record and current animation selector. */
+struct Mount {
+    char pad0[0x170];
+    char animation[0x34];
+    s8 animationId;
+};
+
 struct Rider;
 /* unbake published declaration: published_20478836ddb34d9ed05d754a */
 struct Rider {

@@ -6,6 +6,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
+#include "span_1000/code_8021CD70.h"
 struct func_802285C4_S2;
 /* unbake published declaration: published_037df425b11710e33a8249ff */
 typedef struct func_802285C4_S2 func_802285C4_S2;
@@ -5055,5 +5056,9 @@ typedef struct ForcePlayer ForcePlayer;
 struct ForcePlayer { u8 pad0[0x5D0]; s32 active; u8 pad5D4[0xC28]; f32 strength; Vec3 origin; s32 attract; u8 pad1210[0x4D0]; ForcePlayer *next; };
 typedef struct { u8 pad0[0x20]; ForcePlayer *head; } ForcePlayerList;
 typedef struct { u8 pad0[8]; Vec3 position; u8 pad14[8]; Vec3 velocity; u8 pad28[0x14C]; Vec3 direction; } ForceBody;
+
+extern char D_800C95D0;
+extern SharedMovement D_800C9510_de[2];
+extern Vec3 D_800C94D0_de;
 
 #endif

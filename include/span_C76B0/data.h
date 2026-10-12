@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_C76B0_DATA_H
 #define UNBAKE_SPAN_C76B0_DATA_H
 #include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
 extern float D_800C1A10_de;
 extern float D_800C1A14_de;
 extern float D_800C1A18;
@@ -2113,7 +2114,7 @@ extern float D_800C913C_de;
 extern float D_800C917C;
 extern float D_800C9194;
 extern int D_800C9228_de;
-extern int D_800C94DC_de;
+extern Triple D_800C94DC_de;
 extern float D_800C9514_de;
 extern short D_800C9FD6;
 extern short D_800C9FDA;
