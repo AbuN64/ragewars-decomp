@@ -29150,6 +29150,7 @@ us-rev1 = 0x800D0948
 kind = "data"
 de = 0x800CB70C
 eu = 0x800CC2EC
+eu-x = 0x800CCCBC
 
 [symbol.D_800CB710]
 kind = "data"
