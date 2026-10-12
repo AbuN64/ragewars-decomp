@@ -3442,7 +3442,7 @@ schema = 1
 "func_8041AD10_de" = { evidence = "landed", signature = "void func_8041AD10_de(struct Menu_func_8041AD10_de *menu, s32 index)" }
 "func_8041AD34_de" = { evidence = "landed", signature = "void func_8041AD34_de(struct Menu_func_8041AD34_de *menu)" }
 "func_8041AD7C_de" = { evidence = "landed", signature = "s32 func_8041AD7C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
-"func_8041AE0C_de" = { evidence = "landed", signature = "void func_8041AE0C_de(void *arg0, Args args)" }
+"func_8041AE0C_de" = { evidence = "landed", signature = "void func_8041AE0C_de(Shared_Item *arg0, Args args)" }
 "func_8041AF40_de" = { evidence = "landed", signature = "s32 func_8041AF40_de(struct Menu_func_8041A940_de *menu)" }
 "func_8041AF70_de" = { evidence = "landed", signature = "s32 func_8041AF70_de(struct Menu_func_8041A940_de *menu)" }
 "func_8041AFA0_de" = { evidence = "landed", signature = "s32 func_8041AFA0_de(void *arg0)" }
@@ -3453,7 +3453,7 @@ schema = 1
 "func_8041B110_de" = { evidence = "landed", signature = "void func_8041B110_de(s32 arg0)" }
 "func_8041B22C_de" = { evidence = "landed", signature = "void func_8041B22C_de(Record_func_8041B22C_de *source)" }
 "func_8041B340_de" = { evidence = "landed", signature = "s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
-"func_8041B3D0_de" = { evidence = "landed", signature = "void func_8041B3D0_de(void *arg0, Args args)" }
+"func_8041B3D0_de" = { evidence = "landed", signature = "void func_8041B3D0_de(Shared_Item *arg0, Args args)" }
 "func_8041B504_de" = { evidence = "landed", signature = "s32 func_8041B504_de(struct Menu_func_8041A940_de *menu)" }
 "func_8041B534_de" = { evidence = "landed", signature = "s32 func_8041B534_de(struct Menu_func_8041A940_de *menu)" }
 "func_8041B564_de" = { evidence = "landed", signature = "s32 func_8041B564_de(void *arg0)" }
@@ -3469,7 +3469,7 @@ schema = 1
 "func_8041B8DC_de" = { evidence = "landed", signature = "void func_8041B8DC_de(Context_func_8041B6E8_de *context, s32 index, Node_func_8041B6E8_de *node)" }
 "func_8041B968_de" = { evidence = "landed", signature = "void func_8041B968_de(struct Object6C *object, s32 value)" }
 "func_8041B970_de" = { evidence = "landed", signature = "s32 func_8041B970_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
-"func_8041BA00_de" = { evidence = "landed", signature = "void func_8041BA00_de(void *arg0, Args args)" }
+"func_8041BA00_de" = { evidence = "landed", signature = "void func_8041BA00_de(Shared_Item *arg0, Args args)" }
 "func_8041BB34_de" = { evidence = "landed", signature = "s32 func_8041BB34_de(void)" }
 "func_8041BB3C_de" = { evidence = "landed", signature = "s32 func_8041BB3C_de(struct Owner_func_8041BB3C_de *owner, s32 arg1, s32 slot, s32 kind)" }
 "func_8041BBD0_de" = { evidence = "landed", signature = "s32 func_8041BBD0_de(struct Owner_func_8041BBD0_de *owner, s32 arg1, s32 slot, s32 kind)" }
