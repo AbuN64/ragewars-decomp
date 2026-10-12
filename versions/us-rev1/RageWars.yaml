@@ -7343,7 +7343,7 @@ segments:
       - [0x1B9D30, c, "func_8044B0E0_de"]
       - [0x1B9DC8, .data, "rodata/unresolved/8044BDC8"]
       - [0x1BA250, asm, "func_8044B600_de"]
-      - [0x1BA410, asm, "func_8044B7C0_de"]
+      - [0x1BA410, c, "func_8044B7C0_de"]
       - [0x1BAA54, c, "func_8044BE04_de"]
       - [0x1BB024, asm, "func_8044C3D4_de"]
       - [0x1BB408, asm, "func_8044C7B8_de"]

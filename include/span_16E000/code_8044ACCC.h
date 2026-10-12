@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_16E000_CODE_8044ACCC_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
 struct func_8044B388_S1;
 /* unbake published declaration: published_03e9c7e3de05cad75660efbd */
 typedef struct func_8044B388_S1 func_8044B388_S1;
@@ -537,5 +538,33 @@ struct ObjB {
     void **block;
     char pad64[0x1C8 - 0x64];
 };
+
+extern void func_8044D1B4_de(char *);
+extern void func_8044CFF8_de(char *);
+extern void func_8020A604_de(void *);
+extern s32 func_802540F4_de(s32,void **,s32,void *,s32);
+extern void func_8044B600_de(void *,void *,s32);
+extern s32 D_0044D804;
+extern s32 D_0044D934;
+extern char D_800C4F50_de;
+extern char D_800C4F60_de;
+extern char D_800C4F70_de;
+extern char D_800C4F84_de;
+extern char D_800C4F94_de;
+extern char D_800C4FA4_de;
+extern char D_800C4FB4_de;
+extern char D_800C4FC8_de;
+extern char D_800C4FD8_de;
+extern char D_800C4FEC_de;
+extern char D_800C4FFC_de;
+extern char D_800C5008_de;
+extern char D_800C5010_de;
+extern char D_800C5018_de;
+extern char D_800C5028_de;
+extern char D_800C5038_de;
+extern char D_800C504C_de;
+extern char D_800C505C_de;
+extern char D_800C5070_de;
+extern char D_800C5098_de;
 
 #endif

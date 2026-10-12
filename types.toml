@@ -4261,6 +4261,8 @@ schema = 1
 "func_8044AE70_de" = { evidence = "landed", signature = "s16 func_8044AE70_de(void)" }
 "func_8044B008_de" = { evidence = "declared", signature = "s32 func_8044B008_de(ControllerProfile *, s32)" }
 "func_8044B0E0_de" = { evidence = "landed", signature = "void func_8044B0E0_de(struct Pool_func_8044B0E0_de *arg0)" }
+"func_8044B600_de" = { evidence = "authored", signature = "void func_8044B600_de(void *,void *,s32)" }
+"func_8044B7C0_de" = { evidence = "landed", signature = "void func_8044B7C0_de(Level_func_8044B7C0_de *arg0, s32 arg1)" }
 "func_8044BE04_de" = { evidence = "landed", signature = "void func_8044BE04_de(Scene_func_8044BE04_de *scene)" }
 "func_8044BF90_de" = { evidence = "landed", signature = "void func_8044BF90_de(func_8044CBE0_S1 *arg0)" }
 "func_8044C108_de" = { evidence = "landed", signature = "void func_8044C108_de(World_func_8044C108_de *world, void ***handle)" }
@@ -4434,6 +4436,8 @@ schema = 1
 "D_00400000" = { declaration = "extern char D_00400000;", evidence = "authored" }
 "D_0044A850" = { declaration = "extern u8 D_0044A850[];", evidence = "authored" }
 "D_0044B180" = { declaration = "extern char D_0044B180;", evidence = "authored" }
+"D_0044D804" = { declaration = "extern s32 D_0044D804;", evidence = "authored" }
+"D_0044D934" = { declaration = "extern s32 D_0044D934;", evidence = "authored" }
 "D_0044E48C" = { declaration = "extern char D_0044E48C[];", evidence = "authored" }
 "D_0044E4D4" = { declaration = "extern char D_0044E4D4[];", evidence = "authored" }
 "D_0044E9C0" = { declaration = "extern char D_0044E9C0[];", evidence = "authored" }
@@ -6645,6 +6649,26 @@ schema = 1
 "D_800C4EDC_eu" = { declaration = "extern float D_800C4EDC_eu;", evidence = "authored" }
 "D_800C4EE0_eu" = { declaration = "extern float D_800C4EE0_eu;", evidence = "authored" }
 "D_800C4EE4_eu" = { declaration = "extern float D_800C4EE4_eu;", evidence = "authored" }
+"D_800C4F50_de" = { declaration = "extern char D_800C4F50_de;", evidence = "authored" }
+"D_800C4F60_de" = { declaration = "extern char D_800C4F60_de;", evidence = "authored" }
+"D_800C4F70_de" = { declaration = "extern char D_800C4F70_de;", evidence = "authored" }
+"D_800C4F84_de" = { declaration = "extern char D_800C4F84_de;", evidence = "authored" }
+"D_800C4F94_de" = { declaration = "extern char D_800C4F94_de;", evidence = "authored" }
+"D_800C4FA4_de" = { declaration = "extern char D_800C4FA4_de;", evidence = "authored" }
+"D_800C4FB4_de" = { declaration = "extern char D_800C4FB4_de;", evidence = "authored" }
+"D_800C4FC8_de" = { declaration = "extern char D_800C4FC8_de;", evidence = "authored" }
+"D_800C4FD8_de" = { declaration = "extern char D_800C4FD8_de;", evidence = "authored" }
+"D_800C4FEC_de" = { declaration = "extern char D_800C4FEC_de;", evidence = "authored" }
+"D_800C4FFC_de" = { declaration = "extern char D_800C4FFC_de;", evidence = "authored" }
+"D_800C5008_de" = { declaration = "extern char D_800C5008_de;", evidence = "authored" }
+"D_800C5010_de" = { declaration = "extern char D_800C5010_de;", evidence = "authored" }
+"D_800C5018_de" = { declaration = "extern char D_800C5018_de;", evidence = "authored" }
+"D_800C5028_de" = { declaration = "extern char D_800C5028_de;", evidence = "authored" }
+"D_800C5038_de" = { declaration = "extern char D_800C5038_de;", evidence = "authored" }
+"D_800C504C_de" = { declaration = "extern char D_800C504C_de;", evidence = "authored" }
+"D_800C505C_de" = { declaration = "extern char D_800C505C_de;", evidence = "authored" }
+"D_800C5070_de" = { declaration = "extern char D_800C5070_de;", evidence = "authored" }
+"D_800C5098_de" = { declaration = "extern char D_800C5098_de;", evidence = "authored" }
 "D_800C50E4_de" = { declaration = "extern float D_800C50E4_de;", evidence = "authored" }
 "D_800C50FC_de" = { declaration = "extern float D_800C50FC_de;", evidence = "authored" }
 "D_800C5110_de" = { declaration = "extern s32 D_800C5110_de;", evidence = "authored" }

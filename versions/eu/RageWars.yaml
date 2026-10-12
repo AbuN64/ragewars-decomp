@@ -5434,7 +5434,7 @@ segments:
       - [0x1C23B0, c, "func_8044B0E0_de"]
       - [0x1C2448, .data, "rodata/unresolved/8044C448"]
       - [0x1C28D0, asm, "func_8044B600_de"]
-      - [0x1C2A90, asm, "func_8044B7C0_de"]
+      - [0x1C2A90, c, "func_8044B7C0_de"]
       - [0x1C30D4, c, "func_8044BE04_de"]
       - [0x1C36A4, asm, "func_8044C3D4_de"]
       - [0x1C3A88, asm, "func_8044C7B8_de"]
