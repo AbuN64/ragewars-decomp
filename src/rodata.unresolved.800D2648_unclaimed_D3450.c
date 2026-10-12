@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_unresolved_800D2648_unclaimed_D3450[1] = {
+/* ROM-grounded data: rodata/unresolved/800D2648_unclaimed_D3450 */
+unsigned int D_blob_7e585071816fd959ab49[1] = {
     0x00000001,
 };
