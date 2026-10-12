@@ -4044,7 +4044,7 @@ segments:
       - [0xcec60, data, "src/rw_controller_state_dispatch_CEC60_us_rev1.c"]
       - [0xcec6c, data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C"]
       - [0xcec80, data, "src/rw_controller_state_dispatch_CEC80_us_rev1.c"]
-      - [0xcec8c, data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C"]
+      - [0xcec8c, .data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C"]
       - [0xceca0, data, "src/rw_controller_state_dispatch_CECA0_us_rev1.c"]
       - [0xcecac, data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C_unclaimed_CECAC"]
       - [0xcecc0, data, "src/rw_controller_state_dispatch_CECC0_us_rev1.c"]
