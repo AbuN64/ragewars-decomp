@@ -1979,6 +1979,7 @@ schema = 1
 "func_80288470_de" = { evidence = "authored", signature = "void func_80288470_de(void *)" }
 "func_80288EA8_de" = { evidence = "landed", signature = "void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera)" }
 "func_80289084_de" = { evidence = "declared", signature = "void func_80289084_de(char *, char *)" }
+"func_802897B4_de" = { evidence = "landed", signature = "void func_802897B4_de(World37 *world, Vec3 *point, Item37 **output, s32 *total)" }
 "func_8028A27C_de" = { evidence = "declared", signature = "void func_8028A27C_de(void *, void *, Vec3 *, Vec3 *)" }
 "func_8028A698_de" = { evidence = "authored", signature = "void func_8028A698_de(void *)" }
 "func_8028A948_de" = { evidence = "declared", signature = "void func_8028A948_de()" }
@@ -9907,6 +9908,8 @@ schema = 1
 "Body_func_80225940_de" = { declaration = "struct Body_func_80225940_de { char pad0[0x1C]; s32 motion[3]; };", evidence = "authored" }
 "Body_func_8024C6E8_de" = { declaration = "typedef struct Body_func_8024C6E8_de Body_func_8024C6E8_de;", evidence = "authored" }
 "Bounds" = { declaration = "struct Bounds { u8 bytes[0x60]; };", evidence = "authored" }
+"Bounds2D37" = { declaration = "typedef struct Bounds2D37 { f32 minX,minZ,maxX,maxZ; } Bounds2D37;", evidence = "authored" }
+"Bounds37" = { declaration = "typedef struct Bounds37 { f32 minX,minY,minZ,maxX,maxY,maxZ; } Bounds37;", evidence = "authored" }
 "Box" = { declaration = "typedef struct Box Box;", evidence = "authored" }
 "Box70" = { declaration = "struct Box70 { Vec3 corners[8]; char pad60[0xC]; s32 mask; };", evidence = "authored" }
 "Box_func_8026EE20_de" = { declaration = "typedef struct Box_func_8026EE20_de Box_func_8026EE20_de;", evidence = "authored" }
@@ -10425,6 +10428,7 @@ schema = 1
 "Inventory" = { declaration = "struct Inventory { char pad[0x5F4]; s16 items[3]; };", evidence = "authored" }
 "InventorySlot" = { declaration = "struct InventorySlot { u8 available; u8 slot; };", evidence = "authored" }
 "Item" = { declaration = "typedef struct Item Item;", evidence = "authored" }
+"Item37" = { declaration = "typedef struct Item37 { u8 pad0[0xA0]; Bounds37 bounds; u8 padB8[8]; } Item37;", evidence = "authored" }
 "Item57BD4" = { declaration = "typedef struct Item57BD4 Item57BD4;", evidence = "authored" }
 "ItemDef" = { declaration = "struct ItemDef { char pad[0x20]; s16 type; s16 index; };", evidence = "authored" }
 "Item_func_80218F9C_de" = { declaration = "typedef struct Item_func_80218F9C_de Item_func_80218F9C_de;", evidence = "authored" }
@@ -10445,6 +10449,7 @@ schema = 1
 "Item_func_80442A60_de" = { declaration = "struct Item_func_80442A60_de { char pad0[8]; s32 resource; char padC[0x14 - 0xC]; struct Handlers *handlers; char pad18[0x20 - 0x18]; struct State_func_80442A60_de *state; };", evidence = "authored" }
 "Item_func_80442FB0_de" = { declaration = "typedef struct Item_func_80442FB0_de Item_func_80442FB0_de;", evidence = "authored" }
 "Item_func_8044D668_de" = { declaration = "typedef struct Item_func_8044D668_de Item_func_8044D668_de;", evidence = "authored" }
+"Items37" = { declaration = "typedef struct Items37 { s32 stride, count; Item37 items[1]; } Items37;", evidence = "authored" }
 "JoinRequestItem" = { declaration = "typedef struct JoinRequestItem JoinRequestItem;", evidence = "authored" }
 "JoinRequestScreen" = { declaration = "typedef struct JoinRequestScreen JoinRequestScreen;", evidence = "authored" }
 "Key" = { declaration = "struct Key { char pad0[0x14]; };", evidence = "authored" }
@@ -11369,6 +11374,7 @@ schema = 1
 "Record_func_80449EE4_de" = { declaration = "typedef struct Record_func_80449EE4_de Record_func_80449EE4_de;", evidence = "authored" }
 "Record_func_8044B0E0_de" = { declaration = "typedef struct Record_func_8044B0E0_de Record_func_8044B0E0_de;", evidence = "authored" }
 "Region" = { declaration = "struct Region { struct Region *next; u16 start; u16 pages; s32 pad8; s32 padC; u8 *map; s32 pad14; u8 data[1]; };", evidence = "authored" }
+"Region37" = { declaration = "typedef struct Region37 { Resource37 *resource; Bounds2D37 *bounds; s32 flags; } Region37;", evidence = "authored" }
 "RegionDesc" = { declaration = "struct RegionDesc { s32 pad0; s32 size; struct Region *region; void *mapping; };", evidence = "authored" }
 "RenderCounters" = { declaration = "typedef struct RenderCounters { s32 unk0, unk4, unk8, unkC; char pad10[0x78]; s32 first, second; } RenderCounters;", evidence = "authored" }
 "RenderState" = { declaration = "typedef struct RenderState { union { RenderView views[4]; Display display; } ring; char pad500[0x2688C]; char settings[0x28]; s32 handle; char pad26DB8[0x10]; s32 enabled, field26DCC, field26DD0, field26DD4; } RenderState;", evidence = "authored" }
@@ -11406,6 +11412,7 @@ schema = 1
 "ResidentTargetedDescriptor" = { declaration = "typedef struct ResidentTargetedDescriptor { ResidentPickupPrefix common; ResidentTargetedPickupHandler handler; } ResidentTargetedDescriptor;", evidence = "authored" }
 "ResidentWeaponDescriptor" = { declaration = "typedef struct ResidentWeaponDescriptor { ResidentPickupPrefix common; s16 weaponSlot; s16 ammoAmount; ResidentPickupHandler handler; } ResidentWeaponDescriptor;", evidence = "authored" }
 "Resource" = { declaration = "typedef struct Resource Resource;", evidence = "authored" }
+"Resource37" = { declaration = "typedef struct Resource37 { void *data; } Resource37;", evidence = "authored" }
 "ResourceBank" = { declaration = "typedef struct ResourceBank ResourceBank;", evidence = "authored" }
 "ResourceEntry" = { declaration = "typedef struct ResourceEntry ResourceEntry;", evidence = "authored" }
 "ResourceManagerState" = { declaration = "struct ResourceManagerState { s32 active; s32 count; };", evidence = "authored" }
@@ -12661,6 +12668,7 @@ schema = 1
 "Work80244494" = { declaration = "typedef struct Work80244494 Work80244494;", evidence = "authored" }
 "World" = { declaration = "struct World { u8 pad000[0xFC]; s32 state; };", evidence = "authored" }
 "World24" = { declaration = "typedef struct World24 World24;", evidence = "authored" }
+"World37" = { declaration = "typedef struct World37 { u8 pad0[0x1504]; s32 count; Region37 regions[1]; } World37;", evidence = "authored" }
 "World_func_80226A34_de" = { declaration = "struct World_func_80226A34_de { char pad0[0x20]; SharedPlayer_func_80226A34_de *players; char pad24[0x40 - 0x24]; s32 spin; };", evidence = "authored" }
 "World_func_802283B8_de" = { declaration = "struct World_func_802283B8_de { char pad0[0x20]; SharedPlayer_func_802283B8_de *players; };", evidence = "authored" }
 "World_func_80236F1C_de" = { declaration = "typedef struct World_func_80236F1C_de World_func_80236F1C_de;", evidence = "authored" }

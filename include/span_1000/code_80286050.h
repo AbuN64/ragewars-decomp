@@ -3,6 +3,9 @@
 #include "../types.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "gfx.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct Scene_func_8028B028_de;
 /* unbake published declaration: published_071d490f65b9ae384b2faaa5 */
 typedef struct Scene_func_8028B028_de Scene_func_8028B028_de;
@@ -256,5 +259,13 @@ typedef struct Object_func_8028B274_de Object_func_8028B274_de;
 struct func_8028B1F8_S1;
 /* unbake published declaration: published_f9405dec979e127e750a3f53 */
 typedef struct func_8028B1F8_S1 func_8028B1F8_S1;
+
+typedef struct Bounds37 { f32 minX,minY,minZ,maxX,maxY,maxZ; } Bounds37;
+typedef struct Item37 { u8 pad0[0xA0]; Bounds37 bounds; u8 padB8[8]; } Item37;
+typedef struct Items37 { s32 stride, count; Item37 items[1]; } Items37;
+typedef struct Bounds2D37 { f32 minX,minZ,maxX,maxZ; } Bounds2D37;
+typedef struct Resource37 { void *data; } Resource37;
+typedef struct Region37 { Resource37 *resource; Bounds2D37 *bounds; s32 flags; } Region37;
+typedef struct World37 { u8 pad0[0x1504]; s32 count; Region37 regions[1]; } World37;
 
 #endif
