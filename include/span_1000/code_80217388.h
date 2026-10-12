@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct TeamMenu;
 /* unbake published declaration: published_03df77f5a41514aa2b63bc80 */
 typedef struct TeamMenu TeamMenu;
@@ -1736,5 +1737,8 @@ struct Menu_func_80218F9C_de {
     Slot_func_80218F9C_de slots[4];
     s32 cursor;
 };
+
+typedef struct StickInput { char pad00[0xC6]; s8 x, y; } StickInput;
+typedef struct StickPlayer { char pad00[0x698]; StickInput *input; } StickPlayer;
 
 #endif
