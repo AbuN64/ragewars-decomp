@@ -2959,7 +2959,7 @@ segments:
       - [0xC8FA8, rodata, "src/rw_pool_80235AE0_C8FA8_us_rev1.c"]
       - [0xC8FB4, rodata, "rodata/func_802362E8_de/800C83B4"]
       - [0xC8FC4, rodata, "rodata/shared/800C83C4"]
-      - [0xC8FCC, rodata, "rodata/shared/800C83CC"]
+      - [0xC8FCC, .rodata, "rodata/shared/800C83CC"]
       - [0xC8FD9, data, "rodata/unresolved/800C83D9"]
       - [0xC8FDC, rodata, "src/rw_pool_8044A370_C8FDC_us_rev1.c"]
       - [0xC8FE0, .rodata, "src/rw_pool_8023660C_C8FE0_us_rev1.c"]
