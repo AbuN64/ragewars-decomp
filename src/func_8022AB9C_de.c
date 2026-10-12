@@ -9,7 +9,7 @@ extern s16 D_800CB348_de[];
 
 
 
-s16 func_8022AB9C_de(void *arg0) {
+s32 func_8022AB9C_de(void *arg0) {
     s16 *var_v0;
     s32 temp_v1;
     void *temp_v0;

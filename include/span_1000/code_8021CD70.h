@@ -13736,4 +13736,23 @@ extern f32 D_800C2870_de;
 extern f32 D_800C2878_de;
 extern void func_80239324_de(char *, f32, f32, f32, f32, s32, Vec3);
 
+typedef struct PowerHudAnimation {
+    void *object; s32 pad4, state; f32 padC, x, y;
+    char pad18[0x20]; s32 last;
+} PowerHudAnimation;
+typedef struct PowerHudPlayer {
+    char pad0[0x5F4]; s16 first, second, third;
+    char pad5FA[0x34]; s16 weapon;
+    char pad630[0x7FC]; PowerHudAnimation a,b,c;
+    char padEE0[0x4D8]; s32 refreshA,refreshB,refreshC;
+} PowerHudPlayer;
+extern s32 func_8040C474_de(void);
+extern s32 func_8022AB9C_de(void *);
+extern s32 func_802AA70C_de(void *,s32 *);
+extern void func_802A822C_de(s32,f32,f32,f32,f32,s32,s32,s32);
+extern s32 D_800C9288_de[];
+extern s32 D_800C9328_de[];
+extern s32 D_800C9368[];
+extern s32 D_800C9398_de[];
+
 #endif

@@ -48,7 +48,6 @@ void func_802A7AA4_de(void *);
 void func_802A822C_de(s32, f32, f32, f32, f32, s32, s32, s32);
 void func_802A8F28_de(char *, s32, s32, s32, s32, s32, f32, f32);
 void func_802A9234_de(s32);
-void func_802AA70C_de(void *, void *);
 
 s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 s32 func_802BD320_de(char *, const char *, ...);

@@ -476,6 +476,7 @@ schema = 1
 "func_8021E08C_de" = { evidence = "landed", signature = "void func_8021E08C_de(View *view, Vec3 *point, s32 icon, f32 frame, f32 scale, f32 size)" }
 "func_8021E2A0_de" = { evidence = "landed", signature = "void func_8021E2A0_de(SharedPlayer *player, void *view)" }
 "func_8021E5F8_de" = { evidence = "declared", signature = "void func_8021E5F8_de(void *, void *)" }
+"func_8021EA54_de" = { evidence = "landed", signature = "void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view)" }
 "func_8021EEFC_de" = { evidence = "landed", signature = "void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view)" }
 "func_80220A80_de" = { evidence = "landed", signature = "void func_80220A80_de(Player_func_80220A80_de *player, Body_func_80220A80_de *body)" }
 "func_80220D44_de" = { evidence = "landed", signature = "void func_80220D44_de(SharedPlayer_func_80220D44_de *p)" }
@@ -549,7 +550,7 @@ schema = 1
 "func_8022AA9C_de" = { evidence = "landed", signature = "s32 func_8022AA9C_de(void *arg0, s32 arg1)" }
 "func_8022AAD4_de" = { evidence = "landed", signature = "s16 func_8022AAD4_de(void *arg0, s32 arg1)" }
 "func_8022AB20_de" = { evidence = "landed", signature = "s16 func_8022AB20_de(void *arg0, s32 arg1)" }
-"func_8022AB9C_de" = { evidence = "landed", signature = "s16 func_8022AB9C_de(void *arg0)" }
+"func_8022AB9C_de" = { evidence = "landed", signature = "s32 func_8022AB9C_de(void *arg0)" }
 "func_8022AC00_de" = { evidence = "landed", signature = "s32 func_8022AC00_de(void *arg0)" }
 "func_8022ACB8_de" = { evidence = "landed", signature = "int func_8022ACB8_de(Player_func_8022ACB8_de *player, int slot)" }
 "func_8022ADB0_de" = { evidence = "landed", signature = "int func_8022ADB0_de(void *object, s32 arg1)" }
@@ -7487,6 +7488,10 @@ schema = 1
 "D_800C9200" = { declaration = "extern float D_800C9200;", evidence = "authored" }
 "D_800C9208" = { declaration = "extern float D_800C9208;", evidence = "authored" }
 "D_800C9228_de" = { declaration = "extern int D_800C9228_de;", evidence = "authored" }
+"D_800C9288_de" = { declaration = "extern s32 D_800C9288_de[];", evidence = "authored" }
+"D_800C9328_de" = { declaration = "extern s32 D_800C9328_de[];", evidence = "authored" }
+"D_800C9368" = { declaration = "extern s32 D_800C9368[];", evidence = "authored" }
+"D_800C9398_de" = { declaration = "extern s32 D_800C9398_de[];", evidence = "authored" }
 "D_800C93D8_de" = { declaration = "extern char D_800C93D8_de;", evidence = "authored" }
 "D_800C943C" = { declaration = "extern char D_800C943C;", evidence = "authored" }
 "D_800C9468" = { declaration = "extern char D_800C9468;", evidence = "authored" }
@@ -11278,6 +11283,8 @@ schema = 1
 "Pos5324" = { declaration = "typedef union { Vec3 v; Triple t; } Pos5324;", evidence = "authored" }
 "Pos54E0" = { declaration = "typedef union { Vec3 v; Triple t; } Pos54E0;", evidence = "authored" }
 "PoseTable" = { declaration = "typedef struct PoseTable { s32 stride; char pad4[4]; s16 pad8[2]; s16 value[4]; } PoseTable;", evidence = "authored" }
+"PowerHudAnimation" = { declaration = "typedef struct PowerHudAnimation { void *object; s32 pad4, state; f32 padC, x, y; char pad18[0x20]; s32 last; } PowerHudAnimation;", evidence = "authored" }
+"PowerHudPlayer" = { declaration = "typedef struct PowerHudPlayer { char pad0[0x5F4]; s16 first, second, third; char pad5FA[0x34]; s16 weapon; char pad630[0x7FC]; PowerHudAnimation a,b,c; char padEE0[0x4D8]; s32 refreshA,refreshB,refreshC; } PowerHudPlayer;", evidence = "authored" }
 "Preset" = { declaration = "struct Preset { u8 bytes[0x2A]; };", evidence = "authored" }
 "PresetRow" = { declaration = "typedef struct PresetRow PresetRow;", evidence = "authored" }
 "PresetTable" = { declaration = "struct PresetTable { char pad0[0x16]; PresetRow rows[1]; };", evidence = "authored" }
