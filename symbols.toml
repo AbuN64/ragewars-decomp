@@ -29146,6 +29146,10 @@ eu-x = 0x800CCCB8
 us = 0x800CB618
 us-rev1 = 0x800D0948
 
+[symbol.D_800CB70C_de]
+kind = "data"
+de = 0x800CB70C
+
 [symbol.D_800CB710]
 kind = "data"
 de = 0x800CB710
