@@ -529,7 +529,7 @@ schema = 1
 "func_8022AB9C_de" = { evidence = "landed", signature = "s16 func_8022AB9C_de(void *arg0)" }
 "func_8022AC00_de" = { evidence = "landed", signature = "s32 func_8022AC00_de(void *arg0)" }
 "func_8022ACB8_de" = { evidence = "landed", signature = "int func_8022ACB8_de(Player_func_8022ACB8_de *player, int slot)" }
-"func_8022ADB0_de" = { evidence = "landed", signature = "int func_8022ADB0_de(void *object)" }
+"func_8022ADB0_de" = { evidence = "landed", signature = "int func_8022ADB0_de(void *object, s32 arg1)" }
 "func_8022ADBC_de" = { evidence = "landed", signature = "f32 func_8022ADBC_de(void *arg0)" }
 "func_8022ADF0_de" = { evidence = "landed", signature = "f32 func_8022ADF0_de(void *arg0)" }
 "func_8022AE28_de" = { evidence = "landed", signature = "int func_8022AE28_de(void *arg0, void *arg1)" }
@@ -1960,7 +1960,7 @@ schema = 1
 "func_8028B028_de" = { evidence = "landed", signature = "void func_8028B028_de(Scene_func_8028B028_de *scene, void *camera)" }
 "func_8028B160_de" = { evidence = "landed", signature = "void func_8028B160_de(s32 arg0, s32 arg1)" }
 "func_8028B21C_de" = { evidence = "landed", signature = "s32 func_8028B21C_de(void *arg0, s32 arg1)" }
-"func_8028B25C_de" = { evidence = "landed", signature = "unsigned short func_8028B25C_de(void *arg0, int arg1)" }
+"func_8028B25C_de" = { evidence = "landed", signature = "int func_8028B25C_de(void *arg0, int arg1)" }
 "func_8028B274_de" = { evidence = "landed", signature = "void func_8028B274_de(Bank_func_8028B274_de *arg0,Object_func_8028B274_de *arg1,s32 arg2,s32 arg3)" }
 "func_8028B2F8_de" = { evidence = "landed", signature = "void *func_8028B2F8_de(void *arg0, u16 *arg1)" }
 "func_8028B350_de" = { evidence = "landed", signature = "u32 func_8028B350_de(void *arg0, s32 arg1)" }
