@@ -6322,6 +6322,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D8374"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800D80A0_unclaimed_D8F40_unclaimed_D8F74", "src/ragewars_controller_pak_initialized_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D8390"
 segment = "span_C76B0"
 members = ["src/ragewars_pi_manager_and_handles_us_rev1.c"]
@@ -43617,6 +43625,17 @@ path = "src/ragewars_controller_button_remap_us_rev1.c"
 kind = "data"
 group = "data_800D0DA4"
 members = ["src/ragewars_controller_button_remap_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_controller_pak_initialized_us_rev1.c"
+kind = "data"
+group = "data_800D8374"
+members = ["src/ragewars_controller_pak_initialized_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
