@@ -24,13 +24,6 @@
 
 
 
-extern f32 D_800E1AA0;
-extern f32 D_800E1AA8;
-extern f32 D_800E1AB0;
-extern f32 D_800E1AB8;
-static inline f32 read_float(f32 *value) {
-    return *value;
-}
 
 extern void *func_8025305C_de(s32 size);
 extern void *func_8041B610_de(void *, s32);
@@ -54,10 +47,10 @@ s32 func_80429A24_de(void *window) {
     MenuWidget *opacityItem;
     f32 z;
     ListScreenRecord *record;
-    s32 *counter;
     s32 i;
     s32 x;
     s32 id;
+    s32 *pending;
 
     D_800E4F60 = func_8025305C_de(sizeof(SetupScreen));
     D_800E4F60->window = window;
@@ -101,9 +94,9 @@ s32 func_80429A24_de(void *window) {
     D_800E4F60->category = 0;
     func_8042A990_de();
     func_8042AFE0_de();
-    counter = &D_80154020[1];
-    *counter = 0;
-    counter[-1] = -1;
+    pending = &D_80154020[1];
+    *pending = 0;
+    pending[-1] = -1;
     D_800E4F60->unk454 = func_8040EC30_de(window, 0x308);
     opacityItem = func_8040EC30_de(window, 0x309);
     opacityItem->alpha = 0x6E;
@@ -168,7 +161,7 @@ s32 func_80429A24_de(void *window) {
             break;
         }
         position.value.x = x;
-        position.value.y = read_float(&D_800E1AA8);
+        position.value.y = D_800E1AA8;
         z = D_800E1AAC;
         position.value.z = z;
         func_80439B5C_de(&D_800E4F60->models[i].initial, id, scale.words, position.words);

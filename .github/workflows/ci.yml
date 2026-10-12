@@ -1,13 +1,23 @@
 name: CI
-on:  # progress sites read the report artifacts; a run per push floods them, so main reports on a schedule
+on:  # progress sites read the report artifacts; main reports at most once a day, and only after a change
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 12 * * *"
   pull_request:
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  changed:
+    runs-on: ubuntu-latest
+    outputs:
+      recent: ${{ steps.age.outputs.recent }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - id: age
+        run: echo "recent=$(( $(date +%s) - $(git log -1 --format=%ct) < 86400 ))" >> "$GITHUB_OUTPUT"
   check:
+    needs: changed
+    if: github.event_name != 'schedule' || needs.changed.outputs.recent == '1'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0

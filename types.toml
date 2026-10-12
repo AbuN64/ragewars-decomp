@@ -4306,7 +4306,6 @@ schema = 1
 "quad_normal" = { evidence = "landed", signature = "static inline void quad_normal(struct Quad *quad)" }
 "quatToMtx" = { evidence = "landed", signature = "static inline void quatToMtx(PoseMatrix m, Vector4f *q, Vec3 *t)" }
 "randVec" = { evidence = "landed", signature = "static inline Vec3 randVec(void)" }
-"read_float" = { evidence = "landed", signature = "static inline f32 read_float(f32 *value)" }
 "recycle" = { evidence = "landed", signature = "static inline Message *recycle(void *owner, void *pool)" }
 "release" = { evidence = "landed", signature = "static inline void release(s32 node)" }
 "releaseState" = { evidence = "landed", signature = "static inline void releaseState(struct RespawnCarried *carried, struct RespawnFlags *state)" }
