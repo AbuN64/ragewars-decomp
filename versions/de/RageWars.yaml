@@ -448,7 +448,7 @@ segments:
       - [0x28DF0, c, "func_802281F0_de"]
       - [0x28EEC, c, "func_802282EC_de"]
       - [0x28FB8, c, "func_802283B8_de"]
-      - [0x299C4, asm, "func_80228DC4_de"]
+      - [0x299C4, c, "func_80228DC4_de"]
       - [0x29BB8, c, "func_80228FB8_de"]
       - [0x2A414, asm, "func_80229814_de"]
       - [0x2A680, c, "func_80229A80_de"]

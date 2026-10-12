@@ -4,6 +4,8 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct func_802285C4_S2;
 /* unbake published declaration: published_037df425b11710e33a8249ff */
 typedef struct func_802285C4_S2 func_802285C4_S2;
@@ -5048,4 +5050,10 @@ typedef struct func_80229BE0_S1 func_80229BE0_S1;
 
 struct SharedPlayer;
 extern void func_80229814_de(struct SharedPlayer *player, f32 amount);
+
+typedef struct ForcePlayer ForcePlayer;
+struct ForcePlayer { u8 pad0[0x5D0]; s32 active; u8 pad5D4[0xC28]; f32 strength; Vec3 origin; s32 attract; u8 pad1210[0x4D0]; ForcePlayer *next; };
+typedef struct { u8 pad0[0x20]; ForcePlayer *head; } ForcePlayerList;
+typedef struct { u8 pad0[8]; Vec3 position; u8 pad14[8]; Vec3 velocity; u8 pad28[0x14C]; Vec3 direction; } ForceBody;
+
 #endif

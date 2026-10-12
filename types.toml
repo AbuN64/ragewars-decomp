@@ -497,7 +497,7 @@ schema = 1
 "func_80228798_de" = { evidence = "landed", signature = "void func_80228798_de(void *arg0, void *arg1)" }
 "func_80228958_de" = { evidence = "landed", signature = "void func_80228958_de(void *game, s32 view)" }
 "func_80228AF4_de" = { evidence = "landed", signature = "void func_80228AF4_de(void *arg0, ViewState *arg1)" }
-"func_80228DC4_de" = { evidence = "authored", signature = "void func_80228DC4_de(void *, void *)" }
+"func_80228DC4_de" = { evidence = "landed", signature = "void func_80228DC4_de(void *listObject, void *bodyObject)" }
 "func_80228E60_eu" = { evidence = "declared", signature = "void func_80228E60_eu(void *, s32)" }
 "func_80228FB8_de" = { evidence = "landed", signature = "void func_80228FB8_de(Actor_func_80228FB8_de *actor, s32 arg1, Draw *draw)" }
 "func_802292B8_de" = { evidence = "landed", signature = "void func_802292B8_de(void *arg0)" }
@@ -4330,6 +4330,7 @@ schema = 1
 "path_length" = { evidence = "landed", signature = "static inline s32 path_length(u8 *s)" }
 "pick" = { evidence = "landed", signature = "static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group)" }
 "pickChannel" = { evidence = "landed", signature = "static inline void pickChannel(Shared_PakMenu *menu, s32 *ch)" }
+"playerHasForce" = { evidence = "landed", signature = "static inline s32 playerHasForce(ForcePlayer *player, f32 zero)" }
 "player_at" = { evidence = "landed", signature = "static inline SharedPlayer_func_802283B8_de *player_at(World_func_802283B8_de *world, u32 index)" }
 "pool_alloc" = { evidence = "landed", signature = "static inline void *pool_alloc(s32 arg1)" }
 "post_lines" = { evidence = "landed", signature = "static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target)" }
@@ -10214,6 +10215,9 @@ schema = 1
 "Font_func_80257360_de" = { declaration = "typedef struct Font_func_80257360_de Font_func_80257360_de;", evidence = "authored" }
 "Font_func_8040F160_de" = { declaration = "struct Font_func_8040F160_de { char pad[8]; Glyph glyphs[1]; };", evidence = "authored" }
 "Footprint" = { declaration = "typedef struct Footprint Footprint;", evidence = "authored" }
+"ForceBody" = { declaration = "typedef struct { u8 pad0[8]; Vec3 position; u8 pad14[8]; Vec3 velocity; u8 pad28[0x14C]; Vec3 direction; } ForceBody;", evidence = "authored" }
+"ForcePlayer" = { declaration = "typedef struct ForcePlayer ForcePlayer;", evidence = "authored" }
+"ForcePlayerList" = { declaration = "typedef struct { u8 pad0[0x20]; ForcePlayer *head; } ForcePlayerList;", evidence = "authored" }
 "Format" = { declaration = "struct Format { s32 word[13]; };", evidence = "authored" }
 "FourPlayerResultsScreen" = { declaration = "struct FourPlayerResultsScreen { char pad0[8]; struct ResultsPlayerPanel panels[4]; char pad1348[0x1358 - 0x1348]; s32 state; char pad135C[0x1370 - 0x135C]; char badges[4][0xC0]; };", evidence = "authored" }
 "Frame" = { declaration = "typedef struct Frame Frame;", evidence = "authored" }

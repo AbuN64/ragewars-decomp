@@ -461,7 +461,7 @@ segments:
       - [0x28FAC, c, "func_802282EC_de"]
       - [0x29078, c, "func_802283B8_de"]
       - [0x29A84, asm, "func_80228E60_eu"]
-      - [0x29C04, asm, "func_80228DC4_de"]
+      - [0x29C04, c, "func_80228DC4_de"]
       - [0x29DF8, c, "func_80228FB8_de"]
       - [0x2A654, asm, "func_80229814_de"]
       - [0x2A8C0, c, "func_80229A80_de"]
