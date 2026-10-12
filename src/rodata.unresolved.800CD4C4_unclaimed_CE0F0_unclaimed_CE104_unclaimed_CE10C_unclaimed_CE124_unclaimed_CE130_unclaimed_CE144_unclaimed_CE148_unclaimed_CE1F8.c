@@ -1,3 +1,3 @@
-unsigned int D_auto_rodata_unresolved_800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C_unclaimed_CE124_unclaimed_CE130_unclaimed_CE144_unclaimed_CE148_unclaimed_CE1F8[3] = {
+unsigned int D_d0_62e229ffc1fc3857[3] = {
     0x00204870, 0x801044F8, 0x00005212,
 };
