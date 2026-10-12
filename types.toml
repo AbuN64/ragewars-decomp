@@ -1648,6 +1648,7 @@ schema = 1
 "func_802683E0_de" = { evidence = "landed", signature = "void func_802683E0_de(char *arg0, s32 arg1, s32 arg2, Triple_func_802683E0_de arg3, struct Shape_func_802764D4_de_2 arg6)" }
 "func_802684B8_de" = { evidence = "landed", signature = "void func_802684B8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6)" }
 "func_802684E8_de" = { evidence = "landed", signature = "void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6)" }
+"func_8026851C_de" = { evidence = "landed", signature = "void func_8026851C_de(Source_func_8026851C_de *source, Host_func_8026851C_de *host, s32 unused, Spawn spawn)" }
 "func_802686EC_de" = { evidence = "landed", signature = "s32 func_802686EC_de(s32 arg0, Input80216D3C *arg1, s32 arg2, Triple arg3, Extra arg6)" }
 "func_80268864_de" = { evidence = "landed", signature = "void func_80268864_de(void *unused, u8 *object, s32 third, struct Shape_func_802764D4_de_2 pair, s32 fifth, s32 sixth)" }
 "func_802688AC_de" = { evidence = "landed", signature = "void func_802688AC_de(void *unused, u8 *object, s32 third, struct Shape_func_802764D4_de_2 pair)" }
@@ -12623,6 +12624,7 @@ schema = 1
 "Vec3" = { declaration = "typedef struct Vec3 Vec3;", evidence = "authored" }
 "Vec3Words" = { declaration = "struct Vec3Words { s32 w[3]; };", evidence = "authored" }
 "Vec3_func_802168B8_de" = { declaration = "struct Vec3_func_802168B8_de { s32 unk0; s32 unk4; f32 x; f32 y; f32 z; };", evidence = "authored" }
+"Vec3f" = { declaration = "typedef Vec3 Vec3f;", evidence = "authored" }
 "Vec4s" = { declaration = "typedef struct Vec4s Vec4s;", evidence = "authored" }
 "Vector4f" = { declaration = "typedef struct Vector4f Vector4f;", evidence = "authored" }
 "VectorPair" = { declaration = "struct VectorPair { Vec3 first; Vec3 second; char pad[8]; };", evidence = "authored" }

@@ -1438,7 +1438,7 @@ segments:
       - [0x68FD8, c, "func_802683E0_de"]
       - [0x690B0, c, "func_802684B8_de"]
       - [0x690E0, c, "func_802684E8_de"]
-      - [0x69114, asm, "func_8026851C_de"]
+      - [0x69114, c, "func_8026851C_de"]
       - [0x692D4, c, "func_802686EC_de"]
       - [0x69350, asm, "func_80268768_de"]
       - [0x6944C, c, "func_80268864_de"]

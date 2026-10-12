@@ -3,6 +3,10 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_802624A0.h"
+#include "types.h"
 struct RangeNode;
 /* unbake published declaration: published_0e61783fc3cf6252fb94c2ca */
 typedef struct RangeNode RangeNode;
@@ -221,5 +225,8 @@ struct func_802689BC_S2 {
     char pad0[0x270];
     char unk270;
 };
+
+typedef Vec3 Vec3f;
+extern Effect_func_80262A9C_de *func_802627A0_de(void *system, s32 kind, s32 id, Vec3 position, f32 arg4, Vec3 velocity, Vec3 scale, s32 *arg11);
 
 #endif
