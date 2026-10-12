@@ -3866,6 +3866,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA5D0"
+segment = "span_C76B0"
+members = ["src/ragewars_resident_strings_CB1D0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA60C"
 segment = "span_C76B0"
 members = ["src/rw_text_80294F1C_us_rev1_CB20C_us_rev1.c"]
@@ -44287,6 +44295,17 @@ group = "data_800CA270"
 members = ["src/ragewars_resident_strings_CAE70_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 withheld = ["de", "eu", "eu-x", "us"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_resident_strings_CB1D0_us_rev1.c"
+kind = "data"
+group = "data_800CA5D0"
+members = ["src/ragewars_resident_strings_CB1D0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
 add = []
