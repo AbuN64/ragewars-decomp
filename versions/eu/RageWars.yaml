@@ -3732,7 +3732,7 @@ segments:
       - [0xC91E4, data, "data/unresolved/800C85E4"]
       - [0xC91F0, rodata, "src/rw_formats_802BB0F0_CD850_us_rev1.c"]
       - [0xC91F3, data, "rodata/unresolved/800C85F3"]
-      - [0xC91F4, rodata, "src/ragewars_resident_strings_CD854_us_rev1.c"]
+      - [0xC91F4, .rodata, "src/ragewars_resident_strings_CD854_us_rev1.c"]
       - [0xC9204, .data, "rodata/unresolved/800C8604"]
       - [0xC92E0, rodata, "src/rw_text_802BD430_CD940_us_rev1.c"]
       - [0xC92E6, data, "rodata/unresolved/800C86E6"]

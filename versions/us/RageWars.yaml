@@ -3702,7 +3702,7 @@ segments:
       - [0xC8514, data, "data/unresolved/800C7914"]
       - [0xC8520, rodata, "src/rw_formats_802BB0F0_CD850_us_rev1.c"]
       - [0xC8523, data, "rodata/unresolved/800C7923"]
-      - [0xC8524, rodata, "src/ragewars_resident_strings_CD854_us_rev1.c"]
+      - [0xC8524, .rodata, "src/ragewars_resident_strings_CD854_us_rev1.c"]
       - [0xC8534, .data, "rodata/unresolved/800C7934"]
       - [0xC8610, rodata, "src/rw_text_802BD430_CD940_us_rev1.c"]
       - [0xC8616, data, "rodata/unresolved/800C7A16"]
