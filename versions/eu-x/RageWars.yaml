@@ -4030,7 +4030,7 @@ segments:
       - [0xE9888, data, "rodata/unresolved/800E8C88"]
       - [0xE9890, rodata, "rodata/func_8041BE90_de/800EDAD0"]
       - [0xE9893, data, "rodata/unresolved/800E8C93"]
-      - [0xE9894, data, "data/unresolved/800E8C94"]
+      - [0xE9894, .data, "data/unresolved/800E8C94"]
       - [0xE98A0, .rodata, "src/rw_text_8041C610_E2090_us_rev1.c"]
       - [0xE98B2, data, "rodata/unresolved/800E8CB2"]
       - [0xE98B4, .rodata, "src/rw_text_8041C610_E20A4_us_rev1.c"]
