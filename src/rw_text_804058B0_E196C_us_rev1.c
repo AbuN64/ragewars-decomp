@@ -1,3 +1,3 @@
-const unsigned short D_auto_src_rw_text_804058B0_E196C_us_rev1[7] = {
+const unsigned short D_d1_110e933aa5c1861b[7] = {
     0x6469, 0x7370, 0x6C61, 0x7920, 0x6C69, 0x7374, 0x7300,
 };

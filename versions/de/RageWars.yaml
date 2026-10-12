@@ -3936,7 +3936,7 @@ segments:
       - [0xDD91B, data, "rodata/unresolved/800DCD1B"]
       - [0xDD91C, .rodata, "src/rw_text_804058B0_E194C_us_rev1.c"]
       - [0xDD93B, data, "rodata/unresolved/800DCD3B"]
-      - [0xDD93C, rodata, "src/rw_text_804058B0_E196C_us_rev1.c"]
+      - [0xDD93C, .rodata, "src/rw_text_804058B0_E196C_us_rev1.c"]
       - [0xDD94A, data, "rodata/unresolved/800DCD4A"]
       - [0xDD94C, rodata, "src/rw_text_804058B0_E197C_us_rev1.c"]
       - [0xDD951, data, "rodata/unresolved/800DCD51"]

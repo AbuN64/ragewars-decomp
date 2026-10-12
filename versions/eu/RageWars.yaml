@@ -3924,7 +3924,7 @@ segments:
       - [0xEDF9B, data, "rodata/unresolved/800ED39B"]
       - [0xEDF9C, .rodata, "src/rw_text_804058B0_E194C_us_rev1.c"]
       - [0xEDFBB, data, "rodata/unresolved/800ED3BB"]
-      - [0xEDFBC, rodata, "src/rw_text_804058B0_E196C_us_rev1.c"]
+      - [0xEDFBC, .rodata, "src/rw_text_804058B0_E196C_us_rev1.c"]
       - [0xEDFCA, data, "rodata/unresolved/800ED3CA"]
       - [0xEDFCC, rodata, "src/rw_text_804058B0_E197C_us_rev1.c"]
       - [0xEDFD1, data, "rodata/unresolved/800ED3D1"]
