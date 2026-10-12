@@ -3480,7 +3480,7 @@ schema = 1
 "func_8041DFC0_us_rev1" = { evidence = "landed", signature = "s32 func_8041DFC0_us_rev1(void *arg0)" }
 "func_8041E100_de" = { evidence = "landed", signature = "s32 func_8041E100_de(void *arg0, void *arg1, void *arg2, s32 event)" }
 "func_8041E280_de" = { evidence = "landed", signature = "s32 func_8041E280_de(void *arg0, void *arg1, void *arg2, s32 event)" }
-"func_8041E408_de" = { evidence = "declared", signature = "void func_8041E408_de(s32)" }
+"func_8041E408_de" = { evidence = "landed", signature = "void func_8041E408_de(s32 index)" }
 "func_8041E5F8_de" = { evidence = "authored", signature = "void func_8041E5F8_de()" }
 "func_8041E720_de" = { evidence = "landed", signature = "s32 func_8041E720_de(void)" }
 "func_8041E81C_de" = { evidence = "landed", signature = "void func_8041E81C_de(s32 count, s32 level)" }
@@ -8310,7 +8310,8 @@ schema = 1
 "D_800DF4C4" = { declaration = "extern s32 D_800DF4C4;", evidence = "authored" }
 "D_800DF520" = { declaration = "extern int D_800DF520;", evidence = "authored" }
 "D_800DF544" = { declaration = "extern TextEntry D_800DF544[];", evidence = "authored" }
-"D_800DF964" = { declaration = "extern void * D_800DF964[];", evidence = "authored" }
+"D_800DF740" = { declaration = "extern RequestDrawPair D_800DF740[];", evidence = "authored" }
+"D_800DF964" = { declaration = "extern int D_800DF964[];", evidence = "authored" }
 "D_800DFA02" = { declaration = "extern u16 D_800DFA02[][56];", evidence = "authored" }
 "D_800E01B0_de" = { declaration = "extern int D_800E01B0_de[];", evidence = "authored" }
 "D_800E0286" = { declaration = "extern int D_800E0286[];", evidence = "authored" }
@@ -11314,6 +11315,8 @@ schema = 1
 "RenderState" = { declaration = "typedef struct RenderState { union { RenderView views[4]; Display display; } ring; char pad500[0x2688C]; char settings[0x28]; s32 handle; char pad26DB8[0x10]; s32 enabled, field26DCC, field26DD0, field26DD4; } RenderState;", evidence = "authored" }
 "RenderView" = { declaration = "typedef struct RenderView { char pad00[0xF0]; s16 kind; char padF2[0x1E]; void *buffer; char pad114[0x18]; struct RenderView *previous, *next; char pad134[0xC]; } RenderView;", evidence = "authored" }
 "Request" = { declaration = "struct Request { s16 type; };", evidence = "authored" }
+"RequestDrawPair" = { declaration = "typedef struct RequestDrawPair { s32 first, second; } RequestDrawPair;", evidence = "authored" }
+"RequestDrawScreen" = { declaration = "typedef struct RequestDrawScreen { char pad0[8]; void *roots[3]; s32 selected; s32 timer; s32 count; } RequestDrawScreen;", evidence = "authored" }
 "Request_func_80251F6C_de" = { declaration = "struct Request_func_80251F6C_de { struct Node_func_80251F6C_de *node; struct Node_func_80251F6C_de *extra; s32 key; s32 priority; s32 flags; void *unk14; void *owner; s32 mode; void *unk20; struct Request_func_80251F6C_de *next; };", evidence = "authored" }
 "Request_func_802524B0_de" = { declaration = "typedef struct Request_func_802524B0_de Request_func_802524B0_de;", evidence = "authored" }
 "Request_func_80252774_de" = { declaration = "struct Request_func_80252774_de { struct Node_func_80252774_de *node; s32 pad4; s32 key; s32 priority; };", evidence = "authored" }

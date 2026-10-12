@@ -1,6 +1,8 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8041DF04_H
 #define UNBAKE_SPAN_16E000_CODE_8041DF04_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
 /* unbake published declaration: published_05d9a0171aff75229b03d695 */
 extern s32 func_8041EAC4_de();
 
@@ -55,5 +57,16 @@ struct Menu_func_8041EE08_de {
 
 /* unbake published declaration: published_f42be910a42c1586cb9bed0e */
 extern s32 func_8041EB50_de();
+
+typedef struct RequestDrawScreen {
+    char pad0[8];
+    void *roots[3];
+    s32 selected;
+    s32 timer;
+    s32 count;
+} RequestDrawScreen;
+typedef struct RequestDrawPair { s32 first, second; } RequestDrawPair;
+extern s32 func_8041EC44_de(s32, s32);
+extern RequestDrawPair D_800DF740[];
 
 #endif

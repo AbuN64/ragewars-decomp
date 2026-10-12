@@ -4777,7 +4777,7 @@ segments:
       - [0x181F04, c, "func_8041DE94_de"]
       - [0x181FB4, data, "func_8041DFB4_us_padding_181FB4"]
       - [0x181FC0, asm, "func_8041DFC0_us"]
-      - [0x182478, asm, "func_8041E408_de"]
+      - [0x182478, c, "func_8041E408_de"]
       - [0x182668, asm, "func_8041E5F8_de"]
       - [0x182790, c, "func_8041E720_de"]
       - [0x18288C, c, "func_8041E81C_de"]

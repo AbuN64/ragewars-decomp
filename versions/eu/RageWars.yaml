@@ -4749,7 +4749,7 @@ segments:
       - [0x194394, data, "func_8041E394_eu_padding_194394"]
       - [0x1943A0, asm, "func_8041E3A0_eu"]
       - [0x194550, c, "func_8041E100_de"]
-      - [0x194878, asm, "func_8041E408_de"]
+      - [0x194878, c, "func_8041E408_de"]
       - [0x194A90, asm, "func_8041E5F8_de"]
       - [0x194BB8, c, "func_8041E720_de"]
       - [0x194CB4, asm, "func_8041E81C_de"]
