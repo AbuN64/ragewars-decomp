@@ -1222,7 +1222,7 @@ schema = 1
 "func_80253F8C_de" = { evidence = "landed", signature = "void func_80253F8C_de(s32 arg0, s32 arg1)" }
 "func_802540F4_de" = { evidence = "landed", signature = "void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4)" }
 "func_80254284_de" = { evidence = "landed", signature = "s32 func_80254284_de(s32 arg0, void **arg1, s32 arg2, void *arg3)" }
-"func_80254408_de" = { evidence = "landed", signature = "void **func_80254408_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6)" }
+"func_80254408_de" = { evidence = "landed", signature = "void **func_80254408_de(s32 arg0, void *arg1, s32 arg2, s32 arg3, void *arg4, void *arg5, void *arg6)" }
 "func_80254480_de" = { evidence = "landed", signature = "struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2)" }
 "func_80254600_de" = { evidence = "landed", signature = "struct Shape_typemap_165 *func_80254600_de(s32 arg0, s32 arg1, s32 arg2)" }
 "func_8025476C_de" = { evidence = "landed", signature = "void func_8025476C_de(unsigned int value)" }
@@ -1980,7 +1980,7 @@ schema = 1
 "func_80286AA8_de" = { evidence = "landed", signature = "void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2)" }
 "func_8028787C_de" = { evidence = "landed", signature = "void func_8028787C_de(World_func_8028787C_de *world, Entity *entity)" }
 "func_80287F18_de" = { evidence = "authored", signature = "void func_80287F18_de(void *)" }
-"func_80288470_de" = { evidence = "authored", signature = "void func_80288470_de(void *)" }
+"func_80288470_de" = { evidence = "landed", signature = "void func_80288470_de(DraftStreamWorld *world)" }
 "func_80288EA8_de" = { evidence = "landed", signature = "void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera)" }
 "func_80289084_de" = { evidence = "declared", signature = "void func_80289084_de(char *, char *)" }
 "func_802897B4_de" = { evidence = "landed", signature = "void func_802897B4_de(World37 *world, Vec3 *point, Item37 **output, s32 *total)" }
@@ -2262,6 +2262,7 @@ schema = 1
 "func_80295FB4_us_rev1" = { evidence = "landed", signature = "void func_80295FB4_us_rev1(s32 *output, void **resource, s32 frame, s32 secondary, s32 scaleS, s32 scaleT, s32 wrapS, s32 wrapT, s32 mode)" }
 "func_80295FF4_de" = { evidence = "landed", signature = "void func_80295FF4_de(void)" }
 "func_80296004_de" = { evidence = "landed", signature = "void func_80296004_de(unsigned int value)" }
+"func_80296020_de" = { evidence = "authored", signature = "void func_80296020_de(void *, s32, s32, DraftStreamData *, Vec3 *)" }
 "func_802962A8_de" = { evidence = "landed", signature = "s32 func_802962A8_de(Board *arg0, s32 arg1, s32 arg2)" }
 "func_80296390_de" = { evidence = "landed", signature = "int func_80296390_de(Board*g,int x,int y,int z)" }
 "func_80296474_de" = { evidence = "landed", signature = "void func_80296474_de(Obj5 *arg0, s32 x, s32 y)" }
@@ -6723,6 +6724,7 @@ schema = 1
 "D_800C5208" = { declaration = "extern float D_800C5208;", evidence = "authored" }
 "D_800C520C" = { declaration = "extern float D_800C520C;", evidence = "authored" }
 "D_800C5210_de" = { declaration = "extern char D_800C5210_de[];", evidence = "authored" }
+"D_800C5220_de" = { declaration = "extern char D_800C5220_de[];", evidence = "authored" }
 "D_800C5240_de" = { declaration = "extern double D_800C5240_de;", evidence = "authored" }
 "D_800C5248" = { declaration = "extern float D_800C5248;", evidence = "authored" }
 "D_800C524C" = { declaration = "extern float D_800C524C;", evidence = "authored" }
@@ -8776,6 +8778,7 @@ schema = 1
 "D_800FEB8D" = { declaration = "extern char D_800FEB8D[];", evidence = "authored" }
 "D_800FF140_de" = { declaration = "extern int D_800FF140_de[];", evidence = "authored" }
 "D_800FF1B0_de" = { declaration = "extern struct UnitVtx D_800FF1B0_de[];", evidence = "authored" }
+"D_800FF200" = { declaration = "extern DraftStreamPair D_800FF200;", evidence = "authored" }
 "D_800FF224_de" = { declaration = "extern f32 D_800FF224_de;", evidence = "authored" }
 "D_800FF238" = { declaration = "extern int D_800FF238;", evidence = "authored" }
 "D_800FF24C" = { declaration = "extern s32 D_800FF24C[];", evidence = "authored" }
@@ -10085,6 +10088,14 @@ schema = 1
 "DoubleBits_8029ECB0" = { declaration = "typedef union DoubleBits_8029ECB0 DoubleBits_8029ECB0;", evidence = "authored" }
 "DraftAimPlayer" = { declaration = "typedef struct DraftAimPlayer { char pad0[8]; Vec3 position; char pad14[0x5C]; f32 height; char pad74[0x1D4]; Vec3 specialAim; char pad254[0x3DA]; s16 weapon; char pad630[0x10B0]; struct DraftAimPlayer *next; } DraftAimPlayer;", evidence = "authored" }
 "DraftAimWeapon" = { declaration = "typedef struct DraftAimWeapon { char pad0[0x1C]; f32 angle; } DraftAimWeapon;", evidence = "authored" }
+"DraftStreamCell" = { declaration = "typedef struct DraftStreamCell { f32 minX, minZ, maxX, maxZ; s32 occupied; } DraftStreamCell;", evidence = "authored" }
+"DraftStreamData" = { declaration = "typedef struct DraftStreamData { s32 count; } DraftStreamData;", evidence = "authored" }
+"DraftStreamEntry" = { declaration = "typedef struct DraftStreamEntry { DraftStreamHandle *resource; DraftStreamCell *cell; s16 x, z; } DraftStreamEntry;", evidence = "authored" }
+"DraftStreamHandle" = { declaration = "typedef struct DraftStreamHandle { DraftStreamData *data; } DraftStreamHandle;", evidence = "authored" }
+"DraftStreamPair" = { declaration = "typedef struct DraftStreamPair { f32 first, second; } DraftStreamPair;", evidence = "authored" }
+"DraftStreamTable" = { declaration = "typedef struct DraftStreamTable { s32 stride, count; union { f32 coordinates[1]; DraftStreamCell cells[1]; } data; } DraftStreamTable;", evidence = "authored" }
+"DraftStreamViewer" = { declaration = "typedef struct DraftStreamViewer { s32 pad0; struct DraftStreamViewer *next; char pad8[0x120]; Vec3 position; char pad134[0x234]; Vec3 minimum, maximum; } DraftStreamViewer;", evidence = "authored" }
+"DraftStreamWorld" = { declaration = "typedef struct DraftStreamWorld { char pad0[0x30]; s32 key; char pad34[0xC]; s32 resourceKey; char pad44[0x20]; void *table, *grid; char pad6C[0x20]; void *specialTable; char pad90[0x1470]; s32 entryCount, activeCount; DraftStreamEntry entries[128]; char pad1B08[0x19BA8]; DraftStreamHandle *special; char specialState[0x25C]; f32 originX, originZ, cellX, cellZ; char pad1B920[8]; s32 specialPresent, specialEnabled; } DraftStreamWorld;", evidence = "authored" }
 "Draw" = { declaration = "typedef struct Draw Draw;", evidence = "authored" }
 "DrawArgs" = { declaration = "typedef struct DrawArgs DrawArgs;", evidence = "authored" }
 "DrawArgs_func_8040E67C_de" = { declaration = "struct DrawArgs_func_8040E67C_de { s32 x; s32 y; s32 flags; f32 scaleX; f32 scaleY; s32 v[5]; };", evidence = "authored" }

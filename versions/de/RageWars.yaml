@@ -1681,7 +1681,7 @@ segments:
       - [0x8847C, c, "func_8028787C_de"]
       - [0x8858C, asm, "func_8028798C_de"]
       - [0x88B18, asm, "func_80287F18_de"]
-      - [0x89070, asm, "func_80288470_de"]
+      - [0x89070, c, "func_80288470_de"]
       - [0x89538, asm, "func_80288938_de"]
       - [0x89AA8, c, "func_80288EA8_de"]
       - [0x89C84, asm, "func_80289084_de"]

@@ -6,6 +6,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
+#include "common/types_8a8189af7b05.h"
 struct Scene_func_8028B028_de;
 /* unbake published declaration: published_071d490f65b9ae384b2faaa5 */
 typedef struct Scene_func_8028B028_de Scene_func_8028B028_de;
@@ -267,5 +268,37 @@ typedef struct Bounds2D37 { f32 minX,minZ,maxX,maxZ; } Bounds2D37;
 typedef struct Resource37 { void *data; } Resource37;
 typedef struct Region37 { Resource37 *resource; Bounds2D37 *bounds; s32 flags; } Region37;
 typedef struct World37 { u8 pad0[0x1504]; s32 count; Region37 regions[1]; } World37;
+
+typedef struct DraftStreamCell { f32 minX, minZ, maxX, maxZ; s32 occupied; } DraftStreamCell;
+typedef struct DraftStreamTable {
+    s32 stride, count;
+    union { f32 coordinates[1]; DraftStreamCell cells[1]; } data;
+} DraftStreamTable;
+typedef struct DraftStreamData { s32 count; } DraftStreamData;
+typedef struct DraftStreamHandle { DraftStreamData *data; } DraftStreamHandle;
+typedef struct DraftStreamEntry {
+    DraftStreamHandle *resource; DraftStreamCell *cell; s16 x, z;
+} DraftStreamEntry;
+typedef struct DraftStreamViewer {
+    s32 pad0; struct DraftStreamViewer *next;
+    char pad8[0x120]; Vec3 position;
+    char pad134[0x234]; Vec3 minimum, maximum;
+} DraftStreamViewer;
+typedef struct DraftStreamWorld {
+    char pad0[0x30]; s32 key;
+    char pad34[0xC]; s32 resourceKey;
+    char pad44[0x20]; void *table, *grid;
+    char pad6C[0x20]; void *specialTable;
+    char pad90[0x1470]; s32 entryCount, activeCount;
+    DraftStreamEntry entries[128];
+    char pad1B08[0x19BA8]; DraftStreamHandle *special;
+    char specialState[0x25C];
+    f32 originX, originZ, cellX, cellZ;
+    char pad1B920[8]; s32 specialPresent, specialEnabled;
+} DraftStreamWorld;
+typedef struct DraftStreamPair { f32 first, second; } DraftStreamPair;
+extern DraftStreamPair D_800FF200;
+extern char D_800C5220_de[];
+extern void func_80296020_de(void *, s32, s32, DraftStreamData *, Vec3 *);
 
 #endif
