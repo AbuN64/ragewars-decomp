@@ -3864,7 +3864,7 @@ segments:
       - [0xCDB10, rodata, "src/rw_pool_802BF514_CDB10_us_rev1.c"]
       - [0xCDB20, rodata, "src/rw_pool_802BF67C_CDB20_us_rev1.c"]
       - [0xCDB24, rodata, "src/rw_pool_802BF804_CDB24_us_rev1.c"]
-      - [0xCDB28, rodata, "src/rw_pool_802BFAAC_CDB28_us_rev1.c"]
+      - [0xCDB28, .rodata, "src/rw_pool_802BFAAC_CDB28_us_rev1.c"]
       - [0xCDB38, rodata, "src/rw_pool_802C0044_CDB38_us_rev1.c"]
       - [0xCDB48, data, "rodata/unresolved/800CCF48"]
       - [0xCDB50, .data, "src/ragewars_u64_combined_bitwidth_us_rev1.c"]
