@@ -1,22 +1,13 @@
 #include "types.h"
-typedef struct TimingQueue TimingQueue;
-typedef struct TimingWorld {
- char pad0[0x25B5C]; TimingQueue *unk25B5C;
- char pad25B60[0x1250]; f32 unk26DB0;
- char pad26DB4[4]; u32 unk26DB8,unk26DBC;
- char pad26DC0[1]; u8 unk26DC1;
- char pad26DC2[0x12]; s32 unk26DD4;
-} TimingWorld;
-extern u64 func_802BADC0_de(void);
-extern u64 func_802C0DA0_de(u64,u64);
-extern s32 func_802A23B4_de(void),func_802934F8_de(void),func_80245798_de(void),func_80245B0C_de(void),func_80245850_de(void);
-extern s32 func_80442A28_de(TimingQueue **);
-extern void func_80253344_de(s32),func_80292308_de(TimingWorld *),func_80293C34_de(TimingWorld *),func_804037D4_de(void);
-extern u64 D_801428A0;
-extern u32 D_8011B9F8,D_801428AC,D_80142C34,D_80142CA4;
-extern s32 D_8011BDC0,D_80146CD8,D_801428A8,D_80142868,D_80154048,D_800E28D4;
-extern f32 D_800C546C,D_800CA560,D_800D2988,D_80142C38[2];
-extern TimingQueue *D_8014561C;
+#include "common/data.h"
+#include "common/unused.h"
+#include "shared/func_8021E2A0_de_closed.h"
+#include "shared/func_802453D4_de_closed.h"
+#include "shared/func_804235A8_eu_closed.h"
+#include "shared/unsigned_quotient.h"
+#include "span_1000/code_80291054.h"
+#include "span_C76B0/data.h"
+struct Frame;
 static inline u32 averageFour(void) {
  s32 sum;
  s32 maximum;

@@ -5,6 +5,8 @@
 #include "gfx.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_8028DF6C.h"
+#include "common/types_8fd754e1e915.h"
+#include "span_16E000/code_8043F69C.h"
 struct Display;
 /* unbake published declaration: published_0fd98bf960b45acfd833434e */
 typedef struct Display Display;
@@ -177,5 +179,30 @@ extern void func_802B6B80_de(s32 *);
 extern void func_80445074_eu(void *);
 extern void func_8044DC60_de(void *);
 extern void func_80293054_de(Display *);
+
+typedef struct Node_func_80442A28_de TimingQueue;
+typedef struct TimingWorld {
+ char pad0[0x25B5C]; TimingQueue *unk25B5C;
+ char pad25B60[0x1250]; f32 unk26DB0;
+ char pad26DB4[4]; u32 unk26DB8,unk26DBC;
+ char pad26DC0[1]; u8 unk26DC1;
+ char pad26DC2[0x12]; s32 unk26DD4;
+} TimingWorld;
+extern u64 func_802BADC0_de(void);
+extern s32 func_80245B0C_de(void);
+extern u32 func_80245850_de(void);
+extern s32 func_80442A28_de(struct Node_func_80442A28_de **);
+extern void func_80253344_de(s32);
+extern void func_80292308_de(TimingWorld *);
+extern void func_80293C34_de(void *);
+extern void func_804037D4_de(void);
+extern u32 D_8011B9F8;
+extern u32 D_801428AC;
+extern u32 D_80142C34;
+extern u32 D_80142CA4;
+extern struct Frame *D_8011BDC0;
+extern struct Frame *D_80146CD8;
+extern f32 D_80142C38[2];
+extern TimingQueue *D_8014561C;
 
 #endif
