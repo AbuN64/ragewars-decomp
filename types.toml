@@ -90,6 +90,7 @@ schema = 1
 "exp_inline" = { evidence = "landed", signature = "static inline f64 exp_inline(f64 x)" }
 "fabsf" = { evidence = "authored", signature = "float fabsf(float)" }
 "fade_rate" = { evidence = "landed", signature = "static inline f32 fade_rate(Track *track,f32 time,f32 rate)" }
+"fetch" = { evidence = "landed", signature = "static inline s32 fetch(u8 **app)" }
 "fill" = { evidence = "landed", signature = "static inline void fill(void *dst, u8 value, s32 n)" }
 "find" = { evidence = "landed", signature = "static inline s32 find(Table_func_8028B274_de *table,u16 id)" }
 "findNote" = { evidence = "landed", signature = "static inline s32 findNote(s32 ch, s32 *found)" }
@@ -2556,6 +2557,7 @@ schema = 1
 "func_802A5AD0_de" = { evidence = "landed", signature = "void func_802A5AD0_de(void *arg0)" }
 "func_802A5B4C_de" = { evidence = "landed", signature = "void func_802A5B4C_de(f32 *arg0)" }
 "func_802A5B84_de" = { evidence = "landed", signature = "void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4)" }
+"func_802A5BE4_de" = { evidence = "declared", signature = "void func_802A5BE4_de(void *, Vec3, Vec3, s32, s32)" }
 "func_802A5D38_de" = { evidence = "landed", signature = "void func_802A5D38_de(void *arg0, s32 arg1)" }
 "func_802A5E08_de" = { evidence = "landed", signature = "void func_802A5E08_de(Owner802A6DF8 *owner)" }
 "func_802A5EE0_de" = { evidence = "landed", signature = "void func_802A5EE0_de(void *arg0)" }
@@ -3355,7 +3357,9 @@ schema = 1
 "func_80414360_de" = { evidence = "landed", signature = "void func_80414360_de(void)" }
 "func_80414384_de" = { evidence = "landed", signature = "void func_80414384_de(void)" }
 "func_804143B0_de" = { evidence = "authored", signature = "double func_804143B0_de()" }
+"func_80414400_de" = { evidence = "authored", signature = "s32 func_80414400_de(u8 *buf, f64 value, s32 ch, s32 width, s32 prec)" }
 "func_804147F0_eu_x" = { evidence = "authored", signature = "double func_804147F0_eu_x()" }
+"func_80414CCC_de" = { evidence = "landed", signature = "s32 func_80414CCC_de(u8 *out, u8 *fmt0, u8 *ap)" }
 "func_80415C1C_de" = { evidence = "landed", signature = "void func_80415C1C_de(s32 arg0)" }
 "func_80415C90_de" = { evidence = "landed", signature = "void func_80415C90_de(f32 x, f32 y, f32 w, f32 h, u32 col0, u32 col1, u32 col2, u32 col3)" }
 "func_80416CF4_de" = { evidence = "landed", signature = "void func_80416CF4_de(int mode)" }
@@ -4360,6 +4364,7 @@ schema = 1
 "overlaps" = { evidence = "landed", signature = "static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max)" }
 "packAppend" = { evidence = "landed", signature = "static inline char *packAppend(Pack *pack,void *prepare,s32 size)" }
 "packMtx" = { evidence = "landed", signature = "static inline void packMtx(u32 *out, PoseMatrix m)" }
+"pad" = { evidence = "landed", signature = "static inline void pad(u8 **pp, s32 howmany, const u8 *with)" }
 "pak27" = { evidence = "landed", signature = "static inline void *pak27(s32 ch)" }
 "path_length" = { evidence = "landed", signature = "static inline s32 path_length(u8 *s)" }
 "pick" = { evidence = "landed", signature = "static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group)" }
@@ -4369,6 +4374,7 @@ schema = 1
 "pool_alloc" = { evidence = "landed", signature = "static inline void *pool_alloc(s32 arg1)" }
 "post_lines" = { evidence = "landed", signature = "static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target)" }
 "project" = { evidence = "landed", signature = "static __inline__ Vec3 project(Vec3 *arg0, Vec3 *arg1)" }
+"put" = { evidence = "landed", signature = "static inline void put(u8 **pp, const u8 *p, s32 len)" }
 "put_vertex" = { evidence = "landed", signature = "static inline void put_vertex(s32 index, s32 x, s32 y, u32 color)" }
 "quad_normal" = { evidence = "landed", signature = "static inline void quad_normal(struct Quad *quad)" }
 "quatToMtx" = { evidence = "landed", signature = "static inline void quatToMtx(PoseMatrix m, Vector4f *q, Vec3 *t)" }
@@ -4425,6 +4431,7 @@ schema = 1
 "trackRot" = { evidence = "landed", signature = "static inline void trackRot(Shared_PoseTrack *t, s32 i, Vector4f *out, s32 slerp)" }
 "try_jump" = { evidence = "landed", signature = "static inline s32 try_jump(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_de *body)" }
 "twistPart" = { evidence = "landed", signature = "static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i)" }
+"ultoa" = { evidence = "landed", signature = "static inline u8 *ultoa(u32 val, u8 *endp, s32 base, s32 octzero, const u8 *xdigs)" }
 "unlock" = { evidence = "landed", signature = "static inline void unlock(void)" }
 "unref" = { evidence = "landed", signature = "static inline void unref(Node_func_80251F6C_de *node)" }
 "unsignedDouble" = { evidence = "landed", signature = "static __inline__ f64 unsignedDouble(u32 value,const f64 *bias)" }
@@ -8226,6 +8233,9 @@ schema = 1
 "D_800DD1A8_de" = { declaration = "extern double D_800DD1A8_de;", evidence = "authored" }
 "D_800DD1B0" = { declaration = "extern double D_800DD1B0;", evidence = "authored" }
 "D_800DD1B8" = { declaration = "extern double D_800DD1B8;", evidence = "authored" }
+"D_800DD1C8" = { declaration = "extern const u8 D_800DD1C8[];", evidence = "authored" }
+"D_800DD1DC" = { declaration = "extern const u8 D_800DD1DC[];", evidence = "authored" }
+"D_800DD1F0" = { declaration = "extern const u8 D_800DD1F0[];", evidence = "authored" }
 "D_800DD360" = { declaration = "extern float D_800DD360;", evidence = "authored" }
 "D_800DD368" = { declaration = "extern float D_800DD368;", evidence = "authored" }
 "D_800DD370_de" = { declaration = "extern float D_800DD370_de;", evidence = "authored" }
@@ -8371,6 +8381,8 @@ schema = 1
 "D_800DEA6C" = { declaration = "extern int D_800DEA6C;", evidence = "authored" }
 "D_800DEAD4" = { declaration = "extern int D_800DEAD4[];", evidence = "authored" }
 "D_800DEAD8" = { declaration = "extern s32 D_800DEAD8[][13];", evidence = "authored" }
+"D_800DF230_de" = { declaration = "extern const u8 D_800DF230_de[];", evidence = "authored" }
+"D_800DF240" = { declaration = "extern const u8 D_800DF240[];", evidence = "authored" }
 "D_800DF254" = { declaration = "extern Texture *D_800DF254;", evidence = "authored" }
 "D_800DF258" = { declaration = "extern s32 D_800DF258;", evidence = "authored" }
 "D_800DF25C" = { declaration = "extern s32 D_800DF25C;", evidence = "authored" }

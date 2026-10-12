@@ -100,4 +100,11 @@ extern s32 D_800DF26C_de;
 extern s32 func_804136D8_de(u8 *);
 extern s32 func_8041737C_de(s32, void *);
 
+extern const u8 D_800DD1C8[];
+extern const u8 D_800DD1DC[];
+extern const u8 D_800DD1F0[];
+extern const u8 D_800DF230_de[];
+extern const u8 D_800DF240[];
+extern s32 func_80414400_de(u8 *buf, f64 value, s32 ch, s32 width, s32 prec);
+
 #endif

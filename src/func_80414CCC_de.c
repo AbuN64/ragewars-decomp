@@ -1,13 +1,9 @@
 #include "types.h"
 #include <common/gnu_va_arg.h>
+#include "resident_event_handler.h"
+#include "span_1000/code_802A0888.h"
+#include "span_16E000/code_804143D8.h"
 
-extern const u8 D_800DD1C8[];
-extern const u8 D_800DD1DC[];
-extern const u8 D_800DD1F0[];
-extern const u8 D_800DF230_de[];
-extern const u8 D_800DF240[];
-extern s32 func_80414400_de(u8 *buf, f64 value, s32 ch, s32 width, s32 prec);
-extern u8 *func_802A07DC_de(u8 *arg0, s32 arg1, s32 arg2);
 extern s32 func_802A0238_de(u8 *arg0);
 
 static inline void put(u8 **pp, const u8 *p, s32 len) {
@@ -78,7 +74,8 @@ static inline u8 *ultoa(u32 val, u8 *endp, s32 base, s32 octzero, const u8 *xdig
     return cp;
 }
 
-s32 func_80414CCC_de(u8 *out, u8 *fmt, u8 *ap) {
+s32 func_80414CCC_de(u8 *out, u8 *fmt0, u8 *ap) {
+    u8 *fmt;
     u8 ch;
     s32 n;
     s32 flags;
@@ -100,6 +97,7 @@ s32 func_80414CCC_de(u8 *out, u8 *fmt, u8 *ap) {
     ulval = 0;
     uqval = 0;
     xdigs = 0;
+    fmt = fmt0;
     ret = 0;
     for (;;) {
         for (cp = fmt; (ch = *fmt) != 0 && ch != '%'; fmt++) {
@@ -189,32 +187,37 @@ reswitch:
             flags |= 2;
         case 'd':
         case 'i':
-            if (flags & 4) {
-                uqval = VA(ap, int);
-                if ((s32)uqval < 0) {
-                    uqval = -uqval;
-                    sign = '-';
+            /* Single-pass loops preserve the original GCC allocation weights. */
+            do {
+                if (flags & 4) {
+                    uqval = VA(ap, int);
+                    if ((s32)uqval < 0) {
+                        uqval = -uqval;
+                        sign = '-';
+                    }
+                } else {
+                    {
+                        u8 **q = &ap;
+                        switch (flags & 0xF) {
+                    case 1: case 2: case 4:
+                        ulval = VA(ap, long);
+                        break;
+                    case 8:
+                        ulval = (short)VA(ap, int);
+                        break;
+                    default:
+                        do { ulval = VA(*q, s32); } while (0);
+                        break;
+                        }
+                    }
+                    if ((s32)ulval < 0) {
+                        ulval = -ulval;
+                        sign = '-';
+                    }
                 }
-            } else {
-                { u8 **q = &ap;
- switch (flags & 0xF) {
-                case 1: case 2: case 4:
-                    ulval = VA(ap, long);
-                    break;
-                case 8:
-                    ulval = (short)VA(ap, int);
-                    break;
-                default:
-                    ulval = VA(*q, s32);
-                    break;
-                }}
-                if ((s32)ulval < 0) {
-                    ulval = -ulval;
-                    sign = '-';
-                }
-            }
-            base = 10;
-            goto number;
+                base = 10;
+                goto number;
+            } while (0);
         case 'g':
         case 'G':
             if (prec == 0) {
@@ -232,7 +235,11 @@ reswitch:
             if (prec == -1) {
                 prec = 6;
             }
-            dval = VA8(ap, f64);
+            {
+                u8 *aq = (u8 *)((((s32)ap + 7) & -8) + 8);
+                dval = *(f64 *)(aq - 8);
+                ap = aq;
+            }
             if (flags & 0x40) {
                 width = -width;
             }
@@ -266,8 +273,9 @@ reswitch:
             if (flags & 4) {
                 uqval = VA(ap, int);
             } else {
-                { u8 **q = &ap;
- switch (flags & 0xF) {
+                {
+                    u8 **q = &ap;
+                    switch (flags & 0xF) {
                 case 1: case 2: case 4:
                     ulval = VA(ap, long);
                     break;
@@ -277,7 +285,8 @@ reswitch:
                 default:
                     ulval = VA(*q, s32);
                     break;
-                }}
+                    }
+                }
             }
             base = 8;
             goto nosign;
@@ -314,8 +323,9 @@ reswitch:
             if (flags & 4) {
                 uqval = VA(ap, int);
             } else {
-                { u8 **q = &ap;
- switch (flags & 0xF) {
+                {
+                    u8 **q = &ap;
+                    switch (flags & 0xF) {
                 case 1: case 2: case 4:
                     ulval = VA(ap, long);
                     break;
@@ -325,7 +335,8 @@ reswitch:
                 default:
                     ulval = VA(*q, s32);
                     break;
-                }}
+                    }
+                }
             }
             base = 10;
             goto nosign;
@@ -338,8 +349,9 @@ hex:
             if (flags & 4) {
                 uqval = VA(ap, int);
             } else {
-                { u8 **q = &ap;
- switch (flags & 0xF) {
+                {
+                    u8 **q = &ap;
+                    switch (flags & 0xF) {
                 case 1: case 2: case 4:
                     ulval = VA(ap, long);
                     break;
@@ -349,7 +361,8 @@ hex:
                 default:
                     ulval = VA(*q, s32);
                     break;
-                }}
+                    }
+                }
             }
             base = 16;
             if (flags & 0x10) {
