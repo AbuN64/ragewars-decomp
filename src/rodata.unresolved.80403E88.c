@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_unresolved_80403E88[2] = {
+/* ROM-grounded data for us; supplied-list member has no us-rev1 placement. */
+unsigned int D_blob_95aee8159bbbf48fd370[2] = {
     0x74000000, 0x00940800,
 };

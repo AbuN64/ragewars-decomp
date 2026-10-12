@@ -4336,7 +4336,7 @@ segments:
       - [0x167D9C, c, "func_80403D9C_de"]
       - [0x167DE8, c, "func_80403DE8_de"]
       - [0x167E10, c, "func_80403E10_de"]
-      - [0x167E88, data, "rodata/unresolved/80403E88"]
+      - [0x167E88, .data, "rodata/unresolved/80403E88"]
       - [0x167E90, c, "func_80403E90_de"]
       - [0x168018, asm, "func_80404018_de"]
       - [0x1681E8, asm, "func_804041E8_de"]
