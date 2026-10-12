@@ -69,7 +69,9 @@ typedef void ( *Shared_func_802B3350_de_FuncPtr)(void *, signed int, void *);
 struct Obj_func_802B2F60_de;
 /* unbake published declaration: published_afb2437966459a5449d8f897 */
 struct Obj_func_802B2F60_de {
-    char pad3C[0x3C];
+    u8 padding000[0x14];
+    ALEventQueue events; /* 0x14 */
+    u8 padding028[0x14];
     s32 field3C;
     s32 field40;
 };

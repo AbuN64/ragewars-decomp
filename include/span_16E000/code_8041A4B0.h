@@ -2,14 +2,9 @@
 #define UNBAKE_SPAN_16E000_CODE_8041A4B0_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
-struct func_8041AA30_S1;
+
 /* unbake published declaration: published_0cadf267a46757814d80c32b */
-struct func_8041AA30_S1 {
-    char pad0[0x8];
-    void * unk8;
-    char pad8[0x54 - 0x8 - sizeof(void*)];
-    s32 unk54;
-};
+
 
 /* unbake published declaration: published_1c7c00c1bc3dc5c235997cf9 */
 extern void func_8041A520_de(void *target, const char *format, ...);
@@ -28,9 +23,9 @@ struct Menu_func_8041AD10_de {
 /* unbake published declaration: published_2030796def4cc2503e12d561 */
 extern s32 func_8041A724_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-struct func_8041AA30_S1;
+
 /* unbake published declaration: published_54f67a269fe45055356bdccb */
-typedef struct func_8041AA30_S1 func_8041AA30_S1;
+
 
 struct Key;
 struct Menu_func_8041AD34_de;

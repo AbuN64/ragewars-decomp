@@ -12,8 +12,6 @@ extern struct Pool_func_802627A0_de {
     char pad28[0x54 - 0x28];
     s32 table;
 } D_8011FE88;
-extern char D_800C4260_de;
-extern char D_800C4274_de;
 extern s32 func_8028FE28_de(s32, s32, s32);
 extern void **func_8025193C_de(s32, s32, s32, s32, s32, s32, s32, void *, s32);
 extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
@@ -28,15 +26,15 @@ extern void func_80255ED8_de(void *, Effect_func_80262A9C_de *);
 extern void func_80255CB8_de(void *, Effect_func_80262A9C_de *);
 extern void func_802466A0_de(Effect_func_80262A9C_de *, s32, s32, s32, s32, s32, s32, f32, Vec3, s32, Vec3, Vec3, s32);
 extern void func_8024B2D0_de(Effect_func_80262A9C_de *);
-static inline Effect_func_80262A9C_de *take_effect(void *scene, s32 *ref) {
+static inline Effect_func_80262A9C_de *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     Effect_func_80262A9C_de *effect;
-    if (D_8013B290 == 0 && (unsigned int)((func_80262ABC_S1 *)(scene))->unk5F14.count >= 3) {
+    if (D_8013B290 == 0 && (unsigned int)scene->activeEffects.count >= 3) {
         return 0;
     }
-    effect = ((func_80262ABC_S1 *)(scene))->unk5F00.head;
+    effect = scene->freeEffects.head;
     if (effect != 0) {
-        func_80255ED8_de(&((func_80262ABC_S1 *)(scene))->unk5F00, effect);
-        func_80255CB8_de(&((func_80262ABC_S1 *)(scene))->unk5F14, effect);
+        func_80255ED8_de(&scene->freeEffects, effect);
+        func_80255CB8_de(&scene->activeEffects, effect);
         effect->ref = ref;
         if (ref != 0) {
             *ref += 1;
@@ -44,7 +42,7 @@ static inline Effect_func_80262A9C_de *take_effect(void *scene, s32 *ref) {
     }
     return effect;
 }
-static inline Effect_func_80262A9C_de *spawn_effect(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position,
+static inline Effect_func_80262A9C_de *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position,
                                    f32 scale, Vec3 direction, Vec3 color, s32 *ref) {
     Effect_func_80262A9C_de *effect;
     if (D_800CD764_de == 0) {
@@ -70,7 +68,7 @@ static inline Effect_func_80262A9C_de *spawn_effect(void *scene, s32 id, s32 var
     func_8024B2D0_de(effect);
     return effect;
 }
-Effect_func_80262A9C_de *func_802627A0_de(void *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
+Effect_func_80262A9C_de *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
                       Vec3 color, s32 *ref) {
     Effect_func_80262A9C_de *effect;
     s32 id;

@@ -3,17 +3,17 @@
 #include "span_1000/code_80255BEC.h"
 #include "types.h"
 
-extern void func_80255ED8_de(void *, s32);
+extern void func_80255ED8_de(void *, void *);
 
 
 
 
 
-s32 func_80262C88_de(void *arg0) {
+s32 func_80262C88_de(struct Effect_func_80262A9C_de *arg0) {
     s32 *counter;
 
-    counter = ((func_80262CA8_S1 *)(arg0))->unk2F0;
-    ((func_80262CA8_S1 *)(arg0))->unk174 = 0;
+    counter = arg0->ref;
+    arg0->active = 0;
     if (counter != 0) {
         *counter -= 1;
     }

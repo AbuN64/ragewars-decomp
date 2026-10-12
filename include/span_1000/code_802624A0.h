@@ -1,12 +1,13 @@
+struct SceneEffectPool;
 #ifndef UNBAKE_SPAN_1000_CODE_802624A0_H
 #define UNBAKE_SPAN_1000_CODE_802624A0_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
-struct func_80262CA8_S1;
+
 /* unbake published declaration: published_04ae91f5172862d828227736 */
-typedef struct func_80262CA8_S1 func_80262CA8_S1;
+
 
 struct func_802626BC_S1;
 /* unbake published declaration: published_1ac574a73d966e5e2631fc8f */
@@ -36,9 +37,11 @@ typedef struct EffectDesc EffectDesc;
 struct Effect_func_80262A9C_de;
 /* unbake published declaration: published_88616c5df4d92ee039c40388 */
 struct Effect_func_80262A9C_de {
-    char pad0[0x2F0];
-    s32 *ref;
-    char pad2F4[0x2F8 - 0x2F4];
+    u8 padding000[0x174];
+    s32 active; /* 0x174 */
+    u8 padding178[0x178];
+    s32 *ref; /* 0x2F0 */
+    u8 padding2F4[4];
 };
 
 struct EffectDesc;
@@ -59,7 +62,7 @@ struct EffectDesc {
 };
 
 /* unbake published declaration: published_2657b0315e42d022f822a26b */
-extern Effect_func_80262A9C_de *func_80262A9C_de(void *scene, EffectDesc *desc);
+extern Effect_func_80262A9C_de *func_80262A9C_de(struct SceneEffectPool *scene, EffectDesc *desc);
 
 /* unbake published declaration: published_29cf9335d3078e7a7f6e7d5d */
 extern void *func_80262FF8_de(s32 arg0, s32 *arg1);
@@ -176,14 +179,9 @@ typedef struct func_802626BC_S1 func_802626BC_S1;
 /* unbake published declaration: published_91f992dd3a85d2ca5a30f160 */
 extern void func_802624A8_de(void *arg0);
 
-struct func_80262CA8_S1;
+
 /* unbake published declaration: published_95f48bbb559d4696f0255d99 */
-struct func_80262CA8_S1 {
-    char pad0[0x174];
-    s32 unk174;
-    char pad174[0x2F0 - 0x174 - sizeof(s32)];
-    s32 * unk2F0;
-};
+
 
 struct BitReader;
 /* unbake published declaration: published_989ad5e0b3f405ef5cfdfa32 */
@@ -219,16 +217,6 @@ struct BitReader {
     u8 *data;
     s32 bitPos;
 };
-/* Bitstream prefix plus the 17 by 17 signed grid decoded by func_80296020_de. */
-struct ResourceBitGrid {
-    BitReader reader;
-    s32 parameter8;
-    s32 parameterC;
-    u32 reserved10[2];
-    s16 cells[17][17];
-};
-typedef struct ResourceBitGrid ResourceBitGrid;
-
 
 struct func_80262EA8_S1;
 /* unbake published declaration: published_d9c2c26dcbf1bc0dc57baf92 */
@@ -248,5 +236,13 @@ struct Six;
 typedef struct Six Six;
 
 /* The list func_80262C88_de appends its record to. */
+
+
+/* Shared object layout established by effect-pool consumers. */
+struct SceneEffectPool {
+    Effect_func_80262A9C_de effects[0x20]; /* 0x0000 */
+    IntrusiveList freeEffects; /* 0x5F00 */
+    IntrusiveList activeEffects; /* 0x5F14 */
+};
 
 #endif

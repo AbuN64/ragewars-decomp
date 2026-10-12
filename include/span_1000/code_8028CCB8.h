@@ -79,9 +79,9 @@ struct func_8028D628_S1 {
     int unk1504;
 };
 
-struct func_8028DA90_S1;
+
 /* unbake published declaration: published_272cc065cda814e931c5822b */
-typedef struct func_8028DA90_S1 func_8028DA90_S1;
+
 
 struct Object_func_8028CE94_de;
 struct Table_func_8028CE94_de;
@@ -148,14 +148,9 @@ extern void func_8028D644_de(void *object);
 /* unbake published declaration: published_6843f5606f4f7bad08f72b4c */
 extern s32 func_8028D74C_de(void *arg0, void *arg1);
 
-struct func_8028DA90_S1;
+
 /* unbake published declaration: published_6b33b8a344be8a2d8ed534c9 */
-struct func_8028DA90_S1 {
-    char pad0[0x80];
-    void * unk80;
-    char pad80[0x84 - 0x80 - sizeof(void*)];
-    void * unk84;
-};
+
 
 struct func_8028D578_S1;
 /* unbake published declaration: published_6b4722021e6c4015536e7821 */

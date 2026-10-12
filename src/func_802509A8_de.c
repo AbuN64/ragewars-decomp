@@ -14,15 +14,15 @@ extern char D_800C3E40_de;
 
 
 void func_802509A8_de(void *arg0) {
-    char *o = (char *) arg0;
+    struct ResourceBinding *o = (struct ResourceBinding *) arg0;
     void *temp_v0;
     s32 ret2;
 
-    if (!(((func_80250950_S1 *)(o))->unkD8 & 0x40)) {
-        temp_v0 = func_802507AC_de(arg0, ((func_80250950_S1 *)(o))->unk1);
+    if (!(o->status & 0x40)) {
+        temp_v0 = func_802507AC_de(arg0, o->variant);
         if (temp_v0 != 0) {
             func_8026E158_de((void **) temp_v0);
-            ret2 = func_80251F6C_de(0, ((func_80250950_S1 *)(o))->unkD0 | D_800CD3F0, temp_v0, ((func_80250950_S1 *)(o))->unk20, 8, arg0, &D_00250C2C, &D_800C3E40_de, 0);
+            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, o->resource, 8, arg0, &D_00250C2C, &D_800C3E40_de, 0);
             if (ret2 != 0) {
                 func_80253754_de(0, ret2);
             }

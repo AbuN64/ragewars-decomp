@@ -9,19 +9,19 @@ extern s32 func_8025DF34_de(s32);
 
 
 
-s32 func_802A1E5C_de(void *arg0) {
-    void *p;
+s32 func_802A1E5C_de(struct CommandListController *arg0) {
+    struct LinkedCommandEntry *p;
 
-    ((func_802A2E5C_S1 *)(arg0))->unk5C = 2;
-    ((func_802A2E5C_S1 *)(arg0))->unk48 = 0;
+    arg0->state = 2;
+    arg0->progress = 0;
     func_8025DF34_de(0xE74);
-    p = ((func_802A2E5C_S1 *)(arg0))->unk8;
+    p = arg0->entries;
     if (p != 0) {
         do {
-            if (((func_802A2E5C_S2 *)(p))->unkE != 8) {
-                ((func_802A2E5C_S2 *)(p))->unk10 = 0x64;
+            if (p->kind != 8) {
+                p->command = 0x64;
             }
-            p = ((func_802A2E5C_S2 *)(p))->unk4;
+            p = p->next;
         } while (p != 0);
     }
     return 0;

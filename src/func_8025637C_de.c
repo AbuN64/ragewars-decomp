@@ -6,12 +6,12 @@
 extern void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
 extern Chunk *func_8025661C_de(void *arg0);
 extern s32 func_802BB160_de(void *arg0, void *arg1, s32 arg2);
-extern void func_802BB2A0_de(s32, s32, s32);
+extern void func_802BB2A0_de(void *, void *, s32);
 
 
 
 
-void func_8025637C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
+void func_8025637C_de(struct CartridgeReadWorker *arg0, void *arg1, s32 arg2, void *arg3) {
     char queue[0x18];
     s32 queue_init;
     s32 completed;
@@ -34,7 +34,7 @@ void func_8025637C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
         }
         chunk->length = length;
         chunk->queue = queue;
-        func_802BB160_de(&((func_8025631C_S1 *)(arg0))->unk230, chunk, 1);
+        func_802BB160_de(&arg0->requestQueueStorage, chunk, 1);
         func_802BB2A0_de(queue, &completed, 1);
         remaining -= length;
     } while (remaining != 0);

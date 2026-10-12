@@ -1,3 +1,4 @@
+struct SceneEffectPool;
 #ifndef UNBAKE_SPAN_1000_CODE_80268160_H
 #define UNBAKE_SPAN_1000_CODE_80268160_H
 #include "../types.h"
@@ -227,6 +228,7 @@ struct func_802689BC_S2 {
 };
 
 typedef Vec3 Vec3f;
-extern Effect_func_80262A9C_de *func_802627A0_de(void *system, s32 kind, s32 id, Vec3 position, f32 arg4, Vec3 velocity, Vec3 scale, s32 *arg11);
+extern Effect_func_80262A9C_de *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
+                      Vec3 color, s32 *ref);
 
 #endif

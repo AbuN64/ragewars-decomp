@@ -1,3 +1,4 @@
+struct LevelBitRecord;
 #ifndef UNBAKE_SPAN_1000_CODE_8028B64C_H
 #define UNBAKE_SPAN_1000_CODE_8028B64C_H
 #include "../types.h"
@@ -75,7 +76,7 @@ struct Object_func_8028BCBC_de;
 typedef struct Object_func_8028BCBC_de Object_func_8028BCBC_de;
 
 /* unbake published declaration: published_201d6ef92156e74089ecab55 */
-extern s32 func_8028B988_de(void *arg0, void *arg1);
+extern s32 func_8028B988_de(void *arg0, struct LevelBitRecord *arg1);
 
 struct func_8028C34C_S1;
 /* unbake published declaration: published_23ec0c4284dec74aa61c340c */
@@ -463,9 +464,9 @@ typedef struct World_func_8028C834_de World_func_8028C834_de;
 /* unbake published declaration: published_f02bda701b14a228b439533d */
 extern Player *func_8028C834_de(World_func_8028C834_de *world);
 
-struct func_8028B874_S1;
+
 /* unbake published declaration: published_f0e52d4bac8f4cf6f9593a0f */
-typedef struct func_8028B874_S1 func_8028B874_S1;
+
 
 struct func_8028C400_S1;
 /* unbake published declaration: published_f37c27abbc57ffe1ecfc027b */
@@ -484,12 +485,9 @@ struct func_8028C490_S1 {
     Rec_func_8024C92C_de * unk11D4;
 };
 
-struct func_8028B874_S1;
+
 /* unbake published declaration: published_f62e3d83a937e460aa1cdb45 */
-struct func_8028B874_S1 {
-    char pad0[0x19E];
-    u16 unk19E;
-};
+
 
 struct Sample;
 /* unbake published declaration: published_f78306e4c967a71918dfe7c7 */
@@ -500,5 +498,12 @@ struct Sample {
 struct ModelDef;
 /* unbake published declaration: published_fdb33836b478fec6b41cb744 */
 typedef struct ModelDef ModelDef;
+
+
+/* Shared object layout established by level-bits consumers. */
+struct LevelBitRecord {
+    u8 padding000[0x19E];
+    u16 bitIndex; /* 0x19E */
+};
 
 #endif

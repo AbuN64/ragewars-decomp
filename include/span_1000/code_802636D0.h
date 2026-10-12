@@ -1,3 +1,4 @@
+struct ControllerProfile;
 #ifndef UNBAKE_SPAN_1000_CODE_802636D0_H
 #define UNBAKE_SPAN_1000_CODE_802636D0_H
 #include "../types.h"
@@ -84,9 +85,9 @@ extern void func_80263CF0_de(void *arg0);
 /* unbake published declaration: published_59de1bb25eeba32d94a9763c */
 extern int func_8026436C_de(void *arg0);
 
-struct func_8026439C_S1;
+
 /* unbake published declaration: published_5a30493e993e1f13e7740218 */
-typedef struct func_8026439C_S1 func_8026439C_S1;
+
 
 struct ObjectState224;
 /* unbake published declaration: published_5dd82e13550b5b7ed8dc422d */
@@ -106,12 +107,9 @@ struct func_80264268_S1;
 /* unbake published declaration: published_7ce1a146a36d55c3120f7588 */
 typedef struct func_80264268_S1 func_80264268_S1;
 
-struct func_8026439C_S1;
+
 /* unbake published declaration: published_879161e821b12b795c7f6e3a */
-struct func_8026439C_S1 {
-    char pad0[0xB6];
-    unsigned char unkB6;
-};
+
 
 /* unbake published declaration: published_a02a64eb3484e1d56d5e1d61 */
 extern int func_802643E8_de(void *arg0);
@@ -136,19 +134,16 @@ struct ObjectState30 {
 /* unbake published declaration: published_d44edf3cb5d1770f59897659 */
 extern void func_80263C24_de();
 
-struct func_802643A8_S1;
+
 /* unbake published declaration: published_d4d565a71817d66472583632 */
-typedef struct func_802643A8_S1 func_802643A8_S1;
+
 
 /* unbake published declaration: published_d73512b3227d322a0ed831b2 */
 extern void func_80263AF4_de();
 
-struct func_802643A8_S1;
+
 /* unbake published declaration: published_da218df60c35442cb1f3b6b2 */
-struct func_802643A8_S1 {
-    char pad0[0xC0];
-    unsigned int unkC0;
-};
+
 
 struct func_802644C8_S1;
 /* unbake published declaration: published_e6fc35e6ab73fe8dde34ec9e */
@@ -186,7 +181,7 @@ struct func_802644C8_S1 {
 };
 
 /* unbake published declaration: published_ea24523ed6daa78fd1f7af23 */
-extern int func_802643F8_de(void *arg0);
+extern int func_802643F8_de(struct ControllerProfile *arg0);
 
 /* unbake published declaration: published_ea3e509d7917577c86c7324a */
 extern int func_80264634_de(int arg0);

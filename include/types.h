@@ -1,3 +1,4 @@
+struct ControllerProfile;
 #ifndef UNBAKE_TYPES_H
 #define UNBAKE_TYPES_H
 typedef signed char s8;
@@ -58,8 +59,8 @@ extern void func_8025E11C_de(s32 arg0);
 extern void func_8025E214_de(s32 arg0);
 extern void func_8025E2D4_de(s32 a);
 extern void func_8025E440_de(f32 arg0);
-extern int func_80264388_de(void *object);
-extern int func_802643A0_de(void *object);
+extern int func_80264388_de(struct ControllerProfile *object);
+extern int func_802643A0_de(struct ControllerProfile *object);
 extern s32 func_802644FC_de(s32 arg0);
 extern int func_8026475C_de(int arg0);
 extern void func_80264854_de(s32 a);
@@ -105,7 +106,7 @@ extern s32 func_802ACB18_de(void *arg0, void *arg1);
 extern s32 func_802ACD28_de(void *arg0, void *arg1);
 extern s32 func_802ACFB0_de(void *arg0, void *arg1);
 extern void func_802AD3F0_de(int arg0);
-extern void func_802AF150_de(void *arg0);
+extern void func_802AF150_de(void *rawPlayer);
 extern void func_802AFD00_de(void *arg0);
 extern void func_802AFDFC_de(void *arg0, f32 arg1);
 extern f32 func_802AFE30_de(s32 arg0);

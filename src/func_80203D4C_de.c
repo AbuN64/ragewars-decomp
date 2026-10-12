@@ -17,18 +17,18 @@ extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 
 
 
-static inline void build_rotation(void *object, f32 *matrix) {
+static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
     s32 rotation[4];
     f32 angles[3];
 
-    angles[0] = ((func_80203848_S1 *)(object))->unk130;
-    angles[1] = ((func_80203848_S1 *)(object))->unk134;
-    angles[2] = ((func_80203848_S1 *)(object))->unk138;
+    angles[0] = object->angleX;
+    angles[1] = object->angleY;
+    angles[2] = object->angleZ;
     func_80202CA0_de(rotation, angles);
     func_80274244_de(rotation, matrix);
 }
 
-void func_80203D4C_de(void *unused, void *object, Vec3 *pivot, Vec3 *point) {
+void func_80203D4C_de(void *unused, struct RotationObject *object, Vec3 *pivot, Vec3 *point) {
     f32 matrix[16];
     Vec3 offset;
 

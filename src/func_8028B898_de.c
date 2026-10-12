@@ -2,7 +2,7 @@
 #include "span_1000/code_8028B64C.h"
 #include "types.h"
 
-extern char *func_8028FDB4_de(s32 *, s32);
+extern void *func_8028FDB4_de(void *, s32);
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
@@ -10,7 +10,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B898_de(void *arg0, void *arg1, s32 arg2) {
+void func_8028B898_de(void *arg0, struct LevelBitRecord *arg1, s32 arg2) {
     s32 bitIndex;
     void *field80;
     s32 field1B40C;
@@ -21,7 +21,7 @@ void func_8028B898_de(void *arg0, void *arg1, s32 arg2) {
     s32 idx;
     s32 idx2;
 
-    bitIndex = ((func_8028B874_S1 *)(arg1))->unk19E;
+    bitIndex = arg1->bitIndex;
     field80 = ((World_func_8028787C_de *)(arg0))->levels;
     field1B40C = ((World_func_8028787C_de *)(arg0))->level;
     temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 1);

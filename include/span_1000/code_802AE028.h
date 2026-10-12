@@ -17,18 +17,9 @@ struct CopyDest802B3998;
 /* unbake published declaration: published_0c355228b550dacb0864724b */
 typedef struct CopyDest802B3998 CopyDest802B3998;
 
-struct func_802B4220_S1;
+
 /* unbake published declaration: published_117c8c3bc698903219506b12 */
-struct func_802B4220_S1 {
-    char pad0[0x18];
-    s32 unk18;
-    char pad18[0x24 - 0x18 - sizeof(s32)];
-    s32 unk24;
-    char pad24[0x2C - 0x24 - sizeof(s32)];
-    s32 unk2C;
-    char pad2C[0x48 - 0x2C - sizeof(s32)];
-    char unk48;
-};
+
 
 struct CallbackNode;
 /* unbake published declaration: published_188458e683ef2da7313c1753 */
@@ -55,9 +46,9 @@ struct ALCSeqMarker {
     u32 evtDeltaTicks[16];
 };
 
-struct func_802B4220_S1;
+
 /* unbake published declaration: published_28ac1f494e8c58c1495dfb7c */
-typedef struct func_802B4220_S1 func_802B4220_S1;
+
 
 struct ALCMidiHdr;
 /* unbake published declaration: published_295745d87363764d92b8b37b */

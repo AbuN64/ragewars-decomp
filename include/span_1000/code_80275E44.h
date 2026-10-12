@@ -1,9 +1,10 @@
+struct ModelTreeNode;
 #ifndef UNBAKE_SPAN_1000_CODE_80275E44_H
 #define UNBAKE_SPAN_1000_CODE_80275E44_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 /* unbake published declaration: published_1126cdcf9de8293102706494 */
-extern void func_80276298_de(void *arg0, u16 arg1);
+extern void func_80276298_de(struct ModelTreeNode *arg0, u16 arg1);
 
 /* unbake published declaration: published_1c9f1a92b1b51e2c57c2d4f4 */
 extern void func_802765A0_de(void);
@@ -44,9 +45,9 @@ union ObjectLinks4_2;
 /* unbake published declaration: published_6a175281bf6dd001a2b8df9d */
 typedef union ObjectLinks4_2 ObjectLinks4_2;
 
-struct func_80276284_S1;
+
 /* unbake published declaration: published_6bc998b086823cfe0576e776 */
-typedef struct func_80276284_S1 func_80276284_S1;
+
 
 /* unbake published declaration: published_6c6e08a8a5884ac9d6a72e67 */
 extern float D_800C4AD0_de;
@@ -91,19 +92,9 @@ struct ObjectLinks1C {
     ObjectLinks4_2 unk_18;
 };
 
-struct func_80276284_S1;
+
 /* unbake published declaration: published_98527b236346c1620f720c1a */
-struct func_80276284_S1 {
-    u16 unk0;
-    char pad0[0x2 - 0x0 - sizeof(u16)];
-    u16 unk2;
-    char pad2[0x10 - 0x2 - sizeof(u16)];
-    void * unk10;
-    char pad10[0x14 - 0x10 - sizeof(void*)];
-    void * unk14;
-    char pad14[0x18 - 0x14 - sizeof(void*)];
-    void * unk18;
-};
+
 
 /* unbake published declaration: published_98cc9e8be318fe01a3c1bd65 */
 extern float D_800C4AC8_de;
@@ -136,7 +127,16 @@ struct func_802760F8_S1 {
 };
 
 /* unbake published declaration: published_f00722496b4e122892cbfdcc */
-extern void func_80276214_de(void *arg0, u16 arg1);
+extern void func_80276214_de(struct ModelTreeNode *arg0, u16 arg1);
 
 extern void func_80276608_eu_x(void);
+
+/* Shared object layout established by model-tree consumers. */
+struct ModelTreeNode {
+    u16 modelId; /* 0x00 */
+    u16 flags; /* 0x02 */
+    u8 padding004[0xC];
+    struct ModelTreeNode *branches[3]; /* 0x10 */
+};
+
 #endif

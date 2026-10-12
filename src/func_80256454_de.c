@@ -7,13 +7,13 @@ typedef struct Queue Queue;
 
 
 extern Chunk_func_80256454_de *func_8025661C_de(void *arg0);
-extern s32 func_802BB160_de(Queue *, void *, s32);
-extern s32 func_802BB420_de(Queue *, s32, s32);
+extern s32 func_802BB160_de(void *, void *, s32);
+extern s32 func_802BB420_de(void *, s32, s32);
 
 
 
 
-void func_80256454_de(void *arg0, void *source, s32 length, void *destination,
+void func_80256454_de(struct CartridgeReadWorker *arg0, void *source, s32 length, void *destination,
                    Queue *queue, s32 value, s32 direct) {
     s32 remaining;
     s32 chunk_length;
@@ -27,7 +27,7 @@ void func_80256454_de(void *arg0, void *source, s32 length, void *destination,
             chunk->length = length;
             chunk->queue = queue;
             chunk->value = value;
-            func_802BB160_de(&((func_8025631C_S1 *)(arg0))->unk230, chunk, 1);
+            func_802BB160_de(&arg0->requestQueueStorage, chunk, 1);
         }
     } else {
         remaining = length;
@@ -51,7 +51,7 @@ void func_80256454_de(void *arg0, void *source, s32 length, void *destination,
                 chunk->queue = queue;
                 chunk->value = value;
             }
-            func_802BB420_de(&((func_8025631C_S1 *)(arg0))->unk230, (s32)chunk, 1);
+            func_802BB420_de(&arg0->requestQueueStorage, (s32)chunk, 1);
         } while ((chunk != 0) && (remaining != 0));
     }
 }

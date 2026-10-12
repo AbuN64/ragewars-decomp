@@ -55,16 +55,9 @@ struct Segment_func_80203278_de;
 /* unbake published declaration: published_42fc55ab5fe76890b91c2d4d */
 typedef struct Segment_func_80203278_de Segment_func_80203278_de;
 
-struct func_80203848_S1;
+
 /* unbake published declaration: published_4b691bb7c494a22f27936b89 */
-struct func_80203848_S1 {
-    char pad0[0x130];
-    f32 unk130;
-    char pad130[0x134 - 0x130 - sizeof(f32)];
-    f32 unk134;
-    char pad134[0x138 - 0x134 - sizeof(f32)];
-    f32 unk138;
-};
+
 
 /* unbake published declaration: published_4e5c7e8b2c64205cce8a5abe */
 extern float D_800C1A00_de;
@@ -90,9 +83,9 @@ struct func_80203908_S3;
 /* unbake published declaration: published_8b482d26770e5503c07fd0d2 */
 typedef struct func_80203908_S3 func_80203908_S3;
 
-struct func_80203848_S1;
+
 /* unbake published declaration: published_90bdc0ed791f8ebfc2d976d9 */
-typedef struct func_80203848_S1 func_80203848_S1;
+
 
 /* unbake published declaration: published_924097222ac5e9d37550ab5e */
 extern float D_800C19FC_de;
@@ -218,5 +211,21 @@ void func_80216D3C_de(Input80216D3C *arg0, void *arg1, Output80216D3C *arg2, s32
 void func_80216808_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
 typedef union NavActor { SharedPlayer player; Input80216D3C input; Actor_func_80214624_de actor; struct Owner owner; } NavActor;
 typedef struct NavVec { Vec3 v; f32 fourth; } NavVec;
+
+
+/* Shared object layout established by rotation consumers. */
+struct RotationObject {
+    u8 padding000[0x130];
+    f32 angleX; /* 0x130 */
+    f32 angleY; /* 0x134 */
+    f32 angleZ; /* 0x138 */
+};
+
+
+/* Shared object layout established by weapon-events consumers. */
+struct WeaponEventSource {
+    u8 padding000[0xCB];
+    char eventEnabled; /* 0xCB */
+};
 
 #endif

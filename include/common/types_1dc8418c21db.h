@@ -4693,7 +4693,11 @@ struct func_80247F08_S1 {
 struct ControllerProfile;
 /* unbake published declaration: published_bf3203d18d65a17e6eae0305 */
 struct ControllerProfile {
-    char pad0[0x224];
+    u8 padding000[0xB6];
+    u8 connectionStatus; /* 0xB6 */
+    u8 padding0B7[9];
+    u32 buttonState; /* 0xC0 */
+    u8 padding0C4[0x160];
 };
 
 struct Args;
@@ -4785,10 +4789,11 @@ struct func_8020478C_S1 {
 struct World_func_8028787C_de;
 /* unbake published declaration: published_c8bb46e64d4f901ddd5fc866 */
 struct World_func_8028787C_de {
-    char pad0[0x80];
-    void *levels;
-    char pad84[0x1B40C - 0x84];
-    s32 level;
+    u8 padding000[0x80];
+    void *levels; /* 0x80 */
+    void *secondaryLevels; /* 0x84 */
+    u8 padding088[0x1B384];
+    s32 level; /* 0x1B40C */
 };
 
 struct func_80250DBC_S2;

@@ -30,12 +30,9 @@ struct func_802566A8_S1;
 /* unbake published declaration: published_1799cea1a047582d9198d5b8 */
 typedef struct func_802566A8_S1 func_802566A8_S1;
 
-struct func_8025631C_S1;
+
 /* unbake published declaration: published_218994c2c236214c7bebb275 */
-struct func_8025631C_S1 {
-    char pad0[0x230];
-    char unk230;
-};
+
 
 struct Handles;
 /* unbake published declaration: published_29fc1527f83f17a215342d48 */
@@ -103,9 +100,9 @@ struct CartridgeReadRequest {
     void *replyMsg;
 };
 
-struct func_8025631C_S1;
+
 /* unbake published declaration: published_5fdb4977edfba083a3e28a8f */
-typedef struct func_8025631C_S1 func_8025631C_S1;
+
 
 struct Chunk_func_80256454_de;
 struct Queue;

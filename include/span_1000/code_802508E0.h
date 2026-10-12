@@ -148,18 +148,9 @@ struct func_80250D88_S1 {
     unsigned int unkDC;
 };
 
-struct func_80250950_S1;
+
 /* unbake published declaration: published_6ea2dcf3b17b4aed0abbd659 */
-struct func_80250950_S1 {
-    char pad0[0x1];
-    s8 unk1;
-    char pad1[0x20 - 0x1 - sizeof(s8)];
-    s32 unk20;
-    char pad20[0xD0 - 0x20 - sizeof(s32)];
-    s32 unkD0;
-    char padD0[0xD8 - 0xD0 - sizeof(s32)];
-    u16 unkD8;
-};
+
 
 struct func_802532A0_S1;
 /* unbake published declaration: published_72cfbc13d8bd37d4620729c5 */
@@ -228,16 +219,9 @@ extern void *func_802517B4_de(s32 arg0, s32 arg1);
 /* unbake published declaration: published_9f212b8f433bec53cacb7329 */
 extern void func_80250AD4_de(void *arg0);
 
-struct func_80250ACC_S1;
+
 /* unbake published declaration: published_9fc9b84ecbc0a325cb25fc1b */
-struct func_80250ACC_S1 {
-    char pad0[0x20];
-    s32 unk20;
-    char pad20[0xB4 - 0x20 - sizeof(s32)];
-    void * unkB4;
-    char padB4[0xD0 - 0xB4 - sizeof(void*)];
-    s32 unkD0;
-};
+
 
 /* unbake published declaration: published_a0bb1d0e2e390a27443501e2 */
 extern int func_80250BF0_de();
@@ -251,9 +235,9 @@ struct func_802532A0_S1 {
     unsigned int unkC;
 };
 
-struct func_80250ACC_S1;
+
 /* unbake published declaration: published_a4fdb0e2acaf457241ea19e3 */
-typedef struct func_80250ACC_S1 func_80250ACC_S1;
+
 
 /* unbake published declaration: published_a605950640d1141829f378a8 */
 extern s8 func_80250E14_de(void *arg0);
@@ -328,8 +312,23 @@ struct func_80250D88_S1;
 /* unbake published declaration: published_fd949475b474c617c2cb8b85 */
 typedef struct func_80250D88_S1 func_80250D88_S1;
 
-struct func_80250950_S1;
+
 /* unbake published declaration: published_fe35cc6b286e4b2ab3d3c808 */
-typedef struct func_80250950_S1 func_80250950_S1;
+
+
+
+/* Shared object layout established by resource-binding consumers. */
+struct ResourceBinding {
+    u8 padding000[1];
+    s8 variant; /* 0x01 */
+    u8 padding002[0x1E];
+    s32 resource; /* 0x20 */
+    u8 padding024[0x90];
+    void *loadedResource; /* 0xB4 */
+    u8 padding0B8[0x18];
+    s32 registrationFlags; /* 0xD0 */
+    u8 padding0D4[4];
+    u16 status; /* 0xD8 */
+};
 
 #endif

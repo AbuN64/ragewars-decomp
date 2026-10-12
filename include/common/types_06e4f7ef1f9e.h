@@ -1934,12 +1934,9 @@ struct func_80232FE8_S3 {
     s32 unk13C;
 };
 
-struct func_80203AB0_S1;
+
 /* unbake published declaration: published_b50d1078391ecf9953f4e750 */
-struct func_80203AB0_S1 {
-    char pad0[0xCB];
-    char unkCB;
-};
+
 
 struct func_80203DF0_S1;
 /* unbake published declaration: published_bfa59073273aa440dee9d6e7 */
@@ -1974,9 +1971,9 @@ struct func_8022BECC_S1 {
     short unk62E;
 };
 
-struct func_80203AB0_S1;
+
 /* unbake published declaration: published_d10bb3cccd45d9097a134fdf */
-typedef struct func_80203AB0_S1 func_80203AB0_S1;
+
 
 struct func_80203B60_S3;
 /* unbake published declaration: published_d491af75e10cb5bb73c186a7 */
