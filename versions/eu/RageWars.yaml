@@ -3767,7 +3767,7 @@ segments:
       - [0xCA92C, rodata, "rodata/shared/800CE38C"]
       - [0xCA930, .data, "rodata/unresolved/800C9D30"]
       - [0xCA96C, rodata, "rodata/shared/800CE3CC"]
-      - [0xCA970, data, "rodata/unresolved/800C9D70"]
+      - [0xCA970, .data, "rodata/unresolved/800C9D70"]
       - [0xCA980, rodata, "rodata/shared/800CE3E0"]
       - [0xCA984, rodata, "rodata/shared/800CE3E4"]
       - [0xCA988, .data, "rodata/unresolved/800CE3E8"]
