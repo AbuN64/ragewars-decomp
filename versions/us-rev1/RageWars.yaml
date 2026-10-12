@@ -4553,7 +4553,7 @@ segments:
       - [0xD01C0, .data, "rodata/unresolved/800CF5C0"]
       - [0xd01e0, data, "src/rw_weapon_state_entry_D01E0_us_rev1.c"]
       - [0xd01e8, data, "rodata/unresolved/800CF5C0_unclaimed_D01E8"]
-      - [0xd01f0, data, "src/rw_weapon_state_resource_animation_D01F0_us_rev1.c"]
+      - [0xd01f0, .data, "src/rw_weapon_state_resource_animation_D01F0_us_rev1.c"]
       - [0xd0200, data, "src/rw_weapon_state_entry_D0200_us_rev1.c"]
       - [0xd0208, data, "rodata/unresolved/800CF5C0_unclaimed_D01E8_unclaimed_D0200_unclaimed_D0208"]
       - [0xd0210, data, "src/rw_weapon_state_resource_animation_D0210_us_rev1.c"]
