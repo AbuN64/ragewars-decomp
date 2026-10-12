@@ -5770,6 +5770,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0D00"
+segment = "span_E1720"
+members = ["rodata/shared/800E0D00"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0D18"
 segment = "span_E1720"
 members = ["src/rw_text_80404958_E1918_us_rev1.c"]
@@ -45338,6 +45346,17 @@ path = "src/rodata.shared.800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8A
 kind = "data"
 group = "data_800D7E18"
 members = ["rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8A18"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.shared.800E0D00.c"
+kind = "data"
+group = "data_800E0D00"
+members = ["rodata/shared/800E0D00"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
