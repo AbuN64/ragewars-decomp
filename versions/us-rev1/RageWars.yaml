@@ -5675,7 +5675,7 @@ segments:
       - [0xE30AC, rodata, "src/rw_pool_804402DC_E30AC_us_rev1.c"]
       - [0xE30B0, rodata, "src/rw_pool_80440838_E30B0_us_rev1.c"]
       - [0xE30BC, data, "rodata/unresolved/800E24BC"]
-      - [0xE30C0, rodata, "src/rw_constants_80440838_E30C0_us_rev1.c"]
+      - [0xE30C0, .rodata, "src/rw_constants_80440838_E30C0_us_rev1.c"]
       - [0xE30D4, rodata, "src/rw_constants_80441214_E30D4_us_rev1.c"]
       - [0xE30E4, rodata, "src/rw_pool_804415F4_E30E4_us_rev1.c"]
       - [0xE30EC, data, "rodata/unresolved/800E24EC"]
