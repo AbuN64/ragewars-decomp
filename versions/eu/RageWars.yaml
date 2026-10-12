@@ -3703,7 +3703,7 @@ segments:
       - [0xC907C, rodata, "src/rw_pool_802B6CBC_CD6DC_us_rev1.c"]
       - [0xC9080, rodata, "src/rw_pool_802B6D54_CD6E0_us_rev1.c"]
       - [0xC9084, data, "rodata/unresolved/800C8484"]
-      - [0xC9090, rodata, "src/rw_constants_802B6DEC_CD6F0_us_rev1.c"]
+      - [0xC9090, .rodata, "src/rw_constants_802B6DEC_CD6F0_us_rev1.c"]
       - [0xC90A4, rodata, "rodata/func_802B6DF0_de/800CCB04"]
       - [0xC90A8, .rodata, "src/rw_pool_802B6F9C_CD708_us_rev1.c"]
       - [0xC90C0, data, "rodata/unresolved/800CCB20"]
