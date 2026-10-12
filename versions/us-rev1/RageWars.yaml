@@ -5243,7 +5243,7 @@ segments:
       - [0xD8FC0, data, "src/ragewars_pi_access_queue_initialized_us_rev1.c"]
       - [0xD8FC4, .data, "rodata/writable/800D83C0_unclaimed_D8FC4"]
       - [0xD8FD0, data, "src/ragewars_si_access_queue_initialized_us_rev1.c"]
-      - [0xD8FD4, data, "rodata/writable/800D83C0_unclaimed_D8FD4"]
+      - [0xD8FD4, .data, "rodata/writable/800D83C0_unclaimed_D8FD4"]
       - [0xD8FE0, .data, "src/ragewars_vi_contexts_us_rev1.c"]
       - [0xD9040, data, "src/ragewars_vi_context_selectors_us_rev1.c"]
       - [0xD9048, data, "rodata/writable/800D8440_unclaimed_D9048"]
