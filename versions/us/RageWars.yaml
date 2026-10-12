@@ -769,7 +769,7 @@ segments:
       - [0x3C584, asm, "func_8023B984_us"]
       - [0x3C590, c, "func_8023B9C0_eu"]
       - [0x3C854, c, "func_8023BC74_de"]
-      - [0x3C914, asm, "func_8023BD34_de"]
+      - [0x3C914, c, "func_8023BD34_de"]
       - [0x3CC64, c, "func_8023C084_de"]
       - [0x3CDD0, asm, "func_8023C1F0_de"]
       - [0x3D29C, c, "func_8023C6BC_de"]

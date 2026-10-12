@@ -95,7 +95,7 @@ struct Link_func_8023CC08_de {
     struct Link_func_8023CC08_de *next;
     struct Link_func_8023CC08_de *prev;
     u16 id;
-    u16 padA;
+    union { u16 padA; struct { u8 index; u8 slot; }; };
     s32 fieldC;
 };
 
@@ -172,11 +172,10 @@ struct Channel_func_8023B9C0_eu {
 struct Slot_func_8023B9C0_eu;
 /* unbake published declaration: published_cb649a8b4f11dd3a0401ccd7 */
 struct Slot_func_8023B9C0_eu {
-    s32 a;
-    s32 b;
-    char pad8[2];
-    u8 index;
-    char padB[5];
+    union {
+        struct { s32 a; s32 b; char pad8[2]; u8 index; char padB[5]; };
+        Link_func_8023CC08_de chain;
+    };
 };
 
 struct State_func_8023B9C0_eu;
@@ -197,7 +196,7 @@ struct State_func_8023B9C0_eu {
     char list2Data[0xB10 - 0xAF0];
     Channel_func_8023B9C0_eu channels[8];
     s32 fBF0;
-    s32 fBF4;
+    union { s32 fBF4; Link_func_8023CC08_de *tail; };
     u8 lookup[0x100];
     Entry_func_8023B9C0_eu entries[24];
     s32 fD58;

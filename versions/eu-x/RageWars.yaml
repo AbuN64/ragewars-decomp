@@ -786,7 +786,7 @@ segments:
       - [0x3C5E4, asm, "func_8023B9E4_eu_x"]
       - [0x3C5F0, asm, "func_8023B9F0_eu_x"]
       - [0x3C8B4, c, "func_8023BC74_de"]
-      - [0x3C974, asm, "func_8023BD34_de"]
+      - [0x3C974, c, "func_8023BD34_de"]
       - [0x3CCC4, c, "func_8023C084_de"]
       - [0x3CE30, asm, "func_8023C1F0_de"]
       - [0x3D2FC, c, "func_8023C6BC_de"]
