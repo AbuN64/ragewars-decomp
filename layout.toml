@@ -2546,9 +2546,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C6E3C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020ABF0_C7A3C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C6E44"
 segment = "span_C76B0"
 members = ["src/rw_pool_8020AF9C_C7A44_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C6E58"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020BC50_C7A58_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -2565,6 +2581,22 @@ sdk = false
 name = "data_800C6E64"
 segment = "span_C76B0"
 members = ["src/rw_pool_8020C078_C7A64_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C6E68"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020C2E8_C7A68_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C6E7C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020CA10_C7A7C_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -2770,6 +2802,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C70F0"
+segment = "span_C76B0"
+members = ["src/rw_pool_802110C4_C7CF0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C70F8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C70F8"]
@@ -2818,6 +2858,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C71D0"
+segment = "span_C76B0"
+members = ["src/rw_pool_80212FBC_C7DD0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C71D8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C71D8"]
@@ -2853,6 +2901,14 @@ sdk = false
 name = "data_800C721C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C721C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7220"
+segment = "span_C76B0"
+members = ["src/rw_pool_80213ED4_C7E20_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -2930,6 +2986,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C72DC"
+segment = "span_C76B0"
+members = ["src/rw_pool_80217594_C7EDC_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C72F0"
 segment = "span_C76B0"
 members = ["src/rw_pool_80217630_C7EF0_us_rev1.c"]
@@ -2957,6 +3021,14 @@ sdk = false
 name = "data_800C733C"
 segment = "span_C76B0"
 members = ["src/rw_pool_8021836C_C7F3C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7340"
+segment = "span_C76B0"
+members = ["src/rw_pool_802184C0_C7F40_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3026,9 +3098,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C73E8"
+segment = "span_C76B0"
+members = ["src/rw_pool_8021A78C_C7FE8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7408"
 segment = "span_C76B0"
 members = ["src/rw_pool_8021A9A4_C8008_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7428"
+segment = "span_C76B0"
+members = ["src/rw_pool_8044952C_C8028_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3154,6 +3242,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C78C4"
+segment = "span_C76B0"
+members = ["src/rw_pool_80220ED4_C84C4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7934"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800C7934"]
@@ -3213,6 +3309,14 @@ sdk = false
 name = "data_800C7A16"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800C7A16", "data/unresolved/800C7A18"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7A38"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022404C_C8638_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3306,9 +3410,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7C58"
+segment = "span_C76B0"
+members = ["src/rw_text_80226950_C8858_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7C60"
 segment = "span_C76B0"
 members = ["src/rw_pool_80226C60_C8860_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7C64"
+segment = "span_C76B0"
+members = ["src/rw_pool_80226DD0_C8864_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3410,6 +3530,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7DF0"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022ADBC_C89F0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7DF8"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022ADF0_C89F8_us_rev1.c"]
@@ -3458,6 +3586,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7E10"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022BE20_C8A10_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7E18"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022C080_C8A18_us_rev1.c"]
@@ -3469,6 +3605,30 @@ sdk = false
 name = "data_800C7E1C"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022C1E8_C8A1C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7E20"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022C2B4_C8A20_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7E28"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022C37C_C8A28_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7E30"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022C490_C8A30_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3490,6 +3650,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7E50"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022CA14_C8A50_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7E58"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022CB5C_C8A58_us_rev1.c"]
@@ -3498,9 +3666,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7E68"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022CC34_C8A68_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7E70"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022CD78_C8A70_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7E7C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022CDBC_C8A7C_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3533,6 +3717,14 @@ sdk = false
 name = "data_800C7EA8"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022D428_C8AA8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7EAC"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022D4BC_C8AAC_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3578,6 +3770,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7EF4"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022DFA8_C8AF4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7EFC"
 segment = "span_C76B0"
 members = ["src/rw_pool_8022E0B0_C8AFC_us_rev1.c"]
@@ -3610,9 +3810,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C7F0C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022E78C_C8B0C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C7F20"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800C7C18_0C8A20_0C8B20"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7F78"
+segment = "span_C76B0"
+members = ["src/rw_pool_8022EC3C_C8B78_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3629,6 +3845,22 @@ sdk = false
 name = "data_800C7F84"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C7F84"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7FD0"
+segment = "span_C76B0"
+members = ["src/rw_pool_802301F4_C8BD0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C7FD8"
+segment = "span_C76B0"
+members = ["src/rw_pool_802303A0_C8BD8_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3666,9 +3898,33 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C80A0"
+segment = "span_C76B0"
+members = ["src/rw_pool_8023196C_C8CA0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C80A8"
 segment = "span_C76B0"
 members = ["src/rw_pool_80231BB0_C8CA8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C80AC"
+segment = "span_C76B0"
+members = ["src/rw_pool_80231D48_C8CAC_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C80B4"
+segment = "span_C76B0"
+members = ["src/rw_pool_80231F6C_C8CB4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3749,6 +4005,14 @@ sdk = false
 name = "data_800C8134"
 segment = "span_C76B0"
 members = ["src/rw_pool_802330AC_C8D34_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8138"
+segment = "span_C76B0"
+members = ["src/rw_pool_802331FC_C8D38_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -3893,6 +4157,14 @@ sdk = false
 name = "data_800C82C8"
 segment = "span_C76B0"
 members = ["src/rw_pool_802343C8_C8EC8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C82E8"
+segment = "span_C76B0"
+members = ["src/rw_pool_802349C0_C8EE8_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4050,6 +4322,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8640"
+segment = "span_C76B0"
+members = ["src/rw_pool_80239678_C9240_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8658"
 segment = "span_C76B0"
 members = ["src/rw_pool_80239D00_C9258_us_rev1.c"]
@@ -4085,6 +4365,14 @@ sdk = false
 name = "data_800C8668"
 segment = "span_C76B0"
 members = ["src/rw_pool_80239EA4_C9268_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C868C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8023A294_C928C_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4194,6 +4482,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8784"
+segment = "span_C76B0"
+members = ["src/rw_pool_8023E178_C9384_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C878C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C878C"]
@@ -4250,6 +4546,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C87D0"
+segment = "span_C76B0"
+members = ["src/rw_pool_8023EF00_C93D0_us_rev1.c", "rodata/unresolved/800C87D8"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C87D8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C87D8"]
@@ -4269,6 +4573,14 @@ sdk = false
 name = "data_800C8809"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C8809"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C880C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8023FD18_C940C_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4362,6 +4674,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8864"
+segment = "span_C76B0"
+members = ["src/rw_pool_802433DC_C9464_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C886C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C886C"]
@@ -4405,6 +4725,14 @@ sdk = false
 name = "data_800C88C0"
 segment = "span_C76B0"
 members = ["src/rw_pool_8024570C_C94C0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C88C4"
+segment = "span_C76B0"
+members = ["src/rw_pool_802459A0_C94C4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4578,6 +4906,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8A38"
+segment = "span_C76B0"
+members = ["src/rw_pool_802472F0_C9638_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8AD4"
 segment = "span_C76B0"
 members = ["src/ragewars_resident_strings_C96D4_us_rev1.c"]
@@ -4594,9 +4930,41 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8B3C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8024A1D0_C973C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8B44"
+segment = "span_C76B0"
+members = ["src/rw_pool_8024A3B0_C9744_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8B4C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8024A5A8_C974C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8B61"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C8B61"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8B64"
+segment = "span_C76B0"
+members = ["src/rw_pool_8024A7A0_C9764_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4674,6 +5042,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8C50"
+segment = "span_C76B0"
+members = ["src/rw_pool_8024C454_C9850_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8C6C"
 segment = "span_C76B0"
 members = ["src/rw_pool_8024CB4C_C986C_us_rev1.c"]
@@ -4714,9 +5090,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8D24"
+segment = "span_C76B0"
+members = ["src/rw_tail_8024D284_C9924_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8D2C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C8D2C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8D6C"
+segment = "span_C76B0"
+members = ["src/rw_tail_8024D398_C996C_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4866,6 +5258,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8F44"
+segment = "span_C76B0"
+members = ["src/rw_pool_80250274_C9B44_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8F4C"
 segment = "span_C76B0"
 members = ["rodata/shared/800C8F4C"]
@@ -4946,9 +5346,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8FB0"
+segment = "span_C76B0"
+members = ["src/rw_pool_80256880_C9BB0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8FB8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C8FB8"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8FC0"
+segment = "span_C76B0"
+members = ["src/rw_pool_80257360_C9BC0_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -4981,6 +5397,22 @@ sdk = false
 name = "data_800C8FD4"
 segment = "span_C28A0"
 members = ["rodata/unresolved/800C8FD4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8FD8"
+segment = "span_C76B0"
+members = ["src/rw_pool_80258B94_C9BD8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C8FE0"
+segment = "span_C76B0"
+members = ["src/rw_pool_80258E5C_C9BE0_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5026,6 +5458,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9050"
+segment = "span_C76B0"
+members = ["src/rw_pool_8025AB94_C9C50_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9058"
 segment = "span_C76B0"
 members = ["src/rw_pool_8025AE1C_C9C58_us_rev1.c"]
@@ -5053,6 +5493,22 @@ sdk = false
 name = "data_800C9078"
 segment = "span_C76B0"
 members = ["src/rw_pool_8025C10C_C9C78_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C907C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8025C1CC_C9C7C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9084"
+segment = "span_C76B0"
+members = ["src/rw_pool_8025C2EC_C9C84_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5106,6 +5562,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C90E8"
+segment = "span_C76B0"
+members = ["src/rw_pool_8025D844_C9CE8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C90F0"
 segment = "span_C76B0"
 members = ["src/rw_pool_8025D928_C9CF0_us_rev1.c"]
@@ -5141,6 +5605,14 @@ sdk = false
 name = "data_800C9110"
 segment = "span_C76B0"
 members = ["src/rw_pool_8025DC34_C9D10_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9114"
+segment = "span_C76B0"
+members = ["src/rw_pool_8025DC88_C9D14_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5258,9 +5730,41 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9260"
+segment = "span_C76B0"
+members = ["src/rw_pool_802609AC_C9E60_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C926C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C926C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9270"
+segment = "span_C76B0"
+members = ["src/rw_pool_80260B80_C9E70_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9278"
+segment = "span_C76B0"
+members = ["src/rw_pool_80260C9C_C9E78_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9280"
+segment = "span_C76B0"
+members = ["src/rw_pool_80260EF8_C9E80_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5285,6 +5789,14 @@ sdk = false
 name = "data_800C92AA"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C92AA"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C92AC"
+segment = "span_C76B0"
+members = ["src/rw_pool_8026193C_C9EAC_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5498,6 +6010,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9524"
+segment = "span_C76B0"
+members = ["src/rw_pool_802675C8_CA124_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C952C"
+segment = "span_C76B0"
+members = ["src/rw_pool_802676EC_CA12C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9540"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800C942C_0CA08C_0CA0B0_0CA11C_0CA140"]
@@ -5522,6 +6050,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C954C"
+segment = "span_C76B0"
+members = ["src/rw_pool_802681A8_CA14C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9560"
+segment = "span_C76B0"
+members = ["src/rw_pool_802683E0_CA160_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9574"
 segment = "span_C76B0"
 members = ["src/rw_pool_802688E4_CA174_us_rev1.c"]
@@ -5533,6 +6077,14 @@ sdk = false
 name = "data_800C9578"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C9578"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9580"
+segment = "span_C76B0"
+members = ["src/rw_pool_80268A40_CA180_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5618,6 +6170,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9790"
+segment = "span_C76B0"
+members = ["src/rw_pool_8026CE18_CA390_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9798"
 segment = "span_C76B0"
 members = ["src/rw_pool_8026D27C_CA398_us_rev1.c"]
@@ -5682,9 +6242,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C98C4"
+segment = "span_C76B0"
+members = ["src/rw_pool_80270910_CA4C4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C98CC"
 segment = "span_C76B0"
 members = ["src/rw_pool_80270AAC_CA4CC_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C98D0"
+segment = "span_C76B0"
+members = ["src/rw_pool_80270CD0_CA4D0_us_rev1.c", "rodata/unresolved/800C98D8"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5773,6 +6349,14 @@ sdk = false
 name = "data_800C99B0"
 segment = "span_C76B0"
 members = ["src/rw_pool_802727D8_CA5B0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C99B4"
+segment = "span_C76B0"
+members = ["src/rw_pool_80272828_CA5B4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5882,6 +6466,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C99FC"
+segment = "span_C76B0"
+members = ["src/rw_pool_80273EE4_CA5FC_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9A04"
+segment = "span_C76B0"
+members = ["src/rw_pool_80273F94_CA604_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9A0C"
 segment = "span_C76B0"
 members = ["src/rw_pool_80274020_CA60C_us_rev1.c"]
@@ -5954,6 +6554,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9A88"
+segment = "span_C76B0"
+members = ["src/rw_pool_80274A90_CA688_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9A90"
 segment = "span_C76B0"
 members = ["src/rw_pool_80274BF4_CA690_us_rev1.c"]
@@ -5978,9 +6586,33 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9AB0"
+segment = "span_C76B0"
+members = ["src/rw_pool_802750B0_CA6B0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9AB8"
 segment = "span_C76B0"
 members = ["src/rw_pool_8027525C_CA6B8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9ACC"
+segment = "span_C76B0"
+members = ["src/rw_pool_80275688_CA6CC_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9AD4"
+segment = "span_C76B0"
+members = ["src/rw_pool_802757E4_CA6D4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -5997,6 +6629,22 @@ sdk = false
 name = "data_800C9AE0"
 segment = "span_C76B0"
 members = ["src/rw_pool_80275BC8_CA6E0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9AE4"
+segment = "span_C76B0"
+members = ["src/rw_pool_80275C94_CA6E4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9AEC"
+segment = "span_C76B0"
+members = ["src/rw_pool_80275DD4_CA6EC_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -6274,6 +6922,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C9F3C"
+segment = "span_C76B0"
+members = ["src/rw_pool_80281CA0_CAB3C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9F44"
+segment = "span_C76B0"
+members = ["src/rw_pool_80282330_CAB44_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C9F58"
 segment = "span_C76B0"
 members = ["src/rw_pool_80284090_CAB58_us_rev1.c"]
@@ -6285,6 +6949,14 @@ sdk = false
 name = "data_800C9F7C"
 segment = "span_C76B0"
 members = ["src/rw_pool_8028422C_CAB7C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9F80"
+segment = "span_C76B0"
+members = ["src/rw_pool_80284B20_CAB80_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -6317,6 +6989,14 @@ sdk = false
 name = "data_800C9FAC"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C9FAC"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C9FBC"
+segment = "span_C76B0"
+members = ["src/rw_pool_802859D0_CABBC_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -6946,6 +7626,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA3E4"
+segment = "span_C76B0"
+members = ["src/rw_pool_8028D108_CAFE4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA3EC"
 segment = "span_C76B0"
 members = ["src/rw_pool_8044D3E8_CAFEC_us_rev1.c"]
@@ -7026,6 +7714,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA498"
+segment = "span_C76B0"
+members = ["src/rw_pool_802905F4_CB098_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA4AC"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CA4AC"]
@@ -7074,6 +7770,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA510"
+segment = "span_C76B0"
+members = ["src/rw_pool_80291404_us_rev1_CB110_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA518"
 segment = "span_C76B0"
 members = ["src/rw_pool_802917D8_CB118_us_rev1.c"]
@@ -7098,6 +7802,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA564"
+segment = "span_C76B0"
+members = ["src/rw_pool_80293394_CB164_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA56C"
 segment = "span_C76B0"
 members = ["src/rw_pool_802935C0_CB16C_us_rev1.c"]
@@ -7117,6 +7829,22 @@ sdk = false
 name = "data_800CA588"
 segment = "span_C76B0"
 members = ["src/rw_pool_80293904_CB188_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CA590"
+segment = "span_C76B0"
+members = ["src/rw_pool_80293B28_CB190_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CA5A4"
+segment = "span_C76B0"
+members = ["src/rw_pool_80293CE4_CB1A4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7226,6 +7954,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CA7F8"
+segment = "span_C76B0"
+members = ["src/rw_pool_80297FA0_CB3F8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CA808"
 segment = "span_C76B0"
 members = ["src/rw_pool_80298FE8_CB408_us_rev1.c"]
@@ -7237,6 +7973,14 @@ sdk = false
 name = "data_800CA80C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CA80C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CA810"
+segment = "span_C76B0"
+members = ["src/rw_pool_80298FE8_CB410_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7354,6 +8098,30 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CAC84"
+segment = "span_C76B0"
+members = ["src/rw_pool_8029D000_CB884_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAC8C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8029D248_CB88C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAC94"
+segment = "span_C76B0"
+members = ["src/rw_pool_8029D510_CB894_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CAC9C"
 segment = "span_C76B0"
 members = ["src/rw_pool_8029D8E8_CB89C_us_rev1.c"]
@@ -7386,9 +8154,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CACF0"
+segment = "span_C76B0"
+members = ["src/rw_pool_8029DB74_CB8F0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CACF8"
 segment = "span_C76B0"
 members = ["src/rw_pool_8029DB9C_CB8F8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAD58"
+segment = "span_C76B0"
+members = ["src/rw_pool_8029DCB0_CB958_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7421,6 +8205,14 @@ sdk = false
 name = "data_800CAD90"
 segment = "span_C76B0"
 members = ["src/rw_pool_8029DE48_CB990_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CADB4"
+segment = "span_C76B0"
+members = ["src/rw_pool_8029DF48_CB9B4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7546,6 +8338,38 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CAF00"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A1270_CBB00_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAF08"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A13A4_CBB08_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAF10"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A14B8_CBB10_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAF18"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A15E4_CBB18_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CAF20"
 segment = "span_C76B0"
 members = ["src/rw_formats_802A1B24_CBB20_us_rev1.c"]
@@ -7578,6 +8402,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CAF48"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A2480_CBB48_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CAF50"
 segment = "span_C76B0"
 members = ["src/rw_pool_802A25D0_CBB50_us_rev1.c"]
@@ -7594,9 +8426,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CAF74"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A2FA4_CBB74_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CAF7C"
 segment = "span_C76B0"
 members = ["src/rw_pool_802A31E8_CBB7C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CAF80"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A354C_CBB80_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7642,6 +8490,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CB018"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A5020_CBC18_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CB020"
 segment = "span_C76B0"
 members = ["src/rw_pool_802A5498_CBC20_us_rev1.c"]
@@ -7653,6 +8509,14 @@ sdk = false
 name = "data_800CB024"
 segment = "span_C76B0"
 members = ["src/rw_pool_802A57E0_CBC24_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CB028"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A58B0_CBC28_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7677,6 +8541,22 @@ sdk = false
 name = "data_800CB038"
 segment = "span_C76B0"
 members = ["src/rw_pool_802A5BE4_CBC38_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CB048"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A6174_CBC48_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CB050"
+segment = "span_C76B0"
+members = ["src/rw_pool_802A63A4_CBC50_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7965,6 +8845,22 @@ sdk = false
 name = "data_800CB444"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CB444"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CB468"
+segment = "span_C76B0"
+members = ["src/rw_tail_802ACE38_CC068_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CB470"
+segment = "span_C76B0"
+members = ["src/rw_pool_802AD1B4_CC070_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -8282,6 +9178,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CC680"
+segment = "span_C76B0"
+members = ["src/rw_pool_802AFE30_CD280_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CC68C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CC68C"]
@@ -8434,6 +9338,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CC7B0"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B2CF0_CD3B0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CC7B8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CC7B8"]
@@ -8461,6 +9373,22 @@ sdk = false
 name = "data_800CC7C4"
 segment = "span_C76B0"
 members = ["src/ragewars_resident_strings_CD3C4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CC7D8"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B3CD0_CD3D8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CC7E0"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B3DB8_CD3E0_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -8549,6 +9477,14 @@ sdk = false
 name = "data_800CC948"
 segment = "span_C28A0"
 members = ["rodata/unresolved/800CC948", "rodata/writable/800CC958"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CC958"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B5288_CD558_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -8685,6 +9621,22 @@ sdk = false
 name = "data_800CCAA8"
 segment = "span_C76B0"
 members = ["src/rw_pool_802B6560_CD6A8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CCAC8"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B6900_CD6C8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CCAD0"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B6B80_CD6D0_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -11610,9 +12562,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF2D8"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFED8_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF2E0"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0", "src/rw_weapon_state_resource_animation_CFEE8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CF2F8"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFEF8_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -11626,6 +12594,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF318"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFF18_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF320"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20"]
@@ -11634,9 +12610,33 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF338"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFF38_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF340"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CF358"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFF58_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CF378"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFF78_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -11658,6 +12658,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF39C"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80_unclaimed_CFF98_unclaimed_CFF9C", "src/rw_weapon_state_entry_CFFD8_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80_unclaimed_CFF98_unclaimed_CFF9C_unclaimed_CFFE0"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF3E0"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80_unclaimed_CFF98_unclaimed_CFF9C_unclaimed_CFFE0"]
@@ -11666,9 +12674,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF3F8"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_CFFF8_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80_unclaimed_CFF98_unclaimed_CFF9C_unclaimed_CFFE0_unclaimed_CFFF8_unclaimed_D0000"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF400"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80_unclaimed_CFF98_unclaimed_CFF9C_unclaimed_CFFE0_unclaimed_CFFF8_unclaimed_D0000", "src/rw_weapon_state_resource_animation_D0008_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CF418"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_D0018_us_rev1.c", "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40_unclaimed_CFF58_unclaimed_CFF60_unclaimed_CFF78_unclaimed_CFF80_unclaimed_CFF98_unclaimed_CFF9C_unclaimed_CFFE0_unclaimed_CFFF8_unclaimed_D0000_unclaimed_D0018_unclaimed_D0020"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -11706,9 +12730,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF55C"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_D015C_us_rev1.c", "rodata/unresolved/800CF51C_unclaimed_D0144_unclaimed_D015C_unclaimed_D0164"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF564"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF51C_unclaimed_D0144_unclaimed_D015C_unclaimed_D0164"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CF57C"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_D017C_us_rev1.c", "rodata/unresolved/800CF51C_unclaimed_D0144_unclaimed_D015C_unclaimed_D0164_unclaimed_D017C_unclaimed_D0184"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -11757,6 +12797,14 @@ sdk = false
 name = "data_800CF5E8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF5C0_unclaimed_D01E8", "src/rw_weapon_state_resource_animation_D01F0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800CF600"
+segment = "span_C76B0"
+members = ["src/rw_weapon_state_entry_D0200_us_rev1.c", "rodata/unresolved/800CF5C0_unclaimed_D01E8_unclaimed_D0200_unclaimed_D0208"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -13722,6 +14770,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D0670"
+segment = "span_C76B0"
+members = ["src/rw_pool_80245D30_D1270_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D0678"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800D0678"]
@@ -15298,6 +16354,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0B70"
+segment = "span_E1720"
+members = ["src/rw_pool_80401980_E1770_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0C3C"
 segment = "span_E1720"
 members = ["src/rw_constants_8040293C_E183C_us_rev1.c"]
@@ -15674,6 +16738,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1100"
+segment = "span_E1720"
+members = ["src/rw_text_804142AC_E1D00_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1118"
 segment = "span_E1720"
 members = ["src/rw_pool_80414400_E1D18_us_rev1.c"]
@@ -15738,6 +16810,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1470"
+segment = "span_E1720"
+members = ["src/rw_pool_8041A280_E2070_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1478"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E1478"]
@@ -15794,6 +16874,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E14B8"
+segment = "span_E1720"
+members = ["src/rw_pool_8041C7F4_E20B8_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E14C0"
+segment = "span_E1720"
+members = ["src/rw_pool_8041CAD8_E20C0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E14C8"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E14C8"]
@@ -15821,6 +16917,14 @@ sdk = false
 name = "data_800E1574"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E1574"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E1598"
+segment = "span_E1720"
+members = ["src/rw_pool_cells_8041F6C8_E2198_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -16005,6 +17109,14 @@ sdk = false
 name = "data_800E1B2C"
 segment = "span_E1720"
 members = ["src/rw_pool_8042CE74_E272C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E1B3C"
+segment = "span_E1720"
+members = ["src/rw_pool_8042D28C_E273C_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -16322,6 +17434,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E2350"
+segment = "span_E1720"
+members = ["src/rw_pool_8043DF34_E2F50_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E235C"
+segment = "span_E1720"
+members = ["src/rw_pool_8043E6A4_E2F5C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E2368"
 segment = "span_E1720"
 members = ["src/rw_pool_8043E7AC_E2F68_us_rev1.c"]
@@ -16418,6 +17546,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E23F0"
+segment = "span_E1720"
+members = ["src/rw_pool_8043F120_E2FF0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E2458"
 segment = "span_E1720"
 members = ["src/rw_pool_8043F52C_E3058_us_rev1.c"]
@@ -16469,6 +17605,14 @@ sdk = false
 name = "data_800E24D4"
 segment = "span_E1720"
 members = ["src/rw_constants_80441214_E30D4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E24E4"
+segment = "span_E1720"
+members = ["src/rw_pool_804415F4_E30E4_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -16653,6 +17797,14 @@ sdk = false
 name = "data_800E280C"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E280C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E2814"
+segment = "span_E1720"
+members = ["src/rw_pool_80445BC0_E3414_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -79908,10 +81060,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8020ABF0_C7A3C_us_rev1.c"
+kind = "data"
+group = "data_800C6E3C"
+members = ["src/rw_pool_8020ABF0_C7A3C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8020AF9C_C7A44_us_rev1.c"
 kind = "data"
 group = "data_800C6E44"
 members = ["src/rw_pool_8020AF9C_C7A44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8020BC50_C7A58_us_rev1.c"
+kind = "data"
+group = "data_800C6E58"
+members = ["src/rw_pool_8020BC50_C7A58_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -79934,6 +81108,28 @@ path = "src/rw_pool_8020C078_C7A64_us_rev1.c"
 kind = "data"
 group = "data_800C6E64"
 members = ["src/rw_pool_8020C078_C7A64_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8020C2E8_C7A68_us_rev1.c"
+kind = "data"
+group = "data_800C6E68"
+members = ["src/rw_pool_8020C2E8_C7A68_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8020CA10_C7A7C_us_rev1.c"
+kind = "data"
+group = "data_800C6E7C"
+members = ["src/rw_pool_8020CA10_C7A7C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80106,6 +81302,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802110C4_C7CF0_us_rev1.c"
+kind = "data"
+group = "data_800C70F0"
+members = ["src/rw_pool_802110C4_C7CF0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80212670_C7DB0_us_rev1.c"
 kind = "data"
 group = "data_800C71B0"
@@ -80150,6 +81357,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80212FBC_C7DD0_us_rev1.c"
+kind = "data"
+group = "data_800C71D0"
+members = ["src/rw_pool_80212FBC_C7DD0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8021321C_C7DE0_us_rev1.c"
 kind = "data"
 group = "data_800C71E0"
@@ -80176,6 +81394,17 @@ path = "src/rw_pool_80213AAC_us_rev1_C7E18_us_rev1.c"
 kind = "data"
 group = "data_800C7218"
 members = ["src/rw_pool_80213AAC_us_rev1_C7E18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80213ED4_C7E20_us_rev1.c"
+kind = "data"
+group = "data_800C7220"
+members = ["src/rw_pool_80213ED4_C7E20_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80282,6 +81511,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80217594_C7EDC_us_rev1.c"
+kind = "data"
+group = "data_800C72DC"
+members = ["src/rw_pool_80217594_C7EDC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80217630_C7EF0_us_rev1.c"
 kind = "data"
 group = "data_800C72F0"
@@ -80319,6 +81559,17 @@ path = "src/rw_pool_8021836C_C7F3C_us_rev1.c"
 kind = "data"
 group = "data_800C733C"
 members = ["src/rw_pool_8021836C_C7F3C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802184C0_C7F40_us_rev1.c"
+kind = "data"
+group = "data_800C7340"
+members = ["src/rw_pool_802184C0_C7F40_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80374,6 +81625,17 @@ path = "src/rw_pool_80219A40_C7FC4_us_rev1.c"
 kind = "data"
 group = "data_800C73C4"
 members = ["src/rw_pool_80219A40_C7FC4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8021A78C_C7FE8_us_rev1.c"
+kind = "data"
+group = "data_800C73E8"
+members = ["src/rw_pool_8021A78C_C7FE8_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80480,6 +81742,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80220ED4_C84C4_us_rev1.c"
+kind = "data"
+group = "data_800C78C4"
+members = ["src/rw_pool_80220ED4_C84C4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80222908_C8538_us_rev1.c"
 kind = "data"
 group = "data_800C7938"
@@ -80517,6 +81790,17 @@ path = "src/rw_pool_802231D4_C856C_us_rev1.c"
 kind = "data"
 group = "data_800C796C"
 members = ["src/rw_pool_802231D4_C856C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022404C_C8638_us_rev1.c"
+kind = "data"
+group = "data_800C7A38"
+members = ["src/rw_pool_8022404C_C8638_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80623,6 +81907,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80226DD0_C8864_us_rev1.c"
+kind = "data"
+group = "data_800C7C64"
+members = ["src/rw_pool_80226DD0_C8864_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80228AF4_C88CC_us_rev1.c"
 kind = "data"
 group = "data_800C7CCC"
@@ -80671,6 +81966,17 @@ path = "src/rw_pool_8022A504_C89D8_us_rev1.c"
 kind = "data"
 group = "data_800C7DD8"
 members = ["src/rw_pool_8022A504_C89D8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022ADBC_C89F0_us_rev1.c"
+kind = "data"
+group = "data_800C7DF0"
+members = ["src/rw_pool_8022ADBC_C89F0_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80744,6 +82050,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8022BE20_C8A10_us_rev1.c"
+kind = "data"
+group = "data_800C7E10"
+members = ["src/rw_pool_8022BE20_C8A10_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8022C080_C8A18_us_rev1.c"
 kind = "data"
 group = "data_800C7E18"
@@ -80759,6 +82076,39 @@ path = "src/rw_pool_8022C1E8_C8A1C_us_rev1.c"
 kind = "data"
 group = "data_800C7E1C"
 members = ["src/rw_pool_8022C1E8_C8A1C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022C2B4_C8A20_us_rev1.c"
+kind = "data"
+group = "data_800C7E20"
+members = ["src/rw_pool_8022C2B4_C8A20_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022C37C_C8A28_us_rev1.c"
+kind = "data"
+group = "data_800C7E28"
+members = ["src/rw_pool_8022C37C_C8A28_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022C490_C8A30_us_rev1.c"
+kind = "data"
+group = "data_800C7E30"
+members = ["src/rw_pool_8022C490_C8A30_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80788,6 +82138,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8022CA14_C8A50_us_rev1.c"
+kind = "data"
+group = "data_800C7E50"
+members = ["src/rw_pool_8022CA14_C8A50_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8022CB5C_C8A58_us_rev1.c"
 kind = "data"
 group = "data_800C7E58"
@@ -80799,10 +82160,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8022CC34_C8A68_us_rev1.c"
+kind = "data"
+group = "data_800C7E68"
+members = ["src/rw_pool_8022CC34_C8A68_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8022CD78_C8A70_us_rev1.c"
 kind = "data"
 group = "data_800C7E70"
 members = ["src/rw_pool_8022CD78_C8A70_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022CDBC_C8A7C_us_rev1.c"
+kind = "data"
+group = "data_800C7E7C"
+members = ["src/rw_pool_8022CDBC_C8A7C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80847,6 +82230,17 @@ path = "src/rw_pool_8022D428_C8AA8_us_rev1.c"
 kind = "data"
 group = "data_800C7EA8"
 members = ["src/rw_pool_8022D428_C8AA8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022D4BC_C8AAC_us_rev1.c"
+kind = "data"
+group = "data_800C7EAC"
+members = ["src/rw_pool_8022D4BC_C8AAC_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -80909,6 +82303,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8022DFA8_C8AF4_us_rev1.c"
+kind = "data"
+group = "data_800C7EF4"
+members = ["src/rw_pool_8022DFA8_C8AF4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8022E0B0_C8AFC_us_rev1.c"
 kind = "data"
 group = "data_800C7EFC"
@@ -80953,10 +82358,54 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8022E78C_C8B0C_us_rev1.c"
+kind = "data"
+group = "data_800C7F0C"
+members = ["src/rw_pool_8022E78C_C8B0C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8022EC3C_C8B78_us_rev1.c"
+kind = "data"
+group = "data_800C7F78"
+members = ["src/rw_pool_8022EC3C_C8B78_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8022FC20_C8B80_us_rev1.c"
 kind = "data"
 group = "data_800C7F80"
 members = ["src/rw_pool_8022FC20_C8B80_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802301F4_C8BD0_us_rev1.c"
+kind = "data"
+group = "data_800C7FD0"
+members = ["src/rw_pool_802301F4_C8BD0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802303A0_C8BD8_us_rev1.c"
+kind = "data"
+group = "data_800C7FD8"
+members = ["src/rw_pool_802303A0_C8BD8_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81019,10 +82468,43 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8023196C_C8CA0_us_rev1.c"
+kind = "data"
+group = "data_800C80A0"
+members = ["src/rw_pool_8023196C_C8CA0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80231BB0_C8CA8_us_rev1.c"
 kind = "data"
 group = "data_800C80A8"
 members = ["src/rw_pool_80231BB0_C8CA8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80231D48_C8CAC_us_rev1.c"
+kind = "data"
+group = "data_800C80AC"
+members = ["src/rw_pool_80231D48_C8CAC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80231F6C_C8CB4_us_rev1.c"
+kind = "data"
+group = "data_800C80B4"
+members = ["src/rw_pool_80231F6C_C8CB4_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81133,6 +82615,17 @@ path = "src/rw_pool_802330AC_C8D34_us_rev1.c"
 kind = "data"
 group = "data_800C8134"
 members = ["src/rw_pool_802330AC_C8D34_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802331FC_C8D38_us_rev1.c"
+kind = "data"
+group = "data_800C8138"
+members = ["src/rw_pool_802331FC_C8D38_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81272,6 +82765,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802349C0_C8EE8_us_rev1.c"
+kind = "data"
+group = "data_800C82E8"
+members = ["src/rw_pool_802349C0_C8EE8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8023660C_C8FE0_us_rev1.c"
 kind = "data"
 group = "data_800C83E0"
@@ -81393,6 +82897,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80239678_C9240_us_rev1.c"
+kind = "data"
+group = "data_800C8640"
+members = ["src/rw_pool_80239678_C9240_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80239D00_C9258_us_rev1.c"
 kind = "data"
 group = "data_800C8658"
@@ -81441,6 +82956,17 @@ path = "src/rw_pool_80239EA4_C9268_us_rev1.c"
 kind = "data"
 group = "data_800C8668"
 members = ["src/rw_pool_80239EA4_C9268_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8023A294_C928C_us_rev1.c"
+kind = "data"
+group = "data_800C868C"
+members = ["src/rw_pool_8023A294_C928C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81547,6 +83073,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8023E178_C9384_us_rev1.c"
+kind = "data"
+group = "data_800C8784"
+members = ["src/rw_pool_8023E178_C9384_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8023E690_C93B4_us_rev1.c"
 kind = "data"
 group = "data_800C87B4"
@@ -81584,6 +83121,28 @@ path = "src/rw_pool_8023ED64_C93C8_us_rev1.c"
 kind = "data"
 group = "data_800C87C8"
 members = ["src/rw_pool_8023ED64_C93C8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8023EF00_C93D0_us_rev1.c"
+kind = "data"
+group = "data_800C87D0"
+members = ["src/rw_pool_8023EF00_C93D0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8023FD18_C940C_us_rev1.c"
+kind = "data"
+group = "data_800C880C"
+members = ["src/rw_pool_8023FD18_C940C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81668,6 +83227,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802433DC_C9464_us_rev1.c"
+kind = "data"
+group = "data_800C8864"
+members = ["src/rw_pool_802433DC_C9464_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80243A90_C9480_us_rev1.c"
 kind = "data"
 group = "data_800C8880"
@@ -81712,6 +83282,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802459A0_C94C4_us_rev1.c"
+kind = "data"
+group = "data_800C88C4"
+members = ["src/rw_pool_802459A0_C94C4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80245AD8_C94CC_us_rev1.c"
 kind = "data"
 group = "data_800C88CC"
@@ -81727,6 +83308,17 @@ path = "src/rw_pool_80245C38_C94D0_us_rev1.c"
 kind = "data"
 group = "data_800C88D0"
 members = ["src/rw_pool_80245C38_C94D0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80245D30_D1270_us_rev1.c"
+kind = "data"
+group = "data_800D0670"
+members = ["src/rw_pool_80245D30_D1270_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81760,6 +83352,61 @@ path = "src/rw_pool_80247004_C9614_us_rev1.c"
 kind = "data"
 group = "data_800C8A14"
 members = ["src/rw_pool_80247004_C9614_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802472F0_C9638_us_rev1.c"
+kind = "data"
+group = "data_800C8A38"
+members = ["src/rw_pool_802472F0_C9638_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8024A1D0_C973C_us_rev1.c"
+kind = "data"
+group = "data_800C8B3C"
+members = ["src/rw_pool_8024A1D0_C973C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8024A3B0_C9744_us_rev1.c"
+kind = "data"
+group = "data_800C8B44"
+members = ["src/rw_pool_8024A3B0_C9744_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8024A5A8_C974C_us_rev1.c"
+kind = "data"
+group = "data_800C8B4C"
+members = ["src/rw_pool_8024A5A8_C974C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8024A7A0_C9764_us_rev1.c"
+kind = "data"
+group = "data_800C8B64"
+members = ["src/rw_pool_8024A7A0_C9764_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81804,6 +83451,17 @@ path = "src/rw_pool_8024BF24_C984C_us_rev1.c"
 kind = "data"
 group = "data_800C8C4C"
 members = ["src/rw_pool_8024BF24_C984C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8024C454_C9850_us_rev1.c"
+kind = "data"
+group = "data_800C8C50"
+members = ["src/rw_pool_8024C454_C9850_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81899,6 +83557,39 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80250274_C9B44_us_rev1.c"
+kind = "data"
+group = "data_800C8F44"
+members = ["src/rw_pool_80250274_C9B44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80256880_C9BB0_us_rev1.c"
+kind = "data"
+group = "data_800C8FB0"
+members = ["src/rw_pool_80256880_C9BB0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80257360_C9BC0_us_rev1.c"
+kind = "data"
+group = "data_800C8FC0"
+members = ["src/rw_pool_80257360_C9BC0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802577F4_C9BC8_us_rev1.c"
 kind = "data"
 group = "data_800C8FC8"
@@ -81936,6 +83627,28 @@ path = "src/rw_pool_80258A7C_C9BD4_us_rev1.c"
 kind = "data"
 group = "data_800C8FD4"
 members = ["src/rw_pool_80258A7C_C9BD4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80258B94_C9BD8_us_rev1.c"
+kind = "data"
+group = "data_800C8FD8"
+members = ["src/rw_pool_80258B94_C9BD8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80258E5C_C9BE0_us_rev1.c"
+kind = "data"
+group = "data_800C8FE0"
+members = ["src/rw_pool_80258E5C_C9BE0_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81998,6 +83711,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8025AB94_C9C50_us_rev1.c"
+kind = "data"
+group = "data_800C9050"
+members = ["src/rw_pool_8025AB94_C9C50_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8025AE1C_C9C58_us_rev1.c"
 kind = "data"
 group = "data_800C9058"
@@ -82031,6 +83755,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8025C1CC_C9C7C_us_rev1.c"
+kind = "data"
+group = "data_800C907C"
+members = ["src/rw_pool_8025C1CC_C9C7C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8025C2EC_C9C84_us_rev1.c"
+kind = "data"
+group = "data_800C9084"
+members = ["src/rw_pool_8025C2EC_C9C84_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8025C368_C9C8C_us_rev1.c"
 kind = "data"
 group = "data_800C908C"
@@ -82057,6 +83803,17 @@ path = "src/rw_pool_8025D450_C9CC0_us_rev1.c"
 kind = "data"
 group = "data_800C90C0"
 members = ["src/rw_pool_8025D450_C9CC0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8025D844_C9CE8_us_rev1.c"
+kind = "data"
+group = "data_800C90E8"
+members = ["src/rw_pool_8025D844_C9CE8_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82112,6 +83869,28 @@ path = "src/rw_pool_8025DC34_C9D10_us_rev1.c"
 kind = "data"
 group = "data_800C9110"
 members = ["src/rw_pool_8025DC34_C9D10_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8025DC88_C9D14_us_rev1.c"
+kind = "data"
+group = "data_800C9114"
+members = ["src/rw_pool_8025DC88_C9D14_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8025DD60_C9D24_us_rev1.c"
+kind = "data"
+group = "data_800C9120"
+members = ["src/rw_pool_8025DD60_C9D24_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82218,10 +83997,76 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802609AC_C9E60_us_rev1.c"
+kind = "data"
+group = "data_800C9260"
+members = ["src/rw_pool_802609AC_C9E60_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80260B80_C9E70_us_rev1.c"
+kind = "data"
+group = "data_800C9270"
+members = ["src/rw_pool_80260B80_C9E70_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80260C9C_C9E78_us_rev1.c"
+kind = "data"
+group = "data_800C9278"
+members = ["src/rw_pool_80260C9C_C9E78_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80260EF8_C9E80_us_rev1.c"
+kind = "data"
+group = "data_800C9280"
+members = ["src/rw_pool_80260EF8_C9E80_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802612A8_C9E88_us_rev1.c"
 kind = "data"
 group = "data_800C9288"
 members = ["src/rw_pool_802612A8_C9E88_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8026154C_C9E98_us_rev1.c"
+kind = "data"
+group = "data_800C9290"
+members = ["src/rw_pool_8026154C_C9E98_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8026193C_C9EAC_us_rev1.c"
+kind = "data"
+group = "data_800C92AC"
+members = ["src/rw_pool_8026193C_C9EAC_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82372,6 +84217,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802675C8_CA124_us_rev1.c"
+kind = "data"
+group = "data_800C9524"
+members = ["src/rw_pool_802675C8_CA124_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802676EC_CA12C_us_rev1.c"
+kind = "data"
+group = "data_800C952C"
+members = ["src/rw_pool_802676EC_CA12C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80267DB4_CA144_us_rev1.c"
 kind = "data"
 group = "data_800C9544"
@@ -82394,6 +84261,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802681A8_CA14C_us_rev1.c"
+kind = "data"
+group = "data_800C954C"
+members = ["src/rw_pool_802681A8_CA14C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802683E0_CA160_us_rev1.c"
+kind = "data"
+group = "data_800C9560"
+members = ["src/rw_pool_802683E0_CA160_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802688E4_CA174_us_rev1.c"
 kind = "data"
 group = "data_800C9574"
@@ -82405,10 +84294,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80268A40_CA180_us_rev1.c"
+kind = "data"
+group = "data_800C9580"
+members = ["src/rw_pool_80268A40_CA180_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8026B504_CA358_us_rev1.c"
 kind = "data"
 group = "data_800C9758"
 members = ["src/rw_pool_8026B504_CA358_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8026CE18_CA390_us_rev1.c"
+kind = "data"
+group = "data_800C9790"
+members = ["src/rw_pool_8026CE18_CA390_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82493,10 +84404,43 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80270910_CA4C4_us_rev1.c"
+kind = "data"
+group = "data_800C98C4"
+members = ["src/rw_pool_80270910_CA4C4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80270AAC_CA4CC_us_rev1.c"
 kind = "data"
 group = "data_800C98CC"
 members = ["src/rw_pool_80270AAC_CA4CC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80270CD0_CA4D0_us_rev1.c"
+kind = "data"
+group = "data_800C98D0"
+members = ["src/rw_pool_80270CD0_CA4D0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80270FE8_CA4DC_us_rev1.c"
+kind = "data"
+group = "data_800C98D8"
+members = ["src/rw_pool_80270FE8_CA4DC_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82607,6 +84551,17 @@ path = "src/rw_pool_802727D8_CA5B0_us_rev1.c"
 kind = "data"
 group = "data_800C99B0"
 members = ["src/rw_pool_802727D8_CA5B0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80272828_CA5B4_us_rev1.c"
+kind = "data"
+group = "data_800C99B4"
+members = ["src/rw_pool_80272828_CA5B4_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82757,6 +84712,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80273EE4_CA5FC_us_rev1.c"
+kind = "data"
+group = "data_800C99FC"
+members = ["src/rw_pool_80273EE4_CA5FC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80273F94_CA604_us_rev1.c"
+kind = "data"
+group = "data_800C9A04"
+members = ["src/rw_pool_80273F94_CA604_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80274020_CA60C_us_rev1.c"
 kind = "data"
 group = "data_800C9A0C"
@@ -82867,6 +84844,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80274A90_CA688_us_rev1.c"
+kind = "data"
+group = "data_800C9A88"
+members = ["src/rw_pool_80274A90_CA688_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80274BF4_CA690_us_rev1.c"
 kind = "data"
 group = "data_800C9A90"
@@ -82889,10 +84877,43 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802750B0_CA6B0_us_rev1.c"
+kind = "data"
+group = "data_800C9AB0"
+members = ["src/rw_pool_802750B0_CA6B0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8027525C_CA6B8_us_rev1.c"
 kind = "data"
 group = "data_800C9AB8"
 members = ["src/rw_pool_8027525C_CA6B8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80275688_CA6CC_us_rev1.c"
+kind = "data"
+group = "data_800C9ACC"
+members = ["src/rw_pool_80275688_CA6CC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802757E4_CA6D4_us_rev1.c"
+kind = "data"
+group = "data_800C9AD4"
+members = ["src/rw_pool_802757E4_CA6D4_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -82915,6 +84936,28 @@ path = "src/rw_pool_80275BC8_CA6E0_us_rev1.c"
 kind = "data"
 group = "data_800C9AE0"
 members = ["src/rw_pool_80275BC8_CA6E0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80275C94_CA6E4_us_rev1.c"
+kind = "data"
+group = "data_800C9AE4"
+members = ["src/rw_pool_80275C94_CA6E4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80275DD4_CA6EC_us_rev1.c"
+kind = "data"
+group = "data_800C9AEC"
+members = ["src/rw_pool_80275DD4_CA6EC_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83098,6 +85141,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80281CA0_CAB3C_us_rev1.c"
+kind = "data"
+group = "data_800C9F3C"
+members = ["src/rw_pool_80281CA0_CAB3C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80282330_CAB44_us_rev1.c"
+kind = "data"
+group = "data_800C9F44"
+members = ["src/rw_pool_80282330_CAB44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80284090_CAB58_us_rev1.c"
 kind = "data"
 group = "data_800C9F58"
@@ -83120,10 +85185,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80284B20_CAB80_us_rev1.c"
+kind = "data"
+group = "data_800C9F80"
+members = ["src/rw_pool_80284B20_CAB80_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802850C8_CAB90_us_rev1.c"
 kind = "data"
 group = "data_800C9F90"
 members = ["src/rw_pool_802850C8_CAB90_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802859D0_CABBC_us_rev1.c"
+kind = "data"
+group = "data_800C9FBC"
+members = ["src/rw_pool_802859D0_CABBC_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83208,6 +85295,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8028D108_CAFE4_us_rev1.c"
+kind = "data"
+group = "data_800CA3E4"
+members = ["src/rw_pool_8028D108_CAFE4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8028D28C_CAFF0_us_rev1.c"
 kind = "data"
 group = "data_800CA3F0"
@@ -83285,6 +85383,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802905F4_CB098_us_rev1.c"
+kind = "data"
+group = "data_800CA498"
+members = ["src/rw_pool_802905F4_CB098_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80290A68_us_rev1_CB0B0_us_rev1.c"
 kind = "data"
 group = "data_800CA4B0"
@@ -83300,6 +85409,17 @@ path = "src/rw_pool_80291074_CB0E0_us_rev1.c"
 kind = "data"
 group = "data_800CA4E0"
 members = ["src/rw_pool_80291074_CB0E0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80291404_us_rev1_CB110_us_rev1.c"
+kind = "data"
+group = "data_800CA510"
+members = ["src/rw_pool_80291404_us_rev1_CB110_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83340,6 +85460,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80293394_CB164_us_rev1.c"
+kind = "data"
+group = "data_800CA564"
+members = ["src/rw_pool_80293394_CB164_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802935C0_CB16C_us_rev1.c"
 kind = "data"
 group = "data_800CA56C"
@@ -83366,6 +85497,28 @@ path = "src/rw_pool_80293904_CB188_us_rev1.c"
 kind = "data"
 group = "data_800CA588"
 members = ["src/rw_pool_80293904_CB188_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80293B28_CB190_us_rev1.c"
+kind = "data"
+group = "data_800CA590"
+members = ["src/rw_pool_80293B28_CB190_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80293CE4_CB1A4_us_rev1.c"
+kind = "data"
+group = "data_800CA5A4"
+members = ["src/rw_pool_80293CE4_CB1A4_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83428,10 +85581,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80297FA0_CB3F8_us_rev1.c"
+kind = "data"
+group = "data_800CA7F8"
+members = ["src/rw_pool_80297FA0_CB3F8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80298FE8_CB408_us_rev1.c"
 kind = "data"
 group = "data_800CA808"
 members = ["src/rw_pool_80298FE8_CB408_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80298FE8_CB410_us_rev1.c"
+kind = "data"
+group = "data_800CA810"
+members = ["src/rw_pool_80298FE8_CB410_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83516,6 +85691,39 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8029D000_CB884_us_rev1.c"
+kind = "data"
+group = "data_800CAC84"
+members = ["src/rw_pool_8029D000_CB884_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8029D248_CB88C_us_rev1.c"
+kind = "data"
+group = "data_800CAC8C"
+members = ["src/rw_pool_8029D248_CB88C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8029D510_CB894_us_rev1.c"
+kind = "data"
+group = "data_800CAC94"
+members = ["src/rw_pool_8029D510_CB894_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8029D8E8_CB89C_us_rev1.c"
 kind = "data"
 group = "data_800CAC9C"
@@ -83560,10 +85768,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8029DB74_CB8F0_us_rev1.c"
+kind = "data"
+group = "data_800CACF0"
+members = ["src/rw_pool_8029DB74_CB8F0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8029DB9C_CB8F8_us_rev1.c"
 kind = "data"
 group = "data_800CACF8"
 members = ["src/rw_pool_8029DB9C_CB8F8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8029DCB0_CB958_us_rev1.c"
+kind = "data"
+group = "data_800CAD58"
+members = ["src/rw_pool_8029DCB0_CB958_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83608,6 +85838,17 @@ path = "src/rw_pool_8029DE48_CB990_us_rev1.c"
 kind = "data"
 group = "data_800CAD90"
 members = ["src/rw_pool_8029DE48_CB990_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8029DF48_CB9B4_us_rev1.c"
+kind = "data"
+group = "data_800CADB4"
+members = ["src/rw_pool_8029DF48_CB9B4_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83725,6 +85966,61 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802A1270_CBB00_us_rev1.c"
+kind = "data"
+group = "data_800CAF00"
+members = ["src/rw_pool_802A1270_CBB00_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A13A4_CBB08_us_rev1.c"
+kind = "data"
+group = "data_800CAF08"
+members = ["src/rw_pool_802A13A4_CBB08_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A14B8_CBB10_us_rev1.c"
+kind = "data"
+group = "data_800CAF10"
+members = ["src/rw_pool_802A14B8_CBB10_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A15E4_CBB18_us_rev1.c"
+kind = "data"
+group = "data_800CAF18"
+members = ["src/rw_pool_802A15E4_CBB18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A2480_CBB48_us_rev1.c"
+kind = "data"
+group = "data_800CAF48"
+members = ["src/rw_pool_802A2480_CBB48_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802A25D0_CBB50_us_rev1.c"
 kind = "data"
 group = "data_800CAF50"
@@ -83736,10 +86032,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802A2FA4_CBB74_us_rev1.c"
+kind = "data"
+group = "data_800CAF74"
+members = ["src/rw_pool_802A2FA4_CBB74_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802A31E8_CBB7C_us_rev1.c"
 kind = "data"
 group = "data_800CAF7C"
 members = ["src/rw_pool_802A31E8_CBB7C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A354C_CBB80_us_rev1.c"
+kind = "data"
+group = "data_800CAF80"
+members = ["src/rw_pool_802A354C_CBB80_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83791,6 +86109,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802A5020_CBC18_us_rev1.c"
+kind = "data"
+group = "data_800CB018"
+members = ["src/rw_pool_802A5020_CBC18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802A5498_CBC20_us_rev1.c"
 kind = "data"
 group = "data_800CB020"
@@ -83806,6 +86135,17 @@ path = "src/rw_pool_802A57E0_CBC24_us_rev1.c"
 kind = "data"
 group = "data_800CB024"
 members = ["src/rw_pool_802A57E0_CBC24_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A58B0_CBC28_us_rev1.c"
+kind = "data"
+group = "data_800CB028"
+members = ["src/rw_pool_802A58B0_CBC28_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83839,6 +86179,28 @@ path = "src/rw_pool_802A5BE4_CBC38_us_rev1.c"
 kind = "data"
 group = "data_800CB038"
 members = ["src/rw_pool_802A5BE4_CBC38_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A6174_CBC48_us_rev1.c"
+kind = "data"
+group = "data_800CB048"
+members = ["src/rw_pool_802A6174_CBC48_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802A63A4_CBC50_us_rev1.c"
+kind = "data"
+group = "data_800CB050"
+members = ["src/rw_pool_802A63A4_CBC50_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -83945,6 +86307,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802AD1B4_CC070_us_rev1.c"
+kind = "data"
+group = "data_800CB470"
+members = ["src/rw_pool_802AD1B4_CC070_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802AE290_CD148_us_rev1.c"
 kind = "data"
 group = "data_800CC548"
@@ -83960,6 +86333,17 @@ path = "src/rw_pool_802AE7BC_CD160_us_rev1.c"
 kind = "data"
 group = "data_800CC560"
 members = ["src/rw_pool_802AE7BC_CD160_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802AFE30_CD280_us_rev1.c"
+kind = "data"
+group = "data_800CC680"
+members = ["src/rw_pool_802AFE30_CD280_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84033,6 +86417,39 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_802B2CF0_CD3B0_us_rev1.c"
+kind = "data"
+group = "data_800CC7B0"
+members = ["src/rw_pool_802B2CF0_CD3B0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802B3CD0_CD3D8_us_rev1.c"
+kind = "data"
+group = "data_800CC7D8"
+members = ["src/rw_pool_802B3CD0_CD3D8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802B3DB8_CD3E0_us_rev1.c"
+kind = "data"
+group = "data_800CC7E0"
+members = ["src/rw_pool_802B3DB8_CD3E0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_802B3F10_CD418_us_rev1.c"
 kind = "data"
 group = "data_800CC818"
@@ -84048,6 +86465,17 @@ path = "src/rw_pool_802B450C_CD430_us_rev1.c"
 kind = "data"
 group = "data_800CC830"
 members = ["src/rw_pool_802B450C_CD430_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802B5288_CD558_us_rev1.c"
+kind = "data"
+group = "data_800CC958"
+members = ["src/rw_pool_802B5288_CD558_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84081,6 +86509,28 @@ path = "src/rw_pool_802B6560_CD6A8_us_rev1.c"
 kind = "data"
 group = "data_800CCAA8"
 members = ["src/rw_pool_802B6560_CD6A8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802B6900_CD6C8_us_rev1.c"
+kind = "data"
+group = "data_800CCAC8"
+members = ["src/rw_pool_802B6900_CD6C8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802B6B80_CD6D0_us_rev1.c"
+kind = "data"
+group = "data_800CCAD0"
+members = ["src/rw_pool_802B6B80_CD6D0_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84158,6 +86608,17 @@ path = "src/rw_pool_802BFAAC_CDB28_us_rev1.c"
 kind = "data"
 group = "data_800CCF28"
 members = ["src/rw_pool_802BFAAC_CDB28_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80401980_E1770_us_rev1.c"
+kind = "data"
+group = "data_800E0B70"
+members = ["src/rw_pool_80401980_E1770_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84275,6 +86736,39 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8041A280_E2070_us_rev1.c"
+kind = "data"
+group = "data_800E1470"
+members = ["src/rw_pool_8041A280_E2070_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8041C7F4_E20B8_us_rev1.c"
+kind = "data"
+group = "data_800E14B8"
+members = ["src/rw_pool_8041C7F4_E20B8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8041CAD8_E20C0_us_rev1.c"
+kind = "data"
+group = "data_800E14C0"
+members = ["src/rw_pool_8041CAD8_E20C0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_804243E0_E22B0_us_rev1.c"
 kind = "data"
 group = "data_800E16B0"
@@ -84301,6 +86795,17 @@ path = "src/rw_pool_8042CE74_E272C_us_rev1.c"
 kind = "data"
 group = "data_800E1B2C"
 members = ["src/rw_pool_8042CE74_E272C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8042D28C_E273C_us_rev1.c"
+kind = "data"
+group = "data_800E1B3C"
+members = ["src/rw_pool_8042D28C_E273C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84386,6 +86891,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8043DF34_E2F50_us_rev1.c"
+kind = "data"
+group = "data_800E2350"
+members = ["src/rw_pool_8043DF34_E2F50_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8043E6A4_E2F5C_us_rev1.c"
+kind = "data"
+group = "data_800E235C"
+members = ["src/rw_pool_8043E6A4_E2F5C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8043E7AC_E2F68_us_rev1.c"
 kind = "data"
 group = "data_800E2368"
@@ -84401,6 +86928,17 @@ path = "src/rw_pool_8043EF1C_us_rev1_E2F90_us_rev1.c"
 kind = "data"
 group = "data_800E2390"
 members = ["src/rw_pool_8043EF1C_us_rev1_E2F90_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8043F120_E2FF0_us_rev1.c"
+kind = "data"
+group = "data_800E23F0"
+members = ["src/rw_pool_8043F120_E2FF0_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84430,10 +86968,43 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_804415F4_E30E4_us_rev1.c"
+kind = "data"
+group = "data_800E24E4"
+members = ["src/rw_pool_804415F4_E30E4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80445074_eu_E3398_us_rev1.c"
 kind = "data"
 group = "data_800E2798"
 members = ["src/rw_pool_80445074_eu_E3398_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80445BC0_E3414_us_rev1.c"
+kind = "data"
+group = "data_800E2814"
+members = ["src/rw_pool_80445BC0_E3414_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8044952C_C8028_us_rev1.c"
+kind = "data"
+group = "data_800C7428"
+members = ["src/rw_pool_8044952C_C8028_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84500,6 +87071,17 @@ path = "src/rw_pool_cells_802800C0_CAAF4_us_rev1.c"
 kind = "data"
 group = "data_800C9EF4"
 members = ["src/rw_pool_cells_802800C0_CAAF4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_cells_8041F6C8_E2198_us_rev1.c"
+kind = "data"
+group = "data_800E1598"
+members = ["src/rw_pool_cells_8041F6C8_E2198_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -84606,6 +87188,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_tail_8024D284_C9924_us_rev1.c"
+kind = "data"
+group = "data_800C8D24"
+members = ["src/rw_tail_8024D284_C9924_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_tail_8024D398_C996C_us_rev1.c"
+kind = "data"
+group = "data_800C8D6C"
+members = ["src/rw_tail_8024D398_C996C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_tail_8027D97C_CA954_us_rev1.c"
 kind = "data"
 group = "data_800C9D54"
@@ -84672,6 +87276,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_tail_802ACE38_CC068_us_rev1.c"
+kind = "data"
+group = "data_800CB468"
+members = ["src/rw_tail_802ACE38_CC068_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_tail_802B2780_CD394_us_rev1.c"
 kind = "data"
 group = "data_800CC794"
@@ -84698,6 +87313,17 @@ path = "src/rw_text_8021D408_CFDB4_us_rev1.c"
 kind = "data"
 group = "data_800CF1B4"
 members = ["src/rw_text_8021D408_CFDB4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_text_80226950_C8858_us_rev1.c"
+kind = "data"
+group = "data_800C7C58"
+members = ["src/rw_text_80226950_C8858_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -85116,6 +87742,17 @@ path = "src/rw_text_8040B444_E19CC_us_rev1.c"
 kind = "data"
 group = "data_800E0DCC"
 members = ["src/rw_text_8040B444_E19CC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_text_804142AC_E1D00_us_rev1.c"
+kind = "data"
+group = "data_800E1100"
+members = ["src/rw_text_804142AC_E1D00_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -85831,6 +88468,171 @@ path = "src/rw_weapon_state_end_D06E4_us_rev1.c"
 kind = "data"
 group = "data_800CFAE4"
 members = ["src/rw_weapon_state_end_D06E4_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFEB8_us_rev1.c"
+kind = "data"
+group = "data_800CF230"
+members = ["src/rw_weapon_state_entry_CFEB8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFED8_us_rev1.c"
+kind = "data"
+group = "data_800CF2D8"
+members = ["src/rw_weapon_state_entry_CFED8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFEF8_us_rev1.c"
+kind = "data"
+group = "data_800CF2F8"
+members = ["src/rw_weapon_state_entry_CFEF8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFF18_us_rev1.c"
+kind = "data"
+group = "data_800CF318"
+members = ["src/rw_weapon_state_entry_CFF18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFF38_us_rev1.c"
+kind = "data"
+group = "data_800CF338"
+members = ["src/rw_weapon_state_entry_CFF38_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFF58_us_rev1.c"
+kind = "data"
+group = "data_800CF358"
+members = ["src/rw_weapon_state_entry_CFF58_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFF78_us_rev1.c"
+kind = "data"
+group = "data_800CF378"
+members = ["src/rw_weapon_state_entry_CFF78_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFFD8_us_rev1.c"
+kind = "data"
+group = "data_800CF39C"
+members = ["src/rw_weapon_state_entry_CFFD8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_CFFF8_us_rev1.c"
+kind = "data"
+group = "data_800CF3F8"
+members = ["src/rw_weapon_state_entry_CFFF8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_D0018_us_rev1.c"
+kind = "data"
+group = "data_800CF418"
+members = ["src/rw_weapon_state_entry_D0018_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_D013C_us_rev1.c"
+kind = "data"
+group = "data_800CF51C"
+members = ["src/rw_weapon_state_entry_D013C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_D015C_us_rev1.c"
+kind = "data"
+group = "data_800CF55C"
+members = ["src/rw_weapon_state_entry_D015C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_D017C_us_rev1.c"
+kind = "data"
+group = "data_800CF57C"
+members = ["src/rw_weapon_state_entry_D017C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_D01E0_us_rev1.c"
+kind = "data"
+group = "data_800CF5C0"
+members = ["src/rw_weapon_state_entry_D01E0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_entry_D0200_us_rev1.c"
+kind = "data"
+group = "data_800CF600"
+members = ["src/rw_weapon_state_entry_D0200_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
