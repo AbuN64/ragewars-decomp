@@ -6,7 +6,7 @@
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_C76B0/data.h"
 #include "types.h"
-void func_8027A948_de(s32);
+void func_8027A948_de(void *, Vec3 *);
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x30, 0x34, 0x38, 0x48, 0x4c, 0x50, 0x54], gap at: 0x3c. */
 void func_8027ABF4_de(void *arg0) {
@@ -26,7 +26,7 @@ void func_8027ABF4_de(void *arg0) {
     temp_a1 = *((s32 *) ((u8 *) (arg0) + 308));
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
     if ((temp_a1 != 0) && (D_800C4BC8_de < *((f32 *) ((u8 *) (arg0) + 320)))) {
-        func_8027A948_de(temp_a1 + 8);
+        func_8027A948_de(arg0, (void *)(temp_a1 + 8));
         return;
     }
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
