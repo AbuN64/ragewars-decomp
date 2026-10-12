@@ -7018,6 +7018,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0050"
+segment = "rsp_graphics_f3dex2_data"
+members = ["resources/rsp/graphics/800E0050"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0286"
 segment = "span_C25C0"
 members = ["rodata/unresolved/800E42D6", "data/unresolved/800E0288"]
@@ -45423,6 +45431,17 @@ path = "src/resources.rsp.audio.s.c"
 kind = "data"
 group = "data_800DF230"
 members = ["resources/rsp/audio.s"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/resources.rsp.graphics.800E0050.c"
+kind = "data"
+group = "data_800E0050"
+members = ["resources/rsp/graphics/800E0050"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
