@@ -1,17 +1,21 @@
 #include "types.h"
-typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;
-extern char D_800C3E5C_de[], D_800C8F70[], D_800C3E94_de[], D_0026D7D4_de[];
+#include "gfx.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "shared/func_80245BC0_de_closed.h"
+#include "span_1000/code_8024E914.h"
+#include "span_16E000/code_8044ACCC.h"
+extern char D_800C3E5C_de[];
 extern void **func_8025193C_de(s32,s32,s32,s32,s32,s32,void *,void *,s32);
-extern s32 func_8028FE28_de(void *,s32,s32);
-extern void func_80253838_de(s32,void *);
-extern void *func_802540F4_de(s32,s32 **,s32,void *,s32);
-extern s32 func_8028FE3C_de(s32 *,s32,s32,s32 *);
-extern void func_80253670_de(s32,void *);
+extern s32 func_8028FE28_de(s32 *,s32,s32);
+extern s32 func_8028FE3C_de(void *,s32,s32,s32 *);
+extern void func_80253670_de(void *,Node80253610 *);
 void *func_802507AC_de(ResourceOwner *owner,s32 index) {
     void **block;
     void *allocation;
     s32 key;
-    s32 *table;
+    void *table;
+    s32 *entries;
     if (owner->resource != 0) {
         func_80253670_de(0,owner->resource);
         return owner->resource;
@@ -23,12 +27,14 @@ void *func_802507AC_de(ResourceOwner *owner,s32 index) {
             func_80253838_de(0,block);
             allocation = func_802540F4_de(0,&table,key,D_800C8F70,1);
             if (allocation != 0) {
-                owner->selected = func_8028FE3C_de(table,key,index % *table,&owner->size);
+                entries = table;
+                owner->selected = func_8028FE3C_de(table,key,index % *entries,&owner->size);
                 owner->index = index;
                 func_80253838_de(0,allocation);
             }
         }
     }
-    if (owner->selected == 0) return 0;
-    return func_8025193C_de(0,owner->selected,owner->selected,owner->size,0,0,D_0026D7D4_de,D_800C3E94_de,0);
+    if (owner->selected != 0) {
+        return func_8025193C_de(0,owner->selected,owner->selected,owner->size,0,0,D_0026D7D4_de,D_800C3E94_de,0);
+    } else { return 0; }
 }

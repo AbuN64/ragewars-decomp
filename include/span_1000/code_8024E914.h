@@ -6,6 +6,7 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_802508E0.h"
 #include "types.h"
+#include "common/types_1dc8418c21db.h"
 /* unbake published declaration: published_01d743b79ba7ac1c4e1599d2 */
 extern void func_8024F5A0_de(void *arg0);
 
@@ -457,5 +458,10 @@ typedef struct ResourceObject23 {
 extern char D_0024F8DC;
 extern char D_800C3DAC_de;
 extern char D_800C8ED0;
+
+typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;
+extern char D_800C8F70[];
+extern char D_800C3E94_de[];
+extern char D_0026D7D4_de[];
 
 #endif
