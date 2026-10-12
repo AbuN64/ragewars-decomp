@@ -3155,7 +3155,7 @@ segments:
       - [0xC4E5C, data, "rodata/unresolved/800C425C"]
       - [0xC4E60, .rodata, "src/rw_text_802627A0_C9F50_us_rev1.c"]
       - [0xC4E72, data, "rodata/unresolved/800C4272"]
-      - [0xC4E74, rodata, "src/rw_text_802627A0_C9F64_us_rev1.c"]
+      - [0xC4E74, .rodata, "src/rw_text_802627A0_C9F64_us_rev1.c"]
       - [0xC4E85, data, "rodata/unresolved/800C4285"]
       - [0xC4E88, data, "data/unresolved/800C4288"]
       - [0xC4E90, .rodata, "rodata/func_802631B0_de/800C4290"]

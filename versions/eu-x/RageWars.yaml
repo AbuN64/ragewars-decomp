@@ -3182,7 +3182,7 @@ segments:
       - [0xC514C, data, "rodata/unresolved/800C454C"]
       - [0xC5150, .rodata, "src/rw_text_802627A0_C9F50_us_rev1.c"]
       - [0xC5162, data, "rodata/unresolved/800C4562"]
-      - [0xC5164, rodata, "src/rw_text_802627A0_C9F64_us_rev1.c"]
+      - [0xC5164, .rodata, "src/rw_text_802627A0_C9F64_us_rev1.c"]
       - [0xC5175, data, "rodata/unresolved/800C4575"]
       - [0xC5178, data, "data/unresolved/800C4578"]
       - [0xC5180, .rodata, "rodata/func_802631B0_de/800C4580"]
