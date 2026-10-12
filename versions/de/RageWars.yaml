@@ -4209,7 +4209,7 @@ segments:
       - [0xDF368, rodata, "src/rw_pool_80445074_eu_E3398_us_rev1.c"]
       - [0xDF36C, .rodata, "rodata/unresolved/800DE76C"]
       - [0xDF390, rodata, "rodata/func_80444CF8_de/800E27C0"]
-      - [0xDF394, data, "rodata/unresolved/800DE794"]
+      - [0xDF394, .data, "rodata/unresolved/800DE794"]
       - [0xDF3A0, rodata, "rodata/shared/800E27E0"]
       - [0xDF3A6, data, "rodata/unresolved/800DE7A6"]
       - [0xDF3A8, rodata, "rodata/shared/800E27E8"]
