@@ -4813,7 +4813,7 @@ segments:
       - [0x182E38, data, "func_8041CE38_de_padding_182E38"]
       - [0x182E40, asm, "func_8041CE40_de"]
       - [0x183134, c, "func_8041D134_de"]
-      - [0x1834E0, asm, "func_8041D4E0_de"]
+      - [0x1834E0, c, "func_8041D4E0_de"]
       - [0x1836A8, c, "func_8041D6A8_de"]
       - [0x183960, c, "func_8041D960_de"]
       - [0x183A5C, c, "func_8041DA5C_de"]

@@ -2335,7 +2335,7 @@ extern float D_800DD564;
 extern float D_800DD568;
 extern float D_800DD570;
 extern float D_800DD584;
-extern float D_800DD610;
+extern f32 D_800DD610[];
 extern float D_800DD684;
 extern float D_800DD688;
 extern float D_800DD68C;

@@ -1598,7 +1598,7 @@ schema = 1
 "func_802654E8_de" = { evidence = "landed", signature = "s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2)" }
 "func_80265550_de" = { evidence = "landed", signature = "s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4)" }
 "func_8026563C_de" = { evidence = "landed", signature = "int func_8026563C_de(int arg0)" }
-"func_80265650_de" = { evidence = "landed", signature = "s32 func_80265650_de(s32 arg0, s32 arg1)" }
+"func_80265650_de" = { evidence = "landed", signature = "s32 func_80265650_de(void *arg0, s32 arg1)" }
 "func_80265688_de" = { evidence = "landed", signature = "void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2)" }
 "func_802656DC_de" = { evidence = "landed", signature = "void func_802656DC_de(s32 arg0, s32 arg1)" }
 "func_80265714_de" = { evidence = "landed", signature = "f32 func_80265714_de(f32 arg0)" }
@@ -3489,7 +3489,7 @@ schema = 1
 "func_8041CE18_de" = { evidence = "landed", signature = "void func_8041CE18_de(Unk8041CE88 *arg0)" }
 "func_8041CEB0_us_rev1" = { evidence = "landed", signature = "s32 func_8041CEB0_us_rev1(void *arg0)" }
 "func_8041D134_de" = { evidence = "landed", signature = "s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2)" }
-"func_8041D4E0_de" = { evidence = "authored", signature = "void func_8041D4E0_de()" }
+"func_8041D4E0_de" = { evidence = "landed", signature = "void func_8041D4E0_de(void)" }
 "func_8041D6A8_de" = { evidence = "landed", signature = "void func_8041D6A8_de(void)" }
 "func_8041D960_de" = { evidence = "landed", signature = "void func_8041D960_de(void)" }
 "func_8041DA5C_de" = { evidence = "landed", signature = "void func_8041DA5C_de(s32 style)" }
@@ -4360,6 +4360,7 @@ schema = 1
 "quad_normal" = { evidence = "landed", signature = "static inline void quad_normal(struct Quad *quad)" }
 "quatToMtx" = { evidence = "landed", signature = "static inline void quatToMtx(PoseMatrix m, Vector4f *q, Vec3 *t)" }
 "randVec" = { evidence = "landed", signature = "static inline Vec3 randVec(void)" }
+"record32" = { evidence = "landed", signature = "static __inline__ void *record32(void)" }
 "recycle" = { evidence = "landed", signature = "static inline Message *recycle(void *owner, void *pool)" }
 "release" = { evidence = "landed", signature = "static inline void release(s32 node)" }
 "releaseState" = { evidence = "landed", signature = "static inline void releaseState(struct RespawnCarried *carried, struct RespawnFlags *state)" }
@@ -4372,6 +4373,7 @@ schema = 1
 "round_down" = { evidence = "landed", signature = "static inline f64 round_down(f64 arg0)" }
 "round_up" = { evidence = "landed", signature = "static inline f32 round_up(f32 x, f32 floor)" }
 "safe_sqrt" = { evidence = "landed", signature = "static inline f32 safe_sqrt(f32 x)" }
+"screen32" = { evidence = "landed", signature = "static __inline__ Menu_func_8041D960_de *screen32(void)" }
 "seek" = { evidence = "landed", signature = "static inline void seek(Stream *arg0, u32 arg1)" }
 "selectChannel" = { evidence = "landed", signature = "static inline char *selectChannel(Context_func_8025AE1C_de *context, s32 slot)" }
 "select_key" = { evidence = "landed", signature = "static inline int select_key(Descriptor_func_80250274_de *descriptor, u32 timer)" }
@@ -13757,7 +13759,7 @@ schema = 1
 "func_8041F2A0_Config" = { declaration = "struct func_8041F2A0_Config { char pad0[0x78]; u8 active; char pad79[0x96 - 0x79]; };", evidence = "authored" }
 "func_8041F2A0_Item" = { declaration = "struct func_8041F2A0_Item { char pad0[0x10]; u8 alpha; char pad11[3]; s16 x; s16 y; s16 w; };", evidence = "authored" }
 "func_8041F2A0_Layout" = { declaration = "struct func_8041F2A0_Layout { s32 kind; u16 pad4[3]; u16 title; func_8041F2A0_Cell cells[3]; func_8041F2A0_Cell options[3]; };", evidence = "authored" }
-"func_8041F2A0_MenuBlock" = { declaration = "struct func_8041F2A0_MenuBlock { void *root; s32 list; char pad8[0xC8 - 0x08]; func_8041F2A0_Item *item492; s32 round492; func_8041F2A0_Item *item491; s32 round491; s32 unk216; s32 unk220; s32 lookup486; func_8041F2A0_Item *item486; func_8041F2A0_Item *item563; s32 focus; func_8041F2A0_Item *item510; func_8041F2A0_Item *item512; s32 unk248; s32 style; func_8041F2A0_Item *item511; s32 unk260; s32 player; s32 unk268; };", evidence = "authored" }
+"func_8041F2A0_MenuBlock" = { declaration = "struct func_8041F2A0_MenuBlock { void *root; s32 list; struct Record_func_80439C80_de record; char pad40[0xC8 - 0x40]; func_8041F2A0_Item *item492; s32 round492; func_8041F2A0_Item *item491; s32 round491; s32 unk216; s32 unk220; s32 lookup486; func_8041F2A0_Item *item486; func_8041F2A0_Item *item563; s32 focus; func_8041F2A0_Item *item510; func_8041F2A0_Item *item512; s32 unk248; s32 style; func_8041F2A0_Item *item511; s32 unk260; s32 player; s32 unk268; };", evidence = "authored" }
 "func_8041F2A0_Player" = { declaration = "struct func_8041F2A0_Player { func_8041F2A0_Item *highlight; s32 unk4; s32 kind; s32 unkC; s32 choice; char pad14[4]; char model[0x4C0 - 0x18]; s32 unk4C0; s32 pad4C4; };", evidence = "authored" }
 "func_8041F2A0_Row" = { declaration = "struct func_8041F2A0_Row { s32 pad; f32 scale[4]; f32 distance[4]; func_8041F2A0_Vec3 position[4]; s32 light[4]; char tail[12]; };", evidence = "authored" }
 "func_8041F2A0_Vec3" = { declaration = "struct func_8041F2A0_Vec3 { f32 x; f32 y; f32 z; };", evidence = "authored" }

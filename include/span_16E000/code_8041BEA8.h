@@ -5,6 +5,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "resident_event_handler.h"
+#include "span_16E000/code_8043962C.h"
 struct Label;
 /* unbake published declaration: published_071e2f1d45bdec4a8ab958eb */
 typedef struct Label Label;
@@ -269,5 +270,7 @@ extern void func_8041D4E0_de();
 
 extern void func_8041B968_de(struct Object6C *object, s32 value);
 extern void func_8041DA5C_de(s32 style);
+
+extern void func_80439CD4_de(struct ObjectB8 *, s32);
 
 #endif

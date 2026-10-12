@@ -186,7 +186,7 @@ int func_8026563C_de(int arg0) {
     return result >> 3;
 }
 
-s32 func_80265650_de(s32 arg0, s32 arg1)
+s32 func_80265650_de(void *arg0, s32 arg1)
 {
   s32 temp_a1;
   s32 temp_v0;

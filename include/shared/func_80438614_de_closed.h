@@ -13,7 +13,7 @@ extern ModelPreviewScreen *D_800E5830;
 extern void func_80439B5C_de(void *,s32,Vec3,Vec3);
 extern void func_80439BE0_de(void *,Vec3);
 extern void func_80439C30_de(void *,Vec3);
-extern void func_80439C80_de(void *,s32);
+extern s32 func_80439C80_de(void *,s32);
 
 
 #if defined(VERSION_DE)

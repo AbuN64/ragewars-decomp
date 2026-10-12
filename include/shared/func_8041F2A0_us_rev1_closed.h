@@ -2,6 +2,7 @@
 #define FUNC_8041F2A0_US_REV1_CLOSED_H
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+#include "common/types_1dc8418c21db.h"
 /* Remaining func_8041F2A0_* types are unresolved canonical identities. */
 /* Builds the four-player selection screen state, its preview models and sliding panels, then marks active players. */
 struct func_8041F2A0_Vec3 {
@@ -91,7 +92,8 @@ typedef struct func_8041F2A0_Config func_8041F2A0_Config;
 struct func_8041F2A0_MenuBlock {
     void *root;
     s32 list;
-    char pad8[0xC8 - 0x08];
+    struct Record_func_80439C80_de record;
+    char pad40[0xC8 - 0x40];
     func_8041F2A0_Item *item492;
     s32 round492;
     func_8041F2A0_Item *item491;

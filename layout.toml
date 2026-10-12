@@ -54367,6 +54367,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8041D4E0_de.c"
+kind = "c"
+group = "code_8041BEA8"
+members = ["func_8041D4E0_de", "rodata/func_8041D4E0_de/800E1500"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8041D6A8_de.c"
 kind = "c"
 group = "code_8041BEA8"
@@ -68808,17 +68819,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/rodata.func_8041D4E0_de.800E1500.c"
-kind = "data"
-group = "code_8041BEA8"
-members = ["rodata/func_8041D4E0_de/800E1500"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/rodata.func_8041F6C8_de.800E1578.c"
 kind = "data"
 group = "code_8041F1FC"
@@ -79556,18 +79556,6 @@ kind = "data"
 group = "data_800E14C8"
 members = ["rodata/unresolved/800E14C8"]
 toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800E14FC.c"
-kind = "data"
-group = "data_800E14FC"
-members = ["rodata/unresolved/800E14FC"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["eu", "us"]
 
 [unit.options]
 add = []
