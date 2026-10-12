@@ -4312,7 +4312,7 @@ segments:
       - [0xEE0A0, data, "rodata/writable/800E5CA0"]
       - [0xEE0AC, data, "rodata/unresolved/800E5CAC"]
       - [0xEE298, data, "rodata/writable/800E5E48"]
-      - [0xEE2C4, data, "src/rw_menu_font_presets_us_rev1.c"]
+      - [0xEE2C4, .data, "src/rw_menu_font_presets_us_rev1.c"]
       - [0xEE860, data, "rodata/writable/800E2094"]
       - [0xEE870, .data, "rodata/unresolved/800EDC70"]
   - name: span_F0000

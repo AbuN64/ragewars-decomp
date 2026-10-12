@@ -4293,7 +4293,7 @@ segments:
       - [0xE2850, data, "rodata/writable/800E5CA0"]
       - [0xE285C, data, "rodata/unresolved/800E5CAC"]
       - [0xE29F8, data, "rodata/writable/800E5E48"]
-      - [0xE2A24, data, "src/rw_menu_font_presets_us_rev1.c"]
+      - [0xE2A24, .data, "src/rw_menu_font_presets_us_rev1.c"]
       - [0xE2C94, data, "rodata/writable/800E2094"]
       - [0xE2CA0, .data, "rodata/unresolved/800E20A0"]
       - [0xE4C00, rodata, "rodata/shared/800E4000"]
