@@ -1,50 +1,26 @@
 #include "types.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "stddef.h"
-typedef union AimOutput { Vec3 xyz; Vector4f full; Shared_Quad words; } AimOutput;
-typedef struct AimActor {
-    u8 kind; char pad1[7]; Vec3 pos; char pad14[0x5c];
-    f32 height; char pad74[0x8c]; s32 flags; char pad104[0x144]; Vec3 focus;
-} AimActor;
-typedef struct AimController { char pad0[0x7e]; u8 active; } AimController;
-typedef struct AimView {
-    char pad0[0x24]; s32 mode; char pad28[0x100]; Vec3 origin;
-    char pad134[0x2c]; f32 matrix[16];
-} AimView;
-typedef struct AimWeapon { char pad0[14]; s16 idle; s16 locked; } AimWeapon;
-typedef struct AimHit { AimActor *actor; char pad4[0xe0]; Vec3 point; Vec3 normal; } AimHit;
-typedef struct Player_func_80220A80_de {
-    s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594;
-    char pad598[0x40]; AimController *unk5D8; AimView *view;
-    char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788;
-    f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798;
-    Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4];
-    Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8;
-    char pad7EC[0xa24]; s32 enabled; char pad1214[0x244];
-    Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target;
-} Player_func_80220A80_de;
-extern const f32 D_800C23B4_de, D_800C23B8_de, D_800C23BC_de, D_800C23C0_de;
-extern const f32 D_800C23C4_de, D_800C23C8_de, D_800C23CC_de, D_800C23D0_de;
-extern f32 D_800D2988;
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "common/unused.h"
+#include "resident_event_handler.h"
+#include "shared/func_8021E2A0_de_closed.h"
+#include "shared/func_8027AD4C_de_closed.h"
+#include "span_1000/code_8021CD70.h"
+#include "span_1000/code_8022E938.h"
+#include "span_C76B0/data.h"
 extern AimHit *D_80103FCC;
-extern char D_80103FD0, D_801000F0;
-extern AimWeapon *D_800D052C[];
+extern char D_80103FD0;
 void func_8027302C(f32 *, f32 *);
 void func_80226DD0_de(void *, f32 *);
-void func_8022B144_de(void *, Vec3 *);
+void func_8022B144_de(void *, f32 *);
 s32 func_802444A4_de(char *, Vec3, Vec3, s32);
-void func_80272898_de(f32 *, Vec3 *, Vec3 *);
-void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
-void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
-void func_80271F9C_de(Vec3 *, Vec3 *, f32);
-void func_8027207C_de(Vec3 *);
-f32 func_802B72B0_de(f32);
-void func_8021D408_de(void *, Vec3 *, Vec3 *);
+void func_8021D408_de(SharedPlayer_func_8021D408_de *, Vec3 *, Vec3 *);
 void func_8021CF28_de(void *, void *, AimActor **, void *);
 Vector4f func_8024796C_de(char *);
-s32 func_8021CD94_de(void *, void *);
-f32 func_8024D284_de(void *);
-void func_8021D774_de(Player_func_80220A80_de *arg0) {
+s32 func_8021CD94_de(func_8021CD70_S1 *, func_8021CD70_S2 *);
+void func_8021D774_de(AimPlayer *arg0) {
     AimOutput sp20;
     Vec3 sp30;
     Vec3 sp40;
@@ -52,6 +28,7 @@ void func_8021D774_de(Player_func_80220A80_de *arg0) {
     f32 sp60[16];
     Vec3 spA0;
     Vector4f spB0;
+    AimWeapon *weapon;
     AimOutput spC0;
     AimOutput spD0;
     Vec3 spE0;
@@ -67,18 +44,7 @@ void func_8021D774_de(Player_func_80220A80_de *arg0) {
     temp_s0 = arg0->view;
     temp_fs1f = D_800C23B4_de;
     temp_fs2 = D_800C23B8_de;
-    if (temp_s0 != NULL) {
-        if (temp_s0->mode != 1) {
-            func_8027302C(sp60, temp_s0->matrix);
-            spA0 = temp_s0->origin;
-        } else {
-            goto block_4;
-        }
-    } else {
-block_4:
-        func_80226DD0_de(arg0, sp60);
-        func_8022B144_de(arg0, &spA0);
-    }
+    if (temp_s0) { switch (temp_s0->mode) { case 1: func_80226DD0_de(arg0, sp60); func_8022B144_de(arg0, &spA0.x); break; default: func_8027302C(sp60, temp_s0->matrix); spA0 = temp_s0->origin; break; } } else { func_80226DD0_de(arg0, sp60); func_8022B144_de(arg0, &spA0.x); }
     sp30.x = 0.0f;
     sp30.y = 0;
     sp30.z = D_800C23BC_de;
@@ -106,7 +72,7 @@ block_4:
                     func_80271F9C_de(&spC0.xyz, &spE0, temp_fv0);
                     func_80272898_de(sp60, &spC0.xyz, &spD0.xyz);
                     arg0->aim2 = spD0.xyz;
-                    func_8021D408_de(arg0, &spD0.xyz, &D_80103FCC->normal);
+                    func_8021D408_de((void *)arg0, &spD0.xyz, &D_80103FCC->normal);
                 } else {
                     goto block_14;
                 }
@@ -117,7 +83,7 @@ block_4:
 block_14:
 block_15:
             arg0->aim2 = arg0->aim;
-            func_8021D408_de(arg0, &arg0->aim, &D_80103FCC->normal);
+            func_8021D408_de((void *)arg0, &arg0->aim, &D_80103FCC->normal);
         }
     } else {
         arg0->aim2 = sp50;
@@ -125,7 +91,7 @@ block_15:
     if (arg0->unk62E == 1 && arg0->unk594 == 2) {
         var_s4 = 0x2C6;
     } else {
-        var_s4 = D_800D052C[arg0->unk62E]->idle;
+        weapon=D_800D052C[arg0->unk62E]; var_s4=weapon->idle;
     }
     temp_v1 = arg0->unk62E;
     var_s5 = var_s4 + 0x64;
@@ -207,7 +173,7 @@ block_15:
     func_80271F34_de(temp_s2, temp_s2, temp_s0_2);
     func_80271F9C_de(temp_s0_2, temp_s0_2, temp_fs2 * temp_fs0);
     if (spF0 != NULL) {
-        arg0->unk7B8 = D_800D052C[arg0->unk62E]->locked + 0x64;
+        weapon=D_800D052C[arg0->unk62E]; arg0->unk7B8=weapon->locked+0x64;
     } else {
         arg0->unk7B8 = var_s5;
     }
@@ -238,7 +204,7 @@ block_15:
             temp_a1_2 = arg0->unk794;
             spF0 = temp_a1_2;
             if (temp_a1_2 != NULL) {
-                if (func_8021CD94_de(arg0, temp_a1_2) == 0) {
+                if (func_8021CD94_de((void *)arg0, (void *)temp_a1_2) == 0) {
                     arg0->unk788 = 1;
                     arg0->unk78C = 0.0f;
                 }
@@ -252,7 +218,7 @@ block_15:
                 if (arg0->unk62E == 1 && arg0->unk594 == 2) {
                     var_s4 = 0x2C7;
                 } else {
-                    var_s4 = D_800D052C[arg0->unk62E]->locked;
+                    weapon=D_800D052C[arg0->unk62E]; var_s4=weapon->locked;
                 }
             } else {
                 goto reset_position;

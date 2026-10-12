@@ -4,6 +4,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/types_06e4f7ef1f9e.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct SharedPlayer_func_802227F4_de;
 /* unbake published declaration: published_074dd8864ce6d01863b0e7e9 */
 typedef struct SharedPlayer_func_802227F4_de SharedPlayer_func_802227F4_de;
@@ -13677,5 +13680,30 @@ extern float D_800C2990_de;
 struct SharedPlayer_func_80224F5C_de;
 /* unbake published declaration: published_f8287adb8834feb4935cf561 */
 typedef struct SharedPlayer_func_80224F5C_de SharedPlayer_func_80224F5C_de;
+
+typedef union AimOutput { Vec3 xyz; Vector4f full; Shared_Quad words; } AimOutput;
+typedef struct AimActor {
+    u8 kind; char pad1[7]; Vec3 pos; char pad14[0x5c];
+    f32 height; char pad74[0x8c]; s32 flags; char pad104[0x144]; Vec3 focus;
+} AimActor;
+typedef struct AimController { char pad0[0x7e]; u8 active; } AimController;
+typedef struct AimView {
+    char pad0[0x24]; s32 mode; char pad28[0x100]; Vec3 origin;
+    char pad134[0x2c]; f32 matrix[16];
+} AimView;
+typedef struct AimWeapon { char pad0[14]; s16 idle; s16 locked; } AimWeapon;
+typedef struct AimHit { AimActor *actor; char pad4[0xe0]; Vec3 point; Vec3 normal; } AimHit;
+typedef struct AimPlayer {
+    s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594;
+    char pad598[0x40]; AimController *unk5D8; AimView *view;
+    char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788;
+    f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798;
+    Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4];
+    Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8;
+    char pad7EC[0xa24]; s32 enabled; char pad1214[0x244];
+    Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target;
+} AimPlayer;
+extern const f32 D_800C23B4_de;
+extern const f32 D_800C23B8_de;
 
 #endif

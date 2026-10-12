@@ -449,7 +449,7 @@ schema = 1
 "func_8021CD94_de" = { evidence = "landed", signature = "s32 func_8021CD94_de(func_8021CD70_S1 *arg0, func_8021CD70_S2 *arg1)" }
 "func_8021CF28_de" = { evidence = "declared", signature = "void func_8021CF28_de(Shared_Quad *, void *, void **, Shared_Quad *)" }
 "func_8021D408_de" = { evidence = "landed", signature = "void func_8021D408_de(SharedPlayer_func_8021D408_de *player, Vec3 *target, Vec3 *normal)" }
-"func_8021D774_de" = { evidence = "declared", signature = "void func_8021D774_de(Player_func_80220A80_de *)" }
+"func_8021D774_de" = { evidence = "landed", signature = "void func_8021D774_de(AimPlayer *arg0)" }
 "func_8021E08C_de" = { evidence = "landed", signature = "void func_8021E08C_de(View *view, Vec3 *point, s32 icon, f32 frame, f32 scale, f32 size)" }
 "func_8021E2A0_de" = { evidence = "landed", signature = "void func_8021E2A0_de(SharedPlayer *player, void *view)" }
 "func_8021E5F8_de" = { evidence = "declared", signature = "void func_8021E5F8_de(void *, void *)" }
@@ -4871,12 +4871,14 @@ schema = 1
 "D_800C23AC_de" = { declaration = "extern float D_800C23AC_de;", evidence = "authored" }
 "D_800C23B0_de" = { declaration = "extern float D_800C23B0_de;", evidence = "authored" }
 "D_800C23B0_eu_x" = { declaration = "extern float D_800C23B0_eu_x;", evidence = "authored" }
-"D_800C23BC_de" = { declaration = "extern float D_800C23BC_de;", evidence = "authored" }
-"D_800C23C0_de" = { declaration = "extern float D_800C23C0_de;", evidence = "authored" }
-"D_800C23C4_de" = { declaration = "extern float D_800C23C4_de;", evidence = "authored" }
-"D_800C23C8_de" = { declaration = "extern float D_800C23C8_de;", evidence = "authored" }
-"D_800C23CC_de" = { declaration = "extern float D_800C23CC_de;", evidence = "authored" }
-"D_800C23D0_de" = { declaration = "extern float D_800C23D0_de;", evidence = "authored" }
+"D_800C23B4_de" = { declaration = "extern const f32 D_800C23B4_de;", evidence = "authored" }
+"D_800C23B8_de" = { declaration = "extern const f32 D_800C23B8_de;", evidence = "authored" }
+"D_800C23BC_de" = { declaration = "extern const float D_800C23BC_de;", evidence = "authored" }
+"D_800C23C0_de" = { declaration = "extern const float D_800C23C0_de;", evidence = "authored" }
+"D_800C23C4_de" = { declaration = "extern const float D_800C23C4_de;", evidence = "authored" }
+"D_800C23C8_de" = { declaration = "extern const float D_800C23C8_de;", evidence = "authored" }
+"D_800C23CC_de" = { declaration = "extern const float D_800C23CC_de;", evidence = "authored" }
+"D_800C23D0_de" = { declaration = "extern const float D_800C23D0_de;", evidence = "authored" }
 "D_800C23D4_de" = { declaration = "extern float D_800C23D4_de;", evidence = "authored" }
 "D_800C23D8_de" = { declaration = "extern float D_800C23D8_de;", evidence = "authored" }
 "D_800C23DC_de" = { declaration = "extern float D_800C23DC_de;", evidence = "authored" }
@@ -9713,6 +9715,13 @@ schema = 1
 "Actor_func_804441F4_de" = { declaration = "struct Actor_func_804441F4_de { char pad[0x1C]; struct Owner_func_804441F4_de *owner; };", evidence = "authored" }
 "Actor_func_8044560C_de" = { declaration = "typedef struct Actor_func_8044560C_de Actor_func_8044560C_de;", evidence = "authored" }
 "Actor_func_8044A020_de" = { declaration = "struct Actor_func_8044A020_de { char pad[0x5D8]; struct Part *part; };", evidence = "authored" }
+"AimActor" = { declaration = "typedef struct AimActor { u8 kind; char pad1[7]; Vec3 pos; char pad14[0x5c]; f32 height; char pad74[0x8c]; s32 flags; char pad104[0x144]; Vec3 focus; } AimActor;", evidence = "authored" }
+"AimController" = { declaration = "typedef struct AimController { char pad0[0x7e]; u8 active; } AimController;", evidence = "authored" }
+"AimHit" = { declaration = "typedef struct AimHit { AimActor *actor; char pad4[0xe0]; Vec3 point; Vec3 normal; } AimHit;", evidence = "authored" }
+"AimOutput" = { declaration = "typedef union AimOutput { Vec3 xyz; Vector4f full; Shared_Quad words; } AimOutput;", evidence = "authored" }
+"AimPlayer" = { declaration = "typedef struct AimPlayer { s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594; char pad598[0x40]; AimController *unk5D8; AimView *view; char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788; f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798; Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4]; Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8; char pad7EC[0xa24]; s32 enabled; char pad1214[0x244]; Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target; } AimPlayer;", evidence = "authored" }
+"AimView" = { declaration = "typedef struct AimView { char pad0[0x24]; s32 mode; char pad28[0x100]; Vec3 origin; char pad134[0x2c]; f32 matrix[16]; } AimView;", evidence = "authored" }
+"AimWeapon" = { declaration = "typedef struct AimWeapon { char pad0[14]; s16 idle; s16 locked; } AimWeapon;", evidence = "authored" }
 "Angles" = { declaration = "typedef struct Angles Angles;", evidence = "authored" }
 "Angles_func_8025AB94_de" = { declaration = "typedef struct Angles_func_8025AB94_de Angles_func_8025AB94_de;", evidence = "authored" }
 "Anim" = { declaration = "struct Anim { s32 time; s16 current; s16 next; u16 frames; u8 blending; u8 active; s32 length; void *resource; };", evidence = "authored" }
