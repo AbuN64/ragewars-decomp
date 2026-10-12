@@ -4098,7 +4098,7 @@ segments:
       - [0xE9F73, data, "rodata/unresolved/800E9373"]
       - [0xE9F74, data, "data/unresolved/800E9374"]
       - [0xE9F80, rodata, "rodata/func_8042E1F0_de/800E1B70"]
-      - [0xE9F94, rodata, "src/rw_pool_8042ED70_E2784_us_rev1.c"]
+      - [0xE9F94, .rodata, "src/rw_pool_8042ED70_E2784_us_rev1.c"]
       - [0xE9FA0, .rodata, "rodata/func_8042FD3C_eu_x/800E93A0"]
       - [0xE9FC0, rodata, "rodata/func_8042F7A8_de/800E1BB0"]
       - [0xE9FD4, data, "rodata/unresolved/800E93D4"]
