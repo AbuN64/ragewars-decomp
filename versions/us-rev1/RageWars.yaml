@@ -5393,7 +5393,7 @@ segments:
     subalign: 1
     subsegments:
       - [0xE1720, rodata, "rodata/func_80400000_de/800E0B20"]
-      - [0xE172C, rodata, "rodata/shared/800E0B2C"]
+      - [0xE172C, .rodata, "rodata/shared/800E0B2C"]
       - [0xE173D, data, "rodata/unresolved/800E0B3D"]
       - [0xE1740, rodata, "src/rw_text_804009F4_E1740_us_rev1.c"]
       - [0xE1747, data, "rodata/unresolved/800E0B47"]

@@ -3901,7 +3901,7 @@ segments:
       - [0xD60B8, data, "rodata/writable/800D94E8"]
       - [0xD6164, data, "src/huffman_initial_block_ranges.c"]
       - [0xDD6F0, rodata, "rodata/func_80400000_de/800E0B20"]
-      - [0xDD6FC, rodata, "rodata/shared/800E0B2C"]
+      - [0xDD6FC, .rodata, "rodata/shared/800E0B2C"]
       - [0xDD70D, data, "rodata/unresolved/800DCB0D"]
       - [0xDD710, rodata, "src/rw_text_804009F4_E1740_us_rev1.c"]
       - [0xDD717, data, "rodata/unresolved/800DCB17"]

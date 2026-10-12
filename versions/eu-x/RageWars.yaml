@@ -3923,7 +3923,7 @@ segments:
       - [0xE18F8, data, "rodata/writable/800D94E8"]
       - [0xE19A4, data, "src/huffman_initial_block_ranges.c"]
       - [0xE8F30, rodata, "rodata/func_80400000_de/800E0B20"]
-      - [0xE8F3C, rodata, "rodata/shared/800E0B2C"]
+      - [0xE8F3C, .rodata, "rodata/shared/800E0B2C"]
       - [0xE8F4D, data, "rodata/unresolved/800E834D"]
       - [0xE8F50, rodata, "src/rw_text_804009F4_E1740_us_rev1.c"]
       - [0xE8F57, data, "rodata/unresolved/800E8357"]
