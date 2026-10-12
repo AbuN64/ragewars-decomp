@@ -5172,7 +5172,7 @@ segments:
       - [0xD3FC0, .data, "src/ragewars_pickup_targeted_us_rev1.c"]
       - [0xD40C0, .data, "src/ragewars_pickup_ammo_us_rev1.c"]
       - [0xD4240, .data, "rodata/writable/800D3640"]
-      - [0xD4254, data, "src/ragewars_menu_strings_D4254_us_rev1.c"]
+      - [0xD4254, .data, "src/ragewars_menu_strings_D4254_us_rev1.c"]
       - [0xD4268, .data, "rodata/writable/800D3640_unclaimed_D4268"]
       - [0xD4290, .data, "src/ragewars_menu_strings_D4290_us_rev1.c"]
       - [0xD53E0, data, "src/ragewars_menu_on_label_us_rev1.c"]
