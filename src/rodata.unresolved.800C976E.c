@@ -1,3 +1,4 @@
-unsigned short D_auto_rodata_unresolved_800C976E[1] = {
+/* ROM-grounded data: rodata/unresolved/800C976E */
+unsigned short D_blob_73952d5c9ab334faf16c[1] = {
     0x0000,
 };

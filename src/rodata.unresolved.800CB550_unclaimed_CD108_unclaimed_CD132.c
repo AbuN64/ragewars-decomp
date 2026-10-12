@@ -1,3 +1,4 @@
-unsigned short D_auto_rodata_unresolved_800CB550_unclaimed_CD108_unclaimed_CD132[1] = {
+/* ROM-grounded data: rodata/unresolved/800CB550_unclaimed_CD108_unclaimed_CD132 */
+unsigned short D_blob_2039e765e0f107c77aec[1] = {
     0x43D8,
 };
