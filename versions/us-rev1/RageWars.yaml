@@ -3483,7 +3483,7 @@ segments:
       - [0xCAF0D, data, "rodata/unresolved/800CA30D"]
       - [0xCAF10, rodata, "src/rw_text_80288470_CAF10_us_rev1.c"]
       - [0xCAF19, data, "rodata/unresolved/800CA319"]
-      - [0xCAF1C, rodata, "src/rw_text_80288938_CAF1C_us_rev1.c"]
+      - [0xCAF1C, .rodata, "src/rw_text_80288938_CAF1C_us_rev1.c"]
       - [0xCAF2E, data, "rodata/unresolved/800CA32E"]
       - [0xCAF30, .rodata, "src/rw_pool_80289970_CAF30_us_rev1.c"]
       - [0xCAF74, rodata, "rodata/shared/800CA374"]

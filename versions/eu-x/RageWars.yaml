@@ -3429,7 +3429,7 @@ segments:
       - [0xC610D, data, "rodata/unresolved/800C550D"]
       - [0xC6110, rodata, "src/rw_text_80288470_CAF10_us_rev1.c"]
       - [0xC6119, data, "rodata/unresolved/800C5519"]
-      - [0xC611C, rodata, "src/rw_text_80288938_CAF1C_us_rev1.c"]
+      - [0xC611C, .rodata, "src/rw_text_80288938_CAF1C_us_rev1.c"]
       - [0xC612E, data, "rodata/unresolved/800C552E"]
       - [0xC6130, .rodata, "src/rw_pool_80289970_CAF30_us_rev1.c"]
       - [0xC6174, rodata, "rodata/shared/800CA374"]
