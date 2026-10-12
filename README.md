@@ -7,11 +7,11 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [██████████████▒░░░░░]  72.42% (~75.83%)  4,966,789 of 6,857,872 bytes</code><br><code>de       [██████████████▒░░░░░]  73.94% (~77.27%)  1,022,295 of 1,382,608 bytes</code><br><code>eu       [█████████████▒░░░░░░]  67.79% (~71.12%)  940,596 of 1,387,504 bytes</code><br><code>eu-x     [█████████████▒░░░░░░]  67.52% (~71.05%)  890,042 of 1,318,176 bytes</code><br><code>us       [███████████████▒░░░░]  75.79% (~78.98%)  1,048,216 of 1,382,992 bytes</code><br><code>us-rev1  [███████████████▒░░░░]  76.85% (~80.49%)  1,065,640 of 1,386,592 bytes</code></pre>
+<pre><code>all      [██████████████▒░░░░░]  72.42% (~75.85%)  4,966,789 of 6,857,872 bytes</code><br><code>de       [██████████████▒░░░░░]  73.94% (~77.38%)  1,022,295 of 1,382,608 bytes</code><br><code>eu       [█████████████▒░░░░░░]  67.79% (~71.12%)  940,596 of 1,387,504 bytes</code><br><code>eu-x     [█████████████▒░░░░░░]  67.52% (~71.05%)  890,042 of 1,318,176 bytes</code><br><code>us       [███████████████▒░░░░]  75.79% (~78.98%)  1,048,216 of 1,382,992 bytes</code><br><code>us-rev1  [███████████████▒░░░░]  76.85% (~80.49%)  1,065,640 of 1,386,592 bytes</code></pre>
 
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  68.84% (~73.01%)  760,708 of 1,104,964</code><br><code>data      [██████████████████░░]  94.22% (~94.22%)  261,587 of 277,644</code><br><code>functions [███████████████░░░░░]  79.91%  2,927 of 3,663</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  68.84% (~73.15%)  760,708 of 1,104,964</code><br><code>data      [██████████████████░░]  94.22% (~94.22%)  261,587 of 277,644</code><br><code>functions [███████████████░░░░░]  79.91%  2,927 of 3,663</code></pre> |
 
 | eu (NUS-NRWP-0, Europe). PAL release. SHA256 `d763cbbe485a5f9e1b7be97d5ac16735087e23d0bb62c05dc844e01b7e1156d1` |
 |---|
