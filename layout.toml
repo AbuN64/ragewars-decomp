@@ -1618,6 +1618,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C1A58"
+segment = "span_C25C0"
+members = ["rodata/func_8020402C_de/800C1A58"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C1CEC"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800C1CEC"]
@@ -43713,6 +43721,17 @@ path = "src/retained_A0190.c"
 kind = "data"
 group = "data_8029F590"
 members = ["retained_A0190"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.func_8020402C_de.800C1A58.c"
+kind = "data"
+group = "data_800C1A58"
+members = ["rodata/func_8020402C_de/800C1A58"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
