@@ -1026,7 +1026,7 @@ segments:
       - [0x4FCE8, c, "func_8024F108_de"]
       - [0x4FE74, asm, "func_8024F294_de"]
       - [0x50050, c, "func_8024F470_de"]
-      - [0x50524, data, "rodata/unresolved/8024F924"]
+      - [0x50524, .data, "rodata/unresolved/8024F924"]
       - [0x50530, c, "func_8024F960_eu"]
       - [0x5093C, c, "func_8024FD6C_eu"]
       - [0x50C94, c, "func_802500FC_de"]
