@@ -3183,7 +3183,7 @@ segments:
       - [0xC5114, .rodata, "rodata/unresolved/800C4514"]
       - [0xC5134, .rodata, "src/rw_pool_cells_80269A80_CA2F4_us_rev1.c"]
       - [0xC5148, rodata, "rodata/func_80269A80_de/800C9708"]
-      - [0xC5164, rodata, "src/rw_pool_cells_80269A80_CA324_us_rev1.c"]
+      - [0xC5164, .rodata, "src/rw_pool_cells_80269A80_CA324_us_rev1.c"]
       - [0xC5178, rodata, "rodata/func_80269A80_de/800C9738"]
       - [0xC5194, rodata, "src/rw_tail_80269A80_CA354_us_rev1.c"]
       - [0xC5198, rodata, "src/rw_pool_8026B504_CA358_us_rev1.c"]
