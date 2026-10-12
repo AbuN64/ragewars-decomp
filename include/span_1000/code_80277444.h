@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_1000_CODE_80277444_H
 #include "../types.h"
 #include "common/types_06e4f7ef1f9e.h"
+#include "resident_event_handler.h"
+#include "types.h"
 /* unbake published declaration: published_077af1a9cbac20a8f4d5880a */
 extern void func_80279158_de(void *arg0);
 
@@ -151,5 +153,9 @@ extern s32 func_80278ABC_de(void);
 struct Object_func_802773D4_de;
 /* unbake published declaration: published_f93b6b8cec35862b74a03345 */
 typedef struct Object_func_802773D4_de Object_func_802773D4_de;
+
+typedef struct Vertex38 { u8 pad0[6]; u16 flags; u8 pad8[4]; s8 x,y,z; u8 padF; } Vertex38;
+typedef struct Vertices38 { s32 stride, count; Vertex38 vertices[1]; } Vertices38;
+typedef struct Light38 { u8 pad0[0x11]; s8 x,y,z; } Light38;
 
 #endif

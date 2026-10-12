@@ -1841,6 +1841,7 @@ schema = 1
 "func_80276B44_de" = { evidence = "landed", signature = "void func_80276B44_de(unsigned char percent, unsigned char r, unsigned char g, unsigned char b, unsigned char *outR, unsigned char *outG, unsigned char *outB)" }
 "func_80277128_de" = { evidence = "landed", signature = "s32 func_80277128_de(void *arg0, u32 arg1, u32 arg2, u32 arg3, Vec3 *arg4, f32 *arg5)" }
 "func_802773D4_de" = { evidence = "landed", signature = "s32 func_802773D4_de(Object_func_802773D4_de *arg0, Vec3 arg1, Vec3 arg4, void *arg7, Vec3 *arg8, f32 *arg9)" }
+"func_80277A98_de" = { evidence = "landed", signature = "void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, Vec3 *output, s32 skin)" }
 "func_80278890_de" = { evidence = "landed", signature = "f32 func_80278890_de(void *arg0)" }
 "func_8027892C_de" = { evidence = "landed", signature = "void func_8027892C_de(Object_func_8027892C_de *object, u8 *colors)" }
 "func_80278ABC_de" = { evidence = "landed", signature = "s32 func_80278ABC_de(void)" }
@@ -10530,6 +10531,7 @@ schema = 1
 "LevelSpawnLevelWorld" = { declaration = "typedef struct LevelSpawnLevelWorld LevelSpawnLevelWorld;", evidence = "authored" }
 "Level_func_8044B7C0_de" = { declaration = "typedef struct Level_func_8044B7C0_de Level_func_8044B7C0_de;", evidence = "authored" }
 "Level_func_8044CD8C_de" = { declaration = "struct Level_func_8044CD8C_de { char pad0[0x30]; s32 key; char pad34[0x64 - 0x34]; s32 file; void *grid; };", evidence = "authored" }
+"Light38" = { declaration = "typedef struct Light38 { u8 pad0[0x11]; s8 x,y,z; } Light38;", evidence = "authored" }
 "LightData" = { declaration = "struct LightData { u16 falloff; u16 near; u8 color[4]; };", evidence = "authored" }
 "LightNode" = { declaration = "struct LightNode { char pad0[8]; LightData *data; f32 intensity; s16 position[3]; s16 active; };", evidence = "authored" }
 "LightSettings" = { declaration = "typedef struct LightSettings LightSettings;", evidence = "authored" }
@@ -12689,6 +12691,8 @@ schema = 1
 "VectorPair" = { declaration = "struct VectorPair { Vec3 first; Vec3 second; char pad[8]; };", evidence = "authored" }
 "Vehicle" = { declaration = "typedef struct Vehicle Vehicle;", evidence = "authored" }
 "VersusResultsScreen" = { declaration = "struct VersusResultsScreen { char pad0[0x8]; char panels[4][0xC0]; char tie[0x3DC - 0x308]; s32 state; char pad3E0[0x434 - 0x3E0]; s32 winnerSlot; s32 winner; char pad43C[0x450 - 0x43C]; struct Resource_func_80419E54_de *bannerShadow; struct Resource_func_80419E54_de *banner; char pad458[0x464 - 0x458]; s32 frames; s32 blinkDelay; s32 blinking; };", evidence = "authored" }
+"Vertex38" = { declaration = "typedef struct Vertex38 { u8 pad0[6]; u16 flags; u8 pad8[4]; s8 x,y,z; u8 padF; } Vertex38;", evidence = "authored" }
+"Vertices38" = { declaration = "typedef struct Vertices38 { s32 stride, count; Vertex38 vertices[1]; } Vertices38;", evidence = "authored" }
 "View" = { declaration = "struct View { char pad0[0x29C]; f32 viewport[4]; char pad2AC[0x340 - 0x2AC]; Vec3 normal; f32 distance; };", evidence = "authored" }
 "ViewState" = { declaration = "struct ViewState { u8 bytes[0x29C]; f32 width; f32 height; };", evidence = "authored" }
 "View_func_80225940_de" = { declaration = "typedef struct View_func_80225940_de View_func_80225940_de;", evidence = "authored" }

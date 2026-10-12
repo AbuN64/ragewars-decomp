@@ -180,7 +180,7 @@ extern float D_800C211C_de;
 extern double D_800C2130_de;
 extern float D_800C2138_de;
 extern float D_800C213C_de;
-extern float D_800C2160_de;
+extern float D_800C2160_de[];
 extern float D_800C2164_de;
 extern float D_800C2168_de;
 extern float D_800C217C_de;
