@@ -4298,7 +4298,7 @@ segments:
     subalign: 1
     subsegments:
       - [0x164000, c, "func_80400000_de"]
-      - [0x16467C, asm, "func_8040067C_de"]
+      - [0x16467C, c, "func_8040067C_de"]
       - [0x1649F4, asm, "func_804009F4_de"]
       - [0x164E50, c, "func_80400E50_de"]
       - [0x165214, c, "func_80401214_de"]

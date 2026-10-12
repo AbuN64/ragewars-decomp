@@ -1775,8 +1775,9 @@ typedef struct func_8024E8F0_S1 func_8024E8F0_S1;
 
 struct Shape_typemap_165;
 /* unbake published declaration: published_ea28f56ba4d6d1810752daab */
+struct Pack;
 struct Shape_typemap_165 {
-    int field_0;
+    union { int field_0; struct Pack *pack; };
     int field_4;
     int field_8;
     int field_C;

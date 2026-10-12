@@ -4,6 +4,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
+#include "audio_callbacks.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_802609CC.h"
 struct Item_func_80403458_de;
 /* unbake published declaration: published_05bb5eaae53a8423a02eb7ee */
 struct Item_func_80403458_de {
@@ -283,5 +286,12 @@ typedef struct Record_func_80402FB4_de Record_func_80402FB4_de;
 typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;
 extern f32 func_8040170C_de(f32);
 extern void func_8040293C_de(void);
+
+typedef struct SplineSource { s32 stride,count; union { char data[0]; Vec3 points[0]; f32 weights[0]; }; } SplineSource;
+typedef struct SplineTable { s32 count; } SplineTable;
+extern int func_8028FEB8_de(int *);
+extern void func_802610A8_de(void *,s32);
+extern char *func_802610F0_de(Pack *,s32,s32);
+typedef union SplineSourceCursor { SplineSource *header; Vec3 *points; f32 *weights; } SplineSourceCursor;
 
 #endif

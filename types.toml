@@ -3013,6 +3013,7 @@ schema = 1
 "func_802C6970_us_rev1" = { evidence = "landed", signature = "double func_802C6970_us_rev1(long long u)" }
 "func_80400000_de" = { evidence = "landed", signature = "void func_80400000_de(s32 n, f32 *ys, f32 *xs, f32 *out)" }
 "func_804002D8_de" = { evidence = "landed", signature = "void func_804002D8_de(s32 count, Vec3 *points, f32 *weights, Spline *spline)" }
+"func_8040067C_de" = { evidence = "landed", signature = "void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle)" }
 "func_804009F4_de" = { evidence = "authored", signature = "void func_804009F4_de(int resource)" }
 "func_80400E50_de" = { evidence = "landed", signature = "Vec3 func_80400E50_de(SplineNode *nodes, s32 count, f32 w)" }
 "func_80401214_de" = { evidence = "landed", signature = "Vec3 func_80401214_de(f32 t)" }
@@ -4357,6 +4358,7 @@ schema = 1
 "offset_x" = { evidence = "landed", signature = "static inline f32 offset_x(Actor_func_80279B40_de *actor)" }
 "offset_y" = { evidence = "landed", signature = "static inline f32 offset_y(Actor_func_80279B40_de *actor)" }
 "overlaps" = { evidence = "landed", signature = "static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max)" }
+"packAppend" = { evidence = "landed", signature = "static inline char *packAppend(Pack *pack,void *prepare,s32 size)" }
 "packMtx" = { evidence = "landed", signature = "static inline void packMtx(u32 *out, PoseMatrix m)" }
 "pak27" = { evidence = "landed", signature = "static inline void *pak27(s32 ch)" }
 "path_length" = { evidence = "landed", signature = "static inline s32 path_length(u8 *s)" }
@@ -4408,6 +4410,7 @@ schema = 1
 "spawnTable5" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable5(void)" }
 "spawnTable6" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable6(void)" }
 "spawn_effect" = { evidence = "landed", signature = "static inline Effect_func_80262A9C_de *spawn_effect(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
+"splineRecordSize" = { evidence = "landed", signature = "static inline s32 splineRecordSize(s32 left,s32 right)" }
 "stage_arena" = { evidence = "landed", signature = "static inline s32 stage_arena(s32 cup, s32 stage)" }
 "stamp" = { evidence = "landed", signature = "static inline void stamp(Node_func_80251F6C_de *node)" }
 "sync" = { evidence = "landed", signature = "static inline void sync(void)" }
@@ -11894,7 +11897,7 @@ schema = 1
 "Shape_typemap_162" = { declaration = "struct Shape_typemap_162 { unsigned char padding_0[8]; int field_8; int field_C; int field_10; unsigned char padding_14[88]; float field_6C; unsigned char padding_70[1292]; unsigned char unknown_57C[4]; unsigned char unknown_580[4]; unsigned char padding_584[12]; unsigned char unknown_590[4]; };", evidence = "authored" }
 "Shape_typemap_163" = { declaration = "struct Shape_typemap_163 { int field_0; unsigned char padding_4[4]; void * field_8; int field_C; unsigned char padding_10[4]; int field_14; int field_18; };", evidence = "authored" }
 "Shape_typemap_164" = { declaration = "struct Shape_typemap_164 { unsigned char padding_0[8]; short field_8; };", evidence = "authored" }
-"Shape_typemap_165" = { declaration = "struct Shape_typemap_165 { int field_0; int field_4; int field_8; int field_C; };", evidence = "authored" }
+"Shape_typemap_165" = { declaration = "struct Shape_typemap_165 { union { int field_0; struct Pack *pack; }; int field_4; int field_8; int field_C; };", evidence = "authored" }
 "Shape_typemap_166" = { declaration = "struct Shape_typemap_166 { unsigned char padding_0[4]; short field_4; short field_6; unsigned char unknown_8[2]; short field_A; unsigned char padding_C[8]; int field_14; int field_18; };", evidence = "authored" }
 "Shape_typemap_167" = { declaration = "struct Shape_typemap_167 { int field_0; int field_4; unsigned char unknown_8[4]; int field_C; int field_10; unsigned char unknown_14[4]; int field_18; unsigned char unknown_1C[4]; float field_20; float field_24; float field_28; float field_2C; float field_30; float field_34; int field_38; int field_3C; int field_40; int field_44; int field_48; unsigned char unknown_4C[4]; int field_50; int field_54; int field_58; unsigned char unknown_5C[4]; int field_60; float field_64; unsigned char padding_68[8]; int field_70; int field_74; unsigned char padding_78[40]; float field_A0; float field_A4; int field_A8; int field_AC; int field_B0; int field_B4; unsigned char unknown_B8[4]; unsigned char unknown_BC[4]; unsigned char unknown_C0[4]; unsigned char unknown_C4[4]; unsigned char unknown_C8[4]; unsigned char unknown_CC[4]; unsigned char unknown_D0[4]; unsigned char unknown_D4[4]; int field_D8; int field_DC; int field_E0; int field_E4; int field_E8; unsigned char unknown_EC[4]; unsigned char unknown_F0[4]; unsigned char unknown_F4[4]; unsigned char unknown_F8[4]; unsigned char unknown_FC[4]; float field_100; int field_104; float field_108; float field_10C; float field_110; float field_114; unsigned char padding_118[200]; int field_1E0; };", evidence = "authored" }
 "Shape_typemap_168" = { declaration = "struct Shape_typemap_168 { unsigned char padding_0[28]; int field_1C; int field_20; int field_24; int field_28; int field_2C; int field_30; int field_34; int field_38; int field_3C; };", evidence = "authored" }
@@ -12485,6 +12488,9 @@ schema = 1
 "Spinner" = { declaration = "typedef struct Spinner Spinner;", evidence = "authored" }
 "Spline" = { declaration = "typedef struct Spline Spline;", evidence = "authored" }
 "SplineNode" = { declaration = "struct SplineNode { Vec3 p; Vec3 d2p; f32 s; f32 w; f32 d2s; };", evidence = "authored" }
+"SplineSource" = { declaration = "typedef struct SplineSource { s32 stride,count; union { char data[0]; Vec3 points[0]; f32 weights[0]; }; } SplineSource;", evidence = "authored" }
+"SplineSourceCursor" = { declaration = "typedef union SplineSourceCursor { SplineSource *header; Vec3 *points; f32 *weights; } SplineSourceCursor;", evidence = "authored" }
+"SplineTable" = { declaration = "typedef struct SplineTable { s32 count; } SplineTable;", evidence = "authored" }
 "Sprite" = { declaration = "struct Sprite { s32 format; char *data; s32 field8; s32 fieldC; f32 width; f32 height; f32 extentX; f32 extentY; f32 step; };", evidence = "authored" }
 "Sprite_func_8040CAB0_de" = { declaration = "typedef struct Sprite_func_8040CAB0_de Sprite_func_8040CAB0_de;", evidence = "authored" }
 "Stage" = { declaration = "struct Stage { s32 to; s32 from; f32 distance; };", evidence = "authored" }
