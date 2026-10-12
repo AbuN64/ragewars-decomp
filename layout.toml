@@ -54554,6 +54554,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8041DFC0_us_rev1.c"
+kind = "c"
+group = "code_8041DF04"
+members = ["func_8041DFC0_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8041E100_de.c"
 kind = "c"
 group = "code_8041DF04"
@@ -98791,11 +98802,6 @@ scores = {eu-x = 0.5, us-rev1 = 0.5}
 member = "func_80419F4C_eu_x"
 path = "src/fuzzy/func_80419F4C_eu_x.c"
 scores = {eu-x = 0.5638297872340425, us-rev1 = 0.5638297872340425}
-
-[[fuzzy]]
-member = "func_8041DFC0_us_rev1"
-path = "src/fuzzy/func_8041DFC0_us_rev1.c"
-scores = {us-rev1 = 0.7592592592592593}
 
 [[fuzzy]]
 member = "func_8041E5F8_de"

@@ -11562,6 +11562,7 @@ schema = 1
 "ScreenRectangle" = { declaration = "typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;", evidence = "authored" }
 "ScreenState" = { declaration = "typedef struct ScreenState ScreenState;", evidence = "authored" }
 "Screen_func_8041C2AC_de" = { declaration = "struct Screen_func_8041C2AC_de { void *parent; void *windows[4]; s32 selection; s32 scroll; s32 state; };", evidence = "authored" }
+"Screen_func_8041DFC0_us_rev1" = { declaration = "struct Screen_func_8041DFC0_us_rev1 { void *handle; s32 mode; void *rows[3]; s32 selection; s32 timer; s32 step; };", evidence = "authored" }
 "Screen_func_8041ECB4_de" = { declaration = "struct Screen_func_8041ECB4_de { char pad0[8]; void *roots[3]; s32 request; s32 timer; };", evidence = "authored" }
 "Screen_func_8041FC50_de" = { declaration = "struct Screen_func_8041FC50_de { char pad0[8]; struct Panel_func_8041FC50_de panels[4]; char pad1328[0x10]; s32 state; };", evidence = "authored" }
 "Screen_func_804201A4_de" = { declaration = "struct Screen_func_804201A4_de { struct Entry_func_804201A4_de entries[4]; };", evidence = "authored" }

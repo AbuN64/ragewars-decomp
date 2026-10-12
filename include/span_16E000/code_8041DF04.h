@@ -69,4 +69,15 @@ typedef struct RequestDrawPair { s32 first, second; } RequestDrawPair;
 extern s32 func_8041EC44_de(s32, s32);
 extern RequestDrawPair D_800DF740[];
 
+struct Screen_func_8041DFC0_us_rev1 {
+    void *handle;        /* +0x00 the course-tree handle this screen was built for */
+    s32 mode;            /* +0x04 what func_8041B610_de reports for that handle */
+    void *rows[3];       /* +0x08 the three option rows, addressed as block + (row << 2) + 8 */
+    s32 selection;       /* +0x14 the row a join request edits */
+    s32 timer;           /* +0x18 */
+    s32 step;            /* +0x1C */
+};
+extern s32 func_802999A0_de(s32);
+extern void func_8041E408_de(s32);
+
 #endif
