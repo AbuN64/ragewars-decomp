@@ -4266,7 +4266,7 @@ segments:
       - [0xE1244, data, "src/ragewars_arena_menu_slots_us_rev1.c"]
       - [0xE1AA0, data, "rodata/writable/800E4EF0"]
       - [0xE1AA4, data, "src/rw_menu_event_handlers_E5AF4_us_rev1.c"]
-      - [0xE1B00, data, "rodata/writable/800E0F00"]
+      - [0xE1B00, .data, "rodata/writable/800E0F00"]
       - [0xE1B16, data, "rodata/unresolved/800E0F16"]
       - [0xE1B18, .data, "data/unresolved/800E0F18"]
       - [0xE1F70, data, "rodata/writable/800E53C0"]
