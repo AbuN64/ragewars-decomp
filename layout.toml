@@ -5226,6 +5226,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF928"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800CF5C0_unclaimed_D01E8_unclaimed_D0200_unclaimed_D0208_unclaimed_D0220_unclaimed_D0228_unclaimed_D0240_unclaimed_D0244_unclaimed_D0288_unclaimed_D02A0_unclaimed_D02A8_unclaimed_D02C0_unclaimed_D02C4_unclaimed_D0308_unclaimed_D0320_unclaimed_D0324_unclaimed_D0368_unclaimed_D0380_unclaimed_D0388_unclaimed_D03A0_unclaimed_D03A8_unclaimed_D03C0_unclaimed_D03C4_unclaimed_D0408_unclaimed_D0420_unclaimed_D0428_unclaimed_D0440_unclaimed_D0444_unclaimed_D0488_unclaimed_D04A0_unclaimed_D04A8_unclaimed_D04C0_unclaimed_D04C4_unclaimed_D0508_unclaimed_D0520_unclaimed_D0528", "src/rw_weapon_state_resource_animation_D0530_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CFD08"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF5C0_unclaimed_D0908"]
@@ -55342,6 +55350,17 @@ path = "src/rw_weapon_state_resource_animation_D0370_us_rev1.c"
 kind = "data"
 group = "data_800CF768"
 members = ["src/rw_weapon_state_resource_animation_D0370_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_resource_animation_D0530_us_rev1.c"
+kind = "data"
+group = "data_800CF928"
+members = ["src/rw_weapon_state_resource_animation_D0530_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
