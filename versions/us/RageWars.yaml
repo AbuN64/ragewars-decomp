@@ -2317,7 +2317,7 @@ segments:
       - [0xB4800, c, "func_802B3CD0_de"]
       - [0xB4840, c, "func_802B3D10_de"]
       - [0xB48E8, c, "func_802B3DB8_de"]
-      - [0xB4924, data, "func_802B3D24_us_padding_B4924"]
+      - [0xB4924, .data, "func_802B3D24_us_padding_B4924"]
       - [0x0B4930, asm, "func_802B3D30_us"]
       - [0xB4A0C, c, "func_802B3EDC_de"]
       - [0xB4A3C, asm, "func_802B3E3C_us"]
