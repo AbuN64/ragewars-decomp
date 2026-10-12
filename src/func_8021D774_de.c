@@ -1,25 +1,52 @@
 #include "types.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "stddef.h"
-#include "common/types_1dc8418c21db.h"
-#include "common/types_8a8189af7b05.h"
-#include "common/unused.h"
-#include "resident_event_handler.h"
-#include "shared/func_8021E2A0_de_closed.h"
-#include "shared/func_8027AD4C_de_closed.h"
-#include "span_1000/code_8021CD70.h"
-#include "span_1000/code_8022E938.h"
-#include "span_C76B0/data.h"
+typedef union AimOutput { Vec3 xyz; Vector4f full; Shared_Quad words; } AimOutput;
+typedef struct AimActor {
+    u8 kind; char pad1[7]; Vec3 pos; char pad14[0x5c];
+    f32 height; char pad74[0x8c]; s32 flags; char pad104[0x144]; Vec3 focus;
+} AimActor;
+typedef struct AimController { char pad0[0x7e]; u8 active; } AimController;
+typedef struct AimView {
+    char pad0[0x24]; s32 mode; char pad28[0x100]; Vec3 origin;
+    char pad134[0x2c]; f32 matrix[16];
+} AimView;
+typedef struct AimWeapon { char pad0[14]; s16 idle; s16 locked; } AimWeapon;
+typedef struct AimHit { AimActor *actor; char pad4[0xe0]; Vec3 point; Vec3 normal; } AimHit;
+typedef struct AimPlayer {
+    s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594;
+    char pad598[0x40]; AimController *unk5D8; AimView *view;
+    char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788;
+    f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798;
+    Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4];
+    Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8;
+    char pad7EC[0xa24]; s32 enabled; char pad1214[0x244];
+    Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target;
+} AimPlayer;
+extern const f32 D_800C23B4_de, D_800C23B8_de, D_800C23BC_de, D_800C23C0_de;
+extern const f32 D_800C23C4_de, D_800C23C8_de, D_800C23CC_de, D_800C23D0_de;
+extern f32 D_800D2988;
 extern AimHit *D_80103FCC;
-extern char D_80103FD0;
+extern char D_80103FD0, D_801000F0;
+extern void *D_800D052C[];
 void func_8027302C(f32 *, f32 *);
 void func_80226DD0_de(void *, f32 *);
 void func_8022B144_de(void *, f32 *);
 s32 func_802444A4_de(char *, Vec3, Vec3, s32);
-void func_8021D408_de(SharedPlayer_func_8021D408_de *, Vec3 *, Vec3 *);
+void func_80272898_de(f32 *, Vec3 *, Vec3 *);
+void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
+void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
+void func_80271F9C_de(Vec3 *, Vec3 *, f32);
+void func_8027207C_de(Vec3 *);
+f32 func_802B72B0_de(f32);
+typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
+void func_8021D408_de(struct SharedPlayer_func_8021D408_de *, Vec3 *, Vec3 *);
 void func_8021CF28_de(void *, void *, AimActor **, void *);
 Vector4f func_8024796C_de(char *);
+typedef struct func_8021CD70_S1 func_8021CD70_S1;
+typedef struct func_8021CD70_S2 func_8021CD70_S2;
 s32 func_8021CD94_de(func_8021CD70_S1 *, func_8021CD70_S2 *);
+f32 func_8024D284_de(void *);
 void func_8021D774_de(AimPlayer *arg0) {
     AimOutput sp20;
     Vec3 sp30;
