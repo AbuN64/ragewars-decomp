@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_1000_CODE_80294C64_H
 #include "../types.h"
 #include "resident_event_handler.h"
+#include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct ResidentState;
 /* unbake published declaration: published_0072273f0620a80a3dd1b162 */
 struct ResidentState {
@@ -177,5 +179,27 @@ extern s32 D_auto_800D2AE4;
 extern s32 D_auto_800D2AF4;
 
 extern s32 D_auto_800D2AF8;
+
+struct MenuGlobal_func_80294F1C_us_rev1 {
+    u8 alternateTitle; /* +0x0 */
+    u8 unused0[11]; /* +0x1 */
+    s32 selectionIndex; /* +0xC: == D_8014AEBC */
+    s32 selectionValue; /* +0x10: == D_8014AEC0 */
+    s32 titleWasShown; /* +0x14: == D_8014AEC4 */
+    u8 unused1[8480]; /* +0x18 */
+    u8 displayData; /* +0x2138 */
+    u8 unused2[127]; /* +0x2139 */
+    s32 frameCount; /* +0x21B8: == D_8014D068 */
+};
+struct Selection_func_80294F1C_us_rev1 {
+    s32 index; /* +0x0: == D_8014AEBC */
+    s32 value; /* +0x4 */
+    s32 changed; /* +0x8: == D_8014AEC4 */
+};
+extern void func_80294CA0_us_rev1(void);
+extern u8 D_800CA60C[0x14];
+extern u8 D_auto_800CA620[0x14];
+extern f32 D_auto_800CA634;
+extern s32 D_auto_800D2AFC;
 
 #endif

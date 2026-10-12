@@ -2230,7 +2230,7 @@ schema = 1
 "func_80294C50_de" = { evidence = "landed", signature = "void func_80294C50_de(void)" }
 "func_80294C84_de" = { evidence = "authored", signature = "void func_80294C84_de(void)" }
 "func_80294C8C_de" = { evidence = "landed", signature = "void func_80294C8C_de(s32 arg0, Resource *arg1)" }
-"func_80294CA0_us_rev1" = { evidence = "declared", signature = "void func_80294CA0_us_rev1(void)" }
+"func_80294CA0_us_rev1" = { evidence = "authored", signature = "void func_80294CA0_us_rev1(void)" }
 "func_80294F1C_us_rev1" = { evidence = "landed", signature = "void func_80294F1C_us_rev1(void)" }
 "func_802953FC_us_rev1" = { evidence = "landed", signature = "s32 func_802953FC_us_rev1(s32 arg0)" }
 "func_802954E0_us_rev1" = { evidence = "landed", signature = "void func_802954E0_us_rev1(void)" }
@@ -7512,6 +7512,7 @@ schema = 1
 "D_800CA37C" = { declaration = "extern s32 D_800CA37C;", evidence = "authored" }
 "D_800CA3E0" = { declaration = "extern f32 D_800CA3E0[];", evidence = "authored" }
 "D_800CA560" = { declaration = "extern float D_800CA560;", evidence = "authored" }
+"D_800CA60C" = { declaration = "extern u8 D_800CA60C[0x14];", evidence = "authored" }
 "D_800CA7A0_de" = { declaration = "extern s32 D_800CA7A0_de;", evidence = "authored" }
 "D_800CAB78_eu" = { declaration = "extern float D_800CAB78_eu[];", evidence = "authored" }
 "D_800CAB88_eu" = { declaration = "extern float D_800CAB88_eu;", evidence = "authored" }
@@ -8343,7 +8344,7 @@ schema = 1
 "D_800DF520" = { declaration = "extern int D_800DF520;", evidence = "authored" }
 "D_800DF544" = { declaration = "extern TextEntry D_800DF544[];", evidence = "authored" }
 "D_800DF740" = { declaration = "extern RequestDrawPair D_800DF740[];", evidence = "authored" }
-"D_800DF964" = { declaration = "extern int D_800DF964[];", evidence = "authored" }
+"D_800DF964" = { declaration = "extern void *D_800DF964[];", evidence = "authored" }
 "D_800DFA02" = { declaration = "extern u16 D_800DFA02[][56];", evidence = "authored" }
 "D_800E01B0_de" = { declaration = "extern int D_800E01B0_de[];", evidence = "authored" }
 "D_800E0286" = { declaration = "extern int D_800E0286[];", evidence = "authored" }
@@ -9205,10 +9206,13 @@ schema = 1
 "D_DE0A0" = { declaration = "extern char D_DE0A0;", evidence = "authored" }
 "D_E0050" = { declaration = "extern char D_E0050;", evidence = "authored" }
 "D_E0470" = { declaration = "extern char D_E0470;", evidence = "authored" }
+"D_auto_800CA620" = { declaration = "extern u8 D_auto_800CA620[0x14];", evidence = "authored" }
+"D_auto_800CA634" = { declaration = "extern f32 D_auto_800CA634;", evidence = "authored" }
 "D_auto_800D2AE4" = { declaration = "extern s32 D_auto_800D2AE4;", evidence = "authored" }
 "D_auto_800D2AE8" = { declaration = "extern s32 D_auto_800D2AE8;", evidence = "authored" }
 "D_auto_800D2AF4" = { declaration = "extern s32 D_auto_800D2AF4;", evidence = "authored" }
 "D_auto_800D2AF8" = { declaration = "extern s32 D_auto_800D2AF8;", evidence = "authored" }
+"D_auto_800D2AFC" = { declaration = "extern s32 D_auto_800D2AFC;", evidence = "authored" }
 "jtbl_800C19C0" = { declaration = "extern char jtbl_800C19C0;", evidence = "authored" }
 "jtbl_800C1AA0" = { declaration = "extern int jtbl_800C1AA0[];", evidence = "authored" }
 "jtbl_800C1AF0" = { declaration = "extern int jtbl_800C1AF0[];", evidence = "authored" }
@@ -10619,6 +10623,7 @@ schema = 1
 "Measured_func_804460E4_eu_x_5a0991979bf8" = { declaration = "struct Measured_func_804460E4_eu_x_5a0991979bf8 { unsigned char padding[20]; void * value; };", evidence = "authored" }
 "Menu" = { declaration = "struct Menu { s32 active; s32 pad4; f32 open; char padC[0x1C - 0xC]; Slot_func_80217928_de slots[8]; char pad[0x37C - 0xDC]; s32 cursor; };", evidence = "authored" }
 "MenuGameRoot" = { declaration = "typedef struct MenuGameRoot MenuGameRoot;", evidence = "authored" }
+"MenuGlobal_func_80294F1C_us_rev1" = { declaration = "struct MenuGlobal_func_80294F1C_us_rev1 { u8 alternateTitle; u8 unused0[11]; s32 selectionIndex; s32 selectionValue; s32 titleWasShown; u8 unused1[8480]; u8 displayData; u8 unused2[127]; s32 frameCount; };", evidence = "authored" }
 "MenuHandlerEntry" = { declaration = "struct MenuHandlerEntry { s32 id; MenuElementHandler default_handler; MenuElementHandler override_handler; MenuDrawHandler draw_handler; s32 flags; };", evidence = "authored" }
 "MenuItem" = { declaration = "typedef struct MenuItem MenuItem;", evidence = "authored" }
 "MenuItem_func_80444314_de" = { declaration = "struct MenuItem_func_80444314_de { char pad0[8]; u32 flags; char padC[8]; void *table; };", evidence = "authored" }
@@ -11537,6 +11542,7 @@ schema = 1
 "SelectionScreenState" = { declaration = "struct SelectionScreenState { void *screen; s32 unk4; func_8041F2A0_Player players[4]; func_8041F2A0_Item *header; s32 headerStep; func_8041F2A0_Item *footer; s32 footerStep; s32 phase; s32 timer; s32 prompt; func_8041F2A0_Item *promptItem; func_8041F2A0_Item *pulse; s32 pulseStep; s32 clock; s32 result; };", evidence = "authored" }
 "SelectionSprite" = { declaration = "typedef struct SelectionSprite SelectionSprite;", evidence = "authored" }
 "Selection_func_8020D4AC_de" = { declaration = "struct Selection_func_8020D4AC_de { char pad0[0xC]; s32 node; char pad10[0x28]; s32 objectCount; Player *objects[33]; Stage stages[10]; Vec3 dirs[10]; char pad1B0[0xC]; s32 stageCount; s32 id; };", evidence = "authored" }
+"Selection_func_80294F1C_us_rev1" = { declaration = "struct Selection_func_80294F1C_us_rev1 { s32 index; s32 value; s32 changed; };", evidence = "authored" }
 "Selection_func_802955EC_us_rev1" = { declaration = "struct Selection_func_802955EC_us_rev1 { s32 value; char pad4[12]; };", evidence = "authored" }
 "Selection_func_80420850_de" = { declaration = "struct Selection_func_80420850_de { void *screen; char pad4[0xC]; Row_func_80420850_de rows[8]; };", evidence = "authored" }
 "Session" = { declaration = "struct Session { char pad0[0x98]; s32 running; s32 mode; };", evidence = "authored" }
