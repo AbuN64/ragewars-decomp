@@ -2620,7 +2620,7 @@ segments:
       - [0xC2788, rodata, "rodata/func_80207738_de/800C6C78"]
       - [0xC279C, rodata, "src/rw_pool_802077F4_C788C_us_rev1.c"]
       - [0xC27A0, rodata, "src/rw_pool_80207BB8_C7890_us_rev1.c"]
-      - [0xC27A4, data, "rodata/unresolved/800C1BA4"]
+      - [0xC27A4, .data, "rodata/unresolved/800C1BA4"]
       - [0xC27B0, rodata, "rodata/func_80208158_de/800C6CA0"]
       - [0xC27B8, .rodata, "src/rw_pool_80208410_C78A8_us_rev1.c"]
       - [0xC27DC, .rodata, "src/rw_pool_80208AAC_C78CC_us_rev1.c"]
