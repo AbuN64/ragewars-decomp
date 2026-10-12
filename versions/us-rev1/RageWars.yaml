@@ -3408,7 +3408,7 @@ segments:
       - [0xCAC40, rodata, "src/ragewars_resident_strings_CAC40_us_rev1.c"]
       - [0xCAC50, rodata, "rodata/func_8044B7C0_de/800CA040_unclaimed_CAC50"]
       - [0xCAC5D, data, "rodata/unresolved/800CA05D"]
-      - [0xCAC60, rodata, "src/rw_text_8044B7C0_CAC60_us_rev1.c"]
+      - [0xCAC60, .rodata, "src/rw_text_8044B7C0_CAC60_us_rev1.c"]
       - [0xCAC73, data, "rodata/unresolved/800CA073"]
       - [0xCAC74, rodata, "src/rw_text_8044B7C0_CAC74_us_rev1.c"]
       - [0xCAC81, data, "rodata/unresolved/800CA081"]
