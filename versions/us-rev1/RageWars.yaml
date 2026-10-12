@@ -4532,7 +4532,7 @@ segments:
       - [0xD011C, .data, "rodata/unresolved/800CF51C"]
       - [0xd013c, data, "src/rw_weapon_state_entry_D013C_us_rev1.c"]
       - [0xd0144, data, "rodata/unresolved/800CF51C_unclaimed_D0144"]
-      - [0xd014c, data, "src/rw_weapon_state_resource_animation_D014C_us_rev1.c"]
+      - [0xd014c, .data, "src/rw_weapon_state_resource_animation_D014C_us_rev1.c"]
       - [0xd015c, data, "src/rw_weapon_state_entry_D015C_us_rev1.c"]
       - [0xd0164, data, "rodata/unresolved/800CF51C_unclaimed_D0144_unclaimed_D015C_unclaimed_D0164"]
       - [0xd016c, data, "src/rw_weapon_state_resource_animation_D016C_us_rev1.c"]
