@@ -45130,6 +45130,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.func_80286AA8_de.800CA270_unclaimed_CAE90.c"
+kind = "data"
+group = "code_80286050"
+members = ["rodata/func_80286AA8_de/800CA270_unclaimed_CAE90"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.func_80294CA0_us_rev1.800CA5D0_unclaimed_CB1E0.c"
 kind = "data"
 group = "code_80294C64"
