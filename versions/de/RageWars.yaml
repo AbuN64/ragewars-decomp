@@ -2587,7 +2587,7 @@ segments:
     subsegments:
       - [0xC25C0, .rodata, "rodata/shared/800C6AB0"]
       - [0xC25E8, .data, "rodata/unresolved/800C19E8"]
-      - [0xC25FC, rodata, "src/rw_pool_80202CA0_C76EC_us_rev1.c"]
+      - [0xC25FC, .rodata, "src/rw_pool_80202CA0_C76EC_us_rev1.c"]
       - [0xC2610, rodata, "src/rw_pool_80202E4C_C7700_us_rev1.c"]
       - [0xC261C, rodata, "rodata/func_80202FDC_de/800C6B0C"]
       - [0xC2624, rodata, "rodata/func_80203278_de/800C6B14"]
