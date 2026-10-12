@@ -8704,7 +8704,6 @@ schema = 1
 "D_800EFAC8" = { declaration = "extern Handler802A2B50 D_800EFAC8;", evidence = "authored" }
 "D_800EFB34" = { declaration = "extern s32 D_800EFB34;", evidence = "authored" }
 "D_800EFC80_de" = { declaration = "extern char D_800EFC80_de[];", evidence = "authored" }
-"D_800DF964" = { declaration = "extern int D_800DF964[];", evidence = "authored" }
 "D_800F1DB0" = { declaration = "extern int D_800F1DB0;", evidence = "authored" }
 "D_800F1DB0_de" = { declaration = "extern Handler80437868 D_800F1DB0_de;", evidence = "authored" }
 "D_800F1F74" = { declaration = "extern FieldRow D_800F1F74[];", evidence = "authored" }
