@@ -10,7 +10,7 @@ extern void func_80271F68_de(Vec3 *out, void *arg1, void *arg2);
 
 
 
-s32 func_8020CB3C_de(void *arg0, void *arg1) {
+s32 func_8020CB3C_de(struct Obj8020BC50 *arg0, void *arg1) {
     Vec3 sp10;
     f32 temp_f2;
     f32 var_f20;
@@ -22,9 +22,9 @@ s32 func_8020CB3C_de(void *arg0, void *arg1) {
     var_s1 = -1;
     var_f20 = 0.0f;
     var_s0 = 0;
-    if (((func_8020CB3C_S1 *)(arg0))->unk4 > 0) {
+    if (arg0->count > 0) {
         do {
-            items = ((func_8020CB3C_S1 *)(arg0))->unk0;
+            items = arg0->records;
             stride = *(s32 *)items;
             func_80271F68_de(&sp10, arg1, (char *)items + (var_s0 * stride + 8));
             temp_f2 = (sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z);
@@ -33,7 +33,7 @@ s32 func_8020CB3C_de(void *arg0, void *arg1) {
                 var_f20 = temp_f2;
             }
             var_s0 += 1;
-        } while (var_s0 < ((func_8020CB3C_S1 *)(arg0))->unk4);
+        } while (var_s0 < arg0->count);
     }
     return var_s1;
 }

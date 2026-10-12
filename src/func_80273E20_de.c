@@ -3,21 +3,21 @@
 
 
 /** Swap the two floats within each of the object's four 0x10-byte records. */
-void func_80273E20_de(void *object) {
+void func_80273E20_de(struct Mtx *object) {
     float t;
-    t = ((func_80273930_S1 *)(object))->unk4;
-    ((func_80273930_S1 *)(object))->unk4 = ((func_80273930_S1 *)(object))->unk8;
-    ((func_80273930_S1 *)(object))->unk8 = t;
+    t = object->right.y;
+    object->right.y = object->right.z;
+    object->right.z = t;
 
-    t = ((func_80273930_S1 *)(object))->unk14;
-    ((func_80273930_S1 *)(object))->unk14 = ((func_80273930_S1 *)(object))->unk18;
-    ((func_80273930_S1 *)(object))->unk18 = t;
+    t = object->up.y;
+    object->up.y = object->up.z;
+    object->up.z = t;
 
-    t = ((func_80273930_S1 *)(object))->unk24;
-    ((func_80273930_S1 *)(object))->unk24 = ((func_80273930_S1 *)(object))->unk28;
-    ((func_80273930_S1 *)(object))->unk28 = t;
+    t = object->forward.y;
+    object->forward.y = object->forward.z;
+    object->forward.z = t;
 
-    t = ((func_80273930_S1 *)(object))->unk34;
-    ((func_80273930_S1 *)(object))->unk34 = ((func_80273930_S1 *)(object))->unk38;
-    ((func_80273930_S1 *)(object))->unk38 = t;
+    t = object->m31;
+    object->m31 = object->m32;
+    object->m32 = t;
 }

@@ -3,6 +3,6 @@
 
 
 
-int func_802B20C8_de(void *arg0) {
-    return ((func_80205628_S3 *)(arg0))->unkC;
+int func_802B20C8_de(struct ALSeq_s *arg0) {
+    return arg0->lastTicks;
 }

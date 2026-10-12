@@ -45,27 +45,8 @@ struct func_8020CFE0_S1 {
     char * unk24;
 };
 
-struct func_8020D014_S1;
-/* unbake published declaration: published_1d8c46f15b6ff713ed82bf90 */
-typedef struct func_8020D014_S1 func_8020D014_S1;
-
 /* unbake published declaration: published_295e9dd4f70d6ccf55d8c6fd */
 extern float D_800C1D6C_de;
-
-struct func_8020D014_S1;
-/* unbake published declaration: published_2cb31ac16c072f48e0516396 */
-struct func_8020D014_S1 {
-    char pad0[0x1C];
-    f32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(f32)];
-    s32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(s32)];
-    void * unk24;
-};
-
-struct func_8020D014_S2;
-/* unbake published declaration: published_3242b1c0f34855779b8e94df */
-typedef struct func_8020D014_S2 func_8020D014_S2;
 
 struct Node8020D114;
 /* unbake published declaration: published_691e6301b653044fa0239551 */
@@ -298,31 +279,6 @@ struct func_8020D318_S1;
 struct func_8020D318_S1 {
     char pad0[0x28];
     unsigned int unk28;
-};
-
-struct func_8020D014_S2;
-/* unbake published declaration: published_f042aba3980f95cd04605cde */
-struct func_8020D014_S2 {
-    char pad0[0x4];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    s32 unk8;
-    char pad8[0x10 - 0x8 - sizeof(s32)];
-    void * unk10;
-    char pad10[0x18 - 0x10 - sizeof(void*)];
-    s32 unk18;
-    char pad18[0x1C - 0x18 - sizeof(s32)];
-    s32 unk1C;
-    char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk20;
-    char pad20[0x24 - 0x20 - sizeof(s32)];
-    s32 unk24;
-    char pad24[0x28 - 0x24 - sizeof(s32)];
-    s32 unk28;
-    char pad28[0x2C - 0x28 - sizeof(s32)];
-    s32 unk2C;
-    char pad2C[0x30 - 0x2C - sizeof(s32)];
-    s32 unk30;
 };
 
 struct LinkTable;

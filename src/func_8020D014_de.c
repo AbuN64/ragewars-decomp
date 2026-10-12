@@ -7,26 +7,26 @@
 
 
 
-void func_8020D014_de(void *arg0) {
-    void *var_v0;
+void func_8020D014_de(struct Obj8020BC50 *arg0) {
+    struct Node8020BC50 *var_v0;
     f32 k;
 
-    var_v0 = ((func_8020D014_S1 *)(arg0))->unk24;
+    var_v0 = arg0->nodes;
     if (var_v0 != 0) {
         k = (-1.0f);
         do {
-            ((func_8020D014_S2 *)(var_v0))->unk4 = k;
-            ((func_8020D014_S2 *)(var_v0))->unk8 = -1;
-            ((func_8020D014_S2 *)(var_v0))->unk18 = 0;
-            ((func_8020D014_S2 *)(var_v0))->unk1C = 0;
-            ((func_8020D014_S2 *)(var_v0))->unk20 = 0;
-            ((func_8020D014_S2 *)(var_v0))->unk24 = 0;
-            ((func_8020D014_S2 *)(var_v0))->unk28 = 0;
-            ((func_8020D014_S2 *)(var_v0))->unk2C = 0;
-            ((func_8020D014_S2 *)(var_v0))->unk30 = 0;
-            var_v0 = ((func_8020D014_S2 *)(var_v0))->unk10;
+            var_v0->value = k;
+            var_v0->state = -1;
+            var_v0->field18 = 0;
+            var_v0->field1C = 0;
+            var_v0->field20 = 0;
+            var_v0->field24 = 0;
+            var_v0->field28 = 0;
+            var_v0->field2C = 0;
+            var_v0->field30 = 0;
+            var_v0 = var_v0->next;
         } while (var_v0 != 0);
     }
-    ((func_8020D014_S1 *)(arg0))->unk1C = (-1.0f);
-    ((func_8020D014_S1 *)(arg0))->unk20 = -1;
+    arg0->value = (-1.0f);
+    arg0->selected = -1;
 }

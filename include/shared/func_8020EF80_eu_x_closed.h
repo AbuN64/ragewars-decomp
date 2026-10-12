@@ -1,3 +1,4 @@
+struct Obj8020BC50;
 #ifndef FUNC_8020EF80_EU_X_CLOSED_H
 #define FUNC_8020EF80_EU_X_CLOSED_H
 #include "types.h"
@@ -15,7 +16,7 @@ struct Shared_PickupGoalNode {
 
 extern PickupGoalNodeList D_8013B364;
 
-extern void func_8020D014_de(PickupGoalNodeList *list);
+extern void func_8020D014_de(struct Obj8020BC50 *arg0);
 extern void func_8020D1FC_de(PickupGoalNodeList *list);
 extern s32 func_8020F150_de(s32 *ids);
 extern void func_8020D0CC_de(PickupGoalNodeList *list, s32 key);

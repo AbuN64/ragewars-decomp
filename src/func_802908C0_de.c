@@ -11,7 +11,7 @@ void *func_802908C0_de(void *arg0)
 {
   void *new_var;
   void *node;
-  void *next;
+  struct ListNode80290528 *next;
   if ((((ObjectLinks3C0C *)(arg0))->unk_3C00) == 0)
   {
     func_80290950_de(arg0, ((ObjectLinks3C0C *)arg0)->unk_3C08);
@@ -21,7 +21,7 @@ void *func_802908C0_de(void *arg0)
   ((ObjectLinks3C0C *)(arg0))->unk_3C00 = ((ObjectLinks1E0 *)(node))->unk_1DC;
   if (next != 0)
   {
-    ((func_8020A028_S3 *)(next))->unk1D8 = node;
+    next->previous = node;
   }
   new_var = ((ObjectLinks3C0C *)(arg0))->next;
   ((ObjectLinks1E0 *)(node))->unk_1D8 = 0;

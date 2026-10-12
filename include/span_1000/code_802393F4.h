@@ -1,3 +1,4 @@
+struct Channel;
 #ifndef UNBAKE_SPAN_1000_CODE_802393F4_H
 #define UNBAKE_SPAN_1000_CODE_802393F4_H
 #include "../types.h"
@@ -50,7 +51,7 @@ extern float D_800C8658;
 extern float D_800C3598_de;
 
 /* unbake published declaration: published_32ec5e70ed2a381187efc43b */
-extern void func_80239D00_de(void *arg0, float arg1, int arg2);
+extern void func_80239D00_de(struct Channel *arg0, float arg1, int arg2);
 
 struct func_8023A1E4_S1;
 /* unbake published declaration: published_36cd290da9b15ecd000e5def */
@@ -142,10 +143,6 @@ extern float D_800C3570_de;
 /* unbake published declaration: published_6466040febcd4cd332eb9025 */
 extern int func_8023941C_de(void *arg0);
 
-struct func_80239CF0_S1;
-/* unbake published declaration: published_7174d2eecc2d3be675391b04 */
-typedef struct func_80239CF0_S1 func_80239CF0_S1;
-
 struct func_80239668_S1;
 /* unbake published declaration: published_72183e9004b453a884ef52e8 */
 typedef struct func_80239668_S1 func_80239668_S1;
@@ -227,14 +224,6 @@ struct func_80239D80_S1 {
     s32 unk10;
     char pad10[0x14 - 0x10 - sizeof(s32)];
     f32 unk14;
-};
-
-struct func_80239CF0_S1;
-/* unbake published declaration: published_98e3ad63f0cc4c30f651fec4 */
-struct func_80239CF0_S1 {
-    int unk0;
-    char pad0[0x4 - 0x0 - sizeof(int)];
-    float unk4;
 };
 
 struct func_8023A104_S1;

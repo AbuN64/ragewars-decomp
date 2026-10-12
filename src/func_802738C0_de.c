@@ -8,7 +8,7 @@
 
 
 void func_802738C0_de(void *arg0, f32 arg1) {
-    char *m = (char *) arg0;
+    struct Mtx *m = (char *) arg0;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -18,19 +18,19 @@ void func_802738C0_de(void *arg0, f32 arg1) {
     cos_v = func_802B6560_de(arg1);
     neg_sin = -sin_v;
 
-    a = ((func_80273930_S1 *)(m))->unk4;
-    ((func_80273930_S1 *)(m))->unk4 = (a * cos_v) + (((func_80273930_S1 *)(m))->unk8 * neg_sin);
-    ((func_80273930_S1 *)(m))->unk8 = (a * sin_v) + (((func_80273930_S1 *)(m))->unk8 * cos_v);
+    a = m->right.y;
+    m->right.y = (a * cos_v) + (m->right.z * neg_sin);
+    m->right.z = (a * sin_v) + (m->right.z * cos_v);
 
-    a = ((func_80273930_S1 *)(m))->unk14;
-    ((func_80273930_S1 *)(m))->unk14 = (a * cos_v) + (((func_80273930_S1 *)(m))->unk18 * neg_sin);
-    ((func_80273930_S1 *)(m))->unk18 = (a * sin_v) + (((func_80273930_S1 *)(m))->unk18 * cos_v);
+    a = m->up.y;
+    m->up.y = (a * cos_v) + (m->up.z * neg_sin);
+    m->up.z = (a * sin_v) + (m->up.z * cos_v);
 
-    a = ((func_80273930_S1 *)(m))->unk24;
-    ((func_80273930_S1 *)(m))->unk24 = (a * cos_v) + (((func_80273930_S1 *)(m))->unk28 * neg_sin);
-    ((func_80273930_S1 *)(m))->unk28 = (a * sin_v) + (((func_80273930_S1 *)(m))->unk28 * cos_v);
+    a = m->forward.y;
+    m->forward.y = (a * cos_v) + (m->forward.z * neg_sin);
+    m->forward.z = (a * sin_v) + (m->forward.z * cos_v);
 
-    a = ((func_80273930_S1 *)(m))->unk34;
-    ((func_80273930_S1 *)(m))->unk34 = (a * cos_v) + (((func_80273930_S1 *)(m))->unk38 * neg_sin);
-    ((func_80273930_S1 *)(m))->unk38 = (a * sin_v) + (((func_80273930_S1 *)(m))->unk38 * cos_v);
+    a = m->m31;
+    m->m31 = (a * cos_v) + (m->m32 * neg_sin);
+    m->m32 = (a * sin_v) + (m->m32 * cos_v);
 }
