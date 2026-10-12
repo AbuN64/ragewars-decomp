@@ -4355,7 +4355,7 @@ segments:
       - [0x167980, asm, "func_80401980_de"]
       - [0x167D74, asm, "func_80401D74_de"]
       - [0x16893C, asm, "func_8040293C_de"]
-      - [0x168BA0, asm, "func_80402BA0_de"]
+      - [0x168BA0, c, "func_80402BA0_de"]
       - [0x168FB4, c, "func_80402FB4_de"]
       - [0x1690E0, c, "func_804030E0_de"]
       - [0x169200, c, "func_80403200_de"]

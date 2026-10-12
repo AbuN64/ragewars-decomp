@@ -6190,7 +6190,7 @@ segments:
       - [0x16F980, asm, "func_80401980_de"]
       - [0x16FD74, c, "func_80401D74_de"]
       - [0x17093C, asm, "func_8040293C_de"]
-      - [0x170BA0, asm, "func_80402BA0_de"]
+      - [0x170BA0, c, "func_80402BA0_de"]
       - [0x170FB4, c, "func_80402FB4_de"]
       - [0x1710E0, c, "func_804030E0_de"]
       - [0x171200, c, "func_80403200_de"]

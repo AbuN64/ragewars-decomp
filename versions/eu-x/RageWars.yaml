@@ -4331,7 +4331,7 @@ segments:
       - [0xF1980, asm, "func_80401980_de"]
       - [0xF1D74, asm, "func_80401D74_de"]
       - [0xF293C, asm, "func_8040293C_de"]
-      - [0xF2BA0, asm, "func_80402BA0_de"]
+      - [0xF2BA0, c, "func_80402BA0_de"]
       - [0xF2FB4, c, "func_80402FB4_de"]
       - [0xF30E0, c, "func_804030E0_de"]
       - [0xF3200, c, "func_80403200_de"]

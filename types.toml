@@ -3020,7 +3020,8 @@ schema = 1
 "func_8040184C_de" = { evidence = "landed", signature = "f32 func_8040184C_de(f32 t)" }
 "func_80401980_de" = { evidence = "authored", signature = "void func_80401980_de()" }
 "func_80401D74_de" = { evidence = "landed", signature = "void func_80401D74_de(s32 inset)" }
-"func_80402BA0_de" = { evidence = "authored", signature = "void func_80402BA0_de()" }
+"func_8040293C_de" = { evidence = "authored", signature = "void func_8040293C_de(void)" }
+"func_80402BA0_de" = { evidence = "landed", signature = "void func_80402BA0_de(ScreenRectangle *rectangle)" }
 "func_80402FB4_de" = { evidence = "landed", signature = "void func_80402FB4_de(s32 owner, func_8020478C_S1 *obj)" }
 "func_804030E0_de" = { evidence = "landed", signature = "s32 func_804030E0_de(s32 key)" }
 "func_80403200_de" = { evidence = "landed", signature = "void func_80403200_de(char *name)" }
@@ -4407,6 +4408,7 @@ schema = 1
 "take_effect" = { evidence = "landed", signature = "static inline Effect_func_80262A9C_de *take_effect(void *scene, s32 *ref)" }
 "testBit" = { evidence = "landed", signature = "static inline s32 testBit(s32 n, u8 *bits)" }
 "test_bit" = { evidence = "landed", signature = "static inline int test_bit(unsigned char *bits, int index)" }
+"toUnsigned" = { evidence = "landed", signature = "static inline u32 toUnsigned(f32 v,f32 limit)" }
 "toggle" = { evidence = "landed", signature = "static inline void toggle(Menu_func_802A65E0_de *menu, MenuItem *item)" }
 "touch" = { evidence = "landed", signature = "static inline void touch(s32 index, s32 mode)" }
 "trackPos" = { evidence = "landed", signature = "static inline void trackPos(Shared_PoseTrack *t, s32 i, Vec3 *out)" }
@@ -4417,6 +4419,8 @@ schema = 1
 "unref" = { evidence = "landed", signature = "static inline void unref(Node_func_80251F6C_de *node)" }
 "unsignedDouble" = { evidence = "landed", signature = "static __inline__ f64 unsignedDouble(u32 value,const f64 *bias)" }
 "unsignedFloat" = { evidence = "landed", signature = "static __inline__ f32 unsignedFloat(u32 value,const f64 *bias)" }
+"unsignedHeight" = { evidence = "landed", signature = "static inline f32 unsignedHeight(u32 v)" }
+"unsignedWidth" = { evidence = "landed", signature = "static inline f32 unsignedWidth(u32 v)" }
 "viRetrace" = { evidence = "landed", signature = "static inline u16 *viRetrace(void)" }
 "wrap" = { evidence = "landed", signature = "inline static f32 wrap(f32 arg0)" }
 "wrapAngle" = { evidence = "landed", signature = "static __inline__ f32 wrapAngle(AnimTrack_func_8026193C_de *anim,f32 time)" }
@@ -11551,6 +11555,7 @@ schema = 1
 "Scores" = { declaration = "typedef struct Scores Scores;", evidence = "authored" }
 "Scratch" = { declaration = "struct Scratch { f32 first[4]; f32 second[4]; f32 in[4]; f32 out[4]; f32 position[4]; char matrix[0x40]; };", evidence = "authored" }
 "Screen" = { declaration = "typedef struct Screen Screen;", evidence = "authored" }
+"ScreenRectangle" = { declaration = "typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;", evidence = "authored" }
 "ScreenState" = { declaration = "typedef struct ScreenState ScreenState;", evidence = "authored" }
 "Screen_func_8041C2AC_de" = { declaration = "struct Screen_func_8041C2AC_de { void *parent; void *windows[4]; s32 selection; s32 scroll; s32 state; };", evidence = "authored" }
 "Screen_func_8041ECB4_de" = { declaration = "struct Screen_func_8041ECB4_de { char pad0[8]; void *roots[3]; s32 request; s32 timer; };", evidence = "authored" }

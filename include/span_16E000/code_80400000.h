@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_16E000_CODE_80400000_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
+#include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct Item_func_80403458_de;
 /* unbake published declaration: published_05bb5eaae53a8423a02eb7ee */
 struct Item_func_80403458_de {
@@ -277,5 +279,9 @@ extern f32 D_800E0B60[];
 struct Record_func_80402FB4_de;
 /* unbake published declaration: published_fb09ffa8961d4097a8da2716 */
 typedef struct Record_func_80402FB4_de Record_func_80402FB4_de;
+
+typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;
+extern f32 func_8040170C_de(f32);
+extern void func_8040293C_de(void);
 
 #endif
