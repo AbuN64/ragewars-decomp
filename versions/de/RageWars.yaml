@@ -3357,7 +3357,7 @@ segments:
       - [0xC5C49, data, "rodata/unresolved/800C5049"]
       - [0xC5C4C, rodata, "src/rw_text_8044B7C0_CAD3C_us_rev1.c"]
       - [0xC5C5A, data, "rodata/unresolved/800C505A"]
-      - [0xC5C5C, rodata, "src/rw_text_8044B7C0_CAD4C_us_rev1.c"]
+      - [0xC5C5C, .rodata, "src/rw_text_8044B7C0_CAD4C_us_rev1.c"]
       - [0xC5C6D, data, "rodata/unresolved/800C506D"]
       - [0xC5C70, .rodata, "src/rw_text_8044B7C0_CAD60_us_rev1.c"]
       - [0xC5C95, data, "rodata/unresolved/800C5095"]
