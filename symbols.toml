@@ -37964,6 +37964,8 @@ us-rev1 = 0x800E0C68
 
 [symbol.D_800E0C80]
 kind = "data"
+de = 0x800DCC50
+eu-x = 0x800DCC50
 us-rev1 = 0x800E0C80
 
 [symbol.D_800E0C98]
