@@ -1,3 +1,3 @@
-unsigned int D_auto_rodata_unresolved_800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00_unclaimed_CFF18_unclaimed_CFF20_unclaimed_CFF38_unclaimed_CFF40[3] = {
+unsigned int D_d1_61427aba2adac3fc[3] = {
     0x00232CDC, 0x00000000, 0x800CF244,
 };
