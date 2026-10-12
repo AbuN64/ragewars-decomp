@@ -88,7 +88,7 @@ struct func_80245AE8_S1;
 typedef struct func_80245AE8_S1 func_80245AE8_S1;
 
 /* unbake published declaration: published_1617bf4e547bb83d1f349ace */
-extern void func_80245A10_de();
+extern void func_80245A10_de(void);
 
 struct Access_s32_C4;
 /* unbake published declaration: published_17f0e99cd751b60b1fb8deae */

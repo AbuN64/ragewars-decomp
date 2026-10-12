@@ -7,6 +7,6 @@ extern char *D_800E2830;
 
 
 void func_80245A10_de(void) {
-    char *base = D_800E2830;
-    ((func_80203C40_S1 *)(base))->unk100 = 0;
+    struct Shared_Actor *base = D_800E2830;
+    base->weaponFlags = 0;
 }

@@ -24,13 +24,6 @@ struct func_8022A404_S1 {
     int unk20;
 };
 
-struct func_8022ADA0_S1;
-/* unbake published declaration: published_15319c200fc4826ec4cd9060 */
-struct func_8022ADA0_S1 {
-    char pad0[0x5E4];
-    int unk5E4;
-};
-
 struct func_80237E70_G1;
 /* unbake published declaration: published_15bbcc9cf86837275a04fe48 */
 struct func_80237E70_G1 {
@@ -1843,10 +1836,6 @@ typedef struct func_80237E70_S1 func_80237E70_S1;
 struct func_80209B64_S2;
 /* unbake published declaration: published_dfe0864b2134717307392264 */
 typedef struct func_80209B64_S2 func_80209B64_S2;
-
-struct func_8022ADA0_S1;
-/* unbake published declaration: published_e19ea50d9e037c6ecfac74d9 */
-typedef struct func_8022ADA0_S1 func_8022ADA0_S1;
 
 struct SharedPlayer_func_80209CD8_de;
 /* unbake published declaration: published_e72f1deab26f50ba74b6f994 */

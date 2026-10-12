@@ -1,3 +1,4 @@
+struct SharedPlayer;
 #ifndef UNBAKE_SPAN_1000_CODE_8022C894_H
 #define UNBAKE_SPAN_1000_CODE_8022C894_H
 #include "../types.h"
@@ -32,7 +33,7 @@ struct func_8022CC24_S1 {
 extern void func_8022D420_de(void);
 
 /* unbake published declaration: published_1ccea9b348294dc0034a2ac0 */
-extern void func_8022D4AC_de(void *arg0);
+extern void func_8022D4AC_de(struct SharedPlayer *arg0);
 
 struct ObjectLinks1458_2;
 /* unbake published declaration: published_1eda54a8c1681e8879ac867e */
@@ -65,10 +66,6 @@ struct func_8022D030_S1 {
 
 /* unbake published declaration: published_2fef63eab445ba6873d6e454 */
 extern float D_800C2D90_de;
-
-struct func_8022C8EC_S1;
-/* unbake published declaration: published_300d737d992fd8a0926731b3 */
-typedef struct func_8022C8EC_S1 func_8022C8EC_S1;
 
 struct func_8022D154_S2;
 /* unbake published declaration: published_38c6a5c5e6f8b14dc2353f40 */
@@ -491,10 +488,6 @@ extern float D_800C2DB8_de;
 /* unbake published declaration: published_48d8cae4d4b9969dff41f338 */
 extern float D_800C7E9C;
 
-struct func_8022D49C_S1;
-/* unbake published declaration: published_4b3b8b236245b738535c169d */
-typedef struct func_8022D49C_S1 func_8022D49C_S1;
-
 struct func_8022D154_S1;
 /* unbake published declaration: published_50d893c588df7f5b826e535b */
 struct func_8022D154_S1 {
@@ -650,13 +643,6 @@ struct func_8022D198_S1 {
     Vec3 unk16C4;
 };
 
-struct func_8022D49C_S1;
-/* unbake published declaration: published_d4605bacc21f1c6ea3b2f113 */
-struct func_8022D49C_S1 {
-    char pad0[0x122C];
-    unsigned int unk122C;
-};
-
 /* unbake published declaration: published_d68749b79335905eae3e5922 */
 
 
@@ -692,23 +678,6 @@ typedef struct func_8022CF28_S2 func_8022CF28_S2;
 
 /* unbake published declaration: published_e51a5c6dacd5cd662dbc9c75 */
 extern float D_800C7E98;
-
-struct func_8022C8EC_S1;
-/* unbake published declaration: published_ebcb9263b272cace90c0ba19 */
-struct func_8022C8EC_S1 {
-    char pad0[0x6AC];
-    s32 unk6AC;
-    char pad6AC[0x6C0 - 0x6AC - sizeof(s32)];
-    f32 unk6C0;
-    char pad6C0[0x6C4 - 0x6C0 - sizeof(f32)];
-    f32 unk6C4;
-    char pad6C4[0x72C - 0x6C4 - sizeof(f32)];
-    f32 unk72C;
-    char pad72C[0x86C - 0x72C - sizeof(f32)];
-    s32 unk86C;
-    char pad86C[0x13B4 - 0x86C - sizeof(s32)];
-    s32 * unk13B4;
-};
 
 struct func_8022CA04_S2;
 /* unbake published declaration: published_ec5b7663cb1c66bb3559eb15 */

@@ -1,27 +1,9 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8023330C_H
 #define UNBAKE_SPAN_1000_CODE_8023330C_H
 #include "../types.h"
-struct func_8023370C_S1;
-/* unbake published declaration: published_0a8b74329d2fb7897038f46c */
-struct func_8023370C_S1 {
-    char pad0[0x124];
-    f32 unk124;
-};
-
-struct func_8023330C_S1;
-/* unbake published declaration: published_16793f31c3d06f49f91c060e */
-struct func_8023330C_S1 {
-    char pad0[0x148];
-    float unk148;
-};
-
 struct State_func_802337D0_de;
 /* unbake published declaration: published_20460778177b90f9c4c3f196 */
 typedef struct State_func_802337D0_de State_func_802337D0_de;
-
-struct func_8023330C_S1;
-/* unbake published declaration: published_2675235d89312f29e1678e2f */
-typedef struct func_8023330C_S1 func_8023330C_S1;
 
 /* unbake published declaration: published_280fdebd290b7f85e577a792 */
 extern void func_8023378C_de(void *arg0, void *arg1);
@@ -80,10 +62,6 @@ extern float D_800C3054_de;
 struct func_8023333C_S1;
 /* unbake published declaration: published_a01d884db2fabe6989b41812 */
 typedef struct func_8023333C_S1 func_8023333C_S1;
-
-struct func_8023370C_S1;
-/* unbake published declaration: published_b0578b6815bfd4a5b9070467 */
-typedef struct func_8023370C_S1 func_8023370C_S1;
 
 /* unbake published declaration: published_b3f448e0f04237d6822d835f */
 extern float D_800C3088_de;

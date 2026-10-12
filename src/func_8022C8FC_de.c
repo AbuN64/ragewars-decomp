@@ -1,3 +1,4 @@
+#include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8022C894.h"
 #include "types.h"
 /* Runs a player's grounded movement state: updates it through func_8022404C_de, eases the value at
@@ -18,40 +19,40 @@ extern s32 D_800CED30;
 
 
 
-void func_8022C8FC_de(void *arg0, void *arg1) {
+void func_8022C8FC_de(struct SharedPlayer *arg0, void *arg1) {
     f32 x;
     f32 y;
     f32 zero;
 
     func_8022404C_de(arg0, arg1);
     zero = 0.0f;
-    func_80274870_de(&((func_8022C8EC_S1 *)(arg0))->unk72C, zero, 0.25f);
+    func_80274870_de(&arg0->views5E8.view72C_75.unk72C, zero, 0.25f);
     func_802231D4_de(arg0, arg1, &D_800CE7FC);
     func_802233F0_de(arg0, arg1, &D_800CE7C0);
-    if (!(((func_8022C8EC_S1 *)(arg0))->unk6AC & 0x10)) {
+    if (!(arg0->views5E8.view6AC_45.unk6AC & 0x10)) {
         func_802227F4_de(arg0, arg1, 2);
-        if (((func_8022C8EC_S1 *)(arg0))->unk13B4 == &D_800CED30) {
-            ((func_8022C8EC_S1 *)(arg0))->unk86C = 0x5E24;
+        if (arg0->views13B4.view13B4_3.character == &D_800CED30) {
+            arg0->views5E8.view86C_125.unk86C = 0x5E24;
         } else {
-            ((func_8022C8EC_S1 *)(arg0))->unk86C = 1;
+            arg0->views5E8.view86C_125.unk86C = 1;
         }
     } else {
-        x = ((func_8022C8EC_S1 *)(arg0))->unk6C0;
-        if (x != zero || ((func_8022C8EC_S1 *)(arg0))->unk6C4 != zero) {
-            y = ((func_8022C8EC_S1 *)(arg0))->unk6C4;
+        x = arg0->views5E8.view6C0_51.unk6C0;
+        if (x != zero || arg0->views5E8.view6C4_54.unk6C4 != zero) {
+            y = arg0->views5E8.view6C4_54.unk6C4;
             if (x < y) {
                 if (zero < y) {
-                    ((func_8022C8EC_S1 *)(arg0))->unk86C = 0xA67;
+                    arg0->views5E8.view86C_125.unk86C = 0xA67;
                 } else {
-                    ((func_8022C8EC_S1 *)(arg0))->unk86C = 0xA66;
+                    arg0->views5E8.view86C_125.unk86C = 0xA66;
                 }
             } else if (zero < x) {
-                ((func_8022C8EC_S1 *)(arg0))->unk86C = 0xA65;
+                arg0->views5E8.view86C_125.unk86C = 0xA65;
             } else {
-                ((func_8022C8EC_S1 *)(arg0))->unk86C = 0xA68;
+                arg0->views5E8.view86C_125.unk86C = 0xA68;
             }
         } else {
-            ((func_8022C8EC_S1 *)(arg0))->unk86C = 0xA64;
+            arg0->views5E8.view86C_125.unk86C = 0xA64;
         }
     }
 }

@@ -121,10 +121,6 @@ struct Obj_func_8022B550_de {
     Timer timers[5];
 };
 
-struct func_8022B174_S1;
-/* unbake published declaration: published_692d519974906c975758346b */
-typedef struct func_8022B174_S1 func_8022B174_S1;
-
 struct func_8022AE90_S1;
 /* unbake published declaration: published_6aa7beda2bb560018252b3d2 */
 struct func_8022AE90_S1 {
@@ -151,15 +147,6 @@ struct func_8022B3C0_S1;
 struct func_8022B3C0_S1 {
     char pad0[0x1200];
     Vec3 unk1200;
-};
-
-struct func_8022B974_S1;
-/* unbake published declaration: published_7623c5b0de57f0583ec70b52 */
-struct func_8022B974_S1 {
-    char pad0[0x1210];
-    s32 unk1210;
-    char pad1210[0x1214 - 0x1210 - sizeof(s32)];
-    s32 unk1214;
 };
 
 struct ObjectState13E4;
@@ -254,23 +241,12 @@ struct Game_func_8022B7F8_de;
 /* unbake published declaration: published_b895d967d20ee65dcf56ec21 */
 typedef struct Game_func_8022B7F8_de Game_func_8022B7F8_de;
 
-struct func_8022B174_S1;
-/* unbake published declaration: published_bc20686177b8a8cbdd3af605 */
-struct func_8022B174_S1 {
-    char pad0[0x1210];
-    int unk1210;
-};
-
 struct func_8022B08C_S1;
 /* unbake published declaration: published_be76bef1f7b63c486dbc39ff */
 typedef struct func_8022B08C_S1 func_8022B08C_S1;
 
 /* unbake published declaration: published_bedad43fada45affa9cd8970 */
 extern float D_800C7E08;
-
-struct func_8022B974_S1;
-/* unbake published declaration: published_c49bbf96eb94fa3c94a8bdd4 */
-typedef struct func_8022B974_S1 func_8022B974_S1;
 
 struct IntegerState11C0;
 /* unbake published declaration: published_c5c7151e39a75b33e38aa221 */

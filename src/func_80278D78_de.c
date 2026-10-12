@@ -10,11 +10,11 @@ extern s32 func_8028C26C_de(s8 *arg0, void *arg1, s32 *arg2, s32 *arg3);
 
 
 
-void func_80278D78_de(void *arg0, s32 arg1, void *arg2) {
+void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2) {
     s32 sp20;
     s32 sp24;
 
-    if (!(((func_80203C40_S1 *)(arg0))->unk100 & 0x80000)) {
+    if (!(arg0->weaponFlags & 0x80000)) {
         func_8028C26C_de(&D_8011FE88, arg0, &sp20, &sp24);
         if (sp24 != 0) {
             func_80279204_de(sp20, sp24, 0, arg1 & 0x3FC1FF, arg1 & 0x400000, 0x400000, arg2);

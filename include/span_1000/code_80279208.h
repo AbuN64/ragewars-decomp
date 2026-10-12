@@ -1,3 +1,4 @@
+struct Shared_Actor;
 #ifndef UNBAKE_SPAN_1000_CODE_80279208_H
 #define UNBAKE_SPAN_1000_CODE_80279208_H
 #include "../types.h"
@@ -75,7 +76,7 @@ struct Lists18 {
 extern void func_80279198_de(int arg0, int arg1, void *arg2);
 
 /* unbake published declaration: published_84eff980f5cc975c41473d97 */
-extern void func_802791D8_de(void *arg0);
+extern void func_802791D8_de(struct Shared_Actor *arg0);
 
 struct WeightedTable;
 /* unbake published declaration: published_88b18199528ea8fc83ba39f6 */

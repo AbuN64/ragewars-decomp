@@ -3,6 +3,6 @@
 
 
 
-int func_8022E694_de(void *arg0) {
-    return ((func_8022C6D4_S1 *)(arg0))->unk650 == 0xF;
+int func_8022E694_de(struct SharedPlayer *arg0) {
+    return arg0->views5E8.view650_15.unk650 == 0xF;
 }

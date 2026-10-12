@@ -3,6 +3,6 @@
 
 
 
-void func_802791D8_de(void *arg0) {
-    ((func_80203C40_S1 *)(arg0))->unk100 &= ~0x10000;
+void func_802791D8_de(struct Shared_Actor *arg0) {
+    arg0->weaponFlags &= ~0x10000;
 }

@@ -1,3 +1,4 @@
+struct SharedPlayer;
 #ifndef UNBAKE_SPAN_1000_CODE_8022D944_H
 #define UNBAKE_SPAN_1000_CODE_8022D944_H
 #include "../types.h"
@@ -67,19 +68,6 @@ struct func_8022E694_S2 {
     s32 unk20;
 };
 
-struct func_8022E5DC_S1;
-/* unbake published declaration: published_38bd33112e29f6e4773b4237 */
-struct func_8022E5DC_S1 {
-    char pad0[0x650];
-    s16 unk650;
-    char pad650[0x86C - 0x650 - sizeof(s16)];
-    s32 unk86C;
-};
-
-struct func_8022DA20_S1;
-/* unbake published declaration: published_3917b29ee4d4de3ee537e628 */
-typedef struct func_8022DA20_S1 func_8022DA20_S1;
-
 struct Object126;
 /* unbake published declaration: published_3951c1ef241806101c14ec30 */
 typedef struct Object126 Object126;
@@ -100,7 +88,7 @@ struct func_8022DC34_S2 {
 };
 
 /* unbake published declaration: published_3f4a3e9d55de6dc852515018 */
-extern int func_8022E694_de(void *arg0);
+extern int func_8022E694_de(struct SharedPlayer *arg0);
 
 /* unbake published declaration: published_4f5ea21060782dcd2357e0a4 */
 extern float func_8022E588_de(void * arg0, float * arg1);
@@ -288,13 +276,6 @@ struct func_8022E0A0_S1 {
 /* unbake published declaration: published_800ed33ddc21c00075def03c */
 extern float D_800C2DCC_de;
 
-struct func_8022DA20_S1;
-/* unbake published declaration: published_87c83d6b235c211d4fade7c6 */
-struct func_8022DA20_S1 {
-    char pad0[0x6C0];
-    f32 unk6C0;
-};
-
 struct func_8022DC0C_S1;
 /* unbake published declaration: published_8d539f9fff479e8626c14028 */
 typedef struct func_8022DC0C_S1 func_8022DC0C_S1;
@@ -302,10 +283,6 @@ typedef struct func_8022DC0C_S1 func_8022DC0C_S1;
 struct func_8022DC34_S2;
 /* unbake published declaration: published_8e2b2138ce6b654e4df447ad */
 typedef struct func_8022DC34_S2 func_8022DC34_S2;
-
-struct func_8022E5DC_S1;
-/* unbake published declaration: published_8ea02b5180e74303850bc837 */
-typedef struct func_8022E5DC_S1 func_8022E5DC_S1;
 
 struct func_8022DE48_S1;
 /* unbake published declaration: published_8f92364e9b67fac48366305e */
@@ -452,7 +429,7 @@ struct func_8022D960_S1 {
 extern float D_800C2DC8_de;
 
 /* unbake published declaration: published_ca591ca8e36c4622c0478ef7 */
-extern s32 func_8022E640_de(void *arg0);
+extern s32 func_8022E640_de(struct SharedPlayer *arg0);
 
 /* unbake published declaration: published_caad84110b8f5b4999e277b9 */
 extern void func_8022E260_de(void * arg0, int arg1, int arg2);
@@ -538,7 +515,7 @@ struct func_8022D9F4_S1;
 typedef struct func_8022D9F4_S1 func_8022D9F4_S1;
 
 /* unbake published declaration: published_e81cb8d0281a0920197525a5 */
-extern s32 func_8022E5EC_de(void *arg0);
+extern s32 func_8022E5EC_de(struct SharedPlayer *arg0);
 
 struct func_8022E0A0_S1;
 /* unbake published declaration: published_e9608482d131641a552e36e4 */

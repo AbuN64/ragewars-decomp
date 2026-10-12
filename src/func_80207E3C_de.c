@@ -5,8 +5,8 @@ extern void func_80214178_de(void *a, void *b, int c);
 
 
 
-void func_80207E3C_de(void *arg0, int *arg1) {
-    ((func_80203C40_S1 *)(arg0))->unk100 |= 0x2100;
+void func_80207E3C_de(struct Shared_Actor *arg0, int *arg1) {
+    arg0->weaponFlags |= 0x2100;
     *arg1 |= 0x10000;
     func_80214178_de(arg0, arg1, 1);
 }

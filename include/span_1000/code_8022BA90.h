@@ -1,3 +1,4 @@
+struct ScreenRectangle;
 #ifndef UNBAKE_SPAN_1000_CODE_8022BA90_H
 #define UNBAKE_SPAN_1000_CODE_8022BA90_H
 #include "../types.h"
@@ -37,10 +38,6 @@ struct func_8022C640_S2;
 /* unbake published declaration: published_0f6ac61d67c10e91088bafda */
 typedef struct func_8022C640_S2 func_8022C640_S2;
 
-struct func_8022C1D8_S2;
-/* unbake published declaration: published_14a27986c27efa181cb9cb0b */
-typedef struct func_8022C1D8_S2 func_8022C1D8_S2;
-
 /* unbake published declaration: published_162d14c2015a282ed5d50308 */
 extern float D_800C2D34_de;
 
@@ -75,7 +72,7 @@ extern void *func_8022C55C_de(void *arg0, u32 arg1);
 extern void func_8022C0D0_de(void *arg0);
 
 /* unbake published declaration: published_5c56ad25a63bfc0cce58bb8d */
-extern void func_8022C2B4_de(void *arg0, char *arg1);
+extern void func_8022C2B4_de(void *arg0, struct ScreenRectangle *arg1);
 
 struct func_8022BAC0_S1;
 /* unbake published declaration: published_5c626dd4fbaea3318266964d */
@@ -110,13 +107,6 @@ typedef struct func_8022BD84_S2 func_8022BD84_S2;
 struct ObjectState668;
 /* unbake published declaration: published_7028d698ca23f107911fe2f4 */
 typedef struct ObjectState668 ObjectState668;
-
-struct func_8022C1D8_S2;
-/* unbake published declaration: published_7156a2dabb7692ad806fe066 */
-struct func_8022C1D8_S2 {
-    char pad0[0x7BC];
-    f32 unk7BC;
-};
 
 struct func_8022BB70_S1;
 /* unbake published declaration: published_808652367dc7d07f2ddc5cf7 */

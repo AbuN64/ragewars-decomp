@@ -1,3 +1,5 @@
+struct Shared_Actor;
+struct SharedPlayer;
 #ifndef UNBAKE_SPAN_1000_CODE_80204E78_H
 #define UNBAKE_SPAN_1000_CODE_80204E78_H
 #include "../types.h"
@@ -393,7 +395,7 @@ typedef struct {
     s32 flags;
 } Obj5324;
 extern void func_80285DB0_de(void *, void *, s32);
-extern void func_80278D78_de(void *, s32, void *);
+extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 extern void func_80216288_de(void *, s32, Triple, s32);
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 extern void func_802170A0_de(void *, s32 *, s32, s32, s32);
@@ -447,6 +449,6 @@ typedef struct {
 typedef struct { u8 unused0[0x124]; s32 spawn, remaining; } SpawnDispatchOwner;
 typedef struct { u8 unused0[0x1D]; u8 enabled; } SpawnDispatchConfig;
 extern s32 func_80222D64_de(void *arg0, s32 arg1);
-extern int func_8022ADB0_de(void *object, s32 arg1);
+extern int func_8022ADB0_de(struct SharedPlayer *object, s32 arg1);
 
 #endif

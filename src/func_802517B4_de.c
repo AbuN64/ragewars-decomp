@@ -37,7 +37,7 @@ void *func_802517B4_de(s32 arg0, s32 arg1) {
     HashNode *node;
     void *value;
     void **out;
-    void *object;
+    struct IntrusiveList *object;
 
     temp_a0 = func_802BCF30_de();
     temp_v1 = D_8010515C + 1;
@@ -79,9 +79,9 @@ found:
     object = 0;
     if (value != 0) {
         object = *(void **)value;
-        ((func_8020A028_S4 *)(object))->unk8 += 1;
-        ((func_8020A028_S4 *)(object))->unkC |= 0x100;
-        ((func_8020A028_S4 *)(object))->unk10 = D_80105180.field_0;
+        object->prevOffset += 1;
+        object->nextOffset |= 0x100;
+        object->count = D_80105180.field_0;
         func_80255FB8_de(&D_80100570, object);
     }
 

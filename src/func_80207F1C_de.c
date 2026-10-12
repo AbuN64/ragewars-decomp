@@ -9,7 +9,7 @@ extern void func_80285DB0_de(void *, void *, s32);
 
 
 
-void func_80207F1C_de(void *arg0) {
+void func_80207F1C_de(struct Shared_Actor *arg0) {
     func_80285DB0_de(&D_8011FE88, arg0, 0);
-    ((func_80203C40_S1 *)(arg0))->unk100 &= ~0x100;
+    arg0->weaponFlags &= ~0x100;
 }
