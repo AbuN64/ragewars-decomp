@@ -472,7 +472,7 @@ schema = 1
 "func_80222BE8_de" = { evidence = "landed", signature = "s32 func_80222BE8_de(void *player, s32 slot, s32 amount)" }
 "func_80222D64_de" = { evidence = "landed", signature = "s32 func_80222D64_de(void *arg0, s32 arg1)" }
 "func_80222EA4_de" = { evidence = "landed", signature = "s32 func_80222EA4_de(void *arg0, void *arg1)" }
-"func_80222FE0_de" = { evidence = "declared", signature = "void func_80222FE0_de(void *, void *, s32 *)" }
+"func_80222FE0_de" = { evidence = "landed", signature = "s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused)" }
 "func_802233F0_de" = { evidence = "landed", signature = "void func_802233F0_de(SharedPlayer_func_802233F0_de *arg0, func_802165F8_S1 *arg1, SharedMovement *arg2)" }
 "func_802238E0_de" = { evidence = "landed", signature = "void func_802238E0_de(SharedPlayer_func_802238E0_de *arg0, Actor_func_802238E0_de *arg1, SharedMovement *arg2)" }
 "func_80223E34_de" = { evidence = "landed", signature = "void func_80223E34_de(SharedPlayer_func_80223E34_de *player, func_80203908_S4 *camera)" }
@@ -5099,7 +5099,9 @@ schema = 1
 "D_800C2864_de" = { declaration = "extern float D_800C2864_de;", evidence = "authored" }
 "D_800C2868_de" = { declaration = "extern float D_800C2868_de;", evidence = "authored" }
 "D_800C286C_de" = { declaration = "extern float D_800C286C_de;", evidence = "authored" }
+"D_800C2870_de" = { declaration = "extern f32 D_800C2870_de;", evidence = "authored" }
 "D_800C2874_de" = { declaration = "extern float D_800C2874_de;", evidence = "authored" }
+"D_800C2878_de" = { declaration = "extern f32 D_800C2878_de;", evidence = "authored" }
 "D_800C287C_de" = { declaration = "extern float D_800C287C_de;", evidence = "authored" }
 "D_800C2880_de" = { declaration = "extern float D_800C2880_de;", evidence = "authored" }
 "D_800C2884_de" = { declaration = "extern float D_800C2884_de;", evidence = "authored" }
@@ -12515,6 +12517,11 @@ schema = 1
 "Thread" = { declaration = "struct Thread { char pad0[0x10]; u16 state; };", evidence = "authored" }
 "ThreadNode" = { declaration = "struct ThreadNode { struct ThreadNode *next; s32 priority; struct ThreadNode **queue; s32 unk0C; u16 state; };", evidence = "authored" }
 "ThreeChannels" = { declaration = "typedef struct ThreeChannels ThreeChannels;", evidence = "authored" }
+"ThrowActor" = { declaration = "typedef struct ThrowActor { u8 category; char pad01[0x17]; ThrowDefinition *definition; f32 vx, vy, vz; char pad28[0x148]; ThrowState state; } ThrowActor;", evidence = "authored" }
+"ThrowDefinition" = { declaration = "typedef struct ThrowDefinition { s32 kind; } ThrowDefinition;", evidence = "authored" }
+"ThrowPlayer" = { declaration = "typedef struct ThrowPlayer { char pad00[0x5DC]; void *effect; char pad5E0[0x84]; u32 flags; char pad668[0x58]; f32 speed; char pad6C4[0x148]; ThrowActor *selected; } ThrowPlayer;", evidence = "authored" }
+"ThrowPosition" = { declaration = "typedef struct ThrowPosition { char pad00[8]; Vec3 pos; char pad14[0x58]; f32 angle; } ThrowPosition;", evidence = "authored" }
+"ThrowState" = { declaration = "typedef struct ThrowState { u32 flags; s32 active; char pad08[0x2C]; s8 kind, timer; } ThrowState;", evidence = "authored" }
 "Timer" = { declaration = "typedef struct Timer Timer;", evidence = "authored" }
 "Timer_func_80410E1C_de" = { declaration = "typedef struct Timer_func_80410E1C_de Timer_func_80410E1C_de;", evidence = "authored" }
 "TimingQueue" = { declaration = "typedef struct Node_func_80442A28_de TimingQueue;", evidence = "authored" }

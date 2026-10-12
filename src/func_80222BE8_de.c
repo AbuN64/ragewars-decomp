@@ -2,6 +2,9 @@
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8021CD70.h"
 #include "types.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_C76B0/data.h"
 
 /* Adds ammunition to a player's weapon slot: computes the slot's cap as func_80222D64_de does (zero for
    no slot, the character's cap unless option D_801462D5 is 1, otherwise D_800CE3E8's cap plus the
@@ -204,4 +207,41 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
     }
     func_802227F4_de(arg0, arg1, 0xA);
     return 1;
+}
+
+extern u8 *D_801041F0;
+extern void func_80214178_de(void *, void *, s32);
+
+s32 func_80222FE0_de(void *playerObject, void *positionObject, s32 *unused) {
+    ThrowPlayer *player = playerObject;
+    ThrowPosition *position = positionObject;
+    ThrowActor *actor, *selected;
+    s32 kind;
+    f32 offset, scale, xSpeed, angle;
+    { void *object = D_801041F0; actor = object; }
+    if (!(player->flags & 0x8000)) goto invalid;
+    if (!actor) return 0;
+    selected = player->selected;
+    if (actor == selected) goto invalid;
+    if (actor->category != 1) return 0;
+    kind = actor->definition->kind;
+    if (kind != 1 || !selected) return 0;
+    if (actor->state.active) {
+        angle = position->angle;
+        offset = D_800C2860_de;
+        xSpeed = player->speed * func_802B7130_de(angle + offset);
+        scale = D_800C2864_de;
+        actor->vx = xSpeed * scale;
+        actor->vy = player->speed * D_800C2868_de;
+        actor->vz = player->speed * func_802B6560_de(position->angle + offset) * scale;
+        if (player->effect)
+            func_80239324_de(player->effect, D_800C2870_de, 100.0f, D_800C2870_de, D_800C286C_de, kind, position->pos);
+        if (selected->state.kind == 0x2E) actor->state.flags |= 0x200;
+        actor->state.timer = -1;
+        func_80214178_de(actor, &actor->state, 0x34);
+    } else if (player->effect)
+        func_80239324_de(player->effect, D_800C2878_de, 60.0f, D_800C2878_de, D_800C2874_de, kind, position->pos);
+    return 1;
+invalid:
+    return 0;
 }

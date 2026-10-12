@@ -417,7 +417,7 @@ segments:
       - [0x233D0, c, "func_802227F4_de"]
       - [0x23680, asm, "func_80222AA4_de"]
       - [0x237C4, c, "func_80222BE8_de"]
-      - [0x23BBC, asm, "func_80222FE0_de"]
+      - [0x23BBC, c, "func_80222FE0_de"]
       - [0x23DB0, asm, "func_802231D4_de"]
       - [0x23FCC, c, "func_802233F0_de"]
       - [0x244BC, c, "func_802238E0_de"]

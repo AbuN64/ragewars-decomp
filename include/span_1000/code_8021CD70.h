@@ -13717,4 +13717,23 @@ typedef struct DraftAimWeapon { char pad0[0x1C]; f32 angle; } DraftAimWeapon;
 typedef struct AimGlobals { void *head; char pad4[0x1281]; u8 enabled; } AimGlobals;
 extern f32 func_8022ADBC_de(void *);
 
+typedef struct ThrowDefinition { s32 kind; } ThrowDefinition;
+typedef struct ThrowState { u32 flags; s32 active; char pad08[0x2C]; s8 kind, timer; } ThrowState;
+typedef struct ThrowActor {
+    u8 category; char pad01[0x17]; ThrowDefinition *definition;
+    f32 vx, vy, vz; char pad28[0x148]; ThrowState state;
+} ThrowActor;
+typedef struct ThrowPlayer {
+    char pad00[0x5DC]; void *effect;
+    char pad5E0[0x84]; u32 flags;
+    char pad668[0x58]; f32 speed;
+    char pad6C4[0x148]; ThrowActor *selected;
+} ThrowPlayer;
+typedef struct ThrowPosition {
+    char pad00[8]; Vec3 pos; char pad14[0x58]; f32 angle;
+} ThrowPosition;
+extern f32 D_800C2870_de;
+extern f32 D_800C2878_de;
+extern void func_80239324_de(char *, f32, f32, f32, f32, s32, Vec3);
+
 #endif

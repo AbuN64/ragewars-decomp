@@ -422,7 +422,7 @@ segments:
       - [0x233F4, c, "func_802227F4_de"]
       - [0x236A4, asm, "func_80222AA4_de"]
       - [0x237E8, c, "func_80222BE8_de"]
-      - [0x23BE0, asm, "func_80222FE0_de"]
+      - [0x23BE0, c, "func_80222FE0_de"]
       - [0x23DD4, asm, "func_802231D4_de"]
       - [0x23FF0, c, "func_802233F0_de"]
       - [0x244E0, c, "func_802238E0_de"]
