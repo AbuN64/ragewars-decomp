@@ -7082,6 +7082,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800FD1F0"
+segment = "span_E1720"
+members = ["src/ragewars_resident_strings_FDDF0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800FD208"
 segment = "span_E1720"
 members = ["src/sn64_runtime_type_records.c"]
@@ -43350,6 +43358,17 @@ path = "src/ragewars_resident_strings_E6F5C_us_rev1.c"
 kind = "data"
 group = "data_800E6358"
 members = ["src/ragewars_resident_strings_E6F5C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_resident_strings_FDDF0_us_rev1.c"
+kind = "data"
+group = "data_800FD1F0"
+members = ["src/ragewars_resident_strings_FDDF0_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

@@ -6172,7 +6172,7 @@ segments:
       - [0xF6880, .data, "src/ragewars_debug_continuation_us_rev1.c"]
       - [0xF8E02, data, "rodata/unresolved/psyq_next_record_value_low_byte"]
       - [0xF8E03, .data, "src/sn64_intelligence_type_records.c"]
-      - [0xFDDF0, rodata, "src/ragewars_resident_strings_FDDF0_us_rev1.c"]
+      - [0xFDDF0, .rodata, "src/ragewars_resident_strings_FDDF0_us_rev1.c"]
       - [0xFDE08, .data, "src/sn64_runtime_type_records.c"]
   - name: "retained_101000"
     type: bin
