@@ -1448,6 +1448,7 @@ schema = 1
 "func_8025E584_de" = { evidence = "landed", signature = "short func_8025E584_de(void *arg0)" }
 "func_8025E590_de" = { evidence = "landed", signature = "int func_8025E590_de(void *object)" }
 "func_8025E59C_de" = { evidence = "landed", signature = "int func_8025E59C_de(void *arg0)" }
+"func_8025EA1C_de" = { evidence = "landed", signature = "void func_8025EA1C_de(AnimRef *anim, s32 index, f32 time, Vector4f *out)" }
 "func_8025EF34_de" = { evidence = "landed", signature = "void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count)" }
 "func_8025F074_us" = { evidence = "declared", signature = "s32 func_8025F074_us(void *, void *, s32, s32, s32, s32)" }
 "func_8025F094_eu" = { evidence = "declared", signature = "s32 func_8025F094_eu(void *, void *, s32, s32, s32, s32)" }
@@ -4383,6 +4384,7 @@ schema = 1
 "twistPart" = { evidence = "landed", signature = "static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i)" }
 "unlock" = { evidence = "landed", signature = "static inline void unlock(void)" }
 "unref" = { evidence = "landed", signature = "static inline void unref(Node_func_80251F6C_de *node)" }
+"unsignedFloat" = { evidence = "landed", signature = "static __inline__ f32 unsignedFloat(u32 value,const f64 *bias)" }
 "viRetrace" = { evidence = "landed", signature = "static inline u16 *viRetrace(void)" }
 "wrap" = { evidence = "landed", signature = "inline static f32 wrap(f32 arg0)" }
 "write_bits" = { evidence = "landed", signature = "inline static void write_bits(u32 arg2, u32 arg0, u32 arg1)" }
@@ -9796,6 +9798,8 @@ schema = 1
 "Angles" = { declaration = "typedef struct Angles Angles;", evidence = "authored" }
 "Angles_func_8025AB94_de" = { declaration = "typedef struct Angles_func_8025AB94_de Angles_func_8025AB94_de;", evidence = "authored" }
 "Anim" = { declaration = "struct Anim { s32 time; s16 current; s16 next; u16 frames; u8 blending; u8 active; s32 length; void *resource; };", evidence = "authored" }
+"AnimRef" = { declaration = "typedef struct AnimRef { char pad0[0xC]; u32 span; void **data; } AnimRef;", evidence = "authored" }
+"AnimTrack" = { declaration = "typedef struct AnimTrack { char pad0[0x18]; f32 length; f32 rate; } AnimTrack;", evidence = "authored" }
 "Animation" = { declaration = "typedef struct Animation Animation;", evidence = "authored" }
 "AnimationFrameDefinition" = { declaration = "typedef struct AnimationFrameDefinition AnimationFrameDefinition;", evidence = "authored" }
 "AnimationFrameState" = { declaration = "typedef struct AnimationFrameState AnimationFrameState;", evidence = "authored" }
@@ -10407,6 +10411,7 @@ schema = 1
 "JoinRequestItem" = { declaration = "typedef struct JoinRequestItem JoinRequestItem;", evidence = "authored" }
 "JoinRequestScreen" = { declaration = "typedef struct JoinRequestScreen JoinRequestScreen;", evidence = "authored" }
 "Key" = { declaration = "struct Key { char pad0[0x14]; };", evidence = "authored" }
+"KeyIndex" = { declaration = "typedef struct KeyIndex { char pad0[0xA]; s16 key; char padC[2]; } KeyIndex;", evidence = "authored" }
 "Key_func_80401214_de" = { declaration = "struct Key_func_80401214_de { char pad0[0x1C]; f32 time; char pad20[4]; };", evidence = "authored" }
 "Key_func_80401564_de" = { declaration = "typedef struct Key_func_80401564_de Key_func_80401564_de;", evidence = "authored" }
 "Key_func_8040170C_de" = { declaration = "typedef struct Key_func_8040170C_de Key_func_8040170C_de;", evidence = "authored" }
@@ -11218,6 +11223,7 @@ schema = 1
 "Pool_func_8044B0E0_de" = { declaration = "struct Pool_func_8044B0E0_de { IntrusiveList empty; IntrusiveList records; struct Record_func_8044B0E0_de entries[8]; };", evidence = "authored" }
 "Pos5324" = { declaration = "typedef union { Vec3 v; Triple t; } Pos5324;", evidence = "authored" }
 "Pos54E0" = { declaration = "typedef union { Vec3 v; Triple t; } Pos54E0;", evidence = "authored" }
+"PoseTable" = { declaration = "typedef struct PoseTable { s32 stride; char pad4[4]; s16 pad8[2]; s16 value[4]; } PoseTable;", evidence = "authored" }
 "Preset" = { declaration = "struct Preset { u8 bytes[0x2A]; };", evidence = "authored" }
 "PresetRow" = { declaration = "typedef struct PresetRow PresetRow;", evidence = "authored" }
 "PresetTable" = { declaration = "struct PresetTable { char pad0[0x16]; PresetRow rows[1]; };", evidence = "authored" }

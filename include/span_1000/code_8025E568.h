@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_1000_CODE_8025E568_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct func_802604BC_S1;
 /* unbake published declaration: published_02819758a31f14332eb938c6 */
 typedef struct func_802604BC_S1 func_802604BC_S1;
@@ -173,5 +175,27 @@ struct func_802604BC_S1 {
 
 /* unbake published declaration: published_f705540c0fc247149b26919f */
 extern void func_80260828_de(u32 *arg0, u32 arg1, u32 arg2);
+
+typedef struct AnimTrack {
+    /* 0x00 */ char pad0[0x18];
+    /* 0x18 */ f32 length;
+    /* 0x1C */ f32 rate;
+} AnimTrack;
+typedef struct AnimRef {
+    /* 0x00 */ char pad0[0xC];
+    /* 0x0C */ u32 span;
+    /* 0x10 */ void **data;
+} AnimRef;
+typedef struct KeyIndex {
+    /* 0x00 */ char pad0[0xA];
+    /* 0x0A */ s16 key;
+    /* 0x0C */ char padC[2];
+} KeyIndex;
+typedef struct PoseTable {
+    s32 stride;
+    char pad4[4];
+    s16 pad8[2];
+    s16 value[4];
+} PoseTable;
 
 #endif

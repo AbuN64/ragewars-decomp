@@ -1251,7 +1251,7 @@ segments:
       - [0x05F148, data, "func_8025E59C_de_padding_5F148"]
       - [0x5F14C, data, "rodata/unresolved/8025E54C"]
       - [0x5F150, asm, "func_8025E5B0_de"]
-      - [0x5F5BC, asm, "func_8025EA1C_de"]
+      - [0x5F5BC, c, "func_8025EA1C_de"]
       - [0x5FAD4, c, "func_8025EF34_de"]
       - [0x5FC74, asm, "func_8025F074_us"]
       - [0x5FFD4, c, "func_8025F434_de"]
