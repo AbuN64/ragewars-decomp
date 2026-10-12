@@ -86231,6 +86231,11 @@ path = "src/fuzzy/func_8021CF28_de.c"
 scores = {de = 0.875, eu = 0.875, eu-x = 0.875, us = 0.875, us-rev1 = 0.875}
 
 [[fuzzy]]
+member = "func_8021D774_de"
+path = "src/fuzzy/func_8021D774_de.c"
+scores = {de = 0.9243986254295533, eu = 0.9243986254295533, eu-x = 0.9243986254295533, us = 0.9243986254295533, us-rev1 = 0.9243986254295533}
+
+[[fuzzy]]
 member = "func_80222AA4_de"
 path = "src/fuzzy/func_80222AA4_de.c"
 scores = {de = 0.6419753086419753, eu = 0.6419753086419753, eu-x = 0.6419753086419753, us = 0.6419753086419753, us-rev1 = 0.6419753086419753}
