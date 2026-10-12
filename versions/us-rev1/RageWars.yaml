@@ -5551,7 +5551,7 @@ segments:
       - [0xE2608, rodata, "rodata/func_8042854C_de/800E1A08"]
       - [0xE261C, data, "rodata/unresolved/800E1A1C"]
       - [0xE2620, rodata, "rodata/func_80428700_de/800E1A20"]
-      - [0xE2634, data, "rodata/unresolved/800E1A34"]
+      - [0xE2634, .data, "rodata/unresolved/800E1A34"]
       - [0xE2640, .rodata, "rodata/func_80429B28_eu/800E1A40"]
       - [0xE2654, data, "rodata/unresolved/800E1A54"]
       - [0xE2660, rodata, "rodata/func_8042972C_de/800E1A60"]
