@@ -3623,7 +3623,7 @@ segments:
       - [0xC7F44, data, "rodata/unresolved/800C7344"]
       - [0xC7F50, rodata, "rodata/shared/800CC5A0"]
       - [0xC7F53, data, "rodata/unresolved/800C7353"]
-      - [0xC7F54, rodata, "rodata/shared/800CC5A4"]
+      - [0xC7F54, .rodata, "rodata/shared/800CC5A4"]
       - [0xC7F65, data, "rodata/unresolved/800C7365"]
       - [0xC7F68, rodata, "rodata/func_802AEC20_de/800CC5B8"]
       - [0xC7FD0, rodata, "rodata/func_802AF150_de/800CC620"]

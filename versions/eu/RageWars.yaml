@@ -3617,7 +3617,7 @@ segments:
       - [0xC8B34, data, "rodata/unresolved/800C7F34"]
       - [0xC8B40, rodata, "rodata/shared/800CC5A0"]
       - [0xC8B43, data, "rodata/unresolved/800C7F43"]
-      - [0xC8B44, rodata, "rodata/shared/800CC5A4"]
+      - [0xC8B44, .rodata, "rodata/shared/800CC5A4"]
       - [0xC8B55, data, "rodata/unresolved/800C7F55"]
       - [0xC8B58, rodata, "rodata/func_802AEC20_de/800CC5B8"]
       - [0xC8BC0, rodata, "rodata/func_802AF150_de/800CC620"]

@@ -3649,7 +3649,7 @@ segments:
       - [0xC9504, data, "rodata/unresolved/800C8904"]
       - [0xC9510, rodata, "rodata/shared/800CC5A0"]
       - [0xC9513, data, "rodata/unresolved/800C8913"]
-      - [0xC9514, rodata, "rodata/shared/800CC5A4"]
+      - [0xC9514, .rodata, "rodata/shared/800CC5A4"]
       - [0xC9525, data, "rodata/unresolved/800C8925"]
       - [0xC9528, rodata, "rodata/func_802AEC20_de/800CC5B8"]
       - [0xC9590, rodata, "rodata/func_802AF150_de/800CC620"]

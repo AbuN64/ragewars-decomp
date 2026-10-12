@@ -3735,7 +3735,7 @@ segments:
       - [0xCD194, data, "rodata/unresolved/800CC594"]
       - [0xCD1A0, rodata, "rodata/shared/800CC5A0"]
       - [0xCD1A3, data, "rodata/unresolved/800CC5A3"]
-      - [0xCD1A4, rodata, "rodata/shared/800CC5A4"]
+      - [0xCD1A4, .rodata, "rodata/shared/800CC5A4"]
       - [0xCD1B5, data, "rodata/unresolved/800CC5B5"]
       - [0xCD1B8, rodata, "rodata/func_802AEC20_de/800CC5B8"]
       - [0xCD220, rodata, "rodata/func_802AF150_de/800CC620"]

@@ -3594,7 +3594,7 @@ segments:
       - [0xC7E64, data, "rodata/unresolved/800C7264"]
       - [0xC7E70, rodata, "rodata/shared/800CC5A0"]
       - [0xC7E73, data, "rodata/unresolved/800C7273"]
-      - [0xC7E74, rodata, "rodata/shared/800CC5A4"]
+      - [0xC7E74, .rodata, "rodata/shared/800CC5A4"]
       - [0xC7E85, data, "rodata/unresolved/800C7285"]
       - [0xC7E88, rodata, "rodata/func_802AEC20_de/800CC5B8"]
       - [0xC7EF0, rodata, "rodata/func_802AF150_de/800CC620"]
