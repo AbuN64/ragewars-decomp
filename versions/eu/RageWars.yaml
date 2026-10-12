@@ -3930,7 +3930,7 @@ segments:
       - [0xEDFD1, data, "rodata/unresolved/800ED3D1"]
       - [0xEDFD4, rodata, "src/rw_text_804058B0_E1984_us_rev1.c"]
       - [0xEDFDF, data, "rodata/unresolved/800ED3DF"]
-      - [0xEDFE0, rodata, "rodata/shared/800E0D90"]
+      - [0xEDFE0, .rodata, "rodata/shared/800E0D90"]
       - [0xEDFF2, data, "rodata/unresolved/800ED3F2"]
       - [0xEDFF4, rodata, "rodata/shared/800E0DA4"]
       - [0xEDFF8, rodata, "src/rw_text_80408118_E19A8_us_rev1.c"]

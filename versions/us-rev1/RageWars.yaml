@@ -5434,7 +5434,7 @@ segments:
       - [0xE1981, data, "rodata/unresolved/800E0D81"]
       - [0xE1984, rodata, "src/rw_text_804058B0_E1984_us_rev1.c"]
       - [0xE198F, data, "rodata/unresolved/800E0D8F"]
-      - [0xE1990, rodata, "rodata/shared/800E0D90"]
+      - [0xE1990, .rodata, "rodata/shared/800E0D90"]
       - [0xE19A2, data, "rodata/unresolved/800E0DA2"]
       - [0xE19A4, rodata, "rodata/shared/800E0DA4"]
       - [0xE19A8, rodata, "src/rw_text_80408118_E19A8_us_rev1.c"]

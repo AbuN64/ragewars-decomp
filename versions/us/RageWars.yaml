@@ -3921,7 +3921,7 @@ segments:
       - [0xDC601, data, "rodata/unresolved/800DBA01"]
       - [0xDC604, rodata, "src/rw_text_804058B0_E1984_us_rev1.c"]
       - [0xDC60F, data, "rodata/unresolved/800DBA0F"]
-      - [0xDC610, rodata, "rodata/shared/800E0D90"]
+      - [0xDC610, .rodata, "rodata/shared/800E0D90"]
       - [0xDC622, data, "rodata/unresolved/800DBA22"]
       - [0xDC624, rodata, "rodata/shared/800E0DA4"]
       - [0xDC628, rodata, "src/rw_text_80408118_E19A8_us_rev1.c"]

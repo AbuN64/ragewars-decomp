@@ -3942,7 +3942,7 @@ segments:
       - [0xDD951, data, "rodata/unresolved/800DCD51"]
       - [0xDD954, rodata, "src/rw_text_804058B0_E1984_us_rev1.c"]
       - [0xDD95F, data, "rodata/unresolved/800DCD5F"]
-      - [0xDD960, rodata, "rodata/shared/800E0D90"]
+      - [0xDD960, .rodata, "rodata/shared/800E0D90"]
       - [0xDD972, data, "rodata/unresolved/800DCD72"]
       - [0xDD974, rodata, "rodata/shared/800E0DA4"]
       - [0xDD978, rodata, "src/rw_text_80408118_E19A8_us_rev1.c"]
