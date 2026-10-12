@@ -1300,7 +1300,7 @@ segments:
       - [0x621AC, c, "func_8026160C_de"]
       - [0x62208, data, "rodata/unresolved/80261608"]
       - [0x62210, c, "func_80261670_de"]
-      - [0x624DC, asm, "func_8026193C_de"]
+      - [0x624DC, c, "func_8026193C_de"]
       - [0x62A38, asm, "func_80261E98_de"]
       - [0x63020, c, "func_80262480_de"]
       - [0x63048, c, "func_802624A8_de"]

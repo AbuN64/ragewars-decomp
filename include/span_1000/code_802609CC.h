@@ -3,6 +3,8 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 /* unbake published declaration: published_0af77100b843ca464eb4c115 */
 extern float D_800C41A0_de;
 
@@ -210,5 +212,18 @@ struct func_80260EEC_S1 {
 
 /* unbake published declaration: published_ff3535174168b355dce20d9a */
 extern void func_8026107C_de(int *arg0, int arg1);
+
+typedef struct AnimTrack_func_8026193C_de {
+    f32 time;
+    s16 current,next,frames;
+    u8 active,blending;
+    char padc[4]; void *resource;
+} AnimTrack_func_8026193C_de;
+typedef struct RootActor { char pad0[0x100]; u32 flags; } RootActor;
+typedef struct RootClip { u16 count,loopStart; char pad4[4]; f32 rate; } RootClip;
+typedef struct AngleKeys { char header[8]; s16 keys[1]; } AngleKeys;
+extern void func_802476C8_de(char *,void *,f32,f32);
+extern f32 func_80273EE4_de(f32,f32,f32);
+extern s32 func_802625C4_de(void *);
 
 #endif

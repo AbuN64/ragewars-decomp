@@ -1302,7 +1302,7 @@ segments:
       - [0x6220C, c, "func_8026160C_de"]
       - [0x62268, asm, "func_80261668_de"]
       - [0x62270, c, "func_80261670_de"]
-      - [0x6253C, asm, "func_8026193C_de"]
+      - [0x6253C, c, "func_8026193C_de"]
       - [0x62A98, asm, "func_80261E98_de"]
       - [0x63080, c, "func_80262480_de"]
       - [0x630A8, c, "func_802624A8_de"]

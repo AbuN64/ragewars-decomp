@@ -1310,7 +1310,7 @@ segments:
       - [0x621CC, c, "func_8026160C_de"]
       - [0x62228, asm, "func_80261628_eu"]
       - [0x62230, c, "func_80261670_de"]
-      - [0x624FC, asm, "func_8026193C_de"]
+      - [0x624FC, c, "func_8026193C_de"]
       - [0x62A58, asm, "func_80261E98_de"]
       - [0x63040, c, "func_80262480_de"]
       - [0x63068, c, "func_802624A8_de"]

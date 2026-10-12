@@ -1478,7 +1478,7 @@ schema = 1
 "func_8025FD74_de" = { evidence = "landed", signature = "void func_8025FD74_de(Curve *arg0)" }
 "func_8025FFB0_de" = { evidence = "landed", signature = "void func_8025FFB0_de(Segment8025FFD0 *arg0, u32 *arg1)" }
 "func_80260138_de" = { evidence = "landed", signature = "float func_80260138_de(Stream *p,float t)" }
-"func_8026049C_de" = { evidence = "landed", signature = "unsigned int func_8026049C_de(void *object)" }
+"func_8026049C_de" = { evidence = "landed", signature = "void *func_8026049C_de(void *object)" }
 "func_802604AC_de" = { evidence = "landed", signature = "void func_802604AC_de(void *arg0, s32 arg1, void *arg2)" }
 "func_80260550_de" = { evidence = "landed", signature = "void func_80260550_de(void *arg0, s32 arg1, void *arg2)" }
 "func_80260634_de" = { evidence = "landed", signature = "float func_80260634_de(float value, int bits)" }
@@ -1518,7 +1518,7 @@ schema = 1
 "func_8026160C_de" = { evidence = "landed", signature = "unsigned int func_8026160C_de(unsigned int value)" }
 "func_80261614_de" = { evidence = "landed", signature = "u32 func_80261614_de(s32 arg0)" }
 "func_80261670_de" = { evidence = "landed", signature = "void func_80261670_de(Anim *anim, s32 table, s32 key, s32 blend, s32 *switched, Anim *previous)" }
-"func_8026193C_de" = { evidence = "declared", signature = "void func_8026193C_de(void *, Vec3 *, f32 *, void *)" }
+"func_8026193C_de" = { evidence = "landed", signature = "void func_8026193C_de(AnimTrack_func_8026193C_de *arg0, Vec3 *arg1, f32 *arg2, RootActor *arg3)" }
 "func_80261E98_de" = { evidence = "landed", signature = "void func_80261E98_de(func_80261EB8_S1 *arg0, func_80261EB8_S2 *arg1)" }
 "func_80262480_de" = { evidence = "landed", signature = "void func_80262480_de(void *record)" }
 "func_802624A8_de" = { evidence = "landed", signature = "void func_802624A8_de(void *arg0)" }
@@ -4411,9 +4411,11 @@ schema = 1
 "twistPart" = { evidence = "landed", signature = "static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i)" }
 "unlock" = { evidence = "landed", signature = "static inline void unlock(void)" }
 "unref" = { evidence = "landed", signature = "static inline void unref(Node_func_80251F6C_de *node)" }
+"unsignedDouble" = { evidence = "landed", signature = "static __inline__ f64 unsignedDouble(u32 value,const f64 *bias)" }
 "unsignedFloat" = { evidence = "landed", signature = "static __inline__ f32 unsignedFloat(u32 value,const f64 *bias)" }
 "viRetrace" = { evidence = "landed", signature = "static inline u16 *viRetrace(void)" }
 "wrap" = { evidence = "landed", signature = "inline static f32 wrap(f32 arg0)" }
+"wrapAngle" = { evidence = "landed", signature = "static __inline__ f32 wrapAngle(AnimTrack_func_8026193C_de *anim,f32 time)" }
 "write_bits" = { evidence = "landed", signature = "inline static void write_bits(u32 arg2, u32 arg0, u32 arg1)" }
 
 [global]
@@ -9845,11 +9847,13 @@ schema = 1
 "AimPlayer" = { declaration = "typedef struct AimPlayer { s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594; char pad598[0x40]; AimController *unk5D8; AimView *view; char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788; f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798; Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4]; Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8; char pad7EC[0xa24]; s32 enabled; char pad1214[0x244]; Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target; } AimPlayer;", evidence = "authored" }
 "AimView" = { declaration = "typedef struct AimView { char pad0[0x24]; s32 mode; char pad28[0x100]; Vec3 origin; char pad134[0x2c]; f32 matrix[16]; } AimView;", evidence = "authored" }
 "AimWeapon" = { declaration = "typedef struct AimWeapon { char pad0[14]; s16 idle; s16 locked; } AimWeapon;", evidence = "authored" }
+"AngleKeys" = { declaration = "typedef struct AngleKeys { char header[8]; s16 keys[1]; } AngleKeys;", evidence = "authored" }
 "Angles" = { declaration = "typedef struct Angles Angles;", evidence = "authored" }
 "Angles_func_8025AB94_de" = { declaration = "typedef struct Angles_func_8025AB94_de Angles_func_8025AB94_de;", evidence = "authored" }
 "Anim" = { declaration = "struct Anim { s32 time; s16 current; s16 next; u16 frames; u8 blending; u8 active; s32 length; void *resource; };", evidence = "authored" }
 "AnimRef" = { declaration = "typedef struct AnimRef { char pad0[0xC]; u32 span; void **data; } AnimRef;", evidence = "authored" }
 "AnimTrack" = { declaration = "typedef struct AnimTrack { char pad0[0x18]; f32 length; f32 rate; } AnimTrack;", evidence = "authored" }
+"AnimTrack_func_8026193C_de" = { declaration = "typedef struct AnimTrack_func_8026193C_de { f32 time; s16 current,next,frames; u8 active,blending; char padc[4]; void *resource; } AnimTrack_func_8026193C_de;", evidence = "authored" }
 "Animation" = { declaration = "typedef struct Animation Animation;", evidence = "authored" }
 "AnimationFrameDefinition" = { declaration = "typedef struct AnimationFrameDefinition AnimationFrameDefinition;", evidence = "authored" }
 "AnimationFrameState" = { declaration = "typedef struct AnimationFrameState AnimationFrameState;", evidence = "authored" }
@@ -11464,6 +11468,8 @@ schema = 1
 "Root" = { declaration = "struct Root { char pad[0x20]; struct Obj_func_802281F0_de *unk20; };", evidence = "authored" }
 "Root752C" = { declaration = "struct Root752C { char pad[0x7528]; Node44 *unk_7528; };", evidence = "authored" }
 "Root802131E0" = { declaration = "typedef struct Root802131E0 Root802131E0;", evidence = "authored" }
+"RootActor" = { declaration = "typedef struct RootActor { char pad0[0x100]; u32 flags; } RootActor;", evidence = "authored" }
+"RootClip" = { declaration = "typedef struct RootClip { u16 count,loopStart; char pad4[4]; f32 rate; } RootClip;", evidence = "authored" }
 "Root_func_8027FF58_de" = { declaration = "typedef struct Root_func_8027FF58_de Root_func_8027FF58_de;", evidence = "authored" }
 "Root_func_8041C7F4_de" = { declaration = "typedef struct Root_func_8041C7F4_de Root_func_8041C7F4_de;", evidence = "authored" }
 "Root_func_804436F8_de" = { declaration = "struct Root_func_804436F8_de { char pad[0x1C]; struct Middle *middle; };", evidence = "authored" }

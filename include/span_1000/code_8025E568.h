@@ -170,7 +170,7 @@ struct func_802604BC_S1;
 /* unbake published declaration: published_f0364ac7202117430ed269c4 */
 struct func_802604BC_S1 {
     char pad0[0x10];
-    unsigned int * unk10;
+    void **unk10;
 };
 
 /* unbake published declaration: published_f705540c0fc247149b26919f */
