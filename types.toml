@@ -3204,6 +3204,7 @@ schema = 1
 "func_8040F6DC_de" = { evidence = "landed", signature = "void func_8040F6DC_de(Widget_func_8040F6DC_de *widget, s32 base, s32 old)" }
 "func_8040F75C_resolve" = { evidence = "landed", signature = "static inline void func_8040F75C_resolve(Widget_func_8040F6DC_de *widget)" }
 "func_8040F9E0_de" = { evidence = "declared", signature = "void func_8040F9E0_de()" }
+"func_8040FB94_de" = { evidence = "declared", signature = "void func_8040FB94_de(char *)" }
 "func_804101BC_de" = { evidence = "landed", signature = "void func_804101BC_de(void)" }
 "func_80410448_de" = { evidence = "landed", signature = "void func_80410448_de(void)" }
 "func_80410674_de" = { evidence = "landed", signature = "s32 func_80410674_de(s32 index, s32 mode)" }
