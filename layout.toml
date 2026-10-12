@@ -6346,6 +6346,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1490"
+segment = "span_E1720"
+members = ["src/rw_text_8041C610_E2090_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E16B0"
 segment = "span_E1720"
 members = ["src/rw_pool_804243E0_E22B0_us_rev1.c"]
@@ -53779,6 +53787,17 @@ path = "src/rw_text_804058B0_E194C_us_rev1.c"
 kind = "data"
 group = "data_800E0D4C"
 members = ["src/rw_text_804058B0_E194C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_text_8041C610_E2090_us_rev1.c"
+kind = "data"
+group = "data_800E1490"
+members = ["src/rw_text_8041C610_E2090_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
