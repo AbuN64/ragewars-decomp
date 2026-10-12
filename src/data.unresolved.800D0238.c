@@ -1,3 +1,4 @@
-unsigned int D_auto_data_unresolved_800D0238[3] = {
+/* ROM-grounded data: data/unresolved/800D0238 */
+unsigned int D_blob_phase2_73ef61fc3b9a5abd5256[3] = {
     0xFFFFFFFF, 0xFFFF0000, 0x00000003,
 };

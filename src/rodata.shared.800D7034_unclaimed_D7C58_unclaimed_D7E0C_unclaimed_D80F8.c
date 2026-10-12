@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D80F8[2] = {
+/* ROM-grounded data: rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D80F8 */
+unsigned int D_blob_phase2_b549ecb9aa43027b8d75[2] = {
     0x800D4888, 0x800D488C,
 };

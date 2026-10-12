@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_writable_800D3640_unclaimed_D6430[1] = {
+/* ROM-grounded data: rodata/writable/800D3640_unclaimed_D6430 */
+unsigned int D_blob_phase2_d78f74868d4d9d9e5717[1] = {
     0x6E6F0000,
 };
