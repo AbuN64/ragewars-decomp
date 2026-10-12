@@ -376,4 +376,20 @@ struct func_80239668_S2 {
     char unk128;
 };
 
+
+/* On-screen message recycling and distribution share these list owners. */
+struct ScreenMessageOwner {
+    u8 padding000[0xF24];
+    IntrusiveList activeMessages; /* 0xF24 */
+};
+struct ScreenMessagePool {
+    u8 padding000[4];
+    struct ScreenMessagePool *next; /* 0x04, D_80140FE8 chain */
+    u8 padding008[0xE38];
+    IntrusiveList freeMessages; /* 0xE40 */
+};
+
+struct Message;
+extern struct Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
+
 #endif

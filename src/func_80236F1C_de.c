@@ -1,3 +1,4 @@
+#include "span_1000/code_802393F4.h"
 #include "abi.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_80233920.h"
@@ -100,8 +101,6 @@ void func_80236F1C_de(Race *race, s32 arg1)
     func_804429D4_de(race->self.sound);
 }
 
-extern Gfx *D_80110634;
-extern void func_8026D8F8_de(void);
 
 void func_802372D4_de(Racer *racer) {
     Entity_func_80233C88_de *entity = (Entity_func_80233C88_de *)racer;
@@ -170,19 +169,19 @@ extern s32 func_80245784_de(void);
 
 
 
-static inline Message *recycle(void *owner, void *pool) {
+static inline Message *recycle(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     Message *oldest;
 
-    oldest = ((func_80237E70_S1 *)(owner))->unkF24.head;
+    oldest = owner->activeMessages.head;
     if (oldest != 0) {
         func_80239CE0_de(oldest);
-        func_80255ED8_de(&((func_80237E70_S1 *)(owner))->unkF24, oldest);
-        func_80255D14_de(&((func_80237E70_S2 *)(pool))->unkE40, oldest);
+        func_80255ED8_de(&owner->activeMessages, oldest);
+        func_80255D14_de(&pool->freeMessages, oldest);
     }
     return oldest;
 }
 
-static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
+static inline Message *post_lines(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text, s32 kind, f32 size, s32 target) {
     Message *message;
     s32 height;
     u8 *line;
@@ -225,7 +224,7 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
     return message;
 }
 
-Message *func_80237E80_de(void *owner, void *pool, u8 *text) {
+Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
     Message *pending;
     s32 kind;
 
@@ -234,12 +233,12 @@ Message *func_80237E80_de(void *owner, void *pool, u8 *text) {
         return 0;
     }
     if (func_80245784_de() != 0) {
-        pending = ((func_80237E70_S2 *)(pool))->unkE40.head;
+        pending = pool->freeMessages.head;
         if (pending != 0) {
             kind = 1;
             do {
                 pending->kind = 4;
-                pending = ((func_80237E70_S4 *)(pending))->unk4;
+                pending = pending->next;
             } while (pending != 0);
         }
     }

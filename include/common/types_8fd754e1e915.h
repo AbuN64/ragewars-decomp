@@ -75,7 +75,9 @@ typedef union func_80234DD0_S1_U260 func_80234DD0_S1_U260;
 struct Message;
 /* unbake published declaration: published_4b2e377bb23513bebdbc1ce3 */
 struct Message {
-    char pad0[0xC];
+    u8 padding000[4];
+    struct Message *next; /* 0x04: traversal from the message pool head */
+    u8 padding008[4];
     f32 size;
     f32 alpha;
     s32 kind;

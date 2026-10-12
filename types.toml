@@ -831,7 +831,7 @@ schema = 1
 "func_80236874_de" = { evidence = "declared", signature = "void func_80236874_de()" }
 "func_80236F1C_de" = { evidence = "landed", signature = "void func_80236F1C_de(Race *race, s32 arg1)" }
 "func_802372D4_de" = { evidence = "landed", signature = "void func_802372D4_de(Racer *racer)" }
-"func_80237E80_de" = { evidence = "landed", signature = "Message *func_80237E80_de(void *owner, void *pool, u8 *text)" }
+"func_80237E80_de" = { evidence = "landed", signature = "Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text)" }
 "func_80238314_de" = { evidence = "declared", signature = "void func_80238314_de(Race *, Racer *)" }
 "func_80238D30_de" = { evidence = "declared", signature = "void func_80238D30_de(char *)" }
 "func_80238EB8_de" = { evidence = "landed", signature = "void func_80238EB8_de(State44 *arg0)" }
@@ -10833,7 +10833,7 @@ schema = 1
 "Menu_func_804410AC_de" = { declaration = "struct Menu_func_804410AC_de { s16 cursor; char pad2[0xA]; struct Entry_func_804410AC_de *entries; s32 count; };", evidence = "authored" }
 "Menu_func_80445964_de" = { declaration = "struct Menu_func_80445964_de { s16 state; char pad2[0x1A]; s32 id; s32 input; };", evidence = "authored" }
 "Mesh" = { declaration = "struct Mesh { u32 list; u32 matrix; u32 aux; u32 vertices; u16 scaleS; u16 scaleT; s32 segmented; s32 unused; struct Mesh *next; };", evidence = "authored" }
-"Message" = { declaration = "struct Message { char pad0[0xC]; f32 size; f32 alpha; s32 kind; s32 timer; s32 target; s32 pad20; u8 *text; s32 pad28; s32 pad2C; f32 x; f32 y; f32 scaleX; f32 scaleY; };", evidence = "authored" }
+"Message" = { declaration = "struct Message { u8 padding000[4]; struct Message *next; u8 padding008[4]; f32 size; f32 alpha; s32 kind; s32 timer; s32 target; s32 pad20; u8 *text; s32 pad28; s32 pad2C; f32 x; f32 y; f32 scaleX; f32 scaleY; };", evidence = "authored" }
 "Message_func_802AF150_de" = { declaration = "struct Message_func_802AF150_de { s16 type; char pad[14]; };", evidence = "authored" }
 "Messages" = { declaration = "typedef struct Messages Messages;", evidence = "authored" }
 "Meter" = { declaration = "struct Meter { s32 amount; s32 done; s32 falling; struct Resource_func_80419E54_de *bar; };", evidence = "authored" }
@@ -11670,6 +11670,8 @@ schema = 1
 "Scratch" = { declaration = "struct Scratch { f32 first[4]; f32 second[4]; f32 in[4]; f32 out[4]; f32 position[4]; char matrix[0x40]; };", evidence = "authored" }
 "Screen" = { declaration = "typedef struct Screen Screen;", evidence = "authored" }
 "Screen42" = { declaration = "struct Screen42 { struct Entry42 entries[4]; char pad1340[0x18]; s32 state; s32 next; char pad1360[8]; s32 delay; };", evidence = "authored" }
+"ScreenMessageOwner" = { declaration = "struct ScreenMessageOwner { u8 padding000[0xF24]; IntrusiveList activeMessages; };", evidence = "authored" }
+"ScreenMessagePool" = { declaration = "struct ScreenMessagePool { u8 padding000[4]; struct ScreenMessagePool *next; u8 padding008[0xE38]; IntrusiveList freeMessages; };", evidence = "authored" }
 "ScreenRectangle" = { declaration = "typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;", evidence = "authored" }
 "ScreenState" = { declaration = "typedef struct ScreenState ScreenState;", evidence = "authored" }
 "Screen_func_8041C2AC_de" = { declaration = "struct Screen_func_8041C2AC_de { void *parent; void *windows[4]; s32 selection; s32 scroll; s32 state; };", evidence = "authored" }
