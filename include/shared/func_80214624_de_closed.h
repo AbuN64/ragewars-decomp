@@ -15,16 +15,16 @@ extern s32 func_80240660_de(Actor_func_80214624_de *,Vec3,s32,s32,Vec3 *);
 extern s32 func_80240698_de(Actor_func_80214624_de *,s32,Vec3,s32,s32,Vec3 *);
 extern s32 func_80275B10_de(s32,f32,f32);
 extern void func_8024E79C_de(Actor_func_80214624_de *,Vec3,Vec3 *,s32 *,s32,s32);
-extern void func_80271F34_de(Vec3 *,Vec3 *,Vec3 *);
-extern void func_80271F68_de(Vec3 *,Vec3 *,Vec3 *);
+extern void func_80271F34_de(void *,void *,void *);
+extern void func_80271F68_de(void *,void *,void *);
 extern void func_80271F9C_de(Vec3 *,Vec3 *,f32);
-extern void func_8027207C_de(Vec3 *);
+extern void func_8027207C_de(f32 *);
 static inline void approach(Actor_func_80214624_de *arg0,Actor_func_80214624_de *arg2,Actor_func_80214624_de *temp_a2,Vec3 *posp,s32 *roomp) {
  Vec3 delta,offset; f32 temp_f20;
         if (temp_a2 != 0) {
             func_80271F68_de(&delta, &arg2->pos, &temp_a2->pos);
             delta.y = 0;
-            func_8027207C_de(&delta);
+            func_8027207C_de(&delta.x);
         } else {
             delta.x = 0;
             delta.y = 0;

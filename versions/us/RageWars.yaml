@@ -95,7 +95,7 @@ segments:
       - [0x3A4C, asm, "func_80202E4C_de"]
       - [0x3BDC, c, "func_80202FDC_de"]
       - [0x3E78, c, "func_80203278_de"]
-      - [0x40A4, asm, "func_802034A4_de"]
+      - [0x40A4, c, "func_802034A4_de"]
       - [0x4448, c, "func_80203848_de"]
       - [0x448C, c, "func_8020388C_de"]
       - [0x4508, c, "func_80203908_de"]

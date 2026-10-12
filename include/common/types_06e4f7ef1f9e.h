@@ -169,6 +169,7 @@ struct SharedPlayer {
         struct {
             char * track;
         } view18_1;
+        struct NavigationTrack *navigationTrack;
         struct {
             struct Model * model;
         } view18_2;

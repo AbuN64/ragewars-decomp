@@ -4,6 +4,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct Obj;
 /* unbake published declaration: published_15037d70ad2782d719d578db */
 typedef struct Obj Obj;
@@ -150,8 +153,21 @@ struct Result {
 struct Segment_func_80203278_de;
 /* unbake published declaration: published_bb1d1d9de614eb47426f207d */
 struct Segment_func_80203278_de {
-    char pad0[0x54];
+    char pad0[0x44];
+    f32 rate;
+    f32 limit;
+    f32 distanceLimit;
+    s32 pad50;
     f32 range;
+    f32 tolerance;
+    char pad5C[0x70-0x5C];
+    u8 activeMode;
+    u8 inactiveMode;
+};
+
+struct NavigationTrack {
+    char prefix[0x14];
+    Segment_func_80203278_de segment;
 };
 
 /* unbake published declaration: published_c52a897874324f3fd5ffe7ee */
@@ -197,4 +213,10 @@ extern void func_8020238C_de(void);
 extern void func_802023A8_de(void);
 extern int func_802023C4_de();
 extern void func_802023D0_de(int arg0);
+
+void func_80216D3C_de(Input80216D3C *arg0, void *arg1, Output80216D3C *arg2, s32 arg3, s32 arg4);
+void func_80216808_de(void *arg0, s32 arg1, f32 arg2, f32 arg3);
+typedef union NavActor { SharedPlayer player; Input80216D3C input; Actor_func_80214624_de actor; struct Owner owner; } NavActor;
+typedef struct NavVec { Vec3 v; f32 fourth; } NavVec;
+
 #endif

@@ -132,6 +132,7 @@ schema = 1
 "func_80202CA0_de" = { evidence = "landed", signature = "Vector4f func_80202CA0_de(Vec3 *dir)" }
 "func_80202FDC_de" = { evidence = "landed", signature = "void func_80202FDC_de(Owner *owner, Rider *rider, s32 mode, char *target)" }
 "func_80203278_de" = { evidence = "landed", signature = "void func_80203278_de(SharedPlayer *player, Rider_func_80203278_de *rider, Result *result)" }
+"func_802034A4_de" = { evidence = "landed", signature = "s32 func_802034A4_de(NavActor *arg0,NavRider *arg1)" }
 "func_80203848_de" = { evidence = "landed", signature = "s32 func_80203848_de(s32 arg0, s32 arg1, void *arg2)" }
 "func_8020388C_de" = { evidence = "landed", signature = "void func_8020388C_de(struct Owner_func_8020388C_de *owner, struct Record_func_8020388C_de *record)" }
 "func_80203908_de" = { evidence = "landed", signature = "void func_80203908_de(void *arg0, void *arg1)" }
@@ -4343,6 +4344,8 @@ schema = 1
 "map_category" = { evidence = "landed", signature = "static inline int map_category(int mode)" }
 "max_ammo" = { evidence = "landed", signature = "static inline s32 max_ammo(SharedPlayer_func_80229554_de *player, s32 type)" }
 "motion_storage" = { evidence = "landed", signature = "static inline s32 motion_storage(s32 channels, s32 frames)" }
+"navProject" = { evidence = "landed", signature = "static inline void navProject(f32 *matrix,Vec3 *local,Vec3 *out,Vec3 *to,Vec3 *from)" }
+"navRotation" = { evidence = "landed", signature = "static inline void navRotation(Vector4f *q,Vec3 *aim)" }
 "nearby" = { evidence = "landed", signature = "static inline void nearby(s32 unused, Obj_func_80284DC4_de *center, Obj_func_80284DC4_de **objects, s32 count)" }
 "normalize_copy" = { evidence = "landed", signature = "static inline void normalize_copy(Vec3 *out, Vec3 *in)" }
 "normalize_x" = { evidence = "landed", signature = "static inline void normalize_x(Vec3 *v)" }
@@ -10770,10 +10773,13 @@ schema = 1
 "Mtx3x4_8029FD54" = { declaration = "typedef struct Mtx3x4_8029FD54 Mtx3x4_8029FD54;", evidence = "authored" }
 "MultiplayerOptions" = { declaration = "struct MultiplayerOptions { u8 enabled; u8 reserved[2]; u8 session; };", evidence = "authored" }
 "Name" = { declaration = "struct Name { u8 flags[2]; u8 code[0x14]; u8 text[0x46 - 0x16]; };", evidence = "authored" }
+"NavActor" = { declaration = "typedef union NavActor { SharedPlayer player; Input80216D3C input; Actor_func_80214624_de actor; struct Owner owner; } NavActor;", evidence = "authored" }
+"NavVec" = { declaration = "typedef struct NavVec { Vec3 v; f32 fourth; } NavVec;", evidence = "authored" }
 "NavigationEndpoint" = { declaration = "typedef struct NavigationEndpoint NavigationEndpoint;", evidence = "authored" }
 "NavigationFlagWord" = { declaration = "typedef union NavigationFlagWord NavigationFlagWord;", evidence = "authored" }
 "NavigationNode" = { declaration = "typedef struct NavigationNode NavigationNode;", evidence = "authored" }
 "NavigationState" = { declaration = "typedef struct NavigationState NavigationState;", evidence = "authored" }
+"NavigationTrack" = { declaration = "struct NavigationTrack { char prefix[0x14]; Segment_func_80203278_de segment; };", evidence = "authored" }
 "Node" = { declaration = "struct Node { int id; char pad4[0xC]; struct Node *next; char pad14[0x18]; int active; };", evidence = "authored" }
 "Node438C" = { declaration = "typedef struct Node438C Node438C;", evidence = "authored" }
 "Node44" = { declaration = "struct Node44 { int unk_0; struct Node44 *unk_4; DefC *unk_8; char pc[0x10]; Entity1DC *unk_1C; int p20; f32 unk_24; char p28[0x14]; int unk_3C; ChildB4 *unk_40; };", evidence = "authored" }
