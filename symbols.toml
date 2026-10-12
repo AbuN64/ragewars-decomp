@@ -51207,7 +51207,7 @@ kind = "function"
 eu = 0x8021764C
 
 [symbol.func_8021764C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x8021764C
 us-rev1 = 0x8021762C
 
@@ -55038,7 +55038,7 @@ kind = "function"
 eu = 0x8023A4EC
 
 [symbol.func_8023A51C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x8023A51C
 us-rev1 = 0x8023A4CC
 
@@ -55670,7 +55670,7 @@ kind = "function"
 eu = 0x802406DC
 
 [symbol.func_8024070C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x8024070C
 us-rev1 = 0x802406BC
 
@@ -57502,7 +57502,7 @@ kind = "function"
 eu = 0x8024E994
 
 [symbol.func_8024E9C4_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x8024E9C4
 us-rev1 = 0x8024E974
 
@@ -60934,7 +60934,7 @@ us = 0x802636E0
 us-rev1 = 0x80263760
 
 [symbol.func_80263754_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x80263754
 
 [symbol.func_80263AF4_de]
@@ -61338,7 +61338,7 @@ us = 0x80264E80
 us-rev1 = 0x80264F00
 
 [symbol.func_80264F4C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x80264F4C
 us-rev1 = 0x80264F7C
 
@@ -61548,7 +61548,7 @@ us = 0x80265D70
 us-rev1 = 0x80265DF0
 
 [symbol.func_80265DF8_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x80265DF8
 us-rev1 = 0x80265E28
 
@@ -63633,7 +63633,7 @@ kind = "function"
 eu-x = 0x80278C6C
 
 [symbol.func_80278C7C_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x80278C7C
 
 [symbol.func_80278D78_de]
@@ -64686,7 +64686,7 @@ kind = "function"
 eu = 0x8028567C
 
 [symbol.func_802856AC_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802856AC
 us-rev1 = 0x802856AC
 
@@ -66987,7 +66987,7 @@ eu-x = 0x80294DE0
 us-rev1 = 0x80295B90
 
 [symbol.func_80294C98_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x80294C98
 
 [symbol.func_80294CA0_us_rev1]
@@ -67759,7 +67759,7 @@ kind = "function"
 eu = 0x8029ACB8
 
 [symbol.func_8029ACE8_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x8029ACE8
 us-rev1 = 0x8029BB98
 
@@ -67772,7 +67772,7 @@ us = 0x8029AC78
 us-rev1 = 0x8029BD38
 
 [symbol.func_8029AE74_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x8029AE74
 
 [symbol.func_8029AEA4_de]
@@ -70534,7 +70534,7 @@ kind = "function"
 eu = 0x802AD608
 
 [symbol.func_802AD648_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802AD648
 us-rev1 = 0x802B2438
 
@@ -70567,7 +70567,7 @@ us = 0x802AD698
 us-rev1 = 0x802B2838
 
 [symbol.func_802AD794_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802AD794
 us-rev1 = 0x802B2584
 
@@ -70616,7 +70616,7 @@ kind = "function"
 eu = 0x802ADBE0
 
 [symbol.func_802ADC1C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802ADC1C
 us-rev1 = 0x802B2A0C
 
@@ -72766,7 +72766,7 @@ kind = "function"
 eu = 0x802B7574
 
 [symbol.func_802B758C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802B758C
 us-rev1 = 0x802BC37C
 
@@ -74505,7 +74505,7 @@ eu-x = 0x802BD1D8
 us-rev1 = 0x802C1FE8
 
 [symbol.func_802BD1EC_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD1EC
 us-rev1 = 0x802C1FFC
 
@@ -74524,7 +74524,7 @@ kind = "function"
 eu = 0x802BD20C
 
 [symbol.func_802BD20C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD20C
 us-rev1 = 0x802C201C
 
@@ -74557,7 +74557,7 @@ kind = "function"
 us = 0x802BD248
 
 [symbol.func_802BD24C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD24C
 us-rev1 = 0x802C205C
 
@@ -74582,7 +74582,7 @@ kind = "function"
 de = 0x802BD2E8
 
 [symbol.func_802BD2E8_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD2E8
 us-rev1 = 0x802C20F8
 
@@ -74611,7 +74611,7 @@ us = 0x802BD250
 us-rev1 = 0x802C2410
 
 [symbol.func_802BD358_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD358
 us-rev1 = 0x802C2168
 
@@ -74660,7 +74660,7 @@ kind = "function"
 de = 0x802BD424
 
 [symbol.func_802BD428_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD428
 us-rev1 = 0x802C2238
 
@@ -74673,7 +74673,7 @@ us = 0x802BD360
 us-rev1 = 0x802C2520
 
 [symbol.func_802BD43C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD43C
 us-rev1 = 0x802C224C
 
@@ -74682,7 +74682,7 @@ kind = "function"
 eu = 0x802BD4B8
 
 [symbol.func_802BD4F8_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD4F8
 us-rev1 = 0x802C2308
 
@@ -74722,7 +74722,7 @@ kind = "function"
 eu = 0x802BD6C4
 
 [symbol.func_802BD704_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BD704
 us-rev1 = 0x802C2514
 
@@ -75040,7 +75040,7 @@ kind = "function"
 eu = 0x802C04CC
 
 [symbol.func_802C050C_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802C050C
 us-rev1 = 0x802C531C
 
@@ -75090,7 +75090,7 @@ kind = "function"
 eu = 0x802C1038
 
 [symbol.func_802C1078_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802C1078
 us-rev1 = 0x802C5E88
 
@@ -75768,7 +75768,7 @@ kind = "function"
 us = 0x80405DB4
 
 [symbol.func_80405DB4_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x80405DB4
 
 [symbol.func_80405DC0_de]
@@ -80450,7 +80450,7 @@ us = 0x804245C0
 us-rev1 = 0x804245C0
 
 [symbol.func_804245B8_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x804245B8
 
 [symbol.func_80424B78_eu]
@@ -84283,7 +84283,7 @@ kind = "function"
 us-rev1 = 0x8043EF1C
 
 [symbol.func_8043EFCC_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x8043EFCC
 
 [symbol.func_8043F040_de]
@@ -84312,7 +84312,7 @@ kind = "function"
 de = 0x8043F114
 
 [symbol.func_8043F284_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x8043F284
 
 [symbol.func_8043F290]
@@ -84991,7 +84991,7 @@ kind = "function"
 us = 0x80444024
 
 [symbol.func_80444024_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x80444024
 
 [symbol.func_80444094_de]
@@ -86089,7 +86089,7 @@ us = 0x804499E0
 us-rev1 = 0x8044A4C0
 
 [symbol.func_80449968_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x80449968
 
 [symbol.func_80449970_us_rev1]

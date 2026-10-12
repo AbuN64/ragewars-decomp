@@ -29900,6 +29900,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8021764C_eu_x.c"
+kind = "data"
+group = "code_80217388"
+members = ["func_8021764C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80217928_de.c"
 kind = "c"
 group = "code_80217388"
@@ -33654,6 +33665,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8023A51C_eu_x.c"
+kind = "data"
+group = "code_8023A284"
+members = ["func_8023A51C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8023B3F8_de.c"
 kind = "c"
 group = "code_8023A284"
@@ -34241,6 +34263,17 @@ path = "src/func_8024069C_eu_x.c"
 kind = "data"
 group = "code_8023EEF0"
 members = ["func_8024069C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_8024070C_eu_x.c"
+kind = "data"
+group = "code_8023EEF0"
+members = ["func_8024070C_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -36210,6 +36243,17 @@ path = "src/func_8024E924_de.c"
 kind = "c"
 group = "code_8024E914"
 members = ["func_8024E924_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_8024E9C4_eu_x.c"
+kind = "data"
+group = "code_8024E914"
+members = ["func_8024E9C4_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -39255,6 +39299,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80263754_us_rev1.c"
+kind = "data"
+group = "code_802636D0"
+members = ["func_80263754_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80263AF4_de.c"
 kind = "c"
 group = "code_802636D0"
@@ -39772,6 +39827,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80264F4C_eu_x.c"
+kind = "data"
+group = "code_802646F4"
+members = ["func_80264F4C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80265334_eu_x.c"
 kind = "data"
 group = "code_802646F4"
@@ -39831,6 +39897,17 @@ path = "src/func_80265DD0_de.c"
 kind = "c"
 group = "code_80265370"
 members = ["func_80265DD0_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80265DF8_eu_x.c"
+kind = "data"
+group = "code_80265370"
+members = ["func_80265DF8_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -41577,6 +41654,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80278C7C_us_rev1.c"
+kind = "data"
+group = "code_80277444"
+members = ["func_80278C7C_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80278D78_de.c"
 kind = "c"
 group = "code_80277444"
@@ -42318,6 +42406,17 @@ path = "src/func_80285630_de.c"
 kind = "c"
 group = "code_8028469C"
 members = ["func_80285630_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802856AC_eu_x.c"
+kind = "data"
+group = "code_8028567C"
+members = ["func_802856AC_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -44166,6 +44265,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80294C98_us_rev1.c"
+kind = "data"
+group = "code_80294C64"
+members = ["func_80294C98_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80294F1C_us_rev1.c"
 kind = "c"
 group = "code_80294C64"
@@ -45051,6 +45161,28 @@ path = "src/func_8029AB24_de.c"
 kind = "c"
 group = "code_80299DB4"
 members = ["func_8029AB24_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_8029ACE8_eu_x.c"
+kind = "data"
+group = "code_80299DB4"
+members = ["func_8029ACE8_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_8029AE74_us_rev1.c"
+kind = "data"
+group = "code_80299DB4"
+members = ["func_8029AE74_us_rev1"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -47347,10 +47479,43 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_802AD648_eu_x.c"
+kind = "data"
+group = "code_802AD608"
+members = ["func_802AD648_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802AD794_eu_x.c"
+kind = "data"
+group = "code_802AD608"
+members = ["func_802AD794_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_802AD8F4_de_padding_B3608.c"
 kind = "data"
 group = "data_802B2A08"
 members = ["func_802AD8F4_de_padding_B3608"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802ADC1C_eu_x.c"
+kind = "data"
+group = "code_802AD608"
+members = ["func_802ADC1C_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -49459,6 +49624,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_802B758C_eu_x.c"
+kind = "data"
+group = "code_802BBE24"
+members = ["func_802B758C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_802B759C_eu_x.c"
 kind = "data"
 group = "code_802BBE24"
@@ -50816,10 +50992,98 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_802BD1EC_eu_x.c"
+kind = "data"
+group = "code_802BBC68"
+members = ["func_802BD1EC_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD20C_eu_x.c"
+kind = "data"
+group = "code_802BBC68"
+members = ["func_802BD20C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD24C_eu_x.c"
+kind = "data"
+group = "code_802C2020"
+members = ["func_802BD24C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD2E8_eu_x.c"
+kind = "data"
+group = "code_802C2020"
+members = ["func_802BD2E8_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_802BD320_de.c"
 kind = "c"
 group = "code_802BD1A8"
 members = ["func_802BD320_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD358_eu_x.c"
+kind = "data"
+group = "code_802C2020"
+members = ["func_802BD358_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD428_eu_x.c"
+kind = "data"
+group = "code_802C2020"
+members = ["func_802BD428_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD43C_eu_x.c"
+kind = "data"
+group = "code_802C2020"
+members = ["func_802BD43C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD4F8_eu_x.c"
+kind = "data"
+group = "code_802C2020"
+members = ["func_802BD4F8_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -50842,6 +51106,17 @@ path = "src/func_802BD5F8_eu_x.c"
 kind = "data"
 group = "code_802BD1A8"
 members = ["func_802BD5F8_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802BD704_eu_x.c"
+kind = "data"
+group = "code_802BD1A8"
+members = ["func_802BD704_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -51139,6 +51414,28 @@ path = "src/func_802C021C_de.c"
 kind = "c"
 group = "code_802BE0D0"
 members = ["func_802C021C_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802C050C_eu_x.c"
+kind = "data"
+group = "code_802BE0D0"
+members = ["func_802C050C_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802C1078_eu_x.c"
+kind = "data"
+group = "code_802C074C"
+members = ["func_802C1078_eu_x"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -51766,6 +52063,17 @@ path = "src/func_80405CA8_de.c"
 kind = "c"
 group = "code_80405454"
 members = ["func_80405CA8_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80405DB4_us_rev1.c"
+kind = "data"
+group = "code_80405454"
+members = ["func_80405DB4_us_rev1"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -57157,6 +57465,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_804245B8_us_rev1.c"
+kind = "data"
+group = "code_80423280"
+members = ["func_804245B8_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80424B90_de.c"
 kind = "c"
 group = "code_80423280"
@@ -61179,10 +61498,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8043EFCC_us_rev1.c"
+kind = "data"
+group = "code_8043E9A8"
+members = ["func_8043EFCC_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8043F040_de.c"
 kind = "c"
 group = "code_8043E9A8"
 members = ["func_8043F040_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_8043F284_us_rev1.c"
+kind = "data"
+group = "code_8043E9A8"
+members = ["func_8043F284_us_rev1"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -61604,6 +61945,17 @@ path = "src/func_80443DD0_de.c"
 kind = "c"
 group = "code_80443868"
 members = ["func_80443DD0_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80444024_us_rev1.c"
+kind = "data"
+group = "code_80443868"
+members = ["func_80444024_us_rev1"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -62635,6 +62987,17 @@ path = "src/func_8044972C_de.c"
 kind = "c"
 group = "code_80447BB0"
 members = ["func_8044972C_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80449968_us_rev1.c"
+kind = "data"
+group = "code_80447BB0"
+members = ["func_80449968_us_rev1"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

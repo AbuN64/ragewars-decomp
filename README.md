@@ -7,7 +7,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [███████████▒▒▒▒▒░░░░]  58.13% (~78.42%)  3,986,705 of 6,857,872 bytes</code><br><code>de       [███████████▒▒▒▒▒░░░░]  59.56% (~79.75%)  823,527 of 1,382,608 bytes</code><br><code>eu       [██████████▒▒▒▒░░░░░░]  53.68% (~73.59%)  744,752 of 1,387,504 bytes</code><br><code>eu-x     [██████████▒▒▒▒▒░░░░░]  52.64% (~73.65%)  693,902 of 1,318,176 bytes</code><br><code>us       [████████████▒▒▒▒░░░░]  61.72% (~81.54%)  853,640 of 1,382,992 bytes</code><br><code>us-rev1  [████████████▒▒▒▒▒░░░]  62.81% (~83.34%)  870,884 of 1,386,592 bytes</code></pre>
+<pre><code>all      [███████████▒▒▒▒▒░░░░]  58.14% (~78.42%)  3,987,093 of 6,857,872 bytes</code><br><code>de       [███████████▒▒▒▒▒░░░░]  59.56% (~79.75%)  823,527 of 1,382,608 bytes</code><br><code>eu       [██████████▒▒▒▒░░░░░░]  53.68% (~73.59%)  744,752 of 1,387,504 bytes</code><br><code>eu-x     [██████████▒▒▒▒▒░░░░░]  52.65% (~73.66%)  694,050 of 1,318,176 bytes</code><br><code>us       [████████████▒▒▒▒░░░░]  61.72% (~81.54%)  853,640 of 1,382,992 bytes</code><br><code>us-rev1  [████████████▒▒▒▒▒░░░]  62.82% (~83.35%)  871,124 of 1,386,592 bytes</code></pre>
 
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
@@ -19,7 +19,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 
 | eu-x (NUS-NRWX-0, Europe). PAL multi-language release. SHA256 `511f6c876586bf401faf01a270c67f26fcb7db55ed3f35759c71ab15a29de750` |
 |---|
-| <pre><code>code      [██████████▒▒▒▒▒░░░░░]  50.42% (~75.30%)  561,428 of 1,113,404</code><br><code>data      [████████████░░░░░░░░]  64.69% (~64.69%)  132,474 of 204,772</code><br><code>functions [███████████░░░░░░░░░]  58.48%  2,087 of 3,569</code></pre> |
+| <pre><code>code      [██████████▒▒▒▒▒░░░░░]  50.43% (~75.31%)  561,428 of 1,113,256</code><br><code>data      [████████████░░░░░░░░]  64.72% (~64.72%)  132,622 of 204,920</code><br><code>functions [███████████░░░░░░░░░]  58.86%  2,087 of 3,546</code></pre> |
 
 | us (NUS-NRWE-0, North America). First NTSC release (black cartridge). SHA256 `0433043aaba2649bdd1fe717c4020550ac663c0362527aa082490f5977a3e46b` |
 |---|
@@ -27,7 +27,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 
 | us-rev1 (NUS-NRWE-1, North America). Revised NTSC release (grey cartridge). SHA256 `5dfbae59e4a3860b740ccbb28f33aad624315e30bfca6d60abd62d12a89e0089` |
 |---|
-| <pre><code>code      [██████████▒▒▒▒▒▒░░░░]  54.41% (~79.57%)  615,428 of 1,131,132</code><br><code>data      [████████████████████]  100.00% (~100.00%)  255,456 of 255,460</code><br><code>functions [████████████░░░░░░░░]  61.34%  2,190 of 3,570</code></pre> |
+| <pre><code>code      [██████████▒▒▒▒▒▒░░░░]  54.42% (~79.59%)  615,428 of 1,130,892</code><br><code>data      [████████████████████]  100.00% (~100.00%)  255,696 of 255,700</code><br><code>functions [████████████░░░░░░░░]  61.92%  2,190 of 3,537</code></pre> |
 <!-- /progress -->
 
 ## Development & Contributions
