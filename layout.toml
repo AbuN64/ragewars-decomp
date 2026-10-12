@@ -4410,6 +4410,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CE16C"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C_unclaimed_CECAC_unclaimed_CECCC_unclaimed_CECEC_unclaimed_CED0C_unclaimed_CED2C_unclaimed_CED4C_unclaimed_CED6C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CE224"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C_unclaimed_CECAC_unclaimed_CECCC_unclaimed_CECEC_unclaimed_CED0C_unclaimed_CED2C_unclaimed_CED4C_unclaimed_CED6C_unclaimed_CED8C_unclaimed_CEDAC_unclaimed_CEDCC_unclaimed_CEDEC_unclaimed_CEE04_unclaimed_CEE0C_unclaimed_CEE24", "src/ragewars_actor_primary_mask_events_us_rev1.c"]
@@ -47721,6 +47729,17 @@ path = "src/rodata.unresolved.800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed
 kind = "data"
 group = "data_800CE14C"
 members = ["rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C_unclaimed_CECAC_unclaimed_CECCC_unclaimed_CECEC_unclaimed_CED0C_unclaimed_CED2C_unclaimed_CED4C"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C_unclaimed_CECAC_unclaimed_CECCC_unclaimed_CECEC_unclaimed_CED0C_unclaimed_CED2C_unclaimed_CED4C_unclaimed_CED6C.c"
+kind = "data"
+group = "data_800CE16C"
+members = ["rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEBCC_unclaimed_CEC6C_unclaimed_CEC8C_unclaimed_CECAC_unclaimed_CECCC_unclaimed_CECEC_unclaimed_CED0C_unclaimed_CED2C_unclaimed_CED4C_unclaimed_CED6C"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
