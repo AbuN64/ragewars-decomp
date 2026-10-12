@@ -3811,7 +3811,7 @@ segments:
       - [0x0CCC38, .data, "rodata/unresolved/800CBBC0_0CCBB0_0CCC38"]
       - [0x0CCD70, .data, "src/ragewars_particle_intensity_texture_us_rev1.c"]
       - [0xCCE70, .data, "rodata/writable/800CC270"]
-      - [0xCCEC0, data, "rodata/unresolved/800CC2C0"]
+      - [0xCCEC0, .data, "rodata/unresolved/800CC2C0"]
       - [0xCCED0, data, "rodata/writable/800D1610"]
       - [0xCCEE0, .data, "rodata/unresolved/800CC2E0"]
       - [0xCDEE8, rodata, "src/rw_pool_802745D0_D3228_us_rev1.c"]
