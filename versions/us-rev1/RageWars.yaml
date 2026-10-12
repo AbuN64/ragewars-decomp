@@ -4504,7 +4504,7 @@ segments:
       - [0xCFE30, .data, "rodata/unresolved/800CF230"]
       - [0xcfeb8, data, "src/rw_weapon_state_entry_CFEB8_us_rev1.c"]
       - [0xcfec0, data, "rodata/unresolved/800CF230_unclaimed_CFEC0"]
-      - [0xcfec8, data, "src/rw_weapon_state_resource_animation_CFEC8_us_rev1.c"]
+      - [0xcfec8, .data, "src/rw_weapon_state_resource_animation_CFEC8_us_rev1.c"]
       - [0xcfed8, data, "src/rw_weapon_state_entry_CFED8_us_rev1.c"]
       - [0xcfee0, data, "rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0"]
       - [0xcfee8, .data, "src/rw_weapon_state_resource_animation_CFEE8_us_rev1.c"]
