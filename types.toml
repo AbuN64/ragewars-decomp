@@ -2666,7 +2666,7 @@ schema = 1
 "func_802AEE48_us_rev1" = { evidence = "landed", signature = "s32 func_802AEE48_us_rev1(void)" }
 "func_802AEF84_us_rev1" = { evidence = "landed", signature = "s32 func_802AEF84_us_rev1(void)" }
 "func_802AF0E4_us_rev1" = { evidence = "landed", signature = "s32 func_802AF0E4_us_rev1(void)" }
-"func_802AF150_de" = { evidence = "landed", signature = "void func_802AF150_de(void *arg0)" }
+"func_802AF150_de" = { evidence = "landed", signature = "void func_802AF150_de(void *rawPlayer)" }
 "func_802AF1F0_us_rev1" = { evidence = "landed", signature = "s32 func_802AF1F0_us_rev1(void)" }
 "func_802AF2E0_de" = { evidence = "landed", signature = "void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)" }
 "func_802AF33C_us_rev1" = { evidence = "landed", signature = "s32 func_802AF33C_us_rev1(void)" }
