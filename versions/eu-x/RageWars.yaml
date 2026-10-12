@@ -4016,7 +4016,7 @@ segments:
       - [0xE9528, .rodata, "rodata/func_80414400_de/800E8928"]
       - [0xE9608, .rodata, "src/rw_text_80414CCC_E1DF8_us_rev1.c"]
       - [0xE9619, data, "rodata/unresolved/800E8A19"]
-      - [0xE961C, rodata, "src/rw_text_80414CCC_E1E0C_us_rev1.c"]
+      - [0xE961C, .rodata, "src/rw_text_80414CCC_E1E0C_us_rev1.c"]
       - [0xE962D, rodata, "rodata/unresolved/800E8A2D"]
       - [0xE9630, rodata, "rodata/unresolved/800E1220"]
       - [0xE97A0, rodata, "rodata/func_80415C90_de/800E1390"]

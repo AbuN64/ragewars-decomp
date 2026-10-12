@@ -3992,7 +3992,7 @@ segments:
       - [0xDDCE8, .rodata, "rodata/func_80414400_de/800DD0E8"]
       - [0xDDDC8, .rodata, "src/rw_text_80414CCC_E1DF8_us_rev1.c"]
       - [0xDDDD9, data, "rodata/unresolved/800DD1D9"]
-      - [0xDDDDC, rodata, "src/rw_text_80414CCC_E1E0C_us_rev1.c"]
+      - [0xDDDDC, .rodata, "src/rw_text_80414CCC_E1E0C_us_rev1.c"]
       - [0xDDDED, data, "rodata/unresolved/800DD1ED"]
       - [0xDDDF0, data, "rodata/unresolved/800E1220"]
       - [0xDDDF8, .rodata, "rodata/func_80414CCC_de/800DD1F8"]
