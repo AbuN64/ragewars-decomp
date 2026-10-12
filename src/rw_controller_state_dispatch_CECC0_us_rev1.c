@@ -1,3 +1,3 @@
-unsigned int D_auto_src_rw_controller_state_dispatch_CECC0_us_rev1[3] = {
+unsigned int D_d0_98239c662ef78c25[3] = {
     0x00000003, 0x002123DC, 0x00211120,
 };

@@ -1,3 +1,4 @@
-unsigned int D_auto_src_rw_weapon_state_resource_animation_D0410_us_rev1[4] = {
+/* ROM-grounded data: src/rw_weapon_state_resource_animation_D0410_us_rev1.c */
+unsigned int D_blob_43fb73faf6a744e1e4f2[4] = {
     0x00004E84, 0x3F800000, 0x00000000, 0x00000000,
 };

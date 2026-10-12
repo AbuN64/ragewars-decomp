@@ -1,3 +1,4 @@
-unsigned int D_auto_src_ragewars_character_preview_lights_06_us_rev1[4] = {
+/* ROM-grounded data: src/ragewars_character_preview_lights_06_us_rev1.c */
+unsigned int D_blob_d7757eece62eadd9a76d[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };

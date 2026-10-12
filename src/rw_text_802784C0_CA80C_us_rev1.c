@@ -1,3 +1,4 @@
-const unsigned char D_auto_src_rw_text_802784C0_CA80C_us_rev1[13] = {
+/* ROM-grounded data: src/rw_text_802784C0_CA80C_us_rev1.c */
+const unsigned char D_blob_0351673e4abfd2bdc73f[13] = {
     0x4C, 0x69, 0x74, 0x20, 0x56, 0x65, 0x72, 0x74, 0x69, 0x63, 0x65, 0x73, 0x00,
 };

@@ -1,10 +1,4 @@
-#ifdef VERSION_US_REV
-unsigned int D_auto_rodata_unresolved_800C7434[1] = {
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+unsigned int D_blob_309dae48603c087a4c83[1] = {
     0x00000000,
 };
-#endif
-#ifdef VERSION_US
-unsigned int D_auto_rodata_unresolved_800C7434[1] = {
-    0x0D434361,
-};
-#endif
