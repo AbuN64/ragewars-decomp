@@ -1,3 +1,3 @@
-unsigned int D_auto_rodata_unresolved_800C83D4[3] = {
+unsigned int D_d1_57a81820031ac38e[3] = {
     0x42800000, 0x43000000, 0x4F000000,
 };
