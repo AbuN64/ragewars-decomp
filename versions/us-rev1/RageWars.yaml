@@ -3911,7 +3911,7 @@ segments:
       - [0xce204, data, "src/rw_actor_state_animation_CE204_us_rev1.c"]
       - [0xce210, data, "src/rw_actor_state_entry_CE210_us_rev1.c"]
       - [0xce21c, data, "rodata/unresolved/800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C_unclaimed_CE124_unclaimed_CE130_unclaimed_CE144_unclaimed_CE148_unclaimed_CE1F8_unclaimed_CE210_unclaimed_CE21C"]
-      - [0xce224, data, "src/rw_actor_state_animation_CE224_us_rev1.c"]
+      - [0xce224, .data, "src/rw_actor_state_animation_CE224_us_rev1.c"]
       - [0xce230, data, "src/rw_actor_state_end_CE230_us_rev1.c"]
       - [0xce234, .data, "rodata/unresolved/800CD4C4_unclaimed_CE0F0_unclaimed_CE104_unclaimed_CE10C_unclaimed_CE124_unclaimed_CE130_unclaimed_CE144_unclaimed_CE148_unclaimed_CE1F8_unclaimed_CE210_unclaimed_CE21C_unclaimed_CE230_unclaimed_CE234"]
       - [0xce290, data, "src/rw_actor_state_entry_CE290_us_rev1.c"]

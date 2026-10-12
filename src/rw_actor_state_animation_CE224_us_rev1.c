@@ -1,3 +1,3 @@
-unsigned int D_auto_src_rw_actor_state_animation_CE224_us_rev1[3] = {
+unsigned int D_d0_f1a7051689c16446[3] = {
     0x3F800000, 0x00000000, 0x00000000,
 };
