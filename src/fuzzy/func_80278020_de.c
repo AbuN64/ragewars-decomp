@@ -1,24 +1,40 @@
-#include "common/types_1dc8418c21db.h"
-#include "resident_event_handler.h"
-#include "shared/func_8044DA54_de_closed.h"
-#include "stddef.h"
 #include "types.h"
-s32 func_80277C54_de(void *arg0, void **arg1, s32 *arg2);
-s32 func_80250938_de(void *arg0, void *arg1);
+#include "stddef.h"
 
-typedef struct HitBox {
-    char pad0[0xA0];
+/* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box
+   (six floats at record offset 0xA0) intersects the given bounds, and which either have no
+   byte set at record offset 0xBD, are paired with arg4, or list the key that
+   func_80250938_de(arg4, arg1) finds inside the id list at slot arg1-table index of the list
+   table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
+   reports their number through arg3, and returns 1 when any accepted record has its byte at
+   record offset 0xBA set. With no table (arg1 null) it defers to func_80277C54_de. */
+
+extern s32 func_80277C54_de(void *bounds, void **out, s32 *countOut);
+extern s32 func_80250938_de(void *wanted, void *table);
+extern void *func_8028FDB4_de(void *table, s32 index);
+
+typedef struct Bounds {
     f32 minX;
     f32 minY;
     f32 minZ;
     f32 maxX;
     f32 maxY;
     f32 maxZ;
-    char padB8[2];
+} Bounds;
+
+typedef struct HitBox {
+    u8 pad0[0xA0];
+    f32 minX;
+    f32 minY;
+    f32 minZ;
+    f32 maxX;
+    f32 maxY;
+    f32 maxZ;
+    u8 padB8[2];
     u8 flagBA;
-    char padBB[2];
+    u8 padBB[2];
     u8 flagBD;
-    char padBE[2];
+    u8 padBE[2];
 } HitBox;
 
 typedef struct HitBoxTable {
@@ -32,90 +48,80 @@ typedef struct IdList {
     s16 ids[1];
 } IdList;
 
-typedef struct Bounds {
-    f32 minX;
-    f32 minY;
-    f32 minZ;
-    f32 maxX;
-    f32 maxY;
-    f32 maxZ;
-} Bounds;
-
-s32 func_80278020_de(Bounds *arg0, void *arg1, void **arg2, s32 *arg3, u8 *arg4) {
+s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 *wanted) {
+    s32 foundCount;
     s32 result;
-    s32 count;
     s32 idx;
     s32 found;
     s32 n;
-    s32 *flagTable;
+    s32 *idTable;
     s32 key;
-    s32 v;
-    s16 *p;
+    s32 id;
+    s16 *ids;
     s16 len;
     IdList *list;
-    HitBoxTable *table;
+    HitBoxTable *boxTable;
     HitBox *box;
-    void **out;
+    void **outAt;
 
-    count = 0;
+    foundCount = 0;
     result = 0;
-    if (arg1 == NULL) {
-        return func_80277C54_de(arg0, arg2, arg3);
+    if (table == NULL) {
+        return func_80277C54_de(bounds, out, countOut);
     }
-    table = func_8028FDB4_de(arg1, 2);
-    idx = table->count - 1;
-    box = table->boxes;
-    out = arg2;
-    for (; idx != -1; idx--, box++) {
-        {
-            if (arg0->maxX > box->minX && arg0->minX < box->maxX
-                && arg0->maxZ > box->minZ && arg0->minZ < box->maxZ
-                && arg0->maxY > box->minY && arg0->minY < box->maxY) {
-                if (box->flagBD != 0 && *arg4 != 1) {
-                    found = 0;
-                    flagTable = func_8028FDB4_de(arg1, 3);
-                    if (*flagTable > 0) {
-                        list = func_8028FDB4_de(flagTable, idx);
-                        len = list->count;
-                        p = list->ids;
-                        key = func_80250938_de(arg4, arg1);
-                        n = 0;
-                        if (found < len) {
-                            do {
-                                v = *p;
-                                if (v >= 0x1770) {
-                                    v -= 0x1770;
-                                } else if (v >= 0xFA0) {
-                                    v -= 0xFA0;
-                                } else if (v >= 0x7D0) {
-                                    v -= 0x7D0;
-                                }
-                                n++;
-                                if (v == key) {
-                                    found = 1;
-                                    break;
-                                }
-                                p++;
-                            } while (n < len);
-                        }
+    boxTable = func_8028FDB4_de(table, 2);
+    idx = boxTable->count - 1;
+    box = boxTable->boxes;
+    outAt = out;
+    for (; idx != -1; idx--) {
+        if (bounds->maxX > box->minX && bounds->minX < box->maxX
+            && bounds->maxZ > box->minZ && bounds->minZ < box->maxZ
+            && bounds->maxY > box->minY && bounds->minY < box->maxY) {
+            if (box->flagBD != 0 && *wanted != 1) {
+                found = 0;
+                idTable = func_8028FDB4_de(table, 3);
+                if (*idTable > 0) {
+                    list = func_8028FDB4_de(idTable, idx);
+                    len = list->count;
+                    ids = list->ids;
+                    key = func_80250938_de(wanted, table);
+                    n = 0;
+                    if (found < len) {
+                        do {
+                            id = *ids;
+                            if (id >= 0x1770) {
+                                id -= 0x1770;
+                            } else if (id >= 0xFA0) {
+                                id -= 0xFA0;
+                            } else if (id >= 0x7D0) {
+                                id -= 0x7D0;
+                            }
+                            n++;
+                            if (id == key) {
+                                found = 1;
+                                break;
+                            }
+                            ids++;
+                        } while (n < len);
                     }
-                } else {
-                    found = 1;
                 }
-                if (found != 0) {
-                    *out = box;
-                    out++;
-                    count++;
-                    if (box->flagBA != 0) {
-                        result = 1;
-                    }
-                    if (count == 0x40) {
-                        break;
-                    }
+            } else {
+                found = 1;
+            }
+            if (found != 0) {
+                *outAt = box;
+                outAt++;
+                foundCount++;
+                if (box->flagBA != 0) {
+                    result = 1;
+                }
+                if (foundCount == 0x40) {
+                    break;
                 }
             }
         }
+        box++;
     }
-    *arg3 = count;
+    *countOut = foundCount;
     return result;
 }
