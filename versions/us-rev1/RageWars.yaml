@@ -3020,7 +3020,7 @@ segments:
       - [0xC93F8, .rodata, "src/rw_text_8023FD18_C93F8_us_rev1.c"]
       - [0xC9409, data, "rodata/unresolved/800C8809"]
       - [0xC940C, rodata, "src/rw_pool_8023FD18_C940C_us_rev1.c"]
-      - [0xC9414, data, "rodata/unresolved/800C8814"]
+      - [0xC9414, .data, "rodata/unresolved/800C8814"]
       - [0xC9420, rodata, "src/rw_pool_802406D0_C9420_us_rev1.c"]
       - [0xC9424, rodata, "rodata/func_80240A98_de/800C8824"]
       - [0xC942C, rodata, "src/rw_pool_80240C8C_C942C_us_rev1.c"]
