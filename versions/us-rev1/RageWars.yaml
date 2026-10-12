@@ -3812,7 +3812,7 @@ segments:
       - [0xCD643, data, "rodata/unresolved/800CCA43"]
       - [0xCD644, rodata, "src/rw_text_802B6658_eu_x_CD644_us_rev1.c"]
       - [0xCD651, data, "rodata/unresolved/800CCA51"]
-      - [0xCD654, data, "data/unresolved/800CCA54"]
+      - [0xCD654, .data, "data/unresolved/800CCA54"]
       - [0xCD668, .rodata, "src/rw_constants_802B6560_CD668_us_rev1.c"]
       - [0xCD6A4, data, "rodata/unresolved/800CCAA4"]
       - [0xCD6A8, .rodata, "src/rw_pool_802B6560_CD6A8_us_rev1.c"]
