@@ -71117,7 +71117,7 @@ kind = "function"
 eu = 0x802B05DC
 
 [symbol.func_802B05E8_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802B05E8
 us-rev1 = 0x802B53D8
 
@@ -83340,7 +83340,7 @@ kind = "function"
 us = 0x8043C4F4
 
 [symbol.func_8043C4F4_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x8043C4F4
 
 [symbol.func_8043C54C_de]
@@ -84279,7 +84279,7 @@ eu-x = 0x8043FE2C
 us-rev1 = 0x8043EFD0
 
 [symbol.func_8043EF1C_us_rev1]
-kind = "function"
+kind = "data"
 us-rev1 = 0x8043EF1C
 
 [symbol.func_8043EFCC_us_rev1]

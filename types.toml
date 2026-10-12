@@ -39,7 +39,6 @@ schema = 1
 "D_0041B970" = { evidence = "authored", signature = "s32 D_0041B970(void *, s32, s32, s32, s32)" }
 "D_0041BA00" = { evidence = "authored", signature = "void D_0041BA00()" }
 "_MakeMotorData" = { evidence = "landed", signature = "static inline void _MakeMotorData(int channel, u16 address, u8 *buffer, OSPifRam *mdata)" }
-"_SHIFTL" = { evidence = "authored", signature = "_a->words.w0 = _SHIFTL(1,24,8) | _SHIFTL(f,16,8)" }
 "__builtin_next_arg" = { evidence = "authored", signature = "void *__builtin_next_arg()" }
 "__cmpdi2" = { evidence = "landed", signature = "int __cmpdi2(int ahi, unsigned alo, int bhi, unsigned blo)" }
 "__osIdCheckSum" = { evidence = "landed", signature = "static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)" }
