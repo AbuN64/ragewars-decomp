@@ -9346,6 +9346,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_80295B84"
+segment = "span_1000"
+members = ["func_80294C8C_de_padding_96784"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_8029F590"
 segment = "span_1000"
 members = ["retained_A0190"]
@@ -26746,6 +26754,17 @@ group = "code_80294C64"
 members = ["func_80294C8C_de"]
 toolchain = "gcc-2.8.1-sn64"
 withheld = ["eu"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80294C8C_de_padding_96784.c"
+kind = "data"
+group = "data_80295B84"
+members = ["func_80294C8C_de_padding_96784"]
+toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
 add = []

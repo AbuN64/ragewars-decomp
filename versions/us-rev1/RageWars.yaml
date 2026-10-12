@@ -1882,7 +1882,7 @@ segments:
       - [0x96700, c, "func_80295B00_us_rev1"]
       - [0x96718, c, "func_80295B18_us_rev1"]
       - [0x96730, c, "func_80295B30_us_rev1"]
-      - [0x96784, data, "func_80294C8C_de_padding_96784"]
+      - [0x96784, .data, "func_80294C8C_de_padding_96784"]
       - [0x096790, c, "func_80294C8C_de"]
       - [0x96BB4, c, "func_80295FB4_us_rev1"]
       - [0x979D0, c, "func_80295E78_de"]
