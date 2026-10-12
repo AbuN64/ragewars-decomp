@@ -46530,6 +46530,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/ragewars_weapon_view_offset_D0DCC_us_rev1.c"
+kind = "data"
+group = "data_800D01E8"
+members = ["src/ragewars_weapon_view_offset_D0DCC_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/resident_huffman_dictionaries.c"
 kind = "data"
 group = "data_800D9500"
