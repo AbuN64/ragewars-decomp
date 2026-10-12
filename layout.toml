@@ -9634,6 +9634,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_80212E04"
+segment = "span_1000"
+members = ["func_80212E24_eu_x_padding_13A04"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_80212E24"
 segment = "span_1000"
 members = ["func_80212E24_eu_padding_13A24"]
@@ -13242,6 +13250,17 @@ path = "src/func_80212E24_eu_padding_13A24.c"
 kind = "data"
 group = "data_80212E24"
 members = ["func_80212E24_eu_padding_13A24"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80212E24_eu_x_padding_13A04.c"
+kind = "data"
+group = "data_80212E04"
+members = ["func_80212E24_eu_x_padding_13A04"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
