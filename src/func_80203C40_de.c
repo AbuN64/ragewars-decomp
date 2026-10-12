@@ -9,8 +9,8 @@ extern s32 func_80285F58_de(void *, void *);
 
 
 
-void func_80203C40_de(void *arg0) {
+void func_80203C40_de(Shared_Actor *arg0) {
     if (func_80285F58_de(&D_8011FE88, arg0) == 0) {
-        ((func_80203C40_S1 *)(arg0))->unk100 |= 0x2100;
+        arg0->weaponFlags |= 0x2100;
     }
 }

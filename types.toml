@@ -142,7 +142,7 @@ schema = 1
 "func_80203B1C_de" = { evidence = "landed", signature = "void func_80203B1C_de(void *arg0, void *arg1)" }
 "func_80203B60_de" = { evidence = "landed", signature = "void func_80203B60_de(void *arg0, void *arg1)" }
 "func_80203C08_de" = { evidence = "landed", signature = "void func_80203C08_de(void *arg0, void *arg1)" }
-"func_80203C40_de" = { evidence = "landed", signature = "void func_80203C40_de(void *arg0)" }
+"func_80203C40_de" = { evidence = "landed", signature = "void func_80203C40_de(Shared_Actor *arg0)" }
 "func_80203C84_de" = { evidence = "landed", signature = "void func_80203C84_de(void *arg0, void *arg1, s32 arg2)" }
 "func_80203CFC_de" = { evidence = "landed", signature = "void func_80203CFC_de(void *unused0, void *arg1, s32 arg2)" }
 "func_80203D4C_de" = { evidence = "landed", signature = "void func_80203D4C_de(void *unused, void *object, Vec3 *pivot, Vec3 *point)" }
@@ -220,9 +220,9 @@ schema = 1
 "func_80206758_de" = { evidence = "landed", signature = "int func_80206758_de(void *arg0, void *arg1)" }
 "func_80206764_de" = { evidence = "landed", signature = "void func_80206764_de(void)" }
 "func_8020676C_de" = { evidence = "landed", signature = "void func_8020676C_de(void *arg0, void *arg1, void *arg2)" }
-"func_802067BC_de" = { evidence = "landed", signature = "void func_802067BC_de(void *arg0)" }
+"func_802067BC_de" = { evidence = "landed", signature = "void func_802067BC_de(Shared_Actor *arg0)" }
 "func_802067FC_de" = { evidence = "landed", signature = "void func_802067FC_de(void *arg0)" }
-"func_8020682C_de" = { evidence = "landed", signature = "void func_8020682C_de(void *arg0, s32 *arg1)" }
+"func_8020682C_de" = { evidence = "landed", signature = "void func_8020682C_de(Shared_Actor *arg0, s32 *arg1)" }
 "func_80206898_de" = { evidence = "landed", signature = "void func_80206898_de(void *arg0)" }
 "func_802068C8_de" = { evidence = "landed", signature = "void func_802068C8_de(void *arg0, s32 arg1, s32 arg2)" }
 "func_80206910_de" = { evidence = "landed", signature = "void func_80206910_de(s32 arg0)" }
