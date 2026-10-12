@@ -12,19 +12,19 @@ extern s32 func_80214178_de(void *, void *, s32);
 
 
 /** Update actor state and clear flags for the relevant actor classes. */
-void func_802044C8_de(void *actor, void *state) {
+void func_802044C8_de(SharedPlayer *actor, void *state) {
     s32 flags;
 
     if (func_80285F58_de(&D_8011FE88, actor) == 1) {
         func_80214178_de(actor, state, 1);
-        switch (((func_802044C8_S1 *)(actor))->unkE4) {
+        switch (actor->views1C.viewE4_7.kind) {
         case 0x64C:
-            flags = ((func_802044C8_S1 *)(actor))->unk100 & ~0x2000;
-            ((func_802044C8_S1 *)(actor))->unk100 = flags & ~0x100;
+            flags = actor->views1C.view100_9.flags & ~0x2000;
+            actor->views1C.view100_9.flags = flags & ~0x100;
             break;
         case 0x64B:
         case 0x64E:
-            ((func_802044C8_S1 *)(actor))->unk100 &= 0xF7FFFFFF;
+            actor->views1C.view100_9.flags &= 0xF7FFFFFF;
             break;
         }
     } else {
