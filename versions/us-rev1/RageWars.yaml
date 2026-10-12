@@ -5055,7 +5055,7 @@ segments:
       - [0xD1110, .data, "rodata/unresolved/800CF5C0_unclaimed_D1110"]
       - [0xD112C, .data, "src/ragewars_weapon_resource_directory_us_rev1.c"]
       - [0xD1184, .data, "rodata/unresolved/800CF5C0_unclaimed_D1184"]
-      - [0xD11C8, rodata, "src/rw_constants_80236874_D11C8_us_rev1.c"]
+      - [0xD11C8, .rodata, "src/rw_constants_80236874_D11C8_us_rev1.c"]
       - [0xD11D8, data, "rodata/unresolved/800D05D8"]
       - [0xD11E8, .data, "rodata/writable/800D05E8"]
       - [0xD1240, rodata, "src/rw_pool_8023D380_D1240_us_rev1.c"]
