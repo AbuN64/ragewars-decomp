@@ -1,3 +1,4 @@
-unsigned short D_auto_src_ragewars_weapon_requirement_item_id_D0734_us_rev1[1] = {
+/* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D0734_us_rev1.c */
+unsigned short D_blob_5b1dfcf5ad193ea12512[1] = {
     0x0431,
 };
