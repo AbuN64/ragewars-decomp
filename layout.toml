@@ -49068,6 +49068,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800CBF78.c"
+kind = "data"
+group = "data_800CBF78"
+members = ["rodata/unresolved/800CBF78"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800CC018.c"
 kind = "data"
 group = "data_800CC018"
