@@ -166,7 +166,7 @@ extern float D_800EEAEC;
 extern float D_800EEAF0;
 extern float D_800EEAF4;
 extern float D_800EEAF8;
-extern int D_800EFFD4[];
+extern int D_800DF964[];
 extern int D_800FEAE0[];
 extern int D_800FF140_de[];
 extern int D_800FF238;

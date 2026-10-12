@@ -37646,6 +37646,8 @@ us-rev1 = 0x800E3820
 [symbol.D_800DF964]
 kind = "data"
 de = 0x800DF964
+eu = 0x800EFFD4
+eu-x = 0x800EB194
 us = 0x800DE614
 us-rev1 = 0x800E39B4
 
@@ -41632,11 +41634,6 @@ eu-x = 0x800EAF74
 kind = "data"
 eu = 0x800EFE40
 eu-x = 0x800EB000
-
-[symbol.D_800EFFD4]
-kind = "data"
-eu = 0x800EFFD4
-eu-x = 0x800EB194
 
 [symbol.D_800F00DC]
 kind = "data"
