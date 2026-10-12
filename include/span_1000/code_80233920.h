@@ -3,6 +3,8 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct Triple;
 struct func_802390C0_S1;
 /* unbake published declaration: published_0d1f68bfb9e687a29b5f4815 */
@@ -457,5 +459,9 @@ struct func_802393C8_S1 {
 extern float D_800C3524_de;
 
 extern void func_802391AC_de(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
+
+extern void func_80239EA4_de(void*,Vec3*);
+typedef union Rotation { f32 f[4]; u32 word[4]; } Rotation;
+typedef union TransformVector { Vec3 value; u32 word[3]; } TransformVector;
 
 #endif

@@ -805,6 +805,7 @@ schema = 1
 "func_80233930_de" = { evidence = "landed", signature = "void func_80233930_de(Effect33920 *arg0, u32 x, u32 y, u32 z, Vec3 *out)" }
 "func_80233B14_de" = { evidence = "landed", signature = "void func_80233B14_de(Overlay *overlay)" }
 "func_80233C88_de" = { evidence = "landed", signature = "void func_80233C88_de(Entity_func_80233C88_de *entity)" }
+"func_802349C0_de" = { evidence = "landed", signature = "void func_802349C0_de(void *arg0)" }
 "func_80234DE0_de" = { evidence = "landed", signature = "void func_80234DE0_de(char *camera)" }
 "func_80234FEC_de" = { evidence = "landed", signature = "void func_80234FEC_de(func_80234FDC_S2 *arg0)" }
 "func_802362E8_de" = { evidence = "landed", signature = "void func_802362E8_de(char *view, char *world)" }
@@ -11411,6 +11412,7 @@ schema = 1
 "Root_func_804436F8_de" = { declaration = "struct Root_func_804436F8_de { char pad[0x1C]; struct Middle *middle; };", evidence = "authored" }
 "RosterEntry" = { declaration = "typedef struct RosterEntry RosterEntry;", evidence = "authored" }
 "RosterSlot" = { declaration = "typedef struct RosterSlot RosterSlot;", evidence = "authored" }
+"Rotation" = { declaration = "typedef union Rotation { f32 f[4]; u32 word[4]; } Rotation;", evidence = "authored" }
 "Rotor" = { declaration = "typedef struct Rotor Rotor;", evidence = "authored" }
 "Round" = { declaration = "typedef struct Round Round;", evidence = "authored" }
 "RouteArrivalBrain" = { declaration = "typedef struct RouteArrivalBrain RouteArrivalBrain;", evidence = "authored" }
@@ -12530,6 +12532,7 @@ schema = 1
 "TrailState" = { declaration = "typedef struct TrailState TrailState;", evidence = "authored" }
 "TransferScratch" = { declaration = "typedef struct TransferScratch TransferScratch;", evidence = "authored" }
 "Transform" = { declaration = "struct Transform { char pad0[0x18]; s16 position[3]; };", evidence = "authored" }
+"TransformVector" = { declaration = "typedef union TransformVector { Vec3 value; u32 word[3]; } TransformVector;", evidence = "authored" }
 "Tree" = { declaration = "struct Tree { char pad0[4]; struct Tree *next; struct Tree *child; short id; };", evidence = "authored" }
 "TreeNode" = { declaration = "struct TreeNode { unsigned int key; unsigned char padding[12]; struct TreeNode *link10; struct TreeNode *link14; struct TreeNode *link18; struct TreeNode *link1c; };", evidence = "authored" }
 "Tree_func_8040EDE4_de" = { declaration = "struct Tree_func_8040EDE4_de { struct Tree_func_8040EDE4_de *parent; struct Tree_func_8040EDE4_de *next; struct Tree_func_8040EDE4_de *child; short id; };", evidence = "authored" }
