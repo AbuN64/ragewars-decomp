@@ -4,6 +4,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_8026E1F8.h"
+#include "types.h"
 struct func_8024B8DC_S1;
 /* unbake published declaration: published_03f550b4f94a2508ae69afb6 */
 struct func_8024B8DC_S1 {
@@ -555,5 +558,17 @@ struct func_8024B4E4_S1 {
     char unk170[0x28C - 0x170];
     func_8024B4E4_de_FuncPtr unk28C;
 };
+
+extern void func_802472F0_de(void *);
+extern void func_8024715C_de(char *, Vec3 *);
+extern void func_8028A27C_de(void *, void *, Vec3 *, Vec3 *);
+extern u8 D_800C38F4_de[];
+typedef struct Actor36 {
+    u8 pad0[8]; Vec3 position; u8 pad14[4]; s32 *kind;
+    u8 pad1C[0x74-0x1C]; f32 matrix[4][4]; u8 padB4[0x10]; s32 size;
+    u8 padC8[8]; s32 alignment; u8 padD4[0x14]; Box_func_8026EE20_de box;
+    u32 flags; u8 pad104[0x6C]; u8 state[0x54]; Vec3 displacement;
+    u8 pad1D0[0xBC]; void (*update)(void *, void *);
+} Actor36;
 
 #endif

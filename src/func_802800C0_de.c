@@ -37,7 +37,6 @@ extern void func_80274244_de(Vector4f *, Matrix_func_80213CF8_de *);
 extern void func_8024D4AC_de(Vector4f *, EffectActor *, Vec3);
 extern void func_80273198_de(Matrix_func_80213CF8_de *, Vec3 *);
 extern void func_80270910_de(Matrix_func_80213CF8_de *, Matrix_func_80213CF8_de *);
-extern void func_8026EF58_de(Matrix_func_80213CF8_de *, Matrix_func_80213CF8_de *);
 extern void func_8027347C_de(Matrix_func_80213CF8_de *, f32, f32, f32);
 extern void func_80273448_de(Matrix_func_80213CF8_de *, f32, f32, f32);
 extern void func_8027DD48_de(EffectActor *, Matrix_func_80213CF8_de *, void *, f32);
@@ -129,7 +128,7 @@ static inline void effect_spawn_aim(Effect_func_802800C0_de *effect, EffectTarge
         targetActor = D_801041F0.actor;
         targetTeam = aimTarget->unk7E;
         func_80270910_de(&targetMtx, &targetActor->u60.link.matrixArray[D_801041F0.matrixIndex]);
-        func_8026EF58_de(&targetInv, &targetMtx);
+        func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
         func_80272898_de(&targetInv, &aimTarget->pos, &effect->unk50);
         up = D_801042C8;
         func_8027207C_de(&up);

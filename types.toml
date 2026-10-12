@@ -1031,6 +1031,7 @@ schema = 1
 "func_802466A0_de" = { evidence = "landed", signature = "void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, u32 *info, s32 effect, s32 owner, f32 heading, Vec3 pos, s32 flags, Vec3 extent, Vec3 offset)" }
 "func_80246A08_de" = { evidence = "landed", signature = "s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2)" }
 "func_80246BE8_de" = { evidence = "landed", signature = "void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 arg3)" }
+"func_80246E44_de" = { evidence = "landed", signature = "void func_80246E44_de(Actor36 *actor)" }
 "func_80247004_de" = { evidence = "landed", signature = "void func_80247004_de(Obj_func_80247004_de *arg0)" }
 "func_8024715C_de" = { evidence = "landed", signature = "void func_8024715C_de(char *arg0, Vec3 *arg1)" }
 "func_802472F0_de" = { evidence = "landed", signature = "void func_802472F0_de(void *arg0)" }
@@ -1980,7 +1981,7 @@ schema = 1
 "func_80288EA8_de" = { evidence = "landed", signature = "void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera)" }
 "func_80289084_de" = { evidence = "declared", signature = "void func_80289084_de(char *, char *)" }
 "func_802897B4_de" = { evidence = "landed", signature = "void func_802897B4_de(World37 *world, Vec3 *point, Item37 **output, s32 *total)" }
-"func_8028A27C_de" = { evidence = "declared", signature = "void func_8028A27C_de(void *, void *, Vec3 *, Vec3 *)" }
+"func_8028A27C_de" = { evidence = "authored", signature = "void func_8028A27C_de(void *, void *, Vec3 *, Vec3 *)" }
 "func_8028A698_de" = { evidence = "authored", signature = "void func_8028A698_de(void *)" }
 "func_8028A948_de" = { evidence = "declared", signature = "void func_8028A948_de()" }
 "func_8028AFEC_de" = { evidence = "landed", signature = "char *func_8028AFEC_de(void *arg0, s32 arg1)" }
@@ -5865,6 +5866,7 @@ schema = 1
 "D_800C389C_de" = { declaration = "extern char D_800C389C_de;", evidence = "authored" }
 "D_800C38B0_de" = { declaration = "extern char D_800C38B0_de;", evidence = "authored" }
 "D_800C38C4_de" = { declaration = "extern char D_800C38C4_de;", evidence = "authored" }
+"D_800C38F4_de" = { declaration = "extern u8 D_800C38F4_de[];", evidence = "authored" }
 "D_800C3924_de" = { declaration = "extern float D_800C3924_de;", evidence = "authored" }
 "D_800C392C_de" = { declaration = "extern float D_800C392C_de;", evidence = "authored" }
 "D_800C3948_de" = { declaration = "extern float D_800C3948_de;", evidence = "authored" }
@@ -9775,6 +9777,7 @@ schema = 1
 "Actor" = { declaration = "typedef struct Actor Actor;", evidence = "authored" }
 "Actor126" = { declaration = "typedef struct Actor126 Actor126;", evidence = "authored" }
 "Actor1DC" = { declaration = "typedef struct Actor1DC Actor1DC;", evidence = "authored" }
+"Actor36" = { declaration = "typedef struct Actor36 { u8 pad0[8]; Vec3 position; u8 pad14[4]; s32 *kind; u8 pad1C[0x74-0x1C]; f32 matrix[4][4]; u8 padB4[0x10]; s32 size; u8 padC8[8]; s32 alignment; u8 padD4[0x14]; Box_func_8026EE20_de box; u32 flags; u8 pad104[0x6C]; u8 state[0x54]; Vec3 displacement; u8 pad1D0[0xBC]; void (*update)(void *, void *); } Actor36;", evidence = "authored" }
 "ActorB0" = { declaration = "struct ActorB0 { u8 pad0[0x40]; s32 *flags; u8 pad44[0x68]; u8 *data; };", evidence = "authored" }
 "ActorDef" = { declaration = "typedef struct ActorDef ActorDef;", evidence = "authored" }
 "ActorList" = { declaration = "struct ActorList { s32 pad0; struct Actor_func_80264B8C_de *actors; s32 count; };", evidence = "authored" }
@@ -13803,5 +13806,6 @@ schema = 1
 "u32" = { declaration = "typedef unsigned int u32;", evidence = "authored" }
 "u64" = { declaration = "typedef unsigned long long u64;", evidence = "authored" }
 "u8" = { declaration = "typedef unsigned char u8;", evidence = "authored" }
+"update" = { declaration = "typedef struct Actor36 { u8 pad0[8]; Vec3 position; u8 pad14[4]; s32 *kind; u8 pad1C[0x74-0x1C]; f32 matrix[4][4]; u8 padB4[0x10]; s32 size; u8 padC8[8]; s32 alignment; u8 padD4[0x14]; Box_func_8026EE20_de box; u32 flags; u8 pad104[0x6C]; u8 state[0x54]; Vec3 displacement; u8 pad1D0[0xBC]; void (*update)(void *, void *); } Actor36;", evidence = "authored" }
 "va_list" = { declaration = "typedef char * va_list;", evidence = "authored" }
 "void" = { declaration = "typedef void ( *VoidCallback)(void);", evidence = "authored" }
