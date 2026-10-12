@@ -50719,7 +50719,6 @@ kind = "data"
 group = "data_800EED85"
 members = ["rodata/unresolved/800EED88"]
 toolchain = "gcc-2.8.1-sn64"
-withheld = ["eu-x"]
 
 [unit.options]
 add = []
