@@ -1,3 +1,4 @@
-unsigned int D_auto_src_ragewars_character_preview_keys_07_us_rev1[2] = {
+/* ROM-grounded data: src/ragewars_character_preview_keys_07_us_rev1.c */
+unsigned int D_blob_91ef802128a921ffc999[2] = {
     0x0000008D, 0x00000007,
 };
