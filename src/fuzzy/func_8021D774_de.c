@@ -106,7 +106,7 @@ block_4:
                     func_80271F9C_de(&spC0.xyz, &spE0, temp_fv0);
                     func_80272898_de(sp60, &spC0.xyz, &spD0.xyz);
                     arg0->aim2 = spD0.xyz;
-                    var_a1 = &spD0.xyz;
+                    func_8021D408_de(arg0, &spD0.xyz, &D_80103FCC->normal);
                 } else {
                     goto block_14;
                 }
@@ -116,10 +116,9 @@ block_4:
         } else {
 block_14:
 block_15:
-            var_a1 = &arg0->aim;
             arg0->aim2 = arg0->aim;
+            func_8021D408_de(arg0, &arg0->aim, &D_80103FCC->normal);
         }
-        func_8021D408_de(arg0, var_a1, &D_80103FCC->normal);
     } else {
         arg0->aim2 = sp50;
     }
@@ -129,8 +128,8 @@ block_15:
         var_s4 = D_800D052C[arg0->unk62E]->idle;
     }
     temp_v1 = arg0->unk62E;
-    var_s0 = 1;
     var_s5 = var_s4 + 0x64;
+    var_s0 = 1;
     if ((temp_v1 == 1) || (temp_v1 == 0x12)) {
         var_fs0f = D_800C23C4_de;
         var_fs1 = var_fs0f;
@@ -190,15 +189,11 @@ block_15:
         arg0->unk788 = 0;
     } else if (arg0->unk788 == 0) {
         arg0->unk788 = 1;
-        arg0->out.x = sp50.x;
-        arg0->out.y = sp50.y;
-        arg0->out.z = sp50.z;
+        arg0->out = sp50;
         arg0->velocity.x = 0;
         arg0->velocity.y = 0;
         arg0->velocity.z = 0;
-        arg0->smooth.x = sp50.x;
-        arg0->smooth.y = sp50.y;
-        arg0->smooth.z = sp50.z;
+        arg0->smooth = sp50;
         arg0->smoothVelocity.x = 0;
         arg0->smoothVelocity.y = 0;
         arg0->smoothVelocity.z = 0;
@@ -211,10 +206,10 @@ block_15:
     func_80271F34_de(temp_s0_2, temp_s0_2, &sp40);
     func_80271F34_de(temp_s2, temp_s2, temp_s0_2);
     func_80271F9C_de(temp_s0_2, temp_s0_2, temp_fs2 * temp_fs0);
-    if (spF0 == NULL) {
-        arg0->unk7B8 = var_s5;
-    } else {
+    if (spF0 != NULL) {
         arg0->unk7B8 = D_800D052C[arg0->unk62E]->locked + 0x64;
+    } else {
+        arg0->unk7B8 = var_s5;
     }
     switch (arg0->unk788) {
     case 1:
