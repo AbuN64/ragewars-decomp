@@ -4888,7 +4888,7 @@ segments:
       - [0x19E4F8, asm, "func_804279B8_de"]
       - [0x19E648, asm, "func_80427B08_de"]
       - [0x19E8D8, c, "func_80427D70_de"]
-      - [0x19EA78, asm, "func_80427F10_de"]
+      - [0x19EA78, c, "func_80427F10_de"]
       - [0x19EC24, c, "func_804280BC_de"]
       - [0x19EC88, c, "func_80428120_de"]
       - [0x19ECC0, c, "func_80428158_de"]

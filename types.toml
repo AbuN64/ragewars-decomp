@@ -3639,6 +3639,7 @@ schema = 1
 "func_804279B8_de" = { evidence = "authored", signature = "void func_804279B8_de()" }
 "func_80427B08_de" = { evidence = "landed", signature = "void func_80427B08_de(void)" }
 "func_80427D70_de" = { evidence = "landed", signature = "void func_80427D70_de(void *arg0)" }
+"func_80427F10_de" = { evidence = "landed", signature = "void func_80427F10_de(void)" }
 "func_804280BC_de" = { evidence = "landed", signature = "void func_804280BC_de(void)" }
 "func_80428120_de" = { evidence = "landed", signature = "s32 func_80428120_de(s32 id)" }
 "func_80428158_de" = { evidence = "landed", signature = "s32 func_80428158_de(s32 a, s32 b)" }
@@ -11441,7 +11442,7 @@ schema = 1
 "Region" = { declaration = "struct Region { struct Region *next; u16 start; u16 pages; s32 pad8; s32 padC; u8 *map; s32 pad14; u8 data[1]; };", evidence = "authored" }
 "Region37" = { declaration = "typedef struct Region37 { Resource37 *resource; Bounds2D37 *bounds; s32 flags; } Region37;", evidence = "authored" }
 "RegionDesc" = { declaration = "struct RegionDesc { s32 pad0; s32 size; struct Region *region; void *mapping; };", evidence = "authored" }
-"RenderCounters" = { declaration = "typedef struct RenderCounters { s32 unk0, unk4, unk8, unkC; char pad10[0x78]; s32 first, second; } RenderCounters;", evidence = "authored" }
+"RenderCounters" = { declaration = "typedef struct RenderCounters { s32 unk0, unk4, unk8, unkC; char pad10[0x78]; s32 first, second; char pad90[0x18]; s32 humanWon; } RenderCounters;", evidence = "authored" }
 "RenderState" = { declaration = "typedef struct RenderState { union { RenderView views[4]; Display display; } ring; char pad500[0x2688C]; char settings[0x28]; s32 handle; char pad26DB8[0x10]; s32 enabled, field26DCC, field26DD0, field26DD4; } RenderState;", evidence = "authored" }
 "RenderView" = { declaration = "typedef struct RenderView { char pad00[0xF0]; s16 kind; char padF2[0x1E]; void *buffer; char pad114[0x18]; struct RenderView *previous, *next; char pad134[0xC]; } RenderView;", evidence = "authored" }
 "Request" = { declaration = "struct Request { s16 type; };", evidence = "authored" }
@@ -11500,7 +11501,7 @@ schema = 1
 "ResultsHeadingScreen" = { declaration = "typedef struct ResultsHeadingScreen ResultsHeadingScreen;", evidence = "authored" }
 "ResultsHeadingSettings" = { declaration = "typedef struct ResultsHeadingSettings ResultsHeadingSettings;", evidence = "authored" }
 "ResultsHeadingStage" = { declaration = "typedef struct ResultsHeadingStage ResultsHeadingStage;", evidence = "authored" }
-"ResultsOptionsScreen" = { declaration = "struct ResultsOptionsScreen { char pad0[0x970]; union { MenuWidget *root; void *parent; }; };", evidence = "authored" }
+"ResultsOptionsScreen" = { declaration = "struct ResultsOptionsScreen { char pad0[0x970]; union { MenuWidget *root; void *parent; }; char pad974[0xA44 - 0x974]; s32 selection; char padA48[0x14]; s32 player; char padA60[0x14]; u8 owned[5]; };", evidence = "authored" }
 "ResultsPlayerPanel" = { declaration = "struct ResultsPlayerPanel { char pad0[0x4A8]; s32 state; char pad4AC[0x4D0 - 0x4AC]; };", evidence = "authored" }
 "Reusable" = { declaration = "typedef struct Reusable Reusable;", evidence = "authored" }
 "Rider" = { declaration = "struct Rider { char pad0[0x37]; s8 direction; char pad38[0x1C]; char frame[0x10]; f32 throttle; char pad68[0x38]; Vec3 base; char padAC[0x7C]; f32 change; };", evidence = "authored" }

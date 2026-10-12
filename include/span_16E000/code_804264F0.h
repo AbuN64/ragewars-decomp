@@ -22,6 +22,12 @@ struct ResultsOptionsScreen;
 struct ResultsOptionsScreen {
     char pad0[0x970];
     union { MenuWidget *root; void *parent; };
+    char pad974[0xA44 - 0x974];
+    s32 selection;
+    char padA48[0x14];
+    s32 player;
+    char padA60[0x14];
+    u8 owned[5];
 };
 
 struct Entry_func_8042840C_de;

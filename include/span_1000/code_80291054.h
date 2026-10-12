@@ -162,7 +162,7 @@ typedef struct RenderState {
     union { RenderView views[4]; Display display; } ring; char pad500[0x2688C]; char settings[0x28]; s32 handle;
     char pad26DB8[0x10]; s32 enabled, field26DCC, field26DD0, field26DD4;
 } RenderState;
-typedef struct RenderCounters { s32 unk0, unk4, unk8, unkC; char pad10[0x78]; s32 first, second; } RenderCounters;
+typedef struct RenderCounters { s32 unk0, unk4, unk8, unkC; char pad10[0x78]; s32 first, second; char pad90[0x18]; s32 humanWon; } RenderCounters;
 extern char D_801428C0[];
 extern char D_80142CB8[];
 extern char D_80146CC0[];

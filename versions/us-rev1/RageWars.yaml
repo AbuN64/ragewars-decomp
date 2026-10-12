@@ -6800,7 +6800,7 @@ segments:
       - [0x195B98, asm, "func_804279B8_de"]
       - [0x195CE8, c, "func_80427B08_de"]
       - [0x195F50, c, "func_80427D70_de"]
-      - [0x1960F0, asm, "func_80427F10_de"]
+      - [0x1960F0, c, "func_80427F10_de"]
       - [0x19629C, c, "func_804280BC_de"]
       - [0x196300, c, "func_80428120_de"]
       - [0x196338, c, "func_80428158_de"]
