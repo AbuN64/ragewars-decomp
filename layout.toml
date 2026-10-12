@@ -44155,6 +44155,18 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80297A34_de.c"
+kind = "c"
+group = "code_80297CD0"
+members = ["func_80297A34_de", "rodata/func_80297A34_de/800CA7B8"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu-x"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80297DBC_de.c"
 kind = "c"
 group = "code_80297CD0"
@@ -68317,17 +68329,6 @@ path = "src/rodata.func_8029764C_de.800CA770.c"
 kind = "data"
 group = "code_80297CD0"
 members = ["rodata/func_8029764C_de/800CA770"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.func_80297A34_de.800CA7B0.c"
-kind = "data"
-group = "code_80297CD0"
-members = ["rodata/func_80297A34_de/800CA7B0"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

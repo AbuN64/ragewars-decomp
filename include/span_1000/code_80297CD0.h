@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
+#include "resident_event_handler.h"
 /* unbake published declaration: published_0179e056373ea9952b35ab7c */
 typedef signed int ( *func_802995D4_de_Callback)(signed int, signed int, signed int, signed int);
 
@@ -459,5 +460,8 @@ extern void D_0041B3D0();
 extern s32 D_0041B970(void *, s32, s32, s32, s32);
 /* D_0041BA00: func_8041BA00_de */
 extern void D_0041BA00();
+
+extern s32 func_80299958_de(void);
+extern void func_8029764C_de(s32,s32,s32,void *,s32);
 
 #endif

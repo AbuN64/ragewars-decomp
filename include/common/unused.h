@@ -22016,9 +22016,16 @@ struct WidgetRegisterWidget {
     s32 unk_14;
 };
 struct WidgetTable;
+struct Entry_func_802991D4_de;
 struct WidgetTable {
-    u8 pad0[0x1C];
+    union {
+        u8 pad0[0x1C];
+        struct { s32 (*callback)(s32,s32,s32,s32); s32 current; s32 lowIndex; struct Entry_func_802991D4_de *entries; } menu;
+    };
     WidgetHandler handlers[64];
+    s32 pad51C;
+    s32 handled;
+    s32 elapsed;
 };
 struct Widget_func_8040C6FC_de;
 struct Widget_func_8040C6FC_de {

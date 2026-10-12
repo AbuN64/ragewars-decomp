@@ -2279,8 +2279,8 @@ schema = 1
 "func_80296C30_de" = { evidence = "landed", signature = "s32 func_80296C30_de(f32 *arg0, f32 *arg1)" }
 "func_80296CD0_de" = { evidence = "landed", signature = "void func_80296CD0_de(s32 direction)" }
 "func_80296E3C_de" = { evidence = "authored", signature = "s32 func_80296E3C_de(s32 id, s32 event, s32, s32, s32)" }
-"func_8029764C_de" = { evidence = "declared", signature = "void func_8029764C_de(s32, s32, s32, void *, s32)" }
-"func_80297A34_de" = { evidence = "authored", signature = "s32 func_80297A34_de(s32 event, s32, s32, s32)" }
+"func_8029764C_de" = { evidence = "authored", signature = "void func_8029764C_de(s32,s32,s32,void *,s32)" }
+"func_80297A34_de" = { evidence = "landed", signature = "s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context)" }
 "func_80297AD4_anyInside" = { evidence = "landed", signature = "static inline s32 func_80297AD4_anyInside(Vec3 *points, s32 count, f32 *plane)" }
 "func_80297DBC_de" = { evidence = "landed", signature = "void func_80297DBC_de(void)" }
 "func_80297EA4_de" = { evidence = "landed", signature = "int func_80297EA4_de(int arg0)" }
@@ -4343,6 +4343,7 @@ schema = 1
 "make_plane" = { evidence = "landed", signature = "static inline void make_plane(Plane_func_802965B0_de *plane, Vec3 *from, Vec3 *through, Vec3 *to, Vec3 *point)" }
 "map_category" = { evidence = "landed", signature = "static inline int map_category(int mode)" }
 "max_ammo" = { evidence = "landed", signature = "static inline s32 max_ammo(SharedPlayer_func_80229554_de *player, s32 type)" }
+"menuCategory" = { evidence = "landed", signature = "static inline s32 menuCategory(s32 event)" }
 "motion_storage" = { evidence = "landed", signature = "static inline s32 motion_storage(s32 channels, s32 frames)" }
 "navProject" = { evidence = "landed", signature = "static inline void navProject(f32 *matrix,Vec3 *local,Vec3 *out,Vec3 *to,Vec3 *from)" }
 "navRotation" = { evidence = "landed", signature = "static inline void navRotation(Vector4f *q,Vec3 *aim)" }

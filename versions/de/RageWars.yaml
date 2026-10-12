@@ -1886,7 +1886,7 @@ segments:
       - [0x97A3C, asm, "func_80296E3C_de"]
       - [0x97F10, asm, "func_80297310_de"]
       - [0x9824C, asm, "func_8029764C_de"]
-      - [0x98634, asm, "func_80297A34_de"]
+      - [0x98634, c, "func_80297A34_de"]
       - [0x989BC, c, "func_80297DBC_de"]
       - [0x98AA4, c, "func_80297EA4_de"]
       - [0x98BA0, c, "func_80297FA0_de"]
