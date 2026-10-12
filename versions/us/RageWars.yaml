@@ -2495,7 +2495,7 @@ segments:
       - [0xBC280, c, "func_802BB750_de"]
       - [0xBC394, data, "rodata/unresolved/802BB794"]
       - [0xBC3A0, c, "func_802BB870_de"]
-      - [0xBC3D4, data, "rodata/unresolved/802BB7D4"]
+      - [0xBC3D4, .data, "rodata/unresolved/802BB7D4"]
       - [0xBC3E0, c, "func_802BB8B0_de"]
       - [0xBC5DC, c, "func_802BBAAC_de"]
       - [0xBC6E4, asm, "func_802BBAE4_us"]
