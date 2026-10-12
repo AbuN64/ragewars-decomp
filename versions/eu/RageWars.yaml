@@ -4769,7 +4769,7 @@ segments:
       - [0x195384, c, "func_8041EED0_de"]
       - [0x195460, c, "func_8041EFAC_de"]
       - [0x19555C, asm, "func_8041F55C_eu"]
-      - [0x1955EC, asm, "func_8041F5EC_eu"]
+      - [0x1955EC, .data, "func_8041F5EC_eu"]
       - [0x1955F0, c, "func_8041F140_de"]
       - [0x19563C, c, "func_8041F18C_de"]
       - [0x195688, c, "func_8041F1D8_de"]
