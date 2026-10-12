@@ -3067,7 +3067,7 @@ segments:
       - [0xC4C90, rodata, "src/rw_text_8024F294_C9AD0_us_rev1.c"]
       - [0xC4C9D, data, "rodata/unresolved/800C409D"]
       - [0xC4CA0, .rodata, "src/rw_pool_8024F4A0_C9AE0_us_rev1.c"]
-      - [0xC4CB0, rodata, "src/rw_pool_8024F5A0_C9AF0_us_rev1.c"]
+      - [0xC4CB0, .rodata, "src/rw_pool_8024F5A0_C9AF0_us_rev1.c"]
       - [0xC4CC0, rodata, "rodata/func_8024F960_eu/800C8F00"]
       - [0xC4CE0, rodata, "rodata/func_8024FD6C_eu/800C8F20"]
       - [0xC4CF0, rodata, "rodata/shared/800C8F30"]
