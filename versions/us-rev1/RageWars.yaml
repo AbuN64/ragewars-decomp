@@ -5068,7 +5068,7 @@ segments:
       - [0xD12BC, data, "rodata/writable/800D06BC"]
       - [0xD12C0, .data, "src/ragewars_blast_falloff_us_rev1.c"]
       - [0xD1324, .data, "src/ragewars_model_sway_samples_us_rev1.c"]
-      - [0xD1504, data, "rodata/unresolved/800D06C0_unclaimed_D1504"]
+      - [0xD1504, .data, "rodata/unresolved/800D06C0_unclaimed_D1504"]
       - [0xD1510, .data, "rodata/writable/800D0910"]
       - [0xD1564, .data, "src/ragewars_audio_effect_D1564_us_rev1.c"]
       - [0xD162C, data, "rodata/unresolved/800D0964_unclaimed_D162C"]
