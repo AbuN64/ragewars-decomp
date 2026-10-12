@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_unresolved_800CD3C0_unclaimed_CDFEC_unclaimed_CE000_unclaimed_CE00C_unclaimed_CE020_unclaimed_CE02C_unclaimed_CE040_unclaimed_CE04C_unclaimed_CE060_unclaimed_CE06C[2] = {
+/* ROM-grounded data: rodata/unresolved/800CD3C0_unclaimed_CDFEC_unclaimed_CE000_unclaimed_CE00C_unclaimed_CE020_unclaimed_CE02C_unclaimed_CE040_unclaimed_CE04C_unclaimed_CE060_unclaimed_CE06C */
+unsigned int D_blob_cde1f8af5e44ded3f597[2] = {
     0x801044B8, 0x00002F58,
 };

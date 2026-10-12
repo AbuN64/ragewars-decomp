@@ -1,3 +1,4 @@
-const unsigned int D_auto_src_rw_pool_8043F52C_E3058_us_rev1[1] = {
+/* ROM-grounded data: src/rw_pool_8043F52C_E3058_us_rev1.c */
+const unsigned int D_blob_b7ff8d583778774702c5[1] = {
     0x3F800000,
 };
