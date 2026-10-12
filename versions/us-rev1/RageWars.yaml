@@ -5976,7 +5976,7 @@ segments:
 
       - [0xE4C9C, .data, "src/ragewars_character_preview_positions_14_us_rev1.c"]
 
-      - [0xE4CCC, data, "src/ragewars_character_preview_lights_14_us_rev1.c"]
+      - [0xE4CCC, .data, "src/ragewars_character_preview_lights_14_us_rev1.c"]
 
       - [0xE4CDC, data, "rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4CCC_unclaimed_E4CDC"]
 

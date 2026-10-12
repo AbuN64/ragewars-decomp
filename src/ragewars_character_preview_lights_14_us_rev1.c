@@ -1,3 +1,3 @@
-unsigned int D_auto_src_ragewars_character_preview_lights_14_us_rev1[4] = {
+unsigned int D_d1_5fc895b6dfd2bf53[4] = {
     0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
 };
