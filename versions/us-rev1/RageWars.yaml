@@ -5353,7 +5353,7 @@ segments:
     resource_assembler: armips
     resource_output: code
     subsegments:
-      - [0xDFE30, resource, "resources/rsp/audio.s"]
+      - [0xDFE30, .data, "resources/rsp/audio.s"]
   - name: rsp_graphics_f3dex2_data
     type: resource
     start: 0xE0C50
