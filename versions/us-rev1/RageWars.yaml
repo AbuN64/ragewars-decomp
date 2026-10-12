@@ -3422,7 +3422,7 @@ segments:
       - [0xCACC7, data, "rodata/unresolved/800CA0C7"]
       - [0xCACC8, .rodata, "src/rw_text_8044B7C0_CACC8_us_rev1.c"]
       - [0xCACDA, data, "rodata/unresolved/800CA0DA"]
-      - [0xCACDC, rodata, "src/rw_text_8044B7C0_CACDC_us_rev1.c"]
+      - [0xCACDC, .rodata, "src/rw_text_8044B7C0_CACDC_us_rev1.c"]
       - [0xCACEB, data, "rodata/unresolved/800CA0EB"]
       - [0xCACEC, rodata, "src/rw_text_8044B7C0_CACEC_us_rev1.c"]
       - [0xCACF7, data, "rodata/unresolved/800CA0F7"]
