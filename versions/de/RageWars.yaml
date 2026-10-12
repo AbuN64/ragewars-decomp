@@ -5162,7 +5162,7 @@ segments:
       - [0x19C39C, c, "func_8043639C_de"]
       - [0x19C3BC, c, "func_804363BC_de"]
       - [0x19C454, c, "func_80436454_de"]
-      - [0x19C4E4, data, "func_804364E4_de_padding_19C4E4"]
+      - [0x19C4E4, .data, "func_804364E4_de_padding_19C4E4"]
       - [0x19C4F0, asm, "func_804364E4_de"]
       - [0x19C6B8, c, "func_804366B8_de"]
       - [0x19C8F8, c, "func_804368F8_de"]
