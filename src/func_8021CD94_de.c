@@ -2,6 +2,16 @@
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8021CD70.h"
 #include "stddef.h"
+#include "types.h"
+#include "common/types_8a8189af7b05.h"
+#include "common/types_06e4f7ef1f9e.h"
+#include "common/unused.h"
+#include "resident_event_handler.h"
+#include "shared/func_8021E2A0_de_closed.h"
+#include "shared/func_8027AD4C_de_closed.h"
+#include "span_1000/code_802022E0.h"
+#include "span_1000/code_8022E938.h"
+#include "span_C76B0/data.h"
 s32 func_80216BF4_de(void *, void *, void *);
 /* Checks whether the player's current weapon can lock onto the target. */
 s32 func_8021CD94_de(func_8021CD70_S1 *arg0, func_8021CD70_S2 *arg1) {
@@ -85,4 +95,128 @@ block_33:
     return var_a0;
 block_34:
     return 0;
+}
+
+/* These contiguous globals place the actor-list pointer 0x1285 bytes before the enable flag. */
+extern s32 D_8011CC18;
+extern void *func_8024BC94_de(void *arg0, s32 unused1, struct Shape_func_802764D4_de_2 arg2);
+struct func_8021CD70_S1;
+struct func_8021CD70_S2;
+extern s32 func_8021CD94_de(func_8021CD70_S1 *, func_8021CD70_S2 *);
+extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
+extern Vector4f func_8024796C_de(char *);
+extern void func_80274098_de(void *, void *, void *);
+
+Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
+                            Vec3 *targetPosition)
+{
+    Vec3 candidate, direction, origin;
+    union { Vec3 vector; s32 words[3]; } bestPosition;
+    Vec3 forward, unit;
+    union { Vec3 vector; s32 words[3]; } bestDirection;
+    Vec3 axis;
+    Vector4f correction, facing, result;
+    DraftAimPlayer *other, *best;
+    AimGlobals *globals;
+    u8 *enable;
+    f32 angle, dot, threshold, half, amount, scale;
+    s32 count, i, firstSpecial, secondSpecial;
+
+    bestPosition.words[0] = 0;
+    bestPosition.words[1] = 0;
+    bestPosition.words[2] = 0;
+    bestDirection.words[0] = 0;
+    bestDirection.words[1] = 0;
+    bestDirection.words[2] = 0;
+    result.x = result.y = result.z = bestPosition.vector.x;
+    result.w = D_800C2388_de;
+    best = 0;
+    if (player->weapon != -1) angle = ((DraftAimWeapon *)D_800D052C[player->weapon])->angle;
+    else angle = bestPosition.vector.x;
+    threshold = func_802B6560_de(angle * D_800C238C_de);
+    if (angle != 0.0f) {
+        unit.x = 0.0f;
+        unit.y = 0.0f;
+        unit.z = D_800C2390_de;
+        /* The ROM ABI returns a three-float vector and takes a three-float offset. */
+        forward = ((Vec3 (*)(void *, Vec3))func_8024BC94_de)(player, unit);
+        origin = player->position;
+        origin.y += func_8022ADBC_de(player);
+        enable = &D_801462E5;
+        if (*enable) {
+            other = ((AimGlobals *)(enable - 0x1285))->head;
+            if (other) {
+                firstSpecial = 0x12;
+                scale = D_800C2394_de;
+                do {
+                if (func_8021CD94_de((void *)player, (void *)other) && other != player) {
+                    if (player->weapon == firstSpecial) candidate = other->specialAim;
+                    else {
+                        candidate = other->position;
+                        candidate.y += other->height;
+                        candidate.y += func_8024D284_de(other) * scale;
+                    }
+                    func_80271F68_de(&direction, &candidate, &origin);
+                    func_8027207C_de(&direction.x);
+                    dot = forward.x * direction.x + forward.y * direction.y +
+                          forward.z * direction.z;
+                    if (threshold < dot) {
+                        threshold = dot;
+                        bestPosition.vector = candidate;
+                        best = other;
+                    }
+                }
+                            } while ((other = other->next) != 0);
+            }
+        }
+        count = D_8011CC18;
+        i = 0;
+        if (i < count) {
+            secondSpecial = 0x12;
+            scale = D_800C2398_de;
+            do {
+            other = (void *)D_8011CA18[i];
+            if (func_8021CD94_de((void *)player, (void *)other)) {
+                if (player->weapon == secondSpecial) candidate = other->specialAim;
+                else {
+                    candidate = other->position;
+                    candidate.y += other->height;
+                    candidate.y += func_8024D284_de(other) * scale;
+                }
+                func_80271F68_de(&direction, &candidate, &origin);
+                func_8027207C_de(&direction.x);
+                dot = forward.x * direction.x + forward.y * direction.y +
+                      forward.z * direction.z;
+                if (threshold < dot) {
+                    threshold = dot;
+                    best = other;
+                    bestPosition.vector = candidate;
+                    bestDirection.vector = direction;
+                }
+            }
+                        i++;
+            } while (i < count);
+        }
+    }
+    *target = best;
+    *targetPosition = bestPosition.vector;
+    if (best) {
+        func_80272018_de(&axis, &forward, &bestDirection.vector);
+        func_8027207C_de(&axis.x);
+        scale = D_800C239C_de;
+        threshold = func_802745D0_de(threshold);
+        amount = func_802B72B0_de(D_800C23A0_de - threshold / (angle * scale));
+        amount = func_802B72B0_de(amount);
+        threshold *= amount;
+        threshold *= scale;
+        amount = func_802B7130_de(threshold);
+        correction.x = axis.x * amount;
+        correction.y = axis.y * amount;
+        correction.z = axis.z * amount;
+        D_80115DEC = amount;
+        correction.w = func_802B6560_de(threshold);
+        facing = func_8024796C_de((char *)player);
+        func_80274098_de(&result, &facing, &correction);
+    }
+    return result;
 }

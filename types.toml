@@ -456,7 +456,7 @@ schema = 1
 "func_8021C9D8_de" = { evidence = "landed", signature = "void func_8021C9D8_de(void *arg0, void *arg1)" }
 "func_8021CBD0_de" = { evidence = "landed", signature = "void func_8021CBD0_de(void *arg0, void *arg1)" }
 "func_8021CD94_de" = { evidence = "landed", signature = "s32 func_8021CD94_de(func_8021CD70_S1 *arg0, func_8021CD70_S2 *arg1)" }
-"func_8021CF28_de" = { evidence = "declared", signature = "void func_8021CF28_de(Shared_Quad *, void *, void **, Shared_Quad *)" }
+"func_8021CF28_de" = { evidence = "landed", signature = "Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target, Vec3 *targetPosition)" }
 "func_8021D408_de" = { evidence = "landed", signature = "void func_8021D408_de(SharedPlayer_func_8021D408_de *player, Vec3 *target, Vec3 *normal)" }
 "func_8021D774_de" = { evidence = "landed", signature = "void func_8021D774_de(AimPlayer *arg0)" }
 "func_8021E08C_de" = { evidence = "landed", signature = "void func_8021E08C_de(View *view, Vec3 *point, s32 icon, f32 frame, f32 scale, f32 size)" }
@@ -9787,6 +9787,7 @@ schema = 1
 "Actor_func_8044A020_de" = { declaration = "struct Actor_func_8044A020_de { char pad[0x5D8]; struct Part *part; };", evidence = "authored" }
 "AimActor" = { declaration = "typedef struct AimActor { u8 kind; char pad1[7]; Vec3 pos; char pad14[0x5c]; f32 height; char pad74[0x8c]; s32 flags; char pad104[0x144]; Vec3 focus; } AimActor;", evidence = "authored" }
 "AimController" = { declaration = "typedef struct AimController { char pad0[0x7e]; u8 active; } AimController;", evidence = "authored" }
+"AimGlobals" = { declaration = "typedef struct AimGlobals { void *head; char pad4[0x1281]; u8 enabled; } AimGlobals;", evidence = "authored" }
 "AimHit" = { declaration = "typedef struct AimHit { AimActor *actor; char pad4[0xe0]; Vec3 point; Vec3 normal; } AimHit;", evidence = "authored" }
 "AimOutput" = { declaration = "typedef union AimOutput { Vec3 xyz; Vector4f full; Shared_Quad words; } AimOutput;", evidence = "authored" }
 "AimPlayer" = { declaration = "typedef struct AimPlayer { s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594; char pad598[0x40]; AimController *unk5D8; AimView *view; char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788; f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798; Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4]; Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8; char pad7EC[0xa24]; s32 enabled; char pad1214[0x244]; Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target; } AimPlayer;", evidence = "authored" }
@@ -10022,6 +10023,8 @@ schema = 1
 "Display" = { declaration = "typedef struct Display Display;", evidence = "authored" }
 "Display_func_8040A4D4_de" = { declaration = "typedef struct Display_func_8040A4D4_de Display_func_8040A4D4_de;", evidence = "authored" }
 "DoubleBits_8029ECB0" = { declaration = "typedef union DoubleBits_8029ECB0 DoubleBits_8029ECB0;", evidence = "authored" }
+"DraftAimPlayer" = { declaration = "typedef struct DraftAimPlayer { char pad0[8]; Vec3 position; char pad14[0x5C]; f32 height; char pad74[0x1D4]; Vec3 specialAim; char pad254[0x3DA]; s16 weapon; char pad630[0x10B0]; struct DraftAimPlayer *next; } DraftAimPlayer;", evidence = "authored" }
+"DraftAimWeapon" = { declaration = "typedef struct DraftAimWeapon { char pad0[0x1C]; f32 angle; } DraftAimWeapon;", evidence = "authored" }
 "Draw" = { declaration = "typedef struct Draw Draw;", evidence = "authored" }
 "DrawArgs" = { declaration = "typedef struct DrawArgs DrawArgs;", evidence = "authored" }
 "DrawArgs_func_8040E67C_de" = { declaration = "struct DrawArgs_func_8040E67C_de { s32 x; s32 y; s32 flags; f32 scaleX; f32 scaleY; s32 v[5]; };", evidence = "authored" }

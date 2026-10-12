@@ -13706,4 +13706,15 @@ typedef struct AimPlayer {
 extern const f32 D_800C23B4_de;
 extern const f32 D_800C23B8_de;
 
+typedef struct DraftAimPlayer {
+    char pad0[8]; Vec3 position;
+    char pad14[0x5C]; f32 height;
+    char pad74[0x1D4]; Vec3 specialAim;
+    char pad254[0x3DA]; s16 weapon;
+    char pad630[0x10B0]; struct DraftAimPlayer *next;
+} DraftAimPlayer;
+typedef struct DraftAimWeapon { char pad0[0x1C]; f32 angle; } DraftAimWeapon;
+typedef struct AimGlobals { void *head; char pad4[0x1281]; u8 enabled; } AimGlobals;
+extern f32 func_8022ADBC_de(void *);
+
 #endif
