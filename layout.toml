@@ -4074,6 +4074,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CC79C"
+segment = "span_C76B0"
+members = ["src/rw_text_802B2CF0_CD39C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CC7C4"
 segment = "span_C76B0"
 members = ["src/ragewars_resident_strings_CD3C4_us_rev1.c"]
@@ -53697,6 +53705,17 @@ path = "src/rw_text_80294F1C_us_rev1_CB20C_us_rev1.c"
 kind = "data"
 group = "data_800CA60C"
 members = ["src/rw_text_80294F1C_us_rev1_CB20C_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_text_802B2CF0_CD39C_us_rev1.c"
+kind = "data"
+group = "data_800CC79C"
+members = ["src/rw_text_802B2CF0_CD39C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
