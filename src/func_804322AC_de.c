@@ -1,7 +1,9 @@
 /* Updates the selected player's setup panel and its linked controls. */
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/menu_setup_versions.h"
+/* menu_setup_versions.h declares this scalar only cart-guarded; the slot-error scalar is real in every cart */
 extern s32 D_800DF4C4;
 #include "common/unused.h"
 typedef struct SetupSaveRecord {
@@ -196,12 +198,8 @@ typedef struct {
 
 int func_80264614_de(int);
 u8 * func_802A025C_de(u8 *, u8 *);
-void func_802A2394_de(void);
-void func_8040E8D8_de(void *, int);
 void func_8040E928_de(void *, int);
-void * func_8040EC30_de(void *, unsigned short);
 char * func_80411D78_de(s32);
-void func_8041B6E8_de(void *, s32, s32);
 void func_8041B7B4_de(void *, s32, s32);
 s32 func_8041B7FC_de(void *, s32);
 void func_8041B8DC_de(void *, s32, void *);
@@ -213,7 +211,7 @@ void func_80434C2C_de(s32);
 s32 func_80435528_de(void);
 void func_8043577C_de(s32);
 void func_8043C278_de(s32 *);
-s32 func_80433D38_de();                         /* extern */
+void func_80433D38_de(s32);                    /* extern */
 
 
 /* The slot-error scalar is real external storage in every ROM version. */
@@ -271,30 +269,30 @@ void func_804322AC_de(s32 arg0) {
     u32 temp_v1_2;
     u32 temp_v1_4;
     void *temp_a0;
-    void *temp_v0;
-    void *temp_v0_10;
+    func_8041F2A0_Item *temp_v0;
+    func_8041F2A0_Item *temp_v0_10;
     SetupRosterSlot *temp_v0_11;
-    void *temp_v0_12;
-    void *temp_v0_13;
-    void *temp_v0_14;
-    void *temp_v0_16;
-    void *temp_v0_17;
-    void *temp_v0_18;
-    void *temp_v0_19;
+    func_8041F2A0_Item *temp_v0_12;
+    func_8041F2A0_Item *temp_v0_13;
+    func_8041F2A0_Item *temp_v0_14;
+    func_8041F2A0_Item *temp_v0_16;
+    func_8041F2A0_Item *temp_v0_17;
+    func_8041F2A0_Item *temp_v0_18;
+    func_8041F2A0_Item *temp_v0_19;
     SetupRosterRecord *temp_v0_20;
-    void *temp_v0_21;
-    void *temp_v0_22;
-    void *temp_v0_23;
-    void *temp_v0_24;
-    void *temp_v0_25;
-    void *temp_v0_26;
-    void *temp_v0_27;
-    void *temp_v0_3;
-    void *temp_v0_4;
-    void *temp_v0_5;
-    void *temp_v0_6;
-    void *temp_v0_7;
-    void *temp_v0_8;
+    func_8041F2A0_Item *temp_v0_21;
+    func_8041F2A0_Item *temp_v0_22;
+    func_8041F2A0_Item *temp_v0_23;
+    func_8041F2A0_Item *temp_v0_24;
+    func_8041F2A0_Item *temp_v0_25;
+    func_8041F2A0_Item *temp_v0_26;
+    func_8041F2A0_Item *temp_v0_27;
+    func_8041F2A0_Item *temp_v0_3;
+    func_8041F2A0_Item *temp_v0_4;
+    func_8041F2A0_Item *temp_v0_5;
+    func_8041F2A0_Item *temp_v0_6;
+    func_8041F2A0_Item *temp_v0_7;
+    func_8041F2A0_Item *temp_v0_8;
     SetupRosterChoice *temp_v0_9;
     SetupCharacterState *temp_v1_3;
     void *var_a0_2;
@@ -304,10 +302,11 @@ void func_804322AC_de(s32 arg0) {
 
     temp_a0 = D_800E54A4->v.panelView.players[arg0].panel;
     if (temp_a0 != 0) {
-        func_8040E8D8_de(temp_a0, 0);
+        func_8040E8D8_de((func_8041F2A0_Item *) temp_a0, 0);
     }
     func_8040E928_de(func_8041B7FC_de(D_800E54A4->v.f.unk4, arg0), 0);
-    func_8041B6E8_de(D_800E54A4->v.f.unk0, arg0, SETUP_LABEL_ID);
+    /* the published B6E8 takes the controller handle as a plain scalar */
+    func_8041B6E8_de((s32) D_800E54A4->v.f.unk0, arg0, SETUP_LABEL_ID);
     temp_v1 = D_800E54A4->v.panelView.players[arg0].state;
     switch (temp_v1) {                              /* switch 1 */
     case 0:                                         /* switch 1 */
@@ -393,7 +392,8 @@ block_36:
         var_v0 = arg0 * 8;
         break;
     case 22:                                        /* switch 1 */
-        func_8040E8D8_de(D_800E54A4->v.panelView.players[arg0].panel, 1);
+        /* the panel slot is untyped storage; the hub types the E8D8 argument as the item */
+        func_8040E8D8_de((func_8041F2A0_Item *) D_800E54A4->v.panelView.players[arg0].panel, 1);
         var_v1 = D_800E54A4;
         var_s1 = 0;
         if (var_v1->v.f.unk2E00 == 0) {
@@ -433,7 +433,7 @@ case22_two:
 case22_three:
         var_s0 = SLOT_3_ID;
 case22_selected:
-        func_8041B6E8_de(D_800E54A4->v.f.unk0, arg0, var_s0);
+        func_8041B6E8_de((s32) D_800E54A4->v.f.unk0, arg0, var_s0);
         func_80433BCC_de(arg0);
         var_v0 = arg0 * 8;
         break;
@@ -538,7 +538,7 @@ case22_selected:
         break;
     case 14:                                        /* switch 1 */
     case 17:                                        /* switch 1 */
-        func_8041B6E8_de(D_800E54A4->v.f.unk0, arg0, SETUP_LABEL_ID);
+        func_8041B6E8_de((s32) D_800E54A4->v.f.unk0, arg0, SETUP_LABEL_ID);
         func_8041B7B4_de(D_800E54A4->v.f.unk4, arg0, 1);
 
         temp_v0_17 = func_8040EC30_de(D_800E54A4->v.panelView.players[arg0].root, UI_CASE_17_2A5);
@@ -637,13 +637,13 @@ block_61:
         func_8041B8DC_de(D_800E54A4->v.f.unk4, arg0, func_8040EC30_de(D_800E54A4->v.panelView.players[arg0].panel, UI_CASE_26_2A7));
         break;
 case27_found:
-        func_8041B6E8_de(D_800E54A4->v.f.unk0, arg0, var_s0);
+        func_8041B6E8_de((s32) D_800E54A4->v.f.unk0, arg0, var_s0);
         goto case27_done;
     case 27:                                        /* switch 1 */
-        func_8040E8D8_de(D_800E54A4->v.panelView.players[arg0].panel, 1);
+        func_8040E8D8_de((func_8041F2A0_Item *) D_800E54A4->v.panelView.players[arg0].panel, 1);
         temp_s2 = 0;
- 
-        func_8041B6E8_de(D_800E54A4->v.f.unk0, arg0, CHECK_0_ID);
+
+        func_8041B6E8_de((s32) D_800E54A4->v.f.unk0, arg0, CHECK_0_ID);
         do {
 loop_69:
         if (temp_s2 == 1) {

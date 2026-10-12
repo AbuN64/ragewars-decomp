@@ -1,8 +1,8 @@
 #include "span_16E000/code_8042F988.h"
-#include "span_16E000/code_8042F988.h"
 #include "common/unused.h"
 #include "types.h"
 #include "math_helpers.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 /* Animates the two menu panels through open, close and countdown states and updates the active team menu. */
 
@@ -11,7 +11,6 @@ extern s32 func_8025DF34_de(s32 arg0);
 extern void func_80298368_de(s32);
 extern void func_8029973C_de(void);
 extern void func_802A2360_de(void);
-extern void func_8040E8D8_de(s32,s32);
 extern void func_80419F24_de(s32);
 extern void func_80419F58_de(s32,s32);
 
@@ -40,7 +39,8 @@ s32 func_8042F91C_de(s32 arg0, s32 arg1, s32 arg2) {
             D_800E54A4->unk50 = temp_v0_2;
             if (temp_v0_2 <= 0) {
                 func_8025DF34_de(0xE79);
-                func_8040E8D8_de(D_800E54A4->unk28, 1);
+                /* unk28 is the panel's item handle, kept untyped in the animation state */
+                func_8040E8D8_de((func_8041F2A0_Item *) D_800E54A4->unk28, 1);
                 func_80419F58_de(D_800E54A4->unk24, 4);
                 D_800E54A4->unk4C = 4;
                 D_800E54A4->unk50 = 4;
@@ -74,7 +74,7 @@ s32 func_8042F91C_de(s32 arg0, s32 arg1, s32 arg2) {
             func_8025DF34_de(0xE78);
             D_800E54A4->unk4C = 2;
             D_800E54A4->unk50 = 4;
-            func_8040E8D8_de(D_800E54A4->unk28, 0);
+            func_8040E8D8_de((func_8041F2A0_Item *) D_800E54A4->unk28, 0);
             break;
         }
         if (D_800E54A4->unk4C == 3) func_80433398_de(arg2);

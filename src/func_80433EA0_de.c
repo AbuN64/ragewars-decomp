@@ -1,7 +1,7 @@
 #include "span_16E000/code_8042F988.h"
-#include "span_16E000/code_8042F988.h"
 #include "types.h"
 #include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 extern PakState *D_800E54A4;
 extern char *D_800D3758;
@@ -18,7 +18,6 @@ extern s32 func_8040458C_de(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *
 extern s32 func_804057BC_de(char *, s32);
 extern void func_802A025C_de(char *, char *);
 extern void func_802A0C08_de(char *, char *, ...);
-extern Label *func_8040EC30_de(void *, s32);
 extern s32 func_80405160_de(s32, s32 *);
 extern s32 func_80435424_de(void);
 extern s32 func_804057EC_de(s32);
@@ -136,7 +135,8 @@ D_800DDEC0,
                       D_800E54A4->slots[player].notes[i].name);
     }
     if (failed == 0) {
-        item = func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D8);
+        /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
+        item = (Label *)func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D8);
         if (func_80405160_de(player, &size) == 0) {
             func_802A0C08_de(D_800E54A4->slots[player].free,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -146,7 +146,7 @@ D_800DDEB0_de,
 #endif
  size);
             item->text = D_800E54A4->slots[player].free;
-            item = func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D7);
+            item = (Label *)func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D7);
             size = func_80435424_de();
             func_802A0C08_de(D_800E54A4->slots[player].used,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

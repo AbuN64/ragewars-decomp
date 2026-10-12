@@ -1,4 +1,3 @@
-#include "span_16E000/code_8042F988.h"
 #include "common/draft_fields_func_8026DC24_de.h"
 #include "common/draft_fields_func_80283278_de.h"
 #include "common/draft_fields_func_8028D474_de.h"
@@ -52,6 +51,7 @@
 #include "span_16E000/code_8043E9A8.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8042F988.h"
 #include "types.h"
 
@@ -74,23 +74,24 @@ enum { PAK_SLOT_RESOURCE_688 = 688, PAK_SLOT_RESOURCE_689 = 689, PAK_SLOT_RESOUR
 
 #endif
 extern PakMenuController *D_800E54A4;
-extern void func_8040E8D8_de(MenuWidget *,s32),func_8040E950_de(MenuWidget *,s32),func_8041B8DC_de(s32,s32,MenuWidget *);
-extern MenuWidget *func_8040EC30_de(MenuWidget *,s32),*func_8041B7FC_de(s32,s32);
+extern void func_8040E950_de(MenuWidget *,s32),func_8041B8DC_de(s32,s32,MenuWidget *);
+extern MenuWidget *func_8041B7FC_de(s32,s32);
 extern s32 func_8040EBD0_de(MenuWidget *),func_804358C0_de(s32,s8);
 void func_80433914_de(s32 player) {
  s32 i;
  MenuWidget *label,*value;
  D_800E54A4->players[player].chosen=0;
- D_800E54A4->players[player].nodes[0]=func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_694);
- D_800E54A4->players[player].nodes[1]=func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_691);
- D_800E54A4->players[player].nodes[2]=func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_688);
- D_800E54A4->players[player].nodes[3]=func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_692);
+ /* the hub EC30 returns the item view; nodes[] hold this unit's MenuWidget storage */
+ D_800E54A4->players[player].nodes[0]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_694);
+ D_800E54A4->players[player].nodes[1]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_691);
+ D_800E54A4->players[player].nodes[2]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_688);
+ D_800E54A4->players[player].nodes[3]=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].menuWidget,PAK_SLOT_RESOURCE_692);
  for(i=0;i<4;i++) {
   D_800E54A4->players[player].used[i]=2;
   D_800E54A4->players[player].nodes[i]->alpha=255;
-  label=func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689);
+  label=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_689);
   func_8040E950_de(D_800E54A4->players[player].nodes[i],0);
-  value=func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_690);
+  value=(MenuWidget *)func_8040EC30_de(D_800E54A4->players[player].nodes[i],PAK_SLOT_RESOURCE_690);
   if(D_800E54A4->players[player].records[i].player!=-1) {
    value->text=D_800E54A4->players[player].records[i].name;
    D_800E54A4->players[player].used[i]=1;
@@ -103,11 +104,11 @@ void func_80433914_de(s32 player) {
     }
    }
 #if defined(VERSION_EU)
-  } else {value->text=((D_800E1394)[D_80152789]);func_8040E8D8_de(label,0);}
+  } else {value->text=((D_800E1394)[D_80152789]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
 #elif defined(VERSION_EU_X)
-  } else {value->text=((D_800DD124)[D_80152789]);func_8040E8D8_de(label,0);}
+  } else {value->text=((D_800DD124)[D_80152789]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
 #else
-  } else {value->text=(D_800D3250[0]);func_8040E8D8_de(label,0);}
+  } else {value->text=(D_800D3250[0]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
 #endif
  }
  label=func_8041B7FC_de(D_800E54A4->root,player);
