@@ -55079,6 +55079,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_controller_state_dispatch_CED60_us_rev1.c"
+kind = "data"
+group = "data_800CE14C"
+members = ["src/rw_controller_state_dispatch_CED60_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_formats_80427B08_E25EC_us_rev1.c"
 kind = "data"
 group = "data_800E19EC"
