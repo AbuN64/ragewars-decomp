@@ -1,3 +1,4 @@
-unsigned int D_auto_src_rw_player_state_special_timing_21_us_rev1[2] = {
+/* ROM-grounded data: src/rw_player_state_special_timing_21_us_rev1.c */
+unsigned int D_blob_81103062a07b63e52ece[2] = {
     0x00000000, 0x00000000,
 };

@@ -2266,6 +2266,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C6B2C"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020388C_C772C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C6B34"
 segment = "span_C76B0"
 members = ["src/rw_pool_80203908_C7734_us_rev1.c"]
@@ -2322,6 +2330,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C6B64"
+segment = "span_C76B0"
+members = ["src/rw_pool_80204808_C7764_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C6B6C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C6B6C"]
@@ -2357,6 +2373,14 @@ sdk = false
 name = "data_800C6B88"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C6B88"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C6BB8"
+segment = "span_C76B0"
+members = ["src/rw_pool_80205F18_C77B8_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -2466,6 +2490,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C6DB0"
+segment = "span_C76B0"
+members = ["src/rw_pool_80209DAC_C79B0_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C6DB8"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C6DB8"]
@@ -2482,9 +2514,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C6E18"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020A884_C7A18_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C6E20"
 segment = "span_C76B0"
 members = ["src/rw_pool_8020A95C_C7A20_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800C6E24"
+segment = "span_C76B0"
+members = ["src/rw_pool_8020AA0C_C7A24_us_rev1.c"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -77979,6 +78027,1590 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_player_state_normal_callbacks_44_us_rev1.c"
+kind = "data"
+group = "data_800CECE4"
+members = ["src/rw_player_state_normal_callbacks_44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_callbacks_45_us_rev1.c"
+kind = "data"
+group = "data_800CECFC"
+members = ["src/rw_player_state_normal_callbacks_45_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_callbacks_46_us_rev1.c"
+kind = "data"
+group = "data_800CED14"
+members = ["src/rw_player_state_normal_callbacks_46_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_00_us_rev1.c"
+kind = "data"
+group = "data_800CE8D0"
+members = ["src/rw_player_state_normal_timing_00_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_01_us_rev1.c"
+kind = "data"
+group = "data_800CE8E8"
+members = ["src/rw_player_state_normal_timing_01_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_02_us_rev1.c"
+kind = "data"
+group = "data_800CE900"
+members = ["src/rw_player_state_normal_timing_02_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_03_us_rev1.c"
+kind = "data"
+group = "data_800CE918"
+members = ["src/rw_player_state_normal_timing_03_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_04_us_rev1.c"
+kind = "data"
+group = "data_800CE930"
+members = ["src/rw_player_state_normal_timing_04_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_05_us_rev1.c"
+kind = "data"
+group = "data_800CE948"
+members = ["src/rw_player_state_normal_timing_05_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_06_us_rev1.c"
+kind = "data"
+group = "data_800CE960"
+members = ["src/rw_player_state_normal_timing_06_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_07_us_rev1.c"
+kind = "data"
+group = "data_800CE978"
+members = ["src/rw_player_state_normal_timing_07_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_08_us_rev1.c"
+kind = "data"
+group = "data_800CE990"
+members = ["src/rw_player_state_normal_timing_08_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_09_us_rev1.c"
+kind = "data"
+group = "data_800CE9A8"
+members = ["src/rw_player_state_normal_timing_09_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_10_us_rev1.c"
+kind = "data"
+group = "data_800CE9C0"
+members = ["src/rw_player_state_normal_timing_10_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_11_us_rev1.c"
+kind = "data"
+group = "data_800CE9D8"
+members = ["src/rw_player_state_normal_timing_11_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_12_us_rev1.c"
+kind = "data"
+group = "data_800CE9F0"
+members = ["src/rw_player_state_normal_timing_12_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_13_us_rev1.c"
+kind = "data"
+group = "data_800CEA08"
+members = ["src/rw_player_state_normal_timing_13_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_14_us_rev1.c"
+kind = "data"
+group = "data_800CEA20"
+members = ["src/rw_player_state_normal_timing_14_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_15_us_rev1.c"
+kind = "data"
+group = "data_800CEA38"
+members = ["src/rw_player_state_normal_timing_15_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_16_us_rev1.c"
+kind = "data"
+group = "data_800CEA50"
+members = ["src/rw_player_state_normal_timing_16_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_17_us_rev1.c"
+kind = "data"
+group = "data_800CEA68"
+members = ["src/rw_player_state_normal_timing_17_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_18_us_rev1.c"
+kind = "data"
+group = "data_800CEA80"
+members = ["src/rw_player_state_normal_timing_18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_19_us_rev1.c"
+kind = "data"
+group = "data_800CEA98"
+members = ["src/rw_player_state_normal_timing_19_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_20_us_rev1.c"
+kind = "data"
+group = "data_800CEAB0"
+members = ["src/rw_player_state_normal_timing_20_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_21_us_rev1.c"
+kind = "data"
+group = "data_800CEAC8"
+members = ["src/rw_player_state_normal_timing_21_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_22_us_rev1.c"
+kind = "data"
+group = "data_800CEAE0"
+members = ["src/rw_player_state_normal_timing_22_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_23_us_rev1.c"
+kind = "data"
+group = "data_800CEAF8"
+members = ["src/rw_player_state_normal_timing_23_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_24_us_rev1.c"
+kind = "data"
+group = "data_800CEB10"
+members = ["src/rw_player_state_normal_timing_24_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_25_us_rev1.c"
+kind = "data"
+group = "data_800CEB28"
+members = ["src/rw_player_state_normal_timing_25_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_26_us_rev1.c"
+kind = "data"
+group = "data_800CEB40"
+members = ["src/rw_player_state_normal_timing_26_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_27_us_rev1.c"
+kind = "data"
+group = "data_800CEB58"
+members = ["src/rw_player_state_normal_timing_27_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_28_us_rev1.c"
+kind = "data"
+group = "data_800CEB70"
+members = ["src/rw_player_state_normal_timing_28_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_29_us_rev1.c"
+kind = "data"
+group = "data_800CEB88"
+members = ["src/rw_player_state_normal_timing_29_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_30_us_rev1.c"
+kind = "data"
+group = "data_800CEBA0"
+members = ["src/rw_player_state_normal_timing_30_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_31_us_rev1.c"
+kind = "data"
+group = "data_800CEBB8"
+members = ["src/rw_player_state_normal_timing_31_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_32_us_rev1.c"
+kind = "data"
+group = "data_800CEBD0"
+members = ["src/rw_player_state_normal_timing_32_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_33_us_rev1.c"
+kind = "data"
+group = "data_800CEBE8"
+members = ["src/rw_player_state_normal_timing_33_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_34_us_rev1.c"
+kind = "data"
+group = "data_800CEC00"
+members = ["src/rw_player_state_normal_timing_34_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_35_us_rev1.c"
+kind = "data"
+group = "data_800CEC18"
+members = ["src/rw_player_state_normal_timing_35_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_36_us_rev1.c"
+kind = "data"
+group = "data_800CEC30"
+members = ["src/rw_player_state_normal_timing_36_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_37_us_rev1.c"
+kind = "data"
+group = "data_800CEC48"
+members = ["src/rw_player_state_normal_timing_37_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_38_us_rev1.c"
+kind = "data"
+group = "data_800CEC60"
+members = ["src/rw_player_state_normal_timing_38_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_39_us_rev1.c"
+kind = "data"
+group = "data_800CEC78"
+members = ["src/rw_player_state_normal_timing_39_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_40_us_rev1.c"
+kind = "data"
+group = "data_800CEC90"
+members = ["src/rw_player_state_normal_timing_40_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_41_us_rev1.c"
+kind = "data"
+group = "data_800CECA8"
+members = ["src/rw_player_state_normal_timing_41_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_42_us_rev1.c"
+kind = "data"
+group = "data_800CECC0"
+members = ["src/rw_player_state_normal_timing_42_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_43_us_rev1.c"
+kind = "data"
+group = "data_800CECD8"
+members = ["src/rw_player_state_normal_timing_43_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_44_us_rev1.c"
+kind = "data"
+group = "data_800CECF0"
+members = ["src/rw_player_state_normal_timing_44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_45_us_rev1.c"
+kind = "data"
+group = "data_800CED08"
+members = ["src/rw_player_state_normal_timing_45_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_normal_timing_46_us_rev1.c"
+kind = "data"
+group = "data_800CED20"
+members = ["src/rw_player_state_normal_timing_46_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_00_us_rev1.c"
+kind = "data"
+group = "data_800CED2C"
+members = ["src/rw_player_state_special_callbacks_00_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_01_us_rev1.c"
+kind = "data"
+group = "data_800CED44"
+members = ["src/rw_player_state_special_callbacks_01_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_02_us_rev1.c"
+kind = "data"
+group = "data_800CED5C"
+members = ["src/rw_player_state_special_callbacks_02_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_03_us_rev1.c"
+kind = "data"
+group = "data_800CED74"
+members = ["src/rw_player_state_special_callbacks_03_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_04_us_rev1.c"
+kind = "data"
+group = "data_800CED8C"
+members = ["src/rw_player_state_special_callbacks_04_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_05_us_rev1.c"
+kind = "data"
+group = "data_800CEDA4"
+members = ["src/rw_player_state_special_callbacks_05_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_06_us_rev1.c"
+kind = "data"
+group = "data_800CEDBC"
+members = ["src/rw_player_state_special_callbacks_06_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_07_us_rev1.c"
+kind = "data"
+group = "data_800CEDD4"
+members = ["src/rw_player_state_special_callbacks_07_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_08_us_rev1.c"
+kind = "data"
+group = "data_800CEDEC"
+members = ["src/rw_player_state_special_callbacks_08_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_09_us_rev1.c"
+kind = "data"
+group = "data_800CEE04"
+members = ["src/rw_player_state_special_callbacks_09_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_10_us_rev1.c"
+kind = "data"
+group = "data_800CEE1C"
+members = ["src/rw_player_state_special_callbacks_10_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_11_us_rev1.c"
+kind = "data"
+group = "data_800CEE34"
+members = ["src/rw_player_state_special_callbacks_11_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_12_us_rev1.c"
+kind = "data"
+group = "data_800CEE4C"
+members = ["src/rw_player_state_special_callbacks_12_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_13_us_rev1.c"
+kind = "data"
+group = "data_800CEE64"
+members = ["src/rw_player_state_special_callbacks_13_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_14_us_rev1.c"
+kind = "data"
+group = "data_800CEE7C"
+members = ["src/rw_player_state_special_callbacks_14_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_15_us_rev1.c"
+kind = "data"
+group = "data_800CEE94"
+members = ["src/rw_player_state_special_callbacks_15_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_16_us_rev1.c"
+kind = "data"
+group = "data_800CEEAC"
+members = ["src/rw_player_state_special_callbacks_16_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_17_us_rev1.c"
+kind = "data"
+group = "data_800CEEC4"
+members = ["src/rw_player_state_special_callbacks_17_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_18_us_rev1.c"
+kind = "data"
+group = "data_800CEEDC"
+members = ["src/rw_player_state_special_callbacks_18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_19_us_rev1.c"
+kind = "data"
+group = "data_800CEEF4"
+members = ["src/rw_player_state_special_callbacks_19_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_20_us_rev1.c"
+kind = "data"
+group = "data_800CEF0C"
+members = ["src/rw_player_state_special_callbacks_20_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_21_us_rev1.c"
+kind = "data"
+group = "data_800CEF24"
+members = ["src/rw_player_state_special_callbacks_21_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_22_us_rev1.c"
+kind = "data"
+group = "data_800CEF3C"
+members = ["src/rw_player_state_special_callbacks_22_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_23_us_rev1.c"
+kind = "data"
+group = "data_800CEF54"
+members = ["src/rw_player_state_special_callbacks_23_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_24_us_rev1.c"
+kind = "data"
+group = "data_800CEF6C"
+members = ["src/rw_player_state_special_callbacks_24_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_25_us_rev1.c"
+kind = "data"
+group = "data_800CEF84"
+members = ["src/rw_player_state_special_callbacks_25_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_26_us_rev1.c"
+kind = "data"
+group = "data_800CEF9C"
+members = ["src/rw_player_state_special_callbacks_26_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_27_us_rev1.c"
+kind = "data"
+group = "data_800CEFB4"
+members = ["src/rw_player_state_special_callbacks_27_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_28_us_rev1.c"
+kind = "data"
+group = "data_800CEFCC"
+members = ["src/rw_player_state_special_callbacks_28_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_29_us_rev1.c"
+kind = "data"
+group = "data_800CEFE4"
+members = ["src/rw_player_state_special_callbacks_29_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_30_us_rev1.c"
+kind = "data"
+group = "data_800CEFFC"
+members = ["src/rw_player_state_special_callbacks_30_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_31_us_rev1.c"
+kind = "data"
+group = "data_800CF014"
+members = ["src/rw_player_state_special_callbacks_31_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_32_us_rev1.c"
+kind = "data"
+group = "data_800CF02C"
+members = ["src/rw_player_state_special_callbacks_32_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_33_us_rev1.c"
+kind = "data"
+group = "data_800CF044"
+members = ["src/rw_player_state_special_callbacks_33_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_34_us_rev1.c"
+kind = "data"
+group = "data_800CF05C"
+members = ["src/rw_player_state_special_callbacks_34_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_35_us_rev1.c"
+kind = "data"
+group = "data_800CF074"
+members = ["src/rw_player_state_special_callbacks_35_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_36_us_rev1.c"
+kind = "data"
+group = "data_800CF08C"
+members = ["src/rw_player_state_special_callbacks_36_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_37_us_rev1.c"
+kind = "data"
+group = "data_800CF0A4"
+members = ["src/rw_player_state_special_callbacks_37_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_38_us_rev1.c"
+kind = "data"
+group = "data_800CF0BC"
+members = ["src/rw_player_state_special_callbacks_38_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_39_us_rev1.c"
+kind = "data"
+group = "data_800CF0D4"
+members = ["src/rw_player_state_special_callbacks_39_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_40_us_rev1.c"
+kind = "data"
+group = "data_800CF0EC"
+members = ["src/rw_player_state_special_callbacks_40_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_41_us_rev1.c"
+kind = "data"
+group = "data_800CF104"
+members = ["src/rw_player_state_special_callbacks_41_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_42_us_rev1.c"
+kind = "data"
+group = "data_800CF11C"
+members = ["src/rw_player_state_special_callbacks_42_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_43_us_rev1.c"
+kind = "data"
+group = "data_800CF134"
+members = ["src/rw_player_state_special_callbacks_43_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_44_us_rev1.c"
+kind = "data"
+group = "data_800CF14C"
+members = ["src/rw_player_state_special_callbacks_44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_45_us_rev1.c"
+kind = "data"
+group = "data_800CF164"
+members = ["src/rw_player_state_special_callbacks_45_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_callbacks_46_us_rev1.c"
+kind = "data"
+group = "data_800CF17C"
+members = ["src/rw_player_state_special_callbacks_46_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_00_us_rev1.c"
+kind = "data"
+group = "data_800CED38"
+members = ["src/rw_player_state_special_timing_00_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_01_us_rev1.c"
+kind = "data"
+group = "data_800CED50"
+members = ["src/rw_player_state_special_timing_01_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_02_us_rev1.c"
+kind = "data"
+group = "data_800CED68"
+members = ["src/rw_player_state_special_timing_02_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_03_us_rev1.c"
+kind = "data"
+group = "data_800CED80"
+members = ["src/rw_player_state_special_timing_03_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_04_us_rev1.c"
+kind = "data"
+group = "data_800CED98"
+members = ["src/rw_player_state_special_timing_04_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_05_us_rev1.c"
+kind = "data"
+group = "data_800CEDB0"
+members = ["src/rw_player_state_special_timing_05_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_06_us_rev1.c"
+kind = "data"
+group = "data_800CEDC8"
+members = ["src/rw_player_state_special_timing_06_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_07_us_rev1.c"
+kind = "data"
+group = "data_800CEDE0"
+members = ["src/rw_player_state_special_timing_07_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_08_us_rev1.c"
+kind = "data"
+group = "data_800CEDF8"
+members = ["src/rw_player_state_special_timing_08_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_09_us_rev1.c"
+kind = "data"
+group = "data_800CEE10"
+members = ["src/rw_player_state_special_timing_09_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_10_us_rev1.c"
+kind = "data"
+group = "data_800CEE28"
+members = ["src/rw_player_state_special_timing_10_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_11_us_rev1.c"
+kind = "data"
+group = "data_800CEE40"
+members = ["src/rw_player_state_special_timing_11_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_12_us_rev1.c"
+kind = "data"
+group = "data_800CEE58"
+members = ["src/rw_player_state_special_timing_12_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_13_us_rev1.c"
+kind = "data"
+group = "data_800CEE70"
+members = ["src/rw_player_state_special_timing_13_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_14_us_rev1.c"
+kind = "data"
+group = "data_800CEE88"
+members = ["src/rw_player_state_special_timing_14_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_15_us_rev1.c"
+kind = "data"
+group = "data_800CEEA0"
+members = ["src/rw_player_state_special_timing_15_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_16_us_rev1.c"
+kind = "data"
+group = "data_800CEEB8"
+members = ["src/rw_player_state_special_timing_16_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_17_us_rev1.c"
+kind = "data"
+group = "data_800CEED0"
+members = ["src/rw_player_state_special_timing_17_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_18_us_rev1.c"
+kind = "data"
+group = "data_800CEEE8"
+members = ["src/rw_player_state_special_timing_18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_19_us_rev1.c"
+kind = "data"
+group = "data_800CEF00"
+members = ["src/rw_player_state_special_timing_19_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_20_us_rev1.c"
+kind = "data"
+group = "data_800CEF18"
+members = ["src/rw_player_state_special_timing_20_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_21_us_rev1.c"
+kind = "data"
+group = "data_800CEF30"
+members = ["src/rw_player_state_special_timing_21_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_22_us_rev1.c"
+kind = "data"
+group = "data_800CEF48"
+members = ["src/rw_player_state_special_timing_22_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_23_us_rev1.c"
+kind = "data"
+group = "data_800CEF60"
+members = ["src/rw_player_state_special_timing_23_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_24_us_rev1.c"
+kind = "data"
+group = "data_800CEF78"
+members = ["src/rw_player_state_special_timing_24_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_25_us_rev1.c"
+kind = "data"
+group = "data_800CEF90"
+members = ["src/rw_player_state_special_timing_25_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_26_us_rev1.c"
+kind = "data"
+group = "data_800CEFA8"
+members = ["src/rw_player_state_special_timing_26_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_27_us_rev1.c"
+kind = "data"
+group = "data_800CEFC0"
+members = ["src/rw_player_state_special_timing_27_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_28_us_rev1.c"
+kind = "data"
+group = "data_800CEFD8"
+members = ["src/rw_player_state_special_timing_28_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_29_us_rev1.c"
+kind = "data"
+group = "data_800CEFF0"
+members = ["src/rw_player_state_special_timing_29_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_30_us_rev1.c"
+kind = "data"
+group = "data_800CF008"
+members = ["src/rw_player_state_special_timing_30_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_31_us_rev1.c"
+kind = "data"
+group = "data_800CF020"
+members = ["src/rw_player_state_special_timing_31_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_32_us_rev1.c"
+kind = "data"
+group = "data_800CF038"
+members = ["src/rw_player_state_special_timing_32_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_33_us_rev1.c"
+kind = "data"
+group = "data_800CF050"
+members = ["src/rw_player_state_special_timing_33_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_34_us_rev1.c"
+kind = "data"
+group = "data_800CF068"
+members = ["src/rw_player_state_special_timing_34_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_35_us_rev1.c"
+kind = "data"
+group = "data_800CF080"
+members = ["src/rw_player_state_special_timing_35_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_36_us_rev1.c"
+kind = "data"
+group = "data_800CF098"
+members = ["src/rw_player_state_special_timing_36_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_37_us_rev1.c"
+kind = "data"
+group = "data_800CF0B0"
+members = ["src/rw_player_state_special_timing_37_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_38_us_rev1.c"
+kind = "data"
+group = "data_800CF0C8"
+members = ["src/rw_player_state_special_timing_38_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_39_us_rev1.c"
+kind = "data"
+group = "data_800CF0E0"
+members = ["src/rw_player_state_special_timing_39_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_40_us_rev1.c"
+kind = "data"
+group = "data_800CF0F8"
+members = ["src/rw_player_state_special_timing_40_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_41_us_rev1.c"
+kind = "data"
+group = "data_800CF110"
+members = ["src/rw_player_state_special_timing_41_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_42_us_rev1.c"
+kind = "data"
+group = "data_800CF128"
+members = ["src/rw_player_state_special_timing_42_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_43_us_rev1.c"
+kind = "data"
+group = "data_800CF140"
+members = ["src/rw_player_state_special_timing_43_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_44_us_rev1.c"
+kind = "data"
+group = "data_800CF158"
+members = ["src/rw_player_state_special_timing_44_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_45_us_rev1.c"
+kind = "data"
+group = "data_800CF170"
+members = ["src/rw_player_state_special_timing_45_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_player_state_special_timing_46_us_rev1.c"
+kind = "data"
+group = "data_800CF188"
+members = ["src/rw_player_state_special_timing_46_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80202CA0_C76EC_us_rev1.c"
 kind = "data"
 group = "data_800C6AEC"
@@ -77994,6 +79626,17 @@ path = "src/rw_pool_802034A4_C7718_us_rev1.c"
 kind = "data"
 group = "data_800C6B18"
 members = ["src/rw_pool_802034A4_C7718_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8020388C_C772C_us_rev1.c"
+kind = "data"
+group = "data_800C6B2C"
+members = ["src/rw_pool_8020388C_C772C_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -78045,6 +79688,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80204808_C7764_us_rev1.c"
+kind = "data"
+group = "data_800C6B64"
+members = ["src/rw_pool_80204808_C7764_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_80204868_C7770_us_rev1.c"
 kind = "data"
 group = "data_800C6B70"
@@ -78060,6 +79714,17 @@ path = "src/rw_pool_80204A68_C7774_us_rev1.c"
 kind = "data"
 group = "data_800C6B74"
 members = ["src/rw_pool_80204A68_C7774_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_80205F18_C77B8_us_rev1.c"
+kind = "data"
+group = "data_800C6BB8"
+members = ["src/rw_pool_80205F18_C77B8_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -78188,6 +79853,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_80209DAC_C79B0_us_rev1.c"
+kind = "data"
+group = "data_800C6DB0"
+members = ["src/rw_pool_80209DAC_C79B0_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8020A028_C79E4_us_rev1.c"
 kind = "data"
 group = "data_800C6DE4"
@@ -78199,10 +79875,32 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_pool_8020A884_C7A18_us_rev1.c"
+kind = "data"
+group = "data_800C6E18"
+members = ["src/rw_pool_8020A884_C7A18_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_pool_8020A95C_C7A20_us_rev1.c"
 kind = "data"
 group = "data_800C6E20"
 members = ["src/rw_pool_8020A95C_C7A20_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_8020AA0C_C7A24_us_rev1.c"
+kind = "data"
+group = "data_800C6E24"
+members = ["src/rw_pool_8020AA0C_C7A24_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
