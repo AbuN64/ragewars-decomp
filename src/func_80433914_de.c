@@ -1,3 +1,4 @@
+#include "types.h" /* the draft_fields struct headers below spell s32/u16/u8; types.h must precede them */
 #include "common/draft_fields_func_8026DC24_de.h"
 #include "common/draft_fields_func_80283278_de.h"
 #include "common/draft_fields_func_8028D474_de.h"
