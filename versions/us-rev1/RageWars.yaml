@@ -6164,7 +6164,7 @@ segments:
       - [0xE6F58, data, "rodata/unresolved/800E5E74_unclaimed_E6F58"]
       - [0xE6F5C, .data, "src/ragewars_resident_strings_E6F5C_us_rev1.c"]
       - [0xE6F74, .data, "rodata/unresolved/800E5E74_unclaimed_E6F74"]
-      - [0xE6FAC, data, "rodata/writable/800E63AC"]
+      - [0xE6FAC, .data, "rodata/writable/800E63AC"]
       - [0xE6FC0, .data, "src/ragewars_spinner_states_us_rev1.c"]
       - [0xE7080, data, "src/ragewars_player_name_buffers_us_rev1.c"]
       - [0xE7090, data, "rodata/unresolved/psyq_name_suffix_os"]
