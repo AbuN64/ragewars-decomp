@@ -5409,7 +5409,7 @@ segments:
       - [0x1AF770, c, "func_8044B600_de"]
       - [0x1AF930, c, "func_8044B7C0_de"]
       - [0x1AFF74, c, "func_8044BE04_de"]
-      - [0x1B0544, asm, "func_8044C3D4_de"]
+      - [0x1B0544, c, "func_8044C3D4_de"]
       - [0x1B0928, asm, "func_8044C7B8_de"]
       - [0x1B0EFC, c, "func_8044CD8C_de"]
       - [0x1B11C4, c, "func_8044D054_de"]

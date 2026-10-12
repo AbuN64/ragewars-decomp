@@ -7345,7 +7345,7 @@ segments:
       - [0x1BA250, c, "func_8044B600_de"]
       - [0x1BA410, c, "func_8044B7C0_de"]
       - [0x1BAA54, c, "func_8044BE04_de"]
-      - [0x1BB024, asm, "func_8044C3D4_de"]
+      - [0x1BB024, c, "func_8044C3D4_de"]
       - [0x1BB408, asm, "func_8044C7B8_de"]
       - [0x1BB9DC, c, "func_8044CD8C_de"]
       - [0x1BBCA4, c, "func_8044D054_de"]

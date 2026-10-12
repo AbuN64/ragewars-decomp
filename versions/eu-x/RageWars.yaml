@@ -5491,7 +5491,7 @@ segments:
       - [0x13CA00, c, "func_8044B600_de"]
       - [0x13CBC0, c, "func_8044B7C0_de"]
       - [0x13D204, c, "func_8044BE04_de"]
-      - [0x13D7D4, asm, "func_8044C3D4_de"]
+      - [0x13D7D4, c, "func_8044C3D4_de"]
       - [0x13DBB8, asm, "func_8044C7B8_de"]
       - [0x13E18C, c, "func_8044CD8C_de"]
       - [0x13E454, c, "func_8044D054_de"]

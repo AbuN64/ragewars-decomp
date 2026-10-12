@@ -4,6 +4,9 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
+#include "audio_callbacks.h"
+#include "common/types_8a8189af7b05.h"
+#include "span_1000/code_8027451C.h"
 struct func_8044B388_S1;
 /* unbake published declaration: published_03e9c7e3de05cad75660efbd */
 typedef struct func_8044B388_S1 func_8044B388_S1;
@@ -574,5 +577,43 @@ extern void func_8026D7F4_de(s32, s32);
 extern u8 D_800C4EE0_de[];
 extern u8 D_800C4F04_de[];
 extern u8 D_800C4F2C_de[];
+
+typedef struct CollisionBuildVertex {
+    f32 x;
+    f32 y;
+    char pad8[8];
+} CollisionBuildVertex;
+typedef union CollisionBuildTriangle { struct {
+    u16 kind;
+    u16 flags;
+    CollisionBuildVertex *v[3];
+    union CollisionBuildTriangle *adj[3];
+    s32 mask;
+} fields; Header_func_80275AA4_de canonical; s32 words[8]; } CollisionBuildTriangle;
+typedef struct CollisionBuildHeader {
+    s32 count;
+    s32 offsets[5];
+} CollisionBuildHeader;
+typedef Packed CollisionBuildFace;
+typedef struct CollisionBuildList {
+    s32 kind;
+    s32 count;
+    CollisionBuildFace items[0];
+} CollisionBuildList;
+typedef union CollisionBuildMeshHandle {
+    struct Shape_typemap_165 canonical;
+    struct { void *data; s32 size,refs,flags; } payload;
+} CollisionBuildMeshHandle;
+typedef struct CollisionBuildVertexList { s32 kind,count; CollisionBuildVertex items[0]; } CollisionBuildVertexList;
+typedef struct CollisionBuildTriangleList { s32 kind,count; CollisionBuildTriangle items[0]; } CollisionBuildTriangleList;
+typedef struct CollisionBuildWorld {
+    char pad0[0x84];
+    int *tree;
+    char pad88[0x1B2FC - 0x88];
+    f32 minY;
+    char pad1B300[0x1B40C - 0x1B300];
+    s32 group;
+} CollisionBuildWorld;
+extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
 
 #endif

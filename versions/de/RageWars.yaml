@@ -5517,7 +5517,7 @@ segments:
       - [0x1B1600, c, "func_8044B600_de"]
       - [0x1B17C0, c, "func_8044B7C0_de"]
       - [0x1B1E04, c, "func_8044BE04_de"]
-      - [0x1B23D4, asm, "func_8044C3D4_de"]
+      - [0x1B23D4, c, "func_8044C3D4_de"]
       - [0x1B27B8, asm, "func_8044C7B8_de"]
       - [0x1B2D8C, c, "func_8044CD8C_de"]
       - [0x1B3054, c, "func_8044D054_de"]

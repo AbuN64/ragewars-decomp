@@ -4291,6 +4291,7 @@ schema = 1
 "func_8044BE04_de" = { evidence = "landed", signature = "void func_8044BE04_de(Scene_func_8044BE04_de *scene)" }
 "func_8044BF90_de" = { evidence = "landed", signature = "void func_8044BF90_de(func_8044CBE0_S1 *arg0)" }
 "func_8044C108_de" = { evidence = "landed", signature = "void func_8044C108_de(World_func_8044C108_de *world, void ***handle)" }
+"func_8044C3D4_de" = { evidence = "landed", signature = "void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle)" }
 "func_8044CD8C_de" = { evidence = "landed", signature = "void func_8044CD8C_de(Level_func_8044CD8C_de *level)" }
 "func_8044CFF8_de" = { evidence = "landed", signature = "void func_8044CFF8_de(char *state)" }
 "func_8044D054_de" = { evidence = "landed", signature = "void func_8044D054_de(State_func_8044D054_de *arg0)" }
@@ -4404,6 +4405,7 @@ schema = 1
 "sync" = { evidence = "landed", signature = "static inline void sync(void)" }
 "take" = { evidence = "landed", signature = "static inline func_8022BC04_S3 *take(s32 active)" }
 "take_effect" = { evidence = "landed", signature = "static inline Effect_func_80262A9C_de *take_effect(void *scene, s32 *ref)" }
+"testBit" = { evidence = "landed", signature = "static inline s32 testBit(s32 n, u8 *bits)" }
 "test_bit" = { evidence = "landed", signature = "static inline int test_bit(unsigned char *bits, int index)" }
 "toggle" = { evidence = "landed", signature = "static inline void toggle(Menu_func_802A65E0_de *menu, MenuItem *item)" }
 "touch" = { evidence = "landed", signature = "static inline void touch(s32 index, s32 mode)" }
@@ -10018,6 +10020,15 @@ schema = 1
 "Clip" = { declaration = "struct Clip { s16 mode; s16 frames; };", evidence = "authored" }
 "CloseAttackActor" = { declaration = "typedef struct CloseAttackActor CloseAttackActor;", evidence = "authored" }
 "CloseAttackBrain" = { declaration = "typedef struct CloseAttackBrain CloseAttackBrain;", evidence = "authored" }
+"CollisionBuildFace" = { declaration = "typedef Packed CollisionBuildFace;", evidence = "authored" }
+"CollisionBuildHeader" = { declaration = "typedef struct CollisionBuildHeader { s32 count; s32 offsets[5]; } CollisionBuildHeader;", evidence = "authored" }
+"CollisionBuildList" = { declaration = "typedef struct CollisionBuildList { s32 kind; s32 count; CollisionBuildFace items[0]; } CollisionBuildList;", evidence = "authored" }
+"CollisionBuildMeshHandle" = { declaration = "typedef union CollisionBuildMeshHandle { struct Shape_typemap_165 canonical; struct { void *data; s32 size,refs,flags; } payload; } CollisionBuildMeshHandle;", evidence = "authored" }
+"CollisionBuildTriangle" = { declaration = "typedef union CollisionBuildTriangle { struct { u16 kind; u16 flags; CollisionBuildVertex *v[3]; union CollisionBuildTriangle *adj[3]; s32 mask; } fields; Header_func_80275AA4_de canonical; s32 words[8]; } CollisionBuildTriangle;", evidence = "authored" }
+"CollisionBuildTriangleList" = { declaration = "typedef struct CollisionBuildTriangleList { s32 kind,count; CollisionBuildTriangle items[0]; } CollisionBuildTriangleList;", evidence = "authored" }
+"CollisionBuildVertex" = { declaration = "typedef struct CollisionBuildVertex { f32 x; f32 y; char pad8[8]; } CollisionBuildVertex;", evidence = "authored" }
+"CollisionBuildVertexList" = { declaration = "typedef struct CollisionBuildVertexList { s32 kind,count; CollisionBuildVertex items[0]; } CollisionBuildVertexList;", evidence = "authored" }
+"CollisionBuildWorld" = { declaration = "typedef struct CollisionBuildWorld { char pad0[0x84]; int *tree; char pad88[0x1B2FC - 0x88]; f32 minY; char pad1B300[0x1B40C - 0x1B300]; s32 group; } CollisionBuildWorld;", evidence = "authored" }
 "CollisionInfo" = { declaration = "struct CollisionInfo { s32 w[8]; };", evidence = "authored" }
 "CollisionInfo8020CD74" = { declaration = "typedef struct CollisionInfo8020CD74 CollisionInfo8020CD74;", evidence = "authored" }
 "CollisionInfo_func_80246558_de" = { declaration = "typedef struct CollisionInfo_func_80246558_de CollisionInfo_func_80246558_de;", evidence = "authored" }
