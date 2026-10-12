@@ -158,7 +158,7 @@ segments:
       - [0x62F0, c, "func_802056D0_de"]
       - [0x6320, c, "func_80205700_de"]
       - [0x632C, c, "func_8020570C_de"]
-      - [0x6340, asm, "func_80205720_de"]
+      - [0x6340, c, "func_80205720_de"]
       - [0x6AE4, c, "func_80205EC4_de"]
       - [0x6B38, c, "func_80205F18_de"]
       - [0x6C38, c, "func_80206018_de"]

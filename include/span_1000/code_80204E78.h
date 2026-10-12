@@ -5,6 +5,8 @@
 #include "common/types_8a8189af7b05.h"
 #include "resident_event_handler.h"
 #include "types.h"
+#include "audio_callbacks.h"
+#include "common/types_06e4f7ef1f9e.h"
 struct func_8020612C_S3;
 /* unbake published declaration: published_04eb475a6a22b3d188fcac15 */
 struct func_8020612C_S3 {
@@ -429,5 +431,22 @@ typedef struct {
     char pad1C[0xE4];
     s32 flags;
 } Obj54E0;
+
+typedef struct { s16 id, weight; } SpawnChoice;
+typedef struct { u32 flags; s32 kind; u8 unused8[0xC]; s16 id, selector; Vec3 velocity; s16 count; } SpawnDefinition;
+typedef struct { u8 unused0[0x14]; SpawnDefinition spawn; } SpawnDispatchDefinition;
+typedef struct SpawnDispatchActor {
+    u8 unused0[8]; Triple position; void *world; s32 *definition;
+    u8 unused1C[0x184]; s32 state; u8 unused1A4[0x148];
+    struct SpawnDispatchActor *next;
+} SpawnDispatchActor;
+typedef struct {
+    u8 unused0[8]; Vec3 position; void *world; SpawnDispatchDefinition *definition;
+    Vec3 rotation; u8 unused28[0x34]; Vector4f motion; f32 scale;
+} SpawnDispatchObject;
+typedef struct { u8 unused0[0x124]; s32 spawn, remaining; } SpawnDispatchOwner;
+typedef struct { u8 unused0[0x1D]; u8 enabled; } SpawnDispatchConfig;
+extern s32 func_80222D64_de(void *arg0, s32 arg1);
+extern int func_8022ADB0_de(void *object, s32 arg1);
 
 #endif

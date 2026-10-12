@@ -42,6 +42,8 @@ schema = 1
 "append" = { evidence = "landed", signature = "static inline s32 append(ListHeader *list, Link_func_802596B4_de *node)" }
 "apply" = { evidence = "landed", signature = "static inline void apply(Context_func_8025AB94_de *context, s32 slot, f32 value, View_func_8025AB94_de *view)" }
 "apply_pan" = { evidence = "landed", signature = "static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan)" }
+"available" = { evidence = "landed", signature = "static __inline__ s32 available(s32 id)" }
+"availableChoice" = { evidence = "landed", signature = "static __inline__ s32 availableChoice(s32 id)" }
 "beginFrame" = { evidence = "landed", signature = "static inline void beginFrame(void)" }
 "bind" = { evidence = "landed", signature = "static inline void bind(Node_func_80285B64_de *node, s32 offset, s32 id)" }
 "body_setup" = { evidence = "landed", signature = "static inline void *body_setup(char *obj)" }
@@ -50,6 +52,7 @@ schema = 1
 "centered" = { evidence = "landed", signature = "static inline f32 centered(f32 x)" }
 "clear_entry" = { evidence = "landed", signature = "static inline void clear_entry(Entry_func_802A6F68_de *e)" }
 "clear_list" = { evidence = "landed", signature = "static inline void clear_list(ListHeader *list)" }
+"copySpawnId" = { evidence = "landed", signature = "static __inline__ s32 copySpawnId(s32 id)" }
 "copy_part" = { evidence = "landed", signature = "static inline void copy_part(u8 *d, u8 *s, s32 n)" }
 "count_achievements" = { evidence = "landed", signature = "static inline s32 count_achievements(s32 index)" }
 "create_access_queue" = { evidence = "landed", signature = "static inline void create_access_queue(void)" }
@@ -176,6 +179,7 @@ schema = 1
 "func_802056D0_de" = { evidence = "landed", signature = "void func_802056D0_de(void *arg0)" }
 "func_80205700_de" = { evidence = "landed", signature = "unsigned int func_80205700_de(void *object)" }
 "func_8020570C_de" = { evidence = "landed", signature = "int func_8020570C_de(void *arg0)" }
+"func_80205720_de" = { evidence = "landed", signature = "void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner)" }
 "func_80205EC4_de" = { evidence = "landed", signature = "void func_80205EC4_de(void *arg0, void *arg1)" }
 "func_80205F18_de" = { evidence = "landed", signature = "void func_80205F18_de(Actor_func_80205F18_de *actor, Action *action)" }
 "func_80206018_de" = { evidence = "landed", signature = "void func_80206018_de(void *arg0, Event_func_80206018_de *arg1)" }
@@ -4340,6 +4344,17 @@ schema = 1
 "set_mode" = { evidence = "landed", signature = "static inline void set_mode(s32 *var_s0)" }
 "space_required" = { evidence = "landed", signature = "static inline int space_required(int size)" }
 "spawn" = { evidence = "landed", signature = "static inline void spawn(Actor_func_8024A7A0_de *actor)" }
+"spawnBlocked" = { evidence = "landed", signature = "static __inline__ s32 spawnBlocked(void)" }
+"spawnGroup" = { evidence = "landed", signature = "static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwner *owner, Vec3 position, s32 count)" }
+"spawnParticles" = { evidence = "landed", signature = "static __inline__ void spawnParticles(SpawnDispatchObject *object, SpawnDispatchOwner *owner, Vec3 position, Vec3 velocity, s32 type, s32 *entry, void *world)" }
+"spawnSelected" = { evidence = "landed", signature = "static __inline__ void spawnSelected(SpawnDispatchObject *object, SpawnDispatchOwner *owner, s32 id, void *world, Vec3 position)" }
+"spawnTable0" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable0(void)" }
+"spawnTable1" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable1(void)" }
+"spawnTable2" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable2(void)" }
+"spawnTable3" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable3(void)" }
+"spawnTable4" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable4(void)" }
+"spawnTable5" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable5(void)" }
+"spawnTable6" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable6(void)" }
 "spawn_effect" = { evidence = "landed", signature = "static inline Effect_func_80262A9C_de *spawn_effect(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
 "stage_arena" = { evidence = "landed", signature = "static inline s32 stage_arena(s32 cup, s32 stage)" }
 "stamp" = { evidence = "landed", signature = "static inline void stamp(Node_func_80251F6C_de *node)" }
@@ -12263,6 +12278,13 @@ schema = 1
 "Source_func_8026BC60_de" = { declaration = "struct Source_func_8026BC60_de { s32 flags; u16 id; u8 pad6[0x12]; u16 unk18; u16 unk1A; };", evidence = "authored" }
 "Source_func_80419F24_de" = { declaration = "struct Source_func_80419F24_de { char pad[0x78]; struct Resource_func_80419E54_de *target; char pad7C[0x83 - 0x7C]; u8 value; s32 pending; };", evidence = "authored" }
 "Spawn" = { declaration = "typedef struct Spawn Spawn;", evidence = "authored" }
+"SpawnChoice" = { declaration = "typedef struct { s16 id, weight; } SpawnChoice;", evidence = "authored" }
+"SpawnDefinition" = { declaration = "typedef struct { u32 flags; s32 kind; u8 unused8[0xC]; s16 id, selector; Vec3 velocity; s16 count; } SpawnDefinition;", evidence = "authored" }
+"SpawnDispatchActor" = { declaration = "typedef struct SpawnDispatchActor { u8 unused0[8]; Triple position; void *world; s32 *definition; u8 unused1C[0x184]; s32 state; u8 unused1A4[0x148]; struct SpawnDispatchActor *next; } SpawnDispatchActor;", evidence = "authored" }
+"SpawnDispatchConfig" = { declaration = "typedef struct { u8 unused0[0x1D]; u8 enabled; } SpawnDispatchConfig;", evidence = "authored" }
+"SpawnDispatchDefinition" = { declaration = "typedef struct { u8 unused0[0x14]; SpawnDefinition spawn; } SpawnDispatchDefinition;", evidence = "authored" }
+"SpawnDispatchObject" = { declaration = "typedef struct { u8 unused0[8]; Vec3 position; void *world; SpawnDispatchDefinition *definition; Vec3 rotation; u8 unused28[0x34]; Vector4f motion; f32 scale; } SpawnDispatchObject;", evidence = "authored" }
+"SpawnDispatchOwner" = { declaration = "typedef struct { u8 unused0[0x124]; s32 spawn, remaining; } SpawnDispatchOwner;", evidence = "authored" }
 "Spinner" = { declaration = "typedef struct Spinner Spinner;", evidence = "authored" }
 "Spline" = { declaration = "typedef struct Spline Spline;", evidence = "authored" }
 "SplineNode" = { declaration = "struct SplineNode { Vec3 p; Vec3 d2p; f32 s; f32 w; f32 d2s; };", evidence = "authored" }
