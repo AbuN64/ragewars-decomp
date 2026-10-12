@@ -3325,7 +3325,7 @@ segments:
       - [0xCA61C, rodata, "src/rw_pool_802741A4_CA61C_us_rev1.c"]
       - [0xCA620, rodata, "src/rw_pool_80274244_CA620_us_rev1.c"]
       - [0xCA624, rodata, "src/rw_pool_80274380_CA624_us_rev1.c"]
-      - [0xCA630, rodata, "src/rw_pool_80274564_CA630_us_rev1.c"]
+      - [0xCA630, .rodata, "src/rw_pool_80274564_CA630_us_rev1.c"]
       - [0xCA63C, .rodata, "src/rw_pool_802745D0_CA63C_us_rev1.c"]
       - [0xCA650, rodata, "src/rw_pool_802746A0_CA650_us_rev1.c"]
       - [0xCA654, rodata, "src/rw_pool_80274870_CA654_us_rev1.c"]
