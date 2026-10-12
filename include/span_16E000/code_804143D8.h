@@ -45,9 +45,16 @@ extern int D_8014DCE0;
 struct Texture;
 /* unbake published declaration: published_c0ceb6937cee5a470df7fdd5 */
 struct Texture {
-    char pad0[4];
+    u8 unk0;
+    char pad1[3];
     s16 width;
     s16 height;
+    s16 stride;
+    s16 rows;
+    s32 size;
+    s32 flags;
+    void *palette;
+    u32 data;
 };
 
 /* unbake published declaration: published_5cb3d983580ae75047b9c39e */
