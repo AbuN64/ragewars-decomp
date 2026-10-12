@@ -1632,6 +1632,8 @@ schema = 1
 "func_80268CC8_de" = { evidence = "landed", signature = "int func_80268CC8_de(void *arg0, void *arg1)" }
 "func_80268CE0_de" = { evidence = "landed", signature = "void func_80268CE0_de(u32 mode)" }
 "func_8026925C_de" = { evidence = "landed", signature = "s32 func_8026925C_de(s32 arg0)" }
+"func_8026992C_de" = { evidence = "landed", signature = "void func_8026992C_de(void *matrix, s32 pass, u32 alpha)" }
+"func_80269A80_de" = { evidence = "landed", signature = "s32 func_80269A80_de(struct Shared_GfxMaterial *mat, s32 pass)" }
 "func_8026AC38_de" = { evidence = "landed", signature = "void func_8026AC38_de(void)" }
 "func_8026B504_de" = { evidence = "landed", signature = "s32 func_8026B504_de(void *model, void *lights, s32 *flags)" }
 "func_8026B9EC_de" = { evidence = "landed", signature = "void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass)" }

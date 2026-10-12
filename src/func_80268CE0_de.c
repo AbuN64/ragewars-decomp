@@ -259,3 +259,403 @@ s32 func_8026925C_de(s32 arg0) {
 sw_mode_default:
     return 1;
 }
+
+#include "types.h"
+#include "n64sdk.h"
+#include "gbi.h"
+extern Gfx *D_80110634;
+extern u32 D_800D14B0[];
+extern Gfx D_800CC018_de[], D_800CC0A0[];
+extern s32 D_800CC364;
+extern u32 D_800CC360;
+extern void func_80295FF4_de(void);
+/* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
+void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
+    Gfx *list;
+    gDPSetTextureImage(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 1, D_800D14B0);
+    gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+    gDPLoadSync(D_80110634++);
+    gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, 127, 1024);
+    gDPPipeSync(D_80110634++);
+    gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_8b, 2, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
+    gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, 15 << 2, 15 << 2);
+    gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 255, alpha);
+    gSPMatrix(D_80110634++, matrix, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    list = D_800CC018_de;
+    gSPDisplayList(D_80110634++, ({ if (pass != 0) list = D_800CC0A0; list; }));
+    D_800CC364 = -1;
+    D_800CC360 = -1;
+    func_80295FF4_de();
+}
+
+#include "gfx.h"
+#include "gbi.h"
+#include "types.h"
+#include "n64sdk.h"
+
+struct Shared_AnimFrame {
+    u8 kind;
+    u8 unknown1;
+    u8 shiftS;
+    u8 shiftT;
+    u8 unk4;
+    u8 unk5;
+};
+struct Shared_AnimInfo {
+    s32 count;
+    s32 unk4;
+    struct Shared_AnimFrame *frame;
+};
+struct Shared_GfxMaterial {
+    u32 flags;
+    u8 pad4[3];
+    u8 unk7;
+    s32 unk8;
+    u8 padC[4];
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+    u8 unk17;
+    u16 unk18;
+    u16 unk1A;
+};
+
+extern Gfx *D_80110634;
+extern s32 D_80110620;
+extern s32 D_801462C8;
+extern u32 D_800CD730;
+extern s32 D_800CC378;
+extern s32 D_800CC37C;
+extern s32 D_800CC384;
+extern s32 D_800D15E0;
+extern f32 D_800D15E4[5];
+extern u8 D_800CC3A8;
+extern u8 D_800CC3A9;
+extern u8 D_800CC3AA;
+extern u8 D_800CC3AB;
+extern u8 D_800CC3AC;
+extern u8 D_800CC3AD;
+
+void *func_80295F14_de(s32 *, s32);
+void func_80295F78_de(void *, struct Shared_AnimInfo *);
+#if defined(VERSION_US_REV1)
+void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+#else
+void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
+#endif
+void func_80268CE0_de(u32);
+s32 func_8026925C_de(s32);
+void func_80253754_de(s32, void *);
+s32 func_802744D4_de(void);
+
+s32 func_80269A80_de(struct Shared_GfxMaterial *mat, s32 pass) {
+    struct Shared_AnimInfo info;
+    void *node;
+    u32 flags;
+    s32 tailEnum;
+    s32 a;
+    s32 b;
+    s32 idx;
+    u32 maskS;
+    u32 maskT;
+    u32 extra;
+    u32 extra2;
+    u32 mode;
+
+    flags = mat->flags;
+    if (D_80110620 != 0 && (flags & 0x8040) != 0x8000) {
+        flags |= 2;
+    }
+    if ((flags & 0x100) && mat->unk13 == 0) {
+        return 0;
+    }
+    tailEnum = -1;
+    if (mat->unk8 != 0 && !(D_801462C8 & 0x400) && !(D_80110620 != 0 && (flags & 0x8000))) {
+        node = func_80295F14_de(&mat->unk8, pass);
+        if (node == 0) {
+            return 0;
+        }
+        func_80295F78_de(node, &info);
+        switch (pass) {
+            case -2:
+                if (info.count < 2) {
+                    a = 0;
+                    b = 0;
+                    break;
+                }
+                idx = (u8)(D_800CD730 / info.frame->unknown1);
+                if (mat->unk7 != idx) {
+a = func_802744D4_de() % info.count;
+ if (info.unk4 != 0) { b = a; if (b >= info.unk4) { b = 0; } } else { b = 0; }
+                    mat->unk7 = idx;
+                } else {
+                    a = idx % info.count;
+                    b = info.unk4 ? idx % info.unk4 : 0;
+                }
+                break;
+            case -1:
+                idx = D_800CD730 / info.frame->unknown1;
+                a = idx % info.count;
+                b = (info.unk4 == 0) ? 0 : idx % info.unk4;
+                break;
+            default:
+                a = pass % info.count;
+                if (info.unk4 != 0) {
+                    b = pass % info.unk4;
+                } else {
+                    b = 0;
+                }
+                break;
+        }
+        if (flags & 0x10) {
+            maskS = 1 << (info.frame->shiftS + 6);
+            maskT = 1 << (info.frame->shiftT + 6);
+        } else {
+            maskS = mat->unk18;
+            maskT = mat->unk1A;
+        }
+        if (flags & 0x20) {
+            extra = G_TX_CLAMP;
+            extra2 = G_TX_CLAMP;
+        } else {
+            extra = G_TX_WRAP;
+            extra2 = G_TX_WRAP;
+        }
+        if (flags & 0x800) {
+            extra |= G_TX_MIRROR;
+            extra2 |= G_TX_MIRROR;
+        }
+#if defined(VERSION_US_REV1)
+        func_80295FB4_us_rev1(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
+    #else
+        func_802950B4_de(&mat->unk8, node, a, b, maskS, maskT, extra, extra2, 0);
+    #endif
+        if (flags & 0x2000) {
+            gDPSetTextureLOD(D_80110634++, G_TL_LOD);
+        }
+        if (D_80110620 != 0) {
+            u32 avg = (u32)(mat->unk10 + mat->unk11 + mat->unk12) / 3;
+            gDPSetPrimColor(D_80110634++, info.frame->unk4, 0, 0, 0, avg, mat->unk13);
+        } else {
+            gDPSetPrimColor(D_80110634++, info.frame->unk4, 0, mat->unk10, mat->unk11, mat->unk12, mat->unk13);
+        }
+        if (flags & 0x400) {
+            if (D_80110620 != 0) {
+                u32 avg = (u32)(mat->unk14 + mat->unk15 + mat->unk16) / 3;
+                gDPSetEnvColor(D_80110634++, 0, 0, avg, D_800D15E0 == 0 ? mat->unk13 : D_800D15E4[3]);
+            } else {
+                gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, D_800D15E0 == 0 ? mat->unk13 : D_800D15E4[3]);
+            }
+            if (flags & 2) {
+                if (!(flags & 0x1000)) {
+                    func_80268CE0_de(2);
+                } else if (D_800D15E0 == 0) {
+                    func_80268CE0_de(0);
+                } else {
+                    func_80268CE0_de(1);
+                }
+            } else if (!(flags & 0x1000)) {
+                func_80268CE0_de(4);
+            } else {
+                func_80268CE0_de(3);
+            }
+            func_80253754_de(0, node);
+        } else if (flags & 2) {
+            if (flags & 0x2000) {
+                switch (info.frame->unk5) {
+                    case 4:
+                    case 5:
+                        gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
+                        func_80268CE0_de(0x23);
+                        break;
+                    default:
+                        func_80268CE0_de(5);
+                        break;
+                }
+            } else if (D_800D15E0 == 0) {
+                func_80268CE0_de(6);
+            } else {
+                gDPSetEnvColor(D_80110634++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
+                switch (D_800D15E0) {
+                    case 1:
+                    case 2:
+                        func_80268CE0_de(7);
+                        break;
+                    case 3:
+                        func_80268CE0_de(8);
+                        break;
+                    case 7:
+                        func_80268CE0_de(9);
+                        break;
+                    case 4:
+                    case 5:
+                        func_80268CE0_de(10);
+                        break;
+                    case 6:
+                        gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
+                        func_80268CE0_de(0xB);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            func_80253754_de(0, node);
+        } else {
+            if (flags & 0x2000) {
+                switch (info.frame->unk5) {
+                    case 4:
+                        gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
+                        func_80268CE0_de(0x25);
+                        break;
+                    case 5:
+                        gDPSetEnvColor(D_80110634++, mat->unk14, mat->unk15, mat->unk16, mat->unk17);
+                        func_80268CE0_de(0x24);
+                        break;
+                    default:
+                        func_80268CE0_de(0xC);
+                        break;
+                }
+            } else if (D_800D15E0 == 0) {
+                func_80268CE0_de(0xD);
+            } else {
+                gDPSetEnvColor(D_80110634++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
+                switch (D_800D15E0) {
+                    case 1:
+                    case 2:
+                        func_80268CE0_de(0xE);
+                        break;
+                    case 3:
+                        func_80268CE0_de(0xF);
+                        break;
+                    case 7:
+                        func_80268CE0_de(9);
+                        break;
+                    case 4:
+                    case 5:
+                        func_80268CE0_de(0x10);
+                        break;
+                    case 6:
+                        gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
+                        func_80268CE0_de(0x11);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            func_80253754_de(0, node);
+        }
+    } else {
+        gDPPipeSync(D_80110634++);
+        if (D_800CC3A8 != 0) {
+            if (D_800CC3AC != 0) {
+                gDPSetPrimColor(D_80110634++, 0, 0, D_800CC3A9, D_800CC3AA, D_800CC3AB, D_800CC3AD);
+            } else {
+                gDPSetPrimColor(D_80110634++, 0, 0, D_800CC3A9, D_800CC3AA, D_800CC3AB, mat->unk13);
+            }
+        } else if (D_800CC3AC != 0) {
+            gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800CC3AD);
+        } else if (flags & 0x8000) {
+            if (flags & 0x40) {
+                gDPSetPrimColor(D_80110634++, 0, 0, 255, 0, 0, mat->unk13);
+            } else {
+                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 0, mat->unk13);
+            }
+        } else {
+            gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, mat->unk13);
+        }
+        gSPTexture(D_80110634++, 0, 0, 0, 0, 0);
+        if (flags & 2) {
+            func_80268CE0_de(0x12);
+        } else if (D_800D15E0 == 0) {
+            func_80268CE0_de(0x13);
+        } else {
+            gDPSetEnvColor(D_80110634++, D_800D15E4[0], D_800D15E4[1], D_800D15E4[2], D_800D15E4[3]);
+            switch (D_800D15E0) {
+                case 1:
+                case 2:
+                    func_80268CE0_de(0x14);
+                    break;
+                case 3:
+                    func_80268CE0_de(0x15);
+                    break;
+                case 7:
+                    func_80268CE0_de(0x16);
+                    break;
+                case 4:
+                case 5:
+                    func_80268CE0_de(0x17);
+                    break;
+                case 6:
+                    gDPSetPrimColor(D_80110634++, 0, 0, mat->unk10, mat->unk11, mat->unk12, D_800D15E4[4]);
+                    func_80268CE0_de(0x11);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    if ((flags & 0x100) || D_800D15E0 == 1 || D_800D15E0 == 4 || D_800D15E0 == 6) {
+        if (D_800D15E0 == 0) {
+            tailEnum = 3;
+            if (!(flags & 0x1000)) {
+                tailEnum = 1;
+                if (flags & 0x200) {
+                    tailEnum = 4;
+                }
+            }
+        } else {
+            tailEnum = 5;
+            if (flags & 0x1000) {
+                tailEnum = 3;
+            }
+        }
+    } else if (flags & 0x80) {
+        func_8026925C_de(6);
+    } else {
+        tailEnum = 7;
+        if (!(flags & 0x200)) {
+            if (D_800CC378 != 0) {
+                tailEnum = 9;
+                if (D_800CC37C != 0) {
+                    tailEnum = 8;
+                }
+            } else {
+                tailEnum = 0xB;
+                if (D_800CC37C != 0) {
+                    tailEnum = 10;
+                }
+            }
+        }
+    }
+    if (tailEnum != -1) {
+        func_8026925C_de(tailEnum);
+    }
+    mode = 0x260404;
+    if (flags & 0x1000) {
+        mode |= D_800CC384;
+    }
+    gSPGeometryMode(D_80110634++, mode, 0);
+    mode = 0;
+    if (!(flags & 0x1000)) {
+        mode = D_800CC384;
+    }
+    if (D_800D15E0 == 7) {
+        mode |= 0x20000;
+    }
+    if (!(flags & 0x42)) {
+        mode |= 0x20000;
+    }
+    mode |= 0x200004;
+    if (!(flags & 4)) {
+        mode |= 0x400;
+    }
+    if (flags & 0x10) {
+        mode |= 0x60000;
+    }
+    gSPGeometryMode(D_80110634++, 0, mode);
+    return 1;
+}
