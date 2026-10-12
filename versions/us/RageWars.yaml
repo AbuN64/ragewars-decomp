@@ -3984,7 +3984,7 @@ segments:
       - [0xDCD04, data, "data/unresolved/800DC104"]
       - [0xDCD10, .rodata, "src/rw_text_8041C610_E2090_us_rev1.c"]
       - [0xDCD22, data, "rodata/unresolved/800DC122"]
-      - [0xDCD24, rodata, "src/rw_text_8041C610_E20A4_us_rev1.c"]
+      - [0xDCD24, .rodata, "src/rw_text_8041C610_E20A4_us_rev1.c"]
       - [0xDCD35, data, "rodata/unresolved/800DC135"]
       - [0xDCD38, rodata, "src/rw_pool_8041C7F4_E20B8_us_rev1.c"]
       - [0xDCD40, rodata, "src/rw_pool_8041CAD8_E20C0_us_rev1.c"]
