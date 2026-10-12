@@ -2580,7 +2580,7 @@ schema = 1
 "func_802A7654_de" = { evidence = "landed", signature = "void func_802A7654_de(void)" }
 "func_802A7660_de" = { evidence = "landed", signature = "void func_802A7660_de(Hud *hud, s32 which)" }
 "func_802A7AA4_de" = { evidence = "landed", signature = "void func_802A7AA4_de(Mover *m)" }
-"func_802A7DE4_de" = { evidence = "authored", signature = "void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32)" }
+"func_802A7DE4_de" = { evidence = "landed", signature = "void func_802A7DE4_de(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,s32 green,s32 blue,s32 alpha)" }
 "func_802A822C_de" = { evidence = "landed", signature = "void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32 rightAlign, s32 minDigits)" }
 "func_802A84F8_de" = { evidence = "landed", signature = "void func_802A84F8_de(void)" }
 "func_802A8710_de" = { evidence = "landed", signature = "void func_802A8710_de(void)" }
@@ -4363,6 +4363,7 @@ schema = 1
 "quatToMtx" = { evidence = "landed", signature = "static inline void quatToMtx(PoseMatrix m, Vector4f *q, Vec3 *t)" }
 "randVec" = { evidence = "landed", signature = "static inline Vec3 randVec(void)" }
 "record32" = { evidence = "landed", signature = "static __inline__ void *record32(void)" }
+"rectangle" = { evidence = "landed", signature = "static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a)" }
 "recycle" = { evidence = "landed", signature = "static inline Message *recycle(void *owner, void *pool)" }
 "release" = { evidence = "landed", signature = "static inline void release(s32 node)" }
 "releaseState" = { evidence = "landed", signature = "static inline void releaseState(struct RespawnCarried *carried, struct RespawnFlags *state)" }
