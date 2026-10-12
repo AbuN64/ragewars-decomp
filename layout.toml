@@ -5194,6 +5194,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CD400"
+segment = "span_C76B0"
+members = ["src/rw_actor_state_entry_CE000_us_rev1.c", "rodata/unresolved/800CD3C0_unclaimed_CDFEC_unclaimed_CE000_unclaimed_CE00C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CD484"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CD3C0_unclaimed_CDFEC_unclaimed_CE000_unclaimed_CE00C_unclaimed_CE020_unclaimed_CE02C_unclaimed_CE040_unclaimed_CE04C_unclaimed_CE060_unclaimed_CE06C_unclaimed_CE080_unclaimed_CE084"]
@@ -54892,6 +54900,17 @@ path = "src/rw_actor_state_animation_CE224_us_rev1.c"
 kind = "data"
 group = "data_800CD61C"
 members = ["src/rw_actor_state_animation_CE224_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_actor_state_entry_CE000_us_rev1.c"
+kind = "data"
+group = "data_800CD400"
+members = ["src/rw_actor_state_entry_CE000_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
