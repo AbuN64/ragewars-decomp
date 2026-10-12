@@ -1,77 +1,23 @@
-#include "common/types_1dc8418c21db.h"
-#include "common/unused.h"
-#include "resident_event_handler.h"
-#include "shared/func_802B80B4_eu_closed.h"
-#include "span_1000/code_80200610.h"
 #include "types.h"
-s32 func_802B8CF0_de(void *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+#include "n64sdk.h"
+extern s32 D_800C8140_de;
+extern u8 D_800F2CE0[],D_800F2CC0[];
+extern u8 func_80200840_de(u32);
 
-extern s32 D_800F2CC0;
-extern s32 D_800F2CE0;
-
-void func_8020095C_de(s32 arg0, s8 *arg1, u32 arg2) {
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 var_s2;
-    s32 var_s3;
-    s32 var_v0;
-    s32 var_v0_2;
-    s8 *var_s0;
-    u32 var_s1;
-    u8 temp_v0;
-    void *temp_s0;
-    void *temp_s0_2;
-
-    var_s2 = arg0;
-    var_s0 = arg1;
-    var_s1 = arg2;
-    var_s3 = -(D_800C8140_de == 0);
-    if (var_s1 != 0) {
-loop_1:
-        temp_a0 = var_s2;
-        if (var_s2 & 3) {
-            var_s2 += 1;
-            *var_s0 = func_80200840_de(temp_a0);
-            var_s1 -= 1;
-            var_s0 += 1;
-            if (var_s1 != 0) {
-                goto loop_1;
-            }
-        }
-    }
-    if (var_s1 >= 4U) {
-        var_v0 = var_s1 < 0x10U;
-        do {
-            if ((var_v0 == 0) && (!((s32) var_s0 & 0xF) & (~var_s3 != 0))) {
-                var_s3 = func_802B8CF0_de(&D_800F2CE0, 1, 0, var_s2, (s32) var_s0, var_s1, &D_800F2CC0);
-                var_v0_2 = var_s1 < 4U;
-                if (var_s3 != -1) {
-                    func_802BB2A0_de((s32) &D_800F2CC0, 0, 1);
-                    var_s1 = 0;
-                    goto block_10;
-                }
-            } else {
-                temp_v0 = func_802005A0_de(var_s2);
-                var_s0[0] = (s8) (temp_v0 >> 0x18);
-                var_s0[1] = (s8) (temp_v0 >> 0x10);
-                var_s0[2] = (s8) (temp_v0 >> 8);
-                var_s0[3] = (u8) temp_v0;
-                var_s0 += 4;
-                var_s2 += 4;
-                var_s1 -= 4;
-block_10:
-                var_v0_2 = var_s1 < 4U;
-            }
-            var_v0 = var_s1 < 0x10U;
-        } while (var_v0_2 == 0);
-    }
-    if (var_s1 != 0) {
-        do {
-            temp_a0_2 = var_s2;
-            var_s2 += 1;
-            *var_s0 = func_80200840_de(temp_a0_2);
-            var_s1 -= 1;
-            var_s0 += 1;
-        } while (var_s1 != 0);
-    }
+extern s32 func_802B8CF0_de(void *,s32,s32,u32,void *,u32,void *);
+extern void func_802BB2A0_de(void *,void *,s32);
+void func_8020095C_de(u32 address,u8 *out,u32 count) {
+ s32 status = -(D_800C8140_de == 0); u32 word;
+ while(count!=0 && (address&3)!=0) { *out++=func_80200840_de(address++); count--; }
+ while(count>3) {
+  if(count<16 || (((u32)out&15)!=0 || status==-1)) {
+   word=func_802005A0_de(address);
+   *out++=word>>24; *out++=word>>16; *out++=word>>8; *out++=word;
+   address+=4; count-=4;
+  } else {
+   status=func_802B8CF0_de(D_800F2CE0,1,0,address,out,count,D_800F2CC0);
+   if(status!=-1) { func_802BB2A0_de(D_800F2CC0,0,1); count=0; }
+  }
+ }
+ while(count!=0) { *out++=func_80200840_de(address++); count--; }
 }
