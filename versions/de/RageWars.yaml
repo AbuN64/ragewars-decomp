@@ -4408,7 +4408,7 @@ segments:
       - [0x16B454, c, "func_80405454_de"]
       - [0x16B8B0, asm, "func_804058B0_de"]
       - [0x16BCA8, c, "func_80405CA8_de"]
-      - [0x16BDB4, data, "rodata/unresolved/80405DB4"]
+      - [0x16BDB4, .data, "rodata/unresolved/80405DB4"]
       - [0x16BDC0, asm, "func_80405DC0_de"]
       - [0x16BF48, asm, "func_80405F48_de"]
       - [0x16C178, asm, "func_80406178_de"]

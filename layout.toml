@@ -4498,6 +4498,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800C8554"
+segment = "span_C2860"
+members = ["rodata/unresolved/800C8554"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800C8557"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800C8557", "data/unresolved/800C8558"]
@@ -17450,6 +17458,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800DCC34"
+segment = "span_C24F0"
+members = ["rodata/unresolved/800DCC34"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800DCC3C"
 segment = "span_DD83C"
 members = ["rodata/unresolved/800DCC3C"]
@@ -21722,6 +21738,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_802192B4"
+segment = "span_1000"
+members = ["rodata/unresolved/802192B4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_8023F724"
 segment = "span_1000"
 members = ["rodata/unresolved/8023F724"]
@@ -21994,6 +22018,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_80405DB4"
+segment = "span_166000"
+members = ["rodata/unresolved/80405DB4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_80412D5C"
 segment = "span_164000"
 members = ["rodata/unresolved/80412D5C"]
@@ -22085,6 +22117,14 @@ sdk = false
 name = "data_80423C18"
 segment = "span_164000"
 members = ["rodata/unresolved/80423C18"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_804245B8"
+segment = "span_164000"
+members = ["rodata/unresolved/804245B8"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -68949,6 +68989,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800C8554.c"
+kind = "data"
+group = "data_800C8554"
+members = ["rodata/unresolved/800C8554"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800C8557.c"
 kind = "data"
 group = "data_800C8557"
@@ -76296,6 +76347,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800DCC34.c"
+kind = "data"
+group = "data_800DCC34"
+members = ["rodata/unresolved/800DCC34"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800DCC3C.c"
 kind = "data"
 group = "data_800DCC3C"
@@ -79792,6 +79854,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.802192B4.c"
+kind = "data"
+group = "data_802192B4"
+members = ["rodata/unresolved/802192B4"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.8023F724.c"
 kind = "data"
 group = "data_8023F724"
@@ -80100,6 +80173,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.80405DB4.c"
+kind = "data"
+group = "data_80405DB4"
+members = ["rodata/unresolved/80405DB4"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.80412D5C.c"
 kind = "data"
 group = "data_80412D5C"
@@ -80181,6 +80265,17 @@ path = "src/rodata.unresolved.80423C18.c"
 kind = "data"
 group = "data_80423C18"
 members = ["rodata/unresolved/80423C18"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.804245B8.c"
+kind = "data"
+group = "data_804245B8"
+members = ["rodata/unresolved/804245B8"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
