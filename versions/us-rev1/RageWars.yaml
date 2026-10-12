@@ -351,7 +351,7 @@ segments:
       - [0x13A04, .data, "func_80212E24_eu_x_padding_13A04"]
       - [0x013A10, c, "func_80212E30_eu_x"]
       - [0x13BBC, c, "func_80212FDC_eu"]
-      - [0x13BD4, data, "func_80212FBC_de_padding_13BD4"]
+      - [0x13BD4, .data, "func_80212FBC_de_padding_13BD4"]
       - [0x013BE0, c, "func_80212FBC_de"]
       - [0x13DAC, c, "func_802131AC_de"]
       - [0x13DD8, data, "func_802131D8_de_padding_13DD8"]

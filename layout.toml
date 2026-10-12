@@ -9650,6 +9650,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_80212FD4"
+segment = "span_1000"
+members = ["func_80212FBC_de_padding_13BD4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_8023F724"
 segment = "span_1000"
 members = ["rodata/unresolved/8023F724"]
@@ -13285,6 +13293,17 @@ group = "code_80212C90"
 members = ["func_80212FBC_de"]
 toolchain = "gcc-2.8.1-sn64"
 withheld = ["de"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_80212FBC_de_padding_13BD4.c"
+kind = "data"
+group = "data_80212FD4"
+members = ["func_80212FBC_de_padding_13BD4"]
+toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
 add = []
