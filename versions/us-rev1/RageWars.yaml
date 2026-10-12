@@ -5924,7 +5924,7 @@ segments:
 
       - [0xE4A6C, .data, "src/ragewars_character_preview_positions_09_us_rev1.c"]
 
-      - [0xE4A9C, data, "src/ragewars_character_preview_lights_09_us_rev1.c"]
+      - [0xE4A9C, .data, "src/ragewars_character_preview_lights_09_us_rev1.c"]
 
       - [0xE4AAC, data, "rodata/unresolved/800E3A7F_remaining_E4680_unclaimed_E4A9C_unclaimed_E4AAC"]
 
