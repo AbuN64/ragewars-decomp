@@ -5460,7 +5460,7 @@ segments:
       - [0x1ABF80, c, "func_80445F80_de"]
       - [0x1ACA1C, asm, "func_80446A1C_de"]
       - [0x1ACA20, c, "func_80446A20_de"]
-      - [0x1ACC5C, asm, "func_80446C5C_de"]
+      - [0x1ACC5C, .data, "func_80446C5C_de"]
       - [0x1ACC60, c, "func_80446C60_de"]
       - [0x1ACD78, asm, "func_80446D78_de"]
       - [0x1ACD80, c, "func_80446D80_de"]

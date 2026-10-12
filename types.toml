@@ -3631,6 +3631,7 @@ schema = 1
 "func_80426004_de" = { evidence = "landed", signature = "s32 func_80426004_de(s32 arg0)" }
 "func_80426090_de" = { evidence = "landed", signature = "void func_80426090_de(Arg *arg0)" }
 "func_80426174_de" = { evidence = "landed", signature = "void func_80426174_de(Player_func_80426174_de *p)" }
+"func_80426274_de" = { evidence = "declared", signature = "s32 func_80426274_de(void)" }
 "func_80426788_de" = { evidence = "landed", signature = "s32 func_80426788_de(void)" }
 "func_80426918_de" = { evidence = "landed", signature = "s32 func_80426918_de(void *arg0, void *arg1, s32 delta)" }
 "func_80426CE4_de" = { evidence = "landed", signature = "s32 func_80426CE4_de(void *arg0, void *arg1, s32 event)" }
