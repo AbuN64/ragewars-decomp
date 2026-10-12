@@ -3732,7 +3732,7 @@ segments:
       - [0xCD178, rodata, "src/rw_pool_802AE824_CD178_us_rev1.c"]
       - [0xCD184, data, "rodata/unresolved/800CC584"]
       - [0xCD188, rodata, "src/rw_pool_802AE824_CD188_us_rev1.c"]
-      - [0xCD194, data, "rodata/unresolved/800CC594"]
+      - [0xCD194, .data, "rodata/unresolved/800CC594"]
       - [0xCD1A0, rodata, "rodata/shared/800CC5A0"]
       - [0xCD1A3, data, "rodata/unresolved/800CC5A3"]
       - [0xCD1A4, .rodata, "rodata/shared/800CC5A4"]
