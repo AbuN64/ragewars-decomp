@@ -5128,7 +5128,7 @@ segments:
       - [0xD357B, data, "rodata/unresolved/800D297B"]
       - [0xD357C, data, "rodata/writable/800D297C"]
       - [0xD3588, rodata, "rodata/func_8028D67C_de/800D2988"]
-      - [0xD358C, data, "rodata/unresolved/800D298C"]
+      - [0xD358C, .data, "rodata/unresolved/800D298C"]
       - [0xD3598, data, "rodata/unresolved/800D2998"]
       - [0xD359C, data, "rodata/writable/800D299C"]
       - [0xD35D8, data, "src/ragewars_mode_lifecycle_handlers_D35D8_us_rev1.c"]
