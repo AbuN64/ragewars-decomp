@@ -1,3 +1,3 @@
-unsigned int D_auto_data_unresolved_800C5D94[3] = {
+unsigned int D_d1_a8fd20491c4f9131[3] = {
     0x4154415C, 0x54536372, 0x65644461,
 };
