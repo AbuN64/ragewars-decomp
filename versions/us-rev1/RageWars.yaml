@@ -5073,7 +5073,7 @@ segments:
       - [0xD1978, data, "rodata/unresolved/800D0D78"]
       - [0xD1990, data, "rodata/writable/800D0D90"]
       - [0xD19A0, rodata, "src/rw_pool_8025F434_D19A0_us_rev1.c"]
-      - [0xD19A4, data, "rodata/unresolved/800D0DA4"]
+      - [0xD19A4, .data, "rodata/unresolved/800D0DA4"]
       - [0xD19B0, .data, "src/ragewars_controller_button_remap_us_rev1.c"]
       - [0xD1A48, data, "rodata/unresolved/800D0DA4_unclaimed_D1A48"]
       - [0xD1A50, data, "rodata/writable/800D0E50"]
