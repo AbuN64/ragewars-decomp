@@ -58097,6 +58097,11 @@ path = "src/fuzzy/func_8044A370_de.c"
 scores = {de = 0.7771428571428571, eu = 0.7771428571428571, eu-x = 0.7771428571428571, us = 0.7771428571428571, us-rev1 = 0.7771428571428571}
 
 [[fuzzy]]
+member = "func_8044DE7C_de"
+path = "src/fuzzy/func_8044DE7C_de.c"
+scores = {de = 0.7777777777777778, eu = 0.7777777777777778, eu-x = 0.7777777777777778, us = 0.7777777777777778, us-rev1 = 0.7777777777777778}
+
+[[fuzzy]]
 member = "rodata/writable/800D94E8"
 path = "src/fuzzy/rodata.writable.800D4168.c"
 scores = {de = 0.9534883720930233, eu = 0.9534883720930233, eu-x = 0.9534883720930233, us = 0.9534883720930233}
