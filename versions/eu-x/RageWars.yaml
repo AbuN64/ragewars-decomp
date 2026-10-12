@@ -3660,7 +3660,7 @@ segments:
       - [0xC95FC, data, "rodata/unresolved/800C89FC"]
       - [0xC9600, rodata, "rodata/shared/800CC690"]
       - [0xC9603, data, "rodata/unresolved/800C8A03"]
-      - [0xC9604, rodata, "rodata/shared/800CC694"]
+      - [0xC9604, .rodata, "rodata/shared/800CC694"]
       - [0xC9616, data, "rodata/unresolved/800C8A16"]
       - [0xC9618, rodata, "rodata/func_802B0554_de/800CC6A8"]
       - [0xC9680, rodata, "src/rw_pool_802B0C94_CD310_us_rev1.c"]

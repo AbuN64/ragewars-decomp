@@ -3605,7 +3605,7 @@ segments:
       - [0xC7F5C, data, "rodata/unresolved/800C735C"]
       - [0xC7F60, rodata, "rodata/shared/800CC690"]
       - [0xC7F63, data, "rodata/unresolved/800C7363"]
-      - [0xC7F64, rodata, "rodata/shared/800CC694"]
+      - [0xC7F64, .rodata, "rodata/shared/800CC694"]
       - [0xC7F76, data, "rodata/unresolved/800C7376"]
       - [0xC7F78, rodata, "rodata/func_802B0554_de/800CC6A8"]
       - [0xC7FE0, rodata, "src/rw_pool_802B0C94_CD310_us_rev1.c"]

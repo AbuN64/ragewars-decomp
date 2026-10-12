@@ -3746,7 +3746,7 @@ segments:
       - [0xCD28C, data, "rodata/unresolved/800CC68C"]
       - [0xCD290, rodata, "rodata/shared/800CC690"]
       - [0xCD293, data, "rodata/unresolved/800CC693"]
-      - [0xCD294, rodata, "rodata/shared/800CC694"]
+      - [0xCD294, .rodata, "rodata/shared/800CC694"]
       - [0xCD2A6, data, "rodata/unresolved/800CC6A6"]
       - [0xCD2A8, rodata, "rodata/func_802B0554_de/800CC6A8"]
       - [0xCD310, rodata, "src/rw_pool_802B0C94_CD310_us_rev1.c"]
