@@ -3506,7 +3506,7 @@ segments:
       - [0xCB030, rodata, "rodata/func_8028E284_de/800CA430"]
       - [0xCB034, data, "rodata/unresolved/800CA434"]
       - [0xCB040, rodata, "src/rw_pool_8028E930_CB040_us_rev1.c"]
-      - [0xCB044, rodata, "src/rw_pool_8028EDA0_CB044_us_rev1.c"]
+      - [0xCB044, .rodata, "src/rw_pool_8028EDA0_CB044_us_rev1.c"]
       - [0xCB054, rodata, "src/rw_pool_8028F278_CB054_us_rev1.c"]
       - [0xCB058, rodata, "rodata/func_8028F544_de/800CA458"]
       - [0xCB074, data, "rodata/unresolved/800CA474"]
