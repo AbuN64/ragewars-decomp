@@ -6666,7 +6666,7 @@ segments:
       - [0x18BE64, c, "func_8041DDF4_de"]
       - [0x18BECC, c, "func_8041DE5C_de"]
       - [0x18BF04, c, "func_8041DE94_de"]
-      - [0x18BFB4, data, "func_8041DFB4_us_rev1_padding_18BFB4"]
+      - [0x18BFB4, .data, "func_8041DFB4_us_rev1_padding_18BFB4"]
       - [0x18BFC0, asm, "func_8041DFC0_us_rev1"]
       - [0x18C170, c, "func_8041E100_de"]
       - [0x18C478, asm, "func_8041E408_de"]
