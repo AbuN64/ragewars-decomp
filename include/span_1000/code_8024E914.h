@@ -3,6 +3,9 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "gfx.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_802508E0.h"
+#include "types.h"
 /* unbake published declaration: published_01d743b79ba7ac1c4e1599d2 */
 extern void func_8024F5A0_de(void *arg0);
 
@@ -440,5 +443,19 @@ struct func_8024F8CC_S1 {
 struct func_8024EF18_S1;
 /* unbake published declaration: published_ff9f91b47a0303c8b6df357b */
 typedef struct func_8024EF18_S1 func_8024EF18_S1;
+
+typedef struct ResourceObject23 {
+    s8 pad0;
+    s8 type;
+    char pad2[0x50-2];
+    s32 model;
+    s32 loadedType;
+    s32 resourceName;
+    s32 resourceSize;
+    Node_func_80251F6C_de *blockNode;
+} ResourceObject23;
+extern char D_0024F8DC;
+extern char D_800C3DAC_de;
+extern char D_800C8ED0;
 
 #endif

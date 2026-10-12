@@ -542,7 +542,7 @@ struct ObjB {
 extern void func_8044D1B4_de(char *);
 extern void func_8044CFF8_de(char *);
 extern void func_8020A604_de(void *);
-extern s32 func_802540F4_de(s32,void **,s32,void *,s32);
+extern void **func_802540F4_de(s32,void **,s32,void *,s32);
 extern void func_8044B600_de(void *,void *,s32);
 extern s32 D_0044D804;
 extern s32 D_0044D934;

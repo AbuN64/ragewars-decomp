@@ -15,7 +15,7 @@ extern char D_800C3EA0_de;
 extern Queue_func_802517B4_de D_80101140;
 
 
-s32 func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
+void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
     void **resource;
     s32 size;
     s32 counter;
@@ -49,7 +49,7 @@ s32 func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
                                  0, 0, 0, arg3, arg4);
         if (resource != 0) {
             *arg1 = *resource;
-            return (s32)resource;
+            return resource;
         }
     }
     return 0;

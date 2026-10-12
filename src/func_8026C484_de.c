@@ -3,7 +3,7 @@
 
 void func_80253670_de(void *, void *);
 void func_80253754_de(void *, void *);
-s32 func_802540F4_de(s32, void **, s32, void *, s32);
+void **func_802540F4_de(s32, void **, s32, void *, s32);
 void func_8026BC60_de(void);
 char * func_8028FDB4_de(int *, int);
 int func_8028FE28_de(int *, int, int);

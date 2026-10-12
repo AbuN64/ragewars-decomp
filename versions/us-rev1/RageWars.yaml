@@ -1039,7 +1039,7 @@ segments:
       - [0x4F980, c, "func_8024ED90_de"]
       - [0x4FB18, c, "func_8024EF28_de"]
       - [0x4FCF8, c, "func_8024F108_de"]
-      - [0x4FE84, asm, "func_8024F294_de"]
+      - [0x4FE84, c, "func_8024F294_de"]
       - [0x50060, c, "func_8024F470_de"]
       - [0x50534, asm, "func_8024F984_eu_x"]
       - [0x50540, c, "func_8024F960_eu"]
