@@ -20868,6 +20868,7 @@ us-rev1 = 0x800CA01C
 [symbol.D_800C4F50_de]
 kind = "data"
 de = 0x800C4F50
+eu = 0x800C5200
 
 [symbol.D_800C4F60_de]
 kind = "data"
