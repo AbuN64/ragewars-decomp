@@ -3409,7 +3409,7 @@ segments:
       - [0xC6095, data, "rodata/unresolved/800C5495"]
       - [0xC6098, rodata, "src/rw_text_8028BEAC_CAED8_us_rev1.c"]
       - [0xC60A3, data, "rodata/unresolved/800C54A3"]
-      - [0xC60A4, rodata, "src/rw_constants_8044C7B8_CAEE4_us_rev1.c"]
+      - [0xC60A4, .rodata, "src/rw_constants_8044C7B8_CAEE4_us_rev1.c"]
       - [0xC60B8, rodata, "src/rw_pool_8028798C_CAEF8_us_rev1.c"]
       - [0xC60BC, rodata, "src/rw_pool_80287F18_CAEFC_us_rev1.c"]
       - [0xC60C0, rodata, "rodata/shared/800CA300"]

@@ -3422,7 +3422,7 @@ segments:
       - [0xC60D5, data, "rodata/unresolved/800C54D5"]
       - [0xC60D8, rodata, "src/rw_text_8028BEAC_CAED8_us_rev1.c"]
       - [0xC60E3, data, "rodata/unresolved/800C54E3"]
-      - [0xC60E4, rodata, "src/rw_constants_8044C7B8_CAEE4_us_rev1.c"]
+      - [0xC60E4, .rodata, "src/rw_constants_8044C7B8_CAEE4_us_rev1.c"]
       - [0xC60F8, rodata, "src/rw_pool_8028798C_CAEF8_us_rev1.c"]
       - [0xC60FC, rodata, "src/rw_pool_80287F18_CAEFC_us_rev1.c"]
       - [0xC6100, rodata, "rodata/shared/800CA300"]
