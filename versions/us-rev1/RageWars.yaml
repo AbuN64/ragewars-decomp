@@ -5384,7 +5384,7 @@ segments:
     resource_assembler: armips
     resource_output: data
     subsegments:
-      - [0xE1460, resource, "resources/rsp/800E0860"]
+      - [0xE1460, .data, "resources/rsp/800E0860"]
   - name: span_E1720
     type: code
     start: 0xE1720

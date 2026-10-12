@@ -7050,6 +7050,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0860"
+segment = "rsp_audio_data"
+members = ["resources/rsp/800E0860"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0B03"
 segment = "span_C2860"
 members = ["rodata/unresolved/800E0B03", "data/unresolved/800E0B04"]
@@ -45420,6 +45428,17 @@ path = "src/resident_menu_pak_options.c"
 kind = "data"
 group = "data_80154104"
 members = ["src/resident_menu_pak_options.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/resources.rsp.800E0860.c"
+kind = "data"
+group = "data_800E0860"
+members = ["resources/rsp/800E0860"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
