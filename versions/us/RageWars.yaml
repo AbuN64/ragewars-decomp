@@ -3043,7 +3043,7 @@ segments:
       - [0xC490F, data, "rodata/unresolved/800C3D0F"]
       - [0xC4910, rodata, "src/rw_text_8024F294_C9AD0_us_rev1.c"]
       - [0xC491D, data, "rodata/unresolved/800C3D1D"]
-      - [0xC4920, rodata, "src/rw_pool_8024F4A0_C9AE0_us_rev1.c"]
+      - [0xC4920, .rodata, "src/rw_pool_8024F4A0_C9AE0_us_rev1.c"]
       - [0xC4930, rodata, "src/rw_pool_8024F5A0_C9AF0_us_rev1.c"]
       - [0xC4940, rodata, "rodata/func_8024F960_eu/800C8F00"]
       - [0xC4960, rodata, "rodata/func_8024FD6C_eu/800C8F20"]
