@@ -3,27 +3,43 @@
 #include "span_16E000/code_80423280.h"
 #include "types.h"
 
+/* Builds the options-commit state: allocates its 0x28 bytes through func_8025305C_de and keeps the
+   record at D_800E4510, creates the fade widget 0x4D/0x4E and the title object 0x4F/0x6E, then builds
+   the three option lists 0x59/0x5A, 0x55/0x56 and 0x51/0x52, appends their localized labels, and
+   selects the entry named by the game settings D_801462C8 bytes 0x1B, 0x1F and 0x580 - the third list
+   gains the labels at 0x800D74B8 and 0x800D74BC only when func_80265350_de does not return 0x400000.
+   The 0x80-step slider 0x53/0x54 is created and positioned at the settings' position byte, menu nodes
+   0x57, 0x58 and 0x50 are released, and the record is finally armed with a selection value of -1 and
+   commit state 3, returning zero. */
+
+/* The 0x28-byte options-commit record D_800E4510 points at; built here and read back by
+   func_80422FC0_de through OptionsCommitContext. Field comments give each offset. */
 struct OptionsCommitBlock_func_8042250C_us_rev1 {
-    s32 unk0;                        
-    s32 unk4;                        
-    s32 unk8;                        
-    Record_func_8041ABC0_de *unkC;  
-    Record_func_8041ABC0_de *unk10; 
-    Record_func_8041ABC0_de *unk14; 
-    s32 pad18[2];                    
-    s32 unk20;                       
-    s32 unk24;                       
+    s32 unk0;                        /* 0x00 fade widget record (func_8041A280_de 0x4D/0x4E) */
+    s32 unk4;                        /* 0x04 title object (func_80419E54_de 0x4F/0x6E) */
+    s32 unk8;                        /* 0x08 slider record (func_8041A580_de 0x53/0x54/0x80) */
+    Record_func_8041ABC0_de *unkC;  /* 0x0C first option list (0x59/0x5A) */
+    Record_func_8041ABC0_de *unk10; /* 0x10 second option list (0x55/0x56) */
+    Record_func_8041ABC0_de *unk14; /* 0x14 third option list (0x51/0x52) */
+    s32 pad18[2];                    /* 0x18 unused gap */
+    s32 unk20;                       /* 0x20 selected option value; -1 while nothing is picked */
+    s32 unk24;                       /* 0x24 commit state; 3 once built */
 };
 
 extern struct OptionsCommitBlock_func_8042250C_us_rev1 *D_800E4510;
 extern OptionsBuildSettings D_801462C8;
 
-extern char *D_800D3470_de;
-extern char *D_auto_800D74AC;
+/* Localized label words handed to func_8041AD34_de. D_800D3470_de and D_800D3474 are spelled
+   as in include/common/unused.h:3447 and :441; the label words at 0x800D74A0 onward sit in
+   consecutive slots, so the labels without a symbol of their own (0x800D74AC, 0x800D74B0) are
+   reached by indexing the run base (same convention as func_80420E20_de.c and
+   func_80436E94_de.c). */
+extern s32 D_800D3470_de[];
+extern s32 D_800D3474[];
 extern char *D_800D2124;
 extern char *D_800D2128;
-
-extern char *D_800D2134;
+/* Three consecutive localized labels at US-rev1 800D74B4..800D74BC. */
+extern char *D_800D2134[3];
 extern char *D_800D2138;
 extern char *D_800D213C;
 extern char *D_auto_800D74B0;
@@ -52,19 +68,19 @@ s32 func_8042250C_us_rev1(void) {
     func_8041B110_de(0x58);
     firstList = func_8041ABC0_de(0x59, 0x5A);
     D_800E4510->unkC = firstList;
-    func_8041AD34_de(firstList, D_800D3470_de);
+    func_8041AD34_de(firstList, D_800D3470_de[0]);
     func_8041AD34_de(D_800E4510->unkC, D_800D2124);
     func_8041AD34_de(D_800E4510->unkC, D_800D2128);
     settings = &D_801462C8;
     func_8041AD10_de(D_800E4510->unkC, settings->first);
     secondList = func_8041ABC0_de(0x55, 0x56);
     D_800E4510->unk10 = secondList;
-    func_8041AD34_de(secondList, D_auto_800D74AC);
+    func_8041AD34_de(secondList, D_800D3474[3]);
     func_8041AD34_de(D_800E4510->unk10, D_auto_800D74B0);
     func_8041AD10_de(D_800E4510->unk10, settings->second);
     thirdList = func_8041ABC0_de(0x51, 0x52);
     D_800E4510->unk14 = thirdList;
-    func_8041AD34_de(thirdList, D_800D2134);
+    func_8041AD34_de(thirdList, D_800D2134[0]);
     if (func_80265350_de() != 0x400000) {
         func_8041AD34_de(D_800E4510->unk14, D_800D2138);
         func_8041AD34_de(D_800E4510->unk14, D_800D213C);
