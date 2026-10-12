@@ -61,7 +61,7 @@ segments:
       - [0x18A0, c, "func_80200CA0_de"]
       - [0x1918, asm, "func_80200D18_de"]
       - [0x1A04, asm, "func_80200E04_de"]
-      - [0x1B98, asm, "func_80200F98_de"]
+      - [0x1B98, c, "func_80200F98_de"]
       - [0x1C64, asm, "func_80201064_de"]
       - [0x1CD8, asm, "func_802010D8_de"]
       - [0x1ED8, asm, "func_802012D8_de"]

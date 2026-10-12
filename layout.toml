@@ -10495,6 +10495,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80200F98_de.c"
+kind = "c"
+group = "code_80200610"
+members = ["func_80200F98_de"]
+toolchain = "gcc-2.7.2-kmc"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_802016DC_de.c"
 kind = "c"
 group = "code_80200610"
@@ -57625,11 +57636,6 @@ scores = {de = 0.9666666666666667, eu = 0.9666666666666667, eu-x = 0.96666666666
 member = "func_80200D18_de"
 path = "src/fuzzy/func_80200D18_de.c"
 scores = {de = 0.864406779661017, eu = 0.864406779661017, eu-x = 0.864406779661017, us = 0.864406779661017, us-rev1 = 0.864406779661017}
-
-[[fuzzy]]
-member = "func_80200F98_de"
-path = "src/fuzzy/func_80200F98_de.c"
-scores = {de = 0.9607843137254902, eu = 0.9607843137254902, eu-x = 0.9607843137254902, us = 0.9607843137254902, us-rev1 = 0.9607843137254902}
 
 [[fuzzy]]
 member = "func_80201064_de"
