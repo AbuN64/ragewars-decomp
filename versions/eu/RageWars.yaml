@@ -3544,7 +3544,7 @@ segments:
       - [0xC6C30, rodata, "src/rw_formats_802A1B24_CBB20_us_rev1.c"]
       - [0xC6C33, data, "rodata/unresolved/800C6033"]
       - [0xC6C34, data, "data/unresolved/800C6034"]
-      - [0xC6C40, rodata, "rodata/shared/800CAF30"]
+      - [0xC6C40, .rodata, "rodata/shared/800CAF30"]
       - [0xC6C57, data, "rodata/unresolved/800C6057"]
       - [0xC6C58, rodata, "src/rw_pool_802A2480_CBB48_us_rev1.c"]
       - [0xC6C60, rodata, "src/rw_pool_802A25D0_CBB50_us_rev1.c"]
