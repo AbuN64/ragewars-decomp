@@ -48089,6 +48089,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.func_8044B7C0_de.800CA040_unclaimed_CAC50.c"
+kind = "data"
+group = "code_8044ACCC"
+members = ["rodata/func_8044B7C0_de/800CA040_unclaimed_CAC50"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.func_8044B7C0_de.800CA118_unclaimed_CAD28.c"
 kind = "data"
 group = "code_8044ACCC"
