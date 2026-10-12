@@ -5169,7 +5169,7 @@ segments:
       - [0x1B1200, asm, "func_8043A330_de"]
       - [0x1B14C8, asm, "func_8043A5F8_de"]
       - [0x1B1760, c, "func_8043A890_de"]
-      - [0x1B1A10, asm, "func_8043AB40_de"]
+      - [0x1B1A10, c, "func_8043AB40_de"]
       - [0x1B1BC0, c, "func_8043ACF0_de"]
       - [0x1B1D2C, c, "func_8043AE5C_de"]
       - [0x1B1F9C, c, "func_8043B0CC_de"]

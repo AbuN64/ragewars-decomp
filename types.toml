@@ -3915,6 +3915,7 @@ schema = 1
 "func_80439E34_de" = { evidence = "landed", signature = "s32 func_80439E34_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
 "func_80439F10_us_rev1" = { evidence = "landed", signature = "s32 func_80439F10_us_rev1(void)" }
 "func_8043A890_de" = { evidence = "landed", signature = "s32 func_8043A890_de(void *arg0, void *arg1, s32 event)" }
+"func_8043AB40_de" = { evidence = "landed", signature = "s32 func_8043AB40_de(void *arg0, void *arg1, s32 arg2)" }
 "func_8043ACF0_de" = { evidence = "landed", signature = "void func_8043ACF0_de(s32 player, s32 direction)" }
 "func_8043AE5C_de" = { evidence = "landed", signature = "void func_8043AE5C_de(s32 player, s32 step)" }
 "func_8043B0CC_de" = { evidence = "landed", signature = "void func_8043B0CC_de(s32 player)" }
@@ -8973,6 +8974,7 @@ schema = 1
 "D_80142233" = { declaration = "extern unsigned char D_80142233;", evidence = "authored" }
 "D_80142235" = { declaration = "extern unsigned char D_80142235;", evidence = "authored" }
 "D_801422C1" = { declaration = "extern signed char D_801422C1;", evidence = "authored" }
+"D_80142358" = { declaration = "extern s8 D_80142358[];", evidence = "authored" }
 "D_801427B0" = { declaration = "extern unsigned int D_801427B0;", evidence = "authored" }
 "D_801427D0" = { declaration = "extern int D_801427D0;", evidence = "authored" }
 "D_80142848" = { declaration = "extern int D_80142848;", evidence = "authored" }
@@ -10150,6 +10152,7 @@ schema = 1
 "Entry" = { declaration = "typedef struct Entry Entry;", evidence = "authored" }
 "Entry190" = { declaration = "struct Entry190 { s32 value; u8 pad[0x18C]; };", evidence = "authored" }
 "Entry34" = { declaration = "struct Entry34 { char pad0[0x1C]; s32 weapon; void *info; s32 owned; f32 x; s32 y; f32 z; };", evidence = "authored" }
+"Entry42" = { declaration = "struct Entry42 { MenuWidget *window; struct Slots_func_8041B7B4_de *slots; struct Object49C panel; char pad4A8[8]; s32 state; s32 selection; char pad4B8[0x18]; };", evidence = "authored" }
 "Entry802612C8" = { declaration = "struct Entry802612C8 { s32 x; s32 pad4; s32 z; f32 f0C; s32 n10; s32 n14; };", evidence = "authored" }
 "Entry80294AC4" = { declaration = "struct Entry80294AC4 { void (*callback)(void *arg0); s32 field4; s32 field8; };", evidence = "authored" }
 "Entry802AB8DC" = { declaration = "typedef struct Entry802AB8DC Entry802AB8DC;", evidence = "authored" }
@@ -11555,6 +11558,7 @@ schema = 1
 "Scores" = { declaration = "typedef struct Scores Scores;", evidence = "authored" }
 "Scratch" = { declaration = "struct Scratch { f32 first[4]; f32 second[4]; f32 in[4]; f32 out[4]; f32 position[4]; char matrix[0x40]; };", evidence = "authored" }
 "Screen" = { declaration = "typedef struct Screen Screen;", evidence = "authored" }
+"Screen42" = { declaration = "struct Screen42 { struct Entry42 entries[4]; char pad1340[0x18]; s32 state; s32 next; char pad1360[8]; s32 delay; };", evidence = "authored" }
 "ScreenRectangle" = { declaration = "typedef struct ScreenRectangle { char pad0[0x29c]; f32 x,y,width,height; } ScreenRectangle;", evidence = "authored" }
 "ScreenState" = { declaration = "typedef struct ScreenState ScreenState;", evidence = "authored" }
 "Screen_func_8041C2AC_de" = { declaration = "struct Screen_func_8041C2AC_de { void *parent; void *windows[4]; s32 selection; s32 scroll; s32 state; };", evidence = "authored" }

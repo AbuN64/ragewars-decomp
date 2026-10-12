@@ -5172,7 +5172,7 @@ segments:
       - [0x19E510, asm, "func_8043A330_de"]
       - [0x19E7D8, asm, "func_8043A5F8_de"]
       - [0x19EA70, c, "func_8043A890_de"]
-      - [0x19ED20, asm, "func_8043AB40_de"]
+      - [0x19ED20, c, "func_8043AB40_de"]
       - [0x19EED0, c, "func_8043ACF0_de"]
       - [0x19F03C, c, "func_8043AE5C_de"]
       - [0x19F2AC, c, "func_8043B0CC_de"]

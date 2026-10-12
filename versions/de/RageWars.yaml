@@ -5252,7 +5252,7 @@ segments:
       - [0x1A0330, asm, "func_8043A330_de"]
       - [0x1A05F8, asm, "func_8043A5F8_de"]
       - [0x1A0890, c, "func_8043A890_de"]
-      - [0x1A0B40, asm, "func_8043AB40_de"]
+      - [0x1A0B40, c, "func_8043AB40_de"]
       - [0x1A0CF0, c, "func_8043ACF0_de"]
       - [0x1A0E5C, c, "func_8043AE5C_de"]
       - [0x1A10CC, c, "func_8043B0CC_de"]

@@ -2,6 +2,10 @@
 #define UNBAKE_SPAN_16E000_CODE_8043A0A4_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_16E000/code_8041B020.h"
+#include "span_16E000/code_8041BEA8.h"
+#include "types.h"
 /* unbake published declaration: published_27ad29a7c66d739b3c554ebd */
 extern void func_8043B96C_de();
 
@@ -163,4 +167,24 @@ struct Screen_func_8043BBB0_de {
 };
 
 extern int func_8043B854_de();
+
+struct Entry42 {
+    MenuWidget *window;
+    struct Slots_func_8041B7B4_de *slots;
+    struct Object49C panel;
+    char pad4A8[8];
+    s32 state;
+    s32 selection;
+    char pad4B8[0x18];
+};
+struct Screen42 {
+    struct Entry42 entries[4];
+    char pad1340[0x18];
+    s32 state;
+    s32 next;
+    char pad1360[8];
+    s32 delay;
+};
+extern s8 D_80142358[];
+
 #endif

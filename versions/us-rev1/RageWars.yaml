@@ -7084,7 +7084,7 @@ segments:
       - [0x1A8510, asm, "func_8043A330_de"]
       - [0x1A87D8, asm, "func_8043A5F8_de"]
       - [0x1A8A70, c, "func_8043A890_de"]
-      - [0x1A8D20, asm, "func_8043AB40_de"]
+      - [0x1A8D20, c, "func_8043AB40_de"]
       - [0x1A8ED0, c, "func_8043ACF0_de"]
       - [0x1A903C, c, "func_8043AE5C_de"]
       - [0x1A92AC, c, "func_8043B0CC_de"]

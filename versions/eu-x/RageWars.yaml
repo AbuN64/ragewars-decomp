@@ -5225,7 +5225,7 @@ segments:
       - [0x12B330, asm, "func_8043A330_de"]
       - [0x12B5F8, asm, "func_8043A5F8_de"]
       - [0x12B890, c, "func_8043A890_de"]
-      - [0x12BB40, asm, "func_8043AB40_de"]
+      - [0x12BB40, c, "func_8043AB40_de"]
       - [0x12BCF0, c, "func_8043ACF0_de"]
       - [0x12BE5C, c, "func_8043AE5C_de"]
       - [0x12C0CC, c, "func_8043B0CC_de"]
