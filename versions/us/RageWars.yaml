@@ -2570,7 +2570,7 @@ segments:
       - [0xC18D0, asm, "func_802C0DA0_de"]
       - [0xC1E54, data, "rodata/unresolved/802C1254"]
       - [0xC1E60, asm, "func_802C1330_de"]
-      - [0xC2354, data, "rodata/unresolved/802C1754"]
+      - [0xC2354, .data, "rodata/unresolved/802C1754"]
       - [0xC2360, c, "__cmpdi2"]
       - [0xC23A8, .data, "rodata/unresolved/802C17A8"]
       - [0xC2440, asm, "__floatdisf"]
