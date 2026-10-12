@@ -32546,7 +32546,6 @@ PROVIDE(ragewars_resident_strings_CC164_us_rev1 = 0x800CB564);
 PROVIDE(ragewars_resident_strings_CC658_us_rev1 = 0x800CBA58);
 PROVIDE(ragewars_resident_strings_CC8A4_us_rev1 = 0x800CBCA4);
 PROVIDE(ragewars_resident_strings_CCCEC_us_rev1 = 0x800CC0EC);
-PROVIDE(rw_boot_entry = 0x00000400);
 PROVIDE(rw_menu_paged_func_80406434_de = 0x00406434);
 PROVIDE(rw_menu_paged_func_804066BC_de = 0x004066BC);
 PROVIDE(rw_menu_paged_func_804069F4_de = 0x004069F4);

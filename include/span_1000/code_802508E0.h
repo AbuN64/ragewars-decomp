@@ -1,6 +1,8 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802508E0_H
 #define UNBAKE_SPAN_1000_CODE_802508E0_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
 /* unbake published declaration: published_11c7696e79f010e2a046034f */
 extern int func_80250DE0_de(void *object);
 
@@ -330,5 +332,11 @@ struct ResourceBinding {
     u8 padding0D4[4];
     u16 status; /* 0xD8 */
 };
+
+typedef struct State802532E4 {
+    s32 active;
+    s32 count;
+} State802532E4;
+extern void func_802515F0_de(s32, s32);
 
 #endif
