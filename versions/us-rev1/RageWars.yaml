@@ -3840,7 +3840,7 @@ segments:
       - [0xCD7C3, data, "rodata/unresolved/800CCBC3"]
       - [0xCD7C4, rodata, "src/rw_text_802B9B20_CD7C4_us_rev1.c"]
       - [0xCD7D3, data, "rodata/unresolved/800CCBD3"]
-      - [0xCD7D4, data, "data/unresolved/800CCBD4"]
+      - [0xCD7D4, .data, "data/unresolved/800CCBD4"]
       - [0xCD7E0, rodata, "src/rw_formats_802B9CB0_CD7E0_us_rev1.c"]
       - [0xCD7E3, data, "rodata/unresolved/800CCBE3"]
       - [0xCD7E4, rodata, "src/rw_text_802B9CB0_CD7E4_us_rev1.c"]
