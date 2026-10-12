@@ -2549,7 +2549,7 @@ schema = 1
 "func_802A5780_de" = { evidence = "landed", signature = "void func_802A5780_de(s32 arg0, void *arg1, void *arg2)" }
 "func_802A57D8_de" = { evidence = "landed", signature = "void func_802A57D8_de(void)" }
 "func_802A57E0_de" = { evidence = "landed", signature = "void func_802A57E0_de(void *arg0, s32 arg1, char *arg2)" }
-"func_802A58B0_de" = { evidence = "landed", signature = "void func_802A58B0_de(void *arg0, void *arg1, s32 arg2)" }
+"func_802A58B0_de" = { evidence = "landed", signature = "void func_802A58B0_de(func_802A67D0_S1 *arg0, Shared_Particle *arg1, PackedMatrixWords *arg2)" }
 "func_802A598C_de" = { evidence = "landed", signature = "void func_802A598C_de(Owner802A697C *owner, int object)" }
 "func_802A5A24_de" = { evidence = "landed", signature = "void func_802A5A24_de(void *arg0, s32 arg1)" }
 "func_802A5A54_de" = { evidence = "landed", signature = "void func_802A5A54_de(void *arg0, int arg1)" }
