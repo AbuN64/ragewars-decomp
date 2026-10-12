@@ -22,41 +22,42 @@ extern Record_func_80433914_de D_80102B00[];
 extern char D_800DD508_de[];
 extern char D_800DD50C[];
 
-/* func_8040EC30_de is the hub's Item* lookup; this unit keeps the Label view for its text member. */
+/* EC30 hands back the hub Item view; this unit reads/writes the Label view (text pointer at 0x38)
+   through the store-side cast. */
 extern void func_802A0C08_de(char *, char *, s32);
 extern char *func_80424DE8_de(s32);
 extern s32 func_80426004_de(s32);
 
 void func_8041D6A8_de(void) {
-    Label *item;
+    func_8041F2A0_Item *item;
     s32 score;
 
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_499);
     func_8040E8D8_de(item, 1);
-    item->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
+    ((Label *) item)->text = D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].name;
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_498);
     func_8040E8D8_de(item, 1);
-    item->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
+    ((Label *) item)->text = func_80424DE8_de(((ProfileStatisticsScreen *) D_800E3590)->index);
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_509);
     func_8040E8D8_de(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->kills, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.kills);
-    item->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
+    ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->kills;
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_500);
     func_8040E8D8_de(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->wins, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.wins);
-    item->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
+    ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->wins;
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_502);
     func_8040E8D8_de(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->deaths, D_800DD508_de, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].statistics.deaths);
-    item->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
+    ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->deaths;
     score = func_80426004_de(((ProfileStatisticsScreen *) D_800E3590)->index);
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_505);
     func_8040E8D8_de(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->score, D_800DD50C, score);
-    item->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
-    item = (Label *) func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
+    ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->score;
+    item = func_8040EC30_de(((ProfileStatisticsScreen *) D_800E3590)->handle, PROFILE_RESOURCE_506);
     func_8040E8D8_de(item, 1);
     func_802A0C08_de(((ProfileStatisticsScreen *) D_800E3590)->count, D_800DD50C, D_80102B00[((ProfileStatisticsScreen *) D_800E3590)->index].count);
-    item->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
+    ((Label *) item)->text = ((ProfileStatisticsScreen *) D_800E3590)->count;
 }
 

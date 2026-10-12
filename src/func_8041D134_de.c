@@ -12,7 +12,7 @@
 /* The hub spells D_800E3590 as the padded menu block; this unit's view of it is the published
    Menu_func_8041D134_de struct, so each member use casts D_800E3590 to that view. */
 
-extern void func_8025DF34_de(s32 sound);
+extern s32 func_8025DF34_de(s32 sound);
 extern void func_8029973C_de(void);
 extern void func_802998A8_de(void);
 
@@ -21,8 +21,7 @@ extern s32 func_80419F38_de(s32 fade);
 extern void func_80419F58_de(s32 fade, s32 speed);
 extern Node_func_8041D134_de *func_8041B7FC_de(void *handle, s32 arg1);
 
-
-extern void func_8041DA5C_de(s32 style);
+/* func_8041DA5C_de is declared by span code_8041BEA8.h; no local extern needed. */
 
 s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
     Node_func_8041D134_de *node;
@@ -33,7 +32,9 @@ s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
         ((Menu_func_8041D134_de *) D_800E3590)->right->x -= ((Menu_func_8041D134_de *) D_800E3590)->rightStep;
         if (--((Menu_func_8041D134_de *) D_800E3590)->timer <= 0) {
             func_8025DF34_de(0xE79);
-            func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->groupA, 1);
+            /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
+               E8D8 speaks Item, so the node slots cast to it here. */
+            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupA, 1);
             func_80419F58_de(((Menu_func_8041D134_de *) D_800E3590)->fade, 4);
             ((Menu_func_8041D134_de *) D_800E3590)->state = 4;
             ((Menu_func_8041D134_de *) D_800E3590)->timer = 4;
@@ -54,17 +55,17 @@ s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
             func_80419F24_de(((Menu_func_8041D134_de *) D_800E3590)->fade);
             ((Menu_func_8041D134_de *) D_800E3590)->state = 6;
             ((Menu_func_8041D134_de *) D_800E3590)->timer = 4;
-            func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->groupB, 1);
-            func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->groupC, 1);
+            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupB, 1);
+            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupC, 1);
         }
         break;
     case 5:
         func_8025DF34_de(0xE78);
         ((Menu_func_8041D134_de *) D_800E3590)->state = 2;
         ((Menu_func_8041D134_de *) D_800E3590)->timer = 4;
-        func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->groupB, 0);
-        func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->groupC, 0);
-        func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->groupA, 0);
+        func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupB, 0);
+        func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupC, 0);
+        func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupA, 0);
         break;
     case 6:
         ((Menu_func_8041D134_de *) D_800E3590)->styleValue += ((Menu_func_8041D134_de *) D_800E3590)->styleStep;
@@ -74,7 +75,7 @@ s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
             ((Menu_func_8041D134_de *) D_800E3590)->groupC->style = 100;
             func_8041DA5C_de(0x6E);
             ((Menu_func_8041D134_de *) D_800E3590)->state = 3;
-            func_8040E8D8_de(((Menu_func_8041D134_de *) D_800E3590)->cursor, 1);
+            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->cursor, 1);
         }
         break;
     case 7:

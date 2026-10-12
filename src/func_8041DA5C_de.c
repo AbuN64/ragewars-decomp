@@ -14,20 +14,22 @@
 
 /* The hub names the block's root word and the Item* helpers func_8040EC30_de/func_8040E8D8_de;
    this view's player word sits at +0x10C, beyond what the hub names here, so that use casts.
-   The (u16) on each id reproduces the byte-exact halfword load the original lookup used. */
+   The (u16) on each id reproduces the byte-exact halfword load the original lookup used.
+   EC30 hands back the Item view and the style byte is Item::alpha's slot 0x10, so the node cast
+   moved to the store. */
 extern TextEntry D_800DF544[];
 extern PlayerRecord D_800FEB4A[];
 extern s32 func_80265650_de(PlayerRecord *bits, s32 bit);
 
 void func_8041DA5C_de(s32 style) {
     s32 i;
-    Node_func_8041DA5C_de *node;
+    func_8041F2A0_Item *node;
 
     for (i = 0; i < 50; i++) {
-        node = (Node_func_8041DA5C_de *) func_8040EC30_de(D_800E3590->root, (u16) D_800DF544[i].id);
+        node = func_8040EC30_de(D_800E3590->root, (u16) D_800DF544[i].id);
         if (func_80265650_de(&D_800FEB4A[((Menu_func_8041DA5C_de *) D_800E3590)->player], i) == 1) {
             func_8040E8D8_de(node, 1);
-            node->style = style;
+            ((Node_func_8041DA5C_de *) node)->style = style;
         } else {
             func_8040E8D8_de(node, 0);
         }
