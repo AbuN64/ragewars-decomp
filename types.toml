@@ -99,6 +99,7 @@ schema = 1
 "func_80200B14_de" = { evidence = "landed", signature = "void func_80200B14_de(s32 source, s32 destination, u32 count)" }
 "func_80200C28_de" = { evidence = "authored", signature = "void func_80200C28_de(s32 address, s32 value)" }
 "func_80200CA0_de" = { evidence = "landed", signature = "void func_80200CA0_de(s32 arg0, unsigned char arg1)" }
+"func_80200D18_de" = { evidence = "declared", signature = "void func_80200D18_de(s32, u8 *, s32)" }
 "func_80200F98_de" = { evidence = "landed", signature = "void func_80200F98_de(s32 address, s32 value, u32 count)" }
 "func_802016DC_de" = { evidence = "landed", signature = "s32 func_802016DC_de(u8 *arg0)" }
 "func_802022E0_de" = { evidence = "authored", signature = "void func_802022E0_de()" }
