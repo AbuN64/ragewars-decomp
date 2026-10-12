@@ -1,3 +1,4 @@
-const unsigned int D_auto_rodata_shared_800CE38C[1] = {
+/* ROM-grounded data: rodata/shared/800CE38C */
+const unsigned int D_blob_phase2_69d0378a0ba5ec267e3c[1] = {
     0x3E800000,
 };

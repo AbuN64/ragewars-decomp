@@ -1,30 +1,31 @@
+/* ROM-grounded data: rodata/writable/800E5E48 */
 #ifdef VERSION_DE
-unsigned int D_auto_rodata_writable_800E5E48[11] = {
+unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F7400CC, 0x41C00000, 0xFFFFFFFF,
 };
 #endif
-#ifdef VERSION_EU_X
-unsigned int D_auto_rodata_writable_800E5E48[11] = {
-    0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
-    0x6F740024, 0x8FB40020, 0xFFFFFFFF,
-};
-#endif
 #ifdef VERSION_EU
-unsigned int D_auto_rodata_writable_800E5E48[11] = {
+unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F7400F8, 0x0040B108, 0xFFFFFFFF,
 };
 #endif
-#ifdef VERSION_US_REV
-unsigned int D_auto_rodata_writable_800E5E48[11] = {
+#ifdef VERSION_EU_X
+unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
-    0x6F740041, 0x4E544544, 0xFFFFFFFF,
+    0x6F740024, 0x8FB40020, 0xFFFFFFFF,
 };
 #endif
 #ifdef VERSION_US
-unsigned int D_auto_rodata_writable_800E5E48[11] = {
+unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
     0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
     0x6F74003A, 0x5C50726F, 0xFFFFFFFF,
+};
+#endif
+#ifdef VERSION_US_REV1
+unsigned int D_blob_phase2_0f1feea8562686962270[11] = {
+    0x00000005, 0x4D696E69, 0x47616D65, 0x73000000, 0x424C414E, 0x4B000000, 0x54726170, 0x2053686F,
+    0x6F740041, 0x4E544544, 0xFFFFFFFF,
 };
 #endif

@@ -1,3 +1,4 @@
-const unsigned char D_auto_rodata_shared_800CA300[13] = {
+/* ROM-grounded data: rodata/shared/800CA300 */
+const unsigned char D_blob_phase2_fb6b6c6f9eb91dd0e313[13] = {
     0x67, 0x72, 0x69, 0x64, 0x20, 0x73, 0x65, 0x63, 0x74, 0x69, 0x6F, 0x6E, 0x00,
 };

@@ -1,15 +1,18 @@
+/* ROM-grounded data: rodata/func_8041F6C8_de/800E1578 */
 #ifdef VERSION_DE
-const unsigned int D_auto_rodata_func_8041F6C8_de_800E1578[7] = {
-    0x0041F720, 0x0041F7A8, 0x0041F810, 0x0041F820, 0x0041F8B4, 0x0041F8FC, 0x0041F94C,
+const unsigned int D_blob_phase2_6a11d3477167feb63086[11] = {
+    0x0041F720, 0x0041F7A8, 0x0041F810, 0x0041F820, 0x0041F8B4, 0x0041F8FC, 0x0041F94C, 0x4F000000,
+    0x3B5A740E, 0x428C0000, 0x432A0000,
 };
 #endif
 #ifdef VERSION_EU_X
-const unsigned int D_auto_rodata_func_8041F6C8_de_800E1578[7] = {
-    0x0041FBD0, 0x0041FC58, 0x0041FCC0, 0x0041FCD0, 0x0041FD64, 0x0041FDAC, 0x0041FDFC,
+const unsigned int D_blob_phase2_6a11d3477167feb63086[11] = {
+    0x0041FBD0, 0x0041FC58, 0x0041FCC0, 0x0041FCD0, 0x0041FD64, 0x0041FDAC, 0x0041FDFC, 0x4F000000,
+    0x3B5A740E, 0x428C0000, 0x432A0000,
 };
 #endif
-#ifdef VERSION_US_REV
-const unsigned int D_auto_rodata_func_8041F6C8_de_800E1578[7] = {
+#ifdef VERSION_US_REV1
+const unsigned int D_blob_phase2_6a11d3477167feb63086[7] = {
     0x0041F790, 0x0041F818, 0x0041F880, 0x0041F890, 0x0041F924, 0x0041F96C, 0x0041F9BC,
 };
 #endif

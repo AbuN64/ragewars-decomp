@@ -1,3 +1,4 @@
-const unsigned char D_auto_rodata_func_80286AA8_de_800CA218_unclaimed_CAE38[11] = {
+/* ROM-grounded data: rodata/func_80286AA8_de/800CA218_unclaimed_CAE38 */
+const unsigned char D_blob_phase2_33635e0625fa26158602[11] = {
     0x56, 0x69, 0x73, 0x69, 0x62, 0x69, 0x6C, 0x69, 0x74, 0x79, 0x00,
 };
