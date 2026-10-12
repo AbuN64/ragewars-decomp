@@ -1,3 +1,3 @@
-unsigned int D_auto_data_unresolved_800DFA20[3] = {
+unsigned int D_d1_8b4e2aa7c1163b08[3] = {
     0x43480000, 0x43200000, 0x43480000,
 };

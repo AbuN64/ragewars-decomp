@@ -4245,7 +4245,7 @@ segments:
       - [0xE0574, .data, "rodata/unresolved/800E39C4"]
       - [0xE061C, rodata, "src/rw_viewport_scalar_E466C_us_rev1.c"]
       - [0xE061F, data, "rodata/unresolved/800DFA1F"]
-      - [0xE0620, data, "data/unresolved/800DFA20"]
+      - [0xE0620, .data, "data/unresolved/800DFA20"]
       - [0xE062C, rodata, "src/rw_viewport_scalar_E467C_us_rev1.c"]
       - [0xE062F, data, "rodata/unresolved/800DFA2F"]
       - [0xE0630, .data, "src/ragewars_character_preview_positions_00_us_rev1.c"]
