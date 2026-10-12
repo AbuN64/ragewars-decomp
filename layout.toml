@@ -50815,6 +50815,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_802BB6A8_eu_x.c"
+kind = "data"
+group = "code_802BB15C"
+members = ["func_802BB6A8_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_802BB6A8_eu_x_padding_C10BC.c"
 kind = "data"
 group = "data_802C04BC"

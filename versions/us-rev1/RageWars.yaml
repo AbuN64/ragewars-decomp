@@ -2535,7 +2535,7 @@ segments:
       - [0xC0F84, .data, "func_802BB574_eu_x"]
       - [0xC0F90, c, "func_802BB2A0_de"]
       - [0x0C10B4, .data, "func_802BB2A0_de_padding_C10B4"]
-      - [0xC10B8, asm, "func_802BB6A8_eu_x"]
+      - [0xC10B8, .data, "func_802BB6A8_eu_x"]
       - [0x0C10BC, .data, "func_802BB6A8_eu_x_padding_C10BC"]
       - [0xC10C0, c, "func_802BB3D0_de"]
       - [0xC1108, .data, "func_802BB6F8_eu_x"]

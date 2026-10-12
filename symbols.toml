@@ -74087,7 +74087,7 @@ kind = "function"
 us = 0x802BB67C
 
 [symbol.func_802BB6A8_eu_x]
-kind = "function"
+kind = "data"
 eu-x = 0x802BB6A8
 us-rev1 = 0x802C04B8
 
