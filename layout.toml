@@ -51337,6 +51337,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rw_hud_lives_motion_script_us_rev1.c"
+kind = "data"
+group = "data_800CE410"
+members = ["src/rw_hud_lives_motion_script_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rw_hud_score_motion_script_us_rev1.c"
 kind = "data"
 group = "data_800CE630"

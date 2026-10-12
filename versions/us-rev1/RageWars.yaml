@@ -4088,7 +4088,7 @@ segments:
       - [0xCEFE8, .data, "rodata/unresolved/800CE3E8"]
       - [0xCF008, data, "rodata/writable/800CE408"]
       - [0xCF010, .data, "rodata/unresolved/800CE410"]
-      - [0xcf21c, data, "src/rw_hud_lives_motion_script_us_rev1.c"]
+      - [0xcf21c, .data, "src/rw_hud_lives_motion_script_us_rev1.c"]
       - [0xcf230, .data, "rodata/unresolved/800CE410_unclaimed_CF230"]
       - [0xcf280, .data, "src/rw_hud_score_motion_script_us_rev1.c"]
       - [0xcf29c, data, "rodata/unresolved/800CE410_unclaimed_CF230_unclaimed_CF29C"]
