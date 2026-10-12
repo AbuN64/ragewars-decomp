@@ -56452,6 +56452,11 @@ path = "src/fuzzy/func_8020D6E4_de.c"
 scores = {de = 1.0, eu = 1.0, eu-x = 1.0, us = 1.0, us-rev1 = 1.0}
 
 [[fuzzy]]
+member = "func_8020EA24_eu_x"
+path = "src/fuzzy/func_8020EA24_eu_x.c"
+scores = {eu-x = 0.6666666666666666, us-rev1 = 0.6666666666666666}
+
+[[fuzzy]]
 member = "func_80210248_eu"
 path = "src/fuzzy/func_80210248_eu.c"
 scores = {eu = 0.974025974025974, eu-x = 1.0, us-rev1 = 1.0}
