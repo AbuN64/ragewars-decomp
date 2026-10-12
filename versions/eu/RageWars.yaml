@@ -3969,7 +3969,7 @@ segments:
       - [0xEE320, rodata, "rodata/func_8040E0D4_de/800ED720"]
       - [0xEE330, rodata, "rodata/shared/800E10E0"]
       - [0xEE333, data, "rodata/unresolved/800ED733"]
-      - [0xEE334, data, "data/unresolved/800ED734"]
+      - [0xEE334, .data, "data/unresolved/800ED734"]
       - [0xEE340, rodata, "src/rw_text_804142AC_E1CF0_us_rev1.c"]
       - [0xEE34D, data, "rodata/unresolved/800ED74D"]
       - [0xEE350, rodata, "src/rw_text_804142AC_E1D00_us_rev1.c"]
