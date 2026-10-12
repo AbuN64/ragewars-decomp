@@ -1,4 +1,4 @@
-const unsigned int D_auto_rodata_unresolved_800E3594_unclaimed_E4390[10] = {
+unsigned int D_d4_d3abb35991f02f9f[10] = {
     0x00000063, 0x0000002E, 0x00000062, 0x0000002F, 0x00000061, 0x00000029, 0x0000005F, 0x0000002A,
     0x00000060, 0x00000030,
 };
