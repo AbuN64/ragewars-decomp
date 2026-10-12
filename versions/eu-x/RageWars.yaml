@@ -3913,7 +3913,7 @@ segments:
       - [0xE1714, .rodata, "src/rw_text_802BD430_D9F04_us_rev1.c"]
       - [0xE1735, data, "rodata/unresolved/800E0B35"]
       - [0xE1738, data, "data/unresolved/800E0B38"]
-      - [0xE1740, rodata, "src/rw_text_802BDDE0_D9F30_us_rev1.c"]
+      - [0xE1740, .rodata, "src/rw_text_802BDDE0_D9F30_us_rev1.c"]
       - [0xE1751, data, "rodata/unresolved/800E0B51"]
       - [0xE1754, rodata, "src/rw_text_802BDDE0_D9F44_us_rev1.c"]
       - [0xE1765, data, "rodata/unresolved/800E0B65"]

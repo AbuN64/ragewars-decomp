@@ -5272,7 +5272,7 @@ segments:
       - [0xD9F04, .rodata, "src/rw_text_802BD430_D9F04_us_rev1.c"]
       - [0xD9F25, data, "rodata/unresolved/800D9325"]
       - [0xD9F28, data, "data/unresolved/800D9328"]
-      - [0xD9F30, rodata, "src/rw_text_802BDDE0_D9F30_us_rev1.c"]
+      - [0xD9F30, .rodata, "src/rw_text_802BDDE0_D9F30_us_rev1.c"]
       - [0xD9F41, data, "rodata/unresolved/800D9341"]
       - [0xD9F44, rodata, "src/rw_text_802BDDE0_D9F44_us_rev1.c"]
       - [0xD9F55, data, "rodata/unresolved/800D9355"]
