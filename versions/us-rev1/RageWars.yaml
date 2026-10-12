@@ -3273,7 +3273,7 @@ segments:
       - [0xCA358, rodata, "src/rw_pool_8026B504_CA358_us_rev1.c"]
       - [0xCA35C, .rodata, "src/rw_text_8026C484_CA35C_us_rev1.c"]
       - [0xCA36E, data, "rodata/unresolved/800C976E"]
-      - [0xCA370, rodata, "src/rw_text_8026C484_CA370_us_rev1.c"]
+      - [0xCA370, .rodata, "src/rw_text_8026C484_CA370_us_rev1.c"]
       - [0xCA382, data, "rodata/unresolved/800C9782"]
       - [0xCA384, rodata, "src/rw_text_8026C484_CA384_us_rev1.c"]
       - [0xCA38F, data, "rodata/unresolved/800C978F"]
