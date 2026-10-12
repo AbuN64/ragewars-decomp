@@ -5170,6 +5170,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CF300"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800CF230_unclaimed_CFEC0_unclaimed_CFED8_unclaimed_CFEE0_unclaimed_CFEF8_unclaimed_CFF00", "src/rw_weapon_state_resource_animation_CFF08_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CF51C"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CF51C"]
@@ -55304,6 +55312,17 @@ path = "src/rw_weapon_state_resource_animation_CFEE8_us_rev1.c"
 kind = "data"
 group = "data_800CF2E0"
 members = ["src/rw_weapon_state_resource_animation_CFEE8_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_weapon_state_resource_animation_CFF08_us_rev1.c"
+kind = "data"
+group = "data_800CF300"
+members = ["src/rw_weapon_state_resource_animation_CFF08_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
