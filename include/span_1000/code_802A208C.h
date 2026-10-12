@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A208C_H
 #define UNBAKE_SPAN_1000_CODE_802A208C_H
 #include "../types.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 /* unbake published declaration: published_05bfb7d7cd12aa850acf6088 */
 extern void func_802A230C_de();
 
@@ -54,7 +55,6 @@ struct func_802A2DE4_S2 {
 };
 
 /* unbake published declaration: published_48a1610c68f14e6d4faffffc */
-extern void func_802A2394_de();
 
 struct func_802A2DE4_S2;
 /* unbake published declaration: published_4c7b39aa472d1d1455221971 */

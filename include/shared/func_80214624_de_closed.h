@@ -3,6 +3,7 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/unused.h"
+#include "span_1000/code_8023EEF0.h"
 
 typedef struct { Vec3 pos; s32 unkC; } ApproachLocation;
 extern s32 D_8013B290;
@@ -12,7 +13,6 @@ extern f32 func_8024D398_de(Actor_func_80214624_de *);
 extern f32 func_80271AA8_de(Vec3 *);
 extern ApproachLocation *func_80219408_de(void *);
 extern s32 func_80240660_de(Actor_func_80214624_de *,Vec3,s32,s32,Vec3 *);
-extern s32 func_80240698_de(Actor_func_80214624_de *,s32,Vec3,s32,s32,Vec3 *);
 extern s32 func_80275B10_de(s32,f32,f32);
 extern void func_8024E79C_de(Actor_func_80214624_de *,Vec3,Vec3 *,s32 *,s32,s32);
 extern void func_80271F34_de(void *,void *,void *);

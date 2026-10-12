@@ -2,6 +2,8 @@
 #define FUNC_8027AD4C_DE_CLOSED_H
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+#include "packed_float.h"
+#include "shared/func_80214624_de_closed.h"
 
 /* Complete records from origin/legacy shared headers and source; historical gaps retained. */
 typedef struct Shared_func_8027ADBC_S2 Shared_func_8027ADBC_S2;
@@ -61,18 +63,12 @@ void func_80228DC4_de(void *, void *);
 f32 func_8024D284_de(void *);
 f32 func_8024E420_de(void *);
 void func_80270CD0_de(void *, f32, void *, void *);
-void func_80271F34_de(void *, void *, void *);
-void func_80271F68_de(void *, void *, void *);
-void func_80271F9C_de(Vec3 *, Vec3 *, f32);
-void func_8027207C_de(f32 *);
 void func_80272748_de(void *, f32);
 void func_80272898_de(void *, void *, void *);
 void func_80274244_de(f32 *, f32 *);
 
 
 void func_80279DD0_de(void *, f32);
-float func_802AD520_eu(int);
-float func_802B2350(int);
 f32 func_802B72B0_de(f32);
 void func_80271818_de(void *, f32 *);            /* extern */
 void func_8027A084_de(void *);                      /* extern */

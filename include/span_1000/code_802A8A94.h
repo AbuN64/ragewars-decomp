@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_1000_CODE_802A8A94_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "shared/func_802453D4_de_closed.h"
 /* unbake published declaration: published_10ab4315289132ef269b9237 */
 extern void func_802A8710_de();
 
@@ -199,7 +200,6 @@ typedef struct func_802AB78C_S1 func_802AB78C_S1;
 extern char D_801376F8[];
 
 /* unbake published declaration: published_f4a2c404d673266d77942cfc */
-extern void func_802A84F8_de();
 
 struct IntegerState48;
 /* unbake published declaration: published_f60c24e05183c7fb6dfb31f5 */

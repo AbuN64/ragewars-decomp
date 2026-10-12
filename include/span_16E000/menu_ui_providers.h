@@ -1,6 +1,8 @@
 #ifndef MENU_UI_PROVIDERS_H
 #define MENU_UI_PROVIDERS_H
 #include "../types.h"
+#include "common/unused.h"
+#include "shared/func_80286080_de_closed.h"
 typedef struct MenuOption {
     u8 unobserved0[8];
     s32 flags;
@@ -33,10 +35,8 @@ typedef struct MenuMatchGlobals {
     u8 unobserved125E[0x17F0 - 0x125E];
     s32 status[8];
 } MenuMatchGlobals;
-extern MenuMatchGlobals D_80145088;
 #define D_801462E5 D_80145088.menuInput
 #define D_80146894 D_80145088.status[7]
-extern s32 D_800E1E20;
 extern f32 D_800DE47C_de;
 extern void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 #endif

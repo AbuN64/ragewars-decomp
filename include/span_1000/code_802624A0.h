@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
 struct func_80262CA8_S1;
 /* unbake published declaration: published_04ae91f5172862d828227736 */
 typedef struct func_80262CA8_S1 func_80262CA8_S1;
@@ -237,6 +238,5 @@ struct Six;
 typedef struct Six Six;
 
 /* The list func_80262C88_de appends its record to. */
-extern IntrusiveList D_80137050;
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BB67C_H
 #define UNBAKE_SPAN_1000_CODE_802BB67C_H
 #include "../types.h"
+#include "shared/func_802BB8B0_de_closed.h"
 struct Node802C07B0;
 /* unbake published declaration: published_05e4417f27fad02a33c4521d */
 typedef struct Node802C07B0 Node802C07B0;
@@ -34,7 +35,6 @@ extern void func_802BB9F8_de();
 extern void func_802BBC20_de();
 
 /* unbake published declaration: published_71ef9c311cee9588203fdb18 */
-extern void func_802BBA4C_de(u64 interval);
 
 struct ThreadNode;
 /* unbake published declaration: published_75ee48439baed9bf398878fe */

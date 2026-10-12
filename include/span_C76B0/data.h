@@ -2,6 +2,12 @@
 #define UNBAKE_SPAN_C76B0_DATA_H
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
+#include "common/data.h"
+#include "shared/func_80214624_de_closed.h"
+#include "shared/func_804220A8_de_closed.h"
+#include "shared/func_8043E444_de_closed.h"
+#include "span_16E000/menu_setup_versions.h"
+#include "span_16E000/menu_ui_providers.h"
 extern float D_800C1A10_de;
 extern float D_800C1A14_de;
 extern float D_800C1A18;
@@ -180,7 +186,6 @@ extern float D_800C211C_de;
 extern double D_800C2130_de;
 extern float D_800C2138_de;
 extern float D_800C213C_de;
-extern float D_800C2160_de[];
 extern float D_800C2164_de;
 extern float D_800C2168_de;
 extern float D_800C217C_de;
@@ -2336,7 +2341,6 @@ extern float D_800DD564;
 extern float D_800DD568;
 extern float D_800DD570;
 extern float D_800DD584;
-extern f32 D_800DD610[];
 extern float D_800DD684;
 extern float D_800DD688;
 extern float D_800DD68C;
@@ -2378,7 +2382,6 @@ extern float D_800E249C;
 extern float D_800E24A0;
 extern float D_800E24A4;
 extern float D_800E24A8;
-extern float D_800DE47C_de;
 extern float D_800DE480_de;
 extern float D_800DE484;
 extern float D_800DE488;
@@ -2409,10 +2412,8 @@ extern int D_800DE9D0[];
 extern int D_800DEAD4[];
 extern int D_800DF268_de;
 extern int D_800DF520;
-extern void * D_800DF964[];
 extern int D_800E01B0_de[];
 extern int D_800E0286[];
-extern int D_800E1CC0[];
 extern int D_800EB1AC;
 extern float D_800EE144;
 extern float D_800EE148;
@@ -2495,8 +2496,6 @@ extern int jtbl_800DDBD0[];
 extern int jtbl_800DDC30[];
 extern int jtbl_800DDC90[];
 extern int jtbl_800DDD08[];
-extern int jtbl_800DDDD0[];
-extern int jtbl_800DDE48[];
 extern int jtbl_800DDE90[];
 extern int jtbl_800DDED8[];
 extern int jtbl_800DDFB0[];

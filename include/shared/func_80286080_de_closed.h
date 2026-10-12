@@ -18,16 +18,16 @@ typedef struct Shared_ControlManager { u8 unknown0[0x180C]; s32 state; } Shared_
 #include "span_C76B0/data.h"
 
 #include "types.h"
+#include "shared/func_8021E2A0_de_closed.h"
+#include "shared/func_8027AD4C_de_closed.h"
+#include "shared/func_804235A8_eu_closed.h"
 
 extern s32 D_800CD3F4;
-extern f32 D_800D2988;
 
-extern char D_80145040;
 extern Shared_ControlManager D_80145088;
 extern Shared_Game D_801462C8;
 extern s32 D_80146894;
 
-extern void func_8025476C_de(s32);
 extern void func_8028A698_de(void *);
 extern void func_8028D64C_de(void *);
 

@@ -24,11 +24,11 @@ struct PlayerRankInner;
 
 
 #include "types.h"
+#include "shared/func_8027AD4C_de_closed.h"
 
 
 
 
-extern Shared_MenuData D_80145040;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_800EED80[];
 #else

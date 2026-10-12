@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_1000/menu_ABBDC_versions.h"
 /* unbake published declaration: published_08c282c47e39cff43d22f22a */
 extern int func_80434750_de(void);
 
@@ -207,7 +208,6 @@ struct Player_func_8042F7A8_de {
 };
 
 /* unbake published declaration: published_4c3b7e35e8f4634d07471ff2 */
-extern u8 D_80152789;
 
 struct PakMenuController;
 /* unbake published declaration: published_4db0231b0e4126691f89e038 */

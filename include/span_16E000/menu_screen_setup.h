@@ -4,6 +4,8 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8043962C.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
+#include "shared/func_804235A8_eu_closed.h"
 /* Native model calls copy three 32-bit words by value. The float view
  * preserves the actual coordinate bits through that owning word contract. */
 typedef union SetupModelVector { Vec3 value; Triple words; } SetupModelVector;
@@ -47,9 +49,7 @@ typedef struct SetupScreen {
     s32 unk46C;
 } SetupScreen;
 extern SetupScreen *D_800E4F60;
-extern ListScreenRecord D_80146398[];
 /* The prior selection and pending-state words are one real two-word array. */
-extern s32 D_80154020[2];
 /* Actual loads in the US-rev1 constructor; not guessed constants. */
 extern f32 D_800E1AA0, D_800E1AA4, D_800E1AA8, D_800E1AAC;
 extern f32 D_800E1AB0, D_800E1AB4, D_800E1AB8;

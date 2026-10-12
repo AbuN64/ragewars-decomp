@@ -5,14 +5,12 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
+#include "span_16E000/menu_screen_setup.h"
 
 
 
 extern ModelPreviewScreen *D_800E5830;
 
-extern void func_80439B5C_de(void *,s32,Vec3,Vec3);
-extern void func_80439BE0_de(void *,Vec3);
-extern void func_80439C30_de(void *,Vec3);
 extern s32 func_80439C80_de(void *,s32);
 
 
