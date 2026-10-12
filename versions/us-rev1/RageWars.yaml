@@ -4011,7 +4011,7 @@ segments:
       - [0xCEA34, data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEA34"]
       - [0xCEA38, data, "src/ragewars_actor_handler_run_CEA38_us_rev1.c"]
       - [0xCEA40, .data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEA40"]
-      - [0xCEA70, data, "src/ragewars_actor_handler_run_CEA70_us_rev1.c"]
+      - [0xCEA70, .data, "src/ragewars_actor_handler_run_CEA70_us_rev1.c"]
       - [0xCEA7C, data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEA7C"]
       - [0xCEA80, data, "src/ragewars_actor_handler_run_CEA80_us_rev1.c"]
       - [0xCEA88, data, "rodata/unresolved/800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CEA88"]

@@ -44391,6 +44391,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/ragewars_actor_handler_run_CEA70_us_rev1.c"
+kind = "data"
+group = "data_800CDE40"
+members = ["src/ragewars_actor_handler_run_CEA70_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/ragewars_actor_handler_run_CEB10_us_rev1.c"
 kind = "data"
 group = "data_800CDEDC"
