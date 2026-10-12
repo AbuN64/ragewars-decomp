@@ -3017,7 +3017,7 @@ segments:
       - [0xC4754, .rodata, "src/ragewars_resident_strings_C9554_us_rev1.c"]
       - [0xC478C, .rodata, "src/rw_text_80246BE8_C958C_us_rev1.c"]
       - [0xC479E, data, "rodata/unresolved/800C3B9E"]
-      - [0xC47A0, rodata, "src/rw_text_80246BE8_C95A0_us_rev1.c"]
+      - [0xC47A0, .rodata, "src/rw_text_80246BE8_C95A0_us_rev1.c"]
       - [0xC47B2, data, "rodata/unresolved/800C3BB2"]
       - [0xC47B4, .rodata, "src/rw_text_80246BE8_C95B4_us_rev1.c"]
       - [0xC47E1, data, "rodata/unresolved/800C3BE1"]
