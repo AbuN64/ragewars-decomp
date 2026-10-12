@@ -6693,7 +6693,9 @@ struct Object_func_804220A8_de {
     char pad0[0x6C];
     float width;
     float height;
-    char pad74[0x228];
+    char pad74[0x1AC];
+    f32 particleViewMatrix[4][4];
+    char pad260[0x3C];
     float a;
     float b;
     float c;

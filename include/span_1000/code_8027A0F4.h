@@ -422,13 +422,34 @@ struct Shared_ParticleOscillation {
     char reserved[0x18];
     s8 ramp;
 };
+/* Descriptor distance range: scalars read at +0x1C/+0x20 by the particle transform. */
+struct Shared_ParticleDistanceRange {
+    u8 reserved0[0x1C];
+    f32 minimum;
+    f32 maximum;
+};
+/* Two 24-byte directional-light records occupy particle +0xE0..+0x110. */
+struct Shared_ParticleLighting {
+    u8 ambient[3], reserved3;
+    u8 ambientCopy[3], reserved7;
+    u8 diffuse[3], reservedB;
+    u8 diffuseCopy[3], reservedF;
+    s8 direction[3];
+    u8 reserved13[5];
+};
 struct Shared_ParticleDesc {
     s32 flags;
     char pad4[0x4];
     s8 animMode;
-    char pad9[0x7];
+    char pad9;
+    s8 clampToGround;
+    char padB[5];
     s16 unk10;
-    char pad12[0x1A];
+    char pad12[2];
+    s32 renderModel;
+    char pad18[0xC];
+    struct Shared_ParticleDistanceRange *distanceRange;
+    char pad28[4];
     struct Shared_ParticleOscillation *oscillation;
     char pad30[0x4];
     struct Shared_ParticleColors *colors;
@@ -439,12 +460,32 @@ struct Shared_ParticleDesc;
 struct Shared_ParticleOwner;
 struct Shared_ParticleTarget;
 /* unbake published declaration: published_b1656c38df628e0dea184522 */
+struct Shared_ParticleView {
+    u32 unknown0[2];
+    s32 unk8;
+    u32 unknownC[6];
+    s32 unk24;
+    u32 unknown28[62];
+    s32 grayscale;
+    u32 unknown124;
+    Vec3 unk128;
+    u32 unknown134[59];
+    Matrix viewMtx;
+    u32 unknown260[36];
+    f32 clipMatrix[4][4];
+    u32 unknown330[8];
+    Vec3 clipMin;
+    Vec3 clipMax;
+    u32 unknown368[112];
+    f32 fadeRange;
+};
 struct Shared_Particle {
     Shared_ParticleInstance inst;
     Vec3 attachmentPosition;
     s32 flags;
-    Matrix mtx[2];
-    char padE0[0x38];
+    PackedMatrixWords mtx[2];
+    struct Shared_ParticleLighting lighting[2];
+    char pad110[8];
     struct Shared_ParticleDesc *desc;
     s32 model;
     char pad120[0xC];
@@ -483,6 +524,8 @@ struct Shared_Particle {
     u8 prim[3];
     u8 env[3];
     u8 opacity;
+    u8 drawWhenHidden;
+    u8 reserved1DA[2];
 };
 
 struct func_8027C808_S1;

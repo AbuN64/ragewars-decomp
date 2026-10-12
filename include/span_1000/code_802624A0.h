@@ -219,6 +219,16 @@ struct BitReader {
     u8 *data;
     s32 bitPos;
 };
+/* Bitstream prefix plus the 17 by 17 signed grid decoded by func_80296020_de. */
+struct ResourceBitGrid {
+    BitReader reader;
+    s32 parameter8;
+    s32 parameterC;
+    u32 reserved10[2];
+    s16 cells[17][17];
+};
+typedef struct ResourceBitGrid ResourceBitGrid;
+
 
 struct func_80262EA8_S1;
 /* unbake published declaration: published_d9c2c26dcbf1bc0dc57baf92 */

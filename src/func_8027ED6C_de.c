@@ -5,20 +5,7 @@
 #include "types.h"
 #include "span_1000/code_8027A0F4.h"
 
-struct Shared_ParticleView {
-    u32 unknown0[2];
-    s32 unk8;
-    u32 unknownC[6];
-    s32 unk24;
-    u32 unknown28[62];
-    s32 grayscale;
-    u32 unknown124;
-    Vec3 unk128;
-    u32 unknown134[59];
-    Matrix viewMtx;
-    u32 unknown260[178];
-    f32 fadeRange;
-};
+/* Shared_ParticleView is defined in the particle header. */
 struct Shared_AnimFrame {
     u8 kind;
     u8 unknown1;

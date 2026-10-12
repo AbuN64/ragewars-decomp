@@ -11495,6 +11495,7 @@ schema = 1
 "Resource" = { declaration = "typedef struct Resource Resource;", evidence = "authored" }
 "Resource37" = { declaration = "typedef struct Resource37 { void *data; } Resource37;", evidence = "authored" }
 "ResourceBank" = { declaration = "typedef struct ResourceBank ResourceBank;", evidence = "authored" }
+"ResourceBitGrid" = { declaration = "struct ResourceBitGrid { BitReader reader; s32 parameter8; s32 parameterC; u32 reserved10[2]; s16 cells[17][17]; };", evidence = "authored" }
 "ResourceEntry" = { declaration = "typedef struct ResourceEntry ResourceEntry;", evidence = "authored" }
 "ResourceManagerState" = { declaration = "struct ResourceManagerState { s32 active; s32 count; };", evidence = "authored" }
 "ResourceObject23" = { declaration = "typedef struct ResourceObject23 { s8 pad0; s8 type; char pad2[0x50-2]; s32 model; s32 loadedType; s32 resourceName; s32 resourceSize; Node_func_80251F6C_de *blockNode; } ResourceObject23;", evidence = "authored" }
@@ -12234,11 +12235,14 @@ schema = 1
 "Shared_Particle" = { declaration = "typedef struct Shared_Particle Shared_Particle;", evidence = "authored" }
 "Shared_ParticleColors" = { declaration = "typedef struct Shared_ParticleColors Shared_ParticleColors;", evidence = "authored" }
 "Shared_ParticleDesc" = { declaration = "typedef struct Shared_ParticleDesc Shared_ParticleDesc;", evidence = "authored" }
+"Shared_ParticleDistanceRange" = { declaration = "struct Shared_ParticleDistanceRange { u8 reserved0[0x1C]; f32 minimum; f32 maximum; };", evidence = "authored" }
 "Shared_ParticleFade" = { declaration = "typedef struct Shared_ParticleFade Shared_ParticleFade;", evidence = "authored" }
 "Shared_ParticleInstance" = { declaration = "struct Shared_ParticleInstance { char pad0[0x4]; u16 type; char pad6[0x2]; Vec3 pos; s32 unk14; char pad18[0x4]; Vec3 velocity; char pad28[0x10]; s32 unk38; char pad3C[0x14]; };", evidence = "authored" }
+"Shared_ParticleLighting" = { declaration = "struct Shared_ParticleLighting { u8 ambient[3], reserved3; u8 ambientCopy[3], reserved7; u8 diffuse[3], reservedB; u8 diffuseCopy[3], reservedF; s8 direction[3]; u8 reserved13[5]; };", evidence = "authored" }
 "Shared_ParticleOscillation" = { declaration = "struct Shared_ParticleOscillation { char reserved[0x18]; s8 ramp; };", evidence = "authored" }
 "Shared_ParticleOwner" = { declaration = "typedef struct Shared_ParticleOwner Shared_ParticleOwner;", evidence = "authored" }
 "Shared_ParticleTarget" = { declaration = "struct Shared_ParticleTarget { char pad0[0xB4]; struct UnitMtx *drawMatrices; char padB8[0x48]; s32 flags; char pad104[0x6C]; s32 unk170; s32 unk174; char pad178[0x2C]; s8 unk1A4; };", evidence = "authored" }
+"Shared_ParticleView" = { declaration = "struct Shared_ParticleView { u32 unknown0[2]; s32 unk8; u32 unknownC[6]; s32 unk24; u32 unknown28[62]; s32 grayscale; u32 unknown124; Vec3 unk128; u32 unknown134[59]; Matrix viewMtx; u32 unknown260[36]; f32 clipMatrix[4][4]; u32 unknown330[8]; Vec3 clipMin; Vec3 clipMax; u32 unknown368[112]; f32 fadeRange; };", evidence = "authored" }
 "Shared_Pickup" = { declaration = "typedef struct Shared_Pickup Shared_Pickup;", evidence = "authored" }
 "Shared_PickupDef" = { declaration = "typedef struct Shared_PickupDef Shared_PickupDef;", evidence = "authored" }
 "Shared_PickupDef_size_check" = { declaration = "typedef char Shared_PickupDef_size_check[(sizeof(Shared_PickupDef) == 0x24) ? 1 : -1];", evidence = "authored" }
