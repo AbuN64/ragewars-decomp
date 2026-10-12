@@ -103,6 +103,7 @@ schema = 1
 "func_802023A8_de" = { evidence = "authored", signature = "void func_802023A8_de(void)" }
 "func_802023C4_de" = { evidence = "authored", signature = "int func_802023C4_de()" }
 "func_802023D0_de" = { evidence = "authored", signature = "void func_802023D0_de(int arg0)" }
+"func_802023DC_de" = { evidence = "declared", signature = "u32 func_802023DC_de(void)" }
 "func_80202CA0_de" = { evidence = "landed", signature = "Vector4f func_80202CA0_de(Vec3 *dir)" }
 "func_80202FDC_de" = { evidence = "landed", signature = "void func_80202FDC_de(Owner *owner, Rider *rider, s32 mode, char *target)" }
 "func_80203278_de" = { evidence = "landed", signature = "void func_80203278_de(SharedPlayer *player, Rider_func_80203278_de *rider, Result *result)" }
@@ -4131,6 +4132,7 @@ schema = 1
 "func_80444F98_de" = { evidence = "landed", signature = "s32 func_80444F98_de(void *first, void *second, void *third)" }
 "func_80444FA0_us_rev1" = { evidence = "landed", signature = "s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7)" }
 "func_80445020_de" = { evidence = "landed", signature = "s32 func_80445020_de(void *first, void *second)" }
+"func_80445074_eu" = { evidence = "declared", signature = "void func_80445074_eu(void *)" }
 "func_80445160_de" = { evidence = "landed", signature = "s32 func_80445160_de(void *unused, void *arg1)" }
 "func_804451D0_de" = { evidence = "landed", signature = "s32 func_804451D0_de(Item_func_80441FE8_de *field)" }
 "func_8044524C_us_rev1" = { evidence = "landed", signature = "void func_8044524C_us_rev1(void *first, void *second, void *third)" }
@@ -4257,6 +4259,7 @@ schema = 1
 "func_8044D934_de" = { evidence = "landed", signature = "void func_8044D934_de(s32 arg0, void ***arg1)" }
 "func_8044DA54_de" = { evidence = "landed", signature = "void func_8044DA54_de(Owner_func_8044D794_de *arg0, void ***arg1)" }
 "func_8044DB70_de" = { evidence = "declared", signature = "void func_8044DB70_de()" }
+"func_8044DC60_de" = { evidence = "declared", signature = "void func_8044DC60_de(void *)" }
 "func_8044DCC0_de" = { evidence = "landed", signature = "s32 func_8044DCC0_de(void)" }
 "func_8044DD50_de" = { evidence = "landed", signature = "void func_8044DD50_de(char *match)" }
 "func_8044DDD4_de" = { evidence = "landed", signature = "void func_8044DDD4_de(void *arg0)" }

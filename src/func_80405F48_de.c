@@ -17,8 +17,8 @@ typedef struct Shared_PakMenu {
     Shared_ControllerPort *owner;
 } Shared_PakMenu;
 
-#include "span_16E000/code_80403BCC.h"
-#include "span_16E000/code_80405DC0.h"
+extern s32 D_800E28C8, D_800DE874;
+extern char *D_800D36D4, *D_800D36D8, *D_800D36DC;
 
 extern s32 D_8015375C;
 
@@ -55,21 +55,21 @@ void func_80405F48_de(Shared_PakMenu *menu) {
             switch (D_800DE874) {
                 case 1:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        func_802A037C_de(code, D_800D36E0) == 0 && func_802A037C_de(company, (char *)D_800D36DC) == 0) {
+                        func_802A037C_de(code, D_800D36E0) == 0 && func_802A037C_de(company, D_800D36DC) == 0) {
                         match = 1;
                     } else {
                         match = 0;
                     }
-                    title = (char *)D_800D36D4;
+                    title = D_800D36D4;
                     break;
                 case 2:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        func_802A037C_de(code, D_800D36E0) == 0 && func_802A037C_de(company, (char *)D_800D36DC) == 0) {
+                        func_802A037C_de(code, D_800D36E0) == 0 && func_802A037C_de(company, D_800D36DC) == 0) {
                         match = 1;
                     } else {
                         match = 0;
                     }
-                    title = (char *)D_800D36D8;
+                    title = D_800D36D8;
                     break;
                 case 0:
                 default:
