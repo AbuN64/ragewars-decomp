@@ -4550,7 +4550,7 @@ segments:
       - [0x1890E0, c, "func_80412CA0_de"]
       - [0x18911C, asm, "func_80412CDC_de"]
       - [0x1891D4, c, "func_80412D94_de"]
-      - [0x189394, asm, "func_80412F54_de"]
+      - [0x189394, c, "func_80412F54_de"]
       - [0x189824, c, "func_804133E4_de"]
       - [0x189844, c, "func_80413404_de"]
       - [0x1898B8, c, "func_80413478_de"]

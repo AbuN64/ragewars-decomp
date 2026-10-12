@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_16E000_CODE_80412270_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_16E000/code_80413728.h"
+#include "types.h"
 struct Record_func_80412710_de;
 /* unbake published declaration: published_025ad358ecf5dd267927bed0 */
 typedef struct Record_func_80412710_de Record_func_80412710_de;
@@ -213,5 +215,26 @@ typedef struct Table_func_804122CC_de Table_func_804122CC_de;
 
 /* unbake published declaration: published_f7990f4385d30f2460f01e1a */
 extern s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
+
+typedef struct ImageDescriptor { u8 format; char pad1[7]; s16 width; char padA[0xA]; void *pixels, *palette; } ImageDescriptor;
+extern Format D_8014DA90;
+extern Format D_8014DA50;
+extern void (*D_80153CD4)(void);
+extern void (*D_80153CD0)(void);
+extern void (*D_80153CDC)(void);
+extern void (*D_80153CD8)(void);
+extern void D_0041406C(void);
+extern void D_004140BC(void);
+extern void D_00414094(void);
+extern void D_00414244(void);
+extern void D_00414220(void);
+extern void D_00413FCC(void);
+extern void D_00414024(void);
+extern void D_00413FF8(void);
+extern void D_00414168(void);
+extern void D_00414138(void);
+extern void D_004141C0(void);
+extern void D_004141E0(void);
+extern void D_00414200(void);
 
 #endif

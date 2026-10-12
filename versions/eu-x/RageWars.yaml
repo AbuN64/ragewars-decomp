@@ -4604,7 +4604,7 @@ segments:
       - [0x1030E0, c, "func_80412CA0_de"]
       - [0x10311C, asm, "func_80412CDC_de"]
       - [0x1031D4, c, "func_80412D94_de"]
-      - [0x103394, asm, "func_80412F54_de"]
+      - [0x103394, c, "func_80412F54_de"]
       - [0x103824, c, "func_804133E4_de"]
       - [0x103844, c, "func_80413404_de"]
       - [0x1038B8, c, "func_80413478_de"]

@@ -11,6 +11,19 @@ schema = 1
 "D_0040C5C8" = { evidence = "authored", signature = "void D_0040C5C8()" }
 "D_004125A4" = { evidence = "authored", signature = "s32 D_004125A4(void *, s32, s32, s32, s32)" }
 "D_00412634" = { evidence = "authored", signature = "void D_00412634()" }
+"D_00413FCC" = { evidence = "authored", signature = "void D_00413FCC(void)" }
+"D_00413FF8" = { evidence = "authored", signature = "void D_00413FF8(void)" }
+"D_00414024" = { evidence = "authored", signature = "void D_00414024(void)" }
+"D_0041406C" = { evidence = "authored", signature = "void D_0041406C(void)" }
+"D_00414094" = { evidence = "authored", signature = "void D_00414094(void)" }
+"D_004140BC" = { evidence = "authored", signature = "void D_004140BC(void)" }
+"D_00414138" = { evidence = "authored", signature = "void D_00414138(void)" }
+"D_00414168" = { evidence = "authored", signature = "void D_00414168(void)" }
+"D_004141C0" = { evidence = "authored", signature = "void D_004141C0(void)" }
+"D_004141E0" = { evidence = "authored", signature = "void D_004141E0(void)" }
+"D_00414200" = { evidence = "authored", signature = "void D_00414200(void)" }
+"D_00414220" = { evidence = "authored", signature = "void D_00414220(void)" }
+"D_00414244" = { evidence = "authored", signature = "void D_00414244(void)" }
 "D_00419A4C" = { evidence = "authored", signature = "s32 D_00419A4C(void *, s32, s32, s32, s32)" }
 "D_00419ADC" = { evidence = "authored", signature = "void D_00419ADC()" }
 "D_00419F9C" = { evidence = "authored", signature = "s32 D_00419F9C(void *, s32, s32, s32, s32)" }
@@ -3285,6 +3298,7 @@ schema = 1
 "func_80412C54_de" = { evidence = "landed", signature = "s32 func_80412C54_de(u8 *entry, void *second, void *third, s32 active)" }
 "func_80412CA0_de" = { evidence = "landed", signature = "s32 func_80412CA0_de(struct Object_func_80412CA0_de *object)" }
 "func_80412D94_de" = { evidence = "landed", signature = "u32 func_80412D94_de(u32 value, s32 from, s32 to)" }
+"func_80412F54_de" = { evidence = "landed", signature = "void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source)" }
 "func_804133E4_de" = { evidence = "landed", signature = "void func_804133E4_de(int value)" }
 "func_80413404_de" = { evidence = "landed", signature = "void func_80413404_de(Resource_func_80413404_de *res)" }
 "func_80413478_de" = { evidence = "landed", signature = "int func_80413478_de(void)" }
@@ -9103,6 +9117,8 @@ schema = 1
 "D_8014DA34" = { declaration = "extern int D_8014DA34;", evidence = "authored" }
 "D_8014DA38" = { declaration = "extern int D_8014DA38;", evidence = "authored" }
 "D_8014DA3C" = { declaration = "extern int D_8014DA3C;", evidence = "authored" }
+"D_8014DA50" = { declaration = "extern Format D_8014DA50;", evidence = "authored" }
+"D_8014DA90" = { declaration = "extern Format D_8014DA90;", evidence = "authored" }
 "D_8014DCD4" = { declaration = "extern int D_8014DCD4;", evidence = "authored" }
 "D_8014DCDC" = { declaration = "extern s32 D_8014DCDC;", evidence = "authored" }
 "D_8014DCE0" = { declaration = "extern int D_8014DCE0;", evidence = "authored" }
@@ -10323,6 +10339,7 @@ schema = 1
 "HudStatusShared_Settings" = { declaration = "typedef struct HudStatusShared_Settings HudStatusShared_Settings;", evidence = "authored" }
 "Icon" = { declaration = "struct Icon { s32 key; s32 other; char pad8[0x10 - 0x8]; };", evidence = "authored" }
 "Image" = { declaration = "struct Image { char pad0[8]; struct ImageHeader *header; s32 fieldC; s32 field10; char pad14[0x3C - 0x14]; s32 flags; };", evidence = "authored" }
+"ImageDescriptor" = { declaration = "typedef struct ImageDescriptor { u8 format; char pad1[7]; s16 width; char padA[0xA]; void *pixels, *palette; } ImageDescriptor;", evidence = "authored" }
 "ImageHeader" = { declaration = "struct ImageHeader { char pad0[2]; unsigned char widthShift; unsigned char heightShift; char pad4[0x1D - 4]; unsigned char scale; char pad1E[0x21 - 0x1E]; unsigned char width; unsigned char height; unsigned char format; char data[1]; };", evidence = "authored" }
 "ImageSet" = { declaration = "struct ImageSet { u16 columns; u16 rows; char pad[4]; };", evidence = "authored" }
 "Image_func_80413480_de" = { declaration = "struct Image_func_80413480_de { u8 unk0; u8 flags; char pad2[0xE]; s32 paletteCount; void *palette; void *pixels; s32 unk1C; };", evidence = "authored" }

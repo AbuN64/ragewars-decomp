@@ -4581,7 +4581,7 @@ segments:
       - [0x176D20, c, "func_80412CA0_de"]
       - [0x176D5C, .data, "rodata/unresolved/80412D5C"]
       - [0x176E14, c, "func_80412D94_de"]
-      - [0x176FD4, asm, "func_80412F54_de"]
+      - [0x176FD4, c, "func_80412F54_de"]
       - [0x177464, c, "func_804133E4_de"]
       - [0x177484, c, "func_80413404_de"]
       - [0x1774F8, c, "func_80413478_de"]
