@@ -20,39 +20,77 @@ extern void func_802A42F4_de(void *, void *), func_80255ED8_de(void *, void *), 
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32), func_8025DF34_de(s32);
 void func_802827C8_de(DraftWorld827C8 *world, s32 owner)
 {
-    DraftActor827C8 *actor, *next;
-    DraftActions827C8 *actions;
-    DraftModel827C8 *model;
-    DraftPair827C8 params;
-    u16 animation, effect, sound;
-    s32 count = 0, index;
-    actor = world->actors;
-    while (actor) {
-        next = actor->next;
-        if (actor->type == 0x41E && (actor->flags & 0x100) && actor->owner == owner) {
-            model = actor->model;
-            actor->flags &= ~0x100;
-            index = func_80284068_de(actor) ? 12 : 10;
-            actions = model->actions;
-            animation = actions->animation[index]; effect = actions->effect[index];
-            params = actions->params[index]; sound = model->actions->sound[index];
-            if (effect != 0xFFFF) func_80265E10_de(actor, actor, effect, -1, actor->position, params);
-            if (animation != 0xFFFF) func_80279B40_de(actor, animation, actor->animation, 1);
-            if (sound != 0xFFFF) func_8025DE54_de((s16)sound, actor->position, 0, -1);
-            actor->flags |= 0x100;
-            if (!(actor->flags & 0x800)) {
-                func_80279A00_de(actor);
-                if (actor->linked) { func_80284178_de(actor); func_802A42F4_de(&D_801379C0, actor); }
-                if (actor->effect) { func_80268C7C_de(&D_8013B1A8, actor->effect); actor->effect = 0; }
-                if (actor->refs) --*actor->refs;
-                actor->flags &= 0xFDFFFEFF;
-                func_80255ED8_de(actor->list, actor); actor->list = 0;
-                func_80255CB8_de(world->freeList, actor);
-                if (actor->flags & 0x1000000) func_80255ED8_de(world->activeList, actor);
-            }
-            count++;
+  DraftActor827C8 *actor;
+  DraftActor827C8 *next;
+  DraftActions827C8 *actions;
+  DraftModel827C8 *model;
+  DraftPair827C8 params;
+  unsigned long animation;
+  u16 effect;
+  u16 sound;
+  s32 count = 0;
+  s32 index;
+  actor = world->actors;
+  while (actor)
+  {
+    next = actor->next;
+    if (((actor->type == 0x41E) && (actor->flags & 0x100)) && (actor->owner == owner))
+    {
+      model = actor->model;
+      actor->flags &= ~0x100;
+      index = (func_80284068_de(actor)) ? (12) : (10);
+      actions = model->actions;
+      animation = actions->animation[index];
+      effect = actions->effect[index];
+      params = actions->params[index];
+      sound = model->actions->sound[index];
+      if (effect != 0xFFFF)
+      {
+        func_80265E10_de(actor, actor, effect, -1, actor->position, params);
+      }
+      if (animation != 0xFFFF)
+      {
+        func_80279B40_de(actor, animation, actor->animation, 1);
+      }
+      if (sound != 0xFFFF)
+      {
+        func_8025DE54_de((s16) sound, actor->position, 0, -1);
+      }
+      actor->flags |= 0x100;
+      if (!(actor->flags & 0x800))
+      {
+        func_80279A00_de(actor);
+        if (actor->linked)
+        {
+          func_80284178_de(actor);
+          func_802A42F4_de(&D_801379C0, actor);
         }
-        actor = next;
+        if (actor->effect)
+        {
+          func_80268C7C_de(&D_8013B1A8, actor->effect);
+          actor->effect = 0;
+        }
+        if (actor->refs)
+        {
+          --(*actor->refs);
+        }
+        actor->flags &= 0xFDFFFEFF;
+        func_80255ED8_de(actor->list, actor);
+        actor->list = 0;
+        func_80255CB8_de(world->freeList, actor);
+        if (actor->flags & 0x1000000)
+        {
+          func_80255ED8_de(world->activeList, actor);
+        }
+      }
+      count++;
     }
-    if (count) { func_8025DF34_de(0x91A); func_8025DF34_de(0x91A); }
+    actor = next;
+  }
+
+  if (count)
+  {
+    func_8025DF34_de(0x91A);
+    func_8025DF34_de(0x91A);
+  }
 }
