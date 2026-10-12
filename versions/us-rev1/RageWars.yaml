@@ -5157,7 +5157,7 @@ segments:
       - [0xD3A60, data, "src/ragewars_particle_state_depth_us_rev1.c"]
       - [0xD3AC0, .data, "src/ragewars_particle_state_decal_us_rev1.c"]
       - [0xD3B18, data, "src/ragewars_particle_state_primitive_us_rev1.c"]
-      - [0xD3B78, data, "src/ragewars_menu_sexysteve_token_us_rev1.c"]
+      - [0xD3B78, .data, "src/ragewars_menu_sexysteve_token_us_rev1.c"]
       - [0xD3B8C, data, "rodata/unresolved/800D2E60_unclaimed_D3B78_unclaimed_D3B8C"]
       - [0xD3B90, data, "src/ragewars_font_resource_selector_us_rev1.c"]
       - [0xD3B94, .data, "src/ragewars_font_character_map_primary_us_rev1.c"]

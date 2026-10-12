@@ -5258,6 +5258,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D2F78"
+segment = "span_C76B0"
+members = ["src/ragewars_menu_sexysteve_token_us_rev1.c", "rodata/unresolved/800D2E60_unclaimed_D3B78_unclaimed_D3B8C"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D2F94"
 segment = "span_C76B0"
 members = ["src/ragewars_font_character_map_primary_us_rev1.c"]
@@ -43140,6 +43148,17 @@ path = "src/ragewars_menu_motion_scripts_us_rev1.c"
 kind = "data"
 group = "data_800D316C"
 members = ["src/ragewars_menu_motion_scripts_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_menu_sexysteve_token_us_rev1.c"
+kind = "data"
+group = "data_800D2F78"
+members = ["src/ragewars_menu_sexysteve_token_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
