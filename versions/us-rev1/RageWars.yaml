@@ -2622,7 +2622,7 @@ segments:
       - [0xC6510, asm, "func_802C0820_de"]
       - [0xC6A88, asm, "func_802C1078_eu_x"]
       - [0xC6A90, asm, "func_802C0DA0_de"]
-      - [0xC7014, data, "rodata/unresolved/802C6414"]
+      - [0xC7014, .data, "rodata/unresolved/802C6414"]
       - [0xC7020, asm, "func_802C1330_de"]
       - [0xC7514, data, "rodata/unresolved/802C6914"]
       - [0xC7520, c, "__cmpdi2"]
