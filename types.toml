@@ -143,7 +143,7 @@ schema = 1
 "func_80203B60_de" = { evidence = "landed", signature = "void func_80203B60_de(void *arg0, void *arg1)" }
 "func_80203C08_de" = { evidence = "landed", signature = "void func_80203C08_de(void *arg0, void *arg1)" }
 "func_80203C40_de" = { evidence = "landed", signature = "void func_80203C40_de(Shared_Actor *arg0)" }
-"func_80203C84_de" = { evidence = "landed", signature = "void func_80203C84_de(void *arg0, struct WeaponFireState *arg1, s32 arg2)" }
+"func_80203C84_de" = { evidence = "landed", signature = "void func_80203C84_de(void *arg0, WeaponFireState *arg1, s32 arg2)" }
 "func_80203CFC_de" = { evidence = "landed", signature = "void func_80203CFC_de(void *unused0, void *arg1, s32 arg2)" }
 "func_80203D4C_de" = { evidence = "landed", signature = "void func_80203D4C_de(void *unused, void *object, Vec3 *pivot, Vec3 *point)" }
 "func_80203DF0_de" = { evidence = "landed", signature = "void func_80203DF0_de(void *arg0, void *arg1)" }
@@ -152,7 +152,7 @@ schema = 1
 "func_80203F04_de" = { evidence = "landed", signature = "s32 func_80203F04_de(Player *player, Rider_func_80203F04_de *rider, Player *other)" }
 "func_802043E0_de" = { evidence = "landed", signature = "void func_802043E0_de(char *arg0, char *arg1)" }
 "func_80204468_de" = { evidence = "landed", signature = "void func_80204468_de(void *arg0, void *arg1)" }
-"func_802044C8_de" = { evidence = "landed", signature = "void func_802044C8_de(void *actor, void *state)" }
+"func_802044C8_de" = { evidence = "landed", signature = "void func_802044C8_de(SharedPlayer *actor, void *state)" }
 "func_8020459C_de" = { evidence = "landed", signature = "s32 func_8020459C_de(void *arg0)" }
 "func_802045CC_de" = { evidence = "landed", signature = "void func_802045CC_de(void *arg0, void *arg1)" }
 "func_80204620_de" = { evidence = "landed", signature = "s32 func_80204620_de(void *arg0)" }
@@ -169,7 +169,7 @@ schema = 1
 "func_80204BD0_de" = { evidence = "landed", signature = "void func_80204BD0_de(void *arg0, void *arg1)" }
 "func_80204C34_de" = { evidence = "landed", signature = "void func_80204C34_de(void *arg0, void *arg1)" }
 "func_80204C68_de" = { evidence = "landed", signature = "void func_80204C68_de(void *arg0, void *arg1)" }
-"func_80204D2C_de" = { evidence = "landed", signature = "void func_80204D2C_de(void *arg0)" }
+"func_80204D2C_de" = { evidence = "landed", signature = "void func_80204D2C_de(BreakableHitContext *arg0)" }
 "func_80204DE0_de" = { evidence = "landed", signature = "void func_80204DE0_de(void *a, void *b)" }
 "func_80204DFC_de" = { evidence = "landed", signature = "void func_80204DFC_de(void *arg0)" }
 "func_80204E2C_de" = { evidence = "landed", signature = "void func_80204E2C_de(void *a, void *b)" }
@@ -547,7 +547,7 @@ schema = 1
 "func_8022A940_de" = { evidence = "landed", signature = "void func_8022A940_de(void *arg0)" }
 "func_8022A95C_de" = { evidence = "landed", signature = "void func_8022A95C_de(void *arg0)" }
 "func_8022AA44_de" = { evidence = "landed", signature = "f32 func_8022AA44_de(Shared_func_8022AA34_View *arg0)" }
-"func_8022AA9C_de" = { evidence = "landed", signature = "s32 func_8022AA9C_de(void *arg0, s32 arg1)" }
+"func_8022AA9C_de" = { evidence = "landed", signature = "s32 func_8022AA9C_de(AimPlayer *arg0, s32 arg1)" }
 "func_8022AAD4_de" = { evidence = "landed", signature = "s16 func_8022AAD4_de(void *arg0, s32 arg1)" }
 "func_8022AB20_de" = { evidence = "landed", signature = "s16 func_8022AB20_de(void *arg0, s32 arg1)" }
 "func_8022AB9C_de" = { evidence = "landed", signature = "s32 func_8022AB9C_de(void *arg0)" }
@@ -601,9 +601,9 @@ schema = 1
 "func_8022C080_de" = { evidence = "landed", signature = "void func_8022C080_de(void *arg0, void *arg1)" }
 "func_8022C0D0_de" = { evidence = "landed", signature = "void func_8022C0D0_de(void *arg0)" }
 "func_8022C110_de" = { evidence = "landed", signature = "void func_8022C110_de(Player_func_8022C110_de *player)" }
-"func_8022C1E8_de" = { evidence = "landed", signature = "void func_8022C1E8_de(struct SharedPlayer *arg0, struct ScreenRectangle *arg1)" }
+"func_8022C1E8_de" = { evidence = "landed", signature = "void func_8022C1E8_de(char *arg0, char *arg1)" }
 "func_8022C2B4_de" = { evidence = "landed", signature = "void func_8022C2B4_de(void *arg0, struct ScreenRectangle *arg1)" }
-"func_8022C37C_de" = { evidence = "landed", signature = "void func_8022C37C_de(struct SharedPlayer *arg0, struct ScreenRectangle *arg1)" }
+"func_8022C37C_de" = { evidence = "landed", signature = "void func_8022C37C_de(char *arg0, char *arg1)" }
 "func_8022C454_de" = { evidence = "landed", signature = "void *func_8022C454_de(void *arg0)" }
 "func_8022C460_de" = { evidence = "landed", signature = "s32 func_8022C460_de(void *arg0)" }
 "func_8022C490_de" = { evidence = "landed", signature = "void func_8022C490_de(Player1680 *player)" }
