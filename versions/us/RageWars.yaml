@@ -3629,7 +3629,7 @@ segments:
       - [0xC8088, data, "rodata/unresolved/800C7488"]
       - [0xC8090, rodata, "src/rw_formats_802B3D10_CD3C0_us_rev1.c"]
       - [0xC8093, data, "rodata/unresolved/800C7493"]
-      - [0xC8094, rodata, "src/ragewars_resident_strings_CD3C4_us_rev1.c"]
+      - [0xC8094, .rodata, "src/ragewars_resident_strings_CD3C4_us_rev1.c"]
       - [0xC80A8, rodata, "src/rw_pool_802B3CD0_CD3D8_us_rev1.c"]
       - [0xC80B0, rodata, "src/rw_pool_802B3DB8_CD3E0_us_rev1.c"]
       - [0xC80B8, data, "rodata/unresolved/800C74B8"]

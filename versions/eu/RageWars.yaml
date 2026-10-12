@@ -3652,7 +3652,7 @@ segments:
       - [0xC8D58, data, "rodata/unresolved/800C8158"]
       - [0xC8D60, rodata, "src/rw_formats_802B3D10_CD3C0_us_rev1.c"]
       - [0xC8D63, data, "rodata/unresolved/800C8163"]
-      - [0xC8D64, rodata, "src/ragewars_resident_strings_CD3C4_us_rev1.c"]
+      - [0xC8D64, .rodata, "src/ragewars_resident_strings_CD3C4_us_rev1.c"]
       - [0xC8D78, rodata, "src/rw_pool_802B3CD0_CD3D8_us_rev1.c"]
       - [0xC8D80, rodata, "src/rw_pool_802B3DB8_CD3E0_us_rev1.c"]
       - [0xC8D88, data, "rodata/unresolved/800C8188"]

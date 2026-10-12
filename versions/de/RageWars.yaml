@@ -3658,7 +3658,7 @@ segments:
       - [0xC8168, data, "rodata/unresolved/800C7568"]
       - [0xC8170, rodata, "src/rw_formats_802B3D10_CD3C0_us_rev1.c"]
       - [0xC8173, data, "rodata/unresolved/800C7573"]
-      - [0xC8174, rodata, "src/ragewars_resident_strings_CD3C4_us_rev1.c"]
+      - [0xC8174, .rodata, "src/ragewars_resident_strings_CD3C4_us_rev1.c"]
       - [0xC8188, rodata, "src/rw_pool_802B3CD0_CD3D8_us_rev1.c"]
       - [0xC8190, rodata, "src/rw_pool_802B3DB8_CD3E0_us_rev1.c"]
       - [0xC8198, data, "rodata/unresolved/800C7598"]
