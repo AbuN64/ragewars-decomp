@@ -20,7 +20,7 @@ extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
 
 
 
-void func_80204D2C_de(void *arg0) {
+void func_80204D2C_de(BreakableHitContext *arg0) {
     struct Shape_func_802764D4_de_2 local;
     Shared_World *flag;
 
@@ -31,7 +31,7 @@ void func_80204D2C_de(void *arg0) {
     func_802A5D38_de(&D_801379C0, arg0);
     if (flag->mode != 4) {
         func_80267198_de(arg0, arg0, 7,
-                      ((func_80204C68_S2 *)(arg0))->unk8, local);
-        ((func_80204C68_S2 *)(arg0))->unk100 |= 0x08000000;
+                      arg0->unk_8, local);
+        arg0->unk_100 |= 0x08000000;
     }
 }
