@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_unresolved_800C912C[1] = {
+/* ROM-grounded data: rodata/unresolved/800C912C */
+unsigned int D_blob_18bb52ae02b26281026d[1] = {
     0x68696373,
 };
