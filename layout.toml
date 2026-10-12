@@ -4682,6 +4682,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CB560"
+segment = "span_C76B0"
+members = ["src/ragewars_credits_label_blank_us_rev1.c", "rodata/unresolved/800CB550_unclaimed_CC160_unclaimed_CC161"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CB561"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CB550_unclaimed_CC160_unclaimed_CC161", "src/ragewars_resident_strings_CC164_us_rev1.c"]
@@ -7122,6 +7130,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800D8340"
+segment = "span_C76B0"
+members = ["rodata/unresolved/800D80A0_unclaimed_D8F40", "src/ragewars_ai_boundary_flag_us_rev1.c", "rodata/unresolved/800D80A0_unclaimed_D8F40_unclaimed_D8F61", "data/unresolved/800D8364"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800D8374"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800D80A0_unclaimed_D8F40_unclaimed_D8F74", "src/ragewars_controller_pak_initialized_us_rev1.c"]
@@ -7674,6 +7690,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0B47"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E0B47"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0C3C"
 segment = "span_E1720"
 members = ["src/rw_constants_8040293C_E183C_us_rev1.c"]
@@ -7706,6 +7730,22 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0D2F"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E0D2F"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E0D4B"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E0D4B"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0D4C"
 segment = "span_C24F0"
 members = ["rodata/unresolved/800E0D4C"]
@@ -7714,9 +7754,25 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E0D6B"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E0D6B"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E0D6C"
 segment = "span_E1720"
 members = ["src/rw_text_804058B0_E196C_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E0D8F"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E0D8F"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7754,6 +7810,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E10E3"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E10E3", "data/unresolved/800E10E4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1118"
 segment = "span_E1720"
 members = ["src/rw_pool_80414400_E1D18_us_rev1.c"]
@@ -7786,6 +7850,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1483"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1483", "data/unresolved/800E1484"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1490"
 segment = "span_E1720"
 members = ["src/rw_text_8041C610_E2090_us_rev1.c"]
@@ -7797,6 +7869,14 @@ sdk = false
 name = "data_800E14A4"
 segment = "span_E1720"
 members = ["src/rw_text_8041C610_E20A4_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E153F"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E153F"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7834,6 +7914,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1A07"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1A07"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1A34"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E1A34"]
@@ -7850,6 +7938,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1B23"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1B23"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1B2C"
 segment = "span_E1720"
 members = ["src/rw_pool_8042CE74_E272C_us_rev1.c"]
@@ -7858,9 +7954,33 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E1B63"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1B63", "data/unresolved/800E1B64"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E1B84"
 segment = "span_E1720"
 members = ["src/rw_pool_8042ED70_E2784_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E1DFF"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1DFF"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E1EE3"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1EE3"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7877,6 +7997,14 @@ sdk = false
 name = "data_800E1F34"
 segment = "span_E1720"
 members = ["rodata/unresolved/800E1F34"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E1F47"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E1F47"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -7946,6 +8074,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800E23C3"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E23C3", "data/unresolved/800E23C4"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800E2478"
 segment = "span_E1720"
 members = ["src/rw_pool_cells_8043F52C_E3078_us_rev1.c"]
@@ -7981,6 +8117,14 @@ sdk = false
 name = "data_800E2504"
 segment = "span_E1720"
 members = ["src/rw_constants_80441BE0_E3104_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_800E278F"
+segment = "span_E1720"
+members = ["rodata/unresolved/800E278F"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -9557,6 +9701,14 @@ sdk = false
 name = "data_8014F118"
 segment = "span_1B3F60"
 members = ["rodata/unresolved/8014F118"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
+name = "data_80153F8B"
+segment = "span_1BCBB0"
+members = ["rodata/unresolved/80153F8B"]
 evidence = "inferred"
 signals = ["adjacent"]
 sdk = false
@@ -44700,6 +44852,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/ragewars_ai_boundary_flag_us_rev1.c"
+kind = "data"
+group = "data_800D8340"
+members = ["src/ragewars_ai_boundary_flag_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/ragewars_arccos_table_us_rev1.c"
 kind = "data"
 group = "code_802412C0"
@@ -45344,6 +45507,17 @@ path = "src/ragewars_controller_pak_initialized_us_rev1.c"
 kind = "data"
 group = "data_800D8374"
 members = ["src/ragewars_controller_pak_initialized_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/ragewars_credits_label_blank_us_rev1.c"
+kind = "data"
+group = "data_800CB560"
+members = ["src/ragewars_credits_label_blank_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -52724,10 +52898,98 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800E0B47.c"
+kind = "data"
+group = "data_800E0B47"
+members = ["rodata/unresolved/800E0B47"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E0D2F.c"
+kind = "data"
+group = "data_800E0D2F"
+members = ["rodata/unresolved/800E0D2F"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E0D4B.c"
+kind = "data"
+group = "data_800E0D4B"
+members = ["rodata/unresolved/800E0D4B"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800E0D4C.c"
 kind = "data"
 group = "data_800E0D4C"
 members = ["rodata/unresolved/800E0D4C"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E0D6B.c"
+kind = "data"
+group = "data_800E0D6B"
+members = ["rodata/unresolved/800E0D6B"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E0D8F.c"
+kind = "data"
+group = "data_800E0D8F"
+members = ["rodata/unresolved/800E0D8F"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E10E3.c"
+kind = "data"
+group = "data_800E10E3"
+members = ["rodata/unresolved/800E10E3"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E1483.c"
+kind = "data"
+group = "data_800E1483"
+members = ["rodata/unresolved/800E1483"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E153F.c"
+kind = "data"
+group = "data_800E153F"
+members = ["rodata/unresolved/800E153F"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -52746,6 +53008,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800E1A07.c"
+kind = "data"
+group = "data_800E1A07"
+members = ["rodata/unresolved/800E1A07"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800E1A34.c"
 kind = "data"
 group = "data_800E1A34"
@@ -52757,10 +53030,65 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800E1B23.c"
+kind = "data"
+group = "data_800E1B23"
+members = ["rodata/unresolved/800E1B23"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E1B63.c"
+kind = "data"
+group = "data_800E1B63"
+members = ["rodata/unresolved/800E1B63"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E1DFF.c"
+kind = "data"
+group = "data_800E1DFF"
+members = ["rodata/unresolved/800E1DFF"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E1EE3.c"
+kind = "data"
+group = "data_800E1EE3"
+members = ["rodata/unresolved/800E1EE3"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800E1F34.c"
 kind = "data"
 group = "data_800E1F34"
 members = ["rodata/unresolved/800E1F34"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E1F47.c"
+kind = "data"
+group = "data_800E1F47"
+members = ["rodata/unresolved/800E1F47"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -52794,6 +53122,28 @@ path = "src/rodata.unresolved.800E2104_unclaimed_E2D88.c"
 kind = "data"
 group = "data_800E2188"
 members = ["rodata/unresolved/800E2104_unclaimed_E2D88"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E23C3.c"
+kind = "data"
+group = "data_800E23C3"
+members = ["rodata/unresolved/800E23C3"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800E278F.c"
+kind = "data"
+group = "data_800E278F"
+members = ["rodata/unresolved/800E278F"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -53661,6 +54011,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.80153F8B.c"
+kind = "data"
+group = "data_80153F8B"
+members = ["rodata/unresolved/80153F8B"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.80153F90.c"
 kind = "data"
 group = "data_80153F90"
@@ -54424,6 +54785,17 @@ path = "src/rodata.unresolved.8044EBA4.c"
 kind = "data"
 group = "data_8044EBA4"
 members = ["rodata/unresolved/8044EBA4"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.psyq_next_record_value_low_byte.c"
+kind = "data"
+group = "data_800F8202"
+members = ["rodata/unresolved/psyq_next_record_value_low_byte"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
