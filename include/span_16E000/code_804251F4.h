@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_16E000_CODE_804251F4_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct State_func_80426090_de;
 /* unbake published declaration: published_149d2a17b30650b6792d4c96 */
 struct State_func_80426090_de {
@@ -112,5 +113,18 @@ typedef struct Player_func_80426174_de Player_func_80426174_de;
 struct func_80426270_S1;
 /* unbake published declaration: published_f0053f043b5a756997f28447 */
 typedef struct func_80426270_S1 func_80426270_S1;
+
+typedef struct WeaponStatus {
+    u8 pad[0x78];
+    u8 active;
+    u8 pad79[0x18];
+    u8 out;
+} WeaponStatus;
+typedef struct WeaponPlayer {
+    u8 pad[0x5D8];
+    WeaponStatus *status;
+    u8 pad5DC[0x26];
+    u8 weapons[22][2];
+} WeaponPlayer;
 
 #endif
