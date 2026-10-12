@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
+#include "types.h"
 struct Texture;
 /* unbake published declaration: published_0046a35fa4ae4fa146339145 */
 typedef struct Texture Texture;
@@ -90,5 +91,13 @@ extern void func_80414384_de();
 extern void func_80419868_eu_x(void);
 
 extern void func_802BA1B0_de(s32 arg0);
+
+extern s32 D_800DF258;
+extern s32 D_800DF25C;
+extern s32 D_800DF260_de;
+extern s32 D_800DF264_de;
+extern s32 D_800DF26C_de;
+extern s32 func_804136D8_de(u8 *);
+extern s32 func_8041737C_de(s32, void *);
 
 #endif

@@ -6520,7 +6520,7 @@ segments:
       - [0x183D10, c, "func_80415C90_de"]
       - [0x1851B8, c, "func_80417138_de"]
       - [0x1853FC, c, "func_8041737C_de"]
-      - [0x185574, asm, "func_804174F4_de"]
+      - [0x185574, c, "func_804174F4_de"]
       - [0x185BA0, asm, "func_80417B20_de"]
       - [0x186224, asm, "func_804181A4_de"]
       - [0x186E20, c, "func_80418DA0_de"]
