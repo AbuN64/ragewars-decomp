@@ -1271,8 +1271,9 @@ schema = 1
 "func_802566E8_de" = { evidence = "landed", signature = "void func_802566E8_de(Object *obj)" }
 "func_802567A4_de" = { evidence = "landed", signature = "void func_802567A4_de(void *arg0)" }
 "func_802567D0_de" = { evidence = "landed", signature = "void func_802567D0_de(void)" }
+"func_80256C90_de" = { evidence = "landed", signature = "void func_80256C90_de(void)" }
 "func_80256E6C_de" = { evidence = "landed", signature = "s32 *func_80256E6C_de(s32 **arg0)" }
-"func_80256EA8_de" = { evidence = "landed", signature = "s32 func_80256EA8_de(Work56EC8 *arg0)" }
+"func_80256EA8_de" = { evidence = "landed", signature = "s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)" }
 "func_80256FC0_de" = { evidence = "landed", signature = "void func_80256FC0_de(void)" }
 "func_802570C0_de" = { evidence = "landed", signature = "u32 func_802570C0_de(void *block, s32 size)" }
 "func_802571F0_de" = { evidence = "landed", signature = "u32 func_802571F0_de(s32 offset, s32 length)" }
@@ -7513,6 +7514,7 @@ schema = 1
 "D_800CB6F0" = { declaration = "extern s32 D_800CB6F0;", evidence = "authored" }
 "D_800CB6F4" = { declaration = "extern u32 D_800CB6F4;", evidence = "authored" }
 "D_800CB708" = { declaration = "extern int D_800CB708;", evidence = "authored" }
+"D_800CB70C_de" = { declaration = "extern u32 D_800CB70C_de;", evidence = "authored" }
 "D_800CB710" = { declaration = "extern unsigned int D_800CB710;", evidence = "authored" }
 "D_800CB714" = { declaration = "extern int D_800CB714;", evidence = "authored" }
 "D_800CB720" = { declaration = "extern int D_800CB720;", evidence = "authored" }
@@ -8777,8 +8779,10 @@ schema = 1
 "D_80107DF0" = { declaration = "extern s32 D_80107DF0;", evidence = "authored" }
 "D_80107DF8" = { declaration = "extern Window *D_80107DF8;", evidence = "authored" }
 "D_80107DFC" = { declaration = "extern CacheEntry *D_80107DFC;", evidence = "authored" }
+"D_80107E00" = { declaration = "extern char D_80107E00[];", evidence = "authored" }
 "D_80107E20" = { declaration = "extern void *D_80107E20[];", evidence = "authored" }
 "D_80107E28" = { declaration = "extern struct Work56EC8 * D_80107E28[];", evidence = "authored" }
+"D_80107E34" = { declaration = "extern s32 D_80107E34[];", evidence = "authored" }
 "D_80107E80" = { declaration = "extern char D_80107E80;", evidence = "authored" }
 "D_80107E98" = { declaration = "extern int D_80107E98;", evidence = "authored" }
 "D_80107E9A" = { declaration = "extern u16 D_80107E9A;", evidence = "authored" }
@@ -9886,6 +9890,7 @@ schema = 1
 "Bytes12" = { declaration = "typedef struct Bytes12 Bytes12;", evidence = "authored" }
 "CActor_t" = { declaration = "typedef struct CActor_t CActor_t;", evidence = "authored" }
 "Cache" = { declaration = "typedef struct Cache Cache;", evidence = "authored" }
+"CacheCountdownEntry" = { declaration = "typedef struct CacheCountdownEntry { struct CacheCountdownEntry *next; char pad4[4]; u16 state; } CacheCountdownEntry;", evidence = "authored" }
 "CacheEntry" = { declaration = "struct CacheEntry { struct CacheEntry *next; void *key; u16 state; u16 size; s32 padC; char data[0x80]; };", evidence = "authored" }
 "Cache_func_80298170_de" = { declaration = "struct Cache_func_80298170_de { char pad0[0x53C]; struct Entry_func_80298170_de *entries; s32 count; };", evidence = "authored" }
 "Callback" = { declaration = "typedef struct Callback Callback;", evidence = "authored" }

@@ -1128,7 +1128,7 @@ segments:
       - [0x57368, asm, "func_80256768_us"]
       - [0x57370, c, "func_802567D0_de"]
       - [0x57420, asm, "func_80256880_de"]
-      - [0x57830, asm, "func_80256C90_de"]
+      - [0x57830, c, "func_80256C90_de"]
       - [0x57A0C, c, "func_80256E6C_de"]
       - [0x57A48, c, "func_80256EA8_de"]
       - [0x57B60, c, "func_80256FC0_de"]

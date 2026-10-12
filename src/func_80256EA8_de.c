@@ -21,7 +21,7 @@ extern void func_8028FD4C_de(void *arg0, void *arg1);
 
 extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802B7400_de(void *arg0, s32 arg1);
-s32 func_80256EA8_de(Work56EC8 *arg0)
+s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)
 {
   s32 completed;
   s32 event;

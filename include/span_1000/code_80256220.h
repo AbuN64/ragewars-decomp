@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_1000_CODE_80256220_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct Chunk_func_80256454_de;
 /* unbake published declaration: published_07b27a6457d5aa8896bf9e24 */
 typedef struct Chunk_func_80256454_de Chunk_func_80256454_de;
@@ -276,10 +278,16 @@ struct CacheEntry;
 typedef struct CacheEntry CacheEntry;
 
 /* unbake published declaration: published_d23e37f17c21a6c2b01375ff */
-extern s32 func_80256EA8_de(Work56EC8 *arg0);
+extern s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused);
 
 struct func_8025844C_S1;
 /* unbake published declaration: published_e5c4b9d11970f72fb62ca1ef */
 typedef struct func_8025844C_S1 func_8025844C_S1;
+
+typedef struct CacheCountdownEntry { struct CacheCountdownEntry *next; char pad4[4]; u16 state; } CacheCountdownEntry;
+extern char D_80107E00[];
+extern s32 D_80107E34[];
+extern u32 D_800CB70C_de;
+extern void func_802B24D0_de(s32 *);
 
 #endif
