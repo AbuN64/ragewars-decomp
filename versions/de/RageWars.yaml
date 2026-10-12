@@ -5445,7 +5445,7 @@ segments:
       - [0x1AB504, c, "func_80445504_de"]
       - [0x1AB590, c, "func_80445590_de"]
       - [0x1AB60C, c, "func_8044560C_de"]
-      - [0x1AB6D4, data, "func_804456D4_de_padding_1AB6D4"]
+      - [0x1AB6D4, .data, "func_804456D4_de_padding_1AB6D4"]
       - [0x1AB6E0, asm, "func_804456E0_de"]
       - [0x1AB964, c, "func_80445964_de"]
       - [0x1ABAB4, c, "func_80445AB4_de"]

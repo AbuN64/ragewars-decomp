@@ -7,11 +7,11 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [█████████████▒░░░░░░]  68.33% (~71.79%)  4,685,652 of 6,857,872 bytes</code><br><code>de       [█████████████▒░░░░░░]  68.45% (~71.82%)  946,350 of 1,382,608 bytes</code><br><code>eu       [████████████▒░░░░░░░]  64.41% (~67.78%)  893,723 of 1,387,504 bytes</code><br><code>eu-x     [████████████▒░░░░░░░]  63.97% (~67.57%)  843,239 of 1,318,176 bytes</code><br><code>us       [██████████████▒░░░░░]  71.44% (~74.71%)  988,040 of 1,382,992 bytes</code><br><code>us-rev1  [██████████████▒░░░░░]  73.15% (~76.86%)  1,014,300 of 1,386,592 bytes</code></pre>
+<pre><code>all      [█████████████▒░░░░░░]  68.33% (~71.79%)  4,685,664 of 6,857,872 bytes</code><br><code>de       [█████████████▒░░░░░░]  68.45% (~71.82%)  946,362 of 1,382,608 bytes</code><br><code>eu       [████████████▒░░░░░░░]  64.41% (~67.78%)  893,723 of 1,387,504 bytes</code><br><code>eu-x     [████████████▒░░░░░░░]  63.97% (~67.57%)  843,239 of 1,318,176 bytes</code><br><code>us       [██████████████▒░░░░░]  71.44% (~74.71%)  988,040 of 1,382,992 bytes</code><br><code>us-rev1  [██████████████▒░░░░░]  73.15% (~76.86%)  1,014,300 of 1,386,592 bytes</code></pre>
 
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
-| <pre><code>code      [█████████████▒░░░░░░]  67.09% (~71.30%)  741,352 of 1,104,964</code><br><code>data      [██████████████▒░░░░░]  73.83% (~73.90%)  204,998 of 277,644</code><br><code>functions [███████████████░░░░░]  78.98%  2,893 of 3,663</code></pre> |
+| <pre><code>code      [█████████████▒░░░░░░]  67.09% (~71.30%)  741,352 of 1,104,964</code><br><code>data      [██████████████▒░░░░░]  73.84% (~73.90%)  205,010 of 277,644</code><br><code>functions [███████████████░░░░░]  78.98%  2,893 of 3,663</code></pre> |
 
 | eu (NUS-NRWP-0, Europe). PAL release. SHA256 `d763cbbe485a5f9e1b7be97d5ac16735087e23d0bb62c05dc844e01b7e1156d1` |
 |---|
