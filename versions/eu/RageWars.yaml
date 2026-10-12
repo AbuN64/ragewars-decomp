@@ -655,7 +655,7 @@ segments:
       - [0x302A4, c, "func_8022F5A4_de"]
       - [0x302C4, c, "func_8022F5C4_de"]
       - [0x302E0, c, "func_8022F5E0_de"]
-      - [0x30470, asm, "func_8022F770_de"]
+      - [0x30470, c, "func_8022F770_de"]
       - [0x3066C, c, "func_8022F96C_de"]
       - [0x30AAC, asm, "func_8022FEAC_eu"]
       - [0x30C00, asm, "func_80230058_de"]

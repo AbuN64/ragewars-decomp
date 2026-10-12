@@ -737,7 +737,7 @@ schema = 1
 "func_8022F5A4_de" = { evidence = "landed", signature = "void func_8022F5A4_de(s32 arg0, s32 arg1)" }
 "func_8022F5C4_de" = { evidence = "landed", signature = "void func_8022F5C4_de(int arg0)" }
 "func_8022F5E0_de" = { evidence = "landed", signature = "void func_8022F5E0_de(char *arg0)" }
-"func_8022F770_de" = { evidence = "authored", signature = "void func_8022F770_de(void *, void *)" }
+"func_8022F770_de" = { evidence = "landed", signature = "void func_8022F770_de(void *object, void *unused)" }
 "func_8022F96C_de" = { evidence = "landed", signature = "s32 func_8022F96C_de(void *arg0)" }
 "func_8022FAF8_de" = { evidence = "landed", signature = "s32 func_8022FAF8_de(Object_func_8022FAF8_de *arg0)" }
 "func_8022FC20_de" = { evidence = "landed", signature = "void func_8022FC20_de(void *arg0, void *arg1)" }
@@ -7648,6 +7648,7 @@ schema = 1
 "D_800D2910" = { declaration = "extern u8 D_800D2910[];", evidence = "authored" }
 "D_800D2920" = { declaration = "extern u8 D_800D2920[];", evidence = "authored" }
 "D_800D297B" = { declaration = "extern unsigned char D_800D297B;", evidence = "authored" }
+"D_800D297C" = { declaration = "extern s32 D_800D297C;", evidence = "authored" }
 "D_800D2988" = { declaration = "extern f32 D_800D2988;", evidence = "authored" }
 "D_800D29C8" = { declaration = "extern s32 D_800D29C8;", evidence = "authored" }
 "D_800D2A90" = { declaration = "extern unsigned char * D_800D2A90;", evidence = "authored" }
@@ -8684,6 +8685,7 @@ schema = 1
 "D_800FEB88" = { declaration = "extern char D_800FEB88[];", evidence = "authored" }
 "D_800FEB8D" = { declaration = "extern char D_800FEB8D[];", evidence = "authored" }
 "D_800FF140_de" = { declaration = "extern int D_800FF140_de[];", evidence = "authored" }
+"D_800FF1B0_de" = { declaration = "extern struct UnitVtx D_800FF1B0_de[];", evidence = "authored" }
 "D_800FF224_de" = { declaration = "extern f32 D_800FF224_de;", evidence = "authored" }
 "D_800FF238" = { declaration = "extern int D_800FF238;", evidence = "authored" }
 "D_800FF24C" = { declaration = "extern s32 D_800FF24C[];", evidence = "authored" }
@@ -10425,6 +10427,8 @@ schema = 1
 "Manager_func_80411D18_de" = { declaration = "typedef struct Manager_func_80411D18_de Manager_func_80411D18_de;", evidence = "authored" }
 "Mapping" = { declaration = "typedef struct Mapping Mapping;", evidence = "authored" }
 "Marker" = { declaration = "typedef struct Marker Marker;", evidence = "authored" }
+"MarkerActor" = { declaration = "typedef struct MarkerActor { u8 pad0[0x1D8]; MarkerNode *node; } MarkerActor;", evidence = "authored" }
+"MarkerNode" = { declaration = "typedef struct MarkerNode { u8 pad0[0x1214]; s32 active; u8 pad1218[0x264]; s32 extra; u32 matrices[4][16], extraMatrices[4][16]; } MarkerNode;", evidence = "authored" }
 "Marker_func_802A71C0_de" = { declaration = "struct Marker_func_802A71C0_de { char text[15]; };", evidence = "authored" }
 "Match" = { declaration = "typedef struct Match Match;", evidence = "authored" }
 "MatchMenuObjects" = { declaration = "struct MatchMenuObjects { char pad0[0x17F0]; s32 transition; };", evidence = "authored" }

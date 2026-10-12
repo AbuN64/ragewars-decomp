@@ -3,6 +3,9 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct ObjectLinks14C;
 /* unbake published declaration: published_0030a10c76665024b9356466 */
 struct ObjectLinks14C {
@@ -363,5 +366,13 @@ struct func_8022F95C_S1 {
     char pad62E[0x1450 - 0x62E - sizeof(s16)];
     s32 unk1450;
 };
+
+typedef struct MarkerNode { u8 pad0[0x1214]; s32 active; u8 pad1218[0x264]; s32 extra; u32 matrices[4][16], extraMatrices[4][16]; } MarkerNode;
+typedef struct MarkerActor { u8 pad0[0x1D8]; MarkerNode *node; } MarkerActor;
+extern s32 D_800D297C;
+extern struct UnitVtx D_800FF1B0_de[];
+extern s32 func_8026925C_de(s32);
+extern void func_80268CE0_de(u32);
+extern void func_802A5498_de(u32);
 
 #endif
