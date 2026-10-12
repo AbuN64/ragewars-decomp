@@ -5722,7 +5722,7 @@ segments:
       - [0xE3410, rodata, "rodata/func_80445964_de/800E2810"]
       - [0xE3414, rodata, "src/rw_pool_80445BC0_E3414_us_rev1.c"]
       - [0xE341C, rodata, "rodata/func_80445BC0_de/800E281C"]
-      - [0xE3424, data, "rodata/unresolved/800E2824"]
+      - [0xE3424, .data, "rodata/unresolved/800E2824"]
       - [0xE3438, data, "rodata/writable/800E2838"]
       - [0xE3448, rodata, "src/rw_constants_8040170C_E3448_us_rev1.c"]
       - [0xE344C, data, "rodata/unresolved/800E284C"]
