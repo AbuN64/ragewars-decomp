@@ -51636,6 +51636,18 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.unresolved.800E5CAC.c"
+kind = "data"
+group = "data_800E5CAC"
+members = ["rodata/unresolved/800E5CAC"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu", "eu-x", "us"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.unresolved.800E5CAC_unclaimed_E68F8.c"
 kind = "data"
 group = "data_800E5CF8"

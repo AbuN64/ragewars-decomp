@@ -4226,7 +4226,7 @@ segments:
       - [0xE1246, data, "rodata/unresolved/800E59E6"]
       - [0xE1248, .data, "data/unresolved/800E0648"]
       - [0xE1500, data, "rodata/writable/800E5CA0"]
-      - [0xE150C, data, "rodata/unresolved/800E5CAC"]
+      - [0xE150C, .data, "rodata/unresolved/800E5CAC"]
       - [0xE16A8, data, "rodata/writable/800E5E48"]
       - [0xE16D4, .data, "src/rw_menu_font_presets_us_rev1.c"]
       - [0xE1944, data, "rodata/writable/800E2094"]

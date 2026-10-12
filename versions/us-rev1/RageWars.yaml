@@ -6104,7 +6104,7 @@ segments:
       - [0xe6828, data, "rodata/unresolved/800E59E6_unclaimed_E6828"]
       - [0xe6834, .data, "src/rw_menu_event_handlers_E6834_us_rev1.c"]
       - [0xE68A0, data, "rodata/writable/800E5CA0"]
-      - [0xE68AC, data, "rodata/unresolved/800E5CAC"]
+      - [0xE68AC, .data, "rodata/unresolved/800E5CAC"]
       - [0xE68C8, .data, "src/ragewars_resident_strings_E68C8_us_rev1.c"]
       - [0xE68DC, data, "rodata/unresolved/800E5CAC_unclaimed_E68DC"]
       - [0xE68E0, .data, "src/ragewars_resident_strings_E68E0_us_rev1.c"]
