@@ -90,7 +90,7 @@ segments:
       - [0x3414, .data, "rodata/unresolved/80202814"]
       - [0x3438, asm, "func_80202838_de"]
       - [0x3594, asm, "func_80202994_de"]
-      - [0x3898, data, "rodata/unresolved/80202C98"]
+      - [0x3898, .data, "rodata/unresolved/80202C98"]
       - [0x38A0, c, "func_80202CA0_de"]
       - [0x3A4C, asm, "func_80202E4C_de"]
       - [0x3BDC, c, "func_80202FDC_de"]

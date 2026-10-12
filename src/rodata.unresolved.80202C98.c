@@ -1,10 +1,4 @@
-#ifdef VERSION_DE
-unsigned int D_auto_rodata_unresolved_80202C98[2] = {
+/* ROM-grounded data for de; supplied-list member has no us-rev1 placement. */
+unsigned int D_blob_9ace5635f896c825499f[2] = {
     0x5B735181, 0xB703BE02,
 };
-#endif
-#ifdef VERSION_US
-unsigned int D_auto_rodata_unresolved_80202C98[2] = {
-    0x794F626A, 0x65637454,
-};
-#endif
