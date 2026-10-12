@@ -3878,7 +3878,7 @@ segments:
       - [0xCDFC0, .data, "rodata/unresolved/800CD3C0"]
       - [0xcdfe0, data, "src/rw_actor_state_entry_CDFE0_us_rev1.c"]
       - [0xcdfec, data, "rodata/unresolved/800CD3C0_unclaimed_CDFEC"]
-      - [0xcdff4, data, "src/rw_actor_state_animation_CDFF4_us_rev1.c"]
+      - [0xcdff4, .data, "src/rw_actor_state_animation_CDFF4_us_rev1.c"]
       - [0xce000, data, "src/rw_actor_state_entry_CE000_us_rev1.c"]
       - [0xce00c, data, "rodata/unresolved/800CD3C0_unclaimed_CDFEC_unclaimed_CE000_unclaimed_CE00C"]
       - [0xce014, data, "src/rw_actor_state_animation_CE014_us_rev1.c"]
