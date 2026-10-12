@@ -188,7 +188,8 @@ struct Actor_func_8027E784_de {
 };
 
 /* unbake published declaration: published_55891ab1bb3f3be17d17e761 */
-extern void func_8027E784_de(Actor_func_8027E784_de *actor);
+struct Shared_Particle;
+extern void func_8027E784_de(struct Shared_Particle *actor);
 
 struct Shared_ParticleTarget;
 /* unbake published declaration: published_5879124f3c29ad5ae941e338 */
@@ -424,7 +425,8 @@ struct Shared_ParticleOscillation {
 };
 /* Descriptor distance range: scalars read at +0x1C/+0x20 by the particle transform. */
 struct Shared_ParticleDistanceRange {
-    u8 reserved0[0x1C];
+    u8 reserved0[0x18];
+    f32 shadowSize;
     f32 minimum;
     f32 maximum;
 };

@@ -1896,7 +1896,7 @@ schema = 1
 "func_8027C9CC_de" = { evidence = "landed", signature = "void func_8027C9CC_de(void *arg0)" }
 "func_8027D97C_de" = { evidence = "landed", signature = "void *func_8027D97C_de(void *arg0, void *arg1)" }
 "func_8027DAD0_de" = { evidence = "landed", signature = "void func_8027DAD0_de(Actor_func_8027DAD0_de *actor, Vec3 *outPosition, Vec3 *outHeading)" }
-"func_8027E784_de" = { evidence = "landed", signature = "void func_8027E784_de(Actor_func_8027E784_de *actor)" }
+"func_8027E784_de" = { evidence = "landed", signature = "void func_8027E784_de(Shared_Particle *actor)" }
 "func_8027EB2C_de" = { evidence = "landed", signature = "void func_8027EB2C_de(void *arg0, void *arg1)" }
 "func_8027ED6C_de" = { evidence = "landed", signature = "void func_8027ED6C_de(Shared_Particle *particle, struct Shared_ParticleView *view)" }
 "func_8027ED6C_de_mode" = { evidence = "landed", signature = "static inline s32 func_8027ED6C_de_mode(Shared_Particle *particle)" }
@@ -12235,7 +12235,7 @@ schema = 1
 "Shared_Particle" = { declaration = "typedef struct Shared_Particle Shared_Particle;", evidence = "authored" }
 "Shared_ParticleColors" = { declaration = "typedef struct Shared_ParticleColors Shared_ParticleColors;", evidence = "authored" }
 "Shared_ParticleDesc" = { declaration = "typedef struct Shared_ParticleDesc Shared_ParticleDesc;", evidence = "authored" }
-"Shared_ParticleDistanceRange" = { declaration = "struct Shared_ParticleDistanceRange { u8 reserved0[0x1C]; f32 minimum; f32 maximum; };", evidence = "authored" }
+"Shared_ParticleDistanceRange" = { declaration = "struct Shared_ParticleDistanceRange { u8 reserved0[0x18]; f32 shadowSize; f32 minimum; f32 maximum; };", evidence = "authored" }
 "Shared_ParticleFade" = { declaration = "typedef struct Shared_ParticleFade Shared_ParticleFade;", evidence = "authored" }
 "Shared_ParticleInstance" = { declaration = "struct Shared_ParticleInstance { char pad0[0x4]; u16 type; char pad6[0x2]; Vec3 pos; s32 unk14; char pad18[0x4]; Vec3 velocity; char pad28[0x10]; s32 unk38; char pad3C[0x14]; };", evidence = "authored" }
 "Shared_ParticleLighting" = { declaration = "struct Shared_ParticleLighting { u8 ambient[3], reserved3; u8 ambientCopy[3], reserved7; u8 diffuse[3], reservedB; u8 diffuseCopy[3], reservedF; s8 direction[3]; u8 reserved13[5]; };", evidence = "authored" }
