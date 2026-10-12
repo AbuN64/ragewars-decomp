@@ -341,14 +341,16 @@ struct Record_func_80433914_de {
 struct MenuWidget;
 /* unbake published declaration: published_ad28380903e0937f63001350 */
 struct MenuWidget {
-    char pad0[12];
+    char pad0[4];
+    struct MenuWidget *sibling;
+    struct MenuWidget *child;
     s16 resource;
     char padE[2];
     u8 alpha;
     char pad11[3];
     s16 x;
     s16 y;
-    s16 width;
+    union { s16 width; s16 w; };
     s16 height;
     char pad1C[0x2C - 0x1C];
     s32 value;

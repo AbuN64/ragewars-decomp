@@ -3226,7 +3226,7 @@ schema = 1
 "func_8040EBAC_de" = { evidence = "landed", signature = "s32 func_8040EBAC_de(struct Node_func_8040EB48_de *node)" }
 "func_8040EBD0_de" = { evidence = "landed", signature = "s32 func_8040EBD0_de(struct Node_func_8040EB48_de *node)" }
 "func_8040EBF4_de" = { evidence = "landed", signature = "void func_8040EBF4_de(struct Node_func_8040EBF4_de *node, s32 *x, s32 *y)" }
-"func_8040EC30_de" = { evidence = "landed", signature = "struct Tree *func_8040EC30_de(struct Tree *node, unsigned short id)" }
+"func_8040EC30_de" = { evidence = "landed", signature = "MenuWidget *func_8040EC30_de(void *root, s32 identifier)" }
 "func_8040ECA8_de" = { evidence = "landed", signature = "struct Tree *func_8040ECA8_de(struct Tree *node, s32 id)" }
 "func_8040ED38_de" = { evidence = "landed", signature = "void func_8040ED38_de(Node_func_8040ED38_de *arg0, Node_func_8040ED38_de *arg1, Node_func_8040ED38_de *arg2, Node_func_8040ED38_de *arg3)" }
 "func_8040EDE4_de" = { evidence = "landed", signature = "void func_8040EDE4_de(struct Tree_func_8040EDE4_de *node, struct Tree_func_8040EDE4_de *added)" }
@@ -10702,7 +10702,7 @@ schema = 1
 "MenuState" = { declaration = "typedef struct MenuState MenuState;", evidence = "authored" }
 "MenuStoredCodeAddress" = { declaration = "typedef struct MenuStoredCodeAddress { const MenuPagedCodeAddress *address; } MenuStoredCodeAddress;", evidence = "authored" }
 "MenuTransitionSignal" = { declaration = "typedef struct { s32 selection; s32 trigger; } MenuTransitionSignal;", evidence = "authored" }
-"MenuWidget" = { declaration = "struct MenuWidget { char pad0[12]; s16 resource; char padE[2]; u8 alpha; char pad11[3]; s16 x; s16 y; s16 width; s16 height; char pad1C[0x2C - 0x1C]; s32 value; struct MenuWidget *next; s32 field34; union { void *text; s32 image; s32 word38; }; };", evidence = "authored" }
+"MenuWidget" = { declaration = "struct MenuWidget { char pad0[4]; struct MenuWidget *sibling; struct MenuWidget *child; s16 resource; char padE[2]; u8 alpha; char pad11[3]; s16 x; s16 y; union { s16 width; s16 w; }; s16 height; char pad1C[0x2C - 0x1C]; s32 value; struct MenuWidget *next; s32 field34; union { void *text; s32 image; s32 word38; }; };", evidence = "authored" }
 "Menu_func_802185D0_de" = { declaration = "typedef struct Menu_func_802185D0_de Menu_func_802185D0_de;", evidence = "authored" }
 "Menu_func_80218F9C_de" = { declaration = "typedef struct Menu_func_80218F9C_de Menu_func_80218F9C_de;", evidence = "authored" }
 "Menu_func_80226A34_de" = { declaration = "struct Menu_func_80226A34_de { char pad0[0xCC9]; u8 allowed; char padCCA[0x1278 - 0xCCA]; s32 open; char pad127C[0x1284 - 0x127C]; MenuRules rules; };", evidence = "authored" }
@@ -11563,7 +11563,7 @@ schema = 1
 "Screen_func_804201A4_de" = { declaration = "struct Screen_func_804201A4_de { struct Entry_func_804201A4_de entries[4]; };", evidence = "authored" }
 "Screen_func_80420308_de" = { declaration = "struct Screen_func_80420308_de { struct Entry_func_80420308_de entries[4]; };", evidence = "authored" }
 "Screen_func_804210E8_de" = { declaration = "struct Screen_func_804210E8_de { char pad0[0xC]; void *boxes[4]; };", evidence = "authored" }
-"Screen_func_80421884_de" = { declaration = "struct Screen_func_80421884_de { s32 dialog; char pad4[0x34 - 4]; s32 open; s32 confirmed; };", evidence = "authored" }
+"Screen_func_80421884_de" = { declaration = "struct Screen_func_80421884_de { union { s32 dialog; void *title; }; void *list; void *window; void *buttons[4]; char pad1C[4]; struct MenuWidget *pad; char pad24[4]; s32 length; s32 mode; s32 value; union { s32 open; s32 cursor; }; union { s32 confirmed; s32 full; }; };", evidence = "authored" }
 "Screen_func_80422960_de" = { declaration = "struct Screen_func_80422960_de { char pad0[0x1C]; s32 choice; char pad20[0x60 - 0x20]; s32 mode; s32 arena; };", evidence = "authored" }
 "Screen_func_80423828_de" = { declaration = "struct Screen_func_80423828_de { char pad0[0x1C]; s32 shown; char pad20[0x30 - 0x20]; s32 mode; s32 next_mode; char pad38[0x44 - 0x38]; void *window; char pad48[0x4C - 0x48]; void *second_window; char pad50[0x60 - 0x50]; s32 timer; };", evidence = "authored" }
 "Screen_func_80426788_de" = { declaration = "struct Screen_func_80426788_de { char pad0[0xA58]; s32 wordA58; };", evidence = "authored" }
@@ -13798,7 +13798,7 @@ schema = 1
 "func_8041C864_S1" = { declaration = "typedef struct func_8041C864_S1 func_8041C864_S1;", evidence = "authored" }
 "func_8041F2A0_Cell" = { declaration = "struct func_8041F2A0_Cell { u16 pad; u16 id; };", evidence = "authored" }
 "func_8041F2A0_Config" = { declaration = "struct func_8041F2A0_Config { char pad0[0x78]; u8 active; char pad79[0x96 - 0x79]; };", evidence = "authored" }
-"func_8041F2A0_Item" = { declaration = "struct func_8041F2A0_Item { char pad0[0x10]; u8 alpha; char pad11[3]; s16 x; s16 y; s16 w; };", evidence = "authored" }
+"func_8041F2A0_Item" = { declaration = "typedef MenuWidget func_8041F2A0_Item;", evidence = "authored" }
 "func_8041F2A0_Layout" = { declaration = "struct func_8041F2A0_Layout { s32 kind; u16 pad4[3]; u16 title; func_8041F2A0_Cell cells[3]; func_8041F2A0_Cell options[3]; };", evidence = "authored" }
 "func_8041F2A0_MenuBlock" = { declaration = "struct func_8041F2A0_MenuBlock { void *root; s32 list; struct Record_func_80439C80_de record; char pad40[0xC8 - 0x40]; func_8041F2A0_Item *item492; s32 round492; func_8041F2A0_Item *item491; s32 round491; s32 unk216; s32 unk220; s32 lookup486; func_8041F2A0_Item *item486; func_8041F2A0_Item *item563; s32 focus; func_8041F2A0_Item *item510; func_8041F2A0_Item *item512; s32 unk248; s32 style; func_8041F2A0_Item *item511; s32 unk260; s32 player; s32 unk268; };", evidence = "authored" }
 "func_8041F2A0_Player" = { declaration = "struct func_8041F2A0_Player { func_8041F2A0_Item *highlight; s32 unk4; s32 kind; s32 unkC; s32 choice; char pad14[4]; char model[0x4C0 - 0x18]; s32 unk4C0; s32 pad4C4; };", evidence = "authored" }

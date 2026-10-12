@@ -12,15 +12,8 @@ struct func_8041F2A0_Vec3 {
 };
 typedef struct func_8041F2A0_Vec3 func_8041F2A0_Vec3;
 
-struct func_8041F2A0_Item {
-    char pad0[0x10];
-    u8 alpha;
-    char pad11[3];
-    s16 x;
-    s16 y;
-    s16 w;
-};
-typedef struct func_8041F2A0_Item func_8041F2A0_Item;
+/* Selection items are menu widgets; w is the legacy width spelling. */
+typedef MenuWidget func_8041F2A0_Item;
 
 struct func_8041F2A0_Player {
     func_8041F2A0_Item *highlight;
@@ -137,7 +130,7 @@ extern void func_8041B6E8_de(s32, s32, s32);
 extern void func_8042E9A0_de(s32, s32);
 extern s32 func_8041F18C_de(s32);
 extern void func_8041CAD8_de(void *, s32, s32, s32, s32, Vec3, Vec3, f32, s32);
-extern func_8041F2A0_Item *func_8040EC30_de(void *, s32);
+extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(func_8041F2A0_Item *, s32);
 extern s32 func_80419E54_de(s32, s32);
 extern void func_80420308_de(s32);

@@ -1,17 +1,19 @@
-#include "span_16E000/code_8040C780.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 
 
-struct Tree *func_8040EC30_de(struct Tree *node, unsigned short id) {
-    struct Tree *found = 0;
+MenuWidget *func_8040EC30_de(void *root, s32 identifier) {
+    MenuWidget *node = root;
+    u16 id = identifier;
+    MenuWidget *found = 0;
 
     while (node != 0 && found == 0) {
-        if (node->id == id) {
+        if (node->resource == id) {
             found = node;
         }
         if (found == 0 && node->child != 0) {
             found = func_8040EC30_de(node->child, id);
         }
-        node = node->next;
+        node = node->sibling;
     }
     return found;
 }

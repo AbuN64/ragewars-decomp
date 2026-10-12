@@ -92,10 +92,18 @@ struct State_func_8042177C_de {
 struct Screen_func_80421884_de;
 /* unbake published declaration: published_e719e63785e56280fa10466e */
 struct Screen_func_80421884_de {
-    s32 dialog;
-    char pad4[0x34 - 4];
-    s32 open;
-    s32 confirmed;
+    union { s32 dialog; void *title; };
+    void *list;
+    void *window;
+    void *buttons[4];
+    char pad1C[4];
+    struct MenuWidget *pad;
+    char pad24[4];
+    s32 length;
+    s32 mode;
+    s32 value;
+    union { s32 open; s32 cursor; };
+    union { s32 confirmed; s32 full; };
 };
 
 struct Frame_func_804217D4_de;
