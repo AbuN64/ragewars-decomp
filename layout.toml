@@ -4986,6 +4986,14 @@ signals = ["adjacent"]
 sdk = false
 
 [[group]]
+name = "data_800CCA10"
+segment = "span_C76B0"
+members = ["src/rw_pool_802B5B94_CD610_us_rev1.c"]
+evidence = "inferred"
+signals = ["adjacent"]
+sdk = false
+
+[[group]]
 name = "data_800CCA51"
 segment = "span_C76B0"
 members = ["rodata/unresolved/800CCA51", "data/unresolved/800CCA54"]
@@ -56923,6 +56931,17 @@ path = "src/rw_pool_802B5300_CD560_us_rev1.c"
 kind = "data"
 group = "data_800CC960"
 members = ["src/rw_pool_802B5300_CD560_us_rev1.c"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rw_pool_802B5B94_CD610_us_rev1.c"
+kind = "data"
+group = "data_800CCA10"
+members = ["src/rw_pool_802B5B94_CD610_us_rev1.c"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
