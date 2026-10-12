@@ -3430,7 +3430,7 @@ segments:
       - [0xCACFF, data, "rodata/unresolved/800CA0FF"]
       - [0xCAD00, .rodata, "src/rw_formats_8044B7C0_CAD00_us_rev1.c"]
       - [0xCAD15, data, "rodata/unresolved/800CA115"]
-      - [0xCAD18, rodata, "src/ragewars_resident_strings_CAD18_us_rev1.c"]
+      - [0xCAD18, .rodata, "src/ragewars_resident_strings_CAD18_us_rev1.c"]
       - [0xCAD28, .rodata, "rodata/func_8044B7C0_de/800CA118_unclaimed_CAD28"]
       - [0xCAD39, data, "rodata/unresolved/800CA139"]
       - [0xCAD3C, rodata, "src/rw_text_8044B7C0_CAD3C_us_rev1.c"]
