@@ -243,7 +243,7 @@ schema = 1
 "func_80208000_de" = { evidence = "landed", signature = "void func_80208000_de(s32 *arg0)" }
 "func_80208158_de" = { evidence = "landed", signature = "void func_80208158_de(Brain *brain)" }
 "func_80209308_de" = { evidence = "landed", signature = "f32 func_80209308_de(Brain_func_80209308_de *brain, Vec3 *target, f32 rate, f32 offset)" }
-"func_802095F8_de" = { evidence = "declared", signature = "void func_802095F8_de(Brain *)" }
+"func_802095F8_de" = { evidence = "landed", signature = "void func_802095F8_de(Brain *object)" }
 "func_802097E8_de" = { evidence = "landed", signature = "void func_802097E8_de(int *arg0, int arg1)" }
 "func_80209804_de" = { evidence = "landed", signature = "void func_80209804_de(s32 arg0)" }
 "func_80209828_de" = { evidence = "landed", signature = "s32 func_80209828_de(struct Queue *queue)" }
@@ -4582,6 +4582,8 @@ schema = 1
 "D_800C1C70_de" = { declaration = "extern float D_800C1C70_de;", evidence = "authored" }
 "D_800C1C74_de" = { declaration = "extern float D_800C1C74_de;", evidence = "authored" }
 "D_800C1C78_de" = { declaration = "extern float D_800C1C78_de;", evidence = "authored" }
+"D_800C1C7C_de" = { declaration = "extern f32 D_800C1C7C_de;", evidence = "authored" }
+"D_800C1C80_de" = { declaration = "extern f32 D_800C1C80_de;", evidence = "authored" }
 "D_800C1C84_de" = { declaration = "extern float D_800C1C84_de;", evidence = "authored" }
 "D_800C1C88_de" = { declaration = "extern float D_800C1C88_de;", evidence = "authored" }
 "D_800C1C8C_de" = { declaration = "extern float D_800C1C8C_de;", evidence = "authored" }
@@ -11125,6 +11127,11 @@ schema = 1
 "PickupGoalNodeList" = { declaration = "typedef struct PickupGoalNodeList PickupGoalNodeList;", evidence = "authored" }
 "PickupGoalObj8020EF60" = { declaration = "typedef struct PickupGoalObj8020EF60 PickupGoalObj8020EF60;", evidence = "authored" }
 "Piece" = { declaration = "typedef struct Piece Piece;", evidence = "authored" }
+"PitchBrain" = { declaration = "typedef struct PitchBrain { PitchPlayer *player; char pad04[0x60]; PitchTarget *target; char pad68[0x1E0]; f32 angle, previousAngle; char pad250[8]; Vec3 targetPosition; f32 distance; } PitchBrain;", evidence = "authored" }
+"PitchModel" = { declaration = "typedef struct PitchModel { char pad00[0x12C]; f32 height; } PitchModel;", evidence = "authored" }
+"PitchPlayer" = { declaration = "typedef struct PitchPlayer { char pad00[8]; Vec3 position; char pad14[0x5C4]; PitchProfile *profile; PitchModel *model; char pad5E0[0xE70]; s32 transformed; } PitchPlayer;", evidence = "authored" }
+"PitchProfile" = { declaration = "typedef struct PitchProfile { char pad00[0x8F]; u8 scaled; } PitchProfile;", evidence = "authored" }
+"PitchTarget" = { declaration = "typedef struct PitchTarget { char pad00[0x1D8]; PitchPlayer *player; } PitchTarget;", evidence = "authored" }
 "PixelFormat" = { declaration = "struct PixelFormat { char pad0[0x14]; u32 mask[4]; s32 shift[4]; };", evidence = "authored" }
 "PlacedProp" = { declaration = "struct PlacedProp { u8 state; char pad1[3]; u16 id; char pad6[2]; Vec3 position; void *segment; struct PropGeometry *model; s32 owner; char pad20[8]; char transform[0x40]; char matrix[0x40]; s32 fieldA8; s32 fieldAC; s32 fieldB0; s32 fieldB4; Vec3 min; Vec3 max; s32 key; s32 fieldD4; u16 flags; u8 colorFrame; char padDB; s32 fieldDC; u8 fade; };", evidence = "authored" }
 "PlacedPropRecord" = { declaration = "struct PlacedPropRecord { s32 value; Vec3 position; Vec3 scale; char pad1C[0]; u16 extents[6]; u16 id; u16 segment; u16 model; u8 flags; s8 rotation[4]; };", evidence = "authored" }

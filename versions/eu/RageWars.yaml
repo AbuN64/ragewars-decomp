@@ -218,7 +218,7 @@ segments:
       - [0x96CC, asm, "func_80208AAC_de"]
       - [0x9AD0, asm, "func_80208EB0_de"]
       - [0x9F28, c, "func_80209308_de"]
-      - [0xA218, asm, "func_802095F8_de"]
+      - [0xA218, c, "func_802095F8_de"]
       - [0xA408, asm, "func_802097E8_de"]
       - [0xA424, c, "func_80209804_de"]
       - [0xA708, c, "func_80209AE8_de"]

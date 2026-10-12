@@ -3,6 +3,8 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 
 /* unbake published declaration: published_04dd38a472522fb98a3eb4e5 */
 extern float D_800C1C88_de;
@@ -1636,5 +1638,21 @@ typedef struct func_8020999C_S1 func_8020999C_S1;
 
 /* unbake published declaration: published_ff9a5fe2eb4943a5a104c4cf */
 extern float D_800C1C8C_de;
+
+typedef struct PitchProfile { char pad00[0x8F]; u8 scaled; } PitchProfile;
+typedef struct PitchModel { char pad00[0x12C]; f32 height; } PitchModel;
+typedef struct PitchPlayer {
+    char pad00[8]; Vec3 position; char pad14[0x5C4];
+    PitchProfile *profile; PitchModel *model;
+    char pad5E0[0xE70]; s32 transformed;
+} PitchPlayer;
+typedef struct PitchTarget { char pad00[0x1D8]; PitchPlayer *player; } PitchTarget;
+typedef struct PitchBrain {
+    PitchPlayer *player; char pad04[0x60]; PitchTarget *target;
+    char pad68[0x1E0]; f32 angle, previousAngle; char pad250[8];
+    Vec3 targetPosition; f32 distance;
+} PitchBrain;
+extern f32 D_800C1C7C_de;
+extern f32 D_800C1C80_de;
 
 #endif
