@@ -3,6 +3,8 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct View_func_8028FA60_de;
 /* unbake published declaration: published_026e731961a094583ee7a0c5 */
 typedef struct View_func_8028FA60_de View_func_8028FA60_de;
@@ -467,4 +469,21 @@ struct Scene_func_8028FA60_de;
 struct View_func_8028FA60_de;
 extern s32 func_8028F544_de(struct Ctx_func_8028F544_de *, struct Node_func_8028F544_de **, struct Node_func_8028F544_de **, s32);
 extern void func_8028FA60_de(struct View_func_8028FA60_de *, struct Scene_func_8028FA60_de *, struct Scene_func_8028FA60_de *);
+
+typedef struct SchedulerTask {
+ struct SchedulerTask *next; u32 state,flags;void *framebuffer;
+ struct {s32 type;char pad[0x3C];} list; void *queue; void *message;
+} SchedulerTask;
+typedef struct Scheduler {
+ char pad0[0x2E8];SchedulerTask *gfxHead,*audioTail,*gfxTail,*rsp,*rdp;
+} Scheduler;
+typedef struct SchedulerFrame {
+ char pad0[0x110];void *framebuffer;s32 serial;char pad118[0x140-0x118];
+} SchedulerFrame;
+extern f32 D_800CD750;
+extern s32 D_800CD700;
+extern s32 D_8014D464;
+extern void func_80253CEC_de(s32,s32);
+extern s32 func_8028FA0C_de(void *,void *);
+
 #endif

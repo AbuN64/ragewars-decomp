@@ -8,9 +8,9 @@
 
 
 
-extern s64 D_8011B1D0;
-extern s32 D_8011B1D8;
-extern s64 D_8011B1E0;
+extern u64 D_8011B1D0;
+extern f32 D_8011B1D8;
+extern u64 D_8011B1E0;
 extern s64 D_8011B1E8;
 extern s64 D_8011B1F0;
 

@@ -1761,7 +1761,7 @@ segments:
       - [0x08F50C, .data, "func_8028E860_de_padding_8F50C"]
       - [0x8F510, c, "func_8028E930_de"]
       - [0x8F6AC, c, "func_8028EACC_de"]
-      - [0x8F980, asm, "func_8028EDA0_de"]
+      - [0x8F980, c, "func_8028EDA0_de"]
       - [0x8FE58, asm, "func_8028F278_de"]
       - [0x90124, c, "func_8028F544_de"]
       - [0x90444, c, "func_8028F864_de"]

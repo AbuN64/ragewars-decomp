@@ -276,7 +276,7 @@ extern char D_800DD4C8[];
 extern s32 D_800E1DF8_de;
 
 /* unbake published declaration: published_0f1d20685533359a10cf437b */
-extern s32 D_8011B1D8;
+extern f32 D_8011B1D8;
 
 /* unbake published declaration: published_0f2992ed72e0790c26be2b87 */
 extern char D_800D3918[];
@@ -2842,7 +2842,7 @@ extern f32 D_800C1AC8_de;
 extern GameState D_80140FB4;
 
 /* unbake published declaration: published_b5e924c6609da55089a112a9 */
-extern s64 D_8011B1D0;
+extern u64 D_8011B1D0;
 
 /* unbake published declaration: published_b60be07f426a62de2f2de852 */
 extern char D_80101120;
@@ -3328,7 +3328,7 @@ extern char D_800FEB88[];
 extern Entry_func_8043CF44_de D_0044EF44[];
 
 /* unbake published declaration: published_d627b55ff2eacec31d55e010 */
-extern s64 D_8011B1E0;
+extern u64 D_8011B1E0;
 
 /* unbake published declaration: published_d62fc01b84ab42f82b11545b */
 extern s8 D_800CD604[];

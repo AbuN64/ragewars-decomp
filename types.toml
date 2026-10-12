@@ -1199,7 +1199,7 @@ schema = 1
 "func_802539EC_de" = { evidence = "landed", signature = "void func_802539EC_de(s32 unused, s32 arg1)" }
 "func_80253AD4_de" = { evidence = "landed", signature = "s32 func_80253AD4_de(void)" }
 "func_80253BBC_de" = { evidence = "landed", signature = "void func_80253BBC_de(s32 arg0, func_80205628_S3 *arg1)" }
-"func_80253CEC_de" = { evidence = "landed", signature = "void func_80253CEC_de(s32 arg1)" }
+"func_80253CEC_de" = { evidence = "landed", signature = "void func_80253CEC_de(s32 arg0, s32 arg1)" }
 "func_80253D10_de" = { evidence = "landed", signature = "void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2)" }
 "func_80253E64_de" = { evidence = "landed", signature = "void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2)" }
 "func_80253F8C_de" = { evidence = "landed", signature = "void func_80253F8C_de(s32 arg0, s32 arg1)" }
@@ -2059,7 +2059,7 @@ schema = 1
 "func_8028E860_de" = { evidence = "landed", signature = "s32 func_8028E860_de(Obj_func_8028E860_de *arg0, Vec3 *arg1)" }
 "func_8028E930_de" = { evidence = "landed", signature = "void func_8028E930_de(void *arg0)" }
 "func_8028EACC_de" = { evidence = "landed", signature = "void func_8028EACC_de(OSSched *sc)" }
-"func_8028EDA0_de" = { evidence = "authored", signature = "void func_8028EDA0_de(void *arg0)" }
+"func_8028EDA0_de" = { evidence = "landed", signature = "void func_8028EDA0_de(void *object)" }
 "func_8028F544_de" = { evidence = "landed", signature = "s32 func_8028F544_de(Ctx_func_8028F544_de *arg0, Node_func_8028F544_de **arg1, Node_func_8028F544_de **arg2, s32 arg3)" }
 "func_8028F754_de" = { evidence = "landed", signature = "void func_8028F754_de(Panel *panel, s32 arg1, s32 arg2, s32 arg3, unsigned char style)" }
 "func_8028F864_de" = { evidence = "landed", signature = "void func_8028F864_de(void *arg0, void *arg1, s32 arg2)" }
@@ -7590,6 +7590,7 @@ schema = 1
 "D_800CD6B4" = { declaration = "extern float D_800CD6B4;", evidence = "authored" }
 "D_800CD6E0_de" = { declaration = "extern s32 D_800CD6E0_de;", evidence = "authored" }
 "D_800CD6E4_de" = { declaration = "extern ColorEntry D_800CD6E4_de[];", evidence = "authored" }
+"D_800CD700" = { declaration = "extern s32 D_800CD700;", evidence = "authored" }
 "D_800CD708" = { declaration = "extern int D_800CD708;", evidence = "authored" }
 "D_800CD70C" = { declaration = "extern s32 D_800CD70C;", evidence = "authored" }
 "D_800CD710" = { declaration = "extern int D_800CD710;", evidence = "authored" }
@@ -7599,6 +7600,7 @@ schema = 1
 "D_800CD740_de" = { declaration = "extern float D_800CD740_de;", evidence = "authored" }
 "D_800CD744_de" = { declaration = "extern float D_800CD744_de;", evidence = "authored" }
 "D_800CD74C" = { declaration = "extern float D_800CD74C;", evidence = "authored" }
+"D_800CD750" = { declaration = "extern f32 D_800CD750;", evidence = "authored" }
 "D_800CD754" = { declaration = "extern float D_800CD754;", evidence = "authored" }
 "D_800CD770" = { declaration = "extern int D_800CD770;", evidence = "authored" }
 "D_800CD774" = { declaration = "extern int D_800CD774;", evidence = "authored" }
@@ -8857,9 +8859,9 @@ schema = 1
 "D_8011AD70" = { declaration = "extern char D_8011AD70;", evidence = "authored" }
 "D_8011ADB0" = { declaration = "extern s32 D_8011ADB0;", evidence = "authored" }
 "D_8011AF38" = { declaration = "extern char D_8011AF38;", evidence = "authored" }
-"D_8011B1D0" = { declaration = "extern s64 D_8011B1D0;", evidence = "authored" }
-"D_8011B1D8" = { declaration = "extern s32 D_8011B1D8;", evidence = "authored" }
-"D_8011B1E0" = { declaration = "extern s64 D_8011B1E0;", evidence = "authored" }
+"D_8011B1D0" = { declaration = "extern u64 D_8011B1D0;", evidence = "authored" }
+"D_8011B1D8" = { declaration = "extern f32 D_8011B1D8;", evidence = "authored" }
+"D_8011B1E0" = { declaration = "extern u64 D_8011B1E0;", evidence = "authored" }
 "D_8011B1E8" = { declaration = "extern s64 D_8011B1E8;", evidence = "authored" }
 "D_8011B1F0" = { declaration = "extern s64 D_8011B1F0;", evidence = "authored" }
 "D_8011B200" = { declaration = "extern char D_8011B200;", evidence = "authored" }
@@ -9048,6 +9050,7 @@ schema = 1
 "D_8014D424" = { declaration = "extern int D_8014D424;", evidence = "authored" }
 "D_8014D428" = { declaration = "extern int D_8014D428;", evidence = "authored" }
 "D_8014D45C" = { declaration = "extern int D_8014D45C;", evidence = "authored" }
+"D_8014D464" = { declaration = "extern s32 D_8014D464;", evidence = "authored" }
 "D_8014D468_de" = { declaration = "extern void *D_8014D468_de[];", evidence = "authored" }
 "D_8014D480" = { declaration = "extern s32 D_8014D480;", evidence = "authored" }
 "D_8014D48C" = { declaration = "extern u16 D_8014D48C;", evidence = "authored" }
@@ -11460,6 +11463,9 @@ schema = 1
 "Scene_func_8028FA60_de" = { declaration = "struct Scene_func_8028FA60_de { s32 pad0; s32 flags; s32 options; s32 padC; s32 mode; char pad14[0x38 - 0x14]; s32 music; s64 *time; };", evidence = "authored" }
 "Scene_func_802A5180_de" = { declaration = "typedef struct Scene_func_802A5180_de Scene_func_802A5180_de;", evidence = "authored" }
 "Scene_func_8044BE04_de" = { declaration = "struct Scene_func_8044BE04_de { char pad0[0x1B2B0]; struct LightSettings *light; s16 dir[3]; };", evidence = "authored" }
+"Scheduler" = { declaration = "typedef struct Scheduler { char pad0[0x2E8];SchedulerTask *gfxHead,*audioTail,*gfxTail,*rsp,*rdp; } Scheduler;", evidence = "authored" }
+"SchedulerFrame" = { declaration = "typedef struct SchedulerFrame { char pad0[0x110];void *framebuffer;s32 serial;char pad118[0x140-0x118]; } SchedulerFrame;", evidence = "authored" }
+"SchedulerTask" = { declaration = "typedef struct SchedulerTask { struct SchedulerTask *next; u32 state,flags;void *framebuffer; struct {s32 type;char pad[0x3C];} list; void *queue; void *message; } SchedulerTask;", evidence = "authored" }
 "ScoreTable" = { declaration = "typedef struct ScoreTable ScoreTable;", evidence = "authored" }
 "Scores" = { declaration = "typedef struct Scores Scores;", evidence = "authored" }
 "Scratch" = { declaration = "struct Scratch { f32 first[4]; f32 second[4]; f32 in[4]; f32 out[4]; f32 position[4]; char matrix[0x40]; };", evidence = "authored" }
