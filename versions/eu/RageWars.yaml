@@ -3006,7 +3006,7 @@ segments:
       - [0xC47A1, data, "rodata/unresolved/800C3BA1"]
       - [0xC47A4, .rodata, "src/rw_text_80246E44_C95E4_us_rev1.c"]
       - [0xC47D3, data, "rodata/unresolved/800C3BD3"]
-      - [0xC47D4, rodata, "src/rw_pool_80247004_C9614_us_rev1.c"]
+      - [0xC47D4, .rodata, "src/rw_pool_80247004_C9614_us_rev1.c"]
       - [0xC47E4, .rodata, "rodata/shared/800C8A24"]
       - [0xC47F5, data, "rodata/unresolved/800C3BF5"]
       - [0xC47F8, rodata, "src/rw_pool_802472F0_C9638_us_rev1.c"]

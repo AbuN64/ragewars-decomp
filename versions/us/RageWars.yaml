@@ -2983,7 +2983,7 @@ segments:
       - [0xC4421, data, "rodata/unresolved/800C3821"]
       - [0xC4424, .rodata, "src/rw_text_80246E44_C95E4_us_rev1.c"]
       - [0xC4453, data, "rodata/unresolved/800C3853"]
-      - [0xC4454, rodata, "src/rw_pool_80247004_C9614_us_rev1.c"]
+      - [0xC4454, .rodata, "src/rw_pool_80247004_C9614_us_rev1.c"]
       - [0xC4464, .rodata, "rodata/shared/800C8A24"]
       - [0xC4475, data, "rodata/unresolved/800C3875"]
       - [0xC4478, rodata, "src/rw_pool_802472F0_C9638_us_rev1.c"]
