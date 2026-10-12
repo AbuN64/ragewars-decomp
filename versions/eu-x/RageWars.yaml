@@ -2587,7 +2587,7 @@ segments:
       - [0xC1C80, asm, "func_802C0DA0_de"]
       - [0xC2204, data, "rodata/unresolved/802C1604"]
       - [0xC2210, asm, "func_802C1330_de"]
-      - [0xC2704, data, "rodata/unresolved/802C1B04"]
+      - [0xC2704, .data, "rodata/unresolved/802C1B04"]
       - [0xC2710, c, "__cmpdi2"]
       - [0xC2758, data, "rodata/unresolved/802C1B58"]
       - [0x0C2760, asm, "func_802C1B60_eu_x"]
