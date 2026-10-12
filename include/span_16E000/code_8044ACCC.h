@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
+#include "types.h"
 struct func_8044B388_S1;
 /* unbake published declaration: published_03e9c7e3de05cad75660efbd */
 typedef struct func_8044B388_S1 func_8044B388_S1;
@@ -566,5 +567,12 @@ extern char D_800C504C_de;
 extern char D_800C505C_de;
 extern char D_800C5070_de;
 extern char D_800C5098_de;
+
+typedef struct Shape33 { u32 words[7]; } Shape33;
+typedef void (*ResourceCallback33)(s32, s32);
+extern void func_8026D7F4_de(s32, s32);
+extern u8 D_800C4EE0_de[];
+extern u8 D_800C4F04_de[];
+extern u8 D_800C4F2C_de[];
 
 #endif

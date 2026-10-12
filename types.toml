@@ -4281,7 +4281,7 @@ schema = 1
 "func_8044AE70_de" = { evidence = "landed", signature = "s16 func_8044AE70_de(void)" }
 "func_8044B008_de" = { evidence = "declared", signature = "s32 func_8044B008_de(ControllerProfile *, s32)" }
 "func_8044B0E0_de" = { evidence = "landed", signature = "void func_8044B0E0_de(struct Pool_func_8044B0E0_de *arg0)" }
-"func_8044B600_de" = { evidence = "authored", signature = "void func_8044B600_de(void *,void *,s32)" }
+"func_8044B600_de" = { evidence = "landed", signature = "void func_8044B600_de(void *level, void *buffer, s32 name)" }
 "func_8044B7C0_de" = { evidence = "landed", signature = "void func_8044B7C0_de(Level_func_8044B7C0_de *arg0, s32 arg1)" }
 "func_8044BE04_de" = { evidence = "landed", signature = "void func_8044BE04_de(Scene_func_8044BE04_de *scene)" }
 "func_8044BF90_de" = { evidence = "landed", signature = "void func_8044BF90_de(func_8044CBE0_S1 *arg0)" }
@@ -6676,8 +6676,11 @@ schema = 1
 "D_800C4ED4_eu" = { declaration = "extern float D_800C4ED4_eu;", evidence = "authored" }
 "D_800C4ED8_eu" = { declaration = "extern float D_800C4ED8_eu;", evidence = "authored" }
 "D_800C4EDC_eu" = { declaration = "extern float D_800C4EDC_eu;", evidence = "authored" }
+"D_800C4EE0_de" = { declaration = "extern u8 D_800C4EE0_de[];", evidence = "authored" }
 "D_800C4EE0_eu" = { declaration = "extern float D_800C4EE0_eu;", evidence = "authored" }
 "D_800C4EE4_eu" = { declaration = "extern float D_800C4EE4_eu;", evidence = "authored" }
+"D_800C4F04_de" = { declaration = "extern u8 D_800C4F04_de[];", evidence = "authored" }
+"D_800C4F2C_de" = { declaration = "extern u8 D_800C4F2C_de[];", evidence = "authored" }
 "D_800C4F50_de" = { declaration = "extern char D_800C4F50_de;", evidence = "authored" }
 "D_800C4F60_de" = { declaration = "extern char D_800C4F60_de;", evidence = "authored" }
 "D_800C4F70_de" = { declaration = "extern char D_800C4F70_de;", evidence = "authored" }
@@ -11577,6 +11580,7 @@ schema = 1
 "SevenBytes" = { declaration = "typedef struct SevenBytes SevenBytes;", evidence = "authored" }
 "Shade" = { declaration = "typedef struct Shade Shade;", evidence = "authored" }
 "Shape" = { declaration = "struct Shape { s32 flags; s8 enabled; };", evidence = "authored" }
+"Shape33" = { declaration = "typedef struct Shape33 { u32 words[7]; } Shape33;", evidence = "authored" }
 "Shape_D_800D3F18" = { declaration = "struct Shape_D_800D3F18 { unsigned char padding_0[4]; int field_4; };", evidence = "authored" }
 "Shape_D_800E58E8" = { declaration = "struct Shape_D_800E58E8 { unsigned char padding_0[4]; int field_4; };", evidence = "authored" }
 "Shape_D_8013EFE8" = { declaration = "struct Shape_D_8013EFE8 { unsigned char padding_0[108]; float field_6C; float field_70; unsigned char padding_74[180]; float field_128; unsigned char padding_12C[4]; float field_130; unsigned char padding_134[360]; float field_29C; float field_2A0; float field_2A4; float field_2A8; };", evidence = "authored" }
