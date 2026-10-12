@@ -1,5 +1,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8041B020.h"
+#include "span_16E000/code_8042F988.h"
 #include "types.h"
 
 /* Draws the child at 0x8 of window arg0 with the arguments passed by value once func_8040E0D4_de resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_802A1BE0_de. */
@@ -17,7 +18,7 @@ extern void func_8040E7FC_de(void *, Args);
 
 
 
-void func_8041B3D0_de(void *arg0, Args args) {
+void func_8041B3D0_de(Shared_Item *arg0, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
@@ -26,7 +27,7 @@ void func_8041B3D0_de(void *arg0, Args args) {
 
     changed = 0;
     if (func_8040E0D4_de(&first, &basis, arg0, &args) != 0) {
-        if ((((func_802A2BE0_S1 *)(arg0))->unk12 & 0x200) != 0) {
+        if ((arg0->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             func_8040F488_de(&transformed, &basis);
@@ -34,7 +35,7 @@ void func_8041B3D0_de(void *arg0, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(((func_802A2BE0_S1 *)(arg0))->unk8, args);
+        func_8040E7FC_de(arg0->label, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }
