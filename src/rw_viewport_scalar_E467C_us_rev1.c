@@ -1,3 +1,4 @@
-const unsigned int D_auto_src_rw_viewport_scalar_E467C_us_rev1[1] = {
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+const unsigned int D_blob_e0eb683c6d4d4b28aff1[1] = {
     0x42200000,
 };

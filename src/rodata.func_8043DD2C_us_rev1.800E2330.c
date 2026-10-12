@@ -1,15 +1,4 @@
-#ifdef VERSION_DE
-const unsigned int D_auto_rodata_func_8043DD2C_us_rev1_800E2330[8] = {
-    0x0043DCCC, 0x0043DCFC, 0x0043DD2C, 0x0043DD5C, 0x0043DD8C, 0x0043DDBC, 0x0043DDEC, 0x0043DE1C,
-};
-#endif
-#ifdef VERSION_EU_X
-const unsigned int D_auto_rodata_func_8043DD2C_us_rev1_800E2330[8] = {
-    0x0043EB98, 0x0043EBC8, 0x0043EBF8, 0x0043EC28, 0x0043EC58, 0x0043EC88, 0x0043ECB8, 0x0043ECE8,
-};
-#endif
-#ifdef VERSION_US_REV
-const unsigned int D_auto_rodata_func_8043DD2C_us_rev1_800E2330[8] = {
+/* ROM-grounded exact candidate, normalized from prior lane proof. */
+const unsigned int D_blob_667f0e18fea557f065f4[8] = {
     0x0043DD58, 0x0043DD88, 0x0043DDB8, 0x0043DDE8, 0x0043DE18, 0x0043DE48, 0x0043DE78, 0x0043DEA8,
 };
-#endif

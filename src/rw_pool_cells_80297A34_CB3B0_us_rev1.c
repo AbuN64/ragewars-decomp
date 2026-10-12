@@ -1,3 +1,4 @@
-const unsigned int D_auto_src_rw_pool_cells_80297A34_CB3B0_us_rev1[2] = {
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+const unsigned int D_blob_a8b599cb23bc51b717e6[2] = {
     0x408F4000, 0x00000000,
 };

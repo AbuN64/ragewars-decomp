@@ -1,3 +1,4 @@
-const unsigned int D_auto_src_rw_constants_802B6664_CD6C0_us_rev1[2] = {
+/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
+const unsigned int D_blob_70cd42de207f8964de31[2] = {
     0xBF800000, 0x3F800000,
 };
