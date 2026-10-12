@@ -818,7 +818,7 @@ segments:
       - [0x3FADC, data, "rodata/unresolved/8023EEDC"]
       - [0x3FAE0, asm, "func_8023EF00_de"]
       - [0x4001C, c, "func_8023F43C_de"]
-      - [0x40324, data, "rodata/unresolved/8023F724"]
+      - [0x40324, .data, "rodata/unresolved/8023F724"]
       - [0x40330, asm, "func_8023F750_de"]
       - [0x408F8, asm, "func_8023FD18_de"]
       - [0x40E40, asm, "func_80240260_de"]
