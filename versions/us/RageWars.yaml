@@ -1867,7 +1867,7 @@ segments:
       - [0x96A54, asm, "func_80295F14_de"]
       - [0x96AB8, c, "func_80295F78_de"]
       - [0x96B34, c, "func_80295FF4_de"]
-      - [0x96B54, data, "rodata/unresolved/80295F54"]
+      - [0x96B54, .data, "rodata/unresolved/80295F54"]
       - [0x96B60, asm, "func_80296020_de"]
       - [0x96DE8, c, "func_802962A8_de"]
       - [0x96ED0, c, "func_80296390_de"]
