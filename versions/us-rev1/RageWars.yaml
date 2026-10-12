@@ -5599,7 +5599,7 @@ segments:
       - [0xE2B08, rodata, "rodata/func_8043577C_de/800E1F08"]
       - [0xE2B1C, data, "rodata/unresolved/800E1F1C"]
       - [0xE2B20, rodata, "rodata/func_80436044_de/800E1F20"]
-      - [0xE2B34, data, "rodata/unresolved/800E1F34"]
+      - [0xE2B34, .data, "rodata/unresolved/800E1F34"]
       - [0xE2B40, rodata, "src/rw_constants_80437C28_us_rev1_E2B40_us_rev1.c"]
       - [0xE2B44, rodata, "src/rw_formats_8043829C_E2B44_us_rev1.c"]
       - [0xE2B47, data, "rodata/unresolved/800E1F47"]
