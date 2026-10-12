@@ -2613,7 +2613,7 @@ segments:
       - [0xC292C, rodata, "rodata/func_80203F04_de/800C6B3C"]
       - [0xC2930, rodata, "rodata/func_8020402C_eu_x/800C1D30"]
       - [0xC2934, data, "rodata/unresolved/800C1D34"]
-      - [0xC2938, rodata, "rodata/func_8020402C_eu_x/800C1D38"]
+      - [0xC2938, .rodata, "rodata/func_8020402C_eu_x/800C1D38"]
       - [0xC294C, rodata, "rodata/shared/800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8A44_unclaimed_D8B84"]
       - [0xC2950, rodata, "src/rw_pool_80204738_C7760_us_rev1.c"]
       - [0xC2954, rodata, "src/rw_pool_80204808_C7764_us_rev1.c"]
