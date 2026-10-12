@@ -3028,6 +3028,7 @@ schema = 1
 "func_80403DE8_de" = { evidence = "landed", signature = "void func_80403DE8_de(void)" }
 "func_80403E10_de" = { evidence = "landed", signature = "int func_80403E10_de(Record_func_80403E10_de *rec)" }
 "func_80403E90_de" = { evidence = "landed", signature = "s32 func_80403E90_de(s32 ch)" }
+"func_80404018_de" = { evidence = "landed", signature = "s32 func_80404018_de(s32 ch)" }
 "func_804041E8_de" = { evidence = "authored", signature = "int func_804041E8_de(void)" }
 "func_804042F0_de" = { evidence = "landed", signature = "s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name, u8 *company, u8 *code)" }
 "func_804042F0_encode" = { evidence = "landed", signature = "static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n)" }
@@ -4325,6 +4326,7 @@ schema = 1
 "offset_y" = { evidence = "landed", signature = "static inline f32 offset_y(Actor_func_80279B40_de *actor)" }
 "overlaps" = { evidence = "landed", signature = "static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max)" }
 "packMtx" = { evidence = "landed", signature = "static inline void packMtx(u32 *out, PoseMatrix m)" }
+"pak27" = { evidence = "landed", signature = "static inline void *pak27(s32 ch)" }
 "path_length" = { evidence = "landed", signature = "static inline s32 path_length(u8 *s)" }
 "pick" = { evidence = "landed", signature = "static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group)" }
 "pickChannel" = { evidence = "landed", signature = "static inline void pickChannel(Shared_PakMenu *menu, s32 *ch)" }

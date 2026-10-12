@@ -4362,7 +4362,7 @@ segments:
       - [0xF3E10, c, "func_80403E10_de"]
       - [0xF3E88, asm, "func_80403E88_eu_x"]
       - [0xF3E90, c, "func_80403E90_de"]
-      - [0xF4018, asm, "func_80404018_de"]
+      - [0xF4018, c, "func_80404018_de"]
       - [0xF41E8, asm, "func_804041E8_de"]
       - [0xF42F0, c, "func_804042F0_de"]
       - [0xF458C, c, "func_8040458C_de"]

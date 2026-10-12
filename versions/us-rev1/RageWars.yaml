@@ -6221,7 +6221,7 @@ segments:
       - [0x171E10, c, "func_80403E10_de"]
       - [0x171E88, asm, "func_80403E88_us_rev1"]
       - [0x171E90, c, "func_80403E90_de"]
-      - [0x172018, asm, "func_80404018_de"]
+      - [0x172018, c, "func_80404018_de"]
       - [0x1721E8, asm, "func_804041E8_de"]
       - [0x1722F0, c, "func_804042F0_de"]
       - [0x17258C, c, "func_8040458C_de"]

@@ -4386,7 +4386,7 @@ segments:
       - [0x169E10, c, "func_80403E10_de"]
       - [0x169E88, asm, "func_80403E88_de"]
       - [0x169E90, c, "func_80403E90_de"]
-      - [0x16A018, asm, "func_80404018_de"]
+      - [0x16A018, c, "func_80404018_de"]
       - [0x16A1E8, asm, "func_804041E8_de"]
       - [0x16A2F0, c, "func_804042F0_de"]
       - [0x16A58C, c, "func_8040458C_de"]

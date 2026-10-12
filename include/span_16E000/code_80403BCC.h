@@ -2,6 +2,8 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80403BCC_H
 #define UNBAKE_SPAN_16E000_CODE_80403BCC_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
 struct OSPfs_func_80403E90_de;
 /* unbake published declaration: published_004e2b8bec5ffcce69b921cc */
 typedef struct OSPfs_func_80403E90_de OSPfs_func_80403E90_de;
@@ -154,4 +156,8 @@ extern void func_80404DDC_de(void);
 
 extern int func_804041E8_de(void);
 void func_80404D84_de(void);
+
+extern s32 func_80446F60_de(void *,OSPfs_func_80445F80_de *,s32);
+extern s32 func_80403E90_de(s32);
+
 #endif
