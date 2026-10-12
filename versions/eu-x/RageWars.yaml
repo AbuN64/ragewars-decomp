@@ -3800,7 +3800,7 @@ segments:
       - [0xCB2FC, rodata, "rodata/shared/800CE38C"]
       - [0xCB300, .data, "rodata/unresolved/800CA700"]
       - [0xCB33C, rodata, "rodata/shared/800CE3CC"]
-      - [0xCB340, data, "rodata/unresolved/800CA740"]
+      - [0xCB340, .data, "rodata/unresolved/800CA740"]
       - [0xCB350, rodata, "rodata/shared/800CE3E0"]
       - [0xCB354, rodata, "rodata/shared/800CE3E4"]
       - [0xCB358, .data, "rodata/unresolved/800CE3E8"]
