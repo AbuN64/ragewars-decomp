@@ -64,7 +64,7 @@ void func_80235AE0_de(Racer *view) {
     if ((s16)uly<0) uly=0;
     if ((s16)lry > D_800E28D4-1) lry=maxy;
     buffer=D_8011BDC0; frame=D_800D297C;
-    gSPMatrix((*setup)++, view->projectionMatrices[frame], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+    { Gfx *packet=(*setup); gSPMatrix(packet, view->projectionMatrices[frame], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH); (*setup)++; }
     gSPMoveWord((*setup)++, G_MW_PERSPNORM, 0, view->perspectiveNorm);
     viewport=&view->viewports[frame];
     lights=&view->lights[frame][0];
