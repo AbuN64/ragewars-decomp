@@ -15,30 +15,30 @@
 
 /** Zero the object's vector fields and reset the scale field to the default. */
 void func_80239D90_de(void *arg0) {
-    u8 *o = (u8 *)arg0;
-    u8 *v0;
-    u8 *v1;
-    u8 *v2;
+    struct Record_func_80239DE8_de *o = arg0;
+    struct Channel *v0;
+    struct Channel *v1;
+    struct Channel *v2;
     f32 diag;
 
     diag = D_800C3570_de;
-    v0 = o + 0x18;
-    ((func_80239D80_S1 *)(o))->unk8 = 0;
-    ((func_80239D80_S1 *)(o))->unkC = 0;
-    ((func_80239D80_S1 *)(o))->unk10 = 0;
-    ((func_80239D80_S1 *)(o))->unk14 = diag;
-    ((func_80239CDC_S1 *)(v0))->unk4 = 0;
-    ((func_80239CDC_S1 *)(v0))->unk8 = 0;
-    ((func_80239CDC_S1 *)(v0))->unkC = 0;
-    ((func_80239CDC_S1 *)(v0))->unk10 = 0;
-    v1 = o + 0x2C;
-    v2 = o + 0x40;
-    ((func_80239CDC_S1 *)(v1))->unk4 = 0;
-    ((func_80239CDC_S1 *)(v1))->unk8 = 0;
-    ((func_80239CDC_S1 *)(v1))->unkC = 0;
-    ((func_80239CDC_S1 *)(v1))->unk10 = 0;
-    ((func_80239CDC_S1 *)(v2))->unk4 = 0;
-    ((func_80239CDC_S1 *)(v2))->unk8 = 0;
-    ((func_80239CDC_S1 *)(v2))->unkC = 0;
-    ((func_80239CDC_S1 *)(v2))->unk10 = 0;
+    v0 = &o->channels[0];
+    o->triple.x = 0;
+    o->triple.y = 0;
+    o->triple.z = 0;
+    o->value = diag;
+    v0->level = 0;
+    v0->state[0] = 0;
+    v0->state[1] = 0;
+    v0->state[2] = 0;
+    v1 = &o->channels[1];
+    v2 = &o->channels[2];
+    v1->level = 0;
+    v1->state[0] = 0;
+    v1->state[1] = 0;
+    v1->state[2] = 0;
+    v2->level = 0;
+    v2->state[0] = 0;
+    v2->state[1] = 0;
+    v2->state[2] = 0;
 }

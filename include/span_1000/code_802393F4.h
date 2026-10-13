@@ -93,7 +93,7 @@ struct Channel;
 struct Channel {
     s32 mode;
     f32 level;
-    char pad[0x14 - 8];
+    s32 state[3]; /* 0x08..0x10 */
 };
 
 struct Channel;
