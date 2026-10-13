@@ -219,7 +219,9 @@ struct Descriptor_func_80250274_de;
 struct Owner_func_80250274_de;
 /* unbake published declaration: published_7012cafa2e24bb722ddf4d51 */
 struct Owner_func_80250274_de {
-    char pad0[0x18];
+    char pad0[8];
+    Vec3 position; /* 0x08 */
+    char pad14[4];
     struct Descriptor_func_80250274_de *descriptor;
     char pad1C[4];
     s32 field20;
