@@ -23,7 +23,7 @@ extern s32 func_80282C8C_de(void *);
 extern s32 func_80282D38_de(void *);
 extern s32 func_80282DEC_de(void *);
 /* Published contiguous pool of sixteen damage scaling constants. */
-extern f32 D_800C43E0_de[16];
+extern const f32 D_800C43E0_de[16];
 extern u8 D_801462E5;
 extern void *D_801041F0;
 extern s32 D_80100204;
@@ -54,8 +54,8 @@ static inline s32 adjustHit(Shared_ReactionActor *arg1, Vec3 *position) {
                 body = (*position);
                 origin = temp_s0->position;
                 func_80271FC8_de(&(*position), 0.75f, &body, &origin);
-                var_a2 = 1;
                 (*position).y += func_8024D284_de(temp_s0) * D_800C43E0_de[0];
+                var_a2 = 1;
             }
         }
         return var_a2;
@@ -163,7 +163,6 @@ Vec3 sp30;
     u8 temp_v1_3;
     Shield *sp110;
     Shared_DamageEvent sp40;
-    f32 temp_fs1f;
     f32 temp_fs1f_2;
     s32 var_v1_4;
     Shared_ReactionPlayer *var_s2;
@@ -175,16 +174,15 @@ Vec3 sp30;
     }
     if (func_802661DC_de(arg0, arg1) != 0) {
         sp114 = adjustHit(arg1, &position);
-        temp_fs1f = (f32) params.radius * D_800C43E0_de[1];
-        temp_fs1f_2 = temp_fs1f * hitSize(arg1);
+        temp_fs1f_2 = (f32) params.radius * D_800C43E0_de[1];
+        temp_fs1f_2 *= hitSize(arg1);
         var_fs1 = (f32)params.damage;
         var_fs1 *= scaleHit(arg0, arg1, position, temp_fs1f_2, arg8, arg10, &sp110);
         if (!(var_fs1 <= 0.0f)) {
             hitImpulse(arg0, arg1, params, &sp30);
             func_80216488_de(&sp40, arg1, (s32) var_fs1, temp_fs1f_2, arg10, sp110);
             temp_v1_3 = arg1->category;
-            switch (temp_v1_3) {                    /* irregular */
-            case 2:
+            if (temp_v1_3 == 2) {
                 temp_a0 = arg1->owner;
                 if ((temp_a0 != NULL) && (temp_a0->category == 1)) {
                     if (temp_a0->flags & 0x300000) {
@@ -247,8 +245,7 @@ block_82:
                         }
                     }
                 }
-                break;
-            case 1:
+            } else if (temp_v1_3 == 1) {
                 if (arg1->flags & 0x300000) {
                     temp_s0_3 = arg1->unk1D8;
                     if (var_s2 != NULL) {
@@ -286,7 +283,6 @@ block_98:
                 if ((var_fs1 > 0.0f) && (var_s2 != NULL)) {
                     var_s2->unk1218 = (s32) (var_s2->unk1218 == 0);
                 }
-                break;
             }
             if (var_fs1 != 0.0f) {
                 func_802171FC_de(arg0, &arg0->unk170, &sp40);
