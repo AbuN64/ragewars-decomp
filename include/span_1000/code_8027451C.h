@@ -137,9 +137,7 @@ struct Polygon_func_80275410_de;
 struct Polygon_func_80275410_de {
     char pad0[2];
     u16 flags;
-    Vec3 *v0;
-    Vec3 *v1;
-    Vec3 *v2;
+    Vec3 *vertices[3];
 };
 
 /* unbake published declaration: published_6f8be957e5ff1b046212257d */

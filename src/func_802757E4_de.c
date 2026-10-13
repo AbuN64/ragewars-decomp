@@ -50,8 +50,8 @@ s32 func_802757E4_de(Polygon_func_80275410_de *polygon) {
             D_80111D54 = *(&D_800C49E0_de + 1);
             D_80111D58 = 0;
         } else if (polygon != D_800CD3E8) {
-            edge(&edge0, polygon->v1, polygon->v0);
-            edge(&edge1, polygon->v2, polygon->v1);
+            edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
+            edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
             func_80272018_de(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;

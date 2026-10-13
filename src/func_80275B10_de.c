@@ -9,25 +9,21 @@
 
 s32 func_80275B10_de(void **arg0, f32 arg1, f32 arg2) {
     s32 i;
-    s32 address1;
-    s32 address2;
-    void *point1;
-    void *point2;
+    Vec3 *point1;
+    Vec3 *point2;
 
     if (arg0 == 0) {
         return 1;
     }
 
     for (i = 0; i < 3; i++) {
-        address1 = (s32)arg0 + i * 4 + 4;
-        address2 = (s32)arg0 + ((i + 1) % 3) * 4 + 4;
-        point1 = *(void **)address1;
-        point2 = *(void **)address2;
-        if (((((func_80212828_S7 *)(point2))->unk8 -
-              ((func_80212828_S7 *)(point1))->unk8) *
-             (arg1 - *(f32 *)point1)) +
-                ((*(f32 *)point1 - *(f32 *)point2) *
-                 (arg2 - ((func_80212828_S7 *)(point1))->unk8)) <
+        point1 = ((Polygon_func_80275410_de *)arg0)->vertices[i];
+        point2 = ((Polygon_func_80275410_de *)arg0)->vertices[(i + 1) % 3];
+        if (((point2->z -
+              point1->z) *
+             (arg1 - point1->x)) +
+                ((point1->x - point2->x) *
+                 (arg2 - point1->z)) <
             0.0f) {
             return 0;
         }
