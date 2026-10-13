@@ -69,7 +69,7 @@ extern func_80234FDC_S4 D_80140FF8;
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x268, 0x26c, 0x270, 0x274, 0x278, 0x27c, 0x280, 0x284, 0x288, 0x298, 0x29c, 0x2a8, 0x2ac, 0x2b0, 0x2b4], gap at: 0x28c. */
 /* Updates the actor view and projection matrices and applies camera effects. */
-void func_80234FEC_de(func_80234FDC_S2 *arg0) {
+void func_80234FEC_de(Shared_func_80234FDC_S2 *arg0) {
     f32 ground_x;
     func_80234FDC_S8 *temp_s0_2;
     f32 sp28[16];
