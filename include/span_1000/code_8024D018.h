@@ -174,9 +174,13 @@ typedef struct {
 typedef struct { u8 pad0[0x80C]; s32 active; } State_u1;
 typedef struct {
     u8 kind;
-    u8 pad1[0x17];
+    u8 pad1[7];
+    Vec3 position;
+    u32 unknown14;
     Resource_u1 *resource;
-    u8 pad1C[0xE4];
+    u8 pad1C[0x50];
+    f32 yaw;
+    u8 pad70[0x90];
     u32 flags;
     u8 pad104[0xD4];
     State_u1 *state;
