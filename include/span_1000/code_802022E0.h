@@ -146,7 +146,8 @@ struct Result {
 struct Segment_func_80203278_de;
 /* unbake published declaration: published_bb1d1d9de614eb47426f207d */
 struct Segment_func_80203278_de {
-    char pad0[0x44];
+    char pad0[0x40];
+    s32 orientationMode;
     f32 rate;
     f32 limit;
     f32 distanceLimit;

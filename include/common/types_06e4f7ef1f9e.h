@@ -2,6 +2,7 @@
 #define UNBAKE_COMMON_TYPES_06E4F7EF1F9E_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
+#include "span_1000/code_8027302C.h"
 /* unbake declaration evidence: evidence_15634c5f0d54764e20fb0b72 */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU_X)
@@ -1563,7 +1564,9 @@ struct SharedPlayer {
 struct Rider_func_80203278_de {
     char pad0[0x80];
     SharedPlayer *target;
-    char pad84[0xAC];
+    char pad84[0x18];
+    f32 heading; /* 0x9C */
+    char padA0[0x90];
     Vec3 aim;
 };
 
@@ -1986,9 +1989,21 @@ typedef struct func_80203B60_S3 func_80203B60_S3;
 
 struct Owner;
 /* unbake published declaration: published_d50d51ef2524703bd6c21e18 */
+struct NavigationTrack;
 struct Owner {
-    char pad0[0x18];
-    char *track;
+    char pad0[8];
+    Vec3 position;
+    char pad14[4];
+    union {
+        char *track;
+        struct NavigationTrack *navigationTrack;
+    };
+    char pad1C[0x34];
+    Vec3 scale;
+    Vector4f orientation;
+    f32 heading;
+    char pad70[4];
+    struct Mtx transform;
 };
 
 struct func_80205628_S3;
