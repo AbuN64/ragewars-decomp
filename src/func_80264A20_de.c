@@ -1,3 +1,4 @@
+#include "shared/gameplay_transition.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802646F4.h"
@@ -57,11 +58,11 @@ void func_80264A20_de(void) {
             player = func_8022A414_de((char *)options - 0x1288);
             if (player != 0) {
                 if (snapshot->field_4 == 1 &&
-                    (D_8013B2BC != ((func_80264A40_S1 *)(player))->unk5EC ||
-                     (u16)(((func_80264A40_S1 *)(player))->unk650 - 0x16) < 12)) {
+                    (D_8013B2BC != ((Shared_ActorView *)player)->spawn ||
+                     (u16)(((Shared_ActorView *)player)->action - 0x16) < 12)) {
                     snapshot->field_4 = 2;
                 }
-                snapshot->field_C = ((func_80264A40_S1 *)(player))->unk5EC;
+                snapshot->field_C = ((Shared_ActorView *)player)->spawn;
             }
         }
     } else {

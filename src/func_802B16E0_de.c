@@ -23,12 +23,12 @@ void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 middle;
     u8 x;
     u8 y;
-    void *table;
-    void *entry;
+    ALInstrument *table;
+    ALSound_s *entry;
     u8 *bounds;
 
-    table = ((TableSlot *)((func_802B67B0_S1 *)arg0)->unk60)[arg3 & 0xFF].entry;
-    high = ((func_802B67B0_S2 *)(table))->unkE;
+    table = ((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState[arg3 & 0xFF].instrument;
+    high = table->soundCount;
     low = 1;
     if (table == 0) {
         func_802BAC50_de(&D_800C7440, &D_800C7444, 0x376);
@@ -39,8 +39,8 @@ void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         y = arg2;
         do {
             middle = (low + high) / 2;
-            entry = ((EntryTable *)table)->entries[middle - 1];
-            bounds = ((func_802B67B0_S3 *)(entry))->unk4;
+            entry = table->soundArray[middle - 1];
+            bounds = (u8 *)entry->keyMap;
             if (x >= bounds[2] && x <= bounds[3] &&
                 y >= bounds[0] && y <= bounds[1]) {
                 return entry;
