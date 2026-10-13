@@ -40,9 +40,7 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     f32 temp_fs0;
     f32 temp_fs0_2;
     f32 temp_fs0f;
-    f32 temp_fs0f_2;
     f32 temp_fs1;
-    f32 temp_fs1_2;
     f32 temp_fs1f;
     f32 temp_ft0;
     f32 temp_fv0;
@@ -101,30 +99,29 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
             arg0->field264 = func_802B72B0_de((temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1) + (temp_fv0f * temp_fv0f));
             temp_fs1 = delta.y;
             delta.y = 0;
-            temp_v1_2 = temp_s0 - 6;
             temp_fs0f = func_802B72B0_de((delta.x * delta.x) + (delta.z * delta.z));
             {
-                switch (temp_v1_2) {
-                case 4:
-                case 6:
+                switch (temp_s0) {
+                case 10:
+                case 12:
                     arg0->field268 = 1;
                     arg0->field270 = 1;
                     arg0->field274 = 0;
                     break;
-                case 0:
-                case 2:
+                case 6:
+                case 8:
                     arg0->field268 = 0xB;
                     arg0->field270 = 0;
                     arg0->field274 = 1;
                     break;
-                case 3:
+                case 9:
                     arg0->field268 = 1;
                     arg0->field270 = 1;
                     arg0->field274 = 1;
                     break;
                 default:
-                case 1:
-                case 5:
+                case 7:
+                case 11:
                 if (temp_fs0f == 0.0f) {
                     if (temp_fs1 < 0.0f) {
                         arg0->field248 = (f32) D_800C207C_eu;
@@ -166,14 +163,11 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
                         arg0->field284 = var_v0;
                         var_fv0 = D_800C209C_eu;
                     }
-                    temp_fv0 = D_800C20A0_eu - ((f32) arg0->field284 * var_fv0);
-                    temp_fv1_3 = arg0->field278;
-                    arg0->field27C = temp_fv0;
-                    temp_fv0_2 = (temp_fv0 + temp_fv1_3) * D_800C20A4_eu;
-                    arg0->field280 = temp_fv1_3;
-                    arg0->field278 = temp_fv0_2;
+                    arg0->field27C = D_800C20A0_eu - ((f32) arg0->field284 * var_fv0);
+                    arg0->field280 = arg0->field278;
+                    arg0->field278 = (arg0->field27C + arg0->field280) * D_800C20A4_eu;
                     if (arg0->field270 != 0) {
-                        arg0->field24C = temp_fv0_2;
+                        arg0->field24C = arg0->field278;
                     }
                     return 0;
             }
@@ -246,21 +240,21 @@ block_43:
                     delta.y = temp_fv1f_2;
                     delta.z = temp_fv1_4;
                     arg0->field264 = func_802B72B0_de((temp_ft0 * temp_ft0) + (temp_fv1f_2 * temp_fv1f_2) + (temp_fv1_4 * temp_fv1_4));
-                    temp_fs1_2 = delta.y;
+                    temp_fs1 = delta.y;
                     delta.y = 0;
+                    temp_fs0f = func_802B72B0_de((delta.x * delta.x) + (delta.z * delta.z));
                     temp_fs0 = D_800C20A8_eu;
-                    temp_fs0f_2 = func_802B72B0_de((delta.x * delta.x) + (delta.z * delta.z));
                     temp_fv0_4 = func_802B6560_de(arg0->field278 * temp_fs0);
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
-                    temp_fv0f_2 = (func_8029DD3C_de(arg0->field278 * temp_fs0) * temp_fs0f_2) + ((temp_fv0_3 * (temp_fs0f_2 * temp_fs0f_2)) / (2.0f * (temp_fs1f * temp_fs1f) * temp_fs0_2));
-                    if (((temp_fs1_2 - D_800C20AC_eu) <= temp_fv0f_2) && (temp_fv0f_2 <= (temp_fs1_2 + D_800C20AC_eu))) {
+                    temp_fv0f_2 = (func_8029DD3C_de(arg0->field278 * temp_fs0) * temp_fs0f) + ((temp_fv0_3 * (temp_fs0f * temp_fs0f)) / (2.0f * (temp_fs1f * temp_fs1f) * temp_fs0_2));
+                    if (((temp_fs1 - D_800C20AC_eu) <= temp_fv0f_2) && (temp_fv0f_2 <= (temp_fs1 + D_800C20AC_eu))) {
                         if (func_8020E674_de(arg0, temp_fs1f, temp_fv0_3) != 0) {
                             temp_v0_6 = arg0->field284;
                             temp_v0_7 = temp_v0_6 - 1;
                             if (temp_v0_6 > 0) {
                                 arg0->field284 = temp_v0_7;
-                                arg0->field27C = (f32) (D_800C20B4_eu - ((f32) temp_v0_7 * D_800C20B0_eu));
-                                arg0->field280 = (f32) (D_800C20B0_eu - ((f32) temp_v0_7 * D_800C20B0_eu));
+                                arg0->field27C = (f32) (D_800C20B4_eu - ((f32) arg0->field284 * D_800C20B0_eu));
+                                arg0->field280 = (f32) (D_800C20B0_eu - ((f32) arg0->field284 * D_800C20B0_eu));
                                 if (arg0->field270 != 0) {
                                     var_v0_3 = 1;
                                 } else {
@@ -330,7 +324,7 @@ block_54:
                         arg0->field254 = (f32) (arg0->field278 - arg0->field24C);
                         return 1;
                     }
-                    if (temp_fv0f_2 < (temp_fs1_2 - D_800C20D8_eu)) {
+                    if (temp_fv0f_2 < (temp_fs1 - D_800C20D8_eu)) {
                         temp_v0_8 = arg0->field284;
                         if (temp_v0_8 != 0) {
                             if ((temp_v0_8 >= 0) && (temp_v0_8 < 4)) {
