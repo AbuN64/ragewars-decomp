@@ -27,17 +27,17 @@ static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max) {
 
 
 
-void func_80262E88_de(void *scene, s32 arg1) {
+void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
     Effect_func_80262E88_de *effect;
     Effect_func_80262E88_de *next;
     f32 *max;
 
-    effect = ((func_80262EA8_S1 *)(scene))->unk5F14.head;
+    effect = scene->activeEffects.head;
     if (effect == 0) {
         return;
     }
     do {
-        max = &((func_802077F4_S2 *)(&D_801031F8))->unk4;
+        max = (&D_801031F8 + 1);
     next_effect:
         next = effect->next;
         if (overlaps(effect, max)) {
@@ -52,8 +52,8 @@ void func_80262E88_de(void *scene, s32 arg1) {
             if (effect->ref != 0) {
                 *effect->ref -= 1;
             }
-            func_80255ED8_de(&((func_80262EA8_S1 *)(scene))->unk5F14, effect);
-            func_80255D14_de(&((func_80262EA8_S1 *)(scene))->unk5F00, effect);
+            func_80255ED8_de(&scene->activeEffects, effect);
+            func_80255D14_de(&scene->freeEffects, effect);
         }
         effect = next;
     } while (0);
