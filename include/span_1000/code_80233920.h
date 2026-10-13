@@ -274,7 +274,10 @@ struct Racer {
     u8 spin;
     char pad523[0x1B];
     u16 fogNear; /* 0x53E */
-    char pad540[0x14];
+    char pad540[8];
+    s8 mode548; /* 0x548 */
+    s8 mode549; /* 0x549 */
+    char pad54A[0xA];
     char sound[0x40];
 };
 
