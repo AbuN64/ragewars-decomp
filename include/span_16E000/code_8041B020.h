@@ -43,7 +43,8 @@ struct Node_func_8041B610_de {
     s32 words_00[3];
     s16 tag;
     s16 kind;
-    s16 pad10;
+    s8 alpha; /* 0x10 */
+    u8 reserved11;
     s16 flags;
     s32 words_14[12];
     struct Owner_func_8041B610_de *owner;

@@ -15,13 +15,13 @@ s32 func_8041B564_de(void *arg0) {
     void *p;
 
     func_8025DF34_de(0xE74);
-    p = ((func_80255BEC_S1 *)(arg0))->unk8;
+    p = ((Owner_func_8041B610_de *)arg0)->root;
     if (p != 0) {
         do {
-            if (((func_802A2E5C_S2 *)(p))->unkE != 8) {
-                ((func_802A2E5C_S2 *)(p))->unk10 = 0x64;
+            if ((u16)((Node_func_8041B610_de *)p)->kind != 8) {
+                ((Node_func_8041B610_de *)p)->alpha = 0x64;
             }
-            p = ((func_802A2E5C_S2 *)(p))->unk4;
+            p = (Node_func_8041B610_de *)((Node_func_8041B610_de *)p)->words_00[1];
         } while (p != 0);
     }
     return 0;

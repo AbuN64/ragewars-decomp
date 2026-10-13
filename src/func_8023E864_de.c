@@ -10,9 +10,9 @@ s32 func_8023E864_de(void *arg0, void *arg1) {
     s32 var_v0;
 
     var_v0 = 0;
-    if ((((func_8023E854_S1 *)(arg0))->unk18C == ((func_8023E854_S2 *)(arg1))->unk48) &&
-        (((func_8023E854_S1 *)(arg0))->unk190 == ((func_8023E854_S2 *)(arg1))->unk4C) &&
-        (((func_8023E854_S1 *)(arg0))->unk194 == ((func_8023E854_S2 *)(arg1))->unk50)) {
+    if ((((struct Input *)arg0)->contactNormal.x == ((Polygon_func_8023E8D4_de *)arg1)->normal.x) &&
+        (((struct Input *)arg0)->contactNormal.y == ((Polygon_func_8023E8D4_de *)arg1)->normal.y) &&
+        (((struct Input *)arg0)->contactNormal.z == ((Polygon_func_8023E8D4_de *)arg1)->normal.z)) {
         var_v0 = 1;
     }
     return var_v0;

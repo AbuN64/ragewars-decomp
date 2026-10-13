@@ -191,6 +191,7 @@ struct Input {
     Block70 block10C;
     s32 field17C;
     Triple vec180;
+    Vec3 contactNormal; /* 0x18C */
 };
 
 struct func_8023EE50_S1;
