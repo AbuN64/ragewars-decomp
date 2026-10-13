@@ -4,7 +4,7 @@
 #include "span_16E000/code_8043E9A8.h"
 #include "span_16E000/menu_ui_providers.h"
 #include "span_1000/code_80291054.h"
-void func_802A9234_de(s32 color);
+#include "shared/func_8021E2A0_de_closed.h"
 s32 func_802AAC28_de(s32 resource, s32 mode, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 flags);
 
 void func_8043EE5C_de(struct Item_func_8043F048_de *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context) {
