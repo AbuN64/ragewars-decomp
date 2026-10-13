@@ -5,8 +5,8 @@
 #include "packed_float.h"
 
 
-extern void func_80255ED8_de(void *, s32);
-extern s32 func_80255CB8_de(void *, s32);
+extern void func_80255ED8_de(void *, void *);
+extern s32 func_80255CB8_de(void *, void *);
 extern void func_80278C10_de(void *);
 #if defined(VERSION_EU)
 #else

@@ -59,8 +59,8 @@ s32 func_8028C568_de(void *arg0, void *arg1) {
 
     rec = ((World_func_8044C108_de *)(arg0))->listB.head;
     if (rec != 0) {
-        func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listB, (s32)rec);
-        func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listA, (s32) rec);
+        func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listB, rec);
+        func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listA, rec);
         ((Bucket *)(rec))->object = arg1;
     } else {
         rec = ((World_func_8044C108_de *)(arg0))->listA.tail;
@@ -115,8 +115,8 @@ void func_8028C60C_de(void *arg0) {
                 func_80278C10_de(object);
             }
             if (remove != 0) {
-                func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listA, (s32)node);
-                func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listB, (s32)node);
+                func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listA, node);
+                func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listB, node);
             }
             node = next;
             remove = 0;
