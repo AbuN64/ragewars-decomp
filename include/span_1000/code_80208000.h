@@ -1680,7 +1680,8 @@ typedef struct AiController {
     AiBehaviourTable * table; /* 0x214 */
     AiBehaviourEntry * behaviour; /* 0x218 */
     s32 state; /* 0x21C */
-    u8 pad220[0x1C];
+    s32 handlerIndex; /* 0x220 */
+    u8 pad224[0x18];
     s32 unk23C; /* 0x23C */
     s32 unk240; /* 0x240 */
     f32 aim; /* 0x244 */

@@ -4508,13 +4508,14 @@ struct ObjectLinks24_2 {
     char * unk_0;
     char pad0[0x4 - 0x0 - sizeof(char*)];
     char * unk_4;
-    char pad4[0xC - 0x4 - sizeof(char*)];
+    void * unk_8;
     void * unk_C;
     char padC[0x10 - 0xC - sizeof(void*)];
     s32 unk_10;
     char pad10[0x14 - 0x10 - sizeof(s32)];
     s32 unk_14;
-    char pad14[0x20 - 0x14 - sizeof(s32)];
+    s32 unk_18;
+    s32 unk_1C;
     s32 unk_20;
 };
 

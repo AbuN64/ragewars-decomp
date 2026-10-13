@@ -29,7 +29,11 @@ struct Record_func_8020388C_de;
 struct Record_func_8020388C_de {
     char pad0[0x2C];
     void *table;
-    char pad30[0x108 - 0x30];
+    char pad30[7];
+    s8 state; /* 0x37 */
+    char pad38[0x64 - 0x38];
+    f32 threshold; /* 0x64 */
+    char pad68[0x108 - 0x68];
     void *first;
     s32 pad10C;
     void *second;

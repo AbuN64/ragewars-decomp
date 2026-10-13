@@ -507,6 +507,8 @@ typedef struct ActorMotionDefinition {
     f32 progressScale; /* 0x48 */
     f32 openThreshold; /* 0x4C */
     f32 closeThreshold; /* 0x50 */
+    u8 pad54[0x18];
+    f32 eventThreshold; /* 0x6C */
 } ActorMotionDefinition;
 typedef struct ActorMotionResource {
     s32 kind; /* 0x0 */
@@ -535,7 +537,9 @@ typedef struct ActorMotionState {
     Vec3 base; /* 0xA0 */
     u8 padAC[0x5C];
     void * update; /* 0x108 */
-    u8 pad10C[0x10];
+    void * secondaryUpdate; /* 0x10C */
+    void * event; /* 0x110 */
+    u8 pad114[8];
     void * transform; /* 0x11C */
     u8 pad120[0x4];
     s32 unk124; /* 0x124 */
