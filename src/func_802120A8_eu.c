@@ -94,7 +94,7 @@ void func_802120A8_eu(Actor_func_802120A8_eu *actor) {
         } else {
             brain->player->strafe = 0.0f;
         }
-        brain->w14 = -1;
+        brain->routeNodes[0] = -1;
         func_80209E80_de(brain);
     } else {
         brain->target = 0;
