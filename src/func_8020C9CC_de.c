@@ -9,7 +9,7 @@ s32 func_8020C9CC_de(void *arg0) {
     u8 temp_v1;
     s32 val;
 
-    temp_v1 = ((func_8020C9CC_S1 *)(arg0))->unk4;
+    temp_v1 = ((Link *)arg0)->type;
     val = temp_v1;
     if (val == 4) {
         goto ret1;
