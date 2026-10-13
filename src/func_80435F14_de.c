@@ -1,4 +1,4 @@
-#include "span_16E000/menu_ui_providers.h"
+#include "shared/menu_match_globals.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_80435CE4.h"
