@@ -262,6 +262,8 @@ struct Node802A697C;
 struct Node802A697C {
     u32 unk0;
     f32 value;
+    s32 childValue; /* 0x08 */
+    s32 matrixIndex; /* 0x0C */
 };
 
 struct func_802062E0_S2;

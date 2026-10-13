@@ -298,7 +298,11 @@ struct OSScTask_s;
 struct OSSched;
 /* unbake published declaration: published_a1460cc0e7fc97dc38fd8e6e */
 struct OSSched {
-    char pad0[0x78];
+    char pad0[0x20];
+    s16 retraceMessage; /* 0x20 */
+    char pad22[0x40 - 0x22];
+    Queue_func_802517B4_de interruptQueue; /* 0x40 */
+    char pad58[0x78 - 0x58];
     Queue_func_802517B4_de commandQueue; /* 0x78 */
     char pad90[0x2E0 - 0x90];
     struct OSScClientWork *clientList;

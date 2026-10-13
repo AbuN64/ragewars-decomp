@@ -33,13 +33,14 @@ extern char D_800D4530;
 
 
 void func_8028E930_de(void *arg0) {
+    OSSched *scheduler = arg0;
     s32 event;
-    Node_func_8028E930_de *node;
+    OSScClientWork *node;
     void *resource;
 
 loop_1:
 loop_2:
-    func_802BB2A0_de(&((func_8028E910_S1 *)(arg0))->unk40, &event, 1);
+    func_802BB2A0_de(&scheduler->interruptQueue, &event, 1);
     if (event == 0x29B) {
         goto event_29b;
     }
@@ -76,34 +77,34 @@ event_29a:
             }
         }
     }
-    func_8028EACC_de(arg0);
+    func_8028EACC_de(scheduler);
     func_8040C318_de();
     goto loop_1;
 
 event_29b:
-    func_8028EDA0_de(arg0);
+    func_8028EDA0_de(scheduler);
     goto loop_1;
 
 event_29c:
-    func_8028F278_de(arg0);
+    func_8028F278_de(scheduler);
     goto loop_1;
 
 event_29d:
     func_8025E318_de();
     func_8025E214_de(-1);
     func_8025CBEC_de(func_8025CC6C_de());
-    node = ((func_8028E910_S1 *)(arg0))->unk2E0;
+    node = scheduler->clientList;
     D_800CD708 = 1;
     D_800CD70C = 0x14;
     if (node != 0) {
         do {
-            func_802BB420_de(node->queue, &((func_8028E910_S1 *)(arg0))->unk20, 0);
+            func_802BB420_de(node->queue, &scheduler->retraceMessage, 0);
             node = node->next;
         } while (node != 0);
     }
     goto loop_1;
 
 event_6:
-    func_8028FC10_de(arg0);
+    func_8028FC10_de(scheduler);
     goto loop_1;
 }

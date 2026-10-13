@@ -1,3 +1,4 @@
+#include "span_1000/code_802A6AC0.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802A25C4.h"
@@ -20,20 +21,20 @@ void func_802A57E0_de(void *arg0, s32 arg1, char *arg2) {
     f32 sp10[16];
     f32 temp;
     f32 zero;
-    void *node;
+    State802A6DF8 *node;
 
-    node = ((func_802A67D0_S1 *)(arg0))->unk7528;
+    node = ((Owner802A6DF8 *)arg0)->lists.inactive.head;
     if (node != 0) {
         zero = 0.0f;
         temp = D_800C5E94_de;
         do {
-            if (((func_802A67D0_S2 *)(node))->unk1C == arg1 && ((func_802A67D0_S2 *)(node))->unk24 > zero) {
-                func_8027302C(sp10, (f32 *)(arg2 + (((func_80205628_S3 *)(((func_802A67D0_S2 *)(node))->unk8))->unkC << 6)));
+            if ((s32)node->object == arg1 && node->value > zero) {
+                func_8027302C(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
                 func_8027347C_de(sp10, temp, temp, temp);
                 func_80272828_de(sp10);
                 func_802A25D0_de(arg0, node, sp10);
             }
-            node = ((func_802A67D0_S2 *)(node))->unk4;
+            node = node->next;
         } while (node != 0);
     }
 }
