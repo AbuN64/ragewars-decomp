@@ -45,9 +45,15 @@ struct Shared_ActorView {
     s16 selectedAction; /* 0x62E */
     u8 pad630[0x20];
     s16 action; /* +0x650: src/func_8021B468.c */
-    char pad652[0x46];
+    char pad652[6];
+    f32 actionTimer; /* 0x658 */
+    char pad65C[0x698 - 0x65C];
     void *controller; /* +0x698: src/func_8021B468.c */
-    char pad69C[0x7C];
+    char pad69C[8];
+    f32 lateralInput; /* 0x6A4 */
+    char pad6A8[0x1C];
+    f32 lateralSpeed; /* 0x6C4 */
+    char pad6C8[0x718 - 0x6C8];
     f32 speed; /* +0x718: src/func_8021B468.c */
     u8 pad71C[4];
     f32 transitionBlend; /* 0x720 */
@@ -124,7 +130,8 @@ struct Shared_ControlView {
     char pad0[0x80];
     s8 mode; /* +0x80: src/func_8021B468.c */
     u8 playerId; /* 0x81 */
-    char pad82[0xD];
+    char pad82[0xC];
+    u8 roundEnded; /* 0x8E */
     u8 transientFlag; /* +0x8F: src/func_8021B468.c */
     s8 resetFlag; /* +0x90: src/func_8021B468.c */
     char pad91[2];

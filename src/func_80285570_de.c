@@ -12,28 +12,28 @@ void func_80285570_de(void *arg0, void *arg1) {
     s16 value;
     s32 reference;
 
-    *(s32 *)arg0 = ((func_80285540_S1 *)(arg1))->unk4;
-    ((func_80285540_S2 *)(arg0))->unk10 = ((func_80285540_S1 *)(arg1))->unkC;
-    ((func_80285540_S2 *)(arg0))->unk11 = ((func_80285540_S1 *)(arg1))->unkD;
-    ((func_80285540_S2 *)(arg0))->unk12 = ((func_80285540_S1 *)(arg1))->unkE;
-    ((func_80285540_S2 *)(arg0))->unk13 = ((func_80285540_S1 *)(arg1))->unkF;
-    ((func_80285540_S2 *)(arg0))->unk14 = ((func_80285540_S1 *)(arg1))->unk10;
-    ((func_80285540_S2 *)(arg0))->unk15 = ((func_80285540_S1 *)(arg1))->unk11;
-    ((func_80285540_S2 *)(arg0))->unk16 = ((func_80285540_S1 *)(arg1))->unk12;
-    ((func_80285540_S2 *)(arg0))->unk17 = ((func_80285540_S1 *)(arg1))->unk13;
-    ((func_80285540_S2 *)(arg0))->unk18 = ((func_80285540_S1 *)(arg1))->unk14;
-    ((func_80285540_S2 *)(arg0))->unk1A = ((func_80285540_S1 *)(arg1))->unk16;
-    ((func_80285540_S2 *)(arg0))->unk6 = ((func_80285540_S1 *)(arg1))->unkA;
-    if (((func_80285540_S1 *)(arg1))->unk4 & 0x40) {
-        value = (((func_80285540_S1 *)(arg1))->unk8 * 2) | 1;
+    ((MeshMaterial *)arg0)->flags = ((PackedMeshMaterial *)arg1)->flags;
+    ((MeshMaterial *)arg0)->primaryColor[0] = ((PackedMeshMaterial *)arg1)->primaryColor[0];
+    ((MeshMaterial *)arg0)->primaryColor[1] = ((PackedMeshMaterial *)arg1)->primaryColor[1];
+    ((MeshMaterial *)arg0)->primaryColor[2] = ((PackedMeshMaterial *)arg1)->primaryColor[2];
+    ((MeshMaterial *)arg0)->primaryColor[3] = ((PackedMeshMaterial *)arg1)->primaryColor[3];
+    ((MeshMaterial *)arg0)->secondaryColor[0] = ((PackedMeshMaterial *)arg1)->secondaryColor[0];
+    ((MeshMaterial *)arg0)->secondaryColor[1] = ((PackedMeshMaterial *)arg1)->secondaryColor[1];
+    ((MeshMaterial *)arg0)->secondaryColor[2] = ((PackedMeshMaterial *)arg1)->secondaryColor[2];
+    ((MeshMaterial *)arg0)->secondaryColor[3] = ((PackedMeshMaterial *)arg1)->secondaryColor[3];
+    ((MeshMaterial *)arg0)->width = ((PackedMeshMaterial *)arg1)->width;
+    ((MeshMaterial *)arg0)->height = ((PackedMeshMaterial *)arg1)->height;
+    ((MeshMaterial *)arg0)->mode = ((PackedMeshMaterial *)arg1)->mode;
+    if (((PackedMeshMaterial *)arg1)->flags & 0x40) {
+        value = (((PackedMeshMaterial *)arg1)->renderMode * 2) | 1;
     } else {
-        value = ((func_80285540_S1 *)(arg1))->unk8 * 2;
+        value = ((PackedMeshMaterial *)arg1)->renderMode * 2;
     }
-    ((func_80285540_S2 *)(arg0))->unk4 = value;
-    reference = *(s32 *)arg1;
+    ((MeshMaterial *)arg0)->renderMode = value;
+    reference = ((PackedMeshMaterial *)arg1)->textureId;
     if (reference == -1) {
-        ((func_80285540_S2 *)(arg0))->unk8 = 0;
+        ((MeshMaterial *)arg0)->texture = 0;
         return;
     }
-    func_80295E84_de(&((func_80285540_S2 *)(arg0))->unk8, reference);
+    func_80295E84_de(&((MeshMaterial *)arg0)->texture, reference);
 }

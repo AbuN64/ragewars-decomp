@@ -3,6 +3,31 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+/* Section zero of packed and expanded mesh resources. */
+typedef struct PackedMeshMaterial {
+    s32 textureId;
+    s32 flags;
+    u16 renderMode;
+    u8 mode;
+    u8 reservedB;
+    u8 primaryColor[4];
+    u8 secondaryColor[4];
+    u16 width;
+    u16 height;
+} PackedMeshMaterial;
+typedef struct MeshMaterial {
+    s32 flags;
+    s16 renderMode;
+    u8 mode;
+    u8 reserved7;
+    s32 texture;
+    u8 reservedC[4];
+    u8 primaryColor[4];
+    u8 secondaryColor[4];
+    u16 width;
+    u16 height;
+} MeshMaterial;
+
 struct Obj_func_80284DC4_de;
 /* unbake published declaration: published_01e3bd7c839c01c9308106d3 */
 struct Obj_func_80284DC4_de {
