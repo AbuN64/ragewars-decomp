@@ -1,3 +1,4 @@
+#include "shared/gameplay_transition.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8022BA90.h"
 #include "types.h"
@@ -17,11 +18,11 @@ void func_8022C080_de(void *arg0, void *arg1) {
 
     result = (void *)func_8024E7DC_de(arg1);
     if (result != 0) {
-        t0 = ((func_8022C070_S1 *)(result))->unk2C;
-        t1 = ((func_8022C070_S2 *)(arg0))->unk780;
+        t0 = ((Model_func_80223E34_de *)result)->blend;
+        t1 = ((Shared_ActorView *)arg0)->modelBlend;
         t0 = t0 - t1;
         t0 = t0 * D_800C2D28_de;
         t1 = t1 + t0;
-        ((func_8022C070_S2 *)(arg0))->unk780 = t1;
+        ((Shared_ActorView *)arg0)->modelBlend = t1;
     }
 }

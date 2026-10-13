@@ -448,6 +448,10 @@ struct GlobalState {
     s32 field20;
     s32 field24;
     s32 field28;
+    u8 pad2C[0x28];
+    s32 restricted; /* 0x54 */
+    u8 pad58[0x10];
+    s32 restrictionActive; /* 0x68 */
 };
 
 struct Node_func_8022A748_de;
