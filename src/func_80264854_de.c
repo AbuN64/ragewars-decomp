@@ -11,18 +11,18 @@ extern s32 D_8010EC90;
 
 
 void func_80264854_de(s32 a) {
-    u8 *var_s0;
+    ControllerProfile *var_s0;
     s32 var_s1;
 
     var_s1 = 0;
-    var_s0 = (u8 *)&D_8010F328;
+    var_s0 = (ControllerProfile *)&D_8010F328;
     do {
-        ((func_80264874_S1 *)(var_s0))->unkCC = a;
+        var_s0->mode = a;
         if (a == 0) {
             func_80264248_de(var_s0);
         }
         var_s1 += 1;
-        var_s0 += 0x224;
+        var_s0 += 1;
     } while (var_s1 < 4);
     if (a == 0) {
         func_80285D30_de(&D_8010EC90);

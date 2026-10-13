@@ -39,7 +39,7 @@ struct Record_func_8025B758_de {
     s32 fBC;
     s32 fC0;
     s32 fC4;
-    char padC8[4];
+    f32 fC8; /* per-slot volume scale, 0xC8 */
 };
 
 struct func_8025B778_S2;

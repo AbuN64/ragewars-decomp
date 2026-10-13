@@ -12,16 +12,17 @@
 
 
 void func_802123FC_eu(void *arg0) {
-    void *level1 = ((func_8020A028_S3 *)(arg0))->unk1D8;
-    void *inner = ((func_80212828_S2 *)(level1))->unk1454;
+    CloseAttackActor *actor = arg0;
+    CloseAttackActor *level1 = actor->self;
+    CloseAttackBrain *inner = level1->brain;
     s32 r1, r2;
 
-    ((func_802123DC_S3 *)(inner))->unk220 = 0;
+    inner->state = 0;
     func_80209988_de(inner);
 
     r1 = func_802744D4_de();
-    ((func_802123DC_S3 *)(inner))->unk2D8 = r1 % 4 + 0xC;
+    inner->timer = r1 % 4 + 0xC;
 
     r2 = func_802744D4_de();
-    ((func_802123DC_S3 *)(inner))->unk2DC = r2 % 2;
+    inner->pattern = r2 % 2;
 }

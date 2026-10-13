@@ -13,15 +13,14 @@ extern void func_802B2F10_de(void *arg0, s16 arg1);
 
 
 void func_8025C438_de(void *arg0, s32 arg1) {
-    s8 *new_var;
-    int new_var2;
+    Record_func_8025B758_de *slot = arg0;
+    Owner_func_8025B5F0_de *owner;
     s32 temp_s0;
     void *temp_s0_2;
 
-    temp_s0 = ((func_8025C458_S1 *)(arg0))->unkB0;
-    temp_s0_2 = &((func_80258D60_S1 *)(temp_s0))->unk84;
-    new_var2 = 2;
-    new_var = &((func_8025C458_S1 *)(arg0))->unk0;
-    func_802B2F00_de(temp_s0_2, ((func_8025C458_S3 *)((temp_s0 + ((*(s32 *)new_var) * new_var2))))->unkDC);
-    func_802B2F10_de(temp_s0_2, (s16)(s32)((f32) arg1 * (((func_8025C458_S1 *)(arg0))->unkC8)));
+    temp_s0 = slot->owner;
+    owner = (Owner_func_8025B5F0_de *)temp_s0;
+    temp_s0_2 = owner->sound;
+    func_802B2F00_de(temp_s0_2, owner->samples[slot->index]);
+    func_802B2F10_de(temp_s0_2, (s16)(s32)((f32) arg1 * (slot->fC8)));
 }

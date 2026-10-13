@@ -4761,7 +4761,9 @@ struct ControllerProfile {
     u32 buttonState; /* 0xC0 */
     s8 stickX; /* 0xC4 */
     s8 stickY; /* 0xC5 */
-    u8 padding0C6[0x224 - 0xC6];
+    u8 padding0C6[0xCC - 0xC6];
+    s32 mode; /* 0xCC */
+    u8 padding0D0[0x224 - 0xD0];
 };
 
 struct Args;
