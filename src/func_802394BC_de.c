@@ -1,3 +1,4 @@
+#include "shared/gameplay_camera.h"
 #include "span_1000/code_80233920.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802393F4.h"

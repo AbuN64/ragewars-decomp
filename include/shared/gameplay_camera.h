@@ -207,4 +207,14 @@ struct Shared_Func_80234FDC_Callback {
 typedef char Shared_Func_80234FDC_Callback_size_check[(sizeof(Shared_Func_80234FDC_Callback) == 0x8) ? 1 : -1];
 
 
+/* The list header and complete primary camera, followed by the effect pools. */
+typedef struct RaceViewportState {
+    RaceHeader header;
+    Shared_func_80234FDC_S2 self;
+    char padAfterCamera[0x11D8 - sizeof(RaceHeader) - sizeof(Shared_func_80234FDC_S2)];
+    IntrusiveList freeEffects;
+    IntrusiveList activeEffects;
+} RaceViewportState;
+typedef char RaceHeader_size_check[(sizeof(RaceHeader) == 0x40) ? 1 : -1];
+typedef char RaceViewportState_size_check[(sizeof(RaceViewportState) == 0x1200) ? 1 : -1];
 #endif
