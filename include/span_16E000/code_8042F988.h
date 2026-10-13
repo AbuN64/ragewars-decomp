@@ -63,7 +63,11 @@ struct Shared_Player_func_80433F14 {
     s32 port;
     s32 record;
     s32 host;
-    char padB34[0xB64 - 0xB34];
+    InventorySlot name[8]; /* 0xB34 */
+    s32 nameCursor; /* 0xB44 */
+    s32 namePhase; /* 0xB48 */
+    s32 nameTimer; /* 0xB4C */
+    char padB50[0xB64 - 0xB50];
     s32 profile;
 };
 

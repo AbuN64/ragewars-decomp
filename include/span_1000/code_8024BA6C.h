@@ -1,5 +1,16 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8024BA6C_H
 #define UNBAKE_SPAN_1000_CODE_8024BA6C_H
+#include "types.h"
+/* Section one of the resource selected by an actor's resource key. */
+typedef struct ActorFrameResourceTable {
+    s32 header[2];
+    s32 resources[1];
+} ActorFrameResourceTable;
+/* Section zero of the resource selected by an actor's resource key. */
+typedef struct ActorResourceHeader {
+    u8 unknown0[0x1E];
+    u16 particleScale; /* Float encoded in its high sixteen bits. */
+} ActorResourceHeader;
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
