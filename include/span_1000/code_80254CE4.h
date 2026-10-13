@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80254CE4_H
 #define UNBAKE_SPAN_1000_CODE_80254CE4_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
 struct func_80255428_S3;
 /* unbake published declaration: published_045461a1dd2b8d4beae95fea */
 struct func_80255428_S3 {
@@ -231,5 +232,14 @@ struct func_802551C8_S1 {
 };
 
 extern s32 D_80100560;
+
+
+/* Resource-loader thread, its request queue, message slots and stack. */
+typedef struct ResourceLoadWorker {
+    u8 thread[0x230];
+    struct Queue_func_802BB420_de requests;
+    s32 messages[128];
+    u8 stack[0x1000];
+} ResourceLoadWorker;
 
 #endif

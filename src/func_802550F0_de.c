@@ -1,3 +1,4 @@
+#include "span_1000/code_802508E0.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_80254CE4.h"
@@ -37,10 +38,10 @@ s32 func_80255170_de(s32 *arg0, void *arg1) {
 
     func_802BAC60_de(sp10, (s32) &sp28, 1);
     temp = D_800CD8B8_de;
-    ((func_80228774_S1 *)(arg1))->unk20 = sp10;
+    ((Request_func_80251F6C_de *)arg1)->unk20 = sp10;
     D_800CD704 = 2;
     func_802BB5F0_de(arg0, temp);
-    func_802BB160_de(&((func_80255110_S2 *)(arg0))->unk230, arg1, 1);
+    func_802BB160_de((s32 *)&((ResourceLoadWorker *)arg0)->requests, arg1, 1);
     func_802BB2A0_de((s32) sp10, (s32) &sp2C, 1);
     return 1;
 }
@@ -58,10 +59,10 @@ extern s32 D_800CD8AC_de;
 
 
 s32 func_80255228_de(s32 *arg0) {
-    if (((func_802551C8_S1 *)(arg0))->unk238 != 0) {
+    if (((ResourceLoadWorker *)arg0)->requests.count != 0) {
         do {
             func_802BB5F0_de(arg0, D_800CD8B8_de);
-        } while (((func_802551C8_S1 *)(arg0))->unk238 != 0);
+        } while (((ResourceLoadWorker *)arg0)->requests.count != 0);
     }
     return func_802BB5F0_de(arg0, D_800CD8AC_de);
 }

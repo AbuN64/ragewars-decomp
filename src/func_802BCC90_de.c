@@ -9,20 +9,20 @@ extern char *D_801487B4;
 
 
 void func_802BCC90_de(void) {
-    char *temp_a2;
+    DiskTransferInfo *temp_a2;
     u32 status;
 
     status = *(volatile u32 *)0xA4600010;
-    temp_a2 = D_801487B4 + 0x14;
+    temp_a2 = (DiskTransferInfo *)(D_801487B4 + 0x14);
     while (status & 3) {
         status = *(volatile u32 *)0xA4600010;
     }
-    *(volatile u32 *)0xA5000510 = ((func_8022BC04_S3 *)(temp_a2))->unk10 | 0x10000000;
+    *(volatile u32 *)0xA5000510 = temp_a2->bmControl | 0x10000000;
     status = *(volatile u32 *)0xA4600010;
     while (status & 3) {
         status = *(volatile u32 *)0xA4600010;
     }
-    *(volatile u32 *)0xA5000510 = ((func_8022BC04_S3 *)(temp_a2))->unk10;
+    *(volatile u32 *)0xA5000510 = temp_a2->bmControl;
     func_802BCD64_de();
     {
         volatile u32 *statusAddr = (volatile u32 *)0xA4600010;

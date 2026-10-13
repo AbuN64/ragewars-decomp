@@ -37,7 +37,7 @@ void func_80213340_de(void *arg0)
         index = 0;
         if (table[1] > 0) {
             do {
-                if (((func_8020CA10_S2 *)(func_8020C994_de(table, index)))->unkC & 0x800) {
+                if (((NavigationNode *)func_8020C994_de(table, index))->flags & 0x800) {
                     choices[count] = index;
                     count++;
                 }
@@ -53,33 +53,33 @@ void func_80213340_de(void *arg0)
         s32 tries = 0;
         s32 candidate;
         if (global_count >= 2) {
-            candidate = ((func_80213340_S2 *)(arg0))->unk22C;
+            candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
 loop:
             if (tries < 10) {
                 candidate = func_802744D4_de() % table[1];
-                if (((func_8020CA10_S2 *)(func_8020C994_de(table, candidate)))->unkC & 0x400) {
-                    candidate = ((func_80213340_S2 *)(arg0))->unk22C;
+                if (((NavigationNode *)func_8020C994_de(table, candidate))->flags & 0x400) {
+                    candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
                 }
                 tries++;
-                if (candidate != ((func_80213340_S2 *)(arg0))->unk22C) {
+                if (candidate != ((Brain_func_80212D78_eu_x *)arg0)->goal) {
                     goto store_both;
                 }
                 goto loop;
             } else {
-                ((func_80213340_S2 *)(arg0))->unk22C = candidate;
+                ((Brain_func_80212D78_eu_x *)arg0)->goal = candidate;
                 goto store_c;
             }
         } else {
             candidate = 1;
         }
 store_both:
-        ((func_80213340_S2 *)(arg0))->unk22C = candidate;
+        ((Brain_func_80212D78_eu_x *)arg0)->goal = candidate;
 store_c:
-        ((func_80213340_S2 *)(arg0))->unkC = candidate;
+        ((Brain_func_80212D78_eu_x *)arg0)->nextNode = candidate;
     } else {
         result = choices[func_802744D4_de() % count];
     }
 
-    ((func_80213340_S2 *)(arg0))->unk22C = result;
-    ((func_80213340_S2 *)(arg0))->unkC = result;
+    ((Brain_func_80212D78_eu_x *)arg0)->goal = result;
+    ((Brain_func_80212D78_eu_x *)arg0)->nextNode = result;
 }
