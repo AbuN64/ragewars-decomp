@@ -2,14 +2,15 @@
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_804264F0.h"
 #include "span_16E000/code_8040C780.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
+#include "resident_event_handler.h"
+#include "shared/func_80421E70_eu_closed.h"
+#include "shared/func_804235A8_eu_closed.h"
+#include "span_16E000/code_804196C0.h"
+#include "span_16E000/code_8041F1FC.h"
 
-extern struct Row_func_80426788_de D_800E3A58[];
-extern s32 func_8025DF34_de(s32);
-extern void func_80298368_de(s32), func_8029973C_de(void), func_802A2360_de(void);
-extern void func_80419F24_de(void *), func_80419F58_de(void *, s32);
-extern s32 func_80419F38_de(void *), func_8040EBD0_de(struct Node_func_8040EB48_de *);
-extern void func_80420438_de(s32), func_80420850_de(s32);
-extern s32 func_8041F1D8_de(s32);
+extern s32 func_8040EBD0_de(struct Node_func_8040EB48_de *);
 extern struct Node_func_8040EB48_de *func_8041B7FC_de(struct Slots_func_8041B7FC_de *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
@@ -105,19 +106,19 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
                 if (D_800E42D0->players[var_s3].unkC == 1) {
                     if (D_800E42D0->players[var_s3].highlight != 0) {
                         temp_f0 = (func_802B6560_de((f32) var_s3 + ((f32) D_800E42D0->clock * 0.0033333334f)) * 70.0f) + 170.0f;
-                        temp_a0_2 = (&D_800E42D0->players[var_s3])->highlight;
+                        temp_a0_2 = D_800E42D0->players[var_s3].highlight;
                         temp_a0_2->alpha=(unsigned int)temp_f0;
                     }
                     temp_v0_3 = func_8041B7FC_de(D_800E42D0->unk4, var_s3);
-                    temp_a0_3 = (&D_800E42D0->players[var_s3])->highlight;
+                    temp_a0_3 = D_800E42D0->players[var_s3].highlight;
                     if ((temp_a0_3->x != (temp_v0_3->x - 2)) || (temp_a0_3->y != (temp_v0_3->y - 2))) {
                         func_8025DF34_de(0xE7F);
                         if (func_8040EBD0_de(temp_v0_3) == 0) {
                             temp_a0_4 = temp_v0_3->resource;
                             if (temp_a0_4 != empty_slot) {
-                                (&D_800E42D0->players[var_s3])->kind = (s32) temp_a0_4;
+                                D_800E42D0->players[var_s3].kind = (s32) temp_a0_4;
                                 temp_s0 = func_8041F1D8_de(temp_a0_4);
-                                temp_v1 = func_8041F18C_de((&D_800E42D0->players[var_s3])->kind);
+                                temp_v1 = func_8041F18C_de(D_800E42D0->players[var_s3].kind);
                                 scale.x = D_800E3A58[temp_v1].scale[var_s3];
                                 scale.y = D_800E3A58[temp_v1].scale[var_s3];
                                 scale.z = D_800E3A58[temp_v1].scale[var_s3];
@@ -126,7 +127,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
                                 func_80420850_de(var_s3);
                             }
                         } else {
-                            (&D_800E42D0->players[var_s3])->kind = -1;
+                            D_800E42D0->players[var_s3].kind = -1;
                         }
                         func_80420438_de(var_s3);
                     } else if (temp_v0_3->resource == empty_slot) {

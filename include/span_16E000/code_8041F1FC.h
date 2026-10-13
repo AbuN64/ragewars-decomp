@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
 struct Row_func_80420850_de;
 /* unbake published declaration: published_036993707647b67829999063 */
 typedef struct Row_func_80420850_de Row_func_80420850_de;
@@ -303,5 +304,7 @@ struct Row_func_80420308_de {
 
 /* unbake published declaration: published_e48e12f57cba2675cf62e0f5 */
 extern s32 func_80420AD4_de(void);
+
+extern void func_80420438_de(s32);
 
 #endif
