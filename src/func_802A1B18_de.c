@@ -5,5 +5,6 @@
 
 /** Return the word at offset 0x58 in the supplied object. */
 int func_802A1B18_de(void *object) {
-    return ((func_8022FD9C_S4 *)(object))->unk58;
+    Record_func_802A1990_de *record = object;
+    return record->field_58;
 }
