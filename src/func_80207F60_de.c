@@ -3,10 +3,7 @@
 #include "span_1000/code_80207ABC.h"
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-
-
-
-
-void func_80207F60_de(void *arg0) {
-    func_8028B670_de(&D_8011FE88, ((func_8020478C_S1 *)(arg0))->unkA, ((func_8020478C_S1 *)(arg0))->unk4, 0);
+void func_80207F60_de(void *event) {
+    ActorMotionEvent *arg0 = event;
+    func_8028B670_de(&D_8011FE88, arg0->id, arg0->key, 0);
 }
