@@ -40,7 +40,9 @@ struct Shared_ActorView {
     s32 spawn; /* 0x5EC */
     s32 field5F0; /* 0x5F0 */
     s16 ammo[3]; /* +0x5F4: src/func_8021B468.c */
-    char pad5FA[8];
+    char pad5FA[4];
+    s16 actionEnabled; /* 0x5FE */
+    char pad600[2];
     Shared_ActionSlot actions[22]; /* 0x602 */
     s16 selectedAction; /* 0x62E */
     u8 pad630[0x20];
@@ -126,7 +128,9 @@ struct Shared_ActorView {
     u8 pad13E4[0x1450 - 0x13E4];
     s32 remote; /* 0x1450 */
     void *owner; /* 0x1454 */
-    u8 pad1458[0x16D4 - 0x1458];
+    u8 pad1458[0x16C4 - 0x1458];
+    Triple resetPosition; /* 0x16C4: three-word position copy transport */
+    u8 pad16D0[4];
     s32 field16D4;
     s16 field16D8;
     u8 pad16DA[6];

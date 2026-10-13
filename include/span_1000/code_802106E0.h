@@ -145,7 +145,9 @@ struct CloseAttackBrain {
     s32 timer;
     s32 pattern;
     s32 distance;
-    char pad2E4[0x34];
+    char pad2E4[0x18];
+    s32 reset2FC; /* 0x2FC: reset after route initialization */
+    char pad300[0x18];
     s32 frames;
     s32 visible;
     s32 fireTimer;
