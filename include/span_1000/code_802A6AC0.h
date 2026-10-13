@@ -227,12 +227,20 @@ struct Entry_func_802A6F68_de;
 struct Entry_func_802A6F68_de {
     int unk0;
     int unk4;
-    char pad8[5];
+    s32 unk8;
+    u8 unkC;
     unsigned char unkD;
-    char padE[0x18 - 0xE];
+    char padE[2];
+    s32 unk10;
+    s32 unk14;
     short unk18;
     int unk1C;
-    char pad20[0x18];
+    f32 unk20;
+    s32 unk24;
+    f32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
 };
 
 struct func_802A7FA8_S4;
