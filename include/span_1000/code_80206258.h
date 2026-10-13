@@ -57,16 +57,23 @@ extern void func_802062B0_de(void *arg0);
 struct Rider_func_80206DD4_de;
 /* unbake published declaration: published_283ddb3d048f05ac491e8146 */
 struct Rider_func_80206DD4_de {
-    char pad0[0x3C];
+    char pad0[0x35];
+    s8 animation;
+    char pad36;
+    s8 state;
+    char pad38[4];
     s32 flags;
-    char pad40[0x14];
+    char pad40[4];
+    f32 timer;
+    char pad48[0xC];
     Vec3 pos;
     char pad60[4];
     f32 throttle;
     char pad68[0x34];
     f32 baseYaw;
     Vec3 base;
-    char padAC[0x7C];
+    char padAC[0x78];
+    f32 triggerTime;
     Vec3 shake;
     char pad134[8];
     f32 phase;
@@ -306,9 +313,13 @@ struct Actor_func_80206DD4_de {
     f32 y;
     f32 z;
     s32 model;
-    char *track;
-    char pad1C[0x50];
+    union { char *track; struct Track_func_80206DD4_de *motionTrack; };
+    char pad1C[0x1C];
+    u32 inputFlags;
+    char pad3C[0x30];
     f32 yaw;
+    char pad70[0x90];
+    u32 flags;
 };
 
 /* unbake published declaration: published_add1ed2f458285a25e9fcfe7 */
@@ -410,7 +421,8 @@ struct Segment_func_80206DD4_de;
 struct Segment_func_80206DD4_de {
     char pad0[4];
     u16 moving;
-    char pad6[0x22];
+    char pad6[0x1E];
+    u32 flags;
     u8 bobMode;
     u8 linear;
     u8 yawMode;
@@ -422,6 +434,15 @@ struct Segment_func_80206DD4_de {
     f32 yaw;
     char pad40[4];
     f32 bob;
+    char pad48[0xC];
+    f32 triggerDelay;
+    f32 displacement;
+    f32 duration;
+};
+
+struct Track_func_80206DD4_de {
+    char prefix[0x14];
+    struct Segment_func_80206DD4_de segment;
 };
 
 struct func_80206758_S1;
