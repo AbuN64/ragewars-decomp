@@ -15,7 +15,7 @@ int func_80245908_de(void) {
         return 0;
     }
     record = D_800E2830;
-    if ((record->flags & 2) != 0) {
+    if ((record->spec.flags & 2) != 0) {
         return 1;
     }
     return 0;

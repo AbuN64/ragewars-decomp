@@ -68,17 +68,21 @@ struct Shared_MenuData {
 typedef void (*Shared_ContextCallback)(void *);
 typedef void (*Shared_MenuVoidCallback)(void);
 struct SharedTrackObject;
+#include "shared/track_types.h"
 typedef struct Shared_MenuContext Shared_MenuContext;
 struct Shared_MenuContext {
     void *owner;
-    s32 resource;
+    void *resource;
     u32 unknown08;
     Shared_MenuVoidCallback onClose;
     Shared_MenuVoidCallback callback10;
     u32 unknown14;
     struct SharedTrackObject *target;
     f32 time;
-    u32 unknown20[4];
+    f32 time20;
+    f32 time24;
+    f32 clipStart;
+    f32 clipEnd;
     f32 start;
     f32 end;
     s32 active;
@@ -86,14 +90,17 @@ struct Shared_MenuContext {
     u32 unknown40;
     s32 initialized44;
     s32 closed;
-    u32 unknown4C[5];
+    s32 field4C;
+    s32 field50;
+    s32 pending;
+    s32 field58;
+    u32 unknown5C;
     u32 unknown60;
-    u32 unknown64[4];
-    u32 flags;
-    u32 unknown78[10];
-    f32 scaleA0; /* 0xA0 */
-    f32 aspectRatio; /* 0xA4 */
-    u32 unknownA8[14];
+    u32 unknown64[1];
+    Entry_func_804030E0_de spec; /* 0x68..0xB3 */
+    s32 fieldB4;
+    s32 mode; /* 0xB8 */
+    u32 unknownBC[9];
     s32 requestE0;
     Shared_ContextCallback callbackE4;
     Shared_MenuVoidCallback callbackE8;
