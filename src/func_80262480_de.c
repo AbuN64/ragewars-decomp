@@ -4,11 +4,12 @@
 
 /** Initialize the compact record fields written by the VRAM 0x802624A0 leaf. */
 void func_80262480_de(void *record) {
-    ((func_802624A0_S1 *)(record))->unk4 = -1;
-    ((func_802624A0_S1 *)(record))->unk6 = 0;
-    *(int *)record = 0;
-    ((func_802624A0_S1 *)(record))->unk8 = 0;
-    ((func_802624A0_S1 *)(record))->unkA = 0;
-    ((func_802624A0_S1 *)(record))->unkB = 1;
-    ((func_802624A0_S1 *)(record))->unk10 = 0;
+    func_802624A0_S1 *record_record = record;
+    record_record->unk4 = -1;
+    record_record->unk6 = 0;
+    record_record->unk0 = 0;
+    record_record->unk8 = 0;
+    record_record->unkA = 0;
+    record_record->unkB = 1;
+    record_record->unk10 = 0;
 }

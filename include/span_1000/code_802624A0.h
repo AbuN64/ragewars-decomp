@@ -94,7 +94,7 @@ typedef struct Effect_func_80262E88_de Effect_func_80262E88_de;
 struct func_802624A0_S1;
 /* unbake published declaration: published_6201f6cd8ccffa3133f9e039 */
 struct func_802624A0_S1 {
-    char pad0[0x4];
+    int unk0;
     short unk4;
     char pad4[0x6 - 0x4 - sizeof(short)];
     short unk6;
