@@ -41,6 +41,8 @@ struct Callback;
 /* unbake published declaration: published_1094cc25439c3cf39b1e222c */
 struct Callback {
     s32 (*callback)(void);
+    u8 pad4[0xC00];
+    u8 flags[64]; /* 0xC04: 16 groups of four dispatch flags; allocation is 0xC44 */
 };
 
 struct func_8029B650_S1;

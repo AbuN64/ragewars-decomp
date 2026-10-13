@@ -27,7 +27,7 @@ struct State802A6DF8 {
     Node802A697C *node;
     u8 padC[0x10];
     void *object;
-    u8 pad20[4];
+    s32 contextId; /* 0x20: companion identifier used by inactive-list lookup */
     f32 value;
     u8 pad28[0xC];
     s32 renderMode; /* 0x34 */

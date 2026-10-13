@@ -10,7 +10,7 @@ void func_8029AA34_de(void) {
     s32 idx;
     s32 var_a0;
     s32 var_a1;
-    void *ptr;
+    Callback *context;
 
     var_a1 = 0;
     do {
@@ -18,8 +18,8 @@ void func_8029AA34_de(void) {
         do {
             idx = var_a0 + var_a1 * 4;
             var_a0 += 1;
-            ptr = D_8014D0B0 + idx;
-            ((func_8029BA34_S1 *)(ptr))->unkC04 = 0;
+            context = (Callback *)D_8014D0B0;
+            context->flags[idx] = 0;
         } while (var_a0 < 4);
         var_a1 += 1;
     } while (var_a1 < 0x10);
