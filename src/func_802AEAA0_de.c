@@ -5,5 +5,6 @@
 
 /** Read the object word at offset 0x2C. */
 int func_802AEAA0_de(void *object) {
-    return ((func_80205314_S2 *)(object))->unk2C;
+    func_80205314_S2 *record = object;
+    return record->unk2C;
 }

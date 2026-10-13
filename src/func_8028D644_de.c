@@ -4,5 +4,6 @@
 
 /** Clear the object field at offset 0x10BC. */
 void func_8028D644_de(void *object) {
-    ((func_8028D620_S1 *)(object))->unk10BC = 0;
+    func_8028D620_S1 *record = object;
+    record->unk10BC = 0;
 }

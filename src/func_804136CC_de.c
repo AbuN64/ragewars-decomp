@@ -4,5 +4,6 @@
 
 
 int func_804136CC_de(void *object) {
-    return ((func_8022BC04_S3 *)(object))->unk10 > 0;
+    func_8022BC04_S3 *record = object;
+    return record->unk10 > 0;
 }
