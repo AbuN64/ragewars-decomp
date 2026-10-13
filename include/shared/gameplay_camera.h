@@ -94,7 +94,10 @@ struct Shared_func_80234FDC_S2 {
     char padA0[0x18];
     char unkB8[20]; /* +0xB8: src/func_80234FDC.c */
     char unkCC[20]; /* +0xCC: src/func_80234FDC.c */
-    char unkE0[68]; /* +0xE0: src/func_80234FDC.c */
+    char unkE0[20]; /* 0xE0: third State_func_802337D0_de */
+    f32 shakeHorizontal; /* 0xF4 */
+    f32 shakeVertical; /* 0xF8 */
+    char padFC[0x28];
     u16 unk124; /* +0x124: src/func_80234FDC.c */
     char pad126[0x2];
     Vec3 position; /* +0x128: camera position */

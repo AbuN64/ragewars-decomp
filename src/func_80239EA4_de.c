@@ -1,3 +1,6 @@
+#include "shared/gameplay_camera.h"
+#include "shared/gameplay_movement.h"
+#include "span_C76B0/data.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -32,32 +35,32 @@ extern void *func_8028B2F8_de(char *, s32);
 
 
 void func_80239EA4_de(void *arg0, Vec3 *out) {
-    char *o = (char *)arg0;
+    Shared_func_80234FDC_S2 *o = arg0;
     f32 value;
-    void *entry;
+    Shared_Surface *entry;
     f32 targetX;
     f32 targetY;
     f32 scale;
 
     targetY = 0.0f;
     targetX = targetY;
-    entry = func_8028B2F8_de(&D_8011FE88, ((func_80239E94_S1 *)(o))->unk58);
+    entry = func_8028B2F8_de(&D_8011FE88, (s32)o->unk58);
     if (entry == 0) {
         out->x = targetY;
         out->y = targetY;
         out->z = targetY;
         return;
     }
-    if (((func_8022E694_S1 *)(entry))->unk44 & 0x10000) {
+    if (entry->flags & 0x10000) {
         targetX = D_800C8668;
-        targetY = ((D_800C7470_Pair *)&D_800C8668)->second;
+        targetY = D_800C357C_de;
     }
-    value = ((func_80239E94_S1 *)(o))->unkF4 + (targetX - ((func_80239E94_S1 *)(o))->unkF4) * D_800C3580_de.unk0;
+    value = o->shakeHorizontal + (targetX - o->shakeHorizontal) * D_800C3580_de.unk0;
     scale = D_800C3584_de.unk0;
-    ((func_80239E94_S1 *)(o))->unkF4 = value;
-    ((func_80239E94_S1 *)(o))->unkF8 += (targetY - ((func_80239E94_S1 *)(o))->unkF8) * D_800C3588_de.unk0;
-    out->x = func_80274A90_de(-((func_80239E94_S1 *)(o))->unkF4 * scale, ((func_80239E94_S1 *)(o))->unkF4 * scale);
-    out->y = func_80274A90_de(0.0f, ((func_80239E94_S1 *)(o))->unkF8 * D_800C358C_de.unk0);
-    value = -((func_80239E94_S1 *)(o))->unkF4 * scale;
-    out->z = func_80274A90_de(value, ((func_80239E94_S1 *)(o))->unkF4 * scale);
+    o->shakeHorizontal = value;
+    o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
+    out->x = func_80274A90_de(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
+    out->y = func_80274A90_de(0.0f, o->shakeVertical * D_800C358C_de.unk0);
+    value = -o->shakeHorizontal * scale;
+    out->z = func_80274A90_de(value, o->shakeHorizontal * scale);
 }
