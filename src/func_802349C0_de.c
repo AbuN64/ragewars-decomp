@@ -26,7 +26,7 @@ typedef struct TransformActor {
     char pad0[0x28];
     f32 yaw,pitch,extraYaw,roll;
     TransformVector position;
-    union {f32 f;u32 word;} height;
+    f32 height;
     Rotation base;
     char pad58[0x7C-0x58];
     s32 enabled;
@@ -103,7 +103,7 @@ void func_802349C0_de(void *arg0) {
             func_80274098_de(q58.f, q38.f, q48.f);
             func_80274244_de(q58.f, m68);
             zero=0.0f;
-            func_80272C60_de(mA8, zero, actor->height.f, zero);
+            func_80272C60_de(mA8, zero, actor->height, zero);
             func_80274244_de(temp_s3, mE8);
             result.x = zero;
             result.y = zero;

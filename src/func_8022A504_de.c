@@ -23,11 +23,11 @@ void *func_8022A504_de(void *arg0, Vec3 position, void *arg4) {
     if (var_v1 != 0) {
         do {
             if (var_v1->health != 0 && var_v1 != arg4) {
-                dx = var_v1->position.vector.x - position.x;
+                dx = ((Actor_func_8024A7A0_de *)var_v1)->position0.x - position.x;
                 dx = dx * dx;
-                dy = var_v1->position.vector.y - position.y;
+                dy = ((Actor_func_8024A7A0_de *)var_v1)->position0.y - position.y;
                 dy = dy * dy;
-                dz = var_v1->position.vector.z - position.z;
+                dz = ((Actor_func_8024A7A0_de *)var_v1)->position0.z - position.z;
                 dz = dz * dz;
                 distSq = (dx + dy) + dz;
                 if (distSq < var_f3) {
