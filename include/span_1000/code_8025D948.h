@@ -28,14 +28,18 @@ struct ObjectState40 {
     func_80230BB8_S2_U1D8 unk_0;
     char pad0[0x14 - 0x0 - sizeof(func_80230BB8_S2_U1D8)];
     s32 unk_14;
-    char pad14[0x24 - 0x14 - sizeof(s32)];
+    char pad18[4];
+    s32 flags; /* 0x1C */
+    s32 volume; /* 0x20 */
     s32 unk_24;
     char pad24[0x2C - 0x24 - sizeof(s32)];
     f32 unk_2C;
-    char pad2C[0x38 - 0x2C - sizeof(f32)];
+    char pad30[4];
+    f32 fadeStep; /* 0x34 */
     s32 unk_38;
     char pad38[0x3C - 0x38 - sizeof(s32)];
     f32 unk_3C;
+    f32 targetGain; /* 0x40 */
 };
 
 /* unbake published declaration: published_1a3120ba2bb63b38df2622d7 */
