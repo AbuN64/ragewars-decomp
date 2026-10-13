@@ -1670,11 +1670,15 @@ typedef struct AiController {
     s32 mode; /* 0xC */
     s32 fallback; /* 0x10 */
     s32 queue[4]; /* 0x14 */
-    u8 pad24[0x8];
+    u8 pad24[4];
+    s32 routeGoal; /* 0x28 */
     Vec3 destination; /* 0x2C */
     u8 pad38[0x2C];
     AiTarget * target; /* 0x64 */
-    u8 pad68[0x148];
+    Player *routeObject; /* 0x68 */
+    u8 pad6C[0x50];
+    s32 routeState; /* 0xBC */
+    u8 padC0[0xF0];
     Vec3 home; /* 0x1B0 */
     u8 pad1BC[0x58];
     AiBehaviourTable * table; /* 0x214 */

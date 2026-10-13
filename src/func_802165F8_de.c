@@ -1,3 +1,5 @@
+#include "span_1000/code_80206258.h"
+#include "common/types_8fd754e1e915.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80213ED4.h"
@@ -16,9 +18,9 @@ extern f32 func_802B72B0_de(f32);
 
 
 
-void func_802165F8_de(void *arg0, void *arg1, Result_func_802165F8_de *result) {
-    func_80271F68_de(&result->first, &((func_802165F8_S1 *)(arg0))->unk8,
-                  &((func_802165F8_S2 *)(arg1))->unk48);
+void func_802165F8_de(Player *arg0, ActorMotionState *arg1, Result_func_802165F8_de *result) {
+    func_80271F68_de(&result->first, &arg0->pos,
+                  &arg1->position);
     result->first_normalized = result->first;
     func_8027207C_de(&result->first_normalized.x);
     result->first_length = func_802B72B0_de(
@@ -34,6 +36,6 @@ void func_802165F8_de(void *arg0, void *arg1, Result_func_802165F8_de *result) {
         result->flat.x * result->flat.x +
         result->flat.y * result->flat.y +
         result->flat.z * result->flat.z);
-    result->height = ((func_802165F8_S1 *)(arg0))->unk6C -
-                     ((func_802165F8_S2 *)(arg1))->unk60;
+    result->height = arg0->heading -
+                     arg1->height;
 }

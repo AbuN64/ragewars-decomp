@@ -72,7 +72,7 @@ typedef struct Shared_World {
     s32 level; /* 0x1B40C */
     s32 selectionState; /* 0x1B410 */
     s32 frozen;
-    s32 selectionTimer; /* 0x1B418 */
+    f32 selectionTimer; /* 0x1B418 */
     s32 selectionFlags; /* 0x1B41C */
     u8 unknown1B420[0x14];
     s32 selectionValues[4]; /* 0x1B434 */

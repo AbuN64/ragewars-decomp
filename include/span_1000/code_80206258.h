@@ -529,7 +529,10 @@ typedef struct ActorMotionState {
     s8 state; /* 0x37 */
     u8 pad38[0x8];
     f32 timer; /* 0x40 */
-    u8 pad44[0x20];
+    u8 pad44[0x4];
+    Vec3 position; /* 0x48 */
+    u8 pad54[0xC];
+    f32 height; /* 0x60 */
     f32 speed; /* 0x64 */
     u8 pad68[0x2C];
     s8 routeMode; /* 0x94 */
