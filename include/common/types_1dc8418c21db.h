@@ -3457,7 +3457,12 @@ struct func_8022A5E4_S2 {
 struct MenuPanelRoot;
 /* unbake published declaration: published_5f7e527356912c1e6b313e7f */
 struct MenuPanelRoot {
-    char pad0[0xE0];
+    char pad0[0xCC];
+    s32 resource;
+    char padD0[4];
+    s32 resourceSize;
+    s32 selected;
+    s32 selectedResource;
     s32 window;
 };
 
