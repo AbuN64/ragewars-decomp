@@ -93,10 +93,10 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
         menu->player = player;
         profile = player->views5D8.view5D8_6.profile;
         profile->flags = D_8014D4B0_de;
-        ((func_80408C78_S1 *)(profile))->unk0 = D_80153738.value;
-        ((func_80408C78_S1 *)(profile))->unk2 = D_8014D4AA.value;
-        ((func_80408C78_S1 *)(profile))->unk4 = D_8014D4AC_de.value;
-        ((func_80408C78_S1 *)(profile))->unk6 = D_8014D4AE.value;
+        profile->words[0] = D_80153738.value;
+        profile->words[1] = D_8014D4AA.value;
+        profile->words[2] = D_8014D4AC_de.value;
+        profile->words[3] = D_8014D4AE.value;
         for (i = 0; i < 8; i++) {
             profile->name[i] = D_8014D4B4[i];
         }

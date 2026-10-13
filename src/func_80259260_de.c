@@ -1,6 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802591C0.h"
 #include "types.h"
+#include "common/unused.h"
 /* Starts a sound instance from a description: when the scene's free node list is not empty it takes the
  * first node under the audio lock (func_80258740_de/func_802587A4_de), unlinks it, gives it the next handle, the
  * volume, sample, priority, pan and pitch fields decoded from the description, full gain, the scene frame
@@ -61,7 +62,7 @@ s32 func_80259260_de(Manager_func_80259260_de *manager, void *desc, Vec3Words *p
         node->position = *position;
         node->pad58 = 0;
         node->padB4 = 0;
-        func_8025BB7C_de(node->channel, ((func_80259280_S1 *)(manager->scene))->unk2B8C);
+        func_8025BB7C_de(node->channel, ((struct Context_func_80257360_de *)manager->scene)->field2B8C);
         node->mix = manager->scene[0x2BAC / 4];
         func_8025BB84_de(node->channel, desc, extra);
         at = manager->active.next;

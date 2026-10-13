@@ -25,7 +25,7 @@ void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1) {
         node = ((struct ObjectLinks54_2 *) ((char *) arg0))->link;
         while (node != 0) {
             next = ((struct ObjectLinks4_5 *) ((char *) node))->link;
-            total += ((func_80254D70_S2 *)(node))->unk8;
+            total += node->value;
             if (node->type == 0x15) {
                 s32 node_total;
                 func_802B2450_de(node);
