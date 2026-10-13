@@ -1576,10 +1576,14 @@ struct WeaponFireState;
 struct WeaponFireState {
     char pad0[0x34];
     s8 variant;
-    char pad35[0x124 - 0x35];
+    char pad35[0x64 - 0x35];
+    f32 cueTimer;
+    char pad68[0x124 - 0x68];
     union { f32 spinStep; s32 reset; };
     f32 spin;
-    char pad12C[0x13C - 0x12C];
+    char pad12C[4];
+    f32 charge; /* 0x130 */
+    char pad134[8];
     s32 mode;
     char pad140[4];
     s32 rounds;

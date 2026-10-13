@@ -106,6 +106,7 @@ struct List_func_804428F8_de {
     struct Node_func_804428F8_de *head;
     char pad04[0x10 - 0x4];
     s32 flag;
+    s16 rotation; /* 0x14 */
 };
 
 struct Table_func_804428F8_de {

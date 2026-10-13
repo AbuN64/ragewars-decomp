@@ -1,3 +1,5 @@
+#include "common/unused.h"
+#include "shared/gameplay_transition.h"
 #include "span_1000/code_802192C0.h"
 #include "span_1000/code_8026AC38.h"
 #include "n64sdk.h"
@@ -27,7 +29,7 @@ extern void func_80249E28_de(void *arg0, void *arg1);
 
 
 void func_8021CBD0_de(void *arg0, void *arg1) {
-    void *entry;
+    WeaponInfo *entry;
     f32 *rect;
     f32 x;
     f32 y;
@@ -36,22 +38,22 @@ void func_8021CBD0_de(void *arg0, void *arg1) {
     f32 top;
     f32 bottom;
 
-    if ((((func_8021CBAC_S1 *)(arg0))->unk62E != -1) &&
-        (((func_8021CBAC_S1 *)(arg0))->unk5EA != 0)) {
+    if ((((Shared_ActorView *)arg0)->selectedAction != -1) &&
+        (((Shared_ActorView *)arg0)->lives != 0)) {
         gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
         gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
         func_8026D8F8_de();
 
-        entry = D_800D052C[((func_8021CBAC_S1 *)(arg0))->unk62E];
-        rect = &((func_8021CBAC_S2 *)(arg1))->unk29C;
+        entry = D_800D052C[((Shared_ActorView *)arg0)->selectedAction];
+        rect = ((WeaponMenuView *)arg1)->viewport;
         x = rect[0];
         y = rect[1];
-        left = ((func_8021CBAC_S3 *)(entry))->unk44 * x + rect[2];
-        right = ((func_8021CBAC_S3 *)(entry))->unk4C * x + rect[2];
-        top = ((func_8021CBAC_S3 *)(entry))->unk48 * y + rect[3];
-        bottom = ((func_8021CBAC_S3 *)(entry))->unk50 * y + rect[3];
+        left = entry->scopeBounds[0] * x + rect[2];
+        right = entry->scopeBounds[2] * x + rect[2];
+        top = entry->scopeBounds[1] * y + rect[3];
+        bottom = entry->scopeBounds[3] * y + rect[3];
         func_80291BE8_de(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
-                      (s32)bottom, ((func_8021CBAC_S2 *)(arg1))->unk120);
+                      (s32)bottom, ((WeaponMenuView *)arg1)->clipMode);
 
         gSPGeometryMode(D_80110634++, 0, G_FOG);
         gSPMoveWord(D_80110634++, G_MW_CLIP, 4, 1);
@@ -59,7 +61,7 @@ void func_8021CBD0_de(void *arg0, void *arg1) {
         gSPMoveWord(D_80110634++, G_MW_CLIP, 20, 0xFFFF);
         gSPMoveWord(D_80110634++, G_MW_CLIP, 28, 0xFFFF);
         func_8026D980_de();
-        func_80249E28_de(&((func_8021CBAC_S1 *)(arg0))->unk2E8, arg1);
+        func_80249E28_de(&((Shared_ActorView *)arg0)->weapon, arg1);
         func_8026D9D0_de();
     }
 }

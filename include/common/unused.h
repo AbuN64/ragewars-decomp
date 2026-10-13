@@ -22091,7 +22091,9 @@ struct WeaponMenuMenu {
 };
 struct WeaponMenuView;
 struct WeaponMenuView {
-    char pad[0x29C];
+    char pad[0x120];
+    s32 clipMode;
+    char pad124[0x29C - 0x124];
     f32 viewport[4];
 };
 struct WeaponMenuPlayer;
