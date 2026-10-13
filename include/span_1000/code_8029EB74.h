@@ -142,7 +142,7 @@ extern float D_800C5C00_de;
 extern f32 func_8029DD3C_de(f32 arg0);
 
 /* unbake published declaration: published_b03be4f3b42b744fdf79c310 */
-extern void func_8029E2BC_de(void *arg0, int arg1, int arg2, int arg3);
+extern void func_8029E2BC_de(void *arg0, float arg1, float arg2, float arg3);
 
 /* unbake published declaration: published_b5ec760e6cfc853cd98f0613 */
 extern double D_800C5B60_de;
