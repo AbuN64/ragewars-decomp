@@ -226,9 +226,14 @@ struct ObjectLinks1DC_3;
 struct ObjectLinks1DC_3 {
     char pad0[0x8];
     Vec3 unk_8;
-    char pad8[0x100 - 0x8 - sizeof(Vec3)];
+    char pad14[0xC4 - 0x14];
+    s32 resource;
+    char padC8[8];
+    s32 resourceFlags;
+    char padD4[0x100 - 0xD4];
     s32 unk_100;
-    char pad100[0x1D8 - 0x100 - sizeof(s32)];
+    f32 animationTime;
+    char pad108[0x1D8 - 0x108];
     char * unk_1D8;
 };
 

@@ -28,36 +28,37 @@ extern void func_80208EB0_de(s32 *);
 
 void func_80212948_de(void *arg0)
 {
-    void *state;
+    CloseAttackBrain *state;
+    CloseAttackActor *actor = arg0;
     s32 old_state;
 
-    state = ((func_80212828_S2 *)(((func_8020A028_S3 *)(arg0))->unk1D8))->unk1454;
-    if (((func_80212948_S3 *)(state))->unk64 == 0) {
+    state = actor->self->brain;
+    if (state->target == 0) {
         func_80211020_de(state);
         return;
     }
 
-    old_state = ((func_80212948_S3 *)(state))->unkC;
+    old_state = state->destination;
     if (old_state == -1) {
         func_80212670_de(state);
-        if (((func_80212948_S3 *)(state))->unkC == old_state ||
-            ((func_80212948_S3 *)(state))->unkC == ((func_80212948_S3 *)(state))->unk4) {
+        if (state->destination == old_state ||
+            state->destination == state->route) {
             func_80209874_de(state, 4);
             return;
         }
     }
 
     if (D_800C20C8_de < func_802726BC_de(
-            &((func_80212828_S7 *)(((func_8020A028_S3 *)(((func_80212948_S3 *)(state))->unk64))->unk1D8))->unk8,
-            &((func_80212828_S7 *)(*(void **)state))->unk8)) {
-        func_80209874_de(state, ((func_80212948_S3 *)(state))->unk230);
+            &state->target->self->pos.x,
+            &state->player->pos.x)) {
+        func_80209874_de(state, state->combat);
         return;
     }
 
     func_80211020_de(state);
     func_80208410_de(state);
     func_80208EB0_de(state);
-    if (((func_80212948_S3 *)(state))->unk4 == ((func_80212948_S3 *)(state))->unkC) {
-        ((func_80212948_S3 *)(state))->unkC = -1;
+    if (state->route == state->destination) {
+        state->destination = -1;
     }
 }
