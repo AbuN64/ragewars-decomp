@@ -5,12 +5,13 @@
 
 s32 func_8024E0F0_de(void *arg0)
 {
-  void *new_var2;
+    Actor_u1 *actor = arg0;
+  Resource_u1 *new_var2;
   int new_var;
-  void *temp_a0;
-  temp_a0 = ((func_80205314_S1 *)(arg0))->unk18;
+  Resource_u1 *temp_a0;
+  temp_a0 = actor->resource;
   new_var2 = temp_a0;
-  if ((*(s32 *)new_var2) != 1)
+  if ((new_var2->kind) != 1)
   {
     if (temp_a0 || new_var)
     {
@@ -22,5 +23,5 @@ s32 func_8024E0F0_de(void *arg0)
     }
   }
   new_var = 0x4C;
-  return (((func_8024DED0_S2 *)temp_a0)->unk4C) & 0x2000;
+  return (temp_a0->flags4C) & 0x2000;
 }
