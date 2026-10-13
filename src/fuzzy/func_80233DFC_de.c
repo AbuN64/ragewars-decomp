@@ -1,5 +1,4 @@
-#include "types.h"
-typedef struct ColorActor { u8 pad0[0x520]; u8 color[8]; } ColorActor;
+#include "span_1000/code_80233920.h"
 extern void func_8027207C_de(f32 *);
 extern f64 D_800C30B8_de;
 extern f32 D_800C30C0_de;
@@ -41,7 +40,7 @@ extern f32 D_800C3150_de;
 extern f32 D_800C3154_de;
 extern f32 D_800C3158_de;
 extern f32 D_800C315C_de;
-void func_80233DFC_de(ColorActor *arg0) {
+void func_80233DFC_de(Entity_func_80233C88_de *arg0) {
     f32 vector[3];
     f32 temp_fs0;
     f32 temp_fs0_2;
@@ -56,7 +55,6 @@ void func_80233DFC_de(ColorActor *arg0) {
     f32 temp_fv0_3;
     f32 temp_fv0_4;
     f32 temp_fv0_5;
-    f32 temp_fv1f;
     f64 temp_fs0f;
     f64 var_fa0;
     f64 var_fa0_2;
@@ -66,21 +64,18 @@ void func_80233DFC_de(ColorActor *arg0) {
     f64 var_fa0_6;
     f64 var_fa0_7;
     f64 var_fa0_8;
-    s32 temp_cond;
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_s0;
     s32 var_s2;
     s32 var_v0;
     s32 var_v0_2;
-    s32 var_v1;
-    s32 var_v1_2;
-    s32 var_v1_3;
     s8 var_v0_3;
     s8 var_v0_4;
     s8 var_v0_5;
     u8 *temp_v1;
     u8 *var_s1;
+    u8 *direction;
 
     temp_fs0f = D_800C30B8_de;
     temp_fs2f = D_800C30C0_de;
@@ -122,6 +117,7 @@ void func_80233DFC_de(ColorActor *arg0) {
         }
         temp_v1[8] = (s8) var_v0_2;
         D_800D0EEA[var_s0] = (u8) var_v0_2;
+        direction = D_800CBC9C;
         var_s2 += 1;
         var_s0 += 1;
     } while (var_s2 < 3);
@@ -148,7 +144,7 @@ void func_80233DFC_de(ColorActor *arg0) {
     vector[0] *= D_800C3108_de;
     vector[1] *= D_800C3108_de;
     vector[2] *= D_800C3108_de;
-    D_800CBC9C[4] = (u32)vector[0];
+    direction[4] = (u32)vector[0];
     D_800CBCA1 = (u32)vector[1];
     D_800CBCA2 = (u32)vector[2];
     var_fa0_6 = (f64) D_800CD730;
@@ -158,7 +154,7 @@ void func_80233DFC_de(ColorActor *arg0) {
     temp_fv0_3 = (func_802B7130_de(2.0f * (temp_fs3 * (f32) var_fa0_6) * D_800C3120_de) * D_800C3124_de) + D_800C3128_de;
     var_v0_3 = (u32)temp_fv0_3 & 0xF8;
     arg0->color[0] = var_v0_3;
-    arg0->color[4] = var_v0_3;
+    arg0->secondaryColor[0] = var_v0_3;
     var_fa0_7 = (f64) D_800CD730;
     if (D_800CD730 < 0) {
         var_fa0_7 += D_800C3130_de;
@@ -166,7 +162,7 @@ void func_80233DFC_de(ColorActor *arg0) {
     temp_fv0_4 = (func_802B7130_de(temp_fs3 * (f32) var_fa0_7 * D_800C3138_de) * D_800C313C_de) + D_800C3140_de;
     var_v0_4 = (u32)temp_fv0_4 & 0xF8;
     arg0->color[1] = var_v0_4;
-    arg0->color[5] = var_v0_4;
+    arg0->secondaryColor[1] = var_v0_4;
     var_fa0_8 = (f64) D_800CD730;
     if (D_800CD730 < 0) {
         var_fa0_8 += D_800C3148_de;
@@ -174,5 +170,5 @@ void func_80233DFC_de(ColorActor *arg0) {
     temp_fv0_5 = (func_802B7130_de(temp_fs3 * (f32) var_fa0_8 * D_800C3150_de) * D_800C3154_de) + D_800C3158_de;
     var_v0_5 = (u32)temp_fv0_5 & 0xF8;
     arg0->color[2] = var_v0_5;
-    arg0->color[6] = var_v0_5;
+    arg0->secondaryColor[2] = var_v0_5;
 }

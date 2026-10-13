@@ -39,6 +39,7 @@ struct Entity_func_80233C88_de {
     f32 y;
     char pad2AC[0x520 - 0x2AC];
     u8 color[4];
+    u8 secondaryColor[4];
 };
 
 struct func_8023919C_S1;
