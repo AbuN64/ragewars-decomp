@@ -119,9 +119,14 @@ struct Record_func_804347CC_de {
 struct Player_func_804347CC_de;
 /* unbake published declaration: published_67ed07c39a25e654a129357d */
 struct Player_func_804347CC_de {
-    char pad0[0xB28];
+    s32 state; /* 0x0 */
+    char pad4[0x10];
+    s32 back; /* 0x14 */
+    struct Record_func_804347CC_de records[4]; /* 0x18 */
+    char pad658[0xB28 - 0x658];
     s32 chosen;
-    char padB2C[0xB68 - 0xB2C];
+    char padB2C[0xB64 - 0xB2C];
+    s32 profile; /* 0xB64 */
 };
 
 struct Block_func_804347CC_de;
@@ -133,6 +138,8 @@ struct Block_func_804347CC_de {
     struct Player_func_804347CC_de players[4];
     char pad2DF8[0x2E28 - 0x2DF8];
     struct Record_func_804347CC_de saved[4];
+    s32 savedProfile; /* 0x3468 */
+    u32 checksum; /* 0x346C */
 };
 
 /* unbake published declaration: published_168b7662f1f383690c0017f8 */
