@@ -99,7 +99,7 @@ struct func_80258BFC_S1;
 typedef struct func_80258BFC_S1 func_80258BFC_S1;
 
 /* unbake published declaration: published_5575b0336fe6dd1b278bf966 */
-extern void func_80258BBC_de(void *object, int value);
+extern void func_80258BBC_de(void *object, float value);
 
 /* unbake published declaration: published_56d5ac14d1ba50d835743124 */
 extern int func_80258D2C_de(void *object);
@@ -284,7 +284,7 @@ struct func_80258D68_S1 {
 };
 
 /* unbake published declaration: published_fc2993ca93bf031f38aeb071 */
-extern void func_80258B8C_de(void *arg0, int arg1);
+extern void func_80258B8C_de(void *arg0, float arg1);
 
 struct func_80258A9C_S1;
 /* unbake published declaration: published_ff0b33690720f619293cca91 */

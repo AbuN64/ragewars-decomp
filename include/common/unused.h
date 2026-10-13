@@ -6132,10 +6132,17 @@ struct Context_func_80257360_de {
     s32 field1D6C;
     char pad1D70[0x1DA8 - 0x1D70];
     char frames[0x10];
-    char menu[0x2B88 - 0x1DB8];
+    char menu[4];
+    Voice voices[17]; /* 0x1DBC */
+    char pad2B48[0x28];
+    char *table2B70;
+    char *table2B74;
+    char *table2B78;
+    char pad2B7C[0xC];
     s32 field2B88;
     s16 field2B8C;
-    char pad2B8E[6];
+    char pad2B8E[2];
+    s32 field2B90;
     u8 field2B94;
     char pad2B95[3];
     s32 field2B98;

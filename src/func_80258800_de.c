@@ -1,3 +1,5 @@
+#include "common/unused.h"
+#include "shared/gameplay_round_rules.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -23,7 +25,7 @@ void func_80258800_de(void *arg0, s32 arg1) {
         s32 temp_v1;
         u32 temp_a0;
 
-        temp_s0 = &((func_80258614_S1 *)(arg0))->unk110;
+        temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
         temp_a0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -34,14 +36,14 @@ void func_80258800_de(void *arg0, s32 arg1) {
             func_802BCF50_de(temp_a0);
         }
     }
-    func_8025BE08_de(&((func_80258614_S1 *)(arg0))->unk1DB8, arg1);
-    func_80259988_de(&((func_80258614_S1 *)(arg0))->unk138, arg1);
+    func_8025BE08_de(&((Context_func_80257360_de *)(arg0))->menu[0], arg1);
+    func_80259988_de(&((Context_func_80257360_de *)(arg0))->view[0], arg1);
     {
         s32 *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((func_80258614_S1 *)(arg0))->unk110;
+        temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -73,21 +75,21 @@ void func_802588D4_de(void *arg0, s32 arg1) {
     u32 temp_a0;
     u32 temp_v0;
 
-    temp_s0 = &((func_802588F4_S1 *)(arg0))->unk110;
+    temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
     temp_a0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
         func_802BB2A0_de((s32)temp_s0, 0, 1);
-        var_a0 = &((func_802588F4_S1 *)(arg0))->unk1DB8;
+        var_a0 = &((Context_func_80257360_de *)(arg0))->menu[0];
     } else {
         func_802BCF50_de(temp_a0);
-        var_a0 = &((func_802588F4_S1 *)(arg0))->unk1DB8;
+        var_a0 = &((Context_func_80257360_de *)(arg0))->menu[0];
     }
     func_8025BF08_de(var_a0, arg1);
-    func_802599EC_de(&((func_802588F4_S1 *)(arg0))->unk138, arg1);
-    temp_s0 = &((func_802588F4_S1 *)(arg0))->unk110;
+    func_802599EC_de(&((Context_func_80257360_de *)(arg0))->view[0], arg1);
+    temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
     temp_v0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -118,21 +120,21 @@ void func_802589A8_de(void *arg0, s32 arg1) {
     u32 temp_a0;
     u32 temp_v0;
 
-    temp_s0 = &((func_802588F4_S1 *)(arg0))->unk110;
+    temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
     temp_a0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
         func_802BB2A0_de((s32)temp_s0, 0, 1);
-        var_a0 = &((func_802588F4_S1 *)(arg0))->unk1DB8;
+        var_a0 = &((Context_func_80257360_de *)(arg0))->menu[0];
     } else {
         func_802BCF50_de(temp_a0);
-        var_a0 = &((func_802588F4_S1 *)(arg0))->unk1DB8;
+        var_a0 = &((Context_func_80257360_de *)(arg0))->menu[0];
     }
     func_8025C008_de(var_a0, arg1);
-    func_80259A50_de(&((func_802588F4_S1 *)(arg0))->unk138, arg1);
-    temp_s0 = &((func_802588F4_S1 *)(arg0))->unk110;
+    func_80259A50_de(&((Context_func_80257360_de *)(arg0))->view[0], arg1);
+    temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
     temp_v0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -151,9 +153,9 @@ extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
 
 
 void func_80258A7C_de(void *arg0, s32 arg1, Vec3 arg2, s32 arg3, s32 arg4, f32 arg5) {
-    ((func_80258A9C_S1 *)(arg0))->unk2BBC = arg5;
+    ((Context_func_80257360_de *)(arg0))->alpha = arg5;
     func_80257DD4_de(arg0, arg1, arg2, arg3, arg4);
-    ((func_80258A9C_S1 *)(arg0))->unk2BBC = D_800C3EE0_de[1];
+    ((Context_func_80257360_de *)(arg0))->alpha = D_800C3EE0_de[1];
 }
 
 extern char D_80145088;
@@ -173,9 +175,9 @@ void func_80258AE0_de(void *arg0) {
     Vec3 *vec;
 
     if (D_800CB720 != 0 &&
-        ((func_80258B00_S1 *)(arg0))->unk2BB4 != 0 &&
+        ((Context_func_80257360_de *)(arg0))->field2BB4 != 0 &&
         func_802934F8_de() != 0 &&
-        ((func_80258B00_S1 *)(arg0))->unk134 > 0) {
+        ((Context_func_80257360_de *)(arg0))->track > 0) {
         {
             register f32 value = 0.0f;
 
@@ -184,15 +186,15 @@ void func_80258AE0_de(void *arg0) {
             zero.x = value;
         }
         result = func_802395A4_de(&D_80145088, &zero);
-        vec = &((func_8023945C_S1 *)(result))->unk128;
-        if ((((func_80258B00_S1 *)(arg0))->unk104 & 3) == 0) {
-            func_80257DD4_de(arg0, ((func_80258B00_S1 *)(arg0))->unk134, *vec, 0, -1);
+        vec = &((struct Shared_func_80227014_S4 *)(result))->position;
+        if ((((Context_func_80257360_de *)(arg0))->frame & 3) == 0) {
+            func_80257DD4_de(arg0, ((Context_func_80257360_de *)(arg0))->track, *vec, 0, -1);
         }
     }
 }
 
-void func_80258B8C_de(void *arg0, int arg1) {
-    ((func_80258BAC_S1 *)(arg0))->unk2BA0 = arg1;
+void func_80258B8C_de(void *arg0, float arg1) {
+    ((Context_func_80257360_de *)(arg0))->red = arg1;
 }
 
 void func_80258B94_de(void *arg0, int arg1) {
@@ -200,26 +202,26 @@ void func_80258B94_de(void *arg0, int arg1) {
     if (arg1 < 0) {
         d = d + D_800C3EE8_de;
     }
-    ((func_80258BB4_S1 *)(arg0))->unk2BA4 = (float)d;
+    ((Context_func_80257360_de *)(arg0))->green = (float)d;
 }
 
 /** Store the second argument at byte offset 0x2BA8 in the first argument. */
-void func_80258BBC_de(void *object, int value) {
-    ((func_80258BDC_S1 *)(object))->unk2BA8 = value;
+void func_80258BBC_de(void *object, float value) {
+    ((Context_func_80257360_de *)(object))->blue = value;
 }
 
 /** Return the indexed twelve-byte record from the table at offset 0x2B70. */
 char *func_80258BC4_de(char *object, int index) {
-    return ((func_80258BE4_S1 *)(object))->unk2B70 + index * 12;
+    return ((Context_func_80257360_de *)(object))->table2B70 + index * 12;
 }
 
 void *func_80258BDC_de(void *arg0, int arg1) {
-    return (char *)((func_80258BFC_S1 *)(arg0))->unk2B74 + arg1 * 12;
+    return (char *)((Context_func_80257360_de *)(arg0))->table2B74 + arg1 * 12;
 }
 
 /** Return the indexed 12-byte entry under object offset 0x2B78. */
 void *func_80258BF4_de(void *arg0, int arg1) {
-    return (char *)((func_80258C14_S1 *)(arg0))->unk2B78 + arg1 * 12;
+    return (char *)((Context_func_80257360_de *)(arg0))->table2B78 + arg1 * 12;
 }
 
 extern u32 func_802BCF30_de(void);
@@ -241,7 +243,7 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         s32 temp_v1;
         u32 temp_a0;
 
-        temp_s0 = &((func_80258C2C_S1 *)(arg0))->unk110;
+        temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
         temp_a0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -252,15 +254,15 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
             func_802BCF50_de(temp_a0);
         }
     }
-    func_8025B5F0_de(&((func_80258C2C_S1 *)(arg0))->unk1DB8, arg1);
-    func_80259918_de(&((func_80258C2C_S1 *)(arg0))->unk138, arg1);
+    func_8025B5F0_de(&((Context_func_80257360_de *)(arg0))->menu[0], arg1);
+    func_80259918_de(&((Context_func_80257360_de *)(arg0))->view[0], arg1);
     {
         s32 *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((func_80258C2C_S1 *)(arg0))->unk110;
-        ((func_80258C2C_S1 *)(arg0))->unk2B9C = 0;
+        temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
+        ((Context_func_80257360_de *)(arg0))->field2B9C = 0;
         temp_v0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -283,40 +285,40 @@ void func_80258CEC_de(int arg0) {
 
 /** Store the second argument at offset 0x2BAC. */
 void func_80258D08_de(void *arg0, int arg1) {
-    ((func_80258D28_S1 *)(arg0))->unk2BAC = arg1;
+    ((Context_func_80257360_de *)(arg0))->field2BAC = arg1;
 }
 
 int func_80258D10_de(void *arg0) {
-    return ((func_80258D28_S1 *)(arg0))->unk2BAC;
+    return ((Context_func_80257360_de *)(arg0))->field2BAC;
 }
 
 /** Store a value in the field at offset 0x2BB4. */
 void func_80258D1C_de(char *object, int value) {
-    ((func_80258D3C_S1 *)(object))->unk2BB4 = value;
+    ((Context_func_80257360_de *)(object))->field2BB4 = value;
 }
 
 /** Store a value in the field at offset 0x2B98. */
 void func_80258D24_de(void *object, int value) {
-    ((func_80258D44_S1 *)(object))->unk2B98 = value;
+    ((Context_func_80257360_de *)(object))->field2B98 = value;
 }
 
 /** Read the object word at offset 0x2BB0. */
 int func_80258D2C_de(void *object) {
-    return ((func_80258D4C_S1 *)(object))->unk2BB0;
+    return ((Context_func_80257360_de *)(object))->field2BB0;
 }
 
 /** Store the supplied word at object offset 0x2BB0. */
 void func_80258D38_de(void *arg0, int arg1) {
-    ((func_80258D4C_S1 *)(arg0))->unk2BB0 = arg1;
+    ((Context_func_80257360_de *)(arg0))->field2BB0 = arg1;
 }
 
 void *func_80258D40_de(void *arg0) {
-    return &((func_80258D60_S1 *)(arg0))->unk84;
+    return &((Context_func_80257360_de *)(arg0))->list[0];
 }
 
 /** Store a word in the object field at offset 0x2BB8. */
 void func_80258D48_de(void *object, int value) {
-    ((func_80258D68_S1 *)(object))->unk2BB8 = value;
+    ((Context_func_80257360_de *)(object))->field2BB8 = value;
 }
 
 /* Counts how many of an object's seventeen 0xCC-byte slots at 0x1DC0 hold a given owner, holding the object's lock at 0x110 (raised and released under interrupts disabled through func_802BCF30_de and func_802BCF50_de) around the scan. */
@@ -342,7 +344,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         s32 temp_v1;
         u32 temp_a0;
 
-        temp_s0 = &((func_80203B60_S3 *)(obj))->unk110;
+        temp_s0 = &((Context_func_80257360_de *)(obj))->lock;
         temp_a0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -354,7 +356,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         }
     }
     for (i = 0; i < 17; i++) {
-        if (((struct IntegerState1DC4 *) (obj + (i * 0xCC)))->unk_1DC0 == owner) {
+        if (((Context_func_80257360_de *)obj)->voices[i].sound == owner) {
             count++;
         }
     }
@@ -363,7 +365,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((func_80203B60_S3 *)(obj))->unk110;
+        temp_s0 = &((Context_func_80257360_de *)(obj))->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -433,11 +435,11 @@ extern int func_8025CED0_de(void *arg0, int arg1, float arg2, int arg3);
 
 int func_80258F10_de(void *arg0, int arg1) {
     float var_f0 = (1.0f);
-    float temp_f1 = ((func_80258F30_S1 *)(arg0))->unk2BA8;
+    float temp_f1 = ((Context_func_80257360_de *)(arg0))->blue;
     if (!(var_f0 < temp_f1)) {
         var_f0 = temp_f1;
     }
-    return func_8025CED0_de(&((func_80258F30_S1 *)(arg0))->unk2BC0, arg1, var_f0, 0x40);
+    return func_8025CED0_de(&((Context_func_80257360_de *)(arg0))->dialog[0], arg1, var_f0, 0x40);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025D1BC_de. */
@@ -471,14 +473,14 @@ void func_80258F6C_de(SortTable *table) {
 
 
 int func_80258FF4_de(char *arg0, int id) {
-    Slot_func_80258FF4_de *slot;
+    Voice *slot;
     int i;
-    slot = &((func_80259014_S1 *)(arg0))->unk1DBC;
+    slot = ((Context_func_80257360_de *)arg0)->voices;
     if (id == -1) {
         return -1;
     }
     for (i = 0; i < 17; i++, slot++) {
-        if (slot->id == id) {
+        if (slot->unkC == id) {
             return i;
         }
     }
