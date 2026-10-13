@@ -55,7 +55,7 @@ void func_802A5180_de(Scene_func_802A5180_de *scene) {
     gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 255, 200);
     gSPDisplayList(D_80110634++, (u32)&D_800D2E60);
     for (i = 0; i < 10; i++) {
-        max = &((func_802077F4_S2 *)(&D_801031F8))->unk4;
+        max = (&D_801031F8 + 1);
         list = &scene->lists[i];
         particle = list->head;
         while (particle != 0) {

@@ -49,7 +49,7 @@ static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
         }
         D_8014D080->handled = saved;
     }
-    if (value == ((func_8021C9B4_S3 *)(D_8014D080->entries[D_8014D080->current].primary))->unkC) {
+    if (value == D_8014D080->entries[D_8014D080->current].primary->id) {
         result = func_80297A34_de(arg1, arg2, arg3, arg4);
     } else {
         result = func_80296E3C_de(value, arg1, arg2, arg3, arg4);

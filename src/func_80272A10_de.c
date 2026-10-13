@@ -13,27 +13,27 @@ extern f32 D_800C48C8_de[];
 
 
 void func_80272A10_de(void *arg0, void *arg1, Vec3 *arg2) {
-    char *m = (char *)arg0;
-    char *v = (char *)arg1;
+    Matrix *m = arg0;
+    Vec3 *v = arg1;
     f32 w;
     f32 scale;
 
-    arg2->x = (((func_80272848_S1 *)(m))->unk0 * ((func_8024C864_S1 *)(v))->unk0)
-                       + (((func_80272848_S1 *)(m))->unk10 * ((func_8024C864_S1 *)(v))->unk4)
-                       + (((func_80272848_S1 *)(m))->unk20 * ((func_8024C864_S1 *)(v))->unk8)
-                       + ((func_80272848_S1 *)(m))->unk30;
-    arg2->y = (((func_80272848_S1 *)(m))->unk4 * ((func_8024C864_S1 *)(v))->unk0)
-                       + (((func_80272848_S1 *)(m))->unk14 * ((func_8024C864_S1 *)(v))->unk4)
-                       + (((func_80272848_S1 *)(m))->unk24 * ((func_8024C864_S1 *)(v))->unk8)
-                       + ((func_80272848_S1 *)(m))->unk34;
-    arg2->z = (((func_80272848_S1 *)(m))->unk8 * ((func_8024C864_S1 *)(v))->unk0)
-                       + (((func_80272848_S1 *)(m))->unk18 * ((func_8024C864_S1 *)(v))->unk4)
-                       + (((func_80272848_S1 *)(m))->unk28 * ((func_8024C864_S1 *)(v))->unk8)
-                       + ((func_80272848_S1 *)(m))->unk38;
-    w = (((func_80272848_S1 *)(m))->unkC * ((func_8024C864_S1 *)(v))->unk0)
-        + (((func_80272848_S1 *)(m))->unk1C * ((func_8024C864_S1 *)(v))->unk4)
-        + (((func_80272848_S1 *)(m))->unk2C * ((func_8024C864_S1 *)(v))->unk8)
-        + ((func_80272848_S1 *)(m))->unk3C;
+    arg2->x = (m->m[0] * v->x)
+                       + (m->m[4] * v->y)
+                       + (m->m[8] * v->z)
+                       + m->m[12];
+    arg2->y = (m->m[1] * v->x)
+                       + (m->m[5] * v->y)
+                       + (m->m[9] * v->z)
+                       + m->m[13];
+    arg2->z = (m->m[2] * v->x)
+                       + (m->m[6] * v->y)
+                       + (m->m[10] * v->z)
+                       + m->m[14];
+    w = (m->m[3] * v->x)
+        + (m->m[7] * v->y)
+        + (m->m[11] * v->z)
+        + m->m[15];
     if (w != 0.0f) {
         scale = D_800C48C8_de[1] / w;
         arg2->x = arg2->x * scale;
