@@ -1,3 +1,4 @@
+#include "span_1000/code_8025C544.h"
 #include "span_1000/code_8025D948.h"
 #include "types.h"
 
@@ -19,14 +20,14 @@ void func_8025DACC_de(State_func_8025DACC_de *arg0) {
 }
 
 void func_8025DB34_de(void *arg0) {
-    ((func_8025DB54_S1 *)(arg0))->unk38 = 1;
-    ((func_8025DB54_S1 *)(arg0))->unk40 = 0;
+    ((Track *)arg0)->unk38 = 1;
+    ((Track *)arg0)->unk40 = 0;
 }
 
 /** Clear offset 0x38 and initialize offset 0x40 from D_800C9108. */
 void func_8025DB44_de(void *arg0) {
-    ((func_8025DB64_S1 *)(arg0))->unk40 = D_800C9108;
-    ((func_8025DB64_S1 *)(arg0))->unk38 = 0;
+    ((Track *)arg0)->unk40 = D_800C9108;
+    ((Track *)arg0)->unk38 = 0;
 }
 
 s32 func_802AFF90_de(s32);

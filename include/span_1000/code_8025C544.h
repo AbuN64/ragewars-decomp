@@ -378,6 +378,7 @@ struct Track {
     f32 unk34;
     s32 unk38;
     f32 unk3C;
+    f32 unk40; /* fade reset value */
 };
 
 struct func_8025D1DC_S1;

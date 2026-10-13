@@ -1,3 +1,4 @@
+#include "span_1000/code_8025C544.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8025D948.h"
@@ -24,17 +25,17 @@ void func_8025DD60_de(void *arg0) {
     f32 scaled;
 
     i = 0;
-    func_802AE5B8_de(((func_8025DD80_S1 *)(arg0))->unk10, ((func_8025DD80_S1 *)(arg0))->unkC);
-    func_802AFF30_de(((func_8025DD80_S1 *)(arg0))->unk14, ((func_8025DD80_S1 *)(arg0))->unk10);
-    func_802AFEB0_de(((func_8025DD80_S1 *)(arg0))->unk14,
-                  ((func_80203E78_S1 *)(((func_8025DD80_S1 *)(arg0))->unk8))->unk4);
+    func_802AE5B8_de(((Track *)arg0)->unk10, ((Track *)arg0)->unkC);
+    func_802AFF30_de(((Track *)arg0)->unk14, ((Track *)arg0)->unk10);
+    func_802AFEB0_de(((Track *)arg0)->unk14,
+                  ((Track *)arg0)->unk8->field_4);
     do {
-        func_802AFEE0_de(((func_8025DD80_S1 *)(arg0))->unk14, i & 0xFF, 0);
+        func_802AFEE0_de(((Track *)arg0)->unk14, i & 0xFF, 0);
         i++;
     } while (i < 0x14);
 
-    scaled = (f32)((func_8025DD80_S1 *)(arg0))->unk24 *
-             (((func_80258BB4_S1 *)(*(void **)arg0))->unk2BA4 * D_800C4030_de[1]);
-    func_802AFF60_de(((func_8025DD80_S1 *)(arg0))->unk14, (s16)(s32)(scaled * D_800C4038_de));
-    ((func_8025DD80_S1 *)(arg0))->unk2C = scaled;
+    scaled = (f32)((Track *)arg0)->unk24 *
+             (((Track *)arg0)->unk0->unk2BA4 * D_800C4030_de[1]);
+    func_802AFF60_de(((Track *)arg0)->unk14, (s16)(s32)(scaled * D_800C4038_de));
+    ((Track *)arg0)->unk2C = scaled;
 }

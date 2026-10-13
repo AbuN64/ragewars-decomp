@@ -1,3 +1,4 @@
+#include "shared/level_actor.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8024BA6C.h"
 #include "types.h"
@@ -14,15 +15,14 @@ extern void func_80253754_de(s32 arg0, s32 arg1);
 
 s32 func_8024C294_de(void *arg0, s32 arg1) {
     void *temp_v0;
-    char *temp_v1;
+    ActorFrameResourceTable *temp_v1;
     s32 temp_s0;
 
-    if (((func_8024C284_S1 *)(arg0))->unk100 & 0x40000) {
-        temp_v0 = func_8025193C_de(0, ((func_8024C284_S1 *)(arg0))->unkC4, ((func_8024C284_S1 *)(arg0))->unkC4, ((func_8024C284_S1 *)(arg0))->unkD0, 4, 0, 0, &D_800C3830_de, 1);
+    if (((Actor_func_8024A7A0_de *)arg0)->flags & 0x40000) {
+        temp_v0 = func_8025193C_de(0, ((Actor_func_8024A7A0_de *)arg0)->resource, ((Actor_func_8024A7A0_de *)arg0)->resource, ((Actor_func_8024A7A0_de *)arg0)->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
         if (temp_v0 != 0) {
-            temp_v1 = (char *) func_8028FDB4_de(*(void **) temp_v0, 1);
-            temp_v1 += arg1 * 4;
-            temp_s0 = ((func_80254D70_S2 *)(temp_v1))->unk8;
+            temp_v1 = func_8028FDB4_de(*(void **) temp_v0, 1);
+            temp_s0 = temp_v1->resources[arg1];
             func_80253754_de(0, (s32) temp_v0);
             return temp_s0;
         }
