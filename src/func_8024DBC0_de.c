@@ -16,21 +16,21 @@ extern char D_80131600;
 extern char D_8013B364;
 extern f32 D_800C3CD0_de[];
 extern s32 func_8020CB3C_de(void *, void *);
-extern Triple *func_8020C994_de(void *, s32);
+extern Vec3 *func_8020C994_de(void *, s32);
 extern void func_8027207C_de(Vec3 *);
 extern void func_80271F9C_de(void *, void *, f32);
-extern s32 func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
+extern s32 func_8028FFD0_de(s32, s32, s32, Vec3, Vec3, s32, f32);
 
 
 
 
-void func_8024DBC0_de(void *actor, Triple pos, s32 sound, f32 volume) {
+void func_8024DBC0_de(void *actor, Vec3 pos, s32 sound, f32 volume) {
     Vec3 up;
     Vec3 dir;
-    Triple velocity;
-    Triple at;
+    Vec3 velocity;
+    Vec3 at;
     SoundRequest request;
-    Triple *emitter;
+    Vec3 *emitter;
 
     emitter = func_8020C994_de(&D_8013B364, func_8020CB3C_de(&D_8013B364, &pos));
     request.position = pos;

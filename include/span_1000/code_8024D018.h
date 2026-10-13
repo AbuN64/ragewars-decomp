@@ -73,7 +73,7 @@ struct SoundRequest;
 /* unbake published declaration: published_aff44145335a5c1ef0f9fc65 */
 struct SoundRequest {
     s32 kind;
-    Triple position;
+    Vec3 position;
     char pad[0x148];
     s32 owner;
     s32 flags;
@@ -188,4 +188,5 @@ typedef struct {
 extern f32 D_800C3C7C_de;
 extern f32 D_800C3C80_de;
 
+extern void func_8024DBC0_de(void *actor, Vec3 position, s32 sound, f32 volume);
 #endif

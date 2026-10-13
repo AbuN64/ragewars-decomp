@@ -1,3 +1,4 @@
+#include "span_1000/code_8024D018.h"
 #include "common/unused.h"
 #include "shared/gameplay_transition.h"
 #include "common/types_1dc8418c21db.h"
@@ -99,19 +100,17 @@ void func_802174E4_de(void *arg0, void *unused1, Output80216D3C *arg2) {
 extern f32 D_800C21EC_de;
 
 
-extern void func_8024DBC0_de(void *, s32, s32, s32, s32, f32);
 
 
 
 
-void func_80217594_de(void *arg0, s32 unused1, s32 arg2, s32 *entry) {
+
+void func_80217594_de(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
     if (entry[0] != 0) {
         do {
             if ((arg2 & entry[0]) != 0) {
                 func_8024DBC0_de(arg0,
-                              ((Shared_ActorView *)arg0)->position.words.x,
-                              ((Shared_ActorView *)arg0)->position.words.y,
-                              ((Shared_ActorView *)arg0)->position.words.z,
+                              arg0->pos,
                               entry[1],
                               func_80274A90_de(D_800C21EC_de, D_800C21F0_de));
             }
