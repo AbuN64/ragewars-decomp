@@ -1,20 +1,7 @@
 #include "types.h"
-
 extern const u8 D_800C88F0[];
-
-s64 func_802C0230_de(s64 u, s64 v) {
- s32 negative = 0;
- u32 d0, d1, n0, n1, n2;
- u32 q0, q1;
- u32 b, bm;
- u64 numerator = u, denominator = v;
- u64 quotient;
- if (u < 0) { negative = ~negative; numerator = -numerator; }
- if (v < 0) { negative = ~negative; denominator = -denominator; }
- d0 = denominator;
- d1 = denominator >> 32;
- n0 = numerator;
- n1 = numerator >> 32;
+static inline u64 divideWords(u32 n1, u32 n0, u32 d1, u32 d0) {
+ u32 n2, q0, q1, b, bm; u64 quotient;
   if (d1 == 0)
     {
       if (d0 > n1)
@@ -261,6 +248,16 @@ s64 func_802C0230_de(s64 u, s64 v) {
 
 
  quotient = ((u64)q1 << 32) | q0;
+ return quotient;
+}
+static inline u64 negate(u64 x) { return -x; }
+s64 func_802C0230_de(s64 u, s64 v) {
+ s32 negative = 0;
+ u64 numerator = u, denominator = v;
+ u64 quotient;
+ if (u < 0) { negative = ~negative; numerator = -numerator; }
+ if (v < 0) { negative = ~negative; denominator = -denominator; }
+ quotient = divideWords(numerator >> 32, numerator, denominator >> 32, denominator);
  if (negative) quotient = -quotient;
  return quotient;
 }
