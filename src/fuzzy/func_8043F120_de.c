@@ -9,16 +9,16 @@ char *func_8043F120_de(Shared_DebugWidget *widget) {
     void *value = field->get();
     f32 number;
     switch (field->type) {
+    default: number = 0.0f; break;
     case 0: { f32 *p = value; number = *p; break; }
+    case 3: { s8 *p = value; number = *p; break; }
+    case 4: { s16 *p = value; number = *p; break; }
     case 1:
     case 2:
     case 5: { s32 *p = value; number = *p; break; }
-    case 3: { s8 *p = value; number = *p; break; }
-    case 4: { s16 *p = value; number = *p; break; }
     case 6: { u8 *p = value; number = *p; break; }
     case 7: { u16 *p = value; number = *p; break; }
     case 8: { u32 *p = value; number = (f64)*p; break; }
-    default: number = 0.0f; break;
     }
     number /= field->scale;
     func_802BD320_de(D_8014DE10, D_800DE380, (f64)number);

@@ -40,10 +40,10 @@ void func_8025D844_de(struct AudioStateD844 *state, struct AudioRootD844 *root) 
     params.count38 = 20;
     params.count1C = 192;
     params.kind = 20;
+    params.context = &state->root->heap;
     params.value10 = 0;
     params.value14 = 0;
     params.value18 = 0;
-    params.context = &state->root->heap;
     player = func_802B0340_de(0, 0, &state->root->heap, 1, 0x7C);
     state->player = player;
     func_802AEAB0_de(player, &params);
