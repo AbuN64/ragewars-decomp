@@ -157,8 +157,18 @@ struct Node_func_80285B64_de {
 
 struct Element_func_8041200C_de;
 /* unbake published declaration: published_068d2190ce9044ec428e5b78 */
+/* Font records contain a four-byte header and 147 eight-byte glyph records. */
+typedef struct TextGlyph {
+    u32 texture;
+    s8 width;
+    s8 height;
+    s8 offsetX;
+    s8 offsetY;
+} TextGlyph;
+
 struct Element_func_8041200C_de {
-    char unk_0[1180];
+    u32 header;
+    TextGlyph glyphs[147];
 };
 
 struct func_8029A73C_S1;
