@@ -7,7 +7,7 @@
 
 
 
-extern struct Triple D_800E4A84[];
+extern struct Pair D_800E4A84[];
 
 s32 func_80428158_de(s32 a, s32 b) {
     s32 i;
@@ -16,7 +16,7 @@ s32 func_80428158_de(s32 a, s32 b) {
         return 1;
     }
     for (i = 0; i < 64; i++) {
-        if (D_800E4A84[i].x == a && D_800E4A84[i].y == b) {
+        if (D_800E4A84[i].a == a && D_800E4A84[i].b == b) {
             return 1;
         }
     }
