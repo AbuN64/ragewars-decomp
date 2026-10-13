@@ -165,6 +165,19 @@ struct Slot_func_80218F9C_de {
     f32 scale;
 };
 
+struct TeamMenu {
+    s32 state;
+    s32 unused;
+    f32 open;
+    s32 reset;
+    u8 reserved10[4];
+    f32 spin;
+    s32 count;
+    Slot_func_80218F9C_de slots[4];
+    s32 cursor;
+    s32 hover;
+};
+
 struct ObjectLinks11BC;
 /* unbake published declaration: published_9ff12773c2d18c615ae742ad */
 typedef struct ObjectLinks11BC ObjectLinks11BC;
