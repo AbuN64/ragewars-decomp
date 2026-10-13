@@ -4121,7 +4121,7 @@ schema = 1
 "func_804404A8_de" = { evidence = "landed", signature = "void func_804404A8_de(LayeredText *source, TextLayerRect *position, TextLayerRect *bounds, int flags)" }
 "func_804410AC_de" = { evidence = "landed", signature = "void func_804410AC_de(struct Menu_func_804410AC_de *menu, u8 dir)" }
 "func_80441214_de" = { evidence = "declared", signature = "s32 func_80441214_de(Node_func_804428F8_de *, List_func_804428F8_de *)" }
-"func_804415F4_de" = { evidence = "landed", signature = "void func_804415F4_de(func_8043FFAC_S2 *arg0, char *arg1)" }
+"func_804415F4_de" = { evidence = "declared", signature = "void func_804415F4_de()" }
 "func_80441EB0_de" = { evidence = "landed", signature = "void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct Params_func_80441EB0_de *params)" }
 "func_80441FE8_de" = { evidence = "landed", signature = "int func_80441FE8_de(Item_func_80441FE8_de *item)" }
 "func_80442064_de" = { evidence = "landed", signature = "void func_80442064_de(struct Object_func_80442064_de *object, s32 second, s32 third, s32 fourth)" }
@@ -4434,8 +4434,6 @@ schema = 1
 "pool_alloc" = { evidence = "landed", signature = "static inline void *pool_alloc(s32 arg1)" }
 "post_lines" = { evidence = "landed", signature = "static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target)" }
 "project" = { evidence = "landed", signature = "static __inline__ Vec3 project(Vec3 *arg0, Vec3 *arg1)" }
-"pulseBias" = { evidence = "landed", signature = "static inline f32 pulseBias(void)" }
-"pulseSpeed" = { evidence = "landed", signature = "static inline f32 pulseSpeed(void)" }
 "put" = { evidence = "landed", signature = "static inline void put(u8 **pp, const u8 *p, s32 len)" }
 "put_vertex" = { evidence = "landed", signature = "static inline void put_vertex(s32 index, s32 x, s32 y, u32 color)" }
 "quad_normal" = { evidence = "landed", signature = "static inline void quad_normal(struct Quad *quad)" }
@@ -13011,7 +13009,7 @@ schema = 1
 "TextBoundsData" = { declaration = "typedef struct TextBoundsData TextBoundsData;", evidence = "authored" }
 "TextBoundsDescriptor" = { declaration = "typedef struct TextBoundsDescriptor TextBoundsDescriptor;", evidence = "authored" }
 "TextBoundsFont" = { declaration = "typedef struct TextBoundsFont TextBoundsFont;", evidence = "authored" }
-"TextBoundsHandlers" = { declaration = "struct TextBoundsHandlers { char pad0[0x14]; void (*draw)(TextBoundsText *, TextBoundsMetrics *, TextBoundsMetrics *, struct func_8043FFAC_S2 *); };", evidence = "authored" }
+"TextBoundsHandlers" = { declaration = "struct TextBoundsHandlers { char pad0[0x14]; void (*draw)(TextBoundsText *, TextBoundsMetrics *, TextBoundsMetrics *, void *); };", evidence = "authored" }
 "TextBoundsMetrics" = { declaration = "typedef struct TextBoundsMetrics TextBoundsMetrics;", evidence = "authored" }
 "TextBoundsRecord23" = { declaration = "typedef struct TextBoundsRecord23 TextBoundsRecord23;", evidence = "authored" }
 "TextBoundsState" = { declaration = "typedef struct TextBoundsState TextBoundsState;", evidence = "authored" }
