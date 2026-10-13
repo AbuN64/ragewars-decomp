@@ -62,7 +62,9 @@ struct Actor_func_8024A7A0_de {
     s32 collisionEnabled; /* 0x1A0 */
     u8 pad1A4;
     s8 animationState; /* 0x1A5 */
-    u8 pad1A6[0x32];
+    u8 pad1A6[0xA];
+    f32 motionThreshold; /* 0x1B0 */
+    u8 pad1B4[0x24];
     void *controller; /* 0x1D8: linked actor */
     u8 pad1DC[0x14];
     char *lockOn; /* 0x1F0 */

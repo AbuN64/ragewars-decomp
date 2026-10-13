@@ -1,3 +1,4 @@
+#include "shared/level_actor.h"
 #include "span_1000/code_80203F04.h"
 
 
@@ -6,10 +7,10 @@
 
 /** Clear two flag groups when the object's 0x1B0 field exceeds a tunable. */
 void func_80204738_de(void *object) {
-    if (((func_80204738_S1 *)(object))->unk1B0 > D_800C1A70_de) {
-        int flags = ((func_80204738_S1 *)(object))->unk100;
+    if (((Actor_func_8024A7A0_de *)object)->motionThreshold > D_800C1A70_de) {
+        int flags = ((Actor_func_8024A7A0_de *)object)->flags;
         flags &= ~0x2000;
         flags &= ~0x100;
-        ((func_80204738_S1 *)(object))->unk100 = flags;
+        ((Actor_func_8024A7A0_de *)object)->flags = flags;
     }
 }
