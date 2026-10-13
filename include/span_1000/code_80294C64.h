@@ -71,6 +71,7 @@ struct Selection_func_802955EC_us_rev1;
 struct Selection_func_802955EC_us_rev1 {
     s32 value;
     char pad4[12];
+    s32 alternative; /* 0x10 */
 };
 
 /* unbake published declaration: published_5b225e288c07dcd4f054dbf0 */

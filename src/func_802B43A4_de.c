@@ -1,3 +1,4 @@
+#include "span_1000/code_802BE0D0.h"
 #include "span_1000/code_802B369C.h"
 #include "types.h"
 
@@ -14,10 +15,10 @@ extern char D_002BEAA4;
 
 void func_802B43A4_de(void *arg0, FuncPtr arg1, s32 arg2) {
     func_802B53E0_de(arg0, &D_002BE0D0, &D_002BEAA4, 0);
-    ((func_802B9474_S1 *)(arg0))->unk14 = func_802B0340_de(0, 0, arg2, 1, 0x20);
-    ((func_802B9474_S1 *)(arg0))->unk18 = func_802B0340_de(0, 0, arg2, 1, 0x20);
-    ((func_802B9474_S1 *)(arg0))->unk30 = arg1((char *)arg0 + 0x34);
-    ((func_802B9474_S1 *)(arg0))->unk3C = 0;
-    ((func_802B9474_S1 *)(arg0))->unk40 = 1;
-    ((func_802B9474_S1 *)(arg0))->unk44 = 0;
+    ((ALLoadFilter48_2 *)arg0)->state = func_802B0340_de(0, 0, arg2, 1, 0x20);
+    ((ALLoadFilter48_2 *)arg0)->lstate = func_802B0340_de(0, 0, arg2, 1, 0x20);
+    ((ALLoadFilter48_2 *)arg0)->dma = arg1(&((ALLoadFilter48_2 *)arg0)->dmaState);
+    ((ALLoadFilter48_2 *)arg0)->lastsam = 0;
+    ((ALLoadFilter48_2 *)arg0)->first = 1;
+    ((ALLoadFilter48_2 *)arg0)->memin = 0;
 }

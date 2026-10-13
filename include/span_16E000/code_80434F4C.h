@@ -82,7 +82,10 @@ struct Record_func_804358C0_de;
 struct Record_func_804358C0_de {
     s32 id;
     signed char kind;
-    char pad[400 - 5];
+    char pad5[7];
+    s8 slot; /* 0xC */
+    s8 place; /* 0xD */
+    char padE[400 - 14];
 };
 
 /* unbake published declaration: published_47c055d1efdfa0253a926300 */

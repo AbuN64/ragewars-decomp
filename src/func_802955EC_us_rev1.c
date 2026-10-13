@@ -28,7 +28,7 @@ void func_802955EC_us_rev1(s32 arg0, s32 **arg1) {
         }
         if (arg0 == D_8014AECC.value) {
             if (choose != 0) {
-                *arg1 = &((func_8022BC04_S3 *)(&D_8014AECC))->unk10;
+                *arg1 = &D_8014AECC.alternative;
                 return;
             }
             *arg1 = D_8014AED4;

@@ -36,7 +36,7 @@ s32 func_80420C10_de(s32 arg0, s32 arg1, s32 arg2) {
     case 3:
         temp_a3->unk14 = 1;
         func_8041B7B4_de(D_800E42D0->unk4, temp_s0, 0, temp_a3);
-        func_8041CE10_de(&((func_802558C0_S1 *)((temp_s1 + (s32)D_800E42D0)))->unk20, 1);
+        func_8041CE10_de(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
         func_80420438_de(temp_s0);
         break;
     }

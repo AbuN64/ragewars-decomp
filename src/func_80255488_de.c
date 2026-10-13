@@ -14,22 +14,22 @@ extern s32 D_80101194;
 
 void func_80255488_de(s32 arg0) {
     s32 key;
-    s32 *temp_v0;
-    s32 *var_a0;
-    s32 *var_a2;
-    s32 *var_v1;
+    Entry_func_802553B4_de *temp_v0;
+    Entry_func_802553B4_de *var_a0;
+    Entry_func_802553B4_de *var_a2;
+    Entry_func_802553B4_de *var_v1;
 
     key = arg0;
-    var_v1 = (s32 *)(D_80101194 + ((((key << 5) ^ ((u32)key >> 1) ^
+    var_v1 = (Entry_func_802553B4_de *)(D_80101194 + ((((key << 5) ^ ((u32)key >> 1) ^
                                       ((u32)key >> 9) ^ ((u32)key >> 0x11)) &
                                      D_80101190) * 0x10));
     var_a2 = 0;
-    if (*var_v1 != key) {
+    if (var_v1->key != key) {
 loop:
         var_a2 = var_v1;
-        var_v1 = ((func_80255428_S1 *)(var_v1))->unkC.v0;
+        var_v1 = var_v1->next;
         if (var_v1 != 0) {
-            if (*var_v1 == key) {
+            if (var_v1->key == key) {
                 goto found;
             }
             goto loop;
@@ -37,21 +37,21 @@ loop:
     } else {
 found:
         if (var_v1 != 0) {
-            var_a0 = ((func_80255428_S1 *)(var_v1))->unkC.v0;
+            var_a0 = var_v1->next;
             if (var_a0 != 0) {
-                ((func_80255428_S1 *)(var_v1))->unk4 = ((func_80255428_S2 *)(var_a0))->unk4;
-                *var_v1 = *var_a0;
-                ((func_80255428_S1 *)(var_v1))->unkC.v0 = ((func_80255428_S2 *)(var_a0))->unkC;
+                var_v1->value = var_a0->value;
+                var_v1->key = var_a0->key;
+                var_v1->next = var_a0->next;
                 temp_v0 = var_v1;
                 var_v1 = var_a0;
                 var_a0 = temp_v0;
             }
             if (var_a2 != 0) {
-                ((func_80255428_S3 *)(var_a2))->unkC = var_a0;
+                var_a2->next = var_a0;
             }
-            ((func_80255428_S1 *)(var_v1))->unk4 = 0;
-            *var_v1 = 0;
-            ((func_80255428_S1 *)(var_v1))->unkC.v1 = 0;
+            var_v1->value = 0;
+            var_v1->key = 0;
+            var_v1->next = 0;
         }
     }
 }
