@@ -18,20 +18,20 @@ extern void func_802800C0_de(void *, void *, void *, s32, s32, s32,
 
 
 
-void func_802836D0_de(void *arg0, s32 arg1) {
+void func_802836D0_de(Obj_func_80283920_de *arg0, s32 arg1) {
     Vector4f rotation;
     Vec3 position;
 
-    if ((*((func_802836A4_S1 *)(arg0))->unk118 & 0x10) != 0) {
+    if ((*arg0->effectFlags & 0x10) != 0) {
         position = D_801042C8;
     } else {
-        position = ((func_802836A4_S1 *)(arg0))->unk1C;
+        position = arg0->rotation;
     }
     func_80271818_de(&rotation, &position);
     func_802800C0_de(&D_8011D8D0, arg0,
-                  ((func_802836A4_S1 *)(arg0))->unk12C,
-                  ((func_802836A4_S1 *)(arg0))->unk130,
-                  ((func_802836A4_S1 *)(arg0))->unk134, arg1,
+                  arg0->effectResource,
+                  arg0->effectIndex,
+                  arg0->effectCount, arg1,
                   position, rotation, D_801002A8, 0, -2,
-                  (((func_802836A4_S1 *)(arg0))->unk5C & 0x200006) | 1);
+                  (arg0->unk5C & 0x200006) | 1);
 }

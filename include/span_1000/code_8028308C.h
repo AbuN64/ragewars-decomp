@@ -11,9 +11,16 @@ struct Obj_func_80283920_de {
     s32 unk8;
     s32 unkC;
     s32 unk10;
-    char pad14[0x48];
+    char pad14[8];
+    Vec3 rotation; /* 0x1C */
+    char pad28[0x34];
     u32 unk5C;
-    char pad60[0xd8];
+    char pad60[0xB8];
+    s32 *effectFlags; /* 0x118 */
+    char pad11C[0x10];
+    void *effectResource; /* 0x12C */
+    s32 effectIndex; /* 0x130 */
+    s32 effectCount; /* 0x134 */
     s32 unk138;
     char pad13C[0x1D9 - 0x13C];
     u8 active1D9;
