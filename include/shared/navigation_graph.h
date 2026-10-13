@@ -18,7 +18,7 @@ typedef struct NavigationSearchNode {
     s32 state; /* 0x8 */
     u8 padC[0x4];
     struct NavigationSearchNode * next; /* 0x10 */
-    u8 pad14[0x4];
+    f32 wait; /* 0x14 */
     f32 extra; /* 0x18 */
     f32 cost; /* 0x1C */
     f32 estimate; /* 0x20 */
@@ -27,7 +27,8 @@ typedef struct NavigationSearchNode {
     s32 goal; /* 0x2C */
     struct NavigationSearchNode * parent; /* 0x30 */
     struct Player * object; /* 0x34 */
-    u8 pad38[0x8];
+    s32 ticks; /* 0x38 */
+    s32 delay; /* 0x3C */
     struct NavigationPlatform * platform; /* 0x40 */
     Vec3 endpoint; /* 0x44 */
 } NavigationSearchNode;
