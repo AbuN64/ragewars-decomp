@@ -1415,7 +1415,7 @@ extern f32 D_800C9F74_de[];
 extern s32 D_800E28E4;
 
 /* unbake published declaration: published_58d55c0a66d8ae0bb0f93bc3 */
-extern char D_800D14B0;
+extern u32 D_800D14B0[];
 
 /* unbake published declaration: published_58d840534d5ee968beaa2484 */
 extern s32 D_800D2480;
@@ -3127,7 +3127,7 @@ extern s32 D_801470B0;
 extern func_8020CA10_G1 D_800C4318_de;
 
 /* unbake published declaration: published_ca9de9838524f37357ecdc02 */
-extern char D_801000F0;
+#include "shared/legacy_collision_actor.h"
 
 /* unbake published declaration: published_caa262deba13da2f7f4c3952 */
 extern signed char D_800D1610[3];

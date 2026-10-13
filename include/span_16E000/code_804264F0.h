@@ -28,6 +28,7 @@ struct ResultsOptionsScreen {
     s32 player;
     char padA60[0x14];
     u8 owned[5];
+    u8 pending[5];
 };
 
 struct Entry_func_8042840C_de;

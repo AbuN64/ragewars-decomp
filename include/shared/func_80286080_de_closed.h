@@ -4,9 +4,10 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028FC98.h"
+#include "span_1000/code_80286050.h"
 struct Shared_Pickup;
 #include "shared/world.h"
-typedef struct Shared_ControlManager { u8 unknown0[0x180C]; s32 state; } Shared_ControlManager;
+#include "span_16E000/menu_ui_providers.h"
 
 #include "types.h"
 
@@ -24,9 +25,6 @@ typedef struct Shared_ControlManager { u8 unknown0[0x180C]; s32 state; } Shared_
 
 extern s32 D_800CD3F4;
 
-extern Shared_ControlManager D_80145088;
-extern Shared_Game D_801462C8;
-extern s32 D_80146894;
 
 extern void func_8028A698_de(void *);
 extern void func_8028D64C_de(void *);
@@ -36,13 +34,13 @@ extern void func_80253BBC_de(s32, struct func_80205628_S3 *);
 extern void func_802A56FC_de(void *);
 extern void func_8022A170_de(void *);
 extern void func_80287F18_de(void *);
-extern void func_80288470_de(void *);
+extern void func_80288470_de(DraftStreamWorld *);
 extern void func_8028D61C_de(void *);
 extern void func_802A5680_de(void *);
 extern void func_80286284_de(void *);
 extern void func_8028C60C_de(void *);
 extern void func_80281CA0_de(void *);
-extern void func_802285E8_de(void *);
+extern void func_802285E8_de(char *);
 extern void func_80236F1C_de(void *, void *);
 extern void func_8028D67C_de(void *);
 extern void func_8028D888_de(void *);

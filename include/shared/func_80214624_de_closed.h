@@ -4,12 +4,13 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/unused.h"
 #include "span_1000/code_8023EEF0.h"
+#include "span_1000/code_8024D018.h"
 
 typedef struct { Vec3 pos; s32 unkC; } ApproachLocation;
 extern s32 D_8013B290;
 extern f32 D_800C2160_de[],D_800C215C_de;
 extern f32 func_80216F44_de(Actor_func_80214624_de *,Vec3);
-extern f32 func_8024D398_de(Actor_func_80214624_de *);
+extern f32 func_8024D398_de(Actor_u1 *);
 extern f32 func_80271AA8_de(Vec3 *);
 extern ApproachLocation *func_80219408_de(void *);
 extern s32 func_80240660_de(Actor_func_80214624_de *,Vec3,s32,s32,Vec3 *);

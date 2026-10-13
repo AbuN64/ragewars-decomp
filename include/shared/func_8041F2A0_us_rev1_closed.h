@@ -1,6 +1,7 @@
 #ifndef FUNC_8041F2A0_US_REV1_CLOSED_H
 #define FUNC_8041F2A0_US_REV1_CLOSED_H
 #include "types.h"
+#include "span_16E000/code_8041B020.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 /* Remaining func_8041F2A0_* types are unresolved canonical identities. */
@@ -125,14 +126,13 @@ extern func_8041F2A0_MenuBlock *D_800E3590;
 extern void func_8041DB30_de(int *cursor);
 extern func_8041F2A0_Config D_80146398[];
 extern SelectionScreenState *func_8025305C_de(s32);
-extern s32 func_8041B610_de(s32, s32);
-extern void func_8041B6E8_de(s32, s32, s32);
+extern Node_func_8041B610_de *func_8041B610_de(Owner_func_8041B610_de *, s32);
+extern void func_8041B6E8_de(Owner_func_8041B6E8_de *, s32, s32);
 extern void func_8042E9A0_de(s32, s32);
 extern s32 func_8041F18C_de(s32);
 extern void func_8041CAD8_de(void *, s32, s32, s32, s32, Vec3, Vec3, f32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(func_8041F2A0_Item *, s32);
-extern s32 func_80419E54_de(s32, s32);
 extern void func_80420308_de(s32);
 extern void func_802A2394_de(void);
 

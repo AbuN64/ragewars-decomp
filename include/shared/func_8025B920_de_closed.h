@@ -15,7 +15,7 @@
 
 extern void func_802B2F00_de(void *sound, s16 sample);
 extern s32 func_802B2620_de(void *sound);
-extern void func_802B2F60_de(Obj_func_802B2F60_de *arg0);
+extern void func_802B2F60_de(void *sound);
 
 static __inline__ void release(SlotCC *slot) {
     Owner_func_8025B5F0_de *owner = slot->owner;
@@ -27,7 +27,7 @@ static __inline__ void release(SlotCC *slot) {
         sound = owner->sound;
         func_802B2F00_de(sound, owner->samples[slot->index]);
         if (func_802B2620_de(sound) != 0) {
-extern void func_802B2F60_de(Obj_func_802B2F60_de *arg0);
+            func_802B2F60_de(sound);
         }
         slot->state = -1;
     }

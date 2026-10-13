@@ -3,6 +3,7 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "packed_float.h"
+#include "shared/func_804235A8_eu_layout.h"
 #include "shared/func_80214624_de_closed.h"
 
 /* Complete records from origin/legacy shared headers and source; historical gaps retained. */
@@ -73,8 +74,8 @@ f32 func_802B72B0_de(f32);
 void func_80271818_de(void *, f32 *);            /* extern */
 void func_8027A084_de(void *);                      /* extern */
 void func_8027A4D0_de(void *);                      /* extern */
-extern s32 D_80145040;
-extern void *D_80145060;
+extern Shared_MenuData D_80145040;
+extern Shared_GlobalRuntimeState D_80145060;
 
 
 #endif

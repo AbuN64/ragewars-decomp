@@ -81,16 +81,6 @@ loop:
     }
 }
 
-/* The larger results screen begins with its published options-screen header. */
-struct CompleteResultsScreen {
-    ResultsOptionsScreen options;
-    char pad974[0xE8];
-    s32 selection;
-    char padA60[0x14];
-    u8 enabled[5];
-    u8 pending[5];
-};
-
 extern struct Entry_func_8041EB50_de D_800E4694[];
 extern struct Pair D_800E4A84[];
 extern void func_80265688_de(u8 *, s32, s32);
@@ -116,7 +106,7 @@ void func_804274B0_de(void) {
     if (settings->controllerMode == 1) {
         game = settings;
         for (i = 0; i < 36; i++) {
-            unlocks = func_80425C70_de(i, 0, *(s8 *)((char *)game + ((struct CompleteResultsScreen *)D_800E4690)->selection * 0x96 + 0x150));
+            unlocks = func_80425C70_de(i, 0, *(s8 *)((char *)game + D_800E4690->player * 0x96 + 0x150));
             value = unlocks->bytes[1];
             if (value > 0) func_80265688_de(bits, value - 1, 1);
             for (j = 0; j < 3; j++) {
@@ -159,10 +149,10 @@ found2:;
         }
     }
     for (i = 0; i < 36; i++) {
-        if (func_80265650_de((s32)((struct CompleteResultsScreen *)D_800E4690)->enabled, i) == 1) ((void (*)(s32))func_80427D70_de)(i);
+        if (func_80265650_de((s32)D_800E4690->owned, i) == 1) ((void (*)(s32))func_80427D70_de)(i);
     }
     for (i = 0; i < 36; i++) {
-        if (func_80265650_de((s32)((struct CompleteResultsScreen *)D_800E4690)->pending, i) == 1) func_80265688_de(((struct CompleteResultsScreen *)D_800E4690)->enabled, i, 1);
+        if (func_80265650_de((s32)D_800E4690->pending, i) == 1) func_80265688_de(D_800E4690->owned, i, 1);
     }
     for (i = 0; i < 64; i++) {
         alpha = 170;
@@ -172,9 +162,9 @@ found2:;
         }
         index = 0;
 found3:;
-        if (func_80265650_de((s32)((struct CompleteResultsScreen *)D_800E4690)->enabled, index) == 1) {
+        if (func_80265650_de((s32)D_800E4690->owned, index) == 1) {
             widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].a);
-            if (func_80265650_de((s32)((struct CompleteResultsScreen *)D_800E4690)->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
+            if (func_80265650_de((s32)D_800E4690->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
             else widget->alpha = 170;
             key = D_800E4A84[i].b;
             for (search = 0; search < 36; search++) {
@@ -182,9 +172,9 @@ found3:;
             }
             index = 0;
 found4:;
-            if (func_80265650_de((s32)((struct CompleteResultsScreen *)D_800E4690)->enabled, index) == 1) {
+            if (func_80265650_de((s32)D_800E4690->owned, index) == 1) {
                 widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].b);
-                if (func_80265650_de((s32)((struct CompleteResultsScreen *)D_800E4690)->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
+                if (func_80265650_de((s32)D_800E4690->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
                 else widget->alpha = 170;
                 if (D_800E4A84[i].c.id != -1) {
                     widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[i].c.half.low);

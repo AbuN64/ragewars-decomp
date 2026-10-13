@@ -119,7 +119,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   }
   goto block_common;
   block_46:
-  var_a0 = D_80145060;
+  var_a0 = D_80145060.actorList;
 
   if (var_a0 != ((void *) 0))
   {

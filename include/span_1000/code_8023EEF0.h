@@ -19,7 +19,7 @@ struct func_80240C7C_S1 {
 };
 
 /* unbake published declaration: published_13f7aee92c26b86e020b61d0 */
-extern s32 func_80240698_de(void *arg0, s32 arg1, Triple t, s32 arg5, s32 arg6, void *arg7);
+extern s32 func_80240698_de(void *arg0, s32 arg1, Vec3 t, s32 arg5, s32 arg6, void *arg7);
 
 struct Plane;
 /* unbake published declaration: published_233f7ddff91d9914d0acd545 */

@@ -101,7 +101,7 @@ struct Item_func_8026BC60_de;
 typedef struct Item_func_8026BC60_de Item_func_8026BC60_de;
 
 /* unbake published declaration: published_35f2bcca153bdd52240cf840 */
-extern int D_800CC360;
+extern u32 D_800CC360;
 
 /* unbake published declaration: published_3cf653d93a18218ceed18b1a */
 extern void func_8026D88C_de();

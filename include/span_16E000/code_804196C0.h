@@ -160,6 +160,7 @@ extern void func_8041A02C_de(s32 arg0, struct Triple arg1);
 struct Object_func_80419E54_de;
 /* unbake published declaration: published_d9c444528dcef248634dc5e0 */
 typedef struct Object_func_80419E54_de Object_func_80419E54_de;
+extern Object_func_80419E54_de *func_80419E54_de(s32, s32);
 
 struct Source_func_80419F24_de;
 /* unbake published declaration: published_e0b38653856760aa63ef3f2d */

@@ -2,7 +2,7 @@
 #define MENU_UI_PROVIDERS_H
 #include "../types.h"
 #include "common/unused.h"
-#include "shared/func_80286080_de_closed.h"
+#include "shared/func_80425674_de_layout.h"
 typedef struct MenuOption {
     u8 unobserved0[8];
     s32 flags;
@@ -34,7 +34,10 @@ typedef struct MenuMatchGlobals {
     u8 menuInput;
     u8 unobserved125E[0x17F0 - 0x125E];
     s32 status[8];
+    u8 unobserved1810[0x186C - 0x1810];
+    s32 regenPaused; /* menuInput + MultiplayerOptions.session + SessionState.paused */
 } MenuMatchGlobals;
+extern MenuMatchGlobals D_80145088;
 #define D_801462E5 D_80145088.menuInput
 #define D_80146894 D_80145088.status[7]
 extern f32 D_800DE47C_de;

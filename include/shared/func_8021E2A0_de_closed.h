@@ -6,7 +6,7 @@
 
 extern f32 D_800D2988;
 
-extern u8 D_801462E5;
+#include "span_16E000/menu_ui_providers.h"
 
 extern s32 D_801468F4;
 extern s32 func_802A23B4_de(void);

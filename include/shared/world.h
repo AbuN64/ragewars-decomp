@@ -5,7 +5,9 @@
 struct Shared_Pickup;
 typedef struct Shared_World {
     s32 mode;
-    u8 unknown4[0xE4];
+    u8 unknown4[0x78];
+    s32 *routeCount; /* +0x7C: PatrolRouteSet */
+    u8 unknown80[0x68];
     s32 resource;
     u8 unknownEC[0x34];
     s32 counter120;
