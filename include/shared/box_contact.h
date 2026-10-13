@@ -62,5 +62,5 @@ typedef struct BoxContactRay {
 typedef struct ContactEffectStyle {
     s16 kind, flags;
     s8 mode, red, green, blue;
-} ContactEffectStyle;
+} __attribute__((aligned(4))) ContactEffectStyle;
 #endif

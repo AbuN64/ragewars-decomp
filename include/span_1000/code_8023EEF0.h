@@ -9,6 +9,8 @@ typedef struct RenderSortRecord {
 } RenderSortRecord;
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 /* unbake published declaration: published_0c1156dcdba08c13c63530cf */
 extern int func_80240638_de(void *left, void *right);
 
@@ -181,5 +183,8 @@ typedef struct func_8023F42C_S1 func_8023F42C_S1;
 
 /* unbake published declaration: published_fcbf4162d71373d352fb6116 */
 extern void func_80240C8C_de(void *arg0);
+
+s32 func_8024E2C4_de(void *);
+void func_8022B730_de(void *, f32);
 
 #endif

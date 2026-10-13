@@ -34731,6 +34731,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8023F750_de.c"
+kind = "c"
+group = "code_8023EEF0"
+members = ["func_8023F750_de", "rodata/func_8023F750_de/800C87E0"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8023F784_eu_x_padding_40334.c"
 kind = "data"
 group = "code_8023EEF0"
@@ -79865,54 +79876,10 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/rodata.unresolved.800C3618.c"
-kind = "data"
-group = "data_800C3618"
-members = ["rodata/unresolved/800C3618"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800C36E8.c"
-kind = "data"
-group = "data_800C36E8"
-members = ["rodata/unresolved/800C36E8"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/rodata.unresolved.800C37E4.c"
 kind = "data"
 group = "data_800C37E4"
 members = ["rodata/unresolved/800C37E4"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800C3998.c"
-kind = "data"
-group = "data_800C3998"
-members = ["rodata/unresolved/800C3998"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800C39D8.c"
-kind = "data"
-group = "data_800C39D8"
-members = ["rodata/unresolved/800C39D8"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -81037,17 +81004,6 @@ path = "src/rodata.unresolved.800C87CC.c"
 kind = "data"
 group = "data_800C87CC"
 members = ["rodata/unresolved/800C87CC"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800C87D8.c"
-kind = "data"
-group = "data_800C87D8"
-members = ["rodata/unresolved/800C87D8"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -104097,11 +104053,6 @@ scores = {de = 0.8666666666666667, eu = 0.8666666666666667, eu-x = 0.86666666666
 member = "func_8023CFE0_de"
 path = "src/fuzzy/func_8023CFE0_de.c"
 scores = {de = 0.30851063829787234, eu = 0.30851063829787234, eu-x = 0.30851063829787234, us = 0.30851063829787234, us-rev1 = 0.30851063829787234}
-
-[[fuzzy]]
-member = "func_8023F750_de"
-path = "src/fuzzy/func_8023F750_de.c"
-scores = {de = 0.46756756756756757, eu-x = 0.46756756756756757, us = 0.46756756756756757, us-rev1 = 0.46756756756756757}
 
 [[fuzzy]]
 member = "func_80242FE8_de"

@@ -1,3 +1,0 @@
-unsigned int D_auto_rodata_unresolved_800C3998[8] = {
-    0x3463FFFF, 0x02A61021, 0x0023F80C, 0x0023F83C, 0x0023F868, 0x0023F890, 0x0023F8BC, 0x0023F8F4,
-};
