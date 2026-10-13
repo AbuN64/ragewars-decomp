@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_1000_CODE_8026AC38_H
 #include "../types.h"
 #include "gfx.h"
+#include "common/types_1dc8418c21db.h"
 struct ObjectState18;
 /* unbake published declaration: published_05556071161c88ddf76df2f8 */
 typedef struct ObjectState18 ObjectState18;
@@ -184,4 +185,7 @@ extern void func_8026D834_de(void);
 struct Bank_func_8028B274_de;
 struct Object_func_8028B274_de;
 extern void func_8028B274_de(struct Bank_func_8028B274_de *, struct Object_func_8028B274_de *, s32, s32);
+
+extern void func_80285570_de(void *, void *);
+
 #endif

@@ -41,7 +41,6 @@ schema = 1
 "D_0041BA00" = { evidence = "authored", signature = "void D_0041BA00()" }
 "_MakeMotorData" = { evidence = "landed", signature = "static inline void _MakeMotorData(int channel, u16 address, u8 *buffer, OSPifRam *mdata)" }
 "__builtin_next_arg" = { evidence = "authored", signature = "void *__builtin_next_arg()" }
-"__cmpdi2" = { evidence = "landed", signature = "int __cmpdi2(int ahi, unsigned alo, int bhi, unsigned blo)" }
 "__osIdCheckSum" = { evidence = "landed", signature = "static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)" }
 "__osPfsGetNextPage" = { evidence = "landed", signature = "static inline s32 __osPfsGetNextPage(OSPfs_func_80445F80_de* pfs, u8* bank, __OSInode* inode, __OSInodeUnit* page)" }
 "__osSumcalc" = { evidence = "landed", signature = "static inline u16 __osSumcalc(u8 *ptr, int length)" }
@@ -1412,7 +1411,7 @@ schema = 1
 "func_8025C5BC_de" = { evidence = "landed", signature = "void func_8025C5BC_de(void *arg0)" }
 "func_8025C5DC_de" = { evidence = "landed", signature = "void func_8025C5DC_de(void *arg0)" }
 "func_8025C65C_de" = { evidence = "landed", signature = "void func_8025C65C_de(void *arg0)" }
-"func_8025C824_de" = { evidence = "landed", signature = "int func_8025C824_de(int arg0, short arg1)" }
+"func_8025C824_de" = { evidence = "landed", signature = "int func_8025C824_de(Record_func_8025C008_de *pool, short index)" }
 "func_8025C8C0_de" = { evidence = "landed", signature = "void func_8025C8C0_de(void *arg0)" }
 "func_8025C8D0_de" = { evidence = "landed", signature = "void func_8025C8D0_de(void)" }
 "func_8025C8D8_de" = { evidence = "landed", signature = "void func_8025C8D8_de(void *arg0, void *arg1, s32 arg2)" }
@@ -4508,6 +4507,26 @@ schema = 1
 [function.containsFire]
 evidence = "landed"
 signature = "static __inline__ s32 containsFire(s16 **entries,s32 effect)"
+
+[function.slot_id]
+evidence = "landed"
+signature = "static inline short slot_id(Slots *slots, int index)"
+
+[function.read_resource_word]
+evidence = "landed"
+signature = "static inline s32 read_resource_word(s32 *word)"
+
+[function.clear_resource_state]
+evidence = "landed"
+signature = "static inline void clear_resource_state(void)"
+
+[function.write_resource_word]
+evidence = "landed"
+signature = "static inline void write_resource_word(s32 *word, s32 value)"
+
+[function.func_8026AD8C_de]
+evidence = "landed"
+signature = "void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32 sentinel)"
 [global]
 "D_00200500" = { declaration = "extern char D_00200500;", evidence = "authored" }
 "D_002043E0" = { declaration = "extern char D_002043E0;", evidence = "authored" }
