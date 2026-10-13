@@ -5715,7 +5715,8 @@ struct Actor_func_8024A7A0_de {
     s8 team;
     char pad2;
     s8 field3;
-    u32 pad4;
+    s16 modelIndex;
+    u16 pad6;
     Vec3 position0;
     s32 model; /* 0x14 */
     s32 *definition; /* 0x18 */
@@ -5739,7 +5740,9 @@ struct Actor_func_8024A7A0_de {
     s32 resourceFlags; /* 0xD0 */
     u8 padD4[0xE4 - 0xD4];
     u16 type; /* 0xE4 */
-    u8 padE6[0x100 - 0xE6];
+    u8 stateE6;
+    u8 stateE7;
+    u8 padE8[0x100 - 0xE8];
     s32 flags; /* 0x100 */
     f32 animationTime; /* 0x104 */
     s16 animation; /* 0x108 */
@@ -5747,19 +5750,30 @@ struct Actor_func_8024A7A0_de {
     u8 pad10C[2];
     s8 animationPending; /* 0x10E */
     s8 animationChanged; /* 0x10F */
-    u8 pad110[0x13A - 0x110];
+    u8 pad110[0x138 - 0x110];
+    u8 state138;
+    u8 state139;
     u8 shadowAlpha; /* 0x13A */
-    u8 pad13B[5];
+    u8 state13B;
+    u8 pad13C[4];
     Shared_ParticleLighting lighting[2]; /* 0x140 */
     u8 pad170[4];
     s32 active; /* 0x174 */
     u8 pad178[4];
     s32 mask;
-    u8 pad180[0x70];
+    u8 pad180[0x20];
+    s32 collisionEnabled; /* 0x1A0 */
+    u8 pad1A4[0x34];
+    s32 controller; /* 0x1D8 */
+    u8 pad1DC[0x14];
     char *lockOn; /* 0x1F0 */
-    u8 pad1F4[0x23B - 0x1F4];
+    u8 pad1F4[0x23A - 0x1F4];
+    s8 lean; /* 0x23A */
     u8 updateCount; /* 0x23B */
-    u8 pad23C[0x2E4 - 0x23C];
+    u8 pad23C[0x40];
+    void *update; /* 0x27C */
+    u8 pad280[0x60];
+    s32 renderFlags; /* 0x2E0 */
     s32 flags2E4;
 };
 struct Angles;
@@ -7808,7 +7822,7 @@ struct Object_func_80401980_de {
 struct Object_func_80443128_de;
 struct Object_func_80443128_de {
     char pad[0x140];
-    Box view[1];
+    Shared_ParticleLighting view[1];
 };
 struct OptionsOpenItem;
 struct OptionsOpenItem {

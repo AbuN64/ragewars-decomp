@@ -1,3 +1,4 @@
+#include "shared/particle_lighting.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/unused.h"
 #include "span_1000/code_8026AC38.h"
@@ -10,7 +11,7 @@
 /* Draws a menu model with screen-scaled translation, animated and fixed rotations, restoring the render-state flag afterward; the unsigned offset-to-pointer cast preserves matrix-address scheduling. */
 extern MenuModelScreen D_80141008[]; extern Gfx *D_80110634;
 extern s32 D_800CC380, D_800D297C, D_800E28D0;
-extern char D_8011FE88, D_800D0EF8;
+extern char D_8011FE88;
 #if defined(VERSION_DE)
 extern float D_800DDF50_de;
 extern float D_800DDF58;

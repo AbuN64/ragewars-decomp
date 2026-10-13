@@ -1,10 +1,10 @@
+#include "shared/particle_lighting.h"
 #include "span_16E000/code_80442BC8.h"
 #include "types.h"
 #include "common/unused.h"
 
 extern int D_800D15E0;
 extern f32 D_800D15E4[5];
-extern Box D_800D0EF8;
 extern int D_800D297C,D_8014DE50;
 extern void func_8024A1D0_de(Object_func_80443128_de *, void *, void *);
 void func_80443128_de(Object_func_80443128_de *object, void *context, void *lookup) {

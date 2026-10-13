@@ -1,3 +1,4 @@
+#include "shared/particle_lighting.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -304,7 +305,6 @@ generic:
 
 extern s32 D_801468A0[];
 
-extern char D_800D0EF8;
 extern void *func_802392EC_de(s32);
 
 
