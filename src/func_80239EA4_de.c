@@ -17,13 +17,9 @@
 
 
 
-extern func_8020CA10_G1 D_800C3580_de;
 
-extern func_8020CA10_G1 D_800C3584_de;
 
-extern func_8020CA10_G1 D_800C3588_de;
 
-extern func_8020CA10_G1 D_800C358C_de;
 extern void *func_8028B2F8_de(char *, s32);
 
 
