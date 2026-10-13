@@ -584,7 +584,8 @@ extern u8 D_800C4F2C_de[];
 typedef struct CollisionBuildVertex {
     f32 x;
     f32 y;
-    char pad8[8];
+    f32 z;
+    f32 ceiling;
 } CollisionBuildVertex;
 typedef union CollisionBuildTriangle { struct {
     u16 kind;
