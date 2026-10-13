@@ -4754,19 +4754,30 @@ struct func_80247F08_S1 {
 
 struct ControllerProfile;
 /* unbake published declaration: published_bf3203d18d65a17e6eae0305 */
+/* Four-byte controller connection sample copied with the button history. */
+typedef struct ControllerConnectionSample {
+    u16 reserved;
+    u8 connectionStatus;
+    u8 flags;
+} __attribute__((aligned(4))) ControllerConnectionSample;
 struct ControllerProfile {
     u8 padding000[4];
     s8 port; /* 0x04 */
-    u8 padding005[0xAC - 5];
+    u8 padding005[0x18 - 5];
+    s32 inputButtons; /* 0x18 */
+    ControllerConnectionSample inputConnection; /* 0x1C */
+    s32 inputHistory[3]; /* 0x20 */
+    u8 padding02C[0xAC - 0x2C];
     s32 previousButtons; /* 0xAC */
     s32 buttons; /* 0xB0 */
-    u8 padding0B4[2];
-    u8 connectionStatus; /* 0xB6 */
-    u8 padding0B7[9];
+    ControllerConnectionSample connection; /* 0xB4 */
+    s32 history[2]; /* 0xB8 */
     u32 buttonState; /* 0xC0 */
     s8 stickX; /* 0xC4 */
     s8 stickY; /* 0xC5 */
-    u8 padding0C6[0xCC - 0xC6];
+    s8 previousStickX; /* 0xC6 */
+    s8 previousStickY; /* 0xC7 */
+    u8 padding0C8[4];
     s32 mode; /* 0xCC */
     u8 padding0D0[0x224 - 0xD0];
 };

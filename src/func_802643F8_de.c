@@ -4,5 +4,5 @@
 
 
 int func_802643F8_de(struct ControllerProfile *arg0) {
-    return arg0->connectionStatus >> 7;
+    return arg0->connection.connectionStatus >> 7;
 }

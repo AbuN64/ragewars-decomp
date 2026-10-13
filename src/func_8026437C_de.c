@@ -5,5 +5,5 @@
 
 /** Return the high bit of the byte at object offset 0xB6. */
 unsigned int func_8026437C_de(struct ControllerProfile *arg0) {
-    return arg0->connectionStatus >> 7;
+    return arg0->connection.connectionStatus >> 7;
 }
