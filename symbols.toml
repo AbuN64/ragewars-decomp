@@ -5256,6 +5256,9 @@ us-rev1 = 0x800C7390
 
 [symbol.D_800C22A0_us]
 kind = "data"
+eu-x = 0x800C2650
+eu = 0x800C2610
+de = 0x800C2370
 us = 0x800C22A0
 us-rev1 = 0x800C7460
 
@@ -5269,6 +5272,9 @@ us-rev1 = 0x800C7394
 
 [symbol.D_800C22A4_us]
 kind = "data"
+eu-x = 0x800C2654
+eu = 0x800C2614
+de = 0x800C2374
 us = 0x800C22A4
 us-rev1 = 0x800C7464
 
@@ -6384,6 +6390,8 @@ us-rev1 = 0x800C76F8
 
 [symbol.D_800C2608_eu]
 kind = "data"
+eu-x = 0x800C2648
+de = 0x800C2368
 eu = 0x800C2608
 us = 0x800C2298
 us-rev1 = 0x800C7458
@@ -30984,6 +30992,7 @@ us-rev1 = 0x800D1610
 
 [symbol.D_800D1D60]
 kind = "data"
+de = 0x800D30B4
 us = 0x800D1D60
 us-rev1 = 0x800D70E0
 

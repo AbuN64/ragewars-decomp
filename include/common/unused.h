@@ -21472,7 +21472,11 @@ struct Shared_GlobalFlowState {
 struct Shared_GlobalRuntimeState;
 struct Shared_GlobalRuntimeState {
     void * actorList;
-    char pad4[0x1830];
+    char pad4[0x28 - 0x4];
+    s32 messageContext; /* D_80145088, +0x28 */
+    char pad2C[0x1268 - 0x2C];
+    struct GameLocalizationState localization; /* D_801462C8, +0x1268 */
+    char pad17EA[0x1834 - 0x17EA];
     s32 frozen;
     char pad1838[0x8];
     Shared_GlobalFlowState flow;

@@ -30123,7 +30123,7 @@ omit = []
 path = "src/func_8021B468_de.c"
 kind = "c"
 group = "code_802192C0"
-members = ["func_8021B468_de", "rodata/func_8021B468_de/800C7438"]
+members = ["func_8021B468_de", "rodata/func_8021B468_de/800C7438", "rodata/func_8021B468_de/800C2348", "rodata/unresolved/800C25E4"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

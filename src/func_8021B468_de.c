@@ -2,11 +2,12 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "shared/gameplay_transition.h"
+#include "shared/round_state_variants.h"
 /* Player state, projectiles, effects and linked-actor transitions. */
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
-/* Update player state, effects, projectiles, and linked actors according to control input and world transitions. */
+/* Apply player transitions, regional control gates, and localized linked-actor notifications. */
 
 
 
@@ -17,8 +18,8 @@ extern const Shared_HeightBonuses D_800C2608_eu;
 extern const f32 D_800C22A0_us;
 extern const f32 D_800C22A4_us;
 extern s32 D_800C9228_de[2];
-extern u8 *D_800D1D60;
-extern u8 *D_800D31B8;
+
+
 
                                                   /* size = 0x18 */
 
@@ -62,10 +63,11 @@ extern s32 D_8011D8D0;
 
 extern s32 D_8013B364;
 extern struct Shared_GlobalPlayers D_80145040;
-extern s32 D_80145088;
+extern struct Shared_GlobalRuntimeState D_80145060;
+
 extern u8 D_801462E5;
 
-extern struct Shared_GlobalRuntimeState D_80145060;
+
 
 
 
@@ -90,6 +92,8 @@ void func_8021B468_de(struct Shared_ActorView *arg0, void *arg1, s32 arg2, s32 a
     struct Shared_GlobalPlayers *playersGlobal;
     struct Shared_GlobalFlowState *flow;
     struct Shared_GlobalFlowState *laterFlow;
+    struct GameLocalizationState *localization;
+    s32 *messageContext;
     Vector4f motionOutput;
     s32 sp90;
     
@@ -158,7 +162,7 @@ void func_8021B468_de(struct Shared_ActorView *arg0, void *arg1, s32 arg2, s32 a
     func_80283278_de(&D_8011D8D0, (s32)arg0);
     flow = &D_80145060.flow;
     if ((flow->active != 0)
-
+        && gameplayTransitionEnabled(arg0->controls->germanActive)
         && (var_s3 = 0, (((struct Shared_ActorView *)arg0)->controls->mode == 0xE))) {
         flow->count = (s32) (flow->count + 1);
         playersGlobal = &D_80145040;
@@ -349,10 +353,12 @@ case 7:
                     func_8025DF34_de(0x2D0);
                     var_s0 = D_80145060.actorList;
                     if (var_s0 != 0) {
+                        messageContext = &D_80145060.messageContext;
+                        localization = &D_80145060.localization;
                         do {
                             temp_a1_2 = ((struct Shared_ActorView *)var_s0)->message;
                             if (temp_a1_2 != 0) {
-                                func_80237E80_de(&D_80145088, temp_a1_2, D_800D1D60);
+                                func_80237E80_de(gameplayMessageContext(messageContext), temp_a1_2, gameplayResetMessage(localization->language));
                             }
                             var_s0 = ((struct Shared_ActorView *)var_s0)->next;
                         } while (var_s0 != 0);
@@ -363,13 +369,15 @@ case 7:
             }
             var_s0_2 = D_80145060.actorList;
             if (var_s0_2 != 0) {
+                messageContext = &D_80145060.messageContext;
+                localization = &D_80145060.localization;
                 do {
                     if ((var_s0_2 != arg0) && (((struct Shared_ActorView *)var_s0_2)->parent == arg0)) {
                         temp_a1_3 = ((struct Shared_ActorView *)var_s0_2)->message;
                         ((struct Shared_ActorView *)var_s0_2)->pending = 0;
                         ((struct Shared_ActorView *)var_s0_2)->parent = 0;
                         if (temp_a1_3 != 0) {
-                            func_80239770_de(&D_80145088, temp_a1_3, D_800D31B8, 1.0f);
+                            func_80239770_de(gameplayMessageContext(messageContext), temp_a1_3, gameplayReleaseMessage(localization->language), 1.0f);
                         }
                     }
                     var_s0_2 = ((struct Shared_ActorView *)var_s0_2)->next;
