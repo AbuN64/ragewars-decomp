@@ -1,5 +1,6 @@
 #include "span_1000/code_8024E914.h"
 #include "span_1000/code_8024E914.h"
+#include "span_1000/code_8024E914.h"
 #include "types.h"
 #include "common/unused.h"
 
@@ -38,12 +39,12 @@ void func_80250624_de(void *object, s32 all) {
     s32 count;
     s32 i;
 
-    model = func_8025193C_de(0, ((func_802505CC_S1 *)(object))->unk1C, ((func_802505CC_S1 *)(object))->unk1C, 0x18, 4, 0, 0,
+    model = func_8025193C_de(0, ((PlacedProp *)object)->owner, ((PlacedProp *)object)->owner, 0x18, 4, 0, 0,
                           &D_800C3E5C_de, 0);
     if (model == 0) {
         return;
     }
-    name = func_8028FE3C_de(*model, ((func_802505CC_S1 *)(object))->unk1C, 3, &size);
+    name = func_8028FE3C_de(*model, ((PlacedProp *)object)->owner, 3, &size);
 #if defined(VERSION_DE)
     table = func_8025193C_de(0, name, name, size, 0, 0, 0, D_800C3E70, 0);
 #elif defined(VERSION_EU)
@@ -62,7 +63,7 @@ void func_80250624_de(void *object, s32 all) {
         for (i = 0; i < count; i++) {
             attachment = &entries[i];
             if (all != 0 || attachment->type == 8) {
-                func_80272898_de(&((func_802505CC_S1 *)(object))->unk68, &attachment->offset, &position);
+                func_80272898_de(((PlacedProp *)object)->matrix, &attachment->offset, &position);
                 func_80265E10_de(object, object, attachment->type, -1, position, attachment->params);
             }
         }
