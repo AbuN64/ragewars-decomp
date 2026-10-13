@@ -39,9 +39,9 @@ s32 func_8020D9C0_de(Obj_func_8020D9C0_de *obj) {
     sum.y *= scale;
     sum.z *= scale;
     info = func_8020CFE0_de(global, obj->infoIndex);
-    sum.x *= ((func_8020D9C0_S1 *)(info))->unk14;
-    sum.y *= ((func_8020D9C0_S1 *)(info))->unk14;
-    sum.z *= ((func_8020D9C0_S1 *)(info))->unk14;
+    sum.x *= info->scale;
+    sum.y *= info->scale;
+    sum.z *= info->scale;
     base = func_8020C994_de(global, obj->infoIndex);
     obj->result.x = base->x + sum.x;
     obj->result.y = base->y + sum.y;

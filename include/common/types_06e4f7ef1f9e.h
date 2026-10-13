@@ -1724,7 +1724,8 @@ typedef struct Info Info;
 struct Info;
 /* unbake published declaration: published_b0589d37e25377a2dbc09d06 */
 struct Info {
-    unsigned char raw[0x18];
+    unsigned char raw[0x14];
+    f32 scale; /* 0x14: waypoint response scale */
 };
 
 struct Shared_Actor;
