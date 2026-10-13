@@ -12,12 +12,13 @@ extern void func_802B2480_de(Node_func_80239AF4_de *arg0, void *arg1);
 
 
 void func_802B01E0_de(void *arg0) {
+    ALEventQueue *queue = arg0;
     Node_func_80239AF4_de *cur;
     Node_func_80239AF4_de *next;
     s32 saved;
 
     saved = func_802BD170_de(1);
-    cur = ((func_802B52B0_S1 *)(arg0))->unk8;
+    cur = queue->allocList.next;
     if (cur != 0) {
         do {
             next = cur->next;

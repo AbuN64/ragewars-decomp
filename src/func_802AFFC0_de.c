@@ -8,15 +8,16 @@ extern void func_802B2480_de(void *, void * *);
 
 
 void func_802AFFC0_de(void *arg0, void *arg1, s32 arg2) {
+    ALEventQueue *queue = arg0;
     s32 i;
     char *p;
 
     i = 0;
-    ((func_80255D10_S1 *)(arg0))->unk10 = 0;
-    ((func_80255D10_S1 *)(arg0))->unk8 = 0;
-    ((func_80255D10_S1 *)(arg0))->unkC = 0;
-    ((func_80255D10_S1 *)(arg0))->unk0 = 0;
-    ((func_80255D10_S1 *)(arg0))->unk4 = 0;
+    queue->eventCount = 0;
+    queue->allocList.next = 0;
+    queue->allocList.prev = 0;
+    queue->freeList.next = 0;
+    queue->freeList.prev = 0;
     if (arg2 > 0) {
         p = (char *)arg1;
         do {
