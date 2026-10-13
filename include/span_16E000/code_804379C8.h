@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804379C8_H
 #define UNBAKE_SPAN_16E000_CODE_804379C8_H
 #include "../types.h"
+#include "resident_event_handler.h"
 /* unbake published declaration: published_3bddf339a1debac892b63926 */
 extern void func_80438A88_de();
 
@@ -65,5 +66,7 @@ struct State_func_80439128_de {
     char pad4[0x14 - 4];
     s32 value;
 };
+
+extern char *func_80424DE8_de(s32);
 
 #endif

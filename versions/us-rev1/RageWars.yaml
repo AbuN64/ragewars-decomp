@@ -7033,7 +7033,7 @@ segments:
       - [0x1A5B10, c, "func_80437930_de"]
       - [0x1A5B98, c, "func_80437B98_us_rev1"]
       - [0x1A5C28, asm, "func_80437C28_us_rev1"]
-      - [0x1A647C, asm, "func_8043829C_de"]
+      - [0x1A647C, c, "func_8043829C_de"]
       - [0x1A67F4, c, "func_80438614_de"]
       - [0x1A6A08, asm, "func_80438828_de"]
       - [0x1A6BA4, c, "func_804389C4_de"]

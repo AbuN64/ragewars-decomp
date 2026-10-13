@@ -7338,7 +7338,7 @@ struct ModelPreviewItem {
 };
 union ModelPreviewScreen;
 union ModelPreviewScreen {
-    struct { char pad0[0x20]; void *window; char pad24[0x78]; func_80255D10_S1 rows[10]; char padAfter[0x188 - 0x9C - 10 * sizeof(func_80255D10_S1)]; s32 selected; };
+    struct { char pad0[0x20]; void *window; MenuWidget *item24; char killsText[10], scoreText[10], ratioText[10], otherText[10]; char nameText[0x40]; s32 started, player, badge; func_80255D10_S1 rows[10]; char padAfter[0x188 - 0x9C - 10 * sizeof(func_80255D10_S1)]; s32 selected; };
     struct { char padC8[0xC8]; char modelWorkspace; };
 };
 struct ModelPreviewScreen330;

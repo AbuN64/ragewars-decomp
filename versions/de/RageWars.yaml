@@ -5199,7 +5199,7 @@ segments:
       - [0x19D930, c, "func_80437930_de"]
       - [0x19D9B8, c, "func_804379B8_de"]
       - [0x19DA48, asm, "func_80437A48_de"]
-      - [0x19E29C, asm, "func_8043829C_de"]
+      - [0x19E29C, c, "func_8043829C_de"]
       - [0x19E614, c, "func_80438614_de"]
       - [0x19E828, asm, "func_80438828_de"]
       - [0x19E9C4, c, "func_804389C4_de"]

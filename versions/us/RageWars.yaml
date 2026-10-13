@@ -5123,7 +5123,7 @@ segments:
       - [0x19B3A4, c, "func_804371C4_de"]
       - [0x19B454, c, "func_80437274_de"]
       - [0x19B4E4, .data, "rodata/unresolved/804374E4"]
-      - [0x19C47C, asm, "func_8043829C_de"]
+      - [0x19C47C, c, "func_8043829C_de"]
       - [0x19C7F4, c, "func_80438614_de"]
       - [0x19CA08, asm, "func_80438828_de"]
       - [0x19CBA4, c, "func_804389C4_de"]

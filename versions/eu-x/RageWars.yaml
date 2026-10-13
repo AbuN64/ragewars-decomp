@@ -5177,7 +5177,7 @@ segments:
       - [0x128918, c, "func_80438918_eu_x"]
       - [0x1289A8, data, "func_804389A8_eu_x_padding_1289A8"]
       - [0x1289B0, asm, "func_804389B0_eu_x"]
-      - [0x1292A0, asm, "func_8043829C_de"]
+      - [0x1292A0, c, "func_8043829C_de"]
       - [0x129618, c, "func_80438614_de"]
       - [0x12982C, asm, "func_80438828_de"]
       - [0x1299C8, c, "func_804389C4_de"]

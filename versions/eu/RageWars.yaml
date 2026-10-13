@@ -5120,7 +5120,7 @@ segments:
       - [0x1AE760, c, "func_80437930_de"]
       - [0x1AE7E8, asm, "func_804387E8_eu"]
       - [0x1AE878, asm, "func_80438878_eu"]
-      - [0x1AF170, asm, "func_8043829C_de"]
+      - [0x1AF170, c, "func_8043829C_de"]
       - [0x1AF4E8, c, "func_80438614_de"]
       - [0x1AF6FC, asm, "func_80438828_de"]
       - [0x1AF898, c, "func_804389C4_de"]
