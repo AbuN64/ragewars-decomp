@@ -5,6 +5,15 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "shared/func_8044DA54_de_closed.h"
+#include "shared/func_804235A8_eu_layout.h"
+#include "shared/world.h"
+#include "shared/track_tables.h"
+#include "shared/texture_request.h"
+#include "common/unused.h"
+#include "shared/func_802453D4_de_closed.h"
+#include "shared/func_8027AD4C_de_closed.h"
+#include "span_1000/code_80245980.h"
+#include "span_C76B0/data.h"
 extern struct Shape_typemap_165 *func_80254480_de(s32,void *,s32);
 extern void func_804002D8_de(s32,Vec3 *,f32 *,Spline *);
 extern void func_80253D10_de(s32,struct Shape_typemap_165 **,struct Shape_typemap_165 *);
@@ -81,4 +90,131 @@ void func_8040067C_de(s32 unused, struct Shape_typemap_165 **handle) {
         func_804002D8_de(nr, r.points, s.weights, dr);
     }
     func_80253D10_de(0, handle, output);
+}
+
+extern char D_800E0B2C;
+extern s32 func_8028FE3C_de(void *,s32,s32,s32 *);
+extern void func_80253754_de(void *,Node80253610 *);
+static inline void minTime(f32 *dest,f32 *src) {
+    if(*dest>*src)*dest=*src;
+}
+static inline void maxTime(f32 *dest,f32 *src) {
+    if(*dest<*src)*dest=*src;
+}
+static inline void setTimes(f32 *a,f32 *b,f32 *c,f32 *t) {
+    *a=*t;
+    *b=*t;
+    *c=*t;
+}
+s32 func_804009F4_de(s32 index) {
+    s32 size,size2,i,count,previous,pending,loaded;
+    SharedTrackObject *captured;
+    Shared_World *resources;
+    void **owner,**table;
+    Shared_TrackCues *cues;
+    Key_func_80401564_de *cue;
+    Shared_TrackClip *clip;
+    Shared_MenuContext *context,*scanContext;
+    f32 total;
+    captured=D_80145060.actorList;
+    pending=D_800E2830->field58;
+    resources=&D_8011FE88;
+    if(resources->trackLookup==0 || resources->trackBundle==0) {
+        failed:
+        return 0;
+    }
+    else {
+        if(D_800E2830->active!=0)func_80245B28_de();
+        loaded=func_8028FE3C_de(resources->trackBundle,resources->trackLookup,index+1,&size);
+        owner=func_8025193C_de(0,loaded,loaded,size,0x33,0,D_0040067C,D_800DCB10,1);
+        if(owner==0)goto failed;
+        D_800E2830->owner=owner;
+        D_800E2830->resource=*owner;
+        cues=func_80403ADC_de();
+        cue=cues->cues;
+        count=cues->count;
+        total=0.0f;
+        for(i=0;i<func_80403A64_de();i++) {
+            clip=func_80403A90_de(i);
+             {
+                s32 n=clip->count;
+                Key_func_80401214_de *base=clip->keys;
+                if(n>0) {
+                    total+=base[n-1].time;
+                }
+            }
+        }
+        D_800E2830->start=0.0f;
+        D_800E2830->end=total;
+        D_800E2830->clipStart=0.0f;
+        D_800E2830->clipEnd=total;
+        i=0;
+        if(count>0) {
+            scanContext=D_800E2830;
+            do {
+                Key_func_80401564_de *c=&cue[i];
+                minTime(&scanContext->clipStart,&c->time);
+                maxTime(&scanContext->clipEnd,&c->time);
+                i++;
+            }
+            while(i<count);
+        }
+        setTimes(&D_800E2830->time,&D_800E2830->time20,&D_800E2830->time24,&D_800E2830->clipStart);
+        previous=D_800E2830->spec.id8;
+        loaded=func_8028FE3C_de(D_8011FEFC,D_8011BDFC,0,&size2);
+        if(loaded==0)table=0;
+        else table=func_8025193C_de(0,loaded,loaded,size2,0x33,0,0,&D_800E0B2C,1);
+         {
+            Shared_TrackTable *entries=*table;
+            Entry_func_804030E0_de *base=entries->entries;
+            D_800E2830->pending=pending;
+            D_800E2830->active=1;
+            D_800E2830->spec=base[index];
+        }
+        D_800E2830->field50=0;
+        D_800E2830->unknown40=0;
+        D_800E2830->initialized44=0;
+        D_800E2830->closed=0;
+        D_800E2830->requestE0=D_800E2830->spec.id8;
+        if((D_800E2830->spec.flags&1) && D_800E2830->target!=0) {
+            D_800E2830->position=D_800E2830->target->prefix.position;
+            D_800E2830->yaw=D_800E2830->target->yaw+D_800DCB18_de;
+        }
+        if(D_800E2830->spec.flags&2) {
+            if(captured!=0) {
+                D_800E2830->position=captured->prefix.position;
+                D_800E2830->yaw=captured->yaw;
+            }
+            else {
+                D_800E2830->position.x=0.0f;
+                D_800E2830->position.y=0.0f;
+                D_800E2830->position.z=0.0f;
+                D_800E2830->yaw=0.0f;
+            }
+        }
+        func_80253754_de(0,(void *)table);
+        if(pending) {
+            void (*first)();
+            Shared_MenuVoidCallback second;
+            context=D_800E2830;
+            first=context->callbackE4;
+            second=context->callbackE8;
+            context->pending=1;
+            context->field4C=0;
+            context->callbackE4=0;
+            context->callbackE8=0;
+            context->mode=context->spec.flags&8;
+            context->onClose=first;
+            context->callback10=second;
+            if(context->requestE0-10U<0x47U)context->mode=0;
+            if(D_800E2830->requestE0-400U<4U)D_800E2830->mode=0;
+        }
+        else {
+            if(D_800E2830->spec.id8<3)D_800E2830->requestE0=previous;
+            D_800E2830->pending=0;
+            D_800E2830->time=D_800E2830->start;
+        }
+        if(D_800E2830->spec.id8==0x9F)D_800E2830->mode=0;
+        return 1;
+    }
 }
