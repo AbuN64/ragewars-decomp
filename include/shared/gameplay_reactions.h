@@ -1,6 +1,7 @@
 #ifndef SHARED_REACTION_STATISTICS_H
 #define SHARED_REACTION_STATISTICS_H
 #include "types.h"
+#include "common/types_1dc8418c21db.h"
 
 /* Actor, interaction and score views used to select reactions and record statistics. */
 
@@ -18,36 +19,81 @@ typedef struct Shared_ReactionStatistics Shared_ReactionStatistics;
 typedef struct Shared_ReactionObjectStatistics Shared_ReactionObjectStatistics;
 typedef struct Shared_ReactionPlayerRecord Shared_ReactionPlayerRecord;
 
+/* Damage packet passed by value to the area-hit callbacks. */
+typedef struct Shared_DamageParameters {
+    u16 radius;
+    u16 damage;
+    union {
+        s32 control;
+        struct { s8 impulse; u8 reserved[3]; };
+    };
+} Shared_DamageParameters;
+
+typedef struct Shared_DamageEvent {
+    Shared_ReactionActor *target;
+    s32 damage;
+    f32 radius;
+    s32 flags;
+    Shield *shield;
+} Shared_DamageEvent;
+
 struct Shared_ReactionActor {
-    char pad0[0x6C];
+    u8 category;
+    char pad1[3];
+    u16 type;
+    char pad6[2];
+    Vec3 position;
+    char pad14[0x58];
     f32 unk6C;
-    char pad6C[0x168];
+    f32 height;
+    char pad74[0x70];
+    u16 team;
+    char padE6[0x1A];
+    s32 flags;
+    char pad104[0x28];
+    Shared_ReactionActor *owner;
+    char pad130[0x40];
+    s32 unk170;
+    s32 unk174;
+    char pad178[0x60];
     Shared_ReactionPlayer *unk1D8;
 };
 
 struct Shared_ReactionPlayer {
     u8 unk0;
     char pad0[0x7];
-    f32 unk8;
-    char pad8[0x4];
-    f32 unk10;
+    union {
+        Vec3 position;
+        struct { f32 unk8, unkC, unk10; };
+    };
     u16* unk14;
     char pad14[0xCC];
     u16 unkE4;
     char padE4[0x1A];
     s32 unk100;
-    char pad100[0xD4];
+    char pad104[0x6C];
+    s32 unk170;
+    s32 unk174;
+    char pad178[0x60];
     Shared_ReactionPlayer *unk1D8;
-    char pad1D8[0x3F8];
+    char pad1DC[0x10C];
+    Shared_ReactionActor actor2E8;
+    char pad4C4[0x110];
     s32 unk5D4;
     Shared_ReactionStatistics * unk5D8;
     char pad5D8[0x8];
     s32 unk5E4;
-    char pad5E4[0x68];
+    char pad5E8[0x46];
+    s16 unk62E;
+    char pad630[0x20];
     s16 unk650;
-    char pad650[0xB8E];
+    char pad652[0xB86];
+    f32 unk11D8;
+    char pad11DC[4];
     f32 unk11E0;
-    char pad11E0[0x48];
+    char pad11E4[0x34];
+    s32 unk1218;
+    char pad121C[0x10];
     s32 unk122C;
     char pad122C[0x94];
     Shared_ReactionPlayer *unk12C4;
