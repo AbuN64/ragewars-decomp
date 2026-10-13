@@ -16,7 +16,7 @@ extern char D_801379C0;
 extern void func_80285DB0_de(void *, void *, s32);
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 extern void func_802A5D38_de(void *, s32);
-extern void func_80267198_de(void *, void *, s32, Vec3, struct Shape_func_802764D4_de_2);
+extern void func_80267198_de(void *, void *, s32, Vec3, ResourceManagerState);
 
 
 
@@ -24,10 +24,10 @@ extern void func_80267198_de(void *, void *, s32, Vec3, struct Shape_func_802764
 
 
 void func_80204C68_de(void *arg0, void *arg1) {
-    struct Shape_func_802764D4_de_2 local;
+    ResourceManagerState local;
     Shared_World *flag;
 
-    local.field_0 = 0;
+    local.active = 0;
     flag = &D_8011FE88;
     func_80285DB0_de(flag, arg0, 1);
     func_80278D78_de(arg0, 0x4000, arg0);

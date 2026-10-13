@@ -36,7 +36,7 @@ typedef struct func_80267D80_S2 func_80267D80_S2;
 struct ResourceManagerState;
 struct Triple;
 /* unbake published declaration: published_69fa1ffa23d22c4a1dd509cd */
-typedef void ( *func_802671FC_de_Callback)(void *, void *, signed int, struct Triple, struct ResourceManagerState);
+typedef void ( *func_802671FC_de_Callback)(void *, void *, signed int, Vec3, struct ResourceManagerState);
 
 struct CallbackEntry_func_802671FC_de;
 /* unbake published declaration: published_16acf9f7a3b18d6b4f738bf7 */
@@ -1522,7 +1522,8 @@ struct Actor_func_80267958_de {
 struct ResourceManagerState;
 struct Triple;
 /* unbake published declaration: published_3ae873962f1ea6ba71b3228b */
-typedef void ( *func_80267198_de_Callback)(void *, void *, signed int, struct Triple, struct ResourceManagerState);
+typedef void ( *func_80267198_de_Callback)(void *, void *, signed int, Vec3, struct ResourceManagerState);
+extern void func_80267198_de(void *actor, void *source, s32 event, Vec3 position, struct ResourceManagerState state);
 
 struct CallbackEntry_func_80267198_de;
 /* unbake published declaration: published_30c751c8e108d6479ffbe788 */
@@ -1683,6 +1684,6 @@ struct Target;
 typedef struct Target Target;
 
 /* unbake published declaration: published_ff6244b5cd226bc5580f80d7 */
-extern void func_802671FC_de(void *arg0, void *arg1, s32 arg2, Triple arg3, ResourceManagerState arg6);
+extern void func_802671FC_de(void *arg0, void *arg1, s32 arg2, Vec3 arg3, ResourceManagerState arg6);
 
 #endif

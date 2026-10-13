@@ -19,7 +19,7 @@
 
 
 
-extern void func_80267198_de(void *, void *, s32, Triple, struct Shape_typemap_13);
+extern void func_80267198_de(void *, void *, s32, Vec3, ResourceManagerState);
 extern void func_80285DB0_de(void *, void *, s32);
 
 
@@ -28,7 +28,7 @@ extern void func_80285DB0_de(void *, void *, s32);
 
 
 void func_80204A68_de(void *arg0, void *arg1) {
-    struct Shape_typemap_13 local;
+    ResourceManagerState local;
     s8 factor;
     f32 scale;
     s32 destroy;
@@ -54,7 +54,7 @@ void func_80204A68_de(void *arg0, void *arg1) {
         }
     }
     if (destroy) {
-        local.field_0 = 0;
+        local.active = 0;
         func_80267198_de(arg0, arg0, 7, ((BreakableHitContext *)(arg0))->unk_8, local);
         func_80285DB0_de(&D_8011FE88, arg0, 0);
     }

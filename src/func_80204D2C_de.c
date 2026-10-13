@@ -15,16 +15,16 @@ extern void func_80285DB0_de(void *arg0, void *arg1, s32 arg2);
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 extern void func_802A5D38_de(void *arg0, void *arg1);
 extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
-                          Triple arg3, struct Shape_func_802764D4_de_2 arg4);
+                          Vec3 arg3, ResourceManagerState arg4);
 
 
 
 
 void func_80204D2C_de(BreakableHitContext *arg0) {
-    struct Shape_func_802764D4_de_2 local;
+    ResourceManagerState local;
     Shared_World *flag;
 
-    local.field_0 = 0;
+    local.active = 0;
     flag = &D_8011FE88;
     func_80285DB0_de(flag, arg0, 0);
     func_80278D78_de(arg0, 0x8000, arg0);

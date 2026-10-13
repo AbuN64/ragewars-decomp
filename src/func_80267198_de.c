@@ -13,7 +13,7 @@
 
 extern CallbackEntry_func_80267198_de D_800CC130[];
 
-void func_80267198_de(void *arg0, void *arg1, s32 arg2, Triple arg3, ResourceManagerState arg6) {
+void func_80267198_de(void *arg0, void *arg1, s32 arg2, Vec3 arg3, ResourceManagerState arg6) {
     if (D_800CC130[arg2].callback != 0) {
         D_800CC130[arg2].callback(arg0, arg1, arg2, arg3, arg6);
     }

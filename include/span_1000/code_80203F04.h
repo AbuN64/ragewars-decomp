@@ -27,8 +27,8 @@ struct BreakableHitContext;
 /* unbake published declaration: published_1819e71d559cf558339e7144 */
 struct BreakableHitContext {
     char pad0[0x8];
-    Triple unk_8;
-    char pad8[0x18 - 0x8 - sizeof(Triple)];
+    Vec3 unk_8;
+    char pad8[0x18 - 0x8 - sizeof(Vec3)];
     char * unk_18;
     char pad18[0xE6 - 0x18 - sizeof(char*)];
     s8 unk_E6;
