@@ -4,5 +4,6 @@
 
 s32 func_8022A5A0_de(void *arg0, unsigned int arg1)
 {
-  return (arg1 - (((func_80203E78_S1 *)(arg0))->unk4)) / 5864;
+    func_80203E78_S1 *arg0_record = arg0;
+  return (arg1 - (arg0_record->unk4)) / 5864;
 }

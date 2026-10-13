@@ -8,5 +8,7 @@
 
 /** Copy three words from offsets 0x48..0x50 to offsets 0x18C..0x194. */
 void func_8023E8B4_de(void *arg0, void *arg1) {
-    ((func_8023E8A4_S1 *)(arg0))->unk18C = ((func_8023E8A4_S2 *)(arg1))->unk48;
+    func_8023E8A4_S2 *arg1_record = arg1;
+    func_8023E8A4_S1 *arg0_record = arg0;
+    arg0_record->unk18C = arg1_record->unk48;
 }
