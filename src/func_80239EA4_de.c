@@ -20,7 +20,7 @@
 
 
 
-extern void *func_8028B2F8_de(char *, s32);
+extern void *func_8028B2F8_de(void *, u16 *);
 
 
 
@@ -40,7 +40,7 @@ void func_80239EA4_de(void *arg0, Vec3 *out) {
 
     targetY = 0.0f;
     targetX = targetY;
-    entry = func_8028B2F8_de(&D_8011FE88, (s32)o->unk58);
+    entry = func_8028B2F8_de(&D_8011FE88, (u16 *)o->unk58);
     if (entry == 0) {
         out->x = targetY;
         out->y = targetY;
