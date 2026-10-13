@@ -30,8 +30,9 @@ s32 func_802462E8_de(Instance8020CD74 *arg0, Vec3 position, char **out) {
     char *set;
     s32 grounded;
     s32 collisions;
+    struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)arg0;
 
-    if (*(u8 *)arg0 == 1 && (((func_80203C40_S1 *)(arg0))->unk100 & 0x300000) != 0) {
+    if (actor->type == 1 && (actor->flags100 & 0x300000) != 0) {
         set = &D_801040D0;
     } else {
         grounded = func_8024DEE0_de(arg0);
