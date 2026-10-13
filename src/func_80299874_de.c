@@ -6,17 +6,17 @@
 
 
 
-extern s32 D_8014D080;
+extern Ui_func_80297FA0_de *D_8014D080;
 void func_80299874_de(s32 arg0, s32 arg1) {
     s32 var_a2;
-    void *var_v1;
+    Rec_func_8024C92C_de *var_v1;
     var_a2 = 0;
-    var_v1 = D_8014D080 + 0x1C;
+    var_v1 = D_8014D080->slots;
     do {
-        if ((((struct func_8029A838_S1 *) ((s8 *) var_v1))->unk0) == arg0) {
-            (((struct func_8029A838_S1 *) ((s8 *) var_v1))->unk10) = arg1;
+        if (var_v1->x == arg0) {
+            var_v1->pad1 = arg1;
         }
         var_a2 += 1;
-        var_v1 += 0x14;
+        var_v1++;
     } while (var_a2 < 0x40);
 }
