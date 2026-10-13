@@ -1802,7 +1802,7 @@ segments:
       - [0x93A34, c, "func_80292F48_de"]
       - [0x93AAC, c, "func_80292FC0_de"]
       - [0x93B40, c, "func_80293054_de"]
-      - [0x93C08, asm, "func_8029311C_de"]
+      - [0x93C08, c, "func_8029311C_de"]
       - [0x93D54, c, "func_80293268_de"]
       - [0x93E80, asm, "func_80293394_de"]
       - [0x93F2C, c, "func_80293440_de"]

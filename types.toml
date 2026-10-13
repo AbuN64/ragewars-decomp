@@ -1222,7 +1222,7 @@ schema = 1
 "func_80253670_de" = { evidence = "landed", signature = "void func_80253670_de(void *arg0, Node80253610 *arg1)" }
 "func_80253754_de" = { evidence = "landed", signature = "void func_80253754_de(void *arg0, Node80253610 *arg1)" }
 "func_80253838_de" = { evidence = "landed", signature = "void func_80253838_de(void *arg0, void *arg1)" }
-"func_80253908_de" = { evidence = "authored", signature = "void func_80253908_de(s32 unusedHeap)" }
+"func_80253908_de" = { evidence = "landed", signature = "void func_80253908_de(s32 unusedHeap)" }
 "func_802539EC_de" = { evidence = "landed", signature = "void func_802539EC_de(s32 unused, s32 arg1)" }
 "func_80253AD4_de" = { evidence = "landed", signature = "s32 func_80253AD4_de(void)" }
 "func_80253BBC_de" = { evidence = "landed", signature = "void func_80253BBC_de(s32 arg0, func_80205628_S3 *arg1)" }
@@ -2157,6 +2157,7 @@ schema = 1
 "func_80292F48_de" = { evidence = "landed", signature = "void func_80292F48_de(void)" }
 "func_80292FC0_de" = { evidence = "landed", signature = "void func_80292FC0_de(s32 *arg0, s32 arg1)" }
 "func_80293054_de" = { evidence = "landed", signature = "void func_80293054_de(Display *display)" }
+"func_8029311C_de" = { evidence = "landed", signature = "void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom)" }
 "func_80293268_de" = { evidence = "landed", signature = "void func_80293268_de(void)" }
 "func_80293284_de" = { evidence = "landed", signature = "void func_80293284_de(void *arg0, s32 arg1)" }
 "func_80293334_de" = { evidence = "landed", signature = "void func_80293334_de(void *arg0, void *arg1, void *arg2)" }
@@ -4078,6 +4079,7 @@ schema = 1
 "func_8043ED78_de" = { evidence = "landed", signature = "s32 func_8043ED78_de(void *first, void *second, void *third)" }
 "func_8043EDDC_de" = { evidence = "landed", signature = "s32 func_8043EDDC_de(void)" }
 "func_8043EE24_de" = { evidence = "landed", signature = "s32 func_8043EE24_de(void)" }
+"func_8043EE5C_de" = { evidence = "landed", signature = "void func_8043EE5C_de(struct Item_func_8043F048_de *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context)" }
 "func_8043F040_de" = { evidence = "landed", signature = "void func_8043F040_de(void)" }
 "func_8043F048_de" = { evidence = "landed", signature = "s32 func_8043F048_de(struct Item_func_8043F048_de *item, struct Holder_func_8043F048_de *holder)" }
 "func_8043F0C8_de" = { evidence = "landed", signature = "s32 func_8043F0C8_de(void *first, void *second, void *third)" }
@@ -4526,11 +4528,11 @@ schema = 1
 "D_0044D934" = { declaration = "extern s32 D_0044D934;", evidence = "authored" }
 "D_0044E48C" = { declaration = "extern char D_0044E48C[];", evidence = "authored" }
 "D_0044E4D4" = { declaration = "extern char D_0044E4D4[];", evidence = "authored" }
-"D_0044E684" = { declaration = "extern char D_0044E684[], D_0044E6A8[], D_0044E810[], D_0044E834[], D_0044E858[], D_0044EF18[];", evidence = "authored" }
-"D_0044E6A8" = { declaration = "extern char D_0044E684[], D_0044E6A8[], D_0044E810[], D_0044E834[], D_0044E858[], D_0044EF18[];", evidence = "authored" }
-"D_0044E810" = { declaration = "extern char D_0044E684[], D_0044E6A8[], D_0044E810[], D_0044E834[], D_0044E858[], D_0044EF18[];", evidence = "authored" }
-"D_0044E834" = { declaration = "extern char D_0044E684[], D_0044E6A8[], D_0044E810[], D_0044E834[], D_0044E858[], D_0044EF18[];", evidence = "authored" }
-"D_0044E858" = { declaration = "extern char D_0044E684[], D_0044E6A8[], D_0044E810[], D_0044E834[], D_0044E858[], D_0044EF18[];", evidence = "authored" }
+"D_0044E684" = { declaration = "extern struct List_func_80442574_de D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;", evidence = "authored" }
+"D_0044E6A8" = { declaration = "extern struct List_func_80442574_de D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;", evidence = "authored" }
+"D_0044E810" = { declaration = "extern struct List_func_80442574_de D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;", evidence = "authored" }
+"D_0044E834" = { declaration = "extern struct List_func_80442574_de D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;", evidence = "authored" }
+"D_0044E858" = { declaration = "extern struct List_func_80442574_de D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;", evidence = "authored" }
 "D_0044E99C" = { declaration = "extern char D_0044E99C[], D_0044EB28[], D_0044EBB8[];", evidence = "authored" }
 "D_0044E9C0" = { declaration = "extern char D_0044E9C0[];", evidence = "authored" }
 "D_0044EA2C" = { declaration = "extern char D_0044EA2C[];", evidence = "authored" }
@@ -4541,22 +4543,22 @@ schema = 1
 "D_0044EBDC" = { declaration = "extern char D_0044EBDC[];", evidence = "authored" }
 "D_0044ED20" = { declaration = "extern char D_0044ED20[];", evidence = "authored" }
 "D_0044EE88" = { declaration = "extern char D_0044EE88;", evidence = "authored" }
-"D_0044EF18" = { declaration = "extern char D_0044E684[], D_0044E6A8[], D_0044E810[], D_0044E834[], D_0044E858[], D_0044EF18[];", evidence = "authored" }
+"D_0044EF18" = { declaration = "extern struct List_func_80442574_de D_0044E684, D_0044E6A8, D_0044E810, D_0044E834, D_0044E858, D_0044EF18;", evidence = "authored" }
 "D_0044EF44" = { declaration = "extern Entry_func_8043CF44_de D_0044EF44[];", evidence = "authored" }
 "D_0044F4A4" = { declaration = "extern char D_0044F4A4[];", evidence = "authored" }
 "D_0044F6C4" = { declaration = "extern s32 D_0044F6C4;", evidence = "authored" }
 "D_0044F70C" = { declaration = "extern s32 D_0044F70C;", evidence = "authored" }
 "D_0044F798" = { declaration = "extern char D_0044F798[];", evidence = "authored" }
 "D_0044F82C_de" = { declaration = "extern char D_0044F82C_de;", evidence = "authored" }
-"D_0044F954" = { declaration = "extern char D_0044F954[], D_0044F978[], D_0044FAE0_eu[], D_0044FB04[], D_0044FB28[], D_004501E8[];", evidence = "authored" }
-"D_0044F978" = { declaration = "extern char D_0044F954[], D_0044F978[], D_0044FAE0_eu[], D_0044FB04[], D_0044FB28[], D_004501E8[];", evidence = "authored" }
+"D_0044F954" = { declaration = "extern struct List_func_80442574_de D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;", evidence = "authored" }
+"D_0044F978" = { declaration = "extern struct List_func_80442574_de D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;", evidence = "authored" }
 "D_0044F994_de" = { declaration = "extern s32 D_0044F994_de;", evidence = "authored" }
 "D_0044FA6C" = { declaration = "extern char D_0044FA6C[];", evidence = "authored" }
-"D_0044FAE0_eu" = { declaration = "extern char D_0044F954[], D_0044F978[], D_0044FAE0_eu[], D_0044FB04[], D_0044FB28[], D_004501E8[];", evidence = "authored" }
+"D_0044FAE0_eu" = { declaration = "extern struct List_func_80442574_de D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;", evidence = "authored" }
 "D_0044FAFC" = { declaration = "extern s32 D_0044FAFC;", evidence = "authored" }
-"D_0044FB04" = { declaration = "extern char D_0044F954[], D_0044F978[], D_0044FAE0_eu[], D_0044FB04[], D_0044FB28[], D_004501E8[];", evidence = "authored" }
+"D_0044FB04" = { declaration = "extern struct List_func_80442574_de D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;", evidence = "authored" }
 "D_0044FB20" = { declaration = "extern s32 D_0044FB20;", evidence = "authored" }
-"D_0044FB28" = { declaration = "extern char D_0044F954[], D_0044F978[], D_0044FAE0_eu[], D_0044FB04[], D_0044FB28[], D_004501E8[];", evidence = "authored" }
+"D_0044FB28" = { declaration = "extern struct List_func_80442574_de D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;", evidence = "authored" }
 "D_0044FB50" = { declaration = "extern char D_0044FB50[];", evidence = "authored" }
 "D_0044FB90" = { declaration = "extern CheatCode D_0044FB90[];", evidence = "authored" }
 "D_0044FC6C" = { declaration = "extern char D_0044FC6C[], D_0044FDF8[], D_0044FE88[];", evidence = "authored" }
@@ -4567,7 +4569,7 @@ schema = 1
 "D_0044FFA4" = { declaration = "extern char D_0044FFA4[];", evidence = "authored" }
 "D_0044FFEC" = { declaration = "extern char D_0044FFEC[];", evidence = "authored" }
 "D_00450178" = { declaration = "extern char D_00450178;", evidence = "authored" }
-"D_004501E8" = { declaration = "extern char D_0044F954[], D_0044F978[], D_0044FAE0_eu[], D_0044FB04[], D_0044FB28[], D_004501E8[];", evidence = "authored" }
+"D_004501E8" = { declaration = "extern struct List_func_80442574_de D_0044F954, D_0044F978, D_0044FAE0_eu, D_0044FB04, D_0044FB28, D_004501E8;", evidence = "authored" }
 "D_00450854" = { declaration = "extern f32 D_00450854[];", evidence = "authored" }
 "D_00450884" = { declaration = "extern char D_00450884[];", evidence = "authored" }
 "D_00450AD0" = { declaration = "extern char D_00450AD0;", evidence = "authored" }
@@ -7853,6 +7855,21 @@ schema = 1
 "D_800D316C" = { declaration = "extern s32 D_800D316C;", evidence = "authored" }
 "D_800D3170" = { declaration = "extern s32 D_800D3170;", evidence = "authored" }
 "D_800D3174" = { declaration = "extern s32 D_800D3174;", evidence = "authored" }
+"D_800D3178" = { declaration = "extern char *D_800D3178;", evidence = "authored" }
+"D_800D317C" = { declaration = "extern char *D_800D317C;", evidence = "authored" }
+"D_800D3180" = { declaration = "extern char *D_800D3180;", evidence = "authored" }
+"D_800D3184" = { declaration = "extern char *D_800D3184;", evidence = "authored" }
+"D_800D3188" = { declaration = "extern char *D_800D3188;", evidence = "authored" }
+"D_800D318C_de" = { declaration = "extern char *D_800D318C_de;", evidence = "authored" }
+"D_800D3190_de" = { declaration = "extern char *D_800D3190_de;", evidence = "authored" }
+"D_800D3194" = { declaration = "extern char *D_800D3194;", evidence = "authored" }
+"D_800D3198" = { declaration = "extern char *D_800D3198;", evidence = "authored" }
+"D_800D319C" = { declaration = "extern char *D_800D319C;", evidence = "authored" }
+"D_800D31A0_de" = { declaration = "extern char *D_800D31A0_de;", evidence = "authored" }
+"D_800D31A4" = { declaration = "extern char *D_800D31A4;", evidence = "authored" }
+"D_800D31A8" = { declaration = "extern char *D_800D31A8;", evidence = "authored" }
+"D_800D31AC" = { declaration = "extern char *D_800D31AC;", evidence = "authored" }
+"D_800D31B0" = { declaration = "extern char *D_800D31B0;", evidence = "authored" }
 "D_800D31B8" = { declaration = "extern unsigned char * D_800D31B8;", evidence = "authored" }
 "D_800D31D0" = { declaration = "extern char D_800D31D0;", evidence = "authored" }
 "D_800D3200" = { declaration = "extern int D_800D3200;", evidence = "authored" }
@@ -7860,8 +7877,8 @@ schema = 1
 "D_800D324C" = { declaration = "extern int D_800D324C;", evidence = "authored" }
 "D_800D3250" = { declaration = "extern void *D_800D3250[];", evidence = "authored" }
 "D_800D32A8" = { declaration = "extern char D_800D32A8;", evidence = "authored" }
-"D_800D32C4" = { declaration = "extern int D_800D32C4;", evidence = "authored" }
-"D_800D3304" = { declaration = "extern int D_800D3304;", evidence = "authored" }
+"D_800D32C4" = { declaration = "extern char *D_800D3304[], *D_800D32C4[];", evidence = "authored" }
+"D_800D3304" = { declaration = "extern char *D_800D3304[], *D_800D32C4[];", evidence = "authored" }
 "D_800D3334" = { declaration = "extern int D_800D3334;", evidence = "authored" }
 "D_800D333C" = { declaration = "extern int D_800D333C;", evidence = "authored" }
 "D_800D3340" = { declaration = "extern int D_800D3340;", evidence = "authored" }
@@ -8458,6 +8475,7 @@ schema = 1
 "D_800DF520" = { declaration = "extern int D_800DF520;", evidence = "authored" }
 "D_800DF544" = { declaration = "extern TextEntry D_800DF544[];", evidence = "authored" }
 "D_800DF740" = { declaration = "extern RequestDrawPair D_800DF740[];", evidence = "authored" }
+"D_800DF7D0" = { declaration = "extern JoinNameEntry D_800DF7D0[];", evidence = "authored" }
 "D_800DF964" = { declaration = "extern void *D_800DF964[];", evidence = "authored" }
 "D_800DFA02" = { declaration = "extern u16 D_800DFA02[][56];", evidence = "authored" }
 "D_800E01B0_de" = { declaration = "extern int D_800E01B0_de[];", evidence = "authored" }
@@ -8502,6 +8520,7 @@ schema = 1
 "D_800E1004" = { declaration = "extern s32 D_800E1004[];", evidence = "authored" }
 "D_800E1014" = { declaration = "extern s32 D_800E1014[];", evidence = "authored" }
 "D_800E1024" = { declaration = "extern s32 D_800E1024[];", evidence = "authored" }
+"D_800E1034_eu" = { declaration = "extern char *D_800E1034_eu[];", evidence = "authored" }
 "D_800E1044" = { declaration = "extern int D_800E1044[];", evidence = "authored" }
 "D_800E1054" = { declaration = "extern int D_800E1054[];", evidence = "authored" }
 "D_800E1064_eu" = { declaration = "extern int D_800E1064_eu[];", evidence = "authored" }
@@ -8867,6 +8886,7 @@ schema = 1
 "D_800EFAC8" = { declaration = "extern Handler802A2B50 D_800EFAC8;", evidence = "authored" }
 "D_800EFB34" = { declaration = "extern s32 D_800EFB34;", evidence = "authored" }
 "D_800EFC80_de" = { declaration = "extern char D_800EFC80_de[];", evidence = "authored" }
+"D_800EFE40" = { declaration = "extern JoinNameEntry D_800EFE40[];", evidence = "authored" }
 "D_800F1DB0" = { declaration = "extern int D_800F1DB0;", evidence = "authored" }
 "D_800F1DB0_de" = { declaration = "extern Handler80437868 D_800F1DB0_de;", evidence = "authored" }
 "D_800F1F74" = { declaration = "extern FieldRow D_800F1F74[];", evidence = "authored" }
@@ -9203,7 +9223,7 @@ schema = 1
 "D_8014D464" = { declaration = "extern s32 D_8014D464;", evidence = "authored" }
 "D_8014D468_de" = { declaration = "extern void *D_8014D468_de[];", evidence = "authored" }
 "D_8014D480" = { declaration = "extern s32 D_8014D480;", evidence = "authored" }
-"D_8014D488" = { declaration = "static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &D_8015D488; } #else extern struct Saved D_8014D488;", evidence = "authored" }
+"D_8014D488" = { declaration = "static __inline__ struct List_func_80442574_de *rw_pak_loaded_block_dialog(void) { return &D_0044F954; } static __inline__ struct List_func_80442574_de *rw_pak_selected_block_dialog(void) { return &D_0044F978; } static __inline__ struct List_func_80442574_de *rw_pak_loaded_profile_dialog(void) { return &D_0044FAE0_eu; } static __inline__ struct List_func_80442574_de *rw_pak_selected_profile_dialog(void) { return &D_0044FB04; } static __inline__ struct List_func_80442574_de *rw_pak_other_note_dialog(void) { return &D_0044FB28; } static __inline__ struct List_func_80442574_de *rw_pak_load_error_dialog(void) { return &D_004501E8; } static __inline__ struct Saved *rw_pak_loaded_profile(void) { return &D_8015D488; } #else extern struct Saved D_8014D488;", evidence = "authored" }
 "D_8014D48C" = { declaration = "extern u16 D_8014D48C;", evidence = "authored" }
 "D_8014D490" = { declaration = "extern s8 D_8014D490;", evidence = "authored" }
 "D_8014D4AA" = { declaration = "extern struct { u16 value; } D_8014D4AA;", evidence = "authored" }
@@ -10127,7 +10147,7 @@ schema = 1
 "Brain_func_80209308_de" = { declaration = "typedef struct Brain_func_80209308_de Brain_func_80209308_de;", evidence = "authored" }
 "Brain_func_8020FDB0_de" = { declaration = "typedef struct Brain_func_8020FDB0_de Brain_func_8020FDB0_de;", evidence = "authored" }
 "Brain_func_802120A8_eu" = { declaration = "struct Brain_func_802120A8_eu { struct Actor_func_802120A8_eu *player; s32 route; char pad8[8]; s32 node; s32 w14; char pad18[0x4C]; struct Actor_func_802120A8_eu *target; char pad68[0x188]; f32 walk[8]; char pad210[0x20]; s32 combat; char pad234[0xA4]; s32 timer; s32 pattern; char pad2E0[0x38]; s32 frames; s32 visible; };", evidence = "authored" }
-"Brain_func_80212D78_eu_x" = { declaration = "struct Brain_func_80212D78_eu_x { struct Actor_func_8022D290_de *player; s32 node; char pad8[4]; s32 nextNode; char pad10[0x210]; s32 unk220; char pad224[8]; s32 goal; char pad230[0xCC]; s32 unk2FC; char pad300[0x14]; s32 busy; char pad318[8]; s32 jumpTimer; };", evidence = "authored" }
+"Brain_func_80212D78_eu_x" = { declaration = "struct Brain_func_80212D78_eu_x { struct Actor_func_8022D290_de *player; s32 node; char pad8[4]; s32 nextNode; char pad10[0x210]; s32 unk220; char pad224[8]; s32 goal; char pad230[0xC]; s32 triggerLatch; char pad240[0xBC]; s32 unk2FC; char pad300[0x14]; s32 busy; char pad318[8]; s32 jumpTimer; };", evidence = "authored" }
 "BreakableDefinition" = { declaration = "typedef struct BreakableDefinition { u8 reserved0[0x14]; s32 flags; u8 reserved18[0x10]; s16 health; } BreakableDefinition;", evidence = "authored" }
 "BreakableHitContext" = { declaration = "struct BreakableHitContext { char pad0[0x8]; Triple unk_8; char pad8[0x18 - 0x8 - sizeof(Triple)]; char * unk_18; char pad18[0xE6 - 0x18 - sizeof(char*)]; s8 unk_E6; char padE6[0x100 - 0xE6 - sizeof(s8)]; s32 unk_100; char pad100[0x104 - 0x100 - sizeof(s32)]; f32 unk_104; char pad104[0x108 - 0x104 - sizeof(f32)]; s16 unk_108; char pad108[0x10A - 0x108 - sizeof(s16)]; s16 unk_10A; char pad10A[0x10C - 0x10A - sizeof(s16)]; s16 unk_10C; char pad10C[0x12C - 0x10C - sizeof(s16)]; s16 unk_12C; char pad12C[0x134 - 0x12C - sizeof(s16)]; f32 unk_134; };", evidence = "authored" }
 "BreakableHitDescriptor" = { declaration = "typedef struct BreakableHitDescriptor BreakableHitDescriptor;", evidence = "authored" }
@@ -10688,6 +10708,7 @@ schema = 1
 "Item_func_80442FB0_de" = { declaration = "typedef struct Item_func_80442FB0_de Item_func_80442FB0_de;", evidence = "authored" }
 "Item_func_8044D668_de" = { declaration = "typedef struct Item_func_8044D668_de Item_func_8044D668_de;", evidence = "authored" }
 "Items37" = { declaration = "typedef struct Items37 { s32 stride, count; Item37 items[1]; } Items37;", evidence = "authored" }
+"JoinNameEntry" = { declaration = "typedef struct JoinNameEntry { char **names; s32 pad; } JoinNameEntry;", evidence = "authored" }
 "JoinRequestItem" = { declaration = "typedef struct JoinRequestItem JoinRequestItem;", evidence = "authored" }
 "JoinRequestScreen" = { declaration = "typedef struct JoinRequestScreen JoinRequestScreen;", evidence = "authored" }
 "Key" = { declaration = "struct Key { char pad0[0x14]; };", evidence = "authored" }
@@ -12431,6 +12452,7 @@ schema = 1
 "Shared_Net_size_check" = { declaration = "typedef char Shared_Net_size_check[(sizeof(Shared_Net) == 0x6C) ? 1 : -1];", evidence = "authored" }
 "Shared_Node" = { declaration = "struct Shared_Node { s32 unk0; char pad4[0xC]; struct Shared_Node * unk10; char pad14[0x20]; void * unk34; };", evidence = "authored" }
 "Shared_OptionsScreen" = { declaration = "typedef struct Shared_OptionsScreen Shared_OptionsScreen;", evidence = "authored" }
+"Shared_PakMenu" = { declaration = "typedef struct Shared_PakMenu { s16 state; char pad02[0xA]; struct PakNotesMenuItem *items; char pad10[4]; char *dialogData; char pad18[4]; func_8024795C_S2 *player; union { func_80242278_S1 *owner; func_80242278_S1 *slot; }; } Shared_PakMenu;", evidence = "authored" }
 "Shared_Particle" = { declaration = "typedef struct Shared_Particle Shared_Particle;", evidence = "authored" }
 "Shared_ParticleColors" = { declaration = "typedef struct Shared_ParticleColors Shared_ParticleColors;", evidence = "authored" }
 "Shared_ParticleDesc" = { declaration = "typedef struct Shared_ParticleDesc Shared_ParticleDesc;", evidence = "authored" }
