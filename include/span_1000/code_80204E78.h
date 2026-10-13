@@ -9,6 +9,24 @@ struct SharedPlayer;
 #include "types.h"
 #include "audio_callbacks.h"
 #include "common/types_06e4f7ef1f9e.h"
+/* Animation-trigger definitions have delay bounds and signed animation IDs;
+ * movement definitions instead carry event masks at these offsets. */
+typedef struct AnimationTriggerDefinition {
+    s32 flags;
+    s32 enabled;
+    s16 reserved8;
+    s16 animation;
+    f32 delayMinimum;
+    f32 delayMaximum;
+    s16 firstAnimation;
+    s16 secondAnimation;
+} AnimationTriggerDefinition;
+typedef struct AnimationTriggerResource {
+    s32 kind;
+    u8 reserved4[0x10];
+    AnimationTriggerDefinition trigger;
+} AnimationTriggerResource;
+
 struct func_8020612C_S3;
 /* unbake published declaration: published_04eb475a6a22b3d188fcac15 */
 struct func_8020612C_S3 {
