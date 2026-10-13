@@ -1,11 +1,13 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8020FDB0.h"
-extern void func_8020FDB0_de(void *a, int b);
+extern void func_8020FDB0_de(Brain_func_8020FDB0_de *, s32 *);
 
 
 
 
 int func_80210018_de(void *arg0) {
-    func_8020FDB0_de(arg0, ((func_802066A4_S3 *)(*(void **)arg0))->unk18 + 0x8C);
+    Brain_func_8020FDB0_de *brain = arg0;
+    char *ammo = brain->player->views18.view18_1.track;
+    func_8020FDB0_de(brain, ammo + 0x8C);
     return 1;
 }
