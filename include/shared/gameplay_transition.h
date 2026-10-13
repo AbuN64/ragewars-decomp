@@ -67,7 +67,8 @@ struct Shared_ActorView {
     char pad11DC[0x8];
     s32 pending; /* +0x11E4: src/func_8021B468.c */
     s32 field11E8;
-    u8 pad11EC[0x10];
+    f32 impactTimer; /* 0x11EC */
+    u8 pad11F0[0xC];
     s32 field11FC; /* +0x11FC: src/func_8021B468.c */
     char pad1200[0x10];
     s32 targeting; /* 0x1210 */
