@@ -1,30 +1,12 @@
-#include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B0388.h"
 #include "types.h"
-
-
-
-
-
-
-
-
-
-
-
-s32 func_802B18A4_de(void *arg0, void *arg1)
-{
-  s32 var_v1;
-  char new_var;
-  new_var = 0x40;
-  var_v1 = (((struct func_80206930_S3 *) ((s8 *) ((((ObjectLinks34 *) arg0)->unk_31 * 0x10) + ((func_802B6B90_S1 *) arg1)->unk60)))->unk7) + ((((struct ObjectStateD *) ((s8 *) ((ObjectLinks34 *) arg0)->unk_20))->unk_C) - new_var);
-  if (var_v1 < 0)
-  {
-    var_v1 = 0;
-  }
-  if (var_v1 >= 0x80)
-  {
-    var_v1 = 0x7F;
-  }
-  return var_v1 & 0xFF;
+s32 func_802B18A4_de(void *arg0, void *arg1) {
+    ALVoiceState_s_func_802B1814_de *voice = arg0;
+    ALSeqPlayer_func_802B1814_de *player = arg1;
+    s32 pan;
+    char center = 0x40;
+    pan = player->chanState[voice->channel].pan + (voice->sound->samplePan - center);
+    if (pan < 0) pan = 0;
+    if (pan >= 0x80) pan = 0x7F;
+    return pan & 0xFF;
 }
