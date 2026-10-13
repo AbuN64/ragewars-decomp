@@ -3378,7 +3378,7 @@ schema = 1
 "func_80417138_de" = { evidence = "landed", signature = "void func_80417138_de(s32 flags)" }
 "func_8041737C_de" = { evidence = "landed", signature = "s32 func_8041737C_de(s32 bits, void *palette)" }
 "func_804174F4_de" = { evidence = "landed", signature = "void func_804174F4_de(Texture *arg0)" }
-"func_80417B20_de" = { evidence = "declared", signature = "void func_80417B20_de(void *, int, int, int, float, int, int, float, float, int)" }
+"func_80417B20_de" = { evidence = "landed", signature = "void func_80417B20_de(f32 arg0, f32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9)" }
 "func_804181A4_de" = { evidence = "landed", signature = "void func_804181A4_de(s32 x0, s32 y0, s32 x1, s32 y1, f32 u0, f32 v0, f32 u1, f32 v1)" }
 "func_80418DA0_de" = { evidence = "landed", signature = "void func_80418DA0_de(void *a, int b, int c, int d, float e, int f)" }
 "func_80418DE0_de" = { evidence = "landed", signature = "void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8)" }
@@ -4397,6 +4397,8 @@ schema = 1
 "readLink" = { evidence = "landed", signature = "static __inline__ Link_func_8023CC08_de *readLink(Link_func_8023CC08_de **value)" }
 "record32" = { evidence = "landed", signature = "static __inline__ void *record32(void)" }
 "rectangle" = { evidence = "landed", signature = "static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a)" }
+"rectangleEmit" = { evidence = "landed", signature = "static __inline__ void rectangleEmit(u32 w0, u32 w1)" }
+"rectangleSync" = { evidence = "landed", signature = "static __inline__ void rectangleSync(void)" }
 "recycle" = { evidence = "landed", signature = "static inline Message *recycle(void *owner, void *pool)" }
 "release" = { evidence = "landed", signature = "static inline void release(s32 node)" }
 "releaseState" = { evidence = "landed", signature = "static inline void releaseState(struct RespawnCarried *carried, struct RespawnFlags *state)" }
@@ -4409,6 +4411,7 @@ schema = 1
 "round_down" = { evidence = "landed", signature = "static inline f64 round_down(f64 arg0)" }
 "round_up" = { evidence = "landed", signature = "static inline f32 round_up(f32 x, f32 floor)" }
 "safe_sqrt" = { evidence = "landed", signature = "static inline f32 safe_sqrt(f32 x)" }
+"scaleClip" = { evidence = "landed", signature = "static inline f32 scaleClip(f32 delta, f32 ratio)" }
 "screen32" = { evidence = "landed", signature = "static __inline__ Menu_func_8041D960_de *screen32(void)" }
 "seek" = { evidence = "landed", signature = "static inline void seek(Stream *arg0, u32 arg1)" }
 "selectChannel" = { evidence = "landed", signature = "static inline char *selectChannel(Context_func_8025AE1C_de *context, s32 slot)" }
@@ -8439,6 +8442,10 @@ schema = 1
 "D_800DF264_de" = { declaration = "extern s32 D_800DF264_de;", evidence = "authored" }
 "D_800DF268_de" = { declaration = "extern int D_800DF268_de;", evidence = "authored" }
 "D_800DF26C_de" = { declaration = "extern s32 D_800DF26C_de;", evidence = "authored" }
+"D_800DF274" = { declaration = "extern s32 D_800DF274;", evidence = "authored" }
+"D_800DF280" = { declaration = "extern s32 D_800DF280;", evidence = "authored" }
+"D_800DF28C" = { declaration = "extern s32 D_800DF28C;", evidence = "authored" }
+"D_800DF290" = { declaration = "extern s32 D_800DF290;", evidence = "authored" }
 "D_800DF458" = { declaration = "extern Handler802A2B50 D_800DF458;", evidence = "authored" }
 "D_800DF4C0" = { declaration = "extern s32 D_800DF4C0;", evidence = "authored" }
 "D_800DF4C4" = { declaration = "extern s32 D_800DF4C4;", evidence = "authored" }
@@ -9293,6 +9300,7 @@ schema = 1
 "D_80153D54" = { declaration = "extern struct func_8022BECC_S2 *D_80153D54;", evidence = "authored" }
 "D_80153D58" = { declaration = "extern struct func_8022BECC_S2 *D_80153D58;", evidence = "authored" }
 "D_80153D60" = { declaration = "extern char D_80153D60[];", evidence = "authored" }
+"D_80153F60" = { declaration = "extern Rec_func_8024C92C_de D_80153F60;", evidence = "authored" }
 "D_80153F68" = { declaration = "extern int D_80153F68;", evidence = "authored" }
 "D_80154010" = { declaration = "extern struct Cup D_80154010;", evidence = "authored" }
 "D_80154014" = { declaration = "extern s32 D_80154014;", evidence = "authored" }
