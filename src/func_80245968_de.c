@@ -12,9 +12,9 @@ int func_80245968_de(void) {
     int cond = record->active != 0;
     if (cond) {
         if (record) {
-            return record->unknownA8[0];
+            return record->spec.settings[0];
         } else {
-            return record->unknownA8[0];
+            return record->spec.settings[0];
         }
     }
     return 0;
