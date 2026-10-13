@@ -1,6 +1,7 @@
 #ifndef UNBAKE_COMMON_TYPES_8FD754E1E915_H
 #define UNBAKE_COMMON_TYPES_8FD754E1E915_H
 #include "../types.h"
+#include "gfx.h"
 #include "shared/model_instance.h"
 #include "common/types_8a8189af7b05.h"
 struct Player;
@@ -78,16 +79,16 @@ struct Player {
     s32 state6D4;
     s32 state6D8;
     s32 state6DC;
-    u8 pad6E0[4];
+    f32 movementScale; /* 0x6E0 */
     s32 state6E4;
     Vec3 previousPosition; /* 0x6E8 */
     f32 heightDelta; /* 0x6F4 */
     Vec3 previousTarget; /* 0x6F8 */
     u8 pad704[4];
-    s32 state708;
-    s32 state70C;
-    s32 state710;
-    s32 state714;
+    f32 state708;
+    f32 state70C;
+    f32 state710;
+    f32 state714;
     f32 crouchDepth; /* 0x718 */
     s32 forceCrouch; /* 0x71C */
     f32 eyeOffset; /* 0x720 */
@@ -106,7 +107,8 @@ struct Player {
     s32 state75C;
     u8 pad760[0x10];
     s16 weapon; /* 0x770 */
-    u8 pad772[0xE];
+    u8 pad772[2];
+    Vec3 requestedPosition; /* 0x774 */
     f32 cameraOffset; /* 0x780 */
     f32 cameraScale; /* 0x784 */
     s32 controllerMode; /* 0x788 */

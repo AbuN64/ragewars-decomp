@@ -1536,7 +1536,7 @@ struct CallbackEntry_func_80267198_de {
 extern float D_800C4424_de;
 
 /* unbake published declaration: published_317c54920d66f730614eb556 */
-extern void func_80267D70_de(s32 arg0, void *arg1, s32 arg2, Triple arg3, s32 arg6);
+extern void func_80267D70_de(s32 arg0, void *arg1, s32 arg2, Vec3 arg3, s32 arg6);
 
 /* unbake published declaration: published_3eb6a3f0d63fca4d6131dd6f */
 extern void func_80267D68_de(int arg0, int arg1, int arg2, int arg3);
