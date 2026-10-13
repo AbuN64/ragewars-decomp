@@ -53,7 +53,9 @@ struct Shared_ActorView {
     f32 lateralInput; /* 0x6A4 */
     char pad6A8[0x1C];
     f32 lateralSpeed; /* 0x6C4 */
-    char pad6C8[0x718 - 0x6C8];
+    char pad6C8[0x30];
+    Vec3 contactPosition; /* 0x6F8 */
+    char pad704[0x718 - 0x704];
     f32 speed; /* +0x718: src/func_8021B468.c */
     u8 pad71C[4];
     f32 transitionBlend; /* 0x720 */
@@ -61,7 +63,10 @@ struct Shared_ActorView {
     s16 nextWeapon; /* 0x770 */
     u8 pad772[0x784 - 0x772];
     f32 speedFactor; /* 0x784 */
-    u8 pad788[0x864 - 0x788];
+    s32 controllerMode; /* 0x788 */
+    u8 pad78C[8];
+    void *controllerOwner; /* 0x794 */
+    u8 pad798[0x864 - 0x798];
     s32 field864;
     s32 field868;
     u8 pad86C[0xE54 - 0x86C];
@@ -80,8 +85,9 @@ struct Shared_ActorView {
     s32 field11E8;
     f32 impactTimer; /* 0x11EC */
     u8 pad11F0[0xC];
-    s32 field11FC; /* +0x11FC: src/func_8021B468.c */
-    char pad1200[0x10];
+    f32 field11FC; /* 0x11FC: target radius, cleared by player reset */
+    Vec3 targetPosition; /* 0x1200 */
+    char pad120C[4];
     s32 targeting; /* 0x1210 */
     u8 pad1214[4];
     s32 field1218; /* +0x1218: src/func_8021B468.c */

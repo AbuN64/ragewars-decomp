@@ -1,3 +1,6 @@
+#include "shared/route_chase_records.h"
+#include "shared/gameplay_transition.h"
+#include "shared/level_actor.h"
 #include "span_1000/code_80213ED4.h"
 #include "types.h"
 
@@ -15,34 +18,34 @@ extern s32 D_8013B290;
 s32 func_802169AC_de(void *arg0, void *arg1, void *arg2) {
     void *temp_a2;
 
-    if (((func_802169AC_S1 *)(arg1))->unk4 == 0) {
+    if (((RouteChaseBot *)arg1)->node == 0) {
         return 6;
     }
     if (arg2 == 0) {
-        if (((func_802169AC_S1 *)(arg1))->unk94 != 0) {
+        if (((RouteChaseBot *)arg1)->routeReady != 0) {
             return 4;
         }
         return 3;
     }
-    if (arg2 == ((func_802169AC_S1 *)(arg1))->unk68) {
+    if (arg2 == ((RouteChaseBot *)arg1)->target) {
         return 2;
     }
-    if (*((func_802169AC_S2 *)(arg2))->unk18 == 5) {
+    if (*((Actor_func_8024A7A0_de *)arg2)->definition == 5) {
         return 5;
     }
-    if (((func_802169AC_S2 *)(arg2))->unkE4 == 0x64F) {
+    if (((Actor_func_8024A7A0_de *)arg2)->type == 0x64F) {
         return 7;
     }
     if (D_8013B290 == 0) {
-        if (((func_802169AC_S2 *)(arg2))->unk100 & 0x300000) {
-            temp_a2 = ((func_802169AC_S2 *)(arg2))->unk1D8;
-            if ((((func_802169AC_S3 *)(temp_a2))->unk794 == arg0) &&
-                (((func_802169AC_S3 *)(temp_a2))->unk788 == 2)) {
+        if (((Actor_func_8024A7A0_de *)arg2)->flags & 0x300000) {
+            temp_a2 = ((Actor_func_8024A7A0_de *)arg2)->controller;
+            if ((((Shared_ActorView *)temp_a2)->controllerOwner == arg0) &&
+                (((Shared_ActorView *)temp_a2)->controllerMode == 2)) {
                 return 1;
             }
         }
-        if (((func_802169AC_S4 *)(arg0))->unk2E0 & 2) {
-            if (((func_802169AC_S4 *)(arg0))->unkE4 != 0xCA) {
+        if (((Actor_func_8024A7A0_de *)arg0)->renderFlags & 2) {
+            if (((Actor_func_8024A7A0_de *)arg0)->type != 0xCA) {
                 return 1;
             }
         }

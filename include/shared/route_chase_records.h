@@ -17,7 +17,9 @@ typedef struct RouteChaseBot {
     Vec3 dest;
     u8 pad38[0x30];
     RouteChaseThing *target;
-    u8 pad6C[0x50];
+    u8 pad6C[0x28];
+    s8 routeReady; /* 0x94 */
+    u8 pad95[0x27];
     s32 targetId;
     u8 padC0[0x160];
     s32 resetWord220;
