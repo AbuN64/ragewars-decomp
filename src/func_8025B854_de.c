@@ -12,12 +12,14 @@ s32 func_8025B854_de(s32 arg0, s16 arg1)
   s32 temp_v0;
   s32 temp_v1;
   void *temp_s0;
-  int new_var;
+  Record_func_8025B758_de *slot;
+  Owner_func_8025B5F0_de *owner;
   temp_v0 = (arg1 * 0xCC) + arg0;
   temp_v0 = temp_v0 + 4;
-  new_var = 2;
-  temp_v1 = ((struct func_8025C598_S1 *) temp_v0)->unkB0;
-  temp_s0 = &((func_80258D60_S1 *)(temp_v1))->unk84;
-  func_802B2F00_de(temp_s0, ((struct func_8025C458_S3 *) ((char *) (temp_v1 + (((struct func_8025C598_S1 *) temp_v0)->unk0 * new_var))))->unkDC);
+  slot = (Record_func_8025B758_de *)temp_v0;
+  temp_v1 = slot->owner;
+  owner = (Owner_func_8025B5F0_de *)temp_v1;
+  temp_s0 = owner->sound;
+  func_802B2F00_de(temp_s0, owner->samples[slot->index]);
   func_802B2620_de(temp_s0);
 }
