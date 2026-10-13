@@ -29,8 +29,11 @@ typedef s32 (*MenuElementHandler)(void *element, s32 event, s32 arg2, s32 arg3, 
 
 struct Element;
 /* unbake published declaration: published_0a639495095b5bad30ce37a2 */
+struct Node_func_80299CF0_de;
 struct Element {
-    char pad0[0xC];
+    char pad0[4];
+    struct Node_func_80299CF0_de *left; /* 0x4 */
+    struct Node_func_80299CF0_de *right; /* 0x8 */
     s16 id;
     u16 kind;
     u16 field10;
