@@ -30,10 +30,10 @@ struct Shared_func_8027ADBC_S6 {
 };
 
 typedef struct Shared_func_8027ADBC_S5 Shared_func_8027ADBC_S5;
-struct Shared_func_8027ADBC_S5 { char pad0[0x10]; u16 unk10; u16 unk12; };
+struct Shared_func_8027ADBC_S5 { u16 gravityHi; u16 gravityLo; u16 speedHi; u16 speedLo; char pad8[8]; u16 unk10; u16 unk12; };
 
 typedef struct Shared_func_8027ADBC_S4 Shared_func_8027ADBC_S4;
-struct Shared_func_8027ADBC_S4 { u32 flags; char pad4[0xA]; s16 unkE; char pad10[0x20]; Shared_func_8027ADBC_S5 *unk30; };
+struct Shared_func_8027ADBC_S4 { u32 flags; char pad4[0xA]; s16 unkE; char pad10[0x20]; Shared_func_8027ADBC_S5 *unk30; char pad34[8]; };
 
 /* Phase-1 candidate; target/descriptor layouts and helper ABI remain unresolved. */
 typedef struct Shared_func_8027ADBC_S2 func_8027ADBC_S2;

@@ -3139,7 +3139,12 @@ typedef struct ALVoiceConfig_s ALVoiceConfig_s;
 struct InstanceHdr;
 /* unbake published declaration: published_7d3590cc1e6ec99bead71137 */
 struct InstanceHdr {
-    s32 w[5];
+    union {
+        s32 w[5];
+        struct { s32 header[2]; Vec3 position; } spatial;
+    };
+    u8 pad014[0x62E - 0x14];
+    s16 trajectoryMode;
 };
 
 struct func_8023EBEC_S1;

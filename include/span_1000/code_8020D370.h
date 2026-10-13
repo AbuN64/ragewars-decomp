@@ -62,13 +62,23 @@ struct InstanceHdr;
 /* unbake published declaration: published_525af3877f2130c638c3ad61 */
 struct Actor_func_8020E674_de {
     struct InstanceHdr *instance;
-    u8 pad004[0x254];
+    u8 pad004[0x248 - 4];
+    f32 field248;
+    f32 field24C;
+    f32 field250;
+    f32 field254;
     f32 field258;
-    u8 pad25C[4];
+    f32 field25C;
     f32 field260;
     f32 field264;
-    u8 pad268[0x10];
+    s32 field268;
+    s32 field26C;
+    s32 field270;
+    s32 field274;
     f32 field278;
+    f32 field27C;
+    f32 field280;
+    s32 field284;
 };
 
 struct func_8020DC10_S1;
@@ -144,4 +154,16 @@ typedef struct WeightSource WeightSource;
 /* unbake published declaration: published_e4f7695ce36ca193d6d164db */
 extern s32 func_8020EAB4_de(void);
 
+/* Resource sections returned by func_8028FDB4_de, selectors 1 and 2. */
+#include "shared/func_8027AD4C_de_closed.h"
+typedef struct BallisticResourceKeys {
+    s32 tag;
+    s32 count;
+    u32 keys[1];
+} BallisticResourceKeys;
+typedef struct BallisticResourceRecords {
+    s32 tag;
+    s32 count;
+    Shared_func_8027ADBC_S4 records[1];
+} BallisticResourceRecords;
 #endif
