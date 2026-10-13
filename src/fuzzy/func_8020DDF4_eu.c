@@ -60,7 +60,7 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     f32 temp_fv1f_2;
     f32 temp_fv1f_3;
     f32 var_fv0;
-    s16 temp_s0;
+    s32 temp_s0;
     s32 *temp_s0_2;
     s32 temp_v0_6;
     s32 temp_v0_7;
@@ -91,9 +91,7 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
         if (temp_v1 == 0) {
             temp_v0 = arg0->instance;
             current = temp_v0->spatial.position;
-            delta.x = arg0->field258;
-            delta.y = arg0->field25C;
-            delta.z = arg0->field260;
+            delta = arg0->destination;
             temp_fv1f = delta.x - current.x;
             temp_fv1 = delta.y - current.y;
             temp_fv0f = delta.z - current.z;
@@ -112,7 +110,37 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
                     arg0->field268 = 1;
                     arg0->field270 = 1;
                     arg0->field274 = 0;
-block_15:
+                    break;
+                case 0:
+                case 2:
+                    arg0->field268 = 0xB;
+                    arg0->field270 = 0;
+                    arg0->field274 = 1;
+                    break;
+                case 3:
+                    arg0->field268 = 1;
+                    arg0->field270 = 1;
+                    arg0->field274 = 1;
+                    break;
+                default:
+                case 1:
+                case 5:
+                if (temp_fs0f == 0.0f) {
+                    if (temp_fs1 < 0.0f) {
+                        arg0->field248 = (f32) D_800C207C_eu;
+                    } else {
+                        arg0->field248 = (f32) D_800C2080_eu;
+                    }
+                } else {
+                    arg0->field248 = (f32) (func_8029C044_de(temp_fs1, temp_fs0f) * D_800C2084_eu);
+                }
+                arg0->field270 = 0;
+                arg0->field274 = 0;
+                arg0->field24C = arg0->field248;
+                arg0->field250 = 0.0f;
+                arg0->field254 = 0.0f;
+                return 1;
+                }
                     if (temp_fs0f == 0.0f) {
                         if (temp_fs1 < 0.0f) {
                             arg0->field278 = D_800C2088_eu;
@@ -147,36 +175,7 @@ block_15:
                     if (arg0->field270 != 0) {
                         arg0->field24C = temp_fv0_2;
                     }
-                    goto block_54;
-                case 0:
-                case 2:
-                    arg0->field268 = 0xB;
-                    arg0->field270 = 0;
-                    arg0->field274 = 1;
-                    goto block_15;
-                case 3:
-                    arg0->field268 = 1;
-                    arg0->field270 = 1;
-                    arg0->field274 = 1;
-                    goto block_15;
-                default:
-                case 1:
-                case 5:
-                if (temp_fs0f == 0.0f) {
-                    if (temp_fs1 < 0.0f) {
-                        arg0->field248 = (f32) D_800C207C_eu;
-                    } else {
-                        arg0->field248 = (f32) D_800C2080_eu;
-                    }
-                } else {
-                    arg0->field248 = (f32) (func_8029C044_de(temp_fs1, temp_fs0f) * D_800C2084_eu);
-                }
-                arg0->field270 = 0;
-                arg0->field274 = 0;
-                arg0->field24C = arg0->field248;
-                arg0->field254 = 0.0f;
-                return 1;
-                }
+                    return 0;
             }
         } else {
             if (temp_v1 < 0xB) {
@@ -234,14 +233,12 @@ block_43:
                         temp_s0_3 = &records->records[first];
                     }
                     temp_v0_3 = temp_s0_3->unk30;
-                    temp_v0_4 = temp_s0_3->unk30;
                     temp_fs1f = func_80285630_de((temp_v0_3->speedHi << 0x10) | temp_v0_3->speedLo);
+                    temp_v0_4 = temp_s0_3->unk30;
                     temp_fv0_3 = func_80285630_de((temp_v0_4->gravityHi << 0x10) | temp_v0_4->gravityLo);
                     temp_v0_5 = arg0->instance;
                     current = temp_v0_5->spatial.position;
-                    delta.x = arg0->field258;
-                    delta.y = arg0->field25C;
-                    delta.z = arg0->field260;
+                    delta = arg0->destination;
                     temp_ft0 = delta.x - current.x;
                     temp_fv1f_2 = delta.y - current.y;
                     temp_fv1_4 = delta.z - current.z;
