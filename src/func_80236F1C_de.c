@@ -38,10 +38,10 @@ void func_80236F1C_de(Race *race, s32 arg1)
     race->self.hit = 0;
     race->self.boost = 0;
     race->self.spin = 0;
-    if (race->music != 0) {
-        func_80253BBC_de(0, race->music);
+    if (race->header.music != 0) {
+        func_80253BBC_de(0, race->header.music);
     }
-    if (D_80146894 != 0 || race->mode == 3) {
+    if (D_80146894 != 0 || race->header.views.count == 3) {
         D_800FF224_de = 30.0f;
     }
     if (D_800FF224_de != 0.0f) {
@@ -51,7 +51,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
         D_800FF224_de = 0.0f;
     }
     if (D_800FF224_de != 0.0f) {
-        racer = race->racers;
+        racer = race->header.views.head;
         if (racer != 0) {
             gDPPipeSync(D_80110634++);
             gSPDisplayList(D_80110634++, ((&D_800CBCC0)));
@@ -71,7 +71,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
             func_8026D8F8_de();
         }
     }
-    for (racer = race->racers; racer != 0;) {
+    for (racer = race->header.views.head; racer != 0;) {
         func_80235AE0_de(racer);
         func_802362E8_de(racer, arg1);
         if (racer->effect != 0) {
@@ -88,12 +88,12 @@ void func_80236F1C_de(Race *race, s32 arg1)
         }
     }
     func_80235AE0_de(&race->self);
-    if (race->mode == 0) {
+    if (race->header.views.count == 0) {
         func_80233C88_de(&race->self);
     }
     func_80238314_de(race, &race->self);
     if (D_80145040.replay != 0) {
-        racer = race->racers;
+        racer = race->header.views.head;
         if (racer != 0) {
             func_8022A3F8_de(&D_80145040, racer);
         }
