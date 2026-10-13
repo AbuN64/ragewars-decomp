@@ -326,7 +326,8 @@ struct ImageSet;
 struct ImageSet {
     u16 columns;
     u16 rows;
-    char pad[4];
+    u16 width;
+    u16 height;
 };
 
 struct ImageSet;

@@ -1,3 +1,4 @@
+#include "span_1000/code_8028DF6C.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -27,8 +28,8 @@ void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
     {
       func_802AA8EC_de(temp_v0, arg1, &sp10, &sp14);
       new_var = sp10;
-      *arg2 = ((func_8022BC04_S2 *)(sp10))->unk4;
-      *arg3 = ((func_8020676C_S1 *)(new_var))->unk6;
+      *arg2 = ((ImageSet *)sp10)->width;
+      *arg3 = ((ImageSet *)new_var)->height;
       func_80253754_de(0, temp_v0);
     }
   }
