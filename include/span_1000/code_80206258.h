@@ -502,11 +502,10 @@ typedef struct ActorMotionDefinition {
     f32 transitionTime; /* 0x38 */
     u8 pad3C[0x4];
     f32 speed; /* 0x40 */
-    u8 pad44[0x8];
+    u8 pad44[0x4];
+    f32 progressScale; /* 0x48 */
     f32 openThreshold; /* 0x4C */
     f32 closeThreshold; /* 0x50 */
-    u8 pad54[0x8];
-    f32 progressScale; /* 0x5C */
 } ActorMotionDefinition;
 typedef struct ActorMotionResource {
     s32 kind; /* 0x0 */

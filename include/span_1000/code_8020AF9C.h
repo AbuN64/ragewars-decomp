@@ -307,6 +307,19 @@ extern void func_8020CA10_de(void *arg0, s32 arg1);
 typedef struct NavigationBuffer { s32 stride; s32 reserved; u8 data[1]; } NavigationBuffer;
 typedef struct NavigationPoint { Vec3 position; union { u32 word; struct { u16 flags; u16 objectId; } halves; } attributes; } NavigationPoint;
 typedef struct NavigationPortal { u16 first, second; u8 kind; } NavigationPortal;
+#include "span_1000/code_80206258.h"
+typedef struct NavigationPlatform {
+    u8 pad0[8];
+    Vec3 pos;
+    u8 pad14[4];
+    ActorMotionResource *resource;
+    u8 pad1C[0xC8];
+    u16 objectId;
+    u8 padE6[0x8A];
+    ActorMotionState motion;
+    u8 pad2E0[8];
+} NavigationPlatform;
+typedef struct PlatformRoute { s16 reserved; s16 count; } PlatformRoute;
 typedef struct NavigationSearchNode {
     s32 key; /* 0x0 */
     f32 value; /* 0x4 */
@@ -323,7 +336,7 @@ typedef struct NavigationSearchNode {
     struct NavigationSearchNode * parent; /* 0x30 */
     Player * object; /* 0x34 */
     u8 pad38[0x8];
-    Player * platform; /* 0x40 */
+    NavigationPlatform * platform; /* 0x40 */
     Vec3 endpoint; /* 0x44 */
 } NavigationSearchNode;
 typedef struct NavigationGraph {
