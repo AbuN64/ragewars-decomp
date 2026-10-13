@@ -1,10 +1,12 @@
 #include "span_1000/code_80291054.h"
+#include "span_1000/code_80293A04.h"
 
 
 
 /** Reset three large-offset fields and mark the record active. */
 void func_80293590_de(void *arg0) {
-    ((func_80293574_S1 *)(arg0))->unk26DC1 = 1;
-    ((func_80293574_S1 *)(arg0))->unk26DC4 = 0;
-    ((func_80293574_S1 *)(arg0))->unk26DC0 = 0;
+    struct Session_func_80293A20_de *session = arg0;
+    session->phase = 1;
+    session->timer = 0;
+    session->pad26DC0 = 0;
 }
