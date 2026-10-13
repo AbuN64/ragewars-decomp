@@ -7,6 +7,7 @@
 #include "common/unused.h"
 #include "span_C76B0/data.h"
 #include "packed_float.h"
+#include "shared/gameplay_camera.h"
 
 /* Returns the stereo pan of a sound at a position for a listener: centre (0x40) without a listener, when
  * the sound is horizontally within a small radius or straight ahead; otherwise the horizontal direction
@@ -26,14 +27,14 @@ s16 func_80259B10_de(Vec3 *position, void *listener) {
     if (listener == 0) {
         return 0x40;
     }
-    func_80271F68_de(&offset, &((func_80259B30_S1 *)(listener))->unk128, position);
+    func_80271F68_de(&offset, &((Shared_func_80234FDC_S2 *)(listener))->position, position);
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
-    func_80272BCC_de(&((func_80259B30_S1 *)(listener))->unk160, &offset, &local);
+    func_80272BCC_de(&((Shared_func_80234FDC_S2 *)(listener))->unk160, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
-    forward.z = ((func_802077F4_S2 *)(&D_800C3F00_de))->unk4;
+    forward.z = (&D_800C3F00_de)[1];
     func_8027207C_de(&local.x);
     pan = func_802B7130_de(func_802745D0_de(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {

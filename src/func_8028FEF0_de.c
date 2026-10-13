@@ -7,7 +7,7 @@
 
 void *func_8028FEF0_de(int *arg0, int *arg1) {
     *arg1 = arg0[0] * arg0[1];
-    return &((func_8020CC0C_S1 *)(arg0))->unk8;
+    return &((ResidentDataChunk *)(arg0))->data[0];
 }
 
 /* Transposes the byte matrix after its eight-byte dimensions header and optionally copies the result back. */
@@ -19,7 +19,7 @@ extern void func_802BD3A0_de(void *, void *, s32);
 
 void func_8028FF0C_de(void *arg0, void *arg1, s32 arg2)
 {
-  char *data = &((func_8020CC0C_S1 *)(arg0))->unk8;
+  char *data = &((ResidentDataChunk *)(arg0))->data[0];
   s32 temp_a2;
   int first_column;
   s32 temp_t0;
@@ -98,71 +98,71 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 posi
   {
     return 0;
   }
-  if ((((func_8028FFB0_S1 *)(arg0))->unk3C00) == 0)
+  if ((((World_func_80290238_de *)(arg0))->free) == 0)
   {
-    func_80290950_de(arg0, ((func_8028FFB0_S1 *)(arg0))->unk3C08);
+    func_80290950_de(arg0, ((World_func_80290238_de *)(arg0))->tail);
   }
-  temp_s0 = ((func_8028FFB0_S1 *)(arg0))->unk3C00;
-  temp_v1 = ((func_8028FFB0_S1 *)(arg0))->unk3C04;
-  ((func_8028FFB0_S1 *)(arg0))->unk3C00 = (void *) (((func_8028FFB0_S2 *)(temp_s0))->unk1DC);
+  temp_s0 = ((World_func_80290238_de *)(arg0))->free;
+  temp_v1 = ((World_func_80290238_de *)(arg0))->head;
+  ((World_func_80290238_de *)(arg0))->free = (void *) (((Actor_func_80290238_de *)(temp_s0))->next);
   if (temp_v1 != 0)
   {
-    ((func_8028FFB0_S3 *)(temp_v1))->unk1D8 = temp_s0;
+    ((Actor_func_80290238_de *)(temp_v1))->prev = temp_s0;
   }
-  { char *next = ((func_8028FFB0_S1 *)(arg0))->unk3C04;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1D8 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1DC = next; }
-  ((func_8028FFB0_S1 *)(arg0))->unk3C04 = temp_s0;
-  if ((((func_8028FFB0_S1 *)(arg0))->unk3C08) == 0)
+  { char *next = ((World_func_80290238_de *)(arg0))->head;
+  ((Actor_func_80290238_de *)(temp_s0))->prev = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->next = next; }
+  ((World_func_80290238_de *)(arg0))->head = temp_s0;
+  if ((((World_func_80290238_de *)(arg0))->tail) == 0)
   {
-    ((func_8028FFB0_S1 *)(arg0))->unk3C08 = temp_s0;
+    ((World_func_80290238_de *)(arg0))->tail = temp_s0;
   }
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1D0 = (s32) ((((func_8028FFB0_S2 *)(temp_s0))->unk1D0) | 1);
+  ((Actor_func_80290238_de *)(temp_s0))->state = (s32) ((((Actor_func_80290238_de *)(temp_s0))->state) | 1);
   func_80246184_de(temp_s0);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1C8 = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->lifetime = 0;
   temp_v1_2 = func_8028C198_de(&D_8011FE88, temp_v0);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1D4 = arg1;
+  ((Actor_func_80290238_de *)(temp_s0))->counter = arg1;
   if (arg1 != 0)
   {
     *arg1 += 1;
   }
   if (D_801462E5 != 0)
   {
-    ((func_8028FFB0_S2 *)(temp_s0))->unk18 = &D_8011B200;
+    ((Actor_func_80290238_de *)(temp_s0))->definition = &D_8011B200;
   }
   else
   {
-    ((func_8028FFB0_S2 *)(temp_s0))->unk18 = &D_8011B388;
+    ((Actor_func_80290238_de *)(temp_s0))->definition = &D_8011B388;
   }
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1C8 = arg10;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1CC = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk4 = temp_v0;
+  ((Actor_func_80290238_de *)(temp_s0))->lifetime = arg10;
+  ((Actor_func_80290238_de *)(temp_s0))->lifetimeState = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->model = temp_v0;
   position.y += 10.24f;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk8.v0 = position;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk174 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk178 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk168 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk16C = 1.0f;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk170 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk17C = (f32) (position.x - 81.92f);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk180 = (f32) (position.y - 81.92f);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk184 = (f32) (position.z - 81.92f);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk188 = (f32) (position.x + 81.92f);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk18C = (f32) (position.y + 81.92f);
+  ((Actor_func_80290238_de *)(temp_s0))->position = position;
+  ((Actor_func_80290238_de *)(temp_s0))->angle = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->angleState = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->collisionState = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->collisionScale = 1.0f;
+  ((Actor_func_80290238_de *)(temp_s0))->collisionFlags = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->minX = (f32) (position.x - 81.92f);
+  ((Actor_func_80290238_de *)(temp_s0))->minY = (f32) (position.y - 81.92f);
+  ((Actor_func_80290238_de *)(temp_s0))->minZ = (f32) (position.z - 81.92f);
+  ((Actor_func_80290238_de *)(temp_s0))->maxX = (f32) (position.x + 81.92f);
+  ((Actor_func_80290238_de *)(temp_s0))->maxY = (f32) (position.y + 81.92f);
   far_z = position.z;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk50 = temp_v1_2;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk54 = -1;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk58 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk5C = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk14 = arg9;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk194 = 0;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk19C = 0x1A;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk190 = (f32) (far_z + 81.92f);
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1C = rotation;
-  ((func_8028FFB0_S2 *)(temp_s0))->unk1C4 = 0;
-  center.x = ((func_8028FFB0_S2 *)(temp_s0))->unk8.v1;
-  center.y = (((func_8028FFB0_S4 *)(temp_s0))->unkC) + (func_8024D284_de(temp_s0) * 0.5f);
-  center.z = ((func_8028FFB0_S4 *)(temp_s0))->unk10;
+  ((Actor_func_80290238_de *)(temp_s0))->resource = temp_v1_2;
+  ((Actor_func_80290238_de *)(temp_s0))->animation = -1;
+  ((Actor_func_80290238_de *)(temp_s0))->frame = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->frameState = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->owner = arg9;
+  ((Actor_func_80290238_de *)(temp_s0))->boundsState = 0;
+  ((Actor_func_80290238_de *)(temp_s0))->flags = 0x1A;
+  ((Actor_func_80290238_de *)(temp_s0))->maxZ = (f32) (far_z + 81.92f);
+  ((Actor_func_80290238_de *)(temp_s0))->rotation = rotation;
+  ((Actor_func_80290238_de *)(temp_s0))->effectState = 0;
+  center.x = ((Actor_func_80290238_de *)(temp_s0))->position.x;
+  center.y = (((Actor_func_80290238_de *)(temp_s0))->position.y) + (func_8024D284_de(temp_s0) * 0.5f);
+  center.z = ((Actor_func_80290238_de *)(temp_s0))->position.z;
   func_8028C6D4_de(&D_8011FE88, &center, (char *)temp_s0 + 0x1A8);
   return temp_s0;
 }
@@ -240,7 +240,7 @@ extern char D_8011B388;
 
 
 void func_80290408_de(void *arg0) {
-    ((func_802903E8_S1 *)(arg0))->unk18 = &D_8011B388;
-    ((func_802903E8_S1 *)(arg0))->unk0 = 3;
-    ((func_802903E8_S1 *)(arg0))->unk1D0 = 0;
+    ((Actor_func_80290238_de *)(arg0))->definition = &D_8011B388;
+    ((Actor_func_80290238_de *)(arg0))->active = 3;
+    ((Actor_func_80290238_de *)(arg0))->state = 0;
 }

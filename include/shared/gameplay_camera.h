@@ -92,8 +92,8 @@ struct Shared_func_80234FDC_S2 {
     char unkE0[68]; /* +0xE0: src/func_80234FDC.c */
     u16 unk124; /* +0x124: src/func_80234FDC.c */
     char pad126[0x2];
-    f32 unk128; /* +0x128: src/func_80234FDC.c */
-    char pad12C[0xC];
+    Vec3 position; /* +0x128: camera position */
+    char pad134[0x4];
     f32 unk138; /* +0x138: src/func_80234FDC.c */
     char pad13C[0x14];
     f32 unk150; /* +0x150: src/func_80234FDC.c */
@@ -108,8 +108,11 @@ struct Shared_func_80234FDC_S2 {
     char pad224[0x78];
     f32 unk29C; /* +0x29C: src/func_80234FDC.c */
     f32 unk2A0; /* +0x2A0: src/func_80234FDC.c */
-    char pad2A4[0xDC];
-    char unk380[3][64]; /* +0x380: src/func_80234FDC.c */
+    f32 unk2A4;
+    f32 unk2A8;
+    char pad2AC[0xD4];
+    char unk380[2][64]; /* +0x380: double-buffered projection matrices */
+    Shared_func_80234FDC_S6 lights[2]; /* +0x400: double-buffered lights */
     u16 unk440; /* +0x440: src/func_80234FDC.c */
     char pad442[0x6];
     char unk448[3][64]; /* +0x448: src/func_80234FDC.c */

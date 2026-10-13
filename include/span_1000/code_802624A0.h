@@ -245,4 +245,13 @@ struct SceneEffectPool {
     IntrusiveList activeEffects; /* 0x5F14 */
 };
 
+/* Eight-byte easing parameters returned for a motion animation segment. */
+typedef struct AnimationBlendEntry {
+    u16 frames;
+    u8 reserved2[3];
+    u8 start;
+    u8 reserved6;
+    u8 end;
+} AnimationBlendEntry;
+
 #endif

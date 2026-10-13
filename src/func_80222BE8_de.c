@@ -5,6 +5,8 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_C76B0/data.h"
+#include "span_1000/code_8022C894.h"
+#include "span_1000/code_802AB3FC.h"
 
 /* Adds ammunition to a player's weapon slot: computes the slot's cap as func_80222D64_de does (zero for
    no slot, the character's cap unless option D_801462D5 is 1, otherwise D_800CE3E8's cap plus the
@@ -32,20 +34,20 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
     s32 total;
     s32 have;
 
-    count = (s16 *) (&((func_80222BC4_S1 *)(player))->unk5F4 + slot * 2);
+    count = (&((Actor_func_8022D290_de *)(player))->unk_0x05F4 + slot);
     if (slot == -1) {
         cap = 0;
     } else if (D_801462D5 != 1) {
-        cap = (((func_80222BC4_S1 *)(player))->unk18)->caps[slot];
+        cap = ((Desc *)((Actor_func_8022D290_de *)(player))->field_0x18)->caps[slot];
     } else {
         cap = D_800CE3E8[slot];
-        if (((func_80222BC4_S1 *)(player))->unk1450 == 0) {
+        if (((Actor_func_8022D290_de *)(player))->unk_0x1450 == 0) {
             if (slot == 0) {
-                cap += D_80102B14[((func_80222BC4_S1 *)(player))->unk5D4].bonus0;
+                cap += D_80102B14[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus0;
             } else if (slot == 1) {
-                cap += D_80102B14[((func_80222BC4_S1 *)(player))->unk5D4].bonus1;
+                cap += D_80102B14[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus1;
             } else if (slot == 2) {
-                cap += D_80102B14[((func_80222BC4_S1 *)(player))->unk5D4].bonus2;
+                cap += D_80102B14[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus2;
             }
         }
     }
@@ -55,13 +57,13 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
         if (have == 0 && amount > 0) {
             switch (slot) {
             case 0:
-                ((func_80222BC4_S1 *)(player))->unkCC0 = 1;
+                ((Actor_func_8022D290_de *)(player))->unk_0x0CC0 = 1;
                 break;
             case 1:
-                ((func_80222BC4_S1 *)(player))->unkCC0 = 5;
+                ((Actor_func_8022D290_de *)(player))->unk_0x0CC0 = 5;
                 break;
             case 2:
-                ((func_80222BC4_S1 *)(player))->unkCC0 = 4;
+                ((Actor_func_8022D290_de *)(player))->unk_0x0CC0 = 4;
                 break;
             }
         }
@@ -105,22 +107,22 @@ s32 func_80222D64_de(void *arg0, s32 arg1) {
     if (pickup == 0) {
         return 0;
     }
-    slot = ((func_8021C9B4_S3 *)(pickup))->unkC;
-    count = (s16 *) (&((func_80222D40_S2 *)(arg0))->unk5F4 + slot * 2);
+    slot = ((AmmoPickupDefinition *)(pickup))->slot;
+    count = (&((Actor_func_8022D290_de *)(arg0))->unk_0x05F4 + slot);
     if (slot == -1) {
         cap = 0;
     } else {
         if (D_801462D5 != 1) {
-            base = (((func_80222D40_S2 *)(arg0))->unk18)->caps[slot];
+            base = ((Desc *)((Actor_func_8022D290_de *)(arg0))->field_0x18)->caps[slot];
         } else {
             base = D_800CE3E8[slot];
-            if (((func_80222D40_S2 *)(arg0))->unk1450 == 0) {
+            if (((Actor_func_8022D290_de *)(arg0))->unk_0x1450 == 0) {
                 if (slot == 0) {
-                    base += D_80102B14[((func_80222D40_S2 *)(arg0))->unk5D4].bonus0;
+                    base += D_80102B14[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus0;
                 } else if (slot == 1) {
-                    base += D_80102B14[((func_80222D40_S2 *)(arg0))->unk5D4].bonus1;
+                    base += D_80102B14[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus1;
                 } else if (slot == 2) {
-                    base += D_80102B14[((func_80222D40_S2 *)(arg0))->unk5D4].bonus2;
+                    base += D_80102B14[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus2;
                 }
             }
         }
@@ -147,8 +149,8 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
     s16 state;
     s32 hit;
 
-    if (((func_80222E80_S1 *)(arg1))->unk38 & 0x1000) {
-        state = ((func_80222E80_S2 *)(arg0))->unk650;
+    if (((Actor_func_802238E0_de *)(arg1))->inputFlags & 0x1000) {
+        state = ((Actor_func_8022D290_de *)(arg0))->unk_0x0650;
         if (state != 0xB) {
             if (state != 0xC) {
                 if (state != 9) {
@@ -160,7 +162,7 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
                                 hit = 0;
                             }
                             if (hit) {
-                                ((func_80222E80_S2 *)(arg0))->unk38 |= 0x1000;
+                                ((Actor_func_8022D290_de *)(arg0))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
                             func_802227F4_de(arg0, arg1, 0xC);
@@ -171,7 +173,7 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
             }
         }
     }
-    state = ((func_80222E80_S2 *)(arg0))->unk650;
+    state = ((Actor_func_8022D290_de *)(arg0))->unk_0x0650;
     if (state == 0x15 || state == 0x13 || state == 0x14) {
         hit = 1;
     } else {
@@ -180,16 +182,16 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
     if (hit) {
         return 0;
     }
-    if ((((func_80222E80_S1 *)(arg1))->unk38 & 0x2003) != 0x2000) {
+    if ((((Actor_func_802238E0_de *)(arg1))->inputFlags & 0x2003) != 0x2000) {
         return 0;
     }
-    if (!(((func_80222E80_S1 *)(arg1))->unk20 <= 0.0f)) {
+    if (!(((Actor_func_802238E0_de *)(arg1))->unk20 <= 0.0f)) {
         return 0;
     }
-    if (!(D_800C7948[1] < ((func_80222E80_S1 *)(arg1))->unk20)) {
+    if (!(D_800C7948[1] < ((Actor_func_802238E0_de *)(arg1))->unk20)) {
         return 0;
     }
-    state = ((func_80222E80_S2 *)(arg0))->unk650;
+    state = ((Actor_func_8022D290_de *)(arg0))->unk_0x0650;
     if (state == 0xB) {
         return 0;
     }

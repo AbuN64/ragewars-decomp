@@ -50,8 +50,8 @@ reset_state:
         ((ObjectLinks1BC *)(actor))->unk_1B8 == 8) {
         resource = ((ObjectLinks1BC *)(actor))->unk_12C;
         if (resource != 0 && *(u8 *)resource == 1 &&
-            (((func_80232FE8_S1 *)(resource))->unk100 & 0x300000) != 0) {
-            func_802227F4_de(((func_80232FE8_S1 *)(resource))->unk1D8, resource, 2);
+            (((Shared_Actor *)(resource))->weaponFlags & 0x300000) != 0) {
+            func_802227F4_de(((Shared_Actor *)(resource))->entity, resource, 2);
         }
     }
 

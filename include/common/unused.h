@@ -7317,7 +7317,8 @@ union NavigationFlagWord {
 struct NavigationNode;
 struct NavigationNode {
     Triple pos;
-    NavigationFlagWord unk_C;
+    u16 flags;
+    u16 reservedE;
 };
 struct NavigationState;
 struct NavigationState {

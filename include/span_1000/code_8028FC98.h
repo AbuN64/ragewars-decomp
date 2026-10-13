@@ -180,18 +180,38 @@ struct func_8028FFB0_S4 {
 struct Actor_func_80290238_de;
 /* unbake published declaration: published_c05b03938b18d55a4d44fc14 */
 struct Actor_func_80290238_de {
-    char pad0[0x17C];
+    s8 active;
+    char pad1[3];
+    s16 model;
+    char pad6[2];
+    Vec3 position;
+    s32 owner;
+    char *definition;
+    Vec3 rotation;
+    char pad28[0x28];
+    s32 resource;
+    s32 animation;
+    s32 frame;
+    s32 frameState;
+    char pad60[0x108];
+    s32 collisionState;
+    f32 collisionScale;
+    s32 collisionFlags;
+    s32 angle;
+    s32 angleState;
     f32 minX;
     f32 minY;
     f32 minZ;
     f32 maxX;
     f32 maxY;
     f32 maxZ;
-    char pad194[8];
+    s32 boundsState;
+    char pad198[4];
     u16 flags;
-    char pad19E[0x1C8 - 0x19E];
+    char pad19E[0x26];
+    s32 effectState;
     f32 lifetime;
-    char pad1CC[4];
+    s32 lifetimeState;
     s32 state;
     s32 *counter;
     struct Actor_func_80290238_de *prev;
@@ -333,5 +353,12 @@ extern void func_80290238_de(World_func_80290238_de *world);
 struct Container_func_8029076C_de;
 /* unbake published declaration: published_f870f38abddaaf78b3ccd4de */
 typedef struct Container_func_8029076C_de Container_func_8029076C_de;
+
+/* Resident resource chunks have two count/stride words followed by byte payload. */
+typedef struct ResidentDataChunk {
+    s32 width;
+    s32 count;
+    u8 data[1];
+} ResidentDataChunk;
 
 #endif

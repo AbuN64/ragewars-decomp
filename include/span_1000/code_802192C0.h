@@ -379,4 +379,27 @@ struct func_80219434_S1 {
     short unk4;
 };
 
+typedef struct CompactAnimationState {
+    s32 state;
+    s32 active;
+    u8 reserved8[4];
+    s16 cursor;
+    u8 flags;
+    u8 reservedF[3];
+    s8 clip;
+    u8 reserved13;
+} CompactAnimationState;
+
+typedef struct AnimationSprite {
+    u8 reserved0[8];
+    s32 model;
+    u8 reservedC[4];
+    u8 matrices[2][0x40];
+    s32 scaleX, scaleY, scaleZ;
+    f32 pitch, yaw;
+    u8 reservedA4[4];
+    Vec3 position;
+    s32 active;
+} AnimationSprite;
+
 #endif

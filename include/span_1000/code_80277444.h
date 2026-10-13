@@ -73,7 +73,14 @@ typedef struct Record14 Record14;
 struct Record14;
 /* unbake published declaration: published_7cefb0fed58223d751daef5a */
 struct Record14 {
-    u32 words[5];
+    u32 coordinates[3];
+    u16 lifetime;
+    u8 flags;
+    u8 kind;
+    u8 state;
+    u8 active;
+    u8 mode;
+    u8 reserved13;
 };
 
 struct ObjectState104;

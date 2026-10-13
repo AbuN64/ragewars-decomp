@@ -7,6 +7,7 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_8026E1F8.h"
 #include "types.h"
+#include "span_1000/code_802609CC.h"
 struct func_8024B8DC_S1;
 /* unbake published declaration: published_03f550b4f94a2508ae69afb6 */
 struct func_8024B8DC_S1 {
@@ -564,11 +565,42 @@ extern void func_8024715C_de(char *, Vec3 *);
 extern void func_8028A27C_de(void *, void *, Vec3 *, Vec3 *);
 extern u8 D_800C38F4_de[];
 typedef struct Actor36 {
-    u8 pad0[8]; Vec3 position; u8 pad14[4]; s32 *kind;
-    u8 pad1C[0x74-0x1C]; f32 matrix[4][4]; u8 padB4[0x10]; s32 size;
-    u8 padC8[8]; s32 alignment; u8 padD4[0x14]; Box_func_8026EE20_de box;
-    u32 flags; u8 pad104[0x6C]; u8 state[0x54]; Vec3 displacement;
-    u8 pad1D0[0xBC]; void (*update)(void *, void *);
+    u8 pad0[8];
+    Vec3 position;
+    u8 pad14[4];
+    s32 *kind;
+    u8 pad1C[0x34];
+    f32 scaleX;
+    u8 pad54[4];
+    f32 scaleZ;
+    u8 pad5C[0x10];
+    f32 heading;
+    u8 pad70[4];
+    f32 matrix[4][4];
+    u8 padB4[0x10];
+    s32 size;
+    s32 animationKey;
+    u8 padCC[4];
+    s32 alignment;
+    u8 padD4[0x10];
+    u16 ownerId;
+    s8 animationCount;
+    u8 padE7;
+    Box_func_8026EE20_de box;
+    u32 flags;
+    struct Anim currentTrack;
+    struct Anim previousTrack;
+    s16 blendFrames;
+    u8 pad12E[2];
+    f32 blend;
+    f32 blendTime;
+    u8 blendStart;
+    u8 blendEnd;
+    u8 pad13A[0x36];
+    u8 state[0x54];
+    Vec3 displacement;
+    u8 pad1D0[0xBC];
+    void (*update)(void *, void *);
 } Actor36;
 
 #endif

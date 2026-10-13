@@ -150,9 +150,15 @@ struct PlacedPropRecord {
 struct PropGeometry;
 /* unbake published declaration: published_bce54b9672f163876cd086d1 */
 struct PropGeometry {
-    char pad0[8];
+    s32 kind;
+    char pad4[4];
     f32 radius;
-    char padC[0x24 - 0xC];
+    char padC[2];
+    s8 variant;
+    char padF[3];
+    u8 material;
+    char pad13[0xD];
+    f32 speed;
     u32 radiusSquared;
 };
 
@@ -291,23 +297,35 @@ typedef struct func_8024F624_S1 func_8024F624_S1;
 struct Object_func_8024EB90_de;
 /* unbake published declaration: published_acde94bf8d79cdd2f6e2b0a9 */
 struct Object_func_8024EB90_de {
-    char pad0;
+    u8 state;
     s8 model;
     char pad2;
     s8 material;
-    char pad4[4];
+    u16 id;
+    char pad6[2];
     Vec3 position;
-    char pad14[4];
+    void *room;
     s32 *type;
-    char pad1C[0x68 - 0x1C];
+    char pad1C[0x34];
+    s32 animationKey;
+    s32 animation;
+    s32 resource;
+    s32 resourceSize;
+    s32 *renderResource;
+    char pad64[4];
     char matrices[4][0x40];
-    char pad168[0x174 - 0x168];
+    char pad168[0xC];
     s32 angle;
-    char pad178[0x194 - 0x178];
+    char pad178[4];
+    char effect[0x18];
     f32 scale;
     f32 height;
-    char pad19C[0x1A8 - 0x19C];
-    char lights[0x1C];
+    u16 flags;
+    char pad19E[2];
+    f32 scaleTime;
+    f32 frameDelta;
+    char lights[0x18];
+    s32 scene;
     Gfx *cached;
 };
 

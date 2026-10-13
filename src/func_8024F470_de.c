@@ -7,7 +7,7 @@
 
 /** Clear the word at object offset 0x1C4. */
 void func_8024F470_de(void *arg0) {
-    ((func_8024F460_S1 *)(arg0))->unk1C4 = 0;
+    ((Object_func_8024EB90_de *)(arg0))->cached = 0;
 }
 
 s32 func_8024D870_de();
@@ -33,30 +33,30 @@ void func_8024F4A0_de(void *arg0) {
     f32 threshold;
     f32 final_value;
 
-    ((func_8024F490_S1 *)(o))->unk1 = func_8024F858_de(arg0);
-    ((func_8024F490_S1 *)(o))->unk3 = ((func_8024F490_Inner *)(((func_8024F490_S1 *)(o))->unk18))->value;
+    ((Object_func_8024EB90_de *)(o))->model = func_8024F858_de(arg0);
+    ((Object_func_8024EB90_de *)(o))->material = ((PropGeometry *)(((Object_func_8024EB90_de *)(o))->type))->material;
 
     if (D_80146894.field0 == 0) {
-        char *state = ((func_8024F490_S1 *)(o))->unk18;
+        char *state = ((Object_func_8024EB90_de *)(o))->type;
         if (*(s32 *)state == 0xC) {
-            ((func_8024F490_S1 *)(o))->unk1A4 = D_800D2988 * ((func_8022CA04_S3 *)(state))->unk20;
-        } else if (((func_8024F490_S1 *)(o))->unk19C & 0x10) {
-            temp_f1 = ((func_8024F490_S1 *)(o))->unk1A0 + D_800D2988 * D_800C3DF0_de;
+            ((Object_func_8024EB90_de *)(o))->frameDelta = D_800D2988 * ((PropGeometry *)(state))->speed;
+        } else if (((Object_func_8024EB90_de *)(o))->flags & 0x10) {
+            temp_f1 = ((Object_func_8024EB90_de *)(o))->scaleTime + D_800D2988 * D_800C3DF0_de;
             threshold = (&D_800C3DF0_de)[1];
-            ((func_8024F490_S1 *)(o))->unk1A0 = temp_f1;
+            ((Object_func_8024EB90_de *)(o))->scaleTime = temp_f1;
             if (temp_f1 < threshold) {
-                ((func_8024F490_S1 *)(o))->unk194 = temp_f1 * D_800C3DF8_de.unk0;
+                ((Object_func_8024EB90_de *)(o))->scale = temp_f1 * D_800C3DF8_de.unk0;
             } else {
                 final_value = D_800C3DFC_de.unk0;
-                ((func_8024F490_S1 *)(o))->unk19C &= 0xFFEF;
-                ((func_8024F490_S1 *)(o))->unk194 = final_value;
+                ((Object_func_8024EB90_de *)(o))->flags &= 0xFFEF;
+                ((Object_func_8024EB90_de *)(o))->scale = final_value;
             }
         }
 
-        if (((func_8024F490_S1 *)(o))->unk14 != 0) {
-            ((func_8024F490_S1 *)(o))->unk1C0 = ((MenuRules *)(((func_8024F490_S1 *)(o))->unk14))->locked;
+        if (((Object_func_8024EB90_de *)(o))->room != 0) {
+            ((Object_func_8024EB90_de *)(o))->scene = ((MenuRules *)(((Object_func_8024EB90_de *)(o))->room))->locked;
         } else {
-            ((func_8024F490_S1 *)(o))->unk1C0 = D_800CD8D0.field_0;
+            ((Object_func_8024EB90_de *)(o))->scene = D_800CD8D0.field_0;
         }
     }
 }
@@ -68,18 +68,18 @@ void func_8024F5A0_de(void *arg0) {
     f32 threshold;
     f32 final_value;
 
-    if (((func_8024F590_S1 *)(arg0))->unk19C & 0x10) {
-        temp_f1 = ((func_8024F590_S1 *)(arg0))->unk1A0 +
+    if (((Object_func_8024EB90_de *)(arg0))->flags & 0x10) {
+        temp_f1 = ((Object_func_8024EB90_de *)(arg0))->scaleTime +
                   D_800D2988 * D_800C3E00_de;
-        threshold = ((func_802077F4_S2 *)(&D_800C3E00_de))->unk4;
-        ((func_8024F590_S1 *)(arg0))->unk1A0 = temp_f1;
+        threshold = (&D_800C3E00_de)[1];
+        ((Object_func_8024EB90_de *)(arg0))->scaleTime = temp_f1;
         if (temp_f1 < threshold) {
-            ((func_8024F590_S1 *)(arg0))->unk194 = temp_f1 * D_800C3E08_de;
+            ((Object_func_8024EB90_de *)(arg0))->scale = temp_f1 * D_800C3E08_de;
             return;
         }
         final_value = D_800C3E0C_de;
-        ((func_8024F590_S1 *)(arg0))->unk19C &= 0xFFEF;
-        ((func_8024F590_S1 *)(arg0))->unk194 = final_value;
+        ((Object_func_8024EB90_de *)(arg0))->flags &= 0xFFEF;
+        ((Object_func_8024EB90_de *)(arg0))->scale = final_value;
     }
 }
 
@@ -87,8 +87,8 @@ void func_8024F5A0_de(void *arg0) {
 extern float D_800D2988;
 
 void func_8024F618_de(void *arg0) {
-    void *p = ((func_8024F608_S1 *)(arg0))->unk18;
-    ((func_8024F608_S1 *)(arg0))->unk1A4 = (D_800D2988) * (((func_8022CA04_S3 *)(p))->unk20);
+    void *p = ((Object_func_8024EB90_de *)(arg0))->type;
+    ((Object_func_8024EB90_de *)(arg0))->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
 }
 
 extern void func_802736D4_de(void *, s32);
@@ -105,18 +105,18 @@ void func_8024F634_de(void *arg0) {
     f32 sp10[16];
     s32 var_a1;
 
-    if (*(s32 *) (((func_8024F624_S1 *)(o))->unk18) == 8) {
+    if (*(s32 *) (((Object_func_8024EB90_de *)(o))->type) == 8) {
         var_a1 = D_8013B190;
     } else {
-        var_a1 = ((func_8024F624_S1 *)(o))->unk174;
+        var_a1 = ((Object_func_8024EB90_de *)(o))->angle;
     }
     func_802736D4_de(sp10, var_a1);
 
-    func_8027347C_de(sp10, ((func_8024F624_S1 *)(o))->unk194, ((func_8024F624_S1 *)(o))->unk194, ((func_8024F624_S1 *)(o))->unk194);
+    func_8027347C_de(sp10, ((Object_func_8024EB90_de *)(o))->scale, ((Object_func_8024EB90_de *)(o))->scale, ((Object_func_8024EB90_de *)(o))->scale);
 
-    func_8027254C_de(&((func_8024F624_S1 *)(o))->unk8, 20000.0f);
+    func_8027254C_de(&((Object_func_8024EB90_de *)(o))->position.x, 20000.0f);
 
-    func_80273448_de((char *) sp10, ((func_8024F624_S1 *)(o))->unk8, ((func_8024F624_S1 *)(o))->unkC + ((func_8024F624_S1 *)(o))->unk198, ((func_8024F624_S1 *)(o))->unk10);
+    func_80273448_de((char *) sp10, ((Object_func_8024EB90_de *)(o))->position.x, ((Object_func_8024EB90_de *)(o))->position.y + ((Object_func_8024EB90_de *)(o))->height, ((Object_func_8024EB90_de *)(o))->position.z);
 
     func_80273D6C_de(sp10);
 
@@ -149,7 +149,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
             func_80253838_de(0, resource);
             found = func_802540F4_de(0, &sp28, key, &D_800C3DC0_de, 1);
             if (found != 0) {
-                ((func_8022FD9C_S4 *)(arg0))->unk58 = func_8028FE3C_de((s32)sp28, key,
+                ((Object_func_8024EB90_de *)(arg0))->resource = func_8028FE3C_de((s32)sp28, key,
                                                     arg1 % *(s32 *)sp28,
                                                     &((Access_s32_5C *)(arg0))->field);
                 ((func_8022FD9C_Record *)(arg0))->unk54 = arg1;
@@ -157,9 +157,9 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
             }
         }
     }
-    if (((func_8022FD9C_S4 *)(arg0))->unk58 != 0) {
-        return func_8025193C_de(0, ((func_8022FD9C_S4 *)(arg0))->unk58,
-                             ((func_8022FD9C_S4 *)(arg0))->unk58, ((Access_s32_5C *)(arg0))->field,
+    if (((Object_func_8024EB90_de *)(arg0))->resource != 0) {
+        return func_8025193C_de(0, ((Object_func_8024EB90_de *)(arg0))->resource,
+                             ((Object_func_8024EB90_de *)(arg0))->resource, ((Access_s32_5C *)(arg0))->field,
                              0, 0, &D_0026D7F4, &D_800C3DD4_de, 0);
     }
     return 0;
@@ -174,13 +174,13 @@ s32 func_8024F858_de(void *arg0) {
     s32 value;
     s32 index;
 
-    obj = ((func_8024F848_S1 *)(arg0))->unk18;
+    obj = ((Object_func_8024EB90_de *)(arg0))->type;
     if (*(s32 *)obj == 0xC) {
         return 0;
     }
 
-    value = ((func_80250DBC_S2 *)(obj))->unkE;
-    index = func_8028B25C_de(&D_8011FE88, ((func_8024F848_S1 *)(arg0))->unk4);
+    value = ((PropGeometry *)(obj))->variant;
+    index = func_8028B25C_de(&D_8011FE88, ((Object_func_8024EB90_de *)(arg0))->id);
     if (index < 0x6AB) {
         if (index < 0x6A9) {
             return value;
@@ -202,5 +202,5 @@ extern s32 D_800D297C;
 void func_8024F8DC_de(void *arg0, s32 **arg1) {
     s32 new_var;
     new_var = **arg1;
-    func_80253E64_de(0, arg1, func_802784C0_de(new_var, *((func_8024F8CC_S1 *)(arg0))->unk60, &((func_8024F8CC_S1 *)(arg0))->unk17C, (s32)((char *)arg0 + ((D_800D297C << 6) + 0x68)), 0, arg0));
+    func_80253E64_de(0, arg1, func_802784C0_de(new_var, *((Object_func_8024EB90_de *)(arg0))->renderResource, &((Object_func_8024EB90_de *)(arg0))->effect[0], (s32)((char *)arg0 + ((D_800D297C << 6) + 0x68)), 0, arg0));
 }

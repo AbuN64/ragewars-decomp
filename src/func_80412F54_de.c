@@ -23,8 +23,7 @@ void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source) {
     D_80153D58=0;
     D_80153D54=0;
     if(destination) {
-        /* Published descriptor view records only width at offset 8. */
-        D_80153D58=(func_8022BECC_S2 *)destination;
+        D_80153D58=(void *)destination;
         dst=D_800E2B20[destination->format];
         D_8014DA90=dst;
         if(dst.word[1]) D_80153C70=destination->pixels;
@@ -46,7 +45,7 @@ void func_80412F54_de(ImageDescriptor *destination, ImageDescriptor *source) {
         D_8014DA3C=dst.word[12];
     }
     if(source) {
-        D_80153D54=(func_8022BECC_S2 *)source;
+        D_80153D54=(void *)source;
         src=D_800E2B20[source->format];
         D_8014DA50=src;
         if(src.word[1]) D_80153C64=source->pixels;

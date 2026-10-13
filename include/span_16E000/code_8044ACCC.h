@@ -210,7 +210,10 @@ typedef IntrusiveList List_func_8044D220_de;
 struct Bucket;
 /* unbake published declaration: published_67dad23f781318bbd3282061 */
 struct Bucket {
-    char pad0[0x10];
+    struct Bucket *prev;
+    struct Bucket *next;
+    struct Record14 *object;
+    f32 remaining;
 };
 
 struct Floats;

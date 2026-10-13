@@ -4,6 +4,7 @@
 #include "span_16E000/code_8042BD40.h"
 #include "span_16E000/code_804379C8.h"
 #include "types.h"
+#include "span_1000/code_8028B64C.h"
 
 void func_80286080_de(void *arg0) {
     Shared_World *state;
@@ -100,8 +101,8 @@ void func_80286284_de(void *arg0) {
     u32 remove_value;
 
     count = 0;
-    total = ((func_80286254_S1 *)arg0)->unkE50;
-    objects = &((func_80286254_S1 *)(arg0))->unkC50;
+    total = ((Scene_func_8028B028_de *)arg0)->count;
+    objects = &((Scene_func_8028B028_de *)(arg0))->objects[0];
     if (total > 0) {
         object_type = 2;
         skip_mask = 0x40000000;
@@ -112,18 +113,18 @@ void func_80286284_de(void *arg0) {
             void *next_object;
 
             next_object = (void *)*objectp;
-            if (*((func_8024C654_S1 *)(next_object))->unk18 != object_type) {
+            if (*((Object_func_8028CAE0_de *)(next_object))->kind != object_type) {
                 goto first_pass_done;
             }
             object = next_object;
             objectp++;
-            flags = ((func_80207F90_S1 *)object)->unk100;
+            flags = ((Shared_Actor *)object)->weaponFlags;
             saved_delta = D_800D2988;
             count++;
             if (!(flags & skip_mask)) {
                 func_8024BE3C_de(object);
             }
-            if ((((func_80207F90_S1 *)object)->unk100 & remove_mask) == remove_value) {
+            if ((((Shared_Actor *)object)->weaponFlags & remove_mask) == remove_value) {
                 func_80246E44_de(object);
             }
             D_800D2988 = saved_delta;
@@ -172,7 +173,7 @@ first_pass_done:
             saved_delta = D_800D2988;
             func_8024BE3C_de(object);
             count++;
-            if (((func_80207F90_S1 *)object)->unk100 & 0x2000) {
+            if (((Shared_Actor *)object)->weaponFlags & 0x2000) {
                 func_80246E44_de(object);
             }
             D_800D2988 = saved_delta;

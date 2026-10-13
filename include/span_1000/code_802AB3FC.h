@@ -269,4 +269,13 @@ extern void func_802AADCC_de(u16 *grid, s16 x0, s32 y);
 /* unbake published declaration: published_fb2a6d0b7026cd3e9934b469 */
 extern float D_800C62E0;
 
+/* The five 0x14-byte ammunition definitions searched at D_800D3230. */
+typedef struct AmmoPickupDefinition {
+    u8 reserved0[4];
+    s16 kind;
+    u8 reserved6[6];
+    s16 slot;
+    u8 reservedE[6];
+} AmmoPickupDefinition;
+
 #endif

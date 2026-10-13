@@ -5,6 +5,7 @@
 #include "span_1000/code_80255BEC.h"
 #include "types.h"
 #include "stddef.h"
+#include "span_1000/code_8028FC98.h"
 /* Loads a scene's light into the global light D_800CBC90: copies the ambient and directional colours from the scene's light settings (bytes 0xD and 0xA) into both colour copies and the direction bytes from 0x11, then scales the direction to D_800CA1F0 in length through func_802B72B0_de and func_80271F9C_de and stores it as shorts at 0x1B2B4 of the scene. */
 extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
@@ -137,12 +138,12 @@ void func_8044C108_de(World_func_8044C108_de *world, void ***handle) {
         l2 = func_8028FDB4_de(node, 2);
         l3 = func_8028FDB4_de(node, 3);
         count = l0->field_4;
-        world->verts = &((func_8020CC0C_S1 *)(l0))->unk8;
-        world->faces = &((func_8044CD58_S2 *)(l1))->unk8;
+        world->verts = &((ResidentDataChunk *)(l0))->data[0];
+        world->faces = (Face *)&((ResidentDataChunk *)(l1))->data[0];
         world->nfaces = count;
         count = l2->field_4;
-        world->edgeData = &((func_8020CC0C_S1 *)(l2))->unk8;
-        world->edges = &((func_8044CD58_S2 *)(l3))->unk8;
+        world->edgeData = &((ResidentDataChunk *)(l2))->data[0];
+        world->edges = (Face *)&((ResidentDataChunk *)(l3))->data[0];
         world->nedges = count;
         func_80255CA0_de(&world->listA, 0, 4);
         func_80255CA0_de(&world->listB, 0, 4);

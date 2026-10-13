@@ -6,6 +6,7 @@
 #include "types.h"
 #include "n64sdk.h"
 #include "gbi.h"
+#include "shared/gameplay_camera.h"
 
 /* Steps an animation cursor one frame: looks up the clip in D_8011FE88, keeps the previous frame,
    and moves forward in states 1 and 2 or backward in states 3 and 4; at either end a looping clip
@@ -81,7 +82,7 @@ extern void *func_8028D244_de(char *a, unsigned char b, short c);
 
 
 void *func_80219408_de(void *arg0) {
-    func_8028D244_de(&D_8011FE88, ((func_80219408_S1 *)(arg0))->unk1, ((func_80219408_S1 *)(arg0))->unk2);
+    func_8028D244_de(&D_8011FE88, ((Cursor *)(arg0))->clip, ((Cursor *)(arg0))->frame);
 }
 
 extern void *func_8028D244_de(char *a, unsigned char b, short c);
@@ -91,16 +92,16 @@ extern void *func_8028D244_de(char *a, unsigned char b, short c);
 
 
 void func_80219434_de(void *arg0) {
-    func_8028D244_de(&D_8011FE88, ((func_80219434_S1 *)(arg0))->unk1, ((func_80219434_S1 *)(arg0))->unk4);
+    func_8028D244_de(&D_8011FE88, ((Cursor *)(arg0))->clip, ((Cursor *)(arg0))->previous);
 }
 
 /** Initialize the compact state record to its default values. */
 void func_80219460_de(void *record) {
-    ((func_80219460_S1 *)(record))->unk4 = 1;
-    *(int *)record = 0;
-    ((func_80219460_S1 *)(record))->unkC = 0;
-    ((func_80219460_S1 *)(record))->unkE = 0;
-    ((func_80219460_S1 *)(record))->unk12 = -1;
+    ((CompactAnimationState *)(record))->active = 1;
+    ((CompactAnimationState *)record)->state = 0;
+    ((CompactAnimationState *)(record))->cursor = 0;
+    ((CompactAnimationState *)(record))->flags = 0;
+    ((CompactAnimationState *)(record))->clip = -1;
 }
 
 void func_80219480_de(void) {
@@ -150,7 +151,7 @@ void func_80219490_de(char *object, char *camera) {
     char *matrix;
 
     func_8026D8F8_de();
-    if (((func_80219490_S1 *)(object))->unk8 == 0 || ((func_80219490_S1 *)(object))->unkB4 == 0) {
+    if (((AnimationSprite *)(object))->model == 0 || ((AnimationSprite *)(object))->active == 0) {
         return;
     }
 
@@ -163,18 +164,18 @@ void func_80219490_de(char *object, char *camera) {
     gDPSetTextureFilter(command, G_TF_BILERP);
     func_8026D980_de();
 
-    x = ((func_80219490_S2 *)(camera))->unk2A4;
-    y = ((func_80219490_S2 *)(camera))->unk2A8;
-    z = ((func_80219490_S2 *)(camera))->unk2A0 + y;
-    w = ((func_80219490_S2 *)(camera))->unk29C + x;
+    x = ((Shared_func_80234FDC_S2 *)(camera))->unk2A4;
+    y = ((Shared_func_80234FDC_S2 *)(camera))->unk2A8;
+    z = ((Shared_func_80234FDC_S2 *)(camera))->unk2A0 + y;
+    w = ((Shared_func_80234FDC_S2 *)(camera))->unk29C + x;
     func_80291BE8_de(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
-    func_80272CB0_de(first, ((func_80219490_S1 *)(object))->unk90,
-                   ((func_80219490_S1 *)(object))->unk94, ((func_80219490_S1 *)(object))->unk98);
-    func_80273A98_de(first, ((func_80219490_S1 *)(object))->unkA0);
-    func_802738C0_de(first, ((func_80219490_S1 *)(object))->unk9C);
-    func_80273448_de((char *)first, ((func_80219490_S1 *)(object))->unkA8,
-                   ((func_80219490_S1 *)(object))->unkAC, ((func_80219490_S1 *)(object))->unkB0);
+    func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,
+                   ((AnimationSprite *)(object))->scaleY, ((AnimationSprite *)(object))->scaleZ);
+    func_80273A98_de(first, ((AnimationSprite *)(object))->yaw);
+    func_802738C0_de(first, ((AnimationSprite *)(object))->pitch);
+    func_80273448_de((char *)first, ((AnimationSprite *)(object))->position.x,
+                   ((AnimationSprite *)(object))->position.y, ((AnimationSprite *)(object))->position.z);
     func_80273D6C_de(first);
 
     matrix = (char *)second;
@@ -189,7 +190,7 @@ void func_80219490_de(char *object, char *camera) {
     func_80272898_de(first, object + 0xA8, output);
     {
         s32 offset = (D_800D297C << 6) + 0x10;
-        func_8026DF30_de(((func_80219490_S1 *)(object))->unk8, (s32)(object + offset),
+        func_8026DF30_de(((AnimationSprite *)(object))->model, (s32)(object + offset),
                        (s32)&D_800CBC90, 0, -1);
     }
     func_8026D9D0_de();

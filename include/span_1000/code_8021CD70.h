@@ -18,6 +18,8 @@ struct Actor_func_802238E0_de {
     Vec3 unk8;
     char pad14[0xc];
     f32 unk20;
+    char pad24[0x14];
+    s32 inputFlags;
 };
 
 /* unbake published declaration: published_0c42f0526add5e10203c059e */

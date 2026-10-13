@@ -276,10 +276,20 @@ typedef struct func_8024C5C4_S2 func_8024C5C4_S2;
 struct Brain_func_80212D78_eu_x;
 /* unbake published declaration: published_07c4d4ef1f93bf463c22f5f0 */
 struct Brain_func_80212D78_eu_x {
-    char pad0[0x220];
+    struct Actor_func_8022D290_de *player;
+    s32 node;
+    char pad8[4];
+    s32 nextNode;
+    char pad10[0x210];
     s32 unk220;
-    char pad224[0xD8];
+    char pad224[8];
+    s32 goal;
+    char pad230[0xCC];
     s32 unk2FC;
+    char pad300[0x14];
+    s32 busy;
+    char pad318[8];
+    s32 jumpTimer;
 };
 
 struct Output80216D3C;

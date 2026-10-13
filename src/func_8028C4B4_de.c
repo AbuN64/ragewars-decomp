@@ -6,6 +6,9 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "span_1000/code_80277444.h"
+#include "span_1000/code_80286050.h"
+#include "span_16E000/code_8044ACCC.h"
 
 extern void func_80278F00_de(Rec_func_8024C92C_de *arg0);
 
@@ -22,12 +25,12 @@ void func_8028C4B4_de(void *arg0, s32 arg1) {
     s32 var_s0;
     s32 var_s0_2;
 
-    var_s0 = ((func_8028C490_S1 *)(arg0))->unk11C0;
-    var_s1 = ((func_8028C490_S1 *)(arg0))->unk11D0;
+    var_s0 = ((World_func_8044C108_de *)(arg0))->nfaces;
+    var_s1 = ((World_func_8044C108_de *)(arg0))->faces;
     var_s0 -= 1;
     if (var_s0 != -1) {
         do {
-            if (((func_8028C490_S2 *)(var_s1))->unkF == arg1) {
+            if (((Record14 *)(var_s1))->kind == arg1) {
                 func_80278F00_de(var_s1);
             }
             var_s0 -= 1;
@@ -35,12 +38,12 @@ void func_8028C4B4_de(void *arg0, s32 arg1) {
         } while (var_s0 != -1);
     }
 
-    var_s0_2 = ((func_8028C490_S1 *)(arg0))->unk11C4;
-    var_s1_2 = ((func_8028C490_S1 *)(arg0))->unk11D4;
+    var_s0_2 = ((World_func_8044C108_de *)(arg0))->nedges;
+    var_s1_2 = ((World_func_8044C108_de *)(arg0))->edges;
     var_s0_2 -= 1;
     if (var_s0_2 != -1) {
         do {
-            if (((func_8028C490_S2 *)(var_s1_2))->unkF == arg1) {
+            if (((Record14 *)(var_s1_2))->kind == arg1) {
                 func_80278F00_de(var_s1_2);
             }
             var_s0_2 -= 1;
@@ -54,21 +57,21 @@ s32 func_8028C568_de(void *arg0, void *arg1) {
     f32 val;
     s32 flag;
 
-    rec = ((func_8028C544_S1 *)(arg0))->unk11EC.head;
+    rec = ((World_func_8044C108_de *)(arg0))->listB.head;
     if (rec != 0) {
-        func_80255ED8_de(&((func_8028C544_S1 *)(arg0))->unk11EC, (s32)rec);
-        func_80255CB8_de(&((func_8028C544_S1 *)(arg0))->unk11D8, (s32) rec);
-        ((func_8028C544_S2 *)(rec))->unk8 = arg1;
+        func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listB, (s32)rec);
+        func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listA, (s32) rec);
+        ((Bucket *)(rec))->object = arg1;
     } else {
-        rec = ((func_8028C544_S1 *)(arg0))->unk11DC;
-        func_80278C10_de(((func_8028C544_S2 *)(rec))->unk8);
-        ((func_8028C544_S2 *)(rec))->unk8 = arg1;
+        rec = ((World_func_8044C108_de *)(arg0))->listA.tail;
+        func_80278C10_de(((Bucket *)(rec))->object);
+        ((Bucket *)(rec))->object = arg1;
     }
-    val = recordValue((s32) ((func_8028C544_S3 *)(arg1))->unkC);
-    ((func_8028C544_S2 *)(rec))->unkC = val;
-    flag = ((func_8028C544_S3 *)(arg1))->unkE & 2;
+    val = recordValue((s32) ((Record14 *)(arg1))->lifetime);
+    ((Bucket *)(rec))->remaining = val;
+    flag = ((Record14 *)(arg1))->flags & 2;
     if (flag != 0) {
-        ((func_8028C544_S2 *)(rec))->unkC = val * D_800C52E8_de;
+        ((Bucket *)(rec))->remaining = val * D_800C52E8_de;
     }
     return flag;
 }
@@ -92,17 +95,17 @@ void func_8028C60C_de(void *arg0) {
     f32 zero;
     f32 value;
 
-    node = ((func_8028C5E8_S1 *)(arg0))->unk11D8.head;
+    node = ((World_func_8044C108_de *)(arg0))->listA.head;
     remove = 0;
     if (node != 0) {
         zero = 0.0f;
         do {
-            object = ((func_8028C5E8_S2 *)(node))->unk8;
-            next = ((func_8028C5E8_S2 *)(node))->unk4;
+            object = ((Bucket *)(node))->object;
+            next = ((Bucket *)(node))->next;
             expired = remove;
-            if (((ModelDef *)(object))->colour & 2) {
-                value = ((func_8028C5E8_S2 *)(node))->unkC - D_800D2988;
-                ((func_8028C5E8_S2 *)(node))->unkC = value;
+            if (((Record14 *)(object))->flags & 2) {
+                value = ((Bucket *)(node))->remaining - D_800D2988;
+                ((Bucket *)(node))->remaining = value;
                 if (value <= zero) {
                     expired = 1;
                     remove = 1;
@@ -112,8 +115,8 @@ void func_8028C60C_de(void *arg0) {
                 func_80278C10_de(object);
             }
             if (remove != 0) {
-                func_80255ED8_de(&((func_8028C5E8_S1 *)(arg0))->unk11D8, (s32)node);
-                func_80255CB8_de(&((func_8028C5E8_S1 *)(arg0))->unk11EC, (s32)node);
+                func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listA, (s32)node);
+                func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listB, (s32)node);
             }
             node = next;
             remove = 0;
@@ -418,8 +421,8 @@ void func_8028CCA4_de(void *arg0, s32 arg1) {
     void *entry;
 
     i = 0;
-    count = ((func_8028CC80_S1 *)((arg0)))->unkE50;
-    arr = &((func_8028CC80_S1 *)((arg0)))->unkC50;
+    count = ((Scene_func_8028B028_de *)((arg0)))->count;
+    arr = &((Scene_func_8028B028_de *)((arg0)))->objects[0];
     if (count > 0) {
         do {
             entry = *arr;

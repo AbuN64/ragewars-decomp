@@ -3,6 +3,7 @@
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_80212C90.h"
 #include "types.h"
+#include "span_1000/code_8022C894.h"
 
 /* Runs a computer player's think step: when it has reached its goal node or the goal at 0x22C is past
    the node count D_8013B368, it picks a new goal as func_802136EC_de does (func_80213340_de for a player
@@ -36,15 +37,15 @@ extern void func_80208AAC_de(void *);
 
 
 void func_80213500_de(void *arg0) {
-    void *actor = ((func_80212828_S2 *)(((func_8020A028_S3 *)(arg0))->unk1D8))->unk1454;
+    void *actor = ((Actor_func_8022D290_de *)(((Shared_Actor *)(arg0))->entity))->unk_0x1454;
     void *player;
     s32 busy;
     s32 held;
     s32 state;
 
-    if (((func_80213500_S3 *)(actor))->unk4 == ((func_80213500_S3 *)(actor))->unk22C
-        || !(((func_80213500_S3 *)(actor))->unk22C < D_8013B368)) {
-        void *data = ((func_80209B64_S4 *)(*(void **) actor))->unk5D8;
+    if (((Brain_func_80212D78_eu_x *)(actor))->node == ((Brain_func_80212D78_eu_x *)(actor))->goal
+        || !(((Brain_func_80212D78_eu_x *)(actor))->goal < D_8013B368)) {
+        void *data = ((Actor_func_8022D290_de *)(*(void **) actor))->unk_0x05D8;
         if (((Record_func_80208158_de *)(data))->display && ((Record_func_80208158_de *)(data))->kind == 12) {
             func_80213340_de(actor);
         } else {
@@ -54,42 +55,42 @@ void func_80213500_de(void *arg0) {
             s32 candidate;
 
             if (global_count >= 2) {
-                candidate = ((func_80213500_S3 *)(actor))->unk22C;
+                candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
 loop:
                 if (tries < 10) {
                     candidate = func_802744D4_de() % table[1];
-                    if (((func_8020CA10_S2 *)(func_8020C994_de(table, candidate)))->unkC & 0x400) {
-                        candidate = ((func_80213500_S3 *)(actor))->unk22C;
+                    if (((NavigationNode *)(func_8020C994_de(table, candidate)))->flags & 0x400) {
+                        candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
-                    if (candidate != ((func_80213500_S3 *)(actor))->unk22C) {
+                    if (candidate != ((Brain_func_80212D78_eu_x *)(actor))->goal) {
                         goto store_both;
                     }
                     goto loop;
                 } else {
-                    ((func_80213500_S3 *)(actor))->unk22C = candidate;
+                    ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
                     goto store_c;
                 }
             } else {
                 candidate = 1;
             }
 store_both:
-            ((func_80213500_S3 *)(actor))->unk22C = candidate;
+            ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
 store_c:
-            ((func_80213500_S3 *)(actor))->unkC = candidate;
+            ((Brain_func_80212D78_eu_x *)(actor))->nextNode = candidate;
         }
     }
-    if (--((func_80213500_S3 *)(actor))->unk320 == 0) {
+    if (--((Brain_func_80212D78_eu_x *)(actor))->jumpTimer == 0) {
         player = *(void **) actor;
-        state = ((func_80213500_S7 *)(player))->unk650 != 0xF;
-        busy = ((func_80213500_S3 *)(actor))->unk314 != 0;
-        held = (((func_80213500_S7 *)(player))->unk38 & 0x3000) != 0;
+        state = ((Actor_func_8022D290_de *)(player))->unk_0x0650 != 0xF;
+        busy = ((Brain_func_80212D78_eu_x *)(actor))->busy != 0;
+        held = (((Actor_func_8022D290_de *)(player))->unk_0x0038 & 0x3000) != 0;
         if (state && !held && !busy) {
-            ((func_80213500_S7 *)(player))->unk6B0 |= 0x10;
+            ((Actor_func_8022D290_de *)(player))->unk_0x06B0 |= 0x10;
         }
     }
-    if (((func_80213500_S3 *)(actor))->unk320 < 0) {
-        ((func_80213500_S3 *)(actor))->unk320 = (func_802744D4_de() % 7 + 3) * 15;
+    if (((Brain_func_80212D78_eu_x *)(actor))->jumpTimer < 0) {
+        ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = (func_802744D4_de() % 7 + 3) * 15;
     }
     func_80211020_de(actor);
     func_80208410_de(actor);
@@ -119,11 +120,11 @@ extern void *func_8020C994_de(void *, s32);
 
 void func_802136EC_de(void *arg0)
 {
-    void *actor = ((func_80212828_S2 *)(((func_8020A028_S3 *)(arg0))->unk1D8))->unk1454;
+    void *actor = ((Actor_func_8022D290_de *)(((Shared_Actor *)(arg0))->entity))->unk_0x1454;
 
-    ((func_802136EC_S3 *)(actor))->unk220 = 0;
+    ((Brain_func_80212D78_eu_x *)(actor))->unk220 = 0;
     {
-        void *data = ((func_80209B64_S4 *)(*(void **)actor))->unk5D8;
+        void *data = ((Actor_func_8022D290_de *)(*(void **)actor))->unk_0x05D8;
         if (((Record_func_80208158_de *)(data))->display && ((Record_func_80208158_de *)(data))->kind == 12) {
             func_80213340_de(actor);
         } else {
@@ -133,33 +134,33 @@ void func_802136EC_de(void *arg0)
             s32 candidate;
 
             if (global_count >= 2) {
-                candidate = ((func_802136EC_S3 *)(actor))->unk22C;
+                candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
 loop:
                 if (tries < 10) {
                     candidate = func_802744D4_de() % table[1];
-                    if (((func_8020CA10_S2 *)(func_8020C994_de(table, candidate)))->unkC & 0x400) {
-                        candidate = ((func_802136EC_S3 *)(actor))->unk22C;
+                    if (((NavigationNode *)(func_8020C994_de(table, candidate)))->flags & 0x400) {
+                        candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
-                    if (candidate != ((func_802136EC_S3 *)(actor))->unk22C) {
+                    if (candidate != ((Brain_func_80212D78_eu_x *)(actor))->goal) {
                         goto store_both;
                     }
                     goto loop;
                 } else {
-                    ((func_802136EC_S3 *)(actor))->unk22C = candidate;
+                    ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
                     goto store_c;
                 }
             } else {
                 candidate = 1;
             }
 store_both:
-            ((func_802136EC_S3 *)(actor))->unk22C = candidate;
+            ((Brain_func_80212D78_eu_x *)(actor))->goal = candidate;
 store_c:
-            ((func_802136EC_S3 *)(actor))->unkC = candidate;
+            ((Brain_func_80212D78_eu_x *)(actor))->nextNode = candidate;
         }
     }
     func_80209988_de(actor);
-    ((func_802136EC_S3 *)(actor))->unk320 = -1;
+    ((Brain_func_80212D78_eu_x *)(actor))->jumpTimer = -1;
 }
 
 extern s32 D_8013B364;
@@ -179,27 +180,27 @@ void func_80213810_de(void *arg0)
     s32 candidate;
 
     if (table[1] >= 2) {
-        candidate = ((func_80213340_S2 *)(arg0))->unk22C;
+        candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
 loop:
         if (tries < 10) {
             candidate = func_802744D4_de() % table[1];
-            if (((func_8020CA10_S2 *)(func_8020C994_de(table, candidate)))->unkC & 0x400) {
-                candidate = ((func_80213340_S2 *)(arg0))->unk22C;
+            if (((NavigationNode *)(func_8020C994_de(table, candidate)))->flags & 0x400) {
+                candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
             }
             tries++;
-            if (candidate != ((func_80213340_S2 *)(arg0))->unk22C) {
+            if (candidate != ((Brain_func_80212D78_eu_x *)(arg0))->goal) {
                 goto store_both;
             }
             goto loop;
         } else {
-            ((func_80213340_S2 *)(arg0))->unk22C = candidate;
+            ((Brain_func_80212D78_eu_x *)(arg0))->goal = candidate;
             goto store_c;
         }
     } else {
         candidate = 1;
     }
 store_both:
-    ((func_80213340_S2 *)(arg0))->unk22C = candidate;
+    ((Brain_func_80212D78_eu_x *)(arg0))->goal = candidate;
 store_c:
-    ((func_80213340_S2 *)(arg0))->unkC = candidate;
+    ((Brain_func_80212D78_eu_x *)(arg0))->nextNode = candidate;
 }
