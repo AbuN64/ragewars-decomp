@@ -35,7 +35,8 @@ struct Session_func_80293A20_de {
     char pad26DC2[2];
     f32 timer;
     s32 enabled; /* 0x26DC8 */
-    char pad26DCC[8];
+    char pad26DCC[4];
+    s32 transitionBlocked; /* 0x26DD0 */
     s32 clockPaused; /* 0x26DD4 */
     s32 selector; /* 0x26DD8 */
     s32 selectionActive; /* 0x26DDC */

@@ -151,7 +151,10 @@ struct Node_func_80285B64_de {
     Vec3 position;
     f32 value0;
     f32 value1;
-    char pad20[0x18];
+    u32 amplitudeHandle; /* 0x20 */
+    char pad24[8];
+    u32 lifetimeHandle; /* 0x2C */
+    char pad30[8];
     struct Node_func_80285B64_de **owner;
 };
 

@@ -16,7 +16,7 @@ struct func_80285D00_S1;
 typedef struct func_80285D00_S1 func_80285D00_S1;
 
 /* unbake published declaration: published_33b8724dae65f935f0c3c454 */
-extern void func_802858B0_de(void *arg0, void *arg1, Triple arg2, f32 arg5, f32 arg6, void **arg7);
+extern void func_802858B0_de(void *arg0, void *arg1, Vec3 arg2, f32 arg5, f32 arg6, void **arg7);
 
 struct func_80285D00_S1;
 /* unbake published declaration: published_35b7151ecb7fd050582abb1d */

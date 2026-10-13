@@ -15,18 +15,18 @@ extern void func_80264DE0_de(unsigned int *record, unsigned int value);
 
 
 
-void func_802858B0_de(void *arg0, void *arg1, Triple arg2,
+void func_802858B0_de(void *arg0, void *arg1, Vec3 arg2,
                    f32 arg5, f32 arg6, void **arg7) {
-    ((func_80285880_S1 *)(arg0))->unk8 = arg1;
-    ((func_80285880_S1 *)(arg0))->unkC = arg2;
-    ((func_80285880_S1 *)(arg0))->unk18 = arg5;
-    ((func_80285880_S1 *)(arg0))->unk1C = arg6;
-    ((func_80285880_S1 *)(arg0))->unk38 = arg7;
+    ((Node_func_80285B64_de *)arg0)->key = arg1;
+    ((Node_func_80285B64_de *)arg0)->position = arg2;
+    ((Node_func_80285B64_de *)arg0)->value0 = arg5;
+    ((Node_func_80285B64_de *)arg0)->value1 = arg6;
+    ((Node_func_80285B64_de *)arg0)->owner = arg7;
     if (arg7 != 0) {
         *arg7 = arg0;
     }
-    func_80264DE0_de(&((func_80285880_S1 *)(arg0))->unk20,
-                  (unsigned int)func_8028CE78_de(&D_8011FE88, *(s16 *)arg1));
-    func_80264DE0_de(&((func_80285880_S1 *)(arg0))->unk2C,
-                  (unsigned int)func_8028CE78_de(&D_8011FE88, ((func_8025E52C_S1 *)(arg1))->unk2));
+    func_80264DE0_de(&((Node_func_80285B64_de *)arg0)->amplitudeHandle,
+                  (unsigned int)func_8028CE78_de(&D_8011FE88, ((Clip *)arg1)->mode));
+    func_80264DE0_de(&((Node_func_80285B64_de *)arg0)->lifetimeHandle,
+                  (unsigned int)func_8028CE78_de(&D_8011FE88, ((Clip *)arg1)->frames));
 }
