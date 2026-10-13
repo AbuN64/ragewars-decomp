@@ -1,23 +1,12 @@
 #include "types.h"
 #include "span_1000/code_802BE0D0.h"
-extern u16 func_802BEDB0_de(u16 *,u16,s32,s32,void *);
-typedef struct DecodeNode {u16 first,second;} DecodeNode;
-typedef struct DecodeSample {u16 tag,value;} DecodeSample;
-typedef struct DecodePhrase {
-    char pad0[0xA0]; DecodeSample samples[64]; s32 count; char pad1A4[0x1B8-0x1A4];
-} DecodePhrase;
-typedef struct DecodeTable {
-    char pad0[0xE]; u16 width;
-    char pad10[0x1C-0x10]; DecodePhrase *phrases; DecodeNode *tree;
-} DecodeTable;
-typedef struct DecodeBlock {s32 kind,start,length,offset; DecodeTable *table;} DecodeBlock;
 s32 func_802BEF84_de(DecodeBlock *arg0,u16 *arg1,s16 arg2,u16 *arg3,void *arg4) {
     u16 node;
     s16 block,output;
     DecodeTable *table;
     DecodeNode *tree;
     u16 value;
-    s32 mask,high,topbit;
+    s32 mask,high; u16 topbit;
     DecodeNode *entry;
     s16 j;
     s32 dictOffset;

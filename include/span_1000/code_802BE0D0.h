@@ -174,4 +174,40 @@ extern unsigned short D_800D54BC;
 extern unsigned short D_800D54BE;
 extern unsigned short D_800D54C0_de;
 
+/* Dictionary decoder records, shared by the block and phrase streams. */
+typedef struct DecodeNode {
+    u16 first;
+    u16 second;
+} DecodeNode;
+
+typedef struct DecodeSample {
+    u16 tag;
+    u16 value;
+} DecodeSample;
+
+typedef struct DecodePhrase {
+    u8 pad0[0xA0];
+    DecodeSample samples[64];
+    s32 count;                     /* 0x1A0 */
+    u8 pad1A4[0x14];
+} DecodePhrase;
+
+typedef struct DecodeTable {
+    u8 pad0[0xE];
+    u16 width;
+    u8 pad10[0xC];
+    DecodePhrase *phrases;          /* 0x1C */
+    DecodeNode *tree;               /* 0x20 */
+} DecodeTable;
+
+typedef struct DecodeBlock {
+    s32 kind;
+    s32 start;
+    s32 length;
+    s32 offset;
+    DecodeTable *table;
+} DecodeBlock;
+
+extern u16 func_802BEDB0_de(u16 *, u16, s32, s32, void *);
+
 #endif
