@@ -4,5 +4,6 @@
 
 
 int func_802833D0_de(void *arg0) {
-    return ((func_802045CC_S1 *)(arg0))->unk12C;
+    Obj_func_80283920_de *actor = arg0;
+    return (int)actor->effectResource;
 }

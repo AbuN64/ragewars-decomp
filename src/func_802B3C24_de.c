@@ -5,7 +5,8 @@ extern void *D_800D4070;
 
 
 void func_802B3C24_de(void *arg0) {
-    void *head = D_800D4070;
-    *(void **)arg0 = ((func_802B8CC8_S1 *)(head))->unk2C;
-    ((func_802B8CC8_S1 *)(head))->unk2C = arg0;
+    struct ALParam_s1C *parameter = arg0;
+    ALGlobals *head = D_800D4070;
+    parameter->next = head->drvr.paramList;
+    head->drvr.paramList = arg0;
 }
