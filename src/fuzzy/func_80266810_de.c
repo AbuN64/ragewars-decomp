@@ -19,9 +19,9 @@ extern void func_80271F9C_de(Vec3 *, Vec3 *, f32);
 extern void func_80216488_de(Shared_DamageEvent *, void *, s32, f32, s32, Shield *);
 extern s32 func_8022AC00_de(void *);
 extern void func_802171FC_de(void *, void *, Shared_DamageEvent *);
-extern s32 func_80282C8C_de(void *);
-extern s32 func_80282D38_de(void *);
-extern s32 func_80282DEC_de(void *);
+extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
+extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
+extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
 /* Published contiguous pool of sixteen damage scaling constants. */
 extern const f32 D_800C43E0_de[16];
 extern u8 D_801462E5;
@@ -171,7 +171,9 @@ Vec3 sp30;
     s32 var_v1_3;
     u8 temp_v1_3;
     Shield *sp110;
+    Shared_ReactionObjectKind *projectile;
     Shared_DamageEvent sp40;
+    Shared_DamageEvent *event;
     f32 temp_fs1f_2;
     s32 var_v1_4;
     Shared_ReactionPlayer *var_s2;
@@ -189,9 +191,11 @@ Vec3 sp30;
         var_fs1 *= scaleHit(arg0, arg1, position, temp_fs1f_2, arg8, arg10, &sp110);
         if (!(var_fs1 <= 0.0f)) {
             hitImpulse(arg0, arg1, params, &sp30);
-            func_80216488_de(&sp40, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
+            event = &sp40;
+            func_80216488_de(event, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
             temp_v1_3 = arg1->category;
             if (temp_v1_3 == 2) {
+                projectile = &arg1->objectKind;
                 temp_a0 = arg1->owner;
                 if ((temp_a0 != NULL) && (temp_a0->category == 1)) {
                     if (temp_a0->flags & 0x300000) {
@@ -211,7 +215,7 @@ Vec3 sp30;
                                 if (var_s2->unk122C & 0x10) {
                                     reflectedProjectile(temp_s0_2, arg1, var_fs1, temp_fs1f_2, arg10, sp110);
                                 }
-                                if ((var_s2 != NULL) && (var_s2->unk122C & 0x1000) && (func_80282C8C_de(arg1) != 0)) {
+                                if ((var_s2 != NULL) && (var_s2->unk122C & 0x1000) && (func_80282C8C_de(projectile) != 0)) {
                                     temp_s1_2 = var_s2->unk5E4 + (s32) var_fs1;
                                     var_v1_3 = func_8022AC00_de(temp_s0_2);
                                     if (temp_s1_2 < var_v1_3) {
@@ -227,7 +231,8 @@ Vec3 sp30;
                             var_s2->unk11D8 = (f32) D_800C43E0_de[10];
                         }
                         if (temp_s0_2->unk122C & 0x200) {
-                            goto block_82;
+                            var_fs1 *= D_800C43E0_de[11];
+                            func_80216488_de(&sp40, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
                         }
                     } else if (arg1->type == 0x427) {
                         var_a2_2 = NULL;
@@ -235,13 +240,12 @@ Vec3 sp30;
                             var_a2_2 = temp_a0->unk1D8;
                         }
                         if ((var_a2_2 != NULL) && (var_a2_2->unk122C & 0x200)) {
-block_82:
                             var_fs1 *= D_800C43E0_de[11];
-                            func_80216488_de(&sp40, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
+                            func_80216488_de(event, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
                         }
                     }
                     if (var_s2 != NULL) {
-                        if ((var_s2->unk122C & 0x800) && ((func_80282D38_de(arg1) != 0) || (func_80282DEC_de(arg1) != 0))) {
+                        if ((var_s2->unk122C & 0x800) && ((func_80282D38_de(projectile) != 0) || (func_80282DEC_de(projectile) != 0))) {
                             var_fs1 = 0.0f;
                         }
                         if ((var_s2 != NULL) && (var_s2->unk122C & 0x400)) {

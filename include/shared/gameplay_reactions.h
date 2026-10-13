@@ -37,11 +37,22 @@ typedef struct Shared_DamageEvent {
     Shield *shield;
 } Shared_DamageEvent;
 
+struct Shared_ReactionObjectKind {
+    u8 unk0;
+    char pad0[0x3];
+    u16 unk4;
+};
+
 struct Shared_ReactionActor {
-    u8 category;
-    char pad1[3];
-    u16 type;
-    char pad6[2];
+    union {
+        struct {
+            u8 category;
+            char pad1[3];
+            u16 type;
+            char pad6[2];
+        };
+        Shared_ReactionObjectKind objectKind;
+    };
     Vec3 position;
     char pad14[0x58];
     f32 unk6C;
@@ -123,11 +134,7 @@ struct Shared_ReactionInteraction {
     s32 unkC;
 };
 
-struct Shared_ReactionObjectKind {
-    u8 unk0;
-    char pad0[0x3];
-    u16 unk4;
-};
+
 
 struct Shared_ReactionFloatValue {
     char pad0[0x4];
