@@ -1,3 +1,4 @@
+#include "common/types_8fd754e1e915.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8020FDB0.h"
@@ -14,24 +15,24 @@ void func_80226C60_de(void *object, Vector4f *output)
     Vector4f pitchRotation;
     Vector4f yawRotation;
     Vector4f rollRotation;
-    Shared_Quad orientation;
+    Vector4f orientation;
     Vector4f pitchYaw;
     Vector4f oriented;
-    SharedPlayer_func_8020FDB0_de *player = object;
+    Player *player = object;
     float pitch;
     float roll;
     float heading;
     float yaw;
     float scale;
 
-    pitch = player->views5E8.view724_71.unk724 + player->views5E8.view730_78.unk730[0];
-    roll = player->views5E8.view72C_75.unk72C + player->views5E8.view730_78.unk730[2];
+    pitch = player->pitchOffset + player->state730;
+    roll = player->lean + player->state738;
     scale = D_800C2B70_de;
     roll *= scale;
-    yaw = player->views5E8.view728_73.unk728 + player->views5E8.view730_78.unk730[1];
-    heading = player->views1C.view6C_4.unk6C;
-    orientation = player->views1C.view5C_6.unk5C;
-    pitch -= ((func_8022DBD4_S1 *)object)->unk708;
+    yaw = player->state728 + player->state734;
+    heading = player->heading;
+    orientation = player->orientation;
+    pitch -= player->state708;
 
     D_80115DEC = func_802B7130_de(roll);
     pitch *= scale;

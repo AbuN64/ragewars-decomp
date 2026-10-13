@@ -4,14 +4,18 @@
 #include "gfx.h"
 #include "shared/model_instance.h"
 #include "common/types_8a8189af7b05.h"
+#include "common/types_06e4f7ef1f9e.h"
 struct Player;
 /* unbake published declaration: published_038392ee5aca3bbae9c77df5 */
 typedef struct AiProfile {
-    u8 pad0[0x90];
+    u8 pad0[0x80];
+    s8 character; /* 0x80 */
+    u8 pad81[0xF];
     s8 state90; /* 0x90 */
     u8 pad91[2];
     u8 difficulty; /* 0x93 */
 } AiProfile;
+
 
 struct Player {
     u8 kind; /* 0x0 */
@@ -25,7 +29,7 @@ struct Player {
     s32 movementFlags; /* 0x38 */
     u8 pad3C[0x14];
     Vec3 scale; /* 0x50 */
-    u8 pad5C[0x10];
+    Vector4f orientation; /* 0x5C */
     f32 heading; /* 0x6C */
     u8 pad70[0x4];
     f32 matrix[16]; /* 0x74 */
@@ -52,7 +56,10 @@ struct Player {
     AiProfile * profile; /* 0x5D8 */
     void *owner; /* 0x5DC */
     s32 state; /* 0x5E0 */
-    u8 pad5E4[0x1E];
+    s32 health; /* 0x5E4 */
+    u8 pad5E8[0xC];
+    s16 ammo[3]; /* 0x5F4 */
+    u8 pad5FA[8];
     s8 actions[22][2]; /* 0x602 */
     s16 selectedAction; /* 0x62E */
     u8 pad630[0x20];
@@ -61,7 +68,9 @@ struct Player {
     f32 poseTimer; /* 0x658 */
     u8 pad65C[4];
     s32 flags660; /* 0x660 */
-    u8 pad664[0x24];
+    u8 pad664[0xC];
+    f32 damageCooldown; /* 0x670 */
+    u8 pad674[0x14];
     u8 tuning[0x10]; /* 0x688 */
     void *weaponAnimation; /* 0x698 */
     f32 steer; /* 0x69C */
@@ -93,11 +102,11 @@ struct Player {
     s32 forceCrouch; /* 0x71C */
     f32 eyeOffset; /* 0x720 */
     f32 pitchOffset; /* 0x724 */
-    s32 state728;
+    f32 state728;
     f32 lean; /* 0x72C */
-    s32 state730;
-    s32 state734;
-    s32 state738;
+    f32 state730;
+    f32 state734;
+    f32 state738;
     s32 state73C;
     f32 baseHeight; /* 0x740 */
     f32 verticalOffset; /* 0x744 */
@@ -128,18 +137,23 @@ struct Player {
     void *secondHandle; /* 0x11C0 */
     u8 pad11C4[0x14];
     f32 cooldown; /* 0x11D8 */
-    u8 pad11DC[0x18];
+    u8 pad11DC[8];
+    f32 pending; /* 0x11E4 */
+    u8 pad11E8[0xC];
     f32 fireSpin; /* 0x11F4 */
     s32 fireFrame; /* 0x11F8 */
     f32 zoom; /* 0x11FC */
     Vec3 aimPosition; /* 0x1200 */
     s32 zoomMode; /* 0x120C */
     s32 overlay; /* 0x1210 */
-    u8 pad1214[0x1A0];
+    u8 pad1214[0x18];
+    s32 reactionFlags; /* 0x122C */
+    u8 pad1230[0x184];
     void *animationTable; /* 0x13B4 */
     u8 pad13B8[0x1C];
     s32 toggle; /* 0x13D4 */
-    u8 pad13D8[0x78];
+    void *reactionOwner; /* 0x13D8 */
+    u8 pad13DC[0x74];
     s32 computer; /* 0x1450 */
     struct AiController * controller; /* 0x1454 */
 };

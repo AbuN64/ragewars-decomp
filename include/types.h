@@ -34,7 +34,7 @@ extern s32 func_8020F444_de(void *arg0);
 extern void func_80212FDC_eu(void *object);
 extern void func_80213340_de(void *arg0);
 extern void func_8021A9A4_de(void *arg0, s32 arg1);
-extern s32 func_80222AA4_de(void *, s16);
+extern s32 func_80222AA4_de(void *, s32);
 extern void func_8022B00C_de(void *arg0);
 extern void func_8022C894_de(void *arg0, void *arg1);
 extern void func_8022CC34_de(void *arg0, void *arg1);
