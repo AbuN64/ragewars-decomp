@@ -6,7 +6,6 @@
 
 
 extern void func_8025E5B0_de(s32 *arg0, s32 arg1, s32 arg2, f32 *arg3);
-extern void func_802736D4_de(void *arg0, f32 arg1);
 extern void func_80272898_de(void *, void *, void *);
 
 

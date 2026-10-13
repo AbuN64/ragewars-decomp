@@ -31,7 +31,6 @@ extern s32 D_800CD8D0[];
 
 extern void func_8024DD10_de(PlacedProp *, Record_func_8024F960_eu *, s32, char *);
 extern PropGeometry *func_8028CF6C_de(void *, s32);
-extern void func_802736D4_de(char *, f32);
 extern void func_8027347C_de(char *, f32, f32, f32);
 extern void func_80273448_de(char *, f32, f32, f32);
 extern void func_80273D6C_de(char *);

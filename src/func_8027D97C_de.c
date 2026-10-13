@@ -15,7 +15,6 @@ extern void func_80275688_de(void *arg0, s32 arg1);
 extern void func_80274244_de(void *arg0, void *arg1);
 extern void func_8026F620_de(void *arg0, void *arg1, void *arg2);
 extern f32 func_802760BC_de(s32 arg0, s32 arg1);
-extern void func_802736D4_de(void *arg0, f32 arg1);
 
 
 

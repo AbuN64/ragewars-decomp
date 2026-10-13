@@ -16,7 +16,6 @@ extern void func_80271FC8_de(Vec3 *, f32, Vec3 *, Vec3 *);
 extern f32 func_80273EE4_de(f32, f32, f32);
 
 
-extern void func_802736D4_de(Matrix_func_80213CF8_de *, f32);
 extern void func_80272898_de(Matrix_func_80213CF8_de *, Vec3 *, Vec3 *);
 extern void func_80253754_de(s32, s32);
 

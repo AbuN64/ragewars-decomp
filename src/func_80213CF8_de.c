@@ -18,7 +18,6 @@ extern void func_8024E6D8_de(u8 *arg0, Vec3 *arg1);
 extern void func_80271F34_de(Vec3 *result, Vec3 *left, Vec3 *right);
 extern void func_80271F68_de(Vec3 *result, Vec3 *left, Vec3 *right);
 extern f32 func_8024E73C_de(u8 *arg0);
-extern void func_802736D4_de(Matrix_func_80213CF8_de *arg0, f32 arg1);
 extern void func_80272944_de(Matrix_func_80213CF8_de *arg0, Vec3 *arg1, Vec3 *arg2, s32 count);
 extern void func_80243A90_de(Source *arg0, Vec3 arg1, CollisionInfo *arg2);
 extern void func_80207730_de(u8 *arg0, Source *arg1);

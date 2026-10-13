@@ -25,7 +25,6 @@ extern int D_800D297C;
 extern void func_80226DD0_de(Player1680 *, Matrix *);
 extern void func_802732D0_de(Matrix *, Vec3 *);
 extern void func_802727D8_de(Matrix *);
-extern void func_802736D4_de(Matrix *, float);
 extern void func_80273448_de(Matrix *, float, float, float);
 extern void func_8027027C_de(Matrix *, void *);
 
