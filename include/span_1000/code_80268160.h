@@ -218,7 +218,7 @@ extern float D_800C4494_de;
 extern void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 /* unbake published declaration: published_fc0677306b5e5efd7079b8f7 */
-extern void func_802689BC_de(void *arg0, int arg1, int arg2, int arg3, int arg4, int arg5, unsigned char arg6);
+extern void func_802689BC_de(void *arg0, int arg1, int arg2, Blast blast);
 
 struct func_802689BC_S2;
 /* unbake published declaration: published_fdfb7de5e51682d2d4404993 */

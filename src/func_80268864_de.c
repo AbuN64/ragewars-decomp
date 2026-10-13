@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
@@ -71,9 +72,8 @@ void func_802688E4_de(Actor_func_802688E4_de *arg0, Player *arg1, s32 arg2, Blas
     }
 }
 
-void func_802689BC_de(void *arg0, int arg1, int arg2, int arg3, int arg4, int arg5, unsigned char arg6) {
-    unsigned char *p = &((func_802689BC_S1 *)(&arg3))->unkF;
-    ((func_802689BC_S2 *)(arg0))->unk270 = *p;
+void func_802689BC_de(void *arg0, int arg1, int arg2, Blast blast) {
+    ((Actor_func_8024A7A0_de *)arg0)->effectMode = (u8)blast.radius;
 }
 
 /* Calls func_80217388_de on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls func_80262C88_de when flag 0x80000 remains set. Adapted from func_802790C0_de with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */
@@ -87,11 +87,11 @@ extern void func_80262C88_de(void *arg0);
 
 void func_802689CC_de(u8 *object, s32 second, s32 third, struct Shape_func_802764D4_de_2 pair) {
     func_80217388_de(object, (char *)object + 0x170);
-    ((func_802689CC_S1 *)(object))->unk170 |= 0x20;
-    ((func_802689CC_S1 *)(object))->unk100 &= 0xFFFEFFFF;
-    ((func_802689CC_S1 *)(object))->unk100 &= ~0x2000;
-    ((func_802689CC_S1 *)(object))->unk100 &= ~0x100;
-    if (((func_802689CC_S1 *)(object))->unk100 & 0x80000) {
+    ((Actor_func_8024A7A0_de *)object)->behaviorFlags |= 0x20;
+    ((Actor_func_8024A7A0_de *)object)->flags &= 0xFFFEFFFF;
+    ((Actor_func_8024A7A0_de *)object)->flags &= ~0x2000;
+    ((Actor_func_8024A7A0_de *)object)->flags &= ~0x100;
+    if (((Actor_func_8024A7A0_de *)object)->flags & 0x80000) {
         func_80262C88_de(object);
     }
 }

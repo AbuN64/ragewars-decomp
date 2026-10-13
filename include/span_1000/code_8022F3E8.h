@@ -267,6 +267,8 @@ extern float D_800C2F14_de;
 
 /* unbake published declaration: published_a2055080676415f8cbd205d6 */
 extern float D_800C8008;
+extern float D_800C2F1C_de;
+extern float D_800C2F24_de;
 
 struct func_80230620_S4;
 /* unbake published declaration: published_a7022ad07e30e9c784a439bc */

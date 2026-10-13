@@ -5761,7 +5761,7 @@ struct Actor_func_8024A7A0_de {
     u8 state13B;
     u8 pad13C[4];
     Shared_ParticleLighting lighting[2]; /* 0x140 */
-    u8 pad170[4];
+    s32 behaviorFlags; /* 0x170 */
     s32 active; /* 0x174 */
     u8 pad178[4];
     s32 mask;
@@ -5776,7 +5776,9 @@ struct Actor_func_8024A7A0_de {
     u8 pad1F4[0x23A - 0x1F4];
     s8 lean; /* 0x23A */
     u8 updateCount; /* 0x23B */
-    u8 pad23C[0x40];
+    u8 pad23C[0x34];
+    u8 effectMode; /* 0x270 */
+    u8 pad271[0xB];
     void *update; /* 0x27C */
     u8 pad280[0xC];
     void (*controllerUpdate)(void *, void *); /* 0x28C */
@@ -6239,23 +6241,45 @@ struct Source110;
 struct StateEntry;
 struct Dest {
     u32 flags;
-    char pad4[0x2C];
+    s32 health; /* 0x04 */
+    s32 maxHealth; /* 0x08 */
+    s32 handle; /* 0x0C */
+    s8 level; /* 0x10 */
+    u8 pad11[0x1B];
+    void *table; /* 0x2C */
     StateEntry *entry;
     s8 state;
     s8 old_state;
     char pad36[2];
     u32 old_entry_flags;
     u32 entry_flags;
-    char pad40[0x80];
+    char pad40[0x24];
+    f32 cueTimer; /* 0x64 */
+    char pad68[0x58];
     f32 scale;
     f32 entry_scale;
     s16 result;
     s8 state_result;
     u8 count;
-    char padCC[0x30];
+    s8 secondaryLevel; /* 0xCC */
+    char padCD[0x2F];
     struct Node_func_8025CBEC_de *sound; /* 0xFC */
-    u8 pad100[0x34];
+    u8 pending; /* 0x100 */
+    u8 pad101;
+    s16 channel; /* 0x102 */
+    u8 pad104[4];
+    void *enter; /* 0x108 */
+    void *draw; /* 0x10C */
+    void *hit; /* 0x110 */
+    u8 pad114[0x10];
+    s32 field124;
+    f32 charge; /* 0x128 */
+    f32 field12C;
+    s32 field130;
     f32 restPitch; /* 0x134 */
+    s32 field138, field13C;
+    u8 pad140[4];
+    s32 field144, field148, field14C, field150;
 };
 typedef void *( *StateCallback)(struct Source110 *, struct Dest *);
 struct StateEntry {

@@ -1,3 +1,7 @@
+#include "common/unused.h"
+#include "shared/gameplay_transition.h"
+#include "span_1000/code_8022C894.h"
+#include "shared/gameplay_round_rules.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8022F3E8.h"
 #include "types.h"
@@ -17,7 +21,7 @@ extern void func_80214178_de(void *, void *, s32);
 
 extern void func_8022AF40_de(void *);
 
-extern s32 func_8025DE54_de(s16, s32, s32, s32, s32 *, s32);
+extern s32 func_8025DE54_de(s16, Vec3, void *, s32);
 extern void func_80274870_de(f32 *, f32, f32);
 
 
@@ -41,52 +45,52 @@ static inline s32 released(void *actor, char *player) {
     char *control;
     s32 latch;
 
-    if (((func_80230BB8_S1 *)(player))->unk11D8 > D_800C8008) {
+    if (((Actor_func_8022D290_de *)player)->unk_0x11D8 > D_800C8008) {
         return 1;
     }
-    if ((((func_80230BB8_S2 *)(actor))->unk100 & 0x300000) && ((func_80230BB8_S1 *)(player))->unk1450 != 0) {
-        control = ((func_80230BB8_S1 *)(player))->unk1454;
-        latch = ((func_80230BB8_S3 *)(control))->unk23C;
-        ((func_80230BB8_S3 *)(control))->unk23C = 0;
+    if ((((Actor_func_8024A7A0_de *)actor)->flags & 0x300000) && ((Actor_func_8022D290_de *)player)->unk_0x1450 != 0) {
+        control = ((Actor_func_8022D290_de *)player)->unk_0x1454;
+        latch = ((Brain_func_80212D78_eu_x *)control)->triggerLatch;
+        ((Brain_func_80212D78_eu_x *)control)->triggerLatch = 0;
         return latch == 0;
     }
-    if (!(((func_80230BB8_S1 *)(player))->unk6AC & 0x2000)) {
+    if (!(((Actor_func_8022D290_de *)player)->unk_0x06AC & 0x2000)) {
         return 1;
     }
-    if (((func_80230BB8_S1 *)(player))->unk11B4 != 0) {
+    if (((Actor_func_8022D290_de *)player)->unk_0x11B4 != 0) {
         return 1;
     }
-    return func_80222AA4_de(player, ((func_80230BB8_S1 *)(player))->unk62E) == 0;
+    return func_80222AA4_de(player, ((Actor_func_8022D290_de *)player)->unk_0x062E) == 0;
 }
 
 void func_80230BC8_de(void *actor, void *attack) {
     char *player;
-    s32 *position;
+    Vec3 *position;
     char *target;
 
-    player = ((func_80230BB8_S2 *)(actor))->unk1D8.v0;
-    target = ((func_80230BB8_S1 *)(player))->unk5DC;
+    player = ((Actor_func_8024A7A0_de *)actor)->controller;
+    target = ((Actor_func_8022D290_de *)player)->unk_0x05DC;
     if (target != 0) {
-        position = &((func_802063EC_S2 *)(target))->unk128;
+        position = &((Shared_func_80227014_S4 *)target)->position;
     } else {
-        position = &((func_80230BB8_S1 *)(player))->unk8;
+        position = &((Shared_ActorView *)player)->position.vector;
     }
     if (released(actor, player)) {
         func_80214178_de(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
-        func_8025DE54_de(0x794, position[0], position[1], position[2], position, -1);
-        func_80274870_de(&((func_80230BB8_S5 *)(attack))->unk128, (f32)D_800CA2D8_de * ((func_802077F4_S2 *)(&D_800C8008))->unk4, 0.4f);
+        func_8025DE54_de(0x794, *position, position, -1);
+        func_80274870_de(&((Dest *)attack)->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
         return;
     }
-    func_80274870_de(&((func_80230BB8_S5 *)(attack))->unk128, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
-    ((func_80230BB8_S5 *)(attack))->unk64 -= D_800D2988;
-    if (((func_80230BB8_S5 *)(attack))->unk64 <= 0.0f) {
-        ((func_80230BB8_S5 *)(attack))->unk64 += ((func_802077F4_S2 *)(&D_800C2F20_de))->unk4;
-        if (((func_80230BB8_S1 *)(player))->unk1450 == 0 && D_80140FF8 == 1) {
-            func_8021A9A4_de(((func_80230BB8_S2 *)(actor))->unk1D8.v1, 0x3F9);
+    func_80274870_de(&((Dest *)attack)->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
+    ((Dest *)attack)->cueTimer -= D_800D2988;
+    if (((Dest *)attack)->cueTimer <= 0.0f) {
+        ((Dest *)attack)->cueTimer += D_800C2F24_de;
+        if (((Actor_func_8022D290_de *)player)->unk_0x1450 == 0 && D_80140FF8 == 1) {
+            func_8021A9A4_de(((Actor_func_8024A7A0_de *)actor)->controller, 0x3F9);
         } else {
-            func_8021A9A4_de(((func_80230BB8_S2 *)(actor))->unk1D8.v1, 0x4CB);
+            func_8021A9A4_de(((Actor_func_8024A7A0_de *)actor)->controller, 0x4CB);
         }
     }
 }

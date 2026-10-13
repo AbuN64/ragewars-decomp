@@ -294,7 +294,9 @@ struct Brain_func_80212D78_eu_x {
     s32 unk220;
     char pad224[8];
     s32 goal;
-    char pad230[0xCC];
+    char pad230[0xC];
+    s32 triggerLatch; /* 0x23C */
+    char pad240[0xBC];
     s32 unk2FC;
     char pad300[0x14];
     s32 busy;

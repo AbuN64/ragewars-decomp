@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -59,15 +60,13 @@ void func_80204A68_de(void *arg0, void *arg1) {
     }
 }
 
-extern char D_800C8380_de;
-extern char D_00204C34;
 
 
 
 
 void func_80204BB4_de(void *arg0, void *arg1) {
-    ((func_80204BB4_S1 *)(arg1))->unk2C = &D_800C8380_de;
-    ((func_80204BB4_S1 *)(arg1))->unk108 = &D_00204C34;
+    ((Dest *)arg1)->table = &D_800C8380_de;
+    ((Dest *)arg1)->enter = &D_00204C34;
 }
 
 extern s32 func_80285F58_de(void *, void *);
