@@ -44,9 +44,9 @@ void func_80217F4C_de(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2
     switch (state->state) {
     case 1:
         state->timer += D_800D2988 * D_800C2234_de;
-        if (state->selection == -1) state->value = 0.0f;
-        else state->value = D_800C2238_de;
-        if (D_800C223C_de <= state->timer) {
+        if (state->selection != -1) state->value = D_800C2238_de;
+        else state->value = 0.0f;
+        if (state->timer >= D_800C223C_de) {
             state->state = 2; state->timer = D_800C223C_de;
             if (state->selection != -1) state->selection = 8;
         }
@@ -59,6 +59,6 @@ void func_80217F4C_de(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2
         if (state->timer <= 0.0f) { state->timer = 0.0f; state->state = 0; }
         break;
     }
-    if (!state->state) player->active = 0;
-    else state->angle += D_800D2988 * D_800C2244_de;
+    if (state->state) state->angle += D_800D2988 * D_800C2244_de;
+    else player->active = 0;
 }

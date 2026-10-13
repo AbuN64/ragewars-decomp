@@ -43,23 +43,23 @@ s32 func_804234CC_de(void) {
     D_800E4514 = func_8025305C_de(0x10);
     func_8041B110_de((0x1BD - OPTIONS_RESOURCE_SHIFT));
     func_8041B110_de((0x1C2 - OPTIONS_RESOURCE_SHIFT));
-    settings = &D_801462C8;
     if (OPTIONS_HAS_FIRST_LIST) {
     list = func_8041ABC0_de(0x1BB, 0x1BC);
-    D_800E4514->first_list = list;
-    func_8041AD34_de(list, gameOptionsLabel(0));
+    {s32 *handle = &D_800E4514->first_list; *handle = list;}
+    func_8041AD34_de(D_800E4514->first_list, gameOptionsLabel(0));
     func_8041AD34_de(D_800E4514->first_list, gameOptionsLabel(1));
     func_8041AD34_de(D_800E4514->first_list, gameOptionsLabel(2));
     settings = &D_801462C8;
     func_8041AD10_de(D_800E4514->first_list, settings->first);
     }
     list = func_8041ABC0_de((0x1BE - OPTIONS_RESOURCE_SHIFT), (0x1BF - OPTIONS_RESOURCE_SHIFT));
-    D_800E4514->second_list = list;
-    func_8041AD34_de(list, gameOptionsLabel(3));
+    {s32 *handle = &D_800E4514->second_list; *handle = list;}
+    func_8041AD34_de(D_800E4514->second_list, gameOptionsLabel(3));
     if (func_80265350_de() != 0x400000) {
         func_8041AD34_de(D_800E4514->second_list, gameOptionsLabel(4));
         func_8041AD34_de(D_800E4514->second_list, gameOptionsLabel(5));
     }
+    if (!OPTIONS_HAS_FIRST_LIST) settings = &D_801462C8;
     func_8041AD10_de(D_800E4514->second_list, settings->second);
     slider = func_8041A580_de((0x1C0 - OPTIONS_RESOURCE_SHIFT), (0x1C1 - OPTIONS_RESOURCE_SHIFT), 0x80);
     D_800E4514->slider = slider;

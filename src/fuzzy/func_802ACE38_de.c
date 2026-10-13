@@ -2,8 +2,8 @@
 
 extern f32 D_800C62D8;
 extern f32 D_800C62DC;
-extern void func_802AD1B4_de(void);
-extern void func_802AD264_de(void);
+extern void D_002AD1B4(void);
+extern void D_002AD264(void);
 extern char D_80145088;
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
@@ -22,11 +22,8 @@ struct func_802ADE28_S1 {
     char pad0[0x18];
     func_802ADE28_S2 *unk18;
 };
-struct func_802ADE28_S2 {
-    char pad0[0x14];
-    char pad14[0xC];
-    f32 amount;
-};
+typedef struct EffectAmount { char pad[0xC]; f32 amount; } EffectAmount;
+struct func_802ADE28_S2 { char pad[0x14]; EffectAmount payload; };
 struct func_802ADE28_S3 {
     void **resource;
     u16 unk4;
@@ -61,12 +58,12 @@ struct func_802ADE28_S5 {
 /** Apply a scripted effect command and its optional sound callbacks. */
 s32 func_802ACE38_de(func_802ADE28_S4 *arg0, func_802ADE28_S3 *arg1, func_802ADE28_S1 *arg2) {
     void **resource;
-    func_802ADE28_S2 *state_value;
+    EffectAmount *state_value;
     s32 sound;
     s32 callback;
     s16 command;
 
-    state_value = arg2->unk18;
+    state_value = &arg2->unk18->payload;
     command = arg1->unk4 - 0x708;
     switch (command) {
     case 0:
@@ -81,7 +78,7 @@ s32 func_802ACE38_de(func_802ADE28_S4 *arg0, func_802ADE28_S3 *arg1, func_802ADE
         break;
     case 7:
         func_802A6FB8_de(&arg0->unkD40, 1, 0, 0x7FD,
-                       0, 0, 0, func_802AD1B4_de, func_802AD264_de);
+                       0, 0, 0, D_002AD1B4, D_002AD264);
         break;
     
     default: break;

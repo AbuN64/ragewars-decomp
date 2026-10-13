@@ -67,12 +67,19 @@ void func_802B03D0_de(SeqInitPlayer *p, SeqInitConfig *c) {
     p->channels = c->channels;
     p->channelState = func_802B0340_de(0, 0, heap, c->channels, 16);
     func_802B1990_de(p);
-    voice = func_802B0340_de(0, 0, heap, c->voices, 56);
-    p->freeList = 0;
-    for (i = 0; i < c->voices; i++) {
-        voice->next = p->freeList;
-        p->freeList = voice;
-        voice++;
+    {
+        SeqFreeVoice *base = func_802B0340_de(0, 0, heap, c->voices, 56);
+        p->freeList = 0;
+        i = 0;
+        if (c->voices > 0) {
+            voice = base;
+            do {
+                voice->next = p->freeList;
+                p->freeList = voice;
+                i++;
+                voice++;
+            } while (i < c->voices);
+        }
     }
     p->allocHead = 0;
     p->allocTail = 0;
