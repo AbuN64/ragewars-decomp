@@ -3,12 +3,7 @@
 #include "gbi.h"
 #include "span_1000/code_8023A284.h"
 typedef struct View_func_8023B3F8_de FlareActor;
-typedef struct FlareRadii { f32 value[7]; } FlareRadii;
-typedef struct FlareAlphas { s32 value[7]; } FlareAlphas;
-typedef struct FlareColors { s32 value[21]; } FlareColors;
-extern const FlareRadii D_800C344C_de;
-extern const FlareAlphas D_800C3468_de;
-extern const FlareColors D_800C3484_de;
+#include "shared/lens_flare.h"
 extern const f32 D_800C34D8_de, D_800C34DC_de, D_800C34E4_de, D_800C34E8_de;
 extern const f32 D_800C34EC_de, D_800C34F0_de, D_800C34F4_de, D_800C34F8_de;
 extern const f32 D_800C34FC_de, D_800C3500_de, D_800C3504_de, D_800C3508_de;
@@ -53,23 +48,20 @@ void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 specia
         left = x + D_800C34F4_de;
         top = y + D_800C34F4_de;
         edge = bottom - y;
-        edge = edge <= right ? edge : right;
-        edge = edge <= top ? edge : top;
-        edge = edge <= left ? edge : left;
-        edge = edge <= D_800C34F4_de ? edge : D_800C34F4_de;
+        if (!(edge <= right)) edge = right;
+        if (!(edge <= top)) edge = top;
+        if (!(edge <= left)) edge = left;
+        if (!(edge <= D_800C34F4_de)) edge = D_800C34F4_de;
         if (edge < 0.0f) intensity = 0.0f;
         else {
-            edge = bottom - y;
-            edge = edge <= right ? edge : right;
-            edge = edge <= top ? edge : top;
-            edge = edge <= left ? edge : left;
-            edge = edge <= D_800C34F4_de ? edge : D_800C34F4_de;
-            intensity *= edge / D_800C34F4_de;
+            alpha = bottom - y;
+            if (!(alpha <= right)) alpha = right;
+            if (!(alpha <= top)) alpha = top;
+            if (!(alpha <= left)) alpha = left;
+            if (!(alpha <= D_800C34F4_de)) alpha = D_800C34F4_de;
+            intensity *= alpha / D_800C34F4_de;
         }
-        if (intensity > D_800C34F8_de || intensity < 0.0f) {
-            if (intensity < 0.0f) intensity = 0.0f;
-            else intensity = intensity > D_800C34F8_de ? D_800C34F8_de : intensity;
-        }
+        intensity = intensity > D_800C34F8_de || !(intensity < 0.0f) ? (intensity > D_800C34F8_de ? D_800C34F8_de : intensity) : 0.0f;
     }
     for (i = 0; i < 7; i++) {
         x += nx * distance;
