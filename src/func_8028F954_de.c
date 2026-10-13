@@ -12,24 +12,24 @@
 void func_8028F954_de(void *arg0, void *arg1) {
     void *temp_v0;
 
-    if ((((func_8028F934_S1 *)(arg1))->unk10) == 2) {
-        temp_v0 = ((func_8028F934_S2 *)(arg0))->unk2EC;
+    if ((((struct OSScTask_s *)arg1)->list.type) == 2) {
+        temp_v0 = ((OSSched *)arg0)->audioListTail;
         if (temp_v0 != 0) {
-            ((func_80284AF4_G2 *)(temp_v0))->unk0 = arg1;
+            ((struct OSScTask_s *)temp_v0)->next = arg1;
         } else {
-            ((func_8028F934_S2 *)(arg0))->unk2E4 = arg1;
+            ((OSSched *)arg0)->audioListHead = arg1;
         }
-        ((func_8028F934_S2 *)(arg0))->unk2EC = arg1;
-        ((func_8028F934_S2 *)(arg0))->unk300 = 1;
+        ((OSSched *)arg0)->audioListTail = arg1;
+        ((OSSched *)arg0)->doAudio = 1;
     } else {
-        temp_v0 = ((func_8028F934_S2 *)(arg0))->unk2F0;
+        temp_v0 = ((OSSched *)arg0)->gfxListTail;
         if (temp_v0 != 0) {
-            ((func_80284AF4_G2 *)(temp_v0))->unk0 = arg1;
+            ((struct OSScTask_s *)temp_v0)->next = arg1;
         } else {
-            ((func_8028F934_S2 *)(arg0))->unk2E8 = arg1;
+            ((OSSched *)arg0)->gfxListHead = arg1;
         }
-        ((func_8028F934_S2 *)(arg0))->unk2F0 = arg1;
+        ((OSSched *)arg0)->gfxListTail = arg1;
     }
-    ((func_8028F934_S1 *)(arg1))->unk0 = 0;
-    ((func_8028F934_S1 *)(arg1))->unk4 = (((func_8028F934_S1 *)(arg1))->unk8) & 3;
+    ((struct OSScTask_s *)arg1)->next = 0;
+    ((struct OSScTask_s *)arg1)->state = (((struct OSScTask_s *)arg1)->flags) & 3;
 }

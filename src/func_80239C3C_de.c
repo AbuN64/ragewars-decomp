@@ -13,13 +13,15 @@ extern void func_80255ED8_de(void *, s32);
 
 
 void *func_80239C3C_de(void *arg0, s32 arg1) {
+    struct ScreenMessageOwner *owner = arg0;
+    struct ScreenMessagePool *pool = (struct ScreenMessagePool *)arg1;
     void *temp_s0;
 
-    temp_s0 = ((func_80239C2C_S1 *)(arg0))->unkF24.head;
+    temp_s0 = owner->activeMessages.head;
     if (temp_s0 != 0) {
         func_80239CE0_de(temp_s0);
-        func_80255ED8_de(&((func_80239C2C_S1 *)(arg0))->unkF24, (s32)temp_s0);
-        func_80255D14_de(&((func_80239760_S2 *)(arg1))->unkE40, temp_s0);
+        func_80255ED8_de(&owner->activeMessages, (s32)temp_s0);
+        func_80255D14_de(&pool->freeMessages, temp_s0);
     }
     return temp_s0;
 }

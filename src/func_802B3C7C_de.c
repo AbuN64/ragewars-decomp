@@ -11,12 +11,12 @@ extern void func_802B2480_de(void *arg0, void *arg1);
 void func_802B3C7C_de(void *arg0) {
     void *node;
 
-    node = ((func_80254D70_S1 *)(arg0))->unk14;
+    node = ((ALSynth4C *)arg0)->pLameList.next;
     if (node != 0) {
         do {
             func_802B2450_de(node);
             func_802B2480_de(node, (char *)arg0 + 4);
-            node = ((func_80254D70_S1 *)(arg0))->unk14;
+            node = ((ALSynth4C *)arg0)->pLameList.next;
         } while (node != 0);
     }
 }
