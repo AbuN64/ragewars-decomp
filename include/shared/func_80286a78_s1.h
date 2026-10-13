@@ -48,7 +48,9 @@ struct Shared_func_80286A78_S1 {
     void * unk138; /* +0x138: src/func_80286A78.c */
     s32 unk13C; /* +0x13C: src/func_80286A78.c */
     s32 unk140; /* +0x140: src/func_80286A78.c */
-    char pad144[0x19C4];
+    char pad144[0xF58 - 0x144];
+    s32 unkF58;
+    char padF5C[0x1B08 - 0xF5C];
     u8 address1B08; /* +0x1B08: src/func_80286A78.c */
     char pad1B09[0xFC6F];
     u8 address11778; /* +0x11778: src/func_80286A78.c */
@@ -80,7 +82,11 @@ struct Shared_func_80286A78_S1 {
     s32 unk1B4F0; /* +0x1B4F0: src/func_80286A78.c */
     char pad1B4F4[0xC];
     IntrusiveList address1B500; /* +0x1B500: src/func_80286A78.c */
-    char pad1B514[0x190];
+    char pad1B514[0x100];
+    s32 unk1B614;
+    s32 unk1B618;
+    s32 unk1B61C;
+    char pad1B620[0x84];
     s32 unk1B6A4; /* +0x1B6A4: src/func_80286A78.c */
     char pad1B6A8[0x4];
     s32 unk1B6AC; /* +0x1B6AC: src/func_80286A78.c */

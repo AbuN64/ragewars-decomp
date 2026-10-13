@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80246E34_H
 #define UNBAKE_SPAN_1000_CODE_80246E34_H
 #include "../types.h"
+#include "shared/level_input.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
@@ -213,18 +214,7 @@ struct ObjectLinks180_2 {
 
 struct Input_func_8024B3A8_de;
 /* unbake published declaration: published_49975b2cdeec30e36dc7a97b */
-struct Input_func_8024B3A8_de {
-    s32 unk0;
-    f32 vec4[3];
-    f32 vec10[3];
-    u16 unk1C;
-    u16 unk1E;
-    u16 resource20;
-    u16 resource22;
-    s16 amount24;
-    u8 unk26;
-    u8 unk27;
-};
+
 
 struct func_8024AA08_S2;
 /* unbake published declaration: published_4d5a55ed972c069f2a51e4b9 */
@@ -375,7 +365,7 @@ struct TypeEntry {
 
 struct Input_func_8024B3A8_de;
 /* unbake published declaration: published_95e53f3c8e8e0a651fe39950 */
-typedef struct Input_func_8024B3A8_de Input_func_8024B3A8_de;
+
 
 struct func_8024795C_S3;
 /* unbake published declaration: published_a3cb5d5b524e3f211678ded3 */

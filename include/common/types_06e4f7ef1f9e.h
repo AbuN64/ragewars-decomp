@@ -1559,6 +1559,7 @@ struct SharedPlayer {
             struct SharedPlayer * next;
         } view16E0_2;
     } views16E0;
+    u32 pad16E4; /* Player-array stride is 0x16E8. */
 };
 
 /* unbake published declaration: published_5a94cb9040e6eb0eb981dc94 */
