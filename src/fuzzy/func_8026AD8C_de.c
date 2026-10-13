@@ -134,7 +134,8 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                                 if (*input & 0x80) {
                                     { s32 hi = *input++;
                                     s32 lo = *input++;
-                                    value = (hi << 8) | lo;
+                                    value = hi << 8;
+                                    value |= lo;
                                     commandSize = (s32)value >> 10 & 31;
                                     b2 = (s32)value >> 5 & 31;
                                     c2 = value & 31;
@@ -150,10 +151,10 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                                     vertexSlot = (s32)value >> 5 & 31;
                                     n = value & 0x1F;
                                     if (n == 0) n = 32;
-                                    vertexOffset = vertexCount * 16;
+                                    vertexOffset = vertexCount;
                                     vertexCount += n;
                                     /* Segment 2 holds vertex data, following its eight-byte header. */
-                                    gSPVertex(output++, (vertexData + vertexOffset - vertices) + vertexSegment, n, vertexSlot);
+                                    gSPVertex(output++, (vertexData + vertexOffset * 16 - vertices) + vertexSegment, n, vertexSlot);
                                     break;
                                 case 0x40:
                                     input++;
@@ -163,10 +164,13 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                                     break;
                                 case 0x60:
                                     vertexSlot = tag & 31;
-                                    h = *input++; l = *input++; q = *input++; r = *input++;
-                                    value = *input++;
-                                    gSPModifyVertex(output++, vertexSlot, G_MWO_POINT_ST,
-                                                    (l << 24) | (q << 16) | (r << 8) | value);
+                                    input++;
+                                    value = *input++; l = *input++; q = *input++; r = *input++;
+                                    value <<= 24;
+                                    value |= l << 16;
+                                    value |= q << 8;
+                                    value |= r;
+                                    gSPModifyVertex(output++, vertexSlot, G_MWO_POINT_ST, value);
                                     break;
                                 }
                             }
