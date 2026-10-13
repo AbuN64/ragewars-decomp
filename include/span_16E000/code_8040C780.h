@@ -72,8 +72,12 @@ struct Node_func_8040EB48_de;
 /* unbake published declaration: published_a35b9a97e4e62868872deec1 */
 struct Node_func_8040EB48_de {
     struct Node_func_8040EB48_de *next;
-    char pad4[0x12 - 4];
+    char pad4[0xC - 4];
+    s16 resource; /* +0x0C: selected resource identifier */
+    char padE[0x12 - 0xE];
     unsigned short flags;
+    s16 x; /* +0x14: widget position */
+    s16 y; /* +0x16 */
 };
 
 struct Node_func_8040EB48_de;

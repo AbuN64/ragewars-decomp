@@ -31,7 +31,7 @@ typedef struct func_8041F2A0_Player func_8041F2A0_Player;
 
 struct SelectionScreenState {
     void *screen;
-    s32 unk4;
+    struct Slots_func_8041B7FC_de *unk4;
     func_8041F2A0_Player players[4];
     func_8041F2A0_Item *header;
     s32 headerStep;
@@ -39,7 +39,7 @@ struct SelectionScreenState {
     s32 footerStep;
     s32 phase;
     s32 timer;
-    s32 prompt;
+    void *prompt;
     func_8041F2A0_Item *promptItem;
     func_8041F2A0_Item *pulse;
     s32 pulseStep;

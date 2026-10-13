@@ -4584,7 +4584,7 @@ struct Slots_func_8041B7FC_de;
 /* unbake published declaration: published_ebb2f0239d2816dd0df99bf4 */
 struct Slots_func_8041B7FC_de {
     char pad[0x4C];
-    s32 values[1];
+    struct Node_func_8040EB48_de *values[1];
 };
 
 struct Cell_func_80421BEC_de;
