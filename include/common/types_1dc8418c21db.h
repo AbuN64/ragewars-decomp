@@ -3118,8 +3118,17 @@ struct func_80272908_S2 {
 struct WeaponInfo;
 /* unbake published declaration: published_500c9290ad76e46bd4826f50 */
 struct WeaponInfo {
-    char pad0[0x20];
+    void **resource;
+    u16 model;
+    char pad6[2];
+    s16 capacity;
+    char padA[2];
+    s16 alternate;
+    char padE[0x12];
     s16 *weaponClass;
+    s16 *alternateClass;
+    s16 *thirdClass;
+    s16 *computerClasses[3];
 };
 
 struct func_8022E694_S1;

@@ -1,3 +1,6 @@
+#include "common/types_8fd754e1e915.h"
+#include "shared/gameplay_transition.h"
+#include "common/types_1dc8418c21db.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8022D944.h"
@@ -14,22 +17,22 @@ extern s32 D_80140FF8;
 
 
 s32 func_8022E3C4_de(void *arg0, s32 arg1, s32 arg2) {
-    void **entry;
-    void **scan;
-    void *resource;
-    void *item;
+    s16 **entry;
+    s16 **scan;
+    WeaponInfo *resource;
+    s16 *item;
     s32 i;
 
     resource = D_800D052C[arg1];
-    if (((func_8022E3B4_S1 *)(arg0))->unk1450 != 0) {
-        entry = &((func_8022E3B4_S2 *)(resource))->unk2C;
+    if (((Player *)arg0)->computer != 0) {
+        entry = resource->computerClasses;
         goto scan_setup;
     }
     if (D_80140FF8 != 1) {
-        entry = &((func_8022E3B4_S2 *)(resource))->unk2C;
+        entry = resource->computerClasses;
         goto scan_setup;
     }
-    entry = &((func_8022E3B4_S2 *)(resource))->unk20;
+    entry = &resource->weaponClass;
 
 scan_setup:
     i = 0;
@@ -39,7 +42,7 @@ loop:
     if (item == 0) {
         goto null_item;
     }
-    if (((func_8022E3B4_S3 *)(item))->unk4 != arg2) {
+    if (item[2] != arg2) {
         goto mismatch;
     }
     return 1;
