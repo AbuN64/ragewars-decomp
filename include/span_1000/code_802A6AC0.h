@@ -180,7 +180,9 @@ typedef struct State802A6DF8 State802A6DF8;
 struct Input_func_802A65E0_de;
 /* unbake published declaration: published_40762d04fc59c94c61746dd2 */
 struct Input_func_802A65E0_de {
-    char pad0[0x6AC];
+    char pad0[0x5DC];
+    struct View *view; /* 0x5DC: viewport owner used by the toggle-menu renderer */
+    char pad5E0[0x6AC - 0x5E0];
     s32 held;
     s32 pressed;
 };
@@ -365,7 +367,9 @@ struct MenuItem;
 struct MenuItem {
     s32 active;
     s32 on;
-    char pad8[0x18 - 0x8];
+    char pad8[0x10 - 0x8];
+    s32 image; /* 0x10: toggle-menu sprite resource */
+    s32 imageFrame; /* 0x14: sprite frame */
     s16 bounce;
     s32 startFrame;
     f32 value;
