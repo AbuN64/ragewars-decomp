@@ -1,15 +1,15 @@
+#include "shared/player_movement_interfaces.h"
 #include "types.h"
 #include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
-extern void func_8022404C_de(SharedPlayer *);
+#include "shared/func_8021E2A0_de_closed.h"
+#include "span_C76B0/data.h"
 extern void func_80274870_de(f32 *,f32,f32);
-extern void func_802231D4_de(SharedPlayer *,SharedPlayer *,char *);
-extern void func_802233F0_de(SharedPlayer *,SharedPlayer *,char *);
-extern s32 func_802227F4_de(SharedPlayer *,SharedPlayer *,s32);
-extern char D_800CE7E4,D_800CE7FC,D_800CED30;
-extern f32 D_800D2988;
-extern f32 D_800C29C0_de,D_800C29C4_de,D_800C29C8_de,D_800C29CC_de,D_800C29D0_de,D_800C29D4_de,D_800C29D8_de,D_800C29DC_de,D_800C29E0_de,D_800C29E4_de,D_800C29E8_de,D_800C29EC_de,D_800C29F0_de,D_800C29F4_de,D_800C29F8_de,D_800C29FC_de;
-void func_8022470C_de(SharedPlayer *arg0, SharedPlayer *arg1) {
+extern void func_802231D4_de(SharedPlayer *,func_802165F8_S1 *,char *);
+extern char D_800CED30;
+/* The effect helper accepts the actor context through its Object interface. */
+void func_8022470C_de(SharedPlayer_func_802233F0_de *arg0, func_802165F8_S1 *arg1) {
+    void *playerContext = arg0;
     f32 temp_fv0;
     f32 temp_fv1;
     f32 var_fv0f;
@@ -27,7 +27,7 @@ void func_8022470C_de(SharedPlayer *arg0, SharedPlayer *arg1) {
     u16 temp_v1;
     s32 nextAnimation;
 
-    func_8022404C_de(arg0);
+    func_8022404C_de(playerContext);
     func_80274870_de(&arg0->views5E8.view72C_75.unk72C, 0.0f, 0.25f);
     var_v0 = 1;
     if (!(arg0->views5E8.view718_70.crouch > D_800C29C0_de)) {
@@ -47,12 +47,12 @@ void func_8022470C_de(SharedPlayer *arg0, SharedPlayer *arg1) {
     } else {
         func_802233F0_de(arg0, arg1, &D_800C94EC_de);
     }
-    if ((arg0->views5E8.view7E8_105.unk7E8 == 0) && !(arg0->views5E8.view6E4_61.unk6E4 > D_800C29C8_de) && !(arg1->views1C.view38_3.flags & 0xC0000) && (arg1->views18.view18_2.model->flags & 2) && (arg0->views5E8.view6B0_46.unk6B0 & 0x10) && (arg0->views5E8.view11D8_147.unk11D8 <= 0.0f)) { func_802227F4_de(arg0, arg1, 5); var_v0_3 = 1; } else var_v0_3 = 0;
+    if ((arg0->views5E8.view7E8_105.unk7E8 == 0) && !(arg0->views5E8.view6E4_61.unk6E4 > D_800C29C8_de) && !(arg1->flags & 0xC0000) && (arg1->model->flags & 2) && (arg0->views5E8.view6B0_46.unk6B0 & 0x10) && (arg0->views5E8.view11D8_147.unk11D8 <= 0.0f)) { func_802227F4_de(arg0, arg1, 5); var_v0_3 = 1; } else var_v0_3 = 0;
     if (var_v0_3 == 0) {
         if ((arg0->views5E8.view6C0_51.unk6C0 == 0.0f) && (arg0->views5E8.view6C4_54.unk6C4 == 0.0f)) {
             func_802227F4_de(arg0, arg1, 2);
         }
-        if (((arg1->views1C.view38_3.flags & 0x5000) == 0x4000) && (arg0->views5E8.view6D0_71.onGround != 0)) {
+        if (((arg1->flags & 0x5000) == 0x4000) && (arg0->views5E8.view6D0_71.onGround != 0)) {
             temp_fv1 = arg0->views5E8.view11C4_144.soundTime + D_800D2988;
             arg0->views5E8.view11C4_144.soundTime = temp_fv1;
             if ((arg0->views5E8.view6C8_56.unk6C8 > D_800C29CC_de) && (D_800C29D0_de <= temp_fv1)) {
@@ -61,9 +61,7 @@ void func_8022470C_de(SharedPlayer *arg0, SharedPlayer *arg1) {
         }
         temp_v1 = arg0->views1C.viewE4_7.kind;
         if (temp_v1 == D_800CE474[2]) {
-            if (arg0->views5E8.view86C_125.unk86C != 0x7DA) { arg0->views5E8.view86C_125.unk86C = 0x7DA; return; }
-            if (arg0->views1C.view104_11.idleTime >= D_800C29D4_de) arg0->views5E8.view86C_125.unk86C = 0x7DB;
-            else arg0->views5E8.view86C_125.unk86C = 0x7DA;
+            if (arg0->views5E8.view86C_125.unk86C == 0x7DA && arg0->views1C.view104_11.idleTime >= D_800C29D4_de) arg0->views5E8.view86C_125.unk86C = 0x7DB; else arg0->views5E8.view86C_125.unk86C = 0x7DA;
             return;
         }
         if (temp_v1 == D_800CE474[0]) {
@@ -71,7 +69,7 @@ void func_8022470C_de(SharedPlayer *arg0, SharedPlayer *arg1) {
             if (temp_v1_2 == 0xFA0 && arg0->views1C.view104_11.idleTime < D_800C29D8_de) return;
             if (temp_v1_2 == 0x1004 && arg0->views1C.view104_11.idleTime < D_800C29DC_de) return;
         }
-        if (arg1->views1C.view38_3.flags & 0xC0000) {
+        if (arg1->flags & 0xC0000) {
             if (arg0->views5E8.view6C0_51.unk6C0 >= 0.0f) arg0->views5E8.view86C_125.unk86C = 0xA32;
             else arg0->views5E8.view86C_125.unk86C = 0xA37;
             return;
