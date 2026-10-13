@@ -17,17 +17,6 @@
    the ticker of fading player names, the second counter (count rule) or the squad score, the
    power-up icon and status sprite, the zoom gauge, the ammo pips for weapon 12, and finally the
    team and squad overlays. */
-extern char D_800C25FC_de[];
-extern char D_800C93D8_de;
-extern char D_800C943C;
-extern char D_800C9468;
-extern char D_800C94A4_de;
-extern f32 D_800C9F64_de[];
-extern f32 D_800C9F74_de[];
-extern f32 D_800C9190_de[2];
-extern s32 D_800E28D0;
-extern s32 D_800E28D4;
-extern s32 D_800E28D8;
 extern Gfx *D_80110634;
 
 extern char D_8011D8D0;
@@ -45,14 +34,12 @@ s32 func_80283228_de(void *, Shared_HudPlayer *);
 s16 **func_8028BEAC_de(void *, s32, s32, s32);
 void func_802A6900_de(void *, Shared_HudPlayer *);
 void func_802A7AA4_de(void *);
-void func_802A822C_de(s32, f32, f32, f32, f32, s32, s32, s32);
-void func_802A9234_de(s32);
 
 s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 s32 func_802BD320_de(char *, const char *, ...);
 f32 func_804422F0_de(char *, f32, f32);
 static inline HudStatusShared_MatchRules *hudRules(void) {
-    return &D_801462C8.rules;
+    return &D_801462C8.viewportLayout.rules;
 }
 void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
     char text[16];
@@ -232,7 +219,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             func_802A9234_de(player->alpha);
             func_802A822C_de(n, x, y + scaleY * 22.0f, scaleX, scaleY, 1, 0, 0);
             func_802AAC28_de(0x1F6, 0, x + scaleX * 20.0f, y + scaleY * 16.0f, scaleX, scaleY * 1.5f, 1);
-            if (D_801462C8.rules.markers != 0) {
+            if (D_801462C8.viewportLayout.rules.markers != 0) {
                 func_802AAC28_de(0x203, 0, x + scaleX * 40.0f, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
             }
         }
@@ -261,7 +248,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             player->alpha = 255.0f;
             if (player->scoreAnim != 0 && player->scoreState != 0) {
                 frames = 1;
-                if (D_801462C8.rules.teams != 0) {
+                if (D_801462C8.viewportLayout.rules.teams != 0) {
                     res = func_8028BEAC_de(&D_8011FE88, 0x204, 0, 1);
                 } else {
                     res = func_8028BEAC_de(&D_8011FE88, 0x1FA, 0, 1);
@@ -315,7 +302,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     }
                     func_802A84F8_de();
                     func_802AAB68_de(1.0f, 1.0f);
-                    if (D_801462C8.rules.markers == 0) {
+                    if (D_801462C8.viewportLayout.rules.markers == 0) {
                         /* Names scroll right to left, each fading out from 0xFF in steps of 6. */
                         for (i = player->nameHead; i >= player->nameTail; i--) {
                             if (player->names[i] != NULL) {
@@ -605,9 +592,6 @@ void func_80220A80_de(Player_func_80220A80_de *player, Body_func_80220A80_de *bo
     func_8021D774_de(player);
 }
 /* Regenerates a player's health at 0x5E4 toward the cap from func_8022AC00_de: under flag 4 at 0x122C it adds D_800D2988 times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at D_801462E5 is set, the speed at 0x18's 0x24 meets D_800C78B8's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by D_800C78BC, D_800D2988 and D_800C78C0's rate. */
-extern f32 D_800D2988;
-extern struct D_800C7470_Pair D_800C27C0_de;
-extern struct D_800C7470_Pair D_800C78C0;
 extern s32 func_8022AC00_de(SharedPlayer_func_80220D44_de *p);
 void func_80220D44_de(SharedPlayer_func_80220D44_de *p) {
     f32 f0;

@@ -47,7 +47,7 @@ void func_804243E0_de(s32 player, s32 *awarded) {
     if (func_80265650_de(D_80102B00[player].achievementFlags, 0x24) == 0) {
         ok = 0;
         if ((D_8014222C - 1U < 5 && status->kills >= 15) ||
-            ((rules = &D_801462C8.rules)->timeLimit >= 0.0f && status->kills >= 15 &&
+            ((rules = &D_801462C8.viewportLayout.rules)->timeLimit >= 0.0f && status->kills >= 15 &&
              (elapsed = rules->timeLimit * (1.0f / 15.0f),
               elapsed = (f32) (s32) (elapsed * (1.0f / 60.0f)),
               (f32) D_801462C8.laps - elapsed) <= 5.0f)) {
@@ -63,7 +63,7 @@ void func_804243E0_de(s32 player, s32 *awarded) {
     if (func_80265650_de(D_80102B00[player].achievementFlags, 0x25) == 0) {
         ok = 0;
         if ((D_8014222C - 1U < 10 && status->kills >= 25) ||
-            ((rules = &D_801462C8.rules)->timeLimit >= 0.0f && status->kills >= 25 &&
+            ((rules = &D_801462C8.viewportLayout.rules)->timeLimit >= 0.0f && status->kills >= 25 &&
              (elapsed = rules->timeLimit * (1.0f / 15.0f),
               elapsed = (f32) (s32) (elapsed * (1.0f / 60.0f)),
               (f32) D_801462C8.laps - elapsed) <= 10.0f)) {

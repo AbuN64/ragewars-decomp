@@ -18,6 +18,12 @@ struct Shared_GameSlot {
     u8 secondListMode;
     u8 unknown1F[0x77];
 };
+typedef struct ViewportLayoutRules {
+    HudStatusShared_MatchRules rules;
+    u32 reserved9C[3];
+    s32 humanWon;
+    s32 threePlayerLayout;
+} ViewportLayoutRules;
 typedef struct Shared_Game Shared_Game;
 struct Shared_Game {
     u32 flags;
@@ -47,6 +53,9 @@ struct Shared_Game {
             s32 unk62C;
             u8 unknown630[0x40];
             s32 split;
+            u32 unknown674[3];
+            s32 humanWon;
+            s32 threePlayerLayout;
         };
         struct {
             u8 reserved20[0xB0];
@@ -56,16 +65,15 @@ struct Shared_Game {
             u8 reserved582[0x32];
             s32 state;
             u8 reserved5B8[0x20];
-            HudStatusShared_MatchRules rules;
+            ViewportLayoutRules viewportLayout;
         };
     };
-    u32 unknown674[3];
-    s32 humanWon;
     /* origin/legacy shared/game.h retains the complete 0xCAC-byte game record. */
-    u8 reserved684[0xCAC - 0x684];
+    u8 reserved688[0xCAC - 0x688];
 };
 extern Shared_Game D_801462C8;
 
+typedef char ViewportLayoutRules_size_check[(sizeof(ViewportLayoutRules) == 0xB0) ? 1 : -1];
 typedef char Shared_Game_size_check[(sizeof(Shared_Game) == 0xCAC) ? 1 : -1];
 typedef char Shared_Game_settings_offset_check[(((u32)&((Shared_Game *)0)->playerSettings) == 0xD0) ? 1 : -1];
 typedef char Shared_Game_slots_offset_check[(((u32)&((Shared_Game *)0)->slots) == 0x148) ? 1 : -1];

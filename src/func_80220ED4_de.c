@@ -12,11 +12,9 @@ extern s32 D_8014561C;
 #include "span_1000/code_8026AC38.h"
 
 
-extern struct Shared_World D_8011FE88;
 extern char D_8013B364;
 extern struct Shared_Net D_801468A0;
 
-extern s32 D_801468F4;
 
 extern s32 D_80140FF8;
 extern u8 *D_801041F0;
@@ -52,7 +50,6 @@ extern s32 func_8022C760_de(void *, void *);
 extern void func_8022C88C_de(void *, void *, s32 *);
 extern s32 func_80243A90_de(void *, Vec3, s32 *);
 extern s32 func_8024491C_de(void *, Vec3, Vec3, void *, f32, f32, f32, f32);
-extern s32 func_80245798_de(void);
 extern void func_80245D30_de(void *, void *, void *, s32);
 extern void func_80246684_de(void *);
 extern s32 func_80246A08_de(void *, s32, s32);
@@ -60,8 +57,6 @@ extern void func_80246E44_de(void *);
 extern void func_80247004_de(void *);
 extern s32 func_8024B6A0_de(void *, s32, s32);
 
-extern f32 func_8024D284_de(void *);
-extern f32 func_8024E420_de(void *);
 extern f32 func_8024E464_de(void *);
 extern s32 func_8024E62C_de(void *);
 extern struct Shared_Surface *func_8024E7DC_de(void *);
@@ -74,12 +69,10 @@ extern f32 func_8027525C_de(struct Shared_Model *, f32, f32);
 extern f32 func_80275DD4_de(struct Shared_Model *, f32, f32);
 extern void func_80278D78_de(void *, s32, void *);
 extern void func_80278E04_de(struct Shared_Model *, s32, void *);
-extern void func_8028A27C_de(void *, void *, Vec3 *, Vec3 *);
 
 
 extern void func_802A65E0_de(void *, void *);
 extern void func_802ACA54_de(void *, void *);
-extern f32 func_802B72B0_de(f32);
 extern s32 func_8044D220_de(void *, s32, s32, struct Shared_Placed *, s32);
 void func_80220ED4_de(SharedPlayer *player)
 {
@@ -684,7 +677,7 @@ void func_80220ED4_de(SharedPlayer *player)
   player->views1C.view2E8_37.emitter.unk6C = player->views1C.view6C_9.yaw;
   player->views1C.view2E8_37.emitter.unk5C = player->views1C.view5C_6.unk5C;
   player->views5E8.view774_115.unk774 = player->views0.view8_3.pos;
-  if ((D_801462C8.flags & 8) || ((D_801462C8.rules.markers != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
+  if ((D_801462C8.flags & 8) || ((D_801462C8.viewportLayout.rules.markers != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
   {
     player->views5E8.view5F4_13.ammo[0] = func_8022ACB8_de(player, 0, 0);
     player->views5E8.view5F4_13.ammo[1] = func_8022ACB8_de(player, 1, 0);
