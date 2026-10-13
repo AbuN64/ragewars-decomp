@@ -29,6 +29,11 @@ void func_8026851C_de(Source_func_8026851C_de *source, Host_func_8026851C_de *ho
     void *storage;
     Effect_func_8026851C_de *partner;
 
+#if defined(VERSION_DE)
+    if (spawn.kind == 0x321) {
+        return;
+    }
+#endif
     if (source->active == 0) {
         velocity.x = 0;
         velocity.y = 0;

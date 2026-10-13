@@ -45,11 +45,19 @@ s32 func_80423F48_de(void) {
 
     func_8029973C_de();
     switch (func_80299A08_de()) {
+    #if defined(VERSION_EU_X)
+    case 0x47:
+#else
     case 0x45:
+#endif
         D_800E4600->next = 0x1A;
         D_801462C8.controllerMode = 0;
         break;
+    #if defined(VERSION_EU_X)
+    case 0x4C:
+#else
     case 0x49:
+#endif
         settings = &D_801462C8;
         status = settings->playerSettings;
         D_800E4600->next = 7;
@@ -62,7 +70,11 @@ s32 func_80423F48_de(void) {
             }
         }
         break;
+    #if defined(VERSION_EU_X)
+    case 0x48:
+#else
     case 0x46:
+#endif
         status = D_801462C8.playerSettings;
         status->enabled = 1;
         status[0].slot = 0;
@@ -71,16 +83,32 @@ s32 func_80423F48_de(void) {
         D_800E4600->next = 0x13;
         D_801462C8.controllerMode = 1;
         break;
+    #if defined(VERSION_EU_X)
+    case 0x49:
+#else
     case 0x4B:
+#endif
         D_800E4600->next = 0x1B;
         break;
+    #if defined(VERSION_EU_X)
+    case 0x4B:
+#else
     case 0x47:
+#endif
         D_800E4600->next = 4;
         break;
+    #if defined(VERSION_EU_X)
+    case 0x4A:
+#else
     case 0x4C:
+#endif
         D_800E4600->next = 0x10;
         break;
+    #if defined(VERSION_EU_X)
+    case 0x4D:
+#else
     case 0x48:
+#endif
         status = D_801462C8.playerSettings;
         D_800E4600->next = 7;
         status->enabled = 1;
@@ -93,7 +121,11 @@ s32 func_80423F48_de(void) {
         }
         D_801462C8.controllerMode = 3;
         break;
+    #if defined(VERSION_EU_X)
+    case 0x4E:
+#else
     case 0x4A:
+#endif
         status = D_801462C8.playerSettings;
         D_800E4600->next = 0xA;
         status->enabled = 1;

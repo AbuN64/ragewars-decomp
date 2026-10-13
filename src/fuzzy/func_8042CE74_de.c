@@ -2,9 +2,9 @@
 #include "types.h"
 
 /* Shows the model preview of the screen D_800E53C0 when its model id at 0x32C is set: shows item
-   0x268 of the screen window with alpha 0xAF and D_800D3500 at 0x38, then sets up the view at 0x20
+   the version-specific preview item of the screen window with alpha 0xAF and D_800D3500 at 0x38, then sets up the view at 0x20
    of the screen through func_80439B5C_de with mode 0, a uniform D_800DDAFC_de scale and the offset
-   (0, OFFSET_Y, D_800DDB08_de), through func_80439BE0_de with a zero vector, through func_80439C30_de
+   (0, D_800DDB04, D_800DDB08_de), through func_80439BE0_de with a zero vector, through func_80439C30_de
    with (0, D_800DDB00, 0), and loads the model through func_80439C80_de. */
 
 typedef struct {
@@ -31,7 +31,7 @@ struct Screen {
 extern struct Screen *D_800E53C0;
 
 extern f32 D_800DDAFC_de;
-extern f32 D_800DDB00[3];
+extern f32 D_800DDB00, D_800DDB04, D_800DDB08_de;
 
 extern struct Item *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(struct Item *, s32);
@@ -48,7 +48,13 @@ void func_8042CE74_de(void) {
     Vec3 position;
 
     if (D_800E53C0->model != -1) {
+        #if defined(VERSION_DE)
+        item = func_8040EC30_de(D_800E53C0->window, 0x263);
+#elif defined(VERSION_EU_X)
+        item = func_8040EC30_de(D_800E53C0->window, 0x26C);
+#else
         item = func_8040EC30_de(D_800E53C0->window, 0x268);
+#endif
         func_8040E8D8_de(item, 1);
         item->alpha = 0xAF;
         item->image = previewModelImage();
@@ -59,11 +65,11 @@ void func_8042CE74_de(void) {
         angle.y = 0;
         angle.z = 0;
         position.x = 0;
-        position.y = D_800DDB00[0];
+        position.y = D_800DDB00;
         position.z = 0;
         offset.x = 0;
-        offset.y = D_800DDB00[1];
-        offset.z = D_800DDB00[2];
+        offset.y = D_800DDB04;
+        offset.z = D_800DDB08_de;
         func_80439B5C_de(D_800E53C0->view, 0, scale, offset);
         func_80439BE0_de(D_800E53C0->view, angle);
         func_80439C30_de(D_800E53C0->view, position);
