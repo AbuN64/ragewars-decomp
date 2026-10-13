@@ -29,8 +29,13 @@ struct State802A6DF8 {
     void *object;
     u8 pad20[4];
     f32 value;
-    u8 pad28[0x14];
+    u8 pad28[0xC];
+    s32 renderMode; /* 0x34 */
+    u8 pad38[4];
     u32 flags;
+    struct Node438C *vertices; /* 0x40 */
+    u8 pad44[4];
+    s32 vertexCount; /* 0x48 */
 };
 
 struct List802A6DF8;

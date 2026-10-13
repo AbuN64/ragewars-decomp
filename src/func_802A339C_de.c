@@ -1,3 +1,4 @@
+#include "span_1000/code_802A6AC0.h"
 #include "span_1000/code_802A25C4.h"
 #include "types.h"
 
@@ -18,12 +19,13 @@ void func_802A339C_de(void *arg0, void *arg1) {
     f32 matrix[16];
     Node438C *first;
     Node438C *next;
+    State802A6DF8 *state = arg0;
 
-    if (((func_802A438C_S1 *)(arg0))->unk48 < 2) {
+    if (state->vertexCount < 2) {
         return;
     }
 
-    first = ((func_802A438C_S1 *)(arg0))->unk40;
+    first = state->vertices;
     next = first->next;
     if (first != 0) {
         func_80272CB0_de(matrix, first->a, first->b, first->c);
@@ -71,7 +73,7 @@ no_pair:
             matrix[14] = first->z;
         }
 apply:
-        func_8027027C_de(matrix, (s32)((u8 *)first + ((D_800D297C << 6) + 0x28)));
+        func_8027027C_de(matrix, (s32)first->matrices[D_800D297C]);
         first = next;
         next = first->next;
     }
@@ -79,5 +81,5 @@ apply:
     matrix[12] = first->x;
     matrix[13] = first->y;
     matrix[14] = first->z;
-    func_8027027C_de(matrix, (s32)((u8 *)first + ((D_800D297C << 6) + 0x28)));
+    func_8027027C_de(matrix, (s32)first->matrices[D_800D297C]);
 }

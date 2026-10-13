@@ -46,6 +46,7 @@ struct Node438C {
     s32 a;
     s32 b;
     s32 c;
+    f32 matrices[2][16]; /* 0x28: double-buffered transforms */
 };
 
 struct Node438C;
