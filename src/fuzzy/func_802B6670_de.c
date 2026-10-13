@@ -6,8 +6,9 @@ extern f32 func_802B72B0_de(f32);
 void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
 {
     f32 matrix[4][4];
+    f32 (*matrixPointer)[4] = matrix;
     f32 x, y, z, rx, ry, rz, vx, vy, vz, scale, one;
-    func_802B6C6C_de(matrix);
+    func_802B6C6C_de(matrixPointer);
     x = ax - ex; y = ay - ey; z = az - ez;
     scale = D_800C7870_de / func_802B72B0_de((x*x + y*y) + z*z);
     x *= scale; z *= scale; y *= scale;
@@ -30,5 +31,5 @@ void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az,
     matrix[3][1] = -((ex*vx + ey*vy) + ez*vz);
     matrix[3][2] = -((ex*x + ey*y) + ez*z);
     matrix[3][3] = one;
-    func_802B6CBC_de(matrix, out);
+    func_802B6CBC_de(matrixPointer, out);
 }

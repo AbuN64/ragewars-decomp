@@ -23,7 +23,7 @@ s32 func_8042E460_de(u8 *request) {
 
     for (i = 7; i > 0; i--) {
         settings = &D_801462C8;
-        if (settings->playerSettings[i].active != 1) {
+        if (settings->playerSettings[i].enabled != 1) {
             break;
         }
     }
