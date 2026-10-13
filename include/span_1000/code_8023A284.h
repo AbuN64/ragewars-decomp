@@ -4,6 +4,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "resident_event_handler.h"
 /* unbake published declaration: published_18eaa73701f79305ca915876 */
 extern f32 func_8023A294_de(s32 arg0, f32 value, f32 target, f32 step);
 
@@ -192,5 +193,10 @@ struct IntegerState8A4 {
     IntrusiveList unk_8A0;
     IntrusiveList unk_8B4;
 };
+
+extern s32 **func_80295F14_de(s32 *, s32);
+extern void func_80295F78_de(s32 **, void *);
+extern void func_80295FB4_us_rev1(s32 *, void **, s32, s32, s32, s32, s32, s32, s32);
+extern void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 
 #endif
