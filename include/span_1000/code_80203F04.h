@@ -173,7 +173,8 @@ struct func_80204728_S1;
 typedef struct func_80204728_S1 func_80204728_S1;
 
 /* unbake published declaration: published_bdfc5cc07313ddc69aedb34f */
-extern s32 func_8020459C_de(void *arg0);
+struct Actor_func_8024A7A0_de;
+extern s32 func_8020459C_de(struct Actor_func_8024A7A0_de *actor);
 
 struct func_80204738_S1;
 /* unbake published declaration: published_e11c62d8865473427423f09a */
@@ -198,8 +199,10 @@ void func_80204808_de(struct Actor_func_8024A1D0_de *actor, struct Input_func_80
 typedef struct BreakableDefinition {
     u8 reserved0[0x14];
     s32 flags;
-    u8 reserved18[0x10];
-    s16 health;
+    u8 reserved18[8];
+    s16 triggerValue; /* 0x20: kind-10 state callback result */
+    u8 reserved22[6];
+    s16 health; /* 0x28 */
 } BreakableDefinition;
 
 #endif

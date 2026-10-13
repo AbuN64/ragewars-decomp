@@ -1,20 +1,17 @@
-#include "common/types_1dc8418c21db.h"
+#include "shared/level_actor.h"
 #include "span_1000/code_80203F04.h"
-#include "types.h"
 
-
-
-
-
-
-s32 func_8020459C_de(void *arg0) {
+/* The kind-10 actor initializer installs the state table containing this callback. */
+s32 func_8020459C_de(Actor_func_8024A7A0_de *actor) {
+    void *resource = actor->definition;
+    BreakableDefinition *definition = resource;
     s32 val;
 
-    val = ((func_8020459C_S2 *)((((func_80204468_S2 *)(arg0))->unk18)))->unk20;
+    val = definition->triggerValue;
     if (val != 0) {
-        ((func_80204468_S2 *)(arg0))->unk100 = ((func_80204468_S2 *)(arg0))->unk100 | 0x2000;
+        actor->flags = actor->flags | 0x2000;
     } else {
-        ((func_80204468_S2 *)(arg0))->unk100 = ((func_80204468_S2 *)(arg0))->unk100 & ~0x2000;
+        actor->flags = actor->flags & ~0x2000;
     }
     return val;
 }
