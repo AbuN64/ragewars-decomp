@@ -245,17 +245,35 @@ struct Racer;
 struct Racer {
     char pad0[4];
     struct Racer *next;
-    char pad8[0x118];
+    char pad8[4];
+    f32 screenScaleX; /* 0xC */
+    f32 screenScaleY; /* 0x10 */
+    char pad14[0x54];
+    u16 perspectiveNorm; /* 0x68 */
+    char pad6A[0xA6];
+    f32 viewportScaleX; /* 0x110 */
+    f32 viewportScaleY; /* 0x114 */
+    char pad118[8];
     s32 effect;
     u16 pad124;
     u16 effectArg;
-    char pad128[0x188];
+    char pad128[0x174];
+    f32 viewportWidth; /* 0x29C */
+    f32 viewportHeight;
+    f32 viewportX;
+    f32 viewportY;
+    char pad2AC[4];
     UnitVp viewports[2];
-    char pad2D0[0x250];
+    char pad2D0[0xB0];
+    u32 projectionMatrices[2][16]; /* 0x380 */
+    u32 lights[2][8]; /* 0x400 */
+    char pad440[0xE0];
     u8 hit;
     u8 boost;
     u8 spin;
-    char pad523[0x31];
+    char pad523[0x1B];
+    u16 fogNear; /* 0x53E */
+    char pad540[0x14];
     char sound[0x40];
 };
 
