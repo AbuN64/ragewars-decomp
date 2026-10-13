@@ -18,13 +18,28 @@ void func_8020ABF0_de(NavigationGraph *graph) {
     PlatformRoute *route;
     Vec3 *position;
     f32 distance, best, sentinel;
-    s32 i, count, j;
+    s32 count, i, j;
 
-    for (i = 29; i >= 0; i--) platforms[i] = 0;
+    {
+        s32 clear;
+        for (clear = 29; clear >= 0; clear--) platforms[clear] = 0;
+    }
     count = 0;
-    for (i = 0; i < D_8011BF08; i++) {
-        actor = &D_8011BF00[i];
-        if (actor->objectId == 0x642) platforms[count++] = actor;
+    {
+        s32 gather = 0;
+        NavigationPlatform **out;
+        if (D_8011BF08 > 0) {
+            out = platforms;
+            do {
+                NavigationPlatform *entry = &D_8011BF00[gather];
+                if (entry->objectId == 0x642) {
+                    *out = entry;
+                    out++;
+                    count++;
+                }
+                gather++;
+            } while (gather < D_8011BF08);
+        }
     }
     node = graph->nodes;
     if (node != 0) {
@@ -34,7 +49,9 @@ void func_8020ABF0_de(NavigationGraph *graph) {
             chosen = 0;
             if (point->attributes.halves.flags & 0x200) {
                 best = D_800C1D50_de;
-                for (i = 0; i < count; i++) {
+                i = 0;
+                if (count > 0) {
+                do {
                     actor = platforms[i];
                     motion = &actor->motion;
                     definition = &actor->resource->motion;
@@ -72,13 +89,15 @@ void func_8020ABF0_de(NavigationGraph *graph) {
                             chosenPosition = end;
                         }
                     }
+                    i++;
+                } while (i < count);
                 }
-                if (chosen == 0) {
-                    node->platform = 0;
-                    point->attributes.halves.flags &= 0xFDFF;
-                } else {
+                if (chosen != 0) {
                     node->platform = chosen;
                     node->endpoint = chosenPosition;
+                } else {
+                    node->platform = 0;
+                    point->attributes.halves.flags &= 0xFDFF;
                 }
             }
             node = node->next;
