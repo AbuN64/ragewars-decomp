@@ -28,7 +28,8 @@ extern Handler80437868 D_800F1DB0_de;
 
 
 s32 func_80437688_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    char *entry;
+    Handler80437868 *entry;
+    func_8021C9B4_S3 *actor;
     s32 index;
     s32 wildcard;
     s32 actor_kind;
@@ -36,7 +37,7 @@ s32 func_80437688_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 
     if (D_800F1DB0_de != 0) {
         wildcard = 0x7530;
-        entry = (char *)&D_800F1DB0_de;
+        entry = &D_800F1DB0_de;
         index = 0;
         do {
 #if defined(VERSION_DE)
@@ -44,19 +45,21 @@ s32 func_80437688_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #else
             if (D_800F1DA8[index].value == arg1) {
 #endif
-                actor_kind = ((func_8021C9B4_S3 *)(arg0))->unkC;
+                actor = arg0;
+                actor_kind = actor->unkC;
 #if defined(VERSION_DE)
                 table_kind = D_800E173C[index].value;
 #else
                 table_kind = D_800F1DAC[index].value;
 #endif
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*(Handler80437868 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
                 }
             }
-            entry += 0xC;
+            entry += 3;
             index++;
-        } while (*(Handler80437868 *)entry != 0);
+        /* FAKEMATCH: retain the original 12-byte handler-column scan and dispatch order. */
+        } while (*entry != 0);
     }
     return 0;
 }
