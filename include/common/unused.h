@@ -21854,6 +21854,8 @@ struct TextBoundsData {
     char pad0[0x29C];
     f32 unk_29C;
     f32 unk_2A0;
+    f32 x; /* 0x2A4 */
+    f32 y; /* 0x2A8 */
 };
 struct TextBoundsDescriptor;
 struct TextBoundsDescriptor {
@@ -21898,6 +21900,10 @@ struct TextBoundsState {
     s32 unk_20;
 };
 struct TextBoundsText;
+struct TextBoundsHandlers {
+    char pad0[0x14];
+    void (*draw)(TextBoundsText *, TextBoundsMetrics *, TextBoundsMetrics *, void *);
+};
 struct TextBoundsText {
     s32 value;
     s16 mode;
@@ -21906,7 +21912,7 @@ struct TextBoundsText {
     s32 fieldC;
     s32 field10;
     void *text;
-    s32 field18;
+    struct TextBoundsHandlers *field18;
     s32 spacing;
     s32 field20;
     s32 field24;

@@ -62,7 +62,12 @@ struct func_8043FFAC_S2;
 /* unbake published declaration: published_4aeb6cba81d665dc87f1126c */
 struct func_8043FFAC_S2 {
     s16 unk0;
-    char pad0[0x2E];
+    s16 x; /* 0x02 */
+    s16 y; /* 0x04 */
+    char pad6[6];
+    struct TextBoundsText *entries; /* 0x0C */
+    s32 count; /* 0x10 */
+    char pad14[0x1C];
     f32 unk30;
     f32 unk34;
     s32 unk38;
