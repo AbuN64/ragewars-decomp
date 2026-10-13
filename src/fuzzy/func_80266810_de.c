@@ -29,17 +29,26 @@ extern void *D_801041F0;
 extern s32 D_80100204;
 extern Shield D_80100208, D_80110570;
 
+static inline void storeActorHealth(Shared_ReactionActor *actor, s32 value) { actor->unk174 = value; }
+static inline void storePlayerHealth(Shared_ReactionPlayer *player, s32 value) {
+    player->unk5E4 = value;
+    player->unk174 = player->unk5E4;
+    storeActorHealth(&player->actor2E8, player->unk5E4);
+}
+static inline void buildDamage(Shared_DamageEvent *event, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield *shield) {
+    func_80216488_de(event, target, (s32)damage, radius, flags, shield);
+}
 static inline void reflectedProjectile(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield *shield) {
     Shared_DamageEvent event;
     Shared_DamageEvent *p = &event;
-    func_80216488_de(p, target, (s32)(damage * 2.0f), radius, flags, shield);
+    buildDamage(p, target, damage * 2.0f, radius, flags, shield);
     if (damage * D_800C43E0_de[9] > 0.0f) func_802171FC_de(player, &player->unk170, p);
 }
 static inline void reflectedActor(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield *shield) {
     Shared_DamageEvent event;
     Shared_DamageEvent *p = &event;
     f32 value = damage * D_800C43E0_de[13];
-    func_80216488_de(p, target, (s32)value, radius, flags, shield);
+    buildDamage(p, target, value, radius, flags, shield);
     if (value > 0.0f) func_802171FC_de(player, &player->unk170, p);
 }
 static inline s32 adjustHit(Shared_ReactionActor *arg1, Vec3 *position) {
@@ -180,7 +189,7 @@ Vec3 sp30;
         var_fs1 *= scaleHit(arg0, arg1, position, temp_fs1f_2, arg8, arg10, &sp110);
         if (!(var_fs1 <= 0.0f)) {
             hitImpulse(arg0, arg1, params, &sp30);
-            func_80216488_de(&sp40, arg1, (s32) var_fs1, temp_fs1f_2, arg10, sp110);
+            func_80216488_de(&sp40, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
             temp_v1_3 = arg1->category;
             if (temp_v1_3 == 2) {
                 temp_a0 = arg1->owner;
@@ -194,14 +203,11 @@ Vec3 sp30;
                                 if (temp_s1 < var_v1_2) {
                                     var_v1_2 = temp_s1;
                                 }
-                                temp_s0_2->unk5E4 = var_v1_2;
-                                temp_s0_2->unk174 = var_v1_2;
-                                temp_s0_2->actor2E8.unk174 = var_v1_2;
-                                if (var_s2 != NULL) {
-                                    goto block_61;
-                                }
-                            } else {
-block_61:
+                                storePlayerHealth(temp_s0_2, var_v1_2);
+                            }
+                        }
+                        if (var_s2 != NULL) {
+                            {
                                 if (var_s2->unk122C & 0x10) {
                                     reflectedProjectile(temp_s0_2, arg1, var_fs1, temp_fs1f_2, arg10, sp110);
                                 }
@@ -212,9 +218,7 @@ block_61:
                                         var_v1_3 = temp_s1_2;
                                     }
                                     var_fs1 = 0.0f;
-                                    var_s2->unk5E4 = var_v1_3;
-                                    var_s2->unk174 = var_v1_3;
-                                    var_s2->actor2E8.unk174 = var_v1_3;
+                                    storePlayerHealth(var_s2, var_v1_3);
                                 }
                             }
                         }
@@ -233,7 +237,7 @@ block_61:
                         if ((var_a2_2 != NULL) && (var_a2_2->unk122C & 0x200)) {
 block_82:
                             var_fs1 *= D_800C43E0_de[11];
-                            func_80216488_de(&sp40, arg1, (s32) var_fs1, temp_fs1f_2, arg10, sp110);
+                            func_80216488_de(&sp40, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
                         }
                     }
                     if (var_s2 != NULL) {
@@ -255,14 +259,11 @@ block_82:
                             if (temp_s1_3 < var_v1_4) {
                                 var_v1_4 = temp_s1_3;
                             }
-                            temp_s0_3->unk5E4 = var_v1_4;
-                            temp_s0_3->unk174 = var_v1_4;
-                            temp_s0_3->actor2E8.unk174 = var_v1_4;
-                            if (var_s2 != NULL) {
-                                goto block_98;
-                            }
-                        } else {
-block_98:
+                            storePlayerHealth(temp_s0_3, var_v1_4);
+                        }
+                    }
+                    if (var_s2 != NULL) {
+                        {
                             if (var_s2->unk122C & 0x10) {
                                 reflectedActor(temp_s0_3, arg1, var_fs1, temp_fs1f_2, arg10, sp110);
                             }
@@ -274,7 +275,7 @@ block_98:
                     }
                     if (temp_s0_3->unk122C & 0x200) {
                         var_fs1 *= D_800C43E0_de[15];
-                        func_80216488_de(&sp40, arg1, (s32) var_fs1, temp_fs1f_2, arg10, sp110);
+                        func_80216488_de(&sp40, arg1, (s32)var_fs1, temp_fs1f_2, arg10, sp110);
                     }
                 }
                 if ((var_s2 != NULL) && (var_s2->unk122C & 0x400)) {
