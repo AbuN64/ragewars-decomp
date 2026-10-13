@@ -25,7 +25,6 @@ extern s32 D_800D297C;
 
 
 extern void **func_8024F6EC_de(Object_func_8024EB90_de *, s32);
-extern void func_802736D4_de(Matrix_func_80213CF8_de *, s32);
 extern void func_8027347C_de(Matrix_func_80213CF8_de *, f32, f32, f32);
 extern s32 func_8027254C_de(Vec3 *, f32);
 extern void func_80273448_de(Matrix_func_80213CF8_de *, f32, f32, f32);
@@ -39,7 +38,6 @@ void func_8024EB90_de(Object_func_8024EB90_de *obj) {
     Matrix_func_80213CF8_de matrix;
     void **resource;
     Gfx *branch;
-    s32 angle;
 
     func_8026D8F8_de();
     func_80295FF4_de();
@@ -54,11 +52,10 @@ void func_8024EB90_de(Object_func_8024EB90_de *obj) {
     obj->cached = D_80110634;
     gSPBranchList(D_80110634++, 0);
     if (*obj->type == 8) {
-        angle = D_8013B190;
+        func_802736D4_de(&matrix, D_8013B190);
     } else {
-        angle = obj->angle;
+        func_802736D4_de(&matrix, obj->angle);
     }
-    func_802736D4_de(&matrix, angle);
     func_8027347C_de(&matrix, obj->scale, obj->scale, obj->scale);
     func_8027254C_de(&obj->position, 20000.0f);
     func_80273448_de(&matrix, obj->position.x, obj->position.y + obj->height, obj->position.z);

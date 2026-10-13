@@ -317,7 +317,7 @@ struct Object_func_8024EB90_de {
     char pad64[4];
     char matrices[4][0x40];
     char pad168[0xC];
-    s32 angle;
+    f32 angle;
     char pad178[4];
     char effect[0x18];
     f32 scale;
@@ -363,7 +363,7 @@ struct Object_func_8024EB90_de;
 typedef struct Object_func_8024EB90_de Object_func_8024EB90_de;
 
 /* unbake published declaration: published_bf4e4ae864cc3955fc2dee74 */
-extern int D_8013B190;
+extern f32 D_8013B190;
 
 struct Actor_func_8024ED90_de;
 /* unbake published declaration: published_c24a53b99f47bfcd8eab2be1 */

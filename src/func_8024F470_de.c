@@ -91,7 +91,6 @@ void func_8024F618_de(void *arg0) {
     ((Object_func_8024EB90_de *)(arg0))->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
 }
 
-extern void func_802736D4_de(void *, s32);
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 extern s32 func_8027254C_de(f32 *arg0, f32 arg1);
 extern void func_80273448_de(char *object, float x, float y, float z);
@@ -103,14 +102,12 @@ extern s32 D_800D297C;
 void func_8024F634_de(void *arg0) {
     char *o = (char *) arg0;
     f32 sp10[16];
-    s32 var_a1;
 
-    if (*(s32 *) (((Object_func_8024EB90_de *)(o))->type) == 8) {
-        var_a1 = D_8013B190;
+    if (*(s32 *)((Object_func_8024EB90_de *)o)->type == 8) {
+        func_802736D4_de(sp10, D_8013B190);
     } else {
-        var_a1 = ((Object_func_8024EB90_de *)(o))->angle;
+        func_802736D4_de(sp10, ((Object_func_8024EB90_de *)o)->angle);
     }
-    func_802736D4_de(sp10, var_a1);
 
     func_8027347C_de(sp10, ((Object_func_8024EB90_de *)(o))->scale, ((Object_func_8024EB90_de *)(o))->scale, ((Object_func_8024EB90_de *)(o))->scale);
 
