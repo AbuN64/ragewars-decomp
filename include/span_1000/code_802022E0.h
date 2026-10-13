@@ -122,7 +122,7 @@ struct Actor {
 };
 
 /* unbake published declaration: published_b95c859ed5121f9a5916de9e */
-extern void func_80203DF0_de(void *arg0, void *arg1);
+extern void func_80203DF0_de(void *arg0, func_80203DF0_S1 *event);
 
 struct Segment;
 /* unbake published declaration: published_b96106191ae4ff3c30c9b5de */
@@ -146,7 +146,8 @@ struct Result {
 struct Segment_func_80203278_de;
 /* unbake published declaration: published_bb1d1d9de614eb47426f207d */
 struct Segment_func_80203278_de {
-    char pad0[0x40];
+    char pad0[0x3C];
+    s32 yawEvent; /* 0x3C: rotation event selector */
     s32 orientationMode;
     f32 rate;
     f32 limit;
@@ -178,7 +179,11 @@ struct func_80203DF0_S2;
 struct func_80203DF0_S2 {
     char pad0[0x18];
     char * unk18;
-    char pad18[0x294 - 0x18 - sizeof(char*)];
+    char pad18[0x6C - 0x18 - sizeof(char*)];
+    f32 heading; /* 0x6C */
+    char pad70[0x20C - 0x70];
+    f32 targetHeading; /* 0x20C */
+    char pad210[0x294 - 0x210];
     f32 unk294;
 };
 
