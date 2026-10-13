@@ -5,7 +5,9 @@
 struct Player;
 /* unbake published declaration: published_038392ee5aca3bbae9c77df5 */
 typedef struct AiProfile {
-    u8 pad0[0x93];
+    u8 pad0[0x90];
+    s8 state90; /* 0x90 */
+    u8 pad91[2];
     u8 difficulty; /* 0x93 */
 } AiProfile;
 

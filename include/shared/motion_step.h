@@ -16,11 +16,11 @@ typedef struct MotionContactResult {
 typedef struct ActorMotion {
     void *actor; /* 0x00 */
     s32 actorFlags; /* 0x04 */
-    u8 reserved08[4];
+    f32 field08; /* 0x08 */
     f32 radius; /* 0x0C */
     f32 height; /* 0x10 */
     f32 bottom; /* 0x14 */
-    u8 reserved18[4];
+    f32 field18; /* 0x18 */
     s32 iteration; /* 0x1C */
     s32 candidate; /* 0x20 */
     s32 grounded;
