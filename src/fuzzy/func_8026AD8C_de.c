@@ -28,12 +28,12 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
     s32 tag;
     u32 value, a, b, c, n, block, address;
     s32 b2, c2;
-    s32 kind, vertexSlot, vertexOffset;
+    s32 vertexSlot, vertexOffset;
     const u32 vertexSegment = 0x02000000;
     const u32 matrixSegment = 0x01000000;
     s32 h, l, q, r;
     void *srcData, *dstData;
-    void *copySource3, *copySource2, *copySource1, *copySource0;
+    void *copySource4, *copySource5, *copySource3, *copySource2, *copySource1, *copySource0;
     if (func_80285180_de(res, 1) != 0) {
         parts = 6;
         if (extra == 0) {
@@ -124,7 +124,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                     output = func_8028FDB4_de(dstEntry, 1);
                     if ((tag = *input) != 0) {
                         do {
-                            kind = tag & 0x60;
+                            commandSize = tag & 0x60;
                             if (tag & 0x80) {
                                 value = *input++ << 8;
                                 value |= *input++;
@@ -132,21 +132,21 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                                 b = (s32)value >> 5 & 0x1F;
                                 c = value & 0x1F;
                                 if (*input & 0x80) {
-                                    h = *input++;
-                                    l = *input++;
-                                    value = (h << 8) | l;
+                                    { s32 hi = *input++;
+                                    s32 lo = *input++;
+                                    value = (hi << 8) | lo;
                                     commandSize = (s32)value >> 10 & 31;
                                     b2 = (s32)value >> 5 & 31;
                                     c2 = value & 31;
-                                    gSP2Triangles(output++, a, b, c, 0, commandSize, b2, c2, 0);
+                                    gSP2Triangles(output++, a, b, c, 0, commandSize, b2, c2, 0); }
                                 } else {
                                     gSP1Triangle(output++, a, b, c, 0);
                                 }
                             } else {
-                                switch (kind) {
+                                switch (commandSize) {
                                 case 0x20:
-                                    h = *input++; l = *input++;
-                                    value = (h << 8) | l;
+                                    value = *input++ << 8;
+                                    value |= *input++;
                                     vertexSlot = (s32)value >> 5 & 31;
                                     n = value & 0x1F;
                                     if (n == 0) n = 32;
@@ -173,10 +173,10 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                             tag = *input;
                         } while (tag != 0);
                     }
-                    gSPEndDisplayList(output);
+                    gSPEndDisplayList(output++);
                     dstData = func_8028FDB4_de(dstEntry, 1);
                     commandSize = (u8 *)output - (u8 *)dstData;
-                    block += (commandSize + 15) & ~7;
+                    block += (commandSize + 7) & ~7;
                     total += block;
                     dstEntry->offsets[2] = block;
                     newList->offsets[i + 1] = total;
@@ -188,20 +188,22 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             if (extra != 0) {
                 copySource3 = func_8028FDC8_de(old, 3, &len3); dstData = func_8028FDB4_de(dst, 3);
                 func_802BD3A0_de(dstData, copySource3, len3);
-                dst->offsets[4] = offset + len3;
-                copySource3 = func_8028FDC8_de(old, 4, &len4); dstData = func_8028FDB4_de(dst, 4);
-                func_802BD3A0_de(dstData, copySource3, len4);
-                offset += len3 + len4;
+                offset += len3;
+                dst->offsets[4] = offset;
+                copySource4 = func_8028FDC8_de(old, 4, &len4); dstData = func_8028FDB4_de(dst, 4);
+                func_802BD3A0_de(dstData, copySource4, len4);
+                offset += len4;
                 dst->offsets[5] = offset;
-                copySource3 = func_8028FDC8_de(old, 5, &len5); dstData = func_8028FDB4_de(dst, 5);
-                func_802BD3A0_de(dstData, copySource3, len5);
+                copySource5 = func_8028FDC8_de(old, 5, &len5); dstData = func_8028FDB4_de(dst, 5);
+                func_802BD3A0_de(dstData, copySource5, len5);
                 offset += len5;
                 dst->offsets[6] = offset;
             }
             if (sentinel != 0) {
-                output = func_8028FDB4_de(dst, 3);
-                output->words.w0 = -1; output->words.w1 = 0;
-                dst->offsets[4] = offset + 8;
+                Gfx *sentinelData = func_8028FDB4_de(dst, 3);
+                offset += 8;
+                sentinelData->words.w0 = -1; sentinelData->words.w1 = 0;
+                dst->offsets[4] = offset;
             }
         }
         func_80253D10_de(0, res, allocation);
