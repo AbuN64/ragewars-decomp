@@ -1,3 +1,4 @@
+#include "span_1000/code_8026E1F8.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8026AC38.h"
 #include "types.h"
@@ -21,10 +22,10 @@ void func_8026E158_de(void **arg0) {
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
         rec = func_8028FDB4_de(func_8028FDB4_de(temp_v0, i), 0);
-        if (((func_8026E158_S1 *)(rec))->unk8.v0 == 0) {
+        if (((ResourceSectionReference *)rec)->resource == 0) {
             continue;
         }
-        result = func_80295EAC_de(&((func_8026E158_S1 *)(rec))->unk8.v1, -1);
+        result = func_80295EAC_de(&((ResourceSectionReference *)rec)->resource, -1);
         if (result == 0) {
             continue;
         }

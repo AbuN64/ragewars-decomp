@@ -3,7 +3,7 @@
 #include "types.h"
 
 extern f32 func_802B72B0_de(f32);
-extern char D_800C49A0_de;
+extern f32 D_800C49A4_de;
 
 
 
@@ -12,24 +12,24 @@ extern char D_800C49A0_de;
 
 void func_80274C7C_de(void *arg0)
 {
-    char *o = (char *)arg0;
+    func_80274C64_S1 *o = arg0;
     f32 magSq;
     f32 mag;
     f32 zOut;
 
-    magSq = (((func_80274C64_S1 *)(o))->unk18 * ((func_80274C64_S1 *)(o))->unk18) +
-            (((func_80274C64_S1 *)(o))->unk1C * ((func_80274C64_S1 *)(o))->unk1C) +
-            (((func_80274C64_S1 *)(o))->unk20 * ((func_80274C64_S1 *)(o))->unk20);
+    magSq = (o->unk18 * o->unk18) +
+            (o->unk1C * o->unk1C) +
+            (o->unk20 * o->unk20);
     zOut = 0.0f;
     if (magSq != 0.0f) {
         mag = func_802B72B0_de(magSq);
-        magSq = ((func_802077F4_S2 *)(&D_800C49A0_de))->unk4 / mag;
-        ((func_80274C64_S1 *)(o))->unk24 = ((func_80274C64_S1 *)(o))->unk18 * magSq;
-        ((func_80274C64_S1 *)(o))->unk28 = ((func_80274C64_S1 *)(o))->unk1C * magSq;
-        zOut = ((func_80274C64_S1 *)(o))->unk20 * magSq;
+        magSq = D_800C49A4_de / mag;
+        o->unk24 = o->unk18 * magSq;
+        o->unk28 = o->unk1C * magSq;
+        zOut = o->unk20 * magSq;
     } else {
-        ((func_80274C64_S1 *)(o))->unk24 = 0.0f;
-        ((func_80274C64_S1 *)(o))->unk28 = 0.0f;
+        o->unk24 = 0.0f;
+        o->unk28 = 0.0f;
     }
-    ((func_80274C64_S1 *)(o))->unk2C = zOut;
+    o->unk2C = zOut;
 }
