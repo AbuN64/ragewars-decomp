@@ -1222,7 +1222,7 @@ schema = 1
 "func_80253670_de" = { evidence = "landed", signature = "void func_80253670_de(void *arg0, Node80253610 *arg1)" }
 "func_80253754_de" = { evidence = "landed", signature = "void func_80253754_de(void *arg0, Node80253610 *arg1)" }
 "func_80253838_de" = { evidence = "landed", signature = "void func_80253838_de(void *arg0, void *arg1)" }
-"func_80253908_de" = { evidence = "landed", signature = "void func_80253908_de(void)" }
+"func_80253908_de" = { evidence = "authored", signature = "void func_80253908_de(s32 unusedHeap)" }
 "func_802539EC_de" = { evidence = "landed", signature = "void func_802539EC_de(s32 unused, s32 arg1)" }
 "func_80253AD4_de" = { evidence = "landed", signature = "s32 func_80253AD4_de(void)" }
 "func_80253BBC_de" = { evidence = "landed", signature = "void func_80253BBC_de(s32 arg0, func_80205628_S3 *arg1)" }
@@ -2570,7 +2570,7 @@ schema = 1
 "func_802A5AD0_de" = { evidence = "landed", signature = "void func_802A5AD0_de(void *arg0)" }
 "func_802A5B4C_de" = { evidence = "landed", signature = "void func_802A5B4C_de(f32 *arg0)" }
 "func_802A5B84_de" = { evidence = "landed", signature = "void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4)" }
-"func_802A5BE4_de" = { evidence = "declared", signature = "void func_802A5BE4_de(void *, Vec3, Vec3, s32, s32)" }
+"func_802A5BE4_de" = { evidence = "landed", signature = "Particle *func_802A5BE4_de(Scene_func_802A5180_de *scene, Vec3 position, Vec3 normal, s32 surface, s32 owner)" }
 "func_802A5D38_de" = { evidence = "landed", signature = "void func_802A5D38_de(void *arg0, s32 arg1)" }
 "func_802A5E08_de" = { evidence = "landed", signature = "void func_802A5E08_de(Owner802A6DF8 *owner)" }
 "func_802A5EE0_de" = { evidence = "landed", signature = "void func_802A5EE0_de(void *arg0)" }
@@ -8423,8 +8423,8 @@ schema = 1
 "D_800DE850" = { declaration = "extern u32 D_800DE850;", evidence = "authored" }
 "D_800DE854" = { declaration = "extern u32 D_800DE854;", evidence = "authored" }
 "D_800DE858" = { declaration = "extern int D_800DE858;", evidence = "authored" }
-"D_800DE860_de" = { declaration = "extern s32 D_800DE860_de;", evidence = "authored" }
-"D_800DE864_de" = { declaration = "extern s32 D_800DE864_de;", evidence = "authored" }
+"D_800DE860_de" = { declaration = "extern void *D_800DE860_de;", evidence = "authored" }
+"D_800DE864_de" = { declaration = "extern struct Shape_typemap_165 *D_800DE864_de;", evidence = "authored" }
 "D_800DE868" = { declaration = "extern s32 D_800DE868;", evidence = "authored" }
 "D_800DE874" = { declaration = "extern s32 D_800DE874;", evidence = "authored" }
 "D_800DE898" = { declaration = "extern int D_800DE898;", evidence = "authored" }
@@ -10178,7 +10178,7 @@ schema = 1
 "Cell_func_80259440_de" = { declaration = "struct Cell_func_80259440_de { s32 index; s32 pad4; s32 texture; s32 sequence; s32 frame; char pad14[0x44 - 0x14]; char data[1]; };", evidence = "authored" }
 "Cell_func_804122CC_de" = { declaration = "typedef struct Cell_func_804122CC_de Cell_func_804122CC_de;", evidence = "authored" }
 "Cell_func_80421BEC_de" = { declaration = "struct Cell_func_80421BEC_de { char pad[0x16]; s16 unk16; s16 unk18; s16 unk1A; };", evidence = "authored" }
-"Channel" = { declaration = "struct Channel { s32 mode; f32 level; f32 field8; f32 fieldC; f32 field10; };", evidence = "authored" }
+"Channel" = { declaration = "struct Channel { s32 mode; f32 level; char pad[0x14 - 8]; };", evidence = "authored" }
 "ChannelRecord" = { declaration = "typedef struct ChannelRecord ChannelRecord;", evidence = "authored" }
 "ChannelSet" = { declaration = "struct ChannelSet { s32 owner; Link_func_802596B4_de free; Header freeHeader; Link_func_802596B4_de active; Header activeHeader; Voice_func_802596B4_de voices[32]; };", evidence = "authored" }
 "Channel_func_8023B9C0_eu" = { declaration = "typedef struct Channel_func_8023B9C0_eu Channel_func_8023B9C0_eu;", evidence = "authored" }
