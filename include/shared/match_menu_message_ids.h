@@ -1,0 +1,11 @@
+#ifndef RW_MATCH_MENU_MESSAGE_IDS_H
+#define RW_MATCH_MENU_MESSAGE_IDS_H
+#include "types.h"
+#if defined(VERSION_DE)
+enum { MENU_804291A8_473 = 469, MENU_804291A8_474 = 470 };
+#elif defined(VERSION_EU_X)
+enum { MENU_804291A8_473 = 477, MENU_804291A8_474 = 478 };
+#else
+enum { MENU_804291A8_473 = 473, MENU_804291A8_474 = 474 };
+#endif
+#endif
