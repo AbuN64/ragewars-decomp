@@ -161,7 +161,7 @@ schema = 1
 "func_802043E0_de" = { evidence = "landed", signature = "void func_802043E0_de(char *arg0, char *arg1)" }
 "func_80204468_de" = { evidence = "landed", signature = "void func_80204468_de(void *arg0, void *arg1)" }
 "func_802044C8_de" = { evidence = "landed", signature = "void func_802044C8_de(SharedPlayer *actor, void *state)" }
-"func_8020459C_de" = { evidence = "landed", signature = "s32 func_8020459C_de(void *arg0)" }
+"func_8020459C_de" = { evidence = "landed", signature = "s32 func_8020459C_de(Actor_func_8024A7A0_de *actor)" }
 "func_802045CC_de" = { evidence = "landed", signature = "void func_802045CC_de(void *arg0, void *arg1)" }
 "func_80204620_de" = { evidence = "landed", signature = "s32 func_80204620_de(void *arg0)" }
 "func_80204658_de" = { evidence = "landed", signature = "void func_80204658_de(void *arg0)" }
@@ -476,7 +476,7 @@ schema = 1
 "func_80219490_de" = { evidence = "landed", signature = "void func_80219490_de(char *object, char *camera)" }
 "func_80219A40_de" = { evidence = "landed", signature = "void func_80219A40_de(struct Shared_ReactionActor *arg0, void *arg1, struct Shared_ReactionInteraction *arg2)" }
 "func_8021A78C_de" = { evidence = "landed", signature = "void func_8021A78C_de(void *arg0)" }
-"func_8021A9A4_de" = { evidence = "authored", signature = "void func_8021A9A4_de(void *arg0, s32 arg1)" }
+"func_8021A9A4_de" = { evidence = "landed", signature = "void func_8021A9A4_de(AimPlayer *arg0, s32 effect)" }
 "func_8021B468_de" = { evidence = "landed", signature = "void func_8021B468_de(struct Shared_ActorView *arg0, void *arg1, s32 arg2, s32 arg3)" }
 "func_8021C698_de" = { evidence = "landed", signature = "void func_8021C698_de(Player_func_8021C698_de *player)" }
 "func_8021C9D8_de" = { evidence = "landed", signature = "void func_8021C9D8_de(void *arg0, void *arg1)" }
@@ -908,7 +908,6 @@ schema = 1
 "func_8023B978_de" = { evidence = "landed", signature = "int func_8023B978_de(void *first, void *second)" }
 "func_8023B9B0_de" = { evidence = "declared", signature = "void func_8023B9B0_de(s32, s32)" }
 "func_8023B9C0_eu" = { evidence = "landed", signature = "void func_8023B9C0_eu(void)" }
-"func_8023B9F0_eu_x" = { evidence = "declared", signature = "void func_8023B9F0_eu_x(s32, s32)" }
 "func_8023BC74_de" = { evidence = "landed", signature = "int func_8023BC74_de(void)" }
 "func_8023BD34_de" = { evidence = "landed", signature = "void func_8023BD34_de(u16 flags, Link_func_8023CC08_de *item, s32 unused, u8 *out)" }
 "func_8023C084_de" = { evidence = "landed", signature = "void func_8023C084_de(Mapping *mapping)" }
@@ -4506,6 +4505,9 @@ schema = 1
 "writeLink" = { evidence = "landed", signature = "static __inline__ void writeLink(Link_func_8023CC08_de **where, Link_func_8023CC08_de *value)" }
 "write_bits" = { evidence = "landed", signature = "inline static void write_bits(u32 arg2, u32 arg0, u32 arg1)" }
 
+[function.containsFire]
+evidence = "landed"
+signature = "static __inline__ s32 containsFire(s16 **entries,s32 effect)"
 [global]
 "D_00200500" = { declaration = "extern char D_00200500;", evidence = "authored" }
 "D_002043E0" = { declaration = "extern char D_002043E0;", evidence = "authored" }
@@ -10107,7 +10109,7 @@ schema = 1
 "AiCharacterDefinition" = { declaration = "typedef struct AiCharacterDefinition { u8 pad0[0x28]; f32 unk28; f32 unk2C; f32 unk30; f32 unk34; } AiCharacterDefinition;", evidence = "authored" }
 "AiConfig" = { declaration = "typedef struct AiConfig { s32 unk0; s32 unk4; s32 unk8; s32 unkC; s32 unk10; s32 unk14; s32 unk18; s32 unk1C; s32 unk20; s32 unk24; s32 unk28; s32 unk2C; s32 unk30; s32 unk34; } AiConfig;", evidence = "authored" }
 "AiController" = { declaration = "typedef struct AiController { Player * player; s32 current; s32 previous; s32 mode; s32 fallback; s32 queue[4]; u8 pad24[4]; s32 routeGoal; Vec3 destination; u8 pad38[0x2C]; AiTarget * target; Player *routeObject; u8 pad6C[0x50]; s32 routeState; u8 padC0[0xF0]; Vec3 home; u8 pad1BC[0x58]; AiBehaviourTable * table; AiBehaviourEntry * behaviour; s32 state; s32 handlerIndex; u8 pad224[0x18]; s32 unk23C; s32 unk240; f32 aim; f32 speed[4]; Vec3 targetPosition; f32 distance; u8 pad268[0x7C]; s32 unk2E4; s32 unk2E8; s32 unk2EC; u8 pad2F0[0x4]; s32 unk2F4; s32 unk2F8; s32 unk2FC; s32 unk300; s32 unk304; s32 unk308; s32 unk30C; s32 unk310; s32 unk314; s32 unk318; s32 unk31C; s32 unk320; s32 unk324; s32 unk328; s32 unk32C; } AiController;", evidence = "authored" }
-"AiProfile" = { declaration = "typedef struct AiProfile { u8 pad0[0x90]; s8 state90; u8 pad91[2]; u8 difficulty; } AiProfile;", evidence = "authored" }
+"AiProfile" = { declaration = "typedef struct AiProfile { u8 pad0[0x80]; s8 character; u8 pad81[0xF]; s8 state90; u8 pad91[2]; u8 difficulty; u8 germanActive; } AiProfile;", evidence = "authored" }
 "AiTarget" = { declaration = "typedef struct AiTarget { u8 pad0[0x1D8]; Player * player; } AiTarget;", evidence = "authored" }
 "AimActor" = { declaration = "typedef struct AimActor { u8 kind; char pad1[7]; Vec3 pos; char pad14[0x5c]; f32 height; char pad74[0x8c]; s32 flags; char pad104[0x144]; Vec3 focus; } AimActor;", evidence = "authored" }
 "AimController" = { declaration = "typedef struct AimController { char pad0[0x7e]; u8 active; } AimController;", evidence = "authored" }
@@ -10231,7 +10233,7 @@ schema = 1
 "Brain_func_8020FDB0_de" = { declaration = "typedef struct Brain_func_8020FDB0_de Brain_func_8020FDB0_de;", evidence = "authored" }
 "Brain_func_802120A8_eu" = { declaration = "struct Brain_func_802120A8_eu { struct Actor_func_802120A8_eu *player; s32 route; char pad8[8]; s32 node; s32 routeNodes[4]; char pad24[0x40]; struct Actor_func_802120A8_eu *target; struct Player *routeObject; char pad6C[0x50]; s32 routeState; char padC0[0x130]; f32 walk[8]; char pad210[0x20]; s32 combat; char pad234[0xA4]; s32 timer; s32 pattern; char pad2E0[0x38]; s32 frames; s32 visible; };", evidence = "authored" }
 "Brain_func_80212D78_eu_x" = { declaration = "struct Brain_func_80212D78_eu_x { struct Actor_func_8022D290_de *player; s32 node; char pad8[4]; s32 nextNode; char pad10[0x210]; s32 unk220; char pad224[8]; s32 goal; char pad230[0xC]; s32 triggerLatch; char pad240[0xBC]; s32 unk2FC; char pad300[0x14]; s32 busy; char pad318[8]; s32 jumpTimer; };", evidence = "authored" }
-"BreakableDefinition" = { declaration = "typedef struct BreakableDefinition { u8 reserved0[0x14]; s32 flags; u8 reserved18[0x10]; s16 health; } BreakableDefinition;", evidence = "authored" }
+"BreakableDefinition" = { declaration = "typedef struct BreakableDefinition { u8 reserved0[0x14]; s32 flags; u8 reserved18[8]; s16 triggerValue; u8 reserved22[6]; s16 health; } BreakableDefinition;", evidence = "authored" }
 "BreakableHitContext" = { declaration = "struct BreakableHitContext { char pad0[0x8]; Vec3 unk_8; char pad8[0x18 - 0x8 - sizeof(Vec3)]; char * unk_18; char pad18[0xE6 - 0x18 - sizeof(char*)]; s8 unk_E6; char padE6[0x100 - 0xE6 - sizeof(s8)]; s32 unk_100; char pad100[0x104 - 0x100 - sizeof(s32)]; f32 unk_104; char pad104[0x108 - 0x104 - sizeof(f32)]; s16 unk_108; char pad108[0x10A - 0x108 - sizeof(s16)]; s16 unk_10A; char pad10A[0x10C - 0x10A - sizeof(s16)]; s16 unk_10C; char pad10C[0x12C - 0x10C - sizeof(s16)]; s16 unk_12C; char pad12C[0x134 - 0x12C - sizeof(s16)]; f32 unk_134; };", evidence = "authored" }
 "BreakableHitDescriptor" = { declaration = "typedef struct BreakableHitDescriptor BreakableHitDescriptor;", evidence = "authored" }
 "BreakableHitState" = { declaration = "typedef struct BreakableHitState BreakableHitState;", evidence = "authored" }
