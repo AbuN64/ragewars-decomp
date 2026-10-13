@@ -27,7 +27,7 @@ struct Record_func_8041A280_de {
     char pad10[0x12 - 0x10];
     s16 field_12;
     char pad14[0x20 - 0x14];
-    s32 field_20;
+    union { s32 field_20; f32 progressX; };
     f32 field_24;
     char pad28[0x2C - 0x28];
     u32 colours[4];
@@ -36,7 +36,9 @@ struct Record_func_8041A280_de {
     struct Record_func_8041A280_de *item;
     f32 scaleX;
     f32 scaleY;
-    char pad54[0x60 - 0x54];
+    char pad54[4];
+    s32 phase;
+    s32 running;
     u32 copies[4];
     u32 greenStep;
     u32 redStep;
