@@ -3,6 +3,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80204E78.h"
 #include "types.h"
+#include "span_1000/code_80206258.h"
+#include "span_1000/code_80203F04.h"
+#include "shared/level_actor.h"
 
 extern int D_00206018;
 extern int D_800C854C;
@@ -15,12 +18,14 @@ extern int D_800C854C;
 
 
 void func_80205EC4_de(void *arg0, void *arg1) {
-    void *inner = ((func_80203908_S1 *)(arg0))->unk18;
+    Actor_func_8024A7A0_de *actor = arg0;
+    ActorMotionState *state = arg1;
+    BreakableDefinition *inner = (BreakableDefinition *)actor->definition;
 
-    ((func_80204BB4_S1 *)(arg1))->unk2C = &D_800C854C;
-    ((func_80204BB4_S1 *)(arg1))->unk108 = &D_00206018;
-    if ((((func_80203908_S1 *)(arg0))->unkE4 == 0x644) ||
-        (((func_80204468_S3 *)(inner))->unk14 & 8)) {
-        ((func_80203908_S1 *)(arg0))->unk100 &= ~0x2000;
+    state->table = &D_800C854C;
+    state->update = &D_00206018;
+    if ((actor->type == 0x644) ||
+        (inner->flags & 8)) {
+        actor->flags &= ~0x2000;
     }
 }

@@ -335,6 +335,7 @@ struct ResourceBinding {
     s32 registrationFlags; /* 0xD0 */
     u8 padding0D4[4];
     u16 status; /* 0xD8 */
+    u8 colorFrame; /* 0xDA */
 };
 
 typedef struct State802532E4 {
