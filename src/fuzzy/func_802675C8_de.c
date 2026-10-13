@@ -1,10 +1,6 @@
 #include "types.h"
 
-typedef struct {
-    f32 x;
-    f32 y;
-    f32 z;
-} Vec3;
+#include "common/types_8fd754e1e915.h"
 
 typedef struct {
     u16 value;
@@ -24,19 +20,10 @@ extern void func_80271F9C_de(void *out, void *vector, f32 scale);
 extern f32 D_800C4430_de[];
 extern f32 D_800C46E8_eu;
 
-typedef struct func_802675E0_S1 func_802675E0_S1;
-typedef struct func_802675E0_S2 func_802675E0_S2;
-struct func_802675E0_S1 {
-    char pad0[0x8];
-    Vec3 unk8;
-};
-struct func_802675E0_S2 {
-    char pad0[0x8];
-    Vec3 unk8;
-};
-
 void func_802675C8_de(void *arg0, u8 *arg1, Arg2 arg2, Arg3 arg3, Vec3 *arg4)
 {
+    struct Player *left = arg0;
+    struct Player *right = (void *)arg1;
     char prefix[0x10];
     Vec3 offset;
     char scratch[0x50];
@@ -53,8 +40,8 @@ void func_802675C8_de(void *arg0, u8 *arg1, Arg2 arg2, Arg3 arg3, Vec3 *arg4)
     arg4->x = zero;
     if (*arg1 == 2) {
         offsetp = &offset;
-        func_80271F68_de(offsetp, &((func_802675E0_S1 *)(arg0))->unk8,
-                      &((func_802675E0_S2 *)(arg1))->unk8);
+        func_80271F68_de(offsetp, &left->pos,
+                      &right->pos);
         distance = func_802B72B0_de((offset.x * offset.x) +
                                  (offset.y * offset.y) +
                                  (offset.z * offset.z));
