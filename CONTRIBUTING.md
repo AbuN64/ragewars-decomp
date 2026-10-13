@@ -33,7 +33,7 @@ make check
 Plain `make` and `make check` cover every version.
 Use `VERSION=<version>` to select one version.
 Compiler files live in `tools`.
-Their hashes are recorded in `tools/compiler.sha256`.
+The Makefile verifies their SHA-256 hashes during installation.
 
 ## Next command
 
