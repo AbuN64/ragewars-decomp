@@ -114,7 +114,11 @@ struct Options_func_8043EBE4_de {
     char pad0[0x1D];
     u8 first;
     u8 second;
-    char pad1F[0x148 - 0x1F];
+    char pad1F[0x2D - 0x1F];
+    u8 toggles[7]; /* 0x2D..0x33: menu checkbox flags */
+    char pad34;
+    u8 extraToggle; /* 0x35 */
+    char pad36[0x148 - 0x36];
     struct Player_func_8043EBE4_de players[8];
 };
 
