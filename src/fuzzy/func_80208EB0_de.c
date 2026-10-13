@@ -55,9 +55,8 @@ void func_80208EB0_de(AiController *arg0) {
     f32 temp_fa1;
     f32 temp_fs0f;
     f32 temp_ft0;
-    f32 zero;
+    f32 value;
     f32 temp_fv0_2;
-    f32 temp_fv0_3;
     f32 temp_fv0_4;
     f32 temp_fv0_5;
     f32 temp_fv0f;
@@ -92,9 +91,9 @@ block_6:
         graph = &D_8013B364;
         if (temp_s4 != 0) {
             if (D_800C1C00 < temp_fv0f) {
-                zero = 0.0f;
-                temp_fs0f = func_80209308_de(arg0, temp_s2, 2.0f, zero);
-                if (temp_fs0f < zero) {
+                value = 0.0f;
+                temp_fs0f = func_80209308_de(arg0, temp_s2, 2.0f, value);
+                if (temp_fs0f < value) {
                     if (-temp_fs0f < D_800C1C04) {
                         goto block_15;
                     }
@@ -103,7 +102,8 @@ block_15:
                     temp_v0->forward = D_800C1C0C;
                 }
                 if (((temp_s6 != 0) || (temp_s4 != 0)) && (arg0->unk304 != 0)) {
-                    func_80209910_de(arg0, func_8029C044_de(sp10.y, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
+                    value = sp10.y;
+                    func_80209910_de(arg0, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
                     temp_v0->forward = D_800C1C10;
                 }
             }
@@ -120,9 +120,9 @@ block_15:
             v40.x -= arg0->destination.x;
             v40.z -= arg0->destination.z;
             navigationTurnLeft(&v40);
-            temp_fv0_3 = func_8029C044_de(v40.z, v40.x);
-            v40.x = func_802B6560_de(temp_fv0_3);
-            temp_fv0_4 = func_802B7130_de(temp_fv0_3);
+            value = func_8029C044_de(v40.z, v40.x);
+            v40.x = func_802B6560_de(value);
+            temp_fv0_4 = func_802B7130_de(value);
             temp_fv1 = (v20.x * v40.x) + (v20.y * v40.y) + (v20.z * temp_fv0_4);
             temp_ft0 = v40.x * temp_fv1;
             temp_fv1_2 = temp_fv0_4 * temp_fv1;
@@ -138,7 +138,8 @@ block_15:
             temp_v0->strafe = extra.x * v30.x + extra.z * v30.z;
         }
         if (((temp_s6 != 0) || (temp_s4 != 0)) && (arg0->unk304 != 0)) {
-            func_80209910_de(arg0, func_8029C044_de(sp10.y, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
+            value = sp10.y;
+                    func_80209910_de(arg0, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
             temp_v0->forward = D_800C1C18;
         }
         if (arg0->player->pose == 0xF) {
