@@ -12,14 +12,14 @@ extern void func_802A42F4_de(void *arg0, void *arg1);
 void func_80283A1C_de(void *arg0) {
     s32 temp;
 
-    if (((func_802839F0_S1 *)(arg0))->unk1D9 != 0) {
+    if (((Obj_func_80283920_de *)arg0)->active1D9 != 0) {
         func_80284178_de();
         func_802A42F4_de(&D_801379C0, arg0);
     }
-    temp = ((func_802839F0_S1 *)(arg0))->unk138;
+    temp = ((Obj_func_80283920_de *)arg0)->unk138;
     if (temp != 0) {
         func_80268C7C_de(&D_8013B1A8, temp);
-        ((func_802839F0_S1 *)(arg0))->unk138 = 0;
+        ((Obj_func_80283920_de *)arg0)->unk138 = 0;
     }
 }
 
@@ -53,7 +53,7 @@ void func_80283BA0_de(void *arg0, s32 arg1) {
 
 
 void func_80283BCC_de(void *arg0) {
-    ((func_80283BA0_S1 *)(arg0))->unk5C |= 0x20000;
-    ((func_80283BA0_S1 *)(arg0))->unk8 = D_801001F8.first;
-    ((func_80283BA0_S1 *)(arg0))->unk1C = D_801001F8.second;
+    ((Obj_func_80283920_de *)arg0)->unk5C |= 0x20000;
+    ((TrailActor *)arg0)->origin = D_801001F8.first;
+    ((TrailActor *)arg0)->position = D_801001F8.second;
 }

@@ -4,6 +4,9 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "types.h"
+#include "common/unused.h"
+#include "span_1000/code_8022C894.h"
+#include "shared/gameplay_transition.h"
 
 void func_802131E0_de(Root802131E0 *arg0) {
     Target802131E0 *inner;
@@ -40,30 +43,30 @@ void func_8021321C_de(void *arg0)
     s32 actor_state;
     u32 flags;
 
-    state = ((func_80212828_S2 *)(((func_8020A028_S3 *)(arg0))->unk1D8))->unk1454;
-    if (((func_8020EA10_S3 *)(((func_8021321C_S3 *)(*(void **)state))->unk5D8))->unk8F == 0) {
+    state = ((Root802131E0 *)arg0)->unk1D8->unk1454;
+    if (((Shared_ControlView *)((Brain_func_80212D78_eu_x *)state)->player->unk_0x05D8)->transientFlag == 0) {
         func_80209874_de(state, 2);
         return;
     }
 
     func_80211020_de(state);
-    if (--((func_8021321C_S5 *)(state))->unk320 == 0) {
-        actor_state = ((func_8021321C_S3 *)(*(void **)state))->unk650;
-        flags = ((func_8021321C_S3 *)(*(void **)state))->unk38;
+    if (--((Brain_func_80212D78_eu_x *)state)->jumpTimer == 0) {
+        actor_state = ((Brain_func_80212D78_eu_x *)state)->player->unk_0x0650;
+        flags = ((Brain_func_80212D78_eu_x *)state)->player->unk_0x0038;
         actor_state ^= 15;
         flags = (flags & 0x3000) != 0;
         if (actor_state != 0 && !flags) {
-            ((func_8021321C_S3 *)(*(void **)state))->unk6B0 |= 0x10;
+            ((Brain_func_80212D78_eu_x *)state)->player->unk_0x06B0 |= 0x10;
         }
     }
 
-    if (((func_8021321C_S5 *)(state))->unk320 < 0) {
+    if (((Brain_func_80212D78_eu_x *)state)->jumpTimer < 0) {
         random = func_802744D4_de();
-        ((func_8021321C_S5 *)(state))->unk320 = ((random % 5) + 3) * 15;
+        ((Brain_func_80212D78_eu_x *)state)->jumpTimer = ((random % 5) + 3) * 15;
     }
 
-    if (func_80209948_de(state, ((func_8021321C_S5 *)(state))->unkC) < D_800C20F0_de) {
-        ((func_8021321C_S3 *)(*(void **)state))->unk6B0 |= 0x10;
+    if (func_80209948_de(state, ((Brain_func_80212D78_eu_x *)state)->nextNode) < D_800C20F0_de) {
+        ((Brain_func_80212D78_eu_x *)state)->player->unk_0x06B0 |= 0x10;
     }
     func_80208410_de(state);
     func_80208AAC_de(state);

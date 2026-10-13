@@ -15,6 +15,8 @@ struct Obj_func_80283920_de {
     u32 unk5C;
     char pad60[0xd8];
     s32 unk138;
+    char pad13C[0x1D9 - 0x13C];
+    u8 active1D9;
 };
 
 struct func_8028438C_S1;

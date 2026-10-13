@@ -1,6 +1,7 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_80231F5C.h"
 #include "types.h"
+#include "span_1000/code_8022C894.h"
 
 
 extern s16 func_8022F96C_de(void *arg0);
@@ -23,15 +24,15 @@ void func_80232FF8_de(void *arg0, void *arg1) {
     s16 idx;
     s32 temp_s3;
 
-    temp_s0 = ((func_80232FE8_S1 *)(o))->unk1D8;
-    idx = ((func_80232FE8_S2 *)(temp_s0))->unk650;
+    temp_s0 = (void *)((Actor_func_8022D290_de *)o)->self;
+    idx = ((Actor_func_8022D290_de *)temp_s0)->unk_0x0650;
     temp_s3 = D_800CE8DC[idx].action;
 
-    if (func_80222AA4_de(temp_s0, ((func_80232FE8_S2 *)(temp_s0))->unk62E) == 0) {
-        ((func_80232FE8_S2 *)(temp_s0))->unk770 = func_8022F96C_de(temp_s0);
+    if (func_80222AA4_de(temp_s0, ((Actor_func_8022D290_de *)temp_s0)->unk_0x062E) == 0) {
+        ((Actor_func_8022D290_de *)temp_s0)->unk_0x0770 = func_8022F96C_de(temp_s0);
     } else {
-        ((func_80232FE8_S3 *)(arg1))->unk13C = 1;
-        if (func_802301F4_de(arg0, arg1) == 0 && !(((func_80232FE8_S1 *)(o))->unk100 & 0x400)) {
+        ((ObjectState140 *)arg1)->unk_13C = 1;
+        if (func_802301F4_de(arg0, arg1) == 0 && !(((Actor_func_8022D290_de *)o)->flags & 0x400)) {
             func_80214178_de(arg0, arg1, temp_s3);
         }
     }
