@@ -8,6 +8,7 @@ versions = ["de", "eu", "eu-x", "us", "us-rev1"]
 names_from = "us-rev1"
 toolchain = "gcc-2.8.1-sn64"
 layout_cap = 32
+library_dirs = ["src/libgcc"]
 
 [build]
 cppflags = ["-P", "-undef", "-nostdinc", "-D_LANGUAGE_C", "-DF3DEX_GBI_2", "-D__GNUC__=2"]

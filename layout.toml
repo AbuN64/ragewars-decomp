@@ -23296,17 +23296,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/__cmpdi2.c"
-kind = "c"
-group = "code_802C074C"
-members = ["__cmpdi2"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/__floatdisf.c"
 kind = "c"
 group = "code_802C074C"
@@ -101538,6 +101527,16 @@ path = "src/func_80201A74_de_padding_2674.c"
 kind = "data"
 group = "code_80200610"
 members = ["func_80201A74_de_padding_2674"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+[[unit]]
+path = "src/libgcc/__cmpdi2.c"
+kind = "c"
+group = "code_802C074C"
+members = ["__cmpdi2"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
