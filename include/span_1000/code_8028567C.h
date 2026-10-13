@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8028567C_H
 #define UNBAKE_SPAN_1000_CODE_8028567C_H
 #include "../types.h"
+#include "span_1000/code_802646F4.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 /* unbake published declaration: published_1ba020bada349a96bccff7f8 */
@@ -23,7 +24,7 @@ struct func_80285D00_S1 {
     char pad0[0x14];
     IntrusiveList unk14;
     char pad14[0x28 - 0x14 - sizeof(IntrusiveList)];
-    s32 unk28;
+    union { s32 unk28; f32 baseLevel; };
 };
 
 /* unbake published declaration: published_3b1d1fe2f6fe4c349917c5dd */
@@ -121,19 +122,24 @@ struct func_80285F28_S2 {
 struct func_80285880_S1;
 /* unbake published declaration: published_ab38e14a845e9a6640b8d18f */
 struct func_80285880_S1 {
-    char pad0[0x8];
+    char pad0[4];
+    struct func_80285880_S1 *next;
     void * unk8;
     char pad8[0xC - 0x8 - sizeof(void*)];
-    Triple unkC;
+    union { Triple unkC; Vec3 position; };
     char padC[0x18 - 0xC - sizeof(Triple)];
     f32 unk18;
     char pad18[0x1C - 0x18 - sizeof(f32)];
     f32 unk1C;
     char pad1C[0x20 - 0x1C - sizeof(f32)];
-    unsigned int unk20;
-    char pad20[0x2C - 0x20 - sizeof(unsigned int)];
-    unsigned int unk2C;
-    char pad2C[0x38 - 0x2C - sizeof(unsigned int)];
+    union {
+        struct { unsigned int unk20; char pad20[8]; };
+        Player_func_80264EE0_de amplitudeCurve;
+    };
+    union {
+        struct { unsigned int unk2C; char pad2C[8]; };
+        Player_func_80264EE0_de lifetimeCurve;
+    };
     void ** unk38;
 };
 
