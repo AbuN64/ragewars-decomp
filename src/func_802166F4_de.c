@@ -1,3 +1,4 @@
+#include "span_1000/code_80279208.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80213ED4.h"
 #include "types.h"
@@ -11,13 +12,13 @@
 
 
 
-extern void func_8027985C_de(Picker *);
-extern void func_80279864_de(Picker *, s32, s32);
-extern s16 func_802798A8_de(Picker *);
+extern void func_8027985C_de(WeightedTable *);
+extern void func_80279864_de(WeightedTable *, s32, s32);
+extern s16 func_802798A8_de(WeightedTable *);
 extern s32 func_80246A08_de(s32, s32, s32);
 
 s32 func_802166F4_de(s32 owner, s32 unused, struct Shape_func_802764D4_de_2 *table, s32 flags) {
-    Picker picker;
+    WeightedTable picker;
     s32 first;
     s16 pick;
 

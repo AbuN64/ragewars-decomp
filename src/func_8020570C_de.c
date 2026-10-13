@@ -1,3 +1,4 @@
+#include "span_1000/code_80279208.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80204E78.h"
 #include "types.h"
@@ -37,8 +38,8 @@ extern void *func_8028CF6C_de(void *arg0, s32 arg1);
 extern int func_8028B25C_de(void *arg0, int arg1);
 extern s32 func_8022A8F0_de(void *arg0);
 extern int func_8022A414_de(void *arg0);
-extern void func_8027985C_de(short *object);
-extern s32 func_80279864_de(s16 *arg0, s16 arg1, s16 arg2);
+extern void func_8027985C_de(WeightedTable *object);
+extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
 extern s16 func_802798A8_de(WeightedTable *arg0);
 extern Effect_func_80262A9C_de *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref);
 extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, Vec3 arg6, Vector4f rotation, Vec3 pos, Vec3 *aim, s32 arg10, s32 arg11);
@@ -188,8 +189,8 @@ static __inline__ void spawnGroup(SpawnDispatchObject *object, SpawnDispatchOwne
 void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     Vec3 position;
     Vec3 velocity;
-    s16 picker[52];
-    s16 otherPicker[52];
+    WeightedTable picker;
+    WeightedTable otherPicker;
     void *world;
     SpawnDefinition *definition;
     s32 *entry;
@@ -245,15 +246,15 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
                 second = (s16)func_80279798_de((s16 *)spawnTable4());
             }
             if (definition->flags & 0x80) {
-                func_8027985C_de(otherPicker);
+                func_8027985C_de(&otherPicker);
                 choice = spawnTable6();
                 while (choice->id != -1) {
                     if (availableChoice(choice->id)) {
-                        func_80279864_de(otherPicker, choice->id, choice->weight);
+                        func_80279864_de(&otherPicker, choice->id, choice->weight);
                     }
                     choice++;
                 }
-                third = (s16)func_802798A8_de((WeightedTable *)otherPicker);
+                third = (s16)func_802798A8_de(&otherPicker);
             }
         } else {
             /* Configuration lies 0x1288 bytes into the shared runtime block. */
@@ -262,48 +263,48 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
                 return;
             }
             if (definition->flags & 0x20) {
-                func_8027985C_de(picker);
+                func_8027985C_de(&picker);
                 choice = spawnTable0();
                 while (choice->id != -1) {
                     if (func_80222D64_de((void *)context, choice->id)) {
-                        func_80279864_de(picker, choice->id, choice->weight);
+                        func_80279864_de(&picker, choice->id, choice->weight);
                     }
                     choice++;
                 }
-                first = (s16)func_802798A8_de((WeightedTable *)picker);
+                first = (s16)func_802798A8_de(&picker);
             }
             if (definition->flags & 0x40) {
-                func_8027985C_de(picker);
+                func_8027985C_de(&picker);
                 choice = spawnTable2();
                 if (D_8013B290) {
                     choice = spawnTable3();
                 }
                 while (choice->id != -1) {
                     if (func_8022ADB0_de((void *)context, choice->id)) {
-                        func_80279864_de(picker, choice->id, choice->weight);
+                        func_80279864_de(&picker, choice->id, choice->weight);
                     }
                     choice++;
                 }
-                second = (s16)func_802798A8_de((WeightedTable *)picker);
+                second = (s16)func_802798A8_de(&picker);
             }
             if (definition->flags & 0x80) {
                 third = (s16)func_80279798_de((s16 *)spawnTable5());
             }
         }
-        func_8027985C_de(picker);
+        func_8027985C_de(&picker);
         if (first != -1) {
-            func_80279864_de(picker, first, 100);
+            func_80279864_de(&picker, first, 100);
         }
         if (second != -1) {
-            func_80279864_de(picker, second, 100);
+            func_80279864_de(&picker, second, 100);
         }
         if (third != -1) {
-            func_80279864_de(picker, third, 100);
+            func_80279864_de(&picker, third, 100);
         }
-        if (!picker[0]) {
+        if (!picker.count) {
             return;
         }
-        id = (s16)func_802798A8_de((WeightedTable *)picker);
+        id = (s16)func_802798A8_de(&picker);
         spawnSelected(object, owner, id, world, position);
         return;
     }

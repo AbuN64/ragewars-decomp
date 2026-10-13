@@ -163,9 +163,6 @@ struct Func802172C4Value;
 /* unbake published declaration: published_433130731a92760ee1a8c308 */
 typedef struct Func802172C4Value Func802172C4Value;
 
-struct Picker;
-/* unbake published declaration: published_4377128f3f1d78341915db95 */
-typedef struct Picker Picker;
 
 struct ObjectLinks1230;
 /* unbake published declaration: published_45f12c5c076813e84477797a */
@@ -450,12 +447,6 @@ struct Field_void_88;
 /* unbake published declaration: published_b87d4af4d38e94a8c7069512 */
 typedef struct Field_void_88 Field_void_88;
 
-struct Picker;
-/* unbake published declaration: published_b92e4d4c8714695233c15d0e */
-struct Picker {
-    s16 count;
-    char pad[0x66];
-};
 
 struct Field_void_794;
 /* unbake published declaration: published_c16e9d15d56ce31020f85fb4 */

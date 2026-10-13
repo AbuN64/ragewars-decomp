@@ -82,7 +82,8 @@ struct WeightedTable;
 /* unbake published declaration: published_88b18199528ea8fc83ba39f6 */
 struct WeightedTable {
     s16 count;
-    s16 entries[1][2];
+    s16 entries[25][2]; /* 24 choices and the terminating entry */
+    s16 reserved; /* Complete 0x68-byte caller storage. */
 };
 
 struct ObjectLinks1BC;
