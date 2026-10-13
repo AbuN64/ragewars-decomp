@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80246E34.h"
@@ -27,33 +28,33 @@ void func_8024B53C_de(void *arg0) {
     f32 sine;
     f32 angle;
 
-    copy = ((func_8024B52C_S1 *)(arg0))->unk5C;
+    copy = ((struct Actor_func_8024A7A0_de *)(arg0))->rotation;
     copy_ptr = &copy;
     if (func_80245798_de() != 0) {
         func_8024D728_de(copy_ptr, arg0);
     }
 
-    angle = ((func_8024B52C_S1 *)(arg0))->unk6C;
+    angle = ((struct Actor_func_8024A7A0_de *)(arg0))->yaw;
     scale = (0.5f);
     sine = func_802B7130_de(angle * scale);
     trig.x = 0.0f;
     trig.y = sine;
     trig.z = 0.0f;
-    angle = ((func_8024B52C_S1 *)(arg0))->unk6C * scale;
+    angle = ((struct Actor_func_8024A7A0_de *)(arg0))->yaw * scale;
     D_80115DEC = sine;
     trig.w = func_802B6560_de(angle);
 
     product_ptr = &product;
     func_80274098_de(product_ptr, &trig, copy_ptr);
-    transform = &((func_8024B52C_S1 *)(arg0))->unk74;
+    transform = &((struct Actor_func_8024A7A0_de *)(arg0))->transform[0];
     func_80274244_de(product_ptr, transform);
-    func_8027347C_de(transform, ((func_8024B52C_S1 *)(arg0))->unk50,
-                    ((func_8024B52C_S1 *)(arg0))->unk54,
-                    ((func_8024B52C_S1 *)(arg0))->unk58);
-    func_8027254C_de(&((func_8024B52C_S1 *)(arg0))->unk8, 20000.0f);
-    func_80273448_de(transform, ((func_8024B52C_S1 *)(arg0))->unk8,
-                   ((func_8024B52C_S1 *)(arg0))->unkC,
-                   ((func_8024B52C_S1 *)(arg0))->unk10);
+    func_8027347C_de(transform, ((struct Actor_func_8024A7A0_de *)(arg0))->scale.x,
+                    ((struct Actor_func_8024A7A0_de *)(arg0))->scale.y,
+                    ((struct Actor_func_8024A7A0_de *)(arg0))->scale.z);
+    func_8027254C_de(&((struct Actor_func_8024A7A0_de *)(arg0))->position0.x, 20000.0f);
+    func_80273448_de(transform, ((struct Actor_func_8024A7A0_de *)(arg0))->position0.x,
+                   ((struct Actor_func_8024A7A0_de *)(arg0))->position0.y,
+                   ((struct Actor_func_8024A7A0_de *)(arg0))->position0.z);
     func_80273D6C_de(transform);
 }
 
@@ -62,11 +63,11 @@ void func_8024B654_de(void) {
 
 void func_8024B65C_de(void *arg0, unsigned int arg1)
 {
-  ((func_8024B64C_S1 *)(arg0))->unk10A = arg1;
-  ((func_8024B64C_S1 *)(arg0))->unk10E = 0;
-  if ((((func_8024B64C_S1 *)(arg0))->unk108) != arg1)
+  ((struct Actor_func_8024A7A0_de *)(arg0))->nextAnimation = arg1;
+  ((struct Actor_func_8024A7A0_de *)(arg0))->animationPending = 0;
+  if ((((struct Actor_func_8024A7A0_de *)(arg0))->animation) != arg1)
   {
-    ((func_8024B64C_S1 *)(arg0))->unk10F = 1;
+    ((struct Actor_func_8024A7A0_de *)(arg0))->animationChanged = 1;
   }
 }
 
@@ -92,7 +93,7 @@ s32 func_8024B6A0_de(void *a, s32 c, s32 flag) {
 extern void func_8024B65C_de(void *arg0, u32 arg1);
 
 s32 func_8024B6F4_de(void *arg0, s32 arg1, s32 arg2) {
-    if (arg1 < 0 || (arg2 == 0 && (((func_80203C40_S1 *)(arg0))->unk100 & 0x400))) {
+    if (arg1 < 0 || (arg2 == 0 && (((struct Actor_func_8024A7A0_de *)(arg0))->flags & 0x400))) {
         return 0;
     }
     func_8024B65C_de(arg0, (u32) arg1);
@@ -136,21 +137,21 @@ s32 func_8024B7E4_de(void *arg0, s32 arg1)
   s32 value;
   s32 result;
   result = 0;
-  if ((((func_8024B7D4_S1 *)(arg0))->unk100) & 0x40000)
+  if ((((struct Actor_func_8024A7A0_de *)(arg0))->flags) & 0x40000)
   {
     if (resource)
     {
-      resource = func_8025193C_de(0, ((func_8024B7D4_S1 *)(arg0))->unkC4, ((func_8024B7D4_S1 *)(arg0))->unkC4, ((func_8024B7D4_S1 *)(arg0))->unkD0, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
+      resource = func_8025193C_de(0, ((struct Actor_func_8024A7A0_de *)(arg0))->resource, ((struct Actor_func_8024A7A0_de *)(arg0))->resource, ((struct Actor_func_8024A7A0_de *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
     }
     else
     {
-      resource = func_8025193C_de(0, ((func_8024B7D4_S1 *)(arg0))->unkC4, ((func_8024B7D4_S1 *)(arg0))->unkC4, ((func_8024B7D4_S1 *)(arg0))->unkD0, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
+      resource = func_8025193C_de(0, ((struct Actor_func_8024A7A0_de *)(arg0))->resource, ((struct Actor_func_8024A7A0_de *)(arg0))->resource, ((struct Actor_func_8024A7A0_de *)(arg0))->resourceFlags, 0, 0, 0, (&D_800C39E0_de) + 4, arg1);
     }
     if (resource == 0)
     {
       return result;
     }
-    entry = func_8024BFD4_de(arg0, ((func_8024B7D4_S1 *)(arg0))->unk1);
+    entry = func_8024BFD4_de(arg0, ((struct Actor_func_8024A7A0_de *)(arg0))->team);
     if (entry != 0)
     {
       value = *entry;
@@ -181,20 +182,20 @@ void func_8024B8EC_de(void *arg0, void *arg1, void *arg2) {
     s8 index;
     s32 one;
 
-    index = ((func_8024B8DC_S1 *)(arg0))->unk1;
+    index = ((struct Actor_func_8024A7A0_de *)(arg0))->team;
     if (index != -1) {
-        ((func_8024B8DC_S1 *)(arg0))->unk17C = 1 << index;
-        if (((func_8024B8DC_S2 *)(arg2))->unk4 != 0) {
+        ((struct Actor_func_8024A7A0_de *)(arg0))->mask = 1 << index;
+        if (((struct ActorRenderSettings *)(arg2))->drawShadow != 0) {
             func_8024AA18_de(arg0, arg1, arg2);
         }
         if (*(s32 *)arg2 != 0) {
             one = 1;
-            func_8026DA4C_de(((func_8024B8DC_S2 *)(arg2))->unkC,
-                          ((func_8024B8DC_S1 *)(arg0))->unkB4, one,
+            func_8026DA4C_de(((struct ActorRenderSettings *)(arg2))->view,
+                          ((struct Actor_func_8024A7A0_de *)(arg0))->fieldB4, one,
                           (char *)arg0
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
-                          0, ((func_8024B8DC_S1 *)(arg0))->unk3);
+                          0, ((struct Actor_func_8024A7A0_de *)(arg0))->field3);
             func_8024C454_de(arg0, arg2);
         }
     }
@@ -210,20 +211,20 @@ void func_8024B990_de(void *arg0, void *arg1, void *arg2, Block24 *arg3) {
     s32 one;
 
     ((Object_func_8024B990_de *)arg0)->blocks[D_800D297C] = *arg3;
-    index = ((func_8024B8DC_S1 *)(arg0))->unk1;
+    index = ((struct Actor_func_8024A7A0_de *)(arg0))->team;
     if (index != -1) {
-        ((func_8024B8DC_S1 *)(arg0))->unk17C = 1 << index;
-        if (((func_8024B8DC_S2 *)(arg2))->unk4 != 0) {
+        ((struct Actor_func_8024A7A0_de *)(arg0))->mask = 1 << index;
+        if (((struct ActorRenderSettings *)(arg2))->drawShadow != 0) {
             func_8024AA18_de(arg0, arg1, arg2);
         }
         if (*(s32 *)arg2 != 0) {
             one = 1;
-            func_8026DA4C_de(((func_8024B8DC_S2 *)(arg2))->unkC,
-                          ((func_8024B8DC_S1 *)(arg0))->unkB4, one,
+            func_8026DA4C_de(((struct ActorRenderSettings *)(arg2))->view,
+                          ((struct Actor_func_8024A7A0_de *)(arg0))->fieldB4, one,
                           (char *)arg0
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
-                          0, ((func_8024B8DC_S1 *)(arg0))->unk3);
+                          0, ((struct Actor_func_8024A7A0_de *)(arg0))->field3);
             func_8024C454_de(arg0, arg2);
         }
     }

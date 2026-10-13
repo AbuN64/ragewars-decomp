@@ -66,7 +66,11 @@ typedef char Shared_func_80227014_S3_size_check[(sizeof(Shared_func_80227014_S3)
 
 typedef struct Shared_func_80227014_S4 Shared_func_80227014_S4;
 struct Shared_func_80227014_S4 {
-    char pad0[0x29C];
+    u8 pad0[0x128];
+    Vec3 position; /* 0x128 */
+    u8 pad134[0x160 - 0x134];
+    f32 transform[16]; /* 0x160 */
+    u8 pad1A0[0x29C - 0x1A0];
     f32 unk29C; /* +0x29C: src/func_80227014.c */
     f32 unk2A0; /* +0x2A0: src/func_80227014.c */
     f32 unk2A4; /* +0x2A4: src/func_80227014.c */

@@ -174,7 +174,7 @@ void *func_80255920_de(Heap_func_80255920_de *heap, s32 request) {
                 split->next->prev = split;
             }
             block->next = split;
-            return &((func_802558C0_S1 *)(split))->unk20;
+            return split->data;
         }
     }
     return 0;
@@ -226,7 +226,7 @@ void *func_80255A34_de(Heap_func_80255920_de *heap, s32 request)
                 split->next->prev = split;
             }
             block->next = split;
-            return &((func_802558C0_S1 *)(split))->unk20;
+            return split->data;
         }
     }
     return 0;

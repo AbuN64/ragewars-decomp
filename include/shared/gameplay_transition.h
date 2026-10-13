@@ -10,7 +10,9 @@
 
 typedef struct Shared_ActorView Shared_ActorView;
 struct Shared_ActorView {
-    char pad0[0x8];
+    u8 pad0[3];
+    u8 id; /* 0x03 */
+    u8 pad4[4];
     /* The actual player position also has a word representation in the published
      * SharedPlayer.views0.positionBits; Triple is the copy-provider transport ABI. */
     union { Vec3 vector; Triple words; } position;
@@ -18,7 +20,9 @@ struct Shared_ActorView {
     void * model; /* +0x18: src/func_8021B468.c */
     char pad1C[0xC8];
     u16 kind; /* +0xE4: src/func_8021B468.c */
-    char padE6[0x10A];
+    u8 padE6[0x1D8 - 0xE6];
+    void *self; /* 0x1D8 */
+    u8 pad1DC[0x1F0 - 0x1DC];
     s32 frameValue; /* +0x1F0: src/func_8021B468.c */
     char pad1F4[0xF4];
     char weapon[368]; /* +0x2E8: src/func_8021B468.c */
@@ -28,7 +32,11 @@ struct Shared_ActorView {
     struct Shared_ControlView * controls; /* +0x5D8: src/func_8021B468.c */
     void *message; /* +0x5DC: src/func_8021B468.c */
     s32 state; /* +0x5E0: src/func_8021B468.c */
-    char pad5E4[0x10];
+    s32 health; /* 0x5E4 */
+    s16 fraction; /* 0x5E8 */
+    s16 lives; /* 0x5EA */
+    s32 spawn; /* 0x5EC */
+    s32 field5F0; /* 0x5F0 */
     s16 ammo[3]; /* +0x5F4: src/func_8021B468.c */
     char pad5FA[0x56];
     s16 action; /* +0x650: src/func_8021B468.c */
@@ -36,11 +44,23 @@ struct Shared_ActorView {
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[0x7C];
     f32 speed; /* +0x718: src/func_8021B468.c */
-    char pad71C[0xABC];
+    u8 pad71C[0x864 - 0x71C];
+    s32 field864;
+    s32 field868;
+    u8 pad86C[0xE54 - 0x86C];
+    f32 effectTransform[16]; /* 0xE54 */
+    f32 effectOffsetTransform[16]; /* 0xE94 */
+    u8 padED4[0x11BC - 0xED4];
+    s32 field11BC;
+    s32 field11C0;
+    u8 pad11C4[8];
+    s32 field11CC;
+    u8 pad11D0[8];
     s32 stun; /* +0x11D8: src/func_8021B468.c */
     char pad11DC[0x8];
     s32 pending; /* +0x11E4: src/func_8021B468.c */
-    char pad11E8[0x14];
+    s32 field11E8;
+    u8 pad11EC[0x10];
     s32 field11FC; /* +0x11FC: src/func_8021B468.c */
     char pad1200[0x18];
     s32 field1218; /* +0x1218: src/func_8021B468.c */
@@ -53,13 +73,30 @@ struct Shared_ActorView {
     s32 field1238; /* +0x1238: src/func_8021B468.c */
     char pad123C[0x4];
     s32 field1240; /* +0x1240: src/func_8021B468.c */
-    char pad1244[0x180];
+    u8 pad1244[0x12C4 - 0x1244];
+    s32 field12C4;
+    s32 field12C8;
+    s32 reset12CC[8];
+    u8 pad12EC[8];
+    s32 reset12F4[8];
+    u8 pad1314[0x20];
+    s32 field1334;
+    s32 field1338;
+    u8 pad133C[0x13B4 - 0x133C];
+    s32 *field13B4;
+    u8 pad13B8[0xC];
     u8 specialState; /* +0x13C4: src/func_8021B468.c */
     char pad13C5[0x3];
     s32 special; /* +0x13C8: src/func_8021B468.c */
     char pad13CC[0x14];
     void * parent; /* +0x13E0: src/func_8021B468.c */
-    char pad13E4[0x2FC];
+    u8 pad13E4[0x1450 - 0x13E4];
+    s32 remote; /* 0x1450 */
+    void *owner; /* 0x1454 */
+    u8 pad1458[0x16D4 - 0x1458];
+    s32 field16D4;
+    s16 field16D8;
+    u8 pad16DA[6];
     struct Shared_ActorView * next; /* +0x16E0: src/func_8021B468.c */
 };
 typedef char Shared_ActorView_size_check[(sizeof(Shared_ActorView) == 0x16E4) ? 1 : -1];
@@ -82,9 +119,10 @@ struct Shared_ProjectileView {
     s32 source; /* +0x14: src/func_8021B468.c */
     char pad18[0x184];
     u16 flags; /* +0x19C: src/func_8021B468.c */
-    char pad19E[0x2];
+    char pad19E[0x32];
+    s32 stateFlags; /* 0x1D0 */
 };
-typedef char Shared_ProjectileView_size_check[(sizeof(Shared_ProjectileView) == 0x1A0) ? 1 : -1];
+typedef char Shared_ProjectileView_size_check[(sizeof(Shared_ProjectileView) == 0x1D4) ? 1 : -1];
 
 typedef struct Shared_PlayerSettingsView Shared_PlayerSettingsView;
 struct Shared_PlayerSettingsView {

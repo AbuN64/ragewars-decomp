@@ -318,6 +318,14 @@ struct Context_func_8025AE1C_de {
 struct Context_func_8025AE1C_de;
 struct View_func_8025AE1C_de;
 /* unbake published declaration: published_7312aacc7e506b3601cb5b06 */
+typedef struct SoundEnvelope {
+    u16 flags;
+    u16 initial;
+    u16 target;
+    s16 frames;
+    u32 reserved8;
+} __attribute__((packed)) SoundEnvelope;
+
 struct View_func_8025AE1C_de {
     s32 slot;
     s32 handle;
@@ -326,7 +334,9 @@ struct View_func_8025AE1C_de {
     s32 frame;
     char pad14[4];
     s32 finished;
-    char pad1C[0x2C - 0x1C];
+    u8 pad1C[0xC];
+    s16 priority; /* 0x28 */
+    u8 pad2A[2];
     f32 time;
     char pad30[0x38 - 0x30];
     s16 field38;
@@ -334,7 +344,11 @@ struct View_func_8025AE1C_de {
     char pad3C[0x44 - 0x3C];
     Triple position;
     Triple *tracked;
-    char pad54[0xA0 - 0x54];
+    u8 pad54[0x88 - 0x54];
+    s32 sweeping; /* 0x88 */
+    SoundEnvelope envelope; /* 0x8C */
+    f32 value; /* 0x98 */
+    f32 step; /* 0x9C */
     s32 hold;
     s32 flags;
     s32 trackId;
@@ -343,6 +357,7 @@ struct View_func_8025AE1C_de {
     s32 fieldB4;
     char padB8[4];
     s32 followTrack;
+    s32 fixed; /* 0xC0 */
 };
 
 struct func_8025C388_S1;

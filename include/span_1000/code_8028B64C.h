@@ -175,7 +175,9 @@ struct Object_func_8028CAE0_de {
     u16 team;
     u8 padE6[0x8E];
     s32 active;
-    u8 pad178[0x170];
+    u8 pad178[0x2C];
+    s8 state; /* 0x1A4 */
+    u8 pad1A5[0x2E8 - 0x1A5];
 };
 
 struct World_func_8028CAE0_de;

@@ -603,4 +603,15 @@ typedef struct Actor36 {
     void (*update)(void *, void *);
 } Actor36;
 
+
+/* Options passed with an actor render submission. */
+typedef struct ActorRenderSettings {
+    s32 drawModel;
+    s32 drawShadow;
+    s32 reserved8;
+    s32 view;
+    s32 reserved10;
+    s32 shadowType;
+} ActorRenderSettings;
+
 #endif

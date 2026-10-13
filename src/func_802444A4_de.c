@@ -1,3 +1,5 @@
+#include "common/unused.h"
+#include "shared/motion_step.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80243A80.h"
@@ -46,30 +48,30 @@ s32 func_802444A4_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3) {
     }
     D_800CB41C_de = next;
 
-    ((func_80244494_S1 *)(out))->unk0 = object;
+    ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((func_80203C40_S1 *)(object))->unk100;
+            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
-        ((func_80244494_S1 *)(out))->unk4 = value;
+        ((struct ActorMotion *)(out))->actorFlags = value;
     } else {
-        ((func_80244494_S1 *)(out))->unk4 = 0;
+        ((struct ActorMotion *)(out))->actorFlags = 0;
     }
 
-    ((func_80244494_S1 *)(out))->unk44 = vectors.first;
-    ((func_80244494_S1 *)(out))->unk50 = vectors.second;
-    ((func_80244494_S1 *)(out))->unk24 = 0;
-    ((func_80244494_S1 *)(out))->unk20 = 0;
-    ((func_80244494_S1 *)(out))->unk28 = 0;
-    ((func_80244494_S1 *)(out))->unk2C = 0;
-    ((func_80244494_S1 *)(out))->unk1C = 0;
-    ((func_80244494_S1 *)(out))->unk40 = arg3;
-    ((func_80244494_S1 *)(out))->unkAC = 0;
-    ((func_80244494_S1 *)(out))->unk30 = 0;
-    ((func_80244494_S1 *)(out))->unk34 = 0;
+    ((struct ActorMotion *)(out))->start = vectors.first;
+    ((struct ActorMotion *)(out))->end = vectors.second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
     func_8023E838_de(out);
 
     active = 1;
@@ -79,13 +81,13 @@ s32 func_802444A4_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3) {
             func_8023E45C_de(out);
             count += 1;
             result = func_8023D380_de(out);
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk180;
-            ((func_80244494_S1 *)(out))->unk50 = ((func_80244494_S1 *)(out))->unk198;
-            ((func_80244494_S1 *)(out))->unk74 = ((func_80244494_S1 *)(out))->unk1A4;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
             active -= 1;
         } else {
             result = 0;
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk50;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
             active -= 1;
         }
     } while (result != 0 && active != 0);
@@ -136,30 +138,30 @@ s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     }
     D_800CB41C_de = next;
 
-    ((func_80244494_S1 *)(out))->unk0 = object;
+    ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((func_80203C40_S1 *)(object))->unk100;
+            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
-        ((func_80244494_S1 *)(out))->unk4 = value;
+        ((struct ActorMotion *)(out))->actorFlags = value;
     } else {
-        ((func_80244494_S1 *)(out))->unk4 = 0;
+        ((struct ActorMotion *)(out))->actorFlags = 0;
     }
 
-    ((func_80244494_S1 *)(out))->unk44 = vectors.first;
-    ((func_80244494_S1 *)(out))->unk50 = vectors.second;
-    ((func_80244494_S1 *)(out))->unk24 = 0;
-    ((func_80244494_S1 *)(out))->unk20 = 0;
-    ((func_80244494_S1 *)(out))->unk28 = 0;
-    ((func_80244494_S1 *)(out))->unk2C = 0;
-    ((func_80244494_S1 *)(out))->unk1C = 0;
-    ((func_80244494_S1 *)(out))->unk40 = arg3;
-    ((func_80244494_S1 *)(out))->unkAC = 0;
-    ((func_80244494_S1 *)(out))->unk30 = 0;
-    ((func_80244494_S1 *)(out))->unk34 = 0;
+    ((struct ActorMotion *)(out))->start = vectors.first;
+    ((struct ActorMotion *)(out))->end = vectors.second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
     func_8023E838_de(out);
 
     active = 1;
@@ -169,13 +171,13 @@ s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
             func_8023E45C_de(out);
             count += 1;
             result = func_8023D380_de(out);
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk180;
-            ((func_80244494_S1 *)(out))->unk50 = ((func_80244494_S1 *)(out))->unk198;
-            ((func_80244494_S1 *)(out))->unk74 = ((func_80244494_S1 *)(out))->unk1A4;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
             active -= 1;
         } else {
             result = 0;
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk50;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
             active -= 1;
         }
     } while (result != 0 && active != 0);
@@ -226,30 +228,30 @@ s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     }
     D_800CB41C_de = next;
 
-    ((func_80244494_S1 *)(out))->unk0 = object;
+    ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((func_80203C40_S1 *)(object))->unk100;
+            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
-        ((func_80244494_S1 *)(out))->unk4 = value;
+        ((struct ActorMotion *)(out))->actorFlags = value;
     } else {
-        ((func_80244494_S1 *)(out))->unk4 = 0;
+        ((struct ActorMotion *)(out))->actorFlags = 0;
     }
 
-    ((func_80244494_S1 *)(out))->unk44 = vectors.first;
-    ((func_80244494_S1 *)(out))->unk50 = vectors.second;
-    ((func_80244494_S1 *)(out))->unk24 = 0;
-    ((func_80244494_S1 *)(out))->unk20 = 0;
-    ((func_80244494_S1 *)(out))->unk28 = 0;
-    ((func_80244494_S1 *)(out))->unk2C = 0;
-    ((func_80244494_S1 *)(out))->unk1C = 0;
-    ((func_80244494_S1 *)(out))->unk40 = arg3;
-    ((func_80244494_S1 *)(out))->unkAC = 0;
-    ((func_80244494_S1 *)(out))->unk30 = 0;
-    ((func_80244494_S1 *)(out))->unk34 = 0;
+    ((struct ActorMotion *)(out))->start = vectors.first;
+    ((struct ActorMotion *)(out))->end = vectors.second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
     func_8023E838_de(out);
 
     active = 1;
@@ -259,13 +261,13 @@ s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
             func_8023E45C_de(out);
             count += 1;
             result = func_8023D380_de(out);
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk180;
-            ((func_80244494_S1 *)(out))->unk50 = ((func_80244494_S1 *)(out))->unk198;
-            ((func_80244494_S1 *)(out))->unk74 = ((func_80244494_S1 *)(out))->unk1A4;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
             active -= 1;
         } else {
             result = 0;
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk50;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
             active -= 1;
         }
     } while (result != 0 && active != 0);
@@ -307,30 +309,30 @@ s32 func_80244B68_de(char *arg0, char *arg1, Vec3 first, Vec3 second,
     }
     D_800CB41C_de = next;
 
-    ((func_80244494_S1 *)(out))->unk0 = object;
+    ((struct ActorMotion *)(out))->actor = object;
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((func_80203C40_S1 *)(object))->unk100;
+            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
-        ((func_80244494_S1 *)(out))->unk4 = value;
+        ((struct ActorMotion *)(out))->actorFlags = value;
     } else {
-        ((func_80244494_S1 *)(out))->unk4 = 0;
+        ((struct ActorMotion *)(out))->actorFlags = 0;
     }
 
-    ((func_80244494_S1 *)(out))->unk44 = first;
-    ((func_80244494_S1 *)(out))->unk50 = second;
-    ((func_80244494_S1 *)(out))->unk24 = 0;
-    ((func_80244494_S1 *)(out))->unk20 = 0;
-    ((func_80244494_S1 *)(out))->unk28 = 0;
-    ((func_80244494_S1 *)(out))->unk2C = 0;
-    ((func_80244494_S1 *)(out))->unk1C = 0;
-    ((func_80244494_S1 *)(out))->unk40 = arg4;
-    ((func_80244494_S1 *)(out))->unkAC = 0;
-    ((func_80244494_S1 *)(out))->unk30 = 0;
-    ((func_80244494_S1 *)(out))->unk34 = 0;
+    ((struct ActorMotion *)(out))->start = first;
+    ((struct ActorMotion *)(out))->end = second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = arg4;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
     func_8023E838_de(out);
 
     active = 1;
@@ -340,13 +342,13 @@ s32 func_80244B68_de(char *arg0, char *arg1, Vec3 first, Vec3 second,
             func_8023E45C_de(out);
             count += 1;
             result = func_8023D380_de(out);
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk180;
-            ((func_80244494_S1 *)(out))->unk50 = ((func_80244494_S1 *)(out))->unk198;
-            ((func_80244494_S1 *)(out))->unk74 = ((func_80244494_S1 *)(out))->unk1A4;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
             active -= 1;
         } else {
             result = 0;
-            ((func_80244494_S1 *)(out))->unk44 = ((func_80244494_S1 *)(out))->unk50;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
             active -= 1;
         }
     } while (result != 0 && active != 0);

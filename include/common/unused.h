@@ -1,5 +1,6 @@
 #ifndef UNBAKE_COMMON_UNUSED_H
 #define UNBAKE_COMMON_UNUSED_H
+#include "shared/particle_lighting.h"
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
@@ -5710,21 +5711,49 @@ struct Runtime {
 };
 struct Actor_func_8024A7A0_de;
 struct Actor_func_8024A7A0_de {
-    char pad0;
+    u8 kind;
     s8 team;
     char pad2;
     s8 field3;
     u32 pad4;
     Vec3 position0;
-    u32 pad14[2];
+    s32 model; /* 0x14 */
+    s32 *definition; /* 0x18 */
     Vec3 position1;
-    u32 pad28[13];
+    u32 pad28[10];
+    Vec3 scale; /* 0x50 */
     Vector4f rotation;
-    char pad6C[0xB4 - 0x6C];
+    f32 yaw; /* 0x6C */
+    u8 pad70[4];
+    f32 transform[16]; /* 0x74 */
     s32 fieldB4;
-    char padB8[0x17C - 0xB8];
+    s32 fieldB8;
+    void *shadow; /* 0xBC */
+    u8 padC0[4];
+    s32 resource; /* 0xC4 */
+    u8 padC8[8];
+    s32 resourceFlags; /* 0xD0 */
+    u8 padD4[0xE4 - 0xD4];
+    u16 type; /* 0xE4 */
+    u8 padE6[0x100 - 0xE6];
+    s32 flags; /* 0x100 */
+    f32 animationTime; /* 0x104 */
+    s16 animation; /* 0x108 */
+    s16 nextAnimation; /* 0x10A */
+    u8 pad10C[2];
+    s8 animationPending; /* 0x10E */
+    s8 animationChanged; /* 0x10F */
+    u8 pad110[0x13A - 0x110];
+    u8 shadowAlpha; /* 0x13A */
+    u8 pad13B[5];
+    Shared_ParticleLighting lighting[2]; /* 0x140 */
+    u8 pad170[4];
+    s32 active; /* 0x174 */
+    u8 pad178[4];
     s32 mask;
-    char pad180[0x2E4 - 0x180];
+    u8 pad180[0x23B - 0x180];
+    u8 updateCount; /* 0x23B */
+    u8 pad23C[0x2E4 - 0x23C];
     s32 flags2E4;
 };
 struct Angles;
@@ -6092,9 +6121,12 @@ struct Context_func_80257360_de {
     char pad30[0x7C - 0x30];
     struct Font_func_80257360_de *font;
     struct Font_func_80257360_de *resource;
-    char list[0x110 - 0x84];
+    char list[0x104 - 0x84];
+    s32 frame; /* 0x104 */
+    u8 reserved108[8];
     MenuRules lock;
-    char pad130[0x138 - 0x130];
+    u8 pad130[4];
+    s32 track; /* 0x134 */
     char view[0x1D64 - 0x138];
     char panel[0x1D6C - 0x1D64];
     s32 field1D6C;

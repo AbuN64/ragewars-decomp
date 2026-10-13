@@ -107,14 +107,14 @@ void func_80271F68_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2) {
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
 void func_80271F9C_de(void *arg0, void *arg1, f32 arg2) {
-    ((func_8024C864_S1 *)(arg0))->unk0 = ((func_8024C864_S1 *)(arg1))->unk0 * arg2;
-    ((func_8024C864_S1 *)(arg0))->unk4 = ((func_8024C864_S1 *)(arg1))->unk4 * arg2;
-    ((func_8024C864_S1 *)(arg0))->unk8 = ((func_8024C864_S1 *)(arg1))->unk8 * arg2;
+    ((Vec3 *)(arg0))->x = ((Vec3 *)(arg1))->x * arg2;
+    ((Vec3 *)(arg0))->y = ((Vec3 *)(arg1))->y * arg2;
+    ((Vec3 *)(arg0))->z = ((Vec3 *)(arg1))->z * arg2;
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
 void func_80271FC8_de(void *arg0, f32 t, void *a, void *b) {
-    ((func_8024C864_S1 *)(arg0))->unk0 = ((func_8024C864_S1 *)(a))->unk0 + (t * (((func_8024C864_S1 *)(b))->unk0 - ((func_8024C864_S1 *)(a))->unk0));
-    ((func_8024C864_S1 *)(arg0))->unk4 = ((func_8024C864_S1 *)(a))->unk4 + (t * (((func_8024C864_S1 *)(b))->unk4 - ((func_8024C864_S1 *)(a))->unk4));
-    ((func_8024C864_S1 *)(arg0))->unk8 = ((func_8024C864_S1 *)(a))->unk8 + (t * (((func_8024C864_S1 *)(b))->unk8 - ((func_8024C864_S1 *)(a))->unk8));
+    ((Vec3 *)(arg0))->x = ((Vec3 *)(a))->x + (t * (((Vec3 *)(b))->x - ((Vec3 *)(a))->x));
+    ((Vec3 *)(arg0))->y = ((Vec3 *)(a))->y + (t * (((Vec3 *)(b))->y - ((Vec3 *)(a))->y));
+    ((Vec3 *)(arg0))->z = ((Vec3 *)(a))->z + (t * (((Vec3 *)(b))->z - ((Vec3 *)(a))->z));
 }

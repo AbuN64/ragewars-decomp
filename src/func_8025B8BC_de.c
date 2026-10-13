@@ -83,19 +83,19 @@ void func_8025BB3C_de(s32 a) {
     var_a0 = a + 4;
     var_v0 = 0x10;
     do {
-        (((struct Access_s32_50 *) ((s8 *) var_a0))->field) = 0;
+        ((SlotCC *)var_a0)->flag = 0;
         var_v0 -= 1;
         var_a0 += 0xCC;
     } while (var_v0 >= 0);
 }
 
 void func_8025BB5C_de(void *arg0, void *arg1, int arg2) {
-    ((func_8025BB7C_S1 *)(arg0))->unk44 = *(Triple *)arg1;
-    ((func_8025BB7C_S1 *)(arg0))->unk50 = arg2;
+    ((struct View_func_8025AE1C_de *)(arg0))->position = *(Triple *)arg1;
+    ((struct View_func_8025AE1C_de *)(arg0))->tracked = (Triple *)arg2;
 }
 
 void func_8025BB7C_de(void *arg0, int arg1) {
-    ((func_8025BB9C_S1 *)(arg0))->unkA8 = arg1;
+    ((struct View_func_8025AE1C_de *)(arg0))->trackId = arg1;
 }
 extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
 extern void func_80259F68_de(void *arg0, void *arg1, s32 arg2);
@@ -111,36 +111,36 @@ void func_8025BB84_de(void *arg0, void *arg1, s32 arg2) {
 
     func_80259C5C_de(arg0, arg1, arg2);
     func_80259F68_de(arg0, arg1, arg2);
-    ((func_8025BBA4_S1 *)(arg0))->unk28 = 0x40;
-    index = ((func_8021C9B4_S3 *)(arg1))->unkC;
+    ((struct View_func_8025AE1C_de *)(arg0))->priority = 0x40;
+    index = ((struct Shared_Body *)(arg1))->kind;
     if (index != -1) {
-        record = func_80258BF4_de(((func_8025BBA4_S1 *)(arg0))->unkB0, index);
-        ((func_8025BBA4_S1 *)(arg0))->unk8C = *(Block12 *)record;
-        first = RW_BITS_TO_FLOAT(((func_8025BBA4_S3 *)(arg0))->unk8E);
-        ((func_8025BBA4_S1 *)(arg0))->unk9C =
-            (first - RW_BITS_TO_FLOAT(((func_8025BBA4_S3 *)(arg0))->unk90)) /
-            ((func_8025BBA4_S3 *)(arg0))->unk92;
-        ((func_8025BBA4_S1 *)(arg0))->unk98 =
-            RW_BITS_TO_FLOAT(((func_8025BBA4_S3 *)(arg0))->unk8E);
-        ((func_8025BBA4_S1 *)(arg0))->unk28 =
-            (s16)(s32)RW_BITS_TO_FLOAT(((func_8025BBA4_S3 *)(arg0))->unk8E);
-        ((func_8025BBA4_S1 *)(arg0))->unk88 = 1;
+        record = func_80258BF4_de(((struct View_func_8025AE1C_de *)(arg0))->context, index);
+        ((struct View_func_8025AE1C_de *)(arg0))->envelope = *(SoundEnvelope *)record;
+        first = RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
+        ((struct View_func_8025AE1C_de *)(arg0))->step =
+            (first - RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.target)) /
+            ((struct View_func_8025AE1C_de *)(arg0))->envelope.frames;
+        ((struct View_func_8025AE1C_de *)(arg0))->value =
+            RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
+        ((struct View_func_8025AE1C_de *)(arg0))->priority =
+            (s16)(s32)RW_BITS_TO_FLOAT(((struct View_func_8025AE1C_de *)(arg0))->envelope.initial);
+        ((struct View_func_8025AE1C_de *)(arg0))->sweeping = 1;
         return;
     }
 
-    ((func_8025BBA4_S1 *)(arg0))->unk88 = 0;
-    if (((func_8025BBA4_S1 *)(arg0))->unkA8 < 0x100) {
-        if (((func_8025BBA4_S1 *)(arg0))->unkC0 == 0 &&
-            func_80258D2C_de(((func_8025BBA4_S1 *)(arg0))->unkB0) != 0) {
-            value = ((func_8025BBA4_S4 *)(((func_8025BBA4_S1 *)(arg0))->unkB0))->unk2B94;
+    ((struct View_func_8025AE1C_de *)(arg0))->sweeping = 0;
+    if (((struct View_func_8025AE1C_de *)(arg0))->trackId < 0x100) {
+        if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
+            func_80258D2C_de(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
+            value = (s8)((Context_func_80257360_de *)((struct View_func_8025AE1C_de *)arg0)->context)->field2B94;
             goto store_value;
         }
-    } else if (((func_8025BBA4_S1 *)(arg0))->unkC0 == 0 &&
-               func_80258D2C_de(((func_8025BBA4_S1 *)(arg0))->unkB0) != 0) {
-        value = func_80259B10_de(&((func_8025BBA4_S1 *)(arg0))->unk44,
-            ((func_8025BBA4_S4 *)(((func_8025BBA4_S1 *)(arg0))->unkB0))->unk2B98);
+    } else if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
+               func_80258D2C_de(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
+        value = func_80259B10_de(&((struct View_func_8025AE1C_de *)(arg0))->position,
+            ((struct View_func_8025AE1C_de *)arg0)->context->result);
 store_value:
-        ((func_8025BBA4_S1 *)(arg0))->unk28 = value;
+        ((struct View_func_8025AE1C_de *)(arg0))->priority = value;
     }
 }
 
@@ -152,10 +152,10 @@ void func_8025BD00_de(void **arg0) {
     char *var_s1;
 
     var_s2 = 0;
-    var_s1 = &((func_8025BD20_S1 *)(arg0))->unk4;
+    var_s1 = (char *)((RecordD90 *)arg0)->slots;
     var_s0 = 0;
     do {
-        if (((func_80254D70_S2 *)(var_s1))->unk8 != -1 && ((Header_func_8025B5F0_de *)(*arg0))->local != var_s0) {
+        if (((SlotCC *)var_s1)->used != -1 && ((Header_func_8025B5F0_de *)(*arg0))->local != var_s0) {
             func_8025AE1C_de(var_s1);
             var_s2 += 1;
         }

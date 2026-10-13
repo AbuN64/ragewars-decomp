@@ -112,6 +112,8 @@ struct Block_func_80255920_de {
     struct Block_func_80255920_de *next;
     u32 size;
     u32 free;
+    u8 reserved18[8];
+    u8 data[1]; /* +0x20: allocation payload */
 };
 
 struct Entry_func_80255048_de;

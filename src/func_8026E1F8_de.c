@@ -22,10 +22,10 @@ void func_8026E1F8_de(void **arg0) {
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
         rec = func_8028FDB4_de(func_8028FDB4_de(temp_v0, i), 0);
-        if (((func_80254D70_S2 *)(rec))->unk8 == 0) {
+        if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
-        func_80253F8C_de(0, ((func_80254D70_S2 *)(rec))->unk8);
+        func_80253F8C_de(0, ((struct ResourceSectionReference *)(rec))->resource);
     }
 }
 
@@ -49,10 +49,10 @@ s32 *func_8026E27C_de(void **arg0, s32 arg1, s32 *arg2) {
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
         rec = func_8028FDB4_de(func_8028FDB4_de(temp_v0, i), 0);
-        if (((func_8026E158_S1 *)(rec))->unk8.v0 == 0) {
+        if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
-        result = func_80295EAC_de(&((func_8026E158_S1 *)(rec))->unk8.v1, arg1);
+        result = func_80295EAC_de(&((struct ResourceSectionReference *)(rec))->resource, arg1);
         if (result != 0) {
             *out = result;
             out += 1;

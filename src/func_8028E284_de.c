@@ -1,3 +1,5 @@
+#include "shared/world.h"
+#include "span_1000/code_8028B64C.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
@@ -286,7 +288,7 @@ s32 func_8028E6FC_de(void *arg0)
 
 /** Return an indexed record from the table at object offset 0xAC. */
 void *func_8028E770_de(void *object, int index) {
-    char *base = ((func_8028E74C_S1 *)(object))->unkAC;
+    char *base = (char *)((struct Shared_World *)(object))->actorRecords;
     int stride = *(int *)base;
     return base + (index * stride + 8);
 }
@@ -301,20 +303,20 @@ s32 func_8028E78C_de(void *arg0, Vec3 *arg1) {
     f32 magnitude;
     u16 type;
 
-    func_80271F68_de(&sp10, &((func_8028E768_S1 *)(arg0))->unk8, arg1);
+    func_80271F68_de(&sp10, &((struct Object_func_8028CAE0_de *)(arg0))->x, arg1);
     magnitude = (sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z);
-    if (*((func_8028E768_S1 *)(arg0))->unk18 != 1) {
+    if (*((struct Object_func_8028CAE0_de *)(arg0))->kind != 1) {
         return 0;
     }
-    type = ((func_8028E768_S1 *)(arg0))->unkE4;
+    type = ((struct Object_func_8028CAE0_de *)(arg0))->team;
     if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
         type == 0x454 || type == 0x455 || type == 0x456) {
         return 0;
     }
-    if (((func_8028E768_S1 *)(arg0))->unk174 == 0) {
+    if (((struct Object_func_8028CAE0_de *)(arg0))->active == 0) {
         return 0;
     }
-    if (((func_8028E768_S1 *)(arg0))->unk1A4 == 0x3D) {
+    if (((struct Object_func_8028CAE0_de *)(arg0))->state == 0x3D) {
         return 0;
     }
     return magnitude <= D_800C533C_de;

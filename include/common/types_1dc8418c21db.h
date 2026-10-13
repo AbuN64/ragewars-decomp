@@ -4703,11 +4703,18 @@ struct func_80247F08_S1 {
 struct ControllerProfile;
 /* unbake published declaration: published_bf3203d18d65a17e6eae0305 */
 struct ControllerProfile {
-    u8 padding000[0xB6];
+    u8 padding000[4];
+    s8 port; /* 0x04 */
+    u8 padding005[0xAC - 5];
+    s32 previousButtons; /* 0xAC */
+    s32 buttons; /* 0xB0 */
+    u8 padding0B4[2];
     u8 connectionStatus; /* 0xB6 */
     u8 padding0B7[9];
     u32 buttonState; /* 0xC0 */
-    u8 padding0C4[0x160];
+    s8 stickX; /* 0xC4 */
+    s8 stickY; /* 0xC5 */
+    u8 padding0C6[0x224 - 0xC6];
 };
 
 struct Args;

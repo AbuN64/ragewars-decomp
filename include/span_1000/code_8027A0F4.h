@@ -431,14 +431,7 @@ struct Shared_ParticleDistanceRange {
     f32 maximum;
 };
 /* Two 24-byte directional-light records occupy particle +0xE0..+0x110. */
-struct Shared_ParticleLighting {
-    u8 ambient[3], reserved3;
-    u8 ambientCopy[3], reserved7;
-    u8 diffuse[3], reservedB;
-    u8 diffuseCopy[3], reservedF;
-    s8 direction[3];
-    u8 reserved13[5];
-};
+#include "shared/particle_lighting.h"
 struct Shared_ParticleDesc {
     s32 flags;
     char pad4[0x4];

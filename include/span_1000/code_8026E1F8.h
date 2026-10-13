@@ -282,4 +282,11 @@ struct func_8026E5E0_S3 {
 /* unbake published declaration: published_fd245ff1c02162c33d474b8b */
 extern float D_800C47B8_de;
 
+
+/* Reference stored in section zero of a resource entry. */
+typedef struct ResourceSectionReference {
+    s32 prefix[2];
+    s32 resource;
+} ResourceSectionReference;
+
 #endif

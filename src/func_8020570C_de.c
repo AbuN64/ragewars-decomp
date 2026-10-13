@@ -26,7 +26,7 @@ const u32 D_auto_rodata_unresolved_800C19B8[6] = {
 #endif
 
 int func_8020570C_de(void *arg0) {
-    return ((((func_80205700_S1 *)(arg0))->unkC >> 9) ^ 1) & 1;
+    return ((((Hit *)arg0)->flags >> 9) ^ 1) & 1;
 }
 
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */

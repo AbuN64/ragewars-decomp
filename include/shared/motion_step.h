@@ -5,9 +5,13 @@
 /* Contact positions and interpolation outputs used by the movement solver. */
 typedef struct MotionSurface { u8 reserved0[12]; f32 response; } MotionSurface;
 typedef struct ActorMotion {
-    u8 reserved0[0x24];
+    void *actor; /* 0x00 */
+    s32 actorFlags; /* 0x04 */
+    u8 reserved08[0x14];
+    s32 iteration; /* 0x1C */
+    s32 candidate; /* 0x20 */
     s32 grounded;
-    u8 reserved28[4];
+    s32 candidateIndex; /* 0x28 */
     s32 orientationActive;
     s32 horizontalTicks;
     s32 verticalTicks;
@@ -20,7 +24,8 @@ typedef struct ActorMotion {
     u8 reserved68[12];
     Vec3 orientation;
     f32 distance;
-    u8 reserved84[0x2C];
+    u8 reserved84[0x28];
+    s32 queryFlags; /* 0xAC */
     s32 collisionState;
     f32 damping;
     s32 mode;

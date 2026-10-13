@@ -1,3 +1,6 @@
+#include "shared/gameplay_round_rules.h"
+#include "shared/gameplay_transition.h"
+#include "common/unused.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8027A0F4.h"
 #include "types.h"
@@ -6,7 +9,7 @@ extern char D_8011AD70;
 extern char D_8011AF38;
 extern f32 D_800C4C64_de;
 extern void func_80273198_de(void *arg0, void *arg1);
-extern f32 func_80275DD4_de(s32 arg0, s32 arg1, s32 arg2);
+extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 extern void func_80275410_de(void *arg0, s32 arg1);
 extern void func_80275688_de(void *arg0, s32 arg1);
 extern void func_80274244_de(void *arg0, void *arg1);
@@ -29,7 +32,7 @@ void *func_8027D97C_de(void *arg0, void *arg1) {
     f32 value;
 
     {
-        s32 sw_state_value = (s8)(((func_8027D950_S1 *)(arg0))->unk1D0.v0 + 8);
+        s32 sw_state_value = (s8)(((EffectActor *)arg0)->unk1D0 + 8);
         if ((unsigned int)sw_state_value > 10) {
             goto sw_state_default;
         }
@@ -56,17 +59,17 @@ void *func_8027D97C_de(void *arg0, void *arg1) {
         if (arg1 == 0) {
             return 0;
         }
-        return &((func_8027D950_S2 *)(arg1))->unkE94;
+        return ((Shared_ActorView *)arg1)->effectOffsetTransform;
     sw_state_neg_4:
     sw_state_neg_1:
         if (arg1 == 0) {
             return 0;
         }
-        return &((func_8027D950_S2 *)(arg1))->unkE54;
+        return ((Shared_ActorView *)arg1)->effectTransform;
     sw_state_neg_3:
-        value = func_80275DD4_de(0, ((func_8027D950_S1 *)(arg0))->unk8,
-            ((func_8027D950_S1 *)(arg0))->unk10);
-        if (((func_8027D950_S1 *)(arg0))->unkC - value <= D_800C4C64_de) {
+        value = func_80275DD4_de(0, ((EffectActor *)arg0)->pos.x,
+            ((EffectActor *)arg0)->pos.z);
+        if (((EffectActor *)arg0)->pos.y - value <= D_800C4C64_de) {
             func_80275410_de(state, 0);
             func_80274244_de(state, output);
             shared = &D_8011AD70;
@@ -84,7 +87,7 @@ void *func_8027D97C_de(void *arg0, void *arg1) {
     sw_state_0:
     sw_state_1:
     sw_state_2:
-        value = func_802760BC_de(0, ((func_8027D950_S1 *)(arg0))->unk1D0.v1);
+        value = func_802760BC_de(0, ((EffectActor *)arg0)->unk1D0);
         func_802736D4_de(&D_8011AD70, value);
         return &D_8011AD70;
     sw_state_default:
@@ -155,7 +158,7 @@ void func_8027DAD0_de(Actor_func_8027DAD0_de *actor, Vec3 *outPosition, Vec3 *ou
         owner = actor->owner;
         if (owner->flags & 0x300000) {
             if (owner->model->unk5DC != 0) {
-                transform = &((func_8027DAA4_S1 *)(owner->model->unk5DC))->unk160;
+                transform = ((Shared_func_80227014_S4 *)owner->model->unk5DC)->transform;
             } else {
                 func_80226DD0_de(owner->model, built);
                 transform = built;

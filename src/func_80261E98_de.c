@@ -1,3 +1,4 @@
+#include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "span_1000/code_8028469C.h"
 #include "span_1000/code_802609CC.h"
@@ -5,7 +6,7 @@
 void *func_8028FDB4_de(int *, int);
 typedef struct Shared_func_80261EB8_S1 func_80261EB8_S1;
 typedef struct Shared_func_80261EB8_S2 func_80261EB8_S2;
-typedef struct func_8028469C_S3 func_80261EB8_S3;
+typedef Table_func_8028CE94_de func_80261EB8_S3;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x30, 0x34, 0x38, 0x3c], gap at: 0x28. */
@@ -38,6 +39,7 @@ void func_80261E98_de(func_80261EB8_S1 *arg0, func_80261EB8_S2 *arg1) {
     s32 var_v0_2;
     s32 var_v1;
     func_80261EB8_S3 *temp_s1;
+    Table_func_8028CE94_de *section;
 
     temp_a0 = arg0->unk10;
     if (temp_a0 == 0) {
@@ -53,8 +55,9 @@ void func_80261E98_de(func_80261EB8_S1 *arg0, func_80261EB8_S2 *arg1) {
         var_s0 = arg0->unkC;
         temp_f20 = arg0->unk0;
         temp_f22 = (f32) arg0->unk8;
-        arg1->unk0 = &temp_s1->unk8;
-        arg1->unk4 = &((func_80261EB8_S3 *)func_8028FDB4_de(temp_s0, 2))->unk8;
+        arg1->unk0 = temp_s1->data;
+        section = func_8028FDB4_de(temp_s0, 2);
+        arg1->unk4 = section->data;
         arg1->unk8 = func_8028FDB4_de(temp_v0, 1);
         
         {

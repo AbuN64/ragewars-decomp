@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -101,7 +102,7 @@ void func_8024B2D0_de(char *arg0)
     char *object;
     TypeEntry *entry;
 
-    type = *((func_8024B2C0_S1 *)(arg0))->unk18;
+    type = *((struct Actor_func_8024A7A0_de *)(arg0))->definition;
     if ((u32)type < 15) {
         goto valid_type;
     }
@@ -136,8 +137,8 @@ selected:
     if (entry != 0 && entry->callback != 0) {
         entry->callback(arg0, (char *)arg0 + 0x170);
     }
-    if ((((func_8024B2C0_S1 *)(arg0))->unk100 & 0x08000000) != 0) {
-        (((func_8024B2C0_S1 *)(arg0))->unk23B)++;
+    if ((((struct Actor_func_8024A7A0_de *)(arg0))->flags & 0x08000000) != 0) {
+        (((struct Actor_func_8024A7A0_de *)(arg0))->updateCount)++;
     }
 }
 

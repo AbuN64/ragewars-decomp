@@ -1,3 +1,5 @@
+#include "shared/gameplay_transition.h"
+#include "span_16E000/code_80447BB0.h"
 #include "span_1000/code_80225D10.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -31,13 +33,13 @@ s32 func_80229A80_de(void *game) {
     total2 = 0;
     total1 = 0;
     total0 = 0;
-    for (player = ((func_80229A54_S1 *)(game))->unk20; player != 0; player = ((func_80229A54_S2 *)(player))->unk16E0) {
-        self = (u32) (player - ((func_80229A54_S1 *)(game))->unk4) / 0x16E8;
+    for (player = ((struct ObjectPool *)(game))->object_queue.head; player != 0; player = (char *)((struct Shared_ActorView *)(player))->next) {
+        self = (u32) (player - ((struct ObjectPool *)(game))->objects) / 0x16E8;
         for (other = 0; other < 8; other++) {
             if (other == self) {
                 continue;
             }
-            stats = ((func_80229A54_S2 *)(player))->unk5D8;
+            stats = (char *)((struct Shared_ActorView *)(player))->controls;
             switch (((Record *)(stats))->team) {
             case 0xFF:
                 return 0;
@@ -91,7 +93,7 @@ extern s32 D_80142850;
 /** Return the animation-table offset selected by the actor state. */
 s32 func_80229C0C_de(void *arg0, s32 arg1) {
     s32 *types = &D_800CE47C;
-    u16 type = ((func_80229BE0_S1 *)(arg0))->unkE4;
+    u16 type = ((struct Shared_ActorView *)(arg0))->kind;
     char *state;
     s32 offset;
 
@@ -116,10 +118,10 @@ s32 func_80229C0C_de(void *arg0, s32 arg1) {
     } else if (type == types[-1]) {
         offset = 0x3E8;
     } else {
-        state = ((func_80229BE0_S1 *)(arg0))->unk5D8;
-        switch (((func_80229BE0_S2 *)(state))->unk80) {
+        state = (char *)((struct Shared_ActorView *)(arg0))->controls;
+        switch (((struct Shared_ControlView *)(state))->mode) {
         default:
-            ((func_80229BE0_S2 *)(state))->unk80 = 0;
+            ((struct Shared_ControlView *)(state))->mode = 0;
         case 0:
             offset = 0;
             break;
@@ -340,7 +342,7 @@ void func_8022A170_de(void *arg0) {
         func_80253BBC_de(0, *(void **)arg0);
     }
 
-    node = ((func_80228774_S1 *)(arg0))->unk20;
+    node = ((struct ObjectPool *)(arg0))->object_queue.head;
     if (node != 0) {
         u8 *base = D_801462C8;
 
@@ -351,7 +353,7 @@ void func_8022A170_de(void *arg0) {
             if (base[0x1D] != 0) {
                 func_8024B7E4_de(node, 1);
             }
-            node = ((func_8022A5E4_S2 *)(node))->unk16E0;
+            node = ((struct Shared_ActorView *)(node))->next;
         } while (node != 0);
     }
 }
@@ -364,7 +366,7 @@ void func_8022A1FC_de(void *arg0, void *arg1) {
     s32 count2;
     char *entry;
 
-    node = ((func_80228774_S1 *)(arg0))->unk20;
+    node = ((struct ObjectPool *)(arg0))->object_queue.head;
     if (node != 0) {
         do {
             ((ObjectLinks16E4_2 *)(node))->unk_70 = 0;

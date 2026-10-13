@@ -62,15 +62,22 @@ struct Actor_func_802AB400_de;
 /* unbake published declaration: published_387aebd12f354d95b77fb1b9 */
 struct Actor_func_802AB400_de {
     u8 type;
-    char pad1[0xE4 - 1];
+    u8 pad1[7];
+    Vec3 position; /* 0x08: provider func_8025DE54_de takes Vec3 */
+    u8 pad14[0xE4 - 0x14];
     u16 team;
     char padE6[0x100 - 0xE6];
     s32 flags;
-    char pad104[0x5D8 - 0x104];
+    u8 pad104[0x174 - 0x104];
+    s32 active; /* 0x174 */
+    u8 pad178[0x5D8 - 0x178];
     func_8020EA10_S3 *model;
-    char pad5DC[0x5E4 - 0x5DC];
+    void *owner; /* 0x5DC */
+    u8 pad5E0[4];
     s32 count;
-    char pad5E8[0x5F4 - 0x5E8];
+    u16 fraction; /* 0x5E8 */
+    s16 lives; /* 0x5EA */
+    u8 pad5EC[8];
     s16 levels[7];
     char pad602[0x602 - 0x602];
     Shared_Slot slots[22];
@@ -202,10 +209,13 @@ extern void func_802AB0B0_de(u16 *grid, s16 x0, s32 y);
 struct Entry_func_802AB400_de;
 /* unbake published declaration: published_c17e9ee01d7deb44ae0af1d6 */
 struct Entry_func_802AB400_de {
-    char pad0[4];
+    void *resource;
     s16 id;
-    char pad6[6];
+    s16 sound;
+    s16 callback;
+    s16 reservedA;
     s16 index;
+    s16 argument;
 };
 
 struct func_802ADD18_S2;
@@ -277,5 +287,16 @@ typedef struct AmmoPickupDefinition {
     s16 slot;
     u8 reservedE[6];
 } AmmoPickupDefinition;
+
+
+/* Timed pickup family: common effect payload followed by a word amount. */
+typedef struct TimedItemEffect {
+    void *resource;
+    s16 id;
+    s16 sound;
+    s16 callback;
+    s16 reservedA;
+    s32 amount;
+} TimedItemEffect;
 
 #endif
