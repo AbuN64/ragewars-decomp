@@ -277,7 +277,7 @@ struct FloatState68 {
 struct Bounds;
 /* unbake published declaration: published_6874ef701875bae26c8f6f60 */
 struct Bounds {
-    u8 bytes[0x60];
+    Vec3 corners[8];
 };
 
 struct Entry_func_80242288_de;

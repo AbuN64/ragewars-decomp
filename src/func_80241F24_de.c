@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802412C0.h"
@@ -19,10 +20,9 @@ extern void func_80240E00_de(Query_func_80241BAC_de *, Bounds *);
 extern s32 func_8023EA44_de(Actor_func_80241BAC_de *, Query_func_80241BAC_de *, void *, f32, s32);
 extern f32 func_80241728_de(Query_func_80241BAC_de *, f32, f32);
 extern s32 func_8024491C_de(Input_func_80241BAC_de *, Vec3, Vec3, void *, f32, f32, f32, f32);
-extern s32 func_8023E178_de(Actor_func_80241BAC_de *, void *, f32, s32, f32, s32, Query_func_80241BAC_de *, s32);
+extern s32 func_8023E178_de(Actor_func_80241BAC_de *, void *, f32, f32, f32, s32, Query_func_80241BAC_de *, s32);
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 extern void *D_80103FCC;
-extern char D_801000F0;
 extern f32 D_800C3758_de[];
 
 
@@ -47,9 +47,9 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
     void *entry;
     void *owner_data;
 
-    owner_data = &((func_8020CC0C_S1 *)(owner))->unk8;
+    owner_data = &((Actor_func_8024A7A0_de *)owner)->position0;
     entry = owner->entries + 0x14;
-    height = ((func_80212828_S7 *)(entry))->unk8 + func_8024D398_de(input);
+    height = ((Shape_func_80241950_de *)entry)->radius + func_8024D398_de(input);
     if (actor->move_y > 0.0f) {
         query->word0 = 3;
         func_80240D20_de(query, bounds);
@@ -95,11 +95,11 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
     if (actor->move_x != 0.0f || actor->move_z != 0.0f) {
         query->word0 = 3;
         if (func_8023E178_de(actor, owner_data, height,
-                          ((func_80241F14_S3 *)(bounds))->unk4, ((func_80241F14_S3 *)(bounds))->unk34,
+                          bounds->corners[0].y, bounds->corners[4].y,
                           1, query, 1)) {
             actor->flags |= 8;
-            func_80271F34_de(&((func_8022CA04_S4 *)(input))->unk1C,
-                          &((func_8022CA04_S4 *)(input))->unk1C,
+            func_80271F34_de(&((Actor_func_8024A7A0_de *)input)->position1,
+                          &((Actor_func_8024A7A0_de *)input)->position1,
                           (Vec3 *)&actor->move_x);
         }
     }
