@@ -38,7 +38,7 @@ extern f32 func_80260EF8_de(LocalDecodeRange *arg0);
 extern double D_800C4170_de;
 
 /* unbake published declaration: published_42fa7b99825a028a8bb7d72a */
-extern void func_80260C6C_de(void *arg0, int arg1, Triple t, int arg5);
+extern void func_80260C6C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
 
 struct Stream_func_80261418_de;
 /* unbake published declaration: published_470fd60e3f006dce5685811e */
@@ -72,6 +72,7 @@ struct DecodeArray;
 struct DecodeArray {
     s32 base;
     Func802608ECResult range;
+    s32 count; /* 0x10 */
 };
 
 struct BitFieldSource;
@@ -147,7 +148,7 @@ extern void func_80260FF0_de(unsigned int *record, int index);
 extern void func_80260A5C_de(s32 arg0, Func802608ECResult range, f32 arg4);
 
 /* unbake published declaration: published_ab7fc8b33c2a3c323ef5a6fb */
-extern void func_80260E1C_de(void *arg0, int arg1, Triple t, int arg5);
+extern void func_80260E1C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
 
 struct Entry802612C8;
 /* unbake published declaration: published_b9fedd92a141a058fd218795 */
@@ -186,7 +187,7 @@ typedef struct Track_func_80261180_de Track_func_80261180_de;
 extern f32 func_802609AC_de(s32 bitAddress, Func802608ECResult range);
 
 /* unbake published declaration: published_f2c1870800b92097f3302b73 */
-extern void func_80260D78_de(void *arg0, int arg1, Triple t, int arg5);
+extern void func_80260D78_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
 
 struct func_80260C8C_S1;
 /* unbake published declaration: published_f37f4d76c8e0273e260f33d6 */
