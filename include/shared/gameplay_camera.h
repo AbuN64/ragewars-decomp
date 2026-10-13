@@ -57,7 +57,9 @@ typedef char Shared_func_80234FDC_S1_size_check[(sizeof(Shared_func_80234FDC_S1)
 
 typedef struct Shared_func_80234FDC_S2 Shared_func_80234FDC_S2;
 struct Shared_func_80234FDC_S2 {
-    char pad0[0x14];
+    char pad0[4];
+    Shared_func_80234FDC_S2 *next; /* 0x04: camera list link */
+    char pad8[0xC];
     s16 unk14; /* +0x14: src/func_80234FDC.c */
     char pad16[0x2];
     f32 unk18; /* +0x18: src/func_80234FDC.c */
