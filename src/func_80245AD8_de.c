@@ -9,5 +9,5 @@ extern void *D_800E2830;
 
 float func_80245AD8_de(void) {
     Shared_MenuContext *record = D_800E2830;
-    return (record->scaleA0) * (D_800C88CC);
+    return (record->spec.scaleA0) * (D_800C88CC);
 }
