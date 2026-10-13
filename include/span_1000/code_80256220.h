@@ -15,6 +15,9 @@ struct CartridgeReadWorker {
     u8 requestQueueStorage;
     u8 reserved231[0xA48 - 0x231];
     u8 completionQueueStorage;
+    u8 reservedA49[0x5068 - 0xA49];
+    IntrusiveList available; /* 0x5068 */
+    IntrusiveList pending; /* 0x507C */
 };
 
 struct func_802566A8_S1;
@@ -98,6 +101,9 @@ struct CartridgeReadRequest {
     s32 size;
     void *replyQueue;
     void *replyMsg;
+    s32 active; /* 0x14 */
+    void *next;
+    void *prev;
 };
 
 

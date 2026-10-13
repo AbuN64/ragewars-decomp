@@ -1,3 +1,5 @@
+#include "shared/gameplay_transition.h"
+#include "shared/level_actor.h"
 #include "span_1000/code_8022AE90.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
@@ -19,7 +21,7 @@ void func_8022B69C_de(void *arg0, f32 arg1, void *arg2) {
     f32 temp_f0;
     f32 temp_f1;
 
-    temp_f0 = ((func_8022B68C_S1 *)(arg0))->unk12C0 - arg1;
+    temp_f0 = ((Shared_ActorView *)arg0)->reserve - arg1;
     temp_f1 = D_800C9190_de[1];
     if (!(temp_f0 <= temp_f1)) {
         if (arg0 != 0) {
@@ -29,10 +31,10 @@ void func_8022B69C_de(void *arg0, f32 arg1, void *arg2) {
         }
     }
     temp_f0 = D_800C9190_de[1];
-    ((func_8022B68C_S1 *)(arg0))->unk12C0 = temp_f1;
+    ((Shared_ActorView *)arg0)->reserve = temp_f1;
     if (temp_f1 <= temp_f0) {
-        func_80216488_de(&sp18, arg2, ((func_8022B68C_S1 *)(arg0))->unk174 + 0x1900, 25.599998f, 0x80, 0);
-        func_80219A40_de(arg0, &((func_8022B68C_S1 *)(arg0))->unk170, &sp18);
+        func_80216488_de(&sp18, arg2, ((Actor_func_8024A7A0_de *)arg0)->active + 0x1900, 25.599998f, 0x80, 0);
+        func_80219A40_de(arg0, &((Actor_func_8024A7A0_de *)arg0)->behaviorFlags, &sp18);
     }
 }
 
@@ -44,6 +46,6 @@ void func_8022B69C_de(void *arg0, f32 arg1, void *arg2) {
 
 
 void func_8022B730_de(void *arg0, f32 arg1) {
-    ((func_8022B720_S1 *)(arg0))->unk11DC = ((func_8022B720_S1 *)(arg0))->unk11DC + arg1 * D_800C7E08;
-    ((func_8022B720_S1 *)(arg0))->unk122C = ((func_8022B720_S1 *)(arg0))->unk122C | 0x2000;
+    ((Shared_ActorView *)arg0)->impulse = ((Shared_ActorView *)arg0)->impulse + arg1 * D_800C7E08;
+    ((Shared_ActorView *)arg0)->field122C = ((Shared_ActorView *)arg0)->field122C | 0x2000;
 }

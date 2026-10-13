@@ -22,21 +22,21 @@ void *func_8025C95C_de(void *arg0, s32 arg1, void *arg2, void *arg3, s32 arg4) {
     void *node;
     s32 result;
 
-    node = *(void **)arg0;
+    node = ((SoundVoicePool *)arg0)->available.head;
     if (node != 0) {
         func_80255ED8_de(arg0, node);
-        func_80255D14_de(&((func_80203908_S2 *)(arg0))->unk14, node);
-        ((func_8025C97C_S2 *)(node))->unkC = -1;
-        ((func_8025C97C_S2 *)(node))->unk8 = -1;
-        result = func_8025DE54_de((s16)arg1, ((func_8022ED94_S1 *)(arg2))->unk0,
-                                ((func_8022ED94_S1 *)(arg2))->unk4,
-                                ((func_8022ED94_S1 *)(arg2))->unk8,
+        func_80255D14_de(&((SoundVoicePool *)arg0)->playing, node);
+        ((struct Node_func_8025CBEC_de *)node)->state = -1;
+        ((struct Node_func_8025CBEC_de *)node)->value = -1;
+        result = func_8025DE54_de((s16)arg1, ((Triple *)arg2)->x,
+                                ((Triple *)arg2)->y,
+                                ((Triple *)arg2)->z,
                                 (s32)arg3, arg4);
-        ((func_8025C97C_S2 *)(node))->unk8 = result;
+        ((struct Node_func_8025CBEC_de *)node)->value = result;
         D_800CBB10 = result;
-        ((func_8025C97C_S2 *)(node))->unkC = arg1;
-        ((func_8025C97C_S2 *)(node))->unk10 = *(Triple *)arg2;
-        ((func_8025C97C_S2 *)(node))->unk1C = arg3;
+        ((struct Node_func_8025CBEC_de *)node)->state = arg1;
+        ((struct Node_func_8025CBEC_de *)node)->position = *(Triple *)arg2;
+        ((struct Node_func_8025CBEC_de *)node)->owner = arg3;
     }
     return node;
 }

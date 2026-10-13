@@ -1,3 +1,4 @@
+#include "shared/gameplay_transition.h"
 #include "span_1000/code_8022D944.h"
 #include "types.h"
 
@@ -14,12 +15,12 @@ void func_8022DD94_de(void *arg0) {
     f32 var_f2;
 
     var_f1 = 0.0f;
-    if ((u32)(((func_8022DD84_S1 *)(arg0))->unk650 - 9) < 4U) {
+    if ((u32)((u16)((Shared_ActorView *)arg0)->action - 9) < 4U) {
         var_f1 = D_800C2DF8_de[0];
     }
-    sp10 = ((func_8022DD84_S1 *)(arg0))->unk720;
+    sp10 = ((Shared_ActorView *)arg0)->transitionBlend;
     func_80274870_de(&sp10, var_f1, 0.25f);
-    var_f2 = sp10 - ((func_8022DD84_S1 *)(arg0))->unk720;
+    var_f2 = sp10 - ((Shared_ActorView *)arg0)->transitionBlend;
     if (var_f2 < 0.0f) {
         if (-var_f2 < D_800C2DF8_de[1]) {
             goto clamp;
@@ -28,5 +29,5 @@ void func_8022DD94_de(void *arg0) {
 clamp:
         var_f2 = 0.0f;
     }
-    ((func_8022DD84_S1 *)(arg0))->unk720 = ((func_8022DD84_S1 *)(arg0))->unk720 + var_f2;
+    ((Shared_ActorView *)arg0)->transitionBlend = ((Shared_ActorView *)arg0)->transitionBlend + var_f2;
 }
