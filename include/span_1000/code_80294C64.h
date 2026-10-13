@@ -182,11 +182,17 @@ extern s32 D_auto_800D2AF8;
 
 struct MenuGlobal_func_80294F1C_us_rev1 {
     u8 alternateTitle; /* +0x0 */
-    u8 unused0[11]; /* +0x1 */
+    u8 state; /* +0x1 */
+    u8 unused0[2];
+    s32 field4;
+    s32 active; /* +0x8 */
     s32 selectionIndex; /* +0xC: == D_8014AEBC */
     s32 selectionValue; /* +0x10: == D_8014AEC0 */
     s32 titleWasShown; /* +0x14: == D_8014AEC4 */
-    u8 unused1[8480]; /* +0x18 */
+    u8 unused18[4];
+    s32 field1C, field20, field24, field28;
+    u8 unused2C[0x212C - 0x2C];
+    s32 field212C, field2130, field2134;
     u8 displayData; /* +0x2138 */
     u8 unused2[127]; /* +0x2139 */
     s32 frameCount; /* +0x21B8: == D_8014D068 */

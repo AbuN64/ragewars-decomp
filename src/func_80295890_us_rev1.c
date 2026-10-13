@@ -4,13 +4,13 @@
 
 extern s32 D_8014AECC;
 void func_80295890_us_rev1(void) {
-    if ((((struct Shape_typemap_6 *) ((s8 *) (&D_8014AECC)))->field_0) != 0) {
-        func_80253754_de(0, (((struct Shape_typemap_6 *) ((s8 *) (&D_8014AECC)))->field_0));
+    if (((ResidentState *)&D_8014AECC)->unk0 != 0) {
+        func_80253754_de(0, ((ResidentState *)&D_8014AECC)->unk0);
     }
-    (((struct Shape_typemap_6 *) ((s8 *) (&D_8014AECC)))->field_0) = 0;
-    (((struct Shape_typemap_6 *) ((s8 *) (&D_8014AECC)))->field_8) = 0;
-    (((struct Shape_typemap_6 *) ((s8 *) (&D_8014AECC)))->field_C) = 0;
-    (((struct Shape_typemap_6 *) ((s8 *) (&D_8014AECC)))->field_4) = 0;
+    ((ResidentState *)&D_8014AECC)->unk0 = 0;
+    ((ResidentState *)&D_8014AECC)->unk8 = 0;
+    ((ResidentState *)&D_8014AECC)->unkC = 0;
+    ((ResidentState *)&D_8014AECC)->unk4 = 0;
 }
 
 extern char D_8014AEB0;
@@ -22,21 +22,21 @@ extern char D_8014AEB0;
 void func_802958D8_us_rev1(void) {
     char *object = &D_8014AEB0;
 
-    ((func_802958D8_S1 *)(object))->unk0 = 0;
-    ((func_802958D8_S1 *)(object))->unk1 = 0;
-    ((func_802958D8_S1 *)(object))->unkC = 0;
-    ((func_802958D8_S1 *)(object))->unk10 = 0;
-    ((func_802958D8_S1 *)(object))->unk8 = 1;
-    ((func_802958D8_S1 *)(object))->unk4 = 0;
-    ((func_802958D8_S1 *)(object))->unk14 = 0;
-    ((func_802958D8_S1 *)(object))->unk1C = 0;
-    ((func_802958D8_S1 *)(object))->unk24 = 0;
-    ((func_802958D8_S1 *)(object))->unk28 = 0;
-    ((func_802958D8_S1 *)(object))->unk20 = 0;
-    ((func_802958D8_S1 *)(object))->unk212C = 0;
-    ((func_802958D8_S1 *)(object))->unk2130 = 0;
-    ((func_802958D8_S1 *)(object))->unk2134 = 0;
-    ((func_802958D8_S1 *)(object))->unk21B8 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->alternateTitle = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->state = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->selectionIndex = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->selectionValue = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->active = 1;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field4 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->titleWasShown = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field1C = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field24 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field28 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field20 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field212C = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field2130 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field2134 = 0;
+    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->frameCount = 0;
 }
 
 extern s32 D_800D2AEC;

@@ -98,7 +98,11 @@ struct Polygon_func_8023E8D4_de {
     s32 type;
     s32 pad4;
     s32 kind;
-    char padC[0xC0];
+    char padC[8];
+    s32 vertexCount; /* 0x14 */
+    Vec3 vertices[4]; /* 0x18 */
+    Vec3 normal; /* 0x48 */
+    char pad54[0x78];
     f32 t;
     Vec3 hit;
 };
