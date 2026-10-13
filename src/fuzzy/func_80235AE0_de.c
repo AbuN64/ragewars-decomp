@@ -29,7 +29,7 @@ void func_80235AE0_de(Racer *view) {
     u32 color;
     s16 vx, vy;
     s32 maxx, maxy;
-    f32 sx, sy, width, height;
+    f32 sx, sy, width, height, x, y;
     Gfx *cmd;
     Gfx **dl = &D_80110634;
     Frame *buffer;
@@ -37,13 +37,23 @@ void func_80235AE0_de(Racer *view) {
     gDPPipeSync((*setup)++);
     gSPDisplayList((*setup)++, &D_800CBCC0);
     gSPDisplayList((*setup)++, &D_800CBCF0_de);
-    sx=view->viewportScaleX; width=view->viewportWidth;
-    maxx=(u16)D_800E28D0-1; maxy=(u16)D_800E28D4-1;
-    initScale35AE0(view); view->screenScaleX=sx;
-    ulx=(s32)view->viewportX; uly=(s32)view->viewportY;
-    sy=view->viewportScaleY; height=view->viewportHeight; view->screenScaleY=sy;
-    lrx=(s32)(view->viewportX+width); lry=(s32)(view->viewportY+height);
-    vx=(s16)(s32)((width+width)*sx); vy=(s16)(s32)((height+height)*sy);
+    sx=view->viewportScaleX;
+    width=view->viewportWidth;
+    vx=(s16)(s32)((width+width)*sx);
+    y=view->viewportY;
+    uly=(s32)y;
+    height=view->viewportHeight;
+    x=view->viewportX;
+    lrx=(s32)(x+width);
+    maxx=(u16)D_800E28D0-1;
+    sy=view->viewportScaleY;
+    vy=(s16)(s32)((height+height)*sy);
+    lry=(s32)(y+height);
+    initScale35AE0(view);
+    maxy=(u16)D_800E28D4-1;
+    ulx=(s32)x;
+    view->screenScaleX=sx;
+    view->screenScaleY=sy;
     if (D_800E28D0-1 < (s16)lrx) lrx=maxx;
     if ((s16)ulx<0) ulx=0;
     if ((s16)uly<0) uly=0;
@@ -69,7 +79,7 @@ void func_80235AE0_de(Racer *view) {
         func_8026925C_de(0x14);
         gDPPipeSync((*clearDl)++);
         func_80291BE8_de(D_8011FAC0,(s16)ulx,(s16)lrx,(s16)uly,(s16)lry,view->effect);
-        gDPSetCycleType((*clearDl)++, G_CYC_FILL);
+        cmd=(*clearDl); gDPSetCycleType(cmd, G_CYC_FILL); (*clearDl)++;
         if(D_801462C8&0x4000) {rgb.red=0;rgb.green=0;rgb.blue=0;} else {rgb.red=view->hit&0xF8;rgb.green=view->boost&0xF8;rgb.blue=view->spin&0xF8;}
         if(func_80245798_de()!=0) { color=func_80245AF8_de(); if(color!=0xFF00) {rgb.blue=color>>16;rgb.green=color>>8;rgb.red=color;} }
         gSPGeometryMode(D_80110634++, 0, G_FOG);
@@ -92,7 +102,7 @@ void func_80235AE0_de(Racer *view) {
     }
     gDPPipeSync(D_80110634++);
     func_8026D914_de(0);
-    gDPSetColorDither(D_80110634++, G_CD_BAYER);
+    gDPSetAlphaDither(D_80110634++, G_AD_NOTPATTERN);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     if(view!=&D_80141008)func_802659E0_de(view);
     gDPPipeSync(D_80110634++);

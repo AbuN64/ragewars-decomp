@@ -100325,7 +100325,7 @@ scores = {de = 0.6444444444444445, eu = 0.6444444444444445, eu-x = 0.64444444444
 [[fuzzy]]
 member = "func_802251DC_de"
 path = "src/fuzzy/func_802251DC_de.c"
-scores = {de = 0.9260042283298098, eu = 0.9260042283298098, eu-x = 0.9260042283298098, us = 0.9260042283298098, us-rev1 = 0.9260042283298098}
+scores = {de = 0.9788583509513742, eu = 0.9788583509513742, eu-x = 0.9788583509513742, us = 0.9788583509513742, us-rev1 = 0.9788583509513742}
 
 [[fuzzy]]
 member = "func_80225D34_de"
@@ -100390,7 +100390,7 @@ scores = {de = 0.6204188481675392, eu = 0.6204188481675392, eu-x = 0.62041884816
 [[fuzzy]]
 member = "func_80235AE0_de"
 path = "src/fuzzy/func_80235AE0_de.c"
-scores = {de = 0.7431906614785992, eu = 0.7431906614785992, eu-x = 0.7431906614785992, us = 0.7431906614785992, us-rev1 = 0.7431906614785992}
+scores = {de = 0.7996108949416343, eu = 0.7996108949416343, eu-x = 0.7996108949416343, us = 0.7996108949416343, us-rev1 = 0.7996108949416343}
 
 [[fuzzy]]
 member = "func_8023660C_de"
@@ -101203,6 +101203,11 @@ path = "src/fuzzy/func_80419F4C_eu_x.c"
 scores = {eu-x = 0.5638297872340425, us-rev1 = 0.5638297872340425}
 
 [[fuzzy]]
+member = "func_8041A05C_de"
+path = "src/fuzzy/func_8041A05C_de.c"
+scores = {de = 0.6788321167883211, eu = 0.6788321167883211, eu-x = 0.6788321167883211, us-rev1 = 0.6788321167883211}
+
+[[fuzzy]]
 member = "func_8041DFC0_us"
 path = "src/fuzzy/func_8041DFC0_us.c"
 scores = {us = 0.3576158940397351}
@@ -101428,6 +101433,11 @@ path = "src/fuzzy/func_8043E830_de.c"
 scores = {de = 0.3050847457627119, eu = 0.3050847457627119, eu-x = 0.3050847457627119, us = 0.3050847457627119, us-rev1 = 0.3050847457627119}
 
 [[fuzzy]]
+member = "func_8043EE5C_de"
+path = "src/fuzzy/func_8043EE5C_de.c"
+scores = {de = 0.9504132231404959, eu = 0.9495798319327731, eu-x = 0.9504132231404959, us-rev1 = 1.0}
+
+[[fuzzy]]
 member = "func_8043F120_de"
 path = "src/fuzzy/func_8043F120_de.c"
 scores = {de = 0.8064516129032258, eu = 0.8064516129032258, eu-x = 0.8064516129032258, us = 0.8064516129032258, us-rev1 = 0.8064516129032258}
@@ -101471,6 +101481,11 @@ scores = {de = 0.7, eu = 0.7, eu-x = 0.7, us = 0.7, us-rev1 = 0.7}
 member = "func_8044A370_de"
 path = "src/fuzzy/func_8044A370_de.c"
 scores = {de = 0.7771428571428571, eu = 0.7771428571428571, eu-x = 0.7771428571428571, us = 0.7771428571428571, us-rev1 = 0.7771428571428571}
+
+[[fuzzy]]
+member = "func_8044C7B8_de"
+path = "src/fuzzy/func_8044C7B8_de.c"
+scores = {de = 1.0, eu = 1.0, eu-x = 1.0, us = 1.0, us-rev1 = 1.0}
 
 [[fuzzy]]
 member = "func_8044D3E8_de"
