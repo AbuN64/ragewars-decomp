@@ -33,11 +33,11 @@ extern void func_80255CB8_de(void *, Message *);
 static inline Message *recycle(void *owner, void *pool) {
     Message *oldest;
 
-    oldest = ((func_80237E70_S1 *)(owner))->unkF24.head;
+    oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
         func_80239CE0_de(oldest);
-        func_80255ED8_de(&((func_80237E70_S1 *)(owner))->unkF24, oldest);
-        func_80255D14_de(&((func_80237E70_S2 *)(pool))->unkE40, oldest);
+        func_80255ED8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
+        func_80255D14_de(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
     }
     return oldest;
 }
@@ -92,11 +92,11 @@ Message *func_80239908_de(void *owner, void *pool, u8 *text, s32 target, f32 siz
     if (pool == 0) {
         return 0;
     }
-    for (pending = ((func_80237E70_S2 *)(pool))->unkE40.head; pending != 0; pending = next) {
-        next = ((func_80237E70_S4 *)(pending))->unk4;
+    for (pending = ((struct ScreenMessagePool *)pool)->freeMessages.head; pending != 0; pending = next) {
+        next = pending->next;
         if (pending->target == target) {
-            func_80255ED8_de(&((func_80237E70_S2 *)(pool))->unkE40, pending);
-            func_80255CB8_de(&((func_80237E70_S1 *)(owner))->unkF24, pending);
+            func_80255ED8_de(&((struct ScreenMessagePool *)pool)->freeMessages, pending);
+            func_80255CB8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, pending);
         }
     }
     pending = post_lines(owner, pool, text, 2, size, target);

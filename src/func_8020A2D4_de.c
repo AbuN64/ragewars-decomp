@@ -69,7 +69,7 @@ void func_8020A2D4_de(void *arg0, void *config) {
     target = ((struct func_8028FFB0_S3 *) ((ObjectLinks2EC *) arg0)->unk_64)->unk1D8;
     func_80284FF4_de(&D_8011D8D0, *(void **) arg0, &pos);
     range = D_800C6E08;
-    pos.y = ((func_80216BF4_S1 *)(target))->unkC;
+    pos.y = ((Player *)target)->pos.y;
     if (func_802726BC_de(&pos, &((Player *)(target))->pos) < range) {
         ((ObjectLinks2EC *)(arg0))->unk_2E8 = 0;
     }
