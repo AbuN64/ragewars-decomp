@@ -210,12 +210,20 @@ extern void func_80293054_de(Display *);
 
 typedef struct Node_func_80442A28_de TimingQueue;
 typedef struct TimingWorld {
- char pad0[0x25B5C]; TimingQueue *unk25B5C;
+ char pad0[0x255C8];
+ u8 viewportData[0x594]; TimingQueue *unk25B5C;
  char pad25B60[0x1250]; f32 unk26DB0;
- char pad26DB4[4]; u32 unk26DB8,unk26DBC;
- char pad26DC0[1]; u8 unk26DC1;
- char pad26DC2[0x12]; s32 unk26DD4;
+ s32 previousMode; u32 unk26DB8,unk26DBC;
+ u8 fadeFast; u8 unk26DC1;
+ char pad26DC2[2]; f32 fade;
+ char pad26DC8[0xC]; s32 unk26DD4;
 } TimingWorld;
+/* Drawing callback followed by the remaining two state-dispatch slots. */
+typedef struct FrameCallback {
+ void (*draw)(TimingWorld *);
+ void (*auxiliary0)(TimingWorld *);
+ void (*auxiliary1)(TimingWorld *);
+} FrameCallback;
 extern u64 func_802BADC0_de(void);
 extern s32 func_80245B0C_de(void);
 extern u32 func_80245850_de(void);

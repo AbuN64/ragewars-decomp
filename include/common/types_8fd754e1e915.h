@@ -2022,8 +2022,15 @@ typedef struct func_80228774_S1 func_80228774_S1;
 struct Frame;
 /* unbake published declaration: published_fd78cec88c4c0b83f8a27fcd */
 struct Frame {
-    char pad0[0x110];
+    char pad0[0xF0];
+    u8 taskMessage[0x20];
     void *colorImage;
+    Gfx *list;
+    Gfx *secondList;
+    u32 listBytes;
+    u32 secondListBytes;
+    s32 ticks;
+    s32 submitted;
 };
 
 #endif

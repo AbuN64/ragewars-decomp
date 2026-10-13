@@ -32793,3 +32793,4 @@ PROVIDE(rw_menu_paged_func_8044616C_us_rev1 = 0x0044616C);
 PROVIDE(rw_menu_paged_func_80446214_us_rev1 = 0x00446214);
 PROVIDE(rw_menu_paged_func_80446230_us_rev1 = 0x00446230);
 PROVIDE(rw_menu_paged_func_80446330_us_rev1 = 0x00446330);
+PROVIDE(rwFrameBuildSeconds = 0x800D29A8);

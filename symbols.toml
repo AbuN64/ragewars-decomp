@@ -89080,3 +89080,11 @@ eu = 0x800CE31C
 eu-x = 0x800CECEC
 us = 0x800CD64C
 us-rev1 = 0x800D298C
+
+[symbol.rwFrameBuildSeconds]
+kind = "data"
+de = 0x800CD758
+eu = 0x800CE338
+eu-x = 0x800CED08
+us = 0x800CD668
+us-rev1 = 0x800D29A8
