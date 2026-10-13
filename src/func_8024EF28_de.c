@@ -1,3 +1,4 @@
+#include "shared/legacy_collision_actor.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8024E914.h"
 #include "types.h"
@@ -23,16 +24,16 @@ void func_8024EF28_de(void *actor) {
     f32 ground;
     f32 height;
     f32 size;
-    ground = ((func_8024EF18_S1 *)(actor))->unk40;
-    height = ((func_8024EF18_S1 *)(actor))->unkC - ground;
+    ground = ((Shared_Func80243A80Actor *)actor)->groundY;
+    height = ((Shared_Func80243A80Actor *)actor)->y - ground;
     if (!(RW_MIN_LT(func_8024E2FC_de(actor) * 0.5f, func_8024E2FC_de(actor) * 0.5f - height * 0.1f) < 0.0f)) {
         size = RW_MIN_LT(func_8024E2FC_de(actor) * 0.5f, func_8024E2FC_de(actor) * 0.5f - height * 0.1f);
     } else {
         size = 0.0f;
     }
     func_8024D870_de(rotation, actor);
-    position.x = ((func_8024EF18_S1 *)(actor))->unk8;
-    position.z = ((func_8024EF18_S1 *)(actor))->unk10;
+    position.x = ((Shared_Func80243A80Actor *)actor)->x;
+    position.z = ((Shared_Func80243A80Actor *)actor)->z;
     position.y = ground;
     func_8027254C_de(&position, 20000.0f);
     func_80274244_de(rotation, matrix);

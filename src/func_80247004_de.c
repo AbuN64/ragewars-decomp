@@ -26,7 +26,7 @@ void func_80247004_de(Obj_func_80247004_de *arg0) {
             vec[3] = D_800C3924_de;
         }
         if (flags) {
-            if ((!(arg0->unk100 & 0x1000) && (var_a0 = &((func_80246FF4_S1 *)(arg0))->unk5C, (temp_s2 != 0))) || (var_a0 = &((func_80246FF4_S1 *)(arg0))->unk5C, (temp_s1 != 0))) {
+            if ((!(arg0->unk100 & 0x1000) && (var_a0 = arg0->rotation, (temp_s2 != 0))) || (var_a0 = arg0->rotation, (temp_s1 != 0))) {
                 func_80274380_de(var_a0, vec);
             }
         } else {
@@ -36,7 +36,7 @@ void func_80247004_de(Obj_func_80247004_de *arg0) {
                 var_f0 = D_800D2988[0]; var_f1 = D_800C3928_de[1];
             }
             var_f0 = var_f0 * var_f1;
-            temp_a0 = &((func_80246FF4_S1 *)(arg0))->unk5C;
+            temp_a0 = arg0->rotation;
             if (var_f0 > D_800C3930_de[0]) {
                 var_f0 = D_800C3930_de[0];
             }

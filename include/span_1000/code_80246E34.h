@@ -164,7 +164,9 @@ struct Obj_func_80247004_de;
 struct Obj_func_80247004_de {
     char pad[0x14];
     func_8022EA2C_S1 *unk14;
-    char pad18[0xe8];
+    char pad18[0x5C - 0x18];
+    f32 rotation[4]; /* 0x5C */
+    char pad6C[0x100 - 0x6C];
     u32 unk100;
 };
 

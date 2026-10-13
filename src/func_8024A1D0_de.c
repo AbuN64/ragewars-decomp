@@ -68,9 +68,9 @@ void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *arg1, Lookup *lookup)
     }
     if (lookup->unk0 != 0) {
         one = 1;
-        func_8026DA4C_de((s32)lookup->value, ((func_8024A1C0_S1 *)(actor))->unkB4, one,
+        func_8026DA4C_de((s32)lookup->value, ((Actor_func_8024A3B0_de *)actor)->fieldB4, one,
                       (char *)actor + ((((D_800D297C << one) + D_800D297C) << 3) + 0x140),
-                      0, ((func_8024A1C0_S1 *)(actor))->unk3);
+                      0, ((Actor_func_8024A3B0_de *)actor)->field3);
         func_8024A1C0_spawn(actor, lookup);
     }
     D_800D15E0 = 0;
