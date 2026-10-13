@@ -51,7 +51,8 @@ struct Shared_ActorView {
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[8];
     f32 lateralInput; /* 0x6A4 */
-    char pad6A8[0x1C];
+    char pad6A8[0x18];
+    f32 forwardSpeed; /* 0x6C0 */
     f32 lateralSpeed; /* 0x6C4 */
     char pad6C8[0x30];
     Vec3 contactPosition; /* 0x6F8 */
@@ -66,7 +67,9 @@ struct Shared_ActorView {
     s32 controllerMode; /* 0x788 */
     u8 pad78C[8];
     void *controllerOwner; /* 0x794 */
-    u8 pad798[0x864 - 0x798];
+    u8 pad798[0x848 - 0x798];
+    s32 collisionState; /* 0x848 */
+    u8 pad84C[0x864 - 0x84C];
     s32 field864;
     s32 field868;
     u8 pad86C[0xE54 - 0x86C];
