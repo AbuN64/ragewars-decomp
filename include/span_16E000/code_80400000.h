@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80400000_H
 #define UNBAKE_SPAN_16E000_CODE_80400000_H
 #include "../types.h"
+#include "shared/track_types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
@@ -39,13 +40,6 @@ struct Record_func_80403458_de;
 /* unbake published declaration: published_1da6f21703c8de011e39e5b1 */
 typedef struct Record_func_80403458_de Record_func_80403458_de;
 
-struct Key_func_80401214_de;
-/* unbake published declaration: published_2328bb29474bd73cdd200173 */
-struct Key_func_80401214_de {
-    char pad0[0x1C];
-    f32 time;
-    char pad20[4];
-};
 
 struct Entry_func_80402FB4_de;
 /* unbake published declaration: published_2626effbeb57eba5657e8bd2 */
@@ -98,9 +92,6 @@ struct Tables_func_80403458_de {
     Item_func_80403458_de *items[2];
 };
 
-struct Key_func_80401564_de;
-/* unbake published declaration: published_4917df5dfc7d739b326234e2 */
-typedef struct Key_func_80401564_de Key_func_80401564_de;
 
 struct Entry_func_80403200_de;
 /* unbake published declaration: published_4de850c2a9d08142c187da33 */
@@ -186,19 +177,7 @@ struct Entry_func_80402FB4_de {
     char pad8[0x44];
 };
 
-struct Key_func_80401214_de;
-/* unbake published declaration: published_96cee384cd7efa66139cedd0 */
-typedef struct Key_func_80401214_de Key_func_80401214_de;
 
-struct Key_func_80401564_de;
-/* unbake published declaration: published_9f09061c19b0bca99a2be8ec */
-struct Key_func_80401564_de {
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 pad;
-    f32 time;
-};
 
 /* unbake published declaration: published_a5e3e437fdc42bf32ad4b819 */
 extern void *func_80403B04_de(void *value);
@@ -210,29 +189,17 @@ struct State_func_804039C4_de;
 /* unbake published declaration: published_b1f446e7b5b278c72ded2e68 */
 typedef struct State_func_804039C4_de State_func_804039C4_de;
 
-struct Entry_func_804030E0_de;
-/* unbake published declaration: published_b20f0b3a80d77614d6cfe392 */
-typedef struct Entry_func_804030E0_de Entry_func_804030E0_de;
 
 /* unbake published declaration: published_b266832af6e3add593c892bf */
-extern void func_804009F4_de(int resource);
+extern s32 func_804009F4_de(s32 resource);
 
 struct Record_func_804030E0_de;
 /* unbake published declaration: published_b43769e2f59bec282d08fcd0 */
 typedef struct Record_func_804030E0_de Record_func_804030E0_de;
 
-struct Entry_func_804030E0_de;
-/* unbake published declaration: published_ba4cf85a963272b3877b7157 */
-struct Entry_func_804030E0_de {
-    s32 id0;
-    s32 id4;
-    s32 id8;
-    s32 flags;
-    char pad10[0x3C];
-};
 
 /* unbake published declaration: published_baa76d8aabe56fbb6c5da009 */
-extern void func_80403ADC_de();
+extern void *func_80403ADC_de(void);
 
 struct Record_func_80403458_de;
 /* unbake published declaration: published_bf495ec84ca3b6b7c61574ee */
@@ -293,5 +260,9 @@ extern int func_8028FEB8_de(int *);
 extern void func_802610A8_de(void *,s32);
 extern char *func_802610F0_de(Pack *,s32,s32);
 typedef union SplineSourceCursor { SplineSource *header; Vec3 *points; f32 *weights; } SplineSourceCursor;
+
+extern char D_0040067C[];
+extern char D_800DCB10[];
+extern void *func_80403A90_de(s32);
 
 #endif
