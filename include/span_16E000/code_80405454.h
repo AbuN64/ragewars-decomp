@@ -1473,9 +1473,12 @@ struct Menu_func_804066BC_de;
 struct Owner_func_804066BC_de;
 /* unbake published declaration: published_256bdb7728462426e67dc206 */
 struct Menu_func_804066BC_de {
-    char pad0[0xC];
+    s16 state;
+    char pad2[0xA];
     struct Owner_func_804066BC_de *owner;
-    char pad10[0xC];
+    char pad10[4];
+    char *dialogData; /* 0x14 */
+    char pad18[4];
     func_8024795C_S2 *player;
     func_80242278_S1 *slot;
 };
