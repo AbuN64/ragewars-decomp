@@ -139,7 +139,9 @@ struct Shared_ControlView {
     char pad0[0x80];
     s8 mode; /* +0x80: src/func_8021B468.c */
     u8 playerId; /* 0x81 */
-    char pad82[0xC];
+    u8 pad82;
+    u8 selection; /* 0x83: menu option adjusted by func_8043E28C_de */
+    char pad84[0xA];
     u8 roundEnded; /* 0x8E */
     u8 transientFlag; /* +0x8F: src/func_8021B468.c */
     s8 resetFlag; /* +0x90: src/func_8021B468.c */
