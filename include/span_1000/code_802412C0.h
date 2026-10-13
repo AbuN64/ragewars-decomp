@@ -6,14 +6,18 @@
 #include "common/types_1dc8418c21db.h"
 struct Ray180;
 /* unbake published declaration: published_006a37321258c9d98baff2fe */
+struct MotionSurface;
 struct Ray180 {
     char pad0[0x8];
     f32 spacing;
-    char padC[0x4];
+    f32 secondaryRadius;
     f32 length;
     char pad14[0x4];
     f32 radius;
-    char pad1C[0x28];
+    f32 height; /* 0x1C */
+    char pad20[0x1C];
+    u32 flags; /* 0x3C */
+    struct MotionSurface *surface; /* 0x40 */
     Vec3 start;
     Vec3 end;
     char pad5C[0x24];
@@ -374,7 +378,7 @@ struct ContextB0 {
     f32 step;
     ElementE8 *element;
     s32 kind;
-    char pad60[4];
+    u32 flags; /* 0x60 */
     Matrix_func_80213CF8_de transform; /* 0x64 */
     void *vertices; /* 0xA4 */
     s32 isKind9;
@@ -578,5 +582,11 @@ struct func_802428DC_S2 {
     char pad3C[0x5C - 0x3C - sizeof(int)];
     Vec3 unk5C;
 };
+
+typedef struct CollisionVertex {
+    f32 x, y;
+    char pad8[0x14];
+    s16 *position; /* 0x1C */
+} CollisionVertex;
 
 #endif
