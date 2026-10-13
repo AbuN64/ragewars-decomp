@@ -27,7 +27,7 @@ s32 func_80267444_de(void *arg0, Vec3 *arg1) {
     if ((object->kind == 1) &&
         ((object->flags & 0x300000) != 0)) {
         actor = object->controller;
-        if (arg0 == actor->weapon) {
+        if (arg0 == &actor->weapon) {
             state = actor->selectedAction;
             if ((state == 0) || (state == 0x11) || (state == 0x10)) {
                 first = *arg1;
