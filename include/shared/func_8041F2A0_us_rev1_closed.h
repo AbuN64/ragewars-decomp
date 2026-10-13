@@ -75,7 +75,8 @@ typedef struct func_8041F2A0_Row func_8041F2A0_Row;
 
 struct func_8041F2A0_Config {
     s16 total, score, kills, selected, other;
-    char padA[0x78 - 0xA];
+    s16 unkA; /* +0x0A: end-of-match reward statistic */
+    char padC[0x78 - 0xC];
     u8 active;
     char pad79[7];
     s8 kind;

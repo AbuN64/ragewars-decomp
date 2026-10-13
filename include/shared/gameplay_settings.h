@@ -6,7 +6,9 @@
  * reads (+0x80/+0x95) corroborate the shared record. */
 typedef struct Shared_PlayerSettingsRecord Shared_PlayerSettingsRecord;
 struct Shared_PlayerSettingsRecord {
-    char pad0[0x78];
+    char pad0[4];
+    s16 score; /* +0x04: end-of-match reward statistic */
+    char pad6[0x78 - 6];
     u8 enabled; /* +0x78: func_80423F48_de ROM joining-player stores */
     char pad79[6];
     u8 slot; /* +0x7F: func_80423F48_de ROM slot-number stores */

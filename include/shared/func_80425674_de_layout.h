@@ -39,7 +39,9 @@ struct Shared_Game {
     union {
         struct {
             f32 speedFactor; /* 0x20 */
-            u8 unknown24[0x124];
+            s8 laps; /* +0x24 */
+            s8 players; /* +0x25 */
+            u8 unknown26[0x122];
             Shared_GameSlot slots[8];
             u8 unknown5F8[0x34];
             s32 unk62C;

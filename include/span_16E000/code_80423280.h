@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_16E000_CODE_80423280_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 struct Rec_func_80424B90_de;
 /* unbake published declaration: published_06803c7b75ac4006055e5a6d */
 typedef struct Rec_func_80424B90_de Rec_func_80424B90_de;
@@ -156,5 +158,8 @@ struct OptionsBuildSettings {
 struct OptionsCommitContext;
 /* unbake published declaration: published_f79b188d82206fec506ecb0b */
 typedef struct OptionsCommitContext OptionsCommitContext;
+
+extern u8 D_8014222C;
+extern s32 func_80426274_de(void);
 
 #endif

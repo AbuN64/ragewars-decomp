@@ -353,7 +353,7 @@ struct Record_func_80433914_de {
     u8 count;
     char pad18[0x25 - 0x18];
     u8 rank;
-    char pad26[0x4A - 0x26];
+    u8 plays[0x24]; /* +0x26: per-character match count */
     u8 achievementFlags[0x189 - 0x4A];
     u8 setting[5];
     char pad18E[0x190 - 0x18E];
@@ -3946,7 +3946,9 @@ struct State_func_80421D94_de {
 struct HudStatusShared_MatchRules;
 /* unbake published declaration: published_8780860e2c6feb800a0f86f0 */
 struct HudStatusShared_MatchRules {
-    char pad0[0x20];
+    char pad0[0x14];
+    f32 timeLimit; /* +0x14 */
+    char pad18[8];
     s32 hideHud;
     s32 teams;
     char pad28[0x4];
