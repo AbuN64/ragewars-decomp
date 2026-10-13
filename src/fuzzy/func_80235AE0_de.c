@@ -1,13 +1,14 @@
 #include "span_1000/code_80233920.h"
 #include "gfx.h"
+#include "shared/gameplay_camera.h"
 #include "gbi.h"
 extern f32 D_800C32B8_de, D_800C32BC_de, D_800C32C0_de;
 extern char D_800CBCC0, D_800CBCF0_de;
 extern s32 D_800D297C, D_800E28D0, D_800E28D4;
 extern Gfx *D_80110634;
 extern Frame *D_8011BDC0;
-extern Racer D_80141008;
-extern s32 D_80140FF8, D_80146878, D_801462C8;
+extern Shared_func_80234FDC_S4 D_80140FF8;
+extern s32 D_801462C8;
 extern u8 D_8011FAC0[];
 extern void func_8026E330_de(s32);
 extern void func_80296004_de(s32);
@@ -33,6 +34,9 @@ void func_80235AE0_de(Racer *view) {
     Gfx *cmd;
     Gfx **dl = &D_80110634;
     Frame *buffer;
+    s32 frame;
+    UnitVp *viewport;
+    u32 *lights;
     { Gfx **setup = &D_80110634;
     gDPPipeSync((*setup)++);
     gSPDisplayList((*setup)++, &D_800CBCC0);
@@ -58,23 +62,25 @@ void func_80235AE0_de(Racer *view) {
     if ((s16)ulx<0) ulx=0;
     if ((s16)uly<0) uly=0;
     if (D_800E28D4-1 < (s16)lry) lry=maxy;
-    buffer=D_8011BDC0;
-    gSPMatrix((*setup)++, view->projectionMatrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+    buffer=D_8011BDC0; frame=D_800D297C;
+    gSPMatrix((*setup)++, view->projectionMatrices[frame], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
     gSPMoveWord((*setup)++, G_MW_PERSPNORM, 0, view->perspectiveNorm);
-    view->viewports[D_800D297C].vscale[0]=vx; view->viewports[D_800D297C].vscale[1]=vy;
-    view->viewports[D_800D297C].vtrans[0]=(s16)(s32)((vx*D_800C32BC_de+view->viewportX)*D_800C32C0_de);
-    view->viewports[D_800D297C].vtrans[1]=(s16)(s32)((vy*D_800C32BC_de+view->viewportY)*D_800C32C0_de);
-    gSPMoveMem((*setup)++, G_MV_VIEWPORT, 0, 16, &view->viewports[D_800D297C]);
+    viewport=&view->viewports[frame];
+    lights=&view->lights[frame][0];
+    viewport->vscale[0]=vx; viewport->vscale[1]=vy;
+    viewport->vtrans[0]=(s16)(s32)((vx*D_800C32BC_de+view->viewportX)*D_800C32C0_de);
+    viewport->vtrans[1]=(s16)(s32)((vy*D_800C32BC_de+view->viewportY)*D_800C32C0_de);
+    gSPMoveMem((*setup)++, G_MV_VIEWPORT, 0, 16, viewport);
     gDPSetScissorFrac((*setup)++, G_SC_NON_INTERLACE, (s32)((s16)ulx*D_800C32C0_de), (s32)((s16)uly*D_800C32C0_de), (s32)((s16)lrx*D_800C32C0_de), (s32)((s16)lry*D_800C32C0_de));
-    gSPMoveMem((*setup)++, G_MV_LIGHT, 0, 16, &view->lights[D_800D297C][0]);
-    gSPMoveMem((*setup)++, G_MV_LIGHT, 24, 16, &view->lights[D_800D297C][4]);
+    gSPMoveMem((*setup)++, G_MV_LIGHT, 0, 16, lights);
+    gSPMoveMem((*setup)++, G_MV_LIGHT, 24, 16, lights+4);
     func_8026E330_de(view->effect);
-    if (view!=&D_80141008) func_80296004_de(view->effect);
+    if (view!=&D_80140FF8.view) func_80296004_de(view->effect);
     }
     flag=0; func_8026D88C_de(); func_80295FF4_de();
     gDPSetTextureFilter((*dl)++, G_TF_BILERP);
     if(func_802A23B4_de()!=0) flag=func_80299958_de()!=2;
-    if(view!=&D_80141008 || D_80140FF8==0 || flag!=0) {
+    if(view!=&D_80140FF8.view || D_80140FF8.unk0==0 || flag!=0) {
         Gfx **clearDl = &D_80110634;
         func_8026925C_de(0x14);
         gDPPipeSync((*clearDl)++);
@@ -96,7 +102,7 @@ void func_80235AE0_de(Racer *view) {
         else {
             gDPSetFillColor(D_80110634++, (((((rgb.red<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E))|1)<<16)|1|(((rgb.red<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E)));
         }
-        if(view!=&D_80141008 || D_80146878==3) {
+        if(view!=&D_80140FF8.view || D_80140FF8.state.unk0==3) {
             gDPFillRectangle(D_80110634++, ulx, uly, lrx, lry);
         }
     }
@@ -104,6 +110,6 @@ void func_80235AE0_de(Racer *view) {
     func_8026D914_de(0);
     gDPSetAlphaDither(D_80110634++, G_AD_NOTPATTERN);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-    if(view!=&D_80141008)func_802659E0_de(view);
+    if(view!=&D_80140FF8.view)func_802659E0_de(view);
     gDPPipeSync(D_80110634++);
 }

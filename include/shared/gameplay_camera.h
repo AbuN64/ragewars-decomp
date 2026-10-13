@@ -1,6 +1,7 @@
 #ifndef RW_GAMEPLAY_CAMERA_H
 #define RW_GAMEPLAY_CAMERA_H
 #include "types.h"
+#include "span_1000/code_80233920.h"
 #include "common/types_06e4f7ef1f9e.h"
 /* Complete camera records and callback ABI from origin/legacy func_80234FDC.c. */
 typedef struct Shared_func_80234FDC_S5 Shared_func_80234FDC_S5;
@@ -99,7 +100,8 @@ struct Shared_func_80234FDC_S2 {
     Vec3 position; /* +0x128: camera position */
     char pad134[0x4];
     f32 unk138; /* +0x138: src/func_80234FDC.c */
-    char pad13C[0x14];
+    char pad13C[4];
+    Vector4f orientation;
     f32 unk150; /* +0x150: src/func_80234FDC.c */
     char pad154[0xC];
     s8 unk160; /* +0x160: src/func_80234FDC.c */
@@ -131,7 +133,8 @@ struct Shared_func_80234FDC_S2 {
     char pad534[0x20];
     char unk554[28]; /* +0x554: src/func_80234FDC.c */
     s8 unk570; /* +0x570: src/func_80234FDC.c */
-    char pad571[0x8E3];
+    char pad571[0xE40 - 0x571];
+    IntrusiveList objects;
     f32 unkE54; /* +0xE54: src/func_80234FDC.c */
     char padE58[0x3C];
     s8 unkE94; /* +0xE94: src/func_80234FDC.c */
@@ -153,7 +156,9 @@ struct Shared_func_80234FDC_S4 {
     s32 unk0; /* +0x0: src/func_80234FDC.c */
     s32 unk4; /* +0x4: src/func_80234FDC.c */
     s32 unk8; /* +0x8: src/func_80234FDC.c */
-    char padC[0x1223];
+    char padC[4];
+    Racer view; /* +0x10: D_80141008, the render view embedded in D_80140FF8 */
+    char padView[0x122F - 0x10 - sizeof(Racer)];
     u8 unk122F; /* +0x122F: src/func_80234FDC.c */
     char pad1230[0x590];
     Shared_func_80234FDC_S5 state; /* +0x17C0: src/func_80234FDC.c */
