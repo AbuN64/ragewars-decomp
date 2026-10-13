@@ -2,14 +2,15 @@
 #include "types.h"
 #include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
-#include "shared/func_8021E2A0_de_closed.h"
-#include "span_C76B0/data.h"
 extern void func_80274870_de(f32 *,f32,f32);
 extern void func_802231D4_de(SharedPlayer *,func_802165F8_S1 *,char *);
-extern char D_800CED30;
-/* The effect helper accepts the actor context through its Object interface. */
-void func_8022470C_de(SharedPlayer_func_802233F0_de *arg0, func_802165F8_S1 *arg1) {
-    void *playerContext = arg0;
+extern char D_800CE7E4,D_800CE7FC,D_800CED30;
+extern f32 D_800D2988;
+extern f32 D_800C29C0_de,D_800C29C4_de,D_800C29C8_de,D_800C29CC_de,D_800C29D0_de,D_800C29D4_de,D_800C29D8_de,D_800C29DC_de,D_800C29E0_de,D_800C29E4_de,D_800C29E8_de,D_800C29EC_de,D_800C29F0_de,D_800C29F4_de,D_800C29F8_de,D_800C29FC_de;
+/* State callbacks receive an opaque actor context. */
+void func_8022470C_de(void *playerContext, void *bodyContext) {
+    SharedPlayer_func_802233F0_de *arg0 = playerContext;
+    func_802165F8_S1 *arg1 = bodyContext;
     f32 temp_fv0;
     f32 temp_fv1;
     f32 var_fv0f;
