@@ -1,3 +1,4 @@
+#include "span_1000/code_8027302C.h"
 #include "types.h"
 #include "shared/func_80214624_de_closed.h"
 #include "span_1000/code_8027A0F4.h"
@@ -12,7 +13,6 @@ void func_802727D8_de(void *);
 void func_8026F620_de(f32 *, f32 *, f32 *);
 void func_8028C6D4_de(void *, Vec3 *, struct Shared_ParticleLighting *);
 void func_80273760_de(void *, f32);
-void func_802733B4_de(void *, f32, f32, f32);
 void func_80273448_de(void *, f32, f32, f32);
 f32 func_80275DD4_de(void *, f32, f32);
 f32 func_8027525C_de(void *, f32, f32);

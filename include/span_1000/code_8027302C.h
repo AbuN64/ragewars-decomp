@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_1000_CODE_8027302C_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
+extern void func_802733B4_de(void *matrix, f32 x, f32 y, f32 z);
 extern void func_802736D4_de(void *matrix, f32 angle);
 
 struct Mtx;

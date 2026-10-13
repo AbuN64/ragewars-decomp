@@ -1,3 +1,4 @@
+#include "span_1000/code_8027302C.h"
 #include "types.h"
 /* Builds a player's aiming marker matrices for the current view D_800D297C and turns the marker on at
    0x1214: a beam from the eye (the view position at 0x128, or func_8022B144_de without a view) toward the
@@ -26,7 +27,6 @@ extern void func_802727D8_de(Matrix *);
 extern void func_80272E3C_de(Matrix *, f32, f32, f32);
 extern void func_80273198_de(Matrix *, Vec3 *);
 extern void func_80273448_de(Matrix *, Vec3);
-extern void func_802733B4_de(Matrix *, f32, f32, f32);
 extern void func_8027347C_de(Matrix *, f32, f32, f32);
 extern f32 func_802726F8_de(Vec3 *, Vec3 *);
 extern void func_8027027C_de(Matrix *, Matrix *);
