@@ -25,8 +25,8 @@ extern void func_8025D928_de(void *arg0);
 struct ObjectState40;
 /* unbake published declaration: published_15e1076b86544cc302b546f3 */
 struct ObjectState40 {
-    func_80230BB8_S2_U1D8 unk_0;
-    char pad0[0x14 - 0x0 - sizeof(func_80230BB8_S2_U1D8)];
+    struct Context_func_80257360_de *context;
+    char pad4[0x10];
     s32 unk_14;
     char pad18[4];
     s32 flags; /* 0x1C */
@@ -173,6 +173,7 @@ extern float D_800C4028_de;
 
 /* unbake published declaration: published_d3d313e78b8622823f026607 */
 extern float D_800C4020_de;
+extern float D_800C4024_de;
 
 struct func_8025DD80_S1;
 /* unbake published declaration: published_d9eb9dac083d54853e98f36f */
