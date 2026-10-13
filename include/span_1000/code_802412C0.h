@@ -322,7 +322,10 @@ struct Query_func_80241BAC_de {
     s32 word8;
     s32 wordC;
     s32 word10;
-    u8 pad14[0x40];
+    s32 valid; /* 0x14 */
+    Vec3 point; /* 0x18 */
+    u8 pad24[0x24];
+    Vec3 normal; /* 0x48 */
     void *input;
     s32 index;
     u8 pad5C[0x80];
