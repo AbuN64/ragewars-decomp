@@ -1,3 +1,4 @@
+#include "span_16E000/menu_ui_providers.h"
 #include "shared/world.h"
 #include "span_16E000/code_804221A0.h"
 #include "types.h"
@@ -17,9 +18,9 @@ extern struct Screen_func_80422960_de *D_800E4518;
 extern struct Game_func_80422960_de *D_800E2830;
 
 extern s32 D_8015402C;
-extern char D_80145088[];
 
-extern u8 D_801462C8[];
+
+
 
 extern s32 func_8043C308_de(struct Screen_func_80422960_de *);
 extern void func_8043C080_de(struct Screen_func_80422960_de *);
@@ -44,7 +45,7 @@ s32 func_80422960_de(void *item, s32 arg1, s32 event) {
     s32 state;
     s32 humans;
     s32 i;
-    u8 *settings;
+    Shared_Game *settings;
     u8 *player;
     s32 *pause;
 
@@ -74,23 +75,23 @@ s32 func_80422960_de(void *item, s32 arg1, s32 event) {
             } else {
                 func_8025E2D4_de(D_800E4518->arena);
             }
-            pause = &((func_80422C20_S1 *)D_80145088)->unk180C;
+            pause = &D_80145088.status[7];
             *pause = 0;
             if (D_800E4518->mode == -1) {
                 humans = 0;
                 i = 0;
                 player = (u8 *)pause - 0x5CC;
                 do {
-                    if (player[i * 0x96 + 0x161] == 0 && player[i * 0x96 + 0x148] == 1) {
+                    if (((Shared_Game *)player)->playerSettings[i].locked == 0 && ((Shared_Game *)player)->playerSettings[i].enabled == 1) {
                         humans++;
                     }
                     i++;
                 } while (i < 4);
-                settings = D_801462C8;
-                if (settings[0x580] == 2 && humans >= 2) {
+                settings = &D_801462C8;
+                if (settings->reserved580 == 2 && humans >= 2) {
                     func_8040C428_de(1);
                 } else {
-                    func_8040C428_de(settings[0x580]);
+                    func_8040C428_de(settings->reserved580);
                 }
                 func_802A230C_de();
                 return 0;

@@ -56,7 +56,7 @@ struct Shared_Surface {
     u16 item; /* +0x4C: src/func_80220EB0.c */
     u16 pad4E; /* +0x4E: src/func_80220EB0.c */
     u16 sound; /* +0x50: src/func_80220EB0.c */
-    char pad52[0x2];
+    u16 flags52; /* 0x52 */
 };
 typedef char Shared_Surface_size_check[(sizeof(Shared_Surface) == 0x54) ? 1 : -1];
 

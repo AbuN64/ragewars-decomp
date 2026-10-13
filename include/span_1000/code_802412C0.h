@@ -44,7 +44,10 @@ typedef struct func_80241940_S1 func_80241940_S1;
 struct ElementE8;
 /* unbake published declaration: published_0445ba05aaec1c45a7452b73 */
 struct ElementE8 {
-    char pad0[0xB8];
+    char pad0[0x68];
+    Matrix_func_80213CF8_de transform; /* 0x68 */
+    u8 padA8[0xC];
+    void **resource; /* 0xB4 */
     Box box;
     char padD0[0x8];
     u16 flags;
@@ -220,7 +223,9 @@ typedef struct Input_func_80242550_de Input_func_80242550_de;
 struct ActorB0;
 /* unbake published declaration: published_5d8625a8acee59c8329c17b4 */
 struct ActorB0 {
-    u8 pad0[0x40];
+    u8 pad0[0x1C];
+    f32 height; /* 0x1C */
+    u8 pad20[0x20];
     s32 *flags;
     u8 pad44[0x68];
     u8 *data;
@@ -263,7 +268,7 @@ typedef struct Query_func_80242288_de Query_func_80242288_de;
 
 struct Shape_func_802764D4_de_2;
 /* unbake published declaration: published_62e60b8daec117d0562a4691 */
-extern void func_80243814_de(struct Shape_func_802764D4_de_2 *arg0, struct Shape_func_802764D4_de_2 *arg1);
+extern void func_80243814_de(struct Hit8 *arg0, struct Hit8 *arg1);
 
 struct FloatState68;
 /* unbake published declaration: published_647fcf158541faf521b168c9 */
@@ -366,7 +371,9 @@ struct ContextB0 {
     f32 step;
     ElementE8 *element;
     s32 kind;
-    char pad60[0x48];
+    char pad60[4];
+    Matrix_func_80213CF8_de transform; /* 0x64 */
+    void *vertices; /* 0xA4 */
     s32 isKind9;
     char padAC[0x4];
 };

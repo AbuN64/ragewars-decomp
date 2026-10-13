@@ -1,3 +1,6 @@
+#include "common/unused.h"
+#include "shared/gameplay_transition.h"
+#include "shared/gameplay_round_rules.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80246E34.h"
@@ -36,9 +39,9 @@ Vector4f func_8024796C_de(char *actor) {
     f32 angle;
     f32 sine;
 
-    if (((func_8024795C_S1 *)(actor))->unk100 & 0x300000) {
-        player = ((func_8024795C_S1 *)(actor))->unk1D8;
-        weapon = ((func_8024795C_S2 *)(player))->unk5DC;
+    if (((Actor_func_8024A7A0_de *)actor)->flags & 0x300000) {
+        player = ((Actor_func_8024A7A0_de *)actor)->controller;
+        weapon = ((Shared_ActorView *)player)->message;
         if (weapon != 0) {
             angle = 1.5707964f;
             D_80115DEC = func_802B7130_de(angle);
@@ -46,7 +49,7 @@ Vector4f func_8024796C_de(char *actor) {
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
             yaw.w = func_802B6560_de(angle);
-            func_80274098_de(&result, &yaw, &((func_8024795C_S3 *)(weapon))->unk140);
+            func_80274098_de(&result, &yaw, &((Shared_func_80227014_S4 *)weapon)->orientation);
         } else {
             angle = 1.5707964f;
             func_80226C60_de(player, &own);
@@ -57,33 +60,33 @@ Vector4f func_8024796C_de(char *actor) {
             yaw.w = func_802B6560_de(angle);
             func_80274098_de(&result, &yaw, &own);
         }
-    } else if (*((func_8024795C_S1 *)(actor))->unk18 == 4) {
-        sine = func_802B7130_de(((func_8024795C_S1 *)(actor))->unk294 * 0.5f);
+    } else if (*((Actor_func_8024A7A0_de *)actor)->definition == 4) {
+        sine = func_802B7130_de(((Actor_func_8024A7A0_de *)actor)->pitch * 0.5f);
         pitch.x = sine;
         pitch.y = 0.0f;
         pitch.z = 0.0f;
-        angle = ((func_8024795C_S1 *)(actor))->unk294 * 0.5f;
+        angle = ((Actor_func_8024A7A0_de *)actor)->pitch * 0.5f;
         D_80115DEC = sine;
         pitch.w = func_802B6560_de(angle);
-        sine = func_802B7130_de((((func_8024795C_S1 *)(actor))->unk6C + 3.1415927f) * 0.5f);
+        sine = func_802B7130_de((((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
-        angle = (((func_8024795C_S1 *)(actor))->unk6C + 3.1415927f) * 0.5f;
+        angle = (((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
         yaw.w = func_802B6560_de(angle);
         func_80274098_de(&both, &pitch, &yaw);
         func_80203848_de(&base, actor, (char *)actor + 0x170);
         func_80274098_de(&result, &both, &base);
     } else {
-        sine = func_802B7130_de((((func_8024795C_S1 *)(actor))->unk6C + 3.1415927f) * 0.5f);
+        sine = func_802B7130_de((((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
-        angle = (((func_8024795C_S1 *)(actor))->unk6C + 3.1415927f) * 0.5f;
+        angle = (((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
         yaw.w = func_802B6560_de(angle);
-        func_80274098_de(&result, &yaw, &((func_8024795C_S1 *)(actor))->unk5C);
+        func_80274098_de(&result, &yaw, &((Actor_func_8024A7A0_de *)actor)->rotation);
     }
     return result;
 }

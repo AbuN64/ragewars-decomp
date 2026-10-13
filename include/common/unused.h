@@ -5736,9 +5736,13 @@ struct Actor_func_8024A7A0_de {
     void *shadow; /* 0xBC */
     u8 padC0[4];
     s32 resource; /* 0xC4 */
-    u8 padC8[8];
+    s32 resourceKey; /* 0xC8 */
+    s32 animationKey; /* 0xCC */
     s32 resourceFlags; /* 0xD0 */
-    u8 padD4[0xE4 - 0xD4];
+    s32 resourceAlignment; /* 0xD4 */
+    s32 resourceHandle; /* 0xD8 */
+    s32 resourceState; /* 0xDC */
+    s32 resourceWindow; /* 0xE0 */
     u16 type; /* 0xE4 */
     u8 stateE6;
     u8 stateE7;
@@ -5763,7 +5767,9 @@ struct Actor_func_8024A7A0_de {
     s32 mask;
     u8 pad180[0x20];
     s32 collisionEnabled; /* 0x1A0 */
-    u8 pad1A4[0x34];
+    u8 pad1A4;
+    s8 animationState; /* 0x1A5 */
+    u8 pad1A6[0x32];
     s32 controller; /* 0x1D8 */
     u8 pad1DC[0x14];
     char *lockOn; /* 0x1F0 */
@@ -5772,7 +5778,13 @@ struct Actor_func_8024A7A0_de {
     u8 updateCount; /* 0x23B */
     u8 pad23C[0x40];
     void *update; /* 0x27C */
-    u8 pad280[0x60];
+    u8 pad280[0xC];
+    void (*controllerUpdate)(void *, void *); /* 0x28C */
+    u8 pad290[4];
+    f32 pitch; /* 0x294 */
+    u8 pad298[0xC];
+    f32 restPitch; /* 0x2A4 */
+    u8 pad2A8[0x38];
     s32 renderFlags; /* 0x2E0 */
     s32 flags2E4;
 };
@@ -6242,6 +6254,8 @@ struct Dest {
     u8 count;
     char padCC[0x30];
     struct Node_func_8025CBEC_de *sound; /* 0xFC */
+    u8 pad100[0x34];
+    f32 restPitch; /* 0x134 */
 };
 typedef void *( *StateCallback)(struct Source110 *, struct Dest *);
 struct StateEntry {
