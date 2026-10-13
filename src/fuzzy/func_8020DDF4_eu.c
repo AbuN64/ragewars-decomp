@@ -1,40 +1,41 @@
 #include "span_1000/code_8020D370.h"
+extern const f32 D_800C207C_eu;
+extern const f32 D_800C2080_eu;
+extern const f32 D_800C2084_eu;
+extern const f32 D_800C2088_eu;
+extern const f32 D_800C208C_eu;
+extern const f32 D_800C2090_eu;
+extern const f32 D_800C2094_eu;
+extern const f32 D_800C2098_eu;
+extern const f32 D_800C209C_eu;
+extern const f32 D_800C20A0_eu;
+extern const f32 D_800C20A4_eu;
+extern const f32 D_800C20A8_eu;
+extern const f32 D_800C20AC_eu;
+extern const f32 D_800C20B0_eu;
+extern const f32 D_800C20B4_eu;
+extern const f32 D_800C20B8_eu;
+extern const f32 D_800C20BC_eu;
+extern const f32 D_800C20C0_eu;
+extern const f32 D_800C20C4_eu;
+extern const f32 D_800C20C8_eu;
+extern const f32 D_800C20CC_eu;
+extern const f32 D_800C20D0_eu;
+extern const f32 D_800C20D4_eu;
+extern const f32 D_800C20D8_eu;
+extern const f32 D_800C20DC_eu;
 extern char *func_8028FDB4_de(s32 *, s32);
 extern f32 func_8029DD3C_de(f32);
 s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4);
 f32 func_80285630_de(s32 arg0);
 s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral);
-extern f32 D_800C2088_eu;
-extern f32 D_800C208C_eu;
-extern f32 D_800C2090_eu;
-extern f32 D_800C2094_eu;
-extern f32 D_800C2098_eu;
-extern f32 D_800C209C_eu;
-extern f32 D_800C20A0_eu;
-extern f32 D_800C20A4_eu;
-extern f32 D_800C207C_eu;
-extern f32 D_800C2080_eu;
-extern f32 D_800C2084_eu;
-extern f32 D_800C20A8_eu;
-extern f32 D_800C20AC_eu;
-extern f32 D_800C20B0_eu;
-extern f32 D_800C20B4_eu;
-extern f32 D_800C20B8_eu;
-extern f32 D_800C20BC_eu;
-extern f32 D_800C20C0_eu;
-extern f32 D_800C20C4_eu;
-extern f32 D_800C20C8_eu;
-extern f32 D_800C20CC_eu;
-extern f32 D_800C20D0_eu;
-extern f32 D_800C20D4_eu;
-extern f32 D_800C20D8_eu;
-extern f32 D_800C20DC_eu;
 extern s32 *D_8013D534;
 
 s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     Vec3 current;
     Vec3 delta;
     s32 first, last;
+    s32 keyCount;
     InstanceHdr *temp_v0;
     InstanceHdr *temp_v0_5;
     f32 temp_fs0;
@@ -146,23 +147,20 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
                     } else {
                         arg0->field278 = func_8029C044_de(temp_fs1, temp_fs0f) * D_800C2090_eu;
                     }
-                    temp_fv1_2 = arg0->field278;
-                    var_fv0 = D_800C2094_eu;
-                    arg0->field24C = temp_fv1_2;
-                    if (var_fv0 < temp_fv1_2) {
+                    arg0->field24C = arg0->field278;
+                    if (D_800C2094_eu < arg0->field278) {
                         arg0->field284 = 0;
                     } else {
                         var_v0 = 1;
-                        if (!(temp_fv1_2 > 0.0f)) {
+                        if (!(arg0->field278 > 0.0f)) {
                             var_v0 = 2;
-                            if (!(D_800C2098_eu < temp_fv1_2)) {
+                            if (!(D_800C2098_eu < arg0->field278)) {
                                 var_v0 = 3;
                             }
                         }
                         arg0->field284 = var_v0;
-                        var_fv0 = D_800C209C_eu;
                     }
-                    arg0->field27C = D_800C20A0_eu - ((f32) arg0->field284 * var_fv0);
+                    arg0->field27C = D_800C20A0_eu - ((f32) arg0->field284 * D_800C209C_eu);
                     arg0->field280 = arg0->field278;
                     arg0->field278 = (arg0->field27C + arg0->field280) * D_800C20A4_eu;
                     if (arg0->field270 != 0) {
@@ -172,32 +170,29 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
             }
         } else {
             if (temp_v1 < 0xB) {
-                if (temp_s0 == 9) goto selected;
-                if (temp_s0 < 10) {
-                    if (temp_s0 == 2) var_s2 = 0x12E;
-                } else {
-                    if (temp_s0 == 10) goto selected;
-                    if (temp_s0 == 12) goto selected;
+                switch (temp_s0) {
+                case 2: var_s2 = 0x12E; break;
+                case 9: var_s2 = 0x12E; break;
+                case 10: var_s2 = 0x12E; break;
+                case 12: var_s2 = 0x12E; break;
                 }
             } else if (temp_v1 < 0x15) {
                 arg0->field270 = 0;
-                if (temp_s0 == 8) goto selected;
-                if (temp_s0 < 9) {
-                    if (temp_s0 == 6) var_s2 = 0x12E;
-                } else {
-                    if (temp_s0 == 9) goto selected;
+                switch (temp_s0) {
+                case 6: var_s2 = 0x12E; break;
+                case 8: var_s2 = 0x12E; break;
+                case 9: var_s2 = 0x12E; break;
                 }
+            } else {
+                goto block_88;
             }
-            goto ready;
-selected:
-            var_s2 = 0x12E;
-ready:
             {
 block_43:
                 if (arg0->field268 < 0x15) {
                     temp_s0_2 = D_8013D534;
                     temp_v0_2 = (void *)func_8028FDB4_de(temp_s0_2, 1);
-                    if (func_80265550_de(temp_v0_2->keys, temp_v0_2->count, var_s2, &first, &last) == 0) {
+                    keyCount = temp_v0_2->count;
+                    if (func_80265550_de(temp_v0_2->keys, keyCount, var_s2, &first, &last) == 0) {
                         arg0->field270 = 0;
                         arg0->field274 = 0;
                         arg0->field268 = 0;
@@ -225,10 +220,9 @@ block_43:
                     temp_fs1 = delta.y;
                     delta.y = 0;
                     temp_fs0f = func_802B72B0_de((delta.x * delta.x) + (delta.z * delta.z));
-                    temp_fs0 = D_800C20A8_eu;
-                    temp_fv0_4 = func_802B6560_de(arg0->field278 * temp_fs0);
+                    temp_fv0_4 = func_802B6560_de(arg0->field278 * D_800C20A8_eu);
                     temp_fs0_2 = temp_fv0_4 * temp_fv0_4;
-                    temp_fv0f_2 = (func_8029DD3C_de(arg0->field278 * temp_fs0) * temp_fs0f) + ((temp_fv0_3 * (temp_fs0f * temp_fs0f)) / (2.0f * (temp_fs1f * temp_fs1f) * temp_fs0_2));
+                    temp_fv0f_2 = (func_8029DD3C_de(arg0->field278 * D_800C20A8_eu) * temp_fs0f) + ((temp_fv0_3 * (temp_fs0f * temp_fs0f)) / (2.0f * (temp_fs1f * temp_fs1f) * temp_fs0_2));
                     if (((temp_fs1 - D_800C20AC_eu) <= temp_fv0f_2) && (temp_fv0f_2 <= (temp_fs1 + D_800C20AC_eu))) {
                         if (func_8020E674_de(arg0, temp_fs1f, temp_fv0_3) != 0) {
                             temp_v0_6 = arg0->field284;
@@ -246,10 +240,10 @@ block_54:
                             }
                         }
                         if ((arg0->field270 != 0) && (arg0->field274 != 0)) {
-                            temp_fv1f_3 = arg0->field24C;
                             arg0->field268 = 0xB;
                             arg0->field270 = 0;
                             arg0->field250 = (f32) (arg0->field278 - arg0->field248);
+                            temp_fv1f_3 = arg0->field24C;
                             if (D_800C20B8_eu < temp_fv1f_3) {
                                 arg0->field284 = 0;
                             } else {
