@@ -16,8 +16,9 @@ void func_8025CBEC_de(void *arg0) {
     Node_func_8025CBEC_de *cur;
     Node_func_8025CBEC_de *next;
     s32 value;
+    SoundVoicePool *pool = arg0;
 
-    cur = ((func_8025CC0C_S1 *)(arg0))->unk14.head;
+    cur = pool->playing.head;
     if (cur != 0) {
         do {
             value = cur->value;
@@ -25,8 +26,8 @@ void func_8025CBEC_de(void *arg0) {
             func_8025E174_de(value);
             cur->state = -1;
             cur->value = -1;
-            func_80255ED8_de(&((func_8025CC0C_S1 *)(arg0))->unk14, cur);
-            func_80255D14_de(arg0, cur);
+            func_80255ED8_de(&pool->playing, cur);
+            func_80255D14_de(&pool->available, cur);
             cur = next;
         } while (cur != 0);
     }
