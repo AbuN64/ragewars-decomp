@@ -10,15 +10,16 @@ extern int D_800C32D0_de;
 
 
 void func_8023A114_de(void *arg0, s32 arg1) {
-    void *ret;
+    MessageBuffer *buffer = arg0;
+    s32 *ret;
     s32 scaled;
     s32 first;
 
     scaled = arg1 * 0xED8;
-    ((func_8023A104_S1 *)(arg0))->unk8 = arg1;
+    buffer->count = arg1;
     ret = func_8025343C_de(0, scaled, 0x23, (char *)&D_800C32D0_de + 4);
-    ((func_8023A104_S1 *)(arg0))->unk0 = ret;
-    first = *(s32 *)ret;
-    ((func_8023A104_S1 *)(arg0))->unk4 = first;
+    buffer->allocation = ret;
+    first = *ret;
+    buffer->first = first;
     func_802A001C_de(first, 0, scaled);
 }

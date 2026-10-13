@@ -377,9 +377,17 @@ struct func_80239668_S2 {
 };
 
 
+/* Allocation buffer used by message storage constructors. */
+typedef struct MessageBuffer {
+    s32 *allocation;
+    s32 first;
+    s32 count;
+} MessageBuffer;
+
 /* On-screen message recycling and distribution share these list owners. */
 struct ScreenMessageOwner {
-    u8 padding000[0xF24];
+    u8 padding000[0xF18];
+    MessageBuffer storage; /* 0xF18 */
     IntrusiveList activeMessages; /* 0xF24 */
 };
 struct ScreenMessagePool {
