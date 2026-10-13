@@ -1,14 +1,14 @@
+#include "shared/player_movement_interfaces.h"
 #include "types.h"
+#include "span_1000/code_8021CD70.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "shared/gameplay_movement.h"
 #include "shared/func_80425674_de_layout.h"
+#include "span_1000/code_80204E78.h"
 extern char D_800CED30;
-extern const f32 D_800C2A64_de;
-extern const f32 D_800C2A68_de;
 s32 func_8024E62C_de(void *);
-s32 func_802227F4_de(void *, void *, s32);
-s32 func_8025DE54_de(s32, Vec3, s32, s32);
 void func_80274870_de(f32 *, f32, f32);
+/* Updates swimming turn, pitch, stride motion, sounds, and animation. */
 void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     Shared_Game *game;
     f32 temp_fs0;
@@ -18,7 +18,6 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     f32 temp_fs0_6;
     f32 temp_fv0;
     f32 temp_fv0f;
-    f32 temp_fv0f_2;
     f32 temp_fv0f_3;
     f32 temp_fv0f_4;
     f32 temp_fv1;
@@ -35,10 +34,12 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     f32 var_fv0_5;
     f32 var_fv0f;
     f32 var_fv0f_2;
-    s32 var_a0;
     s32 temp_v1;
     s32 var_v0;
     s32 var_v0_2;
+    f32 *eyex;
+    f32 *eyey;
+    f32 *eyez;
     s32 var_v0_3;
     s32 var_v1;
 
@@ -157,15 +158,22 @@ block_25:
             }
         }
     }
+    eyex = &player->views5E8.view6E8_79.unk6E8.x;
+    eyey = &player->views5E8.view6E8_79.unk6E8.y;
+    eyez = &player->views5E8.view6E8_79.unk6E8.z;
     temp_fv0f_4 = body->views1C.view6C_5.heading;
     temp_fs0_5 = D_800C2AD8_de;
     temp_fs0_6 = func_802B7130_de(temp_fv0f_4 - temp_fs0_5);
     temp_fv0 = func_802B6560_de(body->views1C.view6C_5.heading - temp_fs0_5);
-    player->views5E8.view6E8_79.unk6E8.x += temp_fs0_6 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
-    player->views5E8.view6E8_79.unk6E8.z += temp_fv0 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
-    temp_fv0 = player->views5E8.view6E8_79.unk6E8.y + player->views5E8.view6C0_51.unk6C0 * (D_800D2988 * D_800C2ADC_de);
-    player->views5E8.view6E8_79.unk6E8.y = temp_fv0;
+    {
+    f32 horizontal = *eyex + temp_fs0_6 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
+    f32 coefficient = D_800C2ADC_de;
+    f32 frameDelta = D_800D2988;
+    *eyex = horizontal;
+    *eyez += temp_fv0 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
+    temp_fv0 = *eyey + player->views5E8.view6C0_51.unk6C0 * (frameDelta * coefficient);
+    *eyey = temp_fv0;
     var_v0_3 = D_800CE47C;
     temp_v1 = player->views1C.viewE4_7.kind;
     if (temp_v1 != var_v0_3) { if (player->views5E8.view6C0_51.unk6C0 > 0.0f) { if (player->views13B4.view13B4_3.character != &D_800CED30) player->views5E8.view86C_125.unk86C = 0xA46; else player->views5E8.view86C_125.unk86C = 0x5E28; } else { if (player->views13B4.view13B4_3.character != &D_800CED30) player->views5E8.view86C_125.unk86C = 0xA3C; else player->views5E8.view86C_125.unk86C = 0x5E27; } } else { var_v0_3 = 0xA46; player->views5E8.view86C_125.unk86C = var_v0_3; }
-}
+}}

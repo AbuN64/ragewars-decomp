@@ -13,7 +13,7 @@ extern void func_802231D4_de(void *, void *, void *);
 extern void func_802233F0_de(void *, void *, void *);
 extern s32 func_802227F4_de(void *, void *, s32);
 extern char D_800CE7FC;
-extern char D_800CE7C0;
+extern struct SharedMovement D_800CE7C0;
 extern s32 D_800CED30;
 
 

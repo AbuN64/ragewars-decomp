@@ -1,3 +1,4 @@
+#include "shared/player_movement_interfaces.h"
 #include "span_1000/code_8021CD70.h"
 #include "types.h"
 

@@ -3845,7 +3845,11 @@ struct func_802165F8_S1;
 struct func_802165F8_S1 {
     char pad0[0x8];
     Vec3 unk8;
-    char pad8[0x6C - 0x8 - sizeof(Vec3)];
+    char pad14[4];
+    struct Model *model; /* +0x18: actor definition */
+    char pad1C[0x1C];
+    u32 flags; /* +0x38 */
+    char pad3C[0x30];
     f32 unk6C;
 };
 

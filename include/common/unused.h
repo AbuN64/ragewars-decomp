@@ -2424,7 +2424,7 @@ extern char D_800D47B0;
 extern f32 D_800C3D70_de;
 
 /* unbake published declaration: published_99125f9e533d9b4dcd6bbe39 */
-extern char D_800CE7C0;
+extern struct SharedMovement D_800CE7C0;
 
 /* unbake published declaration: published_994091290e8152a01f6349fe */
 
@@ -3552,7 +3552,7 @@ extern char D_00451B34[];
 extern s32 D_800CA2D8_de;
 
 /* unbake published declaration: published_e3c459d790d3251adfa53463 */
-extern char D_800C94EC_de;
+extern struct SharedMovement D_800C94EC_de;
 
 /* unbake published declaration: published_e3e7bd3567e2345dc8606a34 */
 extern char D_800D3878[];

@@ -6,7 +6,7 @@ extern void func_80274870_de(f32 *,f32,f32);
 extern void func_802231D4_de(SharedPlayer *,SharedPlayer *,char *);
 extern void func_802233F0_de(SharedPlayer *,SharedPlayer *,char *);
 extern s32 func_802227F4_de(SharedPlayer *,SharedPlayer *,s32);
-extern char D_800CE7E4,D_800CE7FC,D_800C94EC_de,D_800CE7C0,D_800CED30;
+extern char D_800CE7E4,D_800CE7FC,D_800CED30;
 extern f32 D_800D2988;
 extern f32 D_800C29C0_de,D_800C29C4_de,D_800C29C8_de,D_800C29CC_de,D_800C29D0_de,D_800C29D4_de,D_800C29D8_de,D_800C29DC_de,D_800C29E0_de,D_800C29E4_de,D_800C29E8_de,D_800C29EC_de,D_800C29F0_de,D_800C29F4_de,D_800C29F8_de,D_800C29FC_de;
 void func_8022470C_de(SharedPlayer *arg0, SharedPlayer *arg1) {

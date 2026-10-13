@@ -505,6 +505,7 @@ schema = 1
 "func_80224408_de" = { evidence = "landed", signature = "void func_80224408_de(SharedPlayer_func_80224408_de *player, Body_func_80224408_de *body)" }
 "func_80224C4C_de" = { evidence = "landed", signature = "void func_80224C4C_de(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_de *body)" }
 "func_80224F5C_de" = { evidence = "landed", signature = "void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_de *body)" }
+"func_802251DC_de" = { evidence = "landed", signature = "void func_802251DC_de(SharedPlayer *player, SharedPlayer *body)" }
 "func_80225940_de" = { evidence = "landed", signature = "void func_80225940_de(SharedPlayer_func_80225940_de *player, Body_func_80225940_de *body)" }
 "func_80225B98_de" = { evidence = "landed", signature = "void func_80225B98_de(void *arg0, void *arg1, s32 arg2)" }
 "func_80225F44_de" = { evidence = "landed", signature = "void func_80225F44_de(SharedPlayer_func_802233F0_de *player,func_802165F8_S1 *body)" }
@@ -5336,6 +5337,8 @@ schema = 1
 "D_800C2A58_de" = { declaration = "extern float D_800C2A58_de;", evidence = "authored" }
 "D_800C2A5C_de" = { declaration = "extern float D_800C2A5C_de;", evidence = "authored" }
 "D_800C2A60_de" = { declaration = "extern float D_800C2A60_de;", evidence = "authored" }
+"D_800C2A64_de" = { declaration = "extern const f32 D_800C2A64_de;", evidence = "authored" }
+"D_800C2A68_de" = { declaration = "extern const f32 D_800C2A68_de;", evidence = "authored" }
 "D_800C2A6C_de" = { declaration = "extern float D_800C2A6C_de;", evidence = "authored" }
 "D_800C2A70_de" = { declaration = "extern float D_800C2A70_de;", evidence = "authored" }
 "D_800C2A74_de" = { declaration = "extern float D_800C2A74_de;", evidence = "authored" }
