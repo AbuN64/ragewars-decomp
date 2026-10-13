@@ -492,7 +492,8 @@ s32 func_80207738_de(void *context, struct Input_func_80207738_de *option);
 
 typedef struct ActorMotionDefinition {
     s32 flags; /* 0x0 */
-    s32 radial; /* 0x4 */
+    u16 radial; /* 0x4 */
+    u8 pad6[2];
     u8 pad8[0x1C];
     s32 transitionFlags; /* 0x24 */
     u8 pad28[0x4];
