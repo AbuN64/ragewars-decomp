@@ -9,17 +9,18 @@ extern s32 func_8025E0F4_de(s32 arg0);
 
 
 void func_8025CB88_de(void *arg0) {
-    void *var_s0;
+    SoundVoicePool *pool = arg0;
+    Node_func_8025CBEC_de *var_s0;
 
-    if (((func_8025CAD0_S1 *)(arg0))->unk28 == 0) {
-        var_s0 = ((func_8025CAD0_S1 *)(arg0))->unk14;
+    if (pool->state == 0) {
+        var_s0 = pool->playing.head;
         if (var_s0 != 0) {
             do {
-                if (func_8025E0F4_de(((func_8025CBA8_S2 *)(var_s0))->unk8) == 0) {
-                    ((func_8025CBA8_S2 *)(var_s0))->unkC = -1;
-                    ((func_8025CBA8_S2 *)(var_s0))->unk8 = -1;
+                if (func_8025E0F4_de(var_s0->value) == 0) {
+                    var_s0->state = -1;
+                    var_s0->value = -1;
                 }
-                var_s0 = ((func_8025CBA8_S2 *)(var_s0))->unk4;
+                var_s0 = var_s0->next;
             } while (var_s0 != 0);
         }
     }

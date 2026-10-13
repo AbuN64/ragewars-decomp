@@ -16,7 +16,7 @@ void func_802B156C_de(List802B663C *arg0, void *arg1) {
     prev = 0;
     node = arg0->head;
     while (node != 0) {
-        if ((void *)&((func_8020C9CC_S1 *)(node))->unk4 == arg1) {
+        if ((void *)(node + 1) == arg1) {
             if (prev != 0) {
                 prev->next = node->next;
             } else {

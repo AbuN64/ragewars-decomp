@@ -12,16 +12,17 @@
 
 void func_8025CAB0_de(void *arg0) {
     s32 temp_v0;
-    void *var_s0;
+    SoundVoicePool *pool = arg0;
+    Node_func_8025CBEC_de *var_s0;
 
-    var_s0 = ((func_8025CAD0_S1 *)(arg0))->unk14;
+    var_s0 = pool->playing.head;
     if (var_s0 != 0) {
         do {
-            func_8025E174_de(((func_8025CA44_S2 *)(var_s0))->unk8);
-            temp_v0 = ((func_8025CA44_S2 *)(var_s0))->unk8;
-            var_s0 = ((func_8025CA44_S2 *)(var_s0))->unk4;
+            func_8025E174_de(var_s0->value);
+            temp_v0 = var_s0->value;
+            var_s0 = var_s0->next;
             D_800CBB18 = temp_v0;
         } while (var_s0 != 0);
     }
-    ((func_8025CAD0_S1 *)(arg0))->unk28 = 1;
+    pool->state = 1;
 }
