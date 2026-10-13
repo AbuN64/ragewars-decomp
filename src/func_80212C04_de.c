@@ -20,7 +20,10 @@ void func_80212C04_de(void *arg0) {
     s32 *rec;
     void *v0;
 
-    rec = ((func_80212C04_S2 *)(((func_8020A028_S3 *)(arg0))->unk1D8))->unk1454;
+    func_8020A028_S3 *object = arg0;
+    func_80212C04_S2 *actor = object->unk1D8;
+
+    rec = actor->unk1454;
     v0 = func_8022A83C_de(&D_80145040);
     if (v0 == (void *) *rec) {
         func_80209874_de(rec, 10);
