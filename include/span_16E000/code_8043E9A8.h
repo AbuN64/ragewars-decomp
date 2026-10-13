@@ -24,6 +24,9 @@ struct Player_func_8043F048_de;
 struct Holder_func_8043F048_de {
     char pad[0x1C];
     struct Player_func_8043F048_de *player;
+    char pad20[0x30 - 0x20];
+    f32 fade;
+    f32 alpha;
 };
 
 struct Flagged;
@@ -55,7 +58,8 @@ struct ItemDef;
 struct Item_func_8043F048_de;
 /* unbake published declaration: published_2cc1add42aadc0df688d8a6f */
 struct Item_func_8043F048_de {
-    char pad[0x18];
+    char pad[0x14];
+    s32 resource;
     struct ItemDef *def;
 };
 
@@ -136,4 +140,6 @@ extern s32 func_8043EDDC_de(void);
 extern s32 func_8043ED50_de(void);
 
 extern void func_8043E97C_de(void *arg0);
+extern f32 D_800E23A0[2];
+extern f32 D_800E23A8;
 #endif
