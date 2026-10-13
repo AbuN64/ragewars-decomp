@@ -160,8 +160,13 @@ typedef struct Scene_func_802A5180_de Scene_func_802A5180_de;
 struct Transform;
 /* unbake published declaration: published_22b2680a9df0f7055970bfc7 */
 struct Transform {
-    char pad0[0x18];
-    s16 position[3];
+    union {
+        PackedMatrixWords matrix;
+        struct {
+            char pad0[0x18];
+            s16 position[3];
+        };
+    };
 };
 
 /* unbake published declaration: published_23db517e0dea0ad42e305716 */
@@ -367,6 +372,11 @@ struct Track_func_802A274C_de {
     char pad0[4];
     f32 span;
     f32 total;
+    char padC[0x12 - 0xC];
+    u8 closed;
+    char pad13[0x21 - 0x13];
+    u8 scaleS, scaleT, count;
+    struct Blend blends[1];
 };
 struct Actor_func_802A274C_de;
 struct Track_func_802A274C_de;
@@ -374,8 +384,14 @@ struct Track_func_802A274C_de;
 struct Actor_func_802A274C_de {
     char pad0[8];
     struct Track_func_802A274C_de *track;
-    char pad12[0x18];
+    struct Key *first;
+    struct Key *second;
+    char pad14[0x24 - 0x14];
     f32 time;
+    char pad28[0x3C - 0x28];
+    u32 flags;
+    s32 field40;
+    func_80212828_S7 *clock;
 };
 
 struct Transform;
@@ -597,8 +613,11 @@ struct Morph {
     struct Blend *blends;
     struct Key *first;
     struct Key *second;
-    void *firstFrame;
-    void *secondFrame;
+    union { void *firstFrame; f32 scaleS; };
+    union { void *secondFrame; f32 scaleT; };
+    f32 textureScaleS;
+    f32 textureScaleT;
+    f32 step;
 };
 
 /* unbake published declaration: published_c8e043a8c8f2e916f786cfa4 */

@@ -2546,7 +2546,7 @@ schema = 1
 "func_802A31E8_de" = { evidence = "landed", signature = "void func_802A31E8_de(void *arg0, void *arg1, void *arg2, void *arg3)" }
 "func_802A339C_de" = { evidence = "landed", signature = "void func_802A339C_de(void *arg0, void *arg1)" }
 "func_802A3718_de" = { evidence = "declared", signature = "void func_802A3718_de(s32, void *, s32)" }
-"func_802A3DD4_de" = { evidence = "declared", signature = "void func_802A3DD4_de(s32, void *, s32)" }
+"func_802A3DD4_de" = { evidence = "landed", signature = "void func_802A3DD4_de(func_802A66B4_S1 *pool, Actor_func_802A274C_de *actor)" }
 "func_802A4134_de" = { evidence = "landed", signature = "s32 func_802A4134_de(AnimationFrameState *state, AnimationFrameDefinition *definition, s32 *frame_count)" }
 "func_802A42F4_de" = { evidence = "landed", signature = "void func_802A42F4_de(Root752C *arg0, Entity1DC *arg1)" }
 "func_802A4598_de" = { evidence = "declared", signature = "void func_802A4598_de(void *, Effect_func_802800C0_de *, s32)" }
@@ -4328,7 +4328,6 @@ schema = 1
 "func_8044D178_de" = { evidence = "landed", signature = "void func_8044D178_de(State_func_8044D0F0_de *state,int selection)" }
 "func_8044D1B4_de" = { evidence = "landed", signature = "void func_8044D1B4_de(char *state)" }
 "func_8044D220_de" = { evidence = "landed", signature = "s32 func_8044D220_de(Track_func_8044D220_de *track, s32 kind, s32 key, Object_func_8044D220_de *out, s32 max)" }
-"func_8044D3E8_de" = { evidence = "declared", signature = "s32 func_8044D3E8_de(void *, Vec3Words *, s32, void *)" }
 "func_8044D528_de" = { evidence = "landed", signature = "void func_8044D528_de(State_func_8044D528_de *state,int selection,int mode)" }
 "func_8044D580_de" = { evidence = "landed", signature = "void func_8044D580_de(State_func_8044D528_de *state)" }
 "func_8044D5C4_de" = { evidence = "landed", signature = "void func_8044D5C4_de(State_func_8044D5C4_de *arg0)" }
@@ -10179,7 +10178,7 @@ schema = 1
 "Cell_func_80259440_de" = { declaration = "struct Cell_func_80259440_de { s32 index; s32 pad4; s32 texture; s32 sequence; s32 frame; char pad14[0x44 - 0x14]; char data[1]; };", evidence = "authored" }
 "Cell_func_804122CC_de" = { declaration = "typedef struct Cell_func_804122CC_de Cell_func_804122CC_de;", evidence = "authored" }
 "Cell_func_80421BEC_de" = { declaration = "struct Cell_func_80421BEC_de { char pad[0x16]; s16 unk16; s16 unk18; s16 unk1A; };", evidence = "authored" }
-"Channel" = { declaration = "struct Channel { s32 mode; f32 level; char pad[0x14 - 8]; };", evidence = "authored" }
+"Channel" = { declaration = "struct Channel { s32 mode; f32 level; f32 field8; f32 fieldC; f32 field10; };", evidence = "authored" }
 "ChannelRecord" = { declaration = "typedef struct ChannelRecord ChannelRecord;", evidence = "authored" }
 "ChannelSet" = { declaration = "struct ChannelSet { s32 owner; Link_func_802596B4_de free; Header freeHeader; Link_func_802596B4_de active; Header activeHeader; Voice_func_802596B4_de voices[32]; };", evidence = "authored" }
 "Channel_func_8023B9C0_eu" = { declaration = "typedef struct Channel_func_8023B9C0_eu Channel_func_8023B9C0_eu;", evidence = "authored" }

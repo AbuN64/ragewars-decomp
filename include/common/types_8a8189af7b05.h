@@ -263,8 +263,11 @@ typedef struct func_80212828_S7 func_80212828_S7;
 struct func_80212828_S7;
 /* unbake published declaration: published_c8204325db8640c56fd7a968 */
 struct func_80212828_S7 {
-    char pad0[0x8];
+    struct func_80212828_S7 *next;
+    s32 field4;
     f32 unk8;
+    char padC[0x28 - 0xC];
+    s32 matrix[2][16];
 };
 
 struct Mode;

@@ -2089,7 +2089,7 @@ segments:
       - [0xA3ECC, c, "func_802A339C_de"]
       - [0xA407C, asm, "func_802A354C_de"]
       - [0xA4248, asm, "func_802A3718_de"]
-      - [0xA4904, asm, "func_802A3DD4_de"]
+      - [0xA4904, c, "func_802A3DD4_de"]
       - [0xA4C64, c, "func_802A4134_de"]
       - [0xA50C8, asm, "func_802A4598_de"]
       - [0xA52BC, asm, "func_802A478C_de"]
