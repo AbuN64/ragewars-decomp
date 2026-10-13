@@ -1,3 +1,6 @@
+#include "common/unused.h"
+#include "span_1000/code_8027A0F4.h"
+#include "shared/gameplay_transition.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028469C.h"
@@ -26,7 +29,7 @@ void func_80284B20_de(void *arg0) {
     f32 radius_sq;
     f32 height_scale;
 
-    amount = ((func_8025E58C_S1 *)(((func_80284AF4_S1 *)(arg0))->unk118))->unk10;
+    amount = ((Shared_Particle *)arg0)->desc->unk10;
     radius_sq = (f32)amount;
     if (radius_sq <= 0.0f) {
         return;
@@ -42,21 +45,21 @@ void func_80284B20_de(void *arg0) {
     actor_id = 0x40F;
     height_scale = (&D_800C4E90_de)[1];
     do {
-        point = ((func_80284AF4_S3 *)(node))->unk8;
+        point = ((Shared_ActorView *)node)->position.vector;
         stop = 0;
-        if (((func_80284AF4_S1 *)(arg0))->unk4 != actor_id) {
+        if (((Shared_Particle *)arg0)->inst.type != actor_id) {
             point.y += func_8024D284_de(node) * height_scale;
         }
-        if (func_802726BC_de(&((func_80284AF4_S1 *)(arg0))->unk8, point_ptr) < radius_sq) {
+        if (func_802726BC_de(&((Shared_Particle *)arg0)->inst.pos.x, point_ptr) < radius_sq) {
             func_80282E98_de(arg0, node);
-            if (((func_80284AF4_S1 *)(arg0))->unk4 == actor_id) {
+            if (((Shared_Particle *)arg0)->inst.type == actor_id) {
                 stop = 1;
             }
         }
         if (stop != 0) {
             node = 0;
         } else {
-            node = ((func_80284AF4_S3 *)(node))->unk16E0;
+            node = ((Shared_ActorView *)node)->next;
         }
     } while (node != 0);
 }
@@ -83,13 +86,13 @@ s32 func_80284C48_de(Instance8020CD74 *arg0, Arg1 *arg1) {
     instance = func_802392EC_de(arg1);
     if (instance != 0 && arg1->field24 == 0) {
         saved = *instance;
-        *(Vec3 *)&instance->w[2] = arg1->position128;
-        collisions = func_80243A90_de(instance, *(Vec3 *)&arg0->w[2], &D_80100030);
+        instance->position = arg1->position128;
+        collisions = func_80243A90_de(instance, arg0->position, &D_80100030);
         *instance = saved;
     } else {
         saved = *arg0;
-        *(Vec3 *)&saved.w[2] = arg1->position128;
-        collisions = func_80243A90_de(&saved, *(Vec3 *)&arg0->w[2], &D_80100030);
+        saved.position = arg1->position128;
+        collisions = func_80243A90_de(&saved, arg0->position, &D_80100030);
     }
     return collisions == 0;
 }
@@ -140,30 +143,30 @@ void func_80284FF4_de(void *arg0, s32 arg1, void *arg2) {
     u16 v;
     s8 *record;
 
-    ((func_8024C864_S1 *)(arg2))->unk0 = 0.0f;
-    ((func_8024C864_S1 *)(arg2))->unk4 = 0.0f;
-    ((func_8024C864_S1 *)(arg2))->unk8 = 0.0f;
-    record = ((func_802831FC_S1 *)(arg0))->unkFC3C;
+    ((Vec3 *)arg2)->x = 0.0f;
+    ((Vec3 *)arg2)->y = 0.0f;
+    ((Vec3 *)arg2)->z = 0.0f;
+    record = ((EffectSystem *)arg0)->lists[1].head;
     count = 0;
     if (record != 0) {
         do {
-            v = ((func_80284FC8_S3 *)(record))->unk4;
+            v = ((Effect_func_802800C0_de *)record)->kind;
             if (((v == 0x41E) || (v == 0x3EF)) &&
-                (((func_80284FC8_S3 *)(record))->unk12C == arg1) &&
-                (((func_80284FC8_S3 *)(record))->unk5C & 0x100)) {
-                ((func_8024C864_S1 *)(arg2))->unk0 += ((func_80284FC8_S3 *)(record))->unk8;
-                ((func_8024C864_S1 *)(arg2))->unk4 += ((func_80284FC8_S3 *)(record))->unkC;
+                (((Effect_func_802800C0_de *)record)->owner == arg1) &&
+                (((Effect_func_802800C0_de *)record)->flags & 0x100)) {
+                ((Vec3 *)arg2)->x += ((Effect_func_802800C0_de *)record)->pos.x;
+                ((Vec3 *)arg2)->y += ((Effect_func_802800C0_de *)record)->pos.y;
                 count += 1;
-                ((func_8024C864_S1 *)(arg2))->unk8 += ((func_80284FC8_S3 *)(record))->unk10;
+                ((Vec3 *)arg2)->z += ((Effect_func_802800C0_de *)record)->pos.z;
             }
-            record = ((func_80284FC8_S3 *)(record))->unk1EC;
+            record = ((Effect_func_802800C0_de *)record)->next;
         } while (record != 0);
     }
     if (count != 0) {
         temp_f2 = (f32)count;
-        ((func_8024C864_S1 *)(arg2))->unk0 = (f32)(((func_8024C864_S1 *)(arg2))->unk0 / temp_f2);
-        ((func_8024C864_S1 *)(arg2))->unk4 = (f32)(((func_8024C864_S1 *)(arg2))->unk4 / temp_f2);
-        ((func_8024C864_S1 *)(arg2))->unk8 = (f32)(((func_8024C864_S1 *)(arg2))->unk8 / temp_f2);
+        ((Vec3 *)arg2)->x = (f32)(((Vec3 *)arg2)->x / temp_f2);
+        ((Vec3 *)arg2)->y = (f32)(((Vec3 *)arg2)->y / temp_f2);
+        ((Vec3 *)arg2)->z = (f32)(((Vec3 *)arg2)->z / temp_f2);
     }
 }
 
@@ -182,16 +185,16 @@ void func_802850C8_de(void *arg0, void *arg1, f32 *arg2) {
     void *node;
 
     *arg2 = D_800C4EA0_de;
-    node = ((func_8028509C_S1 *)(arg0))->unkFC14;
+    node = ((EffectSystem *)arg0)->groups.head;
     if (node != 0) {
         do {
-            if (((func_8028509C_S2 *)(node))->unk12C != arg1 && (((func_8028509C_S2 *)(node))->unk5C & 0x100)) {
-                temp = func_802726BC_de(&((func_8028509C_S2 *)(node))->unk8, &((func_80212828_S7 *)(arg1))->unk8);
+            if (((Effect_func_802800C0_de *)node)->owner != arg1 && (((Effect_func_802800C0_de *)node)->flags & 0x100)) {
+                temp = func_802726BC_de(&((Effect_func_802800C0_de *)node)->pos.x, &((Actor_func_8024A7A0_de *)arg1)->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }
             }
-            node = ((func_8028509C_S2 *)(node))->unk1F4;
+            node = ((Effect_func_802800C0_de *)node)->groupNext;
         } while (node != 0);
     }
 }

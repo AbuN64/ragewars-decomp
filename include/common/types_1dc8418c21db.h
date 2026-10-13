@@ -3721,7 +3721,9 @@ extern unsigned char D_800D297B;
 struct Instance8020CD74;
 /* unbake published declaration: published_79de00ac1f7d845d7b716705 */
 struct Instance8020CD74 {
-    s32 w[20];
+    s32 w[2];
+    Vec3 position;
+    s32 remaining[15];
 };
 
 struct func_80293C20_S1;
