@@ -101,7 +101,10 @@ void func_80235AE0_de(Racer *view) {
         gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, buffer->colorImage);
         if(view->effect!=0) {gDPSetFillColor(D_80110634++, 0x10001);}
         else {
-            gDPSetFillColor(D_80110634++, (color=(((rgb.red<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E)), ((color|1)<<16)|1|(u16)color));
+            far=rgb.red;
+            gDPSetFillColor(D_80110634++, (far=((far<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E),
+                (((u32)(far|1)<<16)|1U)+(u16)far));
+
         }
         if(view!=&D_80140FF8.view || D_80140FF8.state.unk0==3) {
             gDPFillRectangle(D_80110634++, ulx, uly, lrx, lry);

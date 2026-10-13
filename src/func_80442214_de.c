@@ -149,7 +149,7 @@ s32 func_80442488_de(func_8022A404_S1 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 a
 
 void func_80442544_de(void *object) {
     func_80255CA0_de(object, 0x1D0, 0x1D4);
-    ((List_func_804428F8_de *)object)->rotation = 0;
+    ((func_8025E5B0_S1 *)(object))->unk14 = 0;
 }
 
 /* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with func_80440DA0_de from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and three values passed as arguments and a zero as the first value changed. */
