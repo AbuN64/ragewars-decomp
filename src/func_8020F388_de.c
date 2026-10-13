@@ -1,3 +1,6 @@
+#include "span_1000/code_80208000.h"
+#include "shared/navigation_graph.h"
+#include "shared/route_chase_records.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8020EAE0.h"
 #include "types.h"
@@ -35,17 +38,17 @@ s32 func_8020F388_de(void *arg0) {
     } while (count >= 0);
     data[0] = 0x653;
     if (func_8020F150_de(data) == 0) {
-        ((func_8020F2A8_S1 *)(arg0))->unk68 = 0;
-        ((func_8020F2A8_S1 *)(arg0))->unkBC = -1;
+        ((RouteChaseBot *)arg0)->target = 0;
+        ((RouteChaseBot *)arg0)->targetId = -1;
         return 1;
     }
     value = -1;
-    ((func_802066A4_S3 *)(global))->unk18 = value;
-    func_8020D0CC_de(global, ((func_8020F2A8_S1 *)(arg0))->unk4);
-    current = ((func_802066A4_S3 *)(global))->unk18;
+    ((NavigationGraph *)global)->result = value;
+    func_8020D0CC_de(global, ((RouteChaseBot *)arg0)->node);
+    current = ((NavigationGraph *)global)->result;
     if (current != value) {
-        ((func_8020F2A8_S1 *)(arg0))->unkC = current;
-        func_8020D114_de(global, &((func_8020F2A8_S1 *)(arg0))->unk14, 4);
+        ((RouteChaseBot *)arg0)->goal = current;
+        func_8020D114_de(global, &((AiController *)arg0)->queue[0], 4);
     }
     return 1;
 }

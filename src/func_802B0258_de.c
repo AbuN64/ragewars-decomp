@@ -19,13 +19,13 @@ void func_802B0258_de(void *arg0, s16 arg1) {
     char *next;
 
     saved = func_802BD170_de(1);
-    cur = ((func_8020C9B0_S1 *)(arg0))->unk8;
+    cur = ((ALEventQueue *)arg0)->allocList.next;
     if (cur != 0) {
         do {
-            next = ((func_802B5328_S2 *)(cur))->unk0;
-            if (((func_802B5328_S2 *)(cur))->unkC == arg1) {
+            next = ((ALEventListItem *)cur)->node.next;
+            if (((ALEventListItem *)cur)->evt.type == arg1) {
                 if (next != 0) {
-                    ((func_80254D70_S2 *)(next))->unk8 = ((func_80254D70_S2 *)(next))->unk8 + ((func_802B5328_S2 *)(cur))->unk8;
+                    ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + ((ALEventListItem *)cur)->delta;
                 }
                 func_802B2450_de(cur);
                 func_802B2480_de(cur, arg0);
