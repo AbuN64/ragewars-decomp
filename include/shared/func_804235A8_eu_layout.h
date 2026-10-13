@@ -90,7 +90,8 @@ struct Shared_MenuContext {
     u32 unknown60;
     u32 unknown64[4];
     u32 flags;
-    u32 unknown78[11];
+    u32 unknown78[10];
+    f32 scaleA0; /* 0xA0 */
     f32 aspectRatio; /* 0xA4 */
     u32 unknownA8[14];
     s32 requestE0;
