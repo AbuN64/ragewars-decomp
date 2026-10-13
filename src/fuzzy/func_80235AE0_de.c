@@ -1,14 +1,15 @@
 #include "span_1000/code_80233920.h"
 #include "gfx.h"
+#include "shared/func_80425674_de_layout.h"
 #include "shared/gameplay_camera.h"
 #include "gbi.h"
-extern f32 D_800C32B8_de, D_800C32BC_de, D_800C32C0_de;
+
 extern char D_800CBCC0, D_800CBCF0_de;
 extern s32 D_800D297C, D_800E28D0, D_800E28D4;
 extern Gfx *D_80110634;
 extern Frame *D_8011BDC0;
 extern Shared_func_80234FDC_S4 D_80140FF8;
-extern s32 D_801462C8;
+
 extern u8 D_8011FAC0[];
 extern void func_8026E330_de(s32);
 extern void func_80296004_de(s32);
@@ -21,7 +22,7 @@ extern s32 func_80245798_de(void);
 extern u32 func_80245AF8_de(void);
 extern void func_8026D914_de(s32);
 extern void func_802659E0_de(void *);
-static inline void initScale35AE0(Racer *v) { v->screenScaleX=D_800C32B8_de; v->screenScaleY=D_800C32B8_de; }
+static inline void initScale35AE0(Racer *v) { v->screenScaleX=1.0f; v->screenScaleY=1.0f; }
 /* Set projection, viewport and lighting, then draw the view's clear rectangle and fog. */
 void func_80235AE0_de(Racer *view) {
     struct { u8 red, green, blue; } rgb;
@@ -68,10 +69,10 @@ void func_80235AE0_de(Racer *view) {
     viewport=&view->viewports[frame];
     lights=&view->lights[frame][0];
     viewport->vscale[0]=vx; viewport->vscale[1]=vy;
-    viewport->vtrans[0]=(s16)(s32)((vx*D_800C32BC_de+view->viewportX)*D_800C32C0_de);
-    viewport->vtrans[1]=(s16)(s32)((vy*D_800C32BC_de+view->viewportY)*D_800C32C0_de);
+    viewport->vtrans[0]=(s16)(s32)((vx*0.25f+view->viewportX)*4.0f);
+    viewport->vtrans[1]=(s16)(s32)((vy*0.25f+view->viewportY)*4.0f);
     gSPMoveMem((*setup)++, G_MV_VIEWPORT, 0, 16, viewport);
-    gDPSetScissorFrac((*setup)++, G_SC_NON_INTERLACE, (s32)((s16)ulx*D_800C32C0_de), (s32)((s16)uly*D_800C32C0_de), (s32)((s16)lrx*D_800C32C0_de), (s32)((s16)lry*D_800C32C0_de));
+    gDPSetScissorFrac((*setup)++, G_SC_NON_INTERLACE, (s32)((s16)ulx*4.0f), (s32)((s16)uly*4.0f), (s32)((s16)lrx*4.0f), (s32)((s16)lry*4.0f));
     gSPMoveMem((*setup)++, G_MV_LIGHT, 0, 16, lights);
     gSPMoveMem((*setup)++, G_MV_LIGHT, 24, 16, lights+4);
     func_8026E330_de(view->effect);
@@ -85,8 +86,8 @@ void func_80235AE0_de(Racer *view) {
         func_8026925C_de(0x14);
         gDPPipeSync((*clearDl)++);
         func_80291BE8_de(D_8011FAC0,(s16)ulx,(s16)lrx,(s16)uly,(s16)lry,view->effect);
-        cmd=(*clearDl); gDPSetCycleType(cmd, G_CYC_FILL); (*clearDl)++;
-        if(D_801462C8&0x4000) {rgb.red=0;rgb.green=0;rgb.blue=0;} else {rgb.red=view->hit&0xF8;rgb.green=view->boost&0xF8;rgb.blue=view->spin&0xF8;}
+        cmd=*clearDl; gDPSetCycleType(cmd++, G_CYC_FILL); *clearDl=cmd;
+        if(D_801462C8.flags&0x4000) {rgb.red=0;rgb.green=0;rgb.blue=0;} else {rgb.red=view->hit&0xF8;rgb.green=view->boost&0xF8;rgb.blue=view->spin&0xF8;}
         if(func_80245798_de()!=0) { color=func_80245AF8_de(); if(color!=0xFF00) {rgb.blue=color>>16;rgb.green=color>>8;rgb.red=color;} }
         gSPGeometryMode(D_80110634++, 0, G_FOG);
         if(view->effect!=0) {
