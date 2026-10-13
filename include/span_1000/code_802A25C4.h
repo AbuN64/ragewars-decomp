@@ -691,6 +691,15 @@ struct Vtx {
     u8 a;
 };
 
+/* Double-buffered vertex storage shared by the ribbon allocator and reset. */
+struct RibbonVertexPool {
+    s32 state;
+    s32 reserved4;
+    Vtx vertices[2][300]; /* 0x08, 4800 bytes per buffer */
+    s32 remaining; /* 0x2588 */
+    Vtx *next; /* 0x258C */
+};
+
 struct func_802A6A54_S3;
 /* unbake published declaration: published_e3a8728a973917450080f9da */
 typedef struct func_802A6A54_S3 func_802A6A54_S3;

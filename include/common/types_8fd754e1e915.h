@@ -1759,7 +1759,10 @@ struct Model_func_80223E34_de {
     u32 collisionOptions; /* 0x4C */
     char pad50[2];
     u16 materialFlags; /* 0x52 */
-    char pad54[0xA0];
+    char pad54[4];
+    u8 byte58; /* model byte queried by func_80276054_de */
+    u8 byte59; /* model byte queried by func_80276088_de */
+    char pad5A[0x9A];
     f32 height;
 };
 

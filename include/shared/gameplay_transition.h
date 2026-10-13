@@ -205,7 +205,9 @@ typedef char Shared_GlobalPlayers_size_check[(sizeof(Shared_GlobalPlayers) == 0x
 
 typedef struct Shared__struct_D_800D34C0_0x18 Shared__struct_D_800D34C0_0x18;
 struct Shared__struct_D_800D34C0_0x18 {
-    char pad0[0xC];
+    char pad0[4];
+    s16 id; /* 0x04, lookup key */
+    char pad6[6];
     s16 unkC; /* +0xC: src/func_8021B468.c */
     s16 unkE; /* +0xE: src/func_8021B468.c */
     s16 unk10; /* +0x10: src/func_8021B468.c */
