@@ -40,9 +40,9 @@ void func_8022E17C_de(TeamPlayer *a, TeamPlayer *b, s32 mode) {
           if (teamA < 5) {
             off = teamA * 4;
             wins = c->wins;
-            win = (s32 *)((char *)wins + off);
+            win = &wins[teamA];
             losses = c->losses;
-            loss = (s32 *)((char *)losses + off);
+            loss = &losses[teamA];
             switch (mode) {
             case 0:
                 if (c->frozen == 0 && c->locked == 0) {
@@ -58,11 +58,11 @@ void func_8022E17C_de(TeamPlayer *a, TeamPlayer *b, s32 mode) {
                 *loss += 1;
                 break;
             case 2:
-                if (teamB == teamA) {
-                    *win -= 1;
-                } else {
+                if (teamB != teamA) {
                     *win += 1;
+                    break;
                 }
+                *win -= 1;
                 break;
             }
           }
