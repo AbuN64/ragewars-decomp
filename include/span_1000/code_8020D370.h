@@ -157,6 +157,7 @@ extern s32 func_8020EAB4_de(void);
 
 /* Resource sections returned by func_8028FDB4_de, selectors 1 and 2. */
 #include "shared/func_8027AD4C_de_closed.h"
+#include "resident_event_handler.h"
 typedef struct BallisticResourceKeys {
     s32 tag;
     s32 count;
@@ -167,4 +168,7 @@ typedef struct BallisticResourceRecords {
     s32 count;
     Shared_func_8027ADBC_S4 records[1];
 } BallisticResourceRecords;
+
+extern s32 *D_8013D534;
+
 #endif

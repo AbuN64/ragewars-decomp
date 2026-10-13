@@ -50189,8 +50189,8 @@ us-rev1 = 0x8020DD04
 [symbol.func_8020DDF4_eu]
 kind = "function"
 eu = 0x8020DE00
-eu-x = 0x8020DDF4
-us-rev1 = 0x8020DDD4
+eu-x = 0x8020DE00
+us-rev1 = 0x8020DDE0
 
 [symbol.func_8020E674_de]
 kind = "function"

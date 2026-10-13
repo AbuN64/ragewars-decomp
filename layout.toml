@@ -28885,6 +28885,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8020DDF4_eu.c"
+kind = "c"
+group = "code_8020D370"
+members = ["func_8020DDF4_eu", "rodata/func_8020DDF4_eu/800C6EB0"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8020E674_de.c"
 kind = "c"
 group = "code_8020D370"
@@ -69523,39 +69534,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/rodata.func_8020DDF4_eu.800C207C.c"
-kind = "data"
-group = "code_8020D370"
-members = ["rodata/func_8020DDF4_eu/800C207C"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.func_8020DDF4_eu.800C20A0.c"
-kind = "data"
-group = "code_8020D370"
-members = ["rodata/func_8020DDF4_eu/800C20A0"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.func_8020DDF4_eu.800C6EB0.c"
-kind = "data"
-group = "code_8020D370"
-members = ["rodata/func_8020DDF4_eu/800C6EB0"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/rodata.func_8020EC14_de.800C1E68.c"
 kind = "data"
 group = "code_8020EAE0"
@@ -72272,18 +72250,6 @@ kind = "data"
 group = "data_800C2000"
 members = ["rodata/unresolved/800C2000"]
 toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800C205C.c"
-kind = "data"
-group = "data_800C205C"
-members = ["rodata/unresolved/800C205C"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["us"]
 
 [unit.options]
 add = []
@@ -97581,17 +97547,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/rw_tail_8020DDF4_eu_C7ACC_us_rev1.c"
-kind = "data"
-group = "data_800C6ECC"
-members = ["src/rw_tail_8020DDF4_eu_C7ACC_us_rev1.c"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/rw_tail_80227038_C8890_us_rev1.c"
 kind = "data"
 group = "data_800C7C90"
@@ -100249,11 +100204,6 @@ scores = {de = 0.5138339920948617, eu = 0.5138339920948617, eu-x = 0.51383399209
 member = "func_8020D6E4_de"
 path = "src/fuzzy/func_8020D6E4_de.c"
 scores = {de = 1.0, eu = 1.0, eu-x = 1.0, us = 1.0, us-rev1 = 1.0}
-
-[[fuzzy]]
-member = "func_8020DDF4_eu"
-path = "src/fuzzy/func_8020DDF4_eu.c"
-scores = {eu = 1.0, eu-x = 0.9257246376811594, us-rev1 = 0.9257246376811594}
 
 [[fuzzy]]
 member = "func_8020EA24_eu_x"
