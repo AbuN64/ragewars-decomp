@@ -600,7 +600,12 @@ extern s32 func_8022EF04_de(s32 arg0, s32 arg1);
 struct Obj_func_8022F3A4_de;
 /* unbake published declaration: published_f2ad9a2c86b48e9f5349ac1c */
 struct Obj_func_8022F3A4_de {
-    char pad[0x18];
+    char pad[0x10];
+    s32 progress;
+    u8 value14;
+    u8 value15;
+    u8 value16;
+    char pad17;
     char slots[13];
 };
 

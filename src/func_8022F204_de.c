@@ -40,62 +40,62 @@ void func_8022F204_de(s32 arg0) {
 }
 
 void func_8022F314_de(void *arg0, unsigned char arg1) {
-    ((func_8022F304_S1 *)(arg0))->unk14 = arg1;
+    ((Obj_func_8022F3A4_de *)arg0)->value14 = arg1;
 }
 
 /** Advance the byte at offset 0x14 by ten. */
 void func_8022F31C_de(void *object) {
-    ((func_8022F304_S1 *)(object))->unk14 += 10;
+    ((Obj_func_8022F3A4_de *)object)->value14 += 10;
 }
 
 /** Read the byte at object offset 0x14. */
 unsigned char func_8022F32C_de(void *arg0) {
-    return ((func_8022F304_S1 *)(arg0))->unk14;
+    return ((Obj_func_8022F3A4_de *)arg0)->value14;
 }
 
 /** Store a byte in the object field at offset 0x15. */
 void func_8022F338_de(void *object, unsigned char value) {
-    ((unsigned char *)object)[0x15] = value;
+    ((Obj_func_8022F3A4_de *)object)->value15 = value;
 }
 
 int func_8022F340_de(void *arg0) {
-    int v = ((func_8022F330_S1 *)(arg0))->unk15 + 0x32;
-    ((func_8022F330_S1 *)(arg0))->unk15 = (unsigned char)v;
+    int v = ((Obj_func_8022F3A4_de *)arg0)->value15 + 0x32;
+    ((Obj_func_8022F3A4_de *)arg0)->value15 = (unsigned char)v;
     return v;
 }
 
 unsigned char func_8022F350_de(void *arg0) {
-    return ((func_8022F330_S1 *)(arg0))->unk15;
+    return ((Obj_func_8022F3A4_de *)arg0)->value15;
 }
 
 /** Store the supplied byte at offset 0x16. */
 void func_8022F35C_de(void *object, unsigned char value) {
-    ((func_8022F34C_S1 *)(object))->unk16 = value;
+    ((Obj_func_8022F3A4_de *)object)->value16 = value;
 }
 
 int func_8022F364_de(void *arg0) {
-    int v = ((func_8022F34C_S1 *)(arg0))->unk16 + 0x32;
-    ((func_8022F34C_S1 *)(arg0))->unk16 = (unsigned char)v;
+    int v = ((Obj_func_8022F3A4_de *)arg0)->value16 + 0x32;
+    ((Obj_func_8022F3A4_de *)arg0)->value16 = (unsigned char)v;
     return v;
 }
 
 /** Read the object byte at offset 0x16. */
 unsigned char func_8022F374_de(void *object) {
-    return ((unsigned char *)object)[0x16];
+    return ((Obj_func_8022F3A4_de *)object)->value16;
 }
 
 void func_8022F380_de(void *arg0, int arg1) {
-    ((struct func_8022BC04_S3 *) ((int *) arg0))->unk10 = arg1;
+    ((Obj_func_8022F3A4_de *)arg0)->progress = arg1;
 }
 
 /** Advance the word at offset 0x10 by 0x500. */
 void func_8022F388_de(void *object) {
-    ((func_8022BC04_S3 *)(object))->unk10 += 0x500;
+    ((Obj_func_8022F3A4_de *)object)->progress += 0x500;
 }
 
 /** Return the word stored at offset 0x10. */
 unsigned int func_8022F398_de(void *object) {
-    return ((func_8022F388_S1 *)(object))->unk10;
+    return ((Obj_func_8022F3A4_de *)object)->progress;
 }
 
 /* Stores a byte into the object's slot table at 0x18: indices 0 to 10 directly, 17 and 18 into
