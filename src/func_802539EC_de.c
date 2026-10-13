@@ -17,7 +17,7 @@ extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 void func_802539EC_de(s32 unused, s32 arg1) {
     s32 temp_v1;
     s32 temp_v1_2;
-    s32 *base;
+    ResourceLockState *base;
     u32 temp_a0;
     u32 temp_v0;
 
@@ -26,19 +26,19 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
-        func_802BB2A0_de((s32)((char *)&D_801005A8 + 0xB98), 0, 1);
+        func_802BB2A0_de((s32)&((ResourceLockState *)&D_801005A8)->waitQueue, 0, 1);
     } else {
         func_802BCF50_de(temp_a0);
     }
-    base = &D_801005A8;
-    *base = arg1;
+    base = (ResourceLockState *)&D_801005A8;
+    base->slot = arg1;
     D_80100598[arg1] = 1;
     temp_v0 = func_802BCF30_de();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
         func_802BCF50_de(temp_v0);
-        func_802BB420_de(&((func_8025398C_S1 *)(base))->unkB98, 0, 1);
+        func_802BB420_de(&base->waitQueue, 0, 1);
         return;
     }
     func_802BCF50_de(temp_v0);

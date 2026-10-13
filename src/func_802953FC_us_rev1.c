@@ -38,12 +38,12 @@ s32 func_802953FC_us_rev1(s32 arg0) {
     sw_outer_0x102:
         return D_8014AED8;
     sw_outer_0x103:
-        return 1 << ((func_802953FC_S1 *)(D_8014AED0))->unk2;
+        return 1 << ((FrontendInputSelector *)D_8014AED0)->primaryButton;
     sw_outer_0x104:
-        return 1 << ((func_802953FC_S1 *)(D_8014AED0))->unk3;
+        return 1 << ((FrontendInputSelector *)D_8014AED0)->secondaryButton;
     sw_outer_0x105:
         {
-        s32 sw_inner_value = *(u8 *)D_8014AED0;
+        s32 sw_inner_value = ((FrontendInputSelector *)D_8014AED0)->mode;
         if ((unsigned int)sw_inner_value > 5) {
             goto zero;
         }

@@ -208,4 +208,12 @@ extern u8 D_auto_800CA620[0x14];
 extern f32 D_auto_800CA634;
 extern s32 D_auto_800D2AFC;
 
+/* Frontend action mapping selected by D_8014AED0. */
+typedef struct FrontendInputSelector {
+    u8 mode;
+    u8 reserved1;
+    u8 primaryButton;
+    u8 secondaryButton;
+} FrontendInputSelector;
+
 #endif

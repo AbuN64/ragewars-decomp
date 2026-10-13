@@ -1,5 +1,4 @@
 #include "span_1000/code_8023B9A0.h"
-/* FAKEMATCH: retains inherited numeric field accesses because a verified live shared layout for those accesses is not available; the old access widths and evaluation order are preserved. */
 #include "types.h"
 
 extern s32 D_800C3600_de;
@@ -22,7 +21,7 @@ s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
   s32 sp3C;
   u32 rounded;
   void **temp_v0;
-  void *temp_v1;
+  Draw *temp_v1;
   int new_var;
   temp_s1 = ((u32) (arg0 + 0xFFF)) >> 0xC;
   new_var = (temp_s1 + 1) & (~1);
@@ -37,9 +36,9 @@ s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
     temp_v0 = func_8025343C_de(0, new_var2 + rounded, 3, &D_800C3600_de);
     temp_v1 = *temp_v0;
     blk.f30 = temp_v1;
-    ((func_8023C77C_S1 *)(temp_v1))->unkC = temp_v0;
+    temp_v1->model = temp_v0;
   }
-  *((s32 *) (((char *) blk.f30) + 8)) = arg2;
+  ((Draw *)blk.f30)->allocationMode = arg2;
   func_802BB420_de(&D_800FF254, &blk.f28, 1);
   func_802BB2A0_de(sp10, &sp3C, 1);
   return sp3C;

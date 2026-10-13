@@ -32,26 +32,26 @@ extern void func_80208EB0_de(void *);
 
 void func_80212828_de(void *arg0)
 {
-    void *state;
-    void *peer;
-    void *peer_actor;
-    void *peer_state;
+    CloseAttackBrain *state;
+    CloseAttackActor *peer;
+    CloseAttackActor *peer_actor;
+    CloseAttackBrain *peer_state;
     s32 value;
 
-    state = ((func_80212828_S2 *)(((func_8020A028_S3 *)(arg0))->unk1D8))->unk1454;
-    peer = ((func_80212828_S3 *)(state))->unk64;
+    state = ((CloseAttackActor *)arg0)->self->brain;
+    peer = state->target;
     if (peer == 0) {
         func_80211020_de(state);
         return;
     }
 
-    peer_actor = ((func_8020A028_S3 *)(peer))->unk1D8;
-    peer_state = ((func_80212828_S5 *)(peer_actor))->unk1454;
-    value = ((func_80203E78_S1 *)(peer_state))->unk4;
-    ((func_80212828_S3 *)(state))->unkC = value;
-    if (value != ((func_80212828_S3 *)(state))->unk10) {
-        ((func_80212828_S3 *)(state))->unk10 = value;
-        if (!func_8020D1CC_de(D_8013B364, ((func_80212828_S3 *)(state))->unk4, value)) {
+    peer_actor = peer->self;
+    peer_state = peer_actor->brain;
+    value = peer_state->route;
+    state->destination = value;
+    if (value != state->node) {
+        state->node = value;
+        if (!func_8020D1CC_de(D_8013B364, state->route, value)) {
             func_80209874_de(state, 1);
             return;
         }
@@ -60,9 +60,9 @@ void func_80212828_de(void *arg0)
     func_80211020_de(state);
     func_80208410_de(state);
     func_80208EB0_de(state);
-    if (func_802726BC_de(&((func_80212828_S5 *)(peer_actor))->unk8,
-                       &((func_80212828_S7 *)(*(void **)state))->unk8) < D_800C20C0_de[1] ||
-        ((func_80212828_S3 *)(state))->unk4 == ((func_80212828_S3 *)(state))->unkC) {
-        func_80209874_de(state, ((func_80212828_S3 *)(state))->unk230);
+    if (func_802726BC_de(&peer_actor->pos.x,
+                       &state->player->pos.x) < D_800C20C0_de[1] ||
+        state->route == state->destination) {
+        func_80209874_de(state, state->combat);
     }
 }

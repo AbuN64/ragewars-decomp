@@ -62,4 +62,11 @@ struct func_8025398C_S1 {
     char unkB98;
 };
 
+/* Resource manager slot and its wait queue (D_801005A8 / D_80101140). */
+typedef struct ResourceLockState {
+    s32 slot;
+    u8 reserved4[0xB98 - 4];
+    Queue_func_802517B4_de waitQueue;
+} ResourceLockState;
+
 #endif

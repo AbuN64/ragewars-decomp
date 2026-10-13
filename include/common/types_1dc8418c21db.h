@@ -4765,7 +4765,8 @@ typedef struct Link Link;
 struct Draw;
 /* unbake published declaration: published_c1c254635e9cf01fe0d5ec16 */
 struct Draw {
-    char pad0[0xC];
+    char pad0[8];
+    s32 allocationMode; /* 0x08: resource allocation request */
     void *model;
 };
 
