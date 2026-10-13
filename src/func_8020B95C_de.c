@@ -1,9 +1,6 @@
-#include "span_1000/code_8020AF9C.h"
-#include "common/types_1dc8418c21db.h"
-#include "resident_event_handler.h"
+#include "shared/navigation_graph.h"
 #include "stddef.h"
-#include "types.h"
-f32 func_802726BC_de(void *a, void *b);
+f32 func_802726BC_de(f32 *a, f32 *b);
 s32 func_8020B95C_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     NavigationPoint *var_s7;
     NavigationBuffer *temp_v1;
@@ -28,6 +25,11 @@ s32 func_8020B95C_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 a
     var_t0 = 0;
     var_s4 = 0;
     if (arg0->portalCount > 0) {
+        s32 reversibleKind4 = 4;
+        s32 reversibleKind1 = 1;
+        s32 reversibleKind7 = 7;
+        s32 noRoom = -1;
+        s32 forwardExcludedKind = 6;
         var_a3 = arg3;
         do {
             temp_v1_2 = arg0->portals;
@@ -40,17 +42,17 @@ s32 func_8020B95C_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 a
                 }
                 if (temp_v1_3->first == arg1) {
                     temp_a0 = temp_v1_3->kind;
-                    if (temp_a0 != 4) {
+                    if (temp_a0 != reversibleKind4) {
                         if ((s32) temp_a0 < 5) {
                             var_v0 = 0;
-                            if (temp_a0 != 1) {
+                            if (temp_a0 != reversibleKind1) {
 
                             } else {
                                 goto block_14;
                             }
                         } else {
                             var_v0 = 0;
-                            if (temp_a0 == 7) {
+                            if (temp_a0 == reversibleKind7) {
                                 goto block_14;
                             }
                         }
@@ -64,30 +66,30 @@ block_14:
                         var_a3 += 1;
                     }
                 }
-                if ((arg2 != -1) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (var_s7->attributes.halves.flags & 2)) {
+                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (var_s7->attributes.halves.flags & 2)) {
                     *var_a3 = arg2;
                     var_a3 += 1;
                     var_s4 += 1;
                 }
             } else {
-                if ((temp_v1_3->first == arg1) && (temp_v1_3->kind != 6)) {
+                if ((temp_v1_3->first == arg1) && (temp_v1_3->kind != forwardExcludedKind)) {
                     var_s4 += 1;
                     *var_a3 = (s32) temp_v1_3->second;
                     var_a3 += 1;
                 }
                 if (temp_v1_3->second == arg1) {
                     temp_a0_2 = temp_v1_3->kind;
-                    if (temp_a0_2 != 4) {
+                    if (temp_a0_2 != reversibleKind4) {
                         if ((s32) temp_a0_2 < 5) {
                             var_v0_2 = 0;
-                            if (temp_a0_2 != 1) {
+                            if (temp_a0_2 != reversibleKind1) {
 
                             } else {
                                 goto block_32;
                             }
                         } else {
                             var_v0_2 = 0;
-                            if (temp_a0_2 == 7) {
+                            if (temp_a0_2 == reversibleKind7) {
                                 goto block_32;
                             }
                         }
@@ -114,8 +116,8 @@ block_32:
                     s32 secondIndex = arg3[var_s2] * table->stride;
                     void *first = table->data + firstIndex;
                     void *other = table->data + secondIndex;
-                    f32 distance = func_802726BC_de(var_s7, first);
-                    if (func_802726BC_de(var_s7, other) < distance) {
+                    f32 distance = func_802726BC_de(&var_s7->position.x, first);
+                    if (func_802726BC_de(&var_s7->position.x, other) < distance) {
                         s32 saved = arg3[var_s5];
                         arg3[var_s5] = arg3[var_s2];
                         arg3[var_s2] = saved;

@@ -28521,6 +28521,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_8020B95C_de.c"
+kind = "c"
+group = "code_8020AF9C"
+members = ["func_8020B95C_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_8020BC50_de.c"
 kind = "c"
 group = "code_8020AF9C"
@@ -100233,11 +100244,6 @@ scores = {de = 0.9106382978723404, eu = 0.9106382978723404, eu-x = 0.91063829787
 member = "func_8020AF9C_de"
 path = "src/fuzzy/func_8020AF9C_de.c"
 scores = {de = 0.6875, eu = 0.6875, eu-x = 0.6875, us = 0.6875, us-rev1 = 0.6875}
-
-[[fuzzy]]
-member = "func_8020B95C_de"
-path = "src/fuzzy/func_8020B95C_de.c"
-scores = {de = 0.9947089947089947, eu = 0.9947089947089947, eu-x = 0.9947089947089947, us = 0.9947089947089947, us-rev1 = 0.9947089947089947}
 
 [[fuzzy]]
 member = "func_8020BE7C_de"
