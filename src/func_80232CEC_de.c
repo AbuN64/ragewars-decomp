@@ -1,3 +1,4 @@
+#include "common/types_8fd754e1e915.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80231F5C.h"
@@ -19,17 +20,17 @@ extern void func_8022B190_de(s32);
 
 
 void func_80232CEC_de(void *arg0, void *arg1) {
-    void *state;
+    Player *state;
 
-    state = ((func_8020A028_S3 *)(arg0))->unk1D8;
-    if (((func_80232CDC_S2 *)(arg1))->unkCB != 0) {
+    state = ((Shared_Actor *)arg0)->entity;
+    if (((WeaponFireState *)arg1)->triggerMode != 0) {
         if (func_802301F4_de(arg0, arg1) != 0) {
-            ((func_80232CDC_S2 *)(arg1))->unkCB = 0;
-            ((func_80232CDC_S2 *)(arg1))->unk35 = -1;
+            ((WeaponFireState *)arg1)->triggerMode = 0;
+            ((WeaponFireState *)arg1)->queuedAction = -1;
         } else {
-            switch (((func_80232CDC_S3 *)(state))->unk62E) {
+            switch (state->selectedAction) {
             case 8:
-                func_8025DE54_de(0xA3E, ((func_80232CDC_S3 *)(state))->unk8,
+                func_8025DE54_de(0xA3E, state->pos,
                               (s32)((char *)state + 8), -1);
             case 0:
             case 14:
@@ -41,10 +42,10 @@ void func_80232CEC_de(void *arg0, void *arg1) {
                 break;
             }
         }
-        ((func_80232CDC_S3 *)(state))->unk788 = 1;
-        ((func_80232CDC_S3 *)(state))->unk78C = 0;
-    } else if ((((func_80232CDC_S3 *)(state))->unk62E == 12) &&
-               ((((func_80232CDC_S3 *)(state))->unk6AC & 0x4000) != 0)) {
+        state->controllerMode = 1;
+        state->controllerTimer = 0;
+    } else if ((state->selectedAction == 12) &&
+               ((state->inputFlags & 0x4000) != 0)) {
         func_8022B190_de((s32)state);
     }
 }

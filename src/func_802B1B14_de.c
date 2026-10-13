@@ -21,40 +21,47 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 
+/* Voice events serialize the voice pointer in the first four payload bytes. */
+static inline ALVoice_s *event_voice(Message_func_802AF150_de *event) {
+    ALVoice_s *voice;
+    __builtin_memcpy(&voice, &event->pad[2], sizeof(voice));
+    return voice;
+}
+
 void func_802B1B14_de(void *arg0, void *arg1, s32 arg2) {
-    char *cur;
-    char *next;
-    char *object;
+    ALEventListItem *cur;
+    ALEventListItem *next;
+    ALVoiceState_s *object;
     s32 type6;
     Entry802B6BE4 entry;
 
-    object = ((func_802B6BE4_S1 *)(arg1))->unk10;
-    if (((func_802B6BE4_S2 *)(object))->unk34 == 0) {
-        cur = ((func_802B6BE4_S3 *)(arg0))->unk50;
+    object = ((ALVoice_s *)arg1)->clientPrivate;
+    if (object->envPhase == 0) {
+        cur = (ALEventListItem *)((ALSeqPlayer *)arg0)->events.allocList.next;
         if (cur != 0) {
             type6 = 6;
             do {
-                next = ((func_802B6BE4_S4 *)(cur))->unk0;
-                if (((func_802B6BE4_S4 *)(cur))->unkC == type6 &&
-                    ((func_802B6BE4_S4 *)(cur))->unk10 == arg1) {
+                next = (ALEventListItem *)cur->node.next;
+                if (cur->evt.type == type6 &&
+                    event_voice(&cur->evt) == arg1) {
                     if (next != 0) {
-                        ((func_80254D70_S2 *)(next))->unk8 = ((func_80254D70_S2 *)(next))->unk8 +
-                                            ((func_802B6BE4_S4 *)(cur))->unk8;
+                        next->delta = next->delta +
+                                            cur->delta;
                     }
                     func_802B2450_de(cur);
-                    func_802B2480_de(cur, &((func_802B6BE4_S3 *)(arg0))->unk48);
+                    func_802B2480_de(cur, &((ALSeqPlayer *)arg0)->events);
                 }
                 cur = next;
             } while (cur != 0);
         }
     }
-    ((func_802B6BE4_S2 *)(object))->unk33 = 0;
-    ((func_802B6BE4_S2 *)(object))->unk34 = 3;
-    ((func_802B6BE4_S2 *)(object))->unk30 = 0;
-    ((func_802B6BE4_S2 *)(object))->unk24 = ((func_802B6BE4_S3 *)(arg0))->unk1C + arg2;
-    func_802B3470_de(((func_802B6BE4_S3 *)(arg0))->unk14, arg1, 0);
-    func_802B3480_de(((func_802B6BE4_S3 *)(arg0))->unk14, arg1, 0, arg2);
+    object->velocity = 0;
+    object->envPhase = 3;
+    object->envGain = 0;
+    object->envEndTime = ((ALSeqPlayer *)arg0)->currentTime + arg2;
+    func_802B3470_de(((ALSeqPlayer *)arg0)->synth, arg1, 0);
+    func_802B3480_de(((ALSeqPlayer *)arg0)->synth, arg1, 0, arg2);
     entry.type = 5;
     entry.object = arg1;
-    func_802B00D4_de(&((func_802B6BE4_S3 *)(arg0))->unk48, &entry, arg2);
+    func_802B00D4_de(&((ALSeqPlayer *)arg0)->events, &entry, arg2);
 }

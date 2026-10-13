@@ -234,7 +234,7 @@ struct Message_func_802AF150_de;
 struct Message_func_802AF150_de {
     s16 type;
     char pad[14];
-};
+} __attribute__((aligned(4)));
 
 struct Link_func_802596B4_de;
 /* unbake published declaration: published_ad5fe741124e29789f5285da */

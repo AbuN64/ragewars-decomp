@@ -54,7 +54,8 @@ struct Player {
     u8 pad65C[4];
     s32 flags660; /* 0x660 */
     u8 pad664[0x24];
-    u8 tuning[0x14]; /* 0x688 */
+    u8 tuning[0x10]; /* 0x688 */
+    void *weaponAnimation; /* 0x698 */
     f32 steer; /* 0x69C */
     f32 pitch; /* 0x6A0 */
     f32 strafe; /* 0x6A4 */
@@ -114,7 +115,18 @@ struct Player {
     u8 padCBC[0x4F8];
     s32 locked; /* 0x11B4 */
     s32 lockState; /* 0x11B8 */
-    u8 pad11BC[0x1F8];
+    void *firstHandle; /* 0x11BC */
+    void *secondHandle; /* 0x11C0 */
+    u8 pad11C4[0x14];
+    f32 cooldown; /* 0x11D8 */
+    u8 pad11DC[0x18];
+    f32 fireSpin; /* 0x11F4 */
+    s32 fireFrame; /* 0x11F8 */
+    f32 zoom; /* 0x11FC */
+    Vec3 aimPosition; /* 0x1200 */
+    s32 zoomMode; /* 0x120C */
+    s32 overlay; /* 0x1210 */
+    u8 pad1214[0x1A0];
     void *animationTable; /* 0x13B4 */
     u8 pad13B8[0x1C];
     s32 toggle; /* 0x13D4 */

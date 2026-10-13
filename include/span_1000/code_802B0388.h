@@ -469,7 +469,13 @@ struct ALSeqPlayer;
 struct ALVoiceState_s;
 /* unbake published declaration: published_99954e0c1a143980047559f9 */
 struct ALSeqPlayer {
-    char pad[0x64];
+    u8 pad0[0x14];
+    void *synth; /* 0x14 */
+    u8 pad18[4];
+    s32 currentTime; /* 0x1C */
+    u8 pad20[0x28];
+    ALEventQueue events; /* 0x48 */
+    u8 pad5C[8];
     struct ALVoiceState_s *vAllocHead;
 };
 

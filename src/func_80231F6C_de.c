@@ -91,5 +91,5 @@ void func_80231F6C_de(void *actor, void *arg1) {
         return;
     }
     ((WeaponFireState *)(arg1))->mode = 1;
-    ((WeaponFireState *)(arg1))->reset = 0;
+    ((WeaponFireState *)(arg1))->spinStep = 0.0f;
 }

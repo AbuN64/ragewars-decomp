@@ -1,3 +1,7 @@
+#include "common/types_8fd754e1e915.h"
+#include "span_1000/code_80208000.h"
+#include "shared/gameplay_round_rules.h"
+#include "span_1000/code_80204E78.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8022F3E8.h"
 #include "types.h"
@@ -20,7 +24,6 @@ extern void func_80214178_de(void *, void *, s32);
 
 extern void func_8022AF40_de(void *);
 
-extern s32 func_8025DE54_de(s16, s32, s32, s32, s32 *, s32);
 extern void func_80274870_de(f32 *, f32, f32);
 
 
@@ -38,55 +41,55 @@ extern void func_80274870_de(f32 *, f32, f32);
 
 
 
-static inline s32 released(void *actor, char *player) {
-    char *control;
+static inline s32 released(void *actor, Player *player) {
+    AiController *control;
     s32 latch;
 
-    if (((func_80230BB8_S1 *)(player))->unk11D8 > D_800C2F5C_de) {
+    if (player->cooldown > D_800C2F5C_de) {
         return 1;
     }
-    if ((((func_80230BB8_S2 *)(actor))->unk100 & 0x300000) && ((func_80230BB8_S1 *)(player))->unk1450 != 0) {
-        control = ((func_80230BB8_S1 *)(player))->unk1454;
-        latch = ((func_80230BB8_S3 *)(control))->unk23C;
-        ((func_80230BB8_S3 *)(control))->unk23C = 0;
+    if ((((Shared_Actor *)actor)->weaponFlags & 0x300000) && player->computer != 0) {
+        control = player->controller;
+        latch = control->unk23C;
+        control->unk23C = 0;
         return latch == 0;
     }
-    if (!(((func_80230BB8_S1 *)(player))->unk6AC & 0x2000)) {
+    if (!(player->inputFlags & 0x2000)) {
         return 1;
     }
-    if (((func_80230BB8_S1 *)(player))->unk11B4 != 0) {
+    if (player->locked != 0) {
         return 1;
     }
-    return func_80222AA4_de(player, ((func_80230BB8_S1 *)(player))->unk62E) == 0;
+    return func_80222AA4_de(player, player->selectedAction) == 0;
 }
 
 void func_802312C8_de(void *actor, void *attack) {
-    char *player;
-    s32 *position;
-    char *target;
+    Player *player;
+    Vec3 *position;
+    Shared_func_80227014_S4 *target;
 
-    player = ((func_80230BB8_S2 *)(actor))->unk1D8.v0;
-    target = ((func_80230BB8_S1 *)(player))->unk5DC;
+    player = ((Shared_Actor *)actor)->entity;
+    target = player->owner;
     if (target != 0) {
-        position = &((func_802063EC_S2 *)(target))->unk128;
+        position = &target->position;
     } else {
-        position = &((func_80230BB8_S1 *)(player))->unk8;
+        position = &player->pos;
     }
     if (released(actor, player)) {
         func_80214178_de(actor, attack, 2);
         func_8022AF40_de(player);
         func_8022B00C_de(player);
-        func_8025DE54_de(0x978, position[0], position[1], position[2], position, -1);
+        func_8025DE54_de(0x978, *position, (s32)position, -1);
         return;
     }
-    func_80274870_de(&((func_80230BB8_S5 *)(attack))->unk128, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
-    ((func_80230BB8_S5 *)(attack))->unk64 -= D_800D2988;
-    if (((func_80230BB8_S5 *)(attack))->unk64 <= 0.0f) {
-        ((func_80230BB8_S5 *)(attack))->unk64 = ((func_802077F4_S2 *)(&D_800C2F60_de))->unk4;
-        if (((func_80230BB8_S1 *)(player))->unk1450 == 0 && D_80140FF8 == 1) {
-            func_8021A9A4_de(((func_80230BB8_S2 *)(actor))->unk1D8.v1, 0x3FB);
+    func_80274870_de(&((WeaponFireState *)attack)->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
+    ((WeaponFireState *)attack)->cueTimer -= D_800D2988;
+    if (((WeaponFireState *)attack)->cueTimer <= 0.0f) {
+        ((WeaponFireState *)attack)->cueTimer = D_800C2F64_de;
+        if (player->computer == 0 && D_80140FF8 == 1) {
+            func_8021A9A4_de(((Shared_Actor *)actor)->entity, 0x3FB);
         } else {
-            func_8021A9A4_de(((func_80230BB8_S2 *)(actor))->unk1D8.v1, 0x4CD);
+            func_8021A9A4_de(((Shared_Actor *)actor)->entity, 0x4CD);
         }
     }
 }
@@ -99,10 +102,10 @@ void func_80231474_de(Shared_Actor *arg0, WeaponFireState *arg1) {
     f32 temp_f12;
     f32 temp_f1;
     f32 temp_f2;
-    SharedPlayer *temp_s1;
+    Player *temp_s1;
     void *temp_v0;
 
-    temp_s1 = (SharedPlayer *)arg0->entity;
+    temp_s1 = (Player *)arg0->entity;
     if (arg1->variant != 4) {
         temp_f12 = arg1->spin;
         if (temp_f12 > 0.0f) {
@@ -131,7 +134,7 @@ void func_80231474_de(Shared_Actor *arg0, WeaponFireState *arg1) {
     }
     arg1->spinStep += (arg1->spin * D_800D2988) * 2.0f;
     temp_f1 = arg1->spin;
-    temp_v0 = temp_s1->views5E8.view698_34.unk698;
+    temp_v0 = temp_s1->weaponAnimation;
     if (!(temp_f1 < 0.0f
               ? D_800C2F80_de < (-temp_f1 * D_800C2F7C_de)
               : D_800C2F88_de < (temp_f1 * D_800C2F84_de))) {
@@ -173,52 +176,52 @@ extern u8 D_80152789;
 extern s32 D_800DCC68[];
 extern u8 D_80152789;
 #endif
-static inline s32 can_fire(char *player) {
+static inline s32 can_fire(Player *player) {
     s32 ammo;
-    if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.view11D8_147.unk11D8 > 0.0f) {
+    if (player->cooldown > 0.0f) {
         return 0;
     }
-    if (((SharedPlayer_func_8022A398_de *)(player))->views1450.view1450_0.unk1450 != 0) {
+    if (player->computer != 0) {
         return 1;
     }
     if (D_801462D5 != 1) {
         return 1;
     }
-    ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer_func_8022A398_de *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E);
+    ammo = func_8022F55C_de(&D_80102B00[player->slot * 0x190], player->selectedAction);
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            func_80239908_de(&D_80145088, ((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(&D_80145040, player),
+        if (player->owner != 0) {
+            func_80239908_de(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(&D_80145040, player),
                           1.0f);
         }
     }
     return ammo;
 }
 void func_80231664_de(void *actor, void *arg1) {
-    char *player;
+    Player *player;
     s32 action;
     s32 single;
     player = ((Shared_Actor *)(actor))->entity;
-    action = D_800CE8DC[((SharedPlayer_func_8022A398_de *)(player))->views5E8.view650_15.unk650].action;
-    if (func_80222AA4_de(player, ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E) == 0) {
+    action = D_800CE8DC[player->pose].action;
+    if (func_80222AA4_de(player, player->selectedAction) == 0) {
         if (((WeaponFireState *)(arg1))->mode != 2) {
             goto idle;
         }
         ((WeaponFireState *)(arg1))->mode = 1;
-        if (func_80222AA4_de(player, ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E) == 0) {
+        if (func_80222AA4_de(player, player->selectedAction) == 0) {
         idle:
-            ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+            player->weapon = func_8022F96C_de(player);
             return;
         }
     }
-    if ((((SharedPlayer_func_8022A398_de *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && ((WeaponFireState *)(arg1))->rounds > 0) {
+    if ((player->actionFlags & 0x4000) && can_fire(player) && ((WeaponFireState *)(arg1))->rounds > 0) {
         single = 1;
         if (((WeaponFireState *)(arg1))->mode == single) {
             ((WeaponFireState *)(arg1))->mode = 2;
-            if (func_80222AA4_de(player, ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E) == 0) {
+            if (func_80222AA4_de(player, player->selectedAction) == 0) {
                 func_8025DF34_de(0xD4D);
-                if (((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                    func_80239908_de(&D_80145040.object, ((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
+                if (player->owner != 0) {
+                    func_80239908_de(&D_80145040.object, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
                                   func_8022A5A0_de(&D_80145040, player), 1.0f);
                 }
                 ((WeaponFireState *)(arg1))->mode = single;
@@ -231,21 +234,21 @@ void func_80231664_de(void *actor, void *arg1) {
     }
 spin:
     if (((WeaponFireState *)(arg1))->mode == 1) {
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin > 1.0f) {
-            ((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin -= 0.5f;
+        if (player->fireSpin > 1.0f) {
+            player->fireSpin -= 0.5f;
         }
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin < 1.0f) {
-            ((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin = 1.0f;
+        if (player->fireSpin < 1.0f) {
+            player->fireSpin = 1.0f;
         }
     } else if (((WeaponFireState *)(arg1))->mode == 2) {
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin < 2.0f) {
-            ((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin += 0.05f;
+        if (player->fireSpin < 2.0f) {
+            player->fireSpin += 0.05f;
         }
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin > 2.0f) {
-            ((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin = 2.0f;
+        if (player->fireSpin > 2.0f) {
+            player->fireSpin = 2.0f;
         }
     }
-    ((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.frame = (((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.frame + (s32)((SharedPlayer_func_8022A398_de *)(player))->views5E8.rapidFireView.spin) % 8;
+    player->fireFrame = (player->fireFrame + (s32)player->fireSpin) % 8;
     if (func_802301F4_de(actor, arg1) == 0 && !(((Shared_Actor *)(actor))->weaponFlags & 0x400)) {
         func_80214178_de(actor, arg1, action);
     }
