@@ -1,189 +1,276 @@
-#include "types.h"
-#include "common/types_8a8189af7b05.h"
-typedef struct Shared_ActorRoomState {
-    s32 reserved0;
-    s32 current;
-    s32 previous;
-    s32 fallback;
-    s32 reserved10;
-    s32 pending;
-} Shared_ActorRoomState;
-typedef struct Shared_Func80243A80Actor Shared_Func80243A80Actor;
-struct Shared_Func80243A80Actor {
-    u8 type; /* +0x0: src/func_80243A80.c */
-    u8 pad1[7]; /* +0x1: src/func_80243A80.c */
-    f32 x; /* +0x8: src/func_80243A80.c */
-    f32 y; /* +0xC: src/func_80243A80.c */
-    f32 z; /* +0x10: src/func_80243A80.c */
-    u16 * collision; /* +0x14: src/func_80243A80.c */
-    u8 pad18[4]; /* +0x18: src/func_80243A80.c */
-    s32 room; /* +0x1C: src/func_80243A80.c */
-    f32 velY; /* +0x20: src/func_80243A80.c */
-    s32 room2; /* +0x24: src/func_80243A80.c */
-    u8 pad28[12]; /* +0x28: src/func_80243A80.c */
-    void * attached; /* +0x34: src/func_80243A80.c */
-    u32 flags; /* +0x38: src/func_80243A80.c */
-    u8 pad3C[4]; /* +0x3C: src/func_80243A80.c */
-    f32 groundY; /* +0x40: src/func_80243A80.c */
-    f32 contactX; /* +0x44: src/func_80243A80.c */
-    f32 contactBits; /* +0x48: src/func_80243A80.c */
-    f32 contactZ; /* +0x4C: src/func_80243A80.c */
-    u8 pad50[28]; /* +0x50: src/func_80243A80.c */
-    f32 angle; /* +0x6C: src/func_80243A80.c */
-    u8 pad70[144]; /* +0x70: src/func_80243A80.c */
-    u32 status; /* +0x100: src/func_80243A80.c */
-    u8 pad104[0x650 - 0x104];
-    s16 pose;
-    u8 pad652[0x6D0 - 0x652];
-    s32 active;
-    u8 pad6D4[0x1450 - 0x6D4];
-    s32 roomLock;
-    Shared_ActorRoomState *roomState;
-};
-
-
-
-typedef Shared_Func80243A80Actor Func80243A80Actor;
-typedef struct Shared_Func80243A80State Shared_Func80243A80State;
-struct Shared_Func80243A80State {
-    u32 flags; /* +0x0: src/func_80243A80.c */
-    s32 w1; /* +0x4: src/func_80243A80.c */
-    s32 w2; /* +0x8: src/func_80243A80.c */
-    s32 w3; /* +0xC: src/func_80243A80.c */
-    s32 w4; /* +0x10: src/func_80243A80.c */
-    s32 w5; /* +0x14: src/func_80243A80.c */
-    s32 w6; /* +0x18: src/func_80243A80.c */
-};
-
-
-
-typedef Shared_Func80243A80State Func80243A80State;
-
+#include "span_1000/code_80208000.h"
+#include "span_1000/code_8020AF9C.h"
+typedef struct NavigationCollisionQuery { s32 flags, word4, word8, wordC, word10, word14, word18; } NavigationCollisionQuery;
+extern NavigationCollisionQuery D_80103FF0, D_80104050, D_80104070, D_801040D0;
+s32 func_8024E62C_de(Player *);
+s32 func_8024DEE0_de(Player *);
+s32 func_8024DF5C_de(Player *);
+s32 func_8024DFA0_de(Player *);
+s32 func_80243A90_de(Player *, Vec3, NavigationCollisionQuery *);
+void func_80271F68_de(Vec3 *, void *, Vec3 *);
 extern f32 D_800C1D54_de;
 extern f32 D_800C1D58_de;
 extern f32 D_800C1D5C_de;
 extern f32 D_800C1D60_de;
 extern f32 D_800C1D64_de;
 
-typedef struct RoomBuffer {
-    s32 stride;
-    s32 reserved;
-    u8 records[1];
-} RoomBuffer;
-typedef struct RoomMap {
-    RoomBuffer *rooms;
-    s32 roomCount;
-    RoomBuffer *portals;
-    s32 portalCount;
-} RoomMap;
-typedef struct RoomRecord {
-    Vec3 center;
-    u32 flags;
-} RoomRecord;
-typedef struct RoomPortal {
-    u16 first;
-    u16 second;
-    u8 kind;
-} RoomPortal;
-
-s32 func_8024E62C_de(void *);
-s32 func_8024DEE0_de(void *);
-s32 func_8024DF5C_de(void *);
-s32 func_8024DFA0_de(void *);
-s32 func_80243A90_de(Func80243A80Actor *, Vec3, u32 *);
-extern char D_80103FF0;
-extern char D_80104050;
-extern char D_80104070;
-extern char D_801040D0;
-
-static void copyRoomBytes(void *destination, const void *source, s32 count) {
-    u8 *out = destination;
-    const u8 *in = source;
-    while (count-- > 0) *out++ = *in++;
-}
-
-void func_8020AF9C_de(void *mapData, Func80243A80Actor *actor) {
-    RoomMap *map = mapData;
-    s32 rooms[64], portals[64];
-    RoomRecord room;
-    RoomPortal portal;
-    Vec3 delta, position;
-    Func80243A80State query;
+void func_8020AF9C_de(NavigationGraph *arg0, Player *arg1) {
+    s32 sp18[64];
+    s32 sp118[64];
+    Vec3 sp218;
+    Vec3 position;
+    NavigationCollisionQuery query;
     u8 saved[0x50];
-    const void *settings;
-    f32 distance, best, initialY, absY;
-    s32 count = 0, i, chosen, candidate, mode, verticalSeen = 0;
-    s32 flags2000 = actor->flags & 0x2000;
-    s32 flags1000 = actor->flags & 0x1000;
-    for (i = 0; i < 64; i++) rooms[i] = portals[i] = -1;
-    chosen = actor->roomState->current;
-    copyRoomBytes(&room, map->rooms->records + chosen * map->rooms->stride, sizeof(room));
-    delta.x = room.center.x - actor->x;
-    delta.y = room.center.y - actor->y;
-    delta.z = room.center.z - actor->z;
-    best = delta.x * delta.x + delta.z * delta.z;
-    if (flags2000 || flags1000) best = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
-    initialY = delta.y;
-    if (initialY < 0.0f) initialY = -initialY;
-    if (actor->roomLock && actor->roomState->pending != -1) {
-        mode = func_8024E62C_de(actor);
-        if (mode && actor->active == 0) actor->roomState->pending = -1;
-        else if (mode || actor->pose == 15 || flags2000) {
-            candidate = actor->roomState->pending;
-            if (candidate == -1) candidate = actor->roomState->fallback;
-            copyRoomBytes(&room, map->rooms->records + candidate * map->rooms->stride, sizeof(room));
-            delta.x = room.center.x - actor->x;
-            delta.y = room.center.y - actor->y;
-            delta.z = room.center.z - actor->z;
-            distance = delta.x * delta.x + delta.z * delta.z;
-            if (flags2000 || flags1000 || (room.flags & 0x02000000))
-                distance = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
-            if (distance < best && ((delta.y < 0.0f && -delta.y < D_800C1D54_de) ||
-                (delta.y >= 0.0f && delta.y < D_800C1D58_de))) {
-                actor->roomState->previous = actor->roomState->current;
-                actor->roomState->current = candidate;
+    s32 sp2A8;
+    s32 sp2AC;
+    AiController *temp_v0_2;
+    AiController *temp_v1;
+    AiController *temp_v1_10;
+    AiController *temp_v1_2;
+    NavigationBuffer *temp_a0;
+    NavigationBuffer *temp_a1;
+    NavigationBuffer *temp_a3;
+    NavigationBuffer *temp_v1_3;
+    NavigationBuffer *temp_v1_4;
+    NavigationBuffer *temp_v1_6;
+    NavigationBuffer *temp_v1_8;
+    f32 temp_fs1f;
+    f32 var_fs0;
+    f32 var_fs0_2;
+    f32 var_fs0_3;
+    f32 var_fs0f;
+    f32 var_fs1;
+    f32 var_fv0f;
+    s32 *var_a0;
+    s32 *var_a0_3;
+    s32 *var_a1;
+    s32 *var_v1;
+    s32 temp_s0_3;
+    s32 temp_s0_4;
+    s32 temp_s3;
+    s32 temp_s6;
+    s32 temp_s7;
+    s32 temp_t1;
+    s32 temp_v0;
+    s32 temp_v0_3;
+    s32 var_a0_2;
+    s32 var_a3;
+    s32 var_fp;
+    s32 var_s2;
+    s32 var_s2_2;
+    s32 var_s3;
+    s32 var_t0;
+    s32 var_v0_2;
+    s32 var_v1_2;
+    NavigationPoint *temp_s0;
+    NavigationPoint *temp_s0_2;
+    NavigationPortal *temp_s4;
+    NavigationPortal *temp_v1_5;
+    NavigationPoint *temp_v1_7;
+    NavigationPoint *temp_v1_9;
+    u8 temp_a0_2;
+
+    var_s2 = 0;
+    var_a0 = sp118;
+    var_v1 = sp18;
+    do {
+        *var_v1 = -1;
+        *var_a0 = -1;
+        var_a0++;
+        var_s2 += 1;
+        var_v1++;
+    } while (var_s2 < 0x40);
+    temp_a3 = arg0->points;
+    sp2AC = 0;
+    temp_v0 = arg1->movementFlags;
+    temp_s7 = temp_v0 & 0x2000;
+    temp_s6 = temp_v0 & 0x1000;
+    func_80271F68_de(&sp218, navigationRecord(temp_a3, arg1->controller->current), &arg1->pos);
+    if ((temp_s7 != 0) || (temp_s6 != 0)) {
+        var_fs0 = (sp218.x * sp218.x) + (sp218.y * sp218.y) + (sp218.z * sp218.z);
+    } else {
+        var_fs0 = (sp218.x * sp218.x) + (sp218.z * sp218.z);
+    }
+    var_fs1 = sp218.y;
+    var_fs0f = var_fs0;
+    if (var_fs1 < 0.0f) {
+        var_fs1 = -var_fs1;
+    }
+    temp_v1 = arg1->controller;
+    var_fp = temp_v1->current;
+    if (arg1->computer != 0) {
+        var_a3 = 0;
+        if (temp_v1->queue[0] != -1) {
+            var_a0_2 = 0;
+            if (func_8024E62C_de(arg1) != 0) {
+                var_a0_2 = arg1->active == 0;
+                goto block_14;
             }
-            return;
+            if ((arg1->pose == 0xF) || (var_a3 = 0, (temp_s7 != 0))) {
+block_14:
+                if (var_a0_2 == 0) {
+                    temp_v1_2 = arg1->controller;
+                    var_s3 = temp_v1_2->queue[0];
+                    if (var_s3 == -1) {
+                        var_s3 = temp_v1_2->mode;
+                    }
+                    temp_v1_3 = arg0->points;
+                    temp_s0 = navigationRecord(temp_v1_3, var_s3);
+                    func_80271F68_de(&sp218, &temp_s0->position, &arg1->pos);
+                    if ((temp_s7 != 0) || (temp_s6 != 0) || (temp_s0->attributes.halves.flags & 0x200)) {
+                        var_fs0_2 = (sp218.x * sp218.x) + (sp218.y * sp218.y) + (sp218.z * sp218.z);
+                    } else {
+                        var_fs0_2 = (sp218.x * sp218.x) + (sp218.z * sp218.z);
+                    }
+                    if (var_fs0_2 < var_fs0f) {
+                        if (sp218.y < 0.0f) {
+                            if (-sp218.y < D_800C1D54_de) {
+                                goto block_27;
+                            }
+                        } else if (sp218.y < D_800C1D58_de) {
+block_27:
+                            temp_v0_2 = arg1->controller;
+                            temp_v0_2->previous = temp_v0_2->current;
+                            arg1->controller->current = var_s3;
+                        }
+                    }
+                } else {
+                    arg1->controller->queue[0] = -1;
+                    goto block_29;
+                }
+            } else {
+                goto block_30;
+            }
+        } else {
+            goto block_30;
         }
-    }
-    for (i = 0; i < map->portalCount; i++) {
-        copyRoomBytes(&portal, map->portals->records + i * map->portals->stride, sizeof(portal));
-        if (portal.first == actor->roomState->current) { rooms[count] = portal.second; portals[count++] = i; }
-        if (portal.second == actor->roomState->current) { rooms[count] = portal.first; portals[count++] = i; }
-    }
-    for (i = 0; i < count; i++) {
-        candidate = rooms[i];
-        copyRoomBytes(&room, map->rooms->records + candidate * map->rooms->stride, sizeof(room));
-        copyRoomBytes(&portal, map->portals->records + portals[i] * map->portals->stride, sizeof(portal));
-        if ((room.flags & 0x300000) && !flags1000 && !flags2000) continue;
-        delta.x = room.center.x - actor->x;
-        delta.y = room.center.y - actor->y;
-        delta.z = room.center.z - actor->z;
-        distance = delta.x * delta.x + delta.z * delta.z;
-        if (flags2000 || flags1000) distance = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
-        absY = delta.y;
-        if (absY < 0.0f) absY = -absY;
-        if (portal.kind == 3 || portal.kind == 10 || portal.kind == 5 || (!flags1000 && (room.flags & 0x20))) {
-            if (!(absY < initialY)) continue;
-            if (!verticalSeen) { best = D_800C1D60_de; verticalSeen = 1; }
-            if (!(distance < best) && best != D_800C1D64_de) continue;
-        } else if (!(distance < best)) continue;
-        position = room.center;
-        position.y += D_800C1D5C_de;
-        if (actor->type == 1 && (actor->status & 0x300000)) settings = &D_801040D0;
-        else {
-            mode = func_8024DEE0_de(actor);
-            if (!func_8024DF5C_de(actor)) settings = mode ? &D_80104050 : &D_801040D0;
-            else if (!func_8024DFA0_de(actor)) settings = &D_80104070;
-            else settings = &D_80103FF0;
+    } else {
+block_29:
+        var_a3 = 0;
+block_30:
+        var_t0 = 0;
+        temp_t1 = arg1->controller->current;
+        if (arg0->portalCount > 0) {
+            var_a1 = sp118;
+            var_a0_3 = sp18;
+            do {
+                temp_v1_4 = arg0->portals;
+                temp_v1_5 = navigationRecord(temp_v1_4, var_a3);
+                if (temp_v1_5->first == temp_t1) {
+                    var_t0 += 1;
+                    *var_a0_3 = (s32) temp_v1_5->second;
+                    *var_a1 = var_a3;
+                    var_a1++;
+                    var_a0_3++;
+                }
+                if (temp_v1_5->second == temp_t1) {
+                    var_t0 += 1;
+                    *var_a0_3 = (s32) temp_v1_5->first;
+                    *var_a1 = var_a3;
+                    var_a1++;
+                    var_a0_3++;
+                }
+                var_a3 += 1;
+            } while (var_a3 < arg0->portalCount);
         }
-        copyRoomBytes(&query, settings, sizeof(query));
-        query.flags = 0x4000;
-        copyRoomBytes(saved, actor, sizeof(saved));
-        mode = func_80243A90_de(actor, position, &query.flags);
-        copyRoomBytes(actor, saved, sizeof(saved));
-        if (!mode) { best = distance; chosen = candidate; }
+        var_s2_2 = 0;
+        sp2A8 = var_t0;
+        if (var_t0 > 0) {
+            temp_fs1f = D_800C1D5C_de;
+            var_v1_2 = 0 * 4;
+            do {
+                temp_a1 = arg0->points;
+                temp_s3 = sp18[var_s2_2];
+                temp_a0 = arg0->portals;
+                temp_s0_2 = navigationRecord(temp_a1, temp_s3);
+                temp_s4 = navigationRecord(temp_a0, sp118[var_s2_2]);
+                if (!(temp_s0_2->attributes.word & 0x300000) || (temp_s6 != 0) || (temp_s7 != 0)) {
+                    func_80271F68_de(&sp218, &temp_s0_2->position, &arg1->pos);
+                    if ((temp_s7 != 0) || (temp_s6 != 0)) {
+                        var_fs0_3 = (sp218.x * sp218.x) + (sp218.y * sp218.y) + (sp218.z * sp218.z);
+                    } else {
+                        var_fs0_3 = (sp218.x * sp218.x) + (sp218.z * sp218.z);
+                    }
+                    var_fv0f = sp218.y;
+                    if (var_fv0f < 0.0f) {
+                        var_fv0f = -var_fv0f;
+                    }
+                    temp_a0_2 = temp_s4->kind;
+                    if ((temp_a0_2 == 3) || (temp_a0_2 == 0xA) || (temp_a0_2 == 5) || ((temp_s6 == 0) && (temp_s0_2->attributes.halves.flags & 0x20))) {
+                        if (var_fv0f < var_fs1) {
+                            if (sp2AC == 0) {
+                                var_fs0f = D_800C1D60_de;
+                                sp2AC = 1;
+                            }
+                            if ((var_fs0_3 < var_fs0f) || (var_fs0f == D_800C1D64_de)) {
+                                temp_v1_6 = arg0->points;
+                                temp_v1_7 = navigationRecord(temp_v1_6, temp_s3);
+                                position = temp_v1_7->position;
+                                position.y += temp_fs1f;
+                                if ((arg1->kind == 1) && (arg1->weaponFlags & 0x300000)) {
+                                    goto block_60;
+                                }
+                                temp_s0_3 = func_8024DEE0_de(arg1);
+                                if (func_8024DF5C_de(arg1) == 0) {
+                                    if (temp_s0_3 != 0) {
+                                        query = D_80104050;
+                                    } else {
+block_60:
+                                        query = D_801040D0;
+                                    }
+                                } else if (func_8024DFA0_de(arg1) == 0) {
+                                    query = D_80104070;
+                                } else {
+                                    query = D_80103FF0;
+                                }
+                                query.flags = 0x4000;
+                        __builtin_memcpy(saved, arg1, sizeof(saved));
+                                var_v0_2 = func_80243A90_de(arg1, position, &query);
+                                __builtin_memcpy(arg1, saved, sizeof(saved));
+                                goto block_86;
+                            }
+                        }
+                    } else if (var_fs0_3 < var_fs0f) {
+                        temp_v1_8 = arg0->points;
+                        temp_v1_9 = navigationRecord(temp_v1_8, temp_s3);
+                        position = temp_v1_9->position;
+                        position.y += temp_fs1f;
+                        if ((arg1->kind == 1) && (arg1->weaponFlags & 0x300000)) {
+                            goto block_75;
+                        }
+                        temp_s0_4 = func_8024DEE0_de(arg1);
+                        if (func_8024DF5C_de(arg1) == 0) {
+                            if (temp_s0_4 != 0) {
+                                query = D_80104050;
+                            } else {
+block_75:
+                                query = D_801040D0;
+                            }
+                        } else if (func_8024DFA0_de(arg1) == 0) {
+                            query = D_80104070;
+                        } else {
+                            query = D_80103FF0;
+                        }
+                        query.flags = 0x4000;
+                        __builtin_memcpy(saved, arg1, sizeof(saved));
+                        var_v0_2 = func_80243A90_de(arg1, position, &query);
+                        __builtin_memcpy(arg1, saved, sizeof(saved));
+block_86:
+                        if (var_v0_2 == 0) {
+                            var_fs0f = var_fs0_3;
+                            var_fp = temp_s3;
+                        }
+                    }
+                }
+                var_s2_2 += 1;
+                var_v1_2 = var_s2_2 * 4;
+            } while (var_s2_2 < sp2A8);
+        }
+        temp_v1_10 = arg1->controller;
+        temp_v0_3 = temp_v1_10->current;
+        if (temp_v0_3 != var_fp) {
+            temp_v1_10->previous = temp_v0_3;
+        }
+        arg1->controller->current = var_fp;
     }
-    if (actor->roomState->current != chosen) actor->roomState->previous = actor->roomState->current;
-    actor->roomState->current = chosen;
 }
