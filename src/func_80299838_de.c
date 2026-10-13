@@ -9,20 +9,20 @@ extern s32 D_8014D080;
 s32 func_80299838_de(s32 arg0)
 {
   s32 count;
-  void *ptr;
+  struct MenuHandlerEntry *ptr;
   count = 0;
-  ptr = D_8014D080 + 0x1C;
+  ptr = (void *)(D_8014D080 + 0x1C);
   loop:
-  if ((((func_8029A838_S1 *)(ptr))->unk0) != arg0)
+  if ((ptr->id) != arg0)
   {
     goto not_found;
   }
 
-  return ((func_8029A838_S1 *)(ptr))->unk10;
+  return ptr->flags;
   not_found:
   count += 1;
 
-  ptr += 0x14;
+  ptr += 1;
   if (count < 0x40)
   {
     if (ptr)

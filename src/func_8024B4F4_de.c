@@ -4,8 +4,9 @@
 
 
 void func_8024B4F4_de(void *arg0, int arg1) {
-    func_8024B4E4_de_FuncPtr fn = ((func_8024B4E4_S1 *)(arg0))->unk28C;
-    fn(arg0, ((func_8024B4E4_S1 *)(arg0))->unk170);
-    func_8026EE20_de(&((func_8024B4E4_S1 *)(arg0))->unk74, arg1, ((func_8024B4E4_S1 *)(arg0))->unkE8);
+    Actor36 *actor = arg0;
+    func_8024B4E4_de_FuncPtr fn = actor->update;
+    fn(arg0, actor->state);
+    func_8026EE20_de(actor->matrix, arg1, &actor->box);
 }
 
