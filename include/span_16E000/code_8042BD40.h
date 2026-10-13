@@ -111,6 +111,11 @@ struct func_8042CE54_S1;
 struct func_8042CE54_S1 {
     char pad0[0xE0];
     void * unkE0;
+    char padE4[4];
+    s32 first, count;
+    s32 players[8];
+    s32 icons[8][2];
+    char killText[4][25], scoreText[4][25], ratioText[4][25], valueText[4][25];
 };
 
 struct State_func_8042D908_de;
@@ -222,4 +227,12 @@ struct IntegerStateF4 {
 /* unbake published declaration: published_f28294851d68dd6429d140d7 */
 extern void func_8042CFB0_de(void);
 
+/* Results-screen group identifiers from each native menu resource set. */
+#if defined(VERSION_DE)
+enum { RESULTS_RANK_GROUP = 0x264, RESULTS_SECONDARY_GROUP = 0x269 };
+#elif defined(VERSION_EU_X)
+enum { RESULTS_RANK_GROUP = 0x26D, RESULTS_SECONDARY_GROUP = 0x272 };
+#else
+enum { RESULTS_RANK_GROUP = 0x269, RESULTS_SECONDARY_GROUP = 0x26E };
+#endif
 #endif

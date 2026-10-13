@@ -74,9 +74,15 @@ struct func_8041F2A0_Row {
 typedef struct func_8041F2A0_Row func_8041F2A0_Row;
 
 struct func_8041F2A0_Config {
-    char pad0[0x78];
+    s16 total, score, kills, selected, other;
+    char padA[0x78 - 0xA];
     u8 active;
-    char pad79[0x96 - 0x79];
+    char pad79[7];
+    s8 kind;
+    char pad81[3];
+    char name[13];
+    u8 out, rankPad, rank;
+    char tail[2];
 };
 typedef struct func_8041F2A0_Config func_8041F2A0_Config;
 
