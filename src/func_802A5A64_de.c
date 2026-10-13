@@ -13,15 +13,15 @@ extern func_802A6A54_S2 D_800D15E0;
 extern func_802A6A54_S3 D_800D15F0;
 
 void func_802A5A64_de(void *arg0) {
-    if (((func_802A6A54_S1 *)(arg0))->unk24 != 0.0f) {
-        D_800D15E0.unk4 = ((func_802A6A54_S1 *)(arg0))->unk34;
-        D_800D15E0.unk8 = ((func_802A6A54_S1 *)(arg0))->unk38;
-        D_800D15E0.unkC = ((func_802A6A54_S1 *)(arg0))->unk3C;
+    if (((EffectContribution *)arg0)->weight != 0.0f) {
+        D_800D15E0.unk4 = ((EffectContribution *)arg0)->x;
+        D_800D15E0.unk8 = ((EffectContribution *)arg0)->y;
+        D_800D15E0.unkC = ((EffectContribution *)arg0)->z;
     } else {
         D_800D15E0.unk4 = 0.0f;
         D_800D15E0.unk8 = 0.0f;
         D_800D15E0.unkC = 0.0f;
     }
-    D_800D15F0.unk0 = ((func_802A6A54_S1 *)(arg0))->unk24;
-    D_800D15F0.unk4 = ((func_802A6A54_S1 *)(arg0))->unk14;
+    D_800D15F0.unk0 = ((EffectContribution *)arg0)->weight;
+    D_800D15F0.unk4 = ((EffectContribution *)arg0)->scale;
 }

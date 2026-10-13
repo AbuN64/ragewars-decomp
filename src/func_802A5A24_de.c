@@ -5,13 +5,13 @@ extern f32 D_800C5EA0_de;
 
 void func_802A5A24_de(void *arg0, s32 arg1)
 {
-  ((func_802A6A14_S1 *)(arg0))->unk14 = (f32) D_800C5EA0_de;
-  ((func_802A6A14_S1 *)(arg0))->unk0 = arg1;
-  ((func_802A6A14_S1 *)(arg0))->unk4 = 0;
-  ((func_802A6A14_S1 *)(arg0))->unkC = 0;
-  ((func_802A6A14_S1 *)(arg0))->unk10 = 0;
-  ((func_802A6A14_S1 *)(arg0))->unk24 = 0;
-  ((func_802A6A14_S1 *)(arg0))->unk34 = 0;
-  ((func_802A6A14_S1 *)(arg0))->unk38 = 0;
-  ((func_802A6A14_S1 *)(arg0))->unk3C = 0;
+  ((EffectContribution *)arg0)->scale = (f32) D_800C5EA0_de;
+  ((EffectContribution *)arg0)->id = arg1;
+  ((EffectContribution *)arg0)->state = 0;
+  ((EffectContribution *)arg0)->stateC = 0;
+  ((EffectContribution *)arg0)->state10 = 0;
+  ((EffectContribution *)arg0)->weight = 0;
+  ((EffectContribution *)arg0)->x = 0;
+  ((EffectContribution *)arg0)->y = 0;
+  ((EffectContribution *)arg0)->z = 0;
 }
