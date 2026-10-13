@@ -7,14 +7,15 @@
 
 
 int func_8024DDB4_de(void *arg0) {
-    void *temp_a0 = ((func_80205314_S1 *)(arg0))->unk18;
+    Actor_u1 *actor = arg0;
+    Resource_u1 *temp_a0 = actor->resource;
     unsigned int new_var = 0;
-    if (*(int *)temp_a0 != 1) {
+    if (temp_a0->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return ((func_80204468_S3 *)(temp_a0))->unk14 & 2;
+        return temp_a0->flags14 & 2;
     } else {
-        return ((func_80204468_S3 *)(temp_a0))->unk14 & 2;
+        return temp_a0->flags14 & 2;
     }
 }
