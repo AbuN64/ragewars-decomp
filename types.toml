@@ -829,6 +829,7 @@ schema = 1
 "func_80233930_de" = { evidence = "landed", signature = "void func_80233930_de(Effect33920 *arg0, u32 x, u32 y, u32 z, Vec3 *out)" }
 "func_80233B14_de" = { evidence = "landed", signature = "void func_80233B14_de(Overlay *overlay)" }
 "func_80233C88_de" = { evidence = "landed", signature = "void func_80233C88_de(Entity_func_80233C88_de *entity)" }
+"func_80233DFC_de" = { evidence = "landed", signature = "void func_80233DFC_de(Entity_func_80233C88_de *actor)" }
 "func_802349C0_de" = { evidence = "landed", signature = "void func_802349C0_de(void *arg0)" }
 "func_80234DE0_de" = { evidence = "landed", signature = "void func_80234DE0_de(Shared_func_80234FDC_S2 *camera)" }
 "func_80234FEC_de" = { evidence = "landed", signature = "void func_80234FEC_de(func_80234FDC_S2 *arg0)" }
@@ -7689,7 +7690,7 @@ schema = 1
 "D_800CBC30" = { declaration = "extern int D_800CBC30[];", evidence = "authored" }
 "D_800CBC40" = { declaration = "extern int D_800CBC40[];", evidence = "authored" }
 "D_800CBC80" = { declaration = "extern s32 D_800CBC80;", evidence = "authored" }
-"D_800CBC90" = { declaration = "extern u8 D_800CBC90[];", evidence = "authored" }
+"D_800CBC90" = { declaration = "extern Shared_ParticleLighting D_800CBC90[];", evidence = "authored" }
 "D_800CBC94" = { declaration = "extern u8 D_800CBC94[];", evidence = "authored" }
 "D_800CBC9C" = { declaration = "extern u8 D_800CBC9C[];", evidence = "authored" }
 "D_800CBCA0" = { declaration = "extern u8 D_800CBCA0[];", evidence = "authored" }

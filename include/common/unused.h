@@ -3618,7 +3618,7 @@ extern s32 D_002B5400;
 extern char D_800D38D8[];
 
 /* unbake published declaration: published_e7f925ab135292368aba6c46 */
-extern u8 D_800CBC90[];
+extern Shared_ParticleLighting D_800CBC90[];
 
 /* unbake published declaration: published_e8568c898acb454105ce9427 */
 extern void *jtbl_800DD9F0[];
