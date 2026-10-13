@@ -1,3 +1,4 @@
+#include "span_16E000/code_80400000.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8028B64C.h"
 #include "types.h"
@@ -11,6 +12,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 void func_8028BB1C_de(void *arg0, void *arg1, s32 arg2) {
+    struct Item_func_80403458_de *item = arg1;
     s32 bitIndex;
     void *field80;
     s32 field1B40C;
@@ -21,7 +23,7 @@ void func_8028BB1C_de(void *arg0, void *arg1, s32 arg2) {
     s32 idx;
     s32 idx2;
 
-    bitIndex = ((func_8028BAF8_S1 *)(arg1))->unk13;
+    bitIndex = item->bitIndex;
     field80 = ((World_func_8028787C_de *)(arg0))->levels;
     field1B40C = ((World_func_8028787C_de *)(arg0))->level;
     temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 2);

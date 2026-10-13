@@ -15,7 +15,7 @@ struct Item_func_80403458_de {
     char padF[2];
     u8 kind;
     u8 subkind;
-    char pad13[1];
+    u8 bitIndex; /* 0x13: persistent trigger bit */
 };
 
 /* unbake published declaration: published_0ca6f45a4a7e2e51338a3974 */
@@ -68,7 +68,7 @@ struct Item_func_8040332C_de {
     char pad0[0x11];
     u8 kind;
     u8 subkind;
-    char pad13[1];
+    u8 bitIndex; /* 0x13: persistent trigger bit */
 };
 
 struct Tables;

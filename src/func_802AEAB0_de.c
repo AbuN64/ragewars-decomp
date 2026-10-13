@@ -1,3 +1,4 @@
+#include "span_1000/code_802B0388.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_802AE028.h"
 #include "types.h"
@@ -22,55 +23,55 @@ extern void func_802B2FB0_de(s32, void *);
 
 
 void func_802AEAB0_de(void *arg0, InitParams *arg1) {
-    char *obj = arg0;
+    ALSeqPlayer_func_802B0C94_de *obj = arg0;
     InitParams *params = arg1;
     s32 context = params->context;
     s32 global = D_800D4070;
     s32 allocation;
     s32 i;
 
-    ((func_802B3B80_S1 *)(obj))->unk30 = 0xFF;
-    ((func_802B3B80_S1 *)(obj))->unk24 = 0x1E8;
-    ((func_802B3B80_S1 *)(obj))->unk32 = 0x7FFF;
-    ((func_802B3B80_S1 *)(obj))->unk20 = 0;
-    ((func_802B3B80_S1 *)(obj))->unk18 = 0;
-    ((func_802B3B80_S1 *)(obj))->unk28 = 0;
-    ((func_802B3B80_S1 *)(obj))->unk2C = 0;
-    ((func_802B3B80_S1 *)(obj))->unk5C = 0x3E80;
-    ((func_802B3B80_S1 *)(obj))->unk1C = 0;
-    ((func_802B3B80_S1 *)(obj))->unk14 = global;
-    ((func_802B3B80_S1 *)(obj))->unk70 = params->value10;
-    ((func_802B3B80_S1 *)(obj))->unk74 = params->value14;
-    ((func_802B3B80_S1 *)(obj))->unk78 = params->value18;
-    ((func_802B3B80_S1 *)(obj))->unk38 = 9;
-    ((func_802B3B80_S1 *)(obj))->unk34 = params->kind;
-    ((func_802B3B80_S1 *)(obj))->unk60 = func_802B0340_de(0, 0, (void *)context, params->kind, 0x10);
+    obj->chanMask = 0xFF;
+    obj->uspt = 0x1E8;
+    obj->vol = 0x7FFF;
+    obj->bank = 0;
+    obj->target = 0;
+    obj->nextDelta = 0;
+    obj->state = 0;
+    obj->frameTime = 0x3E80;
+    obj->curTime = 0;
+    obj->drvr = global;
+    obj->initOsc = params->value10;
+    obj->updateOsc = params->value14;
+    obj->stopOsc = params->value18;
+    obj->nextEvent.type = 9;
+    obj->maxChannels = params->kind;
+    obj->chanState = func_802B0340_de(0, 0, (void *)context, params->kind, 0x10);
     func_802B1990_de(obj);
 
     allocation = func_802B0340_de(0, 0, (void *)context, params->count38, 0x38);
-    ((func_802B3B80_S1 *)(obj))->unk6C.v0 = 0;
+    obj->vFreeList = 0;
     i = 0;
     if (params->count38 > 0) {
         {
-            s32 *records = (s32 *)allocation;
+            ALVoiceState_s38 *records = (ALVoiceState_s38 *)allocation;
             do {
-                records[0] = ((func_802B3B80_S1 *)(obj))->unk6C.v0;
-                ((func_802B3B80_S1 *)(obj))->unk6C.v1 = records;
+                records->next = obj->vFreeList;
+                obj->vFreeList = records;
                 i++;
-                records = &((func_8020D1FC_S1 *)(records))->unk38;
+                records++;
             } while (i < params->count38);
         }
     }
 
-    ((func_802B3B80_S1 *)(obj))->unk64 = 0;
-    ((func_802B3B80_S1 *)(obj))->unk68 = 0;
+    obj->vAllocHead = 0;
+    obj->vAllocTail = 0;
     allocation = func_802B0340_de(0, 0, (void *)context, params->count1C, 0x1C);
-    func_802AFFC0_de(obj + 0x48, (void *)allocation, params->count1C);
+    func_802AFFC0_de(&obj->evtq, (void *)allocation, params->count1C);
     {
-        CallbackNode *node = (CallbackNode *)obj;
-        node->state = 0;
-        node->callback = &D_002AEC20;
-        node->self = node;
+        ALPlayer_s *node = &obj->node;
+        node->next = 0;
+        node->handler = &D_002AEC20;
+        node->clientData = node;
         func_802B2FB0_de(D_800D4070, node);
     }
 }
