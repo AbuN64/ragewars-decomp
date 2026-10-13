@@ -108,7 +108,7 @@ s32 func_80408DF0_de(void *owner, Menu_func_80408DF0_de *menu) {
         }
         if (menu->prompt != 0) {
             func_80442574_de(menu->prompt != D_0044E48C && menu->player != 0 ?
-                              &((func_80408E1C_S1 *)(menu->player->messages))->unk554 : D_8014561C,
+                              menu->player->messages->text : D_8014561C,
                           menu->prompt, menu->player, menu->slot, ch);
         }
     }

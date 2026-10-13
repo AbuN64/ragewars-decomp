@@ -30,6 +30,7 @@ extern void func_804098A4_de(s32 offset, s32 value);
 struct Messages;
 struct Messages {
     char pad0[0x554];
+    char text[1];
 };
 struct Messages;
 struct Player_func_80408DF0_de;

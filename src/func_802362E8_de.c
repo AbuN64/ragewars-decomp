@@ -5,6 +5,7 @@
 #include "n64sdk.h"
 #include "gbi.h"
 #include "types.h"
+#include "shared/gameplay_camera.h"
 
 /* Draws one view of the game world: after the per-frame setup (func_802909F0_de) it runs the world, player,
  * effect, particle, object and translucent passes for the view in order, skipping the player and effect
@@ -76,8 +77,8 @@ void func_802362E8_de(char *view, char *world) {
         {
             Gfx *_g;
 
-            right = ((func_80219490_S2 *)(view))->unk2A4 + ((func_80219490_S2 *)(view))->unk29C;
-            gDPFillRectangle((Gfx *)(D_80110634++), ((func_80219490_S2 *)(view))->unk2A4, ((func_80219490_S2 *)(view))->unk2A8, right, ((func_80219490_S2 *)(view))->unk2A8 + ((func_80219490_S2 *)(view))->unk2A0);
+            right = ((Shared_func_80234FDC_S2 *)(view))->unk2A4 + ((Shared_func_80234FDC_S2 *)(view))->unk29C;
+            gDPFillRectangle((Gfx *)(D_80110634++), ((Shared_func_80234FDC_S2 *)(view))->unk2A4, ((Shared_func_80234FDC_S2 *)(view))->unk2A8, right, ((Shared_func_80234FDC_S2 *)(view))->unk2A8 + ((Shared_func_80234FDC_S2 *)(view))->unk2A0);
         }
     }
 }

@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8025A3EC.h"
 #include "types.h"
+#include "common/unused.h"
 /* Updates a playing view each frame: records the result of func_802395A4_de for its position in the context, selects its channel and checks whether it still plays; a view past its end, finished once, or whose track changed is marked done, and a done view that still plays is stopped once per frame and loses its handle; a stopped view first waits out its hold count, then is released with its slot and state cleared unless it is fading, while a playing view copies its tracked position and runs its three per-frame updates. The first channel selection matches as an inline helper returning the channel. */
 
 
@@ -29,8 +30,8 @@ extern void func_8025AB94_de(View_func_8025AE1C_de *);
 
 
 static inline char *selectChannel(Context_func_8025AE1C_de *context, s32 slot) {
-    func_802B2F00_de(&((func_80258D60_S1 *)(context))->unk84, context->slots.ids[slot]);
-    return &((func_80258D60_S1 *)(context))->unk84;
+    func_802B2F00_de(((Owner_func_8025A844_de *)context)->sound, context->slots.ids[slot]);
+    return ((Owner_func_8025A844_de *)context)->sound;
 }
 
 void func_8025AE1C_de(View_func_8025AE1C_de *view) {
@@ -53,7 +54,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
             view->tracked = 0;
             context = view->context;
             if (view->frame != context->frame) {
-                channel = &((func_80258D60_S1 *)(context))->unk84;
+                channel = ((Owner_func_8025A844_de *)context)->sound;
                 func_802B2F00_de(channel, context->slots.ids[view->slot]);
                 if (func_802B2620_de(channel) != 0) {
                     func_802B2F60_de(channel);
@@ -68,13 +69,13 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
         return;
     }
     if ((view->flags & 0x18) == 0x10) {
-        func_802B2D80_de((char *)view->context + 0x84);
+        func_802B2D80_de(((Owner_func_8025A844_de *)view->context)->sound);
         return;
     }
     if (playing == 0) {
         context = view->context;
         slots = &context->slots;
-        func_802B25D0_de(&((func_80258D60_S1 *)(context))->unk84, slots->ids[view->slot]);
+        func_802B25D0_de(((Owner_func_8025A844_de *)context)->sound, slots->ids[view->slot]);
         slots->ids[view->slot] = -1;
         view->field38 = 0;
         view->fieldC = -1;

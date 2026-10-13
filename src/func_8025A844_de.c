@@ -4,6 +4,7 @@
 #include "types.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "packed_float.h"
+#include "shared/gameplay_camera.h"
 
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
@@ -81,10 +82,10 @@ void func_8025AA2C_de(Emitter *emitter) {
     if (emitter->reset != 0) {
         emitter->level = D_800C3F50_de;
     }
-    listener = ((func_8025AA4C_S1 *)(emitter->scene))->unk2B98;
-    dx = emitter->x - ((func_8025AA4C_S2 *)(listener))->unk128;
-    dy = emitter->y - ((func_8025AA4C_S2 *)(listener))->unk12C;
-    dz = emitter->z - ((func_8025AA4C_S2 *)(listener))->unk130;
+    listener = ((Owner_func_8025A844_de *)emitter->scene)->listener;
+    dx = emitter->x - ((Shared_func_80234FDC_S2 *)listener)->position.x;
+    dy = emitter->y - ((Shared_func_80234FDC_S2 *)listener)->position.y;
+    dz = emitter->z - ((Shared_func_80234FDC_S2 *)listener)->position.z;
     distance = dx * dx + dy * dy + dz * dz;
     emitter->distance = distance;
     if (emitter->lastDistance < distance) {
@@ -111,8 +112,8 @@ void func_8025AA2C_de(Emitter *emitter) {
     level = emitter->level;
     if (D_800C9048 < level) {
         emitter->level = D_800C9048;
-    } else if (level < ((func_802077F4_S2 *)(&D_800C9048))->unk4) {
-        emitter->level = ((func_802077F4_S2 *)(&D_800C9048))->unk4;
+    } else if (level < (&D_800C9048)[1]) {
+        emitter->level = (&D_800C9048)[1];
     }
     emitter->lastDistance = emitter->distance;
 }

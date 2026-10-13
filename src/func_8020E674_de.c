@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8020D370.h"
 #include "types.h"
+#include "common/unused.h"
 typedef struct World World;
 
 
@@ -48,9 +49,9 @@ s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
     }
 
     invDuration = D_800C1E40_de / actor->field264;
-    delta.x = (actor->field258 - ((func_8020E674_S1 *)(actor->instance))->unk8.v0) * invDuration;
+    delta.x = (actor->field258 - ((Actor_func_8024A7A0_de *)actor->instance)->position0.x) * invDuration;
     delta.x *= scale * func_802B6560_de(actor->field278);
-    delta.z = (actor->field260 - ((func_8020E674_S1 *)(actor->instance))->unk8.v1.z) * invDuration;
+    delta.z = (actor->field260 - ((Actor_func_8024A7A0_de *)actor->instance)->position0.z) * invDuration;
     delta.z *= scale * func_802B6560_de(actor->field278);
     delta.y = scale * func_802B7130_de(actor->field278);
 
@@ -68,7 +69,7 @@ s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
     }
 
     segment = total / (f32)count;
-    current = ((func_8020E674_S1 *)(actor->instance))->unk8.v1;
+    current = ((Actor_func_8024A7A0_de *)actor->instance)->position0;
     accelScale = segment * segment * D_800C1E48_de;
     accelX = acceleration.x * accelScale;
     accelY = acceleration.y * accelScale;
