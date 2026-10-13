@@ -62,6 +62,7 @@ struct func_8024BCF8_S1 {
 
 /* unbake published declaration: published_2b0200c23df6228cb8675cf2 */
 extern float D_800C3B78;
+extern float D_800C3B7C;
 
 struct func_8024C0F4_S1;
 /* unbake published declaration: published_31649471e20a447e76944c89 */

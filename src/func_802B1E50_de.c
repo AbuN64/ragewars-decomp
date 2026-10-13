@@ -1,19 +1,14 @@
-#include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B0388.h"
+#include "span_1000/code_802B243C.h"
 #include "types.h"
 
+void func_802B1E50_de(ALSeqPlayer_func_802B0C94_de *arg0, f32 arg1) {
+    ALSeq_s *temp_v0;
 
-
-
-
-
-void func_802B1E50_de(void *arg0, f32 arg1) {
-    void *temp_v0;
-
-    temp_v0 = ((func_802B4ECC_S1 *)(arg0))->unk18;
+    temp_v0 = arg0->target;
     if (temp_v0 != 0) {
-        ((func_802B4ECC_S1 *)(arg0))->unk24 = (s32)(arg1 * ((func_8020D9C0_S1 *)(temp_v0))->unk14);
+        arg0->uspt = (s32)(arg1 * temp_v0->qnpt);
         return;
     }
-    ((func_802B4ECC_S1 *)(arg0))->unk24 = 0x1E8;
+    arg0->uspt = 0x1E8;
 }
