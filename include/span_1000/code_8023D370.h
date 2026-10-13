@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct Output;
 /* unbake published declaration: published_00e661449e62a0aebf55af1f */
 typedef struct Output Output;
@@ -466,5 +467,15 @@ struct func_8023E6C0_S1 {
 struct Ray_func_8023DF70_de;
 /* unbake published declaration: published_fd230efef2cc7197fad1b7c4 */
 typedef struct Ray_func_8023DF70_de Ray_func_8023DF70_de;
+
+extern f32 D_800C3670_de;
+extern f32 D_800C3674_de;
+extern f32 D_800C3678_de;
+extern f32 D_800C367C_de;
+extern f32 D_800C3680_de;
+extern f32 D_800C3684_de;
+extern f32 D_800C3688_de;
+extern f32 D_800C368C_de;
+extern Vec3 func_802723FC_de(Vec3 *,Vec3 *);
 
 #endif

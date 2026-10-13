@@ -1,16 +1,12 @@
 #include "shared/motion_step.h"
-extern f32 D_800CB404_de;
-extern f32 D_800D0640[];
-extern f32 D_800C3634_de,D_800C3638_de,D_800C363C_de,D_800C3640_de,D_800C3644_de,D_800C3648_de;
-extern f32 D_800C3670_de,D_800C3674_de,D_800C3678_de,D_800C367C_de,D_800C3680_de,D_800C3684_de,D_800C3688_de,D_800C368C_de;
-extern void func_8027207C_de(Vec3 *);
-extern void func_80271FC8_de(Vec3 *,f32,Vec3 *,Vec3 *);
-extern void func_80272180_de(Vec3 *,Vec3 *,Vec3 *,f32);
-extern void func_80272214_de(Vec3 *,Vec3 *,Vec3 *);
-extern Vec3 func_802723FC_de(Vec3 *,Vec3 *);
-extern void func_80271F9C_de(Vec3 *,Vec3 *,f32);
-extern void func_80271F34_de(Vec3 *,Vec3 *,Vec3 *);
-extern void func_8023EC54_de(void *,void *);
+#include "span_1000/code_80271B18.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
+#include "shared/func_80214624_de_closed.h"
+#include "span_1000/code_8023D370.h"
+#include "span_C76B0/data.h"
+#include "types.h"
+extern void func_80271FC8_de(void *,f32,void *,void *);
 /* Resolve contact response, updating translation and rotation along the contact normal. */
 s32 func_8023D380_de(ActorMotion *a) {
     Vec3 remaining;
@@ -21,12 +17,12 @@ s32 func_8023D380_de(ActorMotion *a) {
     Vec3 gravity;
     Vec3 rotation;
     MotionSurface *settings;
-    Vec3 *normal, *result, *delta;
+    Vec3 *delta;
     f32 step, highest, d, scale, damping, fraction;
     s32 i, active, type, timer;
     settings=a->surface;
     if (a->collisionState!=0) {
-    func_8027207C_de(&a->normal);
+    func_8027207C_de(&a->normal.x);
     step=D_800CB404_de*D_800C3634_de;
     a->position=a->end;
     a->projectedOrientation=a->orientation;
@@ -73,8 +69,7 @@ vertical:
 zero_vertical:
         a->velocity.y=0.0f;
     }
-    active=0;
-    if(a->horizontalTicks!=0 || (a->velocity.x=a->velocity.z=0.0f,a->horizontalTicks!=0) || a->verticalTicks!=0)active=1;
+if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontalTicks; active=0; if(timer!=0 || a->verticalTicks!=0)active=1;
     switch(a->mode) {
     case 7:
         if(a->orientationActive!=0)a->projectedOrientation=a->orientation;
@@ -140,7 +135,7 @@ zero_vertical:
     return 1;
 
     case 5: {
-        f32 remainingFraction; Vec3 *rptr;
+        f32 remainingFraction;
         if(a->orientationActive!=0) {
             func_80272214_de(&reflection,&a->orientation,&a->normal);
             projected=func_802723FC_de(&a->orientation,&a->normal);
