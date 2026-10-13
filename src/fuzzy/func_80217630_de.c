@@ -84,7 +84,7 @@ void func_80217630_de(WeaponMenuIconsMenu *menu, WeaponMenuIconsItem *items, s32
     f32 y;
     f32 alpha;
     s32 red;
-    s32 green;
+    s16 green;
     s32 blue;
     WeaponMenuIconsView *view;
     f32 *viewport;

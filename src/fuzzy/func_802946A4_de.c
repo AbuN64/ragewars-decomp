@@ -23,13 +23,15 @@ typedef struct Slot {
     char pad0[0x1D];
     unsigned char field1D;
     unsigned char field1E;
+    char pad1F[0x5D8-0x1F];
+    Board board;
 } Slot;
 
 extern s32 D_800CD730;
 extern f32 D_800D2988[];
 extern f32 D_800CD740_de;
 extern f32 D_800CD744_de;
-extern Board D_801468A0;
+
 extern Slot D_801462C8;
 extern char D_8011FE88;
 extern void func_80293268_de(void);
@@ -51,7 +53,7 @@ void func_802946A4_de(Session *session) {
     if (func_80264B6C_de() != 0) {
         session->music = func_80264B5C_de();
     }
-    board = &D_801468A0;
+    board = &D_801462C8.board;
     board->field20 = 0;
     board->field64 = 3;
     slot = &D_801462C8;
