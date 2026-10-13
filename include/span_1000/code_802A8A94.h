@@ -158,6 +158,8 @@ struct FontStyle {
     s32 primB;
     f32 width;
     f32 height;
+    s32 shadowX; /* 0xC0 */
+    s32 shadowY; /* 0xC4 */
 };
 
 struct func_802AB794_S1;
@@ -199,7 +201,7 @@ struct func_802AB78C_S1;
 typedef struct func_802AB78C_S1 func_802AB78C_S1;
 
 /* unbake published declaration: published_f3bf273158c5557ee856cde0 */
-extern char D_801376F8[];
+extern FontStyle D_801376F8;
 
 /* unbake published declaration: published_f4a2c404d673266d77942cfc */
 

@@ -98,7 +98,7 @@ extern f32 func_8029DE48_de(f32 x);
 extern s32 func_802A05D0_de(u8 *s);
 extern void func_802A1918_de(int *arg0, int *arg1);
 extern void func_802A23C4_de(s32 arg0);
-extern void func_802A88F0_de(s32 text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language);
+extern void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language);
 extern void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3);
 extern void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5);
 extern void func_802AAB68_de(float arg0, float arg1);
