@@ -1,6 +1,7 @@
 #ifndef UNBAKE_COMMON_TYPES_8FD754E1E915_H
 #define UNBAKE_COMMON_TYPES_8FD754E1E915_H
 #include "../types.h"
+#include "shared/model_instance.h"
 #include "common/types_8a8189af7b05.h"
 struct Player;
 /* unbake published declaration: published_038392ee5aca3bbae9c77df5 */
@@ -35,11 +36,15 @@ struct Player {
     s8 animationDone; /* 0x10E */
     u8 pad10F[0x61];
     u8 motion[0x170]; /* 0x170 */
-    u8 pad2E0[0x29C];
-    s32 roundCount; /* 0x57C */
-    s32 roundScore; /* 0x580 */
+    u8 pad2E0[8];
+    struct Object_func_8028B274_de weaponModel; /* 0x2E8 */
+    u8 pad3CE[0xB6];
+    struct AiBehaviourTable *weaponAnimationTable; /* 0x484 */
+    u8 pad488[0xF4];
+    f32 weaponSpinStep; /* 0x57C: weapon state +0x124 */
+    f32 weaponSpin; /* 0x580: weapon state +0x128 */
     u8 pad584[0xC];
-    s32 roundDeaths; /* 0x590 */
+    s32 weaponReset; /* 0x590: weapon state +0x138 */
     s32 gear; /* 0x594 */
     u8 pad598[0x3C];
     s32 slot; /* 0x5D4 */

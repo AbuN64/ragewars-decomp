@@ -238,12 +238,7 @@ struct func_8028B1F8_S1 {
 
 struct Object_func_8028B274_de;
 /* unbake published declaration: published_e8ced3816c9dd76557dd5d3c */
-struct Object_func_8028B274_de {
-    char pad0[4];
-    s16 index;
-    char pad6[0xDE];
-    u16 id;
-};
+#include "shared/model_instance.h"
 
 struct Scene_func_80288EA8_de;
 /* unbake published declaration: published_eaecdbd96c809d67a6da5edc */

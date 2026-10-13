@@ -59,9 +59,9 @@ void func_80244E58_de(void) {
         player = group->lead;
         if (player != 0) {
             func_8022E290_de(player);
-            player->roundCount = 0;
-            player->roundScore = 0;
-            player->roundDeaths = 0;
+            player->weaponSpinStep = 0.0f;
+            player->weaponSpin = 0.0f;
+            player->weaponReset = 0;
         }
         func_80239B64_de(group->members);
         func_80285D30_de(&D_8010EC90);

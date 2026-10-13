@@ -1576,7 +1576,7 @@ struct WeaponFireState;
 /* unbake published declaration: published_1ac661e0b4305bf3b2f44e85 */
 struct WeaponFireState {
     char pad0[0x2C];
-    s32 animation;
+    struct AiBehaviourTable *animation;
     char pad30[4];
     s8 variant;
     s8 queuedAction; /* 0x35 */
@@ -1590,7 +1590,8 @@ struct WeaponFireState {
     f32 spin;
     char pad12C[4];
     f32 charge; /* 0x130 */
-    char pad134[8];
+    char pad134[4];
+    s32 resetState; /* 0x138 */
     s32 mode;
     char pad140[4];
     s32 rounds;

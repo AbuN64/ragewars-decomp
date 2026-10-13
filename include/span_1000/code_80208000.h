@@ -1662,7 +1662,7 @@ typedef struct AiTarget {
     Player * player; /* 0x1D8 */
 } AiTarget;
 typedef struct AiBehaviourEntry { s32 id; void (*enter)(Player *,s32); void (*update)(Player *,s32); u8 reserved[0x14]; } AiBehaviourEntry;
-typedef struct AiBehaviourTable { struct AiBehaviourTable *next; u8 reserved[0x1C]; AiBehaviourEntry entries[1]; } AiBehaviourTable;
+typedef struct AiBehaviourTable { struct AiBehaviourTable *next; u8 reserved[0xC]; s32 defaultAnimation; u8 pad14[0xC]; AiBehaviourEntry entries[1]; } AiBehaviourTable;
 typedef struct AiController {
     Player * player; /* 0x0 */
     s32 current; /* 0x4 */

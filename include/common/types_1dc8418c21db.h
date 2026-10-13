@@ -3137,7 +3137,7 @@ struct WeaponInfo {
     s16 *computerClasses[3];
     char pad38[0xC];
     f32 scopeBounds[4]; /* 0x44 */
-    s32 animation; /* 0x54 */
+    struct AiBehaviourTable *animation; /* 0x54 */
     s32 animationCount;
 };
 
