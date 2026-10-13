@@ -162,13 +162,19 @@ extern int func_8024D264_de(void * arg0);
 
 typedef struct {
     s32 kind;
-    u8 pad4[0x14];
+    u8 pad4[0x10];
+    s32 flags14; /* 0x14 */
     union { f32 value; u16 mode; } at18;
     f32 value1C;
     f32 value20;
     u8 pad24[4];
     f32 value28;
-    u8 pad2C[0xC0];
+    u8 pad2C[0x10];
+    f32 value3C; /* 0x3C */
+    u8 pad40[0xC];
+    s32 flags4C; /* 0x4C */
+    f32 value50; /* 0x50 */
+    u8 pad54[0x98];
     f32 valueEC;
 } Resource_u1;
 typedef struct { u8 pad0[0x80C]; s32 active; } State_u1;

@@ -9,7 +9,8 @@
 
 
 s32 func_802624D8_de(void *arg0) {
-    void *temp = ((func_8020D0CC_S2 *)(arg0))->unk10;
+    func_8020D0CC_S2 *arg0_record = arg0;
+    void *temp = arg0_record->unk10;
     if (temp == 0) {
         return 0;
     }
