@@ -49,9 +49,9 @@ s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
     }
 
     invDuration = D_800C1E40_de / actor->field264;
-    delta.x = (actor->field258 - ((Actor_func_8024A7A0_de *)actor->instance)->position0.x) * invDuration;
+    delta.x = (actor->field258 - actor->instance->header.spatial.position.x) * invDuration;
     delta.x *= scale * func_802B6560_de(actor->field278);
-    delta.z = (actor->field260 - ((Actor_func_8024A7A0_de *)actor->instance)->position0.z) * invDuration;
+    delta.z = (actor->field260 - actor->instance->header.spatial.position.z) * invDuration;
     delta.z *= scale * func_802B6560_de(actor->field278);
     delta.y = scale * func_802B7130_de(actor->field278);
 
@@ -69,7 +69,7 @@ s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
     }
 
     segment = total / (f32)count;
-    current = ((Actor_func_8024A7A0_de *)actor->instance)->position0;
+    current = actor->instance->header.spatial.position;
     accelScale = segment * segment * D_800C1E48_de;
     accelX = acceleration.x * accelScale;
     accelY = acceleration.y * accelScale;
@@ -81,7 +81,7 @@ s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
 
     elapsed = segment;
 
-    if (func_802444A4_de(actor->instance, current, desired, &D_80103FD0) != 0 &&
+    if (func_802444A4_de(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
         (unsigned)(D_80103FCC->state - 7) >= 2) {
         return 1;
     }
@@ -98,7 +98,7 @@ s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
         desired.y = current.y + delta.y * elapsed + accelY;
         desired.z = current.z + delta.z * elapsed + accelZ;
 
-        if (func_802444A4_de(actor->instance, current, desired, &D_80103FD0) != 0 &&
+        if (func_802444A4_de(&actor->instance->header, current, desired, &D_80103FD0) != 0 &&
             (unsigned)(D_80103FCC->state - 7) >= 2) {
             return 1;
         }

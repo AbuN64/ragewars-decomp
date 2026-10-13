@@ -12,8 +12,8 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     Vec3 delta;
     s32 first, last;
     s32 keyCount;
-    InstanceHdr *temp_v0;
-    InstanceHdr *temp_v0_5;
+    BallisticInstance *temp_v0;
+    BallisticInstance *temp_v0_5;
     f32 temp_fs0_2;
     f32 temp_fs0f;
     f32 temp_fs1;
@@ -53,7 +53,7 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
         temp_v1 = arg0->field268;
         if (temp_v1 == 0) {
             temp_v0 = arg0->instance;
-            current = temp_v0->spatial.position;
+            current = temp_v0->header.spatial.position;
             delta = arg0->destination;
             temp_fv1f = delta.x - current.x;
             temp_fv1 = delta.y - current.y;
@@ -172,7 +172,7 @@ block_43:
                     temp_v0_4 = temp_s0_3->unk30;
                     temp_fv0_3 = func_80285630_de((temp_v0_4->gravityHi << 0x10) | temp_v0_4->gravityLo);
                     temp_v0_5 = arg0->instance;
-                    current = temp_v0_5->spatial.position;
+                    current = temp_v0_5->header.spatial.position;
                     delta = arg0->destination;
                     temp_ft0 = delta.x - current.x;
                     temp_fv1f_2 = delta.y - current.y;

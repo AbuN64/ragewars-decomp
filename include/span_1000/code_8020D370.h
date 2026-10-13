@@ -57,11 +57,17 @@ struct func_8020DC10_S1;
 /* unbake published declaration: published_50997f56aa1a93f36668f0ee */
 typedef struct func_8020DC10_S1 func_8020DC10_S1;
 
+/* The trajectory mode belongs to the full instance, beyond its 20-byte header. */
+typedef struct BallisticInstance {
+    InstanceHdr header;
+    u8 pad014[0x62E - 0x14];
+    s16 trajectoryMode;
+} BallisticInstance;
+
 struct Actor_func_8020E674_de;
-struct InstanceHdr;
 /* unbake published declaration: published_525af3877f2130c638c3ad61 */
 struct Actor_func_8020E674_de {
-    struct InstanceHdr *instance;
+    BallisticInstance *instance;
     u8 pad004[0x248 - 4];
     f32 field248;
     f32 field24C;
