@@ -4,5 +4,6 @@
 
 
 int func_802AE7B0_de(void *arg0) {
-    return ((func_80205628_S3 *)(arg0))->unkC;
+    struct ALCSeq_s *sequence = arg0;
+    return sequence->lastTicks;
 }
