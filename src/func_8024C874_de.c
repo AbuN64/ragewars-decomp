@@ -11,7 +11,10 @@
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
 void func_8024C874_de(void *arg0, f32 t, void *a, void *b) {
-    ((func_8024C864_S1 *)(arg0))->unk0 = ((func_8024C864_S1 *)(a))->unk0 + (t * (((func_8024C864_S1 *)(b))->unk0 - ((func_8024C864_S1 *)(a))->unk0));
-    ((func_8024C864_S1 *)(arg0))->unk4 = ((func_8024C864_S1 *)(a))->unk4 + (t * (((func_8024C864_S1 *)(b))->unk4 - ((func_8024C864_S1 *)(a))->unk4));
-    ((func_8024C864_S1 *)(arg0))->unk8 = ((func_8024C864_S1 *)(a))->unk8 + (t * (((func_8024C864_S1 *)(b))->unk8 - ((func_8024C864_S1 *)(a))->unk8));
+    Vec3 *out = arg0;
+    Vec3 *start = a;
+    Vec3 *end = b;
+    out->x = start->x + (t * (end->x - start->x));
+    out->y = start->y + (t * (end->y - start->y));
+    out->z = start->z + (t * (end->z - start->z));
 }

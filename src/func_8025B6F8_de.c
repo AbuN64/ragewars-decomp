@@ -8,25 +8,26 @@ extern float D_800C9068;
 
 
 void func_8025B6F8_de(void *arg0, int arg1, int arg2) {
+    Record_func_8025B758_de *slot = arg0;
     float k = D_800C9068;
 
-    ((func_8025B718_S1 *)(arg0))->unkC = -1;
-    ((func_8025B718_S1 *)(arg0))->unk8 = -1;
-    ((func_8025B718_S1 *)(arg0))->unk3A = -1;
-    ((func_8025B718_S1 *)(arg0))->unk40 = -1;
-    ((func_8025B718_S1 *)(arg0))->unkB4 = -1;
-    ((func_8025B718_S1 *)(arg0))->unkB0 = arg1;
-    ((func_8025B718_S1 *)(arg0))->unk0 = arg2;
-    ((func_8025B718_S1 *)(arg0))->unk38 = 0;
-    ((func_8025B718_S1 *)(arg0))->unk14 = 0;
-    ((func_8025B718_S1 *)(arg0))->unk58 = 0;
-    ((func_8025B718_S1 *)(arg0))->unk5C = 0;
-    ((func_8025B718_S1 *)(arg0))->unkA4 = 0;
-    ((func_8025B718_S1 *)(arg0))->unkAC = 0;
-    ((func_8025B718_S1 *)(arg0))->unkBC = 0;
-    ((func_8025B718_S1 *)(arg0))->unkC0 = 0;
-    ((func_8025B718_S1 *)(arg0))->unkC4 = 1;
-    ((func_8025B718_S1 *)(arg0))->unk2C = k;
-    ((func_8025B718_S1 *)(arg0))->unk34 = k;
-    ((func_8025B718_S1 *)(arg0))->unkB8 = k;
+    slot->f0C = -1;
+    slot->f08 = -1;
+    slot->f3A = -1;
+    slot->f40 = -1;
+    slot->fB4 = -1;
+    slot->owner = arg1;
+    slot->index = arg2;
+    slot->f38 = 0;
+    slot->f14 = 0;
+    slot->f58 = 0;
+    slot->f5C = 0;
+    slot->fA4 = 0;
+    slot->fAC = 0;
+    slot->fBC = 0;
+    slot->fC0 = 0;
+    slot->fC4 = 1;
+    slot->f2C = k;
+    slot->f34 = k;
+    slot->fB8 = k;
 }

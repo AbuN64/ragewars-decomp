@@ -19,7 +19,7 @@ void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag) {
     *out = 0;
     if (handle != 0) {
         table = *handle;
-        entry = &((func_802AB8DC_S1 *)(table))->unk8;
+        entry = &table->entries[0];
         remainder = index % table->count;
         remainder *= 8;
         remainder += (s32)entry;
