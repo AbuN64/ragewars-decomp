@@ -9,19 +9,12 @@
 #include "span_C76B0/data.h"
 extern s32 D_80141008;
 extern void func_80274098_de(void*,void*,void*);
-extern void func_80274244_de(f32*,f32*);
 extern void func_80272C60_de(void *, f32, f32, f32);
 extern u32 func_802337D0_de(State_func_802337D0_de*);
 extern void func_8026F620_de(f32*,f32*,f32*);
-extern void func_80272898_de(void*,void*,void*);
-/* Translation scalars carry IEEE float bits in the callee's three integer ABI words. */
+/* The camera position is passed as a three-word Vec3 value. */
 
-/* These views describe the actor's actual quaternion, matrix, and effect subobjects. */
-typedef union TransformEffect {
-    Effect33920 canonical;
-    struct { s32 kind,link; TransformVector origin; f32 radius;
-        State_func_802337D0_de x,y,z; } state;
-} TransformEffect;
+/* Actor transform and camera-effect subobjects. */
 typedef struct TransformActor {
     char pad0[0x28];
     f32 yaw,pitch,extraYaw,roll;
@@ -31,7 +24,7 @@ typedef struct TransformActor {
     char pad58[0x7C-0x58];
     s32 enabled;
     char pad80[0xA0-0x80];
-    TransformEffect effect;
+    Effect33920 effect;
     char padF4[0x134-0xF4];
     Vec3 cached;
     Rotation rotation,combined;
@@ -108,16 +101,16 @@ void func_802349C0_de(void *arg0) {
             result.x = zero;
             result.y = zero;
             result.z = zero;
-            func_80233930_de(&actor->effect.canonical, actor->effect.state.origin.word[0], actor->effect.state.origin.word[1], actor->effect.state.origin.word[2], &result);
-            func_802337D0_de(&actor->effect.state.x);
-            func_802337D0_de(&actor->effect.state.y);
-            func_802337D0_de(&actor->effect.state.z);
+            func_80233930_de(&actor->effect, actor->effect.origin, &result);
+            func_802337D0_de(&actor->effect.x);
+            func_802337D0_de(&actor->effect.y);
+            func_802337D0_de(&actor->effect.z);
             if (arg0 != &D_80141008) {
                 var_s0 = ((TransformWorld*)(void*)&D_80141008)->effects;
                 if (var_s0 != 0) {
                     do {
-                        func_80233930_de(var_s0, actor->position.word[0], actor->position.word[1], actor->position.word[2], &result);
-                        var_s0 = *(Effect33920**)&var_s0->unk04;
+                        func_80233930_de(var_s0, actor->position.value, &result);
+                        var_s0 = var_s0->next;
                     } while (var_s0 != 0);
                 }
             }
