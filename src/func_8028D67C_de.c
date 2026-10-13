@@ -14,7 +14,7 @@ void func_8028D67C_de(State_func_8028D67C_de *arg0)
   int first_index;
   s32 var_s0;
   s32 var_s3;
-  State_func_8028D67C_de *var_s1;
+  
   temp_f1 = arg0->unk1B31C + 1.0f;
   arg0->unk1B31C = temp_f1;
   var_s3 = 1;
@@ -29,12 +29,10 @@ void func_8028D67C_de(State_func_8028D67C_de *arg0)
   var_s0 = (first_index = 0);
   if (arg0->unkC4C > first_index)
   {
-    var_s1 = arg0;
     do
     {
-      temp_a0 = var_s1->values[0];
+      temp_a0 = arg0->values[var_s0];
       func_80250624_de(temp_a0, var_s3);
-      var_s1 = &((func_8028D658_S1 *)(var_s1))->unk4;
       var_s0 += 1;
     }
     while (var_s0 < arg0->unkC4C);
