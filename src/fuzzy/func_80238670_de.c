@@ -17,10 +17,10 @@ void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 specia
     FlareRadii radii = D_800C344C_de;
     FlareAlphas alphas = D_800C3468_de;
     FlareColors colors = D_800C3484_de;
-    f32 dx, dy, distance, ratio, nx, ny;
+    f32 dx, dy, distance, nx, ny;
     f32 bottom, right, left, top, edge, width, half, alpha;
     Gfx *gfx;
-    s32 texture, i;
+    s32 i;
     if (intensity == 0.0f || actor->hidden) return;
     dx = D_800E28D0 / 2 - x;
     dy = D_800E28D4 / 2 - y;
@@ -28,9 +28,9 @@ void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 specia
     gDPSetTextureFilter(gfx, G_TF_BILERP);
     distance = func_802B72B0_de(dx * dx + dy * dy);
     if (!special) {
-        ratio = distance / func_802B72B0_de((f32)(D_800E28D0 * D_800E28D0) * D_800C34D8_de + (f32)(D_800E28D4 * D_800E28D4) * D_800C34D8_de);
-        if (ratio > D_800C34DC_de) intensity = 0.0f;
-        else intensity *= D_800C34DC_de - ratio;
+        edge = distance / func_802B72B0_de((f32)(D_800E28D0 * D_800E28D0) * D_800C34D8_de + (f32)(D_800E28D4 * D_800E28D4) * D_800C34D8_de);
+        if (edge > D_800C34DC_de) intensity = 0.0f;
+        else intensity *= D_800C34DC_de - edge;
     }
     distance *= D_800C85D0;
     if ((dx < 0.0f ? -dx : dx) > (dy < 0.0f ? -dy : dy)) {
@@ -70,7 +70,7 @@ void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 specia
         else width = radii.value[i] * D_800C3504_de;
         width *= D_800C3508_de;
         half = width * D_800C350C_de;
-        if (!(x > -half && x < D_800E28D0 + half && y > -half && y < D_800E28D4 + half)) return;
+        if (!(x > -half && x < D_800E28D0 + half && y > (top = -half) && y < D_800E28D4 + half)) return;
         if (special && i == 0) {
             gDPSetEnvColor(D_80110634++, 255, 255, 255, intensity * D_800C3510_de);
             func_802AAC28_de(600, 0, (s16)(s32)(x - half), (s16)(s32)(y - half), width, width, 1);
