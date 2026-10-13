@@ -1,42 +1,28 @@
-#include "common/types_1dc8418c21db.h"
-#include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_80434F4C.h"
 #include "types.h"
-/* Advances the current player's name-entry character one step forward, defaulting an unset slot to 'A' and wrapping past 'Z' back to a space. */
 
-extern char *D_800E54A4;
+
+
+
+
+
+
+extern Menu_func_80434EF4_de *D_800E54A4;
 extern void *func_8041B7FC_de(s32, s32);
 
-
-
-
-
-
-
-
-
-
+/* Advances the selected name character, wrapping past Z to a space. */
 void func_80434E34_de(s32 arg0) {
-    char *base;
-    char *entry;
     u8 value;
-    s32 *index;
-    char *flags;
 
-    flags = D_800E54A4 + arg0 * 4;
-    ((func_80205314_S2 *)(flags))->unk2C = 0;
-    func_8041B7FC_de(((func_80203E78_S1 *)(D_800E54A4))->unk4, arg0);
-    index = (s32 *)((arg0 * 0xB68 + D_800E54A4) + 0xB9C);
-    entry = (*index * 2 + arg0 * 0xB68) + D_800E54A4;
-    if (((func_80435010_S3 *)(entry))->unkB8C == 0) {
-        ((func_80435010_S3 *)(entry))->unkB8C = 0x41;
+    D_800E54A4->flags[arg0] = 0;
+    func_8041B7FC_de(D_800E54A4->unk4, arg0);
+    if (D_800E54A4->entries[arg0].name[D_800E54A4->entries[arg0].cursor].available == 0) {
+        D_800E54A4->entries[arg0].name[D_800E54A4->entries[arg0].cursor].available = 0x41;
     }
-    base = arg0 * 0xB68 + D_800E54A4;
-    entry = (((func_80435010_S4 *)(base))->unkB9C * 2 + arg0 * 0xB68) + D_800E54A4;
-    value = ((func_80435010_S3 *)(entry))->unkB8C;
-    value = value + 1;
+    value = D_800E54A4->entries[arg0].name[D_800E54A4->entries[arg0].cursor].available;
+    value++;
     if (value >= 0x5B) {
         value = 0x20;
     }
-    ((func_80435010_S3 *)(entry))->unkB8C = value;
+    D_800E54A4->entries[arg0].name[D_800E54A4->entries[arg0].cursor].available = value;
 }
