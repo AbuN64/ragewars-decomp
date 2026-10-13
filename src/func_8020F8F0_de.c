@@ -23,24 +23,21 @@ s32 func_8020F93C_de(void *arg0)
 {
   s32 var_a1;
   s32 var_v1;
-  void *var_a0;
+  Obj_func_8020F8F0_de *var_a0;
   var_a0 = arg0;
   var_a1 = 0;
-  if ((((func_8020F93C_S1 *)(var_a0))->unk38) == 0)
+  if ((var_a0->count) == 0)
   {
     return 0;
   }
   var_v1 = 0;
   do
   {
-    if (((((func_8020F93C_S1 *)(var_a0))->unk3C) != 0) && ((((func_8020F93C_S1 *)(var_a0))->unk6C) != 0))
+    if (((var_a0->keys[var_v1]) != 0) && ((var_a0->flags[var_v1]) != 0))
     {
       var_a1 += 1;
-      var_a0++;
-      var_a0--;
     }
     var_v1 += 1;
-    var_a0 += 4;
   }
   while (var_v1 < 0xA);
   return var_a1;
@@ -55,28 +52,26 @@ s32 func_8020F984_de(void *arg0) {
     s32 mask;
     s32 var_a1;
     s32 var_v1;
-    void *var_a0;
+    Obj_func_8020F8F0_de *var_a0;
 
     var_a0 = arg0;
     var_a1 = -1;
     var_f1 = D_800C21F0_eu_x.unk4;
     var_v1 = 0;
-    if (((func_8020F984_S2 *)(var_a0))->unk38 > 0) {
+    if (var_a0->count > 0) {
         mask = 0x300000;
         temp_f2 = var_f1;
-        temp_v0 = ((func_8020F984_S2 *)(var_a0))->unk38;
+        temp_v0 = var_a0->count;
         do {
-            if ((((func_80203C40_S1 *)(((func_8020F984_S2 *)(var_a0))->unk3C))->unk100 & mask) &&
-                ((temp_f0 = (f32)((func_8020F984_S2 *)(var_a0))->unk94, temp_f0 < var_f1) ||
+            struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)var_a0->keys[var_v1];
+            if ((actor->flags100 & mask) &&
+                ((temp_f0 = (f32)var_a0->distances[var_v1], temp_f0 < var_f1) ||
                  (var_f1 == temp_f2)) &&
-                (((func_8020F984_S2 *)(var_a0))->unk6C != 0)) {
+                (var_a0->flags[var_v1] != 0)) {
                 var_f1 = temp_f0;
                 var_a1 = var_v1;
-                var_a0++;
-                var_a0--;
             }
             var_v1 += 1;
-            var_a0 += 4;
         } while (var_v1 < temp_v0);
     }
     return var_a1;

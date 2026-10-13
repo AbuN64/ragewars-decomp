@@ -173,11 +173,13 @@ struct func_8020F444_S3 {
 struct Obj_func_8020F8F0_de;
 /* unbake published declaration: published_59a6345e3af94473577a2421 */
 struct Obj_func_8020F8F0_de {
-    char pad[0x3C];
+    char pad[0x38];
+    s32 count;
     int keys[10];
     char pad64[0x6C - 0x64];
     int flags[10];
-    char pad94[0x28C - 0x94];
+    s32 distances[10];
+    char padBC[0x28C - 0xBC];
     int current;
 };
 
