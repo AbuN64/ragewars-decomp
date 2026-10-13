@@ -4,20 +4,20 @@
 
 
 
-extern void func_802A1D14_de(func_802A2EC0_S1 *);
-extern void func_802A1D7C_de(func_802A2EC0_S1 *, func_802A2EC0_S1 *);
+extern void func_802A1D14_de(struct CommandListController *);
+extern void func_802A1D7C_de(struct CommandListController *, struct CommandListController *);
 
-s32 func_802A1FE8_de(func_802A2EC0_S1 *obj) {
-    func_802A2EC0_S1 *self = obj; /* FAKEMATCH: copy-only local steers obj into a1 */
+s32 func_802A1FE8_de(struct CommandListController *obj) {
+    struct CommandListController *self = obj; /* FAKEMATCH: copy-only local steers obj into a1 */
 
-    switch (obj->unk5C) {
+    switch (obj->state) {
     case 0:
-        if (++obj->unk48 > 10) {
+        if (++obj->progress > 10) {
             func_802A1D14_de(obj);
         }
         break;
     case 1:
-        if (++obj->unk48 > 10) {
+        if (++obj->progress > 10) {
             func_802A1D7C_de(obj, self);
         }
         break;
