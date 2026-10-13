@@ -72,11 +72,11 @@ Particle *func_802A5BE4_de(Scene_func_802A5180_de *scene, Vec3 position, Vec3 no
     list = &scene->lists[surface];
     node = scene->free.head;
     if (node != 0) {
-        func_80255ED8_de(&scene->free, (s32)node);
+        func_80255ED8_de(&scene->free, node);
     } else {
         node = list->head;
         if (node == 0) goto done;
-        func_80255ED8_de(list, (s32)node);
+        func_80255ED8_de(list, node);
     }
     func_80255D14_de(list, node);
     if (node != 0) {
