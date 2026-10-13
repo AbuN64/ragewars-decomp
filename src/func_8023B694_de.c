@@ -13,7 +13,7 @@ void func_8023B694_de(Effect *effect, s16 *definition, s16 mask, f32 scale,
                    f32 offset0, f32 offset1, f32 offset2) {
     effect->definition = definition;
     effect->mask = mask;
-    func_80295E84_de(&((func_80204468_S3 *)(effect))->unk14, *definition);
+    func_80295E84_de(&effect->resource, *definition);
     effect->angle0 = 0;
     effect->angle1 = 0;
     effect->timer = 0;

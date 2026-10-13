@@ -66,7 +66,9 @@ struct Effect {
     char pad00[0xC];
     s16 *definition;
     s16 mask;
-    char pad12[0xA];
+    char pad12[2];
+    s32 resource; /* 0x14: initialized from the effect definition */
+    char pad18[4];
     s32 angle0;
     s32 angle1;
     char pad24[0x1E4];
