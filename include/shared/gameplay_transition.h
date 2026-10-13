@@ -49,7 +49,9 @@ struct Shared_ActorView {
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[0x7C];
     f32 speed; /* +0x718: src/func_8021B468.c */
-    u8 pad71C[0x784 - 0x71C];
+    u8 pad71C[0x770 - 0x71C];
+    s16 nextWeapon; /* 0x770 */
+    u8 pad772[0x784 - 0x772];
     f32 speedFactor; /* 0x784 */
     u8 pad788[0x864 - 0x788];
     s32 field864;
@@ -94,7 +96,9 @@ struct Shared_ActorView {
     s32 field1338;
     u8 pad133C[0x13B4 - 0x133C];
     s32 *field13B4;
-    u8 pad13B8[0xC];
+    s32 weaponChanged; /* 0x13B8 */
+    s32 secondaryChanged;
+    s32 specialChanged;
     u8 specialState; /* +0x13C4: src/func_8021B468.c */
     char pad13C5[0x3];
     s32 special; /* +0x13C8: src/func_8021B468.c */

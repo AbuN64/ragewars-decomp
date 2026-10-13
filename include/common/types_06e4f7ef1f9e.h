@@ -1574,11 +1574,14 @@ struct Rider_func_80203278_de {
 struct WeaponFireState;
 /* unbake published declaration: published_1ac661e0b4305bf3b2f44e85 */
 struct WeaponFireState {
-    char pad0[0x34];
+    char pad0[0x2C];
+    s32 animation;
+    char pad30[4];
     s8 variant;
     char pad35[0x64 - 0x35];
     f32 cueTimer;
-    char pad68[0x124 - 0x68];
+    char pad68[0x120 - 0x68];
+    s32 animationCount;
     union { f32 spinStep; s32 reset; };
     f32 spin;
     char pad12C[4];
