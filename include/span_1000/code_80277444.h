@@ -27,8 +27,8 @@ struct Object_func_802773D4_de;
 struct Object_func_802773D4_de {
     char pad0[4];
     f32 value;
-    char unk8;
-    char pad9[0xB8-9];
+    Vec3 direction; /* 0x08 */
+    char pad14[0xB8-0x14];
     u8 flagB8;
     u8 flagB9;
     char padBA[2];

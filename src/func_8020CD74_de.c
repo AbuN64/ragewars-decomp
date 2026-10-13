@@ -4,6 +4,7 @@
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8020AF9C.h"
 #include "types.h"
+#include "common/unused.h"
 
 
 
@@ -39,7 +40,7 @@ s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     position = *(Vec3 *)entry;
     position.y += D_800C1D90_de[1];
 
-    if ((*(u8 *)arg1 == 1) && (((func_80203C40_S1 *)(arg1))->unk100 & 0x300000)) {
+    if ((((Actor_func_8024A7A0_de *)arg1)->kind == 1) && (((Actor_func_8024A7A0_de *)arg1)->flags & 0x300000)) {
         collision = D_801040D0;
     } else {
         first_test = func_8024DEE0_de(arg1);

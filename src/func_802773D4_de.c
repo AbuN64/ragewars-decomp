@@ -68,7 +68,7 @@ s32 func_802773D4_de(Object_func_802773D4_de *arg0, Vec3 arg1, Vec3 arg4, void *
         if (arg9 != 0) {
             *arg9 = amount;
         }
-        func_80271F9C_de(arg8, &((func_8020CC0C_S1 *)(arg0))->unk8, amount);
+        func_80271F9C_de(arg8, &arg0->direction, amount);
     }
     return 1;
 }

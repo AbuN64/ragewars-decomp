@@ -6,6 +6,7 @@
 
 extern f32 func_802B72B0_de(f32);
 extern char D_800C48A8_de;
+extern f32 D_800C48AC_de;
 
 
 
@@ -16,7 +17,7 @@ void func_8027207C_de(f32 *arg0) {
 
     mag = func_802B72B0_de((arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]));
     if (mag != 0.0f) {
-        scale = ((func_802077F4_S2 *)(&D_800C48A8_de))->unk4 / mag;
+        scale = D_800C48AC_de / mag;
         arg0[0] = arg0[0] * scale;
         arg0[1] = arg0[1] * scale;
         arg0[2] = arg0[2] * scale;
@@ -47,13 +48,13 @@ void *func_80272180_de(void *arg0, void *arg1, void *arg2, f32 arg3) {
     f32 temp_f4;
     f32 temp_f5;
 
-    temp_f5 = ((func_8024C864_S1 *)(arg1))->unk0;
-    temp_f4 = ((func_8024C864_S1 *)(arg2))->unk0;
-    temp_f3 = (temp_f5 * temp_f4) + (((func_8024C864_S1 *)(arg1))->unk4 * ((func_8024C864_S1 *)(arg2))->unk4) + (((func_8024C864_S1 *)(arg1))->unk8 * ((func_8024C864_S1 *)(arg2))->unk8);
+    temp_f5 = ((Vec3 *)arg1)->x;
+    temp_f4 = ((Vec3 *)arg2)->x;
+    temp_f3 = (temp_f5 * temp_f4) + (((Vec3 *)arg1)->y * ((Vec3 *)arg2)->y) + (((Vec3 *)arg1)->z * ((Vec3 *)arg2)->z);
     temp_f2 = (arg3 * temp_f3) + temp_f3;
     tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = ((func_8024C864_S1 *)(arg1))->unk4 - (temp_f2 * ((func_8024C864_S1 *)(arg2))->unk4);
-    tmp.z = ((func_8024C864_S1 *)(arg1))->unk8 - (temp_f2 * ((func_8024C864_S1 *)(arg2))->unk8);
+    tmp.y = ((Vec3 *)arg1)->y - (temp_f2 * ((Vec3 *)arg2)->y);
+    tmp.z = ((Vec3 *)arg1)->z - (temp_f2 * ((Vec3 *)arg2)->z);
     *(Vec3 *)arg0 = tmp;
     return arg0;
 }
@@ -64,12 +65,12 @@ void *func_80272214_de(void *arg0, void *arg1, void *arg2) {
     f32 temp_f4;
     f32 temp_f5;
 
-    temp_f5 = ((func_8024C864_S1 *)(arg1))->unk0;
-    temp_f4 = ((func_8024C864_S1 *)(arg2))->unk0;
-    temp_f2 = (temp_f5 * temp_f4) + (((func_8024C864_S1 *)(arg1))->unk4 * ((func_8024C864_S1 *)(arg2))->unk4) + (((func_8024C864_S1 *)(arg1))->unk8 * ((func_8024C864_S1 *)(arg2))->unk8);
+    temp_f5 = ((Vec3 *)arg1)->x;
+    temp_f4 = ((Vec3 *)arg2)->x;
+    temp_f2 = (temp_f5 * temp_f4) + (((Vec3 *)arg1)->y * ((Vec3 *)arg2)->y) + (((Vec3 *)arg1)->z * ((Vec3 *)arg2)->z);
     tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = ((func_8024C864_S1 *)(arg1))->unk4 - (temp_f2 * ((func_8024C864_S1 *)(arg2))->unk4);
-    tmp.z = ((func_8024C864_S1 *)(arg1))->unk8 - (temp_f2 * ((func_8024C864_S1 *)(arg2))->unk8);
+    tmp.y = ((Vec3 *)arg1)->y - (temp_f2 * ((Vec3 *)arg2)->y);
+    tmp.z = ((Vec3 *)arg1)->z - (temp_f2 * ((Vec3 *)arg2)->z);
     *(Vec3 *)arg0 = tmp;
     return arg0;
 }
