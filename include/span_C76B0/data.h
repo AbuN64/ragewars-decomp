@@ -3,6 +3,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/data.h"
+#include "shared/lens_flare.h"
 #include "shared/func_80214624_de_closed.h"
 #include "shared/func_804220A8_de_closed.h"
 #include "shared/func_8043E444_de_closed.h"
@@ -984,8 +985,6 @@ extern float D_800C343C_de;
 extern float D_800C3440_de;
 extern float D_800C3444_de;
 extern float D_800C3448_de;
-extern int D_800C344C_de;
-extern int D_800C3468_de;
 extern float D_800C34D8_de;
 extern float D_800C34DC_de;
 extern float D_800C85D0;
