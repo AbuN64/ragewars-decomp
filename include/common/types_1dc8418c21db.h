@@ -1160,7 +1160,7 @@ struct func_80239CD0_S1 {
 struct ObjectState14;
 /* unbake published declaration: published_31ec7c0fcc97f140005b489c */
 struct ObjectState14 {
-    char pad0[0xC];
+    Vec3 position;
     s16 unk_C;
     char padC[0xE - 0xC - sizeof(s16)];
     s16 unk_E;
@@ -3149,7 +3149,7 @@ typedef struct Slot Slot;
 struct func_8025E52C_S1;
 /* unbake published declaration: published_50e81e234e294aec8be023ac */
 struct func_8025E52C_S1 {
-    char pad0[0x2];
+    s16 translation;
     short unk2;
 };
 

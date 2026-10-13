@@ -331,13 +331,14 @@ struct ObjectLinks24 {
     char * unk_0;
     char pad0[0x4 - 0x0 - sizeof(char*)];
     char * unk_4;
-    char pad4[0xC - 0x4 - sizeof(char*)];
+    void *translationFrames; /* 0x8 */
     void * unk_C;
     char padC[0x10 - 0xC - sizeof(void*)];
     s32 unk_10;
     char pad10[0x14 - 0x10 - sizeof(s32)];
     s32 unk_14;
-    char pad14[0x20 - 0x14 - sizeof(s32)];
+    s32 translationFirst; /* 0x18 */
+    s32 translationNext; /* 0x1C */
     f32 unk_20;
 };
 
