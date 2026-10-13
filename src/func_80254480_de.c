@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802536F4.h"
 #include "types.h"
+#include "span_1000/code_802508E0.h"
 
 
 
@@ -40,7 +41,7 @@ struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2) {
     } else {
         func_802BCF50_de(token);
     }
-    flags = ((func_80254420_S1 *)(arg1))->unk1C;
+    flags = ((Request_func_80251F6C_de *)arg1)->mode;
     node = func_802514A8_de(0, flags);
     if (node != 0) {
         node->field_8++;
