@@ -255,7 +255,7 @@ s32 func_8028E6FC_de(void *arg0)
   char *new_var;
   void *ret;
   s32 count;
-  count = ((func_8028E6D8_S1 *)(arg0))->unk1504;
+  count = ((Owner_func_8028C6D4_de *)arg0)->count;
   if (count <= 0)
   {
     return 0;
@@ -264,10 +264,9 @@ s32 func_8028E6FC_de(void *arg0)
   elem = arg0;
   do
   {
-    new_var = &((func_8028E6D8_S2 *)(elem))->unk1508;
-    field = *((void **) new_var);
+    field = ((Owner_func_8028C6D4_de *)arg0)->tracks[i].nodes;
     ret = func_8028FDB4_de(*((s32 *) field), 2);
-    if ((((func_80203E78_S1 *)(ret))->unk4) != 0)
+    if ((((s32 *)ret)[1]) != 0)
     {
       if (arg0 || i)
       {
@@ -278,9 +277,9 @@ s32 func_8028E6FC_de(void *arg0)
         return 1;
       }
     }
-    count = ((func_8028E6D8_S1 *)(arg0))->unk1504;
+    count = ((Owner_func_8028C6D4_de *)arg0)->count;
     i += 1;
-    elem = &((func_8028E6D8_S2 *)(elem))->unkC;
+
   }
   while (i < count);
   return 0;

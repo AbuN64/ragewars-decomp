@@ -4,9 +4,14 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028FC98.h"
 struct Shared_Pickup;
+struct Actor_func_8028E284_de;
 typedef struct Shared_World {
     s32 mode;
-    u8 unknown4[0x68];
+    u8 unknown4[0x18];
+    s32 resourceBank; /* 0x1C */
+    u8 unknown20[0x2C];
+    s32 *resourceDirectory; /* 0x4C */
+    u8 unknown50[0x1C];
     s32 *modelSections; /* 0x6C */
     s32 *objectSections; /* 0x70 */
     u8 unknown74[8];
@@ -24,7 +29,11 @@ typedef struct Shared_World {
     u8 unknownEC[0x34];
     s32 counter120;
     s32 counter124;
-    u8 system128[0x1B08 - 0x128];
+    u8 system128[0x10];
+    struct Actor_func_8028E284_de *actors; /* 0x138 */
+    s32 actorCapacity; /* 0x13C */
+    s32 actorCount; /* 0x140 */
+    u8 unknown144[0x1B08 - 0x144];
     u8 system1B08[0x11778 - 0x1B08];
     World_func_80290238_de system11778;
     u8 unknown15384[0x1B308 - 0x15384];
@@ -44,5 +53,7 @@ typedef struct Shared_World {
     Vec3 offset;
     struct Shared_Pickup *objects[16];
     s32 count;
+    struct Actor_func_8028E284_de *specialActors[16]; /* 0x1B664 */
+    s32 specialActorCount; /* 0x1B6A4 */
 } Shared_World;
 extern Shared_World D_8011FE88;

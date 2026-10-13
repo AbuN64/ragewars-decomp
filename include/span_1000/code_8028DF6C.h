@@ -6,6 +6,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
+typedef struct WorldSortEntry { s32 item; f32 distance; } WorldSortEntry;
 struct View_func_8028FA60_de;
 /* unbake published declaration: published_026e731961a094583ee7a0c5 */
 typedef struct View_func_8028FA60_de View_func_8028FA60_de;
@@ -273,7 +274,7 @@ typedef struct func_8028EAAC_S1 func_8028EAAC_S1;
 
 struct Shape_func_802764D4_de_2;
 /* unbake published declaration: published_79c5bfbd6ff11ebc1a2c1614 */
-extern void func_8028DFE4_de(struct Shape_func_802764D4_de_2 *arg0, struct Shape_func_802764D4_de_2 *arg1);
+extern void func_8028DFE4_de(WorldSortEntry *arg0, WorldSortEntry *arg1);
 
 struct func_8028E74C_S1;
 /* unbake published declaration: published_7c749357c33cd41200edb83f */
