@@ -119,6 +119,12 @@ struct Scene_func_80259784_de;
 struct Scene_func_80259784_de {
     char pad0[0x1DBC];
     Entry_func_80259784_de entries[1];
+    char pad1E88[0x2A84 - 0x1E88];
+    s32 selection;
+    s32 previousSelection;
+    char pad2A8C[0x28];
+    s16 activeSelection;
+    s16 pendingSelection;
 };
 struct Manager_func_80259784_de;
 struct Scene_func_80259784_de;

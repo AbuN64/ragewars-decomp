@@ -21,7 +21,10 @@ void func_80298ECC_de(void) {
     if (D_8014D080->entries[D_8014D080->index].object != 0) {
         func_80297EA4_de(D_8014D080->entries[D_8014D080->index - 1].field4);
         func_80299C80_de(&D_8014D080->entries[D_8014D080->index].fieldC);
-        func_80411E18_de(((func_8021C9B4_S3 *)(D_8014D080->entries[D_8014D080->index].object))->unkC);
+        {
+            Element *element = D_8014D080->entries[D_8014D080->index].object;
+            func_80411E18_de(element->id);
+        }
     }
     D_8014D080->entries[D_8014D080->index].object = 0;
     D_8014D080->entries[D_8014D080->index].field4 = 0;

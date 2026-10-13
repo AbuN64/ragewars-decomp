@@ -42,7 +42,7 @@ void func_80259784_de(Manager_func_80259784_de *manager, s32 index, s32 owner, V
         first->prev->next = first->next;
         first->next->prev = first->prev;
         node = first;
-        func_802BD3A0_de(&((func_8020CC0C_S1 *)(node))->unk8, entry, 0xCC);
+        func_802BD3A0_de(node->pad8, entry, 0xCC);
         node->owner = owner;
         node->position.x = position->x;
         node->position.y = position->y;
@@ -61,8 +61,8 @@ void func_80259784_de(Manager_func_80259784_de *manager, s32 index, s32 owner, V
         at->prev->next = node;
         at->prev = node;
     }
-    ((func_802597A4_S2 *)(manager->scene))->unk2AB4 = 0;
-    ((func_802597A4_S2 *)(manager->scene))->unk2AB6 = -1;
-    ((func_802597A4_S2 *)(manager->scene))->unk2A88 = -1;
-    ((func_802597A4_S2 *)(manager->scene))->unk2A84 = -1;
+    manager->scene->activeSelection = 0;
+    manager->scene->pendingSelection = -1;
+    manager->scene->previousSelection = -1;
+    manager->scene->selection = -1;
 }
