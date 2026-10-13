@@ -1,57 +1,58 @@
+#include "common/unused.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8025E280.h"
 
 short func_8025E500_de(void *arg0) {
-    return ((Request *)(arg0))->type;
+    return ((Controller_func_80259C5C_de *)arg0)->group;
 }
 
 short func_8025E50C_de(void *arg0) {
-    return ((func_8025E52C_S1 *)(arg0))->unk2;
+    return ((Controller_func_80259C5C_de *)arg0)->sample;
 }
 
 /** Return the signed byte at offset four in the supplied object. */
 int func_8025E518_de(void *object) {
-    return ((func_80242278_S1 *)(object))->unk4;
+    return ((Controller_func_80259C5C_de *)object)->priority;
 }
 
 /** Return the signed byte at offset five. */
 int func_8025E524_de(void *arg0) {
-    return ((func_8025E544_S1 *)(arg0))->unk5;
+    return ((Controller_func_80259C5C_de *)arg0)->mode;
 }
 
 /** Return the signed halfword at offset eight. */
 int func_8025E530_de(char *object) {
-    return ((func_8022BECC_S2 *)(object))->unk8;
+    return ((Controller_func_80259C5C_de *)object)->field8;
 }
 
 short func_8025E53C_de(void *arg0) {
-    return ((func_8025E55C_S1 *)(arg0))->unkA;
+    return ((Controller_func_80259C5C_de *)arg0)->preset;
 }
 
 /** Return the upper two bits of the halfword at object offset 6. */
 unsigned int func_8025E548_de(void *arg0) {
-    return ((func_8020676C_S1 *)(arg0))->unk6 >> 14;
+    return ((Controller_func_80259C5C_de *)arg0)->flags >> 14;
 }
 
 signed char func_8025E554_de(void *arg0) {
-    return ((func_80250DBC_S2 *)(arg0))->unkE;
+    return ((Controller_func_80259C5C_de *)arg0)->pitch;
 }
 
 /** Read the signed object byte at offset 0xF. */
 signed char func_8025E560_de(void *object) {
-    return ((signed char *)object)[0xF];
+    return ((Controller_func_80259C5C_de *)object)->fieldF;
 }
 
 /** Return the signed halfword stored at offset 0x10. */
 int func_8025E56C_de(void *object) {
-    return ((func_8025E58C_S1 *)(object))->unk10;
+    return ((Controller_func_80259C5C_de *)object)->yaw;
 }
 
 unsigned short func_8025E578_de(void *arg0) {
-    return ((func_8020676C_S1 *)(arg0))->unk6 & 0x3FFF;
+    return ((Controller_func_80259C5C_de *)arg0)->flags & 0x3FFF;
 }
 
 short func_8025E584_de(void *arg0) {
-    return ((func_8025E5A4_S1 *)(arg0))->unk12;
+    return ((Controller_func_80259C5C_de *)arg0)->x;
 }

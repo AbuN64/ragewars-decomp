@@ -6124,12 +6124,19 @@ struct Context_func_8025AB94_de {
 };
 struct Controller_func_80259C5C_de;
 struct Controller_func_80259C5C_de {
-    char pad0[6];
-    u16 flags;
-    char pad8[2];
-    s16 preset;
-    char padC[4];
-    s16 yaw;
+    s16 group; /* 0x00: sound description group */
+    s16 sample; /* 0x02 */
+    s8 priority; /* 0x04 */
+    s8 mode; /* 0x05 */
+    u16 flags; /* 0x06: pan and sound flags */
+    s16 field8;
+    s16 preset; /* 0x0A */
+    s16 fieldC;
+    s8 pitch; /* 0x0E */
+    s8 fieldF;
+    s16 yaw; /* 0x10 */
+    s16 x; /* 0x12 */
+    s16 y; /* 0x14 */
 };
 struct Node_func_8028F544_de;
 struct Node_func_8028F544_de {
