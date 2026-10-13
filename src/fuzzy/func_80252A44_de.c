@@ -37,7 +37,6 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     s32 bright;
     u32 base;
     Gfx *cmd;
-    Gfx **dl;
 
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
@@ -67,13 +66,11 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
         total += span->size + span->free;
     }
 
-    dl = &D_80110634;
-    cmd = *dl;
+    cmd = D_80110634++;
     gDPSetPrimColor(cmd, 0, 0, 0x64, 0x64, 0x00, 0xFF);
     height = bottom - top;
     hi = bottom - ((u32)(((u32)D_801011B0 - base) * height) / total) - 1;
-    *dl = cmd + 1;
-    gDPFillRectangle((*dl)++, left, hi, right, bottom + 1);
+    gDPFillRectangle(D_80110634++, left, hi, right, bottom + 1);
 
     for (pass = 0; pass < 2; pass++) {
         for (node = D_80100584.head; node != 0; node = node->next) {
@@ -106,30 +103,29 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
                 b = 0;
             }
 
-            cmd = *dl;
+            cmd = D_80110634++;
             gDPSetPrimColor(cmd, 0, 0, r, g, b, 0xFF);
             hi = bottom - ((u32)(((node->start + node->end) - base) * height) / total) - 1;
             lo = bottom - ((u32)(((node->start - base) - 0x20) * height) / total) - 1;
-            *dl = cmd + 1;
-            if (hi < lo) {
-                gDPFillRectangle((*dl)++, left, hi, right, lo);
+                    if (hi < lo) {
+                gDPFillRectangle(D_80110634++, left, hi, right, lo);
             }
 
-            gDPSetPrimColor((*dl)++, 0, 0, ((s32)((u32)r >> 1)) < 0x100 ? ((s32)((u32)r >> 1)) : 0xFF, ((s32)((u32)g >> 1)) < 0x100 ? ((s32)((u32)g >> 1)) : 0xFF,
+            gDPSetPrimColor(D_80110634++, 0, 0, ((s32)((u32)r >> 1)) < 0x100 ? ((s32)((u32)r >> 1)) : 0xFF, ((s32)((u32)g >> 1)) < 0x100 ? ((s32)((u32)g >> 1)) : 0xFF,
                             ((s32)((u32)b >> 1)) < 0x100 ? ((s32)((u32)b >> 1)) : 0xFF, 0xFF);
-            gDPFillRectangle((*dl)++, left, lo - 1, right, lo);
+            gDPFillRectangle(D_80110634++, left, lo - 1, right, lo);
 
             if (!(node->flags & 0x702) && (u32)(D_80105180.field_0 - node->stamp) >= 5U) {
                 b = 0xFF;
-                gDPSetPrimColor((*dl)++, 0, 0, 255, 255, 255, 255);
+                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 255, 255);
                 for (;;) {
                     if (hi >= lo) break;
-                    gDPFillRectangle((*dl)++, left + 8, hi, right, lo);
+                    gDPFillRectangle(D_80110634++, left + 8, hi, right, lo);
                     break;
                 }
                 bright = (b * 3) >> 1;
-                gDPSetPrimColor((*dl)++, 0, 0, 255, 255, bright < 256 ? bright : 255, 255);
-                gDPFillRectangle((*dl)++, left + 8, lo - 1, right, lo);
+                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, bright < 256 ? bright : 255, 255);
+                gDPFillRectangle(D_80110634++, left + 8, lo - 1, right, lo);
             }
         }
     }
