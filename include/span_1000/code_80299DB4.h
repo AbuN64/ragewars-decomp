@@ -141,4 +141,13 @@ struct func_8029AA48_S1;
 /* unbake published declaration: published_fe671614dced83eb2325c961 */
 typedef struct func_8029AA48_S1 func_8029AA48_S1;
 
+/* Sequential read/write buffer, allocated by func_80299C38_de and freed by
+ * func_80299C80_de; read and append cursors are independent. */
+typedef struct StreamBuffer {
+    s32 data;
+    s32 capacity;
+    s32 readPosition;
+    s32 writePosition;
+} StreamBuffer;
+
 #endif

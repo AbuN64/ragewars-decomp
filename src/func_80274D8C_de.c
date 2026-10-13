@@ -12,13 +12,15 @@
 
 /** Half-plane test: is arg1 on the positive side of arg0's normal (at +0x30)? */
 s32 func_80274D8C_de(void *arg0, void *arg1) {
+    GeometryEdge *edge = arg0;
+    Vec3 *point = arg1;
     Vec3 normal;
     Vec3 delta;
     s32 result;
 
-    normal = ((func_80274DFC_S1 *)(arg0))->unk30;
-    delta.x = ((func_8024E58C_S1 *)(arg1))->unk0 - ((func_80274DFC_S1 *)(arg0))->unk0;
-    delta.z = ((func_8024E58C_S1 *)(arg1))->unk8 - ((func_80274DFC_S1 *)(arg0))->unk8;
+    normal = edge->normal;
+    delta.x = point->x - edge->start.x;
+    delta.z = point->z - edge->start.z;
     result = 0;
     if (!(((normal.x * delta.x) + (normal.z * delta.z)) <= 0.0f)) {
         result = 1;

@@ -7,16 +7,16 @@ extern s32 func_802A0724_de(s32 arg0, s32 unused1, s32 arg2);
 
 
 
-void func_80299B74_de(void *arg0, s32 arg1, s32 arg2) {
-    if ((((func_8029AB74_S1 *)(arg0))->unk0) == 0) {
-        ((func_8029AB74_S1 *)(arg0))->unk0 = func_8025305C_de(arg2);
-        ((func_8029AB74_S1 *)(arg0))->unkC = 0;
-        ((func_8029AB74_S1 *)(arg0))->unk4 = arg2;
+void func_80299B74_de(StreamBuffer *arg0, s32 arg1, s32 arg2) {
+    if ((arg0->data) == 0) {
+        arg0->data = func_8025305C_de(arg2);
+        arg0->writePosition = 0;
+        arg0->capacity = arg2;
     }
     {
-        s32 t_c = ((func_8029AB74_S1 *)(arg0))->unkC;
-        s32 t_0 = ((func_8029AB74_S1 *)(arg0))->unk0;
+        s32 t_c = arg0->writePosition;
+        s32 t_0 = arg0->data;
         func_802A0724_de(t_0 + t_c, arg1, arg2);
     }
-    ((func_8029AB74_S1 *)(arg0))->unkC = (((func_8029AB74_S1 *)(arg0))->unkC) + arg2;
+    arg0->writePosition = (arg0->writePosition) + arg2;
 }

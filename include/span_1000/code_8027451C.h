@@ -207,4 +207,13 @@ extern float D_800C4988_de;
 
 extern s32 func_80274D10_de(f32 *arg0, f32 *arg1, f32 *arg2);
 
+/* Edge endpoints and the direction/normal derived by the edge helpers. */
+typedef struct GeometryEdge {
+    Vec3 start;
+    Vec3 end;
+    Vec3 direction;
+    Vec3 unitDirection;
+    Vec3 normal;
+} GeometryEdge;
+
 #endif
