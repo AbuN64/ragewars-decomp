@@ -100,7 +100,7 @@ struct Bar {
     char pad18[0x20];
     s32 fill;
     s32 label;
-    char pad40[4];
+    s32 enabled; /* 0x40 */
     s32 target;
 };
 

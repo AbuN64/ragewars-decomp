@@ -23,12 +23,12 @@ void func_80239B64_de(s32 arg0) {
 
     temp_s2 = (void *)(arg0 + 0x40);
     if (temp_s2 != 0) {
-        var_s1 = ((func_80239AE4_S1 *)(temp_s2))->unkE40.tail;
+        var_s1 = ((struct ScreenMessagePool *)temp_s2)->freeMessages.tail;
         if (var_s1 != 0) {
             do {
                 temp_s0 = var_s1->next;
-                func_80255ED8_de(&((func_80239AE4_S1 *)(temp_s2))->unkE40, var_s1);
-                func_80255CB8_de((void *)(arg0 + 0xF24), (s32)var_s1);
+                func_80255ED8_de(&((struct ScreenMessagePool *)temp_s2)->freeMessages, var_s1);
+                func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, (s32)var_s1);
                 var_s1 = temp_s0;
             } while (var_s1 != 0);
         }
@@ -37,16 +37,16 @@ void func_80239B64_de(s32 arg0) {
     var_s2 = D_80140FE8_de;
     if (var_s2 != 0) {
         do {
-            var_s1_2 = ((func_80239B54_S2 *)(var_s2))->unkE40.tail;
+            var_s1_2 = ((struct ScreenMessagePool *)var_s2)->freeMessages.tail;
             if (var_s1_2 != 0) {
                 do {
                     temp_s0_2 = var_s1_2->next;
-                    func_80255ED8_de(&((func_80239B54_S2 *)(var_s2))->unkE40, var_s1_2);
-                    func_80255CB8_de((void *)(arg0 + 0xF24), (s32)var_s1_2);
+                    func_80255ED8_de(&((struct ScreenMessagePool *)var_s2)->freeMessages, var_s1_2);
+                    func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, (s32)var_s1_2);
                     var_s1_2 = temp_s0_2;
                 } while (var_s1_2 != 0);
             }
-            var_s2 = ((func_80239B54_S2 *)(var_s2))->unk4;
+            var_s2 = ((struct ScreenMessagePool *)var_s2)->next;
         } while (var_s2 != 0);
     }
 }
