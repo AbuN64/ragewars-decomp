@@ -111,6 +111,8 @@ struct Mover {
     f32 accelX;
     f32 accelY;
     f32 rate;
+    u8 pad34[4];
+    s32 handle; /* 0x38: resource handle initialized by the mover constructor */
 };
 
 /* unbake published declaration: published_82e909c0a4a9fadb8a82a29a */
