@@ -1,3 +1,4 @@
+#include "shared/func_8044D794_de_closed.h"
 #include "shared/world.h"
 #include "shared/sceneactorstride.h"
 #include "shared/sceneglobal.h"
@@ -85,7 +86,6 @@ extern void func_8044BE04_de();
 extern void func_8044BF90_de();
 extern void func_8044D5C4_de();
 extern void func_8044D668_de();
-extern void func_8044D794_de(arg0);
 extern void func_8044DB70_de();
 extern void func_8044EBB0();
 extern void func_8044ED24();
