@@ -29144,7 +29144,6 @@ kind = "c"
 group = "code_802106E0"
 members = ["func_8021113C_eu", "rodata/func_8021113C_eu/800C7100"]
 toolchain = "gcc-2.8.1-sn64"
-withheld = ["eu"]
 
 [unit.options]
 add = []
@@ -46821,7 +46820,6 @@ kind = "c"
 group = "code_80294C64"
 members = ["func_80294C8C_de"]
 toolchain = "gcc-2.8.1-sn64"
-withheld = ["eu"]
 
 [unit.options]
 add = []
@@ -53456,7 +53454,6 @@ kind = "c"
 group = "code_802B8540"
 members = ["func_802B3F10_de", "rodata/func_802B3F10_de/800CC7F0"]
 toolchain = "gcc-2.8.1-sn64"
-withheld = ["us"]
 
 [unit.options]
 add = []
@@ -87837,7 +87834,7 @@ omit = []
 path = "src/rodata.unresolved.800EEAAC.c"
 kind = "data"
 group = "data_800EEAAC"
-members = ["rodata/unresolved/800EEAAC"]
+members = []
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]

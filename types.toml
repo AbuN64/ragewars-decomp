@@ -733,8 +733,8 @@ schema = 1
 "func_8022E890_de" = { evidence = "landed", signature = "void func_8022E890_de(void *unused0, s32 *arg1)" }
 "func_8022E8D0_de" = { evidence = "landed", signature = "int func_8022E8D0_de(short id, int mode)" }
 "func_8022E940_de" = { evidence = "landed", signature = "void func_8022E940_de(void)" }
-"func_8022E948_de" = { evidence = "landed", signature = "void func_8022E948_de(void *arg0)" }
-"func_8022E9A8_de" = { evidence = "landed", signature = "void func_8022E9A8_de(void *arg0)" }
+"func_8022E948_de" = { evidence = "landed", signature = "void func_8022E948_de(Player *arg0)" }
+"func_8022E9A8_de" = { evidence = "landed", signature = "void func_8022E9A8_de(Player *arg0)" }
 "func_8022EA3C_de" = { evidence = "landed", signature = "void func_8022EA3C_de(void *arg0, void *arg1)" }
 "func_8022EB04_de" = { evidence = "landed", signature = "void func_8022EB04_de(void)" }
 "func_8022EB0C_de" = { evidence = "landed", signature = "s32 func_8022EB0C_de(void *arg0, s32 arg1)" }
@@ -13513,11 +13513,6 @@ schema = 1
 "func_8022E694_S1" = { declaration = "typedef struct func_8022E694_S1 func_8022E694_S1;", evidence = "authored" }
 "func_8022E694_S2" = { declaration = "struct func_8022E694_S2 { char pad0[0xC]; f32 unkC; char padC[0x20 - 0xC - sizeof(f32)]; s32 unk20; };", evidence = "authored" }
 "func_8022E694_S3" = { declaration = "typedef struct func_8022E694_S3 func_8022E694_S3;", evidence = "authored" }
-"func_8022E938_S1" = { declaration = "struct func_8022E938_S1 { char pad0[0x6AC]; s32 unk6AC; char pad6AC[0x6B0 - 0x6AC - sizeof(s32)]; s32 unk6B0; char pad6B0[0x13D4 - 0x6B0 - sizeof(s32)]; s32 unk13D4; };", evidence = "authored" }
-"func_8022E998_S1" = { declaration = "typedef struct func_8022E998_S1 func_8022E998_S1;", evidence = "authored" }
-"func_8022E998_S2" = { declaration = "typedef struct func_8022E998_S2 func_8022E998_S2;", evidence = "authored" }
-"func_8022E998_S2_UC" = { declaration = "typedef union func_8022E998_S2_UC { s16 v0; u16 v1; } func_8022E998_S2_UC;", evidence = "authored" }
-"func_8022E998_S3" = { declaration = "typedef struct func_8022E998_S3 func_8022E998_S3;", evidence = "authored" }
 "func_8022EA2C_S1" = { declaration = "typedef struct func_8022EA2C_S1 func_8022EA2C_S1;", evidence = "authored" }
 "func_8022EA2C_S2" = { declaration = "typedef struct func_8022EA2C_S2 func_8022EA2C_S2;", evidence = "authored" }
 "func_8022EAFC_S2" = { declaration = "typedef struct func_8022EAFC_S2 func_8022EAFC_S2;", evidence = "authored" }
