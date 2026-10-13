@@ -6158,13 +6158,20 @@ struct Ctx_func_8028F544_de {
 };
 struct Source110;
 struct Source110 {
-    char pad0[0x100];
+    char pad0[0x1C];
+    Vec3 velocity;
+    char pad28[0x100 - 0x28];
     u32 flags;
     f32 limit;
     s16 current_state;
     s16 previous_state;
     s16 counter;
     s8 state_changed;
+    u8 animationChanged; /* 0x10F */
+    u8 pad110[0x13];
+    u8 stateChanged; /* 0x123 */
+    u8 pad124[0x2E0 - 0x124];
+    u32 renderFlags; /* 0x2E0 */
 };
 struct Dest;
 struct Source110;
@@ -6180,10 +6187,12 @@ struct Dest {
     StateEntry *entry;
     s8 state;
     s8 old_state;
-    char pad36[2];
+    s8 requestedState; /* 0x36 */
+    char pad37;
     u32 old_entry_flags;
     u32 entry_flags;
-    char pad40[0x24];
+    s32 stateTimer; /* 0x40 */
+    char pad44[0x20];
     f32 cueTimer; /* 0x64 */
     char pad68[0x58];
     f32 scale;
@@ -6213,13 +6222,20 @@ struct Dest {
 };
 typedef void *( *StateCallback)(struct Source110 *, struct Dest *);
 struct StateEntry {
-    char pad0[0x10];
+    s32 id;
+    void (*enter)(struct Source110 *, struct Dest *);
+    char pad8[8];
     StateCallback callback;
     f32 scale;
     s32 threshold;
     u32 flags;
 };
 struct Digits;
+struct ActorStateTable {
+    struct ActorStateTable *next;
+    u8 pad4[0x1C];
+    StateEntry entries[1];
+};
 struct Digits {
     char c[4];
 };

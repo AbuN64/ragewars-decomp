@@ -211,7 +211,7 @@ struct Actor_func_80290238_de {
     char pad19E[0x26];
     s32 effectState;
     f32 lifetime;
-    s32 lifetimeState;
+    f32 lifetimeState;
     s32 state;
     s32 *counter;
     struct Actor_func_80290238_de *prev;
