@@ -15,14 +15,15 @@
 
 
 f32 func_80209DAC_de(void *arg0) {
+    AiController *brain = arg0;
     f32 temp_f20;
     f32 var_f14;
     u8 state;
 
-    state = ((func_80209DAC_S2 *)(((func_80209B64_S4 *)(*(void **)arg0))->unk5D8))->unk93.v0;
+    state = brain->player->profile->difficulty;
     switch (state) {
     default:
-        ((func_80209DAC_S2 *)(((func_80209B64_S4 *)(*(void **)arg0))->unk5D8))->unk93.v1 = 0;
+        brain->player->profile->difficulty = 0;
     case 0:
         var_f14 = (1.2217305898666382f);
         break;
@@ -33,12 +34,12 @@ f32 func_80209DAC_de(void *arg0) {
         var_f14 = (0.523598849773407f);
         break;
     }
-    temp_f20 = ((func_80209DAC_S3 *)(arg0))->unk244;
+    temp_f20 = brain->aim;
     if (temp_f20 < func_80274A90_de(-var_f14, var_f14)) {
         temp_f20 += D_800C1CC0_de;
     } else {
         temp_f20 -= D_800C1CC4_de;
     }
-    ((func_80209DAC_S3 *)(arg0))->unk244 = temp_f20;
+    brain->aim = temp_f20;
     return temp_f20;
 }
