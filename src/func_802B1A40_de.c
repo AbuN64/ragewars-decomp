@@ -1,23 +1,16 @@
 #include "span_1000/code_802B0388.h"
-/* FAKEMATCH: retains inherited numeric field accesses because a verified live shared layout for those accesses is not available; the old access widths and evaluation order are preserved. */
 #include "types.h"
-/* Initialises the index'th sixteen-byte entry of the table at 0x60 of the object: bytes 6, 0xA and
-   0xB zero, byte 7 to 0x40, byte 9 to 0x7F, byte 8 to 5, the halfword at 4 to 0xC8 and the float at
-   0xC to D_800C74D0_de. */
 
-
-
-
-
+/* Initialize one channel of the sequence player's channel table. */
 void func_802B1A40_de(void *arg0, s32 index) {
-    s32 off = index << 4;
+    ALSeqPlayer_func_802B0C94_de *player = arg0;
 
-    ((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0x6] = 0;
-    ((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0xA] = 0;
-    ((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0x7] = 0x40;
-    ((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0x9] = 0x7F;
-    ((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0x8] = 0x5;
-    ((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0xB] = 0;
-    *(u16 *)&((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0x4] = 0xC8;
-    *(f32 *)&((u8 *)(((func_802B67B0_S1 *)(arg0))->unk60))[off + 0xC] = D_800C74D0_de;
+    player->chanState[index].fxId = 0;
+    player->chanState[index].fxmix = 0;
+    player->chanState[index].pan = 0x40;
+    player->chanState[index].vol = 0x7F;
+    player->chanState[index].priority = 5;
+    player->chanState[index].sustain = 0;
+    player->chanState[index].bendRange = 0xC8;
+    player->chanState[index].pitchBend = D_800C74D0_de;
 }
