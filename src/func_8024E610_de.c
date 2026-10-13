@@ -5,8 +5,9 @@
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */
 int func_8024E610_de(void *arg0) {
-    if (*(unsigned char *)arg0 == 1) {
-        return ((func_8020F2A8_S3 *)(arg0))->unk34;
+    struct Item_func_8024E6A0_de *item = arg0;
+    if (item->kind == 1) {
+        return (int)item->value;
     }
     return 0;
 }
