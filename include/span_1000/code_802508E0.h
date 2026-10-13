@@ -126,9 +126,15 @@ struct Node_func_80252774_de {
 /* unbake published declaration: published_baf0ead475e3585a400eb3d6 */
 struct Request_func_80252774_de {
     struct Node_func_80252774_de *node;
-    s32 pad4;
+    struct Node_func_80252774_de *extra; /* 0x04: optional companion resource */
     s32 key;
     s32 priority;
+    s32 flags;                         /* 0x10 */
+    void *tag;                         /* 0x14 */
+    s32 owner;                         /* 0x18: bank/variation id */
+    s32 mode;                          /* 0x1C */
+    void *replyQueue;                  /* 0x20 */
+    struct Request_func_80252774_de *next; /* 0x24 */
 };
 
 struct HashNode_func_80252774_de;

@@ -13,7 +13,7 @@ static inline func_8022BC04_S3 *take(s32 active) {
  if(node) {func_80255ED8_de(&D_801010F8,node); node->unk10=active;func_80255CB8_de(&D_8010110C,node);}
  return node;
 }
-func_8022BC04_S3 *func_80254ED0_de(s32 unused,s32 flags) {
+void *func_80254ED0_de(s32 unused,s32 flags) {
  func_8022BC04_S3 *node=take(1);
  if (!node) {
   s32 active=1;

@@ -13,7 +13,7 @@ extern s32 func_802BB420_de(void *, s32, s32);
 
 
 
-void func_80256454_de(struct CartridgeReadWorker *arg0, void *source, s32 length, void *destination,
+void func_80256454_de(struct CartridgeReadWorker *arg0, u32 source, s32 length, void *destination,
                    Queue *queue, s32 value, s32 direct) {
     s32 remaining;
     s32 chunk_length;
@@ -37,7 +37,7 @@ void func_80256454_de(struct CartridgeReadWorker *arg0, void *source, s32 length
             if (chunk == 0) {
                 break;
             }
-            chunk->source = (char *)source + (length - remaining);
+            chunk->source = source + (length - remaining);
             chunk->destination = (char *)destination + (length - remaining);
             if ((u32)remaining < 0x2001U) {
                 chunk_length = remaining;

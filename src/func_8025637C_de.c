@@ -11,7 +11,7 @@ extern void func_802BB2A0_de(void *, void *, s32);
 
 
 
-void func_8025637C_de(struct CartridgeReadWorker *arg0, void *arg1, s32 arg2, void *arg3) {
+void func_8025637C_de(struct CartridgeReadWorker *arg0, u32 arg1, s32 arg2, void *arg3) {
     char queue[0x18];
     s32 queue_init;
     s32 completed;
@@ -27,7 +27,7 @@ void func_8025637C_de(struct CartridgeReadWorker *arg0, void *arg1, s32 arg2, vo
         if (chunk == 0) {
             break;
         }
-        chunk->source = (char *) arg1 + (arg2 - remaining);
+        chunk->source = arg1 + (arg2 - remaining);
         chunk->destination = (char *) arg3 + (arg2 - remaining);
         if ((u32) remaining < 0x2001U) {
             length = remaining;

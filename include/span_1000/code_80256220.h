@@ -48,7 +48,7 @@ typedef struct Item57BD4 Item57BD4;
 struct Chunk;
 /* unbake published declaration: published_2fd72050322a9dc45086a183 */
 struct Chunk {
-    void *source;
+    u32 source; /* cartridge device address */
     void *destination;
     s32 length;
     void *queue;
@@ -114,7 +114,7 @@ struct Chunk_func_80256454_de;
 struct Queue;
 /* unbake published declaration: published_654b14b818922d3de31b976e */
 struct Chunk_func_80256454_de {
-    void *source;
+    u32 source; /* cartridge device address */
     void *destination;
     s32 length;
     struct Queue *queue;

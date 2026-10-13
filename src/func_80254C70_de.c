@@ -6,7 +6,8 @@
 
 extern void func_80255D70_de(void *, s32, s32);
 
-void func_80254C70_de(s32 unused, Node80254C10 *node) {
+void func_80254C70_de(s32 unused, void *object) {
+    Node80254C10 *node = object;
     Node80254C10 *scan;
 
     scan = D_80100584.head;

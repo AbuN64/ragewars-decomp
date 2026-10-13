@@ -1053,7 +1053,7 @@ segments:
       - [0x52038, c, "func_802514A8_de"]
       - [0x52180, asm, "func_802515F0_de"]
       - [0x52344, c, "func_802517B4_de"]
-      - [0x524CC, asm, "func_8025193C_de"]
+      - [0x524CC, c, "func_8025193C_de"]
       - [0x52AFC, c, "func_80251F6C_de"]
       - [0x53040, c, "func_802524B0_de"]
       - [0x53304, c, "func_80252774_de"]
