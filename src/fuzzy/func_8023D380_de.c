@@ -104,8 +104,7 @@ zero_vertical:
         delta=&slide;
         func_80272180_de(delta,&remaining,&a->normal,settings->response);
         func_80271F9C_de(delta,delta,scale-a->damping);
-        result=&a->position;
-        func_80271F34_de(result,&a->interpolated,delta);
+        func_80271F34_de(&a->position,&a->interpolated,delta);
         return 1;
     }
     case 2: {
@@ -121,13 +120,11 @@ zero_vertical:
         scale=D_800C367C_de;
         remainingFraction=scale-remainingFraction;
         func_80271F9C_de(&remaining,&a->velocity,remainingFraction);
-        normal=&a->normal;
-        func_80272214_de(&bounce,&remaining,normal);
+        func_80272214_de(&bounce,&remaining,&a->normal);
         func_80271F9C_de(&bounce,&bounce,scale-a->damping);
-        result=&a->position;
-    func_80271F34_de(result,&a->interpolated,&bounce);
-    func_80271F9C_de(&gravity,normal,D_800D0640[0]*D_800C368C_de);
-    func_80271F34_de(result,result,&gravity);
+    func_80271F34_de(&a->position,&a->interpolated,&bounce);
+    func_80271F9C_de(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    func_80271F34_de(&a->position,&a->position,&gravity);
     return 1;
 
     }
@@ -136,12 +133,10 @@ zero_vertical:
         if(active==0)return 1;
         fraction=a->blend;
         func_80271F9C_de(&remaining,&a->velocity,D_800C3680_de-fraction);
-        normal=&a->normal;
-        bounce=func_802723FC_de(&remaining,normal);
-            result=&a->position;
-    func_80271F34_de(result,&a->interpolated,&bounce);
-    func_80271F9C_de(&gravity,normal,D_800D0640[0]*D_800C368C_de);
-    func_80271F34_de(result,result,&gravity);
+        bounce=func_802723FC_de(&remaining,&a->normal);
+        func_80271F34_de(&a->position,&a->interpolated,&bounce);
+    func_80271F9C_de(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    func_80271F34_de(&a->position,&a->position,&gravity);
     return 1;
 
     case 5: {
@@ -153,21 +148,18 @@ zero_vertical:
             damping=a->damping;
             func_80271F9C_de(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
         }
-        rptr=&reflection;
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3688_de;
         remainingFraction=scale-remainingFraction;
         func_80271F9C_de(&remaining,&a->velocity,remainingFraction);
-        normal=&a->normal;
-        func_80272214_de(rptr,&remaining,normal);
-        projected=func_802723FC_de(&remaining,normal);
-        func_80271FC8_de(&bounce,0.25f,rptr,&projected);
+        func_80272214_de(&reflection,&remaining,&a->normal);
+        projected=func_802723FC_de(&remaining,&a->normal);
+        func_80271FC8_de(&bounce,0.25f,&reflection,&projected);
         func_80271F9C_de(&bounce,&bounce,scale-a->damping);
-        result=&a->position;
-    func_80271F34_de(result,&a->interpolated,&bounce);
-    func_80271F9C_de(&gravity,normal,D_800D0640[0]*D_800C368C_de);
-    func_80271F34_de(result,result,&gravity);
+    func_80271F34_de(&a->position,&a->interpolated,&bounce);
+    func_80271F9C_de(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    func_80271F34_de(&a->position,&a->position,&gravity);
     return 1;
 
     }
