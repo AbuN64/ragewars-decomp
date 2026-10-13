@@ -3,6 +3,7 @@
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_802A1264.h"
 #include "types.h"
+#include "span_16E000/code_8040C780.h"
 
 extern s32 D_800CD9B0;
 extern s32 D_800CD9B4;
@@ -21,7 +22,7 @@ s32 func_802A1B50_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         offset = 0;
         do {
             if (((struct Shape_typemap_3 *) (((char *) (&D_800CD9B0)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct func_8021C9B4_S3 *) ((char *) arg0))->unkC;
+                actor_kind = ((struct Tree *)arg0)->id;
                 table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800CD9B4)) + offset))->field_0;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
                     return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
@@ -52,7 +53,7 @@ void func_802A1BE0_de(void *arg0, Args args) {
 
     changed = 0;
     if (func_8040E0D4_de(&first, &basis, arg0, &args) != 0) {
-        if ((((func_802A2BE0_S1 *)(arg0))->unk12 & 0x200) != 0) {
+        if ((((Widget_func_8040E67C_de *)arg0)->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             func_8040F488_de(&transformed, &basis);
@@ -60,7 +61,7 @@ void func_802A1BE0_de(void *arg0, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(((func_802A2BE0_S1 *)(arg0))->unk8, args);
+        func_8040E7FC_de(((struct Tree *)arg0)->child, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }
