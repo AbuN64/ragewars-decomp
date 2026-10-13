@@ -1,34 +1,29 @@
-#include "span_1000/code_8025C544.h"
+#include "span_1000/code_8025A3EC.h"
 
-void func_802B25D0_de(void *a, short b);
+void func_802B25D0_de(void *sound, short sample);
 
+static inline short slot_id(Slots *slots, int index) {
+    return slots->ids[index];
+}
 
+int func_8025C824_de(Record_func_8025C008_de *pool, short index) {
+    Slot_func_8025C008_de *entry;
+    Context_func_8025AE1C_de *context;
+    Slots *slots;
+    void *owner;
 
-
-int func_8025C824_de(int arg0, short arg1) {
-    void *base;
-    void *arrayBase;
-    short *slot;
-    unsigned char *cursor;
-    int entry;
-
-    entry = arg1 * 0xCC;
-    entry = entry + arg0;
-    entry = entry + 4;
-    base = ((struct func_8025C67C_S1 *) entry)->unkB0;
-    arrayBase = &((func_8025C67C_S2 *)(base))->unk7C;
-    cursor = (((struct func_8025C67C_S1 *) entry)->unk0 * 2) + (unsigned char *)arrayBase;
-    cursor += 0x60;
-    slot = (short *)cursor;
-    func_802B25D0_de(&((func_8025C67C_S2 *)(base))->unk84, *slot);
-    arrayBase = ((short *)arrayBase) + *(int *)entry;
-    slot = &((SlotArray *)arrayBase)->slot[0];
-    *slot = -1;
-    ((struct func_8025C67C_S1 *) entry)->unk38 = 0;
-    ((struct func_8025C67C_S1 *) entry)->unkC = -1;
-    ((struct func_8025C67C_S1 *) entry)->unk8 = -1;
-    ((struct func_8025C67C_S1 *) entry)->unkA8 = -1;
-    ((struct func_8025C67C_S1 *) entry)->unk3A = -1;
-    ((struct func_8025C67C_S1 *) entry)->unkB4 = -1;
+    entry = &pool->slots[index + 1];
+    entry--;
+    owner = entry->owner;
+    context = owner;
+    slots = &context->slots;
+    func_802B25D0_de(entry->owner->sound, slot_id(slots, entry->index));
+    slots->ids[entry->index] = -1;
+    entry->priority = 0;
+    entry->fieldC = -1;
+    entry->used = -1;
+    entry->value = -1;
+    entry->channel = -1;
+    entry->fieldB4 = -1;
     return 0;
 }

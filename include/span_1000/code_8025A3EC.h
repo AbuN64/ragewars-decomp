@@ -42,6 +42,12 @@ struct Record_func_8025B758_de {
     f32 fC8; /* per-slot volume scale, 0xC8 */
 };
 
+/* A pool header followed by its seventeen complete slot records. */
+typedef struct Pool_func_8025B758_de {
+    s32 owner;
+    Record_func_8025B758_de slots[17];
+} Pool_func_8025B758_de;
+
 struct func_8025B778_S2;
 /* unbake published declaration: published_115014568e69ed2ff5155653 */
 struct func_8025B778_S2 {
