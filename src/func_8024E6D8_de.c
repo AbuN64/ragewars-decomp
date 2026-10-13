@@ -19,6 +19,6 @@ void func_8024E6D8_de(u8 *arg0, void *arg1) {
         return;
     }
     *(s32 *)arg1 = 0;
-    ((func_8024E6C8_S1 *)(arg1))->unk4 = 0;
-    ((func_8024E6C8_S1 *)(arg1))->unk8 = 0;
+    ((Triple *)arg1)->y = 0;
+    ((Triple *)arg1)->z = 0;
 }
