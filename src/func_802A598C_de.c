@@ -28,30 +28,30 @@ void func_802A598C_de(Owner802A697C *owner, int object) {
     var_v1 = owner->head;
     if (var_v1 != 0) {
         do {
-            temp_a0 = ((func_802A697C_S1 *)(var_v1))->unk1C;
+            temp_a0 = ((struct State802A697C *)var_v1)->object;
             if ((int)temp_a0 == object) {
                 if (temp_a0 != 0) {
-                    if (((func_802A697C_S1 *)(var_v1))->unk3C & 1) {
-                        temp_v0 = ((func_802A697C_S2 *)(temp_a0))->unk13B;
+                    if (((struct State802A697C *)var_v1)->flags & 1) {
+                        temp_v0 = ((Entity1DC *)temp_a0)->unk_13B;
                         if (temp_v0 != 0) {
-                            ((func_802A697C_S2 *)(temp_a0))->unk13B = (u8)(temp_v0 - 1);
+                            ((Entity1DC *)temp_a0)->unk_13B = (u8)(temp_v0 - 1);
                         }
                     }
-                    if (((func_802A697C_S1 *)(var_v1))->unk3C & 2) {
-                        temp_a0_2 = ((func_802A697C_S1 *)(var_v1))->unk1C;
-                        temp_v0_2 = ((func_802A697C_S3 *)(temp_a0_2))->unk1D9;
+                    if (((struct State802A697C *)var_v1)->flags & 2) {
+                        temp_a0_2 = ((struct State802A697C *)var_v1)->object;
+                        temp_v0_2 = ((Entity1DC *)temp_a0_2)->unk_1D9;
                         if (temp_v0_2 != 0) {
-                            ((func_802A697C_S3 *)(temp_a0_2))->unk1D9 = (u8)(temp_v0_2 - 1);
+                            ((Entity1DC *)temp_a0_2)->unk_1D9 = (u8)(temp_v0_2 - 1);
                         }
                     }
                 }
-                ((func_802A697C_S1 *)(var_v1))->unk1C = 0;
-                temp_f1 = ((func_802077F4_S2 *)(((func_802A697C_S1 *)(var_v1))->unk8))->unk4;
-                if (((func_802A697C_S1 *)(var_v1))->unk24 < temp_f1) {
-                    ((func_802A697C_S1 *)(var_v1))->unk24 = temp_f1;
+                ((struct State802A697C *)var_v1)->object = 0;
+                temp_f1 = ((struct State802A697C *)var_v1)->node->value;
+                if (((struct State802A697C *)var_v1)->value < temp_f1) {
+                    ((struct State802A697C *)var_v1)->value = temp_f1;
                 }
             }
-            var_v1 = ((func_802A697C_S1 *)(var_v1))->unk4;
+            var_v1 = ((struct State802A697C *)var_v1)->next;
         } while (var_v1 != 0);
     }
 }
