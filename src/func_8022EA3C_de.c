@@ -1,11 +1,13 @@
+#include "common/unused.h"
+#include "shared/gameplay_transition.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8022E938.h"
 #include "span_1000/code_8025E280.h"
 #include "types.h"
 
-extern f32 func_8027525C_de(void *arg0, s32 arg1, s32 arg2);
-extern f32 func_80275DD4_de(s32, s32, s32);
+extern f32 func_8027525C_de(void *arg0, f32 arg1, f32 arg2);
+extern f32 func_80275DD4_de(s32, f32, f32);
 
 
 
@@ -22,11 +24,11 @@ void func_8022EA3C_de(void *arg0, void *arg1) {
     f32 amount;
 
     if (arg0 != 0 && arg1 != 0 &&
-        (((func_8022EA2C_S1 *)(arg0))->unk2 & 0x40)) {
+        (((Shared_Func80243A80Collision *)arg0)->flags & 0x40)) {
         first = func_8027525C_de(arg0,
-            ((func_8022EA2C_S2 *)(arg1))->unk0, ((func_8022EA2C_S2 *)(arg1))->unk8);
+            ((Vec3 *)arg1)->x, ((Vec3 *)arg1)->z);
         amount = (f32)(s32)(first - func_80275DD4_de(arg0,
-            ((func_8022EA2C_S2 *)(arg1))->unk0, ((func_8022EA2C_S2 *)(arg1))->unk8));
+            ((Vec3 *)arg1)->x, ((Vec3 *)arg1)->z));
         if (amount < D_800C2E24_de) {
             func_8025E440_de(D_800C2E2C_de - (amount * D_800C2E28_de));
             return;
@@ -105,13 +107,13 @@ s32 func_8022EB0C_de(void *arg0, s32 arg1) {
         offset = condition[0] * 2;
         indexed = arg0;
         indexed += offset;
-        return ((func_8022EAFC_S2 *)(indexed))->unk5F4 >= condition[3];
+        return ((Shared_ActorView *)arg0)->ammo[condition[0]] >= condition[3];
     sw_arg1_3:
-        return ((func_8022EAFC_S3 *)(arg0))->unk5F4 >= 3;
+        return ((Shared_ActorView *)arg0)->ammo[0] >= 3;
     sw_arg1_4:
-        return ((func_8022EAFC_S3 *)(arg0))->unk5F4 >= 5;
+        return ((Shared_ActorView *)arg0)->ammo[0] >= 5;
     sw_arg1_12:
-        if (((func_8022EAFC_S3 *)(arg0))->unk5F8 == 0) {
+        if (((Shared_ActorView *)arg0)->ammo[2] == 0) {
             goto check_external;
         }
     sw_arg1_0:
@@ -140,7 +142,7 @@ extern void func_802227F4_de(void *, void *, s32);
 
 
 s32 func_8022EBD4_de(void *arg0, void *arg1) {
-    if (((func_8022CA04_S3 *)(arg1))->unk20 <= 0.0f && func_8024E62C_de(arg1) != 0) {
+    if (((Actor_func_8024A7A0_de *)arg1)->position1.y <= 0.0f && func_8024E62C_de(arg1) != 0) {
         func_802227F4_de(arg0, arg1, 2);
         return 1;
     }
@@ -159,24 +161,24 @@ void func_8022EC3C_de(void *object) {
     int suppress = 0;
     float value;
 
-    if (((func_8022EC2C_S1 *)(object))->unk86C == 0x1144) {
-        suppress = ((func_8022EC2C_S1 *)(object))->unk10E == 0;
+    if (((Actor_func_8022ED48_de *)object)->unk_0x086C == 0x1144) {
+        suppress = ((Actor_func_8022ED48_de *)object)->unk_0x010E == 0;
     }
-    if (((func_8022EC2C_S1 *)(object))->unkE4 == D_800CE47C) {
-        ((func_8022EC2C_S1 *)(object))->unk86C = 0x8A2;
+    if (((Actor_func_8022ED48_de *)object)->ownerId == D_800CE47C) {
+        ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x8A2;
         return;
     }
     if (!suppress) {
-        value = ((func_8022EC2C_S1 *)(object))->unk6C0;
+        value = ((Actor_func_8022ED48_de *)object)->unk_0x06C0;
         if (D_800C2E88_de <= value) {
-            ((func_8022EC2C_S1 *)(object))->unk86C = 0x8A2;
+            ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x8A2;
             return;
         }
         if (value <= D_800C2E8C_de) {
-            ((func_8022EC2C_S1 *)(object))->unk86C = 0x8A7;
+            ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x8A7;
             return;
         }
-        ((func_8022EC2C_S1 *)(object))->unk86C = 0x14;
+        ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x14;
     }
 }
 
@@ -247,12 +249,12 @@ void func_8022EDA4_de(void *arg0) {
 
     func_80264854_de(0);
     func_80253908_de(0);
-    temp_a1 = ((func_8022ED94_S1 *)(arg0))->unk0;
+    temp_a1 = ((ResourceLoadState *)arg0)->handle;
     if (temp_a1 != 0) {
         func_80253838_de(0, temp_a1);
-        ((func_8022ED94_S1 *)(arg0))->unk0 = 0;
-        ((func_8022ED94_S1 *)(arg0))->unk4 = 0;
-        ((func_8022ED94_S1 *)(arg0))->unk8 = 0;
+        ((ResourceLoadState *)arg0)->handle = 0;
+        ((ResourceLoadState *)arg0)->state4 = 0;
+        ((ResourceLoadState *)arg0)->state8 = 0;
     }
 }
 
@@ -262,8 +264,7 @@ void func_8022EDF4_de(void) {
 
 extern s32 D_80142850;
 
-extern s32 func_8025DE54_de(s16 arg0, s32 arg1, s32 arg2, s32 arg3,
-                         s32 arg4, s32 arg5);
+extern s32 func_8025DE54_de(s16 arg0, Vec3 position, s32 arg4, s32 arg5);
 extern void func_80218464_de(void *arg0);
 extern s32 func_80214178_de(void *arg0, void *arg1, s32 arg2);
 extern void func_8021B1E4_de(void *, s32, s32, s32);
@@ -277,35 +278,29 @@ extern void func_80226708_de(void *arg0);
 void func_8022EDFC_de(void *arg0) {
     s32 mode;
 
-    ((func_8022EDEC_S2 *)(((func_8022EDEC_S1 *)(arg0))->unk5D8))->unk8F = 1;
+    ((Shared_ActorView *)arg0)->controls->transientFlag = 1;
     mode = D_80142850;
     switch (mode) {
     case 0:
         func_8025DE54_de(0x18A1,
-                      ((func_8022EDEC_S1 *)(arg0))->unk8,
-                      ((func_8022EDEC_S1 *)(arg0))->unkC,
-                      ((func_8022EDEC_S1 *)(arg0))->unk10,
+                      ((Shared_ActorView *)arg0)->position.vector,
                       (s32)((char *)arg0 + 8), -1);
         break;
     case 1:
         func_8025DE54_de(0x1969,
-                      ((func_8022EDEC_S1 *)(arg0))->unk8,
-                      ((func_8022EDEC_S1 *)(arg0))->unkC,
-                      ((func_8022EDEC_S1 *)(arg0))->unk10,
+                      ((Shared_ActorView *)arg0)->position.vector,
                       (s32)((char *)arg0 + 8), -1);
         break;
     case 2:
         func_8025DE54_de(0x1905,
-                      ((func_8022EDEC_S1 *)(arg0))->unk8,
-                      ((func_8022EDEC_S1 *)(arg0))->unkC,
-                      ((func_8022EDEC_S1 *)(arg0))->unk10,
+                      ((Shared_ActorView *)arg0)->position.vector,
                       (s32)((char *)arg0 + 8), -1);
         break;
     }
     func_80218464_de((char *)arg0 + 0x938);
-    ((func_8022EDEC_S1 *)(arg0))->unk11B4 = 0;
-    func_80214178_de(&((func_8022EDEC_S1 *)(arg0))->unk2E8, &((func_8022EDEC_S1 *)(arg0))->unk458, 1);
-    func_8021B1E4_de(arg0, ((func_8022EDEC_S1 *)(arg0))->unk5EC, 0, 1);
+    ((Actor_func_8022ED48_de *)arg0)->unk_0x11B4 = 0;
+    func_80214178_de(((Shared_ActorView *)arg0)->weapon, ((Shared_ActorView *)arg0)->ammoData, 1);
+    func_8021B1E4_de(arg0, ((Shared_ActorView *)arg0)->spawn, 0, 1);
     func_80226708_de(arg0);
 }
 

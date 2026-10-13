@@ -1,6 +1,13 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8022E938_H
 #define UNBAKE_SPAN_1000_CODE_8022E938_H
 #include "types.h"
+
+/* Handle and bookkeeping words cleared together when releasing this resource. */
+typedef struct ResourceLoadState {
+    s32 handle;
+    s32 state4;
+    s32 state8;
+} ResourceLoadState;
 struct func_8022EA2C_S2;
 /* unbake published declaration: published_00125f582388c3885c71ed44 */
 typedef struct func_8022EA2C_S2 func_8022EA2C_S2;
@@ -600,13 +607,22 @@ extern s32 func_8022EF04_de(s32 arg0, s32 arg1);
 struct Obj_func_8022F3A4_de;
 /* unbake published declaration: published_f2ad9a2c86b48e9f5349ac1c */
 struct Obj_func_8022F3A4_de {
-    char pad[0x10];
+    char pad[8];
+    s32 state; /* 0x08 */
+    u8 fieldC;
+    s8 fieldD;
+    u8 fieldE, fieldF;
     s32 progress;
     u8 value14;
     u8 value15;
     u8 value16;
     char pad17;
     char slots[13];
+    u8 pad25[0x6C - 0x25];
+    s32 totals[3]; /* 0x6C */
+    u8 pad78[0x94 - 0x78];
+    s32 counters[36]; /* 0x94 */
+    u8 pad124[0x190 - 0x124];
 };
 
 /* unbake published declaration: published_f6bd0bff39e7daa05a751afb */
