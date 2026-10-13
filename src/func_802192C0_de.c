@@ -122,7 +122,7 @@ extern void func_8026E378_de(s32 arg0, s32 arg1);
 
 extern void func_80291BE8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
-extern void func_80272CB0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
 extern void func_80273A98_de(void *arg0, f32 arg1);
 extern void func_802738C0_de(void *arg0, f32 arg1);
 extern void func_80273448_de(char *object, f32 x, f32 y, f32 z);

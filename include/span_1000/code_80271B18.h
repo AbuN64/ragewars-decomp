@@ -2,6 +2,8 @@
 #define UNBAKE_SPAN_1000_CODE_80271B18_H
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
+extern void func_80272C60_de(void *matrix, f32 x, f32 y, f32 z);
+extern void func_80272CB0_de(void *matrix, f32 x, f32 y, f32 z);
 /* unbake published declaration: published_0520f5cd3fa38be6da06a8fe */
 extern float D_800C48D8_de;
 

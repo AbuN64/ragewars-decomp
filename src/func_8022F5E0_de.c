@@ -20,7 +20,7 @@ extern void *D_800D052C[];
 
 
 extern void func_80271F9C_de(void *, void *, f32);
-extern void func_80272CB0_de(void *, s32, s32, s32);
+extern void func_80272CB0_de(void *, f32, f32, f32);
 extern void func_802732D0_de(char *, f32 *);
 extern void func_80226DD0_de(char *, Matrix *);
 extern void func_80226C60_de(char *object, Vector4f *output);
@@ -58,7 +58,7 @@ void func_8022F5E0_de(char *arg0) {
         sp70.z = -sp70.z;
     }
     func_80271F9C_de(&sp60, &((ObjectLinks1DC *)(arg0))->unk_50, 0.1f);
-    func_80272CB0_de(&sp80, *(s32 *)&sp60.x, *(s32 *)&sp60.y, *(s32 *)&sp60.z);
+    func_80272CB0_de(&sp80, sp60.x, sp60.y, sp60.z);
     func_80271F9C_de(&sp70, &sp70, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
         func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &sp10);

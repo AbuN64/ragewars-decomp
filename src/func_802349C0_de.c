@@ -10,7 +10,7 @@
 extern s32 D_80141008;
 extern void func_80274098_de(void*,void*,void*);
 extern void func_80274244_de(f32*,f32*);
-extern void func_80272C60_de(void*,s32,s32,s32);
+extern void func_80272C60_de(void *, f32, f32, f32);
 extern u32 func_802337D0_de(State_func_802337D0_de*);
 extern void func_8026F620_de(f32*,f32*,f32*);
 extern void func_80272898_de(void*,void*,void*);
@@ -103,7 +103,7 @@ void func_802349C0_de(void *arg0) {
             func_80274098_de(q58.f, q38.f, q48.f);
             func_80274244_de(q58.f, m68);
             zero=0.0f;
-            ((void(*)(void*,f32,u32,f32))func_80272C60_de)(mA8,zero,actor->height.word,zero);
+            func_80272C60_de(mA8, zero, actor->height.f, zero);
             func_80274244_de(temp_s3, mE8);
             result.x = zero;
             result.y = zero;
@@ -126,7 +126,7 @@ void func_802349C0_de(void *arg0) {
             func_8026F620_de(m168, m68, mA8);
             var_s1 = m1A8;
             func_8026F620_de(var_s1, m168, mE8);
-            ((void(*)(void*,f32,f32,f32))func_80272C60_de)(m128,
+            func_80272C60_de(m128,
                 actor->position.value.x + transformed.x,
                 actor->position.value.y + sp1E8.y + transformed.y,
                 actor->position.value.z + transformed.z);
@@ -159,7 +159,7 @@ void func_802349C0_de(void *arg0) {
             actor->combined=q48;
             func_80274098_de(actor->rotation.f, q38.f, actor->combined.f);
             func_80274244_de(q48.f, m68);
-            ((void(*)(void*,f32,f32,f32))func_80272C60_de)(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
+            func_80272C60_de(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
             func_8026F620_de(actor->matrix, m68, m128);
         }
 

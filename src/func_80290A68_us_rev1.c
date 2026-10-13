@@ -13,7 +13,7 @@
 
 extern s32 func_8028B21C_de(void *arg0, s32 arg1);
 extern void func_80235AE0_de(Racer *arg0);
-extern void func_80272C60_de(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void func_80272C60_de(void *arg0, f32 arg1, f32 arg2, f32 arg3);
 /* The original call site passes the angle as a plain int word carrying float bits (mfc1/mfc1 pair in
  * several versions of this call); the already-landed definition reinterprets that word internally. */
 extern void func_802739C4_de(void *arg0, s32 angleBits);
@@ -41,7 +41,7 @@ extern s32 D_800D297C;
 extern s32 D_auto_800D7068;
 extern s32 D_800E28D0;
 extern u8 D_26DB0[];
-extern PackedMatrixWords D_auto_8011F5D0;
+extern PackedMatrixWords D_auto_8011F5D0[];
 extern Racer D_80141008;
 
 void func_80290A68_us_rev1(s32 arg0) {
@@ -60,14 +60,14 @@ void func_80290A68_us_rev1(s32 arg0) {
     D_800D15E4[3] = D_800CA4B0;
     if (var_s0 != -1) {
         func_80235AE0_de(&D_80141008);
-        func_80272C60_de(matrix, 0, 0xC2C80000, 0xC3FA0000);
+        func_80272C60_de(matrix, 0.0f, -100.0f, -500.0f);
         angleBits.f = *(f32 *)(&D_26DB0[arg0]) * D_800CA4B4;
         func_802739C4_de(matrix, angleBits.i);
         func_80273D6C_de(matrix);
-        func_8027027C_de(matrix, (&D_auto_8011F5D0)[D_800D297C]);
+        func_8027027C_de(matrix, &D_auto_8011F5D0[D_800D297C]);
         var_s0 = func_8028C198_de(&D_8011FE88, var_s0);
         var_s0 = func_8026D980_de();
-        func_8026DF30_de(var_s0, (s32)((&D_auto_8011F5D0)[D_800D297C]), (s32)&D_800D0EF8, 0, -1);
+        func_8026DF30_de(var_s0, (s32)(&D_auto_8011F5D0[D_800D297C]), (s32)&D_800D0EF8, 0, -1);
         func_8026D9D0_de();
         func_80291FD8_de(arg0, 0, D_auto_800D7068, D_800E28D0 / 2, 190, 10, D_800CA4B8, (&D_800CA4B8)[1]);
     }

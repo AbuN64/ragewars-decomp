@@ -395,7 +395,7 @@ typedef struct AnimationSprite {
     s32 model;
     u8 reservedC[4];
     u8 matrices[2][0x40];
-    s32 scaleX, scaleY, scaleZ;
+    f32 scaleX, scaleY, scaleZ;
     f32 pitch, yaw;
     u8 reservedA4[4];
     Vec3 position;
