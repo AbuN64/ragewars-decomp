@@ -143,9 +143,15 @@ typedef struct Node_func_8040ED38_de Node_func_8040ED38_de;
 struct Widget_func_8040CF8C_de;
 /* unbake published declaration: published_92e1044ef340eee50117de5a */
 struct Widget_func_8040CF8C_de {
-    char pad0[0x12];
+    char pad0[0x10];
+    u8 alpha;
+    char pad11;
     u16 flags;
-    char pad14[0x18];
+    s16 x, y;
+    s16 width, height;
+    s16 offsetX, offsetY;
+    f32 scaleX, scaleY;
+    s32 unknown28;
     u32 colors[4];
 };
 
