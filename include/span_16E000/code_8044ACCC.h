@@ -1,23 +1,22 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8044ACCC_H
 #define UNBAKE_SPAN_16E000_CODE_8044ACCC_H
 #include "../types.h"
+#include "shared/level_track.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
 #include "audio_callbacks.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8027451C.h"
+#include "common/types_06e4f7ef1f9e.h"
+#include "shared/level_input.h"
 struct func_8044B388_S1;
 /* unbake published declaration: published_03e9c7e3de05cad75660efbd */
 typedef struct func_8044B388_S1 func_8044B388_S1;
 
 struct Object_func_8044D220_de;
 /* unbake published declaration: published_0715a667da33b1413a7a313c */
-struct Object_func_8044D220_de {
-    s32 w[4];
-    s16 kind;
-    s16 pad12;
-};
+
 
 struct func_8044CD58_S2;
 /* unbake published declaration: published_0bb211f30fe63a458acee448 */
@@ -40,10 +39,7 @@ typedef struct ObjB ObjB;
 
 struct Track_func_8044D220_de;
 /* unbake published declaration: published_1b5a6c69de844c6abe5cb3cf */
-struct Track_func_8044D220_de {
-    char pad0[0x90];
-    s32 resource;
-};
+
 
 struct LightSettings;
 struct LightSettings {
@@ -318,7 +314,7 @@ struct State_func_8044D0F0_de {
 
 struct Track_func_8044D220_de;
 /* unbake published declaration: published_8e7a95c9b4a3d45829ece90c */
-typedef struct Track_func_8044D220_de Track_func_8044D220_de;
+
 
 struct Node_func_8044D220_de;
 /* unbake published declaration: published_93b184ea0ba838bfa318ace1 */
@@ -448,7 +444,7 @@ typedef struct func_8044ADC0_S1 func_8044ADC0_S1;
 
 struct Object_func_8044D220_de;
 /* unbake published declaration: published_ca85549dbf05a794bd997b96 */
-typedef struct Object_func_8044D220_de Object_func_8044D220_de;
+
 
 /* unbake published declaration: published_cc47fe67a6f2024256f55403 */
 extern short D_8010F320;
@@ -627,5 +623,13 @@ typedef struct CollisionBuildWorld {
     s32 group;
 } CollisionBuildWorld;
 extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
+
+extern void *memcpy(void *, const void *, unsigned int);
+extern s32 D_80141060;
+extern f32 func_80217224_de(void *obj, Vec3 pos);
+extern void func_8024B3A8_de(void *obj, Input_func_8024B3A8_de *rec, s32 mode, s32 index);
+extern s32 func_8024DD8C_de(void *obj);
+extern s32 func_8024DDB4_de(void *obj);
+extern void func_80449970_us_rev1(SharedPlayer *player, Input_func_8024B3A8_de *rec, s32 mode, s32 index);
 
 #endif

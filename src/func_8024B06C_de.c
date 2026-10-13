@@ -151,7 +151,7 @@ extern s32 func_80285F58_de(void *, void *);
 extern void func_802466A0_de(void *, u16, u16, s32, void *, s32, s32, f32,
                           Vec3, u8, Vec3, Vec3, s32);
 
-void func_8024B3A8_de(void *arg0, Input_func_8024B3A8_de *arg1) {
+void func_8024B3A8_de(void *arg0, Input_func_8024B3A8_de *arg1, s32 mode, s32 index) {
     void *resource0;
     s32 resource1;
     s32 lookup;

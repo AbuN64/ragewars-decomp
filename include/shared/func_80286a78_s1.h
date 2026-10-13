@@ -83,9 +83,9 @@ struct Shared_func_80286A78_S1 {
     char pad1B4F4[0xC];
     IntrusiveList address1B500; /* +0x1B500: src/func_80286A78.c */
     char pad1B514[0x100];
-    s32 unk1B614;
-    s32 unk1B618;
-    s32 unk1B61C;
+    f32 unk1B614;
+    f32 unk1B618;
+    f32 unk1B61C;
     char pad1B620[0x84];
     s32 unk1B6A4; /* +0x1B6A4: src/func_80286A78.c */
     char pad1B6A8[0x4];

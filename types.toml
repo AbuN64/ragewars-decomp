@@ -1064,7 +1064,7 @@ schema = 1
 "func_8024AA18_de" = { evidence = "landed", signature = "void func_8024AA18_de(char *obj, s32 unused, char *info)" }
 "func_8024B06C_de" = { evidence = "landed", signature = "s32 func_8024B06C_de(char *obj, Vec3 point, Box70 *out)" }
 "func_8024B2D0_de" = { evidence = "landed", signature = "void func_8024B2D0_de(char *arg0)" }
-"func_8024B3A8_de" = { evidence = "landed", signature = "void func_8024B3A8_de(void *arg0, Input_func_8024B3A8_de *arg1)" }
+"func_8024B3A8_de" = { evidence = "landed", signature = "void func_8024B3A8_de(void *arg0, Input_func_8024B3A8_de *arg1, s32 mode, s32 index)" }
 "func_8024B4F4_de" = { evidence = "landed", signature = "void func_8024B4F4_de(void *arg0, int arg1)" }
 "func_8024B53C_de" = { evidence = "landed", signature = "void func_8024B53C_de(void *arg0)" }
 "func_8024B654_de" = { evidence = "landed", signature = "void func_8024B654_de(void)" }
@@ -4315,6 +4315,7 @@ schema = 1
 "func_8044952C_de" = { evidence = "landed", signature = "void func_8044952C_de(struct RespawnPlayer *player)" }
 "func_8044972C_de" = { evidence = "landed", signature = "void func_8044972C_de(SharedPlayer_func_8044972C_de *player)" }
 "func_80449870_de" = { evidence = "declared", signature = "void func_80449870_de(void *)" }
+"func_80449970_us_rev1" = { evidence = "authored", signature = "void func_80449970_us_rev1(SharedPlayer *player, Input_func_8024B3A8_de *rec, s32 mode, s32 index)" }
 "func_804499B0_de" = { evidence = "landed", signature = "void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active)" }
 "func_80449DB0_de" = { evidence = "landed", signature = "void func_80449DB0_de(struct Record_func_80449DB0_de *record)" }
 "func_80449E18_de" = { evidence = "landed", signature = "void func_80449E18_de(Node_func_80449E18_de *arg0)" }
@@ -4339,6 +4340,7 @@ schema = 1
 "func_8044BF90_de" = { evidence = "landed", signature = "void func_8044BF90_de(func_8044CBE0_S1 *arg0)" }
 "func_8044C108_de" = { evidence = "landed", signature = "void func_8044C108_de(World_func_8044C108_de *world, void ***handle)" }
 "func_8044C3D4_de" = { evidence = "landed", signature = "void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle)" }
+"func_8044C7B8_de" = { evidence = "landed", signature = "void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **handle)" }
 "func_8044CD8C_de" = { evidence = "landed", signature = "void func_8044CD8C_de(Level_func_8044CD8C_de *level)" }
 "func_8044CFF8_de" = { evidence = "landed", signature = "void func_8044CFF8_de(char *state)" }
 "func_8044D054_de" = { evidence = "landed", signature = "void func_8044D054_de(State_func_8044D054_de *arg0)" }
@@ -4386,6 +4388,7 @@ schema = 1
 "make_plane" = { evidence = "landed", signature = "static inline void make_plane(Plane_func_802965B0_de *plane, Vec3 *from, Vec3 *through, Vec3 *to, Vec3 *point)" }
 "map_category" = { evidence = "landed", signature = "static inline int map_category(int mode)" }
 "max_ammo" = { evidence = "landed", signature = "static inline s32 max_ammo(SharedPlayer_func_80229554_de *player, s32 type)" }
+"memcpy" = { evidence = "authored", signature = "void *memcpy(void *, const void *, unsigned int)" }
 "menuCategory" = { evidence = "landed", signature = "static inline s32 menuCategory(s32 event)" }
 "menuPrompt" = { evidence = "landed", signature = "static __inline__ void *menuPrompt(Menu_func_804066BC_de *menu)" }
 "motion_storage" = { evidence = "landed", signature = "static inline s32 motion_storage(s32 channels, s32 frames)" }
@@ -9124,11 +9127,12 @@ schema = 1
 "D_8013B368" = { declaration = "extern int D_8013B368;", evidence = "authored" }
 "D_8013D534" = { declaration = "extern s32 *D_8013D534;", evidence = "authored" }
 "D_8013D538" = { declaration = "extern void * D_8013D538;", evidence = "authored" }
-"D_80140F84" = { declaration = "extern char *D_80140F84;", evidence = "authored" }
+"D_80140F84" = { declaration = "extern SharedPlayer *D_80140F84;", evidence = "authored" }
 "D_80140FB4" = { declaration = "extern GameState D_80140FB4;", evidence = "authored" }
 "D_80140FE8_de" = { declaration = "extern Globals_func_804220A8_de D_80140FE8_de;", evidence = "authored" }
 "D_80141000" = { declaration = "extern int D_80141000;", evidence = "authored" }
-"D_80141040" = { declaration = "extern int D_80141040;", evidence = "authored" }
+"D_80141040" = { declaration = "extern Vec3 D_80141040;", evidence = "authored" }
+"D_80141060" = { declaration = "extern s32 D_80141060;", evidence = "authored" }
 "D_80141128" = { declaration = "extern s32 D_80141128;", evidence = "authored" }
 "D_801421B4" = { declaration = "extern int D_801421B4;", evidence = "authored" }
 "D_801421D0" = { declaration = "extern int D_801421D0;", evidence = "authored" }
@@ -11391,7 +11395,7 @@ schema = 1
 "Object_func_804431E4_de" = { declaration = "struct Object_func_804431E4_de { char pad[0x14]; struct Handlers_func_804431E4_de *handlers; char pad18[0x20 - 0x18]; struct State_func_80442A60_de *state; };", evidence = "authored" }
 "Object_func_80443C14_de" = { declaration = "typedef struct Object_func_80443C14_de Object_func_80443C14_de;", evidence = "authored" }
 "Object_func_8044A07C_de" = { declaration = "struct Object_func_8044A07C_de { char pad[0x11BC]; s32 first; s32 second; };", evidence = "authored" }
-"Object_func_8044D220_de" = { declaration = "struct Object_func_8044D220_de { s32 w[4]; s16 kind; s16 pad12; };", evidence = "authored" }
+"Object_func_8044D220_de" = { declaration = "typedef struct Object_func_8044D220_de Object_func_8044D220_de;", evidence = "authored" }
 "Opaque_ALLowPass" = { declaration = "typedef struct Opaque_ALLowPass_s Opaque_ALLowPass;", evidence = "authored" }
 "Opaque_ALSeq" = { declaration = "typedef struct Opaque_ALSeq_s Opaque_ALSeq;", evidence = "authored" }
 "Opaque_OSMesgQueue" = { declaration = "typedef struct Opaque_OSMesgQueue Opaque_OSMesgQueue;", evidence = "authored" }
@@ -12962,7 +12966,7 @@ schema = 1
 "Track_func_8028C6D4_de" = { declaration = "struct Track_func_8028C6D4_de { void **nodes; s32 pad4[2]; };", evidence = "authored" }
 "Track_func_802A274C_de" = { declaration = "typedef struct Track_func_802A274C_de Track_func_802A274C_de;", evidence = "authored" }
 "Track_func_80401980_de" = { declaration = "typedef struct Track_func_80401980_de Track_func_80401980_de;", evidence = "authored" }
-"Track_func_8044D220_de" = { declaration = "struct Track_func_8044D220_de { char pad0[0x90]; s32 resource; };", evidence = "authored" }
+"Track_func_8044D220_de" = { declaration = "typedef struct Track_func_8044D220_de Track_func_8044D220_de;", evidence = "authored" }
 "Tracker" = { declaration = "typedef struct Tracker Tracker;", evidence = "authored" }
 "TrailActor" = { declaration = "typedef struct TrailActor TrailActor;", evidence = "authored" }
 "TrailNode" = { declaration = "typedef struct TrailNode TrailNode;", evidence = "authored" }

@@ -422,7 +422,7 @@ extern s32 D_002A11EC;
 extern s32 D_800FF254;
 
 /* unbake published declaration: published_178ad23e31bb5dddf2c45aea */
-extern char *D_80140F84;
+
 
 /* unbake published declaration: published_17e48235a4a4fd4cd9c362ad */
 extern void *jtbl_800DCE58[];

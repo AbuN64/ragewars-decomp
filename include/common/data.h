@@ -199,7 +199,7 @@ extern int D_801370C8;
 extern int D_801370CC;
 extern int D_80137428;
 extern void * D_8013D538;
-extern int D_80141040;
+extern Vec3 D_80141040;
 extern int D_801421B4;
 extern int D_801421D0;
 extern unsigned char D_80142233;
