@@ -1,3 +1,4 @@
+#include "shared/navigation_graph.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8020AF9C.h"
 #include "types.h"
@@ -16,38 +17,39 @@ extern s32 func_802744D4_de(void);
 
 void func_8020CA10_de(void *arg0, s32 arg1)
 {
-  char *entry;
+  NavigationPoint *entry;
+  NavigationSearchNode *node = arg0;
   u16 flags;
   char *new_var;
   s32 *base;
-  ((func_8020CA10_S1 *)(arg0))->unk4 = D_800C1D8C_de;
-  ((func_8020CA10_S1 *)(arg0))->unk0 = arg1;
-  ((func_8020CA10_S1 *)(arg0))->unk8 = -1;
-  ((func_8020CA10_S1 *)(arg0))->unkC = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk10 = 0;
+  node->value = D_800C1D8C_de;
+  node->key = arg1;
+  node->state = -1;
+  node->flags = 0;
+  node->next = 0;
   base = D_8013B364.unk0;
   new_var = (char *)base + ((arg1 * (*base)) + 8);
-  entry = new_var;
-  flags = ((func_8020CA10_S2 *)(entry))->unkC;
+  entry = (NavigationPoint *)new_var;
+  flags = entry->flags;
   if (flags & 2)
   {
-    ((func_8020CA10_S1 *)(arg0))->unk14 = D_800C1D90_de;
+    node->wait = D_800C1D90_de;
   }
-  ((func_8020CA10_S1 *)(arg0))->unk34 = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk38 = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk3C = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk40 = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk44 = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk48 = 0;
-  ((func_8020CA10_S1 *)(arg0))->unk4C = 0;
-  flags = ((func_8020CA10_S2 *)(entry))->unkC;
+  node->object = 0;
+  node->ticks = 0;
+  node->delay = 0;
+  node->platform = 0;
+  node->endpoint.x = 0;
+  node->endpoint.y = 0;
+  node->endpoint.z = 0;
+  flags = entry->flags;
   if (flags & 0x40)
   {
-    ((func_8020CA10_S1 *)(arg0))->unk38 = (func_802744D4_de() % 5) + 5;
+    node->ticks = (func_802744D4_de() % 5) + 5;
   }
-  flags = ((func_8020CA10_S2 *)(entry))->unkC;
+  flags = entry->flags;
   if (flags & 0x80)
   {
-    ((func_8020CA10_S1 *)(arg0))->unk3C = (func_802744D4_de() % 5) + 5;
+    node->delay = (func_802744D4_de() % 5) + 5;
   }
 }

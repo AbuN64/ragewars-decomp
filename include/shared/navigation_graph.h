@@ -16,7 +16,7 @@ typedef struct NavigationSearchNode {
     s32 key; /* 0x0 */
     f32 value; /* 0x4 */
     s32 state; /* 0x8 */
-    u8 padC[0x4];
+    s32 flags; /* 0xC */
     struct NavigationSearchNode * next; /* 0x10 */
     f32 wait; /* 0x14 */
     f32 extra; /* 0x18 */
