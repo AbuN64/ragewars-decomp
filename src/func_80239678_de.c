@@ -22,10 +22,10 @@ f32 func_80239678_de(void *arg0, void *arg1) {
     f64 divisor;
     s32 count;
 
-    if (((Race *)arg0)->mode == 0) {
+    if (((Race *)arg0)->header.views.count == 0) {
         return 0.0f;
     }
-    node = ((Race *)arg0)->racers;
+    node = ((Race *)arg0)->header.views.head;
     sum = 0.0f;
     if (node != 0) {
         do {
@@ -37,7 +37,7 @@ f32 func_80239678_de(void *arg0, void *arg1) {
             node = node->next;
         } while (node != 0);
     }
-    count = ((Race *)arg0)->mode;
+    count = ((Race *)arg0)->header.views.count;
     divisor = (f64)count;
     if (count < 0) {
         divisor += D_800C3550_de;
