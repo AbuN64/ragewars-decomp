@@ -2,7 +2,7 @@
 #include "span_1000/code_802AFEAC.h"
 #include "types.h"
 
-extern char D_800C7430_de[];
+extern f32 D_800C7430_de[];
 
 
 
@@ -13,8 +13,8 @@ f32 func_802AFE30_de(s32 arg0)
   s32 n;
   int new_var;
   new_var = 0;
-  result = *((f32 *) (D_800C7430_de + new_var));
-  base = ((func_802077F4_S2 *)(D_800C7430_de))->unk4;
+  result = D_800C7430_de[new_var];
+  base = D_800C7430_de[1];
   n = arg0;
   if (n < 0)
   {

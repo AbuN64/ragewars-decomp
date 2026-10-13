@@ -18,15 +18,15 @@ void func_80239AF4_de(s32 arg0, void *arg1) {
     void *var_a0;
 
     if (arg1 != 0) {
-        var_s1 = ((func_80239AE4_S1 *)(arg1))->unkE40.tail;
-        var_a0 = &((func_80239AE4_S1 *)(arg1))->unkE40;
+        var_s1 = ((struct ScreenMessagePool *)arg1)->freeMessages.tail;
+        var_a0 = &((struct ScreenMessagePool *)arg1)->freeMessages;
         if (var_s1 != 0) {
             do {
                 temp_s0 = var_s1->next;
                 func_80255ED8_de(var_a0, var_s1);
-                func_80255CB8_de(&((func_80239AE4_S2 *)(arg0))->unkF24, (s32)var_s1);
+                func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, (s32)var_s1);
                 var_s1 = temp_s0;
-                var_a0 = &((func_80239AE4_S1 *)(arg1))->unkE40;
+                var_a0 = &((struct ScreenMessagePool *)arg1)->freeMessages;
             } while (var_s1 != 0);
         }
     }
