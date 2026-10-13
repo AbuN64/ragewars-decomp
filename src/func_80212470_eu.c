@@ -13,62 +13,62 @@
 
 
 void func_80212470_eu(void *arg0) {
-    void *level1 = ((func_8020A028_S3 *)(arg0))->unk1D8;
-    void *inner = ((func_80212828_S2 *)(level1))->unk1454;
+    CloseAttackActor *level1 = ((CloseAttackActor *)arg0)->self;
+    CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
 
-    ((func_80212450_S3 *)(inner))->unk220 = 0;
+    inner->state = 0;
     func_80209988_de(inner);
 
     r1 = func_802744D4_de();
-    ((func_80212450_S3 *)(inner))->unk2D8 = r1 % 4 + 0xC;
+    inner->timer = r1 % 4 + 0xC;
 
     r2 = func_802744D4_de();
-    ((func_80212450_S3 *)(inner))->unk2DC = r2 % 2;
+    inner->pattern = r2 % 2;
 
     r3 = func_802744D4_de();
-    ((func_80212450_S3 *)(inner))->unk320 = -1;
-    ((func_80212450_S3 *)(inner))->unk318 = 0;
-    ((func_80212450_S3 *)(inner))->unk31C = 0;
-    ((func_80212450_S3 *)(inner))->unk2E0 = r3 % 250000 + 360000;
+    inner->fireTimer = -1;
+    inner->frames = 0;
+    inner->visible = 0;
+    inner->distance = r3 % 250000 + 360000;
 }
 
 
 
 void func_80212544_eu(void *arg0) {
-    void *level1 = ((Shared_Actor *)arg0)->entity;
-    void *inner = ((func_80212828_S5 *)(level1))->unk1454;
+    CloseAttackActor *level1 = ((CloseAttackActor *)arg0)->self;
+    CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
 
-    ((func_80212450_S3 *)(inner))->unk220 = 0;
+    inner->state = 0;
 
     r1 = func_802744D4_de();
-    ((func_80212450_S3 *)(inner))->unk2D8 = r1 % 4 + 2;
+    inner->timer = r1 % 4 + 2;
 
     r2 = func_802744D4_de();
-    ((func_80212450_S3 *)(inner))->unk2DC = r2 % 2;
+    inner->pattern = r2 % 2;
 
     r3 = func_802744D4_de();
-    ((func_80212450_S3 *)(inner))->unk2E0 = r3 % 32400 + 0x2710;
+    inner->distance = r3 % 32400 + 0x2710;
 
     func_80209988_de(inner);
 
-    ((func_80212450_S3 *)(inner))->unk318 = 0;
-    ((func_80212450_S3 *)(inner))->unk31C = 0;
-    ((func_80212450_S3 *)(inner))->unk320 = -1;
+    inner->frames = 0;
+    inner->visible = 0;
+    inner->fireTimer = -1;
 }
 
 int func_80212610_eu(void *arg0) {
-    void *level1 = ((func_802125F0_S1 *)(arg0))->unk1D8;
-    void *inner = ((func_802125F0_S2 *)(level1))->unk1454;
+    CloseAttackActor *level1 = ((CloseAttackActor *)arg0)->self;
+    CloseAttackBrain *inner = level1->brain;
     s32 r1, r2;
 
-    ((func_802125F0_S3 *)(inner))->unk220 = 0;
+    inner->state = 0;
     func_80209988_de(inner);
 
     r1 = func_802744D4_de();
-    ((func_802125F0_S3 *)(inner))->unk2D8 = r1 % 4 + 0xC;
+    inner->timer = r1 % 4 + 0xC;
 
     r2 = func_802744D4_de();
-    ((func_802125F0_S3 *)(inner))->unk2DC = r2 % 2;
+    inner->pattern = r2 % 2;
 }

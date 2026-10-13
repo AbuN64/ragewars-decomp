@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802412C0.h"
 #include "types.h"
+#include "common/unused.h"
 
 
 
@@ -25,7 +26,6 @@ extern f32 func_80241728_de(Query_func_80241BAC_de *, f32, f32);
 extern s32 func_8024491C_de(Input_func_80241BAC_de *, Vec3, Vec3, void *, f32, f32, f32, f32);
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 extern void *D_80103FCC;
-extern char D_801000F0;
 extern f32 D_800C3758_de[];
 
 
@@ -96,8 +96,8 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
         hit |= func_8023E8D4_de(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
-            func_80271F34_de(&((func_8022CA04_S4 *)(input))->unk1C,
-                          &((func_8022CA04_S4 *)(input))->unk1C,
+            func_80271F34_de(&((Actor_func_8024A7A0_de *)input)->position1,
+                          &((Actor_func_8024A7A0_de *)input)->position1,
                           (Vec3 *)&actor->move_x);
         }
     }

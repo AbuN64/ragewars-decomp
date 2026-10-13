@@ -9,6 +9,7 @@
 
 
 extern float D_800C9138_de;
+extern float D_800C913C_de;
 
 
 
@@ -24,7 +25,7 @@ void func_8021836C_de(char *arg0) {
     s32 i;
     s32 minus_one = -1;
     f32 scale = D_800C224C_de;
-    f32 value = ((func_802077F4_S2 *)(&D_800C9138_de))->unk4;
+    f32 value = D_800C913C_de;
 
     ((ResetThirtySixStorage *)(arg0))->unk0 = 0;
     ((ResetThirtySixStorage *)(arg0))->unk4 = 0;

@@ -131,7 +131,9 @@ struct CloseAttackBrain {
     CloseAttackActor *target;
     char pad68[0x188];
     f32 walk[8];
-    char pad210[0x20];
+    char pad210[0x10];
+    s32 state; /* 0x220 */
+    char pad224[0xC];
     s32 combat;
     char pad234[0xA4];
     s32 timer;

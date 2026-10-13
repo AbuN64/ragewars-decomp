@@ -25,13 +25,15 @@ typedef struct IntegerState1504 IntegerState1504;
 struct Object_func_802773D4_de;
 /* unbake published declaration: published_13c7d750700124ada52844b4 */
 struct Object_func_802773D4_de {
-    char pad0[4];
+    f32 falloff;
     f32 value;
     Vec3 direction; /* 0x08 */
-    char pad14[0xB8-0x14];
+    Vec3 axis; /* 0x14 */
+    char pad20[0xB8-0x20];
     u8 flagB8;
     u8 flagB9;
-    char padBA[2];
+    char padBA;
+    u8 shape; /* 0xBB */
 };
 
 struct Object_func_8027892C_de;

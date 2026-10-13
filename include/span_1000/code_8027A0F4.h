@@ -480,7 +480,8 @@ struct Shared_Particle {
     s32 flags;
     PackedMatrixWords mtx[2];
     struct Shared_ParticleLighting lighting[2];
-    char pad110[8];
+    s32 resource; /* 0x110 */
+    s32 resourceSize; /* 0x114 */
     struct Shared_ParticleDesc *desc;
     s32 model;
     char pad120[0xC];

@@ -47,7 +47,7 @@ void func_8027EB2C_de(void *arg0, void *arg1) {
         if (lookup == 0) {
             return;
         }
-        func_80272898_de(&((func_8028414C_S1 *)(arg1))->unk220, &((func_8027EB00_S2 *)(arg0))->unk8, &delta);
+        func_80272898_de(&((struct Shared_ParticleView *)arg1)->viewMtx, &((Shared_Particle *)arg0)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
@@ -55,29 +55,29 @@ void func_8027EB2C_de(void *arg0, void *arg1) {
         func_8027DD48_de(arg0, (s32)lookup, (s32)arg1, amount);
     }
 
-    if (((func_8027EB00_S2 *)arg0)->unk110 == 0) {
-        resource = func_8025193C_de(0, ((func_80204468_S3 *)((func_8027EB00_S2 *)arg0)->unk118)->unk14,
-                                ((func_80204468_S3 *)((func_8027EB00_S2 *)arg0)->unk118)->unk14, 0x18,
+    if (((Shared_Particle *)arg0)->resource == 0) {
+        resource = func_8025193C_de(0, ((Shared_Particle *)arg0)->desc->renderModel,
+                                ((Shared_Particle *)arg0)->desc->renderModel, 0x18,
                                 0, 0, 0, &D_800C4D38_de, 1);
         if (resource != 0) {
             key = func_8028FE28_de(*resource,
-                                ((func_80204468_S3 *)((func_8027EB00_S2 *)arg0)->unk118)->unk14, 1);
+                                ((Shared_Particle *)arg0)->desc->renderModel, 1);
             func_80253838_de(0, resource);
             found = func_802540F4_de(0, &sp38, key, &D_800C4D50_de, 1);
             if (found != 0) {
-                ((func_8027EB00_S2 *)arg0)->unk110 = func_8028FE3C_de(
+                ((Shared_Particle *)arg0)->resource = func_8028FE3C_de(
                     (s32)sp38, key, index % *(s32 *)sp38,
-                    &((func_8027EB00_S2 *)(arg0))->unk114);
+                    &((Shared_Particle *)arg0)->resourceSize);
                 func_80253838_de(0, (void *)found);
             }
         }
-        if (((func_8027EB00_S2 *)arg0)->unk110 == 0) {
+        if (((Shared_Particle *)arg0)->resource == 0) {
             return;
         }
     }
 
-    resource = func_8025193C_de(0, ((func_8027EB00_S2 *)arg0)->unk110,
-                            ((func_8027EB00_S2 *)arg0)->unk110, ((func_8027EB00_S2 *)arg0)->unk114,
+    resource = func_8025193C_de(0, ((Shared_Particle *)arg0)->resource,
+                            ((Shared_Particle *)arg0)->resource, ((Shared_Particle *)arg0)->resourceSize,
                             0, 0, &D_0026D7F4, &D_800C4D68_de, 1);
     if (resource != 0) {
         func_8026DC24_de(resource, (s32)lookup, 0,
