@@ -27,10 +27,13 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
     Gfx *output;
     s32 tag;
     u32 value, a, b, c, n, block, address;
-    s32 a2, b2, c2;
-    s32 kind;
+    s32 b2, c2;
+    s32 kind, vertexSlot, vertexOffset;
+    const u32 vertexSegment = 0x02000000;
+    const u32 matrixSegment = 0x01000000;
     s32 h, l, q, r;
     void *srcData, *dstData;
+    void *copySource3, *copySource2, *copySource1, *copySource0;
     if (func_80285180_de(res, 1) != 0) {
         parts = 6;
         if (extra == 0) {
@@ -52,16 +55,17 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             size += 16;
             size += 32;
             input = func_8028FDB4_de(srcEntry, 1);
+            { s32 countTag;
             commandSize = 0;
-            while ((tag = *input) != 0) {
+            while ((countTag = *input) != 0) {
                 
-                if (tag & 0x80) {
+                if (countTag & 0x80) {
                     input += 2;
                     commandSize += 8;
                     if (*input & 0x80) input += 2;
                 } else {
-                    tag &= 0x60;
-                    switch (tag) {
+                    countTag &= 0x60;
+                    switch (countTag) {
                     case 0x20: input += 2; commandSize += 8; break;
                     case 0x40: input += 2; commandSize += 8; break;
                     case 0x60: input += 5; commandSize += 8; break;
@@ -69,6 +73,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                 }
             }
             size += (commandSize + 15) & ~7;
+            }
             i++;
         } while (i < count);
         if (extra != 0) {
@@ -85,14 +90,14 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             vertexCount = 0;
             dst->count = parts;
             dst->offsets[0] = offset;
-            srcData = func_8028FDC8_de(old, 0, &len0);
+            copySource0 = func_8028FDC8_de(old, 0, &len0);
             vertices = func_8028FDB4_de(dst, 0);
-            func_802BD3A0_de(vertices, srcData, len0);
+            func_802BD3A0_de(vertices, copySource0, len0);
             offset += len0;
             dst->offsets[1] = offset;
-            srcData = func_8028FDC8_de(old, 1, &len1);
+            copySource1 = func_8028FDC8_de(old, 1, &len1);
             dstData = func_8028FDB4_de(dst, 1);
-            func_802BD3A0_de(dstData, srcData, len1);
+            func_802BD3A0_de(dstData, copySource1, len1);
             offset += len1;
             dst->offsets[2] = offset;
             oldList = func_8028FDB4_de(old, 2);
@@ -110,9 +115,9 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                     block = (srcEntry->count * 4 + 15) & ~7;
                     dstEntry->count = srcEntry->count;
                     dstEntry->offsets[0] = block;
-                    srcData = func_8028FDB4_de(srcEntry, 0);
+                    copySource2 = func_8028FDB4_de(srcEntry, 0);
                     dstData = func_8028FDB4_de(dstEntry, 0);
-                    func_80285570_de(dstData, srcData);
+                    func_80285570_de(dstData, copySource2);
                     block += 32;
                     dstEntry->offsets[1] = block;
                     input = func_8028FDB4_de(srcEntry, 1);
@@ -121,9 +126,8 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                         do {
                             kind = tag & 0x60;
                             if (tag & 0x80) {
-                                h = *input++;
-                                l = *input++;
-                                value = (h << 8) | l;
+                                value = *input++ << 8;
+                                value |= *input++;
                                 a = (s32)value >> 10 & 0x1F;
                                 b = (s32)value >> 5 & 0x1F;
                                 c = value & 0x1F;
@@ -131,10 +135,10 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                                     h = *input++;
                                     l = *input++;
                                     value = (h << 8) | l;
-                                    a2 = (s32)value >> 10 & 31;
+                                    commandSize = (s32)value >> 10 & 31;
                                     b2 = (s32)value >> 5 & 31;
                                     c2 = value & 31;
-                                    gSP2Triangles(output++, a, b, c, 0, a2, b2, c2, 0);
+                                    gSP2Triangles(output++, a, b, c, 0, commandSize, b2, c2, 0);
                                 } else {
                                     gSP1Triangle(output++, a, b, c, 0);
                                 }
@@ -143,25 +147,25 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
                                 case 0x20:
                                     h = *input++; l = *input++;
                                     value = (h << 8) | l;
-                                    kind = (s32)value >> 5 & 31;
+                                    vertexSlot = (s32)value >> 5 & 31;
                                     n = value & 0x1F;
                                     if (n == 0) n = 32;
-                                    a = vertexCount * 16;
+                                    vertexOffset = vertexCount * 16;
                                     vertexCount += n;
                                     /* Segment 2 holds vertex data, following its eight-byte header. */
-                                    address = (vertexData + a - vertices) + 0x02000000;
-                                    gSPVertex(output++, address, n, kind);
+                                    gSPVertex(output++, (vertexData + vertexOffset - vertices) + vertexSegment, n, vertexSlot);
                                     break;
                                 case 0x40:
-                                    h = *input++; l = *input++;
+                                    input++;
+                                    { s32 matrixIndex = *input++;
                                     /* Segment 1 holds 64-byte matrices. */
-                                    address = l * 64 + 0x01000000;
-                                    gSPMatrix(output++, address, G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_PUSH);
+                                    gSPMatrix(output++, matrixSegment + matrixIndex * 64, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH); }
                                     break;
                                 case 0x60:
+                                    vertexSlot = tag & 31;
                                     h = *input++; l = *input++; q = *input++; r = *input++;
                                     value = *input++;
-                                    gSPModifyVertex(output++, tag & 31, G_MWO_POINT_ST,
+                                    gSPModifyVertex(output++, vertexSlot, G_MWO_POINT_ST,
                                                     (l << 24) | (q << 16) | (r << 8) | value);
                                     break;
                                 }
@@ -182,15 +186,15 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             offset += total;
             dst->offsets[3] = offset;
             if (extra != 0) {
-                srcData = func_8028FDC8_de(old, 3, &len3); dstData = func_8028FDB4_de(dst, 3);
-                func_802BD3A0_de(dstData, srcData, len3);
+                copySource3 = func_8028FDC8_de(old, 3, &len3); dstData = func_8028FDB4_de(dst, 3);
+                func_802BD3A0_de(dstData, copySource3, len3);
                 dst->offsets[4] = offset + len3;
-                srcData = func_8028FDC8_de(old, 4, &len4); dstData = func_8028FDB4_de(dst, 4);
-                func_802BD3A0_de(dstData, srcData, len4);
+                copySource3 = func_8028FDC8_de(old, 4, &len4); dstData = func_8028FDB4_de(dst, 4);
+                func_802BD3A0_de(dstData, copySource3, len4);
                 offset += len3 + len4;
                 dst->offsets[5] = offset;
-                srcData = func_8028FDC8_de(old, 5, &len5); dstData = func_8028FDB4_de(dst, 5);
-                func_802BD3A0_de(dstData, srcData, len5);
+                copySource3 = func_8028FDC8_de(old, 5, &len5); dstData = func_8028FDB4_de(dst, 5);
+                func_802BD3A0_de(dstData, copySource3, len5);
                 offset += len5;
                 dst->offsets[6] = offset;
             }

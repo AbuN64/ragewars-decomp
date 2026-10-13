@@ -1416,11 +1416,11 @@
 #define gsSPVertex(v, n, v0) \
     { { _SHIFTL(G_VTX, 24, 8) | _SHIFTL(n, 12, 8) | _SHIFTL((v0) + (n), 1, 7), (unsigned int)(v) } }
 #define gSP1Triangle(pkt, v0, v1, v2, flag) \
-    _GBI_CMD(pkt, _SHIFTL(G_TRI1, 24, 8) | _SHIFTL(_GBI_V3(v0,v1,v2,flag) * 2, 16, 8) | _SHIFTL(_GBI_V3(v1,v2,v0,flag) * 2, 8, 8) | _SHIFTL(_GBI_V3(v2,v0,v1,flag) * 2, 0, 8), 0)
+    _GBI_CMD(pkt, _SHIFTL(G_TRI1, 24, 8) | (_SHIFTL(_GBI_V3(v0,v1,v2,flag) * 2, 16, 8) | _SHIFTL(_GBI_V3(v1,v2,v0,flag) * 2, 8, 8) | _SHIFTL(_GBI_V3(v2,v0,v1,flag) * 2, 0, 8)), 0)
 #define gsSP1Triangle(v0, v1, v2, flag) \
     { { _SHIFTL(G_TRI1, 24, 8) | _SHIFTL(_GBI_V3(v0,v1,v2,flag) * 2, 16, 8) | _SHIFTL(_GBI_V3(v1,v2,v0,flag) * 2, 8, 8) | _SHIFTL(_GBI_V3(v2,v0,v1,flag) * 2, 0, 8), 0 } }
 #define gSP2Triangles(pkt, v00, v01, v02, flag0, v10, v11, v12, flag1) \
-    _GBI_CMD(pkt, _SHIFTL(G_TRI2, 24, 8) | _SHIFTL(_GBI_V3(v00,v01,v02,flag0) * 2, 16, 8) | _SHIFTL(_GBI_V3(v01,v02,v00,flag0) * 2, 8, 8) | _SHIFTL(_GBI_V3(v02,v00,v01,flag0) * 2, 0, 8), _SHIFTL(_GBI_V3(v10,v11,v12,flag1) * 2, 16, 8) | _SHIFTL(_GBI_V3(v11,v12,v10,flag1) * 2, 8, 8) | _SHIFTL(_GBI_V3(v12,v10,v11,flag1) * 2, 0, 8))
+    _GBI_CMD(pkt, _SHIFTL(G_TRI2, 24, 8) | (_SHIFTL(_GBI_V3(v00,v01,v02,flag0) * 2, 16, 8) | _SHIFTL(_GBI_V3(v01,v02,v00,flag0) * 2, 8, 8) | _SHIFTL(_GBI_V3(v02,v00,v01,flag0) * 2, 0, 8)), _SHIFTL(_GBI_V3(v10,v11,v12,flag1) * 2, 16, 8) | _SHIFTL(_GBI_V3(v11,v12,v10,flag1) * 2, 8, 8) | _SHIFTL(_GBI_V3(v12,v10,v11,flag1) * 2, 0, 8))
 #define gsSP2Triangles(v00, v01, v02, flag0, v10, v11, v12, flag1) \
     { { _SHIFTL(G_TRI2, 24, 8) | _SHIFTL(_GBI_V3(v00,v01,v02,flag0) * 2, 16, 8) | _SHIFTL(_GBI_V3(v01,v02,v00,flag0) * 2, 8, 8) | _SHIFTL(_GBI_V3(v02,v00,v01,flag0) * 2, 0, 8), _SHIFTL(_GBI_V3(v10,v11,v12,flag1) * 2, 16, 8) | _SHIFTL(_GBI_V3(v11,v12,v10,flag1) * 2, 8, 8) | _SHIFTL(_GBI_V3(v12,v10,v11,flag1) * 2, 0, 8) } }
 #define gSPModifyVertex(pkt, v, where, data) \
