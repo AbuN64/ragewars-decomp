@@ -109,13 +109,17 @@ typedef struct Screen_func_8042DC04_de Screen_func_8042DC04_de;
 struct func_8042CE54_S1;
 /* unbake published declaration: published_329fb87cf87e44cb62976cf9 */
 struct func_8042CE54_S1 {
-    char pad0[0xE0];
+    s32 transition[7];
+    s32 active;
+    char pad20[0xC0];
     void * unkE0;
-    char padE4[4];
+    s32 buttonAddress;
     s32 first, count;
-    s32 players[8];
+    union { s32 players[8]; void *data; };
     s32 icons[8][2];
     char killText[4][25], scoreText[4][25], ratioText[4][25], valueText[4][25];
+    char name[0x40];
+    s32 phase, mode, dirty, selection;
 };
 
 struct State_func_8042D908_de;
@@ -229,10 +233,10 @@ extern void func_8042CFB0_de(void);
 
 /* Results-screen group identifiers from each native menu resource set. */
 #if defined(VERSION_DE)
-enum { RESULTS_RANK_GROUP = 0x264, RESULTS_SECONDARY_GROUP = 0x269 };
+enum { RESULTS_RANK_GROUP = 0x264, RESULTS_SECONDARY_GROUP = 0x269, RESULTS_MENU_SHIFT=-4, RESULTS_RIGHT_ITEM=0x26A };
 #elif defined(VERSION_EU_X)
-enum { RESULTS_RANK_GROUP = 0x26D, RESULTS_SECONDARY_GROUP = 0x272 };
+enum { RESULTS_RANK_GROUP = 0x26D, RESULTS_SECONDARY_GROUP = 0x272, RESULTS_MENU_SHIFT=5, RESULTS_RIGHT_ITEM=0x273 };
 #else
-enum { RESULTS_RANK_GROUP = 0x269, RESULTS_SECONDARY_GROUP = 0x26E };
+enum { RESULTS_RANK_GROUP = 0x269, RESULTS_SECONDARY_GROUP = 0x26E, RESULTS_MENU_SHIFT=0, RESULTS_RIGHT_ITEM=0x267 };
 #endif
 #endif

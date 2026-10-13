@@ -11,7 +11,9 @@ struct Shared_PlayerSettingsRecord {
     char pad79[6];
     u8 slot; /* +0x7F: func_80423F48_de ROM slot-number stores */
     s8 character; /* +0x80: src/func_8021B468.c */
-    char pad81[0x14];
+    char pad81[0x10];
+    u8 locked; /* +0x91: results-screen human/bot selector */
+    char pad92[3];
     u8 active; /* +0x95: src/func_8021B468.c */
 
 };
