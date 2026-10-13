@@ -1,5 +1,7 @@
 #ifndef RW_FUNC_804235A8_EU_LAYOUT_H
 #define RW_FUNC_804235A8_EU_LAYOUT_H
+#include "shared/gameplay_settings.h"
+#include "shared/func_80425674_de_layout.h"
 
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
@@ -36,17 +38,29 @@ struct Shared_MenuReply {
 };
 typedef struct Shared_MenuObject Shared_MenuObject;
 struct Shared_MenuObject {
-    u8 unknown00[0x17C1];
+    u8 unknown00[0x1310];
+    Shared_PlayerSettingsRecord playerSettings[8];
+    u8 unknown17C0;
     u8 language;
     u8 unknown17C2[0x2E];
 };
 typedef struct Shared_MenuData Shared_MenuData;
 struct Shared_MenuData {
-    u32 unknown00[18];
-    Shared_MenuObject object;
-    s32 stage;
-    u32 unknown183C[6];
-    s32 pause;
+    union {
+        struct {
+            u32 unknown00[18];
+            Shared_MenuObject object;
+            s32 stage;
+            u32 unknown183C[6];
+            s32 pause;
+        };
+        struct {
+            u8 reserved0000[0x5DC];
+            struct func_8025E5B0_S1 dialogOwner; /* D_8014561C */
+            u8 reserved05F2[0x1288 - 0x5DC - sizeof(struct func_8025E5B0_S1)];
+            Shared_Game game; /* D_801462C8; language at root + 0x1809 */
+        };
+    };
 };
 
 #include "types.h"

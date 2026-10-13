@@ -39,7 +39,7 @@ struct Pulse;
 struct Shape_func_80299E74_de_2;
 /* unbake published declaration: published_617de3b77bc2879f33b6777a */
 struct Pulse {
-    struct Shape_func_80299E74_de_2 *light;
+    union { struct Shape_func_80299E74_de_2 *light; struct MenuWidget *widget; };
     s32 phase;
 };
 
