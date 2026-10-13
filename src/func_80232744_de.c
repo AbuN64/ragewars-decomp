@@ -1,3 +1,4 @@
+#include "span_1000/code_80208000.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_80231F5C.h"
 #include "types.h"
@@ -8,7 +9,8 @@
 
 
 void func_80232744_de(void *arg0, s32 arg1, s32 arg2) {
-    func_8021A9A4_de(((func_8020A028_S3 *)(arg0))->unk1D8, arg2);
+    AiTarget *target = arg0;
+    func_8021A9A4_de(target->player, arg2);
 }
 
 extern int *D_800CB358_de[];

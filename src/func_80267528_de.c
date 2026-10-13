@@ -1,3 +1,4 @@
+#include "shared/level_actor.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802661FC.h"
 #include "types.h"
@@ -14,22 +15,24 @@ extern s32 D_8013B290;
 
 s32 func_80267528_de(char *actor, char *target)
 {
+    Actor_func_8024A7A0_de *source = (Actor_func_8024A7A0_de *)actor;
+    Actor_func_8024A7A0_de *destination = (Actor_func_8024A7A0_de *)target;
     s32 flags;
 
     if (D_801462E5 != 0) {
         return 1;
     }
-    if (((func_802044C8_S1 *)(actor))->unkE4 == ((func_80267540_S2 *)(target))->unkE4) {
+    if (source->type == destination->type) {
         return 0;
     }
-    flags = ((func_80267540_S2 *)(target))->unk100;
+    flags = destination->flags;
     if (!(flags & 0x310000)) {
         return 0;
     }
-    if (D_8013B290 != 0 && !(((func_802044C8_S1 *)(actor))->unk100 & 0x300000) && !(flags & 0x300000)) {
+    if (D_8013B290 != 0 && !(source->flags & 0x300000) && !(flags & 0x300000)) {
         return 0;
     }
-    switch (*((func_80267540_S2 *)(target))->unk18) {
+    switch (*destination->definition) {
     case 1:
     case 4:
     case 7:
