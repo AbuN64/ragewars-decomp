@@ -1,3 +1,4 @@
+#include "span_1000/code_80293A04.h"
 #include "span_1000/code_80291054.h"
 #include "types.h"
 
@@ -22,7 +23,7 @@ void func_80292FC0_de(s32 *arg0, s32 arg1) {
     func_802BB750_de((s32)D_8011B7C0);
     {
         s32 temp = D_800CD8A0_de;
-        ((func_80292FA4_S1 *)(arg0))->unk26DC8 = 0;
+        ((Session_func_80293A20_de *)arg0)->enabled = 0;
         func_802BB5F0_de(0, temp);
     }
 loop_1:

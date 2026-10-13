@@ -1,3 +1,4 @@
+#include "span_1000/code_80293A04.h"
 #include "span_1000/code_802A25C4.h"
 #include "span_16E000/code_8044E2B8.h"
 #include "types.h"
@@ -65,6 +66,6 @@ void func_8044DD50_de(char *match) {
     state->c = 0;
     state->d = 0;
     state->e = 0;
-    ((func_8044E9A0_S1 *)(match))->unk26DC1 = 2;
-    ((func_8044E9A0_S1 *)(match))->unk26DBC = 1;
+    ((Session_func_80293A20_de *)match)->phase = 2;
+    ((Session_func_80293A20_de *)match)->target = 1;
 }

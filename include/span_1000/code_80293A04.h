@@ -23,7 +23,9 @@ extern int D_800CD774;
 struct Session_func_80293A20_de;
 /* unbake published declaration: published_23da9d70ffdf4c1877957b97 */
 struct Session_func_80293A20_de {
-    char pad0[0x26DB4];
+    char pad0[0x25580];
+    char menu[0x48];
+    char players[0x26DB4 - 0x255C8];
     s32 previousMode;
     s32 mode;
     s32 target;
@@ -31,6 +33,10 @@ struct Session_func_80293A20_de {
     char phase;
     char pad26DC2[2];
     f32 timer;
+    s32 enabled; /* 0x26DC8 */
+    char pad26DCC[0xC];
+    s32 selector; /* 0x26DD8 */
+    s32 selectionActive; /* 0x26DDC */
 };
 
 /* unbake published declaration: published_24d5ab4551e7369e3cea153b */
