@@ -8,23 +8,23 @@ extern s32 func_802BD170_de(s32);
 
 void func_8028F8BC_de(void *arg0, void *arg1) {
     s32 saved;
-    char *cur;
-    char *prev;
+    OSScClientWork *cur;
+    OSScClientWork *prev;
 
     prev = 0;
-    cur = ((func_8028F89C_S1 *)(arg0))->unk2E0;
+    cur = ((OSSched *)arg0)->clientList;
     saved = func_802BD170_de(1);
     while (cur != 0) {
         if (cur == arg1) {
             if (prev != 0) {
-                *(char **)prev = *(char **)cur;
+                prev->next = cur->next;
             } else {
-                ((func_8028F89C_S1 *)(arg0))->unk2E0 = *(char **)cur;
+                ((OSSched *)arg0)->clientList = cur->next;
             }
             break;
         }
         prev = cur;
-        cur = *(char **)cur;
+        cur = cur->next;
     }
     func_802BD170_de(saved);
 }
