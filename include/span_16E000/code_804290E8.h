@@ -62,7 +62,7 @@ struct func_804296A4_S1 {
 struct Screen_func_80429560_de;
 /* unbake published declaration: published_e86a0894f7ce4d87288dfa9b */
 struct Screen_func_80429560_de {
-    char pad0[0x1C];
+    s32 transition[7];
     void *selectWidget;
     void *cursorWidget;
     void *widget24;
