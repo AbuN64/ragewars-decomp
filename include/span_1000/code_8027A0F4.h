@@ -432,6 +432,13 @@ struct Shared_ParticleDistanceRange {
 };
 /* Two 24-byte directional-light records occupy particle +0xE0..+0x110. */
 #include "shared/particle_lighting.h"
+/* Fourteen event slots: paired parameters followed by parallel ID arrays. */
+struct Shared_ParticleEvents {
+    struct Shape_func_802764D4_de_2 parameters[14];
+    u16 particles[14];
+    u16 effects[14];
+    u16 sounds[14];
+};
 struct Shared_ParticleDesc {
     s32 flags;
     char pad4[0x4];
@@ -442,7 +449,8 @@ struct Shared_ParticleDesc {
     s16 unk10;
     char pad12[2];
     s32 renderModel;
-    char pad18[0xC];
+    struct Shared_ParticleEvents *events;
+    char pad1C[8];
     struct Shared_ParticleDistanceRange *distanceRange;
     char pad28[4];
     struct Shared_ParticleOscillation *oscillation;
@@ -486,7 +494,7 @@ struct Shared_Particle {
     s32 model;
     char pad120[0xC];
     struct Shared_ParticleOwner *owner;
-    char pad130[0x4];
+    s32 ownerId;
     struct Shared_ParticleTarget *target;
     char pad138[0x8];
     f32 time;
@@ -512,9 +520,12 @@ struct Shared_Particle {
     s32 unk1B4;
     char pad1B8[0x1];
     s8 unk1B9;
-    char pad1BA[0x2];
+    s8 unk1BA;
+    char pad1BB;
     f32 unk1BC;
-    char pad1C0[0x10];
+    char pad1C0[4];
+    s32 rotationScale;
+    char pad1C8[8];
     s8 unk1D0;
     s8 unk1D1;
     u8 prim[3];
