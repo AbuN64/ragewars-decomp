@@ -5,5 +5,6 @@
 
 /** Store a word at offset 0x2c. */
 void func_8040F208_de(void *object, int value) {
-    ((func_80205314_S2 *)(object))->unk2C = value;
+    func_80205314_S2 *record = object;
+    record->unk2C = value;
 }
