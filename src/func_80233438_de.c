@@ -1,3 +1,4 @@
+#include "span_1000/code_8024BA6C.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8023330C.h"
@@ -25,12 +26,12 @@ void func_80233438_de(void *arg0, void *arg1) {
     s16 idx;
     s32 value;
 
-    actor = ((func_80232FE8_S1 *)(arg0))->unk1D8;
+    actor = ((ObjectLinks1DC_3 *)arg0)->unk_1D8;
     idx = ((ObjectLinks11DC *)(actor))->unk_650;
     value = D_800CE8DC[idx].action;
 
     if (((ObjectLinks11DC *)(actor))->unk_11D8 <= 0.0f) {
-        if ((((struct func_8020EA10_S3 *) ((ObjectLinks11DC *) actor)->unk_5D8)->unk8F == 0 ||
+        if ((((struct Ctrl *) ((ObjectLinks11DC *) actor)->unk_5D8)->flag == 0 ||
              D_801468F4 == 0) &&
             (((ObjectLinks11DC *)(actor))->unk_6AC & 0x4000)) {
             func_8022B190_de(actor);
@@ -42,7 +43,7 @@ void func_80233438_de(void *arg0, void *arg1) {
             ((ObjectLinks11DC *)(actor))->unk_770 = func_8022F96C_de(actor);
         }
     } else if (func_802301F4_de(arg0, arg1) == 0 &&
-               !(((func_80232FE8_S1 *)(arg0))->unk100 & 0x400)) {
+               !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
         func_80214178_de(arg0, arg1, value);
     }
 }
