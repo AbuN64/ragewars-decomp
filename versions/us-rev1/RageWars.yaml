@@ -2607,7 +2607,7 @@ segments:
       - [0xC4794, c, "func_802BEAA4_de"]
       - [0xC4A9C, asm, "func_802BF08C_eu_x"]
       - [0xC4AA0, asm, "func_802BEDB0_de"]
-      - [0xC4C74, asm, "func_802BEF84_de"]
+      - [0xC4C74, c, "func_802BEF84_de"]
       - [0xC5078, asm, "func_802BF388_de"]
       - [0xC5204, c, "func_802BF514_de"]
       - [0xC5618, asm, "func_802BF928_de"]

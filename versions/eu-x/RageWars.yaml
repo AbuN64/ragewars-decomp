@@ -2570,7 +2570,7 @@ segments:
       - [0xBF984, c, "func_802BEAA4_de"]
       - [0xBFC8C, asm, "func_802BF08C_eu_x"]
       - [0xBFC90, asm, "func_802BEDB0_de"]
-      - [0xBFE64, asm, "func_802BEF84_de"]
+      - [0xBFE64, c, "func_802BEF84_de"]
       - [0xC0268, asm, "func_802BF388_de"]
       - [0xC03F4, c, "func_802BF514_de"]
       - [0xC0808, asm, "func_802BF928_de"]
