@@ -33,17 +33,17 @@ s32 func_8020EAE0_de(void *arg0) {
     if (base == 0) {
         return 1;
     }
-    requested = ((func_8020EAE0_S1 *)(arg0))->unkC;
+    requested = ((Func8020ED50Arg *)arg0)->fieldC;
     if (requested == -1) {
         return 1;
     }
-    current = ((func_8020EAE0_S1 *)(arg0))->unk4;
+    current = ((Func8020ED50Arg *)arg0)->field4;
     if (current == requested) {
         return 1;
     }
-    if (((func_8020EAE0_S1 *)(arg0))->unk28 == requested) {
-        link = ((func_8020EAE0_S1 *)(arg0))->unk14;
-        if (link != -1 && ((func_8020EAE0_S1 *)(arg0))->unk18 != -1) {
+    if (((Func8020ED50Arg *)arg0)->committed == requested) {
+        link = ((Func8020ED50Arg *)arg0)->links[0];
+        if (link != -1 && ((Func8020ED50Arg *)arg0)->links[1] != -1) {
             if (current == link) {
                 return 1;
             }
@@ -53,23 +53,23 @@ s32 func_8020EAE0_de(void *arg0) {
         }
     }
     func_8020D014_de(base);
-    if (((func_8020EAE0_S1 *)(arg0))->unk2F4 != 0) {
+    if (((Func8020ED50Arg *)arg0)->releaseFlags[0] != 0) {
         func_8020EDCC_de(arg0);
     }
-    if (((func_8020EAE0_S1 *)(arg0))->unk2F8 != 0) {
+    if (((Func8020ED50Arg *)arg0)->releaseFlags[1] != 0) {
         func_8020EE50_de(arg0);
     }
-    if (((func_8020EAE0_S1 *)(arg0))->unk2FC != 0) {
+    if (((Func8020ED50Arg *)arg0)->releaseFlags[2] != 0) {
         func_8020EEA4_de(arg0);
     }
     func_8020EC14_de(arg0);
     func_8020D1FC_de(base);
-    func_8020D220_de(base, ((func_8020EAE0_S1 *)(arg0))->unkC);
+    func_8020D220_de(base, ((Func8020ED50Arg *)arg0)->fieldC);
     base[6] = -1;
-    func_8020D0CC_de(base, ((func_8020EAE0_S1 *)(arg0))->unk4);
-    func_8020D114_de(base, &((func_8020EAE0_S1 *)(arg0))->unk14, 4);
-    ((func_8020EAE0_S1 *)(arg0))->unk1BC = 0;
-    ((func_8020EAE0_S1 *)(arg0))->unk1C0 = -1;
-    ((func_8020EAE0_S1 *)(arg0))->unk28 = ((func_8020EAE0_S1 *)(arg0))->unkC;
+    func_8020D0CC_de(base, ((Func8020ED50Arg *)arg0)->field4);
+    func_8020D114_de(base, &((Func8020ED50Arg *)arg0)->links[0], 4);
+    ((Func8020ED50Arg *)arg0)->linkState = 0;
+    ((Func8020ED50Arg *)arg0)->selection = -1;
+    ((Func8020ED50Arg *)arg0)->committed = ((Func8020ED50Arg *)arg0)->fieldC;
     return 1;
 }

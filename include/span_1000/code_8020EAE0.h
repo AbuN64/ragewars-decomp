@@ -212,6 +212,14 @@ struct Func8020ED50Arg {
     char pad8[4];
     s32 fieldC;
     s32 field10;
+    s32 links[4]; /* 0x14 */
+    char pad24[4];
+    s32 committed; /* 0x28 */
+    char pad2C[0x1BC - 0x2C];
+    s32 linkState;
+    s32 selection;
+    char pad1C4[0x2F4 - 0x1C4];
+    s32 releaseFlags[3];
 };
 
 /* unbake published declaration: published_7551b5503870154e34987296 */

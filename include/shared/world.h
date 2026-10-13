@@ -11,7 +11,7 @@ typedef struct Shared_World {
     s32 *objectSections; /* 0x70 */
     u8 unknown74[8];
     s32 *routeCount; /* +0x7C: PatrolRouteSet */
-    u8 unknown80[4];
+    void *bitSections; /* 0x80 */
     void *secondaryLevels; /* 0x84 */
     u8 unknown88[0xC];
     struct Table_func_8028B274_de *modelIds; /* 0x94 */

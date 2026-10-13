@@ -13,7 +13,8 @@ typedef struct View_func_8028FA60_de View_func_8028FA60_de;
 struct Def;
 struct Def {
     s32 type;
-    char pad4[0x24];
+    s32 flags; /* 0x4 */
+    char pad8[0x20];
     s16 id;
 };
 struct Actor_func_8028E284_de;
