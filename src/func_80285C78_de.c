@@ -20,11 +20,11 @@ void func_80285C78_de(void *arg0) {
     void *next;
     s32 flag;
     u32 saved;
-    Node_func_80285B64_de **inner;
+    s32 *inner;
 
     saved = func_802BCF30_de();
-    for (node = ((Pool_func_80285B64_de *)arg0)->active.head; node != 0; node = next) {
-        next = ((Node_func_80285B64_de *)node)->next;
+    for (node = ((func_8025CA44_S1 *)(arg0))->unk14.head; node != 0; node = next) {
+        next = ((func_80285C48_S2 *)(node))->unk4;
         flag = 0;
         if (func_80264DF0_de((char *)node + 0x20) != 0 || func_80264DF0_de((char *)node + 0x2C) != 0) {
             flag = 1;
@@ -32,11 +32,11 @@ void func_80285C78_de(void *arg0) {
         if (flag == 0) {
             continue;
         }
-        inner = ((Node_func_80285B64_de *)node)->owner;
+        inner = ((func_80285C48_S2 *)(node))->unk38;
         if (inner != 0) {
             *inner = 0;
         }
-        func_80255ED8_de(&((Pool_func_80285B64_de *)arg0)->active, node);
+        func_80255ED8_de(&((func_8025CA44_S1 *)(arg0))->unk14, node);
         func_80255D14_de(arg0, node);
     }
     func_802BCF50_de(saved);

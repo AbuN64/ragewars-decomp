@@ -11,35 +11,35 @@ s32 func_8043E830_de(s32 *arg0) {
     switch (arg0[0]) {
         case 2:
             base = &D_801462C8;
-            base->unknown24[9] ^= 1;
+            base->unknown26[7] ^= 1;
             break;
         case 3:
             base = &D_801462C8;
-            base->unknown24[10] ^= 1;
+            base->unknown26[8] ^= 1;
             break;
         case 4:
             base = &D_801462C8;
-            base->unknown24[11] ^= 1;
+            base->unknown26[9] ^= 1;
             break;
         case 5:
             base = &D_801462C8;
-            base->unknown24[12] ^= 1;
+            base->unknown26[10] ^= 1;
             break;
         case 6:
             base = &D_801462C8;
-            base->unknown24[13] ^= 1;
+            base->unknown26[11] ^= 1;
             break;
         case 7:
             base = &D_801462C8;
-            base->unknown24[14] ^= 1;
+            base->unknown26[12] ^= 1;
             break;
         case 8:
             base = &D_801462C8;
-            base->unknown24[15] ^= 1;
+            base->unknown26[13] ^= 1;
             break;
         case 9:
             base = &D_801462C8;
-            base->unknown24[17] ^= 1;
+            base->unknown26[15] ^= 1;
             break;
     }
     return 0;

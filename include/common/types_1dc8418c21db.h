@@ -146,8 +146,7 @@ typedef struct Clip Clip;
 struct Node_func_80285B64_de;
 /* unbake published declaration: published_06745a4e2b0255244a16a083 */
 struct Node_func_80285B64_de {
-    struct Node_func_80285B64_de *previous;
-    struct Node_func_80285B64_de *next;
+    char pad0[8];
     Clip *key;
     Vec3 position;
     f32 value0;
@@ -3120,17 +3119,8 @@ struct func_80272908_S2 {
 struct WeaponInfo;
 /* unbake published declaration: published_500c9290ad76e46bd4826f50 */
 struct WeaponInfo {
-    void **resource;
-    u16 model;
-    char pad6[2];
-    s16 capacity;
-    char padA[2];
-    s16 alternate;
-    char padE[0x12];
+    char pad0[0x20];
     s16 *weaponClass;
-    s16 *alternateClass;
-    s16 *thirdClass;
-    s16 *computerClasses[3];
 };
 
 struct func_8022E694_S1;
