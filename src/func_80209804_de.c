@@ -1,3 +1,4 @@
+#include "span_1000/code_8020AF9C.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
@@ -19,14 +20,14 @@ void func_80209804_de(AiController *arg0)
 /* Pops the front of a four-entry queue at offset 0x14 of a record: shifts the entries down one,
    marks the last empty with -1 and returns whether an entry remains at the front. */
 
-s32 func_80209828_de(struct Queue *queue) {
+s32 func_80209828_de(AiController *queue) {
     s32 i;
 
     for (i = 1; i < 4; i++) {
-        queue->items[i - 1] = queue->items[i];
+        queue->queue[i - 1] = queue->queue[i];
     }
-    queue->items[3] = -1;
-    return queue->items[0] != -1;
+    queue->queue[3] = -1;
+    return queue->queue[0] != -1;
 }
 
 /** Store the second argument at byte offset 0x214 in the first argument. */
@@ -75,11 +76,11 @@ Vec3 *func_8020993C_de(AiController *arg0) {
     return &arg0->player->pos;
 }
 
-s32 func_802726F8_de(f32 *, f32 *);
-extern f32 *func_8020C994_de(void *, s32);
-extern s32 D_8013B364;
-void func_80209948_de(struct TargetPositionRef *arg0, s32 arg1) {
-    func_802726F8_de(arg0->target->position, func_8020C994_de(&D_8013B364, arg1));
+f32 func_802726F8_de(f32 *, f32 *);
+extern void *func_8020C994_de(void *, s32);
+extern NavigationGraph D_8013B364;
+void func_80209948_de(AiController *arg0, s32 arg1) {
+    func_802726F8_de(&arg0->player->pos.x, func_8020C994_de(&D_8013B364, arg1));
 }
 
 /** Reset three state words and set the final state to one. */

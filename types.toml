@@ -1753,7 +1753,7 @@ schema = 1
 "func_802725F4_de" = { evidence = "landed", signature = "void func_802725F4_de(void)" }
 "func_802725FC_de" = { evidence = "landed", signature = "f32 func_802725FC_de(f32 *arg0)" }
 "func_802726BC_de" = { evidence = "landed", signature = "f32 func_802726BC_de(f32 *a, f32 *b)" }
-"func_802726F8_de" = { evidence = "landed", signature = "s32 func_802726F8_de(f32 *a, f32 *b)" }
+"func_802726F8_de" = { evidence = "landed", signature = "f32 func_802726F8_de(f32 *a, f32 *b)" }
 "func_80272748_de" = { evidence = "landed", signature = "void func_80272748_de(Vec3 *arg0, f32 arg1)" }
 "func_802727D8_de" = { evidence = "landed", signature = "void func_802727D8_de(void *arg0)" }
 "func_80272828_de" = { evidence = "landed", signature = "void func_80272828_de(f32 *arg0)" }
