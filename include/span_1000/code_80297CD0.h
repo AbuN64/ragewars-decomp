@@ -385,7 +385,7 @@ struct Ui_func_80297FA0_de {
     s32 pad0;
     s32 current;
     s32 pad8;
-    void *screens;
+    struct Entry_func_802991D4_de *screens;
     s32 value;
     s32 limit;
     s32 screenCount;
