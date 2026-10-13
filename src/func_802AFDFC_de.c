@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802AE028.h"
 #include "types.h"
+#include "span_1000/code_802B0388.h"
 
 
 
@@ -9,12 +10,13 @@
 
 
 void func_802AFDFC_de(void *arg0, f32 arg1) {
-    void *temp_v0;
+    ALSeqPlayer_func_802B0C94_de *player = arg0;
+    ALCSeq_s *temp_v0;
 
-    temp_v0 = ((func_802B4ECC_S1 *)(arg0))->unk18;
+    temp_v0 = player->target;
     if (temp_v0 != 0) {
-        ((func_802B4ECC_S1 *)(arg0))->unk24 = (s32)(arg1 * ((func_80212828_S7 *)(temp_v0))->unk8);
+        player->uspt = (s32)(arg1 * temp_v0->qnpt);
         return;
     }
-    ((func_802B4ECC_S1 *)(arg0))->unk24 = 0x1E8;
+    player->uspt = 0x1E8;
 }

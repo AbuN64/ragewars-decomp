@@ -139,7 +139,15 @@ struct State_func_8044A170_de {
     char pad80[116];
     f32 unkF4;
     f32 unkF8;
-    char padFC[36];
+    s32 unkFC;
+    s32 unk100;
+    s32 unk104;
+    s32 unk108;
+    s32 unk10C;
+    f32 unk110;
+    f32 unk114;
+    s32 unk118;
+    char pad11C[4];
     s32 unk120;
     s16 unk124;
     s16 unk126;
