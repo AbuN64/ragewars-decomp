@@ -51,9 +51,9 @@ void func_80247F18_de(char *arg0, char *arg1, char *arg2, Vec3 arg3,
         } while (var_v1 < 4);
         func_80253754_de(0, temp_v0);
         arg1[0x12] = 0x19;
-        sp20.x = ((func_80247F08_S1 *)(arg2))->unk30;
-        sp20.y = ((func_80247F08_S1 *)(arg2))->unk34;
-        sp20.z = ((func_80247F08_S1 *)(arg2))->unk38;
+        sp20.x = ((Matrix *)arg2)->m[12];
+        sp20.y = ((Matrix *)arg2)->m[13];
+        sp20.z = ((Matrix *)arg2)->m[14];
         func_80271F68_de(&arg3, &arg3, &sp20);
         func_80272018_de(&sp10, &arg3, &arg6);
         func_8027207C_de(&sp10);

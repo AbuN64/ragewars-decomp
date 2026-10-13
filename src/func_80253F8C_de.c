@@ -1,6 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802536F4.h"
 #include "types.h"
+#include "span_1000/code_802508E0.h"
 
 
 
@@ -70,7 +71,7 @@ found:
 
     if (value != 0) {
         void *object = *(void **)value;
-        ((func_8022BC04_S3 *)(object))->unk10 = D_80105180;
+        ((Node_func_80251F6C_de *)object)->stamp = D_80105180;
         func_80255FB8_de(&D_80100570, object);
     }
 
