@@ -388,6 +388,8 @@ struct Particle {
     char pad0[4];
     struct Particle *next;
     Transform transform;
+    u8 padTransform[0x48 - 8 - sizeof(Transform)];
+    s32 owner; /* 0x48: actor whose projected effect this is */
 };
 
 struct Blend;

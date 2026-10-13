@@ -194,4 +194,12 @@ struct Input_func_80204808_de;
 struct Lookup;
 void func_80204808_de(struct Actor_func_8024A1D0_de *actor, struct Input_func_80204808_de *input, struct Lookup *lookup);
 
+/* Definition fields used by breakable-actor flag setup. */
+typedef struct BreakableDefinition {
+    u8 reserved0[0x14];
+    s32 flags;
+    u8 reserved18[0x10];
+    s16 health;
+} BreakableDefinition;
+
 #endif

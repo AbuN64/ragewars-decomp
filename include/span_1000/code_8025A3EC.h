@@ -562,4 +562,12 @@ struct Obj_func_8025BDAC_de;
 /* unbake published declaration: published_ff2091330e213b2b7efdf424 */
 typedef struct Obj_func_8025BDAC_de Obj_func_8025BDAC_de;
 
+/* Position and attenuation curve of a spatial sound source. */
+typedef struct SoundSpatialSource {
+    u8 reserved0[0x34];
+    Vec3 position;
+    u8 reserved40[4];
+    s8 curve;
+} SoundSpatialSource;
+
 #endif

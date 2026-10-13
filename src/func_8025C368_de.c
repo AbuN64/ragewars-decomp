@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8025A3EC.h"
 #include "types.h"
+#include "shared/gameplay_camera.h"
 
 /* Returns how strongly a listener at 0x128 hears a source at 0x34: one minus the squared distance over the squared range D_800D0D10 (zero beyond it), shaped by the source's curve at 0x44 as the eighth power, the square or the plain value. */
 
@@ -17,8 +18,10 @@ extern f32 D_800C3F98_de[];
 
 f32 func_8025C368_de(char *source, char *listener)
 {
-    Vec3 *a = &((func_8025C388_S1 *)(source))->unk34;
-    Vec3 *b = &((func_8023945C_S1 *)(listener))->unk128;
+    SoundSpatialSource *sound = (SoundSpatialSource *)source;
+    Shared_func_80234FDC_S2 *camera = (Shared_func_80234FDC_S2 *)listener;
+    Vec3 *a = &sound->position;
+    Vec3 *b = &camera->position;
     f32 dx = a->x - b->x;
     f32 dy;
     f32 dz;
@@ -36,7 +39,7 @@ f32 func_8025C368_de(char *source, char *listener)
     } else {
         t = D_800C3F98_de[1] - d / D_800D0D10;
     }
-    switch (((func_8025C388_S1 *)(source))->unk44) {
+    switch (sound->curve) {
     case 2:
         return t;
     case 0:
