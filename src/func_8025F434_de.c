@@ -1,3 +1,4 @@
+#include "span_C76B0/data.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8025E568.h"
 #include "types.h"
@@ -10,7 +11,6 @@
 
 
 
-extern f32 D_800D0DA0;
 
 static inline f32 round_up(f32 x, f32 floor) {
     s32 i;
@@ -34,13 +34,13 @@ f32 func_8025F434_de(f32 amount, f32 period) {
     f32 rate;
 
     rate = 0.0f;
-    if (amount == ((func_802077F4_S2 *)(&D_800C91F8))->unk4) {
-        return ((func_802077F4_S2 *)(&D_800C91F8))->unk4;
+    if (amount == D_800C410C_de) {
+        return D_800C410C_de;
     }
     if (period <= D_800C9200) {
-        return ((func_802077F4_S2 *)(&D_800C91F8))->unk4;
+        return D_800C410C_de;
     }
-    rate = round_up(amount / period * ((func_802077F4_S2 *)(&D_800C9200))->unk4, rate);
+    rate = round_up(amount / period * D_800C4114_de, rate);
     if (rate < D_800D0DA0) {
         return rate;
     }

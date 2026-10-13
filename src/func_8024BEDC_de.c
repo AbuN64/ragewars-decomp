@@ -6,7 +6,6 @@
 #include "span_C76B0/data.h"
 #include "packed_float.h"
 
-extern f32 func_802B72B0_de(f32);
 
 void func_8024BEDC_de(void *arg0) {
     float temp_f12 = ((Actor_func_8024A7A0_de *)arg0)->scale.x;

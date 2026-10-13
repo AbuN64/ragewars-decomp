@@ -1,3 +1,4 @@
+#include "span_C76B0/data.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8023D370.h"
@@ -32,7 +33,7 @@ static inline s32 accepts(Ray_func_8023E8D4_de *ray, Polygon_func_8023E8D4_de *p
         if ((u32)(poly->type - 5) < 2) {
             return 0;
         }
-        if (poly->t * ray->slack < -(D_800D0648 * ((func_802077F4_S2 *)(&D_800C87C0))->unk4)) {
+        if (poly->t * ray->slack < -(D_800D0648 * D_800C36D4_de)) {
             return 0;
         }
     }
