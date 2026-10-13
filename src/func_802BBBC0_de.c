@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802BB67C.h"
 #include "types.h"
@@ -26,7 +27,7 @@ void func_802BBC20_de(void)
   s8 *new_var;
   int new_var3;
   temp_s0 = func_802BCF30_de();
-  ((func_8025E58C_S1 *)(new_var = (s8 *) D_800D5270))->unk10 = (new_var3 = 2);
+  ((OSThread_s_func_802BB5F0_de *)(new_var = (s8 *) D_800D5270))->state = (new_var3 = 2);
   new_var2 = &D_800D5268_de;
   func_802BC36C_de(new_var2, new_var3);
   func_802BCF50_de(temp_s0);
