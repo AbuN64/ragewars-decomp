@@ -10,9 +10,9 @@ s32 func_802227F4_de(void *, void *, s32);
 s32 func_8025DE54_de(s32, Vec3, s32, s32);
 void func_80274870_de(f32 *, f32, f32);
 void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
+    Shared_Game *game;
     f32 temp_fs0;
     f32 temp_fs0_2;
-    f32 temp_fs0_3;
     f32 temp_fs0_4;
     f32 temp_fs0_5;
     f32 temp_fs0_6;
@@ -31,7 +31,6 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     f32 var_a2;
     f32 var_fv0;
     f32 var_fv0_2;
-    f32 var_fv0_3;
     f32 var_fv0_4;
     f32 var_fv0_5;
     f32 var_fv0f;
@@ -83,20 +82,17 @@ void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
 block_25:
             body->views1C.view6C_5.heading = var_fv0_2;
         }
+        temp_fv0f_4 = body->views1C.view6C_5.heading;
         temp_fs0_2 = D_800C2A94_de;
-        temp_fs0_3 = func_802B7130_de(body->views1C.view6C_5.heading + temp_fs0_2);
+        temp_fs0_6 = func_802B7130_de(temp_fv0f_4 + temp_fs0_2);
         temp_fv0 = func_802B6560_de(body->views1C.view6C_5.heading + temp_fs0_2);
-        body->views1C.view1C_0.localDisplacement.x += temp_fs0_3 * D_800C2A98_de;
+        body->views1C.view1C_0.localDisplacement.x += temp_fs0_6 * D_800C2A98_de;
         body->views1C.view1C_0.localDisplacement.z += temp_fv0 * D_800C2A98_de;
         temp_fv0f_3 = player->views5E8.view728_73.unk728;
         if (D_800C2A9C_de <= temp_fv0f_3) {
-            var_fv0_3 = body->views1C.view6C_5.heading + D_800C2AA0_de;
-            goto block_30;
-        }
-        if (temp_fv0f_3 <= D_800C2AA4_de) {
-            var_fv0_3 = body->views1C.view6C_5.heading - D_800C2AA8_de;
-block_30:
-            body->views1C.view6C_5.heading = var_fv0_3;
+            body->views1C.view6C_5.heading += D_800C2AA0_de;
+        } else if (temp_fv0f_3 <= D_800C2AA4_de) {
+            body->views1C.view6C_5.heading -= D_800C2AA8_de;
         }
         player->views5E8.view728_73.unk728 = 0.0f;
         player->turnAccumulator = 0.0f;
@@ -146,7 +142,8 @@ block_30:
             player->views5E8.view658_23.stride = temp_fv1f_2 - D_800C2AD0_de;
             player->views5E8.view6C0_51.unk6C0 *= D_800C2AD4_de;
             player->views5E8.view6C4_54.unk6C4 *= D_800C2AD4_de;
-            if ((D_801462C8.local != 0) && ((player->views5D8.view5D8_9.profile->remote != 1) || (D_801462C8.unk62C == 0))) {
+            game = &D_801462C8;
+            if ((game->local != 0) && ((player->views5D8.view5D8_9.profile->remote != 1) || (game->unk62C == 0))) {
                 temp_v1 = player->views1C.view38_3.flags;
                 if (temp_v1 & 0x200) {
                     func_8025DE54_de(D_800C9FD6, body->views0.view8_4.position, 0, -1);
@@ -160,25 +157,15 @@ block_30:
             }
         }
     }
+    temp_fv0f_4 = body->views1C.view6C_5.heading;
     temp_fs0_5 = D_800C2AD8_de;
-    temp_fs0_6 = func_802B7130_de(body->views1C.view6C_5.heading - temp_fs0_5);
+    temp_fs0_6 = func_802B7130_de(temp_fv0f_4 - temp_fs0_5);
     temp_fv0 = func_802B6560_de(body->views1C.view6C_5.heading - temp_fs0_5);
     player->views5E8.view6E8_79.unk6E8.x += temp_fs0_6 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
     player->views5E8.view6E8_79.unk6E8.z += temp_fv0 * player->views5E8.view6C4_54.unk6C4 * player->views5E8.view66C_29.unk66C;
-    player->views5E8.view6E8_79.unk6E8.y += player->views5E8.view6C0_51.unk6C0 * (D_800D2988 * D_800C2ADC_de);
-    var_v0_3 = 0xA46;
-    if (player->views1C.viewE4_7.kind != D_800CE47C) {
-        if (player->views5E8.view6C0_51.unk6C0 > 0.0f) {
-            var_v0_3 = 0xA46;
-            if (player->views13B4.view13B4_3.character == &D_800CED30) {
-                var_v0_3 = 0x5E28;
-            }
-        } else {
-            var_v0_3 = 0xA3C;
-            if (player->views13B4.view13B4_3.character == &D_800CED30) {
-                var_v0_3 = 0x5E27;
-            }
-        }
-    }
-    player->views5E8.view86C_125.unk86C = var_v0_3;
+    temp_fv0 = player->views5E8.view6E8_79.unk6E8.y + player->views5E8.view6C0_51.unk6C0 * (D_800D2988 * D_800C2ADC_de);
+    player->views5E8.view6E8_79.unk6E8.y = temp_fv0;
+    var_v0_3 = D_800CE47C;
+    temp_v1 = player->views1C.viewE4_7.kind;
+    if (temp_v1 != var_v0_3) { if (player->views5E8.view6C0_51.unk6C0 > 0.0f) { if (player->views13B4.view13B4_3.character != &D_800CED30) player->views5E8.view86C_125.unk86C = 0xA46; else player->views5E8.view86C_125.unk86C = 0x5E28; } else { if (player->views13B4.view13B4_3.character != &D_800CED30) player->views5E8.view86C_125.unk86C = 0xA3C; else player->views5E8.view86C_125.unk86C = 0x5E27; } } else { var_v0_3 = 0xA46; player->views5E8.view86C_125.unk86C = var_v0_3; }
 }
