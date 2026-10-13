@@ -8,28 +8,30 @@
 
 /** Unlink an active node and return it to the container's free list. */
 void func_80290950_de(void *container, ListNode80290528 *node) {
-    ListNode80290528 *free_node;
+    World_func_80290238_de *world = container;
+    struct Actor_func_80290238_de *actor = (struct Actor_func_80290238_de *)node;
+    struct Actor_func_80290238_de *free_node;
 
-    if (node->flags & 1) {
-        node->flags &= ~1;
-        if (node->reference_count != 0) {
-            (*node->reference_count)--;
+    if (actor->state & 1) {
+        actor->state &= ~1;
+        if (actor->counter != 0) {
+            (*actor->counter)--;
         }
-        if (node->previous != 0) {
-            node->previous->next = node->next;
+        if (actor->prev != 0) {
+            actor->prev->next = actor->next;
         }
-        if (node->next != 0) {
-            node->next->previous = node->previous;
+        if (actor->next != 0) {
+            actor->next->prev = actor->prev;
         }
-        if (((func_80290930_S1 *)(container))->unk3C04 == node) {
-            ((func_80290930_S1 *)(container))->unk3C04 = node->next;
+        if (world->head == actor) {
+            world->head = actor->next;
         }
-        if (((func_80290930_S1 *)(container))->unk3C08 == node) {
-            ((func_80290930_S1 *)(container))->unk3C08 = node->previous;
+        if (world->tail == actor) {
+            world->tail = actor->prev;
         }
-        free_node = ((func_80290930_S1 *)(container))->unk3C00;
-        node->previous = 0;
-        node->next = free_node;
-        ((func_80290930_S1 *)(container))->unk3C00 = node;
+        free_node = world->free;
+        actor->prev = 0;
+        actor->next = free_node;
+        world->free = actor;
     }
 }
