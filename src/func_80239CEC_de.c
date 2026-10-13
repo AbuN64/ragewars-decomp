@@ -5,8 +5,9 @@
 
 /** Clear four consecutive object words beginning at offset 4. */
 void func_80239CEC_de(void *arg0) {
-    ((func_80239CDC_S1 *)(arg0))->unk4 = 0;
-    ((func_80239CDC_S1 *)(arg0))->unk8 = 0;
-    ((func_80239CDC_S1 *)(arg0))->unkC = 0;
-    ((func_80239CDC_S1 *)(arg0))->unk10 = 0;
+    struct Channel *channel = arg0;
+    channel->level = 0.0f;
+    channel->state[0] = 0;
+    channel->state[1] = 0;
+    channel->state[2] = 0;
 }

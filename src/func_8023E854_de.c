@@ -3,7 +3,8 @@
 
 
 void func_8023E854_de(void *arg0) {
-    ((func_8023E844_S1 *)(arg0))->unk18C = 0;
-    ((func_8023E844_S1 *)(arg0))->unk190 = 0;
-    ((func_8023E844_S1 *)(arg0))->unk194 = 0;
+    struct Input *input = arg0;
+    input->contactNormal.x = 0.0f;
+    input->contactNormal.y = 0.0f;
+    input->contactNormal.z = 0.0f;
 }
