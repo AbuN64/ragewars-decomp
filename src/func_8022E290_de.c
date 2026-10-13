@@ -1,3 +1,4 @@
+#include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8022D944.h"
 #include "types.h"
 
@@ -14,15 +15,15 @@ extern f32 func_8022ADBC_de(void *arg0);
 
 
 void func_8022E290_de(void *arg0) {
-    char *object = arg0;
+    Player *object = arg0;
     void *attributes;
-    void *state = object + 0x688;
+    void *state = object->tuning;
     f32 zero;
 
-    if (((func_8022E280_S1 *)(object))->unk1450 != 0) {
+    if (object->computer != 0) {
         attributes = D_8010EEB8;
     } else {
-        s32 index = ((func_8022E280_S1 *)(object))->unk5D4;
+        s32 index = object->slot;
         attributes = (void *)(index << 4);
         attributes = (char *)attributes + index;
         attributes = (void *)((s32)attributes << 3);
@@ -32,37 +33,37 @@ void func_8022E290_de(void *arg0) {
     }
     func_8026367C_de(state, attributes);
 
-    ((func_8022E280_S1 *)(object))->unk6C0 = 0;
-    ((func_8022E280_S1 *)(object))->unk6C4 = 0;
-    ((func_8022E280_S1 *)(object))->unk6C8 = 0;
-    ((func_8022E280_S1 *)(object))->unk6CC = 0;
-    ((func_8022E280_S1 *)(object))->unk6D0 = 1;
-    ((func_8022E280_S1 *)(object))->unk6D4 = 0;
-    ((func_8022E280_S1 *)(object))->unk6D8 = 0;
-    ((func_8022E280_S1 *)(object))->unk6DC = 0;
-    ((func_8022E280_S1 *)(object))->unk6E4 = 0;
-    ((func_8022E280_S1 *)(object))->unk758 = 0;
-    ((func_8022E280_S1 *)(object))->unk75C = 0;
-    ((func_8022E280_S1 *)(object))->unk11B4 = 0;
-    ((func_8022E280_S1 *)(object))->unk11B8 = 0;
-    ((func_8022E280_S1 *)(object))->unk708 = 0;
-    ((func_8022E280_S1 *)(object))->unk70C = 0;
-    ((func_8022E280_S1 *)(object))->unk710 = 0;
-    ((func_8022E280_S1 *)(object))->unk714 = 0;
-    ((func_8022E280_S1 *)(object))->unk724 = 0;
-    ((func_8022E280_S1 *)(object))->unk728 = 0;
-    ((func_8022E280_S1 *)(object))->unk72C = 0;
-    ((func_8022E280_S1 *)(object))->unk730 = 0;
-    ((func_8022E280_S1 *)(object))->unk734 = 0;
-    ((func_8022E280_S1 *)(object))->unk738 = 0;
-    ((func_8022E280_S1 *)(object))->unk73C = 0;
-    ((func_8022E280_S1 *)(object))->unk740 = func_8022ADBC_de(object);
-    ((func_8022E280_S1 *)(object))->unk744.v0 = 0;
-    zero = ((func_8022E280_S1 *)(object))->unk744.v1;
-    (&((func_8022E280_S1 *)(object))->unk748)->x = (&((func_8022E280_S1 *)(object))->unk748)->y = (&((func_8022E280_S1 *)(object))->unk748)->z = zero;
-    ((func_8022E280_S1 *)(object))->unk754 = D_800C2E10_de;
-    ((func_8022E280_S1 *)(object))->unk780 = zero;
-    ((func_8022E280_S1 *)(object))->unk784 = D_800C2E10_de;
-    ((func_8022E280_S1 *)(object))->unk6E8 = ((func_8022E280_S1 *)(object))->unk8;
-    ((func_8022E280_S1 *)(object))->unk6F8 = ((func_8022E280_S1 *)(object))->unk8;
+    object->stick = 0;
+    object->state6C4 = 0;
+    object->landing = 0;
+    object->state6CC = 0;
+    object->active = 1;
+    object->state6D4 = 0;
+    object->state6D8 = 0;
+    object->state6DC = 0;
+    object->state6E4 = 0;
+    object->state758 = 0;
+    object->state75C = 0;
+    object->locked = 0;
+    object->lockState = 0;
+    object->state708 = 0;
+    object->state70C = 0;
+    object->state710 = 0;
+    object->state714 = 0;
+    object->pitchOffset = 0;
+    object->state728 = 0;
+    object->lean = 0;
+    object->state730 = 0;
+    object->state734 = 0;
+    object->state738 = 0;
+    object->state73C = 0;
+    object->baseHeight = func_8022ADBC_de(object);
+    object->verticalOffset = 0;
+    zero = object->verticalOffset;
+    (&object->velocity)->x = (&object->velocity)->y = (&object->velocity)->z = zero;
+    object->velocityScale = D_800C2E10_de;
+    object->cameraOffset = zero;
+    object->cameraScale = D_800C2E10_de;
+    object->previousPosition = object->pos;
+    object->previousTarget = object->pos;
 }

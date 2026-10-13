@@ -1,3 +1,4 @@
+#include "shared/gameplay_transition.h"
 #include "shared/world.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_8044ACCC.h"
@@ -37,19 +38,19 @@ extern s32 D_801468F4;
 
 
 
-void func_8044A0C4_de(void *arg0, s32 arg1) {
+void func_8044A0C4_de(Player *arg0, s32 arg1) {
     s32 var_a2;
 
-    ((func_8044AD14_S1 *)(arg0))->unk5E0 = arg1;
+    arg0->state = arg1;
     func_80226708_de();
     func_8021AF6C_de(arg0);
     if (D_801462E5 == 0) {
         var_a2 = 0x66;
-    } else if (D_801468F4 != 0 && ((func_8021C9B4_S2 *)(((func_8044AD14_S1 *)(arg0))->unk5D8))->unk8F != 0) {
+    } else if (D_801468F4 != 0 && ((Shared_ControlView *)arg0->profile)->transientFlag != 0) {
         var_a2 = D_800CE47C;
     } else {
-        var_a2 = D_800CE430[((func_8021C9B4_S3 *)(((func_8044AD14_S1 *)(arg0))->unk18))->unkC];
-        ((func_8044AD14_S1 *)(arg0))->unk3 = ((func_8021C9B4_S2 *)(((func_8044AD14_S1 *)(arg0))->unk5D8))->unk81;
+        var_a2 = D_800CE430[((Shared__struct_D_800D34C0_0x18 *)arg0->definition)->unkC];
+        arg0->playerId = ((Shared_ControlView *)arg0->profile)->playerId;
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, var_a2, ((func_8044AD14_S1 *)(arg0))->unk86C);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, var_a2, arg0->animation);
 }

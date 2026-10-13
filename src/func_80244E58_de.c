@@ -44,7 +44,7 @@ extern s32 func_8040332C_de(void);
 void func_80244E58_de(void) {
     Vec3Words origin;
     func_80219490_S2 *camera;
-    void *player;
+    Player *player;
     Group *group;
     s32 target;
     s32 found;
@@ -59,9 +59,9 @@ void func_80244E58_de(void) {
         player = group->lead;
         if (player != 0) {
             func_8022E290_de(player);
-            ((func_80244E48_S2 *)(player))->unk57C = 0;
-            ((func_80244E48_S2 *)(player))->unk580 = 0;
-            ((func_80244E48_S2 *)(player))->unk590 = 0;
+            player->roundCount = 0;
+            player->roundScore = 0;
+            player->roundDeaths = 0;
         }
         func_80239B64_de(group->members);
         func_80285D30_de(&D_8010EC90);

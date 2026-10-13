@@ -11,7 +11,9 @@ typedef struct AiProfile {
 
 struct Player {
     u8 kind; /* 0x0 */
-    u8 pad1[0x7];
+    u8 pad1[2];
+    u8 playerId; /* 0x3 */
+    u8 pad4[4];
     Vec3 pos; /* 0x8 */
     u8 pad14[0x4];
     void * definition; /* 0x18 */
@@ -27,24 +29,94 @@ struct Player {
     u16 objectId; /* 0xE4 */
     u8 padE6[0x1A];
     s32 weaponFlags; /* 0x100 */
-    u8 pad104[0x6C];
+    u8 pad104[0xA];
+    s8 animationDone; /* 0x10E */
+    u8 pad10F[0x61];
     u8 motion[0x170]; /* 0x170 */
-    u8 pad2E0[0x2B4];
+    u8 pad2E0[0x29C];
+    s32 roundCount; /* 0x57C */
+    s32 roundScore; /* 0x580 */
+    u8 pad584[0xC];
+    s32 roundDeaths; /* 0x590 */
     s32 gear; /* 0x594 */
-    u8 pad598[0x40];
+    u8 pad598[0x3C];
+    s32 slot; /* 0x5D4 */
     AiProfile * profile; /* 0x5D8 */
-    u8 pad5DC[0x74];
+    void *owner; /* 0x5DC */
+    s32 state; /* 0x5E0 */
+    u8 pad5E4[0x1E];
+    s8 actions[22][2]; /* 0x602 */
+    s16 selectedAction; /* 0x62E */
+    u8 pad630[0x20];
     s16 pose; /* 0x650 */
-    u8 pad652[0x4A];
+    u8 pad652[6];
+    f32 poseTimer; /* 0x658 */
+    u8 pad65C[4];
+    s32 flags660; /* 0x660 */
+    u8 pad664[0x24];
+    u8 tuning[0x14]; /* 0x688 */
     f32 steer; /* 0x69C */
     f32 pitch; /* 0x6A0 */
     f32 strafe; /* 0x6A4 */
     f32 forward; /* 0x6A8 */
-    u8 pad6AC[0x4];
+    s32 inputFlags; /* 0x6AC */
     s32 actionFlags; /* 0x6B0 */
-    u8 pad6B4[0x1C];
+    u8 pad6B4[0xC];
+    f32 stick; /* 0x6C0 */
+    s32 state6C4; /* 0x6C4 */
+    f32 landing; /* 0x6C8 */
+    s32 state6CC; /* 0x6CC */
     s32 active; /* 0x6D0 */
-    u8 pad6D4[0xD7C];
+    s32 state6D4;
+    s32 state6D8;
+    s32 state6DC;
+    u8 pad6E0[4];
+    s32 state6E4;
+    Vec3 previousPosition; /* 0x6E8 */
+    f32 heightDelta; /* 0x6F4 */
+    Vec3 previousTarget; /* 0x6F8 */
+    u8 pad704[4];
+    s32 state708;
+    s32 state70C;
+    s32 state710;
+    s32 state714;
+    f32 crouchDepth; /* 0x718 */
+    s32 forceCrouch; /* 0x71C */
+    f32 eyeOffset; /* 0x720 */
+    f32 pitchOffset; /* 0x724 */
+    s32 state728;
+    f32 lean; /* 0x72C */
+    s32 state730;
+    s32 state734;
+    s32 state738;
+    s32 state73C;
+    f32 baseHeight; /* 0x740 */
+    f32 verticalOffset; /* 0x744 */
+    Vec3 velocity; /* 0x748 */
+    f32 velocityScale; /* 0x754 */
+    s32 state758;
+    s32 state75C;
+    u8 pad760[0x10];
+    s16 weapon; /* 0x770 */
+    u8 pad772[0xE];
+    f32 cameraOffset; /* 0x780 */
+    f32 cameraScale; /* 0x784 */
+    s32 controllerMode; /* 0x788 */
+    f32 controllerTimer; /* 0x78C */
+    u8 pad790[0xDC];
+    s32 animation; /* 0x86C */
+    u8 pad870[0xC8];
+    s32 weaponBusy; /* 0x938 */
+    u8 pad93C[0x37C];
+    s32 weaponLocked; /* 0xCB8 */
+    u8 padCBC[0x4F8];
+    s32 locked; /* 0x11B4 */
+    s32 lockState; /* 0x11B8 */
+    u8 pad11BC[0x1F8];
+    void *animationTable; /* 0x13B4 */
+    u8 pad13B8[0x1C];
+    s32 toggle; /* 0x13D4 */
+    u8 pad13D8[0x78];
     s32 computer; /* 0x1450 */
     struct AiController * controller; /* 0x1454 */
 };

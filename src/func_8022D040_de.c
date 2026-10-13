@@ -1,3 +1,4 @@
+#include "shared/level_actor.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8022C894.h"
 #include "types.h"
@@ -22,36 +23,36 @@ extern char D_800CE8A4;
 
 
 
-void func_8022D040_de(void *arg0, void *arg1) {
-    char *player;
+void func_8022D040_de(void *arg0, Actor_func_8024A7A0_de *arg1) {
+    Player *player;
     s32 busy;
     f32 x;
 
     player = arg0;
-    if (((func_8022D030_S1 *)(player))->unk6C8 == 0.0f) {
-        ((func_8022D030_S1 *)(player))->unk650 = 0xD;
+    if (player->landing == 0.0f) {
+        player->pose = 0xD;
     } else {
-        ((func_8022D030_S1 *)(player))->unk650 = 0xE;
+        player->pose = 0xE;
     }
     func_802231D4_de(player, arg1, &D_800CE88C);
     func_802238E0_de(player, arg1, &D_800CE8A4);
     busy = 0;
-    if (((func_8022D030_S1 *)(player))->unk86C == 0x1144) {
-        busy = ((func_8022D030_S1 *)(player))->unk10E == 0;
+    if (player->animation == 0x1144) {
+        busy = player->animationDone == 0;
     }
-    if (((func_8022D030_S1 *)(player))->unkE4 == D_800CE47C) {
-        ((func_8022D030_S1 *)(player))->unk86C = 0x8A2;
+    if (player->objectId == D_800CE47C) {
+        player->animation = 0x8A2;
     } else if (!busy) {
-        x = ((func_8022D030_S1 *)(player))->unk6C0;
+        x = player->stick;
         if (D_800C7E94 <= x) {
-            ((func_8022D030_S1 *)(player))->unk86C = 0x8A2;
+            player->animation = 0x8A2;
         } else if (x <= D_800C7E98) {
-            ((func_8022D030_S1 *)(player))->unk86C = 0x8A7;
+            player->animation = 0x8A7;
         } else {
-            ((func_8022D030_S1 *)(player))->unk86C = 0x14;
+            player->animation = 0x14;
         }
     }
-    if (!(((func_8020D1FC_S1 *)(arg1))->unk38 & 0x20000) && ((func_8022D030_S1 *)(player))->unk658 > D_800C7E9C) {
+    if (!(arg1->motionState & 0x20000) && player->poseTimer > D_800C7E9C) {
         func_802227F4_de(player, arg1, 3);
     }
 }
