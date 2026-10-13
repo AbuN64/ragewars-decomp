@@ -1,7 +1,7 @@
 #ifndef RW_TEXTURE_REQUEST_H
 #define RW_TEXTURE_REQUEST_H
 #include "types.h"
-extern s32 D_800CD894_de;
+extern u32 D_800CD894_de;
 extern void *func_8025193C_de(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 #if defined(VERSION_US_REV1)
 extern s32 D_800D2AE0;
