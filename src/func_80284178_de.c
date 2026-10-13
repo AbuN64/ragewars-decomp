@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028308C.h"
 #include "types.h"
+#include "shared/particle_sound.h"
 
 extern s32 D_80140FF8[];
 extern s32 D_800D297C;
@@ -23,7 +24,7 @@ void func_80284178_de(void *arg0) {
     state = D_80140FF8;
     if (state[0] == 1) {
         arg1 = (void *)state[-4];
-        func_80272898_de(&((func_8028414C_S1 *)(arg1))->unk220, &((func_8028414C_S2 *)(arg0))->unk8, &delta);
+        func_80272898_de(&((struct Shared_ParticleView *)arg1)->viewMtx, &((Shared_Particle *)arg0)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
@@ -36,7 +37,7 @@ void func_80284178_de(void *arg0) {
                       (s32)((char *)arg0 + ((D_800D297C << 6) + 0x60)),
                       0, 0.0f);
     }
-    ((func_8028414C_S2 *)(arg0))->unk5C |= 0x100000;
+    ((Shared_Particle *)arg0)->flags |= 0x100000;
 }
 
 /* Spawns a sequence of effects along an object's motion segment. */
@@ -96,20 +97,20 @@ extern void *func_8025C95C_de(void *, s32, void *, void *, s32);
 void func_802843B8_de(void *arg0, s32 arg1) {
     void *node;
 
-    node = ((func_8028438C_S1 *)(arg0))->unk1DC;
+    node = ((SoundParticle *)arg0)->sound;
     if (node != 0) {
-        if (((func_80254930_S1 *)(node))->unkC == arg1 && ((func_80254930_S1 *)(node))->unk8 != -1) {
+        if (((Node80253610 *)node)->flags == arg1 && ((Node80253610 *)node)->references != -1) {
             return;
         }
         func_80284434_de(arg0);
     }
-    ((func_8028438C_S1 *)(arg0))->unk1DC =
-        func_8025C95C_de(func_8025CC6C_de(), arg1, &((func_8028438C_S1 *)(arg0))->unk8, &((func_8028438C_S1 *)(arg0))->unk8, -1);
+    ((SoundParticle *)arg0)->sound =
+        func_8025C95C_de(func_8025CC6C_de(), arg1, &((SoundParticle *)arg0)->particle.inst.pos, &((SoundParticle *)arg0)->particle.inst.pos, -1);
 }
 
 s32 func_80284434_de(void *a) {
-    if ((((struct IntegerState1E0 *) ((s8 *) a))->unk_1DC) != 0) {
-        func_8025CA24_de(func_8025CC6C_de(), (((struct IntegerState1E0 *) ((s8 *) a))->unk_1DC));
-        (((struct IntegerState1E0 *) ((s8 *) a))->unk_1DC) = 0;
+    if (((SoundParticle *)a)->sound != 0) {
+        func_8025CA24_de(func_8025CC6C_de(), ((SoundParticle *)a)->sound);
+        ((SoundParticle *)a)->sound = 0;
     }
 }
