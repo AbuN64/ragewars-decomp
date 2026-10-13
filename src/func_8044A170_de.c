@@ -1,3 +1,5 @@
+#include "shared/gameplay_camera.h"
+#include "span_1000/code_80233920.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8044ACCC.h"
 #include "span_1000/code_80255BEC.h"
@@ -33,21 +35,18 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     Floats *temp_v0_3;
     Floats *temp_v0_4;
     Floats *temp_v0_5;
-    State_func_8044A170_de *var_v1;
-    State_func_8044A170_de *record;
-    typedef struct { u8 bytes[16]; } ClipStride;
 
-    func_80238EB8_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unk24));
-    func_802727D8_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unk160));
-    func_802727D8_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unk1E0));
+    func_80238EB8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unk24));
+    func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unk160));
+    func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unk1E0));
     zero = 0.0f;
     temp_f21 = 1.0f;
-    temp_v0 = ((void *)&((func_8044ADC0_S1 *)(arg0))->unk140);
+    temp_v0 = ((void *)&((Shared_func_80234FDC_S2 *)arg0)->orientation);
     temp_v0->unk8 = zero;
     temp_v0->unk4 = zero;
     arg0->unk140 = zero;
     arg0->unk14C = temp_f21;
-    func_802727D8_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unk1A0));
+    func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unk1A0));
     arg0->unk29C = (f32) D_800E28D0;
     arg0->unk2A0 = (f32) D_800E28D4;
     arg0->unk518 = -1;
@@ -73,55 +72,48 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     arg0->unk530 = (f32) 47.5f;
     arg0->unk534 = (f32) 47.5f;
     func_802393D8_de(arg0);
-    temp_v0_2 = ((void *)&((func_8044ADC0_S1 *)(arg0))->unkA0);
+    temp_v0_2 = ((void *)&((Shared_func_80234FDC_S2 *)arg0)->padA0);
     arg0->unkF4 = zero;
     arg0->unkF8 = zero;
     temp_v0_2->unk8 = zero;
     temp_v0_2->unkC = zero;
     temp_v0_2->unk10 = zero;
     temp_v0_2->unk14 = temp_f21;
-    temp_v0_3 = ((void *)&((func_8044ADC0_S1 *)(arg0))->unkB8);
+    temp_v0_3 = ((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkB8);
     temp_v0_3->unk4 = zero;
     temp_v0_3->unk8 = zero;
     temp_v0_3->unkC = zero;
     temp_v0_3->unk10 = zero;
-    temp_v0_4 = ((void *)&((func_8044ADC0_S1 *)(arg0))->unkCC);
+    temp_v0_4 = ((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkCC);
     temp_v0_4->unk4 = zero;
     temp_v0_4->unk8 = zero;
     temp_v0_4->unkC = zero;
     temp_v0_4->unk10 = zero;
-    temp_v0_5 = ((void *)&((func_8044ADC0_S1 *)(arg0))->unkE0);
+    temp_v0_5 = ((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkE0);
     temp_v0_5->unk4 = zero;
     temp_v0_5->unk8 = zero;
     temp_v0_5->unkC = zero;
     temp_v0_5->unk10 = zero;
     func_802390F4_de(arg0, 0);
-    var_a1 = 0;
-    var_v1 = arg0;
-
     temp_a0 = D_800E28D0 * 2;
-    do {
-        record = (State_func_8044A170_de *)&((ClipStride *)arg0)[var_a1];
-        record->unk2B0 = temp_a0;
-        record->unk2B2 = temp_a0;
-        record->unk2B4 = 0x3FF;
-        record->unk2B6 = 0;
-        record->unk2B8 = temp_a0;
-        record->unk2BA = temp_a0;
-        record->unk2BC = 0;
-        record->unk2BE = 0;
-        var_a1 += 1;
-        var_v1 = &((func_8044ADC0_S2 *)(var_v1))->unk10;
-
-    } while (var_a1 < 2);
-    func_80442544_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unk554));
-    func_802727D8_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unkE54));
-    func_802727D8_de(((void *)&((func_8044ADC0_S1 *)(arg0))->unkE94));
+    for (var_a1 = 0; var_a1 < 2; var_a1++) {
+        ((Racer *)arg0)->viewports[var_a1].vscale[0] = temp_a0;
+        ((Racer *)arg0)->viewports[var_a1].vscale[1] = temp_a0;
+        ((Racer *)arg0)->viewports[var_a1].vscale[2] = 0x3FF;
+        ((Racer *)arg0)->viewports[var_a1].vscale[3] = 0;
+        ((Racer *)arg0)->viewports[var_a1].vtrans[0] = temp_a0;
+        ((Racer *)arg0)->viewports[var_a1].vtrans[1] = temp_a0;
+        ((Racer *)arg0)->viewports[var_a1].vtrans[2] = 0;
+        ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
+    }
+    func_80442544_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unk554));
+    func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkE54));
+    func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkE94));
     arg0->unk544 = 0;
     arg0->unk120 = 0;
     arg0->unk124 = 0x32;
     arg0->unk126 = 0;
     D_80103220.field_4 = 0;
-    func_80255CA0_de(&((func_8044ADC0_S1 *)(arg0))->unkE40, 0, 4);
+    func_80255CA0_de(&((Shared_func_80234FDC_S2 *)arg0)->objects, 0, 4);
     func_80239C20_de(arg0);
 }
