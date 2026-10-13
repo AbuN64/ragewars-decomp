@@ -7394,7 +7394,8 @@ struct Node80254C10 {
     u32 end;
     s32 unk_8;
     u32 flags;
-    char pad10[0x14];
+    s32 stamp; /* 0x10: last-use tick */
+    char pad14[0x10];
     struct Node80254C10 *next;
 };
 struct NodeList;
