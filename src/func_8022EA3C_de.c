@@ -299,7 +299,7 @@ void func_8022EDFC_de(void *arg0) {
     }
     func_80218464_de((char *)arg0 + 0x938);
     ((Actor_func_8022ED48_de *)arg0)->unk_0x11B4 = 0;
-    func_80214178_de(((Shared_ActorView *)arg0)->weapon, ((Shared_ActorView *)arg0)->ammoData, 1);
+    func_80214178_de(&((Shared_ActorView *)arg0)->weapon, &((Shared_ActorView *)arg0)->weapon.behaviorFlags, 1);
     func_8021B1E4_de(arg0, ((Shared_ActorView *)arg0)->spawn, 0, 1);
     func_80226708_de(arg0);
 }

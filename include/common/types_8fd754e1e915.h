@@ -1767,7 +1767,11 @@ struct Model_func_80223E34_de;
 /* unbake published declaration: published_643a575b68115baf18e12e93 */
 struct Model_func_80223E34_de {
     s32 kind; /* 0x00 */
-    char pad4[0x40];
+    char pad4[0x28];
+    f32 blend; /* 0x2C: model-specific player interpolation target */
+    u8 pad30[4];
+    Vec3 effectOffset; /* 0x34 */
+    u8 pad40[4];
     s32 collisionFlags; /* 0x44: model collision eligibility */
     char pad48[4];
     u32 collisionOptions; /* 0x4C */

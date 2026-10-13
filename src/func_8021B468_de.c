@@ -175,7 +175,7 @@ settings_loop:
                     func_80448EF4_de(temp_s0, var_s1->character, 1);
                     temp_v0 = ((struct Shared_ActorView *)temp_s0)->model;
                     ((struct Shared_ModelView *)temp_v0)->flags = (s32) (((struct Shared_ModelView *)temp_v0)->flags & ~4);
-                    func_80214178_de(((struct Shared_ActorView *)temp_s0)->weapon, ((struct Shared_ActorView *)temp_s0)->ammoData, 2);
+                    func_80214178_de(&((struct Shared_ActorView *)temp_s0)->weapon, &((struct Shared_ActorView *)temp_s0)->weapon.behaviorFlags, 2);
                     func_8021B1E4_de(temp_s0, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
                     func_80255ED8_de(playersGlobal->controller, (s32)temp_s0);
                     func_80255CB8_de(&playersGlobal->effects, (s32)temp_s0);

@@ -5,6 +5,7 @@
 #include "types.h"
 
 #include "common/types_8a8189af7b05.h"
+#include "shared/level_actor.h"
 
 /* Player-transition records from origin/legacy shared headers. */
 
@@ -27,8 +28,7 @@ struct Shared_ActorView {
     u8 pad1DC[0x1F0 - 0x1DC];
     s32 frameValue; /* +0x1F0: src/func_8021B468.c */
     char pad1F4[0xF4];
-    char weapon[368]; /* +0x2E8: src/func_8021B468.c */
-    char ammoData[376]; /* +0x458: src/func_8021B468.c */
+    Actor_func_8024A7A0_de weapon; /* 0x2E8: complete embedded weapon actor */
     s32 actorState; /* +0x5D0: src/func_8021B468.c */
     u32 mode; /* +0x5D4: src/func_8021B468.c */
     struct Shared_ControlView * controls; /* +0x5D8: src/func_8021B468.c */
@@ -53,7 +53,9 @@ struct Shared_ActorView {
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[8];
     f32 lateralInput; /* 0x6A4 */
-    char pad6A8[0x18];
+    char pad6A8[4];
+    s32 actionFlags; /* 0x6AC */
+    char pad6B0[0x10];
     f32 forwardSpeed; /* 0x6C0 */
     f32 lateralSpeed; /* 0x6C4 */
     char pad6C8[0x30];
@@ -64,29 +66,39 @@ struct Shared_ActorView {
     f32 transitionBlend; /* 0x720 */
     u8 pad724[0x770 - 0x724];
     s16 nextWeapon; /* 0x770 */
-    u8 pad772[0x784 - 0x772];
+    u8 pad772[0x780 - 0x772];
+    f32 modelBlend; /* 0x780 */
     f32 speedFactor; /* 0x784 */
     s32 controllerMode; /* 0x788 */
-    u8 pad78C[8];
+    f32 controllerTimer; /* 0x78C */
+    u8 pad790[4];
     void *controllerOwner; /* 0x794 */
-    u8 pad798[0x848 - 0x798];
+    u8 pad798[0x7F4 - 0x798];
+    s32 modelState; /* 0x7F4 */
+    f32 modelDistance; /* 0x7F8 */
+    void *effectModel; /* 0x7FC */
+    Vec3 effectPosition; /* 0x800 */
+    u8 pad80C[0x848 - 0x80C];
     s32 collisionState; /* 0x848 */
     u8 pad84C[0x864 - 0x84C];
     s32 field864;
     s32 field868;
-    u8 pad86C[0xE54 - 0x86C];
+    s32 effectId; /* 0x86C */
+    u8 pad870[0xE54 - 0x870];
     f32 effectTransform[16]; /* 0xE54 */
     f32 effectOffsetTransform[16]; /* 0xE94 */
-    u8 padED4[0x11BC - 0xED4];
+    u8 padED4[0x11B4 - 0xED4];
+    s32 actionState; /* 0x11B4 */
+    u8 pad11B8[4];
     s32 field11BC;
     s32 field11C0;
     u8 pad11C4[8];
     s32 field11CC;
     u8 pad11D0[8];
-    s32 stun; /* +0x11D8: src/func_8021B468.c */
+    f32 stun; /* +0x11D8: src/func_8021B468.c */
     f32 impulse; /* 0x11DC */
     char pad11E0[4];
-    s32 pending; /* +0x11E4: src/func_8021B468.c */
+    f32 pending; /* +0x11E4: src/func_8021B468.c */
     s32 field11E8;
     f32 impactTimer; /* 0x11EC */
     u8 pad11F0[0xC];
@@ -115,7 +127,10 @@ struct Shared_ActorView {
     u8 pad1314[0x20];
     s32 field1334;
     s32 field1338;
-    u8 pad133C[0x13B4 - 0x133C];
+    u8 pad133C[8];
+    u8 messageHistory[5][0x15]; /* 0x1344 */
+    u8 pad13AD[3];
+    s32 messageIndex; /* 0x13B0 */
     s32 *field13B4;
     s32 weaponChanged; /* 0x13B8 */
     s32 secondaryChanged;
@@ -125,7 +140,8 @@ struct Shared_ActorView {
     s32 special; /* +0x13C8: src/func_8021B468.c */
     char pad13CC[0x14];
     void * parent; /* +0x13E0: src/func_8021B468.c */
-    u8 pad13E4[0x1450 - 0x13E4];
+    u8 pad13E4[8];
+    u8 effectPayload[0x64]; /* 0x13EC */
     s32 remote; /* 0x1450 */
     void *owner; /* 0x1454 */
     u8 pad1458[0x16C4 - 0x1458];

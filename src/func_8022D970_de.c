@@ -1,3 +1,6 @@
+#include "shared/gameplay_transition.h"
+#include "shared/level_actor.h"
+#include "common/types_8fd754e1e915.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8022D944.h"
 #include "types.h"
@@ -24,17 +27,17 @@ void func_8022D970_de(void *arg0, void *arg1) {
     Vec3 sp20;
 
     temp_v0 = func_8024E7DC_de(arg1);
-    ((func_8022D960_S1 *)(o))->unk7FC = temp_v0;
+    ((Shared_ActorView *)o)->effectModel = (void *)temp_v0;
     if (temp_v0 != 0) {
-        ((func_8022D960_S1 *)(o))->unk7F4 = 0;
-        ((func_8022D960_S1 *)(o))->unk800.v0 = ((func_8022D960_S2 *)(a1))->unk8;
-        ((func_8022D960_S1 *)(o))->unk800.v1.y = ((func_8022D960_S2 *)(a1))->unkC;
-        ((func_8022D960_S1 *)(o))->unk800.v1.z = ((func_8022D960_S2 *)(a1))->unk10;
-        sp10.x = ((func_8022D960_S3 *)(temp_v0))->unk34;
-        sp10.y = ((func_8022D960_S3 *)(temp_v0))->unk38;
-        sp10.z = ((func_8022D960_S3 *)(temp_v0))->unk3C;
-        func_80271F68_de(&sp20, &sp10, &((func_8022D960_S1 *)(o))->unk800.v1);
+        ((Shared_ActorView *)o)->modelState = 0;
+        ((Shared_ActorView *)o)->effectPosition.x = ((Actor_func_8024A7A0_de *)a1)->position0.x;
+        ((Shared_ActorView *)o)->effectPosition.y = ((Actor_func_8024A7A0_de *)a1)->position0.y;
+        ((Shared_ActorView *)o)->effectPosition.z = ((Actor_func_8024A7A0_de *)a1)->position0.z;
+        sp10.x = ((Model_func_80223E34_de *)temp_v0)->effectOffset.x;
+        sp10.y = ((Model_func_80223E34_de *)temp_v0)->effectOffset.y;
+        sp10.z = ((Model_func_80223E34_de *)temp_v0)->effectOffset.z;
+        func_80271F68_de(&sp20, &sp10, &((Shared_ActorView *)o)->effectPosition);
         sp20.y = 0.0f;
-        ((func_8022D960_S1 *)(o))->unk7F8 = func_80271AA8_de(&sp20);
+        ((Shared_ActorView *)o)->modelDistance = func_80271AA8_de(&sp20);
     }
 }
