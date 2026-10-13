@@ -107,5 +107,5 @@ s32 func_8023D158_de(ActorMotion *object) {
             func_80243920_de(object);
         }
     }
-    return ((func_8023D148_S1 *)(object))->unkB0 != 0;
+    return object->collisionState != 0;
 }
