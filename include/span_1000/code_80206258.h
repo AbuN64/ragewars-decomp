@@ -494,7 +494,10 @@ typedef struct ActorMotionDefinition {
     s32 flags; /* 0x0 */
     u16 radial; /* 0x4 */
     u8 pad6[2];
-    u8 pad8[0x1C];
+    u8 pad8[4];
+    s32 eventMask; /* 0xC */
+    s32 secondaryEventMask; /* 0x10 */
+    u8 pad14[0x10];
     s32 transitionFlags; /* 0x24 */
     u8 pad28[0x4];
     f32 height; /* 0x2C */
