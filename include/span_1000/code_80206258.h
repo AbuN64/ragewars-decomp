@@ -518,7 +518,7 @@ typedef struct ActorMotionResource {
     u8 pad4[0x10];
     ActorMotionDefinition motion; /* 0x14 */
 } ActorMotionResource;
-typedef struct ActorMotionHooks { void *reserved[2]; void (*onStep)(void *, void *); } ActorMotionHooks;
+typedef struct ActorMotionHooks { void *reserved[2]; void (*onStep)(void *, void *); u8 padC[0x10]; s32 flags; } ActorMotionHooks;
 typedef struct ActorMotionState {
     s32 flags; /* 0x0 */
     u8 pad4[0x28];

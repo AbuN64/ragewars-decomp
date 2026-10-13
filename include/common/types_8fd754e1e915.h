@@ -103,7 +103,9 @@ struct Player {
     f32 cameraScale; /* 0x784 */
     s32 controllerMode; /* 0x788 */
     f32 controllerTimer; /* 0x78C */
-    u8 pad790[0xDC];
+    u8 pad790[0x7C];
+    s32 controllerEnabled; /* 0x80C */
+    u8 pad810[0x5C];
     s32 animation; /* 0x86C */
     u8 pad870[0xC8];
     s32 weaponBusy; /* 0x938 */

@@ -165,7 +165,9 @@ struct Segment_func_80203278_de {
 };
 
 struct NavigationTrack {
-    char prefix[0x14];
+    u8 prefix[4];
+    u32 flags; /* 0x4 */
+    u8 pad8[0xC];
     Segment_func_80203278_de segment;
 };
 

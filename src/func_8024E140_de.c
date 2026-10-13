@@ -1,3 +1,7 @@
+#include "shared/level_actor.h"
+#include "common/types_8fd754e1e915.h"
+#include "span_1000/code_80206258.h"
+#include "span_1000/code_802022E0.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8024E130.h"
@@ -21,11 +25,11 @@ int func_8024E150_de(void) {
 /** Return whether this object is active for its current behavior class. */
 s32 func_8024E158_de(void *arg0) {
     if (*(u8 *)arg0 == 1) {
-        if ((((func_8024E148_S1 *)(arg0))->unk100 & 0x300000) != 0) {
+        if ((((Actor_func_8024A7A0_de *)arg0)->flags & 0x300000) != 0) {
             return 1;
         }
     }
-    switch (*((func_8024E148_S1 *)(arg0))->unk18) {
+    switch (*((Actor_func_8024A7A0_de *)arg0)->definition) {
     case 1:
     case 2:
     case 5:
@@ -41,14 +45,14 @@ s32 func_8024E1B4_de(void *arg0) {
     if (*(u8 *)arg0 != 1) {
         return 0;
     }
-    if (!(((func_8024E1A4_S1 *)(arg0))->unk100 & 0x2000)) {
+    if (!(((Actor_func_8024A7A0_de *)arg0)->flags & 0x2000)) {
         return 0;
     }
-    arg0 = ((func_8024E1A4_S1 *)(arg0))->unk1A0;
+    arg0 = ((ActorMotionState *)((Player *)arg0)->motion)->hooks;
     if (arg0 == 0) {
         goto ret1;
     }
-    if (((func_8024E1A4_S1 *)(arg0))->unk1C & 0x10000) {
+    if (((ActorMotionHooks *)arg0)->flags & 0x10000) {
         return 0;
     }
 ret1:
@@ -64,7 +68,7 @@ extern s32 func_80245798_de(char *actor);
 
 s32 func_8024E208_de(char *actor)
 {
-    switch (*((ObjectLinks1DC_4 *)(actor))->unk_18) {
+    switch (*((Actor_func_8024A7A0_de *)actor)->definition) {
     case 1:
     case 5:
         return 1;
@@ -72,10 +76,10 @@ s32 func_8024E208_de(char *actor)
         if (*(u8 *)actor != 1) {
             return 0;
         }
-        if (!(((ObjectLinks1DC_4 *)(actor))->unk_100 & 0x300000)) {
+        if (!(((Actor_func_8024A7A0_de *)actor)->flags & 0x300000)) {
             return 0;
         }
-        if (((struct IntegerState810 *) ((ObjectLinks1DC_4 *) actor)->unk_1D8)->unk_80C != 0 || func_80245798_de(actor) != 0) {
+        if (((Player *)((Shared_Actor *)actor)->entity)->controllerEnabled != 0 || func_80245798_de(actor) != 0) {
             return 1;
         }
         return 0;
@@ -89,10 +93,10 @@ typedef struct Owner Owner;
 
 /** Return bit two of the nested state word. */
 unsigned int func_8024E29C_de(char *object) {
-    return (((struct func_8029A9E0_S1 *) ((Owner *) object)->track)->unk4 >> 2) & 1;
+    return (((struct NavigationTrack *)((Actor_func_8024A7A0_de *)object)->definition)->flags >> 2) & 1;
 }
 
 /** Report whether the object pointed to at offset 0x18 equals one. */
 int func_8024E2B0_de(void *arg0) {
-    return *(int *)(((func_8024C654_S1 *)(arg0))->unk18) == 1;
+    return *(int *)(((Actor_func_8024A7A0_de *)arg0)->definition) == 1;
 }
