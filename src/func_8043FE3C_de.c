@@ -35,12 +35,10 @@ int func_802934F8_de(void);
 
 
 
-void func_802A8F28_de(s32, s32, s32, s32, s32, s32, f32, f32);
 
 
 void func_80441BE0_de();
 
-extern u8 D_801462E5;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif
@@ -55,7 +53,6 @@ extern s32 D_800E1E20;
 extern func_8043FFAC_S4 D_800E1E24_de[];
 
 
-extern struct Shape_typemap_13 D_801377B8;
 
 /* unable to generate initializer: unknown type */
 
@@ -174,8 +171,8 @@ block_5:
     func_802AAB3C_de(var_a0_2, var_a1, var_a2, var_a3,
         (s32)((f32)temp_s1->unk19 * var_f1) > 0xFF ? 0xFF : (s32)((f32)temp_s1->unk19 * var_f1),
         (s32)((f32)temp_s1->unk1A * var_f1) > 0xFF ? 0xFF : (s32)((f32)temp_s1->unk1A * var_f1));
-    D_801377B8.field_0 = (s32) temp_s1->unk14;
-    D_801377B8.field_4 = (s32) temp_s1->unk14;
+    D_801377B8[0] = (s32) temp_s1->unk14;
+    D_801377B8[1] = (s32) temp_s1->unk14;
     func_802AAB68_de(temp_s1->unkC * (f32) (D_800E28D0) * 0.0035211267f, temp_s1->unk10 * (f32) (D_800E28D4) * 0.0045045046f);
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;

@@ -1,3 +1,4 @@
+#include "shared/func_80286080_de_closed.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80268160.h"
 #include "types.h"
@@ -7,7 +8,6 @@
 
 /* Selects a cached RDP color-combiner mode and emits the corresponding display-list command. */
 extern Gfx *D_80110634;
-extern u32 D_800CC360;
 void func_80268CE0_de(u32 mode) {
  if (D_800CC360 != mode) {
  D_800CC360=mode;
@@ -264,10 +264,8 @@ sw_mode_default:
 #include "n64sdk.h"
 #include "gbi.h"
 extern Gfx *D_80110634;
-extern u32 D_800D14B0[];
 extern Gfx D_800CC018_de[], D_800CC0A0[];
 extern s32 D_800CC364;
-extern u32 D_800CC360;
 extern void func_80295FF4_de(void);
 /* Emits a 16 by 16 intensity texture, white tint, matrix and the selected pass list. */
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
@@ -326,7 +324,6 @@ struct Shared_GfxMaterial {
 
 extern Gfx *D_80110634;
 extern s32 D_80110620;
-extern s32 D_801462C8;
 extern u32 D_800CD730;
 extern s32 D_800CC378;
 extern s32 D_800CC37C;
@@ -374,7 +371,7 @@ s32 func_80269A80_de(struct Shared_GfxMaterial *mat, s32 pass) {
         return 0;
     }
     tailEnum = -1;
-    if (mat->unk8 != 0 && !(D_801462C8 & 0x400) && !(D_80110620 != 0 && (flags & 0x8000))) {
+    if (mat->unk8 != 0 && !(D_801462C8.flags & 0x400) && !(D_80110620 != 0 && (flags & 0x8000))) {
         node = func_80295F14_de(&mat->unk8, pass);
         if (node == 0) {
             return 0;

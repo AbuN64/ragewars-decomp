@@ -14,6 +14,17 @@
 
 
 
+/* Retained ROM words preceding this unit's generated jump table. */
+#if defined(VERSION_EU)
+const u32 D_auto_rodata_unresolved_800C1D38[2] = {
+    0x00031880, 0x96230004,
+};
+#elif defined(VERSION_US)
+const u32 D_auto_rodata_unresolved_800C19B8[6] = {
+    0x6F736856, 0x65727465, 0x42C80000, 0x4F000000, 0x00000800, 0x08000C00,
+};
+#endif
+
 int func_8020570C_de(void *arg0) {
     return ((((func_80205700_S1 *)(arg0))->unkC >> 9) ^ 1) & 1;
 }

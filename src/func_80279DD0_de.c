@@ -10,10 +10,7 @@
 
 extern f32 D_800D2988;
 extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
-extern void func_80271F9C_de(void *, void *, f32);
 
-extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
-extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 
 void func_80279DD0_de(void *arg0, f32 arg1) {
     Vec3 sp10;

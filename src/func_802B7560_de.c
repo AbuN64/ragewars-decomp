@@ -5,7 +5,6 @@
 
 
 extern s32 func_802B9CB0_de(s32, s32);
-extern void func_802BB2A0_de(s32, s32, s32);
 
 
 extern u8 D_8014D4B0;

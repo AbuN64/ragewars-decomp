@@ -190,12 +190,10 @@ Entry_func_8028C108_de *func_8028C7E0_de(World_func_8028C7E0_de *world, s32 id) 
 
 
 
-extern char D_80145040;
 extern Player *func_8022A414_de(void *list);
 #ifdef VERSION_EU
 extern Player *func_8022A414_de(void *list);
 #endif
-extern void func_80271F68_de(Vec3 *out, Vec3 *a, Vec3 *b);
 extern f32 func_802B72B0_de(f32 value);
 
 Player *func_8028C834_de(World_func_8028C834_de *world) {

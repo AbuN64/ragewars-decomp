@@ -5,10 +5,7 @@
 #include "shared/func_8021E2A0_de_closed.h"
 #include "span_1000/code_80225D10.h"
 #include "span_C76B0/data.h"
-extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
 extern void func_8027207C_de(f32 *);
-extern void func_80271F9C_de(void *, void *, f32);
-extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 
 static inline s32 playerHasForce(ForcePlayer *player, f32 zero) { s32 value = 0; if (zero < player->strength) value = 1; return value; }
 void func_80228DC4_de(void *listObject, void *bodyObject) {

@@ -13,7 +13,6 @@ extern Slot D_8014EA78;
 extern OSMesg D_8014EA70;
 extern void func_802BAC60_de(Slot *, OSMesg *, s32);
 extern s32 func_802BB420_de(Slot *, OSMesg, s32);
-extern s32 func_802BB2A0_de(Slot *, OSMesg *, s32);
 
 static inline void create_access_queue(void) {
     D_800D83D0[0] = 1;

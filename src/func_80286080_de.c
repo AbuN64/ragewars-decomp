@@ -58,7 +58,7 @@ void func_80286080_de(void *arg0) {
     }
 
     func_80236F1C_de(&D_80145088, state);
-    if ((state->frozen == 0) && (D_80145088.state == 0)) {
+    if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
         func_8028D67C_de(state);
     }
     func_8028D888_de(state);

@@ -148,7 +148,6 @@ extern s32 D_800DF278;
 extern char D_80141168;
 
 extern void func_8029EB14_de(Matrix *m);
-extern void func_80272898_de(char *view, Vec3 *in, Vec3 *out);
 extern Vtx10 *func_802A15E4_de(s32 size);
 
 void func_80416ECC_de(s32 mode) {

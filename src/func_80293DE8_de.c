@@ -48,7 +48,6 @@ void func_80293E9C_de(void) {
 
 
 extern void func_80293334_de(void *arg0, void *arg1, void *arg2);
-extern void func_80286AA8_de(void *arg0, void *arg1, void *arg2);
 extern void func_8044A370_de(void *arg0, s32 arg1);
 extern void func_80296004_de(unsigned int value);
 extern u8 D_801468A0;

@@ -25,18 +25,12 @@
 
 
 
-extern void *func_8025305C_de(s32 size);
-extern void *func_8041B610_de(void *, s32);
-extern void func_8041B6E8_de(void *, s32, s32);
-extern void *func_8040EC30_de(void *, u16);
 extern void func_8040E8D8_de(MenuWidget *, s32);
-extern void *func_80419E54_de(s32, s32);
 extern void func_802A2394_de(void);
 
 
 
 
-extern void func_8025DF34_de(s32);
 
 s32 func_80429A24_de(void *window) {
     SetupModelVector scale;
@@ -50,7 +44,6 @@ s32 func_80429A24_de(void *window) {
     s32 i;
     s32 x;
     s32 id;
-    s32 *pending;
 
     D_800E4F60 = func_8025305C_de(sizeof(SetupScreen));
     D_800E4F60->window = window;
@@ -94,9 +87,8 @@ s32 func_80429A24_de(void *window) {
     D_800E4F60->category = 0;
     func_8042A990_de();
     func_8042AFE0_de();
-    pending = &D_80154020[1];
-    *pending = 0;
-    pending[-1] = -1;
+    D_80154020.ready = 0;
+    D_80154020.value = -1;
     D_800E4F60->unk454 = func_8040EC30_de(window, 0x308);
     opacityItem = func_8040EC30_de(window, 0x309);
     opacityItem->alpha = 0x6E;

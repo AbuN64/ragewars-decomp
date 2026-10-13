@@ -11,7 +11,6 @@ extern AudioState D_801468A0;
 
 extern u8 *func_8024E6A0_de(void *arg0);
 extern void func_8024E6D8_de(u8 *arg0, Vec3 *arg1);
-extern void func_80271F34_de(Vec3 *result, Vec3 *left, Vec3 *right);
 extern s32 func_8025DE54_de(s16 arg0, s32 arg1, s32 arg2, s32 arg3,
                          s32 arg4, s32 arg5);
 

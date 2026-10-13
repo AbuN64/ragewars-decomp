@@ -1,3 +1,4 @@
+#include "shared/func_80286080_de_closed.h"
 #include "span_C76B0/data.h"
 
 #include "common/unused.h"
@@ -19,7 +20,6 @@ enum { HEADING_ITEM = 0x153, NAME_PHRASE = 0x69, TIME_PHRASE = 0x3D, TIME_ITEM =
 #endif
 
 extern struct ResultsHeadingScreen *D_800E4690;
-extern struct ResultsHeadingSettings D_801462C8;
 extern struct ResultsHeadingRecord D_80102B00[];
 extern struct ResultsHeadingCharacter D_800DFA6C[];
 extern char D_800DD9BC[];
@@ -34,7 +34,7 @@ extern void func_802A0C08_de(char *, char *, ...);
 extern struct ResultsHeadingStage *func_80425C70_de(s32, s32, s32);
 
 void func_80427B08_de(void) {
-    struct ResultsHeadingSettings *settings;
+    Shared_Game *settings;
     struct Label *item;
     s32 time;
     u8 best;
@@ -43,11 +43,11 @@ void func_80427B08_de(void) {
     /* the hub lookup returns its Item view; the Label view names the text pointer this unit writes */
     ((struct Label *) func_8040EC30_de(D_800E4690->window, HEADING_ITEM))->text = D_800E4690->heading;
     settings = &D_801462C8;
-    switch (settings->players) {
+    switch (settings->controllerMode) {
     case 1:
         func_802A025C_de(D_800E4690->heading, func_80411D78_de(NAME_PHRASE));
         func_8042E9B4_de(D_800E4690->heading, D_800DD9BC,
-                      D_800DFA6C[func_8041F140_de(settings->status[D_800E4690->record].kind)].name->text);
+                      D_800DFA6C[func_8041F140_de(settings->playerSettings[D_800E4690->record].character)].name->text);
         break;
     case 3:
         func_802A025C_de(D_800E4690->time, func_80411D78_de(TIME_PHRASE));

@@ -29,7 +29,6 @@ void func_8023EC54_de(void *, void *);
 void func_8023ECBC_de(void *, u16 *);
 f32 func_802417C4_de(f32 *);
 f32 func_8024D284_de(void *);
-f32 func_8024D398_de(void *);
 f32 func_8024E420_de(void *);
 f32 func_8024E464_de(void *);
 f32 func_80273F94_de(f32, f32);
@@ -43,8 +42,6 @@ s32 func_8023CFE0_de();                     /* extern */
 s32 func_8023D380_de();                         /* extern */
 extern Func80243A80Global *D_80103FCC;
 extern s32 D_80103FD0;
-extern Func80243A80State D_801000F0;
-extern s32 D_80100170;
 
 extern s32 D_801001D0;
 extern s32 D_80100338;

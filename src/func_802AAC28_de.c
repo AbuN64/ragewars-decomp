@@ -4,7 +4,6 @@
 
 
 
-extern s32 D_800E28A4;
 extern s32 D_800CD764_de;
 extern Gfx_func_802AAC28_de *D_80110634;
 

@@ -14,7 +14,6 @@
 
 
 
-extern Frame_func_802A7660_de *D_80140FE8_de;
 extern s32 D_800E28D0;
 extern s32 D_800E28D4;
 extern u8 D_801462DE;
@@ -25,12 +24,10 @@ extern s32 func_8040C474_de(void);
 
 extern void func_802A7AA4_de(void *mover);
 extern void func_802AAA54_de(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);
-extern void func_802A9234_de(u8 alpha);
 extern void func_802AAC28_de(s32 image, s32 frame, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 which);
 
 
 
-extern void func_802A8F28_de(s32 label, s32 x, s32 y, u8 alpha, s32 pad0, s32 pad1, f32 scaleX, f32 scaleY);
 
 void func_802A7660_de(Hud *hud, s32 which) {
     Bar *bar;
@@ -57,7 +54,7 @@ void func_802A7660_de(Hud *hud, s32 which) {
         return;
     }
     wide = func_8040C474_de() == 0 ? 0.75f : 1.0f;
-    scale = D_80140FE8_de->height / (f32) D_800E28D4;
+    scale = D_80140FE8_de.object->b / (f32) D_800E28D4;
     scale = scale * wide;
     switch (which) {
     case 1:

@@ -14,9 +14,7 @@ extern s32 D_8014561C;
 
 extern struct Shared_World D_8011FE88;
 extern char D_8013B364;
-extern struct Shared_Game D_801462C8;
 extern struct Shared_Net D_801468A0;
-extern u8 D_801462E5;
 
 extern s32 D_801468F4;
 
@@ -63,7 +61,6 @@ extern void func_80247004_de(void *);
 extern s32 func_8024B6A0_de(void *, s32, s32);
 
 extern f32 func_8024D284_de(void *);
-extern f32 func_8024D398_de(void *);
 extern f32 func_8024E420_de(void *);
 extern f32 func_8024E464_de(void *);
 extern s32 func_8024E62C_de(void *);
@@ -687,7 +684,7 @@ void func_80220ED4_de(SharedPlayer *player)
   player->views1C.view2E8_37.emitter.unk6C = player->views1C.view6C_9.yaw;
   player->views1C.view2E8_37.emitter.unk5C = player->views1C.view5C_6.unk5C;
   player->views5E8.view774_115.unk774 = player->views0.view8_3.pos;
-  if ((D_801462C8.flags & 8) || ((D_801462C8.split != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
+  if ((D_801462C8.flags & 8) || ((D_801462C8.rules.markers != 0) && (player->views5D8.view5D8_9.profile->counts != 0)))
   {
     player->views5E8.view5F4_13.ammo[0] = func_8022ACB8_de(player, 0, 0);
     player->views5E8.view5F4_13.ammo[1] = func_8022ACB8_de(player, 1, 0);

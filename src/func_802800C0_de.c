@@ -8,32 +8,24 @@
 
 /* These canonical scalar owners are immutable ROM rodata. */
 
-extern Shared_GlobalRuntimeState D_80145060;
 extern EffectTarget *D_80103FCC;
 extern EffectTarget D_801041F0;
 
 extern Vec3 D_801042C8;
 
-extern func_8028414C_S1 *D_80140FE8_de;
 extern s32 D_80140FF8;
 
-extern u8 D_801462E5;
 extern s32 D_800D297C;
 
 extern f32 D_800CD6B0;
 
 extern EffectBlock *func_8028FDB4_de(s32, s32);
 extern s32 func_80265550_de(EffectEntry *, s32, s32, s32 *, s32 *);
-extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
-extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
-extern void func_80271F9C_de(Vec3 *, Vec3 *, f32);
-extern void func_8027207C_de(Vec3 *);
 extern void func_80272898_de(void *, void *, void *);
 extern void func_80272B38_de(Matrix_func_80213CF8_de *, Vec3 *, Vec3 *);
 extern void func_80272CB0_de(Matrix_func_80213CF8_de *, f32, f32, f32);
 extern void func_80272C60_de(Matrix_func_80213CF8_de *, f32, f32, f32);
 extern void func_802727D8_de(Matrix_func_80213CF8_de *);
-extern void func_80274244_de(Vector4f *, Matrix_func_80213CF8_de *);
 extern void func_8024D4AC_de(Vector4f *, EffectActor *, Vec3);
 extern void func_80273198_de(Matrix_func_80213CF8_de *, Vec3 *);
 extern void func_80270910_de(Matrix_func_80213CF8_de *, Matrix_func_80213CF8_de *);
@@ -131,7 +123,7 @@ static inline void effect_spawn_aim(Effect_func_802800C0_de *effect, EffectTarge
         func_8026EF58_de(targetInv.m[0], targetMtx.m[0]);
         func_80272898_de(&targetInv, &aimTarget->pos, &effect->unk50);
         up = D_801042C8;
-        func_8027207C_de(&up);
+        func_8027207C_de(&up.x);
         func_80272B38_de(&targetInv, &up, vel);
         effect->unk134 = (s32) targetActor;
         effect->flags |= 0x10000;
@@ -185,7 +177,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     EffectRender *render;
     Vec3 *vel;
     EffectTarget *aimTarget;
-    func_8028414C_S1 *camera;
+    Object_func_804220A8_de *camera;
     f32 distSq;
     f32 scale;
     f32 depth;
@@ -312,8 +304,8 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     case 2:
                         if (!(source->flags & 0x100000)) {
                             if (D_80140FF8 == 1) {
-                                camera = D_80140FE8_de;
-                                func_80272898_de(&camera->unk220, &source->pos, &aimDelta);
+                                camera = D_80140FE8_de.object;
+                                func_80272898_de(&camera->particleViewMatrix, &source->pos, &aimDelta);
                                 depth = aimDelta.z;
                                 if (depth < 0.0f) {
                                     depth = -depth;
@@ -350,7 +342,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 } else {
                     quat = rotation;
                 }
-                func_80274244_de(&quat, &mtx);
+                func_80274244_de(&quat.x, &mtx.m[0][0]);
             }
             n = entry->params->countBase + effect_spawn_random_count(entry->params->countRange);
             for (j = 0; j < n; j++) {
@@ -420,7 +412,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     dir.x = func_80285630_de(entry->direction[0]);
                     dir.y = func_80285630_de(entry->direction[1]);
                     dir.z = func_80285630_de(entry->direction[2]);
-                    func_8027207C_de(&dir);
+                    func_8027207C_de(&dir.x);
                     if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                         func_80272898_de(&mtx, &dir, &dirOut);
                     } else {
@@ -428,7 +420,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        func_8027207C_de(&effect->direction);
+                        func_8027207C_de(&effect->direction.x);
                     } else {
                         effect->direction = dirOut;
                     }
@@ -475,16 +467,16 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 if (aim != 0) {
                     func_80271F68_de(&aimDelta, aim, &effect->pos);
-                    func_8027207C_de(&aimDelta);
+                    func_8027207C_de(&aimDelta.x);
                     func_80273198_de(&mtx, &aimDelta);
                     if (mode == -8) {
                         effect->direction = D_801002E0;
-                        func_8027207C_de(&effect->direction);
+                        func_8027207C_de(&effect->direction.x);
                     } else {
                         dir.x = func_80285630_de(entry->direction[0]);
                         dir.y = func_80285630_de(entry->direction[1]);
                         dir.z = func_80285630_de(entry->direction[2]);
-                        func_8027207C_de(&dir);
+                        func_8027207C_de(&dir.x);
                         if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
                             func_80272898_de(&mtx, &dir, &dirOut);
                         } else {

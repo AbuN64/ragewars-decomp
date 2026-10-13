@@ -21,7 +21,6 @@
 
 
 
-extern PatrolRouteSet D_8011FE88;
 extern RoutePatrolNodes D_8013B364;
 
 
@@ -45,7 +44,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
     Clip *route;
 
     if (bot->route == -1) {
-        PatrolRouteSet *routes = &D_8011FE88;
+        Shared_World *routes = &D_8011FE88;
 
         if (*routes->routeCount > 0) {
             bot->route = 0;

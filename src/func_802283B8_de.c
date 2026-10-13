@@ -128,7 +128,6 @@ void func_802283B8_de(World_func_802283B8_de *world) {
 
 extern f32 D_800D2988;
 extern s32 D_8014687C;
-extern s32 D_80146894;
 extern s32 func_80245798_de(void);
 extern void *func_8025CC6C_de(void);
 extern s32 func_8025CA24_de(void *, void *);
@@ -386,7 +385,6 @@ extern s32 func_80245798_de(void);
 extern void func_802A9234_de(s32);
 extern void func_802A822C_de(s32, f32, f32, f32, f32, s32, s32, s32);
 
-extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
 
 void func_80228AF4_de(void *arg0, ViewState *arg1) {
     f32 x;

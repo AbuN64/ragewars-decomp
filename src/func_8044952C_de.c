@@ -69,7 +69,6 @@ typedef struct RespawnPlayer {
 } RespawnPlayer;
 
 
-extern unsigned char D_801462E5;
 
 static inline int isOnline(void) {
     return D_801462E5;

@@ -13,19 +13,16 @@ extern char D_8011D8D0;
 
 extern void func_8024AA18_de(Actor_func_8024A7A0_de *actor, s32 arg, Lookup *params);
 extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
-extern void func_80253BBC_de(s32, s32);
 extern void func_8027892C_de(void *object, void *colors);
 extern void func_8026DA4C_de(void **value, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5);
 extern void func_80253754_de(s32, s32);
 extern s32 func_8026E340_de(void);
 extern s32 *func_8028FDB4_de(void *value, s32 index);
-extern f32 func_8024D284_de(Actor_func_8024A7A0_de *actor);
 extern void func_802800C0_de(void *system, Actor_func_8024A7A0_de *source, Actor_func_8024A7A0_de *owner,
                           s32 arg3, s32 arg4, s32 arg5, Vec3 position,
                           Vector4f rotation, Vec3 position2, s32 arg15,
                           s32 arg16, s32 arg17);
 extern Effect_func_8024A1D0_de *func_802830B8_de(void *system);
-extern f32 func_8024D398_de(Actor_func_8024A7A0_de *actor);
 
 static inline void spawn(Actor_func_8024A7A0_de *actor) {
     Vec3 position;

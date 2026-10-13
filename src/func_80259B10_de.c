@@ -13,9 +13,7 @@
  * in listener space is compared with the forward axis through func_802745D0_de and func_802B7130_de, given the
  * side's sign, and scaled around the centre by D_800C8FF8. */
 
-extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
 extern void func_80272BCC_de(void *, Vec3 *, Vec3 *);
-extern void func_8027207C_de(Vec3 *);
 
 
 
@@ -36,7 +34,7 @@ s16 func_80259B10_de(Vec3 *position, void *listener) {
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = ((func_802077F4_S2 *)(&D_800C3F00_de))->unk4;
-    func_8027207C_de(&local);
+    func_8027207C_de(&local.x);
     pan = func_802B7130_de(func_802745D0_de(local.x * forward.x + local.y * forward.y + local.z * forward.z));
     if (local.x == 0.0f) {
         return 0x40;

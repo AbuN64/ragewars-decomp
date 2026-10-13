@@ -5,7 +5,6 @@
 
 
 extern s32 func_802B9CB0_de(s32, s32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802B7A20_de(s32 arg0);
 extern void func_802B7AD8_de(s32 *arg0, s32 arg1);
 

@@ -1,3 +1,4 @@
+#include "shared/func_80286080_de_closed.h"
 #include "shared/world.h"
 #include "gfx.h"
 #include "common/types_1dc8418c21db.h"
@@ -23,7 +24,6 @@ extern char D_800C9468;
 extern char D_800C94A4_de;
 extern f32 D_800C9F64_de[];
 extern f32 D_800C9F74_de[];
-extern HudStatusShared_Settings D_801462C8;
 extern f32 D_800C9190_de[2];
 extern s32 D_800E28D0;
 extern s32 D_800E28D4;
@@ -46,7 +46,6 @@ s16 **func_8028BEAC_de(void *, s32, s32, s32);
 void func_802A6900_de(void *, Shared_HudPlayer *);
 void func_802A7AA4_de(void *);
 void func_802A822C_de(s32, f32, f32, f32, f32, s32, s32, s32);
-void func_802A8F28_de(char *, s32, s32, s32, s32, s32, f32, f32);
 void func_802A9234_de(s32);
 
 s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
@@ -210,7 +209,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
         }
         scaleX = sx * kx;
         scaleY = sy * ky;
-        if (D_801462C8.hudShown == 0) {
+        if (D_801462C8.local == 0) {
             n = player->lives;
             if (player->livesLast != n) {
                 func_802AA70C_de(&player->livesAnim, &D_800C93D8_de);
@@ -223,7 +222,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 func_802AAC28_de(0x1F6, 0, x, y, sx, sy, 1);
                 func_802A822C_de(player->lives, x + sx * 30.0f, y + sy * 24.0f, sx, sy, 1, 0, 0);
             }
-        } else if ((D_801462C8.trialKind == 1 || D_801462C8.trialKind == 4) && player->hideLives == 0) {
+        } else if ((D_801462C8.controllerMode == 1 || D_801462C8.controllerMode == 4) && player->hideLives == 0) {
             n = player->lifeCount - 1;
             if (n < 0) {
                 n = 0;
@@ -237,7 +236,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                 func_802AAC28_de(0x203, 0, x + scaleX * 40.0f, y + scaleY * 11.0f, scaleX, scaleY * 1.5f, 1);
             }
         }
-        if (hudRules()->hideHud == 0 && D_801462C8.hudShown != 0) {
+        if (hudRules()->hideHud == 0 && D_801462C8.local != 0) {
             if (hudRules()->teams != 0) {
                 if (player->owner->team != 0xFF) {
                     score = hudRules()->teamScores[player->owner->team];
@@ -609,7 +608,6 @@ void func_80220A80_de(Player_func_80220A80_de *player, Body_func_80220A80_de *bo
 extern f32 D_800D2988;
 extern struct D_800C7470_Pair D_800C27C0_de;
 extern struct D_800C7470_Pair D_800C78C0;
-extern MultiplayerOptions D_801462E5;
 extern s32 func_8022AC00_de(SharedPlayer_func_80220D44_de *p);
 void func_80220D44_de(SharedPlayer_func_80220D44_de *p) {
     f32 f0;
@@ -617,7 +615,6 @@ void func_80220D44_de(SharedPlayer_func_80220D44_de *p) {
     f32 cur;
     s32 cap;
     s32 val;
-    MultiplayerOptions *regen;
     if ((p->views122C.view122C_1.flags & 4) && p->views5E4.view5E4_2.health > 0) {
         cap = func_8022AC00_de(p);
         f20 = p->views5E4.view5E4_2.health + D_800D2988 * D_800C27C0_de.second;
@@ -629,13 +626,12 @@ void func_80220D44_de(SharedPlayer_func_80220D44_de *p) {
         p->views5E4.view5E4_2.health = val; p->views1C.view174_17.unk174 = val; p->views1C.view45C_31.unk45C = p->views5E4.view5E4_2.health;
         return;
     }
-    regen = &D_801462E5;
     f20 = p->views18.view18_3.body->speed;
-    if (regen->enabled == 0) return;
+    if (D_801462E5 == 0) return;
     if (f20 < D_800C78B8) return;
     cur = p->views5E4.view5E4_2.health;
     if (cur == 0.0f) return;
-    if (p->views5D8.view5D8_4.ctrl->flag != 0 && ((SessionState *)&regen->session)->paused != 0) return;
+    if (p->views5D8.view5D8_4.ctrl->flag != 0 && D_80145088.regenPaused != 0) return;
     f20 = cur + (s32)(f20 * D_800C78BC) * (D_800D2988 * D_800C78C0.first);
     p->views5E4.view5E4_2.health = RW_MIN_LT(f20, func_8022AC00_de(p));
 }

@@ -13,7 +13,6 @@
 
 
 
-extern char D_80145040[];
 extern Spinner D_800E63C0[];
 
 
@@ -33,7 +32,7 @@ void func_80445BC0_de(void *menu, Item_func_8043C9AC_de *item, void *arg2, Style
     s32 x;
     unsigned int bits;
 
-    i = func_8022A5A0_de(D_80145040, style->id);
+    i = func_8022A5A0_de(&D_80145040, style->id);
     if (D_800E63C0[i].timer <= *(&D_800E2810 + 1)) {
         width = func_80442DDC_de(menu, 0)->unk4 * (f32)D_800E28D0 * D_800DE7C8_de;
         x = (f32)item->x + (f32)D_800E63C0[i].value * width;

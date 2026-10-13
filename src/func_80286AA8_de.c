@@ -103,10 +103,7 @@ extern unsigned char D_8011AFC0[];
 
 
 
-extern struct Shared_SceneGlobal D_80145040;
 extern struct Shared_SceneResources D_801376F8;
-extern void *D_80145060;
-extern u8 D_801462E5;
 extern unsigned char D_801468A0[];
 
 
@@ -659,7 +656,7 @@ block_122:
             var_s0_4 += sizeof(struct Shared_SceneActorStride);
         } while (var_s1_3 < temp_s4);
     }
-    var_s1_4 = D_80145060;
+    var_s1_4 = D_80145060.actorList;
     if (var_s1_4 != 0) {
         
         temp_v0_2 = var_s1_4;
@@ -696,7 +693,7 @@ block_122:
     func_8020ABF0_de(temp_v0_2);
     (((struct Shared_func_80286A78_S1 *)(arg0))->unk0) = 4;
     func_80449E18_de(&D_80145040);
-    temp_s0_3 = &D_80145040.address48;
+    temp_s0_3 = &D_80145040.object;
     func_8044A6CC_de(temp_s0_3);
     func_80236874_de(temp_s0_3);
 }

@@ -1,3 +1,4 @@
+#include "shared/func_80286080_de_closed.h"
 #include "shared/world.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
@@ -37,8 +38,6 @@ s32 func_8021BFC4_de();
 
 extern s32 D_8011D8D0;
 extern s8 D_8013B364;
-extern s32 D_80145040;
-extern s32 D_801462C8;
 extern s32 D_801468A0;
 
  
@@ -109,7 +108,7 @@ void func_80219A40_de(struct Shared_ReactionActor *arg0, void *arg1, struct Shar
 
     var_s2 = 0;
     var_s3 = -1;
-    if ((func_80245798_de() == 0) && (func_80245784_de() == 0) && !(D_801462C8 & 1)) {
+    if ((func_80245798_de() == 0) && (func_80245784_de() == 0) && !(D_801462C8.flags & 1)) {
         temp_s1 = arg0->unk1D8;
         temp_a1 = temp_s1->unk14;
         temp_s6 = temp_s1->unk5E4 > 0;

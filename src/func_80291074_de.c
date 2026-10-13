@@ -7,10 +7,8 @@
 #include "common/data.h"
 
 extern f32 D_800D2988;
-extern char D_80145040;
 
 extern s32 D_8014286C;
-extern s32 D_800E28D0[];
 
 extern int func_8022A414_de(void *arg0);
 extern void func_802947C8_de(void *arg0, s32 arg1);
@@ -40,12 +38,12 @@ block_6:
             }
         }
     } else {
-        if (D_800E28D0[1] >= 0xDF) {
+        if (D_800E28D4 >= 0xDF) {
             D_80146CB8 -= D_800C53F0_de;
         } else {
             D_80146CB8 -= D_800C53F4_de;
         }
-        temp_f1 = (f32)D_800E28D0[1] * D_800C53F8_de;
+        temp_f1 = (f32)D_800E28D4 * D_800C53F8_de;
         if (D_80146CB8 <= -temp_f1) {
             temp_v1 = D_8011B9F0 + 1;
             D_8011B9F0 = temp_v1;

@@ -4,7 +4,6 @@
 
 
 extern void *D_800D5280;
-extern u64 func_802BBAAC_de(Node802C07B0 *node);
 
 
 int func_802BB6C0_de(Node802C07B0 *node, u64 arg1, u64 arg2, void *arg3, void *arg4) {

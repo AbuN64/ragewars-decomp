@@ -10,7 +10,6 @@ int func_802934F8_de(void);
 u8 *func_8043F290(void *);
 f32 func_804422F0_de(u8 *, f32, f32);
 char * func_80442A58_de(char *);
-extern u8 D_801462E5;
 extern s32 D_800E28D4;
 extern s32 D_800E28D0; /* unable to generate initializer: unknown type */
 

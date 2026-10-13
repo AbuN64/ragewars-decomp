@@ -10,7 +10,6 @@ extern u8 D_80154110[];
 
 extern void func_802B86F0_de(s32 arg0, s32 arg1);
 extern s32 func_802B9CB0_de(s32, s32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern u32 func_802B8C88_de(void *arg0);
 extern u32 func_80446D80_de(s32 arg0, s32 arg1);
 

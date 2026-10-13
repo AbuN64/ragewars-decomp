@@ -17,7 +17,6 @@ extern u8 *D_800D3DB4;
 extern u8 *D_800E4084[];
 extern u8 *D_800E4094[];
 extern u8 *D_800E40A4[];
-extern u8 *D_800E40B4[];
 extern u8 D_80152789;
 extern char D_800EEE10[];
 extern char D_800EEE18[];

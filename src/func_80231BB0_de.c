@@ -21,8 +21,6 @@ extern MatchRewardsRecord D_80102B00[];
 
 extern s32 D_800D30BC;
 
-extern s32 D_80145040;
-extern char D_80145088;
 
 extern s16 func_8022F96C_de(void *);
 extern s32 func_8022F55C_de(void *, s16);
