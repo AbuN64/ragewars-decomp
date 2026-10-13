@@ -5,6 +5,7 @@
 typedef struct View_func_8023B3F8_de FlareActor;
 #include "shared/lens_flare.h"
 extern const f32 D_800C34D8_de, D_800C34DC_de, D_800C34E4_de, D_800C34E8_de;
+extern const f32 D_800C85D0_de;
 extern const f32 D_800C34EC_de, D_800C34F0_de, D_800C34F4_de, D_800C34F8_de;
 extern const f32 D_800C34FC_de, D_800C3500_de, D_800C3504_de, D_800C3508_de;
 extern const f32 D_800C350C_de, D_800C3510_de, D_800C85D0;
