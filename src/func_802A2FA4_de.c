@@ -2,6 +2,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802A25C4.h"
 #include "types.h"
+#include "common/unused.h"
 
 
 
@@ -21,6 +22,7 @@ extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 
 
 s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
+    Actor_func_8024A7A0_de *object;
     Node_func_802A2FA4_de *node;
     Node_func_802A2FA4_de *next;
     f32 saved_step;
@@ -35,7 +37,7 @@ s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
         D_800D2988 = saved_step * D_800CD740_de;
     }
     if (state->flags & 1) {
-        D_800D2988 *= ((D_800C7470_Pair *)&D_800D2988)->second;
+        D_800D2988 *= (&D_800D2988)[1];
     }
     if (state->flags & 8) {
         state->retries++;
@@ -80,8 +82,9 @@ s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
         } while (node != 0);
     }
 
+    object = state->object;
     if (state->object != 0 && (state->flags & 1) &&
-        !(((func_80207F90_S1 *)(state->object))->unk100 & 0x200)) {
+        !(object->flags & 0x200)) {
         func_802A5FF0_de(state);
     }
     D_800D2988 = saved_step;

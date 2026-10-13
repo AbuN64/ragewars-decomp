@@ -1,6 +1,7 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_802B8DD0.h"
 #include "types.h"
+#include "common/unused.h"
 
 extern PiTransfer802BE820 *D_800D4380[];
 
@@ -60,6 +61,7 @@ extern void func_802BCF50_de(u32);
 
 DeviceState *func_802B9870_de(void) {
     DeviceState *state;
+    struct OSPiHandle_s *handle;
     u32 lock;
     DeviceState *previous;
     DeviceState **slot;
@@ -77,7 +79,8 @@ DeviceState *func_802B9870_de(void) {
     *(volatile u32 *)0xA460002C = 6;
     *(volatile u32 *)0xA4600030 = 2;
     state->queue = 0;
-    func_802A001C_de(&((func_80203908_S2 *)(state))->unk14, 0, 0x60);
+    handle = (void *)state;
+    func_802A001C_de(handle->transferInfo, 0, 0x60);
     lock = func_802BCF30_de();
     slot = &D_800D437C;
     previous = *slot;

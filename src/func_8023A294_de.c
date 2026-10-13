@@ -3,6 +3,7 @@
 #include "span_1000/code_8023A284.h"
 #include "span_1000/code_80255BEC.h"
 #include "types.h"
+#include "span_1000/code_802393F4.h"
 
 extern f32 D_800C359C_de;
 extern f32 D_800C35A0_de;
@@ -56,13 +57,15 @@ extern void func_80255ED8_de(void *, Message *);
 
 
 static inline Message *recycle(void *owner, void *pool) {
+    struct ScreenMessageOwner *messageOwner = owner;
+    struct ScreenMessagePool *messagePool = pool;
     Message *oldest;
 
-    oldest = ((func_80237E70_S1 *)(owner))->unkF24.head;
+    oldest = messageOwner->activeMessages.head;
     if (oldest != 0) {
         func_80239CE0_de(oldest);
-        func_80255ED8_de(&((func_80237E70_S1 *)(owner))->unkF24, oldest);
-        func_80255D14_de(&((func_80239760_S2 *)(pool))->unkE40, oldest);
+        func_80255ED8_de(&messageOwner->activeMessages, oldest);
+        func_80255D14_de(&messagePool->freeMessages, oldest);
     }
     return oldest;
 }
