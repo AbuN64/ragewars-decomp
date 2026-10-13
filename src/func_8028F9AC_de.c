@@ -18,12 +18,12 @@ void *func_8028F9AC_de(void *arg0) {
     if (arg0 == 0) {
         return 0;
     }
-    f1a = ((func_80205628_S3 *)(arg0))->unkC;
+    f1a = (s32)((struct OSScTask_s *)arg0)->framebuffer;
     if (f1a == D_80142C38) {
         return 0;
     }
     v2 = func_802BA310_de();
-    f1b = ((func_80205628_S3 *)(arg0))->unkC;
+    f1b = (s32)((struct OSScTask_s *)arg0)->framebuffer;
     if (f1b == (s32)v2) {
         return 0;
     }

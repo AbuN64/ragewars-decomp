@@ -3117,7 +3117,9 @@ struct Actor_func_8044A020_de;
 struct Part;
 /* unbake published declaration: published_c5de7d4a2612188892e15199 */
 struct Actor_func_8044A020_de {
-    char pad[0x5D8];
+    char pad[0x2E8];
+    char firstEffect[0x170]; /* 0x2E8 */
+    char secondEffect[0x180]; /* 0x458 */
     struct Part *part;
 };
 

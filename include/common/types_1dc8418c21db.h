@@ -4817,6 +4817,8 @@ struct Draw {
     char pad0[8];
     s32 allocationMode; /* 0x08: resource allocation request */
     void *model;
+    char reserved10[0x10];
+    IntrusiveList recycled; /* 0x20 */
 };
 
 struct Field_void_4;

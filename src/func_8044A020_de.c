@@ -19,6 +19,6 @@ extern void func_8021B1E4_de(struct Actor_func_8044A020_de *, s32, s32, s32);
 void func_8044A020_de(struct Actor_func_8044A020_de *actor, void *second) {
     actor->part->active = 1;
     func_80448EF4_de(actor, second, 1);
-    func_80214178_de(&((func_8044AC70_S1 *)(actor))->unk2E8, &((func_8044AC70_S1 *)(actor))->unk458, 2);
+    func_80214178_de(&actor->firstEffect, &actor->secondEffect, 2);
     func_8021B1E4_de(actor, D_80146898, 0, 1);
 }

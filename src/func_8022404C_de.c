@@ -9,7 +9,6 @@
 
 
 
-extern f32 D_800C7A38[];
 extern void func_80274870_de(void *, f32, f32);
 
 
@@ -23,5 +22,5 @@ void func_8022404C_de(struct Object *object) {
     } else {
         level = D_800C7A38[1];
     }
-    func_80274870_de(&((func_80224028_S1 *)(object))->unk740, level, 0.5f);
+    func_80274870_de(&object->effect740, level, 0.5f);
 }

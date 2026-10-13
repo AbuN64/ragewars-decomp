@@ -16,8 +16,8 @@ void *func_8044A738_de(struct Draw *owner) {
 
     if (object != 0) {
         func_8044A170_de(object);
-        func_80255ED8_de(&((func_8044B388_S1 *)(owner))->unkC, object);
-        func_80255D14_de(&((func_8044B388_S1 *)(owner))->unk20, object);
+        func_80255ED8_de(&owner->model, object);
+        func_80255D14_de(&owner->recycled, object);
     }
     return object;
 }
