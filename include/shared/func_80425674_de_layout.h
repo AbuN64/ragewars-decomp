@@ -38,7 +38,8 @@ struct Shared_Game {
      * enabled/slot bytes used by the existing slots array. */
     union {
         struct {
-            u8 unknown20[0x128];
+            f32 speedFactor; /* 0x20 */
+            u8 unknown24[0x124];
             Shared_GameSlot slots[8];
             u8 unknown5F8[0x34];
             s32 unk62C;

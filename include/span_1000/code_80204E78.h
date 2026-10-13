@@ -371,7 +371,9 @@ typedef union {
     Half5324 half;
 } Word5324;
 typedef struct {
-    char pad0[0x18];
+    char pad0[0x10];
+    s32 sound; /* full descriptor +0x24 */
+    char pad14[4];
     s32 unk18;
     s32 unk1C;
     Word5324 unk20;
@@ -446,7 +448,16 @@ typedef struct {
     u8 unused0[8]; Vec3 position; void *world; SpawnDispatchDefinition *definition;
     Vec3 rotation; u8 unused28[0x34]; Vector4f motion; f32 scale;
 } SpawnDispatchObject;
-typedef struct { u8 unused0[0x124]; s32 spawn, remaining; } SpawnDispatchOwner;
+typedef struct {
+    u8 unused0[0x2C];
+    void *callbacks;
+    u8 unused30[0x108 - 0x30];
+    void *update;
+    void *draw;
+    void *hit;
+    u8 unused114[0x10];
+    s32 spawn, remaining;
+} SpawnDispatchOwner;
 typedef struct { u8 unused0[0x1D]; u8 enabled; } SpawnDispatchConfig;
 extern s32 func_80222D64_de(void *arg0, s32 arg1);
 extern int func_8022ADB0_de(struct SharedPlayer *object, s32 arg1);

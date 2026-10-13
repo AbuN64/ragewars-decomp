@@ -8,6 +8,8 @@
 
 /* Player-transition records from origin/legacy shared headers. */
 
+typedef struct Shared_ActionSlot { s8 kind; s8 category; } Shared_ActionSlot;
+
 typedef struct Shared_ActorView Shared_ActorView;
 struct Shared_ActorView {
     u8 pad0[3];
@@ -38,13 +40,18 @@ struct Shared_ActorView {
     s32 spawn; /* 0x5EC */
     s32 field5F0; /* 0x5F0 */
     s16 ammo[3]; /* +0x5F4: src/func_8021B468.c */
-    char pad5FA[0x56];
+    char pad5FA[8];
+    Shared_ActionSlot actions[22]; /* 0x602 */
+    s16 selectedAction; /* 0x62E */
+    u8 pad630[0x20];
     s16 action; /* +0x650: src/func_8021B468.c */
     char pad652[0x46];
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[0x7C];
     f32 speed; /* +0x718: src/func_8021B468.c */
-    u8 pad71C[0x864 - 0x71C];
+    u8 pad71C[0x784 - 0x71C];
+    f32 speedFactor; /* 0x784 */
+    u8 pad788[0x864 - 0x788];
     s32 field864;
     s32 field868;
     u8 pad86C[0xE54 - 0x86C];
@@ -110,7 +117,8 @@ struct Shared_ControlView {
     char pad81[0xE];
     u8 transientFlag; /* +0x8F: src/func_8021B468.c */
     s8 resetFlag; /* +0x90: src/func_8021B468.c */
-    char pad91[0x3];
+    char pad91[2];
+    u8 difficulty; /* 0x93 */
     u8 germanActive; /* +0x94: src/func_8021B468.c */
 };
 typedef char Shared_ControlView_size_check[(sizeof(Shared_ControlView) == 0x95) ? 1 : -1];

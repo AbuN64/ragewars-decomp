@@ -25,7 +25,8 @@ struct Session_func_80293A20_de;
 struct Session_func_80293A20_de {
     char pad0[0x25580];
     char menu[0x48];
-    char players[0x26DB4 - 0x255C8];
+    char players[0x26DB0 - 0x255C8];
+    f32 transitionTime; /* 0x26DB0 */
     s32 previousMode;
     s32 mode;
     s32 target;
@@ -34,7 +35,8 @@ struct Session_func_80293A20_de {
     char pad26DC2[2];
     f32 timer;
     s32 enabled; /* 0x26DC8 */
-    char pad26DCC[0xC];
+    char pad26DCC[8];
+    s32 clockPaused; /* 0x26DD4 */
     s32 selector; /* 0x26DD8 */
     s32 selectionActive; /* 0x26DDC */
 };
@@ -79,6 +81,7 @@ extern void func_80294410_de(void);
 
 /* unbake published declaration: published_70847e5c55140189986406ff */
 extern float D_800C54AC_de;
+extern float D_800C54B0_de;
 
 struct IntegerState164;
 /* unbake published declaration: published_72149f8719a64717f7a52b19 */

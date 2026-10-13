@@ -75,7 +75,7 @@ void func_80293B28_de(void *arg0) {
 
     state = arg0;
     if (D_8014288C == 1) {
-        value = ((func_80293B0C_S1 *)(state))->unk26DB0.v0;
+        value = ((Session_func_80293A20_de *)state)->transitionTime;
         if (D_800C54A4_de < value) {
             if (D_800C54A8_de < value) {
                 D_8014288C = 0;
@@ -93,7 +93,7 @@ func_802A2224_de
                 func_80298368_de(2);
                 func_8040C428_de(0);
                 func_80293790_de(state, 1);
-                ((func_80293B0C_S1 *)(state))->unk26DB0.v1 = 0;
+                ((Session_func_80293A20_de *)state)->transitionTime = 0;
             } else if (D_8010F190 != 0) {
                 D_8014288C = 0;
                 
@@ -109,7 +109,7 @@ func_802A2224_de
 ();
                 func_80298368_de(2);
                 func_80293790_de(state, 8);
-                ((func_80293B0C_S1 *)(state))->unk26DB0.v1 = 0;
+                ((Session_func_80293A20_de *)state)->transitionTime = 0;
             }
         }
     }
@@ -139,20 +139,20 @@ void func_80293C34_de(void *arg0) {
     f32 t2;
     f32 t3;
 
-    if (((func_80293C20_S1 *)(arg0))->unk26DD4 == 0) {
+    if (((Session_func_80293A20_de *)arg0)->clockPaused == 0) {
         t1 = D_801468A0.x + D_800D2988;
         D_801468A0.x = t1;
         if (D_800C54AC_de <= t1) {
-            t2 = D_801468A0.y + ((func_802077F4_S2 *)(&D_800C54AC_de))->unk4;
+            t2 = D_801468A0.y + D_800C54B0_de;
             D_801468A0.x = t1 - D_800C54AC_de;
             D_801468A0.y = t2;
             if (D_800C54B4_de <= t2) {
-                t3 = D_801468A0.z + ((func_802077F4_S2 *)(&D_800C54AC_de))->unk4;
+                t3 = D_801468A0.z + D_800C54B0_de;
                 D_801468A0.y = t2 - D_800C54B4_de;
                 D_801468A0.z = t3;
                 if (D_800C54B4_de <= t3) {
                     D_801468A0.z = t3 - D_800C54B4_de;
-                    D_801468A0.w = D_801468A0.w + ((func_802077F4_S2 *)(&D_800C54AC_de))->unk4;
+                    D_801468A0.w = D_801468A0.w + D_800C54B0_de;
                 }
             }
         }

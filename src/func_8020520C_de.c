@@ -21,12 +21,12 @@ extern char D_002050A0;
 
 /** Initialize the dest record's vtable-like fields from source's flag byte. */
 void func_8020520C_de(void *source, void *dest) {
-    ((func_8020520C_S1 *)(dest))->unk2C = &D_800C8420_de;
-    ((func_8020520C_S1 *)(dest))->unk108 = &D_002052C4;
-    ((func_8020520C_S1 *)(dest))->unk10C = &D_00205628;
-    ((func_8020520C_S1 *)(dest))->unk110 = &D_002050A0;
-    ((func_8020520C_S1 *)(dest))->unk124 = 0;
-    ((func_8020520C_S1 *)(dest))->unk128 = ((func_8020520C_S2 *)(source))->unk3;
+    ((SpawnDispatchOwner *)dest)->callbacks = &D_800C8420_de;
+    ((SpawnDispatchOwner *)dest)->update = &D_002052C4;
+    ((SpawnDispatchOwner *)dest)->draw = &D_00205628;
+    ((SpawnDispatchOwner *)dest)->hit = &D_002050A0;
+    ((SpawnDispatchOwner *)dest)->spawn = 0;
+    ((SpawnDispatchOwner *)dest)->remaining = ((Actor_func_8024A7A0_de *)source)->field3;
 }
 
 extern s32 func_80285F58_de(void *, void *);
@@ -41,7 +41,7 @@ void func_8020524C_de(void *arg0, void *arg1) {
         func_80214178_de(arg0, arg1, 1);
     } else {
         func_80214178_de(arg0, arg1, 0);
-        ((func_80203C40_S1 *)(arg0))->unk100 |= 0x10000;
+        ((Actor_func_8024A7A0_de *)arg0)->flags |= 0x10000;
     }
 }
 
@@ -61,7 +61,7 @@ typedef struct Owner Owner;
 
 /** Return the nested record's field, or a fallback constant when zero. */
 int func_802052F8_de(void *arg0) {
-    int temp = ((struct func_80207B5C_S2 *) ((Owner *) arg0)->track)->unk24;
+    int temp = ((Hold5324 *)((Owner *)arg0)->track)->r.sound;
     if (temp != 0) {
         return temp;
     }
@@ -69,7 +69,7 @@ int func_802052F8_de(void *arg0) {
 }
 
 int func_80205314_de(void *arg0) {
-    return ((func_80205314_S2 *)((((func_80205314_S1 *)(arg0))->unk18)))->unk2C;
+    return ((Obj5324 *)arg0)->holder->r.unk18;
 }
 
 void func_80205324_de(Obj5324 *arg0, s32 *arg1) {

@@ -1,3 +1,6 @@
+#include "common/unused.h"
+#include "shared/gameplay_transition.h"
+#include "shared/func_80425674_de_layout.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8021CD70.h"
@@ -53,7 +56,7 @@ s32 func_802227F4_de(SharedPlayer_func_802227F4_de *player, void *arg1, s32 stat
 extern f32 D_800C2848_de[];
 extern f32 D_800C2850_de[];
 extern f32 D_800C7948;
-extern u8 D_801462C8[];
+
 extern s32 func_8024E62C_de(void *);
 
 
@@ -71,45 +74,45 @@ extern s32 func_8024E62C_de(void *);
 void func_80222908_de(void *arg0, void *arg1, void *ground) {
     u8 *options;
 
-    if (((ObjectLinks1454 *)(arg0))->unk_650 < 2) {
-        ((ObjectLinks1454 *)(arg0))->unk_784 = D_800C2848_de[0];
+    if ((u16)((Shared_ActorView *)arg0)->action < 2) {
+        ((Shared_ActorView *)arg0)->speedFactor = D_800C2848_de[0];
         return;
     }
-    ((ObjectLinks1454 *)(arg0))->unk_784 = ((MovementDescriptor *)(((ObjectLinks3C *)arg1)->unk_18))->speed;
-    if (((ObjectLinks1454 *)(arg0))->unk_1450 != 0) {
-        switch (((func_80209B64_S2 *)(((ObjectLinks1454 *)arg0)->unk_5D8))->unk93) {
+    ((Shared_ActorView *)arg0)->speedFactor = ((MovementDescriptor *)(((ObjectLinks3C *)arg1)->unk_18))->speed;
+    if (((Shared_ActorView *)arg0)->remote != 0) {
+        switch (((Shared_ActorView *)arg0)->controls->difficulty) {
         default:
-            ((func_80209B64_S2 *)(((ObjectLinks1454 *)arg0)->unk_5D8))->unk93 = 0;
+            ((Shared_ActorView *)arg0)->controls->difficulty = 0;
         case 0:
-            ((ObjectLinks1454 *)(arg0))->unk_784 *= D_800C2848_de[1];
+            ((Shared_ActorView *)arg0)->speedFactor *= D_800C2848_de[1];
             break;
         case 1:
-            ((ObjectLinks1454 *)(arg0))->unk_784 *= D_800C2850_de[0];
+            ((Shared_ActorView *)arg0)->speedFactor *= D_800C2850_de[0];
             break;
         case 2:
             break;
         }
-        if (((ObjectLinks1454 *)(arg0))->unk_1450 != 0) {
-            switch (((func_80209B64_S2 *)(((ObjectLinks1454 *)arg0)->unk_5D8))->unk93) {
+        if (((Shared_ActorView *)arg0)->remote != 0) {
+            switch (((Shared_ActorView *)arg0)->controls->difficulty) {
             default:
-                ((func_80209B64_S2 *)(((ObjectLinks1454 *)arg0)->unk_5D8))->unk93 = 0;
+                ((Shared_ActorView *)arg0)->controls->difficulty = 0;
             case 0:
-                ((ObjectLinks1454 *)(arg0))->unk_784 *= D_800C2850_de[1];
+                ((Shared_ActorView *)arg0)->speedFactor *= D_800C2850_de[1];
                 break;
             case 1:
-                ((ObjectLinks1454 *)(arg0))->unk_784 *= D_800C7948;
+                ((Shared_ActorView *)arg0)->speedFactor *= D_800C7948;
                 break;
             case 2:
                 break;
             }
         }
     }
-    options = D_801462C8;
+    options = (u8 *)&D_801462C8;
     if (options[0x1D] != 0) {
-        ((ObjectLinks1454 *)(arg0))->unk_784 *= ((func_8022CA04_S3 *)(options))->unk20;
+        ((Shared_ActorView *)arg0)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
     if (!(((ObjectLinks3C *)(arg1))->unk_38 & 3) && ground != 0
         && (func_8024E62C_de(arg1) != 0 || (((ObjectState54 *)(ground))->unk_52 & 0x800))) {
-        ((ObjectLinks1454 *)(arg0))->unk_784 *= ((ObjectState54 *)(ground))->unk_30;
+        ((Shared_ActorView *)arg0)->speedFactor *= ((ObjectState54 *)(ground))->unk_30;
     }
 }
