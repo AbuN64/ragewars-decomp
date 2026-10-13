@@ -1,3 +1,4 @@
+#include "shared/motion_step.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8023B9A0.h"
 #include "span_1000/code_8023EEF0.h"
@@ -23,8 +24,8 @@ extern void func_80243920_de(void *arg0);
 
 
 
-s32 func_8023D158_de(char *object) {
-    s32 *flags = ((func_8023D148_S1 *)(object))->unk40;
+s32 func_8023D158_de(ActorMotion *object) {
+    s32 *flags = &object->surface->flags;
     f32 magnitude;
     f32 var_f0;
     f32 var_f1;
@@ -33,69 +34,69 @@ s32 func_8023D158_de(char *object) {
     f32 var_f2;
     f32 var_f0_3;
 
-    func_80240C8C_de((char *)object + 0xB0);
-    func_80271F68_de(&((func_8023D148_S1 *)(object))->unk5C.v0,
-                  &((func_8023D148_S1 *)(object))->unk50.v0,
-                  &((func_8023D148_S1 *)(object))->unk44.v0);
+    func_80240C8C_de(&object->collisionState);
+    func_80271F68_de(&object->velocity,
+                  &object->end,
+                  &object->start);
     magnitude = func_802B72B0_de(
-        (((func_8023D148_S1 *)(object))->unk5C.v1 * ((func_8023D148_S1 *)(object))->unk5C.v1) +
-        (((func_8023D148_S2 *)(object))->unk60 * ((func_8023D148_S2 *)(object))->unk60) +
-        (((func_8023D148_S2 *)(object))->unk64 * ((func_8023D148_S2 *)(object))->unk64));
-    ((func_8023D148_S1 *)(object))->unk80 = magnitude;
-    if ((magnitude == 0.0f) && (((func_8023D148_S1 *)(object))->unk4 == 0)) {
+        (object->velocity.x * object->velocity.x) +
+        (object->velocity.y * object->velocity.y) +
+        (object->velocity.z * object->velocity.z));
+    object->distance = magnitude;
+    if ((magnitude == 0.0f) && (object->actorFlags == 0)) {
         return 0;
     }
 
-    if (((func_8023D148_S1 *)(object))->unk80 != 0.0f) {
-        func_80271F9C_de(&((func_8023D148_S1 *)(object))->unk68,
-                      &((func_8023D148_S1 *)(object))->unk5C.v0,
-                      D_800C3630_de / ((func_8023D148_S1 *)(object))->unk80);
+    if (object->distance != 0.0f) {
+        func_80271F9C_de(&object->direction,
+                      &object->velocity,
+                      D_800C3630_de / object->distance);
     } else {
-        ((func_8023D148_S1 *)(object))->unk68 = ((func_8023D148_S1 *)(object))->unk5C.v0;
+        object->direction = object->velocity;
     }
 
-    var_f0 = ((func_8023D148_S1 *)(object))->unk50.v1;
-    if (!(var_f0 <= ((func_8023D148_S1 *)(object))->unk44.v1)) {
-        var_f0 = ((func_8023D148_S1 *)(object))->unk44.v1;
+    var_f0 = object->end.x;
+    if (!(var_f0 <= object->start.x)) {
+        var_f0 = object->start.x;
     }
-    ((func_8023D148_S1 *)(object))->unk84 = var_f0;
-    var_f1 = ((func_8023D148_S1 *)(object))->unk50.v1;
-    if (!(((func_8023D148_S1 *)(object))->unk44.v1 <= var_f1)) {
-        var_f1 = ((func_8023D148_S1 *)(object))->unk44.v1;
+    object->boundsMin.x = var_f0;
+    var_f1 = object->end.x;
+    if (!(object->start.x <= var_f1)) {
+        var_f1 = object->start.x;
     }
-    ((func_8023D148_S1 *)(object))->unk90 = var_f1;
+    object->boundsMax.x = var_f1;
 
-    var_f0_2 = ((func_8023D148_S2 *)(object))->unk54;
-    if (!(var_f0_2 <= ((func_8023D148_S2 *)(object))->unk48)) {
-        var_f0_2 = ((func_8023D148_S2 *)(object))->unk48;
+    var_f0_2 = object->end.y;
+    if (!(var_f0_2 <= object->start.y)) {
+        var_f0_2 = object->start.y;
     }
-    ((func_8023D148_S1 *)(object))->unk88 = var_f0_2;
-    var_f1_2 = ((func_8023D148_S2 *)(object))->unk54;
-    if (!(((func_8023D148_S2 *)(object))->unk48 <= var_f1_2)) {
-        var_f1_2 = ((func_8023D148_S2 *)(object))->unk48;
+    object->boundsMin.y = var_f0_2;
+    var_f1_2 = object->end.y;
+    if (!(object->start.y <= var_f1_2)) {
+        var_f1_2 = object->start.y;
     }
-    ((func_8023D148_S1 *)(object))->unk94 = var_f1_2;
+    object->boundsMax.y = var_f1_2;
 
-    var_f2 = ((func_8023D148_S2 *)(object))->unk58;
-    if (!(var_f2 <= ((func_8023D148_S2 *)(object))->unk4C)) {
-        var_f2 = ((func_8023D148_S2 *)(object))->unk4C;
+    var_f2 = object->end.z;
+    if (!(var_f2 <= object->start.z)) {
+        var_f2 = object->start.z;
     }
-    ((func_8023D148_S1 *)(object))->unk8C = var_f2;
-    var_f0_3 = ((func_8023D148_S2 *)(object))->unk58;
-    if (!(((func_8023D148_S2 *)(object))->unk4C <= var_f0_3)) {
-        var_f0_3 = ((func_8023D148_S2 *)(object))->unk4C;
+    object->boundsMin.z = var_f2;
+    var_f0_3 = object->end.z;
+    if (!(object->start.z <= var_f0_3)) {
+        var_f0_3 = object->start.z;
     }
-    ((func_8023D148_S1 *)(object))->unk98 = var_f0_3;
+    object->boundsMax.z = var_f0_3;
 
-    ((func_8023D148_S1 *)(object))->unk9C = ((func_8023D148_S1 *)(object))->unk84;
-    ((func_8023D148_S1 *)(object))->unkA4 = ((func_8023D148_S1 *)(object))->unk90;
-    ((func_8023D148_S1 *)(object))->unkA8 = ((func_8023D148_S1 *)(object))->unk98;
-    ((func_8023D148_S1 *)(object))->unkA0 = ((func_8023D148_S1 *)(object))->unk8C;
+    object->horizontalBounds[0] = object->boundsMin.x;
+    object->horizontalBounds[2] = object->boundsMax.x;
+    object->horizontalBounds[3] = object->boundsMax.z;
+    object->horizontalBounds[1] = object->boundsMin.z;
 
     if (*flags & 0x200000) {
         func_8023F43C_de(object);
     }
-    if (((func_8023D148_S1 *)(object))->unk80 != 0.0f) {
+    if (object->distance != 0.0f) {
         if (*flags & 0x10000) {
             func_80240260_de(object);
         }

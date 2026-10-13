@@ -21,7 +21,6 @@
 
 
 
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32); /* alEvtqPostEvent */
    /* _handleEvent */
 extern s32 func_802B003C_de(ALEventQueue *, Message_func_802AF150_de *);       /* alEvtqNextEvent */
 
@@ -59,19 +58,19 @@ extern void func_802B2480_de(void *arg0, void *arg1);
 
 
 
-void func_802B2C48_de(void *arg0, s32 arg1) {
+void func_802B2C48_de(ALEventQueue *arg0, void *arg1) {
     s32 saved;
-    char *cur;
-    char *next;
+    ALEventListItem *cur;
+    ALEventListItem *next;
 
     saved = func_802BD170_de(1);
-    cur = ((func_8020C9B0_S1 *)(arg0))->unk8;
+    cur = (ALEventListItem *)arg0->allocList.next;
     if (cur != 0) {
         do {
-            next = ((func_802B7D18_S2 *)(cur))->unk0;
-            if (((func_802B7D18_S2 *)(cur))->unk10 == arg1) {
+            next = (ALEventListItem *)cur->node.next;
+            if (((ALSndpEvent *)&cur->evt)->common.state == arg1) {
                 if (next != 0) {
-                    ((func_80254D70_S2 *)(next))->unk8 = ((func_80254D70_S2 *)(next))->unk8 + ((func_802B7D18_S2 *)(cur))->unk8;
+                    next->delta = next->delta + cur->delta;
                 }
                 func_802B2450_de(cur);
                 func_802B2480_de(cur, arg0);
