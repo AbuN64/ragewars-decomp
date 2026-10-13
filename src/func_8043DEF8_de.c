@@ -15,8 +15,9 @@ extern void func_80264788_de(s32 arg);
 
 void func_8043DEF8_de(void *arg0, s32 arg1) {
     s32 val;
+    Menu_func_8043E1F8_de *menu = arg0;
 
-    val = ((func_80242278_S1 *)((((func_80228774_S1 *)(arg0))->unk20)))->unk4;
+    val = menu->widget->unk4;
     if (arg1 != 0) {
         func_80264770_de(val);
     } else {
