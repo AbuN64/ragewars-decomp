@@ -217,4 +217,12 @@ typedef struct FrontendInputSelector {
     u8 secondaryButton;
 } FrontendInputSelector;
 
+/* Texture animation metadata returned to material and texture consumers. */
+struct Shared_AnimFrame;
+typedef struct Shared_AnimInfo {
+    s32 count;
+    s32 unk4;
+    struct Shared_AnimFrame *frame;
+} Shared_AnimInfo;
+
 #endif
