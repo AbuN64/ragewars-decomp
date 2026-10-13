@@ -136,20 +136,9 @@ found:
     k = t * (t * D_800C3170_de) * t + t * (t * D_800C3174_de);
 
     for(i=0;i<4;i++) {
-    if(D_800C3178_de < ((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i]))) goto color_high;
-    if(((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i]))<0.0f) {output=0; goto color_done;}
-    if(D_800C3178_de < ((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i]))) goto color_high;
-    output=unsignedInt(((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i])),&D_800C317C_de); goto color_done;
-color_high: output=255;
-color_done: self->color[i]=output;
+self->color[i] = D_800C3178_de < ((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i])) ? 255 : (((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i])) < 0.0f ? 0 : D_800C3178_de < ((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i])) ? 255 : (u32)((f32)self->secondaryColor[i] + k * ((f32)target[i] - (f32)self->secondaryColor[i])));
     }
-    if(D_800C3198_de < (unsignedFloat(self->previousN,&D_800C3180_de) + k * (unsignedFloat(endN,&D_800C3188_de)-unsignedFloat(self->previousN,&D_800C3190_de)))) goto clamp_n;
-    if((unsignedFloat(self->previousN,&D_800C31A0_de) + k * (unsignedFloat(endN,&D_800C31A8_de)-unsignedFloat(self->previousN,&D_800C31B0_de))) < 0.0f) { output=0; goto store_n; }
-clamp_n:
-    if(D_800C31D0_de < (unsignedFloat(self->previousN,&D_800C31B8_de) + k * (unsignedFloat(endN,&D_800C31C0_de)-unsignedFloat(self->previousN,&D_800C31C8_de)))) { output=0x3E3; goto store_n; }
-    output=unsignedInt(unsignedFloat(self->previousN,&D_800C31D8_de) + k * (unsignedFloat(endN,&D_800C31E0_de)-unsignedFloat(self->previousN,&D_800C31E8_de)),&D_800C31F0_de);
-store_n:
-    self->blendN=output;
+    self->blendN = !(D_800C3198_de < (unsignedFloat(self->previousN,&D_800C3180_de) + k * (unsignedFloat(endN,&D_800C3188_de)-unsignedFloat(self->previousN,&D_800C3190_de)))) && (unsignedFloat(self->previousN,&D_800C31A0_de) + k * (unsignedFloat(endN,&D_800C31A8_de)-unsignedFloat(self->previousN,&D_800C31B0_de))) < 0.0f ? 0 : (D_800C31D0_de < (unsignedFloat(self->previousN,&D_800C31B8_de) + k * (unsignedFloat(endN,&D_800C31C0_de)-unsignedFloat(self->previousN,&D_800C31C8_de))) ? 0x3E3 : (u32)(unsignedFloat(self->previousN,&D_800C31D8_de) + k * (unsignedFloat(endN,&D_800C31E0_de)-unsignedFloat(self->previousN,&D_800C31E8_de))));
 
     if (self->blendOffset > 0.0f) {
         endA += self->blendOffset * D_800C31F4_de;
