@@ -24,71 +24,76 @@ static inline void initScale35AE0(Racer *v) { v->screenScaleX=D_800C32B8_de; v->
 /* Set projection, viewport and lighting, then draw the view's clear rectangle and fog. */
 void func_80235AE0_de(Racer *view) {
     struct { u8 red, green, blue; } rgb;
-    s32 ulx, uly, lrx, lry, flag, color, near, far, denom;
+    s16 ulx, uly, lrx, lry;
+    s32 flag, near, far, denom;
+    u32 color;
     s16 vx, vy;
+    s32 maxx, maxy;
     f32 sx, sy, width, height;
     Gfx *cmd;
     Gfx **dl = &D_80110634;
     Frame *buffer;
-    gDPPipeSync(D_80110634++);
-    gSPDisplayList(D_80110634++, &D_800CBCC0);
-    gSPDisplayList(D_80110634++, &D_800CBCF0_de);
-    width=view->viewportWidth; height=view->viewportHeight; sx=view->viewportScaleX; sy=view->viewportScaleY;
-    initScale35AE0(view); view->screenScaleX=sx; view->screenScaleY=sy;
+    { Gfx **setup = &D_80110634;
+    gDPPipeSync((*setup)++);
+    gSPDisplayList((*setup)++, &D_800CBCC0);
+    gSPDisplayList((*setup)++, &D_800CBCF0_de);
+    sx=view->viewportScaleX; width=view->viewportWidth;
+    maxx=(u16)D_800E28D0-1; maxy=(u16)D_800E28D4-1;
+    initScale35AE0(view); view->screenScaleX=sx;
     ulx=(s32)view->viewportX; uly=(s32)view->viewportY;
+    sy=view->viewportScaleY; height=view->viewportHeight; view->screenScaleY=sy;
     lrx=(s32)(view->viewportX+width); lry=(s32)(view->viewportY+height);
-    if (D_800E28D0-1 < (s16)lrx) lrx=(u16)D_800E28D0-1;
+    vx=(s16)(s32)((width+width)*sx); vy=(s16)(s32)((height+height)*sy);
+    if (D_800E28D0-1 < (s16)lrx) lrx=maxx;
     if ((s16)ulx<0) ulx=0;
     if ((s16)uly<0) uly=0;
-    if (D_800E28D4-1 < (s16)lry) lry=(u16)D_800E28D4-1;
+    if (D_800E28D4-1 < (s16)lry) lry=maxy;
     buffer=D_8011BDC0;
-    gSPMatrix(D_80110634++, view->projectionMatrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPMoveWord(D_80110634++, G_MW_PERSPNORM, 0, view->perspectiveNorm);
-    vx=(s16)(s32)((width+width)*sx); vy=(s16)(s32)((height+height)*sy);
+    gSPMatrix((*setup)++, view->projectionMatrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPMoveWord((*setup)++, G_MW_PERSPNORM, 0, view->perspectiveNorm);
     view->viewports[D_800D297C].vscale[0]=vx; view->viewports[D_800D297C].vscale[1]=vy;
     view->viewports[D_800D297C].vtrans[0]=(s16)(s32)((vx*D_800C32BC_de+view->viewportX)*D_800C32C0_de);
     view->viewports[D_800D297C].vtrans[1]=(s16)(s32)((vy*D_800C32BC_de+view->viewportY)*D_800C32C0_de);
-    gSPMoveMem(D_80110634++, G_MV_VIEWPORT, 0, 16, &view->viewports[D_800D297C]);
-    gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (s32)((s16)ulx*D_800C32C0_de), (s32)((s16)uly*D_800C32C0_de), (s32)((s16)lrx*D_800C32C0_de), (s32)((s16)lry*D_800C32C0_de));
-    gSPMoveMem(D_80110634++, G_MV_LIGHT, 0, 16, &view->lights[D_800D297C][0]);
-    gSPMoveMem(D_80110634++, G_MV_LIGHT, 24, 16, &view->lights[D_800D297C][4]);
+    gSPMoveMem((*setup)++, G_MV_VIEWPORT, 0, 16, &view->viewports[D_800D297C]);
+    gDPSetScissorFrac((*setup)++, G_SC_NON_INTERLACE, (s32)((s16)ulx*D_800C32C0_de), (s32)((s16)uly*D_800C32C0_de), (s32)((s16)lrx*D_800C32C0_de), (s32)((s16)lry*D_800C32C0_de));
+    gSPMoveMem((*setup)++, G_MV_LIGHT, 0, 16, &view->lights[D_800D297C][0]);
+    gSPMoveMem((*setup)++, G_MV_LIGHT, 24, 16, &view->lights[D_800D297C][4]);
     func_8026E330_de(view->effect);
     if (view!=&D_80141008) func_80296004_de(view->effect);
+    }
     flag=0; func_8026D88C_de(); func_80295FF4_de();
     gDPSetTextureFilter((*dl)++, G_TF_BILERP);
     if(func_802A23B4_de()!=0) flag=func_80299958_de()!=2;
     if(view!=&D_80141008 || D_80140FF8==0 || flag!=0) {
+        Gfx **clearDl = &D_80110634;
         func_8026925C_de(0x14);
-        gDPPipeSync((*dl)++);
+        gDPPipeSync((*clearDl)++);
         func_80291BE8_de(D_8011FAC0,(s16)ulx,(s16)lrx,(s16)uly,(s16)lry,view->effect);
-        gDPSetCycleType((*dl)++, G_CYC_FILL);
+        gDPSetCycleType((*clearDl)++, G_CYC_FILL);
         if(D_801462C8&0x4000) {rgb.red=0;rgb.green=0;rgb.blue=0;} else {rgb.red=view->hit&0xF8;rgb.green=view->boost&0xF8;rgb.blue=view->spin&0xF8;}
         if(func_80245798_de()!=0) { color=func_80245AF8_de(); if(color!=0xFF00) {rgb.blue=color>>16;rgb.green=color>>8;rgb.red=color;} }
-        gSPGeometryMode((*dl)++, 0, G_FOG);
+        gSPGeometryMode(D_80110634++, 0, G_FOG);
         if(view->effect!=0) {
-            gDPSetFogColor((*dl)++, 0, 0, 0, 255);
-            gSPMoveWord((*dl)++, G_MW_FOG, 0, 0x64009D00);
+            gDPSetFogColor(D_80110634++, 0, 0, 0, 255);
+            gSPMoveWord(D_80110634++, G_MW_FOG, 0, 0x64009D00);
         } else {
-            gDPSetFogColor((*dl)++, rgb.red, rgb.green, rgb.blue, 255);
-            cmd=(*dl);(*dl)++;
+            gDPSetFogColor(D_80110634++, rgb.red, rgb.green, rgb.blue, 255);
             far=view->fogNear;denom=1000-far;near=(500-far)<<8;
-            gSPMoveWord(cmd, G_MW_FOG, 0, ((0x1F400/denom)<<16)|((near/denom)&0xFFFF));
+            gSPMoveWord(D_80110634++, G_MW_FOG, 0, ((0x1F400/denom)<<16)|((near/denom)&0xFFFF));
         }
-        gDPSetColorImage((*dl)++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, buffer->colorImage);
-        if(view->effect!=0) {gDPSetFillColor((*dl)++, 0x10001);}
+        gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, buffer->colorImage);
+        if(view->effect!=0) {gDPSetFillColor(D_80110634++, 0x10001);}
         else {
-            cmd=(*dl);(*dl)++;
-            color=((rgb.red<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E);
-            gDPSetFillColor(cmd, ((color|1)<<16)|1|color);
+            gDPSetFillColor(D_80110634++, (((((rgb.red<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E))|1)<<16)|1|(((rgb.red<<8)&0xF800)|((rgb.green<<3)&0x7C0)|((rgb.blue>>2)&0x3E)));
         }
         if(view!=&D_80141008 || D_80146878==3) {
-            gDPFillRectangle((*dl)++, ulx, uly, lrx, lry);
+            gDPFillRectangle(D_80110634++, ulx, uly, lrx, lry);
         }
     }
-    gDPPipeSync((*dl)++);
+    gDPPipeSync(D_80110634++);
     func_8026D914_de(0);
-    gDPSetColorDither((*dl)++, G_CD_BAYER);
-    gDPSetCycleType((*dl)++, G_CYC_2CYCLE);
+    gDPSetColorDither(D_80110634++, G_CD_BAYER);
+    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     if(view!=&D_80141008)func_802659E0_de(view);
-    gDPPipeSync((*dl)++);
+    gDPPipeSync(D_80110634++);
 }
