@@ -17,6 +17,17 @@ struct Entity_func_80233C88_de;
 /* unbake published declaration: published_0eb5652f523dbefb30d5ca29 */
 typedef struct Entity_func_80233C88_de Entity_func_80233C88_de;
 
+/* Color keyframe payload in a 0x64-byte model-section record. */
+typedef struct ColorBlendRecord {
+    u8 color[4];
+    u8 heldColor[4];
+    u32 n, heldN;
+    f32 a, b, heldA, heldB;
+    u8 unknown20[4];
+    f32 period;
+    u8 unknown28[0x64 - 0x28];
+} ColorBlendRecord;
+
 struct Racer;
 /* unbake published declaration: published_155a78e586cc4ec08c11b00c */
 typedef struct Racer Racer;
@@ -32,14 +43,26 @@ typedef struct AxisWave AxisWave;
 struct Entity_func_80233C88_de;
 /* unbake published declaration: published_19267424c2c0e45e980251e7 */
 struct Entity_func_80233C88_de {
-    char pad0[0x29C];
+    char pad0[0x58];
+    u16 *key;
+    f32 blendOffset;
+    char pad60[0x29C - 0x60];
     f32 width;
     f32 height;
     f32 x;
     f32 y;
-    char pad2AC[0x520 - 0x2AC];
+    char pad2AC[0x518 - 0x2AC];
+    s32 lastKey;
+    f32 blendTime;
     u8 color[4];
     u8 secondaryColor[4];
+    f32 blendA;
+    f32 previousA;
+    f32 blendB;
+    f32 previousB;
+    char pad538[4];
+    u32 blendN;
+    u32 previousN;
 };
 
 struct func_8023919C_S1;
