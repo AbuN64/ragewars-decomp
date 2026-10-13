@@ -30,11 +30,11 @@ extern void func_80255ED8_de(void *, Message *);
 static inline Message *recycle(void *owner, void *pool) {
     Message *oldest;
 
-    oldest = ((func_80237E70_S1 *)(owner))->unkF24.head;
+    oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
         func_80239CE0_de(oldest);
-        func_80255ED8_de(&((func_80237E70_S1 *)(owner))->unkF24, oldest);
-        func_80255D14_de(&((func_80239760_S2 *)(pool))->unkE40, oldest);
+        func_80255ED8_de(&((struct ScreenMessageOwner *)owner)->activeMessages, oldest);
+        func_80255D14_de(&((struct ScreenMessagePool *)pool)->freeMessages, oldest);
     }
     return oldest;
 }

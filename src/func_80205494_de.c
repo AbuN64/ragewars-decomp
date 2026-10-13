@@ -1,3 +1,4 @@
+#include "span_1000/code_80203F04.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80204E78.h"
@@ -7,13 +8,13 @@
 
 /** Clear two flags when the controlling byte and nested flag are set. */
 void func_80205494_de(void *arg0, void *arg1) {
-    char *nested = ((func_80205494_S1 *)(arg0))->unk18;
-    if (((func_80205494_S2 *)(arg1))->unkCB != 0 &&
-        (((func_80205494_S3 *)(nested))->unk14 & 0x4) != 0) {
-        unsigned int flags = ((func_80205494_S1 *)(arg0))->unk100;
+    char *nested = ((BreakableHitContext *)arg0)->unk_18;
+    if (((ObjectStateCC *)arg1)->unk_CB != 0 &&
+        (((struct Descriptor *)nested)->damage.flags & 0x4) != 0) {
+        unsigned int flags = ((BreakableHitContext *)arg0)->unk_100;
         flags &= ~0x2000;
         flags &= ~0x100;
-        ((func_80205494_S1 *)(arg0))->unk100 = flags;
+        ((BreakableHitContext *)arg0)->unk_100 = flags;
     }
 }
 

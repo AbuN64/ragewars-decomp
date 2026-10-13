@@ -49,7 +49,7 @@ static inline void find(s32 key, Request_func_80252774_de **out) {
 static inline void release(s32 node) {
     func_80255ED8_de(&D_80100570, (void *)node);
     if (((Node_func_80252774_de *)node)->flags & 0x1000) {
-        func_80255ED8_de(&((func_80203908_S2 *)(&D_80100570))->unk14, (void *)node);
+        func_80255ED8_de(&((IntrusiveList *)&D_80100570)[1], (void *)node);
     }
     if (*(&D_80100570 - 2) == node) {
         *(&D_80100570 - 2) = 0;
