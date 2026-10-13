@@ -7,7 +7,7 @@
 
 
 extern s32 D_800D297C;
-extern void func_80272CB0_de(void *, s32, s32, s32);
+extern void func_80272CB0_de(void *, f32, f32, f32);
 extern void func_802727D8_de(void *);
 extern void func_802A31E8_de(Node438C *, Node438C *, void *, void *);
 extern void func_8027027C_de(void *, s32);
@@ -45,11 +45,11 @@ void func_802A339C_de(void *arg0, void *arg1) {
         if (first == 0) {
             goto no_pair;
         }
-        if (first->x != next->x || first->y != next->y) {
+        if (first->position.x != next->position.x || first->position.y != next->position.y) {
             goto boundary;
         }
 z_test:
-        if (a->z != b->z) {
+        if (a->position.z != b->position.z) {
             goto boundary;
         }
         a = b;
@@ -57,7 +57,7 @@ z_test:
         if (a == 0) {
             goto no_pair;
         }
-        if (b == 0 || a->x != b->x || a->y != b->y) {
+        if (b == 0 || a->position.x != b->position.x || a->position.y != b->position.y) {
             goto boundary;
         }
         goto z_test;
@@ -68,9 +68,9 @@ boundary:
         }
 no_pair:
         {
-            matrix[12] = first->x;
-            matrix[13] = first->y;
-            matrix[14] = first->z;
+            matrix[12] = first->position.x;
+            matrix[13] = first->position.y;
+            matrix[14] = first->position.z;
         }
 apply:
         func_8027027C_de(matrix, (s32)first->matrices[D_800D297C]);
@@ -78,8 +78,8 @@ apply:
         next = first->next;
     }
 
-    matrix[12] = first->x;
-    matrix[13] = first->y;
-    matrix[14] = first->z;
+    matrix[12] = first->position.x;
+    matrix[13] = first->position.y;
+    matrix[14] = first->position.z;
     func_8027027C_de(matrix, (s32)first->matrices[D_800D297C]);
 }

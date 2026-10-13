@@ -65,7 +65,7 @@ void func_8021C9D8_de(void *arg0, void *arg1) {
             (((Shared_ActorView *)arg0)->controls->transientFlag != 0)) {
             value = D_800CE47C;
         } else {
-            value = D_800CE430[((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg0)->definition)->character];
+            value = D_800CE430[((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg0)->definition)->body.header.character];
             ((Actor_func_8024A7A0_de *)arg0)->field3 =
                 ((Shared_ActorView *)arg0)->controls->playerId;
         }

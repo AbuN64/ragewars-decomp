@@ -58,7 +58,7 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->flags & 1) {
+        if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->body.header.flags & 1) {
             if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0x26) {
                 return 0;
             }
@@ -96,7 +96,7 @@ s32 func_8022C7F8_de(void *arg0, void *arg1) {
         field6E4 = ((Actor_func_8022D290_de *)arg0)->unk_0x06E4;
         if (!(D_800C2D5C_de < field6E4)) {
             if (!(((Actor_func_8024A7A0_de *)arg1)->motionState & 0xC0000)) {
-                if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->flags & 2) {
+                if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->body.header.flags & 2) {
                     if ((((Actor_func_8022D290_de *)arg0)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)arg0)->unk_0x11D8 <= 0.0f)) {
                         func_802227F4_de(arg0, arg1, 5);
                         return 1;

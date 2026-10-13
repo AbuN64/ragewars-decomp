@@ -40,27 +40,27 @@ void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 a
     level2 = (&D_800C2100_de)[1];
     first = 0;
     second = 0;
-    ((func_802138F0_S1 *)(voice))->unkC = -1;
-    ((func_802138F0_S1 *)(voice))->unk100 = 0;
-    ((func_802138F0_S1 *)(voice))->unk102 = -1;
+    ((Dest *)voice)->handle = -1;
+    ((Dest *)voice)->pending = 0;
+    ((Dest *)voice)->channel = -1;
     pitch = level;
     if (def != 0) {
-        send = ((func_802138F0_S2 *)(def))->unk12;
-        first = ((func_802138F0_S2 *)(def))->unkE;
-        second = ((func_802138F0_S2 *)(def))->unk10;
-        switch (*(s32 *) def) {
+        send = ((ActorDefinitionHeader *)def)->send;
+        first = ((ActorDefinitionHeader *)def)->first;
+        second = ((ActorDefinitionHeader *)def)->second;
+        switch (((ActorDefinitionHeader *)def)->kind) {
         case 1:
-            raw = ((func_802138F0_S2 *)(def))->unk18.v0;
+            raw = ((ActorHealthDefinition *)def)->health;
             wide = raw;
             if (raw < 0) {
                 wide += D_800C2108_de;
             }
-            level = ((func_802138F0_S2 *)(def))->unk41;
-            level2 = ((func_802138F0_S2 *)(def))->unk40;
+            level = ((MovementDescriptor *)def)->level;
+            level2 = ((MovementDescriptor *)def)->secondaryLevel;
             pitch = wide;
             break;
         case 4:
-            raw = ((func_802138F0_S2 *)(def))->unk18.v0;
+            raw = ((ActorHealthDefinition *)def)->health;
             wide = raw;
             if (raw < 0) {
                 wide += D_800C2110_de;
@@ -68,10 +68,10 @@ void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 a
             pitch = wide;
             break;
         case 7:
-            pitch = ((func_802138F0_S2 *)(def))->unk18.v1;
+            pitch = ((PickupHealthDefinition *)def)->health;
             break;
         }
-        if (*(s32 *) def == 1 || *(s32 *) def == 4) {
+        if (((ActorDefinitionHeader *)def)->kind == 1 || ((ActorDefinitionHeader *)def)->kind == 4) {
             switch (D_801462D0) {
             case 8:
                 scaled = pitch * D_800C2118_de;
@@ -91,9 +91,9 @@ void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 a
     out[3] = send;
     out[1] = first;
     out[2] = second;
-    ((func_802138F0_S1 *)(voice))->unk4 = pitch;
-    ((func_802138F0_S1 *)(voice))->unk10 = (s32) level;
-    ((func_802138F0_S1 *)(voice))->unkCC = (s32) level2;
-    ((func_802138F0_S1 *)(voice))->unk4 <<= 8;
-    ((func_802138F0_S1 *)(voice))->unk8 = ((func_802138F0_S1 *)(voice))->unk4;
+    ((Dest *)voice)->health = pitch;
+    ((Dest *)voice)->level = (s32) level;
+    ((Dest *)voice)->secondaryLevel = (s32) level2;
+    ((Dest *)voice)->health <<= 8;
+    ((Dest *)voice)->maxHealth = ((Dest *)voice)->health;
 }

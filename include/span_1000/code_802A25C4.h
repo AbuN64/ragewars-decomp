@@ -40,12 +40,10 @@ struct Node438C {
     u8 pad0[4];
     struct Node438C *next;
     u8 pad8[8];
-    f32 x;
-    f32 y;
-    f32 z;
-    s32 a;
-    s32 b;
-    s32 c;
+    Vec3 position;
+    f32 a;
+    f32 b;
+    f32 c;
     f32 matrices[2][16]; /* 0x28: double-buffered transforms */
 };
 

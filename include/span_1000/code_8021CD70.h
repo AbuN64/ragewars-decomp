@@ -7408,13 +7408,34 @@ typedef struct ObjectLinks1454 ObjectLinks1454;
 
 struct MovementDescriptor;
 /* unbake published declaration: published_433f32dd85eb3507a1971b58 */
-struct MovementDescriptor {
-    char pad0[0xC];
+/* The definition kind selects the word-health or halfword-health payload. */
+typedef struct ActorDefinitionHeader {
+    s32 kind;
+    s32 gate;
+    u8 pad8[4];
     s16 character;
-    char padE[6];
+    s8 first;
+    u8 padF;
+    s8 second;
+    u8 pad11;
+    s8 send;
+    u8 pad13;
     s32 flags;
-    char pad18[4];
+} ActorDefinitionHeader;
+typedef struct ActorHealthDefinition {
+    ActorDefinitionHeader header;
+    s32 health;
+} ActorHealthDefinition;
+typedef struct PickupHealthDefinition {
+    ActorDefinitionHeader header;
+    s16 health;
+} PickupHealthDefinition;
+struct MovementDescriptor {
+    ActorHealthDefinition body;
     f32 speed;
+    u8 pad20[0x20];
+    u8 secondaryLevel;
+    u8 level;
 };
 
 struct Player_func_80220A80_de;
