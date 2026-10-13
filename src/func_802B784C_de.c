@@ -8,12 +8,13 @@ extern char D_8014D470;
 
 
 void func_802B784C_de(void) {
+    OSPifRam *ram = (OSPifRam *)&D_8014D470;
     s32 var_v0;
     u8 *var_v1;
     s32 val;
 
     var_v1 = &D_8014D470;
-    ((func_8023EBEC_S1 *)(var_v1))->unk3C = 1;
+    ram->pifstatus = 1;
     val = 0xFD;
     var_v0 = 3;
     do {

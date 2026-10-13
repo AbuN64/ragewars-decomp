@@ -5,12 +5,13 @@
 
 
 int func_80259AB8_de(void *arg0, int arg1) {
-    void *node = ((func_80259AD8_S1 *)(arg0))->unk8;
-    void *sentinel = &((func_80259AD8_S1 *)(arg0))->unk4;
+    struct Owner_func_80259918_de *owner = arg0;
+    struct Node_func_80259918_de *node = owner->activeNext;
+    void *sentinel = &owner->activePrev;
     if (node != sentinel) {
         do {
-            int value = ((func_80259AD8_S2 *)(node))->unkB0;
-            node = ((func_80259AD8_S2 *)(node))->unk4;
+            int value = node->key;
+            node = node->next;
             if (value == arg1) {
                 return 1;
             }
