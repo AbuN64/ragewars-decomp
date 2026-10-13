@@ -1,3 +1,0 @@
-const unsigned int D_auto_src_rw_tail_802A88F0_CBEB4_us_rev1[8] = {
-    0x41C00000, 0x41400000, 0x40C00000, 0x41800000, 0x41000000, 0x3F800000, 0x3B66C2B4, 0x3B939A86,
-};

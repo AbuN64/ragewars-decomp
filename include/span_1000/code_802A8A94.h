@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
 #include "shared/func_802453D4_de_closed.h"
+#include "types.h"
 /* unbake published declaration: published_10ab4315289132ef269b9237 */
 extern void func_802A8710_de();
 
@@ -208,5 +209,8 @@ extern FontStyle D_801376F8;
 struct IntegerState48;
 /* unbake published declaration: published_f60c24e05183c7fb6dfb31f5 */
 typedef struct IntegerState48 IntegerState48;
+
+extern u8 D_801377C0[];
+extern u8 D_801378C0[];
 
 #endif
