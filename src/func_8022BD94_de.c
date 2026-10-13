@@ -12,18 +12,20 @@ extern void func_8022C060_de(void *arg0, void *arg1);
 
 
 void func_8022BD94_de(void *arg0, void *arg1, s32 arg2) {
+    func_8022BD84_S2 *object = arg0;
+    func_8020D1FC_S1 *argument = arg1;
     s32 flags;
     s32 flag_1000;
     s32 flag_8000;
     s32 flag_10000;
 
     if (arg2 != 0) {
-        flags = ((func_8020D1FC_S1 *)(arg1))->unk38;
+        flags = argument->unk38;
         flag_1000 = flags & 0x1000;
         flag_8000 = flags & 0x8000;
         flag_10000 = flags & 0x10000;
         if (flag_1000 == 0) {
-            ((func_8022BD84_S2 *)(arg0))->unk840 = 0;
+            object->unk840 = 0;
         } else {
             func_8022BE20_de(arg0, arg1);
         }

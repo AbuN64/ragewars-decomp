@@ -12,6 +12,7 @@ extern void func_802B2480_de(void *, void * *);
 
 
 void func_802AFD6C_de(void *arg0, Node_func_802AFD6C_de *arg1) {
+    func_802B4E3C_S1 *object = arg0;
     s32 saved;
     Node_func_802AFD6C_de **link;
     Node_func_802AFD6C_de *node;
@@ -19,7 +20,7 @@ void func_802AFD6C_de(void *arg0, Node_func_802AFD6C_de *arg1) {
     s32 node_value;
 
     saved = func_802BD170_de(1);
-    link = &((func_802B4E3C_S1 *)(arg0))->unk8;
+    link = &object->unk8;
     if (link != 0) {
 loop:
         node = *link;
