@@ -386,9 +386,16 @@ typedef struct MessageBuffer {
 
 /* On-screen message recycling and distribution share these list owners. */
 struct ScreenMessageOwner {
-    u8 padding000[0xF18];
+    s32 allocation; /* 0x00 */
+    s32 allocationSize; /* 0x04 */
+    s32 count; /* 0x08 */
+    u8 padding00C[0x40 - 0xC];
+    u8 rendering; /* 0x40 */
+    u8 padding041[0xF18 - 0x41];
     MessageBuffer storage; /* 0xF18 */
     IntrusiveList activeMessages; /* 0xF24 */
+    u8 paddingF38[0x1200 - 0xF38];
+    s32 state; /* 0x1200 */
 };
 struct ScreenMessagePool {
     u8 padding000[4];
