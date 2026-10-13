@@ -3,11 +3,15 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 /* Contact positions and interpolation outputs used by the movement solver. */
-typedef struct MotionSurface { s32 flags; u8 reserved4[8]; f32 response; } MotionSurface;
+typedef struct MotionSurface { s32 flags; s8 enabled; u8 reserved5[7]; f32 response; } MotionSurface;
 typedef struct ActorMotion {
     void *actor; /* 0x00 */
     s32 actorFlags; /* 0x04 */
-    u8 reserved08[0x14];
+    u8 reserved08[4];
+    f32 radius; /* 0x0C */
+    f32 height; /* 0x10 */
+    f32 bottom; /* 0x14 */
+    u8 reserved18[4];
     s32 iteration; /* 0x1C */
     s32 candidate; /* 0x20 */
     s32 grounded;

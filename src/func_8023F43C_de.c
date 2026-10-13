@@ -1,3 +1,5 @@
+#include "common/unused.h"
+#include "shared/motion_step.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8023EEF0.h"
 #include "types.h"
@@ -27,7 +29,7 @@ extern void func_8023EF00_de(void *, Query *, u8 *);
 void func_8023F43C_de(char *obj) {
     Query query;
     Query *q;
-    Shape *shape;
+    MotionSurface *shape;
     void *self;
     s32 count;
     s32 i;
@@ -36,41 +38,41 @@ void func_8023F43C_de(char *obj) {
     f32 radius;
     f32 bound;
 
-    shape = ((func_8023F42C_S1 *)(obj))->unk40;
-    if (shape->enabled == 0 || shape == &D_80100170) {
+    shape = ((ActorMotion *)obj)->surface;
+    if (shape->enabled == 0 || shape == (void *)&D_80100170) {
         return;
     }
     table = &D_8011FE88;
     q = &query;
-    radius = ((func_8023F42C_S1 *)(obj))->unkC;
-    self = *(void **)obj;
+    radius = ((ActorMotion *)obj)->radius;
+    self = ((ActorMotion *)obj)->actor;
     q->radius = radius;
     count = table->count;
     q->flag = shape->flags & 0x400;
-    q->bottom = ((func_8023F42C_S1 *)(obj))->unk14;
-    q->top = q->bottom + ((func_8023F42C_S1 *)(obj))->unk10;
-    q->bottom1 = ((func_8023F42C_S1 *)(obj))->unk48 + q->bottom;
-    q->top1 = ((func_8023F42C_S1 *)(obj))->unk48 + q->top;
-    q->bottom2 = ((func_8023F42C_S1 *)(obj))->unk54 + q->bottom;
-    q->top2 = ((func_8023F42C_S1 *)(obj))->unk54 + q->top;
-    bound = ((func_8023F42C_S1 *)(obj))->unk50;
-    if (!(bound <= ((func_8023F42C_S1 *)(obj))->unk44)) {
-        bound = ((func_8023F42C_S1 *)(obj))->unk44;
+    q->bottom = ((ActorMotion *)obj)->bottom;
+    q->top = q->bottom + ((ActorMotion *)obj)->height;
+    q->bottom1 = ((ActorMotion *)obj)->start.y + q->bottom;
+    q->top1 = ((ActorMotion *)obj)->start.y + q->top;
+    q->bottom2 = ((ActorMotion *)obj)->end.y + q->bottom;
+    q->top2 = ((ActorMotion *)obj)->end.y + q->top;
+    bound = ((ActorMotion *)obj)->end.x;
+    if (!(bound <= ((ActorMotion *)obj)->start.x)) {
+        bound = ((ActorMotion *)obj)->start.x;
     }
     q->minX = bound - radius;
-    bound = ((func_8023F42C_S1 *)(obj))->unk50;
-    if (!(((func_8023F42C_S1 *)(obj))->unk44 <= bound)) {
-        bound = ((func_8023F42C_S1 *)(obj))->unk44;
+    bound = ((ActorMotion *)obj)->end.x;
+    if (!(((ActorMotion *)obj)->start.x <= bound)) {
+        bound = ((ActorMotion *)obj)->start.x;
     }
     q->maxX = bound + radius;
-    bound = ((func_8023F42C_S1 *)(obj))->unk58;
-    if (!(bound <= ((func_8023F42C_S1 *)(obj))->unk4C)) {
-        bound = ((func_8023F42C_S1 *)(obj))->unk4C;
+    bound = ((ActorMotion *)obj)->end.z;
+    if (!(bound <= ((ActorMotion *)obj)->start.z)) {
+        bound = ((ActorMotion *)obj)->start.z;
     }
     q->minZ = bound - radius;
-    bound = ((func_8023F42C_S1 *)(obj))->unk58;
-    if (!(((func_8023F42C_S1 *)(obj))->unk4C <= bound)) {
-        bound = ((func_8023F42C_S1 *)(obj))->unk4C;
+    bound = ((ActorMotion *)obj)->end.z;
+    if (!(((ActorMotion *)obj)->start.z <= bound)) {
+        bound = ((ActorMotion *)obj)->start.z;
     }
     q->maxZ = bound + radius;
     for (i = 0; i < count; i++) {
@@ -82,7 +84,7 @@ void func_8023F43C_de(char *obj) {
         case 2:
             break;
         case 1:
-            if ((shape->flags & 1) && ((func_8023F42C_S2 *)(entity))->unk174 == 0) {
+            if ((shape->flags & 1) && ((Actor_func_8024A7A0_de *)entity)->active == 0) {
                 continue;
             }
             break;
@@ -98,48 +100,48 @@ void func_8023F43C_de(char *obj) {
 
 void func_8023F644_de(void *arg0, f32 *arg1)
 {
-  char *new_var;
+  f32 *new_var;
   f32 temp;
   f32 value;
   s32 *new_var2;
   f32 bound;
-  new_var2 = ((func_8023F634_S1 *)(arg0))->unk40;
-  arg1[0] = ((func_8023F634_S1 *)(arg0))->unkC;
-  ((func_80205314_S2 *)(arg1))->unk2C = (*new_var2) & 0x400;
-  temp = ((func_8023F634_S1 *)(arg0))->unk14;
-  arg1[1] = temp;
-  new_var = &((func_8023F634_S1 *)(arg0))->unk10;
-  arg1[2] = temp + (*((f32 *) new_var));
-  arg1[4] = (((func_8023F634_S1 *)(arg0))->unk48) + arg1[1];
-  arg1[3] = (((func_8023F634_S1 *)(arg0))->unk48) + arg1[2];
-  arg1[6] = (((func_8023F634_S1 *)(arg0))->unk54) + arg1[1];
-  arg1[5] = (((func_8023F634_S1 *)(arg0))->unk54) + arg1[2];
-  value = ((func_8023F634_S1 *)(arg0))->unk50;
-  bound = ((func_8023F634_S1 *)(arg0))->unk44;
+  new_var2 = &((ActorMotion *)arg0)->surface->flags;
+  ((Query *)arg1)->radius = ((ActorMotion *)arg0)->radius;
+  ((Query *)arg1)->flag = (*new_var2) & 0x400;
+  temp = ((ActorMotion *)arg0)->bottom;
+  ((Query *)arg1)->bottom = temp;
+  new_var = &((ActorMotion *)arg0)->height;
+  ((Query *)arg1)->top = temp + (*new_var);
+  ((Query *)arg1)->bottom1 = (((ActorMotion *)arg0)->start.y) + ((Query *)arg1)->bottom;
+  ((Query *)arg1)->top1 = (((ActorMotion *)arg0)->start.y) + ((Query *)arg1)->top;
+  ((Query *)arg1)->bottom2 = (((ActorMotion *)arg0)->end.y) + ((Query *)arg1)->bottom;
+  ((Query *)arg1)->top2 = (((ActorMotion *)arg0)->end.y) + ((Query *)arg1)->top;
+  value = ((ActorMotion *)arg0)->end.x;
+  bound = ((ActorMotion *)arg0)->start.x;
   if (!(value <= bound))
   {
     value = bound;
   }
-  arg1[7] = value - arg1[0];
-  value = ((func_8023F634_S1 *)(arg0))->unk50;
-  bound = ((func_8023F634_S1 *)(arg0))->unk44;
+  ((Query *)arg1)->minX = value - ((Query *)arg1)->radius;
+  value = ((ActorMotion *)arg0)->end.x;
+  bound = ((ActorMotion *)arg0)->start.x;
   if (!(bound <= value))
   {
     value = bound;
   }
-  arg1[9] = value + arg1[0];
-  value = ((func_8023F634_S1 *)(arg0))->unk58;
-  bound = ((func_8023F634_S1 *)(arg0))->unk4C;
+  ((Query *)arg1)->maxX = value + ((Query *)arg1)->radius;
+  value = ((ActorMotion *)arg0)->end.z;
+  bound = ((ActorMotion *)arg0)->start.z;
   if (!(value <= bound))
   {
     value = bound;
   }
-  arg1[8] = value - arg1[0];
-  value = ((func_8023F634_S1 *)(arg0))->unk58;
-  bound = ((func_8023F634_S1 *)(arg0))->unk4C;
+  ((Query *)arg1)->minZ = value - ((Query *)arg1)->radius;
+  value = ((ActorMotion *)arg0)->end.z;
+  bound = ((ActorMotion *)arg0)->start.z;
   if (!(bound <= value))
   {
     value = bound;
   }
-  arg1[10] = value + arg1[0];
+  ((Query *)arg1)->maxZ = value + ((Query *)arg1)->radius;
 }
