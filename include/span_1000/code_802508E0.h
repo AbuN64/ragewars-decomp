@@ -100,11 +100,15 @@ struct Node_func_80251328_de;
 /* unbake published declaration: published_5f34cbeed82fc7cd606f6f28 */
 struct Node_func_80251328_de {
     s32 resource;
-    char pad4[8];
+    s32 size;
+    s32 references;
     s32 flags;
     s32 lastUsed;
-    char pad14[4];
+    s32 owner;
     struct Node_func_80251328_de *next;
+    s32 key;
+    s32 pending;
+    s32 callback;
 };
 
 struct Node_func_80252774_de;

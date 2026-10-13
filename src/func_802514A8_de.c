@@ -18,22 +18,22 @@ extern s32 func_80255CB8_de(void *arg0, s32 arg1);
 
 
 static inline void *pool_alloc(s32 arg1) {
-    void *temp_s0;
+    struct Node_func_80251328_de *temp_s0;
 
     if (D_8010513C.count == 0) {
         return 0;
     }
     D_8010513C.count -= 1;
     temp_s0 = D_80100564[D_8010513C.count];
-    ((func_80251448_S1 *)(temp_s0))->unkC = 0x800;
-    ((func_80251448_S1 *)(temp_s0))->unk8 = 0;
-    ((func_80251448_S1 *)(temp_s0))->unk0 = 0;
-    ((func_80251448_S1 *)(temp_s0))->unk24 = 0;
-    ((func_80251448_S1 *)(temp_s0))->unk20 = 0;
-    ((func_80251448_S1 *)(temp_s0))->unk14 = 0;
-    ((func_80251448_S1 *)(temp_s0))->unk10 = D_8010513C.field44;
+    temp_s0->flags = 0x800;
+    temp_s0->references = 0;
+    temp_s0->resource = 0;
+    temp_s0->callback = 0;
+    temp_s0->pending = 0;
+    temp_s0->owner = 0;
+    temp_s0->lastUsed = D_8010513C.field44;
     func_80255CB8_de((char *)&D_8010513C - 0xBCC, (s32)temp_s0);
-    ((func_80251448_S1 *)(temp_s0))->unkC |= (arg1 & 0xC);
+    temp_s0->flags |= (arg1 & 0xC);
     return temp_s0;
 }
 
