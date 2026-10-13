@@ -1,10 +1,10 @@
 #include "span_1000/code_8020AF9C.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "span_C76B0/data.h"
+extern f32 D_800C1D74_de;
 #include "types.h"
 f32 func_802726BC_de(void *a, void *b);
-s32 func_8020C078_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 *arg5, f32 arg6) {
+s32 func_8020C078_de(NavigationGraph *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 *arg5, f32 arg6) {
     s32 sp20[64];
     s32 sp120[64];
     f32 sp220;
@@ -23,7 +23,6 @@ s32 func_8020C078_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     s32 var_a0;
     s32 var_fp;
     s32 var_s0;
-    s32 var_s0_2;
     s32 var_t0;
     s32 var_t1;
     s32 var_v0;
@@ -35,19 +34,16 @@ s32 func_8020C078_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 arg3, s32 ar
     var_s0 = 0;
     temp_v0 = arg0->portalCount;
     if (temp_v0 > 0) {
+        s32 stride;
         temp_a2 = arg0->portals;
+        stride = temp_a2->stride;
         var_a0 = 8;
-loop_2:
-        temp_v1 = (void *)(temp_a2->data + (var_a0 - 8));
-        var_s0 += 1;
-        if ((temp_v1->first != arg2) || (temp_v1->kind != (arg3 & 0xFF))) {
-            var_a0 += temp_a2->stride;
-            if (var_s0 >= temp_v0) {
-                goto block_5;
-            }
-            goto loop_2;
-        }
-        return arg2;
+        do {
+            temp_v1 = (void *)(temp_a2->data + (var_a0 - 8));
+            var_s0++;
+            if (temp_v1->first == arg2 && temp_v1->kind == (u8)arg3) return arg2;
+            var_a0 += stride;
+        } while (var_s0 < temp_v0);
     }
 block_5:
     var_t0 = 0;
@@ -80,30 +76,19 @@ block_5:
             var_t0 += 1;
         } while (var_t0 < arg0->portalCount);
     }
-    var_s0_2 = 0;
-    if (var_t1 > 0) {
-        var_s1 = sp20;
-        do {
-            temp_a0 = arg0->points;
-            temp_a1 = navigationRecord(temp_a0, *var_s1);
-            if (temp_a1 == temp_s4) {
-                var_s0_2 += 1;
-            } else {
-                temp_fv0f = *arg5 + func_802726BC_de(temp_s4, temp_a1);
-                sp220 = temp_fv0f;
-                if (temp_fv0f < arg6) {
-                    var_v0 = func_8020C078_de(arg0, arg2, *var_s1, arg3 & 0xFF, arg4 - 1, &sp220, arg6);
-                } else {
-                    var_v0 = -1;
-                }
-                var_s0_2 += 1;
-                if ((var_v0 != -1) && (sp220 < var_fs0)) {
-                    var_fs0 = sp220;
-                    var_fp = var_v0;
-                }
+    for (var_s0 = 0; var_s0 < var_t1; var_s0++) {
+        NavigationBuffer *table = arg0->points;
+        void *point = navigationRecord(table, sp20[var_s0]);
+        if (point != temp_s4) {
+            sp220 = *arg5 + func_802726BC_de(temp_s4, point);
+            if (sp220 < arg6) {
+                var_v0 = func_8020C078_de(arg0, arg2, sp20[var_s0], (u8)arg3, arg4 - 1, &sp220, arg6);
+            } else var_v0 = -1;
+            if (var_v0 != -1 && sp220 < var_fs0) {
+                var_fs0 = sp220;
+                var_fp = var_v0;
             }
-            var_s1 += 1;
-        } while (var_s0_2 < var_t1);
+        }
     }
     if (var_fs0 < arg6) {
         *arg5 = var_fs0;
