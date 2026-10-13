@@ -261,7 +261,7 @@ extern float D_800C22C4_de;
 extern float D_800C22C4_eu;
 extern float D_800C22C8_eu;
 extern float D_800C22CC_eu;
-extern float D_800C22D4_de;
+extern const float D_800C22D4_de[4];
 extern float D_800C22D4_eu;
 extern float D_800C22D8_de;
 extern float D_800C22D8_eu;

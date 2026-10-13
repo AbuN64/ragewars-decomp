@@ -186,7 +186,7 @@ block_early_return:
                 return;
 block_33:
                 if (temp_s1->unk5E4 > 0) {
-                    var_f0 = temp_s1->unk11E0 + ((struct func_802077F4_S2 *)&D_800C22D0_de)->unk4;
+                    var_f0 = temp_s1->unk11E0 + D_800C22D4_de[0];
                     temp_s1->unk11E0 = var_f0 < D_800C22D8_de ? D_800C22D8_de : var_f0;
 
                 }
