@@ -368,7 +368,7 @@ struct Cursor802171C8 {
 extern s16 func_802171C8_de(Cursor802171C8 *arg0);
 
 /* unbake published declaration: published_a15ba52b67b58abc273ee04b */
-extern void func_80216D30_de(void *arg0, void *arg1, int arg2, int arg3);
+extern void func_80216D30_de(void *arg0, void *arg1, int arg2, float arg3);
 
 struct func_802169AC_S1;
 /* unbake published declaration: published_a3713d6ff2075279ac94bfb8 */
