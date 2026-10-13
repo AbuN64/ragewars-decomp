@@ -1,3 +1,4 @@
+#include "span_C76B0/data.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8023A284.h"
 #include "types.h"
@@ -59,7 +60,7 @@ s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boo
     if (wrap < angle) {
         rotor->angleA = angle - wrap;
     }
-    angle = rotor->angleB + value * ((func_802077F4_S2 *)(&D_800C86E8))->unk4;
+    angle = rotor->angleB + value * D_800C35FC_de;
     rotor->angleB = angle;
     if (wrap < angle) {
         rotor->angleB = angle - wrap;
