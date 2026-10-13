@@ -1,10 +1,14 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80233920_H
 #define UNBAKE_SPAN_1000_CODE_80233920_H
 #include "../types.h"
+#include "span_1000/code_8023330C.h"
+/* XYZ minimum and maximum bounds, copied as a single record. */
+typedef struct ViewFlags { s32 flags; } ViewFlags;
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
+#include "resident_event_handler.h"
 struct Triple;
 struct func_802390C0_S1;
 /* unbake published declaration: published_0d1f68bfb9e687a29b5f4815 */
@@ -36,9 +40,8 @@ struct Overlay;
 /* unbake published declaration: published_158bac9f1433e83a4aec1b34 */
 typedef struct Overlay Overlay;
 
-struct AxisWave;
 /* unbake published declaration: published_1833c068e913cc1226f91bb1 */
-typedef struct AxisWave AxisWave;
+typedef State_func_802337D0_de AxisWave;
 
 struct Entity_func_80233C88_de;
 /* unbake published declaration: published_19267424c2c0e45e980251e7 */
@@ -155,21 +158,11 @@ struct Effect33920;
 /* unbake published declaration: published_73240ec90645f1bbc1437010 */
 typedef struct Effect33920 Effect33920;
 
-struct AxisWave;
-/* unbake published declaration: published_e41f2510e7a2a5e4c9dc5e8a */
-struct AxisWave {
-    s32 kind;
-    s32 unk04;
-    s32 unk08;
-    f32 scale;
-    f32 rate;
-};
-
 struct Effect33920;
 /* unbake published declaration: published_b4deea11405b5220382cd6b8 */
 struct Effect33920 {
     s32 unk00;
-    s32 unk04;
+    Effect33920 *next;
     Vec3 origin;
     f32 radius;
     AxisWave x;
@@ -178,7 +171,7 @@ struct Effect33920 {
 };
 
 /* unbake published declaration: published_50d1fb38d00a3e50301966dd */
-extern void func_80233930_de(Effect33920 *arg0, u32 x, u32 y, u32 z, Vec3 *out);
+extern void func_80233930_de(Effect33920 *arg0, Vec3 position, Vec3 *out);
 
 struct ThreeChannels;
 /* unbake published declaration: published_55e0c62a75e42c435a71eb95 */
@@ -272,7 +265,8 @@ struct Racer {
     char pad8[4];
     f32 screenScaleX; /* 0xC */
     f32 screenScaleY; /* 0x10 */
-    char pad14[0x54];
+    char pad14[0x50];
+    s32 visibilityFlags; /* 0x64 */
     u16 perspectiveNorm; /* 0x68 */
     char pad6A[0xA6];
     f32 viewportScaleX; /* 0x110 */
@@ -288,7 +282,9 @@ struct Racer {
     f32 viewportY;
     char pad2AC[4];
     UnitVp viewports[2];
-    char pad2D0[0xB0];
+    char pad2D0[0x80];
+    Vec3 clipBounds[2]; /* 0x350 */
+    Vec3 volumeBounds[2]; /* 0x368 */
     u32 projectionMatrices[2][16]; /* 0x380 */
     u32 lights[2][8]; /* 0x400 */
     char pad440[0xE0];
@@ -314,15 +310,21 @@ struct World_func_80236F1C_de {
 struct Race;
 struct Racer;
 /* unbake published declaration: published_87e633f7a0289d762a8d86f0 */
-struct Race {
+typedef struct RaceHeader {
     s32 music;
     char pad4[0x1C];
-    struct Racer *racers;
-    char pad24[0xC];
-    s32 mode;
-    char pad34[0xC];
+    IntrusiveList views;
+    u32 lastMode;
+    s32 layoutTimer;
+    char pad3C[4];
+} RaceHeader;
+struct Race {
+    RaceHeader header;
     Racer self;
 };
+
+
+
 
 /* unbake published declaration: published_89f5cee85fbb6b21de9a8306 */
 extern float D_800C3098_de;
@@ -508,5 +510,15 @@ extern void func_802391AC_de(void *view, s32 red, s32 green, s32 blue, s32 mode,
 extern void func_80239EA4_de(void*,Vec3*);
 typedef union Rotation { f32 f[4]; u32 word[4]; } Rotation;
 typedef union TransformVector { Vec3 value; u32 word[3]; } TransformVector;
+
+typedef char AxisWave_size_check[(sizeof(AxisWave) == 0x14) ? 1 : -1];
+typedef char Effect33920_size_check[(sizeof(Effect33920) == 0x54) ? 1 : -1];
+typedef char Racer_size_check[(sizeof(Racer) == 0x594) ? 1 : -1];
+typedef char Race_size_check[(sizeof(Race) == 0x5D4) ? 1 : -1];
+extern f32 D_800D05D0;
+
+extern Box D_800FF208;
+
+extern s32 func_80245784_de(void);
 
 #endif
