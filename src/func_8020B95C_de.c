@@ -66,7 +66,7 @@ block_14:
                         var_a3 += 1;
                     }
                 }
-                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (var_s7->attributes.halves.flags & 2)) {
+                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (var_s7->flags & 2)) {
                     *var_a3 = arg2;
                     var_a3 += 1;
                     var_s4 += 1;

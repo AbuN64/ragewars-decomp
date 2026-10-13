@@ -65,7 +65,7 @@ void func_80208410_de(AiController *arg0) {
         temp_fs0f = func_802726F8_de(temp_s4, var_s3);
         temp_a2 = arg0->queue[0];
         var_a1 = arg0->current;
-        arg0->unk304 = (var_s3->attributes.word & 0x300000) != 0;
+        arg0->unk304 = (var_s3->flags & 0x30) != 0;
         if (temp_a2 == var_a1) {
             var_a1 = arg0->previous;
         }
@@ -204,7 +204,7 @@ block_49:
 block_57:
         arg0->unk314 = 0;
 block_58:
-        if ((arg0->queue[1] == -1) || (var_fv0 = D_800C1BD4_de, ((var_s3->attributes.halves.flags & 0x100) != 0))) {
+        if ((arg0->queue[1] == -1) || (var_fv0 = D_800C1BD4_de, ((var_s3->flags & 0x100) != 0))) {
             var_fv0 = D_800C1BD8_de;
         }
         if ((temp_fs0f < var_fv0) && (arg0->current == arg0->queue[0])) {
@@ -216,7 +216,7 @@ block_66:
             temp_a1_2 = arg0->queue[0];
             if (temp_a1_2 != -1) {
                 temp_v0_10 = func_8020C994_de(graph, temp_a1_2);
-                if (temp_v0_10->attributes.halves.flags & 2) {
+                if (temp_v0_10->flags & 2) {
                     arg0->destination = arg0->home;
                     return;
                 }

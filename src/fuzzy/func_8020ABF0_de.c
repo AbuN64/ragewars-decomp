@@ -47,7 +47,7 @@ void func_8020ABF0_de(NavigationGraph *graph) {
         do {
             point = navigationRecord(graph->points, node->key);
             chosen = 0;
-            if (point->attributes.halves.flags & 0x200) {
+            if (point->flags & 0x200) {
                 best = D_800C1D50_de;
                 i = 0;
                 if (count > 0) {
@@ -97,7 +97,7 @@ void func_8020ABF0_de(NavigationGraph *graph) {
                     node->endpoint = chosenPosition;
                 } else {
                     node->platform = 0;
-                    point->attributes.halves.flags &= 0xFDFF;
+                    point->flags &= 0xFDFF;
                 }
             }
             node = node->next;

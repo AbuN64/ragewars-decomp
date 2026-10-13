@@ -8,7 +8,7 @@ struct NavigationPlatform;
 
 typedef struct NavigationBuffer { s32 stride; s32 reserved; u8 data[1]; } NavigationBuffer;
 
-typedef struct NavigationPoint { Vec3 position; union { u32 word; struct { u16 flags; u16 objectId; } halves; } attributes; } NavigationPoint;
+typedef struct NavigationPoint { Vec3 position; u16 flags; u16 objectId; } NavigationPoint;
 
 typedef struct NavigationPortal { u16 first, second; u8 kind; } NavigationPortal;
 

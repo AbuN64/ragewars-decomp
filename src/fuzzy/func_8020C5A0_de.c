@@ -143,7 +143,7 @@ block_35:
                             var_fv0f_2 = func_802726F8_de(&temp_s2->position.x,&temp_fp->position.x);
                         }
                         var_fv0f_3 = var_fv0f_2 + var_s0->extra;
-                        if (temp_s2->attributes.halves.flags & 0x400) {
+                        if (temp_s2->flags & 0x400) {
                             var_fv0f_3 += D_800C1D88_de;
                         }
                         if (var_fv0f_3 < 0.0f) {

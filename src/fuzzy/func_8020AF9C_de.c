@@ -132,7 +132,7 @@ block_14:
                     temp_v1_3 = arg0->points;
                     temp_s0 = navigationRecord(temp_v1_3, var_s3);
                     func_80271F68_de(&sp218, &temp_s0->position, &arg1->pos);
-                    if ((temp_s7 != 0) || (temp_s6 != 0) || (temp_s0->attributes.halves.flags & 0x200)) {
+                    if ((temp_s7 != 0) || (temp_s6 != 0) || (temp_s0->flags & 0x200)) {
                         var_fs0 = (sp218.x * sp218.x) + (sp218.y * sp218.y) + (sp218.z * sp218.z);
                     } else {
                         var_fs0 = (sp218.x * sp218.x) + (sp218.z * sp218.z);
@@ -199,7 +199,7 @@ block_30:
                 temp_a0 = arg0->portals;
                 temp_s0_2 = navigationRecord(temp_a1, temp_s3);
                 temp_s4 = navigationRecord(temp_a0, sp118[var_s2]);
-                if (!(temp_s0_2->attributes.word & 0x300000) || (temp_s6 != 0) || (temp_s7 != 0)) {
+                if (!(temp_s0_2->flags & 0x30) || (temp_s6 != 0) || (temp_s7 != 0)) {
                     func_80271F68_de(&sp218, &temp_s0_2->position, &arg1->pos);
                     if ((temp_s7 != 0) || (temp_s6 != 0)) {
                         var_fs0 = (sp218.x * sp218.x) + (sp218.y * sp218.y) + (sp218.z * sp218.z);
@@ -211,7 +211,7 @@ block_30:
                         var_fv0f = -var_fv0f;
                     }
                     temp_a0_2 = temp_s4->kind;
-                    if ((temp_a0_2 == 3) || (temp_a0_2 == 0xA) || (temp_a0_2 == 5) || ((temp_s6 == 0) && (temp_s0_2->attributes.halves.flags & 0x20))) {
+                    if ((temp_a0_2 == 3) || (temp_a0_2 == 0xA) || (temp_a0_2 == 5) || ((temp_s6 == 0) && (temp_s0_2->flags & 0x20))) {
                         if (var_fv0f < var_fs1) {
                             if (sp2AC == 0) {
                                 var_fs0f = D_800C1D60_de;
