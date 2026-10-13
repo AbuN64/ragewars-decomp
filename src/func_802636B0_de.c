@@ -4,17 +4,18 @@
 
 /** Clear the object's fields, preserving the field at offset 0x10. */
 void func_802636B0_de(void *object) {
-    ((func_802636D0_S1 *)(object))->unk0 = 0;
-    ((func_802636D0_S1 *)(object))->unk4 = 0;
-    ((func_802636D0_S1 *)(object))->unk8 = 0;
-    ((func_802636D0_S1 *)(object))->unkC = 0;
-    ((func_802636D0_S1 *)(object))->unk14 = 0;
-    ((func_802636D0_S1 *)(object))->unk18 = 0;
-    ((func_802636D0_S1 *)(object))->unk1C = 0;
-    ((func_802636D0_S1 *)(object))->unk20 = 0;
-    ((func_802636D0_S1 *)(object))->unk24 = 0;
-    ((func_802636D0_S1 *)(object))->unk28 = 0;
-    ((func_802636D0_S1 *)(object))->unk2C = 0;
-    ((func_802636D0_S1 *)(object))->unk30 = 0;
-    ((func_802636D0_S1 *)(object))->unk34 = 0;
+    Shared_Input *input = object;
+    input->word0 = 0;
+    input->word4 = 0;
+    input->word8 = 0;
+    input->wordC = 0;
+    input->word14 = 0;
+    input->word18 = 0;
+    input->word1C = 0;
+    input->word20 = 0;
+    input->held = 0;
+    input->pressed = 0;
+    input->unk2C = 0;
+    input->unk30 = 0;
+    input->unk34 = 0;
 }

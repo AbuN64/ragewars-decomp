@@ -202,9 +202,15 @@ struct Shared_Input;
 struct Shared_Shadow;
 /* unbake published declaration: published_cdaf4ee0ec71630d6a6183c7 */
 struct Shared_Input {
-    char pad0[0x10];
+    s32 word0;
+    s32 word4;
+    s32 word8;
+    s32 wordC;
     struct Shared_Shadow * shadow;
-    char pad14[0x10];
+    s32 word14;
+    s32 word18;
+    s32 word1C;
+    s32 word20;
     s32 held;
     s32 pressed;
     s32 unk2C;
