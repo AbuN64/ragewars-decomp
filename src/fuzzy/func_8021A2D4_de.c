@@ -28,7 +28,7 @@ typedef struct DraftRenderGame { char pad0[0x54]; s32 teams; char pad58[0x1B]; u
 extern DraftRenderGame D_801468A0;
 extern s32 D_801468F4, D_800CE47C, D_800C9228_de, D_800D297C, D_800D15E0;
 extern u8 D_801462E5;
-extern f32 D_800D15E4[5];
+extern f32 D_800D15E4[3], D_800D15F0[2];
 extern f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern DraftRenderWeapon *D_800D052C[];
 extern void func_8026B6A0_de(void **, void *, void *, s32, void *, s32, s32);
@@ -46,8 +46,8 @@ void func_8021A2D4_de(DraftRenderActor *actor, s32 arg1, DraftRenderContext *con
 
     player = actor->player;
     if (0.0f < player->ghost) {
-        temporaryFlag = !(player->flags & 0x8000);
-        if (temporaryFlag) player->flags |= 0x8000;
+        if (player->flags & 0x8000) temporaryFlag = 0;
+        else { temporaryFlag = 1; player->flags |= 0x8000; }
         D_800D15E4[0] = 0.0f;
         D_800D15E0 = 3;
         if (player->flags & 0x4000) {
@@ -57,15 +57,25 @@ void func_8021A2D4_de(DraftRenderActor *actor, s32 arg1, DraftRenderContext *con
             D_800D15E4[1] = 0.0f;
             D_800D15E4[2] = D_800C22E8_de;
         }
-        if (player->fixedAlpha) D_800D15E4[3] = D_800C22EC_de;
-        else D_800D15E4[3] = player->view->alpha;
-        D_800D15E4[4] = D_800C22F0_de;
+        if (player->fixedAlpha) D_800D15F0[0] = D_800C22EC_de;
+        else D_800D15F0[0] = player->view->alpha;
+        D_800D15F0[1] = D_800C22F0_de;
         if (D_801468A0.teams && player->info->team) actor->colour = D_801468A0.teamColour;
         else actor->colour = actor->descriptor->colour;
         func_8026B6A0_de(context->resource, player, actor->matrix, 1,
                        &actor->frames[D_800D297C], 0, actor->pass);
         D_800D15E0 = 0;
         if (temporaryFlag) player->flags &= ~0x8000;
+        if ((u32)(player->mode - 0x11) < 2) return;
+    if (player->mode == 15) return;
+    if (player->info->team && D_801468F4) return;
+    if (player->active == 0) return;
+    if (player->kind == D_800CE47C) return;
+    if (player->flags & 0x20) return;
+    model = D_800D052C[player->weapon]->model;
+    if (player->weapon < 16) model -= 0x4B3;
+    else model -= 0x4B5;
+        goto weapon;
     } else {
         if (D_801462E5) {
             if (player->info->team && D_801468F4 && player->active == 0) return;
@@ -93,6 +103,7 @@ void func_8021A2D4_de(DraftRenderActor *actor, s32 arg1, DraftRenderContext *con
     if (player->flags & 0x20) return;
     model = D_800D052C[player->weapon]->model - 0x4B3;
     if (player->weapon >= 16) model -= 2;
+weapon:
     if (model >= 0) {
         resource = func_8024BFD4_de(actor, model);
         if (resource) {

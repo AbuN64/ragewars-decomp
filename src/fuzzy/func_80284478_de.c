@@ -29,11 +29,12 @@ PoolNode84478 *func_80284478_de(PoolOwner84478 *owner, s32 index) {
     PoolNode84478 *node;
     PoolBucket84478 *slot;
     s32 i;
+    PoolNode84478 *tail;
     if (owner->free.head == 0) {
         for (i = 0; i <= (index & 0xFF); i++) {
-            node = owner->slots[i].tail;
-            if (node != 0) {
-                func_80284570_de(owner, node);
+            tail = owner->slots[i].tail;
+            if (tail != 0) {
+                func_80284570_de(owner, tail);
                 break;
             }
         }

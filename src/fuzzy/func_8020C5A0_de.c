@@ -4,7 +4,7 @@ extern f32 func_8020C2E8_de(void *,void *);
 extern f32 func_802726F8_de(f32 *,f32 *);
 
 static inline s32 hasOpen35(NavigationGraph *g,s32 status){NavigationSearchNode *n=g->nodes;while(n){if(n->open==status)return 1;n=n->next;}return 0;}
-static inline NavigationSearchNode *choose35(NavigationGraph *g,s32 status,f32 initial,f32 sentinel){NavigationSearchNode *n=g->nodes,*best=0;f32 minimum=initial;while(n){if(n->open==status&&(n->total<minimum||minimum==sentinel)){best=n;minimum=n->total;}n=n->next;}if(best)best->open=0;return best;}
+static __inline__ NavigationSearchNode *choose35(NavigationGraph *g,s32 status,f32 initial,f32 sentinel){NavigationSearchNode *n=g->nodes,*best=0;f32 minimum=initial;while(n){if(n->open==status){if(n->total<minimum){best=n;minimum=n->total;}else if(minimum==sentinel){best=n;minimum=n->total;}}n=n->next;}if(best)best->open=0;return best;}
 static inline NavigationSearchNode *find35(NavigationGraph *g,s32 key){NavigationSearchNode *n=g->nodes;while(n){if(n->key==key)return n;n=n->next;}return 0;}
 static inline s32 neighbors35(NavigationGraph *arg0, NavigationSearchNode *node,s32 *out,s32 *ids) {
  s32 temp_t1=node->key,var_a3=0,var_t0=0; s32 *var_a0_3=out,*var_a1=ids; NavigationBuffer *temp_v1;NavigationPortal *temp_v1_2;
@@ -63,7 +63,8 @@ void func_8020C5A0_de(NavigationGraph *arg0, NavigationSearchNode *arg1) {
     s32 var_s1_2;
     s32 var_s4;
     s32 var_t0;
-    s32 var_v0,one;
+    s32 var_v0;
+    const s32 one = 1;
     s32 var_v0_2;
     u8 temp_a0_5;
     s32 temp_v1_4;
@@ -77,7 +78,7 @@ void func_8020C5A0_de(NavigationGraph *arg0, NavigationSearchNode *arg1) {
 
     arg1->cost = 0.0f;
     temp_fv0 = func_8020C2E8_de(arg0,arg1);
-    one=1;temp_fs0f = D_800C1D80_de;
+    temp_fs0f = D_800C1D80_de;
     sp210=sp10;
     arg1->estimate = temp_fv0;
     arg1->parent = 0;

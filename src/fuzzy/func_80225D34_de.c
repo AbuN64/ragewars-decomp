@@ -10,17 +10,17 @@ extern void func_802231D4_de(void *, void *, void *);
 extern void func_802227F4_de(void *, void *, s32);
 
 void func_80225D34_de(Player *player, void *body) {
-    f32 yaw, targetYaw, alternate, distance, otherDistance, duration, t, arc;
+    f32 yaw, targetYaw, distance, otherDistance, alternate, duration, t;
     Position pos;
     func_802231D4_de(player, body, D_800CE7E4);
     if (player->target != 0) {
+        player->elapsed += D_800D2988;
         yaw = player->yaw;
         targetYaw = player->targetYaw;
-        player->elapsed += D_800D2988;
         if (targetYaw != yaw) {
             func_80274020_de(&yaw);
             func_80274020_de(&targetYaw);
-            if (targetYaw < yaw) {
+            if (yaw > targetYaw) {
                 alternate = targetYaw + D_800C2AE0_de;
                 distance = yaw - targetYaw;
                 otherDistance = alternate - yaw;
@@ -30,13 +30,9 @@ void func_80225D34_de(Player *player, void *body) {
                 otherDistance = yaw - alternate;
             }
             if (otherDistance < distance) targetYaw = alternate;
-            if (yaw < targetYaw) {
-                yaw += (targetYaw - yaw) * D_800C2AE8_de;
-                if (targetYaw < yaw) yaw = targetYaw;
-            } else {
-                yaw -= (yaw - targetYaw) * D_800C2AEC_de;
-                if (yaw < targetYaw) yaw = targetYaw;
-            }
+            if (yaw < targetYaw ?
+                (yaw += (targetYaw - yaw) * D_800C2AE8_de, targetYaw < yaw) :
+                (yaw -= (yaw - targetYaw) * D_800C2AEC_de, yaw < targetYaw)) yaw = targetYaw;
             func_80274020_de(&yaw);
         }
         player->bodyYaw = yaw;
@@ -46,8 +42,7 @@ void func_80225D34_de(Player *player, void *body) {
             t = player->elapsed / duration;
             pos.x = player->start.x + (player->target->pos.x - player->start.x) * t;
             pos.z = player->start.z + (player->target->pos.z - player->start.z) * t;
-            arc = (t - t * t) * D_800C2AF0_de;
-            pos.y = player->start.y + (player->target->pos.y - player->start.y) * t + player->target->height * arc;
+            pos.y = player->start.y + (player->target->pos.y - player->start.y) * t + player->target->height * ((t - t * t) * D_800C2AF0_de);
             player->pos = pos;
             return;
         }

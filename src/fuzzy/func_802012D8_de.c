@@ -3,12 +3,12 @@
 
 extern s32 func_802005A0_de(s32 address);
 
-int func_802012D8_de(void) {
+void func_802012D8_de(void) {
     u32 savedSource;
     u32 cursor;
     u32 wordCount;
     u32 destination;
-    u32 i;
+    register u32 i;
 
     savedSource = func_802005A0_de(0xB1FFFFF4) & 0xB1FFFFFC;
     cursor = func_802005A0_de(0xB1FFFFF8) & 0x01FFFFFC;
@@ -18,9 +18,9 @@ int func_802012D8_de(void) {
         func_802005DC_de(500);
     }
 
+    wordCount = cursor >> 2;
     i = 0;
-    if ((cursor >> 2) != 0) {
-        wordCount = cursor >> 2;
+    if (wordCount != 0) {
         destination = savedSource & 0xB07FFFFF;
         cursor = savedSource;
         do {
@@ -33,5 +33,5 @@ int func_802012D8_de(void) {
 
     func_802005DC_de(2000);
     func_80200568_de(0xB1FFFFF4, 0);
-    return 0;
+    return;
 }

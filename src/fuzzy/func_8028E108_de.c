@@ -14,16 +14,17 @@ void func_8028E108_de(void *arg0)
   s32 i;
   s32 count;
   s32 result;
+  Actor_func_8028E284_de **slot = D_800F3CF8 + 4;
   D_800F3D08 = 0;
   for (i = 3; i >= 0; i--)
   {
-    D_800F3CF8[i] = 0;
+    *--slot = 0;
   }
 
   count = scene->count;
   if (count <= 0)
   {
-    return count;
+    return;
   }
   i = 0;
   do
@@ -34,7 +35,7 @@ void func_8028E108_de(void *arg0)
       if (result == 0xBD7)
       {
         D_800F3D08 = actor;
-        return result;
+        return;
       }
     }
     else
@@ -65,5 +66,5 @@ void func_8028E108_de(void *arg0)
     i++;
   }
   while (i < scene->count);
-  return 0;
+  return;
 }
