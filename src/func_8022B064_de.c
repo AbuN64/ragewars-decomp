@@ -8,7 +8,7 @@ extern unsigned int func_802227F4_de(void *arg0, void *arg1, s32 arg2);
 
 
 
-void func_8022B064_de(void *arg0, Triple *arg1)
+void func_8022B064_de(void *arg0, Vec3 *arg1)
 {
   Shared_ActorView *player = arg0;
   void *new_var;

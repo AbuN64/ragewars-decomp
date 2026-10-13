@@ -1,3 +1,4 @@
+#include "shared/level_actor.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8024E914.h"
@@ -10,17 +11,17 @@ extern int func_8028B25C_de(void *arg0, int arg1);
 
 
 int func_8024E924_de(void *arg0) {
-    if (*(u8 *)arg0 == 1) {
-        return ((func_8024E914_S1 *)(arg0))->unkE4;
+    if (((Actor_func_8024A7A0_de *)arg0)->kind == 1) {
+        return ((Actor_func_8024A7A0_de *)arg0)->type;
     }
-    return func_8028B25C_de(&D_8011FE88, ((func_8024E914_S1 *)(arg0))->unk4);
+    return func_8028B25C_de(&D_8011FE88, (u16)((Actor_func_8024A7A0_de *)arg0)->modelIndex);
 }
 
 /** Return the selected record field, or negative one for another type. */
 int func_8024E968_de(void *record) {
     int result = -1;
-    if (*(unsigned char *)record == 1) {
-        result = ((func_8023EBEC_S1 *)(record))->unk3C;
+    if (((Actor_func_8024A7A0_de *)record)->kind == 1) {
+        result = ((Actor_func_8024A7A0_de *)record)->motionIndex;
     }
     return result;
 }

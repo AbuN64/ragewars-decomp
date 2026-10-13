@@ -6,6 +6,7 @@
 
 #include "common/types_8a8189af7b05.h"
 #include "shared/level_actor.h"
+#include "shared/level_actor.h"
 
 /* Player-transition records from origin/legacy shared headers. */
 
@@ -145,7 +146,7 @@ struct Shared_ActorView {
     s32 remote; /* 0x1450 */
     void *owner; /* 0x1454 */
     u8 pad1458[0x16C4 - 0x1458];
-    Triple resetPosition; /* 0x16C4: three-word position copy transport */
+    Vec3 resetPosition; /* 0x16C4: previous reset position */
     u8 pad16D0[4];
     s32 field16D4;
     s16 field16D8;

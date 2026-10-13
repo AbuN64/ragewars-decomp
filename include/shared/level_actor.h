@@ -14,9 +14,10 @@ struct Actor_func_8024A7A0_de {
     s32 model; /* 0x14 */
     s32 *definition; /* 0x18 */
     Vec3 position1;
-    u8 pad28[0x10];
+    Vec3 motionAngles; /* 0x28 */
+    void *attached; /* 0x34 */
     s32 motionState; /* 0x38 */
-    u8 pad3C[4];
+    s32 motionIndex; /* 0x3C */
     f32 floorHeight; /* 0x40 */
     Vec3 floorDirection; /* 0x44 */
     Vec3 scale; /* 0x50 */
@@ -64,14 +65,17 @@ struct Actor_func_8024A7A0_de {
     s8 animationState; /* 0x1A5 */
     u8 pad1A6[0xA];
     f32 motionThreshold; /* 0x1B0 */
-    u8 pad1B4[0x24];
+    u8 pad1B4[4];
+    Vec3 aimPosition; /* 0x1B8 */
+    u8 pad1C4[0x14];
     void *controller; /* 0x1D8: linked actor */
     u8 pad1DC[0x14];
     char *lockOn; /* 0x1F0 */
     u8 pad1F4[0x23A - 0x1F4];
     s8 lean; /* 0x23A */
     u8 updateCount; /* 0x23B */
-    u8 pad23C[0x34];
+    s32 actionReady; /* 0x23C */
+    u8 pad240[0x30];
     u8 effectMode; /* 0x270 */
     u8 pad271[0xB];
     void *update; /* 0x27C */
