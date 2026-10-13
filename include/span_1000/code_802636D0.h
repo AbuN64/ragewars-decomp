@@ -2,6 +2,14 @@ struct ControllerProfile;
 #ifndef UNBAKE_SPAN_1000_CODE_802636D0_H
 #define UNBAKE_SPAN_1000_CODE_802636D0_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
+
+/* Status and message queue for controller-pak operations. */
+typedef struct PakQueueState {
+    s8 status;
+    char reserved1[7];
+    Queue_func_802517B4_de queue;
+} PakQueueState;
 struct func_80264268_S1;
 /* unbake published declaration: published_049be7bd52ac98aa5db3fc12 */
 struct func_80264268_S1 {
@@ -66,7 +74,9 @@ typedef struct func_802643D8_S1 func_802643D8_S1;
 struct Obj80264124;
 /* unbake published declaration: published_4131540f4132b5051a9d54ba */
 struct Obj80264124 {
-    char pad00[8];
+    s32 flags;
+    s8 enabled;
+    char pad05[3];
     s32 x;
     s32 y;
     s32 z;
