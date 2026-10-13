@@ -1,6 +1,13 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8029F3A8_H
 #define UNBAKE_SPAN_1000_CODE_8029F3A8_H
 #include "../types.h"
+#include "common/types_8a8189af7b05.h"
+
+/* Matrix constructor record: four header words precede the 4x4 matrix. */
+typedef struct MatrixRecord {
+    u32 header[4];
+    Matrix matrix;
+} MatrixRecord;
 /* unbake published declaration: published_11f9709cfe270733332aeef2 */
 extern float D_800C5CC0_de;
 
@@ -260,7 +267,7 @@ extern void func_8029ECBC_de(void *arg0, f32 arg1);
 extern double D_800C5D30_de;
 
 /* unbake published declaration: published_f29795d883c8253f4d96dc84 */
-extern void func_8029EA7C_de(void *arg0, int arg1, int arg2, int arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9, float arg10, float arg11, float arg12, float arg13, float arg14, float arg15, float arg16);
+extern void func_8029EA7C_de(void *arg0, float arg1, float arg2, float arg3, float arg4, float arg5, float arg6, float arg7, float arg8, float arg9, float arg10, float arg11, float arg12, float arg13, float arg14, float arg15, float arg16);
 
 /* unbake published declaration: published_f3b270e4038ff12b071cd9d9 */
 extern void func_8029F080_de(float *arg0, float *arg1, float *arg2, float *arg3);
