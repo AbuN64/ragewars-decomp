@@ -1458,7 +1458,8 @@ extern void func_8040570C_de(u8 *arg0, s8 *arg1, s32 arg2);
 
 struct Shape_typemap_110;
 /* unbake published declaration: published_1b5f97ff367ab59ea76e94a2 */
-extern void func_80405CDC_de(struct Shape_typemap_110 *arg0);
+struct Record_func_80405CA8_de;
+extern void func_80405CDC_de(struct Record_func_80405CA8_de *arg0);
 
 struct func_80408C78_S1;
 /* unbake published declaration: published_226238b70fd2d71f0864c791 */

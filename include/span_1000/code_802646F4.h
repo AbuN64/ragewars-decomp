@@ -46,6 +46,14 @@ struct Curve_func_80264EE0_de {
 };
 
 struct Curve_func_80264EE0_de;
+/* Type 1 curves choose a new random value each period. */
+typedef struct RandomCurve {
+    s32 type;
+    f32 period;
+    u8 minimum;
+    u8 maximum;
+} RandomCurve;
+
 struct Player_func_80264EE0_de;
 /* unbake published declaration: published_0f4a5c57f1232dfe2610654e */
 struct Player_func_80264EE0_de {
