@@ -369,7 +369,7 @@ extern void func_802428D0_de(void *first, void *second);
 struct ContextB0;
 /* unbake published declaration: published_7ea48cbcd58ed80a6d51be33 */
 struct ContextB0 {
-    Ray180 *ray;
+    void *ray; /* Ray shared by collision traversal callbacks. */
     Vec3 *start;
     Vec3 *end;
     Matrix_func_80213CF8_de matrix;
@@ -468,9 +468,7 @@ struct Actor_func_80241BAC_de {
     u8 pad00[0x3C];
     s32 flags;
     u8 pad40[0x1C];
-    f32 move_x;
-    f32 move_y;
-    f32 move_z;
+    Vec3 movement; /* 0x5C */
     u8 pad68[0x48];
     Query_func_80241BAC_de saved_query;
 };

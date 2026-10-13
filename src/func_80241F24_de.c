@@ -50,7 +50,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
     owner_data = &((Actor_func_8024A7A0_de *)owner)->position0;
     entry = owner->entries + 0x14;
     height = ((Shape_func_80241950_de *)entry)->radius + func_8024D398_de(input);
-    if (actor->move_y > 0.0f) {
+    if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         func_80240D20_de(query, bounds);
         if (func_8023EA44_de(actor, query, owner_data, height, 0)) {
@@ -84,7 +84,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
             D_80103FCC = saved_collision;
         }
     }
-    if (actor->move_y < 0.0f) {
+    if (actor->movement.y < 0.0f) {
         query->word0 = 2;
         func_80240E00_de(query, bounds);
         if (func_8023EA44_de(actor, query, owner_data, height, 1)) {
@@ -92,7 +92,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
             input->flags38 |= 0x10;
         }
     }
-    if (actor->move_x != 0.0f || actor->move_z != 0.0f) {
+    if (actor->movement.x != 0.0f || actor->movement.z != 0.0f) {
         query->word0 = 3;
         if (func_8023E178_de(actor, owner_data, height,
                           bounds->corners[0].y, bounds->corners[4].y,
@@ -100,7 +100,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
             actor->flags |= 8;
             func_80271F34_de(&((Actor_func_8024A7A0_de *)input)->position1,
                           &((Actor_func_8024A7A0_de *)input)->position1,
-                          (Vec3 *)&actor->move_x);
+                          &actor->movement);
         }
     }
 }

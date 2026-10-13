@@ -222,7 +222,8 @@ struct ChildB4 {
     f32 pos[3];
     f32 rot[3];
     Matrix mat[2];
-    char pa8[8];
+    f32 fraction; /* 0xA8 */
+    f32 length; /* 0xAC */
     Entity1DC *unk_B0;
 };
 

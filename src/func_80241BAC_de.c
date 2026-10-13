@@ -42,7 +42,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
     void *saved_collision;
     s32 hit;
 
-    if (actor->move_y > 0.0f) {
+    if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         func_80240D20_de(query, bounds);
         if (func_8023E8D4_de(actor, query, 0)) {
@@ -76,7 +76,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
             D_80103FCC = saved_collision;
         }
     }
-    if (actor->move_y < 0.0f) {
+    if (actor->movement.y < 0.0f) {
         query->word0 = 2;
         func_80240E00_de(query, bounds);
         if (func_8023E8D4_de(actor, query, 1)) {
@@ -84,7 +84,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
             input->flags38 |= 0x10;
         }
     }
-    if (actor->move_x != 0.0f || actor->move_z != 0.0f) {
+    if (actor->movement.x != 0.0f || actor->movement.z != 0.0f) {
         query->word0 = 3;
         func_80240EE0_de(query, bounds);
         hit = func_8023E8D4_de(actor, query, 1);
@@ -98,7 +98,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
             actor->flags |= 8;
             func_80271F34_de(&((Actor_func_8024A7A0_de *)input)->position1,
                           &((Actor_func_8024A7A0_de *)input)->position1,
-                          (Vec3 *)&actor->move_x);
+                          &actor->movement);
         }
     }
 }
