@@ -1,3 +1,4 @@
+#include "span_1000/code_80299DB4.h"
 #include "types.h"
 typedef struct Shared_MenuDefinition Shared_MenuDefinition;
 struct Shared_MenuDefinition {
@@ -15,10 +16,7 @@ struct Shared_MenuEntry {
     Shared_MenuDefinition *object;
     s32 id;
     Shared_MenuDefinition *focus;
-    s32 data;
-    s32 data10;
-    s32 data14;
-    s32 data18;
+    StreamBuffer data;
 };
 typedef struct Shared_MenuCache Shared_MenuCache;
 struct Shared_MenuCache {
@@ -50,7 +48,7 @@ struct Shared_MenuManager {
 void func_80297DBC_de(void);
 void func_80298ECC_de(void);
 s32 func_80299958_de(void);
-void func_80299C80_de(void *);
+void func_80299C80_de(StreamBuffer *);
 void func_80299CC4_de(void);
 f64 func_802A18CC_de(void);
 void func_804116CC_de(s32);
@@ -284,7 +282,7 @@ after_focus10:
         temp_a0_5->focus = temp_v0_6->unk44;
         var_s1 = temp_v0_6;
         D_80146E10 = var_s1->unk44;
-        func_80299C80_de((void *)&D_8014D080->unkC[D_8014D080->unk4].data);
+        func_80299C80_de(&D_8014D080->unkC[D_8014D080->unk4].data);
         temp_v0_7 = D_8014D080->callback2;
         if (temp_v0_7 != 0) {
             (((Shared_MenuDefinition *)(D_8014D080->unkC[D_8014D080->unk4].object))->unk40) = temp_v0_7(arg0);

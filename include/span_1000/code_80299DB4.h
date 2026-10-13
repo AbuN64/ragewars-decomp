@@ -80,7 +80,8 @@ struct Event_func_8029A558_de;
 typedef struct Event_func_8029A558_de Event_func_8029A558_de;
 
 /* unbake published declaration: published_64c011b276506d4d2771cb1f */
-extern void func_80299C80_de(void *arg0);
+struct StreamBuffer;
+extern void func_80299C80_de(struct StreamBuffer *arg0);
 
 /* unbake published declaration: published_8dd57096c7c1345d1d040550 */
 extern void func_8029AAAC_de();
@@ -120,19 +121,7 @@ struct func_8029BA34_S1 {
     char unkC04;
 };
 
-struct func_8029AB74_S1;
-/* unbake published declaration: published_efa88cfb46f09bef628d493f */
-typedef struct func_8029AB74_S1 func_8029AB74_S1;
 
-struct func_8029AB74_S1;
-/* unbake published declaration: published_f0f6ba56be34b37feb45646d */
-struct func_8029AB74_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0xC - 0x4 - sizeof(s32)];
-    s32 unkC;
-};
 
 /* unbake published declaration: published_fb13880cc280f0d492647175 */
 extern void func_8029AA24_de(int arg0);

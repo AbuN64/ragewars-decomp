@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80297CD0_H
 #define UNBAKE_SPAN_1000_CODE_80297CD0_H
 #include "../types.h"
+#include "span_1000/code_80299DB4.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "resident_event_handler.h"
@@ -53,10 +54,7 @@ struct Entry_func_80298ECC_de {
     void *object;
     s32 field4;
     s32 field8;
-    s32 fieldC;
-    s32 field10;
-    s32 field14;
-    s32 field18;
+    StreamBuffer fieldC;
 };
 
 struct Entry_func_80298ECC_de;
@@ -279,10 +277,7 @@ struct Entry_func_80297DBC_de {
     struct Obj_func_80297DBC_de *unk0;
     s32 unk4;
     s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
+    StreamBuffer unkC;
 };
 struct Entry_func_80297DBC_de;
 struct State_func_80297DBC_de;

@@ -19,7 +19,7 @@ void func_80297DBC_de(void) {
     }
     func_80297310_de(1, 0xE06, 0, 0, 0);
     func_80297310_de(1, 0xE07, 0, 0, 0);
-    (&D_8014D080->unkC[temp_s0])->unk14 = 0;
+    (&D_8014D080->unkC[temp_s0])->unkC.readPosition = 0;
     func_80297310_de(1, 0xE02, &D_8014D080->unkC[temp_s0].unkC, 0, 0);
     func_80299C80_de(&D_8014D080->unkC[temp_s0].unkC);
 }
