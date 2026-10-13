@@ -36,6 +36,7 @@ struct Pool_func_80285B64_de;
 struct Pool_func_80285B64_de {
     IntrusiveList free;
     IntrusiveList active;
+    s32 baseLevel; /* 0x28 */
 };
 
 union func_80285D80_S2_U138;

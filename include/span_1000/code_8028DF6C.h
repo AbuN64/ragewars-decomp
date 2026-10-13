@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #ifndef UNBAKE_SPAN_1000_CODE_8028DF6C_H
 #define UNBAKE_SPAN_1000_CODE_8028DF6C_H
 #include "../types.h"
@@ -206,9 +207,13 @@ struct Scene_func_8028FA60_de;
 struct View_func_8028FA60_de;
 /* unbake published declaration: published_55ed0de75e5b4f8701477797 */
 struct View_func_8028FA60_de {
-    char pad0[0x2F4];
+    char pad0[0x78];
+    struct Queue_func_802BB2A0_de messages;
+    char pad90[0x2F4 - 0x90];
     struct Scene_func_8028FA60_de *current;
     struct Scene_func_8028FA60_de *next;
+    char pad2FC[4];
+    s32 pending; /* 0x300 */
 };
 
 /* unbake published declaration: published_56d7c22382e7b35e89a77a56 */

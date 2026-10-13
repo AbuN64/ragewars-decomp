@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "gfx.h"
 #include "span_1000/code_8024BA6C.h"
 #include "n64sdk.h"
@@ -18,7 +19,6 @@
 
 extern Gfx *D_80110634;
 extern s32 D_800D297C;
-extern char D_8011FFB0;
 extern s32 func_802799C0_de(void *, s32);
 extern void func_8026F898_de(f32 *, f32 *, f32 *);
 extern void func_80272828_de(f32 *);
@@ -29,6 +29,7 @@ extern void func_8026C6D8_de(s32, s32, s32, s32, void *, s32, s32);
 
 
 void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
+    struct Actor_func_8024A7A0_de *object = actor;
     f32 mf[16];
     s32 mtx;
     s32 matrices;
@@ -36,7 +37,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
     Gfx *load;
     s32 offset;
 
-    if (((func_8024BA6C_S1 *)(actor))->unkB4 != 0) {
+    if (object->fieldB4 != 0) {
         mtx = func_802799C0_de(&D_8011FFB0, 1);
         if (mtx != 0) {
             matrices = camera->matrices;
@@ -44,8 +45,8 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
             func_80272828_de(mf);
             func_8026FC9C_de(mf, mtx);
             gSPMatrix(D_80110634++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
-            func_8026C6D8_de(layer, camera->style, ((func_8024BA6C_S1 *)(actor))->unkB4, 1,
-                          &(&((func_8024BA6C_S1 *)(actor))->unk140)[D_800D297C], 0, ((func_8024BA6C_S1 *)(actor))->unk3);
+            func_8026C6D8_de(layer, camera->style, object->fieldB4, 1,
+                          &object->lighting[D_800D297C], 0, object->field3);
             restore = D_80110634++;
             offset = (D_800D297C << 6) + 0x380;
             gSPMatrix(restore, matrices + offset, G_MTX_LOAD | G_MTX_PROJECTION);

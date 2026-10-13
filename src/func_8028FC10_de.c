@@ -24,7 +24,7 @@ void func_8028FC10_de(void *arg0) {
     s32 value2 = 0;
     s32 flags;
 
-    while (func_802BB2A0_de(&((func_8028FBF0_S1 *)(arg0))->unk78, &node, 0) != -1) {
+    while (func_802BB2A0_de(&((View_func_8028FA60_de *)arg0)->messages, &node, 0) != -1) {
         if (node->type == 1 && (node->flags & 0x20) && D_800CD704 == 0) {
             D_800CD704 = 2;
             func_802BB5F0_de(&D_80106248, D_800CD8B8_de);
@@ -32,14 +32,14 @@ void func_8028FC10_de(void *arg0) {
         func_8028F954_de(arg0, node);
     }
 
-    if (((func_8028FBF0_S1 *)(arg0))->unk300 != 0 &&
-        ((func_8028FBF0_S1 *)(arg0))->unk2F4 != 0) {
+    if (((View_func_8028FA60_de *)arg0)->pending != 0 &&
+        ((View_func_8028FA60_de *)arg0)->current != 0) {
         func_8028FBD8_de(arg0);
         return;
     }
 
-    flags = (((func_8028FBF0_S1 *)(arg0))->unk2F4 == 0) * 2 |
-            (((func_8028FBF0_S1 *)(arg0))->unk2F8 == 0);
+    flags = (((View_func_8028FA60_de *)arg0)->current == 0) * 2 |
+            (((View_func_8028FA60_de *)arg0)->next == 0);
     if (((s32 (*)(void *, s32 *, s32 *, s32))func_8028F544_de)(arg0, &value1, &value2, flags) != flags) {
         ((void (*)(void *, s32, s32))func_8028FA60_de)(arg0, value1, value2);
     }

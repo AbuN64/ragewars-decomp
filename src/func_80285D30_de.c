@@ -19,15 +19,15 @@ void func_80285D30_de(void *arg0) {
     s32 saved;
 
     saved = func_802BCF30_de();
-    node = ((func_80285D00_S1 *)(arg0))->unk14.head;
+    node = ((Pool_func_80285B64_de *)arg0)->active.head;
     if (node != 0) {
         do {
-            next = ((Field_void_4 *)(node))->value;
-            func_80255ED8_de(&((func_80285D00_S1 *)(arg0))->unk14, node);
+            next = ((Node_func_80285B64_de *)node)->next;
+            func_80255ED8_de(&((Pool_func_80285B64_de *)arg0)->active, node);
             func_80255D14_de(arg0, node);
             node = next;
         } while (node != 0);
     }
-    ((func_80285D00_S1 *)(arg0))->unk28 = 0;
+    ((Pool_func_80285B64_de *)arg0)->baseLevel = 0;
     func_802BCF50_de(saved);
 }
