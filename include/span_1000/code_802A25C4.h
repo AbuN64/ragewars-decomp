@@ -221,7 +221,7 @@ struct ChildB4 {
     int pc;
     f32 pos[3];
     f32 rot[3];
-    f32 mat[32];
+    Matrix mat[2];
     char pa8[8];
     Entity1DC *unk_B0;
 };

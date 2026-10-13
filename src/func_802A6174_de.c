@@ -1,3 +1,5 @@
+#include "span_1000/code_802A25C4.h"
+#include "common/unused.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802A6AC0.h"
@@ -31,37 +33,29 @@ void func_802A6174_de(void *arg0, void *arg1) {
     f32 local[16];
     f32 scale;
     void *entry;
-    UnitMtx *dst;
-    UnitMtx *src;
-    u8 *cursor;
-    u8 *dst_cursor;
-    u8 *src_cursor;
+    Matrix *dst;
+    Matrix *src;
 
-    entry = ((func_802A7164_S1 *)(arg1))->unkB0;
+    entry = ((ChildB4 *)arg1)->unk_B0;
     if (entry != 0) {
         if (entry == (void *)-1) {
-            cursor = (u8 *)arg1;
-            dst_cursor = cursor + (D_800D297C << 6) + 0x28;
-            dst = (UnitMtx *)dst_cursor;
-            src_cursor = cursor + ((D_800D297C ^ 1) << 6) + 0x28;
-            src = (UnitMtx *)src_cursor;
-            *dst = *src;
-            ((func_802A7164_S1 *)(arg1))->unkB0 = 0;
+            ((ChildB4 *)arg1)->mat[D_800D297C] = ((ChildB4 *)arg1)->mat[D_800D297C ^ 1];
+            ((ChildB4 *)arg1)->unk_B0 = 0;
         } else {
             func_80270910_de(local, entry + ((D_800D297C << 6) + 0x60));
             scale = D_800C5EB8_de;
-            if (((func_80204468_S3 *)(((func_802A68A0_S3 *)(entry))->unk118))->unk14 != 0) {
+            if (((Effect_func_802800C0_de *)entry)->entry->unk14 != 0) {
                 scale = D_800C5EBC_de;
             }
             func_8027347C_de(local, scale, scale, scale);
             func_80272828_de(local);
-            func_802732D0_de((char *)local, &((func_802A7164_S1 *)(arg1))->unk10);
-            if (((func_802A7164_S4 *)(arg0))->unk3C & 4) {
-                func_802732EC_de(local, &((func_802A7164_S1 *)(arg1))->unk1C);
+            func_802732D0_de((char *)local, &((ChildB4 *)arg1)->pos[0]);
+            if (((Node44 *)arg0)->unk_3C & 4) {
+                func_802732EC_de(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
                 func_8027027C_de(local, arg1 + ((D_800D297C << 6) + 0x28));
             }
         }
-        ((func_802A7164_S1 *)(arg1))->unk8 = ((func_80212828_S7 *)(((func_802A7164_S4 *)(arg0))->unk8))->unk8;
+        ((ChildB4 *)arg1)->unk_8 = ((Node44 *)arg0)->unk_8->unk_8;
     }
 }
