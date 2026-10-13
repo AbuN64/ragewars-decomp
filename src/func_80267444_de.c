@@ -1,3 +1,5 @@
+#include "shared/level_actor.h"
+#include "shared/gameplay_transition.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802661FC.h"
 #include "types.h"
@@ -16,19 +18,20 @@ extern f32 func_8024D284_de(void *arg0);
 s32 func_80267444_de(void *arg0, Vec3 *arg1) {
     Vec3 first;
     Vec3 second;
-    char *actor;
+    Actor_func_8024A7A0_de *object = arg0;
+    Shared_ActorView *actor;
     s16 state;
     s32 result;
 
     result = 0;
-    if ((*(u8 *)arg0 == 1) &&
-        ((((func_8026745C_S1 *)(arg0))->unk100 & 0x300000) != 0)) {
-        actor = ((func_8026745C_S1 *)(arg0))->unk1D8;
-        if (arg0 == (char *)actor + 0x2E8) {
-            state = ((func_8026745C_S2 *)(actor))->unk62E;
+    if ((object->kind == 1) &&
+        ((object->flags & 0x300000) != 0)) {
+        actor = object->controller;
+        if (arg0 == actor->weapon) {
+            state = actor->selectedAction;
             if ((state == 0) || (state == 0x11) || (state == 0x10)) {
                 first = *arg1;
-                second = ((func_8026745C_S2 *)(actor))->unk8;
+                second = ((Actor_func_8024A7A0_de *)actor)->position0;
                 func_80271FC8_de(arg1, 0.75f, &first, &second);
                 arg1->y += func_8024D284_de(actor) * D_800C4430_de;
                 result = 1;
