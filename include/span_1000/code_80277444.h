@@ -34,6 +34,7 @@ struct Object_func_802773D4_de {
     u8 flagB9;
     char padBA;
     u8 shape; /* 0xBB */
+    u8 animationSeed; /* 0xBC */
 };
 
 struct Object_func_8027892C_de;

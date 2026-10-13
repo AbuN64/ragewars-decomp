@@ -1,3 +1,4 @@
+#include "span_16E000/menu_ui_providers.h"
 #include "shared/world.h"
 #include "span_16E000/code_80435CE4.h"
 #include "types.h"
@@ -10,7 +11,7 @@
    func_8025E384_de and func_8042DEA0_de. Returns zero. */
 
 extern void *D_800E5558;
-extern char D_80145088[];
+
 
 extern s32 func_8043C308_de(void *);
 extern void func_8043C080_de(void *);
@@ -39,7 +40,7 @@ s32 func_804362A8_de(s32 arg0, s32 arg1, s32 event) {
             return 0;
         }
         func_8029973C_de();
-        pause = &((func_80436488_S1 *)D_80145088)->unk180C;
+        pause = &D_80145088.status[7];
         *pause = 0;
         func_8044A370_de((char *)pause - 0x180C, 0);
         func_804499B0_de((char *)pause - 0x1854, 0, 0);
