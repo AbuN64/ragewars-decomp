@@ -1,3 +1,7 @@
+#include "common/unused.h"
+#include "shared/gameplay_transition.h"
+#include "span_1000/code_8021CD70.h"
+#include "span_1000/code_8022C894.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -45,29 +49,29 @@ extern void func_8021C698_de(void *arg0, void *arg1);
 
 
 void func_8021C9D8_de(void *arg0, void *arg1) {
-    Triple pos;
+    Vec3 pos;
     s32 value;
     Gfx *cmd;
 
-    pos = ((func_8021C9B4_S1 *)arg0)->unk8;
-    *(f32 *)&pos.y += ((func_8021C9B4_S1 *)(arg0))->unk70;
-    *(f32 *)&pos.y += func_8024D284_de(arg0) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
+    pos = ((Actor_func_8024A7A0_de *)arg0)->position0;
+    pos.y += ((Actor_func_8024A7A0_de *)arg0)->eyeHeight;
+    pos.y += func_8024D284_de(arg0) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
     func_8028C6D4_de(&D_8011FE88, &pos,
-                  &((func_8021C9B4_Records *)arg0)->records[D_800D297C]);
+                  &((Actor_func_8024A7A0_de *)arg0)->lighting[D_800D297C]);
 
     value = 0x66;
     if (D_801462E5 != 0) {
         if ((D_801468F4 != 0) &&
-            (((func_8021C9B4_S2 *)(((func_8021C9B4_S1 *)(arg0))->unk5D8))->unk8F != 0)) {
+            (((Shared_ActorView *)arg0)->controls->transientFlag != 0)) {
             value = D_800CE47C;
         } else {
-            value = D_800CE430[((func_8021C9B4_S3 *)(((func_8021C9B4_S1 *)(arg0))->unk18))->unkC];
-            ((func_8021C9B4_S1 *)(arg0))->unk3 =
-                ((func_8021C9B4_S2 *)(((func_8021C9B4_S1 *)(arg0))->unk5D8))->unk81;
+            value = D_800CE430[((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg0)->definition)->character];
+            ((Actor_func_8024A7A0_de *)arg0)->field3 =
+                ((Shared_ActorView *)arg0)->controls->playerId;
         }
     }
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, value,
-                  ((func_8021C9B4_S1 *)(arg0))->unk86C);
+                  ((Actor_func_8022D290_de *)arg0)->unk_0x086C);
 
     cmd = D_80110634++;
     gDPPipeSync(cmd);
@@ -85,7 +89,7 @@ void func_8021C9D8_de(void *arg0, void *arg1) {
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFE);
 
     func_80249E28_de(arg0, arg1);
-    if (((func_8021C9B4_S1 *)(arg0))->unk1210 != 0) {
+    if (((Actor_func_8022D290_de *)arg0)->unk_0x1210 != 0) {
         func_8021C698_de(arg0, arg1);
     }
 }

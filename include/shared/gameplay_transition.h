@@ -67,8 +67,7 @@ struct Shared_ActorView {
     char pad11DC[0x8];
     s32 pending; /* +0x11E4: src/func_8021B468.c */
     s32 field11E8;
-    f32 impactTimer; /* 0x11EC */
-    u8 pad11F0[0xC];
+    u8 pad11EC[0x10];
     s32 field11FC; /* +0x11FC: src/func_8021B468.c */
     char pad1200[0x10];
     s32 targeting; /* 0x1210 */
@@ -115,7 +114,8 @@ typedef struct Shared_ControlView Shared_ControlView;
 struct Shared_ControlView {
     char pad0[0x80];
     s8 mode; /* +0x80: src/func_8021B468.c */
-    char pad81[0xE];
+    u8 playerId; /* 0x81 */
+    char pad82[0xD];
     u8 transientFlag; /* +0x8F: src/func_8021B468.c */
     s8 resetFlag; /* +0x90: src/func_8021B468.c */
     char pad91[2];

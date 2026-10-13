@@ -1,6 +1,7 @@
 #include "shared/func_802052C4_de_closed.h"
 #include "span_1000/code_8021CD70.h"
 #include "span_1000/code_8025A3EC.h"
+#include "span_1000/code_8025C544.h"
 #include "span_16E000/code_8043962C.h"
 #include "common/unused.h"
 #include "span_1000/code_80213ED4.h"
@@ -50,8 +51,8 @@ f32 func_80217224_de(void *arg0, Vec3 v) {
 /* Squared XZ distance to a point using the existing by-value vector ABI. */
 f32 func_80217290_de(void *arg0, Vec3 point)
 {
-    f32 dx = point.x - ((SharedPlayer *)arg0)->views0.view8_3.pos.x;
-    f32 dz = point.z - ((SharedPlayer *)arg0)->views0.view8_3.pos.z;
+    f32 dx = point.x - ((Actor_func_8024A7A0_de *)arg0)->position0.x;
+    f32 dz = point.z - ((Actor_func_8024A7A0_de *)arg0)->position0.z;
     return dx * dx + dz * dz;
 }
 
@@ -70,17 +71,17 @@ extern void *func_8025C95C_de(void *, s32, void *, void *, s32);
 
 
 void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
-    void *node;
+    Node_func_8025CBEC_de *node;
     void *fallback;
     s32 kind;
 
-    node = ((func_802172D0_S1 *)(arg1))->unkFC;
+    node = ((Dest *)arg1)->sound;
     fallback = (void *)-1;
     if (node != 0) {
-        if (((func_80205628_S3 *)(node))->unkC == arg2) {
+        if (node->state == arg2) {
             return;
         }
-        func_8025CA24_de(func_8025CC6C_de(), ((func_802172D0_S1 *)(arg1))->unkFC);
+        func_8025CA24_de(func_8025CC6C_de(), ((Dest *)arg1)->sound);
     }
 
     kind = *(u8 *)arg0;
@@ -91,10 +92,10 @@ void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
             }
         }
     } else {
-        fallback = ((func_802172D0_S3 *)(arg0))->unkD0;
+        fallback = (void *)((Actor_func_8024A7A0_de *)arg0)->resourceFlags;
     }
 
-    ((func_802172D0_S1 *)(arg1))->unkFC =
-        func_8025C95C_de(func_8025CC6C_de(), arg2, &((func_802172D0_S3 *)(arg0))->unk8,
-                      &((func_802172D0_S3 *)(arg0))->unk8, (s32)fallback);
+    ((Dest *)arg1)->sound =
+        func_8025C95C_de(func_8025CC6C_de(), arg2, &((Actor_func_8024A7A0_de *)arg0)->position0,
+                      &((Actor_func_8024A7A0_de *)arg0)->position0, (s32)fallback);
 }

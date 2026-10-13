@@ -7409,7 +7409,11 @@ typedef struct ObjectLinks1454 ObjectLinks1454;
 struct MovementDescriptor;
 /* unbake published declaration: published_433f32dd85eb3507a1971b58 */
 struct MovementDescriptor {
-    char pad0[0x1C];
+    char pad0[0xC];
+    s16 character;
+    char padE[6];
+    s32 flags;
+    char pad18[4];
     f32 speed;
 };
 

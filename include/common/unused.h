@@ -6226,6 +6226,8 @@ struct Dest {
     s16 result;
     s8 state_result;
     u8 count;
+    char padCC[0x30];
+    struct Node_func_8025CBEC_de *sound; /* 0xFC */
 };
 typedef void *( *StateCallback)(struct Source110 *, struct Dest *);
 struct StateEntry {

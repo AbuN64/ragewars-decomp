@@ -1,3 +1,6 @@
+#include "common/unused.h"
+#include "span_1000/code_8021CD70.h"
+#include "span_1000/code_8022C894.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
@@ -12,7 +15,7 @@ extern void func_802227F4_de(void *, void *, s32);
 
 
 s32 func_8022C6E4_de(void *arg0, void *arg1) {
-    s16 state = ((func_8022C6D4_S1 *)(arg0))->unk650;
+    s16 state = ((Actor_func_8022D290_de *)arg0)->unk_0x0650;
     s32 blocked;
 
     if ((state == 0x15) || (state == 0x13) || (state == 0x14)) {
@@ -21,13 +24,13 @@ s32 func_8022C6E4_de(void *arg0, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if ((((func_8020D1FC_S1 *)(arg1))->unk38 & 0x20000) == 0) {
+        if ((((Actor_func_8024A7A0_de *)arg1)->motionState & 0x20000) == 0) {
             return 0;
         }
-        if (((func_8022C6D4_S1 *)(arg0))->unk650 == 0xD) {
+        if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0xD) {
             return 0;
         }
-        if (((func_8022C6D4_S1 *)(arg0))->unk650 == 0xE) {
+        if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0xE) {
             return 0;
         }
         func_802227F4_de(arg0, arg1, 0xD);
@@ -45,7 +48,7 @@ extern void func_802227F4_de(void *, void *, s32);
 
 
 s32 func_8022C760_de(void *arg0, void *arg1) {
-    s16 state = ((ObjectState668 *)(arg0))->unk_650;
+    s16 state = ((Actor_func_8022D290_de *)arg0)->unk_0x0650;
     s32 blocked;
     s32 flags;
 
@@ -55,14 +58,14 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if (((struct func_80204468_S3 *) ((ObjectLinks3C *) arg1)->unk_18)->unk14 & 1) {
-            if (((ObjectState668 *)(arg0))->unk_650 == 0x26) {
+        if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->flags & 1) {
+            if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0x26) {
                 return 0;
             }
-            if (((ObjectState668 *)(arg0))->unk_664 & 0x8000) {
+            if (((Actor_func_8022D290_de *)arg0)->unk_0x0664 & 0x8000) {
                 return 0;
             }
-            flags = ((ObjectLinks3C *)(arg1))->unk_38;
+            flags = ((Actor_func_8024A7A0_de *)arg1)->motionState;
             if (flags & 0x80) {
                 goto fire;
             }
@@ -71,7 +74,7 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
     }
     return 0;
 fire:
-    ((ObjectLinks3C *)(arg1))->unk_38 = flags | 0x100;
+    ((Actor_func_8024A7A0_de *)arg1)->motionState = flags | 0x100;
     func_802227F4_de(arg0, arg1, 0xF);
     return 1;
 }
@@ -89,12 +92,12 @@ extern void func_802227F4_de(void *, void *, s32);
 s32 func_8022C7F8_de(void *arg0, void *arg1) {
     f32 field6E4;
 
-    if (((func_8022C7E8_S1 *)(arg0))->unk7E8 == 0) {
-        field6E4 = ((func_8022C7E8_S1 *)(arg0))->unk6E4;
+    if (((Actor_func_8022D290_de *)arg0)->unk_0x07E8 == 0) {
+        field6E4 = ((Actor_func_8022D290_de *)arg0)->unk_0x06E4;
         if (!(D_800C2D5C_de < field6E4)) {
-            if (!(((func_80207ABC_S1 *)(arg1))->unk38 & 0xC0000)) {
-                if (((func_80204468_S3 *)(((func_80207ABC_S1 *)(arg1))->unk18))->unk14 & 2) {
-                    if ((((func_8022C7E8_S1 *)(arg0))->unk6B0 & 0x10) && (((func_8022C7E8_S1 *)(arg0))->unk11D8 <= 0.0f)) {
+            if (!(((Actor_func_8024A7A0_de *)arg1)->motionState & 0xC0000)) {
+                if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->flags & 2) {
+                    if ((((Actor_func_8022D290_de *)arg0)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)arg0)->unk_0x11D8 <= 0.0f)) {
                         func_802227F4_de(arg0, arg1, 5);
                         return 1;
                     }
@@ -111,7 +114,7 @@ int func_8022C88C_de(void) {
 }
 
 void func_8022C894_de(void *arg0, void *arg1) {
-    ((func_8022C884_S1 *)(arg1))->unk1C = 0;
-    ((func_8022C884_S1 *)(arg1))->unk20 = 0;
-    ((func_8022C884_S1 *)(arg1))->unk24 = 0;
+    ((Actor_func_8024A7A0_de *)arg1)->position1.x = 0;
+    ((Actor_func_8024A7A0_de *)arg1)->position1.y = 0;
+    ((Actor_func_8024A7A0_de *)arg1)->position1.z = 0;
 }

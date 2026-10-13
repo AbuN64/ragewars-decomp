@@ -1,4 +1,3 @@
-#include "common/unused.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028469C.h"
@@ -8,24 +7,25 @@
 void *func_802846C8_de(void *arg0, s32 arg1, void *arg2) {
     void *record;
 
-    record = ((EffectEntry *)arg2)->params->listIndex[((EffectSystem *)arg0)->lists].head;
+    record = *(void **)(&((func_8028469C_S1 *)(arg0))->unkFC28 +
+                        (((func_8028469C_S3 *)(((func_8028469C_S2 *)(arg2))->unk38))->unk8 * 20));
     if (arg2 != 0) {
         if (record != 0) {
             do {
-                if (((Effect_func_802800C0_de *)record)->ownerId == arg1) {
-                    if (((Effect_func_802800C0_de *)record)->entry == arg2) {
+                if (((func_8028469C_S4 *)(record))->unk124 == arg1) {
+                    if (((func_8028469C_S4 *)(record))->unk118 == arg2) {
                         return record;
                     }
                 }
-                record = ((Effect_func_802800C0_de *)record)->next;
+                record = ((func_8028469C_S4 *)(record))->unk1EC;
             } while (record != 0);
         }
     } else if (record != 0) {
         do {
-            if (((Effect_func_802800C0_de *)record)->ownerId == arg1) {
+            if (((func_8028469C_S4 *)(record))->unk124 == arg1) {
                 return record;
             }
-            record = ((Effect_func_802800C0_de *)record)->next;
+            record = ((func_8028469C_S4 *)(record))->unk1EC;
         } while (record != 0);
     }
     return 0;
@@ -39,12 +39,12 @@ void func_80284758_de(void *arg0, void *arg1)
     void *current;
     s32 key;
 
-    current = ((EffectSystem *)arg0)->groups.head;
+    current = ((func_8028472C_S1 *)(arg0))->unkFC14.head;
     if (current != 0) {
-        key = (s32)((Effect_func_802800C0_de *)arg1)->entry;
+        key = ((func_8028472C_S2 *)(arg1))->unk118.v0;
 loop:
-        if (((Effect_func_802800C0_de *)current)->entry != key) {
-            current = ((Effect_func_802800C0_de *)current)->groupNext;
+        if (((func_8028472C_S3 *)(current))->unk118 != key) {
+            current = ((func_8028472C_S3 *)(current))->unk1F4;
             if (current != 0) {
                 goto loop;
             }
@@ -52,14 +52,14 @@ loop:
     }
 
     if (current != 0) {
-        func_80255D70_de(&((EffectSystem *)arg0)->groups, current, arg1);
-    } else if (((Effect_func_802800C0_de *)arg1)->entry->flags & 0x2000) {
-        func_80255CB8_de(&((EffectSystem *)arg0)->groups, arg1);
+        func_80255D70_de(&((func_8028472C_S1 *)(arg0))->unkFC14, current, arg1);
+    } else if (*((func_8028472C_S2 *)(arg1))->unk118.v1 & 0x2000) {
+        func_80255CB8_de(&((func_8028472C_S1 *)(arg0))->unkFC14, arg1);
     } else {
-        func_80255D14_de(&((EffectSystem *)arg0)->groups, arg1);
+        func_80255D14_de(&((func_8028472C_S1 *)(arg0))->unkFC14, arg1);
     }
 
-    ((Effect_func_802800C0_de *)arg1)->flags |= 0x01000000;
+    ((func_8028472C_S2 *)(arg1))->unk5C |= 0x01000000;
 }
 
 extern s32 func_802744D4_de(void);
@@ -80,18 +80,18 @@ void func_80284870_de(f32 arg0) {
 
 /** Return offset 0x180 only when the nested state word is zero. */
 float func_8028489C_de(void *arg0) {
-    void *inner = ((Effect_func_802800C0_de *)arg0)->entry;
-    if (((EffectEntry *)inner)->unk14 != 0) {
+    void *inner = ((func_80284870_S1 *)(arg0))->unk118;
+    if (((func_80204468_S3 *)(inner))->unk14 != 0) {
         return 0.0f;
     }
-    return ((Effect_func_802800C0_de *)arg0)->unk180[0];
+    return ((func_80284870_S1 *)(arg0))->unk180;
 }
 
 f32 func_802848BC_de(void *arg0) {
     f32 var_f0;
     var_f0 = 0.0f;
-    if ((((Effect_func_802800C0_de *)arg0)->entry->unk14) == 0) {
-        var_f0 = (((Effect_func_802800C0_de *)arg0)->unk180[1]);
+    if ((((struct func_80204468_S3 *) ((s8 *) ((struct ObjectLinks188 *) ((s8 *) arg0))->unk_118))->unk14) == 0) {
+        var_f0 = (((struct ObjectLinks188 *) ((s8 *) arg0))->unk_184);
     }
     return var_f0;
 }
@@ -100,7 +100,7 @@ s32 func_802848DC_de(void *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((Effect_func_802800C0_de *)arg0)->kind;
+    temp_v1 = ((func_8022BC04_S2 *)(arg0))->unk4;
     val = temp_v1;
     if (val == 0x56) {
         goto ret1;
@@ -129,7 +129,7 @@ s32 func_80284928_de(void *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((Effect_func_802800C0_de *)arg0)->kind;
+    temp_v1 = ((func_8022BC04_S2 *)(arg0))->unk4;
     val = temp_v1;
     if (val == 0x11) {
         goto ret1;
@@ -175,7 +175,7 @@ s32 func_802849AC_de(void *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((Effect_func_802800C0_de *)arg0)->kind;
+    temp_v1 = ((func_8022BC04_S2 *)(arg0))->unk4;
     val = temp_v1;
     if (val == 0xD) {
         goto ret1;
