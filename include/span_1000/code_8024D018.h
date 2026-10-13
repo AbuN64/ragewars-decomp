@@ -164,19 +164,36 @@ typedef struct {
     s32 kind;
     u8 pad4[0x10];
     s32 flags14; /* 0x14 */
-    union { f32 value; u16 mode; } at18;
+    f32 radius; /* 0x18: scalar-radius resource kinds */
     f32 value1C;
     f32 value20;
     u8 pad24[4];
     f32 value28;
-    u8 pad2C[0x10];
+    f32 value2C; /* 0x2C */
+    u8 pad30[4];
+    f32 value34; /* 0x34 */
+    u8 pad38[4];
     f32 value3C; /* 0x3C */
     u8 pad40[0xC];
     s32 flags4C; /* 0x4C */
     f32 value50; /* 0x50 */
     u8 pad54[0x98];
     f32 valueEC;
+    u8 padF0[8];
+    f32 valueF8; /* 0xF8 */
 } Resource_u1;
+
+/* Kind 2 uses a collision-mode halfword followed by three shape dimensions. */
+typedef struct CollisionShapeResource {
+    s32 kind;
+    u8 pad4[0x14];
+    u16 mode; /* 0x18 */
+    u8 pad1A[2];
+    f32 height; /* 0x1C */
+    f32 width; /* 0x20 */
+    u8 pad24[4];
+    f32 depth; /* 0x28 */
+} CollisionShapeResource;
 typedef struct { u8 pad0[0x80C]; s32 active; } State_u1;
 typedef struct {
     u8 kind;

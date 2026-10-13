@@ -16,20 +16,20 @@ f32 func_8024D398_de(Actor_u1 *actor)
         }
         return actor->resource->valueEC;
     case 0: case 5: case 8: case 10: case 12: case 13: case 14:
-        return actor->resource->at18.value;
+        return actor->resource->radius;
     case 1: case 4:
         return actor->resource->value28;
     case 2:
         resource = actor->resource;
-        if (resource->at18.mode == 2) {
-            a = resource->value20;
-            b = resource->value1C;
+        if (((CollisionShapeResource *)resource)->mode == 2) {
+            a = ((CollisionShapeResource *)resource)->width;
+            b = ((CollisionShapeResource *)resource)->height;
             if (!(b <= a)) a = b;
-            b = resource->value28;
+            b = ((CollisionShapeResource *)resource)->depth;
             if (!(a <= b)) b = a;
             return b * D_800C3C80_de;
         }
-        return resource->value1C;
+        return ((CollisionShapeResource *)resource)->height;
     case 7:
         return actor->resource->value1C;
     default:
