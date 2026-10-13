@@ -39,7 +39,7 @@ void func_8023EE60_de(Entry_func_8023EE60_de *arg0)
             dst->unk10 = e->z;
             dst->unk14 = e->w;
             dst->unk18 = e->extra;
-            e = &((func_8023EE50_S1 *)(e))->unk28;
+            e += 1;
         } while (e->dst != 0);
     }
 }

@@ -1,3 +1,4 @@
+#include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80271B18.h"
 #include "types.h"
@@ -10,17 +11,17 @@
 
 
 void func_80272B38_de(void *arg0, void *arg1, void *arg2) {
-    char *m = (char *)arg0;
-    char *v = (char *)arg1;
-    char *out = (char *)arg2;
+    Matrix *m = arg0;
+    Vec3 *v = arg1;
+    Vec3 *out = arg2;
 
-    ((func_8024C864_S1 *)(out))->unk0 = (((func_80272BA8_S2 *)(m))->unk0 * ((func_8024C864_S1 *)(v))->unk0)
-                       + (((func_80272BA8_S2 *)(m))->unk10 * ((func_8024C864_S1 *)(v))->unk4)
-                       + (((func_80272BA8_S2 *)(m))->unk20 * ((func_8024C864_S1 *)(v))->unk8);
-    ((func_8024C864_S1 *)(out))->unk4 = (((func_80272BA8_S2 *)(m))->unk4 * ((func_8024C864_S1 *)(v))->unk0)
-                       + (((func_80272BA8_S2 *)(m))->unk14 * ((func_8024C864_S1 *)(v))->unk4)
-                       + (((func_80272BA8_S2 *)(m))->unk24 * ((func_8024C864_S1 *)(v))->unk8);
-    ((func_8024C864_S1 *)(out))->unk8 = (((func_80272BA8_S2 *)(m))->unk8 * ((func_8024C864_S1 *)(v))->unk0)
-                       + (((func_80272BA8_S2 *)(m))->unk18 * ((func_8024C864_S1 *)(v))->unk4)
-                       + (((func_80272BA8_S2 *)(m))->unk28 * ((func_8024C864_S1 *)(v))->unk8);
+    out->x = (m->m[0] * v->x)
+                       + (m->m[4] * v->y)
+                       + (m->m[8] * v->z);
+    out->y = (m->m[1] * v->x)
+                       + (m->m[5] * v->y)
+                       + (m->m[9] * v->z);
+    out->z = (m->m[2] * v->x)
+                       + (m->m[6] * v->y)
+                       + (m->m[10] * v->z);
 }
