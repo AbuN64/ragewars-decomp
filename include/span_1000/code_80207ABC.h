@@ -88,4 +88,11 @@ typedef struct func_80207BB8_S3 func_80207BB8_S3;
 /* unbake published declaration: published_f5159e77480ef804c90c8e97 */
 extern int func_80207FE4_de(void * arg0);
 
+typedef struct ActorMotionEvent {
+    u8 pad0[0x4];
+    u16 key; /* 0x4 */
+    u8 pad6[0x4];
+    u16 id; /* 0xA */
+} ActorMotionEvent;
+
 #endif

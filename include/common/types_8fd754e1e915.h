@@ -4,10 +4,51 @@
 #include "common/types_8a8189af7b05.h"
 struct Player;
 /* unbake published declaration: published_038392ee5aca3bbae9c77df5 */
+typedef struct AiProfile {
+    u8 pad0[0x93];
+    u8 difficulty; /* 0x93 */
+} AiProfile;
+
 struct Player {
-    char pad0[8];
-    Vec3 pos;
+    u8 kind; /* 0x0 */
+    u8 pad1[0x7];
+    Vec3 pos; /* 0x8 */
+    u8 pad14[0x4];
+    void * definition; /* 0x18 */
+    u8 pad1C[0x1C];
+    s32 movementFlags; /* 0x38 */
+    u8 pad3C[0x14];
+    Vec3 scale; /* 0x50 */
+    u8 pad5C[0x10];
+    f32 heading; /* 0x6C */
+    u8 pad70[0x4];
+    f32 matrix[16]; /* 0x74 */
+    u8 padB4[0x30];
+    u16 objectId; /* 0xE4 */
+    u8 padE6[0x1A];
+    s32 weaponFlags; /* 0x100 */
+    u8 pad104[0x6C];
+    u8 motion[0x170]; /* 0x170 */
+    u8 pad2E0[0x2B4];
+    s32 gear; /* 0x594 */
+    u8 pad598[0x40];
+    AiProfile * profile; /* 0x5D8 */
+    u8 pad5DC[0x74];
+    s16 pose; /* 0x650 */
+    u8 pad652[0x4A];
+    f32 steer; /* 0x69C */
+    f32 pitch; /* 0x6A0 */
+    f32 strafe; /* 0x6A4 */
+    f32 forward; /* 0x6A8 */
+    u8 pad6AC[0x4];
+    s32 actionFlags; /* 0x6B0 */
+    u8 pad6B4[0x1C];
+    s32 active; /* 0x6D0 */
+    u8 pad6D4[0xD7C];
+    s32 computer; /* 0x1450 */
+    struct AiController * controller; /* 0x1454 */
 };
+
 
 struct func_8020A028_S4;
 /* unbake published declaration: published_065e9124cd99670a6d0994d5 */

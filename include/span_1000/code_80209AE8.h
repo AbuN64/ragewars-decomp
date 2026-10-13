@@ -403,7 +403,9 @@ struct func_8020A6D8_S1 {
 };
 
 /* unbake published declaration: published_b1ddceb58c04e0d82758f360 */
-extern void func_8020A028_de(void *arg0, void *arg1);
+struct AiController;
+struct AiConfig;
+extern void func_8020A028_de(struct AiController *arg0, struct AiConfig *arg1);
 
 /* unbake published declaration: published_b7ba202fd7ae5507e630eccd */
 extern void func_8020A95C_de(void *arg0, void *arg1);
@@ -530,5 +532,31 @@ extern void func_8020A7B0_de(void *arg0, void *arg1);
 
 /* unbake published declaration: published_ffae6f6b77889999281a50d4 */
 extern float D_800C1D0C_de;
+
+
+#include "span_1000/code_80208000.h"
+typedef struct AiCharacterDefinition {
+    u8 pad0[0x28];
+    f32 unk28; /* 0x28 */
+    f32 unk2C; /* 0x2C */
+    f32 unk30; /* 0x30 */
+    f32 unk34; /* 0x34 */
+} AiCharacterDefinition;
+typedef struct AiConfig {
+    s32 unk0; /* 0x0 */
+    s32 unk4; /* 0x4 */
+    s32 unk8; /* 0x8 */
+    s32 unkC; /* 0xC */
+    s32 unk10; /* 0x10 */
+    s32 unk14; /* 0x14 */
+    s32 unk18; /* 0x18 */
+    s32 unk1C; /* 0x1C */
+    s32 unk20; /* 0x20 */
+    s32 unk24; /* 0x24 */
+    s32 unk28; /* 0x28 */
+    s32 unk2C; /* 0x2C */
+    s32 unk30; /* 0x30 */
+    s32 unk34; /* 0x34 */
+} AiConfig;
 
 #endif

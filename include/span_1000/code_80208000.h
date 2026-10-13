@@ -1655,4 +1655,58 @@ typedef struct PitchBrain {
 extern f32 D_800C1C7C_de;
 extern f32 D_800C1C80_de;
 
+
+#include "common/types_8fd754e1e915.h"
+typedef struct AiTarget {
+    u8 pad0[0x1D8];
+    Player * player; /* 0x1D8 */
+} AiTarget;
+typedef struct AiBehaviourEntry { s32 id; void (*enter)(Player *,s32); void (*update)(Player *,s32); u8 reserved[0x14]; } AiBehaviourEntry;
+typedef struct AiBehaviourTable { struct AiBehaviourTable *next; u8 reserved[0x1C]; AiBehaviourEntry entries[1]; } AiBehaviourTable;
+typedef struct AiController {
+    Player * player; /* 0x0 */
+    s32 current; /* 0x4 */
+    s32 previous; /* 0x8 */
+    s32 mode; /* 0xC */
+    s32 fallback; /* 0x10 */
+    s32 queue[4]; /* 0x14 */
+    u8 pad24[0x8];
+    Vec3 destination; /* 0x2C */
+    u8 pad38[0x2C];
+    AiTarget * target; /* 0x64 */
+    u8 pad68[0x148];
+    Vec3 home; /* 0x1B0 */
+    u8 pad1BC[0x58];
+    AiBehaviourTable * table; /* 0x214 */
+    AiBehaviourEntry * behaviour; /* 0x218 */
+    s32 state; /* 0x21C */
+    u8 pad220[0x1C];
+    s32 unk23C; /* 0x23C */
+    s32 unk240; /* 0x240 */
+    f32 aim; /* 0x244 */
+    f32 speed[4]; /* 0x248 */
+    Vec3 targetPosition; /* 0x258 */
+    f32 distance; /* 0x264 */
+    u8 pad268[0x7C];
+    s32 unk2E4; /* 0x2E4 */
+    s32 unk2E8; /* 0x2E8 */
+    s32 unk2EC; /* 0x2EC */
+    u8 pad2F0[0x4];
+    s32 unk2F4; /* 0x2F4 */
+    s32 unk2F8; /* 0x2F8 */
+    s32 unk2FC; /* 0x2FC */
+    s32 unk300; /* 0x300 */
+    s32 unk304; /* 0x304 */
+    s32 unk308; /* 0x308 */
+    s32 unk30C; /* 0x30C */
+    s32 unk310; /* 0x310 */
+    s32 unk314; /* 0x314 */
+    s32 unk318; /* 0x318 */
+    s32 unk31C; /* 0x31C */
+    s32 unk320; /* 0x320 */
+    s32 unk324; /* 0x324 */
+    s32 unk328; /* 0x328 */
+    s32 unk32C; /* 0x32C */
+} AiController;
+
 #endif

@@ -490,4 +490,68 @@ struct func_80206604_G1 {
 struct Input_func_80207738_de;
 s32 func_80207738_de(void *context, struct Input_func_80207738_de *option);
 
+typedef struct ActorMotionDefinition {
+    s32 flags; /* 0x0 */
+    s32 radial; /* 0x4 */
+    u8 pad8[0x1C];
+    s32 transitionFlags; /* 0x24 */
+    u8 pad28[0x4];
+    f32 height; /* 0x2C */
+    f32 radius; /* 0x30 */
+    f32 heading; /* 0x34 */
+    f32 transitionTime; /* 0x38 */
+    u8 pad3C[0x4];
+    f32 speed; /* 0x40 */
+    u8 pad44[0x8];
+    f32 openThreshold; /* 0x4C */
+    f32 closeThreshold; /* 0x50 */
+    u8 pad54[0x8];
+    f32 progressScale; /* 0x5C */
+} ActorMotionDefinition;
+typedef struct ActorMotionResource {
+    s32 kind; /* 0x0 */
+    u8 pad4[0x10];
+    ActorMotionDefinition motion; /* 0x14 */
+} ActorMotionResource;
+typedef struct ActorMotionHooks { void *reserved[2]; void (*onStep)(void *, void *); } ActorMotionHooks;
+typedef struct ActorMotionState {
+    s32 flags; /* 0x0 */
+    u8 pad4[0x28];
+    void * table; /* 0x2C */
+    ActorMotionHooks * hooks; /* 0x30 */
+    s8 mode; /* 0x34 */
+    u8 pad35[0x2];
+    s8 state; /* 0x37 */
+    u8 pad38[0x8];
+    f32 timer; /* 0x40 */
+    u8 pad44[0x20];
+    f32 speed; /* 0x64 */
+    u8 pad68[0x2C];
+    s8 routeMode; /* 0x94 */
+    u8 route; /* 0x95 */
+    u16 start; /* 0x96 */
+    u16 destination; /* 0x98 */
+    u8 pad9A[0x6];
+    Vec3 base; /* 0xA0 */
+    u8 padAC[0x5C];
+    void * update; /* 0x108 */
+    u8 pad10C[0x10];
+    void * transform; /* 0x11C */
+    u8 pad120[0x4];
+    s32 unk124; /* 0x124 */
+    s32 unk128; /* 0x128 */
+    s32 unk12C; /* 0x12C */
+    s32 unk130; /* 0x130 */
+    f32 yaw; /* 0x134 */
+    f32 pitch; /* 0x138 */
+    f32 progress; /* 0x13C */
+    s32 unk140; /* 0x140 */
+    s32 unk144; /* 0x144 */
+    s32 unk148; /* 0x148 */
+    s32 unk14C; /* 0x14C */
+    u8 pad150[0x18];
+    s32 unk168; /* 0x168 */
+    s32 unk16C; /* 0x16C */
+} ActorMotionState;
+
 #endif
