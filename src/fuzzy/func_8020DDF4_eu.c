@@ -134,8 +134,7 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
                 arg0->field270 = 0;
                 arg0->field274 = 0;
                 arg0->field24C = arg0->field248;
-                arg0->field250 = 0.0f;
-                arg0->field254 = 0.0f;
+                arg0->field254 = arg0->field250 = 0.0f;
                 return 1;
                 }
                     if (temp_fs0f == 0.0f) {
@@ -173,45 +172,27 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
             }
         } else {
             if (temp_v1 < 0xB) {
-                if (temp_s0 != 9) {
-                    if (temp_s0 < 0xA) {
-                        if (temp_s0 != 2) {
-
-                        } else {
-                            goto block_42;
-                        }
-                    } else {
-                        var_v0_2 = 0xC;
-                        if (temp_s0 != 0xA) {
-                            goto block_41;
-                        }
-                        goto block_42;
-                    }
+                if (temp_s0 == 9) goto selected;
+                if (temp_s0 < 10) {
+                    if (temp_s0 == 2) var_s2 = 0x12E;
                 } else {
-                    goto block_42;
+                    if (temp_s0 == 10) goto selected;
+                    if (temp_s0 == 12) goto selected;
                 }
-                goto block_43;
-            }
-            if (temp_v1 < 0x15) {
+            } else if (temp_v1 < 0x15) {
                 arg0->field270 = 0;
-                if (temp_s0 != 8) {
-                    if (temp_s0 < 9) {
-                        if (temp_s0 != 6) {
-
-                        } else {
-                            goto block_42;
-                        }
-                    } else {
-                        var_v0_2 = 9;
-block_41:
-                        if (temp_s0 == var_v0_2) {
-                            goto block_42;
-                        }
-                    }
+                if (temp_s0 == 8) goto selected;
+                if (temp_s0 < 9) {
+                    if (temp_s0 == 6) var_s2 = 0x12E;
                 } else {
-block_42:
-                    var_s2 = 0x12E;
+                    if (temp_s0 == 9) goto selected;
                 }
+            }
+            goto ready;
+selected:
+            var_s2 = 0x12E;
+ready:
+            {
 block_43:
                 if (arg0->field268 < 0x15) {
                     temp_s0_2 = D_8013D534;
@@ -224,7 +205,8 @@ block_43:
                     }
                     {
                         BallisticResourceRecords *records = (void *)func_8028FDB4_de(temp_s0_2, 2);
-                        temp_s0_3 = &records->records[first];
+                        temp_s0_3 = records->records;
+                        temp_s0_3 += first;
                     }
                     temp_v0_3 = temp_s0_3->unk30;
                     temp_fs1f = func_80285630_de((temp_v0_3->speedHi << 0x10) | temp_v0_3->speedLo);
@@ -250,17 +232,15 @@ block_43:
                     if (((temp_fs1 - D_800C20AC_eu) <= temp_fv0f_2) && (temp_fv0f_2 <= (temp_fs1 + D_800C20AC_eu))) {
                         if (func_8020E674_de(arg0, temp_fs1f, temp_fv0_3) != 0) {
                             temp_v0_6 = arg0->field284;
-                            temp_v0_7 = temp_v0_6 - 1;
                             if (temp_v0_6 > 0) {
-                                arg0->field284 = temp_v0_7;
+                                arg0->field284--;
                                 arg0->field27C = (f32) (D_800C20B4_eu - ((f32) arg0->field284 * D_800C20B0_eu));
                                 arg0->field280 = (f32) (D_800C20B0_eu - ((f32) arg0->field284 * D_800C20B0_eu));
                                 if (arg0->field270 != 0) {
-                                    var_v0_3 = 1;
+                                    arg0->field268 = 1;
                                 } else {
-                                    var_v0_3 = 0xB;
+                                    arg0->field268 = 0xB;
                                 }
-                                arg0->field268 = var_v0_3;
 block_54:
                                 return 0;
                             }
@@ -325,26 +305,18 @@ block_54:
                         return 1;
                     }
                     if (temp_fv0f_2 < (temp_fs1 - D_800C20D8_eu)) {
-                        temp_v0_8 = arg0->field284;
-                        if (temp_v0_8 != 0) {
-                            if ((temp_v0_8 >= 0) && (temp_v0_8 < 4)) {
-                                goto block_83;
-                            }
-                        } else {
-                            goto block_86;
+                        switch (arg0->field284) {
+                        case 0: arg0->field27C = arg0->field278; break;
+                        case 1: case 2: case 3: arg0->field280 = arg0->field278; break;
                         }
                     } else {
-                        temp_v0_9 = arg0->field284;
-                        if (temp_v0_9 == 0) {
-block_83:
-                            arg0->field280 = (f32) arg0->field278;
-                        } else if ((temp_v0_9 >= 0) && (temp_v0_9 < 4)) {
-block_86:
-                            arg0->field27C = (f32) arg0->field278;
+                        switch (arg0->field284) {
+                        case 0: arg0->field280 = arg0->field278; break;
+                        case 1: case 2: case 3: arg0->field27C = arg0->field278; break;
                         }
                     }
                     arg0->field268 = (s32) (arg0->field268 + 1);
-                    arg0->field278 = (arg0->field280 + arg0->field27C) * D_800C20DC_eu;
+                    arg0->field278 = (arg0->field27C + arg0->field280) * D_800C20DC_eu;
                     return 0;
                 }
                 goto block_88;
