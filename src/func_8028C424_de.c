@@ -1,3 +1,5 @@
+#include "shared/world.h"
+#include "span_1000/code_80277444.h"
 #include "span_1000/code_8028B64C.h"
 #include "types.h"
 
@@ -8,34 +10,35 @@
 
 s32 func_8028C424_de(char *object, s32 type) {
     s32 index;
-    char *record;
+    Record14 *record;
+    u8 *flags;
 
-    index = ((func_8028C400_S1 *)(object))->unk11C0;
-    record = ((func_8028C400_S1 *)(object))->unk11D0;
+    index = ((Shared_World *)object)->recordCount;
+    record = ((Shared_World *)object)->recordArray;
     index--;
     if (index != -1) {
-        record += 0xE;
+        flags = &record->flags;
         do {
-            if (((func_8028C400_S2 *)(record))->unk1 == type &&
-                (*(u8 *)record & 0x40) == 0) {
+            if (flags[1] == type &&
+                (*flags & 0x40) == 0) {
                 return 0;
             }
             index--;
-            record += 0x14;
+            flags += sizeof(Record14);
         } while (index != -1);
     }
 
-    index = ((func_8028C400_S1 *)(object))->unk11C4;
-    record = ((func_8028C400_S1 *)(object))->unk11D4;
+    index = ((Shared_World *)object)->alternateRecordCount;
+    record = ((Shared_World *)object)->alternateRecordArray;
     index--;
     if (index != -1) {
         do {
-            if (((func_8028C400_S2 *)(record))->unkF == type &&
-                (((func_8028C400_S2 *)(record))->unkE & 0x40) == 0) {
+            if (record->kind == type &&
+                (record->flags & 0x40) == 0) {
                 return 0;
             }
             index--;
-            record += 0x14;
+            record++;
         } while (index != -1);
     }
 
