@@ -3,6 +3,13 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+/* Sound voices move between the available and playing lists. */
+typedef struct SoundVoicePool {
+    IntrusiveList available;
+    IntrusiveList playing;
+    s32 state;
+} SoundVoicePool;
+
 struct SongHeader;
 /* unbake published declaration: published_043b96e141a6be98c4d04ef2 */
 struct SongHeader {
@@ -86,6 +93,8 @@ struct Node_func_8025CBEC_de {
     struct Node_func_8025CBEC_de *next;
     s32 value;
     s32 state;
+    Vec3 position; /* 0x10: sound source in world coordinates */
+    void *owner; /* 0x1C */
 };
 
 struct Node_func_8025CBEC_de;
