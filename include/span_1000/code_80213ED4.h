@@ -277,6 +277,8 @@ struct Location;
 struct Location {
     Vec3 pos;
     s32 room;
+    f32 heading; /* 0x10 */
+    u16 flags; /* 0x14 */
 };
 
 struct func_80216D3C_S2;
@@ -416,18 +418,22 @@ struct Tracker;
 struct Tracker {
     s32 flags;
     s32 active;
-    u8 pad8[0x60];
+    u8 pad8[0x2C];
+    s8 mode; /* 0x34 */
+    u8 pad35[0x33];
     struct Actor_func_80214DD4_de *self;
     Vec3 offset;
     s32 unk78;
-    u8 pad7C[4];
+    f32 targetTimer; /* 0x7C */
     struct Actor_func_80214DD4_de *anchor;
     u8 pad84[4];
     struct Actor_func_80214DD4_de *target;
     f32 angle;
     f32 height;
     s8 slot;
-    u8 pad95[0x1B];
+    u8 pad95[7];
+    f32 homeYaw; /* 0x9C */
+    u8 padA0[0x10];
     Vec3 homePos;
     s32 homeRoom;
     u8 padC0[0xE];

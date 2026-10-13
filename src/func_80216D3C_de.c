@@ -19,24 +19,25 @@ extern void func_80215410_de(void *, void *, s32, void *);
 
 
 void func_80216D3C_de(Input80216D3C *arg0, void *arg1, Output80216D3C *arg2, s32 arg3, s32 arg4) {
+    Tracker *tracker = arg1;
     Triple first;
     Triple second;
     f32 temp_f0;
     f32 temp_f1;
 
-    temp_f1 = ((func_80216D3C_S1 *)(arg1))->unk7C;
+    temp_f1 = tracker->targetTimer;
     if (temp_f1 > 0.0f) {
         temp_f0 = temp_f1 - D_800D2988;
-        ((func_80216D3C_S1 *)(arg1))->unk7C = temp_f0;
+        tracker->targetTimer = temp_f0;
         if (temp_f0 <= 0.0f) {
-            ((func_80216D3C_S1 *)(arg1))->unk78 = 0;
-            ((func_80216D3C_S1 *)(arg1))->unk7C = 0.0f;
+            tracker->unk78 = 0;
+            tracker->targetTimer = 0.0f;
         }
     }
     if (arg3 != 0) {
-        func_80214DD4_de(arg0, arg1, ((func_80216D3C_S1 *)(arg1))->unk88, (u8 *)arg2 + 0x44);
+        func_80214DD4_de(arg0, tracker, (s32)tracker->target, &arg2[1]);
     } else {
-        Output80216D3C *out = &((func_80216D3C_S2 *)(arg2))->unk44;
+        Output80216D3C *out = &arg2[1];
         first = arg0->vec;
         second.x = 0;
         second.y = 0;
@@ -54,7 +55,7 @@ void func_80216D3C_de(Input80216D3C *arg0, void *arg1, Output80216D3C *arg2, s32
         out->unk40 = 0;
     }
     if (arg4 != 0) {
-        func_80215410_de(arg0, arg1, ((func_80216D3C_S1 *)(arg1))->unk80, arg2);
+        func_80215410_de(arg0, tracker, (s32)tracker->anchor, arg2);
         return;
     }
     first = arg0->vec;

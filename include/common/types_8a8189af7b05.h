@@ -230,7 +230,8 @@ struct Actor_func_80214DD4_de {
     Vec3 pos;
     s32 room;
     s32 *kind;
-    u8 pad1C[0x54];
+    u8 pad1C[0x50];
+    f32 heading; /* 0x6C */
     f32 height;
     u8 pad74[0x70];
     u16 id;
