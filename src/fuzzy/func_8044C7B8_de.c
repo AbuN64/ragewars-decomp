@@ -37,6 +37,7 @@ void func_8044C7B8_de(Shared_func_80286A78_S1 *world, void ***handle) {
     LevelBlock *hdr;
     s32 i;
     s32 j;
+    s32 playerIndex;
     s32 k;
     Input_func_8024B3A8_de *rec;
     Input_func_8024B3A8_de *recWalk;
@@ -101,8 +102,11 @@ void func_8044C7B8_de(Shared_func_80286A78_S1 *world, void ***handle) {
                 memcpy(&D_80141040, rec->vec4, sizeof(Vec3));
                 D_80141040.y += 204.79998779296875f;
                 D_80141060 = func_80286728_de(world, rec->vec4);
-                for (j = 0, slot = D_80146398; j < D_80145048; j++, slot++) {
-                    player = &D_80140F84[j];
+playerIndex = 0;
+                if (playerIndex < D_80145048) {
+                    slot = D_80146398;
+                    do {
+                    player = &D_80140F84[playerIndex];
                     if (nspawns != 0) {
                         if (slot->character == 0xC && player->views1450.view1450_1.computer != 0 && world->unk1B40C == 9) {
                             func_8044D220_de(world, 9, 0xC1D, &extra, 1);
@@ -137,6 +141,9 @@ void func_8044C7B8_de(Shared_func_80286A78_S1 *world, void ***handle) {
                         }
                     }
                     func_80449970_us_rev1(player, rec, mode, i);
+                    slot++;
+                    playerIndex++;
+                } while (playerIndex < D_80145048);
                 }
             }
             for (i = world->unk13C; i < n; i++) {
