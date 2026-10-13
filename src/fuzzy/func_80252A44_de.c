@@ -83,25 +83,10 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
                 continue;
             }
 
-            r = 0xFF;
-            if (!(node->flags & 1)) {
-                g = 0;
-                if (!(node->flags & 0x100)) {
-                    r = 0;
-                    if (node->flags & 0x600) {
-                        g = 0;
-                        b = 0xFF;
-                    } else {
-                        g = 0xFF;
-                        b = 0;
-                    }
-                } else {
-                    b = 0;
-                }
-            } else {
-                g = 0xFF;
-                b = 0;
-            }
+            if (node->flags & 1) { r = 255; g = 255; b = 0; }
+            else if (node->flags & 0x100) { r = 255; g = 0; b = 0; }
+            else if (node->flags & 0x600) { r = 0; g = 0; b = 255; }
+            else { r = 0; g = 255; b = 0; }
 
             cmd = D_80110634++;
             gDPSetPrimColor(cmd, 0, 0, r, g, b, 0xFF);
