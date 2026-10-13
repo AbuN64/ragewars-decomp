@@ -106,7 +106,7 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
         ((Racer *)arg0)->viewports[var_a1].vtrans[2] = 0;
         ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
-    func_80442544_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unk554));
+    func_80442544_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->messageList));
     func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkE54));
     func_802727D8_de(((void *)&((Shared_func_80234FDC_S2 *)arg0)->unkE94));
     arg0->unk544 = 0;

@@ -191,7 +191,7 @@ extern int D_800E12E4[];
 extern DeviceState *D_800D437C;
 
 /* unbake published declaration: published_096c4d8e28127cdcc4596332 */
-extern char D_800CB380_de[];
+extern void (*D_800CB380_de[][2])(void);
 
 /* unbake published declaration: published_099f4151b540552e020406f7 */
 extern char D_0023293C;

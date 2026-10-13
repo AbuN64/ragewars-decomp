@@ -319,7 +319,7 @@ actor_found:
         func_8026FC9C_de(sp228, arg0->unk448[D_800D297C]);
     }
     func_8023AFF0_de(&arg0->unk570, arg0);
-    func_804428F8_de(arg0->unk554);
+    func_804428F8_de(&arg0->messageList);
     if (func_80245798_de() != 0) {
         arg0->unk58 = ((void *(*)())func_80286728_de)(&D_8011FE88, &arg0->unk38);
     }

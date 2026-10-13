@@ -3,6 +3,7 @@
 #include "types.h"
 #include "span_1000/code_80233920.h"
 #include "common/types_06e4f7ef1f9e.h"
+#include "span_16E000/code_8043F69C.h"
 /* Complete camera records and callback ABI from origin/legacy func_80234FDC.c. */
 typedef struct Shared_func_80234FDC_S5 Shared_func_80234FDC_S5;
 struct Shared_func_80234FDC_S5 {
@@ -63,7 +64,9 @@ struct Shared_func_80234FDC_S2 {
     s16 unk14; /* +0x14: src/func_80234FDC.c */
     char pad16[0x2];
     f32 unk18; /* +0x18: src/func_80234FDC.c */
-    char pad1C[0x8];
+    s16 state; /* 0x1C */
+    u8 pad1E[2];
+    s32 stateCounter; /* 0x20 */
     s32 unk24; /* +0x24: src/func_80234FDC.c */
     f32 unk28;
     f32 unk2C;
@@ -135,8 +138,17 @@ struct Shared_func_80234FDC_S2 {
     f32 unk528; /* +0x528: src/func_80234FDC.c */
     f32 unk52C;
     f32 unk530;
-    char pad534[0x20];
-    char unk554[28]; /* +0x554: src/func_80234FDC.c */
+    u8 pad534[4];
+    s32 fadeCounter; /* 0x538 */
+    u8 pad53C[8];
+    s32 fadeEnabled; /* 0x544 */
+    u8 pad548[2];
+    s8 fadeMode; /* 0x54A */
+    s8 fadeRed, fadeGreen, fadeBlue;
+    s8 fadeStart, fadeEnd, fadeStep, fadeState;
+    u8 pad552[2];
+    List_func_804428F8_de messageList; /* 0x554 */
+    u8 pad56C[4];
     s8 unk570; /* +0x570: src/func_80234FDC.c */
     char pad571[0xE40 - 0x571];
     IntrusiveList objects;
