@@ -213,7 +213,8 @@ void func_802A0960_de(u8 *arg0, u8 *arg1, u8 *arg2, u8 *arg3, u8 *arg4) {
 extern void func_802BAC60_de(void *arg0, void *arg1, s32 arg2);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 void func_802A0A48_de(void *arg0) {
-    func_802BAC60_de(arg0, &((func_802A1A48_S1 *)(arg0))->unk18, 1);
+    MessageSemaphore *semaphore = arg0;
+    func_802BAC60_de(arg0, &semaphore->message, 1);
     func_802BB420_de(arg0, 1, 1);
 }
 extern void func_802BB2A0_de(s32, s32, s32);

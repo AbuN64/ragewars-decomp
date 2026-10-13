@@ -293,7 +293,9 @@ struct OSScTask_s;
 struct OSSched;
 /* unbake published declaration: published_a1460cc0e7fc97dc38fd8e6e */
 struct OSSched {
-    char pad0[0x2E0];
+    char pad0[0x78];
+    Queue_func_802517B4_de commandQueue; /* 0x78 */
+    char pad90[0x2E0 - 0x90];
     struct OSScClientWork *clientList;
     struct OSScTask_s *audioListHead;
     struct OSScTask_s *gfxListHead;

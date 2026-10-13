@@ -46,7 +46,7 @@ void func_8028EACC_de(OSSched *sc) {
         if (D_800CD704 == 0) func_802BB5F0_de(&D_80106248, D_800CD8AC_de);
     }
     sc->frameCount++;
-    while (func_802BB2A0_de(&((func_8028EAAC_S1 *)(sc))->unk78, &event, 0) != -1) func_8028F954_de(sc, event);
+    while (func_802BB2A0_de(&sc->commandQueue, &event, 0) != -1) func_8028F954_de(sc, event);
     D_80142920++;
     if (D_80146CC8 != 0) {
         D_80142920 = 0;

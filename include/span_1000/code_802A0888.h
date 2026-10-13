@@ -1,6 +1,13 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A0888_H
 #define UNBAKE_SPAN_1000_CODE_802A0888_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
+
+/* Single-message queue used by the acquire/release helpers. */
+typedef struct MessageSemaphore {
+    Queue_func_802517B4_de queue;
+    s32 message;
+} MessageSemaphore;
 /* unbake published declaration: published_159799eedfcce12b3567247f */
 extern s32 func_802A03F4_de(u8 *arg0, u8 *arg1);
 
