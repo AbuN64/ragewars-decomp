@@ -1,3 +1,4 @@
+#include "shared/gameplay_transition.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8022AE90.h"
 #include "types.h"
@@ -17,12 +18,13 @@ extern void func_8027027C_de(Matrix *src, void *dst);
 
 
 void func_8022B3D0_de(char *arg0, s32 arg1, Vec3 *arg2) {
+    Shared_ActorView *actor = (Shared_ActorView *)arg0;
     Matrix matrix;
     Vec3 offset;
 
     func_80273198_de(&matrix, arg2);
     func_80271F9C_de(&offset, arg2, 5.12f);
-    func_80271F34_de(&offset, &offset, &((func_8022B3C0_S1 *)(arg0))->unk1200);
+    func_80271F34_de(&offset, &offset, &actor->targetPosition);
     func_80273448_de(&matrix, offset.x, offset.y, offset.z);
     func_80273D6C_de(&matrix);
     func_8027027C_de(&matrix, (char *)arg0 + 0x1600);
