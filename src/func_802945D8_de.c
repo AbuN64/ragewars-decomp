@@ -1,3 +1,4 @@
+#include "span_1000/code_80293A04.h"
 #include "shared/world.h"
 #include "span_1000/code_802944E8.h"
 #include "types.h"
@@ -56,14 +57,14 @@ void func_80294614_de(void *arg0) {
 #else
     f = (1.0f);
 #endif
-    field = ((Shared_Legacy_func_80294608_S1 *)(arg0))->unk26DD8;
+    field = ((Session_func_80293A20_de *)arg0)->selector;
 #if defined(VERSION_US_REV1)
     D_800D2970 = 0;
 #endif
     D_800CD744_de = f;
-    ((func_802077F4_S2 *)(&D_800D2988))->unk4 = f;
+    D_800D298C = f;
     D_800CD740_de = f;
     func_8044D528_de(dst, field, 0);
-    ((Shared_Legacy_func_80294608_S1 *)(arg0))->unk26DB8 = 0xD;
+    ((Session_func_80293A20_de *)arg0)->mode = 0xD;
     D_80154048 = 0;
 }
