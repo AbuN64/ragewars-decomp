@@ -1,3 +1,6 @@
+#include "common/unused.h"
+#include "shared/level_actor.h"
+#include "span_1000/code_8021CD70.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -18,13 +21,13 @@ extern s32 func_80285F58_de(void *, void *);
 
 
 void func_802066A4_de(void *arg0, void *arg1) {
-    ((func_802066A4_S1 *)(arg1))->unk124 = ((func_802066A4_S3 *)(((func_80204468_S2 *)(arg0))->unk18))->unk18;
+    ((Dest *)arg1)->field124 = ((ActorHealthDefinition *)((Actor_func_8024A7A0_de *)arg0)->definition)->health;
     func_80214178_de(arg0, arg1, 0);
-    ((func_802066A4_S1 *)(arg1))->unk128 = D_800C1AE0_de;
-    ((func_802066A4_S1 *)(arg1))->unk12C = D_800C1AE0_de;
+    ((Dest *)arg1)->charge = D_800C1AE0_de;
+    ((Dest *)arg1)->field12C = D_800C1AE0_de;
     if (func_80285F58_de(&D_8011FE88, arg0) == 1) {
-        ((func_80204468_S2 *)(arg0))->unk100 &= ~0x2000;
-        ((func_80204468_S2 *)(arg0))->unk100 &= ~0x100;
+        ((Actor_func_8024A7A0_de *)arg0)->flags &= ~0x2000;
+        ((Actor_func_8024A7A0_de *)arg0)->flags &= ~0x100;
     }
 }
 
@@ -39,7 +42,7 @@ void func_80206724_de(void *arg0, void *arg1) {
 }
 
 int func_80206758_de(void *arg0, void *arg1) {
-    return ((func_80206758_S1 *)(arg1))->unk124;
+    return ((Dest *)arg1)->field124;
 }
 
 void func_80206764_de(void) {
