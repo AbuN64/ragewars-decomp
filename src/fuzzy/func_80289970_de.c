@@ -4,20 +4,23 @@
 #include "span_1000/code_80277444.h"
 #include "shared/particle_lighting.h"
 #include "shared/func_80425674_de_layout.h"
-/* Matrices occupy the source record's opaque storage at +0x20 and +0x60. */
 extern void func_80272898_de(void *, Vec3 *, Vec3 *);
 extern s32 func_80277128_de(void *, f32, f32, f32, Vec3 *, f32 *);
-extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
+extern void func_80271F34_de(void *, void *, void *);
 extern void func_80272A10_de(void *, Vec3 *, Vec3 *);
-extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
-extern void func_8027207C_de(Vec3 *);
+extern void func_80271F68_de(void *, void *, void *);
+extern void func_8027207C_de(void *);
 extern f32 func_80278890_de(void *);
-extern void func_80271F9C_de(Vec3 *, Vec3 *, f32);
+extern void func_80271F9C_de(void *, void *, f32);
 
+static inline f32 sampleDot(Vec3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
 void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shared_ParticleLighting *arg3) {
     Shared_Game *settings;
-    f32 weights[128];
-    Vec3 directions[128];
+    /* First128 floats are weights; the remaining384 hold XYZ directions. */
+    f32 samples[512];
+    f32 *weights;
+    f32 *directions;
+    f32 *sampleDirection;
     Vec3 transformed;
     Vec3 combinedDirection;
     Vec3 color;
@@ -32,9 +35,10 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
     Object_func_802773D4_de *animatedVolume;
     Vec3 *transformedPosition;
     Vec3 *colorPtr;
-    Vec3 *animationColorPtr;
-    Vec3 *direction;
+    f32 *direction;
+    Object_func_802773D4_de **volumeCursor;
     f32 zero;
+    f32 one;
     f32 temp_fs0;
     f32 brightness;
     f32 temp_fv0;
@@ -46,15 +50,13 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
     f32 var_fv0_3;
     f32 var_fv0_4;
     f32 var_fv0_5;
-    f32 var_fv0f_2;
-    f32 var_fv0f_3;
     f32 var_fv0f_4;
     f32 var_fv0f_5;
     f32 var_fv0f_6;
     f32 var_fv0f_7;
     f32 var_fv0f_8;
     s32 sampleIndex;
-    s32 lightIndex;
+    s32 directionOffset;
     Object_func_802773D4_de *volume;
 
     settings = &D_801462C8;
@@ -86,15 +88,18 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
     if (arg1 > 0) {
 
         
+        weights = samples;
+        directions = samples + 128;
         transformedPosition = &transformed;
         do {
+            sampleDirection = directions + sampleIndex * 3;
             volume = arg0[sampleIndex];
             func_80272898_de(volume->pad20, arg2, transformedPosition);
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 func_80271F34_de(&translatedDirection, &localDirection, transformedPosition);
                 func_80272A10_de(volume->pad20 + 0x40, &translatedDirection, &localDirection);
-                func_80271F68_de(&directions[sampleIndex], arg2, &localDirection);
-                func_8027207C_de(&directions[sampleIndex]);
+                func_80271F68_de(sampleDirection, arg2, &localDirection);
+                func_8027207C_de(sampleDirection);
                 color = volume->direction;
                 if ((u8)volume->padBA != 0) {
                     temp_fv0 = func_80278890_de(volume);
@@ -116,19 +121,19 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
                 }
                 func_80271F34_de(&ambient, &ambient, &contribution);
                 weights[sampleIndex] *= temp_fs0;
-                var_fv0f_2 = color.x; if (var_fv0f_2 < 0.0f) var_fv0f_2 = -var_fv0f_2;
-                if (color.y < 0.0f) var_fv0f_3 = var_fv0f_2 - color.y; else var_fv0f_3 = var_fv0f_2 + color.y;
-                if (color.z < 0.0f) temp_fs0 = var_fv0f_3 - color.z; else temp_fs0 = var_fv0f_3 + color.z;
-                func_80271F9C_de(&contribution, &directions[sampleIndex], *&weights[sampleIndex]);
+                temp_fv0f = color.x; if (temp_fv0f < 0.0f) temp_fv0f = -temp_fv0f;
+                if (color.y < 0.0f) temp_fv0f = temp_fv0f - color.y; else temp_fv0f = temp_fv0f + color.y;
+                if (color.z < 0.0f) temp_fs0 = temp_fv0f - color.z; else temp_fs0 = temp_fv0f + color.z;
+                func_80271F9C_de(&contribution, sampleDirection, *&weights[sampleIndex]);
                 func_80271F9C_de(&contribution, &contribution, temp_fs0);
                 func_80271F34_de(&combinedDirection, &combinedDirection, &contribution);
                 if (volume->flagB8 != 0) {
                     weights[sampleIndex] = -weights[sampleIndex];
                 }
             } else {
-                directions[sampleIndex].x = 0.0f;
-                directions[sampleIndex].y = 0.0f;
-                directions[sampleIndex].z = 0.0f;
+                sampleDirection[0] = 0.0f;
+                sampleDirection[1] = 0.0f;
+                sampleDirection[2] = 0.0f;
                 weights[sampleIndex] = 0.0f;
             }
 
@@ -138,38 +143,41 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
         } while (sampleIndex < arg1);
     }
     func_8027207C_de(&combinedDirection);
-    lightIndex = 0;
+    sampleIndex = 0;
     if (arg1 > 0) {
 
+        directionOffset = 0;
+        volumeCursor = arg0;
+        one = 1.0f;
         zero = 0.0f;
         colorPtr = &color;
-        animationColorPtr = &animationColor;
         do {
-            direction = &directions[lightIndex];
-            temp_fs0 = (combinedDirection.x * direction->x) + (combinedDirection.y * direction->y) + (combinedDirection.z * direction->z);
-            volume = arg0[lightIndex];
-            var_fs0f = 1.0f - temp_fs0; if (temp_fs0 < zero) var_fs0f = 1.0f;
+            temp_fs0 = sampleDot(&combinedDirection, samples, directionOffset);
+            volume = *volumeCursor;
+            var_fs0f = one - temp_fs0; if (temp_fs0 < zero) var_fs0f = one;
             var_fs0f *= 0.5f;
             color = volume->direction;
-            temp_fs0 = 1.0f - var_fs0f;
+            temp_fs0 = one - var_fs0f;
             if (volume == animatedVolume) {
                 temp_fv0_2 = func_80278890_de(volume);
                 animationColor.x = temp_fv0_2;
                 animationColor.y = temp_fv0_2;
                 animationColor.z = temp_fv0_2;
-                func_80271F9C_de(&animatedContribution, animationColorPtr, temp_fs0 * weights[lightIndex]);
+                func_80271F9C_de(&animatedContribution, &animationColor, temp_fs0 * samples[sampleIndex]);
                 func_80271F34_de(&diffuse, &diffuse, &animatedContribution);
-                func_80271F9C_de(&animatedContribution, animationColorPtr, var_fs0f * weights[lightIndex]);
+                func_80271F9C_de(&animatedContribution, &animationColor, var_fs0f * samples[sampleIndex]);
                 func_80271F34_de(&backLight, &backLight, &animatedContribution);
             }
-            func_80271F9C_de(&contribution, colorPtr, temp_fs0 * weights[lightIndex]);
+            func_80271F9C_de(&contribution, colorPtr, temp_fs0 * samples[sampleIndex]);
             func_80271F34_de(&diffuse, &diffuse, &contribution);
 
 
-            func_80271F9C_de(&contribution, colorPtr, var_fs0f * weights[lightIndex]);
+            func_80271F9C_de(&contribution, colorPtr, var_fs0f * samples[sampleIndex]);
             func_80271F34_de(&backLight, &backLight, &contribution);
-            lightIndex++;
-        } while (lightIndex < arg1);
+            volumeCursor++;
+            sampleIndex++;
+            directionOffset += 3;
+        } while (sampleIndex < arg1);
     }
     func_80271F9C_de(&backLight, &backLight, 0.5f);
     func_80271F34_de(&ambient, &ambient, &backLight);
