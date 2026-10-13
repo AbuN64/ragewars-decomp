@@ -4,6 +4,15 @@
 #include "common/types_8a8189af7b05.h"
 /* Contact positions and interpolation outputs used by the movement solver. */
 typedef struct MotionSurface { s32 flags; s8 enabled; u8 reserved5; s8 materialKind; u8 reserved7[5]; f32 response; u8 reserved10[8]; f32 materialResponse; } MotionSurface;
+/* Contact result beginning at ActorMotion.collisionState; also passed separately
+ * by the actor collision resolver to the contact flag helpers. */
+typedef struct MotionContactResult {
+    s32 state;
+    f32 damping;
+    s32 mode;
+    s32 material;
+    s32 flags;
+} MotionContactResult;
 typedef struct ActorMotion {
     void *actor; /* 0x00 */
     s32 actorFlags; /* 0x04 */

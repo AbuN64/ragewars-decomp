@@ -1,3 +1,5 @@
+#include "shared/world.h"
+#include "span_1000/code_80277444.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8028B64C.h"
 #include "types.h"
@@ -18,9 +20,9 @@ s32 func_8028BC0C_de(void *arg0, void *arg1) {
     u8 *temp_a0;
     s32 mask;
 
-    bitIndex = ((func_8028BAF8_S1 *)(arg1))->unk13;
-    field80 = ((World_func_8028787C_de *)(arg0))->levels;
-    field1B40C = ((World_func_8028787C_de *)(arg0))->level;
+    bitIndex = ((Record14 *)arg1)->reserved13;
+    field80 = ((Shared_World *)arg0)->bitSections;
+    field1B40C = ((Shared_World *)arg0)->level;
     temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 2);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);
