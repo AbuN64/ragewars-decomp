@@ -2,21 +2,17 @@
 #include "span_1000/code_80209AE8.h"
 #include "types.h"
 
-
-
-
-
-
-
-f32 func_80209AE8_de(void *arg0)
+f32 func_80209AE8_de(AiController *arg0)
 {
-  void *object;
+  Player *object;
+    AiCharacterDefinition *definition;
   u8 state;
   f32 var_f0;
   f32 var_f1;
-  object = *((void **) arg0);
-  state = ((struct func_80209B64_S2 *) ((char *) ((func_80209B64_S1 *) object)->unk5D8))->unk93;
-  var_f1 = ((struct func_8022C070_S1 *) ((char *) ((func_80209B64_S1 *) object)->unk18))->unk2C;
+  object = arg0->player;
+    definition = object->definition;
+  state = object->profile->difficulty;
+  var_f1 = definition->unk2C;
   var_f1 = var_f1 * D_800C1C90_de;
   switch (state)
   {
@@ -24,7 +20,7 @@ f32 func_80209AE8_de(void *arg0)
       goto done;
 
     default:
-      ((struct func_80209B64_S5 *) ((char *) ((struct func_80209B64_S4 *) ((char *) (*((void **) arg0))))->unk5D8))->unk93 = 0;
+      arg0->player->profile->difficulty = 0;
 
     case 0:
       var_f0 = D_800C1C94_de;
