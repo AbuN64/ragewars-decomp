@@ -4455,7 +4455,7 @@ segments:
       - [0x182EF0, c, "func_8040CAB0_de"]
       - [0x183190, c, "func_8040CD50_de"]
       - [0x1833CC, c, "func_8040CF8C_de"]
-      - [0x183710, asm, "func_8040D2D0_de"]
+      - [0x183710, c, "func_8040D2D0_de"]
       - [0x183F44, asm, "func_8040DB04_de"]
       - [0x184514, asm, "func_8040E0D4_de"]
       - [0x184ABC, c, "func_8040E67C_de"]

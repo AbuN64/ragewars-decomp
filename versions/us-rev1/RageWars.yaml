@@ -6366,7 +6366,7 @@ segments:
       - [0x17AB30, c, "func_8040CAB0_de"]
       - [0x17ADD0, c, "func_8040CD50_de"]
       - [0x17B00C, c, "func_8040CF8C_de"]
-      - [0x17B350, asm, "func_8040D2D0_de"]
+      - [0x17B350, c, "func_8040D2D0_de"]
       - [0x17BB84, asm, "func_8040DB04_de"]
       - [0x17C154, asm, "func_8040E0D4_de"]
       - [0x17C6FC, c, "func_8040E67C_de"]

@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
 struct Widget_func_8040E984_de;
 /* unbake published declaration: published_005d35c3847ad474b8054e27 */
 struct Widget_func_8040E984_de {
@@ -331,5 +332,10 @@ struct Batch_func_8040CF8C_de {
     void *cursor;
     s32 count;
 };
+
+extern s32 D_8014D568;
+extern s32 D_8014D56C;
+char *func_80411D78_de(s32);
+s32 D_0040F570(char *, char *);
 
 #endif

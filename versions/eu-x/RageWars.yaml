@@ -4509,7 +4509,7 @@ segments:
       - [0xFCEF0, c, "func_8040CAB0_de"]
       - [0xFD190, c, "func_8040CD50_de"]
       - [0xFD3CC, c, "func_8040CF8C_de"]
-      - [0xFD710, asm, "func_8040D2D0_de"]
+      - [0xFD710, c, "func_8040D2D0_de"]
       - [0xFDF44, asm, "func_8040DB04_de"]
       - [0xFE514, asm, "func_8040E0D4_de"]
       - [0xFEABC, c, "func_8040E67C_de"]

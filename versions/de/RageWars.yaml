@@ -4531,7 +4531,7 @@ segments:
       - [0x172AB0, c, "func_8040CAB0_de"]
       - [0x172D50, c, "func_8040CD50_de"]
       - [0x172F8C, c, "func_8040CF8C_de"]
-      - [0x1732D0, asm, "func_8040D2D0_de"]
+      - [0x1732D0, c, "func_8040D2D0_de"]
       - [0x173B04, asm, "func_8040DB04_de"]
       - [0x1740D4, asm, "func_8040E0D4_de"]
       - [0x17467C, c, "func_8040E67C_de"]

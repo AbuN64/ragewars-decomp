@@ -1,24 +1,23 @@
 #include "shared/text_render.h"
-extern s32 D_8014D570, D_8014D710, D_8014D714;
-extern s32 D_8014D564, D_8014D568, D_8014D56C, D_800DEA60;
-extern s32 D_8014D584, D_8014D588, D_8014D58C;
+#include "audio_callbacks.h"
+#include "common/data.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "common/unused.h"
+#include "resident_event_handler.h"
+#include "shared/rectangle_draw.h"
+#include "span_16E000/code_8040C780.h"
+#include "span_16E000/code_8040F1E0.h"
+#include "span_16E000/code_80411B68.h"
+#include "types.h"
 extern struct Shape_typemap_165 D_8014D580;
-extern Element_func_8041200C_de *D_8014D560;
 extern Batch_func_8040CF8C_de D_8014D590[];
-u8 *func_80411D78_de(s32);
 s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, TextWidget *, DrawArgs *);
 s32 func_8040F488_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *);
-void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
-void func_802A1870_de(s32, s32, s32, s32);
+void func_802A1870_de(unsigned int, unsigned int, unsigned int, unsigned int);
 s32 func_802A0238_de(u8 *);
 Element_func_8041200C_de *func_8041200C_de(s32);
-s16 func_80411C60_de(s32);
-s16 func_80411CD0_de(s32);
-s16 func_80411C98_de(s32);
-s32 func_8040F160_de(s32, u8 *, s32);
-void *func_802A15E4_de(s32);
 void func_8029FE38_de(char *, s32, s32, s32 (*)(char *, char *));
-s32 D_0040F570(char *, char *);
 static inline void textBegin(u8 font, u8 style) {
     func_802A1898_de(&D_8014D580.field_0, &D_8014D580.field_8,
                    &D_8014D580.field_4, &D_8014D580.field_C);
@@ -35,7 +34,7 @@ static inline s32 textOverlaps(Batch_func_8040CF8C_de *next) {
     for (i = 0; i < D_8014D570; i++) {
         batch = &D_8014D590[i];
         if (next->area.field_4 < batch->area.field_0 || batch->area.field_4 < next->area.field_0 ||
-            next->area.field_C < batch->area.field_8 || batch->area.field_C < next->area.field_8) continue;
+            batch->area.field_8 > next->area.field_C || batch->area.field_C < next->area.field_8) continue;
         return 1;
     }
     return 0;
@@ -60,7 +59,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     clipped = 0;
     if (!resolved) {
         if (widget->stringId == -1) return;
-        resolved = func_80411D78_de(widget->stringId);
+        resolved = (u8 *)func_80411D78_de(widget->stringId);
     }
     text=resolved;
     if (!func_8040E0D4_de(&area, &box, widget, &args)) return;
@@ -90,7 +89,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     switch (widget->align & 3) {
         case 0: x=area.field_0; break;
         case 1: x=(area.field_0+area.field_4)/2-width/2; break;
-        case 2: x=area.field_4+1-width; break;
+        case 2: {s32 edge=area.field_4; ++edge; x=edge-width;} break;
     }
     y = 0.0f;
     switch (widget->align & 12) {
@@ -106,13 +105,14 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     tempY=(s32)y+(s32)(D_8014D56C*args.scaleY);
     batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(D_8014D568*args.scaleY);
     if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
-    if (batch->area.field_8 >= batch->area.field_C) batch->area.field_C=batch->area.field_8+1;
+    if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
     if (textOverlaps(batch)) { func_8040CAB0_de(); textBegin(font, style); }
-    sprites=func_802A15E4_de(length*sizeof(TextSprite));
+    sprite=func_802A15E4_de(length*sizeof(TextSprite));
+    sprites=sprite;
     D_8014D590[D_8014D570].cursor=sprites;
     color=((u32)args.alpha<<24)|0xFFFFFF;
     count=0;
-    sprite=sprites;
+
     for (i=0; i<length; i++) {
         glyphId=*text-0x20;
         sprite->glyph=glyphId;
