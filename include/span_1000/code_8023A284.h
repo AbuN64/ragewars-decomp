@@ -1,6 +1,8 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8023A284_H
 #define UNBAKE_SPAN_1000_CODE_8023A284_H
 #include "../types.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 /* unbake published declaration: published_18eaa73701f79305ca915876 */
 extern f32 func_8023A294_de(s32 arg0, f32 value, f32 target, f32 step);
@@ -38,15 +40,18 @@ extern int func_8023B978_de(void *first, void *second);
 struct Descriptor_func_8023B718_de;
 /* unbake published declaration: published_5c692a18355f2513ff6458db */
 struct Descriptor_func_8023B718_de {
-    char pad0[8];
+    char pad0[2];
+    u8 red, green, blue;
+    u8 envRed, envGreen, envBlue;
     f32 spinRate;
-    char padC[4];
+    f32 textureScale;
     f32 phaseRate;
     f32 baseSpeed;
-    char pad18[4];
+    f32 fadeDepth;
     f32 hostScale;
     f32 throttleRate;
-    char pad24[5];
+    char pad24[4];
+    u8 alpha;
     u8 flags;
 };
 
@@ -82,8 +87,22 @@ struct Object_func_8023B3F8_de;
 struct Object_func_8023B3F8_de {
     char gap0[4];
     struct Object_func_8023B3F8_de *next;
-    char gap8[0x208];
+    char gap8[4];
+    Descriptor_func_8023B718_de *descriptor;
+    u16 mask;
+    char gap12[2];
+    s32 texture[2];
+    f32 offsetS;
+    f32 offsetT;
+    char gap24[4];
+    UnitVtx vertices[2][15];
+    f32 throttle;
+    f32 phase;
     f32 depth;
+    f32 phaseScale;
+    f32 textureScale;
+    f32 trim;
+    f32 opacity;
 };
 
 /* unbake published declaration: published_7eb250fdea2c615ced1230a6 */
@@ -102,6 +121,10 @@ struct View_func_8023B3F8_de {
     s32 hidden;
     char gap124[8];
     f32 depth;
+    char gap130[0x130];
+    Vec3 fan[5];
+    char gap29C[0x74];
+    f32 clipPlane[4];
 };
 
 struct Object_func_8023B3F8_de;
