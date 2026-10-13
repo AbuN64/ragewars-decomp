@@ -11,7 +11,7 @@
 
 extern s32 D_80146914;
 extern void func_80264788_de(s8);
-extern void func_80264248_de(func_80242278_S1 *);
+extern void func_80264248_de(func_80242278_S1 *widget);
 extern void func_802647E8_de(func_80242278_S1 *, s32);
 
 s32 func_8043E1F8_de(s32 arg0, Menu_func_8043E1F8_de *menu) {
