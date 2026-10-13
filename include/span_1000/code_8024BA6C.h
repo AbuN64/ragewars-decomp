@@ -148,7 +148,8 @@ struct Scratch {
     f32 second[4];
     f32 in[4];
     f32 out[4];
-    f32 position[4];
+    Vec3 position;
+    f32 positionPadding;
     char matrix[0x40];
 };
 
