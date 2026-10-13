@@ -29,8 +29,8 @@ s32 func_8024643C_de(Instance8020CD74 *arg0, Instance8020CD74 *arg1) {
 
     saved = *arg0;
     scale = D_800C3828_de;
-    ((func_80216BF4_S1 *)(arg0))->unkC += func_8024D284_de(arg0) * scale;
-    desired = ((Player *)(arg1))->pos;
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += func_8024D284_de(arg0) * scale;
+    desired = ((struct Actor_func_80214DD4_de *)arg1)->pos;
     desired.y += func_8024D284_de(arg1) * scale;
     collisions = func_80243A90_de(arg0, desired, &D_80103FD0);
     *arg0 = saved;

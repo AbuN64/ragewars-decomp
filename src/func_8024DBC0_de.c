@@ -35,7 +35,7 @@ void func_8024DBC0_de(void *actor, Triple pos, s32 sound, f32 volume) {
     emitter = func_8020C994_de(&D_8013B364, func_8020CB3C_de(&D_8013B364, &pos));
     request.position = pos;
     at = request.position;
-    request.owner = ((func_80204468_S3 *)(actor))->unk14;
+    request.owner = ((struct Actor_func_80214DD4_de *)actor)->room;
     if (emitter != 0) {
         at = *emitter;
     }

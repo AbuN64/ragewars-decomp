@@ -27,14 +27,14 @@ s32 func_80216BF4_de(Instance8020CD74 *arg0, void *unused, Instance8020CD74 *tar
     s32 collisions;
 
     saved = *arg0;
-    ((func_80216BF4_S1 *)(arg0))->unkC += func_8024D284_de(arg0);
-    ((func_80216BF4_S1 *)(arg0))->unkC += ((Actor_func_80214310_de *)(target))->eye;
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += func_8024D284_de(arg0);
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += ((Actor_func_80214310_de *)(target))->eye;
 
     desired = ((Actor_func_80214310_de *)(target))->position;
     desired.y += func_8024D284_de(target);
     desired.y += ((Actor_func_80214310_de *)(target))->eye;
 
-    collisions = func_802444A4_de(arg0, ((Player *)(arg0))->pos, desired, &D_80100030);
+    collisions = func_802444A4_de(arg0, ((struct Actor_func_80214DD4_de *)arg0)->pos, desired, &D_80100030);
     if (D_801041F0 == target)
         collisions = 0;
 

@@ -24,14 +24,14 @@ s32 func_8022E43C_de(Instance8020CD74 *arg0, Vec3 *arg1) {
     s32 moved;
 
     saved = *arg0;
-    ((func_8022E42C_S1 *)(arg0))->unk8.v1.y += func_8024D284_de(arg0) * D_800C2E10_de[1];
-    ((func_8022E42C_S1 *)(arg0))->unk8.v1.y += ((func_8022E42C_S1 *)(arg0))->unk70;
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += func_8024D284_de(arg0) * D_800C2E10_de[1];
+    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += ((struct Actor_func_80214DD4_de *)arg0)->height;
     func_80243A90_de(arg0, *arg1, &D_80100030);
 
-    moved = (arg1->x != ((func_8022E42C_S1 *)(arg0))->unk8.v0) ||
-            (arg1->y != ((func_8022E42C_S1 *)(arg0))->unk8.v1.y) ||
-            (arg1->z != ((func_8022E42C_S1 *)(arg0))->unk8.v1.z);
-    *arg1 = ((func_8022E42C_S1 *)(arg0))->unk8.v1;
+    moved = (arg1->x != ((struct Actor_func_80214DD4_de *)arg0)->pos.x) ||
+            (arg1->y != ((struct Actor_func_80214DD4_de *)arg0)->pos.y) ||
+            (arg1->z != ((struct Actor_func_80214DD4_de *)arg0)->pos.z);
+    *arg1 = ((struct Actor_func_80214DD4_de *)arg0)->pos;
     *arg0 = saved;
 
     return moved;
