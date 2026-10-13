@@ -369,4 +369,10 @@ extern void func_8024C104_eu(void);
 extern void func_8024C10C_eu(void);
 extern void func_8024C134_eu_x(void);
 extern void func_8024C13C_eu_x(void);
+/* Section five of an actor frame resource describes its rendering mode. */
+struct ActorFrameMetadata {
+    u8 reserved0[0x6E];
+    u8 renderMode; /* 0x6E */
+};
+
 #endif

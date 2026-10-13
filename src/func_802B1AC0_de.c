@@ -12,9 +12,9 @@
 void func_802B1AC0_de(void *arg0, void *arg1, s32 arg2) {
     s32 stride = arg2 * 0x10;
 
-    ((func_802B6B90_S2 *)(stride + ((func_802B6B90_S1 *)(arg0))->unk60))->unk0 = arg1;
-    ((func_802B6B90_S2 *)((stride + ((func_802B6B90_S1 *)(arg0))->unk60)))->unk7 = ((func_802B6B90_S3 *)(arg1))->unk1;
-    ((func_802B6B90_S2 *)((stride + ((func_802B6B90_S1 *)(arg0))->unk60)))->unk9 = ((func_802B6B90_S3 *)(arg1))->unk0;
-    ((func_802B6B90_S2 *)((stride + ((func_802B6B90_S1 *)(arg0))->unk60)))->unk8 = ((func_802B6B90_S3 *)(arg1))->unk2;
-    ((func_802B6B90_S2 *)((stride + ((func_802B6B90_S1 *)(arg0))->unk60)))->unk4 = ((func_802B6B90_S3 *)(arg1))->unkC;
+    ((ALChanState10 *)(stride + (s32)((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState))->instrument = arg1;
+    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState)))->pan = ((ALInstrument *)arg1)->pan;
+    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState)))->vol = ((ALInstrument *)arg1)->volume;
+    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState)))->priority = ((ALInstrument *)arg1)->priority;
+    ((ALChanState10 *)((stride + (s32)((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState)))->bendRange = (u16)((ALInstrument *)arg1)->bendRange;
 }

@@ -99,7 +99,8 @@ struct Shared_MenuContext {
     u32 unknownEC;
     Vec3 position;
     f32 yaw;
-    u32 unknown100[6];
+    f32 response; /* 0x100 */
+    u32 unknown104[5];
     char messages[5][0x28];
     s32 messageCount;
 };

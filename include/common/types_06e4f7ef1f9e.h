@@ -1581,7 +1581,9 @@ struct WeaponFireState {
     s8 variant;
     char pad35[0x64 - 0x35];
     f32 cueTimer;
-    char pad68[0x120 - 0x68];
+    char pad68[0xCB - 0x68];
+    s8 triggerMode; /* 0xCB */
+    char padCC[0x120 - 0xCC];
     s32 animationCount;
     union { f32 spinStep; s32 reset; };
     f32 spin;
