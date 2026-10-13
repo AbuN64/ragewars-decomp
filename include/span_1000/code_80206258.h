@@ -525,7 +525,8 @@ typedef struct ActorMotionState {
     void * table; /* 0x2C */
     ActorMotionHooks * hooks; /* 0x30 */
     s8 mode; /* 0x34 */
-    u8 pad35[0x2];
+    s8 action; /* 0x35 */
+    u8 pad36;
     s8 state; /* 0x37 */
     u8 pad38[0x8];
     f32 timer; /* 0x40 */
@@ -541,7 +542,9 @@ typedef struct ActorMotionState {
     u16 destination; /* 0x98 */
     u8 pad9A[0x6];
     Vec3 base; /* 0xA0 */
-    u8 padAC[0x5C];
+    u8 padAC[0x1F];
+    s8 actionPending; /* 0xCB */
+    u8 padCC[0x3C];
     void * update; /* 0x108 */
     void * secondaryUpdate; /* 0x10C */
     void * event; /* 0x110 */
