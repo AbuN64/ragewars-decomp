@@ -1,3 +1,5 @@
+#include "span_1000/code_80206258.h"
+#include "common/types_8fd754e1e915.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_80207ABC.h"
@@ -5,39 +7,34 @@
 
 extern s32 func_80214178_de(void *, void *, s32);
 
-
-
-
-
-
-
-
-
-
-void func_80207C94_de(void *arg0, void *arg1) {
+void func_80207C94_de(void *object, void *state) {
+    Player *arg0 = object;
+    ActorMotionState *arg1 = state;
     s32 temp_a2;
-    void *temp_a3;
+    ActorMotionResource *resource;
+    ActorMotionDefinition *temp_a3;
     s32 var_v1;
     s32 temp_v0;
 
-    temp_a3 = &((func_80203908_S2 *)(((func_80207ABC_S1 *)(arg0))->unk18))->unk14;
-    temp_a2 = ((func_80207C94_S3 *)(temp_a3))->unk24;
+    resource = arg0->definition;
+    temp_a3 = &resource->motion;
+    temp_a2 = temp_a3->transitionFlags;
     var_v1 = 1;
     if (temp_a2 & 0x20) {
-        temp_v0 = ((func_80207ABC_S4 *)(arg1))->unk0 & 0x20000;
+        temp_v0 = arg1->flags & 0x20000;
         var_v1 = (u32)0 < (u32)temp_v0;
     }
-    if ((temp_a2 & 0x200) && !(((func_80207ABC_S1 *)(arg0))->unk38 & 0x40)) {
+    if ((temp_a2 & 0x200) && !(arg0->movementFlags & 0x40)) {
         var_v1 = 0;
     }
-    if ((((func_80207C94_S3 *)(temp_a3))->unk24 & 0x800) && (((func_80207ABC_S1 *)(arg0))->unk38 & 0x40)) {
+    if ((temp_a3->transitionFlags & 0x800) && (arg0->movementFlags & 0x40)) {
         var_v1 = 0;
     }
     if (var_v1 != 0) {
-        if (((func_80207ABC_S4 *)(arg1))->unk40 >= ((func_80207C94_S3 *)(temp_a3))->unk50) {
+        if (arg1->timer >= temp_a3->closeThreshold) {
             func_80214178_de(arg0, arg1, 3);
         }
     } else {
-        ((func_80207ABC_S4 *)(arg1))->unk40 = 0.0f;
+        arg1->timer = 0.0f;
     }
 }
