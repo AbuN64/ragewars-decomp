@@ -161,7 +161,7 @@ typedef struct func_80293904_S1 {
 } func_80293904_S1;
 
 typedef struct RenderView {
-    char pad00[0xF0]; s16 kind; char padF2[0x1E]; void *buffer;
+    char pad00[0x14]; Vec3 direction; char pad20[0xD0]; s16 kind; char padF2[0x1E]; void *buffer;
     char pad114[0x18]; struct RenderView *previous, *next; char pad134[0xC];
 } RenderView;
 typedef struct RenderState {
