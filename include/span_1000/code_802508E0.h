@@ -344,4 +344,13 @@ typedef struct State802532E4 {
 } State802532E4;
 extern void func_802515F0_de(s32, s32);
 
+/* Actor resource fade selects the near/far value using its frame threshold. */
+struct ResourceFadeDefinition {
+    u8 reserved0[0xE];
+    s8 nearValue; /* 0xE */
+    s8 farValue; /* 0xF */
+    u8 reserved10[0x14];
+    u32 threshold; /* 0x24 */
+};
+
 #endif

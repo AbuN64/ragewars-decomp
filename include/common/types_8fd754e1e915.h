@@ -1750,9 +1750,12 @@ typedef struct func_80237E70_G1 func_80237E70_G1;
 struct Model_func_80223E34_de;
 /* unbake published declaration: published_643a575b68115baf18e12e93 */
 struct Model_func_80223E34_de {
-    char pad0[0x44];
+    s32 kind; /* 0x00 */
+    char pad4[0x40];
     s32 collisionFlags; /* 0x44: model collision eligibility */
-    char pad48[0xA];
+    char pad48[4];
+    u32 collisionOptions; /* 0x4C */
+    char pad50[2];
     u16 materialFlags; /* 0x52 */
     char pad54[0xA0];
     f32 height;

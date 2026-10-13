@@ -1,6 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802508E0.h"
 #include "types.h"
+#include "shared/level_actor.h"
 
 extern u8 D_801462E5;
 
@@ -15,11 +16,11 @@ s8 func_80250E14_de(void *arg0) {
     void *temp_a1;
 
     if (D_801462E5 != 0) {
-        return ((func_80250DBC_S2 *)((((func_80250D88_S1 *)(arg0))->unk18)))->unkE;
+        return ((struct ResourceFadeDefinition *)((Actor_func_8024A7A0_de *)arg0)->definition)->nearValue;
     }
-    temp_a1 = ((func_80250D88_S1 *)(arg0))->unk18;
-    if (((func_80250D88_S1 *)(arg0))->unkDC < ((func_80250D88_S2 *)(temp_a1))->unk24 * 2) {
-        return ((func_80250D88_S2 *)(temp_a1))->unkE;
+    temp_a1 = ((Actor_func_8024A7A0_de *)arg0)->definition;
+    if ((u32)((Actor_func_8024A7A0_de *)arg0)->resourceState < ((struct ResourceFadeDefinition *)temp_a1)->threshold * 2) {
+        return ((struct ResourceFadeDefinition *)temp_a1)->nearValue;
     }
-    return ((func_80250D88_S2 *)(temp_a1))->unkF;
+    return ((struct ResourceFadeDefinition *)temp_a1)->farValue;
 }
