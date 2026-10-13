@@ -4,54 +4,61 @@ extern f32 D_800E1454;
 extern f32 D_800E1460;
 extern f32 D_800E146C;
 
-static inline f32 bound(f32 value, f32 low, f32 high) {
-    if (value < low) value = low;
-    else if (high < value) value = high;
-    return value;
-}
-
 s32 func_8041A05C_de(Record_func_8041A280_de *object) {
+    Record_func_8041A280_de *owner = object;
+    f32 value, target, result;
+    Record_func_8041A280_de *frame;
     if (object->running == 1) {
         switch (object->phase) {
-        case 3: break;
         case 1:
-            if (object->frame->progressX != D_800DD420) {
-                if (object->frame->progressX < D_800DD420)
-                    { f32 value = object->frame->progressX + object->scaleX;
-                    if (value < 0.0f) value = 0.0f;
-                    else if (D_800DD420 < value) value = D_800DD420;
-                    object->frame->progressX = value;
-                }
-                else object->frame->progressX -= D_800E1454;
-            } else if (object->frame->field_24 != D_800DD420) {
-                if (object->frame->field_24 < D_800DD420) {
-                    object->frame->field_24 += object->scaleY;
-                    if (D_800DD420 < object->frame->field_24) object->frame->field_24 = D_800DD428;
-                } else {
-                    object->frame->field_24 = D_800DD420;
-                    object->phase = 3;
+            frame = object->frame;
+            target = D_800DD420;
+            value = frame->progressX;
+            if (value != target) {
+                if (value < target) {
+                    result = value + object->scaleX;
+                    if (result < 0.0f) result = 0.0f;
+                    else if (target < result) result = target;
+                    frame->progressX = result;
+                } else frame->progressX = value - D_800E1454;
+            } else {
+                value = frame->field_24;
+                if (value != target) {
+                    if (value < target) {
+                        frame->field_24 = value + object->scaleY;
+                        object = object->frame;
+                        if (target < object->field_24) object->field_24 = D_800DD428;
+                    } else {
+                        frame->field_24 = target;
+                        object->phase = 3;
+                    }
                 }
             }
             break;
         case 2:
-            if (object->frame->field_24 - D_800DD42C > D_800DD42C) {
-                if (D_800DD42C < object->frame->field_24)
-                    { f32 value = object->frame->field_24 - object->scaleY;
-                    if (value < D_800DD42C) value = D_800DD42C;
-                    else if (D_800E1460 < value) value = D_800E1460;
-                    object->frame->field_24 = value;
-                }
-                else object->frame->field_24 += D_800DD434;
-            } else if (object->frame->progressX != 0.0f) {
-                if (0.0f < object->frame->progressX)
-                    { f32 value = object->frame->progressX - object->scaleX;
-                    if (value < 0.0f) value = 0.0f;
-                    else if (D_800DD438 < value) value = D_800DD438;
-                    object->frame->progressX = value;
-                }
-                else object->frame->progressX += D_800E146C;
-            } else object->phase = 4;
+            frame = object->frame;
+            target = D_800DD42C;
+            value = frame->field_24;
+            if (target < value - target) {
+                if (target < value) {
+                    result = value - object->scaleY;
+                    if (result < target) result = target;
+                    else if (D_800E1460 < result) result = D_800E1460;
+                    frame->field_24 = result;
+                } else frame->field_24 = value + D_800DD434;
+            } else {
+                value = frame->progressX;
+                if (value != 0.0f) {
+                    if (0.0f < value) {
+                        result = value - object->scaleX;
+                        if (result < 0.0f) result = 0.0f;
+                        else if (D_800DD438 < result) result = D_800DD438;
+                        frame->progressX = result;
+                    } else frame->progressX = value + D_800E146C;
+                } else owner->phase = 4;
+            }
             break;
+        case 3: break;
         }
     }
     return 0;
