@@ -84,7 +84,7 @@ struct Menu_func_804085E0_de {
 };
 
 /* unbake published declaration: published_582bc2b60e287658228d096d */
-extern s32 D_800D36D8;
+extern char *D_800D36D8;
 
 struct Menu_func_80409144_de;
 /* unbake published declaration: published_66f5903e553061b56e894602 */
@@ -200,7 +200,7 @@ struct PakNoteTextEntry {
 };
 
 /* unbake published declaration: published_e98c824605e3de0102852329 */
-extern s32 D_800D36D4;
+extern char *D_800D36D4;
 
 /* unbake published declaration: published_f1a10b825ca94110495fd2ff */
 extern int D_800D243C;

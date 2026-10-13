@@ -1,3 +1,4 @@
+#include "shared/pak_menu.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/unused.h"
 #include "span_16E000/code_80405454.h"
@@ -15,7 +16,6 @@ s32 func_80405338_de(s32, s32, char **);
 s32 func_80405598_de(s32);
 void func_80405648_de(u8 *, u8 *, s32);
 u32 func_804057EC_de(u32);
-void func_80405F48_de(void *);
 s32 func_80406858_de(void *, s32, s32 *, s32 *);
 void * func_80442574_de(void *, void *, s32, s32, s32);
 s32 func_802A037C_de(); /* extern */
@@ -45,7 +45,7 @@ extern s32 D_8011FECC;
 extern s32 D_8011FAC0;
 extern s32 D_8014561C;
 extern s32 D_8015375C;
-void func_804069F4_de(Shared_func_804069F4_S1 *arg0) {
+void func_804069F4_de(Shared_PakMenu *arg0) {
     u8 sp18[16];
     s32 sp28;
     s32 sp2C;
@@ -86,11 +86,11 @@ void func_804069F4_de(Shared_func_804069F4_S1 *arg0) {
         D_80153784 = 1;
         D_8014AD9C = 0;
 #if defined(VERSION_DE)
-        func_80442574_de(&D_8014561C, &D_0044EABC, arg0->first, (s32) arg0->second, 0);
+        func_80442574_de(&D_8014561C, &D_0044EABC, (s32)arg0->player, (s32) arg0->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-        func_80442574_de(&D_8014561C, &D_0044F70C, arg0->first, (s32) arg0->second, 0);
+        func_80442574_de(&D_8014561C, &D_0044F70C, (s32)arg0->player, (s32) arg0->slot, 0);
 #elif defined(VERSION_US)
-        func_80442574_de(&D_8014561C, &D_0044EC2C, arg0->first, (s32) arg0->second, 0);
+        func_80442574_de(&D_8014561C, &D_0044EC2C, (s32)arg0->player, (s32) arg0->slot, 0);
 #endif
         D_800E28CC = 1;
         D_8014AD94 = 0;
@@ -123,7 +123,7 @@ void func_804069F4_de(Shared_func_804069F4_S1 *arg0) {
 block_11:
     if (func_80405598_de(D_800E28C8) == 0) {
         func_80293268_de((s32) &D_8011FAC0);
-        if ((arg0->second->unkB0 & 0x1000) && (D_800E28CC == 0)) {
+        if ((arg0->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
             D_80146D60 = 1;
             D_800E28CC = 1;
         }
@@ -135,11 +135,11 @@ block_11:
                 D_80153784 = 1;
                 D_8014AD9C = 0;
 #if defined(VERSION_DE)
-                func_80442574_de(&D_8014561C, &D_0044EA74, arg0->first, (s32) arg0->second, 0);
+                func_80442574_de(&D_8014561C, &D_0044EA74, (s32)arg0->player, (s32) arg0->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                func_80442574_de(&D_8014561C, &D_0044F6C4, arg0->first, (s32) arg0->second, 0);
+                func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)arg0->player, (s32) arg0->slot, 0);
 #elif defined(VERSION_US)
-                func_80442574_de(&D_8014561C, &D_0044EBE4, arg0->first, (s32) arg0->second, 0);
+                func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)arg0->player, (s32) arg0->slot, 0);
 #endif
                 D_8014AD94 = 0;
                 D_800E28CC = 1;
@@ -195,11 +195,11 @@ block_36:
                         D_80153784 = 1;
                         D_8014AD9C = 0;
 #if defined(VERSION_DE)
-                        func_80442574_de(&D_8014561C, &D_0044EA74, arg0->first, (s32) arg0->second, 0);
+                        func_80442574_de(&D_8014561C, &D_0044EA74, (s32)arg0->player, (s32) arg0->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        func_80442574_de(&D_8014561C, &D_0044F6C4, arg0->first, (s32) arg0->second, 0);
+                        func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)arg0->player, (s32) arg0->slot, 0);
 #elif defined(VERSION_US)
-                        func_80442574_de(&D_8014561C, &D_0044EBE4, arg0->first, (s32) arg0->second, 0);
+                        func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)arg0->player, (s32) arg0->slot, 0);
 #endif
                         D_8014AD94 = 0;
                         D_800E28CC = 1;
@@ -259,11 +259,11 @@ notes_checked:
                         D_80153784 = 1;
                         D_80146D60 = 1;
 #if defined(VERSION_DE)
-                        func_80442574_de(&D_8014561C, &D_0044EED0, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+                        func_80442574_de(&D_8014561C, &D_0044EED0, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        func_80442574_de(&D_8014561C, &D_0044FB20, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+                        func_80442574_de(&D_8014561C, &D_0044FB20, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_US)
-                        func_80442574_de(&D_8014561C, &D_0044F040, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+                        func_80442574_de(&D_8014561C, &D_0044F040, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 #endif
                         goto prompt_checked;
                     }
@@ -276,11 +276,11 @@ block_56:
                     D_80153784 = 1;
                     D_80146D60 = 1;
 #if defined(VERSION_DE)
-                    func_80442574_de(&D_8014561C, &D_0044EEAC, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+                    func_80442574_de(&D_8014561C, &D_0044EEAC, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                    func_80442574_de(&D_8014561C, &D_0044FAFC, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+                    func_80442574_de(&D_8014561C, &D_0044FAFC, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_US)
-                    func_80442574_de(&D_8014561C, &D_0044F01C, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+                    func_80442574_de(&D_8014561C, &D_0044F01C, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 #endif
                 }
 prompt_checked:
@@ -296,7 +296,7 @@ prompt_checked:
 block_59:
     D_80153784 = 1;
     D_80146D60 = 1;
-    func_80442574_de(&D_8014561C, &D_0044ED44, arg0->first, (s32) arg0->second, (s32) &D_0044E4F8);
+    func_80442574_de(&D_8014561C, &D_0044ED44, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
 block_60:
     if (D_80153784 == 0) {
         func_80405F48_de(arg0);

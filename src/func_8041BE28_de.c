@@ -57,7 +57,8 @@ extern void func_80404E28_de(s32);
 
 extern void func_8041C244_de(void);
 extern void func_80434FB4_de(s32);
-extern s32 D_800D36D4, D_800E28CC, D_800DF4C0,D_8010F190,D_80146D60,D_8014AD94;
+extern char *D_800D36D4;
+extern s32 D_800E28CC, D_800DF4C0,D_8010F190,D_80146D60,D_8014AD94;
 
 #if defined(VERSION_DE)
 extern char D_800DD450[];

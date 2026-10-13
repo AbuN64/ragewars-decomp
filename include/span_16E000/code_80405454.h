@@ -1481,6 +1481,7 @@ struct Menu_func_804066BC_de {
     char pad18[4];
     func_8024795C_S2 *player;
     func_80242278_S1 *slot;
+    struct List_func_80442574_de *prompt; /* 0x24: dialog resource */
 };
 
 struct func_80408C78_S1;

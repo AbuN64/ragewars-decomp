@@ -1,3 +1,4 @@
+#include "shared/pak_menu.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_16E000/code_80405454.h"
 #include "span_16E000/code_80405DC0.h"
@@ -34,10 +35,9 @@ extern void func_80404E28_de(s32 ch);
 extern s32 func_80404F04_de(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
-extern void func_80405F48_de(Menu_func_804066BC_de *menu);
 extern void func_80442574_de(char *, char *, func_8024795C_S2 *, func_80242278_S1 *, char *);
 
-void func_804066BC_de(Menu_func_804066BC_de *menu) {
+void func_804066BC_de(Shared_PakMenu *menu) {
     s32 ch;
 
     D_8014D4C0_de = 0;
@@ -47,7 +47,7 @@ void func_804066BC_de(Menu_func_804066BC_de *menu) {
     D_800DE874 = 1;
     D_80153784 = 0;
     D_8015375C = 0;
-    menu->owner->flags &= ~0x01000000;
+    menu->items[20].flags &= ~0x01000000;
     ch = menu->slot->unk4;
     if (D_800E28C0 != 0) {
         D_80153784 = 1;

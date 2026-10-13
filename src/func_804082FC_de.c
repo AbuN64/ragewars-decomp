@@ -1,25 +1,8 @@
+#include "shared/pak_menu.h"
 #include "common/unused.h"
 #include "span_16E000/code_80405DC0.h"
 #include "types.h"
 #include "types.h"
-typedef struct Shared_PakMenuItem {
-    u32 unknown0[2];
-    u32 flags;
-    u32 unknownC[7];
-} Shared_PakMenuItem;
-typedef struct Shared_ControllerPort {
-    u32 unknown0;
-    s8 channel;
-} Shared_ControllerPort;
-struct SharedPlayer;
-typedef struct Shared_PakMenu {
-    u32 unknown0[3];
-    Shared_PakMenuItem *items;
-    u32 unknown10[3];
-    struct SharedPlayer *player;
-    Shared_ControllerPort *owner;
-} Shared_PakMenu;
-
 /* Searches controller pak slots for the pak menu: takes the channel (the cycling one D_800E28C8 or the
    menu slot's) and returns 1 (setting D_80153784) when func_80406178_de takes over; with a note search pending (D_8014D4EC_de)
    it shows the notes through func_80407290_de; otherwise it looks for the game's note (D_800D36D8) among
@@ -38,17 +21,16 @@ extern void func_80407578_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 extern void func_80405338_de(s32 ch, s32 note, s32 *state);
 extern void func_80405648_de(s32 state, char *name, s32 size);
 extern s32 func_802A037C_de(char *name, s32 game);
-extern void func_80442574_de(char *, char *, struct SharedPlayer *, Shared_ControllerPort *, char *);
+extern void func_80442574_de(char *, char *, func_8024795C_S2 *, func_80242278_S1 *, char *);
 extern void func_80404E28_de(s32 ch);
 extern s32 func_80404F04_de(s32 ch);
-extern void func_80405F48_de(Shared_PakMenu *menu);
 
 static inline void pickChannel(Shared_PakMenu *menu, s32 *ch)
 {
     if (D_8015375C != 0) {
         *ch = D_800E28C8;
     } else {
-        *ch = menu->owner->channel;
+        *ch = menu->owner->unk4;
     }
 }
 
@@ -137,7 +119,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
         if (D_8015375C != 0) {
             c = D_800E28C8;
         } else {
-            c = menu->owner->channel;
+            c = menu->owner->unk4;
         }
         ch = c;
         if (func_80406178_de(menu, c, 0) != 0) {

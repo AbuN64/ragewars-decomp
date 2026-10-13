@@ -1,21 +1,4 @@
-#include "types.h"
-typedef struct Shared_PakMenuItem {
-    u32 unknown0[2];
-    u32 flags;
-    u32 unknownC[7];
-} Shared_PakMenuItem;
-typedef struct Shared_ControllerPort {
-    u32 unknown0;
-    s8 channel;
-} Shared_ControllerPort;
-struct SharedPlayer;
-typedef struct Shared_PakMenu {
-    u32 unknown0[3];
-    Shared_PakMenuItem *items;
-    u32 unknown10[3];
-    struct SharedPlayer *player;
-    Shared_ControllerPort *owner;
-} Shared_PakMenu;
+#include "shared/pak_menu.h"
 
 extern s32 D_800E28C8, D_800DE874;
 extern char *D_800D36D4, *D_800D36D8, *D_800D36DC;
@@ -46,7 +29,7 @@ void func_80405F48_de(Shared_PakMenu *menu) {
     if (D_8015375C != 0) {
         ch = D_800E28C8;
     } else {
-        ch = menu->owner->channel;
+        ch = menu->owner->unk4;
     }
     for (i = 0; i < 16; i++) {
         result = func_8040458C_de(ch, i, &exists, name, ext, &size, company, code);

@@ -1817,6 +1817,8 @@ struct func_80242278_S1;
 struct func_80242278_S1 {
     char pad0[0x4];
     s8 unk4;
+    char pad05[0xB0 - 5];
+    s32 unkB0; /* controller input flags used by Controller Pak selection */
 };
 
 struct func_8024795C_S2;

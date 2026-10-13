@@ -9,7 +9,7 @@
 #include "span_16E000/code_80447BB0.h"
 #include "span_16E000/code_8044ACCC.h"
 extern void func_80449E18_de(Node_func_80449E18_de *);
-extern void func_80253908_de(void);
+extern void func_80253908_de(s32 unusedHeap);
 extern s32 func_80254284_de(s32,void **,s32,void *);
 extern void **func_80254408_de(s32,s32,s32,s32,s32,s32,void *);
 extern void func_80286AA8_de(void *,s32,s32);
@@ -50,7 +50,7 @@ void func_8044B7C0_de(Level_func_8044B7C0_de *arg0, s32 arg1) {
     /* The global is the holder storage; its canonical scalar declaration is incomplete. */
     ((void (*)(void *))func_80449E18_de)(&D_80145040);
     /* The original resource API passes the unused arena argument. */
-    ((void (*)(s32))func_80253908_de)(0);
+    func_80253908_de(0);
     func_80254284_de(0, (void **)&sp20, arg1, &D_800C4F50_de);
     temp_v0 = func_8028FE28_de(sp20, arg1, 5);
     arg0->unk1C = temp_v0;

@@ -15,7 +15,7 @@ extern s32 func_80254B58_de(s32, s32, s32);
 extern void func_802515F0_de(s32, s32);
 extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
 
-void func_80253908_de(void) {
+void func_80253908_de(s32 unusedHeap) {
     s32 temp_v1;
     s32 temp_v1_2;
     u32 temp_a0;

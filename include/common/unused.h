@@ -1133,7 +1133,7 @@ extern struct Shape_func_802764D4_de_2 D_80149B10[];
 extern s32 D_800E1014[];
 
 /* unbake published declaration: published_4a75e4fba0cf2a0633c66f0b */
-extern s32 D_800DE864_de;
+extern struct Shape_typemap_165 *D_800DE864_de;
 
 /* unbake published declaration: published_4a8d61ad1093592a8aeda068 */
 extern char D_800E62DC[];
@@ -1338,7 +1338,7 @@ extern f32 D_800C4E58_de[];
 extern float D_800C49F8_de;
 
 /* unbake published declaration: published_560d43917b1a9c70093c99a3 */
-extern s32 D_800DE860_de;
+extern void *D_800DE860_de;
 
 /* unbake published declaration: published_5610cfc0aec34472c4ebbec8 */
 extern func_8020CA10_G1 D_800C3584_de;
@@ -7933,11 +7933,7 @@ struct Owner_func_8044D794_de {
     struct Entry_func_8044D794_de *spare;
 };
 struct PakNotesMenuItem;
-struct PakNotesMenuItem {
-    char pad0[8];
-    u32 flags;
-    char padC[0x1C];
-};
+#include "shared/pak_menu.h"
 struct PakNotesMenu;
 struct PakNotesMenu {
     char pad0[0xC];

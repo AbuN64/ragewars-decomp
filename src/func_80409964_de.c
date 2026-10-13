@@ -2,10 +2,10 @@
 #include "types.h"
 #include "stddef.h"
 /* Releases the two active resources and clears their associated state. */
-void func_80253838_de(s32, s32); /* extern */
+void func_80253838_de(void *, void *); /* extern */
 void func_80253908_de(s32); /* extern */
-extern s32 D_800DE860_de;
-extern s32 D_800DE864_de;
+extern void *D_800DE860_de;
+extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800DE868;
 extern s32 D_800E28BC;
 void func_80409964_de(void) {

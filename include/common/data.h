@@ -141,7 +141,7 @@ extern int D_800E2894[];
 extern int D_800E28A4_eu[];
 extern int D_800E28B4_eu[];
 extern int D_800E28C4_eu[];
-extern int D_800E2994[];
+extern u8 *D_800E2994[];
 extern int D_800E2FB4[];
 extern int D_800E3234[];
 extern int D_800E3244[];

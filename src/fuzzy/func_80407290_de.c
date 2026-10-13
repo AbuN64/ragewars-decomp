@@ -1,7 +1,8 @@
 #include "common/types_1dc8418c21db.h"
 #include "shared/pak_save_text.h"
 extern s32 D_8015375C, D_800E28C8, D_8014D4C0_de;
-extern void *D_800DE860_de, *D_800DE864_de;
+extern void *D_800DE860_de;
+extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800DE868, D_800E28BC;
 extern char D_80153738[], D_8014561C[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];

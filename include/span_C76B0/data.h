@@ -2207,7 +2207,7 @@ extern int D_800D3590;
 extern int D_800D35F4;
 extern int D_800D3628;
 extern int D_800D36E4;
-extern int D_800D37D0;
+extern u8 *D_800D37D0;
 extern int D_800D3958;
 extern int D_800D3A58;
 extern unsigned char * D_800D3A9C;
