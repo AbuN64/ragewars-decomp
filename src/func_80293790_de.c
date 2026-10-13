@@ -1,3 +1,4 @@
+#include "span_1000/code_80293A04.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802646F4.h"
@@ -11,21 +12,21 @@ extern int func_80264B6C_de(void);
 void func_80293790_de(void *arg0, s32 arg1) {
     s32 saved;
 
-    saved = ((func_80293774_S1 *)(arg0))->unk26DB8;
-    ((func_80293774_S1 *)(arg0))->unk26DC1 = 1;
-    ((func_80293774_S1 *)(arg0))->unk26DC4.v0 = 0;
-    ((func_80293774_S1 *)(arg0))->unk26DB8 = 0x14;
-    ((func_80293774_S1 *)(arg0))->unk26DBC = arg1;
-    ((func_80293774_S1 *)(arg0))->unk26DB4 = saved;
+    saved = ((Session_func_80293A20_de *)arg0)->mode;
+    ((Session_func_80293A20_de *)arg0)->phase = 1;
+    ((Session_func_80293A20_de *)arg0)->timer = 0;
+    ((Session_func_80293A20_de *)arg0)->mode = 0x14;
+    ((Session_func_80293A20_de *)arg0)->target = arg1;
+    ((Session_func_80293A20_de *)arg0)->previousMode = saved;
     if (func_80264B6C_de() != 0) {
-        ((func_80293774_S1 *)(arg0))->unk26DC4.v1 = D_800C5494.unk4;
+        ((Session_func_80293A20_de *)arg0)->timer = D_800C5494.unk4;
     }
 }
 
 /** Set the state byte and linked value in a large object. */
 void func_80293824_de(void *object, int value) {
-    ((func_80293808_S1 *)(object))->unk26DC1 = 2;
-    ((func_80293808_S1 *)(object))->unk26DBC = value;
+    ((Session_func_80293A20_de *)object)->phase = 2;
+    ((Session_func_80293A20_de *)object)->target = value;
 }
 
 typedef void (*Handler8029382C)(void *);
@@ -46,11 +47,11 @@ void func_80293848_de(void *arg0) {
         D_800CD724 = 0;
     }
     func_80264CB8_de();
-    field = ((func_8029382C_S1 *)(arg0))->unk26DB8;
-    fn = *(Handler8029382C *)(D_800CD78C + field * 0xC);
+    field = ((Session_func_80293A20_de *)arg0)->mode;
+    fn = ((SessionHandlerRow *)D_800CD78C)[field].update;
     if (fn != 0) {
         fn(arg0);
-        field = ((func_8029382C_S1 *)(arg0))->unk26DB8;
+        field = ((Session_func_80293A20_de *)arg0)->mode;
     }
     if (field != 0x14 && D_80142CA8 != 0) {
         D_80142CA8 -= 1;

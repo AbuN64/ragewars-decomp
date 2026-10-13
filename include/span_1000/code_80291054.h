@@ -7,6 +7,12 @@
 #include "span_1000/code_8028DF6C.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_8043F69C.h"
+/* One state-dispatch row in D_800CD78C, stride 0xC. */
+typedef struct SessionHandlerRow {
+    void (*update)(void *);
+    char reserved4[8];
+} SessionHandlerRow;
+
 struct Display;
 /* unbake published declaration: published_0fd98bf960b45acfd833434e */
 typedef struct Display Display;
