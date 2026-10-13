@@ -194,15 +194,23 @@ extern void func_8027E784_de(struct Shared_Particle *actor);
 struct Shared_ParticleTarget;
 /* unbake published declaration: published_5879124f3c29ad5ae941e338 */
 struct Shared_ParticleTarget {
-    char pad0[0xB4];
+    u8 kind;
+    char reserved1[0x17];
+    s32 *category;
+    char reserved1C[0x98];
     struct UnitMtx *drawMatrices;
-    char padB8[0x48];
+    struct UnitMtx *bones;
+    char padBC[0x44];
     s32 flags;
     char pad104[0x6C];
     s32 unk170;
     s32 unk174;
     char pad178[0x2C];
     s8 unk1A4;
+    char reserved1A5[0xE3];
+    void (*callback)(struct Shared_ParticleTarget *, s32 *, void *);
+    char reserved28C[0x1158];
+    s32 extraUses;
 };
 
 struct func_80282E6C_Table;
@@ -496,7 +504,8 @@ struct Shared_Particle {
     struct Shared_ParticleOwner *owner;
     s32 ownerId;
     struct Shared_ParticleTarget *target;
-    char pad138[0x8];
+    s32 handle;
+    char pad13C[4];
     f32 time;
     f32 frame;
     f32 unk148;
@@ -518,7 +527,7 @@ struct Shared_Particle {
     f32 amplitudeA;
     f32 amplitudeB;
     s32 unk1B4;
-    char pad1B8[0x1];
+    s8 mode0;
     s8 unk1B9;
     s8 unk1BA;
     char pad1BB;
