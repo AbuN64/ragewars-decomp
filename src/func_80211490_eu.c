@@ -163,7 +163,7 @@ block_41:
             } else {
                 temp_s1->player->strafe = 0.0f;
             }
-            temp_s1->w14 = -1;
+            temp_s1->routeNodes[0] = -1;
             temp_v0_6 = temp_s1->fireTimer - 1;
             temp_s1->fireTimer = temp_v0_6;
             if ((temp_v0_6 == 0) && ((func_802744D4_de() % 100) < (s32) temp_f21)) {

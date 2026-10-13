@@ -152,7 +152,7 @@ halt:
             } else {
                 brain->player->strafe = 0.0f;
             }
-            brain->w14 = -1;
+            brain->routeNodes[0] = -1;
             if (--brain->fireTimer == 0 && (func_802744D4_de() % 100) < (s32)speed) {
                 brain->player->buttons |= 0x10;
             }

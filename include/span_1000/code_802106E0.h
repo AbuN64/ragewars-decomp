@@ -43,10 +43,13 @@ struct Brain_func_802120A8_eu {
     s32 route;
     char pad8[8];
     s32 node;
-    s32 w14;
-    char pad18[0x4C];
+    s32 routeNodes[4]; /* 0x14 */
+    char pad24[0x40];
     struct Actor_func_802120A8_eu *target;
-    char pad68[0x188];
+    struct Player *routeObject; /* 0x68 */
+    char pad6C[0x50];
+    s32 routeState; /* 0xBC */
+    char padC0[0x130];
     f32 walk[8];
     char pad210[0x20];
     s32 combat;
@@ -126,10 +129,13 @@ struct CloseAttackBrain {
     s32 w8;
     s32 destination;
     s32 node;
-    s32 w14;
-    char pad18[0x4C];
+    s32 routeNodes[4]; /* 0x14 */
+    char pad24[0x40];
     CloseAttackActor *target;
-    char pad68[0x188];
+    struct Player *routeObject; /* 0x68 */
+    char pad6C[0x50];
+    s32 routeState; /* 0xBC */
+    char padC0[0x130];
     f32 walk[8];
     char pad210[0x10];
     s32 state; /* 0x220 */

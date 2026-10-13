@@ -1,3 +1,5 @@
+#include "span_1000/code_80233920.h"
+#include "shared/gameplay_camera.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802393F4.h"
 #include "types.h"
@@ -16,26 +18,26 @@ extern f32 func_802B72B0_de(f32);
 f32 func_80239678_de(void *arg0, void *arg1) {
     Vec3 position;
     f32 sum;
-    void *node;
+    Racer *node;
     f64 divisor;
     s32 count;
 
-    if (((func_80239668_S1 *)(arg0))->unk30 == 0) {
+    if (((Race *)arg0)->mode == 0) {
         return 0.0f;
     }
-    node = ((func_80239668_S1 *)(arg0))->unk20;
+    node = ((Race *)arg0)->racers;
     sum = 0.0f;
     if (node != 0) {
         do {
-            func_80271F68_de(&position, &((func_80239668_S2 *)(node))->unk128, arg1);
+            func_80271F68_de(&position, &((Shared_func_80234FDC_S2 *)node)->position, arg1);
             sum += func_802B72B0_de(
                 (position.x * position.x) +
                 (position.y * position.y) +
                 (position.z * position.z));
-            node = ((func_80239668_S2 *)(node))->unk4;
+            node = node->next;
         } while (node != 0);
     }
-    count = ((func_80239668_S1 *)(arg0))->unk30;
+    count = ((Race *)arg0)->mode;
     divisor = (f64)count;
     if (count < 0) {
         divisor += D_800C3550_de;
