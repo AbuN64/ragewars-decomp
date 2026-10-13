@@ -244,14 +244,6 @@ struct Widget_func_8044214C_de;
 /* unbake published declaration: published_75048687b1600994328aa7fa */
 typedef struct Widget_func_8044214C_de Widget_func_8044214C_de;
 
-struct Node_func_80442A28_de;
-/* unbake published declaration: published_8056e8896dbc131035baa742 */
-struct Node_func_80442A28_de {
-    char pad0[0x28];
-    short kind;
-    char pad1[0x1A8];
-    struct Node_func_80442A28_de *next;
-};
 
 struct Node_func_804429D4_de;
 struct Owner_func_804429D4_de;
@@ -281,9 +273,8 @@ struct Item_func_80441FE8_de {
     u8 **text;
 };
 
-struct Node_func_80442A28_de;
 /* unbake published declaration: published_d87125e14130ab82b23c66ee */
-typedef struct Node_func_80442A28_de Node_func_80442A28_de;
+typedef struct Node_func_804428F8_de Node_func_80442A28_de;
 
 struct func_8043FFAC_S4;
 /* unbake published declaration: published_ec8208c3adadc60c6fecba92 */

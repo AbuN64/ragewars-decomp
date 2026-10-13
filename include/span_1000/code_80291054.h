@@ -3,6 +3,7 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "gfx.h"
+#include "shared/gameplay_camera.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_8028DF6C.h"
 #include "common/types_8fd754e1e915.h"
@@ -208,11 +209,11 @@ extern void func_80445074_eu(void *);
 extern void func_8044DC60_de(void *);
 extern void func_80293054_de(Display *);
 
-typedef struct Node_func_80442A28_de TimingQueue;
+typedef Node_func_80442A28_de TimingQueue;
 typedef struct TimingWorld {
  char pad0[0x255C8];
- u8 viewportData[0x594]; TimingQueue *unk25B5C;
- char pad25B60[0x1250]; f32 unk26DB0;
+ RaceViewportState viewport;
+ char pad267C8[0x5E8]; f32 unk26DB0;
  s32 previousMode; u32 unk26DB8,unk26DBC;
  u8 fadeFast; u8 unk26DC1;
  char pad26DC2[2]; f32 fade;
@@ -224,10 +225,11 @@ typedef struct FrameCallback {
  void (*auxiliary0)(TimingWorld *);
  void (*auxiliary1)(TimingWorld *);
 } FrameCallback;
+extern FrameCallback D_800CD790[];
 extern u64 func_802BADC0_de(void);
 extern s32 func_80245B0C_de(void);
 extern u32 func_80245850_de(void);
-extern s32 func_80442A28_de(struct Node_func_80442A28_de **);
+extern s32 func_80442A28_de(Node_func_80442A28_de **);
 extern void func_80253344_de(s32);
 extern void func_80292308_de(TimingWorld *);
 extern void func_80293C34_de(void *);
@@ -240,5 +242,11 @@ extern struct Frame *D_8011BDC0;
 extern struct Frame *D_80146CD8;
 extern f32 D_80142C38[2];
 extern TimingQueue *D_8014561C;
+
+extern u32 D_800CD884;
+extern f32 rwFrameBuildSeconds;
+extern f32 D_800C5468;
+extern void func_802539EC_de(s32,s32);
+extern void func_80293268_de(void *);
 
 #endif

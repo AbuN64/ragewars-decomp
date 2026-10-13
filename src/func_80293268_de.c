@@ -6,7 +6,7 @@
 #include "types.h"
 
 /** Thin wrapper around func_80264404_de. */
-void func_80293268_de(void) {
+void func_80293268_de(void *unused) {
     func_80264404_de();
 }
 

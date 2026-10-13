@@ -2145,7 +2145,6 @@ extern int D_800CD668_de[];
 extern float D_800CD6B4;
 extern float D_800CD74C;
 extern float D_800CD754;
-extern int D_800CD790[];
 extern double D_800CD9A0;
 extern int D_800CDBD0[];
 extern unsigned char * D_800D1D60;

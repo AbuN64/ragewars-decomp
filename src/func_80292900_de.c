@@ -67,7 +67,7 @@ void func_80292900_de(TimingWorld *arg0) {
         if (func_802934F8_de() == 0) {
             arg0->unk26DD4 = 0;
         } else {
-            arg0->unk26DD4 = func_80442A28_de(&arg0->unk25B5C);
+            arg0->unk26DD4 = func_80442A28_de(&arg0->viewport.self.messageList.head);
         }
     }
     if (D_80154048 != 0) {
