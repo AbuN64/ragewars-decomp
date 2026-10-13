@@ -1,6 +1,7 @@
 #ifndef RW_GAMEPLAY_CAMERA_H
 #define RW_GAMEPLAY_CAMERA_H
 #include "types.h"
+#include "common/types_06e4f7ef1f9e.h"
 /* Complete camera records and callback ABI from origin/legacy func_80234FDC.c. */
 typedef struct Shared_func_80234FDC_S5 Shared_func_80234FDC_S5;
 struct Shared_func_80234FDC_S5 {
@@ -61,12 +62,15 @@ struct Shared_func_80234FDC_S2 {
     f32 unk18; /* +0x18: src/func_80234FDC.c */
     char pad1C[0x8];
     s32 unk24; /* +0x24: src/func_80234FDC.c */
-    char pad28[0x10];
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
     f32 unk38; /* +0x38: src/func_80234FDC.c */
     f32 unk3C; /* +0x3C: src/func_80234FDC.c */
     f32 unk40; /* +0x40: src/func_80234FDC.c */
     f32 unk44; /* +0x44: src/func_80234FDC.c */
-    char pad48[0x10];
+    Shared_Quad unk48;
     struct Shared_func_80234FDC_S8 *unk58; /* +0x58: src/func_80234FDC.c */
     f32 unk5C; /* +0x5C: src/func_80234FDC.c */
     f32 unk60; /* +0x60: src/func_80234FDC.c */
@@ -105,12 +109,16 @@ struct Shared_func_80234FDC_S2 {
     s8 unk1E0; /* +0x1E0: src/func_80234FDC.c */
     char pad1E1[0x3F];
     f32 unk220; /* +0x220: src/func_80234FDC.c */
-    char pad224[0x78];
+    char pad224[0x3C];
+    Vec3 corners[5];
     f32 unk29C; /* +0x29C: src/func_80234FDC.c */
     f32 unk2A0; /* +0x2A0: src/func_80234FDC.c */
     f32 unk2A4;
     f32 unk2A8;
-    char pad2AC[0xD4];
+    char pad2AC[0x44];
+    Vector4f clipPlanes[6];
+    Vec3 clipBounds[2];
+    Vec3 volumeBounds[2];
     char unk380[2][64]; /* +0x380: double-buffered projection matrices */
     Shared_func_80234FDC_S6 lights[2]; /* +0x400: double-buffered lights */
     u16 unk440; /* +0x440: src/func_80234FDC.c */
@@ -118,7 +126,9 @@ struct Shared_func_80234FDC_S2 {
     char unk448[3][64]; /* +0x448: src/func_80234FDC.c */
     char pad508[0x20];
     f32 unk528; /* +0x528: src/func_80234FDC.c */
-    char pad52C[0x28];
+    f32 unk52C;
+    f32 unk530;
+    char pad534[0x20];
     char unk554[28]; /* +0x554: src/func_80234FDC.c */
     s8 unk570; /* +0x570: src/func_80234FDC.c */
     char pad571[0x8E3];

@@ -1,3 +1,4 @@
+#include "shared/gameplay_camera.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80233920.h"
 #include "types.h"
@@ -26,24 +27,24 @@ extern void func_80275954_de(void *, s32, Vec3 *);
 
 
 
-void func_80234DE0_de(char *camera) {
+void func_80234DE0_de(Shared_func_80234FDC_S2 *camera) {
     Vec3 pts[5];
     Vec3 *out;
     f32 radius;
     f32 height;
 
-    if (((func_80234DD0_S1 *)(camera))->unk7C == 0) {
+    if (camera->unk7C == 0) {
         return;
     }
     if (D_801462E5 == 0) {
-        radius = ((func_80234DD0_S1 *)(camera))->unk528 /
-                 func_802B6560_de(((func_80234DD0_S1 *)(camera))->unk530 * ((func_80234DD0_S1 *)(camera))->unk70 * D_800C3200_de[0]);
+        radius = camera->unk528 /
+                 func_802B6560_de(camera->unk530 * camera->unk70 * D_800C3200_de[0]);
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = radius * func_802B7130_de(((func_80234DD0_S1 *)(camera))->unk530 * ((func_80234DD0_S1 *)(camera))->unk70 * D_800C3200_de[0]);
-        pts[1].y = pts[1].x / ((func_80234DD0_S1 *)(camera))->unk70;
-        pts[1].z = -((func_80234DD0_S1 *)(camera))->unk528;
+        pts[1].x = radius * func_802B7130_de(camera->unk530 * camera->unk70 * D_800C3200_de[0]);
+        pts[1].y = pts[1].x / camera->unk70;
+        pts[1].z = -camera->unk528;
         pts[2].x = -pts[1].x;
         pts[2].y = pts[1].y;
         pts[2].z = pts[1].z;
@@ -57,9 +58,9 @@ void func_80234DE0_de(char *camera) {
         pts[0].x = 0.0f;
         pts[0].y = 0.0f;
         pts[0].z = 0.0f;
-        pts[1].x = ((func_80234DD0_S1 *)(camera))->unk74 * D_800C3200_de[1];
-        pts[1].y = ((func_80234DD0_S1 *)(camera))->unk78 * D_800C3200_de[1];
-        pts[1].z = -((func_80234DD0_S1 *)(camera))->unk528;
+        pts[1].x = camera->unk74 * D_800C3200_de[1];
+        pts[1].y = camera->unk78 * D_800C3200_de[1];
+        pts[1].z = -camera->unk528;
         pts[2].x = -pts[1].x;
         pts[2].y = pts[1].y;
         pts[2].z = pts[1].z;
@@ -71,15 +72,15 @@ void func_80234DE0_de(char *camera) {
         pts[4].z = pts[1].z;
         radius = func_802B72B0_de(pts[1].x * pts[1].x + pts[1].y * pts[1].y + pts[1].z * pts[1].z);
     }
-    out = &((func_80234DD0_S1 *)(camera))->unk260.v0;
-    func_80272944_de(camera + 0x160, pts, out, 5);
-    func_802965B0_de(camera + 0x2F0, out, out + 1, out + 2, out + 3, out + 4);
-    func_80275954_de(camera + 0x350, 5, out);
+    out = &camera->corners[0];
+    func_80272944_de(&camera->unk160, pts, out, 5);
+    func_802965B0_de(camera->clipPlanes, out, out + 1, out + 2, out + 3, out + 4);
+    func_80275954_de(camera->clipBounds, 5, out);
     height = radius * D_800C3208_de;
-    ((func_80234DD0_S1 *)(camera))->unk368 = ((func_80234DD0_S1 *)(camera))->unk260.v1 - radius;
-    ((func_80234DD0_S1 *)(camera))->unk374 = ((func_80234DD0_S1 *)(camera))->unk260.v1 + radius;
-    ((func_80234DD0_S1 *)(camera))->unk36C = ((func_80234DD0_S2 *)(camera))->unk264 - height;
-    ((func_80234DD0_S1 *)(camera))->unk378 = ((func_80234DD0_S2 *)(camera))->unk264 + height;
-    ((func_80234DD0_S1 *)(camera))->unk370 = ((func_80234DD0_S2 *)(camera))->unk268 - radius;
-    ((func_80234DD0_S1 *)(camera))->unk37C = ((func_80234DD0_S2 *)(camera))->unk268 + radius;
+    camera->volumeBounds[0].x = camera->corners[0].x - radius;
+    camera->volumeBounds[1].x = camera->corners[0].x + radius;
+    camera->volumeBounds[0].y = camera->corners[0].y - height;
+    camera->volumeBounds[1].y = camera->corners[0].y + height;
+    camera->volumeBounds[0].z = camera->corners[0].z - radius;
+    camera->volumeBounds[1].z = camera->corners[0].z + radius;
 }
