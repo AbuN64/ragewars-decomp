@@ -104,7 +104,9 @@ extern void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, i
 extern void func_802AAB68_de(float arg0, float arg1);
 extern s32 func_802ACB18_de(void *arg0, void *arg1);
 extern s32 func_802ACD28_de(void *arg0, void *arg1);
-extern s32 func_802ACFB0_de(void *arg0, void *arg1);
+struct Actor_func_802AB400_de;
+struct MultiChannelItemEffect;
+extern s32 func_802ACFB0_de(struct Actor_func_802AB400_de *arg0, struct MultiChannelItemEffect *arg1);
 extern void func_802AD3F0_de(int arg0);
 extern void func_802AF150_de(void *rawPlayer);
 extern void func_802AFD00_de(void *arg0);

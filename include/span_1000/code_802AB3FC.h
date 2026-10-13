@@ -299,4 +299,10 @@ typedef struct TimedItemEffect {
     s32 amount;
 } TimedItemEffect;
 
+/* Three-channel pickups extend the common two-argument effect record. */
+typedef struct MultiChannelItemEffect {
+    Entry_func_802AB400_de effect;
+    s16 third;
+} MultiChannelItemEffect;
+
 #endif
