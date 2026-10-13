@@ -62,7 +62,9 @@ struct Shared_ActorView {
     s32 field11E8;
     u8 pad11EC[0x10];
     s32 field11FC; /* +0x11FC: src/func_8021B468.c */
-    char pad1200[0x18];
+    char pad1200[0x10];
+    s32 targeting; /* 0x1210 */
+    u8 pad1214[4];
     s32 field1218; /* +0x1218: src/func_8021B468.c */
     s32 projectileBase; /* +0x121C: src/func_8021B468.c */
     s32 projectileIndex; /* +0x1220: src/func_8021B468.c */

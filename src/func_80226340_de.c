@@ -1,3 +1,5 @@
+#include "shared/gameplay_transition.h"
+#include "common/unused.h"
 #include "span_1000/code_80233920.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -100,20 +102,20 @@ void func_80226548_de(void *arg0, void *arg1) {
     f32 temp_f1;
 
     func_802231D4_de(arg0, arg1, &D_800CE7E4);
-    if (((func_80226524_S1 *)(arg0))->unk1210 != 0) {
+    if (((Shared_ActorView *)arg0)->targeting != 0) {
         func_8021CF28_de(&sp20, arg0, &sp50, &sp30);
         if (sp50 != 0) {
-            position = &((func_80226524_S1 *)(arg0))->unk8.v0;
-            if (!(D_800C2B48_de[1] < func_802726F8_de(position, &((func_8020E674_S1 *)(sp50))->unk8.v0))) {
-                if (func_802444A4_de(arg0, ((func_80226524_S1 *)(arg0))->unk8.v1,
-                                     ((func_8020E674_S1 *)(sp50))->unk8.v1,
+            position = &((Shared_ActorView *)arg0)->position.vector.x;
+            if (!(D_800C2B48_de[1] < func_802726F8_de(position, &((Shared_ActorView *)sp50)->position.vector.x))) {
+                if (func_802444A4_de(arg0, ((Shared_ActorView *)arg0)->position.vector,
+                                     ((Shared_ActorView *)sp50)->position.vector,
                                      &D_80103FD0) == 0 ||
                     *D_80103FCC == sp50) {
-                    func_80271F68_de(&sp40, &((func_8020E674_S1 *)(sp50))->unk8.v1, (Vec3 *)position);
+                    func_80271F68_de(&sp40, &((Shared_ActorView *)sp50)->position.vector, (Vec3 *)position);
                     sp54 = func_80271AA8_de(&sp40);
                     func_80274020_de(&sp54);
-                    func_80274020_de(&((func_80203908_S4 *)(arg1))->unk6C);
-                    temp_f1 = ((func_80203908_S4 *)(arg1))->unk6C;
+                    func_80274020_de(&((Actor_func_8024A7A0_de *)arg1)->yaw);
+                    temp_f1 = ((Actor_func_8024A7A0_de *)arg1)->yaw;
                     if (D_800C2B50_de < temp_f1) {
                         if (sp54 < D_800C2B54_de) {
                             sp54 += D_800C2B58_de;
@@ -124,12 +126,12 @@ void func_80226548_de(void *arg0, void *arg1) {
 positive:
                         temp_f1 = sp54;
                         if (D_800C2B5C_de < temp_f1 &&
-                            ((func_80203908_S4 *)(arg1))->unk6C < D_800C2B60_de) {
-                            ((func_80203908_S4 *)(arg1))->unk6C =
-                                ((func_80203908_S4 *)(arg1))->unk6C + D_800C2B64_de;
+                            ((Actor_func_8024A7A0_de *)arg1)->yaw < D_800C2B60_de) {
+                            ((Actor_func_8024A7A0_de *)arg1)->yaw =
+                                ((Actor_func_8024A7A0_de *)arg1)->yaw + D_800C2B64_de;
                         }
                     }
-                    func_80274870_de(&((func_80203908_S4 *)(arg1))->unk6C, sp54, D_800C9FEC);
+                    func_80274870_de(&((Actor_func_8024A7A0_de *)arg1)->yaw, sp54, D_800C9FEC);
                 }
             }
         }
