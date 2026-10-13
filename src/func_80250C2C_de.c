@@ -4,7 +4,8 @@
 
 void func_80250C2C_de(void *arg0, s32 **arg1)
 {
+  struct ResourceBinding *binding = arg0;
   s32 new_var;
   new_var = *(*arg1);
-  func_80253E64_de(0, arg1, func_802784C0_de(new_var, *(((func_80250BD4_S1 *)(arg0))->unk20), arg0 + 0xB8, (s32) (arg0 + 0x28), 0, arg0));
+  func_80253E64_de(0, arg1, func_802784C0_de(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, arg0));
 }

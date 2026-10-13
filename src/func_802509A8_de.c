@@ -22,7 +22,7 @@ void func_802509A8_de(void *arg0) {
         temp_v0 = func_802507AC_de(arg0, o->variant);
         if (temp_v0 != 0) {
             func_8026E158_de((void **) temp_v0);
-            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, o->resource, 8, arg0, &D_00250C2C, &D_800C3E40_de, 0);
+            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (s32)o->resource, 8, arg0, &D_00250C2C, &D_800C3E40_de, 0);
             if (ret2 != 0) {
                 func_80253754_de(0, ret2);
             }

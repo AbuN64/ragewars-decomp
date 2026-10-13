@@ -328,10 +328,11 @@ struct ResourceBinding {
     u8 padding000[1];
     s8 variant; /* 0x01 */
     u8 padding002[0x1E];
-    s32 resource; /* 0x20 */
-    u8 padding024[0x90];
+    s32 *resource; /* 0x20: loaded resource descriptor */
+    u8 padding024[4];
+    u8 transform[0x8C]; /* 0x28 */
     void *loadedResource; /* 0xB4 */
-    u8 padding0B8[0x18];
+    u8 runtimeState[0x18]; /* 0xB8 */
     s32 registrationFlags; /* 0xD0 */
     u8 padding0D4[4];
     u16 status; /* 0xD8 */
