@@ -6,8 +6,10 @@
 
 /** Copy the three-word vector at source offset 0x260. */
 void *func_802390D0_de(void *destination, void *source) {
+    func_802390C0_S1 *source_record = source;
 
-    *(struct Triple *)destination =
-        ((func_802390C0_S1 *)(source))->unk260;
+    Triple *out = destination;
+    *out =
+        source_record->unk260;
     return destination;
 }
