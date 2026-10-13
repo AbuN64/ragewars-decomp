@@ -458,16 +458,7 @@ struct func_8022F304_S1 {
     unsigned char unk14;
 };
 
-struct func_8022E938_S1;
 /* unbake published declaration: published_6dcaadcb8ae454096a6c0891 */
-struct func_8022E938_S1 {
-    char pad0[0x6AC];
-    s32 unk6AC;
-    char pad6AC[0x6B0 - 0x6AC - sizeof(s32)];
-    s32 unk6B0;
-    char pad6B0[0x13D4 - 0x6B0 - sizeof(s32)];
-    s32 unk13D4;
-};
 
 struct func_8022EA2C_S2;
 /* unbake published declaration: published_6fda8db0745cb2820985bed9 */
@@ -629,34 +620,8 @@ struct Obj_func_8022F3A4_de {
 /* unbake published declaration: published_f6bd0bff39e7daa05a751afb */
 extern float D_800C2E24_de;
 
-struct func_8022E938_S1;
 /* unbake published declaration: published_f6ecb1c0059641272bca0da1 */
-typedef struct func_8022E938_S1 func_8022E938_S1;
 
 extern void *D_800D052C[];
-typedef struct func_8022E998_S1 func_8022E998_S1;
-typedef struct func_8022E998_S2 func_8022E998_S2;
-typedef struct func_8022E998_S3 func_8022E998_S3;
-typedef union func_8022E998_S2_UC { s16 v0; u16 v1; } func_8022E998_S2_UC;
-struct func_8022E998_S1 {
-    char pad0[0x6AC];
-    s32 unk6AC;
-    char pad6AC[0x6B0 - 0x6AC - sizeof(s32)];
-    s32 unk6B0;
-    char pad6B0[0x770 - 0x6B0 - sizeof(s32)];
-    s16 unk770;
-    char pad770[0x938 - 0x770 - sizeof(s16)];
-    s32 unk938;
-    char pad938[0xCB8 - 0x938 - sizeof(s32)];
-    s32 unkCB8;
-};
-struct func_8022E998_S2 {
-    char pad0[0xC];
-    func_8022E998_S2_UC unkC;
-};
-struct func_8022E998_S3 {
-    char pad0[0x602];
-    s8 unk602;
-};
 
 #endif
