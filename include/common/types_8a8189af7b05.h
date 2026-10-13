@@ -72,7 +72,9 @@ struct Held {
 struct Model;
 /* unbake published declaration: published_1260323754b8435c54630066 */
 struct Model {
-    char pad0[0x4C];
+    char pad0[0x14];
+    u32 flags; /* +0x14: func_802251DC_de */
+    char pad18[0x34];
     s32 slots[8];
 };
 

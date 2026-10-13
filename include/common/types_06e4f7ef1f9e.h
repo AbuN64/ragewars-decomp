@@ -185,7 +185,7 @@ struct SharedPlayer {
     } views18;
     union {
         struct {
-            u8 unk1C[344];
+            union { u8 unk1C[344]; Vec3 localDisplacement; };
         } view1C_0;
         struct {
             u8 pad1[344];
@@ -715,6 +715,7 @@ struct SharedPlayer {
         struct {
             char pad[0xB4];
             f32 unk69C;
+            f32 pitchInput; /* +0x6A0: func_802251DC_de */
         } view69C_39;
         struct {
             char pad[0xB4];
@@ -815,6 +816,7 @@ struct SharedPlayer {
         struct {
             char pad[0xF4];
             f32 unk6DC;
+            f32 strideSign; /* +0x6E0: func_802251DC_de */
         } view6DC_60;
         struct {
             char pad[0xFC];
@@ -1531,7 +1533,9 @@ struct SharedPlayer {
             Matrix dots[2];
         } view1580_1;
     } views1580;
-    char pad1600[0xD4];
+    char pad1600[0xC0];
+    f32 turnAccumulator; /* +0x16C0: func_802251DC_de */
+    char pad16C4[0x10];
     union {
         struct {
             s32 unk16D4;

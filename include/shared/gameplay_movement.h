@@ -159,5 +159,31 @@ struct Shared_Net {
 typedef char Shared_Net_size_check[(sizeof(Shared_Net) == 0x6C) ? 1 : -1];
 
 
+/* The per-character stride sound halfword has distinct auto symbols in each ROM. */
+#if defined(VERSION_DE)
+extern s16 D_auto_800C9FAA[];
+#elif defined(VERSION_EU)
+extern s16 D_auto_800CAB8E[];
+#elif defined(VERSION_EU_X)
+extern s16 D_auto_800CB55E[];
+#elif defined(VERSION_US)
+extern s16 D_auto_800C9EBE[];
+#else
+extern s16 D_auto_800CF1EE[];
+#endif
+static inline s32 strideSound(s32 index) {
+#if defined(VERSION_DE)
+    return D_auto_800C9FAA[index * 2];
+#elif defined(VERSION_EU)
+    return D_auto_800CAB8E[index * 2];
+#elif defined(VERSION_EU_X)
+    return D_auto_800CB55E[index * 2];
+#elif defined(VERSION_US)
+    return D_auto_800C9EBE[index * 2];
+#else
+    return D_auto_800CF1EE[index * 2];
+#endif
+}
+
 #include "shared/func_80286080_de_closed.h"
 #endif
