@@ -988,6 +988,7 @@ schema = 1
 "func_80242920_de" = { evidence = "landed", signature = "s32 func_80242920_de(void *arg0, void *arg1, void *arg2, s32 *arg3)" }
 "func_80242A94_de" = { evidence = "landed", signature = "s32 func_80242A94_de(void *arg0, void *arg1, void *arg2, s32 *arg3)" }
 "func_80242BF0_de" = { evidence = "landed", signature = "void func_80242BF0_de(Ray180 *ray)" }
+"func_802433DC_de" = { evidence = "landed", signature = "void func_802433DC_de(ContextB0 *mesh,CollisionVertex **points)" }
 "func_80243814_de" = { evidence = "landed", signature = "void func_80243814_de(Hit8 *arg0, Hit8 *arg1)" }
 "func_80243850_de" = { evidence = "landed", signature = "s32 func_80243850_de(void *arg0, void *arg1)" }
 "func_80243874_de" = { evidence = "landed", signature = "void func_80243874_de(void *arg0)" }

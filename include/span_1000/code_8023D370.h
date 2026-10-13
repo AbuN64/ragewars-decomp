@@ -93,18 +93,21 @@ struct func_8023ED54_S1 {
     f32 unkCC;
 };
 
-struct Polygon_func_8023E8D4_de;
+struct Polygon;
 /* unbake published declaration: published_24da760bcc94d858391a76b5 */
-struct Polygon_func_8023E8D4_de {
+struct Polygon {
     s32 type;
-    s32 pad4;
+    f32 response; /* 0x04 */
     s32 kind;
-    char padC[8];
+    s32 category; /* 0x0C */
+    u32 flags; /* 0x10 */
     s32 vertexCount; /* 0x14 */
     Vec3 vertices[4]; /* 0x18 */
     Vec3 normal; /* 0x48 */
-    char pad54[0x78];
-    f32 t;
+    void *input; /* 0x54 */
+    s32 index; /* 0x58 */
+    char pad5C[0x70];
+    f32 t; /* 0xCC */
     Vec3 hit;
 };
 
@@ -154,14 +157,22 @@ struct func_8023ED54_S1;
 /* unbake published declaration: published_4547cb7d8d40055c5d1183a5 */
 typedef struct func_8023ED54_S1 func_8023ED54_S1;
 
-struct Polygon_func_8023E8D4_de;
+struct Polygon;
 /* unbake published declaration: published_7cd7a1e1e1e022d9852b9808 */
-typedef struct Polygon_func_8023E8D4_de Polygon_func_8023E8D4_de;
+typedef struct Polygon Polygon_func_8023E8D4_de;
 
 struct Ray_func_8023E8D4_de;
 /* unbake published declaration: published_4766403059ac241f8a7b496d */
+struct MotionSurface;
 struct Ray_func_8023E8D4_de {
-    char pad0[0x44];
+    char pad0[0x08];
+    f32 radius; /* 0x08 */
+    f32 secondaryRadius; /* 0x0C */
+    char pad10[0x0C];
+    f32 height; /* 0x1C */
+    char pad20[0x1C];
+    u32 flags; /* 0x3C */
+    struct MotionSurface *surface; /* 0x40 */
     Vec3 start;
     Vec3 end;
     char pad5C[0x24];
@@ -235,28 +246,11 @@ extern s32 func_8023E864_de(void *arg0, void *arg1);
 
 struct Polygon;
 /* unbake published declaration: published_effecfbeb347ac6c62e9f5cd */
-struct Polygon {
-    s32 type;
-    s32 pad4;
-    s32 kind;
-    char padC[0x3C];
-    Vec3 normal;
-    char pad54[0x78];
-    f32 t;
-    Vec3 hit;
-};
 
-struct Ray_func_8023DF70_de;
+
+struct Ray_func_8023E8D4_de;
 /* unbake published declaration: published_761f64b943082051c2452ef7 */
-struct Ray_func_8023DF70_de {
-    char pad0[0x44];
-    Vec3 start;
-    Vec3 end;
-    char pad5C[0x24];
-    f32 slack;
-    char pad84[0x2C];
-    Polygon nearest;
-};
+
 
 struct Range;
 /* unbake published declaration: published_7ae45a128559e7e93b366077 */
@@ -465,9 +459,9 @@ struct func_8023E6C0_S1 {
     float unk18;
 };
 
-struct Ray_func_8023DF70_de;
+struct Ray_func_8023E8D4_de;
 /* unbake published declaration: published_fd230efef2cc7197fad1b7c4 */
-typedef struct Ray_func_8023DF70_de Ray_func_8023DF70_de;
+typedef struct Ray_func_8023E8D4_de Ray_func_8023DF70_de;
 
 extern f32 D_800C3670_de;
 extern f32 D_800C3674_de;

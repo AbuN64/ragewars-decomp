@@ -4,6 +4,9 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_8023D370.h"
+#include "types.h"
 struct Ray180;
 /* unbake published declaration: published_006a37321258c9d98baff2fe */
 struct MotionSurface;
@@ -369,7 +372,7 @@ extern void func_802428D0_de(void *first, void *second);
 struct ContextB0;
 /* unbake published declaration: published_7ea48cbcd58ed80a6d51be33 */
 struct ContextB0 {
-    Ray180 *ray;
+    void *ray; /* Ray shared by collision traversal callbacks. */
     Vec3 *start;
     Vec3 *end;
     Matrix_func_80213CF8_de matrix;
@@ -586,5 +589,7 @@ typedef struct CollisionVertex {
     char pad8[0x14];
     s16 *position; /* 0x1C */
 } CollisionVertex;
+
+extern s32 func_8023DF70_de(Ray_func_8023DF70_de*,Vec3*,f32,Polygon*,s32);
 
 #endif
