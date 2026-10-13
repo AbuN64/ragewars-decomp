@@ -1,3 +1,4 @@
+#include "span_16E000/code_8040C780.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_8043962C.h"
@@ -100,7 +101,7 @@ s32 func_80439E34_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         index = 0;
         do {
             if (D_800E59B0[index].value == arg1) {
-                actor_kind = ((func_8021C9B4_S3 *)(arg0))->unkC;
+                actor_kind = ((struct Tree *)arg0)->id;
                 table_kind = D_800E59B4[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
                     return (*(Handler8043A014 *)entry)(arg0, arg1, arg2, arg3, arg4);
