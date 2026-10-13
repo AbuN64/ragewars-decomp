@@ -373,16 +373,20 @@ struct Slot_func_8025C008_de {
     s32 index;
     s32 state;
     s32 used;
-    char pad0[4];
+    s32 fieldC;
     s32 key;
-    char pad1[0x3C];
+    char pad14[0x24];
+    s16 priority;
+    s16 channel;
+    char pad3C[0x14];
     s32 flag;
     char pad2[0x50];
     s32 mask;
     s32 value;
     s32 active;
     Owner_func_8025B5F0_de *owner;
-    char pad3[0x18];
+    s32 fieldB4;
+    char padB8[0x14];
 };
 
 /* unbake published declaration: published_7ed8ca2b41cd67787d74853e */
