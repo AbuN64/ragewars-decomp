@@ -5,5 +5,6 @@
 
 /** Return the word at offset twelve. */
 int func_8026140C_de(char *object) {
-    return ((func_80205628_S3 *)(object))->unkC;
+    Stream_func_80261418_de *stream = (void *)object;
+    return stream->unkC;
 }
