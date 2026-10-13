@@ -4658,7 +4658,7 @@ segments:
       - [0x1047A0, c, "func_80414360_de"]
       - [0x1047E8, asm, "func_804147E8_eu_x"]
       - [0x1047F0, asm, "func_804147F0_eu_x"]
-      - [0x104840, asm, "func_80414400_de"]
+      - [0x104840, c, "func_80414400_de"]
       - [0x10510C, c, "func_80414CCC_de"]
       - [0x10605C, c, "func_80415C1C_de"]
       - [0x1060C4, .data, "func_804160C4_eu_x"]

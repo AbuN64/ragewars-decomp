@@ -54873,6 +54873,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80414400_de.c"
+kind = "c"
+group = "code_804143D8"
+members = ["func_80414400_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80414CCC_de.c"
 kind = "c"
 group = "code_804143D8"
@@ -100154,6 +100165,11 @@ path = "src/fuzzy/func_802079B0_de.c"
 scores = {de = 0.9821428571428571, eu = 0.9821428571428571, eu-x = 0.9821428571428571, us = 0.9821428571428571, us-rev1 = 0.9821428571428571}
 
 [[fuzzy]]
+member = "func_80208410_de"
+path = "src/fuzzy/func_80208410_de.c"
+scores = {de = 0.6997635933806147, eu = 0.6997635933806147, eu-x = 0.6997635933806147, us = 0.6997635933806147, us-rev1 = 0.6997635933806147}
+
+[[fuzzy]]
 member = "func_8020AF9C_de"
 path = "src/fuzzy/func_8020AF9C_de.c"
 scores = {de = 0.14903846153846154, eu = 0.14903846153846154, eu-x = 0.14903846153846154, us = 0.14903846153846154, us-rev1 = 0.14903846153846154}
@@ -101102,11 +101118,6 @@ scores = {de = 0.850253807106599, eu = 0.850253807106599, eu-x = 0.8502538071065
 member = "func_804116CC_de"
 path = "src/fuzzy/func_804116CC_de.c"
 scores = {de = 0.7985074626865671, eu = 0.7985074626865671, eu-x = 0.7985074626865671, us = 0.7985074626865671, us-rev1 = 0.7985074626865671}
-
-[[fuzzy]]
-member = "func_80414400_de"
-path = "src/fuzzy/func_80414400_de.c"
-scores = {de = 0.5577264653641207, eu = 0.5577264653641207, eu-x = 0.5577264653641207, us = 0.5577264653641207, us-rev1 = 0.5577264653641207}
 
 [[fuzzy]]
 member = "func_804147F0_eu_x"

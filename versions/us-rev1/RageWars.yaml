@@ -6515,7 +6515,7 @@ segments:
       - [0x1823E0, c, "func_80414360_de"]
       - [0x182428, asm, "func_804147E8_eu_x"]
       - [0x182430, asm, "func_804147F0_eu_x"]
-      - [0x182480, asm, "func_80414400_de"]
+      - [0x182480, c, "func_80414400_de"]
       - [0x182D4C, c, "func_80414CCC_de"]
       - [0x183C9C, c, "func_80415C1C_de"]
       - [0x183D04, .data, "func_804160C4_eu_x"]

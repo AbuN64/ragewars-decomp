@@ -107,4 +107,9 @@ extern const u8 D_800DF230_de[];
 extern const u8 D_800DF240[];
 extern s32 func_80414400_de(u8 *buf, f64 value, s32 ch, s32 width, s32 prec);
 
+extern f64 D_800E1118;
+extern f64 D_800E1130;
+extern f64 D_800E1148;
+extern f64 D_800E11F0;
+
 #endif
