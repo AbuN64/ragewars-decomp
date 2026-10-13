@@ -24,11 +24,12 @@ void func_8040F350_de(void *arg0, Args args) {
     Quad_func_802A1BE0_de transformed;
     Quad_func_802A1BE0_de first;
     s32 changed;
+    Widget_func_8040F6DC_de *window = arg0;
 
     changed = 0;
     D_800E2AB8 = 0;
     if (func_8040E0D4_de(&first, &basis, arg0, &args) != 0) {
-        if ((((func_802A2BE0_S1 *)(arg0))->unk12 & 0x200) != 0) {
+        if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             if (func_8040F488_de(&transformed, &basis) == 0) {
@@ -38,7 +39,7 @@ void func_8040F350_de(void *arg0, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(((func_802A2BE0_S1 *)(arg0))->unk8, args);
+        func_8040E7FC_de(window->children, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }

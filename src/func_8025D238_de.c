@@ -17,12 +17,12 @@ s32 func_8025D238_de(void **arg0, s16 id, s16 avoid) {
     s32 total;
     s32 entry;
     s32 draw;
-    char *table;
+    Context_func_8025D450_de *table;
     s32 result;
 
     total = 0;
     table = *arg0;
-    if (func_80265550_de(((func_8025D258_S1 *)(table))->unk2B60, ((func_8025D258_S1 *)(table))->unk2B64, id, &first, &last) == 0) {
+    if (func_80265550_de(table->unk2B60, table->unk2B64, id, &first, &last) == 0) {
         return -1;
     }
     result = first;

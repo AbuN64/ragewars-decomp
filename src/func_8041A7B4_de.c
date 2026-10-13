@@ -1,3 +1,4 @@
+#include "span_16E000/code_8040F1E0.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8041A4B0.h"
 #include "types.h"
@@ -23,10 +24,11 @@ void func_8041A7B4_de(void *arg0, Args args) {
     Quad_func_802A1BE0_de value;
     Quad_func_802A1BE0_de transformed;
     s32 changed;
+    Widget_func_8040F6DC_de *window = arg0;
 
     changed = 0;
     if (func_8040E0D4_de(&first, &basis, arg0, &args) != 0) {
-        if ((((func_802A2BE0_S1 *)(arg0))->unk12 & 0x200) != 0) {
+        if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             func_8040F488_de(&transformed, &basis);
@@ -34,7 +36,7 @@ void func_8041A7B4_de(void *arg0, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(((func_802A2BE0_S1 *)(arg0))->unk8, args);
+        func_8040E7FC_de(window->children, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }
