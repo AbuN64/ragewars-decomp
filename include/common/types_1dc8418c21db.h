@@ -3413,7 +3413,10 @@ struct Record_func_80409BDC_de;
 struct func_80242278_S1;
 /* unbake published declaration: published_5f4d2b451150d5fda5e14351 */
 struct Record_func_80409BDC_de {
-    char pad[0x20];
+    char pad[0x14];
+    void *dialogData; /* 0x14 */
+    char pad18[4];
+    struct SharedPlayer_func_80226A34_de *player; /* 0x1C */
     struct func_80242278_S1 *inner;
 };
 
