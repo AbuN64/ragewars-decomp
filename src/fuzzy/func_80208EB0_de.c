@@ -27,7 +27,21 @@ extern f32 D_800C1C18;
 extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
+static __inline__ void navigationTurnLeft(Vec3 *v) {
+    v->y = v->x;
+    v->x = -v->z;
+    v->z = v->y;
+    v->y = 0.0f;
+}
+static __inline__ void navigationTurnRight(Vec3 *v) {
+    v->y = v->x;
+    v->x = v->z;
+    v->z = -v->y;
+    v->y = 0.0f;
+}
 void func_80208EB0_de(AiController *arg0) {
+    NavigationGraph *graph;
+    Vec3 *playerPosition;
     Vec3 sp10;
     Vec3 v20;
     Vec3 v30;
@@ -41,7 +55,7 @@ void func_80208EB0_de(AiController *arg0) {
     f32 temp_fa1;
     f32 temp_fs0f;
     f32 temp_ft0;
-    f32 temp_fv0;
+    f32 zero;
     f32 temp_fv0_2;
     f32 temp_fv0_3;
     f32 temp_fv0_4;
@@ -69,19 +83,22 @@ block_6:
     if (arg0->unk300 == 0) {
         temp_s2 = &arg0->destination;
         temp_v0 = arg0->player;
+        playerPosition = &temp_v0->pos;
         temp_v0_2 = temp_v0->movementFlags;
         temp_s6 = temp_v0_2 & 0x2000;
         temp_s4 = temp_v0_2 & 0x1000;
-        func_80271F68_de(&sp10, temp_s2, &temp_v0->pos);
+        func_80271F68_de(&sp10, temp_s2, playerPosition);
         temp_fv0f = func_802B72B0_de((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
+        graph = &D_8013B364;
         if (temp_s4 != 0) {
             if (D_800C1C00 < temp_fv0f) {
-                temp_fv0 = func_80209308_de(arg0, temp_s2, 2.0f, 0.0f);
-                if (temp_fv0 < 0.0f) {
-                    if (-temp_fv0 < D_800C1C04) {
+                zero = 0.0f;
+                temp_fs0f = func_80209308_de(arg0, temp_s2, 2.0f, zero);
+                if (temp_fs0f < zero) {
+                    if (-temp_fs0f < D_800C1C04) {
                         goto block_15;
                     }
-                } else if (temp_fv0 < D_800C1C08) {
+                } else if (temp_fs0f < D_800C1C08) {
 block_15:
                     temp_v0->forward = D_800C1C0C;
                 }
@@ -95,21 +112,15 @@ block_15:
             v30.x = func_802B7130_de(temp_fs0f);
             v30.y = 0.0f;
             v30.z = func_802B6560_de(temp_fs0f);
-            v20.x = arg0->destination.x - temp_v0->pos.x;
+            v20.x = arg0->destination.x - playerPosition->x;
             v20.y = 0.0f;
-            v20.z = arg0->destination.z - temp_v0->pos.z;
-            temp_v0_3 = func_8020C994_de(&D_8013B364, arg0->current);
+            v20.z = arg0->destination.z - playerPosition->z;
+            temp_v0_3 = func_8020C994_de(graph, arg0->current);
             v40 = temp_v0_3->position;
-            temp_fa0 = v40.x - arg0->destination.x;
-            v40.x = temp_fa0;
-            temp_fv0_2 = v40.z - arg0->destination.z;
-            v40.y = temp_fa0;
-            v40.y = 0.0f;
-            v40.z = temp_fv0_2;
-            temp_fa1 = -temp_fv0_2;
-            v40.x = temp_fa1;
-            v40.z = temp_fa0;
-            temp_fv0_3 = func_8029C044_de(temp_fa0, temp_fa1);
+            v40.x -= arg0->destination.x;
+            v40.z -= arg0->destination.z;
+            navigationTurnLeft(&v40);
+            temp_fv0_3 = func_8029C044_de(v40.z, v40.x);
             v40.x = func_802B6560_de(temp_fv0_3);
             temp_fv0_4 = func_802B7130_de(temp_fv0_3);
             temp_fv1 = (v20.x * v40.x) + (v20.y * v40.y) + (v20.z * temp_fv0_4);
@@ -123,21 +134,15 @@ block_15:
             extra.z = v20.z + temp_fv1_2;
             func_8027207C_de(&extra);
             temp_v0->forward = (extra.x * v30.x) + (extra.y * v30.y) + (extra.z * v30.z);
-            temp_fv1f = -v30.x;
-            temp_fv0_5 = extra.z * temp_fv1f;
-            v30.y = v30.x;
-            v30.x = v30.z;
-            temp_fv0f_2 = (extra.x * v30.z) + temp_fv0_5;
-            v30.z = temp_fv1f;
-            v30.y = 0.0f;
-            temp_v0->strafe = temp_fv0f_2;
+            navigationTurnRight(&v30);
+            temp_v0->strafe = extra.x * v30.x + extra.z * v30.z;
         }
         if (((temp_s6 != 0) || (temp_s4 != 0)) && (arg0->unk304 != 0)) {
             func_80209910_de(arg0, func_8029C044_de(sp10.y, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
             temp_v0->forward = D_800C1C18;
         }
         if (arg0->player->pose == 0xF) {
-            if (arg0->destination.y < temp_v0->pos.y) {
+            if (arg0->destination.y < playerPosition->y) {
                 temp_v0->forward = D_800C1C1C;
             } else {
                 temp_v0->forward = D_800C1C20;
