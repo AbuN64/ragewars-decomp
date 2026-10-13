@@ -182,7 +182,11 @@ typedef struct AnimTrack {
     /* 0x1C */ f32 rate;
 } AnimTrack;
 typedef struct AnimRef {
-    /* 0x00 */ char pad0[0xC];
+    /* 0x00 */ char pad0[4];
+    /* 0x04 */ u16 id;
+    /* 0x06 */ u16 frame;
+    /* 0x08 */ u16 count;
+    /* 0x0A */ u8 flags[2];
     /* 0x0C */ u32 span;
     /* 0x10 */ void **data;
 } AnimRef;

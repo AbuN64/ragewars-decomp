@@ -308,4 +308,18 @@ struct func_8028D658_S1;
 /* unbake published declaration: published_fabd06f0f0817187a2880065 */
 typedef struct func_8028D658_S1 func_8028D658_S1;
 
+/* Clip section 1 has a stride/count header and 0x38-byte pose records.
+ * Position is used to select the nearest frame; the remaining pose data is
+ * consumed by the animation routines reached through func_8028D244_de. */
+typedef struct AnimationPoseFrame {
+    Vec3 position;
+    u8 poseData[0x38 - sizeof(Vec3)];
+} AnimationPoseFrame;
+
+typedef struct AnimationPoseFrameSet {
+    s32 stride;
+    s32 count;
+    AnimationPoseFrame frames[1];
+} AnimationPoseFrameSet;
+
 #endif
