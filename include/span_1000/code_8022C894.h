@@ -316,7 +316,7 @@ struct Actor_func_8022D290_de {
     s32 unk_0x0840;
     char pad_new018[0x8];
     s32 unk_0x084C;
-    char pad_new019[0x4];
+    s32 unk_0x0850; /* action override state */
     f32 unk_0x0854;
     char pad_043[0x8];
     s32 unk_0x0860;

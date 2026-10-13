@@ -11,11 +11,12 @@ extern void func_80449870_de(void *);
 
 
 void func_8022D428_de(void *arg0) {
-    if (((func_8022D418_S1 *)(arg0))->unk850 == 0) {
-        if ((((func_8022D418_S1 *)(arg0))->unk664 & 0x8000) == 0) {
-            func_80274870_de(&((func_8022D418_S1 *)(arg0))->unk72C, 1.308997f, 0.25f);
+    Actor_func_8022D290_de *actor = arg0;
+    if (actor->unk_0x0850 == 0) {
+        if ((actor->unk_0x0664 & 0x8000) == 0) {
+            func_80274870_de(&actor->unk_0x072C, 1.308997f, 0.25f);
         }
-        if (((func_8022D418_S1 *)(arg0))->unk658 > D_800C2DB8_de) {
+        if (actor->unk_0x0658 > D_800C2DB8_de) {
             func_80449870_de(arg0);
         }
     }
