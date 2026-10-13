@@ -10,19 +10,20 @@
 
 void func_802610A8_de(void *arg0, s32 arg1) {
     s32 count;
-    s8 *ptr;
+    s32 *ptr;
+    Pack *pack = arg0;
     s32 magic;
 
     count = 1;
-    (*(s32 *)arg0) = arg1;
-    ((func_80203E78_S1 *)arg0)->unk4 = ((arg1 * 4) + 0xF) & ~7;
+    pack->count = arg1;
+    pack->offsets[0] = ((arg1 * 4) + 0xF) & ~7;
     if (arg1 > 0) {
         magic = 0xDEADBEEF;
-        ptr = &((func_8025BD20_S1 *)((arg0)))->unk4;
+        ptr = pack->offsets;
         do {
-            (((func_80203E78_S1 *)(ptr))->unk4) = magic;
+            ptr[1] = magic;
             count += 1;
-            ptr += 4;
+            ptr += 1;
         } while (arg1 >= count);
     }
 }
