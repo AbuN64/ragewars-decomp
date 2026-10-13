@@ -1,3 +1,5 @@
+#include "shared/gameplay_transition.h"
+#include "span_C76B0/data.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8022D944.h"
 #include "types.h"
@@ -11,8 +13,8 @@
 
 
 s32 func_8022DC1C_de(void *arg0) {
-    f32 field = ((func_8022DC0C_S1 *)(arg0))->unk718;
-    f32 konst = ((func_802077F4_S2 *)(&D_800C7EC8))->unk4;
+    f32 field = ((Shared_ActorView *)arg0)->speed;
+    f32 konst = D_800C2DDC_de;
     s32 result = 1;
     if (!(konst < field)) {
         result = 0;
