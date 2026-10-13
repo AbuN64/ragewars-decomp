@@ -28,6 +28,7 @@ extern f32 D_800C1BD4_de;
 extern f32 D_800C1BD8_de;
 
 void func_80208410_de(AiController *arg0) {
+    NavigationGraph *graph = &D_8013B364;
     Vec3 sp10;
     GroundObject *temp_v0_6;
     GroundObject *temp_v0_8;
@@ -39,8 +40,8 @@ void func_80208410_de(AiController *arg0) {
     NavigationSearchNode *temp_v0_4;
     NavigationSearchNode *temp_v0_9;
     Player *temp_s6;
-    Player *temp_v0_5;
-    Player *temp_v0_7;
+    NavigationPlatform *temp_v0_5;
+    NavigationPlatform *temp_v0_7;
     Vec3 *temp_s4;
     f32 temp_fs0f;
     f32 temp_fv0;
@@ -59,7 +60,7 @@ void func_80208410_de(AiController *arg0) {
 
     temp_s6 = arg0->player;
     if ((arg0->mode != -1) && (temp_a1 = arg0->queue[0], arg0->unk300 = 0, arg0->unk310 = 0, arg0->unk304 = 0, arg0->unk308 = 0, arg0->unk30C = 0, (temp_a1 != -1))) {
-        var_s3 = func_8020C994_de(&D_8013B364, temp_a1);
+        var_s3 = func_8020C994_de(graph, temp_a1);
         temp_s4 = &arg0->player->pos;
         temp_fs0f = func_802726F8_de(temp_s4, var_s3);
         temp_a2 = arg0->queue[0];
@@ -68,22 +69,22 @@ void func_80208410_de(AiController *arg0) {
         if (temp_a2 == var_a1) {
             var_a1 = arg0->previous;
         }
-        temp_v0 = func_8020CC0C_de(&D_8013B364, var_a1, temp_a2);
+        temp_v0 = func_8020CC0C_de(graph, var_a1, temp_a2);
         if (temp_v0 > 0) {
-            temp_v0_2 = func_8020C9B0_de(&D_8013B364, temp_v0);
+            temp_v0_2 = func_8020C9B0_de(graph, temp_v0);
             if (temp_v0_2->kind == 4) {
                 arg0->unk30C = 1;
             }
             if (temp_v0_2->kind == 8) {
-                func_802726F8_de(temp_s4, func_8020C994_de(&D_8013B364, arg0->current));
-                temp_s2 = func_8020C994_de(&D_8013B364, arg0->queue[0]);
+                func_802726F8_de(temp_s4, func_8020C994_de(graph, arg0->current));
+                temp_s2 = func_8020C994_de(graph, arg0->queue[0]);
                 arg0->unk308 = 1;
                 if (temp_v0 != arg0->unk32C) {
                     arg0->unk314 = 0;
                     arg0->unk32C = temp_v0;
                 }
                 if (arg0->unk314 == 0) {
-                    var_s0 = func_8020C994_de(&D_8013B364, arg0->current);
+                    var_s0 = func_8020C994_de(graph, arg0->current);
                     func_80271F68_de(&sp10, temp_s4, &var_s0->position);
                     if (func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z)) < D_800C1BB8_de) {
                         arg0->unk314 = 1;
@@ -134,7 +135,7 @@ block_21:
             }
             if (temp_v0_2->kind == 5) {
                 if (arg0->unk314 == 0) {
-                    var_s0 = func_8020C994_de(&D_8013B364, arg0->current);
+                    var_s0 = func_8020C994_de(graph, arg0->current);
                     if (!(func_802726F8_de(temp_s4, var_s0) < D_800C1BC4_de)) {
 block_35:
                         arg0->destination = var_s0->position;
@@ -146,7 +147,7 @@ block_35:
 block_37:
                 temp_s2_2 = arg0->unk314;
                 if (temp_s2_2 == 1) {
-                    temp_v0_4 = func_8020CFE0_de(&D_8013B364, arg0->current);
+                    temp_v0_4 = func_8020CFE0_de(graph, arg0->current);
                     if (func_802726F8_de(temp_v0_4->platform + 8, temp_v0_4 + 0x44) < D_800C1BC8_de) {
                         temp_v0_5 = temp_v0_4->platform;
                         arg0->destination = temp_v0_5->pos;
@@ -165,13 +166,13 @@ block_41:
                     if (temp_v0_6 != 0) {
                         var_s0_2 = temp_v0_6->resource->kind == 2;
                     }
-                    func_80271F68_de(&sp10, temp_s4, func_8020CFE0_de(&D_8013B364, arg0->current)->platform + 8);
+                    func_80271F68_de(&sp10, temp_s4, func_8020CFE0_de(graph, arg0->current)->platform + 8);
                     temp_fv0f = func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z));
                     if ((var_s0_2 != 0) && (temp_fv0f < D_800C1BCC_de)) {
                         arg0->unk314 = 3;
                         goto block_49;
                     }
-                    temp_v0_7 = func_8020CFE0_de(&D_8013B364, arg0->current)->platform;
+                    temp_v0_7 = func_8020CFE0_de(graph, arg0->current)->platform;
                     arg0->destination = temp_v0_7->pos;
                     return;
                 }
@@ -185,8 +186,8 @@ block_49:
                     if (var_s0_3 == 0) {
                         arg0->unk314 = 0;
                     }
-                    var_s3 = func_8020C994_de(&D_8013B364, arg0->queue[0]);
-                    temp_v0_9 = func_8020CFE0_de(&D_8013B364, arg0->queue[0]);
+                    var_s3 = func_8020C994_de(graph, arg0->queue[0]);
+                    temp_v0_9 = func_8020CFE0_de(graph, arg0->queue[0]);
                     if (func_802726F8_de(temp_v0_9->platform + 8, temp_v0_9 + 0x44) < D_800C1BD0_de) {
                         arg0->destination = var_s3->position;
                         temp_s6->actionFlags |= 0x10;
@@ -214,7 +215,7 @@ block_58:
 block_66:
             temp_a1_2 = arg0->queue[0];
             if (temp_a1_2 != -1) {
-                temp_v0_10 = func_8020C994_de(&D_8013B364, temp_a1_2);
+                temp_v0_10 = func_8020C994_de(graph, temp_a1_2);
                 if (temp_v0_10->attributes.halves.flags & 2) {
                     arg0->destination = arg0->home;
                     return;
