@@ -67,9 +67,10 @@ struct Actor_func_8020E674_de {
     f32 field24C;
     f32 field250;
     f32 field254;
-    f32 field258;
-    f32 field25C;
-    f32 field260;
+    union {
+        struct { f32 field258; f32 field25C; f32 field260; };
+        Vec3 destination;
+    };
     f32 field264;
     s32 field268;
     s32 field26C;
