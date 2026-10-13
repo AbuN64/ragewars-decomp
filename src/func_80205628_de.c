@@ -1,21 +1,21 @@
-#include "common/types_06e4f7ef1f9e.h"
+#include "shared/level_actor.h"
 #include "span_1000/code_80204E78.h"
+#include "span_1000/code_80246E34.h"
 #include "types.h"
 
-extern void func_8026DC24_de(void * *, s32, s32, void *, s32, s32);
+extern void func_8026DC24_de(void **, s32, s32, void *, s32, s32);
 extern s32 D_800D297C;
 
-
-
-
-
-
-
-
+/* Draw callback installed by func_8020520C_de; the animation lookup is
+ * the same third callback argument consumed by func_8024A1D0_de. */
 void func_80205628_de(void *arg0, void *arg1, void *arg2) {
-    ((func_80205628_S1 *)(arg0))->unk17C = 1 << ((func_80205628_S2 *)(arg1))->unk124;
-    if (*(s32 *) arg2 != 0) {
-        func_8026DC24_de(((func_80205628_S3 *)(arg2))->unkC, ((func_80205628_S1 *)(arg0))->unkB4, 1,
-                      (char *) arg0 + (D_800D297C * 0x18 + 0x140), 0, ((func_80205628_S2 *)(arg1))->unk128);
+    Actor_func_8024A7A0_de *actor = arg0;
+    SpawnDispatchOwner *owner = arg1;
+    Lookup *lookup = arg2;
+
+    actor->mask = 1 << owner->spawn;
+    if (lookup->unk0 != 0) {
+        func_8026DC24_de(lookup->value, actor->fieldB4, 1,
+                        &actor->lighting[D_800D297C], 0, owner->remaining);
     }
 }
