@@ -72134,17 +72134,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/rodata.unresolved.800C1CEC.c"
-kind = "data"
-group = "data_800C1CEC"
-members = ["rodata/unresolved/800C1CEC"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/rodata.unresolved.800C1CF4.c"
 kind = "data"
 group = "data_800C1CF4"
@@ -72171,17 +72160,6 @@ path = "src/rodata.unresolved.800C1D94.c"
 kind = "data"
 group = "data_800C1D94"
 members = ["rodata/unresolved/800C1D94"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800C1DBC.c"
-kind = "data"
-group = "data_800C1DBC"
-members = ["rodata/unresolved/800C1DBC"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -100234,6 +100212,11 @@ scores = {de = 0.8350515463917526, eu = 0.8350515463917526, eu-x = 0.83505154639
 member = "func_80214178_de"
 path = "src/fuzzy/func_80214178_de.c"
 scores = {de = 0.9901960784313726, eu = 0.9901960784313726, eu-x = 0.9901960784313726, us = 0.9901960784313726, us-rev1 = 0.9901960784313726}
+
+[[fuzzy]]
+member = "func_80215868_de"
+path = "src/fuzzy/func_80215868_de.c"
+scores = {de = 0.3564356435643564, eu = 0.3564356435643564, eu-x = 0.3564356435643564, us = 0.3564356435643564, us-rev1 = 0.3564356435643564}
 
 [[fuzzy]]
 member = "func_80217F4C_de"

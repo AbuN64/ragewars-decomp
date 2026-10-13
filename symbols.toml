@@ -44726,8 +44726,10 @@ us-rev1 = 0x8013B368
 
 [symbol.D_8013D534]
 kind = "data"
+de = 0x8012D534
 eu = 0x8013D534
 eu-x = 0x80137534
+us = 0x8012B534
 us-rev1 = 0x801315F4
 
 [symbol.D_8013D538]
@@ -50188,8 +50190,10 @@ us-rev1 = 0x8020DD04
 
 [symbol.func_8020DDF4_eu]
 kind = "function"
+de = 0x8020DDE0
 eu = 0x8020DE00
 eu-x = 0x8020DE00
+us = 0x8020DDE0
 us-rev1 = 0x8020DDE0
 
 [symbol.func_8020E674_de]

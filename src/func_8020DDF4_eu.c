@@ -1,12 +1,12 @@
 #include "span_1000/code_8020D370.h"
 #include "shared/func_8044DA54_de_closed.h"
-#include "resident_event_handler.h"
-#include "span_1000/code_8029EB74.h"
-#include "types.h"
+extern f32 func_8029DD3C_de(f32);
 s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4);
 f32 func_80285630_de(s32 arg0);
 s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral);
 
+/* Refine a launch angle by testing a ballistic arc against the destination.
+ * State 0 initializes the bounds; later calls bisect the chosen quadrant. */
 s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     Vec3 current;
     Vec3 delta;
@@ -14,42 +14,30 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     s32 keyCount;
     InstanceHdr *temp_v0;
     InstanceHdr *temp_v0_5;
-    f32 temp_fs0;
     f32 temp_fs0_2;
     f32 temp_fs0f;
     f32 temp_fs1;
     f32 temp_fs1f;
     f32 temp_ft0;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
     f32 temp_fv0_3;
     f32 temp_fv0_4;
     f32 temp_fv0f;
     f32 temp_fv0f_2;
     f32 temp_fv1;
-    f32 temp_fv1_2;
-    f32 temp_fv1_3;
     f32 temp_fv1_4;
     f32 temp_fv1_5;
     f32 temp_fv1f;
     f32 temp_fv1f_2;
     f32 temp_fv1f_3;
-    f32 var_fv0;
     s32 temp_s0;
     s32 *temp_s0_2;
     s32 temp_v0_6;
-    s32 temp_v0_7;
-    s32 temp_v0_8;
-    s32 temp_v0_9;
     s32 temp_v1;
     s32 temp_v1_3;
     s32 var_v0;
-    s32 var_v0_2;
-    s32 var_v0_3;
     s32 var_v0_4;
     s32 var_v0_5;
     BallisticResourceKeys *temp_v0_2;
-    u32 temp_v1_2;
     u32 var_s2;
     Shared_func_8027ADBC_S4 *temp_s0_3;
     Shared_func_8027ADBC_S5 *temp_v0_3;
