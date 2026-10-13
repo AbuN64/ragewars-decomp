@@ -1,4 +1,1 @@
-/* ROM-grounded data: func_80263154_de_padding_63DC8 */
-unsigned int D_blob_phase2_9d40121227189ba4e5f3[1] = {
-    0x00000000,
-};
+unsigned char D_auto_func_80263154_de_padding_63DC8[8] = { 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x20, 0x21 };

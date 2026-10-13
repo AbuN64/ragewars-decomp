@@ -3858,7 +3858,7 @@ extern int D_800CE3E8[];
 extern s32 D_800C8FF0_de[];
 
 /* unbake published declaration: published_fa236561c45859de3ea40df3 */
-extern f32 D_801031F0[];
+extern Box D_801031F0;
 
 /* unbake published declaration: published_fa434d13e583a37d58cb019b */
 extern char D_800D3B1C[];

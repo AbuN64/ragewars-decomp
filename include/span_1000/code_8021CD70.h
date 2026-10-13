@@ -10878,14 +10878,28 @@ typedef struct AimView {
 typedef struct AimWeapon { char pad0[14]; s16 idle; s16 locked; } AimWeapon;
 typedef struct AimHit { AimActor *actor; char pad4[0xe0]; Vec3 point; Vec3 normal; } AimHit;
 typedef struct AimPlayer {
-    s8 unk0; char pad1[7]; Vec3 unk8; char pad14[0x580]; s32 unk594;
-    char pad598[0x40]; AimController *unk5D8; AimView *view;
-    char pad5E0[0x4e]; s16 unk62E; char pad630[0x158]; s32 unk788;
+    s8 unk0; char pad1[7]; Vec3 unk8; char pad14[8];
+    Vec3 position; /* 0x1C: effect spawn position */
+    char pad28[0x10]; u32 movementFlags; /* 0x38 */
+    char pad3C[0xC8]; f32 animationTimer; /* 0x104 */
+    char pad108[6]; u8 firing; /* 0x10E */
+    char pad10F[0x37D]; s8 weaponKind; /* 0x48C */
+    char pad48D[0x107]; s32 unk594;
+    char pad598[4]; s32 shots; /* 0x59C */
+    char pad5A0[0x34]; s32 playerIndex; /* 0x5D4 */
+    AimController *unk5D8; AimView *view;
+    s32 equippedKind; /* 0x5E0 */
+    char pad5E4[0x10]; s16 ammo[7]; /* 0x5F4 */
+    s8 weapons[22][2]; /* 0x602: active flag and state */
+    s16 unk62E; char pad630[0x20]; u16 state; /* 0x650 */
+    char pad652[0x136]; s32 unk788;
     f32 unk78C; char pad790[4]; AimActor *unk794; s32 unk798;
     Vec3 out; Vec3 velocity; AimActor *unk7B4; s32 unk7B8; char pad7BC[4];
     Vec3 smooth; Vec3 smoothVelocity; Vector4f rotation; s32 unk7E8;
-    char pad7EC[0xa24]; s32 enabled; char pad1214[0x244];
-    Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target;
+    char pad7EC[0x80]; s32 animation; /* 0x86C */
+    char pad870[0x9A0]; s32 enabled;
+    char pad1214[0x23C]; s32 controlled; /* 0x1450 */
+    char pad1454[4]; Vec3 aim; Vec3 aim2; Vec3 normal; AimActor *target;
 } AimPlayer;
 extern const f32 D_800C23B4_de;
 extern const f32 D_800C23B8_de;

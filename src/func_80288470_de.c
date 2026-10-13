@@ -46,7 +46,7 @@ void func_80288470_de(DraftStreamWorld *world)
         table = func_8028FDB4_de(world->grid, 4);
         lastZ = zCount - 1;
         cells = table->data.cells;
-        while (firstX < xCount && xHigh[firstX] < D_801031F0[0]) firstX++;
+        while (firstX < xCount && xHigh[firstX] < D_801031F0.min.x) firstX++;
         while (lastX >= 0 && D_801031F8.second < xLow[lastX]) lastX--;
         while (firstZ < zCount && zHigh[firstZ] < D_801031F8.first) firstZ++;
         while (lastZ >= 0 && D_800FF200.second < zLow[lastZ]) lastZ--;

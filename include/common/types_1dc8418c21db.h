@@ -146,7 +146,8 @@ typedef struct Clip Clip;
 struct Node_func_80285B64_de;
 /* unbake published declaration: published_06745a4e2b0255244a16a083 */
 struct Node_func_80285B64_de {
-    char pad0[8];
+    struct Node_func_80285B64_de *previous;
+    struct Node_func_80285B64_de *next;
     Clip *key;
     Vec3 position;
     f32 value0;

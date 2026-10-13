@@ -125,8 +125,8 @@ void func_8021A78C_de(void *arg0) {
 
 extern s32 D_80140FF8;
 extern s32 D_8011D8D0;
-Vector4f func_8024796C_de(char *actor);
-s32 func_8022AA9C_de(AimPlayer *arg0, s32 arg1);
+Vector4f func_8024796C_de(void *actor);
+s16 *func_8022AA9C_de(AimPlayer *arg0, s32 arg1);
 void func_8022B144_de(void *arg0, f32 *arg1);
 s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, Vec3 arg6, Vector4f rotation, Vec3 pos, Vec3 *aim, s32 arg10, s32 arg11);
 
@@ -223,7 +223,7 @@ clear:
     arg0->firing = 0;
 spawn:
     if (weapon && weapon->mode != 1) direction = weapon->origin;
-    else func_8022B144_de(arg0, &direction);
+    else func_8022B144_de(arg0, &direction.x);
     position = arg0->position;
     extra = 0;
     if (arg0->unk788 == 2) extra = arg0->unk794;

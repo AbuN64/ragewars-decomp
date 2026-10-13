@@ -66,18 +66,6 @@ struct func_80217388_S1 {
     void * unkD0;
 };
 
-struct TeamMenu;
-/* unbake published declaration: published_42efa1a604d46e4547ff2a20 */
-struct TeamMenu {
-    s32 state;
-    char pad4[0x8 - 0x4];
-    f32 open;
-    char padC[0x14 - 0xC];
-    f32 spin;
-    char pad18[0x6C - 0x18];
-    s32 cursor;
-    s32 hover;
-};
 
 struct Entry;
 /* unbake published declaration: published_470d4125233279b31027c2b2 */

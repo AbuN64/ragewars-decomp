@@ -1,3 +1,1 @@
-unsigned int D_auto_func_8023CE9C_de_padding_3DBA8[1] = {
-    0x00000000,
-};
+unsigned char D_auto_func_8023CE9C_de_padding_3DBA8[8] = { 0x00, 0x00, 0x00, 0x00, 0x0E, 0x6D, 0x5F, 0x44 };

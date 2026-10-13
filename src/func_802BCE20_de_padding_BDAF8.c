@@ -1,3 +1,1 @@
-unsigned int D_auto_func_802BCE20_de_padding_BDAF8[1] = {
-    0x00000000,
-};
+unsigned char D_auto_func_802BCE20_de_padding_BDAF8[8] = { 0x00, 0x00, 0x00, 0x00, 0x26, 0xB2, 0x00, 0x08 };

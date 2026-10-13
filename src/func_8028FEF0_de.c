@@ -174,7 +174,7 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 posi
 
 
 
-extern f32 D_801031F0[];
+extern Box D_801031F0;
 extern f32 D_800D2988;
 extern void func_80290424_de(Actor_func_80290238_de *actor);
 
@@ -199,9 +199,9 @@ void func_80290238_de(World_func_80290238_de *world) {
                 expired = 1;
             }
         }
-        if (!((D_801031F0[3] > actor->minX) && (D_801031F0[0] < actor->maxX) &&
-              (D_801031F0[5] > actor->minZ) && (D_801031F0[2] < actor->maxZ) &&
-              (D_801031F0[4] > actor->minY) && (D_801031F0[1] < actor->maxY))) {
+        if (!((D_801031F0.max.x > actor->minX) && (D_801031F0.min.x < actor->maxX) &&
+              (D_801031F0.max.z > actor->minZ) && (D_801031F0.min.z < actor->maxZ) &&
+              (D_801031F0.max.y > actor->minY) && (D_801031F0.min.y < actor->maxY))) {
             if (!(actor->flags & 0x200)) {
                 expired = 1;
             }
