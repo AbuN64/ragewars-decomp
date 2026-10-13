@@ -13,13 +13,13 @@ void func_80240538_de(float *s, float *d) {
 }
 
 /** Swap two eight-byte pairs. */
-void func_802405FC_de(struct Shape_func_802764D4_de_2 *left, struct Shape_func_802764D4_de_2 *right) {
-    struct Shape_func_802764D4_de_2 temporary = *left;
+void func_802405FC_de(RenderSortRecord *left, RenderSortRecord *right) {
+    RenderSortRecord temporary = *left;
     *left = *right;
     *right = temporary;
 }
 
 /** Order two records by their scalar at offset four. */
 int func_80240638_de(void *left, void *right) {
-    return ((func_802077F4_S2 *)(left))->unk4 < ((func_802077F4_S2 *)(right))->unk4 ? -1 : 1;
+    return ((RenderSortRecord *)left)->depth < ((RenderSortRecord *)right)->depth ? -1 : 1;
 }

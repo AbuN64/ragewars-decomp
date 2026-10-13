@@ -1,6 +1,12 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8023EEF0_H
 #define UNBAKE_SPAN_1000_CODE_8023EEF0_H
 #include "../types.h"
+
+/* Sortable render item, moved as an eight-byte record. */
+typedef struct RenderSortRecord {
+    s32 index;
+    f32 depth;
+} RenderSortRecord;
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 /* unbake published declaration: published_0c1156dcdba08c13c63530cf */
@@ -158,7 +164,7 @@ struct func_80241250_S1 {
 
 struct Shape_func_802764D4_de_2;
 /* unbake published declaration: published_ce5f284f6ea9e7b26fea99cd */
-extern void func_802405FC_de(struct Shape_func_802764D4_de_2 *left, struct Shape_func_802764D4_de_2 *right);
+extern void func_802405FC_de(RenderSortRecord *left, RenderSortRecord *right);
 
 struct Plane;
 /* unbake published declaration: published_e3668a30bc26bd13649605eb */
