@@ -80,7 +80,9 @@ struct PakMenuController;
 struct PakMenuController {
     s32 field0;
     s32 root;
-    char pad8[0x54 - 8];
+    char pad8[0x2C - 8];
+    s32 selected[4]; /* 0x2C */
+    char pad3C[0x54 - 0x3C];
     s32 phase;
     Shared_Player_func_80433F14 players[4];
 };
