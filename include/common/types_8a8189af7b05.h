@@ -81,7 +81,7 @@ struct Model {
 struct Shared_Quad;
 /* unbake published declaration: published_16493ff7647bee1c3761ac4f */
 struct Shared_Quad {
-    s32 w[4];
+    union { s32 w[4]; f32 f[4]; }; /* Integer transport or quaternion coefficients. */
 };
 
 /* A mount's embedded animation record and current animation selector. */

@@ -1654,7 +1654,8 @@ extern f32 D_800C7590[2];
 extern void *jtbl_800DCED8[];
 
 /* unbake published declaration: published_6ae7bb390e75158dc5cabd4f */
-extern s32 D_800CE474[2];
+/* Character IDs: movement also reads the third word at D_800CE47C. */
+extern s32 D_800CE474[];
 
 /* unbake published declaration: published_6af2b4f2f70947372d7328c2 */
 extern char D_800D32A8;

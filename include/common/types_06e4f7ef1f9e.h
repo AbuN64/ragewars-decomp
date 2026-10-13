@@ -862,6 +862,7 @@ struct SharedPlayer {
         struct {
             char pad[0x11C];
             f32 unk704;
+            f32 viewPitch; /* +0x708: func_80226DD0_de */
         } view704_67;
         struct {
             char pad[0x11C];
