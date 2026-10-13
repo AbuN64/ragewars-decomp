@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8022E938_H
 #define UNBAKE_SPAN_1000_CODE_8022E938_H
 #include "types.h"
+#include "common/types_8fd754e1e915.h"
 
 /* Handle and bookkeeping words cleared together when releasing this resource. */
 typedef struct ResourceLoadState {
@@ -427,7 +428,7 @@ extern unsigned char func_8022F374_de(void *object);
 extern void func_8022ECC4_de(void);
 
 /* unbake published declaration: published_488d32e7068788566cc20234 */
-extern void func_8022E948_de(void *arg0);
+extern void func_8022E948_de(Player *arg0);
 
 struct func_8022EF20_S1;
 /* unbake published declaration: published_51900947dfcfc7e0fc19714e */
