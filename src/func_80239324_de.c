@@ -11,19 +11,19 @@ extern f32 D_800C8628[];
 
 
 
-static inline void set_emitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, Vec3 pos)
+static inline void set_emitter(func_80239314_S1 *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, Vec3 pos)
 {
-    ((func_80239314_S1 *)(obj))->unkA8 = pos;
-    ((func_80239314_S1 *)(obj))->unkB4 = scale;
-    ((func_80239314_S1 *)(obj))->unkB8 = value;
-    ((func_80239314_S1 *)(obj))->unkBC = a;
-    ((func_80239314_S1 *)(obj))->unkCC = value;
-    ((func_80239314_S1 *)(obj))->unkD0 = b;
-    ((func_80239314_S1 *)(obj))->unkE0 = value;
-    ((func_80239314_S1 *)(obj))->unkE4 = c;
+    obj->unkA8 = pos;
+    obj->unkB4 = scale;
+    obj->unkB8 = value;
+    obj->unkBC = a;
+    obj->unkCC = value;
+    obj->unkD0 = b;
+    obj->unkE0 = value;
+    obj->unkE4 = c;
 }
 
-void func_80239324_de(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, Vec3 pos)
+void func_80239324_de(func_80239314_S1 *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, Vec3 pos)
 {
     if (obj != 0) {
         f32 k = D_800C8628[1];

@@ -10,7 +10,7 @@ extern f32 D_800C99F0;
 
 
 void func_80273760_de(void *arg0, f32 arg1) {
-    char *m = (char *) arg0;
+    struct Mtx *m = arg0;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
@@ -19,21 +19,21 @@ void func_80273760_de(void *arg0, f32 arg1) {
     sin_v = func_802B7130_de(arg1);
     zero = (f32) 0;
     one = D_800C99F0;
-    ((func_80272848_S1 *)(m))->unk8 = zero;
-    ((func_80272848_S1 *)(m))->unk20 = zero;
-    ((func_80272848_S1 *)(m))->unk18 = zero;
-    ((func_80272848_S1 *)(m))->unk24 = zero;
-    ((func_80272848_S1 *)(m))->unk38 = zero;
-    ((func_80272848_S1 *)(m))->unk34 = zero;
-    ((func_80272848_S1 *)(m))->unk30 = zero;
-    ((func_80272848_S1 *)(m))->unk2C = zero;
-    ((func_80272848_S1 *)(m))->unk1C = zero;
-    ((func_80272848_S1 *)(m))->unkC = zero;
-    ((func_80272848_S1 *)(m))->unk28 = one;
-    ((func_80272848_S1 *)(m))->unk3C = one;
+    m->right.z = zero;
+    m->forward.x = zero;
+    m->up.z = zero;
+    m->forward.y = zero;
+    m->m32 = zero;
+    m->m31 = zero;
+    m->m30 = zero;
+    m->m23 = zero;
+    m->m13 = zero;
+    m->m03 = zero;
+    m->forward.z = one;
+    m->m33 = one;
     cos_v = func_802B6560_de(arg1);
-    ((func_80272848_S1 *)(m))->unk14 = cos_v;
-    ((func_80272848_S1 *)(m))->unk0 = cos_v;
-    ((func_80272848_S1 *)(m))->unk10 = -sin_v;
-    ((func_80272848_S1 *)(m))->unk4 = sin_v;
+    m->up.y = cos_v;
+    m->right.x = cos_v;
+    m->up.x = -sin_v;
+    m->right.y = sin_v;
 }
