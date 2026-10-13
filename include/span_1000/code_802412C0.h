@@ -369,7 +369,7 @@ extern void func_802428D0_de(void *first, void *second);
 struct ContextB0;
 /* unbake published declaration: published_7ea48cbcd58ed80a6d51be33 */
 struct ContextB0 {
-    void *ray; /* Ray shared by collision traversal callbacks. */
+    Ray180 *ray;
     Vec3 *start;
     Vec3 *end;
     Matrix_func_80213CF8_de matrix;
