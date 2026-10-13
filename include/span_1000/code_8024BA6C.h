@@ -341,7 +341,8 @@ struct func_8024BE48_S1;
 typedef struct func_8024BE48_S1 func_8024BE48_S1;
 
 /* unbake published declaration: published_f34e851eb8ebc200ea4ffa99 */
-extern s32 func_8024BD08_de(void *arg0);
+struct Shared_Func80243A80Actor;
+extern s32 func_8024BD08_de(struct Shared_Func80243A80Actor *arg0);
 
 /* unbake published declaration: published_f6497526dd7d0f69b70655c5 */
 extern float D_800C3B88;
