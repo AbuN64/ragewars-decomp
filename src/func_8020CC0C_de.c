@@ -25,7 +25,7 @@ int func_8020CC0C_de(Graph *graph, int from, int to) {
     Link *link;
 
     for (i = 0; i < graph->count; i++) {
-        link = (Link *)(&((func_8020CC0C_S1 *)(graph->links))->unk8 + i * graph->links->stride);
+        link = (Link *)((char *)&graph->links->first + i * graph->links->stride);
         if (link->from == from && link->to == to) {
             return i;
         }
