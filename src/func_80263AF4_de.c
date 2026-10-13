@@ -11,7 +11,7 @@
 extern u8 D_800CBC10;
 extern s32 D_800CBC1C;
 extern char D_8010EC90;
-extern char D_8010F328[];
+extern ControllerProfile D_8010F328[4];
 extern u8 D_8010BBB8;
 extern char D_8010FBC0;
 extern char D_8010FC00;
@@ -37,7 +37,7 @@ void func_80263AF4_de(void) {
         if (locked) {
             func_80263740_de();
             for (i = 0; i < 4; i++) {
-                func_80264104_de(&D_8010F328[i * 0x224]);
+                func_80264104_de(&D_8010F328[i]);
             }
             switch (D_8010BBB8) {
             case 0:
