@@ -1,19 +1,14 @@
-#include "common/types_1dc8418c21db.h"
-#include "span_1000/code_8028CCB8.h"
-#include "types.h"
+#include "shared/world.h"
 
 extern void func_80253838_de(void *, void *);
 
+void func_8028DA74_de(Shared_World *world) {
+    void *handle;
 
-
-
-void func_8028DA74_de(void *arg0) {
-    s32 temp;
-
-    temp = ((func_8028DA50_S1 *)(arg0))->unk14;
-    if (temp != 0) {
-        func_80253838_de(0, temp);
-        ((func_8028DA50_S1 *)(arg0))->unk14 = 0;
-        ((func_8028DA50_S1 *)(arg0))->unk18 = -1;
+    handle = world->resourceHandle;
+    if (handle != 0) {
+        func_80253838_de(0, handle);
+        world->resourceHandle = 0;
+        world->resourceKey = -1;
     }
 }

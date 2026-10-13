@@ -8,23 +8,35 @@ struct Record14;
 struct Actor_func_8028E284_de;
 typedef struct Shared_World {
     s32 mode;
-    u8 unknown4[0x18];
+    u8 unknown4[0x10];
+    void *resourceHandle; /* 0x14 */
+    s32 resourceKey; /* 0x18 */
     s32 resourceBank; /* 0x1C */
-    u8 unknown20[0x2C];
+    u8 unknown20[4];
+    s32 indexedBank; /* 0x24 */
+    s32 lookupBank; /* 0x28 */
+    u8 unknown2C[8];
+    s32 trackLookup; /* 0x34 */
+    u8 unknown38[0x14];
     s32 *resourceDirectory; /* 0x4C */
-    u8 unknown50[0x1C];
+    u8 unknown50[4];
+    s32 *indexedDirectory; /* 0x54 */
+    s32 *lookupDirectory; /* 0x58 */
+    u8 unknown5C[0x10];
     s32 *modelSections; /* 0x6C */
     s32 *objectSections; /* 0x70 */
-    u8 unknown74[4];
+    s32 *trackBundle; /* 0x74: D_8011FEFC */
     s32 *actorDefinitions; /* 0x78: count followed by record offsets */
     s32 *routeCount; /* +0x7C: PatrolRouteSet */
     void *bitSections; /* 0x80 */
     void *secondaryLevels; /* 0x84 */
     u8 unknown88[0xC];
     struct Table_func_8028B274_de *modelIds; /* 0x94 */
-    u8 unknown98[8];
+    Table_func_8028CE94_de *lookupTable; /* 0x98 */
+    u8 unknown9C[4];
     Table_func_8028CE94_de *records; /* 0xA0 */
-    u8 unknownA4[8];
+    Table_func_8028CE94_de *stridedRecords; /* 0xA4 */
+    u8 unknownA8[4];
     Table_func_8028CE94_de *actorRecords; /* 0xAC */
     u8 unknownB0[0x38];
     s32 resource;

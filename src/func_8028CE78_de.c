@@ -1,10 +1,10 @@
-#include "span_1000/code_8028CCB8.h"
+#include "shared/world.h"
 
-
-
-/** Return an indexed record from the table at object offset 0xA4. */
-void *func_8028CE78_de(void *object, int index) {
-    char *base = ((func_8028CE54_S1 *)(object))->unkA4;
-    int stride = *(int *)base;
-    return base + (index * stride + 8);
+/** Return an indexed record from the world's strided table. */
+void *func_8028CE78_de(Shared_World *world, s32 index) {
+    Table_func_8028CE94_de *table = world->stridedRecords;
+    void *base = table;
+    char *bytes = base;
+    s32 stride = table->stride;
+    return bytes + (index * stride + 8);
 }
