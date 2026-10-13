@@ -2325,7 +2325,7 @@ extern float D_800DD3E4;
 extern float D_800DD3FC;
 extern float D_800DD400_de;
 extern float D_800DD404;
-extern float D_800DD408_de;
+extern float D_800DD408_de[2];
 extern float D_800DD420;
 extern float D_800DD428;
 extern float D_800DD42C;

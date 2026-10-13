@@ -4667,7 +4667,7 @@ segments:
       - [0x1077BC, c, "func_8041737C_de"]
       - [0x107934, c, "func_804174F4_de"]
       - [0x107F60, asm, "func_80417B20_de"]
-      - [0x1085E4, asm, "func_804181A4_de"]
+      - [0x1085E4, c, "func_804181A4_de"]
       - [0x1091E0, c, "func_80418DA0_de"]
       - [0x109220, c, "func_80418DE0_de"]
       - [0x1093CC, c, "func_80418F8C_de"]
