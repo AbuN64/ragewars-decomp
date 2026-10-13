@@ -50,7 +50,7 @@ extern void func_80245A5C_de(int arg0, int arg1, int arg2, int arg3);
 extern void func_80245B74_de(s32 unused);
 extern s32 func_8024B6F4_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent);
-extern s32 func_80254B8C_de(s32 arg0, u32 arg1, s32 arg2, u32 arg3);
+extern void *func_80254B8C_de(s32 arg0, u32 arg1, s32 arg2, u32 arg3);
 extern void func_80254D44_de(s32, s32);
 extern void func_80255F70_de(void *arg0);
 extern s32 func_8025B920_de(void *record, s16 value, s16 id);
