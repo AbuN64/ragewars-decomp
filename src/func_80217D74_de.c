@@ -90,7 +90,7 @@ void func_80217D74_de(s32 *menu, void *player) {
         }
         ((ObjectLinks11B8 *)(player))->unk_770 = weapon;
         if (!(((ObjectLinks11B8 *)(player))->unk_38 & 0x1000)) {
-            alternate = ((func_8021C9B4_S3 *)(D_800D052C[weapon]))->unkC;
+            alternate = ((WeaponInfo *)(D_800D052C[weapon]))->alternate;
             if (alternate != category && (ammo = (char *) player + alternate * 2)[0x602] != 0) {
                 entry->weapon = alternate;
             }
