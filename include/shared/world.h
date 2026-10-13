@@ -31,9 +31,16 @@ typedef struct Shared_World {
     f32 elapsed;
     u8 unknown1B30C[0x100];
     s32 level; /* 0x1B40C */
-    u8 unknown1B410[4];
+    s32 selectionState; /* 0x1B410 */
     s32 frozen;
-    u8 unknown1B418[0x1FC];
+    s32 selectionTimer; /* 0x1B418 */
+    s32 selectionFlags; /* 0x1B41C */
+    u8 unknown1B420[0x14];
+    s32 selectionValues[4]; /* 0x1B434 */
+    s32 previewState; /* 0x1B444 */
+    s32 previewTimer; /* 0x1B448 */
+    s32 previewStart; /* 0x1B44C */
+    u8 unknown1B450[0x1C4];
     Vec3 offset;
     struct Shared_Pickup *objects[16];
     s32 count;

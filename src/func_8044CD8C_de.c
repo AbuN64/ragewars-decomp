@@ -1,3 +1,4 @@
+#include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_16E000/code_8044ACCC.h"
@@ -41,8 +42,8 @@ void func_8044CD8C_de(Level_func_8044CD8C_de *level) {
     s32 lastCol;
     s32 lastRow;
     s32 rows;
-    func_8022BC04_S3 *cells;
-    func_8022BC04_S3 *cell;
+    DraftStreamCell *cells;
+    DraftStreamCell *cell;
     s32 col;
     s32 first;
     s32 key;
@@ -61,7 +62,7 @@ void func_8044CD8C_de(Level_func_8044CD8C_de *level) {
     width = ((ResourceManagerState *) func_8028FDB4_de(level->grid, 0))->count;
     row = 0;
     rows = ((ResourceManagerState *) func_8028FDB4_de(level->grid, 2))->count;
-    cells = &((func_8044D9DC_S1 *)(func_8028FDB4_de(level->grid, 4)))->unk8;
+    cells = (DraftStreamCell *) ((ResourceManagerState *) func_8028FDB4_de(level->grid, 4) + 1);
     lastRow = rows - 1;
     lastCol = width - 1;
     /* FAKEMATCH: constant-holding local first keeps the column loop's entry test as slt */
@@ -69,7 +70,7 @@ void func_8044CD8C_de(Level_func_8044CD8C_de *level) {
     for (; row <= lastRow; row++) {
         for (col = first; col <= lastCol; col++) {
             cell = &cells[col + row * width];
-            if (cell->unk10 != 0) {
+            if (cell->occupied != 0) {
                 continue;
             }
             key = func_8028FE3C_de(level->file, level->key, col + row * width, &size);
@@ -124,7 +125,7 @@ extern void func_8044D0F0_de(char *);
 void func_8044CFF8_de(char *state) {
     func_8044D054_de(state);
     func_8044D0F0_de(state);
-    ((func_8044DC48_S1 *)(state))->unk1B444 = 0;
-    ((func_8044DC48_S1 *)(state))->unk1B448 = 0x15;
-    ((func_8044DC48_S1 *)(state))->unk1B44C = D_801462CC.field_0;
+    ((Shared_World *)state)->previewState = 0;
+    ((Shared_World *)state)->previewTimer = 0x15;
+    ((Shared_World *)state)->previewStart = D_801462CC.field_0;
 }

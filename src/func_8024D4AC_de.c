@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -51,7 +52,7 @@ Vector4f func_8024D4AC_de(char *actor, Vec3 point) {
 
     target = 0;
     if (actor != 0 && *(u8 *)actor == 1) {
-        target = ((func_8024D49C_S1 *)(actor))->unk1F0;
+        target = ((Actor_func_8024A7A0_de *)(actor))->lockOn;
         aim = func_8024796C_de(actor);
         func_80274244_de(&aim, matrix);
         local.x = 0.0f;

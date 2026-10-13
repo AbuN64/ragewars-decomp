@@ -1,3 +1,4 @@
+#include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80246E34.h"
@@ -70,11 +71,11 @@ Vector4f func_80247BB4_de(char *actor, Vec3 point, Vector4f *assist, f32 cone) {
     count = D_8011CC18;
     for (; i < count; i++) {
         entity = D_8011CA18[i];
-        if (entity == actor || (((func_80247BA4_S1 *)(entity))->unk100 & 1) || ((func_80247BA4_S1 *)(entity))->unk174 == 0) {
+        if (entity == actor || (((Actor_func_8024A7A0_de *)(entity))->flags & 1) || ((Actor_func_8024A7A0_de *)(entity))->active == 0) {
             continue;
         }
-        center = ((func_80247BA4_S1 *)(entity))->unk8;
-        center.y += ((func_80247BA4_S1 *)(entity))->unk70;
+        center = ((Actor_func_8024A7A0_de *)(entity))->position0;
+        center.y += ((Actor_func_8024A7A0_de *)(entity))->eyeHeight;
         center.y += func_8024D284_de(entity) * 0.5f;
         func_80271F68_de(&dir, &center, &point);
         func_8027207C_de(&dir);

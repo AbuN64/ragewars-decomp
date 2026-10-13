@@ -5720,11 +5720,15 @@ struct Actor_func_8024A7A0_de {
     s32 model; /* 0x14 */
     s32 *definition; /* 0x18 */
     Vec3 position1;
-    u32 pad28[10];
+    u8 pad28[0x10];
+    s32 motionState; /* 0x38 */
+    u8 pad3C[4];
+    f32 floorHeight; /* 0x40 */
+    Vec3 floorDirection; /* 0x44 */
     Vec3 scale; /* 0x50 */
     Vector4f rotation;
     f32 yaw; /* 0x6C */
-    u8 pad70[4];
+    f32 eyeHeight; /* 0x70 */
     f32 transform[16]; /* 0x74 */
     s32 fieldB4;
     s32 fieldB8;
@@ -5751,7 +5755,9 @@ struct Actor_func_8024A7A0_de {
     s32 active; /* 0x174 */
     u8 pad178[4];
     s32 mask;
-    u8 pad180[0x23B - 0x180];
+    u8 pad180[0x70];
+    char *lockOn; /* 0x1F0 */
+    u8 pad1F4[0x23B - 0x1F4];
     u8 updateCount; /* 0x23B */
     u8 pad23C[0x2E4 - 0x23C];
     s32 flags2E4;

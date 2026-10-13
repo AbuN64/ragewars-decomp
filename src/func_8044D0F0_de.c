@@ -1,3 +1,4 @@
+#include "shared/world.h"
 #include "span_16E000/code_8044ACCC.h"
 #include "span_1000/code_80255BEC.h"
 #include "types.h"
@@ -38,14 +39,14 @@ void func_8044D178_de(State_func_8044D0F0_de *state,int selection) {
 /* Resets part of a large state block: sets its word at offset 0x1B410 to 2 and clears the words
    at 0x1B414 to 0x1B41C and 0x1B434 to 0x1B440. */
 void func_8044D1B4_de(char *state) {
-    ((func_8044DE04_S1 *)(state))->unk1B410 = 2;
-    ((func_8044DE04_S1 *)(state))->unk1B414 = 0;
-    ((func_8044DE04_S1 *)(state))->unk1B418 = 0;
-    ((func_8044DE04_S1 *)(state))->unk1B41C = 0;
-    ((func_8044DE04_S1 *)(state))->unk1B434 = 0;
-    ((func_8044DE04_S1 *)(state))->unk1B438 = 0;
-    ((func_8044DE04_S1 *)(state))->unk1B43C = 0;
-    ((func_8044DE04_S1 *)(state))->unk1B440 = 0;
+    ((Shared_World *)state)->selectionState = 2;
+    ((Shared_World *)state)->frozen = 0;
+    ((Shared_World *)state)->selectionTimer = 0;
+    ((Shared_World *)state)->selectionFlags = 0;
+    ((Shared_World *)state)->selectionValues[0] = 0;
+    ((Shared_World *)state)->selectionValues[1] = 0;
+    ((Shared_World *)state)->selectionValues[2] = 0;
+    ((Shared_World *)state)->selectionValues[3] = 0;
 }
 
 /* Copies up to max of a track's placed objects whose key matches into out: finds the key's index range in the track's sorted key table through func_80265550_de, queues each object in that range of the given kind (any kind for -1) on a local list through func_80255CA0_de and func_80255CB8_de, then takes them back off through func_80256190_de and func_80255ED8_de, copying each 20-byte object, and returns how many were copied. */
