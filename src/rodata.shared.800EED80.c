@@ -1,3 +1,0 @@
-const unsigned char D_auto_rodata_shared_800EED80[5] = {
-    0x25, 0x30, 0x34, 0x64, 0x00,
-};

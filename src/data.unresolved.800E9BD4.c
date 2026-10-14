@@ -1,3 +1,0 @@
-unsigned int D_auto_data_unresolved_800E9BD4[1] = {
-    0x00000000,
-};

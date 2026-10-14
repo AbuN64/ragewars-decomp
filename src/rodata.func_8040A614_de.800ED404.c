@@ -1,3 +1,0 @@
-const unsigned short D_auto_rodata_func_8040A614_de_800ED404[7] = {
-    0x2533, 0x642E, 0x2530, 0x3264, 0x2E25, 0x3032, 0x6400,
-};

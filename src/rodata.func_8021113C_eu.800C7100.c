@@ -1,3 +1,0 @@
-const unsigned int D_auto_rodata_func_8021113C_eu_800C7100[8] = {
-    0x48AFC800, 0x3ECCCCCD, 0x40490FDB, 0x3FC90FDB, 0x42C80000, 0x40490FDB, 0x3FC90FDB, 0x42C80000,
-};
