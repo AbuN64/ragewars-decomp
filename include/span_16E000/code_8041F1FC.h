@@ -4,6 +4,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
+#include "span_16E000/code_8041BEA8.h"
 struct Row_func_80420850_de;
 typedef struct Row_func_80420850_de Row_func_80420850_de;
 
@@ -87,19 +88,12 @@ struct SelectMenu {
     SelectEntry entries[8];
 };
 
-struct Item_func_80420308_de;
-struct Item_func_80420308_de {
-    char pad[0x14];
-    u16 x;
-    u16 y;
-};
 
 struct Entry_func_80420308_de;
-struct Item_func_80420308_de;
 struct Entry_func_80420308_de {
     void *window;
     char pad4[0x8 - 0x4];
-    struct Item_func_80420308_de *cursor;
+    struct Node_func_8041D134_de *cursor;
     char padC[0x14 - 0xC];
     s32 state;
     char pad18[0x4C8 - 0x18];

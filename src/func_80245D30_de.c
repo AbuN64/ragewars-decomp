@@ -12,7 +12,7 @@ static inline s32 currentEnabled(Actor_func_80245D30_de *actor) {
     return 0;
 }
 void func_80245D30_de(Actor_func_80245D30_de *arg0, Material_func_80245D30_de *arg1, Vec3 *arg2, s32 arg3) {
-    Rider_func_80245D30_de *rider;
+    Actor_func_80245D30_de *rider;
     f32 speed;
     Vec3 v10,v20;
     f32 sp30;
@@ -38,7 +38,7 @@ void func_80245D30_de(Actor_func_80245D30_de *arg0, Material_func_80245D30_de *a
     Vec3 *var_a0;
 
     if (arg0->kind == 1) {
-        rider=(Rider_func_80245D30_de *)arg0;
+        rider=arg0;
         var_v1=currentEnabled(arg0);
         var_v0 = rider->flags & 3;
     } else {
@@ -69,7 +69,7 @@ void func_80245D30_de(Actor_func_80245D30_de *arg0, Material_func_80245D30_de *a
             }
         }
         if ((arg1->flags & 0x2000) && (arg0->kind == 1)) {
-            rider=(Rider_func_80245D30_de *)arg0;
+            rider=arg0;
             v20=v10;
             v20.y = 0.0f;
             temp_f0_2 = func_80271AA8_de(&v20);

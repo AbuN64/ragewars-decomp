@@ -7,13 +7,6 @@ struct Node_func_804428F8_de;
 typedef struct Node_func_804428F8_de Node_func_804428F8_de;
 
 struct Entry_func_80441EB0_de;
-struct List_func_80441EB0_de;
-struct List_func_80441EB0_de {
-    struct Entry_func_80441EB0_de *entries;
-    s16 count;
-    char pad6[0x1A];
-    s32 value;
-};
 
 struct func_8043FFAC_S2;
 typedef struct func_8043FFAC_S2 func_8043FFAC_S2;
@@ -105,8 +98,6 @@ struct Table_func_804428F8_de {
     char pad00[0xC];
     void (*handler)(Node_func_804428F8_de *, List_func_804428F8_de *);
 };
-struct Item_func_80441FE8_de;
-typedef struct Item_func_80441FE8_de Item_func_80441FE8_de;
 
 struct Params_func_804427C4_de;
 struct Params_func_804427C4_de {
@@ -238,13 +229,6 @@ struct Object_func_804420B4_de {
     u8 character;
 };
 
-struct Item_func_80441FE8_de;
-struct Item_func_80441FE8_de {
-    int unk0;
-    short type;
-    char pad6[0xE];
-    u8 **text;
-};
 
 typedef struct Node_func_804428F8_de Node_func_80442A28_de;
 
@@ -253,11 +237,10 @@ typedef struct ObjRecAt1AV2 ObjRecAt1AV2;
 
 extern float func_8044222C_de(int c, unsigned char next, float sx, float sy);
 
-struct List_func_80441EB0_de;
 struct ParamsRecAt24V1;
 struct ParamsRecAt24V1 {
     char pad[0x18];
-    struct List_func_80441EB0_de *list;
+    struct List_func_80442574_de *list;
     s32 b;
     s32 c;
     s32 d;

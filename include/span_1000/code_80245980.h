@@ -23,13 +23,6 @@ struct Access_u8_E6 {
     u8 field;
 };
 
-struct Rider_func_80245D30_de;
-struct Rider_func_80245D30_de {
-    char pad0[0x38];
-    s32 flags;
-    char pad3c[0x30];
-    f32 yaw;
-};
 
 extern f32 func_802459A0_de();
 
@@ -128,8 +121,6 @@ typedef struct Access_s8_23A Access_s8_23A;
 
 extern float D_800C3828_de;
 
-struct Rider_func_80245D30_de;
-typedef struct Rider_func_80245D30_de Rider_func_80245D30_de;
 
 struct Access_s8_1A5;
 struct Access_s8_1A5 {

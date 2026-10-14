@@ -19,7 +19,7 @@ extern s32 func_80448CC4_de(OSPfs *pfs);
 extern s32 func_80448BFC_de(OSPfs *pfs);
 extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
 
-s32 func_80446A20_de(OSPfs *pfs, s32 file_no, OSPfsState *state)
+s32 func_80446A20_de(OSPfs *pfs, s32 file_no, NoteState *state)
 {
     s32 ret;
     int pages;

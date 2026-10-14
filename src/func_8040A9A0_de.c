@@ -14,10 +14,10 @@ extern char D_800ED414[];
 extern u16 D_8014D48C;
 extern char D_800DCD94_de[];
 #endif
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
-s32 func_8040A9A0_de(Item_func_80441FE8_de *field) {
+s32 func_8040A9A0_de(LayeredText *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     s32 value = D_8015D48C;
     char *text = (char *)field->text[D_80152789];

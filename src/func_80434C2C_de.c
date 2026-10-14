@@ -11,7 +11,7 @@ extern u8 D_80102B00[];
 extern s8 D_80102B0D[];
 extern s8 D_800FEB0E[];
 extern struct MatchSetupGlobals D_801462C8;
-extern struct Item_func_80434C2C_de *func_8040EC30_de(void *, s32);
+extern struct Label *func_8040EC30_de(void *, s32);
 void func_80434C2C_de(s32 player) {
     struct MatchSetupGlobals *globals;
     s32 row;

@@ -24,11 +24,11 @@ extern char D_800EEE18[];
 
 extern char D_800E27E0[];
 extern char D_800E27E8[];
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_804451D0_de(Item_func_80441FE8_de *field) {
+s32 func_804451D0_de(LayeredText *field) {
     s32 step = (D_801462E0[0] - 0x80) / 8;
     char *text;
 

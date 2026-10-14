@@ -11,14 +11,14 @@ extern u8 D_80152789;
    same function. */
 
 
-extern void func_8043FE3C_de(struct Object_func_80442064_de *, s32, s32, s32, s32, s32);
+extern void func_8043FE3C_de(struct Field *, s32, s32, s32, s32, s32);
 
-void func_8044208C_de(struct Object_func_80442064_de *object, s32 second, s32 third, s32 fourth) {
+void func_8044208C_de(struct Field *object, s32 second, s32 third, s32 fourth) {
     
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-func_8043FE3C_de(object, second, third, fourth, object->source[D_80152789], 0);
+func_8043FE3C_de(object, second, third, fourth, object->text[D_80152789], 0);
 #else
-func_8043FE3C_de(object, second, third, fourth, *object->source, 0);
+func_8043FE3C_de(object, second, third, fourth, *object->text, 0);
 #endif
 
 }

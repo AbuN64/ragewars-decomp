@@ -22,7 +22,7 @@ extern Camera_func_8026851C_de *D_80103FCC;
 extern s32 func_802833D0_de(void *host);
 extern s32 func_80262C88_de(void *effect);
 
-void func_8026851C_de(SourceRecAt1C *source, Host_func_8026851C_de *host, s32 unused, Spawn spawn) {
+void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unused, Spawn spawn) {
     Vec3f scale;
     Vec3f velocity;
     Effect_func_8026851C_de *effect;
@@ -62,8 +62,8 @@ void func_8026851C_de(SourceRecAt1C *source, Host_func_8026851C_de *host, s32 un
         effect->offset.y = D_80103FCC->offset.y;
         effect->offset.z = D_80103FCC->offset.z;
     } else if ((unsigned)(spawn.kind - 0x474) < 4) {
-        if (host->type == 1 && (host->flags & 0x300000)) {
-            partner = host->partner;
+        if (host->kind == 1 && (host->flags & 0x300000)) {
+            partner = host->state;
             if (partner != 0) {
                 partner->child = effect;
                 effect->scale = partner->scale;

@@ -3058,8 +3058,6 @@ typedef struct Globals_func_804220A8_de Globals_func_804220A8_de;
 struct Group_func_8044D794_de;
 typedef struct Group_func_8044D794_de Group_func_8044D794_de;
 
-struct Host_func_8026851C_de;
-typedef struct Host_func_8026851C_de Host_func_8026851C_de;
 
 struct HudCue;
 typedef struct HudCue HudCue;
@@ -5488,14 +5486,6 @@ struct Holder_func_8043E2D8_de {
     struct func_80242278_S1 *mode;
 };
 struct Effect_func_8026851C_de;
-struct Host_func_8026851C_de;
-struct Host_func_8026851C_de {
-    unsigned char type;
-    char pad1[0x100 - 1];
-    s32 flags;
-    char pad104[0x1D8 - 0x104];
-    struct Effect_func_8026851C_de *partner;
-};
 struct HudCue;
 struct HudCue {
     s32 handle;
@@ -6574,6 +6564,7 @@ struct Owner_func_8044D794_de {
 };
 struct PakNotesMenuItem;
 #include "shared/pak_menu.h"
+#include "span_1000/code_8027A0F4.h"
 struct PakNotesMenu;
 struct PakNotesMenu {
     char pad0[0xC];

@@ -1,17 +1,8 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8041C67C_H
 #define UNBAKE_SPAN_16E000_CODE_8041C67C_H
 #include "types.h"
-struct OSPfsState;
-struct OSPfsState {
-    u32 file_size;
-    u32 game_code;
-    u16 company_code;
-    char ext_name[4];
-    char game_name[16];
-};
+#include "span_16E000/code_80403BCC.h"
 
-struct OSPfsState;
-typedef struct OSPfsState OSPfsState;
 
 struct __OSContRequesFormatShort;
 typedef struct __OSContRequesFormatShort __OSContRequesFormatShort;

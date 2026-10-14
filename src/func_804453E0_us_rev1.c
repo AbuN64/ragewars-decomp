@@ -26,10 +26,10 @@ s32 func_804453E0_us_rev1(struct FieldRecAt14 *field) {
 extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_80445414_us_rev1(struct Field_func_80445414_us_rev1 *field, s32 index) {
+s32 func_80445414_us_rev1(struct Field *field, s32 index) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -51,10 +51,10 @@ s32 func_80445414_us_rev1(struct Field_func_80445414_us_rev1 *field, s32 index) 
 extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_804454B4_us_rev1(struct Field_func_80445414_us_rev1 *field) {
+s32 func_804454B4_us_rev1(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -76,10 +76,10 @@ s32 func_804454B4_us_rev1(struct Field_func_80445414_us_rev1 *field) {
 extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_80445544_us_rev1(struct Field_func_80445414_us_rev1 *field) {
+s32 func_80445544_us_rev1(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -101,10 +101,10 @@ s32 func_80445544_us_rev1(struct Field_func_80445414_us_rev1 *field) {
 extern u8 D_800CBC90[];
 extern u8 D_800CBC94[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_804455D4_us_rev1(struct Field_func_80445414_us_rev1 *field) {
+s32 func_804455D4_us_rev1(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -124,10 +124,10 @@ s32 func_804455D4_us_rev1(struct Field_func_80445414_us_rev1 *field) {
 extern u8 D_800D0EE8[];
 extern u8 D_800CBC9C[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_80445664_us_rev1(struct Field_func_80445414_us_rev1 *field, s32 index) {
+s32 func_80445664_us_rev1(struct Field *field, s32 index) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -149,10 +149,10 @@ s32 func_80445664_us_rev1(struct Field_func_80445414_us_rev1 *field, s32 index) 
 extern u8 D_800D0EE8[];
 extern u8 D_800CBC9C[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_80445704_us_rev1(struct Field_func_80445414_us_rev1 *field) {
+s32 func_80445704_us_rev1(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -174,10 +174,10 @@ s32 func_80445704_us_rev1(struct Field_func_80445414_us_rev1 *field) {
 extern u8 D_800D0EE8[];
 extern u8 D_800CBC9C[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_80445794_us_rev1(struct Field_func_80445414_us_rev1 *field) {
+s32 func_80445794_us_rev1(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {
@@ -197,10 +197,10 @@ s32 func_80445794_us_rev1(struct Field_func_80445414_us_rev1 *field) {
 extern u8 D_800D0EEA[];
 extern u8 D_800D0EEE[];
 extern char D_800E27D8[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802BD320_de(char *, char *, s32);
 
-s32 func_80445824_us_rev1(struct Field_func_80445414_us_rev1 *field) {
+s32 func_80445824_us_rev1(struct Field *field) {
     char *text = *field->text;
 
     if (field->value == -1) {

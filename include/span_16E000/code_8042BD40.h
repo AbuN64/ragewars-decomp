@@ -112,13 +112,6 @@ struct State_func_8042D908_de {
 struct IntegerState330;
 typedef struct IntegerState330 IntegerState330;
 
-struct Item_func_8042D304_de;
-struct Item_func_8042D304_de {
-    char pad[0x10];
-    u8 alpha;
-    char pad11[0x2C - 0x11];
-    s32 frame;
-};
 
 struct Shared_Rec3;
 typedef struct Shared_Rec3 Shared_Rec3;

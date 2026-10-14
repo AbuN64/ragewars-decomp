@@ -12,10 +12,10 @@ extern char D_80145040[];
 extern s16 D_801422DC[];
 extern char D_800DE700[];
 extern s32 func_8022A5A0_de(void *, unsigned int);
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
-s32 func_80443A24_de(Item_func_80441FE8_de *field, struct Holder *holder) {
+s32 func_80443A24_de(LayeredText *field, struct Holder *holder) {
     s32 player = func_8022A5A0_de(D_80145040, (u32)holder->owner);
     s32 value = D_801422DC[player * 75];
     char *text = (char *)*field->text;

@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_16E000_CODE_80444EC0_H
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_16E000/code_8043F69C.h"
 extern void func_80444E70_de(s16 *record);
 
 struct Options_func_80444D50_de;
@@ -43,19 +44,18 @@ extern s32 func_80444E7C_de(void);
 
 extern int func_80444E30_de(void);
 
-struct Item_func_80441FE8_de;
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_804451D0_de(struct Item_func_80441FE8_de *field);
+s32 func_804451D0_de(struct LayeredText *field);
 #endif
 
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_80445ECC(struct Item_func_80441FE8_de *field);
+s32 func_80445ECC(struct LayeredText *field);
 #endif
 
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_80445AB8(struct Item_func_80441FE8_de *field);
+s32 func_80445AB8(struct LayeredText *field);
 #endif
 
 #endif

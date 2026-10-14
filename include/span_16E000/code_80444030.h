@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_16E000_CODE_80444030_H
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_16E000/code_8043F69C.h"
 struct Settings_func_80444988_de;
 struct Settings_func_80444988_de {
     char pad[0x79];
@@ -144,9 +145,8 @@ struct MenuItemRecAt14 {
 struct MenuItemRecAt14;
 typedef struct MenuItemRecAt14 MenuItemRecAt14;
 
-struct Item_func_80441FE8_de;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8044488C_de(struct Item_func_80441FE8_de *field);
+s32 func_8044488C_de(struct LayeredText *field);
 #endif
 
 #endif

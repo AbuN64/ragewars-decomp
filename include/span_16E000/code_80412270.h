@@ -167,12 +167,6 @@ extern s16 func_80413660_de(s16 *record);
 struct Image_func_80413480_de;
 typedef struct Image_func_80413480_de Image_func_80413480_de;
 
-struct Entry_func_80412B18_de;
-struct Entry_func_80412B18_de {
-    char pad[0x4C];
-    u8 first;
-    u8 second;
-};
 
 extern void func_80412898_de(s32 identifier, s32 row, s32 column, s32 first, s32 second);
 

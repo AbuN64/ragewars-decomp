@@ -2,10 +2,6 @@
 #define UNBAKE_SPAN_1000_CODE_8024BA6C_H
 #include "types.h"
 /* Section one of the resource selected by an actor's resource key. */
-typedef struct ActorFrameResourceTable {
-    s32 header[2];
-    s32 resources[1];
-} ActorFrameResourceTable;
 /* Section zero of the resource selected by an actor's resource key. */
 typedef struct ActorResourceHeader {
     u8 unknown0[0x1E];

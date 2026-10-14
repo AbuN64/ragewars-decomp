@@ -20,11 +20,11 @@ extern s32 D_8015375C;
 extern u8 *D_800D394C[];
 
 extern char D_800DCD9C[];
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040B444_de(Item_func_80441FE8_de *field, struct Record_func_80409BDC_de *holder) {
+s32 func_8040B444_de(LayeredText *field, struct Record_func_80409BDC_de *holder) {
     char *text;
     s32 value;
 

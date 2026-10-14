@@ -76,7 +76,7 @@ Acmd *func_802B5D70_de(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd *p)
 
     if (d->rs) {
         length = d->output - d->input;
-        delta = func_802B6300_de((ALDelay *)d, incount);
+        delta = func_802B6300_de(d, incount);
         delta /= length;
         unity = D_800C77CC_de;
         delta = (s32)(delta * unity);

@@ -8,14 +8,14 @@ extern u8 D_80152789;
 
 
 
-extern u8 *func_8043F290(Item_func_80441FE8_de *item);
+extern u8 *func_8043F290(LayeredText *item);
 
-int func_80441FE8_de(Item_func_80441FE8_de *item) {
+int func_80441FE8_de(LayeredText *item) {
     u8 *p;
     int len;
 
     len = 0;
-    if (item->type == 5) {
+    if (item->mode == 5) {
         p = func_8043F290(item);
     } else {
         

@@ -197,6 +197,9 @@ struct Actor_func_80290238_de {
     s32 *counter;
     struct Actor_func_80290238_de *prev;
     struct Actor_func_80290238_de *next;
+    char pad1E0[0x110];
+    signed int * ref;
+    unsigned char padding2F4[4];
 };
 
 struct Actor_func_80290238_de;

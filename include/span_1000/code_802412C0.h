@@ -7,6 +7,7 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_8023D370.h"
 #include "types.h"
+#include "span_1000/code_80213ED4.h"
 struct Ray180;
 struct MotionSurface;
 struct Ray180 {
@@ -107,11 +108,6 @@ typedef struct ContextB0 ContextB0;
 struct FloatState68;
 typedef struct FloatState68 FloatState68;
 
-struct Input_func_80242550_de;
-struct Input_func_80242550_de {
-    u8 pad0[8];
-    Triple position;
-};
 
 struct Ray180;
 typedef struct Ray180 Ray180;
@@ -190,8 +186,6 @@ struct func_80241940_S2 {
 struct func_80243864_S2;
 typedef struct func_80243864_S2 func_80243864_S2;
 
-struct Input_func_80242550_de;
-typedef struct Input_func_80242550_de Input_func_80242550_de;
 
 struct ActorB0;
 struct ActorB0 {

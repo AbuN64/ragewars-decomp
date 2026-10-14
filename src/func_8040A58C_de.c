@@ -9,10 +9,10 @@ struct PreviewTextValue { char pad[0x22]; s16 value; };
 
 extern struct PreviewTextValue *D_800E28BC;
 extern char D_800DCD80[];
-extern s32 func_80441FE8_de(struct Field_func_80445414_us_rev1 *);
+extern s32 func_80441FE8_de(struct Field *);
 extern void func_802658E4_de(char *, char *, s32);
 
-s32 func_8040A58C_de(struct Field_func_80445414_us_rev1 *field) {
+s32 func_8040A58C_de(struct Field *field) {
     s32 value = D_800E28BC->value;
     char *text = *field->text;
 

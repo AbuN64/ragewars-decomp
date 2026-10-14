@@ -3,6 +3,7 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_16E000/code_8043F69C.h"
 extern s32 func_8040A1B0_de(s32 arg0);
 
 extern void func_8040A47C_de(void);
@@ -73,9 +74,8 @@ struct Record_func_80409BDC_de;
 extern char *func_8040A09C_de(struct Record_func_80409BDC_de *menu);
 
 
-struct Item_func_80441FE8_de;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040A300_de(struct Item_func_80441FE8_de *field, struct Record_func_80409BDC_de *holder);
+s32 func_8040A300_de(struct LayeredText *field, struct Record_func_80409BDC_de *holder);
 #endif
 
 #endif

@@ -373,6 +373,8 @@ struct Resource_func_80419E54_de;
 struct Resource_func_80419E54_de {
     char pad[0x10];
     unsigned char value;
+    char pad11[0x1B];
+    signed int frame;
 };
 
 struct Field_s32_2E0;
@@ -3030,11 +3032,6 @@ struct func_80435010_S4 {
     s32 unkB9C;
 };
 
-struct Object_func_80442064_de;
-struct Object_func_80442064_de {
-    char pad[0x14];
-    s32 *source;
-};
 
 struct PackedMatrixWords;
 struct PackedMatrixWords {
@@ -3077,6 +3074,8 @@ struct List_func_80442574_de;
 struct List_func_80442574_de {
     struct Entry_func_80441EB0_de *entries;
     s16 count;
+    char pad6[0x1A];
+    signed int value;
 };
 
 struct Record_func_80439C80_de;
@@ -3392,6 +3391,8 @@ struct Field;
 struct Field {
     char pad[0x14];
     char **text;
+    char pad18[0x4];
+    signed int value;
 };
 
 struct func_802165F8_S1;

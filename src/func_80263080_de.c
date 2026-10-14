@@ -7,11 +7,11 @@ extern void func_80255ED8_de(void *, void *);
 
 
 
-void func_80263080_de(struct SceneEffectPool *arg0, struct Effect_func_80262A9C_de *arg1) {
+void func_80263080_de(struct SceneEffectPool *arg0, struct Actor_func_80290238_de *arg1) {
     s32 *temp_v1;
 
     temp_v1 = arg1->ref;
-    arg1->active = 0;
+    arg1->angle = 0;
     if (temp_v1 != 0) {
         *temp_v1 -= 1;
     }

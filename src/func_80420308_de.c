@@ -17,12 +17,12 @@
 extern struct Screen_func_80420308_de *D_800E42D0;
 extern struct RowRecAtA D_800E42D4[];
 extern void func_8041B6E8_de(void *, s32, s32);
-extern struct Item_func_80420308_de *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(struct Item_func_80420308_de *, s32);
+extern struct Node_func_8041D134_de *func_8040EC30_de(void *, s32);
+extern void func_8040E8D8_de(struct Node_func_8041D134_de *, s32);
 extern void func_80420438_de(s32);
 
 void func_80420308_de(s32 player) {
-    struct Item_func_80420308_de *frame;
+    struct Node_func_8041D134_de *frame;
 
     func_8041B6E8_de(D_800E42D0->entries[0].window, player, D_800E42D4[player].frame);
     D_800E42D0->entries[player].cursor = func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].cursor);

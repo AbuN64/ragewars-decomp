@@ -9,11 +9,11 @@
 extern s32 D_800E63B8;
 extern u8 *D_800D3DBC;
 extern char D_800DE7B0_de[];
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1)
-s32 func_80445ECC(Item_func_80441FE8_de *field) {
+s32 func_80445ECC(LayeredText *field) {
     char *text;
     if (D_800E63B8 == 0) {
         field->text = &D_800D3DBC;

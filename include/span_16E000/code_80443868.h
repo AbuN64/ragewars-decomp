@@ -3,6 +3,7 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_16E000/code_8043F69C.h"
 extern void func_80443BCC_de(void);
 
 struct ActorRecAt260;
@@ -153,10 +154,9 @@ extern s32 func_804438BC_de(StateRecAt1C *arg0);
 struct Sync;
 typedef struct Sync Sync;
 
-struct Item_func_80441FE8_de;
 struct MenuRules;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_80443998_de(struct Item_func_80441FE8_de *field, struct MenuRules *holder);
+s32 func_80443998_de(struct LayeredText *field, struct MenuRules *holder);
 #endif
 
 #endif

@@ -4,14 +4,14 @@
 
 
 
-extern char *func_8043F290(Item_func_80441FE8_de *);
+extern char *func_8043F290(LayeredText *);
 
 
 /* Forwards its four arguments to func_8043FE3C_de with what func_8043F290 returns for the object as the fifth and a one as the sixth. Adapted from func_8044208C_de with the fifth argument taken from func_8043F290 and a one as the sixth changed. */
 
-extern void func_8043FE3C_de(Item_func_80441FE8_de *, s32, s32, s32, s32, s32);
+extern void func_8043FE3C_de(LayeredText *, s32, s32, s32, s32, s32);
 
-void func_804420E4_de(Item_func_80441FE8_de *object, s32 second, s32 third, s32 fourth) {
+void func_804420E4_de(LayeredText *object, s32 second, s32 third, s32 fourth) {
 #if defined(VERSION_DE)
     func_8043FE3C_de(object, second, third, fourth, (s32)func_8043F290(object), 1);
 #else

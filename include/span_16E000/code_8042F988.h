@@ -176,11 +176,6 @@ struct MatchSetupGlobals {
     ListScreenRecord status[8];
 };
 
-struct Item_func_80434C2C_de;
-struct Item_func_80434C2C_de {
-    char pad[0x38];
-    u8 *text;
-};
 
 struct Block_func_80434B08_de;
 struct Player_func_804356BC_de;

@@ -23,10 +23,10 @@ extern char D_80145040[];
 extern s16 D_801422DA[];
 extern char D_800DE700[];
 extern s32 func_8022A5A0_de(void *, unsigned int);
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
-s32 func_80443AB0_de(Item_func_80441FE8_de *field, struct MenuRules *holder) {
+s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     struct LocalizedInputState *players = &D_80145040;

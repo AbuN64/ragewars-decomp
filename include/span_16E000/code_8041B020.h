@@ -70,12 +70,6 @@ struct ChildRecAt38 {
 };
 
 struct ChildRecAt38;
-struct Owner_func_8041BC64_de;
-struct Owner_func_8041BC64_de {
-    char pad[0x4C];
-    struct ChildRecAt38 *children[4];
-    s32 busy[4];
-};
 
 extern void func_8041B110_de(s32 arg0);
 
@@ -158,12 +152,6 @@ struct Record_func_8041B110_de {
 extern s32 func_8041B340_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct ChildRecAt2C;
-struct Owner_func_8041BBD0_de;
-struct Owner_func_8041BBD0_de {
-    char pad[0x4C];
-    struct ChildRecAt2C *children[4];
-    s32 busy[4];
-};
 
 struct Record_func_8041B110_de;
 typedef struct Record_func_8041B110_de Record_func_8041B110_de;
@@ -202,19 +190,7 @@ struct ChildRecAt30 {
 };
 
 struct ChildRecAt30;
-struct Owner_func_8041BCF8_de;
-struct Owner_func_8041BCF8_de {
-    char pad[0x4C];
-    struct ChildRecAt30 *children[4];
-    s32 busy[4];
-};
 
 struct Child;
-struct Owner_func_8041BB3C_de;
-struct Owner_func_8041BB3C_de {
-    char pad[0x4C];
-    struct Child *children[4];
-    s32 busy[4];
-};
 
 #endif

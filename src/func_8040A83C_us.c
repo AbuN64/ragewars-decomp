@@ -8,7 +8,7 @@ extern u8 D_8014B494[];
 extern s32 D_80153774;
 extern s32 D_800D2478; /* const */
 extern s32 D_800D2480; /* const */
-s32 func_8040A83C_us(struct Object_func_80442064_de *arg0) {
+s32 func_8040A83C_us(struct Field *arg0) {
     s8 *temp_s0;
     s8 *temp_s0_2;
     s32 var_s1;
@@ -21,12 +21,12 @@ s32 func_8040A83C_us(struct Object_func_80442064_de *arg0) {
     u8 temp_v0;
     var_s1 = 8;
     if (D_80153774 != 0) {
-        arg0->source = &D_800D2478;
+        arg0->text = &D_800D2478;
     } else {
-        arg0->source = &D_800D2480;
+        arg0->text = &D_800D2480;
         var_a1 = &D_8014B49B;
         while (*var_a1-- == 0x20 && var_s1 != 0) var_s1--;
-        temp_s0 = *arg0->source;
+        temp_s0 = *arg0->text;
         temp_s0 = temp_s0 + (func_80441FE8_de(arg0) - 8);
         space = 0x20;
         var_v1 = 7;

@@ -59,6 +59,7 @@
 #define UNBAKE_SPAN_1000_CODE_8020EAE0_H
 #include "types.h"
 #include "common/draft_fields_func_8020F5A4_de.h"
+#include "span_1000/code_8020AF9C.h"
 struct func_8020F93C_S1;
 typedef struct func_8020F93C_S1 func_8020F93C_S1;
 
@@ -81,20 +82,11 @@ typedef struct func_8020F444_S2 func_8020F444_S2;
 struct ObjectLinks1458;
 typedef struct ObjectLinks1458 ObjectLinks1458;
 
-struct Node_func_8020F150_de;
-struct Node_func_8020F150_de {
-    s32 id;
-    char pad4[0xC];
-    struct Node_func_8020F150_de *next;
-    char pad14[0x20];
-    char *owner;
-};
 
-struct Node_func_8020F150_de;
 struct func_8020F150_S1;
 struct func_8020F150_S1 {
     char pad0[0x24];
-    struct Node_func_8020F150_de * unk24;
+    struct Node8020BC50 * unk24;
 };
 
 struct Actor1DC;
@@ -179,8 +171,6 @@ extern s32 func_8020F55C_de(s32 arg0);
 
 extern s32 func_8020F614_de(void);
 
-struct Node_func_8020F150_de;
-typedef struct Node_func_8020F150_de Node_func_8020F150_de;
 
 struct Func8020ED50Arg;
 struct Func8020ED50Arg {

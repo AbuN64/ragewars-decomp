@@ -14,10 +14,10 @@ extern u8 *D_800D3628;
 extern char D_800DE758_de[];
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
-s32 func_80444D9C_de(Item_func_80441FE8_de *item) {
+s32 func_80444D9C_de(LayeredText *item) {
     u32 code;
     u8 *text;
     s32 length;

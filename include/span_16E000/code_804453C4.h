@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_16E000_CODE_804453C4_H
 #include "types.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/types_1dc8418c21db.h"
 extern float D_800E2810;
 
 struct MenuRecAt20V1;
@@ -109,13 +110,6 @@ typedef struct MenuRecAt20V1 MenuRecAt20V1;
 struct LocalizedInputState;
 typedef struct LocalizedInputState LocalizedInputState;
 
-struct Field_func_80445414_us_rev1;
-struct Field_func_80445414_us_rev1 {
-    char pad[0x14];
-    char **text;
-    s32 pad18;
-    s32 value;
-};
 
 struct TextEntryRecAtC;
 struct TextEntryRecAtC {

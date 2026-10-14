@@ -18,6 +18,7 @@ struct Node8020BC50 {
     s32 field28;
     s32 field2C;
     s32 field30;
+    char * owner;
 };
 
 struct ObjectLinks14;

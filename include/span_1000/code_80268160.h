@@ -8,6 +8,7 @@ struct SceneEffectPool;
 #include "resident_event_handler.h"
 #include "span_1000/code_802624A0.h"
 #include "types.h"
+struct Actor_func_80290238_de;
 struct RangeNode;
 typedef struct RangeNode RangeNode;
 
@@ -190,7 +191,7 @@ struct func_802689BC_S2 {
 };
 
 typedef Vec3 Vec3f;
-extern Effect_func_80262A9C_de *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
+extern struct Actor_func_80290238_de *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
                       Vec3 color, s32 *ref);
 
 #endif

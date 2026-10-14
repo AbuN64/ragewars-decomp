@@ -7,11 +7,11 @@
 
 extern s32 func_80299958_de();
 extern void *func_80411DCC_de(s32);
-extern struct Entry_func_80412B18_de *func_8040EC30_de(void *, unsigned short);
+extern struct Record_func_80412710_de *func_8040EC30_de(void *, unsigned short);
 
 void func_80412B18_de(s32 identifier, s32 *first, s32 *second) {
-    struct Entry_func_80412B18_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    struct Record_func_80412710_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
 
-    *first = entry->first;
-    *second = entry->second;
+    *first = entry->field_4C;
+    *second = entry->field_4D;
 }

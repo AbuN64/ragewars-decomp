@@ -13,11 +13,11 @@ extern u8 *D_800D35F0[];
 
 
 extern char D_800DE750_de[];
-extern s32 func_80441FE8_de(Item_func_80441FE8_de *);
+extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8044488C_de(Item_func_80441FE8_de *field) {
+s32 func_8044488C_de(LayeredText *field) {
     char *text;
     s32 value = D_801462DC >> 4;
 

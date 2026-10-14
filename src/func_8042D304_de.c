@@ -9,9 +9,9 @@
 extern struct func_8042CE54_S1 *D_800E53C0;
 extern u8 D_80146398[];
 extern void *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(struct Item_func_8042D304_de *, s32);
+extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
 void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
-    struct Item_func_8042D304_de *item;
+    struct Resource_func_80419E54_de *item;
     void *parent;
     u8 *record;
     u32 rank;
@@ -60,7 +60,7 @@ void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
     }
     item = func_8040EC30_de(parent, id);
     func_8040E8D8_de(item, 1);
-    item->alpha = 0x96;
+    item->value = 0x96;
     rank = record[0x92];
     switch (rank) {
     case 0:

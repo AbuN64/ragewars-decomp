@@ -16,8 +16,6 @@ struct CallbackStateC {
     void (*callback)(void *, s32, s32);
 };
 
-struct ALDelay;
-typedef struct ALDelay ALDelay;
 
 struct func_802BB32C_S2;
 typedef struct func_802BB32C_S2 func_802BB32C_S2;
@@ -80,20 +78,6 @@ struct ALDelay28 {
     ALResampler_s28 *rs;
 };
 
-struct ALDelay;
-struct ALDelay {
-    u32 input;
-    u32 output;
-    s16 ffcoef;
-    s16 fbcoef;
-    s16 gain;
-    f32 rsinc;
-    f32 rsval;
-    s32 rsdelta;
-    f32 rsgain;
-    void *lp;
-    void *rs;
-};
 
 struct ALResampler_s;
 typedef struct ALResampler_s ALResampler_s;
@@ -144,7 +128,7 @@ extern float D_800C7748_de;
 
 extern float D_800C7880_de;
 
-extern f32 func_802B6300_de(ALDelay *d, s32 count);
+extern f32 func_802B6300_de(ALDelay28 *d, s32 count);
 
 extern float D_800C7888_de;
 

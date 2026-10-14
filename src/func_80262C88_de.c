@@ -9,11 +9,11 @@ extern void func_80255ED8_de(void *, void *);
 
 
 
-s32 func_80262C88_de(struct Effect_func_80262A9C_de *arg0) {
+s32 func_80262C88_de(struct Actor_func_80290238_de *arg0) {
     s32 *counter;
 
     counter = arg0->ref;
-    arg0->active = 0;
+    arg0->angle = 0;
     if (counter != 0) {
         *counter -= 1;
     }

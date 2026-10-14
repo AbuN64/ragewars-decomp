@@ -7,19 +7,19 @@
 
 
 extern void func_8029973C_de();
-extern void func_8041B8DC_de(struct Owner_func_8041BC64_de *, s32, void *);
+extern void func_8041B8DC_de(struct Context_func_8041B6E8_de *, s32, void *);
 
-s32 func_8041BC64_de(struct Owner_func_8041BC64_de *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BC64_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot, s32 kind) {
     struct ChildRecAt38 *child;
 
     func_8029973C_de();
     if (kind != 1) {
         return 0;
     }
-    if (owner->busy[(u16)slot] != 0) {
+    if (owner->locked[(u16)slot] != 0) {
         return 0;
     }
-    child = owner->children[(u16)slot];
+    child = owner->shown[(u16)slot];
     if (child == 0) {
         return 0;
     }

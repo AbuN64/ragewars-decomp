@@ -16,7 +16,7 @@ void *func_80262FF8_de(s32 arg0, s32 *arg1) {
         if (temp_s0 != 0) {
             func_80255ED8_de((void *)(arg0 + 0x5F00), (s32)temp_s0);
             func_80255CB8_de((void *)(arg0 + 0x5F14), (s32)temp_s0);
-            ((Effect_func_80262A9C_de *)(temp_s0))->ref = arg1;
+            ((Actor_func_80290238_de *)(temp_s0))->ref = arg1;
             if (arg1 != 0) {
                 *arg1 += 1;
             }

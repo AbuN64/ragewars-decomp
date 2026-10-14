@@ -41,7 +41,7 @@ extern int func_8022A414_de(void *arg0);
 extern void func_8027985C_de(WeightedTable *object);
 extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
 extern s16 func_802798A8_de(WeightedTable *arg0);
-extern Effect_func_80262A9C_de *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref);
+extern Actor_func_80290238_de *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref);
 extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, Vec3 arg6, Vector4f rotation, Vec3 pos, Vec3 *aim, s32 arg10, s32 arg11);
 extern void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 position, s32 arg9, f32 arg10);
 extern char D_8011D8D0[];

@@ -5,7 +5,7 @@
    evaluates RANGE in single precision against the cartridge's 2.0, 4.0 and 1.0 constants. */
 extern const float D_800C77D8_de; /* RANGE, followed by RANGE*2 */
 extern const float D_800C77E0_de; /* RANGE/2 */
-f32 func_802B6300_de(ALDelay *d, s32 count)
+f32 func_802B6300_de(ALDelay28 *d, s32 count)
 {
     f32 val;
     d->rsval += d->rsinc * count;
