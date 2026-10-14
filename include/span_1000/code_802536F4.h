@@ -53,7 +53,7 @@ struct func_8025398C_S1 {
 typedef struct ResourceLockState {
     s32 slot;
     u8 reserved4[0xB98 - 4];
-    Queue_func_802517B4_de waitQueue;
+    OSMesgQueue waitQueue;
 } ResourceLockState;
 
 #endif

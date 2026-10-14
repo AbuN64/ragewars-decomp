@@ -6,12 +6,12 @@
 
 
 
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern void func_80254990_de(void *, void *);
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 
 void func_80253838_de(void *arg0, void *arg1) {
     s32 temp_v1;

@@ -4,7 +4,6 @@
 /* osCreateViManager, drafted from ultralib src/io/vimgr.c (2.0I: no __additional_scanline). */
 
 typedef void *OSMesg;
-typedef struct OSMesgQueue OSMesgQueue;
 typedef struct OSThread OSThread;
 
 

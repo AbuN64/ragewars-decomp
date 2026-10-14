@@ -13,11 +13,11 @@
 
 
 
-extern OSPfs_func_80403E90_de D_8014D280[];
+extern OSPfs D_8014D280[];
 extern PakDirectory *D_800E2854;
 
-extern s32 func_80446A20_de(OSPfs_func_80403E90_de *pfs, s32 file_no, NoteState *state);
-extern s32 func_80446C60_de(OSPfs_func_80403E90_de *pfs, s32 *free);
+extern s32 func_80446A20_de(OSPfs *pfs, s32 file_no, NoteState *state);
+extern s32 func_80446C60_de(OSPfs *pfs, s32 *free);
 
 s32 func_80403E90_de(s32 ch) {
     s32 i;
@@ -47,13 +47,13 @@ s32 func_80403E90_de(s32 ch) {
 }
 
 extern u8 D_8010FC00[];
-extern OSPfs_func_80403E90_de D_8014D280[];
+extern OSPfs D_8014D280[];
 static inline void *pak27(s32 ch) {return ((u8 *)D_8014D280)+ch*0x68;}
 s32 func_80404018_de(s32 ch) {
     s32 tries;
     s32 result;
     void *pfs;
-    OSPfs_func_80403E90_de *base;
+    OSPfs *base;
     if(D_8010FBE3[ch*4] != 0) {
         D_80153500[ch]=-2;
         return 0;

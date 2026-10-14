@@ -1,9 +1,9 @@
 #include "shared/controller_request.h"
 extern s32 D_800C8144_de;
-extern RingQueue D_800F2F40;
-extern Queue_func_802BB2A0_de D_800F3110;
-extern s32 func_802BB420_de(RingQueue *, s32, s32);
-extern s32 func_802BB2A0_de(Queue_func_802BB2A0_de *, void **, s32);
+extern OSMesgQueue D_800F2F40;
+extern OSMesgQueue D_800F3110;
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
+extern s32 func_802BB2A0_de(OSMesgQueue *, void **, s32);
 extern s32 func_80200500_de(void);
 extern void func_80200538_de(s32);
 extern s32 func_802017E8_de(s32, s32, u32, s32);

@@ -13,7 +13,7 @@ extern void func_802BC36C_de(void *);
 extern void *func_802BC558_de(void *);
 extern void func_802BB750_de(void *);
 
-s32 func_802BB2A0_de(Queue_func_802BB2A0_de *queue, void **message, s32 block)
+s32 func_802BB2A0_de(OSMesgQueue *queue, void **message, s32 block)
 {
     u32 mask = func_802BCF30_de();
 
@@ -31,7 +31,7 @@ s32 func_802BB2A0_de(Queue_func_802BB2A0_de *queue, void **message, s32 block)
     }
     queue->first = (queue->first + 1) % queue->msgCount;
     queue->validCount--;
-    if (*(void **)queue->fullqueue != 0) {
+    if (*queue->fullqueue != 0) {
         func_802BB750_de(func_802BC558_de(&queue->fullqueue));
     }
     func_802BCF50_de(mask);

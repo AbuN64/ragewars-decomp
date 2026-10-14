@@ -172,7 +172,7 @@ struct func_8028E6D8_S2 {
 struct OSScClientWork;
 struct OSScClientWork {
     struct OSScClientWork *next;
-    Queue_func_802517B4_de *queue;
+    OSMesgQueue *queue;
 };
 
 struct ObjectLinks2E4;
@@ -182,7 +182,7 @@ struct Scene_func_8028FA60_de;
 struct View_func_8028FA60_de;
 struct View_func_8028FA60_de {
     char pad0[0x78];
-    struct Queue_func_802BB2A0_de messages;
+    struct OSMesgQueue messages;
     char pad90[0x2F4 - 0x90];
     struct Scene_func_8028FA60_de *current;
     struct Scene_func_8028FA60_de *next;
@@ -260,9 +260,9 @@ struct OSSched {
     char pad0[0x20];
     s16 retraceMessage; /* 0x20 */
     char pad22[0x40 - 0x22];
-    Queue_func_802517B4_de interruptQueue; /* 0x40 */
+    OSMesgQueue interruptQueue; /* 0x40 */
     char pad58[0x78 - 0x58];
-    Queue_func_802517B4_de commandQueue; /* 0x78 */
+    OSMesgQueue commandQueue; /* 0x78 */
     char pad90[0x2E0 - 0x90];
     struct OSScClientWork *clientList;
     struct OSScTask_s *audioListHead;

@@ -15,14 +15,14 @@
 
 
 
-extern OSPfs_func_80403E90_de D_8014D280[];
+extern OSPfs D_8014D280[];
 extern PakDirectory *D_800E2854;
 extern u8 D_8010BBB8;
 
 
 extern void func_80263740_de(void);
 extern void func_8026454C_de(void);
-extern s32 func_80446580_de(OSPfs_func_80403E90_de *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
+extern s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
 extern void func_80404018_de(s32 ch);
 
 s32 func_80404858_de(s32 ch, s32 index) {

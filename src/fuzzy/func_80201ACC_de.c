@@ -1,7 +1,6 @@
 #include "types.h"
 
-typedef struct RingQueue RingQueue;
-typedef struct Queue_func_802BB2A0_de Queue_func_802BB2A0_de;
+typedef struct OSMesgQueue OSMesgQueue;
 typedef struct ControllerRequest {
     u32 header;
     u32 status;
@@ -10,15 +9,15 @@ typedef struct ControllerRequest {
     u32 argument0;
     u32 argument1;
     u32 argument2;
-    Queue_func_802BB2A0_de *reply;
+    OSMesgQueue *reply;
 } ControllerRequest;
 
 extern s32 D_800C8144_de;
-extern RingQueue D_800F2F40;
-extern Queue_func_802BB2A0_de D_800F3110;
+extern OSMesgQueue D_800F2F40;
+extern OSMesgQueue D_800F3110;
 extern void func_802016FC_de(u32 mask);
-extern s32 func_802BB420_de(RingQueue *, void *, s32);
-extern s32 func_802BB2A0_de(Queue_func_802BB2A0_de *, void **, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, void *, s32);
+extern s32 func_802BB2A0_de(OSMesgQueue *, void **, s32);
 
 void *func_80201ACC_de(void) {
     ControllerRequest request;

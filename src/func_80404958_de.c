@@ -14,7 +14,7 @@ extern u8 *D_800E25C4[], *D_800E25C4[];
 
 
 
-extern OSPfs_func_80403E90_de D_8014D280[];
+extern OSPfs D_8014D280[];
 extern u8 D_8010BBB8;
 
 extern char D_800DCCD0[];
@@ -30,7 +30,7 @@ extern void func_80263740_de(void);
 extern void func_8026454C_de(void);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern s32 func_80265444_de(void *a, void *b, s32 size);
-extern s32 func_80447AF0_de(OSPfs_func_80403E90_de *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
+extern s32 func_80447AF0_de(OSPfs *pfs, s32 file_no, s32 flag, s32 offset, s32 size, void *data);
 extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 extern s32 func_80404858_de(s32 ch, s32 index);

@@ -5,7 +5,7 @@
 
 /* Single-message queue used by the acquire/release helpers. */
 typedef struct MessageSemaphore {
-    Queue_func_802517B4_de queue;
+    OSMesgQueue queue;
     s32 message;
 } MessageSemaphore;
 extern s32 func_802A03F4_de(u8 *arg0, u8 *arg1);

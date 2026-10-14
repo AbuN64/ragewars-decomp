@@ -5,13 +5,13 @@
 #include "span_1000/code_802508E0.h"
 #include "types.h"
 
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 extern s32 D_800C3EA8_de;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern struct Shape_func_802BC570_de *func_802548B8_de(s32, s32, u32, s32 *);
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 extern void func_802511AC_de(s32);
 extern s32 func_80254B58_de(s32, s32, s32);
 extern void func_802515F0_de(s32, s32);

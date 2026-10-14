@@ -4,12 +4,12 @@
 #include "span_1000/code_802508E0.h"
 #include "types.h"
 
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern struct Shape_typemap_165 *func_802548B8_de(s32, s32, u32, void *);
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 
 struct Shape_typemap_165 *func_8025343C_de(s32 arg0, s32 arg1, u32 arg2, void *arg3) {
     struct Shape_typemap_165 *var_s0;
@@ -46,7 +46,7 @@ struct Shape_typemap_165 *func_8025343C_de(s32 arg0, s32 arg1, u32 arg2, void *a
     return var_s0;
 }
 
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 extern s8 D_801051A0;
 
 extern u32 func_802BCF30_de(void);
@@ -55,7 +55,7 @@ extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);
 extern s32 func_80255630_de(s8 *, void *, s32);
 extern void func_80254C70_de(s32, struct Shape_typemap_165 *);
 extern void func_80254AD0_de(s32, struct Shape_typemap_165 *);
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 
 struct Shape_typemap_165 *func_80253530_de(void *arg0, void *arg1, s32 arg2) {
     struct Shape_typemap_165 *var_s0;
@@ -99,12 +99,12 @@ struct Shape_typemap_165 *func_80253530_de(void *arg0, void *arg1, s32 arg2) {
     return var_s0;
 }
 
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern void func_80254DA4_de(void *, Node80253610 *);
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 
 void func_80253670_de(void *arg0, Node80253610 *arg1) {
     s32 temp_v1;

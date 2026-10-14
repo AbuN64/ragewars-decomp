@@ -201,7 +201,7 @@ extern s32 D_80100560;
 /* Resource-loader thread, its request queue, message slots and stack. */
 typedef struct ResourceLoadWorker {
     u8 thread[0x230];
-    struct RingQueue requests;
+    struct OSMesgQueue requests;
     s32 messages[128];
     u8 stack[0x1000];
 } ResourceLoadWorker;

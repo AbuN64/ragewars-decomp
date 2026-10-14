@@ -19,8 +19,8 @@ s32 func_80257DD4_de(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 arg4, s32 arg
     s32 sp24;
     s32 sp28;
     s32 sp2C;
-    Queue_func_802BB2A0_de *temp_s0;
-    RingQueue *temp_s0_2;
+    OSMesgQueue *temp_s0;
+    OSMesgQueue *temp_s0_2;
     s32 *var_a0_2;
     s32 *var_a0_3;
     s32 *var_a0_4;

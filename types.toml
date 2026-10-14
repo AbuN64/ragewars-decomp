@@ -2983,10 +2983,10 @@ schema = 1
 "func_802BB008_eu" = { evidence = "authored", signature = "void func_802BB008_eu(void)" }
 "func_802BB060_de" = { evidence = "landed", signature = "int func_802BB060_de(u32 arg0, u32 *arg1)" }
 "func_802BB0F0_de" = { evidence = "landed", signature = "int func_802BB0F0_de(u32 arg0, u32 arg1)" }
-"func_802BB160_de" = { evidence = "landed", signature = "s32 func_802BB160_de(Queue_func_802517B4_de *arg0, void *arg1, s32 arg2)" }
-"func_802BB2A0_de" = { evidence = "landed", signature = "s32 func_802BB2A0_de(Queue_func_802BB2A0_de *queue, void **message, s32 block)" }
+"func_802BB160_de" = { evidence = "landed", signature = "s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2)" }
+"func_802BB2A0_de" = { evidence = "landed", signature = "s32 func_802BB2A0_de(OSMesgQueue *queue, void **message, s32 block)" }
 "func_802BB3D0_de" = { evidence = "landed", signature = "void func_802BB3D0_de(s32 arg0)" }
-"func_802BB420_de" = { evidence = "landed", signature = "s32 func_802BB420_de(RingQueue *queue, s32 entry, s32 mode)" }
+"func_802BB420_de" = { evidence = "landed", signature = "s32 func_802BB420_de(OSMesgQueue *queue, s32 entry, s32 mode)" }
 "func_802BB550_de" = { evidence = "landed", signature = "void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2)" }
 "func_802BB5F0_de" = { evidence = "landed", signature = "void func_802BB5F0_de(OSThread_s_func_802BB5F0_de *t, s32 pri)" }
 "func_802BB6C0_de" = { evidence = "landed", signature = "int func_802BB6C0_de(Node802C07B0 *node, u64 arg1, u64 arg2, void *arg3, void *arg4)" }
@@ -10390,7 +10390,7 @@ schema = 1
 "ControllerConnectionSample" = { declaration = "typedef struct ControllerConnectionSample { u16 reserved; u8 connectionStatus; u8 flags; } __attribute__((aligned(4))) ControllerConnectionSample;", evidence = "authored" }
 "ControllerProfile" = { declaration = "struct ControllerProfile { u8 padding000[4]; s8 port; u8 padding005[0x18 - 5]; s32 inputButtons; ControllerConnectionSample inputConnection; s32 inputHistory[3]; u8 padding02C[0xAC - 0x2C]; s32 previousButtons; s32 buttons; ControllerConnectionSample connection; s32 history[2]; u32 buttonState; s8 stickX; s8 stickY; s8 previousStickX; s8 previousStickY; u8 padding0C8[4]; s32 mode; u8 padding0D0[0x224 - 0xD0]; };", evidence = "authored" }
 "ControllerRecAtC7" = { declaration = "struct ControllerRecAtC7 { char pad0[0xC6]; s8 x; s8 y; };", evidence = "authored" }
-"ControllerRequest" = { declaration = "typedef struct ControllerRequest { u32 header; u32 status; u32 reserved; u32 command; s32 argument0; u32 argument1; s32 argument2; Queue_func_802BB2A0_de *reply; } ControllerRequest;", evidence = "authored" }
+"ControllerRequest" = { declaration = "typedef struct ControllerRequest { u32 header; u32 status; u32 reserved; u32 command; s32 argument0; u32 argument1; s32 argument2; OSMesgQueue *reply; } ControllerRequest;", evidence = "authored" }
 "ControllerResponse" = { declaration = "typedef union ControllerResponse { void *message; s32 status; } ControllerResponse;", evidence = "authored" }
 "Controller_func_80259C5C_de" = { declaration = "typedef struct Controller_func_80259C5C_de Controller_func_80259C5C_de;", evidence = "authored" }
 "Controls" = { declaration = "struct Controls { char pad0[0x80]; s8 mode; char pad81[0x94 - 0x81]; u8 team; u8 active; };", evidence = "authored" }
@@ -11096,7 +11096,7 @@ schema = 1
 "MeshMaterial" = { declaration = "typedef struct MeshMaterial { s32 flags; s16 renderMode; u8 mode; u8 reserved7; s32 texture; u8 reservedC[4]; u8 primaryColor[4]; u8 secondaryColor[4]; u16 width; u16 height; } MeshMaterial;", evidence = "authored" }
 "Message" = { declaration = "struct Message { u8 padding000[4]; struct Message *next; u8 padding008[4]; f32 size; f32 alpha; s32 kind; s32 timer; s32 target; s32 pad20; u8 *text; s32 pad28; s32 pad2C; f32 x; f32 y; f32 scaleX; f32 scaleY; };", evidence = "authored" }
 "MessageBuffer" = { declaration = "typedef struct MessageBuffer { s32 *allocation; s32 first; s32 count; } MessageBuffer;", evidence = "authored" }
-"MessageSemaphore" = { declaration = "typedef struct MessageSemaphore { Queue_func_802517B4_de queue; s32 message; } MessageSemaphore;", evidence = "authored" }
+"MessageSemaphore" = { declaration = "typedef struct MessageSemaphore { OSMesgQueue queue; s32 message; } MessageSemaphore;", evidence = "authored" }
 "Message_func_802AF150_de" = { declaration = "struct Message_func_802AF150_de { s16 type; char pad[14]; } __attribute__((aligned(4)));", evidence = "authored" }
 "Messages" = { declaration = "typedef struct Messages Messages;", evidence = "authored" }
 "Meter" = { declaration = "struct Meter { s32 amount; s32 done; s32 falling; struct Resource_func_80419E54_de *bar; };", evidence = "authored" }
@@ -11218,13 +11218,12 @@ schema = 1
 "OSIoMesg_func_802BA350_de" = { declaration = "typedef struct OSIoMesg_func_802BA350_de OSIoMesg_func_802BA350_de;", evidence = "authored" }
 "OSPfs" = { declaration = "struct OSPfs { int status; struct OSMesgQueue *queue; int channel; u8 id[32]; u8 label[32]; int version; int dir_size; int inode_table; int minode_table; int dir_table; int inode_start_page; u8 banks; u8 activebank; };", evidence = "authored" }
 "OSPfsState" = { declaration = "struct OSPfsState { u32 file_size; u32 game_code; u16 company_code; char ext_name[4]; char game_name[16]; };", evidence = "authored" }
-"OSPfs_func_80403E90_de" = { declaration = "typedef struct OSPfs_func_80403E90_de OSPfs_func_80403E90_de;", evidence = "authored" }
 "OSPiHandle_s" = { declaration = "typedef struct OSPiHandle_s OSPiHandle_s;", evidence = "authored" }
 "OSPiHandle_s_func_802B93B0_de" = { declaration = "typedef struct OSPiHandle_s_func_802B93B0_de OSPiHandle_s_func_802B93B0_de;", evidence = "authored" }
 "OSPifRam" = { declaration = "struct OSPifRam { u32 ramarray[15]; u32 pifstatus; };", evidence = "authored" }
-"OSScClientWork" = { declaration = "struct OSScClientWork { struct OSScClientWork *next; Queue_func_802517B4_de *queue; };", evidence = "authored" }
+"OSScClientWork" = { declaration = "struct OSScClientWork { struct OSScClientWork *next; OSMesgQueue *queue; };", evidence = "authored" }
 "OSScTask_s" = { declaration = "struct OSScTask_s { struct OSScTask_s *next; u32 state; u32 flags; void *framebuffer; struct { s32 type; } list; };", evidence = "authored" }
-"OSSched" = { declaration = "struct OSSched { char pad0[0x20]; s16 retraceMessage; char pad22[0x40 - 0x22]; Queue_func_802517B4_de interruptQueue; char pad58[0x78 - 0x58]; Queue_func_802517B4_de commandQueue; char pad90[0x2E0 - 0x90]; struct OSScClientWork *clientList; struct OSScTask_s *audioListHead; struct OSScTask_s *gfxListHead; struct OSScTask_s *audioListTail; struct OSScTask_s *gfxListTail; struct OSScTask_s *curRSPTask; struct OSScTask_s *curRDPTask; u32 frameCount; s32 doAudio; };", evidence = "authored" }
+"OSSched" = { declaration = "struct OSSched { char pad0[0x20]; s16 retraceMessage; char pad22[0x40 - 0x22]; OSMesgQueue interruptQueue; char pad58[0x78 - 0x58]; OSMesgQueue commandQueue; char pad90[0x2E0 - 0x90]; struct OSScClientWork *clientList; struct OSScTask_s *audioListHead; struct OSScTask_s *gfxListHead; struct OSScTask_s *audioListTail; struct OSScTask_s *gfxListTail; struct OSScTask_s *curRSPTask; struct OSScTask_s *curRDPTask; u32 frameCount; s32 doAudio; };", evidence = "authored" }
 "OSTask" = { declaration = "union OSTask { OSTask_t t; long long force_structure_alignment; };", evidence = "authored" }
 "OSTask_t" = { declaration = "struct OSTask_t { u32 type; u32 flags; u64 *ucode_boot; u32 ucode_boot_size; u64 *ucode; u32 ucode_size; u64 *ucode_data; u32 ucode_data_size; u64 *dram_stack; u32 dram_stack_size; u64 *output_buff; u64 *output_buff_size; u64 *data_ptr; u32 data_size; u64 *yield_data_ptr; u32 yield_data_size; };", evidence = "authored" }
 "OSThreadContext" = { declaration = "typedef struct OSThreadContext OSThreadContext;", evidence = "authored" }
@@ -11651,7 +11650,7 @@ schema = 1
 "PakNoteTextEntry" = { declaration = "typedef struct PakNoteTextEntry PakNoteTextEntry;", evidence = "authored" }
 "PakNotesMenu" = { declaration = "typedef struct PakNotesMenu PakNotesMenu;", evidence = "authored" }
 "PakNotesMenuItem" = { declaration = "typedef struct PakNotesMenuItem PakNotesMenuItem;", evidence = "authored" }
-"PakQueueState" = { declaration = "typedef struct PakQueueState { s8 status; char reserved1[7]; Queue_func_802517B4_de queue; } PakQueueState;", evidence = "authored" }
+"PakQueueState" = { declaration = "typedef struct PakQueueState { s8 status; char reserved1[7]; OSMesgQueue queue; } PakQueueState;", evidence = "authored" }
 "PakRecord" = { declaration = "struct PakRecord { u8 present; char pad[7]; char pak[0x68]; };", evidence = "authored" }
 "PakSaveContext" = { declaration = "typedef struct PakSaveContext PakSaveContext;", evidence = "authored" }
 "PakSavePakSlot" = { declaration = "typedef struct PakSavePakSlot PakSavePakSlot;", evidence = "authored" }
@@ -11807,9 +11806,7 @@ schema = 1
 "Queue" = { declaration = "struct Queue { char pad[0x14]; s32 items[4]; };", evidence = "authored" }
 "QueueEntry" = { declaration = "typedef struct QueueEntry QueueEntry;", evidence = "authored" }
 "QueueRec" = { declaration = "typedef struct QueueRec QueueRec;", evidence = "authored" }
-"Queue_func_802517B4_de" = { declaration = "struct Queue_func_802517B4_de { void **head; s32 unk04; s32 count; s32 index; s32 capacity; void **entries; };", evidence = "authored" }
-"Queue_func_802BB2A0_de" = { declaration = "typedef struct Queue_func_802BB2A0_de Queue_func_802BB2A0_de;", evidence = "authored" }
-"RingQueue" = { declaration = "typedef struct RingQueue RingQueue;", evidence = "authored" }
+"OSMesgQueue" = { declaration = "struct OSMesgQueue { void **mtqueue; void **fullqueue; s32 validCount; s32 first; s32 msgCount; void **msg; };", evidence = "authored" }
 "Race" = { declaration = "typedef struct Race Race;", evidence = "authored" }
 "RaceHeader" = { declaration = "typedef struct RaceHeader { s32 music; char pad4[0x1C]; IntrusiveList views; u32 lastMode; s32 layoutTimer; char pad3C[4]; } RaceHeader;", evidence = "authored" }
 "RaceHeader_size_check" = { declaration = "typedef char RaceHeader_size_check[(sizeof(RaceHeader) == 0x40) ? 1 : -1];", evidence = "authored" }
@@ -11940,8 +11937,8 @@ schema = 1
 "ResourceEntry" = { declaration = "typedef struct ResourceEntry ResourceEntry;", evidence = "authored" }
 "ResourceFadeDefinition" = { declaration = "struct ResourceFadeDefinition { u8 reserved0[0xE]; s8 nearValue; s8 farValue; u8 reserved10[0x14]; u32 threshold; };", evidence = "authored" }
 "ResourceLoadState" = { declaration = "typedef struct ResourceLoadState { s32 handle; s32 state4; s32 state8; } ResourceLoadState;", evidence = "authored" }
-"ResourceLoadWorker" = { declaration = "typedef struct ResourceLoadWorker { u8 thread[0x230]; struct RingQueue requests; s32 messages[128]; u8 stack[0x1000]; } ResourceLoadWorker;", evidence = "authored" }
-"ResourceLockState" = { declaration = "typedef struct ResourceLockState { s32 slot; u8 reserved4[0xB98 - 4]; Queue_func_802517B4_de waitQueue; } ResourceLockState;", evidence = "authored" }
+"ResourceLoadWorker" = { declaration = "typedef struct ResourceLoadWorker { u8 thread[0x230]; struct OSMesgQueue requests; s32 messages[128]; u8 stack[0x1000]; } ResourceLoadWorker;", evidence = "authored" }
+"ResourceLockState" = { declaration = "typedef struct ResourceLockState { s32 slot; u8 reserved4[0xB98 - 4]; OSMesgQueue waitQueue; } ResourceLockState;", evidence = "authored" }
 "ResourceManagerState" = { declaration = "struct ResourceManagerState { s32 active; s32 count; };", evidence = "authored" }
 "ResourceObject23" = { declaration = "typedef struct ResourceObject23 { s8 pad0; s8 type; char pad2[0x50-2]; s32 model; s32 loadedType; s32 resourceName; s32 resourceSize; CachedResource *blockNode; } ResourceObject23;", evidence = "authored" }
 "ResourceOwner" = { declaration = "typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;", evidence = "authored" }

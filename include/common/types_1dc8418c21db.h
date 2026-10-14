@@ -353,15 +353,6 @@ struct func_80275120_S1 {
     float unkC;
 };
 
-struct Queue_func_802517B4_de;
-struct Queue_func_802517B4_de {
-    void **head;
-    s32 unk04;
-    s32 count;
-    s32 index;
-    s32 capacity;
-    void **entries;
-};
 
 typedef signed int ( *Handler802A2B50)(void *, signed int, signed int, signed int, signed int);
 
@@ -752,8 +743,7 @@ struct func_8024C864_S1 {
     f32 unk8;
 };
 
-struct Queue_func_802517B4_de;
-typedef struct Queue_func_802517B4_de Queue_func_802517B4_de;
+struct OSMesgQueue;
 
 struct Desc;
 struct Desc {
@@ -3216,8 +3206,7 @@ typedef struct func_802077F4_S4 func_802077F4_S4;
 struct func_80204BB4_S1;
 typedef struct func_80204BB4_S1 func_80204BB4_S1;
 
-struct RingQueue;
-typedef struct RingQueue RingQueue;
+struct OSMesgQueue;
 
 struct func_802B7EB0_S1;
 typedef struct func_802B7EB0_S1 func_802B7EB0_S1;
@@ -3243,15 +3232,6 @@ typedef struct func_802428C0_S2 func_802428C0_S2;
 struct ObjRecAt28V2;
 typedef struct ObjRecAt28V2 ObjRecAt28V2;
 
-struct RingQueue;
-struct RingQueue {
-    s32 *state;
-    s32 unknown4;
-    s32 count;
-    s32 start;
-    s32 capacity;
-    s32 *entries;
-};
 
 struct func_80272908_S2;
 typedef struct func_80272908_S2 func_80272908_S2;

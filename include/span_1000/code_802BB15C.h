@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BB15C_H
 #define UNBAKE_SPAN_1000_CODE_802BB15C_H
 #include "types.h"
+#include "span_1000/code_802B7B80.h"
 
 extern char D_800CCC30[];
 extern int D_8000030C;
@@ -15,10 +16,9 @@ struct Thread {
     u16 state;
 };
 
-struct Queue_func_802BB2A0_de;
-typedef struct Queue_func_802BB2A0_de Queue_func_802BB2A0_de;
+struct OSMesgQueue;
 
-extern s32 func_802BB2A0_de(Queue_func_802BB2A0_de *queue, void **message, s32 block);
+extern s32 func_802BB2A0_de(OSMesgQueue *queue, void **message, s32 block);
 
 extern int func_802BB0F0_de(unsigned int devAddr, unsigned int data);
 
@@ -41,14 +41,5 @@ typedef struct Thread Thread;
 
 extern void func_802BB3D0_de(s32 arg0);
 
-struct Queue_func_802BB2A0_de;
-struct Queue_func_802BB2A0_de {
-    void *mtqueue;
-    void *fullqueue;
-    s32 validCount;
-    s32 first;
-    s32 msgCount;
-    void **msg;
-};
 
 #endif

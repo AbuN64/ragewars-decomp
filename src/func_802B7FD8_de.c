@@ -4,7 +4,6 @@
 /* osMotorInit, drafted from ultralib src/io/motor.c (the branch before 2.0J) with its static
    _MakeMotorData, which this library inlines: _MotorStartData, _motorstartbuf, _MotorStopData and _motorstopbuf are
    D_8014D4C0, D_8014D5C0, D_8014D5E0 and D_8014D6E0, and __osMotorinitialized is D_800D8380. */
-typedef struct OSMesgQueue OSMesgQueue;
 extern OSPifRam D_8014D4C0[4];
 extern u8 D_8014D5C0[32];
 extern OSPifRam D_8014D5E0[4];

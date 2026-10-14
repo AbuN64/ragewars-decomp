@@ -4,8 +4,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-struct OSPfs_func_80403E90_de;
-typedef struct OSPfs_func_80403E90_de OSPfs_func_80403E90_de;
 
 struct EntryRecAt0V3;
 struct EntryRecAt0V3 {
@@ -111,10 +109,6 @@ struct PakDirectory {
 
 extern f32 func_80403C98_de(f32 from, f32 to, f32 weight);
 
-struct OSPfs_func_80403E90_de;
-struct OSPfs_func_80403E90_de {
-    char pad[0x68];
-};
 
 struct Menu_func_80403BE0_de;
 typedef struct Menu_func_80403BE0_de Menu_func_80403BE0_de;

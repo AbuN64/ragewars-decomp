@@ -11,7 +11,7 @@ typedef struct ControllerRequest {
     s32 argument0;
     u32 argument1;
     s32 argument2;
-    Queue_func_802BB2A0_de *reply;
+    OSMesgQueue *reply;
 } ControllerRequest;
 
 typedef union ControllerResponse {

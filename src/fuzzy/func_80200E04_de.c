@@ -3,10 +3,10 @@
 #include "span_1000/code_802BB15C.h"
 extern s32 D_800C8140_de;
 extern func_802BDDC0_S1 D_800F2CE0;
-extern Queue_func_802BB2A0_de D_800F2CC0;
+extern OSMesgQueue D_800F2CC0;
 extern void func_80200CA0_de(u32, u8);
 extern s32 func_802B8CF0_de(void *, s32, s32, s32, s32, s32, s32);
-extern s32 func_802BB2A0_de(Queue_func_802BB2A0_de *, void **, s32);
+extern s32 func_802BB2A0_de(OSMesgQueue *, void **, s32);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
  * and falling back to byte/word writes if the DMA request is unavailable. */

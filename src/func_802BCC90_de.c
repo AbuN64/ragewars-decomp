@@ -37,11 +37,11 @@ void func_802BCC90_de(void) {
 
 extern Ctx D_80149B50;
 extern s32 D_800D5268_de;
-extern void *func_802BC558_de(RingQueue *arg0, RingQueue *arg1, Ctx *arg2);
+extern void *func_802BC558_de(OSMesgQueue *arg0, OSMesgQueue *arg1, Ctx *arg2);
 extern void func_802BC508_de(void *arg0, void *arg1);
 
 void func_802BCD64_de(void) {
-    RingQueue *node;
+    OSMesgQueue *node;
     s32 a0;
     s32 v1;
     s32 v0;
@@ -49,14 +49,14 @@ void func_802BCD64_de(void) {
 
     node = D_80149B50.cur;
     if (node != 0) {
-        a0 = node->count;
-        v1 = node->capacity;
+        a0 = node->validCount;
+        v1 = node->msgCount;
         if (a0 < v1) {
-            v0 = node->start + a0;
+            v0 = node->first + a0;
             rem = v0 % v1;
-            node->entries[rem] = D_80149B50.f4;
-            node->count = node->count + 1;
-            if (*node->state != 0) {
+            node->msg[rem] = D_80149B50.f4;
+            node->validCount = node->validCount + 1;
+            if (*node->mtqueue != 0) {
                 func_802BC508_de(&D_800D5268_de, func_802BC558_de(node, node, &D_80149B50));
             }
         }

@@ -59,10 +59,10 @@ extern s32 D_800CD8AC_de;
 
 
 s32 func_80255228_de(s32 *arg0) {
-    if (((ResourceLoadWorker *)arg0)->requests.count != 0) {
+    if (((ResourceLoadWorker *)arg0)->requests.validCount != 0) {
         do {
             func_802BB5F0_de(arg0, D_800CD8B8_de);
-        } while (((ResourceLoadWorker *)arg0)->requests.count != 0);
+        } while (((ResourceLoadWorker *)arg0)->requests.validCount != 0);
     }
     return func_802BB5F0_de(arg0, D_800CD8AC_de);
 }

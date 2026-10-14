@@ -9,10 +9,10 @@ extern void * *func_8025193C_de(s32, s32, s32, s32, s32, s32, void *, void *, s3
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern void func_80254990_de(void *, void *);
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 
 extern char D_800C3EA0_de;
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 
 
 void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {

@@ -8,7 +8,7 @@ struct ControllerProfile;
 typedef struct PakQueueState {
     s8 status;
     char reserved1[7];
-    Queue_func_802517B4_de queue;
+    OSMesgQueue queue;
 } PakQueueState;
 struct func_80264268_S1;
 struct func_80264268_S1 {

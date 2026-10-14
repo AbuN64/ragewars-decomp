@@ -8,7 +8,7 @@
 
 
 
-extern Queue_func_802517B4_de D_80101140;
+extern OSMesgQueue D_80101140;
 extern State802532E4 D_8010117C;
 
 
@@ -20,8 +20,8 @@ void func_80253344_de(s32 unused) {
     s32 var_s0;
     State802532E4 *temp_s1;
     void *queueAddress;
-    Queue_func_802BB2A0_de *receive;
-    RingQueue *send;
+    OSMesgQueue *receive;
+    OSMesgQueue *send;
 
     temp_s1 = &D_8010117C;
     var_s0 = 1;

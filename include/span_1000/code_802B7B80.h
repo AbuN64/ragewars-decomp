@@ -7,6 +7,15 @@ struct Block40 {
 };
 
 struct OSMesgQueue;
+typedef struct OSMesgQueue OSMesgQueue;
+struct OSMesgQueue {
+    void **mtqueue;
+    void **fullqueue;
+    s32 validCount;
+    s32 first;
+    s32 msgCount;
+    void **msg;
+};
 struct OSPfs;
 struct OSPfs {
     int status;

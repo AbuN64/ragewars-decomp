@@ -21,7 +21,7 @@ extern void func_802BB5F0_de(void *, s32);
 
 
 
-extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
+extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 
 
 extern s32 D_800CD700, D_800CD704, D_800CD8AC_de, D_800DE850, D_80106248;
@@ -84,7 +84,7 @@ void func_8028EACC_de(OSSched *sc) {
     }
     work = sc->clientList;
     while (work != 0) {
-        if (work->queue->count < 2) func_802BB420_de(work->queue, (s32)sc, 0);
+        if (work->queue->validCount < 2) func_802BB420_de(work->queue, (s32)sc, 0);
         work = work->next;
     }
     func_80263AF4_de();
