@@ -19,7 +19,7 @@ extern void func_80274870_de(f32 *, f32, f32);
 
 
 
-void func_8022DC44_de(Player *arg0, Actor_func_8024A7A0_de *arg1, s32 unused, s32 *flags) {
+void func_8022DC44_de(Player *arg0, LevelActor *arg1, s32 unused, s32 *flags) {
     s32 held;
     s32 crouch;
     f32 target;

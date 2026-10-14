@@ -122,10 +122,10 @@ static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
 }
 void func_8044C108_de(WorldRecAt1B40C *world, void ***handle) {
     void *node;
-    struct Shape_func_802764D4_de_2 *l0;
-    struct Shape_func_802764D4_de_2 *l1;
-    struct Shape_func_802764D4_de_2 *l2;
-    struct Shape_func_802764D4_de_2 *l3;
+    struct IntPair *l0;
+    struct IntPair *l1;
+    struct IntPair *l2;
+    struct IntPair *l3;
     s32 k;
     s32 i;
     s32 n;

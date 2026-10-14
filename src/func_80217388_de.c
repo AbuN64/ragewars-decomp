@@ -26,7 +26,7 @@ void func_80217388_de(void *arg0, void *arg1) {
         owner = arg0;
         break;
     case 0:
-        owner = (void *)((Actor_func_8024A7A0_de *)arg0)->resourceFlags;
+        owner = (void *)((LevelActor *)arg0)->resourceFlags;
         break;
     }
 

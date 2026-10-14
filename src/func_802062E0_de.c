@@ -32,7 +32,7 @@ extern SpawnDispatchActor *func_8028FFD0_de(char *, void *, s32, Vec3, Triple, s
 
 
 
-void func_802062E0_de(Actor_func_8024A7A0_de *actor, ActorMotionState *owner, Params params, s32 kind) {
+void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params, s32 kind) {
     SpawnDispatchActor *node;
     Settings *settings;
 

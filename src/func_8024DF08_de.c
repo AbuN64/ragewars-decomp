@@ -10,7 +10,7 @@
 
 
 s32 func_8024DF08_de(void *arg0) {
-    void *temp_a1 = ((Actor_func_8024A7A0_de *)arg0)->definition;
+    void *temp_a1 = ((LevelActor *)arg0)->definition;
     s32 temp_v1 = ((ModelBlend *)temp_a1)->kind;
 
     if (temp_v1 != 1) {
@@ -21,7 +21,7 @@ s32 func_8024DF08_de(void *arg0) {
     }
     {
         s32 var_v1 = 0;
-        if (((Actor_func_8024A7A0_de *)arg0)->active <= 0 || (((ModelBlend *)temp_a1)->collisionOptions & 2)) {
+        if (((LevelActor *)arg0)->active <= 0 || (((ModelBlend *)temp_a1)->collisionOptions & 2)) {
             var_v1 = 1;
         }
         return var_v1;

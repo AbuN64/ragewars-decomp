@@ -40,7 +40,7 @@ s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     position = *(Vec3 *)entry;
     position.y += D_800C1D90_de[1];
 
-    if ((((Actor_func_8024A7A0_de *)arg1)->kind == 1) && (((Actor_func_8024A7A0_de *)arg1)->flags & 0x300000)) {
+    if ((((LevelActor *)arg1)->kind == 1) && (((LevelActor *)arg1)->flags & 0x300000)) {
         collision = D_801040D0;
     } else {
         first_test = func_8024DEE0_de(arg1);

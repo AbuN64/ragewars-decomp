@@ -22,7 +22,7 @@ extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 
 
 s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
-    Actor_func_8024A7A0_de *object;
+    LevelActor *object;
     Node_func_802A2FA4_de *node;
     Node_func_802A2FA4_de *next;
     f32 saved_step;

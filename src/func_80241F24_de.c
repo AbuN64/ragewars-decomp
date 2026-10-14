@@ -47,7 +47,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     void *entry;
     void *owner_data;
 
-    owner_data = &((Actor_func_8024A7A0_de *)owner)->position0;
+    owner_data = &((LevelActor *)owner)->position0;
     entry = owner->entries + 0x14;
     height = ((ShapeRecAt18V1 *)entry)->radius + func_8024D398_de(input);
     if (actor->movement.y > 0.0f) {
@@ -98,8 +98,8 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
                           bounds->corners[0].y, bounds->corners[4].y,
                           1, query, 1)) {
             actor->flags |= 8;
-            func_80271F34_de(&((Actor_func_8024A7A0_de *)input)->position1,
-                          &((Actor_func_8024A7A0_de *)input)->position1,
+            func_80271F34_de(&((LevelActor *)input)->position1,
+                          &((LevelActor *)input)->position1,
                           &actor->movement);
         }
     }

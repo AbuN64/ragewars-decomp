@@ -2,7 +2,7 @@
 #include "span_16E000/code_804379C8.h"
 /* Updates the two menu options and plays their change sounds. */
 
-extern struct Shape_func_802764D4_de_2 *D_800E58A4;
+extern struct IntPair *D_800E58A4;
 extern unsigned char D_801462E1[];
 extern int func_8041A6E0_de(int);
 extern void func_8025DF34_de(int);

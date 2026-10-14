@@ -53,11 +53,11 @@ void func_8021C9D8_de(void *arg0, void *arg1) {
     s32 value;
     Gfx *cmd;
 
-    pos = ((Actor_func_8024A7A0_de *)arg0)->position0;
-    pos.y += ((Actor_func_8024A7A0_de *)arg0)->eyeHeight;
+    pos = ((LevelActor *)arg0)->position0;
+    pos.y += ((LevelActor *)arg0)->eyeHeight;
     pos.y += func_8024D284_de(arg0) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
     func_8028C6D4_de(&D_8011FE88, &pos,
-                  &((Actor_func_8024A7A0_de *)arg0)->lighting[D_800D297C]);
+                  &((LevelActor *)arg0)->lighting[D_800D297C]);
 
     value = 0x66;
     if (D_801462E5 != 0) {
@@ -65,8 +65,8 @@ void func_8021C9D8_de(void *arg0, void *arg1) {
             (((Shared_ActorView *)arg0)->controls->transientFlag != 0)) {
             value = D_800CE47C;
         } else {
-            value = D_800CE430[((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg0)->definition)->body.header.character];
-            ((Actor_func_8024A7A0_de *)arg0)->field3 =
+            value = D_800CE430[((MovementDescriptor *)((LevelActor *)arg0)->definition)->body.header.character];
+            ((LevelActor *)arg0)->field3 =
                 ((Shared_ActorView *)arg0)->controls->playerId;
         }
     }

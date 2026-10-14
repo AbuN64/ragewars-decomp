@@ -146,7 +146,7 @@ struct func_80241250_S1 {
     f32 unk50;
 };
 
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 extern void func_802405FC_de(RenderSortRecord *left, RenderSortRecord *right);
 
 struct Plane;

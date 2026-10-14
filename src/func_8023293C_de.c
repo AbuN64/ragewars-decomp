@@ -28,7 +28,7 @@ void func_8023293C_de(void *arg0, void *arg1, void *arg2) {
     s32 one;
     s16 state;
 
-    actor = ((Actor_func_8024A7A0_de *)arg0)->controller;
+    actor = ((LevelActor *)arg0)->controller;
     resource = ((Actor_func_8022D290_de *)actor)->unk_0x05DC;
     result = -1;
     if (resource == 0) {
@@ -52,7 +52,7 @@ void func_8023293C_de(void *arg0, void *arg1, void *arg2) {
         result = ((Actor_func_8022D290_de *)actor)->unk_0x11F8;
     }
     func_8026DA4C_de(((Lookup *)arg2)->value,
-                  ((Actor_func_8024A7A0_de *)arg0)->fieldB4, 1,
+                  ((LevelActor *)arg0)->fieldB4, 1,
                   (char *)arg0 + (D_800D297C * 0x18 + 0x140), 0, result);
 }
 
@@ -83,7 +83,7 @@ void func_80232A48_de(void *arg0, void *arg1) {
     ((Dest *)arg1)->field138 = 0;
     ((Dest *)arg1)->field13C = 1;
     ((Dest *)arg1)->field12C = k;
-    ((Actor_func_8024A7A0_de *)arg0)->team = 0;
+    ((LevelActor *)arg0)->team = 0;
     ((Dest *)arg1)->field148 = 0;
     ((Dest *)arg1)->field144 = 1;
     ((Dest *)arg1)->field14C = 0;

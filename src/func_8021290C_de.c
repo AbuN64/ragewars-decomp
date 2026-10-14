@@ -14,7 +14,7 @@
 
 /** Reset the inner record via func_80209988_de, then override two of its fields. */
 void func_8021290C_de(void *arg0) {
-    Shared_ActorView *level1 = ((Actor_func_8024A7A0_de *)arg0)->controller;
+    Shared_ActorView *level1 = ((LevelActor *)arg0)->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
     func_80209988_de(inner);

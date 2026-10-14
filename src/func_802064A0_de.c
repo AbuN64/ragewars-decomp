@@ -23,8 +23,8 @@ void func_802064A0_de(void *arg0, void *arg1, Triple arg2,
 
     result = func_802800C0_de(&D_8011D8D0, arg0, arg0,
                            &((ActorMotionState *)arg1)->unk124, 0, arg6,
-                           ((Actor_func_8024A7A0_de *)arg0)->position1,
-                           ((Actor_func_8024A7A0_de *)arg0)->rotation,
+                           ((LevelActor *)arg0)->position1,
+                           ((LevelActor *)arg0)->rotation,
                            arg2, 0, -1, 0);
     ((ActorMotionState *)arg1)->unk128 -= result;
 }

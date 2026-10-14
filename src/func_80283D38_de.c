@@ -19,7 +19,7 @@ s32 func_80283D38_de(s32 arg0) {
 
 
 
-extern void func_80265E10_de(void *, void *, s32, s32, Vec3, struct Shape_func_802764D4_de_2);
+extern void func_80265E10_de(void *, void *, s32, s32, Vec3, struct IntPair);
 extern void func_80279B40_de(void *, s32, s8, s32);
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 
@@ -34,7 +34,7 @@ extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 
 
 void func_80283D50_de(void *arg0) {
-    struct Shape_func_802764D4_de_2 pair;
+    struct IntPair pair;
     s32 temp_a1;
     struct Shared_ParticleEvents *temp_v0;
     s32 var_a0;
@@ -78,7 +78,7 @@ void func_80283D50_de(void *arg0) {
 
 
 
-extern void func_80265E10_de(void *, void *, s32, s32, Vec3, struct Shape_func_802764D4_de_2);
+extern void func_80265E10_de(void *, void *, s32, s32, Vec3, struct IntPair);
 extern void func_80279B40_de(void *, s32, s8, s32);
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 
@@ -93,7 +93,7 @@ extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 
 
 void func_80283E58_de(void *arg0) {
-    struct Shape_func_802764D4_de_2 pair;
+    struct IntPair pair;
     s32 temp_a1;
     struct Shared_ParticleEvents *temp_v0;
     s32 var_a0;
@@ -137,7 +137,7 @@ void func_80283E58_de(void *arg0) {
 
 
 
-extern void func_80265E10_de(void *, void *, s32, s32, Vec3, struct Shape_func_802764D4_de_2);
+extern void func_80265E10_de(void *, void *, s32, s32, Vec3, struct IntPair);
 extern void func_80279B40_de(void *, s32, s8, s32);
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 
@@ -152,7 +152,7 @@ extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 
 
 void func_80283F60_de(void *arg0) {
-    struct Shape_func_802764D4_de_2 pair;
+    struct IntPair pair;
     s32 temp_a1;
     struct Shared_ParticleEvents *temp_v0;
     s32 var_a0;

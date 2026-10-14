@@ -137,7 +137,7 @@ void func_8028C60C_de(void *arg0) {
 
 
 
-extern struct Shape_func_802764D4_de_2 *func_8028FDB4_de(void *table, s32 index);
+extern struct IntPair *func_8028FDB4_de(void *table, s32 index);
 extern void func_802897B4_de(Owner_func_8028C6D4_de *owner, s32 time, Sample *sample, s32 *segment);
 extern void func_80289970_de(Sample *sample, s32 segment, s32 time, Block24 *out);
 

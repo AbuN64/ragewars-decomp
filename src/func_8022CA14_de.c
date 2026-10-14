@@ -42,13 +42,13 @@ void func_8022CA14_de(void *arg0, void *arg1) {
     if (D_8013B2BC == 0x1DB1) {
         scale = D_800C2D64_de;
     }
-    ((Actor_func_8024A7A0_de *)arg1)->position1.y =
-        scale * ((Resource_u1 *)((Actor_func_8024A7A0_de *)arg1)->definition)->value20;
+    ((LevelActor *)arg1)->position1.y =
+        scale * ((Resource_u1 *)((LevelActor *)arg1)->definition)->value20;
     result = func_8024E6A0_de(arg1);
     if (result != 0) {
         func_8024E6D8_de(result, &vector);
-        func_80271F34_de(&((Actor_func_8024A7A0_de *)arg1)->position1,
-                      &((Actor_func_8024A7A0_de *)arg1)->position1, &vector);
+        func_80271F34_de(&((LevelActor *)arg1)->position1,
+                      &((LevelActor *)arg1)->position1, &vector);
     }
 
     state = ((Shared_ControlView *)((Player *)arg0)->profile)->transientFlag;
@@ -133,8 +133,8 @@ transition:
     func_802227F4_de(arg0, arg1, 6);
     goto finish;
 scale_value:
-    ((Actor_func_8024A7A0_de *)arg1)->position1.y =
-        scale * ((Resource_u1 *)((Actor_func_8024A7A0_de *)arg1)->definition)->value20;
+    ((LevelActor *)arg1)->position1.y =
+        scale * ((Resource_u1 *)((LevelActor *)arg1)->definition)->value20;
 finish:
     func_8022CC34_de(arg0, arg1);
 }
@@ -160,12 +160,12 @@ void func_8022CC34_de(void *arg0, void *arg1) {
     if (!(((Player *)arg0)->flags660 & 0x8000)) {
         func_802233F0_de((s32)arg0, (s32)arg1, &D_800C94EC_de);
     }
-    if (((Actor_func_8024A7A0_de *)arg1)->position1.y <= 0.0f) {
+    if (((LevelActor *)arg1)->position1.y <= 0.0f) {
         if (func_8024E62C_de(arg1) != 0) {
             func_802227F4_de(arg0, arg1, 2);
         }
     }
-    if (((Actor_func_8024A7A0_de *)arg1)->position1.y <= 0.0f) {
+    if (((LevelActor *)arg1)->position1.y <= 0.0f) {
         if (func_8024E678_de(arg1, 0) < 0.0f) {
             if (-func_8024E678_de(arg1, 0) < D_800C2D78_de[0]) {
                 goto set_value;

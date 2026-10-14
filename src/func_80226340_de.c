@@ -114,8 +114,8 @@ void func_80226548_de(void *arg0, void *arg1) {
                     func_80271F68_de(&sp40, &((Shared_ActorView *)sp50)->position.vector, (Vec3 *)position);
                     sp54 = func_80271AA8_de(&sp40);
                     func_80274020_de(&sp54);
-                    func_80274020_de(&((Actor_func_8024A7A0_de *)arg1)->yaw);
-                    temp_f1 = ((Actor_func_8024A7A0_de *)arg1)->yaw;
+                    func_80274020_de(&((LevelActor *)arg1)->yaw);
+                    temp_f1 = ((LevelActor *)arg1)->yaw;
                     if (D_800C2B50_de < temp_f1) {
                         if (sp54 < D_800C2B54_de) {
                             sp54 += D_800C2B58_de;
@@ -126,12 +126,12 @@ void func_80226548_de(void *arg0, void *arg1) {
 positive:
                         temp_f1 = sp54;
                         if (D_800C2B5C_de < temp_f1 &&
-                            ((Actor_func_8024A7A0_de *)arg1)->yaw < D_800C2B60_de) {
-                            ((Actor_func_8024A7A0_de *)arg1)->yaw =
-                                ((Actor_func_8024A7A0_de *)arg1)->yaw + D_800C2B64_de;
+                            ((LevelActor *)arg1)->yaw < D_800C2B60_de) {
+                            ((LevelActor *)arg1)->yaw =
+                                ((LevelActor *)arg1)->yaw + D_800C2B64_de;
                         }
                     }
-                    func_80274870_de(&((Actor_func_8024A7A0_de *)arg1)->yaw, sp54, D_800C9FEC);
+                    func_80274870_de(&((LevelActor *)arg1)->yaw, sp54, D_800C9FEC);
                 }
             }
         }

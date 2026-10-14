@@ -42,18 +42,18 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
     f32 diff;
     char *light;
     s32 alpha;
-    if (((struct Actor_func_8024A7A0_de *)(obj))->model == 0 || func_8024E158_de() == 0 || (((struct Actor_func_8024A7A0_de *)(obj))->flags & 0x200000)) {
+    if (((struct LevelActor *)(obj))->model == 0 || func_8024E158_de() == 0 || (((struct LevelActor *)(obj))->flags & 0x200000)) {
         return;
     }
-    if (((struct Actor_func_8024A7A0_de *)(obj))->flags & 0x10000000) {
-        if (((struct Actor_func_8024A7A0_de *)(obj))->shadow == 0) {
+    if (((struct LevelActor *)(obj))->flags & 0x10000000) {
+        if (((struct LevelActor *)(obj))->shadow == 0) {
             ground = func_8024E650_de(obj, 0);
-            if (((struct Actor_func_8024A7A0_de *)(obj))->position0.y < ground) {
+            if (((struct LevelActor *)(obj))->position0.y < ground) {
                 return;
             }
-            diff = ((struct Actor_func_8024A7A0_de *)(obj))->position0.y - ground;
+            diff = ((struct LevelActor *)(obj))->position0.y - ground;
             height = (512.0f < diff) ? 512.0f : diff;
-            if ((((struct Actor_func_8024A7A0_de *)(obj))->shadow = func_802799C0_de(&D_8011FFB0, 1)) == 0) {
+            if ((((struct LevelActor *)(obj))->shadow = func_802799C0_de(&D_8011FFB0, 1)) == 0) {
                 return;
             }
             light = obj + (D_800D297C * 0x18 + 0x140);
@@ -72,7 +72,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             if (D_800D15E0 == 1) {
                 alpha = alpha * D_800D15F0 * 0.003921569f;
             }
-            ((struct Actor_func_8024A7A0_de *)(obj))->shadowAlpha = alpha;
+            ((struct LevelActor *)(obj))->shadowAlpha = alpha;
             dir.y = 1.0f;
             func_8027207C_de(&dir);
             if (RW_ABS(dir.y) < 0.15f) {
@@ -85,17 +85,17 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             }
             plane = ground + height * 0.9f;
             func_8027310C_de(projection, &dir, plane);
-            func_80273448_de(projection, -((struct Actor_func_8024A7A0_de *)(obj))->position0.x, -plane, -((struct Actor_func_8024A7A0_de *)(obj))->position0.z);
+            func_80273448_de(projection, -((struct LevelActor *)(obj))->position0.x, -plane, -((struct LevelActor *)(obj))->position0.z);
             scale = height * 0.003f + 1.0f;
             func_802735A8_de(projection, scale, scale, scale);
             func_80274244_de(obj + 0x5C, turn);
-            func_8026F620_de(((struct Actor_func_8024A7A0_de *)(obj))->shadow, projection, turn);
-            func_80273448_de(((struct Actor_func_8024A7A0_de *)(obj))->shadow, ((struct Actor_func_8024A7A0_de *)(obj))->position0.x, ground, ((struct Actor_func_8024A7A0_de *)(obj))->position0.z);
-            if (((struct Actor_func_8024A7A0_de *)(obj))->shadow == 0) {
+            func_8026F620_de(((struct LevelActor *)(obj))->shadow, projection, turn);
+            func_80273448_de(((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->position0.x, ground, ((struct LevelActor *)(obj))->position0.z);
+            if (((struct LevelActor *)(obj))->shadow == 0) {
                 return;
             }
         }
-        func_8024BA7C_de(obj, info, ((struct Actor_func_8024A7A0_de *)(obj))->shadow, ((struct Actor_func_8024A7A0_de *)(obj))->shadowAlpha);
+        func_8024BA7C_de(obj, info, ((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->shadowAlpha);
     } else {
         func_8024ADD0_de(obj, ((struct ActorRenderSettings *)(info))->shadowType, 0);
     }

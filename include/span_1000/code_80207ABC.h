@@ -63,9 +63,9 @@ struct func_80207ABC_S4 {
     f32 unk40;
 };
 
-struct Actor_func_8024A7A0_de;
+struct LevelActor;
 struct ActorMotionState;
-extern void func_80207FA0_de(struct Actor_func_8024A7A0_de *arg0, struct ActorMotionState *arg1);
+extern void func_80207FA0_de(struct LevelActor *arg0, struct ActorMotionState *arg1);
 
 struct func_80207BB8_S3;
 typedef struct func_80207BB8_S3 func_80207BB8_S3;

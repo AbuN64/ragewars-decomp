@@ -12,7 +12,7 @@ extern Triple D_801002B8;
 extern Vec3 D_801042C8;
 extern char D_8011D8D0;
 
-extern void func_80265E10_de(void *, void *, s32, s32, Triple, struct Shape_func_802764D4_de_2);
+extern void func_80265E10_de(void *, void *, s32, s32, Triple, struct IntPair);
 extern void func_80271818_de(struct Shape_typemap_165 *, Vec3 *);
 extern s32 func_802800C0_de(void *, void *, void *, s32, s32, s32, Vec3, struct Shape_typemap_165, Triple, s32, s32, s32);
 extern s32 func_8025DE54_de(s16, s32, s32, s32, s32, s32);
@@ -28,7 +28,7 @@ extern void func_80284570_de(void *, void *);
 
 
 void func_8027C4F0_de(Shared_Particle *arg0) {
-    struct Shape_func_802764D4_de_2 pair;
+    struct IntPair pair;
     struct Shape_typemap_165 rotation;
     Vec3 position;
     s32 temp_a1;
@@ -38,7 +38,7 @@ void func_8027C4F0_de(Shared_Particle *arg0) {
     s32 temp_s2;
     s32 sound;
     struct Shared_ParticleDesc *temp_s1;
-    struct Shape_func_802764D4_de_2 *temp_v0_2;
+    struct IntPair *temp_v0_2;
 
     switch (D_801042C4) {
     case 1:

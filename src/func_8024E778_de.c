@@ -6,7 +6,7 @@
 
 /** Return the low three mode bits when the record type is one. */
 int func_8024E778_de(void *arg0) {
-    Actor_func_8024A7A0_de *actor = arg0;
+    LevelActor *actor = arg0;
     if (actor->kind == 1) {
         return actor->motionState & 7;
     }

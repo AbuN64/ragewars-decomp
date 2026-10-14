@@ -313,12 +313,12 @@ extern void func_8025C578_de(void *arg0);
 extern int D_800CBB1C;
 
 struct ContextRecAt2BB8;
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 struct Track;
 struct Track {
     struct ContextRecAt2BB8 *unk0;
     s32 unk4;
-    struct Shape_func_802764D4_de_2 *unk8;
+    struct IntPair *unk8;
     void *unkC;
     s32 unk10;
     s32 unk14;

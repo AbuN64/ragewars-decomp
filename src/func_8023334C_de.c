@@ -52,14 +52,14 @@ extern s32 func_802301F4_de(void *, void *);
 void func_8023334C_de(void *arg0, void *arg1) {
     void *actor;
 
-    actor = ((Actor_func_8024A7A0_de *)arg0)->controller;
+    actor = ((LevelActor *)arg0)->controller;
     ((WeaponFireState *)arg1)->mode = 2;
     if (func_80222AA4_de(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
         ((Shared_ActorView *)actor)->nextWeapon = func_8022F96C_de(actor);
         return;
     }
 
-    if (((Actor_func_8024A7A0_de *)arg0)->animationTime >= D_800C3054_de) {
+    if (((LevelActor *)arg0)->animationTime >= D_800C3054_de) {
         if (func_8022B184_de(actor) == 0) {
             func_8022B984_de(actor);
         }

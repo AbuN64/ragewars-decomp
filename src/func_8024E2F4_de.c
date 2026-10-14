@@ -90,7 +90,7 @@ f32 func_8024E3C4_de(void *arg0) {
 f32 func_8024E420_de(void *arg0) {
     Resource_u1 *nested;
     if (*(u8 *)arg0 == 1) {
-        return ((Actor_func_8024A7A0_de *)arg0)->eyeHeight;
+        return ((LevelActor *)arg0)->eyeHeight;
     }
     nested = ((Actor_u1 *)arg0)->resource;
     if (nested->kind == 0) {

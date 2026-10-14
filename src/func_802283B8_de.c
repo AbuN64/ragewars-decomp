@@ -412,7 +412,7 @@ void func_80228AF4_de(void *arg0, ViewState *arg1) {
     x = (f32)(s32)(position * D_800C2BE0_de);
     scale_x = arg1->width / (f32)D_800E28D0;
     position -= x * ((D_800C7470_Pair *)&D_800C2BE0_de)->second;
-    scale_y = arg1->height / (f32)((struct Shape_func_802764D4_de_2 *)&D_800E28D0)->field_4;
+    scale_y = arg1->height / (f32)((struct IntPair *)&D_800E28D0)->field_4;
     if ((x < D_800C2BE8_de) && (position < D_800C2BEC_de) &&
         ((D_800CD730 % 15U) < 5U)) {
         return;
@@ -430,7 +430,7 @@ void func_80228AF4_de(void *arg0, ViewState *arg1) {
         }
     } else {
         center_x = (f32)D_800E28D0 * D_800C2C00_de[1];
-        center_y = (f32)(((struct Shape_func_802764D4_de_2 *)&D_800E28D0)->field_4 - 10) * D_800C2C00_de[1];
+        center_y = (f32)(((struct IntPair *)&D_800E28D0)->field_4 - 10) * D_800C2C00_de[1];
     }
 
     func_802A822C_de((s32)x, center_x - (scale_x * D_800C2C08_de),

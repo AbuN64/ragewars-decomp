@@ -25,7 +25,7 @@ extern Vector4f func_8024D728_de(char *);
 extern f32 func_80240A98_de(Probe *, f32, f32, f32, f32);
 extern void func_80270CD0_de(Vector4f *, f32, Vector4f *, Vector4f *);
 static inline s32 is_held(char *obj) {
-    return (*(u8 *)obj != 1) ? 0 : (((Actor_func_8024A7A0_de *)(obj))->flags & 1);
+    return (*(u8 *)obj != 1) ? 0 : (((LevelActor *)(obj))->flags & 1);
 }
 
 Vector4f func_8024D870_de(char *obj) {
@@ -43,17 +43,17 @@ Vector4f func_8024D870_de(char *obj) {
     f32 half;
     char *self;
 
-    if (((Actor_func_8024A7A0_de *)(obj))->model != 0 && is_held(obj) == 0) {
+    if (((LevelActor *)(obj))->model != 0 && is_held(obj) == 0) {
         if (*(u8 *)obj == 1) {
             self = obj;
-            if (((Actor_func_8024A7A0_de *)(obj))->motionState & 3) {
+            if (((LevelActor *)(obj))->motionState & 3) {
                 goto identity;
             }
-            if (((Actor_func_8024A7A0_de *)(obj))->flags & 0x300000) {
-                if (func_802757E4_de(((Actor_func_8024A7A0_de *)(obj))->model) != 0) {
+            if (((LevelActor *)(obj))->flags & 0x300000) {
+                if (func_802757E4_de(((LevelActor *)(obj))->model) != 0) {
                     goto identity;
                 }
-                func_80275C94_de(&normal, ((Actor_func_8024A7A0_de *)(obj))->model);
+                func_80275C94_de(&normal, ((LevelActor *)(obj))->model);
                 up.x = 0.0f;
                 up.y = 1.0f;
                 up.z = 0.0f;
@@ -66,14 +66,14 @@ Vector4f func_8024D870_de(char *obj) {
                 tilt.z = axis.z * D_80115DEC;
                 tilt.w = func_802B6560_de(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt = func_8024D728_de(obj);
-                sine = func_802B7130_de(((Actor_func_8024A7A0_de *)(self))->yaw);
-                cosine = func_802B6560_de(((Actor_func_8024A7A0_de *)(self))->yaw);
-                probe.dir = ((Actor_func_8024A7A0_de *)(self))->floorDirection;
-                probe.start.x = ((Actor_func_8024A7A0_de *)(self))->position0.x;
-                probe.start.y = ((Actor_func_8024A7A0_de *)(self))->floorHeight;
-                probe.start.z = ((Actor_func_8024A7A0_de *)(self))->position0.z;
-                slope = func_80240A98_de(&probe, ((Actor_func_8024A7A0_de *)(obj))->position0.x, ((Actor_func_8024A7A0_de *)(obj))->position0.z, ((Actor_func_8024A7A0_de *)(obj))->position0.x - sine,
-                                      ((Actor_func_8024A7A0_de *)(obj))->position0.z - cosine);
+                sine = func_802B7130_de(((LevelActor *)(self))->yaw);
+                cosine = func_802B6560_de(((LevelActor *)(self))->yaw);
+                probe.dir = ((LevelActor *)(self))->floorDirection;
+                probe.start.x = ((LevelActor *)(self))->position0.x;
+                probe.start.y = ((LevelActor *)(self))->floorHeight;
+                probe.start.z = ((LevelActor *)(self))->position0.z;
+                slope = func_80240A98_de(&probe, ((LevelActor *)(obj))->position0.x, ((LevelActor *)(obj))->position0.z, ((LevelActor *)(obj))->position0.x - sine,
+                                      ((LevelActor *)(obj))->position0.z - cosine);
                 slope = RW_MIN(slope, 25.0f) * 0.75f;
                 half = 0.5f;
                 angle = slope * half;

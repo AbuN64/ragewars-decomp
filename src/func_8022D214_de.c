@@ -9,7 +9,7 @@ extern void func_8044A07C_de(s32 arg0);
 
 
 void func_8022D214_de(void *arg0) {
-    Actor_func_8024A7A0_de *actor = arg0;
+    LevelActor *actor = arg0;
     Shared_ActorView *player = arg0;
     actor->flags &= 0xFF7FFFFF;
     player->stun = 0;

@@ -30,7 +30,7 @@ struct Shared_ActorView {
     u8 pad1DC[0x1F0 - 0x1DC];
     s32 frameValue; /* +0x1F0: src/func_8021B468.c */
     char pad1F4[0xF4];
-    Actor_func_8024A7A0_de weapon; /* 0x2E8: complete embedded weapon actor */
+    LevelActor weapon; /* 0x2E8: complete embedded weapon actor */
     s32 actorState; /* +0x5D0: src/func_8021B468.c */
     u32 mode; /* +0x5D4: src/func_8021B468.c */
     struct Shared_ControlView * controls; /* +0x5D8: src/func_8021B468.c */

@@ -16,7 +16,7 @@ void func_80442544_de(void *);                    /* extern */
 
 
 extern s32 D_800E28D0, D_800E28D4;
-extern struct Shape_func_802764D4_de_2 D_80103220;
+extern struct IntPair D_80103220;
 
 
 

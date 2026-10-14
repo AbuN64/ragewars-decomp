@@ -39,8 +39,8 @@ Vector4f func_8024796C_de(char *actor) {
     f32 angle;
     f32 sine;
 
-    if (((Actor_func_8024A7A0_de *)actor)->flags & 0x300000) {
-        player = ((Actor_func_8024A7A0_de *)actor)->controller;
+    if (((LevelActor *)actor)->flags & 0x300000) {
+        player = ((LevelActor *)actor)->controller;
         weapon = ((Shared_ActorView *)player)->message;
         if (weapon != 0) {
             angle = 1.5707964f;
@@ -60,33 +60,33 @@ Vector4f func_8024796C_de(char *actor) {
             yaw.w = func_802B6560_de(angle);
             func_80274098_de(&result, &yaw, &own);
         }
-    } else if (*((Actor_func_8024A7A0_de *)actor)->definition == 4) {
-        sine = func_802B7130_de(((Actor_func_8024A7A0_de *)actor)->pitch * 0.5f);
+    } else if (*((LevelActor *)actor)->definition == 4) {
+        sine = func_802B7130_de(((LevelActor *)actor)->pitch * 0.5f);
         pitch.x = sine;
         pitch.y = 0.0f;
         pitch.z = 0.0f;
-        angle = ((Actor_func_8024A7A0_de *)actor)->pitch * 0.5f;
+        angle = ((LevelActor *)actor)->pitch * 0.5f;
         D_80115DEC = sine;
         pitch.w = func_802B6560_de(angle);
-        sine = func_802B7130_de((((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f);
+        sine = func_802B7130_de((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
-        angle = (((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f;
+        angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
         yaw.w = func_802B6560_de(angle);
         func_80274098_de(&both, &pitch, &yaw);
         func_80203848_de(&base, actor, (char *)actor + 0x170);
         func_80274098_de(&result, &both, &base);
     } else {
-        sine = func_802B7130_de((((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f);
+        sine = func_802B7130_de((((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f);
         yaw.x = 0.0f;
         yaw.y = sine;
         yaw.z = 0.0f;
-        angle = (((Actor_func_8024A7A0_de *)actor)->yaw + 3.1415927f) * 0.5f;
+        angle = (((LevelActor *)actor)->yaw + 3.1415927f) * 0.5f;
         D_80115DEC = sine;
         yaw.w = func_802B6560_de(angle);
-        func_80274098_de(&result, &yaw, &((Actor_func_8024A7A0_de *)actor)->rotation);
+        func_80274098_de(&result, &yaw, &((LevelActor *)actor)->rotation);
     }
     return result;
 }

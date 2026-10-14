@@ -13,8 +13,8 @@
 
 /** Copy the source byte at offset 7 into two fields under object offset 0x18. */
 void func_80206930_de(void *arg0, int arg1, void *arg2) {
-    void *inner = ((Actor_func_8024A7A0_de *)arg0)->definition;
+    void *inner = ((LevelActor *)arg0)->definition;
     ((ActorDefinitionHeader *)inner)->first = (s8)((Trigger *)arg2)->unk4;
-    inner = ((Actor_func_8024A7A0_de *)arg0)->definition;
+    inner = ((LevelActor *)arg0)->definition;
     ((ActorDefinitionHeader *)inner)->second = (s8)((Trigger *)arg2)->unk4;
 }

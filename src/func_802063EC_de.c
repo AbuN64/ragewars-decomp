@@ -21,8 +21,8 @@ void func_802063EC_de(void *arg0, void *arg1, Triple arg2, Triple arg3,
                    s32 arg4, s32 arg5, s32 arg6) {
     if (func_80262CE0_de(&D_80131150, arg5, 0, arg6,
                       arg4, arg2,
-                      ((Actor_func_8024A7A0_de *)arg0)->yaw,
-                      ((Actor_func_8024A7A0_de *)arg0)->position1, arg3,
+                      ((LevelActor *)arg0)->yaw,
+                      ((LevelActor *)arg0)->position1, arg3,
                       &((ActorMotionState *)arg1)->unk124) != 0) {
         ((ActorMotionState *)arg1)->unk128 -= 1;
     }

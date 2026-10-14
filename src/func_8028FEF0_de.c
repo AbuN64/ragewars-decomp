@@ -31,8 +31,8 @@ void func_8028FF0C_de(void *arg0, void *arg1, s32 arg2)
   first_column = 0;
   func_802BD3A0_de(arg1, arg0, 8);
   var_a3 = arg1 + 8;
-  temp_a2 = ((struct Shape_func_802764D4_de_2 *) arg0)->field_4;
-  temp_t0 = ((struct Shape_func_802764D4_de_2 *) arg0)->field_0;
+  temp_a2 = ((struct IntPair *) arg0)->field_4;
+  temp_t0 = ((struct IntPair *) arg0)->field_0;
   var_a1 = first_column;
   if (temp_a2 > first_column)
   {

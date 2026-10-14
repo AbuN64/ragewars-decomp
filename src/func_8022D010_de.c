@@ -13,7 +13,7 @@
 
 void func_8022D010_de(void *arg0, void *arg1) {
     Actor_func_8022D290_de *actor = arg0;
-    Actor_func_8024A7A0_de *other = arg1;
+    LevelActor *other = arg1;
     actor->unk_0x06C0 = actor->unk_0x06C0 * (D_800C7E90);
     actor->unk_0x06C4 = actor->unk_0x06C4 * (D_800C7E90);
     other->position1.y = other->position1.y * (D_800C7E90);

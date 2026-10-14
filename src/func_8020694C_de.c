@@ -18,14 +18,14 @@ void func_8020694C_de(char *arg0, void *arg1, Rec *arg2) {
     int n;
     void *child;
 
-    n = (s8)((Actor_func_8024A7A0_de *)arg0)->stateE7;
+    n = (s8)((LevelActor *)arg0)->stateE7;
     for (i = 0; i < n; i++) {
         child = func_8024BFD4_de(arg0, i);
         if (child != 0) {
             arg2->a = child;
             arg2->b = child;
             func_8024AA18_de(arg0, arg1, arg2);
-            func_8026DA4C_de(child, ((Actor_func_8024A7A0_de *)arg0)->fieldB4, 1, &((Actor_func_8024A7A0_de *)arg0)->lighting[D_800D297C], 0, ((Actor_func_8024A7A0_de *)arg0)->field3);
+            func_8026DA4C_de(child, ((LevelActor *)arg0)->fieldB4, 1, &((LevelActor *)arg0)->lighting[D_800D297C], 0, ((LevelActor *)arg0)->field3);
         }
     }
 }

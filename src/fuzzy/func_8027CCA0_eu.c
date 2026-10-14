@@ -19,7 +19,7 @@ void func_80272B38_de(f32 *, Vec3 *, Vec3 *);
 void func_80284178_de(void *);
 void func_802A42F4_de(void *, void *);
 s32 func_8024E140_de(void *);
-void func_80265E10_de(void *, void *, u16, s32, Vec3, struct Shape_func_802764D4_de_2);
+void func_80265E10_de(void *, void *, u16, s32, Vec3, struct IntPair);
 void func_80279B40_de(void *, s32, s32, s32);
 void func_8025DE54_de(s16, Vec3, s32, void *);
 void func_802737F0_de(f32 *, f32);

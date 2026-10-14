@@ -52,7 +52,7 @@ Vector4f func_8024D4AC_de(char *actor, Vec3 point) {
 
     target = 0;
     if (actor != 0 && *(u8 *)actor == 1) {
-        target = ((Actor_func_8024A7A0_de *)(actor))->lockOn;
+        target = ((LevelActor *)(actor))->lockOn;
         aim = func_8024796C_de(actor);
         func_80274244_de(&aim, matrix);
         local.x = 0.0f;

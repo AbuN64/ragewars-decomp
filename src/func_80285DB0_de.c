@@ -34,7 +34,7 @@ void func_80285DB0_de(void *arg0, void *arg1, s32 arg2) {
     s32 lastOffset;
     u32 first;
 
-    if (!(((Actor_func_8024A7A0_de *)arg1)->flags & 0x80000)) {
+    if (!(((LevelActor *)arg1)->flags & 0x80000)) {
         first = (u32)((Shared_World *)arg0)->actors;
         index = -1;
         if ((u32) arg1 >= first) {

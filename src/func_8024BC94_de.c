@@ -10,7 +10,7 @@ extern void func_8024796C_de(void *arg0);
 extern void func_80274244_de(void *arg0, void *arg1);
 extern void func_80272898_de(void *, void *, void *);
 
-void *func_8024BC94_de(void *arg0, s32 unused1, struct Shape_func_802764D4_de_2 arg2) {
+void *func_8024BC94_de(void *arg0, s32 unused1, struct IntPair arg2) {
     s32 sp10[4];
     s32 sp20[16];
     Triple sp60;

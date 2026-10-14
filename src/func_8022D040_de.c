@@ -23,7 +23,7 @@ extern char D_800CE8A4;
 
 
 
-void func_8022D040_de(void *arg0, Actor_func_8024A7A0_de *arg1) {
+void func_8022D040_de(void *arg0, LevelActor *arg1) {
     Player *player;
     s32 busy;
     f32 x;

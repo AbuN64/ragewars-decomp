@@ -25,7 +25,7 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
     }
     if (sound != 0) {
         func_8025DE54_de((s16)sound,
-                      ((Actor_func_8024A7A0_de *)arg0)->position0, 0, -1);
+                      ((LevelActor *)arg0)->position0, 0, -1);
     }
     if (callback != 0) {
         func_8025E11C_de(callback);

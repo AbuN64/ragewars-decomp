@@ -234,7 +234,7 @@ struct func_80241940_S1 {
 struct QueryRecAt58;
 typedef struct QueryRecAt58 QueryRecAt58;
 
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 extern void func_80243814_de(struct Hit8 *arg0, struct Hit8 *arg1);
 
 struct FloatState68;

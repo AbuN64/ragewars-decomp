@@ -96,8 +96,8 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
         hit |= func_8023E8D4_de(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
-            func_80271F34_de(&((Actor_func_8024A7A0_de *)input)->position1,
-                          &((Actor_func_8024A7A0_de *)input)->position1,
+            func_80271F34_de(&((LevelActor *)input)->position1,
+                          &((LevelActor *)input)->position1,
                           &actor->movement);
         }
     }

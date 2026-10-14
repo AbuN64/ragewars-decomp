@@ -22,7 +22,7 @@ void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **
     Object_func_8044D220_de spawns[8];
     Object_func_8044D220_de extra;
     s32 n;
-    Actor_func_8024A7A0_de *objects;
+    LevelActor *objects;
     s32 mode;
     struct Shape_typemap_165 *block;
     s32 nspawns;
@@ -37,11 +37,11 @@ void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **
     s32 *definition;
     InputRecAt27 *rec;
     InputRecAt27 *recWalk;
-    Actor_func_8024A7A0_de *objWalk;
+    LevelActor *objWalk;
     func_8041F2A0_Config *slot;
     s16 value;
-    Actor_func_8024A7A0_de *obj;
-    Actor_func_8024A7A0_de *other;
+    LevelActor *obj;
+    LevelActor *other;
     SharedPlayer *player;
     Object_func_8044D220_de *spawn;
     f32 angle;
@@ -52,11 +52,11 @@ void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **
         mode = func_8028B394_de(world, 0);
         node = (*handle)->data;
         n = node->count;
-        block = func_80254480_de(0, handle, n * (sizeof(Actor_func_8024A7A0_de)) + 8);
+        block = func_80254480_de(0, handle, n * (sizeof(LevelActor)) + 8);
         if (block != 0) {
             func_8028FF0C_de(node, block->data, 1);
             hdr = block->data;
-            hdr->size = sizeof(Actor_func_8024A7A0_de);
+            hdr->size = sizeof(LevelActor);
             hdr->count = n;
             records = node->records;
             objects = hdr->objects;

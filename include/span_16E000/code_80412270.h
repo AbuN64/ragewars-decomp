@@ -30,10 +30,10 @@ struct List_func_80412634_de {
 };
 
 struct Entry_func_80412898_de;
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 struct Entry_func_80412898_de {
     char pad_00[0x44];
-    struct Shape_func_802764D4_de_2 *cells;
+    struct IntPair *cells;
     u8 pad_48[3];
     u8 width;
 };

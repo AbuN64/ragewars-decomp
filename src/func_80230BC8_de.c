@@ -48,7 +48,7 @@ static inline s32 released(void *actor, char *player) {
     if (((Actor_func_8022D290_de *)player)->unk_0x11D8 > D_800C8008) {
         return 1;
     }
-    if ((((Actor_func_8024A7A0_de *)actor)->flags & 0x300000) && ((Actor_func_8022D290_de *)player)->unk_0x1450 != 0) {
+    if ((((LevelActor *)actor)->flags & 0x300000) && ((Actor_func_8022D290_de *)player)->unk_0x1450 != 0) {
         control = ((Actor_func_8022D290_de *)player)->unk_0x1454;
         latch = ((Brain_func_80212D78_eu_x *)control)->triggerLatch;
         ((Brain_func_80212D78_eu_x *)control)->triggerLatch = 0;
@@ -68,7 +68,7 @@ void func_80230BC8_de(void *actor, void *attack) {
     Vec3 *position;
     char *target;
 
-    player = ((Actor_func_8024A7A0_de *)actor)->controller;
+    player = ((LevelActor *)actor)->controller;
     target = ((Actor_func_8022D290_de *)player)->unk_0x05DC;
     if (target != 0) {
         position = &((SharedRecAt564V1 *)target)->position;
@@ -88,9 +88,9 @@ void func_80230BC8_de(void *actor, void *attack) {
     if (((Dest *)attack)->cueTimer <= 0.0f) {
         ((Dest *)attack)->cueTimer += D_800C2F24_de;
         if (((Actor_func_8022D290_de *)player)->unk_0x1450 == 0 && D_80140FF8 == 1) {
-            func_8021A9A4_de(((Actor_func_8024A7A0_de *)actor)->controller, 0x3F9);
+            func_8021A9A4_de(((LevelActor *)actor)->controller, 0x3F9);
         } else {
-            func_8021A9A4_de(((Actor_func_8024A7A0_de *)actor)->controller, 0x4CB);
+            func_8021A9A4_de(((LevelActor *)actor)->controller, 0x4CB);
         }
     }
 }

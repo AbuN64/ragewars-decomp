@@ -84,7 +84,7 @@ void func_8023F43C_de(char *obj) {
         case 2:
             break;
         case 1:
-            if ((shape->flags & 1) && ((Actor_func_8024A7A0_de *)entity)->active == 0) {
+            if ((shape->flags & 1) && ((LevelActor *)entity)->active == 0) {
                 continue;
             }
             break;

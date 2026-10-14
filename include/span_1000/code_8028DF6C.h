@@ -236,7 +236,7 @@ typedef struct Scene_func_8028FA60_de Scene_func_8028FA60_de;
 struct ObjRecAt78V2;
 typedef struct ObjRecAt78V2 ObjRecAt78V2;
 
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 extern void func_8028DFE4_de(WorldSortEntry *arg0, WorldSortEntry *arg1);
 
 struct func_8028E74C_S1;

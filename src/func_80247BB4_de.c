@@ -71,11 +71,11 @@ Vector4f func_80247BB4_de(char *actor, Vec3 point, Vector4f *assist, f32 cone) {
     count = D_8011CC18;
     for (; i < count; i++) {
         entity = D_8011CA18[i];
-        if (entity == actor || (((Actor_func_8024A7A0_de *)(entity))->flags & 1) || ((Actor_func_8024A7A0_de *)(entity))->active == 0) {
+        if (entity == actor || (((LevelActor *)(entity))->flags & 1) || ((LevelActor *)(entity))->active == 0) {
             continue;
         }
-        center = ((Actor_func_8024A7A0_de *)(entity))->position0;
-        center.y += ((Actor_func_8024A7A0_de *)(entity))->eyeHeight;
+        center = ((LevelActor *)(entity))->position0;
+        center.y += ((LevelActor *)(entity))->eyeHeight;
         center.y += func_8024D284_de(entity) * 0.5f;
         func_80271F68_de(&dir, &center, &point);
         func_8027207C_de(&dir);

@@ -567,8 +567,8 @@ struct NodeEvent {
 struct Resource_func_80419E54_de;
 typedef struct Resource_func_80419E54_de Resource_func_80419E54_de;
 
-struct Shape_func_802764D4_de_2;
-struct Shape_func_802764D4_de_2 {
+struct IntPair;
+struct IntPair {
     int field_0;
     int field_4;
 };
@@ -2815,14 +2815,14 @@ struct ControllerRecAtC7 {
 };
 
 struct EventRecAt14;
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 struct EventRecAt14 {
     u16 frame;
     u16 effect;
     s16 bone;
     s16 pad6;
     Vec3 local;
-    struct Shape_func_802764D4_de_2 params;
+    struct IntPair params;
 };
 
 struct RecordRecAt94;

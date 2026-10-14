@@ -51,8 +51,8 @@ f32 func_80217224_de(void *arg0, Vec3 v) {
 /* Squared XZ distance to a point using the existing by-value vector ABI. */
 f32 func_80217290_de(void *arg0, Vec3 point)
 {
-    f32 dx = point.x - ((Actor_func_8024A7A0_de *)arg0)->position0.x;
-    f32 dz = point.z - ((Actor_func_8024A7A0_de *)arg0)->position0.z;
+    f32 dx = point.x - ((LevelActor *)arg0)->position0.x;
+    f32 dz = point.z - ((LevelActor *)arg0)->position0.z;
     return dx * dx + dz * dz;
 }
 
@@ -92,10 +92,10 @@ void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
             }
         }
     } else {
-        fallback = (void *)((Actor_func_8024A7A0_de *)arg0)->resourceFlags;
+        fallback = (void *)((LevelActor *)arg0)->resourceFlags;
     }
 
     ((Dest *)arg1)->sound =
-        func_8025C95C_de(func_8025CC6C_de(), arg2, &((Actor_func_8024A7A0_de *)arg0)->position0,
-                      &((Actor_func_8024A7A0_de *)arg0)->position0, (s32)fallback);
+        func_8025C95C_de(func_8025CC6C_de(), arg2, &((LevelActor *)arg0)->position0,
+                      &((LevelActor *)arg0)->position0, (s32)fallback);
 }

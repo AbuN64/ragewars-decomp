@@ -23,7 +23,7 @@
 extern Shared_BigObj *D_800E53C0;
 extern Shared_Rec3 D_80146398[8];
 
-extern void func_804243E0_de(s32 a0, struct Shape_func_802764D4_de_2 *a1);
+extern void func_804243E0_de(s32 a0, struct IntPair *a1);
 extern void func_804259E0_de(s32 a0);
 
 void func_8042D118_de(void)

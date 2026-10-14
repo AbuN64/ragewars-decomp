@@ -25,11 +25,11 @@ int func_8024E150_de(void) {
 /** Return whether this object is active for its current behavior class. */
 s32 func_8024E158_de(void *arg0) {
     if (*(u8 *)arg0 == 1) {
-        if ((((Actor_func_8024A7A0_de *)arg0)->flags & 0x300000) != 0) {
+        if ((((LevelActor *)arg0)->flags & 0x300000) != 0) {
             return 1;
         }
     }
-    switch (*((Actor_func_8024A7A0_de *)arg0)->definition) {
+    switch (*((LevelActor *)arg0)->definition) {
     case 1:
     case 2:
     case 5:
@@ -45,7 +45,7 @@ s32 func_8024E1B4_de(void *arg0) {
     if (*(u8 *)arg0 != 1) {
         return 0;
     }
-    if (!(((Actor_func_8024A7A0_de *)arg0)->flags & 0x2000)) {
+    if (!(((LevelActor *)arg0)->flags & 0x2000)) {
         return 0;
     }
     arg0 = ((ActorMotionState *)((Player *)arg0)->motion)->hooks;
@@ -68,7 +68,7 @@ extern s32 func_80245798_de(char *actor);
 
 s32 func_8024E208_de(char *actor)
 {
-    switch (*((Actor_func_8024A7A0_de *)actor)->definition) {
+    switch (*((LevelActor *)actor)->definition) {
     case 1:
     case 5:
         return 1;
@@ -76,7 +76,7 @@ s32 func_8024E208_de(char *actor)
         if (*(u8 *)actor != 1) {
             return 0;
         }
-        if (!(((Actor_func_8024A7A0_de *)actor)->flags & 0x300000)) {
+        if (!(((LevelActor *)actor)->flags & 0x300000)) {
             return 0;
         }
         if (((Player *)((Shared_Actor *)actor)->entity)->controllerEnabled != 0 || func_80245798_de(actor) != 0) {
@@ -93,10 +93,10 @@ typedef struct Owner Owner;
 
 /** Return bit two of the nested state word. */
 unsigned int func_8024E29C_de(char *object) {
-    return (((struct NavigationTrack *)((Actor_func_8024A7A0_de *)object)->definition)->flags >> 2) & 1;
+    return (((struct NavigationTrack *)((LevelActor *)object)->definition)->flags >> 2) & 1;
 }
 
 /** Report whether the object pointed to at offset 0x18 equals one. */
 int func_8024E2B0_de(void *arg0) {
-    return *(int *)(((Actor_func_8024A7A0_de *)arg0)->definition) == 1;
+    return *(int *)(((LevelActor *)arg0)->definition) == 1;
 }

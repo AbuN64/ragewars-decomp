@@ -29,7 +29,7 @@ extern void func_8026C6D8_de(s32, s32, s32, s32, void *, s32, s32);
 
 
 void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
-    struct Actor_func_8024A7A0_de *object = actor;
+    struct LevelActor *object = actor;
     f32 mf[16];
     s32 mtx;
     s32 matrices;

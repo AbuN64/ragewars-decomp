@@ -30,22 +30,22 @@ s32 func_802169AC_de(void *arg0, void *arg1, void *arg2) {
     if (arg2 == ((RouteChaseBot *)arg1)->target) {
         return 2;
     }
-    if (*((Actor_func_8024A7A0_de *)arg2)->definition == 5) {
+    if (*((LevelActor *)arg2)->definition == 5) {
         return 5;
     }
-    if (((Actor_func_8024A7A0_de *)arg2)->type == 0x64F) {
+    if (((LevelActor *)arg2)->type == 0x64F) {
         return 7;
     }
     if (D_8013B290 == 0) {
-        if (((Actor_func_8024A7A0_de *)arg2)->flags & 0x300000) {
-            temp_a2 = ((Actor_func_8024A7A0_de *)arg2)->controller;
+        if (((LevelActor *)arg2)->flags & 0x300000) {
+            temp_a2 = ((LevelActor *)arg2)->controller;
             if ((((Shared_ActorView *)temp_a2)->controllerOwner == arg0) &&
                 (((Shared_ActorView *)temp_a2)->controllerMode == 2)) {
                 return 1;
             }
         }
-        if (((Actor_func_8024A7A0_de *)arg0)->renderFlags & 2) {
-            if (((Actor_func_8024A7A0_de *)arg0)->type != 0xCA) {
+        if (((LevelActor *)arg0)->renderFlags & 2) {
+            if (((LevelActor *)arg0)->type != 0xCA) {
                 return 1;
             }
         }

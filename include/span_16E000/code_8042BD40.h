@@ -57,12 +57,12 @@ struct State_func_8042DAF8_de {
     s32 target;
 };
 
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 struct Shared_BigObj;
 struct Shared_BigObj {
     char pad0[0xF0];
     s32 slot[8];
-    struct Shape_func_802764D4_de_2 arr2[8];
+    struct IntPair arr2[8];
 };
 
 struct SlotRecAt7F;

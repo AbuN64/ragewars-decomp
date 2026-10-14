@@ -6,7 +6,7 @@
 /* Clears bits 0x2000 and 0x100 of the flag word at offset 0x100 of an object. */
 
 
-void func_80278F68_de(struct Actor_func_8024A7A0_de *object) {
+void func_80278F68_de(struct LevelActor *object) {
     object->flags &= ~0x2000;
     object->flags &= ~0x100;
 }

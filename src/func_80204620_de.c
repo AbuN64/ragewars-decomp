@@ -12,13 +12,13 @@
 s32 func_80204620_de(void *arg0) {
     s32 val;
 
-    val = ((BreakableDefinition *)((Actor_func_8024A7A0_de *)arg0)->definition)->health;
+    val = ((BreakableDefinition *)((LevelActor *)arg0)->definition)->health;
     if (val != 0) {
-        ((Actor_func_8024A7A0_de *)arg0)->flags = ((Actor_func_8024A7A0_de *)arg0)->flags | 0x2000;
+        ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2000;
     } else {
-        s32 flags = ((Actor_func_8024A7A0_de *)arg0)->flags & ~0x2000;
+        s32 flags = ((LevelActor *)arg0)->flags & ~0x2000;
         flags &= ~0x100;
-        ((Actor_func_8024A7A0_de *)arg0)->flags = flags;
+        ((LevelActor *)arg0)->flags = flags;
     }
     return val;
 }

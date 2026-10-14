@@ -14,7 +14,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 s32 func_80285F58_de(void *arg0, void *arg1) {
     Shared_World *world = arg0;
-    Actor_func_8024A7A0_de *actor = arg1;
+    LevelActor *actor = arg1;
     void *field80;
     void *temp_v0;
     u8 *base;

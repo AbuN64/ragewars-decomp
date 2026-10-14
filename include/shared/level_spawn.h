@@ -10,7 +10,7 @@
 typedef struct LevelBlock {
     s32 size;
     s32 count;
-    Actor_func_8024A7A0_de objects[1];
+    LevelActor objects[1];
 } LevelBlock;
 typedef struct LevelNode {
     s32 size;

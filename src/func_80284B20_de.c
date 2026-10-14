@@ -189,7 +189,7 @@ void func_802850C8_de(void *arg0, void *arg1, f32 *arg2) {
     if (node != 0) {
         do {
             if (((ParticleEffect *)node)->owner != arg1 && (((ParticleEffect *)node)->flags & 0x100)) {
-                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &((Actor_func_8024A7A0_de *)arg1)->position0.x);
+                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &((LevelActor *)arg1)->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }

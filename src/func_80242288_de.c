@@ -57,7 +57,7 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
         switch (entry->kind) {
         case 1:
             word = &query.word0;
-            owner_data = &((Actor_func_8024A7A0_de *)owner)->position0;
+            owner_data = &((LevelActor *)owner)->position0;
             value = ((EntryBlock *)owner->entries)->entry.value + actor->fieldC;
             if ((actor->field5C != *(f32 *)&query.word4) ||
                 (actor->field64 != *(f32 *)&query.word4)) {

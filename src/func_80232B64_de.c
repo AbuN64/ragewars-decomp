@@ -17,7 +17,7 @@ extern s32 func_80214178_de(void *, void *, s32);
 void func_80232B64_de(void *arg0, void *arg1) {
     void *temp_v0;
 
-    temp_v0 = ((Actor_func_8024A7A0_de *)arg0)->controller;
+    temp_v0 = ((LevelActor *)arg0)->controller;
     ((Shared_ActorView *)temp_v0)->controllerMode = 1;
     ((Shared_ActorView *)temp_v0)->controllerOwner = 0;
     ((Player *)temp_v0)->controllerTimer = 0;

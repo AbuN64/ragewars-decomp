@@ -8,7 +8,7 @@
 
 
 
-void func_80207FA0_de(Actor_func_8024A7A0_de *arg0, ActorMotionState *arg1) {
+void func_80207FA0_de(LevelActor *arg0, ActorMotionState *arg1) {
     arg1->flags = (s32) (arg1->flags | 0x10000);
     arg0->flags = (s32) (arg0->flags | 0x2100);
     arg1->unk16C = 0;

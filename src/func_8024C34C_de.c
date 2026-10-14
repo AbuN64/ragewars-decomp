@@ -28,13 +28,13 @@ void func_8024C34C_de(void *arg0, s32 *arg1) {
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
-    func_802736D4_de(scratch.matrix, ((Actor_func_8024A7A0_de *)arg0)->yaw);
+    func_802736D4_de(scratch.matrix, ((LevelActor *)arg0)->yaw);
     func_80272898_de(scratch.matrix, scratch.in, scratch.out);
-    scratch.position.x = ((Actor_func_8024A7A0_de *)arg0)->position0.x +
-                          (scratch.out[0] * ((Actor_func_8024A7A0_de *)arg0)->scale.x);
-    scratch.position.y = ((Actor_func_8024A7A0_de *)arg0)->position0.y;
-    scratch.position.z = ((Actor_func_8024A7A0_de *)arg0)->position0.z +
-                          (scratch.out[2] * ((Actor_func_8024A7A0_de *)arg0)->scale.z);
-    func_8024E79C_de(arg0, scratch.position, &((Actor_func_8024A7A0_de *)arg0)->position0,
-                  &((Actor_func_8024A7A0_de *)arg0)->model, 0, 0);
+    scratch.position.x = ((LevelActor *)arg0)->position0.x +
+                          (scratch.out[0] * ((LevelActor *)arg0)->scale.x);
+    scratch.position.y = ((LevelActor *)arg0)->position0.y;
+    scratch.position.z = ((LevelActor *)arg0)->position0.z +
+                          (scratch.out[2] * ((LevelActor *)arg0)->scale.z);
+    func_8024E79C_de(arg0, scratch.position, &((LevelActor *)arg0)->position0,
+                  &((LevelActor *)arg0)->model, 0, 0);
 }

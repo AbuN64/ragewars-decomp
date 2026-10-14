@@ -12,5 +12,5 @@ void func_8024E79C_de(void *arg0, Triple t, void *arg4, s32 *arg5, s32 arg6, s32
     char unused[0x150];
     Triple *output = arg4;
     *output = t;
-    *arg5 = ((Actor_func_8024A7A0_de *)arg0)->model;
+    *arg5 = ((LevelActor *)arg0)->model;
 }

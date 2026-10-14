@@ -26,7 +26,7 @@ void func_8020520C_de(void *source, void *dest) {
     ((SpawnDispatchOwner *)dest)->draw = &D_00205628;
     ((SpawnDispatchOwner *)dest)->hit = &D_002050A0;
     ((SpawnDispatchOwner *)dest)->spawn = 0;
-    ((SpawnDispatchOwner *)dest)->remaining = ((Actor_func_8024A7A0_de *)source)->field3;
+    ((SpawnDispatchOwner *)dest)->remaining = ((LevelActor *)source)->field3;
 }
 
 extern s32 func_80285F58_de(void *, void *);
@@ -41,7 +41,7 @@ void func_8020524C_de(void *arg0, void *arg1) {
         func_80214178_de(arg0, arg1, 1);
     } else {
         func_80214178_de(arg0, arg1, 0);
-        ((Actor_func_8024A7A0_de *)arg0)->flags |= 0x10000;
+        ((LevelActor *)arg0)->flags |= 0x10000;
     }
 }
 

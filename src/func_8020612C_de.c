@@ -22,7 +22,7 @@ void func_8020612C_de(void *arg0, void *arg1) {
     s32 temp_v1;
     s32 var_v0;
 
-    temp_v0 = (void *)((Actor_func_8024A7A0_de *)arg0)->definition;
+    temp_v0 = (void *)((LevelActor *)arg0)->definition;
     temp_a2 = &temp_v0->trigger;
     if (temp_a2->enabled == 0) {
         if (temp_a2->firstAnimation == -1) {
@@ -46,7 +46,7 @@ void func_8020612C_de(void *arg0, void *arg1) {
     }
     var_v0 = temp_v1 & 2;
     if (var_v0 != 0) {
-        if (((Actor_func_8024A7A0_de *)arg0)->flags & 0x200) {
+        if (((LevelActor *)arg0)->flags & 0x200) {
             ((ActorMotionState *)arg1)->timer = 0.0f;
             return;
         }

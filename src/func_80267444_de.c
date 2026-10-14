@@ -18,7 +18,7 @@ extern f32 func_8024D284_de(void *arg0);
 s32 func_80267444_de(void *arg0, Vec3 *arg1) {
     Vec3 first;
     Vec3 second;
-    Actor_func_8024A7A0_de *object = arg0;
+    LevelActor *object = arg0;
     Shared_ActorView *actor;
     s16 state;
     s32 result;
@@ -31,7 +31,7 @@ s32 func_80267444_de(void *arg0, Vec3 *arg1) {
             state = actor->selectedAction;
             if ((state == 0) || (state == 0x11) || (state == 0x10)) {
                 first = *arg1;
-                second = ((Actor_func_8024A7A0_de *)actor)->position0;
+                second = ((LevelActor *)actor)->position0;
                 func_80271FC8_de(arg1, 0.75f, &first, &second);
                 arg1->y += func_8024D284_de(actor) * D_800C4430_de;
                 result = 1;

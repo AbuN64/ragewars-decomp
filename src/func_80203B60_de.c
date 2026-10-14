@@ -19,7 +19,7 @@ extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
 
 void func_80203B60_de(void *arg0, void *arg1) {
-    Actor_func_8024A7A0_de *o0 = arg0;
+    LevelActor *o0 = arg0;
     ActorMotionState *o1 = arg1;
     ActorMotionDefinition *tmp;
     s32 masked;

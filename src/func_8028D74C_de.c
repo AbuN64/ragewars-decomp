@@ -10,7 +10,7 @@
 
 s32 func_8028D74C_de(void *arg0, void *arg1) {
     Container *scene = arg0;
-    Actor_func_8024A7A0_de *actor = arg1;
+    LevelActor *actor = arg1;
     void *base;
 
     if (actor->flags & 0x80000) {

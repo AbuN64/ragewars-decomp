@@ -26,8 +26,8 @@ void func_80203908_de(void *arg0, void *arg1) {
     s32 flags;
     ActorMotionDefinition *record;
 
-    record = &((ActorMotionResource *)((Actor_func_8024A7A0_de *)arg0)->definition)->motion;
-    if (((Actor_func_8024A7A0_de *)arg0)->type == 0x40C) {
+    record = &((ActorMotionResource *)((LevelActor *)arg0)->definition)->motion;
+    if (((LevelActor *)arg0)->type == 0x40C) {
         ((struct RecordRecAt13C *)arg1)->speed = D_800C6B30[1];
     } else {
         ((struct RecordRecAt13C *)arg1)->speed = 0.0f;
@@ -37,13 +37,13 @@ void func_80203908_de(void *arg0, void *arg1) {
 
     if (func_80285F58_de(&D_8011FE88, arg0) == 0) {
         if (record->flags & 0x1000) {
-            flags = ((Actor_func_8024A7A0_de *)arg0)->flags & ~0x2000;
+            flags = ((LevelActor *)arg0)->flags & ~0x2000;
             flags = flags & ~0x100;
-            ((Actor_func_8024A7A0_de *)arg0)->flags = flags;
+            ((LevelActor *)arg0)->flags = flags;
         }
         if (record->flags & 0x800) {
-            ((Actor_func_8024A7A0_de *)arg0)->flags =
-                ((Actor_func_8024A7A0_de *)arg0)->flags & ~0x100;
+            ((LevelActor *)arg0)->flags =
+                ((LevelActor *)arg0)->flags & ~0x100;
             func_80214178_de(arg0, arg1, 0);
         } else {
             func_80214178_de(arg0, arg1, 1);

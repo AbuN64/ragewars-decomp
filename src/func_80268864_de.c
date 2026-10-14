@@ -11,7 +11,7 @@
 extern s32 D_80146894;
 extern void func_802172D0_de(u8 *, u8 *, s32);
 
-void func_80268864_de(void *unused, u8 *object, s32 third, struct Shape_func_802764D4_de_2 pair, s32 fifth, s32 sixth) {
+void func_80268864_de(void *unused, u8 *object, s32 third, struct IntPair pair, s32 fifth, s32 sixth) {
     if (D_80146894 == 0 && object != 0 && object[0] == 1) {
         do {
             func_802172D0_de(object, object + 0x170, sixth);
@@ -26,7 +26,7 @@ void func_80268864_de(void *unused, u8 *object, s32 third, struct Shape_func_802
 
 extern void func_80217388_de(u8 *, u8 *);
 
-void func_802688AC_de(void *unused, u8 *object, s32 third, struct Shape_func_802764D4_de_2 pair) {
+void func_802688AC_de(void *unused, u8 *object, s32 third, struct IntPair pair) {
     if (object != 0 && object[0] == 1) {
         func_80217388_de(object, object + 0x170);
     }
@@ -73,7 +73,7 @@ void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast
 }
 
 void func_802689BC_de(void *arg0, int arg1, int arg2, Blast blast) {
-    ((Actor_func_8024A7A0_de *)arg0)->effectMode = (u8)blast.radius;
+    ((LevelActor *)arg0)->effectMode = (u8)blast.radius;
 }
 
 /* Calls func_80217388_de on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls func_80262C88_de when flag 0x80000 remains set. Adapted from func_802790C0_de with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */
@@ -85,13 +85,13 @@ extern void func_80262C88_de(void *arg0);
 
 
 
-void func_802689CC_de(u8 *object, s32 second, s32 third, struct Shape_func_802764D4_de_2 pair) {
+void func_802689CC_de(u8 *object, s32 second, s32 third, struct IntPair pair) {
     func_80217388_de(object, (char *)object + 0x170);
-    ((Actor_func_8024A7A0_de *)object)->behaviorFlags |= 0x20;
-    ((Actor_func_8024A7A0_de *)object)->flags &= 0xFFFEFFFF;
-    ((Actor_func_8024A7A0_de *)object)->flags &= ~0x2000;
-    ((Actor_func_8024A7A0_de *)object)->flags &= ~0x100;
-    if (((Actor_func_8024A7A0_de *)object)->flags & 0x80000) {
+    ((LevelActor *)object)->behaviorFlags |= 0x20;
+    ((LevelActor *)object)->flags &= 0xFFFEFFFF;
+    ((LevelActor *)object)->flags &= ~0x2000;
+    ((LevelActor *)object)->flags &= ~0x100;
+    if (((LevelActor *)object)->flags & 0x80000) {
         func_80262C88_de(object);
     }
 }

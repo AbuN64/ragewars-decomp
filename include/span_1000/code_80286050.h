@@ -7,7 +7,7 @@
 #include "resident_event_handler.h"
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
-struct Actor_func_8024A7A0_de;
+struct LevelActor;
 struct SceneRecAt10C0;
 typedef struct SceneRecAt10C0 SceneRecAt10C0;
 
@@ -141,11 +141,11 @@ typedef struct func_8028B1F8_S2 func_8028B1F8_S2;
 struct SceneRecAt10C0;
 struct SceneRecAt10C0 {
     char pad0[0xC50];
-    struct Actor_func_8024A7A0_de *objects[128];
+    struct LevelActor *objects[128];
     s32 count;
     char padE54[0x10BC - 0xE54];
     s32 lateCount;
-    struct Actor_func_8024A7A0_de *late[64];
+    struct LevelActor *late[64];
 };
 
 struct BankRecAt94;

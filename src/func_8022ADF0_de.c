@@ -10,7 +10,7 @@ extern f32 func_8024D284_de(void);
 
 
 f32 func_8022ADF0_de(void *arg0) {
-    if (((Actor_func_8024A7A0_de *)arg0)->definition != 0) {
+    if (((LevelActor *)arg0)->definition != 0) {
         return func_8024D284_de();
     } else {
         return D_800C2D08_de;

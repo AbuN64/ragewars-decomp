@@ -4,13 +4,13 @@
 
 
 
-extern struct Shape_func_802764D4_de_2 D_80149B10[];
+extern struct IntPair D_80149B10[];
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 
 void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2) {
     u32 temp_v0;
-    struct Shape_func_802764D4_de_2 *e;
+    struct IntPair *e;
 
     temp_v0 = func_802BCF30_de();
     ;

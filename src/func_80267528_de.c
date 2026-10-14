@@ -15,8 +15,8 @@ extern s32 D_8013B290;
 
 s32 func_80267528_de(char *actor, char *target)
 {
-    Actor_func_8024A7A0_de *source = (Actor_func_8024A7A0_de *)actor;
-    Actor_func_8024A7A0_de *destination = (Actor_func_8024A7A0_de *)target;
+    LevelActor *source = (LevelActor *)actor;
+    LevelActor *destination = (LevelActor *)target;
     s32 flags;
 
     if (D_801462E5 != 0) {

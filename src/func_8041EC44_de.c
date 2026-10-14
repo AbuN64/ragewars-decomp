@@ -6,7 +6,7 @@
    identifier matches, or zero when none does. */
 
 
-extern struct Shape_func_802764D4_de_2 D_800E381C[][17];
+extern struct IntPair D_800E381C[][17];
 
 s32 func_8041EC44_de(s32 row, s32 id) {
     s32 i;

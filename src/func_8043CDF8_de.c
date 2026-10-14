@@ -11,7 +11,7 @@ extern CheatCode D_0044FB90[];
 extern u8 D_800E5CAC[];
 
 
-extern struct Shape_func_802764D4_de_2 D_801462C8;
+extern struct IntPair D_801462C8;
 
 extern s32 D_80154030;
 
@@ -24,7 +24,7 @@ s32 func_8043CDF8_de(void)
     s32 j;
     s32 match;
     s32 hasSound; /* FAKEMATCH: flag local orders the sound load before the D_80154030 store */
-    struct Shape_func_802764D4_de_2 *settings;
+    struct IntPair *settings;
     u8 *code;
 
     D_80154030 = -1;

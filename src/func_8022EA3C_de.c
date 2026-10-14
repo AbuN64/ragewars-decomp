@@ -142,7 +142,7 @@ extern void func_802227F4_de(void *, void *, s32);
 
 
 s32 func_8022EBD4_de(void *arg0, void *arg1) {
-    if (((Actor_func_8024A7A0_de *)arg1)->position1.y <= 0.0f && func_8024E62C_de(arg1) != 0) {
+    if (((LevelActor *)arg1)->position1.y <= 0.0f && func_8024E62C_de(arg1) != 0) {
         func_802227F4_de(arg0, arg1, 2);
         return 1;
     }

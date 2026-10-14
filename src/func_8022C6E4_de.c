@@ -24,7 +24,7 @@ s32 func_8022C6E4_de(void *arg0, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if ((((Actor_func_8024A7A0_de *)arg1)->motionState & 0x20000) == 0) {
+        if ((((LevelActor *)arg1)->motionState & 0x20000) == 0) {
             return 0;
         }
         if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0xD) {
@@ -58,14 +58,14 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
         blocked = 0;
     }
     if (blocked == 0) {
-        if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->body.header.flags & 1) {
+        if (((MovementDescriptor *)((LevelActor *)arg1)->definition)->body.header.flags & 1) {
             if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0x26) {
                 return 0;
             }
             if (((Actor_func_8022D290_de *)arg0)->unk_0x0664 & 0x8000) {
                 return 0;
             }
-            flags = ((Actor_func_8024A7A0_de *)arg1)->motionState;
+            flags = ((LevelActor *)arg1)->motionState;
             if (flags & 0x80) {
                 goto fire;
             }
@@ -74,7 +74,7 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
     }
     return 0;
 fire:
-    ((Actor_func_8024A7A0_de *)arg1)->motionState = flags | 0x100;
+    ((LevelActor *)arg1)->motionState = flags | 0x100;
     func_802227F4_de(arg0, arg1, 0xF);
     return 1;
 }
@@ -95,8 +95,8 @@ s32 func_8022C7F8_de(void *arg0, void *arg1) {
     if (((Actor_func_8022D290_de *)arg0)->unk_0x07E8 == 0) {
         field6E4 = ((Actor_func_8022D290_de *)arg0)->unk_0x06E4;
         if (!(D_800C2D5C_de < field6E4)) {
-            if (!(((Actor_func_8024A7A0_de *)arg1)->motionState & 0xC0000)) {
-                if (((MovementDescriptor *)((Actor_func_8024A7A0_de *)arg1)->definition)->body.header.flags & 2) {
+            if (!(((LevelActor *)arg1)->motionState & 0xC0000)) {
+                if (((MovementDescriptor *)((LevelActor *)arg1)->definition)->body.header.flags & 2) {
                     if ((((Actor_func_8022D290_de *)arg0)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)arg0)->unk_0x11D8 <= 0.0f)) {
                         func_802227F4_de(arg0, arg1, 5);
                         return 1;
@@ -114,7 +114,7 @@ int func_8022C88C_de(void) {
 }
 
 void func_8022C894_de(void *arg0, void *arg1) {
-    ((Actor_func_8024A7A0_de *)arg1)->position1.x = 0;
-    ((Actor_func_8024A7A0_de *)arg1)->position1.y = 0;
-    ((Actor_func_8024A7A0_de *)arg1)->position1.z = 0;
+    ((LevelActor *)arg1)->position1.x = 0;
+    ((LevelActor *)arg1)->position1.y = 0;
+    ((LevelActor *)arg1)->position1.z = 0;
 }

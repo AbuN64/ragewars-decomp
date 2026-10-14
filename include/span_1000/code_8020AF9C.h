@@ -68,10 +68,10 @@ struct func_8020CFE0_S2;
 typedef struct func_8020CFE0_S2 func_8020CFE0_S2;
 
 struct EntryList8020CCE8;
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 struct EntryList8020CCE8 {
     s32 pad0[2];
-    struct Shape_func_802764D4_de_2 *table;
+    struct IntPair *table;
     s32 count;
 };
 

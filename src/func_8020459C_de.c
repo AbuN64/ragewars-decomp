@@ -2,7 +2,7 @@
 #include "span_1000/code_80203F04.h"
 
 /* The kind-10 actor initializer installs the state table containing this callback. */
-s32 func_8020459C_de(Actor_func_8024A7A0_de *actor) {
+s32 func_8020459C_de(LevelActor *actor) {
     void *resource = actor->definition;
     BreakableDefinition *definition = resource;
     s32 val;

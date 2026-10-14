@@ -141,8 +141,8 @@ struct RiderRecAt130V2 {
 struct func_80204728_S1;
 typedef struct func_80204728_S1 func_80204728_S1;
 
-struct Actor_func_8024A7A0_de;
-extern s32 func_8020459C_de(struct Actor_func_8024A7A0_de *actor);
+struct LevelActor;
+extern s32 func_8020459C_de(struct LevelActor *actor);
 
 struct func_80204738_S1;
 struct func_80204738_S1 {

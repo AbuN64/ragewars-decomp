@@ -21,6 +21,6 @@ void func_80204F10_de(void *arg0) {
     ResourceManagerState pair;
 
     pair.active = 0;
-    func_80267198_de(arg0, arg0, 7, ((Actor_func_8024A7A0_de *)arg0)->position0, pair);
+    func_80267198_de(arg0, arg0, 7, ((LevelActor *)arg0)->position0, pair);
     func_80285DB0_de(&D_8011FE88, arg0, 0);
 }

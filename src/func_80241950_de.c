@@ -61,7 +61,7 @@ void func_80241950_de(char *obj, Vec3 *corners, char *floor, s32 attachment) {
     f32 angle;
 
     anim = obj + 0x170;
-    shape = (ShapeRecAt18V1 *)((u8 *)((Actor_func_8024A7A0_de *)obj)->definition + 0x14);
+    shape = (ShapeRecAt18V1 *)((u8 *)((LevelActor *)obj)->definition + 0x14);
     if (attachment != 0) {
         grow = func_8024D398_de(attachment);
         lift = func_8024D284_de(attachment);
@@ -112,17 +112,17 @@ void func_80241950_de(char *obj, Vec3 *corners, char *floor, s32 attachment) {
     corners[7].y = bottom;
     corners[7].z = minZ;
     func_80273648_de(rest, ((Dest *)anim)->restPitch);
-    sine = func_802B7130_de(((Actor_func_8024A7A0_de *)obj)->yaw * 0.5f);
+    sine = func_802B7130_de(((LevelActor *)obj)->yaw * 0.5f);
     yaw.x = 0.0f;
     yaw.y = sine;
     yaw.z = 0.0f;
-    angle = ((Actor_func_8024A7A0_de *)obj)->yaw * 0.5f;
+    angle = ((LevelActor *)obj)->yaw * 0.5f;
     D_80115DEC = sine;
     yaw.w = func_802B6560_de(angle);
-    func_80274098_de(&orient, &yaw, &((Actor_func_8024A7A0_de *)obj)->rotation);
+    func_80274098_de(&orient, &yaw, &((LevelActor *)obj)->rotation);
     func_80274244_de(&orient, turn);
     func_8026F620_de(matrix, rest, turn);
-    func_80273448_de(matrix, ((Actor_func_8024A7A0_de *)obj)->position0.x, ((Actor_func_8024A7A0_de *)obj)->position0.y, ((Actor_func_8024A7A0_de *)obj)->position0.z);
+    func_80273448_de(matrix, ((LevelActor *)obj)->position0.x, ((LevelActor *)obj)->position0.y, ((LevelActor *)obj)->position0.z);
     func_80272944_de(matrix, corners, corners, 8);
     if (shape->flags & 1) {
         bottom = ((ActorMotion *)floor)->end.y - ((ActorMotion *)floor)->height;

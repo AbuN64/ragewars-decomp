@@ -33,8 +33,8 @@ void func_8022B69C_de(void *arg0, f32 arg1, void *arg2) {
     temp_f0 = D_800C9190_de[1];
     ((Shared_ActorView *)arg0)->reserve = temp_f1;
     if (temp_f1 <= temp_f0) {
-        func_80216488_de(&sp18, arg2, ((Actor_func_8024A7A0_de *)arg0)->active + 0x1900, 25.599998f, 0x80, 0);
-        func_80219A40_de(arg0, &((Actor_func_8024A7A0_de *)arg0)->behaviorFlags, &sp18);
+        func_80216488_de(&sp18, arg2, ((LevelActor *)arg0)->active + 0x1900, 25.599998f, 0x80, 0);
+        func_80219A40_de(arg0, &((LevelActor *)arg0)->behaviorFlags, &sp18);
     }
 }
 

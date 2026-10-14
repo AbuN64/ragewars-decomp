@@ -25,7 +25,7 @@ extern char D_80103FCC[];
 
 
 
-void func_8022DE58_de(Player *arg0, Actor_func_8024A7A0_de *arg1) {
+void func_8022DE58_de(Player *arg0, LevelActor *arg1) {
     Vec3 next;
     f32 temp_f0;
     f32 temp_f1;

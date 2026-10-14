@@ -29,20 +29,20 @@ void func_8022CF38_de(void *arg0, void *arg1) {
     ((Shared_ActorView *)arg0)->forwardSpeed *= D_800C2D94_de;
     ((Shared_ActorView *)arg0)->lateralSpeed *= D_800C2D94_de;
 
-    value = ((Actor_func_8024A7A0_de *)arg1)->position1.y * D_800C2D98_de;
+    value = ((LevelActor *)arg1)->position1.y * D_800C2D98_de;
     minimum = D_800C2D9C_de;
-    ((Actor_func_8024A7A0_de *)arg1)->position1.y = value;
+    ((LevelActor *)arg1)->position1.y = value;
     if (value < minimum) {
-        ((Actor_func_8024A7A0_de *)arg1)->position1.y = minimum;
+        ((LevelActor *)arg1)->position1.y = minimum;
     }
 
     ((Shared_ActorView *)arg0)->collisionState = 0;
     func_8023913C_de(((Shared_ActorView *)arg0)->message);
     func_80218464_de(((Shared_func_80227014_S2 *)arg0)->unk938);
 
-    if (((Actor_func_8024A7A0_de *)arg1)->motionState & 0x8000) {
-        func_8025DE54_de(0x2DA, ((Actor_func_8024A7A0_de *)arg1)->position0, 0, -1);
+    if (((LevelActor *)arg1)->motionState & 0x8000) {
+        func_8025DE54_de(0x2DA, ((LevelActor *)arg1)->position0, 0, -1);
     } else {
-        func_8025DE54_de(0x2DC, ((Actor_func_8024A7A0_de *)arg1)->position0, 0, -1);
+        func_8025DE54_de(0x2DC, ((LevelActor *)arg1)->position0, 0, -1);
     }
 }

@@ -23,7 +23,7 @@ void func_8022CDBC_de(void *arg0, void *arg1) {
         (((Shared_ActorView *)arg0)->actionTimer >= D_800C2D8C_de)) {
         func_802227F4_de(arg0, arg1, 8);
     } else {
-        ((Actor_func_8024A7A0_de *)arg1)->position1.y = D_800C2D90_de;
+        ((LevelActor *)arg1)->position1.y = D_800C2D90_de;
     }
     func_8022CE78_de((s32)arg0, (s32)arg1);
 }

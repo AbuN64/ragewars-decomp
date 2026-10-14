@@ -21,7 +21,7 @@ void func_8028C26C_de(char *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     s32 field_c8;
     s32 field_c0;
 
-    if (!(((Actor_func_8024A7A0_de *)arg1)->flags & 0x80000)) {
+    if (!(((LevelActor *)arg1)->flags & 0x80000)) {
         first = (u32)((Shared_World *)arg0)->actors;
         index = -1;
         if ((u32)arg1 >= first) {

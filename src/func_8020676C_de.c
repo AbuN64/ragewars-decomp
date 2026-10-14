@@ -16,7 +16,7 @@ extern void func_80285DB0_de(char *a, void *b, int c);
 
 void func_8020676C_de(void *arg0, void *arg1, void *arg2) {
     func_802065C0_de(arg0, arg1, (u16)((Trigger *)arg2)->unk4);
-    ((Actor_func_8024A7A0_de *)arg0)->flags = ((Actor_func_8024A7A0_de *)arg0)->flags | 0x2100;
+    ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2100;
     func_802472F0_de(arg0);
     func_80285DB0_de(&D_8011FE88, arg0, 0);
 }

@@ -21,15 +21,15 @@ void func_80206604_de(void *arg0, void *arg1) {
 
     ((ActorMotionState *)arg1)->table = &D_800C85F0_de;
     ((ActorMotionState *)arg1)->update = &D_00206724;
-    flags = ((Actor_func_8024A7A0_de *)arg0)->flags;
+    flags = ((LevelActor *)arg0)->flags;
     flags |= 0x01000000;
     flags |= 0x02000000;
     flags2 = flags | 0x20000;
-    ((Actor_func_8024A7A0_de *)arg0)->flags = flags2;
+    ((LevelActor *)arg0)->flags = flags2;
     if (D_801462E5.unk0 == 0) {
-        ((Actor_func_8024A7A0_de *)arg0)->flags = flags2 | 0x10000000;
+        ((LevelActor *)arg0)->flags = flags2 | 0x10000000;
     }
-    if ((((Actor_func_8024A7A0_de *)arg0)->type == 0x453) && (func_80245B0C_de() == 0x6F)) {
+    if ((((LevelActor *)arg0)->type == 0x453) && (func_80245B0C_de() == 0x6F)) {
         ((ActorMotionState *)arg1)->secondaryUpdate = &D_0020694C;
     }
 }

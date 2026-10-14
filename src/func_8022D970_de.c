@@ -30,9 +30,9 @@ void func_8022D970_de(void *arg0, void *arg1) {
     ((Shared_ActorView *)o)->effectModel = (void *)temp_v0;
     if (temp_v0 != 0) {
         ((Shared_ActorView *)o)->modelState = 0;
-        ((Shared_ActorView *)o)->effectPosition.x = ((Actor_func_8024A7A0_de *)a1)->position0.x;
-        ((Shared_ActorView *)o)->effectPosition.y = ((Actor_func_8024A7A0_de *)a1)->position0.y;
-        ((Shared_ActorView *)o)->effectPosition.z = ((Actor_func_8024A7A0_de *)a1)->position0.z;
+        ((Shared_ActorView *)o)->effectPosition.x = ((LevelActor *)a1)->position0.x;
+        ((Shared_ActorView *)o)->effectPosition.y = ((LevelActor *)a1)->position0.y;
+        ((Shared_ActorView *)o)->effectPosition.z = ((LevelActor *)a1)->position0.z;
         sp10.x = ((ModelBlend *)temp_v0)->effectOffset.x;
         sp10.y = ((ModelBlend *)temp_v0)->effectOffset.y;
         sp10.z = ((ModelBlend *)temp_v0)->effectOffset.z;

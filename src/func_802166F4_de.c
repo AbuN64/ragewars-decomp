@@ -17,7 +17,7 @@ extern void func_80279864_de(WeightedTable *, s32, s32);
 extern s16 func_802798A8_de(WeightedTable *);
 extern s32 func_80246A08_de(s32, s32, s32);
 
-s32 func_802166F4_de(s32 owner, s32 unused, struct Shape_func_802764D4_de_2 *table, s32 flags) {
+s32 func_802166F4_de(s32 owner, s32 unused, struct IntPair *table, s32 flags) {
     WeightedTable picker;
     s32 first;
     s16 pick;

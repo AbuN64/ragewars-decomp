@@ -19,7 +19,7 @@ extern s32 D_801462C8;
 
 
 void func_80206080_de(void *arg0, void *arg1) {
-    Actor_func_8024A7A0_de *actor = arg0;
+    LevelActor *actor = arg0;
     ActorMotionState *motion = arg1;
     AnimationTriggerResource *resource;
     AnimationTriggerDefinition *base;

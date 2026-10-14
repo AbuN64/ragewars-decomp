@@ -2,8 +2,8 @@
 #define RW_LEVEL_ACTOR_H
 #include "common/types_06e4f7ef1f9e.h"
 #include "shared/particle_lighting.h"
-typedef struct Actor_func_8024A7A0_de Actor_func_8024A7A0_de;
-struct Actor_func_8024A7A0_de {
+typedef struct LevelActor LevelActor;
+struct LevelActor {
     u8 kind;
     s8 team;
     char pad2;

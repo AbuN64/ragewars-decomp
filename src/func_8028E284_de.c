@@ -42,7 +42,7 @@ void func_8028E390_de(void *arg0, void *table, u8 *remap) {
     void *data;
     u8 tag;
     ImageSet *set;
-    struct Shape_func_802764D4_de_2 *image;
+    struct IntPair *image;
     s32 rows;
     s32 columns;
     u32 count;
@@ -65,7 +65,7 @@ void func_8028E390_de(void *arg0, void *table, u8 *remap) {
         set = data;
         rows = set->rows;
         rows--;
-        image = (struct Shape_func_802764D4_de_2 *)(set + 1);
+        image = (struct IntPair *)(set + 1);
         while (1) {
             if (rows == end) {
                 break;
@@ -85,7 +85,7 @@ void func_8028E390_de(void *arg0, void *table, u8 *remap) {
                     *pixel = (hi << 4) | lo;
                     pixel++;
                 }
-                image = (struct Shape_func_802764D4_de_2 *)((u8 *)image + ((u32)(width * height) >> 1));
+                image = (struct IntPair *)((u8 *)image + ((u32)(width * height) >> 1));
                 image++;
             }
             rows--;
@@ -110,7 +110,7 @@ void func_8028E4A4_de(void *arg0, void **resource) {
     void *table;
     u8 *remap;
     ImageSet *set;
-    struct Shape_func_802764D4_de_2 *image;
+    struct IntPair *image;
     s32 rows;
     s32 columns;
     u32 count;
@@ -137,7 +137,7 @@ void func_8028E4A4_de(void *arg0, void **resource) {
             set = data;
             rows = set->rows;
             rows--;
-            image = (struct Shape_func_802764D4_de_2 *)(set + 1);
+            image = (struct IntPair *)(set + 1);
             while (1) {
                 if (rows == end) {
                     break;
@@ -157,7 +157,7 @@ void func_8028E4A4_de(void *arg0, void **resource) {
                         *pixel = (hi << 4) | lo;
                         pixel++;
                     }
-                    image = (struct Shape_func_802764D4_de_2 *)((u8 *)image + ((u32)(width * height) >> 1));
+                    image = (struct IntPair *)((u8 *)image + ((u32)(width * height) >> 1));
                     image++;
                 }
                 rows--;
@@ -183,7 +183,7 @@ void func_8028E5D0_de(void *arg0, void **resource) {
     void *table;
     u8 *remap;
     ImageSet *set;
-    struct Shape_func_802764D4_de_2 *image;
+    struct IntPair *image;
     s32 rows;
     s32 columns;
     u32 count;
@@ -210,7 +210,7 @@ void func_8028E5D0_de(void *arg0, void **resource) {
             set = data;
             rows = set->rows;
             rows--;
-            image = (struct Shape_func_802764D4_de_2 *)(set + 1);
+            image = (struct IntPair *)(set + 1);
             while (1) {
                 if (rows == end) {
                     break;
@@ -230,7 +230,7 @@ void func_8028E5D0_de(void *arg0, void **resource) {
                         *pixel = (hi << 4) | lo;
                         pixel++;
                     }
-                    image = (struct Shape_func_802764D4_de_2 *)((u8 *)image + ((u32)(width * height) >> 1));
+                    image = (struct IntPair *)((u8 *)image + ((u32)(width * height) >> 1));
                     image++;
                 }
                 rows--;

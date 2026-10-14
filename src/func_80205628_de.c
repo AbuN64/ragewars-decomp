@@ -9,7 +9,7 @@ extern s32 D_800D297C;
 /* Draw callback installed by func_8020520C_de; the animation lookup is
  * the same third callback argument consumed by func_8024A1D0_de. */
 void func_80205628_de(void *arg0, void *arg1, void *arg2) {
-    Actor_func_8024A7A0_de *actor = arg0;
+    LevelActor *actor = arg0;
     SpawnDispatchOwner *owner = arg1;
     Lookup *lookup = arg2;
 

@@ -13,10 +13,10 @@ s32 func_8024DF5C_de(void *arg0) {
     ModelBlend *temp_a1;
     s32 var_v1;
 
-    temp_a1 = ((Actor_func_8024A7A0_de *)arg0)->definition;
+    temp_a1 = ((LevelActor *)arg0)->definition;
     if (temp_a1->kind == 1) {
         var_v1 = 0;
-        if (((Actor_func_8024A7A0_de *)arg0)->active <= 0 || (temp_a1->collisionOptions & 4)) {
+        if (((LevelActor *)arg0)->active <= 0 || (temp_a1->collisionOptions & 4)) {
             var_v1 = 1;
         }
         return var_v1;

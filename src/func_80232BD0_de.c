@@ -23,10 +23,10 @@ s32 func_80232BD0_de(void *arg0, void *arg1, void *arg2) {
             return 1;
         }
     }
-    if ((((Actor_func_8024A7A0_de *)arg0)->flags & 0x300000) && (((Shared_ActorView *)arg2)->remote != 0)) {
+    if ((((LevelActor *)arg0)->flags & 0x300000) && (((Shared_ActorView *)arg2)->remote != 0)) {
         temp_v1 = ((Shared_ActorView *)arg2)->owner;
-        temp_v0 = ((Actor_func_8024A7A0_de *)temp_v1)->actionReady;
-        ((Actor_func_8024A7A0_de *)temp_v1)->actionReady = 0;
+        temp_v0 = ((LevelActor *)temp_v1)->actionReady;
+        ((LevelActor *)temp_v1)->actionReady = 0;
         return temp_v0 == 0;
     }
     if (((Shared_ActorView *)arg2)->actionFlags & 0x2000) {

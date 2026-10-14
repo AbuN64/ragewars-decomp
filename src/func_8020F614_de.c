@@ -32,7 +32,7 @@ s32 func_8020F614_de(void) {
             result = func_8020C994_de(base, node->key);
             if ((((NavigationNode *)result)->flags & 1) &&
                 ((NavigationNode *)result)->reservedE == 0x64E &&
-                (s8)((Actor_func_8024A7A0_de *)node->object)->pad1A4 == 0) {
+                (s8)((LevelActor *)node->object)->pad1A4 == 0) {
                 func_8020D220_de(base, node->key);
                 count += 1;
             }

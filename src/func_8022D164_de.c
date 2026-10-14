@@ -16,7 +16,7 @@ void func_8022D164_de(void *arg0, void *arg1)
   new_var = &((Player *)arg0)->movementScale;
   ((Player *)arg0)->state6C4 = 0;
   *new_var = new_var3;
-  ((Actor_func_8024A7A0_de *)arg1)->position1.x = 0;
-  ((Actor_func_8024A7A0_de *)arg1)->position1.y = 0;
-  ((Actor_func_8024A7A0_de *)arg1)->position1.z = 0;
+  ((LevelActor *)arg1)->position1.x = 0;
+  ((LevelActor *)arg1)->position1.y = 0;
+  ((LevelActor *)arg1)->position1.z = 0;
 }

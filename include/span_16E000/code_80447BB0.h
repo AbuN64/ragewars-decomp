@@ -3072,13 +3072,13 @@ struct ObjectPool {
 };
 
 struct Node_func_80449E18_de;
-struct Shape_func_802764D4_de_2;
+struct IntPair;
 struct Node_func_80449E18_de {
     char p0[8];
     s32 unk8;
     char p1[8];
     s32 unk14;
-    struct Shape_func_802764D4_de_2 *unk18;
+    struct IntPair *unk18;
     char p2[4];
     struct Node_func_80449E18_de *unk20;
     char p3[0x2D8];

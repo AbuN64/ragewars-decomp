@@ -10,9 +10,9 @@
 
 
 
-extern void func_80266810_de(unsigned char *, s32, s32, Triple, struct Shape_func_802764D4_de_2, s32, s32, s32);
+extern void func_80266810_de(unsigned char *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
-void func_80267B68_de(unsigned char *arg0, s32 arg1, s32 arg2, Triple arg3, struct Shape_func_802764D4_de_2 arg6) {
+void func_80267B68_de(unsigned char *arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
     if (*arg0 == 1) {
         func_80266810_de(arg0, arg1, arg2, arg3, arg6, 0, 0, 0x80);
     }

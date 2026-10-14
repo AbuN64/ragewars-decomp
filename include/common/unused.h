@@ -766,8 +766,8 @@ extern u16 D_8014D48C;
 
 extern char D_800D38FC[];
 
-struct Shape_func_802764D4_de_2;
-extern struct Shape_func_802764D4_de_2 D_80149B10[];
+struct IntPair;
+extern struct IntPair D_80149B10[];
 
 extern s32 D_800E1014[];
 
@@ -2768,7 +2768,7 @@ typedef struct ActorRecAt1D8V2 ActorRecAt1D8V2;
 struct Actor_func_80214624_de;
 typedef struct Actor_func_80214624_de Actor_func_80214624_de;
 
-struct Actor_func_8024A7A0_de;
+struct LevelActor;
 
 
 struct Angles;
@@ -4406,7 +4406,7 @@ struct Runtime {
     char p78C[8];
     struct Actor_func_80214624_de *unk794;
 };
-struct Actor_func_8024A7A0_de;
+struct LevelActor;
 
 struct Angles;
 struct Angles {

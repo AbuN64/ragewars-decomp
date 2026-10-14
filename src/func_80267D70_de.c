@@ -15,9 +15,9 @@ extern void func_80232744_de(void *arg0, s32 arg1, s32 arg2);
 void func_80267D70_de(s32 arg0, void *arg1, s32 arg2, Vec3 arg3, s32 arg6)
 {
   s32 t6 = arg6;
-  void *temp = ((Actor_func_8024A7A0_de *)arg1)->controller;
+  void *temp = ((LevelActor *)arg1)->controller;
   ((Player *)temp)->requestedPosition = arg3;
  /* FAKEMATCH: preserve instruction scheduling between the copied triple and the following call. */
  do { } while (0);
-  func_80232744_de(arg1, (s32) (&((struct Actor_func_8024A7A0_de *)arg1)->behaviorFlags), t6);
+  func_80232744_de(arg1, (s32) (&((struct LevelActor *)arg1)->behaviorFlags), t6);
 }

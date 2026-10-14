@@ -102,7 +102,7 @@ void func_8024B2D0_de(char *arg0)
     char *object;
     TypeEntry *entry;
 
-    type = *((struct Actor_func_8024A7A0_de *)(arg0))->definition;
+    type = *((struct LevelActor *)(arg0))->definition;
     if ((u32)type < 15) {
         goto valid_type;
     }
@@ -137,8 +137,8 @@ selected:
     if (entry != 0 && entry->callback != 0) {
         entry->callback(arg0, (char *)arg0 + 0x170);
     }
-    if ((((struct Actor_func_8024A7A0_de *)(arg0))->flags & 0x08000000) != 0) {
-        (((struct Actor_func_8024A7A0_de *)(arg0))->updateCount)++;
+    if ((((struct LevelActor *)(arg0))->flags & 0x08000000) != 0) {
+        (((struct LevelActor *)(arg0))->updateCount)++;
     }
 }
 

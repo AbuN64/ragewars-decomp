@@ -120,8 +120,8 @@ typedef struct ObjectRecAt8 ObjectRecAt8;
 struct func_80278900_S1;
 typedef struct func_80278900_S1 func_80278900_S1;
 
-struct Actor_func_8024A7A0_de;
-extern void func_80278F68_de(struct Actor_func_8024A7A0_de *object);
+struct LevelActor;
+extern void func_80278F68_de(struct LevelActor *object);
 
 struct func_80278900_S1;
 struct func_80278900_S1 {

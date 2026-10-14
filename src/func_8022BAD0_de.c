@@ -37,7 +37,7 @@ void func_8022BAD0_de(void *arg0) {
             ((Shared_ActorView *)arg0)->model = result;
         }
     }
-    ((Actor_func_8024A7A0_de *)arg0)->scale.x = ((ObjectState108 *)result)->unk_FC;
-    ((Actor_func_8024A7A0_de *)arg0)->scale.y = ((ObjectState108 *)result)->unk_100;
-    ((Actor_func_8024A7A0_de *)arg0)->scale.z = ((ObjectState108 *)result)->unk_104;
+    ((LevelActor *)arg0)->scale.x = ((ObjectState108 *)result)->unk_FC;
+    ((LevelActor *)arg0)->scale.y = ((ObjectState108 *)result)->unk_100;
+    ((LevelActor *)arg0)->scale.z = ((ObjectState108 *)result)->unk_104;
 }

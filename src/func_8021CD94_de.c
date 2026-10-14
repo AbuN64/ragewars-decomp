@@ -98,7 +98,7 @@ block_34:
 }
 
 /* These contiguous globals place the actor-list pointer 0x1285 bytes before the enable flag. */
-extern void *func_8024BC94_de(void *arg0, s32 unused1, struct Shape_func_802764D4_de_2 arg2);
+extern void *func_8024BC94_de(void *arg0, s32 unused1, struct IntPair arg2);
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
 extern s32 func_8021CD94_de(func_8021CD70_S1 *, func_8021CD70_S2 *);

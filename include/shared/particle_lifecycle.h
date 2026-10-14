@@ -10,7 +10,7 @@ typedef struct LiveParticle {
 } LiveParticle;
 /* Effect arguments use the same two-word ABI with signed halfword controls. */
 typedef union ParticleActionPair {
-    struct Shape_func_802764D4_de_2 words;
+    struct IntPair words;
     struct { s16 upper, lower; s32 last; } control;
 } ParticleActionPair;
 #endif

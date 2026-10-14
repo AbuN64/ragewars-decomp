@@ -29,7 +29,7 @@ extern void func_80253754_de(s32, void *);
 
 
 
-s32 func_80246A08_de(Actor_func_8024A7A0_de *arg0, s32 arg1, s32 arg2) {
+s32 func_80246A08_de(LevelActor *arg0, s32 arg1, s32 arg2) {
     WeightedTable table;
     void **resource;
     s32 *entries;

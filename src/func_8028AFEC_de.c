@@ -30,14 +30,14 @@ void *func_8028B00C_de(void *object, int index) {
 extern Gfx *D_80110634;
 
 
-extern void func_80249E28_de(Actor_func_8024A7A0_de *object, void *camera);
+extern void func_80249E28_de(LevelActor *object, void *camera);
 
 void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
-    Actor_func_8024A7A0_de *object;
+    LevelActor *object;
     s32 count;
     s32 i;
     s32 late;
-    Actor_func_8024A7A0_de **objects;
+    LevelActor **objects;
 
     func_8026D980_de();
     count = scene->count;

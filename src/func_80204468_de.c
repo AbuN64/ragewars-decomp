@@ -19,9 +19,9 @@ void func_80204468_de(void *arg0, void *arg1) {
     ((ActorMotionState *)arg1)->unk124 = 0;
     ((ActorMotionState *)arg1)->unk128 = 0;
     ((ActorMotionState *)arg1)->unk12C = 0;
-    if (((BreakableDefinition *)((Actor_func_8024A7A0_de *)arg0)->definition)->flags & 1) {
-        ((Actor_func_8024A7A0_de *)arg0)->flags = ((Actor_func_8024A7A0_de *)arg0)->flags | 0x10000;
+    if (((BreakableDefinition *)((LevelActor *)arg0)->definition)->flags & 1) {
+        ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x10000;
         return;
     }
-    ((Actor_func_8024A7A0_de *)arg0)->flags = ((Actor_func_8024A7A0_de *)arg0)->flags & 0xFFFEFFFF;
+    ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags & 0xFFFEFFFF;
 }

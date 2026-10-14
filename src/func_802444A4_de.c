@@ -52,7 +52,7 @@ s32 func_802444A4_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3) {
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
+            flags = ((struct LevelActor *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
@@ -142,7 +142,7 @@ s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
+            flags = ((struct LevelActor *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
@@ -232,7 +232,7 @@ s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
+            flags = ((struct LevelActor *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }
@@ -313,7 +313,7 @@ s32 func_80244B68_de(char *arg0, char *arg1, Vec3 first, Vec3 second,
     if (object != 0) {
         s32 value = 0;
         if (*(u8 *)object == 1) {
-            flags = ((struct Actor_func_8024A7A0_de *)(object))->flags;
+            flags = ((struct LevelActor *)(object))->flags;
             flags &= 0x300000;
             value = flags != 0;
         }

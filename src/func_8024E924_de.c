@@ -11,17 +11,17 @@ extern int func_8028B25C_de(void *arg0, int arg1);
 
 
 int func_8024E924_de(void *arg0) {
-    if (((Actor_func_8024A7A0_de *)arg0)->kind == 1) {
-        return ((Actor_func_8024A7A0_de *)arg0)->type;
+    if (((LevelActor *)arg0)->kind == 1) {
+        return ((LevelActor *)arg0)->type;
     }
-    return func_8028B25C_de(&D_8011FE88, (u16)((Actor_func_8024A7A0_de *)arg0)->modelIndex);
+    return func_8028B25C_de(&D_8011FE88, (u16)((LevelActor *)arg0)->modelIndex);
 }
 
 /** Return the selected record field, or negative one for another type. */
 int func_8024E968_de(void *record) {
     int result = -1;
-    if (((Actor_func_8024A7A0_de *)record)->kind == 1) {
-        result = ((Actor_func_8024A7A0_de *)record)->motionIndex;
+    if (((LevelActor *)record)->kind == 1) {
+        result = ((LevelActor *)record)->motionIndex;
     }
     return result;
 }

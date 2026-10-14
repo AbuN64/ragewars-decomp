@@ -391,7 +391,7 @@ struct Shared_ParticleDistanceRange {
 #include "shared/particle_lighting.h"
 /* Fourteen event slots: paired parameters followed by parallel ID arrays. */
 struct Shared_ParticleEvents {
-    struct Shape_func_802764D4_de_2 parameters[14];
+    struct IntPair parameters[14];
     u16 particles[14];
     u16 effects[14];
     u16 sounds[14];

@@ -15,7 +15,7 @@ extern void func_80216288_de(void *, s32, Triple, s32);
 
 
 
-void func_8026835C_de(void *arg0, Filter *arg1, s32 arg2, Triple arg3, struct Shape_func_802764D4_de_2 arg6) {
+void func_8026835C_de(void *arg0, Filter *arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
     ObjRecAt1 *object = arg0;
     switch (arg1->type) {
     case 0:

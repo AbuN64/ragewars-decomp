@@ -3,7 +3,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 typedef struct ParticleEvents {
-    struct Shape_func_802764D4_de_2 params[14];
+    struct IntPair params[14];
     u16 models[14],effects[14],sounds[14];
 } ParticleEvents;
 typedef struct ParticleConfig { char pad0[0x18]; ParticleEvents *events; } ParticleConfig;
@@ -24,7 +24,7 @@ extern IntrusiveList D_801379C0,D_8013B1A8;
 extern void func_8027B720_de(void *),func_80279A00_de(void *),func_80284178_de(void *);
 extern void func_802A42F4_de(void *,void *),func_80268C7C_de(void *,s32);
 extern void func_80255ED8_de(void *,void *),func_80255CB8_de(void *,void *);
-extern void func_80265E10_de(void *,void *,u16,s32,Vec3,struct Shape_func_802764D4_de_2);
+extern void func_80265E10_de(void *,void *,u16,s32,Vec3,struct IntPair);
 extern void func_80279B40_de(void *,s32,s32,s32);
 extern void func_8025DE54_de(s16,Vec3,s32,s32);
 extern void func_80281A9C_de(s32,void *,void *,s32);
@@ -34,7 +34,7 @@ extern void func_80271F68_de(Vec3 *,Vec3 *,Vec3 *);
 void func_80281CA0_de(ParticleWorld *world) {
     StepParticle *selected[128];
     StepParticle *actors[128];
-    struct Shape_func_802764D4_de_2 params;
+    struct IntPair params;
     Vec3 delta;
     ParticleList *list;
     StepParticle *p,*other,*node,*focus;

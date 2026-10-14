@@ -12,7 +12,7 @@
 
 /** Clear two flags when the controlling byte and nested flag are set. */
 void func_802055EC_de(void *arg0, void *arg1) {
-    Actor_func_8024A7A0_de *object = arg0;
+    LevelActor *object = arg0;
     BreakableDefinition *nested = (void *)object->definition;
     ObjectStateCC *state = arg1;
     if (state->unk_CB != 0 &&

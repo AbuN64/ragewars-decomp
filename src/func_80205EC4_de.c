@@ -18,7 +18,7 @@ extern int D_800C854C;
 
 
 void func_80205EC4_de(void *arg0, void *arg1) {
-    Actor_func_8024A7A0_de *actor = arg0;
+    LevelActor *actor = arg0;
     ActorMotionState *state = arg1;
     BreakableDefinition *inner = (BreakableDefinition *)actor->definition;
 

@@ -19,8 +19,8 @@ void func_804491E8_de(Node_func_80449E18_de *);                         /* exter
 void func_80449E18_de(Node_func_80449E18_de *arg0) {
     s32 temp_a0;
     s32 temp_v0;
-    struct Shape_func_802764D4_de_2 *temp_v1;
-    struct Shape_func_802764D4_de_2 *temp_v1_2;
+    struct IntPair *temp_v1;
+    struct IntPair *temp_v1_2;
     Node_func_80449E18_de *var_s0;
 
     if ((func_802934F8_de() != 0) && (func_80264B6C_de() != 0)) {

@@ -5,7 +5,7 @@
 
 s32 func_8024E900_de(void *arg0)
 {
-    Actor_func_8024A7A0_de *actor = arg0;
+    LevelActor *actor = arg0;
   int new_var;
   new_var = 1;
   if ((actor->kind) != 1)

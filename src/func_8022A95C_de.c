@@ -19,7 +19,7 @@ extern void func_80246E44_de(char *);
 
 
 void func_8022A95C_de(void *arg0) {
-    Actor_func_8024A7A0_de *base;
+    LevelActor *base;
     s32 old_value;
     s32 new_value;
     f32 saved_value;
@@ -36,10 +36,10 @@ void func_8022A95C_de(void *arg0) {
     new_value = ((Shared_ActorView *)arg0)->effectId;
     D_800D2988 = saved_value;
     if (old_value != new_value) {
-        ((Actor_func_8024A7A0_de *)arg0)->animationPending = 0;
+        ((LevelActor *)arg0)->animationPending = 0;
     }
-    ((Shared_ActorView *)arg0)->weapon.position0 = ((Actor_func_8024A7A0_de *)arg0)->position0;
-    ((Shared_ActorView *)arg0)->weapon.yaw = ((Actor_func_8024A7A0_de *)arg0)->yaw;
-    ((Shared_ActorView *)arg0)->weapon.model = ((Actor_func_8024A7A0_de *)arg0)->model;
-    ((Shared_ActorView *)arg0)->weapon.rotation = ((Actor_func_8024A7A0_de *)arg0)->rotation;
+    ((Shared_ActorView *)arg0)->weapon.position0 = ((LevelActor *)arg0)->position0;
+    ((Shared_ActorView *)arg0)->weapon.yaw = ((LevelActor *)arg0)->yaw;
+    ((Shared_ActorView *)arg0)->weapon.model = ((LevelActor *)arg0)->model;
+    ((Shared_ActorView *)arg0)->weapon.rotation = ((LevelActor *)arg0)->rotation;
 }

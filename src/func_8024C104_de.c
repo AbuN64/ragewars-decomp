@@ -22,11 +22,11 @@ void *func_8024C104_de(void *arg0, void *arg1, s32 *arg2) {
     inVec[0] = spVec[0];
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
-    func_802736D4_de(mtx, ((Actor_func_8024A7A0_de *)o1)->yaw);
+    func_802736D4_de(mtx, ((LevelActor *)o1)->yaw);
     func_80272898_de(mtx, inVec, outVec);
-    outVec[0] *= ((Actor_func_8024A7A0_de *)o1)->scale.x;
-    outVec[1] *= ((Actor_func_8024A7A0_de *)o1)->scale.y;
-    outVec[2] *= ((Actor_func_8024A7A0_de *)o1)->scale.z;
+    outVec[0] *= ((LevelActor *)o1)->scale.x;
+    outVec[1] *= ((LevelActor *)o1)->scale.y;
+    outVec[2] *= ((LevelActor *)o1)->scale.z;
     *(Triple *) arg0 = *(Triple *) outVec;
     return arg0;
 }

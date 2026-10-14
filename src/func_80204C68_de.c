@@ -35,7 +35,7 @@ void func_80204C68_de(void *arg0, void *arg1) {
     func_802A5D38_de(&D_801379C0, arg0);
     if (flag->mode != 4) {
         func_80267198_de(arg0, arg0, 6,
-                      ((Actor_func_8024A7A0_de *)arg0)->position0, local);
-        ((Actor_func_8024A7A0_de *)arg0)->flags |= 0x08000000;
+                      ((LevelActor *)arg0)->position0, local);
+        ((LevelActor *)arg0)->flags |= 0x08000000;
     }
 }

@@ -28,7 +28,7 @@ extern struct Shape_typemap_13 *func_8028FDB4_de(s32, s32);
 extern void func_80253754_de(s32, s32 *);
 extern void func_80270910_de(f32 *, char *);
 extern void func_80272898_de(void *, Vec3 *, Vec3 *);
-extern void func_80265E10_de(char *, char *, u16, s32, Vec3, struct Shape_func_802764D4_de_2);
+extern void func_80265E10_de(char *, char *, u16, s32, Vec3, struct IntPair);
 
 void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
     Vec3 pos;

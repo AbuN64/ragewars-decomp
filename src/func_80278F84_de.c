@@ -7,7 +7,7 @@
 
 
 
-void func_80278F84_de(Actor_func_8024A7A0_de *arg0) {
+void func_80278F84_de(LevelActor *arg0) {
     func_802472F0_de(arg0);
     arg0->flags = (s32) (arg0->flags | 0x2100);
 }

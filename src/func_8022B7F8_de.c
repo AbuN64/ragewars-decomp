@@ -84,10 +84,10 @@ void func_8022B7F8_de(void *arg0, void *arg1) {
     if (source == 0) {
         return;
     }
-    if (((Actor_func_8024A7A0_de *)source)->kind != 1) {
+    if (((LevelActor *)source)->kind != 1) {
         return;
     }
-    if ((((Actor_func_8024A7A0_de *)source)->flags & 0x300000) == 0) {
+    if ((((LevelActor *)source)->flags & 0x300000) == 0) {
         return;
     }
 
