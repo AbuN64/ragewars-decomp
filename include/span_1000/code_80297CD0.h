@@ -38,8 +38,8 @@ struct Element {
     MenuElementHandler handler;
 };
 
-struct Ui_func_80297FA0_de;
-typedef struct Ui_func_80297FA0_de Ui_func_80297FA0_de;
+struct ScreenManager;
+typedef struct ScreenManager ScreenManager;
 
 struct Entry_func_80298ECC_de;
 struct Entry_func_80298ECC_de {
@@ -104,8 +104,8 @@ struct MenuHandlerEntry {
     s32 flags;
 };
 
-struct WidgetTable_func_802982C4_de;
-struct WidgetTable_func_802982C4_de {
+struct MenuHandlerTable;
+struct MenuHandlerTable {
     u8 pad0[0x1C];
     struct MenuHandlerEntry handlers[64];
 };
@@ -247,8 +247,8 @@ struct State_func_80297DBC_de {
     s32 (*unk10)(s32);
 };
 
-struct WidgetTable_func_802982C4_de;
-typedef struct WidgetTable_func_802982C4_de WidgetTable_func_802982C4_de;
+struct MenuHandlerTable;
+typedef struct MenuHandlerTable MenuHandlerTable;
 
 extern void func_802982C4_de(s32 id, MenuElementHandler event_handler, MenuDrawHandler draw_handler, s32 flags);
 extern MenuElementHandler func_802997E4_de(s32 kind);
@@ -320,8 +320,8 @@ struct func_8029A7E4_S1 {
 
 extern void func_80298FE8_de();
 
-struct Ui_func_80297FA0_de;
-struct Ui_func_80297FA0_de {
+struct ScreenManager;
+struct ScreenManager {
     s32 pad0;
     s32 current;
     s32 pad8;

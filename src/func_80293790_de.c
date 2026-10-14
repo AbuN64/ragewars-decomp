@@ -12,21 +12,21 @@ extern int func_80264B6C_de(void);
 void func_80293790_de(void *arg0, s32 arg1) {
     s32 saved;
 
-    saved = ((Session_func_80293A20_de *)arg0)->mode;
-    ((Session_func_80293A20_de *)arg0)->phase = 1;
-    ((Session_func_80293A20_de *)arg0)->timer = 0;
-    ((Session_func_80293A20_de *)arg0)->mode = 0x14;
-    ((Session_func_80293A20_de *)arg0)->target = arg1;
-    ((Session_func_80293A20_de *)arg0)->previousMode = saved;
+    saved = ((GameSession *)arg0)->mode;
+    ((GameSession *)arg0)->phase = 1;
+    ((GameSession *)arg0)->timer = 0;
+    ((GameSession *)arg0)->mode = 0x14;
+    ((GameSession *)arg0)->target = arg1;
+    ((GameSession *)arg0)->previousMode = saved;
     if (func_80264B6C_de() != 0) {
-        ((Session_func_80293A20_de *)arg0)->timer = D_800C5494.unk4;
+        ((GameSession *)arg0)->timer = D_800C5494.unk4;
     }
 }
 
 /** Set the state byte and linked value in a large object. */
 void func_80293824_de(void *object, int value) {
-    ((Session_func_80293A20_de *)object)->phase = 2;
-    ((Session_func_80293A20_de *)object)->target = value;
+    ((GameSession *)object)->phase = 2;
+    ((GameSession *)object)->target = value;
 }
 
 typedef void (*Handler8029382C)(void *);
@@ -47,11 +47,11 @@ void func_80293848_de(void *arg0) {
         D_800CD724 = 0;
     }
     func_80264CB8_de();
-    field = ((Session_func_80293A20_de *)arg0)->mode;
+    field = ((GameSession *)arg0)->mode;
     fn = ((SessionHandlerRow *)D_800CD78C)[field].update;
     if (fn != 0) {
         fn(arg0);
-        field = ((Session_func_80293A20_de *)arg0)->mode;
+        field = ((GameSession *)arg0)->mode;
     }
     if (field != 0x14 && D_80142CA8 != 0) {
         D_80142CA8 -= 1;

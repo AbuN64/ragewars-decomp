@@ -18,7 +18,7 @@ extern f32 func_802B72B0_de(f32);
 
 
 
-void func_802165F8_de(Player *arg0, ActorMotionState *arg1, Result_func_802165F8_de *result) {
+void func_802165F8_de(Player *arg0, ActorMotionState *arg1, OffsetResult *result) {
     func_80271F68_de(&result->first, &arg0->pos,
                   &arg1->position);
     result->first_normalized = result->first;

@@ -11,7 +11,7 @@
 
 
 
-extern struct Block_func_80434B08_de *D_800E54A4;
+extern struct PlayerSlotTable *D_800E54A4;
 extern u8 D_80102B00[];
 extern s8 D_800FEB0C[];
 extern s8 D_80102B0D[];

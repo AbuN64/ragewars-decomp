@@ -5,7 +5,7 @@
 #include "shared/func_804235A8_eu_closed.h"
 
 
-extern struct Screen_func_8041DFC0_us_rev1 *D_800E39C0;
+extern struct CourseOptionsScreen *D_800E39C0;
 
 s32 func_8041DFC0_us(void *arg0) {
     func_8041F2A0_Item *item;

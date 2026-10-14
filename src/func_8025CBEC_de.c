@@ -13,8 +13,8 @@ extern void func_80255ED8_de(void *, s32);
 
 
 void func_8025CBEC_de(void *arg0) {
-    Node_func_8025CBEC_de *cur;
-    Node_func_8025CBEC_de *next;
+    SoundSourceNode *cur;
+    SoundSourceNode *next;
     s32 value;
     SoundVoicePool *pool = arg0;
 

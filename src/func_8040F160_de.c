@@ -8,11 +8,11 @@
 
 
 
-extern Font_func_8040F160_de *func_8041200C_de(s32 index);
+extern FontRecord *func_8041200C_de(s32 index);
 extern short func_80411C60_de(s32 index);
 
 s32 func_8040F160_de(s32 font, u8 *text, s32 length) {
-    Font_func_8040F160_de *record;
+    FontRecord *record;
     s32 i;
     s32 total;
 

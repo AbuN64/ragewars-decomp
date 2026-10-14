@@ -26,7 +26,7 @@ extern void func_8026DA4C_de(s32, void *, s32, s32, void *, s32);
 extern void func_8026DC24_de(s32, void *, s32, s32, void *, s32);
 extern void func_80253754_de(s32, s32);
 
-void func_802504B0_de(Owner_func_802504B0_de *owner) {
+void func_802504B0_de(ModelOwner *owner) {
     s32 arg2;
     s32 instance;
     s32 resource;

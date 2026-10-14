@@ -10,12 +10,12 @@
 
 extern void func_802547E4_de(void *p);
 extern void func_802A0748_de(void *p, s32 c, s32 n);
-extern s32 func_804136A8_de(Image_func_80413480_de *image);
-extern s32 func_8041369C_de(Image_func_80413480_de *image);
+extern s32 func_804136A8_de(OwnedImage *image);
+extern s32 func_8041369C_de(OwnedImage *image);
 extern void *func_8025305C_de(s32 size);
 extern void func_802A0724_de(void *dst, void *src, s32 n);
 
-s32 func_80413480_de(Image_func_80413480_de *dst, Image_func_80413480_de *src) {
+s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
     s32 size;
 
     if (dst->flags & 1) {

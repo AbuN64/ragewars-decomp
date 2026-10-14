@@ -15,7 +15,7 @@
 
 
 extern u8 D_801462C8[];
-extern struct Match_func_8042DEA0_de D_801468A0;
+extern struct MatchState D_801468A0;
 extern struct RecordRecAt189 D_80102B00[];
 extern s32 D_800E4680;
 extern s32 D_8015402C;
@@ -44,7 +44,7 @@ void func_8042DEA0_de(void) {
     s32 humans;
     s32 i;
     s32 first;
-    struct Match_func_8042DEA0_de *match;
+    struct MatchState *match;
 
     func_8029973C_de();
     func_80298368_de(2);

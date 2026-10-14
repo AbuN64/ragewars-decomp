@@ -14,7 +14,7 @@ extern s32 func_80255CB8_de(void *arg0, s32 arg1);
 
 
 void *func_80254A28_de(s32 unused0, s32 arg1) {
-    struct Node_func_80251328_de *temp_s0;
+    struct ResourceCacheEntry *temp_s0;
 
     if (D_8010513C.count == 0) {
         return 0;

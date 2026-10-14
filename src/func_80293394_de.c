@@ -18,7 +18,7 @@ void func_80293394_de(void *arg0) {
     color[0] = 0;
     color[1] = 0;
     color[2] = 0;
-    value = ((struct Session_func_80293A20_de *)arg0)->timer;
+    value = ((struct GameSession *)arg0)->timer;
     alpha = 0xFF;
     if (!(value < 0)) {
         alpha = 0;

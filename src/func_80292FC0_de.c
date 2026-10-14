@@ -23,7 +23,7 @@ void func_80292FC0_de(s32 *arg0, s32 arg1) {
     func_802BB750_de((s32)D_8011B7C0);
     {
         s32 temp = D_800CD8A0_de;
-        ((Session_func_80293A20_de *)arg0)->enabled = 0;
+        ((GameSession *)arg0)->enabled = 0;
         func_802BB5F0_de(0, temp);
     }
 loop_1:

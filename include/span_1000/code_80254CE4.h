@@ -68,12 +68,12 @@ struct EntryRecAtCV1 {
 struct func_80255428_S3;
 typedef struct func_80255428_S3 func_80255428_S3;
 
-struct Slot_func_802552E0_de;
-struct Slot_func_802552E0_de {
+struct HashSlot;
+struct HashSlot {
     s32 key;
     s32 value;
     u32 index;
-    struct Slot_func_802552E0_de *next;
+    struct HashSlot *next;
 };
 
 union func_80255428_S1_UC;
@@ -142,8 +142,8 @@ struct Heap {
     struct BlockRecAt14 *first;
 };
 
-struct Slot_func_802552E0_de;
-typedef struct Slot_func_802552E0_de Slot_func_802552E0_de;
+struct HashSlot;
+typedef struct HashSlot HashSlot;
 
 struct BlockRecAt20;
 struct HeapRecAtC;

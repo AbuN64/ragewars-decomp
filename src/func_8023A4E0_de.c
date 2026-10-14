@@ -14,7 +14,7 @@ extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
 void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
-    func_80296F7C_S1 animation;
+    AnimationInfo animation;
     Vec3 points[5];
     f32 red[5], green[5], blue[5], alpha[5];
     Vec3 triangle[3];

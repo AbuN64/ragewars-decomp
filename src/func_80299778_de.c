@@ -1,7 +1,7 @@
 #include "span_1000/code_80297CD0.h"
 #include "types.h"
 
-extern WidgetTable_func_802982C4_de *D_8014D080;
+extern MenuHandlerTable *D_8014D080;
 
 void func_80299778_de(s32 id, s32 mode, MenuElementHandler handler)
 {

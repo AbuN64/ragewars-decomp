@@ -5,7 +5,7 @@
 
 
 void func_8040E928_de(void *object, int enabled) {
-    u16 *flags = &((Widget_func_8040E67C_de *)(object))->flags;
+    u16 *flags = &((Widget *)(object))->flags;
     if (enabled) {
         *flags |= 0x40;
     } else {

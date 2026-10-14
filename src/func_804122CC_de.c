@@ -13,7 +13,7 @@
 
 
 
-void func_804122CC_de(Table_func_804122CC_de *table, Cell_func_804122CC_de *cell, u32 row, u32 col) {
+void func_804122CC_de(ScrollTable *table, Cell_func_804122CC_de *cell, u32 row, u32 col) {
     s32 lastCol;
     s32 lastRow;
     u32 entryCol;

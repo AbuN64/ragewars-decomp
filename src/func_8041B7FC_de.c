@@ -6,6 +6,6 @@
    parallel array at offset 0x5C. */
 
 
-struct Node_func_8040EB48_de *func_8041B7FC_de(struct Slots_func_8041B7FC_de *object, s32 index) {
+struct WidgetNode *func_8041B7FC_de(struct Slots_func_8041B7FC_de *object, s32 index) {
     return object->values[index];
 }

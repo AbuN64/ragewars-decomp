@@ -8,7 +8,7 @@
 
 
 
-extern struct Screen_func_80428300_de *D_800E4690;
+extern struct ResultsOptionsScreen *D_800E4690;
 extern char D_801462C8[];
 
 extern void func_8042854C_de(s32 arg0, s32 arg1, s32 arg2);

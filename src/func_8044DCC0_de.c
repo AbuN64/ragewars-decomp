@@ -66,6 +66,6 @@ void func_8044DD50_de(char *match) {
     state->c = 0;
     state->d = 0;
     state->e = 0;
-    ((Session_func_80293A20_de *)match)->phase = 2;
-    ((Session_func_80293A20_de *)match)->target = 1;
+    ((GameSession *)match)->phase = 2;
+    ((GameSession *)match)->target = 1;
 }

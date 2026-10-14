@@ -11,7 +11,7 @@ extern s32 D_8010B194_de;
 extern s32 func_80245814_de(s32 *flags);
 extern s32 func_80264B6C_de(void);
 
-void func_80293A20_de(Session_func_80293A20_de *session, s32 arg1, s32 target) {
+void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
     s32 pending;
     s32 *flags;
 
@@ -75,7 +75,7 @@ void func_80293B28_de(void *arg0) {
 
     state = arg0;
     if (D_8014288C == 1) {
-        value = ((Session_func_80293A20_de *)state)->transitionTime;
+        value = ((GameSession *)state)->transitionTime;
         if (D_800C54A4_de < value) {
             if (D_800C54A8_de < value) {
                 D_8014288C = 0;
@@ -93,7 +93,7 @@ func_802A2224_de
                 func_80298368_de(2);
                 func_8040C428_de(0);
                 func_80293790_de(state, 1);
-                ((Session_func_80293A20_de *)state)->transitionTime = 0;
+                ((GameSession *)state)->transitionTime = 0;
             } else if (D_8010F190 != 0) {
                 D_8014288C = 0;
                 
@@ -109,7 +109,7 @@ func_802A2224_de
 ();
                 func_80298368_de(2);
                 func_80293790_de(state, 8);
-                ((Session_func_80293A20_de *)state)->transitionTime = 0;
+                ((GameSession *)state)->transitionTime = 0;
             }
         }
     }
@@ -139,7 +139,7 @@ void func_80293C34_de(void *arg0) {
     f32 t2;
     f32 t3;
 
-    if (((Session_func_80293A20_de *)arg0)->clockPaused == 0) {
+    if (((GameSession *)arg0)->clockPaused == 0) {
         t1 = D_801468A0.x + D_800D2988;
         D_801468A0.x = t1;
         if (D_800C54AC_de <= t1) {

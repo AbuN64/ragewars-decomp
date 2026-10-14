@@ -7,7 +7,7 @@ extern void func_802A9234_de(s32);
 extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 extern s32 D_800E28D8;
 extern f32 D_800DE740;
-void func_80443734_de(ObjRecAt1CV1 *arg0, Entry_func_80443734_de *arg1, s32 arg2, Style_func_8043C9AC_de *arg3) {
+void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, Style_func_8043C9AC_de *arg3) {
     s32 phase;
     s32 amount;
     s32 half;

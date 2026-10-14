@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8042F988_H
 #define UNBAKE_SPAN_16E000_CODE_8042F988_H
 #include "types.h"
+#include "span_16E000/code_80434F4C.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/menu_ABBDC_versions.h"
@@ -177,12 +178,8 @@ struct MatchSetupGlobals {
 };
 
 
-struct Block_func_80434B08_de;
+struct PlayerSlotTable;
 struct Player_func_804356BC_de;
-struct Block_func_80434B08_de {
-    char pad0[0x58];
-    struct Player_func_804356BC_de players[4];
-};
 
 struct Player_func_8042F7A8_de;
 struct Player_func_8042F7A8_de {

@@ -15,8 +15,8 @@ struct TrialSettings {
     s8 score;
 };
 
-struct Match_func_8042DEA0_de;
-struct Match_func_8042DEA0_de {
+struct MatchState;
+struct MatchState {
     char pad0[0x90];
     s32 kills;
     char pad94[4];

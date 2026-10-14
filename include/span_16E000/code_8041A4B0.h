@@ -61,6 +61,7 @@ struct Scroll {
     s32 count;
     s32 item;
 };
+typedef struct Scroll Scroll;
 
 struct Record_func_8041A580_de;
 struct Record_func_8041A580_de {
@@ -85,13 +86,7 @@ typedef struct Record_func_8041ABC0_de Record_func_8041ABC0_de;
 
 extern void func_8041A550_de();
 
-struct Scroll_func_8041A8E8_de;
-struct Scroll_func_8041A8E8_de {
-    char pad[0x48];
-    s32 length;
-    s32 count;
-    s32 item;
-};
+struct Scroll;
 
 struct Record_func_8041A580_de;
 typedef struct Record_func_8041A580_de Record_func_8041A580_de;

@@ -5,7 +5,7 @@
 #include "n64sdk.h"
 #include "gbi.h"
 #include "n64sdk.h"
-extern struct Screen_func_8041FC50_de *D_800E42D0;
+extern struct FourPlayerScreen *D_800E42D0;
 extern s32 D_800D15E0;
 extern f32 D_800D15E4[5];
 extern struct Shape_typemap_165 D_800E41C0[];

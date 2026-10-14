@@ -11,7 +11,7 @@
 
 
 
-extern Ui_func_80297FA0_de *D_8014D080;
+extern ScreenManager *D_8014D080;
 extern s32 D_80146E04;
 
 

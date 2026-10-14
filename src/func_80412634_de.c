@@ -9,11 +9,11 @@
 
 
 
-extern void func_804122CC_de(List_func_80412634_de *list, UnitMtx *cell, u32 column, u32 row);
+extern void func_804122CC_de(GridList *list, UnitMtx *cell, u32 column, u32 row);
 extern void func_8040D2D0_de(UnitMtx *cell, NodeEvent style);
 
-void func_80412634_de(List_func_80412634_de *arg0, NodeEvent style) {
-    List_func_80412634_de *list = arg0;
+void func_80412634_de(GridList *arg0, NodeEvent style) {
+    GridList *list = arg0;
     UnitMtx cell;
     u32 column;
     u32 row;

@@ -1,6 +1,6 @@
 #include "span_1000/code_80297CD0.h"
 #include "types.h"
-extern Ui_func_80297FA0_de *D_8014D080;
+extern ScreenManager *D_8014D080;
 s16 func_80299A08_de(void) {
     Element *ptr;
     ptr = D_8014D080->screens[D_8014D080->current].focus;

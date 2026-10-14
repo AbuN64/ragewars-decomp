@@ -25,13 +25,13 @@ s32 func_8025CA24_de(void *arg0, void *arg1) {
     if (var_s0 != 0) {
         do {
             if (var_s0 == arg1) {
-                func_8025E174_de(((Node_func_8025CBEC_de *)var_s0)->value);
-                D_800CBB14 = ((Node_func_8025CBEC_de *)var_s0)->value;
+                func_8025E174_de(((SoundSourceNode *)var_s0)->value);
+                D_800CBB14 = ((SoundSourceNode *)var_s0)->value;
                 func_80255ED8_de(&((SoundVoicePool *)arg0)->playing, (s32)var_s0);
                 func_80255D14_de(arg0, var_s0);
                 return 1;
             }
-            var_s0 = ((Node_func_8025CBEC_de *)var_s0)->next;
+            var_s0 = ((SoundSourceNode *)var_s0)->next;
         } while (var_s0 != 0);
     }
     return 0;

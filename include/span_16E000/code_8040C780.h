@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8040C780_H
 #define UNBAKE_SPAN_16E000_CODE_8040C780_H
 #include "types.h"
+#include "span_1000/code_80297CD0.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
@@ -19,8 +20,7 @@ struct WidgetRecAt1A {
 };
 
 
-struct Widget_func_8040E67C_de;
-typedef struct Widget_func_8040E67C_de Widget_func_8040E67C_de;
+struct Widget;
 
 struct WidgetRecAtE;
 typedef struct WidgetRecAtE WidgetRecAtE;
@@ -51,9 +51,9 @@ struct Node_func_8040ED38_de {
 
 extern void func_8040CAB0_de();
 
-struct Node_func_8040EB48_de;
-struct Node_func_8040EB48_de {
-    struct Node_func_8040EB48_de *next;
+struct WidgetNode;
+struct WidgetNode {
+    struct WidgetNode *next;
     char pad4[0xC - 4];
     s16 resource; /* +0x0C: selected resource identifier */
     char padE[0x12 - 0xE];
@@ -62,11 +62,11 @@ struct Node_func_8040EB48_de {
     s16 y; /* +0x16 */
 };
 
-struct Node_func_8040EB48_de;
-extern s32 func_8040EBAC_de(struct Node_func_8040EB48_de *node);
+struct WidgetNode;
+extern s32 func_8040EBAC_de(struct WidgetNode *node);
 
-struct Node_func_8040EB48_de;
-extern s32 func_8040EB48_de(struct Node_func_8040EB48_de *node);
+struct WidgetNode;
+extern s32 func_8040EB48_de(struct WidgetNode *node);
 
 struct SpriteRecAt14;
 typedef struct SpriteRecAt14 SpriteRecAt14;
@@ -85,14 +85,10 @@ struct Widget_func_8040CD50_de {
 struct Widget_func_8040CD50_de;
 typedef struct Widget_func_8040CD50_de Widget_func_8040CD50_de;
 
-struct Widget_func_8040E67C_de;
-struct Widget_func_8040E67C_de {
-    char pad0[0x12];
-    u16 flags;
-};
+struct Widget;
 
-struct Widget_func_8040E67C_de;
-extern void func_8040E900_de(struct Widget_func_8040E67C_de *record, int enable);
+struct Widget;
+extern void func_8040E900_de(struct Widget *record, int enable);
 
 struct Tree_func_8040EEA4_de;
 struct Tree_func_8040EEA4_de {
@@ -109,8 +105,8 @@ struct Tree_func_8040EEA4_de {
 struct BatchRec;
 typedef struct BatchRec BatchRec;
 
-struct Node_func_8040EB48_de;
-extern s32 func_8040EB68_de(struct Node_func_8040EB48_de *node);
+struct WidgetNode;
+extern s32 func_8040EB68_de(struct WidgetNode *node);
 
 struct Node_func_8040ED38_de;
 typedef struct Node_func_8040ED38_de Node_func_8040ED38_de;
@@ -173,8 +169,8 @@ struct DrawArgs {
     s32 v[4];
 };
 
-struct Node_func_8040EB48_de;
-extern s32 func_8040EB8C_de(struct Node_func_8040EB48_de *node);
+struct WidgetNode;
+extern s32 func_8040EB8C_de(struct WidgetNode *node);
 
 struct Pair14;
 extern void func_8040E978_de(struct Pair14 *record, s16 first, s16 second);

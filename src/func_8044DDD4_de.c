@@ -26,9 +26,9 @@ void func_8044DDD4_de(void *arg0) {
     D_801468A0.unk4 = 0;
     D_801468A0.unk8 = 0;
     D_801468A0.unkC = 0;
-    ((Session_func_80293A20_de *)arg0)->selectionActive = 0;
+    ((GameSession *)arg0)->selectionActive = 0;
     D_801468A0.first = 0;
-    ((Session_func_80293A20_de *)arg0)->phase = 2;
-    ((Session_func_80293A20_de *)arg0)->selector = var_s0;
-    ((Session_func_80293A20_de *)arg0)->target = 0xC;
+    ((GameSession *)arg0)->phase = 2;
+    ((GameSession *)arg0)->selector = var_s0;
+    ((GameSession *)arg0)->target = 0xC;
 }

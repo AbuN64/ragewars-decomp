@@ -53,7 +53,7 @@ void func_802A1BE0_de(void *arg0, Args args) {
 
     changed = 0;
     if (func_8040E0D4_de(&first, &basis, arg0, &args) != 0) {
-        if ((((Widget_func_8040E67C_de *)arg0)->flags & 0x200) != 0) {
+        if ((((Widget *)arg0)->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             func_8040F488_de(&transformed, &basis);

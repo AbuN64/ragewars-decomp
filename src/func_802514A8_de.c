@@ -18,7 +18,7 @@ extern s32 func_80255CB8_de(void *arg0, s32 arg1);
 
 
 static inline void *pool_alloc(s32 arg1) {
-    struct Node_func_80251328_de *temp_s0;
+    struct ResourceCacheEntry *temp_s0;
 
     if (D_8010513C.count == 0) {
         return 0;

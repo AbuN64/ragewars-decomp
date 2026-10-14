@@ -57,7 +57,7 @@ void func_80294614_de(void *arg0) {
 #else
     f = (1.0f);
 #endif
-    field = ((Session_func_80293A20_de *)arg0)->selector;
+    field = ((GameSession *)arg0)->selector;
 #if defined(VERSION_US_REV1)
     D_800D2970 = 0;
 #endif
@@ -65,6 +65,6 @@ void func_80294614_de(void *arg0) {
     D_800D298C = f;
     D_800CD740_de = f;
     func_8044D528_de(dst, field, 0);
-    ((Session_func_80293A20_de *)arg0)->mode = 0xD;
+    ((GameSession *)arg0)->mode = 0xD;
     D_80154048 = 0;
 }

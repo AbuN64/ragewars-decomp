@@ -50,15 +50,15 @@ struct func_80250A7C_S1 {
 
 extern void func_80253300_de(void *arg0);
 
-struct Node_func_80251328_de;
-struct Node_func_80251328_de {
+struct ResourceCacheEntry;
+struct ResourceCacheEntry {
     s32 resource;
     s32 size;
     s32 references;
     s32 flags;
     s32 lastUsed;
     s32 owner;
-    struct Node_func_80251328_de *next;
+    struct ResourceCacheEntry *next;
     s32 key;
     s32 pending;
     s32 callback;
@@ -153,8 +153,8 @@ struct Owner_func_80250C84_de {
     u8 colorFrame;
 };
 
-struct Node_func_80251328_de;
-typedef struct Node_func_80251328_de Node_func_80251328_de;
+struct ResourceCacheEntry;
+typedef struct ResourceCacheEntry ResourceCacheEntry;
 
 struct func_80250D88_S2;
 typedef struct func_80250D88_S2 func_80250D88_S2;

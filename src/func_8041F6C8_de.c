@@ -10,8 +10,8 @@
 #include "span_16E000/code_804196C0.h"
 #include "span_16E000/code_8041F1FC.h"
 
-extern s32 func_8040EBD0_de(struct Node_func_8040EB48_de *);
-extern struct Node_func_8040EB48_de *func_8041B7FC_de(struct Slots_func_8041B7FC_de *, s32);
+extern s32 func_8040EBD0_de(struct WidgetNode *);
+extern struct WidgetNode *func_8041B7FC_de(struct Slots_func_8041B7FC_de *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
 s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
@@ -33,7 +33,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
     MenuWidget *temp_a0_7;
     MenuWidget *temp_a1;
     MenuWidget *temp_a1_2;
-    struct Node_func_8040EB48_de *temp_v0_3;
+    struct WidgetNode *temp_v0_3;
 
     temp_v0 = D_800E42D0->phase;
     switch (temp_v0) {

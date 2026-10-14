@@ -4,7 +4,7 @@
 /* Returns whether any node in a linked list has bit 6 set in its flag halfword at offset 0x12. */
 
 
-s32 func_8040EBAC_de(struct Node_func_8040EB48_de *node) {
+s32 func_8040EBAC_de(struct WidgetNode *node) {
     u32 flags = 0;
 
     while (node != 0) {

@@ -37,14 +37,15 @@ typedef struct Entry_func_80434EF4_de Entry_func_80434EF4_de;
 
 extern void func_80434FB4_de(s32 value);
 
-struct Block_func_804356BC_de;
+struct PlayerSlotTable;
 struct Player_func_804356BC_de;
 struct Triple;
-struct Block_func_804356BC_de {
+struct PlayerSlotTable {
     char pad0[0x58];
     struct Player_func_804356BC_de players[4];
     struct Triple places[4];
 };
+typedef struct PlayerSlotTable PlayerSlotTable;
 
 struct Player_func_8043590C_de;
 typedef struct Player_func_8043590C_de Player_func_8043590C_de;
@@ -241,8 +242,8 @@ extern int func_80435128_de(int player);
 
 extern void func_8043583C_de(void);
 
-struct Menu_func_80434EF4_de;
-struct Menu_func_80434EF4_de {
+struct NameEntryMenu;
+struct NameEntryMenu {
     s32 unk0;
     s32 unk4;
     u8 pad8[0x24];
@@ -253,8 +254,8 @@ struct Menu_func_80434EF4_de {
 struct ObjectState71;
 typedef struct ObjectState71 ObjectState71;
 
-struct Menu_func_80434EF4_de;
-typedef struct Menu_func_80434EF4_de Menu_func_80434EF4_de;
+struct NameEntryMenu;
+typedef struct NameEntryMenu NameEntryMenu;
 
 extern s32 func_80435528_de(void);
 

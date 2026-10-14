@@ -1642,7 +1642,7 @@ extern s32 D_800CBC1C;
 
 extern s32 D_800DEA60;
 
-extern Node_func_80251328_de *D_80104574;
+extern ResourceCacheEntry *D_80104574;
 
 extern char D_800DCD60[];
 
@@ -4886,7 +4886,7 @@ struct Dest {
     u8 count;
     s8 secondaryLevel; /* 0xCC */
     char padCD[0x2F];
-    struct Node_func_8025CBEC_de *sound; /* 0xFC */
+    struct SoundSourceNode *sound; /* 0xFC */
     u8 pending; /* 0x100 */
     u8 pad101;
     s16 channel; /* 0x102 */

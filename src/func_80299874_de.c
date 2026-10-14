@@ -6,7 +6,7 @@
 
 
 
-extern Ui_func_80297FA0_de *D_8014D080;
+extern ScreenManager *D_8014D080;
 void func_80299874_de(s32 arg0, s32 arg1) {
     s32 var_a2;
     Rec_func_8024C92C_de *var_v1;

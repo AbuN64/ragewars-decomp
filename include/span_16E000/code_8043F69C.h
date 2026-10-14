@@ -168,11 +168,11 @@ struct MenuRecAt10 {
     s32 count;
 };
 
-struct Model_func_8044214C_de;
-typedef struct Model_func_8044214C_de Model_func_8044214C_de;
+struct PreviewWidget;
+typedef struct PreviewWidget PreviewWidget;
 
-struct Model_func_8044214C_de;
-struct Model_func_8044214C_de {
+struct PreviewWidget;
+struct PreviewWidget {
     float x;
     float y;
     float depth;
@@ -188,7 +188,7 @@ struct Model_func_8044214C_de {
 struct StateRecAt47C;
 struct StateRecAt47C {
     int selection;
-    Model_func_8044214C_de model;
+    PreviewWidget model;
     char pad18c[0x2EC];
     int active;
     float size;

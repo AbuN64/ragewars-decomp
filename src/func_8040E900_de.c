@@ -5,7 +5,7 @@
    argument. */
 
 
-void func_8040E900_de(struct Widget_func_8040E67C_de *record, int enable) {
+void func_8040E900_de(struct Widget *record, int enable) {
     if (enable) {
         record->flags |= 1;
     } else {

@@ -34,14 +34,14 @@ struct Snapshot {
     s32 handles[8];
 };
 
-struct Curve_func_80264EE0_de;
-struct Curve_func_80264EE0_de {
+struct SampledCurve;
+struct SampledCurve {
     int type;
     unsigned char samples[0x10];
     float length;
 };
 
-struct Curve_func_80264EE0_de;
+struct SampledCurve;
 /* Type 1 curves choose a new random value each period. */
 typedef struct RandomCurve {
     s32 type;
@@ -52,7 +52,7 @@ typedef struct RandomCurve {
 
 struct PlayerRecAt8;
 struct PlayerRecAt8 {
-    struct Curve_func_80264EE0_de *curve;
+    struct SampledCurve *curve;
     float time;
     float value;
 };
@@ -68,19 +68,11 @@ typedef struct PlayerRecAt8 PlayerRecAt8;
 struct Snapshot;
 typedef struct Snapshot Snapshot;
 
-struct Snapshot_func_80264CE0_de;
-struct Snapshot_func_80264CE0_de {
-    char pad0[0x10];
-    Block70 blocks[8];
-    Triple positions[8];
-    f32 values[8];
-    s32 handles[8];
-};
+struct Snapshot;
 
 extern void func_80264CE0_de();
 
-struct Snapshot_func_80264CE0_de;
-typedef struct Snapshot_func_80264CE0_de Snapshot_func_80264CE0_de;
+struct Snapshot;
 
 extern s32 func_802646D4_de(s32 arg0);
 
@@ -142,8 +134,8 @@ struct func_80264E10_S1 {
 
 extern s32 func_80264DF0_de(void *arg0);
 
-struct Curve_func_80264EE0_de;
-typedef struct Curve_func_80264EE0_de Curve_func_80264EE0_de;
+struct SampledCurve;
+typedef struct SampledCurve SampledCurve;
 
 extern void func_80264A0C_de();
 

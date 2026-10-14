@@ -46,14 +46,14 @@ typedef struct EntryRecAt0V2 EntryRecAt0V2;
 
 extern float D_800E227C;
 
-struct Entry_func_8043CC10_de;
-typedef struct Entry_func_8043CC10_de Entry_func_8043CC10_de;
+struct InputHistory;
+typedef struct InputHistory InputHistory;
 
 struct CheatCode;
 typedef struct CheatCode CheatCode;
 
-struct Entry_func_8043CC10_de;
-struct Entry_func_8043CC10_de {
+struct InputHistory;
+struct InputHistory {
     s32 value;
     s32 timer;
     s32 count;

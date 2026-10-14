@@ -11,7 +11,7 @@ extern s32 func_8044D220_de(s8 *, s32, s32, void *, s32);
 
 
 void func_802947C8_de(void *arg0, s32 arg1) {
-    Session_func_80293A20_de *object = arg0;
+    GameSession *object = arg0;
     s32 sp18[6];
     s32 var_s0;
 

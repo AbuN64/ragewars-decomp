@@ -106,8 +106,8 @@ struct RecordRecAt1A {
     u8 cellZ;
 };
 
-struct Owner_func_802504B0_de;
-typedef struct Owner_func_802504B0_de Owner_func_802504B0_de;
+struct ModelOwner;
+typedef struct ModelOwner ModelOwner;
 
 struct func_8024F490_Inner;
 typedef struct func_8024F490_Inner func_8024F490_Inner;
@@ -258,8 +258,8 @@ struct func_8024F590_S1 {
 struct func_8024F624_S1;
 typedef struct func_8024F624_S1 func_8024F624_S1;
 
-struct Object_func_8024EB90_de;
-struct Object_func_8024EB90_de {
+struct StaticObject;
+struct StaticObject {
     u8 state;
     s8 model;
     char pad2;
@@ -300,8 +300,8 @@ struct Descriptor_func_802504B0_de {
     s8 argument;
 };
 struct Descriptor_func_802504B0_de;
-struct Owner_func_802504B0_de;
-struct Owner_func_802504B0_de {
+struct ModelOwner;
+struct ModelOwner {
     char pad0[0x18];
     struct Descriptor_func_802504B0_de *descriptor;
     char pad1C[4];
@@ -317,8 +317,8 @@ struct Owner_func_802504B0_de {
 struct func_8024F590_S1;
 typedef struct func_8024F590_S1 func_8024F590_S1;
 
-struct Object_func_8024EB90_de;
-typedef struct Object_func_8024EB90_de Object_func_8024EB90_de;
+struct StaticObject;
+typedef struct StaticObject StaticObject;
 
 extern f32 D_8013B190;
 

@@ -7,7 +7,7 @@
 
 
 
-extern Menu_func_80434EF4_de *D_800E54A4;
+extern NameEntryMenu *D_800E54A4;
 extern void *func_8041B7FC_de(s32, s32);
 
 /* Steps the selected name character of an entry back by one, wrapping below the printable range to 'Z'. */

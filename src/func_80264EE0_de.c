@@ -6,7 +6,7 @@
 
 
 float func_80264EE0_de(PlayerRecAt8 *p) {
-    Curve_func_80264EE0_de *c = p->curve;
+    SampledCurve *c = p->curve;
 
     switch (c->type) {
     case 0:

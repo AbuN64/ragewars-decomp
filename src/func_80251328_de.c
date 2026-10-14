@@ -9,19 +9,19 @@
 
 
 
-extern Node_func_80251328_de *D_80104574;
-extern Node_func_80251328_de *D_80100568;
-extern Node_func_80251328_de **D_80100564;
+extern ResourceCacheEntry *D_80104574;
+extern ResourceCacheEntry *D_80100568;
+extern ResourceCacheEntry **D_80100564;
 extern s32 D_8010513C;
 extern s32 D_80105180;
 extern char D_801051A0;
 extern char D_80100570;
-extern void func_80254DD0_de(void *, Node_func_80251328_de *);
+extern void func_80254DD0_de(void *, ResourceCacheEntry *);
 extern s32 func_80255B2C_de(void *, s32);
-extern void func_80255ED8_de(void *, Node_func_80251328_de *);
+extern void func_80255ED8_de(void *, ResourceCacheEntry *);
 
-static inline Node_func_80251328_de *find_stale(Node_func_80251328_de **recent) {
-    Node_func_80251328_de *node;
+static inline ResourceCacheEntry *find_stale(ResourceCacheEntry **recent) {
+    ResourceCacheEntry *node;
 
     for (node = D_80104574; node != 0; node = node->next) {
         if (!(node->flags & 0x702)) {
@@ -41,8 +41,8 @@ static inline Node_func_80251328_de *find_stale(Node_func_80251328_de **recent) 
 }
 
 s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
-    Node_func_80251328_de *recent;
-    Node_func_80251328_de *node;
+    ResourceCacheEntry *recent;
+    ResourceCacheEntry *node;
     s32 result;
 
     recent = 0;
@@ -65,7 +65,7 @@ s32 func_80251328_de(s32 unused0, s32 unused1, s32 keep_recent) {
         } else {
             node->flags = 0;
         }
-        *(Node_func_80251328_de **)(D_8010513C * 4 + (char *)D_80100564) = node;
+        *(ResourceCacheEntry **)(D_8010513C * 4 + (char *)D_80100564) = node;
         D_8010513C++;
         return result;
     }

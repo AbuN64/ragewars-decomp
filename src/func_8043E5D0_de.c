@@ -11,10 +11,10 @@ s32 func_8043E5D0_de(void) {
 
 
 
-extern State_func_8043E254_de D_801468A0;
+extern TutorialProgress D_801468A0;
 
 s32 func_8043E5D8_de(void) {
-    State_func_8043E254_de *s = &D_801468A0;
+    TutorialProgress *s = &D_801468A0;
     s32 result;
 
     result = 0;

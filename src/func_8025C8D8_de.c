@@ -19,7 +19,7 @@ void func_8025C8D8_de(void *arg0, void *arg1, s32 arg2) {
         do {
             func_80255D14_de(arg0, arg1);
             i += 1;
-            arg1 = (Node_func_8025CBEC_de *)arg1 + 1;
+            arg1 = (SoundSourceNode *)arg1 + 1;
         } while (i < arg2);
     }
     ((SoundVoicePool *)arg0)->state = 0;

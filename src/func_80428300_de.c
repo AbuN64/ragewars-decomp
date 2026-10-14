@@ -13,7 +13,7 @@
 
 
 
-extern struct Screen_func_80428300_de *D_800E4690;
+extern struct ResultsOptionsScreen *D_800E4690;
 extern s8 D_80142358[];
 extern char D_80102B00[];
 

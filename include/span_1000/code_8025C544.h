@@ -77,20 +77,20 @@ struct SlotArray {
 struct IntegerStateB4_2;
 typedef struct IntegerStateB4_2 IntegerStateB4_2;
 
-struct Node_func_8025CBEC_de;
-struct Node_func_8025CBEC_de {
+struct SoundSourceNode;
+struct SoundSourceNode {
     s32 unk0;
-    struct Node_func_8025CBEC_de *next;
+    struct SoundSourceNode *next;
     s32 value;
     s32 state;
     Vec3 position; /* 0x10: sound source in world coordinates */
     void *owner; /* 0x1C */
 };
 
-struct Node_func_8025CBEC_de;
+struct SoundSourceNode;
 union func_8025CC0C_S1_U14;
 union func_8025CC0C_S1_U14 {
-    struct Node_func_8025CBEC_de * v0;
+    struct SoundSourceNode * v0;
     char v1;
 };
 
@@ -279,8 +279,8 @@ typedef struct QueueRec QueueRec;
 
 extern void func_8025C8C0_de(void *arg0);
 
-struct Node_func_8025CBEC_de;
-typedef struct Node_func_8025CBEC_de Node_func_8025CBEC_de;
+struct SoundSourceNode;
+typedef struct SoundSourceNode SoundSourceNode;
 
 struct QueueRec;
 struct QueueRec {

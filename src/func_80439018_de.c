@@ -10,7 +10,7 @@
 
 
 
-extern struct State_func_80439018_de *D_800E58A0;
+extern struct SoundOptionsScreen *D_800E58A0;
 extern u8 D_801462E1;
 extern s32 func_8041A470_de(void *);
 extern s32 func_8041A6E0_de(void *);

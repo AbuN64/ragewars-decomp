@@ -21,7 +21,7 @@ s32 func_80264DF0_de(void *arg0) {
     f32 temp_f1;
     f32 temp_f1_2;
     s32 temp_v1;
-    Curve_func_80264EE0_de *temp_a0;
+    SampledCurve *temp_a0;
 
     temp_a0 = player->curve;
     temp_v1 = temp_a0->type;

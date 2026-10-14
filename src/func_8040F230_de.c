@@ -17,10 +17,10 @@
 
 
 
-extern s32 func_8040E0D4_de(Shared_Quad *a, Shared_Quad *b, Widget_func_8040F230_de *widget, Triple *at);
+extern s32 func_8040E0D4_de(Shared_Quad *a, Shared_Quad *b, ButtonWidget *widget, Triple *at);
 extern void func_8040DB04_de(struct Pair14 *image, Triple at, Style style);
 
-void func_8040F230_de(Widget_func_8040F230_de *widget, Triple at, Style style) {
+void func_8040F230_de(ButtonWidget *widget, Triple at, Style style) {
     Shared_Quad box0;
     Shared_Quad box1;
     struct Pair14 *image;

@@ -115,8 +115,8 @@ extern s32 func_80411A74_de(void);
 struct Pool_func_80411518_de;
 typedef struct Pool_func_80411518_de Pool_func_80411518_de;
 
-struct Widget_func_8040F230_de;
-typedef struct Widget_func_8040F230_de Widget_func_8040F230_de;
+struct ButtonWidget;
+typedef struct ButtonWidget ButtonWidget;
 
 extern void func_80410448_de();
 
@@ -228,8 +228,8 @@ extern s16 func_80411A84_de(s32 index);
 struct Usage;
 typedef struct Usage Usage;
 
-struct Font_func_8040F160_de;
-struct Font_func_8040F160_de {
+struct FontRecord;
+struct FontRecord {
     char pad[8];
     Glyph glyphs[1];
 };
@@ -240,8 +240,8 @@ typedef struct SlotRecAtCV2 SlotRecAtCV2;
 struct Style;
 typedef struct Style Style;
 
-struct Font_func_8040F160_de;
-typedef struct Font_func_8040F160_de Font_func_8040F160_de;
+struct FontRecord;
+typedef struct FontRecord FontRecord;
 
 extern void func_8040F534_de(s32 width, s32 height);
 
@@ -249,8 +249,8 @@ struct PoolRecAtC;
 typedef struct PoolRecAtC PoolRecAtC;
 
 struct Pair14;
-struct Widget_func_8040F230_de;
-struct Widget_func_8040F230_de {
+struct ButtonWidget;
+struct ButtonWidget {
     char pad0[0x2C];
     struct Pair14 *normal;
     struct Pair14 *highlighted;

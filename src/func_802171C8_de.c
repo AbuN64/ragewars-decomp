@@ -71,7 +71,7 @@ extern void *func_8025C95C_de(void *, s32, void *, void *, s32);
 
 
 void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
-    Node_func_8025CBEC_de *node;
+    SoundSourceNode *node;
     void *fallback;
     s32 kind;
 

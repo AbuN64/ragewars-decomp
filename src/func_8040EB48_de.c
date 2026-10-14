@@ -4,7 +4,7 @@
 /* Returns the union of the flag halfwords at offset 0x12 of every node in a linked list. */
 
 
-s32 func_8040EB48_de(struct Node_func_8040EB48_de *node) {
+s32 func_8040EB48_de(struct WidgetNode *node) {
     s32 flags = 0;
 
     while (node != 0) {

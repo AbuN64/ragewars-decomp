@@ -16,8 +16,8 @@ extern void func_802941DC_de(s32 arg0);
 
 extern int D_800CD774;
 
-struct Session_func_80293A20_de;
-struct Session_func_80293A20_de {
+struct GameSession;
+struct GameSession {
     char pad0[0x25580];
     char menu[0x48];
     char players[0x26DB0 - 0x255C8];
@@ -73,8 +73,8 @@ extern float D_800C54A4_de;
 
 extern float D_800C54C0_de;
 
-struct Session_func_80293A20_de;
-typedef struct Session_func_80293A20_de Session_func_80293A20_de;
+struct GameSession;
+typedef struct GameSession GameSession;
 
 struct ObjRecV2;
 typedef struct ObjRecV2 ObjRecV2;

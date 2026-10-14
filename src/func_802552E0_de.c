@@ -8,10 +8,10 @@
 extern s32 D_800CB6F0;
 extern u32 D_800CB6F4;
 extern s32 D_80101190;
-extern Slot_func_802552E0_de *D_80101194;
+extern HashSlot *D_80101194;
 extern s32 D_80101198;
 extern char D_801051A0;
-extern Slot_func_802552E0_de *func_80255920_de(void *, s32);
+extern HashSlot *func_80255920_de(void *, s32);
 
 void func_802552E0_de(s32 capacity)
 {

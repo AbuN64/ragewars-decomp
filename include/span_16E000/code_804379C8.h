@@ -31,8 +31,8 @@ struct MenuSelectionMessage {
     s32 value;
 };
 
-struct State_func_80439018_de;
-struct State_func_80439018_de {
+struct SoundOptionsScreen;
+struct SoundOptionsScreen {
     void *menu;
     char pad4[0x8 - 0x4];
     void *music;

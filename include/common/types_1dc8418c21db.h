@@ -2717,8 +2717,8 @@ typedef struct func_80258BB4_S1 func_80258BB4_S1;
 struct func_80255BEC_S1;
 typedef struct func_80255BEC_S1 func_80255BEC_S1;
 
-struct State_func_8043E254_de;
-typedef struct State_func_8043E254_de State_func_8043E254_de;
+struct TutorialProgress;
+typedef struct TutorialProgress TutorialProgress;
 
 struct func_80204EA8_S1;
 typedef struct func_80204EA8_S1 func_80204EA8_S1;
@@ -3970,8 +3970,8 @@ typedef struct func_8029A9E0_S1 func_8029A9E0_S1;
 struct Shared_HudView;
 typedef struct Shared_HudView Shared_HudView;
 
-struct State_func_8043E254_de;
-struct State_func_8043E254_de {
+struct TutorialProgress;
+struct TutorialProgress {
     char pad0[0x1C];
     s32 unk1C;
     s32 unk20;
@@ -4052,7 +4052,7 @@ typedef struct func_80435010_S3 func_80435010_S3;
 struct Slots_func_8041B7FC_de;
 struct Slots_func_8041B7FC_de {
     char pad[0x4C];
-    struct Node_func_8040EB48_de *values[1];
+    struct WidgetNode *values[1];
 };
 
 struct CellRecAt1A;

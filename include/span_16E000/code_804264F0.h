@@ -103,11 +103,7 @@ struct RecordRecAt8D {
     char pad92[0x190 - 0x92];
 };
 
-struct Screen_func_80428300_de;
-struct Screen_func_80428300_de {
-    char pad[0xA5C];
-    s32 player;
-};
+struct ResultsOptionsScreen;
 
 extern void func_804273D4_de();
 

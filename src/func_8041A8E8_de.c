@@ -5,9 +5,9 @@
    at the first. */
 
 
-extern void func_8041A6EC_de(struct Scroll_func_8041A8E8_de *, s32);
+extern void func_8041A6EC_de(struct Scroll *, s32);
 
-void func_8041A8E8_de(struct Scroll_func_8041A8E8_de *scroll) {
+void func_8041A8E8_de(struct Scroll *scroll) {
     if (scroll->item > 0) {
         func_8041A6EC_de(scroll, scroll->item - 1);
     }

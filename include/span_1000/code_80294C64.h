@@ -119,8 +119,8 @@ typedef struct Selection_func_802955EC_us_rev1 Selection_func_802955EC_us_rev1;
 
 extern int func_80295B18_us_rev1(void);
 
-struct func_80296F7C_S1;
-typedef struct func_80296F7C_S1 func_80296F7C_S1;
+struct AnimationInfo;
+typedef struct AnimationInfo AnimationInfo;
 
 extern void func_80295E78_de(int *value, int first, int second);
 
@@ -129,8 +129,8 @@ typedef struct func_80295B18_S1 func_80295B18_S1;
 
 extern void func_80294C50_de(void);
 
-struct func_80296F7C_S1;
-struct func_80296F7C_S1 {
+struct AnimationInfo;
+struct AnimationInfo {
     s32 unk0;
     char pad0[0x4 - 0x0 - sizeof(s32)];
     s32 unk4;

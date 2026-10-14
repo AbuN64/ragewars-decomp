@@ -124,8 +124,8 @@ typedef struct Field_f32_24 Field_f32_24;
 struct AudioStateA4;
 typedef struct AudioStateA4 AudioStateA4;
 
-struct Result_func_802165F8_de;
-struct Result_func_802165F8_de {
+struct OffsetResult;
+struct OffsetResult {
     Vec3 first;
     Vec3 first_normalized;
     f32 first_length;
@@ -447,8 +447,8 @@ struct Field_Vec_C {
 struct ObjectLinks1230;
 typedef struct ObjectLinks1230 ObjectLinks1230;
 
-struct Result_func_802165F8_de;
-typedef struct Result_func_802165F8_de Result_func_802165F8_de;
+struct OffsetResult;
+typedef struct OffsetResult OffsetResult;
 
 struct Field_Vec_0;
 typedef struct Field_Vec_0 Field_Vec_0;

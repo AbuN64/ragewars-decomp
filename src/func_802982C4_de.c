@@ -5,7 +5,7 @@
 
 
 
-extern WidgetTable_func_802982C4_de *D_8014D080;
+extern MenuHandlerTable *D_8014D080;
 
 /* Registers a widget handler under an identifier, reusing its slot or the first free one, or clears that slot when no handler is given. */
 void func_802982C4_de(s32 id, MenuElementHandler arg1, MenuDrawHandler draw_handler, s32 arg3) {

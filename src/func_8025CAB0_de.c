@@ -13,7 +13,7 @@
 void func_8025CAB0_de(void *arg0) {
     s32 temp_v0;
     SoundVoicePool *pool = arg0;
-    Node_func_8025CBEC_de *var_s0;
+    SoundSourceNode *var_s0;
 
     var_s0 = pool->playing.head;
     if (var_s0 != 0) {

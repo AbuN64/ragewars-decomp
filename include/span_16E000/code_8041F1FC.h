@@ -140,8 +140,8 @@ struct Panel_func_8041FC50_de {
 };
 
 struct Panel_func_8041FC50_de;
-struct Screen_func_8041FC50_de;
-struct Screen_func_8041FC50_de {
+struct FourPlayerScreen;
+struct FourPlayerScreen {
     char pad0[8];
     struct Panel_func_8041FC50_de panels[4];
     char pad1328[0x10];

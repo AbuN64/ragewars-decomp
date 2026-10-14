@@ -10,7 +10,7 @@
 
 
 
-extern struct Block_func_804356BC_de *D_800E54A4;
+extern struct PlayerSlotTable *D_800E54A4;
 extern char D_80102B00[];
 extern void func_802A0724_de(void *, void *, s32);
 

@@ -15,14 +15,14 @@
 
 
 extern ActorList D_80145040;
-extern Snapshot_func_80264CE0_de D_8010BC40;
+extern Snapshot D_8010BC40;
 
 extern s32 func_8028B350_de(void *table, s32 id);
 
 void func_80264CE0_de(void) {
     s32 i;
     ActorRecAt5E0 *actor;
-    Snapshot_func_80264CE0_de *snapshot;
+    Snapshot *snapshot;
     ActorList *list;
 
     list = &D_80145040;

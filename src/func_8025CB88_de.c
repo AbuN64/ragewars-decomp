@@ -10,7 +10,7 @@ extern s32 func_8025E0F4_de(s32 arg0);
 
 void func_8025CB88_de(void *arg0) {
     SoundVoicePool *pool = arg0;
-    Node_func_8025CBEC_de *var_s0;
+    SoundSourceNode *var_s0;
 
     if (pool->state == 0) {
         var_s0 = pool->playing.head;

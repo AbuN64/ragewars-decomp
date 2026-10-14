@@ -5,7 +5,7 @@
 
 /** Reset three large-offset fields and mark the record active. */
 void func_80293590_de(void *arg0) {
-    struct Session_func_80293A20_de *session = arg0;
+    struct GameSession *session = arg0;
     session->phase = 1;
     session->timer = 0;
     session->pad26DC0 = 0;

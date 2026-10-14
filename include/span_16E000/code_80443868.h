@@ -61,8 +61,8 @@ struct StateRecAt1C {
     struct Actor_func_804438BC_de * unk1C;
 };
 
-struct Entry_func_80443734_de;
-typedef struct Entry_func_80443734_de Entry_func_80443734_de;
+struct CaptionEntry;
+typedef struct CaptionEntry CaptionEntry;
 
 extern s32 func_80443710_de(void *arg0, MenuRules *arg1);
 
@@ -123,8 +123,8 @@ extern int func_80443844_de(int unused, PlayerRecAt1C *player);
 struct RecordRecAtCV3;
 extern void func_80443BD4_de(struct RecordRecAtCV3 *record);
 
-struct Entry_func_80443734_de;
-struct Entry_func_80443734_de {
+struct CaptionEntry;
+struct CaptionEntry {
     char pad0[4];
     s32 width;
     char pad8[4];
@@ -136,7 +136,7 @@ struct Entry_func_80443734_de {
     u16 y;
 };
 
-extern void func_80443734_de(ObjRecAt1CV1 *arg0, Entry_func_80443734_de *arg1, s32 arg2, Style_func_8043C9AC_de *arg3);
+extern void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, Style_func_8043C9AC_de *arg3);
 
 struct Actor_func_804438BC_de;
 typedef struct Actor_func_804438BC_de Actor_func_804438BC_de;

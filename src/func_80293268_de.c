@@ -31,10 +31,10 @@ void func_80293284_de(void *arg0, s32 arg1) {
     D_801468A0.unk8 = 0;
     D_801468A0.unkC = 0;
     D_801468A0.first = 0;
-    ((Session_func_80293A20_de *)arg0)->phase = 2;
-    ((Session_func_80293A20_de *)arg0)->selector = var_s0;
-    ((Session_func_80293A20_de *)arg0)->selectionActive = 1;
-    ((Session_func_80293A20_de *)arg0)->target = 0xD;
+    ((GameSession *)arg0)->phase = 2;
+    ((GameSession *)arg0)->selector = var_s0;
+    ((GameSession *)arg0)->selectionActive = 1;
+    ((GameSession *)arg0)->target = 0xD;
 }
 
 void func_8044A370_de(void *a);
@@ -44,6 +44,6 @@ void func_804499B0_de(void *a, void *b, void *c);
 
 
 void func_80293334_de(void *arg0, void *arg1, void *arg2) {
-    func_8044A370_de(((Session_func_80293A20_de *)arg0)->players);
-    func_804499B0_de(((Session_func_80293A20_de *)arg0)->menu, arg1, arg2);
+    func_8044A370_de(((GameSession *)arg0)->players);
+    func_804499B0_de(((GameSession *)arg0)->menu, arg1, arg2);
 }

@@ -11,7 +11,7 @@ extern s32 func_8025DE54_de(s16 arg0, Vec3 position, s32 arg4, s32 arg5);
 
 void func_8025CB0C_de(void *arg0) {
     s32 temp_v0;
-    Node_func_8025CBEC_de *var_s0;
+    SoundSourceNode *var_s0;
 
     var_s0 = ((SoundVoicePool *)arg0)->playing.head;
     if (var_s0 != 0) {

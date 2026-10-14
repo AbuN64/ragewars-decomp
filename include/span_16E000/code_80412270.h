@@ -22,8 +22,8 @@ extern s32 func_80413634_de(u8 *record);
 
 extern u8 func_804135FC_de(u8 *record);
 
-struct List_func_80412634_de;
-struct List_func_80412634_de {
+struct GridList;
+struct GridList {
     char pad0[0x48];
     u8 columns;
     u8 rows;
@@ -90,8 +90,8 @@ struct Record_func_80412710_de {
     u8 pad_52[0xE];
 };
 
-struct Image_func_80413480_de;
-struct Image_func_80413480_de {
+struct OwnedImage;
+struct OwnedImage {
     u8 unk0;
     u8 flags;
     char pad2[0xE];
@@ -120,8 +120,8 @@ struct Cell_func_804122CC_de {
 
 extern u32 func_80412D94_de(u32 value, s32 from, s32 to);
 
-struct List_func_80412634_de;
-typedef struct List_func_80412634_de List_func_80412634_de;
+struct GridList;
+typedef struct GridList GridList;
 
 struct Entry_func_80412AC0_de;
 struct Entry_func_80412AC0_de {
@@ -139,8 +139,8 @@ extern void func_80412AC0_de(s32 identifier, s32 first, s32 second);
 
 extern void func_80412940_de(s32 identifier, s32 row, s32 column, s32 *first, s32 *second);
 
-struct Table_func_804122CC_de;
-struct Table_func_804122CC_de {
+struct ScrollTable;
+struct ScrollTable {
     Layout layout;
     s32 pad2C[6];
     s32 *contents;
@@ -164,14 +164,14 @@ struct Table_func_804122CC_de {
 
 extern s16 func_80413660_de(s16 *record);
 
-struct Image_func_80413480_de;
-typedef struct Image_func_80413480_de Image_func_80413480_de;
+struct OwnedImage;
+typedef struct OwnedImage OwnedImage;
 
 
 extern void func_80412898_de(s32 identifier, s32 row, s32 column, s32 first, s32 second);
 
-struct Table_func_804122CC_de;
-typedef struct Table_func_804122CC_de Table_func_804122CC_de;
+struct ScrollTable;
+typedef struct ScrollTable ScrollTable;
 
 extern s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
 

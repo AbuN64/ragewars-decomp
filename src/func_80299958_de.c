@@ -1,6 +1,6 @@
 #include "span_1000/code_80297CD0.h"
 #include "types.h"
-extern Ui_func_80297FA0_de *D_8014D080;
+extern ScreenManager *D_8014D080;
 s32 func_80299958_de(void) {
     s32 result;
     s32 field4;

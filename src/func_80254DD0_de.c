@@ -20,10 +20,10 @@ void func_80254DD0_de(void *arg0, void *arg1) {
     void *temp_v0;
     void *temp_s0;
 
-    temp_v0 = ((Node_func_80251328_de *)arg1)->owner;
+    temp_v0 = ((ResourceCacheEntry *)arg1)->owner;
     if (temp_v0 != 0) {
         func_80255488_de(((ResourceLoadRequest *)temp_v0)->key);
-        temp_s0 = ((Node_func_80251328_de *)arg1)->owner;
+        temp_s0 = ((ResourceCacheEntry *)arg1)->owner;
         func_80255ED8_de(&D_8010110C, temp_s0);
         ((ResourceLoadRequest *)temp_s0)->flags = 0;
         func_80255CB8_de(&D_801010F8, (s32) temp_s0);

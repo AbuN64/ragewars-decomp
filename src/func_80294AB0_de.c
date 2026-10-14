@@ -20,14 +20,14 @@ void func_80294AB0_de(void *arg0) {
     s32 index;
 
     if ((D_80142CA8 == 2) &&
-        (((struct Session_func_80293A20_de *)arg0)->transitionBlocked == 0)) {
-        index = ((struct Session_func_80293A20_de *)arg0)->target;
-        ((struct Session_func_80293A20_de *)arg0)->transitionTime = 0;
-        ((struct Session_func_80293A20_de *)arg0)->mode = index;
+        (((struct GameSession *)arg0)->transitionBlocked == 0)) {
+        index = ((struct GameSession *)arg0)->target;
+        ((struct GameSession *)arg0)->transitionTime = 0;
+        ((struct GameSession *)arg0)->mode = index;
         func_802456A0_de();
         func_8025E214_de(-1);
         func_80264854_de(0);
-        callback = D_800CD788[((struct Session_func_80293A20_de *)arg0)->mode].callback;
+        callback = D_800CD788[((struct GameSession *)arg0)->mode].callback;
         if (callback != 0) {
             callback(arg0);
         }
