@@ -3,6 +3,7 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "types.h"
 struct func_80419D04_S1;
 /* unbake published declaration: published_01d87bbdd805a4c0831b5ded */
 struct func_80419D04_S1 {
@@ -197,4 +198,9 @@ struct Object_func_80419E54_de {
 };
 
 extern void func_80419B18_eu_x(void);
+
+extern f32 D_800E1454;
+extern f32 D_800E1460;
+extern f32 D_800E146C;
+
 #endif

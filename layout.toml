@@ -82919,6 +82919,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/rodata.func_80414400_de.800DBD98_2.c"
+kind = "c"
+group = "code_804143D8"
+members = ["func_804147F0_eu_x"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/rodata.func_80414400_de.800DD0E8.c"
 kind = "data"
 group = "code_804143D8"
@@ -83034,6 +83045,17 @@ path = "src/rodata.func_8042E1F0_de.800E1B70.c"
 kind = "data"
 group = "code_8042E080"
 members = ["rodata/func_8042E1F0_de/800E1B70"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.func_8042E1F0_de.800E1B70_2.c"
+kind = "c"
+group = "code_8042E080"
+members = ["func_8042E460_de"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -92182,6 +92204,17 @@ path = "src/rodata.unresolved.800EAAE0.c"
 kind = "data"
 group = "code_804196C0"
 members = ["rodata/unresolved/800EAAE0"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/rodata.unresolved.800EAAE0_2.c"
+kind = "c"
+group = "code_804196C0"
+members = ["func_8041A05C_de"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -109188,11 +109221,6 @@ path = "src/fuzzy/func_804116CC_de.c"
 scores = {de = 0.7985074626865671, eu = 0.7985074626865671, eu-x = 0.7985074626865671, us = 0.7985074626865671, us-rev1 = 0.7985074626865671}
 
 [[fuzzy]]
-member = "func_804147F0_eu_x"
-path = "src/fuzzy/func_804147F0_eu_x.c"
-scores = {eu-x = 0.95, us-rev1 = 0.95}
-
-[[fuzzy]]
 member = "func_80415C1C_de"
 path = "src/fuzzy/func_80415C1C_de.c"
 scores = {de = 1.0, eu = 1.0, eu-x = 0.9615384615384616, us-rev1 = 0.9615384615384616}
@@ -109206,11 +109234,6 @@ scores = {de = 0.9203539823008849, eu = 0.9203539823008849, eu-x = 1.0, us-rev1 
 member = "func_80419F4C_eu_x"
 path = "src/fuzzy/func_80419F4C_eu_x.c"
 scores = {eu-x = 0.5638297872340425, us-rev1 = 0.5638297872340425}
-
-[[fuzzy]]
-member = "func_8041A05C_de"
-path = "src/fuzzy/func_8041A05C_de.c"
-scores = {de = 0.9124087591240876, eu = 0.9124087591240876, eu-x = 0.9124087591240876, us-rev1 = 0.9124087591240876}
 
 [[fuzzy]]
 member = "func_8041DFC0_us"
@@ -109346,11 +109369,6 @@ scores = {de = 0.8860759493670886, eu = 0.9036144578313253, eu-x = 0.89156626506
 member = "func_8042E1F0_de"
 path = "src/fuzzy/func_8042E1F0_de.c"
 scores = {de = 0.8141025641025641, eu = 0.8141025641025641, eu-x = 0.8141025641025641, us = 0.8141025641025641, us-rev1 = 0.8141025641025641}
-
-[[fuzzy]]
-member = "func_8042E460_de"
-path = "src/fuzzy/func_8042E460_de.c"
-scores = {de = 0.98989898989899, eu = 0.990990990990991, eu-x = 0.990990990990991, us = 0.98989898989899, us-rev1 = 0.98989898989899}
 
 [[fuzzy]]
 member = "func_8042ED70_de"

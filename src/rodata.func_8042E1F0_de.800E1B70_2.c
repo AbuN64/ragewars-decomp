@@ -5,10 +5,10 @@
 
 
 #include "shared/func_80425674_de_layout.h"
+#include "span_1000/code_802106E0.h"
+#include "span_16E000/code_8041DF04.h"
+#include "span_16E000/code_8042E080.h"
 
-extern s32 func_802744D4_de(void);
-extern s32 func_8042EE94_de(void);
-extern s32 func_8041F140_de(s32 kind);
 extern u8 *func_802A025C_de(u8 *dst, u8 *name);
 
 /* Seats a joining player (request: kind+1, team, rank) in the highest free player slot, filling its index, kind (random for 20), team (random for 3, at most 2), rank and name (per language on the European cartridges); returns the slot or -1 when all are taken. */

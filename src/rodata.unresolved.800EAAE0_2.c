@@ -1,8 +1,5 @@
 #include "span_16E000/code_804196C0.h"
 #include "span_C76B0/data.h"
-extern f32 D_800E1454;
-extern f32 D_800E1460;
-extern f32 D_800E146C;
 
 s32 func_8041A05C_de(Record_func_8041A280_de *object) {
     Record_func_8041A280_de *owner = object;

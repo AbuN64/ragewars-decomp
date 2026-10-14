@@ -5050,7 +5050,7 @@ segments:
       - [0x191FF0, c, "func_8042DE10_de"]
       - [0x192080, c, "func_8042DEA0_de"]
       - [0x1923D0, asm, "func_8042E1F0_de"]
-      - [0x192640, asm, "func_8042E460_de"]
+      - [0x192640, c, "func_8042E460_de"]
       - [0x1927CC, asm, "func_8042E5EC_de"]
       - [0x192B68, c, "func_8042E988_de"]
       - [0x192F50, asm, "func_8042ED70_de"]

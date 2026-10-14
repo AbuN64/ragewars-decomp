@@ -11,27 +11,15 @@ library_dirs = ["src/libgcc"]
 
 [[project.version_differences]]
 function = "func_80423F48_de"
-guard = "VERSION_EU_X"
-enabled = ["eu-x"]
-disabled = ["de", "eu", "us", "us-rev1"]
+sides = [["eu-x"], ["de", "eu", "us", "us-rev1"]]
 
 [[project.version_differences]]
 function = "func_8026851C_de"
-guard = "VERSION_DE"
-enabled = ["de"]
-disabled = ["eu", "eu-x", "us", "us-rev1"]
+sides = [["de"], ["eu", "eu-x", "us", "us-rev1"]]
 
 [[project.version_differences]]
 function = "func_8042CE74_de"
-guard = "VERSION_DE"
-enabled = ["de"]
-disabled = ["eu", "eu-x", "us", "us-rev1"]
-
-[[project.version_differences]]
-function = "func_8042CE74_de"
-guard = "VERSION_EU_X"
-enabled = ["eu-x"]
-disabled = ["de", "eu", "us", "us-rev1"]
+sides = [["de"], ["eu-x"], ["eu", "us", "us-rev1"]]
 
 [build]
 cppflags = ["-P", "-undef", "-nostdinc", "-D_LANGUAGE_C", "-DF3DEX_GBI_2", "-D__GNUC__=2"]
