@@ -935,7 +935,7 @@ schema = 1
 "func_8023D380_de" = { evidence = "landed", signature = "s32 func_8023D380_de(ActorMotion *a)" }
 "func_8023DAA0_de" = { evidence = "landed", signature = "s32 func_8023DAA0_de(Ray *ray, Box *box, f32 *out)" }
 "func_8023DDC4_de" = { evidence = "landed", signature = "s32 func_8023DDC4_de(Ray *ray, Vector4f *rect, f32 *t)" }
-"func_8023DF70_de" = { evidence = "landed", signature = "s32 func_8023DF70_de(Ray_func_8023DF70_de *ray, Vec3 *offset, f32 radius, Polygon *poly, s32 keep)" }
+"func_8023DF70_de" = { evidence = "landed", signature = "s32 func_8023DF70_de(CapsuleSweep *ray, Vec3 *offset, f32 radius, Polygon *poly, s32 keep)" }
 "func_8023E178_de" = { evidence = "landed", signature = "s32 func_8023E178_de(Ray_func_8023E178_de *ray, Vec3 *center, f32 radius, f32 top, f32 bottom, s32 clip, Polygon_func_8023E178_de *poly, s32 keep)" }
 "func_8023E45C_de" = { evidence = "landed", signature = "void func_8023E45C_de(Input *arg0)" }
 "func_8023E690_de" = { evidence = "landed", signature = "void func_8023E690_de(struct Range *range, f32 low, s32 count, f32 high, f32 extra)" }
@@ -11806,7 +11806,6 @@ schema = 1
 "RangeNode" = { declaration = "typedef struct RangeNode RangeNode;", evidence = "authored" }
 "Ray" = { declaration = "typedef struct Ray Ray;", evidence = "authored" }
 "Ray180" = { declaration = "struct Ray180 { char pad0[0x8]; f32 spacing; f32 secondaryRadius; f32 length; char pad14[0x4]; f32 radius; f32 height; char pad20[0x1C]; u32 flags; struct MotionSurface *surface; Vec3 start; Vec3 end; char pad5C[0x24]; f32 scale; Box box; Vector4f rect; char padAC[0xD0]; f32 nearest; };", evidence = "authored" }
-"Ray_func_8023DF70_de" = { declaration = "typedef struct CapsuleSweep Ray_func_8023DF70_de;", evidence = "authored" }
 "Ray_func_8023E178_de" = { declaration = "struct Ray_func_8023E178_de { char pad0[0x44]; Vec3 start; Vec3 end; Vec3 dir; char pad68[0x18]; f32 slack; char pad84[0x2C]; Polygon_func_8023E178_de nearest; };", evidence = "authored" }
 "CapsuleSweep" = { declaration = "struct CapsuleSweep { char pad0[0x08]; f32 radius; f32 secondaryRadius; char pad10[0x0C]; f32 height; char pad20[0x1C]; u32 flags; struct MotionSurface *surface; Vec3 start; Vec3 end; char pad5C[0x24]; f32 slack; char pad84[0x2C]; Polygon_func_8023E8D4_de nearest; };", evidence = "authored" }
 "ReadCommand" = { declaration = "typedef struct ReadCommand ReadCommand;", evidence = "authored" }

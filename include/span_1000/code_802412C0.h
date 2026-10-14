@@ -502,6 +502,6 @@ typedef struct CollisionVertex {
     s16 *position; /* 0x1C */
 } CollisionVertex;
 
-extern s32 func_8023DF70_de(Ray_func_8023DF70_de*,Vec3*,f32,Polygon*,s32);
+extern s32 func_8023DF70_de(CapsuleSweep*,Vec3*,f32,Polygon*,s32);
 
 #endif

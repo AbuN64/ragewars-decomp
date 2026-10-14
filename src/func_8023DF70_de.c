@@ -22,7 +22,7 @@ extern void func_80271F9C_de(Vec3 *, Vec3 *, f32);
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 extern s32 func_802406D0_de(Polygon *, Vec3 *, f32);
 
-static inline s32 accepts(Ray_func_8023DF70_de *ray, Polygon *poly) {
+static inline s32 accepts(CapsuleSweep *ray, Polygon *poly) {
     if (poly->t <= 0.0f) {
         if (poly->kind == 7) {
             return 0;
@@ -40,7 +40,7 @@ static inline s32 accepts(Ray_func_8023DF70_de *ray, Polygon *poly) {
     return 1;
 }
 
-s32 func_8023DF70_de(Ray_func_8023DF70_de *ray, Vec3 *offset, f32 radius, Polygon *poly, s32 keep) {
+s32 func_8023DF70_de(CapsuleSweep *ray, Vec3 *offset, f32 radius, Polygon *poly, s32 keep) {
     Vec3 start;
     Vec3 end;
     Vec3 shift;

@@ -402,7 +402,6 @@ struct func_8023E6C0_S1 {
 };
 
 struct CapsuleSweep;
-typedef struct CapsuleSweep Ray_func_8023DF70_de;
 
 extern f32 D_800C3670_de;
 extern f32 D_800C3674_de;

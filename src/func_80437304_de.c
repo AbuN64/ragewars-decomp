@@ -8,7 +8,7 @@ extern char D_80102B7E[];
 
 extern s32 func_8041A280_de(s32, s32);
 extern s32 func_80265650_de(char *, s32);
-extern void func_8040E950_de(struct Widget_func_8040E67C_de *record, int enable);
+extern void func_8040E950_de(MenuWidget *record, int enable);
 extern s32 func_80419E54_de(s32, s32);
 
 s32 func_80437304_de(void *arg0) {
