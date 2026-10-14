@@ -156,7 +156,7 @@ void func_80258A7C_de(void *arg0, s32 arg1, Vec3 arg2, s32 arg3, s32 arg4, f32 a
     ((ContextRecAt2BC0 *)(arg0))->alpha = D_800C3EE0_de[1];
 }
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 extern s32 func_802934F8_de(void);
 extern void *func_802395A4_de(s32 *arg0, Vec3 *arg1);

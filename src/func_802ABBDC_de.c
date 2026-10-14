@@ -247,7 +247,7 @@ extern MenuAmountColumn D_800FEB10[];
 extern MenuBonusColumn D_80102B14[];
 extern Shared_FullPlayerMenuGlobals D_80140F84;
 
-extern s32 D_80145088;
+#include "shared/menu_match_globals.h"
 
 extern s32 D_800C91B8_de;
 extern f32 D_800C6260;

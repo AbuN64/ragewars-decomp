@@ -21,7 +21,7 @@ extern s32 D_8015402C;
 extern u8 D_801462D5;
 extern s32 D_80146918;
 extern s32 D_801468F4;
-extern char D_80145088[];
+#include "shared/menu_match_globals.h"
 
 extern s32 func_8043C308_de(struct MenuRules *);
 extern void func_8043C080_de(struct MenuRules *);
@@ -59,7 +59,7 @@ s32 func_80438ADC_de(void *window, void *arg1, s32 event) {
             }
             func_8040C428_de(0);
             func_8040E8D8_de(window, 1);
-            object = D_80145088;
+            object = &D_80145088;
             func_8044A370_de(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
             func_80286AA8_de(&D_8011FE88, 0, 0);

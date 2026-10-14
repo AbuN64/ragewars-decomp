@@ -1,6 +1,7 @@
 #ifndef MATCH_OPTIONS_TEXT_H
 #define MATCH_OPTIONS_TEXT_H
 #include "shared/func_80425674_de_layout.h"
+#include "common/unused.h"
 #if defined(VERSION_DE)
 enum { OPTIONS_ID_SHIFT=-4 };
 extern char *D_auto_800D3494;
@@ -11,8 +12,7 @@ extern char *D_auto_800D349C;
 static inline char *optionsLabel2(Shared_Game *game) { return D_auto_800D349C; }
 extern char *D_auto_800D34A0;
 static inline char *optionsLabel3(Shared_Game *game) { return D_auto_800D34A0; }
-extern char *D_800D34A4;
-static inline char *optionsLabel4(Shared_Game *game) { return D_800D34A4; }
+static inline char *optionsLabel4(Shared_Game *game) { return D_800D34A4[0]; }
 extern char *D_auto_800D34A8;
 static inline char *optionsLabel5(Shared_Game *game) { return D_auto_800D34A8; }
 extern char *D_auto_800D34AC;
@@ -59,8 +59,7 @@ extern char *D_auto_800D74C8;
 static inline char *optionsLabel2(Shared_Game *game) { return D_auto_800D74C8; }
 extern char *D_auto_800D74CC;
 static inline char *optionsLabel3(Shared_Game *game) { return D_auto_800D74CC; }
-extern char *D_800D34A4;
-static inline char *optionsLabel4(Shared_Game *game) { return D_800D34A4; }
+static inline char *optionsLabel4(Shared_Game *game) { return D_800D34A4[0]; }
 extern char *D_auto_800D74D4;
 static inline char *optionsLabel5(Shared_Game *game) { return D_auto_800D74D4; }
 extern char *D_auto_800D74D8;

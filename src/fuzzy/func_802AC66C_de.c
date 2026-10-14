@@ -10,7 +10,7 @@ typedef struct DraftPlayerAC66C {
 } DraftPlayerAC66C;
 typedef struct DraftPickupAC66C { u8 **text; s16 pad4, sound, event, padA, index, arg1, arg2; } DraftPickupAC66C;
 extern s32 D_801468F4, D_800CE474[2];
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
 extern void *func_80237E80_de(void *, void *, u8 *);
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32);

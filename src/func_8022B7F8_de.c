@@ -1,3 +1,4 @@
+#include "shared/menu_match_globals.h"
 #include "shared/gameplay_transition.h"
 #include "shared/level_actor.h"
 #include "common/types_1dc8418c21db.h"
@@ -12,7 +13,6 @@
 
 
 
-extern Game_func_8022B7F8_de D_80145088;
 extern void *D_800D31B4_de[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern void *D_800E1144[];
@@ -25,7 +25,6 @@ extern void *D_800E1154[];
 extern void *D_800D31C0[];
 #endif
 #else
-extern char D_80145088;
 extern void *D_800D31B4_de;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern void *D_800E1144;
@@ -56,7 +55,7 @@ void func_8022B7F8_de(void *arg0, void *arg1) {
     void *owner;
     void *payload;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    Game_func_8022B7F8_de *game;
+    MenuMatchGlobals *game;
     MenuSettings *settings;
 #endif
 

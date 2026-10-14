@@ -8557,7 +8557,7 @@ schema = 1
 "D_800DF544" = { declaration = "extern TextEntry D_800DF544[];", evidence = "authored" }
 "D_800DF740" = { declaration = "extern RequestDrawPair D_800DF740[];", evidence = "authored" }
 "D_800DF7D0" = { declaration = "extern JoinNameEntry D_800DF7D0[];", evidence = "authored" }
-"D_800DF964" = { declaration = "extern void *D_800DF964[];", evidence = "authored" }
+"D_800DF964" = { declaration = "extern char **D_800DF964[];", evidence = "authored" }
 "D_800DFA02" = { declaration = "extern u16 D_800DFA02[][56];", evidence = "authored" }
 "D_800E01B0_de" = { declaration = "extern int D_800E01B0_de[];", evidence = "authored" }
 "D_800E0286" = { declaration = "extern int D_800E0286[];", evidence = "authored" }

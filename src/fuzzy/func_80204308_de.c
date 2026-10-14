@@ -10,7 +10,8 @@ typedef struct SoundActor {
 } SoundActor;
 
 
-extern char D_80145088, D_80141008;
+#include "shared/menu_match_globals.h"
+extern char D_80141008;
 
 extern void func_80239908_de(void *, void *, s32, void *, f32);
 s32 func_80204308_de(SoundObject *object, SoundGuard *guard, SoundActor *actor) {

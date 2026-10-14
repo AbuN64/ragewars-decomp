@@ -90,7 +90,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     return found;
 }
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 extern void *func_802395A4_de(s32 *, Vec3 *);
 extern s32 func_8025BA4C_de(void *, s32);

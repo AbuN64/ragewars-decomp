@@ -23,7 +23,7 @@ extern u8 D_801462D5;
 extern s32 D_800D30BC;
 extern f32 D_800D2988;
 extern char D_80145040[];
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 extern s16 func_8022F96C_de(void *);
 extern s32 func_8022F55C_de(void *, s16);

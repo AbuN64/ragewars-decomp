@@ -23,7 +23,7 @@
 
 
 extern f32 D_800D2988;
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 extern void func_802394BC_de(char *, f32, f32, f32, f32, s32, Triple);
 extern void func_802227F4_de(SharedPlayer_func_80226340_de *, SharedPlayer_func_80226340_de *, s32);

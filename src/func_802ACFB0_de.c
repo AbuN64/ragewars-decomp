@@ -2,7 +2,7 @@
 #include "span_1000/code_802AB3FC.h"
 #include "types.h"
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif

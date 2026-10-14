@@ -8,7 +8,8 @@ typedef struct DraftSceneA698 {
 extern ColorEntry D_800CD6E4_de[];
 extern f32 D_800D2988;
 extern s32 D_801462CC;
-extern char D_80145088, D_80141008;
+#include "shared/menu_match_globals.h"
+extern char D_80141008;
 extern void *D_800D3A9C;
 extern void func_804037D4_de(void), func_804030E0_de(s32);
 extern s32 func_8044D220_de(void *, s32, s32, void *, s32), func_802934F8_de(void);

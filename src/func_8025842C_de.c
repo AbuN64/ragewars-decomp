@@ -12,7 +12,7 @@
 extern u8 D_801462E1;
 extern f32 D_800C3EE0_de;
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);

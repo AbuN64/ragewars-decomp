@@ -1,6 +1,5 @@
 #include "shared/match_menu_message_ids.h"
 #include "types.h"
-typedef struct MatchMenuObjects { char pad0[0x124D]; u8 level; char pad124E[0x5A2]; s32 transition; } MatchMenuObjects;
 
 /* Handles the menu message func_80299A08_de reports after func_8029973C_de. 0x1D9 sends code 3 to
    func_8042E988_de unless func_802999A0_de(0) reports 0x16; then it stops the match objects at D_80145088
@@ -8,7 +7,7 @@ typedef struct MatchMenuObjects { char pad0[0x124D]; u8 level; char pad124E[0x5A
    it idle, sets the word at 0x17F0 of the objects to 8 and sends 20, 10, 15 or 10 by the byte at
    0x124D through jtbl_800E1A40, or 3 for any other value. 0x1DA sends 11 when func_802999A0_de(0)
    reports 11 and -1 otherwise. Either then calls func_802998A8_de. Returns zero. */
-extern MatchMenuObjects D_80145088;
+#include "shared/menu_match_globals.h"
 extern char D_80145040[];
 extern char D_8011FE88[];
 
@@ -27,7 +26,7 @@ extern void func_802998A8_de(void);
 
 
 s32 func_80429B28_eu(void) {
-    MatchMenuObjects *objects;
+    MenuMatchGlobals *objects;
     s32 code;
     u32 level;
 
@@ -44,8 +43,8 @@ s32 func_80429B28_eu(void) {
         if (func_8025477C_de() == 0) {
             func_8025476C_de(1);
         }
-        level = objects->level;
-        objects->transition = 8;
+        level = objects->settings.padding[0xD];
+        objects->status[0] = 8;
         if (level >= 5) {
             goto send_3;
         }

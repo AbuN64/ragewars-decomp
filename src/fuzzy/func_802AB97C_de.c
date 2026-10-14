@@ -13,7 +13,7 @@ typedef struct DraftPickupAB97C { u8 **text; s16 pad4, sound, event, padA, index
 extern u8 D_801462E5;
 extern s32 D_801468F4;
 extern DraftWeaponAB97C *D_800D052C[];
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 extern s32 func_80222BE8_de(void *, s32, s32), func_8025DE54_de(s16, Vec3, s32, s32);
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
 extern void *func_80237E80_de(void *, void *, u8 *);

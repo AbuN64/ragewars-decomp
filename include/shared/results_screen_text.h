@@ -1,8 +1,8 @@
 #ifndef RESULTS_SCREEN_TEXT_H
 #define RESULTS_SCREEN_TEXT_H
 #include "types.h"
+#include "common/data.h"
 /* PAL resources provide a string per selected language. */
-extern char **D_800DF964[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 extern const char D_800EE170[], D_800EE174[];

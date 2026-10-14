@@ -8,7 +8,7 @@
 extern s32 D_8011FE88;
 extern void ***D_800D052C[];
 extern s32 D_800CD730;
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 
 extern s32 func_802327A0_de(s32);

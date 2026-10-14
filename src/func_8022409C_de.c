@@ -37,7 +37,7 @@
 
 extern f32 D_800D2988;
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 extern char D_800C2950_de;
 
 extern void func_80274870_de(f32 *, f32, f32);

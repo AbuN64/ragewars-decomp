@@ -3,7 +3,7 @@
 #include "span_1000/code_80233920.h"
 #include "span_1000/code_802AB3FC.h"
 #include "types.h"
-extern LocalizedEffectContext D_80145088;
+#include "shared/menu_match_globals.h"
 extern void func_80237E80_de(void *, void *, void *);
 extern s32 func_8025DE54_de(s16 arg0, Vec3 position, s32 arg4, s32 arg5);
 
@@ -17,7 +17,7 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
             func_80237E80_de(&D_80145088,
                           ((Shared_ActorView *)arg0)->message,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                          ((void **)resource)[D_80145088.language]);
+                          ((void **)resource)[D_80145088.settings.language]);
 #else
                           *(void **)resource);
 #endif

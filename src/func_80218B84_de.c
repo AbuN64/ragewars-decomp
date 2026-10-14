@@ -64,7 +64,7 @@ extern s32 D_800DCE78[];
 extern s32 D_800DCE84[];
 extern s32 D_800DCE90[];
 #endif
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 extern s32 D_8014561C;
 extern s32 D_801468C4;
 extern s32 func_80245784_de(void);

@@ -13,7 +13,7 @@
 
 
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 
 extern s32 func_802395A4_de(void *, Triple *);

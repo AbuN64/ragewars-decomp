@@ -4,7 +4,7 @@ extern f32 D_800C62D8;
 extern f32 D_800C62DC;
 extern void D_002AD1B4(void);
 extern void D_002AD264(void);
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);

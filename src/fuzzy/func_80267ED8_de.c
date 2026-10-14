@@ -32,7 +32,7 @@ typedef struct Context {
 
 
 
-extern char D_80145088[];
+#include "shared/menu_match_globals.h"
 extern void func_80237E80_de(char *system, char *emitter, s32 sound);
 
 void func_80267ED8_de(s32 arg0, Context *arg1, s32 arg2, Triple arg3, Params arg6)
@@ -41,10 +41,10 @@ void func_80267ED8_de(s32 arg0, Context *arg1, s32 arg2, Triple arg3, Params arg
         char *parent = arg1->inner->parent;
 
         if (parent != 0) {
-            func_80237E80_de(D_80145088, parent, gameplaySoundValue(arg6.value));
+            func_80237E80_de(&D_80145088, parent, gameplaySoundValue(arg6.value));
         }
     } else {
-        func_80237E80_de(D_80145088, D_80145088 + 0x40, gameplaySoundValue(arg6.value));
+        func_80237E80_de(&D_80145088, &D_80145088.fallbackCamera, gameplaySoundValue(arg6.value));
     }
     if (gameplaySoundHook(arg6.value) != 0) {
         func_8025E11C_de(gameplaySoundHook(arg6.value));

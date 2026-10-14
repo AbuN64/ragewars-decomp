@@ -3,7 +3,7 @@
 typedef struct TogglePlayer { u8 pad0[0x5dc]; void *owner; u8 pad5e0[0xc1c]; f32 timer; Vec3 position; s32 mode; u8 pad1210[0x248]; Vec3 source; u8 pad1464[0xc]; Vec3 direction; s32 enabled; u8 pad1480[0x180]; u8 matrix[0x40]; } TogglePlayer;
 extern f32 D_800C2D0C_de;
 extern void *D_800D311C,*D_800D3120,*D_800D3124;
-extern u8 D_80145088[];
+#include "shared/menu_match_globals.h"
 extern void func_8025DF34_de(s32);
 extern void func_80273198_de(f32 *,Vec3 *);
 extern void func_80271F9C_de(Vec3 *,Vec3 *,f32);
@@ -39,6 +39,6 @@ void func_8022B1B8_de(TogglePlayer *player,s32 mode) {
             message = D_800D3124;
             if (mode != 0) message = D_800D3120;
         }
-        func_80237E80_de(D_80145088,owner,message);
+        func_80237E80_de(&D_80145088,owner,message);
     }
 }

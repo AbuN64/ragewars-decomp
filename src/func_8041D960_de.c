@@ -7,7 +7,7 @@
    cartridges hold each entry's text per language and pick the current language's. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-extern Game_func_8041D960_de D_80145088;
+#include "shared/menu_match_globals.h"
 #endif
 /* The hub spells D_800E3590 as the padded menu block; its focus slot at +0x0EC is a word there,
    while this unit's view types it as a node pointer, so each member use casts to the view. */
@@ -27,7 +27,7 @@ void func_8041D960_de(void) {
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
                 ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DF544[i].text[0];
 #elif defined(VERSION_EU) || defined(VERSION_EU_X)
-                ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DF544[i].text[D_80145088.language];
+                ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DF544[i].text[D_80145088.settings.language];
 #endif
             } else {
                 ((Menu_func_8041D960_de *) D_800E3590)->label->text = D_800DD4C8 + 4;

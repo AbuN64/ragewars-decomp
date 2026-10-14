@@ -4,7 +4,7 @@
 
 extern u8 *func_802A025C_de(u8 *, u8 *);
 extern void func_80239770_de(void *, s32, void *, f32);
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 
 
 

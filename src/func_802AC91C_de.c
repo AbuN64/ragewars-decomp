@@ -171,7 +171,7 @@ block_4:
     }
 }
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif
@@ -216,7 +216,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     return 1;
 }
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif
@@ -275,7 +275,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
     return result;
 }
 
-extern char D_80145088;
+#include "shared/menu_match_globals.h"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif

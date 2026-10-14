@@ -10,9 +10,7 @@ extern CallbackPair *D_800CD668_de[];
 
 extern void *D_800CD730;
 
-typedef struct TriggerSoundSystem { char pad0[0x20]; void *fallback; char pad24[0x1C]; char defaultEmitter[1]; } TriggerSoundSystem;
-extern TriggerSoundSystem D_80145088;
-extern u8 D_801462E5;
+#include "shared/menu_match_globals.h"
 extern s32 D_8011FE88, D_801371D4;
 extern TriggerActor *D_8011BF00;
 extern void func_80239908_de(void *, void *, s32, void *, f32);
@@ -24,10 +22,10 @@ void func_80278C10_de(Trigger *trigger) {
     s32 callback;
     table = D_800CD668_de[trigger->table];
     if (table != 0) {
-        fallback = D_80145088.defaultEmitter;
+        fallback = &D_80145088.fallbackCamera;
         if (D_801462E5 == 0) {
-            fallback = D_80145088.fallback;
-            if (fallback == 0) fallback = D_80145088.defaultEmitter;
+            fallback = D_80145088.cameras;
+            if (fallback == 0) fallback = &D_80145088.fallbackCamera;
         }
         if (D_8011FE88 == 4) {
             index = trigger->sound;
