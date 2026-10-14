@@ -232,6 +232,7 @@ struct FrameSchedule {
     s32 task;
     char pad114[0x10];
     u32 duration;
+    char pad128[0x18];
 };
 
 struct OSScTask_s;
