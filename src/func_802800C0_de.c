@@ -22,23 +22,23 @@ extern f32 D_800CD6B0;
 extern EffectBlock *func_8028FDB4_de(s32, s32);
 extern s32 func_80265550_de(EffectEntry *, s32, s32, s32 *, s32 *);
 extern void func_80272898_de(void *, void *, void *);
-extern void func_80272B38_de(Matrix_func_80213CF8_de *, Vec3 *, Vec3 *);
-extern void func_80272CB0_de(Matrix_func_80213CF8_de *, f32, f32, f32);
-extern void func_80272C60_de(Matrix_func_80213CF8_de *, f32, f32, f32);
-extern void func_802727D8_de(Matrix_func_80213CF8_de *);
+extern void func_80272B38_de(MatrixF *, Vec3 *, Vec3 *);
+extern void func_80272CB0_de(MatrixF *, f32, f32, f32);
+extern void func_80272C60_de(MatrixF *, f32, f32, f32);
+extern void func_802727D8_de(MatrixF *);
 extern void func_8024D4AC_de(Vector4f *, EffectActor *, Vec3);
-extern void func_80273198_de(Matrix_func_80213CF8_de *, Vec3 *);
-extern void func_80270910_de(Matrix_func_80213CF8_de *, Matrix_func_80213CF8_de *);
-extern void func_8027347C_de(Matrix_func_80213CF8_de *, f32, f32, f32);
-extern void func_80273448_de(Matrix_func_80213CF8_de *, f32, f32, f32);
-extern void func_8027DD48_de(EffectActor *, Matrix_func_80213CF8_de *, void *, f32);
+extern void func_80273198_de(MatrixF *, Vec3 *);
+extern void func_80270910_de(MatrixF *, MatrixF *);
+extern void func_8027347C_de(MatrixF *, f32, f32, f32);
+extern void func_80273448_de(MatrixF *, f32, f32, f32);
+extern void func_8027DD48_de(EffectActor *, MatrixF *, void *, f32);
 extern s32 func_802744D4_de(void);
-extern void func_80284570_de(EffectSystem *, Effect_func_802800C0_de *);
-extern void func_80255ED8_de(IntrusiveList *, Effect_func_802800C0_de *);
-extern void func_80255CB8_de(IntrusiveList *, Effect_func_802800C0_de *);
-extern void func_80255D70_de(IntrusiveList *, Effect_func_802800C0_de *, Effect_func_802800C0_de *);
+extern void func_80284570_de(EffectSystem *, ParticleEffect *);
+extern void func_80255ED8_de(IntrusiveList *, ParticleEffect *);
+extern void func_80255CB8_de(IntrusiveList *, ParticleEffect *);
+extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void func_80295E84_de(u32 *, s32);
-extern void func_80246184_de(Effect_func_802800C0_de *);
+extern void func_80246184_de(ParticleEffect *);
 extern f32 func_80285630_de(CharacterScreenCell);
 
 #if defined(VERSION_EU)
@@ -47,11 +47,11 @@ extern f32 func_802AD520_eu(s32);
 extern f32 func_802B2350(s32);
 #endif
 
-extern void func_8022B040_de(s32, Effect_func_802800C0_de *);
-extern void func_8027DAD0_de(Effect_func_802800C0_de *, s32, s32);
-extern void func_802A4598_de(void *, Effect_func_802800C0_de *, s32);
+extern void func_8022B040_de(s32, ParticleEffect *);
+extern void func_8027DAD0_de(ParticleEffect *, s32, s32);
+extern void func_802A4598_de(void *, ParticleEffect *, s32);
 extern s32 func_80268BE0_de(void *, s32);
-extern void func_802843B8_de(Effect_func_802800C0_de *, s32);
+extern void func_802843B8_de(ParticleEffect *, s32);
 extern void func_8025DE54_de(s16, Vec3, s32, s32);
 extern void func_802765B0_de(s8, u8, u8, u8, u8 *, u8 *, u8 *);
 
@@ -61,8 +61,8 @@ static inline s32 effect_spawn_random_count(s32 range) {
     return range != 0 ? func_802744D4_de() % (range + 1) : 0;
 }
 
-static inline Effect_func_802800C0_de *effect_spawn_find_owned(IntrusiveList *list, void *ownerId, EffectEntry *entry) {
-    Effect_func_802800C0_de *effect;
+static inline ParticleEffect *effect_spawn_find_owned(IntrusiveList *list, void *ownerId, EffectEntry *entry) {
+    ParticleEffect *effect;
 
     effect = list->head;
     if (entry != 0) {
@@ -81,8 +81,8 @@ static inline Effect_func_802800C0_de *effect_spawn_find_owned(IntrusiveList *li
     return 0;
 }
 
-static inline Effect_func_802800C0_de *effect_spawn_allocate(EffectSystem *sys, u8 index) {
-    Effect_func_802800C0_de *effect;
+static inline ParticleEffect *effect_spawn_allocate(EffectSystem *sys, u8 index) {
+    ParticleEffect *effect;
     IntrusiveList *list;
     s32 i;
 
@@ -108,9 +108,9 @@ static inline Effect_func_802800C0_de *effect_spawn_allocate(EffectSystem *sys, 
     return effect;
 }
 
-static inline void effect_spawn_aim(Effect_func_802800C0_de *effect, EffectTarget *aimTarget, Vec3 *vel, s32 sourceType) {
-    Matrix_func_80213CF8_de targetMtx;
-    Matrix_func_80213CF8_de targetInv;
+static inline void effect_spawn_aim(ParticleEffect *effect, EffectTarget *aimTarget, Vec3 *vel, s32 sourceType) {
+    MatrixF targetMtx;
+    MatrixF targetInv;
     Vec3 up;
     EffectActor *targetActor;
     s32 targetTeam;
@@ -136,7 +136,7 @@ static inline void effect_spawn_aim(Effect_func_802800C0_de *effect, EffectTarge
 
 s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind,
                   Vec3 arg6, Vector4f rotation, Vec3 pos, Vec3 *aim, s32 arg10, s32 arg11) {
-    Matrix_func_80213CF8_de mtx;
+    MatrixF mtx;
     Vec3 dir;
     Vec3 dirOut;
     Vec3 offset;
@@ -173,11 +173,11 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
     s32 numEntries;
     EffectEntry *entries;
     EffectEntry *entry;
-    Effect_func_802800C0_de *effect;
+    ParticleEffect *effect;
     EffectRender *render;
     Vec3 *vel;
     EffectTarget *aimTarget;
-    Object_func_804220A8_de *camera;
+    ParticleView *camera;
     f32 distSq;
     f32 scale;
     f32 depth;
@@ -550,7 +550,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     render->flags |= 0x4000;
                 }
                 if (entry->params->unk5 != 3) {
-                    Effect_func_802800C0_de *other;
+                    ParticleEffect *other;
 
                     for (other = sys->groups.head; other != 0; other = other->groupNext) {
                         if (other->entry == effect->entry) {

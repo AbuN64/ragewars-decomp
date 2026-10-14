@@ -20,7 +20,7 @@ static __inline__ f64 unsignedDouble(u32 value,const f64 *bias) {
     return result;
 }
 
-static __inline__ f32 wrapAngle(AnimTrack_func_8026193C_de *anim,f32 time) {
+static __inline__ f32 wrapAngle(AnimChannel *anim,f32 time) {
     s16 *keys;
     s32 first,next,last;
     keys=((AngleKeys *)func_8028FDB4_de(func_8026049C_de(anim),0))->keys;
@@ -31,7 +31,7 @@ static __inline__ f32 wrapAngle(AnimTrack_func_8026193C_de *anim,f32 time) {
     return func_80273EE4_de(time-(f32)first,(f32)keys[first]*D_800C41F0_de,(f32)keys[last]*D_800C41F0_de);
 }
 
-void func_8026193C_de(AnimTrack_func_8026193C_de *arg0, Vec3 *arg1, f32 *arg2, RootActor *arg3) {
+void func_8026193C_de(AnimChannel *arg0, Vec3 *arg1, f32 *arg2, RootActor *arg3) {
     Vec3 sp10;
     Vec3 sp20;
     f32 temp_fs0;

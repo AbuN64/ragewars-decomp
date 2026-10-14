@@ -10,7 +10,7 @@ extern State_func_8040385C_de *D_800E2830;
 Vec3 func_8040385C_de(void) {
     Vec3 sp10;
     Vec3 sp20;
-    Table_func_8028CE94_de *temp_v0;
+    StridedTable *temp_v0;
     if (D_800E2830->unk38 == 0) {
         sp20.x = 0;
         sp20.y = 0;

@@ -30,7 +30,7 @@ extern f32 D_800C4CD4_de, D_800C4CD8_de, D_800C4CDC_de, D_800C4CE0_de, D_800C4CE
 extern f32 D_800C9D88;
 extern s32 D_800D297C;
 
-void func_8027DD48_de(Shared_Particle *arg0, void *arg1, Object_func_804220A8_de *arg2, f32 arg3) {
+void func_8027DD48_de(Shared_Particle *arg0, void *arg1, ParticleView *arg2, f32 arg3) {
     f32 m10[16], m50[16], m90[16], mD0[16], m110[16];
     Vec4 v150;
     Vec4 v160;

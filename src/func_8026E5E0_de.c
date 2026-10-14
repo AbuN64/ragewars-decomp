@@ -17,7 +17,7 @@ extern s32 func_802800C0_de(void *, void *, void *, s32, s32, s32,
 extern void func_80265E10_de(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 extern f32 func_8024BF24_de(void *);
 
-void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct Matrix_func_80213CF8_de *arg2, func_8026E5E0_S3 *arg3, AttachmentTable *arg4) {
+void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *arg3, AttachmentTable *arg4) {
     Triple pos;
     Triple mapped;
     Triple zero;

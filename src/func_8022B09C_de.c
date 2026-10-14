@@ -7,7 +7,7 @@
 
 
 
-extern void func_80226DD0_de(char *, Matrix_func_80213CF8_de *);
+extern void func_80226DD0_de(char *, MatrixF *);
 extern void func_80272898_de(void *, void *, void *);
 
 
@@ -17,9 +17,9 @@ extern void func_80272898_de(void *, void *, void *);
 
 void func_8022B09C_de(void *arg0, Vec3 *arg1) {
     Vec3 input;
-    Matrix_func_80213CF8_de matrix;
+    MatrixF matrix;
     Vec3 *input_ptr;
-    Matrix_func_80213CF8_de *matrix_ptr;
+    MatrixF *matrix_ptr;
 
     func_8022B08C_S1 *object = arg0;
     func_8022B08C_S2 *owner;

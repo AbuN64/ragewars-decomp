@@ -47,7 +47,7 @@ typedef struct func_80241940_S1 func_80241940_S1;
 struct ElementE8;
 struct ElementE8 {
     char pad0[0x68];
-    Matrix_func_80213CF8_de transform; /* 0x68 */
+    MatrixF transform; /* 0x68 */
     u8 padA8[0xC];
     void **resource; /* 0xB4 */
     Box box;
@@ -321,14 +321,14 @@ struct ContextB0 {
     void *ray; /* Ray shared by collision traversal callbacks. */
     Vec3 *start;
     Vec3 *end;
-    Matrix_func_80213CF8_de matrix;
+    MatrixF matrix;
     f32 reach;
     s32 segments;
     f32 step;
     ElementE8 *element;
     s32 kind;
     u32 flags; /* 0x60 */
-    Matrix_func_80213CF8_de transform; /* 0x64 */
+    MatrixF transform; /* 0x64 */
     void *vertices; /* 0xA4 */
     s32 isKind9;
     char padAC[0x4];

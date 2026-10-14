@@ -44,11 +44,11 @@
 
 
 extern f32 D_800D2988[];
-extern void func_8024796C_de(Vector4f *,Actor_func_802238E0_de *),func_80274244_de(Vector4f *,Matrix_func_80213CF8_de *),func_80272898_de(Matrix_func_80213CF8_de *,Vec3 *,Vec3 *),func_80271F34_de(Vec3 *,Vec3 *,Vec3 *),func_8025DE54_de(s16,Vec3,s32,s32),func_80274870_de(f32 *,f32,f32);
+extern void func_8024796C_de(Vector4f *,Actor_func_802238E0_de *),func_80274244_de(Vector4f *,MatrixF *),func_80272898_de(MatrixF *,Vec3 *,Vec3 *),func_80271F34_de(Vec3 *,Vec3 *,Vec3 *),func_8025DE54_de(s16,Vec3,s32,s32),func_80274870_de(f32 *,f32,f32);
 extern f32 func_802B72B0_de(f32);
 void func_802238E0_de(SharedPlayer_func_802238E0_de *arg0, Actor_func_802238E0_de *arg1, SharedMovement *arg2) {
     Vec3 v18,v28,v38,v48,v58;
-    Matrix_func_80213CF8_de sp68;
+    MatrixF sp68;
     Vector4f spA8;
     f32 temp_f0;
     f32 temp_f0_2;

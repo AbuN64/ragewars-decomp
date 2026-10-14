@@ -8,7 +8,7 @@ extern s32 D_00285160;
 extern s32 D_800C51D8;
 
 void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 arg2, s32 arg3) {
-    Table_func_8028CE94_de *table;
+    StridedTable *table;
     s32 idx;
     s32 sp28;
     s32 result;

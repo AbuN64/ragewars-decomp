@@ -18,7 +18,7 @@ void func_8022C080_de(void *arg0, void *arg1) {
 
     result = (void *)func_8024E7DC_de(arg1);
     if (result != 0) {
-        t0 = ((Model_func_80223E34_de *)result)->blend;
+        t0 = ((ModelBlend *)result)->blend;
         t1 = ((Shared_ActorView *)arg0)->modelBlend;
         t0 = t0 - t1;
         t0 = t0 * D_800C2D28_de;

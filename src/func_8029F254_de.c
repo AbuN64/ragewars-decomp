@@ -6,7 +6,7 @@
 
 
 
-void func_8029F254_de(struct Matrix_func_80213CF8_de *arg0, Vec3 *arg1, f32 arg2) {
+void func_8029F254_de(struct MatrixF *arg0, Vec3 *arg1, f32 arg2) {
     f32 sine;
     f32 cosine;
     f32 cosine_value;

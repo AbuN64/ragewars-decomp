@@ -58,7 +58,7 @@ struct InputRecAt28 {
 
 extern float D_800C5AB0_de;
 
-extern void func_8029D000_de(Plane_func_802965B0_de *m);
+extern void func_8029D000_de(PlaneEquation *m);
 
 extern f64 func_8029BDEC_de(f64 x);
 

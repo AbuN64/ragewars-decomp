@@ -75,11 +75,11 @@ struct func_8028D628_S1 {
 
 
 struct Object_func_8028CE94_de;
-struct Table_func_8028CE94_de;
+struct StridedTable;
 struct Object_func_8028CE94_de {
     char pad[0xA8];
-    struct Table_func_8028CE94_de *unkA8;
-    struct Table_func_8028CE94_de *unkAC;
+    struct StridedTable *unkA8;
+    struct StridedTable *unkAC;
 };
 
 struct Object_func_8028CE94_de;

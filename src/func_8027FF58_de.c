@@ -33,8 +33,8 @@ void func_8027FF58_de(void *arg0) {
     s32 active_mask;
     s32 flagged_offset;
     s32 head_offset;
-    Effect_func_802800C0_de *temp_s0;
-    Effect_func_802800C0_de *var_s1;
+    ParticleEffect *temp_s0;
+    ParticleEffect *var_s1;
     u8 *head_cursor;
 
     var_s3 = 0;

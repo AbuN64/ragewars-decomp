@@ -13,7 +13,7 @@ extern void func_802A42F4_de(void *arg0, void *arg1);
 extern void func_80255ED8_de(void *, s32);
 extern s32 func_80255CB8_de(void *, s32);
 
-void func_80284570_de(EffectSystem *arg0, Effect_func_802800C0_de *arg1) {
+void func_80284570_de(EffectSystem *arg0, ParticleEffect *arg1) {
     s32 *temp_v1;
     s32 temp_a1;
     s32 temp_v1_2;

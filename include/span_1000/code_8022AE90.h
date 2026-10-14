@@ -186,13 +186,13 @@ extern int func_8022B97C_de(void);
 struct func_8022B08C_S2;
 struct func_8022B08C_S2 {
     char pad0[0x160];
-    Matrix_func_80213CF8_de unk160;
+    MatrixF unk160;
 };
 
 struct func_8022B08C_S1;
 struct func_8022B08C_S1 {
     char pad0[0x5DC];
-    Matrix_func_80213CF8_de * unk5DC;
+    MatrixF * unk5DC;
 };
 
 struct Context;

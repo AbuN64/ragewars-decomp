@@ -33,7 +33,7 @@ void func_80282330_de(ParticleDrawList *list, struct Shared_ParticleView *view) 
     f32 zScale, xyScale, xScale, maximum, height, radius;
     f32 minX, maxX, minY, maxY, minZ, maxZ;
     f32 depth;
-    Object_func_804220A8_de *camera;
+    ParticleView *camera;
     u32 special;
     if (list->head != 0) {
         gDPPipeSync(D_80110634++);

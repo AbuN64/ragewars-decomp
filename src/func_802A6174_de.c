@@ -44,7 +44,7 @@ void func_802A6174_de(void *arg0, void *arg1) {
         } else {
             func_80270910_de(local, entry + ((D_800D297C << 6) + 0x60));
             scale = D_800C5EB8_de;
-            if (((Effect_func_802800C0_de *)entry)->entry->unk14 != 0) {
+            if (((ParticleEffect *)entry)->entry->unk14 != 0) {
                 scale = D_800C5EBC_de;
             }
             func_8027347C_de(local, scale, scale, scale);

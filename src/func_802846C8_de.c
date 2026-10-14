@@ -12,20 +12,20 @@ void *func_802846C8_de(void *arg0, s32 arg1, void *arg2) {
     if (arg2 != 0) {
         if (record != 0) {
             do {
-                if (((Effect_func_802800C0_de *)record)->ownerId == arg1) {
-                    if (((Effect_func_802800C0_de *)record)->entry == arg2) {
+                if (((ParticleEffect *)record)->ownerId == arg1) {
+                    if (((ParticleEffect *)record)->entry == arg2) {
                         return record;
                     }
                 }
-                record = ((Effect_func_802800C0_de *)record)->next;
+                record = ((ParticleEffect *)record)->next;
             } while (record != 0);
         }
     } else if (record != 0) {
         do {
-            if (((Effect_func_802800C0_de *)record)->ownerId == arg1) {
+            if (((ParticleEffect *)record)->ownerId == arg1) {
                 return record;
             }
-            record = ((Effect_func_802800C0_de *)record)->next;
+            record = ((ParticleEffect *)record)->next;
         } while (record != 0);
     }
     return 0;
@@ -41,10 +41,10 @@ void func_80284758_de(void *arg0, void *arg1)
 
     current = ((EffectSystem *)arg0)->groups.head;
     if (current != 0) {
-        key = (s32)((Effect_func_802800C0_de *)arg1)->entry;
+        key = (s32)((ParticleEffect *)arg1)->entry;
 loop:
-        if (((Effect_func_802800C0_de *)current)->entry != key) {
-            current = ((Effect_func_802800C0_de *)current)->groupNext;
+        if (((ParticleEffect *)current)->entry != key) {
+            current = ((ParticleEffect *)current)->groupNext;
             if (current != 0) {
                 goto loop;
             }
@@ -53,13 +53,13 @@ loop:
 
     if (current != 0) {
         func_80255D70_de(&((EffectSystem *)arg0)->groups, current, arg1);
-    } else if (((Effect_func_802800C0_de *)arg1)->entry->flags & 0x2000) {
+    } else if (((ParticleEffect *)arg1)->entry->flags & 0x2000) {
         func_80255CB8_de(&((EffectSystem *)arg0)->groups, arg1);
     } else {
         func_80255D14_de(&((EffectSystem *)arg0)->groups, arg1);
     }
 
-    ((Effect_func_802800C0_de *)arg1)->flags |= 0x01000000;
+    ((ParticleEffect *)arg1)->flags |= 0x01000000;
 }
 
 extern s32 func_802744D4_de(void);
@@ -80,18 +80,18 @@ void func_80284870_de(f32 arg0) {
 
 /** Return offset 0x180 only when the nested state word is zero. */
 float func_8028489C_de(void *arg0) {
-    void *inner = ((Effect_func_802800C0_de *)arg0)->entry;
+    void *inner = ((ParticleEffect *)arg0)->entry;
     if (((EffectEntry *)inner)->unk14 != 0) {
         return 0.0f;
     }
-    return ((Effect_func_802800C0_de *)arg0)->unk180[0];
+    return ((ParticleEffect *)arg0)->unk180[0];
 }
 
 f32 func_802848BC_de(void *arg0) {
     f32 var_f0;
     var_f0 = 0.0f;
-    if ((((Effect_func_802800C0_de *)arg0)->entry->unk14) == 0) {
-        var_f0 = (((Effect_func_802800C0_de *)arg0)->unk180[1]);
+    if ((((ParticleEffect *)arg0)->entry->unk14) == 0) {
+        var_f0 = (((ParticleEffect *)arg0)->unk180[1]);
     }
     return var_f0;
 }
@@ -100,7 +100,7 @@ s32 func_802848DC_de(void *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((Effect_func_802800C0_de *)arg0)->kind;
+    temp_v1 = ((ParticleEffect *)arg0)->kind;
     val = temp_v1;
     if (val == 0x56) {
         goto ret1;
@@ -129,7 +129,7 @@ s32 func_80284928_de(void *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((Effect_func_802800C0_de *)arg0)->kind;
+    temp_v1 = ((ParticleEffect *)arg0)->kind;
     val = temp_v1;
     if (val == 0x11) {
         goto ret1;
@@ -175,7 +175,7 @@ s32 func_802849AC_de(void *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((Effect_func_802800C0_de *)arg0)->kind;
+    temp_v1 = ((ParticleEffect *)arg0)->kind;
     val = temp_v1;
     if (val == 0xD) {
         goto ret1;

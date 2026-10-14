@@ -55,8 +55,8 @@ struct ItemRecAt1C {
     struct ItemRecAt1C *next;
 };
 
-struct Source_func_8026BC60_de;
-struct Source_func_8026BC60_de {
+struct ResourceSource;
+struct ResourceSource {
     s32 flags;
     u16 id;
     u8 pad6[0x12];
@@ -66,10 +66,10 @@ struct Source_func_8026BC60_de {
 
 struct ItemRecAt1C;
 struct Node_func_8026BC60_de;
-struct Source_func_8026BC60_de;
+struct ResourceSource;
 struct Node_func_8026BC60_de {
     u32 key;
-    struct Source_func_8026BC60_de *source;
+    struct ResourceSource *source;
     struct ItemRecAt1C *head;
     struct ItemRecAt1C *tail;
     struct Node_func_8026BC60_de *prev;
@@ -96,8 +96,8 @@ extern float D_800C4668_de;
 
 extern void func_8026C020_de();
 
-struct Source_func_8026BC60_de;
-typedef struct Source_func_8026BC60_de Source_func_8026BC60_de;
+struct ResourceSource;
+typedef struct ResourceSource ResourceSource;
 
 struct Owner104;
 typedef struct Owner104 Owner104;

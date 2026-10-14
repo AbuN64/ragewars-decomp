@@ -13,7 +13,7 @@
 
 f32 func_8022ADBC_de(void *arg0) {
     struct Object *object = arg0;
-    struct Model_func_80223E34_de *temp_v0;
+    struct ModelBlend *temp_v0;
 
     temp_v0 = object->owner;
     if (temp_v0 != 0) {

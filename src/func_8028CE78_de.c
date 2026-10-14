@@ -2,7 +2,7 @@
 
 /** Return an indexed record from the world's strided table. */
 void *func_8028CE78_de(Shared_World *world, s32 index) {
-    Table_func_8028CE94_de *table = world->stridedRecords;
+    StridedTable *table = world->stridedRecords;
     void *base = table;
     char *bytes = base;
     s32 stride = table->stride;

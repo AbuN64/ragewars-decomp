@@ -24,7 +24,7 @@ void func_8024C34C_de(void *arg0, s32 *arg1) {
 
     zero = 0.0f;
     func_8025E5B0_de(arg1, 0, zero, scratch.first);
-    func_8025E5B0_de(arg1, 0, ((AnimTrack_func_8026193C_de *)arg1)->time, scratch.second);
+    func_8025E5B0_de(arg1, 0, ((AnimChannel *)arg1)->time, scratch.second);
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];

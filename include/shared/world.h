@@ -32,12 +32,12 @@ typedef struct Shared_World {
     void *secondaryLevels; /* 0x84 */
     u8 unknown88[0xC];
     struct TableRecAt8 *modelIds; /* 0x94 */
-    Table_func_8028CE94_de *lookupTable; /* 0x98 */
+    StridedTable *lookupTable; /* 0x98 */
     u8 unknown9C[4];
-    Table_func_8028CE94_de *records; /* 0xA0 */
-    Table_func_8028CE94_de *stridedRecords; /* 0xA4 */
+    StridedTable *records; /* 0xA0 */
+    StridedTable *stridedRecords; /* 0xA4 */
     u8 unknownA8[4];
-    Table_func_8028CE94_de *actorRecords; /* 0xAC */
+    StridedTable *actorRecords; /* 0xAC */
     u8 unknownB0[0x38];
     s32 resource;
     u8 unknownEC[0x34];

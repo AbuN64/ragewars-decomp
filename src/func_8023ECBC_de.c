@@ -31,13 +31,13 @@ void func_8023ECBC_de(void *arg0, u16 *arg1)
     temp_v0 = func_8028B2F8_de(&D_8011FE88, arg1);
     if (temp_v0 != 0)
     {
-      if ((((Model_func_80223E34_de *)temp_v0)->collisionFlags) & 0x400000)
+      if ((((ModelBlend *)temp_v0)->collisionFlags) & 0x400000)
       {
         ;
         ((Shared_Func80243A80Frame *)o)->sp54 = (((Shared_Func80243A80Frame *)o)->sp54) | 0x8000;
       }
       else
-        if ((((Model_func_80223E34_de *)temp_v0)->materialFlags) & 0x80)
+        if ((((ModelBlend *)temp_v0)->materialFlags) & 0x80)
       {
         var_v0 = (((Shared_Func80243A80Frame *)o)->sp54) | 0x10000;
         ((Shared_Func80243A80Frame *)o)->sp54 = var_v0;

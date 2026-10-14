@@ -33,9 +33,9 @@ void func_8022D970_de(void *arg0, void *arg1) {
         ((Shared_ActorView *)o)->effectPosition.x = ((Actor_func_8024A7A0_de *)a1)->position0.x;
         ((Shared_ActorView *)o)->effectPosition.y = ((Actor_func_8024A7A0_de *)a1)->position0.y;
         ((Shared_ActorView *)o)->effectPosition.z = ((Actor_func_8024A7A0_de *)a1)->position0.z;
-        sp10.x = ((Model_func_80223E34_de *)temp_v0)->effectOffset.x;
-        sp10.y = ((Model_func_80223E34_de *)temp_v0)->effectOffset.y;
-        sp10.z = ((Model_func_80223E34_de *)temp_v0)->effectOffset.z;
+        sp10.x = ((ModelBlend *)temp_v0)->effectOffset.x;
+        sp10.y = ((ModelBlend *)temp_v0)->effectOffset.y;
+        sp10.z = ((ModelBlend *)temp_v0)->effectOffset.z;
         func_80271F68_de(&sp20, &sp10, &((Shared_ActorView *)o)->effectPosition);
         sp20.y = 0.0f;
         ((Shared_ActorView *)o)->modelDistance = func_80271AA8_de(&sp20);

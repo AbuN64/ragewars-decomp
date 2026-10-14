@@ -16,7 +16,7 @@ extern void func_80271FC8_de(Vec3 *, f32, Vec3 *, Vec3 *);
 extern f32 func_80273EE4_de(f32, f32, f32);
 
 
-extern void func_80272898_de(Matrix_func_80213CF8_de *, Vec3 *, Vec3 *);
+extern void func_80272898_de(MatrixF *, Vec3 *, Vec3 *);
 extern void func_80253754_de(s32, s32);
 
 
@@ -40,7 +40,7 @@ void func_802472F0_de(void *arg0) {
     Vec3 second;
     Vec3 saved;
     Vec3 moved;
-    Matrix_func_80213CF8_de matrix;
+    MatrixF matrix;
     s32 active;
     f32 first_value;
     f32 second_value;

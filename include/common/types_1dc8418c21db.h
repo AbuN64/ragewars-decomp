@@ -37,8 +37,8 @@ struct Pool {
 struct Actor_func_8024A1D0_de;
 typedef struct Actor_func_8024A1D0_de Actor_func_8024A1D0_de;
 
-struct Table_func_8028CE94_de;
-struct Table_func_8028CE94_de {
+struct StridedTable;
+struct StridedTable {
     s32 stride;
     s32 count;
     char data[1];
@@ -136,7 +136,7 @@ struct Node_func_80285B64_de {
     struct Node_func_80285B64_de **owner;
 };
 
-struct Element_func_8041200C_de;
+struct GlyphBuffer;
 /* Font records contain a four-byte header and 147 eight-byte glyph records. */
 typedef struct TextGlyph {
     u32 texture;
@@ -146,7 +146,7 @@ typedef struct TextGlyph {
     s8 offsetY;
 } TextGlyph;
 
-struct Element_func_8041200C_de {
+struct GlyphBuffer {
     u32 header;
     TextGlyph glyphs[147];
 };
@@ -286,8 +286,8 @@ typedef struct Output80216D3C Output80216D3C;
 struct func_8022ED94_S1;
 typedef struct func_8022ED94_S1 func_8022ED94_S1;
 
-struct Matrix_func_80213CF8_de;
-struct Matrix_func_80213CF8_de {
+struct MatrixF;
+struct MatrixF {
     f32 m[4][4];
 };
 
@@ -707,14 +707,14 @@ typedef struct Block24 Block24;
 struct func_8028B3C0_S1;
 typedef struct func_8028B3C0_S1 func_8028B3C0_S1;
 
-struct Plane_func_802965B0_de;
-struct Plane_func_802965B0_de {
+struct PlaneEquation;
+struct PlaneEquation {
     Vec3 normal;
     f32 distance;
 };
 
-struct Plane_func_802965B0_de;
-typedef struct Plane_func_802965B0_de Plane_func_802965B0_de;
+struct PlaneEquation;
+typedef struct PlaneEquation PlaneEquation;
 
 struct Extra;
 struct Extra {
@@ -2942,8 +2942,8 @@ struct __OSDir {
     u8 game_name[16];
 };
 
-struct Element_func_8041200C_de;
-typedef struct Element_func_8041200C_de Element_func_8041200C_de;
+struct GlyphBuffer;
+typedef struct GlyphBuffer GlyphBuffer;
 
 struct func_80207F90_S1;
 typedef struct func_80207F90_S1 func_80207F90_S1;
@@ -3504,8 +3504,8 @@ struct func_802558C0_S1 {
 struct ObjectState1E_2;
 typedef struct ObjectState1E_2 ObjectState1E_2;
 
-struct Matrix_func_80213CF8_de;
-typedef struct Matrix_func_80213CF8_de Matrix_func_80213CF8_de;
+struct MatrixF;
+typedef struct MatrixF MatrixF;
 
 struct func_8023945C_S1;
 typedef struct func_8023945C_S1 func_8023945C_S1;
@@ -4456,8 +4456,8 @@ struct RecordRecAt14 {
 struct ResourceManagerState;
 typedef struct ResourceManagerState ResourceManagerState;
 
-struct Table_func_8028CE94_de;
-typedef struct Table_func_8028CE94_de Table_func_8028CE94_de;
+struct StridedTable;
+typedef struct StridedTable StridedTable;
 
 struct D_800C7470_Pair;
 typedef struct D_800C7470_Pair D_800C7470_Pair;

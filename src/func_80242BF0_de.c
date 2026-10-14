@@ -22,7 +22,7 @@ extern s32 func_80216108_de(void *);
 extern s32 func_8023DAA0_de(Ray180 *, Box *, f32 *);
 extern s32 func_8023DDC4_de(Ray180 *, Vector4f *, f32 *);
 extern void func_80243874_de(ContextB0 *);
-extern void func_8026F368_de(Matrix_func_80213CF8_de *, Vec3 *, Vec3 *, Vec3 *);
+extern void func_8026F368_de(MatrixF *, Vec3 *, Vec3 *, Vec3 *);
 extern void func_802852C0_de(char *, u32, u32, void *, void *);
 extern void *func_8028FDB4_de(void *, s32);
 

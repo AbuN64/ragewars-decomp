@@ -179,7 +179,7 @@ s32 func_8028B394_de(void *arg0, s32 arg1) {
 
     raw = func_8028FDB4_de(((Shared_World *)arg0)->modelSections, 2);
     base = raw + 8;
-    if (arg1 < 0 || arg1 >= ((Table_func_8028CE94_de *)raw)->count) {
+    if (arg1 < 0 || arg1 >= ((StridedTable *)raw)->count) {
         return 0;
     }
     return base + (arg1 << 5);

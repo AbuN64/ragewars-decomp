@@ -12,7 +12,7 @@ extern s32 func_80265550_de(void *,s32,s32,s32 *,s32 *);
 extern void func_80285B64_de(s32,void *,Triple,f32,f32,s32);
 
 void func_8028CE94_de(Object_func_8028CE94_de *arg0,s32 arg1,s32 arg2,Triple pos,D_800C7470_Pair scale) {
- s32 sp20,sp24; void *data; s32 count; Table_func_8028CE94_de *temp_v1; s32 var_s0; Table_func_8028CE94_de *temp_v0;
+ s32 sp20,sp24; void *data; s32 count; StridedTable *temp_v1; s32 var_s0; StridedTable *temp_v0;
  f32 arg6,arg7;
  temp_v0=arg0->unkA8;
  arg6=scale.first;arg7=scale.second;

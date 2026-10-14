@@ -168,12 +168,12 @@ struct ObjRecAt4V4 {
 
 extern void func_8026107C_de(int *arg0, int arg1);
 
-typedef struct AnimTrack_func_8026193C_de {
+typedef struct AnimChannel {
     f32 time;
     s16 current,next,frames;
     u8 active,blending;
     char padc[4]; void *resource;
-} AnimTrack_func_8026193C_de;
+} AnimChannel;
 typedef struct RootActor { char pad0[0x100]; u32 flags; } RootActor;
 typedef struct RootClip { u16 count,loopStart; char pad4[4]; f32 rate; } RootClip;
 typedef struct AngleKeys { char header[8]; s16 keys[1]; } AngleKeys;

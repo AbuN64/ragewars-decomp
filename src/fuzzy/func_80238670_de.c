@@ -2,7 +2,7 @@
 #include "gfx.h"
 #include "gbi.h"
 #include "span_1000/code_8023A284.h"
-typedef struct View_func_8023B3F8_de FlareActor;
+typedef struct ClipView FlareActor;
 #include "shared/lens_flare.h"
 extern const f32 D_800C34D8_de, D_800C34DC_de, D_800C34E4_de, D_800C34E8_de;
 extern const f32 D_800C85D0_de;

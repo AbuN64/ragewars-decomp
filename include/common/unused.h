@@ -2939,8 +2939,8 @@ typedef struct EffectTarget EffectTarget;
 struct Effect_func_8026851C_de;
 typedef struct Effect_func_8026851C_de Effect_func_8026851C_de;
 
-struct Effect_func_802800C0_de;
-typedef struct Effect_func_802800C0_de Effect_func_802800C0_de;
+struct ParticleEffect;
+typedef struct ParticleEffect ParticleEffect;
 
 struct Ent;
 typedef struct Ent Ent;
@@ -3395,8 +3395,8 @@ typedef struct ObjectState95 ObjectState95;
 struct Object_func_80401980_de;
 typedef struct Object_func_80401980_de Object_func_80401980_de;
 
-struct Object_func_804220A8_de;
-typedef struct Object_func_804220A8_de Object_func_804220A8_de;
+struct ParticleView;
+typedef struct ParticleView ParticleView;
 
 struct Object_func_80443128_de;
 typedef struct Object_func_80443128_de Object_func_80443128_de;
@@ -4949,10 +4949,10 @@ struct EffectActor {
     char pad14[0x48];
     u32 flags;
     union {
-        Matrix_func_80213CF8_de matrices[2];
+        MatrixF matrices[2];
         struct {
             char pad[0x54];
-            Matrix_func_80213CF8_de *matrixArray;
+            MatrixF *matrixArray;
             char padB8[0x18];
             void *owner;
         } link;
@@ -5059,8 +5059,8 @@ struct EffectRender {
 };
 struct EffectActor;
 struct EffectEntry;
-struct Effect_func_802800C0_de;
-struct Effect_func_802800C0_de {
+struct ParticleEffect;
+struct ParticleEffect {
     char pad0[4];
     u16 kind;
     char pad6[2];
@@ -5107,19 +5107,19 @@ struct Effect_func_802800C0_de {
     f32 unk1E0;
     IntrusiveList *list;
     char pad1E8[4];
-    struct Effect_func_802800C0_de *next;
+    struct ParticleEffect *next;
     s32 unk1F0;
-    struct Effect_func_802800C0_de *groupNext;
+    struct ParticleEffect *groupNext;
 };
 struct EffectSystem;
-struct Effect_func_802800C0_de;
+struct ParticleEffect;
 struct EffectSystem {
     char pad0[0xFC00];
     IntrusiveList free;
     IntrusiveList groups;
     IntrusiveList lists[3];
     s32 resource;
-    struct Effect_func_802800C0_de *last;
+    struct ParticleEffect *last;
 };
 struct EffectActor;
 struct EffectTarget;
@@ -5428,8 +5428,8 @@ struct Globals {
     char pad0[0x1288];
     Match match;
 };
-struct Object_func_804220A8_de;
-struct Object_func_804220A8_de {
+struct ParticleView;
+struct ParticleView {
     char pad0[0x6C];
     float width;
     float height;
@@ -5442,9 +5442,9 @@ struct Object_func_804220A8_de {
     float d;
 };
 struct Globals_func_804220A8_de;
-struct Object_func_804220A8_de;
+struct ParticleView;
 struct Globals_func_804220A8_de {
-    struct Object_func_804220A8_de *object;
+    struct ParticleView *object;
     char pad4[0x88];
     float width;
     float height;

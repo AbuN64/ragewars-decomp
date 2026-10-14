@@ -21,8 +21,8 @@ void func_802830CC_de(struct EffectSystem *arg0, s32 arg1) {
     s32 temp_a1;
     s32 temp_v1_2;
     u16 temp_v1;
-    Effect_func_802800C0_de *temp_s1;
-    Effect_func_802800C0_de *var_s0;
+    ParticleEffect *temp_s1;
+    ParticleEffect *var_s0;
 
     var_s0 = arg0->lists[1].head;
     if (var_s0 != 0) {
@@ -61,7 +61,7 @@ void func_802830CC_de(struct EffectSystem *arg0, s32 arg1) {
 }
 
 s32 func_80283228_de(struct EffectSystem *arg0, s32 arg1) {
-    Effect_func_802800C0_de *record;
+    ParticleEffect *record;
     s32 count;
     u16 v;
 

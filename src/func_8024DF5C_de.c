@@ -10,7 +10,7 @@
 
 
 s32 func_8024DF5C_de(void *arg0) {
-    Model_func_80223E34_de *temp_a1;
+    ModelBlend *temp_a1;
     s32 var_v1;
 
     temp_a1 = ((Actor_func_8024A7A0_de *)arg0)->definition;

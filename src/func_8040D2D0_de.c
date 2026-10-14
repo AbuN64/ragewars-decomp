@@ -16,7 +16,7 @@ s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, Tex
 s32 func_8040F488_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *);
 void func_802A1870_de(unsigned int, unsigned int, unsigned int, unsigned int);
 s32 func_802A0238_de(u8 *);
-Element_func_8041200C_de *func_8041200C_de(s32);
+GlyphBuffer *func_8041200C_de(s32);
 void func_8029FE38_de(char *, s32, s32, s32 (*)(char *, char *));
 static inline void textBegin(u8 font, u8 style) {
     func_802A1898_de(&D_8014D580.field_0, &D_8014D580.field_8,

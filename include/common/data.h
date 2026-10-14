@@ -217,7 +217,7 @@ extern int D_8014D420_de;
 extern int D_8014D424;
 extern int D_8014D428;
 extern int D_8014D45C;
-extern struct Element_func_8041200C_de * D_8014D560;
+extern struct GlyphBuffer * D_8014D560;
 extern int D_8014D564;
 extern int D_8014D924;
 extern int D_8014D940;

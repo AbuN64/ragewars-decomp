@@ -150,16 +150,16 @@ void func_80284FF4_de(void *arg0, s32 arg1, void *arg2) {
     count = 0;
     if (record != 0) {
         do {
-            v = ((Effect_func_802800C0_de *)record)->kind;
+            v = ((ParticleEffect *)record)->kind;
             if (((v == 0x41E) || (v == 0x3EF)) &&
-                (((Effect_func_802800C0_de *)record)->owner == arg1) &&
-                (((Effect_func_802800C0_de *)record)->flags & 0x100)) {
-                ((Vec3 *)arg2)->x += ((Effect_func_802800C0_de *)record)->pos.x;
-                ((Vec3 *)arg2)->y += ((Effect_func_802800C0_de *)record)->pos.y;
+                (((ParticleEffect *)record)->owner == arg1) &&
+                (((ParticleEffect *)record)->flags & 0x100)) {
+                ((Vec3 *)arg2)->x += ((ParticleEffect *)record)->pos.x;
+                ((Vec3 *)arg2)->y += ((ParticleEffect *)record)->pos.y;
                 count += 1;
-                ((Vec3 *)arg2)->z += ((Effect_func_802800C0_de *)record)->pos.z;
+                ((Vec3 *)arg2)->z += ((ParticleEffect *)record)->pos.z;
             }
-            record = ((Effect_func_802800C0_de *)record)->next;
+            record = ((ParticleEffect *)record)->next;
         } while (record != 0);
     }
     if (count != 0) {
@@ -188,13 +188,13 @@ void func_802850C8_de(void *arg0, void *arg1, f32 *arg2) {
     node = ((EffectSystem *)arg0)->groups.head;
     if (node != 0) {
         do {
-            if (((Effect_func_802800C0_de *)node)->owner != arg1 && (((Effect_func_802800C0_de *)node)->flags & 0x100)) {
-                temp = func_802726BC_de(&((Effect_func_802800C0_de *)node)->pos.x, &((Actor_func_8024A7A0_de *)arg1)->position0.x);
+            if (((ParticleEffect *)node)->owner != arg1 && (((ParticleEffect *)node)->flags & 0x100)) {
+                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &((Actor_func_8024A7A0_de *)arg1)->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }
             }
-            node = ((Effect_func_802800C0_de *)node)->groupNext;
+            node = ((ParticleEffect *)node)->groupNext;
         } while (node != 0);
     }
 }

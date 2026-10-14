@@ -128,7 +128,7 @@ void func_8026BC60_de(void) {
     s32 i;
     s32 j;
     void *entry;
-    Source_func_8026BC60_de *source;
+    ResourceSource *source;
     u32 key;
     Node_func_8026BC60_de *parent;
     Node_func_8026BC60_de *node;

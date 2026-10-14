@@ -33,7 +33,7 @@ void func_80422020_de(void) {
 
 void func_804220A8_de(int key) {
  Globals_func_804220A8_de *g = &D_80140FE8_de;
- Object_func_804220A8_de *o = g->object;
+ ParticleView *o = g->object;
  float width = 45.0f;
  float height = D_800DD610[1];
  State_func_804220A8_de *state = D_800E2830;

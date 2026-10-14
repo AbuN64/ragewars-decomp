@@ -12,7 +12,7 @@ extern void func_8027207C_de(void *out);
 
 
 void func_80296878_de(void *arg0, void *arg1, void *arg2, void *arg3) {
-    Plane_func_802965B0_de *plane = arg0;
+    PlaneEquation *plane = arg0;
     Vec3 *point = arg1;
     u8 sp10[12];
     u8 sp20[12];

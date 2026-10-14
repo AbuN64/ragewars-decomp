@@ -77,7 +77,7 @@ void func_8021A78C_de(void *arg0) {
     ((ObjectLinks16D8 *)(object))->unk_668 = 0;
     ((ObjectLinks16D8 *)(object))->unk_66C = 0;
     if (((ObjectLinks16D8 *)(object))->unk_18.v0 != 0) {
-        ((ObjectLinks16D8 *)(object))->unk_6F4.v0 = ((struct Model_func_80223E34_de *) ((ObjectLinks16D8 *) object)->unk_18.v1)->height;
+        ((ObjectLinks16D8 *)(object))->unk_6F4.v0 = ((struct ModelBlend *) ((ObjectLinks16D8 *) object)->unk_18.v1)->height;
     } else {
         ((ObjectLinks16D8 *)(object))->unk_6F4.v1 = 0;
     }

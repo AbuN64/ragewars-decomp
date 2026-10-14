@@ -12,8 +12,8 @@ typedef struct DescriptorRecAt29 DescriptorRecAt29;
 
 extern float D_800C86E8;
 
-struct View_func_8023B3F8_de;
-typedef struct View_func_8023B3F8_de View_func_8023B3F8_de;
+struct ClipView;
+typedef struct ClipView ClipView;
 
 extern Message *func_8023A344_de(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target);
 
@@ -101,8 +101,8 @@ extern float D_800CD744_de;
 
 extern s32 func_8023B94C_de(void **arg0, void **arg1);
 
-struct View_func_8023B3F8_de;
-struct View_func_8023B3F8_de {
+struct ClipView;
+struct ClipView {
     char gap0[0x120];
     s32 hidden;
     char gap124[8];

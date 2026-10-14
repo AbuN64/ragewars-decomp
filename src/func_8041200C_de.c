@@ -6,8 +6,8 @@
    indices, 0 and 1, returning 0x80696F50 and 0x806973EC, which differ by exactly 1180. */
 
 
-extern Element_func_8041200C_de *D_80153C28;
+extern GlyphBuffer *D_80153C28;
 
-Element_func_8041200C_de *func_8041200C_de(s32 index) {
+GlyphBuffer *func_8041200C_de(s32 index) {
     return &D_80153C28[index];
 }

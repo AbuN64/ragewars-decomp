@@ -34,7 +34,7 @@ void func_8022DE58_de(Player *arg0, Actor_func_8024A7A0_de *arg1) {
     f32 temp_f22;
     f32 var_f23;
 
-    var_f23 = (((((Model_func_80223E34_de *)(arg0->definition))->height -
+    var_f23 = (((((ModelBlend *)(arg0->definition))->height -
                     arg0->cameraOffset) -
                    arg0->crouchDepth) -
                   arg0->eyeOffset) -

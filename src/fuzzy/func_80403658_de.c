@@ -10,7 +10,7 @@ extern void func_80271F68_de(Vec3 *,Vec3 *,Vec3 *);
 extern f32 func_802725FC_de(Vec3 *),func_80271AA8_de(Vec3 *);
 Vec3 func_80403658_de(void) {
     Vec3 first,second,delta,result,temp,fallback;
-    Table_func_8028CE94_de *table;
+    StridedTable *table;
     if (D_800E2830->unk38 == 0) {
         result.x = 0;
         result.y = 0;

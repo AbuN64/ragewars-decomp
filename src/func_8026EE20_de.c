@@ -145,7 +145,7 @@ extern void func_80271F68_de(Vec3 *out, Vec3 *a, Vec3 *b);
 extern void func_80272018_de(Vec3 *out, Vec3 *a, Vec3 *b);
 extern f32 func_802B72B0_de(f32);
 
-void func_8026F368_de(Matrix_func_80213CF8_de *mtx, Vec3 *eye, Vec3 *target, Vec3 *up) {
+void func_8026F368_de(MatrixF *mtx, Vec3 *eye, Vec3 *target, Vec3 *up) {
     Vec3 upward;
     Vec3 forward;
     Vec3 right;

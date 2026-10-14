@@ -6,7 +6,7 @@
 void *func_8028FDB4_de(int *, int);
 typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
 typedef struct Shared_func_80261EB8_S2 SharedRecAt20;
-typedef Table_func_8028CE94_de ObjRecV1;
+typedef StridedTable ObjRecV1;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x30, 0x34, 0x38, 0x3c], gap at: 0x28. */
@@ -39,7 +39,7 @@ void func_80261E98_de(SharedRecAt10V1 *arg0, SharedRecAt20 *arg1) {
     s32 var_v0_2;
     s32 var_v1;
     ObjRecV1 *temp_s1;
-    Table_func_8028CE94_de *section;
+    StridedTable *section;
 
     temp_a0 = arg0->unk10;
     if (temp_a0 == 0) {

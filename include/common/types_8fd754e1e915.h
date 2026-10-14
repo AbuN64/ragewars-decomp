@@ -1751,8 +1751,8 @@ struct ObjRecAt5D8 {
 struct func_80237E70_G1;
 typedef struct func_80237E70_G1 func_80237E70_G1;
 
-struct Model_func_80223E34_de;
-struct Model_func_80223E34_de {
+struct ModelBlend;
+struct ModelBlend {
     s32 kind; /* 0x00 */
     char pad4[0x28];
     f32 blend; /* 0x2C: model-specific player interpolation target */
@@ -1831,8 +1831,8 @@ struct func_80237E70_S1 {
     IntrusiveList unkF24;
 };
 
-struct Model_func_80223E34_de;
-typedef struct Model_func_80223E34_de Model_func_80223E34_de;
+struct ModelBlend;
+typedef struct ModelBlend ModelBlend;
 
 struct Course;
 typedef struct Course Course;

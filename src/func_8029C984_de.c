@@ -272,7 +272,7 @@ static inline Vec3 cross(Vec3 *a, Vec3 *b) {
     return r;
 }
 
-void func_8029D000_de(Plane_func_802965B0_de *m) {
+void func_8029D000_de(PlaneEquation *m) {
     Vec3 x;
     Vec3 y;
     Vec3 z;

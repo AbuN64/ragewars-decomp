@@ -7772,7 +7772,7 @@ struct Controls;
 struct Ctrl;
 struct Held;
 struct Mode;
-struct Model_func_80223E34_de;
+struct ModelBlend;
 struct Mount;
 struct Profile;
 struct Record;
@@ -7826,7 +7826,7 @@ struct SharedPlayer_func_80223E34_de {
             char * track;
         } view18_1;
         struct {
-            struct Model_func_80223E34_de * model;
+            struct ModelBlend * model;
         } view18_2;
         struct {
             struct Body * body;
@@ -10761,7 +10761,7 @@ typedef struct Body_func_80224408_de Body_func_80224408_de;
 struct Body_func_80224C4C_de;
 typedef struct Body_func_80224C4C_de Body_func_80224C4C_de;
 
-struct Model_func_80223E34_de;
+struct ModelBlend;
 struct Object;
 
 

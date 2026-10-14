@@ -98,8 +98,8 @@ struct Hud {
     Bar bars[2];
 };
 
-struct Menu_func_802A65E0_de;
-typedef struct Menu_func_802A65E0_de Menu_func_802A65E0_de;
+struct ToggleMenu;
+typedef struct ToggleMenu ToggleMenu;
 
 extern void func_802A7180_de(void *arg0, void *arg1);
 
@@ -329,8 +329,8 @@ struct MenuItem {
     s32 (*update)(void *input, struct MenuItem *item);
 };
 
-struct Menu_func_802A65E0_de;
-struct Menu_func_802A65E0_de {
+struct ToggleMenu;
+struct ToggleMenu {
     u8 state;
     u8 timer;
     MenuItem items[4];
