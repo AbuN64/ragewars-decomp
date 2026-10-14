@@ -3,8 +3,8 @@
 #include "types.h"
 
 s32 func_80264248_de();
-void func_802647E8_de(void *arg0, s32 arg1) {
-    (((struct func_80264874_S1 *) ((s8 *) arg0))->unkCC) = arg1;
+void func_802647E8_de(ControllerProfile *arg0, s32 arg1) {
+    arg0->mode = arg1;
     if (arg1 == 0) {
         func_80264248_de();
     }

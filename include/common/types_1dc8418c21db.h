@@ -3744,12 +3744,6 @@ struct func_8024B8DC_S2 {
     s32 unkC;
 };
 
-struct func_80264874_S1;
-/* unbake published declaration: published_77dba614acb8b424cadb7a49 */
-struct func_80264874_S1 {
-    char pad0[0xCC];
-    s32 unkCC;
-};
 
 /* unbake published declaration: published_78818960804290f7946a2b5e */
 extern unsigned char D_800D297B;
@@ -4934,9 +4928,6 @@ struct func_8023EBEC_S1 {
     s32 unk3C;
 };
 
-struct func_80264874_S1;
-/* unbake published declaration: published_cff9cea93981c7c6ca00fabb */
-typedef struct func_80264874_S1 func_80264874_S1;
 
 struct func_8022CA04_S3;
 /* unbake published declaration: published_d0c179720d675c8974b3b79f */
