@@ -3,6 +3,8 @@
 #include "span_1000/code_80204E78.h"
 /* FAKEMATCH: retains inherited numeric field accesses because a verified live shared layout for those accesses is not available; the old access widths and evaluation order are preserved. */
 #include "types.h"
+#include "shared/level_actor.h"
+#include "span_1000/code_80206258.h"
 extern s32 D_801462C8;
 
 
@@ -17,7 +19,10 @@ extern s32 D_801462C8;
 
 
 void func_80206080_de(void *arg0, void *arg1) {
-    void *base;
+    Actor_func_8024A7A0_de *actor = arg0;
+    ActorMotionState *motion = arg1;
+    AnimationTriggerResource *resource;
+    AnimationTriggerDefinition *base;
     char *ctx;
     f32 result;
     s32 count;
@@ -25,10 +30,10 @@ void func_80206080_de(void *arg0, void *arg1) {
     f64 var_f1;
     f32 scaled;
 
-    base = ((func_80205314_S1 *)(arg0))->unk18;
-    base = &((func_80206080_S2 *)(base))->unk14;
-    result = func_80274A90_de(((func_80206080_S2 *)(base))->unkC, ((func_80206080_S2 *)(base))->unk10);
-    ((func_80207BB8_S4 *)(arg1))->unk64 = result;
+    resource = (void *)actor->definition;
+    base = &resource->trigger;
+    result = func_80274A90_de(base->delayMinimum, base->delayMaximum);
+    motion->speed = result;
     ctx = (char *) &D_801462C8;
     if (((ObjectState1E_2 *)(ctx))->unk_1D != 0) {
         count = *(s32 *) (ctx - 0x1258);
@@ -40,7 +45,7 @@ void func_80206080_de(void *arg0, void *arg1) {
             if (temp_v1 < 0) {
                 var_f1 += (4294967296.0);
             }
-            ((func_80207BB8_S4 *)(arg1))->unk64 = scaled * (f32) var_f1;
+            motion->speed = scaled * (f32) var_f1;
         }
     }
 }
