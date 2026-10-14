@@ -1,0 +1,4 @@
+unsigned int D_auto_rodata_shared_800D7034_unclaimed_D7C58_unclaimed_D7E0C_unclaimed_D8A18[10] = {
+    0x800D6BE0, 0x800D6BE4, 0x800D6BE8, 0x800D6BEC, 0x800D6BF0, 0x800D6BF4, 0x800D6BF8, 0x800D6BFC,
+    0x800D6C00, 0x800D6C04,
+};

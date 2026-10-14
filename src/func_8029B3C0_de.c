@@ -1,0 +1,456 @@
+#include "common/types_8a8189af7b05.h"
+#include "span_1000/code_8029BBA0.h"
+#include "types.h"
+
+/* Converts an array of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from func_8029B868_de, with the clamped product, branch products, fallback call, and result order changed. */
+
+
+
+
+
+
+
+
+
+void func_8029B3C0_de(f32 *arg0) {
+    f32 sp10;
+    f32 sp14;
+    f32 sp18;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 angle;
+    f32 test;
+    f32 out1;
+    f32 out2;
+
+    func_8029BBB0_de(arg0[0], &sp10, &sp14);
+    func_8029BBB0_de(arg0[1], &sp18, &sp1C);
+    func_8029BBB0_de(arg0[2], &sp20, &sp24);
+    test = (sp14 * sp20 * sp18) - (sp10 * sp24);
+    if ((1.0f) < test) {
+        test = (1.0f);
+    }
+    if (test < (-1.0f)) {
+        test = (-1.0f);
+    }
+    angle = func_8029DE48_de(-test);
+    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
+        f32 product = sp14 * sp24;
+        f32 cross = sp10 * sp20;
+        f32 first0 = (product * sp18) + cross;
+        f32 first1 = sp14 * sp1C;
+        f32 second0 = sp1C * sp20;
+        f32 second1 = (cross * sp18) + product;
+        out1 = func_8029C044_de(first0, first1);
+        out2 = func_8029C044_de(second0, second1);
+    } else {
+        out1 = 0.0f;
+        out2 = func_8029C044_de(-sp18, sp1C * sp24);
+    }
+    arg0[0] = angle;
+    arg0[1] = out1;
+    arg0[2] = out2;
+}
+
+/* Converts a vector of three angles into another angle triple via sine/cosine products, clamping and atan2-style calls, and writes it back. Adapted from func_8029B6E0_de, with the clamped product, the branch products, and the stored order of the second and third results changed. */
+
+
+
+
+
+
+
+
+
+
+
+void func_8029B54C_de(Vec3 *arg0) {
+    f32 sp10;
+    f32 sp14;
+    f32 sp18;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 outX;
+    f32 outZ;
+    f32 clamped;
+    f32 angle;
+    f32 test;
+
+    func_8029BBB0_de(arg0->x, &sp10, &sp14);
+    func_8029BBB0_de(arg0->y, &sp18, &sp1C);
+    func_8029BBB0_de(arg0->z, &sp20, &sp24);
+
+    clamped = sp1C * sp20;
+    if ((1.0f) < clamped) {
+        clamped = (1.0f);
+    }
+    if (clamped < (-1.0f)) {
+        clamped = (-1.0f);
+    }
+
+    angle = func_8029DE48_de(clamped);
+    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
+        f32 saved18 = sp18;
+        f32 product = saved18 * sp20;
+        f32 saved10 = sp10;
+        f32 saved24 = sp24;
+        f32 secondArg = sp1C * saved24;
+        f32 t = sp14 * product;
+
+        outX = func_8029C044_de((saved10 * saved24) - t,
+                             (saved10 * product) + (sp14 * saved24));
+        outZ = func_8029C044_de(saved18, secondArg);
+    } else {
+        { f32 t = sp10 * sp18 * sp24; outX = func_8029C044_de(sp10 * sp1C, (sp14 * sp20) - t); }
+        outZ = 0.0f;
+    }
+
+    arg0->x = outX;
+    arg0->y = outZ;
+    arg0->z = angle;
+}
+
+
+
+
+
+
+void func_8029B6E0_de(Vec3 *arg0) {
+    f32 sp10;
+    f32 sp14;
+    f32 sp18;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 outX;
+    f32 outZ;
+    f32 clamped;
+    f32 angle;
+    f32 test;
+
+    func_8029BBB0_de(arg0->x, &sp10, &sp14);
+    func_8029BBB0_de(arg0->y, &sp18, &sp1C);
+    func_8029BBB0_de(arg0->z, &sp20, &sp24);
+
+    clamped = -sp18 * sp24;
+    if ((1.0f) < clamped) {
+        clamped = (1.0f);
+    }
+    if (clamped < (-1.0f)) {
+        clamped = (-1.0f);
+    }
+
+    angle = func_8029DE48_de(-clamped);
+    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
+        f32 product = sp18 * sp20;
+        f32 saved10 = sp10;
+        f32 saved20 = sp1C;
+        f32 saved21 = sp20;
+        f32 secondArg = saved20 * sp24;
+
+        outX = func_8029C044_de((sp14 * product) + (saved10 * saved20),
+                             (-saved10 * product) + (saved20 * sp14));
+        outZ = func_8029C044_de(saved21, secondArg);
+    } else {
+        outX = func_8029C044_de(-sp24 * sp10, sp24 * sp14);
+        outZ = 0.0f;
+    }
+
+    arg0->x = outX;
+    arg0->y = angle;
+    arg0->z = outZ;
+}
+
+
+
+
+
+
+void func_8029B868_de(f32 *arg0) {
+    f32 sp10;
+    f32 sp14;
+    f32 sp18;
+    f32 sp1C;
+    f32 sp20;
+    f32 sp24;
+    f32 angle;
+    f32 test;
+    f32 out0;
+    f32 out2;
+
+    func_8029BBB0_de(arg0[0], &sp10, &sp14);
+    func_8029BBB0_de(arg0[1], &sp18, &sp1C);
+    func_8029BBB0_de(arg0[2], &sp20, &sp24);
+    test = (sp1C * sp10 * sp20) - (sp18 * sp24);
+    if ((1.0f) < test) {
+        test = (1.0f);
+    }
+    if (test < (-1.0f)) {
+        test = (-1.0f);
+    }
+    angle = func_8029DE48_de(-test);
+    test = ((f32 (*)(f32))func_8029DD18_de)(angle);
+    if (((9.9999997473787516e-05f) < test) || (test < (-9.9999997473787516e-05f))) {
+        f32 product = sp1C * sp24;
+        f32 cross = sp18 * sp20;
+        f32 first0 = cross + (sp10 * product);
+        f32 first1 = sp14 * sp1C;
+        f32 second0 = sp14 * sp20;
+        f32 second1 = product + (cross * sp10);
+        out0 = func_8029C044_de(first0, first1);
+        out2 = func_8029C044_de(second0, second1);
+    } else {
+        out0 = func_8029C044_de(sp10, sp14 * sp24);
+        out2 = 0.0f;
+    }
+    arg0[0] = out0;
+    arg0[1] = angle;
+    arg0[2] = out2;
+}
+
+f32 func_8029B9FC_de(f32 arg0) {
+    f32 temp_f2;
+    f32 var_f0;
+    f32 var_f1;
+    f32 var_f20;
+    s32 var_s0;
+
+    var_f20 = arg0;
+    var_s0 = 1;
+    var_f1 = var_f20;
+    if (((25.132743835449219f) < var_f20) || (var_f20 < (-25.13274383544922f))) {
+        func_8029B278_de((f64)var_f20, (6.2831859588623047));
+    } else {
+        if ((6.2831859588623047f) < var_f20) {
+            do {
+                var_f1 -= (6.2831859588623047f);
+            } while ((6.2831859588623047f) < var_f1);
+        }
+        var_f0 = 0.0f;
+        if (var_f1 < var_f0) {
+            do {
+                var_f1 += (6.283185958862305f);
+            } while (var_f1 < var_f0);
+        }
+    }
+    if (var_f20 < (-1.5707963705062866f)) {
+        do {
+            var_f20 += (6.2831854820251465f);
+        } while (var_f20 < (-1.5707963705062866f));
+    }
+    if ((4.7123889923095703f) < var_f20) {
+        do {
+            var_f20 -= (6.2831854820251465f);
+        } while ((4.7123889923095703f) < var_f20);
+    }
+    if ((1.5707963705062866f) < var_f20) {
+        var_s0 = -1;
+        var_f20 -= (3.1415927410125732f);
+    }
+    temp_f2 = var_f20 * var_f20;
+    var_f0 = (((((((temp_f2 * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * temp_f2) + (0.0083333337679505348f)) * temp_f2) - (0.1666666716337204f)) * temp_f2 * var_f20) + var_f20;
+    if (var_s0 < 0) {
+        var_f0 = -var_f0;
+    }
+    return var_f0;
+}
+
+/* Computes the sine and cosine of an angle by reducing it into one turn, folding it into a quadrant, and evaluating one odd polynomial for each output.
+   Adapted from func_8029B9FC_de with the fmod result kept and copied back into the angle, a shared zero local for the wrap loops, the quadrant fold producing a sine and a cosine argument, and both polynomials computed before the two pointer stores changed. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+void func_8029BBB0_de(f32 angle, f32 *sinOut, f32 *cosOut) {
+    f32 r;
+    f32 zero;
+    f32 s;
+    f32 c;
+    f32 s2;
+    f32 c2;
+    f32 ps;
+    f32 pc;
+
+    r = angle;
+    if (((25.132743835449219f) < angle) || (angle < (-25.13274383544922f))) {
+        r = func_8029B278_de((f64)angle, (6.2831859588623047));
+    } else {
+        if ((6.2831859588623047f) < angle) {
+            do {
+                r -= (6.2831859588623047f);
+            } while ((6.2831859588623047f) < r);
+        }
+        zero = 0.0f;
+        if (r < zero) {
+            do {
+                r += (6.283185958862305f);
+            } while (r < zero);
+        }
+    }
+    angle = r;
+    zero = 0.0f;
+    while (angle < zero) {
+        angle += (6.2831854820251465f);
+    }
+    if ((6.2831854820251465f) <= angle) {
+        do {
+            angle -= (6.2831854820251465f);
+        } while ((6.2831854820251465f) <= angle);
+    }
+    if ((3.1415929794311523f) <= angle) {
+        if ((4.7123894691467285f) <= angle) {
+            angle -= (4.7123894691467285f);
+            s = angle - (1.5707964897155762f);
+            c = angle;
+        } else {
+            angle -= (3.1415929794311523f);
+            s = -angle;
+            c = angle - (1.5707964897155762f);
+        }
+    } else if ((1.5707964897155762f) <= angle) {
+        angle -= (1.5707964897155762f);
+        s = (1.5707964897155762f) - angle;
+        c = -angle;
+    } else {
+        s = angle;
+        c = (1.5707964897155762f) - angle;
+    }
+    s2 = s * s;
+    c2 = c * c;
+    ps = ((((((((s2 * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * s2) + (0.008333333767950535f)) * s2) - (0.1666666716337204f)) * s2) + (1.0f)) * s;
+    pc = ((((((((c2 * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * c2) + (0.008333333767950535f)) * c2) - (0.1666666716337204f)) * c2) + (1.0f)) * c;
+    *sinOut = ps;
+    *cosOut = pc;
+}
+
+/* Returns the hyperbolic tangent of a double: 1 beyond 25.3, 1 - 2/(exp(2|x|) + 1) above atanh(0.5) with exp computed inline by a rational approximation scaled by func_8029ABA0_de (ldexp), and the odd rational series x + x^3 P(x^2)/Q(x^2) for small arguments, with the sign of x restored. */
+
+
+
+static inline f64 exp_inline(f64 x) {
+    f64 t;
+    f64 r;
+    f64 p;
+    s32 k;
+
+    if (-2.710504946537621e-20 < x && x < 2.710504946537621e-20) {
+        return 1.0;
+    }
+    t = x * 1.4426950216293335;
+    k = t;
+    if (k < 0) {
+        k--;
+    }
+    if (0.5 <= t - k) {
+        k++;
+    }
+    r = x - k * 0.693359375 + k * 2.1219444170128557e-4;
+    t = r * r;
+    p = ((t * 1.652032915444579e-5 + 6.943599786609411e-3) * t + 0.25) * r;
+    return func_8029ABA0_de(p / ((t * 4.9586285604164e-4 + 5.55538684129715e-2) * t + 0.5 - p) + 0.5, k + 1);
+}
+
+f64 func_8029BDEC_de(f64 x) {
+    f64 z;
+    f64 s;
+    f64 result;
+
+    z = x;
+    if (x < 0.0) {
+        z = -x;
+    }
+    if (z > 25.299999237060547) {
+        result = 1.0;
+    } else if (z > 0.5493061542510986) {
+        result = exp_inline(z + z);
+        result = 0.5 - 1.0 / (result + 1.0);
+        result = result + result;
+    } else if (z < 2.3000000515249751e-10) {
+        result = z;
+    } else {
+        s = z * z;
+        result = z + z * (((s * -0.9643748998641968 - 99.2259292602539) * s - 1613.411865234375) * s)
+                / (((s + 112.74474334716795) * s + 2233.77197265625) * s + 4840.23583984375);
+    }
+    if (x < 0.0) {
+        result = -result;
+    }
+    return result;
+}
+
+/* Returns the angle of the vector (x, y) in radians, atan2(y, x): both components within 1e-6 of zero are snapped to zero, the axes return exact multiples of pi/2, and otherwise the arctangent of |y/x| comes from the (t - 1)/(t + 1) series around pi/4, negated for a negative ratio and offset by the quadrant's term from D_800D2B60. */
+
+extern f32 D_800D2B60[4];
+
+f32 func_8029C044_de(f32 y, f32 x) {
+    s32 quadrant;
+    f32 ratio;
+    f32 magnitude;
+    f32 t;
+    f32 t2;
+    f32 angle;
+
+    if (-1e-6f < x && x < 1e-6f) {
+        x = 0.0f;
+    }
+    if (-1e-6f < y && y < 1e-6f) {
+        y = 0.0f;
+    }
+    if (x == 0.0f && y == 0.0f) {
+        return 0.0f;
+    }
+    if (x == 0.0f) {
+        if (y >= 0.0f) {
+            return 1.5707964f;
+        }
+        return -1.5707964f;
+    }
+    if (y == 0.0f) {
+        if (x >= 0.0f) {
+            return 0.0f;
+        }
+        return 3.1415927f;
+    }
+    quadrant = 0;
+    if (x < 0.0f) {
+        quadrant = 1;
+    }
+    if (y < 0.0f) {
+        quadrant |= 2;
+    }
+    ratio = y / x;
+    magnitude = ratio;
+    if (quadrant != 0 && quadrant != 3) {
+        magnitude = -ratio;
+    }
+    if (magnitude < 1e-6f) {
+        return D_800D2B60[quadrant];
+    }
+    magnitude = ratio;
+    if (ratio < 0.0f) {
+        magnitude = -ratio;
+    }
+    t = (magnitude - 1.0f) / (magnitude + 1.0f);
+    t2 = t * t;
+    angle = (((((((-0.004054058f * t2 + 0.021861229f) * t2 - 0.055909887f) * t2 + 0.09642004f) * t2
+                 - 0.13908534f) * t2 + 0.19946536f) * t2 - 0.33329856f) * t2 + 0.99999934f) * t
+            + 0.7853982f;
+    if (ratio < 0.0f) {
+        angle = -angle;
+    }
+    return angle + D_800D2B60[quadrant];
+}

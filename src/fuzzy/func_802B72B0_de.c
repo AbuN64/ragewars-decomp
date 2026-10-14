@@ -1,0 +1,4 @@
+#include "types.h"
+f32 func_802B72B0_de(f32 value) {
+    return __builtin_sqrtf(value);
+}

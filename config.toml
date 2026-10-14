@@ -1,0 +1,1369 @@
+schema = 3
+
+[project]
+id = "1317b0d7-6ca5-413c-ae10-0649ad5d6994"
+name = "RageWars"
+title = "Turok: Rage Wars"
+versions = ["de", "eu", "eu-x", "us", "us-rev1"]
+names_from = "us-rev1"
+toolchain = "gcc-2.8.1-sn64"
+library_dirs = ["src/libgcc"]
+
+[[project.version_differences]]
+function = "func_80423F48_de"
+sides = [["eu-x"], ["de", "eu", "us", "us-rev1"]]
+
+[[project.version_differences]]
+function = "func_8026851C_de"
+sides = [["de"], ["eu", "eu-x", "us", "us-rev1"]]
+
+[[project.version_differences]]
+function = "func_8042CE74_de"
+sides = [["de"], ["eu-x"], ["eu", "us", "us-rev1"]]
+
+[build]
+cppflags = ["-P", "-undef", "-nostdinc", "-D_LANGUAGE_C", "-DF3DEX_GBI_2", "-D__GNUC__=2"]
+asflags = ["-march=vr4300", "-mabi=32", "-EB", "--no-pad-sections"]
+gnu_asflags = ["-mips3"]
+cflags = []
+text_mask = 536870911
+
+[version.de]
+baserom = "roms/baserom.de.z64"
+baserom_sha1 = "a6daacbd0e7f77c73208cf494aefc24703060b17"
+split = "versions/de/RageWars.yaml"
+symbols = "versions/de/symbol_addrs.txt"
+macros = ["VERSION_DE"]
+cartridge_id = "NUS-NRWD-0"
+region = "Germany"
+description = "Censored German release."
+
+[version.eu]
+baserom = "roms/baserom.eu.z64"
+baserom_sha1 = "46b474fac79a4b21535bb6c78ce3039a2c202359"
+split = "versions/eu/RageWars.yaml"
+symbols = "versions/eu/symbol_addrs.txt"
+macros = ["VERSION_EU"]
+cartridge_id = "NUS-NRWP-0"
+region = "Europe"
+description = "PAL release."
+
+[version.eu-x]
+baserom = "roms/baserom.eu-x.z64"
+baserom_sha1 = "0b54615930a55675955eef8d8a22f1dfc34d2b44"
+split = "versions/eu-x/RageWars.yaml"
+symbols = "versions/eu-x/symbol_addrs.txt"
+macros = ["VERSION_EU_X"]
+cartridge_id = "NUS-NRWX-0"
+region = "Europe"
+description = "PAL multi-language release."
+
+[version.us]
+baserom = "roms/baserom.us.z64"
+baserom_sha1 = "9f8cb190831945f6f707aa8c2b20e04fa4276795"
+split = "versions/us/RageWars.yaml"
+symbols = "versions/us/symbol_addrs.txt"
+macros = ["VERSION_US"]
+cartridge_id = "NUS-NRWE-0"
+region = "North America"
+description = "First NTSC release (black cartridge)."
+
+[version.us-rev1]
+baserom = "roms/baserom.us-rev1.z64"
+baserom_sha1 = "037fb397cee2669048ed6b762a64698de4a4d88a"
+split = "versions/us-rev1/RageWars.yaml"
+symbols = "versions/us-rev1/symbol_addrs.txt"
+macros = ["VERSION_US_REV1"]
+cartridge_id = "NUS-NRWE-1"
+region = "North America"
+description = "Revised NTSC release (grey cartridge)."
+
+[[resident.de]]
+address = 2148276672
+end = 1052672
+start = 796096
+table_entry_bias = 2147483648
+
+[[resident.de]]
+address = 2148856088
+end = 1800400
+start = 1785696
+table_entry_bias = 2147483648
+
+[[resident.de]]
+address = 2149589608
+end = 12000
+start = 11880
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149591060
+end = 13368
+start = 13332
+table_entry_bias = 2147483648
+
+[[resident.de]]
+address = 2149592216
+end = 14496
+start = 14488
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149613560
+end = 35840
+start = 35832
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149637124
+end = 59408
+start = 59396
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149637588
+end = 62068
+start = 59860
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149640708
+end = 62992
+start = 62980
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149642068
+end = 64848
+start = 64340
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2149646712
+end = 69468
+start = 68984
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2151701940
+end = 1490368
+start = 1490356
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2151729828
+end = 1518256
+start = 1518244
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2151983176
+end = 1773040
+start = 1771592
+table_entry_bias = 0
+
+[[resident.de]]
+address = 2151985528
+end = 1775104
+start = 1773944
+table_entry_bias = 0
+
+[[resident.eu]]
+address = 2148277344
+end = 1052672
+start = 796768
+table_entry_bias = 0
+
+[[resident.eu]]
+address = 2148926440
+end = 1870832
+start = 1856048
+table_entry_bias = 2147483648
+
+[[resident.eu]]
+address = 2149591060
+end = 13368
+start = 13332
+table_entry_bias = 2147483648
+
+[[resident.eu]]
+address = 2151987992
+end = 1843392
+start = 1841944
+table_entry_bias = 0
+
+[[resident.eu]]
+address = 2151990344
+end = 1845456
+start = 1844296
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2148277408
+end = 983040
+start = 796832
+table_entry_bias = 2147483648
+
+[[resident.eu-x]]
+address = 2148902168
+end = 1322272
+start = 1307488
+table_entry_bias = 2147483648
+
+[[resident.eu-x]]
+address = 2149591060
+end = 13368
+start = 13332
+table_entry_bias = 2147483648
+
+[[resident.eu-x]]
+address = 2150372868
+end = 795152
+start = 795140
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2150374148
+end = 796432
+start = 796420
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2150374232
+end = 796656
+start = 796504
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2151988296
+end = 1294832
+start = 1293384
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2151990648
+end = 1296896
+start = 1295736
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2152001628
+end = 1306720
+start = 1306716
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2152001720
+end = 1306816
+start = 1306808
+table_entry_bias = 0
+
+[[resident.eu-x]]
+address = 2152002388
+end = 1307488
+start = 1307476
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2148276464
+end = 1052672
+start = 795888
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2148848264
+end = 1792592
+start = 1777872
+table_entry_bias = 2147483648
+
+[[resident.us]]
+address = 2149591060
+end = 13368
+start = 13332
+table_entry_bias = 2147483648
+
+[[resident.us]]
+address = 2149592216
+end = 14496
+start = 14488
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149599336
+end = 22120
+start = 21608
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149601428
+end = 24076
+start = 23700
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149634916
+end = 57516
+start = 57188
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149637588
+end = 62068
+start = 59860
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149643960
+end = 66800
+start = 66232
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149646712
+end = 69468
+start = 68984
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149648092
+end = 70368
+start = 70364
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149650452
+end = 72736
+start = 72724
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149656168
+end = 78448
+start = 78440
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149657944
+end = 81728
+start = 80216
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149660904
+end = 83184
+start = 83176
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149676588
+end = 98864
+start = 98860
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149683892
+end = 106176
+start = 106164
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149773060
+end = 195344
+start = 195332
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149819580
+end = 241856
+start = 241852
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149830584
+end = 252864
+start = 252856
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149838556
+end = 260832
+start = 260828
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149840676
+end = 262960
+start = 262948
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149849388
+end = 271664
+start = 271660
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149862724
+end = 285008
+start = 284996
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149866760
+end = 289040
+start = 289032
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149902692
+end = 324976
+start = 324964
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149906724
+end = 329008
+start = 328996
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149929096
+end = 351376
+start = 351368
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149934732
+end = 357188
+start = 357004
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149945848
+end = 368128
+start = 368120
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149960740
+end = 383024
+start = 383012
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149962728
+end = 385008
+start = 385000
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149967004
+end = 389280
+start = 389276
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149967180
+end = 389456
+start = 389452
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149979656
+end = 401936
+start = 401928
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149984052
+end = 406336
+start = 406324
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149988052
+end = 410336
+start = 410324
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149994236
+end = 416512
+start = 416508
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149995236
+end = 417520
+start = 417508
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2149997992
+end = 420272
+start = 420264
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150009940
+end = 432224
+start = 432212
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150032732
+end = 455008
+start = 455004
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150065564
+end = 487840
+start = 487836
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150078948
+end = 501232
+start = 501220
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150126088
+end = 548368
+start = 548360
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150172916
+end = 595200
+start = 595188
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150172936
+end = 595216
+start = 595208
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150173080
+end = 596348
+start = 595352
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150190024
+end = 613364
+start = 612296
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150195028
+end = 617312
+start = 617300
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150198280
+end = 620560
+start = 620552
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150238728
+end = 661320
+start = 661000
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150240676
+end = 662960
+start = 662948
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150245628
+end = 667904
+start = 667900
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150282028
+end = 704304
+start = 704300
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150289820
+end = 712096
+start = 712092
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150290072
+end = 712352
+start = 712344
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150290404
+end = 712688
+start = 712676
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150291560
+end = 713840
+start = 713832
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150293336
+end = 715616
+start = 715608
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150296028
+end = 718304
+start = 718300
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150301148
+end = 723424
+start = 723420
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150301268
+end = 723552
+start = 723540
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150302264
+end = 724544
+start = 724536
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150302392
+end = 724672
+start = 724664
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150302452
+end = 725124
+start = 724724
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150310772
+end = 733056
+start = 733044
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150311236
+end = 733520
+start = 733508
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150311284
+end = 733568
+start = 733556
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150313128
+end = 735408
+start = 735400
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150313688
+end = 735968
+start = 735960
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150314264
+end = 736544
+start = 736536
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150314920
+end = 737200
+start = 737192
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150315112
+end = 737392
+start = 737384
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150319704
+end = 743340
+start = 741976
+table_entry_bias = 2147483648
+
+[[resident.us]]
+address = 2150322952
+end = 745232
+start = 745224
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150322988
+end = 745584
+start = 745260
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150326956
+end = 749488
+start = 749228
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150327428
+end = 749712
+start = 749700
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150327700
+end = 750640
+start = 749972
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150329000
+end = 751280
+start = 751272
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150329628
+end = 752332
+start = 751900
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150330844
+end = 753120
+start = 753116
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150330884
+end = 753168
+start = 753156
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150331176
+end = 753456
+start = 753448
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150331324
+end = 753600
+start = 753596
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150331348
+end = 753632
+start = 753620
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150335464
+end = 757740
+start = 757736
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150337388
+end = 759664
+start = 759660
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150337560
+end = 759840
+start = 759832
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150337784
+end = 761568
+start = 760056
+table_entry_bias = 2147483648
+
+[[resident.us]]
+address = 2150339764
+end = 762048
+start = 762036
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150340724
+end = 763008
+start = 762996
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150340968
+end = 763248
+start = 763240
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150341348
+end = 763632
+start = 763620
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150341784
+end = 764064
+start = 764056
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150342700
+end = 764976
+start = 764972
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150342724
+end = 765008
+start = 764996
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150342764
+end = 765040
+start = 765036
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150342844
+end = 765120
+start = 765116
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150342868
+end = 765152
+start = 765140
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150342972
+end = 765248
+start = 765244
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150344152
+end = 766432
+start = 766424
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150344596
+end = 766880
+start = 766868
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150344756
+end = 767040
+start = 767028
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150345596
+end = 767872
+start = 767868
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150345608
+end = 767888
+start = 767880
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150345652
+end = 767936
+start = 767924
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150345880
+end = 768160
+start = 768152
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150346892
+end = 769168
+start = 769164
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150347204
+end = 769488
+start = 769476
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150347508
+end = 769792
+start = 769780
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150348260
+end = 770544
+start = 770532
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150348692
+end = 770976
+start = 770964
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150348756
+end = 771040
+start = 771028
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150349720
+end = 773528
+start = 771992
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150352032
+end = 776128
+start = 774304
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354252
+end = 776528
+start = 776524
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354492
+end = 776768
+start = 776764
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354508
+end = 776784
+start = 776780
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354524
+end = 776800
+start = 776796
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354588
+end = 776864
+start = 776860
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354744
+end = 777024
+start = 777016
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150354860
+end = 777136
+start = 777132
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150355064
+end = 777344
+start = 777336
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150355364
+end = 777640
+start = 777636
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150355796
+end = 778080
+start = 778068
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150359016
+end = 781296
+start = 781288
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150359032
+end = 783828
+start = 781304
+table_entry_bias = 2147483648
+
+[[resident.us]]
+address = 2150362332
+end = 784608
+start = 784604
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150370504
+end = 792784
+start = 792776
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150371924
+end = 794208
+start = 794196
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150373204
+end = 795488
+start = 795476
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2150373288
+end = 795712
+start = 795560
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151693960
+end = 1474192
+start = 1474184
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151726124
+end = 1506352
+start = 1506348
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151729956
+end = 1510192
+start = 1510180
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151755100
+end = 1535508
+start = 1535324
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151760936
+end = 1541168
+start = 1541160
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151761020
+end = 1541248
+start = 1541244
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151767196
+end = 1547536
+start = 1547420
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151781544
+end = 1561776
+start = 1561768
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151782232
+end = 1562908
+start = 1562456
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151784668
+end = 1565440
+start = 1564892
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151790172
+end = 1570400
+start = 1570396
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151794300
+end = 1574528
+start = 1574524
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151805352
+end = 1585584
+start = 1585576
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151815960
+end = 1596396
+start = 1596184
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151817816
+end = 1598120
+start = 1598040
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151818508
+end = 1602140
+start = 1598732
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151824408
+end = 1605928
+start = 1604632
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151826872
+end = 1607104
+start = 1607096
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151834852
+end = 1618408
+start = 1615076
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151846264
+end = 1627812
+start = 1626488
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151848964
+end = 1630672
+start = 1629188
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151865288
+end = 1645736
+start = 1645512
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151870764
+end = 1653128
+start = 1650988
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151898348
+end = 1678576
+start = 1678572
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151904484
+end = 1688700
+start = 1684708
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151915684
+end = 1697040
+start = 1695908
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151935772
+end = 1716044
+start = 1715996
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151935948
+end = 1716880
+start = 1716172
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151956524
+end = 1736752
+start = 1736748
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151960472
+end = 1745136
+start = 1740696
+table_entry_bias = 2147483648
+
+[[resident.us]]
+address = 2151968488
+end = 1748720
+start = 1748712
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151971208
+end = 1751820
+start = 1751432
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151976588
+end = 1756816
+start = 1756812
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151983544
+end = 1765216
+start = 1763768
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151985108
+end = 1765344
+start = 1765332
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151985736
+end = 1765968
+start = 1765960
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151985896
+end = 1767280
+start = 1766120
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151996964
+end = 1777200
+start = 1777188
+table_entry_bias = 0
+
+[[resident.us]]
+address = 2151997636
+end = 1777872
+start = 1777860
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2148297392
+end = 1052672
+start = 816816
+table_entry_bias = 2147483648
+
+[[resident.us-rev1]]
+address = 2148875624
+end = 1837152
+start = 1821616
+table_entry_bias = 2147483648
+
+[[resident.us-rev1]]
+address = 2149591060
+end = 13368
+start = 13332
+table_entry_bias = 2147483648
+
+[[resident.us-rev1]]
+address = 2150392852
+end = 815136
+start = 815124
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2150394132
+end = 816416
+start = 816404
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2150394216
+end = 816640
+start = 816488
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2151986328
+end = 1808960
+start = 1807512
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2151988680
+end = 1811024
+start = 1809864
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2151999660
+end = 1820848
+start = 1820844
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2151999752
+end = 1820944
+start = 1820936
+table_entry_bias = 0
+
+[[resident.us-rev1]]
+address = 2152000420
+end = 1821616
+start = 1821604
+table_entry_bias = 0

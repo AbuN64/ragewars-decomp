@@ -1,0 +1,3 @@
+unsigned int D_auto_rodata_unresolved_800EE1E0[8] = {
+    0x0042FEC4, 0x0042FEDC, 0x0042FF88, 0x0042FED0, 0x0042FEB8, 0x0042FEA0, 0x0042FEAC, 0x0042FFB0,
+};

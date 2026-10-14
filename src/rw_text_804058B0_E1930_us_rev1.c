@@ -1,0 +1,4 @@
+/* ROM-grounded data: src/rw_text_804058B0_E1930_us_rev1.c */
+const unsigned char D_blob_ebf9835a8d7fba2a8a62[9] = {
+    0x5A, 0x2D, 0x42, 0x75, 0x66, 0x66, 0x65, 0x72, 0x00,
+};

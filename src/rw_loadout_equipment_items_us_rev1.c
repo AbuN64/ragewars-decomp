@@ -1,0 +1,4 @@
+unsigned int D_auto_src_rw_loadout_equipment_items_us_rev1[12] = {
+    0x00000098, 0x00001397, 0x0000000A, 0x800D711C, 0x000000AD, 0x00001396, 0x0000000C, 0x800D7124,
+    0x000000AF, 0x000013AD, 0x0000000B, 0x800D7120,
+};

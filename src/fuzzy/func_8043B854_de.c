@@ -1,0 +1,85 @@
+#include "types.h"
+
+/* Rebuilds the loadout of every active player whose entry on the screen D_800E59E0 is in mode 2:
+   clears the 22 owned bytes at 0x4C and level bytes at 0x62 of the player's 150-byte record in
+   D_80146398, then for columns 0 and 1 (16-byte table D_800E5BC4, level column + 1), 2 and 3
+   (D_800E5B44, level column + 3) and 4 (D_800E5B14, level 4) marks the item of the row the entry's
+   value for that column selects as owned at that level, and finally marks item 0 owned at level
+   0. */
+
+struct Entry {
+    char pad0[0x4B0];
+    s32 values[6];
+    char pad4C8[0x4CC - 0x4C8];
+    s32 mode;
+};
+
+struct Screen {
+    void *window;
+    s32 pad4;
+    struct Entry entries[4];
+};
+
+struct Source {
+    s32 pad0;
+    s32 pad4;
+    s32 item;
+    s32 padC;
+};
+
+extern struct Screen *D_800E59E0;
+extern u8 D_80146398[];
+extern struct Source D_800E5BC4[];
+extern struct Source D_800E5B14[];
+extern struct Source D_800E5B44[];
+extern void *jtbl_800E2040[];
+
+void func_8043B854_de(void) {
+    u8 *record;
+    struct Source *source;
+    struct Source *row;
+    s32 level;
+    s32 item;
+    s32 i;
+    s32 column;
+
+    for (i = 0; i < 4; i++) {
+        record = &D_80146398[i * 150];
+        if (record[0x78] != 1) {
+            continue;
+        }
+        if (D_800E59E0->entries[i].mode != 2) {
+            continue;
+        }
+        for (column = 0; column < 22; column++) {
+            (record + column)[0x4C] = 0;
+            (record + column)[0x62] = 0;
+        }
+        for (column = 0; column < 6; column++) {
+            switch (column) {
+            case 0:
+            case 1:
+                source = D_800E5BC4;
+                level = column + 1;
+                break;
+            case 4:
+                source = D_800E5B14;
+                level = 4;
+                break;
+            case 2:
+            case 3:
+                source = D_800E5B44;
+                level = column + 3;
+                break;
+            default:
+                continue;
+            }
+            item = source[D_800E59E0->entries[i].values[column]].item;
+            row = source + D_800E59E0->entries[i].values[column];
+            (record + item)[0x4C] = 1;
+            (record + row->item)[0x62] = level;
+        }
+        record[0x4C] = 1;
+        record[0x62] = 0;
+    }
+}

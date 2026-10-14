@@ -1,0 +1,4 @@
+const unsigned int D_auto_rodata_unresolved_800DE76C[9] = {
+    0x00000000, 0x00444114, 0x00444148, 0x0044417C, 0x004441B0, 0x004441DC, 0x004441DC, 0x004441DC,
+    0x004441DC,
+};

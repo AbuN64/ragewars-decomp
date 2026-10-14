@@ -1,0 +1,4 @@
+unsigned int D_auto_src_ragewars_menu_strings_D6308_us_rev1[10] = {
+    0x20202073, 0x61766500, 0x2020206C, 0x6F616400, 0x20686561, 0x6C746800, 0x20202061, 0x6D6D6F00,
+    0x676F2062, 0x61636B00,
+};

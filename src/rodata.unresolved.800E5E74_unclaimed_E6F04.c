@@ -1,0 +1,3 @@
+unsigned int D_auto_rodata_unresolved_800E5E74_unclaimed_E6F04[8] = {
+    0x800E62F4, 0x6C657665, 0x6C202020, 0x20202020, 0x20203A20, 0x20202020, 0x20000000, 0x800E6308,
+};

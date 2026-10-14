@@ -1,0 +1,3 @@
+unsigned int D_auto_rodata_writable_800FE548[7] = {
+    0x000428C0, 0x00A32821, 0x000520C0, 0x00832021, 0x00041880, 0x00832021, 0x000418C0,
+};

@@ -1,0 +1,3 @@
+unsigned int D_auto_rodata_unresolved_800E2104_unclaimed_E2D3C[8] = {
+    0x46534D4C, 0x50565255, 0x41594F00, 0x4C48454B, 0x50564952, 0x5C000000, 0x41404A44, 0x4B4A0000,
+};

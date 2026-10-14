@@ -1,0 +1,16 @@
+.github/workflows/ci.yml
+.gitignore
+.gitlab-ci.yml
+Makefile
+README.md
+generated.txt
+versions/de/report.json
+versions/de/symbols.ld
+versions/eu-x/report.json
+versions/eu-x/symbols.ld
+versions/eu/report.json
+versions/eu/symbols.ld
+versions/us-rev1/report.json
+versions/us-rev1/symbols.ld
+versions/us/report.json
+versions/us/symbols.ld

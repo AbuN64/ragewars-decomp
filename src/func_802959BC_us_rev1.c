@@ -1,0 +1,58 @@
+/* Handles one held press of the menu "previous page" key: D_auto_800D2AF4 counts the held presses, and on
+ * the fourth one the selection index D_8014AEBC is stepped down by five modulo the menu item count,
+ * the change flag word at +8 from the index is set, and a negative remainder is folded back to a
+ * positive display index. Ported verbatim from the legacy branch source (byte-exact in that build). */
+#include "types.h"
+#include "common/unused.h"
+#include "span_1000/code_80294C64.h"
+
+
+void func_802959BC_us_rev1(void) {
+    s32 temp_a0;
+    s32 temp_v0;
+    s32 var_v1;
+    s32 *p;
+    s32 old;
+
+    old = D_auto_800D2AF4++;
+    if (old >= 3) {
+        p = &D_8014AEBC;
+        temp_a0 = p[0] - 5;
+        temp_v0 = temp_a0 + p[-1];
+        var_v1 = temp_v0 % p[-1];
+        *(volatile s32 *)&p[0] = temp_a0;
+        p[0] = var_v1;
+        if ((f32) var_v1 < 0.0f) {
+            var_v1 = -var_v1;
+        }
+        p[0] = var_v1;
+        p[2] = 1;
+        D_auto_800D2AF4 = 0;
+    }
+}
+
+/* Handles one held press of the menu "next page" key: D_auto_800D2AF8 counts the held presses, and on the
+ * fourth one the selection index D_8014AEBC is stepped up by five modulo the menu item count; the
+ * pre-modulo index store is retained as the original emitted it, and the change flag word at +8 from
+ * the index is set. Ported verbatim from the legacy branch source (byte-exact in that build). */
+
+
+void func_80295A60_us_rev1(void) {
+    s32 temp_a0;
+    s32 temp_v0;
+    s32 var_v1;
+    s32 *p;
+    s32 old;
+
+    old = D_auto_800D2AF8++;
+    if (old >= 3) {
+        p = &D_8014AEBC;
+        temp_a0 = p[0] + 5;
+        temp_v0 = p[-1];
+        var_v1 = temp_a0 % temp_v0;
+        D_auto_800D2AF8 = 0;
+        p[2] = 1;
+        *(volatile s32 *)&p[0] = temp_a0;
+        p[0] = var_v1;
+    }
+}

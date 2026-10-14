@@ -1,0 +1,3 @@
+unsigned int D_auto_rodata_unresolved_800D80A0_unclaimed_D8F40[8] = {
+    0x00000010, 0x00000010, 0x00000020, 0x00000000, 0xC1200000, 0x00000000, 0x00000000, 0x00000000,
+};

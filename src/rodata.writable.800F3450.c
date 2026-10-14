@@ -1,0 +1,10 @@
+#ifdef VERSION_DE
+unsigned int D_auto_rodata_writable_800F3450[8] = {
+    0x00435988, 0x00000E0A, 0x00000013, 0x0042F768, 0x00000E08, 0x00000013, 0x0042F8DC, 0x00000E06,
+};
+#endif
+#ifdef VERSION_US
+unsigned int D_auto_rodata_writable_800F3450[8] = {
+    0x00AC7D00, 0x00348003, 0x2A0A5C80, 0x032C0402, 0x0000ACF6, 0x00003490, 0x03020A5C, 0x90030292,
+};
+#endif

@@ -1,0 +1,4 @@
+/* ROM-grounded data: src/rw_player_state_special_timing_38_us_rev1.c */
+unsigned int D_blob_430323561f303d187440[2] = {
+    0x00000000, 0x000023F0,
+};
