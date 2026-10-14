@@ -219,7 +219,7 @@ schema = 1
 "func_80206258_de" = { evidence = "landed", signature = "void func_80206258_de(void *arg0)" }
 "func_80206288_de" = { evidence = "landed", signature = "void func_80206288_de(void *arg0)" }
 "func_802062B0_de" = { evidence = "landed", signature = "void func_802062B0_de(void *arg0)" }
-"func_802062E0_de" = { evidence = "landed", signature = "void func_802062E0_de(void *actor, void *owner, Params params, s32 kind)" }
+"func_802062E0_de" = { evidence = "landed", signature = "void func_802062E0_de(Actor_func_8024A7A0_de *actor, ActorMotionState *owner, Params params, s32 kind)" }
 "func_802063EC_de" = { evidence = "landed", signature = "void func_802063EC_de(void *arg0, void *arg1, Triple arg2, Triple arg3, s32 arg4, s32 arg5, s32 arg6)" }
 "func_802064A0_de" = { evidence = "landed", signature = "void func_802064A0_de(void *arg0, void *arg1, Triple arg2, s32 unused5, s32 arg6)" }
 "func_8020655C_de" = { evidence = "landed", signature = "s32 func_8020655C_de(s32 arg0)" }
