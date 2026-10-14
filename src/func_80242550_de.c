@@ -17,9 +17,9 @@
 
 
 extern void func_80271F68_de(Triple *, Triple *, Triple *);
-extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, Input_func_80242550_de *);
-extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Input_func_80242550_de *);
-extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Input_func_80242550_de *);
+extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, Source_func_802164A8_de *);
+extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Source_func_802164A8_de *);
+extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, SurfaceHit *, Source_func_802164A8_de *);
 
 void func_80242550_de(Actor_func_80242550_de *actor, Source_func_802164A8_de *input) {
     Triple saved_previous;
