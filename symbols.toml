@@ -48144,6 +48144,10 @@ us = 0x8020EA04
 kind = "data"
 eu = 0x8020EA24
 
+[symbol.D_auto_func_80210248_eu_padding_10E48]
+kind = "data"
+eu = 0x80210248
+
 [symbol.D_auto_func_802106DC_de_padding_112DC]
 kind = "data"
 de = 0x802106DC
@@ -48271,6 +48275,14 @@ de = 0x8023B9A4
 [symbol.D_auto_func_8023B9B4_eu_padding_3C5B4]
 kind = "data"
 eu = 0x8023B9B4
+
+[symbol.D_auto_func_8023B9E4_eu_x_padding_3C594]
+kind = "data"
+us-rev1 = 0x8023B994
+
+[symbol.D_auto_func_8023B9E4_eu_x_padding_3C5E4]
+kind = "data"
+eu-x = 0x8023B9E4
 
 [symbol.D_auto_func_8023CE9C_de_padding_3DBA8]
 kind = "data"
@@ -48407,6 +48419,26 @@ eu = 0x8024F954
 [symbol.D_auto_func_80250E68_de_padding_51A68]
 kind = "data"
 de = 0x80250E68
+
+[symbol.D_auto_func_80255220_us_padding_55E78]
+kind = "data"
+us = 0x80255278
+
+[symbol.D_auto_func_80255240_eu_padding_55E98]
+kind = "data"
+eu = 0x80255298
+
+[symbol.D_auto_func_80255270_eu_x_padding_55E78]
+kind = "data"
+us-rev1 = 0x80255278
+
+[symbol.D_auto_func_80255270_eu_x_padding_55EC8]
+kind = "data"
+eu-x = 0x802552C8
+
+[symbol.D_auto_func_80255280_de_padding_55ED8]
+kind = "data"
+de = 0x802552D8
 
 [symbol.D_auto_func_802555C8_us_padding_561C8]
 kind = "data"
@@ -49592,6 +49624,18 @@ eu = 0x802B8ED8
 kind = "data"
 eu-x = 0x802B8F18
 
+[symbol.D_auto_func_802B8F48_de_padding_B9B48]
+kind = "data"
+de = 0x802B8F48
+
+[symbol.D_auto_func_802B8F48_de_padding_B9E28]
+kind = "data"
+eu-x = 0x802B9228
+
+[symbol.D_auto_func_802B8F48_de_padding_BEC38]
+kind = "data"
+us-rev1 = 0x802BE038
+
 [symbol.D_auto_func_802B8F88_eu_padding_B9B88]
 kind = "data"
 eu = 0x802B8F88
@@ -50356,6 +50400,26 @@ eu = 0x80405DC4
 kind = "data"
 eu-x = 0x80405DC4
 
+[symbol.D_auto_func_80408870_de_padding_16C870]
+kind = "data"
+us = 0x80408870
+
+[symbol.D_auto_func_80408870_de_padding_16E870]
+kind = "data"
+de = 0x80408870
+
+[symbol.D_auto_func_80408870_de_padding_176870]
+kind = "data"
+us-rev1 = 0x80408870
+
+[symbol.D_auto_func_80408870_de_padding_17EA58]
+kind = "data"
+eu = 0x80408A58
+
+[symbol.D_auto_func_80408870_de_padding_F8A58]
+kind = "data"
+eu-x = 0x80408A58
+
 [symbol.D_auto_func_8040BBAC_de_padding_171BAC]
 kind = "data"
 de = 0x8040BBAC
@@ -50611,6 +50675,10 @@ us = 0x80446DCC
 [symbol.D_auto_func_804471D4_eu_padding_1BD1D4]
 kind = "data"
 eu = 0x804471D4
+
+[symbol.D_auto_func_80447818_de_padding_1BEA78]
+kind = "data"
+eu = 0x80448A78
 
 [symbol.D_auto_func_80447AEC_de_padding_1ADAEC]
 kind = "data"
@@ -50926,11 +50994,11 @@ us-rev1 = 0x802012D8
 
 [symbol.func_802013E0_de]
 kind = "function"
-de = 0x802013E0
-eu = 0x802013E0
-eu-x = 0x802013E0
-us = 0x802013E0
-us-rev1 = 0x802013E0
+de = 0x802013D8
+eu = 0x802013D8
+eu-x = 0x802013D8
+us = 0x802013D8
+us-rev1 = 0x802013D8
 
 [symbol.func_802014A4_de]
 kind = "function"
@@ -50982,11 +51050,11 @@ us-rev1 = 0x80201A80
 
 [symbol.func_80201AD0_de]
 kind = "function"
-de = 0x80201AD0
-eu = 0x80201AD0
-eu-x = 0x80201AD0
-us = 0x80201AD0
-us-rev1 = 0x80201AD0
+de = 0x80201ACC
+eu = 0x80201ACC
+eu-x = 0x80201ACC
+us = 0x80201ACC
+us-rev1 = 0x80201ACC
 
 [symbol.func_80201B50_de]
 kind = "function"
@@ -52517,11 +52585,11 @@ us-rev1 = 0x8020BC50
 
 [symbol.func_8020BE80_de]
 kind = "function"
-de = 0x8020BE80
-eu = 0x8020BEA0
-eu-x = 0x8020BEA0
-us = 0x8020BE80
-us-rev1 = 0x8020BE80
+de = 0x8020BE7C
+eu = 0x8020BE9C
+eu-x = 0x8020BE9C
+us = 0x8020BE7C
+us-rev1 = 0x8020BE7C
 
 [symbol.func_8020C078_de]
 kind = "function"
@@ -52893,7 +52961,7 @@ us = 0x8020EF54
 
 [symbol.func_8020EF64_us]
 kind = "function"
-us = 0x8020EF64
+us = 0x8020EF60
 
 [symbol.func_8020EF80_eu]
 kind = "function"
@@ -53085,7 +53153,7 @@ us-rev1 = 0x80210180
 
 [symbol.func_80210248_eu]
 kind = "function"
-eu = 0x80210248
+eu = 0x80210250
 eu-x = 0x80210250
 us-rev1 = 0x80210230
 
@@ -53120,11 +53188,11 @@ us-rev1 = 0x80210964
 
 [symbol.func_80210C20_de]
 kind = "function"
-de = 0x80210C20
-eu = 0x80210C40
-eu-x = 0x80210C40
-us = 0x80210C20
-us-rev1 = 0x80210C20
+de = 0x80210C14
+eu = 0x80210C34
+eu-x = 0x80210C34
+us = 0x80210C14
+us-rev1 = 0x80210C14
 
 [symbol.func_80210E88_de]
 kind = "function"
@@ -53246,13 +53314,8 @@ us-rev1 = 0x80212670
 kind = "function"
 de = 0x80212670
 eu = 0x80212690
-eu-x = 0x80212694
-us = 0x80212670
-us-rev1 = 0x80212674
-
-[symbol.func_80212684_eu_x]
-kind = "function"
 eu-x = 0x80212690
+us = 0x80212670
 us-rev1 = 0x80212670
 
 [symbol.func_802127F4_de]
@@ -56573,8 +56636,8 @@ us-rev1 = 0x80230390
 
 [symbol.func_80230610_eu]
 kind = "function"
-eu = 0x80230610
-eu-x = 0x80230640
+eu = 0x80230604
+eu-x = 0x80230634
 
 [symbol.func_80230630_de]
 kind = "function"
@@ -56736,8 +56799,8 @@ us-rev1 = 0x80232770
 
 [symbol.func_80232790_eu]
 kind = "function"
-eu = 0x80232790
-eu-x = 0x802327C0
+eu = 0x80232788
+eu-x = 0x802327B8
 
 [symbol.func_802327A0_de]
 kind = "function"
@@ -57090,11 +57153,11 @@ us-rev1 = 0x802362D8
 
 [symbol.func_8023660C_de]
 kind = "function"
-de = 0x80236610
-eu = 0x80236620
-eu-x = 0x80236650
-us = 0x802365F0
-us-rev1 = 0x80236600
+de = 0x8023660C
+eu = 0x8023661C
+eu-x = 0x8023664C
+us = 0x802365EC
+us-rev1 = 0x802365FC
 
 [symbol.func_80236874_de]
 kind = "function"
@@ -57648,18 +57711,9 @@ eu-x = 0x8023B9F0
 us = 0x8023B990
 us-rev1 = 0x8023B9A0
 
-[symbol.func_8023B9E4_eu_x]
-kind = "function"
-eu-x = 0x8023B9E4
-us-rev1 = 0x8023B994
-
 [symbol.func_8023B9F0_eu_x]
 kind = "function"
 eu-x = 0x8023B9F0
-
-[symbol.func_8023B9F4_eu_x]
-kind = "function"
-eu-x = 0x8023B9F4
 
 [symbol.func_8023BC74_de]
 kind = "function"
@@ -58819,11 +58873,11 @@ us-rev1 = 0x80246174
 
 [symbol.func_802461E8_de]
 kind = "function"
-de = 0x802461F0
-eu = 0x80246200
-eu-x = 0x80246230
-us = 0x802461D0
-us-rev1 = 0x802461E0
+de = 0x802461E8
+eu = 0x802461F8
+eu-x = 0x80246228
+us = 0x802461C8
+us-rev1 = 0x802461D8
 
 [symbol.func_802462E8_de]
 kind = "function"
@@ -60267,11 +60321,11 @@ us-rev1 = 0x80252714
 
 [symbol.func_80252A44_de]
 kind = "function"
-de = 0x80252A50
-eu = 0x80252A10
-eu-x = 0x80252A40
-us = 0x802529E0
-us-rev1 = 0x802529F0
+de = 0x80252A44
+eu = 0x80252A04
+eu-x = 0x80252A34
+us = 0x802529D4
+us-rev1 = 0x802529E4
 
 [symbol.func_8025305C_de]
 kind = "function"
@@ -61843,11 +61897,11 @@ us-rev1 = 0x8025C67C
 
 [symbol.func_8025C6D4_de]
 kind = "function"
-de = 0x8025C6E0
-eu = 0x8025C6A0
-eu-x = 0x8025C6D0
-us = 0x8025C680
-us-rev1 = 0x8025C700
+de = 0x8025C6D4
+eu = 0x8025C694
+eu-x = 0x8025C6C4
+us = 0x8025C674
+us-rev1 = 0x8025C6F4
 
 [symbol.func_8025C824_de]
 kind = "function"
@@ -62578,11 +62632,11 @@ us-rev1 = 0x80260158
 
 [symbol.func_8026033C_de]
 kind = "function"
-de = 0x80260340
-eu = 0x80260300
-eu-x = 0x80260330
-us = 0x802602E0
-us-rev1 = 0x80260360
+de = 0x8026033C
+eu = 0x802602FC
+eu-x = 0x8026032C
+us = 0x802602DC
+us-rev1 = 0x8026035C
 
 [symbol.func_8026049C_de]
 kind = "function"
@@ -64292,19 +64346,19 @@ us-rev1 = 0x8026CBA4
 
 [symbol.func_8026CE20_de]
 kind = "function"
-de = 0x8026CE20
-eu = 0x8026CDE0
-eu-x = 0x8026CE10
-us = 0x8026CDA0
-us-rev1 = 0x8026CE20
+de = 0x8026CE18
+eu = 0x8026CDD8
+eu-x = 0x8026CE08
+us = 0x8026CD98
+us-rev1 = 0x8026CE18
 
 [symbol.func_8026D280_de]
 kind = "function"
-de = 0x8026D280
-eu = 0x8026D240
-eu-x = 0x8026D270
-us = 0x8026D200
-us-rev1 = 0x8026D280
+de = 0x8026D27C
+eu = 0x8026D23C
+eu-x = 0x8026D26C
+us = 0x8026D1FC
+us-rev1 = 0x8026D27C
 
 [symbol.func_8026D4F0_de]
 kind = "function"
@@ -64793,11 +64847,11 @@ us-rev1 = 0x80272284
 
 [symbol.func_8027229C_de]
 kind = "function"
-de = 0x802722A0
-eu = 0x802722D0
-eu-x = 0x80272300
-us = 0x80272290
-us-rev1 = 0x80272310
+de = 0x8027229C
+eu = 0x802722CC
+eu-x = 0x802722FC
+us = 0x8027228C
+us-rev1 = 0x8027230C
 
 [symbol.func_802723FC_de]
 kind = "function"
@@ -66896,11 +66950,11 @@ us-rev1 = 0x8028784C
 
 [symbol.func_8028798C_de]
 kind = "function"
-de = 0x80287990
-eu = 0x80287930
-eu-x = 0x80287960
-us = 0x802878E0
-us-rev1 = 0x80287960
+de = 0x8028798C
+eu = 0x8028792C
+eu-x = 0x8028795C
+us = 0x802878DC
+us-rev1 = 0x8028795C
 
 [symbol.func_80287F18_de]
 kind = "function"
@@ -68831,7 +68885,7 @@ us-rev1 = 0x80294980
 
 [symbol.func_802949A0_us]
 kind = "function"
-us = 0x802949A0
+us = 0x8029499C
 
 [symbol.func_802949FC_de]
 kind = "function"
@@ -69771,11 +69825,11 @@ us-rev1 = 0x8029D044
 
 [symbol.func_8029C288_de]
 kind = "function"
-de = 0x8029C290
-eu = 0x8029C3B0
-eu-x = 0x8029C3E0
-us = 0x8029C1D0
-us-rev1 = 0x8029D290
+de = 0x8029C288
+eu = 0x8029C3A8
+eu-x = 0x8029C3D8
+us = 0x8029C1C8
+us-rev1 = 0x8029D288
 
 [symbol.func_8029C4A0_de]
 kind = "function"
@@ -72052,11 +72106,11 @@ us-rev1 = 0x802ABC18
 
 [symbol.func_802AAD14_de]
 kind = "function"
-de = 0x802AAD20
-eu = 0x802AAE30
-eu-x = 0x802AAE70
-us = 0x802AAC50
-us-rev1 = 0x802ABD10
+de = 0x802AAD14
+eu = 0x802AAE24
+eu-x = 0x802AAE64
+us = 0x802AAC44
+us-rev1 = 0x802ABD04
 
 [symbol.func_802AADBC_de]
 kind = "function"
@@ -72076,11 +72130,11 @@ us-rev1 = 0x802ABDBC
 
 [symbol.func_802AAEE4_de]
 kind = "function"
-de = 0x802AAEF0
-eu = 0x802AB000
-eu-x = 0x802AB040
-us = 0x802AAE20
-us-rev1 = 0x802ABEE0
+de = 0x802AAEE4
+eu = 0x802AAFF4
+eu-x = 0x802AB034
+us = 0x802AAE14
+us-rev1 = 0x802ABED4
 
 [symbol.func_802AB0B0_de]
 kind = "function"
@@ -74408,10 +74462,10 @@ eu-x = 0x802B90B0
 
 [symbol.func_802B8F48_de]
 kind = "function"
-de = 0x802B8F48
+de = 0x802B8F50
 eu = 0x802B91F0
-eu-x = 0x802B9228
-us-rev1 = 0x802BE038
+eu-x = 0x802B9230
+us-rev1 = 0x802BE040
 
 [symbol.func_802B9010_de]
 kind = "function"
@@ -76095,11 +76149,11 @@ us-rev1 = 0x80404018
 
 [symbol.func_804041F0_de]
 kind = "function"
-de = 0x804041F0
-eu = 0x804041F0
-eu-x = 0x804041F0
-us = 0x804041F0
-us-rev1 = 0x804041F0
+de = 0x804041E8
+eu = 0x804041E8
+eu-x = 0x804041E8
+us = 0x804041E8
+us-rev1 = 0x804041E8
 
 [symbol.func_804042F0_de]
 kind = "function"
@@ -76401,11 +76455,11 @@ us-rev1 = 0x804069F4
 
 [symbol.func_80406A90_eu]
 kind = "function"
-eu = 0x80406A90
+eu = 0x80406A88
 
 [symbol.func_80406A90_eu_x]
 kind = "function"
-eu-x = 0x80406A90
+eu-x = 0x80406A88
 
 [symbol.func_80406F7C_de]
 kind = "function"
@@ -76481,11 +76535,11 @@ us-rev1 = 0x804085E0
 
 [symbol.func_80408870_de]
 kind = "function"
-de = 0x80408870
-eu = 0x80408A58
-eu-x = 0x80408A58
-us = 0x80408870
-us-rev1 = 0x80408870
+de = 0x80408878
+eu = 0x80408A60
+eu-x = 0x80408A60
+us = 0x80408878
+us-rev1 = 0x80408878
 
 [symbol.func_80408AC4_us]
 kind = "function"
@@ -80080,11 +80134,11 @@ us-rev1 = 0x8041F01C
 
 [symbol.func_8041F0B0_de]
 kind = "function"
-de = 0x8041F0B0
+de = 0x8041F0A8
 
 [symbol.func_8041F120_us]
 kind = "function"
-us = 0x8041F120
+us = 0x8041F118
 
 [symbol.func_8041F140_de]
 kind = "function"
@@ -80129,7 +80183,7 @@ us-rev1 = 0x8041F118
 
 [symbol.func_8041F560_eu]
 kind = "function"
-eu = 0x8041F560
+eu = 0x8041F55C
 
 [symbol.func_8041F5EC_eu]
 kind = "data"
@@ -80657,7 +80711,7 @@ us-rev1 = 0x80423370
 
 [symbol.func_804230E0_de]
 kind = "function"
-de = 0x804230E0
+de = 0x804230D4
 
 [symbol.func_80423280_de]
 kind = "function"
@@ -80827,7 +80881,7 @@ eu = 0x80423CE8
 
 [symbol.func_80423D30_eu_x]
 kind = "function"
-eu-x = 0x80423D30
+eu-x = 0x80423D24
 
 [symbol.func_80423DB0_eu_x]
 kind = "function"
@@ -81438,7 +81492,7 @@ eu-x = 0x80429C78
 
 [symbol.func_80429CA0_eu]
 kind = "function"
-eu = 0x80429CA0
+eu = 0x80429C9C
 
 [symbol.func_80429DEC_eu_x]
 kind = "function"
@@ -82555,7 +82609,7 @@ us-rev1 = 0x80435E40
 
 [symbol.func_80435C60_us]
 kind = "function"
-us = 0x80435C60
+us = 0x80435C54
 
 [symbol.func_80435C68_de]
 kind = "function"
@@ -82742,7 +82796,7 @@ us-rev1 = 0x804366C4
 
 [symbol.func_80436640_us]
 kind = "function"
-us = 0x80436640
+us = 0x80436634
 
 [symbol.func_804366B8_de]
 kind = "function"
@@ -82966,8 +83020,8 @@ de = 0x80437688
 
 [symbol.func_80437690_eu]
 kind = "function"
-eu = 0x80437690
-eu-x = 0x804377C0
+eu = 0x8043768C
+eu-x = 0x804377BC
 
 [symbol.func_80437718_de]
 kind = "function"
@@ -83039,7 +83093,7 @@ us-rev1 = 0x80437868
 
 [symbol.func_804385F0_eu_x]
 kind = "function"
-eu-x = 0x804385F0
+eu-x = 0x804385E8
 
 [symbol.func_80438614_de]
 kind = "function"
@@ -83056,7 +83110,7 @@ us-rev1 = 0x804379C8
 
 [symbol.func_804387F0_eu]
 kind = "function"
-eu = 0x804387F0
+eu = 0x804387E8
 
 [symbol.func_80438828_de]
 kind = "function"
@@ -86192,7 +86246,7 @@ us = 0x80447828
 [symbol.func_80447818_de]
 kind = "function"
 de = 0x80447820
-eu = 0x80448A78
+eu = 0x80448A80
 
 [symbol.func_8044799C_de]
 kind = "function"
