@@ -71,8 +71,8 @@ s32 func_8028B21C_de(void *, s32);
 s32 func_8028C198_de(void *, s32);
 void func_8028C6D4_de(void *, Vec3 *, void *);
 void func_80290950_de(void *, void *);
-extern char D_8011B200;
-extern char D_8011B388;
+extern struct ActorDefinitionHeader D_8011B200;
+extern struct ActorDefinitionHeader D_8011B388;
 
 extern u8 D_801462E5;
 extern s32 D_800CD764_de[];
@@ -234,7 +234,7 @@ void func_80290238_de(World_func_80290238_de *world) {
     } while (next != 0);
 }
 
-extern char D_8011B388;
+extern struct ActorDefinitionHeader D_8011B388;
 
 
 

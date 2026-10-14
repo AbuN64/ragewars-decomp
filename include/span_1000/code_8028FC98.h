@@ -179,6 +179,7 @@ struct func_8028FFB0_S4 {
 
 struct Actor_func_80290238_de;
 /* unbake published declaration: published_c05b03938b18d55a4d44fc14 */
+struct ActorDefinitionHeader;
 struct Actor_func_80290238_de {
     s8 active;
     char pad1[3];
@@ -186,7 +187,7 @@ struct Actor_func_80290238_de {
     char pad6[2];
     Vec3 position;
     s32 owner;
-    char *definition;
+    struct ActorDefinitionHeader *definition;
     Vec3 rotation;
     char pad28[0x28];
     s32 resource;
