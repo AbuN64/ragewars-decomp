@@ -10,7 +10,7 @@
 extern s32 D_80141008;
 extern void func_80274098_de(void*,void*,void*);
 extern void func_80272C60_de(void *, f32, f32, f32);
-extern u32 func_802337D0_de(State_func_802337D0_de*);
+extern u32 func_802337D0_de(StateRecAt10*);
 extern void func_8026F620_de(f32*,f32*,f32*);
 /* The camera position is passed as a three-word Vec3 value. */
 

@@ -22,7 +22,7 @@ void func_8042840C_de(void) {
     count = 0;
     base = D_800E4690->player * 0x96;
     for (weapon = 0; weapon < 0x16; weapon++) {
-        if (((Entry_func_8042840C_de *) (weapon + base + D_801462C8))->owned == 1) {
+        if (((EntryRecAt11C *) (weapon + base + D_801462C8))->owned == 1) {
             if (weapon != 0) {
                 func_8042854C_de(count, weapon, 0);
                 count += 1;

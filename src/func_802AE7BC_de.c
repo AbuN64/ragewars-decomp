@@ -21,7 +21,7 @@ f32 func_802AE7BC_de(void **arg0, s32 arg1, s32 arg2) {
     if (arg2 < 0) {
         angle += D_800C7310_de;
     }
-    temp_v0 = ((Obj_func_80297DBC_de *)((*arg0)))->unk40;
+    temp_v0 = ((ObjRecAt40V1 *)((*arg0)))->unk40;
     scaled = arg1f * (f32)angle;
     val = (f64)temp_v0;
     if (temp_v0 < 0) {

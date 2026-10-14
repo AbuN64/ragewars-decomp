@@ -25,7 +25,7 @@ s32 func_80421DD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         offset = 0;
         do {
             if (((struct Shape_typemap_3 *) (((char *) (&D_800E4454)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct func_8021C9B4_S3 *) ((char *) arg0))->unkC;
+                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
                 table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E4458)) + offset))->field_0;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
                     return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);

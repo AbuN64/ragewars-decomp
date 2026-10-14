@@ -11,7 +11,7 @@
 extern s32 D_8015375C;
 extern s32 D_800E28C8;
 
-s32 func_80409EF4_de(struct Record_func_80409EF4_de *record, s32 *out) {
+s32 func_80409EF4_de(struct RecordRecAt20V2 *record, s32 *out) {
     s32 value;
     s32 result;
 

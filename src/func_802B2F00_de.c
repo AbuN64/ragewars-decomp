@@ -14,7 +14,7 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 void func_802B2F10_de(ALSndPlayer *arg0, s16 arg1) {
-    Params_func_802B2F10_de p;
+    ParamsRecAt8V1 p;
     s32 acc;
 
     acc = (s32)arg0->sndState;

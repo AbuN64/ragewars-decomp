@@ -14,7 +14,7 @@ extern u8 D_80152789;
 extern s32 D_80154030;
 extern Entry_func_8043CC10_de D_800E5CA0;
 
-s32 func_8043CC10_de(Obj_func_8043CC10_de *arg0) {
+s32 func_8043CC10_de(ObjRecAt14V2 *arg0) {
     s32 index;
     s32 count;
 

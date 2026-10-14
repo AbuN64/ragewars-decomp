@@ -12,7 +12,7 @@ extern char D_800D7604[];
 extern char D_800D7608[];
 extern char D_800D760C[];
 
-s32 func_8044472C_de(struct Field_func_8040A4A0_de *field) {
+s32 func_8044472C_de(struct FieldRecAt14 *field) {
     switch (D_801462E3) {
     case 0:
         field->text = D_800D7604;

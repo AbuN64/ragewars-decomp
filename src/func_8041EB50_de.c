@@ -5,7 +5,7 @@
 /* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
 
 
-extern struct Entry_func_8041EB50_de D_80153F80[];
+extern struct EntryRecAt0V1 D_80153F80[];
 
 s32 func_8041EB50_de(void) {
     s32 count = 0;

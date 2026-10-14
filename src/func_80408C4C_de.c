@@ -76,7 +76,7 @@ extern void func_80442574_de(char *, char *, SharedPlayer_func_80408C4C_de *, fu
 s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
     s32 ch;
     SharedPlayer_func_80408C4C_de *player;
-    Profile_func_80408C4C_de *profile;
+    ProfileRecAt84 *profile;
     s32 i;
 
     if (D_8015375C != 0) {

@@ -11,7 +11,7 @@
 
 
 
-extern PakDirectory_func_8040458C_de *D_800E2854;
+extern PakDirectoryRecAt4 *D_800E2854;
 extern u8 D_800DE80C[];
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);

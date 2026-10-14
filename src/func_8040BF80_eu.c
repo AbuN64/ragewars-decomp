@@ -9,7 +9,7 @@
 
 
 
-s32 func_8040BF80_eu(struct Field_func_8040A4A0_de *field) {
+s32 func_8040BF80_eu(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

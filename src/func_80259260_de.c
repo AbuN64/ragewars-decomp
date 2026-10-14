@@ -30,14 +30,14 @@ extern s8 func_8025E554_de(void *);
 
 
 
-s32 func_80259260_de(Manager_func_80259260_de *manager, void *desc, Vec3Words *position, s32 volume, s32 extra) {
-    Node_func_80259260_de *node;
-    Node_func_80259260_de *first;
-    Node_func_80259260_de *at;
+s32 func_80259260_de(ManagerRecAtD8V1 *manager, void *desc, Vec3Words *position, s32 volume, s32 extra) {
+    NodeRecAtC8 *node;
+    NodeRecAtC8 *first;
+    NodeRecAtC8 *at;
     s32 *scene;
     s32 priority;
 
-    if (manager->free.next != (Node_func_80259260_de *)&manager->free) {
+    if (manager->free.next != (NodeRecAtC8 *)&manager->free) {
         func_80258740_de(manager->scene);
         first = manager->free.next;
         first->prev->next = first->next;
@@ -62,12 +62,12 @@ s32 func_80259260_de(Manager_func_80259260_de *manager, void *desc, Vec3Words *p
         node->position = *position;
         node->pad58 = 0;
         node->padB4 = 0;
-        func_8025BB7C_de(node->channel, ((struct Context_func_80257360_de *)manager->scene)->field2B8C);
+        func_8025BB7C_de(node->channel, ((struct ContextRecAt2BC0 *)manager->scene)->field2B8C);
         node->mix = manager->scene[0x2BAC / 4];
         func_8025BB84_de(node->channel, desc, extra);
         at = manager->active.next;
         priority = node->priority;
-        while (at != (Node_func_80259260_de *)&manager->active) {
+        while (at != (NodeRecAtC8 *)&manager->active) {
             if (at->priority < priority) {
                 break;
             }

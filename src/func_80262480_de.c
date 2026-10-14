@@ -4,7 +4,7 @@
 
 /** Initialize the compact record fields written by the VRAM 0x802624A0 leaf. */
 void func_80262480_de(void *record) {
-    func_802624A0_S1 *record_record = record;
+    ObjRecAt10V1 *record_record = record;
     record_record->unk4 = -1;
     record_record->unk6 = 0;
     record_record->unk0 = 0;

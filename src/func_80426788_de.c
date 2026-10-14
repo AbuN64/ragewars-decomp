@@ -22,7 +22,7 @@
 
 extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status D_80146398[];
-extern struct Row_func_80426788_de D_800E3A58[];
+extern struct RowRecAt54 D_800E3A58[];
 
 extern void func_802A2394_de();
 

@@ -15,11 +15,11 @@ void func_8043F040_de(void) {
 
 
 /* Reports whether an item is available to the player: indices 0-2 and 3-5 of type 0x10FE are checked against the player's two counts, type 0x1194 against its flag table. */
-s32 func_8043F048_de(struct Item_func_8043F048_de *item, struct Holder_func_8043F048_de *holder) {
+s32 func_8043F048_de(struct ItemRecAt18V2 *item, struct Holder_func_8043F048_de *holder) {
     struct ItemDef *def = item->def;
     s32 type = def->type;
     s32 index = def->index;
-    struct Player_func_8043F048_de *player = holder->player;
+    struct PlayerRecAt64E *player = holder->player;
     s32 result = 0;
 
     switch (type) {

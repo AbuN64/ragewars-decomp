@@ -19,7 +19,7 @@ extern void func_802B3C3C_de(s32 arg0, void *arg1);
 void func_802B3200_de(void *arg0, void *arg1) {
     void *Shared_func_802B3200_de_v0;
     void *temp_a0;
-    Shared_func_802B3200_de_FuncPtr fn;
+    SharedRecV8 fn;
     s32 new_var;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {

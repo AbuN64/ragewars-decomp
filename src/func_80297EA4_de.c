@@ -8,7 +8,7 @@ int func_802995D4_de(s16, int, int, int, s32); /* extern */
 int func_80299CC4_de(); /* extern */
 extern State_func_80297EA4_de *D_8014D080;
 int func_80297EA4_de(int arg0) {
- int index,event,result; func_8021C9B4_S3 *item; int (*callback)(int,int,int,int);
+ int index,event,result; ObjRecAtCV1 *item; int (*callback)(int,int,int,int);
  index=D_8014D080->unk4;
  if(index>=0 && D_8014D080->unk530) {
  item=D_8014D080->unkC[index].unk8;

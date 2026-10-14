@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802C074C_H
 #define UNBAKE_SPAN_1000_CODE_802C074C_H
-#include "../types.h"
+#include "types.h"
 #include "audio_callbacks.h"
 
 /* The conversion helpers this cartridge keeps in one code group at 0x802C074C. Each helper owns its

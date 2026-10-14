@@ -7,7 +7,7 @@
 
 
 
-int func_8025BDAC_de(Obj_func_8025BDAC_de *obj, int keyA, int keyB) {
+int func_8025BDAC_de(ObjRecAtCV4 *obj, int keyA, int keyB) {
     int i;
     int *keys = &obj->slots[0].keyB;
 

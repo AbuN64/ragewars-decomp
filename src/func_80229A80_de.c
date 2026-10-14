@@ -348,7 +348,7 @@ void func_8022A170_de(void *arg0) {
 
         do {
             func_8024B8C4_de(node);
-            func_8024B8C4_de((char *)node + 0x2E8);
+            func_8024B8C4_de(&((struct Shared_ActorView *)(node))->weapon);
             func_8022BC94_de(node, 0);
             if (base[0x1D] != 0) {
                 func_8024B7E4_de(node, 1);

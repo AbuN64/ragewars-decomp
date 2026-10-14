@@ -60,17 +60,17 @@ void func_8022CA14_de(void *arg0, void *arg1) {
         case 0:
             func_8025DE54_de(0x18A1,
                           ((Player *)arg0)->pos,
-                          (s32)((char *)arg0 + 8), -1);
+                          (s32)&((Player *)arg0)->pos, -1);
             break;
         case 1:
             func_8025DE54_de(0x1969,
                           ((Player *)arg0)->pos,
-                          (s32)((char *)arg0 + 8), -1);
+                          (s32)&((Player *)arg0)->pos, -1);
             break;
         case 2:
             func_8025DE54_de(0x1905,
                           ((Player *)arg0)->pos,
-                          (s32)((char *)arg0 + 8), -1);
+                          (s32)&((Player *)arg0)->pos, -1);
             break;
             }
         }

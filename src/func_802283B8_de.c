@@ -40,8 +40,8 @@ extern s32 func_8022C650_de(World_func_802283B8_de *);
 extern void func_8022A748_de(World_func_802283B8_de *);
 extern s32 func_80228070_de(World_func_802283B8_de *);
 
-static inline SharedPlayer_func_802283B8_de *player_at(World_func_802283B8_de *world, u32 index) {
-    SharedPlayer_func_802283B8_de *player;
+static inline SharedPlayerRecV2 *player_at(World_func_802283B8_de *world, u32 index) {
+    SharedPlayerRecV2 *player;
     s32 count;
 
     player = 0;
@@ -62,10 +62,10 @@ static inline SharedPlayer_func_802283B8_de *player_at(World_func_802283B8_de *w
 }
 
 void func_802283B8_de(World_func_802283B8_de *world) {
-    SharedPlayer_func_802283B8_de *player;
-    Rules_func_802283B8_de *rules;
+    SharedPlayerRecV2 *player;
+    RulesRecAtA8 *rules;
     Game_func_802283B8_de *game;
-    Rules_func_802283B8_de *limits;
+    RulesRecAtA8 *limits;
     s32 i;
     s32 active;
     s32 out;
@@ -152,25 +152,25 @@ void func_802285E8_de(char *arg0) {
     if (D_8014687C == 11 || D_8014687C == 8) {
         return;
     }
-    actor = ((func_802285C4_S1 *)(arg0))->unk20;
+    actor = ((ObjRecAt20V2 *)(arg0))->unk20;
     while (actor != 0) {
-        if (func_80245798_de() != 0 || ((func_802285C4_S2 *)(actor))->unk5EA == 0) {
+        if (func_80245798_de() != 0 || ((ObjRecV5 *)(actor))->unk5EA == 0) {
             void *work;
 
             work = func_8025CC6C_de();
-            func_8025CA24_de(work, ((func_802285C4_S2 *)(actor))->unk11BC.v0);
-            ((func_802285C4_S2 *)(actor))->unk11BC.v1 = 0;
+            func_8025CA24_de(work, ((ObjRecV5 *)(actor))->unk11BC.v0);
+            ((ObjRecV5 *)(actor))->unk11BC.v1 = 0;
             work = func_8025CC6C_de();
-            func_8025CA24_de(work, ((func_802285C4_S2 *)(actor))->unk11C0.v0);
-            ((func_802285C4_S2 *)(actor))->unk11C0.v1 = 0;
+            func_8025CA24_de(work, ((ObjRecV5 *)(actor))->unk11C0.v0);
+            ((ObjRecV5 *)(actor))->unk11C0.v1 = 0;
         } else if (D_80146894 == 0) {
-            void *owner = ((func_802285C4_S2 *)(actor))->unk5DC;
+            void *owner = ((ObjRecV5 *)(actor))->unk5DC;
             s32 blocked;
 
             if (owner == 0) {
                 blocked = 0;
             } else {
-                blocked = ((func_8021CD70_S4 *)(owner))->unk564 != 0;
+                blocked = ((ObjRecAt564 *)(owner))->unk564 != 0;
             }
             if (blocked == 0) {
                 Block *base;
@@ -178,29 +178,29 @@ void func_802285E8_de(char *arg0) {
                 s32 new_value;
                 f32 saved_value;
 
-                base = &((func_802285C4_S2 *)(actor))->unk2E8;
-                old_value = ((Actor_func_802285E8_de *)actor)->value86C;
+                base = &((ObjRecV5 *)(actor))->unk2E8;
+                old_value = ((ActorRecAt86C *)actor)->value86C;
                 saved_value = D_800D2988;
-                ((Actor_func_802285E8_de *)actor)->flags |= 0x200;
+                ((ActorRecAt86C *)actor)->flags |= 0x200;
                 base->value = 0x10;
                 base->flags &= 0xFFFDFFFF;
                 func_8024BE3C_de(base);
-                if (((func_802285C4_S2 *)(actor))->unk11D8 <= 0.0f) {
+                if (((ObjRecV5 *)(actor))->unk11D8 <= 0.0f) {
                     func_80246E44_de((char *)base);
                 }
-                new_value = ((func_802285C4_S2 *)(actor))->unk86C;
+                new_value = ((ObjRecV5 *)(actor))->unk86C;
                 D_800D2988 = saved_value;
                 if (old_value != new_value) {
-                    ((func_802285C4_S2 *)(actor))->unk10E = 0;
+                    ((ObjRecV5 *)(actor))->unk10E = 0;
                 }
-                ((func_802285C4_S4 *)(actor))->unk2F0 = ((func_802285C4_S2 *)(actor))->unk8;
-                ((func_802285C4_S4 *)(actor))->unk354 = ((func_802285C4_S2 *)(actor))->unk6C;
-                ((func_802285C4_S4 *)(actor))->unk2FC = ((func_802285C4_S2 *)(actor))->unk14;
-                ((func_802285C4_S4 *)(actor))->unk344 = ((func_802285C4_S2 *)(actor))->unk5C;
-                ((func_802285C4_S4 *)(actor))->unk3E8 &= ~0x200;
+                ((ObjRecV6 *)(actor))->unk2F0 = ((ObjRecV5 *)(actor))->unk8;
+                ((ObjRecV6 *)(actor))->unk354 = ((ObjRecV5 *)(actor))->unk6C;
+                ((ObjRecV6 *)(actor))->unk2FC = ((ObjRecV5 *)(actor))->unk14;
+                ((ObjRecV6 *)(actor))->unk344 = ((ObjRecV5 *)(actor))->unk5C;
+                ((ObjRecV6 *)(actor))->unk3E8 &= ~0x200;
             }
         }
-        actor = ((func_802285C4_S2 *)(actor))->unk16E0;
+        actor = ((ObjRecV5 *)(actor))->unk16E0;
     }
 }
 
@@ -235,36 +235,36 @@ void func_80228798_de(void *arg0, void *arg1) {
         do {
             void *owner;
 
-            owner = ((func_80228774_S2 *)(node))->unk5DC;
+            owner = ((ObjRecAt16E0V2 *)(node))->unk5DC;
             if (owner != 0) {
                 if (owner == arg1) {
                     void *actor;
 
-                    actor = &((func_80228774_S2 *)(node))->unk2E8;
+                    actor = &((ObjRecAt16E0V2 *)(node))->unk2E8;
                     if (((func_80207B5C_S2 *)(owner))->unk24 == 0) {
-                        if (((func_80228774_S4 *)(actor))->unk100 & 0x40000) {
+                        if (((ObjRecAt1D8V3 *)(actor))->unk100 & 0x40000) {
                             void *resource;
 
                             resource = func_8025193C_de(
-                                0, ((func_80228774_S4 *)(actor))->unkC4,
-                                ((func_80228774_S4 *)(actor))->unkC4,
-                                ((func_80228774_S4 *)(actor))->unkD0,
+                                0, ((ObjRecAt1D8V3 *)(actor))->unkC4,
+                                ((ObjRecAt1D8V3 *)(actor))->unkC4,
+                                ((ObjRecAt1D8V3 *)(actor))->unkD0,
                                 4, 0, 0, &D_800C2BC0_de, 1);
                             if (resource != 0) {
                                 void *linked;
                                 void *temp;
 
-                                linked = ((func_80228774_S4 *)(actor))->unk1D8;
+                                linked = ((ObjRecAt1D8V3 *)(actor))->unk1D8;
                                 func_8024B4F4_de(actor, (s32)func_8028FDB4_de(*(void **)resource, 0));
                                 temp = ((func_80228774_S5 *)(linked))->unk5DC;
                                 if (temp != 0) {
                                     Vec3 delta;
 
-                                    delta.x = ((func_80228774_S6 *)(temp))->unk128 -
-                                              ((func_80228774_S4 *)(actor))->unk8;
+                                    delta.x = ((ObjRecAt128 *)(temp))->unk128 -
+                                              ((ObjRecAt1D8V3 *)(actor))->unk8;
                                     delta.y = 0.0f;
-                                    delta.z = ((func_80228774_S7 *)(((func_80228774_S5 *)(linked))->unk5DC))->unk130 -
-                                              ((func_80228774_S4 *)(actor))->unk10;
+                                    delta.z = ((ObjRecAt130 *)(((func_80228774_S5 *)(linked))->unk5DC))->unk130 -
+                                              ((ObjRecAt1D8V3 *)(actor))->unk10;
                                     func_8024ADD0_de(actor, &delta, 1);
                                 }
                                 func_80253754_de(0, (s32)resource);
@@ -275,13 +275,13 @@ void func_80228798_de(void *arg0, void *arg1) {
                     }
                 } else if (owner != 0) {
 generic:
-                    if (((func_80228774_S2 *)(node))->unk100 & 0x40000) {
+                    if (((ObjRecAt16E0V2 *)(node))->unk100 & 0x40000) {
                         void *resource;
 
                         resource = func_8025193C_de(
-                            0, ((func_80228774_S2 *)(node))->unkC4,
-                            ((func_80228774_S2 *)(node))->unkC4,
-                            ((func_80228774_S2 *)(node))->unkD0,
+                            0, ((ObjRecAt16E0V2 *)(node))->unkC4,
+                            ((ObjRecAt16E0V2 *)(node))->unkC4,
+                            ((ObjRecAt16E0V2 *)(node))->unkD0,
                             4, 0, 0, &D_800C2BC0_de, 1);
                         if (resource != 0) {
                             func_8024B4F4_de(node, (s32)func_8028FDB4_de(*(void **)resource, 0));
@@ -290,7 +290,7 @@ generic:
                     }
                 }
             }
-            node = ((func_80228774_S2 *)(node))->unk16E0;
+            node = ((ObjRecAt16E0V2 *)(node))->unk16E0;
         } while (node != 0);
     }
 }
@@ -331,10 +331,10 @@ void func_80228958_de(void *game, s32 view) {
     match = D_801468A0;
     team = -1;
     if (match[0x24 / 4] != 0 || match[0x78 / 4] != 0) {
-        team = ((struct Record *) ((struct Owner_func_804441F4_de *) func_802392EC_de(view))->name)->team;
+        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) func_802392EC_de(view))->name)->team;
     }
     func_8026D980_de();
-    for (player = ((func_802285C4_S1 *)(game))->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
+    for (player = ((ObjRecAt20V2 *)(game))->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
         zoomed = 0;
         if (((ObjectLinks16E4 *)(player))->unk_11FC > 0.0f) {
             zoomed = 1;

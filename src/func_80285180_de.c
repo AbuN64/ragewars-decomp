@@ -24,9 +24,9 @@ s32 func_80285180_de(void **arg0, s32 arg1) {
     s32 var_s0;
     u8 temp_v1;
     void **var_s1;
-    func_80285150_S1 *temp_a2;
-    func_80285150_S2 *temp_s0;
-    func_80285150_S1 *temp_v0;
+    ObjRecAt4V2 *temp_a2;
+    ObjRecAt12 *temp_s0;
+    ObjRecAt4V2 *temp_v0;
     temp_a2 = *arg0;
     temp_s0 = temp_a2->unk0;
     if ((temp_s0->unk0 & ~0xFF) == 0x524E4300) {

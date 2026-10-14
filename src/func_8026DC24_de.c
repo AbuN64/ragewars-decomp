@@ -49,9 +49,9 @@ block_7:
         temp_v0 += 1;
         *queue_countp = temp_v0;
         temp_v1_2 = temp_v1 + &D_801157D8;
-        ((struct Measured_func_8026DC24_de_d3723d959b3b *)(temp_v1_2))->value = b;
-        ((struct Measured_func_8026DC24_de_067abebdf932 *)(temp_v1_2))->value = c;
-        ((struct Measured_func_8026DC24_de_034b69863103 *)(temp_v1_2))->value = d;
-        ((struct Measured_func_8026DC24_de_258934bd7eea *)(temp_v1_2))->value = var_s0;
+        ((struct MeasuredRecAt0V1 *)(temp_v1_2))->value = b;
+        ((struct MeasuredRecAtCV1 *)(temp_v1_2))->value = c;
+        ((struct MeasuredRecAt4V1 *)(temp_v1_2))->value = d;
+        ((struct MeasuredRecAt8V1 *)(temp_v1_2))->value = var_s0;
     }
 }

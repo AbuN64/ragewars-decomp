@@ -19,20 +19,20 @@ void func_8028D964_de(void *arg0, s32 arg1) {
     s32 size;
     s32 one;
 
-    if (((struct Measured_func_8028D964_de_ac82866df9b6 *)(arg0))->value == 0 || ((struct Measured_func_8028D964_de_7705078627e3 *)(arg0))->value != arg1) {
+    if (((struct MeasuredRecAt14V2 *)(arg0))->value == 0 || ((struct Measured_func_8028D964_de_7705078627e3 *)(arg0))->value != arg1) {
         func_8028DA74_de(arg0);
-        if (((struct Measured_func_8028D964_de_067abebdf932 *)(arg0))->value != 0) {
+        if (((struct MeasuredRecAtCV3 *)(arg0))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = func_8025193C_de(0, ((struct Measured_func_8028D964_de_067abebdf932 *)(arg0))->value,
-                                     ((struct Measured_func_8028D964_de_067abebdf932 *)(arg0))->value,
-                                     ((struct Measured_func_8028D964_de_615f24e2ba64 *)(arg0))->value, size, 0, 0,
+            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV3 *)(arg0))->value,
+                                     ((struct MeasuredRecAtCV3 *)(arg0))->value,
+                                     ((struct MeasuredRecAt10V2 *)(arg0))->value, size, 0, 0,
                                      &D_800C5290_de, one);
             if (resource != 0) {
-                key = func_8028FE3C_de((s32)*resource, ((struct Measured_func_8028D964_de_067abebdf932 *)(arg0))->value,
+                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV3 *)(arg0))->value,
                                     arg1, &sp28);
                 func_80253838_de(0, resource);
-                if ((((struct Measured_func_8028D964_de_1458d717147e *)(arg0))->value =
+                if ((((struct MeasuredRecAt14V6 *)(arg0))->value =
                      func_8025193C_de(0, key, key, sp28, size, 0,
                                    &D_00285160, &D_800C52BC, one)) != 0) {
                     ((struct Measured_func_8028D964_de_7705078627e3 *)(arg0))->value = arg1;

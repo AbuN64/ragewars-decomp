@@ -36,7 +36,7 @@ extern void func_802A84F8_de(void);
 
 extern void func_802A8F28_de(char *, s32, s32, s32, s32, s32, f32, f32);
 
-void func_802185D0_de(struct TeamMenu *menu, Item_func_80218F9C_de *items, s32 count, WeaponMenuPlayer *player) {
+void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
     s32 width;
     s32 height;
     f32 fade;
@@ -52,7 +52,7 @@ void func_802185D0_de(struct TeamMenu *menu, Item_func_80218F9C_de *items, s32 c
     WeaponMenuView *view;
     WeaponMenuView *titleView;
     f32 *viewport;
-    Item_func_80218F9C_de *item;
+    ItemRecAt18V1 *item;
 
     titleView = player->view;
     level = D_801462DE + 0x40;

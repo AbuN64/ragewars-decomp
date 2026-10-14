@@ -12,7 +12,7 @@ extern f32 D_800C49A4_de;
 
 void func_80274C7C_de(void *arg0)
 {
-    func_80274C64_S1 *o = arg0;
+    ObjRecAt2CV1 *o = arg0;
     f32 magSq;
     f32 mag;
     f32 zOut;

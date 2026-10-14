@@ -50,7 +50,7 @@ extern s32 D_800E1E20;
 
 
 
-extern func_8043FFAC_S4 D_800E1E24_de[];
+extern ObjRecAt1AV2 D_800E1E24_de[];
 
 
 
@@ -72,7 +72,7 @@ void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *arg1, s32 arg2, 
     s32 var_s0;
     u32 temp_v1;
     u8 var_s5;
-    func_8043FFAC_S4 *temp_s1;
+    ObjRecAt1AV2 *temp_s1;
 
     var_s5 = 1;
     if ((func_802934F8_de() == 0) || !(arg0->unk8 & 0x40000000)) {

@@ -7,6 +7,6 @@
 
 
 
-void func_80439C30_de(struct Object_func_80439C30_de *object, struct Triple vector) {
+void func_80439C30_de(struct ObjectRecAt28 *object, struct Triple vector) {
     object->vector = vector;
 }

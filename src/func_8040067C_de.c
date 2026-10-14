@@ -112,7 +112,7 @@ s32 func_804009F4_de(s32 index) {
     Shared_World *resources;
     void **owner,**table;
     Shared_TrackCues *cues;
-    Key_func_80401564_de *cue;
+    PositionKey *cue;
     Shared_TrackClip *clip;
     Shared_MenuContext *context,*scanContext;
     f32 total;
@@ -138,7 +138,7 @@ s32 func_804009F4_de(s32 index) {
             clip=func_80403A90_de(i);
              {
                 s32 n=clip->count;
-                Key_func_80401214_de *base=clip->keys;
+                KeyRecAt1C *base=clip->keys;
                 if(n>0) {
                     total+=base[n-1].time;
                 }
@@ -152,7 +152,7 @@ s32 func_804009F4_de(s32 index) {
         if(count>0) {
             scanContext=D_800E2830;
             do {
-                Key_func_80401564_de *c=&cue[i];
+                PositionKey *c=&cue[i];
                 minTime(&scanContext->clipStart,&c->time);
                 maxTime(&scanContext->clipEnd,&c->time);
                 i++;
@@ -166,7 +166,7 @@ s32 func_804009F4_de(s32 index) {
         else table=func_8025193C_de(0,loaded,loaded,size2,0x33,0,0,&D_800E0B2C,1);
          {
             Shared_TrackTable *entries=*table;
-            Entry_func_804030E0_de *base=entries->entries;
+            EntryRecAt48 *base=entries->entries;
             D_800E2830->pending=pending;
             D_800E2830->active=1;
             D_800E2830->spec=base[index];

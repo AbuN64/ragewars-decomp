@@ -34,7 +34,7 @@
 extern s32 func_8026E340_de(void);
 extern void func_80271F9C_de(f32 *out, Key *key, void *frame);
 
-void func_802A2B58_de(Actor_func_802A274C_de *actor, func_80212828_S7 *clock, Vtx *out, f32 scale, Morph_func_802A2B58_de *morph) {
+void func_802A2B58_de(Actor_func_802A274C_de *actor, ObjRecAt28V1 *clock, Vtx *out, f32 scale, Morph_func_802A2B58_de *morph) {
     f32 a[3];
     f32 b[3];
     f32 weight;

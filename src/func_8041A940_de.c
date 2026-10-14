@@ -8,8 +8,8 @@
 
 
 
-s32 func_8041A940_de(struct Menu_func_8041A940_de *menu) {
-    struct Item_func_8041A940_de *item;
+s32 func_8041A940_de(struct MenuRecAt54 *menu) {
+    struct ItemRecAt10 *item;
 
     menu->state = 2;
     for (item = menu->items; item != 0; item = item->next) {

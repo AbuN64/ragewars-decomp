@@ -20,7 +20,7 @@ extern void func_8027207C_de(Vec3 *arg0);
 
 
 
-Vector4f *func_8024D728_de(Vector4f *out, Input_func_8024D728_de *input) {
+Vector4f *func_8024D728_de(Vector4f *out, InputRecAt44 *input) {
     Vec3 source;
     Vec3 up;
     Vec3 axis;

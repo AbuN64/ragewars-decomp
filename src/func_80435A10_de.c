@@ -7,7 +7,7 @@
 extern char *D_800E54A4;
 
 int func_80435A10_de(int unused0, int unused1, unsigned int message, int arg) {
-    Player_func_80435A10_de *p = (Player_func_80435A10_de *)(D_800E54A4 + (message & 0xFFFF) * 0xB68);
+    PlayerRecAtBA4 *p = (PlayerRecAtBA4 *)(D_800E54A4 + (message & 0xFFFF) * 0xB68);
 
     if (p->state == 12 && (message >> 16) == 3 && arg < 6 && arg >= 4) {
         p->timer = 0;

@@ -19,5 +19,5 @@ void func_80267D70_de(s32 arg0, void *arg1, s32 arg2, Vec3 arg3, s32 arg6)
   ((Player *)temp)->requestedPosition = arg3;
  /* FAKEMATCH: preserve instruction scheduling between the copied triple and the following call. */
  do { } while (0);
-  func_80232744_de(arg1, (s32) ((char *)arg1 + 0x170), t6);
+  func_80232744_de(arg1, (s32) (&((struct Actor_func_8024A7A0_de *)arg1)->behaviorFlags), t6);
 }

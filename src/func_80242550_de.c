@@ -17,20 +17,20 @@
 
 
 extern void func_80271F68_de(Triple *, Triple *, Triple *);
-extern void func_80241950_de(Owner_func_80241BAC_de *, Bounds *, Actor_func_80242550_de *, Input_func_80242550_de *);
-extern void func_80241BAC_de(Actor_func_80242550_de *, Owner_func_80241BAC_de *, Bounds *, Query_func_80241BAC_de *, Input_func_80242550_de *);
-extern void func_80241F24_de(Actor_func_80242550_de *, Owner_func_80241BAC_de *, Bounds *, Query_func_80241BAC_de *, Input_func_80242550_de *);
+extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, Input_func_80242550_de *);
+extern void func_80241BAC_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, Query_func_80241BAC_de *, Input_func_80242550_de *);
+extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *, Query_func_80241BAC_de *, Input_func_80242550_de *);
 
 void func_80242550_de(Actor_func_80242550_de *actor, Input_func_80242550_de *input) {
     Triple saved_previous;
     Triple saved_position;
     Query_func_80241BAC_de query;
     Bounds bounds;
-    Owner_func_80241BAC_de *owner;
-    Entry_func_80242550_de *entry;
+    OwnerRecAt18 *owner;
+    EntryRecAt4V3 *entry;
 
     owner = actor->owner;
-    entry = (Entry_func_80242550_de *)(owner->entries + 0x14);
+    entry = (EntryRecAt4V3 *)(owner->entries + 0x14);
     if (*actor->flags & 0x40000) {
         saved_previous = actor->previous;
         saved_position = actor->position;

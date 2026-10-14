@@ -58,15 +58,15 @@ struct Shared_MenuAmountColumn {
 
 
 
-typedef struct Shared_func_802ACBCC_S1 Shared_func_802ACBCC_S1;
-struct Shared_func_802ACBCC_S1 {
+typedef struct SharedRecAt13E0 SharedRecAt13E0;
+struct SharedRecAt13E0 {
     char pad0[0x8];
     Vec3 position; /* +0x8: passed by value to func_8025DE54_de */
     char pad14[0x4];
-    struct Shared_func_802ACBCC_S3 * unk18; /* +0x18: src/func_802ACBCC.c */
+    struct SharedRecAtC * unk18; /* +0x18: src/func_802ACBCC.c */
     char pad1C[0x5B8];
     s32 unk5D4; /* +0x5D4: src/func_802ACBCC.c */
-    struct Shared_func_802ACBCC_S6 * unk5D8; /* +0x5D8: src/func_802ACBCC.c */
+    struct SharedRecAt92V1 * unk5D8; /* +0x5D8: src/func_802ACBCC.c */
     void * unk5DC; /* +0x5DC: src/func_802ACBCC.c */
     char pad5E0[0x4];
     s32 unk5E4; /* +0x5E4: src/func_802ACBCC.c */
@@ -93,8 +93,8 @@ struct Shared_func_802ACBCC_S1 {
 
 
 
-typedef struct Shared_func_802ACBCC_S2 Shared_func_802ACBCC_S2;
-struct Shared_func_802ACBCC_S2 {
+typedef struct SharedRecAt8V2 SharedRecAt8V2;
+struct SharedRecAt8V2 {
     u8 ** unk0; /* +0x0: src/func_802ACBCC.c */
     s16 unk4; /* +0x4: src/func_802ACBCC.c */
     s16 unk6; /* +0x6: src/func_802ACBCC.c */
@@ -104,24 +104,24 @@ struct Shared_func_802ACBCC_S2 {
 
 
 
-typedef struct Shared_func_802ACBCC_S3 Shared_func_802ACBCC_S3;
-struct Shared_func_802ACBCC_S3 {
+typedef struct SharedRecAtC SharedRecAtC;
+struct SharedRecAtC {
     char pad0[0xC];
     s16 unkC; /* +0xC: src/func_802ACBCC.c */
 };
 
 
 
-typedef struct Shared_func_802ACBCC_S4 Shared_func_802ACBCC_S4;
-struct Shared_func_802ACBCC_S4 {
+typedef struct SharedRecV1 SharedRecV1;
+struct SharedRecV1 {
     char pad0[0x8F];
     u8 unk8F; /* +0x8F: src/func_802ACBCC.c */
 };
 
 
 
-typedef struct Shared_func_802ACBCC_S5 Shared_func_802ACBCC_S5;
-struct Shared_func_802ACBCC_S5 {
+typedef struct SharedRecAt84 SharedRecAt84;
+struct SharedRecAt84 {
     char pad0[0x24];
     s32 unk24; /* +0x24: src/func_802ACBCC.c */
     char pad28[0x2C];
@@ -135,8 +135,8 @@ struct Shared_func_802ACBCC_S5 {
 
 
 
-typedef struct Shared_func_802ACBCC_S6 Shared_func_802ACBCC_S6;
-struct Shared_func_802ACBCC_S6 {
+typedef struct SharedRecAt92V1 SharedRecAt92V1;
+struct SharedRecAt92V1 {
     char pad0[0x8F];
     u8 unk8F; /* +0x8F: src/func_802ACBCC.c */
     u8 unk90; /* +0x90: src/func_802ACBCC.c */
@@ -146,8 +146,8 @@ struct Shared_func_802ACBCC_S6 {
 
 
 
-typedef struct Shared_func_802ACBCC_S7 Shared_func_802ACBCC_S7;
-struct Shared_func_802ACBCC_S7 {
+typedef struct SharedRecV2 SharedRecV2;
+struct SharedRecV2 {
     char pad0[0x5DC];
     void * unk5DC; /* +0x5DC: src/func_802ACBCC.c */
     char pad5E0[0x1100];
@@ -156,24 +156,24 @@ struct Shared_func_802ACBCC_S7 {
 
 
 
-typedef struct Shared_func_802ACBCC_S8 Shared_func_802ACBCC_S8;
-struct Shared_func_802ACBCC_S8 {
+typedef struct SharedRecAt16E0V1 SharedRecAt16E0V1;
+struct SharedRecAt16E0V1 {
     char pad0[0x5D8];
-    struct Shared_func_802ACBCC_S9 * unk5D8; /* +0x5D8: src/func_802ACBCC.c */
+    struct SharedRecAt92V2 * unk5D8; /* +0x5D8: src/func_802ACBCC.c */
     void * unk5DC; /* +0x5DC: src/func_802ACBCC.c */
     char pad5E0[0xBFC];
     f32 unk11DC; /* +0x11DC: src/func_802ACBCC.c */
     char pad11E0[0x4C];
     s32 unk122C; /* +0x122C: src/func_802ACBCC.c */
     char pad1230[0x4B0];
-    struct Shared_func_802ACBCC_S8 * unk16E0; /* +0x16E0: src/func_802ACBCC.c */
+    struct SharedRecAt16E0V1 * unk16E0; /* +0x16E0: src/func_802ACBCC.c */
     char pad16E4[0x4];
 };
 
 
 
-typedef struct Shared_func_802ACBCC_S9 Shared_func_802ACBCC_S9;
-struct Shared_func_802ACBCC_S9 {
+typedef struct SharedRecAt92V2 SharedRecAt92V2;
+struct SharedRecAt92V2 {
     char pad0[0x92];
     u8 unk92; /* +0x92: src/func_802ACBCC.c */
 };
@@ -184,7 +184,7 @@ typedef struct Shared_PlayerListMenuGlobals Shared_PlayerListMenuGlobals;
 struct Shared_PlayerListMenuGlobals {
     void * players; /* +0x0: src/func_802ACBCC.c */
     u8 padToMenu[6204]; /* +0x4: src/func_802ACBCC.c */
-    Shared_func_802ACBCC_S5 menu; /* +0x1840: src/func_802ACBCC.c */
+    SharedRecAt84 menu; /* +0x1840: src/func_802ACBCC.c */
 };
 
 
@@ -200,7 +200,7 @@ struct Shared_PlayerMenuGlobals {
 
 typedef struct Shared_FullPlayerMenuGlobals Shared_FullPlayerMenuGlobals;
 struct Shared_FullPlayerMenuGlobals {
-    struct Shared_func_802ACBCC_S8 * entries; /* +0x0: src/func_802ACBCC.c */
+    struct SharedRecAt16E0V1 * entries; /* +0x0: src/func_802ACBCC.c */
     Shared_PlayerMenuGlobals tail; /* +0x4: src/func_802ACBCC.c */
 };
 
@@ -301,15 +301,15 @@ extern f32 D_800C62AC;
 
            /* const */
 
-typedef Shared_func_802ACBCC_S1 func_802ACBCC_S1;
-typedef Shared_func_802ACBCC_S2 func_802ACBCC_S2;
-typedef Shared_func_802ACBCC_S3 func_802ACBCC_S3;
-typedef Shared_func_802ACBCC_S4 func_802ACBCC_S4;
-typedef Shared_func_802ACBCC_S5 func_802ACBCC_S5;
-typedef Shared_func_802ACBCC_S6 func_802ACBCC_S6;
-typedef Shared_func_802ACBCC_S7 func_802ACBCC_S7;
-typedef Shared_func_802ACBCC_S8 func_802ACBCC_S8;
-typedef Shared_func_802ACBCC_S9 func_802ACBCC_S9;
+typedef SharedRecAt13E0 ObjRecV4;
+typedef SharedRecAt8V2 ObjRecV9;
+typedef SharedRecAtC ObjRecV11;
+typedef SharedRecV1 ObjRecV10;
+typedef SharedRecAt84 ObjRecV12;
+typedef SharedRecAt92V1 ObjRecV13;
+typedef SharedRecV2 ObjRecV7;
+typedef SharedRecAt16E0V1 ObjRecV3;
+typedef SharedRecAt92V2 ObjRecV8;
 
 typedef Shared_PlayerListMenuGlobals PlayerListMenuGlobals;
 typedef Shared_PlayerMenuGlobals PlayerMenuGlobals;
@@ -317,7 +317,7 @@ typedef Shared_FullPlayerMenuGlobals FullPlayerMenuGlobals;
 
 /* Handles player menu commands and updates selection and game mode state. */
 
-s32 func_802ACBCC(func_802ACBCC_S1 *arg0, func_802ACBCC_S2 *arg1) {
+s32 func_802ACBCC(ObjRecV4 *arg0, ObjRecV9 *arg1) {
     f32 temp_f20;
     f32 loopBonus; 
     f32 old_unk11E4;
@@ -351,12 +351,12 @@ s32 func_802ACBCC(func_802ACBCC_S1 *arg0, func_802ACBCC_S2 *arg1) {
     void *temp_a1_7;
     void *temp_a1_8;
     void *temp_a1_9;
-    func_802ACBCC_S8 *temp_s0;
-    func_802ACBCC_S8 **loopEntries;
+    ObjRecV3 *temp_s0;
+    ObjRecV3 **loopEntries;
     FullPlayerMenuGlobals *menuGlobals;
-    func_802ACBCC_S5 *loopMenuData;
-    func_802ACBCC_S5 *commandMenuData;
-    func_802ACBCC_S6 *temp_v1_2;
+    ObjRecV12 *loopMenuData;
+    ObjRecV12 *commandMenuData;
+    ObjRecV13 *temp_v1_2;
 
     var_s4 = 0;
     if (arg0->unk5E4 > 0) {
@@ -418,7 +418,7 @@ case_BD6:
                 goto command_done;
 case_BD7:
             {
-                func_802ACBCC_S5 *listMenuData = &D_80140F84.tail.list.menu;
+                ObjRecV12 *listMenuData = &D_80140F84.tail.list.menu;
                 listMenuData->unk84 = 0;
                 listMenuData->unk80 = 1;
                 arg0->unk5D8->unk8F = 1U;

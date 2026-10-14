@@ -4,7 +4,7 @@
 #include "span_1000/code_80297CD0.h"
 
 
-void func_80299CF0_de(struct Node_func_80299CF0_de *, s32, s32, s32, s32, s32);
+void func_80299CF0_de(struct NodeRecAt12 *, s32, s32, s32, s32, s32);
 #include "span_1000/code_80299DB4.h"
 void func_8029973C_de(void);
 void func_80298368_de(s32);
@@ -82,14 +82,14 @@ void func_8029764C_de(s32 param_1, s32 param_2, s32 param_3, void *param_4, s32 
     /* FAKEMATCH: Native scalar child links lack named Element fields. */
                     if (*(s32 *)((char *)iVar8 + 4) != 0) {
     /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                        func_80299CF0_de(*(struct Node_func_80299CF0_de **)((char *)iVar8 + 4), param_2, local_res8, (s32)param_4,
+                        func_80299CF0_de(*(struct NodeRecAt12 **)((char *)iVar8 + 4), param_2, local_res8, (s32)param_4,
                                          param_5, 1);
                     }
                     if (table->handled == 0) {
     /* FAKEMATCH: Native scalar child links lack named Element fields. */
                         if (*(s32 *)((char *)iVar8 + 8) != 0) {
     /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                            func_80299CF0_de(*(struct Node_func_80299CF0_de **)((char *)iVar8 + 8), param_2, local_res8,
+                            func_80299CF0_de(*(struct NodeRecAt12 **)((char *)iVar8 + 8), param_2, local_res8,
                                              (s32)param_4, param_5, 1);
                         }
                         table->handled = uVar9;

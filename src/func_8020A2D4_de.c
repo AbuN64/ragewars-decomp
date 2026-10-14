@@ -66,7 +66,7 @@ void func_8020A2D4_de(void *arg0, void *config) {
         return;
     }
     ((ObjectLinks2EC *)(arg0))->unk_2E8 -= 1;
-    target = ((struct func_8028FFB0_S3 *) ((ObjectLinks2EC *) arg0)->unk_64)->unk1D8;
+    target = ((struct ObjRecAt1D8V2 *) ((ObjectLinks2EC *) arg0)->unk_64)->unk1D8;
     func_80284FF4_de(&D_8011D8D0, *(void **) arg0, &pos);
     range = D_800C6E08;
     pos.y = ((Player *)target)->pos.y;

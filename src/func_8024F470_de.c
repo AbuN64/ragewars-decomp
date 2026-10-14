@@ -25,7 +25,7 @@ extern func_8020CA10_G1 D_800C3DFC_de;
 extern f32 D_800D2988;
 
 extern struct Shape_func_8021A2D4_de_2 D_800CD8D0;
-extern GlobalState_func_8024F4A0_de D_80146894;
+extern GlobalStateRecAt1C D_80146894;
 
 void func_8024F4A0_de(void *arg0) {
     char *o = (char *) arg0;

@@ -15,7 +15,7 @@ s32 func_8041B564_de(void *arg0) {
     void *p;
 
     func_8025DF34_de(0xE74);
-    p = ((Owner_func_8041B610_de *)arg0)->root;
+    p = ((OwnerRecAt44 *)arg0)->root;
     if (p != 0) {
         do {
             if ((u16)((Node_func_8041B610_de *)p)->kind != 8) {

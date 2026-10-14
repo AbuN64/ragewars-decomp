@@ -9,9 +9,9 @@
 
 
 
-Entry_func_8028C108_de *func_8028C108_de(World_func_8028C108_de *world, s32 id) {
+EntryRecAt18V4 *func_8028C108_de(World_func_8028C108_de *world, s32 id) {
     s32 i;
-    Entry_func_8028C108_de *found = 0;
+    EntryRecAt18V4 *found = 0;
 
     for (i = 0; i < world->count; i++) {
         if (world->list[i]->def->unkC == id) {

@@ -30,12 +30,12 @@ extern void func_802800C0_de(void *system, Actor_func_8024A1D0_de *source, Actor
                           s32 arg3, s32 arg4, s32 arg5, Vec3 position,
                           Vector4f rotation, Vec3 position2, s32 arg15,
                           s32 arg16, s32 arg17);
-extern Effect_func_8024A1D0_de *func_802830B8_de(void *system);
+extern EffectRecAt154 *func_802830B8_de(void *system);
 extern f32 func_8024D398_de(Actor_func_8024A1D0_de *actor);
 
 static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lookup) {
     Vec3 position;
-    Effect_func_8024A1D0_de *effect;
+    EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
 

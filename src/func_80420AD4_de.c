@@ -4,7 +4,7 @@
 /* Counts how many of the four 0x4C8-byte entries D_800E42D0 points to are in state 1 or 2. */
 
 
-extern struct Entry_func_80420AD4_de *D_800E42D0;
+extern struct EntryRecAt14V2 *D_800E42D0;
 
 s32 func_80420AD4_de(void) {
     s32 count = 0;

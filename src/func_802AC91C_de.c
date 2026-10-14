@@ -18,7 +18,7 @@ void *func_802AC91C_de(s32 arg0) {
     i = 3;
     do {
         i -= 1;
-        if (((struct Entry_func_802AB400_de *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != arg0) {
             v1 += 0x18;
         } else {
             return v1;
@@ -40,7 +40,7 @@ void *func_802AC950_de(s32 arg0) {
     i = 5;
     do {
         i -= 1;
-        if (((struct Entry_func_802AB400_de *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != arg0) {
             v1 += 0x14;
         } else {
             return v1;
@@ -62,7 +62,7 @@ void *func_802AC984_de(s32 arg0) {
     i = 7;
     do {
         i -= 1;
-        if (((struct Entry_func_802AB400_de *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != arg0) {
             v1 += 0x18;
         } else {
             return v1;
@@ -84,7 +84,7 @@ void *func_802AC9B8_de(s32 arg0) {
     i = 1;
     do {
         i -= 1;
-        if (((struct Entry_func_802AB400_de *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != arg0) {
             v1 += 0x14;
         } else {
             return v1;
@@ -106,7 +106,7 @@ void *func_802AC9EC_de(s32 arg0) {
     i = 0xF;
     do {
         i -= 1;
-        if (((struct Entry_func_802AB400_de *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != arg0) {
             v1 += 0x10;
         } else {
             return v1;
@@ -128,7 +128,7 @@ void *func_802ACA20_de(s32 arg0) {
     i = 2;
     do {
         i -= 1;
-        if (((struct Entry_func_802AB400_de *)(v1))->id != arg0) {
+        if (((struct EntryRecAtE *)(v1))->id != arg0) {
             v1 += 0x10;
         } else {
             return v1;
@@ -185,14 +185,14 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     void *resource;
     s32 sound;
     s32 callback;
-    if (((struct Entry_func_802AB400_de *)(arg1))->index != -1) {
-        func_80222BE8_de(arg0, ((struct Entry_func_802AB400_de *)(arg1))->index,
-                      ((struct Entry_func_802AB400_de *)(arg1))->argument);
+    if (((struct EntryRecAtE *)(arg1))->index != -1) {
+        func_80222BE8_de(arg0, ((struct EntryRecAtE *)(arg1))->index,
+                      ((struct EntryRecAtE *)(arg1))->argument);
     }
 
-    resource = ((Entry_func_802AB400_de *)arg1)->resource;
-    sound = ((struct Entry_func_802AB400_de *)(arg1))->sound;
-    callback = ((struct Entry_func_802AB400_de *)(arg1))->callback;
+    resource = ((EntryRecAtE *)arg1)->resource;
+    sound = ((struct EntryRecAtE *)(arg1))->sound;
+    callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
         func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
@@ -248,7 +248,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
     }
 
     if (result != 0) {
-        resource = ((Entry_func_802AB400_de *)arg1)->resource;
+        resource = ((EntryRecAtE *)arg1)->resource;
         sound = ((struct TimedItemEffect *)(arg1))->sound;
         callback = ((struct TimedItemEffect *)(arg1))->callback;
         if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
@@ -293,7 +293,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
     s32 amount;
 
     amount = ((struct Actor_func_802AB400_de *)(arg0))->fraction +
-             (u16)((struct Entry_func_802AB400_de *)(arg1))->index;
+             (u16)((struct EntryRecAtE *)(arg1))->index;
     ((struct Actor_func_802AB400_de *)(arg0))->fraction = amount;
     if ((s16)amount >= 100) {
         ((struct Actor_func_802AB400_de *)(arg0))->fraction = amount - 100;
@@ -303,9 +303,9 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
         }
     }
 
-    resource = ((Entry_func_802AB400_de *)arg1)->resource;
-    sound = ((struct Entry_func_802AB400_de *)(arg1))->sound;
-    callback = ((struct Entry_func_802AB400_de *)(arg1))->callback;
+    resource = ((EntryRecAtE *)arg1)->resource;
+    sound = ((struct EntryRecAtE *)(arg1))->sound;
+    callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
         func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);

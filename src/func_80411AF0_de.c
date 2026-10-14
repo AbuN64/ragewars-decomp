@@ -6,14 +6,14 @@
 
 
 
-extern struct Entry_func_804101BC_de *D_80153C10;
-extern struct Resource_func_804101BC_de *D_8014D988;
+extern struct EntryRecAt8V1 *D_80153C10;
+extern struct ResourceRecAt6 *D_8014D988;
 extern void func_80419624_de(s32);
 
 void func_80411AF0_de(s32 i) {
-    struct Resource_func_804101BC_de *resource;
+    struct ResourceRecAt6 *resource;
 
-    resource = (struct Resource_func_804101BC_de *)(i * 8 + (s32)D_8014D988);
+    resource = (struct ResourceRecAt6 *)(i * 8 + (s32)D_8014D988);
     if (resource->id != -1) {
         if (resource->retained > 0) {
             resource->retained--;

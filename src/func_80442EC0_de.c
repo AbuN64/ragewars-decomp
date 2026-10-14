@@ -2,7 +2,7 @@
 #include "types.h"
 #include "common/unused.h"
 
-f32 func_80442EC0_de(Item_func_80442FB0_de *arg0) {
+f32 func_80442EC0_de(ItemRecAt14 *arg0) {
  Binding *v = arg0->binding;
  void *p = v->storage();
  switch(v->type) {

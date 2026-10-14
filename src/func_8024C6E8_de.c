@@ -20,7 +20,7 @@ extern void func_80273448_de(void *, f32, f32, f32);
 extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
 extern void func_8026F620_de(Body_func_8024C6E8_de *, f32 *, f32 *);
 
-void func_8024C6E8_de(s32 unused, Source_func_8024C6E8_de *source, Body_func_8024C6E8_de *body, s32 owner, s32 kind) {
+void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *body, s32 owner, s32 kind) {
     Vec3 velocity;
     Vec3 position;
     f32 impulse[16];

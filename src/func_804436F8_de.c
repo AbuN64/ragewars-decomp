@@ -9,7 +9,7 @@
 
 
 
-s32 func_804436F8_de(void *unused, struct Root_func_804436F8_de *root) {
+s32 func_804436F8_de(void *unused, struct RootRecAt1C *root) {
     root->middle->leaf->flag = 1;
     return 1;
 }

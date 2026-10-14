@@ -4,7 +4,7 @@
 /* Moves nodes whose key differs from arg1 (or every node when arg1 is -1) from the active list to the tail of the list rooted at offset 0xD8. Adapted from func_80259988_de, with the match test inverted, a -1 wildcard added, and the tail insertion written as a do-while(0) list macro. */
 
 
-void func_80259918_de(Owner_func_80259918_de *arg0, s32 arg1) {
+void func_80259918_de(OwnerRecAtD8 *arg0, s32 arg1) {
     Node_func_80259918_de *node;
     Node_func_80259918_de *next;
     node = arg0->activeNext;
@@ -22,7 +22,7 @@ void func_80259918_de(Owner_func_80259918_de *arg0, s32 arg1) {
 /* Move nodes with the requested key from the active list to the other list. */
 void func_80259988_de(void *arg0, s32 arg1)
 {
-    Owner_func_80259918_de *owner = arg0;
+    OwnerRecAtD8 *owner = arg0;
     Node_func_80259918_de *node = owner->activeNext;
     Node_func_80259918_de *head = (Node_func_80259918_de *)&owner->activePrev;
     Node_func_80259918_de *other = (Node_func_80259918_de *)&owner->otherPrev;
@@ -54,9 +54,9 @@ void func_802599EC_de(void *arg0, s32 arg1) {
     ListNode *append_sentinel;
     ListNode *tail;
 
-    node = (ListNode *)((Owner_func_80259918_de *)arg0)->activeNext;
-    sentinel = (ListNode *)&((Owner_func_80259918_de *)arg0)->activePrev;
-    append_sentinel = (ListNode *)&((Owner_func_80259918_de *)arg0)->otherPrev;
+    node = (ListNode *)((OwnerRecAtD8 *)arg0)->activeNext;
+    sentinel = (ListNode *)&((OwnerRecAtD8 *)arg0)->activePrev;
+    append_sentinel = (ListNode *)&((OwnerRecAtD8 *)arg0)->otherPrev;
     if (node != sentinel) {
         loop_sentinel = sentinel;
         do {
@@ -64,11 +64,11 @@ void func_802599EC_de(void *arg0, s32 arg1) {
             if (node->valueBC == arg1) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
-                tail = (ListNode *)((Owner_func_80259918_de *)arg0)->otherPrev;
+                tail = (ListNode *)((OwnerRecAtD8 *)arg0)->otherPrev;
                 node->next = append_sentinel;
                 node->prev = tail;
-                ((ListNode *)((Owner_func_80259918_de *)arg0)->otherPrev)->next = node;
-                ((Owner_func_80259918_de *)arg0)->otherPrev = (Node_func_80259918_de *)node;
+                ((ListNode *)((OwnerRecAtD8 *)arg0)->otherPrev)->next = node;
+                ((OwnerRecAtD8 *)arg0)->otherPrev = (Node_func_80259918_de *)node;
             }
             node = next;
         } while (node != loop_sentinel);
@@ -76,11 +76,11 @@ void func_802599EC_de(void *arg0, s32 arg1) {
 }
 
 void func_80259A50_de(Lists *arg0, s32 arg1) {
-    Node_func_80259A50_de *var_a2;
-    Node_func_80259A50_de *temp_a3;
-    Node_func_80259A50_de *temp_v0;
-    Node_func_80259A50_de *temp_t0;
-    Node_func_80259A50_de *temp_t1;
+    NodeRecAtAC *var_a2;
+    NodeRecAtAC *temp_a3;
+    NodeRecAtAC *temp_v0;
+    NodeRecAtAC *temp_t0;
+    NodeRecAtAC *temp_t1;
 
     var_a2 = arg0->first.next;
     temp_v0 = &arg0->first;
@@ -90,7 +90,7 @@ void func_80259A50_de(Lists *arg0, s32 arg1) {
         do {
             temp_a3 = var_a2->next;
             if ((var_a2->flags & arg1) != 0) {
-                Node_func_80259A50_de *temp_tail;
+                NodeRecAtAC *temp_tail;
 
                 var_a2->prev->next = temp_a3;
                 var_a2->next->prev = var_a2->prev;

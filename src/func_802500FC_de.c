@@ -26,7 +26,7 @@ s32 func_802500FC_de(void *arg0, s32 arg1) {
     u16 temp_v1;
     u16 var_v0;
     u8 next_timer;
-    Descriptor_func_80250274_de *temp_a0;
+    DescriptorRecAt24 *temp_a0;
 
     func_80271F68_de(&sp10, &camera->position,
                   &owner->position);

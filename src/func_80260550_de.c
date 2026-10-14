@@ -20,7 +20,7 @@ extern void func_80270AAC_de(void *arg0, s32 arg1, void *arg2, void *arg3);
 void func_80260550_de(void *arg0, s32 arg1, void *arg2) {
     ObjectLinks24_2 *o = arg0;
     Vector4f *out = arg2;
-    func_8025E52C_S1 *indices = (void *)o->unk_0;
+    ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
     ObjectState14 *rec;
     void *base;

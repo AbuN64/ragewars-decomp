@@ -29,7 +29,7 @@ void func_8028B670_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         return;
     }
     if (((Shared_World *)arg0)->level == arg1) {
-        entry = (char *)((Scene_func_8028E284_de *)arg0)->actors + (s32) arg2 * 0x2E8;
+        entry = (char *)((SceneRecAt140 *)arg0)->actors + (s32) arg2 * 0x2E8;
         cond = ((Actor_func_8028E284_de *)entry)->def;
         if ((u32) (cond->type - 9) < 2) {
             if (cond->flags & 0x200) {

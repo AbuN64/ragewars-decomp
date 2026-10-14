@@ -1,14 +1,12 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80447BB0_H
 #define UNBAKE_SPAN_16E000_CODE_80447BB0_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct Node_func_80449E18_de;
-/* unbake published declaration: published_03551606a8d76f9473d0e3d4 */
 typedef struct Node_func_80449E18_de Node_func_80449E18_de;
 
 struct ObjectState96;
-/* unbake published declaration: published_0b4f24a06454985597a133fc */
 struct ObjectState96 {
     char pad0[0x78];
     u8 unk_78;
@@ -25,7 +23,6 @@ struct ObjectState96 {
 };
 
 struct __OSInodeCache;
-/* unbake published declaration: published_135a577deb29c463b686231a */
 struct __OSInodeCache {
     __OSInode inode;
     u8 bank;
@@ -33,22 +30,17 @@ struct __OSInodeCache {
 };
 
 struct ObjectPool;
-/* unbake published declaration: published_1d5e876d68bab097664d9ab3 */
 typedef struct ObjectPool ObjectPool;
 
-/* unbake published declaration: published_1e19392292f946a729bc10d9 */
-extern void func_80447A38_de(u8 *valid, Entry_func_8023B9C0_eu *data);
+extern void func_80447A38_de(u8 *valid, EntryRecAt3 *data);
 
 struct IntegerState88;
-/* unbake published declaration: published_33dde6c8be8a73b7ac25ad8c */
 typedef struct IntegerState88 IntegerState88;
 
 struct func_804499B0_de_S3;
-/* unbake published declaration: published_353a1b7df82f6e2f89547ced */
 typedef struct func_804499B0_de_S3 func_804499B0_de_S3;
 
 struct __OSPackId;
-/* unbake published declaration: published_36ec048c27005afb51873062 */
 struct __OSPackId {
     u32 repaired;
     u32 random;
@@ -62,15 +54,12 @@ struct __OSPackId {
 };
 
 struct func_8044AB34_S1;
-/* unbake published declaration: published_6431d91466ce9c683d56e16b */
 typedef struct func_8044AB34_S1 func_8044AB34_S1;
 
 struct __OSInodeCache;
-/* unbake published declaration: published_662b87cc48f4f28b7aaa570d */
 typedef struct __OSInodeCache __OSInodeCache;
 
 struct func_804499B0_de_S3;
-/* unbake published declaration: published_68d8966f07cad85f88399510 */
 struct func_804499B0_de_S3 {
     char pad0[0x3];
     u8 unk3;
@@ -132,7 +121,6 @@ struct func_804499B0_de_S3 {
 };
 
 struct Entry_func_80448CC4_de;
-/* unbake published declaration: published_6aa52e7077e714c44f03539f */
 struct Entry_func_80448CC4_de {
     s32 pad0;
     s32 first;
@@ -163,8 +151,7 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct func_80229BE0_S2;
-/* unbake published declaration: published_6c3a4d9cfd6bc2d7076b6cab */
+struct ObjRecAt80;
 struct SharedPlayer_func_8044972C_de {
     union {
         struct {
@@ -461,10 +448,10 @@ struct SharedPlayer_func_8044972C_de {
     } views1C;
     union {
         struct {
-            struct func_80229BE0_S2 * unk5D8;
+            struct ObjRecAt80 * unk5D8;
         } view5D8_0;
         struct {
-            struct func_80229BE0_S2 * record;
+            struct ObjRecAt80 * record;
         } view5D8_1;
         struct {
             struct Controls * controls;
@@ -1587,19 +1574,15 @@ struct SharedPlayer_func_8044972C_de {
     } views16E0;
 };
 
-/* unbake published declaration: published_6fa3d8867d83f70e3f107a73 */
 extern u16 func_80448B84_de(u8 *bytes, s32 count);
 
 struct Record_func_80449EE4_de;
-/* unbake published declaration: published_75bcf6d19b6d883278e82951 */
 typedef struct Record_func_80449EE4_de Record_func_80449EE4_de;
 
 struct __OSPackId;
-/* unbake published declaration: published_7838733f07ada8f0729b9025 */
 typedef struct __OSPackId __OSPackId;
 
 struct Record_func_80449EE4_de;
-/* unbake published declaration: published_791f13774795cf67e7f373a6 */
 struct Record_func_80449EE4_de {
     char pad0[0x7F];
     signed char slot;
@@ -1610,7 +1593,6 @@ struct Record_func_80449EE4_de {
 };
 
 struct func_8044AC70_S1;
-/* unbake published declaration: published_7ac3dd04aa7a6e29e9a5408a */
 struct func_8044AC70_S1 {
     char pad0[0x2E8];
     char unk2E8;
@@ -1619,7 +1601,6 @@ struct func_8044AC70_S1 {
 };
 
 struct func_8044AC70_S1;
-/* unbake published declaration: published_8fcb996308f89b1f6069b7a4 */
 typedef struct func_8044AC70_S1 func_8044AC70_S1;
 
 struct Body;
@@ -1645,7 +1626,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_9fc1353bf90b1285fbd0b907 */
 struct SharedPlayer_func_80449EE4_de {
     union {
         struct {
@@ -3069,14 +3049,12 @@ struct SharedPlayer_func_80449EE4_de {
 };
 
 struct func_8044AB34_S1;
-/* unbake published declaration: published_b12ecfb9fb41b3423722e79f */
 struct func_8044AB34_S1 {
     char pad0[0x16D8];
     s16 unk16D8;
 };
 
 struct IntegerState88;
-/* unbake published declaration: published_b83fbb36a9e49b4746e40840 */
 struct IntegerState88 {
     char pad0[0x74];
     s32 unk_74;
@@ -3085,7 +3063,6 @@ struct IntegerState88 {
 };
 
 struct ObjectPool;
-/* unbake published declaration: published_baa8083c3ede87472f48e65e */
 struct ObjectPool {
     void *allocation;
     char *objects;
@@ -3096,7 +3073,6 @@ struct ObjectPool {
 
 struct Node_func_80449E18_de;
 struct Shape_func_802764D4_de_2;
-/* unbake published declaration: published_c2481af71ac916eb9f27a7ad */
 struct Node_func_80449E18_de {
     char p0[8];
     s32 unk8;
@@ -3115,7 +3091,6 @@ struct Node_func_80449E18_de {
 
 struct Actor_func_8044A020_de;
 struct Part;
-/* unbake published declaration: published_c5de7d4a2612188892e15199 */
 struct Actor_func_8044A020_de {
     char pad[0x2E8];
     char firstEffect[0x170]; /* 0x2E8 */
@@ -3124,15 +3099,12 @@ struct Actor_func_8044A020_de {
 };
 
 struct SharedPlayer_func_8044972C_de;
-/* unbake published declaration: published_d9813787115c920c2b4f14fe */
 typedef struct SharedPlayer_func_8044972C_de SharedPlayer_func_8044972C_de;
 
 struct SharedPlayer_func_80449EE4_de;
-/* unbake published declaration: published_dafef328e631739197056416 */
 typedef struct SharedPlayer_func_80449EE4_de SharedPlayer_func_80449EE4_de;
 
 struct ObjectState96;
-/* unbake published declaration: published_de83d13959887efce071777b */
 typedef struct ObjectState96 ObjectState96;
 
 struct Record_func_80449DB0_de;

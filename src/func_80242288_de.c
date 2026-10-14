@@ -18,7 +18,7 @@
 
 extern char D_80100338;
 
-extern void func_80241950_de(Owner_func_80241BAC_de *, Bounds *, Actor_func_80242288_de *, Owner_func_80241BAC_de *);
+extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242288_de *, OwnerRecAt18 *);
 extern s32 func_8023E178_de(Actor_func_80242288_de *, void *, f32, f32, f32, s32, s32 *, s32);
 extern s32 func_8023EA44_de(Actor_func_80242288_de *, s32 *, void *, f32, s32);
 extern s32 func_8023E8D4_de(Actor_func_80242288_de *, s32 *, s32);
@@ -36,10 +36,10 @@ extern void func_80241180_de(s32 *, Bounds *);
 
 
 
-void func_80242288_de(Actor_func_80242288_de *actor, Owner_func_80241BAC_de *owner) {
-    Query_func_80242288_de query;
+void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
+    QueryRecAt58 query;
     Bounds bounds;
-    Entry_func_80242288_de *entry;
+    EntryRecAt8V5 *entry;
 
     entry = &((EntryBlock *)owner->entries)->entry;
     if ((actor->field40 != &D_80100338) && (((Shape *)actor->field40)->enabled != 0)) {

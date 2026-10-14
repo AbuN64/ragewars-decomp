@@ -12,7 +12,7 @@
 extern s32 func_80285F58_de(void *, void *);
 
 
-void func_80206018_de(void *arg0, Event_func_80206018_de *arg1) {
+void func_80206018_de(void *arg0, EventRecAt30 *arg1) {
     CallbackHolder *holder;
     s32 different;
 

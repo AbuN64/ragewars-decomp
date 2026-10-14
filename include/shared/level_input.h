@@ -1,8 +1,8 @@
 #ifndef RW_LEVEL_INPUT_H
 #define RW_LEVEL_INPUT_H
 #include "common/types_8a8189af7b05.h"
-typedef struct Input_func_8024B3A8_de Input_func_8024B3A8_de;
-struct Input_func_8024B3A8_de {
+typedef struct InputRecAt27 InputRecAt27;
+struct InputRecAt27 {
     s32 unk0;
     f32 vec4[3];
     f32 vec10[3];

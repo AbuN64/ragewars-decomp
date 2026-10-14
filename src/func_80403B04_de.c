@@ -5,6 +5,6 @@
 
 /** Advance a byte pointer by eight bytes. */
 void *func_80403B04_de(void *value) {
-    func_8020CC0C_S1 *record = value;
+    ObjRecAt8V2 *record = value;
     return &record->unk8;
 }

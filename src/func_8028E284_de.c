@@ -13,7 +13,7 @@
 extern Actor_func_8028E284_de *D_800F3CD0[],*D_800F3D0C;
 extern s32 D_80142850;
 extern s32 func_802A01E8_de(void);
-void func_8028E284_de(Scene_func_8028E284_de *scene) {
+void func_8028E284_de(SceneRecAt140 *scene) {
  s32 count=0,i=9,offset=36;Actor_func_8028E284_de *actor=scene->actors;
  D_800F3D0C=0;
  do {*(Actor_func_8028E284_de **)((char *)D_800F3CD0+offset)=0;i--;offset-=4;} while(i>=0);
@@ -302,20 +302,20 @@ s32 func_8028E78C_de(void *arg0, Vec3 *arg1) {
     f32 magnitude;
     u16 type;
 
-    func_80271F68_de(&sp10, &((struct Object_func_8028CAE0_de *)(arg0))->x, arg1);
+    func_80271F68_de(&sp10, &((struct ObjectRecAt1A4 *)(arg0))->x, arg1);
     magnitude = (sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z);
-    if (*((struct Object_func_8028CAE0_de *)(arg0))->kind != 1) {
+    if (*((struct ObjectRecAt1A4 *)(arg0))->kind != 1) {
         return 0;
     }
-    type = ((struct Object_func_8028CAE0_de *)(arg0))->team;
+    type = ((struct ObjectRecAt1A4 *)(arg0))->team;
     if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
         type == 0x454 || type == 0x455 || type == 0x456) {
         return 0;
     }
-    if (((struct Object_func_8028CAE0_de *)(arg0))->active == 0) {
+    if (((struct ObjectRecAt1A4 *)(arg0))->active == 0) {
         return 0;
     }
-    if (((struct Object_func_8028CAE0_de *)(arg0))->state == 0x3D) {
+    if (((struct ObjectRecAt1A4 *)(arg0))->state == 0x3D) {
         return 0;
     }
     return magnitude <= D_800C533C_de;
@@ -332,7 +332,7 @@ extern void func_80271F68_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2);
 
 
 
-s32 func_8028E860_de(Obj_func_8028E860_de *arg0, Vec3 *arg1) {
+s32 func_8028E860_de(ObjRecAtE4V2 *arg0, Vec3 *arg1) {
     Vec3 delta;
     u16 type;
 

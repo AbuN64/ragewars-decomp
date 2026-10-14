@@ -15,7 +15,7 @@ extern void func_80264788_de(s32 arg);
 
 void func_8043DEF8_de(void *arg0, s32 arg1) {
     s32 val;
-    Menu_func_8043E1F8_de *menu = arg0;
+    MenuRecAt20V2 *menu = arg0;
 
     val = menu->widget->unk4;
     if (arg1 != 0) {

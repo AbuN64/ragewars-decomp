@@ -6,7 +6,7 @@
 s32 func_8022B178_de(void *); /* extern */
 void func_8044972C_de(void *); /* extern */
 extern State_func_8043E254_de D_801468A0[];
-s32 func_804438BC_de(State_func_804438BC_de *arg0) {
+s32 func_804438BC_de(StateRecAt1C *arg0) {
     State_func_8043E254_de *state;
     s32 temp_v0;
     s32 var_v0;

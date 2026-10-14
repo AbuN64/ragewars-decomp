@@ -4,5 +4,5 @@
 
 s32 func_8044A07C_de(s32);
 void func_80232C68_de(void *arg0) {
-    func_8044A07C_de((((struct Actor_func_8028CC34_de *) ((s8 *) arg0))->link));
+    func_8044A07C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }

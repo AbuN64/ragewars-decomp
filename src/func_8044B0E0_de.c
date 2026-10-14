@@ -5,7 +5,7 @@
 
 
 
-void func_8044B0E0_de(struct Pool_func_8044B0E0_de *arg0) {
+void func_8044B0E0_de(struct PoolRecAt28V2 *arg0) {
     f32 temp_f20;
     s32 var_s1;
     s32 var_s2;

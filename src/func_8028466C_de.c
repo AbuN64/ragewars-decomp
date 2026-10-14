@@ -9,7 +9,7 @@ void func_8028466C_de(char *obj, unsigned char count) {
     int i;
 
     for (i = 0; i <= count; i++) {
-        Entry_func_8028466C_de *e = (Entry_func_8028466C_de *)(obj + i * sizeof(Entry_func_8028466C_de) + 0xFC28);
+        EntryRecAt4V1 *e = (EntryRecAt4V1 *)(obj + i * sizeof(EntryRecAt4V1) + 0xFC28);
         if (e->handle != 0) {
             func_80284570_de(obj, e->handle);
             return;

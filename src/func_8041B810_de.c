@@ -7,6 +7,6 @@
 
 
 
-s16 func_8041B810_de(struct Slots_func_8041B810_de *object, s32 index) {
+s16 func_8041B810_de(struct SlotsRecAt4C *object, s32 index) {
     return object->entries[index]->unkC;
 }

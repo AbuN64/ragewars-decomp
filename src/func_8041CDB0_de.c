@@ -8,7 +8,7 @@
 
 
 
-void func_8041CDB0_de(Obj_func_8041CDB0_de *arg0, Vec3 v) {
+void func_8041CDB0_de(ObjRecAt480 *arg0, Vec3 v) {
     arg0->unk480 = v;
 }
 
@@ -18,7 +18,7 @@ void func_8041CDB0_de(Obj_func_8041CDB0_de *arg0, Vec3 v) {
 
 
 
-void func_8041CDDC_de(Obj_func_8041CDDC_de *arg0, Vec3 v) {
+void func_8041CDDC_de(ObjRecAt48C *arg0, Vec3 v) {
     arg0->unk48C = v;
 }
 
@@ -26,7 +26,7 @@ void func_8041CDDC_de(Obj_func_8041CDDC_de *arg0, Vec3 v) {
 
 
 
-void func_8041CE08_de(Obj_func_8041CE08_de *arg0, s32 arg1) {
+void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1) {
     arg0->unk498 = arg1;
 }
 

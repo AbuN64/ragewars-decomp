@@ -16,7 +16,7 @@
 #include "span_C76B0/data.h"
 extern s32 D_800CD8D0;
 extern ViewFlags D_80103220;
-extern u32 func_802337D0_de(State_func_802337D0_de *);
+extern u32 func_802337D0_de(StateRecAt10 *);
 extern void func_80234FEC_de(Shared_func_80234FDC_S2 *camera);
 /* Update split-screen rectangles, advance transient effects, and merge visible bounds. */
 void func_80236874_de(RaceViewportState *state) {

@@ -19,10 +19,10 @@ Element *func_80298170_de(s32 id) {
     s32 i;
 
     context = (s32)func_80411DCC_de(func_80299958_de());
-    for (i = 0; i < ((Cache_func_80298170_de *)D_8014D080)->count; i++) {
-        if (((Cache_func_80298170_de *)D_8014D080)->entries[i].context == context && ((Cache_func_80298170_de *)D_8014D080)->entries[i].id == id
-            && ((Cache_func_80298170_de *)D_8014D080)->entries[i].object != 0 && ((Cache_func_80298170_de *)D_8014D080)->entries[i].object->id == id) {
-            return ((Cache_func_80298170_de *)D_8014D080)->entries[i].object;
+    for (i = 0; i < ((CacheRecAt540 *)D_8014D080)->count; i++) {
+        if (((CacheRecAt540 *)D_8014D080)->entries[i].context == context && ((CacheRecAt540 *)D_8014D080)->entries[i].id == id
+            && ((CacheRecAt540 *)D_8014D080)->entries[i].object != 0 && ((CacheRecAt540 *)D_8014D080)->entries[i].object->id == id) {
+            return ((CacheRecAt540 *)D_8014D080)->entries[i].object;
         }
     }
     object = (Element *)func_8040EC30_de((struct Tree *)context, id & 0xFFFF);
@@ -30,11 +30,11 @@ Element *func_80298170_de(s32 id) {
     if (D_8014D09C < D_8014D0A0) {
         D_8014D09C = D_8014D0A0;
     }
-    if (((Cache_func_80298170_de *)D_8014D080)->count < 75) {
-        ((Cache_func_80298170_de *)D_8014D080)->entries[((Cache_func_80298170_de *)D_8014D080)->count].id = id;
-        ((Cache_func_80298170_de *)D_8014D080)->entries[((Cache_func_80298170_de *)D_8014D080)->count].object = object;
-        ((Cache_func_80298170_de *)D_8014D080)->entries[((Cache_func_80298170_de *)D_8014D080)->count].context = context;
-        ((Cache_func_80298170_de *)D_8014D080)->count++;
+    if (((CacheRecAt540 *)D_8014D080)->count < 75) {
+        ((CacheRecAt540 *)D_8014D080)->entries[((CacheRecAt540 *)D_8014D080)->count].id = id;
+        ((CacheRecAt540 *)D_8014D080)->entries[((CacheRecAt540 *)D_8014D080)->count].object = object;
+        ((CacheRecAt540 *)D_8014D080)->entries[((CacheRecAt540 *)D_8014D080)->count].context = context;
+        ((CacheRecAt540 *)D_8014D080)->count++;
     }
     return object;
 }

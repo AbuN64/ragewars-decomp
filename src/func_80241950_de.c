@@ -42,7 +42,7 @@ void func_80241950_de(char *obj, Vec3 *corners, char *floor, s32 attachment) {
     f32 turn[16];
     Vector4f yaw;
     Vector4f orient;
-    Shape_func_80241950_de *shape;
+    ShapeRecAt18V1 *shape;
     char *anim;
     f32 grow;
     f32 lift;
@@ -61,7 +61,7 @@ void func_80241950_de(char *obj, Vec3 *corners, char *floor, s32 attachment) {
     f32 angle;
 
     anim = obj + 0x170;
-    shape = (Shape_func_80241950_de *)((u8 *)((Actor_func_8024A7A0_de *)obj)->definition + 0x14);
+    shape = (ShapeRecAt18V1 *)((u8 *)((Actor_func_8024A7A0_de *)obj)->definition + 0x14);
     if (attachment != 0) {
         grow = func_8024D398_de(attachment);
         lift = func_8024D284_de(attachment);

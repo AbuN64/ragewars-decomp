@@ -64,7 +64,7 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
 
             product = i * count;
             if (i != requested) {
-                if (((struct func_8020C9CC_S1 *) (obj->links->data + ((product + requested) * obj->links->stride)))->unk4 != 0) {
+                if (((struct ObjRecAt4V1 *) (obj->links->data + ((product + requested) * obj->links->stride)))->unk4 != 0) {
                     record = (char *)obj->records +
                              (i * obj->records->stride + 8);
                     if (record != 0 && (((ObjectState10 *)(record))->unk_C.v0 & mask) == 0) {
@@ -85,7 +85,7 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
 
                 product = i * obj->count;
                 if (i != requested) {
-                    if (((struct func_8020C9CC_S1 *) (obj->links->data + ((product + requested) * obj->links->stride)))->unk4 != 0) {
+                    if (((struct ObjRecAt4V1 *) (obj->links->data + ((product + requested) * obj->links->stride)))->unk4 != 0) {
                         record = (char *)obj->records +
                                  (i * obj->records->stride + 8);
                         if (record != 0 && (((ObjectState10 *)(record))->unk_C.v1 & 0x400) == 0) {

@@ -22,21 +22,21 @@ extern char D_8014AEB0;
 void func_802958D8_us_rev1(void) {
     char *object = &D_8014AEB0;
 
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->alternateTitle = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->state = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->selectionIndex = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->selectionValue = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->active = 1;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field4 = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->titleWasShown = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field1C = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field24 = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field28 = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field20 = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field212C = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field2130 = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->field2134 = 0;
-    ((struct MenuGlobal_func_80294F1C_us_rev1 *)object)->frameCount = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->alternateTitle = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->state = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->selectionIndex = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->selectionValue = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->active = 1;
+    ((struct MenuGlobalRecAt21B8 *)object)->field4 = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->titleWasShown = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field1C = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field24 = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field28 = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field20 = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field212C = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field2130 = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->field2134 = 0;
+    ((struct MenuGlobalRecAt21B8 *)object)->frameCount = 0;
 }
 
 extern s32 D_800D2AEC;

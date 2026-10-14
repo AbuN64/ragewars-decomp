@@ -66,7 +66,7 @@ extern void func_80253838_de(void *heap, void *block);
 extern void func_80253908_de(s32 heap);
 extern void func_80442574_de(void *buffer, char *message, SharedPlayer_func_8022A398_de *player, char *title, s32 channel);
 
-static inline void get_channel(Menu_func_804085E0_de *menu, s32 *channel) {
+static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
     if (D_8015375C != 0) {
         *channel = D_800E28C8;
     } else {
@@ -74,7 +74,7 @@ static inline void get_channel(Menu_func_804085E0_de *menu, s32 *channel) {
     }
 }
 
-s32 func_804085E0_de(void *unused, Menu_func_804085E0_de *menu) {
+s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
     s32 channel;
     char *label;
     s8 port;

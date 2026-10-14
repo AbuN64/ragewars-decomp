@@ -58,7 +58,7 @@ extern s32 func_8025E584_de(Controller_func_80259C5C_de *);
 extern s32 func_8025E590_de(Controller_func_80259C5C_de *);
 
 
-void func_80259C5C_de(View_func_80259C5C_de *view, Controller_func_80259C5C_de *controller, s32 flags) {
+void func_80259C5C_de(ViewRecAtB0 *view, Controller_func_80259C5C_de *controller, s32 flags) {
     s16 x;
     s16 y;
     f32 fx;

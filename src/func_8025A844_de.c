@@ -24,7 +24,7 @@ static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan) {
 
 void func_8025A844_de(Voice_func_8025A844_de *voice) {
     s32 rising;
-    Params_func_8025A844_de *params;
+    ParamsRecAt18 *params;
 
     params = &voice->params;
     if (func_80258D2C_de(voice->owner) == 0) {

@@ -20,7 +20,7 @@
 
 
 extern s32 D_8014D570;
-extern Batch_func_8040CF8C_de D_8014D590[];
+extern BatchRec D_8014D590[];
 extern s32 D_800E2AB8;
 
 
@@ -35,7 +35,7 @@ extern void func_804174F4_de(s32 texture);
 extern void func_80418DA0_de(f32 x, f32 y, f32 z, f32 width, f32 height, s32 color);
 
 static inline s32 func_8040CDD0_overlaps(struct Shape_typemap_165 *area) {
-    Batch_func_8040CF8C_de *batch;
+    BatchRec *batch;
     s32 i;
 
     for (i = 0; i < D_8014D570; i++) {

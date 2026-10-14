@@ -4,7 +4,7 @@
 
 
 
-f32 func_8022AA44_de(Shared_func_8022AA34_View *arg0) {
+f32 func_8022AA44_de(SharedRecAt848 *arg0) {
     f32 value;
     f32 scaled;
     f32 initial;

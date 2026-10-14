@@ -89,8 +89,8 @@ struct Shared_ActorView {
     s32 effectId; /* 0x86C */
     u8 pad870[0x938 - 0x870];
     char strokes[0xD40 - 0x938]; /* 0x938 */
-    Record_func_802A6F68_de record; /* 0xD40 */
-    u8 padE2C[0xE54 - 0xD40 - sizeof(Record_func_802A6F68_de)];
+    RecordRecAtE8 record; /* 0xD40 */
+    u8 padE2C[0xE54 - 0xD40 - sizeof(RecordRecAtE8)];
     f32 effectTransform[16]; /* 0xE54 */
     f32 effectOffsetTransform[16]; /* 0xE94 */
     u8 padED4[0x11B4 - 0xED4];

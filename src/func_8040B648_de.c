@@ -9,9 +9,9 @@ extern char D_8014561C;
 extern s32 D_8014ADA0;
 extern s32 D_8014D480;
 extern s32 D_8015375C;
-s32 func_8040B648_de(s32 arg0, Action_func_8040B648_de *arg1) {
+s32 func_8040B648_de(s32 arg0, ActionRecAt24 *arg1) {
     void *var_a0;
-    func_8024795C_S2 *temp_v0;
+    ObjRecAt5DC *temp_v0;
     D_800E28C0 = 1;
     D_8014D480 = 0;
     if (D_8015375C != 0) {

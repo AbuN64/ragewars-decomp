@@ -33,7 +33,7 @@ void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct Matrix_func_80213
     s32 var_s2;
     u16 temp_a0;
     u32 temp_v1;
-    func_8026E5E0_S2 *var_s3;
+    ObjRecAt4V7 *var_s3;
 
     arg1 = arg1 - 1;
     if (arg1 != -1) {

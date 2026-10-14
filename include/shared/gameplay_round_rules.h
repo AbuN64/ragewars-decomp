@@ -19,7 +19,7 @@ struct Shared_func_80227014_S1 {
     char pad70[0x4];
     s32 unk74; /* +0x74: src/func_80227014.c */
     char pad78[0x98 - 0x78];
-    s32 unk98; /* +0x98: origin/legacy func_80286A78.c, Shared_func_80286A78_S4. */
+    s32 unk98; /* +0x98: origin/legacy func_80286A78.c, SharedRecAt98. */
 };
 typedef char Shared_func_80227014_S1_size_check[(sizeof(Shared_func_80227014_S1) == 0x9C) ? 1 : -1];
 
@@ -65,8 +65,8 @@ struct Shared_func_80227014_S3 {
 typedef char Shared_func_80227014_S3_size_check[(sizeof(Shared_func_80227014_S3) == 0x95) ? 1 : -1];
 
 
-typedef struct Shared_func_80227014_S4 Shared_func_80227014_S4;
-struct Shared_func_80227014_S4 {
+typedef struct SharedRecAt564V1 SharedRecAt564V1;
+struct SharedRecAt564V1 {
     u8 pad0[0x128];
     Vec3 position; /* 0x128 */
     u8 pad134[0xC];
@@ -81,7 +81,7 @@ struct Shared_func_80227014_S4 {
     char pad2AC[0x2B8];
     s32 unk564; /* +0x564: src/func_80227014.c */
 };
-typedef char Shared_func_80227014_S4_size_check[(sizeof(Shared_func_80227014_S4) == 0x568) ? 1 : -1];
+typedef char Shared_func_80227014_S4_size_check[(sizeof(SharedRecAt564V1) == 0x568) ? 1 : -1];
 
 
 typedef struct Shared_func_80227014_S5 Shared_func_80227014_S5;

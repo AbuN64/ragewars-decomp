@@ -42,11 +42,11 @@ s32 func_8025842C_de(void *arg0) {
     u32 mask;
     s32 count;
 
-    ((struct Context_func_80257360_de *)(object))->red = (f32)bytes[0] * D_800C3EE0_de;
-    ((struct Context_func_80257360_de *)(object))->green = (f32)bytes[-1] * D_800C3EE0_de;
-    ((struct Context_func_80257360_de *)(object))->blue = (f32)bytes[1] * D_800C3EE0_de;
+    ((struct ContextRecAt2BC0 *)(object))->red = (f32)bytes[0] * D_800C3EE0_de;
+    ((struct ContextRecAt2BC0 *)(object))->green = (f32)bytes[-1] * D_800C3EE0_de;
+    ((struct ContextRecAt2BC0 *)(object))->blue = (f32)bytes[1] * D_800C3EE0_de;
     queue = object + 0x110;
-    ((struct Context_func_80257360_de *)(object))->field2BB0 = bytes[-2];
+    ((struct ContextRecAt2BC0 *)(object))->field2BB0 = bytes[-2];
     mask = func_802BCF30_de();
     count = ((MenuRules *)(queue))->locked + 1;
     ((MenuRules *)(queue))->locked = count;
@@ -57,7 +57,7 @@ s32 func_8025842C_de(void *arg0) {
         func_802BCF50_de(mask);
     }
 
-    func_8025BD00_de(&((struct Context_func_80257360_de *)(object))->menu[0]);
+    func_8025BD00_de(&((struct ContextRecAt2BC0 *)(object))->menu[0]);
     {
         char *queue2 = object + 0x110;
         u32 mask2 = func_802BCF30_de();
@@ -79,9 +79,9 @@ s32 func_8025842C_de(void *arg0) {
     func_8025D450_de(queue);
 
     if (D_800CB720 != 0 &&
-        ((struct Context_func_80257360_de *)(object))->field2BB4 != 0 &&
+        ((struct ContextRecAt2BC0 *)(object))->field2BB4 != 0 &&
         func_802934F8_de() != 0 &&
-        ((struct Context_func_80257360_de *)(object))->track > 0) {
+        ((struct ContextRecAt2BC0 *)(object))->track > 0) {
         Vec3 zero;
         void *result;
         Vec3 *vec;
@@ -90,12 +90,12 @@ s32 func_8025842C_de(void *arg0) {
         zero.y = 0.0f;
         zero.x = 0.0f;
         result = func_802395A4_de(&D_80145088, &zero);
-        vec = &((struct Shared_func_80227014_S4 *)(result))->position;
-        if ((((struct Context_func_80257360_de *)(object))->frame & 3) == 0) {
-            func_80257DD4_de(object, ((struct Context_func_80257360_de *)(object))->track, *vec, 0, -1);
+        vec = &((struct SharedRecAt564V1 *)(result))->position;
+        if ((((struct ContextRecAt2BC0 *)(object))->frame & 3) == 0) {
+            func_80257DD4_de(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);
         }
     }
-    return ++((struct Context_func_80257360_de *)(object))->frame;
+    return ++((struct ContextRecAt2BC0 *)(object))->frame;
 }
 
 extern u32 func_802BCF30_de(void);
@@ -116,7 +116,7 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         s32 temp_v1;
         u32 temp_a0;
 
-        temp_s0 = &((struct Context_func_80257360_de *)(arg0))->lock;
+        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
         temp_a0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked + 1;
         temp_s0->locked = temp_v1;
@@ -127,12 +127,12 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
             func_802BCF50_de(temp_a0);
         }
     }
-    if (func_8025C17C_de(&((struct Context_func_80257360_de *)(arg0))->menu[0], arg1) != 0) {
+    if (func_8025C17C_de(&((struct ContextRecAt2BC0 *)(arg0))->menu[0], arg1) != 0) {
         MenuRules *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((struct Context_func_80257360_de *)(arg0))->lock;
+        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
@@ -144,12 +144,12 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         }
         return 1;
     }
-    if (func_80259AB8_de(&((struct Context_func_80257360_de *)(arg0))->view[0], arg1) != 0) {
+    if (func_80259AB8_de(&((struct ContextRecAt2BC0 *)(arg0))->view[0], arg1) != 0) {
         MenuRules *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((struct Context_func_80257360_de *)(arg0))->lock;
+        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
@@ -166,7 +166,7 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((struct Context_func_80257360_de *)(arg0))->lock;
+        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
@@ -194,7 +194,7 @@ void func_80258740_de(s32 *arg0) {
     s32 temp_v1;
     u32 temp_a0;
 
-    temp_s0 = &((struct Context_func_80257360_de *)(arg0))->lock;
+    temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
     temp_a0 = func_802BCF30_de();
     temp_v1 = temp_s0->locked + 1;
     temp_s0->locked = temp_v1;
@@ -220,7 +220,7 @@ void func_802587A4_de(s32 *arg0) {
     s32 temp_v1;
     u32 temp_v0;
 
-    temp_s0 = &((struct Context_func_80257360_de *)(arg0))->lock;
+    temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
     temp_v0 = func_802BCF30_de();
     temp_v1 = temp_s0->locked - 1;
     temp_s0->locked = temp_v1;

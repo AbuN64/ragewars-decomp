@@ -11,15 +11,15 @@
 
 
 extern void func_802B2D80_de(void *);
-void func_8025B8BC_de(Slot_func_8025B8BC_de *base, s16 index)
+void func_8025B8BC_de(SlotRecAtB8 *base, s16 index)
 {
-  unsigned int offset = index * (sizeof(Slot_func_8025B8BC_de));
+  unsigned int offset = index * (sizeof(SlotRecAtB8));
   char *entry = (char *) offset;
-  Slot_func_8025B8BC_de *slots;
-  Slot_func_8025B8BC_de *selected;
+  SlotRecAtB8 *slots;
+  SlotRecAtB8 *selected;
   entry += (unsigned int) base;
   slots = base;
- do { func_802B2D80_de(0x84 + ((Slot_func_8025B8BC_de *) entry)->owner); entry = (char *) slots; entry += offset; selected = (Slot_func_8025B8BC_de *) entry; } while (0);
+ do { func_802B2D80_de(0x84 + ((SlotRecAtB8 *) entry)->owner); entry = (char *) slots; entry += offset; selected = (SlotRecAtB8 *) entry; } while (0);
   selected->flags |= 8;
 }
 
@@ -39,9 +39,9 @@ s32 func_8025B920_de(void *record, s16 value, s16 id) {
 
 /* Returns whether any of the sixteen occupied slots of a record, other than the one its header marks as local, holds the given value at slot offset 0xA8. */
 
-s32 func_8025BA4C_de(Record_func_8025BA4C_de *record, s32 value) {
+s32 func_8025BA4C_de(RecordRecAt4V3 *record, s32 value) {
     s32 i;
-    Slot_func_8025BA4C_de *slot = record->slots;
+    SlotRecAtA8 *slot = record->slots;
 
     for (i = 0; i < 16; i++, slot++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {
@@ -69,7 +69,7 @@ void func_8025BA9C_de(s32 arg0, s16 arg1) {
     if (((struct IntegerStateB4 *) base)->unk_10 != ((struct func_80245A10_S1 *) a0)->unk104) {
         s32 idx = ((struct IntegerStateB4 *) base)->unk_0;
         s32 addr = a0 + idx * 2;
-        func_802B2F00_de(s1, ((struct func_8025C458_S3 *) addr)->unkDC);
+        func_802B2F00_de(s1, ((struct ObjRecAtDC *) addr)->unkDC);
         if (func_802B2620_de(s1) != 0) {
             func_802B2F60_de(s1);
         }
@@ -132,7 +132,7 @@ void func_8025BB84_de(void *arg0, void *arg1, s32 arg2) {
     if (((struct View_func_8025AE1C_de *)(arg0))->trackId < 0x100) {
         if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
             func_80258D2C_de(((struct View_func_8025AE1C_de *)(arg0))->context) != 0) {
-            value = (s8)((Context_func_80257360_de *)((struct View_func_8025AE1C_de *)arg0)->context)->field2B94;
+            value = (s8)((ContextRecAt2BC0 *)((struct View_func_8025AE1C_de *)arg0)->context)->field2B94;
             goto store_value;
         }
     } else if (((struct View_func_8025AE1C_de *)(arg0))->fixed == 0 &&
@@ -155,7 +155,7 @@ void func_8025BD00_de(void **arg0) {
     var_s1 = (char *)((RecordD90 *)arg0)->slots;
     var_s0 = 0;
     do {
-        if (((SlotCC *)var_s1)->used != -1 && ((Header_func_8025B5F0_de *)(*arg0))->local != var_s0) {
+        if (((SlotCC *)var_s1)->used != -1 && ((HeaderRecAt102 *)(*arg0))->local != var_s0) {
             func_8025AE1C_de(var_s1);
             var_s2 += 1;
         }

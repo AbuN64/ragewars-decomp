@@ -101,8 +101,8 @@ void func_80286284_de(void *arg0) {
     u32 remove_value;
 
     count = 0;
-    total = ((Scene_func_8028B028_de *)arg0)->count;
-    objects = &((Scene_func_8028B028_de *)(arg0))->objects[0];
+    total = ((SceneRecAt10C0 *)arg0)->count;
+    objects = &((SceneRecAt10C0 *)(arg0))->objects[0];
     if (total > 0) {
         object_type = 2;
         skip_mask = 0x40000000;
@@ -113,7 +113,7 @@ void func_80286284_de(void *arg0) {
             void *next_object;
 
             next_object = (void *)*objectp;
-            if (*((Object_func_8028CAE0_de *)(next_object))->kind != object_type) {
+            if (*((ObjectRecAt1A4 *)(next_object))->kind != object_type) {
                 goto first_pass_done;
             }
             object = next_object;

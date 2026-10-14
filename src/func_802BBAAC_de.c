@@ -1,16 +1,29 @@
-#include "shared/func_802BB8B0_de_closed.h"
-#include "common/unused.h"
-#include "types.h"
 /* __osInsertTimer, drafted from ultralib src/os/timerintr.c. */
+#include "types.h"
 
+typedef void *OSMesg;
+typedef struct OSMesgQueue OSMesgQueue;
 
-u64 func_802BBAAC_de(struct OSTimer_s *t)
+typedef struct OSTimer_s {
+    struct OSTimer_s *next;
+    struct OSTimer_s *prev;
+    u64 interval;
+    u64 value;
+    OSMesgQueue *mq;
+    OSMesg msg;
+} OSTimer;
+
+extern OSTimer *D_800D5280;
+extern u32 func_802BCF30_de(void);
+extern void func_802BCF50_de(u32 mask);
+
+u64 func_802BBAAC_de(OSTimer *t)
 {
-    struct OSTimer_s *timep;
+    OSTimer *timep;
     u64 tim;
     u32 savedMask = func_802BCF30_de();
 
-    timep = ((struct OSTimer_s *)D_800D5280)->next;
+    timep = D_800D5280->next;
     tim = t->value;
     for (; timep != D_800D5280 && tim > timep->value; timep = timep->next) {
         tim -= timep->value;

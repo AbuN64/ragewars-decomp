@@ -30,7 +30,7 @@ extern f32 func_8024D398_de(Actor_func_802676EC_de *);
 extern f32 func_802726F8_de(Vec3 *, Vec3 *);
 
 f32 func_802676EC_de(Actor_func_802676EC_de *self, Target *target, Vec3 position, f32 radius, s32 falloff, s32 flags, Shield **found) {
-    Player_func_802676EC_de *player;
+    PlayerRecAt122C *player;
     s32 shielded;
     s32 scaled;
     s32 special;

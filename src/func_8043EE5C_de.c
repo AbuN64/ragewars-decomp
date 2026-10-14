@@ -7,11 +7,11 @@
 #include "shared/func_8021E2A0_de_closed.h"
 s32 func_802AAC28_de(s32 resource, s32 mode, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 flags);
 
-void func_8043EE5C_de(struct Item_func_8043F048_de *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context) {
+void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context) {
     struct ItemDef *def = item->def;
     s32 type = def->type;
     s32 index = def->index;
-    struct Player_func_8043F048_de *player = context->player;
+    struct PlayerRecAt64E *player = context->player;
     s32 available = 0;
     switch (type) {
     case 0x10FE:

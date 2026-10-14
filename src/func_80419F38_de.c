@@ -5,7 +5,7 @@
    at offset 0x44 is zero; func_80419F18_de sets the pending word and func_80419F24_de clears it. */
 
 
-s32 func_80419F38_de(struct Object_func_80419F38_de *object) {
+s32 func_80419F38_de(struct ObjectRecAt84 *object) {
     if (object->pending == 0) {
         return 1;
     }

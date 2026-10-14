@@ -12,7 +12,7 @@ extern FieldRow D_800E4EC4[];
 extern Handler8042931C D_800E4EC8;
 
 
-struct func_8021C9B4_S3;
+struct ObjRecAtCV1;
 
 s32 func_8042931C_us_rev1(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler8042931C *entry;
@@ -20,7 +20,7 @@ s32 func_8042931C_us_rev1(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    func_8021C9B4_S3 *actor;
+    ObjRecAtCV1 *actor;
 
     if (D_800E4EC8 != 0) {
         wildcard = 0x7530;

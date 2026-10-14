@@ -21,7 +21,7 @@ extern void func_80271F34_de(Vec3 *out, Vec3 *a, Vec3 *b);
 
 Vec3 func_80401564_de(f32 t) {
     s32 *track;
-    Key_func_80401564_de *key;
+    PositionKey *key;
     s32 count;
     f32 u;
     Vec3 result;
@@ -30,7 +30,7 @@ Vec3 func_80401564_de(f32 t) {
 
     track = func_8028FDB4_de(D_800E2830->unk4, 1);
     count = track[1];
-    key = (Key_func_80401564_de *)(track + 2);
+    key = (PositionKey *)(track + 2);
     if (count == 0) {
         result.x = 0.0f;
         result.y = 0.0f;

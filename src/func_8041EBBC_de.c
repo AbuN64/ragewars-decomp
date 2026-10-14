@@ -5,7 +5,7 @@
 
 
 
-extern struct Entry_func_804101BC_de D_80153F80[];
+extern struct EntryRecAt8V1 D_80153F80[];
 
 s32 func_8041EBBC_de(void) {
     s32 score;

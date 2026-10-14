@@ -46,7 +46,7 @@ s32 func_80216108_de(void *arg0)
                 }
                 audio = &D_801468A0;
                 if (audio->field98 != 0 &&
-                    ((struct func_80229BE0_S2 *) ((ObjectLinks1230 *) actor)->unk_5D8)->unk80 == 0xB &&
+                    ((struct ObjRecAt80 *) ((ObjectLinks1230 *) actor)->unk_5D8)->unk80 == 0xB &&
                     audio->fieldA0 > 0) {
                     return 9;
                 }

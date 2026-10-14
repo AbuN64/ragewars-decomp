@@ -18,7 +18,7 @@ extern s32 D_800D2AE0;
 extern char D_800E6058[];
 extern char D_800E6074[];
 
-s32 func_80446230_us_rev1(struct Field_func_8040A4A0_de *field) {
+s32 func_80446230_us_rev1(struct FieldRecAt14 *field) {
     if (D_800D2AE0 != 0) {
         field->text = D_800E6058;
     } else {

@@ -13,7 +13,7 @@ extern StunProtectionRules D_801468A0[];
 extern void func_80214178_de(char *, char *, s32);
 extern void func_802227F4_de(SharedPlayer *, SharedPlayer *, s32);
 
-extern void func_802391AC_de(View_func_80229814_de *, s32, s32, s32, s32, s32, s32, s32);
+extern void func_802391AC_de(ViewRecAt54D *, s32, s32, s32, s32, s32, s32, s32);
 
 void func_80229814_de(SharedPlayer *player, f32 amount) {
     f32 stun;
@@ -36,12 +36,12 @@ void func_80229814_de(SharedPlayer *player, f32 amount) {
         }
         player->views1C.view100_9.flags &= ~0x01000000;
         if (player->views5DC.view5DC_2.view != 0) {
-            if (((View_func_80229814_de *)player->views5DC.view5DC_2.view)->flash == 0) {
-                func_802391AC_de((View_func_80229814_de *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) func_80274564_de(7.5f), 0,
+            if (((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash == 0) {
+                func_802391AC_de((ViewRecAt54D *)player->views5DC.view5DC_2.view, 0x80, 0, 0, 0xFA, (u8) (u32) func_80274564_de(7.5f), 0,
                               (u8) (u32) ((player->views5E8.view11D8_149.stun * 0.06666667f - 1.5f) * 15.0f));
             } else {
-                ((View_func_80229814_de *)player->views5DC.view5DC_2.view)->flash = 3;
-                ((View_func_80229814_de *)player->views5DC.view5DC_2.view)->level = (u32) player->views5E8.view11D8_149.stun;
+                ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->flash = 3;
+                ((ViewRecAt54D *)player->views5DC.view5DC_2.view)->level = (u32) player->views5E8.view11D8_149.stun;
             }
         }
     }

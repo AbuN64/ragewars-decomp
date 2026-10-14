@@ -8,5 +8,5 @@
 
 
 s32 func_802B2620_de(void *arg0) {
-    return (((struct func_8020D280_S1 *) ((s8 *) ((((struct func_80203DF0_S3 *) ((s8 *) arg0))->unk3C * 0x30) + ((struct func_80203DF0_S3 *) ((s8 *) arg0))->unk40)))->unk28);
+    return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct ObjRecAt40V3 *) ((s8 *) arg0))->unk3C * 0x30) + ((struct ObjRecAt40V3 *) ((s8 *) arg0))->unk40)))->unk28);
 }

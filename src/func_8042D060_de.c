@@ -18,7 +18,7 @@ extern s32 func_80228070_de(World *world);
 extern s32 func_802281F0_de(World *world);
 extern s32 func_802282EC_de(World *world);
 s32 func_8042D060_de(void) {
-    Settings_func_8042D060_de *settings;
+    SettingsRecAt24 *settings;
     settings = &D_8014561C.settings;
     if (settings->timeSetting > 0 && D_8014561C.rules.timeLeft == 0.0f) {
         return MATCH_END_TIME_UP;

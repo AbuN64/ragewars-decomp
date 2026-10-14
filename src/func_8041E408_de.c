@@ -8,7 +8,7 @@
 #include "types.h"
 
 extern void *D_800E39C0;
-extern struct Request_func_8041E100_de D_80153F80[];
+extern struct RequestRecAt10 D_80153F80[];
 extern struct TextEntry D_800E381C[][17];
 extern u8 *func_802A025C_de(u8 *, u8 *);
 enum { DRAW_ICON=909, DRAW_NAME=911, DRAW_VARIANT=910, DRAW_FIRST=912, DRAW_SECOND=913 };

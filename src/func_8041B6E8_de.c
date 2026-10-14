@@ -11,7 +11,7 @@
 extern void func_802995D4_de(s32 id, s32 command, s32 arg2, s32 arg3, s32 arg4);
 extern Node_func_8041B6E8_de *func_8040EC30_de(void *root, s32 id);
 
-void func_8041B6E8_de(Owner_func_8041B6E8_de *owner, s32 index, s32 id) {
+void func_8041B6E8_de(OwnerRecAt8V1 *owner, s32 index, s32 id) {
     Context_func_8041B6E8_de *context;
     Node_func_8041B6E8_de *node;
     s32 i;

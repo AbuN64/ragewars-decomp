@@ -11,16 +11,16 @@ extern f32 func_80274808_de(f32, f32, f32);
 extern void func_802727D8_de(Matrix *);
 extern void func_80273C68_de(Matrix *, f32);
 extern void func_80272898_de(Matrix *, Vec3 *, Vec3 *);
-extern void func_802185D0_de(Menu_func_80218F9C_de *, Item_func_80218F9C_de *, s32, void *);
+extern void func_802185D0_de(Menu_func_80218F9C_de *, ItemRecAt18V1 *, s32, void *);
 
 void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 arg1, void *player) {
     Matrix matrix;
     Vec3 position;
-    Item_func_80218F9C_de items[4];
+    ItemRecAt18V1 items[4];
     Vec3 offset;
     s32 i;
-    Slot_func_80218F9C_de *slot;
-    Item_func_80218F9C_de *item;
+    SlotRecAt10 *slot;
+    ItemRecAt18V1 *item;
     f32 target;
 
     if (menu->active != 0) {

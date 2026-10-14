@@ -1,14 +1,12 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8020FDB0_H
 #define UNBAKE_SPAN_1000_CODE_8020FDB0_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 struct func_802100E0_S2;
-/* unbake published declaration: published_235b4e17fb5f2b18cd4a2a27 */
 typedef struct func_802100E0_S2 func_802100E0_S2;
 
 struct func_802100E0_S1;
-/* unbake published declaration: published_60107e7d799af6d2980da043 */
 struct func_802100E0_S1 {
     char pad0[0x62E];
     s16 unk62E;
@@ -17,11 +15,9 @@ struct func_802100E0_S1 {
 };
 
 struct func_802100E0_S1;
-/* unbake published declaration: published_72d3c954dbe4a9477d6d0c32 */
 typedef struct func_802100E0_S1 func_802100E0_S1;
 
 struct SharedPlayer_func_8020FDB0_de;
-/* unbake published declaration: published_ab90f95a265c7ca4588a3c6c */
 typedef struct SharedPlayer_func_8020FDB0_de SharedPlayer_func_8020FDB0_de;
 
 struct Body;
@@ -47,7 +43,6 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 struct func_80209B64_S2;
-/* unbake published declaration: published_ad1094a296f07e78dd9600fa */
 struct SharedPlayer_func_8020FDB0_de {
     union {
         struct {
@@ -1471,18 +1466,15 @@ struct SharedPlayer_func_8020FDB0_de {
 };
 
 struct func_802100E0_S2;
-/* unbake published declaration: published_d67eed9c7c4e09308d56d0f1 */
 struct func_802100E0_S2 {
     char pad0[0x2E4];
     s32 unk2E4;
 };
 
 struct Brain_func_8020FDB0_de;
-/* unbake published declaration: published_eece28ee3f1d0d40f1c4c1ba */
 typedef struct Brain_func_8020FDB0_de Brain_func_8020FDB0_de;
 
 struct Brain_func_8020FDB0_de;
-/* unbake published declaration: published_fd67d5ce5f98c71c7a7f5e75 */
 struct Brain_func_8020FDB0_de {
     SharedPlayer_func_8020FDB0_de *player;
     char pad4[0x2E0];

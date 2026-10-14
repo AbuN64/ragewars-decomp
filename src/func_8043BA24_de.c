@@ -5,7 +5,7 @@
    0x4B0 equal to one. */
 
 
-extern struct Entry_func_8043BA24_de *D_800E59E0;
+extern struct EntryRecAt4B0 *D_800E59E0;
 
 s32 func_8043BA24_de(void) {
     s32 count = 0;

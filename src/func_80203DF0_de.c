@@ -14,10 +14,10 @@ extern void func_80273C68_de(void *arg0, f32 arg1);
 
 
 
-void func_80203DF0_de(void *arg0, func_80203DF0_S1 *event) {
-    func_80203DF0_S2 *temp_a0;
-    Segment_func_80203278_de *temp_s1;
-    func_80203DF0_S2 *temp_v0;
+void func_80203DF0_de(void *arg0, ObjRecAt8V1 *event) {
+    ObjRecAt294 *temp_a0;
+    SegmentRecAt71 *temp_s1;
+    ObjRecAt294 *temp_v0;
 
     struct NavigationTrack *track;
 

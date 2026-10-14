@@ -97,7 +97,7 @@ struct Shared_MenuContext {
     u32 unknown5C;
     u32 unknown60;
     u32 unknown64[1];
-    Entry_func_804030E0_de spec; /* 0x68..0xB3 */
+    EntryRecAt48 spec; /* 0x68..0xB3 */
     s32 fieldB4;
     s32 mode; /* 0xB8 */
     u32 unknownBC[9];

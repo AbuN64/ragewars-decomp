@@ -95,7 +95,7 @@ extern Node_func_8026BC60_de *D_8010C57C;
 extern s32 D_80110640;
 extern Node_func_8026BC60_de *D_8010C584;
 extern void **D_8011064C;
-extern Item_func_8026BC60_de D_8010C590[];
+extern ItemRecAt1C D_8010C590[];
 extern Node_func_8026BC60_de D_801144D0[];
 extern struct Shape_typemap_165 D_801157D8[];
 
@@ -133,7 +133,7 @@ void func_8026BC60_de(void) {
     Node_func_8026BC60_de *parent;
     Node_func_8026BC60_de *node;
     s32 *data;
-    Item_func_8026BC60_de *item;
+    ItemRecAt1C *item;
     struct Shape_typemap_165 *param;
 
     if (D_80110640 != 0) {

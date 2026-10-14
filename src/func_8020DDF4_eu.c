@@ -3,11 +3,11 @@
 extern f32 func_8029DD3C_de(f32);
 s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4);
 f32 func_80285630_de(s32 arg0);
-s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral);
+s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral);
 
 /* Refine a launch angle by testing a ballistic arc against the destination.
  * State 0 initializes the bounds; later calls bisect the chosen quadrant. */
-s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
+s32 func_8020DDF4_eu(ActorRec *arg0) {
     Vec3 current;
     Vec3 delta;
     s32 first, last;
@@ -39,9 +39,9 @@ s32 func_8020DDF4_eu(Actor_func_8020E674_de *arg0) {
     s32 var_v0_5;
     BallisticResourceKeys *temp_v0_2;
     u32 var_s2;
-    Shared_func_8027ADBC_S4 *temp_s0_3;
-    Shared_func_8027ADBC_S5 *temp_v0_3;
-    Shared_func_8027ADBC_S5 *temp_v0_4;
+    BallisticParamsHolder *temp_s0_3;
+    BallisticParams *temp_v0_3;
+    BallisticParams *temp_v0_4;
 
     temp_s0 = arg0->instance->trajectoryMode;
     var_s2 = 0;

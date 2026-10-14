@@ -14,7 +14,7 @@
 
 
 
-extern Queue_func_8025CC90_de D_80108064[];
+extern QueueRec D_80108064[];
 extern func_80203E78_S1 *D_800D0D78;
 
 extern void func_80258740_de(Bank *);
@@ -33,7 +33,7 @@ extern void func_802B2ED0_de(char *, s32, s32);
 extern void func_802B2DE0_de(char *, s32);
 extern void func_802B2D80_de(char *);
 
-void func_8025CC90_de(Player_func_8025CC90_de *player) {
+void func_8025CC90_de(PlayerRecAt24 *player) {
     s32 rate;
     char *channel;
     s32 index;

@@ -211,7 +211,7 @@ void func_8024B990_de(void *arg0, void *arg1, void *arg2, Block24 *arg3) {
     s8 index;
     s32 one;
 
-    ((Object_func_8024B990_de *)arg0)->blocks[D_800D297C] = *arg3;
+    ((ObjectRecAt140 *)arg0)->blocks[D_800D297C] = *arg3;
     index = ((struct Actor_func_8024A7A0_de *)(arg0))->team;
     if (index != -1) {
         ((struct Actor_func_8024A7A0_de *)(arg0))->mask = 1 << index;

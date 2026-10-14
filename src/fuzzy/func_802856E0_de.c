@@ -3,7 +3,7 @@
 #include "common/unused.h"
 extern s32 func_802BCF30_de(void);
 extern void func_802BCF50_de(s32);
-extern f32 func_80264EE0_de(Player_func_80264EE0_de *);
+extern f32 func_80264EE0_de(PlayerRecAt8 *);
 
 f32 func_802856E0_de(func_80285D00_S1 *pool, Vec3 position) {
     f32 value = pool->baseLevel;

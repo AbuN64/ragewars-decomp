@@ -20,7 +20,7 @@ void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3) {
     s32 new_var;
     void *Shared_func_802B3480_de_v0;
     void *temp_a0;
-    Shared_func_802B3480_de_FuncPtr fn;
+    SharedRecV10 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
         Shared_func_802B3480_de_v0 = func_802B3BF8_de();

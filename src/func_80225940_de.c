@@ -34,7 +34,7 @@ extern void func_80442574_de(char *, char *, SharedPlayer_func_80225940_de *, vo
 extern SharedPlayer_func_80225940_de *func_8022A5F4_de(char *, s32);
 extern void func_8044972C_de(SharedPlayer_func_80225940_de *);
 
-void func_80225940_de(SharedPlayer_func_80225940_de *player, Body_func_80225940_de *body) {
+void func_80225940_de(SharedPlayer_func_80225940_de *player, BodyRecAt1C *body) {
     SharedPlayer_func_80225940_de *other;
     SharedPlayer_func_80225940_de *leader;
     s32 i;

@@ -8,7 +8,7 @@
 extern const float D_800CC740; /* followed by 1000000.0f */
 extern const double D_800CC748; /* 4294967296.0 */
 extern const float D_800CC750; /* 2147483648.0f */
-u32 func_802B2120_de(Obj_func_802B20D4_de *seq, f32 sec, u32 tempo)
+u32 func_802B2120_de(ObjRecAt18V1 *seq, f32 sec, u32 tempo)
 {
     f32 ticks;
     f64 t;

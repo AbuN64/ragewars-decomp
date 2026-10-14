@@ -11,7 +11,7 @@ typedef struct Owner Owner;
 
 void func_802043E0_de(char *arg0, char *arg1) {
     Owner *owner = (void *)arg0;
-    func_802043E0_S2 *event = (void *)arg1;
+    ObjRecAt30 *event = (void *)arg1;
     char *base = owner->track + 0x14;
     Hook *hook = event->unk30;
 

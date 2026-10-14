@@ -8,7 +8,7 @@
 extern s32 D_8015375C;
 extern char D_800D7794[];
 
-s32 func_8040A458_de(struct func_80254D70_S1 *record) {
+s32 func_8040A458_de(struct ObjRecAt14V1 *record) {
     if (D_8015375C != 0) {
         record->unk14 = D_800D7794;
     }

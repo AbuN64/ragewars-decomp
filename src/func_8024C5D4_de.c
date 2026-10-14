@@ -11,7 +11,7 @@ extern void func_8026E5E0_de(void *arg0, s32 arg1, s32 arg2, void *arg3, void *a
 
 void func_8024C5D4_de(void *arg0, void *arg1, s32 arg2, s32 arg3)
 {
-    func_8024C5C4_S1 *object = arg0;
+    ObjRecAt17C *object = arg0;
   func_8024C5C4_S2 *temp_v0;
   s32 temp_s1;
   s32 mask = 1 << arg2;

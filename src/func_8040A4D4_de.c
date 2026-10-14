@@ -11,7 +11,7 @@ extern int D_800D37A8;
 extern int D_800D37AC;
 extern int D_800D37B0;
 
-int func_8040A4D4_de(func_80254D70_S1 *out) {
+int func_8040A4D4_de(ObjRecAt14V1 *out) {
     switch (D_800E28BC->depth) {
     case 8:
     default:

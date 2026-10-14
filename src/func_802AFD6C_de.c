@@ -12,7 +12,7 @@ extern void func_802B2480_de(void *, void * *);
 
 
 void func_802AFD6C_de(void *arg0, Node_func_802AFD6C_de *arg1) {
-    func_802B4E3C_S1 *object = arg0;
+    ObjRecAt8V3 *object = arg0;
     s32 saved;
     Node_func_802AFD6C_de **link;
     Node_func_802AFD6C_de *node;

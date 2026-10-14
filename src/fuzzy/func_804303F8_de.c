@@ -3,7 +3,7 @@
 #include "span_16E000/code_8042F988.h"
 s32 func_80299B4C_de();                                /* extern */
 s32 func_8040EBD0_de(void *);                          /* extern */
-Node_func_8040EF84_de *func_8041B7FC_de(s32, s32);                      /* extern */
+NodeRecAt44 *func_8041B7FC_de(s32, s32);                      /* extern */
 void func_8041B8DC_de(s32, s32, void *);                  /* extern */
 void func_80433BCC_de(s32);                               /* extern */
 void func_80433D38_de(s32);                               /* extern */
@@ -15,9 +15,9 @@ s32 func_804303F8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 temp_s0;
     s32 temp_s1;
     s32 temp_v0;
-    Node_func_8040EF84_de *var_s0;
-    Node_func_8040EF84_de *var_s0_2;
-    Node_func_8040EF84_de *var_s0_3;
+    NodeRecAt44 *var_s0;
+    NodeRecAt44 *var_s0_2;
+    NodeRecAt44 *var_s0_3;
 
     temp_s1 = arg2 & 0xFFFF;
     temp_v0 = D_800E54A4->players[temp_s1].state;

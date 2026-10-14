@@ -6,7 +6,7 @@
 
 
 
-void func_80275AA4_de(Header_func_80275AA4_de *dst, Packed *src, char *base, int unused, char *extra) {
+void func_80275AA4_de(HeaderRecAt1C *dst, Packed *src, char *base, int unused, char *extra) {
     int i;
 
     dst->unk0 = src->unk0;

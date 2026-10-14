@@ -15,7 +15,7 @@
 
 /** Zero the object's vector fields and reset the scale field to the default. */
 void func_80239D90_de(void *arg0) {
-    struct Record_func_80239DE8_de *o = arg0;
+    struct RecordRecAt18 *o = arg0;
     struct Channel *v0;
     struct Channel *v1;
     struct Channel *v2;

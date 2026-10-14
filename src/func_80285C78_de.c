@@ -15,7 +15,7 @@ extern void func_80255ED8_de(void *, void *);
 
 
 
-static inline IntrusiveList *active_list(Pool_func_80285B64_de *pool) {
+static inline IntrusiveList *active_list(PoolRecAt28V1 *pool) {
     return &pool->active;
 }
 

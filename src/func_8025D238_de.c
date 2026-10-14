@@ -17,7 +17,7 @@ s32 func_8025D238_de(void **arg0, s16 id, s16 avoid) {
     s32 total;
     s32 entry;
     s32 draw;
-    Context_func_8025D450_de *table;
+    ContextRecAt2BB8 *table;
     s32 result;
 
     total = 0;

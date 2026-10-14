@@ -13,9 +13,9 @@ extern Reusable *D_80103FCC;
 
 
 
-void func_8023EE60_de(Entry_func_8023EE60_de *arg0)
+void func_8023EE60_de(EntryRecAt24 *arg0)
 {
-    Entry_func_8023EE60_de *e = arg0;
+    EntryRecAt24 *e = arg0;
     s32 counter = -1;
 
     if (e->dst != 0) {

@@ -7,10 +7,10 @@
    Returns zero. */
 
 
-extern s32 func_80265350_de(struct Record_func_80444C68_de *);
+extern s32 func_80265350_de(struct RecordRecAt14 *);
 extern s32 func_8040C3BC_de();
 
-s32 func_80445590_de(struct Record_func_80444C68_de *record) {
+s32 func_80445590_de(struct RecordRecAt14 *record) {
     if (func_80265350_de(record) != 0x400000) {
         record->flags |= 0x800000;
     } else {

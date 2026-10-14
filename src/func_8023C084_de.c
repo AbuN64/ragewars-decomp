@@ -10,7 +10,7 @@
 
 
 
-extern Entry_func_8023B9C0_eu D_80103F28[];
+extern EntryRecAt3 D_80103F28[];
 extern char D_8014E000;
 extern void func_802AD370_de(s32, s32, s32, s32, s32, s32);
 

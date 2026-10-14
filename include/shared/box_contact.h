@@ -3,10 +3,31 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 struct Object_func_8044A07C_de;
+/* A fixed point bone matrix: integer halves, then fraction halves. */
+typedef struct BoxContactBone {
+    s16 whole[4][4];
+    u16 fraction[4][4];
+} BoxContactBone;
 typedef struct BoxContactActor {
-    u8 reserved0[0x18];
+    u8 reserved0;
+    s8 animation;
+    u8 reserved2[0x16];
     s32 *kind;
-    u8 reserved1C[0x1BC];
+    u8 reserved1C[0x34];
+    Vec3 scale;
+    u8 reserved5C[0x18];
+    f32 transform[4][4];
+    u8 reservedB4[4];
+    BoxContactBone *bones;
+    u8 reservedBC[8];
+    s32 shapeId;
+    u8 reservedC8[8];
+    s32 shapeBank;
+    u8 reservedD4[0x14];
+    Box box;
+    u8 reserved100[0x7C];
+    u32 partMask;
+    u8 reserved180[0x58];
     struct Object_func_8044A07C_de *widget;
 } BoxContactActor;
 typedef struct ContactProjectile {
@@ -27,12 +48,20 @@ typedef struct ContactProjectile {
     u16 contactState;
 } ContactProjectile;
 typedef struct BoxContactMaterial {
-    u8 reserved0[4];
+    u32 flags;
     s8 kind, alternateKind;
     u8 reserved6[10];
     f32 response;
 } BoxContactMaterial;
-typedef struct BoxContactTransform { u32 words[28]; } BoxContactTransform;
+/* A collision part: its eight box corners, a sphere radius, flags and the part mask it belongs to. */
+typedef struct BoxContactTransform {
+    Vec3 corners[8];
+    f32 radius;
+    u8 reserved64;
+    u8 flags;
+    u8 reserved66[6];
+    u32 mask;
+} BoxContactTransform;
 typedef struct BoxContactPolygon {
     s32 type;
     f32 response;
@@ -49,6 +78,11 @@ typedef struct BoxContactPolygon {
     f32 t;
     Vec3 hit;
 } BoxContactPolygon;
+/* The parts of an animated shape: the byte stride of each part, then the part count; parts follow. */
+typedef struct BoxContactPartTable {
+    s32 stride;
+    s32 count;
+} BoxContactPartTable;
 typedef struct BoxContactRay {
     ContactProjectile *projectile;
     u8 reserved4[0x3C];
@@ -56,7 +90,8 @@ typedef struct BoxContactRay {
     Vec3 start, end, direction;
     u8 reserved68[0x18];
     f32 slack;
-    u8 reserved84[0x2C];
+    Box bounds;
+    u8 reserved9C[0x14];
     BoxContactPolygon nearest;
 } BoxContactRay;
 typedef struct ContactEffectStyle {

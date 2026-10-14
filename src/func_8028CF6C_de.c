@@ -9,7 +9,7 @@ void *func_8028CF6C_de(void *arg0, s32 arg1) {
     if (arg1 == -1) {
         goto ret_null;
     }
-    result = func_8028FDB4_de(((struct func_8028CF7C_S1 *) ((s8 *) arg0))->unk78, arg1);
+    result = func_8028FDB4_de(((struct ObjRecAt78V1 *) ((s8 *) arg0))->unk78, arg1);
     goto end;
 ret_null:
     result = 0;

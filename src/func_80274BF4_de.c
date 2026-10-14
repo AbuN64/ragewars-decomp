@@ -9,7 +9,7 @@ extern char D_800C49A0_de;
 
 void func_80274BF4_de(void *arg0)
 {
-    func_80274C64_S1 *o = arg0;
+    ObjRecAt2CV1 *o = arg0;
     f32 magSq;
     f32 mag;
     f32 zOut;

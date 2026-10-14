@@ -57,39 +57,31 @@
 #include "common/draft_fields_func_8028D964_de.h"
 #ifndef UNBAKE_SPAN_1000_CODE_8020EAE0_H
 #define UNBAKE_SPAN_1000_CODE_8020EAE0_H
-#include "../types.h"
+#include "types.h"
 #include "common/draft_fields_func_8020F5A4_de.h"
 struct func_8020F93C_S1;
-/* unbake published declaration: published_05f0862f18f519bde7d3954f */
 typedef struct func_8020F93C_S1 func_8020F93C_S1;
 
 struct func_8020F444_S3;
-/* unbake published declaration: published_11daeca208a7f90fc85f9e39 */
 typedef struct func_8020F444_S3 func_8020F444_S3;
 
-/* unbake published declaration: published_1200409ce4996aa5da883b6c */
 
 
-/* unbake published declaration: published_120cd997fc60799c06981bec */
 extern float D_800C1EE4_de;
 
 struct ObjectLinks1458;
-/* unbake published declaration: published_14bf456c163516dbdb4ebe76 */
 struct ObjectLinks1458 {
     char pad0[0x1454];
     char * unk_1454;
 };
 
 struct func_8020F444_S2;
-/* unbake published declaration: published_228f954ef569fe4c3dbb8e1d */
 typedef struct func_8020F444_S2 func_8020F444_S2;
 
 struct ObjectLinks1458;
-/* unbake published declaration: published_2a667e6a4c62cc6ad9a7cb1c */
 typedef struct ObjectLinks1458 ObjectLinks1458;
 
 struct Node_func_8020F150_de;
-/* unbake published declaration: published_b22c47375fc66ad1f761f998 */
 struct Node_func_8020F150_de {
     s32 id;
     char pad4[0xC];
@@ -100,18 +92,15 @@ struct Node_func_8020F150_de {
 
 struct Node_func_8020F150_de;
 struct func_8020F150_S1;
-/* unbake published declaration: published_33ad3e45a41792dfd2bb4fe7 */
 struct func_8020F150_S1 {
     char pad0[0x24];
     struct Node_func_8020F150_de * unk24;
 };
 
 struct Actor1DC;
-/* unbake published declaration: published_37ddf4ba82244947ea211aeb */
 typedef struct Actor1DC Actor1DC;
 
 struct func_8020F93C_S1;
-/* unbake published declaration: published_445c22bb552c1ab023612ea8 */
 struct func_8020F93C_S1 {
     char pad0[0x38];
     s32 unk38;
@@ -122,7 +111,6 @@ struct func_8020F93C_S1 {
 };
 
 struct func_8020EAE0_S1;
-/* unbake published declaration: published_452b15da74eb12c67001a6f7 */
 struct func_8020EAE0_S1 {
     char pad0[0x4];
     s32 unk4;
@@ -147,15 +135,12 @@ struct func_8020EAE0_S1 {
 };
 
 struct func_8020EE50_S1;
-/* unbake published declaration: published_48c7119698252a40ba900175 */
 typedef struct func_8020EE50_S1 func_8020EE50_S1;
 
 struct ObjectLinks40;
-/* unbake published declaration: published_4becbad3d729d038243561a1 */
 typedef struct ObjectLinks40 ObjectLinks40;
 
 struct func_8020EEA4_S2;
-/* unbake published declaration: published_52db00ee9e16be6ee624cf31 */
 struct func_8020EEA4_S2 {
     char pad0[0xC];
     u16 unkC;
@@ -164,15 +149,13 @@ struct func_8020EEA4_S2 {
 };
 
 struct func_8020F444_S3;
-/* unbake published declaration: published_5981aa58897157ba4e45074e */
 struct func_8020F444_S3 {
     char pad0[0x1A4];
     s8 unk1A4;
 };
 
-struct Obj_func_8020F8F0_de;
-/* unbake published declaration: published_59a6345e3af94473577a2421 */
-struct Obj_func_8020F8F0_de {
+struct ObjRecAt28C;
+struct ObjRecAt28C {
     char pad[0x38];
     s32 count;
     int keys[10];
@@ -184,28 +167,22 @@ struct Obj_func_8020F8F0_de {
 };
 
 struct Actor1DC;
-/* unbake published declaration: published_64278d94a24014d552de4c45 */
 struct Actor1DC {
     char pad0[0x1D8];
     char **info;
 };
 
 struct func_8020EAE0_S1;
-/* unbake published declaration: published_6f8c0f8190f441514bb10ae8 */
 typedef struct func_8020EAE0_S1 func_8020EAE0_S1;
 
-/* unbake published declaration: published_715897414a07df14fc04b063 */
 extern s32 func_8020F55C_de(s32 arg0);
 
-/* unbake published declaration: published_71dd46e0dc626560dc6e6495 */
 extern s32 func_8020F614_de(void);
 
 struct Node_func_8020F150_de;
-/* unbake published declaration: published_730738ddd80344c5f13152bb */
 typedef struct Node_func_8020F150_de Node_func_8020F150_de;
 
 struct Func8020ED50Arg;
-/* unbake published declaration: published_730e5977d481df46ec060a7c */
 struct Func8020ED50Arg {
     char pad0[4];
     s32 field4;
@@ -222,11 +199,9 @@ struct Func8020ED50Arg {
     s32 releaseFlags[3];
 };
 
-/* unbake published declaration: published_7551b5503870154e34987296 */
 extern s32 func_8020F57C_de(s32 arg0);
 
 struct func_8020EE50_S1;
-/* unbake published declaration: published_75b5d2b96553d62aef9328e7 */
 struct func_8020EE50_S1 {
     char pad0[0x10];
     void * unk10;
@@ -237,14 +212,11 @@ struct func_8020EE50_S1 {
 };
 
 struct Func8020ED50Arg;
-/* unbake published declaration: published_8d2e88097e947fc00b07c818 */
 typedef struct Func8020ED50Arg Func8020ED50Arg;
 
-/* unbake published declaration: published_98737a6202b7debdbb223b2d */
 
 
 struct func_8020F2A8_S1;
-/* unbake published declaration: published_98df532cc89fc143b0347ce3 */
 struct func_8020F2A8_S1 {
     char pad0[0x4];
     s32 unk4;
@@ -259,11 +231,9 @@ struct func_8020F2A8_S1 {
 };
 
 struct func_8020F150_S1;
-/* unbake published declaration: published_9a0a5f2115fe0969b73262dc */
 typedef struct func_8020F150_S1 func_8020F150_S1;
 
 struct func_8020F984_S2;
-/* unbake published declaration: published_9e795483c480eecdb91819be */
 struct func_8020F984_S2 {
     char pad0[0x38];
     s32 unk38;
@@ -275,22 +245,17 @@ struct func_8020F984_S2 {
     s32 unk94;
 };
 
-struct Obj_func_8020F8F0_de;
-/* unbake published declaration: published_b0af7916e5660821a7cb04cc */
-typedef struct Obj_func_8020F8F0_de Obj_func_8020F8F0_de;
+struct ObjRecAt28C;
+typedef struct ObjRecAt28C ObjRecAt28C;
 
-/* unbake published declaration: published_b631cd0063bbe8d1751bcfa2 */
 extern float D_800C1EE0_de;
 
-/* unbake published declaration: published_b8340c0ea1af745761b2bf4f */
 
 
 struct func_8020F984_S2;
-/* unbake published declaration: published_b88852b06289f30d08398a2b */
 typedef struct func_8020F984_S2 func_8020F984_S2;
 
 struct func_8020EEA4_S3;
-/* unbake published declaration: published_cab54bf21082d917067ac26d */
 struct func_8020EEA4_S3 {
     char pad0[0x10];
     void * unk10;
@@ -299,25 +264,20 @@ struct func_8020EEA4_S3 {
 };
 
 struct func_8020EEA4_S2;
-/* unbake published declaration: published_cb4600820e90837be4547bf1 */
 typedef struct func_8020EEA4_S2 func_8020EEA4_S2;
 
 struct func_8020F2A8_S1;
-/* unbake published declaration: published_d2947bc71306587832c21328 */
 typedef struct func_8020F2A8_S1 func_8020F2A8_S1;
 
-/* unbake published declaration: published_dd6653a164f5941b4d193f74 */
 extern float D_800C1EDC_de;
 
 struct ObjectLinks40;
-/* unbake published declaration: published_e4ddf34a4e336fcee680f302 */
 struct ObjectLinks40 {
     unsigned char padding_0[60];
     Actor1DC *unk_3C;
 };
 
 struct func_8020F444_S2;
-/* unbake published declaration: published_ef74726fbacc4fa315b61528 */
 struct func_8020F444_S2 {
     char pad0[0x10];
     void * unk10;
@@ -326,7 +286,6 @@ struct func_8020F444_S2 {
 };
 
 struct func_8020EEA4_S3;
-/* unbake published declaration: published_fad9ce4788895c865c9ef2f7 */
 typedef struct func_8020EEA4_S3 func_8020EEA4_S3;
 
 extern int func_8020EF60_us(void * arg0);

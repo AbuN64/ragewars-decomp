@@ -12,8 +12,8 @@ extern s32 D_800CC374;
 extern s32 D_800E28D0,D_800E28D4;
 extern s32 D_800E28D8;
 extern u8 D_800E28DB;
-extern struct Shape_func_8024A5A8_de_2 D_800DE8A8[];
-extern struct Shape_func_8024A5A8_de_2 D_800DE934[];
+extern struct ShapeRecAt18V2 D_800DE8A8[];
+extern struct ShapeRecAt18V2 D_800DE934[];
 extern Rec_func_8024C92C_de D_800DE9C0[];
 extern char D_800E2A14;
 extern char D_800E2A18;
@@ -37,7 +37,7 @@ void func_8040BBB0_de(void) {
     s32 var_a0;
     s32 temp_v0;
     s32 var_v1;
-    struct Shape_func_8024A5A8_de_2 *var_s0;
+    struct ShapeRecAt18V2 *var_s0;
     var_s0 = NULL;
     D_80141000 = 2;
     if (D_800E28D8 == -1) {

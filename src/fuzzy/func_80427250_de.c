@@ -7,7 +7,7 @@
 #include "common/draft_fields_func_8028D474_de.h"
 #include "common/draft_fields_func_8028D964_de.h"
 
-extern struct Entry_func_8041EB50_de D_800E4694[];
+extern struct EntryRecAt0V1 D_800E4694[];
 extern s32 func_80265650_de(u8 *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_80428158_de(s32, s32);

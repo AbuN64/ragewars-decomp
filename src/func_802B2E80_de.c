@@ -10,8 +10,8 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 
-void func_802B2E80_de(struct Obj_func_802B2F60_de *arg0, s32 arg1) {
-    Params_func_802B2E80_de p;
+void func_802B2E80_de(struct ObjRecAt40V2 *arg0, s32 arg1) {
+    ParamsRecAt8V3 p;
     s32 acc;
 
     acc = arg0->field40;

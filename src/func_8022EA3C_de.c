@@ -161,24 +161,24 @@ void func_8022EC3C_de(void *object) {
     int suppress = 0;
     float value;
 
-    if (((Actor_func_8022ED48_de *)object)->unk_0x086C == 0x1144) {
-        suppress = ((Actor_func_8022ED48_de *)object)->unk_0x010E == 0;
+    if (((ActorRecAt16E0 *)object)->unk_0x086C == 0x1144) {
+        suppress = ((ActorRecAt16E0 *)object)->unk_0x010E == 0;
     }
-    if (((Actor_func_8022ED48_de *)object)->ownerId == D_800CE47C) {
-        ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x8A2;
+    if (((ActorRecAt16E0 *)object)->ownerId == D_800CE47C) {
+        ((ActorRecAt16E0 *)object)->unk_0x086C = 0x8A2;
         return;
     }
     if (!suppress) {
-        value = ((Actor_func_8022ED48_de *)object)->unk_0x06C0;
+        value = ((ActorRecAt16E0 *)object)->unk_0x06C0;
         if (D_800C2E88_de <= value) {
-            ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x8A2;
+            ((ActorRecAt16E0 *)object)->unk_0x086C = 0x8A2;
             return;
         }
         if (value <= D_800C2E8C_de) {
-            ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x8A7;
+            ((ActorRecAt16E0 *)object)->unk_0x086C = 0x8A7;
             return;
         }
-        ((Actor_func_8022ED48_de *)object)->unk_0x086C = 0x14;
+        ((ActorRecAt16E0 *)object)->unk_0x086C = 0x14;
     }
 }
 
@@ -217,7 +217,7 @@ void func_8022ED24_de(void) {
 }
 
 extern s32 D_800CED30;
-void func_8022ED48_de(Actor_func_8022ED48_de *arg0)
+void func_8022ED48_de(ActorRecAt16E0 *arg0)
 {
   s32 temp_v0;
   temp_v0 = arg0->flags & 0xFF7FFFFF;
@@ -298,7 +298,7 @@ void func_8022EDFC_de(void *arg0) {
         break;
     }
     func_80218464_de((char *)arg0 + 0x938);
-    ((Actor_func_8022ED48_de *)arg0)->unk_0x11B4 = 0;
+    ((ActorRecAt16E0 *)arg0)->unk_0x11B4 = 0;
     func_80214178_de(&((Shared_ActorView *)arg0)->weapon, &((Shared_ActorView *)arg0)->weapon.behaviorFlags, 1);
     func_8021B1E4_de(arg0, ((Shared_ActorView *)arg0)->spawn, 0, 1);
     func_80226708_de(arg0);

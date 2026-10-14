@@ -19,7 +19,7 @@ void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
     p = arg1;
     saved = func_802BCF30_de();
     func_80255CA0_de(arg0, 0, 4);
-    func_80255CA0_de(&((Pool_func_80285B64_de *)arg0)->active, 0, 4);
+    func_80255CA0_de(&((PoolRecAt28V1 *)arg0)->active, 0, 4);
     i = 0;
     if (arg2 > 0) {
         do {
@@ -28,6 +28,6 @@ void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
             p++;
         } while (i < arg2);
     }
-    ((Pool_func_80285B64_de *)arg0)->baseLevel = 0;
+    ((PoolRecAt28V1 *)arg0)->baseLevel = 0;
     func_802BCF50_de(saved);
 }

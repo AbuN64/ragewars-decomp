@@ -17,8 +17,8 @@ s32 func_80421BEC_de(void) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_a0;
-    Cell_func_80421BEC_de *temp_a0;
-    Cell_func_80421BEC_de *temp_v1;
+    CellRecAt1A *temp_a0;
+    CellRecAt1A *temp_v1;
 
     if (D_800E28E0 >= 2) {
         func_802A2394_de();

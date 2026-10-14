@@ -3,5 +3,5 @@
 extern char *D_80153C28;
 
 short func_80411CD0_de(int index) {
-    return ((struct func_8021C9B4_S3 *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkC;
+    return ((struct ObjRecAtCV1 *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkC;
 }

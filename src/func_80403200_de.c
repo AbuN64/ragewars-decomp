@@ -28,7 +28,7 @@ void func_80403200_de(char *name) {
     s32 i;
     s32 id;
     s32 n;
-    Entry_func_80403200_de *entries;
+    EntryRecAt18V5 *entries;
 
     if (D_800DE7E8 != 0) {
         loaded = func_8028FE3C_de(D_8011FEFC, D_8011BDFC, 0, &size);
@@ -38,7 +38,7 @@ void func_80403200_de(char *name) {
             table = func_8025193C_de(0, loaded, loaded, size, 0x33, 0, 0, &D_800E0B2C, 1);
         }
         i = 0;
-        entries = (Entry_func_80403200_de *)(*table + 2);
+        entries = (EntryRecAt18V5 *)(*table + 2);
         n = *D_8011FEFC - 1;
         for (; i < n; i++) {
             if (((s32 (*)(char *, char *))func_80293440_de)(name, entries[i].name) == 0) {

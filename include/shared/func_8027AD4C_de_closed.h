@@ -29,14 +29,14 @@ struct Shared_func_8027ADBC_S6 {
     Vec3 pos; /* +0x8: src/func_8027ADBC.c */
 };
 
-typedef struct Shared_func_8027ADBC_S5 Shared_func_8027ADBC_S5;
-struct Shared_func_8027ADBC_S5 { u16 gravityHi; u16 gravityLo; u16 speedHi; u16 speedLo; char pad8[8]; u16 unk10; u16 unk12; };
+typedef struct BallisticParams BallisticParams;
+struct BallisticParams { u16 gravityHi; u16 gravityLo; u16 speedHi; u16 speedLo; char pad8[8]; u16 unk10; u16 unk12; };
 
-typedef struct Shared_func_8027ADBC_S4 Shared_func_8027ADBC_S4;
-struct Shared_func_8027ADBC_S4 { u32 flags; char pad4[0xA]; s16 unkE; char pad10[0x20]; Shared_func_8027ADBC_S5 *unk30; char pad34[8]; };
+typedef struct BallisticParamsHolder BallisticParamsHolder;
+struct BallisticParamsHolder { u32 flags; char pad4[0xA]; s16 unkE; char pad10[0x20]; BallisticParams *unk30; char pad34[8]; };
 
 /* Phase-1 candidate; target/descriptor layouts and helper ABI remain unresolved. */
-typedef struct Shared_func_8027ADBC_S2 func_8027ADBC_S2;
+typedef struct Shared_func_8027ADBC_S2 SharedRecAt16E0V2;
 typedef struct Shared_func_8027ADBC_S3 func_8027ADBC_S3;
 typedef struct Shared_func_8027ADBC_S6 func_8027ADBC_S6;
 extern f32 D_800C4BCC_de;

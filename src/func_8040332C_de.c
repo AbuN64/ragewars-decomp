@@ -23,7 +23,7 @@ s32 func_8040332C_de(void) {
     s32 found;
     s32 *track;
     Triple *refs;
-    Item_func_8040332C_de *item;
+    ItemRecAt12 *item;
     s32 i;
     s32 n;
     s32 hit;

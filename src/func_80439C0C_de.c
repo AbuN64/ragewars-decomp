@@ -8,6 +8,6 @@
 
 
 
-struct Triple func_80439C0C_de(struct func_802062E0_S2 *object) {
+struct Triple func_80439C0C_de(struct ObjRecAt1CV3 *object) {
     return object->unk1C;
 }

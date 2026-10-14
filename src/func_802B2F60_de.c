@@ -12,7 +12,7 @@ extern void func_802B00D4_de(ALEventQueue *, void *, s32);
 
 
 
-void func_802B2F60_de(Obj_func_802B2F60_de *arg0) {
+void func_802B2F60_de(ObjRecAt40V2 *arg0) {
     s32 new_var;
     Buf16 sp10;
 

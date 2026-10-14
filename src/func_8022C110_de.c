@@ -14,7 +14,7 @@ extern Course *D_800E4680;
 extern char D_80102B00[][0x190];
 extern unsigned char func_8022F454_de(char *, int);
 
-void func_8022C110_de(Player_func_8022C110_de *player) {
+void func_8022C110_de(PlayerRecAt1450V2 *player) {
     short state;
 
     if (D_801462C8.started != 0) {

@@ -8,7 +8,7 @@
 extern Manager D_801047E0;
 extern s32 D_80100570;
 extern u32 D_80101190;
-extern HashNode_func_80252774_de *D_80101194;
+extern HashNodeRecAtCV2 *D_80101194;
 extern struct CartridgeReadWorker D_801011B8;
 extern s32 D_80105180;
 extern s32 D_80106248;
@@ -42,7 +42,7 @@ static inline void release(void) {
     } else func_802BCF50_de(token);
 }
 static inline void find(u32 key, Request_func_80252774_de **out) {
-    HashNode_func_80252774_de *node = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&D_80101190);
+    HashNodeRecAtCV2 *node = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&D_80101190);
     if (node->key != key) goto not_initial;
     *out=node->value;
     goto done;

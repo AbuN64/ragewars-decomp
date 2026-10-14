@@ -10,7 +10,7 @@
 
 extern f32 D_800D2988;
 
-u32 func_802337D0_de(State_func_802337D0_de *state) {
+u32 func_802337D0_de(StateRecAt10 *state) {
     f32 scale;
     f32 step;
 

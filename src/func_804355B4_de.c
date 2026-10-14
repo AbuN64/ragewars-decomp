@@ -6,7 +6,7 @@
    offset 0x58. */
 
 
-extern struct Player_func_80434750_de *D_800E54A4;
+extern struct PlayerRecAt58 *D_800E54A4;
 
 s32 func_804355B4_de(void) {
     s32 count = 0;

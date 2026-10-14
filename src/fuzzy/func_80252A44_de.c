@@ -16,12 +16,12 @@ extern s32 func_802BB420_de(void *queue, s32 msg, s32 flag);
 extern void func_80268CE0_de(s32);
 extern void func_8026925C_de(s32);
 
-extern struct Block_func_80255920_de *D_801011B0;
+extern struct BlockRecAt20 *D_801011B0;
 
 /* Draws the heap usage bar: a bordered box with one coloured band per tracked allocation, scaled to the
  * total heap size. */
 void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
-    struct Block_func_80255920_de *span;
+    struct BlockRecAt20 *span;
     Node80254C10 *node;
     u32 total;
     u32 lock;

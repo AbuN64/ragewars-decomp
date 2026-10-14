@@ -1,10 +1,9 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802661FC_H
 #define UNBAKE_SPAN_1000_CODE_802661FC_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct Target;
-/* unbake published declaration: published_0871fa10599e565f61bc8af8 */
 struct Target {
     u8 kind;
     char pad1[3];
@@ -12,11 +11,9 @@ struct Target {
 };
 
 struct Vec4s;
-/* unbake published declaration: published_0c865edb2a618622f60197ec */
 typedef struct Vec4s Vec4s;
 
 struct func_80267540_S2;
-/* unbake published declaration: published_0cc29fa3aabc46899a16810c */
 struct func_80267540_S2 {
     char pad0[0x18];
     s32 * unk18;
@@ -26,31 +23,25 @@ struct func_80267540_S2 {
     s32 unk100;
 };
 
-/* unbake published declaration: published_13116a096f040040bc3b02f0 */
 extern float D_800C442C_de;
 
 struct func_80267D80_S2;
-/* unbake published declaration: published_14cb26a083f43caa9a015cbc */
 typedef struct func_80267D80_S2 func_80267D80_S2;
 
 struct ResourceManagerState;
 struct Triple;
-/* unbake published declaration: published_69fa1ffa23d22c4a1dd509cd */
 typedef void ( *func_802671FC_de_Callback)(void *, void *, signed int, Vec3, struct ResourceManagerState);
 
-struct CallbackEntry_func_802671FC_de;
-/* unbake published declaration: published_16acf9f7a3b18d6b4f738bf7 */
-struct CallbackEntry_func_802671FC_de {
+struct CallbackEntryRecAt4V2;
+struct CallbackEntryRecAt4V2 {
     func_802671FC_de_Callback callback;
     s32 unused;
 };
 
-/* unbake published declaration: published_16f3c6018a40aec4d4c89dee */
 extern float D_800C4440_de;
 
 struct Actor_func_802676EC_de;
-struct Player_func_802676EC_de;
-/* unbake published declaration: published_1cfb15fa9deb7ffa24e9bee7 */
+struct PlayerRecAt122C;
 struct Actor_func_802676EC_de {
     char pad0[8];
     Vec3 position;
@@ -59,11 +50,10 @@ struct Actor_func_802676EC_de {
     char pad74[0x100 - 0x74];
     s32 flags;
     char pad104[0x1D8 - 0x104];
-    struct Player_func_802676EC_de *player;
+    struct PlayerRecAt122C *player;
 };
 
 struct SharedPlayer_func_80267958_de;
-/* unbake published declaration: published_761ea9413aee245e4465a395 */
 typedef struct SharedPlayer_func_80267958_de SharedPlayer_func_80267958_de;
 
 struct Body;
@@ -89,7 +79,6 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 struct func_8023945C_S1;
-/* unbake published declaration: published_820c53087080fd5a861aadfb */
 struct SharedPlayer_func_80267958_de {
     union {
         struct {
@@ -1513,7 +1502,6 @@ struct SharedPlayer_func_80267958_de {
 };
 
 struct Actor_func_80267958_de;
-/* unbake published declaration: published_2dad3e5d20d8eb5c4471ac04 */
 struct Actor_func_80267958_de {
     char pad0[0x1D8];
     SharedPlayer_func_80267958_de *player;
@@ -1521,28 +1509,22 @@ struct Actor_func_80267958_de {
 
 struct ResourceManagerState;
 struct Triple;
-/* unbake published declaration: published_3ae873962f1ea6ba71b3228b */
 typedef void ( *func_80267198_de_Callback)(void *, void *, signed int, Vec3, struct ResourceManagerState);
 extern void func_80267198_de(void *actor, void *source, s32 event, Vec3 position, struct ResourceManagerState state);
 
-struct CallbackEntry_func_80267198_de;
-/* unbake published declaration: published_30c751c8e108d6479ffbe788 */
-struct CallbackEntry_func_80267198_de {
+struct CallbackEntryRecAt4V1;
+struct CallbackEntryRecAt4V1 {
     func_80267198_de_Callback callback;
     s32 unused;
 };
 
-/* unbake published declaration: published_3161582c7be047fc5300e8ba */
 extern float D_800C4424_de;
 
-/* unbake published declaration: published_317c54920d66f730614eb556 */
 extern void func_80267D70_de(s32 arg0, void *arg1, s32 arg2, Vec3 arg3, s32 arg6);
 
-/* unbake published declaration: published_3eb6a3f0d63fca4d6131dd6f */
 extern void func_80267D68_de(int arg0, int arg1, int arg2, int arg3);
 
 struct func_8026745C_S1;
-/* unbake published declaration: published_41eabfb5540f2cb677ef10a2 */
 struct func_8026745C_S1 {
     char pad0[0x100];
     s32 unk100;
@@ -1550,12 +1532,10 @@ struct func_8026745C_S1 {
     char * unk1D8;
 };
 
-struct Object_func_8026730C_de;
-/* unbake published declaration: published_468bbe0e32f620cfec82177d */
-typedef struct Object_func_8026730C_de Object_func_8026730C_de;
+struct ObjectRecAtD0;
+typedef struct ObjectRecAtD0 ObjectRecAtD0;
 
 struct func_8026745C_S2;
-/* unbake published declaration: published_4e4b5a06c39e8077988e92c0 */
 struct func_8026745C_S2 {
     char pad0[0x8];
     Vec3 unk8;
@@ -1564,30 +1544,23 @@ struct func_8026745C_S2 {
 };
 
 struct func_8026745C_S2;
-/* unbake published declaration: published_4f06331f26e14d3e1ae7ef21 */
 typedef struct func_8026745C_S2 func_8026745C_S2;
 
 struct SevenBytes;
-/* unbake published declaration: published_52f0591921961480a4216922 */
 typedef struct SevenBytes SevenBytes;
 
-/* unbake published declaration: published_53a2329aa352350e889d6b4a */
 extern float D_800C4420_de;
 
-struct CallbackEntry_func_802671FC_de;
-/* unbake published declaration: published_5668ea81c1ff96eaaa1dd391 */
-typedef struct CallbackEntry_func_802671FC_de CallbackEntry_func_802671FC_de;
+struct CallbackEntryRecAt4V2;
+typedef struct CallbackEntryRecAt4V2 CallbackEntryRecAt4V2;
 
-/* unbake published declaration: published_6c3a93c8c629814dd7f64950 */
 extern void func_80267C78_de(int arg0, int arg1, int arg2, int arg3);
 
 struct Actor_func_80267958_de;
-/* unbake published declaration: published_71bbcbaf7d87e0996b5aa38d */
 typedef struct Actor_func_80267958_de Actor_func_80267958_de;
 
 struct Actor_func_802676EC_de;
 struct Carrier;
-/* unbake published declaration: published_8786b582f150ffcfe691bbc3 */
 struct Carrier {
     struct Actor_func_802676EC_de *owner;
     char pad4[0x10];
@@ -1596,24 +1569,19 @@ struct Carrier {
 };
 
 struct func_8026745C_S1;
-/* unbake published declaration: published_8c0f9faa74ec6c904dcf0a83 */
 typedef struct func_8026745C_S1 func_8026745C_S1;
 
-struct CallbackEntry_func_80267198_de;
-/* unbake published declaration: published_95ec8fdb435bc9827ed4fa4b */
-typedef struct CallbackEntry_func_80267198_de CallbackEntry_func_80267198_de;
+struct CallbackEntryRecAt4V1;
+typedef struct CallbackEntryRecAt4V1 CallbackEntryRecAt4V1;
 
 struct Carrier;
-/* unbake published declaration: published_96d2a29da2330a8796a6d9ae */
 typedef struct Carrier Carrier;
 
 struct Actor_func_802676EC_de;
-/* unbake published declaration: published_9b7227f382cfba55d5f15894 */
 typedef struct Actor_func_802676EC_de Actor_func_802676EC_de;
 
-struct Object_func_8026730C_de;
-/* unbake published declaration: published_a757ed574ca103eea8cf303d */
-struct Object_func_8026730C_de {
+struct ObjectRecAtD0;
+struct ObjectRecAtD0 {
     u8 type;
     u8 pad1[0x17];
     s32 *kind;
@@ -1622,7 +1590,6 @@ struct Object_func_8026730C_de {
 };
 
 struct Vec4s;
-/* unbake published declaration: published_b2b54a80970594e26b101f53 */
 struct Vec4s {
     s16 x;
     s16 y;
@@ -1630,32 +1597,26 @@ struct Vec4s {
     s16 w;
 };
 
-/* unbake published declaration: published_bec9a39278c3b2411528ff3e */
 extern float D_800C9538;
 
 struct func_80267540_S2;
-/* unbake published declaration: published_ca4479af19fd4f19fbebf837 */
 typedef struct func_80267540_S2 func_80267540_S2;
 
 struct Node_func_80267CE4_de;
-/* unbake published declaration: published_d6e404ad0f61b2ec2ce4f0f2 */
 struct Node_func_80267CE4_de {
     s32 unused;
     struct Node_func_80267CE4_de *next;
 };
 
 struct func_80267D80_S2;
-/* unbake published declaration: published_dc72f70344e9c2a27f1f8b04 */
 struct func_80267D80_S2 {
     char pad0[0x774];
     Triple unk774;
 };
 
-/* unbake published declaration: published_dd7b39af620039e39f021dc4 */
 extern float D_800C46E8_eu;
 
 struct SevenBytes;
-/* unbake published declaration: published_f001c92bba508e1c8b154fa9 */
 struct SevenBytes {
     u8 a;
     u8 b;
@@ -1666,24 +1627,18 @@ struct SevenBytes {
     u8 g;
 };
 
-/* unbake published declaration: published_df58342423bd226a8c2570fd */
 extern void func_80267CE4_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, SevenBytes arg6);
 
-/* unbake published declaration: published_e3f5949d065b980eda2ef949 */
 extern float D_800C4428_de;
 
 struct Node_func_80267CE4_de;
-/* unbake published declaration: published_f6462c73aafbac0c3e7f8257 */
 typedef struct Node_func_80267CE4_de Node_func_80267CE4_de;
 
-/* unbake published declaration: published_f89328ae625dba9cc7779fa1 */
 extern float D_800C4430_de;
 
 struct Target;
-/* unbake published declaration: published_f9002e1d48151314aa14cf3b */
 typedef struct Target Target;
 
-/* unbake published declaration: published_ff6244b5cd226bc5580f80d7 */
 extern void func_802671FC_de(void *arg0, void *arg1, s32 arg2, Vec3 arg3, ResourceManagerState arg6);
 
 #endif

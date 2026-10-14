@@ -11,9 +11,9 @@
 
 extern unsigned char *D_800E4680;
 
-void func_80286950_de(World_func_80286950_de *world) {
-    Object_func_80286950_de *object;
-    Descriptor_func_80286950_de *descriptor;
+void func_80286950_de(WorldRecAt1B660 *world) {
+    ObjectRecAt18 *object;
+    DescriptorRecAt20 *descriptor;
     s32 found;
     s32 i;
 

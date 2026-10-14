@@ -13,7 +13,7 @@ extern char *func_8028FDB4_de(s32 *, s32);
 
 
 void func_8025D350_de(void *arg0, s32 arg1) {
-    Player_func_8025CC90_de *player = arg0;
+    PlayerRecAt24 *player = arg0;
     f64 var_f2;
     s32 temp_v0_2;
     SongHeader *temp_v0;

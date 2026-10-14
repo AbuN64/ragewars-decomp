@@ -29,7 +29,7 @@ void func_8022BC94_de(void *arg0, s32 arg1) {
     Vec3 sp28;
     void *temp_s1;
     Shared_ActorView *temp_s2;
-    Shared_func_80227014_S4 *temp_v0;
+    SharedRecAt564V1 *temp_v0;
     ObjectLinks1DC_3 *object = arg0;
 
     if (object->unk_100 & 0x40000) {
@@ -42,7 +42,7 @@ void func_8022BC94_de(void *arg0, s32 arg1) {
                 if (temp_v0 != 0) {
                     sp28.x = temp_v0->position.x - object->unk_8.x;
                     sp28.y = 0.0f;
-                    sp28.z = ((Shared_func_80227014_S4 *)temp_s2->message)->position.z - object->unk_8.z;
+                    sp28.z = ((SharedRecAt564V1 *)temp_s2->message)->position.z - object->unk_8.z;
                     func_8024ADD0_de(arg0, &sp28, arg1);
                 }
             }

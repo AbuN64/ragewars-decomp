@@ -5,7 +5,7 @@
 /* Returns 1 when one of the object's ten entries at 0x3C matches its current value at 0x28C and the
    paired flag at 0x6C is set, and 0 otherwise or when the current value is zero. */
 
-int func_8020F8F0_de(Obj_func_8020F8F0_de *obj) {
+int func_8020F8F0_de(ObjRecAt28C *obj) {
     int i;
 
     if (obj->current == 0) {
@@ -23,7 +23,7 @@ s32 func_8020F93C_de(void *arg0)
 {
   s32 var_a1;
   s32 var_v1;
-  Obj_func_8020F8F0_de *var_a0;
+  ObjRecAt28C *var_a0;
   var_a0 = arg0;
   var_a1 = 0;
   if ((var_a0->count) == 0)
@@ -52,7 +52,7 @@ s32 func_8020F984_de(void *arg0) {
     s32 mask;
     s32 var_a1;
     s32 var_v1;
-    Obj_func_8020F8F0_de *var_a0;
+    ObjRecAt28C *var_a0;
 
     var_a0 = arg0;
     var_a1 = -1;

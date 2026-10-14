@@ -3,5 +3,5 @@
 
 s32 func_8025DF34_de(s16);
 void func_80279178_de(void *arg0) {
-    func_8025DF34_de((((struct func_802791A8_S1 *) ((s8 *) arg0))->unk6));
+    func_8025DF34_de((((struct ObjRecAt6V2 *) ((s8 *) arg0))->unk6));
 }

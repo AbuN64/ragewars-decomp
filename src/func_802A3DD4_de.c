@@ -11,7 +11,7 @@
 void func_802A3DD4_de(func_802A66B4_S1 *pool, Actor_func_802A274C_de *actor) {
     Morph storage;
     Morph *morph = &storage;
-    func_80212828_S7 *clock, *next;
+    ObjRecAt28V1 *clock, *next;
     Vtx *vertices;
     u32 count, i;
     s32 edges;

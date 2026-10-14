@@ -12,12 +12,12 @@ extern void func_8025AA2C_de(View_func_8025AB94_de *);
 extern void func_802B2F00_de(char *, s32);
 extern void func_802B2E80_de(char *, f32);
 
-static inline char *selectChannel(Context_func_8025AB94_de *context, s32 slot) {
+static inline char *selectChannel(ContextRecAt104 *context, s32 slot) {
     func_802B2F00_de(context->channels, context->slots[slot]);
     return context->channels;
 }
 
-static inline void apply(Context_func_8025AB94_de *context, s32 slot, f32 value, View_func_8025AB94_de *view) {
+static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, View_func_8025AB94_de *view) {
     char *channel = context->channels;
 
     func_802B2F00_de(channel, context->slots[slot]);
@@ -27,8 +27,8 @@ static inline void apply(Context_func_8025AB94_de *context, s32 slot, f32 value,
 }
 
 void func_8025AB94_de(View_func_8025AB94_de *view) {
-    Motion_func_8025AB94_de *motion;
-    Angles_func_8025AB94_de *angles;
+    MotionRecAt24 *motion;
+    AnglesRecAt8 *angles;
     s32 refreshed;
     s32 falling;
     f32 position;
@@ -38,7 +38,7 @@ void func_8025AB94_de(View_func_8025AB94_de *view) {
     f32 base;
     f32 result;
     char *channel;
-    Context_func_8025AB94_de *context;
+    ContextRecAt104 *context;
 
     refreshed = 0;
     motion = &view->motion;

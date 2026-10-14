@@ -7,7 +7,7 @@ extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044ED44[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void func_80404E28_de(s32);
 extern s32 func_80404F04_de(s32), func_80404F3C_de(s32), func_80405598_de(s32), func_80264580_de(s32);
-extern void func_80442574_de(char *, char *, func_8024795C_S2 *, func_80242278_S1 *, char *);
+extern void func_80442574_de(char *, char *, ObjRecAt5DC *, func_80242278_S1 *, char *);
 s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 {
     s32 result, busy, slot;

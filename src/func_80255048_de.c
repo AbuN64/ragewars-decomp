@@ -9,9 +9,9 @@
 
 extern s32 D_80105180[];
 
-Entry_func_80255048_de *func_80255048_de(s32 unused, EntryList *list, Entry_func_80255048_de **recent)
+EntryRecAt18V3 *func_80255048_de(s32 unused, EntryList *list, EntryRecAt18V3 **recent)
 {
-    Entry_func_80255048_de *e = list->first;
+    EntryRecAt18V3 *e = list->first;
 
     if (*recent == 0) {
         for (; e != 0; e = e->next) {

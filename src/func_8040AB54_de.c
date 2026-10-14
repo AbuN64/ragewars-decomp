@@ -11,7 +11,7 @@
 extern s32 D_80153788;
 extern void func_802649FC_de();
 
-void func_8040AB54_de(struct Record_func_8040AB54_de *record) {
+void func_8040AB54_de(struct RecordRecAtCV3 *record) {
     record->target->flags &= ~0x04000000;
     D_80153788 = 8;
     record->target->flags |= 8;

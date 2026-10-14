@@ -10,7 +10,7 @@
 
 
 
-extern struct Record_func_804053E0_de *D_800E2854;
+extern struct RecordRecAt4V2 *D_800E2854;
 extern s32 func_804057EC_de(s32);
 
 s32 func_804053E0_de(s32 index, s32 entry, s32 *out) {

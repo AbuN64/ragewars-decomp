@@ -29,7 +29,7 @@ void func_80402FB4_de(s32 owner, func_8020478C_S1 *obj) {
     s32 found;
     s32 i;
     s32 n;
-    Entry_func_80402FB4_de *entry;
+    EntryRecAt4V2 *entry;
     s32 id4;
     s32 idA;
 
@@ -44,7 +44,7 @@ void func_80402FB4_de(s32 owner, func_8020478C_S1 *obj) {
             table = func_8025193C_de(0, key, key, size, 0x33, 0, 0, &D_800E0B2C, 1);
         }
         n = *D_8011FEFC - 1;
-        entry = (Entry_func_80402FB4_de *)(*table + 2);
+        entry = (EntryRecAt4V2 *)(*table + 2);
         for (i = 0; i < n; i++, entry++) {
             if (entry->id4 == id4 && entry->id0 == idA) {
                 found = i;

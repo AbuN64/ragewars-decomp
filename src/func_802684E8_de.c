@@ -22,7 +22,7 @@ extern Camera_func_8026851C_de *D_80103FCC;
 extern s32 func_802833D0_de(void *host);
 extern s32 func_80262C88_de(void *effect);
 
-void func_8026851C_de(Source_func_8026851C_de *source, Host_func_8026851C_de *host, s32 unused, Spawn spawn) {
+void func_8026851C_de(SourceRecAt1C *source, Host_func_8026851C_de *host, s32 unused, Spawn spawn) {
     Vec3f scale;
     Vec3f velocity;
     Effect_func_8026851C_de *effect;

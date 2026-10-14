@@ -43,23 +43,23 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     if (id == -1) {
         return found;
     }
-    temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
+    temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
     temp_a0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
         func_802BB2A0_de((s32)temp_s0, 0, 1);
-        var_a0 = &((Context_func_80257360_de *)(arg0))->view[0];
+        var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     } else {
         func_802BCF50_de(temp_a0);
-        var_a0 = &((Context_func_80257360_de *)(arg0))->view[0];
+        var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     }
     func_802598B4_de(var_a0, id);
     for (i = 0; i < 17; i++) {
-        if (((Context_func_80257360_de *)arg0)->voices[i].sound == id) {
+        if (((ContextRecAt2BC0 *)arg0)->voices[i].sound == id) {
             found++;
-            voice = &((Context_func_80257360_de *)arg0)->voices[i];
+            voice = &((ContextRecAt2BC0 *)arg0)->voices[i];
             if (i == 16) {
                 voice->sound = -1;
                 voice->priority = 0;
@@ -72,12 +72,12 @@ s32 func_80257A14_de(void *arg0, s32 id) {
                     voice->flags &= ~0x10;
                 }
                 if ((&((Context_func_8025AE1C_de *)arg0)->slots)[0].ids[i] != -1) {
-                    func_8025BA9C_de(&((Context_func_80257360_de *)(arg0))->menu[0], i);
+                    func_8025BA9C_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], i);
                 }
             }
         }
     }
-    temp_s0 = &((Context_func_80257360_de *)(arg0))->lock;
+    temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
     temp_v0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -119,37 +119,37 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, Vec3 *arg2, s32 arg3,
                   s32 arg4, s32 arg5, s32 arg6) {
     void *node;
 
-    ((Context_func_80257360_de *)(arg0))->field2B98 = func_802395A4_de(&D_80145088, arg2);
+    ((ContextRecAt2BC0 *)(arg0))->field2B98 = func_802395A4_de(&D_80145088, arg2);
     if (arg1->flags & 1) {
-        if (func_8025BA4C_de(&((Context_func_80257360_de *)(arg0))->menu[0], ((Context_func_80257360_de *)(arg0))->field2B8C) != 0) {
+        if (func_8025BA4C_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C) != 0) {
             return -1;
         }
-        if (func_8025C10C_de(arg2, (char *)((Context_func_80257360_de *)(arg0))->field2B98 + 0x128) == 0.0f) {
+        if (func_8025C10C_de(arg2, (char *)((ContextRecAt2BC0 *)(arg0))->field2B98 + 0x128) == 0.0f) {
             return -1;
         }
     }
-    if ((arg1->flags & 0x1000) && ((Context_func_80257360_de *)(arg0))->field2B90 != -1) {
-        if (func_8025BDAC_de(&((Context_func_80257360_de *)(arg0))->menu[0], ((Context_func_80257360_de *)(arg0))->field2B8C,
-                         ((Context_func_80257360_de *)(arg0))->field2B90) != -1) {
+    if ((arg1->flags & 0x1000) && ((ContextRecAt2BC0 *)(arg0))->field2B90 != -1) {
+        if (func_8025BDAC_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C,
+                         ((ContextRecAt2BC0 *)(arg0))->field2B90) != -1) {
             return -1;
         }
     }
     if (arg1->field2 != 0) {
-        return func_80259260_de(&((Context_func_80257360_de *)(arg0))->view[0], arg1, arg2, arg3, arg5);
+        return func_80259260_de(&((ContextRecAt2BC0 *)(arg0))->view[0], arg1, arg2, arg3, arg5);
     }
     if (arg1->flags & 0x40) {
-        func_8025B920_de(&((Context_func_80257360_de *)(arg0))->menu[0], ((Context_func_80257360_de *)(arg0))->field2B8C, arg1->field0);
+        func_8025B920_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C, arg1->field0);
     }
-    node = func_8025B1C8_de(&((Context_func_80257360_de *)(arg0))->menu[0], arg1, arg3, arg4);
+    node = func_8025B1C8_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1, arg3, arg4);
     if (node == 0) {
         return -1;
     }
     func_8025BB5C_de(node, arg2, arg6);
-    func_8025BB7C_de(node, ((Context_func_80257360_de *)(arg0))->field2B8C);
+    func_8025BB7C_de(node, ((ContextRecAt2BC0 *)(arg0))->field2B8C);
     func_8025BB84_de(node, arg1, arg5);
 
     {
-        char *queue = &((Context_func_80257360_de *)(arg0))->lock;
+        char *queue = &((ContextRecAt2BC0 *)(arg0))->lock;
         u32 token = func_802BCF30_de();
         s32 count = ((MenuRules *)(queue))->locked + 1;
         ((MenuRules *)(queue))->locked = count;
@@ -162,7 +162,7 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, Vec3 *arg2, s32 arg3,
     }
     func_802577F4_de(arg0, ((Draw *)(node))->model, 0, arg2);
     {
-        char *queue = &((Context_func_80257360_de *)(arg0))->lock;
+        char *queue = &((ContextRecAt2BC0 *)(arg0))->lock;
         u32 token = func_802BCF30_de();
         s32 count = ((MenuRules *)(queue))->locked - 1;
         ((MenuRules *)(queue))->locked = count;

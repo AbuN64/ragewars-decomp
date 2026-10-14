@@ -9,7 +9,7 @@ extern void *func_8028FDB4_de(void *, s32);
 
 
 /* Finds an identifier in the object's list and returns its mapped byte from the resource record, or -1 when absent. */
-s32 func_8028BCBC_de(Object_func_8028BCBC_de *arg0, s32 arg1) {
+s32 func_8028BCBC_de(ObjectRecAtB0 *arg0, s32 arg1) {
     s32 i;
     void *record;
     Table *list = arg0->list;

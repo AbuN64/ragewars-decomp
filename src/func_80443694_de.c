@@ -10,12 +10,12 @@
 
 extern char D_80145040[];
 extern char D_0044E48C[];
-extern void func_8022A5A0_de(void *, struct Owner_func_80443694_de *);
+extern void func_8022A5A0_de(void *, struct OwnerRecAt698 *);
 extern void func_804097E8_de();
-extern void func_80442574_de(void *, void *, struct Owner_func_80443694_de *, s32, s32);
+extern void func_80442574_de(void *, void *, struct OwnerRecAt698 *, s32, s32);
 
-s32 func_80443694_de(void *unused, struct Holder_func_80443694_de *holder) {
-    struct Owner_func_80443694_de *owner = holder->owner;
+s32 func_80443694_de(void *unused, struct HolderRecAt1CV1 *holder) {
+    struct OwnerRecAt698 *owner = holder->owner;
 
     func_8022A5A0_de(D_80145040, owner);
     func_804097E8_de();

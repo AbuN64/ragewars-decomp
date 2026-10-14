@@ -13,13 +13,13 @@
 #include "shared/func_80286080_de_closed.h"
 #include "span_1000/code_802A8A94.h"
 
-struct MenuGlobal_func_80294F1C_us_rev1;
+struct MenuGlobalRecAt21B8;
 
-struct Selection_func_80294F1C_us_rev1;
+struct SelectionRecAt8;
 
 struct Message;
 extern struct Message *func_80237E80_de(void *owner, void *pool, u8 *text);
-extern struct MenuGlobal_func_80294F1C_us_rev1 D_8014AEB0;
+extern struct MenuGlobalRecAt21B8 D_8014AEB0;
 extern s32 D_8014AEC0;
 extern s32 D_800D2AE0;
 
@@ -50,7 +50,7 @@ void func_80294F1C_us_rev1(void) {
     s32 var_v1;
     s32 var_v1_2;
     s32 minusOne; 
-    struct Selection_func_80294F1C_us_rev1 *selection; 
+    struct SelectionRecAt8 *selection; 
 
 
     if (D_800D2AE0 != 0) {
@@ -103,7 +103,7 @@ void func_80294F1C_us_rev1(void) {
                     temp_v0_2 = minusOne + D_8014AEB8.unk0;
                     var_v1 = temp_v0_2 % D_8014AEB8.unk0;
                     D_8014AEB0.titleWasShown = 1;
-                    ((struct Selection_func_80294F1C_us_rev1 *)&D_8014AEBC)->index = minusOne;
+                    ((struct SelectionRecAt8 *)&D_8014AEBC)->index = minusOne;
                     D_8014AEBC = var_v1;
                     if ((f32) var_v1 < 0.0f) {
                         var_v1 = -var_v1;
@@ -136,7 +136,7 @@ void func_80294F1C_us_rev1(void) {
                     temp_v0_3 = regpart_temp_a0 + D_8014AEB8.unk0;
                     var_v1_2 = temp_v0_3 % D_8014AEB8.unk0;
                     D_8014AEB0.selectionIndex = regpart_temp_a0;
-                    selection = (struct Selection_func_80294F1C_us_rev1 *)&D_8014AEBC;
+                    selection = (struct SelectionRecAt8 *)&D_8014AEBC;
                     D_8014AEBC = var_v1_2;
                     if ((f32) var_v1_2 < 0.0f) {
                         var_v1_2 = -var_v1_2;

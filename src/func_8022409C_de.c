@@ -74,11 +74,11 @@ void func_8022409C_de(void *arg0, void *arg1) {
     held = (&D_800C2960_de)[1];
     func_80274870_de(&((func_80224078_Arg1 *)(arg1))->unk6C,
                   ((func_80224078_Arg1 *)arg1)->unk6C +
-                      (f32)((Controller_func_80217B3C_de *)((func_80224078_Arg0 *)arg0)->unk698)->x * D_800C2960_de,
+                      (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)arg0)->unk698)->x * D_800C2960_de,
                   held);
     func_80274870_de(&((func_80224078_Arg0 *)(arg0))->unk724,
                   ((func_80224078_Arg0 *)arg0)->unk724 +
-                      (f32)-((Controller_func_80217B3C_de *)((func_80224078_Arg0 *)arg0)->unk698)->y * D_800C2968_de,
+                      (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)arg0)->unk698)->y * D_800C2968_de,
                   held);
 
     value = ((func_80224078_Arg0 *)arg0)->unk6A8;

@@ -5,7 +5,7 @@
    reports the totals through the two pointers. */
 
 
-void func_8040EBF4_de(struct Node_func_8040EBF4_de *node, s32 *x, s32 *y) {
+void func_8040EBF4_de(struct NodeRecAt16 *node, s32 *x, s32 *y) {
     s32 sumX = node->x;
     s32 sumY = node->y;
 

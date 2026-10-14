@@ -1,8 +1,7 @@
 #ifndef UNBAKE_SPAN_166000_CODE_8043D1DC_H
 #define UNBAKE_SPAN_166000_CODE_8043D1DC_H
-#include "../types.h"
+#include "types.h"
 struct Func8043D458Arg;
-/* unbake published declaration: published_ba66ab26e4740f9fb7a5d164 */
 struct Func8043D458Arg {
     s8 pad0[8];
     s32 flags;

@@ -63,7 +63,7 @@ void func_80273448_de(char *, f32, f32, f32);
 void func_8026F620_de(f32 *, f32 *, f32 *);
 void func_80273D6C_de(struct Mtx *);
 
-static inline void alignment_from_rider(f32 *matrix, Rider_func_80203278_de *rider) {
+static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
     Vector4f q;
     Vec3 aim;
     aim.x = rider->aim.x;
@@ -73,12 +73,12 @@ static inline void alignment_from_rider(f32 *matrix, Rider_func_80203278_de *rid
     func_80274244_de(&q, matrix);
 }
 
-void func_80202E4C_de(struct Owner *owner, Rider_func_80203278_de *rider) {
+void func_80202E4C_de(struct Owner *owner, RiderRecAt130V1 *rider) {
     Vector4f rotation;
     Vector4f combined;
     f32 model[16];
     f32 alignment[16];
-    Segment_func_80203278_de *segment;
+    SegmentRecAt71 *segment;
     f32 angleScale;
     f32 angle;
     f32 sine;

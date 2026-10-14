@@ -21,7 +21,7 @@
 
 extern Entry802AB8DC D_800CC134[];
 
-extern Event_func_8024C1C4_de *func_80262598_de(void *);
+extern EventRecAt14 *func_80262598_de(void *);
 extern s32 func_802625C4_de(void *);
 extern s32 *func_8024BFD4_de(char *, s8);
 extern struct Shape_typemap_13 *func_8028FDB4_de(s32, s32);
@@ -34,7 +34,7 @@ void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
     Vec3 pos;
     Vec3 local;
     f32 matrix[16];
-    Event_func_8024C1C4_de *events;
+    EventRecAt14 *events;
     s32 count;
     s32 i;
     s32 checkMask;

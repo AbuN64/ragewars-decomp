@@ -31,7 +31,7 @@ typedef struct Shared_World {
     void *bitSections; /* 0x80 */
     void *secondaryLevels; /* 0x84 */
     u8 unknown88[0xC];
-    struct Table_func_8028B274_de *modelIds; /* 0x94 */
+    struct TableRecAt8 *modelIds; /* 0x94 */
     Table_func_8028CE94_de *lookupTable; /* 0x98 */
     u8 unknown9C[4];
     Table_func_8028CE94_de *records; /* 0xA0 */
@@ -77,7 +77,7 @@ typedef struct Shared_World {
     s32 counter1504; /* 0x1504 */
     u8 unknown1508[0x600];
     u8 system1B08[0x11778 - 0x1B08];
-    World_func_80290238_de system11778;
+    WorldRecAt3C08 system11778;
     u8 unknown15384[0x1B308 - 0x15384];
     f32 elapsed;
     u8 unknown1B30C[0x100];

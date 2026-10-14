@@ -24,7 +24,7 @@ extern f32 D_800D2988;
 
 
 s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boost, Host *host) {
-    Descriptor_func_8023B718_de *descriptor;
+    DescriptorRecAt29 *descriptor;
     f32 throttle;
     f32 value;
     f32 angle;

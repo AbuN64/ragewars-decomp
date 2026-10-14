@@ -21,7 +21,7 @@ extern char *func_8028FDB4_de(s32 *, s32);
 void func_8024C92C_de(void *arg0, s32 arg1, void *arg2) {
     ObjectLinks24 *o = arg0;
     Vec3 *out = arg2;
-    func_8025E52C_S1 *indices = (void *)o->unk_0;
+    ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
     ObjectState14 *recs;
     f32 *base;

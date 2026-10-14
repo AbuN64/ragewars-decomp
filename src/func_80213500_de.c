@@ -46,7 +46,7 @@ void func_80213500_de(void *arg0) {
     if (((Brain_func_80212D78_eu_x *)(actor))->node == ((Brain_func_80212D78_eu_x *)(actor))->goal
         || !(((Brain_func_80212D78_eu_x *)(actor))->goal < D_8013B368)) {
         void *data = ((Actor_func_8022D290_de *)(*(void **) actor))->unk_0x05D8;
-        if (((Record_func_80208158_de *)(data))->display && ((Record_func_80208158_de *)(data))->kind == 12) {
+        if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
             func_80213340_de(actor);
         } else {
             s32 global_count = D_8013B368;
@@ -125,7 +125,7 @@ void func_802136EC_de(void *arg0)
     ((Brain_func_80212D78_eu_x *)(actor))->unk220 = 0;
     {
         void *data = ((Actor_func_8022D290_de *)(*(void **)actor))->unk_0x05D8;
-        if (((Record_func_80208158_de *)(data))->display && ((Record_func_80208158_de *)(data))->kind == 12) {
+        if (((RecordRecAt94 *)(data))->display && ((RecordRecAt94 *)(data))->kind == 12) {
             func_80213340_de(actor);
         } else {
             s32 global_count = D_8013B368;

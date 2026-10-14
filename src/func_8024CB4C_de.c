@@ -8,7 +8,7 @@ extern void func_80270AAC_de(void *arg0, s32 arg1, void *arg2, void *arg3);
 
 void func_8024CB4C_de(ObjectLinks24_2 *arg0, s32 arg1, Vector4f *arg2) {
     ObjectLinks24_2 *o = arg0;
-    func_8025E52C_S1 *indices;
+    ObjRecAt2V1 *indices;
     s16 idx;
     ObjectState14 *rec;
     void *base;

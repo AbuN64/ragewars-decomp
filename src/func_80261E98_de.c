@@ -4,9 +4,9 @@
 #include "span_1000/code_802609CC.h"
 
 void *func_8028FDB4_de(int *, int);
-typedef struct Shared_func_80261EB8_S1 func_80261EB8_S1;
-typedef struct Shared_func_80261EB8_S2 func_80261EB8_S2;
-typedef Table_func_8028CE94_de func_80261EB8_S3;
+typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
+typedef struct Shared_func_80261EB8_S2 SharedRecAt20;
+typedef Table_func_8028CE94_de ObjRecV1;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x30, 0x34, 0x38, 0x3c], gap at: 0x28. */
@@ -14,7 +14,7 @@ typedef Table_func_8028CE94_de func_80261EB8_S3;
  * ROM pool prefix. Their definitions preserve the resident data layout. */
 const f32 D_800C41F8_de = 1.0f;
 const f32 D_800C41FC_de = 1.0f;
-void func_80261E98_de(func_80261EB8_S1 *arg0, func_80261EB8_S2 *arg1) {
+void func_80261E98_de(SharedRecAt10V1 *arg0, SharedRecAt20 *arg1) {
     extern const f32 D_800C41FC_de;
     f32 unit;
     f32 temp_f1;
@@ -38,7 +38,7 @@ void func_80261E98_de(func_80261EB8_S1 *arg0, func_80261EB8_S2 *arg1) {
     s32 var_v0;
     s32 var_v0_2;
     s32 var_v1;
-    func_80261EB8_S3 *temp_s1;
+    ObjRecV1 *temp_s1;
     Table_func_8028CE94_de *section;
 
     temp_a0 = arg0->unk10;

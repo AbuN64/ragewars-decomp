@@ -14,12 +14,12 @@
 
 
 
-extern Record_func_80282C8C_de *D_800D052C[];
+extern RecordRecAt2C *D_800D052C[];
 
-s32 func_80282C8C_de(func_8022BC04_S2 *obj) {
+s32 func_80282C8C_de(ObjRecAt4V5 *obj) {
     s32 i;
     s32 j;
-    Entry_func_80282C8C_de *entry;
+    EntryRecAt4V4 *entry;
 
     for (i = 0; i < 22; i++) {
         for (j = 0; j < 3; j++) {
@@ -44,12 +44,12 @@ s32 func_80282C8C_de(func_8022BC04_S2 *obj) {
 
 
 
-extern Record_func_80282C8C_de *D_800D052C[];
+extern RecordRecAt2C *D_800D052C[];
 
-s32 func_80282D38_de(func_8022BC04_S2 *obj) {
+s32 func_80282D38_de(ObjRecAt4V5 *obj) {
     s32 i;
     s32 j;
-    Entry_func_80282C8C_de *entry;
+    EntryRecAt4V4 *entry;
 
     if (obj->unk4 == 0x427) return 1;
     for (i = 0; i < 22; i++) {
@@ -75,12 +75,12 @@ s32 func_80282D38_de(func_8022BC04_S2 *obj) {
 
 
 
-extern Record_func_80282C8C_de *D_800D052C[];
+extern RecordRecAt2C *D_800D052C[];
 
-s32 func_80282DEC_de(func_8022BC04_S2 *obj) {
+s32 func_80282DEC_de(ObjRecAt4V5 *obj) {
     s32 i;
     s32 j;
-    Entry_func_80282C8C_de *entry;
+    EntryRecAt4V4 *entry;
 
     for (i = 0; i < 22; i++) {
         for (j = 0; j < 3; j++) {

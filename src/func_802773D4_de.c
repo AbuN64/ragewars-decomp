@@ -20,7 +20,7 @@ extern void func_80271F9C_de(void *, void *, f32);
 
 
 
-s32 func_802773D4_de(Object_func_802773D4_de *arg0, Vec3 arg1, Vec3 arg4, void *arg7,
+s32 func_802773D4_de(ObjectRecAtBC *arg0, Vec3 arg1, Vec3 arg4, void *arg7,
                   Vec3 *arg8, f32 *arg9) {
     Vec3 second;
     Vec3 first;

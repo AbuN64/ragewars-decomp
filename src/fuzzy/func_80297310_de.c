@@ -2,7 +2,7 @@
 #include "span_1000/code_80299DB4.h"
 #include "common/unused.h"
 extern WidgetTable *D_8014D080;
-extern void func_80299CF0_de(Node_func_80299CF0_de *, s32, s32, s32, s32, s32);
+extern void func_80299CF0_de(NodeRecAt12 *, s32, s32, s32, s32, s32);
 extern void func_8040E928_de(void *, s32);
 extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);

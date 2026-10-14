@@ -18,7 +18,7 @@ void func_80206A20_de(Actor_func_80206DD4_de *arg0, Rider_func_80206DD4_de *arg1
     s32 temp_v1_2;
     s32 var_a0;
     s8 temp_s3;
-    Segment_func_80206DD4_de *temp_s0;
+    SegmentRecAt5C *temp_s0;
 
     temp_s3 = arg1->state;
     temp_s0 = &arg0->motionTrack->segment;

@@ -38,11 +38,11 @@ void func_80217D74_de(s32 *menu, void *player) {
     s16 alternate;
     char *ammo;
 
-    held = ((struct func_8021846C_S3 *) ((ObjectLinks11B8 *) player)->unk_698)->unkB0 & 0x8000;
+    held = ((struct ObjRecAtB0 *) ((ObjectLinks11B8 *) player)->unk_698)->unkB0 & 0x8000;
     if (func_8022C460_de(player) != 0) {
         held = 0;
     }
-    if (D_801468F4 != 0 && ((struct func_8020EA10_S3 *) ((ObjectLinks11B8 *) player)->unk_5D8)->unk8F == 1) {
+    if (D_801468F4 != 0 && ((struct ObjRecAt8F *) ((ObjectLinks11B8 *) player)->unk_5D8)->unk8F == 1) {
         held = 0;
         menu[0] = 3;
     }

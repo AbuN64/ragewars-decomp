@@ -17,7 +17,7 @@ s32 func_8043E28C_de(void *arg0, void *arg1) {
     u8 *bytep;
     s32 result;
 
-    p = (void *)((Menu_func_8043E1F8_de *)arg1)->owner;
+    p = (void *)((MenuRecAt20V2 *)arg1)->owner;
     bytep = &p->controls->selection;
     result = func_804423BC_de(arg1, *bytep, 1, 0, 0xA, 0);
     *bytep = (u8)result;

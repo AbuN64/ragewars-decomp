@@ -1,6 +1,6 @@
 #ifndef MENU_SCREEN_SETUP_H
 #define MENU_SCREEN_SETUP_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8043962C.h"
@@ -12,8 +12,8 @@ typedef union SetupModelVector { Vec3 value; Triple words; } SetupModelVector;
 /* Five retained model records start at +8, with native stride 0xC0. */
 typedef union SetupScreenModel {
     State_func_80439B5C_de initial;
-    struct func_802062E0_S2 rotation;
-    struct Object_func_80439C30_de offset;
+    struct ObjRecAt1CV3 rotation;
+    struct ObjectRecAt28 offset;
     u8 record[0xC0];
 } SetupScreenModel;
 typedef struct SetupScreen {
@@ -54,6 +54,6 @@ extern SetupScreen *D_800E4F60;
 extern f32 D_800E1AA0, D_800E1AA4, D_800E1AA8, D_800E1AAC;
 extern f32 D_800E1AB0, D_800E1AB4, D_800E1AB8;
 extern s32 func_80439B5C_de(State_func_80439B5C_de *, s32, Triple, Triple);
-extern void func_80439BE0_de(struct func_802062E0_S2 *, Triple);
-extern void func_80439C30_de(struct Object_func_80439C30_de *, Triple);
+extern void func_80439BE0_de(struct ObjRecAt1CV3 *, Triple);
+extern void func_80439C30_de(struct ObjectRecAt28 *, Triple);
 #endif

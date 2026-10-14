@@ -17,7 +17,7 @@ extern void *D_80103FCC;
 extern char D_801000F0;
 
 
-void func_802426CC_de(Actor_func_802426CC_de *actor, void *owner, Input_func_802426CC_de *input, Query_func_80241BAC_de *query) {
+void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, Query_func_80241BAC_de *query) {
     u8 collision[0x108];
     Vec3 next;
     f32 hit_y;

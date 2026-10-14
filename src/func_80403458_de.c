@@ -27,7 +27,7 @@ void func_80403458_de(void) {
     f32 time;
     s32 late;
     s32 *track;
-    Entry_func_80403458_de *entry;
+    EntryRecAt8V4 *entry;
     Item_func_80403458_de *item;
     s32 n;
     s32 i;
@@ -44,7 +44,7 @@ void func_80403458_de(void) {
     }
     track = func_8028FDB4_de(D_800E2830->resource, 2);
     n = track[1];
-    entry = (Entry_func_80403458_de *)(track + 2);
+    entry = (EntryRecAt8V4 *)(track + 2);
     if (n == 0) {
         return;
     }

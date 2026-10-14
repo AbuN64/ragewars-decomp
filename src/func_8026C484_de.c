@@ -12,7 +12,7 @@ s32 **func_8025193C_de(); /* extern */
 
 extern s32 **D_8011064C;
 
-extern func_8026C484_S2 D_801157D8[];
+extern ObjRecAtCV2 D_801157D8[];
 extern s32 D_800C466C_de;                          /* unable to generate initializer: unknown type */
 extern s32 D_800C4680_de;                          /* unable to generate initializer: unknown type */
 extern s32 D_800C4694_de;                          
@@ -27,7 +27,7 @@ void func_8026C484_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
         s32 temp_v0_3;
         s32 temp_v1;
         s8 *temp_s1_2;
-        func_8026C484_S2 *temp_v1_2;
+        ObjRecAtCV2 *temp_v1_2;
         temp_v0 = func_8025193C_de(0, arg0, arg0, 0x18, 0, 0, 0, &D_800C466C_de, 1);
         if (temp_v0 != 0) {
                 temp_s1 = func_8028FE28_de(*temp_v0, arg0, 1);

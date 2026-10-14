@@ -27,7 +27,7 @@ void func_80283A1C_de(void *arg0) {
 
 f32 func_802B72B0_de(f32);
 void func_80271F9C_de(Vec3 *,Vec3 *,f32); void func_80271F34_de(Vec3 *,Vec3 *,Vec3 *);
-void func_80283A80_de(Obj_func_80283A80_de *arg0) {
+void func_80283A80_de(ObjRecAt174 *arg0) {
  Vec3 delta, direction;
  Vec3 *velocity, *dir;
  int condition;

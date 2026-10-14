@@ -14,10 +14,10 @@ f32 func_80285630_de(s32 arg0) {
     f64 var_f2;
 
     sp0 = (s32) (*(u16 *) &arg0) << 16;
-    if (((struct func_8022EA2C_S1 *) ((u16 *) (&arg0)))->unk2 == 0) {
+    if (((struct ObjRecAt2V2 *) ((u16 *) (&arg0)))->unk2 == 0) {
         return *(f32 *) &sp0;
     }
-    sp4 = (s32) (((struct func_8022EA2C_S1 *) ((u16 *) (&arg0)))->unk2) << 16;
+    sp4 = (s32) (((struct ObjRecAt2V2 *) ((u16 *) (&arg0)))->unk2) << 16;
     seed = (D_80111D24 * (s32) 0xA84A5B53) + (s32) 0x58348C2D;
     idx = (s32) ((seed >> 16) & 0x7FFF);
     var_f2 = (f64) idx;

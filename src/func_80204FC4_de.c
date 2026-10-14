@@ -4,7 +4,7 @@
 
 
 
-int func_80204FC4_de(Actor_func_80204FC4_de *actor, Cell *cell, float scale) {
+int func_80204FC4_de(ActorRecAt134 *actor, Cell *cell, float scale) {
     if (actor->always == 1) {
         return 1;
     }

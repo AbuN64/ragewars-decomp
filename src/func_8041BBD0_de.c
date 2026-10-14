@@ -10,7 +10,7 @@ extern void func_8029973C_de();
 extern void func_8041B8DC_de(struct Owner_func_8041BBD0_de *, s32, void *);
 
 s32 func_8041BBD0_de(struct Owner_func_8041BBD0_de *owner, s32 arg1, s32 slot, s32 kind) {
-    struct Child_func_8041BBD0_de *child;
+    struct ChildRecAt2C *child;
 
     func_8029973C_de();
     if (kind != 1) {

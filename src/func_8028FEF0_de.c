@@ -98,24 +98,24 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 posi
   {
     return 0;
   }
-  if ((((World_func_80290238_de *)(arg0))->free) == 0)
+  if ((((WorldRecAt3C08 *)(arg0))->free) == 0)
   {
-    func_80290950_de(arg0, ((World_func_80290238_de *)(arg0))->tail);
+    func_80290950_de(arg0, ((WorldRecAt3C08 *)(arg0))->tail);
   }
-  temp_s0 = ((World_func_80290238_de *)(arg0))->free;
-  temp_v1 = ((World_func_80290238_de *)(arg0))->head;
-  ((World_func_80290238_de *)(arg0))->free = (void *) (((Actor_func_80290238_de *)(temp_s0))->next);
+  temp_s0 = ((WorldRecAt3C08 *)(arg0))->free;
+  temp_v1 = ((WorldRecAt3C08 *)(arg0))->head;
+  ((WorldRecAt3C08 *)(arg0))->free = (void *) (((Actor_func_80290238_de *)(temp_s0))->next);
   if (temp_v1 != 0)
   {
     ((Actor_func_80290238_de *)(temp_v1))->prev = temp_s0;
   }
-  { char *next = ((World_func_80290238_de *)(arg0))->head;
+  { char *next = ((WorldRecAt3C08 *)(arg0))->head;
   ((Actor_func_80290238_de *)(temp_s0))->prev = 0;
   ((Actor_func_80290238_de *)(temp_s0))->next = next; }
-  ((World_func_80290238_de *)(arg0))->head = temp_s0;
-  if ((((World_func_80290238_de *)(arg0))->tail) == 0)
+  ((WorldRecAt3C08 *)(arg0))->head = temp_s0;
+  if ((((WorldRecAt3C08 *)(arg0))->tail) == 0)
   {
-    ((World_func_80290238_de *)(arg0))->tail = temp_s0;
+    ((WorldRecAt3C08 *)(arg0))->tail = temp_s0;
   }
   ((Actor_func_80290238_de *)(temp_s0))->state = (s32) ((((Actor_func_80290238_de *)(temp_s0))->state) | 1);
   func_80246184_de(temp_s0);
@@ -178,7 +178,7 @@ extern Box D_801031F0;
 extern f32 D_800D2988;
 extern void func_80290424_de(Actor_func_80290238_de *actor);
 
-void func_80290238_de(World_func_80290238_de *world) {
+void func_80290238_de(WorldRecAt3C08 *world) {
     Actor_func_80290238_de *actor;
     Actor_func_80290238_de *next;
     s32 expired;

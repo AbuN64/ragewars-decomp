@@ -8,6 +8,6 @@
 
 
 
-void func_80439BE0_de(struct func_802062E0_S2 *object, struct Triple vector) {
+void func_80439BE0_de(struct ObjRecAt1CV3 *object, struct Triple vector) {
     object->unk1C = vector;
 }

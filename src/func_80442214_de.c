@@ -8,7 +8,7 @@
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */
 
-char *func_80442214_de(struct func_802285C4_S1 *object) {
+char *func_80442214_de(struct ObjRecAt20V2 *object) {
     char *result = 0;
 
     if (object->unk20 != 0) {
@@ -194,7 +194,7 @@ extern void **func_8025343C_de(s32, s32, s32, char *);
 extern void func_80440DA0_de(void *, void **, struct List_func_80442574_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
-void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct Params_func_80442690_de *params, struct List_func_80442574_de *list) {
+void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct List_func_80442574_de *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -280,7 +280,7 @@ extern void func_80253838_de(s32, s32);
 void func_804428F8_de(List_func_804428F8_de *list) {
     Node_func_804428F8_de *node;
     Node_func_804428F8_de *next;
-    State_func_804428F8_de *state;
+    StateRecAtBCV1 *state;
 
     node = list->head;
     while (node != 0) {
@@ -302,11 +302,11 @@ void func_804428F8_de(List_func_804428F8_de *list) {
     }
 }
 
-void func_804429D4_de(struct Owner_func_804429D4_de *owner) {
-    struct Node_func_804429D4_de *node = owner->head;
+void func_804429D4_de(struct OwnerRecAt4 *owner) {
+    struct NodeRecAt1D0 *node = owner->head;
 
     while (node != 0) {
-        ((void (*)(struct Node_func_804429D4_de *, struct Owner_func_804429D4_de *))node->vtable[4])(node, owner);
+        ((void (*)(struct NodeRecAt1D0 *, struct OwnerRecAt4 *))node->vtable[4])(node, owner);
         node = node->next;
     }
 }

@@ -1,12 +1,11 @@
 #ifndef UNBAKE_COMMON_TYPES_8FD754E1E915_H
 #define UNBAKE_COMMON_TYPES_8FD754E1E915_H
-#include "../types.h"
+#include "types.h"
 #include "gfx.h"
 #include "shared/model_instance.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 struct Player;
-/* unbake published declaration: published_038392ee5aca3bbae9c77df5 */
 typedef struct AiProfile {
     u8 pad0[0x80];
     s8 character; /* 0x80 */
@@ -160,70 +159,56 @@ struct Player {
 
 
 struct func_8020A028_S4;
-/* unbake published declaration: published_065e9124cd99670a6d0994d5 */
 typedef struct func_8020A028_S4 func_8020A028_S4;
 
-struct func_8028FFB0_S3;
-/* unbake published declaration: published_0c4c309fc9346bf78512568b */
-typedef struct func_8028FFB0_S3 func_8028FFB0_S3;
+struct ObjRecAt1D8V2;
+typedef struct ObjRecAt1D8V2 ObjRecAt1D8V2;
 
 struct func_8022A404_S1;
-/* unbake published declaration: published_0ef470c36c33aac1678541f0 */
 struct func_8022A404_S1 {
     char pad0[0x20];
     int unk20;
 };
 
 struct func_80237E70_G1;
-/* unbake published declaration: published_15bbcc9cf86837275a04fe48 */
 struct func_80237E70_G1 {
     u8 * unk0;
 };
 
 struct func_8022C070_S1;
-/* unbake published declaration: published_1622ac15db337834fc5f53a6 */
 typedef struct func_8022C070_S1 func_8022C070_S1;
 
 struct Player;
-/* unbake published declaration: published_d8dcb86fbb8137ac4bad3624 */
 typedef struct Player Player;
 
 union func_80237E70_S1_UF24;
-/* unbake published declaration: published_1cce067f7aad9c705606aa41 */
 typedef union func_80237E70_S1_UF24 func_80237E70_S1_UF24;
 
 struct Course;
-/* unbake published declaration: published_216630242578523cec543667 */
 struct Course {
     char pad0[0x28];
     u8 laps;
 };
 
 struct CollisionInfo8020CD74;
-/* unbake published declaration: published_247806b135682bb989f76d39 */
 typedef struct CollisionInfo8020CD74 CollisionInfo8020CD74;
 
 struct func_8021C9B4_S2;
-/* unbake published declaration: published_2992b6641f8252b38c3b8592 */
 typedef struct func_8021C9B4_S2 func_8021C9B4_S2;
 
-struct func_8021C9B4_S3;
-/* unbake published declaration: published_38f41ea56ea46e3acfde77e6 */
-typedef struct func_8021C9B4_S3 func_8021C9B4_S3;
+struct ObjRecAtCV1;
+typedef struct ObjRecAtCV1 ObjRecAtCV1;
 
-struct func_8021C9B4_S3;
-/* unbake published declaration: published_77f3131db20f5bb3cbf8ff28 */
-struct func_8021C9B4_S3 {
+struct ObjRecAtCV1;
+struct ObjRecAtCV1 {
     char pad0[0xC];
     s16 unkC;
 };
 
 union func_80234DD0_S1_U260;
-/* unbake published declaration: published_2d71dad7fa5594ed0ff7ccff */
 typedef union func_80234DD0_S1_U260 func_80234DD0_S1_U260;
 
 struct Message;
-/* unbake published declaration: published_4b2e377bb23513bebdbc1ce3 */
 struct Message {
     u8 padding000[4];
     struct Message *next; /* 0x04: traversal from the message pool head */
@@ -245,22 +230,18 @@ struct Message {
 
 struct Message;
 union func_80237E70_S1_UF24;
-/* unbake published declaration: published_2e4db81399e9d66d8e3ada2c */
 union func_80237E70_S1_UF24 {
     struct Message * v0;
     char v1;
 };
 
 struct func_8022C884_S1;
-/* unbake published declaration: published_312c403436a35d2ca1d2f977 */
 typedef struct func_8022C884_S1 func_8022C884_S1;
 
 struct func_80237E70_S2;
-/* unbake published declaration: published_314d45c0b4bdfcb0f8bcbce7 */
 typedef struct func_80237E70_S2 func_80237E70_S2;
 
 struct func_80209B64_S2;
-/* unbake published declaration: published_38bff7fb5bfdb161bc875f6e */
 struct func_80209B64_S2 {
     char pad0[0x93];
     u8 unk93;
@@ -289,7 +270,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_39f1aff0e9c5c2b6601a8142 */
 struct SharedPlayer_func_80209CD8_de {
     union {
         struct {
@@ -1712,18 +1692,15 @@ struct SharedPlayer_func_80209CD8_de {
     } views16E0;
 };
 
-struct func_80205314_S1;
-/* unbake published declaration: published_3e2ccefdc488aa189f5b0dac */
-struct func_80205314_S1 {
+struct ObjRecAt18V5;
+struct ObjRecAt18V5 {
     char pad0[0x18];
     void * unk18;
 };
 
-/* unbake published declaration: published_458d8cd18563e836751fbb0d */
 extern int D_800CE47C;
 
 struct func_80229A54_S2;
-/* unbake published declaration: published_4b5b21f928fc805642982cde */
 struct func_80229A54_S2 {
     char pad0[0x5D8];
     char * unk5D8;
@@ -1732,11 +1709,9 @@ struct func_80229A54_S2 {
 };
 
 struct Message;
-/* unbake published declaration: published_5c8c7bc278828738eae8469a */
 typedef struct Message Message;
 
 union func_80234DD0_S1_U260;
-/* unbake published declaration: published_fb7831f6f2d5bed7b1a3e492 */
 union func_80234DD0_S1_U260 {
     Vec3 v0;
     f32 v1;
@@ -1744,48 +1719,39 @@ union func_80234DD0_S1_U260 {
 
 struct Message;
 union func_80237E70_S2_UE40;
-/* unbake published declaration: published_c783b163f708458b1694f686 */
 union func_80237E70_S2_UE40 {
     char v0;
     struct Message * v1;
 };
 
 union func_80237E70_S2_UE40;
-/* unbake published declaration: published_f70fbf877980fd25852eb909 */
 typedef union func_80237E70_S2_UE40 func_80237E70_S2_UE40;
 
 struct func_80237E70_S2;
-/* unbake published declaration: published_53ecc0d6133b1b8a81791bf6 */
 struct func_80237E70_S2 {
     char pad0[0xE40];
     IntrusiveList unkE40;
 };
 
 struct ObjectLinks3C;
-/* unbake published declaration: published_5bab6b1b518c4a13cf256fc1 */
 typedef struct ObjectLinks3C ObjectLinks3C;
 
 struct func_80237E70_S4;
-/* unbake published declaration: published_5f2b8df85b968505a6e63f57 */
 typedef struct func_80237E70_S4 func_80237E70_S4;
 
-struct func_80209B64_S4;
-/* unbake published declaration: published_819336a813f25bbdd5f7fbba */
-typedef struct func_80209B64_S4 func_80209B64_S4;
+struct ObjRecAt5D8;
+typedef struct ObjRecAt5D8 ObjRecAt5D8;
 
-struct func_80209B64_S4;
-/* unbake published declaration: published_f41be357b4d486a06cf791d9 */
-struct func_80209B64_S4 {
+struct ObjRecAt5D8;
+struct ObjRecAt5D8 {
     char pad0[0x5D8];
     void * unk5D8;
 };
 
 struct func_80237E70_G1;
-/* unbake published declaration: published_6173b1be7689f3d15438d0a3 */
 typedef struct func_80237E70_G1 func_80237E70_G1;
 
 struct Model_func_80223E34_de;
-/* unbake published declaration: published_643a575b68115baf18e12e93 */
 struct Model_func_80223E34_de {
     s32 kind; /* 0x00 */
     char pad4[0x28];
@@ -1805,37 +1771,31 @@ struct Model_func_80223E34_de {
     f32 height;
 };
 
-struct func_802285C4_S1;
-/* unbake published declaration: published_e336c22feb33e5da5040e5e4 */
-struct func_802285C4_S1 {
+struct ObjRecAt20V2;
+struct ObjRecAt20V2 {
     char pad0[0x20];
     char * unk20;
 };
 
 struct Frame;
-/* unbake published declaration: published_6766de618a8df73c02c9aa7b */
 typedef struct Frame Frame;
 
 union func_80209DAC_S2_U93;
-/* unbake published declaration: published_6b0d69e26d6f7e781f737cec */
 typedef union func_80209DAC_S2_U93 func_80209DAC_S2_U93;
 
 struct func_80216BF4_S1;
-/* unbake published declaration: published_7342324c038a4978f4405098 */
 struct func_80216BF4_S1 {
     char pad0[0xC];
     f32 unkC;
 };
 
 union func_80209DAC_S2_U93;
-/* unbake published declaration: published_9734fbdb4149c0946d24b60a */
 union func_80209DAC_S2_U93 {
     u8 v0;
     s8 v1;
 };
 
 struct func_8021C9B4_S2;
-/* unbake published declaration: published_83ff6a2d071859b2b55124fb */
 struct func_8021C9B4_S2 {
     char pad0[0x81];
     u8 unk81;
@@ -1845,48 +1805,39 @@ struct func_8021C9B4_S2 {
 
 struct Message;
 struct func_80237E70_S4;
-/* unbake published declaration: published_86e11553ead31f9ee60a7439 */
 struct func_80237E70_S4 {
     char pad0[0x4];
     struct Message * unk4;
 };
 
 struct func_8020D1FC_S1;
-/* unbake published declaration: published_87984c97a621164625c54a6d */
 struct func_8020D1FC_S1 {
     char pad0[0x38];
     s32 unk38;
 };
 
 struct func_8020D1FC_S1;
-/* unbake published declaration: published_8ae23b59734ed7c5bd5a7b12 */
 typedef struct func_8020D1FC_S1 func_8020D1FC_S1;
 
-struct func_80219490_S2;
-/* unbake published declaration: published_8b15a4ef2de8e3f7b26e965f */
-typedef struct func_80219490_S2 func_80219490_S2;
+struct ObjRecAt2A8;
+typedef struct ObjRecAt2A8 ObjRecAt2A8;
 
 struct func_80207ABC_S1;
-/* unbake published declaration: published_95943328149f90ede93cc3ba */
 typedef struct func_80207ABC_S1 func_80207ABC_S1;
 
 struct func_80237E70_S1;
-/* unbake published declaration: published_976a687fb0f4ca917c9183e4 */
 struct func_80237E70_S1 {
     char pad0[0xF24];
     IntrusiveList unkF24;
 };
 
 struct Model_func_80223E34_de;
-/* unbake published declaration: published_97885ae3357bd7b19a31d475 */
 typedef struct Model_func_80223E34_de Model_func_80223E34_de;
 
 struct Course;
-/* unbake published declaration: published_978ec52e02267703dd9401a4 */
 typedef struct Course Course;
 
 struct ObjectLinks3C;
-/* unbake published declaration: published_98236de9655387e75400eb42 */
 struct ObjectLinks3C {
     char pad0[0x18];
     char * unk_18;
@@ -1894,9 +1845,8 @@ struct ObjectLinks3C {
     s32 unk_38;
 };
 
-struct func_80219490_S2;
-/* unbake published declaration: published_9c0c6f95fc3748021e7c02d4 */
-struct func_80219490_S2 {
+struct ObjRecAt2A8;
+struct ObjRecAt2A8 {
     char pad0[0x29C];
     f32 unk29C;
     char pad29C[0x2A0 - 0x29C - sizeof(f32)];
@@ -1908,14 +1858,12 @@ struct func_80219490_S2 {
 };
 
 struct func_80204620_S2;
-/* unbake published declaration: published_a673890484372da256a4dfba */
 struct func_80204620_S2 {
     char pad0[0x28];
     s16 unk28;
 };
 
 struct func_80207ABC_S1;
-/* unbake published declaration: published_a5dfc2008d0a6ca4ec8e5840 */
 struct func_80207ABC_S1 {
     char pad0[0x18];
     void * unk18;
@@ -1923,33 +1871,28 @@ struct func_80207ABC_S1 {
     s32 unk38;
 };
 
-struct func_8028FFB0_S3;
-/* unbake published declaration: published_aaeca452f5b69bef91b4d8f0 */
-struct func_8028FFB0_S3 {
+struct ObjRecAt1D8V2;
+struct ObjRecAt1D8V2 {
     char pad0[0x1D8];
     char * unk1D8;
 };
 
 struct func_80203E78_S1;
-/* unbake published declaration: published_aaef9e04cd149e7e9b9bff6e */
 struct func_80203E78_S1 {
     char pad0[0x4];
     s32 unk4;
 };
 
 struct func_8022C070_S1;
-/* unbake published declaration: published_abe235c706505cdfc9c84e24 */
 struct func_8022C070_S1 {
     char pad0[0x2C];
     f32 unk2C;
 };
 
 struct func_80216BF4_S1;
-/* unbake published declaration: published_afbc21781e0ef858054d572d */
 typedef struct func_80216BF4_S1 func_80216BF4_S1;
 
 struct func_8020A028_S4;
-/* unbake published declaration: published_afe45d3df0eefb571c5630bc */
 struct func_8020A028_S4 {
     char pad0[0x8];
     s32 unk8;
@@ -1960,18 +1903,15 @@ struct func_8020A028_S4 {
 };
 
 struct func_80228774_S1;
-/* unbake published declaration: published_b236c4fb22a855c312ea6735 */
 struct func_80228774_S1 {
     char pad0[0x20];
     void * unk20;
 };
 
-struct func_802285C4_S1;
-/* unbake published declaration: published_b412c8b51980ce44aede35dd */
-typedef struct func_802285C4_S1 func_802285C4_S1;
+struct ObjRecAt20V2;
+typedef struct ObjRecAt20V2 ObjRecAt20V2;
 
 struct func_8022C884_S1;
-/* unbake published declaration: published_bd2e412d9501070c02ec22ef */
 struct func_8022C884_S1 {
     char pad0[0x1C];
     int unk1C;
@@ -1981,60 +1921,46 @@ struct func_8022C884_S1 {
     int unk24;
 };
 
-/* unbake published declaration: published_c6db770db09f6280f91dc11b */
 extern int D_801371DC;
 
-/* unbake published declaration: published_cb91fd939f7e0ef99c7fc438 */
 extern int D_800CE430[];
 
 struct func_8022A404_S1;
-/* unbake published declaration: published_cf8cc049dea9915d8b543590 */
 typedef struct func_8022A404_S1 func_8022A404_S1;
 
-struct Record_func_80208158_de;
-/* unbake published declaration: published_cfc4c1b204a2b8c2f13b03fa */
-typedef struct Record_func_80208158_de Record_func_80208158_de;
+struct RecordRecAt94;
+typedef struct RecordRecAt94 RecordRecAt94;
 
 struct func_80237E70_S1;
-/* unbake published declaration: published_db39e476ff883658175a37b1 */
 typedef struct func_80237E70_S1 func_80237E70_S1;
 
 struct func_80209B64_S2;
-/* unbake published declaration: published_dfe0864b2134717307392264 */
 typedef struct func_80209B64_S2 func_80209B64_S2;
 
 struct SharedPlayer_func_80209CD8_de;
-/* unbake published declaration: published_e72f1deab26f50ba74b6f994 */
 typedef struct SharedPlayer_func_80209CD8_de SharedPlayer_func_80209CD8_de;
 
-struct func_80205314_S1;
-/* unbake published declaration: published_e7acd01bb5bfca1882b4f478 */
-typedef struct func_80205314_S1 func_80205314_S1;
+struct ObjRecAt18V5;
+typedef struct ObjRecAt18V5 ObjRecAt18V5;
 
 struct CollisionInfo8020CD74;
-/* unbake published declaration: published_f35af8eca6d43e4be2a06191 */
 struct CollisionInfo8020CD74 {
     s32 w[7];
 };
 
 struct func_80229A54_S2;
-/* unbake published declaration: published_faa25f1c1af7c6308a84c591 */
 typedef struct func_80229A54_S2 func_80229A54_S2;
 
 struct func_80203E78_S1;
-/* unbake published declaration: published_faa789fba760926bcea48080 */
 typedef struct func_80203E78_S1 func_80203E78_S1;
 
-struct func_8021CD70_S4;
-/* unbake published declaration: published_fc9408ddd3f226576d810ebb */
-typedef struct func_8021CD70_S4 func_8021CD70_S4;
+struct ObjRecAt564;
+typedef struct ObjRecAt564 ObjRecAt564;
 
 struct func_80228774_S1;
-/* unbake published declaration: published_fd0ab19a5d575fc1818754e9 */
 typedef struct func_80228774_S1 func_80228774_S1;
 
 struct Frame;
-/* unbake published declaration: published_fd78cec88c4c0b83f8a27fcd */
 struct Frame {
     char pad0[0xF0];
     u8 taskMessage[0x20];

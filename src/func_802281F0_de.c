@@ -6,10 +6,10 @@
 
 
 extern State D_801468A0;
-extern int func_8022A5A0_de(Root *,Obj_func_802281F0_de *);
+extern int func_8022A5A0_de(Root *,ObjRecAt16E0V1 *);
 s32 func_802281F0_de(Root *root) {
  State *initial=&D_801468A0; State *state;
- Obj_func_802281F0_de *node; int i,sum,skip; unsigned char *settings;
+ ObjRecAt16E0V1 *node; int i,sum,skip; unsigned char *settings;
  if(initial->unk58==0) return 0;
  node=root->unk20; state=initial;
  if(node) { settings=(unsigned char *)state-0x5D8; }

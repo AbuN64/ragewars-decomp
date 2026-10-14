@@ -5,7 +5,7 @@
    three. */
 
 
-extern struct Request_func_8041E100_de D_80153F80[];
+extern struct RequestRecAt10 D_80153F80[];
 
 void func_8041EA70_de(void) {
     s32 i;

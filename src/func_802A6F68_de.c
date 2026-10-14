@@ -7,14 +7,14 @@
 #include "types.h"
 /* Clears a record: its four 0x38-byte entries through an inline per-entry clear, its two leading
    flag bytes and trailing words, and sets the word at 0xE6 to -5. */
-static inline void clear_entry(Entry_func_802A6F68_de *e) {
+static inline void clear_entry(EntryRecAt34 *e) {
     e->unk4 = 0;
     e->unk0 = 0;
     e->unkD = 0;
     e->unk18 = 0;
     e->unk1C = 0;
 }
-void func_802A6F68_de(Record_func_802A6F68_de *rec) {
+void func_802A6F68_de(RecordRecAtE8 *rec) {
     int i;
     for (i = 0; i < 4; i++) {
         clear_entry(&rec->entries[i]);
@@ -30,19 +30,19 @@ s32 func_802A6FB8_de(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg
     s32 var_a1;
     u32 key;
     char *temp_v1;
-    Entry_func_802A6F68_de *var_v1;
-    Entry_func_802A6F68_de *var_v1_2;
+    EntryRecAt34 *var_v1;
+    EntryRecAt34 *var_v1_2;
     var_a1 = 0;
     key = arg2 & 0xFFFF;
     for (var_a1 = 0; var_a1 < 4; var_a1++) {
-        if (((Record_func_802A6F68_de *)arg0)->entries[var_a1].unk0 != 0 &&
-            ((Record_func_802A6F68_de *)arg0)->entries[var_a1].unkC == key) {
+        if (((RecordRecAtE8 *)arg0)->entries[var_a1].unk0 != 0 &&
+            ((RecordRecAtE8 *)arg0)->entries[var_a1].unkC == key) {
             break;
         }
     }
     if (var_a1 == 4) {
         for (var_a1 = 0; var_a1 < 4; var_a1++) {
-            if (((Record_func_802A6F68_de *)arg0)->entries[var_a1].unk0 == 0) {
+            if (((RecordRecAtE8 *)arg0)->entries[var_a1].unk0 == 0) {
                 break;
             }
         }
@@ -51,17 +51,17 @@ s32 func_802A6FB8_de(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg
         }
     }
     temp_v1 = arg0 + ((var_a1 * 0x38) + 4);
-    ((Record_func_802A6F68_de *)arg0)->unkE4 = var_a1;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk0 = 1;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk8 = arg1;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unkC = arg2;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk10 = arg3;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk14 = arg4;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk28 = arg5;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk2C = arg6;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk30 = arg7;
-    ((Entry_func_802A6F68_de *)(temp_v1))->unkD = (u8) (((Entry_func_802A6F68_de *)(temp_v1))->unkD + 1);
-    ((Entry_func_802A6F68_de *)(temp_v1))->unk34 = arg8;
+    ((RecordRecAtE8 *)arg0)->unkE4 = var_a1;
+    ((EntryRecAt34 *)(temp_v1))->unk0 = 1;
+    ((EntryRecAt34 *)(temp_v1))->unk8 = arg1;
+    ((EntryRecAt34 *)(temp_v1))->unkC = arg2;
+    ((EntryRecAt34 *)(temp_v1))->unk10 = arg3;
+    ((EntryRecAt34 *)(temp_v1))->unk14 = arg4;
+    ((EntryRecAt34 *)(temp_v1))->unk28 = arg5;
+    ((EntryRecAt34 *)(temp_v1))->unk2C = arg6;
+    ((EntryRecAt34 *)(temp_v1))->unk30 = arg7;
+    ((EntryRecAt34 *)(temp_v1))->unkD = (u8) (((EntryRecAt34 *)(temp_v1))->unkD + 1);
+    ((EntryRecAt34 *)(temp_v1))->unk34 = arg8;
     return 1;
 }
 s32 func_802A7098_de(void *arg0)
@@ -73,7 +73,7 @@ s32 func_802A7098_de(void *arg0)
   var_a1 = 3;
   do
   {
-    new_var = ((s8 *) (arg0 + ((((struct Owner_func_8020388C_de *)(arg0))->id) * 0x38))) + 4;
+    new_var = ((s8 *) (arg0 + ((((struct OwnerRecAtE4 *)(arg0))->id) * 0x38))) + 4;
     if ((*((s32 *) new_var)) != 0)
     {
       var_a2 += 1;
@@ -103,11 +103,11 @@ s32 func_802A70D4_de(Menu_func_802A70D4_de *menu, s32 backward) {
     return cursor;
 }
 void func_802A7168_de(void *arg0) {
-    ((Entry_func_802A6F68_de *)(arg0))->unk4 = 0;
-    ((Entry_func_802A6F68_de *)(arg0))->unk0 = 0;
-    ((Entry_func_802A6F68_de *)(arg0))->unkD = 0;
-    ((Entry_func_802A6F68_de *)(arg0))->unk18 = 0;
-    ((Entry_func_802A6F68_de *)(arg0))->unk1C = 0;
+    ((EntryRecAt34 *)(arg0))->unk4 = 0;
+    ((EntryRecAt34 *)(arg0))->unk0 = 0;
+    ((EntryRecAt34 *)(arg0))->unkD = 0;
+    ((EntryRecAt34 *)(arg0))->unk18 = 0;
+    ((EntryRecAt34 *)(arg0))->unk1C = 0;
 }
 void func_802A7180_de(void *arg0, void *arg1) {
     s32 temp_v0;

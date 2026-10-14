@@ -67,7 +67,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
     do
     {
       temp_a0 = arg0->unk0;
-      temp_s1 = (Shared_Target *) (&((Shared_func_8020AA40_S1 *) temp_a0)->unk0[(var_s5->unk0 * (*temp_a0)) + 8]);
+      temp_s1 = (Shared_Target *) (&((SharedRecAt0V1 *) temp_a0)->unk0[(var_s5->unk0 * (*temp_a0)) + 8]);
       if (temp_s1->unkC & 1)
       {
         var_f20 = D_800C1D40[1];
@@ -80,7 +80,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
             var_s2 = 0;
             do
             {
-              temp_s0 = (Shared_WeaponSlot *) (&((Shared_func_8020AA40_S1 *) ww->unk138)->unk0[var_s2]);
+              temp_s0 = (Shared_WeaponSlot *) (&((SharedRecAt0V1 *) ww->unk138)->unk0[var_s2]);
               compare_id = temp_s1->unkE;
               if (compare_id == 0x64E)
               {

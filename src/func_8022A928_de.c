@@ -2,7 +2,7 @@
 
 
 
-void func_8022A928_de(func_8022A918_S1 *arg0, int arg1) {
+void func_8022A928_de(ObjRecAtB4 *arg0, int arg1) {
     if (arg0->unk4 == arg1) {
         arg0->unkB4 = 1;
     }

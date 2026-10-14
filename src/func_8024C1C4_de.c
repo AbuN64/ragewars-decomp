@@ -11,14 +11,14 @@
 
 
 
-extern Event_func_8024C1C4_de *func_80262598_de(void *);
+extern EventRecAt14 *func_80262598_de(void *);
 extern s32 func_802625C4_de(void *);
 extern void func_80272898_de(void *matrix, Vec3 *in, Vec3 *out);
 extern void func_80265E10_de(char *, char *, u16, s32, Vec3, struct Shape_func_802764D4_de_2);
 
 void func_8024C1C4_de(char *obj, void *anim)
 {
-    Event_func_8024C1C4_de *e;
+    EventRecAt14 *e;
     s32 count;
     s32 i;
     Vec3 pos;

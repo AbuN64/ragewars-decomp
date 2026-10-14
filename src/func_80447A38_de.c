@@ -11,7 +11,7 @@
 extern u8 D_8014D46C[];
 extern char D_80154110;
 
-void func_80447A38_de(u8 *valid, Entry_func_8023B9C0_eu *data) {
+void func_80447A38_de(u8 *valid, EntryRecAt3 *data) {
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;

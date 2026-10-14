@@ -23,9 +23,9 @@ extern s32 func_8022A5A0_de(char *, s32);
 extern func_802077F4_S2 *func_80442DDC_de(void *, s32);
 
 extern void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
-extern void func_8044208C_de(void *, Item_func_8043C9AC_de *, void *, Style_func_80445BC0_de *);
+extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, Style_func_80445BC0_de *);
 
-void func_80445BC0_de(void *menu, Item_func_8043C9AC_de *item, void *arg2, Style_func_80445BC0_de *style) {
+void func_80445BC0_de(void *menu, ItemRecAt20V1 *item, void *arg2, Style_func_80445BC0_de *style) {
     s32 i;
     f32 width;
     f32 alpha;

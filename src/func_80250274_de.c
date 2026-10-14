@@ -24,7 +24,7 @@ extern void func_8026DA4C_de(s32, void *, s32, s32, void *, s32);
 extern void func_8026DC24_de(s32, void *, s32, s32, void *, s32);
 extern void func_80253754_de(s32, s32);
 
-static inline int select_key(Descriptor_func_80250274_de *descriptor, u32 timer) {
+static inline int select_key(DescriptorRecAt24 *descriptor, u32 timer) {
  int key;
     if (timer >= (u32)(descriptor->period * 2)) {
         key = descriptor->key2;
@@ -34,7 +34,7 @@ static inline int select_key(Descriptor_func_80250274_de *descriptor, u32 timer)
  return key;
 }
 void func_80250274_de(Owner_func_80250274_de *owner) {
-    Descriptor_func_80250274_de *descriptor;
+    DescriptorRecAt24 *descriptor;
     s32 arg2;
     s32 key;
     s32 instance;
@@ -55,7 +55,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
         }
         D_800D15E0 = 1;
         D_800D15F0 = owner->fade << 5;
-        { Descriptor_func_80250274_de **slot = &owner->descriptor; key = (*slot)->key; }
+        { DescriptorRecAt24 **slot = &owner->descriptor; key = (*slot)->key; }
     } else {
         if (owner->fade < 8) {
             D_800D15E0 = 1;

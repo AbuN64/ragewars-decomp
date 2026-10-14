@@ -1,20 +1,16 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BAC58_H
 #define UNBAKE_SPAN_1000_CODE_802BAC58_H
-#include "../types.h"
+#include "types.h"
 struct OSThread_s;
-/* unbake published declaration: published_28089a3c7de105e8ea5e3d0d */
 typedef struct OSThread_s OSThread_s;
 
 struct ObjectLinks18_2;
-/* unbake published declaration: published_4f53f53d76f2afdb74f936ea */
 typedef struct ObjectLinks18_2 ObjectLinks18_2;
 
 struct OSThreadContext;
-/* unbake published declaration: published_55c9a8f14dcdadc01db7c115 */
 typedef struct OSThreadContext OSThreadContext;
 
 struct ObjectLinks18_2;
-/* unbake published declaration: published_a756ed0fcf80dc7443452765 */
 struct ObjectLinks18_2 {
     s32 *unk_0;
     s32 *unk_4;
@@ -25,7 +21,6 @@ struct ObjectLinks18_2 {
 };
 
 struct OSThreadContext;
-/* unbake published declaration: published_e0e6c3cb3272195ee653d56e */
 struct OSThreadContext {
     u64 at;
     u64 v0;
@@ -67,7 +62,6 @@ struct OSThreadContext {
 };
 
 struct OSThread_s;
-/* unbake published declaration: published_de67a6594626ba0044c05b68 */
 struct OSThread_s {
     struct OSThread_s *next;
     s32 priority;

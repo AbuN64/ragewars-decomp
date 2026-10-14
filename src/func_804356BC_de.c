@@ -27,7 +27,7 @@ void func_804356BC_de(s32 arg0) {
     record = &D_80102B00[arg0 * 400];
     if (place != -1) {
         func_802A0724_de(record, D_800E54A4->players[place].slots[owner], 400);
-        ((struct Record_func_804358C0_de *)record)->slot = (s8) owner;
+        ((struct RecordRecAtD *)record)->slot = (s8) owner;
     }
-    ((struct Record_func_804358C0_de *)record)->place = (s8) place;
+    ((struct RecordRecAtD *)record)->place = (s8) place;
 }

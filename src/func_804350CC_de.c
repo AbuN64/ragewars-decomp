@@ -6,10 +6,10 @@
 
 
 extern u8 D_80146410[];
-extern struct Entry_func_804350CC_de *D_800E54A4;
+extern struct EntryRecAt6C *D_800E54A4;
 
 void func_804350CC_de(s32 index) {
-    struct Entry_func_804350CC_de *entry;
+    struct EntryRecAt6C *entry;
 
     D_80146410[index * 150] = 1;
     entry = &D_800E54A4[index];

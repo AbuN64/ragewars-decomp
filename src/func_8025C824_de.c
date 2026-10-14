@@ -6,8 +6,8 @@ static inline short slot_id(Slots *slots, int index) {
     return slots->ids[index];
 }
 
-int func_8025C824_de(Record_func_8025C008_de *pool, short index) {
-    Slot_func_8025C008_de *entry;
+int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
+    SlotRecAtB4V2 *entry;
     Context_func_8025AE1C_de *context;
     Slots *slots;
     void *owner;

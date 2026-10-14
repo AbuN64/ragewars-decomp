@@ -28,12 +28,12 @@ void func_80203908_de(void *arg0, void *arg1) {
 
     record = &((ActorMotionResource *)((Actor_func_8024A7A0_de *)arg0)->definition)->motion;
     if (((Actor_func_8024A7A0_de *)arg0)->type == 0x40C) {
-        ((struct Record_func_8020388C_de *)arg1)->speed = D_800C6B30[1];
+        ((struct RecordRecAt13C *)arg1)->speed = D_800C6B30[1];
     } else {
-        ((struct Record_func_8020388C_de *)arg1)->speed = 0.0f;
+        ((struct RecordRecAt13C *)arg1)->speed = 0.0f;
     }
-    ((struct Record_func_8020388C_de *)arg1)->pad128 = 0;
-    ((struct Record_func_8020388C_de *)arg1)->threshold = record->eventThreshold;
+    ((struct RecordRecAt13C *)arg1)->pad128 = 0;
+    ((struct RecordRecAt13C *)arg1)->threshold = record->eventThreshold;
 
     if (func_80285F58_de(&D_8011FE88, arg0) == 0) {
         if (record->flags & 0x1000) {
@@ -51,5 +51,5 @@ void func_80203908_de(void *arg0, void *arg1) {
     } else {
         func_80214178_de(arg0, arg1, 0x40);
     }
-    ((struct Record_func_8020388C_de *)arg1)->state = 0;
+    ((struct RecordRecAt13C *)arg1)->state = 0;
 }

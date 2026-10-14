@@ -50,7 +50,7 @@ extern void func_804427C4_de(void *, Menu_func_8043F37C_eu *, char *);
 
 s32 func_8043F37C_eu(void *arg0, Menu_func_8043F37C_eu *menu, void *arg2) {
     SharedPlayer_func_8043F37C_eu *player = menu->player;
-    func_80229BE0_S2 *settings = player->views5D8.view5D8_7.settings;
+    ObjRecAt80 *settings = player->views5D8.view5D8_7.settings;
 
     if (func_8026437C_de(menu->input) != 0) {
         func_8044A0C4_de(player, settings->unk80);

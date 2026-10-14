@@ -176,7 +176,7 @@ void func_80229468_de(Inventory *arg0, Receiver *arg1) {
    unlimited at 0x1450), and the message "<amount> <type name>" with a plural suffix for more than one
    is built and shown through func_8022B75C_de. */
 extern s32 D_800CE3E8[];
-extern Profile_func_80229554_de D_80102B00[];
+extern ProfileRecAt16 D_80102B00[];
 extern u8 D_801462D5;
 extern char D_800C2C50_de[];
 extern char D_800C2C54_de[];
@@ -184,9 +184,9 @@ extern char D_800C2C54_de[];
 extern void func_802A025C_de(char *, char *);
 extern void func_802A02E8_de(char *, char *);
 extern char *func_80232764_de(s32);
-extern void func_8022B75C_de(SharedPlayer_func_80229554_de *, char *, f32);
+extern void func_8022B75C_de(SharedPlayerRecV1 *, char *, f32);
 
-static inline s32 max_ammo(SharedPlayer_func_80229554_de *player, s32 type) {
+static inline s32 max_ammo(SharedPlayerRecV1 *player, s32 type) {
     s32 max;
 
     if (type == -1) {
@@ -209,7 +209,7 @@ static inline s32 max_ammo(SharedPlayer_func_80229554_de *player, s32 type) {
     return max;
 }
 
-void func_80229554_de(SharedPlayer_func_80229554_de *player, s32 type, s32 amount) {
+void func_80229554_de(SharedPlayerRecV1 *player, s32 type, s32 amount) {
     char number[8];
     char message[32];
 

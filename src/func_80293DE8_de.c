@@ -74,7 +74,7 @@ void func_80293EB8_de(void *arg0) {
     func_80296004_de(0);
 }
 
-struct func_80293B0C_S1;
+struct ObjRecV2;
 
 
 

@@ -10,14 +10,14 @@
 #include "resident_event_handler.h"
 #include "shared/func_80214624_de_closed.h"
 extern f32 D_800C1A28,D_800C1A2C,D_800C1A30,D_800C1A34_de,D_800C1A38_de;
-void func_80203278_de(SharedPlayer *player, Rider_func_80203278_de *rider, Result *result);
+void func_80203278_de(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
 Vector4f func_80202CA0_de(Vec3 *dir);
 void func_80272BCC_de(void *arg0, void *arg1, void *arg2);
 void func_80202FDC_de(struct Owner *owner, Rider *rider, s32 mode, char *target);
 void func_802172D0_de(void *arg0, void *arg1, s32 arg2);
 void func_80217388_de(void *arg0, void *arg1);
 f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2);
-typedef union NavRider { Rider_func_80203278_de target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; Vec3 aim; } nav; } NavRider;
+typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; Vec3 aim; } nav; } NavRider;
 /* Callers reserve a 136-byte result workspace shared by both target searches. */
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 static inline void navProject(f32 *matrix,Vec3 *local,Vec3 *out,Vec3 *to,Vec3 *from) { func_80271F68_de(local,to,from); func_80272BCC_de(matrix,local,out); }
@@ -47,7 +47,7 @@ s32 func_802034A4_de(NavActor *arg0,NavRider *arg1) {
     s32 var_s7;
     u16 temp_v1;
     u8 var_a2;
-    Segment_func_80203278_de *temp_s4;
+    SegmentRecAt71 *temp_s4;
 
     var_s7 = 0;
     temp_s4 = &arg0->player.views18.navigationTrack->segment;

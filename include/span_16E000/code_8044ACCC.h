@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8044ACCC_H
 #define UNBAKE_SPAN_16E000_CODE_8044ACCC_H
-#include "../types.h"
+#include "types.h"
 #include "shared/level_track.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
@@ -11,19 +11,15 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "shared/level_input.h"
 struct func_8044B388_S1;
-/* unbake published declaration: published_03e9c7e3de05cad75660efbd */
 typedef struct func_8044B388_S1 func_8044B388_S1;
 
 struct Object_func_8044D220_de;
-/* unbake published declaration: published_0715a667da33b1413a7a313c */
 
 
 struct func_8044CD58_S2;
-/* unbake published declaration: published_0bb211f30fe63a458acee448 */
 typedef struct func_8044CD58_S2 func_8044CD58_S2;
 
 struct State_func_8044D5C4_de;
-/* unbake published declaration: published_0fb985f91aa95a03bec1931f */
 struct State_func_8044D5C4_de {
     char p[0x11C0];
     s32 unk11C0;
@@ -34,11 +30,9 @@ struct State_func_8044D5C4_de {
 };
 
 struct ObjB;
-/* unbake published declaration: published_1a0f621e4ceca3197f0d6100 */
 typedef struct ObjB ObjB;
 
 struct Track_func_8044D220_de;
-/* unbake published declaration: published_1b5a6c69de844c6abe5cb3cf */
 
 
 struct LightSettings;
@@ -50,16 +44,14 @@ struct LightSettings {
     signed char dir[3];
 };
 struct LightSettings;
-struct Scene_func_8044BE04_de;
-/* unbake published declaration: published_1ea5d767fee9755fb453c5ad */
-struct Scene_func_8044BE04_de {
+struct SceneRecAt1B2B4;
+struct SceneRecAt1B2B4 {
     char pad0[0x1B2B0];
     struct LightSettings *light;
     s16 dir[3];
 };
 
 struct func_8044B27C_S1;
-/* unbake published declaration: published_214465e0da8418e64a9b4304 */
 struct func_8044B27C_S1 {
     s32 unk0;
     char pad0[0x4 - 0x0 - sizeof(s32)];
@@ -86,15 +78,12 @@ struct func_8044B27C_S1 {
 };
 
 struct func_8044CBE0_S1;
-/* unbake published declaration: published_2cc73a5be27e6400a95e3e0c */
 typedef struct func_8044CBE0_S1 func_8044CBE0_S1;
 
 struct func_8044B27C_S1;
-/* unbake published declaration: published_2ef454522ca91f75f3412cd5 */
 typedef struct func_8044B27C_S1 func_8044B27C_S1;
 
 struct func_8044ADC0_S1;
-/* unbake published declaration: published_313fba72233e3fc5100a149e */
 struct func_8044ADC0_S1 {
     char pad0[0x24];
     u8 unk24;
@@ -125,7 +114,6 @@ struct func_8044ADC0_S1 {
 };
 
 struct State_func_8044A170_de;
-/* unbake published declaration: published_33d69d29419f50a675dc6095 */
 struct State_func_8044A170_de {
     char pad0[12];
     f32 unkC;
@@ -188,15 +176,12 @@ struct State_func_8044A170_de {
 };
 
 struct Bucket;
-/* unbake published declaration: published_471abe7b7133cf21ce18265f */
 typedef struct Bucket Bucket;
 
-struct Scene_func_8044BE04_de;
-/* unbake published declaration: published_48c7b7872d4991bdb0c6fa77 */
-typedef struct Scene_func_8044BE04_de Scene_func_8044BE04_de;
+struct SceneRecAt1B2B4;
+typedef struct SceneRecAt1B2B4 SceneRecAt1B2B4;
 
 struct Level_func_8044CD8C_de;
-/* unbake published declaration: published_56bc57263924032593e9862a */
 struct Level_func_8044CD8C_de {
     char pad0[0x30];
     s32 key;
@@ -206,13 +191,11 @@ struct Level_func_8044CD8C_de {
 };
 
 struct Record_func_8044B0E0_de;
-/* unbake published declaration: published_62b4bfbae9de117fc805f904 */
 typedef struct Record_func_8044B0E0_de Record_func_8044B0E0_de;
 
-typedef IntrusiveList List_func_8044D220_de;
+typedef IntrusiveList ListRec;
 
 struct Bucket;
-/* unbake published declaration: published_67dad23f781318bbd3282061 */
 struct Bucket {
     struct Bucket *prev;
     struct Bucket *next;
@@ -221,30 +204,24 @@ struct Bucket {
 };
 
 struct Floats;
-/* unbake published declaration: published_6a829e40a0b390440726b718 */
 typedef struct Floats Floats;
 
 struct State_func_8044D528_de;
-/* unbake published declaration: published_6be81ebb4d088799734f18a7 */
 typedef struct State_func_8044D528_de State_func_8044D528_de;
 
 struct Node_func_8044D220_de;
-/* unbake published declaration: published_6cdfb76b51d99806ecd8c592 */
 struct Node_func_8044D220_de {
     s32 index;
     s32 link[2];
 };
 
 struct ObjA;
-/* unbake published declaration: published_6eca4361159d9949f04b4407 */
 typedef struct ObjA ObjA;
 
 struct func_8044AD14_S1;
-/* unbake published declaration: published_76764fb650f0df8d95430623 */
 typedef struct func_8044AD14_S1 func_8044AD14_S1;
 
 struct Face;
-/* unbake published declaration: published_80f0f00cf25f576f7f22d299 */
 struct Face {
     char pad0[0xE];
     u8 flags;
@@ -254,29 +231,24 @@ struct Face {
 };
 
 struct Face;
-/* unbake published declaration: published_84a579a7937e3398e6b655b9 */
 typedef struct Face Face;
 
 struct func_8044CD58_S2;
-/* unbake published declaration: published_7d8422f136aed686ff6b5ca3 */
 struct func_8044CD58_S2 {
     char pad0[0x8];
     Face unk8;
 };
 
 union func_8044CBE0_S1_U1B500;
-/* unbake published declaration: published_faa1761375a00f945a4b4a5d */
 union func_8044CBE0_S1_U1B500 {
     void * v0;
     s8 v1;
 };
 
 union func_8044CBE0_S1_U1B500;
-/* unbake published declaration: published_fadfa2f79e688582e2330cde */
 typedef union func_8044CBE0_S1_U1B500 func_8044CBE0_S1_U1B500;
 
 struct func_8044CBE0_S1;
-/* unbake published declaration: published_87b278bfae3ccc46b2ee5ebb */
 struct func_8044CBE0_S1 {
     char pad0[0xB8];
     void * unkB8;
@@ -300,7 +272,6 @@ struct func_8044CBE0_S1 {
 };
 
 struct State_func_8044D0F0_de;
-/* unbake published declaration: published_8d58e8caf7698d8f4c8bc2dd */
 struct State_func_8044D0F0_de {
     char pad[0x3C];
     int resource;
@@ -313,30 +284,24 @@ struct State_func_8044D0F0_de {
 };
 
 struct Track_func_8044D220_de;
-/* unbake published declaration: published_8e7a95c9b4a3d45829ece90c */
 
 
 struct Node_func_8044D220_de;
-/* unbake published declaration: published_93b184ea0ba838bfa318ace1 */
 typedef struct Node_func_8044D220_de Node_func_8044D220_de;
 
 struct State_func_8044D0F0_de;
-/* unbake published declaration: published_947c4f0f4169a8d36f755296 */
 typedef struct State_func_8044D0F0_de State_func_8044D0F0_de;
 
 struct State_func_8044A170_de;
-/* unbake published declaration: published_d5583accc538aa0c239f9794 */
 typedef struct State_func_8044A170_de State_func_8044A170_de;
 
 struct func_8044ADC0_S2;
-/* unbake published declaration: published_958e83fc183c003efbc03158 */
 struct func_8044ADC0_S2 {
     char pad0[0x10];
     State_func_8044A170_de unk10;
 };
 
 struct func_8044DE04_S1;
-/* unbake published declaration: published_967b3a335a75fad31729a419 */
 struct func_8044DE04_S1 {
     char pad0[0x1B410];
     s32 unk1B410;
@@ -357,7 +322,6 @@ struct func_8044DE04_S1 {
 };
 
 struct Record_func_8044B0E0_de;
-/* unbake published declaration: published_99c6af227884454015bdae7a */
 struct Record_func_8044B0E0_de {
     char p[8];
     s32 unk8;
@@ -366,19 +330,17 @@ struct Record_func_8044B0E0_de {
     s16 unk16;
 };
 
-struct Pool_func_8044B0E0_de;
+struct PoolRecAt28V2;
 /* A list of the pool's eight records and a second, empty list. */
-struct Pool_func_8044B0E0_de {
+struct PoolRecAt28V2 {
     IntrusiveList empty;
     IntrusiveList records;
     struct Record_func_8044B0E0_de entries[8];
 };
 
-/* unbake published declaration: published_a8cd9df325b9249a05caebaa */
 extern float D_800CA1F0;
 
 struct ObjA;
-/* unbake published declaration: published_a9390afccb50143e4577ceab */
 struct ObjA {
     s8 pad0;
     s8 type;
@@ -388,12 +350,10 @@ struct ObjA {
 };
 
 struct Level_func_8044CD8C_de;
-/* unbake published declaration: published_ab2eebee946e6037911db766 */
 typedef struct Level_func_8044CD8C_de Level_func_8044CD8C_de;
 
 
 struct func_8044AD14_S1;
-/* unbake published declaration: published_ad7d00f349fd0aead2ac4135 */
 struct func_8044AD14_S1 {
     char pad0[0x3];
     u8 unk3;
@@ -408,9 +368,8 @@ struct func_8044AD14_S1 {
 };
 
 struct Face;
-struct World_func_8044C108_de;
-/* unbake published declaration: published_b14efc97a06d9009324be95e */
-struct World_func_8044C108_de {
+struct WorldRecAt1B40C;
+struct WorldRecAt1B40C {
     char pad0[0x80];
     void *tree;
     char pad84[0x11C0 - 0x84];
@@ -428,7 +387,6 @@ struct World_func_8044C108_de {
 };
 
 struct func_8044DC48_S1;
-/* unbake published declaration: published_bcd8c5d65e5346023eb35e54 */
 struct func_8044DC48_S1 {
     char pad0[0x1B444];
     s32 unk1B444;
@@ -439,18 +397,14 @@ struct func_8044DC48_S1 {
 };
 
 struct func_8044ADC0_S1;
-/* unbake published declaration: published_c284947750ad8fd02c12a019 */
 typedef struct func_8044ADC0_S1 func_8044ADC0_S1;
 
 struct Object_func_8044D220_de;
-/* unbake published declaration: published_ca85549dbf05a794bd997b96 */
 
 
-/* unbake published declaration: published_cc47fe67a6f2024256f55403 */
 extern short D_8010F320;
 
 struct State_func_8044D528_de;
-/* unbake published declaration: published_cd6af7fbd41b171e29f57d14 */
 struct State_func_8044D528_de {
     char pad[0x1B2B0];
     Resource_func_80419E54_de *input;
@@ -462,20 +416,17 @@ struct State_func_8044D528_de {
 };
 
 struct func_8044D9DC_S1;
-/* unbake published declaration: published_debcf34518aece203f8d24f9 */
 typedef struct func_8044D9DC_S1 func_8044D9DC_S1;
 
 struct func_8044DE04_S1;
-/* unbake published declaration: published_dfa64f0f9e4b63873270bf69 */
 typedef struct func_8044DE04_S1 func_8044DE04_S1;
 
-struct func_8044B420_S1;
-/* unbake published declaration: published_e11f3c33d8e73aa79a16e6e0 */
+struct ObjRecAt8C8;
 struct Entry_func_8044A7D0_de {
     char pad0[0x228];
 };
 
-struct func_8044B420_S1 {
+struct ObjRecAt8C8 {
     struct Entry_func_8044A7D0_de entries[4];
     IntrusiveList free;
     IntrusiveList active;
@@ -483,7 +434,6 @@ struct func_8044B420_S1 {
 };
 
 struct func_8044B388_S1;
-/* unbake published declaration: published_e1476b404f133e421e0f2871 */
 struct func_8044B388_S1 {
     char pad0[0xC];
     char unkC;
@@ -492,22 +442,17 @@ struct func_8044B388_S1 {
 };
 
 struct func_8044ADC0_S2;
-/* unbake published declaration: published_e1a1fc83c1e471b78aa089bb */
 typedef struct func_8044ADC0_S2 func_8044ADC0_S2;
 
 struct State_func_8044D5C4_de;
-/* unbake published declaration: published_e1f64bd196785a44f72a94eb */
 typedef struct State_func_8044D5C4_de State_func_8044D5C4_de;
 
-struct func_8044B420_S1;
-/* unbake published declaration: published_e22b85f0ce79b7c4622e43cd */
-typedef struct func_8044B420_S1 func_8044B420_S1;
+struct ObjRecAt8C8;
+typedef struct ObjRecAt8C8 ObjRecAt8C8;
 
-/* unbake published declaration: published_e6d3488b06462f7d3306f6e0 */
 extern s16 func_8044AE70_de();
 
 struct Floats;
-/* unbake published declaration: published_eb7e1aedf4fe20ba41e44888 */
 struct Floats {
     f32 unk0;
     f32 unk4;
@@ -518,30 +463,25 @@ struct Floats {
 };
 
 struct func_8044DC48_S1;
-/* unbake published declaration: published_ec65ebd705eaee7ed9d3a1b0 */
 typedef struct func_8044DC48_S1 func_8044DC48_S1;
 
 struct func_8044D9DC_S1;
-/* unbake published declaration: published_f85fc8254c3c5703ab026de5 */
 struct func_8044D9DC_S1 {
     char pad0[0x8];
     func_8022BC04_S3 unk8;
 };
 
 struct Object_func_8044A07C_de;
-/* unbake published declaration: published_fe86c82f8ad35cecf64a81a5 */
 struct Object_func_8044A07C_de {
     char pad[0x11BC];
     s32 first;
     s32 second;
 };
 
-struct World_func_8044C108_de;
-/* unbake published declaration: published_ff33d1624dc36a7a729a3f00 */
-typedef struct World_func_8044C108_de World_func_8044C108_de;
+struct WorldRecAt1B40C;
+typedef struct WorldRecAt1B40C WorldRecAt1B40C;
 
 struct ObjB;
-/* unbake published declaration: published_ffc8a37c2286ca66a3ebb2fa */
 struct ObjB {
     s8 pad0;
     s8 type;
@@ -597,7 +537,7 @@ typedef union CollisionBuildTriangle { struct {
     CollisionBuildVertex *v[3];
     union CollisionBuildTriangle *adj[3];
     s32 mask;
-} fields; Header_func_80275AA4_de canonical; s32 words[8]; } CollisionBuildTriangle;
+} fields; HeaderRecAt1C canonical; s32 words[8]; } CollisionBuildTriangle;
 typedef struct CollisionBuildHeader {
     s32 count;
     s32 offsets[5];
@@ -627,9 +567,9 @@ extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
 extern void *memcpy(void *, const void *, unsigned int);
 extern s32 D_80141060;
 extern f32 func_80217224_de(void *obj, Vec3 pos);
-extern void func_8024B3A8_de(void *obj, Input_func_8024B3A8_de *rec, s32 mode, s32 index);
+extern void func_8024B3A8_de(void *obj, InputRecAt27 *rec, s32 mode, s32 index);
 extern s32 func_8024DD8C_de(void *obj);
 extern s32 func_8024DDB4_de(void *obj);
-extern void func_80449970_us_rev1(SharedPlayer *player, Input_func_8024B3A8_de *rec, s32 mode, s32 index);
+extern void func_80449970_us_rev1(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
 
 #endif

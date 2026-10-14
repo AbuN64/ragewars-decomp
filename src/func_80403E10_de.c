@@ -3,7 +3,7 @@
    kind 9 and 3 for kind 10; other kinds give 0. */
 
 
-int func_80403E10_de(Record_func_80403E10_de *rec) {
+int func_80403E10_de(RecordRecAt12 *rec) {
     int result = 0;
 
     switch (rec->kind) {

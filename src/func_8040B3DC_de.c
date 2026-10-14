@@ -10,7 +10,7 @@ extern s32 D_80153734;
 extern char D_800D7970[];
 extern char D_800D797C[];
 
-s32 func_8040B3DC_de(struct Field_func_8040A4A0_de *field) {
+s32 func_8040B3DC_de(struct FieldRecAt14 *field) {
     if (D_80153734 != 0) {
         field->text = D_800D7970;
     } else {
@@ -27,7 +27,7 @@ extern s32 D_80153734;
 extern char D_800D7974[];
 extern char D_800D7980[];
 
-s32 func_8040B410_de(struct Field_func_8040A4A0_de *field) {
+s32 func_8040B410_de(struct FieldRecAt14 *field) {
     if (D_80153734 != 0) {
         field->text = D_800D7974;
     } else {

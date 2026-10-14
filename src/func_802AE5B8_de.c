@@ -5,11 +5,11 @@
 
 
 
-extern u32 func_802AEA2C_de(RuntimeState_func_802AE5B8_de *state, u32 index);
+extern u32 func_802AEA2C_de(RuntimeStateRecAtB8 *state, u32 index);
 
 
 
-void func_802AE5B8_de(RuntimeState_func_802AE5B8_de *state, u32 base) {
+void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
     f64 converted;
     s32 count;
     u32 entry;

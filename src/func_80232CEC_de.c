@@ -31,7 +31,7 @@ void func_80232CEC_de(void *arg0, void *arg1) {
             switch (state->selectedAction) {
             case 8:
                 func_8025DE54_de(0xA3E, state->pos,
-                              (s32)((char *)state + 8), -1);
+                              (s32)&state->pos, -1);
             case 0:
             case 14:
                 func_8022B00C_de(state);

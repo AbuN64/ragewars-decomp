@@ -2,21 +2,21 @@
 #define RW_TRACK_TYPES_H
 #include "types.h"
 
-struct Key_func_80401214_de;
-typedef struct Key_func_80401214_de Key_func_80401214_de;
+struct KeyRecAt1C;
+typedef struct KeyRecAt1C KeyRecAt1C;
 
-struct Key_func_80401214_de;
-struct Key_func_80401214_de {
+struct KeyRecAt1C;
+struct KeyRecAt1C {
     char pad0[0x1C];
     f32 time;
     char pad20[4];
 };
 
-struct Key_func_80401564_de;
-typedef struct Key_func_80401564_de Key_func_80401564_de;
+struct PositionKey;
+typedef struct PositionKey PositionKey;
 
-struct Key_func_80401564_de;
-struct Key_func_80401564_de {
+struct PositionKey;
+struct PositionKey {
     f32 x;
     f32 y;
     f32 z;
@@ -24,11 +24,11 @@ struct Key_func_80401564_de {
     f32 time;
 };
 
-struct Entry_func_804030E0_de;
-typedef struct Entry_func_804030E0_de Entry_func_804030E0_de;
+struct EntryRecAt48;
+typedef struct EntryRecAt48 EntryRecAt48;
 
-struct Entry_func_804030E0_de;
-struct Entry_func_804030E0_de {
+struct EntryRecAt48;
+struct EntryRecAt48 {
     s32 id0;
     s32 id4;
     s32 id8;

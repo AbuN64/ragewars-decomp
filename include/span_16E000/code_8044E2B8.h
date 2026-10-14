@@ -1,16 +1,13 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8044E2B8_H
 #define UNBAKE_SPAN_16E000_CODE_8044E2B8_H
-#include "../types.h"
+#include "types.h"
 struct Item_func_8044D668_de;
-/* unbake published declaration: published_19af1571a60feb6037c82d8b */
 typedef struct Item_func_8044D668_de Item_func_8044D668_de;
 
 struct func_8044E9A0_S1;
-/* unbake published declaration: published_4265a79e2b65078b53a8017a */
 typedef struct func_8044E9A0_S1 func_8044E9A0_S1;
 
 struct func_8044E9A0_S1;
-/* unbake published declaration: published_7761baea0588a03a3b0cd650 */
 struct func_8044E9A0_S1 {
     char pad0[0x26DBC];
     s32 unk26DBC;
@@ -19,7 +16,6 @@ struct func_8044E9A0_S1 {
 };
 
 struct Item_func_8044D668_de;
-/* unbake published declaration: published_e7cdc26b93f854c05cccc322 */
 struct Item_func_8044D668_de {
     char pad0[0x11];
     u8 kind;
@@ -27,7 +23,6 @@ struct Item_func_8044D668_de {
 };
 
 struct Level;
-/* unbake published declaration: published_89074508878058526cf744c6 */
 struct Level {
     char pad0[0x11C0];
     s32 counts[2];
@@ -36,11 +31,9 @@ struct Level {
 };
 
 struct Level;
-/* unbake published declaration: published_c6e4f47305289a6fd779c0f9 */
 typedef struct Level Level;
 
 struct State_func_8044DD50_de;
-/* unbake published declaration: published_e9a427152c7db20fc3e31a4b */
 struct State_func_8044DD50_de {
     char pad0[0x24];
     s32 a;

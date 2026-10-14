@@ -10,7 +10,7 @@ extern s32 D_800D0EBC;
 extern char D_800E60E4[];
 extern char D_800E60C8[];
 
-s32 func_80446090_us_rev1(struct Field_func_8040A4A0_de *field) {
+s32 func_80446090_us_rev1(struct FieldRecAt14 *field) {
     if (D_800D0EBC != 0) {
         field->text = D_800E60E4;
     } else {
@@ -37,7 +37,7 @@ extern s32 D_800E63BC;
 extern char D_800E6100[];
 extern char D_800E611C[];
 
-s32 func_8044610C_us_rev1(struct Field_func_8040A4A0_de *field) {
+s32 func_8044610C_us_rev1(struct FieldRecAt14 *field) {
     if (D_800E63BC != 0) {
         field->text = D_800E6100;
     } else {

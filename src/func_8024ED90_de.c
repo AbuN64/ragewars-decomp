@@ -23,13 +23,13 @@ extern void func_802800C0_de(void *system, Actor_func_8024ED90_de *source, Actor
                           s32 arg3, s32 arg4, s32 arg5, Vec3 position,
                           Vector4f rotation, Vec3 position2, s32 arg15,
                           s32 arg16, s32 arg17);
-extern Effect_func_8024A1D0_de *func_802830B8_de(void *system);
+extern EffectRecAt154 *func_802830B8_de(void *system);
 extern f32 func_8024D398_de(Actor_func_8024ED90_de *actor);
 
 void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **arg1) {
     Vec3 position;
     Vector4f rotation;
-    Effect_func_8024A1D0_de *effect;
+    EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
 

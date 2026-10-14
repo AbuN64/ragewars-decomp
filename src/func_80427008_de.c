@@ -10,7 +10,7 @@
 
 
 extern struct Screen_func_80427008_de *D_800E4690;
-extern struct Record_func_80427008_de D_80102B00[];
+extern struct RecordRecAt8D D_80102B00[];
 
 
 extern void func_80265688_de(u8 *, s32, s32);

@@ -10,7 +10,7 @@ s32 func_8020F5A4_de(void **arg0) {
     void *temp_a0;
 
     temp_a0 = *arg0;
-    temp_v0 = func_8022AAD4_de(temp_a0, (s32) ((struct Measured_func_8020F5A4_de_e8f921223fca *)(temp_a0))->value);
+    temp_v0 = func_8022AAD4_de(temp_a0, (s32) ((struct MeasuredRecAt62EV1 *)(temp_a0))->value);
     switch (temp_v0) {
         case 0:
             return 5;

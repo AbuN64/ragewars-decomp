@@ -13,8 +13,8 @@
 
 extern struct Saved D_80153738;
 
-void func_80409A5C_de(struct Owner_func_804099EC_de *owner) {
-    struct Profile_func_80408C4C_de *settings = owner->settings;
+void func_80409A5C_de(struct OwnerRecAt5D8V1 *owner) {
+    struct ProfileRecAt84 *settings = owner->settings;
     s32 i;
 
     settings->flags = D_80153738.flag;

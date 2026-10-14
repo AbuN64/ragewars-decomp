@@ -8,7 +8,7 @@
 
 
 extern char D_80145040;
-extern TextEntry_func_80445D6C_de D_800E63C0[];
+extern TextEntryRecAtC D_800E63C0[];
 extern s32 func_8022A5A0_de(void *table, s32 player);
 
 s32 func_80445D6C_de(s32 unused, MenuRules *menu) {

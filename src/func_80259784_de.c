@@ -26,11 +26,11 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 
 
-void func_80259784_de(Manager_func_80259784_de *manager, s32 index, s32 owner, Vec3 *position) {
+void func_80259784_de(ManagerRecAtD8V2 *manager, s32 index, s32 owner, Vec3 *position) {
     Entry_func_80259784_de *entry;
-    Node_func_80259784_de *node;
-    Node_func_80259784_de *at;
-    Node_func_80259784_de *first;
+    NodeRecAt4C *node;
+    NodeRecAt4C *at;
+    NodeRecAt4C *first;
     s32 priority;
 
     entry = &manager->scene->entries[index];
@@ -38,7 +38,7 @@ void func_80259784_de(Manager_func_80259784_de *manager, s32 index, s32 owner, V
         return;
     }
     first = manager->free.next;
-    if (first != (Node_func_80259784_de *)&manager->free) {
+    if (first != (NodeRecAt4C *)&manager->free) {
         first->prev->next = first->next;
         first->next->prev = first->prev;
         node = first;
@@ -50,7 +50,7 @@ void func_80259784_de(Manager_func_80259784_de *manager, s32 index, s32 owner, V
         node->timer = 0;
         at = manager->active.next;
         priority = node->priority;
-        while (at != (Node_func_80259784_de *)&manager->active) {
+        while (at != (NodeRecAt4C *)&manager->active) {
             if (at->priority < priority) {
                 break;
             }

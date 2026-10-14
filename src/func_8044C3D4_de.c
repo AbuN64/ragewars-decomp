@@ -105,7 +105,7 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
             for (j = 0; j < ntris; j++) {
                 tri = &tris[j];
                 /* The caller supplies a sixth bounds value; the decoder uses the first five. */
-                ((void (*)(Header_func_80275AA4_de *,Packed *,char *,int,char *,int))func_80275AA4_de)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
+                ((void (*)(HeaderRecAt1C *,Packed *,char *,int,char *,int))func_80275AA4_de)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
                 for (i = 0; i < 3; i++) {
                     y = tri->fields.v[i]->y;
                     if (!(y <= world->minY)) {

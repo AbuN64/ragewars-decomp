@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8021CD70_H
 #define UNBAKE_SPAN_1000_CODE_8021CD70_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
@@ -8,11 +8,9 @@
 #include "resident_event_handler.h"
 #include "types.h"
 struct SharedPlayer;
-/* unbake published declaration: published_074dd8864ce6d01863b0e7e9 */
 typedef struct SharedPlayer SharedPlayer_func_802227F4_de;
 
 struct Actor_func_802238E0_de;
-/* unbake published declaration: published_0ab0a787db19b9fbd5687b55 */
 struct Actor_func_802238E0_de {
     char pad0[0x8];
     Vec3 unk8;
@@ -22,11 +20,9 @@ struct Actor_func_802238E0_de {
     s32 inputFlags;
 };
 
-/* unbake published declaration: published_0c42f0526add5e10203c059e */
 extern float D_800C78BC;
 
 struct MultiplayerOptions;
-/* unbake published declaration: published_0c61ae7dbe540847c707518f */
 struct MultiplayerOptions {
     u8 enabled;
     u8 reserved[2];
@@ -34,7 +30,6 @@ struct MultiplayerOptions {
 };
 
 struct Body_func_80224408_de;
-/* unbake published declaration: published_16d8c6550d94d212119f96c0 */
 struct Body_func_80224408_de {
     char pad0[8];
     s32 x;
@@ -51,7 +46,6 @@ struct Body_func_80224408_de {
 };
 
 struct ObjectLinks854;
-/* unbake published declaration: published_17f60f251bf274dc79322b86 */
 struct ObjectLinks854 {
     char pad0[0x14];
     u16 * unk_14;
@@ -70,7 +64,6 @@ struct ObjectLinks854 {
 };
 
 struct Body_func_80224C4C_de;
-/* unbake published declaration: published_a486c926fd4e8bb4eb897539 */
 struct Body_func_80224C4C_de {
     char pad0[8];
     s32 x;
@@ -107,7 +100,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_18156dd603a6e960bd477dfd */
 struct SharedPlayer_func_80224C4C_de {
     union {
         struct {
@@ -1553,12 +1545,10 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_1a54273c8e57873493cdf667 */
 /* This transition uses the canonical player record; its original fields have identical offsets. */
 
-struct Body_func_80225940_de;
-/* unbake published declaration: published_7a6159e3d87bd9dfb0d74e96 */
-struct Body_func_80225940_de {
+struct BodyRecAt1C;
+struct BodyRecAt1C {
     char pad0[0x1C];
     s32 motion[3];
 };
@@ -1568,7 +1558,7 @@ struct View_func_80225940_de {
     char pad0[0x554];
     char menu[1];
 };
-struct Body_func_80225940_de;
+struct BodyRecAt1C;
 struct Character;
 struct Controller;
 struct Controls;
@@ -1591,7 +1581,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View_func_80225940_de;
-/* unbake published declaration: published_1e7ffc9cec24f650edaa032d */
 struct SharedPlayer_func_80225940_de {
     union {
         struct {
@@ -1633,7 +1622,7 @@ struct SharedPlayer_func_80225940_de {
             struct Model * model;
         } view18_2;
         struct {
-            struct Body_func_80225940_de * body;
+            struct BodyRecAt1C * body;
         } view18_3;
         struct {
             struct Character * character;
@@ -3015,7 +3004,6 @@ struct SharedPlayer_func_80225940_de {
 };
 
 struct func_8021CD70_S1;
-/* unbake published declaration: published_1eb3274979f18b7e4c71baf7 */
 struct func_8021CD70_S1 {
     char pad0[0x170];
     s8 unk170;
@@ -3024,11 +3012,9 @@ struct func_8021CD70_S1 {
 };
 
 struct func_80222D40_S2;
-/* unbake published declaration: published_1f57b14f77c925de460909ab */
 typedef struct func_80222D40_S2 func_80222D40_S2;
 
 struct MovementDescriptor;
-/* unbake published declaration: published_1f602b944b2f8c8760412971 */
 typedef struct MovementDescriptor MovementDescriptor;
 
 struct Body;
@@ -3054,11 +3040,9 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_21350e0cad08a04336d5de09 */
 /* Movement and transition share the canonical player record. */
 
 struct Body_func_80224F5C_de;
-/* unbake published declaration: published_961c5a7c92790e1ce5ce886d */
 struct Body_func_80224F5C_de {
     char pad0[8];
     s32 x;
@@ -3093,7 +3077,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_28a21b36448567bca554dedd */
 struct SharedPlayer_func_80224F5C_de {
     union {
         struct {
@@ -4517,7 +4500,6 @@ struct SharedPlayer_func_80224F5C_de {
 };
 
 struct ObjectLinks1454;
-/* unbake published declaration: published_2bddcced03c142d071f81ca7 */
 struct ObjectLinks1454 {
     char pad0[0x5D8];
     char * unk_5D8;
@@ -4530,7 +4512,6 @@ struct ObjectLinks1454 {
 };
 
 struct ObjectState54;
-/* unbake published declaration: published_30514f9d88f6d992aa833ea1 */
 struct ObjectState54 {
     char pad0[0x30];
     f32 unk_30;
@@ -4538,36 +4519,28 @@ struct ObjectState54 {
     u16 unk_52;
 };
 
-/* unbake published declaration: published_353e383bdfb1880da5bdae70 */
 extern float D_800C9FA0_de;
 
 struct SharedPlayer_func_802238E0_de;
-/* unbake published declaration: published_3577020108c20de2a46353ce */
 typedef struct SharedPlayer_func_802238E0_de SharedPlayer_func_802238E0_de;
 
-/* unbake published declaration: published_37ec21195e74de6aebd94919 */
 extern float D_800C2994_de;
 
 struct Tuning;
-/* unbake published declaration: published_385bad772d57e60ff2df7ae3 */
 struct Tuning {
     char pad0[0x22];
     s16 strokeSound;
 };
 
 struct Player_func_80220A80_de;
-/* unbake published declaration: published_3e29edd94ef46fcf70e7c37c */
 typedef struct Player_func_80220A80_de Player_func_80220A80_de;
 
-/* unbake published declaration: published_3f179f5f0add0a5c6f471ebd */
 extern float D_800C299C_de;
 
 struct ObjectLinks1454;
-/* unbake published declaration: published_41267e2a86137bfce5810040 */
 typedef struct ObjectLinks1454 ObjectLinks1454;
 
 struct MovementDescriptor;
-/* unbake published declaration: published_433f32dd85eb3507a1971b58 */
 /* The definition kind selects the word-health or halfword-health payload. */
 typedef struct ActorDefinitionHeader {
     s32 kind;
@@ -4599,7 +4572,6 @@ struct MovementDescriptor {
 };
 
 struct Player_func_80220A80_de;
-/* unbake published declaration: published_45080d9bc92735d8f681ad0b */
 struct Player_func_80220A80_de {
     char pad0[0x5D0];
     s32 cameraMode;
@@ -4623,7 +4595,6 @@ struct Player_func_80220A80_de {
 };
 
 struct Body_func_80220A80_de;
-/* unbake published declaration: published_465972269304f7a7aee1672f */
 struct Body_func_80220A80_de {
     char pad0[8];
     f32 x;
@@ -4635,68 +4606,53 @@ struct Body_func_80220A80_de {
     f32 heading;
 };
 
-struct Body_func_80225940_de;
-/* unbake published declaration: published_4d3db4e4ed12b7978b72f11b */
-typedef struct Body_func_80225940_de Body_func_80225940_de;
+struct BodyRecAt1C;
+typedef struct BodyRecAt1C BodyRecAt1C;
 
 struct MultiplayerOptions;
-/* unbake published declaration: published_4dfb8b35bf4f20e1e061770e */
 typedef struct MultiplayerOptions MultiplayerOptions;
 
 struct SharedMovement;
-/* unbake published declaration: published_54c896ca09a9c6d83417deee */
 typedef struct SharedMovement SharedMovement;
 
-/* unbake published declaration: published_58dbf2ce25b83edb20315bb0 */
 extern float D_800C2960_de;
 
 struct func_80224078_Arg1;
-/* unbake published declaration: published_58eeeabec3256ec0aec2025c */
 typedef struct func_80224078_Arg1 func_80224078_Arg1;
 
 struct SessionState;
-/* unbake published declaration: published_590c7fe96f608832d908083e */
 typedef struct SessionState SessionState;
 
 struct Tuning;
-/* unbake published declaration: published_5a3be277a0662aa2eabb0de7 */
 typedef struct Tuning Tuning;
 
 struct Profile;
-/* unbake published declaration: published_7481e49065155cf712a48b19 */
 typedef struct Profile Profile;
 
 struct func_80224078_Arg0;
-/* unbake published declaration: published_5c04b819c818f8c7822dc2f1 */
 typedef struct func_80224078_Arg0 func_80224078_Arg0;
 
 struct func_80224028_S1;
-/* unbake published declaration: published_60172dd19fb3458be270f282 */
 struct func_80224028_S1 {
     char pad0[0x740];
     char unk740;
 };
 
-/* unbake published declaration: published_6027e49b8661b93459858684 */
 extern float D_800C2988_de;
 
 struct Shared_HudPlayer;
-/* unbake published declaration: published_61de5d6452c9e215d8ca4262 */
 typedef struct Shared_HudPlayer Shared_HudPlayer;
 
 struct ObjectState521;
-/* unbake published declaration: published_65c62c4a8ca1cc35c7e10372 */
 struct ObjectState521 {
     unsigned char padding_0[1312];
     u8 unk_520;
 };
 
 struct Desc;
-/* unbake published declaration: published_7267478ab11f9f2b61430695 */
 typedef struct Desc Desc;
 
 struct func_80222D40_S2;
-/* unbake published declaration: published_6831c7623e0291a647bade88 */
 struct func_80222D40_S2 {
     char pad0[0x18];
     Desc * unk18;
@@ -4709,11 +4665,9 @@ struct func_80222D40_S2 {
 };
 
 struct func_80224028_S1;
-/* unbake published declaration: published_6a70ca8c1397432b62d8aae0 */
 typedef struct func_80224028_S1 func_80224028_S1;
 
 struct ObjectState108;
-/* unbake published declaration: published_6abc00b11bd371b719b99eb9 */
 struct ObjectState108 {
     char pad0[0x44];
     u32 unk_44;
@@ -4726,20 +4680,16 @@ struct ObjectState108 {
 };
 
 struct ObjectState108;
-/* unbake published declaration: published_6b3e71a16d9c4d9959071751 */
 typedef struct ObjectState108 ObjectState108;
 
 struct func_8021CD70_S1;
-/* unbake published declaration: published_71084ce1c453521c708f2f55 */
 typedef struct func_8021CD70_S1 func_8021CD70_S1;
 
 struct ObjectState54;
-/* unbake published declaration: published_72519c34cd0e63dc105b8705 */
 typedef struct ObjectState54 ObjectState54;
 
 struct Desc;
 struct func_80222BC4_S1;
-/* unbake published declaration: published_73d5c3c4319c808365290f5a */
 struct func_80222BC4_S1 {
     char pad0[0x18];
     struct Desc * unk18;
@@ -4753,27 +4703,20 @@ struct func_80222BC4_S1 {
     s32 unk1450;
 };
 
-/* unbake published declaration: published_74b0e020bd610e1b9a8050b9 */
 extern float D_800C2998_de;
 
-/* unbake published declaration: published_759eec1bd6179be39126982d */
 extern float D_800C2980_de;
 
-/* unbake published declaration: published_778debeceed21482d457ff73 */
 extern float D_800C78B8;
 
 struct func_80222BC4_S1;
-/* unbake published declaration: published_7a398be59b752e7ced2dc15e */
 typedef struct func_80222BC4_S1 func_80222BC4_S1;
 
 struct func_8021CD70_S2;
-/* unbake published declaration: published_7bb68c73582f16eea6585147 */
 typedef struct func_8021CD70_S2 func_8021CD70_S2;
 
-/* unbake published declaration: published_7bd8eb36d778f61129bdc999 */
 extern float D_800C2978_de;
 
-/* unbake published declaration: published_823643ac276d11f20e0fec66 */
 extern float D_800C2984_de;
 
 struct Body;
@@ -4799,7 +4742,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_8b5015b20789cab2381e2f12 */
 struct SharedPlayer_func_80220D44_de {
     union {
         struct {
@@ -6235,7 +6177,6 @@ struct Shared_HudOwner {
 };
 struct Shared_HudOwner;
 struct Shared_HudPlayer;
-/* unbake published declaration: published_8c51f608f044396c3e653b08 */
 struct Shared_HudPlayer {
     char pad0[0xE4];
     u16 kind;
@@ -6337,14 +6278,11 @@ struct Shared_HudPlayer {
 };
 
 struct ObjectLinks854;
-/* unbake published declaration: published_93b818297a0e6e5a9adc1415 */
 typedef struct ObjectLinks854 ObjectLinks854;
 
-/* unbake published declaration: published_965d340a072f686ada218b1d */
 extern float D_800C2968_de;
 
 struct SharedPlayer_func_80224408_de;
-/* unbake published declaration: published_96bc1d56509f6b00a7a7795a */
 typedef struct SharedPlayer_func_80224408_de SharedPlayer_func_80224408_de;
 
 struct Body_func_80224408_de;
@@ -6370,7 +6308,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_a15ed22bd0b21a2ca370f4a2 */
 struct SharedPlayer_func_80224408_de {
     union {
         struct {
@@ -7793,23 +7730,18 @@ struct SharedPlayer_func_80224408_de {
     } views16E0;
 };
 
-/* unbake published declaration: published_a63e3a5c60089fe2e03d5ab5 */
 extern float D_800C298C_de;
 
 struct SharedPlayer_func_80220D44_de;
-/* unbake published declaration: published_a6f576b03174c5b13bf836f3 */
 typedef struct SharedPlayer_func_80220D44_de SharedPlayer_func_80220D44_de;
 
 struct View;
-/* unbake published declaration: published_a95a562926827621eb5c5e03 */
 typedef struct View View;
 
 struct Body_func_80220A80_de;
-/* unbake published declaration: published_ac0d72f985e2d0fef6a9d863 */
 typedef struct Body_func_80220A80_de Body_func_80220A80_de;
 
 struct SharedMovement;
-/* unbake published declaration: published_af02db7ad5d7626575bbddd6 */
 struct SharedMovement {
     f32 unk0;
     f32 unk4;
@@ -7823,18 +7755,14 @@ struct SharedMovement {
     s16 unk22;
 };
 
-/* unbake published declaration: published_afeec5458338fec2579132a0 */
 extern float D_800CAB88_eu;
 
-/* unbake published declaration: published_b908017161eea1fceff4a650 */
 extern float D_800CAB78_eu[];
 
 struct Body_func_80224F5C_de;
-/* unbake published declaration: published_ba559938b96d3fef97dea905 */
 typedef struct Body_func_80224F5C_de Body_func_80224F5C_de;
 
 struct SharedPlayer_func_80225940_de;
-/* unbake published declaration: published_bac421f167bfcc349138242e */
 typedef struct SharedPlayer_func_80225940_de SharedPlayer_func_80225940_de;
 
 struct Body;
@@ -7860,7 +7788,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_be4bd14f3857db82783f84d8 */
 struct SharedPlayer_func_80223E34_de {
     union {
         struct {
@@ -9283,7 +9210,6 @@ struct SharedPlayer_func_80223E34_de {
     } views16E0;
 };
 
-/* unbake published declaration: published_be4fb3bae1568accb3c5e020 */
 extern float D_800C2970_de;
 
 struct Body;
@@ -9309,7 +9235,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_bebce5656ba4c0e528fb3630 */
 struct SharedPlayer_func_802238E0_de {
     union {
         struct {
@@ -10733,7 +10658,6 @@ struct SharedPlayer_func_802238E0_de {
 };
 
 struct func_80224078_Arg0;
-/* unbake published declaration: published_c0f23e246777ff4c448b1e2c */
 struct func_80224078_Arg0 {
     char pad0[0x5DC];
     void *unk5DC;
@@ -10758,23 +10682,19 @@ struct func_80224078_Arg0 {
 };
 
 struct func_80222E80_S1;
-/* unbake published declaration: published_c3e06265924942180aeb9a19 */
 typedef struct func_80222E80_S1 func_80222E80_S1;
 
 struct func_80222E80_S2;
-/* unbake published declaration: published_c5000f8837fc117a1b3b47cb */
 typedef struct func_80222E80_S2 func_80222E80_S2;
 
 struct SharedPlayer_func_80224C4C_de;
-/* unbake published declaration: published_c8949ffc1e06beaf985abbf9 */
 typedef struct SharedPlayer_func_80224C4C_de SharedPlayer_func_80224C4C_de;
 
 struct func_8021CD70_S2;
-struct func_8021CD70_S3;
-/* unbake published declaration: published_cabb856bbb4978605ee634bf */
+struct ObjRecAt14V3;
 struct func_8021CD70_S2 {
     char pad0[0x18];
-    struct func_8021CD70_S3 * unk18;
+    struct ObjRecAt14V3 * unk18;
     char pad18[0xE4];
     s32 unk100;
     char pad100[0x70];
@@ -10785,11 +10705,9 @@ struct func_8021CD70_S2 {
     void * unk5DC;
 };
 
-/* unbake published declaration: published_cedeab1aae83d54913fcb549 */
 extern float D_800C297C_de;
 
 struct func_80224078_Arg1;
-/* unbake published declaration: published_cfa1bdd22209f20113438f0b */
 struct func_80224078_Arg1 {
     char pad0[8];
     char unk8;
@@ -10801,26 +10719,21 @@ struct func_80224078_Arg1 {
     f32 unk6C;
 };
 
-/* unbake published declaration: published_d752f68093441a464818f840 */
 extern float D_800C2974_de;
 
 struct ObjectState521;
-/* unbake published declaration: published_d8839b8bdcc7349c4c7a14e9 */
 typedef struct ObjectState521 ObjectState521;
 
 struct SessionState;
-/* unbake published declaration: published_da27f829b9fb173859b28c0d */
 struct SessionState {
     u8 reserved[0x60C];
     s32 paused;
 };
 
 struct SharedPlayer;
-/* unbake published declaration: published_dafecadc98e828f13b45cdc2 */
 typedef struct SharedPlayer SharedPlayer_func_802233F0_de;
 
 struct func_80222E80_S2;
-/* unbake published declaration: published_dfff64f7e4489a42d22d9a55 */
 struct func_80222E80_S2 {
     char pad0[0x38];
     s32 unk38;
@@ -10829,11 +10742,9 @@ struct func_80222E80_S2 {
 };
 
 struct SharedPlayer_func_80223E34_de;
-/* unbake published declaration: published_e70589719b3853a0c1c407cb */
 typedef struct SharedPlayer_func_80223E34_de SharedPlayer_func_80223E34_de;
 
 struct func_80222E80_S1;
-/* unbake published declaration: published_eaeba77fe54d99d06cb62ecc */
 struct func_80222E80_S1 {
     char pad0[0x20];
     f32 unk20;
@@ -10842,27 +10753,21 @@ struct func_80222E80_S1 {
 };
 
 struct Actor_func_802238E0_de;
-/* unbake published declaration: published_ed736c225a00e5f3f5965e44 */
 typedef struct Actor_func_802238E0_de Actor_func_802238E0_de;
 
 struct Body_func_80224408_de;
-/* unbake published declaration: published_efcc150a66caee83d018642d */
 typedef struct Body_func_80224408_de Body_func_80224408_de;
 
 struct Body_func_80224C4C_de;
-/* unbake published declaration: published_f1b3c8a3d1ccb1a3ff6602c3 */
 typedef struct Body_func_80224C4C_de Body_func_80224C4C_de;
 
 struct Model_func_80223E34_de;
 struct Object;
-/* unbake published declaration: published_f238e4dce1a9189406bcc719 */
 
 
-/* unbake published declaration: published_f782ab584fa56252bbd0af28 */
 extern float D_800C2990_de;
 
 struct SharedPlayer_func_80224F5C_de;
-/* unbake published declaration: published_f8287adb8834feb4935cf561 */
 typedef struct SharedPlayer_func_80224F5C_de SharedPlayer_func_80224F5C_de;
 
 typedef union AimOutput { Vec3 xyz; Vector4f full; Shared_Quad words; } AimOutput;

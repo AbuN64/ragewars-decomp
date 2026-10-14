@@ -12,7 +12,7 @@
 
 extern FileState D_801539B0;
 extern FileHeader D_8014D724;
-extern Entry_func_80410674_de *D_80153C10;
+extern EntryRecAt18V1 *D_80153C10;
 extern s32 *D_80153C14;
 extern Usage *D_8014D988;
 extern char D_800DD0B0;
@@ -55,7 +55,7 @@ s32 func_80410674_de(s32 index, s32 mode) {
     s32 size;
     s32 i;
     s32 format;
-    Entry_func_80410674_de *entry;
+    EntryRecAt18V1 *entry;
 
     if (D_80153C10[index].unk4 & 1) {
         touch(index, mode);

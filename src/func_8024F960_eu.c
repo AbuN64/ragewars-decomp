@@ -29,7 +29,7 @@ extern s32 D_800CD8D0[];
 
 
 
-extern void func_8024DD10_de(PlacedProp *, Record_func_8024F960_eu *, s32, char *);
+extern void func_8024DD10_de(PlacedProp *, RecordRecAt1A *, s32, char *);
 extern PropGeometry *func_8028CF6C_de(void *, s32);
 extern void func_8027347C_de(char *, f32, f32, f32);
 extern void func_80273448_de(char *, f32, f32, f32);
@@ -48,7 +48,7 @@ static inline s32 func_80250BF0_de(void) {
     return D_800D0910;
 }
 
-void func_8024F960_eu(PlacedProp *prop, Record_func_8024F960_eu *record, s32 owner, char *segments, f32 spacing) {
+void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing) {
     char matrix[0x40];
     Vec3 position;
     PropGeometry *model;

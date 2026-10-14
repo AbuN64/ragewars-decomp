@@ -8,7 +8,7 @@
 
 
 float func_8022C67C_de(void *arg0) {
-    func_8022C67C_S1 *obj = arg0;
+    ObjRecAtB8 *obj = arg0;
     float f1 = D_800C2D48_de;
     float f2 = *(float *)((char *)&D_800C2D48_de + 4);
     float f0 = D_800C2D50_de;

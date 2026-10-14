@@ -6,8 +6,8 @@
    60, a diagonal (1, 3, 5 or 7) when both axes are non-zero and their magnitudes differ by less than 46,
    otherwise 2 or 6 when the horizontal axis dominates and 0 or 4 when the vertical one does, reading
    the stick bytes at 0xC6 and 0xC7 of the controller at 0x698. */
-s32 func_80217B3C_de(Player_func_80217B3C_de *player) {
-    Controller_func_80217B3C_de *controller;
+s32 func_80217B3C_de(PlayerRecAt698 *player) {
+    ControllerRecAtC7 *controller;
     s8 x;
     s8 y;
     controller = player->controller;

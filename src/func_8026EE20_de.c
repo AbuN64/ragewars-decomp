@@ -7,7 +7,7 @@
 
 /* Transforms an axis-aligned box by a matrix: starts the new minimum and maximum at the matrix translation and, for every matrix entry, adds the smaller of its products with the old minimum and maximum to the new minimum and the larger to the new maximum. */
 
-void func_8026EE20_de(f32 m[4][4], Box_func_8026EE20_de *box, Box_func_8026EE20_de *out) {
+void func_8026EE20_de(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
     f32 min[3];
     f32 max[3];
     f32 newMin[3];

@@ -8,7 +8,7 @@ extern void func_80283064_de(void *arg0, s32 *arg1);
 
 
 void func_802A5F9C_de(void *unused, void *arg1, void *arg2) {
-    Entry_func_802A6F68_de *entry = arg1;
+    EntryRecAt34 *entry = arg1;
     s32 field34;
     s32 *p;
 

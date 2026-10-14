@@ -1,11 +1,10 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802192C0_H
 #define UNBAKE_SPAN_1000_CODE_802192C0_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 struct func_80219490_S1;
-/* unbake published declaration: published_00af4daaab18587b1c2c1217 */
 struct func_80219490_S1 {
     char pad0[0x8];
     s32 unk8;
@@ -30,7 +29,6 @@ struct func_80219490_S1 {
 };
 
 struct func_8021CBAC_S1;
-/* unbake published declaration: published_02b359446a9ee4aa0145ce0d */
 struct func_8021CBAC_S1 {
     char pad0[0x2E8];
     char unk2E8;
@@ -41,15 +39,12 @@ struct func_8021CBAC_S1 {
 };
 
 struct func_80219434_S1;
-/* unbake published declaration: published_02f27b63830137baa1e96030 */
 typedef struct func_80219434_S1 func_80219434_S1;
 
 struct ObjectState8E;
-/* unbake published declaration: published_0d0fe25adae1c88ee7d75a2f */
 typedef struct ObjectState8E ObjectState8E;
 
 struct Player_func_8021C698_de;
-/* unbake published declaration: published_111ec6f8f399ee7b35acbef1 */
 struct Player_func_8021C698_de {
     char pad0[0x1214];
     s32 marker;
@@ -61,11 +56,9 @@ struct Player_func_8021C698_de {
 };
 
 struct func_8021C9B4_Records;
-/* unbake published declaration: published_228cc37b8a9cfd2905d19078 */
 typedef struct func_8021C9B4_Records func_8021C9B4_Records;
 
 struct func_8021C9B4_S1;
-/* unbake published declaration: published_2ee09703b30f7c18d93d8dda */
 struct func_8021C9B4_S1 {
     char pad0[0x3];
     u8 unk3;
@@ -84,14 +77,11 @@ struct func_8021C9B4_S1 {
 };
 
 struct func_8021C9B4_S1;
-/* unbake published declaration: published_31e952a9cb84ef4f636876d5 */
 typedef struct func_8021C9B4_S1 func_8021C9B4_S1;
 
-/* unbake published declaration: published_371bc1d87c4668137ff21d1c */
 extern float D_800C22FC_de;
 
 struct func_80219408_S1;
-/* unbake published declaration: published_3ca0ebecfbb58d16ccd0e66f */
 struct func_80219408_S1 {
     char pad0[0x1];
     char unk1;
@@ -100,7 +90,6 @@ struct func_80219408_S1 {
 };
 
 struct ObjectLinks16D8;
-/* unbake published declaration: published_440054d13516028d2c414902 */
 struct ObjectLinks16D8 {
     char pad0[0x8];
     Vec3 unk_8;
@@ -255,15 +244,12 @@ struct ObjectLinks16D8 {
 };
 
 struct Struct802193C8;
-/* unbake published declaration: published_4643b57326c8a2337fdf174e */
 typedef struct Struct802193C8 Struct802193C8;
 
 struct func_8021CBAC_S3;
-/* unbake published declaration: published_49057fa07e76a2cd3d8d52e1 */
 typedef struct func_8021CBAC_S3 func_8021CBAC_S3;
 
 struct func_80219460_S1;
-/* unbake published declaration: published_4d1cc2765aca081a3caaa9b8 */
 struct func_80219460_S1 {
     char pad0[0x4];
     int unk4;
@@ -275,14 +261,11 @@ struct func_80219460_S1 {
     char unk12;
 };
 
-/* unbake published declaration: published_511ac70ee31bcbdd6e3e29cd */
 extern float D_800C22B0_us;
 
-/* unbake published declaration: published_5bb2382da4f3c659a3a7275f */
 extern float D_800C22D0_de;
 
 struct Cursor;
-/* unbake published declaration: published_63f62c45ee32cf0d7d0bdac3 */
 struct Cursor {
     s8 state;
     u8 clip;
@@ -291,7 +274,6 @@ struct Cursor {
 };
 
 struct func_8021CBAC_S2;
-/* unbake published declaration: published_7c6b5c05e40deac51376bfba */
 struct func_8021CBAC_S2 {
     char pad0[0x120];
     s32 unk120;
@@ -300,7 +282,6 @@ struct func_8021CBAC_S2 {
 };
 
 struct func_8021CBAC_S3;
-/* unbake published declaration: published_7e34e12db0dc0e85449c8739 */
 struct func_8021CBAC_S3 {
     char pad0[0x44];
     f32 unk44;
@@ -313,29 +294,23 @@ struct func_8021CBAC_S3 {
 };
 
 struct func_80219460_S1;
-/* unbake published declaration: published_802f7fca018276e4378e3919 */
 typedef struct func_80219460_S1 func_80219460_S1;
 
-/* unbake published declaration: published_8b06ef28bb9421cd1dfe15f2 */
 extern float D_800C22F8_de;
 
 struct func_80219408_S1;
-/* unbake published declaration: published_9447a27efae135fdd1ac5479 */
 typedef struct func_80219408_S1 func_80219408_S1;
 
 struct ObjectState8E;
-/* unbake published declaration: published_b256f126519a56329635e551 */
 struct ObjectState8E {
     unsigned char padding[141];
     s8 state;
 };
 
 struct Cursor;
-/* unbake published declaration: published_c22d44ff83f8162733fe7093 */
 typedef struct Cursor Cursor;
 
 struct Struct802193C8;
-/* unbake published declaration: published_cb683ed4cf261441b6f2b330 */
 struct Struct802193C8 {
     s8 field0;
     s8 field1;
@@ -344,34 +319,27 @@ struct Struct802193C8 {
 };
 
 struct func_8021C9B4_Records;
-/* unbake published declaration: published_cbb724e495896d42ab761051 */
 struct func_8021C9B4_Records {
     char pad[0x140];
     Slot records[16];
 };
 
 struct func_8021CBAC_S2;
-/* unbake published declaration: published_d55435d307220429a8286dc8 */
 typedef struct func_8021CBAC_S2 func_8021CBAC_S2;
 
 struct func_8021CBAC_S1;
-/* unbake published declaration: published_da0607871a816e7de4fb558c */
 typedef struct func_8021CBAC_S1 func_8021CBAC_S1;
 
 struct func_80219490_S1;
-/* unbake published declaration: published_e3df4ee3d8ed8b29604bdd66 */
 typedef struct func_80219490_S1 func_80219490_S1;
 
 struct Player_func_8021C698_de;
-/* unbake published declaration: published_e9e3fb1434b4570dde546b96 */
 typedef struct Player_func_8021C698_de Player_func_8021C698_de;
 
 struct ObjectLinks16D8;
-/* unbake published declaration: published_f36ae8aea2abcccb56c6d98b */
 typedef struct ObjectLinks16D8 ObjectLinks16D8;
 
 struct func_80219434_S1;
-/* unbake published declaration: published_f6d60c481db216d17af88659 */
 struct func_80219434_S1 {
     char pad0[0x1];
     char unk1;

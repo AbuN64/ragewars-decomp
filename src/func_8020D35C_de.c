@@ -5,6 +5,6 @@
 
 /** Clear the word at offset 0x28. */
 void func_8020D35C_de(void *arg0) {
-    func_8020D280_S1 *record = arg0;
+    ObjRecAt28V2 *record = arg0;
     record->unk28 = 0;
 }

@@ -6,5 +6,5 @@
 extern char *D_80153C28;
 
 short func_80411C28_de(int index) {
-    return ((struct func_802B67B0_S2 *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkE;
+    return ((struct ObjRecAtE *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkE;
 }

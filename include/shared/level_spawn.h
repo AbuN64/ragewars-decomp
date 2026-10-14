@@ -15,7 +15,7 @@ typedef struct LevelBlock {
 typedef struct LevelNode {
     s32 size;
     s32 count;
-    Input_func_8024B3A8_de records[1];
+    InputRecAt27 records[1];
 } LevelNode;
 extern SharedPlayer *D_80140F84;
 #endif

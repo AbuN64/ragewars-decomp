@@ -132,7 +132,7 @@ void func_8026CBA4_de(void **resource, void *owner, s32 matrix, s32 segment, s32
     for (i = 0; i < count; i++) {
         part = func_8028FDB4_de(parts, i);
         material = func_8028FDB4_de(part, 0);
-        if ((((Material *)material)->flags & 0x38) != 0x38 || (((Player_func_802676EC_de *)(owner))->flags & 0x400)) {
+        if ((((Material *)material)->flags & 0x38) != 0x38 || (((PlayerRecAt122C *)(owner))->flags & 0x400)) {
             Gfx *cmd;
             void *list = func_8028FDB4_de(part, 1);
 

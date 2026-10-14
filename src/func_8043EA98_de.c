@@ -23,7 +23,7 @@ extern s32 func_8026437C_de(char *);
 extern void func_8025E384_de(void);
 extern void func_8044DE7C_de(char *, s32);
 
-void func_8043EA98_de(void *arg0, struct func_802285C4_S1 *menu) {
+void func_8043EA98_de(void *arg0, struct ObjRecAt20V2 *menu) {
     struct Globals_func_8043EA98_de *globals;
     struct Part *settings;
     char *profile;

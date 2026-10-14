@@ -27,9 +27,9 @@ void func_8041DA5C_de(s32 style) {
 
     for (i = 0; i < 50; i++) {
         node = func_8040EC30_de(D_800E3590->root, (u16) D_800DF544[i].id);
-        if (func_80265650_de(&D_800FEB4A[((Menu_func_8041DA5C_de *) D_800E3590)->player], i) == 1) {
+        if (func_80265650_de(&D_800FEB4A[((MenuRecAt10C *) D_800E3590)->player], i) == 1) {
             func_8040E8D8_de(node, 1);
-            ((Node_func_8041DA5C_de *) node)->style = style;
+            ((NodeRecAt10 *) node)->style = style;
         } else {
             func_8040E8D8_de(node, 0);
         }

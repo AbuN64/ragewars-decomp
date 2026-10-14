@@ -16,7 +16,7 @@ extern void D_00203DF0();
 
 extern f32 D_800C6B30;
 
-void func_8020388C_de(struct Owner_func_8020388C_de *owner, struct Record_func_8020388C_de *record)
+void func_8020388C_de(struct OwnerRecAtE4 *owner, struct RecordRecAt13C *record)
 {
     record->table = D_800C8170_de;
     record->first = D_002039F8;

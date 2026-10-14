@@ -7,6 +7,6 @@
 
 
 
-struct Triple func_80439C5C_de(struct Object_func_80439C30_de *object) {
+struct Triple func_80439C5C_de(struct ObjectRecAt28 *object) {
     return object->vector;
 }

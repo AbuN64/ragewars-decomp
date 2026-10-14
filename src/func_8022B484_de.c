@@ -13,7 +13,7 @@ extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 
 void func_8022B484_de(char *arg0) {
-    func_8022B474_S1 *object = arg0;
+    ObjRecAt120C *object = arg0;
     s32 index;
 
     if (object->unk120C != 0) {

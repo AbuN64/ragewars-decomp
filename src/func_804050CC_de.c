@@ -8,7 +8,7 @@
 
 
 
-extern PakDirectory_func_8040458C_de *D_800E2854;
+extern PakDirectoryRecAt4 *D_800E2854;
 
 /* Counts empty Controller Pak note slots on channel ch when the pak is ready and returns its error status, or -2 when not ready. */
 s32 func_804050CC_de(s32 ch, s32 *count) {

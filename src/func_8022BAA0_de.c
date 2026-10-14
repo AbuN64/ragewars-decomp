@@ -10,7 +10,7 @@
 /** Report whether the nested pointer's word at 0x564 is nonzero. */
 int func_8022BAA0_de(void *object) {
     func_80228774_S5 *object_record = object;
-    func_8021CD70_S4 *nested = object_record->unk5DC;
+    ObjRecAt564 *nested = object_record->unk5DC;
     if (nested != 0) {
         return nested->unk564 != 0;
     }

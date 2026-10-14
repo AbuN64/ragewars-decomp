@@ -10,7 +10,7 @@ void func_80426090_de(Arg *arg0) {
     s32 temp_s3;
     s32 temp_v0;
     s32 var_s1;
-    State_func_80426090_de *temp_a0;
+    StateRecAt91 *temp_a0;
     Model *var_s2;
     temp_a0 = arg0->unk5D8;
     if (temp_a0->unk91 != 1) {

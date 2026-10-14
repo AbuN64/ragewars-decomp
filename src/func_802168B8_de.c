@@ -9,7 +9,7 @@ extern void func_80217074_de(void *arg0, f32 arg1);
 
 extern f32 D_800D2988;
 
-void func_802168B8_de(void *arg0, s32 arg1, Vec3_func_802168B8_de *arg2, f32 arg3) {
+void func_802168B8_de(void *arg0, s32 arg1, VecRecAt10 *arg2, f32 arg3) {
     f32 f0;
     f32 f1;
     f32 f2;

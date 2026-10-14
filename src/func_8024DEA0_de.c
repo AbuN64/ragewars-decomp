@@ -10,10 +10,10 @@
 extern u8 D_801462E5;
 s32 func_8024DEA0_de(void *arg0) {
     void *temp_a0;
-    temp_a0 = (((struct func_80205314_S1 *) ((s8 *) arg0))->unk18);
-    if ((((struct func_8021CD70_S3 *) ((s8 *) temp_a0))->unk0) == 0xB) {
+    temp_a0 = (((struct ObjRecAt18V5 *) ((s8 *) arg0))->unk18);
+    if ((((struct ObjRecAt14V3 *) ((s8 *) temp_a0))->unk0) == 0xB) {
         if (D_801462E5 != 0) {
-            return (((struct func_8021CD70_S3 *) ((s8 *) temp_a0))->unk14) & 1;
+            return (((struct ObjRecAt14V3 *) ((s8 *) temp_a0))->unk14) & 1;
         }
         return 1;
     }

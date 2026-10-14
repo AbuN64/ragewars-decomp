@@ -4,7 +4,7 @@
    is idle (0), finished (17) or in state 14; otherwise, or when none is in state 14, returns -1. */
 
 
-extern Player_func_80434750_de *D_800E54A4;
+extern PlayerRecAt58 *D_800E54A4;
 
 int func_80434750_de(void) {
     int i;

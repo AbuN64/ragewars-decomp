@@ -14,7 +14,7 @@ extern s32 func_8022A5A0_de(char *, s32);
 
 
 
-s32 func_80445964_de(void *unused, Menu_func_80445964_de *menu) {
+s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
     s32 i;
     f32 t;
 

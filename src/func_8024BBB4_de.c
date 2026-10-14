@@ -24,7 +24,7 @@ void func_8024BBB4_de(char *actor, Vec3 offset, void *arg4, s32 *arg5)
 
         offset.x = -offset.x;
         offset.z = -offset.z;
-        parent = ((struct func_8024795C_S2 *) ((ObjectLinks1DC_3 *) actor)->unk_1D8)->unk5DC;
+        parent = ((struct ObjRecAt5DC *) ((ObjectLinks1DC_3 *) actor)->unk_1D8)->unk5DC;
         if (parent != 0) {
             func_80272898_de(parent + 0x160, &offset, &target);
         } else {

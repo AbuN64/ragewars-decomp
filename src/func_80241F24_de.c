@@ -34,7 +34,7 @@ extern f32 D_800C3758_de[];
 
 
 
-void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input) {
+void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input) {
     u8 collision[0x108];
     Vec3 next;
     f32 hit_y;
@@ -49,7 +49,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *own
 
     owner_data = &((Actor_func_8024A7A0_de *)owner)->position0;
     entry = owner->entries + 0x14;
-    height = ((Shape_func_80241950_de *)entry)->radius + func_8024D398_de(input);
+    height = ((ShapeRecAt18V1 *)entry)->radius + func_8024D398_de(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
         func_80240D20_de(query, bounds);

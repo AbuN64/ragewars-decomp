@@ -4,7 +4,7 @@
 
 /* Sets the sound fade state and derives its step from the clamped duration. */
 
-void func_8025DACC_de(State_func_8025DACC_de *arg0) {
+void func_8025DACC_de(StateRecAt34 *arg0) {
     f32 var_f2;
 
     var_f2 = arg0->unk30;

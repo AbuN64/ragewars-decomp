@@ -24,9 +24,9 @@ void func_8025D450_de(Track *arg0) {
     s32 var_s0;
     s32 var_v0;
     void *temp_s0_2;
-    Context_func_8025D450_de *temp_v0_2;
+    ContextRecAt2BB8 *temp_v0_2;
     struct Resource *temp_v0_4;
-    Context_func_8025D450_de *temp_v0_5;
+    ContextRecAt2BB8 *temp_v0_5;
     void *var_v0_2;
     temp_v1 = arg0->unk18;
     switch (temp_v1) { /* irregular */

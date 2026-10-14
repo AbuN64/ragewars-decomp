@@ -12,7 +12,7 @@ extern void func_802648C8_de(void);
 extern s32 func_8025CC6C_de(s32 mask);
 extern void func_8025CAB0_de(s32 value);
 
-void func_8044560C_de(Player_func_8044560C_de *player) {
+void func_8044560C_de(PlayerRecAtC *player) {
     s32 mask;
 
     player->state = 2;

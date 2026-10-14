@@ -4,7 +4,7 @@
 #include "stddef.h"
 /* Clears a record: the words at offsets 0, 4, 8, 0x18 and 0x1C, and the three-word array at 0xC
    from its last entry down. */
-void func_80405CA8_de(struct Record_func_80405CA8_de *record) {
+void func_80405CA8_de(struct RecordRecAt1C *record) {
     s32 i;
     record->a = 0;
     record->b = 0;
@@ -18,7 +18,7 @@ void func_80405CA8_de(struct Record_func_80405CA8_de *record) {
 /* Releases object resources and clears their handles. */
 void func_80253838_de(s32, s32);
 /* extern */
-void func_80405CDC_de(struct Record_func_80405CA8_de *arg0) {
+void func_80405CDC_de(struct RecordRecAt1C *arg0) {
     s32 temp_a1;
     s32 temp_a1_2;
     s32 temp_a1_3;

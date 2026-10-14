@@ -14,7 +14,7 @@ extern f32 D_800E2280[];
 
 
 
-s32 func_8043CB30_de(void *unused, Menu_func_8043CB30_de *menu) {
+s32 func_8043CB30_de(void *unused, MenuRecAt20V4 *menu) {
     f32 t;
 
     t = D_800E5CA0.y + D_800D2988;

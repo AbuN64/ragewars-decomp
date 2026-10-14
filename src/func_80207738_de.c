@@ -3,14 +3,14 @@
 
 /* Chooses the option label from the signed kind byte and, for the default
  * kind, the paired variant byte. The caller's context is unused. */
-struct Input_func_80207738_de {
+struct InputRecAt37 {
     char pad0[0x34];
     s8 variant;
     char pad35[2];
     s8 kind;
 };
 
-s32 func_80207738_de(void *context, struct Input_func_80207738_de *option) {
+s32 func_80207738_de(void *context, struct InputRecAt37 *option) {
     s32 result;
     switch (option->kind) {
     case 3:

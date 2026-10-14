@@ -4,7 +4,7 @@
 
 
 extern int D_801468F4[];
-void func_80443C14_de(Object_func_80443C14_de *object) {
+void func_80443C14_de(ObjectRecAt1C *object) {
  if(object->parent) object->parent->unk85C=1;
  object->actor->flags1c0 |= 0x01800000;
  object->actor->flags1c0 &= 0xFEFFFFFF;

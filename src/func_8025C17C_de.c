@@ -9,9 +9,9 @@
 
 
 
-s32 func_8025C17C_de(Record_func_8025BA4C_de *record, s32 value) {
+s32 func_8025C17C_de(RecordRecAt4V3 *record, s32 value) {
     s32 i;
-    Slot_func_8025BA4C_de *slot = record->slots;
+    SlotRecAtA8 *slot = record->slots;
 
     for (i = 0; i < 17; i++, slot++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {

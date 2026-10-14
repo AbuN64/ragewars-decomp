@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-typedef struct Shared_func_80286A78_S1 Shared_func_80286A78_S1;
-struct Shared_func_80286A78_S1 {
+typedef struct SharedRecAt1B92C SharedRecAt1B92C;
+struct SharedRecAt1B92C {
     s32 unk0; /* +0x0: src/func_80286A78.c */
     char pad4[0x18];
     s32 unk1C; /* +0x1C: src/func_80286A78.c */
@@ -100,6 +100,6 @@ struct Shared_func_80286A78_S1 {
     char pad1B928[0x4];
     s32 unk1B92C; /* +0x1B92C: src/func_80286A78.c */
 };
-typedef char Shared_func_80286A78_S1_size_check[(sizeof(Shared_func_80286A78_S1) == 0x1B930) ? 1 : -1];
+typedef char Shared_func_80286A78_S1_size_check[(sizeof(SharedRecAt1B92C) == 0x1B930) ? 1 : -1];
 
 #endif

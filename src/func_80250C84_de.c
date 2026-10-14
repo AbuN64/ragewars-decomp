@@ -48,7 +48,7 @@ void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 arg2, s32 k
             }
             data = object;
         } else {
-            data = (char *)(header + 2);
+            data = (char *)&header[2];
         }
         if (D_800D15E0 != 0) {
             func_8026DA4C_de(instance, owner->transform, 0, 0, data, arg2);

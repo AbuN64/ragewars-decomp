@@ -1,7 +1,7 @@
 #include "span_16E000/code_8043E9A8.h"
 #include "shared/func_8043F294_de_closed.h"
 
-s32 func_8043F294_de(Menu_func_8043F294_de *arg0, Shared_MenuInput *arg1) {
+s32 func_8043F294_de(MenuRecAt14 *arg0, Shared_MenuInput *arg1) {
     void *temp_a0_2;
     void *temp_v1;
     f32 temp_v0;

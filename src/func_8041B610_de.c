@@ -15,7 +15,7 @@ extern Node_func_8041B610_de *func_8025305C_de(s32 size);
 extern void func_802A0748_de(Node_func_8041B610_de *node, s32 value, s32 size);
 extern void func_8040EDE4_de(Node_func_8041B610_de *parent, Node_func_8041B610_de *node);
 
-Node_func_8041B610_de *func_8041B610_de(Owner_func_8041B610_de *owner, s32 value) {
+Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *owner, s32 value) {
     Node_func_8041B610_de *node;
 
     node = func_8025305C_de(0x70);

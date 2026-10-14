@@ -9,7 +9,7 @@
 
 
 s32 func_80445FC8_us_rev1(void *unused, struct Holder *holder) {
-    struct Owner_func_8043DB04_de *owner = holder->owner;
+    struct OwnerRecAt5D0 *owner = holder->owner;
 
     if (owner == 0) {
         return 0;
@@ -34,7 +34,7 @@ s32 func_80445FC8_us_rev1(void *unused, struct Holder *holder) {
 extern char D_800E6090[];
 extern char D_800E60AC[];
 
-s32 func_80446000_us_rev1(struct Field_func_8040A4A0_de *field, struct Holder *holder) {
+s32 func_80446000_us_rev1(struct FieldRecAt14 *field, struct Holder *holder) {
     if (holder->owner == 0) {
         return 0;
     }

@@ -49,7 +49,7 @@ Vector4f func_8024796C_de(char *actor) {
             yaw.y = D_80115DEC;
             yaw.z = 0.0f;
             yaw.w = func_802B6560_de(angle);
-            func_80274098_de(&result, &yaw, &((Shared_func_80227014_S4 *)weapon)->orientation);
+            func_80274098_de(&result, &yaw, &((SharedRecAt564V1 *)weapon)->orientation);
         } else {
             angle = 1.5707964f;
             func_80226C60_de(player, &own);

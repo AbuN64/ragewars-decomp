@@ -7,7 +7,7 @@
 
 /** Set flag 8 in the first object and flag 0x10 in the second. */
 void func_802428D0_de(void *first, void *second) {
-    Actor_func_802426CC_de *actor = first;
+    ActorRecAtB0 *actor = first;
     Input_func_802426CC_de *input = second;
     actor->flags |= 8;
     input->flags38 |= 0x10;

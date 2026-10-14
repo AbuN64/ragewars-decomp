@@ -22,7 +22,7 @@ void func_8040F580_de(void) {
     s32 e;
     s32 n;
     s32 i;
-    Slot_func_8040F580_de *slot;
+    SlotRecAtCV2 *slot;
 
     for (e = 0; e < D_80153C20.count; e++) {
         if (D_80153C20.entries[e].refCount != 0 && D_80153C20.entries[e].active != 0) {

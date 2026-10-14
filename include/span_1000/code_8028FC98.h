@@ -1,10 +1,9 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8028FC98_H
 #define UNBAKE_SPAN_1000_CODE_8028FC98_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 struct Node_func_8029076C_de;
-/* unbake published declaration: published_07604d8de075bbff696cbcf7 */
 struct Node_func_8029076C_de {
     char pad0[0x17C];
     f32 x0;
@@ -20,40 +19,31 @@ struct Node_func_8029076C_de {
 };
 
 struct Results;
-/* unbake published declaration: published_16f97d099fa7c882fadec402 */
 typedef struct Results Results;
 
-/* unbake published declaration: published_173a58cd2cee3de59c8d2923 */
 extern void *func_8028FEF0_de(int *arg0, int *arg1);
 
 struct Node_func_8029076C_de;
-/* unbake published declaration: published_55ca511dc5e652605fb71554 */
 typedef struct Node_func_8029076C_de Node_func_8029076C_de;
 
 struct Results;
-/* unbake published declaration: published_17d3432aa71bf8502ee0b67d */
 struct Results {
     char pad0[0x144];
     Node_func_8029076C_de *nodes[0x200];
     s32 count;
 };
 
-/* unbake published declaration: published_2e7571dbc839e03d9c2caab4 */
 extern void func_802909F0_de();
 
 struct func_80290930_S1;
-/* unbake published declaration: published_2fe2ee76bc6887717672a0c3 */
 typedef struct func_80290930_S1 func_80290930_S1;
 
 struct func_802905D4_S2;
-/* unbake published declaration: published_30c1e515c83e9263cbece682 */
 typedef struct func_802905D4_S2 func_802905D4_S2;
 
-/* unbake published declaration: published_458bcb4e413ed03fb701da81 */
 extern float D_800C53A8_de;
 
 struct ObjectLinks3C0C;
-/* unbake published declaration: published_4cdaf6aa9ed831b1ae177988 */
 struct ObjectLinks3C0C {
     char pad0[0x3C00];
     void * unk_3C00;
@@ -64,7 +54,6 @@ struct ObjectLinks3C0C {
 };
 
 struct func_8028FFB0_S2;
-/* unbake published declaration: published_4dc5640d05cb4255d4072492 */
 struct func_8028FFB0_S2 {
     char pad0[0x4];
     s16 unk4;
@@ -127,22 +116,18 @@ struct func_8028FFB0_S2 {
 };
 
 struct Actor_func_80290238_de;
-/* unbake published declaration: published_4f36db34cd324f5aef419611 */
 typedef struct Actor_func_80290238_de Actor_func_80290238_de;
 
 struct func_802905D4_S1;
-/* unbake published declaration: published_4fc6542c01ec7a32c9cb35a2 */
 struct func_802905D4_S1 {
     char pad0[0x3C04];
     char * unk3C04;
 };
 
 struct ObjectLinks1E0;
-/* unbake published declaration: published_56d26d31c607ace9a5b715e6 */
 typedef struct ObjectLinks1E0 ObjectLinks1E0;
 
 struct ObjectLinks1E0;
-/* unbake published declaration: published_5760ad651ebf0a6ae228ae7d */
 struct ObjectLinks1E0 {
     char pad0[0x1C8];
     s32 unk_1C8;
@@ -154,22 +139,18 @@ struct ObjectLinks1E0 {
     void * unk_1DC;
 };
 
-/* unbake published declaration: published_586caf21dc3fe10048417b00 */
 extern s32 func_8028FE6C_de(s32 arg0, s32 arg1, s32 *arg2);
 
-/* unbake published declaration: published_5a898f91cd30ed0c26960665 */
 extern void func_8028FED0_de(void *arg0, void **arg1, s32 *arg2);
 
-struct Container_func_8029076C_de;
+struct ContainerRecAt3C04;
 struct Node_func_8029076C_de;
-/* unbake published declaration: published_5c806110e3383c450a535975 */
-struct Container_func_8029076C_de {
+struct ContainerRecAt3C04 {
     char pad0[0x3C04];
     struct Node_func_8029076C_de *head;
 };
 
 struct func_8028FFB0_S4;
-/* unbake published declaration: published_683c472ba9f35b408086e24b */
 struct func_8028FFB0_S4 {
     char pad0[0xC];
     f32 unkC;
@@ -178,7 +159,6 @@ struct func_8028FFB0_S4 {
 };
 
 struct Actor_func_80290238_de;
-/* unbake published declaration: published_c05b03938b18d55a4d44fc14 */
 struct ActorDefinitionHeader;
 struct Actor_func_80290238_de {
     s8 active;
@@ -220,9 +200,8 @@ struct Actor_func_80290238_de {
 };
 
 struct Actor_func_80290238_de;
-struct World_func_80290238_de;
-/* unbake published declaration: published_6a42aa424d03335fcb314976 */
-struct World_func_80290238_de {
+struct WorldRecAt3C08;
+struct WorldRecAt3C08 {
     char pad0[0x3C00];
     struct Actor_func_80290238_de *free;
     struct Actor_func_80290238_de *head;
@@ -230,11 +209,9 @@ struct World_func_80290238_de {
 };
 
 struct ListNode80290528;
-/* unbake published declaration: published_6f3416b747c6a7d0067b3528 */
 typedef struct ListNode80290528 ListNode80290528;
 
 struct func_8028FFB0_S1;
-/* unbake published declaration: published_706f5f5e123937b6a5b6925b */
 struct func_8028FFB0_S1 {
     char pad0[0x3C00];
     char * unk3C00;
@@ -245,11 +222,9 @@ struct func_8028FFB0_S1 {
 };
 
 struct func_802905D4_S3;
-/* unbake published declaration: published_711130ffd67a78b8f036e7db */
 typedef struct func_802905D4_S3 func_802905D4_S3;
 
 struct ListNode80290528;
-/* unbake published declaration: published_99887c13821be6cf64771346 */
 struct ListNode80290528 {
     char unknown000[0x1D0];
     unsigned int flags;
@@ -259,7 +234,6 @@ struct ListNode80290528 {
 };
 
 struct func_80290930_S1;
-/* unbake published declaration: published_8751606caf263eedfd9cff1c */
 struct func_80290930_S1 {
     char pad0[0x3C00];
     ListNode80290528 * unk3C00;
@@ -270,7 +244,6 @@ struct func_80290930_S1 {
 };
 
 struct func_802905D4_S3;
-/* unbake published declaration: published_8e62ccc93c1530d4ad28a9c2 */
 struct func_802905D4_S3 {
     char pad0[0x17C];
     f32 unk17C;
@@ -291,11 +264,9 @@ struct func_802905D4_S3 {
 };
 
 struct func_802903E8_S1;
-/* unbake published declaration: published_a6bf28c96b3cdf2b9189fba4 */
 typedef struct func_802903E8_S1 func_802903E8_S1;
 
 struct func_802905D4_S2;
-/* unbake published declaration: published_ba6b39d3f733b65a26333b24 */
 struct func_802905D4_S2 {
     char pad0[0x350];
     f32 unk350;
@@ -312,30 +283,23 @@ struct func_802905D4_S2 {
 };
 
 struct func_802905D4_S1;
-/* unbake published declaration: published_c5813bf784c35572cce73909 */
 typedef struct func_802905D4_S1 func_802905D4_S1;
 
 struct ObjectLinks3C0C;
-/* unbake published declaration: published_c80ecd09ea1aa42d9d9ffee8 */
 typedef struct ObjectLinks3C0C ObjectLinks3C0C;
 
-/* unbake published declaration: published_c89bfd33b790282f76006e96 */
 extern void func_80290408_de(void *arg0);
 
 struct func_8028FFB0_S1;
-/* unbake published declaration: published_d1d109baf7376dfba683affe */
 typedef struct func_8028FFB0_S1 func_8028FFB0_S1;
 
 struct func_8028FFB0_S2;
-/* unbake published declaration: published_de9befc2e0647413438a436a */
 typedef struct func_8028FFB0_S2 func_8028FFB0_S2;
 
 struct func_8028FFB0_S4;
-/* unbake published declaration: published_e40b11fa2ca421a472aa1bf7 */
 typedef struct func_8028FFB0_S4 func_8028FFB0_S4;
 
 struct func_802903E8_S1;
-/* unbake published declaration: published_f3fa11e9b366713b64ab2316 */
 struct func_802903E8_S1 {
     signed char unk0;
     char pad0[0x18 - 0x0 - sizeof(signed char)];
@@ -344,16 +308,13 @@ struct func_802903E8_S1 {
     int unk1D0;
 };
 
-struct World_func_80290238_de;
-/* unbake published declaration: published_f40ae23cc722687c4c30332b */
-typedef struct World_func_80290238_de World_func_80290238_de;
+struct WorldRecAt3C08;
+typedef struct WorldRecAt3C08 WorldRecAt3C08;
 
-/* unbake published declaration: published_f60803f91b30a10a5cb9bfa3 */
-extern void func_80290238_de(World_func_80290238_de *world);
+extern void func_80290238_de(WorldRecAt3C08 *world);
 
-struct Container_func_8029076C_de;
-/* unbake published declaration: published_f870f38abddaaf78b3ccd4de */
-typedef struct Container_func_8029076C_de Container_func_8029076C_de;
+struct ContainerRecAt3C04;
+typedef struct ContainerRecAt3C04 ContainerRecAt3C04;
 
 /* Resident resource chunks have two count/stride words followed by byte payload. */
 typedef struct ResidentDataChunk {

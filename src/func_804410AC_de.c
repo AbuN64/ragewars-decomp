@@ -8,8 +8,8 @@
 
 
 
-void func_804410AC_de(struct Menu_func_804410AC_de *menu, u8 dir) {
-    struct Entry_func_804410AC_de *entry;
+void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
+    struct EntryRecAt18V2 *entry;
     s32 old;
 
     entry = &menu->entries[menu->cursor];

@@ -6,7 +6,7 @@
 
 /* Supplies the nonnegative blend remaining after the incoming strength is
  * scaled, then applies the actor animation using the original lookup. */
-struct Input_func_80204808_de {
+struct InputRecAt40 {
     char pad0[0x40];
     f32 strength;
 };
@@ -16,7 +16,7 @@ extern s32 D_800D15E0;
 extern f32 D_800D15F0;
 extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
 
-void func_80204808_de(Actor_func_8024A1D0_de *actor, struct Input_func_80204808_de *input, Lookup *lookup) {
+void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
     f32 remaining = D_800C1A78_de - input->strength * D_800C1A74_de;
     D_800D15E0 = 1;
     if (remaining < 0.0f) {

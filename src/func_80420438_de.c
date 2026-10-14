@@ -21,7 +21,7 @@
 
 
 extern struct Screen_func_804201A4_de *D_800E42D0;
-extern struct Row_func_80420438_de D_800E42D4[];
+extern struct RowRecAt18 D_800E42D4[];
 extern u8 D_800FEB57[];
 extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
 extern void func_8040E928_de(struct Resource_func_80419E54_de *, s32);

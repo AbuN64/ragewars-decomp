@@ -3,7 +3,7 @@
 #include "span_1000/code_80217388.h"
 #include "types.h"
 s32 func_8021917C_de(void *arg0, void *arg1) {
-    if (((((struct func_8021846C_S3 *) ((s8 *) ((struct ObjectLinks69C *) ((s8 *) arg1))->unk_698))->unkB0) & 0x8000) && ((((struct Record *) ((s8 *) ((struct ObjectLinks69C *) ((s8 *) arg1))->unk_5D8))->team) != 0xFF)) {
+    if (((((struct ObjRecAtB0 *) ((s8 *) ((struct ObjectLinks69C *) ((s8 *) arg1))->unk_698))->unkB0) & 0x8000) && ((((struct Record *) ((s8 *) ((struct ObjectLinks69C *) ((s8 *) arg1))->unk_5D8))->team) != 0xFF)) {
         (((struct Object6C *) ((s8 *) arg0))->value) = -1;
         return 1;
     }
@@ -18,7 +18,7 @@ void func_802191B8_de(char *arg0, void *arg1) {
     s32 result;
     s32 value;
     char *entry;
-    flags = ((struct func_8021846C_S3 *) ((ObjectLinks11BC *) arg1)->unk_698)->unkB0 & 0x8000;
+    flags = ((struct ObjRecAtB0 *) ((ObjectLinks11BC *) arg1)->unk_698)->unkB0 & 0x8000;
     state = *(s32 *)arg0;
     if ((state == 0) || (state == 3)) {
         if ((D_801468C4 != 0) &&

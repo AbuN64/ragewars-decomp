@@ -19,8 +19,8 @@ extern s32 D_80146894;
 extern s32 func_8025DEC0_de(s32 arg0, Vec3 arg1, s32 arg4, s32 arg5,
                          f32 arg6);
 
-void func_8026826C_de(Object_func_8026826C_de *arg0, Object_func_8026826C_de *arg1, s32 arg2, Vec3 arg3,
-                   Params_func_8026826C_de arg6) {
+void func_8026826C_de(ObjectRecAt17C *arg0, ObjectRecAt17C *arg1, s32 arg2, Vec3 arg3,
+                   ParamsRecAt4 arg6) {
     s32 *global = &D_80146894;
     s32 selected;
     f32 scale;

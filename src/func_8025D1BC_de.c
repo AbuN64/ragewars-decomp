@@ -11,7 +11,7 @@ extern void func_802587A4_de(s32 *arg0);
 
 
 void func_8025D1BC_de(void *arg0) {
-    Player_func_8025CED0_de *player = arg0;
+    PlayerRecAt1E *player = arg0;
     void *temp_v0_2;
     s32 temp_v0;
 

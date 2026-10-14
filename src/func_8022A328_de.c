@@ -21,7 +21,7 @@ extern s32 D_800D0EBC;
 void func_8022A328_de(void *arg0, void *arg1) {
     func_80228774_S1 *object;
     func_80207B5C_S2 *argument;
-    func_8022A2FC_S2 *var_s0;
+    ObjRecAt16E0V3 *var_s0;
 
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {

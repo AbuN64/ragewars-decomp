@@ -11,13 +11,13 @@ extern func_802A6AC0_S2 D_800D15E0;
 extern func_802077F4_S2 D_800D15F0;
 
 void func_802A5AD0_de(void *arg0) {
-    if (((func_802A6A54_S1 *)(arg0))->unk24 != 0.0f) {
-        D_800D15E0.unk4 += ((func_802A6A54_S1 *)(arg0))->unk34;
-        D_800D15E0.unk8 += ((func_802A6A54_S1 *)(arg0))->unk38;
-        D_800D15E0.unkC += ((func_802A6A54_S1 *)(arg0))->unk3C;
-        D_800D15E0.unk10 += ((func_802A6A54_S1 *)(arg0))->unk24;
+    if (((ObjRecAt3CV1 *)(arg0))->unk24 != 0.0f) {
+        D_800D15E0.unk4 += ((ObjRecAt3CV1 *)(arg0))->unk34;
+        D_800D15E0.unk8 += ((ObjRecAt3CV1 *)(arg0))->unk38;
+        D_800D15E0.unkC += ((ObjRecAt3CV1 *)(arg0))->unk3C;
+        D_800D15E0.unk10 += ((ObjRecAt3CV1 *)(arg0))->unk24;
     }
-    D_800D15F0.unk4 += ((func_802A6A54_S1 *)(arg0))->unk14;
+    D_800D15F0.unk4 += ((ObjRecAt3CV1 *)(arg0))->unk14;
 }
 
 extern f32 D_800C5EA0_de[2];
@@ -47,11 +47,11 @@ void func_802A5B84_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4) {
 
     node = func_8027963C_de(arg0 + 0x7588);
     if (node != 0) {
-        ((func_802A6B74_S1 *)(node))->unk18 = arg1;
-        ((func_802A6B74_S1 *)(node))->unk14 = arg2;
-        ((func_802A6B74_S1 *)(node))->unk8 = 0;
-        ((func_802A6B74_S1 *)(node))->unkC = arg4;
-        ((func_802A6B74_S1 *)(node))->unk10 = arg3;
+        ((ObjRecAt18V6 *)(node))->unk18 = arg1;
+        ((ObjRecAt18V6 *)(node))->unk14 = arg2;
+        ((ObjRecAt18V6 *)(node))->unk8 = 0;
+        ((ObjRecAt18V6 *)(node))->unkC = arg4;
+        ((ObjRecAt18V6 *)(node))->unk10 = arg3;
     }
 }
 
@@ -60,7 +60,7 @@ void func_80273448_de(char *, f32, f32, f32);
 void func_8027347C_de(void *, f32, f32, f32);
 void func_8027027C_de(f32 *, PackedMatrixWords *);
 
-Particle *func_802A5BE4_de(Scene_func_802A5180_de *scene, Vec3 position, Vec3 normal, s32 surface, s32 owner) {
+Particle *func_802A5BE4_de(SceneRecAt95A8 *scene, Vec3 position, Vec3 normal, s32 surface, s32 owner) {
     f32 matrix[16];
     Vector4f rotation;
     Particle *node;

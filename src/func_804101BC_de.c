@@ -10,9 +10,9 @@
 
 extern struct State_func_804101BC_de D_801539B0;
 extern s16 D_80153C0C, D_80153C20;
-extern struct Entry_func_804101BC_de *D_80153C10;
-extern struct Resource_func_804101BC_de *D_8014D988;
-extern struct Chunk_func_804101BC_de *D_80153C28;
+extern struct EntryRecAt8V1 *D_80153C10;
+extern struct ResourceRecAt6 *D_8014D988;
+extern struct ChunkRecAt48C *D_80153C28;
 extern void *D_8014D98C[];
 extern void func_80411AF0_de(s32), func_8040F580_de(void), func_802A0EB0_de(void *);
 extern void func_804118E4_de(s32), func_80410E1C_de(s32), func_80411D18_de(void);
@@ -24,8 +24,8 @@ void func_804101BC_de(void) {
     s32 i_chunks;
     s32 offset_chunks;
     s32 offset;
-    struct Resource_func_804101BC_de *resource;
-    struct Chunk_func_804101BC_de *chunk;
+    struct ResourceRecAt6 *resource;
+    struct ChunkRecAt48C *chunk;
     void **block;
     void **tables;
     void **first;
@@ -36,7 +36,7 @@ void func_804101BC_de(void) {
         invalid = -1;
         offset = 0;
         do {
-            if (((struct Entry_func_804101BC_de *)(offset + (s32)D_80153C10))->flags & 1) {
+            if (((struct EntryRecAt8V1 *)(offset + (s32)D_80153C10))->flags & 1) {
                 resource = D_8014D988 + i;
                 if (resource->id != invalid && resource->retained == 0) {
                     func_80411AF0_de(i);
@@ -56,14 +56,14 @@ void func_804101BC_de(void) {
     offset_chunks = 0;
     if (state->count > 0) {
         do {
-            block = ((struct Chunk_func_804101BC_de *)(offset_chunks + (s32)D_80153C28))->optional;
+            block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional;
             if (block) {
                 func_802547E4_de(*block);
-                func_802547E4_de(((struct Chunk_func_804101BC_de *)(offset_chunks + (s32)D_80153C28))->optional);
+                func_802547E4_de(((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->optional);
             }
             i_chunks++;
-            func_802547E4_de(*((struct Chunk_func_804101BC_de *)(offset_chunks + (s32)D_80153C28))->primary);
-            block = ((struct Chunk_func_804101BC_de *)(offset_chunks + (s32)D_80153C28))->primary;
+            func_802547E4_de(*((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary);
+            block = ((struct ChunkRecAt48C *)(offset_chunks + (s32)D_80153C28))->primary;
             offset_chunks += 0x49C;
             func_802547E4_de(block);
         } while (i_chunks < D_80153C20);

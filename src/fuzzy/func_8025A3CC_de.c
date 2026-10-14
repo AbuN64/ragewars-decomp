@@ -24,8 +24,8 @@ void func_8025A3CC_de(View_func_8025AE1C_de *arg0) {
     Context_func_8025AE1C_de *temp_a0;
     Context_func_8025AE1C_de *temp_v1_2;
     Context_func_8025AE1C_de *temp_v1_7;
-    Obj_func_802B2F60_de *temp_s0;
-    Obj_func_802B2F60_de *temp_s1;
+    ObjRecAt40V2 *temp_s0;
+    ObjRecAt40V2 *temp_s1;
     f32 temp_fa1;
     f32 temp_fv0;
     f32 temp_fv0_2;

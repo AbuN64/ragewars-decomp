@@ -8,7 +8,7 @@
 
 /** Unlink an active node and return it to the container's free list. */
 void func_80290950_de(void *container, ListNode80290528 *node) {
-    World_func_80290238_de *world = container;
+    WorldRecAt3C08 *world = container;
     struct Actor_func_80290238_de *actor = (struct Actor_func_80290238_de *)node;
     struct Actor_func_80290238_de *free_node;
 

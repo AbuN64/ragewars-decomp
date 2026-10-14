@@ -28,7 +28,7 @@ extern s32 func_802444A4_de(InstanceHdr *arg0, Vec3 current, Vec3 desired,
 
 
 
-s32 func_8020E674_de(Actor_func_8020E674_de *actor, f32 scale, f32 lateral) {
+s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral) {
     Vec3 current;
     Vec3 desired;
     Vec3 delta;

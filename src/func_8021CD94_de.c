@@ -24,9 +24,9 @@ s32 func_8021CD94_de(func_8021CD70_S1 *arg0, func_8021CD70_S2 *arg1) {
     s8 temp_v1;
     s8 temp_v1_2;
     s8 temp_v1_4;
-    func_8021CD70_S3 *temp_a1_2;
-    func_8021CD70_S4 *temp_a1_3;
-    func_8021CD70_S4 *temp_v0;
+    ObjRecAt14V3 *temp_a1_2;
+    ObjRecAt564 *temp_a1_3;
+    ObjRecAt564 *temp_v0;
     temp_a1 = arg0->unk62E;
     if (temp_a1 == 0x12) {
         if (arg1->unk100 & 0x300000) {

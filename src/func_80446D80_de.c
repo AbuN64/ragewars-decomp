@@ -9,7 +9,7 @@
 
 extern char D_80154110;
 extern void func_80446E58_de(int channel);
-extern void func_80446EE4_de(int channel, Entry_func_8023B9C0_eu *data);
+extern void func_80446EE4_de(int channel, EntryRecAt3 *data);
 extern s32 func_802B9CB0_de(s32 direction, void *data);
 extern s32 func_802BB2A0_de(void *queue, void **msg, s32 flag);
 
@@ -17,7 +17,7 @@ s32 func_80446D80_de(void *queue, int channel)
 {
     s32 ret = 0;
     void *dummy;
-    Entry_func_8023B9C0_eu data;
+    EntryRecAt3 data;
 
     func_80446E58_de(channel);
 

@@ -12,7 +12,7 @@ void func_802B2D80_de(ALSndPlayer *arg0) {
     s32 base = (s32)arg0->sndState;
 
     if (((ALSoundState *) (base + (arg0->target * 0x30)))->state == 0) {
-        Params_func_802B2F10_de p;
+        ParamsRecAt8V1 p;
         p.f0 = 0;
         p.f4 = base + arg0->target * 0x30;
         func_802B00D4_de(&arg0->evtq, (s16 *)&p, 0);
@@ -25,7 +25,7 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 void func_802B2DE0_de(ALSndPlayer *arg0, s8 arg1) {
-    Params_func_802B2DE0_de p;
+    ParamsRecAt8V2 p;
     s32 acc;
 
     acc = (s32)arg0->sndState;

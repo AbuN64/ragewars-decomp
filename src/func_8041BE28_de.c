@@ -18,7 +18,7 @@ extern u8 D_80152789;
 
 extern void func_8040E928_de(void *, int);
 
-int func_8041BE28_de(List_func_8041BE28_de *list) {
+int func_8041BE28_de(ListRecAt4C *list) {
     int i;
 
     for (i = 0; i < list->count; i++) {

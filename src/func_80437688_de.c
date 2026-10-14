@@ -29,7 +29,7 @@ extern Handler80437868 D_800F1DB0_de;
 
 s32 func_80437688_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     Handler80437868 *entry;
-    func_8021C9B4_S3 *actor;
+    ObjRecAtCV1 *actor;
     s32 index;
     s32 wildcard;
     s32 actor_kind;

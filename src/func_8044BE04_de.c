@@ -13,7 +13,7 @@ extern u8 D_800CBC9C[];
 extern u8 D_800CBCA0[];
 extern f32 func_802B72B0_de(f32);
 extern void func_80271F9C_de(f32 *, f32 *, f32);
-void func_8044BE04_de(Scene_func_8044BE04_de *scene) {
+void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
     s32 i;
     u8 c;
     f32 v[3];
@@ -107,7 +107,7 @@ void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
 extern s32 func_80285180_de(void ***handle, s32 arg1);
 extern void *func_8028FDB4_de(void *node, s32 index);
 extern void func_8028FDF8_de(void *node, s32 arg1);
-static inline s32 groupHas(World_func_8044C108_de *world, s32 n) {
+static inline s32 groupHas(WorldRecAt1B40C *world, s32 n) {
     s32 index;
     void *g;
     u8 *bits;
@@ -120,7 +120,7 @@ static inline s32 groupHas(World_func_8044C108_de *world, s32 n) {
     mask = 1 << (n & 7);
     return bits[n / 8] & mask;
 }
-void func_8044C108_de(World_func_8044C108_de *world, void ***handle) {
+void func_8044C108_de(WorldRecAt1B40C *world, void ***handle) {
     void *node;
     struct Shape_func_802764D4_de_2 *l0;
     struct Shape_func_802764D4_de_2 *l1;

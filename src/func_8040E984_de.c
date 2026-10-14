@@ -13,7 +13,7 @@
 
 
 
-void func_8040E984_de(Widget_func_8040E984_de **hit, Widget_func_8040E984_de *node, DrawArgs_func_8040E67C_de args, s32 px, s32 py) {
+void func_8040E984_de(WidgetRecAt1A **hit, WidgetRecAt1A *node, DrawArgs_func_8040E67C_de args, s32 px, s32 py) {
     if (*hit != 0) {
         return;
     }

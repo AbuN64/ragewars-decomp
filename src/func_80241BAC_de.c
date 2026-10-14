@@ -31,7 +31,7 @@ extern f32 D_800C3758_de[];
 
 
 
-void func_80241BAC_de(Actor_func_80241BAC_de *actor, Owner_func_80241BAC_de *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input) {
+void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input) {
     u8 collision[0x108];
     Vec3 next;
     f32 hit_y;

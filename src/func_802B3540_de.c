@@ -19,7 +19,7 @@ void func_802B3540_de(void *arg0, void *arg1, s32 arg2) {
     s32 new_var;
     void *Shared_func_802B3540_de_v0;
     void *temp_a0;
-    Shared_func_802B3540_de_FuncPtr fn;
+    SharedRecV3 fn;
 
     if ((((ObjectState1C *)(arg1))->unk_8.v0) != 0) {
         Shared_func_802B3540_de_v0 = func_802B3BF8_de();

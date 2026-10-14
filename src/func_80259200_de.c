@@ -5,7 +5,7 @@
 
 
 
-int func_80259200_de(Obj_func_80259200_de *obj, int id) {
+int func_80259200_de(ObjRecAt1E64 *obj, int id) {
     int count;
     int i;
 

@@ -10,7 +10,7 @@ extern s32 D_800D2978;
 
 f32 func_80278890_de(void *arg0)
 {
-  Object_func_802773D4_de *volume = arg0;
+  ObjectRecAtBC *volume = arg0;
   u32 temp_a0;
   s32 idx;
   temp_a0 = volume->animationSeed;
@@ -27,7 +27,7 @@ extern s32 D_800D2978;
 
 
 
-void func_8027892C_de(Object_func_8027892C_de *object, u8 *colors) {
+void func_8027892C_de(ObjectRecAt8 *object, u8 *colors) {
     s32 state;
     s32 i;
     Vtx *record;

@@ -3,9 +3,9 @@
 #include "common/unused.h"
 #include "types.h"
 
-s16 func_802B2510_de(Pool_func_802B2510_de *pool, void *owner) {
+s16 func_802B2510_de(PoolRecAt44 *pool, void *owner) {
     s32 count = pool->count;
-    Slot_func_802B2510_de *slots = pool->slots;
+    SlotRecAt2F *slots = pool->slots;
 
     if (count > 0) {
         s16 i = 0;
@@ -14,7 +14,7 @@ s16 func_802B2510_de(Pool_func_802B2510_de *pool, void *owner) {
         u8 flags = 0x40;
         do {
         s16 index = i;
-        Slot_func_802B2510_de *slot = (Slot_func_802B2510_de *)(index * sizeof(*slots) + (u32)slots);
+        SlotRecAt2F *slot = (SlotRecAt2F *)(index * sizeof(*slots) + (u32)slots);
         if (slot->owner == 0) {
             slot->owner = owner;
             slot->state = state;

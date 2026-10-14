@@ -5,7 +5,7 @@
 /* Cycles a menu selection from directional input while skipping reserved entries. */
  /* extern */
 extern s32 D_800E63B8;
-s32 func_804453F0_de(s32 arg0, struct Record_func_80409DCC_de *arg1) {
+s32 func_804453F0_de(s32 arg0, struct RecordRecAt20V1 *arg1) {
     s32 var_a0;
     var_a0 = D_800E63B8;
     if (arg1->inner->unkB0 & 0x20202) {

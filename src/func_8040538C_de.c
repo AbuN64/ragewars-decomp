@@ -9,7 +9,7 @@
 
 
 
-extern struct Record_func_80405338_de *D_800E2854;
+extern struct RecordRecAt4V1 *D_800E2854;
 
 s32 func_8040538C_de(s32 index, s32 entry, char **out) {
     if (D_801534F0[index] != 3) {

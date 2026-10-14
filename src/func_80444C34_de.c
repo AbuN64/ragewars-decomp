@@ -11,7 +11,7 @@
 
 extern struct Settings_func_80444BE8_de D_80146302;
 
-s32 func_80444C34_de(void *unused, struct Holder_func_80444BE8_de *holder) {
+s32 func_80444C34_de(void *unused, struct HolderRecAt1CV2 *holder) {
     struct Settings_func_80444BE8_de *settings = &D_80146302;
 
     if (holder->owner != 0) {

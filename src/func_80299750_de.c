@@ -8,5 +8,5 @@ extern void *func_80298170_de(void);
 
 
 void func_80299750_de(s32 arg0, s32 arg1) {
-    ((Obj_func_80297DBC_de *)(func_80298170_de()))->unk40 = arg1;
+    ((ObjRecAt40V1 *)(func_80298170_de()))->unk40 = arg1;
 }

@@ -52,7 +52,7 @@ void func_802BB8B0_de(void)
 
 
 void func_802BB9F8_de(void) {
-    Node_func_802BB9F8_de *node = (Node_func_802BB9F8_de *)D_800D5280;
+    NodeRecAt1C *node = (NodeRecAt1C *)D_800D5280;
 
     D_80149B98 = 0;
     D_80149B90 = 0;

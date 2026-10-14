@@ -21,7 +21,7 @@
 
 
 extern f32 D_800C9138_de;
-extern func_8020676C_S1 *D_800D052C[];
+extern ObjRecAt6V1 *D_800D052C[];
 extern f32 func_80274808_de(f32, f32, f32);
 extern void func_802727D8_de(Matrix *);
 extern void func_80273C68_de(Matrix *, f32);
@@ -35,7 +35,7 @@ void func_80217928_de(Menu *menu, s32 arg1, s32 arg2) {
     Vec3 offset;
     s32 count;
     s32 i;
-    Slot_func_80217928_de *slot;
+    SlotRecAt14 *slot;
     Item *item;
     f32 target;
     f32 size;

@@ -6,5 +6,5 @@
 
 
 char *func_8028D218_de(void *arg0, s32 arg1) {
-    func_8028FDB4_de(func_8028FDB4_de((((struct func_8028D220_S1 *) ((s8 *) arg0))->unk7C), arg1), 0);
+    func_8028FDB4_de(func_8028FDB4_de((((struct ObjRecAt7C *) ((s8 *) arg0))->unk7C), arg1), 0);
 }

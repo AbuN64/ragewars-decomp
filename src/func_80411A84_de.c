@@ -5,7 +5,7 @@
    to; func_80411A84_de and func_80411AA8_de read offsets 0xA and 0xC. */
 
 
-extern struct Record_func_80411A84_de *D_80153C10;
+extern struct RecordRecAtCV4 *D_80153C10;
 
 s16 func_80411A84_de(s32 index) {
     return D_80153C10[index].a;

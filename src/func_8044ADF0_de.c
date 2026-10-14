@@ -2,7 +2,7 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_802624A0.h"
 #include "span_1000/code_80255BEC.h"
-void func_8044ADF0_de(func_80262ABC_S1 *arg0) {
+void func_8044ADF0_de(ObjRecAt5F14 *arg0) {
     Effect_func_80262A9C_de *var_s0;
     s32 var_s1;
 

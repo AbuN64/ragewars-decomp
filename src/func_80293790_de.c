@@ -60,7 +60,7 @@ void func_80293848_de(void *arg0) {
     D_800CD734 += 1;
 }
 
-s32 func_80293904_de(func_80293904_S1 *arg0, f32 arg1, s32 arg2, s32 arg3) {
+s32 func_80293904_de(ObjRecAt26DC1 *arg0, f32 arg1, s32 arg2, s32 arg3) {
     s32 *flag = &D_8010B194_de;
 
     if ((*flag != 0) && (arg3 != -1)) {

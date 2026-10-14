@@ -6,7 +6,7 @@
    Adapted from func_804355B4_de with the extra 0xE and 0x11 exclusions changed. */
 
 
-extern struct Player_func_80434750_de *D_800E54A4;
+extern struct PlayerRecAt58 *D_800E54A4;
 
 s32 func_80435528_de(void) {
     s32 count = 0;

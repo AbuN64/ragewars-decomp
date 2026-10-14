@@ -14,7 +14,7 @@
 extern char D_800D7688;
 extern char D_800D768C;
 
-s32 func_8043E494_de(func_80254D70_S1 *arg0, Menu_func_8043E494_de *menu) {
+s32 func_8043E494_de(ObjRecAt14V1 *arg0, Menu_func_8043E494_de *menu) {
     switch (menu->owner->record->mode) {
     case 0:
         arg0->unk14 = &D_800D7688;

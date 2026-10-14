@@ -41,7 +41,7 @@ static inline f32 approach(f32 value, f32 target, f32 step) {
 
 
 void func_8023660C_de(char *camera, f32 a, f32 b, f32 c, f32 d) {
-    func_80219490_S2 *record = camera;
+    ObjRecAt2A8 *record = camera;
     record->unk29C = approach(record->unk29C, a, 16.0f);
     record->unk2A0 = approach(record->unk2A0, b, 16.0f);
     record->unk2A4 = approach(record->unk2A4, c, 16.0f);

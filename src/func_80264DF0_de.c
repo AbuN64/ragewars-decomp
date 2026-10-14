@@ -17,7 +17,7 @@ extern func_8020CA10_G1 D_800C4318_de;
 
 
 s32 func_80264DF0_de(void *arg0) {
-    Player_func_80264EE0_de *player = arg0;
+    PlayerRecAt8 *player = arg0;
     f32 temp_f1;
     f32 temp_f1_2;
     s32 temp_v1;

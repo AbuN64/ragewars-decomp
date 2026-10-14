@@ -4,8 +4,8 @@
 
 extern s32 func_8025DF34_de(s32);
 
-s32 func_8041AFA0_de(struct Menu_func_8041A940_de *arg0) {
-    struct Item_func_8041A940_de *p;
+s32 func_8041AFA0_de(struct MenuRecAt54 *arg0) {
+    struct ItemRecAt10 *p;
 
     func_8025DF34_de(0xE74);
     p = arg0->items;

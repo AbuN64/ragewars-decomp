@@ -137,9 +137,9 @@ void func_8044DA54_de(Owner_func_8044D794_de *arg0, void ***arg1) {
     void *obj;
     Frame_func_8044D794_de *frame;
     Bank_func_8044D794_de *bank;
-    struct Entry_func_80405338_de *items;
-    struct Entry_func_80405338_de *item;
-    Slot_func_8044D794_de *slot;
+    struct EntryRecAt0V3 *items;
+    struct EntryRecAt0V3 *item;
+    SlotRecAt0V2 *slot;
     s32 count;
     s32 inner;
     s32 i;

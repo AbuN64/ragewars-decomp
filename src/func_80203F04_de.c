@@ -18,7 +18,7 @@ extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
 extern f32 func_8024D284_de(Player *);
 extern s32 func_802444A4_de(Player *, Vec3, Vec3, char *);
 
-s32 func_80203F04_de(Player *player, Rider_func_80203F04_de *rider, Player *other) {
+s32 func_80203F04_de(Player *player, RiderRecAt130V2 *rider, Player *other) {
     Vec3 from;
     Vec3 to;
     f32 lift;

@@ -12,8 +12,8 @@ s32 func_8023B94C_de(void **arg0, void **arg1)
   int new_var;
   s32 var_v0;
   var_v0 = 1;
-  new_var2 = ((struct func_8023B968_S1 *) ((s8 *) (*arg0)))->unk210;
-  if ((((struct func_8023B968_S1 *) ((s8 *) (*arg1)))->unk210) < new_var2)
+  new_var2 = ((struct ObjRecAt210 *) ((s8 *) (*arg0)))->unk210;
+  if ((((struct ObjRecAt210 *) ((s8 *) (*arg1)))->unk210) < new_var2)
   {
     new_var = 1;
     var_v0 = -new_var;

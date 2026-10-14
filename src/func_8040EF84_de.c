@@ -4,7 +4,7 @@
 
 
 
-void func_8040EF84_de(Node_func_8040EF84_de *node, void *from, void *to) {
+void func_8040EF84_de(NodeRecAt44 *node, void *from, void *to) {
     if (node != 0) {
         if (node->left != 0) {
             func_8040EF84_de(node->left, from, to);

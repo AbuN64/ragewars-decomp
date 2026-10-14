@@ -23,7 +23,7 @@ extern void func_8027DD48_de(Shared_Particle *particle, void *matrix, void *came
 extern s32 func_80296B74_de(f32 (*arg0)[4], f32 *arg1);
 extern void func_8027EB2C_de(void *arg0, void *arg1);
 extern void func_8027ED6C_de(Shared_Particle *particle, struct Shared_ParticleView *view);
-extern void func_802A58B0_de(func_802A67D0_S1 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
+extern void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
 
 void func_80282330_de(ParticleDrawList *list, struct Shared_ParticleView *view) {
     f32 bounds[6];

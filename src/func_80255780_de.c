@@ -92,11 +92,11 @@ merge:
 
 
 void func_802558B4_de(struct Heap *heap, char *start, s32 size) {
-    struct Block_func_802558B4_de *block;
+    struct BlockRecAt14 *block;
 
     heap->start = start;
     heap->end = start + size;
-    block = (struct Block_func_802558B4_de *) (((u32) start + 15) & ~15);
+    block = (struct BlockRecAt14 *) (((u32) start + 15) & ~15);
     size -= (char *) block - start;
     size &= ~15;
     block->previous = 0;
@@ -128,15 +128,15 @@ void func_802558B4_de(struct Heap *heap, char *start, s32 size) {
 
 
 
-void *func_80255920_de(Heap_func_80255920_de *heap, s32 request) {
-    Block_func_80255920_de *block;
-    Block_func_80255920_de *split;
+void *func_80255920_de(HeapRecAtC *heap, s32 request) {
+    BlockRecAt20 *block;
+    BlockRecAt20 *split;
     u32 size;
 
     size = (request + 0x2F) & ~0xF;
     for (block = heap->head; block != 0; block = block->nextFree) {
         if (block->free >= size) {
-            { u8 *cursor = (u8 *)block; cursor += block->size; split = (Block_func_80255920_de *)cursor; }
+            { u8 *cursor = (u8 *)block; cursor += block->size; split = (BlockRecAt20 *)cursor; }
             split->size = size;
             split->free = block->free - size;
             if (split->free != 0) {
@@ -189,16 +189,16 @@ void *func_80255920_de(Heap_func_80255920_de *heap, s32 request) {
 
 
 
-void *func_80255A34_de(Heap_func_80255920_de *heap, s32 request)
+void *func_80255A34_de(HeapRecAtC *heap, s32 request)
 {
-    Block_func_80255920_de *block;
-    Block_func_80255920_de *split;
+    BlockRecAt20 *block;
+    BlockRecAt20 *split;
     u32 size;
 
     size = (request + 0x2F) & ~0xF;
     for (block = heap->tail; block != 0; block = block->prevFree) {
         if (block->free >= size) {
-            { u8 *cursor = (u8 *)block; cursor += block->size; cursor += block->free; cursor -= size; split = (Block_func_80255920_de *)cursor; }
+            { u8 *cursor = (u8 *)block; cursor += block->size; cursor += block->free; cursor -= size; split = (BlockRecAt20 *)cursor; }
             split->size = size;
             split->free = 0;
             block->free -= size;

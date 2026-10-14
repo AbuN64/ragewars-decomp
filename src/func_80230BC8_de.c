@@ -71,7 +71,7 @@ void func_80230BC8_de(void *actor, void *attack) {
     player = ((Actor_func_8024A7A0_de *)actor)->controller;
     target = ((Actor_func_8022D290_de *)player)->unk_0x05DC;
     if (target != 0) {
-        position = &((Shared_func_80227014_S4 *)target)->position;
+        position = &((SharedRecAt564V1 *)target)->position;
     } else {
         position = &((Shared_ActorView *)player)->position.vector;
     }

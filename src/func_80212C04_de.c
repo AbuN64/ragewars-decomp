@@ -20,8 +20,8 @@ void func_80212C04_de(void *arg0) {
     s32 *rec;
     void *v0;
 
-    func_8020A028_S3 *object = arg0;
-    func_80212C04_S2 *actor = object->unk1D8;
+    ObjRecAt1D8V1 *object = arg0;
+    ObjRecAt1454V1 *actor = object->unk1D8;
 
     rec = actor->unk1454;
     v0 = func_8022A83C_de(&D_80145040);

@@ -12,8 +12,8 @@ s32 func_80437810_de(void) {
     s32 temp_a0_2;
     s32 temp_v0;
     s32 temp_v0_2;
-    Cell_func_80421BEC_de *temp_a0;
-    Cell_func_80421BEC_de *temp_v1;
+    CellRecAt1A *temp_a0;
+    CellRecAt1A *temp_v1;
     temp_v0 = func_8041A470_de(D_800E5784->unk0);
     switch (temp_v0) { /* irregular */
     case 3:

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80233920_H
 #define UNBAKE_SPAN_1000_CODE_80233920_H
-#include "../types.h"
+#include "types.h"
 #include "span_1000/code_8023330C.h"
 /* XYZ minimum and maximum bounds, copied as a single record. */
 typedef struct ViewFlags { s32 flags; } ViewFlags;
@@ -10,15 +10,13 @@ typedef struct ViewFlags { s32 flags; } ViewFlags;
 #include "types.h"
 #include "resident_event_handler.h"
 struct Triple;
-struct func_802390C0_S1;
-/* unbake published declaration: published_0d1f68bfb9e687a29b5f4815 */
-struct func_802390C0_S1 {
+struct ObjRecAt260;
+struct ObjRecAt260 {
     char pad0[0x260];
     struct Triple unk260;
 };
 
 struct Entity_func_80233C88_de;
-/* unbake published declaration: published_0eb5652f523dbefb30d5ca29 */
 typedef struct Entity_func_80233C88_de Entity_func_80233C88_de;
 
 /* Color keyframe payload in a 0x64-byte model-section record. */
@@ -33,18 +31,14 @@ typedef struct ColorBlendRecord {
 } ColorBlendRecord;
 
 struct Racer;
-/* unbake published declaration: published_155a78e586cc4ec08c11b00c */
 typedef struct Racer Racer;
 
 struct Overlay;
-/* unbake published declaration: published_158bac9f1433e83a4aec1b34 */
 typedef struct Overlay Overlay;
 
-/* unbake published declaration: published_1833c068e913cc1226f91bb1 */
-typedef State_func_802337D0_de AxisWave;
+typedef StateRecAt10 AxisWave;
 
 struct Entity_func_80233C88_de;
-/* unbake published declaration: published_19267424c2c0e45e980251e7 */
 struct Entity_func_80233C88_de {
     char pad0[0x58];
     u16 *key;
@@ -69,26 +63,20 @@ struct Entity_func_80233C88_de {
 };
 
 struct func_8023919C_S1;
-/* unbake published declaration: published_1c6a2fb25abc8ee79769029d */
 typedef struct func_8023919C_S1 func_8023919C_S1;
 
-/* unbake published declaration: published_1d90da3f512df1029cde0399 */
 extern float D_800C3090_de;
 
 struct func_802393C8_S1;
-/* unbake published declaration: published_2a0d3c6c38211f158eb75125 */
 typedef struct func_802393C8_S1 func_802393C8_S1;
 
 struct func_80234DD0_S1;
-/* unbake published declaration: published_2edd9b83bac29a35f2fdc1a6 */
 typedef struct func_80234DD0_S1 func_80234DD0_S1;
 
-struct func_80239314_S1;
-/* unbake published declaration: published_32e1427bbc9076e3473d0db0 */
-typedef struct func_80239314_S1 func_80239314_S1;
+struct ObjRecAtE4V1;
+typedef struct ObjRecAtE4V1 ObjRecAtE4V1;
 
 struct func_802390E4_S1;
-/* unbake published declaration: published_3316d315c7ba36a6e2377774 */
 struct func_802390E4_S1 {
     char pad0[0x14];
     s16 unk14;
@@ -100,22 +88,17 @@ struct func_802390E4_S1 {
     s32 unk20;
 };
 
-/* unbake published declaration: published_340cb388fbb0e65cc7620eb5 */
 extern void func_80239184_de(void);
 
-struct func_802390C0_S1;
-/* unbake published declaration: published_34886db184385b631602eb0b */
-typedef struct func_802390C0_S1 func_802390C0_S1;
+struct ObjRecAt260;
+typedef struct ObjRecAt260 ObjRecAt260;
 
-/* unbake published declaration: published_3c8595152e1fddffce3d664b */
 extern float D_800C3530_de;
 
 struct func_8023912C_S2;
-/* unbake published declaration: published_3e2af159f5b0b9df1367460e */
 typedef struct func_8023912C_S2 func_8023912C_S2;
 
 struct Overlay;
-/* unbake published declaration: published_7b6e0bef6d65a3af442a0849 */
 struct Overlay {
     char pad0[0x538];
     f32 timer;
@@ -130,12 +113,10 @@ struct Overlay {
     u8 alpha;
 };
 
-/* unbake published declaration: published_4879d9aeee3de2db64b11775 */
 extern void func_80233B14_de(Overlay *overlay);
 
-struct func_80239314_S1;
-/* unbake published declaration: published_4d8af50fb6a149802005fe44 */
-struct func_80239314_S1 {
+struct ObjRecAtE4V1;
+struct ObjRecAtE4V1 {
     char pad0[0xA8];
     Vec3 unkA8;
     char padA8[0xB4 - 0xA8 - sizeof(Vec3)];
@@ -155,11 +136,9 @@ struct func_80239314_S1 {
 };
 
 struct Effect33920;
-/* unbake published declaration: published_73240ec90645f1bbc1437010 */
 typedef struct Effect33920 Effect33920;
 
 struct Effect33920;
-/* unbake published declaration: published_b4deea11405b5220382cd6b8 */
 struct Effect33920 {
     s32 unk00;
     Effect33920 *next;
@@ -170,26 +149,20 @@ struct Effect33920 {
     AxisWave z;
 };
 
-/* unbake published declaration: published_50d1fb38d00a3e50301966dd */
 extern void func_80233930_de(Effect33920 *arg0, Vec3 position, Vec3 *out);
 
 struct ThreeChannels;
-/* unbake published declaration: published_55e0c62a75e42c435a71eb95 */
 typedef struct ThreeChannels ThreeChannels;
 
-/* unbake published declaration: published_58db9c4e11bf7a377f56672e */
 extern float D_800C352C_de;
 
 struct State44;
-/* unbake published declaration: published_5a870e98e060d745541e394e */
 typedef struct State44 State44;
 
 struct Race;
-/* unbake published declaration: published_60e731ddc9efff8343aa8773 */
 typedef struct Race Race;
 
 struct func_80238F14_S1;
-/* unbake published declaration: published_6291cad67595bc6d383e0c6c */
 struct func_80238F14_S1 {
     char pad0[0x24];
     s32 unk24;
@@ -222,26 +195,21 @@ struct func_80238F14_S1 {
 };
 
 struct UnitVp;
-/* unbake published declaration: published_6511a5ab03c64038afc9aaf6 */
 struct UnitVp {
     s16 vscale[4];
     s16 vtrans[4];
 };
 
 struct func_802392DC_S1;
-/* unbake published declaration: published_66124693d684cb1a7ec5f525 */
 typedef struct func_802392DC_S1 func_802392DC_S1;
 
 struct func_802390E4_S1;
-/* unbake published declaration: published_66bd5f3f15ac100d86c5fcfc */
 typedef struct func_802390E4_S1 func_802390E4_S1;
 
 struct World_func_80236F1C_de;
-/* unbake published declaration: published_694230af3b98da209bb3d438 */
 typedef struct World_func_80236F1C_de World_func_80236F1C_de;
 
 struct func_80234DD0_S2;
-/* unbake published declaration: published_6c431b17f9e0953162ac2ed8 */
 struct func_80234DD0_S2 {
     char pad0[0x264];
     f32 unk264;
@@ -250,15 +218,12 @@ struct func_80234DD0_S2 {
 };
 
 struct func_80239184_S1;
-/* unbake published declaration: published_6edc769ffa0b454787567f0c */
 typedef struct func_80239184_S1 func_80239184_S1;
 
 struct UnitVp;
-/* unbake published declaration: published_852504211ce33ec8522578f3 */
 typedef struct UnitVp UnitVp;
 
 struct Racer;
-/* unbake published declaration: published_701589cbf2eee5acea255c7b */
 struct Racer {
     char pad0[4];
     struct Racer *next;
@@ -301,7 +266,6 @@ struct Racer {
 };
 
 struct World_func_80236F1C_de;
-/* unbake published declaration: published_7a4a77041fe7741ba52e7a1f */
 struct World_func_80236F1C_de {
     char pad0[0x12A5];
     u8 replay;
@@ -309,7 +273,6 @@ struct World_func_80236F1C_de {
 
 struct Race;
 struct Racer;
-/* unbake published declaration: published_87e633f7a0289d762a8d86f0 */
 typedef struct RaceHeader {
     s32 music;
     char pad4[0x1C];
@@ -326,14 +289,11 @@ struct Race {
 
 
 
-/* unbake published declaration: published_89f5cee85fbb6b21de9a8306 */
 extern float D_800C3098_de;
 
-/* unbake published declaration: published_952831d3803075d407c78a37 */
 extern float D_800C8610;
 
 struct func_8023912C_S2;
-/* unbake published declaration: published_9683d9cee3c5dc9a53874f92 */
 struct func_8023912C_S2 {
     char pad0[0x88];
     f32 unk88;
@@ -349,15 +309,12 @@ struct func_8023912C_S2 {
     f32 unk9C;
 };
 
-/* unbake published declaration: published_97c62163e0590ffd31023673 */
 extern void func_8023918C_de(void);
 
 struct func_80238F14_S1;
-/* unbake published declaration: published_9f246fa3e83af5c1bc7b1f24 */
 typedef struct func_80238F14_S1 func_80238F14_S1;
 
 struct State44;
-/* unbake published declaration: published_a47b4e9f88a94ab40cb3de44 */
 struct State44 {
     s32 unk_0;
     s32 unk_4;
@@ -377,7 +334,6 @@ struct State44 {
 };
 
 struct func_80239184_S1;
-/* unbake published declaration: published_a73c434f0bc215a3075ec33e */
 struct func_80239184_S1 {
     char pad0[0x548];
     signed char unk548;
@@ -386,20 +342,15 @@ struct func_80239184_S1 {
 };
 
 struct func_80234DD0_S2;
-/* unbake published declaration: published_ab4fa17e9599dc0495e60ba4 */
 typedef struct func_80234DD0_S2 func_80234DD0_S2;
 
-/* unbake published declaration: published_af087754ee82491905e5f45d */
 extern void func_802391F8_de(void *arg0, s8 *arg1, s8 *arg2, s8 *arg3);
 
-/* unbake published declaration: published_b2c5dc6201d715ec41f7890c */
 extern float D_800C3094_de;
 
-/* unbake published declaration: published_b763990fea80ea7f5671daa2 */
 extern float D_800C309C_de;
 
 struct func_80234DD0_S1;
-/* unbake published declaration: published_bf634e67cf9c98b444c37794 */
 struct func_80234DD0_S1 {
     char pad0[0x70];
     f32 unk70;
@@ -430,7 +381,6 @@ struct func_80234DD0_S1 {
 };
 
 struct ThreeChannels;
-/* unbake published declaration: published_c03d1495f74d9e01f1a06b21 */
 struct ThreeChannels {
     char pad0[0x520];
     u8 first;
@@ -438,14 +388,11 @@ struct ThreeChannels {
     u8 third;
 };
 
-/* unbake published declaration: published_c5b952c979189d9e6e28dd2d */
 extern void func_8023913C_de(void *arg0);
 
-/* unbake published declaration: published_c6239bc49dc9fd7644942646 */
 extern void func_8023660C_de(char *camera, f32 a, f32 b, f32 c, f32 d);
 
 struct func_8023919C_S1;
-/* unbake published declaration: published_d5131d0d7b01d5fe4ee19c25 */
 struct func_8023919C_S1 {
     char pad0[0x538];
     s32 unk538;
@@ -470,7 +417,6 @@ struct func_8023919C_S1 {
 };
 
 struct func_802392DC_S1;
-/* unbake published declaration: published_e057731f420e8d31bd52066a */
 struct func_802392DC_S1 {
     char pad0[0x5DC];
     int unk5DC;
@@ -478,11 +424,9 @@ struct func_802392DC_S1 {
     void * unk16E0;
 };
 
-/* unbake published declaration: published_e742300887abac419d5144dc */
 extern float D_800C3528_de;
 
 struct func_802393C8_S1;
-/* unbake published declaration: published_f43265a662a28054422c2b1c */
 struct func_802393C8_S1 {
     char pad0[0xFC];
     int unkFC;
@@ -502,7 +446,6 @@ struct func_802393C8_S1 {
     int unk118;
 };
 
-/* unbake published declaration: published_f6c2e3322959b0434214179c */
 extern float D_800C3524_de;
 
 extern void func_802391AC_de(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);

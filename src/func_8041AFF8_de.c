@@ -13,8 +13,8 @@
 
 extern void func_8025DF34_de(s32);
 
-s32 func_8041AFF8_de(struct Menu_func_8041AFF8_de *menu, void *second, void *third, s32 active) {
-    struct Owner_func_8041AD10_de *owner;
+s32 func_8041AFF8_de(struct MenuRecAt114 *menu, void *second, void *third, s32 active) {
+    struct OwnerRecAt38 *owner;
 
     if (active == 1) {
         owner = menu->owner;

@@ -14,10 +14,10 @@ s32 func_80242A94_de(void *arg0, void *arg1, void *arg2, s32 *arg3) {
 
     var_s0 = 0;
     temp_s3 = arg1 + 8;
-    temp_f20 = ((struct FloatState20 *) ((struct func_80205314_S1 *) arg1)->unk18)->unk_1C + ((struct FloatState68_2 *) arg0)->unk_C;
+    temp_f20 = ((struct FloatState20 *) ((struct ObjRecAt18V5 *) arg1)->unk18)->unk_1C + ((struct FloatState68_2 *) arg0)->unk_C;
     if ((((struct FloatState68_2 *) arg0)->unk_5C != 0.0f) || (((struct FloatState68_2 *) arg0)->unk_64 != 0.0f)) {
         *arg3 = 3;
-        var_s0 = func_8023E178_de(arg0, temp_s3, temp_f20, ((struct func_80241F14_S3 *) arg2)->unk4, ((struct func_80241F14_S3 *) arg2)->unk34, 1, arg3, 1);
+        var_s0 = func_8023E178_de(arg0, temp_s3, temp_f20, ((struct ObjRecAt34 *) arg2)->unk4, ((struct ObjRecAt34 *) arg2)->unk34, 1, arg3, 1);
     }
     if (((struct FloatState68_2 *) arg0)->unk_60 > 0.0f) {
         *arg3 = 2;

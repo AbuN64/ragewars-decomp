@@ -9,10 +9,10 @@
 
 
 extern u32 D_80154030;
-extern Entry_func_8043CF44_de D_0044EF44[];
+extern EntryRecAt0V2 D_0044EF44[];
 extern char D_800D7E14;
 
-s32 func_8043CF44_de(func_80254D70_S1 *arg0) {
+s32 func_8043CF44_de(ObjRecAt14V1 *arg0) {
     if (D_80154030 < 12) {
         arg0->unk14 = D_0044EF44[D_80154030].ptr;
     } else {

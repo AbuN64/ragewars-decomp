@@ -8,7 +8,7 @@ extern char D_8014561C[];
 extern char D_0044E468[];
 extern void func_80442574_de(char *, char *, int, int, int);
 
-int func_8040AA4C_de(int unused, Item_func_8040AA4C_de *item) {
+int func_8040AA4C_de(int unused, ItemRecAt24 *item) {
     if (D_80153730 != 0) {
         func_80442574_de(D_8014561C, D_0044E468, item->x, item->y, 0);
     } else {

@@ -21,7 +21,7 @@ void func_8020EDCC_de(char *arg0) {
         for (i = 0; i < 10; i++) {
             Actor1DC *a = ((struct ObjectLinks40 *) (arg0 + (i * 4)))->unk_3C;
             if (a != 0) {
-                ((struct func_80232C78_S4 *) func_8020CFE0_de(table, ((struct func_80203E78_S1 *) ((ObjectLinks1458 *) a->info)->unk_1454)->unk4))->unk18 = value;
+                ((struct ObjRecAt18V3 *) func_8020CFE0_de(table, ((struct func_80203E78_S1 *) ((ObjectLinks1458 *) a->info)->unk_1454)->unk4))->unk18 = value;
             }
         }
     }

@@ -88,7 +88,7 @@ static inline void release(void) {
 
 Node_func_80251F6C_de *func_80251F6C_de(s32 unused, s32 key, Node_func_80251F6C_de *first, Node_func_80251F6C_de *second, s32 mode, void *owner,
                     void *tag, void *spare, s32 async) {
-    HashNode_func_80251F6C_de *node;
+    HashNodeRecAtCV1 *node;
     Request_func_80251F6C_de *found;
     Request_func_80251F6C_de **out;
     Request_func_80251F6C_de *scan;
@@ -97,7 +97,7 @@ Node_func_80251F6C_de *func_80251F6C_de(s32 unused, s32 key, Node_func_80251F6C_
     acquire();
 
     out = &found;
-    node = (HashNode_func_80251F6C_de *)((s32)D_80101194 +
+    node = (HashNodeRecAtCV1 *)((s32)D_80101194 +
         ((((key << 5) ^ ((u32)key >> 1) ^ ((u32)key >> 9) ^
            ((u32)key >> 17)) & D_80101190) * 0x10));
     if (node->key != key) {

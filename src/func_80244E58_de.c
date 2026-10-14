@@ -24,7 +24,7 @@ extern func_80244E48_S1 *D_800E2830;
 
 extern Group D_80145060;
 
-extern struct { func_80219490_S2 *unk0; } D_80140FE8_de;
+extern struct { ObjRecAt2A8 *unk0; } D_80140FE8_de;
 extern char D_8010EC90;
 
 
@@ -43,7 +43,7 @@ extern s32 func_8040332C_de(void);
 
 void func_80244E58_de(void) {
     Vec3Words origin;
-    func_80219490_S2 *camera;
+    ObjRecAt2A8 *camera;
     Player *player;
     Group *group;
     s32 target;

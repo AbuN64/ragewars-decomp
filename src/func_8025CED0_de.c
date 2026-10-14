@@ -44,7 +44,7 @@ static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group) {
     return first;
 }
 
-static inline void restart(Player_func_8025CED0_de *player) {
+static inline void restart(PlayerRecAt1E *player) {
     char *channel;
 
     if (player->state != 2 && player->state != 0) {
@@ -55,7 +55,7 @@ static inline void restart(Player_func_8025CED0_de *player) {
     }
 }
 
-s32 func_8025CED0_de(Player_func_8025CED0_de *player, s32 group, f32 scale) {
+s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale) {
     s32 song;
     s32 request;
 

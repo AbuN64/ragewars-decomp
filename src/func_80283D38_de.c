@@ -128,7 +128,7 @@ void func_80283E58_de(void *arg0) {
     if (temp_s3 != 0xFFFF) {
         func_8025DE54_de((s16)temp_s3,
                       ((Shared_Particle *)arg0)->inst.pos,
-                      (s32)((char *)arg0 + 8), (s32)arg0);
+                      (s32)&((Shared_Particle *)arg0)->inst.pos, (s32)arg0);
     }
 }
 

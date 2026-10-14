@@ -19,7 +19,7 @@ u32 func_802AE824_de(void **arg0, f32 arg1, s32 arg2) {
     s32 temp_v0;
     s32 converted;
 
-    temp_v0 = ((Obj_func_80297DBC_de *)((*arg0)))->unk40;
+    temp_v0 = ((ObjRecAt40V1 *)((*arg0)))->unk40;
     arg1f = arg1;
     val = (f64)temp_v0;
     if (temp_v0 < 0) {

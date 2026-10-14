@@ -157,7 +157,7 @@ void func_8027DAD0_de(Actor_func_8027DAD0_de *actor, Vec3 *outPosition, Vec3 *ou
         owner = actor->owner;
         if (owner->flags & 0x300000) {
             if (owner->model->unk5DC != 0) {
-                transform = ((Shared_func_80227014_S4 *)owner->model->unk5DC)->transform;
+                transform = ((SharedRecAt564V1 *)owner->model->unk5DC)->transform;
             } else {
                 func_80226DD0_de(owner->model, built);
                 transform = built;

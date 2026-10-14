@@ -25,8 +25,8 @@ void func_8028C4B4_de(void *arg0, s32 arg1) {
     s32 var_s0;
     s32 var_s0_2;
 
-    var_s0 = ((World_func_8044C108_de *)(arg0))->nfaces;
-    var_s1 = ((World_func_8044C108_de *)(arg0))->faces;
+    var_s0 = ((WorldRecAt1B40C *)(arg0))->nfaces;
+    var_s1 = ((WorldRecAt1B40C *)(arg0))->faces;
     var_s0 -= 1;
     if (var_s0 != -1) {
         do {
@@ -38,8 +38,8 @@ void func_8028C4B4_de(void *arg0, s32 arg1) {
         } while (var_s0 != -1);
     }
 
-    var_s0_2 = ((World_func_8044C108_de *)(arg0))->nedges;
-    var_s1_2 = ((World_func_8044C108_de *)(arg0))->edges;
+    var_s0_2 = ((WorldRecAt1B40C *)(arg0))->nedges;
+    var_s1_2 = ((WorldRecAt1B40C *)(arg0))->edges;
     var_s0_2 -= 1;
     if (var_s0_2 != -1) {
         do {
@@ -57,13 +57,13 @@ s32 func_8028C568_de(void *arg0, void *arg1) {
     f32 val;
     s32 flag;
 
-    rec = ((World_func_8044C108_de *)(arg0))->listB.head;
+    rec = ((WorldRecAt1B40C *)(arg0))->listB.head;
     if (rec != 0) {
-        func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listB, rec);
-        func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listA, rec);
+        func_80255ED8_de(&((WorldRecAt1B40C *)(arg0))->listB, rec);
+        func_80255CB8_de(&((WorldRecAt1B40C *)(arg0))->listA, rec);
         ((Bucket *)(rec))->object = arg1;
     } else {
-        rec = ((World_func_8044C108_de *)(arg0))->listA.tail;
+        rec = ((WorldRecAt1B40C *)(arg0))->listA.tail;
         func_80278C10_de(((Bucket *)(rec))->object);
         ((Bucket *)(rec))->object = arg1;
     }
@@ -95,7 +95,7 @@ void func_8028C60C_de(void *arg0) {
     f32 zero;
     f32 value;
 
-    node = ((World_func_8044C108_de *)(arg0))->listA.head;
+    node = ((WorldRecAt1B40C *)(arg0))->listA.head;
     remove = 0;
     if (node != 0) {
         zero = 0.0f;
@@ -115,8 +115,8 @@ void func_8028C60C_de(void *arg0) {
                 func_80278C10_de(object);
             }
             if (remove != 0) {
-                func_80255ED8_de(&((World_func_8044C108_de *)(arg0))->listA, node);
-                func_80255CB8_de(&((World_func_8044C108_de *)(arg0))->listB, node);
+                func_80255ED8_de(&((WorldRecAt1B40C *)(arg0))->listA, node);
+                func_80255CB8_de(&((WorldRecAt1B40C *)(arg0))->listB, node);
             }
             node = next;
             remove = 0;
@@ -172,9 +172,9 @@ void func_8028C6D4_de(Owner_func_8028C6D4_de *owner, s32 time, Block24 *out) {
 
 
 
-Entry_func_8028C108_de *func_8028C7E0_de(World_func_8028C7E0_de *world, s32 id) {
+EntryRecAt18V4 *func_8028C7E0_de(World_func_8028C7E0_de *world, s32 id) {
     s32 i;
-    Entry_func_8028C108_de *found = 0;
+    EntryRecAt18V4 *found = 0;
 
     for (i = 0; i < world->count; i++) {
         if (world->list[i]->def->unkC == id) {
@@ -199,7 +199,7 @@ extern Player *func_8022A414_de(void *list);
 #endif
 extern f32 func_802B72B0_de(f32 value);
 
-Player *func_8028C834_de(World_func_8028C834_de *world) {
+Player *func_8028C834_de(WorldRecAt1B6A4 *world) {
     Vec3 delta;
     Player *player;
     Player *object;
@@ -239,7 +239,7 @@ extern void func_8024B8C4_de(Object_func_8028C934_de *object);
 extern s32 func_8024D160_de(Object_func_8028C934_de *object);
 extern s32 func_8024E1B4_de(Object_func_8028C934_de *object);
 
-void func_8028C934_de(World_func_8028C934_de *world, Object_func_8028C934_de *object) {
+void func_8028C934_de(WorldRecAt10B8 *world, Object_func_8028C934_de *object) {
     func_8024B8C4_de(object);
     if (func_8024D160_de(object) != 0) {
         s32 n = world->countA;
@@ -300,10 +300,10 @@ void func_8028C934_de(World_func_8028C934_de *world, Object_func_8028C934_de *ob
 }
 
 /* Returns the nearest other object matching the optional team, kind and active filters, by squared distance. */
-Object_func_8028CAE0_de *func_8028CAE0_de(World_func_8028CAE0_de *world, Object_func_8028CAE0_de *self, s32 team, s32 kind, s32 activeOnly) {
+ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *self, s32 team, s32 kind, s32 activeOnly) {
     s32 i;
-    Object_func_8028CAE0_de *obj;
-    Object_func_8028CAE0_de *best;
+    ObjectRecAt1A4 *obj;
+    ObjectRecAt1A4 *best;
     f32 min;
     f32 dx, dy, dz, distSq;
 
@@ -345,15 +345,15 @@ Object_func_8028CAE0_de *func_8028CAE0_de(World_func_8028CAE0_de *world, Object_
 
 
 
-struct Entry_func_8028CBB0_de *func_8028CBB0_de(struct Owner_func_8028CBB0_de *owner, struct Entry_func_8028CBB0_de *pos) {
+struct EntryRecAt10 *func_8028CBB0_de(struct Owner_func_8028CBB0_de *owner, struct EntryRecAt10 *pos) {
     s32 i;
-    struct Entry_func_8028CBB0_de *best;
+    struct EntryRecAt10 *best;
     f32 min;
-    struct Entry_func_8028CBB0_de **entries;
+    struct EntryRecAt10 **entries;
     f32 dx, dy, dz, distSq;
-    struct Entry_func_8028CBB0_de *e;
+    struct EntryRecAt10 *e;
     s32 n;
-    struct Entry_func_8028CBB0_de **p;
+    struct EntryRecAt10 **p;
 
     i = 0;
     best = 0;
@@ -389,11 +389,11 @@ struct Entry_func_8028CBB0_de *func_8028CBB0_de(struct Owner_func_8028CBB0_de *o
 
 
 
-Actor_func_8028CC34_de *func_8028CC34_de(Obj_func_8028CC34_de *obj, int id) {
+ActorRecAt1D8V1 *func_8028CC34_de(Obj_func_8028CC34_de *obj, int id) {
     int i;
-    Actor_func_8028CC34_de *found;
+    ActorRecAt1D8V1 *found;
     int count;
-    Actor_func_8028CC34_de **list;
+    ActorRecAt1D8V1 **list;
 
     i = 0;
     found = 0;
@@ -421,13 +421,13 @@ void func_8028CCA4_de(void *arg0, s32 arg1) {
     void *entry;
 
     i = 0;
-    count = ((Scene_func_8028B028_de *)((arg0)))->count;
-    arr = &((Scene_func_8028B028_de *)((arg0)))->objects[0];
+    count = ((SceneRecAt10C0 *)((arg0)))->count;
+    arr = &((SceneRecAt10C0 *)((arg0)))->objects[0];
     if (count > 0) {
         do {
             entry = *arr;
-            if (((Actor_func_8028CC34_de *)((entry)))->link == arg1) {
-                ((Actor_func_8028CC34_de *)((entry)))->link = 0;
+            if (((ActorRecAt1D8V1 *)((entry)))->link == arg1) {
+                ((ActorRecAt1D8V1 *)((entry)))->link = 0;
             }
             i += 1;
             arr += 1;

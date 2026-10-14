@@ -11,7 +11,7 @@
 #include "span_16E000/code_80411B68.h"
 #include "types.h"
 extern struct Shape_typemap_165 D_8014D580;
-extern Batch_func_8040CF8C_de D_8014D590[];
+extern BatchRec D_8014D590[];
 s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, TextWidget *, DrawArgs *);
 s32 func_8040F488_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *);
 void func_802A1870_de(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -28,9 +28,9 @@ static inline void textBegin(u8 font, u8 style) {
     D_8014D568 = func_80411CD0_de((s8)font);
     D_8014D56C = func_80411C98_de((s8)font);
 }
-static inline s32 textOverlaps(Batch_func_8040CF8C_de *next) {
+static inline s32 textOverlaps(BatchRec *next) {
     s32 i;
-    Batch_func_8040CF8C_de *batch;
+    BatchRec *batch;
     for (i = 0; i < D_8014D570; i++) {
         batch = &D_8014D590[i];
         if (next->area.field_4 < batch->area.field_0 || batch->area.field_4 < next->area.field_0 ||
@@ -51,7 +51,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     u8 font, style;
     u8 *text;
     f32 x, y, sub; u8 *resolved;
-    Batch_func_8040CF8C_de *batch;
+    BatchRec *batch;
     TextSprite *sprites, *sprite;
     TextGlyph *glyph;
     u32 color; s16 glyphId;

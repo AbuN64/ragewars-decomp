@@ -43,12 +43,12 @@ extern void func_8044DDD4_de(char *);
 extern void func_80404E28_de(s32 ch);
 extern s32 func_80404F04_de(s32 ch);
 extern s32 func_80264580_de(s32 ch);
-extern void func_80442574_de(char *, char *, Player_func_80408DF0_de *, func_80242278_S1 *, s32);
+extern void func_80442574_de(char *, char *, PlayerRecAt5EC *, func_80242278_S1 *, s32);
 
 
 
 
-s32 func_80408DF0_de(void *owner, Menu_func_80408DF0_de *menu) {
+s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     s32 ch;
     s32 status;
     s32 connected;

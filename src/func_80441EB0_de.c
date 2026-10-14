@@ -16,7 +16,7 @@ extern void **func_8025343C_de(s32, s32, s32, char *);
 extern void func_80440DA0_de(void *, void **, struct List_func_80441EB0_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
-void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct Params_func_80441EB0_de *params) {
+void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
     struct List_func_80441EB0_de *list = params->list;
     s32 a;
     s32 b;

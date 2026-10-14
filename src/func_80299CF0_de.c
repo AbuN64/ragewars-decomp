@@ -10,7 +10,7 @@ extern s32 D_8014D080;
 extern s32 func_80299958_de(void);
 extern s32 func_802995D4_de(s32, s32, s32, s32, s32);
 
-void func_80299CF0_de(Node_func_80299CF0_de *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+void func_80299CF0_de(NodeRecAt12 *node, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                    s32 depth) {
     func_8029A73C_S1 *context;
     s32 saved;

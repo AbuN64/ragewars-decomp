@@ -61,17 +61,17 @@ void func_80230630_de(void *arg0, void *arg1) {
             case 0:
                 func_8025DE54_de(0x18A1,
                               ((Shared_ActorView *)actor)->position.vector,
-                              (s32)((char *)actor + 8), -1);
+                              (s32)&((Player *)actor)->pos, -1);
                 break;
             case 1:
                 func_8025DE54_de(0x1969,
                               ((Shared_ActorView *)actor)->position.vector,
-                              (s32)((char *)actor + 8), -1);
+                              (s32)&((Player *)actor)->pos, -1);
                 break;
             case 2:
                 func_8025DE54_de(0x1905,
                               ((Shared_ActorView *)actor)->position.vector,
-                              (s32)((char *)actor + 8), -1);
+                              (s32)&((Player *)actor)->pos, -1);
                 break;
             }
         }

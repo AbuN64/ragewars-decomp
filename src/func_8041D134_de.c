@@ -10,7 +10,7 @@
 
 
 /* The hub spells D_800E3590 as the padded menu block; this unit's view of it is the published
-   Menu_func_8041D134_de struct, so each member use casts D_800E3590 to that view. */
+   MenuRecAt108 struct, so each member use casts D_800E3590 to that view. */
 
 extern s32 func_8025DF34_de(s32 sound);
 extern void func_8029973C_de(void);
@@ -26,77 +26,77 @@ extern Node_func_8041D134_de *func_8041B7FC_de(void *handle, s32 arg1);
 s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
     Node_func_8041D134_de *node;
 
-    switch (((Menu_func_8041D134_de *) D_800E3590)->state) {
+    switch (((MenuRecAt108 *) D_800E3590)->state) {
     case 1:
-        ((Menu_func_8041D134_de *) D_800E3590)->left->x += ((Menu_func_8041D134_de *) D_800E3590)->leftStep;
-        ((Menu_func_8041D134_de *) D_800E3590)->right->x -= ((Menu_func_8041D134_de *) D_800E3590)->rightStep;
-        if (--((Menu_func_8041D134_de *) D_800E3590)->timer <= 0) {
+        ((MenuRecAt108 *) D_800E3590)->left->x += ((MenuRecAt108 *) D_800E3590)->leftStep;
+        ((MenuRecAt108 *) D_800E3590)->right->x -= ((MenuRecAt108 *) D_800E3590)->rightStep;
+        if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             func_8025DF34_de(0xE79);
             /* Node_func_8041D134_de is the hub Item view's twin (style at 0x10, x/y at 0x14/0x16);
                E8D8 speaks Item, so the node slots cast to it here. */
-            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupA, 1);
-            func_80419F58_de(((Menu_func_8041D134_de *) D_800E3590)->fade, 4);
-            ((Menu_func_8041D134_de *) D_800E3590)->state = 4;
-            ((Menu_func_8041D134_de *) D_800E3590)->timer = 4;
+            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 1);
+            func_80419F58_de(((MenuRecAt108 *) D_800E3590)->fade, 4);
+            ((MenuRecAt108 *) D_800E3590)->state = 4;
+            ((MenuRecAt108 *) D_800E3590)->timer = 4;
         }
         break;
     case 2:
-        ((Menu_func_8041D134_de *) D_800E3590)->left->x -= ((Menu_func_8041D134_de *) D_800E3590)->leftStep;
-        ((Menu_func_8041D134_de *) D_800E3590)->right->x += ((Menu_func_8041D134_de *) D_800E3590)->rightStep;
-        if (--((Menu_func_8041D134_de *) D_800E3590)->timer <= 0) {
-            ((Menu_func_8041D134_de *) D_800E3590)->state = 3;
+        ((MenuRecAt108 *) D_800E3590)->left->x -= ((MenuRecAt108 *) D_800E3590)->leftStep;
+        ((MenuRecAt108 *) D_800E3590)->right->x += ((MenuRecAt108 *) D_800E3590)->rightStep;
+        if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
+            ((MenuRecAt108 *) D_800E3590)->state = 3;
             func_8029973C_de();
             func_802998A8_de();
             return 0;
         }
         break;
     case 4:
-        if (func_80419F38_de(((Menu_func_8041D134_de *) D_800E3590)->fade) != 0) {
-            func_80419F24_de(((Menu_func_8041D134_de *) D_800E3590)->fade);
-            ((Menu_func_8041D134_de *) D_800E3590)->state = 6;
-            ((Menu_func_8041D134_de *) D_800E3590)->timer = 4;
-            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupB, 1);
-            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupC, 1);
+        if (func_80419F38_de(((MenuRecAt108 *) D_800E3590)->fade) != 0) {
+            func_80419F24_de(((MenuRecAt108 *) D_800E3590)->fade);
+            ((MenuRecAt108 *) D_800E3590)->state = 6;
+            ((MenuRecAt108 *) D_800E3590)->timer = 4;
+            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 1);
+            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 1);
         }
         break;
     case 5:
         func_8025DF34_de(0xE78);
-        ((Menu_func_8041D134_de *) D_800E3590)->state = 2;
-        ((Menu_func_8041D134_de *) D_800E3590)->timer = 4;
-        func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupB, 0);
-        func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupC, 0);
-        func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->groupA, 0);
+        ((MenuRecAt108 *) D_800E3590)->state = 2;
+        ((MenuRecAt108 *) D_800E3590)->timer = 4;
+        func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupB, 0);
+        func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupC, 0);
+        func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->groupA, 0);
         break;
     case 6:
-        ((Menu_func_8041D134_de *) D_800E3590)->styleValue += ((Menu_func_8041D134_de *) D_800E3590)->styleStep;
-        ((Menu_func_8041D134_de *) D_800E3590)->groupC->style += ((Menu_func_8041D134_de *) D_800E3590)->alphaStep;
-        func_8041DA5C_de(((Menu_func_8041D134_de *) D_800E3590)->styleValue);
-        if (--((Menu_func_8041D134_de *) D_800E3590)->timer <= 0) {
-            ((Menu_func_8041D134_de *) D_800E3590)->groupC->style = 100;
+        ((MenuRecAt108 *) D_800E3590)->styleValue += ((MenuRecAt108 *) D_800E3590)->styleStep;
+        ((MenuRecAt108 *) D_800E3590)->groupC->style += ((MenuRecAt108 *) D_800E3590)->alphaStep;
+        func_8041DA5C_de(((MenuRecAt108 *) D_800E3590)->styleValue);
+        if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
+            ((MenuRecAt108 *) D_800E3590)->groupC->style = 100;
             func_8041DA5C_de(0x6E);
-            ((Menu_func_8041D134_de *) D_800E3590)->state = 3;
-            func_8040E8D8_de((func_8041F2A0_Item *) ((Menu_func_8041D134_de *) D_800E3590)->cursor, 1);
+            ((MenuRecAt108 *) D_800E3590)->state = 3;
+            func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
         }
         break;
     case 7:
         break;
     }
 
-    if (((Menu_func_8041D134_de *) D_800E3590)->state == 3) {
-        ((Menu_func_8041D134_de *) D_800E3590)->clock += arg2;
-        ((Menu_func_8041D134_de *) D_800E3590)->cursor->style = func_802B6560_de((f32) ((Menu_func_8041D134_de *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
-        node = func_8041B7FC_de(((Menu_func_8041D134_de *) D_800E3590)->handle, 0);
-        if (node != ((Menu_func_8041D134_de *) D_800E3590)->focus) {
+    if (((MenuRecAt108 *) D_800E3590)->state == 3) {
+        ((MenuRecAt108 *) D_800E3590)->clock += arg2;
+        ((MenuRecAt108 *) D_800E3590)->cursor->style = func_802B6560_de((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
+        node = func_8041B7FC_de(((MenuRecAt108 *) D_800E3590)->handle, 0);
+        if (node != ((MenuRecAt108 *) D_800E3590)->focus) {
             func_8025DF34_de(0xE7E);
-            if (((Menu_func_8041D134_de *) D_800E3590)->focus != 0) {
-                ((Menu_func_8041D134_de *) D_800E3590)->focus->style = 0x6E;
+            if (((MenuRecAt108 *) D_800E3590)->focus != 0) {
+                ((MenuRecAt108 *) D_800E3590)->focus->style = 0x6E;
             }
-            ((Menu_func_8041D134_de *) D_800E3590)->focus = node;
+            ((MenuRecAt108 *) D_800E3590)->focus = node;
             node->style = 0xE1;
             func_8041D960_de();
             func_8041D4E0_de();
-            ((Menu_func_8041D134_de *) D_800E3590)->cursor->x = node->x - 2;
-            ((Menu_func_8041D134_de *) D_800E3590)->cursor->y = node->y;
+            ((MenuRecAt108 *) D_800E3590)->cursor->x = node->x - 2;
+            ((MenuRecAt108 *) D_800E3590)->cursor->y = node->y;
         }
     }
     return 0;

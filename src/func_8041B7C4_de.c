@@ -5,7 +5,7 @@
    its count at 0x48. */
 
 
-s32 func_8041B7C4_de(struct Slots_func_8041B7C4_de *object) {
+s32 func_8041B7C4_de(struct SlotsRecAt5CV2 *object) {
     s32 used = 0;
     s32 i;
 

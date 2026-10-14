@@ -23,7 +23,7 @@ extern u8 D_80152789;
 
 extern struct func_80204468_S3 *D_800E39C0;
 extern struct TextEntry D_800E381C[][17];
-extern struct Request_func_8041E100_de D_80153F80[];
+extern struct RequestRecAt10 D_80153F80[];
 extern void func_8029973C_de();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);
@@ -91,7 +91,7 @@ extern u8 D_80152789;
 
 extern struct func_80204468_S3 *D_800E39C0;
 extern struct TextEntry D_800E381C[][17];
-extern struct Request_func_8041E100_de D_80153F80[];
+extern struct RequestRecAt10 D_80153F80[];
 extern void func_8029973C_de();
 extern s32 func_802999A0_de(s32);
 extern s32 func_8041EC44_de(s32, s32);

@@ -1,7 +1,7 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 typedef struct DraftUi06434 { u8 pad[0x554]; char message[1]; } DraftUi06434;
-typedef struct DraftPlayer06434 { u8 pad[0x5D8]; Profile_func_80408C4C_de *settings; DraftUi06434 *ui; u8 pad5E0[0xB8]; void *model; } DraftPlayer06434;
+typedef struct DraftPlayer06434 { u8 pad[0x5D8]; ProfileRecAt84 *settings; DraftUi06434 *ui; u8 pad5E0[0xB8]; void *model; } DraftPlayer06434;
 typedef struct DraftSlot06434 { u8 pad[4]; s8 channel; } DraftSlot06434;
 typedef struct DraftMenu06434 { u8 pad[0x1C]; DraftPlayer06434 *player; DraftSlot06434 *slot; } DraftMenu06434;
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800E28C8;
@@ -14,7 +14,7 @@ extern u32 func_804057F8_de(void *, u32, u32);
 void func_80406434_de(DraftMenu06434 *menu)
 {
     DraftPlayer06434 *player;
-    Profile_func_80408C4C_de *settings;
+    ProfileRecAt84 *settings;
     s32 channel, i;
     char *prompt;
     D_8014D4C0_de = 1; D_8014D4DC = 1; D_80153760 = 0; D_8014D4EC_de = 1;

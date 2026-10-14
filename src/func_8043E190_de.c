@@ -7,7 +7,7 @@
 
 extern char D_800D76C8;
 
-s32 func_8043E190_de(func_80254D70_S1 *arg0) {
+s32 func_8043E190_de(ObjRecAt14V1 *arg0) {
     arg0->unk14 = &D_800D76C8;
     return 0;
 }

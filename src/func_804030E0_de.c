@@ -29,7 +29,7 @@ s32 func_804030E0_de(s32 key) {
     s32 loaded;
     s32 i;
     s32 n;
-    Entry_func_804030E0_de *entries;
+    EntryRecAt48 *entries;
 
     if (D_800DE7E8 == 0) {
         return 0;
@@ -41,7 +41,7 @@ s32 func_804030E0_de(s32 key) {
         table = func_8025193C_de(0, loaded, loaded, size, 0x33, 0, 0, &D_800E0B2C, 1);
     }
     i = 0;
-    entries = (Entry_func_804030E0_de *)(*table + 2);
+    entries = (EntryRecAt48 *)(*table + 2);
     n = *D_8011FEFC - 1;
     for (; i < n; i++) {
         if (entries[i].id8 == key) {

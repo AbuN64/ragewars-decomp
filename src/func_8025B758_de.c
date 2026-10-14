@@ -47,7 +47,7 @@ void func_8025B758_de(s32 *arg0, s32 arg1) {
     off = i;
     do {
         rec = (Record_func_8025B758_de *)((u32)off + (u32)arg0);
-        rec = &((func_8025B778_S2 *)(rec))->unk4;
+        rec = &((ObjRecAt4V6 *)(rec))->unk4;
         rec->index = i;
         i += 1;
         rec->owner = arg1;

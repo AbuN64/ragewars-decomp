@@ -21,7 +21,7 @@ extern s32 func_8028B350_de(void *table, s32 id);
 
 void func_80264CE0_de(void) {
     s32 i;
-    Actor_func_80264B8C_de *actor;
+    ActorRecAt5E0 *actor;
     Snapshot_func_80264CE0_de *snapshot;
     ActorList *list;
 

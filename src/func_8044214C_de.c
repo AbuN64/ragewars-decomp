@@ -6,8 +6,8 @@
 
 
 extern Model_func_8044214C_de *func_8028CFA0_de(void *,int,int);
-Model_func_8044214C_de *func_8044214C_de(Widget_func_8044214C_de *widget,int selection,int kind) {
- State_func_8044214C_de *state=widget->state;
+Model_func_8044214C_de *func_8044214C_de(WidgetRecAt20 *widget,int selection,int kind) {
+ StateRecAt47C *state=widget->state;
  Model_func_8044214C_de *model=func_8028CFA0_de(&D_8011FE88,selection,kind);
  if(!model){state->active=0;return 0;}
  state->selection=selection;

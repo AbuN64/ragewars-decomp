@@ -53,7 +53,7 @@ s32 func_80409448_de(void *unused, Menu_func_804066BC_de *menu) {
     s32 channel;
     void *prompt;
     void *owner;
-    func_8024795C_S2 *player;
+    ObjRecAt5DC *player;
     func_80242278_S1 *slot;
     switch (D_80153778) {
     case 4: pakShow(menu); return 1;

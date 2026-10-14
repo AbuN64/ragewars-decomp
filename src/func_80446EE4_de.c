@@ -11,7 +11,7 @@
 
 extern char D_80154110;
 
-void func_80446EE4_de(s32 channel, Entry_func_8023B9C0_eu *data) {
+void func_80446EE4_de(s32 channel, EntryRecAt3 *data) {
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
     s32 i;

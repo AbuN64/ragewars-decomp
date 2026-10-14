@@ -8,7 +8,7 @@
 
 
 void func_8022A8C8_de(char *object, f32 arg1) {
-    func_802285C4_S1 *object_record = (void *)object;
+    ObjRecAt20V2 *object_record = (void *)object;
     func_8022A8B8_S2 *record = object_record->unk20;
     if (record != 0) {
         do {

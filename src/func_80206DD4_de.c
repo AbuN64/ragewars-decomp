@@ -11,14 +11,14 @@ extern f32 func_80275DD4_de(s32, f32, f32);
 extern void func_802761EC_de(s32, f32);
 void func_80206DD4_de(Actor_func_80206DD4_de *actor, Rider_func_80206DD4_de *rider) {
     Vec3 point;
-    Segment_func_80206DD4_de *segment;
+    SegmentRecAt5C *segment;
     f32 t;
     f32 phase;
     f32 amp;
     Vec3 *base;
     Actor_func_80206DD4_de *owner;
     t = rider->throttle;
-    segment = (Segment_func_80206DD4_de *)(actor->track + 0x14);
+    segment = (SegmentRecAt5C *)(actor->track + 0x14);
     if (t < 0.0f) {
         t = 0.0f;
     } else if (t > 1.0f) {

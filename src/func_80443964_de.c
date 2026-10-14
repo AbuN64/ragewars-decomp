@@ -10,7 +10,7 @@ extern s32 D_801468F4;
 extern char D_800D7BE8[];
 extern char D_800D7BE4[];
 
-s32 func_80443964_de(struct Field_func_8040A4A0_de *field) {
+s32 func_80443964_de(struct FieldRecAt14 *field) {
     if (D_801468F4 != 0) {
         field->text = D_800D7BE8;
     } else {

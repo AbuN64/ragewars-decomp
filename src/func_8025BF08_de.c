@@ -15,9 +15,9 @@ extern void func_802B2F00_de(void *sound, s16 sample);
 extern s32 func_802B2620_de(void *sound);
 extern void func_802B2F60_de(void *sound);
 
-void func_8025BF08_de(Record_func_8025BF08_de *record, s32 value) {
+void func_8025BF08_de(RecordRecAt4V5 *record, s32 value) {
     s32 i;
-    Slot_func_8025BF08_de *slot = record->slots;
+    SlotRecAtB4V1 *slot = record->slots;
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {

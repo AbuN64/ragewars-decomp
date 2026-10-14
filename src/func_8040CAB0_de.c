@@ -47,7 +47,7 @@ void func_8040CAB0_de(void) {
     s32 texture;
     struct Shape_typemap_165 clip;
     Batch *batch;
-    Sprite_func_8040CAB0_de *sprite;
+    SpriteRecAt14 *sprite;
 
     if (D_8014D570 == 0) {
         return;

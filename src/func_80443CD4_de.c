@@ -9,16 +9,16 @@ extern s32 D_80145040;
 extern s32 D_801468F4[];
 extern s32 D_8015375C[];
 extern s32 D_800E28C0[]; /* const */
-void func_80443CD4_de(Arg_func_80443CD4_de *arg0) {
+void func_80443CD4_de(ArgRecAt1C *arg0) {
     s32 temp_a1;
     s32 var_s0;
-    Actor_func_80443C14_de *temp_a0;
-    Actor_func_80443C14_de *temp_v0;
-    Actor_func_80443C14_de *temp_v1;
-    Actor_func_80443C14_de *temp_v1_2;
-    Actor_func_80443C14_de *temp_v1_3;
-    Actor_func_80443C14_de *temp_v1_4;
-    Actor_func_80443C14_de *temp_v1_5;
+    ActorRecAt260 *temp_a0;
+    ActorRecAt260 *temp_v0;
+    ActorRecAt260 *temp_v1;
+    ActorRecAt260 *temp_v1_2;
+    ActorRecAt260 *temp_v1_3;
+    ActorRecAt260 *temp_v1_4;
+    ActorRecAt260 *temp_v1_5;
     temp_v1 = arg0->unkC;
     temp_v1->flags238 = (s32) (temp_v1->flags238 | 0x01800000);
     temp_v1_2 = arg0->unkC;

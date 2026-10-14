@@ -12,22 +12,22 @@ extern s32 D_801468F4;
 extern s32 func_8024E924_de(s32 arg0);
 extern s32 func_8022ACB8_de(Actor_func_802AB400_de *actor, s16 index, s32 arg2);
 extern s32 func_8022AC00_de(Actor_func_802AB400_de *actor, s32 id);
-static inline Entry_func_802AB400_de *find_entry(char *table, s32 count, s32 size, s32 id) {
-    Entry_func_802AB400_de *entry;
+static inline EntryRecAtE *find_entry(char *table, s32 count, s32 size, s32 id) {
+    EntryRecAtE *entry;
     s32 i;
-    entry = (Entry_func_802AB400_de *)table;
+    entry = (EntryRecAtE *)table;
     for (i=count; i!=-1; --i) {
         if (entry->id == id) return entry;
-        entry=(Entry_func_802AB400_de *)((char *)entry+size);
+        entry=(EntryRecAtE *)((char *)entry+size);
     }
     return 0;
 }
 s32 func_802AB400_de(s32 arg0, Actor_func_802AB400_de *actor) {
-    Entry_func_802AB400_de *powerup;
-    Entry_func_802AB400_de *weapon;
-    Entry_func_802AB400_de *item;
-    Entry_func_802AB400_de *bonus;
-    Entry_func_802AB400_de *special;
+    EntryRecAtE *powerup;
+    EntryRecAtE *weapon;
+    EntryRecAtE *item;
+    EntryRecAtE *bonus;
+    EntryRecAtE *special;
     s32 id;
     s32 level;
     s32 noState3;

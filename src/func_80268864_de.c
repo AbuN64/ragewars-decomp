@@ -49,11 +49,11 @@ void func_802688AC_de(void *unused, u8 *object, s32 third, struct Shape_func_802
 
 extern f32 D_800C9570[];
 extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
-extern void func_8022B11C_de(Owner_func_802688E4_de *, s32);
+extern void func_8022B11C_de(OwnerRecAt16D4 *, s32);
 
-void func_802688E4_de(Actor_func_802688E4_de *arg0, Player *arg1, s32 arg2, Blast blast) {
+void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast) {
     Vec3 delta;
-    Owner_func_802688E4_de *owner;
+    OwnerRecAt16D4 *owner;
     f32 range;
     f32 dist;
 

@@ -7,7 +7,7 @@
 
 extern f32 D_800CC740;
 
-f32 func_802B20D4_de(Obj_func_802B20D4_de *arg0, s32 arg1, s32 arg2) {
+f32 func_802B20D4_de(ObjRecAt18V1 *arg0, s32 arg1, s32 arg2) {
     f64 v;
     f32 new_var;
 

@@ -55,31 +55,31 @@ s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
             void *next;
 
             base = (u8 *)state + (index * 4);
-            p = ((struct Measured_func_802AE030_de_d0c30e922349 *)(base))->value;
-            lead = ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value;
+            p = ((struct MeasuredRecAt18 *)(base))->value;
+            lead = ((struct MeasuredRecAt0V3 *)(p))->value;
             p = (u8 *)p + 1;
-            count_byte = ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value;
+            count_byte = ((struct MeasuredRecAt0V3 *)(p))->value;
             count = count_byte & 0xFF;
             if (count == 0) {
                 next = (u8 *)p + 5;
-                ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value = lead;
+                ((struct MeasuredRecAt0V3 *)(p))->value = lead;
             } else {
                 if (count != first_value) {
-                    ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value = count_byte - 1;
+                    ((struct MeasuredRecAt0V3 *)(p))->value = count_byte - 1;
                 }
                 p = (u8 *)p + 1;
-                byte0 = ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value;
+                byte0 = ((struct MeasuredRecAt0V3 *)(p))->value;
                 p = (u8 *)p + 1;
-                byte1 = ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value;
+                byte1 = ((struct MeasuredRecAt0V3 *)(p))->value;
                 p = (u8 *)p + 1;
-                byte2 = ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value;
+                byte2 = ((struct MeasuredRecAt0V3 *)(p))->value;
                 p = (u8 *)p + 1;
-                byte3 = ((struct Measured_func_802AE030_de_3cc73d040be0 *)(p))->value;
+                byte3 = ((struct MeasuredRecAt0V3 *)(p))->value;
                 p = (u8 *)p + 1;
                 next = (u8 *)p - ((byte0 << 24) + (byte1 << 16) +
                                    (byte2 << 8) + byte3);
             }
-            ((struct Measured_func_802AE030_de_d0c30e922349 *)(base))->value = next;
+            ((struct MeasuredRecAt18 *)(base))->value = next;
             state->flagsA8[index] = 0;
             result->type = 0x14;
         }

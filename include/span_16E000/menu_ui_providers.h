@@ -1,6 +1,6 @@
 #ifndef MENU_UI_PROVIDERS_H
 #define MENU_UI_PROVIDERS_H
-#include "../types.h"
+#include "types.h"
 #include "common/unused.h"
 #include "shared/func_80425674_de_layout.h"
 typedef struct MenuOption {

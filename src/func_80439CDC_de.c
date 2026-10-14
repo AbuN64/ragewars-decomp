@@ -7,6 +7,6 @@
 
 
 
-struct Triple func_80439CDC_de(struct Object_func_80439CDC_de *object) {
+struct Triple func_80439CDC_de(struct ObjectRecAt10 *object) {
     return object->vector;
 }

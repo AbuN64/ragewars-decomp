@@ -13,7 +13,7 @@ extern char D_800D39A0[];
 extern char D_800D39B4[];
 extern char D_800D39C8[];
 
-s32 func_8040B9DC_de(struct Field_func_8040A4A0_de *field) {
+s32 func_8040B9DC_de(struct FieldRecAt14 *field) {
     u32 state = D_80153778;
 
     if (state >= 5) {

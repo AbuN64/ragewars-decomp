@@ -18,18 +18,18 @@ void func_802A5D38_de(void *arg0, s32 arg1) {
     Particle *node;
     Particle *next;
 
-    if (((Scene_func_802A5180_de *)arg0)->free.count != 0x64) {
+    if (((SceneRecAt95A8 *)arg0)->free.count != 0x64) {
         count = 0;
         offset = 0x94E0;
         do {
-            slot = &((Scene_func_802A5180_de *)arg0)->lists[count].head;
+            slot = &((SceneRecAt95A8 *)arg0)->lists[count].head;
             node = *slot;
             if (node != 0) {
                 do {
                     next = node->next;
                     if (node->owner == arg1) {
                         func_80255ED8_de(slot, (s32) node);
-                        func_80255D14_de(&((Scene_func_802A5180_de *)arg0)->free, node);
+                        func_80255D14_de(&((SceneRecAt95A8 *)arg0)->free, node);
                     }
                     node = next;
                 } while (node != 0);

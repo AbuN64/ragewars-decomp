@@ -32,8 +32,8 @@ void func_80218E98_de(char *arg0) {
 
     for (i = 0; i < 4; i++, arg0 += 0x14) {
         f32 scaled = i * scale;
-        ((Slot_func_80218F9C_de *)(arg0 + 0x1C))->unused2 = 0;
-        ((Slot_func_80218F9C_de *)(arg0 + 0x1C))->scale = value;
-        ((Slot_func_80218F9C_de *)(arg0 + 0x1C))->angle = -scaled;
+        ((SlotRecAt10 *)(arg0 + 0x1C))->unused2 = 0;
+        ((SlotRecAt10 *)(arg0 + 0x1C))->scale = value;
+        ((SlotRecAt10 *)(arg0 + 0x1C))->angle = -scaled;
     }
 }

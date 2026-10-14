@@ -26,7 +26,7 @@ void func_8026AC38_de(void) {
     func_80295FF4_de();
 
     cmd = D_80110634++;
-    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)&D_0044B180);
+    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_0044B180);
     cmd = D_80110634++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 5, 0, G_TX_WRAP, 5, 0);
     cmd = D_80110634++;

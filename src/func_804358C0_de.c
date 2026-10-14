@@ -5,7 +5,7 @@
    equals the second argument and whose first word equals the first, or -1 when none does. */
 
 
-extern struct Record_func_804358C0_de D_80102B08[];
+extern struct RecordRecAtD D_80102B08[];
 
 s32 func_804358C0_de(s32 id, s32 kind) {
     s32 i;

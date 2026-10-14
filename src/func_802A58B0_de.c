@@ -20,7 +20,7 @@ extern void func_802A25D0_de(void *arg0, void *arg1, f32 *arg2);
 
 
 
-void func_802A58B0_de(func_802A67D0_S1 *arg0, Shared_Particle *arg1, PackedMatrixWords *arg2) {
+void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *arg2) {
     f32 local[16];
     f32 scale;
     f32 zero;

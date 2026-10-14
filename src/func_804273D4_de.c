@@ -81,7 +81,7 @@ loop:
     }
 }
 
-extern struct Entry_func_8041EB50_de D_800E4694[];
+extern struct EntryRecAt0V1 D_800E4694[];
 extern struct Pair D_800E4A84[];
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_80265650_de(s32, s32);

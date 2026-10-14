@@ -6,7 +6,7 @@
 
 
 
-extern struct Slot_func_8041F1D8_de D_800E3A50[];
+extern struct SlotRecAt4 D_800E3A50[];
 
 s32 func_8041F1D8_de(s32 key) {
     s32 value = 0;

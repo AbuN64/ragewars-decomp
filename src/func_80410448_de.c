@@ -31,9 +31,9 @@ void func_80410448_de(void) {
     s32 i;
     s32 j;
     s32 k;
-    struct Slot_func_8040F580_de *slot;
-    struct Slot_func_8040F580_de *slots;
-    struct Resource_func_804101BC_de *resource;
+    struct SlotRecAtCV2 *slot;
+    struct SlotRecAtCV2 *slots;
+    struct ResourceRecAt6 *resource;
 
     now = func_802A1934_de();
     if (D_801539B0.locked != 0) {

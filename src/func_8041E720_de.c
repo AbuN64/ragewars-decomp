@@ -7,7 +7,7 @@
 
 
 
-extern struct Entry_func_804101BC_de D_80153F80[];
+extern struct EntryRecAt8V1 D_80153F80[];
 extern InstanceHdr D_800E37B8[];
 
 static inline s32 entryScore(void) {

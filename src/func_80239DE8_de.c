@@ -13,7 +13,7 @@
 
 
 
-void func_80239DE8_de(struct Record_func_80239DE8_de *record, f32 first, f32 second, f32 third, f32 value, s32 mode,
+void func_80239DE8_de(struct RecordRecAt18 *record, f32 first, f32 second, f32 third, f32 value, s32 mode,
                    Triple triple) {
     record->triple = triple;
     record->value = value;

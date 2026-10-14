@@ -1,16 +1,13 @@
 #ifndef UNBAKE_COMMON_TYPES_8A8189AF7B05_H
 #define UNBAKE_COMMON_TYPES_8A8189AF7B05_H
-#include "../types.h"
+#include "types.h"
 struct Box;
-/* unbake published declaration: published_22271f56ff1f25f48ba524c3 */
 typedef struct Box Box;
 
 struct Vec3;
-/* unbake published declaration: published_5812d14400a6b36e6b9bbb18 */
 typedef struct Vec3 Vec3;
 
 struct Vec3;
-/* unbake published declaration: published_c2d0b2ae83422f0ce9d453a1 */
 struct Vec3 {
     f32 x;
     f32 y;
@@ -18,28 +15,23 @@ struct Vec3 {
 };
 
 struct Box;
-/* unbake published declaration: published_d66ac82aaa46e00fdabffe60 */
 struct Box {
     Vec3 min;
     Vec3 max;
 };
 
 struct Owner8020F150;
-/* unbake published declaration: published_00b864ab900afab9ba5f30b8 */
 typedef struct Owner8020F150 Owner8020F150;
 
 struct Shared_Input;
-/* unbake published declaration: published_033f76a80add6faea9a1f158 */
 typedef struct Shared_Input Shared_Input;
 
 struct Shape_func_8021A2D4_de_2;
-/* unbake published declaration: published_04a7b59492549219a2460b2b */
 struct Shape_func_8021A2D4_de_2 {
     int field_0;
 };
 
 struct Triple;
-/* unbake published declaration: published_0c3d3cbe4ff75b7c698e465d */
 struct Triple {
     s32 x;
     s32 y;
@@ -47,11 +39,9 @@ struct Triple {
 };
 
 struct Triple;
-/* unbake published declaration: published_4dd4b24dc962759bbf22e09b */
 typedef struct Triple Triple;
 
 struct Settings;
-/* unbake published declaration: published_078a0db7d402bc8a9c2ad1fc */
 struct Settings {
     char pad0[0x78];
     s32 flag78;
@@ -60,7 +50,6 @@ struct Settings {
 };
 
 struct Held;
-/* unbake published declaration: published_0c59b189643c0e3ceba506a0 */
 struct Held {
     u8 type;
     char pad1[0x100 - 0x1];
@@ -70,7 +59,6 @@ struct Held {
 };
 
 struct Model;
-/* unbake published declaration: published_1260323754b8435c54630066 */
 struct Model {
     s32 kind; /* 0x00: definition class */
     char pad4[0x10];
@@ -80,7 +68,6 @@ struct Model {
 };
 
 struct Shared_Quad;
-/* unbake published declaration: published_16493ff7647bee1c3761ac4f */
 struct Shared_Quad {
     union { s32 w[4]; f32 f[4]; }; /* Integer transport or quaternion coefficients. */
 };
@@ -93,7 +80,6 @@ struct Mount {
 };
 
 struct Rider;
-/* unbake published declaration: published_20478836ddb34d9ed05d754a */
 struct Rider {
     char pad0[0x37];
     s8 direction;
@@ -107,19 +93,15 @@ struct Rider {
 };
 
 struct Shared_Effect;
-/* unbake published declaration: published_2f3ea03034662cd978ad1547 */
 typedef struct Shared_Effect Shared_Effect;
 
 struct Shared_Slot;
-/* unbake published declaration: published_382a124a680de5b042d97b24 */
 typedef struct Shared_Slot Shared_Slot;
 
 struct Matrix;
-/* unbake published declaration: published_4339dbd88bf952cc30a3c163 */
 typedef struct Matrix Matrix;
 
 struct Profile;
-/* unbake published declaration: published_4809db739e3e982af47c812e */
 struct Profile {
     u8 bonus2;
     u8 bonus0;
@@ -128,17 +110,14 @@ struct Profile {
 };
 
 struct Shared_Emitter;
-/* unbake published declaration: published_5379c36cf8f34532a5ac448d */
 typedef struct Shared_Emitter Shared_Emitter;
 
 struct Matrix;
-/* unbake published declaration: published_557598c5f857a94ea5843139 */
 struct Matrix {
     f32 m[16];
 };
 
 struct Controls;
-/* unbake published declaration: published_565fccbb8e92a9a8acb77fa5 */
 struct Controls {
     char pad0[0x80];
     s8 mode;
@@ -148,12 +127,10 @@ struct Controls {
 };
 
 struct Shared_Quad;
-/* unbake published declaration: published_d83bab7a76e92c1a75660825 */
 typedef struct Shared_Quad Shared_Quad;
 
 struct Shared_Emitter;
 struct Shared_Model;
-/* unbake published declaration: published_958ed06d860a79f3c23508f2 */
 struct Shared_Emitter {
     char pad0[0x8];
     Vec3 pos;
@@ -166,21 +143,18 @@ struct Shared_Emitter {
 };
 
 struct Shared_Effect;
-/* unbake published declaration: published_966588013c91d1a9c3a443e6 */
 struct Shared_Effect {
     char pad0[0xB4];
     s32 state;
 };
 
 struct Record;
-/* unbake published declaration: published_b00f2f4949cb17b7809bff6f */
 struct Record {
     char pad0[0x92];
     u8 team;
 };
 
 struct View;
-/* unbake published declaration: published_b7c3dd209caf2e37bb735ae2 */
 struct View {
     char pad0[0x29C];
     f32 viewport[4];
@@ -190,7 +164,6 @@ struct View {
 };
 
 struct Shared_Body;
-/* unbake published declaration: published_cca06adbef5dea4c337c5f21 */
 struct Shared_Body {
     char pad0[0xC];
     s16 kind;
@@ -200,7 +173,6 @@ struct Shared_Body {
 
 struct Shared_Input;
 struct Shared_Shadow;
-/* unbake published declaration: published_cdaf4ee0ec71630d6a6183c7 */
 struct Shared_Input {
     s32 word0;
     s32 word4;
@@ -219,7 +191,6 @@ struct Shared_Input {
 };
 
 struct Shared_Slot;
-/* unbake published declaration: published_d8d68874f25249de848226db */
 struct Shared_Slot {
     s8 owned;
     s8 pad1;
@@ -232,7 +203,6 @@ struct Body {
 };
 struct Actor_func_80214DD4_de;
 struct Controller;
-/* unbake published declaration: published_994592539551493e794ad301 */
 struct Actor_func_80214DD4_de {
     u8 type;
     u8 pad1[7];
@@ -263,14 +233,12 @@ struct Ctrl {
     u8 pad[0x8F];
     u8 flag;
 };
-struct func_80212828_S7;
-/* unbake published declaration: published_9dac64a0ec8f020d08e9fc7b */
-typedef struct func_80212828_S7 func_80212828_S7;
+struct ObjRecAt28V1;
+typedef struct ObjRecAt28V1 ObjRecAt28V1;
 
-struct func_80212828_S7;
-/* unbake published declaration: published_c8204325db8640c56fd7a968 */
-struct func_80212828_S7 {
-    struct func_80212828_S7 *next;
+struct ObjRecAt28V1;
+struct ObjRecAt28V1 {
+    struct ObjRecAt28V1 *next;
     s32 field4;
     f32 unk8;
     char padC[0x28 - 0xC];
@@ -280,7 +248,7 @@ struct func_80212828_S7 {
 struct Mode;
 struct Mode {
     char pad0[8];
-    func_80212828_S7 *physics;
+    ObjRecAt28V1 *physics;
     char padC[12];
 };
 struct StateInfo;
@@ -315,7 +283,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_074858c7626b1d9b8f443780 */
 struct SharedPlayer_func_8022A398_de {
     union {
         struct {
@@ -1738,17 +1705,14 @@ struct SharedPlayer_func_8022A398_de {
     } views16E0;
 };
 
-struct func_8024795C_S2;
-/* unbake published declaration: published_0967dc50200a75ea76027e17 */
-typedef struct func_8024795C_S2 func_8024795C_S2;
+struct ObjRecAt5DC;
+typedef struct ObjRecAt5DC ObjRecAt5DC;
 
 struct SharedPlayer_func_8022A398_de;
-/* unbake published declaration: published_40f0b19d9e0b11bf4fa26f53 */
 typedef struct SharedPlayer_func_8022A398_de SharedPlayer_func_8022A398_de;
 
-struct Profile_func_80408C4C_de;
-/* unbake published declaration: published_4047e41358439033e127f9f8 */
-struct Profile_func_80408C4C_de {
+struct ProfileRecAt84;
+struct ProfileRecAt84 {
     u16 words[4];
     char pad8[0x78];
     u8 flags;
@@ -1756,26 +1720,22 @@ struct Profile_func_80408C4C_de {
     u8 name[8];
 };
 
-struct Player_func_802676EC_de;
-/* unbake published declaration: published_0d5840eaf9a4cc3ee873f266 */
-struct Player_func_802676EC_de {
+struct PlayerRecAt122C;
+struct PlayerRecAt122C {
     char pad0[0x122C];
     s32 flags;
 };
 
 struct func_8028414C_S1;
-/* unbake published declaration: published_0e51bf6fbe996ae2a6f8ccfe */
 typedef struct func_8028414C_S1 func_8028414C_S1;
 
-struct func_8022BC04_S2;
-/* unbake published declaration: published_0f995a602586ca028bdd57ba */
-struct func_8022BC04_S2 {
+struct ObjRecAt4V5;
+struct ObjRecAt4V5 {
     char pad0[0x4];
     u16 unk4;
 };
 
 struct func_8024E8F0_S1;
-/* unbake published declaration: published_58d23743d5ba73000621c376 */
 struct func_8024E8F0_S1 {
     u8 unk0;
     char pad0[0x100 - 0x0 - sizeof(u8)];
@@ -1783,11 +1743,9 @@ struct func_8024E8F0_S1 {
 };
 
 struct func_8024E8F0_S1;
-/* unbake published declaration: published_f70d6876d739474e1f8fc177 */
 typedef struct func_8024E8F0_S1 func_8024E8F0_S1;
 
 struct Shape_typemap_165;
-/* unbake published declaration: published_ea28f56ba4d6d1810752daab */
 struct Pack;
 struct Shape_typemap_165 {
     union { int field_0; struct Pack *pack; void *data; };
@@ -1796,31 +1754,25 @@ struct Shape_typemap_165 {
     int field_C;
 };
 
-struct func_802066A4_S3;
-/* unbake published declaration: published_1668fb6c34955643d3fae938 */
-typedef struct func_802066A4_S3 func_802066A4_S3;
+struct ObjRecAt18V4;
+typedef struct ObjRecAt18V4 ObjRecAt18V4;
 
-struct func_8020EA10_S3;
-/* unbake published declaration: published_169c7c342d991169d4abf685 */
-typedef struct func_8020EA10_S3 func_8020EA10_S3;
+struct ObjRecAt8F;
+typedef struct ObjRecAt8F ObjRecAt8F;
 
 struct func_80204468_S3;
-/* unbake published declaration: published_aa95152a805ded8210812838 */
 typedef struct func_80204468_S3 func_80204468_S3;
 
 struct func_80204468_S3;
-/* unbake published declaration: published_cf345f566143d8e076afb511 */
 struct func_80204468_S3 {
     char pad0[0x14];
     int unk14;
 };
 
 struct HeadRecord;
-/* unbake published declaration: published_1ebea1830b753df58bcf3d99 */
 typedef struct HeadRecord HeadRecord;
 
 struct func_80242278_S1;
-/* unbake published declaration: published_49ce863c21593448eea26581 */
 struct func_80242278_S1 {
     char pad0[0x4];
     s8 unk4;
@@ -1828,43 +1780,36 @@ struct func_80242278_S1 {
     s32 unkB0; /* controller input flags used by Controller Pak selection */
 };
 
-struct func_8024795C_S2;
-/* unbake published declaration: published_4a0a8369c54ff5de306d682c */
-struct func_8024795C_S2 {
+struct ObjRecAt5DC;
+struct ObjRecAt5DC {
     char pad0[0x5DC];
     char * unk5DC;
 };
 
 struct func_80242278_S1;
-/* unbake published declaration: published_bd18aa1ac6677b34035da7f0 */
 typedef struct func_80242278_S1 func_80242278_S1;
 
 struct Owner8020F150;
-/* unbake published declaration: published_2d7157e48511b0aae9140021 */
 struct Owner8020F150 {
     char pad[0x294];
     s32 active;
 };
 
 struct HeadRecord;
-/* unbake published declaration: published_2f5402bf62a3c861fbc97740 */
 struct HeadRecord {
     void *head;
     char rest[0x10];
 };
 
-struct func_8020EA10_S3;
-/* unbake published declaration: published_a11e4f95c95762d8544b9f85 */
-struct func_8020EA10_S3 {
+struct ObjRecAt8F;
+struct ObjRecAt8F {
     char pad0[0x8F];
     u8 unk8F;
 };
 
-/* unbake published declaration: published_39c0825a8e090613ca5ab7d6 */
 extern float D_800CD740_de;
 
 struct func_80283038_S1;
-/* unbake published declaration: published_4ce8ba6a98943bbdcab3f072 */
 struct func_80283038_S1 {
     char pad0[0x5C];
     s32 unk5C;
@@ -1872,41 +1817,34 @@ struct func_80283038_S1 {
     s32 * unk118;
 };
 
-struct func_8022BC04_S2;
-/* unbake published declaration: published_4f8f88988d29e94b03be3afd */
-typedef struct func_8022BC04_S2 func_8022BC04_S2;
+struct ObjRecAt4V5;
+typedef struct ObjRecAt4V5 ObjRecAt4V5;
 
 struct func_8028414C_S1;
-/* unbake published declaration: published_52d8064581f52c8037b19010 */
 struct func_8028414C_S1 {
     char pad0[0x220];
     char unk220;
 };
 
-struct func_802066A4_S3;
-/* unbake published declaration: published_5a6739a35c3fcc31d8c6293e */
-struct func_802066A4_S3 {
+struct ObjRecAt18V4;
+struct ObjRecAt18V4 {
     char pad0[0x18];
     s32 unk18;
 };
 
 struct func_80228774_S5;
-/* unbake published declaration: published_7448d83ccce13c21ca72cf21 */
 typedef struct func_80228774_S5 func_80228774_S5;
 
 struct func_80228774_S5;
-/* unbake published declaration: published_8eea87a66fa2efe16ecb5fc7 */
 struct func_80228774_S5 {
     char pad0[0x5DC];
     void * unk5DC;
 };
 
 struct func_80283038_S1;
-/* unbake published declaration: published_9cab5eb8d60d2884f5550513 */
 typedef struct func_80283038_S1 func_80283038_S1;
 
 struct Saved;
-/* unbake published declaration: published_a3c563eb46841982348d59df */
 struct Saved {
     u16 values[4];
     u8 flag;
@@ -1915,24 +1853,20 @@ struct Saved {
     u32 checksum; /* 0x14: checksum over the preceding 20 bytes. */
 };
 
-struct Player_func_802676EC_de;
-/* unbake published declaration: published_e1958f1d64e46fafab968ba4 */
-typedef struct Player_func_802676EC_de Player_func_802676EC_de;
+struct PlayerRecAt122C;
+typedef struct PlayerRecAt122C PlayerRecAt122C;
 
 struct func_8027C324_S3;
-/* unbake published declaration: published_c02a76e709b31768c9ca7b52 */
 typedef struct func_8027C324_S3 func_8027C324_S3;
 
-struct Owner_func_804099EC_de;
-struct Profile_func_80408C4C_de;
-/* unbake published declaration: published_d051b7ce44e234d3ff50f311 */
-struct Owner_func_804099EC_de {
+struct OwnerRecAt5D8V1;
+struct ProfileRecAt84;
+struct OwnerRecAt5D8V1 {
     char pad[0x5D8];
-    struct Profile_func_80408C4C_de *settings;
+    struct ProfileRecAt84 *settings;
 };
 
 struct func_8027C324_S3;
-/* unbake published declaration: published_cc62af82f76b1b6e37e24abd */
 struct func_8027C324_S3 {
     char pad0[0x70];
     u16 unk70;
@@ -1943,16 +1877,13 @@ struct func_8027C324_S3 {
 };
 
 struct Shape_typemap_3;
-/* unbake published declaration: published_d4404a7d3c6aff476bc76b74 */
 struct Shape_typemap_3 {
     int field_0;
 };
 
-/* unbake published declaration: published_e52f766d0c1a39c2d2a258be */
 extern int D_800E28CC;
 
-struct Profile_func_80408C4C_de;
-/* unbake published declaration: published_f04d099af63dc965ac291eaf */
-typedef struct Profile_func_80408C4C_de Profile_func_80408C4C_de;
+struct ProfileRecAt84;
+typedef struct ProfileRecAt84 ProfileRecAt84;
 
 #endif

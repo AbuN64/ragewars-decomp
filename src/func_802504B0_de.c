@@ -55,7 +55,7 @@ void func_802504B0_de(Owner_func_802504B0_de *owner) {
             }
             data = object;
         } else {
-            data = (char *)(header + 2);
+            data = (char *)&header[2];
         }
         if (D_800D15E0 != 0) {
             func_8026DA4C_de(instance, owner->transform, 0, 0, data, arg2);

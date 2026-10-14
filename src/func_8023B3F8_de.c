@@ -21,12 +21,12 @@ extern void D_0023B94C();
 extern void D_0023B978_de();
 extern void func_8026925C_de(s32);
 extern void func_802852C0_de(char *, u32, u32, void *, void *);
-extern void func_8023A4E0_de(Object_func_8023B3F8_de *, View_func_8023B3F8_de *);
+extern void func_8023A4E0_de(ObjectRecAt220 *, View_func_8023B3F8_de *);
 
 void func_8023B3F8_de(Scene *scene, View_func_8023B3F8_de *view) {
-    Object_func_8023B3F8_de *near[4];
-    Object_func_8023B3F8_de *far[4];
-    Object_func_8023B3F8_de *object;
+    ObjectRecAt220 *near[4];
+    ObjectRecAt220 *far[4];
+    ObjectRecAt220 *object;
     s32 nearCount;
     s32 farCount;
     s32 i;

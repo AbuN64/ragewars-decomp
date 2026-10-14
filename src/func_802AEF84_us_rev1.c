@@ -11,7 +11,7 @@ extern void func_802AEAB4_us_rev1(s32, s32);
 extern s32 func_802BD400_de(u8 *arg0);
 
 s32 func_802AEF84_us_rev1(void) {
-    ReadWord_func_802AEF84_us_rev1 first;
+    ReadWordRecAt4 first;
     u32 word;
     s32 result;
     u32 var_s0;

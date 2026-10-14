@@ -10,7 +10,7 @@ extern s32 D_80153780;
 extern char D_800D7810[];
 extern char D_800D7814[];
 
-s32 func_8040A6A8_de(struct Field_func_8040A4A0_de *field) {
+s32 func_8040A6A8_de(struct FieldRecAt14 *field) {
     if (D_80153780 != 0) {
         field->text = D_800D7810;
     } else {
@@ -29,7 +29,7 @@ extern char D_8014561C[];
 extern char D_0044E4B0[];
 extern void func_80442574_de(void *, void *, s32, s32, s32);
 
-s32 func_8040A6DC_de(void *unused, struct Record_func_8040A6DC_de *record) {
+s32 func_8040A6DC_de(void *unused, struct RecordRecAt24 *record) {
     do {
         if (D_80153780 != 0) {
             func_80442574_de(D_8014561C, D_0044E4B0, record->first, record->second, 0);
@@ -67,7 +67,7 @@ void func_8040A764_de(void) {
 extern s32 D_80153730;
 extern s32 D_80153774;
 
-void func_8040A77C_de(struct Record_func_8040A77C_de *record) {
+void func_8040A77C_de(struct RecordRecAtCV1 *record) {
     record->target->first &= ~0x01800000;
     D_80153730 = 0;
     D_80153774 = 1;
@@ -84,7 +84,7 @@ extern char D_800D77EC[];
 extern char D_800D77F4[];
 extern char D_800D77F0[];
 
-s32 func_8040A7BC_de(struct Field_func_8040A4A0_de *field) {
+s32 func_8040A7BC_de(struct FieldRecAt14 *field) {
     if (D_80153730 != 0) {
         field->text = D_800D77EC;
     } else if (D_80153774 != 0) {

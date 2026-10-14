@@ -9,7 +9,7 @@
 
 
 extern struct State_func_80428E10_de *D_800E4690;
-extern struct Entry_func_80428E10_de D_800E4694[];
+extern struct EntryRecAt8V3 D_800E4694[];
 extern void func_8029973C_de();
 
 extern void func_8042E9A0_de(s32, s32);

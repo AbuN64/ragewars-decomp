@@ -76,14 +76,14 @@ extern s32 *func_8028FDB4_de(s32 resource, s32 index);
 
 f32 func_8040170C_de(f32 t) {
     s32 *track;
-    Key_func_8040170C_de *key;
+    KeyRecAt10 *key;
     s32 count;
     f32 u;
     f32 v;
 
     track = func_8028FDB4_de(D_800E2830->resource, 1);
     count = track[1];
-    key = (Key_func_8040170C_de *)(track + 2);
+    key = (KeyRecAt10 *)(track + 2);
     if (count == 0) {
         v = 0.0f;
     } else if (t <= key[0].time) {

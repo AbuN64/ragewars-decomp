@@ -66,7 +66,7 @@ static inline s32 released(void *actor, Player *player) {
 void func_802312C8_de(void *actor, void *attack) {
     Player *player;
     Vec3 *position;
-    Shared_func_80227014_S4 *target;
+    SharedRecAt564V1 *target;
 
     player = ((Shared_Actor *)actor)->entity;
     target = player->owner;

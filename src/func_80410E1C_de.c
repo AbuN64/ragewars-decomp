@@ -10,7 +10,7 @@
 
 
 
-extern Pool_func_80410E1C_de D_80153C0C;
+extern PoolRecAtC D_80153C0C;
 
 extern void func_80419624_de(void *data);
 

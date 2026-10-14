@@ -21,7 +21,7 @@ extern s32 D_801462CC;
 extern char D_800D3B1C[];
 extern char D_800D3B20[];
 
-s32 func_8043D388_de(struct State_func_804447F0_de *item) {
+s32 func_8043D388_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x4) {
         item->unk8 |= 0x1000000;
     } else {
@@ -54,7 +54,7 @@ extern s32 D_801462CC;
 extern char D_800D3B24[];
 extern char D_800D3B28[];
 
-s32 func_8043D410_de(struct State_func_804447F0_de *item) {
+s32 func_8043D410_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x8) {
         item->unk8 |= 0x1000000;
     } else {
@@ -87,7 +87,7 @@ extern s32 D_801462CC;
 extern char D_800D3B2C[];
 extern char D_800D3B30[];
 
-s32 func_8043D498_de(struct State_func_804447F0_de *item) {
+s32 func_8043D498_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x10) {
         item->unk8 |= 0x1000000;
     } else {
@@ -120,7 +120,7 @@ extern s32 D_801462CC;
 extern char D_800D3B34[];
 extern char D_800D3B38[];
 
-s32 func_8043D520_de(struct State_func_804447F0_de *item) {
+s32 func_8043D520_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x20) {
         item->unk8 |= 0x1000000;
     } else {
@@ -153,7 +153,7 @@ extern s32 D_801462CC;
 extern char D_800D3B3C[];
 extern char D_800D3B40[];
 
-s32 func_8043D5A8_de(struct State_func_804447F0_de *item) {
+s32 func_8043D5A8_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x40) {
         item->unk8 |= 0x1000000;
     } else {
@@ -186,7 +186,7 @@ extern s32 D_801462CC;
 extern char D_800D3B44[];
 extern char D_800D3B48[];
 
-s32 func_8043D630_de(struct State_func_804447F0_de *item) {
+s32 func_8043D630_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x80) {
         item->unk8 |= 0x1000000;
     } else {
@@ -219,7 +219,7 @@ extern s32 D_801462CC;
 extern char D_800D3B4C[];
 extern char D_800D3B50[];
 
-s32 func_8043D6B8_de(struct State_func_804447F0_de *item) {
+s32 func_8043D6B8_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x100) {
         item->unk8 |= 0x1000000;
     } else {
@@ -252,7 +252,7 @@ extern s32 D_801462CC;
 extern char D_800D3B54[];
 extern char D_800D3B58[];
 
-s32 func_8043D740_de(struct State_func_804447F0_de *item) {
+s32 func_8043D740_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x200) {
         item->unk8 |= 0x1000000;
     } else {
@@ -285,7 +285,7 @@ extern s32 D_801462CC;
 extern char D_800D3B5C[];
 extern char D_800D3B60[];
 
-s32 func_8043D7C8_de(struct State_func_804447F0_de *item) {
+s32 func_8043D7C8_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x400) {
         item->unk8 |= 0x1000000;
     } else {
@@ -318,7 +318,7 @@ extern s32 D_801462CC;
 extern char D_800D3B64[];
 extern char D_800D3B68[];
 
-s32 func_8043D850_de(struct State_func_804447F0_de *item) {
+s32 func_8043D850_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x800) {
         item->unk8 |= 0x1000000;
     } else {
@@ -351,7 +351,7 @@ extern s32 D_801462CC;
 extern char D_800D3B6C[];
 extern char D_800D3B70[];
 
-s32 func_8043D8D8_de(struct State_func_804447F0_de *item) {
+s32 func_8043D8D8_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x1000) {
         item->unk8 |= 0x1000000;
     } else {
@@ -384,7 +384,7 @@ extern s32 D_801462CC;
 extern char D_800D3B74[];
 extern char D_800D3B78[];
 
-s32 func_8043D960_de(struct State_func_804447F0_de *item) {
+s32 func_8043D960_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x2000) {
         item->unk8 |= 0x1000000;
     } else {
@@ -417,7 +417,7 @@ extern s32 D_801462CC;
 extern char D_800D3B7C[];
 extern char D_800D3B80[];
 
-s32 func_8043D9E8_de(struct State_func_804447F0_de *item) {
+s32 func_8043D9E8_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x4000) {
         item->unk8 |= 0x1000000;
     } else {
@@ -450,7 +450,7 @@ extern s32 D_801462CC;
 extern char D_800D3B84[];
 extern char D_800D3B88[];
 
-s32 func_8043DA70_de(struct State_func_804447F0_de *item) {
+s32 func_8043DA70_de(struct StateRecAt14 *item) {
     if (D_801462CC & 0x8000) {
         item->unk8 |= 0x1000000;
     } else {

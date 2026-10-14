@@ -7,22 +7,22 @@
 
 
 extern s16 D_80153C0C;
-extern struct Entry_func_804101BC_de *D_80153C10;
-extern struct Resource_func_804101BC_de *D_8014D988;
+extern struct EntryRecAt8V1 *D_80153C10;
+extern struct ResourceRecAt6 *D_8014D988;
 extern void func_80411AF0_de(s32);
 
 void func_80412038_de(void) {
     s32 i;
     s32 invalid;
     s32 offset;
-    struct Resource_func_804101BC_de *resource;
+    struct ResourceRecAt6 *resource;
 
     i = 0;
     if (D_80153C0C > 0) {
         invalid = -1;
         offset = 0;
         do {
-            if (((struct Entry_func_804101BC_de *)(offset + (s32)D_80153C10))->flags & 1) {
+            if (((struct EntryRecAt8V1 *)(offset + (s32)D_80153C10))->flags & 1) {
                 resource = D_8014D988 + i;
                 if (resource->id != invalid && resource->retained == 0) {
                     func_80411AF0_de(i);

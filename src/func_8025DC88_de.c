@@ -21,7 +21,7 @@ extern f32 D_800C4030_de;
 void func_8025DC88_de(void *arg0) {
     ObjectState40 *o = arg0;
     f32 var_f20;
-    Context_func_80257360_de *temp_v0;
+    ContextRecAt2BC0 *temp_v0;
 
     if (o->unk_38 != 0) {
         f32 prod = o->context->green;

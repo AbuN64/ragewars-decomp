@@ -15,13 +15,13 @@ extern void func_802738C0_de(void *arg0, f32 arg1);
 
 
 void func_8022E0B0_de(void *arg0, void *arg1) {
-    func_8022E0A0_S2 *range;
-    func_8022E0A0_S4 *actor;
+    ObjRecAt1AV1 *range;
+    ObjRecAt724 *actor;
     s32 value;
     f32 amount;
 
-    func_8022E0A0_S1 *event = arg1;
-    func_8020A028_S3 *object;
+    ObjRecAt1CV2 *event = arg1;
+    ObjRecAt1D8V1 *object;
 
     range = event->unk1C;
     value = event->unk4;

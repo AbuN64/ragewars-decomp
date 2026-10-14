@@ -14,13 +14,13 @@ extern s32 D_80101194;
 
 void func_80255488_de(s32 arg0) {
     s32 key;
-    Entry_func_802553B4_de *temp_v0;
-    Entry_func_802553B4_de *var_a0;
-    Entry_func_802553B4_de *var_a2;
-    Entry_func_802553B4_de *var_v1;
+    EntryRecAtCV1 *temp_v0;
+    EntryRecAtCV1 *var_a0;
+    EntryRecAtCV1 *var_a2;
+    EntryRecAtCV1 *var_v1;
 
     key = arg0;
-    var_v1 = (Entry_func_802553B4_de *)(D_80101194 + ((((key << 5) ^ ((u32)key >> 1) ^
+    var_v1 = (EntryRecAtCV1 *)(D_80101194 + ((((key << 5) ^ ((u32)key >> 1) ^
                                       ((u32)key >> 9) ^ ((u32)key >> 0x11)) &
                                      D_80101190) * 0x10));
     var_a2 = 0;

@@ -32,7 +32,7 @@ extern void func_80255ED8_de(void *list, Particle *particle);
 
 
 
-void func_802A5180_de(Scene_func_802A5180_de *scene) {
+void func_802A5180_de(SceneRecAt95A8 *scene) {
     Particle *particle;
     Particle *next;
     f32 *max;

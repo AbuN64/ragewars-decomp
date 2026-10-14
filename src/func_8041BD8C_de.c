@@ -11,7 +11,7 @@ extern void func_8029973C_de(void);
 extern void func_802995D4_de(int, int, int, int, int);
 
 int func_8041BD8C_de(Mixer *mixer, int unused, int channel, int value, int extra) {
-    func_8021C9B4_S3 *h;
+    ObjRecAtCV1 *h;
 
     func_8029973C_de();
     if (mixer->muted[(unsigned short)channel] != 0) {

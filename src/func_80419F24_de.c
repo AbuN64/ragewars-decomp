@@ -8,7 +8,7 @@
 
 
 
-void func_80419F24_de(struct Source_func_80419F24_de *source) {
+void func_80419F24_de(struct SourceRecAt84 *source) {
     struct Resource_func_80419E54_de *target = source->target;
     u8 value = source->value;
 

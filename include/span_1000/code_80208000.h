@@ -1,16 +1,14 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80208000_H
 #define UNBAKE_SPAN_1000_CODE_80208000_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
 
-/* unbake published declaration: published_04dd38a472522fb98a3eb4e5 */
 extern float D_800C1C88_de;
 
 struct func_80209988_S1;
-/* unbake published declaration: published_0c8f00d24df762c9874ddcba */
 struct func_80209988_S1 {
     char pad0[0x2F4];
     int unk2F4;
@@ -21,29 +19,23 @@ struct func_80209988_S1 {
 };
 
 struct Player_func_80209308_de;
-/* unbake published declaration: published_1ede7ed4086be0120c2d7f07 */
 typedef struct Player_func_80209308_de Player_func_80209308_de;
 
 struct SharedPlayer_func_80208158_de;
-/* unbake published declaration: published_2eb1cc8fa248b15e42703bb1 */
 typedef struct SharedPlayer_func_80208158_de SharedPlayer_func_80208158_de;
 
-/* unbake published declaration: published_c31f42d481de445b549a9572 */
 typedef void ( *SharedCallback5)(void *, signed int);
 
 struct CallbackState8;
-/* unbake published declaration: published_31993fdcf375053a122c63ca */
 struct CallbackState8 {
     unsigned char padding_0[4];
     SharedCallback5 callback;
 };
 
 struct func_80209A94_S1;
-/* unbake published declaration: published_32ecfb2208375307050eaf84 */
 typedef struct func_80209A94_S1 func_80209A94_S1;
 
 struct ObjectLinks220;
-/* unbake published declaration: published_504b684cfd24b547a8b508f5 */
 struct ObjectLinks220 {
     char pad0[0x214];
     void * unk_214;
@@ -54,7 +46,6 @@ struct ObjectLinks220 {
 };
 
 struct Player_func_80209308_de;
-/* unbake published declaration: published_52b089327e5b4b1119609728 */
 struct Player_func_80209308_de {
     char pad0[0x594];
     s32 gear;
@@ -63,7 +54,6 @@ struct Player_func_80209308_de {
 };
 
 struct Tutorial;
-/* unbake published declaration: published_606102c60102ef131738cb7c */
 struct Tutorial {
     char pad0[0x98];
     s32 active;
@@ -73,31 +63,25 @@ struct Tutorial {
 };
 
 struct func_80209988_S1;
-/* unbake published declaration: published_62735d6c946f865d422c7956 */
 typedef struct func_80209988_S1 func_80209988_S1;
 
 struct Tutorial;
-/* unbake published declaration: published_7dc3c62ffd8c76349e7768d3 */
 typedef struct Tutorial Tutorial;
 
 struct func_80209910_S1;
-/* unbake published declaration: published_87057184f6fc88a6b982cd75 */
 typedef struct func_80209910_S1 func_80209910_S1;
 
 struct func_8020986C_S1;
-/* unbake published declaration: published_9285c5ebe305bf3af4ea574d */
 struct func_8020986C_S1 {
     char pad0[0x214];
     int unk214;
 };
 
 struct Brain_func_80209308_de;
-/* unbake published declaration: published_98038d599be560faffc33fe6 */
 typedef struct Brain_func_80209308_de Brain_func_80209308_de;
 
 struct Brain_func_80209308_de;
 struct Player_func_80209308_de;
-/* unbake published declaration: published_b4214407e5e0574189c2fbe0 */
 struct Brain_func_80209308_de {
     struct Player_func_80209308_de *player;
     char pad4[0x244];
@@ -105,22 +89,18 @@ struct Brain_func_80209308_de {
 };
 
 struct func_8020986C_S1;
-/* unbake published declaration: published_bc0a24bb8f543ed471ed8388 */
 typedef struct func_8020986C_S1 func_8020986C_S1;
 
 struct func_80209910_S1;
-/* unbake published declaration: published_be6ca8ff38b94a67a4dc1de2 */
 struct func_80209910_S1 {
     char pad0[0x6A0];
     float unk6A0;
 };
 
 struct TargetPositionRef;
-/* unbake published declaration: published_bea4296e14c4e9e397c818c2 */
 typedef struct TargetPositionRef TargetPositionRef;
 
 struct func_8020999C_S1;
-/* unbake published declaration: published_d0104c35a072c0639c304950 */
 struct func_8020999C_S1 {
     char pad0[0x300];
     int unk300;
@@ -135,15 +115,12 @@ struct func_8020999C_S1 {
 };
 
 struct CallbackState8;
-/* unbake published declaration: published_d2cca0812f792e5b9c47f37e */
 typedef struct CallbackState8 CallbackState8;
 
 struct Brain;
-/* unbake published declaration: published_d53b6f3b99920b263505dcef */
 typedef struct Brain Brain;
 
 struct ObjectLinks220;
-/* unbake published declaration: published_dc51e7e6dcf207f4815f3e52 */
 typedef struct ObjectLinks220 ObjectLinks220;
 
 struct Body;
@@ -156,7 +133,7 @@ struct Mode;
 struct Model;
 struct Mount;
 struct Profile;
-struct Record_func_80208158_de;
+struct RecordRecAt94;
 struct Rider;
 struct Settings;
 struct SharedPlayer_func_80208158_de;
@@ -169,7 +146,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-/* unbake published declaration: published_f01ebc07928d9e869d40c6ff */
 struct SharedPlayer_func_80208158_de {
     union {
         struct {
@@ -466,10 +442,10 @@ struct SharedPlayer_func_80208158_de {
     } views1C;
     union {
         struct {
-            struct Record_func_80208158_de * unk5D8;
+            struct RecordRecAt94 * unk5D8;
         } view5D8_0;
         struct {
-            struct Record_func_80208158_de * record;
+            struct RecordRecAt94 * record;
         } view5D8_1;
         struct {
             struct Controls * controls;
@@ -1599,7 +1575,6 @@ struct Behaviour {
 };
 struct Behaviour;
 struct Brain;
-/* unbake published declaration: published_e8e4d1d2efc941bccfa8815f */
 struct Brain {
     SharedPlayer_func_80208158_de *player;
     s32 start;
@@ -1620,23 +1595,19 @@ struct TargetPosition {
 };
 struct TargetPosition;
 struct TargetPositionRef;
-/* unbake published declaration: published_ee163411971e31be1823bb67 */
 struct TargetPositionRef {
     struct TargetPosition *target;
 };
 
 struct func_80209A94_S1;
-/* unbake published declaration: published_efbdccd529efd7f01027b17c */
 struct func_80209A94_S1 {
     char pad0[0x21C];
     s32 unk21C;
 };
 
 struct func_8020999C_S1;
-/* unbake published declaration: published_f5894e929e8a515cc663f862 */
 typedef struct func_8020999C_S1 func_8020999C_S1;
 
-/* unbake published declaration: published_ff9a5fe2eb4943a5a104c4cf */
 extern float D_800C1C8C_de;
 
 typedef struct PitchProfile { char pad00[0x8F]; u8 scaled; } PitchProfile;

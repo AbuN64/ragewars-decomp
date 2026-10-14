@@ -17,7 +17,7 @@ extern Sync D_801468A0;
 extern char D_8011FAC0[];
 extern void func_8044DD50_de(char *);
 
-int func_80443844_de(int unused, Player_func_80443844_de *player) {
+int func_80443844_de(int unused, PlayerRecAt1C *player) {
     Sync *sync = &D_801468A0;
     int team;
 

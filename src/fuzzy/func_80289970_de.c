@@ -14,7 +14,7 @@ extern f32 func_80278890_de(void *);
 extern void func_80271F9C_de(void *, void *, f32);
 
 static inline f32 sampleDot(Vec3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
-void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shared_ParticleLighting *arg3) {
+void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, Vec3 *arg2, Shared_ParticleLighting *arg3) {
     Shared_Game *settings;
     /* First128 floats are weights; the remaining384 hold XYZ directions. */
     f32 samples[512];
@@ -32,11 +32,11 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
     Vec3 translatedDirection;
     Vec3 animationColor;
     Vec3 animatedContribution;
-    Object_func_802773D4_de *animatedVolume;
+    ObjectRecAtBC *animatedVolume;
     Vec3 *transformedPosition;
     Vec3 *colorPtr;
     f32 *direction;
-    Object_func_802773D4_de **volumeCursor;
+    ObjectRecAtBC **volumeCursor;
     f32 zero;
     f32 one;
     f32 temp_fs0;
@@ -57,7 +57,7 @@ void func_80289970_de(Object_func_802773D4_de **arg0, s32 arg1, Vec3 *arg2, Shar
     f32 var_fv0f_8;
     s32 sampleIndex;
     s32 directionOffset;
-    Object_func_802773D4_de *volume;
+    ObjectRecAtBC *volume;
 
     settings = &D_801462C8;
     brightness = (f32)(u32)settings->buttons * 0.003921568859368563f;

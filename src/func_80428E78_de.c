@@ -21,7 +21,7 @@ s32 func_80428E78_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 wildcard;
     s32 actor_kind;
     s32 table_kind;
-    func_8021C9B4_S3 *actor;
+    ObjRecAtCV1 *actor;
 
     if (D_800E4D8C != 0) {
         wildcard = 0x7530;

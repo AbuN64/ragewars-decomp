@@ -9,7 +9,7 @@ extern char D_800D35E8;
 extern u8 D_801462E5;
 extern u8 D_801462E7;
 
-s32 func_804447F0_de(State_func_804447F0_de *arg0) {
+s32 func_804447F0_de(StateRecAt14 *arg0) {
     s32 var_v0;
 
     if ((func_802934F8_de() != 0) && (D_801462E5 == 0)) {

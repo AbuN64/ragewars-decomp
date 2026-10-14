@@ -21,11 +21,11 @@ char *func_80442A58_de(char *member) {
 
 
 
-extern void func_80255ED8_de(struct List_func_80442A60_de *, struct Item_func_80442A60_de *);
+extern void func_80255ED8_de(struct List_func_80442A60_de *, struct ItemRecAt20V2 *);
 extern void func_80253838_de(s32, s32);
 
-static inline void remove_item(struct List_func_80442A60_de *list, struct Item_func_80442A60_de *item) {
-    struct State_func_80442A60_de *state;
+static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRecAt20V2 *item) {
+    struct StateRecAtBCV2 *state;
 
     if (item->handlers->callback != 0) {
         item->handlers->callback(item, list);
@@ -39,7 +39,7 @@ static inline void remove_item(struct List_func_80442A60_de *list, struct Item_f
 }
 
 void func_80442A60_de(struct List_func_80442A60_de *list) {
-    struct Item_func_80442A60_de *item;
+    struct ItemRecAt20V2 *item;
 
 loop:
     item = list->head;
@@ -58,13 +58,13 @@ extern u8 D_80152789;
 
 
 #if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void * func_8043F290(struct Object_func_80442ADC_de *);
+extern void * func_8043F290(struct ObjectRecAt14 *);
 #else
-extern void * func_8043F114_de(struct Object_func_80442ADC_de *);
+extern void * func_8043F114_de(struct ObjectRecAt14 *);
 #endif
 extern void func_804422F0_de(void *, f32, f32);
 
-void func_80442ADC_de(struct Object_func_80442ADC_de *object, f32 scale) {
+void func_80442ADC_de(struct ObjectRecAt14 *object, f32 scale) {
     void *target;
 
     if (object->kind == 5) {
@@ -122,7 +122,7 @@ void func_80442B5C_de(struct Object1C8 *object) {
    returned as they are and the rest as 0x2F less the value. */
 
 
-s32 func_80442B88_de(struct Object_func_80442B88_de *object) {
+s32 func_80442B88_de(struct ObjectRecAt1C8 *object) {
     s32 count = object->count;
 
     if (count < 0x18) {
@@ -179,7 +179,7 @@ s32 func_80442CD8_de(s16 *record) {
    is 3. */
 
 
-void func_80442CF4_de(s16 *record, struct Object_func_80442CF4_de *object) {
+void func_80442CF4_de(s16 *record, struct ObjectRecAt478 *object) {
     if (*record == 3) {
         object->flag = 1;
     }
@@ -191,7 +191,7 @@ void func_80442CF4_de(s16 *record, struct Object_func_80442CF4_de *object) {
 
 
 
-void func_80442D10_de(Widget_func_80442D10_de *w, Descriptor_func_80442D10_de *d, char **arena, int id, int arg) {
+void func_80442D10_de(WidgetRecAt24 *w, Descriptor_func_80442D10_de *d, char **arena, int id, int arg) {
  int size; char *extra;
  w->id=id; w->type=d->type; w->flags=d->flags|0x1800000;
  w->x=d->x; w->y=d->y; w->r=d->r; w->g=d->g; w->b=d->b; w->a=d->a;
@@ -199,7 +199,7 @@ void func_80442D10_de(Widget_func_80442D10_de *w, Descriptor_func_80442D10_de *d
  size=0; if(d->type==3) size=0x480;
  if(size) {
  w->extra=*arena;
- extra=*arena; if(d->type==3) ((struct Object_func_80442CF4_de *)(extra))->flag=1;
+ extra=*arena; if(d->type==3) ((struct ObjectRecAt478 *)(extra))->flag=1;
  { int step=0; if(d->type==3) step=0x480;
  *arena+=step; }
  }
@@ -210,7 +210,7 @@ void func_80442D10_de(Widget_func_80442D10_de *w, Descriptor_func_80442D10_de *d
 
 extern char D_800E1E24_de[];
 extern u8 D_80146848;
-void *func_80442DDC_de(Obj_func_80442DDC_de *arg0) {
+void *func_80442DDC_de(ObjRecAt8V4 *arg0) {
  s32 index=0;
  switch(arg0->flags & 0x3fe0) {
  case 0x20: break;

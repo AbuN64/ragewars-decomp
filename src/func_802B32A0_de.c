@@ -19,7 +19,7 @@ void func_802B32A0_de(void *arg0, void *arg1, s8 arg2) {
     s32 var_v0;
     void *Shared_func_802B32A0_de_v0;
     void *temp_a0;
-    Shared_func_802B32A0_de_FuncPtr fn;
+    SharedRecV4 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
         Shared_func_802B32A0_de_v0 = func_802B3BF8_de();
@@ -57,7 +57,7 @@ void func_802B3350_de(void *arg0, void *arg1, u8 arg2) {
     s32 new_var;
     void *Shared_func_802B3350_de_v0;
     void *temp_a0;
-    Shared_func_802B3350_de_FuncPtr fn;
+    SharedRecV5 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
         Shared_func_802B3350_de_v0 = func_802B3BF8_de();
@@ -90,7 +90,7 @@ void func_802B33E0_de(void *arg0, void *arg1, f32 arg2) {
     s32 new_var;
     void *Shared_func_802B33E0_de_v0;
     void *temp_a0;
-    Shared_func_802B33E0_de_FuncPtr fn;
+    SharedRecV7 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
         Shared_func_802B33E0_de_v0 = func_802B3BF8_de();

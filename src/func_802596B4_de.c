@@ -24,7 +24,7 @@ static inline void func_802596D4_insertAfter(Link_func_802596B4_de *at, Link_fun
     at->next = link;
 }
 
-static inline void func_802596D4_voiceInit(Voice_func_802596B4_de *voice, s32 owner) {
+static inline void func_802596D4_voiceInit(VoiceRecAt8 *voice, s32 owner) {
     func_802596D4_linkInit(&voice->link);
     func_8025B6F8_de(&voice->header, owner, -1);
 }

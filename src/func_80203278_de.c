@@ -53,10 +53,10 @@ extern f32 func_8024D284_de(SharedPlayer *);
 extern s32 func_802444A4_de(SharedPlayer *, Vec3, Vec3, char *);
 extern f32 func_802B72B0_de(f32);
 
-void func_80203278_de(SharedPlayer *player, Rider_func_80203278_de *rider, Result *result) {
+void func_80203278_de(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result) {
     f32 nearest;
     SharedPlayer *best;
-    Segment_func_80203278_de *segment;
+    SegmentRecAt71 *segment;
     SharedPlayer *other;
     f32 distance;
     f32 lift;
@@ -68,7 +68,7 @@ void func_80203278_de(SharedPlayer *player, Rider_func_80203278_de *rider, Resul
 
     nearest = 0.0f;
     best = 0;
-    segment = (Segment_func_80203278_de *)(player->views18.view18_1.track + 0x14);
+    segment = (SegmentRecAt71 *)(player->views18.view18_1.track + 0x14);
     other = D_80145060;
     if (other != 0) {
         lift = (0.5f);

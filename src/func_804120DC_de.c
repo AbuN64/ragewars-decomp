@@ -7,10 +7,10 @@
 
 
 
-extern void func_80410674_de(Widget_func_804120DC_de *image, s32 mode);
-extern void func_80411AF0_de(Widget_func_804120DC_de *image);
+extern void func_80410674_de(WidgetRecAt34 *image, s32 mode);
+extern void func_80411AF0_de(WidgetRecAt34 *image);
 
-void func_804120DC_de(Widget_func_804120DC_de *widget, s32 load, s32 siblings) {
+void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
     if (widget == 0) {
         return;
     }

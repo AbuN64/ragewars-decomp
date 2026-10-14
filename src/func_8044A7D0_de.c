@@ -9,7 +9,7 @@
 
 
 
-void func_8044A7D0_de(func_8044B420_S1 *pool) {
+void func_8044A7D0_de(ObjRecAt8C8 *pool) {
     s32 i;
     struct Entry_func_8044A7D0_de *entry;
 

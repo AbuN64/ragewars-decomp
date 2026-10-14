@@ -7,11 +7,11 @@
 
 
 
-void func_8040F044_de(Widget_func_8040F044_de *a, Widget_func_8040F044_de *b) {
-    Widget_func_8040F044_de *w;
-    Widget_func_8040F044_de *cursorA;
-    Widget_func_8040F044_de *cursorB;
-    Widget_func_8040F044_de saved;
+void func_8040F044_de(WidgetRecAtE *a, WidgetRecAtE *b) {
+    WidgetRecAtE *w;
+    WidgetRecAtE *cursorA;
+    WidgetRecAtE *cursorB;
+    WidgetRecAtE saved;
 
     cursorA = a;
 root:

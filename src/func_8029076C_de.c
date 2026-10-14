@@ -13,7 +13,7 @@ extern s32 func_8024D160_de(void *arg0);
 
 
 
-void func_8029076C_de(Container_func_8029076C_de *arg0, Results *arg1) {
+void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *arg1) {
     f32 *bounds;
     s32 count;
     s32 mask;

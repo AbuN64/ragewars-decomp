@@ -9,7 +9,7 @@ extern s32 func_8028B25C_de(s32, s32);
 
 void func_8028E108_de(void *arg0)
 {
-  Scene_func_8028E284_de *scene = arg0;
+  SceneRecAt140 *scene = arg0;
   Actor_func_8028E284_de *actor = scene->actors;
   s32 i;
   s32 count;

@@ -21,7 +21,7 @@ extern void func_802547E4_de(void *buffer);
 void func_80411518_de(s32 index) {
     s32 n;
     s32 i;
-    Slot_func_80411518_de *slot;
+    SlotRecAtCV1 *slot;
 
     for (n = 0; n < D_80153C20.entries[index].def->unkE; n++) {
         slot = D_80153C20.entries[index].ns[n];

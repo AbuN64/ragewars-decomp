@@ -15,7 +15,7 @@ extern struct Settings_func_80444488_de D_80146302;
 extern char D_800D75EC[];
 extern char D_800D75F0[];
 
-s32 func_804444EC_de(struct Field_func_8040A4A0_de *field, struct Holder_func_80444488_de *holder) {
+s32 func_804444EC_de(struct FieldRecAt14 *field, struct Holder_func_80444488_de *holder) {
     s32 result = 0;
     struct Settings_func_80444488_de *settings = &D_80146302;
 

@@ -20,10 +20,10 @@ extern s32 D_800E1E20;
 extern func_802077F4_S2 *func_80442DDC_de(void *, s32);
 
 extern void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
-extern void func_8044208C_de(void *, Item_func_8043C9AC_de *, void *, Style_func_8043C9AC_de *);
+extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, Style_func_8043C9AC_de *);
 
 /* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through func_802AA9F4_de and func_802A7DE4_de; then draws the item through func_8044208C_de. */
-void func_8043C9AC_de(void *menu, Item_func_8043C9AC_de *item, void *arg2, Style_func_8043C9AC_de *style) {
+void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *arg2, Style_func_8043C9AC_de *style) {
     f32 width;
     f32 alpha;
     s32 x;

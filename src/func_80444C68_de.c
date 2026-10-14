@@ -10,7 +10,7 @@ extern f32 D_800D2988;
 extern s32 func_80265350_de(void);
 extern s32 func_8040C3BC_de();
 
-s32 func_80444C68_de(struct Record_func_80444C68_de *record) {
+s32 func_80444C68_de(struct RecordRecAt14 *record) {
     D_80154100 -= D_800D2988;
     if (D_80154100 <= 0.0f) {
         D_80154100 = 0.0f;

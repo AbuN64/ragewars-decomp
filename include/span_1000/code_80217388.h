@@ -1,29 +1,23 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80217388_H
 #define UNBAKE_SPAN_1000_CODE_80217388_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
 struct TeamMenu;
-/* unbake published declaration: published_03df77f5a41514aa2b63bc80 */
 typedef struct TeamMenu TeamMenu;
 
-/* unbake published declaration: published_054b90efc28ce6ecb9ff625d */
 extern float D_800C2250_de;
 
-/* unbake published declaration: published_05a8bdb850bc3eb3137a1d86 */
 extern float D_800C22A8_de;
 
-/* unbake published declaration: published_0882e31051966bda4f00560a */
 extern void func_802174E4_de(void *arg0, void *unused1, Output80216D3C *arg2);
 
-struct Slot_func_80217928_de;
-/* unbake published declaration: published_48daf0666b8dd98d158756e7 */
-typedef struct Slot_func_80217928_de Slot_func_80217928_de;
+struct SlotRecAt14;
+typedef struct SlotRecAt14 SlotRecAt14;
 
-struct Slot_func_80217928_de;
-/* unbake published declaration: published_8d1afac22f8ab88dc02b7244 */
-struct Slot_func_80217928_de {
+struct SlotRecAt14;
+struct SlotRecAt14 {
     s32 weapon;
     void *info;
     s32 owned;
@@ -33,34 +27,28 @@ struct Slot_func_80217928_de {
 };
 
 struct Menu;
-/* unbake published declaration: published_0a586c2fa339b710d0e3976f */
 struct Menu {
     s32 active;
     s32 pad4;
     f32 open;
     char padC[0x1C - 0xC];
-    Slot_func_80217928_de slots[8];
+    SlotRecAt14 slots[8];
     char pad[0x37C - 0xDC];
     s32 cursor;
 };
 
-/* unbake published declaration: published_0ee82a5a4fc137ab7ad84b9b */
 extern float D_800C2254_de;
 
 struct Item;
-/* unbake published declaration: published_246095d40a80b661ca48bfc3 */
 typedef struct Item Item;
 
-struct Slot_func_80218F9C_de;
-/* unbake published declaration: published_27103045e517171641206d6a */
-typedef struct Slot_func_80218F9C_de Slot_func_80218F9C_de;
+struct SlotRecAt10;
+typedef struct SlotRecAt10 SlotRecAt10;
 
 struct func_80218F84_S1;
-/* unbake published declaration: published_37ea95abcd25cba4ebc2c272 */
 typedef struct func_80218F84_S1 func_80218F84_S1;
 
 struct func_80217388_S1;
-/* unbake published declaration: published_428510071e7214861bc70de0 */
 struct func_80217388_S1 {
     char pad0[0xD0];
     void * unkD0;
@@ -68,31 +56,25 @@ struct func_80217388_S1 {
 
 
 struct Entry;
-/* unbake published declaration: published_470d4125233279b31027c2b2 */
 typedef struct Entry Entry;
 
-struct Player_func_80217B3C_de;
-/* unbake published declaration: published_5136f42de71ffcc0d685e56f */
-typedef struct Player_func_80217B3C_de Player_func_80217B3C_de;
+struct PlayerRecAt698;
+typedef struct PlayerRecAt698 PlayerRecAt698;
 
 struct Menu_func_80218F9C_de;
-/* unbake published declaration: published_52241a8b66738b2c72f75d76 */
 typedef struct Menu_func_80218F9C_de Menu_func_80218F9C_de;
 
-struct Controller_func_80217B3C_de;
-struct Player_func_80217B3C_de;
-/* unbake published declaration: published_5f5138c35a8282eff177f6db */
-struct Player_func_80217B3C_de {
+struct ControllerRecAtC7;
+struct PlayerRecAt698;
+struct PlayerRecAt698 {
     char pad0[0x698];
-    struct Controller_func_80217B3C_de *controller;
+    struct ControllerRecAtC7 *controller;
 };
 
 struct func_80217388_S2;
-/* unbake published declaration: published_5f642439016a0f640555c7d4 */
 typedef struct func_80217388_S2 func_80217388_S2;
 
 struct ObjectLinks11BC;
-/* unbake published declaration: published_63d75a35b7835db4c8dcca17 */
 struct ObjectLinks11BC {
     char pad0[0x5D8];
     char * unk_5D8;
@@ -107,7 +89,6 @@ struct ObjectLinks11BC {
 };
 
 struct func_80218F84_S1;
-/* unbake published declaration: published_65351482a43de57d0cdb2181 */
 struct func_80218F84_S1 {
     unsigned int unk0;
     char pad0[0x4 - 0x0 - sizeof(unsigned int)];
@@ -118,22 +99,18 @@ struct func_80218F84_S1 {
     int unk6C;
 };
 
-struct Item_func_80218F9C_de;
-/* unbake published declaration: published_70bdef9777bea68b112603ab */
-typedef struct Item_func_80218F9C_de Item_func_80218F9C_de;
+struct ItemRecAt18V1;
+typedef struct ItemRecAt18V1 ItemRecAt18V1;
 
 struct func_80217388_S2;
-/* unbake published declaration: published_7487c6dc23a40b962d63bf71 */
 struct func_80217388_S2 {
     char pad0[0xFC];
     s32 unkFC;
 };
 
-/* unbake published declaration: published_85dc7d92ef23c11a479fcd86 */
 extern void func_8021836C_de( char *arg0);
 
 struct Item;
-/* unbake published declaration: published_991e510a2472e16a45f24678 */
 struct Item {
     s32 slot;
     s32 weapon;
@@ -143,9 +120,8 @@ struct Item {
     f32 height;
 };
 
-struct Slot_func_80218F9C_de;
-/* unbake published declaration: published_9941bab94aa30688f386fbe5 */
-struct Slot_func_80218F9C_de {
+struct SlotRecAt10;
+struct SlotRecAt10 {
     s32 team;
     s32 unused;
     f32 angle;
@@ -161,17 +137,15 @@ struct TeamMenu {
     u8 reserved10[4];
     f32 spin;
     s32 count;
-    Slot_func_80218F9C_de slots[4];
+    SlotRecAt10 slots[4];
     s32 cursor;
     s32 hover;
 };
 
 struct ObjectLinks11BC;
-/* unbake published declaration: published_9ff12773c2d18c615ae742ad */
 typedef struct ObjectLinks11BC ObjectLinks11BC;
 
 struct IntegerState74;
-/* unbake published declaration: published_a29be21c82c4cf0882166986 */
 struct IntegerState74 {
     char pad0[0x6C];
     s32 unk_6C;
@@ -180,7 +154,6 @@ struct IntegerState74 {
 };
 
 struct Entry34;
-/* unbake published declaration: published_a3af74126dc1bee192cc2cde */
 struct Entry34 {
     char pad0[0x1C];
     s32 weapon;
@@ -192,26 +165,20 @@ struct Entry34 {
 };
 
 struct Menu;
-/* unbake published declaration: published_ae2da6d6ec1ed6fadc8f747f */
 typedef struct Menu Menu;
 
 struct IntegerState74;
-/* unbake published declaration: published_ae5ff94ef10585cda279ef82 */
 typedef struct IntegerState74 IntegerState74;
 
-/* unbake published declaration: published_b050a553adb05a545c795ac0 */
 extern f32 func_802184C0_de(f32 arg0, f32 arg1, s32 arg2, f32 arg3);
 
 struct ObjectLinks69C;
-/* unbake published declaration: published_b49e6948e2a9260d7df22e56 */
 typedef struct ObjectLinks69C ObjectLinks69C;
 
 struct func_80217388_S1;
-/* unbake published declaration: published_bd3d3363fcf51e7c8a26fafb */
 typedef struct func_80217388_S1 func_80217388_S1;
 
 struct Entry;
-/* unbake published declaration: published_c1057ed6864bdb1a6322bef6 */
 struct Entry {
     char pad0[0x1E];
     u16 team;
@@ -219,16 +186,13 @@ struct Entry {
 };
 
 struct Entry34;
-/* unbake published declaration: published_c42994d1aa53ab577a06a0e6 */
 typedef struct Entry34 Entry34;
 
 struct SharedPlayer_func_80218B84_de;
-/* unbake published declaration: published_c6086dfd9b1c6398fe7213f5 */
 typedef struct SharedPlayer_func_80218B84_de SharedPlayer_func_80218B84_de;
 
-struct Item_func_80218F9C_de;
-/* unbake published declaration: published_ce6283e3b83c196cf576d694 */
-struct Item_func_80218F9C_de {
+struct ItemRecAt18V1;
+struct ItemRecAt18V1 {
     s32 slot;
     Vec3 position;
     s32 icon;
@@ -237,7 +201,6 @@ struct Item_func_80218F9C_de {
 };
 
 struct ObjectLinks69C;
-/* unbake published declaration: published_d0c8902d2171867cc55d2278 */
 struct ObjectLinks69C {
     unsigned char padding_0[1496];
     void *unk_5D8;
@@ -245,10 +208,8 @@ struct ObjectLinks69C {
     void *unk_698;
 };
 
-/* unbake published declaration: published_e0f4bdd7f5148d7b92e0e548 */
 extern float D_800C21F0_de;
 
-/* unbake published declaration: published_e539920932fe0d2f73dd6438 */
 extern float D_800C224C_de;
 
 struct Body;
@@ -272,8 +233,7 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct func_8021846C_S3;
-/* unbake published declaration: published_e61b67c92a5ff64d3681cb7d */
+struct ObjRecAtB0;
 struct SharedPlayer_func_80218B84_de {
     union {
         struct {
@@ -835,11 +795,11 @@ struct SharedPlayer_func_80218B84_de {
         } view688_43;
         struct {
             char pad[0xB0];
-            struct func_8021846C_S3 * unk698;
+            struct ObjRecAtB0 * unk698;
         } view698_34;
         struct {
             char pad[0xB0];
-            struct func_8021846C_S3 * controller;
+            struct ObjRecAtB0 * controller;
         } view698_35;
         struct {
             char pad[0xB0];
@@ -1696,14 +1656,11 @@ struct SharedPlayer_func_80218B84_de {
     } views16E0;
 };
 
-/* unbake published declaration: published_e6809098b924f687dbe4cee9 */
 extern float D_800C21E8_de;
 
-/* unbake published declaration: published_e9b525877214772b64550ba6 */
 extern float D_800C22C8_de;
 
 struct ObjectLinks11B8;
-/* unbake published declaration: published_ea3065f6fe5c61f9f738eec7 */
 struct ObjectLinks11B8 {
     char pad0[0x38];
     s32 unk_38;
@@ -1721,21 +1678,18 @@ struct ObjectLinks11B8 {
     s32 unk_11B4;
 };
 
-/* unbake published declaration: published_ee3a159db87f2fa1dd340e5a */
 extern void func_80218E98_de( char *arg0);
 
 struct ObjectLinks11B8;
-/* unbake published declaration: published_ee7ed5f5955310bb82b9c33b */
 typedef struct ObjectLinks11B8 ObjectLinks11B8;
 
 struct Menu_func_80218F9C_de;
-/* unbake published declaration: published_f54c3c4e2a9db984bbda189e */
 struct Menu_func_80218F9C_de {
     s32 active;
     s32 unused;
     f32 open;
     char padC[0x10];
-    Slot_func_80218F9C_de slots[4];
+    SlotRecAt10 slots[4];
     s32 cursor;
 };
 

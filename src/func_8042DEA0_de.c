@@ -16,7 +16,7 @@
 
 extern u8 D_801462C8[];
 extern struct Match_func_8042DEA0_de D_801468A0;
-extern struct Record_func_8042DEA0_de D_80102B00[];
+extern struct RecordRecAt189 D_80102B00[];
 extern s32 D_800E4680;
 extern s32 D_8015402C;
 extern s32 D_80146948;
@@ -40,7 +40,7 @@ extern s32 func_802744D4_de(void);
 void func_8042DEA0_de(void) {
     u8 *settings;
     u8 *config;
-    struct Status_func_8042DEA0_de *status;
+    struct StatusRecAt95 *status;
     s32 humans;
     s32 i;
     s32 first;
@@ -52,7 +52,7 @@ void func_8042DEA0_de(void) {
     humans = 0;
     settings = D_801462C8;
     for (i = 0; i < 8; i++) {
-        status = (struct Status_func_8042DEA0_de *)(settings + 0xD0 + i * 0x96);
+        status = (struct StatusRecAt95 *)(settings + 0xD0 + i * 0x96);
         status->lives = 0;
         status->score = 0;
         if (status->computer == 0) {
@@ -68,10 +68,10 @@ void func_8042DEA0_de(void) {
     D_800E4680 = 0;
     if (settings[0xD] != 0) {
         first = 0;
-        while (((struct Status_func_8042DEA0_de *)(settings + 0xD0 + first * 0x96))->joined == 0) {
+        while (((struct StatusRecAt95 *)(settings + 0xD0 + first * 0x96))->joined == 0) {
             first++;
         }
-        status = (struct Status_func_8042DEA0_de *)(settings + 0xD0 + first * 0x96);
+        status = (struct StatusRecAt95 *)(settings + 0xD0 + first * 0x96);
         switch (settings[0xD]) {
         case 1:
             D_800E4680 = func_80425C70_de(D_8015402C, 0, status->kind);
@@ -104,7 +104,7 @@ void func_8042DEA0_de(void) {
         break;
     }
     for (i = 0; i < 4; i++) {
-        status = (struct Status_func_8042DEA0_de *)(settings + 0xD0 + i * 0x96);
+        status = (struct StatusRecAt95 *)(settings + 0xD0 + i * 0x96);
         if (status->joined == 1 && status->computer == 0) {
             func_802A025C_de(status->name, D_80102B00[i].name);
             if (settings[0xD] != 0) {

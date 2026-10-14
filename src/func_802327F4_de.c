@@ -11,10 +11,10 @@ extern char D_80102B00[][0x190];
 extern int D_800D30BC;
 extern int func_8022F55C_de(char *, int);
 extern void func_8025DF34_de(int);
-extern int func_8022A5A0_de(void *, Player_func_802327F4_de *);
+extern int func_8022A5A0_de(void *, PlayerRecAt1450V1 *);
 extern void func_80239908_de(void *, void *, int, int, float);
 
-int func_802327F4_de(Player_func_802327F4_de *player) {
+int func_802327F4_de(PlayerRecAt1450V1 *player) {
     SettingsE *rules;
     int result;
 

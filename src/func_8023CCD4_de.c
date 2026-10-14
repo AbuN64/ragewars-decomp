@@ -15,7 +15,7 @@ extern Slot_func_8023CCD4_de D_800FFB50[];
 extern void func_8023C084_de(Slot_func_8023CCD4_de *);
 extern s32 func_802BB420_de(s32, Node_func_8023CCD4_de *, s32);
 
-void func_8023CCD4_de(Owner_func_8023CCD4_de *arg0) {
+void func_8023CCD4_de(OwnerRecAt8V2 *arg0) {
     Node_func_8023CCD4_de *node;
     Node_func_8023CCD4_de *prev;
     u8 *slot;

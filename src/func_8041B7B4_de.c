@@ -5,6 +5,6 @@
    the parallel array at offset 0x4C. */
 
 
-void func_8041B7B4_de(struct Slots_func_8041B7B4_de *object, s32 index, s32 value) {
+void func_8041B7B4_de(struct SlotsRecAt5CV1 *object, s32 index, s32 value) {
     object->values[index] = value;
 }

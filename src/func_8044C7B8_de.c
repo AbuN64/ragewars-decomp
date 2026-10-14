@@ -27,7 +27,7 @@ void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **
     struct Shape_typemap_165 *block;
     s32 nspawns;
     LevelNode *node;
-    Input_func_8024B3A8_de *records;
+    InputRecAt27 *records;
     LevelBlock *hdr;
     s32 i;
     s32 peerIndex;
@@ -35,8 +35,8 @@ void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **
     s32 spawnIndex;
     s32 specialSet;
     s32 *definition;
-    Input_func_8024B3A8_de *rec;
-    Input_func_8024B3A8_de *recWalk;
+    InputRecAt27 *rec;
+    InputRecAt27 *recWalk;
     Actor_func_8024A7A0_de *objWalk;
     func_8041F2A0_Config *slot;
     s16 value;

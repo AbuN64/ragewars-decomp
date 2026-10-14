@@ -23,7 +23,7 @@ void func_8024CA10_de(void *arg0, s32 arg1, void *arg2) {
     void *base;
     char *a;
 
-    idx = ((struct func_8025E52C_S1 *) (((ObjectLinks24 *) o)->unk_0 + (arg1 * 4)))->unk2;
+    idx = ((struct ObjRecAt2V1 *) (((ObjectLinks24 *) o)->unk_0 + (arg1 * 4)))->unk2;
     if (idx == -1) {
         f32 scale;
         rec = ((ObjectLinks24 *)(o))->unk_4 + arg1 * 0x14;

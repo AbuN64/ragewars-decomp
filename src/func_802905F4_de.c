@@ -25,7 +25,7 @@ extern void func_8024EB90_de(void *arg0);
 
 
 void func_802905F4_de(char *arg0, char *arg1) {
-    World_func_80290238_de *world = (void *)arg0;
+    WorldRecAt3C08 *world = (void *)arg0;
     Shared_func_80234FDC_S2 *camera = (void *)arg1;
     Actor_func_80290238_de *entry;
     f32 value;

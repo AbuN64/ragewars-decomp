@@ -46,11 +46,11 @@ extern s32 D_800E28D0;
 extern s32 D_800E28D4;                          /* unable to generate initializer: unknown type */
 typedef struct Shared_func_80234FDC_S1 func_80234FDC_S1;
 typedef struct Shared_func_80234FDC_S2 func_80234FDC_S2;
-typedef struct Shared_func_80234FDC_S3 func_80234FDC_S3;
+typedef struct Shared_func_80234FDC_S3 SharedRecV11;
 typedef struct Shared_func_80234FDC_S4 func_80234FDC_S4;
-typedef struct Shared_func_80234FDC_S5 func_80234FDC_S5;
-typedef struct Shared_func_80234FDC_S6 func_80234FDC_S6;
-typedef struct Shared_func_80234FDC_S7 func_80234FDC_S7;
+typedef struct Shared_func_80234FDC_S5 SharedRecAt0V2;
+typedef struct Shared_func_80234FDC_S6 SharedRecAt1A;
+typedef struct Shared_func_80234FDC_S7 SharedRecV9;
 typedef struct Shared_func_80234FDC_S8 func_80234FDC_S8;
 
 
@@ -117,10 +117,10 @@ void func_80234FEC_de(Shared_func_80234FDC_S2 *arg0) {
     u16 temp_v0_3;
     u16 var_v1_3;
 
-    func_80234FDC_S6 *temp_s4;
+    SharedRecAt1A *temp_s4;
     func_80234FDC_S1 *var_s5;
     func_80234FDC_S1 *var_v1;
-    func_80234FDC_S5 *state; 
+    SharedRecAt0V2 *state; 
 
     var_v1 = D_80145060;
     while (var_v1 != 0) {

@@ -10,7 +10,7 @@
 
 extern f32 D_800CAC34, D_800C5AF4, D_800C5AF8_de, D_800C5AFC;
 /* Build a rotation matrix from the three Euler angles in arg1. */
-void func_8029C984_de(func_8029D984_S2 *arg0, Vec3 *arg1) {
+void func_8029C984_de(ObjRecAt3CV2 *arg0, Vec3 *arg1) {
     f32 sp10;
     f32 sp14;
     f32 sp18;
@@ -67,7 +67,7 @@ void func_8029C984_de(func_8029D984_S2 *arg0, Vec3 *arg1) {
 extern f32 func_802B72B0_de(f32);
 
 
-void func_8029CAB4_de(Input_func_8029CAB4_de *arg0, Vec3 *arg1) {
+void func_8029CAB4_de(InputRecAt28 *arg0, Vec3 *arg1) {
     f32 clamped;
     f32 magnitude;
     f32 polynomial;
@@ -127,7 +127,7 @@ void func_8029CAB4_de(Input_func_8029CAB4_de *arg0, Vec3 *arg1) {
 extern f32 func_802B72B0_de(f32);
 
 
-void func_8029CC70_de(Input_func_8029CAB4_de *arg0, Vec3 *arg1) {
+void func_8029CC70_de(InputRecAt28 *arg0, Vec3 *arg1) {
     f32 clamped;
     f32 magnitude;
     f32 polynomial;

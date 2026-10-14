@@ -23,7 +23,7 @@ extern Snapshot D_8010BC40;
 
 void func_80264B8C_de(void) {
     s32 i;
-    Actor_func_80264B8C_de *actor;
+    ActorRecAt5E0 *actor;
     Snapshot *snapshot;
     ActorList *list;
 

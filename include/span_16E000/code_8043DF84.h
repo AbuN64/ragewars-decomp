@@ -1,10 +1,9 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8043DF84_H
 #define UNBAKE_SPAN_16E000_CODE_8043DF84_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct PlayerSettings;
-/* unbake published declaration: published_0786d38fab82ece8a81507c3 */
 struct PlayerSettings {
     char pad0[0x78];
     s8 active;
@@ -14,7 +13,6 @@ struct PlayerSettings {
 };
 
 struct StatusView;
-/* unbake published declaration: published_07a4ae5ba5b8a3db7769146c */
 struct StatusView {
     char pad[336];
     s8 active;
@@ -42,8 +40,7 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct func_80229BE0_S2;
-/* unbake published declaration: published_9afff8baf3a607bd5b992ff8 */
+struct ObjRecAt80;
 struct SharedPlayer_func_8043F37C_eu {
     union {
         struct {
@@ -361,7 +358,7 @@ struct SharedPlayer_func_8043F37C_eu {
             struct Profile * profile;
         } view5D8_6;
         struct {
-            struct func_80229BE0_S2 * settings;
+            struct ObjRecAt80 * settings;
         } view5D8_7;
         struct {
             s32 f5D8;
@@ -1467,55 +1464,45 @@ struct SharedPlayer_func_8043F37C_eu {
 };
 
 struct SharedPlayer_func_8043F37C_eu;
-/* unbake published declaration: published_bba4c946c05cad2859da7fe8 */
 typedef struct SharedPlayer_func_8043F37C_eu SharedPlayer_func_8043F37C_eu;
 
 struct Menu_func_8043F37C_eu;
-/* unbake published declaration: published_16762e3f43ee56c02b877cdb */
 struct Menu_func_8043F37C_eu {
     char pad[0x1C];
     SharedPlayer_func_8043F37C_eu *player;
     s32 input;
 };
 
-/* unbake published declaration: published_16cca5f52993c677002b1124 */
 extern s32 func_8043E568_de(void *arg0, Arg1Struct *arg1);
 
-/* unbake published declaration: published_191180bb4c8a7c442faac814 */
 extern void func_8043DFC8_de(void);
 
-struct Menu_func_8043E1F8_de;
-/* unbake published declaration: published_23ab9e2e28d55bd7214ff1e5 */
-typedef struct Menu_func_8043E1F8_de Menu_func_8043E1F8_de;
+struct MenuRecAt20V2;
+typedef struct MenuRecAt20V2 MenuRecAt20V2;
 
-/* unbake published declaration: published_2a1319d5d4e5663c14711edf */
 extern s32 func_8043E5D8_de(void);
 
-struct Menu_func_8043E1F8_de;
+struct MenuRecAt20V2;
 struct Owner_func_8043E1F8_de;
-/* unbake published declaration: published_c1c33c03a60c9e7862fa290e */
-struct Menu_func_8043E1F8_de {
+struct MenuRecAt20V2 {
     char pad0[0x1C];
     struct Owner_func_8043E1F8_de *owner;
     func_80242278_S1 *widget;
 };
 
-/* unbake published declaration: published_3970acabec6951e5371142ae */
-extern s32 func_8043E1F8_de(s32 arg0, Menu_func_8043E1F8_de *menu);
+extern s32 func_8043E1F8_de(s32 arg0, MenuRecAt20V2 *menu);
 
 struct Shape_typemap_114;
-/* unbake published declaration: published_3de93d7af2a5d247be048da7 */
 struct Shape_typemap_114 {
     unsigned char padding_0[32];
     int field_20;
 };
 
 struct Obj1C;
-/* unbake published declaration: published_affa58f10db23b47b4221119 */
 struct Obj1C {
     char pad0[0x5D4];
     s32 unk5D4;
-    func_80229BE0_S2 *unk5D8;
+    ObjRecAt80 *unk5D8;
     s32 unk5DC;
     char pad5E0[0x698 - 0x5E0];
     s32 unk698;
@@ -1525,42 +1512,32 @@ struct Obj1C {
 
 struct Handle8043E788;
 struct Obj1C;
-/* unbake published declaration: published_412afb7ce2c95b1fe92990f5 */
 struct Handle8043E788 {
     char pad0[0x1C];
     struct Obj1C *unk1C;
 };
 
-/* unbake published declaration: published_54538a744611b209dbd78f3c */
 extern s32 func_8043E254_de(void);
 
-/* unbake published declaration: published_5994a4a4de4d25252cf1ce35 */
 extern void func_8043DEF8_de(void *arg0, s32 arg1);
 
-/* unbake published declaration: published_5a001d5d807a8507b70766df */
 extern float D_800DE330_de;
 
 struct Outer8043E458;
-/* unbake published declaration: published_5de731b9151c1cf786d5e9d1 */
 typedef struct Outer8043E458 Outer8043E458;
 
 struct Handle8043E788;
-/* unbake published declaration: published_5e6d771c0ad128687803b8a5 */
 typedef struct Handle8043E788 Handle8043E788;
 
-/* unbake published declaration: published_64158570c6e1410e7379fa83 */
 extern s32 func_8043E658_de(void *arg0, Handle8043E788 *arg1);
 
 struct Record_func_80409BDC_de;
-/* unbake published declaration: published_66c9b33b8da525d6a20cbcab */
 extern void func_8043E504_de(struct Record_func_80409BDC_de *arg0);
 
 struct PlayerSettings;
-/* unbake published declaration: published_69bf83255fd24ba68b5448ed */
 typedef struct PlayerSettings PlayerSettings;
 
 struct func_8043E5BC_S1;
-/* unbake published declaration: published_6d4417f6880d388a77586d1d */
 struct func_8043E5BC_S1 {
     char pad0[0x1C];
     s32 unk1C;
@@ -1571,18 +1548,14 @@ struct func_8043E5BC_S1 {
 };
 
 struct StatusView;
-/* unbake published declaration: published_7d64652f90531521e21fbd25 */
 typedef struct StatusView StatusView;
 
-/* unbake published declaration: published_81079847d1ebea8f6247c2a3 */
 extern float D_80142228;
 
 struct func_8043E5BC_S1;
-/* unbake published declaration: published_820e2d278f4cdd7a941994e8 */
 typedef struct func_8043E5BC_S1 func_8043E5BC_S1;
 
 struct Target8043E458;
-/* unbake published declaration: published_bc2089c99fee6f25108cf7b1 */
 struct Target8043E458 {
     u8 pad0[0x7B];
     s8 unk7B;
@@ -1596,75 +1569,58 @@ struct Other8043E458 {
 };
 struct Other8043E458;
 struct Outer8043E458;
-/* unbake published declaration: published_8ccb01b457dafe4a2705ddc4 */
 struct Outer8043E458 {
     u8 pad0[0x1C];
     struct Other8043E458 *unk1C;
 };
 
 struct StatusStep;
-/* unbake published declaration: published_8d59c5a3a1d75e369c3db511 */
 typedef struct StatusStep StatusStep;
 
 struct StatusStep;
-/* unbake published declaration: published_a7624c268dcc726b671a4209 */
 struct StatusStep {
     char pad[150];
 };
 
 struct func_8043E318_S2;
-/* unbake published declaration: published_a7740b29f11dc28dbc5ddc2a */
 struct func_8043E318_S2 {
     char pad0[0x5D8];
     u8 * unk5D8;
 };
 
 struct Obj1C;
-/* unbake published declaration: published_b0510844057d14c6e3166efc */
 typedef struct Obj1C Obj1C;
 
 struct FlaggedRosterView;
-/* unbake published declaration: published_bd3553ebcc79e562eec26fb2 */
 struct FlaggedRosterView {
     char pad0[0x148];
     u8 flag;
 };
 
-/* unbake published declaration: published_bf28a8d95fec791757962cea */
 extern s32 func_8043E134_de(void);
 
-/* unbake published declaration: published_bf4be9092c97a1d7eaa9e1db */
 extern s32 func_8043E1C0_de(void);
 
-/* unbake published declaration: published_cb2a0a6c9a634fadae4d3fec */
 extern void func_8043E124_de(void);
 
 struct FlaggedRosterView;
-/* unbake published declaration: published_d0cad7f5babe622e770dcd69 */
 typedef struct FlaggedRosterView FlaggedRosterView;
 
 struct Menu_func_8043F37C_eu;
-/* unbake published declaration: published_d2b1090480cb04f75c11c4be */
 typedef struct Menu_func_8043F37C_eu Menu_func_8043F37C_eu;
 
-/* unbake published declaration: published_dcadf7210973f9dab71331f9 */
 extern ControllerProfile *func_8043E05C_de(s32 *out);
 
-/* unbake published declaration: published_deebcc83515e018612f6402f */
 extern void func_8043E4E0_de(Outer8043E56C *arg0);
 
-/* unbake published declaration: published_e3efbaa363f2cf3cf9f689e3 */
 extern s32 func_8043E530_de(void);
 
-/* unbake published declaration: published_e9264588ea9cc507602221bb */
 extern s32 func_8043E610_de(void *arg0, Handle8043E788 *arg1);
 
 struct Target8043E458;
-/* unbake published declaration: published_edb836897f327268ce724ff9 */
 typedef struct Target8043E458 Target8043E458;
 
 struct func_8043E318_S2;
-/* unbake published declaration: published_ef42b303648adfdd08a98b53 */
 typedef struct func_8043E318_S2 func_8043E318_S2;
 
 #endif

@@ -59,7 +59,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   void *temp_s0_5;
   void *temp_s2; 
   void *var_a0;
-  func_8027ADBC_S2 *var_s0;
+  SharedRecAt16E0V2 *var_s0;
   temp_v1 = arg0->inst.type;
   if (temp_v1 == 0x127)
   {
@@ -164,9 +164,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   temp_s0_2 = (void *) (&arg0->inst.velocity.x);
   func_80271F34_de(temp_s0_2, temp_s0_2, &sp10);
 #if defined(VERSION_EU)
-  func_80272748_de(temp_s0_2, func_802AD520_eu((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk12));
+  func_80272748_de(temp_s0_2, func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #else
-  func_80272748_de(temp_s0_2, func_802B2350((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk12));
+  func_80272748_de(temp_s0_2, func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12));
 #endif
   return;
   block_24:
@@ -181,9 +181,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   func_80228DC4_de(&D_80145040, arg0);
 
 #if defined(VERSION_EU)
-  temp_f0_3 = func_802AD520_eu((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk10);
+  temp_f0_3 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #else
-  temp_f0_3 = func_802B2350((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk10);
+  temp_f0_3 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #endif
   if (temp_f0_3 != 0.0f)
   {
@@ -197,9 +197,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     temp_f12 = arg0->inst.velocity.z;
     temp_f20_2 = func_802B72B0_de(((temp_f1 * temp_f1) + (temp_f0_4 * temp_f0_4)) + (temp_f12 * temp_f12));
 #if defined(VERSION_EU)
-    temp_f0_5 = func_802AD520_eu((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk12);
+    temp_f0_5 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
-    temp_f0_5 = func_802B2350((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk12);
+    temp_f0_5 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #endif
     if (temp_f0_3 > 0.0f)
     {
@@ -225,7 +225,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   temp_s0_4 = arg0->target;
 
   temp_a0 = arg0->desc;
-  if (((temp_s0_4 != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((Shared_func_8027ADBC_S4 *)arg0->desc)->unkE != 0))
+  if (((temp_s0_4 != ((void *) 0)) && (arg0->desc->flags & 0x40000)) && (((BallisticParamsHolder *)arg0->desc)->unkE != 0))
   {
     temp_f0_6 = func_8024E420_de(temp_s0_4);
     sp20 = temp_s0_4->pos;
@@ -243,7 +243,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     temp_f12_2 = arg0->inst.velocity.z;
     temp_f20_3 = func_802B72B0_de(((temp_f1_3 * temp_f1_3) + (temp_f0_7 * temp_f0_7)) + (temp_f12_2 * temp_f12_2));
     temp_f0_8 = func_802745D0_de(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
-    temp_f1_4 = ((f32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unkE) * D_800C4BEC_de;
+    temp_f1_4 = ((f32) ((BallisticParamsHolder *)arg0->desc)->unkE) * D_800C4BEC_de;
     var_f2 = D_800C4BF0_de;
     if (temp_f1_4 < temp_f0_8)
     {
@@ -261,9 +261,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   if (!(arg0->flags & 0x70000))
   {
 #if defined(VERSION_EU)
-    temp_f0_9 = func_802AD520_eu((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk10);
+    temp_f0_9 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #else
-    temp_f0_9 = func_802B2350((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk10);
+    temp_f0_9 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk10);
 #endif
     if (temp_f0_9 != 0.0f)
     {
@@ -277,9 +277,9 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       temp_f12_3 = arg0->inst.velocity.z;
       temp_f20_4 = func_802B72B0_de(((temp_f1_5 * temp_f1_5) + (temp_f0_10 * temp_f0_10)) + (temp_f12_3 * temp_f12_3));
 #if defined(VERSION_EU)
-      temp_f0_11 = func_802AD520_eu((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk12);
+      temp_f0_11 = func_802AD520_eu((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #else
-      temp_f0_11 = func_802B2350((s32) ((Shared_func_8027ADBC_S4 *)arg0->desc)->unk30->unk12);
+      temp_f0_11 = func_802B2350((s32) ((BallisticParamsHolder *)arg0->desc)->unk30->unk12);
 #endif
       if (temp_f0_9 > 0.0f)
       {

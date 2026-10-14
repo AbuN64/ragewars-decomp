@@ -39,7 +39,7 @@ static inline void init(Node_func_80285B64_de *node, Clip *key, Vec3 position, f
     bind(node, 0x2C, key->frames);
 }
 
-Node_func_80285B64_de *func_80285B64_de(Pool_func_80285B64_de *pool, Clip *key, Vec3 position, f32 value0, f32 value1, Node_func_80285B64_de **owner) {
+Node_func_80285B64_de *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, Vec3 position, f32 value0, f32 value1, Node_func_80285B64_de **owner) {
     s32 mask;
     Node_func_80285B64_de *node;
 

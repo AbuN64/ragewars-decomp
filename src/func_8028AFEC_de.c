@@ -32,7 +32,7 @@ extern Gfx *D_80110634;
 
 extern void func_80249E28_de(Actor_func_8024A7A0_de *object, void *camera);
 
-void func_8028B028_de(Scene_func_8028B028_de *scene, void *camera) {
+void func_8028B028_de(SceneRecAt10C0 *scene, void *camera) {
     Actor_func_8024A7A0_de *object;
     s32 count;
     s32 i;
@@ -90,8 +90,8 @@ s32 func_8028B21C_de(void *arg0, s32 arg1)
   void *base;
   s32 masked;
   base = ((struct Shared_World *)(arg0))->modelIds;
-  count = ((struct Table_func_8028B274_de *)(base))->count;
-  ptr = &((struct Table_func_8028B274_de *)(base))->entries[0];
+  count = ((struct TableRecAt8 *)(base))->count;
+  ptr = &((struct TableRecAt8 *)(base))->entries[0];
   i = 0;
   if (count <= 0)
   {
@@ -125,12 +125,12 @@ int func_8028B25C_de(void *arg0, int arg1) {
 
 
 extern void func_80246BE8_de(Object_func_8028B274_de *,s32,s32,s32);
-static inline s32 find(Table_func_8028B274_de *table,u16 id) {
+static inline s32 find(TableRecAt8 *table,u16 id) {
  s32 index=0,count; u16 *entry;entry=table->entries;count=table->count;
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
  return -1;
 }
-void func_8028B274_de(Bank_func_8028B274_de *arg0,Object_func_8028B274_de *arg1,s32 arg2,s32 arg3) {
+void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *arg1,s32 arg2,s32 arg3) {
  s32 index=0;
  if(arg1->id!=arg2) {
  index=find(arg0->table,arg2);

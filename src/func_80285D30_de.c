@@ -19,15 +19,15 @@ void func_80285D30_de(void *arg0) {
     s32 saved;
 
     saved = func_802BCF30_de();
-    node = ((Pool_func_80285B64_de *)arg0)->active.head;
+    node = ((PoolRecAt28V1 *)arg0)->active.head;
     if (node != 0) {
         do {
             next = ((Node_func_80285B64_de *)node)->next;
-            func_80255ED8_de(&((Pool_func_80285B64_de *)arg0)->active, node);
+            func_80255ED8_de(&((PoolRecAt28V1 *)arg0)->active, node);
             func_80255D14_de(arg0, node);
             node = next;
         } while (node != 0);
     }
-    ((Pool_func_80285B64_de *)arg0)->baseLevel = 0;
+    ((PoolRecAt28V1 *)arg0)->baseLevel = 0;
     func_802BCF50_de(saved);
 }

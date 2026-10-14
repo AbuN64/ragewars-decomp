@@ -1,7 +1,7 @@
 struct ControllerProfile;
 #ifndef UNBAKE_SPAN_1000_CODE_802636D0_H
 #define UNBAKE_SPAN_1000_CODE_802636D0_H
-#include "../types.h"
+#include "types.h"
 #include "common/types_1dc8418c21db.h"
 
 /* Status and message queue for controller-pak operations. */
@@ -11,7 +11,6 @@ typedef struct PakQueueState {
     Queue_func_802517B4_de queue;
 } PakQueueState;
 struct func_80264268_S1;
-/* unbake published declaration: published_049be7bd52ac98aa5db3fc12 */
 struct func_80264268_S1 {
     char pad0[0xC8];
     s32 unkC8;
@@ -24,7 +23,6 @@ struct func_80264268_S1 {
 };
 
 struct func_802636D0_S1;
-/* unbake published declaration: published_0e4a430961e5fbaea2e958c9 */
 struct func_802636D0_S1 {
     int unk0;
     char pad0[0x4 - 0x0 - sizeof(int)];
@@ -53,26 +51,21 @@ struct func_802636D0_S1 {
     int unk34;
 };
 
-/* unbake published declaration: published_18598f0a833f7de89b06056a */
 extern s32 func_802636E8_de(s32 arg0);
 
 struct func_802643D8_S1;
-/* unbake published declaration: published_1e68d4b4a8abe4b23c058c9c */
 struct func_802643D8_S1 {
     char pad0[0xC0];
     int unkC0;
 };
 
 struct ObjectState30;
-/* unbake published declaration: published_1f55217cdf40ea6d351902f6 */
 typedef struct ObjectState30 ObjectState30;
 
 struct func_802643D8_S1;
-/* unbake published declaration: published_237f3675e1e43a617dcf74a8 */
 typedef struct func_802643D8_S1 func_802643D8_S1;
 
 struct Obj80264124;
-/* unbake published declaration: published_4131540f4132b5051a9d54ba */
 struct Obj80264124 {
     s32 flags;
     s8 enabled;
@@ -89,50 +82,37 @@ struct Obj80264124 {
     char object[1];
 };
 
-/* unbake published declaration: published_51122205c9dab1ebec558294 */
 extern void func_80263CF0_de(void *arg0);
 
-/* unbake published declaration: published_59de1bb25eeba32d94a9763c */
 extern int func_8026436C_de(void *arg0);
 
 
-/* unbake published declaration: published_5a30493e993e1f13e7740218 */
 
 
 struct ObjectState224;
-/* unbake published declaration: published_5dd82e13550b5b7ed8dc422d */
 typedef struct ObjectState224 ObjectState224;
 
-/* unbake published declaration: published_63ddce3c523a1544ca4f4c8c */
 extern int func_80264690_de();
 
 struct func_802644C8_S1;
-/* unbake published declaration: published_6990ded6fe3c3c441080d5b9 */
 typedef struct func_802644C8_S1 func_802644C8_S1;
 
-/* unbake published declaration: published_6d74f77681222e5e43a1ad16 */
 extern void func_8026454C_de();
 
 struct func_80264268_S1;
-/* unbake published declaration: published_7ce1a146a36d55c3120f7588 */
 typedef struct func_80264268_S1 func_80264268_S1;
 
 
-/* unbake published declaration: published_879161e821b12b795c7f6e3a */
 
 
-/* unbake published declaration: published_a02a64eb3484e1d56d5e1d61 */
 extern int func_802643E8_de(void *arg0);
 
-/* unbake published declaration: published_ad34f0345223a6769719c1b5 */
 extern float D_800C4308_de;
 
 struct func_802636D0_S1;
-/* unbake published declaration: published_c9d022396964595497ea15c6 */
 typedef struct func_802636D0_S1 func_802636D0_S1;
 
 struct ObjectState30;
-/* unbake published declaration: published_cd6dcd1527b8421a6154886e */
 struct ObjectState30 {
     unsigned char padding_0[44];
     s8 unk_2C;
@@ -141,22 +121,17 @@ struct ObjectState30 {
     s8 unk_2F;
 };
 
-/* unbake published declaration: published_d44edf3cb5d1770f59897659 */
 extern void func_80263C24_de();
 
 
-/* unbake published declaration: published_d4d565a71817d66472583632 */
 
 
-/* unbake published declaration: published_d73512b3227d322a0ed831b2 */
 extern void func_80263AF4_de();
 
 
-/* unbake published declaration: published_da218df60c35442cb1f3b6b2 */
 
 
 struct func_802644C8_S1;
-/* unbake published declaration: published_e6fc35e6ab73fe8dde34ec9e */
 struct func_802644C8_S1 {
     char pad0[0x18];
     s32 unk18;
@@ -190,18 +165,14 @@ struct func_802644C8_S1 {
     u8 unkC7;
 };
 
-/* unbake published declaration: published_ea24523ed6daa78fd1f7af23 */
 extern int func_802643F8_de(struct ControllerProfile *arg0);
 
-/* unbake published declaration: published_ea3e509d7917577c86c7324a */
 extern int func_80264634_de(int arg0);
 
 struct Obj80264124;
-/* unbake published declaration: published_f10dc01c6f1afb2d329856bc */
 typedef struct Obj80264124 Obj80264124;
 
 struct ObjectState224;
-/* unbake published declaration: published_fa464a0384915ffc378d46c3 */
 struct ObjectState224 {
     s32 unk_0;
     char pad0[0x4 - 0x0 - sizeof(s32)];
@@ -244,7 +215,6 @@ struct ObjectState224 {
     s32 unk_220;
 };
 
-/* unbake published declaration: published_fd91d48606494941ea2083b9 */
 extern void func_80264404_de();
 
 #endif

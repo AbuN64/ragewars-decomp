@@ -9,7 +9,7 @@
 extern void func_802106E0_de(void *, int);
 extern void func_80210964_de(void *, int);
 
-int func_80210E88_de(Player_func_80210E88_de *p) {
+int func_80210E88_de(PlayerRecAt1CC *p) {
     if (p == 0) {
         return 1;
     }

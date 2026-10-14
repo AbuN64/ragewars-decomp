@@ -6,7 +6,7 @@
    matches, or zero when none does. */
 
 
-extern struct Entry_func_8041EB50_de D_800E4694[];
+extern struct EntryRecAt0V1 D_800E4694[];
 
 s32 func_80428120_de(s32 id) {
     s32 i;

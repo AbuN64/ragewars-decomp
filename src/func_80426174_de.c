@@ -12,7 +12,7 @@
 
 
 
-void func_80426174_de(Player_func_80426174_de *p) {
+void func_80426174_de(PlayerRecAt602 *p) {
     int i;
 
     if (p->info->locked != 1 && p->info->present != 0) {

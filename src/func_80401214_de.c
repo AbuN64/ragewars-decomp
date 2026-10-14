@@ -16,13 +16,13 @@
 extern func_80203E78_S1 *D_800E2830;
 
 extern s32 *func_8028FDB4_de(s32 *node, s32 index);
-extern Vec3 func_80400E50_de(Key_func_80401214_de *keys, s32 count, f32 t);
+extern Vec3 func_80400E50_de(KeyRecAt1C *keys, s32 count, f32 t);
 
 Vec3 func_80401214_de(f32 t) {
     s32 i;
     s32 idx;
     s32 count;
-    Key_func_80401214_de *keys;
+    KeyRecAt1C *keys;
     s32 *clip;
     f32 start;
     f32 end;
@@ -37,7 +37,7 @@ Vec3 func_80401214_de(f32 t) {
         idx = i;
         clip = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de((s32 *)D_800E2830->unk4, 0), idx), 0);
         count = clip[1];
-        keys = (Key_func_80401214_de *)(clip + 2);
+        keys = (KeyRecAt1C *)(clip + 2);
         start = end;
         end = start + keys[count - 1].time;
         if (idx == 0 && t <= start) {

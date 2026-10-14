@@ -3,9 +3,9 @@
 
 /* Returns the word at offset 0xE0 of the object D_800E2830 points to. The interval also holds an
    empty function with no symbol of its own, compiled here as the file-local stub after it. */
-struct Unresolved_func_80245B20_de_StateE0;
+struct UnresolvedRec;
 
-extern struct Unresolved_func_80245B20_de_StateE0 *D_800E2830;
+extern struct UnresolvedRec *D_800E2830;
 
 
 

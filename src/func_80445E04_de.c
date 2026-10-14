@@ -5,20 +5,20 @@
 
 
 extern u8 D_80145040[],D_800E20AC[];
-extern s32 func_8022A5A0_de(void *,func_80209B64_S4 *);
+extern s32 func_8022A5A0_de(void *,ObjRecAt5D8 *);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern void func_80442384_de(s32,Entry_func_80445E04_de *,s32), func_80444F30_eu(void *);
+extern void func_80442384_de(s32,EntryRecAt1C *,s32), func_80444F30_eu(void *);
 #else
-extern void func_80442384_de(s32,Entry_func_80445E04_de *,s32), func_804440F0_de(void *);
+extern void func_80442384_de(s32,EntryRecAt1C *,s32), func_804440F0_de(void *);
 #endif
-s32 func_80445E04_de(s32 arg0, Entry_func_80445E04_de *arg1, s32 arg2) {
+s32 func_80445E04_de(s32 arg0, EntryRecAt1C *arg1, s32 arg2) {
     s32 temp_v0;
     s32 var_a0;
     s32 var_a1;
     u8 *var_a2;
     u8 *var_v1;
     u8 var_v0;
-    func_80209B64_S4 *temp_s1;
+    ObjRecAt5D8 *temp_s1;
 
     temp_s1 = arg1->unk1C;
     temp_v0 = func_8022A5A0_de(D_80145040, temp_s1);

@@ -20,7 +20,7 @@ void *func_8024C664_de(char *arg0)
     char *object;
     ObjectList *list;
 
-    func_8024C654_S1 *actor = (void *)arg0;
+    ObjRecAt18V2 *actor = (void *)arg0;
 
     type = *actor->unk18;
     if ((unsigned int)type >= 15) {
