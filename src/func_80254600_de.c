@@ -15,7 +15,7 @@ extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);
 
-extern void func_80254C70_de(s32, struct Shape_typemap_165 *);
+extern void func_80254C70_de(s32 unused, void *object);
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
 extern s32 func_802BB420_de(OSMesgQueue *, s32, s32);
 

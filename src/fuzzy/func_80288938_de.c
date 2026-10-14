@@ -22,7 +22,7 @@ extern SceneHandle **func_80250B24_de(SceneProp *,s32,s32,SceneHandle **);
 extern void func_802504B0_de(SceneProp *,s32);
 extern SceneHandle *func_802507AC_de(SceneProp *,s32);
 extern void func_80270910_de(f32 *,u32 *),func_80272898_de(f32 *,Vec3 *,Vec3 *);
-extern void *func_802BD3A0_de(void *,const void *,s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 static inline u32 *sceneMatrix(SceneProp *prop) { return prop->matrix; }
 void func_80288938_de(SceneWorld *arg0) {
     f32 sp28[16];

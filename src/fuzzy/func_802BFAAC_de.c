@@ -2,7 +2,7 @@
 #include "span_C76B0/data.h"
 #include "common/unused.h"
 extern void func_802BF928_de(f32 *, s32, s32, f32 *, f32 *, s32 *);
-extern void *func_802BD3A0_de(void *, const void *, s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 /* Decode a 256-sample transform block, rotate around the FFT, then combine
  * it with the preceding block and round/saturate to signed PCM samples. */

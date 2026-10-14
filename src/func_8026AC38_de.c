@@ -52,7 +52,7 @@ void func_8026AC38_de(void) {
 s32 func_8028FDC8_de(s32 arg0, s32 arg1, s32 *arg2);
 extern struct Shape_typemap_165 *func_80254480_de(s32, void *, s32);
 void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
-extern void *func_802BD3A0_de(void *, const void *, s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */
 void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32 sentinel) {

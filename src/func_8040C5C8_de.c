@@ -11,7 +11,7 @@
 
 extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *, Args *);
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
-extern s32 func_8040F488_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *);
+extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_802A1870_de(s32, s32, s32, s32);
 extern void func_8040E7FC_de(void *, Args);
 

@@ -8,7 +8,7 @@ extern u16 *func_8028FDC8_de(void *, s32, u32 *);
 extern s32 func_8028FDF8_de(void *, s32);
 extern s32 **func_80254480_de(s32, void *, s32);
 extern void func_80253D10_de(s32, void *, s32 **);
-extern void *func_802BD3A0_de(void *, const void *, s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 typedef struct {
     s32 **handle;

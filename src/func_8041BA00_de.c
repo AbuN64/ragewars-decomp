@@ -11,7 +11,7 @@
 
 extern s32 func_8040E0D4_de(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, Args *);
 extern void func_802A1898_de(u32 *, u32 *, u32 *, u32 *);
-extern void func_8040F488_de(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *);
+extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_802A1870_de(u32, u32, u32, u32);
 extern void func_8040E7FC_de(void *, Args);
 

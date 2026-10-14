@@ -52,7 +52,7 @@ void func_80299C80_de(StreamBuffer *);
 void func_80299CC4_de(void);
 f64 func_802A18CC_de(void);
 void func_804116CC_de(s32);
-void *func_80411DCC_de(s32);
+extern void *func_80411DCC_de(s32 index);
 s32 func_80411DF0_de(s32);
 void func_80411E18_de(s32);
 

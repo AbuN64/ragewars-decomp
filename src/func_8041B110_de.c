@@ -13,7 +13,7 @@
 
 
 extern s32 func_80299958_de(void);
-extern s32 func_80411DCC_de(s32 arg0);
+extern void *func_80411DCC_de(s32 index);
 extern Record_func_8041B110_de *func_8040EC30_de(s32 arg0, s32 arg1);
 extern Record_func_8041B110_de *func_8025305C_de(s32);
 extern void func_802A0748_de(Record_func_8041B110_de *, s32, s32);

@@ -20,7 +20,7 @@ extern void func_80258740_de(Context_func_80259440_de *);
 extern void func_802587A4_de(Context_func_80259440_de *);
 extern s16 func_8025B034_de(char *, s32, s32, s32, s32);
 extern s16 func_802B2510_de(char *, s32);
-extern void func_802BD3A0_de(void *, void *, s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void func_802577F4_de(Context_func_80259440_de *, s32, s32, char *);
 
 static inline void append(ListHead *head, Entry_func_80259440_de *entry) {

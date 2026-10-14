@@ -8,7 +8,7 @@
 
 
 extern s32 func_80299958_de();
-extern void *func_80411DCC_de(s32);
+extern void *func_80411DCC_de(s32 index);
 extern Entry_func_80412898_de *func_8040EC30_de(void *, unsigned short);
 
 void func_80412940_de(s32 identifier, s32 row, s32 column, s32 *first, s32 *second) {

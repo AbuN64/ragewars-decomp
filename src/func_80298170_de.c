@@ -10,7 +10,7 @@ extern s32 D_8014D080;
 
 extern s32 D_8014D0A0;
 extern s32 func_80299958_de(void);
-extern void *func_80411DCC_de(s32 handle);
+extern void *func_80411DCC_de(s32 index);
 extern struct Tree *func_8040EC30_de(struct Tree *context, u16 id);
 
 Element *func_80298170_de(s32 id) {

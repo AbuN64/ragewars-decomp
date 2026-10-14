@@ -6,7 +6,7 @@
 
 
 extern s32 func_80299958_de();
-extern void *func_80411DCC_de(s32);
+extern void *func_80411DCC_de(s32 index);
 extern struct Record_func_80412710_de *func_8040EC30_de(void *, unsigned short);
 
 void func_80412B18_de(s32 identifier, s32 *first, s32 *second) {

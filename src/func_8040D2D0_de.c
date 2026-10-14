@@ -13,7 +13,7 @@
 extern struct Shape_typemap_165 D_8014D580;
 extern BatchRec D_8014D590[];
 s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, TextWidget *, DrawArgs *);
-s32 func_8040F488_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *);
+extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 void func_802A1870_de(unsigned int, unsigned int, unsigned int, unsigned int);
 s32 func_802A0238_de(u8 *);
 GlyphBuffer *func_8041200C_de(s32);

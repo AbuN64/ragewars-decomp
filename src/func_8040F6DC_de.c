@@ -13,7 +13,7 @@
 extern s16 D_80153C0C;
 extern u16 *D_80153C4C;
 
-extern s32 func_80411DCC_de(u32 index);
+extern void *func_80411DCC_de(s32 index);
 extern void func_804116CC_de(u32 index);
 
 static inline void func_8040F75C_resolve(UiWidget *widget) {

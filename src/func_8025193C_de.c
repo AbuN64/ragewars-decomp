@@ -17,7 +17,7 @@ extern void func_80255FB8_de(void *, s32);
 extern void *func_80254ED0_de(s32, s32);
 extern void *func_802514A8_de(s32, s32);
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
-extern void func_80254C70_de(s32, void *);
+extern void func_80254C70_de(s32 unused, void *object);
 extern s32 func_80255170_de(s32 *, void *);
 extern ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference);
 extern void func_80254E88_de(s32, void *);

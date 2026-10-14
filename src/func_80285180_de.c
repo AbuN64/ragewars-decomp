@@ -5,7 +5,7 @@
 void func_80253D10_de(s32, void **, void *);
 void * func_80254480_de(s32, void *, s32);
 void * func_80254600_de(s32, s32, s32);
-void * func_802BD3A0_de(void *, const void *, int);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 s32 func_802AD4C0_de(); /* extern */
 #if defined(VERSION_DE)
 s32 func_802AD940_de();

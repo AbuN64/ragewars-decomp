@@ -3,7 +3,7 @@
 extern s16 D_8014D500;
 extern OSViMode_func_802BA910_de D_8014D508;
 extern OSViMode_func_802BA910_de D_800D4530[];
-extern void *func_802BD3A0_de(void *, const void *, s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void func_802BA6B0_de(void *);
 
 /* Resize the selected VI mode around its original horizontal and field

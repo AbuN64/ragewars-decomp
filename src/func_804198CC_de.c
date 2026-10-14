@@ -9,7 +9,7 @@
 
 
 extern s32 func_80299958_de(void);
-extern s32 func_80411DCC_de(s32);
+extern void *func_80411DCC_de(s32 index);
 extern s32 func_8040EC30_de(s32 screen, u16 id);
 extern Animation *func_8025305C_de(s32 size);
 extern void func_802A0748_de(void *p, s32 c, s32 n);

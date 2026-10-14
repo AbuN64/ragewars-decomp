@@ -17,7 +17,7 @@ extern s32 func_8025477C_de(void);
 extern void func_80263740_de(void);
 
 extern void func_8026454C_de(void);
-extern void func_802BD3A0_de(s32, s32, s32);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern s32 func_80447AF0_de(Device *, s32, s32, s32, s32, s32);
 s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
 {

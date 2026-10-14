@@ -6,7 +6,7 @@
 
 extern struct Shape_typemap_165 *func_802514A8_de(s32 arg0, u32 arg1);
 
-extern void func_80254C70_de(s32 arg0, void *arg1);
+extern void func_80254C70_de(s32 unused, void *object);
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 struct Shape_typemap_165 *func_802548B8_de(s32 arg0_unused, s32 arg1, u32 arg2) {

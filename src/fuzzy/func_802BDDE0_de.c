@@ -20,7 +20,7 @@ extern s64 func_802C1330_de(s64 numerator, s64 denominator);
 extern s64 func_802C0DA0_de(s64 numerator, s64 denominator);
 extern s64 func_802C0230_de(s64 numerator, s64 denominator);
 extern s64 func_802C0820_de(s64 numerator, s64 denominator);
-extern void *func_802BD3A0_de(void *destination, const void *source, s32 count);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 void func_802BDDE0_de(ValueRecord *record, u8 type) {
     u8 *table;

@@ -8,7 +8,7 @@ typedef struct DraftEventState {
 extern DraftEventState *D_8014D080;
 extern s32 D_80146E04;
 extern s32 func_80299958_de(void);
-extern Element *func_80411DCC_de(s32);
+extern void *func_80411DCC_de(s32 index);
 extern Element *func_80298170_de(s32);
 extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);

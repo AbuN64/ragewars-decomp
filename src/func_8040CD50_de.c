@@ -26,7 +26,7 @@ extern s32 D_800E2AB8;
 
 extern s32 func_8040E0D4_de(struct Shape_typemap_165 *area, struct Shape_typemap_165 *box, Widget_func_8040CD50_de *widget, DrawArgs *args);
 extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
-extern s32 func_8040F488_de(struct Shape_typemap_165 *clip, struct Shape_typemap_165 *box);
+extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_802A1870_de(s32 left, s32 right, s32 top, s32 bottom);
 
 extern s32 func_80410674_de(s32 image, s32 mode);

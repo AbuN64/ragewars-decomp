@@ -7,7 +7,7 @@
 
 
 extern s32 func_80299958_de();
-extern void *func_80411DCC_de(s32);
+extern void *func_80411DCC_de(s32 index);
 extern struct Entry_func_80412AC0_de *func_8040EC30_de(void *, u16);
 
 void func_80412AC0_de(s32 identifier, s32 first, s32 second) {
