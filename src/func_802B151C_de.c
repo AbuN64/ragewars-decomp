@@ -8,10 +8,10 @@
 
 
 void *func_802B151C_de(void *arg0, s8 arg1, s8 arg2, s8 arg3) {
-    ALVoiceState_s *node;
+    ALVoiceState *node;
     ALSeqPlayer88 *player = arg0;
-    ALVoiceState_s *next;
-    ALVoiceState_s *tail;
+    ALVoiceState *next;
+    ALVoiceState *tail;
 
     node = player->vFreeList;
     if (node != 0) {

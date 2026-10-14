@@ -20,7 +20,7 @@ s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2) {
     char *cur;
 
     total = 0;
-    cur = ((ALSeqPlayer_func_802B0C94_de *)arg0)->evtq.allocList.next;
+    cur = ((ALSeqPlayer *)arg0)->evtq.allocList.next;
     result = 1;
     if (cur != 0) {
         do {
@@ -33,7 +33,7 @@ s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2) {
                         ((ALEventListItem *)next)->delta = ((ALEventListItem *)next)->delta + amount;
                     }
                     func_802B2450_de(cur);
-                    func_802B2480_de(cur, &((ALSeqPlayer_func_802B0C94_de *)arg0)->evtq.freeList.next);
+                    func_802B2480_de(cur, &((ALSeqPlayer *)arg0)->evtq.freeList.next);
                     goto done;
                 }
                 result = 0;

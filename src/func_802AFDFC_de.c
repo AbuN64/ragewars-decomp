@@ -10,7 +10,7 @@
 
 
 void func_802AFDFC_de(void *arg0, f32 arg1) {
-    ALSeqPlayer_func_802B0C94_de *player = arg0;
+    ALSeqPlayer *player = arg0;
     ALCSeq_s *temp_v0;
 
     temp_v0 = player->target;

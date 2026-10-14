@@ -2741,7 +2741,7 @@ schema = 1
 "func_802B0630_eu" = { evidence = "authored", signature = "int func_802B0630_eu(void * arg0, int arg1, int arg2)" }
 "func_802B091C_us_rev1" = { evidence = "landed", signature = "u32 func_802B091C_us_rev1(u32 arg0, u32 arg1, u32 arg2)" }
 "func_802B0A90_de" = { evidence = "landed", signature = "void func_802B0A90_de(struct ALSequencePlayer *seqp)" }
-"func_802B0C94_de" = { evidence = "landed", signature = "void func_802B0C94_de(ALSeqPlayer_func_802B0C94_de *seqp, ALEvent10 *event)" }
+"func_802B0C94_de" = { evidence = "landed", signature = "void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent10 *event)" }
 "func_802B0D3C_us_rev1" = { evidence = "landed", signature = "u32 func_802B0D3C_us_rev1(u32 arg0)" }
 "func_802B1088_us_rev1" = { evidence = "landed", signature = "s32 func_802B1088_us_rev1(s32 arg0)" }
 "func_802B1308_us_rev1" = { evidence = "landed", signature = "s32 func_802B1308_us_rev1(u8 *arg0)" }
@@ -2752,12 +2752,12 @@ schema = 1
 "func_802B156C_us_rev1" = { evidence = "landed", signature = "s32 func_802B156C_us_rev1(u16 *arg0)" }
 "func_802B15D0_de" = { evidence = "landed", signature = "s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2)" }
 "func_802B15EC_us_rev1" = { evidence = "landed", signature = "s32 func_802B15EC_us_rev1(s32 *arg0)" }
-"func_802B1680_de" = { evidence = "landed", signature = "ALVoiceState_s *func_802B1680_de(ALSeqPlayer *seqp, u8 key, u8 channel)" }
+"func_802B1680_de" = { evidence = "landed", signature = "ALVoiceState *func_802B1680_de(ALSeqPlayer *seqp, u8 key, u8 channel)" }
 "func_802B16B4_us_rev1" = { evidence = "landed", signature = "s32 func_802B16B4_us_rev1(u8 *arg0, s32 arg1)" }
 "func_802B16E0_de" = { evidence = "landed", signature = "void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3)" }
 "func_802B1734_us_rev1" = { evidence = "landed", signature = "s32 func_802B1734_us_rev1(u32 arg0)" }
 "func_802B1790_us_rev1" = { evidence = "landed", signature = "s32 func_802B1790_us_rev1(u32 arg0)" }
-"func_802B1814_de" = { evidence = "landed", signature = "s16 func_802B1814_de(ALVoiceState_s_func_802B1814_de *vs, ALSeqPlayer_func_802B1814_de *seqp)" }
+"func_802B1814_de" = { evidence = "landed", signature = "s16 func_802B1814_de(ALVoiceState *vs, ALSeqPlayer *seqp)" }
 "func_802B1820_us_rev1" = { evidence = "landed", signature = "s32 func_802B1820_us_rev1(u8 *arg0)" }
 "func_802B1888_de" = { evidence = "landed", signature = "int func_802B1888_de(void *arg0, int arg1)" }
 "func_802B1888_us_rev1" = { evidence = "landed", signature = "u8 func_802B1888_us_rev1(void *arg0)" }
@@ -2781,7 +2781,7 @@ schema = 1
 "func_802B1DC0_us_rev1" = { evidence = "landed", signature = "void func_802B1DC0_us_rev1(s32 arg0)" }
 "func_802B1DEC_de" = { evidence = "landed", signature = "void func_802B1DEC_de(void *arg0, void *arg1)" }
 "func_802B1E18_us_rev1" = { evidence = "landed", signature = "void func_802B1E18_us_rev1(s32 arg0)" }
-"func_802B1E50_de" = { evidence = "landed", signature = "void func_802B1E50_de(ALSeqPlayer_func_802B0C94_de *arg0, f32 arg1)" }
+"func_802B1E50_de" = { evidence = "landed", signature = "void func_802B1E50_de(ALSeqPlayer *arg0, f32 arg1)" }
 "func_802B1E70_us_rev1" = { evidence = "landed", signature = "void func_802B1E70_us_rev1(s32 arg0)" }
 "func_802B1E80_de" = { evidence = "landed", signature = "void func_802B1E80_de(ALSeq_s *seq, ALEvent *event)" }
 "func_802B1EC8_us_rev1" = { evidence = "landed", signature = "void func_802B1EC8_us_rev1(s32 arg0)" }
@@ -9976,7 +9976,7 @@ schema = 1
 "ALMainBus_s" = { declaration = "struct ALMainBus_s { ALFilter_s14 filter; s32 sourceCount; s32 maxSources; ALFilter_s14 **sources; };", evidence = "authored" }
 "ALMicroTime" = { declaration = "typedef int ALMicroTime;", evidence = "authored" }
 "ALNoteEvent" = { declaration = "typedef struct ALNoteEvent ALNoteEvent;", evidence = "authored" }
-"ALOscEvent" = { declaration = "struct ALOscEvent { struct ALVoiceState_s38 *vs; void *oscState; u8 chan; };", evidence = "authored" }
+"ALOscEvent" = { declaration = "struct ALOscEvent { struct ALVoiceState *vs; void *oscState; u8 chan; };", evidence = "authored" }
 "ALParam_s" = { declaration = "typedef struct ALParam_s ALParam_s;", evidence = "authored" }
 "ALParam_s1C" = { declaration = "struct ALParam_s1C { struct ALParam_s1C *next; s32 delta; s16 type; s32 data; s32 moredata; s32 stillmoredata; s32 yetstillmoredata; };", evidence = "authored" }
 "ALParam_s_func_802B3000_de" = { declaration = "typedef struct ALParam_s_func_802B3000_de ALParam_s_func_802B3000_de;", evidence = "authored" }
@@ -9993,11 +9993,9 @@ schema = 1
 "ALSeqPlayer" = { declaration = "typedef struct ALSeqPlayer ALSeqPlayer;", evidence = "authored" }
 "ALSeqPlayer88" = { declaration = "typedef struct ALSeqPlayer88 ALSeqPlayer88;", evidence = "authored" }
 "ALSeqPlayer_func_802B0A90_de" = { declaration = "typedef struct ALSeqPlayer_func_802B0A90_de ALSeqPlayer_func_802B0A90_de;", evidence = "authored" }
-"ALSeqPlayer_func_802B0C94_de" = { declaration = "typedef struct ALSeqPlayer_func_802B0C94_de ALSeqPlayer_func_802B0C94_de;", evidence = "authored" }
-"ALSeqPlayer_func_802B1814_de" = { declaration = "typedef struct ALSeqPlayer_func_802B1814_de ALSeqPlayer_func_802B1814_de;", evidence = "authored" }
 "ALSeq_s" = { declaration = "typedef struct ALSeq_s ALSeq_s;", evidence = "authored" }
 "ALSequenceLoopEvent" = { declaration = "struct ALSequenceLoopEvent { ALSeqMarker *start; ALSeqMarker *end; s32 count; };", evidence = "authored" }
-"ALSequencePlayer" = { declaration = "struct ALSequencePlayer { ALSeqPlayer_func_802B0C94_de base; ALSeqMarker *loopStart; ALSeqMarker *loopEnd; s32 loopCount; };", evidence = "authored" }
+"ALSequencePlayer" = { declaration = "struct ALSequencePlayer { ALSeqPlayer base; ALSeqMarker *loopStart; ALSeqMarker *loopEnd; s32 loopCount; };", evidence = "authored" }
 "ALSndPlayer" = { declaration = "struct ALSndPlayer { ALPlayer_s node; ALEventQueue evtq; Message_func_802AF150_de nextEvent; void *drvr; s32 target; void *sndState; s32 maxSounds; s32 frameTime; s32 nextDelta; s32 curTime; };", evidence = "authored" }
 "ALSndPlayer_func_802B2650_de" = { declaration = "struct ALSndPlayer_func_802B2650_de { ALPlayer_s14 node; ALEventQueue evtq; Message_func_802AF150_de nextEvent; struct ALSynth_func_802B2650_de *drvr; s32 target; void *sndState; s32 maxSounds; s32 frameTime; s32 nextDelta; s32 curTime; };", evidence = "authored" }
 "ALSndPlayer_func_802B2780_de" = { declaration = "typedef struct ALSndPlayer_func_802B2780_de ALSndPlayer_func_802B2780_de;", evidence = "authored" }
@@ -10017,9 +10015,7 @@ schema = 1
 "ALSynth_func_802B3000_de" = { declaration = "typedef struct ALSynth_func_802B3000_de ALSynth_func_802B3000_de;", evidence = "authored" }
 "ALTempoEvent" = { declaration = "struct ALTempoEvent { s32 ticks; u8 status; u8 type; u8 len; u8 byte1; u8 byte2; u8 byte3; };", evidence = "authored" }
 "ALVoiceConfig_s" = { declaration = "typedef struct ALVoiceConfig_s ALVoiceConfig_s;", evidence = "authored" }
-"ALVoiceState_s" = { declaration = "struct ALVoiceState_s { struct ALVoiceState_s *next; ALVoice_s voice; void *sound; s32 envEndTime; f32 pitch; f32 vibrato; u8 envGain; u8 channel; u8 key; u8 velocity; u8 envPhase; u8 phase; u8 tremelo; u8 flags; };", evidence = "authored" }
-"ALVoiceState_s38" = { declaration = "typedef struct ALVoiceState_s38 ALVoiceState_s38;", evidence = "authored" }
-"ALVoiceState_s_func_802B1814_de" = { declaration = "typedef struct ALVoiceState_s_func_802B1814_de ALVoiceState_s_func_802B1814_de;", evidence = "authored" }
+"ALVoiceState" = { declaration = "struct ALVoiceState { struct ALVoiceState *next; ALVoice_s voice; ALSound_s *sound; s32 envEndTime; f32 pitch; f32 vibrato; u8 envGain; u8 channel; u8 key; u8 velocity; u8 envPhase; u8 phase; u8 tremelo; u8 flags; };", evidence = "authored" }
 "ALVoice_s" = { declaration = "typedef struct ALVoice_s ALVoice_s;", evidence = "authored" }
 "ALVoice_s_func_802B3000_de" = { declaration = "typedef struct ALVoice_s_func_802B3000_de ALVoice_s_func_802B3000_de;", evidence = "authored" }
 "ALVolumeEvent" = { declaration = "struct ALVolumeEvent { struct ALVoice_s *voice; s32 delta; u8 vol; };", evidence = "authored" }

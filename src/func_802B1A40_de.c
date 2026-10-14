@@ -3,7 +3,7 @@
 
 /* Initialize one channel of the sequence player's channel table. */
 void func_802B1A40_de(void *arg0, s32 index) {
-    ALSeqPlayer_func_802B0C94_de *player = arg0;
+    ALSeqPlayer *player = arg0;
 
     player->chanState[index].fxId = 0;
     player->chanState[index].fxmix = 0;

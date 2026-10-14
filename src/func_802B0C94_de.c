@@ -12,27 +12,27 @@ extern const float D_800C74C0_de; /* 127.0f, followed by 2^31 */
 extern const float D_800C74C8_de; /* 1.0f */
 extern char D_800C7440[]; /* "EX" */
 extern char D_800C7444[]; /* "audio/seqplayer.c" */
-extern ALSound_s *func_802B16E0_de(ALSeqPlayer_func_802B0C94_de *, u8, u8, u8); /* __lookupSoundQuick */
-extern ALVoiceState_s38 *func_802B151C_de(ALSeqPlayer_func_802B0C94_de *, u8, u8, u8); /* __mapVoice */
-extern ALVoiceState_s38 *func_802B1680_de(ALSeqPlayer_func_802B0C94_de *, u8, u8); /* __lookupVoice */
+extern ALSound_s *func_802B16E0_de(ALSeqPlayer *, u8, u8, u8); /* __lookupSoundQuick */
+extern ALVoiceState *func_802B151C_de(ALSeqPlayer *, u8, u8, u8); /* __mapVoice */
+extern ALVoiceState *func_802B1680_de(ALSeqPlayer *, u8, u8); /* __lookupVoice */
 extern s32 func_802B3000_de(void *, ALVoice_s *, ALVoiceConfig_s *); /* alSynAllocVoice */
                                    /* alCents2Ratio */
-extern u8 func_802B18A4_de(ALVoiceState_s38 *, ALSeqPlayer_func_802B0C94_de *); /* __vsPan */
-extern s16 func_802B1814_de(ALVoiceState_s38 *, ALSeqPlayer_func_802B0C94_de *); /* __vsVol */
-extern ALMicroTime func_802B1888_de(ALVoiceState_s38 *, ALMicroTime); /* __vsDelta */
+extern u8 func_802B18A4_de(ALVoiceState *, ALSeqPlayer *); /* __vsPan */
+extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *); /* __vsVol */
+extern ALMicroTime func_802B1888_de(ALVoiceState *, ALMicroTime); /* __vsDelta */
 extern void func_802B35E0_de(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMicroTime); /* alSynStartVoiceParams */
 extern void func_802B00D4_de(ALEventQueue *, ALEvent10 *, ALMicroTime); /* alEvtqPostEvent */
-extern void func_802B1B14_de(ALSeqPlayer_func_802B0C94_de *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
+extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
 extern void func_802B3350_de(void *, ALVoice_s *, u8); /* alSynSetPan */
 extern void func_802B32A0_de(void *, ALVoice_s *, u8); /* alSynSetFXMix */
 extern void func_802B33E0_de(void *, ALVoice_s *, f32); /* alSynSetPitch */
-extern void func_802B1AC0_de(ALSeqPlayer_func_802B0C94_de *, ALInstrument *, s32); /* __setInstChanState */
+extern void func_802B1AC0_de(ALSeqPlayer *, ALInstrument *, s32); /* __setInstChanState */
 extern void func_802BAC50_de(char *, char *, s32); /* __assert */
-void func_802B0C94_de(ALSeqPlayer_func_802B0C94_de *seqp, ALEvent10 *event)
+void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent10 *event)
 {
     ALVoice_s *voice;
-    ALVoiceState_s38 *vs;
+    ALVoiceState *vs;
     s32 status;
     u8 chan;
     u8 key;
@@ -43,7 +43,7 @@ void func_802B0C94_de(ALSeqPlayer_func_802B0C94_de *seqp, ALEvent10 *event)
     s16 vol;
     ALEvent10 evt;
     ALMicroTime deltaTime;
-    ALVoiceState_s38 *vstate;
+    ALVoiceState *vstate;
     u8 pan;
     if (!(event->type == 1 || event->type == 2)) /* AL_SEQ_MIDI_EVT, AL_SEQP_MIDI_EVT */
         func_802BAC50_de(D_800C7440, D_800C7444, 436);

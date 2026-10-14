@@ -4070,9 +4070,9 @@ struct ALCSPlayer {
     ALEventQueue evtq;
     s32 frameTime;
     ALChanState10 *chanState;
-    ALVoiceState_s38 *vAllocHead;
-    ALVoiceState_s38 *vAllocTail;
-    ALVoiceState_s38 *vFreeList;
+    ALVoiceState *vAllocHead;
+    ALVoiceState *vAllocTail;
+    ALVoiceState *vFreeList;
     ALOscInit initOsc;
     ALOscUpdate updateOsc;
     ALOscStop stopOsc;

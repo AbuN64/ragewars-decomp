@@ -27,23 +27,7 @@ struct ALKeyMap {
     s8 detune;
 };
 
-struct ALVoiceState_s;
-struct ALVoiceState_s {
-    struct ALVoiceState_s *next;
-    ALVoice_s voice;
-    void *sound;
-    s32 envEndTime;
-    f32 pitch;
-    f32 vibrato;
-    u8 envGain;
-    u8 channel;
-    u8 key;
-    u8 velocity;
-    u8 envPhase;
-    u8 phase;
-    u8 tremelo;
-    u8 flags;
-};
+struct ALVoiceState;
 
 struct func_802B6B90_S3;
 struct func_802B6B90_S3 {
@@ -105,6 +89,9 @@ struct ALSound_s {
     ALEnvelope *envelope;
     ALKeyMap *keyMap;
     void *wavetable;
+    u8 samplePan;
+    u8 sampleVolume;
+    u8 flags;
 };
 
 struct ALInstrument;
@@ -160,8 +147,7 @@ typedef struct TableSlot TableSlot;
 struct ObjectLinks88;
 typedef struct ObjectLinks88 ObjectLinks88;
 
-struct ALSeqPlayer_func_802B0C94_de;
-typedef struct ALSeqPlayer_func_802B0C94_de ALSeqPlayer_func_802B0C94_de;
+struct ALSeqPlayer;
 
 struct func_802B6BE4_S4;
 struct func_802B6BE4_S4 {
@@ -177,8 +163,7 @@ struct func_802B6BE4_S4 {
 struct func_802B67B0_S1;
 typedef struct func_802B67B0_S1 func_802B67B0_S1;
 
-struct ALSeqPlayer_func_802B1814_de;
-typedef struct ALSeqPlayer_func_802B1814_de ALSeqPlayer_func_802B1814_de;
+struct ALSeqPlayer;
 
 struct ObjectStateD;
 typedef struct ObjectStateD ObjectStateD;
@@ -193,8 +178,8 @@ struct ALBank_s {
     ALInstrument *instArray[1];
 };
 
-struct ALVoiceState_s38;
-typedef struct ALVoiceState_s38 ALVoiceState_s38;
+struct ALVoiceState;
+typedef struct ALVoiceState ALVoiceState;
 
 struct ALChanState;
 struct ALChanState {
@@ -209,13 +194,7 @@ struct ALChanState {
     f32 pitchBend;
 };
 struct ALChanState;
-struct ALSeqPlayer_func_802B1814_de;
-struct ALSeqPlayer_func_802B1814_de {
-    char pad0[0x32];
-    s16 vol;
-    char pad1[0x60 - 0x34];
-    struct ALChanState *chanState;
-};
+struct ALSeqPlayer;
 
 struct List802B663C;
 typedef struct List802B663C List802B663C;
@@ -283,9 +262,9 @@ struct func_802B6A60_S1 {
     func_802626BC_S1_U10 unk60;
 };
 
-struct ALVoiceState_s38;
-struct ALVoiceState_s38 {
-    struct ALVoiceState_s38 *next;
+struct ALVoiceState;
+struct ALVoiceState {
+    struct ALVoiceState *next;
     ALVoice_s voice;
     ALSound_s *sound;
     s32 envEndTime;
@@ -302,9 +281,9 @@ struct ALVoiceState_s38 {
 };
 
 struct ALOscEvent;
-struct ALVoiceState_s38;
+struct ALVoiceState;
 struct ALOscEvent {
-    struct ALVoiceState_s38 *vs;
+    struct ALVoiceState *vs;
     void *oscState;
     u8 chan;
 };
@@ -334,8 +313,7 @@ struct func_802B66A0_S1 {
     char * unk50;
 };
 
-struct ALVoiceState_s_func_802B1814_de;
-typedef struct ALVoiceState_s_func_802B1814_de ALVoiceState_s_func_802B1814_de;
+struct ALVoiceState;
 
 struct func_802B65EC_S2;
 typedef struct func_802B65EC_S2 func_802B65EC_S2;
@@ -350,8 +328,7 @@ struct func_802B6D04_S1 {
     void * unk78;
 };
 
-struct ALVoiceState_s;
-typedef struct ALVoiceState_s ALVoiceState_s;
+struct ALVoiceState;
 
 typedef signed int ( *Lane_ALOscInit)(void * *, float *, unsigned char, unsigned char, unsigned char, unsigned char);
 
@@ -402,17 +379,7 @@ struct EntryTable {
 };
 
 struct ALSeqPlayer;
-struct ALVoiceState_s;
-struct ALSeqPlayer {
-    u8 pad0[0x14];
-    void *synth; /* 0x14 */
-    u8 pad18[4];
-    s32 currentTime; /* 0x1C */
-    u8 pad20[0x28];
-    ALEventQueue events; /* 0x48 */
-    u8 pad5C[8];
-    struct ALVoiceState_s *vAllocHead;
-};
+struct ALVoiceState;
 
 struct func_802B67B0_S3;
 typedef struct func_802B67B0_S3 func_802B67B0_S3;
@@ -427,23 +394,7 @@ struct ALSound {
     u8 flags;
 };
 struct ALSound;
-struct ALVoiceState_s_func_802B1814_de;
-struct ALVoiceState_s_func_802B1814_de {
-    struct ALVoiceState_s_func_802B1814_de *next;
-    char voice[0x1C];
-    struct ALSound *sound;
-    s32 envEndTime;
-    f32 pitch;
-    f32 vibrato;
-    u8 envGain;
-    u8 channel;
-    u8 key;
-    u8 velocity;
-    u8 envPhase;
-    u8 phase;
-    u8 tremelo;
-    u8 flags;
-};
+struct ALVoiceState;
 
 struct func_802B67B0_S1;
 struct func_802B67B0_S1 {
@@ -510,8 +461,8 @@ struct ALEvent10 {
 struct ALEvent10;
 typedef struct ALEvent10 ALEvent10;
 
-struct ALSeqPlayer_func_802B0C94_de;
-struct ALSeqPlayer_func_802B0C94_de {
+struct ALSeqPlayer;
+struct ALSeqPlayer {
     ALPlayer_s node;
     void *drvr;
     void *target;
@@ -528,9 +479,9 @@ struct ALSeqPlayer_func_802B0C94_de {
     ALEventQueue evtq;
     ALMicroTime frameTime;
     ALChanState10 *chanState;
-    ALVoiceState_s38 *vAllocHead;
-    ALVoiceState_s38 *vAllocTail;
-    ALVoiceState_s38 *vFreeList;
+    ALVoiceState *vAllocHead;
+    ALVoiceState *vAllocTail;
+    ALVoiceState *vFreeList;
     Lane_ALOscInit initOsc;
     Lane_ALOscUpdate updateOsc;
     Lane_ALOscStop stopOsc;

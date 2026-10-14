@@ -12,7 +12,7 @@ extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);
 
 
 void func_802AFD00_de(void *arg0) {
-    struct ALSeqPlayer_func_802B0C94_de *player = arg0;
+    struct ALSeqPlayer *player = arg0;
     Message_func_802AF150_de sp10;
     s32 sp20;
     s32 field18;

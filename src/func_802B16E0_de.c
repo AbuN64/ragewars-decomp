@@ -27,7 +27,7 @@ void *func_802B16E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     ALSound_s *entry;
     u8 *bounds;
 
-    table = ((ALSeqPlayer_func_802B0C94_de *)arg0)->chanState[arg3 & 0xFF].instrument;
+    table = ((ALSeqPlayer *)arg0)->chanState[arg3 & 0xFF].instrument;
     high = table->soundCount;
     low = 1;
     if (table == 0) {

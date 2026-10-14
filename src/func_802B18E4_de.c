@@ -24,12 +24,12 @@ void func_802B18E4_de(void *arg0, void *arg1) {
         i++;
     } while (found == 0);
     i = 0;
-    if (((ALSeqPlayer_func_802B0C94_de *)arg0)->maxChannels != 0) {
+    if (((ALSeqPlayer *)arg0)->maxChannels != 0) {
         do {
             func_802B1A40_de(arg0, i);
             func_802B1AC0_de(arg0, found, i);
             i += 1;
-        } while (i < ((ALSeqPlayer_func_802B0C94_de *)arg0)->maxChannels);
+        } while (i < ((ALSeqPlayer *)arg0)->maxChannels);
     }
     if (((ALBank_s *)arg1)->percussion != 0) {
         func_802B1A40_de(arg0, i);

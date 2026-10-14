@@ -11,7 +11,7 @@
 
 
 
-s16 func_802B1814_de(ALVoiceState_s_func_802B1814_de *vs, ALSeqPlayer_func_802B1814_de *seqp)
+s16 func_802B1814_de(ALVoiceState *vs, ALSeqPlayer *seqp)
 {
     u32 t1, t2;
 

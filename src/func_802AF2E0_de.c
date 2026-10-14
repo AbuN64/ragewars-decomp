@@ -6,11 +6,11 @@
 
 extern void *func_802B16E0_de(void *, s32, s32, s32);
 extern void *func_802B151C_de(void *, u8, u8, u8);
-extern ALVoiceState_s *func_802B1680_de(ALSeqPlayer *, u8, u8);
+extern ALVoiceState *func_802B1680_de(ALSeqPlayer *, u8, u8);
 extern s32 func_802B3000_de(ALSynth_func_802B3000_de *, ALVoice_s_func_802B3000_de *, ALVoiceConfig_s *);
 
 extern s32 func_802B18A4_de(void *, void *);
-extern s16 func_802B1814_de(ALVoiceState_s_func_802B1814_de *, ALSeqPlayer_func_802B1814_de *);
+extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);
 extern s32 func_802B1888_de(void *, s32);
 extern void func_802B35E0_de(ALSynth_func_802B3000_de *, ALVoice_s_func_802B3000_de *, void *, f32, s16, u8, u8, s32);
 extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);
@@ -26,10 +26,10 @@ extern void func_802BAC50_de(void *, void *, s32);
  * callee-specific voice/player views share their measured O32 prefixes. */
 void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
 {
-    ALSeqPlayer_func_802B0C94_de *seqp = object;
+    ALSeqPlayer *seqp = object;
     ALEvent10 *event = (ALEvent10 *)message;
     ALVoice_s *voice;
-    ALVoiceState_s38 *vs;
+    ALVoiceState *vs;
     s32 status;
     u8 chan;
     u8 key;
@@ -40,7 +40,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
     s16 vol;
     ALEvent10 evt;
     ALMicroTime deltaTime;
-    ALVoiceState_s38 *vstate;
+    ALVoiceState *vstate;
     u8 pan;
 
     status = event->msg.midi.status & 0xF0;
@@ -129,7 +129,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
             pitch = vstate->pitch * seqp->chanState[chan].pitchBend * vstate->vibrato;
             fxmix = seqp->chanState[chan].fxmix;
             pan = func_802B18A4_de(vstate, seqp);
-            vol = func_802B1814_de((ALVoiceState_s_func_802B1814_de *)vstate, (ALSeqPlayer_func_802B1814_de *)seqp);
+            vol = func_802B1814_de((ALVoiceState *)vstate, (ALSeqPlayer *)seqp);
             deltaTime = sound->envelope->attackTime;
             func_802B35E0_de(seqp->drvr, (ALVoice_s_func_802B3000_de *)voice, sound->wavetable, pitch, vol, pan, fxmix, deltaTime);
             evt.type = 6; /* AL_SEQP_ENV_EVT */
@@ -148,7 +148,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
             break;
         }
     case 0x80: /* AL_MIDI_NoteOff */
-        vstate = (ALVoiceState_s38 *)func_802B1680_de((ALSeqPlayer *)seqp, key, chan);
+        vstate = (ALVoiceState *)func_802B1680_de((ALSeqPlayer *)seqp, key, chan);
         if (!vstate)
             return;
         if (vstate->phase == 2)
@@ -159,18 +159,18 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
         }
         break;
     case 0xA0: /* AL_MIDI_PolyKeyPressure */
-        vstate = (ALVoiceState_s38 *)func_802B1680_de((ALSeqPlayer *)seqp, key, chan);
+        vstate = (ALVoiceState *)func_802B1680_de((ALSeqPlayer *)seqp, key, chan);
         if (!vstate)
             return;
         vstate->velocity = byte2;
-        func_802B3480_de(seqp->drvr, &vstate->voice, func_802B1814_de((ALVoiceState_s_func_802B1814_de *)vstate, (ALSeqPlayer_func_802B1814_de *)seqp),
+        func_802B3480_de(seqp->drvr, &vstate->voice, func_802B1814_de((ALVoiceState *)vstate, (ALSeqPlayer *)seqp),
                       func_802B1888_de(vstate, seqp->curTime));
         break;
     case 0xD0: /* AL_MIDI_ChannelPressure */
         for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
             if (vs->channel == chan) {
                 vs->velocity = byte1;
-                func_802B3480_de(seqp->drvr, &vs->voice, func_802B1814_de((ALVoiceState_s_func_802B1814_de *)vs, (ALSeqPlayer_func_802B1814_de *)seqp),
+                func_802B3480_de(seqp->drvr, &vs->voice, func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
                               func_802B1888_de(vs, seqp->curTime));
             }
         }
@@ -190,7 +190,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
             seqp->chanState[chan].vol = byte2;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if ((vs->channel == chan) && (vs->envPhase != 3)) {
-                    vol = func_802B1814_de((ALVoiceState_s_func_802B1814_de *)vs, (ALSeqPlayer_func_802B1814_de *)seqp);
+                    vol = func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp);
                     func_802B3480_de(seqp->drvr, &vs->voice, vol, func_802B1888_de(vs, seqp->curTime));
                 }
             }

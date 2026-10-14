@@ -23,7 +23,7 @@ extern void func_802B2FB0_de(s32, void *);
 
 
 void func_802AEAB0_de(void *arg0, InitParams *arg1) {
-    ALSeqPlayer_func_802B0C94_de *obj = arg0;
+    ALSeqPlayer *obj = arg0;
     InitParams *params = arg1;
     s32 context = params->context;
     s32 global = D_800D4070;
@@ -53,7 +53,7 @@ void func_802AEAB0_de(void *arg0, InitParams *arg1) {
     i = 0;
     if (params->count38 > 0) {
         {
-            ALVoiceState_s38 *records = (ALVoiceState_s38 *)allocation;
+            ALVoiceState *records = (ALVoiceState *)allocation;
             do {
                 records->next = obj->vFreeList;
                 obj->vFreeList = records;

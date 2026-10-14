@@ -11,9 +11,9 @@
 
 
 
-ALVoiceState_s *func_802B1680_de(ALSeqPlayer *seqp, u8 key, u8 channel)
+ALVoiceState *func_802B1680_de(ALSeqPlayer *seqp, u8 key, u8 channel)
 {
-    ALVoiceState_s *vs;
+    ALVoiceState *vs;
 
     for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
         if ((vs->key == key) && (vs->channel == channel) &&

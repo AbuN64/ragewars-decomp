@@ -31,13 +31,13 @@ static inline ALVoice_s *event_voice(Message_func_802AF150_de *event) {
 void func_802B1B14_de(void *arg0, void *arg1, s32 arg2) {
     ALEventListItem *cur;
     ALEventListItem *next;
-    ALVoiceState_s *object;
+    ALVoiceState *object;
     s32 type6;
     Entry802B6BE4 entry;
 
     object = ((ALVoice_s *)arg1)->clientPrivate;
     if (object->envPhase == 0) {
-        cur = (ALEventListItem *)((ALSeqPlayer *)arg0)->events.allocList.next;
+        cur = (ALEventListItem *)((ALSeqPlayer *)arg0)->evtq.allocList.next;
         if (cur != 0) {
             type6 = 6;
             do {
@@ -49,7 +49,7 @@ void func_802B1B14_de(void *arg0, void *arg1, s32 arg2) {
                                             cur->delta;
                     }
                     func_802B2450_de(cur);
-                    func_802B2480_de(cur, &((ALSeqPlayer *)arg0)->events);
+                    func_802B2480_de(cur, &((ALSeqPlayer *)arg0)->evtq);
                 }
                 cur = next;
             } while (cur != 0);
@@ -58,10 +58,10 @@ void func_802B1B14_de(void *arg0, void *arg1, s32 arg2) {
     object->velocity = 0;
     object->envPhase = 3;
     object->envGain = 0;
-    object->envEndTime = ((ALSeqPlayer *)arg0)->currentTime + arg2;
-    func_802B3470_de(((ALSeqPlayer *)arg0)->synth, arg1, 0);
-    func_802B3480_de(((ALSeqPlayer *)arg0)->synth, arg1, 0, arg2);
+    object->envEndTime = ((ALSeqPlayer *)arg0)->curTime + arg2;
+    func_802B3470_de(((ALSeqPlayer *)arg0)->drvr, arg1, 0);
+    func_802B3480_de(((ALSeqPlayer *)arg0)->drvr, arg1, 0, arg2);
     entry.type = 5;
     entry.object = arg1;
-    func_802B00D4_de(&((ALSeqPlayer *)arg0)->events, &entry, arg2);
+    func_802B00D4_de(&((ALSeqPlayer *)arg0)->evtq, &entry, arg2);
 }

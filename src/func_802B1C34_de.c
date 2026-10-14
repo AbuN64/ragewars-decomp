@@ -22,7 +22,7 @@ void func_802B1C34_de(void *arg0, void *arg1) {
     u16 type;
     s32 type16;
 
-    cur = (void *)((ALSeqPlayer_func_802B0C94_de *)arg0)->evtq.allocList.next;
+    cur = (void *)((ALSeqPlayer *)arg0)->evtq.allocList.next;
     if (cur != 0) {
         type16 = 0x16;
         do {
@@ -30,20 +30,20 @@ void func_802B1C34_de(void *arg0, void *arg1) {
             next = (void *)cur->node.next;
             if ((type == 0x16 || type == 0x17) &&
                 ((ALEvent10 *)&cur->evt)->msg.osc.vs == arg1) {
-                ((ALSeqPlayer_func_802B0C94_de *)arg0)->stopOsc(
+                ((ALSeqPlayer *)arg0)->stopOsc(
                     ((ALEvent10 *)&cur->evt)->msg.osc.oscState);
                 func_802B2450_de(cur);
                 if (next != 0) {
                     next->delta = next->delta +
                                         cur->delta;
                 }
-                func_802B2480_de(cur, &((ALSeqPlayer_func_802B0C94_de *)arg0)->evtq.freeList.next);
+                func_802B2480_de(cur, &((ALSeqPlayer *)arg0)->evtq.freeList.next);
                 if ((short)type == type16) {
-                    ((ALVoiceState_s38 *)arg1)->flags &= 0xFE;
+                    ((ALVoiceState *)arg1)->flags &= 0xFE;
                 } else {
-                    ((ALVoiceState_s38 *)arg1)->flags &= 0xFD;
+                    ((ALVoiceState *)arg1)->flags &= 0xFD;
                 }
-                if (((ALVoiceState_s38 *)arg1)->flags == 0) {
+                if (((ALVoiceState *)arg1)->flags == 0) {
                     break;
                 }
             }

@@ -7,7 +7,7 @@
 
 
 void func_802B1990_de(void *arg0) {
-    ALSeqPlayer_func_802B0C94_de *player = arg0;
+    ALSeqPlayer *player = arg0;
     s32 i;
     s32 off;
     s32 c40, c7f, c5, cc8;

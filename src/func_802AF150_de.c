@@ -19,7 +19,7 @@ extern char D_800C7354_de[];
 
 /** Dispatch the current object message and forward any resulting value. */
 void func_802AF150_de(void *rawPlayer) {
-    struct ALSeqPlayer_func_802B0C94_de *arg0 = rawPlayer;
+    struct ALSeqPlayer *arg0 = rawPlayer;
     Message_func_802AF150_de message;
     Message_func_802AF150_de output;
     s32 value1;

@@ -3,7 +3,7 @@
 #include "span_1000/code_802B0388.h"
 #include "common/unused.h"
 struct ALSequencePlayer {
-    ALSeqPlayer_func_802B0C94_de base;
+    ALSeqPlayer base;
     ALSeqMarker *loopStart;
     ALSeqMarker *loopEnd;
     s32 loopCount;
@@ -18,10 +18,10 @@ struct ALSequenceLoopEvent {
 extern char D_800C7440[];      /* "EX" */
 extern char D_800C7444[];      /* "audio/seqplayer.c" */
 
-extern void func_802B0A90_de(ALSeqPlayer_func_802B0C94_de *);                        /* __handleNextSeqEvent */
-extern void func_802B0C94_de(ALSeqPlayer_func_802B0C94_de *, ALEvent10 *);             /* __handleMIDIMsg */
-extern void func_802B1DEC_de(ALSeqPlayer_func_802B0C94_de *, ALEvent10 *);             /* __handleMetaMsg */
-extern void func_802B1E50_de(ALSeqPlayer_func_802B0C94_de *, f32);                   /* __setUsptFromTempo */
+extern void func_802B0A90_de(ALSeqPlayer *);                        /* __handleNextSeqEvent */
+extern void func_802B0C94_de(ALSeqPlayer *, ALEvent10 *);             /* __handleMIDIMsg */
+extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent10 *);             /* __handleMetaMsg */
+extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
 extern void func_802B00D4_de(ALEventQueue *, ALEvent10 *, ALMicroTime); /* alEvtqPostEvent */
 extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent10 *);    /* alEvtqNextEvent */
 extern void func_802B0258_de(ALEventQueue *, s16);                 /* alEvtqFlushType */
@@ -29,10 +29,10 @@ extern void func_802B36F0_de(void *, ALVoice_s *);                   /* alSynSto
 extern void func_802B3200_de(void *, ALVoice_s *);                   /* alSynFreeVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
 extern void func_802B33E0_de(void *, ALVoice_s *, f32);              /* alSynSetPitch */
-extern s16 func_802B1814_de(ALVoiceState_s38 *, ALSeqPlayer_func_802B0C94_de *);        /* __vsVol */
-extern ALMicroTime func_802B1888_de(ALVoiceState_s38 *, ALMicroTime);  /* __vsDelta */
-extern void func_802B1B14_de(ALSeqPlayer_func_802B0C94_de *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
-extern void func_802B18E4_de(ALSeqPlayer_func_802B0C94_de *, void *);               /* __initFromBank */
+extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);        /* __vsVol */
+extern ALMicroTime func_802B1888_de(ALVoiceState *, ALMicroTime);  /* __vsDelta */
+extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
+extern void func_802B18E4_de(ALSeqPlayer *, void *);               /* __initFromBank */
 extern void func_802BAC50_de(char *, char *, s32);                 /* __assert */
 
 ALMicroTime func_802B0554_de(void *node)
@@ -41,7 +41,7 @@ ALMicroTime func_802B0554_de(void *node)
     ALEvent10 evt;
     ALVoice_s *voice;
     ALMicroTime delta;
-    ALVoiceState_s38 *vs;
+    ALVoiceState *vs;
     void *oscState;
     f32 oscValue;
     u8 chan;
@@ -61,14 +61,14 @@ ALMicroTime func_802B0554_de(void *node)
             voice = seqp->base.nextEvent.msg.note.voice;
             func_802B36F0_de(seqp->base.drvr, voice);
             func_802B3200_de(seqp->base.drvr, voice);
-            vs = (ALVoiceState_s38 *)voice->clientPrivate;
+            vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
                 func_802B1C34_de(&seqp->base, vs);
             func_802B156C_de(&seqp->base, voice);
             break;
         case 6: /* AL_SEQP_ENV_EVT */
             voice = seqp->base.nextEvent.msg.vol.voice;
-            vs = (ALVoiceState_s38 *)voice->clientPrivate;
+            vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->envPhase == 0)
                 vs->envPhase = 1;
             delta = seqp->base.nextEvent.msg.vol.delta;
