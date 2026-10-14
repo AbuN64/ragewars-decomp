@@ -2,6 +2,9 @@
 #define UNBAKE_SPAN_1000_CODE_802AFEAC_H
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "shared/audio_initialize.h"
+#include "types.h"
 struct func_802B510C_S2;
 /* unbake published declaration: published_275d50f0b6f32f21e20b32ac */
 struct func_802B510C_S2 {
@@ -88,5 +91,40 @@ struct func_802B52B0_S1 {
     char pad0[0x8];
     Node_func_80239AF4_de * unk8;
 };
+
+typedef struct SeqFreeVoice { struct SeqFreeVoice *next; char pad[0x34]; } SeqFreeVoice;
+typedef struct SeqInitConfig {
+    s32 voices, events;
+    u8 channels, debug;
+    u8 pad[2];
+    void *heap;
+    void *initOsc, *updateOsc, *stopOsc;
+} SeqInitConfig;
+typedef struct SeqInitPlayer {
+    void *next;
+    struct SeqInitPlayer *self;
+    void *callback;
+    char padC[8];
+    void *driver;
+    void *target;
+    s32 time;
+    void *bank;
+    s32 uspt, delta, state;
+    u16 mask;
+    s16 volume;
+    u8 channels, debug;
+    u8 pad36[2];
+    s16 eventType;
+    char pad3A[0xE];
+    char queue[0x14];
+    s32 frameTime;
+    void *channelState;
+    SeqFreeVoice *allocHead, *allocTail, *freeList;
+    void *initOsc, *updateOsc, *stopOsc;
+    void *loopStart, *loopEnd;
+    s32 loopCount;
+} SeqInitPlayer;
+extern char D_002B0554;
+extern void func_802B1990_de(void *);
 
 #endif

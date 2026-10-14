@@ -1,3 +1,4 @@
+#include "shared/gameplay_transition.h"
 #include "span_1000/code_8022C894.h"
 #include "types.h"
 
@@ -24,7 +25,7 @@ void func_8022D4BC_de(void *arg0)
     ((ObjectLinks1458_2 *)(arg0))->unk_58 = D_800C2DC0_de;
     return;
   }
-  func_802636B0_de((char *)arg0 + 0x688);
+  func_802636B0_de(((Shared_ActorView *)arg0)->profile);
   ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) arg0)->unk_1454))->unk_23C = 0;
   ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) arg0)->unk_1454))->unk_240 = 0;
 }

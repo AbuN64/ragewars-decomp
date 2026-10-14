@@ -69,7 +69,7 @@ func_802B7B80_us
 func_802B7C50_de
 #endif
 #endif
-((char *)o + 0xD8);
+(((Obj80264124 *)o)->status);
         
 #if defined(VERSION_EU)
 func_802B7EF0_eu
@@ -92,7 +92,7 @@ func_802B7B80_us
 func_802B7C50_de
 #endif
 #endif
-((char *)o + 0xD8);
+(((Obj80264124 *)o)->status);
         if (func_802B7FD8_de(&D_8010FC00, o + 0xD8, arg0->enabled) == 0) {
             ((Obj80264124 *)o)->active = 1;
         }

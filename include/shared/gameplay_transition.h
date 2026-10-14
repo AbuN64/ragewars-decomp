@@ -3,6 +3,7 @@
 #define RW_GAMEPLAY_TRANSITION_H
 
 #include "types.h"
+#include "span_1000/code_802A6AC0.h"
 
 #include "common/types_8a8189af7b05.h"
 #include "shared/level_actor.h"
@@ -50,7 +51,8 @@ struct Shared_ActorView {
     s16 action; /* +0x650: src/func_8021B468.c */
     char pad652[6];
     f32 actionTimer; /* 0x658 */
-    char pad65C[0x698 - 0x65C];
+    char pad65C[0x688 - 0x65C];
+    char profile[0x10]; /* 0x688 */
     void *controller; /* +0x698: src/func_8021B468.c */
     char pad69C[8];
     f32 lateralInput; /* 0x6A4 */
@@ -85,7 +87,10 @@ struct Shared_ActorView {
     s32 field864;
     s32 field868;
     s32 effectId; /* 0x86C */
-    u8 pad870[0xE54 - 0x870];
+    u8 pad870[0x938 - 0x870];
+    char strokes[0xD40 - 0x938]; /* 0x938 */
+    Record_func_802A6F68_de record; /* 0xD40 */
+    u8 padE2C[0xE54 - 0xD40 - sizeof(Record_func_802A6F68_de)];
     f32 effectTransform[16]; /* 0xE54 */
     f32 effectOffsetTransform[16]; /* 0xE94 */
     u8 padED4[0x11B4 - 0xED4];
@@ -145,7 +150,9 @@ struct Shared_ActorView {
     u8 effectPayload[0x64]; /* 0x13EC */
     s32 remote; /* 0x1450 */
     void *owner; /* 0x1454 */
-    u8 pad1458[0x16C4 - 0x1458];
+    u8 pad1458[0x1600 - 0x1458];
+    f32 transform1600[16]; /* 0x1600 */
+    u8 pad1640[0x16C4 - 0x1640];
     Vec3 resetPosition; /* 0x16C4: previous reset position */
     u8 pad16D0[4];
     s32 field16D4;

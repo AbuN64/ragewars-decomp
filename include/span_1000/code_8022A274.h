@@ -310,7 +310,7 @@ typedef struct ObjectLinks16E4_3 ObjectLinks16E4_3;
 extern void func_8022A8C8_de(char *object, f32 arg1);
 
 /* unbake published declaration: published_a59bd593ee05ef71f12112d0 */
-extern void func_8022A928_de(void *arg0, int arg1);
+extern void func_8022A928_de(func_8022A918_S1 *arg0, int arg1);
 
 struct ObjectLinks16E4_3;
 /* unbake published declaration: published_a7f94a89ca70a352fce6a235 */

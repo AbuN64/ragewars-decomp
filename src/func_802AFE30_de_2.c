@@ -1,42 +1,11 @@
 #include "types.h"
 #include "n64sdk.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_802AFEAC.h"
 
-typedef struct SeqFreeVoice { struct SeqFreeVoice *next; char pad[0x34]; } SeqFreeVoice;
-typedef struct SeqInitConfig {
-    s32 voices, events;
-    u8 channels, debug;
-    u8 pad[2];
-    void *heap;
-    void *initOsc, *updateOsc, *stopOsc;
-} SeqInitConfig;
-typedef struct SeqInitPlayer {
-    void *next;
-    struct SeqInitPlayer *self;
-    void *callback;
-    char padC[8];
-    void *driver;
-    void *target;
-    s32 time;
-    void *bank;
-    s32 uspt, delta, state;
-    u16 mask;
-    s16 volume;
-    u8 channels, debug;
-    u8 pad36[2];
-    s16 eventType;
-    char pad3A[0xE];
-    char queue[0x14];
-    s32 frameTime;
-    void *channelState;
-    SeqFreeVoice *allocHead, *allocTail, *freeList;
-    void *initOsc, *updateOsc, *stopOsc;
-    void *loopStart, *loopEnd;
-    s32 loopCount;
-} SeqInitPlayer;
 extern void *D_800D4070;
-extern char D_002B0554;
-extern void *func_802B0340_de(s32, s32, void *, s32, s32);
-extern void func_802B1990_de(void *);
+s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void func_802B2FB0_de(void *, void *);
 

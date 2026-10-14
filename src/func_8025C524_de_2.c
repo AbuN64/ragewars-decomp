@@ -1,34 +1,12 @@
 #include "types.h"
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_8025C544.h"
+#include "span_1000/code_802AE028.h"
+#include "span_C76B0/data.h"
 
-struct AudioHeapD844 {
-    u8 *start;
-    u8 *cursor;
-    u32 size;
-};
-struct AudioRootD844 {
-    char pad0[0x1DA8];
-    struct AudioHeapD844 heap;
-};
-struct AudioParamsD844 {
-    s32 count38, count1C;
-    u8 kind;
-    u8 pad9[3];
-    struct AudioHeapD844 *context;
-    s32 value10, value14, value18;
-};
-struct AudioStateD844 {
-    struct AudioRootD844 *root;
-    char pad4[0xC];
-    void *allocation;
-    void *player;
-    s32 mode, flags, unused20, timer, index, unused2C;
-    f32 first, second;
-    s32 counter;
-    f32 third, fourth;
-};
-extern f32 D_800C3FF8_de, D_800C3FFC_de;
-extern void *func_802B0340_de(s32, s32, struct AudioHeapD844 *, s32, s32);
-extern void func_802AEAB0_de(void *, struct AudioParamsD844 *);
+s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
+void func_802AEAB0_de(void *arg0, InitParams *arg1);
 
 void func_8025D844_de(struct AudioStateD844 *state, struct AudioRootD844 *root) {
     struct AudioParamsD844 params;

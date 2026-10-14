@@ -27,5 +27,5 @@ void func_8022B3D0_de(char *arg0, s32 arg1, Vec3 *arg2) {
     func_80271F34_de(&offset, &offset, &actor->targetPosition);
     func_80273448_de(&matrix, offset.x, offset.y, offset.z);
     func_80273D6C_de(&matrix);
-    func_8027027C_de(&matrix, (char *)arg0 + 0x1600);
+    func_8027027C_de(&matrix, actor->transform1600);
 }

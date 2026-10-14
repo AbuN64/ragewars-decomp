@@ -3,6 +3,8 @@
 #include "audio_callbacks.h"
 #include "../types.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 /* unbake published declaration: published_046f9b91cdb88c064d3a1184 */
 extern float D_800C788C_de;
 
@@ -211,5 +213,21 @@ struct ALFx {
 
 /* unbake published declaration: published_eefcfc2bee3410ddf64c4f2b */
 extern float D_800C7740_de;
+
+typedef struct ALFilter_u1 {
+    struct ALFilter_u1 *source;
+    ALCmdHandler handler;
+    void *setParam;
+    s16 inp;
+    s16 outp;
+    s32 type;
+} ALFilter_u1;
+typedef struct ALSave_u1 {
+    ALFilter_u1 filter;
+    s32 dramout;
+    s32 first;
+} ALSave_u1;
+extern char D_800C8DB0_eu_x[];
+extern char D_800C8DB4_eu_x[];
 
 #endif

@@ -1,4 +1,3 @@
-/* osCartRomInit, drafted from ultralib src/io/cartrominit.c (the 2.0I branch, before 2.0J). */
 #include "types.h"
 
 typedef struct OSPiHandle_s {

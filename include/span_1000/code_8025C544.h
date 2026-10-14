@@ -3,6 +3,8 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "types.h"
 /* Sound voices move between the available and playing lists. */
 typedef struct SoundVoicePool {
     IntrusiveList available;
@@ -459,6 +461,33 @@ struct func_8025CAD0_S1 {
     void * unk14;
     char pad14[0x28 - 0x14 - sizeof(void*)];
     s32 unk28;
+};
+
+struct AudioHeapD844 {
+    u8 *start;
+    u8 *cursor;
+    u32 size;
+};
+struct AudioRootD844 {
+    char pad0[0x1DA8];
+    struct AudioHeapD844 heap;
+};
+struct AudioParamsD844 {
+    s32 count38, count1C;
+    u8 kind;
+    u8 pad9[3];
+    struct AudioHeapD844 *context;
+    s32 value10, value14, value18;
+};
+struct AudioStateD844 {
+    struct AudioRootD844 *root;
+    char pad4[0xC];
+    void *allocation;
+    void *player;
+    s32 mode, flags, unused20, timer, index, unused2C;
+    f32 first, second;
+    s32 counter;
+    f32 third, fourth;
 };
 
 #endif

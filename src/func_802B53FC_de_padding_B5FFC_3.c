@@ -1,8 +1,10 @@
 #include "types.h"
 #include "gbi.h"
-extern f32 D_800C7870_de, D_800C7874_de;
-extern void func_802B6C6C_de(f32 [4][4]), func_802B6CBC_de(f32 [4][4], void *);
-extern f32 func_802B72B0_de(f32);
+#include "common/types_1dc8418c21db.h"
+#include "resident_event_handler.h"
+#include "shared/func_8027AD4C_de_closed.h"
+#include "span_C76B0/data.h"
+void func_802B6CBC_de(f32 *arg0, s32 *arg1);
 void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
 {
     f32 matrix[4][4];
