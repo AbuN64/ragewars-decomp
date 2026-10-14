@@ -10,7 +10,6 @@ enum MatchEnd {
     MATCH_END_TAG_LIMIT,
     MATCH_END_POINT_TARGET
 };
-typedef struct World World;
 extern Game_func_8042D060_de D_8014561C;
 extern World D_80145040;
 extern s32 D_8014DD98;

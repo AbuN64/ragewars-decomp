@@ -11,9 +11,9 @@
 extern s32 D_8015375C;
 extern s32 D_800E28C8;
 
-s32 func_80409BDC_de(struct Record_func_80409BDC_de *record) {
+s32 func_80409BDC_de(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
         return D_800E28C8;
     }
-    return record->inner->unk4;
+    return record->owner->unk4;
 }

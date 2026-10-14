@@ -12,13 +12,13 @@ extern s32 D_8015375C;
 extern s32 D_800E28C8;
 extern void func_80404E28_de(s32);
 
-void func_80409F2C_de(struct Record_func_80409BDC_de *record) {
+void func_80409F2C_de(struct Shared_PakMenu *record) {
     s32 value;
 
     if (D_8015375C != 0) {
         value = D_800E28C8;
     } else {
-        value = record->inner->unk4;
+        value = record->owner->unk4;
     }
     func_80404E28_de(value);
 }

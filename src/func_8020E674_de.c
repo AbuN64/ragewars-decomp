@@ -3,7 +3,6 @@
 #include "span_1000/code_8020D370.h"
 #include "types.h"
 #include "common/unused.h"
-typedef struct World World;
 
 
 

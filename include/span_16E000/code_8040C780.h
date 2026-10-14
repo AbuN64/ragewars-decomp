@@ -125,8 +125,7 @@ struct Widget_func_8040CF8C_de {
     u32 colors[4];
 };
 
-struct Node_func_8040E7FC_de;
-typedef struct Node_func_8040E7FC_de Node_func_8040E7FC_de;
+struct MenuWidget;
 
 struct Tree;
 struct Tree {
@@ -264,13 +263,7 @@ extern void func_8040C948_de(void);
 
 extern void func_8040E894_de();
 
-struct Node_func_8040E7FC_de;
-struct Node_func_8040E7FC_de {
-    s32 unk0;
-    struct Node_func_8040E7FC_de *next;
-    u8 pad8[0xA];
-    u16 flags;
-};
+struct MenuWidget;
 
 struct BatchRec;
 struct Shape_typemap_165;

@@ -20,7 +20,7 @@ extern s32 D_80153760;
 extern s32 D_8014D4EC_de;
 extern s32 D_800E28C8;
 
-char *func_8040A09C_de(struct Record_func_80409BDC_de *menu) {
+char *func_8040A09C_de(struct Shared_PakMenu *menu) {
     s32 channel[2]; /* FAKEMATCH: unused second slot keeps channel in the frame */
     char *text;
     char *prompt; /* FAKEMATCH: copy-only local routes the switch result through its own register before text */
@@ -33,7 +33,7 @@ char *func_8040A09C_de(struct Record_func_80409BDC_de *menu) {
         if (D_8015375C != 0) {
             channel[0] = D_800E28C8;
         } else {
-            channel[0] = menu->inner->unk4;
+            channel[0] = menu->owner->unk4;
         }
         switch (channel[0]) {
         case 0:

@@ -12,16 +12,16 @@ extern s32 D_80153768;
 extern s32 D_8015375C;
 extern s32 D_800E28C8;
 extern s32 func_802645D0_de(s32);
-extern s32 func_80406178_de(struct Record_func_80409BDC_de *, s32, s32);
+extern s32 func_80406178_de(struct Shared_PakMenu *, s32, s32);
 
-static inline s32 func_80409BDC_de(struct Record_func_80409BDC_de *record) {
+static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
         return D_800E28C8;
     }
-    return record->inner->unk4;
+    return record->owner->unk4;
 }
 
-s32 func_8040B2C8_de(struct Record_func_80409BDC_de *record) {
+s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
     if (D_80153768 == 0) {
         if (func_80409BDC_de(record) != -1) {
             if (func_802645D0_de(func_80409BDC_de(record)) != 0) {

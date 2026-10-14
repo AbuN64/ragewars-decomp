@@ -179,17 +179,7 @@ extern double D_800C5680_de;
 
 typedef void ( *func_80299468_de_Callback)(signed int, signed int, signed int, signed int);
 
-struct Manager_func_80299468_de;
-struct Manager_func_80299468_de {
-    func_80299468_de_Callback callback;
-    s32 index;
-    s32 lowIndex;
-    void *entries;
-    char pad10[0x520];
-    s32 field530;
-    char pad534[8];
-    void *field53C;
-};
+struct ScreenManager;
 
 struct IntegerState530;
 struct IntegerState530 {
@@ -200,8 +190,7 @@ struct IntegerState530 {
 struct CacheRecAt540;
 typedef struct CacheRecAt540 CacheRecAt540;
 
-struct Menu_func_802991D4_de;
-typedef struct Menu_func_802991D4_de Menu_func_802991D4_de;
+struct ScreenManager;
 
 extern s32 func_802998E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
@@ -220,8 +209,7 @@ struct func_8029A8E0_S1 {
 
 extern void func_8029958C_de(s32 arg0);
 
-struct Manager_func_80299468_de;
-typedef struct Manager_func_80299468_de Manager_func_80299468_de;
+struct ScreenManager;
 
 extern double D_800C5668_de;
 
@@ -288,17 +276,7 @@ struct Entry_func_802991D4_de {
     char padC[0x10];
 };
 struct Entry_func_802991D4_de;
-struct Menu_func_802991D4_de;
-struct Menu_func_802991D4_de {
-    s32 (*callback)(s32 event, s32, s32, s32);
-    s32 current;
-    char pad8[4];
-    struct Entry_func_802991D4_de *entries;
-    char pad10[0x510];
-    s32 handled;
-    char pad524[4];
-    s32 locked;
-};
+struct ScreenManager;
 
 struct Manager_func_80298ECC_de;
 typedef struct Manager_func_80298ECC_de Manager_func_80298ECC_de;
@@ -322,19 +300,20 @@ extern void func_80298FE8_de();
 
 struct ScreenManager;
 struct ScreenManager {
-    s32 pad0;
+    s32 (*callback)(s32 event, s32, s32, s32);
     s32 current;
-    s32 pad8;
+    s32 lowIndex;
     struct Entry_func_802991D4_de *screens;
     s32 value;
     s32 limit;
     s32 screenCount;
     Rec_func_8024C92C_de slots[64];
-    s32 pad51C[2];
+    char pad51C[0x4];
+    s32 handled;
     s32 frames;
     s32 focus;
     s32 paging;
-    s32 pad530;
+    s32 field530;
     s32 field534;
     s32 field538;
     void *cache;

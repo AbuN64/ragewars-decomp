@@ -7,22 +7,7 @@
 struct Output;
 typedef struct Output Output;
 
-struct func_8023EBC4_S1;
-struct func_8023EBC4_S1 {
-    s32 unk0;
-    char pad0[0x88 - 0x0 - sizeof(s32)];
-    s32 unk88;
-    char pad88[0x9C - 0x88 - sizeof(s32)];
-    s32 unk9C;
-    char pad9C[0xB0 - 0x9C - sizeof(s32)];
-    s32 unkB0;
-    char padB0[0xC4 - 0xB0 - sizeof(s32)];
-    s32 unkC4;
-    char padC4[0xFC - 0xC4 - sizeof(s32)];
-    s32 unkFC;
-    char padFC[0x100 - 0xFC - sizeof(s32)];
-    s32 unk100;
-};
+struct World;
 
 struct Ray;
 typedef struct Ray Ray;
@@ -190,8 +175,7 @@ typedef struct CapsuleSweep CapsuleSweep;
 struct func_8023E844_S1;
 typedef struct func_8023E844_S1 func_8023E844_S1;
 
-struct func_8023EBC4_S1;
-typedef struct func_8023EBC4_S1 func_8023EBC4_S1;
+struct World;
 
 extern float D_800D0648;
 

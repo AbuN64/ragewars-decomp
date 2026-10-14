@@ -20,9 +20,9 @@ s32 func_8043E91C_de(void *arg0, void *arg1, void *arg2) {
 extern void func_80264770_de(s32 kind);
 extern void func_80404E28_de(s32 kind);
 
-void func_8043E948_de(struct Record_func_80409BDC_de *arg0)
+void func_8043E948_de(struct Shared_PakMenu *arg0)
 {
-    s32 kind = arg0->inner->unk4;
+    s32 kind = arg0->owner->unk4;
 
     func_80264770_de(kind);
     func_80404E28_de(kind);

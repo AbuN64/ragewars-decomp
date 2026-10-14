@@ -2,6 +2,7 @@
 #define UNBAKE_COMMON_TYPES_1DC8418C21DB_H
 #include "audio_callbacks.h"
 #include "types.h"
+#include "shared/pak_menu.h"
 #include "span_1000/code_802B7B80.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
@@ -303,9 +304,10 @@ struct MenuWidget {
     struct MenuWidget *sibling;
     struct MenuWidget *child;
     s16 resource;
-    char padE[2];
+    s16 field_0E;
     u8 alpha;
-    char pad11[3];
+    char pad11[0x1];
+    u16 flags;
     s16 x;
     s16 y;
     union { s16 width; s16 w; };
@@ -315,6 +317,18 @@ struct MenuWidget {
     struct MenuWidget *next;
     s32 field34;
     union { void *text; s32 image; s32 word38; };
+    char pad3C[0x8];
+    void *field_44;
+    u8 field_48;
+    u8 field_49;
+    u8 field_4A;
+    u8 field_4B;
+    u8 field_4C;
+    u8 field_4D;
+    u8 field_4E;
+    u8 field_4F;
+    u8 field_50;
+    u8 field_51;
 };
 
 struct MenuWidget;
@@ -3077,15 +3091,8 @@ struct Record_func_80439C80_de {
     s32 handle;
 };
 
-struct Record_func_80409BDC_de;
+struct Shared_PakMenu;
 struct PakMenuSlot;
-struct Record_func_80409BDC_de {
-    char pad[0x14];
-    void *dialogData; /* 0x14 */
-    char pad18[4];
-    struct SharedPlayer_func_80226A34_de *player; /* 0x1C */
-    struct PakMenuSlot *inner;
-};
 
 struct func_8022A5E4_S2;
 struct func_8022A5E4_S2 {
@@ -3352,9 +3359,20 @@ struct Triple_func_802683E0_de {
 
 struct World;
 struct World {
-    u8 pad000[0xFC];
+    s32 unk0;
+    char pad4[0x84];
+    s32 unk88;
+    char pad8C[0x10];
+    s32 unk9C;
+    char padA0[0x10];
+    s32 unkB0;
+    char padB4[0x10];
+    s32 unkC4;
+    char padC8[0x34];
     s32 state;
+    s32 unk100;
 };
+typedef struct World World;
 
 struct func_80251448_S1;
 struct func_80251448_S1 {

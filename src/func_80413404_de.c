@@ -6,12 +6,12 @@
 extern void func_802547E4_de(void *);
 extern void func_802A0748_de(void *, int, int);
 
-void func_80413404_de(Resource_func_80413404_de *res) {
+void func_80413404_de(OwnedImage *res) {
     if (res->flags & 1) {
-        func_802547E4_de(res->handle);
+        func_802547E4_de(res->pixels);
     }
-    if ((res->flags & 2) && res->size > 0) {
-        func_802547E4_de(res->data);
+    if ((res->flags & 2) && res->paletteCount > 0) {
+        func_802547E4_de(res->palette);
     }
     func_802A0748_de(res, 0, 32);
 }

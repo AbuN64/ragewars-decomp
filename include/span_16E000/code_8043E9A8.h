@@ -108,8 +108,8 @@ struct Options_func_8043EBE4_de {
     struct Player_func_8043EBE4_de players[8];
 };
 
-struct Record_func_80409BDC_de;
-extern void func_8043E948_de(struct Record_func_80409BDC_de *arg0);
+struct Shared_PakMenu;
+extern void func_8043E948_de(struct Shared_PakMenu *arg0);
 
 extern s32 func_8043E9A8_de(void *arg0, Obj8043EB20 *arg1);
 

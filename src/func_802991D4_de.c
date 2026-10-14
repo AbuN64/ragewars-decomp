@@ -10,7 +10,7 @@
 
 
 
-extern Menu_func_802991D4_de *D_8014D080;
+extern ScreenManager *D_8014D080;
 extern Element *func_80298170_de(s32 id);
 extern s32 func_80411DF0_de(s32 id);
 
@@ -20,7 +20,7 @@ extern s32 func_80411DF0_de(s32 id);
 
 
 static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    Menu_func_802991D4_de *manager;
+    ScreenManager *manager;
     s32 locked;
     s32 index;
     s32 minusOne;
@@ -28,12 +28,12 @@ static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
     s32 result;
 
     if (func_80411DF0_de(value) != 0) {
-        if (value != D_8014D080->entries[D_8014D080->current].owner) {
+        if (value != D_8014D080->screens[D_8014D080->current].owner) {
             return 0;
         }
     }
     manager = D_8014D080;
-    locked = manager->locked;
+    locked = manager->focus;
     index = manager->current;
     minusOne = -1;
     if ((value == locked) || (index == minusOne)) {
@@ -49,7 +49,7 @@ static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
         }
         D_8014D080->handled = saved;
     }
-    if (value == D_8014D080->entries[D_8014D080->current].primary->id) {
+    if (value == D_8014D080->screens[D_8014D080->current].primary->id) {
         result = func_80297A34_de(arg1, arg2, arg3, arg4);
     } else {
         result = func_80296E3C_de(value, arg1, arg2, arg3, arg4);
@@ -63,10 +63,10 @@ void func_802991D4_de(s32 id) {
     if (func_802997E4_de(func_80298170_de(id)->kind) == 0) {
         return;
     }
-    previous = D_8014D080->entries[D_8014D080->current].focus;
+    previous = D_8014D080->screens[D_8014D080->current].focus;
     if (previous != 0) {
         send_event(previous->id, 0x10,0,0,0);
     }
-    D_8014D080->entries[D_8014D080->current].focus = func_80298170_de(id);
+    D_8014D080->screens[D_8014D080->current].focus = func_80298170_de(id);
     send_event(id, 0xF,0,0,0);
 }

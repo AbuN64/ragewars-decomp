@@ -4,8 +4,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_80413728.h"
 #include "types.h"
-struct Record_func_80412710_de;
-typedef struct Record_func_80412710_de Record_func_80412710_de;
+struct MenuWidget;
 
 extern s32 func_804125A4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
@@ -38,15 +37,7 @@ struct Entry_func_80412898_de {
     u8 width;
 };
 
-struct Resource_func_80413404_de;
-struct Resource_func_80413404_de {
-    unsigned char unk0;
-    unsigned char flags;
-    char pad2[0xE];
-    int size;
-    void *data;
-    void *handle;
-};
+struct OwnedImage;
 
 extern s16 func_80413678_de(s16 *record);
 
@@ -70,25 +61,7 @@ struct Layout {
 
 extern s16 func_80413690_de(s16 *record);
 
-struct Record_func_80412710_de;
-struct Record_func_80412710_de {
-    s32 words_00[3];
-    s16 field_0C;
-    s16 field_0E;
-    s32 words_10[13];
-    void *field_44;
-    u8 field_48;
-    u8 field_49;
-    u8 field_4A;
-    u8 field_4B;
-    u8 field_4C;
-    u8 field_4D;
-    u8 field_4E;
-    u8 field_4F;
-    u8 field_50;
-    u8 field_51;
-    u8 pad_52[0xE];
-};
+struct MenuWidget;
 
 struct OwnedImage;
 struct OwnedImage {
@@ -101,8 +74,7 @@ struct OwnedImage {
     s32 unk1C;
 };
 
-struct Resource_func_80413404_de;
-typedef struct Resource_func_80413404_de Resource_func_80413404_de;
+struct OwnedImage;
 
 struct Cell_func_804122CC_de;
 typedef struct Cell_func_804122CC_de Cell_func_804122CC_de;

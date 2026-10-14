@@ -14,13 +14,13 @@ extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040A300_de(LayeredText *field, struct Record_func_80409BDC_de *holder) {
+s32 func_8040A300_de(LayeredText *field, struct Shared_PakMenu *holder) {
     char *text;
     s32 value;
     if (D_8015375C != 0) {
         field->text = D_800D7E14;
     } else {
-        value = holder->inner->unk4;
+        value = holder->owner->unk4;
         field->text = (u8 **)&D_800D36E4;
         text = (char *)*(u8 **)&D_800D36E4;
         func_802658E4_de(text + (func_80441FE8_de(field) - 1),

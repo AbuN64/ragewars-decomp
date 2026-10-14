@@ -1531,8 +1531,8 @@ typedef struct Handle8043E788 Handle8043E788;
 
 extern s32 func_8043E658_de(void *arg0, Handle8043E788 *arg1);
 
-struct Record_func_80409BDC_de;
-extern void func_8043E504_de(struct Record_func_80409BDC_de *arg0);
+struct Shared_PakMenu;
+extern void func_8043E504_de(struct Shared_PakMenu *arg0);
 
 struct PlayerSettings;
 typedef struct PlayerSettings PlayerSettings;

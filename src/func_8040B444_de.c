@@ -24,7 +24,7 @@ extern s32 func_80441FE8_de(LayeredText *);
 extern void func_802658E4_de(char *, char *, s32);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040B444_de(LayeredText *field, struct Record_func_80409BDC_de *holder) {
+s32 func_8040B444_de(LayeredText *field, struct Shared_PakMenu *holder) {
     char *text;
     s32 value;
 
@@ -36,7 +36,7 @@ s32 func_8040B444_de(LayeredText *field, struct Record_func_80409BDC_de *holder)
     if (D_8015375C != 0) {
         value = D_800E28C8;
     } else {
-        value = holder->inner->unk4;
+        value = holder->owner->unk4;
     }
     if (D_80153734 != 0) {
         field->text = D_800D394C;

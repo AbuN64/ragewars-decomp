@@ -64,18 +64,18 @@ extern s32 func_8040A6DC_de(void *unused, struct RecordRecAt24 *record);
 struct OwnerRecAt5D8V1;
 extern void func_80409A5C_de(struct OwnerRecAt5D8V1 *owner);
 
-struct Record_func_80409BDC_de;
-extern void func_80409F2C_de(struct Record_func_80409BDC_de *record);
+struct Shared_PakMenu;
+extern void func_80409F2C_de(struct Shared_PakMenu *record);
 
 struct RecordRecAt20V2;
 extern s32 func_80409EF4_de(struct RecordRecAt20V2 *record, s32 *out);
 
-struct Record_func_80409BDC_de;
-extern char *func_8040A09C_de(struct Record_func_80409BDC_de *menu);
+struct Shared_PakMenu;
+extern char *func_8040A09C_de(struct Shared_PakMenu *menu);
 
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040A300_de(struct LayeredText *field, struct Record_func_80409BDC_de *holder);
+s32 func_8040A300_de(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 
 #endif

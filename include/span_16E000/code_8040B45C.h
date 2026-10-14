@@ -10,8 +10,7 @@ extern int D_800CC37C;
 
 extern int D_800DE898;
 
-struct Record_func_8040B58C_de;
-typedef struct Record_func_8040B58C_de Record_func_8040B58C_de;
+struct Shared_PakMenu;
 
 extern void func_8040C09C_de();
 
@@ -49,13 +48,7 @@ struct ModeRecAt8 {
 
 extern int D_800CC378;
 
-struct Record_func_8040B58C_de;
-struct Record_func_8040B58C_de {
-    char pad0[0x1C];
-    ObjRecAt5DC *player;
-    PakMenuSlot *inner;
-    void *unk24;
-};
+struct Shared_PakMenu;
 
 struct NodeRecAt2A8;
 struct NodeRecAt2A8 {
@@ -95,9 +88,9 @@ extern void func_8040BBB0_de();
 
 extern void func_8040B84C_de(void);
 
-struct Record_func_80409BDC_de;
+struct Shared_PakMenu;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_8040B444_de(struct LayeredText *field, struct Record_func_80409BDC_de *holder);
+s32 func_8040B444_de(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 
 #endif

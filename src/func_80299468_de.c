@@ -8,7 +8,7 @@
 
 
 
-extern Manager_func_80299468_de *D_8014D080;
+extern ScreenManager *D_8014D080;
 
 extern void func_802547E4_de(void *arg0);
 
@@ -16,27 +16,27 @@ extern void func_802547E4_de(void *arg0);
 
 
 void func_80299468_de(void) {
-    Manager_func_80299468_de *manager;
+    ScreenManager *manager;
     s32 lowIndex;
     s32 one;
 
     manager = D_8014D080;
     lowIndex = manager->lowIndex;
-    if (manager->index >= lowIndex) {
+    if (manager->current >= lowIndex) {
         one = 1;
         do {
             manager->field530 = one;
             func_80298ECC_de();
             manager = D_8014D080;
-        } while (manager->index >= lowIndex);
+        } while (manager->current >= lowIndex);
     }
     if (D_8014D080->callback != 0) {
         D_8014D080->callback(0xE05, 0, 0, 0);
     }
-    if (D_8014D080->field53C != 0) {
-        func_802547E4_de(D_8014D080->field53C);
+    if (D_8014D080->cache != 0) {
+        func_802547E4_de(D_8014D080->cache);
     }
-    func_802547E4_de(D_8014D080->entries);
+    func_802547E4_de(D_8014D080->screens);
     func_802547E4_de(D_8014D080);
     D_8014D080 = 0;
     func_8029AAAC_de();

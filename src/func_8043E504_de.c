@@ -10,7 +10,7 @@ extern s32 D_800E28C0;
 
 
 
-void func_8043E504_de(struct Record_func_80409BDC_de *arg0) {
-    func_80264770_de(arg0->inner->unk4);
+void func_8043E504_de(struct Shared_PakMenu *arg0) {
+    func_80264770_de(arg0->owner->unk4);
     D_800E28C0 = 0;
 }

@@ -16,7 +16,7 @@ extern void func_80253908_de(s32);
 extern void func_80253838_de(s32, void *);
 /* Save the small controller-pak record when capacity allows, release the
  * pending resources, and show the channel-specific success/error dialog. */
-s32 func_80407290_de(s32 unused, struct Record_func_80409BDC_de *menu)
+s32 func_80407290_de(s32 unused, struct Shared_PakMenu *menu)
 {
     struct SharedPlayer_func_80226A34_de *player;
     char extension[8];
@@ -27,7 +27,7 @@ s32 func_80407290_de(s32 unused, struct Record_func_80409BDC_de *menu)
     s32 attempted = 0;
     if (D_8015375C == 0) {
         player = menu->player;
-        channel = menu->inner->unk4;
+        channel = menu->owner->unk4;
     } else {
         player = 0;
         channel = D_800E28C8;

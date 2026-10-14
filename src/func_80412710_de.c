@@ -13,15 +13,15 @@
 
 extern s32 func_80299958_de(void);
 extern void *func_80411DCC_de(s32 index);
-extern Record_func_80412710_de *func_8040EC30_de(s32 arg0, s32 arg1);
+extern MenuWidget *func_8040EC30_de(s32 arg0, s32 arg1);
 extern void *func_8025305C_de(s32);
 extern void func_802A0748_de(void *, s32, s32);
-extern void func_8040ED38_de(s32 arg0, s32 arg1, Record_func_80412710_de *arg2, Record_func_80412710_de *arg3);
+extern void func_8040ED38_de(s32 arg0, s32 arg1, MenuWidget *arg2, MenuWidget *arg3);
 
 s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6) {
-    Record_func_80412710_de *source;
+    MenuWidget *source;
     s32 context;
-    Record_func_80412710_de *result;
+    MenuWidget *result;
     s32 size;
     void *cells;
 
