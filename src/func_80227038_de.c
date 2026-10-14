@@ -19,18 +19,15 @@ typedef struct Shared_func_80227014_S8 func_80227014_S8;
 typedef struct Shared_func_80227014_S9 SharedRecAt564V3;
 typedef struct Shared_func_80227014_S10 func_80227014_S10;
 typedef struct Shared_func_80227014_S11 func_80227014_S11;
-typedef struct Shared_func_80227014_S7 SharedRecAt18;
 typedef struct Shared_func_80227014_S13 func_80227014_S13;
 typedef struct Shared_func_80227014_S14 SharedRecAt564V2;
 typedef struct Shared_func_80227014_S10 func_80227014_S15;
 typedef struct Shared_func_80227014_S16 func_80227014_S16;
-typedef struct Shared_func_80227014_S7 SharedRecAt18;
 typedef struct Shared_func_80227014_S18 func_80227014_S18;
 typedef struct Shared_func_80227014_S19 func_80227014_S19;
 typedef struct Shared_func_80227014_S20 SharedRecAt564V4;
 typedef struct Shared_func_80227014_S10 func_80227014_S21;
 typedef struct Shared_func_80227014_S22 func_80227014_S22;
-typedef struct Shared_func_80227014_S7 SharedRecAt18;
 
 s32 func_80214178_de(void *, void *, s32);
 void func_80218464_de(void *);
