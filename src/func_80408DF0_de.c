@@ -35,7 +35,7 @@ extern char D_0044E4B0[];
 extern char D_0044E4D4[];
 extern char D_0044FFA4[];
 
-extern void func_80264248_de(PakMenuSlot *slot);
+extern void func_80264248_de(Shape *arg0);
 extern void func_802647E8_de(PakMenuSlot *slot, s32 mode);
 extern void func_80264788_de(s32 ch);
 extern void func_8044D528_de(char *, s32, s32);

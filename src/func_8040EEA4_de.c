@@ -6,7 +6,7 @@
 
 
 
-extern struct Tree_func_8040EEA4_de *func_8040ECA8_de(struct Tree_func_8040EEA4_de *node, s32 id);
+extern struct Tree *func_8040ECA8_de(struct Tree *node, s32 id);
 
 static inline struct Tree_func_8040EEA4_de *findPredecessor(struct Tree_func_8040EEA4_de *node, s32 id) {
     s32 childId;

@@ -6,7 +6,7 @@
 extern char *D_8011FECC;
 extern char D_800DCD60[];
 extern void func_80253908_de(s32 a);
-extern void func_80253838_de(s32, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void **func_8025343C_de(s32, s32, s32, char *);
 extern void func_802A001C_de(void *, s32, s32);
 

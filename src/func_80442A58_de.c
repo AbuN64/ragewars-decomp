@@ -22,7 +22,7 @@ char *func_80442A58_de(char *member) {
 
 
 extern void func_80255ED8_de(struct List_func_80442A60_de *, struct ItemRecAt20V2 *);
-extern void func_80253838_de(s32, s32);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRecAt20V2 *item) {
     struct StateRecAtBCV2 *state;

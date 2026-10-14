@@ -139,7 +139,7 @@ finish:
     func_8022CC34_de(arg0, arg1);
 }
 
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_802231D4_de(s32, s32, void *);
 extern void func_802233F0_de(s32 arg0, s32 arg1, void *arg2);
 extern s32 func_8024E62C_de(void *arg0);

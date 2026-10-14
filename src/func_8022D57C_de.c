@@ -3,7 +3,7 @@
 #include "span_1000/code_8022D56C.h"
 #include "types.h"
 
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_80449870_de(void *);
 
 

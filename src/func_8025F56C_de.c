@@ -20,7 +20,7 @@ extern s32 func_8028FDC8_de(s32, s32, s32 *);
 extern char *func_8028FDB4_de(s32 *, s32);
 extern void *func_80254480_de(s32, void *, s32);
 extern void *func_802BD3A0_de(void *, const void *, s32);
-extern void func_80253838_de(s32, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253D10_de(s32, void **, void *);
 extern s32 func_8025F0F4_us_rev1(void *, void *, s32, s32, s32, s32);
 extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;

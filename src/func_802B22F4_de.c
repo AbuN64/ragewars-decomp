@@ -1,7 +1,7 @@
 #include "span_1000/code_802B243C.h"
 #include "types.h"
 
-extern s32 func_802B235C_de(void *arg0);
+extern s32 func_802B235C_de(struct ALSeq_s *arg0);
 
 
 

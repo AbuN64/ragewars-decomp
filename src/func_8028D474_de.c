@@ -5,7 +5,7 @@
 extern void func_8028DA74_de(void *arg0);
 extern void * *func_8025193C_de(s32, s32, s32, s32, s32, s32, void *, void *, s32);
 extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
-extern void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 extern s32 D_00285160;
 extern char D_800C5290_de;

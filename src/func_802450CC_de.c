@@ -26,7 +26,7 @@ extern u32 func_80245850_de(void);
 
 
 extern void func_80245BC0_de(void);
-extern void func_80253838_de(s32, s32);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_8025476C_de(s32);
 
 void func_802450CC_de(void) {

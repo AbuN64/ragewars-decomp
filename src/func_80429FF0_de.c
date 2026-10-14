@@ -39,7 +39,7 @@ extern void func_804399D0(char *);
 #else
 extern void func_804397F0_auto(char *);
 #endif
-extern s32 func_8042B294_de(s32);
+extern int func_8042B294_de(int index);
 extern s32 func_8042B1B8_de(s32, s32);
 extern void func_804220A8_de(s32);
 extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);

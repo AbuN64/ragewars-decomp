@@ -56,7 +56,7 @@ extern void func_80246E44_de();
 extern void func_8024B2D0_de();
 extern void func_8024BE3C_de();
 extern struct Shape_typemap_165 * func_8025343C_de();
-extern void func_80253838_de();
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de();
 extern s32 func_80254284_de();
 extern void ** func_80254408_de();

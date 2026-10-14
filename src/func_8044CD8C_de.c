@@ -1,3 +1,4 @@
+#include "span_1000/code_8024E914.h"
 #include "shared/world.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -25,7 +26,7 @@ extern char D_800C5210_de[];
 extern void func_8024F294_de(ObjB *obj, s32 arg1);
 extern void *func_8024F6EC_de(ObjB *obj, s32 type);
 extern void func_802509A8_de(ObjA *obj, s32 arg1);
-extern void *func_802507AC_de(ObjA *obj, s32 type);
+extern void *func_802507AC_de(ResourceOwner *owner,s32 index);
 extern void **func_8025193C_de(s32, s32, s32, s32, s32, Level_func_8044CD8C_de *, void *, void *, s32);
 extern void func_80253754_de(s32, void *);
 extern void func_8026E158_de(void *handle);

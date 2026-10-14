@@ -32,7 +32,7 @@ f32 func_8024D284_de(void *);
 f32 func_8024E420_de(void *);
 f32 func_8024E464_de(void *);
 f32 func_80273F94_de(f32, f32);
-void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 f32 func_8027525C_de(void *, f32, f32);
 f32 func_80275DD4_de(void *, f32, f32);
 void * func_8028C050_de(void *, void *);

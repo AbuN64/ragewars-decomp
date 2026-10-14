@@ -16,7 +16,7 @@ extern f32 D_800C3E58_de;
 extern char D_00250C2C;
 extern char D_800C3E40_de;
 
-extern s32 func_802507AC_de(Owner_func_80250274_de *, s32);
+extern void *func_802507AC_de(ResourceOwner *owner,s32 index);
 extern s32 func_80251F6C_de(s32, s32, s32, s32, s32, void *, void *, void *, s32);
 extern void func_80253BBC_de(s32, s32);
 extern void func_8027892C_de(void *object, void *colors);

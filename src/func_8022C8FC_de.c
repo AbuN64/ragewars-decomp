@@ -8,7 +8,7 @@
    second axis dominates and 0xA65 or 0xA68 otherwise, by the sign of the dominant axis. */
 
 extern void func_8022404C_de(void *, void *);
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_802231D4_de(void *, void *, void *);
 extern void func_802233F0_de(void *, void *, void *);
 extern s32 func_802227F4_de(void *, void *, s32);

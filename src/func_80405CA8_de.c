@@ -16,7 +16,7 @@ void func_80405CA8_de(struct RecordRecAt1C *record) {
     }
 }
 /* Releases object resources and clears their handles. */
-void func_80253838_de(s32, s32);
+extern void func_80253838_de(void *arg0, void *arg1);
 /* extern */
 void func_80405CDC_de(struct RecordRecAt1C *arg0) {
     s32 temp_a1;

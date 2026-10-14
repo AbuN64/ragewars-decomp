@@ -14,7 +14,9 @@ extern struct EntryRecAt8V1 *D_80153C10;
 extern struct ResourceRecAt6 *D_8014D988;
 extern struct ChunkRecAt48C *D_80153C28;
 extern void *D_8014D98C[];
-extern void func_80411AF0_de(s32), func_8040F580_de(void), func_802A0EB0_de(void *);
+extern void func_80411AF0_de(s32 i);
+extern void func_8040F580_de(void);
+extern void func_802A0EB0_de(void *);
 extern void func_804118E4_de(s32), func_80410E1C_de(s32), func_80411D18_de(void);
 extern void func_802547E4_de(void *), func_802A0748_de(void *, s32, s32);
 

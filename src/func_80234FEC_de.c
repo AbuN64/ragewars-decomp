@@ -22,7 +22,7 @@ void func_802738C0_de(void *, f32);
 void func_80273A98_de(void *, f32);
 void func_80274244_de(f32 *, f32 *);
 
-void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 f32 func_80275DD4_de(void *, f32, f32);
 int func_802A23B4_de(void);
 int func_802A23F0_de(void);

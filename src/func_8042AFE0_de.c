@@ -16,7 +16,7 @@ extern struct MenuSettings D_801462C8;
 extern struct Screen_func_8042AFE0_de *D_800E4F60;
 extern char *D_800D34D4_de[];
 
-extern s32 func_8042B294_de(s32);
+extern int func_8042B294_de(int index);
 extern char *func_8042B1B8_de(s32, s32);
 extern void func_8028D380_de(void *, char *, char *, s32);
 extern char *func_802A0494_de(char *);

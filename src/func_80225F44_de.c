@@ -9,7 +9,7 @@
 #include "span_1000/code_80225D10.h"
 extern void func_802231D4_de(void *,void *,void *);
 extern s32 func_80214178_de(void *,void *,s32);
-extern void func_80274870_de(f32 *,f32,f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern f32 D_800C9514_de;
 extern f32 D_800C9FE8;
 extern Triple D_800C94DC_de;

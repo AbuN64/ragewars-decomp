@@ -21,7 +21,7 @@ extern char *D_800E1DA4[];
 #endif
 
 extern void *func_8040EC30_de(void *, s32);
-extern void *func_8042B294_de(s32);
+extern int func_8042B294_de(int index);
 extern s32 func_8042B1B8_de(void *, s32);
 extern void func_8028D380_de(char *, s32, char *, s32);
 extern char *func_802A0494_de(char *);

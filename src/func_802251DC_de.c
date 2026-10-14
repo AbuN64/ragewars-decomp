@@ -7,7 +7,7 @@
 #include "span_1000/code_80204E78.h"
 extern char D_800CED30;
 s32 func_8024E62C_de(void *);
-void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 /* Updates swimming turn, pitch, stride motion, sounds, and animation. */
 void func_802251DC_de(SharedPlayer *player, SharedPlayer *body) {
     Shared_Game *game;

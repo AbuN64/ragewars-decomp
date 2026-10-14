@@ -15,7 +15,7 @@ void func_80404D84_de(void) {
 
 /* Releases the save buffer and clears its global state. */
 extern void func_80253908_de(int);
-extern void func_80253838_de(int, int *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern int D_800E2850;
 extern int D_800E2854;
 extern int *D_800DE808;

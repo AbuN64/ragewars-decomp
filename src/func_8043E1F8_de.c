@@ -11,7 +11,7 @@
 
 extern s32 D_80146914;
 extern void func_80264788_de(s8);
-extern void func_80264248_de(PakMenuSlot *widget);
+extern void func_80264248_de(Shape *arg0);
 extern void func_802647E8_de(PakMenuSlot *, s32);
 
 s32 func_8043E1F8_de(s32 arg0, MenuRecAt20V2 *menu) {

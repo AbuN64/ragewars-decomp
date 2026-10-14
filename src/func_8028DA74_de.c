@@ -1,6 +1,6 @@
 #include "shared/world.h"
 
-extern void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 void func_8028DA74_de(Shared_World *world) {
     void *handle;

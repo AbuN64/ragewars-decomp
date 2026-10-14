@@ -2,7 +2,7 @@
 #include "types.h"
 #include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
-extern void func_80274870_de(f32 *,f32,f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_802231D4_de(SharedPlayer *,func_802165F8_S1 *,char *);
 extern char D_800CE7E4,D_800CE7FC,D_800CED30;
 extern f32 D_800D2988;

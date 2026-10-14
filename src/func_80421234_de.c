@@ -14,7 +14,7 @@ extern NumberPadScreen *D_800E4400;
 extern s8 D_80102B0D[];
 extern s32 func_80426004_de(s32);
 extern void *func_8040EC30_de(void *, s32);
-extern void func_8040E950_de(void *, s32);
+extern void func_8040E950_de(struct Widget_func_8040E67C_de *record, int enable);
 
 #if defined(VERSION_DE)
 enum { MENU_804212A4_941 = 935, MENU_804212A4_943 = 937, MENU_804212A4_945 = 939, MENU_804212A4_948 = 942 };

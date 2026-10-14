@@ -2,7 +2,7 @@
 #include "types.h"
 
 extern s32 D_800CBC18;
-extern void func_80264248_de(void *arg0);
+extern void func_80264248_de(Shape *arg0);
 extern s32 D_8010F328;
 extern s32 D_8010BC18[4];
 extern u8 D_8010B3F4;

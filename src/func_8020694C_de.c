@@ -3,7 +3,7 @@
 /** For each of the object's child slots, attach the child to the record and spawn its effect. */
 extern int D_800D297C;
 extern void *func_8024BFD4_de(void *, int);
-extern void func_8024AA18_de(void *, void *, void *);
+extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8026DA4C_de(void *, int, int, void *, int, int);
 
 

@@ -21,7 +21,7 @@ extern s32 D_800E51E4[];
 extern s32 D_800E51F8[];
 extern s32 D_800E5214[];
 extern s32 D_800E5240[];
-extern void *func_8042B294_de(s32);
+extern int func_8042B294_de(int index);
 extern s32 func_8042B154_de(void *);
 extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);

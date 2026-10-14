@@ -34,7 +34,7 @@ extern u16 D_800DFA02[][56];
 extern s32 func_8022F5C4_de(void *profile, s32 character);
 extern s32 func_80265650_de(u8 *bits, s32 index);
 extern void func_80265688_de(u8 *bits, s32 index, s32 value);
-extern void func_8040E950_de(MenuWidget *widget, s32 hidden);
+extern void func_8040E950_de(struct Widget_func_8040E67C_de *record, int enable);
 extern void func_8040E8D8_de(MenuWidget *widget, s32 visible);
 extern MenuWidget *func_8040EC30_de(void *parent, s32 id);
 

@@ -8,7 +8,8 @@
 extern char D_00285160[],D_800C50CC_de[],D_800F41F0[];
 extern int func_80264B6C_de(void);
 extern int *func_8025193C_de(int,int,int,int,int,int,void *,void *,int);
-extern void func_802BD3A0_de(void *,int,int),func_80253838_de(int,int *),func_8044D528_de(State_func_8044D0F0_de *,int,int);
+extern void func_802BD3A0_de(void *,int,int),func_8044D528_de(State_func_8044D0F0_de *,int,int);
+extern void func_80253838_de(void *arg0, void *arg1);
 void func_8044D0F0_de(State_func_8044D0F0_de *state) {
  int *resource;
  int id;
@@ -25,7 +26,7 @@ extern char D_00285160[],D_800C50CC_de[],D_800F41F0[];
 extern int func_80264B6C_de(void);
 extern int *func_8025193C_de(int,int,int,int,int,int,void *,void *,int);
 extern void func_802BD3A0_de(void *,int,int);
-extern void func_80253838_de(int,int *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_8044D528_de(State_func_8044D0F0_de *,int,int);
 
 

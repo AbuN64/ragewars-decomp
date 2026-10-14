@@ -12,7 +12,7 @@ extern f32 D_800C7ED0[];
 extern f32 D_800C7ED8[];
 
 extern s32 func_802227F4_de(void *, void *, s32);
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 
 
 

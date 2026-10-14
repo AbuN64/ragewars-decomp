@@ -73,7 +73,7 @@ void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct List_func_80442574
 
 
 extern void func_80255ED8_de(void *, struct ItemRecAt20V2 *);
-extern void func_80253838_de(s32, s32);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 void func_8044334C_de(void *list, struct ItemRecAt20V2 *item) {
     struct StateRecAtBCV2 *state;

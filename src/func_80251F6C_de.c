@@ -42,7 +42,7 @@ extern s32 func_802551FC_de(s32 *, ResourceLoadRequest *, Manager *);
 extern void func_80255CB8_de(void *, ResourceLoadRequest *);
 extern void func_80255ED8_de(void *, ResourceLoadRequest *);
 extern void func_80255FB8_de(void *, CachedResource *);
-extern ResourceLoadRequest *func_80252774_de(s32, ResourceLoadRequest *, s32);
+extern ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference);
 
 static inline void addref(CachedResource *node) {
     node->count += 1;

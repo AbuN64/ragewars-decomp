@@ -16,7 +16,7 @@ extern void func_80272898_de(void *, void *, Vec3 *);
 extern void func_8027DD48_de(void *, s32, s32, f32);
 extern void * *func_8025193C_de(s32, s32, s32, s32, s32, s32, void *, void *, s32);
 extern s32 func_8028FE28_de(s32 *, s32, s32);
-extern void func_80253838_de(s32, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern s32 func_802540F4_de(s32, void **, s32, void *, s32);
 extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
 extern void func_8026DC24_de(void **, s32, s32, void *, s32, s32);

@@ -55,7 +55,7 @@ Vector4f func_80202CA0_de(Vec3 *dir) {
     return q;
 }
 
-Vector4f func_80202CA0_de(Vec3 *);
+extern Vector4f func_80202CA0_de(Vec3 *dir);
 void func_80274098_de(void *, void *, void *);
 void func_8027347C_de(void *, f32, f32, f32);
 s32 func_8027254C_de(f32 *, f32);

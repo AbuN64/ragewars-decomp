@@ -18,7 +18,7 @@ extern struct Screen_func_8042B78C_de *D_800E4F60;
 extern void func_8029973C_de();
 extern void func_8025DF34_de(s32);
 
-extern void *func_8042B294_de(s32);
+extern int func_8042B294_de(int index);
 extern s32 func_8042B154_de(void *);
 
 extern void func_80439C80_de(void *, s32);

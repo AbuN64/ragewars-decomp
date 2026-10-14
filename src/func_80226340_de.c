@@ -81,7 +81,7 @@ extern s32 func_802444A4_de(void *, Vec3, Vec3, void *);
 extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
 extern f32 func_80271AA8_de(Vec3 *);
 
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 
 
 

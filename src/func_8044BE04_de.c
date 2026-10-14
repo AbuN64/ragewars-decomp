@@ -41,7 +41,7 @@ void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
     }
 }
 int func_8022A414_de(void *);
-void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 void func_802547E4_de(void *);
 void func_80255ED8_de(void *, s32);
 void func_8025CBEC_de(void *);

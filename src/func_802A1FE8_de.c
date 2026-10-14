@@ -4,7 +4,7 @@
 
 
 
-extern void func_802A1D14_de(struct CommandListController *);
+extern void func_802A1D14_de(void *arg0);
 extern void func_802A1D7C_de(struct CommandListController *, struct CommandListController *);
 
 s32 func_802A1FE8_de(struct CommandListController *obj) {

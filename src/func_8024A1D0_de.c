@@ -21,7 +21,7 @@ extern char D_8011D8D0;
 extern s32 D_800D297C;
 extern s32 D_800D15E0;
 
-extern void func_8024AA18_de(void *arg0, void *arg1, void *arg2);
+extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8026DA4C_de();
 extern s32 func_8026E340_de(void);
 extern s32 *func_8028FDB4_de(void *value, s32 index);

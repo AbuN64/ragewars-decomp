@@ -22,7 +22,7 @@
 
 
 
-extern void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 
 #endif

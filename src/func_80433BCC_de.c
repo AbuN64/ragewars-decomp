@@ -13,7 +13,7 @@ extern struct Block_func_80433BCC_de *D_800E54A4;
 extern char D_80102B00[];
 extern s8 D_80102B0D[];
 extern struct Item_func_80433BCC_de *func_8040EC30_de(void *, s32);
-extern void func_8040E950_de(struct Item_func_80433BCC_de *, s32);
+extern void func_8040E950_de(struct Widget_func_8040E67C_de *record, int enable);
 extern struct Item_func_80433BCC_de *func_8041B7FC_de(void *, s32);
 void func_80433BCC_de(s32 player) {
     struct Item_func_80433BCC_de *item;

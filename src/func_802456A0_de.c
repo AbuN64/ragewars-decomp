@@ -6,7 +6,7 @@
 extern int func_80245784_de(void);
 
 extern void func_80245BC0_de(void);
-extern void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void *D_800E2830;
 
 

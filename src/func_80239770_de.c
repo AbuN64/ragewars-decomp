@@ -16,7 +16,7 @@ extern func_80237E70_G1 D_800D7028;
 
 extern func_80237E70_G1 D_800D7034;
 extern s32 D_800E28D0;
-extern void func_80239CE0_de(Message *);
+extern void func_80239CE0_de(void *arg0);
 extern void func_80255ED8_de(void *, Message *);
 
 

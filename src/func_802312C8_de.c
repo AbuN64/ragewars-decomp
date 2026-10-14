@@ -24,7 +24,7 @@ extern void func_80214178_de(void *, void *, s32);
 
 extern void func_8022AF40_de(void *);
 
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 
 
 
@@ -96,7 +96,7 @@ void func_802312C8_de(void *actor, void *attack) {
 
 extern f32 D_800D2988;
 
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 
 void func_80231474_de(Shared_Actor *arg0, WeaponFireState *arg1) {
     f32 temp_f12;

@@ -1,7 +1,7 @@
 #include "span_1000/code_802646F4.h"
 #include "types.h"
 
-extern void func_80264248_de(void *arg0);
+extern void func_80264248_de(Shape *arg0);
 extern s32 D_8010F328;
 
 void func_8026480C_de(void) {

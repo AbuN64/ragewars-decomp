@@ -22,7 +22,7 @@
 extern struct State_func_80410448_de D_801539B0;
 
 extern s32 func_802A1934_de(void);
-extern void func_80411AF0_de(s32 index);
+extern void func_80411AF0_de(s32 i);
 extern void func_80419624_de(char *data);
 
 

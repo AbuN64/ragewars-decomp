@@ -64,7 +64,7 @@ extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 extern void func_8025E418_de(s32);
 
 
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern f32 func_8027525C_de(struct Shared_Model *, f32, f32);
 extern f32 func_80275DD4_de(struct Shared_Model *, f32, f32);
 extern void func_80278D78_de(void *, s32, void *);

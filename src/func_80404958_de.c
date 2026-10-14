@@ -22,7 +22,7 @@ extern char D_800DCCE8_de[];
 
 extern void **func_8025343C_de(s32, s32, s32, char *);
 extern void func_80253908_de(s32);
-extern void func_80253838_de(s32, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
 

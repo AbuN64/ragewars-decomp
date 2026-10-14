@@ -275,7 +275,7 @@ void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427
 extern List_func_804428F8_de D_8014561C;
 extern s32 func_80441214_de(Node_func_804428F8_de *, List_func_804428F8_de *);
 extern void func_80255ED8_de(List_func_804428F8_de *, Node_func_804428F8_de *);
-extern void func_80253838_de(s32, s32);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 void func_804428F8_de(List_func_804428F8_de *list) {
     Node_func_804428F8_de *node;

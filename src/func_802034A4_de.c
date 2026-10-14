@@ -11,7 +11,7 @@
 #include "shared/func_80214624_de_closed.h"
 extern f32 D_800C1A28,D_800C1A2C,D_800C1A30,D_800C1A34_de,D_800C1A38_de;
 void func_80203278_de(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
-Vector4f func_80202CA0_de(Vec3 *dir);
+extern Vector4f func_80202CA0_de(Vec3 *dir);
 void func_80272BCC_de(void *arg0, void *arg1, void *arg2);
 void func_80202FDC_de(struct Owner *owner, Rider *rider, s32 mode, char *target);
 void func_802172D0_de(void *arg0, void *arg1, s32 arg2);

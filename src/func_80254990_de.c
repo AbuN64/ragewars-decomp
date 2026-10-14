@@ -6,7 +6,7 @@ extern char D_801051A0;
 
 extern void func_80254DD0_de(void *arg0, struct IntrusiveList *arg1);
 extern void func_80255B2C_de(void *arg0, s32 arg1);
-extern void func_80254AD0_de(s32, s32);
+extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 
 

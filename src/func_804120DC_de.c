@@ -8,7 +8,7 @@
 
 
 extern void func_80410674_de(WidgetRecAt34 *image, s32 mode);
-extern void func_80411AF0_de(WidgetRecAt34 *image);
+extern void func_80411AF0_de(s32 i);
 
 void func_804120DC_de(WidgetRecAt34 *widget, s32 load, s32 siblings) {
     if (widget == 0) {

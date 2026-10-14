@@ -2,7 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80245980.h"
 extern void *D_800E2830;
-extern void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 
 

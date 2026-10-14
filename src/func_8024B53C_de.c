@@ -175,7 +175,7 @@ void func_8024B8C4_de(void *arg0) {
 }
 
 extern s32 D_800D297C;
-extern void func_8024AA18_de(void *arg0, void *arg1, void *arg2);
+extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 extern void func_8026DA4C_de();
 
@@ -203,7 +203,7 @@ void func_8024B8EC_de(void *arg0, void *arg1, void *arg2) {
 }
 
 extern s32 D_800D297C;
-extern void func_8024AA18_de(void *arg0, void *arg1, void *arg2);
+extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 extern void func_8026DA4C_de();
 

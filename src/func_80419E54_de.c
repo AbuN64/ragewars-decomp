@@ -10,7 +10,7 @@ extern void func_802A0748_de(void *, int, int);
 extern Resource_func_80419E54_de *func_8040EC30_de(int, int);
 extern void func_8040EDE4_de(Resource_func_80419E54_de *, Object_func_80419E54_de *);
 extern int func_80411DCC_de(int);
-extern void func_80419C84_de(Object_func_80419E54_de *, int);
+extern void func_80419C84_de(func_80419D04_S1 *arg0, s32 arg1);
 extern void func_80419F18_de(Object_func_80419E54_de *);
 Object_func_80419E54_de *func_80419E54_de(int arg0, int arg1)
 {

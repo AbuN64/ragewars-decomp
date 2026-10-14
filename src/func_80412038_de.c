@@ -9,7 +9,7 @@
 extern s16 D_80153C0C;
 extern struct EntryRecAt8V1 *D_80153C10;
 extern struct ResourceRecAt6 *D_8014D988;
-extern void func_80411AF0_de(s32);
+extern void func_80411AF0_de(s32 i);
 
 void func_80412038_de(void) {
     s32 i;

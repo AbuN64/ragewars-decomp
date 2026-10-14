@@ -6,7 +6,7 @@ extern s32 D_8010F328;
 extern u8 D_8010B3F4;
 extern s32 D_8010BC18[4];
 extern s32 D_8010EC90;
-extern void func_80264248_de(void *arg0);
+extern void func_80264248_de(Shape *arg0);
 extern void func_80285D30_de(s32 *);
 void func_802648C8_de(void)
 {

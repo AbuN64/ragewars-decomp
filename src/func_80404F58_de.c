@@ -10,7 +10,7 @@ extern Device D_8014D280[];
 extern s8 D_8010BBB8;
 extern char D_800DCCD0[];
 extern s32 *func_8025343C_de(s32, s32, s32, void *);
-extern void func_80253838_de(s32, s32 *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de(s32);
 extern void func_8025476C_de(s32);
 extern s32 func_8025477C_de(void);

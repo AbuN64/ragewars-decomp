@@ -9,7 +9,7 @@
 
 
 
-extern void func_80274870_de(void *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 
 
 

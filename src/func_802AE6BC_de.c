@@ -5,7 +5,7 @@
 
 
 
-extern s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult_func_802AE6BC_de *result);
+extern s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result);
 extern u32 func_802AEA2C_de(RuntimeState *state, u32 index);
 
 void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result) {

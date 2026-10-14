@@ -14,7 +14,7 @@ extern s32 D_800C9684;
 
 
 extern void func_80253908_de(s32);
-extern void func_80253838_de(s32, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80226950_de(ObjectPool *, s32);
 extern void func_8026367C_de(void *, void *);
 extern void func_802097E8_de(void *, void *);

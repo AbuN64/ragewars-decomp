@@ -11,7 +11,7 @@ extern char D_800C3A64_de;
 
 extern char D_8011D8D0;
 
-extern void func_8024AA18_de(LevelActor *actor, s32 arg, Lookup *params);
+extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
 extern void func_8027892C_de(void *object, void *colors);
 extern void func_8026DA4C_de(void **value, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5);

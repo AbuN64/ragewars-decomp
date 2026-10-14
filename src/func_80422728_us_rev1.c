@@ -74,7 +74,7 @@ extern s32 func_8025E2C4_de(void);
 
 extern void func_8025E384_de(void);
 
-extern void func_8040E950_de(MenuWidget *, s32);
+extern void func_8040E950_de(struct Widget_func_8040E67C_de *record, int enable);
 extern s32 func_80419E54_de(s32, s32);
 extern void func_8041B110_de(s32);
 extern Record_func_8041ABC0_de *func_8041ABC0_de(s32, s32);

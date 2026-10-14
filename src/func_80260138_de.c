@@ -2,7 +2,7 @@
 #include "types.h"
 /* Evaluates a packed cubic curve after seeking and reloading its containing segment. */
 
-extern void func_8025FD74_de(Stream *);
+extern void func_8025FD74_de(Curve *arg0);
 extern u32 func_802606C4_de(s32,s32);
 static inline void seek(Stream *arg0, u32 arg1) {
     u32 sp10[64];

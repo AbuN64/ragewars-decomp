@@ -53,7 +53,7 @@ extern char D_800CE7E4;
 extern Tuning D_800CE82C;
 extern s32 D_80104418[];
 extern f32 D_800D2988;
-extern void func_80274870_de(f32 *, f32, f32);
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_802231D4_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, char *);
 extern void func_802233F0_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, Tuning *);
 

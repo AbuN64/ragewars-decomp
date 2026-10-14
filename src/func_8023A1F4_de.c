@@ -3,7 +3,7 @@
 
 extern void func_8025E3F0_de(s32 arg0);
 extern void func_80253908_de(s32 a);
-extern void func_80253838_de(void *, void *);
+extern void func_80253838_de(void *arg0, void *arg1);
 
 
 

@@ -24,9 +24,9 @@ extern void func_80255ED8_de(void *, Request_func_802524B0_de *);
 extern void func_80255CB8_de(void *, Request_func_802524B0_de *);
 extern void func_80254DD0_de(s32, Node_func_802524B0_de *);
 extern void func_80255B2C_de(void *, void *);
-extern void func_80254AD0_de(s32, Node_func_802524B0_de *);
+extern void func_80254AD0_de(s32 arg0, s32 arg1);
 extern void func_80254E88_de(s32, Request_func_802524B0_de *);
-extern void func_80252774_de(s32, Request_func_802524B0_de *, s32);
+extern ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference);
 
 static inline void lock(void) {
     u32 token = func_802BCF30_de();
