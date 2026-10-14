@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80411B68_H
 #define UNBAKE_SPAN_16E000_CODE_80411B68_H
 #include "types.h"
+#include "common/types_1dc8418c21db.h"
 extern void func_80411EEC_de();
 
 struct WidgetRecAt34;
@@ -28,18 +29,9 @@ extern short func_80411C98_de(int index);
 
 extern int func_80411AE8_de(void);
 
-struct BufferPool_func_80411F48_de;
-struct BufferPool_func_80411F48_de {
-    s16 count;
-    void *primary;
-    void *secondary;
-    void *flags;
-    void *refs;
-    s32 dirty;
-};
+struct BufferPool;
 
-struct BufferPool_func_80411F48_de;
-typedef struct BufferPool_func_80411F48_de BufferPool_func_80411F48_de;
+struct BufferPool;
 
 extern int func_80411D08_de(void);
 

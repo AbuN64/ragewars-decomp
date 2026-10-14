@@ -5,6 +5,6 @@
    time the sequence wraps and stops when it reaches zero. func_804198CC_de clears it on creation. */
 
 
-void func_80419A04_de(struct FrameSequence_func_804199DC_de *sequence, s32 loops) {
+void func_80419A04_de(struct FrameSequence *sequence, s32 loops) {
     sequence->loops = loops;
 }

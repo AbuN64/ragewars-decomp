@@ -6,7 +6,7 @@ typedef struct Queue Queue;
 
 
 
-extern Chunk_func_80256454_de *func_8025661C_de(void *arg0);
+extern Chunk *func_8025661C_de(void *arg0);
 extern s32 func_802BB160_de(void *, void *, s32);
 extern s32 func_802BB420_de(void *, s32, s32);
 
@@ -17,7 +17,7 @@ void func_80256454_de(struct CartridgeReadWorker *arg0, u32 source, s32 length, 
                    Queue *queue, s32 value, s32 direct) {
     s32 remaining;
     s32 chunk_length;
-    Chunk_func_80256454_de *chunk;
+    Chunk *chunk;
 
     if (direct != 0) {
         chunk = func_8025661C_de(arg0);

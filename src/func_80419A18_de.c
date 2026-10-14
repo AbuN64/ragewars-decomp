@@ -5,6 +5,6 @@
    bit 2 when it reverses a ping-pong sequence. */
 
 
-void func_80419A18_de(struct FrameSequence_func_804199DC_de *sequence, s32 bits) {
-    sequence->unk5C |= bits;
+void func_80419A18_de(struct FrameSequence *sequence, s32 bits) {
+    sequence->flags |= bits;
 }

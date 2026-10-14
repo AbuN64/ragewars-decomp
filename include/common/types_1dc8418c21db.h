@@ -2,6 +2,7 @@
 #define UNBAKE_COMMON_TYPES_1DC8418C21DB_H
 #include "audio_callbacks.h"
 #include "types.h"
+#include "span_1000/code_802BAC58.h"
 #include "shared/pak_menu.h"
 #include "span_1000/code_802B7B80.h"
 #include "common/types_8a8189af7b05.h"
@@ -2566,11 +2567,7 @@ struct ALSynth_func_802B3000_de {
     s32 paramSamples;
 };
 
-struct func_8025E58C_S1;
-struct func_8025E58C_S1 {
-    char pad0[0x10];
-    short unk10;
-};
+struct OSThread_s;
 
 struct ObjRecAt18V2;
 typedef struct ObjRecAt18V2 ObjRecAt18V2;
@@ -2753,6 +2750,7 @@ struct BufferPool {
     func_80255BEC_S1 *secondary;
     u16 *flags;
     s16 *refs;
+    s32 dirty;
 };
 
 struct Node_func_80239AF4_de;
@@ -3842,8 +3840,7 @@ struct Args {
     u32 words[10];
 };
 
-struct func_8025E58C_S1;
-typedef struct func_8025E58C_S1 func_8025E58C_S1;
+struct OSThread_s;
 
 struct Field_f32_10;
 struct Field_f32_10 {

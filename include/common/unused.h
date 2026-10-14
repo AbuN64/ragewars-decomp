@@ -5305,6 +5305,7 @@ struct FrameSequence {
     s32 flags;
     s32 loops;
 };
+typedef struct FrameSequence FrameSequence;
 struct SlotRecAt0V2;
 struct SlotRecAt0V2 {
     s32 item;

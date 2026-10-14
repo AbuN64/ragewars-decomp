@@ -8,17 +8,17 @@
 
 
 
-extern struct State_func_804287F8_de *D_800E4690;
+extern struct ResultsDrawScreen *D_800E4690;
 extern void func_8029973C_de();
 extern void func_8025DF34_de(s32);
 
 s32 func_804287F8_de(void *first, void *second, u32 event, s32 value) {
-    struct State_func_804287F8_de *state;
+    struct ResultsDrawScreen *state;
 
     if ((event >> 16) == 3 && value == 0) {
         func_8029973C_de();
         state = D_800E4690;
-        state->mode = 8;
+        state->state = 8;
         state->item->value = 0x5A;
         func_8025DF34_de(0xE7C);
     }

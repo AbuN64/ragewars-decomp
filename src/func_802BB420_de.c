@@ -6,7 +6,7 @@
 
 
 
-extern func_8025E58C_S1 *D_800D5270;
+extern OSThread_s *D_800D5270;
 extern s32 func_802BCF30_de(void);
 extern void func_802BCF50_de(s32 value);
 extern void func_802BC36C_de(void *queue_data);
@@ -22,7 +22,7 @@ s32 func_802BB420_de(OSMesgQueue *queue, s32 entry, s32 mode) {
             func_802BCF50_de(saved);
             return -1;
         }
-        D_800D5270->unk10 = 8;
+        D_800D5270->state = 8;
         func_802BC36C_de(&queue->fullqueue);
     }
     queue->msg[(queue->first + queue->validCount) % queue->msgCount] = entry;

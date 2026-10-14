@@ -6,6 +6,6 @@
    0x48. func_804198CC_de resets the index through here after counting the frames. */
 
 
-void func_804199DC_de(struct FrameSequence_func_804199DC_de *sequence, s32 frame) {
+void func_804199DC_de(struct FrameSequence *sequence, s32 frame) {
     sequence->frame = frame;
 }

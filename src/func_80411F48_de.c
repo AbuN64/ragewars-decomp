@@ -4,7 +4,7 @@
 
 
 
-extern BufferPool_func_80411F48_de D_80153C40;
+extern BufferPool D_80153C40;
 extern s16 D_80153C0C;
 extern s16 D_80153C20;
 

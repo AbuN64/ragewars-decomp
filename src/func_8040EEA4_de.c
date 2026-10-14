@@ -8,9 +8,9 @@
 
 extern struct Tree *func_8040ECA8_de(struct Tree *node, s32 id);
 
-static inline struct Tree_func_8040EEA4_de *findPredecessor(struct Tree_func_8040EEA4_de *node, s32 id) {
+static inline struct Tree *findPredecessor(struct Tree *node, s32 id) {
     s32 childId;
-    struct Tree_func_8040EEA4_de *found = 0;
+    struct Tree *found = 0;
 
     childId = id;
     while (node != 0 && found == 0) {
@@ -25,8 +25,8 @@ static inline struct Tree_func_8040EEA4_de *findPredecessor(struct Tree_func_804
     return found;
 }
 
-void func_8040EEA4_de(struct Tree_func_8040EEA4_de *node, struct Tree_func_8040EEA4_de *added) {
-    struct Tree_func_8040EEA4_de *parent;
+void func_8040EEA4_de(struct Tree *node, struct Tree *added) {
+    struct Tree *parent;
 
     added->child = node;
     added->parent = node->parent;

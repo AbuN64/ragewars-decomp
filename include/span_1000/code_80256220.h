@@ -4,8 +4,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "types.h"
-struct Chunk_func_80256454_de;
-typedef struct Chunk_func_80256454_de Chunk_func_80256454_de;
+struct Chunk;
 
 struct CartridgeReadWorker;
 struct CartridgeReadWorker {
@@ -44,6 +43,7 @@ struct Chunk {
     void *destination;
     s32 length;
     void *queue;
+    s32 value;
 };
 
 extern void func_802567D0_de();
@@ -95,15 +95,8 @@ struct CartridgeReadRequest {
 
 
 
-struct Chunk_func_80256454_de;
+struct Chunk;
 struct Queue;
-struct Chunk_func_80256454_de {
-    u32 source; /* cartridge device address */
-    void *destination;
-    s32 length;
-    struct Queue *queue;
-    s32 value;
-};
 
 extern u32 func_802571F0_de(s32 offset, s32 length);
 

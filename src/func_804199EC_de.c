@@ -4,6 +4,6 @@
 /* Returns a frame sequence's current frame index, which func_804199DC_de sets. */
 
 
-s32 func_804199EC_de(struct FrameSequence_func_804199DC_de *sequence) {
+s32 func_804199EC_de(struct FrameSequence *sequence) {
     return sequence->frame;
 }

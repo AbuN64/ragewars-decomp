@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804196C0_H
 #define UNBAKE_SPAN_16E000_CODE_804196C0_H
 #include "types.h"
+#include "common/unused.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
@@ -60,18 +61,7 @@ struct Object_func_80419F58_de {
 
 extern float D_800E1470;
 
-struct FrameSequence_func_804199DC_de;
-struct FrameSequence_func_804199DC_de {
-    char pad0[0x44];
-    void *target;
-    s32 *frames;
-    s32 frame;
-    s32 count;
-    s32 elapsed;
-    s32 duration;
-    s32 unk5C;
-    s32 loops;
-};
+struct FrameSequence;
 
 extern void func_8041A400_de();
 
@@ -105,8 +95,8 @@ struct ObjectRecAt84 {
     s32 pending;
 };
 
-struct FrameSequence_func_804199DC_de;
-extern s32 func_804199F8_de(struct FrameSequence_func_804199DC_de *sequence);
+struct FrameSequence;
+extern s32 func_804199F8_de(struct FrameSequence *sequence);
 
 struct Record_func_8041A280_de;
 typedef struct Record_func_8041A280_de Record_func_8041A280_de;
@@ -121,8 +111,8 @@ extern s32 func_80419A4C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 struct Triple;
 extern void func_80419ADC_de(s32 arg0, struct Triple arg1);
 
-struct FrameSequence_func_804199DC_de;
-extern s32 func_80419A0C_de(struct FrameSequence_func_804199DC_de *sequence);
+struct FrameSequence;
+extern s32 func_80419A0C_de(struct FrameSequence *sequence);
 
 extern void func_80419E24_de();
 
@@ -149,8 +139,8 @@ extern void func_80419F24_de(struct SourceRecAt84 *source);
 struct func_80419D04_S1;
 typedef struct func_80419D04_S1 func_80419D04_S1;
 
-struct FrameSequence_func_804199DC_de;
-extern s32 func_804199EC_de(struct FrameSequence_func_804199DC_de *sequence);
+struct FrameSequence;
+extern s32 func_804199EC_de(struct FrameSequence *sequence);
 
 struct Object_func_80419E54_de;
 struct Resource_func_80419E54_de;

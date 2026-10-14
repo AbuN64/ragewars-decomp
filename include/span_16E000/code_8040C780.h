@@ -90,17 +90,7 @@ struct Widget;
 struct Widget;
 extern void func_8040E900_de(struct Widget *record, int enable);
 
-struct Tree_func_8040EEA4_de;
-struct Tree_func_8040EEA4_de {
-    struct Tree_func_8040EEA4_de *parent;
-    struct Tree_func_8040EEA4_de *next;
-    struct Tree_func_8040EEA4_de *child;
-    short id;
-    short pad_0E;
-    s32 pad_10;
-    short field_14;
-    short field_16;
-};
+struct Tree;
 
 struct BatchRec;
 typedef struct BatchRec BatchRec;
@@ -133,7 +123,11 @@ struct Tree {
     struct Tree *next;
     struct Tree *child;
     short id;
+    char pad10[0x4];
+    short field_14;
+    short field_16;
 };
+typedef struct Tree Tree;
 
 struct DrawArgs_func_8040E67C_de;
 struct DrawArgs_func_8040E67C_de {

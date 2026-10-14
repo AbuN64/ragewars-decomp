@@ -5,6 +5,6 @@
    (forward), 0x10 (ping-pong), 0x20 (counted loop) and 8 (loop) on every tick. */
 
 
-s32 func_80419A3C_de(struct FrameSequence_func_804199DC_de *sequence, s32 bits) {
-    return (sequence->unk5C & bits) != 0;
+s32 func_80419A3C_de(struct FrameSequence *sequence, s32 bits) {
+    return (sequence->flags & bits) != 0;
 }

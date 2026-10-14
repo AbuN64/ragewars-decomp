@@ -5,6 +5,6 @@
    time accumulated at 0x54 exceeds this. func_804198CC_de clears it when it builds the sequence. */
 
 
-void func_804199E4_de(struct FrameSequence_func_804199DC_de *sequence, s32 duration) {
+void func_804199E4_de(struct FrameSequence *sequence, s32 duration) {
     sequence->duration = duration;
 }

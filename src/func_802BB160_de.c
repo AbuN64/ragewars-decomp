@@ -12,7 +12,7 @@ extern void func_802BB750_de(s32 arg0);
 
 
 
-extern func_8025E58C_S1 *D_800D5270;
+extern OSThread_s *D_800D5270;
 
 s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
     u32 saved;
@@ -24,7 +24,7 @@ s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
             func_802BCF50_de(saved);
             return -1;
         }
-        D_800D5270->unk10 = 8;
+        D_800D5270->state = 8;
         func_802BC36C_de(&arg0->fullqueue);
     }
 

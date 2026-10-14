@@ -4,6 +4,6 @@
 /* Returns how many frames a sequence holds, counted by func_804198CC_de up to the -1 terminator. */
 
 
-s32 func_804199F8_de(struct FrameSequence_func_804199DC_de *sequence) {
+s32 func_804199F8_de(struct FrameSequence *sequence) {
     return sequence->count;
 }

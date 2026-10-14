@@ -7,13 +7,7 @@ struct State_func_80428214_de;
 typedef struct State_func_80428214_de State_func_80428214_de;
 
 struct Resource_func_80419E54_de;
-struct State_func_804287F8_de;
-struct State_func_804287F8_de {
-    char pad0[0x988];
-    s32 mode;
-    char pad98C[0xA50 - 0x98C];
-    struct Resource_func_80419E54_de *item;
-};
+struct ResultsDrawScreen;
 
 struct ResultsOptionsScreen;
 struct ResultsOptionsScreen {
@@ -236,7 +230,9 @@ struct ResultsDrawScreen {
     s32 state;
     char pad98C[0xA44 - 0x98C];
     s32 soundBase;
-    char padA48[0xA60 - 0xA48];
+    char padA48[0x8];
+    struct Resource_func_80419E54_de *item;
+    char padA54[0xC];
     struct Shape_typemap_21 *bannerShadow;
     struct Shape_typemap_21 *banner;
     s32 blinking;
