@@ -2,9 +2,9 @@
 #include "types.h"
 /* Seeks the containing frame in a variable-length stream and reloads it when the frame changes. */
 
-extern void func_8025FD74_de(Stream_func_80261418_de *);
+extern void func_8025FD74_de(Stream *);
 extern u32 func_802606C4_de(s32,s32);
-void func_80261418_de(Stream_func_80261418_de *arg0, u32 arg1) {
+void func_80261418_de(Stream *arg0, u32 arg1) {
     u32 sp10[64];
     s32 temp_a0;
     s32 temp_lo;

@@ -2580,8 +2580,6 @@ typedef struct ObjRecAt18V2 ObjRecAt18V2;
 struct func_80254D70_S2;
 typedef struct func_80254D70_S2 func_80254D70_S2;
 
-struct Node75_func_802750B0_de;
-typedef struct Node75_func_802750B0_de Node75_func_802750B0_de;
 
 struct func_80207F90_S1;
 struct func_80207F90_S1 {
@@ -2930,13 +2928,6 @@ struct TextEntry {
     char **text;
 };
 
-struct Node75_func_802750B0_de;
-struct Node75_func_802750B0_de {
-    int pad0;
-    void *prev;
-    void *cur;
-    void *next;
-};
 
 struct Label;
 struct Label {

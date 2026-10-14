@@ -8,15 +8,6 @@
 #include "audio_callbacks.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_802609CC.h"
-struct Item_func_80403458_de;
-struct Item_func_80403458_de {
-    char pad0[0xE];
-    u8 flags;
-    char padF[2];
-    u8 kind;
-    u8 subkind;
-    u8 bitIndex; /* 0x13: persistent trigger bit */
-};
 
 extern Vec3 func_8040385C_de(void);
 
@@ -48,10 +39,12 @@ typedef struct ItemRecAt12 ItemRecAt12;
 
 struct ItemRecAt12;
 struct ItemRecAt12 {
-    char pad0[0x11];
+    char pad0[0xE];
+    u8 flags;
+    char padF[2];
     u8 kind;
     u8 subkind;
-    char pad13[1];
+    u8 bitIndex; /* 0x13: persistent trigger bit */
 };
 
 struct Tables;
@@ -60,8 +53,6 @@ struct Tables {
     ItemRecAt12 *items[2];
 };
 
-struct Item_func_80403458_de;
-typedef struct Item_func_80403458_de Item_func_80403458_de;
 
 struct State_func_8040385C_de;
 struct State_func_8040385C_de {
@@ -71,11 +62,6 @@ struct State_func_8040385C_de {
     s32 unk38;
 };
 
-struct Tables_func_80403458_de;
-struct Tables_func_80403458_de {
-    char pad0[0x11D0];
-    Item_func_80403458_de *items[2];
-};
 
 
 struct EntryRecAt18V5;
@@ -193,8 +179,6 @@ struct Record_func_804030E0_de {
     s32 key;
 };
 
-struct Tables_func_80403458_de;
-typedef struct Tables_func_80403458_de Tables_func_80403458_de;
 
 struct State_func_804039C4_de;
 struct State_func_804039C4_de {

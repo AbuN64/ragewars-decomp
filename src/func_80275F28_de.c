@@ -14,7 +14,7 @@ extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
 
 
 
-Vec3 *func_80275F28_de(Vec3 *out, Node75_func_802750B0_de *node) {
+Vec3 *func_80275F28_de(Vec3 *out, Node75 *node) {
     Vec3 a;
     Vec3 b;
     CollisionBuildVertex *p;

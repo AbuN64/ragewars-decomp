@@ -16,7 +16,7 @@ extern void func_80271F68_de(Vec3 *, void *, void *);
 extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
 extern void func_8027207C_de(Vec3 *);
 
-static inline Vec3 *cross_edges(Vec3 *out, Node75_func_802750B0_de *node) {
+static inline Vec3 *cross_edges(Vec3 *out, Node75 *node) {
     Vec3 a;
     Vec3 b;
 
@@ -34,7 +34,7 @@ static inline Vec3 *cross_edges(Vec3 *out, Node75_func_802750B0_de *node) {
     return out;
 }
 
-Vec3 *func_80275C94_de(Vec3 *out, Node75_func_802750B0_de *node) {
+Vec3 *func_80275C94_de(Vec3 *out, Node75 *node) {
     if (node == 0) {
         ((Vec3 *)&D_80115E20)->x = 0;
         ((Vec3 *)&D_80115E20)->z = 0;

@@ -5,7 +5,7 @@
 #include "stddef.h"
 #include "types.h"
 f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
-f32 func_8027525C_de(Node75_func_802750B0_de *node, f32 x, f32 z);
+f32 func_8027525C_de(Node75 *node, f32 x, f32 z);
 extern s32 D_800CD764_de;
 
 /* Warning: Gap in callee-saved word stack region.

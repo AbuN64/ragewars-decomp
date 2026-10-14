@@ -25,7 +25,7 @@ extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
 
 
 
-f32 func_8027525C_de(Node75_func_802750B0_de *node, f32 x, f32 z) {
+f32 func_8027525C_de(Node75 *node, f32 x, f32 z) {
     Vec3 normal;
     Vec3 point;
     Vec3 a;

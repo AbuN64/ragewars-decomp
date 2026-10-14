@@ -18,13 +18,6 @@ struct WidgetRecAt1A {
     s16 height;
 };
 
-struct Tree_func_8040EDE4_de;
-struct Tree_func_8040EDE4_de {
-    struct Tree_func_8040EDE4_de *parent;
-    struct Tree_func_8040EDE4_de *next;
-    struct Tree_func_8040EDE4_de *child;
-    short id;
-};
 
 struct Widget_func_8040E67C_de;
 typedef struct Widget_func_8040E67C_de Widget_func_8040E67C_de;
@@ -141,7 +134,7 @@ typedef struct Node_func_8040E7FC_de Node_func_8040E7FC_de;
 
 struct Tree;
 struct Tree {
-    char pad0[4];
+    struct Tree *parent;
     struct Tree *next;
     struct Tree *child;
     short id;

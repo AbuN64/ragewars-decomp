@@ -4,6 +4,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
+#include "span_1000/code_8025E568.h"
 #include "types.h"
 extern float D_800C41A0_de;
 
@@ -30,16 +31,6 @@ extern double D_800C4170_de;
 
 extern void func_80260C6C_de(void *arg0, int arg1, Func802608ECResult t, int arg5);
 
-struct Stream_func_80261418_de;
-struct Stream_func_80261418_de {
-    s32 unk0;
-    char pad4[8];
-    s32 unkC;
-    char pad10[16];
-    u32 unk20;
-    u32 unk24;
-    s32 unk28;
-};
 
 struct func_80260C8C_S1;
 typedef struct func_80260C8C_S1 func_80260C8C_S1;
@@ -156,8 +147,6 @@ struct func_80260C8C_S1 {
     int unk10;
 };
 
-struct Stream_func_80261418_de;
-typedef struct Stream_func_80261418_de Stream_func_80261418_de;
 
 struct ObjRecAt4V4;
 struct ObjRecAt4V4 {

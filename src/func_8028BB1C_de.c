@@ -12,7 +12,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 void func_8028BB1C_de(void *arg0, void *arg1, s32 arg2) {
-    struct Item_func_80403458_de *item = arg1;
+    struct ItemRecAt12 *item = arg1;
     s32 bitIndex;
     void *field80;
     s32 field1B40C;

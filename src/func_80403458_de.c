@@ -15,24 +15,24 @@
 
 
 extern Record_func_80403458_de *D_800E2830;
-extern Tables_func_80403458_de D_8011FE88;
+extern Tables D_8011FE88;
 
 extern s32 func_80245784_de(void);
 extern s32 *func_8028FDB4_de(s32 resource, s32 index);
-extern void func_80402FB4_de(s32 mode, Item_func_80403458_de *item);
-extern void func_80278E7C_de(Item_func_80403458_de *item);
-extern void func_8028BB1C_de(Tables_func_80403458_de *tables, Item_func_80403458_de *item, s32 mode);
+extern void func_80402FB4_de(s32 mode, ItemRecAt12 *item);
+extern void func_80278E7C_de(ItemRecAt12 *item);
+extern void func_8028BB1C_de(Tables *tables, ItemRecAt12 *item, s32 mode);
 
 void func_80403458_de(void) {
     f32 time;
     s32 late;
     s32 *track;
     EntryRecAt8V4 *entry;
-    Item_func_80403458_de *item;
+    ItemRecAt12 *item;
     s32 n;
     s32 i;
     s32 hit;
-    Tables_func_80403458_de *tables;
+    Tables *tables;
 
     time = D_800E2830->time;
     late = 0;
