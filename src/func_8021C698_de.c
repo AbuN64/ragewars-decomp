@@ -34,7 +34,7 @@ void func_8021C698_de(Player_func_8021C698_de *player) {
     s32 high;
 
     if (player->marker != 0) {
-        gSPMatrix(D_80110634++, (u32) &player->views[D_800D297C], G_MTX_LOAD);
+        gSPMatrix(D_80110634++, &player->views[D_800D297C], G_MTX_LOAD);
         gDPPipeSync(D_80110634++);
         func_8026D8F8_de();
         func_8026925C_de(0xE);

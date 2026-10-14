@@ -244,7 +244,7 @@ void func_8027ED6C_de(Shared_Particle *particle, struct Shared_ParticleView *vie
         dist = -dist;
     }
     if (D_80140FF8 == 1) {
-        gSPMatrix(D_80110634++, (u32)&particle->mtx[D_800D297C], G_MTX_LOAD);
+        gSPMatrix(D_80110634++, &particle->mtx[D_800D297C], G_MTX_LOAD);
     } else {
         mtx = func_802799C0_de(&D_8011FFB0, 1);
         if (mtx == 0) {
@@ -334,7 +334,7 @@ void func_8027ED6C_de(Shared_Particle *particle, struct Shared_ParticleView *vie
         }
     }
     alpha = (alpha > 255 ? 255 : alpha) < 0 ? 0 : (alpha > 255 ? 255 : alpha);
-    gSPVertex(D_80110634++, (u32)&D_8011AF78, 4, 0);
+    gSPVertex(D_80110634++, &D_8011AF78, 4, 0);
     if (textured) {
         gSPTextureL(D_80110634++, shiftS, shiftT, 0, 0xFF, 0, G_ON);
         }

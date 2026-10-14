@@ -2870,7 +2870,7 @@ schema = 1
 "func_802B5288_de" = { evidence = "landed", signature = "f32 func_802B5288_de(f32 arg0, s32 arg1, s32 arg2, s32 arg3)" }
 "func_802B5300_de" = { evidence = "landed", signature = "f64 func_802B5300_de(f64 arg0, s32 *arg2)" }
 "func_802B53B4_de" = { evidence = "landed", signature = "f64 func_802B53B4_de(f64 arg0, s32 arg1)" }
-"func_802B53E0_de" = { evidence = "landed", signature = "void func_802B53E0_de(void *arg0, int arg1, int arg2, int arg3)" }
+"func_802B53E0_de" = { evidence = "landed", signature = "void func_802B53E0_de(void *arg0, void *arg1, void *arg2, int arg3)" }
 "func_802B5540_de" = { evidence = "landed", signature = "s32 func_802B5540_de(Obj_func_802B3EDC_de *arg0, s32 arg1, s32 arg2)" }
 "func_802B5570_de" = { evidence = "landed", signature = "Acmd *func_802B5570_de(void *filter, s16 *outp, s32 outCnt, s32 sampleOffset, Acmd *p)" }
 "func_802B56A0_eu" = { evidence = "landed", signature = "Acmd *func_802B56A0_eu(ALMainBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)" }

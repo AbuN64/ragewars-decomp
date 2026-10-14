@@ -30,7 +30,7 @@ void func_802A5498_de(u32 arg0) {
     cmd = D_80110634++;
     gDPSetCycleType(cmd, G_CYC_2CYCLE);
     cmd = D_80110634++;
-    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)&D_800D14B0);
+    gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, &D_800D14B0);
     cmd = D_80110634++;
     gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 0, 0, G_TX_CLAMP, 0, 0);
     cmd = D_80110634++;
@@ -46,11 +46,11 @@ void func_802A5498_de(u32 arg0) {
     cmd = D_80110634++;
     gDPSetPrimColor(cmd, 255, 255, 200, 0, 0, 150);
     cmd = D_80110634++;
-    gSPDisplayList(cmd, (u32)&D_800CDCA8);
+    gSPDisplayList(cmd, &D_800CDCA8);
     cmd = D_80110634++;
     gSPMatrix(cmd, arg0, G_MTX_LOAD);
     cmd = D_80110634++;
-    gSPVertex(cmd, (u32)&D_801469A0, 4, 0);
+    gSPVertex(cmd, &D_801469A0, 4, 0);
     cmd = D_80110634++;
     gSP2Triangles(cmd, 0, 1, 2, 0, 2, 3, 0, 0);
 

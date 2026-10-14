@@ -2,10 +2,10 @@
 
 
 
-void func_802B53E0_de(void *arg0, int arg1, int arg2, int arg3) {
+void func_802B53E0_de(void *arg0, void *arg1, void *arg2, int arg3) {
     struct ALFilter_s *filter = arg0;
     filter->source = 0;
-    filter->handler = (void *)arg1;
+    filter->handler = arg1;
     filter->setParam = (s32 (*)(void *, s32, void *))arg2;
     filter->inp = 0;
     filter->outp = 0;
