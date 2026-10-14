@@ -2,9 +2,9 @@
 #include "types.h"
 #include "device_io.h"
 /* osEPiRawStartDma, drafted from ultralib src/io/epirawdma.c with the 2.0I EPI_SYNC of PRinternal/piint.h. */
-extern OSPiHandle_s_func_802B93B0_de *D_800D4380[2];
+extern OSPiHandle_s *D_800D4380[2];
 extern u32 func_802BBBC0_de(void *addr);
-s32 func_802B93B0_de(OSPiHandle_s_func_802B93B0_de *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size)
+s32 func_802B93B0_de(OSPiHandle_s *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size)
 {
     u32 stat;
     u32 domain;
@@ -13,7 +13,7 @@ s32 func_802B93B0_de(OSPiHandle_s_func_802B93B0_de *pihandle, s32 direction, u32
         stat = *(volatile u32 *)0xA4600010;
     domain = pihandle->domain;
     if (D_800D4380[domain] != pihandle) {
-        OSPiHandle_s_func_802B93B0_de *cHandle = D_800D4380[domain];
+        OSPiHandle_s *cHandle = D_800D4380[domain];
         if (domain == 0) {
             if (cHandle->latency != pihandle->latency) IO_WRITE(0xA4600014, pihandle->latency);
             if (cHandle->pageSize != pihandle->pageSize) IO_WRITE(0xA460001C, pihandle->pageSize);

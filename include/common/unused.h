@@ -3,6 +3,7 @@
 #include "shared/particle_lighting.h"
 #include "shared/level_actor.h"
 #include "types.h"
+#include "span_1000/code_802B8DD0.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
@@ -141,7 +142,7 @@ extern s32 D_801540F0;
 
 extern int D_800E12E4[];
 
-extern DeviceState *D_800D437C;
+extern OSPiHandle_s *D_800D437C;
 
 extern void (*D_800CB380_de[][2])(void);
 
@@ -2050,7 +2051,7 @@ extern s32 D_800CD940_de;
 
 extern char D_800C8380_de;
 
-extern DeviceState D_80148740;
+extern OSPiHandle_s D_80148740;
 
 extern char D_800C3830_de;
 
@@ -3275,7 +3276,6 @@ struct OSIoMesgHdr;
 typedef struct OSIoMesgHdr OSIoMesgHdr;
 
 struct OSPiHandle_s;
-typedef struct OSPiHandle_s OSPiHandle_s;
 
 struct OSTimer_s;
 typedef struct OSTimer_s OSTimer_s;
@@ -6136,19 +6136,6 @@ struct OSIoMesg {
     u32 devAddr;
     u32 size;
     void *piHandle;
-};
-struct OSPiHandle_s;
-struct OSPiHandle_s {
-    struct OSPiHandle_s *next;
-    u8 type;
-    u8 latency;
-    u8 pageSize;
-    u8 relDuration;
-    u8 pulse;
-    u8 domain;
-    u32 baseAddress;
-    u32 speed;
-    u8 transferInfo[0x60];
 };
 struct OSTimer_s;
 struct OSTimer_s {

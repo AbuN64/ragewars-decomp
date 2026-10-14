@@ -4,18 +4,18 @@
 
 
 
-extern OSThread_s_func_802BB5F0_de *D_800D5268_de;
-extern OSThread_s_func_802BB5F0_de *D_800D5270;
+extern OSThread_s *D_800D5268_de;
+extern OSThread_s *D_800D5270;
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32 mask);
-extern void func_802BB870_de(OSThread_s_func_802BB5F0_de **queue, OSThread_s_func_802BB5F0_de *t);
-extern void func_802BC508_de(OSThread_s_func_802BB5F0_de **queue, OSThread_s_func_802BB5F0_de *t);
-extern void func_802BC36C_de(OSThread_s_func_802BB5F0_de **queue);
+extern void func_802BB870_de(OSThread_s **queue, OSThread_s *t);
+extern void func_802BC508_de(OSThread_s **queue, OSThread_s *t);
+extern void func_802BC36C_de(OSThread_s **queue);
 
-void func_802BB5F0_de(OSThread_s_func_802BB5F0_de *t, s32 pri)
+void func_802BB5F0_de(OSThread_s *t, s32 pri)
 {
     register u32 saveMask;
-    OSThread_s_func_802BB5F0_de **runQueue;
+    OSThread_s **runQueue;
 
     saveMask = func_802BCF30_de();
 

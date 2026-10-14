@@ -6,7 +6,7 @@
 
 
 
-extern Thread *D_800D5270;
+extern OSThread_s *D_800D5270;
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern void func_802BC36C_de(void *);

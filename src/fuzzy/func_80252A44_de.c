@@ -11,7 +11,6 @@ extern char D_80101140[];
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32 mask);
-extern void func_802BB2A0_de(void *queue, s32 msg, s32 flag);
 extern s32 func_802BB420_de(void *queue, s32 msg, s32 flag);
 extern void func_80268CE0_de(s32);
 extern void func_8026925C_de(s32);
