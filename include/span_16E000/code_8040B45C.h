@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8040B45C_H
 #define UNBAKE_SPAN_16E000_CODE_8040B45C_H
 #include "types.h"
+#include "shared/pak_menu.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_16E000/code_8043F69C.h"
 extern void func_8040B7E0_de(void);
@@ -14,13 +15,7 @@ typedef struct Record_func_8040B58C_de Record_func_8040B58C_de;
 
 extern void func_8040C09C_de();
 
-struct Action_func_8040B4E0_de;
-struct Action_func_8040B4E0_de {
-    char pad0[0x1C];
-    void *unk1C;
-    PakMenuSlot *unk20;
-    void *unk24;
-};
+struct Shared_PakMenu;
 
 extern void func_8040B830_de(void);
 
@@ -85,8 +80,7 @@ extern s32 func_8040B648_de(s32 arg0, ActionRecAt24 *arg1);
 
 extern int D_80141000;
 
-struct Action_func_8040B4E0_de;
-typedef struct Action_func_8040B4E0_de Action_func_8040B4E0_de;
+struct Shared_PakMenu;
 
 extern void func_8040C2F8_de();
 

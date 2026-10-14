@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8022A274_H
 #define UNBAKE_SPAN_1000_CODE_8022A274_H
 #include "types.h"
+#include "span_16E000/code_8042E080.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct Loadout;
@@ -309,18 +310,12 @@ typedef struct Node_func_8022A748_de Node_func_8022A748_de;
 struct GlobalState;
 typedef struct GlobalState GlobalState;
 
-struct State_func_8022A68C_de;
-typedef struct State_func_8022A68C_de State_func_8022A68C_de;
+struct MatchState;
 
 struct func_8022AAC4_S2;
 typedef struct func_8022AAC4_S2 func_8022AAC4_S2;
 
-struct State_func_8022A68C_de;
-struct State_func_8022A68C_de {
-    char pad0[0x1C];
-    int armed;
-    int active;
-};
+struct MatchState;
 
 struct func_8022A470_S2;
 typedef struct func_8022A470_S2 func_8022A470_S2;

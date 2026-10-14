@@ -21,6 +21,7 @@ typedef struct Shared_PakMenu {
         PakMenuSlot *owner;
         PakMenuSlot *slot;
     };
+    void *unk24;
 } Shared_PakMenu;
 void func_80405F48_de(Shared_PakMenu *menu);
 #endif

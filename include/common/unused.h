@@ -3,6 +3,7 @@
 #include "shared/particle_lighting.h"
 #include "shared/level_actor.h"
 #include "types.h"
+#include "span_16E000/code_8040C780.h"
 #include "span_1000/code_802B8DD0.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
@@ -3856,8 +3857,7 @@ typedef struct WidgetRegisterWidget WidgetRegisterWidget;
 struct WidgetTable;
 typedef struct WidgetTable WidgetTable;
 
-struct Widget_func_8040C6FC_de;
-typedef struct Widget_func_8040C6FC_de Widget_func_8040C6FC_de;
+struct Slider;
 
 struct Window_func_80421AE8_de;
 typedef struct Window_func_80421AE8_de Window_func_80421AE8_de;
@@ -20748,18 +20748,7 @@ struct WidgetTable {
     s32 handled;
     s32 elapsed;
 };
-struct Widget_func_8040C6FC_de;
-struct Widget_func_8040C6FC_de {
-    char pad[0xC];
-    s16 parentId;
-    char pad2[0x44 - 0xC - 2];
-    s32 lo;
-    s32 hi;
-    s32 step;
-    s32 value;
-    char pad3[0x6C - 0x50 - 4];
-    s32 userWord;
-};
+struct Slider;
 struct World24;
 struct World24 {
     char pad0[0x20];

@@ -186,10 +186,12 @@ struct Widget_func_8040C950_de {
 struct Slider;
 struct Widget_func_8040C950_de;
 struct Slider {
-    char pad0[0x44];
+    char pad0[0xC];
+    s16 parentId;
+    char padE[0x36];
     s32 min;
     s32 max;
-    char pad4C[4];
+    s32 step;
     s32 value;
     s32 left;
     s32 top;

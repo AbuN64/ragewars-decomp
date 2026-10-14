@@ -38,7 +38,7 @@ extern int func_80245784_de(void);
 
 
 
-extern State_func_8022A68C_de D_801468A0;
+extern MatchState D_801468A0;
 
 
 
@@ -48,8 +48,8 @@ extern State_func_8022A68C_de D_801468A0;
 int func_8022A68C_de(char *arg0) {
     Shared_ActorView *p;
     int count;
-    State_func_8022A68C_de *s;
-    State_func_8022A68C_de *t;
+    MatchState *s;
+    MatchState *t;
 
     if (func_80245798_de() != 0 || func_80245784_de() != 0 || D_801371DC != 0) {
         return 0;

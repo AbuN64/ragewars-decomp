@@ -6,14 +6,14 @@
    func_8042DEA0_de. */
 
 
-extern struct State_func_8042CFDC_de D_801468A0;
+extern struct MatchState D_801468A0;
 extern s32 func_8042AF28_de();
 extern s32 func_8042ACD8_de();
 extern void func_80298368_de(s32);
 extern void func_8042DEA0_de();
 
 void func_8042CFDC_de(void) {
-    struct State_func_8042CFDC_de *state = &D_801468A0;
+    struct MatchState *state = &D_801468A0;
 
     state->second = 0;
     state->first = 0;

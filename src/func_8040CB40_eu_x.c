@@ -12,15 +12,15 @@ extern s32 func_80299958_de(void);
 extern void func_802995D4_de(s32, s32, s32, s32, s32);
 extern void func_8029973C_de(void);
 
-s32 func_8040CB40_eu_x(Widget_func_8040C6FC_de *arg0, s32 msg, s32 arg2, s32 arg3) {
+s32 func_8040CB40_eu_x(Slider *arg0, s32 msg, s32 arg2, s32 arg3) {
     s32 result;
-    Widget_func_8040C6FC_de *widget = arg0;
+    Slider *widget = arg0;
 
-    if (widget->value < widget->lo) {
-        widget->value = widget->lo;
+    if (widget->value < widget->min) {
+        widget->value = widget->min;
     }
-    if (widget->value > widget->hi) {
-        widget->value = widget->hi;
+    if (widget->value > widget->max) {
+        widget->value = widget->max;
     }
 
     switch (msg) {
@@ -28,7 +28,7 @@ s32 func_8040CB40_eu_x(Widget_func_8040C6FC_de *arg0, s32 msg, s32 arg2, s32 arg
         case 8:
             if (arg3 != 0) {
                 s32 v = widget->value + widget->step;
-                s32 hi = widget->hi;
+                s32 hi = widget->max;
                 widget->value = v;
                 if (hi < v) {
                     widget->value = hi;
@@ -40,7 +40,7 @@ s32 func_8040CB40_eu_x(Widget_func_8040C6FC_de *arg0, s32 msg, s32 arg2, s32 arg
         case 7:
             if (arg3 != 0) {
                 s32 v = widget->value - widget->step;
-                s32 lo = widget->lo;
+                s32 lo = widget->min;
                 widget->value = v;
                 if (v < lo) {
                     widget->value = lo;
@@ -53,11 +53,11 @@ s32 func_8040CB40_eu_x(Widget_func_8040C6FC_de *arg0, s32 msg, s32 arg2, s32 arg
             goto end;
 
         case 0x1002:
-            result = widget->lo;
+            result = widget->min;
             goto end;
 
         case 0x1003:
-            result = widget->hi;
+            result = widget->max;
             goto end;
 
         case 0x1006:
@@ -65,36 +65,36 @@ s32 func_8040CB40_eu_x(Widget_func_8040C6FC_de *arg0, s32 msg, s32 arg2, s32 arg
             goto end;
 
         case 0x1008:
-            result = widget->userWord;
+            result = widget->flags;
             goto end;
 
         case 0x1005:
-            if (arg2 < widget->lo) {
+            if (arg2 < widget->min) {
                 goto post;
             }
-            if (widget->hi < arg2) {
+            if (widget->max < arg2) {
                 goto post;
             }
             widget->value = arg2;
             goto post;
 
         case 0x1004:
-            if (widget->lo < arg2) {
-                widget->hi = arg2;
+            if (widget->min < arg2) {
+                widget->max = arg2;
             }
-            if (arg3 < widget->hi) {
-                widget->lo = arg3;
+            if (arg3 < widget->max) {
+                widget->min = arg3;
             }
             goto post;
 
         case 0x1007:
-            if (arg2 < (widget->hi - widget->lo)) {
+            if (arg2 < (widget->max - widget->min)) {
                 widget->step = arg2;
             }
             goto post;
 
         case 0x1009:
-            widget->userWord = arg2;
+            widget->flags = arg2;
             goto post;
 
         default:
