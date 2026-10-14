@@ -2047,7 +2047,7 @@ extern u8 D_800D0E52;
 
 extern s32 D_800E63B0;
 
-extern s32 D_800CD940_de;
+extern s32 D_800CD940_de[5];
 
 extern char D_800C8380_de;
 

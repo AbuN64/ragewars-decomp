@@ -65,7 +65,6 @@ extern s32 D_8013B364;
 extern struct Shared_GlobalPlayers D_80145040;
 extern struct Shared_GlobalRuntimeState D_80145060;
 
-extern u8 D_801462E5;
 
 
 

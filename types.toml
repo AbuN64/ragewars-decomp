@@ -7810,7 +7810,7 @@ schema = 1
 "D_800CD91C" = { declaration = "extern int D_800CD91C;", evidence = "authored" }
 "D_800CD920_de" = { declaration = "extern int D_800CD920_de;", evidence = "authored" }
 "D_800CD930_de" = { declaration = "extern int D_800CD930_de;", evidence = "authored" }
-"D_800CD940_de" = { declaration = "extern s32 D_800CD940_de;", evidence = "authored" }
+"D_800CD940_de" = { declaration = "extern s32 D_800CD940_de[5];", evidence = "authored" }
 "D_800CD948_de" = { declaration = "extern s32 D_800CD948_de;", evidence = "authored" }
 "D_800CD94C_de" = { declaration = "extern int D_800CD94C_de;", evidence = "authored" }
 "D_800CD960_de" = { declaration = "extern s32 D_800CD960_de;", evidence = "authored" }
