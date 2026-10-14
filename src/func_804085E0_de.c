@@ -61,7 +61,7 @@ extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800DE868;
 extern s32 D_800E28BC;
 
-extern SharedPlayer_func_8022A398_de *func_8022A5C0_de(void *profiles, func_80242278_S1 *slot);
+extern SharedPlayer_func_8022A398_de *func_8022A5C0_de(void *profiles, PakMenuSlot *slot);
 extern void func_80253838_de(void *heap, void *block);
 extern void func_80253908_de(s32 heap);
 extern void func_80442574_de(void *buffer, char *message, SharedPlayer_func_8022A398_de *player, char *title, s32 channel);

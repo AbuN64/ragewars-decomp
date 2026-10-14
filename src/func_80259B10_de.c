@@ -27,11 +27,11 @@ s16 func_80259B10_de(Vec3 *position, void *listener) {
     if (listener == 0) {
         return 0x40;
     }
-    func_80271F68_de(&offset, &((Shared_func_80234FDC_S2 *)(listener))->position, position);
+    func_80271F68_de(&offset, &((GameplayCamera *)(listener))->position, position);
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
-    func_80272BCC_de(&((Shared_func_80234FDC_S2 *)(listener))->unk160, &offset, &local);
+    func_80272BCC_de(&((GameplayCamera *)(listener))->unk160, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];

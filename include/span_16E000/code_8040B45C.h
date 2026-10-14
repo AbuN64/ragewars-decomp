@@ -18,7 +18,7 @@ struct Action_func_8040B4E0_de;
 struct Action_func_8040B4E0_de {
     char pad0[0x1C];
     void *unk1C;
-    func_80242278_S1 *unk20;
+    PakMenuSlot *unk20;
     void *unk24;
 };
 
@@ -58,7 +58,7 @@ struct Record_func_8040B58C_de;
 struct Record_func_8040B58C_de {
     char pad0[0x1C];
     ObjRecAt5DC *player;
-    func_80242278_S1 *inner;
+    PakMenuSlot *inner;
     void *unk24;
 };
 

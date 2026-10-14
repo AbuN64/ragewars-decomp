@@ -7,14 +7,14 @@ extern u32 func_80245850_de(void);
 
 
 
-extern Record_func_80245C38_de *D_800E2830;
+extern Record108 *D_800E2830;
 extern f32 D_800D2988;
 
 
 void func_80245C38_de(void) {
     f32 value;
     f32 limit;
-    Record_func_80245C38_de *record;
+    Record108 *record;
 
     if (func_80245784_de() != 0) {
         if (func_80245850_de() != 0) {

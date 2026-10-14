@@ -31,7 +31,7 @@ extern void *func_8028B2F8_de(void *, u16 *);
 
 
 void func_80239EA4_de(void *arg0, Vec3 *out) {
-    Shared_func_80234FDC_S2 *o = arg0;
+    GameplayCamera *o = arg0;
     f32 value;
     Shared_Surface *entry;
     f32 targetX;

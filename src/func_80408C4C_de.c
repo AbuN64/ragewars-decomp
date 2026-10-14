@@ -64,11 +64,11 @@ extern char D_8014561C[];
 
 
 extern s32 func_80406178_de(Menu_func_80408C4C_de *menu, s32 ch, s32 mode);
-extern SharedPlayer_func_80408C4C_de *func_8022A5C0_de(char *pool, func_80242278_S1 *slot);
+extern SharedPlayer_func_80408C4C_de *func_8022A5C0_de(char *pool, PakMenuSlot *slot);
 extern void func_8044A0C4_de(SharedPlayer_func_80408C4C_de *player, s32 team);
 extern void func_804427C4_de(char *text, Menu_func_80408C4C_de *menu, char *format);
 extern s32 func_80404858_de(s32 ch, s32 index);
-extern void func_80442574_de(char *, char *, SharedPlayer_func_80408C4C_de *, func_80242278_S1 *, char *);
+extern void func_80442574_de(char *, char *, SharedPlayer_func_80408C4C_de *, PakMenuSlot *, char *);
 
 
 

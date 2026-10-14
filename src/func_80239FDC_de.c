@@ -21,7 +21,7 @@ extern s32 D_800CD8D0;
 
 void func_80239FDC_de(void *arg0) {
     s32 object;
-    Shared_func_80234FDC_S2 *camera = arg0;
+    GameplayCamera *camera = arg0;
     f32 value;
     f32 x;
     f32 y;

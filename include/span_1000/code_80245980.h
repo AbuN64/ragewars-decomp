@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80245980_H
 #define UNBAKE_SPAN_1000_CODE_80245980_H
 #include "types.h"
+#include "span_1000/code_80243A80.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
@@ -150,8 +151,7 @@ extern float D_800C37D4_de;
 
 extern void func_80245B28_de();
 
-struct Record_func_80245C38_de;
-typedef struct Record_func_80245C38_de Record_func_80245C38_de;
+struct Record108;
 
 
 
@@ -181,21 +181,7 @@ struct Access_s32_D8 {
     s32 field;
 };
 
-struct Record_func_80245C38_de;
-struct Record_func_80245C38_de {
-    char pad0[0x1C];
-    f32 value;
-    f32 previous;
-    char pad24[8];
-    f32 limit;
-    f32 threshold;
-    char pad34[8];
-    s32 done;
-    char pad40[0x74];
-    s32 active;
-    char padB8[0x4C];
-    s32 mode;
-};
+struct Record108;
 
 struct World_func_802466A0_de;
 typedef struct World_func_802466A0_de World_func_802466A0_de;

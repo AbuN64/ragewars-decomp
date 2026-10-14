@@ -19,7 +19,7 @@ extern f32 D_800C3F98_de[];
 f32 func_8025C368_de(char *source, char *listener)
 {
     SoundSpatialSource *sound = (SoundSpatialSource *)source;
-    Shared_func_80234FDC_S2 *camera = (Shared_func_80234FDC_S2 *)listener;
+    GameplayCamera *camera = (GameplayCamera *)listener;
     Vec3 *a = &sound->position;
     Vec3 *b = &camera->position;
     f32 dx = a->x - b->x;

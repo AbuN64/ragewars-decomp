@@ -35,15 +35,15 @@ extern char D_0044E4B0[];
 extern char D_0044E4D4[];
 extern char D_0044FFA4[];
 
-extern void func_80264248_de(func_80242278_S1 *slot);
-extern void func_802647E8_de(func_80242278_S1 *slot, s32 mode);
+extern void func_80264248_de(PakMenuSlot *slot);
+extern void func_802647E8_de(PakMenuSlot *slot, s32 mode);
 extern void func_80264788_de(s32 ch);
 extern void func_8044D528_de(char *, s32, s32);
 extern void func_8044DDD4_de(char *);
 extern void func_80404E28_de(s32 ch);
 extern s32 func_80404F04_de(s32 ch);
 extern s32 func_80264580_de(s32 ch);
-extern void func_80442574_de(char *, char *, PlayerRecAt5EC *, func_80242278_S1 *, s32);
+extern void func_80442574_de(char *, char *, PlayerRecAt5EC *, PakMenuSlot *, s32);
 
 
 

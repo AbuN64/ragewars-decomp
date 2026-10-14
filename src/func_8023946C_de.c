@@ -12,7 +12,7 @@ extern void func_802B72B0_de(float arg0);
 
 void func_8023946C_de(void *arg0, Vec3 *arg1) {
     Vec3 sp10;
-    Shared_func_80234FDC_S2 *camera = arg0;
+    GameplayCamera *camera = arg0;
     func_80271F68_de(&sp10, &camera->position, arg1);
     func_802B72B0_de((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
 }

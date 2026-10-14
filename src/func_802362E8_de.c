@@ -77,8 +77,8 @@ void func_802362E8_de(char *view, char *world) {
         {
             Gfx *_g;
 
-            right = ((Shared_func_80234FDC_S2 *)(view))->unk2A4 + ((Shared_func_80234FDC_S2 *)(view))->unk29C;
-            gDPFillRectangle((Gfx *)(D_80110634++), ((Shared_func_80234FDC_S2 *)(view))->unk2A4, ((Shared_func_80234FDC_S2 *)(view))->unk2A8, right, ((Shared_func_80234FDC_S2 *)(view))->unk2A8 + ((Shared_func_80234FDC_S2 *)(view))->unk2A0);
+            right = ((GameplayCamera *)(view))->unk2A4 + ((GameplayCamera *)(view))->unk29C;
+            gDPFillRectangle((Gfx *)(D_80110634++), ((GameplayCamera *)(view))->unk2A4, ((GameplayCamera *)(view))->unk2A8, right, ((GameplayCamera *)(view))->unk2A8 + ((GameplayCamera *)(view))->unk2A0);
         }
     }
 }

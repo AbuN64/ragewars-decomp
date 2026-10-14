@@ -17,7 +17,7 @@
 extern s32 D_800CD8D0;
 extern ViewFlags D_80103220;
 extern u32 func_802337D0_de(StateRecAt10 *);
-extern void func_80234FEC_de(Shared_func_80234FDC_S2 *camera);
+extern void func_80234FEC_de(GameplayCamera *camera);
 /* Update split-screen rectangles, advance transient effects, and merge visible bounds. */
 void func_80236874_de(RaceViewportState *state) {
     f32 halfWidth;
@@ -53,7 +53,7 @@ void func_80236874_de(RaceViewportState *state) {
     ViewFlags *flags;
     Shared_Game *settings;
     ViewportLayoutRules *layout;
-    Shared_func_80234FDC_S2 *view;
+    GameplayCamera *view;
     Box *clip, *bounds;
     ViewFlags initialFlags;
 

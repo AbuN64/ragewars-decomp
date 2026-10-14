@@ -3078,13 +3078,13 @@ struct Record_func_80439C80_de {
 };
 
 struct Record_func_80409BDC_de;
-struct func_80242278_S1;
+struct PakMenuSlot;
 struct Record_func_80409BDC_de {
     char pad[0x14];
     void *dialogData; /* 0x14 */
     char pad18[4];
     struct SharedPlayer_func_80226A34_de *player; /* 0x1C */
-    struct func_80242278_S1 *inner;
+    struct PakMenuSlot *inner;
 };
 
 struct func_8022A5E4_S2;

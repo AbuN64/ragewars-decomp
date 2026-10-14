@@ -8,9 +8,9 @@
  * These are persistent state fields, with the actual root storage between. */
 typedef struct MenuMatchGlobals {
     u8 unobserved0[0x20];
-    Shared_func_80234FDC_S2 *cameras; /* 0x20 */
+    GameplayCamera *cameras; /* 0x20 */
     u8 unobserved24[0x40 - 0x24];
-    Shared_func_80234FDC_S2 fallbackCamera; /* 0x40 */
+    GameplayCamera fallbackCamera; /* 0x40 */
     u8 unobservedED8[0x1200 - 0xED8];
     s32 useFallbackCamera; /* 0x1200 */
     u8 unobserved1204[0x125D - 0x1204];

@@ -1791,8 +1791,8 @@ struct func_80204468_S3 {
 struct HeadRecord;
 typedef struct HeadRecord HeadRecord;
 
-struct func_80242278_S1;
-struct func_80242278_S1 {
+struct PakMenuSlot;
+struct PakMenuSlot {
     char pad0[0x4];
     s8 unk4;
     char pad05[0xB0 - 5];
@@ -1805,8 +1805,8 @@ struct ObjRecAt5DC {
     char * unk5DC;
 };
 
-struct func_80242278_S1;
-typedef struct func_80242278_S1 func_80242278_S1;
+struct PakMenuSlot;
+typedef struct PakMenuSlot PakMenuSlot;
 
 struct Owner8020F150;
 struct Owner8020F150 {

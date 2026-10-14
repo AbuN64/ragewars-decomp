@@ -54,7 +54,7 @@ void *func_8022A634_de(void *arg0, u32 arg1) {
         if (var_v1 != 0) {
             do {
                 temp_v0 = ((Shared_ActorView *)var_v1)->message;
-                if (temp_v0 != 0 && ((Shared_func_80234FDC_S2 *)temp_v0)->messageList.flag == 0) {
+                if (temp_v0 != 0 && ((GameplayCamera *)temp_v0)->messageList.flag == 0) {
                     if (var_a2 == (s32) arg1) {
                         return var_v1;
                     }

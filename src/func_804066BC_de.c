@@ -35,7 +35,7 @@ extern void func_80404E28_de(s32 ch);
 extern s32 func_80404F04_de(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
-extern void func_80442574_de(char *, char *, ObjRecAt5DC *, func_80242278_S1 *, char *);
+extern void func_80442574_de(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
 void func_804066BC_de(Shared_PakMenu *menu) {
     s32 ch;

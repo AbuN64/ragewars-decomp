@@ -1475,7 +1475,7 @@ struct Menu_func_804066BC_de {
     char *dialogData; /* 0x14 */
     char pad18[4];
     ObjRecAt5DC *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
     struct List_func_80442574_de *prompt; /* 0x24: dialog resource */
 };
 
@@ -1497,7 +1497,7 @@ struct Menu_func_80408C4C_de;
 struct Menu_func_80408C4C_de {
     char pad0[0x1C];
     SharedPlayer_func_80408C4C_de *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
     char *prompt;
 };
 

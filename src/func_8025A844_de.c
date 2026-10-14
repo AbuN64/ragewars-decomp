@@ -83,9 +83,9 @@ void func_8025AA2C_de(Emitter *emitter) {
         emitter->level = D_800C3F50_de;
     }
     listener = ((Owner_func_8025A844_de *)emitter->scene)->listener;
-    dx = emitter->x - ((Shared_func_80234FDC_S2 *)listener)->position.x;
-    dy = emitter->y - ((Shared_func_80234FDC_S2 *)listener)->position.y;
-    dz = emitter->z - ((Shared_func_80234FDC_S2 *)listener)->position.z;
+    dx = emitter->x - ((GameplayCamera *)listener)->position.x;
+    dy = emitter->y - ((GameplayCamera *)listener)->position.y;
+    dz = emitter->z - ((GameplayCamera *)listener)->position.z;
     distance = dx * dx + dy * dy + dz * dz;
     emitter->distance = distance;
     if (emitter->lastDistance < distance) {

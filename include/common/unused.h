@@ -5471,11 +5471,11 @@ struct Owner_func_8043E2D8_de {
 };
 struct Holder_func_8043E2D8_de;
 struct Owner_func_8043E2D8_de;
-struct func_80242278_S1;
+struct PakMenuSlot;
 struct Holder_func_8043E2D8_de {
     char pad[0x1C];
     struct Owner_func_8043E2D8_de *owner;
-    struct func_80242278_S1 *mode;
+    struct PakMenuSlot *mode;
 };
 struct Effect_func_8026851C_de;
 struct HudCue;
@@ -6549,7 +6549,7 @@ struct PakNotesMenu {
     char pad0[0xC];
     PakNotesMenuItem *items;
     char pad10[0x10];
-    func_80242278_S1 *owner;
+    PakMenuSlot *owner;
 };
 struct PakSaveContext;
 struct PakSaveContext {
@@ -6581,7 +6581,7 @@ struct PakSearchMenu;
 struct PakSearchMenu {
     char pad0[0x1C];
     PakSearchPlayer *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
 };
 struct PakSlot;
 struct PakSlot {
@@ -6610,7 +6610,7 @@ struct PakStatusPakSaveMenu {
     char *text;
     char pad18[4];
     SharedPlayer_func_80209CD8_de *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
 };
 struct ParamsRecAt18;
 struct ParamsRecAt18 {

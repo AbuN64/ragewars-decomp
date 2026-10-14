@@ -37,7 +37,7 @@ extern void func_80404E28_de(s32 ch);
 extern s32 func_80404858_de(s32 ch, s32 index);
 extern s32 func_804051D4_de(s32 ch);
 extern s32 func_80407578_de(void *owner, Menu_func_80409144_de *menu, void *arg);
-extern void func_80442574_de(char *, char *, void *, func_80242278_S1 *, char *);
+extern void func_80442574_de(char *, char *, void *, PakMenuSlot *, char *);
 
 s32 func_80409144_de(void *owner, Menu_func_80409144_de *menu, void *arg) {
     s32 ch;

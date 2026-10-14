@@ -16,7 +16,7 @@ extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
 
 s32 func_802500FC_de(void *arg0, s32 arg1) {
     Owner_func_80250274_de *owner = arg0;
-    Shared_func_80234FDC_S2 *camera = (void *)arg1;
+    GameplayCamera *camera = (void *)arg1;
     Vec3 sp10;
     f32 temp_f0;
     f32 threshold;

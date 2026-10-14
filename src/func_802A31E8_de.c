@@ -41,7 +41,7 @@ void func_802A31E8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    func_80272B38_de(&((Shared_func_80234FDC_S2 *)arg2)->unk1A0, setup, &basis);
+    func_80272B38_de(&((GameplayCamera *)arg2)->unk1A0, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;

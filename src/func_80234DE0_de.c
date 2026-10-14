@@ -27,7 +27,7 @@ extern void func_80275954_de(void *, s32, Vec3 *);
 
 
 
-void func_80234DE0_de(Shared_func_80234FDC_S2 *camera) {
+void func_80234DE0_de(GameplayCamera *camera) {
     Vec3 pts[5];
     Vec3 *out;
     f32 radius;

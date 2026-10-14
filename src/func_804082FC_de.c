@@ -21,7 +21,7 @@ extern void func_80407578_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 extern void func_80405338_de(s32 ch, s32 note, s32 *state);
 extern void func_80405648_de(s32 state, char *name, s32 size);
 extern s32 func_802A037C_de(char *name, s32 game);
-extern void func_80442574_de(char *, char *, ObjRecAt5DC *, func_80242278_S1 *, char *);
+extern void func_80442574_de(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 extern void func_80404E28_de(s32 ch);
 extern s32 func_80404F04_de(s32 ch);
 

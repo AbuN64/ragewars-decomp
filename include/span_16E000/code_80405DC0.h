@@ -48,7 +48,7 @@ struct PlayerRecAt5EC;
 struct MenuRecAt24 {
     char pad0[0x1C];
     struct PlayerRecAt5EC *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
     char *prompt;
 };
 
@@ -62,7 +62,7 @@ struct MenuRecAt20V3;
 struct MenuRecAt20V3 {
     char pad0[0x1C];
     SharedPlayer_func_8022A398_de *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
 };
 
 extern char *D_800D36D8;
@@ -71,7 +71,7 @@ struct Menu_func_80409144_de;
 struct Menu_func_80409144_de {
     char pad0[0x1C];
     void *player;
-    func_80242278_S1 *slot;
+    PakMenuSlot *slot;
     char *prompt;
 };
 

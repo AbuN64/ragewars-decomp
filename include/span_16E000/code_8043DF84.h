@@ -1487,7 +1487,7 @@ struct Owner_func_8043E1F8_de;
 struct MenuRecAt20V2 {
     char pad0[0x1C];
     struct Owner_func_8043E1F8_de *owner;
-    func_80242278_S1 *widget;
+    PakMenuSlot *widget;
 };
 
 extern s32 func_8043E1F8_de(s32 arg0, MenuRecAt20V2 *menu);

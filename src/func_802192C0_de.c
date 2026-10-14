@@ -164,10 +164,10 @@ void func_80219490_de(char *object, char *camera) {
     gDPSetTextureFilter(command, G_TF_BILERP);
     func_8026D980_de();
 
-    x = ((Shared_func_80234FDC_S2 *)(camera))->unk2A4;
-    y = ((Shared_func_80234FDC_S2 *)(camera))->unk2A8;
-    z = ((Shared_func_80234FDC_S2 *)(camera))->unk2A0 + y;
-    w = ((Shared_func_80234FDC_S2 *)(camera))->unk29C + x;
+    x = ((GameplayCamera *)(camera))->unk2A4;
+    y = ((GameplayCamera *)(camera))->unk2A8;
+    z = ((GameplayCamera *)(camera))->unk2A0 + y;
+    w = ((GameplayCamera *)(camera))->unk29C + x;
     func_80291BE8_de(&D_8011FAC0, (s32)x, (s32)w, (s32)y, (s32)z, 0);
 
     func_80272CB0_de(first, ((AnimationSprite *)(object))->scaleX,

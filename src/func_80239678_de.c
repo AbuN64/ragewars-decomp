@@ -29,7 +29,7 @@ f32 func_80239678_de(void *arg0, void *arg1) {
     sum = 0.0f;
     if (node != 0) {
         do {
-            func_80271F68_de(&position, &((Shared_func_80234FDC_S2 *)node)->position, arg1);
+            func_80271F68_de(&position, &((GameplayCamera *)node)->position, arg1);
             sum += func_802B72B0_de(
                 (position.x * position.x) +
                 (position.y * position.y) +

@@ -56,10 +56,10 @@ struct Shared_func_80234FDC_S1 {
 typedef char Shared_func_80234FDC_S1_size_check[(sizeof(Shared_func_80234FDC_S1) == 0x16E4) ? 1 : -1];
 
 
-typedef struct Shared_func_80234FDC_S2 Shared_func_80234FDC_S2;
-struct Shared_func_80234FDC_S2 {
+typedef struct GameplayCamera GameplayCamera;
+struct GameplayCamera {
     char pad0[4];
-    Shared_func_80234FDC_S2 *next; /* 0x04: camera list link */
+    GameplayCamera *next; /* 0x04: camera list link */
     char pad8[0xC];
     s16 unk14; /* +0x14: src/func_80234FDC.c */
     char pad16[0x2];
@@ -157,7 +157,7 @@ struct Shared_func_80234FDC_S2 {
     s8 unkE94; /* +0xE94: src/func_80234FDC.c */
     char padE95[0x3];
 };
-typedef char Shared_func_80234FDC_S2_size_check[(sizeof(Shared_func_80234FDC_S2) == 0xE98) ? 1 : -1];
+typedef char Shared_func_80234FDC_S2_size_check[(sizeof(GameplayCamera) == 0xE98) ? 1 : -1];
 
 
 typedef struct Shared_func_80234FDC_S3 Shared_func_80234FDC_S3;
@@ -210,8 +210,8 @@ typedef char Shared_Func_80234FDC_Callback_size_check[(sizeof(Shared_Func_80234F
 /* The list header and complete primary camera, followed by the effect pools. */
 typedef struct RaceViewportState {
     RaceHeader header;
-    Shared_func_80234FDC_S2 self;
-    char padAfterCamera[0x11D8 - sizeof(RaceHeader) - sizeof(Shared_func_80234FDC_S2)];
+    GameplayCamera self;
+    char padAfterCamera[0x11D8 - sizeof(RaceHeader) - sizeof(GameplayCamera)];
     IntrusiveList freeEffects;
     IntrusiveList activeEffects;
 } RaceViewportState;

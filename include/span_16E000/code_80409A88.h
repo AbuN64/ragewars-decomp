@@ -35,11 +35,11 @@ typedef struct Display_func_8040A4D4_de Display_func_8040A4D4_de;
 extern void func_8040A490_de(void);
 
 struct RecordRecAt20V2;
-struct func_80242278_S1;
+struct PakMenuSlot;
 struct RecordRecAt20V2 {
     char pad[0x1C];
     s32 result;
-    struct func_80242278_S1 *inner;
+    struct PakMenuSlot *inner;
 };
 
 struct Display_func_8040A4D4_de;

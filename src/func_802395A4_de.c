@@ -16,7 +16,7 @@ extern void func_80271F68_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2);
 
 void *func_802395A4_de(void *arg0, Vec3 *arg1) {
     Vec3 position;
-    Shared_func_80234FDC_S2 *node;
+    GameplayCamera *node;
     void *bestNode;
     f32 bestDist;
     f32 distSq;

@@ -20,12 +20,12 @@ void func_8023913C_de(void *arg0) {
         f32 f2 = D_800C3534_de;
         f32 f3 = D_800C8628;
 
-        ((Shared_func_80234FDC_S2 *)arg0)->unk90 = 0;
-        ((Shared_func_80234FDC_S2 *)arg0)->unk94 = 0;
-        ((Shared_func_80234FDC_S2 *)arg0)->unk88 = f0;
-        ((Shared_func_80234FDC_S2 *)arg0)->unk8C = f1;
-        ((Shared_func_80234FDC_S2 *)arg0)->unk98 = f2;
-        ((Shared_func_80234FDC_S2 *)arg0)->unk9C = f3;
+        ((GameplayCamera *)arg0)->unk90 = 0;
+        ((GameplayCamera *)arg0)->unk94 = 0;
+        ((GameplayCamera *)arg0)->unk88 = f0;
+        ((GameplayCamera *)arg0)->unk8C = f1;
+        ((GameplayCamera *)arg0)->unk98 = f2;
+        ((GameplayCamera *)arg0)->unk9C = f3;
     }
 }
 

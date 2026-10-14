@@ -18,8 +18,8 @@ typedef struct Shared_PakMenu {
     char pad18[4];
     ObjRecAt5DC *player;
     union {
-        func_80242278_S1 *owner;
-        func_80242278_S1 *slot;
+        PakMenuSlot *owner;
+        PakMenuSlot *slot;
     };
 } Shared_PakMenu;
 void func_80405F48_de(Shared_PakMenu *menu);
