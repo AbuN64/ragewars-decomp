@@ -98,7 +98,6 @@ block_34:
 }
 
 /* These contiguous globals place the actor-list pointer 0x1285 bytes before the enable flag. */
-extern s32 D_8011CC18;
 extern void *func_8024BC94_de(void *arg0, s32 unused1, struct Shape_func_802764D4_de_2 arg2);
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
@@ -111,9 +110,9 @@ Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
                             Vec3 *targetPosition)
 {
     Vec3 candidate, direction, origin;
-    union { Vec3 vector; s32 words[3]; } bestPosition;
+    Vec3 bestPosition;
     Vec3 forward, unit;
-    union { Vec3 vector; s32 words[3]; } bestDirection;
+    Vec3 bestDirection;
     Vec3 axis;
     Vector4f correction, facing, result;
     DraftAimPlayer *other, *best;
@@ -122,17 +121,17 @@ Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
     f32 angle, dot, threshold, half, amount, scale;
     s32 count, i, firstSpecial, secondSpecial;
 
-    bestPosition.words[0] = 0;
-    bestPosition.words[1] = 0;
-    bestPosition.words[2] = 0;
-    bestDirection.words[0] = 0;
-    bestDirection.words[1] = 0;
-    bestDirection.words[2] = 0;
-    result.x = result.y = result.z = bestPosition.vector.x;
+    bestPosition.x = 0.0f;
+    bestPosition.y = 0.0f;
+    bestPosition.z = 0.0f;
+    bestDirection.x = 0.0f;
+    bestDirection.y = 0.0f;
+    bestDirection.z = 0.0f;
+    result.x = result.y = result.z = bestPosition.x;
     result.w = D_800C2388_de;
     best = 0;
     if (player->weapon != -1) angle = ((DraftAimWeapon *)D_800D052C[player->weapon])->angle;
-    else angle = bestPosition.vector.x;
+    else angle = bestPosition.x;
     threshold = func_802B6560_de(angle * D_800C238C_de);
     if (angle != 0.0f) {
         unit.x = 0.0f;
@@ -162,7 +161,7 @@ Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
                           forward.z * direction.z;
                     if (threshold < dot) {
                         threshold = dot;
-                        bestPosition.vector = candidate;
+                        bestPosition = candidate;
                         best = other;
                     }
                 }
@@ -190,8 +189,8 @@ Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
                 if (threshold < dot) {
                     threshold = dot;
                     best = other;
-                    bestPosition.vector = candidate;
-                    bestDirection.vector = direction;
+                    bestPosition = candidate;
+                    bestDirection = direction;
                 }
             }
                         i++;
@@ -199,9 +198,9 @@ Vector4f func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
         }
     }
     *target = best;
-    *targetPosition = bestPosition.vector;
+    *targetPosition = bestPosition;
     if (best) {
-        func_80272018_de(&axis, &forward, &bestDirection.vector);
+        func_80272018_de(&axis, &forward, &bestDirection);
         func_8027207C_de(&axis.x);
         scale = D_800C239C_de;
         threshold = func_802745D0_de(threshold);
