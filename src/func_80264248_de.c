@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802636D0.h"
 #include "types.h"
@@ -11,7 +12,6 @@ extern s32 D_800CBC1C;
 extern s8 D_8010BBB8;
 extern char D_8010FBC0;
 extern char D_8010FC00;
-extern s32 func_802BB2A0_de(void *, void *, s32);
 extern s32 func_802BB420_de(void *, void *, s32);
 extern s32 func_802BAD80_de(void *);
 extern void func_80263740_de(void);

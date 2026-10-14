@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/unused.h"
 #include "shared/gameplay_round_rules.h"
 #include "common/types_06e4f7ef1f9e.h"
@@ -9,7 +10,6 @@
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_8025BE08_de(void *arg0, s32 arg1);
 extern void func_80259988_de(void *arg0, s32 arg1);
@@ -31,7 +31,7 @@ void func_80258800_de(void *arg0, s32 arg1) {
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
             func_802BCF50_de(temp_a0);
-            func_802BB2A0_de((s32)temp_s0, 0, 1);
+            func_802BB2A0_de(temp_s0, 0, 1);
         } else {
             func_802BCF50_de(temp_a0);
         }
@@ -58,7 +58,6 @@ void func_80258800_de(void *arg0, s32 arg1) {
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_8025BF08_de(void *, s32);
 extern void func_802599EC_de(void *, s32);
 extern void func_802BB420_de(void *, s32, s32);
@@ -81,7 +80,7 @@ void func_802588D4_de(void *arg0, s32 arg1) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
-        func_802BB2A0_de((s32)temp_s0, 0, 1);
+        func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
     } else {
         func_802BCF50_de(temp_a0);
@@ -103,7 +102,6 @@ void func_802588D4_de(void *arg0, s32 arg1) {
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_8025C008_de(void *arg0, s32 arg1);
 extern void func_80259A50_de(void *arg0, s32 arg1);
@@ -126,7 +124,7 @@ void func_802589A8_de(void *arg0, s32 arg1) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
-        func_802BB2A0_de((s32)temp_s0, 0, 1);
+        func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
     } else {
         func_802BCF50_de(temp_a0);
@@ -226,7 +224,6 @@ void *func_80258BF4_de(void *arg0, int arg1) {
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_8025B5F0_de(void *arg0, s32 arg1);
 extern void func_80259918_de(void *arg0, s32 arg1);
@@ -249,7 +246,7 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
             func_802BCF50_de(temp_a0);
-            func_802BB2A0_de((s32)temp_s0, 0, 1);
+            func_802BB2A0_de(temp_s0, 0, 1);
         } else {
             func_802BCF50_de(temp_a0);
         }
@@ -325,7 +322,6 @@ void func_80258D48_de(void *object, int value) {
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 
@@ -350,7 +346,7 @@ s32 func_80258D50_de(char *obj, s32 owner)
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
             func_802BCF50_de(temp_a0);
-            func_802BB2A0_de((s32)temp_s0, 0, 1);
+            func_802BB2A0_de(temp_s0, 0, 1);
         } else {
             func_802BCF50_de(temp_a0);
         }

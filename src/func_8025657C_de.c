@@ -1,9 +1,9 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_80256220.h"
 #include "types.h"
 /* Receives read requests, transfers and acknowledges each one. The timer-message
  * handling belongs to the separate US-rev1 routine, which this item does not contain. */
 
-extern s32 func_802BB2A0_de(void *, void *, s32);
 extern s32 func_802BB420_de(void *, void *, s32);
 extern void func_802BD280_de(void *, s32);
 extern s32 func_802B9A40_de(s32, u32, void *, u32);

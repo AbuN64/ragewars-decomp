@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80256220.h"
 #include "span_1000/code_8025D948.h"
@@ -19,7 +20,6 @@ extern void *func_802B3A44_de(void *arg0, s32 *arg1, s32 arg2, s16 arg3);
 
 extern void func_8028FD4C_de(void *arg0, void *arg1);
 
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802B7400_de(void *arg0, s32 arg1);
 s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)
 {

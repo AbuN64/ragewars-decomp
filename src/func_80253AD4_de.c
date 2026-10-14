@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802536F4.h"
 #include "types.h"
@@ -5,7 +6,6 @@
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 
@@ -25,7 +25,7 @@ s32 func_80253AD4_de(void) {
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
-        func_802BB2A0_de((s32)((char *)&D_801005A8 + 0xB98), 0, 1);
+        func_802BB2A0_de(((char *)&D_801005A8 + 0xB98), 0, 1);
     } else {
         func_802BCF50_de(temp_a0);
     }

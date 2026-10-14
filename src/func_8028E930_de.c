@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_8025E280.h"
 #include "span_1000/code_8028DF6C.h"
 #include "span_1000/code_802BA23C.h"
@@ -6,7 +7,6 @@
 
 
 
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, void *arg1, s32 arg2);
 extern void func_8028EACC_de(void *arg0);
 

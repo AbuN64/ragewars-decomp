@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */
 #include "common/unused.h"
 #include "types.h"
@@ -12,7 +13,6 @@
 
 
 
-extern s32 func_802BB2A0_de(void *, void *, s32);
 extern s32 func_802BB420_de(void *, void *, s32);
 extern void func_802BB6C0_de(void *, u64, u64, void *, void *);
 extern int func_802955C8_us_rev1(void);

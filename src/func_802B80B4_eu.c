@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_8025A3EC.h"
 #include "common/unused.h"
 #include "span_1000/code_802B7B80.h"

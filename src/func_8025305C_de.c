@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
@@ -9,7 +10,6 @@ extern s32 D_800C3EA8_de;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern struct Shape_func_802BC570_de *func_802548B8_de(s32, s32, u32, s32 *);
 extern s32 func_802BB420_de(Queue_func_802517B4_de *, s32, s32);
 extern void func_802511AC_de(s32);
@@ -37,7 +37,7 @@ Record *func_8025305C_de(s32 size) {
     D_8010515C = counter;
     if (counter != 1) {
         func_802BCF50_de(token);
-        func_802BB2A0_de((s32)&D_80101140, 0, 1);
+        func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
         func_802BCF50_de(token);
     }
@@ -59,7 +59,7 @@ Record *func_8025305C_de(s32 size) {
         D_8010515C = counter3;
         if (counter3 != 1) {
             func_802BCF50_de(token3);
-            func_802BB2A0_de((s32)&D_80101140, 0, 1);
+            func_802BB2A0_de(&D_80101140, 0, 1);
         } else {
             func_802BCF50_de(token3);
         }
@@ -81,7 +81,7 @@ Record *func_8025305C_de(s32 size) {
         D_8010515C = counter3;
         if (counter3 != 1) {
             func_802BCF50_de(token3);
-            func_802BB2A0_de((s32)&D_80101140, 0, 1);
+            func_802BB2A0_de(&D_80101140, 0, 1);
         } else {
             func_802BCF50_de(token3);
         }

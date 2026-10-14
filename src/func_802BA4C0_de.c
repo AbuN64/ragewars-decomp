@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_802BA23C.h"
 #include "span_1000/code_802BA23C.h"
 #include "common/unused.h"
@@ -12,7 +13,6 @@ extern u16 D_80148840;
 
 extern struct __OSViContext *func_802BA640_de(void);
 
-extern s32 func_802BB2A0_de(Opaque_OSMesgQueue *mq, OSMesg *msg, s32 flag);
 extern s32 func_802BB420_de(Opaque_OSMesgQueue *mq, OSMesg msg, s32 flag);
 extern u32 func_802BCF00_de(void);
 extern void func_802BB8B0_de(void);

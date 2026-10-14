@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/unused.h"
 #include "span_1000/code_8025A3EC.h"
 #include "common/types_1dc8418c21db.h"
@@ -19,7 +20,6 @@
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *, s32, s32);
 
 extern void func_8025BA9C_de(void *, s16);
@@ -49,7 +49,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
-        func_802BB2A0_de((s32)temp_s0, 0, 1);
+        func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     } else {
         func_802BCF50_de(temp_a0);
@@ -105,7 +105,6 @@ extern void func_8025BB84_de(void *, Item57BD4 *, s32);
 extern void func_802577F4_de(void *, void *, s32, Vec3 *);
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *, s32, s32);
 
 

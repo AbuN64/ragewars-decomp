@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802B7B80.h"
 #include "span_1000/code_802B9BB4.h"

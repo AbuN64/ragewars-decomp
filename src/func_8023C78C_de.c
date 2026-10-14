@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_8023B9A0.h"
 #include "types.h"
 
@@ -6,7 +7,6 @@ extern s32 D_800FF254;
 void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
 void **func_8025343C_de(s32 arg0, s32 arg1, s32 arg2, void *arg3);
 void func_802BB420_de(void *arg0, void *arg1, s32 arg2);
-void func_802BB2A0_de(void *arg0, void *arg1, s32 arg2);
 
 
 

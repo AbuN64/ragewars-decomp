@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "shared/gameplay_round_rules.h"
 #include "common/unused.h"
 #include "common/types_06e4f7ef1f9e.h"
@@ -15,7 +16,6 @@ extern char D_80145088;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 extern void func_80259440_de(void *arg0);
@@ -100,7 +100,6 @@ s32 func_8025842C_de(void *arg0) {
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_8025C17C_de(void *arg0, s32 arg1);
 extern s32 func_80259AB8_de(void *arg0, s32 arg1);
@@ -122,7 +121,7 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         temp_s0->locked = temp_v1;
         if (temp_v1 != 1) {
             func_802BCF50_de(temp_a0);
-            func_802BB2A0_de((s32)temp_s0, 0, 1);
+            func_802BB2A0_de(temp_s0, 0, 1);
         } else {
             func_802BCF50_de(temp_a0);
         }
@@ -182,7 +181,6 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(s32, s32, s32);
 
 
 
@@ -200,7 +198,7 @@ void func_80258740_de(s32 *arg0) {
     temp_s0->locked = temp_v1;
     if (temp_v1 != 1) {
         func_802BCF50_de(temp_a0);
-        func_802BB2A0_de((s32) temp_s0, 0, 1);
+        func_802BB2A0_de(temp_s0, 0, 1);
         return;
     }
     func_802BCF50_de(temp_a0);

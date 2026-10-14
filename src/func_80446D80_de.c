@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8041C67C.h"
 #include "types.h"
@@ -11,7 +12,6 @@ extern char D_80154110;
 extern void func_80446E58_de(int channel);
 extern void func_80446EE4_de(int channel, EntryRecAt3 *data);
 extern s32 func_802B9CB0_de(s32 direction, void *data);
-extern s32 func_802BB2A0_de(void *queue, void **msg, s32 flag);
 
 s32 func_80446D80_de(void *queue, int channel)
 {

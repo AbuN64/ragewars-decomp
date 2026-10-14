@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802508E0.h"
 #include "span_1000/code_80255BEC.h"
@@ -33,7 +34,6 @@ extern s32 D_80106248;
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
-extern void func_802BB2A0_de(void *, s32, s32);
 extern s32 func_802BB420_de(void *, s32, s32);
 extern Request_func_80251F6C_de *func_80254ED0_de(s32, s32);
 extern void func_80254E88_de(s32, Request_func_80251F6C_de *);

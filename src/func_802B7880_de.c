@@ -1,10 +1,10 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_802B7488.h"
 #include "types.h"
 
 extern u64 func_802BADC0_de(void);
 extern void func_802BAC60_de(void *, s32, s32);
 extern void func_802BB6C0_de(void *arg0, u64 arg1, u64 arg2, void *arg3, void *arg4);
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802B7A20_de(s32 arg0);
 extern s32 func_802B9CB0_de(s32, s32);
 extern void func_802B7AD8_de(s32 *arg0, s32 arg1);
@@ -33,7 +33,7 @@ s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
     if (value <= 0x0165A0BBULL) {
         func_802BAC60_de(sp40, (s32)sp58, 1);
         func_802BB6C0_de(sp20, 0x0165A0BCULL - value, 0, sp40, sp58);
-        func_802BB2A0_de((s32)sp40, (s32)sp58, 1);
+        func_802BB2A0_de(sp40, (s32)sp58, 1);
     }
     D_8014D46C = 4;
     func_802B7A20_de(0);

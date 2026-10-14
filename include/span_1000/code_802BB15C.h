@@ -18,6 +18,8 @@ struct Thread {
 struct Queue_func_802BB2A0_de;
 typedef struct Queue_func_802BB2A0_de Queue_func_802BB2A0_de;
 
+extern s32 func_802BB2A0_de(Queue_func_802BB2A0_de *queue, void **message, s32 block);
+
 extern int func_802BB0F0_de(unsigned int devAddr, unsigned int data);
 
 struct OSThread_s_func_802BB5F0_de;

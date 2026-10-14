@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802536F4.h"
@@ -7,7 +8,6 @@
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32 arg0);
-extern void func_802BB2A0_de(s32 arg0, s32 arg1, s32 arg2);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 
@@ -33,7 +33,7 @@ void func_80253BBC_de(s32 arg0, func_80205628_S3 *arg1) {
     D_8010515C = counter;
     if (counter != 1) {
         func_802BCF50_de(token);
-        func_802BB2A0_de((s32)((char *)base + 0xB98), 0, 1);
+        func_802BB2A0_de(((char *)base + 0xB98), 0, 1);
     } else {
         func_802BCF50_de(token);
     }

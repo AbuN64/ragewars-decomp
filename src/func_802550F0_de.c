@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_802508E0.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
@@ -21,7 +22,6 @@ void func_802550F0_de(s32 arg0, s32 arg1) {
 extern void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_802BB5F0_de(s32 *, s32);
 extern void func_802BB160_de(s32 *arg0, void *arg1, s32 arg2);
-extern void func_802BB2A0_de(s32, s32, s32);
 
 extern s32 D_800CD704;
 
@@ -42,7 +42,7 @@ s32 func_80255170_de(s32 *arg0, void *arg1) {
     D_800CD704 = 2;
     func_802BB5F0_de(arg0, temp);
     func_802BB160_de((s32 *)&((ResourceLoadWorker *)arg0)->requests, arg1, 1);
-    func_802BB2A0_de((s32) sp10, (s32) &sp2C, 1);
+    func_802BB2A0_de(sp10, (s32) &sp2C, 1);
     return 1;
 }
 

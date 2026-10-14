@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_80256220.h"
 #include "types.h"
 
@@ -8,7 +9,6 @@ extern u32 D_800CB704_de;
 extern char D_80107DD8[];
 extern Node_func_80256FC0_de *D_80107DF4[];
 
-extern void func_802BB2A0_de(s32, s32, s32);
 extern void func_802B2450_de(Node_func_80256FC0_de *arg0);
 extern void func_802B2480_de(void *arg0, void **arg1);
 

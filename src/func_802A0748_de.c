@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "span_1000/code_802A0888.h"
 #include "types.h"
 /* Fills arg2 bytes at arg0 with the byte arg1, storing single bytes up to word alignment, replicated words through the middle and single bytes at the tail, and returns arg0. Adapted from func_802A001C_de. */
@@ -217,7 +218,6 @@ void func_802A0A48_de(void *arg0) {
     func_802BAC60_de(arg0, &semaphore->message, 1);
     func_802BB420_de(arg0, 1, 1);
 }
-extern void func_802BB2A0_de(s32, s32, s32);
 void func_802A0A84_de(s32 arg0) {
     func_802BB2A0_de(arg0, arg0 + 0x18, 1);
 }

@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B8DD0.h"
 #include "types.h"
@@ -13,7 +14,6 @@ extern Slot D_8014EA58;
 extern OSMesg D_8014EA50;
 extern void func_802BAC60_de(Slot *, OSMesg *, s32);
 extern s32 func_802BB420_de(Slot *, OSMesg, s32);
-extern s32 func_802BB2A0_de(Slot *, OSMesg *, s32);
 
 static inline void create_access_queue(void) {
     D_800D83C0[0] = 1;

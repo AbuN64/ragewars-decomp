@@ -1,3 +1,4 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802536F4.h"
@@ -7,7 +8,6 @@
 
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32 arg0);
-extern void func_802BB2A0_de(s32 arg0, s32 arg1, s32 arg2);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_80254DD0_de(void *arg0, void *arg1);
 extern void func_80255B2C_de(void *arg0, s32 arg1);
@@ -30,7 +30,7 @@ void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_
     D_8010515C = counter;
     if (counter != 1) {
         func_802BCF50_de(token);
-        func_802BB2A0_de((s32)&D_80101140, 0, 1);
+        func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
         func_802BCF50_de(token);
     }

@@ -1,10 +1,10 @@
+#include "span_1000/code_802BB15C.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8028DF6C.h"
 #include "types.h"
 
 
 
-extern s32 func_802BB2A0_de(void *arg0, void *arg1, s32 arg2);
 extern void func_802BB5F0_de(void *arg0, s32 arg1);
 
 
