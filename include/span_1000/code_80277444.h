@@ -143,9 +143,9 @@ struct func_80278900_S1;
 /* unbake published declaration: published_d08cffa011bb834b3cdd9931 */
 typedef struct func_80278900_S1 func_80278900_S1;
 
-struct func_80203C40_S1;
+struct Actor_func_8024A7A0_de;
 /* unbake published declaration: published_d298ed118bc580c54c5b4afa */
-extern void func_80278F68_de(struct func_80203C40_S1 *object);
+extern void func_80278F68_de(struct Actor_func_8024A7A0_de *object);
 
 struct func_80278900_S1;
 /* unbake published declaration: published_d2f107874537584bc5c786fe */

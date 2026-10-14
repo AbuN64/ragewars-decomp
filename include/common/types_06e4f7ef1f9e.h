@@ -16,12 +16,6 @@
 
 /* unbake evidence input: LyogdW5iYWtlIGRlY2xhcmF0aW9uIGV2aWRlbmNlOiBldmlkZW5jZV8xNTYzNGM1ZjBkNTQ3NjRlMjBmYjBiNzIgKi8KI2lmIGRlZmluZWQoVkVSU0lPTl9FVSkgfHwgZGVmaW5lZChWRVJTSU9OX0VVX1gpCiNpZiBkZWZpbmVkKFZFUlNJT05fRVVfWCkKI2RlZmluZSBSV19MT0NBTElaRURfVEVYVChmaXhlZCwgZXVfdGFibGUsIGV1X3hfdGFibGUsIGxhbmd1YWdlKSAoKGV1X3hfdGFibGUpW2xhbmd1YWdlXSkKI2Vsc2UKI2RlZmluZSBSV19MT0NBTElaRURfVEVYVChmaXhlZCwgZXVfdGFibGUsIGV1X3hfdGFibGUsIGxhbmd1YWdlKSAoKGV1X3RhYmxlKVtsYW5ndWFnZV0pCiNlbmRpZgojZWxzZQojZGVmaW5lIFJXX0xPQ0FMSVpFRF9URVhUKGZpeGVkLCBldV90YWJsZSwgZXVfeF90YWJsZSwgbGFuZ3VhZ2UpIChmaXhlZCkKI2VuZGlmCg== */
 
-struct func_80203C40_S1;
-/* unbake published declaration: published_0003f32f202f251a68cf1ca1 */
-struct func_80203C40_S1 {
-    char pad0[0x100];
-    s32 unk100;
-};
 
 struct Vector4f;
 /* unbake published declaration: published_1e4532db7539a6306f2b3fdc */
@@ -1715,9 +1709,6 @@ struct func_80203908_S1 {
     s32 unk100;
 };
 
-struct func_80205494_S2;
-/* unbake published declaration: published_44f1e94d9e4feda248e44987 */
-typedef struct func_80205494_S2 func_80205494_S2;
 
 struct func_80232C78_S4;
 /* unbake published declaration: published_4a926ef3ef03d90762d94237 */
@@ -1858,9 +1849,6 @@ struct func_8022FD9C_S1 {
     void * unk1D8;
 };
 
-struct func_80203C40_S1;
-/* unbake published declaration: published_80412e8a3883cfdb1701c8fe */
-typedef struct func_80203C40_S1 func_80203C40_S1;
 
 struct func_80203C84_S1;
 /* unbake published declaration: published_84d4b303c1ce4c9a24fb40c2 */
@@ -1933,12 +1921,6 @@ struct IntegerState11C4 {
     s32 unk_11C0;
 };
 
-struct func_80205494_S2;
-/* unbake published declaration: published_a9eceb126be005afed0c8c7b */
-struct func_80205494_S2 {
-    char pad0[0xCB];
-    signed char unkCB;
-};
 
 struct func_80232FE8_S3;
 /* unbake published declaration: published_ac8c06e6a0b1c60c080b0716 */

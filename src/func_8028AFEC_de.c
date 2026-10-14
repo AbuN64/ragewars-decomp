@@ -1,3 +1,4 @@
+#include "shared/level_actor.h"
 #include "shared/world.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
@@ -29,14 +30,14 @@ void *func_8028B00C_de(void *object, int index) {
 extern Gfx *D_80110634;
 
 
-extern void func_80249E28_de(func_80203C40_S1 *object, void *camera);
+extern void func_80249E28_de(Actor_func_8024A7A0_de *object, void *camera);
 
 void func_8028B028_de(Scene_func_8028B028_de *scene, void *camera) {
-    func_80203C40_S1 *object;
+    Actor_func_8024A7A0_de *object;
     s32 count;
     s32 i;
     s32 late;
-    func_80203C40_S1 **objects;
+    Actor_func_8024A7A0_de **objects;
 
     func_8026D980_de();
     count = scene->count;
@@ -47,7 +48,7 @@ void func_8028B028_de(Scene_func_8028B028_de *scene, void *camera) {
     objects = scene->objects;
     for (i = 0; i < count; i++) {
         object = objects[i];
-        if (object->unk100 & 4) {
+        if (object->flags & 4) {
             late = scene->lateCount;
             if (late != 64) {
                 scene->late[late] = object;

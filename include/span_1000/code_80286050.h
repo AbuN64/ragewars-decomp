@@ -7,6 +7,7 @@
 #include "resident_event_handler.h"
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+struct Actor_func_8024A7A0_de;
 struct Scene_func_8028B028_de;
 /* unbake published declaration: published_071d490f65b9ae384b2faaa5 */
 typedef struct Scene_func_8028B028_de Scene_func_8028B028_de;
@@ -168,11 +169,11 @@ struct Scene_func_8028B028_de;
 /* unbake published declaration: published_a9ddbdd0b7db476e4b468c9c */
 struct Scene_func_8028B028_de {
     char pad0[0xC50];
-    func_80203C40_S1 *objects[128];
+    struct Actor_func_8024A7A0_de *objects[128];
     s32 count;
     char padE54[0x10BC - 0xE54];
     s32 lateCount;
-    func_80203C40_S1 *late[64];
+    struct Actor_func_8024A7A0_de *late[64];
 };
 
 struct Bank_func_8028B274_de;

@@ -79,7 +79,9 @@ struct func_80207ABC_S4 {
 };
 
 /* unbake published declaration: published_d41d08d1067cc899b4db46f2 */
-extern void func_80207FA0_de(void *arg0, void *arg1);
+struct Actor_func_8024A7A0_de;
+struct ActorMotionState;
+extern void func_80207FA0_de(struct Actor_func_8024A7A0_de *arg0, struct ActorMotionState *arg1);
 
 struct func_80207BB8_S3;
 /* unbake published declaration: published_f10e3e17e30e74e16638f64d */
