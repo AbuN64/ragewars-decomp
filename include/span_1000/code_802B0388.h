@@ -231,12 +231,6 @@ typedef struct EntryTable EntryTable;
 extern float D_800C74D0_de;
 
 struct ALVoice_s;
-struct ALVolumeEvent;
-struct ALVolumeEvent {
-    struct ALVoice_s *voice;
-    s32 delta;
-    u8 vol;
-};
 
 struct func_802B6B90_S1;
 struct func_802B6B90_S1 {
@@ -282,11 +276,6 @@ struct ALVoiceState {
 
 struct ALOscEvent;
 struct ALVoiceState;
-struct ALOscEvent {
-    struct ALVoiceState *vs;
-    void *oscState;
-    u8 chan;
-};
 
 struct func_802B6A60_S1;
 typedef struct func_802B6A60_S1 func_802B6A60_S1;
@@ -429,37 +418,16 @@ struct ALChanState10;
 typedef struct ALChanState10 ALChanState10;
 
 struct ALNoteEvent;
-typedef struct ALNoteEvent ALNoteEvent;
 
 struct ALOscEvent;
-typedef struct ALOscEvent ALOscEvent;
 
 struct ALVolumeEvent;
-typedef struct ALVolumeEvent ALVolumeEvent;
 
 struct ALNoteEvent;
 struct ALVoice_s;
-struct ALNoteEvent {
-    struct ALVoice_s *voice;
-};
 
-struct ALEvent10;
-struct ALEvent10 {
-    s16 type;
-    union {
-        ALMIDIEvent midi;
-        ALNoteEvent note;
-        ALVolumeEvent vol;
-        Request spvol;
-        InventorySlot sppriority;
-        func_80284AF4_G2 spseq;
-        func_80284AF4_G2 spbank;
-        ALOscEvent osc;
-    } msg;
-};
 
-struct ALEvent10;
-typedef struct ALEvent10 ALEvent10;
+struct ALEvent;
 
 struct ALSeqPlayer;
 struct ALSeqPlayer {
@@ -475,7 +443,7 @@ struct ALSeqPlayer {
     s16 vol;
     u8 maxChannels;
     u8 debugFlags;
-    ALEvent10 nextEvent;
+    ALEvent nextEvent;
     ALEventQueue evtq;
     ALMicroTime frameTime;
     ALChanState10 *chanState;

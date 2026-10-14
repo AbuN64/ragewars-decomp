@@ -19,11 +19,11 @@ extern char D_800C7440[];      /* "EX" */
 extern char D_800C7444[];      /* "audio/seqplayer.c" */
 
 extern void func_802B0A90_de(ALSeqPlayer *);                        /* __handleNextSeqEvent */
-extern void func_802B0C94_de(ALSeqPlayer *, ALEvent10 *);             /* __handleMIDIMsg */
-extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent10 *);             /* __handleMetaMsg */
+extern void func_802B0C94_de(ALSeqPlayer *, ALEvent *);             /* __handleMIDIMsg */
+extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent *);             /* __handleMetaMsg */
 extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUsptFromTempo */
-extern void func_802B00D4_de(ALEventQueue *, ALEvent10 *, ALMicroTime); /* alEvtqPostEvent */
-extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent10 *);    /* alEvtqNextEvent */
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime); /* alEvtqPostEvent */
+extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void func_802B0258_de(ALEventQueue *, s16);                 /* alEvtqFlushType */
 extern void func_802B36F0_de(void *, ALVoice_s *);                   /* alSynStopVoice */
 extern void func_802B3200_de(void *, ALVoice_s *);                   /* alSynFreeVoice */
@@ -38,7 +38,7 @@ extern void func_802BAC50_de(char *, char *, s32);                 /* __assert *
 ALMicroTime func_802B0554_de(void *node)
 {
     struct ALSequencePlayer *seqp = node;
-    ALEvent10 evt;
+    ALEvent evt;
     ALVoice_s *voice;
     ALMicroTime delta;
     ALVoiceState *vs;
@@ -55,7 +55,7 @@ ALMicroTime func_802B0554_de(void *node)
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
-            func_802B00D4_de(&seqp->base.evtq, (ALEvent10 *)&evt, seqp->base.frameTime);
+            func_802B00D4_de(&seqp->base.evtq, (ALEvent *)&evt, seqp->base.frameTime);
             break;
         case 5: /* AL_NOTE_END_EVT */
             voice = seqp->base.nextEvent.msg.note.voice;

@@ -15,7 +15,7 @@ struct ALSynth_func_802B2650_de;
 struct ALSndPlayer_func_802B2650_de {
     ALPlayer_s14 node;
     ALEventQueue evtq;
-    Message_func_802AF150_de nextEvent;
+    ALEvent nextEvent;
     struct ALSynth_func_802B2650_de *drvr;
     s32 target;
     void *sndState;

@@ -18,7 +18,7 @@ extern void func_802B2450_de(ListLink *);            /* alUnlink */
 extern void func_802B2480_de(ListLink *, ListLink *);  /* alLink */
  /* alCopy */
 
-void func_802B00D4_de(ALEventQueue *evtq, Message_func_802AF150_de *evt, s32 delta)
+void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
 {
     ALEventListItem *item;
     ALEventListItem *nextItem;

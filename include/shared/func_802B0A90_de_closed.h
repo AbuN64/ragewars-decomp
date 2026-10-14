@@ -20,18 +20,18 @@ struct ALSequenceLoopEvent {
 extern char D_800C7440[];   /* "EX" */
 extern char D_800C7444[];   /* "audio/seqplayer.c" */
 
-extern void func_802B1E80_de(struct ALSeq_s *, Message_func_802AF150_de *);                 /* alSeqNextEvent */
-extern void func_802B0C94_de(ALSeqPlayer *, Message_func_802AF150_de *);           /* __handleMIDIMsg */
-extern void func_802B1DEC_de(ALSeqPlayer *, Message_func_802AF150_de *);           /* __handleMetaMsg */
+extern void func_802B1E80_de(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
+extern void func_802B0C94_de(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */
+extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
 extern u8 func_802B22F4_de(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
 extern int func_802B20C8_de(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
 extern void func_802B22BC_de(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, ALMicroTime);  /* alEvtqPostEvent */
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
 extern void func_802BAC50_de(char *, char *, s32);                /* __assert */
 
 static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
 {
-    Message_func_802AF150_de evt;
+    ALEvent evt;
     s32 deltaTicks;
     struct ALSeq_s *seq = seqp->base.target;
 

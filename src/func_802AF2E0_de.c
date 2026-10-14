@@ -13,7 +13,7 @@ extern s32 func_802B18A4_de(void *, void *);
 extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);
 extern s32 func_802B1888_de(void *, s32);
 extern void func_802B35E0_de(ALSynth_func_802B3000_de *, ALVoice_s_func_802B3000_de *, void *, f32, s16, u8, u8, s32);
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 extern void func_802B1B14_de(void *, void *, s32);
 extern void func_802B3480_de(void *, void *, s16, s32);
 extern void func_802B3350_de(void *, void *, u8);
@@ -24,10 +24,10 @@ extern void func_802BAC50_de(void *, void *, s32);
 
 /* Apply one compact-sequence MIDI message. The existing event storage and
  * callee-specific voice/player views share their measured O32 prefixes. */
-void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
+void func_802AF2E0_de(void *object, ALEvent *message)
 {
     ALSeqPlayer *seqp = object;
-    ALEvent10 *event = (ALEvent10 *)message;
+    ALEvent *event = (ALEvent *)message;
     ALVoice_s *voice;
     ALVoiceState *vs;
     s32 status;
@@ -38,7 +38,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
     u8 byte2;
     ALMIDIEvent *midi = &event->msg.midi;
     s16 vol;
-    ALEvent10 evt;
+    ALEvent evt;
     ALMicroTime deltaTime;
     ALVoiceState *vstate;
     u8 pan;
@@ -96,7 +96,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
                         evt.type = 22; /* AL_TREM_OSC_EVT */
                         evt.msg.osc.vs = vstate;
                         evt.msg.osc.oscState = oscState;
-                        func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, deltaTime);
+                        func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
                         vstate->flags |= 0x01;
                     }
                 }
@@ -120,7 +120,7 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
                         evt.msg.osc.vs = vstate;
                         evt.msg.osc.oscState = oscState;
                         evt.msg.osc.chan = chan;
-                        func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, deltaTime);
+                        func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
                         vstate->flags |= 0x02;
                     }
                 }
@@ -136,14 +136,14 @@ void func_802AF2E0_de(void *object, Message_func_802AF150_de *message)
             evt.msg.vol.voice = voice;
             evt.msg.vol.vol = sound->envelope->decayVolume;
             evt.msg.vol.delta = sound->envelope->decayTime;
-            func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, deltaTime);
+            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
             if (midi->duration) {
                 evt.type = 21; /* AL_CSP_NOTEOFF_EVT */
                 evt.msg.midi.status = chan | 0x80;
                 evt.msg.midi.byte1 = key;
                 evt.msg.midi.byte2 = 0;
                 deltaTime = seqp->uspt * midi->duration;
-                func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, deltaTime);
+                func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, deltaTime);
             }
             break;
         }

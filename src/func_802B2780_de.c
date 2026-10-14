@@ -13,7 +13,7 @@ extern void func_802B33E0_de(ALSynth_func_802B3000_de *, ALVoice_s *, f32);     
 extern void func_802B32A0_de(ALSynth_func_802B3000_de *, ALVoice_s *, u8);             /* alSynSetFXMix */
 extern void func_802B36F0_de(ALSynth_func_802B3000_de *, ALVoice_s *);                 /* alSynStopVoice */
 extern void func_802B3200_de(ALSynth_func_802B3000_de *, ALVoice_s *);                 /* alSynFreeVoice */
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);       /* alEvtqPostEvent */
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);       /* alEvtqPostEvent */
 extern void func_802B2C48_de(ALEventQueue *, ALSoundState *);       /* _removeEvents */
 
 void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
@@ -59,7 +59,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
             evt.common.type = 6; /* AL_SNDP_DECAY_EVT */
             evt.common.state = state;
             delta = (s32)func_802B2CF0_de(snd->envelope->attackTime, state->pitch);
-            func_802B00D4_de(&sndp->evtq, (Message_func_802AF150_de *)&evt, delta);
+            func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
             break;
 
         case 1: /* AL_SNDP_STOP_EVT */
@@ -70,7 +70,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
             if (delta) {
                 evt.common.type = 7; /* AL_SNDP_END_EVT */
                 evt.common.state = state;
-                func_802B00D4_de(&sndp->evtq, (Message_func_802AF150_de *)&evt, delta);
+                func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
                 state->state = 2;
             } else {
                 func_802B36F0_de(sndp->drvr, &state->voice);
@@ -122,7 +122,7 @@ void func_802B2780_de(ALSndPlayer *sndp, ALSndpEvent *event)
                 func_802B3480_de(sndp->drvr, &state->voice, (s16)vtmp, delta);
                 evt.common.type = 1; /* AL_SNDP_STOP_EVT */
                 evt.common.state = state;
-                func_802B00D4_de(&sndp->evtq, (Message_func_802AF150_de *)&evt, delta);
+                func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, delta);
             }
             break;
 

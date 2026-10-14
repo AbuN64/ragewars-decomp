@@ -22,10 +22,8 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 /* Voice events serialize the voice pointer in the first four payload bytes. */
-static inline ALVoice_s *event_voice(Message_func_802AF150_de *event) {
-    ALVoice_s *voice;
-    __builtin_memcpy(&voice, &event->pad[2], sizeof(voice));
-    return voice;
+static inline ALVoice_s *event_voice(ALEvent *event) {
+    return (ALVoice_s *)event->msg.note.voice;
 }
 
 void func_802B1B14_de(void *arg0, void *arg1, s32 arg2) {

@@ -5,11 +5,11 @@
 #include "types.h"
 
 
-extern void func_802AF2E0_de(void *, Message_func_802AF150_de *);
+extern void func_802AF2E0_de(void *, ALEvent *);
 extern void func_802AFB6C_de(void *, ObjectState10_2 *);
 
 
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 extern s32 func_802B003C_de(void *, s16 *);
 extern void func_802B0258_de(void *, s16);
 extern void func_802B36F0_de(void *, void *);
@@ -31,7 +31,7 @@ extern void func_802BAC50_de(void *, void *, s32);
 ALMicroTime func_802AEC20_de(void *node)
 {
     ALSeqPlayer *seqp = (ALSeqPlayer *)node;
-    ALEvent10 evt;
+    ALEvent evt;
     ALVoice_s *voice;
     ALMicroTime delta;
     ALVoiceState *vs;
@@ -48,7 +48,7 @@ ALMicroTime func_802AEC20_de(void *node)
             break;
         case 9: /* AL_SEQP_API_EVT */
             evt.type = 9;
-            func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, seqp->frameTime);
+            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, seqp->frameTime);
             break;
         case 5: /* AL_NOTE_END_EVT */
             voice = seqp->nextEvent.msg.note.voice;
@@ -81,7 +81,7 @@ ALMicroTime func_802AEC20_de(void *node)
             evt.type = 22;
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
-            func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, delta);
+            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, delta);
             break;
         case 23: /* AL_VIB_OSC_EVT */
             vs = seqp->nextEvent.msg.osc.vs;
@@ -95,11 +95,11 @@ ALMicroTime func_802AEC20_de(void *node)
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
             evt.msg.osc.chan = chan;
-            func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, delta);
+            func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, delta);
             break;
         case 2:  /* AL_SEQP_MIDI_EVT */
         case 21: /* AL_CSP_NOTEOFF_EVT */
-            func_802AF2E0_de(seqp, (Message_func_802AF150_de *)&seqp->nextEvent);
+            func_802AF2E0_de(seqp, (ALEvent *)&seqp->nextEvent);
             break;
         case 7: /* AL_SEQP_META_EVT */
             func_802AFB6C_de(seqp, (ObjectState10_2 *)&seqp->nextEvent);
@@ -140,7 +140,7 @@ ALMicroTime func_802AEC20_de(void *node)
                 }
                 seqp->state = 2;
                 evt.type = 16;
-                func_802B00D4_de(&seqp->evtq, (Message_func_802AF150_de *)&evt, 0x7fffffff);
+                func_802B00D4_de(&seqp->evtq, (ALEvent *)&evt, 0x7fffffff);
             }
             break;
         case 12: /* AL_SEQP_PRIORITY_EVT */

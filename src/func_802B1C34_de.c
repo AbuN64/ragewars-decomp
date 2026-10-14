@@ -29,9 +29,9 @@ void func_802B1C34_de(void *arg0, void *arg1) {
             type = cur->evt.type;
             next = (void *)cur->node.next;
             if ((type == 0x16 || type == 0x17) &&
-                ((ALEvent10 *)&cur->evt)->msg.osc.vs == arg1) {
+                ((ALEvent *)&cur->evt)->msg.osc.vs == arg1) {
                 ((ALSeqPlayer *)arg0)->stopOsc(
-                    ((ALEvent10 *)&cur->evt)->msg.osc.oscState);
+                    ((ALEvent *)&cur->evt)->msg.osc.oscState);
                 func_802B2450_de(cur);
                 if (next != 0) {
                     next->delta = next->delta +

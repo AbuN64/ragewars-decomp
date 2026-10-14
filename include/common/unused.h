@@ -2683,8 +2683,7 @@ typedef struct ALDelay_func_802B5B94_de ALDelay_func_802B5B94_de;
 struct ALEnvMixer_s;
 typedef struct ALEnvMixer_s ALEnvMixer_s;
 
-struct ALEvent10_2;
-typedef struct ALEvent10_2 ALEvent10_2;
+struct ALEvent;
 
 struct ALFx2C;
 typedef struct ALFx2C ALFx2C;
@@ -4064,7 +4063,7 @@ struct ALCSPlayer {
     s16 vol;
     u8 maxChannels;
     u8 debugFlags;
-    ALEvent10 nextEvent;
+    ALEvent nextEvent;
     ALEventQueue evtq;
     s32 frameTime;
     ALChanState10 *chanState;
@@ -4128,13 +4127,6 @@ struct ALEnvMixer_s {
     void *ctrlTail;
     ALFilter_s14_2 **sources;
     s32 motion;
-};
-struct ALEvent10_2;
-struct ALEvent10_2 {
-    s16 type;
-    union {
-        s32 word[3];
-    } msg;
 };
 struct ALFx2C;
 struct ALFx2C {
@@ -4207,7 +4199,7 @@ struct ALSeqPlayer88 {
     s16 vol;
     u8 maxChannels;
     u8 debugFlags;
-    ALEvent10_2 nextEvent;
+    ALEvent nextEvent;
     ALEventQueue evtq;
     s32 frameTime;
     void *chanState;
@@ -4236,7 +4228,7 @@ struct ALSeqPlayer_func_802B0A90_de {
     s16 vol;
     u8 maxChannels;
     u8 debugFlags;
-    ALEvent10_2 nextEvent;
+    ALEvent nextEvent;
     ALEventQueue evtq;
     ALMicroTime frameTime;
     void *chanState;
@@ -4254,7 +4246,7 @@ struct ALSndPlayer_func_802B2780_de;
 struct ALSndPlayer_func_802B2780_de {
     ALPlayer_s node;
     ALEventQueue evtq;
-    Message_func_802AF150_de nextEvent;
+    ALEvent nextEvent;
     func_80284AF4_G2 *drvr;
     s32 target;
     void *sndState;
@@ -4286,7 +4278,7 @@ struct ALSoundState_func_802B2780_de {
 };
 union ALSndpEvent_func_802B2780_de;
 union ALSndpEvent_func_802B2780_de {
-    Message_func_802AF150_de msg;
+    ALEvent msg;
     struct {
         s16 type;
         ALSoundState_func_802B2780_de *state;

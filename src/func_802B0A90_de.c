@@ -5,7 +5,7 @@
 
 void func_802B0A90_de(struct ALSequencePlayer *seqp)
 {
-    Message_func_802AF150_de evt;
+    ALEvent evt;
 
     if (seqp->base.target == 0)
         return;

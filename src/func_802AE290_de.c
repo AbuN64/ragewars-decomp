@@ -9,7 +9,7 @@
    cartridge constants and each deltaFlag store made through a pointer local, as the library's
    -fforce-addr kept it frame-relative. */
 extern u32 func_802AEA2C_de(ALCSeq_s *, u32); /* __readVarLen */
-extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent_func_802B21A8_de *); /* __alCSeqGetTrackEvent */
+extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *); /* __alCSeqGetTrackEvent */
 extern const double D_800C72F0_de; /* 4294967296.0 */
 extern const float D_800C72F8_de; /* 1.0f */
 static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
@@ -44,7 +44,7 @@ static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
     }
     seq->qnpt = D_800C72F8_de / (f32)t;
 }
-static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent_func_802B21A8_de *evt)
+static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
 {
     u32 i;
     u32 firstTime = 0xFFFFFFFF;
@@ -72,7 +72,7 @@ static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent_func_802B21A8_de *evt)
 }
 void func_802AE290_de(ALCSeq_s *seq, ALCSeqMarker *m, u32 ticks)
 {
-    ALEvent_func_802B21A8_de evt;
+    ALEvent evt;
     ALCSeq_s tempSeq;
     s32 i;
     alCSeqNew(&tempSeq, (u8 *)seq->base);

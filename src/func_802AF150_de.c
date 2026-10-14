@@ -5,10 +5,10 @@
 
 
 
-extern void func_802AE6BC_de(s32 arg0, Message_func_802AF150_de *arg1);
+extern void func_802AE6BC_de(s32 arg0, ALEvent *arg1);
 extern s32 func_802AE9B0_de(s32 arg0, s32 *arg1);
-extern void func_802AFB6C_de(void *arg0, Message_func_802AF150_de *arg1);
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);
+extern void func_802AFB6C_de(void *arg0, ALEvent *arg1);
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
 extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
 extern char D_800C7350_de[];
 extern char D_800C7354_de[];
@@ -20,8 +20,8 @@ extern char D_800C7354_de[];
 /** Dispatch the current object message and forward any resulting value. */
 void func_802AF150_de(void *rawPlayer) {
     struct ALSeqPlayer *arg0 = rawPlayer;
-    Message_func_802AF150_de message;
-    Message_func_802AF150_de output;
+    ALEvent message;
+    ALEvent output;
     s32 value1;
     s32 value2;
     s32 value3;

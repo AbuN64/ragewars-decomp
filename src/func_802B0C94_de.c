@@ -21,7 +21,7 @@ extern u8 func_802B18A4_de(ALVoiceState *, ALSeqPlayer *); /* __vsPan */
 extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *); /* __vsVol */
 extern ALMicroTime func_802B1888_de(ALVoiceState *, ALMicroTime); /* __vsDelta */
 extern void func_802B35E0_de(void *, ALVoice_s *, void *, f32, s16, u8, u8, ALMicroTime); /* alSynStartVoiceParams */
-extern void func_802B00D4_de(ALEventQueue *, ALEvent10 *, ALMicroTime); /* alEvtqPostEvent */
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime); /* alEvtqPostEvent */
 extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
 extern void func_802B3350_de(void *, ALVoice_s *, u8); /* alSynSetPan */
@@ -29,7 +29,7 @@ extern void func_802B32A0_de(void *, ALVoice_s *, u8); /* alSynSetFXMix */
 extern void func_802B33E0_de(void *, ALVoice_s *, f32); /* alSynSetPitch */
 extern void func_802B1AC0_de(ALSeqPlayer *, ALInstrument *, s32); /* __setInstChanState */
 extern void func_802BAC50_de(char *, char *, s32); /* __assert */
-void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent10 *event)
+void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent *event)
 {
     ALVoice_s *voice;
     ALVoiceState *vs;
@@ -41,7 +41,7 @@ void func_802B0C94_de(ALSeqPlayer *seqp, ALEvent10 *event)
     u8 byte2;
     ALMIDIEvent *midi = &event->msg.midi;
     s16 vol;
-    ALEvent10 evt;
+    ALEvent evt;
     ALMicroTime deltaTime;
     ALVoiceState *vstate;
     u8 pan;

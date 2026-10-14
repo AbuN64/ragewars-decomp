@@ -2,13 +2,6 @@
 #define UNBAKE_SPAN_1000_CODE_802B243C_H
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
-struct ALEndEvent;
-struct ALEndEvent {
-    s32 ticks;
-    u8 status;
-    u8 type;
-    u8 len;
-};
 
 struct MidiState802B70B8;
 struct MidiState802B70B8 {
@@ -22,16 +15,6 @@ struct MidiState802B70B8 {
     s16 unk1A;
 };
 
-struct ALTempoEvent;
-struct ALTempoEvent {
-    s32 ticks;
-    u8 status;
-    u8 type;
-    u8 len;
-    u8 byte1;
-    u8 byte2;
-    u8 byte3;
-};
 
 struct ObjRecAt18V1;
 typedef struct ObjRecAt18V1 ObjRecAt18V1;
@@ -41,26 +24,14 @@ extern u32 func_802B2120_de(ObjRecAt18V1 *seq, f32 sec, u32 tempo);
 extern double D_800C74E8_de;
 
 struct ALEndEvent;
-typedef struct ALEndEvent ALEndEvent;
 
 struct ALTempoEvent;
-typedef struct ALTempoEvent ALTempoEvent;
 
-struct ALEvent;
-struct ALEvent {
-    s16 type;
-    union {
-        ALMIDIEvent midi;
-        ALTempoEvent tempo;
-        ALEndEvent end;
-    } msg;
-};
 
 struct func_802B742C_S1;
 typedef struct func_802B742C_S1 func_802B742C_S1;
 
 struct ALEvent;
-typedef struct ALEvent ALEvent;
 
 struct func_802B73C4_S1;
 typedef struct func_802B73C4_S1 func_802B73C4_S1;

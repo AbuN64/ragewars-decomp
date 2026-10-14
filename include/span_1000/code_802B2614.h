@@ -15,7 +15,7 @@ struct ParamsRecAt8V3 {
 
 union ALSndpEvent;
 union ALSndpEvent {
-    Message_func_802AF150_de msg;
+    ALEvent msg;
     struct {
         s16 type;
         void *state;
@@ -26,7 +26,7 @@ struct ALSndPlayer;
 struct ALSndPlayer {
     ALPlayer_s node;
     ALEventQueue evtq;
-    Message_func_802AF150_de nextEvent;
+    ALEvent nextEvent;
     void *drvr;
     s32 target;
     void *sndState;

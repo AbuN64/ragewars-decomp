@@ -13,7 +13,7 @@ extern s32 func_802B00D4_de(void *, s16 *, s32);
 
 
 void func_802B1D24_de(void *arg0) {
-    Message_func_802AF150_de sp10;
+    ALEvent sp10;
     s32 sp20;
     s32 temp_v1;
     void *temp_s0;

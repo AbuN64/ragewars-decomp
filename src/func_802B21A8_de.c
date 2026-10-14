@@ -5,10 +5,10 @@
 /* alSeqNewMarker, drafted from ultralib src/audio/seq.c: fill a marker with the sequence position
    of the first event at or after the given tick count (the track start for zero), stepping a
    scratch pass with alSeqNextEvent and restoring the sequence's own position afterwards. */
-extern void func_802B1E80_de(ALSeq_s *, ALEvent_func_802B21A8_de *); /* alSeqNextEvent */
+extern void func_802B1E80_de(ALSeq_s *, ALEvent *); /* alSeqNextEvent */
 void func_802B21A8_de(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)
 {
-    ALEvent_func_802B21A8_de evt;
+    ALEvent evt;
     u8 *savePtr, *lastPtr;
     s32 saveTicks, lastTicks;
     s16 saveStatus, lastStatus;

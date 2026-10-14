@@ -36,15 +36,15 @@ extern ALGlobals_func_802B2650_de *D_800D4070; /* alGlobals */
 extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);          /* alHeapDBAlloc */
 extern void func_802AFFC0_de(ALEventQueue *, ALEventListItem *, s32);  /* alEvtqNew */
 extern void func_802B2FB0_de(ALSynth_func_802B2650_de *, ALPlayer_s14 *);                   /* alSynAddPlayer */
-extern void func_802B00D4_de(ALEventQueue *, Message_func_802AF150_de *, s32);          /* alEvtqPostEvent */
-extern s32 func_802B003C_de(ALEventQueue *, Message_func_802AF150_de *);                /* alEvtqNextEvent */
+extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);          /* alEvtqPostEvent */
+extern s32 func_802B003C_de(ALEventQueue *, ALEvent *);                /* alEvtqNextEvent */
 /* _sndpVoiceHandler (func_802B2BBC_de); the cartridge stores the handler by its 0x002B7C8C address. */
 extern s32 D_002B2BBC(void *);
 
 void func_802B2650_de(ALSndPlayer_func_802B2650_de *sndp, ALSndpConfig *c)
 {
     u8 *ptr;
-    Message_func_802AF150_de evt;
+    ALEvent evt;
     ALSoundState *sState;
     u32 i;
 
@@ -68,6 +68,6 @@ void func_802B2650_de(ALSndPlayer_func_802B2650_de *sndp, ALSndpConfig *c)
     func_802B2FB0_de(sndp->drvr, &sndp->node);
 
     evt.type = 5; /* AL_SNDP_API_EVT */
-    func_802B00D4_de(&sndp->evtq, (Message_func_802AF150_de *)&evt, sndp->frameTime);
+    func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
     sndp->nextDelta = func_802B003C_de(&sndp->evtq, &sndp->nextEvent);
 }

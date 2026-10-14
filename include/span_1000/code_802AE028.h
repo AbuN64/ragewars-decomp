@@ -340,6 +340,6 @@ struct RuntimeStateRecAtB8;
 typedef struct RuntimeStateRecAtB8 RuntimeStateRecAtB8;
 
 /* Process one compact-sequence MIDI message; O32/native all-version proof retained. */
-void func_802AF2E0_de(void *object, Message_func_802AF150_de *message);
+void func_802AF2E0_de(void *object, ALEvent *message);
 
 #endif

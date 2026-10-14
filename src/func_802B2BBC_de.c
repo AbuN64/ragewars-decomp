@@ -22,7 +22,7 @@
 
 
    /* _handleEvent */
-extern s32 func_802B003C_de(ALEventQueue *, Message_func_802AF150_de *);       /* alEvtqNextEvent */
+extern s32 func_802B003C_de(ALEventQueue *, ALEvent *);       /* alEvtqNextEvent */
 
 s32 func_802B2BBC_de(void *node)
 {
@@ -34,7 +34,7 @@ s32 func_802B2BBC_de(void *node)
         switch (sndp->nextEvent.type) {
             case 5: /* AL_SNDP_API_EVT */
                 evt.common.type = 5;
-                func_802B00D4_de(&sndp->evtq, (Message_func_802AF150_de *)&evt, sndp->frameTime);
+                func_802B00D4_de(&sndp->evtq, (ALEvent *)&evt, sndp->frameTime);
                 break;
             default:
                 func_802B2780_de(sndp, next);

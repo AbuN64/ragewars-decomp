@@ -197,19 +197,25 @@ typedef struct ALPlayer_s14 ALPlayer_s14;
 
 struct ALEventQueue;
 typedef struct ALEventQueue ALEventQueue;
+struct ALNoteEvent;
+struct ALOscEvent;
+struct ALVolumeEvent;
+struct ALEndEvent;
+struct ALTempoEvent;
+struct ALEvent;
+typedef struct ALNoteEvent ALNoteEvent;
+typedef struct ALOscEvent ALOscEvent;
+typedef struct ALVolumeEvent ALVolumeEvent;
+typedef struct ALEndEvent ALEndEvent;
+typedef struct ALTempoEvent ALTempoEvent;
+typedef struct ALEvent ALEvent;
 
-struct Message_func_802AF150_de;
-struct Message_func_802AF150_de {
-    s16 type;
-    char pad[14];
-} __attribute__((aligned(4)));
 
 struct ListLink;
 struct ListLink {
     struct ListLink *next;
     struct ListLink *prev;
 };
-
 struct ListLink;
 typedef struct ListLink ListLink;
 
@@ -220,8 +226,7 @@ struct ALEventQueue {
     s32 eventCount;
 };
 
-struct Message_func_802AF150_de;
-typedef struct Message_func_802AF150_de Message_func_802AF150_de;
+struct ALEvent;
 
 struct Node802A697C;
 struct Node802A697C {
@@ -962,19 +967,6 @@ struct func_8020CA10_S2 {
     u16 unkC;
 };
 
-struct ALEvent_func_802B21A8_de;
-struct ALEvent_func_802B21A8_de {
-    s16 type;
-    union {
-        struct {
-            s32 ticks;
-            u8 status;
-            u8 byte1;
-            u8 byte2;
-            u32 duration;
-        } midi;
-    } msg;
-};
 
 struct Object6C;
 struct Object6C {
@@ -3189,12 +3181,6 @@ struct func_8020C9B0_S1 {
 struct func_80245A10_S1;
 typedef struct func_80245A10_S1 func_80245A10_S1;
 
-struct ALEventListItem;
-struct ALEventListItem {
-    ListLink node;
-    s32 delta;
-    Message_func_802AF150_de evt;
-};
 
 struct Params;
 typedef struct Params Params;
@@ -3908,6 +3894,54 @@ struct func_80284AF4_G2;
 struct func_80284AF4_G2 {
     void * unk0;
 };
+struct ALEndEvent {
+    s32 ticks;
+    u8 status;
+    u8 type;
+    u8 len;
+};
+struct ALTempoEvent {
+    s32 ticks;
+    u8 status;
+    u8 type;
+    u8 len;
+    u8 byte1;
+    u8 byte2;
+    u8 byte3;
+};
+struct ALNoteEvent {
+    struct ALVoice_s *voice;
+};
+struct ALVolumeEvent {
+    struct ALVoice_s *voice;
+    s32 delta;
+    u8 vol;
+};
+struct ALOscEvent {
+    struct ALVoiceState *vs;
+    void *oscState;
+    u8 chan;
+};
+struct ALEvent {
+    s16 type;
+    union {
+        ALMIDIEvent midi;
+        ALTempoEvent tempo;
+        ALEndEvent end;
+        ALNoteEvent note;
+        ALVolumeEvent vol;
+        Request spvol;
+        InventorySlot sppriority;
+        func_80284AF4_G2 spseq;
+        func_80284AF4_G2 spbank;
+        ALOscEvent osc;
+    } msg;
+};
+struct ALEventListItem {
+    ListLink node;
+    s32 delta;
+    ALEvent evt;
+};
 
 struct ObjRecAt10V2;
 typedef struct ObjRecAt10V2 ObjRecAt10V2;
@@ -4244,8 +4278,7 @@ typedef struct func_80293268_S1 func_80293268_S1;
 struct func_80250BD4_S1;
 typedef struct func_80250BD4_S1 func_80250BD4_S1;
 
-struct ALEvent_func_802B21A8_de;
-typedef struct ALEvent_func_802B21A8_de ALEvent_func_802B21A8_de;
+struct ALEvent;
 
 struct func_8022E694_S1;
 struct func_8022E694_S1 {
