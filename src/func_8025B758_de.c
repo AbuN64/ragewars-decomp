@@ -1,11 +1,12 @@
+#include "common/unused.h"
+#include "span_C76B0/data.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8025A3EC.h"
 #include "types.h"
 
-extern char D_800C9068;
 
 
-extern s16 D_80107FA0[];
+
 
 
 
@@ -28,7 +29,7 @@ void func_8025B758_de(s32 *arg0, s32 arg1) {
     s32 one;
 
     i = 0;
-    k1 = ((func_802077F4_S2 *)(&D_800C9068))->unk4;
+    k1 = D_800C3F7C_de;
     k2 = D_800C3F80_de;
     *arg0 = arg1;
     do {

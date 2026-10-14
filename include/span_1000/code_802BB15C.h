@@ -1,6 +1,8 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BB15C_H
 #define UNBAKE_SPAN_1000_CODE_802BB15C_H
 #include "../types.h"
+
+extern char D_800CCC30[];
 /* unbake published declaration: published_180e04857c059e42e1641a71 */
 extern int D_8000030C;
 

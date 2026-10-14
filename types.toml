@@ -7549,6 +7549,7 @@ schema = 1
 "D_800C7DB8" = { declaration = "extern float D_800C7DB8;", evidence = "authored" }
 "D_800C7DC0" = { declaration = "extern float D_800C7DC0;", evidence = "authored" }
 "D_800C7DC8" = { declaration = "extern float D_800C7DC8;", evidence = "authored" }
+"D_800C7E00" = { declaration = "extern f32 D_800C7E00;", evidence = "authored" }
 "D_800C7E08" = { declaration = "extern float D_800C7E08;", evidence = "authored" }
 "D_800C7E90" = { declaration = "extern float D_800C7E90;", evidence = "authored" }
 "D_800C7E94" = { declaration = "extern float D_800C7E94;", evidence = "authored" }
@@ -7620,6 +7621,7 @@ schema = 1
 "D_800C8FF8" = { declaration = "extern float D_800C8FF8;", evidence = "authored" }
 "D_800C9044" = { declaration = "extern float D_800C9044;", evidence = "authored" }
 "D_800C9048" = { declaration = "extern float D_800C9048;", evidence = "authored" }
+"D_800C9068" = { declaration = "extern f32 D_800C9068;", evidence = "authored" }
 "D_800C90F8_de" = { declaration = "extern s32 D_800C90F8_de[];", evidence = "authored" }
 "D_800C9108" = { declaration = "extern float D_800C9108;", evidence = "authored" }
 "D_800C9138_de" = { declaration = "extern f32 D_800C9138_de;", evidence = "authored" }
@@ -7754,6 +7756,7 @@ schema = 1
 "D_800CCB08" = { declaration = "extern const float D_800CCB08;", evidence = "authored" }
 "D_800CCB10" = { declaration = "extern const float D_800CCB10;", evidence = "authored" }
 "D_800CCB18" = { declaration = "extern const float D_800CCB18;", evidence = "authored" }
+"D_800CCC30" = { declaration = "extern char D_800CCC30[];", evidence = "authored" }
 "D_800CCF10" = { declaration = "extern float D_800CCF10;", evidence = "authored" }
 "D_800CCF14" = { declaration = "extern float D_800CCF14;", evidence = "authored" }
 "D_800CCF18" = { declaration = "extern float D_800CCF18;", evidence = "authored" }

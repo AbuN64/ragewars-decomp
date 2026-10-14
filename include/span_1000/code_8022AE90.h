@@ -3,6 +3,8 @@
 #include "../types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
+extern f32 D_800C7E00;
+
 struct IntegerState1250;
 /* unbake published declaration: published_08e8580ff60ee0382ad494a0 */
 typedef struct IntegerState1250 IntegerState1250;

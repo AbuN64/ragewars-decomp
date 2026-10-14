@@ -6,7 +6,6 @@
 
 
 
-extern float D_800C7E00;
 
 void func_8022B550_de(Obj_func_8022B550_de *obj, float target, float rate, int kind, int tag) {
     int i;

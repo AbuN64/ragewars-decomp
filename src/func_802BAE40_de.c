@@ -123,45 +123,15 @@ func_802BD200_eu_x
 }
 
 extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
-#if defined(VERSION_DE)
-extern const float D_800C79E0;
-#elif defined(VERSION_EU)
-extern const float D_800C85D0;
-#elif defined(VERSION_EU_X)
-extern const double D_800C8FA0;
-#elif defined(VERSION_US)
-extern const float D_800C7900;
-#else
-extern char D_800CCC30[];
-#endif
+
 extern s32 D_800C79E4_de;
 
 int func_802BB060_de(u32 arg0, u32 *arg1) {
     if (arg0 & 3) {
-#if defined(VERSION_DE)
-        func_802BAC50_de(&D_800C79E0, &D_800C79E4_de, 0x33);
-#elif defined(VERSION_EU)
-        func_802BAC50_de(&D_800C85D0, &D_800C79E4_de, 0x33);
-#elif defined(VERSION_EU_X)
-        func_802BAC50_de(&D_800C8FA0, &D_800C79E4_de, 0x33);
-#elif defined(VERSION_US)
-        func_802BAC50_de(&D_800C7900, &D_800C79E4_de, 0x33);
-#else
         func_802BAC50_de(D_800CCC30, &D_800C79E4_de, 0x33);
-#endif
     }
     if (arg1 == 0) {
-#if defined(VERSION_DE)
-        func_802BAC50_de(&D_800C79E0, &D_800C79E4_de, 0x34);
-#elif defined(VERSION_EU)
-        func_802BAC50_de(&D_800C85D0, &D_800C79E4_de, 0x34);
-#elif defined(VERSION_EU_X)
-        func_802BAC50_de(&D_800C8FA0, &D_800C79E4_de, 0x34);
-#elif defined(VERSION_US)
-        func_802BAC50_de(&D_800C7900, &D_800C79E4_de, 0x34);
-#else
         func_802BAC50_de(D_800CCC30, &D_800C79E4_de, 0x34);
-#endif
     }
     if (func_802B9D70_de() != 0) {
         return -1;
