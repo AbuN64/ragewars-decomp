@@ -2,6 +2,7 @@
 #define UNBAKE_COMMON_TYPES_1DC8418C21DB_H
 #include "audio_callbacks.h"
 #include "types.h"
+#include "span_1000/code_802B7B80.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 struct ItemRecAt20V1;
@@ -289,32 +290,6 @@ typedef struct func_8022ED94_S1 func_8022ED94_S1;
 struct MatrixF;
 struct MatrixF {
     f32 m[4][4];
-};
-
-struct Record_func_80433914_de;
-typedef struct Record_func_80433914_de Record_func_80433914_de;
-
-struct Record_func_80433914_de;
-struct Record_func_80433914_de {
-    union {
-        struct {
-    u8 name[8];
-    s32 time;
-    s8 owner;
-    s8 player;
-    char padE[1];
-    u8 slot;
-    char pad10[7];
-    u8 count;
-    char pad18[0x25 - 0x18];
-    u8 rank;
-    u8 plays[0x24]; /* +0x26: per-character match count */
-    u8 achievementFlags[0x189 - 0x4A];
-    u8 setting[5];
-    char pad18E[0x190 - 0x18E];
-        };
-        struct { char pad0[0x6C]; s32 wins, kills, deaths; } statistics;
-    };
 };
 
 struct MenuWidget;
@@ -652,9 +627,6 @@ struct OwnerRecAt38 {
     struct Key *selected;
 };
 
-struct OSPfs_func_80445F80_de;
-typedef struct OSPfs_func_80445F80_de OSPfs_func_80445F80_de;
-
 struct EntryRecAt3;
 struct EntryRecAt3 {
     u16 id;
@@ -669,15 +641,6 @@ struct Shape_typemap_21;
 struct Shape_typemap_21 {
     unsigned char padding_0[16];
     unsigned char field_10;
-};
-
-struct ProfileRecAt16;
-struct ProfileRecAt16 {
-    char pad0[0x14];
-    u8 bonus2;
-    u8 bonus0;
-    u8 bonus1;
-    char pad17[0x190 - 0x17];
 };
 
 struct ObjRecAt1454V2;
@@ -3234,23 +3197,6 @@ struct HashNode {
 struct InstanceHdr;
 typedef struct InstanceHdr InstanceHdr;
 
-struct OSPfs_func_80445F80_de;
-struct OSPfs_func_80445F80_de {
-    int status;
-    void *queue;
-    int channel;
-    u8 id[32];
-    u8 label[32];
-    int version;
-    int dir_size;
-    int inode_table;
-    int minode_table;
-    int dir_table;
-    int inode_start_page;
-    u8 banks;
-    u8 activebank;
-};
-
 struct func_8024C8B4_S1;
 typedef struct func_8024C8B4_S1 func_8024C8B4_S1;
 
@@ -4462,8 +4408,6 @@ typedef struct StridedTable StridedTable;
 struct D_800C7470_Pair;
 typedef struct D_800C7470_Pair D_800C7470_Pair;
 
-struct ProfileRecAt16;
-typedef struct ProfileRecAt16 ProfileRecAt16;
 
 struct ObjRecAtB0;
 typedef struct ObjRecAtB0 ObjRecAtB0;

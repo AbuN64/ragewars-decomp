@@ -9,7 +9,7 @@
    cartridge has it. */
 
 
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 extern char *D_800D34E4;
 extern char *D_800D34E8;
 extern char *D_800D34EC;
@@ -47,7 +47,7 @@ extern char *D_800D3568;
 extern char *D_800D356C;
 extern char *D_800D3570;
 extern char *D_800D3574;
-extern s32 func_8022F454_de(Record_func_80433914_de *, s32);
+extern s32 func_8022F454_de(Profile *, s32);
 
 #if defined(VERSION_EU)
 extern char *D_800E1DE4[];
@@ -131,7 +131,7 @@ extern u8 D_80152789;
 #endif
 char *func_804253C8_de(s32 result) {
     /* FAKEMATCH: retain the recovered resident jump-table labels and one-pass dispatch scheduling. */
-    Record_func_80433914_de *player = D_80102B00;
+    Profile *player = D_80102B00;
     char *text = 0;
     u32 index;
 

@@ -35,7 +35,7 @@ struct Shared_Player_func_80433F14 {
     s32 back;
     union {
         char slots[4][400];
-        Record_func_80433914_de records[4];
+        Profile records[4];
     };
     union {
         struct { char pad658[0x67E - 0x658]; Name names[15]; };

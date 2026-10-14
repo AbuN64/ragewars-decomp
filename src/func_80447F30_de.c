@@ -17,13 +17,13 @@
 
 
 
-extern s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448CC4_de(OSPfs *pfs);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_80448BB4_de(u16 *ptr, u16 *csum, u16 *icsum);
-extern s32 func_80448548_de(OSPfs_func_80445F80_de *pfs, __OSPackId *temp);
-extern s32 func_80448260_de(OSPfs_func_80445F80_de *pfs, __OSPackId *badid, __OSPackId *newid);
+extern s32 func_80448548_de(OSPfs *pfs, __OSPackId *temp);
+extern s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
 
-s32 func_80447F30_de(OSPfs_func_80445F80_de *pfs)
+s32 func_80447F30_de(OSPfs *pfs)
 {
     int k;
     u16 sum;
@@ -98,9 +98,9 @@ s32 func_80447F30_de(OSPfs_func_80445F80_de *pfs)
 
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
-extern s32 func_80448BFC_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448BFC_de(OSPfs *pfs);
 
-s32 func_804480E0_de(OSPfs_func_80445F80_de *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name, s32 *file_no)
+s32 func_804480E0_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name, s32 *file_no)
 {
     s32 j;
     int i;

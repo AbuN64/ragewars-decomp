@@ -11,10 +11,10 @@
 
 
 
-extern s32 func_80448BFC_de(OSPfs_func_80445F80_de *pfs);
-extern s32 func_804488A4_de(OSPfs_func_80445F80_de *pfs, __OSInode *inode, u8 flag, u8 bank);
+extern s32 func_80448BFC_de(OSPfs *pfs);
+extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
 
-s32 func_80446C60_de(OSPfs_func_80445F80_de *pfs, s32 *bytes_not_used)
+s32 func_80446C60_de(OSPfs *pfs, s32 *bytes_not_used)
 {
     int j;
     int pages = 0;

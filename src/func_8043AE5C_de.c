@@ -6,7 +6,7 @@
 extern struct Screen_func_8043B0CC_de *D_800E59E0;
 extern struct Shape_typemap_165 D_800E5B44[];
 extern HudStatusShared_Settings D_801462C8;
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 extern s32 func_8022F4DC_de(s32 record, s32 item);
 extern void func_8043B49C_de(s32 player, s32 category, s32 choice);
 

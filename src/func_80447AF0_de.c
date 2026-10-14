@@ -2,12 +2,12 @@
 #include "span_16E000/code_80447BB0.h"
 #include "types.h"
 /* Reads or writes Controller Pak file blocks while validating and following its inode chain, based on the 2.0I public reference. */
-extern s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448CC4_de(OSPfs *pfs);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
-extern s32 func_804488A4_de(OSPfs_func_80445F80_de *,__OSInode *,u8,u8);
-extern s32 func_80448BFC_de(OSPfs_func_80445F80_de *);
-static inline s32 __osPfsGetNextPage(OSPfs_func_80445F80_de* pfs, u8* bank, __OSInode* inode, __OSInodeUnit* page) {
+extern s32 func_804488A4_de(OSPfs *,__OSInode *,u8,u8);
+extern s32 func_80448BFC_de(OSPfs *);
+static inline s32 __osPfsGetNextPage(OSPfs* pfs, u8* bank, __OSInode* inode, __OSInodeUnit* page) {
     s32 ret;
     if (page->inode_t.bank != *bank) {
         *bank = page->inode_t.bank;
@@ -22,7 +22,7 @@ static inline s32 __osPfsGetNextPage(OSPfs_func_80445F80_de* pfs, u8* bank, __OS
     }
     return 0;
 }
-s32 func_80447AF0_de(OSPfs_func_80445F80_de* pfs, s32 file_no, u8 flag, int offset, int size_in_bytes, u8* data_buffer) {
+s32 func_80447AF0_de(OSPfs* pfs, s32 file_no, u8 flag, int offset, int size_in_bytes, u8* data_buffer) {
     s32 ret;
     __OSDir dir;
     __OSInode inode;

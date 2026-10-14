@@ -27,7 +27,7 @@ extern s32 D_800E4680;
 extern Shared_Game D_801462C8;
 /* D_80146398 is the hub's func_8041F2A0_Config array: eight 0x96-byte records at Game+0xD0.
    This unit reaches them only as settings->playerSettings and declares nothing here. */
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 
 extern void func_8029973C_de(void);
 extern s32 func_80299A08_de(void);

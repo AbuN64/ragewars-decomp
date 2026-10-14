@@ -7,7 +7,7 @@
 extern u32 func_802B8880_de(void *queue, s32 channel, u16 address,
                            u8 *buffer, s32 force);
 
-s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs)
+s32 func_80448CC4_de(OSPfs *pfs)
 {
     u8 name[32];
     s32 i;

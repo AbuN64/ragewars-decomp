@@ -12,7 +12,7 @@
 
 
 
-extern s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448CC4_de(OSPfs *pfs);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
 
@@ -29,7 +29,7 @@ static inline u16 __osSumcalc(u8 *ptr, int length)
     return sum;
 }
 
-s32 func_804488A4_de(OSPfs_func_80445F80_de *pfs, __OSInode *inode, u8 flag, u8 bank)
+s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank)
 {
     u8 sum;
     int j;

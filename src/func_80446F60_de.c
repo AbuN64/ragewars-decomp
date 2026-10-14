@@ -20,14 +20,14 @@
 
 
 extern s32 func_80446D80_de(void *queue, int channel);
-extern s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448CC4_de(OSPfs *pfs);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_80448BB4_de(u16 *ptr, u16 *csum, u16 *icsum);
-extern s32 func_80448548_de(OSPfs_func_80445F80_de *pfs, __OSPackId *temp);
-extern s32 func_80448260_de(OSPfs_func_80445F80_de *pfs, __OSPackId *badid, __OSPackId *newid);
-extern s32 func_80447130_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448548_de(OSPfs *pfs, __OSPackId *temp);
+extern s32 func_80448260_de(OSPfs *pfs, __OSPackId *badid, __OSPackId *newid);
+extern s32 func_80447130_de(OSPfs *pfs);
 
-s32 func_80446F60_de(void *queue, OSPfs_func_80445F80_de *pfs, int channel)
+s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
 {
     int k;
     s32 ret = 0;
@@ -123,18 +123,18 @@ s32 func_80446F60_de(void *queue, OSPfs_func_80445F80_de *pfs, int channel)
 
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
-extern s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs);
-extern s32 func_80448BFC_de(OSPfs_func_80445F80_de *pfs);
-extern s32 func_804486B8_de(OSPfs_func_80445F80_de *pfs);
-extern s32 func_804488A4_de(OSPfs_func_80445F80_de *pfs, __OSInode *inode, u8 flag, u8 bank);
-extern s32 func_8044756C_de(OSPfs_func_80445F80_de *pfs, __OSInodeCache *cache);
+extern s32 func_80448CC4_de(OSPfs *pfs);
+extern s32 func_80448BFC_de(OSPfs *pfs);
+extern s32 func_804486B8_de(OSPfs *pfs);
+extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
+extern s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache);
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern s32 func_80448A48_eu_x(OSPfs_func_80445F80_de *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
+extern s32 func_80448A48_eu_x(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
 #else
-extern s32 func_804476B8_de(OSPfs_func_80445F80_de *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
+extern s32 func_804476B8_de(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
 #endif
 
-s32 func_80447130_de(OSPfs_func_80445F80_de *pfs)
+s32 func_80447130_de(OSPfs *pfs)
 {
     int j;
     s32 ret;
@@ -300,9 +300,9 @@ func_804476B8_de
 
 
 
-extern s32 func_804488A4_de(OSPfs_func_80445F80_de *pfs, __OSInode *inode, u8 flag, u8 bank);
+extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 flag, u8 bank);
 
-s32 func_8044756C_de(OSPfs_func_80445F80_de *pfs, __OSInodeCache *cache)
+s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache)
 {
     int i;
     int n;

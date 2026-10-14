@@ -981,7 +981,6 @@ extern char D_800D3390;
 
 extern s32 D_80142898;
 
-extern Profile D_80102B14[];
 
 extern char D_8010B304[];
 

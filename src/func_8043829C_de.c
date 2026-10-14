@@ -8,7 +8,7 @@
 #include "shared/func_80438614_de_closed.h"
 #include "span_16E000/code_804379C8.h"
 #include "span_C76B0/data.h"
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 extern s32 func_802A0C08_de(void *, s32, ...);
 /* Fill the selected player's preview statistics and optional rank badge. */
 void func_8043829C_de(void) {

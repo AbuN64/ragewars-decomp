@@ -1,11 +1,9 @@
 #include "types.h"
-typedef struct OSPfs_func_80445F80_de {
-    u8 reserved0[0x60]; s32 inode_start_page; u8 banks;
-} OSPfs_func_80445F80_de;
+#include "span_1000/code_802B7B80.h"
 typedef struct __OSInode { u16 pages[128]; } __OSInode;
 typedef struct OSInodeCache { __OSInode inode; u8 bank; u8 references[256]; } OSInodeCache;
-s32 func_804488A4_de(OSPfs_func_80445F80_de *, __OSInode *, u8, u8);
-s32 func_80448A48_eu_x(OSPfs_func_80445F80_de *pfs, s32 value, OSInodeCache *cache) {
+s32 func_804488A4_de(OSPfs *, __OSInode *, u8, u8);
+s32 func_80448A48_eu_x(OSPfs *pfs, s32 value, OSInodeCache *cache) {
     u32 key = (value >> 16) & 0xFFFF;
     u32 keyBank = key >> 8;
     u8 bank;

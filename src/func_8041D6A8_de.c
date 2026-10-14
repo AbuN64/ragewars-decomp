@@ -18,7 +18,7 @@ enum { PROFILE_RESOURCE_498 = 498, PROFILE_RESOURCE_499 = 499, PROFILE_RESOURCE_
 
 /* The hub spells D_800E3590 as the menu block; this unit keeps its ProfileStatisticsScreen view
    because it reads the 0x32-byte text buffers from 0x110 up, which the hub only pads over. */
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 extern char D_800DD508_de[];
 extern char D_800DD50C[];
 

@@ -9,7 +9,7 @@
 #include "common/types_1dc8418c21db.h"
 /* func_802301E4_S* are unresolved canonical player/actor/control/attack types. */
 
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 
 
 extern s32 D_800D30BC;

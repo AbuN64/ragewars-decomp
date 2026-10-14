@@ -3336,7 +3336,7 @@ struct Held;
 struct Mode;
 struct Model;
 struct Mount;
-struct ProfileRecAt16;
+struct Profile;
 struct Record;
 struct Rider;
 struct Settings;
@@ -3664,7 +3664,7 @@ struct SharedPlayerRecV1 {
             unsigned char * info;
         } view5D8_5;
         struct {
-            struct ProfileRecAt16 * profile;
+            struct Profile * profile;
         } view5D8_6;
         struct {
             struct Settings * settings;

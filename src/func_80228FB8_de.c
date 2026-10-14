@@ -176,7 +176,7 @@ void func_80229468_de(Inventory *arg0, Receiver *arg1) {
    unlimited at 0x1450), and the message "<amount> <type name>" with a plural suffix for more than one
    is built and shown through func_8022B75C_de. */
 extern s32 D_800CE3E8[];
-extern ProfileRecAt16 D_80102B00[];
+extern Profile D_80102B00[];
 extern u8 D_801462D5;
 extern char D_800C2C50_de[];
 extern char D_800C2C54_de[];

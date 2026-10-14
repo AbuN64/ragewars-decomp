@@ -10,7 +10,7 @@
 
 /* Adds ammunition to a player's weapon slot: computes the slot's cap as func_80222D64_de does (zero for
    no slot, the character's cap unless option D_801462D5 is 1, otherwise D_800CE3E8's cap plus the
-   profile bonus from D_80102B14 unless the flag at 0x1450 is set), and when the slot has room it
+   profile bonus from D_80102B00 unless the flag at 0x1450 is set), and when the slot has room it
    selects weapon 1, 5 or 4 at 0xCC0 for slots 0, 1 and 2 if the slot was empty and ammunition is
    added, then adds the amount clamped to the cap. Returns whether the slot had room. Adapted from
    func_80222D64_de with the count read once into an int and the weapon selection as a switch. */
@@ -22,7 +22,7 @@
 extern void *func_802AC950_de(s32);
 extern u8 D_801462D5;
 extern s32 D_800CE3E8[];
-extern Profile D_80102B14[];
+extern Profile D_80102B00[];
 
 
 
@@ -43,11 +43,11 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
         cap = D_800CE3E8[slot];
         if (((Actor_func_8022D290_de *)(player))->unk_0x1450 == 0) {
             if (slot == 0) {
-                cap += D_80102B14[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus0;
+                cap += D_80102B00[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus0;
             } else if (slot == 1) {
-                cap += D_80102B14[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus1;
+                cap += D_80102B00[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus1;
             } else if (slot == 2) {
-                cap += D_80102B14[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus2;
+                cap += D_80102B00[((Actor_func_8022D290_de *)(player))->unk_0x05D4].bonus2;
             }
         }
     }
@@ -79,7 +79,7 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
 /* Returns whether a player can take more ammunition for a pickup: looks up the pickup's weapon slot
    through func_802AC950_de, takes the cap as zero for no slot, the character's cap at 0x108 when option
    D_801462D5 is not 1, or otherwise D_800CE3E8's cap raised, unless the flag at 0x1450 is set, by the
-   player profile's bonus byte for slots 0, 1 and 2 in D_80102B14, and compares the slot's count at
+   player profile's bonus byte for slots 0, 1 and 2 in D_80102B00, and compares the slot's count at
    0x5F4 against it. */
 
 
@@ -89,7 +89,7 @@ s32 func_80222BE8_de(void *player, s32 slot, s32 amount) {
 extern void *func_802AC950_de(s32);
 extern u8 D_801462D5;
 extern s32 D_800CE3E8[];
-extern Profile D_80102B14[];
+extern Profile D_80102B00[];
 
 
 
@@ -118,11 +118,11 @@ s32 func_80222D64_de(void *arg0, s32 arg1) {
             base = D_800CE3E8[slot];
             if (((Actor_func_8022D290_de *)(arg0))->unk_0x1450 == 0) {
                 if (slot == 0) {
-                    base += D_80102B14[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus0;
+                    base += D_80102B00[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus0;
                 } else if (slot == 1) {
-                    base += D_80102B14[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus1;
+                    base += D_80102B00[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus1;
                 } else if (slot == 2) {
-                    base += D_80102B14[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus2;
+                    base += D_80102B00[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus2;
                 }
             }
         }

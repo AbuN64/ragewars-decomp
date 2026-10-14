@@ -15,7 +15,7 @@
 
 
 
-extern s32 func_80448CC4_de(OSPfs_func_80445F80_de *pfs);
+extern s32 func_80448CC4_de(OSPfs *pfs);
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
 
@@ -35,7 +35,7 @@ static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)
     return 0;
 }
 
-s32 func_80448548_de(OSPfs_func_80445F80_de *pfs, __OSPackId *temp)
+s32 func_80448548_de(OSPfs *pfs, __OSPackId *temp)
 {
     u16 index[4];
     s32 ret = 0;

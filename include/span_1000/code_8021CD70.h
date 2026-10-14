@@ -4626,8 +4626,6 @@ typedef struct SessionState SessionState;
 struct Tuning;
 typedef struct Tuning Tuning;
 
-struct Profile;
-typedef struct Profile Profile;
 
 struct func_80224078_Arg0;
 typedef struct func_80224078_Arg0 func_80224078_Arg0;

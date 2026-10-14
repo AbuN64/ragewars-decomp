@@ -103,11 +103,30 @@ typedef struct Matrix Matrix;
 
 struct Profile;
 struct Profile {
+    union {
+        struct {
+    u8 name[8];
+    s32 time;
+    s8 owner;
+    s8 player;
+    char padE[1];
+    u8 slot;
+    char pad10[4];
     u8 bonus2;
     u8 bonus0;
     u8 bonus1;
-    char pad[0x18D];
+    u8 count;
+    char pad18[0x25 - 0x18];
+    u8 rank;
+    u8 plays[0x24]; /* +0x26: per-character match count */
+    u8 achievementFlags[0x189 - 0x4A];
+    u8 setting[5];
+    char pad18E[0x190 - 0x18E];
+        };
+        struct { char pad0[0x6C]; s32 wins, kills, deaths; } statistics;
+    };
 };
+typedef struct Profile Profile;
 
 struct Shared_Emitter;
 typedef struct Shared_Emitter Shared_Emitter;

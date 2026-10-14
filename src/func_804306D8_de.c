@@ -412,7 +412,7 @@ s32 func_804306D8_de(s32 arg0, s32 arg1, s32 arg2) {
                     for (j = 0; j < 4; j++) {
                         found = func_804358C0_de(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[j].owner);
                         if (found != -1) {
-                            func_8022EF30_de(&((Record_func_80433914_de *) D_80102B00)[found]);
+                            func_8022EF30_de(&((Profile *) D_80102B00)[found]);
                         }
                     }
                 }
@@ -447,7 +447,7 @@ s32 func_804306D8_de(s32 arg0, s32 arg1, s32 arg2) {
             i = D_800E54A4->players[p].choice;
             other = func_804358C0_de(D_800E54A4->players[p].profile, D_800E54A4->players[p].records[i].owner);
             if (other != -1) {
-                func_8022EF30_de(&((Record_func_80433914_de *) D_80102B00)[other]);
+                func_8022EF30_de(&((Profile *) D_80102B00)[other]);
             }
             func_8022EF30_de(&D_800E54A4->players[p].records[i]);
             if (func_80434428_de(p) == 1) {

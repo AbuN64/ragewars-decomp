@@ -5,7 +5,7 @@
 extern func_8042CE54_S1 *D_800E53C0;
 extern ResourceBank D_800E12D2[],D_800E12D6[],D_800E12DA[],D_800E12DE[],D_800E12E2[],D_800E12E6[],D_800E12EA[],D_800E12EE[],D_800E12F2[],D_800E12F6[];
 extern struct RowRecAt54 D_800E3A58[];
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 extern s32 D_800E01B0_de[],D_800FF140_de[],D_800FEAE0[],D_8014DD98;
 extern s32 func_8041F140_de(s32);
 extern char *func_802A0494_de(char *);

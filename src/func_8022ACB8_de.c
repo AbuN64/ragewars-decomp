@@ -9,7 +9,7 @@
 
 extern unsigned char D_801462D5;
 extern int D_800CE3E8[];
-extern ProfileRecAt16 D_80102B00[];
+extern Profile D_80102B00[];
 
 int func_8022ACB8_de(Player_func_8022ACB8_de *player, int slot) {
     int value;

@@ -2,7 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_80423280.h"
 /* Count achievements, store the rank, and select its version-specific title. */
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 extern s32 func_80265650_de(s32 bits, s32 index);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern char *D_800D3200[];

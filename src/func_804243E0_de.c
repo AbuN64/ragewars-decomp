@@ -6,7 +6,7 @@
 #include "span_16E000/code_80423280.h"
 
 /* Awards earned end-of-match unlocks and lists the first two new rewards. */
-extern Record_func_80433914_de D_80102B00[];
+extern Profile D_80102B00[];
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
