@@ -4114,6 +4114,7 @@ schema = 1
 "func_8043F040_de" = { evidence = "landed", signature = "void func_8043F040_de(void)" }
 "func_8043F048_de" = { evidence = "landed", signature = "s32 func_8043F048_de(struct Item_func_8043F048_de *item, struct Holder_func_8043F048_de *holder)" }
 "func_8043F0C8_de" = { evidence = "landed", signature = "s32 func_8043F0C8_de(void *first, void *second, void *third)" }
+"func_8043F120_de" = { evidence = "landed", signature = "char *func_8043F120_de(Shared_DebugWidget *widget)" }
 "func_8043F294_de" = { evidence = "landed", signature = "s32 func_8043F294_de(Menu_func_8043F294_de *arg0, Shared_MenuInput *arg1)" }
 "func_8043F37C_eu" = { evidence = "landed", signature = "s32 func_8043F37C_eu(void *arg0, Menu_func_8043F37C_eu *menu, void *arg2)" }
 "func_8043F52C_de" = { evidence = "landed", signature = "void func_8043F52C_de(TextBoundsText *arg0, TextBoundsMetrics *arg1)" }
@@ -8477,6 +8478,9 @@ schema = 1
 "D_800DE338" = { declaration = "extern float D_800DE338;", evidence = "authored" }
 "D_800DE370" = { declaration = "extern float D_800DE370;", evidence = "authored" }
 "D_800DE378_de" = { declaration = "extern float D_800DE378_de;", evidence = "authored" }
+"D_800DE380" = { declaration = "extern char D_800DE380[];", evidence = "authored" }
+"D_800DE388_de" = { declaration = "extern char D_800DE388_de[];", evidence = "authored" }
+"D_800DE390_de" = { declaration = "extern char D_800DE390_de[];", evidence = "authored" }
 "D_800DE428" = { declaration = "extern float D_800DE428;", evidence = "authored" }
 "D_800DE47C_de" = { declaration = "extern f32 D_800DE47C_de;", evidence = "authored" }
 "D_800DE480_de" = { declaration = "extern float D_800DE480_de;", evidence = "authored" }
@@ -9364,6 +9368,8 @@ schema = 1
 "D_8014DCF8" = { declaration = "extern int D_8014DCF8[];", evidence = "authored" }
 "D_8014DD50" = { declaration = "extern Preset D_8014DD50;", evidence = "authored" }
 "D_8014DD98" = { declaration = "extern s32 D_8014DD98;", evidence = "authored" }
+"D_8014DDD0" = { declaration = "extern char D_8014DDD0[];", evidence = "authored" }
+"D_8014DE10" = { declaration = "extern char D_8014DE10[];", evidence = "authored" }
 "D_8014E000" = { declaration = "extern char D_8014E000;", evidence = "authored" }
 "D_8014ED10_de" = { declaration = "extern u64 D_8014ED10_de[];", evidence = "authored" }
 "D_8014FE30" = { declaration = "extern u32 D_8014FE30;", evidence = "authored" }

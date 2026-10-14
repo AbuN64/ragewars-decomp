@@ -142,4 +142,11 @@ extern s32 func_8043ED50_de(void);
 extern void func_8043E97C_de(void *arg0);
 extern f32 D_800E23A0[2];
 extern f32 D_800E23A8;
+
+extern char D_800DE380[];
+extern char D_800DE388_de[];
+extern char D_800DE390_de[];
+extern char D_8014DE10[];
+extern char D_8014DDD0[];
+
 #endif
