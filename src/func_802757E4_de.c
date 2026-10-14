@@ -10,8 +10,8 @@
 
 
 
-extern Polygon_func_80275410_de *D_800CD3E8;
-extern Polygon_func_80275410_de *D_800CD3EC;
+extern Triangle *D_800CD3E8;
+extern Triangle *D_800CD3EC;
 extern Vec3 D_80115E10;
 extern f32 D_80111D54;
 extern s32 D_80111D58;
@@ -29,7 +29,7 @@ static inline void normalize_copy(Vec3 *out, Vec3 *in) {
     func_8027207C_de(out);
 }
 
-s32 func_802757E4_de(Polygon_func_80275410_de *polygon) {
+s32 func_802757E4_de(Triangle *polygon) {
     Vec3 up;
     Vec3 normal;
     Vec3 edge0;

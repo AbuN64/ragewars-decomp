@@ -416,7 +416,7 @@ typedef struct ResourceObject23 {
     s32 loadedType;
     s32 resourceName;
     s32 resourceSize;
-    Node_func_80251F6C_de *blockNode;
+    CachedResource *blockNode;
 } ResourceObject23;
 extern char D_0024F8DC;
 extern char D_800C3DAC_de;

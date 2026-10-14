@@ -38,7 +38,7 @@ s32 func_80255170_de(s32 *arg0, void *arg1) {
 
     func_802BAC60_de(sp10, (s32) &sp28, 1);
     temp = D_800CD8B8_de;
-    ((Request_func_80251F6C_de *)arg1)->unk20 = sp10;
+    ((ResourceLoadRequest *)arg1)->replyQueue = sp10;
     D_800CD704 = 2;
     func_802BB5F0_de(arg0, temp);
     func_802BB160_de((s32 *)&((ResourceLoadWorker *)arg0)->requests, arg1, 1);

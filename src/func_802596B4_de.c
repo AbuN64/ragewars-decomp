@@ -12,12 +12,12 @@
 
 extern void func_8025B6F8_de(Header *header, s32 owner, s32 arg2);
 
-static inline void func_802596D4_linkInit(Link_func_802596B4_de *link) {
+static inline void func_802596D4_linkInit(ListLink *link) {
     link->prev = link;
     link->next = link;
 }
 
-static inline void func_802596D4_insertAfter(Link_func_802596B4_de *at, Link_func_802596B4_de *link) {
+static inline void func_802596D4_insertAfter(ListLink *at, ListLink *link) {
     link->next = at->next;
     link->prev = at;
     at->next->prev = link;

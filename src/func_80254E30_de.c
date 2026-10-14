@@ -18,7 +18,7 @@ void *func_80254E30_de(void) {
     void *temp_s0 = *p;
     if (temp_s0 != 0) {
         func_80255ED8_de(p, (s32) temp_s0);
-        ((Request_func_80251F6C_de *)temp_s0)->flags = 1;
+        ((ResourceLoadRequest *)temp_s0)->flags = 1;
         func_80255CB8_de(((char *)p + sizeof(IntrusiveList)), (s32) temp_s0);
     }
     return temp_s0;

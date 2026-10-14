@@ -35,26 +35,26 @@ extern s32 D_80106248;
 extern u32 func_802BCF30_de(void);
 extern void func_802BCF50_de(u32);
 extern s32 func_802BB420_de(void *, s32, s32);
-extern Request_func_80251F6C_de *func_80254ED0_de(s32, s32);
-extern void func_80254E88_de(s32, Request_func_80251F6C_de *);
-extern void func_80255170_de(s32 *, Request_func_80251F6C_de *);
-extern s32 func_802551FC_de(s32 *, Request_func_80251F6C_de *, Manager *);
-extern void func_80255CB8_de(void *, Request_func_80251F6C_de *);
-extern void func_80255ED8_de(void *, Request_func_80251F6C_de *);
-extern void func_80255FB8_de(void *, Node_func_80251F6C_de *);
-extern Request_func_80251F6C_de *func_80252774_de(s32, Request_func_80251F6C_de *, s32);
+extern ResourceLoadRequest *func_80254ED0_de(s32, s32);
+extern void func_80254E88_de(s32, ResourceLoadRequest *);
+extern void func_80255170_de(s32 *, ResourceLoadRequest *);
+extern s32 func_802551FC_de(s32 *, ResourceLoadRequest *, Manager *);
+extern void func_80255CB8_de(void *, ResourceLoadRequest *);
+extern void func_80255ED8_de(void *, ResourceLoadRequest *);
+extern void func_80255FB8_de(void *, CachedResource *);
+extern ResourceLoadRequest *func_80252774_de(s32, ResourceLoadRequest *, s32);
 
-static inline void addref(Node_func_80251F6C_de *node) {
+static inline void addref(CachedResource *node) {
     node->count += 1;
     node->flags |= 0x100;
 }
 
-static inline void stamp(Node_func_80251F6C_de *node) {
+static inline void stamp(CachedResource *node) {
     node->stamp = D_80105180;
     func_80255FB8_de(&D_80100570, node);
 }
 
-static inline void unref(Node_func_80251F6C_de *node) {
+static inline void unref(CachedResource *node) {
     if (--node->count == 0) {
         node->flags &= ~0x100;
     }
@@ -86,18 +86,18 @@ static inline void release(void) {
     }
 }
 
-Node_func_80251F6C_de *func_80251F6C_de(s32 unused, s32 key, Node_func_80251F6C_de *first, Node_func_80251F6C_de *second, s32 mode, void *owner,
+CachedResource *func_80251F6C_de(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner,
                     void *tag, void *spare, s32 async) {
-    HashNodeRecAtCV1 *node;
-    Request_func_80251F6C_de *found;
-    Request_func_80251F6C_de **out;
-    Request_func_80251F6C_de *scan;
+    ResourceHashEntry *node;
+    ResourceLoadRequest *found;
+    ResourceLoadRequest **out;
+    ResourceLoadRequest *scan;
     s32 busy;
 
     acquire();
 
     out = &found;
-    node = (HashNodeRecAtCV1 *)((s32)D_80101194 +
+    node = (ResourceHashEntry *)((s32)D_80101194 +
         ((((key << 5) ^ ((u32)key >> 1) ^ ((u32)key >> 9) ^
            ((u32)key >> 17)) & D_80101190) * 0x10));
     if (node->key != key) {
@@ -145,8 +145,8 @@ done:
         if (found != 0) {
             found->key = key;
             found->priority = 0;
-            found->owner = owner;
-            found->unk14 = tag;
+            found->owner = (s32)owner;
+            found->tag = tag;
             found->mode = mode;
             found->node = first;
             found->extra = second;

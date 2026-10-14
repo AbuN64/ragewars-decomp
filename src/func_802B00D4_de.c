@@ -14,15 +14,15 @@
 
 
 extern s32 func_802BD170_de(s32);                  /* osSetIntMask */
-extern void func_802B2450_de(Link_func_802596B4_de *);            /* alUnlink */
-extern void func_802B2480_de(Link_func_802596B4_de *, Link_func_802596B4_de *);  /* alLink */
+extern void func_802B2450_de(ListLink *);            /* alUnlink */
+extern void func_802B2480_de(ListLink *, ListLink *);  /* alLink */
  /* alCopy */
 
 void func_802B00D4_de(ALEventQueue *evtq, Message_func_802AF150_de *evt, s32 delta)
 {
     ALEventListItem *item;
     ALEventListItem *nextItem;
-    Link_func_802596B4_de *node;
+    ListLink *node;
     s32 postAtEnd = 0;
     s32 mask;
 
@@ -34,7 +34,7 @@ void func_802B00D4_de(ALEventQueue *evtq, Message_func_802AF150_de *evt, s32 del
         return;
     }
 
-    func_802B2450_de((Link_func_802596B4_de *)item);
+    func_802B2450_de((ListLink *)item);
     ((void (*)(void *, void *, s32))func_802B0310_de)(evt, &item->evt, sizeof(*evt));
 
     if (delta == 0x7FFFFFFF)
@@ -46,7 +46,7 @@ void func_802B00D4_de(ALEventQueue *evtq, Message_func_802AF150_de *evt, s32 del
                 item->delta = 0;
             else
                 item->delta = delta;
-            func_802B2480_de((Link_func_802596B4_de *)item, node);
+            func_802B2480_de((ListLink *)item, node);
             break;
         } else {
             nextItem = (ALEventListItem *)node->next;
@@ -55,7 +55,7 @@ void func_802B00D4_de(ALEventQueue *evtq, Message_func_802AF150_de *evt, s32 del
                 item->delta = delta;
                 nextItem->delta -= delta;
 
-                func_802B2480_de((Link_func_802596B4_de *)item, node);
+                func_802B2480_de((ListLink *)item, node);
                 break;
             }
 

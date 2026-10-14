@@ -110,8 +110,8 @@ extern float D_800C49C4_de;
 
 extern f32 func_802749B4_de(f32 arg0, f32 arg1);
 
-struct Polygon_func_80275410_de;
-struct Polygon_func_80275410_de {
+struct Triangle;
+struct Triangle {
     char pad0[2];
     u16 flags;
     Vec3 *vertices[3];
@@ -122,8 +122,8 @@ extern s32 func_80274D8C_de(void *arg0, void *arg1);
 struct func_80274DFC_S1;
 typedef struct func_80274DFC_S1 func_80274DFC_S1;
 
-struct Polygon_func_80275410_de;
-typedef struct Polygon_func_80275410_de Polygon_func_80275410_de;
+struct Triangle;
+typedef struct Triangle Triangle;
 
 extern void func_80274C7C_de(void *arg0);
 

@@ -8,8 +8,8 @@ extern int D_8011BF00;
 
 struct List802795C0;
 struct List802795C0 {
-    Link_func_802596B4_de *head;
-    Link_func_802596B4_de *tail;
+    ListLink *head;
+    ListLink *tail;
     int count;
 };
 

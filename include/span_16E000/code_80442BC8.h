@@ -9,8 +9,8 @@ struct Object1C8 {
     s32 second;
 };
 
-struct Descriptor_func_80442D10_de;
-struct Descriptor_func_80442D10_de {
+struct WidgetDescriptor;
+struct WidgetDescriptor {
     short type;
     short pad;
     int flags;
@@ -38,7 +38,7 @@ struct ObjRecAt8V4 {
     u32 flags;
 };
 
-struct Descriptor_func_80442D10_de;
+struct WidgetDescriptor;
 struct WidgetRecAt24;
 struct WidgetRecAt24 {
     int id;
@@ -52,19 +52,19 @@ struct WidgetRecAt24 {
     unsigned char b;
     unsigned char a;
     int value;
-    struct Descriptor_func_80442D10_de *desc;
+    struct WidgetDescriptor *desc;
     int index;
     void *extra;
     int arg;
 };
 
-struct Descriptor_func_80442D10_de;
-typedef struct Descriptor_func_80442D10_de Descriptor_func_80442D10_de;
+struct WidgetDescriptor;
+typedef struct WidgetDescriptor WidgetDescriptor;
 
 struct WidgetRecAt24;
 typedef struct WidgetRecAt24 WidgetRecAt24;
 
-extern void func_80442D10_de(WidgetRecAt24 *w, Descriptor_func_80442D10_de *d, char **arena, int id, int arg);
+extern void func_80442D10_de(WidgetRecAt24 *w, WidgetDescriptor *d, char **arena, int id, int arg);
 
 struct StateRecAtBCV2;
 struct StateRecAtBCV2 {

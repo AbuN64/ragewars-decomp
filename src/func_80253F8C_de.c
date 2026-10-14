@@ -71,7 +71,7 @@ found:
 
     if (value != 0) {
         void *object = *(void **)value;
-        ((Node_func_80251F6C_de *)object)->stamp = D_80105180;
+        ((CachedResource *)object)->stamp = D_80105180;
         func_80255FB8_de(&D_80100570, object);
     }
 

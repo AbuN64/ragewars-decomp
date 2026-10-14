@@ -42,7 +42,7 @@ s32 func_80279508_de(void *arg0, void *arg1) {
     (((struct ListHeader *) ((s8 *) arg0))->count) = count;
     return count;
 }
-int func_80279550_de(List802795C0 *arg0, Link_func_802596B4_de *arg1) {
+int func_80279550_de(List802795C0 *arg0, ListLink *arg1) {
     if (arg1->prev != 0) {
         arg1->prev->next = arg1->next;
     }
@@ -65,7 +65,7 @@ static inline void clear_list(ListHeader *list) {
     list->count = 0;
 }
 /* Append a free node and return the new list length. */
-static inline s32 append(ListHeader *list, Link_func_802596B4_de *node) {
+static inline s32 append(ListHeader *list, ListLink *node) {
     s32 count;
     if (list->count == 0) {
         list->head = node;
@@ -75,7 +75,7 @@ static inline s32 append(ListHeader *list, Link_func_802596B4_de *node) {
     } else {
         node->next = list->tail;
         node->prev = 0;
-        ((Link_func_802596B4_de *)list->tail)->prev = node;
+        ((ListLink *)list->tail)->prev = node;
         list->tail = node;
     }
     count = list->count + 1;
@@ -88,13 +88,13 @@ void func_802795B0_de(ListHeader *lists, void *pool, s32 stride, s32 count) {
     clear_list(lists);
     clear_list(lists + 1);
     for (remaining = count - 1; remaining != -1; remaining--) {
-        append(lists, (Link_func_802596B4_de *)pool);
+        append(lists, (ListLink *)pool);
         pool = (char *)pool + stride;
     }
 }
-Link_func_802596B4_de *func_8027963C_de(Lists18 *arg0) {
-    Link_func_802596B4_de *node;
-    Link_func_802596B4_de *tail;
+ListLink *func_8027963C_de(Lists18 *arg0) {
+    ListLink *node;
+    ListLink *tail;
     List802795C0 *inactive;
     node = arg0->active.head;
     if (node != 0) {
@@ -128,9 +128,9 @@ Link_func_802596B4_de *func_8027963C_de(Lists18 *arg0) {
     }
     return node;
 }
-void func_802796F4_de(Lists18 *arg0, Link_func_802596B4_de *arg1) {
+void func_802796F4_de(Lists18 *arg0, ListLink *arg1) {
     List802795C0 *inactive;
-    Link_func_802596B4_de *tail;
+    ListLink *tail;
     inactive = &arg0->inactive;
     if (arg1->prev != 0) {
         arg1->prev->next = arg1->next;

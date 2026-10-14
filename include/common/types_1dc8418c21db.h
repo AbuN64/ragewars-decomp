@@ -204,19 +204,19 @@ struct Message_func_802AF150_de {
     char pad[14];
 } __attribute__((aligned(4)));
 
-struct Link_func_802596B4_de;
-struct Link_func_802596B4_de {
-    struct Link_func_802596B4_de *next;
-    struct Link_func_802596B4_de *prev;
+struct ListLink;
+struct ListLink {
+    struct ListLink *next;
+    struct ListLink *prev;
 };
 
-struct Link_func_802596B4_de;
-typedef struct Link_func_802596B4_de Link_func_802596B4_de;
+struct ListLink;
+typedef struct ListLink ListLink;
 
 struct ALEventQueue;
 struct ALEventQueue {
-    Link_func_802596B4_de freeList;
-    Link_func_802596B4_de allocList;
+    ListLink freeList;
+    ListLink allocList;
     s32 eventCount;
 };
 
@@ -331,7 +331,7 @@ typedef struct ALVoice_s ALVoice_s;
 
 struct ALVoice_s;
 struct ALVoice_s {
-    Link_func_802596B4_de node;
+    ListLink node;
     void *pvoice;
     void *table;
     void *clientPrivate;
@@ -2508,8 +2508,8 @@ struct func_8022ED94_S1 {
 union func_80239C2C_S1_UF24;
 typedef union func_80239C2C_S1_UF24 func_80239C2C_S1_UF24;
 
-struct Item_func_8042B4D4_de;
-struct Item_func_8042B4D4_de {
+struct MenuMarker;
+struct MenuMarker {
     char pad[0x10];
     u8 alpha;
     char pad11[0x14 - 0x11];
@@ -2562,9 +2562,9 @@ typedef struct Extra Extra;
 struct ALSynth_func_802B3000_de;
 struct ALSynth_func_802B3000_de {
     void *head;
-    Link_func_802596B4_de pFreeList;
-    Link_func_802596B4_de pAllocList;
-    Link_func_802596B4_de pLameList;
+    ListLink pFreeList;
+    ListLink pAllocList;
+    ListLink pLameList;
     s32 paramSamples;
 };
 
@@ -3202,7 +3202,7 @@ typedef struct func_80245A10_S1 func_80245A10_S1;
 
 struct ALEventListItem;
 struct ALEventListItem {
-    Link_func_802596B4_de node;
+    ListLink node;
     s32 delta;
     Message_func_802AF150_de evt;
 };
@@ -3216,8 +3216,8 @@ typedef struct func_802077F4_S4 func_802077F4_S4;
 struct func_80204BB4_S1;
 typedef struct func_80204BB4_S1 func_80204BB4_S1;
 
-struct Queue_func_802BB420_de;
-typedef struct Queue_func_802BB420_de Queue_func_802BB420_de;
+struct RingQueue;
+typedef struct RingQueue RingQueue;
 
 struct func_802B7EB0_S1;
 typedef struct func_802B7EB0_S1 func_802B7EB0_S1;
@@ -3243,8 +3243,8 @@ typedef struct func_802428C0_S2 func_802428C0_S2;
 struct ObjRecAt28V2;
 typedef struct ObjRecAt28V2 ObjRecAt28V2;
 
-struct Queue_func_802BB420_de;
-struct Queue_func_802BB420_de {
+struct RingQueue;
+struct RingQueue {
     s32 *state;
     s32 unknown4;
     s32 count;
@@ -3620,7 +3620,7 @@ struct ALFilter_s_func_802B3000_de;
 struct ALVoice_s_func_802B3000_de;
 struct PVoice_s_func_802B3000_de;
 struct PVoice_s_func_802B3000_de {
-    Link_func_802596B4_de node;
+    ListLink node;
     struct ALVoice_s_func_802B3000_de *vvoice;
     struct ALFilter_s_func_802B3000_de *channelKnob;
     char pad10[0xD8 - 0x10];
@@ -3628,7 +3628,7 @@ struct PVoice_s_func_802B3000_de {
 };
 
 struct ALVoice_s_func_802B3000_de {
-    Link_func_802596B4_de node;
+    ListLink node;
     struct PVoice_s_func_802B3000_de *pvoice;
     void *table;
     void *clientPrivate;

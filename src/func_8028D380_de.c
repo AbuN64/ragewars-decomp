@@ -22,7 +22,7 @@ void func_8028D380_de(void *arg0, s32 arg1, void *arg2, s32 arg3) {
     s32 sp20;
     s32 tempv0;
     s32 temps2;
-    Node_func_80251F6C_de *node;
+    CachedResource *node;
     s32 count;
 
     tempv0 = func_8028FE28_de(((Shared_World *)arg0)->resourceDirectory, ((Shared_World *)arg0)->resourceBank, arg1);

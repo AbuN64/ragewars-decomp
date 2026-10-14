@@ -35,16 +35,16 @@ struct State_func_8042BA54_de {
     s32 next;
 };
 
-struct Item_func_8042B4D4_de;
+struct MenuMarker;
 struct Screen_func_8042B78C_de;
 struct Screen_func_8042B78C_de {
     char pad0[0x308];
     char view[0x434 - 0x308];
     s32 category;
     s32 selection;
-    struct Item_func_8042B4D4_de *item;
+    struct MenuMarker *item;
     char pad440[0x448 - 0x440];
-    struct Item_func_8042B4D4_de *marker;
+    struct MenuMarker *marker;
     char pad44C[0x45C - 0x44C];
     s32 word45C;
     char pad460[0x464 - 0x460];
@@ -114,17 +114,17 @@ struct func_8042B4C4_S1 {
     s32 unk46C;
 };
 
-struct Item_func_8042B4D4_de;
+struct MenuMarker;
 struct Screen_func_8042B4D4_de;
 struct Screen_func_8042B4D4_de {
     char pad0[0x308];
     char view[0x434 - 0x308];
     s32 category;
     s32 selection;
-    struct Item_func_8042B4D4_de *item;
-    struct Item_func_8042B4D4_de *left;
-    struct Item_func_8042B4D4_de *right;
-    struct Item_func_8042B4D4_de *marker;
+    struct MenuMarker *item;
+    struct MenuMarker *left;
+    struct MenuMarker *right;
+    struct MenuMarker *marker;
     char pad44C[0x45C - 0x44C];
     s32 word45C;
     char pad460[0x464 - 0x460];

@@ -4,8 +4,8 @@
 struct Active;
 typedef struct Active Active;
 
-struct Settings_func_8042EB10_de;
-struct Settings_func_8042EB10_de {
+struct TrialSettings;
+struct TrialSettings {
     char pad0[0xD];
     u8 trialKind;
     char padE[0x16];
@@ -36,8 +36,8 @@ extern void func_8042E5EC_de();
 
 extern void func_8042EC38_de();
 
-struct Settings_func_8042EB10_de;
-typedef struct Settings_func_8042EB10_de Settings_func_8042EB10_de;
+struct TrialSettings;
+typedef struct TrialSettings TrialSettings;
 
 struct Active;
 struct Active {

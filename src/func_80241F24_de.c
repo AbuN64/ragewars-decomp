@@ -11,16 +11,16 @@
 
 
 
-extern f32 func_8024D398_de(Input_func_80241BAC_de *);
-extern f32 func_8024E464_de(Input_func_80241BAC_de *);
-extern f32 func_8024D284_de(Input_func_80241BAC_de *);
-extern f32 func_8024E420_de(Input_func_80241BAC_de *);
-extern void func_80240D20_de(Query_func_80241BAC_de *, Bounds *);
-extern void func_80240E00_de(Query_func_80241BAC_de *, Bounds *);
-extern s32 func_8023EA44_de(Actor_func_80241BAC_de *, Query_func_80241BAC_de *, void *, f32, s32);
-extern f32 func_80241728_de(Query_func_80241BAC_de *, f32, f32);
-extern s32 func_8024491C_de(Input_func_80241BAC_de *, Vec3, Vec3, void *, f32, f32, f32, f32);
-extern s32 func_8023E178_de(Actor_func_80241BAC_de *, void *, f32, f32, f32, s32, Query_func_80241BAC_de *, s32);
+extern f32 func_8024D398_de(CollisionProbe *);
+extern f32 func_8024E464_de(CollisionProbe *);
+extern f32 func_8024D284_de(CollisionProbe *);
+extern f32 func_8024E420_de(CollisionProbe *);
+extern void func_80240D20_de(SurfaceHit *, Bounds *);
+extern void func_80240E00_de(SurfaceHit *, Bounds *);
+extern s32 func_8023EA44_de(Actor_func_80241BAC_de *, SurfaceHit *, void *, f32, s32);
+extern f32 func_80241728_de(SurfaceHit *, f32, f32);
+extern s32 func_8024491C_de(CollisionProbe *, Vec3, Vec3, void *, f32, f32, f32, f32);
+extern s32 func_8023E178_de(Actor_func_80241BAC_de *, void *, f32, f32, f32, s32, SurfaceHit *, s32);
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 extern void *D_80103FCC;
 extern f32 D_800C3758_de[];
@@ -34,7 +34,7 @@ extern f32 D_800C3758_de[];
 
 
 
-void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input) {
+void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, SurfaceHit *query, CollisionProbe *input) {
     u8 collision[0x108];
     Vec3 next;
     f32 hit_y;

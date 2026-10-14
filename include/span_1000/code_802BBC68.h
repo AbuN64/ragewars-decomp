@@ -24,7 +24,7 @@ typedef struct Ctx Ctx;
 
 struct Ctx;
 struct Ctx {
-    Queue_func_802BB420_de *cur;
+    RingQueue *cur;
     s32 f4;
 };
 

@@ -191,7 +191,7 @@ void func_80442CF4_de(s16 *record, struct ObjectRecAt478 *object) {
 
 
 
-void func_80442D10_de(WidgetRecAt24 *w, Descriptor_func_80442D10_de *d, char **arena, int id, int arg) {
+void func_80442D10_de(WidgetRecAt24 *w, WidgetDescriptor *d, char **arena, int id, int arg) {
  int size; char *extra;
  w->id=id; w->type=d->type; w->flags=d->flags|0x1800000;
  w->x=d->x; w->y=d->y; w->r=d->r; w->g=d->g; w->b=d->b; w->a=d->a;

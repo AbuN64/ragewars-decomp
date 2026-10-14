@@ -88,14 +88,14 @@ void func_8042E9B4_de(char *text, char *find, char *replacement) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Settings_func_8042EB10_de D_801462C8;
+extern TrialSettings D_801462C8;
 extern Active *D_800E4680;
 extern char D_8011FAC0[];
 extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042EB10_de(void) {
- Settings_func_8042EB10_de *g=&D_801462C8;
+ TrialSettings *g=&D_801462C8;
  if(g->trialKind != 0) func_8042ED70_de((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,1,0,0);
  else func_8042ED70_de((f32)g->time,0,g->score,g->other,1,0,0);
  func_8044DE7C_de(D_8011FAC0,func_8042EE34_de());
@@ -104,14 +104,14 @@ void func_8042EB10_de(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Settings_func_8042EB10_de D_801462C8;
+extern TrialSettings D_801462C8;
 extern Active *D_800E4680;
 extern char D_8011FAC0[];
 extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042EBA4_de(void) {
- Settings_func_8042EB10_de *g=&D_801462C8;
+ TrialSettings *g=&D_801462C8;
  if(g->trialKind != 0) func_8042ED70_de((f32)D_800E4680->time,0,D_800E4680->score,D_800E4680->other,0,1,1);
  else func_8042ED70_de((f32)g->time,0,g->score,g->other,0,1,1);
  func_8044DE7C_de(D_8011FAC0,func_8042EE34_de());
@@ -120,14 +120,14 @@ void func_8042EBA4_de(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Settings_func_8042EB10_de D_801462C8;
+extern TrialSettings D_801462C8;
 extern Active *D_800E4680;
 extern char D_8011FAC0[];
 extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042EC38_de(void) {
- Settings_func_8042EB10_de *g=&D_801462C8;
+ TrialSettings *g=&D_801462C8;
  if(g->trialKind != 0) func_8042ED70_de((f32)D_800E4680->time,D_800E4680->limit,D_800E4680->score,D_800E4680->other,0,1,0);
  else func_8042ED70_de((f32)g->time,D_801462C8.limit,g->score,g->other,0,1,0);
  func_8044DE7C_de(D_8011FAC0,func_8042EE34_de());
@@ -136,14 +136,14 @@ void func_8042EC38_de(void) {
 /* Applies the selected rule settings and refreshes the menu state. */
 
 
-extern Settings_func_8042EB10_de D_801462C8;
+extern TrialSettings D_801462C8;
 extern Active *D_800E4680;
 extern char D_8011FAC0[];
 extern void func_8042ED70_de(f32,s32,s32,s32,s32,s32,s32);
 extern s32 func_8042EE34_de(void);
 extern void func_8044DE7C_de(void *,s32);
 void func_8042ECD8_de(void) {
- Settings_func_8042EB10_de *g=&D_801462C8;
+ TrialSettings *g=&D_801462C8;
  if(g->trialKind != 0) func_8042ED70_de((f32)D_800E4680->time,D_800E4680->score,D_800E4680->score,D_800E4680->other,0,0,0);
  else func_8042ED70_de((f32)g->time,D_801462C8.limit,g->score,g->other,0,0,0);
  func_8044DE7C_de(D_8011FAC0,func_8042EE34_de());

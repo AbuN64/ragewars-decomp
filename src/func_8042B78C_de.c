@@ -23,7 +23,7 @@ extern void *func_8042B294_de(s32);
 extern s32 func_8042B154_de(void *);
 
 extern void func_80439C80_de(void *, s32);
-extern void func_8040E8D8_de(struct Item_func_8042B4D4_de *, s32);
+extern void func_8040E8D8_de(struct MenuMarker *, s32);
 
 s32 func_8042B78C_de(void *arg0, void *arg1, void *arg2, s32 event) {
     struct Screen_func_8042B78C_de *screen;

@@ -52,9 +52,9 @@ typedef struct ALFilter_sC ALFilter_sC;
 struct ALSynth4C;
 struct ALSynth4C {
     ALPlayer_s14 *head;
-    Link_func_802596B4_de pFreeList;
-    Link_func_802596B4_de pAllocList;
-    Link_func_802596B4_de pLameList;
+    ListLink pFreeList;
+    ListLink pAllocList;
+    ListLink pLameList;
     s32 paramSamples;
     s32 curSamples;
     void *dma;
@@ -158,7 +158,7 @@ typedef struct ALEnvMixer4C ALEnvMixer4C;
 struct Opaque_ALVoice_s;
 struct PVoice_s;
 struct PVoice_s {
-    Link_func_802596B4_de node;
+    ListLink node;
     struct Opaque_ALVoice_s *vvoice;
     ALFilter_s14 *channelKnob;
     ALLoadFilter decoder;
@@ -191,9 +191,9 @@ typedef struct ALGlobals ALGlobals;
 struct ALSynth;
 struct ALSynth {
     void *head;
-    Link_func_802596B4_de pFreeList;
-    Link_func_802596B4_de pAllocList;
-    Link_func_802596B4_de pLameList;
+    ListLink pFreeList;
+    ListLink pAllocList;
+    ListLink pLameList;
     s32 paramSamples;
     s32 curSamples;
     ALDMANew dma;

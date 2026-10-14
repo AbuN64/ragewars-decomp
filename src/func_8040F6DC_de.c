@@ -16,8 +16,8 @@ extern u16 *D_80153C4C;
 extern s32 func_80411DCC_de(u32 index);
 extern void func_804116CC_de(u32 index);
 
-static inline void func_8040F75C_resolve(Widget_func_8040F6DC_de *widget) {
-    Widget_func_8040F6DC_de *w;
+static inline void func_8040F75C_resolve(UiWidget *widget) {
+    UiWidget *w;
     u32 index;
     s32 offset;
     s32 data;
@@ -58,7 +58,7 @@ static inline void func_8040F75C_resolve(Widget_func_8040F6DC_de *widget) {
     }
 }
 
-void func_8040F6DC_de(Widget_func_8040F6DC_de *widget, s32 base, s32 old) {
+void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
     for (; widget != 0; widget = widget->next) {
         if (widget->flags & 0x10) {
             if (widget->words[0] != 0) {
@@ -99,11 +99,11 @@ void func_8040F6DC_de(Widget_func_8040F6DC_de *widget, s32 base, s32 old) {
             widget->name = 0;
         }
         if (widget->children != 0) {
-            widget->children = (Widget_func_8040F6DC_de *)((s32)widget->children + base - old);
+            widget->children = (UiWidget *)((s32)widget->children + base - old);
             func_8040F6DC_de(widget->children, base, old);
         }
         if (widget->next != 0) {
-            widget->next = (Widget_func_8040F6DC_de *)((s32)widget->next + base - old);
+            widget->next = (UiWidget *)((s32)widget->next + base - old);
         }
     }
 }

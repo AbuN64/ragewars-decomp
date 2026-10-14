@@ -24,7 +24,7 @@ void func_8040F350_de(void *arg0, Args args) {
     Quad_func_802A1BE0_de transformed;
     Quad_func_802A1BE0_de first;
     s32 changed;
-    Widget_func_8040F6DC_de *window = arg0;
+    UiWidget *window = arg0;
 
     changed = 0;
     D_800E2AB8 = 0;

@@ -16,43 +16,10 @@ struct Manager {
     s32 mask;
 };
 
-struct Node_func_80251F6C_de;
-struct Node_func_80251F6C_de {
-    void *data;
-    s32 unk04;
-    s32 count;
-    s32 flags;
-    s32 stamp;
-};
-
-struct Node_func_80251F6C_de;
-struct Request_func_80251F6C_de;
-struct Request_func_80251F6C_de {
-    struct Node_func_80251F6C_de *node;
-    struct Node_func_80251F6C_de *extra;
-    s32 key;
-    s32 priority;
-    s32 flags;
-    void *unk14;
-    void *owner;
-    s32 mode;
-    void *unk20;
-    struct Request_func_80251F6C_de *next;
-};
-
-struct HashNodeRecAtCV1;
-struct Request_func_80251F6C_de;
-struct HashNodeRecAtCV1 {
-    s32 key;
-    struct Request_func_80251F6C_de *value;
-    s32 unk08;
-    struct HashNodeRecAtCV1 *next;
-};
-
 extern int D_801005A0[];
 
-struct Node_func_80251F6C_de;
-typedef struct Node_func_80251F6C_de Node_func_80251F6C_de;
+struct CachedResource;
+typedef struct CachedResource CachedResource;
 
 struct Manager_func_802524B0_de;
 struct Manager_func_802524B0_de {
@@ -97,20 +64,20 @@ struct Node_func_80251328_de {
     s32 callback;
 };
 
-struct Node_func_80252774_de;
-struct Request_func_80252774_de;
-struct Node_func_80252774_de {
+struct CachedResource;
+struct ResourceLoadRequest;
+struct CachedResource {
     void *data;
-    s32 pad4;
+    s32 unk04;
     s32 count;
     s32 flags;
-    s32 pad10;
-    struct Request_func_80252774_de *owner;
+    s32 stamp;
+    struct ResourceLoadRequest *owner;
 };
 
-struct Request_func_80252774_de {
-    struct Node_func_80252774_de *node;
-    struct Node_func_80252774_de *extra; /* 0x04: optional companion resource */
+struct ResourceLoadRequest {
+    struct CachedResource *node;
+    struct CachedResource *extra; /* 0x04: optional companion resource */
     s32 key;
     s32 priority;
     s32 flags;                         /* 0x10 */
@@ -118,16 +85,16 @@ struct Request_func_80252774_de {
     s32 owner;                         /* 0x18: bank/variation id */
     s32 mode;                          /* 0x1C */
     void *replyQueue;                  /* 0x20 */
-    struct Request_func_80252774_de *next; /* 0x24 */
+    struct ResourceLoadRequest *next; /* 0x24 */
 };
 
-struct HashNodeRecAtCV2;
-struct Request_func_80252774_de;
-struct HashNodeRecAtCV2 {
+struct ResourceHashEntry;
+struct ResourceLoadRequest;
+struct ResourceHashEntry {
     s32 key;
-    struct Request_func_80252774_de *value;
-    s32 pad8;
-    struct HashNodeRecAtCV2 *next;
+    struct ResourceLoadRequest *value;
+    s32 unk08;
+    struct ResourceHashEntry *next;
 };
 
 struct Manager_func_802524B0_de;
@@ -192,8 +159,7 @@ typedef struct Node_func_80251328_de Node_func_80251328_de;
 struct func_80250D88_S2;
 typedef struct func_80250D88_S2 func_80250D88_S2;
 
-struct Node_func_80252774_de;
-typedef struct Node_func_80252774_de Node_func_80252774_de;
+struct CachedResource;
 
 extern void *func_802517B4_de(s32 arg0, s32 arg1);
 
@@ -243,8 +209,8 @@ struct ObjectLinksDC {
     unsigned short unk_D8;
 };
 
-struct HashNodeRecAtCV1;
-typedef struct HashNodeRecAtCV1 HashNodeRecAtCV1;
+struct ResourceHashEntry;
+typedef struct ResourceHashEntry ResourceHashEntry;
 
 extern void func_802524B0_de(void *arg);
 
@@ -253,11 +219,10 @@ extern void func_8025331C_de(void *arg0);
 struct Owner_func_80250C84_de;
 typedef struct Owner_func_80250C84_de Owner_func_80250C84_de;
 
-struct HashNodeRecAtCV2;
-typedef struct HashNodeRecAtCV2 HashNodeRecAtCV2;
+struct ResourceHashEntry;
 
-struct Request_func_80252774_de;
-typedef struct Request_func_80252774_de Request_func_80252774_de;
+struct ResourceLoadRequest;
+typedef struct ResourceLoadRequest ResourceLoadRequest;
 
 struct Shape_func_802BC570_de;
 struct Shape_func_802BC570_de {
@@ -267,8 +232,7 @@ struct Shape_func_802BC570_de {
     int field_C;
 };
 
-struct Request_func_80251F6C_de;
-typedef struct Request_func_80251F6C_de Request_func_80251F6C_de;
+struct ResourceLoadRequest;
 
 struct func_80250D88_S1;
 typedef struct func_80250D88_S1 func_80250D88_S1;

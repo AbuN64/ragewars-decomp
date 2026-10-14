@@ -14,10 +14,10 @@ f32 func_80241728_de(void *arg0, f32 arg1, f32 arg2) {
     Vec3 normal;
     Vec3 point;
 
-    normal = ((Query_func_80241BAC_de *)arg0)->normal;
+    normal = ((SurfaceHit *)arg0)->normal;
     if (normal.y == 0.0f) {
-        return ((Query_func_80241BAC_de *)arg0)->point.y;
+        return ((SurfaceHit *)arg0)->point.y;
     }
-    point = ((Query_func_80241BAC_de *)arg0)->point;
+    point = ((SurfaceHit *)arg0)->point;
     return (((point.z - arg2) * normal.z) + ((point.x - arg1) * normal.x) + (point.y * normal.y)) / normal.y;
 }

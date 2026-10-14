@@ -9,7 +9,7 @@
 extern Manager D_801047E0;
 extern s32 D_80100570;
 extern u32 D_80101190;
-extern HashNodeRecAtCV2 *D_80101194;
+extern ResourceHashEntry *D_80101194;
 extern struct CartridgeReadWorker D_801011B8;
 extern s32 D_80105180;
 extern s32 D_80106248;
@@ -19,7 +19,7 @@ extern void *func_802514A8_de(s32, s32);
 extern void func_80254AD0_de(s32, s32);
 extern void func_80254C70_de(s32, void *);
 extern s32 func_80255170_de(s32 *, void *);
-extern Request_func_80252774_de *func_80252774_de(s32, Request_func_80252774_de *, s32);
+extern ResourceLoadRequest *func_80252774_de(s32, ResourceLoadRequest *, s32);
 extern void func_80254E88_de(s32, void *);
 extern void func_8025637C_de(struct CartridgeReadWorker *, u32, s32, void *);
 extern void func_80256454_de(struct CartridgeReadWorker *, u32, s32, void *, struct Queue *, s32, s32);
@@ -42,8 +42,8 @@ static inline void release(void) {
         func_802BB420_de(D_801047E0.lock, 0, 1);
     } else func_802BCF50_de(token);
 }
-static inline void find(u32 key, Request_func_80252774_de **out) {
-    HashNodeRecAtCV2 *node = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&D_80101190);
+static inline void find(u32 key, ResourceLoadRequest **out) {
+    ResourceHashEntry *node = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&D_80101190);
     if (node->key != key) goto not_initial;
     *out=node->value;
     goto done;
@@ -59,21 +59,21 @@ loop:
     if (node!=0) goto loop;
 done:;
 }
-static inline void addref(Node_func_80252774_de *node) {
+static inline void addref(CachedResource *node) {
     node->count++;
     node->flags |= 0x100;
 }
-static inline void stamp(Node_func_80252774_de *node) {
-    node->pad10=D_80105180;
+static inline void stamp(CachedResource *node) {
+    node->stamp=D_80105180;
     func_80255FB8_de(&D_80100570,(s32)node);
 }
-static inline Node_func_80252774_de *allocate(u32 size, u32 flags) {
-    Node_func_80252774_de *node=func_802514A8_de(0,flags);
+static inline CachedResource *allocate(u32 size, u32 flags) {
+    CachedResource *node=func_802514A8_de(0,flags);
     if (node!=0) {
         addref(node);
         node->data=func_80254B8C_de(0,size,(flags>>5)&1,flags);
         if (node->data!=0) {
-            node->pad4=size;
+            node->unk04=size;
             node->flags |= flags;
             func_80254C70_de(0,node);
         } else {
@@ -86,14 +86,14 @@ static inline Node_func_80252774_de *allocate(u32 size, u32 flags) {
 }
 void *func_8025193C_de(s32 unused, u32 key, u32 source, u32 size,
                           u32 mode, s32 owner, void *tag, const char *spare, u32 direct) {
-    Request_func_80252774_de *request;
-    Request_func_80252774_de *scan;
-    Request_func_80252774_de *resolved;
-    Node_func_80252774_de *node;
+    ResourceLoadRequest *request;
+    ResourceLoadRequest *scan;
+    ResourceLoadRequest *resolved;
+    CachedResource *node;
     u32 flags;
     u32 oldFlags;
     s32 busy;
-    Request_func_80252774_de *allocated;
+    ResourceLoadRequest *allocated;
 
     acquire();
     find(key,&request);

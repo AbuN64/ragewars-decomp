@@ -25,7 +25,7 @@ void *func_8028C050_de(void *arg0, void *arg1) {
     if (arg0 != 0 &&
         func_80275B10_de(arg0, ((Vec3 *)arg1)->x,
                           ((Vec3 *)arg1)->z) != 0) {
-        if (!(((Polygon_func_80275410_de *)arg0)->flags & 0x40)) {
+        if (!(((Triangle *)arg0)->flags & 0x40)) {
             return arg0;
         }
         lower = func_80275DD4_de(arg0,

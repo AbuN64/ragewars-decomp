@@ -44,18 +44,18 @@ schema = 1
 "__osIdCheckSum" = { evidence = "landed", signature = "static inline s32 __osIdCheckSum(u16 *ptr, u16 *csum, u16 *icsum)" }
 "__osPfsGetNextPage" = { evidence = "landed", signature = "static inline s32 __osPfsGetNextPage(OSPfs* pfs, u8* bank, __OSInode* inode, __OSInodeUnit* page)" }
 "__osSumcalc" = { evidence = "landed", signature = "static inline u16 __osSumcalc(u8 *ptr, int length)" }
-"accepts" = { evidence = "landed", signature = "static inline s32 accepts(Ray_func_8023E8D4_de *ray, Polygon_func_8023E8D4_de *poly)" }
+"accepts" = { evidence = "landed", signature = "static inline s32 accepts(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly)" }
 "acquire" = { evidence = "landed", signature = "static inline void acquire(void)" }
 "activeCount" = { evidence = "landed", signature = "static inline s32 activeCount(void)" }
 "active_list" = { evidence = "landed", signature = "static inline IntrusiveList *active_list(PoolRecAt28V1 *pool)" }
 "addImpulse" = { evidence = "landed", signature = "static inline void addImpulse(Vec3 *v,Vec3 *impulse)" }
-"addref" = { evidence = "landed", signature = "static inline void addref(Node_func_80251F6C_de *node)" }
+"addref" = { evidence = "landed", signature = "static inline void addref(CachedResource *node)" }
 "aimAbs" = { evidence = "landed", signature = "static inline f32 aimAbs(f32 value)" }
 "alCSeqNew" = { evidence = "landed", signature = "static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)" }
 "alCSeqNextEvent" = { evidence = "landed", signature = "static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent_func_802B21A8_de *evt)" }
 "alignment_from_rider" = { evidence = "landed", signature = "static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider)" }
-"allocate" = { evidence = "landed", signature = "static inline Node_func_80252774_de *allocate(u32 size, u32 flags)" }
-"append" = { evidence = "landed", signature = "static inline s32 append(ListHeader *list, Link_func_802596B4_de *node)" }
+"allocate" = { evidence = "landed", signature = "static inline CachedResource *allocate(u32 size, u32 flags)" }
+"append" = { evidence = "landed", signature = "static inline s32 append(ListHeader *list, ListLink *node)" }
 "apply" = { evidence = "landed", signature = "static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, View_func_8025AB94_de *view)" }
 "apply_pan" = { evidence = "landed", signature = "static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan)" }
 "available" = { evidence = "landed", signature = "static __inline__ s32 available(s32 id)" }
@@ -945,8 +945,8 @@ schema = 1
 "func_8023E854_de" = { evidence = "landed", signature = "void func_8023E854_de(void *arg0)" }
 "func_8023E864_de" = { evidence = "landed", signature = "s32 func_8023E864_de(void *arg0, void *arg1)" }
 "func_8023E8B4_de" = { evidence = "landed", signature = "void func_8023E8B4_de(void *arg0, void *arg1)" }
-"func_8023E8D4_de" = { evidence = "landed", signature = "s32 func_8023E8D4_de(Ray_func_8023E8D4_de *ray, Polygon_func_8023E8D4_de *poly, s32 keep)" }
-"func_8023EA44_de" = { evidence = "landed", signature = "s32 func_8023EA44_de(Ray_func_8023E8D4_de *ray, Polygon_func_8023E8D4_de *poly, Vec3 *point, f32 radius, s32 keep)" }
+"func_8023E8D4_de" = { evidence = "landed", signature = "s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep)" }
+"func_8023EA44_de" = { evidence = "landed", signature = "s32 func_8023EA44_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, Vec3 *point, f32 radius, s32 keep)" }
 "func_8023EBD4_de" = { evidence = "landed", signature = "void func_8023EBD4_de(void)" }
 "func_8023EBFC_de" = { evidence = "landed", signature = "void func_8023EBFC_de(void *arg0, void *arg1)" }
 "func_8023EC54_de" = { evidence = "landed", signature = "void func_8023EC54_de(void *arg0, void *arg1)" }
@@ -985,11 +985,11 @@ schema = 1
 "func_802417C4_de" = { evidence = "landed", signature = "f32 func_802417C4_de(f32 *arg0)" }
 "func_80241840_de" = { evidence = "landed", signature = "f32 func_80241840_de(Vec3 *a, Vec3 *b, Vec3 *p)" }
 "func_80241950_de" = { evidence = "landed", signature = "void func_80241950_de(char *obj, Vec3 *corners, char *floor, s32 attachment)" }
-"func_80241BAC_de" = { evidence = "landed", signature = "void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input)" }
-"func_80241F24_de" = { evidence = "landed", signature = "void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, Query_func_80241BAC_de *query, Input_func_80241BAC_de *input)" }
+"func_80241BAC_de" = { evidence = "landed", signature = "void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, SurfaceHit *query, CollisionProbe *input)" }
+"func_80241F24_de" = { evidence = "landed", signature = "void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds *bounds, SurfaceHit *query, CollisionProbe *input)" }
 "func_80242288_de" = { evidence = "landed", signature = "void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner)" }
 "func_80242550_de" = { evidence = "landed", signature = "void func_80242550_de(Actor_func_80242550_de *actor, Input_func_80242550_de *input)" }
-"func_802426CC_de" = { evidence = "landed", signature = "void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, Query_func_80241BAC_de *query)" }
+"func_802426CC_de" = { evidence = "landed", signature = "void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, SurfaceHit *query)" }
 "func_802428D0_de" = { evidence = "landed", signature = "void func_802428D0_de(void *first, void *second)" }
 "func_802428EC_de" = { evidence = "landed", signature = "void func_802428EC_de(void *arg0, void *arg1)" }
 "func_80242920_de" = { evidence = "landed", signature = "s32 func_80242920_de(void *arg0, void *arg1, void *arg2, s32 *arg3)" }
@@ -1225,9 +1225,9 @@ schema = 1
 "func_802515F0_de" = { evidence = "landed", signature = "void func_802515F0_de(s32 unused, s32 arg1)" }
 "func_802517B4_de" = { evidence = "landed", signature = "void *func_802517B4_de(s32 arg0, s32 arg1)" }
 "func_8025193C_de" = { evidence = "landed", signature = "void *func_8025193C_de(s32 unused, u32 key, u32 source, u32 size, u32 mode, s32 owner, void *tag, const char *spare, u32 direct)" }
-"func_80251F6C_de" = { evidence = "landed", signature = "Node_func_80251F6C_de *func_80251F6C_de(s32 unused, s32 key, Node_func_80251F6C_de *first, Node_func_80251F6C_de *second, s32 mode, void *owner, void *tag, void *spare, s32 async)" }
+"func_80251F6C_de" = { evidence = "landed", signature = "CachedResource *func_80251F6C_de(s32 unused, s32 key, CachedResource *first, CachedResource *second, s32 mode, void *owner, void *tag, void *spare, s32 async)" }
 "func_802524B0_de" = { evidence = "landed", signature = "void func_802524B0_de(void *arg)" }
-"func_80252774_de" = { evidence = "landed", signature = "Request_func_80252774_de *func_80252774_de(s32 unused, Request_func_80252774_de *request, s32 dropReference)" }
+"func_80252774_de" = { evidence = "landed", signature = "ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference)" }
 "func_8025305C_de" = { evidence = "landed", signature = "Record *func_8025305C_de(s32 size)" }
 "func_802532F4_de" = { evidence = "landed", signature = "int func_802532F4_de(void *arg0)" }
 "func_80253300_de" = { evidence = "landed", signature = "void func_80253300_de(void *arg0)" }
@@ -1368,8 +1368,8 @@ schema = 1
 "func_8025966C_de" = { evidence = "landed", signature = "void func_8025966C_de(void *arg0, s32 arg1)" }
 "func_80259694_de" = { evidence = "landed", signature = "void *func_80259694_de(LinkPair *arg0)" }
 "func_802596B4_de" = { evidence = "landed", signature = "void func_802596B4_de(ChannelSet *set, s32 owner)" }
-"func_802596D4_insertAfter" = { evidence = "landed", signature = "static inline void func_802596D4_insertAfter(Link_func_802596B4_de *at, Link_func_802596B4_de *link)" }
-"func_802596D4_linkInit" = { evidence = "landed", signature = "static inline void func_802596D4_linkInit(Link_func_802596B4_de *link)" }
+"func_802596D4_insertAfter" = { evidence = "landed", signature = "static inline void func_802596D4_insertAfter(ListLink *at, ListLink *link)" }
+"func_802596D4_linkInit" = { evidence = "landed", signature = "static inline void func_802596D4_linkInit(ListLink *link)" }
 "func_802596D4_voiceInit" = { evidence = "landed", signature = "static inline void func_802596D4_voiceInit(VoiceRecAt8 *voice, s32 owner)" }
 "func_80259784_de" = { evidence = "landed", signature = "void func_80259784_de(ManagerRecAtD8V2 *manager, s32 index, s32 owner, Vec3 *position)" }
 "func_802598B4_de" = { evidence = "landed", signature = "void func_802598B4_de(void *arg0, s32 arg1)" }
@@ -1840,9 +1840,9 @@ schema = 1
 "func_80274DFC_de" = { evidence = "landed", signature = "void func_80274DFC_de(float mf[4][4], float xEye, float yEye, float zEye, float xAt, float yAt, float zAt, float xUp, float yUp, float zUp)" }
 "func_802750B0_de" = { evidence = "landed", signature = "Vec3 *func_802750B0_de(Vec3 *out, Node75 *node)" }
 "func_8027525C_de" = { evidence = "landed", signature = "f32 func_8027525C_de(Node75 *node, f32 x, f32 z)" }
-"func_80275410_de" = { evidence = "landed", signature = "Vector4f *func_80275410_de(Vector4f *out, Polygon_func_80275410_de *polygon)" }
+"func_80275410_de" = { evidence = "landed", signature = "Vector4f *func_80275410_de(Vector4f *out, Triangle *polygon)" }
 "func_80275688_de" = { evidence = "landed", signature = "Vector4f *func_80275688_de(Vector4f *out)" }
-"func_802757E4_de" = { evidence = "landed", signature = "s32 func_802757E4_de(Polygon_func_80275410_de *polygon)" }
+"func_802757E4_de" = { evidence = "landed", signature = "s32 func_802757E4_de(Triangle *polygon)" }
 "func_80275954_de" = { evidence = "declared", signature = "void func_80275954_de(void *, s32, Vec3 *)" }
 "func_80275A58_de" = { evidence = "landed", signature = "void func_80275A58_de(void *arg0)" }
 "func_80275AA4_de" = { evidence = "landed", signature = "void func_80275AA4_de(HeaderRecAt1C *dst, Packed *src, char *base, int unused, char *extra)" }
@@ -1900,10 +1900,10 @@ schema = 1
 "func_802794B0_de" = { evidence = "landed", signature = "void func_802794B0_de(ListHeader *list)" }
 "func_802794C0_de" = { evidence = "landed", signature = "void func_802794C0_de(void *arg0, void *arg1)" }
 "func_80279508_de" = { evidence = "landed", signature = "s32 func_80279508_de(void *arg0, void *arg1)" }
-"func_80279550_de" = { evidence = "landed", signature = "int func_80279550_de(List802795C0 *arg0, Link_func_802596B4_de *arg1)" }
+"func_80279550_de" = { evidence = "landed", signature = "int func_80279550_de(List802795C0 *arg0, ListLink *arg1)" }
 "func_802795B0_de" = { evidence = "landed", signature = "void func_802795B0_de(ListHeader *lists, void *pool, s32 stride, s32 count)" }
-"func_8027963C_de" = { evidence = "landed", signature = "Link_func_802596B4_de *func_8027963C_de(Lists18 *arg0)" }
-"func_802796F4_de" = { evidence = "landed", signature = "void func_802796F4_de(Lists18 *arg0, Link_func_802596B4_de *arg1)" }
+"func_8027963C_de" = { evidence = "landed", signature = "ListLink *func_8027963C_de(Lists18 *arg0)" }
+"func_802796F4_de" = { evidence = "landed", signature = "void func_802796F4_de(Lists18 *arg0, ListLink *arg1)" }
 "func_80279798_de" = { evidence = "landed", signature = "s16 func_80279798_de(s16 *arg0)" }
 "func_8027985C_de" = { evidence = "landed", signature = "void func_8027985C_de(WeightedTable *object)" }
 "func_80279864_de" = { evidence = "landed", signature = "s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2)" }
@@ -2808,7 +2808,7 @@ schema = 1
 "func_802B23B0_de" = { evidence = "landed", signature = "int func_802B23B0_de(struct ALSeq_s *stream)" }
 "func_802B23C4_de" = { evidence = "landed", signature = "s16 func_802B23C4_de(void *arg0)" }
 "func_802B23F4_de" = { evidence = "landed", signature = "int func_802B23F4_de(void *arg0)" }
-"func_802B2450_de" = { evidence = "landed", signature = "void func_802B2450_de(Link_func_802596B4_de *arg0)" }
+"func_802B2450_de" = { evidence = "landed", signature = "void func_802B2450_de(ListLink *arg0)" }
 "func_802B2480_de" = { evidence = "landed", signature = "void func_802B2480_de(void *arg0, void **arg1)" }
 "func_802B24A0_de" = { evidence = "landed", signature = "void func_802B24A0_de(void *arg0)" }
 "func_802B24D0_de" = { evidence = "landed", signature = "void func_802B24D0_de(s32 *arg0)" }
@@ -2986,7 +2986,7 @@ schema = 1
 "func_802BB160_de" = { evidence = "landed", signature = "s32 func_802BB160_de(Queue_func_802517B4_de *arg0, void *arg1, s32 arg2)" }
 "func_802BB2A0_de" = { evidence = "landed", signature = "s32 func_802BB2A0_de(Queue_func_802BB2A0_de *queue, void **message, s32 block)" }
 "func_802BB3D0_de" = { evidence = "landed", signature = "void func_802BB3D0_de(s32 arg0)" }
-"func_802BB420_de" = { evidence = "landed", signature = "s32 func_802BB420_de(Queue_func_802BB420_de *queue, s32 entry, s32 mode)" }
+"func_802BB420_de" = { evidence = "landed", signature = "s32 func_802BB420_de(RingQueue *queue, s32 entry, s32 mode)" }
 "func_802BB550_de" = { evidence = "landed", signature = "void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2)" }
 "func_802BB5F0_de" = { evidence = "landed", signature = "void func_802BB5F0_de(OSThread_s_func_802BB5F0_de *t, s32 pri)" }
 "func_802BB6C0_de" = { evidence = "landed", signature = "int func_802BB6C0_de(Node802C07B0 *node, u64 arg1, u64 arg2, void *arg3, void *arg4)" }
@@ -3293,8 +3293,8 @@ schema = 1
 "func_8040F568_de" = { evidence = "landed", signature = "void func_8040F568_de(void)" }
 "func_8040F570_de" = { evidence = "landed", signature = "int func_8040F570_de(struct Field_u16_14 *a, struct Field_u16_14 *b)" }
 "func_8040F580_de" = { evidence = "landed", signature = "void func_8040F580_de(void)" }
-"func_8040F6DC_de" = { evidence = "landed", signature = "void func_8040F6DC_de(Widget_func_8040F6DC_de *widget, s32 base, s32 old)" }
-"func_8040F75C_resolve" = { evidence = "landed", signature = "static inline void func_8040F75C_resolve(Widget_func_8040F6DC_de *widget)" }
+"func_8040F6DC_de" = { evidence = "landed", signature = "void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old)" }
+"func_8040F75C_resolve" = { evidence = "landed", signature = "static inline void func_8040F75C_resolve(UiWidget *widget)" }
 "func_8040F9E0_de" = { evidence = "declared", signature = "void func_8040F9E0_de()" }
 "func_8040FB94_de" = { evidence = "declared", signature = "void func_8040FB94_de(char *)" }
 "func_804101BC_de" = { evidence = "landed", signature = "void func_804101BC_de(void)" }
@@ -4158,7 +4158,7 @@ schema = 1
 "func_80442BA8_de" = { evidence = "landed", signature = "void func_80442BA8_de(MenuSpriteElement *e)" }
 "func_80442CD8_de" = { evidence = "landed", signature = "s32 func_80442CD8_de(s16 *record)" }
 "func_80442CF4_de" = { evidence = "landed", signature = "void func_80442CF4_de(s16 *record, struct ObjectRecAt478 *object)" }
-"func_80442D10_de" = { evidence = "landed", signature = "void func_80442D10_de(WidgetRecAt24 *w, Descriptor_func_80442D10_de *d, char **arena, int id, int arg)" }
+"func_80442D10_de" = { evidence = "landed", signature = "void func_80442D10_de(WidgetRecAt24 *w, WidgetDescriptor *d, char **arena, int id, int arg)" }
 "func_80442DDC_de" = { evidence = "landed", signature = "void *func_80442DDC_de(ObjRecAt8V4 *arg0)" }
 "func_80442EC0_de" = { evidence = "landed", signature = "f32 func_80442EC0_de(ItemRecAt14 *arg0)" }
 "func_80442FB0_de" = { evidence = "landed", signature = "void func_80442FB0_de(ItemRecAt14 *item,float value)" }
@@ -4489,7 +4489,7 @@ schema = 1
 "spawn_effect" = { evidence = "landed", signature = "static inline Effect_func_80262A9C_de *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
 "splineRecordSize" = { evidence = "landed", signature = "static inline s32 splineRecordSize(s32 left,s32 right)" }
 "stage_arena" = { evidence = "landed", signature = "static inline s32 stage_arena(s32 cup, s32 stage)" }
-"stamp" = { evidence = "landed", signature = "static inline void stamp(Node_func_80251F6C_de *node)" }
+"stamp" = { evidence = "landed", signature = "static inline void stamp(CachedResource *node)" }
 "sync" = { evidence = "landed", signature = "static inline void sync(void)" }
 "take" = { evidence = "landed", signature = "static inline func_8022BC04_S3 *take(s32 active)" }
 "take_effect" = { evidence = "landed", signature = "static inline Effect_func_80262A9C_de *take_effect(struct SceneEffectPool *scene, s32 *ref)" }
@@ -4507,7 +4507,7 @@ schema = 1
 "twistPart" = { evidence = "landed", signature = "static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i)" }
 "ultoa" = { evidence = "landed", signature = "static inline u8 *ultoa(u32 val, u8 *endp, s32 base, s32 octzero, const u8 *xdigs)" }
 "unlock" = { evidence = "landed", signature = "static inline void unlock(void)" }
-"unref" = { evidence = "landed", signature = "static inline void unref(Node_func_80251F6C_de *node)" }
+"unref" = { evidence = "landed", signature = "static inline void unref(CachedResource *node)" }
 "unsignedDouble" = { evidence = "landed", signature = "static __inline__ f64 unsignedDouble(u32 value,const f64 *bias)" }
 "unsignedFloat" = { evidence = "landed", signature = "static __inline__ f32 unsignedFloat(u32 value,const f64 *bias)" }
 "unsignedHeight" = { evidence = "landed", signature = "static inline f32 unsignedHeight(u32 v)" }
@@ -10012,7 +10012,7 @@ schema = 1
 "ALStartParamAlt" = { declaration = "struct ALStartParamAlt { struct Node_func_80239AF4_de *next; s32 delta; s16 type; s16 unity; f32 pitch; s16 volume; u8 pan; u8 fxMix; s32 samples; void *wave; };", evidence = "authored" }
 "ALSynConfig" = { declaration = "typedef struct ALSynConfig ALSynConfig;", evidence = "authored" }
 "ALSynth" = { declaration = "typedef struct ALSynth ALSynth;", evidence = "authored" }
-"ALSynth4C" = { declaration = "struct ALSynth4C { ALPlayer_s14 *head; Link_func_802596B4_de pFreeList; Link_func_802596B4_de pAllocList; Link_func_802596B4_de pLameList; s32 paramSamples; s32 curSamples; void *dma; void *heap; void *paramList; void *mainBus; void *auxBus; ALFilter_sC *outputFilter; s32 numPVoices; s32 maxAuxBusses; s32 outputRate; s32 maxOutSamples; };", evidence = "authored" }
+"ALSynth4C" = { declaration = "struct ALSynth4C { ALPlayer_s14 *head; ListLink pFreeList; ListLink pAllocList; ListLink pLameList; s32 paramSamples; s32 curSamples; void *dma; void *heap; void *paramList; void *mainBus; void *auxBus; ALFilter_sC *outputFilter; s32 numPVoices; s32 maxAuxBusses; s32 outputRate; s32 maxOutSamples; };", evidence = "authored" }
 "ALSynth_func_802B2650_de" = { declaration = "struct ALSynth_func_802B2650_de { ALPlayer_s14 *head; };", evidence = "authored" }
 "ALSynth_func_802B3000_de" = { declaration = "typedef struct ALSynth_func_802B3000_de ALSynth_func_802B3000_de;", evidence = "authored" }
 "ALTempoEvent" = { declaration = "struct ALTempoEvent { s32 ticks; u8 status; u8 type; u8 len; u8 byte1; u8 byte2; u8 byte3; };", evidence = "authored" }
@@ -10107,7 +10107,7 @@ schema = 1
 "Actor_func_80228FB8_de" = { declaration = "typedef struct Actor_func_80228FB8_de Actor_func_80228FB8_de;", evidence = "authored" }
 "Actor_func_8022AB20_de" = { declaration = "struct Actor_func_8022AB20_de { char pad[0x5F4]; s16 table[1]; };", evidence = "authored" }
 "Actor_func_8022D290_de" = { declaration = "struct Actor_func_8022D290_de { u8 type; char pad_000[0x2]; s8 unk_0x0003; s32 unk_0x0004; f32 posX; f32 posY; f32 posZ; s32 field_0x14; s32 field_0x18; s32 unk_0x001C; s32 unk_0x0020; s32 unk_0x0024; s32 unk_0x0028; char pad_new001[0xC]; s32 unk_0x0038; char pad_002[0x4]; f32 unk_0x0040; char pad_003[0x8]; s32 unk_0x004C; f32 unk_0x0050; s32 unk_0x0054; f32 unk_0x0058; s32 unk_0x005C; s32 unk_0x0060; s32 unk_0x0064; s32 unk_0x0068; f32 unk_0x006C; f32 unk_0x0070; s32 unk_0x0074; char pad_005[0x8]; s8 unk_0x0080; char pad_006[0x12]; s8 unk_0x0093; u8 unk_0x0094; char pad_new002[0x27]; s32 unk_0x00BC; char pad_new003[0x24]; u16 ownerId; char pad_008[0x1A]; s32 flags; f32 aimYaw; char pad_009[0x6]; s8 unk_0x010E; char pad_010[0x65]; s32 unk_0x0174; char pad_new004[0x5C]; f32 unk_0x01D4; s32 self; char pad_012[0x14]; s32 eventValue; char pad_new005[0x28]; s32 unk_0x021C; char pad_new006[0x40]; s32 unk_0x0260; s32 unk_0x0264; char pad_new007[0x34]; f32 unk_0x029C; f32 unk_0x02A0; f32 unk_0x02A4; f32 unk_0x02A8; char pad_new008[0x38]; s32 unk_0x02E4; s32 unk_0x02E8; char pad_013b[0x4]; s32 unk_0x02F0; s32 unk_0x02F4; s32 unk_0x02F8; s32 unk_0x02FC; s32 unk_0x0300; char pad_new009[0x24]; f32 unk_0x0328; char pad_new010[0x14]; f32 unk_0x0340; s32 unk_0x0344; s32 unk_0x0348; s32 unk_0x034C; f32 unk_0x0350; f32 unk_0x0354; f32 unk_0x0358; f32 unk_0x035C; f32 unk_0x0360; f32 unk_0x0364; s32 unk_0x0368; s32 unk_0x036C; s32 unk_0x0370; s32 unk_0x0374; s32 unk_0x0378; s32 unk_0x037C; char pad_new011[0x68]; s32 unk_0x03E8; char pad_017[0x70]; s32 unk_0x045C; char pad_018[0x24]; s32 unk_0x0484; char pad_019[0x4]; s8 unk_0x048C; char pad_020[0x33]; s32 unk_0x04C0; char pad_021[0x5F]; s8 unk_0x0523; char pad_022[0x54]; s32 unk_0x0578; char pad_023[0x18]; s32 unk_0x0594; char pad_024[0x4]; s32 unk_0x059C; f32 unk_0x05A0; char pad_025a[0x24]; s32 unk_0x05C8; char pad_025b[0x4]; s32 unk_0x05D0; s32 unk_0x05D4; s32 unk_0x05D8; s32 unk_0x05DC; s32 unk_0x05E0; s32 unk_0x05E4; s16 unk_0x05E8; s16 unk_0x05EA; s32 unk_0x05EC; s32 unk_0x05F0; s16 unk_0x05F4; s16 unk_0x05F6; s16 unk_0x05F8; s16 unk_0x05FA; char pad_027[0x32]; s16 unk_0x062E; s16 unk_0x0630; s16 unk_0x0632; char pad_028[0x1C]; s16 unk_0x0650; s16 unk_0x0652; s16 unk_0x0654; char pad_029[0x2]; f32 unk_0x0658; s32 unk_0x065C; s32 unk_0x0660; s32 unk_0x0664; char pad_030[0x4]; f32 unk_0x066C; f32 unk_0x0670; char pad_031[0x4]; f32 unk_0x0678; s32 unk_0x067C; s32 unk_0x0680; s32 unk_0x0684; char pad_new012[0x10]; s32 unk_0x0698; f32 unk_0x069C; f32 unk_0x06A0; f32 unk_0x06A4; f32 unk_0x06A8; s32 unk_0x06AC; s32 unk_0x06B0; s32 unk_0x06B4; s32 unk_0x06B8; s32 unk_0x06BC; f32 unk_0x06C0; f32 unk_0x06C4; f32 unk_0x06C8; f32 unk_0x06CC; s32 unk_0x06D0; f32 unk_0x06D4; f32 unk_0x06D8; f32 unk_0x06DC; f32 unk_0x06E0; f32 unk_0x06E4; f32 unk_0x06E8; f32 unk_0x06EC; f32 unk_0x06F0; f32 unk_0x06F4; s32 unk_0x06F8; s32 unk_0x06FC; s32 unk_0x0700; f32 unk_0x0704; f32 unk_0x0708; char pad_new013[0xC]; f32 unk_0x0718; s32 unk_0x071C; f32 unk_0x0720; f32 unk_0x0724; f32 unk_0x0728; f32 unk_0x072C; f32 unk_0x0730; f32 unk_0x0734; f32 unk_0x0738; f32 unk_0x073C; f32 unk_0x0740; f32 unk_0x0744; char pad_new014[0x10]; f32 unk_0x0758; f32 unk_0x075C; char pad_037[0x10]; s16 unk_0x0770; char pad_038[0x2]; s32 unk_0x0774; s32 unk_0x0778; s32 unk_0x077C; f32 unk_0x0780; f32 unk_0x0784; s32 unk_0x0788; f32 unk_0x078C; char pad_039[0x4]; s32 unk_0x0794; s32 unk_0x0798; s32 unk_0x079C; s32 unk_0x07A0; s32 unk_0x07A4; s32 unk_0x07A8; s32 unk_0x07AC; s32 unk_0x07B0; s32 unk_0x07B4; s32 unk_0x07B8; f32 unk_0x07BC; s32 unk_0x07C0; s32 unk_0x07C4; s32 unk_0x07C8; s32 unk_0x07CC; s32 unk_0x07D0; s32 unk_0x07D4; s32 unk_0x07D8; s32 unk_0x07DC; s32 unk_0x07E0; s32 unk_0x07E4; s32 unk_0x07E8; f32 unk_0x07EC; f32 unk_0x07F0; f32 unk_0x07F4; char pad_new015[0x4]; s32 unk_0x07FC; char pad_new016[0xC]; s32 unk_0x080C; char pad_new017[0x28]; f32 unk_0x0838; f32 unk_0x083C; s32 unk_0x0840; char pad_new018[0x8]; s32 unk_0x084C; s32 unk_0x0850; f32 unk_0x0854; char pad_043[0x8]; s32 unk_0x0860; char pad_044[0x8]; s32 unk_0x086C; s32 unk_0x0870; char pad_045a[0xB8]; s32 unk_0x092C; char pad_045b[0x8]; s32 unk_0x0938; char pad_046[0x37C]; s32 unk_0x0CB8; char pad_047[0x4]; s32 unk_0x0CC0; char pad_048[0x8]; s32 unk_0x0CCC; char pad_new020[0x194]; s32 unk_0x0E64; char pad_new021[0x38]; s32 unk_0x0EA0; char pad_new022[0x38]; s32 unk_0x0EDC; char pad_new023[0x10]; f32 unk_0x0EF0; f32 unk_0x0EF4; char pad_050[0x24]; s32 unk_0x0F1C; char pad_051[0x4]; s32 unk_0x0F24; char pad_052[0x4]; f32 unk_0x0F2C; f32 unk_0x0F30; char pad_053[0x20]; s32 unk_0x0F54; char pad_054[0xF0]; s32 unk_0x1048; char pad_055[0x4]; s32 unk_0x1050; char pad_056[0x4]; f32 unk_0x1058; f32 unk_0x105C; char pad_057[0x1C]; f32 unk_0x107C; s32 unk_0x1080; s32 unk_0x1084; char pad_058[0x4]; s32 unk_0x108C; char pad_059[0x4]; f32 unk_0x1094; f32 unk_0x1098; char pad_060[0x20]; s32 unk_0x10BC; s32 unk_0x10C0; char pad_061[0x4]; s32 unk_0x10C8; char pad_062[0x4]; f32 unk_0x10D0; f32 unk_0x10D4; char pad_063[0x20]; s32 unk_0x10F8; char pad_064[0x8]; s32 unk_0x1104; char pad_065[0x28]; f32 unk_0x1130; s32 unk_0x1134; char pad_066[0x8]; s32 unk_0x1140; char pad_067[0x28]; f32 unk_0x116C; s32 unk_0x1170; char pad_068[0x8]; s32 unk_0x117C; char pad_069[0x28]; f32 unk_0x11A8; s32 unk_0x11AC; s32 unk_0x11B0; s32 unk_0x11B4; s32 unk_0x11B8; s32 unk_0x11BC; s32 unk_0x11C0; f32 unk_0x11C4; s32 unk_0x11C8; s32 unk_0x11CC; s32 unk_0x11D0; s32 unk_0x11D4; f32 unk_0x11D8; f32 unk_0x11DC; f32 unk_0x11E0; f32 unk_0x11E4; char pad_072[0x4]; f32 unk_0x11EC; s32 unk_0x11F0; f32 unk_0x11F4; s32 unk_0x11F8; s32 unk_0x11FC; char pad_new024[0xC]; s32 unk_0x120C; s32 unk_0x1210; s32 unk_0x1214; s32 unk_0x1218; s32 unk_0x121C; s32 unk_0x1220; char pad_074[0x8]; s32 unk_0x122C; f32 unk_0x1230; f32 unk_0x1234; s32 unk_0x1238; s8 unk_0x123C; s8 unk_0x123D; s8 unk_0x123E; char pad_075[0x1]; f32 unk_0x1240; f32 unk_0x1244; char pad_076[0x78]; f32 unk_0x12C0; char pad_077[0x28]; s32 unk_0x12EC; s32 unk_0x12F0; char pad_078[0x40]; s32 unk_0x1334; s32 unk_0x1338; s32 unk_0x133C; char pad_079[0x74]; void *unk_0x13B4; char pad_080[0xC]; s8 unk_0x13C4; char pad_081[0x3]; s32 unk_0x13C8; char pad_082[0x8]; s32 unk_0x13D4; s32 unk_0x13D8; char pad_083[0x4]; s32 unk_0x13E0; char pad_084[0x6C]; s32 unk_0x1450; s32 unk_0x1454; s32 unk_0x1458; s32 unk_0x145C; s32 unk_0x1460; s32 unk_0x1464; s32 unk_0x1468; s32 unk_0x146C; s32 unk_0x1470; s32 unk_0x1474; s32 unk_0x1478; s32 unk_0x147C; char pad_085[0x240]; f32 unk_0x16C0; char pad_086[0x10]; s32 unk_0x16D4; s16 unk_0x16D8; char pad_087[0x6]; s32 unk_0x16E0; };", evidence = "authored" }
-"Actor_func_80241BAC_de" = { declaration = "struct Actor_func_80241BAC_de { u8 pad00[0x3C]; s32 flags; u8 pad40[0x1C]; Vec3 movement; u8 pad68[0x48]; Query_func_80241BAC_de saved_query; };", evidence = "authored" }
+"Actor_func_80241BAC_de" = { declaration = "struct Actor_func_80241BAC_de { u8 pad00[0x3C]; s32 flags; u8 pad40[0x1C]; Vec3 movement; u8 pad68[0x48]; SurfaceHit saved_query; };", evidence = "authored" }
 "Actor_func_80242288_de" = { declaration = "struct Actor_func_80242288_de { OwnerRecAt18 *owner; u8 pad04[8]; f32 fieldC; u8 pad10[0x30]; void *field40; u8 pad44[0x18]; f32 field5C; f32 field60; f32 field64; };", evidence = "authored" }
 "Actor_func_80242550_de" = { declaration = "struct Actor_func_80242550_de { OwnerRecAt18 *owner; u8 pad04[0x3C]; s32 *flags; Triple previous; Triple position; Triple delta; };", evidence = "authored" }
 "Actor_func_80245D30_de" = { declaration = "typedef struct Actor_func_80245D30_de Actor_func_80245D30_de;", evidence = "authored" }
@@ -10320,7 +10320,7 @@ schema = 1
 "Cell_func_804122CC_de" = { declaration = "typedef struct Cell_func_804122CC_de Cell_func_804122CC_de;", evidence = "authored" }
 "Channel" = { declaration = "struct Channel { s32 mode; f32 level; s32 state[3]; };", evidence = "authored" }
 "ChannelRecord" = { declaration = "typedef struct ChannelRecord ChannelRecord;", evidence = "authored" }
-"ChannelSet" = { declaration = "struct ChannelSet { s32 owner; Link_func_802596B4_de free; Header freeHeader; Link_func_802596B4_de active; Header activeHeader; VoiceRecAt8 voices[32]; };", evidence = "authored" }
+"ChannelSet" = { declaration = "struct ChannelSet { s32 owner; ListLink free; Header freeHeader; ListLink active; Header activeHeader; VoiceRecAt8 voices[32]; };", evidence = "authored" }
 "Channel_func_8023B9C0_eu" = { declaration = "typedef struct Channel_func_8023B9C0_eu Channel_func_8023B9C0_eu;", evidence = "authored" }
 "Channel_func_80430118_de" = { declaration = "typedef struct Channel_func_80430118_de Channel_func_80430118_de;", evidence = "authored" }
 "Char" = { declaration = "struct Char { char c; char pad; };", evidence = "authored" }
@@ -10431,7 +10431,7 @@ schema = 1
 "DescriptorRecAt29" = { declaration = "typedef struct DescriptorRecAt29 DescriptorRecAt29;", evidence = "authored" }
 "Descriptor_func_80205F18_de" = { declaration = "typedef struct Descriptor_func_80205F18_de Descriptor_func_80205F18_de;", evidence = "authored" }
 "Descriptor_func_802504B0_de" = { declaration = "typedef struct Descriptor_func_802504B0_de Descriptor_func_802504B0_de;", evidence = "authored" }
-"Descriptor_func_80442D10_de" = { declaration = "struct Descriptor_func_80442D10_de { short type; short pad; int flags; unsigned short x; unsigned short y; unsigned char r; unsigned char g; unsigned char b; unsigned char a; int value; };", evidence = "authored" }
+"WidgetDescriptor" = { declaration = "struct WidgetDescriptor { short type; short pad; int flags; unsigned short x; unsigned short y; unsigned char r; unsigned char g; unsigned char b; unsigned char a; int value; };", evidence = "authored" }
 "Dest" = { declaration = "typedef struct Dest Dest;", evidence = "authored" }
 "Dest_func_802164A8_de" = { declaration = "typedef struct Dest_func_802164A8_de Dest_func_802164A8_de;", evidence = "authored" }
 "Device" = { declaration = "typedef struct Device Device;", evidence = "authored" }
@@ -10704,8 +10704,7 @@ schema = 1
 "Handlers_func_804431E4_de" = { declaration = "struct Handlers_func_804431E4_de { char pad[0xC]; void (*callback)(); };", evidence = "authored" }
 "Handles" = { declaration = "typedef struct Handles Handles;", evidence = "authored" }
 "HashNode" = { declaration = "struct HashNode { s32 key; void *value; s32 unk08; struct HashNode *next; };", evidence = "authored" }
-"HashNodeRecAtCV1" = { declaration = "struct HashNodeRecAtCV1 { s32 key; struct Request_func_80251F6C_de *value; s32 unk08; struct HashNodeRecAtCV1 *next; };", evidence = "authored" }
-"HashNodeRecAtCV2" = { declaration = "struct HashNodeRecAtCV2 { s32 key; struct Request_func_80252774_de *value; s32 pad8; struct HashNodeRecAtCV2 *next; };", evidence = "authored" }
+"ResourceHashEntry" = { declaration = "struct ResourceHashEntry { s32 key; struct ResourceLoadRequest *value; s32 unk08; struct ResourceHashEntry *next; };", evidence = "authored" }
 "HeadRecord" = { declaration = "typedef struct HeadRecord HeadRecord;", evidence = "authored" }
 "Header" = { declaration = "struct Header { u8 data[0xCC]; };", evidence = "authored" }
 "Header44" = { declaration = "typedef struct Header44 Header44;", evidence = "authored" }
@@ -10758,7 +10757,7 @@ schema = 1
 "InputRecAt27" = { declaration = "typedef struct InputRecAt27 InputRecAt27;", evidence = "authored" }
 "InputRecAt28" = { declaration = "typedef struct InputRecAt28 InputRecAt28;", evidence = "authored" }
 "InputRecAt44" = { declaration = "typedef struct InputRecAt44 InputRecAt44;", evidence = "authored" }
-"Input_func_80241BAC_de" = { declaration = "struct Input_func_80241BAC_de { u8 kind; u8 pad01[7]; f32 x; f32 y; f32 z; u8 pad14[0xC]; f32 floor; u8 pad24[0x10]; struct OwnerRecAt18 *owner; s32 flags38; u8 pad3C[0xC4]; s32 flags100; };", evidence = "authored" }
+"CollisionProbe" = { declaration = "struct CollisionProbe { u8 kind; u8 pad01[7]; f32 x; f32 y; f32 z; u8 pad14[0xC]; f32 floor; u8 pad24[0x10]; struct OwnerRecAt18 *owner; s32 flags38; u8 pad3C[0xC4]; s32 flags100; };", evidence = "authored" }
 "Input_func_80242550_de" = { declaration = "struct Input_func_80242550_de { u8 pad0[8]; Triple position; };", evidence = "authored" }
 "Input_func_802426CC_de" = { declaration = "typedef struct Input_func_802426CC_de Input_func_802426CC_de;", evidence = "authored" }
 "Input_func_802A65E0_de" = { declaration = "struct Input_func_802A65E0_de { char pad0[0x5DC]; struct View *view; char pad5E0[0x6AC - 0x5E0]; s32 held; s32 pressed; };", evidence = "authored" }
@@ -10838,7 +10837,7 @@ schema = 1
 "ItemRecAt24" = { declaration = "typedef struct ItemRecAt24 ItemRecAt24;", evidence = "authored" }
 "Item_func_8024E6A0_de" = { declaration = "struct Item_func_8024E6A0_de { unsigned char kind; char pad[0x33]; void *value; unsigned flags; };", evidence = "authored" }
 "Item_func_80420308_de" = { declaration = "struct Item_func_80420308_de { char pad[0x14]; u16 x; u16 y; };", evidence = "authored" }
-"Item_func_8042B4D4_de" = { declaration = "struct Item_func_8042B4D4_de { char pad[0x10]; u8 alpha; char pad11[0x14 - 0x11]; s16 x; };", evidence = "authored" }
+"MenuMarker" = { declaration = "struct MenuMarker { char pad[0x10]; u8 alpha; char pad11[0x14 - 0x11]; s16 x; };", evidence = "authored" }
 "Item_func_8042D304_de" = { declaration = "struct Item_func_8042D304_de { char pad[0x10]; u8 alpha; char pad11[0x2C - 0x11]; s32 frame; };", evidence = "authored" }
 "Item_func_80433BCC_de" = { declaration = "struct Item_func_80433BCC_de { char pad[0x8]; struct func_8028469C_S2 *label; };", evidence = "authored" }
 "Item_func_80434C2C_de" = { declaration = "struct Item_func_80434C2C_de { char pad[0x38]; u8 *text; };", evidence = "authored" }
@@ -10882,12 +10881,12 @@ schema = 1
 "LinkTable" = { declaration = "typedef struct LinkTable LinkTable;", evidence = "authored" }
 "Link_func_8023CC08_de" = { declaration = "struct Link_func_8023CC08_de { struct Link_func_8023CC08_de *next; struct Link_func_8023CC08_de *prev; u16 id; union { u16 padA; struct { u8 index; u8 slot; }; }; s32 fieldC; };", evidence = "authored" }
 "Link_func_80259260_de" = { declaration = "struct Link_func_80259260_de { struct NodeRecAtC8 *prev; struct NodeRecAtC8 *next; };", evidence = "authored" }
-"Link_func_802596B4_de" = { declaration = "struct Link_func_802596B4_de { struct Link_func_802596B4_de *next; struct Link_func_802596B4_de *prev; };", evidence = "authored" }
+"ListLink" = { declaration = "struct ListLink { struct ListLink *next; struct ListLink *prev; };", evidence = "authored" }
 "Link_func_80259784_de" = { declaration = "typedef struct Link_func_80259784_de Link_func_80259784_de;", evidence = "authored" }
 "Link_func_80283A80_de" = { declaration = "typedef struct Link_func_80283A80_de Link_func_80283A80_de;", evidence = "authored" }
 "LinkedCommandEntry" = { declaration = "struct LinkedCommandEntry { u8 padding000[4]; struct LinkedCommandEntry *next; u8 padding008[6]; u16 kind; u8 command; };", evidence = "authored" }
 "List" = { declaration = "struct List { char pad0[0x48]; u8 visibleX; u8 visibleY; u8 maxX; u8 maxY; u8 cursorX; u8 cursorY; u8 scrollX; u8 scrollY; u8 minX; u8 minY; };", evidence = "authored" }
-"List802795C0" = { declaration = "struct List802795C0 { Link_func_802596B4_de *head; Link_func_802596B4_de *tail; int count; };", evidence = "authored" }
+"List802795C0" = { declaration = "struct List802795C0 { ListLink *head; ListLink *tail; int count; };", evidence = "authored" }
 "List802A6DF8" = { declaration = "struct List802A6DF8 { struct State802A6DF8 *head; struct State802A6DF8 *tail; s32 count; };", evidence = "authored" }
 "List802B663C" = { declaration = "typedef struct List802B663C List802B663C;", evidence = "authored" }
 "ListHead" = { declaration = "struct ListHead { struct Entry_func_80259440_de *prev; struct Entry_func_80259440_de *next; };", evidence = "authored" }
@@ -11176,9 +11175,8 @@ schema = 1
 "Node_func_8023CC08_de" = { declaration = "typedef struct Node_func_8023CC08_de Node_func_8023CC08_de;", evidence = "authored" }
 "Node_func_8023CCD4_de" = { declaration = "typedef struct Node_func_8023CCD4_de Node_func_8023CCD4_de;", evidence = "authored" }
 "Node_func_80251328_de" = { declaration = "struct Node_func_80251328_de { s32 resource; s32 size; s32 references; s32 flags; s32 lastUsed; s32 owner; struct Node_func_80251328_de *next; s32 key; s32 pending; s32 callback; };", evidence = "authored" }
-"Node_func_80251F6C_de" = { declaration = "struct Node_func_80251F6C_de { void *data; s32 unk04; s32 count; s32 flags; s32 stamp; };", evidence = "authored" }
+"CachedResource" = { declaration = "struct CachedResource { void *data; s32 unk04; s32 count; s32 flags; s32 stamp; struct ResourceLoadRequest *owner; };", evidence = "authored" }
 "Node_func_802524B0_de" = { declaration = "typedef struct Node_func_802524B0_de Node_func_802524B0_de;", evidence = "authored" }
-"Node_func_80252774_de" = { declaration = "struct Node_func_80252774_de { void *data; s32 pad4; s32 count; s32 flags; s32 pad10; struct Request_func_80252774_de *owner; };", evidence = "authored" }
 "Node_func_80256FC0_de" = { declaration = "struct Node_func_80256FC0_de { struct Node_func_80256FC0_de *prev; struct Node_func_80256FC0_de *next; s32 field8; u32 age; };", evidence = "authored" }
 "Node_func_802598B4_de" = { declaration = "struct Node_func_802598B4_de { struct Node_func_802598B4_de *prev; struct Node_func_802598B4_de *next; s32 unused; s32 value; };", evidence = "authored" }
 "Node_func_80259918_de" = { declaration = "struct Node_func_80259918_de { struct Node_func_80259918_de *prev; struct Node_func_80259918_de *next; char pad08[0xB0 - 0x8]; s32 key; };", evidence = "authored" }
@@ -11635,7 +11633,7 @@ schema = 1
 "Owner_func_80444BE8_de" = { declaration = "struct Owner_func_80444BE8_de { char pad[0x5D8]; struct Settings_func_80444BE8_de *settings; };", evidence = "authored" }
 "Owner_func_8044D794_de" = { declaration = "typedef struct Owner_func_8044D794_de Owner_func_8044D794_de;", evidence = "authored" }
 "PVoice_s" = { declaration = "typedef struct PVoice_s PVoice_s;", evidence = "authored" }
-"PVoice_s_func_802B3000_de" = { declaration = "struct PVoice_s_func_802B3000_de { Link_func_802596B4_de node; struct ALVoice_s_func_802B3000_de *vvoice; struct ALFilter_s_func_802B3000_de *channelKnob; char pad10[0xD8 - 0x10]; s32 offset; };", evidence = "authored" }
+"PVoice_s_func_802B3000_de" = { declaration = "struct PVoice_s_func_802B3000_de { ListLink node; struct ALVoice_s_func_802B3000_de *vvoice; struct ALFilter_s_func_802B3000_de *channelKnob; char pad10[0xD8 - 0x10]; s32 offset; };", evidence = "authored" }
 "Pack" = { declaration = "struct Pack { s32 count; s32 offsets[1]; };", evidence = "authored" }
 "Packed" = { declaration = "struct Packed { unsigned short unk0; unsigned short unk2; unsigned short first[3]; unsigned short second[3]; int unk10; };", evidence = "authored" }
 "PackedBitWords" = { declaration = "typedef struct { u32 low; u32 high; } PackedBitWords;", evidence = "authored" }
@@ -11768,7 +11766,7 @@ schema = 1
 "Polygon" = { declaration = "typedef struct Polygon Polygon;", evidence = "authored" }
 "Polygon_func_8023E178_de" = { declaration = "struct Polygon_func_8023E178_de { s32 type; s32 pad4; s32 kind; char padC[0x8]; s32 flag; Vec3 point; char pad24[0x24]; Vec3 normal; char pad54[0x78]; f32 t; Vec3 hit; };", evidence = "authored" }
 "Polygon_func_8023E8D4_de" = { declaration = "typedef struct Polygon Polygon_func_8023E8D4_de;", evidence = "authored" }
-"Polygon_func_80275410_de" = { declaration = "struct Polygon_func_80275410_de { char pad0[2]; u16 flags; Vec3 *vertices[3]; };", evidence = "authored" }
+"Triangle" = { declaration = "struct Triangle { char pad0[2]; u16 flags; Vec3 *vertices[3]; };", evidence = "authored" }
 "Pool" = { declaration = "struct Pool { s32 count; char pad[0x40]; s32 field44; };", evidence = "authored" }
 "Pool80255720" = { declaration = "typedef struct Pool80255720 Pool80255720;", evidence = "authored" }
 "Pool80255ACC" = { declaration = "struct Pool80255ACC { s32 unk0; s32 unk4; Block80255720 *head; Block80255720 *tail; };", evidence = "authored" }
@@ -11805,13 +11803,13 @@ schema = 1
 "Query" = { declaration = "struct Query { f32 radius; f32 bottom; f32 top; f32 top1; f32 bottom1; f32 top2; f32 bottom2; f32 minX; f32 minZ; f32 maxX; f32 maxZ; s32 flag; };", evidence = "authored" }
 "QueryE0" = { declaration = "typedef struct QueryE0 QueryE0;", evidence = "authored" }
 "QueryRecAt58" = { declaration = "struct QueryRecAt58 { s32 word0; s32 word4; s32 word8; s32 wordC; s32 word10; u8 pad14[0x40]; OwnerRecAt18 *owner; s32 index; u8 pad5C[0x84]; };", evidence = "authored" }
-"Query_func_80241BAC_de" = { declaration = "typedef struct Query_func_80241BAC_de Query_func_80241BAC_de;", evidence = "authored" }
+"SurfaceHit" = { declaration = "typedef struct SurfaceHit SurfaceHit;", evidence = "authored" }
 "Queue" = { declaration = "struct Queue { char pad[0x14]; s32 items[4]; };", evidence = "authored" }
 "QueueEntry" = { declaration = "typedef struct QueueEntry QueueEntry;", evidence = "authored" }
 "QueueRec" = { declaration = "typedef struct QueueRec QueueRec;", evidence = "authored" }
 "Queue_func_802517B4_de" = { declaration = "struct Queue_func_802517B4_de { void **head; s32 unk04; s32 count; s32 index; s32 capacity; void **entries; };", evidence = "authored" }
 "Queue_func_802BB2A0_de" = { declaration = "typedef struct Queue_func_802BB2A0_de Queue_func_802BB2A0_de;", evidence = "authored" }
-"Queue_func_802BB420_de" = { declaration = "typedef struct Queue_func_802BB420_de Queue_func_802BB420_de;", evidence = "authored" }
+"RingQueue" = { declaration = "typedef struct RingQueue RingQueue;", evidence = "authored" }
 "Race" = { declaration = "typedef struct Race Race;", evidence = "authored" }
 "RaceHeader" = { declaration = "typedef struct RaceHeader { s32 music; char pad4[0x1C]; IntrusiveList views; u32 lastMode; s32 layoutTimer; char pad3C[4]; } RaceHeader;", evidence = "authored" }
 "RaceHeader_size_check" = { declaration = "typedef char RaceHeader_size_check[(sizeof(RaceHeader) == 0x40) ? 1 : -1];", evidence = "authored" }
@@ -11826,9 +11824,9 @@ schema = 1
 "RangeNode" = { declaration = "typedef struct RangeNode RangeNode;", evidence = "authored" }
 "Ray" = { declaration = "typedef struct Ray Ray;", evidence = "authored" }
 "Ray180" = { declaration = "struct Ray180 { char pad0[0x8]; f32 spacing; f32 secondaryRadius; f32 length; char pad14[0x4]; f32 radius; f32 height; char pad20[0x1C]; u32 flags; struct MotionSurface *surface; Vec3 start; Vec3 end; char pad5C[0x24]; f32 scale; Box box; Vector4f rect; char padAC[0xD0]; f32 nearest; };", evidence = "authored" }
-"Ray_func_8023DF70_de" = { declaration = "typedef struct Ray_func_8023E8D4_de Ray_func_8023DF70_de;", evidence = "authored" }
+"Ray_func_8023DF70_de" = { declaration = "typedef struct CapsuleSweep Ray_func_8023DF70_de;", evidence = "authored" }
 "Ray_func_8023E178_de" = { declaration = "struct Ray_func_8023E178_de { char pad0[0x44]; Vec3 start; Vec3 end; Vec3 dir; char pad68[0x18]; f32 slack; char pad84[0x2C]; Polygon_func_8023E178_de nearest; };", evidence = "authored" }
-"Ray_func_8023E8D4_de" = { declaration = "struct Ray_func_8023E8D4_de { char pad0[0x08]; f32 radius; f32 secondaryRadius; char pad10[0x0C]; f32 height; char pad20[0x1C]; u32 flags; struct MotionSurface *surface; Vec3 start; Vec3 end; char pad5C[0x24]; f32 slack; char pad84[0x2C]; Polygon_func_8023E8D4_de nearest; };", evidence = "authored" }
+"CapsuleSweep" = { declaration = "struct CapsuleSweep { char pad0[0x08]; f32 radius; f32 secondaryRadius; char pad10[0x0C]; f32 height; char pad20[0x1C]; u32 flags; struct MotionSurface *surface; Vec3 start; Vec3 end; char pad5C[0x24]; f32 slack; char pad84[0x2C]; Polygon_func_8023E8D4_de nearest; };", evidence = "authored" }
 "ReadCommand" = { declaration = "typedef struct ReadCommand ReadCommand;", evidence = "authored" }
 "ReadHalfword" = { declaration = "typedef struct ReadHalfword ReadHalfword;", evidence = "authored" }
 "ReadWord" = { declaration = "struct ReadWord { s32 word; u8 byte; };", evidence = "authored" }
@@ -11907,9 +11905,8 @@ schema = 1
 "RequestDrawPair" = { declaration = "typedef struct RequestDrawPair { s32 first, second; } RequestDrawPair;", evidence = "authored" }
 "RequestDrawScreen" = { declaration = "typedef struct RequestDrawScreen { char pad0[8]; void *roots[3]; s32 selected; s32 timer; s32 count; } RequestDrawScreen;", evidence = "authored" }
 "RequestRecAt10" = { declaration = "struct RequestRecAt10 { s32 id; s32 variant; s32 word8; s32 variantC; char name[28 - 0x10]; };", evidence = "authored" }
-"Request_func_80251F6C_de" = { declaration = "struct Request_func_80251F6C_de { struct Node_func_80251F6C_de *node; struct Node_func_80251F6C_de *extra; s32 key; s32 priority; s32 flags; void *unk14; void *owner; s32 mode; void *unk20; struct Request_func_80251F6C_de *next; };", evidence = "authored" }
+"ResourceLoadRequest" = { declaration = "struct ResourceLoadRequest { struct CachedResource *node; struct CachedResource *extra; s32 key; s32 priority; s32 flags; void *tag; s32 owner; s32 mode; void *replyQueue; struct ResourceLoadRequest *next; };", evidence = "authored" }
 "Request_func_802524B0_de" = { declaration = "typedef struct Request_func_802524B0_de Request_func_802524B0_de;", evidence = "authored" }
-"Request_func_80252774_de" = { declaration = "struct Request_func_80252774_de { struct Node_func_80252774_de *node; struct Node_func_80252774_de *extra; s32 key; s32 priority; s32 flags; void *tag; s32 owner; s32 mode; void *replyQueue; struct Request_func_80252774_de *next; };", evidence = "authored" }
 "ResetFlagsStorage" = { declaration = "typedef struct { u8 padding_0[176]; s32 unkB0; } ResetFlagsStorage;", evidence = "authored" }
 "ResetFourStorage" = { declaration = "typedef struct { s32 unk0; s32 unk4; s32 unk8; s32 unkC; u8 padding_10[4]; s32 unk14; s32 unk18; u8 padding_1C[8]; f32 unk24; s32 unk28; f32 unk2C; u8 padding_30[60]; s32 unk6C; s32 unk70; } ResetFourStorage;", evidence = "authored" }
 "ResetOwnerStorage" = { declaration = "typedef struct { u8 padding_0[1688]; void * unk698; } ResetOwnerStorage;", evidence = "authored" }
@@ -11943,10 +11940,10 @@ schema = 1
 "ResourceEntry" = { declaration = "typedef struct ResourceEntry ResourceEntry;", evidence = "authored" }
 "ResourceFadeDefinition" = { declaration = "struct ResourceFadeDefinition { u8 reserved0[0xE]; s8 nearValue; s8 farValue; u8 reserved10[0x14]; u32 threshold; };", evidence = "authored" }
 "ResourceLoadState" = { declaration = "typedef struct ResourceLoadState { s32 handle; s32 state4; s32 state8; } ResourceLoadState;", evidence = "authored" }
-"ResourceLoadWorker" = { declaration = "typedef struct ResourceLoadWorker { u8 thread[0x230]; struct Queue_func_802BB420_de requests; s32 messages[128]; u8 stack[0x1000]; } ResourceLoadWorker;", evidence = "authored" }
+"ResourceLoadWorker" = { declaration = "typedef struct ResourceLoadWorker { u8 thread[0x230]; struct RingQueue requests; s32 messages[128]; u8 stack[0x1000]; } ResourceLoadWorker;", evidence = "authored" }
 "ResourceLockState" = { declaration = "typedef struct ResourceLockState { s32 slot; u8 reserved4[0xB98 - 4]; Queue_func_802517B4_de waitQueue; } ResourceLockState;", evidence = "authored" }
 "ResourceManagerState" = { declaration = "struct ResourceManagerState { s32 active; s32 count; };", evidence = "authored" }
-"ResourceObject23" = { declaration = "typedef struct ResourceObject23 { s8 pad0; s8 type; char pad2[0x50-2]; s32 model; s32 loadedType; s32 resourceName; s32 resourceSize; Node_func_80251F6C_de *blockNode; } ResourceObject23;", evidence = "authored" }
+"ResourceObject23" = { declaration = "typedef struct ResourceObject23 { s8 pad0; s8 type; char pad2[0x50-2]; s32 model; s32 loadedType; s32 resourceName; s32 resourceSize; CachedResource *blockNode; } ResourceObject23;", evidence = "authored" }
 "ResourceOwner" = { declaration = "typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;", evidence = "authored" }
 "ResourcePageJob" = { declaration = "typedef struct ResourcePageJob { u32 reserved0; u8 *source; u32 size; u16 page; u8 reservedE[2]; ResourcePageMapping *mapping; ResourcePageThread *thread; u8 *slot; } ResourcePageJob;", evidence = "authored" }
 "ResourcePageMapping" = { declaration = "typedef struct ResourcePageMapping { struct ResourcePageMapping *next, *prev; u16 page; u8 flags, slot; s32 resident; } ResourcePageMapping;", evidence = "authored" }
@@ -12065,7 +12062,7 @@ schema = 1
 "Screen_func_80422960_de" = { declaration = "struct Screen_func_80422960_de { char pad0[0x1C]; s32 choice; char pad20[0x60 - 0x20]; s32 mode; s32 arena; };", evidence = "authored" }
 "Screen_func_80423828_de" = { declaration = "struct Screen_func_80423828_de { char pad0[0x1C]; s32 shown; char pad20[0x30 - 0x20]; s32 mode; s32 next_mode; char pad38[0x44 - 0x38]; void *window; char pad48[0x4C - 0x48]; void *second_window; char pad50[0x60 - 0x50]; s32 timer; };", evidence = "authored" }
 "Screen_func_80426788_de" = { declaration = "struct Screen_func_80426788_de { char pad0[0xA58]; s32 wordA58; };", evidence = "authored" }
-"Screen_func_80426918_de" = { declaration = "struct Screen_func_80426918_de { char pad0[0x978]; struct Item_func_8042B4D4_de *left; char pad97C[2]; u16 leftSpeed; struct Item_func_8042B4D4_de *right; char pad984[2]; u16 rightSpeed; s32 state; s32 timer; void *prompt; void *button; char pad998[0xA48 - 0x998]; struct Item_func_8042B4D4_de *pulse; char padA4C[4]; struct Item_func_8042B4D4_de *banner; s32 clock; s32 requested; };", evidence = "authored" }
+"Screen_func_80426918_de" = { declaration = "struct Screen_func_80426918_de { char pad0[0x978]; struct MenuMarker *left; char pad97C[2]; u16 leftSpeed; struct MenuMarker *right; char pad984[2]; u16 rightSpeed; s32 state; s32 timer; void *prompt; void *button; char pad998[0xA48 - 0x998]; struct MenuMarker *pulse; char padA4C[4]; struct MenuMarker *banner; s32 clock; s32 requested; };", evidence = "authored" }
 "Screen_func_80427008_de" = { declaration = "struct Screen_func_80427008_de { char pad0[0xA5C]; s32 record; char padA60[0xA74 - 0xA60]; u8 shown[5]; u8 marked[5]; };", evidence = "authored" }
 "Screen_func_804273D4_de" = { declaration = "struct Screen_func_804273D4_de { char pad0[0x970]; s32 context; };", evidence = "authored" }
 "Screen_func_804279B8_de" = { declaration = "typedef struct Screen_func_804279B8_de Screen_func_804279B8_de;", evidence = "authored" }
@@ -12076,9 +12073,9 @@ schema = 1
 "Screen_func_8042972C_de" = { declaration = "struct Screen_func_8042972C_de { char pad0[0x1C]; void *selectWidget; void *cursorWidget; void *widget24; void *widget28; void *widget2C; void *widget30; void *widget34; s32 countCap; s32 countDefault; };", evidence = "authored" }
 "Screen_func_8042A990_de" = { declaration = "struct Screen_func_8042A990_de { void *window; char pad4[0x3EC - 0x4]; struct Label *label; char pad3F0[0x3F4 - 0x3F0]; char text[0x434 - 0x3F4]; s32 category; s32 selection; void *item; };", evidence = "authored" }
 "Screen_func_8042AFE0_de" = { declaration = "struct Screen_func_8042AFE0_de { char pad0[0x3EC]; struct Label *widget; char pad3F0[0x3F4 - 0x3F0]; char label[0x40]; s32 list; s32 entry; };", evidence = "authored" }
-"Screen_func_8042B4D4_de" = { declaration = "struct Screen_func_8042B4D4_de { char pad0[0x308]; char view[0x434 - 0x308]; s32 category; s32 selection; struct Item_func_8042B4D4_de *item; struct Item_func_8042B4D4_de *left; struct Item_func_8042B4D4_de *right; struct Item_func_8042B4D4_de *marker; char pad44C[0x45C - 0x44C]; s32 word45C; char pad460[0x464 - 0x460]; s32 word464; };", evidence = "authored" }
+"Screen_func_8042B4D4_de" = { declaration = "struct Screen_func_8042B4D4_de { char pad0[0x308]; char view[0x434 - 0x308]; s32 category; s32 selection; struct MenuMarker *item; struct MenuMarker *left; struct MenuMarker *right; struct MenuMarker *marker; char pad44C[0x45C - 0x44C]; s32 word45C; char pad460[0x464 - 0x460]; s32 word464; };", evidence = "authored" }
 "Screen_func_8042B644_de" = { declaration = "struct Screen_func_8042B644_de { char pad0[0x434]; s32 category; s32 selection; struct Resource_func_80419E54_de *item; struct Resource_func_80419E54_de *left; struct Resource_func_80419E54_de *right; struct Resource_func_80419E54_de *marker; char pad44C[0x45C - 0x44C]; s32 word45C; char pad460[0x464 - 0x460]; s32 word464; };", evidence = "authored" }
-"Screen_func_8042B78C_de" = { declaration = "struct Screen_func_8042B78C_de { char pad0[0x308]; char view[0x434 - 0x308]; s32 category; s32 selection; struct Item_func_8042B4D4_de *item; char pad440[0x448 - 0x440]; struct Item_func_8042B4D4_de *marker; char pad44C[0x45C - 0x44C]; s32 word45C; char pad460[0x464 - 0x460]; s32 word464; };", evidence = "authored" }
+"Screen_func_8042B78C_de" = { declaration = "struct Screen_func_8042B78C_de { char pad0[0x308]; char view[0x434 - 0x308]; s32 category; s32 selection; struct MenuMarker *item; char pad440[0x448 - 0x440]; struct MenuMarker *marker; char pad44C[0x45C - 0x44C]; s32 word45C; char pad460[0x464 - 0x460]; s32 word464; };", evidence = "authored" }
 "Screen_func_8042D690_de" = { declaration = "struct Screen_func_8042D690_de { char pad0[0xE4]; void *object; char padE8[0x320 - 0xE8]; s32 open; char pad324[0x328 - 0x324]; s32 choice; };", evidence = "authored" }
 "Screen_func_8042DC04_de" = { declaration = "typedef struct Screen_func_8042DC04_de Screen_func_8042DC04_de;", evidence = "authored" }
 "Screen_func_8043ACF0_de" = { declaration = "struct Screen_func_8043ACF0_de { void *window; s32 pad4; struct Entry_func_8043ACF0_de entries[4]; };", evidence = "authored" }
@@ -12118,7 +12115,7 @@ schema = 1
 "SettingsE" = { declaration = "struct SettingsE { char pad0[0xD]; u8 players; };", evidence = "authored" }
 "SettingsRecAt24" = { declaration = "struct SettingsRecAt24 { char pad0[0x24]; s8 timeSetting; };", evidence = "authored" }
 "Settings_func_804279B8_de" = { declaration = "typedef struct Settings_func_804279B8_de Settings_func_804279B8_de;", evidence = "authored" }
-"Settings_func_8042EB10_de" = { declaration = "struct Settings_func_8042EB10_de { char pad0[0xD]; u8 trialKind; char padE[0x16]; s8 time; s8 limit; s8 other; s8 score; };", evidence = "authored" }
+"TrialSettings" = { declaration = "struct TrialSettings { char pad0[0xD]; u8 trialKind; char padE[0x16]; s8 time; s8 limit; s8 other; s8 score; };", evidence = "authored" }
 "Settings_func_80444488_de" = { declaration = "struct Settings_func_80444488_de { char pad[0x7C]; u8 value; };", evidence = "authored" }
 "Settings_func_80444548_de" = { declaration = "struct Settings_func_80444548_de { char pad[0x7D]; u8 value; };", evidence = "authored" }
 "Settings_func_80444610_de" = { declaration = "struct Settings_func_80444610_de { char pad[0x7E]; u8 value; };", evidence = "authored" }
@@ -13236,7 +13233,7 @@ schema = 1
 "WidgetHandler" = { declaration = "typedef struct WidgetHandler WidgetHandler;", evidence = "authored" }
 "WidgetRecAt1A" = { declaration = "struct WidgetRecAt1A { char pad0[4]; struct WidgetRecAt1A *next; struct WidgetRecAt1A *child; s16 id; u16 selector; char pad10[4]; s16 x; s16 y; s16 width; s16 height; };", evidence = "authored" }
 "WidgetRecAt20" = { declaration = "struct WidgetRecAt20 { char pad[0x20]; struct StateRecAt47C *state; };", evidence = "authored" }
-"WidgetRecAt24" = { declaration = "struct WidgetRecAt24 { int id; unsigned short type; unsigned short pad; int flags; unsigned short x; unsigned short y; unsigned char r; unsigned char g; unsigned char b; unsigned char a; int value; struct Descriptor_func_80442D10_de *desc; int index; void *extra; int arg; };", evidence = "authored" }
+"WidgetRecAt24" = { declaration = "struct WidgetRecAt24 { int id; unsigned short type; unsigned short pad; int flags; unsigned short x; unsigned short y; unsigned char r; unsigned char g; unsigned char b; unsigned char a; int value; struct WidgetDescriptor *desc; int index; void *extra; int arg; };", evidence = "authored" }
 "WidgetRecAt34" = { declaration = "typedef struct WidgetRecAt34 WidgetRecAt34;", evidence = "authored" }
 "WidgetRecAtE" = { declaration = "typedef struct WidgetRecAtE WidgetRecAtE;", evidence = "authored" }
 "WidgetRegisterWidget" = { declaration = "typedef struct WidgetRegisterWidget WidgetRegisterWidget;", evidence = "authored" }
@@ -13248,7 +13245,7 @@ schema = 1
 "Widget_func_8040CF8C_de" = { declaration = "struct Widget_func_8040CF8C_de { char pad0[0x10]; u8 alpha; char pad11; u16 flags; s16 x, y; s16 width, height; s16 offsetX, offsetY; f32 scaleX, scaleY; s32 unknown28; u32 colors[4]; };", evidence = "authored" }
 "Widget_func_8040E67C_de" = { declaration = "typedef struct Widget_func_8040E67C_de Widget_func_8040E67C_de;", evidence = "authored" }
 "Widget_func_8040F230_de" = { declaration = "typedef struct Widget_func_8040F230_de Widget_func_8040F230_de;", evidence = "authored" }
-"Widget_func_8040F6DC_de" = { declaration = "struct Widget_func_8040F6DC_de { s32 name; struct Widget_func_8040F6DC_de *next; struct Widget_func_8040F6DC_de *children; char padC[2]; u16 type; char pad10[2]; u16 flags; char pad14[0x18]; s32 words[4]; char pad3C[8]; s32 extra; };", evidence = "authored" }
+"UiWidget" = { declaration = "struct UiWidget { s32 name; struct UiWidget *next; struct UiWidget *children; char padC[2]; u16 type; char pad10[2]; u16 flags; char pad14[0x18]; s32 words[4]; char pad3C[8]; s32 extra; };", evidence = "authored" }
 "Window" = { declaration = "typedef struct Window Window;", evidence = "authored" }
 "Window_func_80421AE8_de" = { declaration = "typedef struct Window_func_80421AE8_de Window_func_80421AE8_de;", evidence = "authored" }
 "Word5324" = { declaration = "typedef union { s32 whole; Half5324 half; } Word5324;", evidence = "authored" }

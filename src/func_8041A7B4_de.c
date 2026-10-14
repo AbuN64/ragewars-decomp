@@ -24,7 +24,7 @@ void func_8041A7B4_de(void *arg0, Args args) {
     Quad_func_802A1BE0_de value;
     Quad_func_802A1BE0_de transformed;
     s32 changed;
-    Widget_func_8040F6DC_de *window = arg0;
+    UiWidget *window = arg0;
 
     changed = 0;
     if (func_8040E0D4_de(&first, &basis, arg0, &args) != 0) {

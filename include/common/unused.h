@@ -6332,7 +6332,7 @@ struct ObjectLinks4_4 {
 struct ObjectLinks8_2;
 struct ObjectLinks8_2 {
     unsigned char padding[4];
-    Link_func_802596B4_de * volatile unk_4;
+    ListLink * volatile unk_4;
 };
 struct ObjectLinks8_3;
 struct ObjectLinks8_3 {

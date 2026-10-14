@@ -12,7 +12,7 @@ extern void func_802B44B0_de(ALAuxBus_s *, void *, s32);              /* alAuxBu
 extern void func_802B4454_de(ALMainBus_s *, void *, s32);             /* alMainBusNew */
 extern void *func_802B64C0_de(ALSynth *, s16, ALSynConfig *, ALHeap *); /* alSynAllocFX */
 extern s32 func_802B5540_de(void *, s32, void *);                   /* alMainBusParam */
-extern void func_802B2480_de(Link_func_802596B4_de *, Link_func_802596B4_de *);                   /* alLink */
+extern void func_802B2480_de(ListLink *, ListLink *);                   /* alLink */
 extern void func_802B43A4_de(ALLoadFilter *, ALDMANew, ALHeap *);   /* alLoadNew */
 extern s32 func_802BEAA4_de(void *, s32, void *);                   /* alLoadParam */
 extern void func_802B450C_de(ALResampler *, ALHeap *);              /* alResampleNew */
@@ -69,7 +69,7 @@ void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
     pvoices = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(PVoice_s));
     for (i = 0; i < c->maxPVoices; i++) {
         pv = &pvoices[i];
-        func_802B2480_de((Link_func_802596B4_de *)pv, &drvr->pFreeList);
+        func_802B2480_de((ListLink *)pv, &drvr->pFreeList);
         pv->vvoice = 0;
 
         func_802B43A4_de(&pv->decoder, drvr->dma, hp);

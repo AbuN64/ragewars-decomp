@@ -2,7 +2,7 @@
 #include "span_1000/code_802B243C.h"
 #include "types.h"
 
-void func_802B2450_de(Link_func_802596B4_de *arg0) {
+void func_802B2450_de(ListLink *arg0) {
     if (arg0->next != 0) {
         arg0->next->prev = arg0->prev;
     }

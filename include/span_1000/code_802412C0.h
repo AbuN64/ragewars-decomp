@@ -116,8 +116,8 @@ struct Input_func_80242550_de {
 struct Ray180;
 typedef struct Ray180 Ray180;
 
-struct Query_func_80241BAC_de;
-typedef struct Query_func_80241BAC_de Query_func_80241BAC_de;
+struct SurfaceHit;
+typedef struct SurfaceHit SurfaceHit;
 
 struct EntryC;
 struct EntryC {
@@ -275,8 +275,8 @@ struct func_80241718_S1 {
     Vec3 unk48;
 };
 
-struct Query_func_80241BAC_de;
-struct Query_func_80241BAC_de {
+struct SurfaceHit;
+struct SurfaceHit {
     s32 word0;
     s32 word4;
     s32 word8;
@@ -296,7 +296,7 @@ struct ActorRecAtB0 {
     u8 pad00[0x3C];
     s32 flags;
     u8 pad40[0x70];
-    Query_func_80241BAC_de saved_query;
+    SurfaceHit saved_query;
 };
 
 struct ObjRecAt34;
@@ -347,9 +347,9 @@ struct func_802414E4_S1 {
 
 extern void func_802428EC_de(void *arg0, void *arg1);
 
-struct Input_func_80241BAC_de;
+struct CollisionProbe;
 struct OwnerRecAt18;
-struct Input_func_80241BAC_de {
+struct CollisionProbe {
     u8 kind;
     u8 pad01[7];
     f32 x;
@@ -408,7 +408,7 @@ struct Actor_func_80241BAC_de {
     u8 pad40[0x1C];
     Vec3 movement; /* 0x5C */
     u8 pad68[0x48];
-    Query_func_80241BAC_de saved_query;
+    SurfaceHit saved_query;
 };
 
 struct ObjRecAt34;
@@ -432,8 +432,8 @@ struct Actor_func_80242550_de {
 struct Actor_func_80242550_de;
 typedef struct Actor_func_80242550_de Actor_func_80242550_de;
 
-struct Input_func_80241BAC_de;
-typedef struct Input_func_80241BAC_de Input_func_80241BAC_de;
+struct CollisionProbe;
+typedef struct CollisionProbe CollisionProbe;
 
 struct Input_func_802426CC_de;
 struct Input_func_802426CC_de {

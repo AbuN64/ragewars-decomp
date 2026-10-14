@@ -9,7 +9,7 @@
 #include "span_16E000/code_8044ACCC.h"
 struct ObjB;
 extern void **func_8025193C_de(s32, s32, s32, s32, s32, s32, void *, void *, s32);
-extern Node_func_80251F6C_de *func_80251F6C_de(s32, s32, Node_func_80251F6C_de *, Node_func_80251F6C_de *, s32, void *, void *, void *, s32);
+extern CachedResource *func_80251F6C_de(s32, s32, CachedResource *, CachedResource *, s32, void *, void *, void *, s32);
 extern s32 func_8028FE28_de(s32 *, s32, s32);
 extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
 extern void func_80253754_de(void *, Node80253610 *);
@@ -21,7 +21,7 @@ void func_8024F294_de(struct ObjB *object, s32 unused) {
     s32 *table;
     void **resource;
     void **found;
-    Node_func_80251F6C_de *block;
+    CachedResource *block;
     s32 key;
     s32 index;
     index = obj->type;

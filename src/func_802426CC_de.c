@@ -11,13 +11,13 @@ extern f32 func_8024D398_de(void *);
 extern f32 func_8024E464_de(Input_func_802426CC_de *);
 extern f32 func_8024D284_de(Input_func_802426CC_de *);
 extern f32 func_8024E420_de(void *);
-extern f32 func_80241728_de(Query_func_80241BAC_de *, f32, f32);
+extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 extern s32 func_8024491C_de(Input_func_802426CC_de *, Vec3, Vec3, void *, f32, f32, f32, f32);
 extern void *D_80103FCC;
 extern char D_801000F0;
 
 
-void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, Query_func_80241BAC_de *query) {
+void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *input, SurfaceHit *query) {
     u8 collision[0x108];
     Vec3 next;
     f32 hit_y;

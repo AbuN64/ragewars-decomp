@@ -12,7 +12,7 @@ extern f32 func_802B72B0_de(f32);
 
 
 f32 func_802760BC_de(void *arg0, s32 arg1) {
-    Polygon_func_80275410_de *polygon = arg0;
+    Triangle *polygon = arg0;
     Vec3 *v0;
     Vec3 *v1;
     f32 dx, dz;

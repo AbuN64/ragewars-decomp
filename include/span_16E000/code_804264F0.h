@@ -187,14 +187,14 @@ struct func_80428388_S1 {
 
 extern void func_804274B0_de();
 
-struct Item_func_8042B4D4_de;
+struct MenuMarker;
 struct Screen_func_80426918_de;
 struct Screen_func_80426918_de {
     char pad0[0x978];
-    struct Item_func_8042B4D4_de *left;
+    struct MenuMarker *left;
     char pad97C[2];
     u16 leftSpeed;
-    struct Item_func_8042B4D4_de *right;
+    struct MenuMarker *right;
     char pad984[2];
     u16 rightSpeed;
     s32 state;
@@ -202,9 +202,9 @@ struct Screen_func_80426918_de {
     void *prompt;
     void *button;
     char pad998[0xA48 - 0x998];
-    struct Item_func_8042B4D4_de *pulse;
+    struct MenuMarker *pulse;
     char padA4C[4];
-    struct Item_func_8042B4D4_de *banner;
+    struct MenuMarker *banner;
     s32 clock;
     s32 requested;
 };

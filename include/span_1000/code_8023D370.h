@@ -139,9 +139,9 @@ typedef struct func_8023ED54_S1 func_8023ED54_S1;
 struct Polygon;
 typedef struct Polygon Polygon_func_8023E8D4_de;
 
-struct Ray_func_8023E8D4_de;
+struct CapsuleSweep;
 struct MotionSurface;
-struct Ray_func_8023E8D4_de {
+struct CapsuleSweep {
     char pad0[0x08];
     f32 radius; /* 0x08 */
     f32 secondaryRadius; /* 0x0C */
@@ -184,8 +184,8 @@ struct Input {
 struct func_8023EE50_S1;
 typedef struct func_8023EE50_S1 func_8023EE50_S1;
 
-struct Ray_func_8023E8D4_de;
-typedef struct Ray_func_8023E8D4_de Ray_func_8023E8D4_de;
+struct CapsuleSweep;
+typedef struct CapsuleSweep CapsuleSweep;
 
 struct func_8023E844_S1;
 typedef struct func_8023E844_S1 func_8023E844_S1;
@@ -215,7 +215,7 @@ extern s32 func_8023E864_de(void *arg0, void *arg1);
 struct Polygon;
 
 
-struct Ray_func_8023E8D4_de;
+struct CapsuleSweep;
 
 
 struct Range;
@@ -401,8 +401,8 @@ struct func_8023E6C0_S1 {
     float unk18;
 };
 
-struct Ray_func_8023E8D4_de;
-typedef struct Ray_func_8023E8D4_de Ray_func_8023DF70_de;
+struct CapsuleSweep;
+typedef struct CapsuleSweep Ray_func_8023DF70_de;
 
 extern f32 D_800C3670_de;
 extern f32 D_800C3674_de;

@@ -170,11 +170,11 @@ struct Style {
     s32 v[5];
 };
 
-struct Widget_func_8040F6DC_de;
-struct Widget_func_8040F6DC_de {
+struct UiWidget;
+struct UiWidget {
     s32 name;
-    struct Widget_func_8040F6DC_de *next;
-    struct Widget_func_8040F6DC_de *children;
+    struct UiWidget *next;
+    struct UiWidget *children;
     char padC[2];
     u16 type;
     char pad10[2];
@@ -210,8 +210,8 @@ struct FileHeader {
     struct EntryRecAt18V1 *unk25C;
 };
 
-struct Widget_func_8040F6DC_de;
-typedef struct Widget_func_8040F6DC_de Widget_func_8040F6DC_de;
+struct UiWidget;
+typedef struct UiWidget UiWidget;
 
 struct Pair2C;
 struct Pair2C {

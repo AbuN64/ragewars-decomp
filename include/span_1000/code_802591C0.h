@@ -348,16 +348,16 @@ typedef struct ManagerRecAtD8V1 ManagerRecAtD8V1;
 
 struct VoiceRecAt8;
 struct VoiceRecAt8 {
-    Link_func_802596B4_de link;
+    ListLink link;
     Header header;
 };
 
 struct ChannelSet;
 struct ChannelSet {
     s32 owner;
-    Link_func_802596B4_de free;
+    ListLink free;
     Header freeHeader;
-    Link_func_802596B4_de active;
+    ListLink active;
     Header activeHeader;
     VoiceRecAt8 voices[32];
 };

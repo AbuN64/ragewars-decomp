@@ -9,7 +9,7 @@
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_C76B0/data.h"
 extern void func_80272018_de(Vec3*,Vec3*,Vec3*);
-extern s32 func_8023E8D4_de(Ray_func_8023E8D4_de*,Polygon_func_8023E8D4_de*,s32);
+extern s32 func_8023E8D4_de(CapsuleSweep*,Polygon_func_8023E8D4_de*,s32);
 void func_802433DC_de(ContextB0 *mesh,CollisionVertex **points) {
     Vec3 vertex;
     Vec3 edgeA;
@@ -17,7 +17,7 @@ void func_802433DC_de(ContextB0 *mesh,CollisionVertex **points) {
     Polygon polygon;
     Vec3 offset;
     MotionSurface *surface;
-    Ray_func_8023E8D4_de *ray;
+    CapsuleSweep *ray;
     s32 i;
     s32 byteOffset;
     s32 sideType;

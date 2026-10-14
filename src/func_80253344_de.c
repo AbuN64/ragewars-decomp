@@ -21,7 +21,7 @@ void func_80253344_de(s32 unused) {
     State802532E4 *temp_s1;
     void *queueAddress;
     Queue_func_802BB2A0_de *receive;
-    Queue_func_802BB420_de *send;
+    RingQueue *send;
 
     temp_s1 = &D_8010117C;
     var_s0 = 1;
