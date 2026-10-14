@@ -1,6 +1,0 @@
-#ifndef RAGEWARS_AUDIO_EVENTS_H
-#define RAGEWARS_AUDIO_EVENTS_H
-
-enum { AL_SEQ_END_EVT = 4 };
-
-#endif

@@ -1,3 +1,0 @@
-unsigned int D_d0_36a1c50337b8b72b[4] = {
-    0x00000000, 0x00000000, 0xFFFFFFF1, 0xFFFFFFF1,
-};

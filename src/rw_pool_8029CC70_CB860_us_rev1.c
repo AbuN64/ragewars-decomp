@@ -1,4 +1,0 @@
-const unsigned int D_auto_src_rw_pool_8029CC70_CB860_us_rev1[9] = {
-    0x3F800000, 0xBF800000, 0xBC3F5FAF, 0x3CFD10F8, 0x3D4D8392, 0x3DB63A9E, 0x3E5BBFCA, 0x3FC90FDA,
-    0x3FC90FDB,
-};

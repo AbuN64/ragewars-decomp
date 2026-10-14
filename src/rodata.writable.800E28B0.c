@@ -1,3 +1,0 @@
-unsigned int D_auto_rodata_writable_800E28B0[8] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000000,
-};

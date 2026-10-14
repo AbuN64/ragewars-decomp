@@ -1,4 +1,0 @@
-unsigned int D_auto_rodata_unresolved_800CDA3C_unclaimed_CE6E0_unclaimed_CE750_unclaimed_CE8B4[11] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000,
-};

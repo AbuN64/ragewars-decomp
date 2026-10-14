@@ -1,4 +1,0 @@
-unsigned int D_auto_src_ragewars_audio_effect_D8DA0_us_rev1[10] = {
-    0x00000001, 0x00001F40, 0x00000000, 0x00001BF8, 0x00002EE0, 0x00000000, 0x00007FFF, 0x00000000,
-    0x00000000, 0x00000000,
-};

@@ -1,4 +1,0 @@
-unsigned int D_auto_src_ragewars_character_preview_positions_10_us_rev1[12] = {
-    0x42200000, 0xC2700000, 0xC2C80000, 0xC2200000, 0xC2700000, 0xC2C80000, 0x422C0000, 0xC2BE0000,
-    0xC2A00000, 0xC1A80000, 0xC2BE0000, 0xC2A00000,
-};

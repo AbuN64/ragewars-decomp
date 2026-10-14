@@ -1,4 +1,0 @@
-/* ROM-grounded data: src/rw_text_804009F4_E1740_us_rev1.c */
-const unsigned char D_blob_10ea9112e7af26a5bf4c[7] = {
-    0x43, 0x69, 0x6E, 0x65, 0x6D, 0x61, 0x00,
-};

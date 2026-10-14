@@ -1,4 +1,0 @@
-/* ROM-grounded data: src/rw_actor_state_animation_CE034_us_rev1.c */
-unsigned int D_blob_469d2ff2feb95c6a748d[3] = {
-    0x3F800000, 0x00000005, 0x00000000,
-};

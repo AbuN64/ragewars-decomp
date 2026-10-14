@@ -1,4 +1,0 @@
-#ifndef UNBAKE_SPAN_1000_DATA_H
-#define UNBAKE_SPAN_1000_DATA_H
-
-#endif

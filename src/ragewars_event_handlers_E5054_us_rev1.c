@@ -1,6 +1,0 @@
-/* ROM-grounded us-rev1 data; explicit withholding in other holders. */
-unsigned int D_blob_5a30de177bdbcc6f9c51[18] = {
-    0x00000E08, 0x0000001B, 0x00421C1C, 0x00000E06, 0x0000001B, 0x00421B20, 0x00000E03, 0x0000001B,
-    0x00421BEC, 0x00000002, 0x0000001B, 0x00421DC4, 0x00000001, 0x0000001B, 0x00421D18, 0x00000000,
-    0x00000000, 0x00000000,
-};
