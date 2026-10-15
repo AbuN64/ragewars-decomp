@@ -9,8 +9,6 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 <!-- progress -->
 <pre><code>all      [███████████▒▒▒▒▒▒░░░]  55.50% (~86.20%)  3,806,324 of 6,857,872 bytes</code><br><code>de       [███████████▒▒▒▒▒▒░░░]  56.53% (~86.90%)  781,604 of 1,382,608 bytes</code><br><code>eu       [██████████▒▒▒▒▒▒░░░░]  52.25% (~82.51%)  724,996 of 1,387,504 bytes</code><br><code>eu-x     [██████████▒▒▒▒▒▒░░░░]  51.21% (~83.04%)  675,064 of 1,318,176 bytes</code><br><code>us       [███████████▒▒▒▒▒▒░░░]  58.32% (~88.34%)  806,667 of 1,382,992 bytes</code><br><code>us-rev1  [███████████▒▒▒▒▒▒▒░░]  58.99% (~90.04%)  817,993 of 1,386,592 bytes</code></pre>
 
-<img src="docs/memory-map-us-rev1.svg">
-
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
 | <pre><code>code      [█████████▒▒▒▒▒▒▒░░░░]  46.98% (~84.98%)  519,296 of 1,105,268</code><br><code>data      [██████████████████░░]  94.57%  262,308 of 277,340</code><br><code>functions [███████████▒▒▒▒▒▒▒░░]  58.92% (~93.53%)  2,034 of 3,452</code></pre> |
@@ -44,5 +42,7 @@ For detailed instructions please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Dependencies
 
-- [AbuCakeUnbake64](https://github.com/AbuN64/cake-unbake-64)
-- [GCC 2.8.1 for mips-nintendo-nu64](https://github.com/pmret/gcc-papermario) at `d97824ffc7517675646960442b3f512a473e4404`, the compiler of toolchain `gcc-2.8.1`, assembled by SN ASN64 version 2.81
+| Compiler | Toolchain | Assembler | Source |
+|---|---|---|---|
+| GCC 2.8.1 | `gcc-2.8.1-sn64` | SN ASN64 2.81 | [pmret/gcc-papermario](https://github.com/pmret/gcc-papermario/tree/d97824ffc7517675646960442b3f512a473e4404) `d97824f` |
+| GCC 2.7.2 (KMC) | `gcc-2.7.2-kmc` | SN ASN64 2.81 | [decompals/mips-gcc-2.7.2](https://github.com/decompals/mips-gcc-2.7.2/tree/43d1cdb67ed135879869b5266f01efaaada5e35a) `43d1cdb` |
