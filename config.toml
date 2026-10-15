@@ -6,6 +6,7 @@ name = "RageWars"
 title = "Turok: Rage Wars"
 versions = ["de", "eu", "eu-x", "us", "us-rev1"]
 names_from = "us-rev1"
+readme_map = "us-rev1"
 toolchain = "gcc-2.8.1-sn64"
 library_dirs = ["src/libgcc", "src/sdk/libgultra"]
 
