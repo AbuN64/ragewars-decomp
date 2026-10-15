@@ -111849,6 +111849,12 @@ scores = {de = 0.5, eu = 0.5, eu-x = 0.5, us = 0.5, us-rev1 = 0.5}
 key = {de = "820763dde9aa17e57bba57369746af6de9bf4e5b9c18d77dcaca0da5eff6180f", eu = "f83f3243470e8d181d3be7f3683f42a43db67b92c9f6b3f9dde640b60b72c979", eu-x = "ceb78b0284e061490d497fd49a5c8ccde8e689257eb3179b86bde7d0ca2d560d", us = "b33fed0d66cd5d707e284c33529caaf9ef3850ea6635081b55ba8b5c797f1eca", us-rev1 = "d9ec4cbe3861a066d2b4613affe352931f7d6d9f3dc9636c3b16588ae1185990"}
 
 [[fuzzy]]
+member = "func_802A0C14_eu_x"
+path = "src/fuzzy/func_802A0C14_eu_x.c"
+scores = {eu-x = 0.75, us-rev1 = 0.75}
+key = {eu-x = "29e82582c4909481bf3c47d22691deb1528c5004a0faa4a08ac7f443ce7f0184", us-rev1 = "e049615fdfdc1cb3242d70e71a14b9d488634eac1edb8f6e21056d3a2ff278b4"}
+
+[[fuzzy]]
 member = "func_802A1270_de"
 path = "src/fuzzy/func_802A1270_de.c"
 scores = {de = 0.6883116883116883, eu = 0.6883116883116883, eu-x = 0.6973684210526315, us = 0.6883116883116883, us-rev1 = 0.6973684210526315}
