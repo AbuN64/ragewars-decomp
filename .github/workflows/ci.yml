@@ -1,5 +1,5 @@
 name: CI
-on:  # progress sites read the report artifacts; main reports at most once a day, and only after a change
+on:  # main runs at most once a day, and only after a change
   schedule:
     - cron: "0 12 * * *"
   pull_request:
@@ -42,28 +42,3 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = pull_request ]; then BASE="origin/$BASE_REF"; else BASE="$BEFORE"; fi
           case "$BASE" in *0000000000000000000000000000000000000000) BASE=4b825dc642cb6eb9a060e54bf8d69288fbee4904;; esac
           unbake audit --against "$BASE"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: de_report
-          path: versions/de/report.json
-          if-no-files-found: error
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: eu_report
-          path: versions/eu/report.json
-          if-no-files-found: error
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: eu-x_report
-          path: versions/eu-x/report.json
-          if-no-files-found: error
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: us_report
-          path: versions/us/report.json
-          if-no-files-found: error
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: us-rev1_report
-          path: versions/us-rev1/report.json
-          if-no-files-found: error
