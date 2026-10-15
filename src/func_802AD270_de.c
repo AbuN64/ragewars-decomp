@@ -1,4 +1,1 @@
-#include "span_1000/code_802AD504.h"
-unsigned short func_802AD270_de(float arg0) {
-    return *(unsigned short *)&arg0;
-}
+unsigned char D_auto_func_802AD504_eu_padding_AE104[12] = { 0x02, 0x30, 0x18, 0x23, 0x10, 0x75, 0x00, 0x0B, 0x28, 0x62, 0x00, 0x02 };

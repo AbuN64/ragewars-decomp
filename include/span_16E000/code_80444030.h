@@ -149,4 +149,8 @@ typedef struct MenuItemRecAt14 MenuItemRecAt14;
 s32 func_8044488C_de(struct LayeredText *field);
 #endif
 
+extern u8 *D_800D35EC[];
+extern u8 *D_800D35F0[];
+extern char D_800DE750_de[];
+
 #endif

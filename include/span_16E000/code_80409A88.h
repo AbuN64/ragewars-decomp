@@ -78,4 +78,14 @@ extern char *func_8040A09C_de(struct Shared_PakMenu *menu);
 s32 func_8040A300_de(struct LayeredText *field, struct Shared_PakMenu *holder);
 #endif
 
+extern s32 func_802645D0_de(s32);
+
+extern void func_80404E28_de(s32);
+void func_80404E28_de(s32);
+s32 func_80404F04_de(s32);
+
+extern char D_800DCD80[];
+
+extern char D_800DCD84[];
+
 #endif

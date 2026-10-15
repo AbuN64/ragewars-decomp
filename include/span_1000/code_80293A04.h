@@ -123,4 +123,12 @@ struct func_80293378_S1 {
 
 extern void func_80293FF0_de(void);
 
+extern void func_8040C428_de(s32 arg0);
+extern void func_80296004_de(unsigned int value);
+extern s32 D_800CD77C;
+
+extern void func_80291FD8_de(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7);
+
+extern s32 D_800CC380;
+
 #endif

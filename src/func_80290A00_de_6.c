@@ -1,0 +1,12 @@
+#include "span_1000/code_80290980.h"
+
+void func_80290A50_us_rev1(void) {
+}
+
+void func_80290A58_us_rev1(void) {
+}
+
+void func_80290A60_us_rev1(void) {
+}
+
+unsigned char D_auto_func_80290A68_us_rev1_padding_91668[8] = { 0x3C, 0x03, 0x80, 0x15, 0x8C, 0x63, 0x36, 0xB8 };

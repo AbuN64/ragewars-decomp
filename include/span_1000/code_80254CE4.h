@@ -206,4 +206,11 @@ typedef struct ResourceLoadWorker {
     u8 stack[0x1000];
 } ResourceLoadWorker;
 
+extern s32 D_800CD8AC_de;
+extern s32 D_800CD704;
+extern s32 D_800CD8AC_de;
+
+extern s32 D_80101198;
+extern s32 D_800CB6F8;
+
 #endif

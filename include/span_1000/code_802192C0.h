@@ -370,4 +370,13 @@ typedef struct AnimationSprite {
     s32 active;
 } AnimationSprite;
 
+void func_80219688_de(char *, char *, void *);
+void func_80282A44_de(void *, s32);
+s32 func_8021BFC4_de();
+extern s32 D_8014280C[];
+
+s32 func_80229C0C_de(void *, s32);
+void func_8022B530_de(s32);
+extern void *D_800F3D08;
+
 #endif

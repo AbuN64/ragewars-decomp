@@ -281,4 +281,7 @@ typedef struct func_8020EEA4_S3 func_8020EEA4_S3;
 extern int func_8020EF60_us(void * arg0);
 extern int func_8020EF80_eu(void * arg0);
 s32 func_8020EF80_eu_x(PickupGoalObj8020EF60 *arg0);
+
+extern s32 func_80232ABC_de(void *arg0);
+
 #endif

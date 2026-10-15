@@ -1,54 +1,59 @@
 #include "span_1000/code_80243A80.h"
+#include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
+#include "common/unused.h"
+#include "shared/legacy_collision_actor.h"
+#include "shared/motion_step.h"
 #include "span_C76B0/data.h"
 #include "types.h"
 
-/* Moves an actor through collision queries and resolves its position and contact state. */
-
-/* The values func_80243A90_de loads by address:
- * 0x800C8880 = -0.45 (float, D_800C3790_de in this cartridge's tables)
- * 0x800C8884 = -0.7071 (float, unnamed in this cartridge's tables)
- * 0x800C8888 = 204.79999 (float, D_800C3798_de in this cartridge's tables)
- * 0x800C888C = 1.0 (float, unnamed in this cartridge's tables)
- * 0x800C8890 = 51.199997 (float, D_800C37A0_de in this cartridge's tables)
- * 0x800C8894 = 1.024 (float, D_800C37A4_de in this cartridge's tables)
- * 0x800C8898 = 51.199997 (float, D_800C37A8_de in this cartridge's tables)
- */
-
-
-#include "shared/legacy_collision_actor.h"
-
-s32 func_8023D158_de(char *);
 void func_8023E45C_de(void *);
-void func_8023E690_de(void *, f32, f32, f32, f32);
+
 void func_8023E6EC_de(void *, void *);
+
 void func_8023E838_de(void *);
+
 void func_8023EBD4_de(void *);
+
 void func_8023EBFC_de(void *, void *);
+
 void func_8023EC54_de(void *, void *);
+
 void func_8023ECBC_de(void *, u16 *);
+
 f32 func_802417C4_de(f32 *);
+
 f32 func_8024D284_de(void *);
+
 f32 func_8024E420_de(void *);
+
 f32 func_8024E464_de(void *);
+
 f32 func_80273F94_de(f32, f32);
+
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+
 f32 func_8027525C_de(void *, f32, f32);
+
 f32 func_80275DD4_de(void *, f32, f32);
+
 void * func_8028C050_de(void *, void *);
 
+s32 func_8023CFE0_de();
 
-s32 func_8023CFE0_de();                     /* extern */
-s32 func_8023D380_de();                         /* extern */
+                     /* extern */
+
+
+                         /* extern */
 extern Func80243A80Global *D_80103FCC;
+
 extern s32 D_80103FD0;
 
 extern s32 D_801001D0;
+
 extern s32 D_80100338;
 
 extern float D_800C379C_de;
-
-extern s32 D_801001D0;
 
 /* Moves an actor through collision queries and updates its contact flags and resolved position. */
 /* Warning: Gap in callee-saved word stack region.
@@ -56,8 +61,21 @@ extern s32 D_801001D0;
 typedef Shared_Func80243A80Frame Func80243A80Frame;
 
 typedef Vec3 Func80243A80Vec3;
+
 typedef Shared_Func80243A80Bits Func80243A80Bits;
+
+extern void func_8023E6D0_de(void *arg0, f32 arg1);
+
+extern void func_8023EBD4_de(void *arg0);
+
+extern void func_8023E838_de(void *arg0);
+
+extern void func_8023E45C_de(void *arg0);
+
 s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
+    void func_8023E690_de(void *, f32, f32, f32, f32);
+    s32 func_8023D380_de();
+    s32 func_8023D158_de(char *);
     Func80243A80Frame frame;
     f32 temp_f0;
     f32 temp_f0_2;
@@ -332,4 +350,316 @@ block_71:
         return var_s3;
     }
     return 0;
+}
+
+s32 func_802444A4_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3) {
+    extern s32 func_8023D380_de(void *arg0);
+    extern s32 func_8023D158_de(void *arg0);
+    Work80244494 work;
+    VectorPair vectors;
+    char *object = arg0;
+    char *out;
+    s32 count;
+    s32 active;
+    s32 result;
+    s32 next;
+    s32 maximum;
+    s32 flags;
+
+    func_8023E6D0_de(work.data, 0.0f);
+    out = work.data;
+    vectors.first = arg1;
+    vectors.second = arg2;
+    func_8023EBD4_de(out);
+    if (vectors.first.x == vectors.second.x &&
+        vectors.first.y == vectors.second.y &&
+        vectors.first.z == vectors.second.z) {
+        return 0;
+    }
+
+    D_800CB418_de += 1;
+    maximum = D_800CB41C_de;
+    next = D_800CB418_de;
+    if (next < maximum) {
+        next = maximum;
+    }
+    D_800CB41C_de = next;
+
+    ((struct ActorMotion *)(out))->actor = object;
+    if (object != 0) {
+        s32 value = 0;
+        if (*(u8 *)object == 1) {
+            flags = ((struct LevelActor *)(object))->flags;
+            flags &= 0x300000;
+            value = flags != 0;
+        }
+        ((struct ActorMotion *)(out))->actorFlags = value;
+    } else {
+        ((struct ActorMotion *)(out))->actorFlags = 0;
+    }
+
+    ((struct ActorMotion *)(out))->start = vectors.first;
+    ((struct ActorMotion *)(out))->end = vectors.second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
+    func_8023E838_de(out);
+
+    active = 1;
+    count = 0;
+    do {
+        if (func_8023D158_de(out) != 0) {
+            func_8023E45C_de(out);
+            count += 1;
+            result = func_8023D380_de(out);
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
+            active -= 1;
+        } else {
+            result = 0;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
+            active -= 1;
+        }
+    } while (result != 0 && active != 0);
+    return count;
+}
+
+s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
+                   f32 arg4) {
+    extern s32 func_8023D380_de(void *arg0);
+    extern s32 func_8023D158_de(void *arg0);
+    Work80244494 work;
+    VectorPair vectors;
+    char *object = arg0;
+    char *out;
+    s32 count;
+    s32 active;
+    s32 result;
+    s32 next;
+    s32 maximum;
+    s32 flags;
+
+    func_8023E6D0_de(work.data, arg4);
+    out = work.data;
+    vectors.first = arg1;
+    vectors.second = arg2;
+    func_8023EBD4_de(out);
+    if (vectors.first.x == vectors.second.x &&
+        vectors.first.y == vectors.second.y &&
+        vectors.first.z == vectors.second.z) {
+        return 0;
+    }
+
+    D_800CB418_de += 1;
+    maximum = D_800CB41C_de;
+    next = D_800CB418_de;
+    if (next < maximum) {
+        next = maximum;
+    }
+    D_800CB41C_de = next;
+
+    ((struct ActorMotion *)(out))->actor = object;
+    if (object != 0) {
+        s32 value = 0;
+        if (*(u8 *)object == 1) {
+            flags = ((struct LevelActor *)(object))->flags;
+            flags &= 0x300000;
+            value = flags != 0;
+        }
+        ((struct ActorMotion *)(out))->actorFlags = value;
+    } else {
+        ((struct ActorMotion *)(out))->actorFlags = 0;
+    }
+
+    ((struct ActorMotion *)(out))->start = vectors.first;
+    ((struct ActorMotion *)(out))->end = vectors.second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
+    func_8023E838_de(out);
+
+    active = 1;
+    count = 0;
+    do {
+        if (func_8023D158_de(out) != 0) {
+            func_8023E45C_de(out);
+            count += 1;
+            result = func_8023D380_de(out);
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
+            active -= 1;
+        } else {
+            result = 0;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
+            active -= 1;
+        }
+    } while (result != 0 && active != 0);
+    return count;
+}
+
+s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
+                  Vec3 arg4, f32 arg5) {
+    extern void func_8023E690_de(void *arg0, Vec3 arg1, f32 arg2);
+    extern s32 func_8023D380_de(void *arg0);
+    extern s32 func_8023D158_de(void *arg0);
+    Work80244494 work;
+    VectorPair vectors;
+    char *object = arg0;
+    char *out;
+    s32 count;
+    s32 active;
+    s32 result;
+    s32 next;
+    s32 maximum;
+    s32 flags;
+
+    func_8023E690_de(work.data, arg4, arg5);
+    out = work.data;
+    vectors.first = arg1;
+    vectors.second = arg2;
+    func_8023EBD4_de(out);
+    if (vectors.first.x == vectors.second.x &&
+        vectors.first.y == vectors.second.y &&
+        vectors.first.z == vectors.second.z) {
+        return 0;
+    }
+
+    D_800CB418_de += 1;
+    maximum = D_800CB41C_de;
+    next = D_800CB418_de;
+    if (next < maximum) {
+        next = maximum;
+    }
+    D_800CB41C_de = next;
+
+    ((struct ActorMotion *)(out))->actor = object;
+    if (object != 0) {
+        s32 value = 0;
+        if (*(u8 *)object == 1) {
+            flags = ((struct LevelActor *)(object))->flags;
+            flags &= 0x300000;
+            value = flags != 0;
+        }
+        ((struct ActorMotion *)(out))->actorFlags = value;
+    } else {
+        ((struct ActorMotion *)(out))->actorFlags = 0;
+    }
+
+    ((struct ActorMotion *)(out))->start = vectors.first;
+    ((struct ActorMotion *)(out))->end = vectors.second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
+    func_8023E838_de(out);
+
+    active = 1;
+    count = 0;
+    do {
+        if (func_8023D158_de(out) != 0) {
+            func_8023E45C_de(out);
+            count += 1;
+            result = func_8023D380_de(out);
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
+            active -= 1;
+        } else {
+            result = 0;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
+            active -= 1;
+        }
+    } while (result != 0 && active != 0);
+    return count;
+}
+
+s32 func_80244B68_de(char *arg0, char *arg1, Vec3 first, Vec3 second,
+                   s32 arg4) {
+    extern s32 func_8023D380_de(void *arg0);
+    extern s32 func_8023D158_de(void *arg0);
+    char *object = arg0;
+    char *out = arg1;
+    s32 count;
+    s32 active;
+    s32 result;
+    s32 next;
+    s32 maximum;
+    s32 flags;
+
+    func_8023EBD4_de(out);
+    if (first.x == second.x && first.y == second.y && first.z == second.z) {
+        return 0;
+    }
+
+    D_800CB418_de += 1;
+    maximum = D_800CB41C_de;
+    next = D_800CB418_de;
+    if (next < maximum) {
+        next = maximum;
+    }
+    D_800CB41C_de = next;
+
+    ((struct ActorMotion *)(out))->actor = object;
+    if (object != 0) {
+        s32 value = 0;
+        if (*(u8 *)object == 1) {
+            flags = ((struct LevelActor *)(object))->flags;
+            flags &= 0x300000;
+            value = flags != 0;
+        }
+        ((struct ActorMotion *)(out))->actorFlags = value;
+    } else {
+        ((struct ActorMotion *)(out))->actorFlags = 0;
+    }
+
+    ((struct ActorMotion *)(out))->start = first;
+    ((struct ActorMotion *)(out))->end = second;
+    ((struct ActorMotion *)(out))->grounded = 0;
+    ((struct ActorMotion *)(out))->candidate = 0;
+    ((struct ActorMotion *)(out))->candidateIndex = 0;
+    ((struct ActorMotion *)(out))->orientationActive = 0;
+    ((struct ActorMotion *)(out))->iteration = 0;
+    ((struct ActorMotion *)(out))->surface = arg4;
+    ((struct ActorMotion *)(out))->queryFlags = 0;
+    ((struct ActorMotion *)(out))->horizontalTicks = 0;
+    ((struct ActorMotion *)(out))->verticalTicks = 0;
+    func_8023E838_de(out);
+
+    active = 1;
+    count = 0;
+    do {
+        if (func_8023D158_de(out) != 0) {
+            func_8023E45C_de(out);
+            count += 1;
+            result = func_8023D380_de(out);
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->interpolated;
+            ((struct ActorMotion *)(out))->end = ((struct ActorMotion *)(out))->position;
+            ((struct ActorMotion *)(out))->orientation = ((struct ActorMotion *)(out))->projectedOrientation;
+            active -= 1;
+        } else {
+            result = 0;
+            ((struct ActorMotion *)(out))->start = ((struct ActorMotion *)(out))->end;
+            active -= 1;
+        }
+    } while (result != 0 && active != 0);
+    return count;
 }

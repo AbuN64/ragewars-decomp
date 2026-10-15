@@ -47,4 +47,8 @@ struct Board {
 
 extern s32 func_80296C30_de(f32 *arg0, f32 *arg1);
 
+extern void *func_80411DCC_de(s32 index);
+
+s32 func_80411DF0_de(s32);
+
 #endif

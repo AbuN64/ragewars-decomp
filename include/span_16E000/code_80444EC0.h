@@ -58,4 +58,31 @@ s32 func_80445ECC(struct LayeredText *field);
 s32 func_80445AB8(struct LayeredText *field);
 #endif
 
+extern u8 *D_800D3D8C;
+extern u8 *D_800D3D90;
+extern u8 *D_800D3D94;
+extern u8 *D_800E4084[];
+extern u8 *D_800E4094[];
+extern u8 *D_800E40A4[];
+extern char D_800EEE10[];
+extern char D_800EEE18[];
+extern char D_800E27E0[];
+extern char D_800E27E8[];
+
+extern char *D_800D7DC8;
+extern char *D_800D7DCC;
+extern char *D_800D7DD0;
+
+extern u8 *D_800D3DBC;
+extern char D_800DE7B0_de[];
+
+extern void func_8025E29C_de(s32);
+
+extern u32 D_80142218;
+extern u8 *D_800D3624;
+
+extern u8 *D_800D7DD8;
+extern u8 *D_800D3DB0;
+extern u8 *D_800D3DB4;
+
 #endif

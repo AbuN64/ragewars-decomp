@@ -90,4 +90,7 @@ struct ParamsRecAt8V3;
 typedef struct ParamsRecAt8V3 ParamsRecAt8V3;
 
 s32 func_802B2CF0_de(s32 val, f32 div);
+
+extern const f32 D_800C7544;
+
 #endif

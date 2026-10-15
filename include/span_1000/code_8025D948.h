@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_1000_CODE_8025D948_H
 #include "types.h"
 #include "common/types_06e4f7ef1f9e.h"
+#include "common/types_8a8189af7b05.h"
 struct StateRecAt34;
 struct StateRecAt34 {
     char pad[0x18];
@@ -171,5 +172,21 @@ extern void func_8025DB58_de(s32 a);
 extern void func_8025E150_de(void);
 
 extern void func_8025E1EC_de(s32 arg0);
+
+extern s32 func_802BEAA4_de(void *, s32, void *);
+extern s32 func_802B51B8_de(void *, s32, void *);
+
+extern void func_80257360_de(void *arg0);
+extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
+extern s32 func_80258D10_de(void *arg0);
+extern void func_80258D08_de(void *arg0, s32 arg1);
+extern s32 func_8025826C_de(void *, s32, Vec3, s32);
+extern int func_80258D10_de(void *arg0);
+extern void func_80258D08_de(void *arg0, int arg1);
+extern int func_8025826C_de(void *arg0, int arg1, Vec3 arg2, int arg3);
+
+extern s32 func_80258D50_de(char *obj, s32 owner);
+
+extern void func_802AFEE0_de(s32 arg0, s32 arg1, s8 arg2);
 
 #endif

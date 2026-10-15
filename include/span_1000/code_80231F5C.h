@@ -270,4 +270,16 @@ extern void func_8023293C_de(void *arg0, void *arg1, void *arg2);
 
 extern float D_800C2FC8_de;
 
+extern void func_8022FDAC_de(void *arg0, void *arg1);
+
+extern void func_8022B190_de(s32);
+
+extern void func_802739C4_de(void *, float);
+extern void func_8022AEA0_de(void *arg0, s32 arg1);
+extern void func_802739C4_de(void *, f32);
+
+extern void func_8022B9C4_de(void *arg0);
+
+extern void func_8022B1A8(void *, s32);
+
 #endif

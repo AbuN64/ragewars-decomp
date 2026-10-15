@@ -1,14 +1,1 @@
-#include "common/unused.h"
-#include "common/types_1dc8418c21db.h"
-#include "common/types_8fd754e1e915.h"
-#include "span_1000/code_8025E568.h"
-
-/** Return the signed halfword at offset 0x14 in the supplied object. */
-int func_8025E590_de(void *object) {
-    return ((Controller_func_80259C5C_de *)object)->y;
-}
-
-/** Return the signed halfword at offset twelve. */
-int func_8025E59C_de(void *arg0) {
-    return ((Controller_func_80259C5C_de *)arg0)->fieldC;
-}
+unsigned char D_auto_func_8025E568_eu_padding_5F168[8] = { 0x02, 0x02, 0x80, 0x21, 0x0C, 0x0A, 0xF5, 0x90 };

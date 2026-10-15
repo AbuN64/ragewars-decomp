@@ -1,24 +1,46 @@
 #include "span_1000/code_8026AC38.h"
-#include "span_1000/code_80296014.h"
-#include "n64sdk.h"
-#include "gbi.h"
-#include "types.h"
-#include "n64sdk.h"
-#include "gfx.h"
-#include "common/types_8a8189af7b05.h"
-#include "span_1000/code_802609CC.h"
 #include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "gbi.h"
+#include "gfx.h"
+#include "n64sdk.h"
 #include "resident_event_handler.h"
 #include "shared/func_8044DA54_de_closed.h"
-
-
-
+#include "span_1000/code_802609CC.h"
+#include "span_1000/code_80296014.h"
+#include "types.h"
 
 extern Gfx *D_80110634;
+
 extern char D_0044B180;
+
 extern u32 D_800CC384;
 
 extern s32 func_8026925C_de(s32);
+
+s32 func_8028FDC8_de(s32 arg0, s32 arg1, s32 *arg2);
+
+extern struct Shape_typemap_165 *func_80254480_de(s32, void *, s32);
+
+void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
+
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+
+extern s32 D_80110620;
+
+extern signed char D_800D1610[3];
+
+extern char D_80145040;
+
+extern void func_80270700_de(f32 *matrix, void *model);
+
+extern void func_802732D0_de(f32 *matrix, Vec3 *position);
+
+extern char *func_8022A414_de(void *players);
+
+extern void func_80271F68_de(Vec3 *out, void *a, Vec3 *b);
+
+extern void func_8027207C_de(Vec3 *v);
 
 void func_8026AC38_de(void) {
     Gfx *cmd;
@@ -48,11 +70,6 @@ void func_8026AC38_de(void) {
 
     func_8026925C_de(0x1D);
 }
-
-s32 func_8028FDC8_de(s32 arg0, s32 arg1, s32 *arg2);
-extern struct Shape_typemap_165 *func_80254480_de(s32, void *, s32);
-void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2);
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 /* Expand packed geometry commands into display lists while rebuilding resource offsets. */
 void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32 sentinel) {
@@ -274,4 +291,37 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
         }
         func_80253D10_de(0, res, allocation);
     }
+}
+
+s32 func_8026B504_de(void *model, void *lights, s32 *flags) {
+    Vec3 direction;
+    Vec3 position;
+    f32 matrix[4][4];
+
+    if (D_80110620 != 0 && (*flags & 0x8000)) {
+        func_80270700_de((f32 *)matrix, model);
+        func_802732D0_de((f32 *)matrix, &position);
+        func_80271F68_de(&direction, func_8022A414_de(&D_80145040) + 0x6E8, &position);
+        func_8027207C_de(&direction);
+        {
+            Gfx *cmd;
+            Gfx *light;
+            Gfx *ambient;
+
+            D_800D1610[0] = direction.x * D_800C4668_de;
+            D_800D1610[1] = direction.y * D_800C4668_de;
+            D_800D1610[2] = direction.z * D_800C4668_de;
+            cmd = D_80110634++;
+            gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
+            gSPMoveMem(D_80110634++, G_MV_LIGHT, 48, 16, (unsigned int)(D_800D1610 - 8));
+            gSPMoveMem(D_80110634++, G_MV_LIGHT, 72, 16, (unsigned int)(D_800D1610 - 0x10));
+        }
+        return 1;
+    }
+    if (lights != 0) {
+        gSPMoveWord(D_80110634++, G_MW_NUMLIGHT, 0, 0x18);
+        gSPMoveMem(D_80110634++, G_MV_LIGHT, 48, 16, (unsigned int)((char *)lights + 8));
+        gSPMoveMem(D_80110634++, G_MV_LIGHT, 72, 16, (unsigned int)lights);
+    }
+    return 0;
 }

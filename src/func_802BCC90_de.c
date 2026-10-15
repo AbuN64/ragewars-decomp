@@ -1,64 +1,44 @@
-#include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802BBC68.h"
+#include "span_1000/code_802B7058.h"
 #include "types.h"
 
-extern char *D_801487B4;
 
 
-
-
-
-void func_802BCC90_de(void) {
-    DiskTransferInfo *temp_a2;
-    u32 status;
-
-    status = *(volatile u32 *)0xA4600010;
-    temp_a2 = (DiskTransferInfo *)(D_801487B4 + 0x14);
-    while (status & 3) {
-        status = *(volatile u32 *)0xA4600010;
-    }
-    *(volatile u32 *)0xA5000510 = temp_a2->bmControl | 0x10000000;
-    status = *(volatile u32 *)0xA4600010;
-    while (status & 3) {
-        status = *(volatile u32 *)0xA4600010;
-    }
-    *(volatile u32 *)0xA5000510 = temp_a2->bmControl;
-    func_802BCD64_de();
-    {
-        volatile u32 *statusAddr = (volatile u32 *)0xA4600010;
-        s32 mask = 0x100401;
-        s32 *flagsAddr = &D_800D5258;
-        s32 flags = *flagsAddr;
-
-        *statusAddr = 2;
-        *flagsAddr = flags | mask;
-    }
-}
-
-extern Ctx D_80149B50;
-extern s32 D_800D5268_de;
-extern void *func_802BC558_de(OSMesgQueue *arg0, OSMesgQueue *arg1, Ctx *arg2);
-extern void func_802BC508_de(void *arg0, void *arg1);
-
-void func_802BCD64_de(void) {
-    OSMesgQueue *node;
-    s32 a0;
-    s32 v1;
+void func_802B6D54_de(f32 *arg0, s32 *arg1) {
+    s32 *inLo;
+    u32 *inHi;
+    f32 *outRow;
+    f32 *outPair;
+    f32 mult;
+    u32 mask;
+    s32 raw0;
+    u32 raw1;
     s32 v0;
-    s32 rem;
+    s32 v1;
+    s32 i;
+    s32 j;
 
-    node = D_80149B50.cur;
-    if (node != 0) {
-        a0 = node->validCount;
-        v1 = node->msgCount;
-        if (a0 < v1) {
-            v0 = node->first + a0;
-            rem = v0 % v1;
-            node->msg[rem] = D_80149B50.f4;
-            node->validCount = node->validCount + 1;
-            if (*node->mtqueue != 0) {
-                func_802BC508_de(&D_800D5268_de, func_802BC558_de(node, node, &D_80149B50));
-            }
-        }
-    }
+    inLo = arg1;
+    inHi = (u32 *) (arg1 + 8);
+    i = 0;
+    mask = 0xFFFF0000;
+    mult = D_800C7890_de;
+    outRow = arg0;
+    do {
+        j = 0;
+        outPair = outRow;
+        do {
+            raw0 = *inLo;
+            raw1 = *inHi;
+            inHi += 1;
+            v0 = (raw0 & mask) | (raw1 >> 16);
+            v1 = ((raw0 << 16) & mask) | (raw1 & 0xFFFF);
+            inLo += 1;
+            j += 1;
+            outPair[0] = (f32) v0 * mult;
+            outPair[1] = (f32) v1 * mult;
+            outPair += 2;
+        } while (j < 2);
+        i += 1;
+        outRow += 4;
+    } while (i < 4);
 }

@@ -59,4 +59,9 @@ struct State_func_80439128_de {
 
 extern char *func_80424DE8_de(s32);
 
+extern void func_8042E988_de(s32);
+
+extern void func_80438828_de();
+extern void func_8040C428_de(s32);
+
 #endif

@@ -265,4 +265,19 @@ typedef struct MultiChannelItemEffect {
     s16 third;
 } MultiChannelItemEffect;
 
+extern f32 D_800C6260;
+extern f32 D_800CB3F8;
+extern f32 D_800C6270_de;
+extern f32 D_800C6274_de;
+extern f32 D_800C627C_de;
+extern f32 D_800CB414;
+extern f32 D_800C6288_de;
+extern f32 D_800C628C_de;
+extern f32 D_800C6290_de;
+extern f32 D_800C6294_de;
+extern f32 D_800C6298;
+extern f32 D_800C629C;
+extern f32 D_800C62A4;
+extern f32 D_800C62AC;
+
 #endif

@@ -427,4 +427,12 @@ extern char D_800C8F70[];
 extern char D_800C3E94_de[];
 extern char D_0026D7D4_de[];
 
+extern char D_800C3E70[];
+
+extern s32 func_8026E340_de(void);
+extern f32 func_8024E2FC_de(void *);
+
+extern s32 func_8024F858_de(void *arg0);
+extern s32 func_802784C0_de(s32 a, s32 b, void *c, s32 d, s32 e, void *f);
+
 #endif

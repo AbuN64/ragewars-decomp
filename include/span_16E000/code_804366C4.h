@@ -76,4 +76,19 @@ extern s32 func_80436C94_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 extern s32 func_80436D4C_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 extern s32 func_804371C4_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
 extern s32 func_80438F0C_de(void);
+
+extern void func_804367A8_de(s32);
+
+void func_804366B8_de(s32);
+extern s32 D_800D34C0_de;
+
+extern void func_804368F8_de(s32);
+
+extern void func_804369E8_de(s32);
+extern void func_8042E988_de(s32);
+void func_804369E8_de(s32);
+
+extern FieldRow D_800F1DA8[];
+extern FieldRow D_800F1DAC[];
+
 #endif

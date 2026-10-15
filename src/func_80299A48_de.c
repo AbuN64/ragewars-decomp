@@ -1,9 +1,1 @@
-#include "span_1000/code_80299DB4.h"
-
-
-
-extern func_8029AA48_S1 *D_8014D080;
-void func_80299A48_de(int arg0, int arg1) {
-    D_8014D080->unk534 = arg0;
-    D_8014D080->unk538 = arg1;
-}
+unsigned char D_auto_func_80299DB4_us_padding_9A9B4[12] = { 0x00, 0x04, 0x00, 0x18, 0x00, 0x00, 0x00, 0x04, 0x62, 0x61, 0x73, 0x65 };

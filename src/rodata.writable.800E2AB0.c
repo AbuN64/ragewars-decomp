@@ -1,26 +1,4 @@
-/* ROM-grounded data: rodata/writable/800E2AB0 */
-#ifdef VERSION_DE
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
-    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00412B78, 0x00000006,
+/* ROM-grounded data: rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548_unclaimed_E359C_unclaimed_E35B8_unclaimed_E35D4_unclaimed_E364C_unclaimed_E3650_unclaimed_E3658_unclaimed_E3664_unclaimed_E366C_unclaimed_E3670_unclaimed_E3678_unclaimed_E3684_unclaimed_E368C_unclaimed_E3690_unclaimed_E3698_unclaimed_E36A4_unclaimed_E36AC */
+unsigned int D_blob_f69ded480cb428b63ba0[1] = {
+    0x00000000,
 };
-#endif
-#ifdef VERSION_EU
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
-    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-};
-#endif
-#ifdef VERSION_EU_X
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
-    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000016, 0x3DE147AE,
-};
-#endif
-#ifdef VERSION_US
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
-    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x4E545F53, 0x4D414C4C,
-};
-#endif
-#ifdef VERSION_US_REV1
-unsigned int D_blob_phase2_77924f34fbc0b4a7149c[8] = {
-    0x00000001, 0x00000001, 0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000, 0x00000016, 0x3DE147AE,
-};
-#endif

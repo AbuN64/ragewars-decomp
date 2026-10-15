@@ -1,15 +1,1 @@
-#include "span_1000/code_80296014.h"
-
-/** Clear the global word at VRAM 0x800D2B00. */
-extern int D_800CD890;
-
-void func_80295FF4_de(void) {
-    D_800CD890 = 0;
-}
-
-extern unsigned int D_800CD894_de;
-
-/** Replace the global state word. */
-void func_80296004_de(unsigned int value) {
-    D_800CD894_de = value;
-}
+unsigned char D_auto_func_80296014_de_padding_96C14[12] = { 0x12, 0x71, 0x00, 0x09, 0x24, 0x02, 0xFF, 0xFF, 0x00, 0x13, 0x24, 0x00 };

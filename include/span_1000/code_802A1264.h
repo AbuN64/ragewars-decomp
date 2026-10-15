@@ -56,4 +56,8 @@ extern void func_802A16F8_de(s32 arg0);
 
 extern void func_802A17C4_de();
 
+extern void *func_80411DCC_de(s32 index);
+
+extern const char D_800CAF20[];
+
 #endif

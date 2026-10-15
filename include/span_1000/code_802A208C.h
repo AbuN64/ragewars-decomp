@@ -92,4 +92,11 @@ struct CommandListMenu {
     s32 state; /* 0x54 */
 };
 
+extern void func_802A1D14_de(void *arg0);
+
+s32 func_802A2480_de(s32, s32);
+
+extern void func_8042DEA0_de(void);
+extern void func_802A2400_de(f32);
+
 #endif

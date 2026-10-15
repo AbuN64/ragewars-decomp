@@ -1,8 +1,1 @@
-#include "types.h"
-#include "common/unused.h"
-#include "span_1000/code_80291054.h"
-#include "span_1000/code_802C074C.h"
-
-f64 func_804147F0_eu_x(void) {
-    return func_802C6970_us_rev1(func_802BADC0_de()) / func_802C6970_us_rev1(D_80149B00);
-}
+unsigned char D_auto_func_804147E8_eu_x_padding_1047E8[8] = { 0x08, 0x10, 0x57, 0x1E, 0x02, 0x40, 0x38, 0x21 };

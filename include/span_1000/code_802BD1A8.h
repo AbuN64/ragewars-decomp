@@ -16,4 +16,9 @@ extern void func_802BD2F0_de();
 struct LldivResult;
 typedef struct LldivResult LldivResult;
 
+extern s32 func_802BD430_de(void *(*)(void *, const char *, s32), void *, const char *, char *);
+
+extern s64 func_802C0230_de(s64, s64) __attribute__((const));
+extern s64 func_802C0820_de(s64, s64) __attribute__((const));
+
 #endif

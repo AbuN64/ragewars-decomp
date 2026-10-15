@@ -1,3 +1,1 @@
-#include "span_1000/code_802BAC58.h"
-void func_802BAC50_de(void) {
-}
+unsigned char D_auto_func_802BAC58_de_padding_BB858[8] = { 0xAC, 0x82, 0x00, 0x00, 0xAC, 0x82, 0x00, 0x04 };

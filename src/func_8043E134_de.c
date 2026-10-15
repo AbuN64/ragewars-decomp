@@ -1,26 +1,26 @@
+#include "common/types_8a8189af7b05.h"
+#include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_8043DF84.h"
 #include "types.h"
-/* Advances the frame timer D_8015404C by D_800D2988 and, once it reaches
-   threshold D_800E2358, clears a flag at D_801468A0+0x24 and reports the
-   round over through func_8022A748_de on the world 0x1860 bytes before it. */
 
-extern f32 D_8015404C;
-extern f32 D_800D2988;
-extern s32 D_801468A0;
+/** Dispatches to func_80264770_de or func_80264788_de with a byte read from arg0->unk20->unk4, chosen by arg1. */
 
-void func_8022A748_de(void *arg0);
+extern void func_80264770_de(s32 arg);
+extern void func_80264788_de(s32 arg);
 
-s32 func_8043E134_de(void) {
-    f32 time;
-    s32 *base;
 
-    time = D_8015404C + D_800D2988;
-    D_8015404C = time;
-    if ((120.0f) <= time) {
-        base = (s32 *) &D_801468A0;
-        base[9] = 0;
-        func_8022A748_de((void *) ((char *) base - 0x1860));
-        return 1;
+
+
+
+
+void func_8043DEF8_de(void *arg0, s32 arg1) {
+    s32 val;
+    MenuRecAt20V2 *menu = arg0;
+
+    val = menu->widget->unk4;
+    if (arg1 != 0) {
+        func_80264770_de(val);
+    } else {
+        func_80264788_de(val);
     }
-    return 0;
 }

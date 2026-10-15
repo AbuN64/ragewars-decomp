@@ -1641,4 +1641,9 @@ typedef struct Target Target;
 
 extern void func_802671FC_de(void *arg0, void *arg1, s32 arg2, Vec3 arg3, ResourceManagerState arg6);
 
+extern s32 func_8025DEC0_de(s32 arg0, Vec3 arg1, s32 arg4, s32 arg5,
+                         f32 arg6);
+
+extern void func_80232744_de(void *arg0, s32 arg1, s32 arg2);
+
 #endif

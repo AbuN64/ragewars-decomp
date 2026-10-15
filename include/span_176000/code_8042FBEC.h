@@ -8,4 +8,6 @@ extern int func_80446920_eu(void * arg0);
 extern char D_00452274[];
 extern void func_804427C4_de(void *, void *, void *);
 
+extern char D_00451B84[];
+
 #endif

@@ -1,72 +1,81 @@
-#include "span_16E000/code_80420E90.h"
-#include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "types.h"
-#include "span_16E000/code_80420E90.h"
+/* Opens the options screen: allocates its 0x3C-byte state into D_800E4400 for window arg0, builds
+   its title, heading and the four toggle buttons 0x3B4, 0x3B1, 0x3AD and 0x3AF set from bits of
+   D_801462C8, creates the item list and refreshes the limit markers through func_80421234_de. */
 
-/* Resets the number pad of the screen D_800E4400: shows the item at 0x20, hides item 0x3AB of the
-   window at 0x8, sets the words at 0x2C, 0x28, 0x30 and 0x34 to 1, 8, 0 and 0, then for keys 0 to
-   9 takes item 0x3B8 plus the key, sets its alpha to 0x96 and clears its word at 0x38, and
-   finishes through func_80421568_de. */
+extern struct OptionsOpenScreen *D_800E4400;
+extern s32 D_801462C8;
 
-extern NumberPadScreen *D_800E4400;
-extern MenuWidget *func_8040EC30_de(void *, s32);
-extern void func_8040E8D8_de(void *, s32);
-extern void func_80421568_de();
+/* The hub spells the allocator, the window item lookup and the list builder; these helpers stay. */
+extern void *func_8041A280_de(s32, s32);
+extern void func_8041B110_de(s32);
+extern void *func_8041ABC0_de(s32, s32);
+extern void func_8041AD34_de(void *, void *);
+extern void func_8041AD10_de(void *, s32);
+extern void func_80421234_de(void);
 
-#if defined(VERSION_DE)
-enum { MENU_8042144C_939 = 933, MENU_8042144C_952 = 946, MENU_8042144C_953 = 947, MENU_8042144C_954 = 948, MENU_8042144C_955 = 949, MENU_8042144C_956 = 950, MENU_8042144C_957 = 951, MENU_8042144C_958 = 952, MENU_8042144C_959 = 953, MENU_8042144C_960 = 954, MENU_8042144C_961 = 955 };
-#elif defined(VERSION_EU_X)
-enum { MENU_8042144C_939 = 943, MENU_8042144C_952 = 956, MENU_8042144C_953 = 957, MENU_8042144C_954 = 958, MENU_8042144C_955 = 959, MENU_8042144C_956 = 960, MENU_8042144C_957 = 961, MENU_8042144C_958 = 962, MENU_8042144C_959 = 963, MENU_8042144C_960 = 964, MENU_8042144C_961 = 965 };
-#else
-enum { MENU_8042144C_939 = 939, MENU_8042144C_952 = 952, MENU_8042144C_953 = 953, MENU_8042144C_954 = 954, MENU_8042144C_955 = 955, MENU_8042144C_956 = 956, MENU_8042144C_957 = 957, MENU_8042144C_958 = 958, MENU_8042144C_959 = 959, MENU_8042144C_960 = 960, MENU_8042144C_961 = 961 };
-#endif
+s32 func_80420E20_de(void *window) {
+    struct OptionsOpenScreen *screen;
+    void *button;
 
-void func_804213DC_de(void) {
-    MenuWidget *item;
-    s32 key;
+    screen = (struct OptionsOpenScreen *) func_8025305C_de(0x3C);
+    D_800E4400 = screen;
+    screen->window = window;
+    screen->full = 0;
+    /* the hub's item type carries no color; this unit's options view names the byte at +0x1A */
+    ((OptionsOpenItem *) func_8040EC30_de(window, 0x3A8))->color = 0x88;
+    D_800E4400->title = func_8041A280_de(0x3A8, 0x3A9);
+    func_8041B110_de(0x3B6);
 
-    func_8040E8D8_de(D_800E4400->pad, 1);
-    func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, MENU_8042144C_939), 0);
-    D_800E4400->mode = 1;
-    D_800E4400->length = 8;
-    D_800E4400->value = 0;
-    D_800E4400->cursor = 0;
-    for (key = 0; key < 10; key++) {
-        switch (key) {
-        case 1:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_953);
-            break;
-        case 2:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_954);
-            break;
-        case 3:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_955);
-            break;
-        case 4:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_956);
-            break;
-        case 5:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_957);
-            break;
-        case 6:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_958);
-            break;
-        case 7:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_959);
-            break;
-        case 8:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_960);
-            break;
-        case 9:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_961);
-            break;
-        case 0:
-        default:
-            item = func_8040EC30_de(D_800E4400->window, MENU_8042144C_952);
-            break;
-        }
-        item->alpha = 0x96;
-        item->word38 = 0;
+    button = func_8041ABC0_de(0x3B4, 0x3B5);
+    D_800E4400->buttons[0] = button;
+    func_8041AD34_de(button, D_800D3470_de[0]);
+    func_8041AD34_de(D_800E4400->buttons[0], D_800D3474[0]);
+    if (D_801462C8 & 0x8000000) {
+        func_8041AD10_de(D_800E4400->buttons[0], 1);
+    } else {
+        func_8041AD10_de(D_800E4400->buttons[0], 0);
     }
-    func_80421568_de();
+
+    button = func_8041ABC0_de(0x3B1, 0x3B2);
+    D_800E4400->buttons[1] = button;
+    func_8041AD34_de(button, D_800D3470_de[0]);
+    func_8041AD34_de(D_800E4400->buttons[1], D_800D3474[0]);
+    if (D_801462C8 & 0x10000000) {
+        func_8041AD10_de(D_800E4400->buttons[1], 1);
+    } else {
+        func_8041AD10_de(D_800E4400->buttons[1], 0);
+    }
+
+    button = func_8041ABC0_de(0x3AD, 0x3AE);
+    D_800E4400->buttons[2] = button;
+    func_8041AD34_de(button, D_800D3470_de[0]);
+    func_8041AD34_de(D_800E4400->buttons[2], D_800D3474[0]);
+    if (D_801462C8 & 0x8) {
+        func_8041AD10_de(D_800E4400->buttons[2], 1);
+    } else {
+        func_8041AD10_de(D_800E4400->buttons[2], 0);
+    }
+
+    button = func_8041ABC0_de(0x3AF, 0x3B0);
+    D_800E4400->buttons[3] = button;
+    func_8041AD34_de(button, D_800D3470_de[0]);
+    func_8041AD34_de(D_800E4400->buttons[3], D_800D3474[0]);
+    if (D_801462C8 & 0x20000000) {
+        func_8041AD10_de(D_800E4400->buttons[3], 1);
+    } else {
+        func_8041AD10_de(D_800E4400->buttons[3], 0);
+    }
+
+    func_8041B110_de(0x3AC);
+    D_800E4400->cursor = (OptionsOpenItem *) func_8040EC30_de(window, 0x3B7);
+    D_800E4400->unk_28 = 0;
+    D_800E4400->unk_2C = 0;
+    D_800E4400->unk_34 = 1;
+    /* the hub publishes the list builder as returning the word naming the list; the member stores it */
+    D_800E4400->list = (void *) func_80419E54_de(0x3AA, 0x6E);
+    func_80421234_de();
+    return 0;
 }

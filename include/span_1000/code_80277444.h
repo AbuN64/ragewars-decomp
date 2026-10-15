@@ -140,4 +140,6 @@ typedef struct Vertex38 { u8 pad0[6]; u16 flags; u8 pad8[4]; s8 x,y,z; u8 padF; 
 typedef struct Vertices38 { s32 stride, count; Vertex38 vertices[1]; } Vertices38;
 typedef struct Light38 { u8 pad0[0x11]; s8 x,y,z; } Light38;
 
+extern s32 func_8028C568_de(void *arg0, void *arg1);
+
 #endif

@@ -1,4 +1,4 @@
-/* ROM-grounded data: rodata/writable/800D0E50 */
-unsigned char D_blob_phase2_c60516986d26724838dd[1] = {
-    0x00,
+/* ROM-grounded data: rodata/unresolved/800D0DA4_unclaimed_D1A48 */
+unsigned int D_blob_1bcfb5257718bb2d745a[2] = {
+    0x3F84F47C, 0x3F84CF4E,
 };

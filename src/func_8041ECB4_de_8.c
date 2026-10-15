@@ -1,0 +1,313 @@
+#include "span_16E000/code_8041DF04.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "types.h"
+
+/* Resets the three 28-byte entries of D_80153F80: -1 in the first word and zero in the next
+   three. */
+
+
+
+
+/* Counts the four player records whose byte 0x78 is one and returns 3, 2 or 1 for one, two or three such players, otherwise zero. */
+
+
+
+extern Player_func_8041EAC4_de D_80146398[];
+
+/* Counts how many of the three 28-byte entries of D_80153F80 hold a non-negative first word. */
+
+
+
+
+/* Returns entry column - 1 of row r in the five-word table D_800E37B8, or zero when the column is
+   not positive. */
+extern s32 D_800E37B8[];
+
+/* Returns the score of the three entries: 5, 10 or 20 points by kind for each active one, repeating the previous award for other kinds. */
+
+
+
+
+
+/* Returns the column of the first of the seventeen eight-byte entries in row r of D_800E381C whose
+   identifier matches, or zero when none does. */
+
+
+extern struct IntPair D_800E381C[][17];
+
+/* Releases the object D_800E39C0 holds through func_802547E4_de, clears D_800E39C0 and returns zero. */
+
+
+extern void func_802547E4_de(void *);
+
+/* Advances the join screen's pulse timer by delta and sets byte 0x10 of node 0x392 under the edited request's root to 150 plus 100 times the sine of the timer over 300; returns zero. */
+
+
+/* Calls func_8029973C_de, then passes -1 to func_8042E988_de when func_802999A0_de reports 0x16 for zero
+   and 0x15 otherwise, then calls func_802998A8_de. Returns zero. */
+extern void func_8029973C_de();
+
+extern s32 func_802999A0_de(s32);
+
+extern void func_8042E988_de(s32);
+
+extern void func_802998A8_de();
+
+/* Steps the selected menu item backwards and updates its display state. */
+
+
+extern void func_8025DF34_de(int),func_8029973C_de(void),func_8040E8D8_de(Resource_func_80419E54_de *,int);
+
+#if defined(VERSION_DE)
+enum { MENU_RESOURCE = 0x38c };
+#elif defined(VERSION_EU)
+enum { MENU_RESOURCE = 0x392 };
+#elif defined(VERSION_EU_X)
+enum { MENU_RESOURCE = 0x396 };
+#elif defined(VERSION_US)
+enum { MENU_RESOURCE = 0x392 };
+#elif defined(VERSION_US_REV1)
+enum { MENU_RESOURCE = 0x392 };
+#endif
+
+/* Advances the selected menu item and updates its display state. */
+
+
+
+
+/* Cycles a menu selection and updates the associated character setting. */
+
+
+
+extern s32 D_8014DCF8[];
+
+extern unsigned char D_8014DCFB[],D_8014236A[];
+
+extern void func_8029973C_de(void),func_8041E408_de(s32);
+
+void func_8041EA70_de(void) {
+    extern struct RequestRecAt10 D_80153F80[];
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        D_80153F80[i].id = -1;
+        D_80153F80[i].variant = 0;
+        D_80153F80[i].word8 = 0;
+        D_80153F80[i].variantC = 0;
+    }
+}
+
+s32 func_8041EAC4_de(void) {
+    s32 count;
+    s32 i;
+    s32 result;
+    Player_func_8041EAC4_de *player;
+
+    count = 0;
+    player = D_80146398;
+    for (i = 0; i < 4; i++) {
+        if (player[i].active == 1) {
+            count++;
+        }
+    }
+    result = 0;
+    switch (count) {
+    case 1:
+        result = 3;
+        break;
+    case 2:
+        result = 2;
+        break;
+    case 3:
+        result = 1;
+        break;
+    }
+    return result;
+}
+
+s32 func_8041EB50_de(void) {
+    extern struct EntryRecAt0V1 D_80153F80[];
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        if (D_80153F80[i].value >= 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+s32 func_8041EB88_de(s32 column, s32 row) {
+    s32 previous = column - 1;
+
+    if (column <= 0) {
+        return 0;
+    }
+    return D_800E37B8[row * 5 + previous];
+}
+
+s32 func_8041EBBC_de(void) {
+    extern struct EntryRecAt8V1 D_80153F80[];
+    s32 score;
+    s32 points;
+    s32 i;
+
+    score = 0;
+    points = 0;
+    for (i = 0; i < 3; i++) {
+        if (D_80153F80[i].unused >= 0) {
+            switch (D_80153F80[i].flags) {
+            case 0:
+                points = 5;
+                break;
+            case 1:
+                points = 10;
+                break;
+            case 2:
+                points = 20;
+                break;
+            }
+            score += points;
+        }
+    }
+    return score;
+}
+
+s32 func_8041EC44_de(s32 row, s32 id) {
+    s32 i;
+
+    for (i = 0; i < 0x11; i++) {
+        if (D_800E381C[row][i].field_0 == id) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+s32 func_8041EC84_de(void) {
+    extern void *D_800E39C0;
+    func_802547E4_de(D_800E39C0);
+    D_800E39C0 = 0;
+    return 0;
+}
+
+s32 func_8041ECB4_de(void *arg0, void *arg1, s32 delta) {
+    extern Resource_func_80419E54_de *func_8040EC30_de(void *root, s32 id);
+    extern struct Screen_func_8041ECB4_de *D_800E39C0;
+    Resource_func_80419E54_de *node;
+    D_800E39C0->timer += delta;
+#if defined(VERSION_DE)
+    node = func_8040EC30_de(D_800E39C0->roots[D_800E39C0->request], 0x38C);
+#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
+    node = func_8040EC30_de(D_800E39C0->roots[D_800E39C0->request], 0x392);
+#elif defined(VERSION_EU_X)
+    node = func_8040EC30_de(D_800E39C0->roots[D_800E39C0->request], 0x396);
+#endif
+    node->value = (u32)(func_802B6560_de(D_800E39C0->timer * 0.0033333334f) * 100.0f + 150.0f);
+    return 0;
+}
+
+s32 func_8041ED78_de(void) {
+    func_8029973C_de();
+    func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
+    func_802998A8_de();
+    return 0;
+}
+
+s32 func_8041EDC0_de(void) {
+    func_8029973C_de();
+    func_8042E988_de(func_802999A0_de(0) == 0x16 ? -1 : 0x15);
+    func_802998A8_de();
+    return 0;
+}
+
+s32 func_8041EE08_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern Resource_func_80419E54_de *func_8040EC30_de(int,int);
+    extern Menu_func_8041EE08_de *D_800E39C0;
+    s32 temp_v0_2;
+    s32 idx;
+    Resource_func_80419E54_de *temp_v0;
+    Resource_func_80419E54_de *temp_v0_3;
+    if (arg3 == 1) {
+        func_8029973C_de();
+        idx = D_800E39C0->unk14;
+#if defined(VERSION_DE)
+        temp_v0 = func_8040EC30_de(D_800E39C0->items[idx], 0x38C);
+#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        temp_v0 = func_8040EC30_de(D_800E39C0->items[idx], 0x392);
+#elif defined(VERSION_EU_X)
+        temp_v0 = func_8040EC30_de(D_800E39C0->items[idx], 0x396);
+#endif
+        temp_v0->value = 0xFF;
+        func_8040E8D8_de(temp_v0, 0);
+        temp_v0_2 = D_800E39C0->unk14 - 1;
+        D_800E39C0->unk14 = temp_v0_2;
+        if (temp_v0_2 < 0) {
+            D_800E39C0->unk14 = D_800E39C0->unk1C - 1;
+        }
+        idx = D_800E39C0->unk14;
+#if defined(VERSION_DE)
+        temp_v0_3 = func_8040EC30_de(D_800E39C0->items[idx], 0x38C);
+#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        temp_v0_3 = func_8040EC30_de(D_800E39C0->items[idx], 0x392);
+#elif defined(VERSION_EU_X)
+        temp_v0_3 = func_8040EC30_de(D_800E39C0->items[idx], 0x396);
+#endif
+        temp_v0_3->value = 0xFF;
+        func_8040E8D8_de(temp_v0_3, 1);
+        D_800E39C0->unk18 = 0;
+        func_8025DF34_de(0xE80);
+        return 0;
+    }
+    return 0;
+}
+
+s32 func_8041EED0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern Resource_func_80419E54_de *func_8040EC30_de(int,int);
+    extern Menu_func_8041EE08_de *D_800E39C0;
+    s32 temp_hi;
+    s32 temp_v0_2;
+    s32 temp_v1;
+    Resource_func_80419E54_de *temp_v0;
+    Resource_func_80419E54_de *temp_v0_3;
+
+    if (arg3 == 1) {
+        func_8029973C_de();
+        temp_v0 = func_8040EC30_de(D_800E39C0->items[D_800E39C0->unk14], MENU_RESOURCE);
+        temp_v0->value = 0xFF;
+        func_8040E8D8_de(temp_v0, 0);
+        temp_v1 = D_800E39C0->unk1C;
+        temp_v0_2 = D_800E39C0->unk14 + 1;
+        temp_hi = temp_v0_2 % temp_v1;
+        D_800E39C0->unk14 = temp_hi;
+        temp_v0_3 = func_8040EC30_de(D_800E39C0->items[temp_hi], MENU_RESOURCE);
+        temp_v0_3->value = 0xFF;
+        func_8040E8D8_de(temp_v0_3, 1);
+        D_800E39C0->unk18 = 0;
+        func_8025DF34_de(0xE80);
+        return 0;
+    }
+    return 0;
+}
+
+s32 func_8041EFAC_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
+    extern func_80204468_S3 *D_800E39C0;
+    s32 temp_a1;
+    s32 temp_a1_2;
+    u32 temp_a2;
+
+    temp_a2 = arg2 >> 0x10;
+    if ((temp_a2 == 3) && (arg3 == 0)) {
+        func_8029973C_de();
+        temp_a1 = D_800E39C0->unk14 * 0x1C;
+        *(s32 *)((char *)D_8014DCF8 + temp_a1) = (*(s32 *)((char *)D_8014DCF8 + temp_a1) + 1) % 5;
+        func_8041E408_de(D_800E39C0->unk14);
+        if (func_802999A0_de(0) == 0x16) {
+            temp_a1_2 = D_800E39C0->unk14;
+            *(D_8014236A + ((7 - temp_a1_2) * 0x96)) = *(D_8014DCFB + (temp_a1_2 * 0x1C));
+        }
+    }
+    return 0;
+}

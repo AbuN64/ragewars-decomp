@@ -675,4 +675,14 @@ extern void func_8022D198_de(void);
 
 extern void func_8022D3EC_de(void);
 
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+extern void func_8022CE78_de(s32 arg0, s32 arg1);
+
+extern void func_80449870_de(void *);
+extern void func_80225B98_de(void *a, void *b, int c);
+
+s32 func_8021C45C_de(s32, void *, s32, s32);
+
+extern void func_802738C0_de(void *arg0, f32 arg1);
+
 #endif

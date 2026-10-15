@@ -277,4 +277,7 @@ extern int func_80212D80_eu(void * arg0);
 extern void func_80212D80_eu_x(struct ActorRecAt1D8V2 *arg0);
 
 void func_802131E0_de(Root802131E0 *arg0);
+
+extern f32 func_8024E73C_de(u8 *arg0);
+
 #endif

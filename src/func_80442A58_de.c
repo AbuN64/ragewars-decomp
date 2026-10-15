@@ -1,16 +1,10 @@
-#include "gfx.h"
-#include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802A8A94.h"
 #include "span_16E000/code_80442BC8.h"
-#include "types.h"
-#include "n64sdk.h"
+#include "common/types_1dc8418c21db.h"
 #include "gbi.h"
-
-/* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
-   get back the start of the structure whose member at offset 0x554 it addresses. */
-char *func_80442A58_de(char *member) {
-    return member - 0x554;
-}
+#include "gfx.h"
+#include "n64sdk.h"
+#include "span_1000/code_802A8A94.h"
+#include "types.h"
 
 /* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through func_80253838_de. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
 
@@ -22,6 +16,7 @@ char *func_80442A58_de(char *member) {
 
 
 extern void func_80255ED8_de(struct List_func_80442A60_de *, struct ItemRecAt20V2 *);
+
 extern void func_80253838_de(void *arg0, void *arg1);
 
 static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRecAt20V2 *item) {
@@ -38,17 +33,6 @@ static inline void remove_item(struct List_func_80442A60_de *list, struct ItemRe
     func_80253838_de(0, item->resource);
 }
 
-void func_80442A60_de(struct List_func_80442A60_de *list) {
-    struct ItemRecAt20V2 *item;
-
-loop:
-    item = list->head;
-    if (item != 0) {
-        remove_item(list, item);
-        goto loop;
-    }
-}
-
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif
@@ -62,7 +46,43 @@ extern void * func_8043F290(struct ObjectRecAt14 *);
 #else
 extern void * func_8043F114_de(struct ObjectRecAt14 *);
 #endif
+
 extern void func_804422F0_de(void *, f32, f32);
+
+/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through func_802A84F8_de and func_8026925C_de, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through func_802AAC28_de. Adapted from func_8022C2B4_de. */
+extern Gfx *D_80110634;
+
+extern s32 D_800E28D0;
+
+extern s32 D_800E28D4;
+
+extern void func_8026925C_de(s32);
+
+extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
+
+/* Selects the descriptor for a single masked category bit; on eu and eu-x the slot is
+   additionally offset by nine descriptors per local player, read from the byte after D_80146848. */
+
+extern char D_800E1E24_de[];
+
+extern u8 D_80146848;
+
+/* Steps a pointer back 0x554 bytes: callers pass the pointer held at offset 0x44 of an object and
+   get back the start of the structure whose member at offset 0x554 it addresses. */
+char *func_80442A58_de(char *member) {
+    return member - 0x554;
+}
+
+void func_80442A60_de(struct List_func_80442A60_de *list) {
+    struct ItemRecAt20V2 *item;
+
+loop:
+    item = list->head;
+    if (item != 0) {
+        remove_item(list, item);
+        goto loop;
+    }
+}
 
 void func_80442ADC_de(struct ObjectRecAt14 *object, f32 scale) {
     void *target;
@@ -131,15 +151,6 @@ s32 func_80442B88_de(struct ObjectRecAt1C8 *object) {
     return 0x2F - count;
 }
 
-/* Draws a pulsing sprite for an active menu element: when the word at 0x1CC is set, it takes the frame at 0x1C8 folded back after 23, sets up drawing through func_802A84F8_de and func_8026925C_de, emits a yellow environment and primitive colour to the display list and draws sprite 0x67 at the owner's rectangle scaled to the screen through func_802AAC28_de. Adapted from func_8022C2B4_de. */
-extern Gfx *D_80110634;
-extern s32 D_800E28D0;
-extern s32 D_800E28D4;
-
-
-extern void func_8026925C_de(s32);
-extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
-
 void func_80442BA8_de(MenuSpriteElement *e) {
     s32 frame;
     Gfx *gfx;
@@ -205,11 +216,6 @@ void func_80442D10_de(WidgetRecAt24 *w, WidgetDescriptor *d, char **arena, int i
  }
 }
 
-/* Selects the descriptor for a single masked category bit; on eu and eu-x the slot is
-   additionally offset by nine descriptors per local player, read from the byte after D_80146848. */
-
-extern char D_800E1E24_de[];
-extern u8 D_80146848;
 void *func_80442DDC_de(ObjRecAt8V4 *arg0) {
  s32 index=0;
  switch(arg0->flags & 0x3fe0) {

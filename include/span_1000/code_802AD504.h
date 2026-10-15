@@ -66,4 +66,8 @@ extern s32 func_802B1A68_us_rev1(u32 arg0);
 
 extern void func_802B1D14_us_rev1(s32 arg0);
 
+extern s32 func_802AE5AC_us_rev1(s32);
+extern s32 func_802AE5AC_us_rev1(s32);
+extern s32 func_802AE5AC_us_rev1(s32);
+
 #endif

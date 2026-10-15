@@ -1,40 +1,41 @@
-#include "types.h"
 #include "span_1000/code_802B8DD0.h"
+#include "common/types_1dc8418c21db.h"
+#include "span_1000/code_802B369C.h"
+#include "types.h"
 
+extern char D_800C7570;
 
-extern OSPiHandle_s D_801486C0;
-extern OSPiHandle_s *D_800D437C;
-extern void *func_802A001C_de(void *dst, s32 value, u32 size);
-extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern char D_800C7574;
 
-OSPiHandle_s *func_802B8F48_de(void)
-{
-    u32 domain = 0;
-    u32 saveMask;
-    OSPiHandle_s *h = &D_801486C0;
-    OSPiHandle_s **table;
+extern void func_802BAC50_de(void *, void *, s32);
 
-    if (h->baseAddress == 0xB0000000)
-        return h;
+extern f32 D_800C7590[2];
 
-    h->type = 0;
-    h->baseAddress = 0xB0000000;
-    func_802B9B20_de(0, &domain);
-    h->latency = domain & 0xff;
-    h->pulse = (domain >> 8) & 0xff;
-    h->pageSize = (domain >> 0x10) & 0xf;
-    h->relDuration = (domain >> 0x14) & 0xf;
-    h->domain = 0;
-    h->speed = 0;
+s32 func_802B3D10_de(ALSynth4C *drvr, ALPlayer_s14 **client) {
+ s32 smallest = 0x7FFFFFFF;
+ ALPlayer_s14 *scan;
+ if (drvr->head == 0) func_802BAC50_de(&D_800C7570, &D_800C7574, 0x133);
+ *client = 0;
+ scan = drvr->head;
+ if (scan != 0) {
+  do {
+   if (scan->samplesLeft - drvr->curSamples < smallest) {
+    *client = scan;
+    smallest = scan->samplesLeft - drvr->curSamples;
+   }
+   scan = scan->next;
+  } while (scan != 0);
+ }
+ return (*client)->samplesLeft;
+}
 
-    func_802A001C_de(&h->transferInfo, 0, sizeof(h->transferInfo));
+s32 func_802B3DB8_de(func_8022E694_S1 *arg0, s32 arg1) {
+    f32 v;
+    int idx;
 
-    saveMask = func_802BCF30_de();
-    table = &D_800D437C;
-    h->next = *table;
-    *table = h;
-    func_802BCF50_de(saveMask);
-
-    return h;
+    v = (f32)arg1 * (f32)arg0->unk44;
+    idx = 0;
+    v = v * D_800C7590[idx];
+    v = v + D_800C7590[1];
+    return (s32)v;
 }

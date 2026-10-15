@@ -457,4 +457,9 @@ struct ObjectLinks2B50 {
 struct ChannelSet;
 typedef struct ChannelSet ChannelSet;
 
+extern s16 func_8025E500_de(void *);
+extern s16 func_8025E50C_de(void *);
+extern s8 func_8025E554_de(void *);
+extern s16 func_8025B034_de(char *, s32, s32, s32, s32);
+
 #endif

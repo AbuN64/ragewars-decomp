@@ -246,4 +246,11 @@ typedef struct ObjRecAtB8 {
     int unkB8;
 } ObjRecAtB8;
 
+extern void func_8024B4F4_de(void *arg0, s32 arg1);
+extern void func_8022BE20_de(void *arg0, void *arg1);
+
+extern s32 func_8022C460_de(void *);
+
+extern int D_80140FC0;
+
 #endif

@@ -1,3 +1,4 @@
-unsigned int D_auto_rodata_writable_800D2630[6] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+/* ROM-grounded data: rodata/unresolved/800D262C */
+unsigned int D_blob_159b4c21eed46a69dd94[1] = {
+    0x0BE80DFC,
 };

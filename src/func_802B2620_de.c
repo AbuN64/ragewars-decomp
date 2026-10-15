@@ -1,12 +1,1 @@
-#include "common/types_06e4f7ef1f9e.h"
-#include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802B2614.h"
-#include "types.h"
-
-
-
-
-
-s32 func_802B2620_de(void *arg0) {
-    return (((struct ObjRecAt28V2 *) ((s8 *) ((((struct ObjRecAt40V3 *) ((s8 *) arg0))->unk3C * 0x30) + ((struct ObjRecAt40V3 *) ((s8 *) arg0))->unk40)))->unk28);
-}
+unsigned char D_auto_func_802B2614_de_padding_B3214[12] = { 0x00, 0x03, 0x10, 0x40, 0x00, 0x43, 0x10, 0x21, 0x8C, 0x83, 0x00, 0x40 };

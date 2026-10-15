@@ -4950,4 +4950,28 @@ extern char D_800C95D0;
 extern SharedMovement D_800C9510_de[2];
 extern Vec3 D_800C94D0_de;
 
+extern char D_800C2B68_de[];
+
+void func_8022C5AC_de(char *);
+void func_8022C5DC_de(void *);
+s32 func_8022C620_de(char *);
+extern f32 D_800C2BA0_de;
+extern f32 D_800C2BA4_de;
+extern f32 D_800C2BA8_de;
+extern f32 D_800C2BAC_de;
+extern f32 D_800C2BB0_de;
+extern f32 D_800C2BB4_de;
+extern f32 D_800C2BB8_de;
+extern f32 D_800C2BBC_de;
+extern s32 D_800C91B8_de;
+
+extern void func_8024B4F4_de(void *arg0, s32 arg1);
+
+extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
+
+extern void func_8022BC94_de(void *arg0, s32 arg1);
+extern s32 func_8024B7E4_de(void *arg0, s32 arg1);
+extern void func_8021C9D8_de(void *arg0, void *arg1);
+extern void func_8021CBD0_de(void *arg0, void *arg1);
+
 #endif

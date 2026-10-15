@@ -1,4 +1,4 @@
-/* ROM-grounded data: rodata/writable/800E4EF0 */
-unsigned int D_blob_phase2_aa4dbfd938acb198f6de[1] = {
-    0x00000000,
+unsigned int D_auto_rodata_unresolved_800E4694_unclaimed_E5984_unclaimed_E5A20_unclaimed_E5ABC[13] = {
+    0x3F19999A, 0x00000E06, 0x0000000E, 0x00429180, 0x00000002, 0x0000000E, 0x004292D4, 0x00000001,
+    0x0000000E, 0x004291A8, 0x00000000, 0x00000000, 0x00000000,
 };

@@ -1,4 +1,3 @@
-/* ROM-grounded data: rodata/writable/800E58A0 */
-unsigned int D_blob_phase2_a5b1126a7bc6f87c820f[2] = {
-    0x00000000, 0x00000000,
+unsigned int D_d0_0aba94e2fd07d572[3] = {
+    0x52455F57, 0x41525F43, 0x52596571,
 };

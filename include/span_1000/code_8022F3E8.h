@@ -318,4 +318,12 @@ extern s32 func_8026925C_de(s32);
 extern void func_80268CE0_de(u32);
 extern void func_802A5498_de(u32);
 
+extern s32 func_802327A0_de(s32);
+
+extern s32 func_80230058_de(void *, void *);
+
+extern void func_8022AF40_de(void *);
+
+extern void func_8022B9C4_de(void *arg0);
+
 #endif

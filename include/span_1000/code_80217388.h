@@ -1696,4 +1696,8 @@ struct Menu_func_80218F9C_de {
 typedef struct StickInput { char pad00[0xC6]; s8 x, y; } StickInput;
 typedef struct StickPlayer { char pad00[0x698]; StickInput *input; } StickPlayer;
 
+extern char D_800C2260_de[];
+
+extern void func_802181FC_de(void *, s32, void *);
+
 #endif

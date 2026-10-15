@@ -125,4 +125,10 @@ typedef struct EntryRecAt1C EntryRecAt1C;
 extern int func_80446330_us_rev1(void * arg0);
 struct Field;
 extern s32 func_80445310_de(struct Field *field);
+
+extern u8 D_800E20AC[];
+
+extern void func_802648C8_de(void);
+extern void func_804415F4_de();
+
 #endif

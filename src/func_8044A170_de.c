@@ -1,119 +1,56 @@
-#include "shared/gameplay_camera.h"
-#include "span_1000/code_80233920.h"
-#include "common/types_1dc8418c21db.h"
+#include "shared/gameplay_transition.h"
+#include "shared/world.h"
+#include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_8044ACCC.h"
-#include "span_1000/code_80255BEC.h"
 #include "types.h"
-/* Initializes camera transforms, viewport state, clipping records, and resource lists. */
+#include "span_1000/code_8026AC38.h"
 
- 
-void func_80238EB8_de(void *);                               /* extern */
-void func_802390F4_de(void *, s32);                         /* extern */
-void func_802393D8_de(void *);                            /* extern */
-void func_80239C20_de(void *);                            /* extern */
-void func_802727D8_de(void *);                            /* extern */
-void func_80442544_de(void *);                    /* extern */
+/* Releases the two handles at offsets 0x11BC and 0x11C0 of an object: each goes to func_8025CA24_de
+   with what func_8025CC6C_de returns, and each is then cleared. */
 
 
-extern s32 D_800E28D0, D_800E28D4;
-extern struct IntPair D_80103220;
+extern void *func_8025CC6C_de();
+extern void func_8025CA24_de(void *, s32);
+
+void func_8044A07C_de(struct Object_func_8044A07C_de *object) {
+    func_8025CA24_de(func_8025CC6C_de(), object->first);
+    object->first = 0;
+    func_8025CA24_de(func_8025CC6C_de(), object->second);
+    object->second = 0;
+}
+
+/* Stores the second argument at 0x5E0 of the actor, calls func_80226708_de and func_8021AF6C_de on it, then starts sound D_8011FE88 for it through func_8028B274_de with 0x66, D_800CE47C or its type's entry of D_800CE430 chosen by the options D_801462E5 and D_801468F4.
+   Adapted from func_8022BB80_de with a leading field store and two calls added and the D_801462C8 offsets changed to the symbols D_801462E5 and D_801468F4. */
+
+
+extern void func_80226708_de();
+extern void func_8021AF6C_de(void *);
+extern u8 D_801462E5;
+extern s32 D_801468F4;
 
 
 
 
 
 
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x10, 0x14, 0x20, 0x24], gap at: 0x18. */
-void func_8044A170_de(State_func_8044A170_de *arg0) {
-    f32 temp_f21;
-    f32 zero;
-    s16 temp_a0;
-    s32 var_a1;
-    Floats *temp_v0;
-    Floats *temp_v0_2;
-    Floats *temp_v0_3;
-    Floats *temp_v0_4;
-    Floats *temp_v0_5;
 
-    func_80238EB8_de(((void *)&((GameplayCamera *)arg0)->unk24));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unk160));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unk1E0));
-    zero = 0.0f;
-    temp_f21 = 1.0f;
-    temp_v0 = ((void *)&((GameplayCamera *)arg0)->orientation);
-    temp_v0->unk8 = zero;
-    temp_v0->unk4 = zero;
-    arg0->unk140 = zero;
-    arg0->unk14C = temp_f21;
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unk1A0));
-    arg0->unk29C = (f32) D_800E28D0;
-    arg0->unk2A0 = (f32) D_800E28D4;
-    arg0->unk518 = -1;
-    arg0->unk2A4 = zero;
-    arg0->unk2A8 = zero;
-    arg0->unk520 = 0;
-    arg0->unk524 = 0;
-    arg0->unk521 = 0;
-    arg0->unk525 = 0;
-    arg0->unk522 = 0;
-    arg0->unk526 = 0;
-    arg0->unk523 = 0;
-    arg0->unk527 = 0;
-    arg0->unk51C = temp_f21;
-    arg0->unk53C = 0x3E3;
-    arg0->unk540 = 0x3E3;
-    arg0->unk548 = 0;
-    arg0->unk7C = 0;
-    arg0->unkC = temp_f21;
-    arg0->unk10 = temp_f21;
-    arg0->unk528 = (f32) 1024.0f;
-    arg0->unk52C = (f32) 1024.0f;
-    arg0->unk530 = (f32) 47.5f;
-    arg0->unk534 = (f32) 47.5f;
-    func_802393D8_de(arg0);
-    temp_v0_2 = ((void *)&((GameplayCamera *)arg0)->padA0);
-    arg0->unkF4 = zero;
-    arg0->unkF8 = zero;
-    temp_v0_2->unk8 = zero;
-    temp_v0_2->unkC = zero;
-    temp_v0_2->unk10 = zero;
-    temp_v0_2->unk14 = temp_f21;
-    temp_v0_3 = ((void *)&((GameplayCamera *)arg0)->unkB8);
-    temp_v0_3->unk4 = zero;
-    temp_v0_3->unk8 = zero;
-    temp_v0_3->unkC = zero;
-    temp_v0_3->unk10 = zero;
-    temp_v0_4 = ((void *)&((GameplayCamera *)arg0)->unkCC);
-    temp_v0_4->unk4 = zero;
-    temp_v0_4->unk8 = zero;
-    temp_v0_4->unkC = zero;
-    temp_v0_4->unk10 = zero;
-    temp_v0_5 = ((void *)&((GameplayCamera *)arg0)->unkE0);
-    temp_v0_5->unk4 = zero;
-    temp_v0_5->unk8 = zero;
-    temp_v0_5->unkC = zero;
-    temp_v0_5->unk10 = zero;
-    func_802390F4_de(arg0, 0);
-    temp_a0 = D_800E28D0 * 2;
-    for (var_a1 = 0; var_a1 < 2; var_a1++) {
-        ((Racer *)arg0)->viewports[var_a1].vscale[0] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vscale[1] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vscale[2] = 0x3FF;
-        ((Racer *)arg0)->viewports[var_a1].vscale[3] = 0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[0] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[1] = temp_a0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[2] = 0;
-        ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
+
+
+
+
+void func_8044A0C4_de(Player *arg0, s32 arg1) {
+    s32 var_a2;
+
+    arg0->state = arg1;
+    func_80226708_de();
+    func_8021AF6C_de(arg0);
+    if (D_801462E5 == 0) {
+        var_a2 = 0x66;
+    } else if (D_801468F4 != 0 && ((Shared_ControlView *)arg0->profile)->transientFlag != 0) {
+        var_a2 = D_800CE47C;
+    } else {
+        var_a2 = D_800CE430[((Shared__struct_D_800D34C0_0x18 *)arg0->definition)->unkC];
+        arg0->playerId = ((Shared_ControlView *)arg0->profile)->playerId;
     }
-    func_80442544_de(((void *)&((GameplayCamera *)arg0)->messageList));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unkE54));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unkE94));
-    arg0->unk544 = 0;
-    arg0->unk120 = 0;
-    arg0->unk124 = 0x32;
-    arg0->unk126 = 0;
-    D_80103220.field_4 = 0;
-    func_80255CA0_de(&((GameplayCamera *)arg0)->objects, 0, 4);
-    func_80239C20_de(arg0);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, var_a2, arg0->animation);
 }

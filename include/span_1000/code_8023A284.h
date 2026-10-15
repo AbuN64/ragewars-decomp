@@ -174,4 +174,12 @@ extern void func_80295F78_de(s32 **, void *);
 extern void func_80295FB4_us_rev1(s32 *, void **, s32, s32, s32, s32, s32, s32, s32);
 extern void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 
+extern void func_8023E854_de(void *arg0);
+
+extern void D_0023B938();
+extern void D_0023B94C();
+extern void D_0023B978_de();
+
+extern void func_80240260_de(void *arg0);
+
 #endif
