@@ -1,0 +1,3 @@
+const unsigned int D_auto_rodata_func_8024F950_de_800C3E10[8] = {
+    0x4F000000, 0x40A3D70A, 0x3FC90FDC, 0x40490FDC, 0x4096CBE5, 0x42CCCCCC, 0x4123D70A, 0x3F000000,
+};

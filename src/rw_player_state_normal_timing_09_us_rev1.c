@@ -1,0 +1,4 @@
+/* ROM-grounded data: src/rw_player_state_normal_timing_09_us_rev1.c */
+unsigned int D_blob_8c5ad759aadcbb68b886[2] = {
+    0x00000080, 0x000008A2,
+};

@@ -1,0 +1,139 @@
+#include "common/types_1dc8418c21db.h"
+#include "span_1000/code_802192C0.h"
+#include "span_1000/code_8026AC38.h"
+#include "n64sdk.h"
+#include "gbi.h"
+#include "types.h"
+#include "common/unused.h"
+#include "span_1000/code_80291054.h"
+
+
+/* Draws a player's marker when it is enabled at 0x1214: loads the player's matrix for the current view
+   D_800D297C from its table at 0x1500, sets the render and geometry modes, fills the eight vertices of
+   a red prism in D_80102A58 (alpha 150 on the upper and 100 on the lower corners), emits them with the
+   eight triangles joining them, and passes the same colour and alphas to func_802A5498_de with the
+   matrix from the table at 0x1580 when 0x147C is set. */
+
+
+
+
+
+
+
+
+extern s32 D_800D297C;
+
+extern void func_8026925C_de(s32);
+extern void func_80268CE0_de(s32);
+extern void func_802A5498_de(UnitMtx *, s32, s32, s32);
+
+void func_8021C698_de(Player_func_8021C698_de *player) {
+    s32 red;
+    s32 low;
+    s32 high;
+
+    if (player->marker != 0) {
+        gSPMatrix(D_80110634++, &player->views[D_800D297C], G_MTX_LOAD);
+        gDPPipeSync(D_80110634++);
+        func_8026D8F8_de();
+        func_8026925C_de(0xE);
+        func_80268CE0_de(0x1C);
+        red = 200;
+        low = 100;
+        high = 150;
+        gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
+        gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
+        D_80102A58[0].x = 0;
+        D_80102A58[0].y = 1;
+        D_80102A58[0].z = 0;
+        D_80102A58[0].flag = 0;
+        D_80102A58[0].s = 0;
+        D_80102A58[0].t = 0;
+        D_80102A58[0].r = red;
+        D_80102A58[0].g = 0;
+        D_80102A58[0].b = 0;
+        D_80102A58[0].a = high;
+        D_80102A58[1].x = 1;
+        D_80102A58[1].y = 0;
+        D_80102A58[1].z = 0;
+        D_80102A58[1].flag = 0;
+        D_80102A58[1].s = 0;
+        D_80102A58[1].t = 0;
+        D_80102A58[1].r = red;
+        D_80102A58[1].g = 0;
+        D_80102A58[1].b = 0;
+        D_80102A58[1].a = high;
+        D_80102A58[2].x = 0;
+        D_80102A58[2].y = -1;
+        D_80102A58[2].z = 0;
+        D_80102A58[2].flag = 0;
+        D_80102A58[2].s = 0;
+        D_80102A58[2].t = 0;
+        D_80102A58[2].r = red;
+        D_80102A58[2].g = 0;
+        D_80102A58[2].b = 0;
+        D_80102A58[2].a = low;
+        D_80102A58[3].x = -1;
+        D_80102A58[3].y = -1;
+        D_80102A58[3].z = 0;
+        D_80102A58[3].flag = 0;
+        D_80102A58[3].s = 0;
+        D_80102A58[3].t = 0;
+        D_80102A58[3].r = red;
+        D_80102A58[3].g = 0;
+        D_80102A58[3].b = 0;
+        D_80102A58[3].a = low;
+        D_80102A58[4].x = 0;
+        D_80102A58[4].y = 1;
+        D_80102A58[4].z = -1;
+        D_80102A58[4].flag = 0;
+        D_80102A58[4].s = 0;
+        D_80102A58[4].t = 0;
+        D_80102A58[4].r = red;
+        D_80102A58[4].g = 0;
+        D_80102A58[4].b = 0;
+        D_80102A58[4].a = high;
+        D_80102A58[5].x = 1;
+        D_80102A58[5].y = 0;
+        D_80102A58[5].z = -1;
+        D_80102A58[5].flag = 0;
+        D_80102A58[5].s = 0;
+        D_80102A58[5].t = 0;
+        D_80102A58[5].r = red;
+        D_80102A58[5].g = 0;
+        D_80102A58[5].b = 0;
+        D_80102A58[5].a = high;
+        D_80102A58[6].x = 0;
+        D_80102A58[6].y = -1;
+        D_80102A58[6].z = -1;
+        D_80102A58[6].flag = 0;
+        D_80102A58[6].s = 0;
+        D_80102A58[6].t = 0;
+        D_80102A58[6].r = red;
+        D_80102A58[6].g = 0;
+        D_80102A58[6].b = 0;
+        D_80102A58[6].a = low;
+        D_80102A58[7].x = -1;
+        D_80102A58[7].y = -1;
+        D_80102A58[7].z = -1;
+        D_80102A58[7].flag = 0;
+        D_80102A58[7].s = 0;
+        D_80102A58[7].t = 0;
+        D_80102A58[7].r = red;
+        D_80102A58[7].g = 0;
+        D_80102A58[7].b = 0;
+        D_80102A58[7].a = low;
+        gSPVertex(D_80110634++, (u32) D_80102A58, 8, 0);
+        gSP1Triangle(D_80110634++, 0, 1, 4, 0);
+        gSP1Triangle(D_80110634++, 1, 4, 5, 0);
+        gSP1Triangle(D_80110634++, 1, 2, 5, 0);
+        gSP1Triangle(D_80110634++, 2, 5, 6, 0);
+        gSP1Triangle(D_80110634++, 2, 3, 6, 0);
+        gSP1Triangle(D_80110634++, 3, 6, 7, 0);
+        gSP1Triangle(D_80110634++, 3, 0, 7, 0);
+        gSP1Triangle(D_80110634++, 0, 7, 4, 0);
+        if (player->second != 0) {
+            func_802A5498_de(&player->markers[D_800D297C], red, low, high);
+        }
+    }
+}

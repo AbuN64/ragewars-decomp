@@ -1,0 +1,4 @@
+unsigned int D_auto_rodata_unresolved_800E4604_unclaimed_E5210_unclaimed_E5258[10] = {
+    0x00000E03, 0x00000020, 0x800D74F0, 0x800D74FC, 0x800D74F8, 0x800D74F4, 0x800D74F8, 0x800D74F4,
+    0x800D74FC, 0x800D74F0,
+};

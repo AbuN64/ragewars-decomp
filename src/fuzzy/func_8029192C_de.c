@@ -1,0 +1,114 @@
+#include "types.h"
+
+typedef struct OSScTask_s {
+    void *next;
+    s32 state, flags, framebuffer;
+    u32 type, taskFlags;
+    void *boot;
+    u32 bootSize;
+    void *code;
+    u32 codeSize;
+    void *data;
+    u32 dataSize;
+    void *stack;
+    u32 stackSize;
+    u8 *output;
+    u8 *outputEnd;
+    void *commands;
+    u32 commandSize;
+    void *yield;
+    u32 yieldSize;
+    void *queue;
+    void *message;
+    u8 tail[0x10];
+} OSScTask_s;
+typedef struct FrameSchedule {
+    u8 pad[0x20];
+    OSScTask_s first, second;
+    u8 message[0x20];
+    s32 framebuffer;
+    void *commands, *commands2;
+    u32 commandSize, commandSize2;
+    u8 pad124[4];
+    s32 dual;
+    u8 tail[0x14];
+} FrameSchedule;
+typedef struct FrameScheduler {
+    FrameSchedule frames[3];
+    FrameSchedule *current;
+} FrameScheduler;
+extern u8 D_800D8C10[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
+extern char D_801428C0, D_80142928;
+extern s32 D_8014D424;
+extern u8 *D_8014D428;
+extern u32 D_800D2978, D_800DE850, D_800CD730, D_800D297C;
+extern void *D_8014D460, *D_8014D464, *D_8014D430_de, *D_8014D42C;
+extern void osWritebackDCacheAll(void);
+extern void func_8028FD4C_de(void *, void *);
+void func_8029192C_de(FrameScheduler *frames, FrameSchedule *frame)
+{
+    OSScTask_s *task;
+    s32 size;
+    u8 *base;
+    task = &frame->first;
+    task->commands = frame->commands;
+    size = D_8014D424;
+    task->type = 1;
+    task->boot = D_800D8C10;
+    base = D_8014D428;
+    task->bootSize = 0xD0;
+    task->codeSize = 0x1000;
+    task->dataSize = 0x800;
+    task->yield = D_800E4000;
+    task->yieldSize = 0xC00;
+    task->code = D_800D8CE0;
+    task->data = D_800DC020_de;
+    task->taskFlags = 0;
+    task->stack = 0;
+    task->stackSize = 0;
+    task->output = base;
+    task->outputEnd = base + size;
+    task->commandSize = frame->commandSize;
+    task->next = 0;
+    task->queue = &D_801428C0;
+    task->message = frame->message;
+    task->framebuffer = frame->framebuffer;
+    task->flags = frame->dual ? 3 : 0x23;
+    if (frame->dual) {
+        task = &frame->second;
+        task->commands = frame->commands2;
+        size = D_8014D424;
+        task->type = 1;
+        task->boot = D_800D8C10;
+        base = D_8014D428;
+        task->bootSize = 0xD0;
+        task->codeSize = 0x1000;
+        task->dataSize = 0x800;
+        task->yield = D_800E4000;
+        task->yieldSize = 0xC00;
+        task->code = D_800DA070;
+        task->data = D_800DC440;
+        task->taskFlags = 0;
+        task->stack = 0;
+        task->stackSize = 0;
+        task->output = base;
+        task->outputEnd = base + size;
+        task->commandSize = frame->commandSize2;
+        task->next = 0;
+        task->flags = 0x23;
+        task->queue = &D_801428C0;
+        task->message = frame->message;
+        task->framebuffer = frame->framebuffer;
+    }
+    osWritebackDCacheAll();
+    func_8028FD4C_de(&D_80142928, &frame->first);
+    if (frame->dual) func_8028FD4C_de(&D_80142928, &frame->second);
+    D_800D2978++;
+    D_800CD730++;
+    D_800D297C ^= 1;
+    frames->current = &frames->frames[D_800D2978 % D_800DE850];
+    if (D_800D297C == 0) frames->current->commands = D_8014D460;
+    else frames->current->commands = D_8014D464;
+    if (D_800D297C == 0) frames->current->commands2 = D_8014D430_de;
+    else frames->current->commands2 = D_8014D42C;
+}

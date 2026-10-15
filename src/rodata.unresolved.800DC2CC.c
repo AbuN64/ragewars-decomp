@@ -1,0 +1,3 @@
+unsigned int D_auto_rodata_unresolved_800DC2CC[7] = {
+    0x32657175, 0x00422FE4, 0x0042306C, 0x00423230, 0x00423130, 0x004231AC, 0x00000000,
+};

@@ -1,0 +1,4 @@
+const unsigned int D_auto_src_rw_pool_80208AAC_C78CC_us_rev1[9] = {
+    0x41200000, 0x3E860A93, 0x3E860A93, 0x3F000000, 0x3F800000, 0x40490FDB, 0x3F800000, 0xBF800000,
+    0x3F800000,
+};

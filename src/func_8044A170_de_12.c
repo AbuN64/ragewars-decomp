@@ -1,0 +1,152 @@
+/* Packs a collision mesh into one allocated block: copies the node's vertex list, the triangle source
+   and the trailing chunk behind a five-offset header, builds a 0x20-byte triangle record per source
+   face, lowers the world's minimum height to every triangle vertex, and flags triangles whose group
+   bit, callback or neighbours mark them with the default surface mask. */
+#include "types.h"
+#include "span_1000/code_8027451C.h"
+#include "span_1000/code_802536F4.h"
+#include "shared/func_8044DA54_de_closed.h"
+#include "resident_event_handler.h"
+#include "shared/func_804235A8_eu_closed.h"
+#include "span_16E000/code_8044ACCC.h"
+
+
+
+
+
+
+
+
+extern s32 D_800CD8D0;
+
+
+
+
+
+extern s32 func_8028FDC8_de(s32 node, s32 index, s32 *size);
+extern s32 func_8028FDF8_de(s32 *node, s32 arg1);
+
+static inline s32 testBit(s32 n, u8 *bits) {
+    s32 mask = 1 << (n & 7);
+
+    return bits[n / 8] & mask;
+}
+
+void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **handle) {
+    s32 size0;
+    s32 size1;
+    s32 size3;
+    void *chunk;
+    s32 tableSize;
+    char *base;
+    CollisionBuildVertex *verts;
+    CollisionBuildTriangle *tris;
+    CollisionBuildMeshHandle *block;
+    int *node;
+    void *first;
+    CollisionBuildVertexList *vlist;
+    CollisionBuildList *flist;
+    s32 ntris;
+    CollisionBuildHeader *hdr;
+    s32 offset;
+    char *dst;
+    char *vdst;
+    CollisionBuildVertexList *copiedVertices;
+    CollisionBuildTriangleList *copiedTriangles;
+    s32 nverts;
+    s32 i;
+    s32 j;
+    s32 k;
+    CollisionBuildTriangle *tri;
+    CollisionBuildFace *face;
+    f32 y;
+    int *group;
+    s32 index;
+    u8 *bits;
+
+    if (func_80285180_de((void*)handle, 1) != 0) {
+        node = (*handle)->payload.data;
+        first = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 0, &size0);
+        vlist = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 1, &size1);
+        flist = (void*)func_8028FDB4_de(node, 2);
+        ntris = flist->count;
+        chunk = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 3, &size3);
+        tableSize = (ntris << 5) | 8;
+        block = (void*)func_80254480_de(0, handle, size0 + 0x18 + size1 + tableSize + size3);
+        if (block != 0) {
+            offset = 0x18;
+            hdr = block->payload.data;
+            i = 0;
+            hdr->count = 0;
+            hdr->offsets[0] = offset;
+            func_8028FF0C_de(first, (char *) hdr + offset, 0);
+            hdr->count = 1;
+            offset += size0;
+            vdst = (char *) hdr + offset;
+            hdr->offsets[1] = offset;
+            func_8028FF0C_de(vlist, vdst, 0);
+            hdr->count = 2;
+            offset += size1;
+            dst = (char *) hdr + offset;
+            hdr->offsets[2] = offset;
+            func_8028FF0C_de(flist, dst, 1);
+            face = flist->items;
+            copiedTriangles=(void*)dst;
+            copiedTriangles->kind = 0x20;
+            copiedTriangles->count = ntris;
+            base = (char *) hdr;
+            tris = copiedTriangles->items;
+            nverts = vlist->count;
+            copiedVertices=(void*)vdst;
+            verts = copiedVertices->items;
+            for (i = 0; i < nverts; i++) {
+                func_80275A58_de(&verts[i]);
+            }
+            for (j = 0; j < ntris; j++) {
+                tri = &tris[j];
+                /* The caller supplies a sixth bounds value; the decoder uses the first five. */
+                ((void (*)(HeaderRecAt1C *,Packed *,char *,int,char *,int))func_80275AA4_de)(&tri->canonical, &face[j], (char*)verts, nverts, (char*)tris, ntris);
+                for (i = 0; i < 3; i++) {
+                    y = tri->fields.v[i]->y;
+                    if (!(y <= world->minY)) {
+                        y = world->minY;
+                    }
+                    world->minY = y;
+                }
+                index = world->group;
+                group = (void*)func_8028FDB4_de((void*)func_8028FDB4_de((void*)func_8028FDB4_de(world->tree, 0), index), 0);
+                func_8028FDB4_de(group, 0);
+                func_8028FDF8_de(group, 1);
+                bits = (void*)func_8028FDB4_de(group, 1);
+                if (testBit(j, bits)) {
+                    tri->fields.flags |= 0x400;
+                }
+                if (!(tri->fields.mask & D_800CD8D0)) {
+                    tri->fields.mask = D_800CD8D0;
+                }
+                if (func_80245798_de() != 0) {
+                    tri->fields.mask = D_800CD8D0;
+                }
+                if (tri->fields.flags & 0x2000) {
+                    tri->fields.mask = D_800CD8D0;
+                }
+            }
+            for (j = 0; j < ntris; j++) {
+                tri = &tris[j];
+                for (k = 0; k < 3; k++) {
+                    if (tri->fields.adj[k] != 0 && (tri->fields.adj[k]->fields.flags & 0x2000)) {
+                        { s32 *surface = &tri->fields.mask; *surface = D_800CD8D0; }
+                    }
+                }
+            }
+            offset += tableSize;
+            hdr->count = 3;
+            hdr->offsets[3] = offset;
+            func_8028FF0C_de(chunk, base + offset, 0);
+            hdr->count = 4;
+            offset += size3;
+            hdr->offsets[4] = offset;
+        }
+        func_80253D10_de(0, (void*)handle, (void*)block);
+    }
+}

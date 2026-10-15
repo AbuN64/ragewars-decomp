@@ -1,0 +1,440 @@
+#include "span_16E000/code_8041F1FC.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "gbi.h"
+#include "gfx.h"
+#include "n64sdk.h"
+#include "types.h"
+
+extern s32 D_800D15E0;
+
+extern f32 D_800D15E4[5];
+
+extern struct Shape_typemap_165 D_800E41C0[];
+
+extern s32 D_800E28D0;
+
+extern s32 D_800E28D4;
+
+extern Gfx *D_80110634;
+
+extern void func_8041C7F4_de(void *);
+
+/* Enables character choices unlocked by active players and highlights the selected profile's unlocked characters. */
+#if defined(VERSION_DE)
+enum { UNLOCK_MARK = 129 };
+#elif defined(VERSION_EU_X)
+enum { UNLOCK_MARK = 135 };
+#else
+enum { UNLOCK_MARK = 131 };
+#endif
+
+extern char D_80102B00[][0x190];
+
+extern signed char D_80102B0D[];
+
+extern u8 D_800FEB54[];
+
+extern s32 D_800E3A54[][28];
+
+extern u16 D_800DFA02[][56];
+
+extern s32 func_8022F5C4_de(void *profile, s32 character);
+
+extern s32 func_80265650_de(u8 *bits, s32 index);
+
+extern void func_80265688_de(u8 *bits, s32 index, s32 value);
+
+extern void func_8040E950_de(MenuWidget *record, int enable);
+
+/* Cycles player p's choice on the screen D_800E42D0: dims the item for the current choice at 0x18
+   of p's 0x4C8-byte entry (from p's 36-byte layout row D_800E42D4, cells from 0xC) to alpha 0x50
+   through func_8040E928_de(0), advances the choice modulo the count byte (at least one) found at
+   0x57 plus the index func_8041F1D8_de gives for the entry's word at 0x10 in p's 400-byte record of
+   D_80102B00, highlights the new choice's item with alpha 0x96 and stores it. Written from the
+   assembly with the entries as an array member of the screen. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+extern void func_8040E928_de(struct Resource_func_80419E54_de *, s32);
+
+/* Activates player p's panel on the screen D_800E42D0: passes p and the frame item id from p's
+   36-byte layout row D_800E42D4 to func_8041B6E8_de, takes the row's cursor item into the word at 0x8
+   of p's 0x4C8-byte entry, places it two units up and left of the frame item, shows it, sets the
+   entry's state at 0x14 to one, redraws through func_80420438_de and hides the row's prompt item. */
+
+
+
+
+
+
+
+
+
+
+
+extern void func_8041B6E8_de(void *, s32, s32);
+
+extern void func_80420438_de(s32);
+
+/* Resets player p's choice on the screen D_800E42D0: calls func_8040E8D8_de(1) on the three items in
+   option cells from 0x18 of p's 36-byte layout row D_800E42D4, dims the item of the current choice at 0x18 of
+   p's 0x4C8-byte entry to alpha 0x50 through func_8040E928_de(0) and resets the choice to 0; unless
+   the entry's kind at 0x10 is -1 it then calls func_8040E8D8_de(0) on as many of those cells as the
+   count byte (at least one) at 0x57 plus the index func_8041F1D8_de gives for the kind in p's
+   400-byte record of D_80102B00, and highlights the item of the choice with alpha 0x96. Adapted
+   from func_804201A4_de. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Confirms a player's character choice and, once no player is still choosing, fills the match roster and starts the game; scheduler lever: the block-scoped match pointer inside the roster loop places the hoisted match address after the loop constants, as the cartridge does. */
+
+
+
+
+
+
+
+
+
+
+extern CharacterScreenCell D_800E029E[][9];
+
+extern unsigned char D_800FEB0F[];
+
+extern void func_8041B7B4_de(void *, int, int);
+
+extern void func_8041CE10_de(void *, int);
+
+extern void func_80298368_de(int);
+
+/* Chooses a different enabled random character, updates its preview and selects an available costume. */
+
+
+
+
+
+
+
+
+
+
+
+extern Choice D_800E3A50[];
+
+extern s32 func_802744D4_de(void);
+
+extern s32 func_8040EBD0_de(void *widget);
+
+extern void func_8041CAD8_de(void *preview, s32 a1, s32 model, s32 a3, s32 a4, Vec3 scale, Vec3 position, f32 angle, s32 flags);
+
+/* Counts how many of the four 0x4C8-byte entries D_800E42D0 points to are in state 1 or 2. */
+
+
+
+
+/* Draw callback of the four-player screen D_800E42D0: on draw event 1 in state 3 it clips the display list to each joined or ready player's viewport in D_800E41C0 and draws that panel through func_8041C7F4_de, in the flash fill (mode 3) while the panel's flash counter runs down and in opaque white otherwise, then restores the full-screen clip and the white fill; returns zero. */
+s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
+{
+    extern struct FourPlayerScreen *D_800E42D0;
+    s32 i;
+    if (event == 1 && D_800E42D0->state == 3) {
+        D_800D15E0 = 0;
+        D_800D15E4[0] = 255.0f;
+        D_800D15E4[1] = 255.0f;
+        D_800D15E4[2] = 255.0f;
+        D_800D15E4[3] = 255.0f;
+        for (i = 0; i < 4; i++) {
+            if (D_800E42D0->panels[i].state == 1 || D_800E42D0->panels[i].state == 3) {
+                if (D_800E42D0->panels[i].player != -1) {
+                    gDPSetScissorFrac(D_80110634++, 0, (s32)((f32)((D_800E41C0[i].field_0)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_4)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_8)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_C)) * 4.0f));
+                    if (D_800E42D0->panels[i].flash > 0) {
+                        D_800D15E4[0] = 150.0f;
+                        D_800D15E4[1] = 0.0f;
+                        D_800D15E4[2] = 0.0f;
+                        D_800D15E4[3] = 100.0f;
+                        D_800D15E4[4] = 100.0f;
+                        D_800D15E0 = 3;
+                        D_800E42D0->panels[i].flash--;
+                    } else {
+                        D_800D15E0 = 0;
+                        D_800D15E4[0] = 255.0f;
+                        D_800D15E4[1] = 255.0f;
+                        D_800D15E4[2] = 255.0f;
+                        D_800D15E4[3] = 255.0f;
+                    }
+                    func_8041C7F4_de(D_800E42D0->panels[i].body);
+                }
+            }
+        }
+        D_800D15E0 = 0;
+        gDPSetScissorFrac(D_80110634++, 0, (s32)((f32)((0)) * 4.0f), (s32)((f32)((0)) * 4.0f), (s32)((f32)((D_800E28D0 - 1)) * 4.0f), (s32)((f32)((D_800E28D4 - 1)) * 4.0f));
+        D_800D15E4[0] = 255.0f;
+        D_800D15E4[1] = 255.0f;
+        D_800D15E4[2] = 255.0f;
+        D_800D15E4[3] = 255.0f;
+    }
+    return 0;
+}
+
+void func_8041FF2C_de(void) {
+    extern MenuWidget *func_8040EC30_de(void *parent, s32 id);
+    extern void func_8040E8D8_de(MenuWidget *widget, s32 visible);
+    extern HudStatusShared_Settings D_801462C8[];
+    extern CharacterSelectionRoot *D_800E42D0;
+    u8 bits[4];
+    s32 i;
+    s32 j;
+    s32 found;
+    MenuWidget *widget;
+    MenuWidget *mark;
+
+    for (i = 0; i < 17; i++) {
+        found = 0;
+        for (j = 0; j < 4 && !found; j++) {
+            if (D_80102B0D[j * 0x190] >= 0) {
+                found = found || func_8022F5C4_de(D_80102B00[j], D_800E3A54[i][0]);
+            }
+        }
+        if (D_801462C8->trialKind == 0 || D_801462C8->trialKind == 2) {
+            if (D_801462C8->flags & 0x8000000) {
+                found = 1;
+            }
+        }
+        func_80265688_de(bits, i, found);
+    }
+    if (D_801462C8->trialKind == 1) {
+        func_80265688_de(bits, 11, 0);
+        func_80265688_de(bits, 12, 0);
+        func_80265688_de(bits, 13, 0);
+        func_80265688_de(bits, 14, 0);
+    }
+    if (D_801462C8->trialKind == 0 || D_801462C8->trialKind == 2) {
+        func_80265688_de(bits, 1, 1);
+    }
+    for (i = 0; i < 17; i++) {
+        widget = func_8040EC30_de(D_800E42D0->screen, D_800DFA02[i][0]);
+        func_8040E950_de(widget, 0);
+        if (!func_80265650_de(bits, i)) {
+            if (widget) {
+                func_8040E950_de(widget, 1);
+                func_8040E8D8_de(widget, 0);
+            }
+        } else if (D_801462C8->trialKind == 1 && func_80265650_de(D_800FEB54, D_800E3A54[i][0]) == 1) {
+            mark = func_8040EC30_de(widget, UNLOCK_MARK);
+            func_8040E8D8_de(mark, 1);
+            mark->alpha = 50;
+        }
+    }
+}
+
+void func_804201A4_de(s32 player) {
+    extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
+    extern u8 D_800FEB57[];
+    extern struct Row D_800E42D4[];
+    extern struct Screen_func_804201A4_de *D_800E42D0;
+    struct Resource_func_80419E54_de *item;
+    s32 choice;
+    s32 count;
+
+    choice = D_800E42D0->entries[player].choice;
+    item = func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].cells[choice].flags);
+    func_8040E928_de(item, 0);
+    item->value = 0x50;
+    count = D_800FEB57[func_8041F1D8_de(D_800E42D0->entries[player].kind) + player * 400];
+    if (count <= 0) {
+        count = 1;
+    }
+    choice = (choice + 1) % count;
+    item = func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].cells[choice].flags);
+    func_8040E928_de(item, 1);
+    item->value = 0x96;
+    D_800E42D0->entries[player].choice = choice;
+}
+
+void func_80420308_de(s32 player) {
+    extern struct Node_func_8041D134_de *func_8040EC30_de(void *, s32);
+    extern void func_8040E8D8_de(struct Node_func_8041D134_de *, s32);
+    extern struct RowRecAtA D_800E42D4[];
+    extern struct Screen_func_80420308_de *D_800E42D0;
+    struct Node_func_8041D134_de *frame;
+
+    func_8041B6E8_de(D_800E42D0->entries[0].window, player, D_800E42D4[player].frame);
+    D_800E42D0->entries[player].cursor = func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].cursor);
+    frame = func_8040EC30_de(D_800E42D0->entries[0].window, (u16)D_800E42D4[player].frame);
+    D_800E42D0->entries[player].cursor->x = frame->x - 2;
+    D_800E42D0->entries[player].cursor->y = frame->y - 2;
+    func_8040E8D8_de(D_800E42D0->entries[player].cursor, 1);
+    D_800E42D0->entries[player].state = 1;
+    func_80420438_de(player);
+    func_8040E8D8_de(func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].prompt), 0);
+}
+
+void func_80420438_de(s32 player) {
+    extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
+    extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+    extern u8 D_800FEB57[];
+    extern struct RowRecAt18 D_800E42D4[];
+    extern struct Screen_func_804201A4_de *D_800E42D0;
+    struct Resource_func_80419E54_de *item;
+    s32 count;
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        func_8040E8D8_de(func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].options[i].flags), 1);
+    }
+    item = func_8040EC30_de(D_800E42D0->entries[0].window,
+                         D_800E42D4[player].cells[D_800E42D0->entries[player].choice].flags);
+    func_8040E928_de(item, 0);
+    item->value = 0x50;
+    D_800E42D0->entries[player].choice = 0;
+    if (D_800E42D0->entries[player].kind == -1) {
+        return;
+    }
+    count = D_800FEB57[func_8041F1D8_de(D_800E42D0->entries[player].kind) + player * 400];
+    if (count <= 0) {
+        count = 1;
+    }
+    for (i = 0; i < count; i++) {
+        func_8040E8D8_de(func_8040EC30_de(D_800E42D0->entries[0].window, D_800E42D4[player].options[i].flags), 0);
+    }
+    item = func_8040EC30_de(D_800E42D0->entries[0].window,
+                         D_800E42D4[player].cells[D_800E42D0->entries[player].choice].flags);
+    func_8040E928_de(item, 1);
+    item->value = 0x96;
+}
+
+void func_80420618_de(int player, int choice) {
+    extern void func_8041F18C_de(int);
+    extern void *func_8040EC30_de(void *, int);
+    extern void func_8040E8D8_de(void *, int);
+    extern Match_func_80420618_de D_801462C8;
+    extern SelectMenu *D_800E42D0;
+    int i;
+    int j;
+    int count;
+    RosterSlot *slot;
+    int kind;
+
+    D_800E42D0->entries[player].state = 3;
+    func_8041B7B4_de(D_800E42D0->menu, player, 1);
+    D_800E42D0->entries[player].confirmed = 1;
+    for (i = 0; i < 3; i++) {
+        func_8040E8D8_de(func_8040EC30_de(D_800E42D0->screen, D_800E029E[player][i].id), 1);
+    }
+    D_800E42D0->entries[player].choice = choice;
+    func_8041F18C_de(choice);
+    func_8041CE10_de(D_800E42D0->entries[player].preview, 0);
+
+    count = 0;
+    for (j = 0; j < 4; j++) {
+        if (D_800E42D0->entries[j].state == 1 || D_800E42D0->entries[j].state == 2) {
+            count++;
+        }
+    }
+    if (count != 0) {
+        return;
+    }
+
+    slot = D_801462C8.slots;
+    for (i = 0; i < 8; i++) {
+        slot[i].active = 0;
+        if (D_800E42D0->entries[i].state == 3) {
+            slot[i].locked = 0;
+            slot[i].active = 1;
+            slot[i].player = i;
+            kind = func_8041F1D8_de(D_800E42D0->entries[i].choice);
+            slot[i].kind = kind;
+            {
+                Match_func_80420618_de *match = &D_801462C8;
+
+                if (match->mode == 1) {
+                    D_800FEB0F[i * 0x190] = kind;
+                }
+            }
+            slot[i].variant = D_800E42D0->entries[i].variant[3];
+        }
+    }
+    func_80298368_de(D_801462C8.mode == 1 ? 10 : 8);
+}
+
+void func_80420850_de(s32 player) {
+    extern s32 func_8041F18C_de(s32 id);
+    extern void *func_8040EC30_de(void *parent, s32 id);
+    extern u8 D_800FEB57[][0x190];
+    extern Selection_func_80420850_de *D_800E42D0;
+    s32 tries;
+    s32 done;
+    s32 id;
+    s32 kind;
+    s32 index;
+    s32 costumes;
+
+    tries = 0;
+    done = 0;
+    do {
+        id = D_800E3A50[func_802744D4_de() % 17].id;
+        if (func_8040EBD0_de(func_8040EC30_de(D_800E42D0->screen, (u16)id)) == 0 && D_800E42D0->rows[player].choice != id) {
+            done = 1;
+        } else if (++tries > 5000) {
+#if defined(VERSION_DE)
+            id = 0x90;
+#elif defined(VERSION_EU_X)
+            id = 0x96;
+#else
+            id = 0x92;
+#endif
+            done = 1;
+        }
+    } while (!done);
+    D_800E42D0->rows[player].choice = id;
+    kind = func_8041F1D8_de(id);
+    index = func_8041F18C_de(D_800E42D0->rows[player].choice);
+    {
+        Vec3 scale;
+        scale.x = D_800E3A50[index].scale[player];
+        scale.y = D_800E3A50[index].scale[player];
+        scale.z = D_800E3A50[index].scale[player];
+        func_8041CAD8_de(D_800E42D0->rows[player].preview, 9, kind + 0x38F, 75, 24000, scale,
+                      D_800E3A50[index].position[player], D_800E3A50[index].angle[player],
+                      D_800E3A50[index].flags[player]);
+    }
+    costumes = D_800FEB57[player][kind];
+    if (costumes <= 0) {
+        costumes = 1;
+    }
+    D_800E42D0->rows[player].costume = func_802744D4_de() % costumes;
+}
+
+s32 func_80420AD4_de(void) {
+    extern struct EntryRecAt14V2 *D_800E42D0;
+    s32 count = 0;
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if ((u32) (D_800E42D0[i].state - 1) < 2) {
+            count++;
+        }
+    }
+    return count;
+}

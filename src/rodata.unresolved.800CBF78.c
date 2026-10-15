@@ -1,0 +1,3 @@
+unsigned int D_d0_dd74e180bb8189f5[4] = {
+    0x53204D45, 0x4E434841, 0x7FFFFFFF, 0x00000000,
+};

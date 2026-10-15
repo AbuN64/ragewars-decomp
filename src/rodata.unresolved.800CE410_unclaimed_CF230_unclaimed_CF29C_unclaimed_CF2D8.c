@@ -1,0 +1,3 @@
+unsigned int D_d0_039b5e354452fae9[4] = {
+    0x00000001, 0xFFFFFFAE, 0x00000044, 0x00000000,
+};

@@ -1,0 +1,3 @@
+const unsigned int D_auto_src_rw_pool_8041A05C_E2050_us_rev1[8] = {
+    0x3F800000, 0x3C23D70A, 0x3F99999A, 0x3D4CCCCD, 0x3F800000, 0x3C23D70A, 0x3F800000, 0x3C23D70A,
+};

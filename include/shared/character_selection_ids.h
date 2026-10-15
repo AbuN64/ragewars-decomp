@@ -1,0 +1,12 @@
+#ifndef RW_CHARACTER_SELECTION_IDS_H
+#define RW_CHARACTER_SELECTION_IDS_H
+#include "types.h"
+#if defined(VERSION_DE)
+enum { CHARACTER_EMPTY_SLOT = 127 };
+#elif defined(VERSION_EU_X)
+enum { CHARACTER_EMPTY_SLOT = 133 };
+#else
+enum { CHARACTER_EMPTY_SLOT = 129 };
+#endif
+
+#endif

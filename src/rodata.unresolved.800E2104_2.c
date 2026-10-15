@@ -1,0 +1,4 @@
+unsigned int D_auto_src_ragewars_resident_strings_E2D10_us_rev1[11] = {
+    0x4A404C46, 0x57524949, 0x4C4C584D, 0x59415940, 0x425D5600, 0x42445542, 0x56404945, 0x44405C42,
+    0x4343475C, 0x51455A52, 0x5A510000,
+};
