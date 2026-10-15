@@ -10644,7 +10644,7 @@ schema = 1
 "ForcePlayer" = { declaration = "typedef struct ForcePlayer ForcePlayer;", evidence = "authored" }
 "ForcePlayerList" = { declaration = "typedef struct { u8 pad0[0x20]; ForcePlayer *head; } ForcePlayerList;", evidence = "authored" }
 "Format" = { declaration = "struct Format { s32 word[13]; };", evidence = "authored" }
-"FourPlayerResultsScreen" = { declaration = "struct FourPlayerResultsScreen { char pad0[8]; struct ResultsPlayerPanel panels[4]; char pad1348[0x1358 - 0x1348]; s32 state; char pad135C[0x1370 - 0x135C]; char badges[4][0xC0]; };", evidence = "authored" }
+"FourPlayerResultsScreen" = { declaration = "struct FourPlayerResultsScreen { char pad0[0x4]; void *menu; struct ResultsPlayerPanel panels[4]; char pad1348[0x1358 - 0x1348]; s32 state; int timer; char pad1360[0x8]; int next; char pad136C[0x4]; char badges[4][0xC0]; };", evidence = "authored" }
 "FourPlayerScreen" = { declaration = "struct FourPlayerScreen { char pad0[8]; struct Panel_func_8041FC50_de panels[4]; char pad1328[0x10]; s32 state; };", evidence = "authored" }
 "Frame" = { declaration = "typedef struct Frame Frame;", evidence = "authored" }
 "Frame118" = { declaration = "typedef struct Frame118 Frame118;", evidence = "authored" }
@@ -13258,7 +13258,7 @@ schema = 1
 "Word54E0" = { declaration = "typedef union { s32 whole; Half54E0 half; } Word54E0;", evidence = "authored" }
 "Work56EC8" = { declaration = "struct Work56EC8 { void *owner; s16 id; char pad6[2]; char payload[0x40]; void *base; s32 offset; };", evidence = "authored" }
 "Work80244494" = { declaration = "typedef struct Work80244494 Work80244494;", evidence = "authored" }
-"World" = { declaration = "struct World { s32 unk0; char pad4[0x84]; s32 unk88; char pad8C[0x10]; s32 unk9C; char padA0[0x10]; s32 unkB0; char padB4[0x10]; s32 unkC4; char padC8[0x34]; s32 state; s32 unk100; };", evidence = "authored" }
+"World" = { declaration = "struct World { s32 unk0; char pad4[0x84]; s32 unk88; char pad8C[0x4]; signed int resource; char pad94[0x8]; s32 unk9C; char padA0[0x10]; s32 unkB0; char padB4[0x10]; s32 unkC4; char padC8[0x34]; s32 state; s32 unk100; char pad104[0x34]; void *unk138; signed int unk13C; signed int unk140; char pad144[0xE14]; signed int unkF58; char padF5C[0x1A4B0]; signed int unk1B40C; char pad1B410[0xC]; signed int unk1B41C; char pad1B420[20]; signed int unk1B434; char pad1B438[0x1DC]; float unk1B614; float unk1B618; float unk1B61C; struct EntryRecAt18V4 *list[16]; signed int count; };", evidence = "authored" }
 "World24" = { declaration = "typedef struct World24 World24;", evidence = "authored" }
 "World37" = { declaration = "typedef struct World37 { u8 pad0[0x1504]; s32 count; Region37 regions[1]; } World37;", evidence = "authored" }
 "WorldRecAt10B8" = { declaration = "struct WorldRecAt10B8 { char pad0[0x144]; Object_func_8028C934_de *listA[512]; s32 countA; Object_func_8028C934_de *listB[128]; s32 countB; char padB4C[0xC50 - 0xB4C]; Object_func_8028C934_de *all[128]; s32 countAll; Object_func_8028C934_de *type1[64]; s32 countType1; s32 padF58; Object_func_8028C934_de *flagged[32]; s32 countFlagged; Object_func_8028C934_de *type5[16]; s32 countType5; Object_func_8028C934_de *model64F[32]; s32 count64F; Object_func_8028C934_de *model64D[4]; s32 count64D; };", evidence = "authored" }
