@@ -2,6 +2,7 @@
 #include "span_1000/code_802BD1A8.h"
 #include "types.h"
 #include "common/unused.h"
+#include "libasm_802BD1A8.h"
 /* Initializes the game state: clears the whole state block and fills its slot and lookup tables
    with 0xFF, resets the 24 player entries and queue slots, sets up the three lists and the stream
    descriptor for the ROM data at D_16E000, loads the expansion-pak data when more memory is present,

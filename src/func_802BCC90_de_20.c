@@ -1,6 +1,7 @@
 #include "span_1000/code_802BBC68.h"
 #include "types.h"
 #include "version_calls.h"
+#include "libasm_802BBC68.h"
 extern Func802C1F10Node *D_800D526C;
 extern void *D_800D5270;
 extern u32 func_802BCF30_de(void);

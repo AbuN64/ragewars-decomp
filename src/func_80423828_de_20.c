@@ -1,7 +1,7 @@
 #include "span_16E000/code_80423280.h"
+#include "common/unused.h"
 #include "span_16E000/code_804251F4.h"
 #include "types.h"
-#include "common/unused.h"
 
 /* Applies event *D_800E4680 to player record D_80102B00[index] once per D_8015402C: when that bit
    of the record's current slot flags is already set it returns -1; otherwise it sets the bit and,
@@ -12,7 +12,6 @@
 
 
 extern struct Player_func_80425014_de D_80102B00[];
-
 
 extern u8 *D_800E4680;
 

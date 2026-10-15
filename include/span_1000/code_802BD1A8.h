@@ -9,9 +9,7 @@ struct LldivResult {
     s64 rem;
 };
 
-extern void osUnmapTLBAll();
 
-extern void osWritebackDCacheAll();
 
 struct LldivResult;
 typedef struct LldivResult LldivResult;

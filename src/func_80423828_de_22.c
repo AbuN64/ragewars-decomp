@@ -7,7 +7,6 @@
 #include "stddef.h"
 #include "types.h"
 
-
 extern s32 func_8022F5C4_de(char *, s32);
 
 extern void func_8022F5A4_de(char *, s32);
@@ -35,7 +34,6 @@ static inline s32 count_achievements(s32 index) {
     return count;
 }
 
-
 extern PresetTable *func_8028D474_de(void *table, s32 key);
 
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
@@ -45,11 +43,6 @@ extern void *func_802BD3A0_de(void *destination, const void *source, int count);
    together with the current handle D_8015402C and flag 1; an unrecognised mode does nothing. */
 
 extern char D_80102B7E[];
-
-
-
-
-
 
 /* Starts the ambient track for the current stage D_8015402C (stage 4, 9, 22 and 35 select tracks
    0 to 3): returns -1 when the stage has no track or when func_80265650_de reports the slot busy,

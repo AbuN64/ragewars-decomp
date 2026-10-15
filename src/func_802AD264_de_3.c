@@ -5,6 +5,7 @@
 #include "span_1000/code_802BD1A8.h"
 #include "types.h"
 #include "sdk/libgultra.h"
+#include "libasm_802BD1A8.h"
 
 extern u8 D_8014D3E2;
 

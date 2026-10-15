@@ -13,9 +13,7 @@ struct Func802C1F10Node {
 
 extern void func_802BCC90_de();
 
-extern unsigned int func_802BD1C0_eu();
 
-extern unsigned int func_802BCE50_us();
 
 extern void func_802BCD64_de();
 
@@ -28,9 +26,7 @@ struct Ctx {
     s32 f4;
 };
 
-extern void func_802BC850_eu_x();
 
-extern unsigned int func_802BD200_eu_x();
 
 struct Func802C1F10Node;
 typedef struct Func802C1F10Node Func802C1F10Node;

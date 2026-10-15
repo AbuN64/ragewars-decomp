@@ -1,38 +1,34 @@
+#include "span_1000/code_8025D948.h"
 #include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802B339C.h"
+#include "span_1000/code_802B369C.h"
 #include "types.h"
+#include "common/unused.h"
+
+extern void func_802B2450_de(void *arg0);
+
+extern void func_802B2480_de(void *arg0, void *arg1);
 
 
-extern void *__allocParam(void);
+void _collectPVoices(void *arg0) {
+    void *node;
 
-
-
-
-
-
-
-
-
-
-
-void func_802B3540_de(void *arg0, void *arg1, s32 arg2) {
-    s32 new_var;
-    void *Shared_func_802B3540_de_v0;
-    void *temp_a0;
-    SharedRecV3 fn;
-
-    if ((((ObjectState1C *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B3540_de_v0 = __allocParam();
-        if (Shared_func_802B3540_de_v0 != 0) {
-            new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectState1C *) arg1)->unk_8.v1)->state);
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_8 = 0xE;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_C = arg2;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_0 = 0;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_4 = new_var;
-            ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_A = ((ObjectState1C *)(arg1))->unk_1A;
-            temp_a0 = ((struct Draw *) ((ObjectState1C *) arg1)->unk_8.v1)->model;
-            fn = ((CallbackStateC_4 *)(temp_a0))->callback;
-            fn(temp_a0, 3, Shared_func_802B3540_de_v0);
-        }
+    node = ((ALSynth4C *)arg0)->pLameList.next;
+    if (node != 0) {
+        do {
+            func_802B2450_de(node);
+            func_802B2480_de(node, (char *)arg0 + 4);
+            node = ((ALSynth4C *)arg0)->pLameList.next;
+        } while (node != 0);
     }
+}
+
+s32 func_802B3CD0_de(func_8022E694_S1 *arg0, s32 arg1) {
+    f32 v;
+    int idx;
+
+    v = (f32)arg1 * (f32)arg0->unk44;
+    idx = 0;
+    v = v * D_800C7588[idx];
+    v = v + D_800C7588[1];
+    return (s32)v & ~0xF;
 }

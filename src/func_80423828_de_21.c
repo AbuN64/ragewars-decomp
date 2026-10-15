@@ -1,8 +1,8 @@
 #include "span_16E000/code_80423280.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
-#include "span_16E000/code_804251F4.h"
 #include "common/unused.h"
+#include "span_16E000/code_804251F4.h"
 
 /* Returns the message text for an event result from func_80425014_de: for results 5001 to 5057 the
    text pointer jtbl_800DD848 selects for the result, where result 5002 picks between two texts by
@@ -12,43 +12,6 @@
 
 
 extern Profile D_80102B00[];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 extern s32 func_8022F454_de(Profile *, s32);
 

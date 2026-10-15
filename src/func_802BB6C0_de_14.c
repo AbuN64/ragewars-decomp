@@ -2,6 +2,7 @@
 #include "span_1000/code_802BBC68.h"
 #include "types.h"
 #include "version_calls.h"
+#include "libasm_802BBC68.h"
 extern s32 D_800D5268_de;
 extern ThreadNode *D_800D5270;
 extern void func_802BC508_de(ThreadNode **queue, ThreadNode *node);

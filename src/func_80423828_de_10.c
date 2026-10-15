@@ -21,7 +21,6 @@ extern struct ArenaChoiceState *D_800E4600;
 
 extern s32 D_800E4680;
 
-
 /* D_80146398 is the hub's func_8041F2A0_Config array: eight 0x96-byte records at Game+0xD0.
    This unit reaches them only as settings->playerSettings and declares nothing here. */
 extern Profile D_80102B00[];

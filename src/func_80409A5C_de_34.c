@@ -1,30 +1,14 @@
 #include "span_16E000/code_80409A88.h"
 #include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
 #include "span_16E000/code_8040A83C.h"
 #include "types.h"
-#include "common/unused.h"
 
 /* Points a field's text at the label for the state word D_80153788: one of 15 strings through the jump table
    jtbl_800E0F48 for states 0 to 15, and D_800D7838 for any other state. Returns zero. */
 
 
 extern u32 D_80153788;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 s32 func_8040B024_de(struct FieldRecAt14 *field) {
     u32 state = D_80153788;

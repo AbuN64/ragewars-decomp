@@ -7,6 +7,7 @@
 #include "span_1000/code_802BB15C.h"
 #include "span_1000/code_802BD1A8.h"
 #include "types.h"
+#include "libasm_802BD1A8.h"
 
 extern s32 D_80142C30;
 

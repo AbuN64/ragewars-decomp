@@ -6,6 +6,7 @@
 #include "types.h"
 #include "common/unused.h"
 #include "sdk/libgultra.h"
+#include "libasm_802BD1A8.h"
 
 
 s32 func_802B1820_us_rev1(u8 *arg0) {

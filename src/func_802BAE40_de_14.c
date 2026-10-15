@@ -53,6 +53,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_8023B9A0.h"
 #include "types.h"
+#include "libasm_802BBC68.h"
 
 /* osInitialize, drafted from ultralib src/os/initialize.c (before 2.0J, _FINALROM): the clock
    rate comes from the ROM header through osPiRawReadIo. */

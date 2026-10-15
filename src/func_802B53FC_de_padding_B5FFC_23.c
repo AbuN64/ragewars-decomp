@@ -1,28 +1,4 @@
-#include "span_1000/code_802B369C.h"
-#include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802B53FC.h"
-#include "types.h"
-
-
-
-
-s32 func_802B6480_de(ALSave *arg0, s32 arg1, s32 arg2)
-{
-  switch (arg1)
-  {
-    case 1:
-      arg0->filter.source = (ALFilter_s14 *)arg2;
-      goto ret0;
-
-    case 6:
-      arg0->dramout = arg2;
-
-    default:
-      ret0:
-    return 0;
-
-      return 0;
-
-  }
-
-}
+const unsigned int D_auto_rodata_func_802B6560_de_800C7818[15] = {
+    0xBFC55554, 0xBC83656D, 0x3F8110ED, 0x3804C2A0, 0xBF29F6FF, 0xEEA56814, 0x3EC5DBDF, 0x0E314BFE,
+    0x3FD45F30, 0x6DC9C883, 0x400921FB, 0x50000000, 0x3E6110B4, 0x611A6263, 0x00000000,
+};

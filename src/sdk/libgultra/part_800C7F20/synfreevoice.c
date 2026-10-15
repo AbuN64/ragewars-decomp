@@ -1,3 +1,4 @@
+#include "sdk/libgultra.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B2EF8.h"
 #include "types.h"

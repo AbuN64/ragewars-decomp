@@ -7,7 +7,7 @@ title = "Turok: Rage Wars"
 versions = ["de", "eu", "eu-x", "us", "us-rev1"]
 names_from = "us-rev1"
 toolchain = "gcc-2.8.1-sn64"
-library_dirs = ["src/libgcc"]
+library_dirs = ["src/libgcc", "src/sdk/libgultra"]
 
 [[project.version_differences]]
 function = "func_80423F48_de"
