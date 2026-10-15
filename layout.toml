@@ -112456,6 +112456,12 @@ scores = {eu-x = 0.810126582278481}
 key = {eu-x = "6bff0e4df47145e77310bba4fcea37cb008ae7f5f8f60bc996c83e99ba511f3e"}
 
 [[fuzzy]]
+member = "func_8043DCA4_de"
+path = "src/fuzzy/func_8043DCA4_de.c"
+scores = {de = 0.9626168224299065, us = 0.9626168224299065}
+key = {de = "9bfb5528112a9027215e8eb3ec2c26a3d0e5c83d3892057ddcd7e4b32936e92a", us = "829f3df4c5a57f8e521c7213633579882feceacb2c0f61d175940fe6d093b492"}
+
+[[fuzzy]]
 member = "func_8043DD2C_us_rev1"
 path = "src/fuzzy/func_8043DD2C_us_rev1.c"
 scores = {us-rev1 = 0.8333333333333334}
