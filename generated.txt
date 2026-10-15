@@ -10,7 +10,6 @@ versions/eu-x/report.json
 versions/eu-x/symbols.ld
 versions/eu/report.json
 versions/eu/symbols.ld
-versions/stamp.json
 versions/us-rev1/report.json
 versions/us-rev1/symbols.ld
 versions/us/report.json
