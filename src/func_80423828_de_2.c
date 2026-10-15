@@ -1,8 +1,8 @@
-#include "span_176000/code_80405DC4.h"
-#include "types.h"
-#include "span_16E000/code_8041B020.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
+#include "span_16E000/code_8041B020.h"
+#include "span_176000/code_80405DC4.h"
+#include "types.h"
 /* Marks two loading-screen hint slots (0x1D9 and 0x1DA) unused. */
 
 
