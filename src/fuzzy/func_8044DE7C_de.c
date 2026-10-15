@@ -19,9 +19,9 @@ struct ResetMenuDE7C {
     char pad8C[0x20];
     s32 enabled;
 };
-extern Track_func_8044D220_de D_8011FE88;
+extern World D_8011FE88;
 extern struct ResetMenuDE7C D_801468A0;
-extern s32 func_8044D220_de(Track_func_8044D220_de *, s32, s32, Object_func_8044D220_de *, s32);
+extern s32 func_8044D220_de(World *, s32, s32, Object_func_8044D220_de *, s32);
 
 void func_8044DE7C_de(struct ResetActorDE7C *actor, s32 key) {
     Object_func_8044D220_de entry;

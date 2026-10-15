@@ -32,7 +32,7 @@ struct State_func_8044D5C4_de {
 struct ObjB;
 typedef struct ObjB ObjB;
 
-struct Track_func_8044D220_de;
+struct World;
 
 
 struct LightSettings;
@@ -283,7 +283,7 @@ struct State_func_8044D0F0_de {
     int changed;
 };
 
-struct Track_func_8044D220_de;
+struct World;
 
 
 struct Node_func_8044D220_de;

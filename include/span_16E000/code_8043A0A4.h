@@ -69,13 +69,18 @@ struct ResultsPlayerPanel {
 struct FourPlayerResultsScreen;
 struct ResultsPlayerPanel;
 struct FourPlayerResultsScreen {
-    char pad0[8];
+    char pad0[0x4];
+    void *menu;
     struct ResultsPlayerPanel panels[4];
     char pad1348[0x1358 - 0x1348];
     s32 state;
-    char pad135C[0x1370 - 0x135C];
+    int timer;
+    char pad1360[0x8];
+    int next;
+    char pad136C[0x4];
     char badges[4][0xC0];
 };
+typedef struct FourPlayerResultsScreen FourPlayerResultsScreen;
 
 struct Entry_func_8043BBB0_de;
 struct Entry_func_8043BBB0_de {
@@ -105,22 +110,11 @@ struct Entry_func_8043B0CC_de {
 };
 
 struct ResultsPlayerPanel;
-struct State_func_8043BF28_de;
-struct State_func_8043BF28_de {
-    void *screen;
-    void *menu;
-    struct ResultsPlayerPanel players[4];
-    char pad1348[0x10];
-    int phase;
-    int timer;
-    char pad1360[8];
-    int next;
-};
+struct FourPlayerResultsScreen;
 
 extern s32 func_8043BA24_de();
 
-struct State_func_8043BF28_de;
-typedef struct State_func_8043BF28_de State_func_8043BF28_de;
+struct FourPlayerResultsScreen;
 
 struct Entry_func_8043B0CC_de;
 struct Screen_func_8043B0CC_de;

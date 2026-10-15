@@ -7,7 +7,7 @@
 
 
 
-extern struct Table_func_804351E4_de *D_800E54A4;
+extern struct PlayerSlotTable *D_800E54A4;
 
 s32 func_804351E4_de(void) {
     s32 found = -1;
@@ -17,7 +17,7 @@ s32 func_804351E4_de(void) {
         if (found != -1) {
             break;
         }
-        if (D_800E54A4->slots[i].x == -1) {
+        if (D_800E54A4->places[i].x == -1) {
             found = i;
         }
     }

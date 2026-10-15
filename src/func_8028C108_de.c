@@ -9,7 +9,7 @@
 
 
 
-EntryRecAt18V4 *func_8028C108_de(World_func_8028C108_de *world, s32 id) {
+EntryRecAt18V4 *func_8028C108_de(World *world, s32 id) {
     s32 i;
     EntryRecAt18V4 *found = 0;
 

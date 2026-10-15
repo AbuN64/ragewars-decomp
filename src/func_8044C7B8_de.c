@@ -15,10 +15,10 @@
 extern void func_80253D10_de(s32 arg0, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *block);
 extern struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *handle, s32 size);
 extern void *func_8028CF6C_de(void *world, s32 id);
-extern s32 func_8044D220_de(Track_func_8044D220_de *world, s32 group, s32 set, Object_func_8044D220_de *out, s32 max);
-extern s32 func_8044D3E8_de(Track_func_8044D220_de *world, void *data, s32 group, void *buf);
+extern s32 func_8044D220_de(World *world, s32 group, s32 set, Object_func_8044D220_de *out, s32 max);
+extern s32 func_8044D3E8_de(World *world, void *data, s32 group, void *buf);
 
-void func_8044C7B8_de(Track_func_8044D220_de *world, struct Shape_typemap_165 **handle) {
+void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
     Object_func_8044D220_de spawns[8];
     Object_func_8044D220_de extra;
     s32 n;

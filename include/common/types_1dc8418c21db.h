@@ -3360,7 +3360,9 @@ struct World {
     s32 unk0;
     char pad4[0x84];
     s32 unk88;
-    char pad8C[0x10];
+    char pad8C[0x4];
+    signed int resource;
+    char pad94[0x8];
     s32 unk9C;
     char padA0[0x10];
     s32 unkB0;
@@ -3369,6 +3371,24 @@ struct World {
     char padC8[0x34];
     s32 state;
     s32 unk100;
+    char pad104[0x34];
+    void *unk138;
+    signed int unk13C;
+    signed int unk140;
+    char pad144[0xE14];
+    signed int unkF58;
+    char padF5C[0x1A4B0];
+    signed int unk1B40C;
+    char pad1B410[0xC];
+    signed int unk1B41C;
+    char pad1B420[20];
+    signed int unk1B434;
+    char pad1B438[0x1DC];
+    float unk1B614;
+    float unk1B618;
+    float unk1B61C;
+    struct EntryRecAt18V4 *list[16];
+    signed int count;
 };
 typedef struct World World;
 

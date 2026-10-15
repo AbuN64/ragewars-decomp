@@ -192,12 +192,8 @@ struct IntegerStateBC0 {
 
 extern float D_800DDED0;
 
-struct Table_func_804351E4_de;
+struct PlayerSlotTable;
 struct Triple;
-struct Table_func_804351E4_de {
-    char pad[0x2DF8];
-    struct Triple slots[4];
-};
 
 extern void func_8043599C_de(s32 first, s32 second, s32 index);
 

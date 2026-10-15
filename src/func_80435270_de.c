@@ -4,7 +4,7 @@
 
 
 
-extern struct Table_func_804351E4_de *D_800E54A4;
+extern struct PlayerSlotTable *D_800E54A4;
 
 int func_80435270_de(int id, int value) {
     int found;
@@ -12,10 +12,10 @@ int func_80435270_de(int id, int value) {
 
     found = 0;
     for (i = 0; i < 4 && found == 0; i++) {
-        if (D_800E54A4->slots[i].x == id && D_800E54A4->slots[i].y == value) {
+        if (D_800E54A4->places[i].x == id && D_800E54A4->places[i].y == value) {
             found = 1;
-            D_800E54A4->slots[i].x = -1;
-            D_800E54A4->slots[i].z = 2;
+            D_800E54A4->places[i].x = -1;
+            D_800E54A4->places[i].z = 2;
         }
     }
     return found;

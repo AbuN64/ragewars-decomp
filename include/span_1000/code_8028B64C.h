@@ -65,8 +65,7 @@ extern s32 func_8028B988_de(void *arg0, struct LevelBitRecord *arg1);
 struct func_8028C34C_S1;
 typedef struct func_8028C34C_S1 func_8028C34C_S1;
 
-struct World_func_8028C108_de;
-typedef struct World_func_8028C108_de World_func_8028C108_de;
+struct World;
 
 struct IntegerState54;
 typedef struct IntegerState54 IntegerState54;
@@ -251,14 +250,9 @@ struct func_8028C5E8_S1 {
     char unk11EC;
 };
 
-struct World_func_8028C108_de;
-struct World_func_8028C108_de {
-    char pad[0x1B620];
-    EntryRecAt18V4 *list[16];
-    s32 count;
-};
+struct World;
 
-extern EntryRecAt18V4 *func_8028C108_de(World_func_8028C108_de *world, s32 id);
+extern EntryRecAt18V4 *func_8028C108_de(World *world, s32 id);
 
 struct func_8028C400_S2;
 struct func_8028C400_S2 {

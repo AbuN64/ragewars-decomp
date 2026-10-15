@@ -65,7 +65,7 @@ extern void func_80255CB8_de(ListRec *, Node_func_8044D220_de *);
 extern Node_func_8044D220_de *func_80256190_de(ListRec *);
 extern void func_80255ED8_de(ListRec *, Node_func_8044D220_de *);
 
-s32 func_8044D220_de(Track_func_8044D220_de *track, s32 kind, s32 key, Object_func_8044D220_de *out, s32 max) {
+s32 func_8044D220_de(World *track, s32 kind, s32 key, Object_func_8044D220_de *out, s32 max) {
     ListRec list;
     Node_func_8044D220_de nodes[64];
     s32 first;
