@@ -1791,7 +1791,7 @@ segments:
       - [0x915F8, data, "func_802909F8_de_padding_915F8"]
       - [0x91600, c, "func_80290A00_de"]
       - [0x91648, c, "func_80290A48_de"]
-      - [0x91670, asm, "func_80290A70_de"]
+      - [0x91670, c, "func_80290A70_de"]
       - [0x91678, data, "func_80290A78_de_padding_91678"]
       - [0x91680, asm, "func_80290A80_de"]
       - [0x91688, data, "func_80290A88_de_padding_91688"]
