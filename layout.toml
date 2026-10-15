@@ -90196,6 +90196,28 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/sdk/libgultra/libasm_802AD504.s"
+kind = "asm"
+group = "libasm_802AD504"
+members = ["osUnmapTLB"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/sdk/libgultra/libasm_802B29C4.s"
+kind = "asm"
+group = "libasm_802B29C4"
+members = ["func_802AD8F4_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/sdk/libgultra/part_800C7F20/code_802B66A0.c"
 kind = "c"
 group = "code_802B66A0"
