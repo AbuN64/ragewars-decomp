@@ -13166,7 +13166,7 @@ schema = 1
 "TransferScratch" = { declaration = "typedef struct TransferScratch TransferScratch;", evidence = "authored" }
 "Transform" = { declaration = "struct Transform { union { PackedMatrixWords matrix; struct { char pad0[0x18]; s16 position[3]; }; }; };", evidence = "authored" }
 "TransformVector" = { declaration = "typedef union TransformVector { Vec3 value; u32 word[3]; } TransformVector;", evidence = "authored" }
-"Tree" = { declaration = "struct Tree { struct Tree *parent; struct Tree *next; struct Tree *child; short id; char pad10[0x4]; short field_14; short field_16; };", evidence = "authored" }
+"Tree" = { declaration = "struct Tree { struct Tree *parent; struct Tree *next; struct Tree *child; short id; char pad0E[0x6]; short field_14; short field_16; };", evidence = "authored" }
 "TreeNode" = { declaration = "struct TreeNode { unsigned int key; unsigned char padding[12]; struct TreeNode *link10; struct TreeNode *link14; struct TreeNode *link18; struct TreeNode *link1c; };", evidence = "authored" }
 "TrialSettings" = { declaration = "struct TrialSettings { char pad0[0xD]; u8 trialKind; char padE[0x16]; s8 time; s8 limit; s8 other; s8 score; };", evidence = "authored" }
 "Triangle" = { declaration = "struct Triangle { char pad0[2]; u16 flags; Vec3 *vertices[3]; };", evidence = "authored" }

@@ -123,7 +123,7 @@ struct Tree {
     struct Tree *next;
     struct Tree *child;
     short id;
-    char pad10[0x4];
+    char pad0E[0x6];
     short field_14;
     short field_16;
 };
