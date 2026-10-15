@@ -3230,6 +3230,7 @@ schema = 1
 "func_8040C474_de" = { evidence = "landed", signature = "s32 func_8040C474_de(void)" }
 "func_8040C484_de" = { evidence = "landed", signature = "void func_8040C484_de(unsigned width,int a1,int a2,int a3,int a4,int a5)" }
 "func_8040C5C8_de" = { evidence = "landed", signature = "void func_8040C5C8_de(void *widget, Args args)" }
+"func_8040C638_us" = { evidence = "landed", signature = "s32 func_8040C638_us(s32 arg0)" }
 "func_8040C648_us" = { evidence = "landed", signature = "void func_8040C648_us(void *arg0, Args args)" }
 "func_8040C948_de" = { evidence = "landed", signature = "void func_8040C948_de(void)" }
 "func_8040C950_de" = { evidence = "landed", signature = "void func_8040C950_de(Slider *slider)" }
