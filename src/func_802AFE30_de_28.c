@@ -27,12 +27,12 @@ extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUspt
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime); /* alEvtqPostEvent */
 extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void func_802B0258_de(ALEventQueue *, s16);                 /* alEvtqFlushType */
-extern void func_802B36F0_de(void *, ALVoice_s *);                   /* alSynStopVoice */
-extern void func_802B3200_de(void *, ALVoice_s *);                   /* alSynFreeVoice */
+extern void alSynStopVoice(void *, ALVoice_s *);                   /* alSynStopVoice */
+extern void alSynFreeVoice(void *, ALVoice_s *);                   /* alSynFreeVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
 extern void func_802B33E0_de(void *, ALVoice_s *, f32);              /* alSynSetPitch */
 extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);        /* __vsVol */
-extern ALMicroTime func_802B1888_de(ALVoiceState *, ALMicroTime);  /* __vsDelta */
+extern ALMicroTime __vsDelta(ALVoiceState *, ALMicroTime);  /* __vsDelta */
 extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
 extern void func_802B18E4_de(ALSeqPlayer *, void *);               /* __initFromBank */
 extern void func_802BAC50_de(char *, char *, s32);                 /* __assert */
@@ -61,8 +61,8 @@ ALMicroTime func_802B0554_de(void *node)
             break;
         case 5: /* AL_NOTE_END_EVT */
             voice = seqp->base.nextEvent.msg.note.voice;
-            func_802B36F0_de(seqp->base.drvr, voice);
-            func_802B3200_de(seqp->base.drvr, voice);
+            alSynStopVoice(seqp->base.drvr, voice);
+            alSynFreeVoice(seqp->base.drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
                 func_802B1C34_de(&seqp->base, vs);
@@ -86,7 +86,7 @@ ALMicroTime func_802B0554_de(void *node)
             tremelo = (u32)oscValue;
             *tremeloSlot = tremelo;
             func_802B3480_de(seqp->base.drvr, &vs->voice, func_802B1814_de(vs, &seqp->base),
-                          func_802B1888_de(vs, seqp->base.curTime));
+                          __vsDelta(vs, seqp->base.curTime));
             evt.type = 22;
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
@@ -121,8 +121,8 @@ ALMicroTime func_802B0554_de(void *node)
         case 16: /* AL_SEQP_STOP_EVT */
             if (seqp->base.state == 2) {
                 for (vs = seqp->base.vAllocHead; vs != 0; vs = seqp->base.vAllocHead) {
-                    func_802B36F0_de(seqp->base.drvr, &vs->voice);
-                    func_802B3200_de(seqp->base.drvr, &vs->voice);
+                    alSynStopVoice(seqp->base.drvr, &vs->voice);
+                    alSynFreeVoice(seqp->base.drvr, &vs->voice);
                     if (vs->flags)
                         func_802B1C34_de(&seqp->base, vs);
                     func_802B156C_de(&seqp->base, &vs->voice);
@@ -148,7 +148,7 @@ ALMicroTime func_802B0554_de(void *node)
             seqp->base.vol = seqp->base.nextEvent.msg.spvol.type;
             for (vs = seqp->base.vAllocHead; vs != 0; vs = vs->next) {
                 func_802B3480_de(seqp->base.drvr, &vs->voice, func_802B1814_de(vs, &seqp->base),
-                              func_802B1888_de(vs, seqp->base.curTime));
+                              __vsDelta(vs, seqp->base.curTime));
             }
             break;
         case 11: /* AL_SEQP_LOOP_EVT */

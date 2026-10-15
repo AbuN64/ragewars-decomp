@@ -13,7 +13,7 @@ extern void func_802BCF70_de(s32 arg0, s32 arg1);
 extern s32 D_800C7990_de;
 extern s32 D_800C7994_de;
 
-s32 func_802B9CB0_de(s32 arg0, s32 arg1) {
+s32 __osSiRawStartDma(s32 arg0, s32 arg1) {
     if (arg1 & 3) {
         func_802BAC50_de(&D_800C7990_de, &D_800C7994_de, 0x37);
     }

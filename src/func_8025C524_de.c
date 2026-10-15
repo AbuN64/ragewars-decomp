@@ -14,7 +14,7 @@ void func_8025C524_de(void *arg0, s32 arg1)
   new_var2 = 2;
   new_var = &((SlotRecAtB4V2 *)arg0)->index;
   func_802B2F00_de(temp_s0_2, ((Owner_func_8025B5F0_de *)temp_s0)->samples[*new_var]);
-  func_802B2E30_de(temp_s0_2, arg1 & 0xFF);
+  alSndpSetPan(temp_s0_2, arg1 & 0xFF);
 }
 
 void func_8025C578_de(void *arg0)
@@ -34,7 +34,7 @@ void func_8025C5BC_de(void *arg0) {
 
 extern void func_802B2F00_de(void *arg0, s16 arg1);
 extern s32 func_802B2620_de(void *arg0);
-extern void func_802B2F60_de(void *arg0);
+extern void alSndpStop(void *arg0);
 
 void func_8025C5DC_de(void *arg0) {
     s32 a0;
@@ -49,7 +49,7 @@ void func_8025C5DC_de(void *arg0) {
         s32 addr = a0 + idx * 2;
         func_802B2F00_de(s1, ((Owner_func_8025B5F0_de *)a0)->samples[idx]);
         if (func_802B2620_de(s1) != 0) {
-            func_802B2F60_de(s1);
+            alSndpStop(s1);
         }
         ((SlotRecAtB4V2 *)arg0)->state = -1;
     }

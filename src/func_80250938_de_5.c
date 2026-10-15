@@ -37,7 +37,7 @@ extern s32 D_80101194;
 
 extern u32 func_802BCF30_de(void);
 
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 extern s32 func_802BB420_de(void *, s32, s32);
 
@@ -72,10 +72,10 @@ static inline void acquire(void) {
 
     D_8010515C = counter;
     if (counter != 1) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB2A0_de(D_801047E0.lock, 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
 }
 
@@ -86,10 +86,10 @@ static inline void release(void) {
 
     D_8010515C = counter;
     if (counter != 0) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB420_de(D_801047E0.lock, 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
 }
 
@@ -120,10 +120,10 @@ static inline void lock(void) {
 
     D_8010515C = counter;
     if (counter != 1) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB2A0_de(D_801047E0.lock, 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
 }
 
@@ -134,10 +134,10 @@ static inline void unlock(void) {
 
     D_8010515C = counter;
     if (counter != 0) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB420_de(D_801047E0.lock, 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
 }
 

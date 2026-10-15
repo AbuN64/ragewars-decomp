@@ -107,7 +107,7 @@ void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
     func_802BD170_de(mask);
 }
 
-void func_802B01E0_de(void *arg0) {
+void alEvtqFlush(void *arg0) {
     extern void func_802B2480_de(Node_func_80239AF4_de *arg0, void *arg1);
     extern void func_802B2450_de(Node_func_80239AF4_de *arg0);
     ALEventQueue *queue = arg0;

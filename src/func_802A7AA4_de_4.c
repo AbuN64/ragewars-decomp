@@ -1,153 +1,110 @@
+#include "types.h"
+#include "gfx.h"
+#include "gbi.h"
 #include "span_1000/code_802A8A94.h"
 #include "common/types_1dc8418c21db.h"
-#include "span_1000/code_8026AC38.h"
-#include "span_1000/code_80296014.h"
-#include "span_1000/code_802A208C.h"
-#include "span_1000/code_802A6AC0.h"
-#include "types.h"
+#include "shared/world.h"
+#include "shared/func_802453D4_de_closed.h"
+#include "span_16E000/code_8043F69C.h"
+#include "resident_event_handler.h"
+#include "span_1000/code_80291054.h"
 
-s32 func_802A7AA4_de();
+extern Node80253610 *func_8028BEAC_de(Shared_World *, s32, s32, s32);
+extern void func_802AA1AC_de(Node80253610 *, s32, s16, s16, f32, f32, s32);
+extern void func_80253754_de(void *, Node80253610 *);
 
-extern s32 D_800CDEB4;
-
-s32 func_802AA70C_de(void *, s32 *);
-
-extern s32 D_800CDEC8;
-
-extern int func_802A23B4_de(void);
-
-extern void func_802A9234_de(s32);
-
-extern void func_802A7660_de(void *arg0, int arg1);
-
-extern u8 D_801462DE;
-
-extern f32 D_800CB3A8;
-
-extern f32 D_800CB3B0;
-
-extern f32 D_800C6214_de;
-
-extern f32 D_800C621C_de;
-
-extern f32 D_800C6224_de;
-
-void func_802AA6D0_de(void *arg0, s16 arg1, s16 arg2)
+/* The advance and kerning scale follow the currently selected font. */
+static inline f32 fontGlyphWidth(void)
 {
-  Mover *mover = arg0;
-  mover->handle = -1;
-  mover->active = 0;
-  mover->state = 0;
-  mover->x = (f32) arg1;
-  mover->y = (f32) arg2;
-}
-
-s32 func_802AA70C_de(void *arg0, s32 *arg1) {
-    (((struct ObjectLinksC_2 *) ((s8 *) arg0))->unk_4) = arg1;
-    (((struct ObjectLinksC_2 *) ((s8 *) arg0))->unk_8) = 2;
-    return func_802A7AA4_de();
-}
-
-s32 func_802AA730_de(void *arg0, s32 arg1, s32 arg2) {
-    (((struct IntegerState48 *) ((s8 *) arg0))->unk_40) = arg1;
-    (((struct IntegerState48 *) ((s8 *) arg0))->unk_3C) = arg2;
-    (((struct IntegerState48 *) ((s8 *) arg0))->unk_44) = 0x64;
-    func_802AA70C_de(arg0, &D_800CDEB4);
-}
-
-void func_802AA760_de(void *arg0, s32 arg1, s32 arg2) {
-    (((struct IntegerState90 *) ((s8 *) arg0))->unk_88) = arg1;
-    (((struct IntegerState90 *) ((s8 *) arg0))->unk_84) = arg2;
-    (((struct IntegerState90 *) ((s8 *) arg0))->unk_8C) = 0x64;
-    func_802AA70C_de(arg0 + 0x48, &D_800CDEC8);
-}
-
-void func_802AA794_de(char *object, int value) {
-    Hud *hud = (void *)object;
-    hud->bars[0].target = value;
-}
-
-void func_802AA79C_de(void *object, int value) {
-    Hud *hud = (void *)object;
-    hud->bars[1].target = value;
-}
-
-void func_802AA7A4_de(void *arg0) {
-    char pad[256];
-    (void)pad;
-
-    if (func_802A23B4_de() == 1) {
-        func_802A2090_de();
-        func_8026D8F8_de();
-        func_80295FF4_de();
+    f32 result;
+    switch (D_80147150) {
+    case 0: result = 24.0f; break;
+    case 1: result = 12.0f; break;
+    case 3: result = 6.0f; break;
+    case 4: case 5: result = 16.0f; break;
+    case 2: case 6: result = 8.0f; break;
+    default: result = 1.0f; break;
     }
-    func_802A84F8_de();
-    func_802A8710_de();
-    func_802AAB68_de(D_800C61F0_de, D_800C61F0_de);
-    func_802AAB3C_de(0xFF, 0xFF, 0xFF, 0xC8, 0xC8, 0xC8);
-    func_802A9234_de(D_801462DE);
-    if (((Hud *)arg0)->bars[0].enabled != 0) {
-        func_802A7660_de(arg0, 1);
-    }
-    if (((Hud *)arg0)->bars[1].enabled != 0) {
-        func_802A7660_de(arg0, 2);
-    }
+    return result;
 }
 
-/** Return the floating parameter selected by the current global mode. */
-f32 func_802AA864_de(void) {
-    {
-        s32 sw_mode_value = D_80147150;
-        if ((unsigned int)sw_mode_value > 6) {
-            goto sw_mode_default;
+void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language)
+{
+    FontStyle *style = &D_801376F8;
+    Node80253610 *font;
+    s32 special = 0;
+    s32 resource;
+    u8 ch, next, glyph;
+    f32 advance, sx, sy, a, b;
+
+    gDPPipeSync(D_80110634++);
+    if (shadow) {
+        gDPSetEnvColor(D_80110634++, 0, 0, 0, alpha);
+        gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, 255);
+        x += style->shadowX * (D_800E28D0 / 284);
+        y += style->shadowY * (D_800E28D4 / 222);
+    } else {
+        gDPSetEnvColor(D_80110634++, style->envR, style->envG, style->envB, alpha);
+        gDPSetPrimColor(D_80110634++, 0, 0, style->primR, style->primG, style->primB, 255);
+    }
+    switch (language) {
+    default: case 0: resource = 2; break;
+    case 1: resource = 1; special = 1; break;
+    case 2: case 3: resource = 6; break;
+    case 4: case 5: resource = 5; break;
+    case 6: resource = 7; break;
+    }
+    font = func_8028BEAC_de(&D_8011FE88, resource, 0x10, 1);
+    if (font) {
+        while (text && (ch = *text) && ch != 10) {
+            next = text[1];
+            switch (language) {
+            default: case 0:
+                glyph = D_801378C0[ch];
+                a = fontGlyphWidth();
+                b = fontGlyphWidth();
+                advance = func_8044222C_de(ch, next, a, b);
+                break;
+            case 1:
+                glyph = D_801377C0[ch];
+                advance = fontGlyphWidth();
+                break;
+            case 2:
+                glyph = D_801377C0[ch];
+                advance = fontGlyphWidth();
+                break;
+            case 3:
+                glyph = D_801377C0[ch];
+                advance = fontGlyphWidth();
+                break;
+            case 4:
+                glyph = ch;
+                if (ch == 255) glyph = 255;
+                advance = fontGlyphWidth();
+                break;
+            case 5:
+                glyph = ch;
+                if (ch == 255) glyph = 255;
+                advance = fontGlyphWidth();
+                break;
+            case 6:
+                glyph = ch;
+                if (ch == 255) glyph = 255;
+                advance = fontGlyphWidth();
+                break;
+            }
+            sx = width;
+            sy = height;
+            if (special && (glyph == 0x25 || glyph == 0x2B || glyph == 0x3D)) {
+                sx = D_800E28D0 * (1.0f / 284.0f);
+                sy = D_800E28D4 * (1.0f / 222.0f);
+            }
+            if (glyph != 255) {
+                func_802AA1AC_de(font, glyph, (s16)x, (s16)y, sx, sy, 1);
+            }
+            x += advance * sx;
+            text++;
         }
-        switch (sw_mode_value) {
-        case 0: goto sw_mode_0;
-        case 1: goto sw_mode_1;
-        case 2: goto sw_mode_2;
-        case 3: goto sw_mode_3;
-        case 4: goto sw_mode_4;
-        case 5: goto sw_mode_4;
-        case 6: goto sw_mode_2;
-        }
-    }
-    do {
-    sw_mode_0:
-        return D_800C6214_de;
-    sw_mode_1:
-        return D_800CB3A8;
-    sw_mode_2:
-    sw_mode_6:
-        return D_800C621C_de;
-    sw_mode_3:
-        return D_800CB3B0;
-    sw_mode_4:
-    sw_mode_5:
-        return D_800C6224_de;
-    sw_mode_default:
-        return D_800C6228_de;
-    
-    } while (0);
-}
-
-void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag) {
-    Table802AB8DC *table;
-    Entry802AB8DC *entry;
-    void *result;
-    u8 entryTag;
-    s32 remainder;
-
-    *out = 0;
-    if (handle != 0) {
-        table = *handle;
-        entry = &table->entries[0];
-        remainder = index % table->count;
-        remainder *= 8;
-        remainder += (s32)entry;
-        entry = (Entry802AB8DC *)remainder;
-        entryTag = entry->pad4[0];
-        result = (u8 *)table + entry->offset;
-        *tag = entryTag;
-        *out = result;
+        func_80253754_de(0, font);
     }
 }

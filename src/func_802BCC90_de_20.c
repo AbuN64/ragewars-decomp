@@ -6,7 +6,7 @@ extern void *D_800D5270;
 extern u32 func_802BCF30_de(void);
 extern void func_802BB870_de(void *arg0, Func802C1F10Node *arg1);
 
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 void func_802BCE20_de(Func802C1F10Node *arg0) {
     Func802C1F10Node *node;
     Func802C1F10Node *cur;
@@ -35,5 +35,5 @@ void func_802BCE20_de(Func802C1F10Node *arg0) {
     if (node == D_800D5270) {
         func_802BC850_eu_x();
     }
-    func_802BCF50_de(token);
+    __osRestoreInt(token);
 }

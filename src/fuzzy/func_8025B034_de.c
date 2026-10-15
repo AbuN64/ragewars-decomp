@@ -71,7 +71,7 @@ loop_1:
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
                     func_802B2F00_de(temp_s1, *((s16 *) ((u8 *) ((temp_a0 + (*((s32 *) ((u8 *) (temp_s0) + 4)) * 2))) + 220)));
                     if (func_802B2620_de(temp_s1) != 0) {
-                        func_802B2F60_de(temp_s1);
+                        alSndpStop(temp_s1);
                     }
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
                     *((s32 *) ((u8 *) (temp_s0_2) + 4)) = -1;

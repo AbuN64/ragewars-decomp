@@ -3,7 +3,7 @@
 #include "types.h"
 
 extern void func_802B3F10_de(s32 arg0, s32 arg1, s32 arg2);
-extern int func_802B60D8_de(int *arg0, int arg1, int arg2);
+extern int alFxParam(int *arg0, int arg1, int arg2);
 extern s32 func_802B5540_de(void *arg0, s32 arg1, s32 arg2);
 
 
@@ -15,7 +15,7 @@ s32 func_802B64C0_de(void *arg0, s16 arg1, s32 arg2, s32 arg3) {
 
     func_802B3F10_de((s32)((ALSynth *)arg0)->auxBus + scaled + 0x20, arg2, arg3);
     temp_a2 = (s32)((ALSynth *)arg0)->auxBus + scaled;
-    func_802B60D8_de((int *)(temp_a2 + 0x20), 1, temp_a2);
+    alFxParam((int *)(temp_a2 + 0x20), 1, temp_a2);
     func_802B5540_de(((ALSynth *)arg0)->mainBus, 2, (s32)((ALSynth *)arg0)->auxBus + scaled + 0x20);
     return (s32)((ALSynth *)arg0)->auxBus + scaled + 0x20;
 }

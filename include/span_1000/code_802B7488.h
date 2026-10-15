@@ -73,7 +73,7 @@ struct ContPad {
     u8 error;
 };
 
-extern int func_802B7C30_de();
+extern int __osDpDeviceBusy();
 
 struct ALSoundState;
 struct ALSoundState {

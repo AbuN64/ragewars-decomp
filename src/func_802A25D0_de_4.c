@@ -1,85 +1,75 @@
-#include "span_1000/code_802A6AC0.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802A25C4.h"
 #include "types.h"
+#include "span_1000/code_8024E914.h"
+/* Interpolates morph vertex positions and shades between two key frames. */
 
 
 
 
 
-extern s32 D_800D297C;
-extern void func_80272CB0_de(void *, f32, f32, f32);
-extern void func_802727D8_de(void *);
-extern void func_802A31E8_de(Node438C *, Node438C *, void *, void *);
-extern void func_8027027C_de(void *, s32);
 
 
 
 
-void func_802A339C_de(void *arg0, void *arg1) {
-    f32 matrix[16];
-    Node438C *first;
-    Node438C *next;
-    State802A6DF8 *state = arg0;
 
-    if (state->vertexCount < 2) {
-        return;
+
+
+
+
+
+
+
+
+extern void func_80271F9C_de(f32 *out, Key *key, void *frame);
+
+void func_802A274C_de(Actor_func_802A274C_de *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *morph) {
+    f32 a[3];
+    f32 b[3];
+    f32 weight;
+    f32 t;
+    Blend *blend;
+    Shade *from;
+    Key *key;
+    s32 count;
+    u32 grey;
+    s32 red;
+    s32 green;
+    s32 blue;
+
+    weight = 0.5f - func_802B6560_de(clock->unk8 / actor->track->total * 3.1415927f) * 0.5f;
+    if (actor->time <= actor->track->span) {
+        weight = weight * (0.5f - func_802B6560_de(actor->time / actor->track->span * 3.1415927f) * 0.5f);
     }
-
-    first = state->vertices;
-    next = first->next;
-    if (first != 0) {
-        func_80272CB0_de(matrix, first->a, first->b, first->c);
-    } else {
-        func_802727D8_de(matrix);
+    count = morph->count;
+    blend = morph->blends;
+    t = 1.0f - weight;
+    while (--count != -1) {
+        key = &morph->second[blend->second];
+        func_80271F9C_de(a, &morph->first[blend->first], morph->firstFrame);
+        func_80271F9C_de(b, key, morph->secondFrame);
+        out->x = (s16) (a[0] + t * (b[0] - a[0]));
+        out->y = (s16) (a[1] + t * (b[1] - a[1]));
+        out->z = (s16) (a[2] + t * (b[2] - a[2]));
+        from = &blend->from;
+        if (func_8026E340_de() != 0) {
+            blue = blend->from.b;
+            green = blend->from.g;
+            red = blend->from.r;
+            grey = (f32) (blue + green + red)
+                 + t * (f32) ((blend->to.b - blue) + (blend->to.g - green) + (blend->to.r - red));
+            out->r = 0;
+            out->g = 0;
+            out->b = grey / 3;
+            out->a = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
+        } else {
+            out->r = (u32) ((f32) blend->from.r + t * (f32) (blend->to.r - blend->from.r));
+            out->g = (u32) ((f32) blend->from.g + t * (f32) (blend->to.g - blend->from.g));
+            out->b = (u32) ((f32) blend->from.b + t * (f32) (blend->to.b - blend->from.b));
+            out->a = (u32) ((f32) from->a + t * (f32) (blend->to.a - from->a));
+        }
+        blend++;
+        out++;
     }
-
-    while (first != 0) {
-        Node438C *a;
-        Node438C *b;
-
-        if (next == 0) {
-            break;
-        }
-        a = first;
-        b = next;
-        if (first == 0) {
-            goto no_pair;
-        }
-        if (first->position.x != next->position.x || first->position.y != next->position.y) {
-            goto boundary;
-        }
-z_test:
-        if (a->position.z != b->position.z) {
-            goto boundary;
-        }
-        a = b;
-        b = b->next;
-        if (a == 0) {
-            goto no_pair;
-        }
-        if (b == 0 || a->position.x != b->position.x || a->position.y != b->position.y) {
-            goto boundary;
-        }
-        goto z_test;
-boundary:
-        if (a != 0 && b != 0) {
-            func_802A31E8_de(a, b, arg1, matrix);
-            goto apply;
-        }
-no_pair:
-        {
-            matrix[12] = first->position.x;
-            matrix[13] = first->position.y;
-            matrix[14] = first->position.z;
-        }
-apply:
-        func_8027027C_de(matrix, (s32)first->matrices[D_800D297C]);
-        first = next;
-        next = first->next;
-    }
-
-    matrix[12] = first->position.x;
-    matrix[13] = first->position.y;
-    matrix[14] = first->position.z;
-    func_8027027C_de(matrix, (s32)first->matrices[D_800D297C]);
 }

@@ -1,41 +1,65 @@
-#include "types.h"
-#include "common/types_8a8189af7b05.h"
-#include "shared/func_8044DA54_de_closed.h"
+#include "span_1000/code_8026AC38.h"
 #include "span_1000/code_80286050.h"
-void func_802897B4_de(World37 *world, Vec3 *point, Item37 **output, s32 *total) {
-    Region37 *region;
-    s32 i, found, regionCount, itemCount;
-    f32 x, z;
-    Items37 *items;
-    Item37 *item, *base;
-    region = 0;
-    i = 0;
-    found = 0;
-    x = point->x; z = point->z;
-    regionCount = world->count;
-    for (; i < regionCount; i++) {
-        Bounds2D37 *bounds = world->regions[i].bounds;
-        if (bounds->maxX < x || x < bounds->minX ||
-            bounds->maxZ < z || z < bounds->minZ) continue;
-        region = &world->regions[i];
-        break;
-    }
-    if (region == 0) {
-        *total = 0;
-    } else {
-        items = func_8028FDB4_de(region->resource->data, 2);
-        itemCount = items->count;
-        base = items->items;
-        for (i = 0; i < itemCount; i++) {
-            Bounds37 *bounds;
-            item = &base[i];
-            bounds = &item->bounds;
-            if (bounds->maxX > point->x && bounds->maxY > point->y && bounds->maxZ > point->z &&
-                bounds->minX <= point->x && bounds->minY <= point->y && bounds->minZ <= point->z) {
-                output[found++] = item;
-                if (found == 10) break;
-            }
+#include "n64sdk.h"
+#include "gbi.h"
+#include "types.h"
+
+
+
+/* Draws a scene through cached display lists: loads the scene if needed (returning if that fails), calls the model's base list, and on first use records two lists in the frame's command stream, one for objects without flag 4 and one for objects with it, each drawn through func_802504B0_de inside a func_8026D980_de pass and preceded by a branch past its end; finally calls the first cached list. */
+
+
+
+
+
+
+extern Gfx *D_80110634;
+extern void func_80253908_de(s32 heap);
+extern void func_80288938_de(Scene_func_80288EA8_de *scene);
+extern void *func_8028FDB4_de(void *table, s32 index);
+
+
+extern void func_802504B0_de(Object_func_80288EA8_de *object, void *camera);
+
+void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
+    Object_func_80288EA8_de **objects;
+    Object_func_80288EA8_de *object;
+    Gfx *branch;
+    s32 pass;
+
+    if (scene->loaded == 0) {
+        func_80253908_de(0);
+        func_80288938_de(scene);
+        if (scene->loaded == 0) {
+            return;
         }
-        *total = found;
     }
+    gSPDisplayList(D_80110634++, (unsigned int)func_8028FDB4_de(scene->model, 2));
+    if (scene->lists[0] == 0) {
+        for (pass = 0; pass < 2; pass++) {
+            scene->lists[pass] = D_80110634;
+            gSPBranchList(D_80110634++, 0);
+            func_8026D980_de();
+            objects = func_8028FDB4_de(scene->model, 1);
+            while (*objects != 0) {
+                object = *objects++;
+                switch (pass) {
+                case 0:
+                    if (!(object->flags & 4)) {
+                        func_802504B0_de(object, camera);
+                    }
+                    break;
+                case 1:
+                    if (object->flags & 4) {
+                        func_802504B0_de(object, camera);
+                    }
+                    break;
+                }
+            }
+            func_8026D9D0_de();
+            gSPEndDisplayList(D_80110634++);
+            gSPBranchList(scene->lists[pass]++, (unsigned int)D_80110634);
+        }
+    }
+    gSPDisplayList(D_80110634++, (unsigned int)scene->lists[0]);
 }

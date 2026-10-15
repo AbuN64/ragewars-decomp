@@ -12,7 +12,6 @@
 struct PlayerRankInner;
 
 
-#include "types.h"
 #include "common/types_1dc8418c21db.h"
 
 
@@ -23,7 +22,6 @@ struct PlayerRankInner;
 
 
 
-#include "types.h"
 #include "shared/func_8027AD4C_de_closed.h"
 
 

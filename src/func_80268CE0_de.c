@@ -260,9 +260,6 @@ sw_mode_default:
     return 1;
 }
 
-#include "types.h"
-#include "n64sdk.h"
-#include "gbi.h"
 extern Gfx *D_80110634;
 extern Gfx D_800CC018_de[], D_800CC0A0[];
 extern s32 D_800CC364;
@@ -286,10 +283,6 @@ void func_8026992C_de(void *matrix, s32 pass, u32 alpha) {
     func_80295FF4_de();
 }
 
-#include "gfx.h"
-#include "gbi.h"
-#include "types.h"
-#include "n64sdk.h"
 
 struct Shared_AnimFrame {
     u8 kind;

@@ -1,43 +1,41 @@
-#include "span_16E000/code_80429C10.h"
+#include "span_16E000/code_80423280.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "shared/world.h"
+#include "span_16E000/code_804264F0.h"
 #include "types.h"
-#include "common/unused.h"
-#include "shared/func_8041F2A0_us_rev1_closed.h"
+#include "span_16E000/code_8043A0A4.h"
 
-/* Advances the menu transition state and updates its visual effects. */
-
-
-
+/* Formats the name of entry D_800E4690's word at 0xA44 into a local 0x40-byte buffer through
+   func_8028D380_de from D_8011FE88, passes the length func_802A0494_de measures to func_802A025C_de for the
+   text object at offset 0xA04, and points word 0x38 of the object at 0x998 to that text object. */
 
 
 
 
 
 
+extern void func_8028D380_de(void *, s32, char *, s32);
 
-/* The values func_8042AE60_eu loads by address:
- * 0x800E1AF4 = 0.0033333334 (float, D_800EE144 in this cartridge's tables)
- * 0x800E1AF8 = 100.0 (float, D_800EE148 in this cartridge's tables)
- * 0x800E1AFC = 150.0 (float, unnamed in this cartridge's tables)
- * 0x800E1B00 = 2147483600.0 (float, D_800EE150 in this cartridge's tables)
- * 0x800E1B04 = 0.0033333334 (float, D_800EE154 in this cartridge's tables)
- * 0x800E1B08 = 100.0 (float, D_800EE158 in this cartridge's tables)
- * 0x800E1B0C = 150.0 (float, unnamed in this cartridge's tables)
- * 0x800E1B10 = 2147483600.0 (float, D_800EE160 in this cartridge's tables)
- */
-s32 func_8025DF34_de(s32);
-void func_8029973C_de(void);
-void func_802A2360_de(void);
+extern s32 func_802A0494_de(char *);
 
-void func_80419F24_de(void *);
-s32 func_80419F38_de(void *);
-void func_80419F58_de(void *, int);
-void func_8042A7B4_de(s32);
+extern void func_802A025C_de(void *, s32);
 
-void func_8042E988_de(s32);
-void func_80298368_de(s32);
+/* Returns the index of the entry among the 0x24 28-byte entries of D_800E4694 whose identifier
+   matches, or zero when none does. */
 
-#include "shared/func_8042AE60_eu_layout.h"
-extern MenuTransitionSignal D_80154020;
+
+extern struct EntryRecAt0V1 D_800E4694[];
+
+/* Returns one when the two arguments are equal or when any of the sixty-four 12-byte pairs of D_800E4A84 holds exactly that ordered pair, zero otherwise.
+   Adapted from func_8041F1D8_de with the single-key slot scan changed to an ordered-pair lookup over 64 twelve-byte entries. */
+
+
+
+extern struct Pair D_800E4A84[];
+
+/* Sets the byte at offset 0x10 of the two objects at offsets 0xA64 and 0xA60 of the structure D_800E4690
+   points to to 0xFF, shows both through func_8040E8D8_de and clears the word at 0xA68. */
 
 
 
@@ -45,6 +43,22 @@ extern MenuTransitionSignal D_80154020;
 
 
 
+extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+
+/* Reports every set entry of each ready slot to the handler, stopping after two slots. */
+
+
+
+
+
+
+
+extern void func_8042854C_de(s32, s32, s32);
+
+/* Rebuilds the item list for the player D_800E4690 selects: clears it through func_80428700_de, looks
+   up that player's model in D_8011FE88, and for each of the model's eight slot ids at 0x4C that is
+   at least 0x4C3 adds the nonzero id less 0x4C3 as the next row through func_8042854C_de when
+   func_8022F4DC_de accepts it for the player's 400-byte record in D_80102B00. */
 
 
 
@@ -53,161 +67,166 @@ extern MenuTransitionSignal D_80154020;
 
 
 
+extern char D_80102B00[];
+
+extern struct Model *func_8028CFA0_de(void *, s32, s32);
+
+extern s32 func_8022F4DC_de(char *, s32);
+
+/* Rebuilds the weapon menu for the player D_800E4690 selects: clears it through func_80428700_de, then
+   for each of the 0x16 weapon ids (excluding id 0) whose owned flag in D_801462C8 (offset 0x11C,
+   player stride 0x96) is set, appends a row through func_8042854C_de. */
 
 
-extern ListScreenScreen *D_800E4F60;
 
-s32 func_8042AE60_eu(void *arg0, s32 arg1, s32 arg2) {
-    ListScreenScreen *countdown;
-    f32 var_f0;
-    s32 temp_a2;
-    s32 temp_s0; 
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v0_4;
-    s32 temp_v1;
-    s32 var_a1;
-    s32 var_v0;
-    ListScreenItem *temp_a0;
-    ListScreenItem *temp_a0_2;
-    ListScreenItem *temp_a1;
-    ListScreenItem *temp_a1_2;
-    void *var_a0;
-    ListScreenItem *var_a0_2;
-    void *var_a0_3;
 
-    if (D_80154020.trigger == 1) {
-        D_80154020.trigger = 0;
-        if (D_80154020.selection != -1) {
-            D_800E4F60->unk_44C->alpha = 0x5A;
-            func_8029973C_de();
-            func_80298368_de(D_80154020.selection);
-            return 0;
-        }
-        D_800E4F60->unk_44C->alpha = 0xFF;
-        D_800E4F60->unk_3DC = 9;
-        if (D_800E4F60->selection == 0) {
-            func_8040E8D8_de(D_800E4F60->unk_440, 1);
-            var_a0 = D_800E4F60->unk_448;
-        } else {
-            var_a0 = D_800E4F60->unk_444;
-        }
-        func_8040E8D8_de(var_a0, 1);
-        func_8040E8D8_de(D_800E4F60->label, 1);
-        func_8040E8D8_de(D_800E4F60->unk_3F0, 1);
-        goto block_7;
-    }
-block_7:
-    temp_v0 = D_800E4F60->unk_3DC;
-    switch (temp_v0) {
-    case 1:
-        temp_a1 = D_800E4F60->left;
-        temp_a1->x = (u16) (temp_a1->x + (u16)D_800E4F60->leftCount);
-        temp_a1_2 = D_800E4F60->right;
-        temp_a1_2->x = (u16) (temp_a1_2->x - (u16)D_800E4F60->rightCount);
-        temp_v0_2 = D_800E4F60->unk_3E0 - 1;
-        D_800E4F60->unk_3E0 = temp_v0_2;
-        if (temp_v0_2 <= 0) {
-            func_8025DF34_de(0xE79);
-            func_8040E8D8_de(D_800E4F60->unk_3E8, 1);
-            func_80419F58_de(D_800E4F60->text3E4, 4);
-            D_800E4F60->unk_3DC = 4;
-            D_800E4F60->unk_3E0 = 4;
-        }
-        break;
-    case 2:
-        temp_a0 = D_800E4F60->left;
-        temp_a0->x = (u16) (temp_a0->x - (u16)D_800E4F60->leftCount);
-        temp_a0_2 = D_800E4F60->right;
-        temp_a0_2->x = (u16) (temp_a0_2->x + (u16)D_800E4F60->rightCount);
-        temp_v0_3 = D_800E4F60->unk_3E0 - 1;
-        D_800E4F60->unk_3E0 = temp_v0_3;
-        if (temp_v0_3 <= 0) {
-            D_800E4F60->unk_3DC = 3;
-            func_8029973C_de();
-            func_80298368_de(8);
-            return 0;
-        }
-        break;
-    case 3:
-        if (D_800E4F60->unk_460 == 0) {
-            func_802A2360_de();
-            var_a1 = 0;
-            var_a0_3 = D_800E4F60->unk_458;
-            D_800E4F60->unk_460 = 1;
-            func_8040E8D8_de(var_a0_3, var_a1);
-        }
-        break;
-    case 4:
-        countdown = D_800E4F60;
-        temp_v1 = countdown->unk_3E0;
-        temp_v0_4 = temp_v1 - 1;
-        if (temp_v0_4 >= 0) {
-            var_v0 = temp_v1 - (temp_v1 >= temp_v0_4);
-        } else {
-            var_v0 = 0;
-        }
-        countdown->unk_3E0 = var_v0;
-        
-        if ((((ListScreenScreen *) D_800E4F60)->unk_3E0 <= 0) && (func_80419F38_de(D_800E4F60->text3E4) != 0)) {
-            func_80419F24_de(D_800E4F60->text3E4);
-            func_8042A7B4_de(0xA);
-            D_800E4F60->unk_3DC = 9;
-        }
-        break;
-    case 5:
-        func_8040E8D8_de(D_800E4F60->unk_458, 1);
-        func_8040E8D8_de(D_800E4F60->unk_3E8, 0);
-        func_8042B2E4_de();
-        func_8042A7B4_de(0);
-        D_800E4F60->unk_3DC = 2;
-        D_800E4F60->unk_3E0 = 4;
-        func_8040E8D8_de(D_800E4F60->unk_448, 0);
-        func_8025DF34_de(0xE78);
-        break;
-    case 8:
-        temp_v0 = ((ListScreenItem *)func_8040EC30_de(arg0, 0x316U))->alpha;
-        temp_s0 = temp_v0 >> 1;
-        func_8042A7B4_de(temp_s0);
-        if (temp_s0 < 0xA) {
-            D_800E4F60->unk_3DC = 3;
-            func_8042E988_de(0xB);
-            return 0;
-        }
-        break;
-    case 9:
-        temp_s0 = ((ListScreenItem *)func_8040EC30_de(arg0, 0x316U))->alpha;
-        temp_s0 = (temp_s0 + 1) * 2;
-        if (temp_s0 >= 0x42) {
-            temp_s0 = 0x41;
-            D_800E4F60->unk_3DC = 3;
-        }
-        func_8042A7B4_de(temp_s0);
-        var_a1 = 1;
-        if (D_800E4F60->selection == 0) {
-            var_a0_3 = D_800E4F60->unk_448;
-            func_8040E8D8_de(var_a0_3, var_a1);
-        }
-        break;
-    default:
-        break;
-    }
-    if (D_800E4F60->unk_3DC == 3) {
-            temp_a2 = D_800E4F60->unk_45C + arg2;
-            D_800E4F60->unk_45C = temp_a2;
-            if (D_80154020.selection == -1) {
-                if (D_800E4F60->selection == 0) {
-                    var_f0 = (func_802B6560_de((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
-                    var_a0_2 = D_800E4F60->unk_448;
-                    var_a0_2->alpha = (u8) (u32) var_f0;
-                } else {
-                    var_f0 = (func_802B6560_de((f32) temp_a2 * 0.0033333334f) * 100.0f) + 150.0f;
-                    var_a0_2 = D_800E4F60->item;
-                    var_a0_2->alpha = (u8) (u32) var_f0;
-                }
-            }
-        }
-        return 0;
+
+
+
+extern void func_8042854C_de(s32 arg0, s32 arg1, s32 arg2);
+
+/* Enumerates the eight item identifiers of the record func_8028D474_de finds for a key and registers each nonzero identifier above 0x4C3 through func_8042854C_de, translated by 0x4C3 and numbered in order. */
+
+
+
+
+
+extern Record_func_804284C0_de *func_8028D474_de(void *table, s32 key);
+
+extern void func_8042854C_de(s32 slot, s32 item, s32 arg2);
+
+void func_804280BC_de(void) {
+    extern struct State_func_804280BC_de *D_800E4690;
+    char buffer[0x40];
+
+    func_8028D380_de(&D_8011FE88, D_800E4690->name, buffer, 0x3F);
+    func_802A025C_de(D_800E4690->text, func_802A0494_de(buffer));
+    D_800E4690->owner->unk38 = D_800E4690->text;
 }
 
+s32 func_80428120_de(s32 id) {
+    s32 i;
+
+    for (i = 0; i < 0x24; i++) {
+        if (D_800E4694[i].value == id) {
+            return i;
+        }
+    }
+    return 0;
+}
+
+s32 func_80428158_de(s32 a, s32 b) {
+    s32 i;
+
+    if (a == b) {
+        return 1;
+    }
+    for (i = 0; i < 64; i++) {
+        if (D_800E4A84[i].a == a && D_800E4A84[i].b == b) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void func_804281A8_de(void) {
+    extern func_80428388_S1 *D_800E4690;
+    (D_800E4690->unkA64)->value = 0xFF;
+    (D_800E4690->unkA60)->value = 0xFF;
+    func_8040E8D8_de(D_800E4690->unkA60, 1);
+    func_8040E8D8_de(D_800E4690->unkA64, 1);
+    D_800E4690->unkA68 = 0;
+}
+
+void func_80428214_de(void) {
+    extern State_func_80428214_de D_801462C8;
+    State_func_80428214_de *st;
+    s32 n;
+    s32 k;
+    s32 i;
+    State_func_80428214_de *base;
+    s32 j;
+
+    k = 0;
+    st = &D_801462C8;
+    for (n = 0; n < 4; n++) {
+        if (st->slots[n].ready == 1) {
+            j = 0;
+            for (i = 0; i < 0x16; i++) {
+                if (((base = &D_801462C8)->slots[n].flags[i] == 1) && (i != 0)) {
+                    func_8042854C_de(j, i, k);
+                    j++;
+                }
+            }
+            k++;
+            if (k >= 2) {
+                return;
+            }
+        }
+    }
+}
+
+void func_80428300_de(void) {
+    extern struct ResultsOptionsScreen *D_800E4690;
+    struct Model *model;
+    s32 player;
+    s32 id;
+    s32 row;
+    s32 i;
+
+    func_80428700_de();
+    player = D_800E4690->player;
+    model = func_8028CFA0_de(&D_8011FE88, 0xB, D_80142358[player * 150]);
+    row = 0;
+    for (i = 0; i < 8; i++) {
+        id = model->slots[i];
+        if (id >= 0x4C3) {
+            id -= 0x4C3;
+            if (func_8022F4DC_de(&D_80102B00[player * 400], id) == 1 && id != 0) {
+                func_8042854C_de(row, id, 0);
+                row++;
+            }
+        }
+    }
+}
+
+void func_8042840C_de(void) {
+    extern char D_801462C8[];
+    extern struct ResultsOptionsScreen *D_800E4690;
+    s32 count;
+    s32 weapon;
+    s32 base;
+
+    func_80428700_de();
+    count = 0;
+    base = D_800E4690->player * 0x96;
+    for (weapon = 0; weapon < 0x16; weapon++) {
+        if (((EntryRecAt11C *) (weapon + base + D_801462C8))->owned == 1) {
+            if (weapon != 0) {
+                func_8042854C_de(count, weapon, 0);
+                count += 1;
+            }
+        }
+    }
+}
+
+void func_804284C0_de(s32 key) {
+    Record_func_804284C0_de *record;
+    s32 count;
+    s32 i;
+    s32 item;
+
+    func_80428700_de();
+    record = func_8028D474_de(&D_8011FE88, key);
+    count = 0;
+    for (i = 0; i < 8; i++) {
+        item = record->items[i];
+        if (item >= 0x4C3) {
+            item -= 0x4C3;
+            if (item != 0) {
+                func_8042854C_de(count, item, 0);
+                count++;
+            }
+        }
+    }
+}

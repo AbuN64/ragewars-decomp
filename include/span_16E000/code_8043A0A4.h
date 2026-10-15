@@ -5,7 +5,6 @@
 #include "resident_event_handler.h"
 #include "span_16E000/code_8041B020.h"
 #include "span_16E000/code_8041BEA8.h"
-#include "types.h"
 extern void func_8043B96C_de();
 
 struct Entry_func_8043ACF0_de;

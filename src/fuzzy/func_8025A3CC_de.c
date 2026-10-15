@@ -174,7 +174,7 @@ block_47:
                         if (arg0->frame != temp_a0->frame) {
                             func_802B2F00_de(temp_s0, temp_a0->slots.ids[arg0->slot]);
                             if (func_802B2620_de(temp_s0) != 0) {
-                                func_802B2F60_de(temp_s0);
+                                alSndpStop(temp_s0);
                             }
                             arg0->handle = -1;
                         }

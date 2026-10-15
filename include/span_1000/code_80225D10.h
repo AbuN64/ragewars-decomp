@@ -5,7 +5,6 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 #include "span_1000/code_8021CD70.h"
 struct ObjRecV5;
 typedef struct ObjRecV5 ObjRecV5;

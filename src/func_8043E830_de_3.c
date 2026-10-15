@@ -1,2 +1,21 @@
-/* Data separated from executable functions by the legacy split layout. */
-unsigned int func_8043EF1C_us_rev1[12] = { 0x00431023U, 0x3C01800EU, 0xC4202390U, 0x3C018014U, 0xE42068B0U, 0x8C84000CU, 0x3C03FBFFU, 0x8C820030U, 0x3463FFFFU, 0x00431024U, 0x03E00008U, 0xAC820030U };
+#include "span_16E000/code_8043E9A8.h"
+#include "types.h"
+
+
+
+
+
+extern s32 func_80264690_de(void);
+
+/** Clears or sets bit 24 of arg1's record's flags depending on how many of func_80264690_de's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
+s32 func_8043EB70_de(void *arg0, Obj8043ECE8 *arg1) {
+    if (func_80264690_de() < 2) {
+        arg1->unkC->unk58 &= 0xFEFFFFFF;
+        if (arg1->unk0 == 2) {
+            arg1->unk0 = 1;
+        }
+    } else {
+        arg1->unkC->unk58 |= 0x01000000;
+    }
+    return 0;
+}

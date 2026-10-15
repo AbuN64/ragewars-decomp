@@ -1,7 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802B7058_H
 #define UNBAKE_SPAN_1000_CODE_802B7058_H
 #include "types.h"
-extern s32 func_802B7490_de();
+extern s32 __osAiDeviceBusy();
 
 extern unsigned int func_802B72C0_de();
 

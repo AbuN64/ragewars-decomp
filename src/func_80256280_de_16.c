@@ -15,7 +15,7 @@ extern f32 D_800C3EE0_de;
 #include "shared/menu_match_globals.h"
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 extern void func_80259440_de(void *arg0);
@@ -51,10 +51,10 @@ s32 func_8025842C_de(void *arg0) {
     count = ((MenuRules *)(queue))->locked + 1;
     ((MenuRules *)(queue))->locked = count;
     if (count != 1) {
-        func_802BCF50_de(mask);
+        __osRestoreInt(mask);
         func_802BB2A0_de(queue, 0, 1);
     } else {
-        func_802BCF50_de(mask);
+        __osRestoreInt(mask);
     }
 
     func_8025BD00_de(&((struct ContextRecAt2BC0 *)(object))->menu[0]);
@@ -65,10 +65,10 @@ s32 func_8025842C_de(void *arg0) {
 
         ((MenuRules *)(queue2))->locked = count2;
         if (count2 != 0) {
-            func_802BCF50_de(mask2);
+            __osRestoreInt(mask2);
             func_802BB420_de(queue2, 0, 1);
         } else {
-            func_802BCF50_de(mask2);
+            __osRestoreInt(mask2);
         }
     }
 
@@ -99,7 +99,7 @@ s32 func_8025842C_de(void *arg0) {
 }
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_8025C17C_de(void *arg0, s32 arg1);
 extern s32 func_80259AB8_de(void *arg0, s32 arg1);
@@ -120,10 +120,10 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         temp_v1 = temp_s0->locked + 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 1) {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
         }
     }
     if (func_8025C17C_de(&((struct ContextRecAt2BC0 *)(arg0))->menu[0], arg1) != 0) {
@@ -136,10 +136,10 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
         }
         return 1;
     }
@@ -153,10 +153,10 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
         }
         return 1;
     }
@@ -170,17 +170,17 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
         }
     }
     return 0;
 }
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 
 
@@ -197,15 +197,15 @@ void func_80258740_de(s32 *arg0) {
     temp_v1 = temp_s0->locked + 1;
     temp_s0->locked = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(temp_s0, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_a0);
+    __osRestoreInt(temp_a0);
 }
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 
@@ -223,9 +223,9 @@ void func_802587A4_de(s32 *arg0) {
     temp_v1 = temp_s0->locked - 1;
     temp_s0->locked = temp_v1;
     if (temp_v1 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(temp_s0, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }

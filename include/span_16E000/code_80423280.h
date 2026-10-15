@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct RecRecAt4;
 typedef struct RecRecAt4 RecRecAt4;
 
@@ -137,5 +136,47 @@ typedef struct OptionsCommitContext OptionsCommitContext;
 
 extern u8 D_8014222C;
 extern s32 func_80426274_de(void);
+
+extern int D_800E1AFC_de[];
+extern int D_800E1B7C[];
+extern int D_800E1ACC_de[];
+
+extern s32 func_8041E720_de(void);
+extern void func_8041E81C_de(s32, s32);
+extern void func_80429654_de(s32);
+
+extern int func_8042B294_de(int index);
+extern void func_8042AFC0_de(int);
+extern void func_8042AFD0_de(int);
+
+extern void func_8042A7B4_de(int);
+
+extern void func_8042201C_de();
+
+extern s32 func_8042AF28_de();
+enum MatchEnd {
+    MATCH_END_TIME_UP,
+    MATCH_END_SCORE_LIMIT,
+    MATCH_END_TAG_LIMIT,
+    MATCH_END_POINT_TARGET
+};
+extern void func_804259E0_de(s32 a0);
+extern s32 func_80425DFC_de(s32);
+extern void func_80425EE4_de(s32, s32 *);
+extern void func_804259E0_de(s32);
+extern f32 D_800DDB08_de[];
+extern f32 D_800DDB10;
+extern void func_8042D28C_de();
+
+extern void func_804220A8_de(s32);
+
+extern char D_800DD9BC[];
+extern char D_800DD9C8[];
+extern char D_800DD9D0_de[];
+extern void func_8042E9B4_de(char *, char *, char *);
+
+extern void func_8042C018_de();
+
+extern s32 func_80264614_de(s32);
 
 #endif

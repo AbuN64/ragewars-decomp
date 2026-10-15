@@ -1,24 +1,40 @@
+#include "span_1000/code_80200610.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
-#include "span_1000/code_802022E0.h"
-#include "types.h"
 #include "shared/func_8027AD4C_de_closed.h"
+#include "span_1000/code_802022E0.h"
 #include "span_C76B0/data.h"
-
-
-
-
-
-
-
-
-
-
-
+#include "types.h"
 
 extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
 
+extern Vector4f func_80202CA0_de(Vec3 *dir);
 
+Vector4f func_80202CA0_de(Vec3 *dir);
+
+void func_80274098_de(void *, void *, void *);
+
+void func_8027347C_de(void *, f32, f32, f32);
+
+s32 func_8027254C_de(f32 *, f32);
+
+void func_80273448_de(char *, f32, f32, f32);
+
+void func_8026F620_de(f32 *, f32 *, f32 *);
+
+void func_80273D6C_de(struct Mtx *);
+
+static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
+    Vector4f q;
+    Vec3 aim;
+    aim.x = rider->aim.x;
+    aim.y = rider->aim.y;
+    aim.z = rider->aim.z;
+    q = func_80202CA0_de(&aim);
+    func_80274244_de(&q, matrix);
+}
+
+unsigned char D_auto_func_80201A74_de_padding_2674[12] = { 0x27, 0xBD, 0xFF, 0xE8, 0xAF, 0xBF, 0x00, 0x14, 0x0C, 0x08, 0x01, 0x40 };
 
 Vector4f func_80202CA0_de(Vec3 *dir) {
     Vector4f q;
@@ -50,24 +66,6 @@ Vector4f func_80202CA0_de(Vec3 *dir) {
         q.w = func_802B6560_de(angle);
     }
     return q;
-}
-
-extern Vector4f func_80202CA0_de(Vec3 *dir);
-void func_80274098_de(void *, void *, void *);
-void func_8027347C_de(void *, f32, f32, f32);
-s32 func_8027254C_de(f32 *, f32);
-void func_80273448_de(char *, f32, f32, f32);
-void func_8026F620_de(f32 *, f32 *, f32 *);
-void func_80273D6C_de(struct Mtx *);
-
-static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
-    Vector4f q;
-    Vec3 aim;
-    aim.x = rider->aim.x;
-    aim.y = rider->aim.y;
-    aim.z = rider->aim.z;
-    q = func_80202CA0_de(&aim);
-    func_80274244_de(&q, matrix);
 }
 
 void func_80202E4C_de(struct Owner *owner, RiderRecAt130V1 *rider) {

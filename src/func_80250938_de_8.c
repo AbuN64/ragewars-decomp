@@ -31,13 +31,13 @@ void func_80253344_de(s32 unused) {
     temp_v1 = D_8010515C + var_s0;
     D_8010515C = temp_v1;
     if (temp_v1 != var_s0) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         queueAddress = (char *)temp_s1 - 0x3C;
         receive = queueAddress;
         func_802BB2A0_de(receive, 0, var_s0);
         var_s0 = 0;
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         var_s0 = 0;
     }
     do {
@@ -48,12 +48,12 @@ void func_80253344_de(s32 unused) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         queueAddress = &D_80101140;
         send = queueAddress;
         func_802BB420_de(send, 0, 1);
     } else {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
     }
 }
 

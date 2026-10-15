@@ -57,7 +57,6 @@
 #include "common/draft_fields_func_8028D964_de.h"
 #ifndef UNBAKE_SPAN_1000_CODE_8020EAE0_H
 #define UNBAKE_SPAN_1000_CODE_8020EAE0_H
-#include "types.h"
 #include "common/draft_fields_func_8020F5A4_de.h"
 #include "span_1000/code_8020AF9C.h"
 struct func_8020F93C_S1;

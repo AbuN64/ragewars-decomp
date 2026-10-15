@@ -13,7 +13,6 @@ typedef struct Shared_MenuInput {
     s32 buttons;
 } Shared_MenuInput;
 
-#include "types.h"
 #include "common/types_8a8189af7b05.h"
 struct Shared_Model { u16 unknown0; u16 flags; };
 struct Shared_Placed { Vec3 pos; u32 unknownC; s16 kind; };

@@ -3,7 +3,6 @@
 #include "span_1000/code_8027A0F4.h"
 #include "gbi.h"
 #include "types.h"
-#include "span_1000/code_8027A0F4.h"
 
 /* Shared_ParticleView is defined in the particle header. */
 struct Shared_AnimFrame {

@@ -2114,14 +2114,14 @@ schema = 1
 "func_8028EDA0_de" = { evidence = "landed", signature = "void func_8028EDA0_de(void *object)" }
 "func_8028F544_de" = { evidence = "landed", signature = "s32 func_8028F544_de(Ctx_func_8028F544_de *arg0, Node_func_8028F544_de **arg1, Node_func_8028F544_de **arg2, s32 arg3)" }
 "func_8028F754_de" = { evidence = "landed", signature = "void func_8028F754_de(Panel *panel, s32 arg1, s32 arg2, s32 arg3, unsigned char style)" }
-"func_8028F864_de" = { evidence = "landed", signature = "void func_8028F864_de(void *arg0, void *arg1, s32 arg2)" }
+"osScAddClient" = { evidence = "landed", signature = "void osScAddClient(void *arg0, void *arg1, s32 arg2)" }
 "func_8028F8BC_de" = { evidence = "landed", signature = "void func_8028F8BC_de(void *arg0, void *arg1)" }
 "func_8028F94C_de" = { evidence = "landed", signature = "void *func_8028F94C_de(void *object)" }
-"func_8028F954_de" = { evidence = "landed", signature = "void func_8028F954_de(void *arg0, void *arg1)" }
+"__scAppendList" = { evidence = "landed", signature = "void __scAppendList(void *arg0, void *arg1)" }
 "func_8028F9AC_de" = { evidence = "landed", signature = "void *func_8028F9AC_de(void *arg0)" }
 "func_8028FA0C_de" = { evidence = "landed", signature = "s32 func_8028FA0C_de(void *arg0, void *arg1)" }
 "func_8028FA60_de" = { evidence = "landed", signature = "void func_8028FA60_de(View_func_8028FA60_de *view, Scene_func_8028FA60_de *current, Scene_func_8028FA60_de *next)" }
-"func_8028FBD8_de" = { evidence = "landed", signature = "void func_8028FBD8_de(void *arg0)" }
+"__scYield" = { evidence = "landed", signature = "void __scYield(void *arg0)" }
 "func_8028FC10_de" = { evidence = "landed", signature = "void func_8028FC10_de(void *arg0)" }
 "func_8028FD44_de" = { evidence = "landed", signature = "int func_8028FD44_de(int arg0)" }
 "func_8028FD4C_de" = { evidence = "landed", signature = "void func_8028FD4C_de(s32 arg0, s32 arg1)" }
@@ -2676,7 +2676,7 @@ schema = 1
 "func_802AD1D0_us" = { evidence = "authored", signature = "void func_802AD1D0_us(void)" }
 "func_802AD264_de" = { evidence = "landed", signature = "int func_802AD264_de(void)" }
 "func_802AD270_de" = { evidence = "landed", signature = "unsigned short func_802AD270_de(float arg0)" }
-"func_802AD3F0_de" = { evidence = "authored", signature = "void func_802AD3F0_de(int arg0)" }
+"osUnmapTLB" = { evidence = "authored", signature = "void osUnmapTLB(int arg0)" }
 "func_802AD42C_de" = { evidence = "authored", signature = "int func_802AD42C_de(void)" }
 "func_802AD520_eu" = { evidence = "authored", signature = "f32 func_802AD520_eu(s32)" }
 "func_802AD580_eu_x" = { evidence = "landed", signature = "void func_802AD580_eu_x(void)" }
@@ -2697,7 +2697,7 @@ schema = 1
 "func_802AE8C8_de" = { evidence = "landed", signature = "void func_802AE8C8_de(CopyDest802B3998 *dst, CopySource802B3998 *src)" }
 "func_802AE93C_de" = { evidence = "landed", signature = "void func_802AE93C_de(CopyDest802B3998 *src, CopySource802B3998 *dst)" }
 "func_802AE9B0_de" = { evidence = "landed", signature = "s32 func_802AE9B0_de(ValueSet *set, u32 *result)" }
-"func_802AEA2C_de" = { evidence = "landed", signature = "s32 func_802AEA2C_de(s32 arg0, s32 arg1)" }
+"__readVarLen" = { evidence = "landed", signature = "s32 __readVarLen(s32 arg0, s32 arg1)" }
 "func_802AEAA0_de" = { evidence = "landed", signature = "int func_802AEAA0_de(void *object)" }
 "func_802AEAB0_de" = { evidence = "landed", signature = "void func_802AEAB0_de(void *arg0, InitParams *arg1)" }
 "func_802AEC20_de" = { evidence = "landed", signature = "ALMicroTime func_802AEC20_de(void *node)" }
@@ -2716,7 +2716,7 @@ schema = 1
 "func_802AFB6C_de" = { evidence = "landed", signature = "void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1)" }
 "func_802AFCE4_us_rev1" = { evidence = "landed", signature = "u32 func_802AFCE4_us_rev1(u8 *arg0, u8 *arg1)" }
 "func_802AFD00_de" = { evidence = "landed", signature = "void func_802AFD00_de(void *arg0)" }
-"func_802AFD6C_de" = { evidence = "landed", signature = "void func_802AFD6C_de(void *arg0, Node_func_802AFD6C_de *arg1)" }
+"__CSPRepostEvent" = { evidence = "landed", signature = "void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1)" }
 "func_802AFDFC_de" = { evidence = "landed", signature = "void func_802AFDFC_de(void *arg0, f32 arg1)" }
 "func_802AFE30_de" = { evidence = "landed", signature = "f32 func_802AFE30_de(s32 arg0)" }
 "func_802AFE80_de" = { evidence = "landed", signature = "void func_802AFE80_de(s32 arg0)" }
@@ -2729,12 +2729,12 @@ schema = 1
 "func_802AFFEC_us_rev1" = { evidence = "landed", signature = "s32 func_802AFFEC_us_rev1(s32 arg0)" }
 "func_802B003C_de" = { evidence = "landed", signature = "s32 func_802B003C_de(void *arg0, s16 *arg1)" }
 "func_802B00D4_de" = { evidence = "landed", signature = "void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)" }
-"func_802B01E0_de" = { evidence = "landed", signature = "void func_802B01E0_de(void *arg0)" }
+"alEvtqFlush" = { evidence = "landed", signature = "void alEvtqFlush(void *arg0)" }
 "func_802B0258_de" = { evidence = "landed", signature = "void func_802B0258_de(void *arg0, s16 arg1)" }
 "func_802B026C_us_rev1" = { evidence = "landed", signature = "s32 func_802B026C_us_rev1(void *arg0, s32 arg1, s32 arg2, s32 arg3)" }
 "func_802B0310_de" = { evidence = "landed", signature = "void func_802B0310_de(unsigned char *source, unsigned char *destination, int count)" }
 "func_802B0340_de" = { evidence = "landed", signature = "s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e)" }
-"func_802B0390_de" = { evidence = "landed", signature = "void func_802B0390_de(void *arg0, s32 arg1, s32 arg2)" }
+"alHeapInit" = { evidence = "landed", signature = "void alHeapInit(void *arg0, s32 arg1, s32 arg2)" }
 "func_802B03D0_de" = { evidence = "landed", signature = "void func_802B03D0_de(SeqInitPlayer *p, SeqInitConfig *c)" }
 "func_802B0554_de" = { evidence = "landed", signature = "ALMicroTime func_802B0554_de(void *node)" }
 "func_802B05C8_us_rev1" = { evidence = "landed", signature = "s32 func_802B05C8_us_rev1(void *arg0, s32 arg1, s32 arg2, s32 arg3)" }
@@ -2745,7 +2745,7 @@ schema = 1
 "func_802B0D3C_us_rev1" = { evidence = "landed", signature = "u32 func_802B0D3C_us_rev1(u32 arg0)" }
 "func_802B1088_us_rev1" = { evidence = "landed", signature = "s32 func_802B1088_us_rev1(s32 arg0)" }
 "func_802B1308_us_rev1" = { evidence = "landed", signature = "s32 func_802B1308_us_rev1(u8 *arg0)" }
-"func_802B151C_de" = { evidence = "landed", signature = "void *func_802B151C_de(void *arg0, s8 arg1, s8 arg2, s8 arg3)" }
+"__mapVoice" = { evidence = "landed", signature = "void *__mapVoice(void *arg0, s8 arg1, s8 arg2, s8 arg3)" }
 "func_802B1554_us_rev1" = { evidence = "landed", signature = "void func_802B1554_us_rev1(void)" }
 "func_802B155C_us_rev1" = { evidence = "landed", signature = "void func_802B155C_us_rev1(int arg0)" }
 "func_802B156C_de" = { evidence = "landed", signature = "void func_802B156C_de(List802B663C *arg0, void *arg1)" }
@@ -2759,7 +2759,7 @@ schema = 1
 "func_802B1790_us_rev1" = { evidence = "landed", signature = "s32 func_802B1790_us_rev1(u32 arg0)" }
 "func_802B1814_de" = { evidence = "landed", signature = "s16 func_802B1814_de(ALVoiceState *vs, ALSeqPlayer *seqp)" }
 "func_802B1820_us_rev1" = { evidence = "landed", signature = "s32 func_802B1820_us_rev1(u8 *arg0)" }
-"func_802B1888_de" = { evidence = "landed", signature = "int func_802B1888_de(void *arg0, int arg1)" }
+"__vsDelta" = { evidence = "landed", signature = "int __vsDelta(void *arg0, int arg1)" }
 "func_802B1888_us_rev1" = { evidence = "landed", signature = "u8 func_802B1888_us_rev1(void *arg0)" }
 "func_802B18A4_de" = { evidence = "landed", signature = "s32 func_802B18A4_de(void *arg0, void *arg1)" }
 "func_802B18C0_us_rev1" = { evidence = "landed", signature = "void func_802B18C0_us_rev1(s16 *arg0, s32 arg1)" }
@@ -2769,7 +2769,7 @@ schema = 1
 "func_802B19C0_us_rev1" = { evidence = "landed", signature = "s32 func_802B19C0_us_rev1(u32 arg0)" }
 "func_802B1A40_de" = { evidence = "landed", signature = "void func_802B1A40_de(void *arg0, s32 index)" }
 "func_802B1A68_us_rev1" = { evidence = "landed", signature = "s32 func_802B1A68_us_rev1(u32 arg0)" }
-"func_802B1AC0_de" = { evidence = "landed", signature = "void func_802B1AC0_de(void *arg0, void *arg1, s32 arg2)" }
+"__setInstChanState" = { evidence = "landed", signature = "void __setInstChanState(void *arg0, void *arg1, s32 arg2)" }
 "func_802B1B10_us_rev1" = { evidence = "landed", signature = "s32 func_802B1B10_us_rev1(u32 arg0)" }
 "func_802B1B14_de" = { evidence = "landed", signature = "void func_802B1B14_de(void *arg0, void *arg1, s32 arg2)" }
 "func_802B1BBC_us_rev1" = { evidence = "landed", signature = "s32 func_802B1BBC_us_rev1(u32 arg0)" }
@@ -2798,8 +2798,8 @@ schema = 1
 "func_802B2134_us_rev1" = { evidence = "landed", signature = "s32 func_802B2134_us_rev1(void)" }
 "func_802B21A8_de" = { evidence = "landed", signature = "void func_802B21A8_de(ALSeq_s *seq, ALSeqMarker *m, u32 ticks)" }
 "func_802B2214_us_rev1" = { evidence = "landed", signature = "s32 func_802B2214_us_rev1(void)" }
-"func_802B22BC_de" = { evidence = "landed", signature = "void func_802B22BC_de(ALSeq_s *arg0, ALSeqMarker *arg1)" }
-"func_802B22D8_de" = { evidence = "landed", signature = "void func_802B22D8_de(void *arg0, void *arg1)" }
+"alSeqSetLoc" = { evidence = "landed", signature = "void alSeqSetLoc(ALSeq_s *arg0, ALSeqMarker *arg1)" }
+"alSeqGetLoc" = { evidence = "landed", signature = "void alSeqGetLoc(void *arg0, void *arg1)" }
 "func_802B22E4_us_rev1" = { evidence = "landed", signature = "s32 func_802B22E4_us_rev1(void)" }
 "func_802B22F4_de" = { evidence = "landed", signature = "s32 func_802B22F4_de(ALSeq_s *arg0, s32 *arg1)" }
 "func_802B2350" = { evidence = "landed", signature = "float func_802B2350(int arg0)" }
@@ -2822,18 +2822,18 @@ schema = 1
 "func_802B2CF0_de" = { evidence = "landed", signature = "s32 func_802B2CF0_de(s32 val, f32 div)" }
 "func_802B2D80_de" = { evidence = "landed", signature = "void func_802B2D80_de(ALSndPlayer *arg0)" }
 "func_802B2DE0_de" = { evidence = "landed", signature = "void func_802B2DE0_de(ALSndPlayer *arg0, s8 arg1)" }
-"func_802B2E30_de" = { evidence = "landed", signature = "s32 func_802B2E30_de(struct ObjRecAt40V2 *arg0, s8 arg1)" }
-"func_802B2E80_de" = { evidence = "landed", signature = "void func_802B2E80_de(struct ObjRecAt40V2 *arg0, s32 arg1)" }
+"alSndpSetPan" = { evidence = "landed", signature = "s32 alSndpSetPan(struct ObjRecAt40V2 *arg0, s8 arg1)" }
+"alSndpSetPitch" = { evidence = "landed", signature = "void alSndpSetPitch(struct ObjRecAt40V2 *arg0, s32 arg1)" }
 "func_802B2ED0_de" = { evidence = "landed", signature = "void func_802B2ED0_de(ALSndPlayer *object, short index, unsigned char value)" }
 "func_802B2F00_de" = { evidence = "landed", signature = "void func_802B2F00_de(ALSndPlayer *arg0, s16 arg1)" }
 "func_802B2F10_de" = { evidence = "landed", signature = "void func_802B2F10_de(ALSndPlayer *arg0, s16 arg1)" }
-"func_802B2F60_de" = { evidence = "landed", signature = "void func_802B2F60_de(ObjRecAt40V2 *arg0)" }
-"func_802B2FB0_de" = { evidence = "landed", signature = "void func_802B2FB0_de(void *arg0, void *arg1)" }
+"alSndpStop" = { evidence = "landed", signature = "void alSndpStop(ObjRecAt40V2 *arg0)" }
+"alSynAddPlayer" = { evidence = "landed", signature = "void alSynAddPlayer(void *arg0, void *arg1)" }
 "func_802B3000_de" = { evidence = "landed", signature = "s32 func_802B3000_de(ALSynth_func_802B3000_de *drvr, ALVoice_s_func_802B3000_de *voice, ALVoiceConfig_s *vc)" }
 "func_802B3130_de" = { evidence = "landed", signature = "s32 func_802B3130_de(void *arg0, void **arg1, s16 arg2)" }
 "func_802B31E8_de" = { evidence = "authored", signature = "void func_802B31E8_de(void)" }
 "func_802B31F0_de" = { evidence = "landed", signature = "void func_802B31F0_de(int *arg0)" }
-"func_802B3200_de" = { evidence = "landed", signature = "void func_802B3200_de(void *arg0, void *arg1)" }
+"alSynFreeVoice" = { evidence = "landed", signature = "void alSynFreeVoice(void *arg0, void *arg1)" }
 "func_802B32A0_de" = { evidence = "landed", signature = "void func_802B32A0_de(void *arg0, void *arg1, s8 arg2)" }
 "func_802B3350_de" = { evidence = "landed", signature = "void func_802B3350_de(void *arg0, void *arg1, u8 arg2)" }
 "func_802B33E0_de" = { evidence = "landed", signature = "void func_802B33E0_de(void *arg0, void *arg1, f32 arg2)" }
@@ -2841,14 +2841,14 @@ schema = 1
 "func_802B3480_de" = { evidence = "landed", signature = "void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3)" }
 "func_802B3540_de" = { evidence = "landed", signature = "void func_802B3540_de(void *arg0, void *arg1, s32 arg2)" }
 "func_802B35E0_de" = { evidence = "landed", signature = "void func_802B35E0_de(ALSynth_func_802B3000_de *s, ALVoice_s_func_802B3000_de *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)" }
-"func_802B36F0_de" = { evidence = "landed", signature = "void func_802B36F0_de(void *arg0, void *arg1)" }
+"alSynStopVoice" = { evidence = "landed", signature = "void alSynStopVoice(void *arg0, void *arg1)" }
 "func_802B3770_de" = { evidence = "landed", signature = "void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)" }
 "func_802B38B4_eu_x" = { evidence = "authored", signature = "void func_802B38B4_eu_x(void)" }
 "func_802B3A44_de" = { evidence = "landed", signature = "Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)" }
-"func_802B3BF8_de" = { evidence = "landed", signature = "void *func_802B3BF8_de(void)" }
-"func_802B3C24_de" = { evidence = "landed", signature = "void func_802B3C24_de(void *arg0)" }
-"func_802B3C3C_de" = { evidence = "landed", signature = "void func_802B3C3C_de(s32 arg0, s32 arg1)" }
-"func_802B3C7C_de" = { evidence = "landed", signature = "void func_802B3C7C_de(void *arg0)" }
+"__allocParam" = { evidence = "landed", signature = "void *__allocParam(void)" }
+"__freeParam" = { evidence = "landed", signature = "void __freeParam(void *arg0)" }
+"_freePVoice" = { evidence = "landed", signature = "void _freePVoice(s32 arg0, s32 arg1)" }
+"_collectPVoices" = { evidence = "landed", signature = "void _collectPVoices(void *arg0)" }
 "func_802B3CD0_de" = { evidence = "landed", signature = "s32 func_802B3CD0_de(func_8022E694_S1 *arg0, s32 arg1)" }
 "func_802B3D10_de" = { evidence = "landed", signature = "s32 func_802B3D10_de(ALSynth4C *drvr, ALPlayer_s14 **client)" }
 "func_802B3DB8_de" = { evidence = "landed", signature = "s32 func_802B3DB8_de(func_8022E694_S1 *arg0, s32 arg1)" }
@@ -2880,7 +2880,7 @@ schema = 1
 "func_802B5B94_de" = { evidence = "landed", signature = "s32 func_802B5B94_de(void *filter, s32 paramID, void *param)" }
 "func_802B5D70_de" = { evidence = "landed", signature = "Acmd *func_802B5D70_de(ALFx *r, ALDelay28 *d, s32 buff, s32 incount, Acmd *p)" }
 "func_802B5F68_de" = { evidence = "landed", signature = "Acmd *func_802B5F68_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)" }
-"func_802B60D8_de" = { evidence = "landed", signature = "int func_802B60D8_de(int *arg0, int arg1, int arg2)" }
+"alFxParam" = { evidence = "landed", signature = "int alFxParam(int *arg0, int arg1, int arg2)" }
 "func_802B60EC_de" = { evidence = "landed", signature = "Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)" }
 "func_802B625C_de" = { evidence = "landed", signature = "void *func_802B625C_de(void *arg0, s32 arg1, s32 arg2, void *arg3)" }
 "func_802B6300_de" = { evidence = "landed", signature = "f32 func_802B6300_de(ALDelay28 *d, s32 count)" }
@@ -2902,7 +2902,7 @@ schema = 1
 "func_802B72E0_de" = { evidence = "landed", signature = "s32 func_802B72E0_de(u32 frequency)" }
 "func_802B7400_de" = { evidence = "landed", signature = "s32 func_802B7400_de(void *bufPtr, u32 size)" }
 "func_802B748C_de" = { evidence = "authored", signature = "void func_802B748C_de(void)" }
-"func_802B7490_de" = { evidence = "landed", signature = "s32 func_802B7490_de(void)" }
+"__osAiDeviceBusy" = { evidence = "landed", signature = "s32 __osAiDeviceBusy(void)" }
 "func_802B74B0_de" = { evidence = "landed", signature = "s32 func_802B74B0_de(s32 arg0)" }
 "func_802B7538_de" = { evidence = "landed", signature = "void func_802B7538_de(s32 arg0)" }
 "func_802B7560_de" = { evidence = "landed", signature = "s32 func_802B7560_de(s32 arg0)" }
@@ -2915,7 +2915,7 @@ schema = 1
 "func_802B7AD8_de" = { evidence = "landed", signature = "void func_802B7AD8_de(u8 *valid, EntryRecAt3 *data)" }
 "func_802B7B80_us" = { evidence = "landed", signature = "u32 func_802B7B80_us(Triple *arg0)" }
 "func_802B7B90_de" = { evidence = "landed", signature = "s32 func_802B7B90_de(void *bufPtr, u64 size)" }
-"func_802B7C30_de" = { evidence = "landed", signature = "int func_802B7C30_de(void)" }
+"__osDpDeviceBusy" = { evidence = "landed", signature = "int __osDpDeviceBusy(void)" }
 "func_802B7C50_de" = { evidence = "landed", signature = "u32 func_802B7C50_de(Triple *arg0)" }
 "func_802B7D44_us" = { evidence = "landed", signature = "u32 func_802B7D44_us(Triple *arg0)" }
 "func_802B7E14_de" = { evidence = "landed", signature = "u32 func_802B7E14_de(Triple *arg0)" }
@@ -2945,12 +2945,12 @@ schema = 1
 "func_802B9BC0_de" = { evidence = "landed", signature = "void func_802B9BC0_de(void)" }
 "func_802B9C14_de" = { evidence = "landed", signature = "void func_802B9C14_de(void)" }
 "func_802B9C80_de" = { evidence = "landed", signature = "void func_802B9C80_de(void)" }
-"func_802B9CB0_de" = { evidence = "landed", signature = "s32 func_802B9CB0_de(s32 arg0, s32 arg1)" }
+"__osSiRawStartDma" = { evidence = "landed", signature = "s32 __osSiRawStartDma(s32 arg0, s32 arg1)" }
 "func_802B9D70_de" = { evidence = "landed", signature = "int func_802B9D70_de(void)" }
 "func_802B9D90_de" = { evidence = "landed", signature = "OSTask *func_802B9D90_de(OSTask *intp)" }
 "func_802B9E78_de" = { evidence = "landed", signature = "void func_802B9E78_de(OSTask *arg0)" }
-"func_802B9F7C_de" = { evidence = "landed", signature = "void func_802B9F7C_de(void)" }
-"func_802B9FB0_de" = { evidence = "landed", signature = "int func_802B9FB0_de(void)" }
+"osSpTaskStartGo" = { evidence = "landed", signature = "void osSpTaskStartGo(void)" }
+"__osSpDeviceBusy" = { evidence = "landed", signature = "int __osSpDeviceBusy(void)" }
 "func_802B9FD0_de" = { evidence = "landed", signature = "s32 func_802B9FD0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3)" }
 "func_802BA0D0_de" = { evidence = "landed", signature = "s32 func_802BA0D0_de(u32 pc)" }
 "func_802BA0FC_de" = { evidence = "authored", signature = "void func_802BA0FC_de(void)" }
@@ -2959,7 +2959,7 @@ schema = 1
 "func_802BA140_de" = { evidence = "landed", signature = "s32 func_802BA140_de(void *arg0)" }
 "func_802BA18C_de" = { evidence = "authored", signature = "void func_802BA18C_de(void)" }
 "func_802BA190_de" = { evidence = "landed", signature = "unsigned int func_802BA190_de(void)" }
-"func_802BA1B0_de" = { evidence = "landed", signature = "void func_802BA1B0_de(s32 arg0)" }
+"osViBlack" = { evidence = "landed", signature = "void osViBlack(s32 arg0)" }
 "func_802BA210_de" = { evidence = "landed", signature = "void func_802BA210_de(void)" }
 "func_802BA310_de" = { evidence = "landed", signature = "void *func_802BA310_de(void)" }
 "func_802BA350_de" = { evidence = "landed", signature = "void func_802BA350_de(s32 pri)" }
@@ -2968,11 +2968,11 @@ schema = 1
 "func_802BA650_de" = { evidence = "landed", signature = "void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2)" }
 "func_802BA6B0_de" = { evidence = "landed", signature = "void func_802BA6B0_de(OSViMode *modep)" }
 "func_802BA700_de" = { evidence = "landed", signature = "void func_802BA700_de(s32 arg0)" }
-"func_802BA870_de" = { evidence = "landed", signature = "void func_802BA870_de(f32 arg0)" }
-"func_802BA8C0_de" = { evidence = "landed", signature = "void func_802BA8C0_de(s32 arg0)" }
+"osViSetYScale" = { evidence = "landed", signature = "void osViSetYScale(f32 arg0)" }
+"osViSwapBuffer" = { evidence = "landed", signature = "void osViSwapBuffer(s32 arg0)" }
 "func_802BA910_de" = { evidence = "landed", signature = "void func_802BA910_de(void)" }
 "func_802BAC50_de" = { evidence = "landed", signature = "void func_802BAC50_de(void)" }
-"func_802BAC60_de" = { evidence = "landed", signature = "void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2)" }
+"osCreateMesgQueue" = { evidence = "landed", signature = "void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2)" }
 "func_802BAC90_de" = { evidence = "landed", signature = "void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)" }
 "func_802BAD68_de" = { evidence = "authored", signature = "void func_802BAD68_de(void)" }
 "func_802BAD70_de" = { evidence = "landed", signature = "int func_802BAD70_de(void)" }
@@ -2996,7 +2996,7 @@ schema = 1
 "func_802BB8B0_de" = { evidence = "landed", signature = "void func_802BB8B0_de(void)" }
 "func_802BB9F8_de" = { evidence = "landed", signature = "void func_802BB9F8_de(void)" }
 "func_802BBA4C_de" = { evidence = "landed", signature = "void func_802BBA4C_de(u64 interval)" }
-"func_802BBAAC_de" = { evidence = "landed", signature = "u64 func_802BBAAC_de(OSTimer *t)" }
+"__osInsertTimer" = { evidence = "landed", signature = "u64 __osInsertTimer(OSTimer *t)" }
 "func_802BBBC0_de" = { evidence = "landed", signature = "s32 func_802BBBC0_de(s32 arg0)" }
 "func_802BBC20_de" = { evidence = "landed", signature = "void func_802BBC20_de(void)" }
 "func_802BC850_eu_x" = { evidence = "authored", signature = "void func_802BC850_eu_x()" }
@@ -3008,7 +3008,7 @@ schema = 1
 "func_802BCF10_de" = { evidence = "declared", signature = "s32 func_802BCF10_de(void)" }
 "func_802BCF20_de" = { evidence = "authored", signature = "unsigned int func_802BCF20_de()" }
 "func_802BCF30_de" = { evidence = "authored", signature = "u32 func_802BCF30_de(void)" }
-"func_802BCF50_de" = { evidence = "authored", signature = "void func_802BCF50_de(u32 mask)" }
+"__osRestoreInt" = { evidence = "authored", signature = "void __osRestoreInt(u32 mask)" }
 "func_802BD080_de" = { evidence = "authored", signature = "int func_802BD080_de()" }
 "func_802BD150_de" = { evidence = "authored", signature = "void func_802BD150_de(u32 compare)" }
 "func_802BD160_de" = { evidence = "authored", signature = "unsigned int func_802BD160_de(unsigned int csr)" }
@@ -3017,8 +3017,8 @@ schema = 1
 "func_802BD200_eu_x" = { evidence = "authored", signature = "unsigned int func_802BD200_eu_x()" }
 "func_802BD218_de" = { evidence = "authored", signature = "void func_802BD218_de(void)" }
 "func_802BD220_de" = { evidence = "authored", signature = "void func_802BD220_de(unsigned int sr)" }
-"func_802BD230_de" = { evidence = "authored", signature = "void func_802BD230_de()" }
-"func_802BD2F0_de" = { evidence = "authored", signature = "void func_802BD2F0_de()" }
+"osUnmapTLBAll" = { evidence = "authored", signature = "void osUnmapTLBAll()" }
+"osWritebackDCacheAll" = { evidence = "authored", signature = "void osWritebackDCacheAll()" }
 "func_802BD320_de" = { evidence = "landed", signature = "s32 func_802BD320_de(char *buffer, const char *format, ...)" }
 "func_802BD378_de" = { evidence = "landed", signature = "s32 func_802BD378_de(void *arg0, void *arg1, s32 arg2)" }
 "func_802BD3A0_de" = { evidence = "landed", signature = "void *func_802BD3A0_de(void *destination, const void *source, int count)" }

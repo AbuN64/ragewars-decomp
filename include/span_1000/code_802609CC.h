@@ -5,7 +5,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_8025E568.h"
-#include "types.h"
 extern float D_800C41A0_de;
 
 extern double D_800C4190_de;

@@ -24,7 +24,7 @@
  /* 1.0f */
 static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
 {
-    extern u32 func_802AEA2C_de(ALCSeq_s *, u32);
+    extern u32 __readVarLen(ALCSeq_s *, u32);
     u32 i, tmpOff, flagTmp;
     f64 t;
     s32 division;
@@ -44,7 +44,7 @@ static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
             flagTmp = 1 << i;
             seq->validTracks |= flagTmp;
             seq->curLoc[i] = (u8 *)((u32)ptr + tmpOff);
-            seq->evtDeltaTicks[i] = func_802AEA2C_de(seq, i);
+            seq->evtDeltaTicks[i] = __readVarLen(seq, i);
         } else
             seq->curLoc[i] = 0;
     }
@@ -58,7 +58,7 @@ static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
 
 static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
 {
-    extern u32 func_802AEA2C_de(ALCSeq_s *, u32);
+    extern u32 __readVarLen(ALCSeq_s *, u32);
     extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *);
     u32 i;
     u32 firstTime = 0xFFFFFFFF;
@@ -80,7 +80,7 @@ static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
     seq->lastTicks += firstTime;
     seq->lastDeltaTicks = firstTime;
     if (evt->type != 0x12)
-        seq->evtDeltaTicks[firstTrack] += func_802AEA2C_de(seq, firstTrack);
+        seq->evtDeltaTicks[firstTrack] += __readVarLen(seq, firstTrack);
     deltaFlag = &seq->deltaFlag;
     *deltaFlag = 1;
 }
@@ -147,7 +147,7 @@ u8 func_802AE500_de(ALCSeq_s *seq, u32 track)
 }
 
 void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
-    extern u32 func_802AEA2C_de(RuntimeStateRecAtB8 *state, u32 index);
+    extern u32 __readVarLen(RuntimeStateRecAtB8 *state, u32 index);
     f64 converted;
     s32 count;
     u32 entry;
@@ -167,7 +167,7 @@ void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
         if (entry != 0) {
             state->active |= 1U << i;
             state->objects[i] = (void *)(base + entry);
-            state->results[i] = func_802AEA2C_de(state, i);
+            state->results[i] = __readVarLen(state, i);
         } else {
             state->objects[i] = 0;
         }
@@ -182,7 +182,7 @@ void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
 }
 
 void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result) {
-    extern u32 func_802AEA2C_de(RuntimeState *state, u32 index);
+    extern u32 __readVarLen(RuntimeState *state, u32 index);
     extern s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result);
     u32 minimum;
     u32 index;
@@ -212,7 +212,7 @@ void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result
     if (result->type != 0x12) {
         u32 delta;
 
-        delta = func_802AEA2C_de(state, selected);
+        delta = __readVarLen(state, selected);
         state->results[selected] += delta;
     }
     state->first = 1;

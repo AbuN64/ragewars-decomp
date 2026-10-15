@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct Texture;
 typedef struct Texture Texture;
 
@@ -70,7 +69,7 @@ extern void func_80414384_de();
 
 extern void func_80419868_eu_x(void);
 
-extern void func_802BA1B0_de(s32 arg0);
+extern void osViBlack(s32 arg0);
 
 extern s32 D_800DF258;
 extern s32 D_800DF25C;

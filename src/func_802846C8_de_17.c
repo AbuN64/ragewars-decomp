@@ -120,7 +120,7 @@ f32 func_802859D0_de(f32 *arg0, u32 arg1, u32 arg2, u32 arg3) {
 }
 
 void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
-    extern void func_802BCF50_de(u32);
+    extern void __osRestoreInt(u32);
     extern u32 func_802BCF30_de(void);
     s32 i;
     Node_func_80285B64_de *p;
@@ -139,11 +139,11 @@ void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
         } while (i < arg2);
     }
     ((PoolRecAt28V1 *)arg0)->baseLevel = 0;
-    func_802BCF50_de(saved);
+    __osRestoreInt(saved);
 }
 
 Node_func_80285B64_de *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, Vec3 position, f32 value0, f32 value1, Node_func_80285B64_de **owner) {
-    extern void func_802BCF50_de(s32 mask);
+    extern void __osRestoreInt(s32 mask);
     extern s32 func_802BCF30_de(void);
     extern void func_80255ED8_de(IntrusiveList *list, Node_func_80285B64_de *node);
     s32 mask;
@@ -156,12 +156,12 @@ Node_func_80285B64_de *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, Vec3 pos
         func_80255D14_de(&pool->active, node);
         init(node, key, position, value0, value1, owner);
     }
-    func_802BCF50_de(mask);
+    __osRestoreInt(mask);
     return node;
 }
 
 void func_80285C78_de(void *arg0) {
-    extern void func_802BCF50_de(u32);
+    extern void __osRestoreInt(u32);
     extern u32 func_802BCF30_de(void);
     extern void func_80255ED8_de(void *, void *);
     Node_func_80285B64_de *node;
@@ -187,11 +187,11 @@ void func_80285C78_de(void *arg0) {
         func_80255ED8_de(&(*active_list(arg0)), node);
         func_80255D14_de(arg0, node);
     }
-    func_802BCF50_de(saved);
+    __osRestoreInt(saved);
 }
 
 void func_80285D30_de(void *arg0) {
-    extern void func_802BCF50_de(s32 arg0);
+    extern void __osRestoreInt(s32 arg0);
     extern s32 func_802BCF30_de(void);
     extern void func_80255ED8_de(void *, s32);
     void *node;
@@ -209,5 +209,5 @@ void func_80285D30_de(void *arg0) {
         } while (node != 0);
     }
     ((PoolRecAt28V1 *)arg0)->baseLevel = 0;
-    func_802BCF50_de(saved);
+    __osRestoreInt(saved);
 }

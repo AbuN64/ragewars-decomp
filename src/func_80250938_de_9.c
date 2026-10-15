@@ -8,7 +8,7 @@
 
 extern u32 func_802BCF30_de(void);
 
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 extern struct Shape_typemap_165 *func_802548B8_de(s32, s32, u32, void *);
 
@@ -32,7 +32,7 @@ extern s32 func_80254B58_de(s32, s32, s32);
 
 extern void func_802515F0_de(s32, s32);
 
-extern void func_802BCF50_de(u32 arg0);
+extern void __osRestoreInt(u32 arg0);
 
 extern s32 D_80101134[];
 
@@ -55,20 +55,20 @@ struct Shape_typemap_165 *func_8025343C_de(s32 arg0, s32 arg1, u32 arg2, void *a
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     var_s0 = func_802548B8_de(0, temp_s0, temp_s1, temp_s2);
     temp_v0 = func_802BCF30_de();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
     }
     return var_s0;
 }
@@ -87,10 +87,10 @@ struct Shape_typemap_165 *func_80253530_de(void *arg0, void *arg1, s32 arg2) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     var_s0 = func_802514A8_de(0, 0U);
     if (var_s0 != 0) {
@@ -109,10 +109,10 @@ struct Shape_typemap_165 *func_80253530_de(void *arg0, void *arg1, s32 arg2) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0_2);
+        __osRestoreInt(temp_v0_2);
         func_802BB420_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_v0_2);
+        __osRestoreInt(temp_v0_2);
     }
     return var_s0;
 }
@@ -131,10 +131,10 @@ void func_80253670_de(void *arg0, Node80253610 *arg1) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     func_80254DA4_de(0, temp_s0);
     temp_s0->references += 1;
@@ -143,11 +143,11 @@ void func_80253670_de(void *arg0, Node80253610 *arg1) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 void func_80253754_de(void *arg0, Node80253610 *arg1) {
@@ -164,10 +164,10 @@ void func_80253754_de(void *arg0, Node80253610 *arg1) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     temp_s0->references -= 1;
     if (temp_s0->references == 0) {
@@ -177,11 +177,11 @@ void func_80253754_de(void *arg0, Node80253610 *arg1) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 void func_80253838_de(void *arg0, void *arg1) {
@@ -196,21 +196,21 @@ void func_80253838_de(void *arg0, void *arg1) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     func_80254990_de(0, arg1);
     temp_v0 = func_802BCF30_de();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 void func_80253908_de(s32 unusedHeap) {
@@ -225,10 +225,10 @@ void func_80253908_de(s32 unusedHeap) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     func_802511AC_de(0);
     while (func_80254B58_de(0, 0, 0) != 0) {
@@ -238,11 +238,11 @@ void func_80253908_de(s32 unusedHeap) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 void func_802539EC_de(s32 unused, s32 arg1) {
@@ -257,10 +257,10 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&((ResourceLockState *)&D_801005A8)->waitQueue, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     base = (ResourceLockState *)&D_801005A8;
     base->slot = arg1;
@@ -269,11 +269,11 @@ void func_802539EC_de(s32 unused, s32 arg1) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&base->waitQueue, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 s32 func_80253AD4_de(void) {
@@ -289,10 +289,10 @@ s32 func_80253AD4_de(void) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(((char *)&D_801005A8 + 0xB98), 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     base = &D_801005A8;
     result = *(s32 *)((char *)D_80100598 + (*base << 2));
@@ -301,10 +301,10 @@ s32 func_80253AD4_de(void) {
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de((char *)base + 0xB98, 0, 1);
     } else {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
     }
     return result;
 }
@@ -327,10 +327,10 @@ void func_80253BBC_de(s32 arg0, func_80205628_S3 *arg1) {
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB2A0_de(((char *)base + 0xB98), 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
 
     if (D_80100598[index] != 0) {
@@ -349,9 +349,9 @@ void func_80253BBC_de(s32 arg0, func_80205628_S3 *arg1) {
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {
-        func_802BCF50_de(token2);
+        __osRestoreInt(token2);
         func_802BB420_de(&D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(token2);
+    __osRestoreInt(token2);
 }

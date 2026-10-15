@@ -18,7 +18,7 @@ extern u8 D_8014D5C0;
 extern u8 D_80154110[];
 
 extern void func_802B9C14_de(void);
-extern s32 func_802B9CB0_de(s32, s32);
+extern s32 __osSiRawStartDma(s32, s32);
 extern s32 func_802BB2A0_de(OSMesgQueue *, void **, s32);
 extern u32 func_802B8C88_de(void *arg0);
 extern void func_802B9C80_de(void);

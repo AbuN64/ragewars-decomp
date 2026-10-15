@@ -1,527 +1,174 @@
-#include "span_16E000/code_80423280.h"
-#include "common/types_1dc8418c21db.h"
+#include "span_16E000/menu_screen_setup.h"
 #include "common/unused.h"
-#include "shared/menu_match_globals.h"
-#include "shared/world.h"
-#include "span_16E000/code_8042BD40.h"
+/* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
+   the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
+   items of the window with their alpha and visibility, resets the selection and the counters at
+   D_80154024, clears the pending flag at 0x91 of the eight D_80146398 records, places the four
+   character models (ids 0xEA6 to 0xEA9, x 0, -6, -13, -19) and a fifth model 0xEA6, then issues
+   request 0xE78 through func_8025DF34_de and calls func_80422170_de; returns zero. */
 #include "types.h"
+#include "common/types_8a8189af7b05.h"
 
-/* Calls func_802A2164_us and func_802A2394_de, then func_80298368_de with 0x11. */
-#if defined(VERSION_EU)
-extern void func_802A2344_eu();
-#elif defined(VERSION_EU_X)
-extern void func_802A2374_eu_x();
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
-extern void func_802A2164_us();
-#else
-extern void func_802A2224_de();
-#endif
 
-extern void func_802A2394_de();
 
-extern void func_80298368_de(s32);
 
-/* Clears the words at offsets 0x78 and 0x54 of D_801468A0, then calls func_80298368_de with 0x14
-   unless func_8042AF28_de and func_8042ACD8_de both report something, in which case it calls
-   func_8042DEA0_de. */
 
 
-extern struct MatchState D_801468A0;
 
-extern s32 func_8042AF28_de();
 
-extern s32 func_8042ACD8_de();
 
-extern void func_8042DEA0_de();
 
-/* Reports why a match ended: time running out on a timed match, the score limit (func_80228070_de),
-   the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
-   rule set 1), or otherwise whether the last-player-standing check reached its end. */
-enum MatchEnd {
-    MATCH_END_TIME_UP,
-    MATCH_END_SCORE_LIMIT,
-    MATCH_END_TAG_LIMIT,
-    MATCH_END_POINT_TARGET
-};
 
-extern Game_func_8042D060_de D_8014561C;
 
-extern World D_80145040;
 
-extern s32 D_8014DD98;
 
-extern s32 func_80228070_de(World *world);
 
-extern s32 func_802281F0_de(World *world);
 
-extern s32 func_802282EC_de(World *world);
 
-/* For each of the 8 occupied slots without the pending-remove flag, runs its two release callbacks. */
 
 
 
 
 
-
-
-
-
-extern void func_804243E0_de(s32 a0, struct IntPair *a1);
-
-extern void func_804259E0_de(s32 a0);
-
-/* Refreshes each of 8 configured participants: for each slot, reads the participant id at offset
-   0xF0 + slot*4 of D_800E53C0; when it is not -1 and the id's 150-byte record in D_80146398 has
-   its byte at 0x91 clear, stores func_80425DFC_de(id) at offset 0x32C of D_800E53C0, calls
-   func_80425EE4_de(id, &D_800E53C0[0x110 + id*8]), and calls func_804259E0_de(id). */
-
-
-extern s32 func_80425DFC_de(s32);
-
-extern void func_80425EE4_de(s32, s32 *);
-
-extern void func_804259E0_de(s32);
-
-/* When the object D_800E53C0 points to has a target at 0x32C and its word at 0x328 set, runs
-   func_804399D0 on offset 0x20 of it with D_800D15E0 set and D_800D15F0 raised to D_800DDB08_de[1],
-   then clears D_800D15E0 and sets D_800D15F0 to D_800DDB10. */
-
-
-
-extern s32 D_800D15E0;
-
-extern f32 D_800D15F0;
-
-extern f32 D_800DDB08_de[];
-
-extern f32 D_800DDB10;
-
-extern void func_804399D0(void *);
-
-/* Draws player p's badge on the screen D_800E53C0: looks up the group item the third argument
-   names in the screen window, picks its child 0x26C, 0x26B or 0x26A for kinds 1 to 3 and 0x26D
-   otherwise, shows it with alpha 0x96, and sets its frame at 0x2C from the rank byte at 0x92 of
-   the player's 150-byte record in D_80146398, the cartridge's jump table jtbl_800E1B48 sending
-   ranks 0 to 4 to frame 0x63, 0x62, 0x61 or 0x5F or to hiding it again with frame 0x60, which any
-   higher rank also gets. */
-
-
-/* Hides the four child items of a selected menu panel. */
-
-
-
-                            /* extern */
-
-
-#if defined(VERSION_DE)
-enum { ITEM0 = 616, ITEM1 = 615, ITEM2 = 614, ITEM3 = 613 };
-#elif defined(VERSION_EU_X)
-enum { ITEM0 = 625, ITEM1 = 624, ITEM2 = 623, ITEM3 = 622 };
-#else
-enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
-#endif
-
-/* Releases the object D_800E53C0 holds through func_802547E4_de, clears D_800E53C0 and returns zero. */
-
-
-extern void func_802547E4_de(void *);
-
-/* Handles event 1 on the screen D_800E53C0: unless func_8043C308_de reports its menu in state 1 it
-   calls func_8042D28C_de; otherwise it advances the menu with func_8043C080_de and func_8043C2A4_de and,
-   once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
-   calls func_8029973C_de, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
-   D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and func_8042ACD8_de both
-   agree or for screen 0x14; choice 1 calls func_8040C428_de(0), shows the window, stops the objects
-   at D_80145088 and 0x48 before it, releases D_8011FE88 through func_80286AA8_de and sets the word at
-   0x17F0 of D_80145088 to 8. Returns zero. */
-
-
-
-
-
-extern u8 D_801462D5;
-
-extern s32 D_80146918;
-
-extern s32 D_801468F4;
-
-extern s32 func_8043C308_de(struct MenuRules *);
-
-extern void func_8043C080_de(struct MenuRules *);
-
-extern void func_8043C2A4_de(struct MenuRules *);
-
-extern void func_8042D28C_de();
-
-extern void func_8040C428_de(s32);
-
-extern void func_8044A370_de(void *, s32);
-
-extern void func_804499B0_de(void *, s32, s32);
-
-extern void func_80286AA8_de(void *, s32, s32);
-
-extern void func_8029973C_de();
-
-/* Runs one frame of the screen D_800E53C0's confirmation prompt while D_800E28E0 is not positive:
-   on the first frame it marks the prompt open at 0x320 and asks func_802991D4_de for message 0x238,
-   or 0x237 when func_8040EBD0_de rejects the object loaded for 0x238, then calls func_802A2360_de. Once
-   the choice word D_80154020[1] reads one it clears it and either enables the prompt's object at
-   0xE4 and records the choice at 0x328, when the pending action D_80154020[0] is -1, or disables
-   the object, clears 0x328 and hands the pending action to func_80298368_de through func_8029973C_de.
-   Returns zero. On eu-x both message ids are renumbered 5 higher. */
-
-
-
-
-
-extern s32 D_800E28E0;
-
-extern s32 D_80154020[];
-
-extern s32 func_8040EBD0_de(void *);
-
-extern void func_802991D4_de(s32);
-
-extern void func_802A2360_de();
-
-#if defined(VERSION_DE)
-enum { CONFIRM_MESSAGE = 0x234, FALLBACK_MESSAGE = 0x233 };
-#elif defined(VERSION_EU_X)
-enum { CONFIRM_MESSAGE = 0x23D, FALLBACK_MESSAGE = 0x23C };
-#else
-enum { CONFIRM_MESSAGE = 0x238, FALLBACK_MESSAGE = 0x237 };
-#endif
-
-void func_8042CFB0_de(void) {
-    
-#if defined(VERSION_EU)
-func_802A2344_eu
-#elif defined(VERSION_EU_X)
-func_802A2374_eu_x
-#elif defined(VERSION_US) || defined(VERSION_US_REV1)
-func_802A2164_us
-#else
-func_802A2224_de
-#endif
-();
-    func_802A2394_de();
-    func_80298368_de(0x11);
-}
-
-void func_8042CFDC_de(void) {
-    struct MatchState *state = &D_801468A0;
-
-    state->second = 0;
-    state->first = 0;
-    if (func_8042AF28_de() == 0 || func_8042ACD8_de() == 0) {
-        func_80298368_de(0x14);
-    } else {
-        func_8042DEA0_de();
-    }
-}
-
-void func_8042D034_de(void) {
-    struct MatchState *state = &D_801468A0;
-
-    state->second = 0;
-    state->first = 0;
-    func_80298368_de(0xF);
-}
-
-s32 func_8042D060_de(void) {
-    SettingsRecAt24 *settings;
-    settings = &D_8014561C.settings;
-    if (settings->timeSetting > 0 && D_8014561C.rules.timeLeft == 0.0f) {
-        return MATCH_END_TIME_UP;
-    }
-    if (func_80228070_de(&D_80145040) != 0) {
-        return MATCH_END_SCORE_LIMIT;
-    }
-    switch (D_8014DD98) {
-    case 0:
-        if (func_802282EC_de(&D_80145040) != 0) {
-            return MATCH_END_POINT_TARGET;
-        }
-        break;
-    case 1:
-        if (func_802281F0_de(&D_80145040) != 0) {
-            return MATCH_END_TAG_LIMIT;
-        }
-        break;
-    }
-    return D_8014561C.rules.lastStanding == 1;
-}
-
-void func_8042D118_de(void)
-{
-    extern Shared_Rec3 D_80146398[8];
-    extern Shared_BigObj *D_800E53C0;
-  s32 i;
-  Shared_BigObj *obj;
-  int temp_1;
-  Shared_Rec3 *recs;
-  for (i = 0; i < 8; i++)
-  {
-    s32 val;
-    temp_1 = -1;
-    obj = D_800E53C0;
-    recs = D_80146398;
-    val = obj->slot[i];
-    if (val == temp_1)
-    {
-      continue;
-    }
-    if ((recs + val)->flag != 0)
-    {
-      continue;
-    }
-    func_804243E0_de(val, &obj->arr2[val]);
-    recs = D_80146398;
-    func_804259E0_de(val);
-  }
-
-}
-
-void func_8042D1C8_de(void) {
-    extern u8 D_80146398[];
-    extern u8 *D_800E53C0;
-    s32 id;
+s32 func_80429A24_de(void *window) {
+    SetupModelVector scale;
+    SetupModelVector position;
+    SetupModelVector rotation;
+    SetupModelVector offset;
+    MenuWidget *item1, *item2, *item3, *item4, *item5, *item6, *item7, *item8;
+    MenuWidget *opacityItem;
+    f32 z;
+    ListScreenRecord *record;
     s32 i;
-    s32 idx;
-    u8 *record;
-
-    for (i = 0; i < 8; i += 1) {
-        idx = i * 4;
-        id = ((struct IntegerStateF4 *) (D_800E53C0 + idx))->unk_F0;
-        if (id == -1) {
-            continue;
-        }
-        record = &D_80146398[id * 0x96];
-        if (record[0x91] != 0) {
-            continue;
-        }
-        ((IntegerState330 *)(D_800E53C0))->unk_32C = func_80425DFC_de(id);
-        func_80425EE4_de(id, (s32 *)((id * 8 + 0x110) + D_800E53C0));
-        func_804259E0_de(id);
-    }
-}
-
-void func_8042D28C_de(void) {
-    extern Shared_Screen *D_800E53C0;
-    Shared_Screen *state = D_800E53C0;
-    f32 *level;
-
-    if (state->lastPick != -1 && state->active != 0) {
-        level = &D_800D15F0;
-        D_800D15E0 = 1;
-        *level = D_800DDB08_de[1];
-#if defined(VERSION_DE)
-        func_804397F0_auto((char *) state + 0x20);
-#else
-        func_804399D0((char *) state + 0x20);
-#endif
-        D_800D15E0 = 0;
-        *level = D_800DDB10;
-    }
-}
-
-void func_8042D304_de(s32 player, s32 kind, unsigned short group) {
-    extern void *func_8040EC30_de(void *, s32);
-    extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
-    extern u8 D_80146398[];
-    extern struct func_8042CE54_S1 *D_800E53C0;
-    struct Resource_func_80419E54_de *item;
-    void *parent;
-    u8 *record;
-    u32 rank;
+    s32 x;
     s32 id;
-    s32 frame;
-    record = &D_80146398[player * 150];
-    parent = func_8040EC30_de(D_800E53C0->unkE0, group);
-    switch (kind) {
-    case 0:
-    default:
-#if defined(VERSION_DE)
-        id = 0x268;
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26D;
-#elif defined(VERSION_EU_X)
-        id = 0x271;
-#endif
-        break;
-    case 1:
-#if defined(VERSION_DE)
-        id = 0x267;
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26C;
-#elif defined(VERSION_EU_X)
-        id = 0x270;
-#endif
-        break;
-    case 2:
-#if defined(VERSION_DE)
-        id = 0x266;
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26B;
-#elif defined(VERSION_EU_X)
-        id = 0x26F;
-#endif
-        break;
-    case 3:
-#if defined(VERSION_DE)
-        id = 0x265;
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-        id = 0x26A;
-#elif defined(VERSION_EU_X)
-        id = 0x26E;
-#endif
-        break;
-    }
-    item = func_8040EC30_de(parent, id);
-    func_8040E8D8_de(item, 1);
-    item->value = 0x96;
-    rank = record[0x92];
-    switch (rank) {
-    case 0:
-        frame = 0x63;
-        break;
-    case 1:
-        frame = 0x62;
-        break;
-    case 2:
-        frame = 0x61;
-        break;
-    case 3:
-        frame = 0x5F;
-        break;
-    case 4:
-        frame = 0x60;
-        break;
-    default:
-        func_8040E8D8_de(item, 0);
-        frame = 0x60;
-        break;
-    }
-    item->frame = frame;
-}
 
-void func_8042D418_de(s32 arg0) {
-    s32 func_8040EC30_de(s32, s32);
-    void func_8040E8D8_de(s32, s32);
-    extern MenuPanelRoot *D_800E53C0;
-    s32 temp_s1;
-    s32 var_a1;
-    s32 var_s0;
+    D_800E4F60 = func_8025305C_de(sizeof(SetupScreen));
+    D_800E4F60->window = window;
+    D_800E4F60->list = func_8041B610_de(window, 4);
+    func_8041B6E8_de(window, 0, 0x2FF);
+    func_8041B6E8_de(window, 1, 0x2FF);
+    func_8041B6E8_de(window, 2, 0x2FF);
+    func_8041B6E8_de(window, 3, 0x2FF);
+    D_800E4F60->unk3DC = 1;
+    D_800E4F60->unk45C = 0;
+    D_800E4F60->unk3E0 = 4;
 
-    temp_s1 = func_8040EC30_de(D_800E53C0->window, arg0 & 0xFFFF);
-    var_s0 = 0;
-    do {
-        switch(var_s0) {
-        case 0: var_a1=ITEM0; break;
-        case 1: var_a1=ITEM1; break;
-        case 2: var_a1=ITEM2; break;
-        case 3: var_a1=ITEM3; break;
-        default: var_a1=ITEM0; break;
+    item1 = func_8040EC30_de(window, 0x306);
+    D_800E4F60->left = item1;
+    item1->x -= item1->width;
+    D_800E4F60->leftCount = D_800E4F60->left->width / 4;
+    x = D_800E4F60->left->width - D_800E4F60->leftCount * 4;
+    D_800E4F60->left->x += x;
+
+    item2 = func_8040EC30_de(window, 0x30F);
+    D_800E4F60->right = item2;
+    item2->x += item2->width;
+    D_800E4F60->rightCount = D_800E4F60->right->width / 4;
+    x = D_800E4F60->right->width - D_800E4F60->rightCount * 4;
+    D_800E4F60->right->x -= x;
+
+    opacityItem = func_8040EC30_de(window, 0x30A);
+    opacityItem->alpha = 0x6E;
+    item3 = func_8040EC30_de(window, 0x35D);
+    D_800E4F60->unk448 = item3;
+    item3->alpha = 0x41;
+    func_8040E8D8_de(D_800E4F60->unk448, 0);
+    D_800E4F60->text3E4 = func_80419E54_de(0x303, 0x6E);
+    item4 = func_8040EC30_de(window, 0x301);
+    D_800E4F60->unk3E8 = item4;
+    func_8040E8D8_de(item4, 0);
+    D_800E4F60->label = func_8040EC30_de(window, 0x30E);
+    D_800E4F60->unk3F0 = func_8040EC30_de(window, 0x310);
+    func_8042B080_de();
+    D_800E4F60->selection = 0;
+    D_800E4F60->category = 0;
+    func_8042A990_de();
+    func_8042AFE0_de();
+    D_80154020.ready = 0;
+    D_80154020.value = -1;
+    D_800E4F60->unk454 = func_8040EC30_de(window, 0x308);
+    opacityItem = func_8040EC30_de(window, 0x309);
+    opacityItem->alpha = 0x6E;
+    D_800E4F60->unk46C = 0;
+    item5 = func_8040EC30_de(window, 0x30B);
+    D_800E4F60->unk440 = item5;
+    item5->alpha = 0x8C;
+    func_8040E8D8_de(D_800E4F60->unk440, 1);
+    item6 = func_8040EC30_de(window, 0x30D);
+    D_800E4F60->unk444 = item6;
+    item6->alpha = 0x8C;
+    func_8040E8D8_de(D_800E4F60->unk444, 0);
+    item7 = func_8040EC30_de(window, 0x30C);
+    D_800E4F60->unk44C = item7;
+    item7->alpha = 0xFF;
+    D_800E4F60->unk450 = func_8040EC30_de(window, 0x2FE);
+    item8 = func_8040EC30_de(window, 0x300);
+    D_800E4F60->unk458 = item8;
+    func_8040E8D8_de(item8, 1);
+    func_802A2394_de();
+    D_800E4F60->unk460 = 0;
+    D_800E4F60->unk464 = 0;
+    D_800E4F60->unk468 = -1;
+
+    for (i = 0; i < 8; i++) {
+        record = &D_80146398[i];
+        if (record->out == 1) {
+            record->active = 0;
+            record->out = 0;
         }
-        func_8040E8D8_de(func_8040EC30_de(temp_s1, var_a1), 0);
-        var_s0 += 1;
-    } while (var_s0 < 4);
-}
+    }
+    func_802A23C4_de(1);
 
-s32 func_8042D4CC_de(void) {
-    extern void *D_800E53C0;
-    func_802547E4_de(D_800E53C0);
-    D_800E53C0 = 0;
+    x = 0;
+    id = 0;
+    scale.value.x = D_800E1AA0;
+    scale.value.y = D_800E1AA0;
+    scale.value.z = D_800E1AA0;
+    rotation.value.x = 0.0f;
+    rotation.value.y = 0.0f;
+    rotation.value.z = 0.0f;
+    offset.value.x = 0.0f;
+    offset.value.y = D_800E1AA4;
+    offset.value.z = 0.0f;
+    for (i = 0; i < 4; i++) {
+        switch (i) {
+        case 0:
+            x = 0;
+            id = 0xEA6;
+            break;
+        case 1:
+            x = -6;
+            id = 0xEA7;
+            break;
+        case 2:
+            x = -13;
+            id = 0xEA8;
+            break;
+        case 3:
+            x = -19;
+            id = 0xEA9;
+            break;
+        }
+        position.value.x = x;
+        position.value.y = D_800E1AA8;
+        z = D_800E1AAC;
+        position.value.z = z;
+        func_80439B5C_de(&D_800E4F60->models[i].initial, id, scale.words, position.words);
+        func_80439BE0_de(&D_800E4F60->models[i].rotation, rotation.words);
+        func_80439C30_de(&D_800E4F60->models[i].offset, offset.words);
+    }
+    scale.value.x = D_800E1AB0;
+    scale.value.y = D_800E1AB0;
+    scale.value.z = D_800E1AB0;
+    position.value.z = z;
+    position.value.x = D_800E1AB4;
+    position.value.y = D_800E1AB8;
+    func_80439B5C_de(&D_800E4F60->models[4].initial, 0xEA6, scale.words, position.words);
+    func_80439BE0_de(&D_800E4F60->models[4].rotation, rotation.words);
+    func_80439C30_de(&D_800E4F60->models[4].offset, offset.words);
+    func_8025DF34_de(0xE78);
+    func_80422170_de();
     return 0;
 }
 
-s32 func_8042D4FC_de(void *window, void *arg1, s32 event) {
-    extern void func_8040E8D8_de(void *, s32);
-    extern struct MenuRules *D_800E53C0;
-    s32 state;
-    char *object;
-    s32 next;
-
-    if (event != 1) {
-        return 0;
-    }
-    state = func_8043C308_de(D_800E53C0);
-    if (state == event) {
-        func_8043C080_de(D_800E53C0);
-        func_8043C2A4_de(D_800E53C0);
-        if (func_8043C308_de(D_800E53C0) != 2) {
-            return 0;
-        }
-        if (D_800E53C0->locked != 0) {
-            if (D_800E53C0->locked != state) {
-                return 0;
-            }
-            func_8040C428_de(0);
-            func_8040E8D8_de(window, 1);
-            object = &D_80145088;
-            func_8044A370_de(object, 0);
-            func_804499B0_de(object - 0x48, 0, 0);
-            func_80286AA8_de(&D_8011FE88, 0, 0);
-            ((MatchMenuObjects *)(object))->transition = 8;
-        } else {
-            func_8040E8D8_de(window, 0);
-            func_8029973C_de();
-            if (D_801462D5 == 0) {
-                D_80146918 = 0;
-                D_801468F4 = 0;
-                if (func_8042AF28_de() != 0 && func_8042ACD8_de() != 0) {
-                    func_8042DEA0_de();
-                    return 0;
-                }
-                next = 0x14;
-            } else {
-                D_80146918 = 0;
-                D_801468F4 = 0;
-                next = 0xF;
-            }
-            func_80298368_de(next);
-            return 0;
-        }
-    } else {
-        func_8042D28C_de();
-    }
-    return 0;
-}
-
-s32 func_8042D690_de(s32 context) {
-    extern void *func_8040EC30_de(s32, s32);
-    extern void func_8040E8D8_de(void *, s32);
-    extern struct Screen_func_8042D690_de *D_800E53C0;
-    s32 *choice;
-    s32 taken;
-    s32 message;
-
-    if (D_800E28E0 <= 0) {
-        if (D_800E53C0->open == 0) {
-            D_800E53C0->open = 1;
-            if (func_8040EBD0_de(func_8040EC30_de(context, CONFIRM_MESSAGE)) == 0) {
-                message = CONFIRM_MESSAGE;
-            } else {
-                message = FALLBACK_MESSAGE;
-            }
-            func_802991D4_de(message);
-            func_802A2360_de();
-        }
-        choice = &D_80154020[1];
-        taken = choice[0];
-        if (taken == 1) {
-            choice[0] = 0;
-            if (choice[-1] != -1) {
-                func_8040E8D8_de(D_800E53C0->object, 0);
-                D_800E53C0->choice = 0;
-                func_8029973C_de();
-                func_80298368_de(choice[-1]);
-                return 0;
-            }
-            func_8040E8D8_de(D_800E53C0->object, 1);
-            D_800E53C0->choice = taken;
-        }
-    }
-    return 0;
-}

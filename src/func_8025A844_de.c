@@ -1,5 +1,4 @@
 #include "span_1000/code_8025A3EC.h"
-#include "span_1000/code_8025A3EC.h"
 #include "common/unused.h"
 #include "types.h"
 #include "common/types_06e4f7ef1f9e.h"
@@ -12,14 +11,14 @@ extern s32 func_80258D2C_de(Owner_func_8025A844_de *);
 extern s16 func_80259B10_de(void *, void *);
 
 extern void func_802B2F00_de(void *, s16);
-extern void func_802B2E30_de(void *, s32);
+extern void alSndpSetPan(void *, s32);
 
 static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan) {
     Owner_func_8025A844_de *owner = voice->owner;
     char *sound = owner->sound;
 
     func_802B2F00_de(sound, owner->samples[voice->index]);
-    func_802B2E30_de(sound, pan);
+    alSndpSetPan(sound, pan);
 }
 
 void func_8025A844_de(Voice_func_8025A844_de *voice) {

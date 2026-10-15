@@ -9,9 +9,9 @@ struct LldivResult {
     s64 rem;
 };
 
-extern void func_802BD230_de();
+extern void osUnmapTLBAll();
 
-extern void func_802BD2F0_de();
+extern void osWritebackDCacheAll();
 
 struct LldivResult;
 typedef struct LldivResult LldivResult;

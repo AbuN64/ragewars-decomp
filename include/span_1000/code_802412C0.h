@@ -6,7 +6,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_8023D370.h"
-#include "types.h"
 #include "span_1000/code_80213ED4.h"
 struct Ray180;
 struct MotionSurface;
@@ -503,5 +502,12 @@ typedef struct CollisionVertex {
 } CollisionVertex;
 
 extern s32 func_8023DF70_de(CapsuleSweep*,Vec3*,f32,Polygon*,s32);
+
+extern void func_80242FE8_de(void *arg0, void *arg1);
+
+extern void D_00243814();
+extern void D_00243850();
+extern s32 func_80216108_de(void *);
+extern void func_8026F368_de(MatrixF *, Vec3 *, Vec3 *, Vec3 *);
 
 #endif

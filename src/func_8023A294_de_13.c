@@ -17,13 +17,13 @@ extern void func_802AD370_de(int a0, int a1, int a2, int a3, int a4, int a5);
 
 
 
-void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
+void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2);
 
 void **func_8025343C_de(s32 arg0, s32 arg1, s32 arg2, void *arg3);
 
 void func_802BB420_de(void *arg0, void *arg1, s32 arg2);
 
-extern void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
+extern void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2);
 
 extern void func_802BB420_de(void *arg0, void *arg1, s32 arg2);
 
@@ -97,7 +97,7 @@ s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
   new_var = (temp_s1 + 1) & (~1);
   if (1)
   {
-    func_802BAC60_de(sp10, (s32) (&sp38), 1);
+    osCreateMesgQueue(sp10, (s32) (&sp38), 1);
     blk.f28 = 3;
     blk.f2C = arg0;
     blk.f34 = (void **) sp10;
@@ -120,7 +120,7 @@ void func_8023C85C_de(s32 arg0) {
     s32 sp38;
     void *sp3C;
 
-    func_802BAC60_de(sp10, (s32)&sp38, 1);
+    osCreateMesgQueue(sp10, (s32)&sp38, 1);
     block.type = 2;
     block.value = arg0;
     block.data = sp10;

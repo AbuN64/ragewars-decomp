@@ -5,7 +5,6 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 typedef struct WorldSortEntry { s32 item; f32 distance; } WorldSortEntry;
 struct View_func_8028FA60_de;
 typedef struct View_func_8028FA60_de View_func_8028FA60_de;

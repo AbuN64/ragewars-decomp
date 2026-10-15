@@ -468,4 +468,6 @@ struct func_80216D3C_S1 {
     s32 unk88;
 };
 
+extern void func_80217074_de(void *arg0, f32 arg1);
+
 #endif

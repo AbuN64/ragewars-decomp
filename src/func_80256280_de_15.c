@@ -19,7 +19,7 @@
 
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *, s32, s32);
 
 extern void func_8025BA9C_de(void *, s16);
@@ -48,11 +48,11 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     }
     func_802598B4_de(var_a0, id);
@@ -82,10 +82,10 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(temp_s0, 0, 1);
     } else {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
     }
     return found;
 }
@@ -104,7 +104,7 @@ extern void func_8025BB5C_de(void *, Vec3 *, s32);
 extern void func_8025BB84_de(void *, Item57BD4 *, s32);
 extern void func_802577F4_de(void *, void *, s32, Vec3 *);
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *, s32, s32);
 
 
@@ -153,10 +153,10 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, Vec3 *arg2, s32 arg3,
         s32 count = ((MenuRules *)(queue))->locked + 1;
         ((MenuRules *)(queue))->locked = count;
         if (count != 1) {
-            func_802BCF50_de(token);
+            __osRestoreInt(token);
             func_802BB2A0_de(queue, 0, 1);
         } else {
-            func_802BCF50_de(token);
+            __osRestoreInt(token);
         }
     }
     func_802577F4_de(arg0, ((Draw *)(node))->model, 0, arg2);
@@ -166,10 +166,10 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, Vec3 *arg2, s32 arg3,
         s32 count = ((MenuRules *)(queue))->locked - 1;
         ((MenuRules *)(queue))->locked = count;
         if (count != 0) {
-            func_802BCF50_de(token);
+            __osRestoreInt(token);
             func_802BB420_de(queue, 0, 1);
         } else {
-            func_802BCF50_de(token);
+            __osRestoreInt(token);
         }
     }
     return 0;

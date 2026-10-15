@@ -33,8 +33,8 @@ extern s16 D_800D4210[128];
 extern char D_800CC850[], D_800C7604[];
 extern void *D_800D4070;
 extern void func_802BAC50_de(const char *, const char *, s32);
-extern void func_802B3C3C_de(void *, DraftAudioVoice *);
-extern void func_802B3C24_de(void *);
+extern void _freePVoice(void *, DraftAudioVoice *);
+extern void __freeParam(void *);
 extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);
 extern f32 func_802B5288_de(f32, s32, s32, s32);
 
@@ -57,7 +57,7 @@ Acmd *func_802B4A10_eu_x(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset
             event = env->ctrlList;
             event->data.voice->offset = 0;
             count -= elapsed;
-            func_802B3C3C_de(D_800D4070, event->data.voice);
+            _freePVoice(D_800D4070, event->data.voice);
             goto remove;
         case 11:
         case 12:
@@ -129,7 +129,7 @@ remove:
         output += elapsed << 1;
         env->ctrlList = event->next;
         if (!env->ctrlList) env->ctrlTail = 0;
-        func_802B3C24_de(event);
+        __freeParam(event);
         previous = nextOffset;
     }
     commands = func_802B4C7C_de(env, &input, &output, count, sampleOffset, commands);

@@ -24,11 +24,11 @@ extern s32 func_802C00B0_de(void *, s32, s32 *);
 
 extern s32 func_802B2620_de(char *);
 
-extern void func_802B2E80_de(char *, f32);
+extern void alSndpSetPitch(char *, f32);
 
 extern void func_802B2F10_de(char *, s32);
 
-extern void func_802B2E30_de(char *, s32);
+extern void alSndpSetPan(char *, s32);
 
 extern void func_802B2ED0_de(char *, s32, s32);
 
@@ -77,7 +77,7 @@ static inline s32 pick(Bank_func_8025CED0_de *bank, s32 group) {
 }
 
 static inline void restart(PlayerRecAt1E *player) {
-    extern void func_802B2F60_de(char *);
+    extern void alSndpStop(char *);
     extern void func_802B2F00_de(char *, s32);
     extern char *func_80258D40_de(Bank_func_8025CED0_de *);
     char *channel;
@@ -86,7 +86,7 @@ static inline void restart(PlayerRecAt1E *player) {
         player->state = 2;
         channel = func_80258D40_de(player->bank);
         func_802B2F00_de(channel, player->id);
-        func_802B2F60_de(channel);
+        alSndpStop(channel);
     }
 }
 
@@ -142,9 +142,9 @@ void func_8025CC90_de(PlayerRecAt24 *player) {
             D_800D0D78->unk4 = func_802C00B0_de(sequence, 0x5622, &rate);
             player->state = 3;
             func_802B2F00_de(channel, player->id);
-            func_802B2E80_de(channel, rate * 4.5351473e-05f);
+            alSndpSetPitch(channel, rate * 4.5351473e-05f);
             func_802B2F10_de(channel, (s16)(player->speed * player->tempoScale));
-            func_802B2E30_de(channel, player->priority);
+            alSndpSetPan(channel, player->priority);
             func_802B2ED0_de(channel, player->id, 0x7F);
             func_802B2DE0_de(channel, (u8)(u32)player->volume);
             func_802B2D80_de(channel);
@@ -195,7 +195,7 @@ void func_8025D158_de(struct Shape_typemap_110 *record, s32 resource) {
 }
 
 void func_8025D1BC_de(void *arg0) {
-    extern void func_802B2F60_de(void *arg0);
+    extern void alSndpStop(void *arg0);
     extern void func_802B2F00_de(void *arg0, s16 arg1);
     extern void *func_80258D40_de(void *arg0);
     extern void func_802587A4_de(s32 *arg0);
@@ -210,7 +210,7 @@ void func_8025D1BC_de(void *arg0) {
         player->state = 2;
         temp_v0_2 = func_80258D40_de(player->bank);
         func_802B2F00_de(temp_v0_2, player->id);
-        func_802B2F60_de(temp_v0_2);
+        alSndpStop(temp_v0_2);
     }
     func_802587A4_de((s32 *)player->bank);
 }
@@ -273,7 +273,7 @@ void func_8025D350_de(void *arg0, s32 arg1) {
 }
 
 void func_8025D3E4_de(void *arg0) {
-    extern void func_802B2F60_de(void *arg0);
+    extern void alSndpStop(void *arg0);
     extern void func_802B2F00_de(void *arg0, s16 arg1);
     extern void *func_80258D40_de(void *arg0);
     PlayerRecAt1E *player = arg0;
@@ -285,6 +285,6 @@ void func_8025D3E4_de(void *arg0) {
         player->state = 2;
         temp_v0_2 = func_80258D40_de(player->bank);
         func_802B2F00_de(temp_v0_2, player->id);
-        func_802B2F60_de(temp_v0_2);
+        alSndpStop(temp_v0_2);
     }
 }

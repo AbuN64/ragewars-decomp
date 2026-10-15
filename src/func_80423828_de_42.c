@@ -1,20 +1,18 @@
 #include "span_16E000/code_80423280.h"
 #include "common/types_1dc8418c21db.h"
-#include "common/types_8fd754e1e915.h"
-#include "span_16E000/code_8042BD40.h"
+#include "shared/world.h"
+#include "span_16E000/code_80429C10.h"
 #include "types.h"
+#include "common/unused.h"
+#include "span_1000/code_80245980.h"
+#include "span_16E000/code_804366C4.h"
 
-/* Releases the object D_800E5430 holds through func_802547E4_de, clears D_800E5430 and returns zero. */
-
-
-extern void func_802547E4_de(void *);
-
-/* Runs the screen D_800E5430 each frame: past stage 1 of D_800E28E0 it only calls func_802A2394_de;
-   otherwise it calls func_802A2360_de and, while its menu reports 3, counts the delay at 0xC down and
-   on expiry scrolls the list at 0x8 back one row, wrapping to the menu's own row count, and
-   restarts the delay at 3; when the menu reports 4 it calls func_8029973C_de and leaves through
-   func_80298368_de with the stored target or func_802998A8_de when that is -1. Returns zero. Written
-   from the assembly as a switch on the menu result, matching on the first trial. */
+/* Sets the alpha of every catalogue icon on the screen D_800E4F60: for categories 0 to 3 (tables
+   D_800E5240, D_800E5214, D_800E51F8 and D_800E51E4) it walks the count func_8042B154_de gives for the
+   category's list func_8042B294_de and, for the first of the forty 16-byte icon records D_800E4F64
+   whose key matches the entry, sets the alpha of the item its key names (and of the item its second
+   word names unless that is -1) and shows them through func_8040E8D8_de while the alpha is at least
+   12. */
 
 
 
@@ -22,206 +20,213 @@ extern void func_802547E4_de(void *);
 
 
 
-extern s32 D_800E28E0;
-
-extern void func_802A2394_de();
-
-extern void func_802A2360_de();
-
-extern s32 func_8041A470_de(struct Menu_func_804241BC_de *);
-
-extern void func_8029973C_de();
-
-extern void func_80298368_de(s32);
-
-extern void func_802998A8_de();
-
-/* Activates the requested player slots and creates any missing players when entering the screen. */
 
 
 
+extern s32 func_8042B154_de(void *);
+
+/* Refreshes the selection on the screen D_800E4F60: for category 0 to 3 at 0x434 it takes the item
+   the selection at 0x438 names in the 4-byte table D_800E5240, D_800E5214, D_800E51F8 or
+   D_800E51E4 from the window into 0x43C, copies the selection's name into the text at 0x3F4 (the
+   default label for selection 0, otherwise the resource name func_8028D380_de reads from
+   D_8011FE88 for the entry func_8042B1B8_de finds in the category's list func_8042B294_de), points the
+   label at 0x3EC to that text and calls func_80245B28_de. */
 
 
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80152789;
+extern char *D_800E1DA4[];
+#endif
+
+extern void func_8028D380_de(char *, s32, char *, s32);
+
+extern char *func_802A0494_de(char *);
+
+extern void func_802A025C_de(char *, char *);
 
 
-extern SlotRecAt7F D_80146398[];
-
-extern s8 D_80102B0D[];
-
-extern void func_8029973C_de(void);
-
-/* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E5430 points to to -1 and
-   calls func_8041A430_de on the object's first word with 2, returning zero. */
-
-
-
-
-/* When the fourth argument is one, calls func_8029973C_de, advances the word at 0x20 of the object D_800E5430 holds while func_80264614_de reports one for it and it is below func_80264690_de's limit, formats that word into the object's text at 0x14 through func_802A0C08_de with D_800E1B60, and plays sound 0xE81 through func_8025DF34_de; returns zero.
-   Adapted from func_80422340_de with the object chain changed to a guarded counter increment, text format and sound call. */
+/* Resets the selection screen: maps the menu mode at 0x434 to a category (0 to 2, 1 to 3, 2 to 1,
+   otherwise 0), builds the category list through func_8042B1B8_de, hides the forty controls of the
+   table D_800E4F64 (and each entry's optional second control), refreshes the list, hides five fixed
+   widgets and restores the selection, starting from the first entry when nothing was selected. */
 
 
 
 
 
-extern char D_800E1B60[];
 
-extern s32 func_80264614_de(s32);
-
-extern s32 func_80264690_de();
-
-extern void func_802A0C08_de(char *, char *, s32);
-
-extern void func_8025DF34_de(s32);
-
-/* Slider-down handler: when the fourth argument is one, calls func_8029973C_de, lowers the value at
-   offset 0x20 of the object D_800E5430 points to by one while it is at least 2, formats it into the
-   text at offset 0x14 with D_800E1B60 through func_802A0C08_de and plays sound 0xE81. Returns zero. */
+extern void func_8042E9A0_de(int, int);
 
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5434, an actor kind at D_800E5438 and a handler at D_800E543C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+extern void func_8042ACD8_de(void);
 
-typedef s32 (*Handler8042DFF0)(void *, s32, s32, s32, s32);
+static inline int map_category(int mode) {
+    int category;
 
-extern FieldRow D_800E5434[];
-
-extern FieldRow D_800E5438[];
-
-extern Handler8042DFF0 D_800E543C;
-
-s32 func_8042DAC8_de(void) {
-    extern void *D_800E5430;
-    func_802547E4_de(D_800E5430);
-    D_800E5430 = 0;
-    return 0;
-}
-
-s32 func_8042DAF8_de(void) {
-    extern struct State_func_8042DAF8_de *D_800E5430;
-    s32 result;
-
-    if (D_800E28E0 >= 2) {
-        func_802A2394_de();
-        return 0;
-    }
-    func_802A2360_de();
-    switch (result = func_8041A470_de(D_800E5430->menu)) {
-    case 3:
-        if (--D_800E5430->delay <= 0) {
-            D_800E5430->list->unk16--;
-            if (D_800E5430->list->unk16 + D_800E5430->list->unk1A < 0) {
-                D_800E5430->list->unk16 = D_800E5430->menu->list->unk1A;
-            }
-            D_800E5430->delay = result;
-        }
-        break;
-    case 4:
-        func_8029973C_de();
-        if (D_800E5430->target != -1) {
-            func_80298368_de(D_800E5430->target);
+    switch (mode) {
+        case 3:
+            category = 0;
+            break;
+        case 2:
+            category = 1;
+            break;
+        case 1:
+            category = 3;
+            break;
+        case 0:
+            category = 2;
+            break;
+        default:
             return 0;
+    }
+    return category;
+}
+
+void func_8042A7B4_de(s32 alpha) {
+    extern struct Resource_func_80419E54_de *func_8040EC30_de(void *, s32);
+    extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+    extern s32 D_800E5240[];
+    extern s32 D_800E5214[];
+    extern s32 D_800E51F8[];
+    extern s32 D_800E51E4[];
+    extern struct Icon D_800E4F64[];
+    extern struct func_80284AF4_G2 *D_800E4F60;
+    struct Resource_func_80419E54_de *item;
+    s32 *table;
+    s32 visible;
+    s32 category;
+    s32 count;
+    s32 list;
+    s32 found;
+    s32 i;
+    s32 j;
+
+    visible = alpha >= 12;
+    for (category = 0; category < 4; category++) {
+        switch (category) {
+        case 3:
+            table = D_800E51E4;
+            list = 3;
+            break;
+        case 2:
+            table = D_800E51F8;
+            list = 2;
+            break;
+        case 0:
+            table = D_800E5240;
+            list = 0;
+            break;
+        case 1:
+            table = D_800E5214;
+            list = 1;
+            break;
+        default:
+            return;
         }
-        func_802998A8_de();
-        break;
-    default:
-        return 0;
-    }
-    return 0;
-}
-
-int func_8042DC04_de(void) {
-    extern void func_8041A430_de(int, int);
-    extern Screen_func_8042DC04_de *D_800E5430;
-    int i;
-    SlotRecAt7F *slot;
-
-    func_8029973C_de();
-    D_800E5430->state = 7;
-    func_8041A430_de(D_800E5430->window, 2);
-    for (i = 0; i < D_800E5430->count; i++) {
-        slot = &D_80146398[i];
-        slot->active = 1;
-        slot->index = i;
-        if (D_80102B0D[i * 400] < 0) {
-            func_8022F204_de(i);
-        }
-    }
-    return 0;
-}
-
-s32 func_8042DCC4_de(void) {
-    extern void func_8041A430_de(void *, s32);
-    extern struct State_func_80421D94_de *D_800E5430;
-    struct State_func_80421D94_de *state;
-
-    func_8029973C_de();
-    state = D_800E5430;
-    state->value = -1;
-    func_8041A430_de(state->first, 2);
-    return 0;
-}
-
-s32 func_8042DD00_de(void *a0, void *a1, void *a2, s32 press) {
-    extern struct Object_func_8042DD00_de *D_800E5430;
-    struct Object_func_8042DD00_de *object;
-
-    if (press != 1) {
-        return 0;
-    }
-    func_8029973C_de();
-    if (func_80264614_de(D_800E5430->value) == press) {
-        object = D_800E5430;
-        if (object->value < func_80264690_de()) {
-            D_800E5430->value++;
-        }
-    }
-    func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->value);
-    func_8025DF34_de(0xE81);
-    return 0;
-}
-
-s32 func_8042DDA8_de(void *first, void *second, void *third, s32 fourth) {
-    extern struct Object_func_8042DD00_de *D_800E5430;
-    s32 value;
-
-    if (fourth != 1) {
-        return 0;
-    }
-    func_8029973C_de();
-    value = D_800E5430->value;
-    if (value >= 2) {
-        D_800E5430->value = value - 1;
-    }
-    func_802A0C08_de(D_800E5430->text, D_800E1B60, D_800E5430->value);
-    func_8025DF34_de(0xE81);
-    return 0;
-}
-
-s32 func_8042DE10_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    Handler8042DFF0 *entry;
-    s32 index;
-    s32 wildcard;
-    s32 actor_kind;
-    s32 table_kind;
-    ObjRecAtCV1 *actor;
-
-    if (D_800E543C != 0) {
-        wildcard = 0x7530;
-        entry = &D_800E543C;
-        index = 0;
         do {
-            if (D_800E5434[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5438[index].value;
-                if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+            count = func_8042B154_de(func_8042B294_de(list));
+            for (i = 0; i < count; i++) {
+                found = 0;
+                j = 0;
+            scan:
+                if (table[i] == D_800E4F64[j].key) {
+                    item = func_8040EC30_de(D_800E4F60->unk0, (u16)D_800E4F64[j].key);
+                    func_8040E8D8_de(item, visible);
+                    item->value = alpha;
+                    if (D_800E4F64[j].other != -1) {
+                        item = func_8040EC30_de(D_800E4F60->unk0, (u16)D_800E4F64[j].other);
+                        func_8040E8D8_de(item, visible);
+                        item->value = alpha;
+                    }
+                    found = 1;
+                }
+                j++;
+                if (j < 40 && found == 0) {
+                    goto scan;
                 }
             }
-            entry += 3;
-            index++;
-        } while (*entry != 0);
+        } while (0);
     }
-    return 0;
+}
+
+void func_8042A990_de(void) {
+    extern s32 func_8042B1B8_de(void *, s32);
+    extern void *func_8040EC30_de(void *, s32);
+    extern struct StateFlags D_800E5240[];
+    extern struct StateFlags D_800E5214[];
+    extern struct StateFlags D_800E51F8[];
+    extern struct StateFlags D_800E51E4[];
+    extern struct Screen_func_8042A990_de *D_800E4F60;
+    struct StateFlags *table;
+    char buffer[0x40];
+    switch (D_800E4F60->category) {
+    case 3:
+        table = D_800E51E4;
+        break;
+    case 2:
+        table = D_800E51F8;
+        break;
+    case 1:
+        table = D_800E5214;
+        break;
+    case 0:
+        table = D_800E5240;
+        break;
+    default:
+        return;
+    }
+    D_800E4F60->item = func_8040EC30_de(D_800E4F60->window, table[D_800E4F60->selection].flags);
+    if (D_800E4F60->selection == 0) {
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        func_802A025C_de(D_800E4F60->text, D_800D34D4_de[0]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        func_802A025C_de(D_800E4F60->text, D_800E1DA4[D_80152789]);
+#endif
+    } else {
+        func_8028D380_de(&D_8011FE88,
+                      func_8042B1B8_de(func_8042B294_de(D_800E4F60->category), D_800E4F60->selection),
+                      buffer, 0x3F);
+        func_802A025C_de(D_800E4F60->text, func_802A0494_de(buffer));
+    }
+    D_800E4F60->label->text = D_800E4F60->text;
+    func_80245B28_de();
+}
+
+void func_8042AAD0_de(void) {
+    extern int func_8042B1B8_de(int, int);
+    extern void *func_8040EC30_de(void *, int);
+    extern void func_8040E8D8_de(void *, int);
+    extern Control D_800E4F64[];
+    extern Menu_func_8042AAD0_de *D_800E4F60;
+    int category;
+    int list;
+    int i;
+
+    category = map_category(D_800E4F60->mode);
+    list = func_8042B1B8_de(category, D_800E4F60->selection);
+    for (i = 0; i < 40; i++) {
+        func_8040E8D8_de(func_8040EC30_de(D_800E4F60->screen, D_800E4F64[i].first), 0);
+        if (D_800E4F64[i].second != -1) {
+            func_8040E8D8_de(func_8040EC30_de(D_800E4F60->screen, (unsigned short)D_800E4F64[i].second), 0);
+        }
+    }
+    func_8042E9A0_de(category, list);
+    func_8042E988_de(0x15);
+    func_8040E8D8_de(D_800E4F60->widgetC, 0);
+    func_8040E8D8_de(D_800E4F60->widgetE, 0);
+    func_8040E8D8_de(D_800E4F60->widgetD, 0);
+    func_8040E8D8_de(D_800E4F60->widgetA, 0);
+    func_8040E8D8_de(D_800E4F60->widgetB, 0);
+    func_8042B350_de();
+    if (D_800E4F60->selection == 0) {
+        func_8042AFC0_de(category);
+        func_8042AFD0_de(0);
+        func_8042ACD8_de();
+    } else {
+        func_8042AFC0_de(-1);
+        func_8042AFD0_de(D_800E4F60->selection);
+    }
 }

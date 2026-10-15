@@ -24,7 +24,6 @@ struct Shared_DebugWidget {
     struct PlayerRankInner *inner;
 };
 
-#include "types.h"
 
 
 

@@ -1,120 +1,101 @@
-#include "span_1000/code_80246E34.h"
-#include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
+#include "span_1000/code_80246E34.h"
 #include "types.h"
-
-/* Refreshes the actor's animation from the lookup through func_8024AA18_de and func_8026DA4C_de and, when the lookup's third node carries flag 0x8000, spawns a 0x94 effect at the actor scaled by its size, then clears D_800D15E0. Adapted from func_8024C454_de with its body moved into a static inline helper, the func_8024B8EC_de update calls added before it, the D_800C8B38 scale constants and the trailing D_800D15E0 clear changed. */
-
-
-
-
-
-
+/* Fires the effect events of an object's animation that fall within a frame window: only for the object's
+ * own animation at 0x104 or an object flagged 0x4000000; each event whose frame lies in [from, to) is
+ * placed from its local point through the object's matrix when it names no bone, otherwise through its
+ * bone matrix (or at the object's position when it has none), and for models 0x44E, 0x451 and 0x453 an
+ * effect flagged 4 fires only if its bone's hit box shares the object's mask; each fired event spawns its
+ * effect through func_80265E10_de and is counted in D_800D06BC. */
 
 
 
 
 
-extern f32 D_800C8B38[];
 
-extern char D_8011D8D0;
 
-extern s32 D_800D297C;
 
-extern s32 D_800D15E0;
 
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 
-extern void func_8026DA4C_de();
 
-extern s32 func_8026E340_de(void);
+extern Entry802AB8DC D_800CC134[];
 
-extern s32 *func_8028FDB4_de(void *value, s32 index);
+extern EventRecAt14 *func_80262598_de(void *);
+extern s32 func_802625C4_de(void *);
+extern s32 *func_8024BFD4_de(char *, s8);
+extern struct Shape_typemap_13 *func_8028FDB4_de(s32, s32);
+extern void func_80253754_de(s32, s32 *);
+extern void func_80270910_de(f32 *, char *);
+extern void func_80272898_de(void *, Vec3 *, Vec3 *);
+extern void func_80265E10_de(char *, char *, u16, s32, Vec3, struct IntPair);
 
-extern EffectRecAt154 *func_802830B8_de(void *system);
+void func_802476C8_de(char *obj, void *anim, f32 from, f32 to) {
+    Vec3 pos;
+    Vec3 local;
+    f32 matrix[16];
+    EventRecAt14 *events;
+    s32 count;
+    s32 i;
+    s32 checkMask;
+    s32 fire;
+    s32 *resource;
+    struct Shape_typemap_13 *table;
 
-static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lookup) {
-    extern void func_802800C0_de(void *system, Actor_func_8024A1D0_de *source, Actor_func_8024A1D0_de *owner, s32 arg3, s32 arg4, s32 arg5, Vec3 position, Vector4f rotation, Vec3 position2, s32 arg15, s32 arg16, s32 arg17);
-    extern f32 func_8024D398_de(Actor_func_8024A1D0_de *actor);
-    extern f32 func_8024D284_de(Actor_func_8024A1D0_de *actor);
-    Vec3 position;
-    EffectRecAt154 *effect;
-    f32 scale;
-    s32 *node;
-
-    if (func_8026E340_de() != 0) {
-        node = func_8028FDB4_de(*lookup->value, 2);
-        if ((*node != 0) &&
-            (*func_8028FDB4_de(func_8028FDB4_de(node, 0), 0) & 0x8000)) {
-            position = actor->position0;
-            position.y += func_8024D284_de(actor) * D_800C8B38[1];
-            func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0x94,
-                          actor->position1, actor->rotation, position, 0, -1, 0);
-            effect = func_802830B8_de(&D_8011D8D0);
-            if (effect != 0) {
-                scale = D_800C3A50_de;
-                effect->field150 = func_8024D398_de(actor) * scale;
-                effect->field154 = func_8024D284_de(actor) * scale;
-            }
-        }
+    if (!(((struct ObjectLinks180 *) obj)->unk_100 & 0x4000000) && anim != obj + 0x104) {
+        return;
     }
-}
-
-extern void func_8026B6A0_de(void **value, s32 arg1, s32 arg2, s32 arg3, BlockRecAt0 *block, s32 arg5, s32 arg6);
-
-static inline void spawn(Actor_func_8024A3B0_de *actor) {
-    extern void func_802800C0_de(void *system, Actor_func_8024A3B0_de *source, Actor_func_8024A3B0_de *owner, s32 arg3, s32 arg4, s32 arg5, Vec3 position, Vector4f rotation, Vec3 position2, s32 arg15, s32 arg16, s32 arg17);
-    extern f32 func_8024D284_de(Actor_func_8024A3B0_de *actor);
-    Vec3 position;
-
-    position = actor->position0;
-    position.y += func_8024D284_de(actor) * *(&D_800C3A50_de + 1);
-    func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0x94,
-                  actor->position1, actor->rotation, position, 0, -1, 0);
-}
-
-void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *arg1, Lookup *lookup) {
-    s32 one;
-
-    if (lookup->unk4 != 0) {
-        func_8024AA18_de(actor, arg1, lookup);
+    switch (((struct ObjectLinks180 *) obj)->unk_E4) {
+    case 0x44E:
+    case 0x451:
+    case 0x453:
+        checkMask = 1;
+        break;
+    default:
+        checkMask = 0;
+        break;
     }
-    if (lookup->unk0 != 0) {
-        one = 1;
-        func_8026DA4C_de((s32)lookup->value, ((Actor_func_8024A3B0_de *)actor)->fieldB4, one,
-                      (char *)actor + ((((D_800D297C << one) + D_800D297C) << 3) + 0x140),
-                      0, ((Actor_func_8024A3B0_de *)actor)->field3);
-        func_8024A1C0_spawn(actor, lookup);
-    }
-    D_800D15E0 = 0;
-}
-
-void func_8024A3B0_de(Actor_func_8024A3B0_de *actor, s32 arg1, s32 arg2, Lookup *params) {
-    extern f32 func_8024D398_de(Actor_func_8024A3B0_de *actor);
-    extern f32 func_8024D284_de(Actor_func_8024A3B0_de *actor);
-    EffectRecAt154 *effect;
-    f32 scale;
-    s32 *node;
-
-    if (params->unk4 != 0) {
-        func_8024AA18_de(actor, arg2, params);
-    }
-    if (params->unk0 != 0) {
-        func_8026B6A0_de(params->value, arg1, actor->fieldB4, 1, &actor->blocks[D_800D297C], 0, actor->field3);
-        if (func_8026E340_de() != 0) {
-            node = func_8028FDB4_de(*params->value, 2);
-            if ((*node != 0) &&
-                (*func_8028FDB4_de(func_8028FDB4_de(node, 0), 0) & 0x8000)) {
-                spawn(actor);
-                effect = func_802830B8_de(&D_8011D8D0);
-                if (effect != 0) {
-                    scale = D_800C8B48;
-                    effect->field150 = func_8024D398_de(actor) * scale;
-                    effect->field154 = func_8024D284_de(actor) * scale;
+    table = 0;
+    events = func_80262598_de(anim);
+    count = func_802625C4_de(anim);
+    resource = 0;
+    for (i = 0; i < count; i++) {
+        if (from <= (f32)events[i].frame && (f32)events[i].frame < to) {
+            fire = 1;
+            if (events[i].bone == -1) {
+                local.x = events[i].local.x;
+                local.y = events[i].local.z;
+                local.z = events[i].local.y;
+                func_80272898_de(obj + 0x74, &local, &pos);
+            } else {
+                if (checkMask && (D_800CC134[events[i].effect].offset & 4)) {
+                    if (resource == 0) {
+                        resource = func_8024BFD4_de(obj, ((struct ObjectLinks180 *) obj)->unk_1);
+                        if (resource == 0) {
+                            goto masked;
+                        }
+                        table = func_8028FDB4_de(*resource, 5);
+                    }
+                    fire = ((struct Shape_typemap_3 *) (((char *) table) + ((events[i].bone * table->field_0) + 0x74)))->field_0 & ((struct ObjectLinks180 *) obj)->unk_17C;
+                }
+            masked:
+                if (fire == 0) {
+                    continue;
+                }
+                if (((struct ObjectLinks180 *) obj)->unk_B8 != 0) {
+                    func_80270910_de(matrix, ((struct ObjectLinks180 *) obj)->unk_B8 + (events[i].bone << 6));
+                    func_80272898_de(matrix, &events[i].local, &pos);
+                } else {
+                    pos = ((struct ObjectLinks180 *) obj)->unk_8;
                 }
             }
+            if (fire != 0) {
+                func_80265E10_de(obj, obj, events[i].effect, -1, pos, events[i].params);
+                D_800D06BC++;
+            }
         }
     }
-    D_800D15E0 = 0;
+    if (resource != 0) {
+        func_80253754_de(0, resource);
+    }
 }

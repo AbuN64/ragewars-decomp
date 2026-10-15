@@ -37,8 +37,6 @@ struct Shared_MenuContext {
     s32 messageCount;
 };
 
-#include "types.h"
-#include "common/types_8a8189af7b05.h"
 
 /* The copied prefix is exactly 0x50 bytes. */
 typedef struct SharedTrackObjectPrefix {

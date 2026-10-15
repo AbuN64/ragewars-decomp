@@ -1,0 +1,4 @@
+#include "sdk/libgultra.h"
+unsigned int D_auto_rodata_unresolved_800CD4C4[8] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+};

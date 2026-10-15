@@ -43,7 +43,7 @@ void func_802BB8B0_de(void)
 
         if (t->interval != 0) {
             t->value = t->interval;
-            func_802BBAAC_de(t);
+            __osInsertTimer(t);
         }
     }
 }
@@ -76,5 +76,5 @@ void func_802BBA4C_de(u64 interval) {
     D_8014FE30 = func_802BCF00_de();
     compare = D_8014FE30 + interval;
     func_802BD150_de(compare);
-    func_802BCF50_de(saved);
+    __osRestoreInt(saved);
 }

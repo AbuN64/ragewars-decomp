@@ -56,7 +56,6 @@
 #include "common/draft_fields_func_8028D964_de.h"
 #ifndef UNBAKE_SPAN_1000_CODE_80212C90_H
 #define UNBAKE_SPAN_1000_CODE_80212C90_H
-#include "types.h"
 #include "common/types_8a8189af7b05.h"
 extern float D_800C2100_de;
 

@@ -88,4 +88,6 @@ extern char D_800DCD80[];
 
 extern char D_800DCD84[];
 
+extern char D_800DCD94_de[];
+
 #endif

@@ -11,7 +11,7 @@ extern u8 D_80154110[];
 
 
 extern void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2);
-extern s32 func_802B9CB0_de(s32, s32);
+extern s32 __osSiRawStartDma(s32, s32);
 extern u32 func_802B8C88_de(void *arg0);
 extern u32 func_80446D80_de(s32 arg0, s32 arg1);
 
@@ -30,10 +30,10 @@ u32 func_802B8880_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     func_802B9C14_de();
     D_8014D4B0 = 3;
     func_802B8AA0_de(arg1, arg2 & 0xFFFF, arg3);
-    result = func_802B9CB0_de(1, D_80154110);
+    result = __osSiRawStartDma(1, D_80154110);
     func_802BB2A0_de(arg0, 0, 1);
     do {
-        result = func_802B9CB0_de(0, D_80154110);
+        result = __osSiRawStartDma(0, D_80154110);
         func_802BB2A0_de(arg0, 0, 1);
         source = D_80154110;
         if (arg1 != 0) {

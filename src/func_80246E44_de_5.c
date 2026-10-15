@@ -1,80 +1,111 @@
-#include "span_1000/code_80246E34.h"
-#include "span_C76B0/data.h"
-#include "types.h"
 #include "common/unused.h"
+#include "common/types_06e4f7ef1f9e.h"
+#include "common/types_8a8189af7b05.h"
+#include "span_1000/code_80246E34.h"
+#include "types.h"
+/* Returns an actor's aim with auto-aim applied: with no assist cone the actor's aiming orientation from
+ * func_8024796C_de is returned unchanged; otherwise, of the live entities other than the actor (not flagged 1,
+ * with a body at 0x174), the one whose aim point (half its height above its top) lies most nearly along the
+ * aim direction from the given point, within the cone (in degrees, halved), pulls the aim toward it by an
+ * angle that fades with the fourth root of how far off-axis it is. The applied correction is also written
+ * to the optional assist quaternion (identity when nothing is in range). */
 
 
-extern char D_0024D108;
-extern char D_800C3A64_de;
 
 
-extern char D_8011D8D0;
 
-extern void func_8024AA18_de(char *obj, s32 unused, char *info);
-extern s32 func_80251F6C_de(s32, s32, void *, s32, s32, void *, void *, void *, s32);
-extern void func_8027892C_de(void *object, void *colors);
-extern void func_8026DA4C_de(void **value, s32 arg1, s32 arg2, s32 arg3, void *arg4, s32 arg5);
-extern void func_80253754_de(s32, s32);
-extern s32 func_8026E340_de(void);
-extern s32 *func_8028FDB4_de(void *value, s32 index);
-extern void func_802800C0_de(void *system, LevelActor *source, LevelActor *owner,
-                          s32 arg3, s32 arg4, s32 arg5, Vec3 position,
-                          Vector4f rotation, Vec3 position2, s32 arg15,
-                          s32 arg16, s32 arg17);
-extern EffectRecAt154 *func_802830B8_de(void *system);
+extern char *D_8011CA18[];
 
-static inline void spawn(LevelActor *actor) {
-    Vec3 position;
+extern f32 D_80115DEC;
+extern Vector4f func_8024796C_de(char *);
+extern void func_80274244_de(Vector4f *, f32 *);
+extern void func_80272898_de(f32 *, Vec3 *, Vec3 *);
+extern f32 func_8024D284_de(char *);
+extern void func_80271F68_de(Vec3 *, Vec3 *, Vec3 *);
+extern void func_8027207C_de(Vec3 *);
+extern void func_80272018_de(Vec3 *, Vec3 *, Vec3 *);
 
-    position = actor->position0;
-    position.y += func_8024D284_de(actor) * D_800C3A74_de;
-    func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0x94,
-                  actor->position1, actor->rotation, position, 0, -1, 0);
-}
+extern f32 func_802B72B0_de(f32);
 
-void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
-    EffectRecAt154 *effect;
-    f32 scale;
-    s32 *node;
-    s32 resource;
-    s32 *header;
-    char *data;
 
-    actor->mask = 1 << actor->team;
-    if (params->unk4 != 0) {
-        func_8024AA18_de(actor, arg1, params);
+extern void func_80274098_de(Vector4f *, Vector4f *, Vector4f *);
+
+
+
+
+Vector4f func_80247BB4_de(char *actor, Vec3 point, Vector4f *assist, f32 cone) {
+    Vec3 dir;
+    Vec3 local;
+    Vec3 aim;
+    Vec3 axis;
+    Vec3 best;
+    Vec3 center;
+    Vector4f base;
+    Vector4f turn;
+    Vector4f result;
+    f32 matrix[16];
+    char *entity;
+    char *target;
+    s32 count;
+    s32 i;
+    f32 bestDot;
+    f32 dot;
+    f32 angle;
+
+    local.x = 0.0f;
+    local.y = 0.0f;
+    local.z = 1.0f;
+    base = func_8024796C_de(actor);
+    if (cone == 0.0f) {
+        if (assist != 0) {
+            assist->x = assist->y = assist->z = 0.0f;
+            assist->w = 1.0f;
+        }
+        return base;
     }
-    if (params->unk0 == 0) {
-        return;
-    }
-    resource = func_80251F6C_de(0, actor->flags2E4 | D_800CD3F0, params->value, 0, 0,
-                             actor, &D_0024D108, &D_800C3A64_de, 1);
-    if (resource == 0) {
-        return;
-    }
-    func_80253BBC_de(0, resource);
-    header = *(s32 **)resource;
-    if (header[0] == 1) {
-        char *object = (char *)header + header[1];
-
-        func_8027892C_de(object, (char *)header + header[2]);
-        data = object;
-    } else {
-        data = (char *)(header + 2);
-    }
-    func_8026DA4C_de(params->value, actor->fieldB4, 1, 0, data, actor->field3);
-    if (func_8026E340_de() != 0) {
-        node = func_8028FDB4_de(*params->value, 2);
-        if ((*node != 0) &&
-            (*func_8028FDB4_de(func_8028FDB4_de(node, 0), 0) & 0x8000)) {
-            spawn(actor);
-            effect = func_802830B8_de(&D_8011D8D0);
-            if (effect != 0) {
-                scale = D_800C3A78_de;
-                effect->field150 = func_8024D398_de(actor) * scale;
-                effect->field154 = func_8024D284_de(actor) * scale;
-            }
+    func_80274244_de(&base, matrix);
+    func_80272898_de(matrix, &local, &aim);
+    i = 0;
+    target = 0;
+    bestDot = func_802B6560_de(cone * 0.008726647f);
+    count = D_8011CC18;
+    for (; i < count; i++) {
+        entity = D_8011CA18[i];
+        if (entity == actor || (((LevelActor *)(entity))->flags & 1) || ((LevelActor *)(entity))->active == 0) {
+            continue;
+        }
+        center = ((LevelActor *)(entity))->position0;
+        center.y += ((LevelActor *)(entity))->eyeHeight;
+        center.y += func_8024D284_de(entity) * 0.5f;
+        func_80271F68_de(&dir, &center, &point);
+        func_8027207C_de(&dir);
+        dot = aim.x * dir.x + aim.y * dir.y + aim.z * dir.z;
+        if (bestDot < dot) {
+            bestDot = dot;
+            best = dir;
+            target = entity;
         }
     }
-    func_80253754_de(0, resource);
+    if (target != 0) {
+        func_80272018_de(&axis, &aim, &best);
+        func_8027207C_de(&axis);
+        angle = func_802745D0_de(bestDot);
+        angle *= func_802B72B0_de(func_802B72B0_de(1.0f - angle / (cone * 0.008726647f)));
+        angle *= 0.5f;
+        D_80115DEC = func_802B7130_de(angle);
+        turn.x = axis.x * D_80115DEC;
+        turn.y = axis.y * D_80115DEC;
+        turn.z = axis.z * D_80115DEC;
+        turn.w = func_802B6560_de(angle);
+        func_80274098_de(&result, &base, &turn);
+        if (assist != 0) {
+            *assist = turn;
+        }
+        return result;
+    }
+    if (assist != 0) {
+        assist->x = assist->y = assist->z = 0.0f;
+        assist->w = 1.0f;
+    }
+    return base;
 }

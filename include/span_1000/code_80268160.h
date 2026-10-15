@@ -7,7 +7,6 @@ struct SceneEffectPool;
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_802624A0.h"
-#include "types.h"
 struct Actor_func_80290238_de;
 struct RangeNode;
 typedef struct RangeNode RangeNode;

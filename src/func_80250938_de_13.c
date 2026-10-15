@@ -9,7 +9,7 @@ extern OSMesgQueue D_80101140;
 
 extern u32 func_802BCF30_de(void);
 
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 extern void func_80254990_de(void *, void *);
 
@@ -33,21 +33,21 @@ void func_802547E4_de(void *arg0) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
     func_80254990_de(0, temp_s0);
     temp_v0 = func_802BCF30_de();
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 struct Shape_typemap_165 *func_802548B8_de(s32 arg0_unused, s32 arg1, u32 arg2) {

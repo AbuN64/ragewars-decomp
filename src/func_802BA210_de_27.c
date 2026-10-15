@@ -11,7 +11,7 @@
 
 extern __OSViContext_func_802BA6B0_de *D_800D4414;
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 void func_802BA6B0_de(OSViMode *modep) {
     register u32 saveMask = func_802BCF30_de();
@@ -19,5 +19,5 @@ void func_802BA6B0_de(OSViMode *modep) {
     D_800D4414->modep = modep;
     D_800D4414->state = 1;
     D_800D4414->control = D_800D4414->modep->comRegs.w0;
-    func_802BCF50_de(saveMask);
+    __osRestoreInt(saveMask);
 }

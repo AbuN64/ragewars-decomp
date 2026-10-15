@@ -14,7 +14,6 @@ typedef struct Shared_MenuInput {
     s32 buttons;
 } Shared_MenuInput;
 
-#include "types.h"
 typedef struct Shared_GameSlot Shared_GameSlot;
 struct Shared_GameSlot {
     u8 enabled;
@@ -53,7 +52,6 @@ struct Shared_Game {
 
 #include "common/unused.h"
 
-#include "types.h"
 
 extern Shared_Game D_801462C8;
 extern s32 D_801462CC;

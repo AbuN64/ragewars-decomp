@@ -15,9 +15,9 @@ typedef struct OSTimer_s {
 
 extern OSTimer *D_800D5280;
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern void __osRestoreInt(u32 mask);
 
-u64 func_802BBAAC_de(OSTimer *t)
+u64 __osInsertTimer(OSTimer *t)
 {
     OSTimer *timep;
     u64 tim;
@@ -39,6 +39,6 @@ u64 func_802BBAAC_de(OSTimer *t)
     t->prev = timep->prev;
     timep->prev->next = t;
     timep->prev = t;
-    func_802BCF50_de(savedMask);
+    __osRestoreInt(savedMask);
     return tim;
 }

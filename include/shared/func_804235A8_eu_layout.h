@@ -5,8 +5,6 @@
 
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
-#include "types.h"
-#include "common/types_1dc8418c21db.h"
 typedef struct Shared_OptionsScreen Shared_OptionsScreen;
 struct Shared_OptionsScreen {
     u32 unknown00[7];
@@ -63,7 +61,6 @@ struct Shared_MenuData {
     };
 };
 
-#include "types.h"
 #include "common/types_8a8189af7b05.h"
 typedef void (*Shared_ContextCallback)(void *);
 typedef void (*Shared_MenuVoidCallback)(void);

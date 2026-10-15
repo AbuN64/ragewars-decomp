@@ -8,7 +8,7 @@
 
 extern OSThread_s *D_800D5270;
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BC36C_de(void *);
 extern void *func_802BC558_de(void *);
 extern void func_802BB750_de(void *);
@@ -19,7 +19,7 @@ s32 func_802BB2A0_de(OSMesgQueue *queue, void **message, s32 block)
 
     while (queue->validCount == 0) {
         if (!block) {
-            func_802BCF50_de(mask);
+            __osRestoreInt(mask);
             return -1;
         }
         D_800D5270->state = 8;
@@ -34,7 +34,7 @@ s32 func_802BB2A0_de(OSMesgQueue *queue, void **message, s32 block)
     if (*queue->fullqueue != 0) {
         func_802BB750_de(func_802BC558_de(&queue->fullqueue));
     }
-    func_802BCF50_de(mask);
+    __osRestoreInt(mask);
     return 0;
 }
 

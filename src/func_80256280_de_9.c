@@ -8,5 +8,5 @@
 
 void func_802567A4_de(void *arg0) {
     (((struct MenuRules *) ((s8 *) arg0))->locked) = 0;
-    func_802BAC60_de(arg0, arg0 + 0x18, 1);
+    osCreateMesgQueue(arg0, arg0 + 0x18, 1);
 }

@@ -92,7 +92,6 @@ struct AudioLowPassFilter {
 struct AudioLowPassFilter;
 typedef struct AudioLowPassFilter AudioLowPassFilter;
 
-extern void func_802B468C_de(AudioLowPassFilter *lp);
 
 struct func_802B95DC_S1;
 typedef struct func_802B95DC_S1 func_802B95DC_S1;

@@ -4,7 +4,6 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 
 extern float D_800C1C88_de;
 

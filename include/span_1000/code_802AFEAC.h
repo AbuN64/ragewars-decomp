@@ -4,7 +4,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "shared/audio_initialize.h"
-#include "types.h"
 struct func_802B510C_S2;
 struct func_802B510C_S2 {
     char pad0[0x8];

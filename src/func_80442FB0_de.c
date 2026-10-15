@@ -1,6 +1,5 @@
 #include "shared/particle_lighting.h"
 #include "span_16E000/code_80442BC8.h"
-#include "span_16E000/code_80442BC8.h"
 #include "common/unused.h"
 #include "types.h"
 

@@ -1,110 +1,25 @@
-#include "types.h"
 #include "gfx.h"
+#include "n64sdk.h"
 #include "gbi.h"
-#include "span_1000/code_802A8A94.h"
-#include "common/types_1dc8418c21db.h"
-#include "shared/world.h"
-#include "shared/func_802453D4_de_closed.h"
-#include "span_16E000/code_8043F69C.h"
-#include "resident_event_handler.h"
+#include "types.h"
 #include "span_1000/code_80291054.h"
-
-extern Node80253610 *func_8028BEAC_de(Shared_World *, s32, s32, s32);
-extern void func_802AA1AC_de(Node80253610 *, s32, s16, s16, f32, f32, s32);
-extern void func_80253754_de(void *, Node80253610 *);
-
-/* The advance and kerning scale follow the currently selected font. */
-static inline f32 fontGlyphWidth(void)
-{
-    f32 result;
-    switch (D_80147150) {
-    case 0: result = 24.0f; break;
-    case 1: result = 12.0f; break;
-    case 3: result = 6.0f; break;
-    case 4: case 5: result = 16.0f; break;
-    case 2: case 6: result = 8.0f; break;
-    default: result = 1.0f; break;
-    }
-    return result;
-}
-
-void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow, s32 alpha, s32 language)
-{
-    FontStyle *style = &D_801376F8;
-    Node80253610 *font;
-    s32 special = 0;
-    s32 resource;
-    u8 ch, next, glyph;
-    f32 advance, sx, sy, a, b;
-
+static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a) {
     gDPPipeSync(D_80110634++);
-    if (shadow) {
-        gDPSetEnvColor(D_80110634++, 0, 0, 0, alpha);
-        gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, 255);
-        x += style->shadowX * (D_800E28D0 / 284);
-        y += style->shadowY * (D_800E28D4 / 222);
-    } else {
-        gDPSetEnvColor(D_80110634++, style->envR, style->envG, style->envB, alpha);
-        gDPSetPrimColor(D_80110634++, 0, 0, style->primR, style->primG, style->primB, 255);
-    }
-    switch (language) {
-    default: case 0: resource = 2; break;
-    case 1: resource = 1; special = 1; break;
-    case 2: case 3: resource = 6; break;
-    case 4: case 5: resource = 5; break;
-    case 6: resource = 7; break;
-    }
-    font = func_8028BEAC_de(&D_8011FE88, resource, 0x10, 1);
-    if (font) {
-        while (text && (ch = *text) && ch != 10) {
-            next = text[1];
-            switch (language) {
-            default: case 0:
-                glyph = D_801378C0[ch];
-                a = fontGlyphWidth();
-                b = fontGlyphWidth();
-                advance = func_8044222C_de(ch, next, a, b);
-                break;
-            case 1:
-                glyph = D_801377C0[ch];
-                advance = fontGlyphWidth();
-                break;
-            case 2:
-                glyph = D_801377C0[ch];
-                advance = fontGlyphWidth();
-                break;
-            case 3:
-                glyph = D_801377C0[ch];
-                advance = fontGlyphWidth();
-                break;
-            case 4:
-                glyph = ch;
-                if (ch == 255) glyph = 255;
-                advance = fontGlyphWidth();
-                break;
-            case 5:
-                glyph = ch;
-                if (ch == 255) glyph = 255;
-                advance = fontGlyphWidth();
-                break;
-            case 6:
-                glyph = ch;
-                if (ch == 255) glyph = 255;
-                advance = fontGlyphWidth();
-                break;
-            }
-            sx = width;
-            sy = height;
-            if (special && (glyph == 0x25 || glyph == 0x2B || glyph == 0x3D)) {
-                sx = D_800E28D0 * (1.0f / 284.0f);
-                sy = D_800E28D4 * (1.0f / 222.0f);
-            }
-            if (glyph != 255) {
-                func_802AA1AC_de(font, glyph, (s16)x, (s16)y, sx, sy, 1);
-            }
-            x += advance * sx;
-            text++;
-        }
-        func_80253754_de(0, font);
-    }
+    gDPSetPrimColor(D_80110634++,255,255,r,g,b,a);
+    gDPFillRectangle(D_80110634++, x0>0?x0:0,y0>0?y0:0,x1>0?x1:0,y1>0?y1:0);
+}
+void func_802A7DE4_de(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,s32 green,s32 blue,s32 alpha) {
+    u8 r=red,g=green,b=blue,a=alpha;
+    s32 lightR,lightG,lightB,darkR,darkG,darkB;
+    lightR=invert ? r>>1 : r<<1;
+    lightG=invert ? g>>1 : g<<1;
+    lightB=invert ? b>>1 : b<<1;
+    darkR=invert ? r<<1 : r>>1;
+    darkG=invert ? g<<1 : g>>1;
+    darkB=invert ? b<<1 : b>>1;
+    rectangle(x0,y0,x1,y1,r,g,b,a);
+    rectangle(x0,y0,x1,y0+border,lightR,lightG,lightB,a);
+    rectangle(x1-border,y0,x1,y1,lightR,lightG,lightB,a);
+    rectangle(x0,y1-border,x1,y1,darkR,darkG,darkB,a);
+    rectangle(x0,y0,x0+border,y1,darkR,darkG,darkB,a);
 }

@@ -3,7 +3,7 @@
 #include "types.h"
 
 
-extern void *func_802B3BF8_de(void);
+extern void *__allocParam(void);
 extern s32 func_802B3CD0_de(void *arg0, s32 arg3);
 
 
@@ -23,7 +23,7 @@ void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3) {
     SharedRecV10 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B3480_de_v0 = func_802B3BF8_de();
+        Shared_func_802B3480_de_v0 = __allocParam();
         if (Shared_func_802B3480_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_8 = 0xB;

@@ -1,84 +1,163 @@
-#include "gfx.h"
-#include "common/types_8fd754e1e915.h"
-#include "span_1000/code_80233920.h"
-#include "span_1000/code_8028FC98.h"
-#include "n64sdk.h"
-#include "gbi.h"
 #include "types.h"
-#include "shared/gameplay_camera.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "span_1000/code_8023330C.h"
+#include "span_1000/code_80233920.h"
+#include "resident_event_handler.h"
+#include "shared/func_804235A8_eu_closed.h"
+#include "span_1000/code_802022E0.h"
+#include "span_C76B0/data.h"
+extern s32 D_80141008;
+extern void func_80274098_de(void*,void*,void*);
+extern void func_80272C60_de(void *, f32, f32, f32);
+extern u32 func_802337D0_de(StateRecAt10*);
+extern void func_8026F620_de(f32*,f32*,f32*);
+/* The camera position is passed as a three-word Vec3 value. */
 
-/* Draws one view of the game world: after the per-frame setup (func_802909F0_de) it runs the world, player,
- * effect, particle, object and translucent passes for the view in order, skipping the player and effect
- * passes in the alternate HUD mode (func_80245798_de) and running the extra passes only when func_802934F8_de
- * allows; when debug flag 0x200 is set it then clears the view's rectangle at 0x29C..0x2A8 to the far
- * depth with a fill-rectangle command. */
+/* Actor transform and camera-effect subobjects. */
+typedef struct TransformActor {
+    char pad0[0x28];
+    f32 yaw,pitch,extraYaw,roll;
+    TransformVector position;
+    f32 height;
+    Rotation base;
+    char pad58[0x7C-0x58];
+    s32 enabled;
+    char pad80[0xA0-0x80];
+    Effect33920 effect;
+    char padF4[0x134-0xF4];
+    Vec3 cached;
+    Rotation rotation,combined;
+    f32 matrix[16];
+} TransformActor;
+typedef struct TransformWorld {
+    s32 identifier;
+    char pad4[0x11AC-4];
+    Effect33920 *effects;
+} TransformWorld;
 
+void func_802349C0_de(void *arg0) {
+    TransformActor *actor=arg0;
+    Rotation q18,q28,q38,q48,q58;
+    f32 m68[16],mA8[16],mE8[16],m128[16],m168[16],m1A8[16];
+    Vec3 sp1E8,result,transformed;
+    f32 zero,cosineInput;
+    Effect33920 *var_s0;
+    f32 *temp_s3;
+    f32 *var_s1;
+    f32 temp_fs0;
+    f32 temp_fs0_2;
+    f32 temp_fs0_3;
+    f32 temp_fs0f;
+    f32 temp_fv0;
+    f32 temp_fv0_2;
+    f32 temp_fv0_3;
+    f32 temp_fv0_4;
+    f32 temp_fv0_5;
+    f32 temp_fv0_6;
+    f32 var_fs1;
+    f32 var_fs1f;
+    void *temp_s0;
 
-extern Gfx *D_80110634;
-extern char D_80145040;
-extern char D_801379C0;
-extern s32 D_801462C8;
-
-extern void func_80289084_de(char *, char *);
-extern s32 func_80245798_de(void);
-extern void func_80228798_de(void *, char *);
-extern s32 func_802934F8_de(void);
-extern void func_8022A2A0_de(void *, char *);
-extern void func_8028B028_de(char *, char *);
-extern void func_802A5180_de(void *, char *);
-extern void func_802905F4_de(char *, char *);
-extern void func_80286454_de(char *, char *);
-extern void func_80228958_de(void *, char *);
-extern void func_8023B3F8_de(char *, char *);
-extern void func_8028B160_de(char *, char *);
-extern void func_802A478C_de(void *, char *);
-extern void func_80238D30_de(char *);
-extern void func_8022A328_de(void *, char *);
-extern void func_8026925C_de(s32);
-
-
-
-
-
-
-
-void func_802362E8_de(char *view, char *world) {
-    f32 right;
-
-    func_802909F0_de();
-    func_80289084_de(world, view);
-    if (func_80245798_de() == 0) {
-        func_80228798_de(&D_80145040, view);
-    }
-    if (func_802934F8_de() != 0) {
-        func_8022A2A0_de(&D_80145040, view);
-    }
-    func_8028B028_de(world, view);
-    func_802A5180_de(&D_801379C0, view);
-    if (func_80245798_de() == 0) {
-        func_802905F4_de(world + 0x11778, view);
-    }
-    func_80286454_de(world, view);
-    func_80228958_de(&D_80145040, view);
-    func_8023B3F8_de(view + 0x570, view);
-    func_8028B160_de(world, view);
-    func_802A478C_de(&D_801379C0, view);
-    func_80238D30_de(view);
-    if (func_80245798_de() == 0 && func_802934F8_de() != 0) {
-        func_8022A328_de(&D_80145040, view);
-    }
-    if (D_801462C8 & 0x200) {
-        gDPPipeSync(D_80110634++);
-        gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-        gDPSetBlendColor(D_80110634++, 255, 255, 255, 255);
-        gDPSetPrimDepth(D_80110634++, 65535, 65535);
-        gDPSetDepthSource(D_80110634++, G_ZS_PRIM);
-        func_8026925C_de(0x16);
-        {
-            Gfx *_g;
-
-            right = ((GameplayCamera *)(view))->unk2A4 + ((GameplayCamera *)(view))->unk29C;
-            gDPFillRectangle((Gfx *)(D_80110634++), ((GameplayCamera *)(view))->unk2A4, ((GameplayCamera *)(view))->unk2A8, right, ((GameplayCamera *)(view))->unk2A8 + ((GameplayCamera *)(view))->unk2A0);
+    if (actor->enabled != 0) {
+        var_fs1 = actor->pitch;
+        var_fs1f = actor->roll;
+        if (func_80245798_de() == 0) {
+            func_80239EA4_de(arg0, &sp1E8);
+            var_fs1f += sp1E8.z;
+            temp_fs0f = D_800C31F8_de;
+            temp_fs0 = var_fs1f * temp_fs0f;
+            var_fs1 += sp1E8.x;
+            temp_fv0 = func_802B7130_de(temp_fs0);
+            temp_fs0_2 = var_fs1 * temp_fs0f;
+            D_80115DEC = temp_fv0;
+            q38.word[0] = 0;
+            q38.word[1] = 0;
+            q38.f[2] = temp_fv0;
+            q38.f[3] = func_802B6560_de(temp_fs0);
+            temp_fv0_2 = func_802B7130_de(temp_fs0_2);
+            D_80115DEC = temp_fv0_2;
+            q18.f[0] = temp_fv0_2;
+            q18.word[1] = 0;
+            q18.word[2] = 0;
+            q18.f[3] = func_802B6560_de(temp_fs0_2);
+            temp_s0 = actor->combined.f;
+            temp_fv0_3 = func_802B7130_de((actor->yaw + actor->extraYaw) * temp_fs0f);
+            q28.word[0] = 0;
+            q28.f[1] = temp_fv0_3;
+            q28.word[2] = 0;
+            cosineInput = ((actor->yaw + actor->extraYaw) * temp_fs0f);
+            D_80115DEC = temp_fv0_3;
+            temp_s3 = actor->base.f;
+            q28.f[3] = func_802B6560_de(cosineInput);
+            func_80274098_de(q48.f, q18.f, q28.f);
+            func_80274098_de(temp_s0, q48.f, temp_s3);
+            func_80274098_de(actor->rotation.f, q38.f, temp_s0);
+            func_80274098_de(q58.f, q38.f, q48.f);
+            func_80274244_de(q58.f, m68);
+            zero=0.0f;
+            func_80272C60_de(mA8, zero, actor->height, zero);
+            func_80274244_de(temp_s3, mE8);
+            result.x = zero;
+            result.y = zero;
+            result.z = zero;
+            func_80233930_de(&actor->effect, actor->effect.origin, &result);
+            func_802337D0_de(&actor->effect.x);
+            func_802337D0_de(&actor->effect.y);
+            func_802337D0_de(&actor->effect.z);
+            if (arg0 != &D_80141008) {
+                var_s0 = ((TransformWorld*)(void*)&D_80141008)->effects;
+                if (var_s0 != 0) {
+                    do {
+                        func_80233930_de(var_s0, actor->position.value, &result);
+                        var_s0 = var_s0->next;
+                    } while (var_s0 != 0);
+                }
+            }
+            func_8026F620_de(m168, m68, mE8);
+            func_80272898_de(m168, &result, &transformed);
+            func_8026F620_de(m168, m68, mA8);
+            var_s1 = m1A8;
+            func_8026F620_de(var_s1, m168, mE8);
+            func_80272C60_de(m128,
+                actor->position.value.x + transformed.x,
+                actor->position.value.y + sp1E8.y + transformed.y,
+                actor->position.value.z + transformed.z);
+            func_8026F620_de(actor->matrix, var_s1, m128);
+        } else {
+            cosineInput = actor->roll;
+            temp_fs0_3 = D_800C31FC_de;
+            temp_fv0_4 = func_802B7130_de(cosineInput * temp_fs0_3);
+            q38.word[0] = 0;
+            q38.word[1] = 0;
+            q38.f[2] = temp_fv0_4;
+            cosineInput = (actor->roll * temp_fs0_3);
+            D_80115DEC = temp_fv0_4;
+            q38.f[3] = func_802B6560_de(cosineInput);
+            temp_fv0_5 = func_802B7130_de(actor->pitch * temp_fs0_3);
+            q18.f[0] = temp_fv0_5;
+            q18.word[1] = 0;
+            q18.word[2] = 0;
+            cosineInput = (actor->pitch * temp_fs0_3);
+            D_80115DEC = temp_fv0_5;
+            q18.f[3] = func_802B6560_de(cosineInput);
+            temp_fv0_6 = func_802B7130_de((actor->yaw + actor->extraYaw) * temp_fs0_3);
+            q28.word[0] = 0;
+            q28.f[1] = temp_fv0_6;
+            q28.word[2] = 0;
+            cosineInput = ((actor->yaw + actor->extraYaw) * temp_fs0_3);
+            D_80115DEC = temp_fv0_6;
+            q28.f[3] = func_802B6560_de(cosineInput);
+            func_80274098_de(q48.f, q18.f, q28.f);
+            actor->combined=q48;
+            func_80274098_de(actor->rotation.f, q38.f, actor->combined.f);
+            func_80274244_de(q48.f, m68);
+            func_80272C60_de(m128,actor->position.value.x,actor->position.value.y,actor->position.value.z);
+            func_8026F620_de(actor->matrix, m68, m128);
         }
+
+        actor->cached.x = var_fs1;
+        actor->cached.z = var_fs1f;
+        actor->cached.y = (f32) actor->yaw;
     }
 }

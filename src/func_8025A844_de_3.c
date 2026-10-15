@@ -19,7 +19,7 @@
 extern s32 func_802395A4_de(void *, Triple *);
 extern void func_802B2F00_de(char *, s32);
 extern s32 func_802B2620_de(char *);
-extern void func_802B2F60_de(char *);
+extern void alSndpStop(char *);
 extern void func_802B2D80_de(char *);
 extern void func_802B25D0_de(char *, s32);
 extern void func_8025A3CC_de(View_func_8025AE1C_de *);
@@ -57,7 +57,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
                 channel = ((Owner_func_8025A844_de *)context)->sound;
                 func_802B2F00_de(channel, context->slots.ids[view->slot]);
                 if (func_802B2620_de(channel) != 0) {
-                    func_802B2F60_de(channel);
+                    alSndpStop(channel);
                 }
                 view->handle = -1;
             }

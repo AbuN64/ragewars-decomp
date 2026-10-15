@@ -134,7 +134,7 @@ struct OSViMode_func_802BA910_de {
 struct ObjectState28;
 typedef struct ObjectState28 ObjectState28;
 
-extern void func_802BA870_de(f32 arg0);
+extern void osViSetYScale(f32 arg0);
 
 struct OSViMode_func_802BA910_de;
 typedef struct OSViMode_func_802BA910_de OSViMode_func_802BA910_de;

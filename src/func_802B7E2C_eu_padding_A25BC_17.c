@@ -6,7 +6,7 @@
 extern u32 func_802BBBC0_de(void *arg0);
 
 s32 func_802B7B90_de(void *bufPtr, u64 size) {
-    if (func_802B7C30_de()) {
+    if (__osDpDeviceBusy()) {
         return -1;
     }
     IO_WRITE_WORD(RDP_DMA_STATUS_REG, 1);

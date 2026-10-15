@@ -7,7 +7,7 @@
 
 extern void func_802B2450_de(Node_func_802AFD6C_de *arg0);
 
-extern void func_802AFD6C_de(void *arg0, Node_func_802AFD6C_de *arg1);
+extern void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1);
 
 extern s32 func_802AE9B0_de(s32 arg0, s32 *arg1);
 
@@ -57,7 +57,7 @@ void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1) {
         while (node != 0) {
             next = node->prev;
             node->value = (node->value / scale) * ((ObjectState4C *)(arg0))->unk_24;
-            func_802AFD6C_de(&((ObjectState4C *)(arg0))->unk_48, node);
+            __CSPRepostEvent(&((ObjectState4C *)(arg0))->unk_48, node);
             node = next;
         }
     }
@@ -78,7 +78,7 @@ void func_802AFD00_de(void *arg0) {
     }
 }
 
-void func_802AFD6C_de(void *arg0, Node_func_802AFD6C_de *arg1) {
+void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1) {
     extern void func_802B2480_de(void *, void * *);
     ObjRecAt8V3 *object = arg0;
     s32 saved;

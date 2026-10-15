@@ -9,7 +9,7 @@ extern void func_802B2450_de(void *arg0);
 extern void func_802B2480_de(void *arg0, void *arg1);
 
 
-void func_802B3C7C_de(void *arg0) {
+void _collectPVoices(void *arg0) {
     void *node;
 
     node = ((ALSynth4C *)arg0)->pLameList.next;

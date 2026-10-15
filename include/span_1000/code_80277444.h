@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "resident_event_handler.h"
-#include "types.h"
 extern void func_80279158_de(void *arg0);
 
 struct ObjectLinks150C;

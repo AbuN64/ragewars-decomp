@@ -1,60 +1,33 @@
-#include "span_16E000/code_804264F0.h"
+#include "span_16E000/code_80423280.h"
 #include "types.h"
-/* Loads the stage list of the results screen D_800E4690: clears its two 36-bit sets at 0xA74 and
-   0xA79, copies into the first the 36 cleared-stage bits that the player record D_80102B00[index at
-   0xA5C] keeps for the current mode D_801462D5 (at 0x7E, 0x83, 0x88 or 0x8D for modes 1 to 4), and
-   refreshes the list through func_804274B0_de. */
+#include "common/unused.h"
 
 
 
+extern s8 D_80102B0D[][400];
+extern RecRecAt4 D_80146398[];
 
-
-extern struct Screen_func_80427008_de *D_800E4690;
-extern struct RecordRecAt8D D_80102B00[];
-
-
-extern void func_80265688_de(u8 *, s32, s32);
-extern s32 func_80265650_de(u8 *, s32);
-
-
-void func_80427008_de(void) {
+/* Adds the current record's deltas to both running totals of each player still in play, capping each at 99999. */
+void func_80424B90_de(void) {
     s32 i;
+    s32 v;
+    RecRecAt4 *rec;
 
-    i = 0;
-    do {
-        func_80265688_de(D_800E4690->shown, i, 0);
-        func_80265688_de(D_800E4690->marked, i, 0);
-        i++;
-    } while (i < 36);
-    switch (D_801462D5) {
-    case 1:
-        i = 0;
-        do {
-            func_80265688_de(D_800E4690->shown, i, func_80265650_de(D_80102B00[D_800E4690->record].single, i));
-            i++;
-        } while (i < 36);
-        break;
-    case 2:
-        i = 0;
-        do {
-            func_80265688_de(D_800E4690->shown, i, func_80265650_de(D_80102B00[D_800E4690->record].versus, i));
-            i++;
-        } while (i < 36);
-        break;
-    case 3:
-        i = 0;
-        do {
-            func_80265688_de(D_800E4690->shown, i, func_80265650_de(D_80102B00[D_800E4690->record].three, i));
-            i++;
-        } while (i < 36);
-        break;
-    case 4:
-        i = 0;
-        do {
-            func_80265688_de(D_800E4690->shown, i, func_80265650_de(D_80102B00[D_800E4690->record].four, i));
-            i++;
-        } while (i < 36);
-        break;
+    for (i = 0; i < 4; i++) {
+        if (D_80102B0D[i][0] >= 0) {
+            rec = &D_80146398[i];
+            v = D_800FEB6C[i][0] + rec->unk4;
+            if (v > 99999) {
+                D_800FEB6C[i][0] = 99999;
+            } else {
+                D_800FEB6C[i][0] = v;
+            }
+            v = D_800FEB74[i][0] + rec->unk2;
+            if (v > 99999) {
+                D_800FEB74[i][0] = 99999;
+            } else {
+                D_800FEB74[i][0] = v;
+            }
+        }
     }
-    func_804274B0_de();
 }

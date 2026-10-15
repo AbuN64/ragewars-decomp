@@ -9,7 +9,7 @@ void func_8023C084_de(void *);
 void *func_8023CBC0_de(u16);
 s32 func_802BB2A0_de(void *, void **, s32);
 s32 func_802BB420_de(void *, void *, s32);
-void func_802BD2F0_de(void);
+void osWritebackDCacheAll(void);
 void func_802BD170_de(s32);
 void func_802BB750_de(void *);
 /* Firmware restart entry at80000400, called by the native fatal-fault path. */
@@ -98,7 +98,7 @@ void func_8023C1F0_de(void) {
             duration = elapsed;
         } while (duration * D_800C3618_de < D_800C361C_de);
     }
-    func_802BD2F0_de();
+    osWritebackDCacheAll();
     func_802BD170_de(1);
     rw_boot_entry();
     D_800CB3F8_de = -1;

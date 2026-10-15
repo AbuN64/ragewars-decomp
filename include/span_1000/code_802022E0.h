@@ -6,7 +6,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct Obj;
 typedef struct Obj Obj;
 

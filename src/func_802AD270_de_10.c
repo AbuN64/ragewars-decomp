@@ -5,7 +5,7 @@
 
 extern s32 func_802AE500_de(s32, s32);
 
-s32 func_802AEA2C_de(s32 arg0, s32 arg1) {
+s32 __readVarLen(s32 arg0, s32 arg1) {
     s32 temp_v0;
     s32 var_s0;
 

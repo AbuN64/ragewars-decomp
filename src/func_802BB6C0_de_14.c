@@ -42,5 +42,5 @@ state_done:
         D_800D5270->state = 2;
         func_802BC36C_de((ThreadNode **)&D_800D5268_de, D_800D5270);
     }
-    func_802BCF50_de(token);
+    __osRestoreInt(token);
 }

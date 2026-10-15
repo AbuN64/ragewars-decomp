@@ -1,7 +1,6 @@
 #include "types.h"
 #ifndef UNBAKE_SPAN_16E000_CODE_80403BCC_H
 #define UNBAKE_SPAN_16E000_CODE_80403BCC_H
-#include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 

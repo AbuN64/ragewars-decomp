@@ -15,7 +15,7 @@ extern s32 D_80101160;
 
 extern u32 func_802BCF30_de(void);
 
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 /* Reclaims one pool node: finds the first unlocked node (none of flags 0x702) in the D_80104574 list that
  * was last used five or more frames ago, falling back unless keep_recent is set to the first unlocked node
@@ -136,11 +136,11 @@ block_7:
         temp_v1 = D_8010515C - 1;
         D_8010515C = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(&D_80101140, 0, 1);
             var_s0_2 = 0;
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             var_s0_2 = 0;
         }
         if (var_s1 > 0) {
@@ -153,11 +153,11 @@ block_7:
         temp_v1_2 = D_8010515C + 1;
         D_8010515C = temp_v1_2;
         if (temp_v1_2 != 1) {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
             func_802BB2A0_de(&D_80101140, 0, 1);
             return;
         }
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
 }
 
@@ -296,10 +296,10 @@ void *func_802517B4_de(s32 arg0, s32 arg1) {
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
     }
 
     out = &value;
@@ -342,10 +342,10 @@ found:
     temp_v1_2 = D_8010515C - 1;
     D_8010515C = temp_v1_2;
     if (temp_v1_2 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
     }
     return object;
 }

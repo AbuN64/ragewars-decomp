@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct Chunk;
 
 struct CartridgeReadWorker;

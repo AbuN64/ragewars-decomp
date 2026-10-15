@@ -3,7 +3,6 @@
 #include "types.h"
 #include "resident_event_handler.h"
 #include "common/types_1dc8418c21db.h"
-#include "types.h"
 struct ResidentState;
 struct ResidentState {
     s32 unk0;

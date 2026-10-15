@@ -34,7 +34,7 @@ extern s32 D_002B9A40(s32, u32, void *, u32);
 extern s32 D_002B93B0(void *, s32, u32, void *, u32);
 extern void D_002B9010(void *);
 
-extern void func_802BAC60_de(void *mq, s32 msg, s32 count);
+extern void osCreateMesgQueue(void *mq, s32 msg, s32 count);
 extern void func_802B9950_de(void);
 extern void func_802BB550_de(s32 event, s32 mq, s32 msg);
 extern int func_802BADA0_de(void *t);
@@ -42,7 +42,7 @@ extern void func_802BB5F0_de(OSThread_s_func_802BB5F0_de *t, s32 pri);
 extern void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p);
 extern void func_802BB750_de(void *node);
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern void __osRestoreInt(u32 mask);
 
 void func_802BDEC0_us_rev1(s32 pri, OSMesgQueue *cmdQ, OSMesg *cmdBuf, s32 cmdMsgCnt)
 {
@@ -53,8 +53,8 @@ void func_802BDEC0_us_rev1(s32 pri, OSMesgQueue *cmdQ, OSMesg *cmdBuf, s32 cmdMs
     if (D_800D4360.active) {
         return;
     }
-    func_802BAC60_de(cmdQ, (s32) cmdBuf, cmdMsgCnt);
-    func_802BAC60_de(&D_801486A0, (s32) D_801486B8, 1);
+    osCreateMesgQueue(cmdQ, (s32) cmdBuf, cmdMsgCnt);
+    osCreateMesgQueue(&D_801486A0, (s32) D_801486B8, 1);
 
     if (!D_800D83C0) {
         func_802B9950_de();
@@ -79,7 +79,7 @@ void func_802BDEC0_us_rev1(s32 pri, OSMesgQueue *cmdQ, OSMesg *cmdBuf, s32 cmdMs
     D_800D4360.cmdQueue = cmdQ;
     func_802BAC90_de(&D_80147470, 0, D_002B9010, &D_800D4360, &D_801486A0, pri);
     func_802BB750_de(&D_80147470);
-    func_802BCF50_de(savedMask);
+    __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
         func_802BB5F0_de(0, oldPri);

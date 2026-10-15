@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "shared/func_802453D4_de_closed.h"
-#include "types.h"
 extern void func_802A8710_de();
 
 struct Table802AB8DC;

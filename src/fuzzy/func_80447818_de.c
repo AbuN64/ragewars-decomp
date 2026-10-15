@@ -23,9 +23,9 @@ s32 func_80447818_de(OSMesgQueue *arg0, s8 *arg1) {
     func_802B9C14_de();
     do {
         func_8044799C_de(0U);
-        func_802B9CB0_de(1, (s32) D_80154110);
+        __osSiRawStartDma(1, (s32) D_80154110);
         func_802BB2A0_de(arg0, &sp20, 1);
-        temp_s6 = func_802B9CB0_de(0, (s32) D_80154110);
+        temp_s6 = __osSiRawStartDma(0, (s32) D_80154110);
         func_802BB2A0_de(arg0, &sp20, 1);
         func_80447A38_de(&sp24, &sp10);
         var_a0 = 0;

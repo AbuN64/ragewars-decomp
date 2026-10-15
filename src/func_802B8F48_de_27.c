@@ -54,7 +54,7 @@ extern OSPiHandle_s *D_800D437C;
 
 extern void *func_802A001C_de(void *, s32, u32);
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 
 
@@ -87,6 +87,6 @@ OSPiHandle_s *func_802B9870_de(void) {
     *slot = state;
     D_801487B4 = state;
     state->next = previous;
-    func_802BCF50_de(lock);
+    __osRestoreInt(lock);
     return state;
 }

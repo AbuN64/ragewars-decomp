@@ -7,7 +7,6 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_8026E1F8.h"
-#include "types.h"
 #include "span_1000/code_802609CC.h"
 struct func_8024B8DC_S1;
 struct func_8024B8DC_S1 {

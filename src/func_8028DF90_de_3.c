@@ -18,7 +18,7 @@ extern void *func_8025CC6C_de(void);
 extern void func_8025CBEC_de(void *arg0);
 
 extern void func_802BA6B0_de(void *arg0);
-extern void func_802BA1B0_de(s32 arg0);
+extern void osViBlack(s32 arg0);
 
 
 
@@ -65,13 +65,13 @@ event_29a:
     if (D_800CD708 != 0) {
         D_800CD70C--;
         if (D_800CD70C <= 0) {
-            func_802BA870_de(D_800C5350_de);
+            osViSetYScale(D_800C5350_de);
             resource = &D_800D47B0;
             if (D_800E28D8 == 0) {
                 resource = &D_800D4530;
             }
             func_802BA6B0_de(resource);
-            func_802BA1B0_de(1);
+            osViBlack(1);
             func_802BA700_de(2);
             for (;;) {
             }

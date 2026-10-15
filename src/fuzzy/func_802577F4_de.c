@@ -17,9 +17,9 @@ extern f32 D_800C3ED8_de;
 extern void func_80259784_de(void *, s32);
 extern s32 func_8025B854_de(void *, s16);
 extern void func_8025B8BC_de(void *, s16);
-extern void func_802B2E80_de(void *, s32);
+extern void alSndpSetPitch(void *, s32);
 extern void func_802B2DE0_de(void *, u8);
-extern void func_802B2E30_de(void *, u8);
+extern void alSndpSetPan(void *, u8);
 extern void func_802B2F10_de(void *, s16);
 
 s32 func_802577F4_de(SoundContext *context, s32 id) {
@@ -45,12 +45,12 @@ s32 func_802577F4_de(SoundContext *context, s32 id) {
         return 0;
     }
     if (!func_8025B854_de(&context->manager, index)) {
-        func_802B2E80_de(context->voice, slot->pitch);
+        alSndpSetPitch(context->voice, slot->pitch);
         volume = 127;
         if (slot->volume + context->volume < 128)
             volume = (u8)slot->volume + (u8)context->volume;
         func_802B2DE0_de(context->voice, volume);
-        func_802B2E30_de(context->voice, slot->pan);
+        alSndpSetPan(context->voice, slot->pan);
         if (slot->flags & 0x200) gain = context->specialGain;
         else {
             gain = context->gain;

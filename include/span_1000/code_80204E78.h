@@ -6,7 +6,6 @@ struct SharedPlayer;
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "resident_event_handler.h"
-#include "types.h"
 #include "audio_callbacks.h"
 #include "common/types_06e4f7ef1f9e.h"
 /* Animation-trigger definitions have delay bounds and signed animation IDs;

@@ -9,7 +9,7 @@ extern OSMesgQueue D_80101140;
 
 extern u32 func_802BCF30_de(void);
 
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 extern struct Shape_typemap_165 *func_802514A8_de(s32, u32);
 
@@ -38,10 +38,10 @@ struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2) {
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
     flags = ((ResourceLoadRequest *)arg1)->mode;
     node = func_802514A8_de(0, flags);
@@ -67,10 +67,10 @@ struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2) {
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {
-        func_802BCF50_de(token2);
+        __osRestoreInt(token2);
         func_802BB420_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(token2);
+        __osRestoreInt(token2);
     }
     return node;
 }
@@ -87,10 +87,10 @@ struct Shape_typemap_165 *func_80254600_de(s32 arg0, s32 arg1, s32 arg2) {
     counter = D_8010515C + 1;
     D_8010515C = counter;
     if (counter != 1) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
     }
     node = func_802514A8_de(0, 0x22U);
     if (node != 0) {
@@ -115,10 +115,10 @@ struct Shape_typemap_165 *func_80254600_de(s32 arg0, s32 arg1, s32 arg2) {
     counter2 = D_8010515C - 1;
     D_8010515C = counter2;
     if (counter2 != 0) {
-        func_802BCF50_de(token2);
+        __osRestoreInt(token2);
         func_802BB420_de(&D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(token2);
+        __osRestoreInt(token2);
     }
     return node;
 }

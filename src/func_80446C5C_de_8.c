@@ -14,7 +14,7 @@
 
 
 
-extern s32 func_802B9CB0_de(s32 direction, void *data);
+extern s32 __osSiRawStartDma(s32 direction, void *data);
 
 /* __osPfsRequestOneChannel, drafted from the ultralib io pfsgetstatus source (2.0I branch): fill the pak
    PIF RAM block with one skip byte per preceding channel, a status request for the given channel and
@@ -43,10 +43,10 @@ s32 func_80446D80_de(void *queue, int channel)
 
     func_80446E58_de(channel);
 
-    ret = func_802B9CB0_de(1, &D_80154110);
+    ret = __osSiRawStartDma(1, &D_80154110);
     func_802BB2A0_de(queue, &dummy, 1);
 
-    ret = func_802B9CB0_de(0, &D_80154110);
+    ret = __osSiRawStartDma(0, &D_80154110);
     func_802BB2A0_de(queue, &dummy, 1);
 
     func_80446EE4_de(channel, &data);

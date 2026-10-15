@@ -6,6 +6,8 @@
 #include "span_1000/code_802B4730.h"
 #include "span_C76B0/data.h"
 #include "types.h"
+#include "sdk/libgultra.h"
+#include "code_802BAC64.h"
 
 extern ALGlobals_func_802B5B94_de *D_800D4070;
 
@@ -197,7 +199,7 @@ Acmd *func_802B5F68_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
     return ptr;
 }
 
-int func_802B60D8_de(int *arg0, int arg1, int arg2) {
+int alFxParam(int *arg0, int arg1, int arg2) {
     if (arg1 == 1) {
         *arg0 = arg2;
     }

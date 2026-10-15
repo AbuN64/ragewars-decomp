@@ -6,19 +6,19 @@
 #include "types.h"
 #include "common/unused.h"
 
-extern void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
+extern void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2);
 extern void func_802A001C_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_802BAC90_de(s32 arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5);
 extern void func_802BB750_de(s32 arg0);
 
 void func_802550F0_de(s32 arg0, s32 arg1) {
-    func_802BAC60_de((void *)(arg0 + 0x230), arg0 + 0x248, 0x80);
+    osCreateMesgQueue((void *)(arg0 + 0x230), arg0 + 0x248, 0x80);
     func_802A001C_de((void *)(arg0 + 0x448), arg1, 0x1000);
     func_802BAC90_de(arg0, arg1, &D_00255280, arg0, arg0 + 0x1448, D_800CD8AC_de);
     func_802BB750_de(arg0);
 }
 
-extern void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
+extern void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_802BB5F0_de(s32 *, s32);
 extern void func_802BB160_de(s32 *arg0, void *arg1, s32 arg2);
 
@@ -34,7 +34,7 @@ s32 func_80255170_de(s32 *arg0, void *arg1) {
     s32 sp2C;
     s32 temp;
 
-    func_802BAC60_de(sp10, (s32) &sp28, 1);
+    osCreateMesgQueue(sp10, (s32) &sp28, 1);
     temp = D_800CD8B8_de;
     ((ResourceLoadRequest *)arg1)->replyQueue = sp10;
     D_800CD704 = 2;

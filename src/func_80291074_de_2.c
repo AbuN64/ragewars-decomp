@@ -17,10 +17,10 @@ void func_80291208_de(RenderState *state) {
     u32 i, count, previous, next;
     RenderCounters *counters;
     RenderView *view;
-    func_802BAC60_de(D_801428C0, (s32)D_80142CB8, 0x1000);
+    osCreateMesgQueue(D_801428C0, (s32)D_80142CB8, 0x1000);
     func_802A001C_de(D_800EFC80_de, 7, 0x2000);
     func_8028F754_de((void *)&D_80142928, (s32)(D_800EFC80_de + 0x2000), D_800CD8C8_de, 0, 1);
-    func_8028F864_de(&D_80142928, D_80146CC0, (s32)D_801428C0);
+    osScAddClient(&D_80142928, D_80146CC0, (s32)D_801428C0);
     state->handle = -1;
     func_80293590_de(state);
     D_80110634 = 0;

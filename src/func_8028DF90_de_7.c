@@ -16,7 +16,7 @@ extern s32 D_80142C38;
 
 
 
-extern void func_802BAC60_de(char *row, char *slots, s32 count);
+extern void osCreateMesgQueue(char *row, char *slots, s32 count);
 
 extern void func_802BB550_de(s32 slot, char *row, s32 text);
 
@@ -52,7 +52,7 @@ extern s64 func_802BADC0_de(void);
 
 extern void func_802B9E78_de(s32 *mode);
 
-extern void func_802B9F7C_de(s32 *mode);
+extern void osSpTaskStartGo(s32 *mode);
 
 extern void func_802B7B90_de(s32 music, s64 time);
 
@@ -172,8 +172,8 @@ void func_8028F754_de(Panel *panel, s32 arg1, s32 arg2, s32 arg3, unsigned char 
     panel->field2F0 = 0;
     panel->field300 = 0;
     panel->mode = 4;
-    func_802BAC60_de(panel->row0, panel->row0Slots, 8);
-    func_802BAC60_de(panel->row1, panel->row1Slots, 8);
+    osCreateMesgQueue(panel->row0, panel->row0Slots, 8);
+    osCreateMesgQueue(panel->row1, panel->row1Slots, 8);
     func_802BB550_de(4, panel->row0, 0x29B);
     func_802BB550_de(9, panel->row0, 0x29C);
     func_802BB550_de(0xE, panel->row0, 0x29D);
@@ -182,7 +182,7 @@ void func_8028F754_de(Panel *panel, s32 arg1, s32 arg2, s32 arg3, unsigned char 
     func_802BB750_de(panel->elements);
 }
 
-void func_8028F864_de(void *arg0, void *arg1, s32 arg2) {
+void osScAddClient(void *arg0, void *arg1, s32 arg2) {
     s32 temp_v0;
     temp_v0 = func_802BD170_de(1);
     (((struct ObjRecAt4V3 *) ((s8 *) arg1))->unk4) = arg2;
@@ -220,7 +220,7 @@ void *func_8028F94C_de(void *object) {
     return &record->unk78;
 }
 
-void func_8028F954_de(void *arg0, void *arg1) {
+void __scAppendList(void *arg0, void *arg1) {
     void *temp_v0;
 
     if ((((struct OSScTask_s *)arg1)->list.type) == 2) {
@@ -278,7 +278,7 @@ s32 func_8028FA0C_de(void *arg0, void *arg1) {
     if (((((s32)((struct OSScTask_s *)arg1)->flags)) & 0x60) != 0x60) {
         return 1;
     }
-    func_802BA8C0_de(((s32)((struct OSScTask_s *)arg1)->framebuffer));
+    osViSwapBuffer(((s32)((struct OSScTask_s *)arg1)->framebuffer));
     return 1;
 }
 
@@ -290,7 +290,7 @@ void func_8028FA60_de(View_func_8028FA60_de *view, Scene_func_8028FA60_de *curre
     }
     if (current != 0) {
         if (current->mode == 2) {
-            func_802BD2F0_de();
+            osWritebackDCacheAll();
             D_8011B1D0 = func_802BADC0_de();
         } else if (current->options & 0x20) {
             now = func_802BADC0_de();
@@ -302,7 +302,7 @@ void func_8028FA60_de(View_func_8028FA60_de *view, Scene_func_8028FA60_de *curre
         }
         current->flags &= ~0x30;
         func_802B9E78_de(&current->mode);
-        func_802B9F7C_de(&current->mode);
+        osSpTaskStartGo(&current->mode);
         view->current = current;
         if (current == next) {
             view->next = next;
@@ -316,7 +316,7 @@ void func_8028FA60_de(View_func_8028FA60_de *view, Scene_func_8028FA60_de *curre
     }
 }
 
-void func_8028FBD8_de(void *arg0) {
+void __scYield(void *arg0) {
     void *temp_a0;
     temp_a0 = (((struct ObjectLinks2F8 *) ((s8 *) arg0))->unk_2F4);
     if ((((struct IntegerState14 *) ((s8 *) temp_a0))->unk_10) == 1) {
@@ -336,12 +336,12 @@ void func_8028FC10_de(void *arg0) {
             D_800CD704 = 2;
             func_802BB5F0_de(&D_80106248, D_800CD8B8_de);
         }
-        func_8028F954_de(arg0, node);
+        __scAppendList(arg0, node);
     }
 
     if (((View_func_8028FA60_de *)arg0)->pending != 0 &&
         ((View_func_8028FA60_de *)arg0)->current != 0) {
-        func_8028FBD8_de(arg0);
+        __scYield(arg0);
         return;
     }
 

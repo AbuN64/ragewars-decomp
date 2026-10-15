@@ -8,7 +8,7 @@
 
 extern State_func_802BA700_de *D_800D4414;
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 arg0);
+extern void __osRestoreInt(u32 arg0);
 
 void func_802BA700_de(s32 arg0) {
     u32 token;
@@ -40,5 +40,5 @@ void func_802BA700_de(s32 arg0) {
         D_800D4414->flags |= D_800D4414->inner->w1 & 0x300;
     }
     D_800D4414->status |= 8;
-    func_802BCF50_de(token);
+    __osRestoreInt(token);
 }

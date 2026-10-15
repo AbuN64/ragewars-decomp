@@ -5,6 +5,7 @@
 #include "span_1000/code_802BD1A8.h"
 #include "types.h"
 #include "common/unused.h"
+#include "sdk/libgultra.h"
 
 
 s32 func_802B1820_us_rev1(u8 *arg0) {
@@ -395,7 +396,7 @@ s32 func_802B2050_us_rev1(void) {
                     first.word = word;
                     if (word != 0) {
                         func_802BD170_de(1);
-                        func_802BD2F0_de();
+                        osWritebackDCacheAll();
                         func_802BD010_de(0x80000000, 0x800000);
                         ((void (*)(void))word)();
                     }

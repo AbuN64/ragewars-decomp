@@ -5,7 +5,6 @@
 #include "gfx.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_802508E0.h"
-#include "types.h"
 #include "common/types_1dc8418c21db.h"
 extern void func_8024F5A0_de(void *arg0);
 

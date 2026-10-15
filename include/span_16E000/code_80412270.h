@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_80413728.h"
-#include "types.h"
 struct MenuWidget;
 
 extern s32 func_804125A4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);

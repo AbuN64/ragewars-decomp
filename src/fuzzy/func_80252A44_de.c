@@ -10,7 +10,7 @@ extern struct Shape_func_8021A2D4_de_2 D_80105180;
 extern char D_80101140[];
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern void __osRestoreInt(u32 mask);
 extern s32 func_802BB420_de(void *queue, s32 msg, s32 flag);
 extern void func_80268CE0_de(s32);
 extern void func_8026925C_de(s32);
@@ -52,10 +52,10 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     lock = func_802BCF30_de();
     D_8010515C++;
     if (D_8010515C != 1) {
-        func_802BCF50_de(lock);
+        __osRestoreInt(lock);
         func_802BB2A0_de(D_80101140, 0, 1);
     } else {
-        func_802BCF50_de(lock);
+        __osRestoreInt(lock);
     }
 
     base = 0x80000000;
@@ -117,9 +117,9 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     lock = func_802BCF30_de();
     D_8010515C--;
     if (D_8010515C != 0) {
-        func_802BCF50_de(lock);
+        __osRestoreInt(lock);
         func_802BB420_de(D_80101140, 0, 1);
         return;
     }
-    func_802BCF50_de(lock);
+    __osRestoreInt(lock);
 }

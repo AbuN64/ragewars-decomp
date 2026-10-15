@@ -7,7 +7,6 @@ typedef struct ActorResourceHeader {
     u8 unknown0[0x1E];
     u16 particleScale; /* Float encoded in its high sixteen bits. */
 } ActorResourceHeader;
-#include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct func_8024BECC_S1;

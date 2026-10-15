@@ -199,10 +199,10 @@ block_41:
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
                 *((s32 *) ((u8 *) (temp_s0) + 28)) = temp_v1;
                 if (temp_v1 != 1) {
-                    func_802BCF50_de(temp_a0);
+                    __osRestoreInt(temp_a0);
                     func_802BB2A0_de(temp_s0, NULL, 1);
                 } else {
-                    func_802BCF50_de(temp_a0);
+                    __osRestoreInt(temp_a0);
                 }
                 temp_s0_2 = arg0 + 0x110;
                 var_s2 = ((s32 *) arg0)[268 / sizeof(s32)] + 1;
@@ -213,11 +213,11 @@ block_41:
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
                 *((s32 *) ((u8 *) (temp_s0_2) + 28)) = temp_v1_2;
                 if (temp_v1_2 != 0) {
-                    func_802BCF50_de(temp_v0_4);
+                    __osRestoreInt(temp_v0_4);
                     func_802BB420_de(temp_s0_2, 0, 1);
                     var_v0_3 = arg1 < 0x100;
                 } else {
-                    func_802BCF50_de(temp_v0_4);
+                    __osRestoreInt(temp_v0_4);
                     var_v0_3 = arg1 < 0x100;
                 }
                 if (var_v0_3 != 0) {

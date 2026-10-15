@@ -3,7 +3,7 @@
 #include "types.h"
 
 
-extern void *func_802B3BF8_de(void);
+extern void *__allocParam(void);
 
 
 
@@ -14,7 +14,7 @@ extern void *func_802B3BF8_de(void);
 
 
 
-void func_802B36F0_de(void *arg0, void *arg1)
+void alSynStopVoice(void *arg0, void *arg1)
 {
   int new_var;
   void *Shared_func_802B36F0_de_v0;
@@ -22,7 +22,7 @@ void func_802B36F0_de(void *arg0, void *arg1)
   SharedRecV12 fn;
   if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0)
   {
-    Shared_func_802B36F0_de_v0 = func_802B3BF8_de();
+    Shared_func_802B36F0_de_v0 = __allocParam();
     if (Shared_func_802B36F0_de_v0 != 0)
     {
       new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);

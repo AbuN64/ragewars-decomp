@@ -20,7 +20,7 @@ extern void func_802B2F00_de(void *sound, s16 sample);
 
 extern s32 func_802B2620_de(void *sound);
 
-extern void func_802B2F60_de(void *sound);
+extern void alSndpStop(void *sound);
 
 extern void func_802B2F00_de(void *arg0, s16 arg1);
 
@@ -31,7 +31,7 @@ extern s32 func_802B2620_de(void *arg0);
 
 extern void func_802B2D80_de(void *);
 
-extern void func_802B2F60_de(void *arg0);
+extern void alSndpStop(void *arg0);
 
 extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
 
@@ -54,7 +54,7 @@ extern void func_8025AE1C_de(void *arg0);
 
 extern void func_802B2F10_de(void *arg0, s16 arg1);
 
-extern void func_802B2E80_de(void *arg0, f32 arg1);
+extern void alSndpSetPitch(void *arg0, f32 arg1);
 
 void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
 {
@@ -81,11 +81,11 @@ void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
         {
           if (active)
           {
-            func_802B2F60_de(sound);
+            alSndpStop(sound);
           }
           else
           {
-            func_802B2F60_de(sound);
+            alSndpStop(sound);
           }
         }
         slot->state = absent;
@@ -257,7 +257,7 @@ void func_8025BA9C_de(s32 arg0, s16 arg1) {
         s32 addr = a0 + idx * 2;
         func_802B2F00_de(s1, ((struct ObjRecAtDC *) addr)->unkDC);
         if (func_802B2620_de(s1) != 0) {
-            func_802B2F60_de(s1);
+            alSndpStop(s1);
         }
         ((struct IntegerStateB4 *) base)->unk_4 = -1;
     }
@@ -383,7 +383,7 @@ void func_8025BE08_de(RecordRecAt4V6 *record, s32 value) {
                 sound = owner->sound;
                 func_802B2F00_de(sound, owner->samples[slot->index]);
                 if (func_802B2620_de(sound) != 0) {
-                    func_802B2F60_de(sound);
+                    alSndpStop(sound);
                 }
                 slot->state = -1;
             }
@@ -406,7 +406,7 @@ void func_8025BF08_de(RecordRecAt4V5 *record, s32 value) {
                 sound = owner->sound;
                 func_802B2F00_de(sound, owner->samples[slot->index]);
                 if (func_802B2620_de(sound) != 0) {
-                    func_802B2F60_de(sound);
+                    alSndpStop(sound);
                 }
                 slot->state = -1;
             }
@@ -429,7 +429,7 @@ void func_8025C008_de(RecordRecAt4V4 *record, s32 value) {
                 sound = owner->sound;
                 func_802B2F00_de(sound, owner->samples[slot->index]);
                 if (func_802B2620_de(sound) != 0) {
-                    func_802B2F60_de(sound);
+                    alSndpStop(sound);
                 }
                 slot->state = -1;
             }
@@ -580,5 +580,5 @@ void func_8025C4B4_de(void *arg0, f32 arg1) {
     func_802B2F00_de(temp_s0_2, owner->samples[slot->index]);
     scaled = arg1 * (slot->f34);
     scaled = scaled * (slot->fB8);
-    func_802B2E80_de(temp_s0_2, scaled);
+    alSndpSetPitch(temp_s0_2, scaled);
 }

@@ -1,180 +1,127 @@
-#include "span_16E000/code_80423280.h"
+#include "gfx.h"
 #include "common/types_1dc8418c21db.h"
-#include "common/types_8fd754e1e915.h"
-#include "span_16E000/code_8042BD40.h"
-#include "span_16E000/code_80434F4C.h"
+#include "span_16E000/code_80429C10.h"
 #include "types.h"
-
-/* Handles the answer on the screen D_800E53C0. */
-
-
-extern s32 D_80146894;
-
-extern s32 D_80146918;
-
-extern s32 D_801468F4;
-
-extern void func_8029973C_de();
-
-extern s32 func_8043C308_de(struct MenuRules *);
-
-extern s32 func_80299A08_de();
-
-extern void func_8043C278_de(struct MenuRules *);
-
-extern s32 func_8042AF28_de();
-
-extern void func_8042E988_de(s32);
-
-extern void func_80298368_de(s32);
-
-/* When the fourth argument is one, calls func_8029973C_de and, while the counter at offset 0xE8 of
-   the object D_800E53C0 points to is positive, decrements it and calls func_8042C018_de. Returns zero. */
+#include "n64sdk.h"
+#include "gbi.h"
+#include "common/unused.h"
+#include "shared/func_802453D4_de_closed.h"
+#include "span_1000/code_80291054.h"
+#include "span_1000/code_80297CD0.h"
+#include "span_166000/code_80426310.h"
+#include "span_16E000/code_80423280.h"
 
 
 
 
-extern void func_8042C018_de();
-
-/* When the fourth argument is one, calls func_8029973C_de and, while the position at offset 0xE8 of
-   the object D_800E53C0 points to is more than four below the limit at 0xEC, advances it and calls
-   func_8042C018_de. Returns zero. */
 
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E53C4, an actor kind at D_800E53C8 and a handler at D_800E53CC: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+/* Draw callback of the versus results screen D_800E4F60: on draw event 1 in states 3, 8 or 9 it
+   sets the fill D_800D15E0 to blended white, restores the full-screen clip, and at alpha 210 draws
+   the four player panels (on screen 0x14 with no pending pause) and the tie panel at 0x308 unless a
+   winner is set, then resets the fill. On update event 0 (unless func_80299958_de reports 0x19) it
+   plays the winner's voice on the twentieth frame, raises the banner blink six frames later, and
+   fades the two banner sprites out by 30 per frame before hiding them. Returns zero. */
 
-typedef s32 (*Handler8042DB38)(void *, s32, s32, s32, s32);
+extern struct VersusResultsScreen *D_800E4F60;
+extern s32 D_800D15E0;
+extern f32 D_800D15E4[4];
 
-extern FieldRow D_800E53C4[];
-
-extern FieldRow D_800E53C8[];
-
-extern Handler8042DB38 D_800E53CC;
-
-s32 func_8042D788_de(void) {
-    extern struct MenuRules *D_800E53C0;
-    s32 *paused;
-    func_8029973C_de();
-    if (func_8043C308_de(D_800E53C0) == 1) {
-        return 0;
-    }
-    paused = &D_80146894;
-    *paused = 0;
-    switch (func_80299A08_de()) {
-#if defined(VERSION_DE)
-    case 0x235 - 2:
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x239 - 2:
-#elif defined(VERSION_EU_X)
-    case 0x23E - 2:
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
+extern void func_804399D0(char *);
+#else
 #endif
-        if (((u8 *)paused)[-0x5BF] == 0) {
-            func_8043C278_de(D_800E53C0);
-            D_800E53C0->locked = 0;
-        } else {
-            D_80146918 = 0;
-            D_801468F4 = 0;
-            func_80298368_de(0xF);
-        }
-        break;
 #if defined(VERSION_DE)
-    case 0x235 - 1:
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x239 - 1:
-#elif defined(VERSION_EU_X)
-    case 0x23E - 1:
+extern void func_804399D0(char *);
+#else
+extern void func_804397F0_auto(char *);
 #endif
-        func_80434FB4_de(5);
-        func_80298368_de(0x13);
-        break;
+extern s32 func_8042B1B8_de(s32, s32);
+extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
+
+s32 func_80429FF0_de(void *arg0, void *arg1, s32 event) {
+    s32 i;
+    s32 alpha;
+
+    if (event == 1 && (D_800E4F60->state == 3 || D_800E4F60->state == 8 || D_800E4F60->state == 9)) {
+        ((struct MenuRenderFill *)&D_800D15E0)->mode = 0;
+        D_800D15E0 = 1;
+        D_800D15E4[0] = 255.0f;
+        D_800D15E4[1] = 255.0f;
+        D_800D15E4[2] = 255.0f;
+        D_800D15E4[3] = 255.0f;
+        gDPSetScissor(D_80110634++, G_SC_NON_INTERLACE, 0, 0, D_800E28D0 - 1, D_800E28D4 - 1);
+        D_800D15E4[3] = 210.0f;
+        if (func_80299958_de() == 0x14 && D_80154024 == 0) {
+            for (i = 0; i < 4; i++) {
 #if defined(VERSION_DE)
-    case 0x235 + 3:
-#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
-    case 0x239 + 3:
-#elif defined(VERSION_EU_X)
-    case 0x23E + 3:
+                
+#if defined(VERSION_DE)
+func_804399D0
+#else
+func_804397F0_auto
 #endif
-        if (func_8042AF28_de() == 1) {
-            func_8042E988_de(0x21);
-            return 0;
-        }
-        if (((u8 *)paused)[-0x5BF] == 0) {
-            func_80298368_de(0x14);
-        } else {
-            func_80298368_de(0xF);
-        }
-        break;
-    default:
-        return 0;
-    }
-    return 0;
-}
-
-s32 func_8042D8A4_de(void) {
-    func_8029973C_de();
-    return 0;
-}
-
-s32 func_8042D8C4_de(void *first, void *second, void *third, s32 fourth) {
-    extern struct State_func_8042D8C4_de *D_800E53C0;
-    struct State_func_8042D8C4_de *state;
-
-    if (fourth == 1) {
-        func_8029973C_de();
-        state = D_800E53C0;
-        if (state->count > 0) {
-            state->count--;
-            func_8042C018_de();
-            return 0;
-        }
-    }
-    return 0;
-}
-
-s32 func_8042D908_de(void *first, void *second, void *third, s32 fourth) {
-    extern struct State_func_8042D908_de *D_800E53C0;
-    struct State_func_8042D908_de *state;
-    s32 position;
-
-    if (fourth == 1) {
-        func_8029973C_de();
-        state = D_800E53C0;
-        position = state->position;
-        if (position + 4 < state->limit) {
-            state->position = position + 1;
-            func_8042C018_de();
-            return 0;
-        }
-    }
-    return 0;
-}
-
-s32 func_8042D958_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    Handler8042DB38 *entry;
-    s32 index;
-    s32 wildcard;
-    s32 actor_kind;
-    s32 table_kind;
-    ObjRecAtCV1 *actor;
-
-    if (D_800E53CC != 0) {
-        wildcard = 0x7530;
-        entry = &D_800E53CC;
-        index = 0;
-        do {
-            if (D_800E53C4[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E53C8[index].value;
-                if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
-                }
+(D_800E4F60->panels[i]);
+#else
+                
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
+func_804399D0
+#else
+func_804397E8_de
+#endif
+(D_800E4F60->panels[i]);
+#endif
             }
-            entry += 3;
-            index++;
-        } while (*entry != 0);
+        }
+        if (D_800E4F60->winner == 0) {
+#if defined(VERSION_DE)
+            
+#if defined(VERSION_DE)
+func_804399D0
+#else
+func_804397F0_auto
+#endif
+(D_800E4F60->tie);
+#else
+            
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
+func_804399D0
+#else
+func_804397E8_de
+#endif
+(D_800E4F60->tie);
+#endif
+        }
+        D_800D15E0 = 0;
+        D_800D15E4[3] = 255.0f;
+    }
+    if (event == 0 && func_80299958_de() != 0x19) {
+        if (D_800E4F60->frames < 20) {
+            if (++D_800E4F60->frames == 20 && D_800E4F60->winner > 0) {
+                func_804220A8_de(func_8042B1B8_de(func_8042B294_de(D_800E4F60->winnerSlot), D_800E4F60->winner) + 0x259);
+                D_800E4F60->blinkDelay = 0;
+            }
+        }
+        if (D_800E4F60->blinkDelay != -1) {
+            if (++D_800E4F60->blinkDelay >= 6) {
+                D_800E4F60->blinking = 1;
+                D_800E4F60->blinkDelay = -1;
+            }
+        }
+        if (D_800E4F60->blinking == 1) {
+            alpha = D_800E4F60->banner->value;
+            alpha -= 30;
+            if (alpha <= 0) {
+                D_800E4F60->blinking = 0;
+                func_8040E8D8_de(D_800E4F60->bannerShadow, 0);
+                func_8040E8D8_de(D_800E4F60->banner, 0);
+                alpha = 0xFF;
+            }
+            D_800E4F60->banner->value = alpha;
+            D_800E4F60->bannerShadow->value = alpha;
+        }
     }
     return 0;
 }

@@ -43,7 +43,7 @@ extern s32 D_8014D424;
 extern u8 *D_8014D428;
 extern u32 D_800D2978, D_800DE850, D_800CD730, D_800D297C;
 extern void *D_8014D460, *D_8014D464, *D_8014D430_de, *D_8014D42C;
-extern void func_802BD2F0_de(void);
+extern void osWritebackDCacheAll(void);
 extern void func_8028FD4C_de(void *, void *);
 void func_8029192C_de(FrameScheduler *frames, FrameSchedule *frame)
 {
@@ -100,7 +100,7 @@ void func_8029192C_de(FrameScheduler *frames, FrameSchedule *frame)
         task->message = frame->message;
         task->framebuffer = frame->framebuffer;
     }
-    func_802BD2F0_de();
+    osWritebackDCacheAll();
     func_8028FD4C_de(&D_80142928, &frame->first);
     if (frame->dual) func_8028FD4C_de(&D_80142928, &frame->second);
     D_800D2978++;

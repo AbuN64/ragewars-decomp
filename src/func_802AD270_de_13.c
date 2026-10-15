@@ -20,7 +20,7 @@ extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
 
 extern void *func_802B16E0_de(void *, s32, s32, s32);
 
-extern void *func_802B151C_de(void *, u8, u8, u8);
+extern void *__mapVoice(void *, u8, u8, u8);
 
 extern ALVoiceState *func_802B1680_de(ALSeqPlayer *, u8, u8);
 
@@ -30,7 +30,7 @@ extern s32 func_802B18A4_de(void *, void *);
 
 extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);
 
-extern s32 func_802B1888_de(void *, s32);
+extern s32 __vsDelta(void *, s32);
 
 extern void func_802B35E0_de(ALSynth_func_802B3000_de *, ALVoice_s_func_802B3000_de *, void *, f32, s16, u8, u8, s32);
 
@@ -44,7 +44,7 @@ extern void func_802B32A0_de(void *, void *, u8);
 
 extern void func_802B33E0_de(void *, void *, f32);
 
-extern void func_802B1AC0_de(void *, void *, s32);
+extern void __setInstChanState(void *, void *, s32);
 
 extern void func_802BAC50_de(void *, void *, s32);
 
@@ -187,7 +187,7 @@ void func_802AF2E0_de(void *object, ALEvent *message)
             config.priority = seqp->chanState[chan].priority;
             config.fxBus = 0;
             config.unityPitch = 0;
-            vstate = func_802B151C_de(seqp, key, vel, chan);
+            vstate = __mapVoice(seqp, key, vel, chan);
             if (!vstate)
                 return;
             voice = &vstate->voice;
@@ -282,14 +282,14 @@ void func_802AF2E0_de(void *object, ALEvent *message)
             return;
         vstate->velocity = byte2;
         func_802B3480_de(seqp->drvr, &vstate->voice, func_802B1814_de((ALVoiceState *)vstate, (ALSeqPlayer *)seqp),
-                      func_802B1888_de(vstate, seqp->curTime));
+                      __vsDelta(vstate, seqp->curTime));
         break;
     case 0xD0: /* AL_MIDI_ChannelPressure */
         for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
             if (vs->channel == chan) {
                 vs->velocity = byte1;
                 func_802B3480_de(seqp->drvr, &vs->voice, func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
-                              func_802B1888_de(vs, seqp->curTime));
+                              __vsDelta(vs, seqp->curTime));
             }
         }
         break;
@@ -309,7 +309,7 @@ void func_802AF2E0_de(void *object, ALEvent *message)
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 if ((vs->channel == chan) && (vs->envPhase != 3)) {
                     vol = func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp);
-                    func_802B3480_de(seqp->drvr, &vs->voice, vol, func_802B1888_de(vs, seqp->curTime));
+                    func_802B3480_de(seqp->drvr, &vs->voice, vol, __vsDelta(vs, seqp->curTime));
                 }
             }
             break;
@@ -350,7 +350,7 @@ void func_802AF2E0_de(void *object, ALEvent *message)
             func_802BAC50_de(D_800C7350_de, D_800C7354_de, 711);
         if (key < seqp->bank->instCount) {
             ALInstrument *inst = seqp->bank->instArray[key];
-            func_802B1AC0_de(seqp, inst, chan);
+            __setInstChanState(seqp, inst, chan);
         }
         break;
     case 0xE0: /* AL_MIDI_PitchBendChange */

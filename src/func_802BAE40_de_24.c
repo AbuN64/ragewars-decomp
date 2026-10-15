@@ -3,7 +3,7 @@
 #include "types.h"
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 
 void func_802BB850_eu(s32 arg0) {
@@ -13,5 +13,5 @@ void func_802BB850_eu(s32 arg0) {
     temp_v0 = func_802BCF30_de();
     p = &D_800D5258;
     *p |= arg0;
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }

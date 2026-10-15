@@ -18,7 +18,7 @@ static __inline__ void writeLink(Link_func_8023CC08_de **where, Link_func_8023CC
 
 /* Releases one page of a resource's TLB slot: clears the odd (flag 1) or even page of the slot's entry in
  * D_80103F28 and, when the other page is still in use, remaps the slot with only that page through
- * func_802AD370_de; otherwise it unmaps the slot through func_802AD3F0_de and frees its virtual page. The
+ * func_802AD370_de; otherwise it unmaps the slot through osUnmapTLB and frees its virtual page. The
  * resource then has no slot. */
 
 
@@ -132,7 +132,7 @@ void func_8023C084_de(Mapping *mapping) {
         slot = mapping->slot;
         if (D_80103F28[slot].slot == 0xFF) {
         unmap:
-            func_802AD3F0_de(slot);
+            osUnmapTLB(slot);
             D_80103F28[mapping->slot].id = 0xFFFF;
         } else {
             func_802AD370_de(slot, 0, D_80103F28[slot].id << 12, -1,

@@ -1,190 +1,224 @@
+#include "shared/world.h"
+#include "gfx.h"
 #include "span_1000/code_802A8A94.h"
 #include "types.h"
-#include "gfx.h"
-#include "gbi.h"
 #include "abi.h"
 #include "n64sdk.h"
+#include "gbi.h"
 
-/* Draws a text string in the current font style D_801376F8: when centring, measures it through func_804422F0_de at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through func_802A88F0_de, first as a shadow when requested. */
-
-extern s32 D_800E28D0;
-extern Gfx *D_80110634;
-extern f32 func_804422F0_de(s32 text, f32 size, f32 spacing);
+/* Draws a signed integer of up to four digits with the font sprite set from func_8028BEAC_de: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through func_802AA1AC_de, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
 
 
-void func_802A8F28_de(s32 text, s32 x, s32 y, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY) {
-    FontStyle *style;
-    f32 sizeFactor;
-    f32 spacing;
-    f32 size;
+
+extern s32 func_8028BEAC_de(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern void func_802AA1AC_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
+extern s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
+extern void func_80253754_de(s32 arg0, s32 arg1);
+
+void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32 rightAlign, s32 minDigits) {
+    s32 sprites;
+    s32 negative;
+    s32 thousands;
+    s32 hundreds;
+    s32 tens;
+    s32 ones;
+    s32 rest;
+    s32 last;
+    s32 i;
+    s32 place;
+    s32 digit;
     f32 width;
-    f32 limit;
-    f32 ratio;
-    f32 fx;
-    f32 fy;
-    f32 w;
-    f32 h;
-    s32 language;
+    f32 scale;
 
-    style = &D_801376F8;
-    if (centred) {
-        switch (D_80147150) {
-        case 0:
-            sizeFactor = 24.0f;
-            break;
-        case 1:
-            sizeFactor = 12.0f;
-            break;
+    sprites = func_8028BEAC_de(&D_8011FE88, 4, 0x10, 1);
+    if (sprites == 0) {
+        return;
+    }
+    negative = 0;
+    if (value < 0) {
+        value = -value;
+        negative = 1;
+        if (value < 0) {
+            goto release;
+        }
+    }
+    thousands = value * 0.001f;
+    rest = value - thousands * 1000;
+    hundreds = rest * 0.01f;
+    rest -= hundreds * 100;
+    tens = rest * 0.1f;
+    ones = rest - tens * 10;
+    last = 3;
+    if (thousands == 0) {
+        last = 2;
+        if (hundreds == 0) {
+            last = tens != 0;
+        }
+    }
+    if (last < minDigits - 1) {
+        last = minDigits - 1;
+    }
+    if (negative) {
+        func_802AAC28_de(4, 10, x, y, size, arg4, arg5);
+        x += size * 13.0f;
+    }
+    for (i = last; i >= 0; i--) {
+        place = i;
+        if (rightAlign) {
+            place = last - i;
+        }
+        switch (place) {
         case 3:
-            sizeFactor = 6.0f;
-            break;
-        case 4:
-        case 5:
-            sizeFactor = 16.0f;
+            digit = thousands;
             break;
         case 2:
-        case 6:
-            sizeFactor = 8.0f;
-            break;
-        default:
-            sizeFactor = 1.0f;
-            break;
-        }
-        size = style->width * scaleX * sizeFactor;
-        switch (D_80147150) {
-        case 0:
-            spacing = 24.0f;
+            digit = hundreds;
             break;
         case 1:
-            spacing = 12.0f;
+            digit = tens;
             break;
-        case 3:
-            spacing = 6.0f;
-            break;
-        case 4:
-        case 5:
-            spacing = 16.0f;
-            break;
-        case 2:
-        case 6:
-            spacing = 8.0f;
-            break;
+        case 0:
         default:
-            spacing = 1.0f;
+            digit = ones;
             break;
         }
-        width = func_804422F0_de(text, size, spacing);
-        limit = D_800E28D0 - 0x2C;
-        if (limit < width) {
-            ratio = limit / width;
-            scaleX *= ratio;
-            width *= ratio;
+        scale = 1.0f;
+        if (digit == 1) {
+            scale = 0.7f;
         }
-        x -= (s32)(width * 0.5f);
+        width = scale * (size * 13.0f);
+        if (rightAlign) {
+            x -= width;
+        }
+        if ((u32)digit < 10) {
+            func_802AA1AC_de(sprites, digit, x, y, size, arg4, arg5);
+        }
+        if (!rightAlign) {
+            x += width;
+        }
     }
-    gDPPipeSync(D_80110634++);
-    gDPSetEnvColor(D_80110634++, (u32)((style->envR)), (u32)((style->envG)), (u32)((style->envB)), (u32)((alpha)));
-    gDPSetPrimColor(D_80110634++, 0, 0, (u32)((style->primR)), (u32)((style->primG)), (u32)((style->primB)), 255);
-    fx = x;
-    w = style->width * scaleX;
-    h = style->height * scaleY;
-    language = D_80147150;
-    fy = y;
-    if (shadow) {
-        func_802A88F0_de(text, fx, fy, w, h, 1, alpha, language);
-    }
-    func_802A88F0_de(text, fx, fy, w, h, 0, alpha, language);
+release:
+    func_80253754_de(0, sprites);
 }
 
-/* Emits the render-state display-list prologue for a flat colour pass: pipeline sync, one-cycle
-   mode, the two combiner/mode presets through func_80268CE0_de and func_8026925C_de, the environment
-   colour from the argument with full alpha bits, texture enable and the texture-filter, colour-dither
-   and alpha-dither mode words, the alpha dither chosen by D_800E28D8. */
-
 extern Gfx *D_80110634;
-extern s32 D_800E28D8;
+extern s32 D_801377B8[2];
 
+
+extern s32 func_802AADBC_de(void);
 extern void func_80268CE0_de(s32 arg0);
-extern void func_8026925C_de(s32 arg0);
+extern s32 func_8026925C_de(s32);
 
-void func_802A9234_de(s32 color) {
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
-    func_80268CE0_de(0x1B);
-    func_8026925C_de(0x19);
-    {
-        Gfx *cmd = D_80110634++;
-        gDPSetEnvColor(cmd, 255, 255, 255, color);
+
+
+
+void func_802A84F8_de(void) {
+    s32 texture;
+
+    texture = func_802AADBC_de();
+    if (texture != 0) {
+
+        {
+            Gfx *cmd;
+            cmd = D_80110634++;
+            gDPPipeSync(cmd);
+            cmd = D_80110634++;
+            gDPSetCycleType(cmd, G_CYC_2CYCLE);
+        }
+
+        func_80268CE0_de(0x1A);
+        func_8026925C_de(0x15);
+
+        D_80147150 = 0;
+        {
+        Gfx *cmd;
+        cmd = D_80110634++;
+        gSPTexture(cmd, 32768, 32768, 0, 0, G_ON);
+        cmd = D_80110634++;
+        gDPSetTextureLUT(cmd, G_TT_NONE);
+        cmd = D_80110634++;
+        gDPSetTexturePersp(cmd, G_TP_NONE);
+        cmd = D_80110634++;
+        gDPSetTextureFilter(cmd, G_TF_BILERP);
+        cmd = D_80110634++;
+        gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)texture);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
+        cmd = D_80110634++;
+        gDPLoadSync(cmd);
+        cmd = D_80110634++;
+        gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 143, 2048);
+        cmd = D_80110634++;
+        gDPPipeSync(cmd);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 2, 0, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
+        cmd = D_80110634++;
+        gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 92, 92);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 0, 0, 1, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
+        cmd = D_80110634++;
+        gDPSetTileSize(cmd, 1, 0, 0, 60, 60);
+        }
+
+        func_802AAB3C_de(0x8C, 0x8C, 0x8C, 0x8C, 0x8C, 0x8C);
+        func_802AAB68_de(D_800C5FB0_de, D_800C5FB0_de);
+        D_801377B8[0] = 2;
+        D_801377B8[1] = 2;
     }
-    gSPTexture(D_80110634++, 32768, 32768, 0, 0, G_ON);
-    gDPSetTextureLUT(D_80110634++, G_TT_NONE);
-    gDPSetTexturePersp(D_80110634++, G_TP_NONE);
-    if (D_800E28D8 == 0) { gDPSetTextureFilter(D_80110634++, G_TF_POINT); } else { gDPSetTextureFilter(D_80110634++, G_TF_BILERP); }
 }
 
 extern Gfx *D_80110634;
 
-void func_802A9364_de(void *pTexture, void *pOpacity, int XPos, int YPos, int TextureWidth, int TextureHeight) {
-    { gDPSetTextureImage(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pOpacity); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(D_80110634++); gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(D_80110634++); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
-    { gDPSetTextureImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(D_80110634++); gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, (u32)((((TextureWidth*TextureHeight-1)<2047?(TextureWidth*TextureHeight-1):2047))), (u32)((((1<<11)+(1>(TextureWidth*2/8)?1:(TextureWidth*2/8))-1)/(1>(TextureWidth*2/8)?1:(TextureWidth*2/8))))); gDPPipeSync(D_80110634++); gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (u32)((((TextureWidth*2)+7)>>3)), 0, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
-    gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)((TextureWidth/16)), 256, 1, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-    gDPSetTileSize(D_80110634++, 1, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2)));
-    { Gfx *g=D_80110634++; gDPTexRect(g, XPos<<2, YPos<<2, (XPos+TextureWidth)<<2, (YPos+TextureHeight)<<2, 0); gDPHalf1(D_80110634++, 0); gDPHalf2(D_80110634++, (((u32)((1<<10)) & 0xFFFF) << ((16)))|(((u32)((1<<10)) & 0xFFFF) << ((0)))); }
-}
+extern s32 func_802AADBC_de(void);
 
-extern Gfx *D_80110634;
+void func_802A8710_de(void) {
+    Gfx *cmd;
+    s32 v0;
 
-void func_802A9734_de(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY) {
- int dsdx=1024,dtdy; int xl,yl,xh,yh;
- if(ScaleX!=0.0f) dsdx=dsdx/ScaleX;
- dtdy=1024;
- if(ScaleY!=0.0f) dtdy=dtdy/ScaleY;
- xl=XPos*D_800C61B8_de; xh=(XPos+TextureWidth*ScaleX)*D_800C61B8_de;
- yl=YPos*D_800C61B8_de; yh=(YPos+TextureHeight*ScaleY)*D_800C61B8_de;
-
-    { gDPSetTextureImage(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pOpacity); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(D_80110634++); gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(D_80110634++); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
-    { gDPSetTextureImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(D_80110634++); gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, (u32)((((TextureWidth*TextureHeight-1)<2047?(TextureWidth*TextureHeight-1):2047))), (u32)((((1<<11)+(1>(TextureWidth*2/8)?1:(TextureWidth*2/8))-1)/(1>(TextureWidth*2/8)?1:(TextureWidth*2/8))))); gDPPipeSync(D_80110634++); gDPSetTile(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, (u32)((((TextureWidth*2)+7)>>3)), 0, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
-    gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)((TextureWidth/16)), 256, 1, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0);
-    gDPSetTileSize(D_80110634++, 1, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2)));
-    gDPTexRect(D_80110634++,
-        (s16)xl > 0 ? (s16)xl : 0, (s16)yl > 0 ? (s16)yl : 0,
-        (s16)xh > 0 ? (s16)xh : 0, (s16)yh > 0 ? (s16)yh : 0,
-        G_TX_RENDERTILE);
-    gDPHalf1(D_80110634++, (((u32)((((short)xl<0 ? ((short)dsdx<0 ? -(((((short)xl*(short)dsdx)>>7))>((0))?((((short)xl*(short)dsdx)>>7)):((0))) : -(((((short)xl*(short)dsdx)>>7))<((0))?((((short)xl*(short)dsdx)>>7)):((0)))) : 0))) & 0xFFFF) << ((16)))
-      | (((u32)(((yl<0 ? ((short)dtdy<0 ? -(((((short)yl*(short)dtdy)>>7))>((0))?((((short)yl*(short)dtdy)>>7)):((0))) : -(((((short)yl*(short)dtdy)>>7))<((0))?((((short)yl*(short)dtdy)>>7)):((0)))) : 0))) & 0xFFFF) << ((0))));
-    gDPHalf2(D_80110634++, (((u32)((dsdx)) & 0xFFFF) << ((16)))|(((u32)((dtdy)) & 0xFFFF) << ((0))));
-}
-
-/* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at the given position. Adapted from func_802A9364_de with the palette block and the second texture block removed and its first block's image pointer taken from the texture argument. */
-
-extern Gfx *D_80110634;
-
-void func_802A9CD0_de(void *pTexture, int XPos, int YPos, int TextureWidth, int TextureHeight) {
-    { gDPSetTextureImage(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(D_80110634++); gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(D_80110634++); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
-    { Gfx *g=D_80110634++; gDPTexRect(g, XPos<<2, YPos<<2, (XPos+TextureWidth)<<2, (YPos+TextureHeight)<<2, 0); gDPHalf1(D_80110634++, 0); gDPHalf2(D_80110634++, (((u32)((1<<10)) & 0xFFFF) << ((16)))|(((u32)((1<<10)) & 0xFFFF) << ((0)))); }
-}
-
-/* Appends display-list commands to D_80110634 that load a 4-bit texture block of the given size and draw it as a texture rectangle at a floating-point position, stretched by the given horizontal and vertical scales with the texture steps divided by them. Adapted from func_802A9CD0_de with the position made floating point, the rectangle corners scaled by D_800C61BC_de and the scale factors applied to the extent and the texture step. */
-
-extern Gfx *D_80110634;
-extern f32 D_800C61BC_de;
-void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY) {
-    int dsdx;
-    int dtdy;
-    int xl, yl, xh, yh;
-
-    dsdx = 1 << 10;
-    if (ScaleX != 0.0f) {
-        dsdx = dsdx / ScaleX;
+    v0 = func_802AADBC_de();
+    if (v0 != 0) {
+        D_80147150 = 1;
+        cmd = D_80110634++;
+        gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32) v0);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
+        cmd = D_80110634++;
+        gDPLoadSync(cmd);
+        cmd = D_80110634++;
+        gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 31, 2048);
+        cmd = D_80110634++;
+        gDPPipeSync(cmd);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 1, 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
+        cmd = D_80110634++;
+        gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 60, 28);
     }
-    dtdy = 1 << 10;
-    if (ScaleY != 0.0f) {
-        dtdy = dtdy / ScaleY;
+}
+
+extern Gfx *D_80110634;
+
+extern s32 func_802AADBC_de(void);
+
+void func_802A8800_de(void) {
+    Gfx *cmd;
+    s32 v0;
+
+    v0 = func_802AADBC_de();
+    if (v0 != 0) {
+        D_80147150 = 2;
+        cmd = D_80110634++;
+        gDPSetTextureImage(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32) v0);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
+        cmd = D_80110634++;
+        gDPLoadSync(cmd);
+        cmd = D_80110634++;
+        gDPLoadBlock(cmd, G_TX_LOADTILE, 0, 0, 31, 2048);
+        cmd = D_80110634++;
+        gDPPipeSync(cmd);
+        cmd = D_80110634++;
+        gDPSetTile(cmd, G_IM_FMT_I, G_IM_SIZ_4b, 1, 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 3, 0, G_TX_WRAP, 4, 0);
+        cmd = D_80110634++;
+        gDPSetTileSize(cmd, G_TX_RENDERTILE, 0, 0, 60, 28);
     }
-    xl = XPos * D_800C61BC_de;
-    xh = (XPos + TextureWidth * ScaleX) * D_800C61BC_de;
-    yl = YPos * D_800C61BC_de;
-    yh = (YPos + TextureHeight * ScaleY) * D_800C61BC_de;
-    { gDPSetTextureImage(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 1, (u32)pTexture); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, G_TX_LOADTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPLoadSync(D_80110634++); gDPLoadBlock(D_80110634++, G_TX_LOADTILE, 0, 0, (u32)((((((TextureWidth*TextureHeight+3)>>2)-1)<2047?(((TextureWidth*TextureHeight+3)>>2)-1):2047))), (u32)((((1<<11)+(1>(TextureWidth/16)?1:(TextureWidth/16))-1)/(1>(TextureWidth/16)?1:(TextureWidth/16))))); gDPPipeSync(D_80110634++); gDPSetTile(D_80110634++, G_IM_FMT_I, G_IM_SIZ_4b, (u32)(((((TextureWidth>>1)+7)>>3))), 256, G_TX_RENDERTILE, 0, G_TX_WRAP, 0, 0, G_TX_WRAP, 0, 0); gDPSetTileSize(D_80110634++, G_TX_RENDERTILE, 0, 0, (u32)(((TextureWidth-1)<<2)), (u32)(((TextureHeight-1)<<2))); }
-    { Gfx *g=D_80110634++; gDPTexRect(g, xl, yl, xh, yh, 0); gDPHalf1(D_80110634++, 0); gDPHalf2(D_80110634++, (((u32)((dsdx)) & 0xFFFF) << ((16)))|(((u32)((dtdy)) & 0xFFFF) << ((0)))); }
 }

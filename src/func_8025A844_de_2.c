@@ -9,7 +9,7 @@
 extern void func_8025AA2C_de(View_func_8025AB94_de *);
 
 extern void func_802B2F00_de(char *, s32);
-extern void func_802B2E80_de(char *, f32);
+extern void alSndpSetPitch(char *, f32);
 
 static inline char *selectChannel(ContextRecAt104 *context, s32 slot) {
     func_802B2F00_de(context->channels, context->slots[slot]);
@@ -22,7 +22,7 @@ static inline void apply(ContextRecAt104 *context, s32 slot, f32 value, View_fun
     func_802B2F00_de(channel, context->slots[slot]);
     value *= view->motion.factor;
     value *= view->scale;
-    func_802B2E80_de(channel, value);
+    alSndpSetPitch(channel, value);
 }
 
 void func_8025AB94_de(View_func_8025AB94_de *view) {
@@ -77,7 +77,7 @@ clamp_done:;
                 }
                 motion->heading = result;
                 channel = selectChannel(view->context, view->slot);
-                func_802B2E80_de(channel, result * view->motion.factor * view->scale);
+                alSndpSetPitch(channel, result * view->motion.factor * view->scale);
                 return;
             }
         }

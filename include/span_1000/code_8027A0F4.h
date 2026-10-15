@@ -6,7 +6,6 @@
 #include "common/types_8fd754e1e915.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct Actor_func_80281A9C_de;
 typedef struct Actor_func_80281A9C_de Actor_func_80281A9C_de;
 

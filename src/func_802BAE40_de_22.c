@@ -13,14 +13,14 @@ extern void func_802BB750_de(void *value);
 extern struct IntPair D_80149B10[];
 
 s32 func_802BB420_de(OSMesgQueue *queue, s32 entry, s32 mode) {
-    extern void func_802BCF50_de(s32 value);
+    extern void __osRestoreInt(s32 value);
     extern s32 func_802BCF30_de(void);
     s32 saved;
 
     saved = func_802BCF30_de();
     while (queue->validCount >= queue->msgCount) {
         if (mode != 1) {
-            func_802BCF50_de(saved);
+            __osRestoreInt(saved);
             return -1;
         }
         D_800D5270->state = 8;
@@ -31,12 +31,12 @@ s32 func_802BB420_de(OSMesgQueue *queue, s32 entry, s32 mode) {
     if (*queue->mtqueue != 0) {
         func_802BB750_de(func_802BC558_de(queue));
     }
-    func_802BCF50_de(saved);
+    __osRestoreInt(saved);
     return 0;
 }
 
 void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2) {
-    extern void func_802BCF50_de(u32);
+    extern void __osRestoreInt(u32);
     extern u32 func_802BCF30_de(void);
     u32 temp_v0;
     struct IntPair *e;
@@ -45,5 +45,5 @@ void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2) {
     ;
     (&D_80149B10[arg0])->field_0 = arg1;
     (*(&D_80149B10[arg0])).field_4 = arg2;
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }

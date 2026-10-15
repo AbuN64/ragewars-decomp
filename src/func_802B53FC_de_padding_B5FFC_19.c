@@ -5,6 +5,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "types.h"
+#include "code_802BAC64.h"
 
 /* alResamplePull, drafted from ultralib src/audio/resample.c: at unity pitch pull the source and
    move its output; otherwise clip and quantise the pitch ratio, pull the input sample count it

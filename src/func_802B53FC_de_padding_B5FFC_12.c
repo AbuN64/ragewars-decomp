@@ -5,7 +5,7 @@
 
 extern void func_802B1A40_de(void *arg0, s32 arg1);
 
-extern void func_802B1AC0_de(void *arg0, void *arg1, s32 arg2);
+extern void __setInstChanState(void *arg0, void *arg1, s32 arg2);
 
 /* __vsVol, drafted from ultralib src/audio/seqplayer.c: combine a voice's tremolo, velocity and
    envelope gain with its sound's sample volume, the player volume and the channel volume. */
@@ -33,7 +33,7 @@ s16 func_802B1814_de(ALVoiceState *vs, ALSeqPlayer *seqp)
 }
 
 /** Clamp (record - arg1) at a lower bound of 0x3E8 for negative results. */
-int func_802B1888_de(void *arg0, int arg1) {
+int __vsDelta(void *arg0, int arg1) {
     struct ALVoiceState *voice = arg0;
     int v = voice->envEndTime - arg1;
     if (v >= 0) {
@@ -68,13 +68,13 @@ void func_802B18E4_de(void *arg0, void *arg1) {
     if (((ALSeqPlayer *)arg0)->maxChannels != 0) {
         do {
             func_802B1A40_de(arg0, i);
-            func_802B1AC0_de(arg0, found, i);
+            __setInstChanState(arg0, found, i);
             i += 1;
         } while (i < ((ALSeqPlayer *)arg0)->maxChannels);
     }
     if (((ALBank_s *)arg1)->percussion != 0) {
         func_802B1A40_de(arg0, i);
-        func_802B1AC0_de(arg0, ((ALBank_s *)arg1)->percussion, 9);
+        __setInstChanState(arg0, ((ALBank_s *)arg1)->percussion, 9);
     }
 }
 

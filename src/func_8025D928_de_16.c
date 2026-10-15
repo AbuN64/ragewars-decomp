@@ -52,7 +52,7 @@ extern s32 func_802B6480_de(void *, s32, void *);
 extern s32 func_802B3DB8_de(ALSynth4C *, s32);
 
          /* _timeToSamplesNoRound */
-extern void func_802B3C7C_de(ALSynth4C *);
+extern void _collectPVoices(ALSynth4C *);
 
 s32 func_802B2450_de(s32);
 
@@ -178,11 +178,11 @@ Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
     }
 
     *cmdLen = (s32)(cmdlEnd - cmdList);
-    func_802B3C7C_de(drvr);
+    _collectPVoices(drvr);
     return cmdlEnd;
 }
 
-void *func_802B3BF8_de(void) {
+void *__allocParam(void) {
     extern func_802B8CC8_S1 *D_800D4070;
     void *temp_v0;
     void *var_v1;
@@ -197,7 +197,7 @@ void *func_802B3BF8_de(void) {
     return var_v1;
 }
 
-void func_802B3C24_de(void *arg0) {
+void __freeParam(void *arg0) {
     extern void *D_800D4070;
     struct ALParam_s1C *parameter = arg0;
     ALGlobals *head = D_800D4070;
@@ -205,7 +205,7 @@ void func_802B3C24_de(void *arg0) {
     head->drvr.paramList = arg0;
 }
 
-void func_802B3C3C_de(s32 arg0, s32 arg1) {
+void _freePVoice(s32 arg0, s32 arg1) {
     s32 func_802B2480_de(s32, s32);
     func_802B2450_de(arg1);
     func_802B2480_de(arg1, arg0 + 0x14);

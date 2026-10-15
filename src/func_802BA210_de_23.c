@@ -22,7 +22,7 @@ extern OSIoMesg_func_802BA350_de D_80149AE0;
 extern void D_002BA4C0(void *arg);
 
 
-extern void func_802BAC60_de(OSMesgQueue *mq, OSMesg *msg, s32 count);
+extern void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 count);
 extern void func_802BB550_de(s32 event, OSMesgQueue *mq, OSMesg msg);
 extern s32 func_802BADA0_de(OSThread *t);
 extern void func_802BB5F0_de(OSThread *t, s32 pri);
@@ -30,7 +30,7 @@ extern void func_802BAC90_de(OSThread *t, s32 id, void (*entry)(void *), void *a
 
 extern void func_802BB750_de(OSThread *t);
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern void __osRestoreInt(u32 mask);
 
 void func_802BA350_de(s32 pri)
 {
@@ -42,7 +42,7 @@ void func_802BA350_de(s32 pri)
         return;
     }
     func_802BB9F8_de();
-    func_802BAC60_de(&D_80149A80, D_80149AA0, 5);
+    osCreateMesgQueue(&D_80149A80, D_80149AA0, 5);
     D_80149AC0.hdr.type = 13;
     D_80149AC0.hdr.pri = 0;
     D_80149AC0.hdr.retQueue = 0;
@@ -70,7 +70,7 @@ void func_802BA350_de(s32 pri)
     func_802BAC90_de(&D_80148850, 0, D_002BA4C0, &D_800D4420, D_8014ED10_de + 0x1000 / sizeof(u64), pri);
     func_802BA210_de();
     func_802BB750_de(&D_80148850);
-    func_802BCF50_de(savedMask);
+    __osRestoreInt(savedMask);
 
     if (oldPri != -1) {
         func_802BB5F0_de(0, oldPri);

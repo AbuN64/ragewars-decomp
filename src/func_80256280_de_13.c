@@ -50,7 +50,7 @@ void func_80256C90_de(void) {
     argument = stop;
     frame = stop;
     previous = 0;
-    func_8028F864_de(&D_80142928, messages, (s32)D_80107E00);
+    osScAddClient(&D_80142928, messages, (s32)D_80107E00);
     do {
         D_800CB710 = ((func_802BADC0_de() - previous) << 6) / 3000ULL;
         func_802BB2A0_de((void *)D_80107E00, &event.message, 1);
@@ -103,7 +103,7 @@ s32 func_80256EA8_de(Work56EC8 *arg0, u32 unused)
   {
     arg0->base = D_80107E20[D_800CB708];
     arg0->offset = ((((s32) item) - ((s32) D_80107E20[D_800CB708])) >> 3) << 3;
-    func_802BD2F0_de();
+    osWritebackDCacheAll();
     func_8028FD4C_de(&D_80142928, arg0->payload);
     D_800CB708 ^= 1;
     func_8025E23C_de();

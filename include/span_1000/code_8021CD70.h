@@ -6,7 +6,6 @@
 #include "common/types_8fd754e1e915.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct SharedPlayer;
 typedef struct SharedPlayer SharedPlayer_func_802227F4_de;
 

@@ -17,7 +17,7 @@ int func_802BB6C0_de(Node802C07B0 *node, u64 arg1, u64 arg2, void *arg3, void *a
     }
     node->field18 = arg3;
     node->field1C = arg4;
-    value = func_802BBAAC_de(node);
+    value = __osInsertTimer(node);
     if (*(void **)D_800D5280 == node) {
         func_802BBA4C_de(value);
     }

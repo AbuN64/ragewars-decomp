@@ -30,5 +30,5 @@ void func_802BBC20_de(void)
   ((OSThread_s *)(new_var = (s8 *) D_800D5270))->state = (new_var3 = 2);
   new_var2 = &D_800D5268_de;
   func_802BC36C_de(new_var2, new_var3);
-  func_802BCF50_de(temp_s0);
+  __osRestoreInt(temp_s0);
 }

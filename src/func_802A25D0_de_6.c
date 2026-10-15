@@ -1,57 +1,100 @@
-#include "types.h"
-#include "gfx.h"
-#include "gbi.h"
-
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802A25C4.h"
-#include "span_1000/code_80291054.h"
-#include "span_1000/code_8022F3E8.h"
-#include "span_C76B0/data.h"
-#include "shared/ribbon_draw.h"
+#include "types.h"
+#include "common/unused.h"
+#include "shared/func_8021E2A0_de_closed.h"
 
-void func_802A3DD4_de(func_802A66B4_S1 *pool, Actor_func_802A274C_de *actor) {
-    Morph storage;
-    Morph *morph = &storage;
-    ObjRecAt28V1 *clock, *next;
-    Vtx *vertices;
-    u32 count, i;
-    s32 edges;
-    morph->blends = actor->track->blends;
-    morph->count = actor->track->count;
-    if (actor->flags & 2) { morph->first = actor->first; morph->second = actor->second; }
-    else { morph->first = actor->first; morph->second = actor->first; }
-    morph->scaleS = actor->track->scaleS * D_800C5E08_de;
-    morph->scaleT = actor->track->scaleT * D_800C5E08_de;
-    clock = actor->clock;
-    next = clock->next;
-    count = actor->track->count;
-    edges = count - 1;
-    gSPMatrix(D_80110634++, &clock->matrix[D_800D297C], G_MTX_LOAD);
-    while (clock != 0 && next != 0 && 0.0f < clock->unk8 && 0.0f < next->unk8) {
-        vertices = func_802A56C4_de(pool, count);
-        if (vertices == 0) break;
-        func_802A274C_de(actor, clock, vertices, &storage);
-        gSPVertex(D_80110634++, vertices, count, 0);
-        gSPMatrix(D_80110634++, &next->matrix[D_800D297C], G_MTX_LOAD);
-        vertices = func_802A56C4_de(pool, count);
-        if (vertices == 0) return;
-        func_802A274C_de(actor, next, vertices, &storage);
-        gSPVertex(D_80110634++, vertices, count, count);
-        i = 0;
-        while ((s32)i < edges) {
-            { Gfx *cmd = D_80110634++;
-              cmd->words.w0 = (((i * 2 & 255) << 16) | (((count + i) * 2 & 255) << 8) | ((count + i + 1) * 2 & 255)) | (G_TRI2 << 24);
-              cmd->words.w1 = ((i * 2 & 255) << 16) | (((count + i + 1) * 2 & 255) << 8) | ((i + 1) * 2 & 255);
-            }
-            i++;
-        }
-        if (actor->track->closed) {
-            { Gfx *cmd = D_80110634++;
-              cmd->words.w0 = (((i * 2 & 255) << 16) | (((count + i) * 2 & 255) << 8) | (count * 2 & 255)) | (G_TRI2 << 24);
-              cmd->words.w1 = ((i * 2 & 255) << 16) | ((count * 2 & 255) << 8);
-            }
-        }
-        clock = next;
-        next = clock->next;
 
+
+
+
+
+
+
+
+extern void func_802A5780_de(s32, State_func_802A2FA4_de *, Node_func_802A2FA4_de *);
+extern void func_802A5FF0_de(State_func_802A2FA4_de *);
+
+
+
+
+s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
+    LevelActor *object;
+    Node_func_802A2FA4_de *node;
+    Node_func_802A2FA4_de *next;
+    f32 saved_step;
+    f32 zero;
+    f32 decay;
+    f32 cutoff;
+    f32 value;
+    f32 updated;
+
+    saved_step = D_800D2988;
+    if (state->flags & 2) {
+        D_800D2988 = saved_step * D_800CD740_de;
     }
+    if (state->flags & 1) {
+        D_800D2988 *= (&D_800D2988)[1];
+    }
+    if (state->flags & 8) {
+        state->retries++;
+        if (state->retries >= 3) {
+            state->object = 0;
+        }
+    }
+
+    if (state->count_up >= 0.0f) {
+        state->total += D_800D2988;
+    }
+    state->timer -= D_800D2988;
+    if (state->timer < 0.0f) {
+        state->timer = 0.0f;
+    }
+
+    node = state->nodes;
+    if (node != 0) {
+        zero = 0.0f;
+        decay = D_800C5DE0_de[1];
+        cutoff = D_800C5DE8_de[0];
+        do {
+            next = node->next;
+            if (state->timer <= zero && node->value > zero) {
+                node->value = zero;
+            }
+            value = node->value;
+            if (value <= zero) {
+                updated = value - decay;
+                node->value = updated;
+                if (updated < cutoff) {
+                    func_802A5780_de(arg0, state, node);
+                }
+            } else {
+                updated = value - D_800D2988;
+                node->value = updated;
+                if (updated < zero) {
+                    node->value = zero;
+                }
+            }
+            node = next;
+        } while (node != 0);
+    }
+
+    object = state->object;
+    if (state->object != 0 && (state->flags & 1) &&
+        !(object->flags & 0x200)) {
+        func_802A5FF0_de(state);
+    }
+    D_800D2988 = saved_step;
+
+    if (state->active == 0) {
+        if (state->timer != 0.0f) {
+            if (state->object == 0) {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+    return 1;
 }

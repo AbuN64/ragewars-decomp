@@ -7,7 +7,6 @@
 
 #include "common/types_8a8189af7b05.h"
 #include "shared/level_actor.h"
-#include "shared/level_actor.h"
 
 /* Player-transition records from origin/legacy shared headers. */
 

@@ -30,10 +30,10 @@ s32 func_802B7560_de(s32 arg0) {
     p = &D_8014D4B0;
     if (*p != 1) {
         func_802B768C_de();
-        func_802B9CB0_de(1, &D_8014D470);
+        __osSiRawStartDma(1, &D_8014D470);
         func_802BB2A0_de(arg0, 0, 1);
     }
-    result = func_802B9CB0_de(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &D_8014D470);
     *p = 1;
     func_802B9C80_de();
     return result;
@@ -102,16 +102,16 @@ s32 func_802B7740_de(s32 arg0, s32 arg1) {
 
         func_802B784C_de();
         data = &D_8014D470;
-        func_802B9CB0_de(1, data);
+        __osSiRawStartDma(1, data);
         func_802BB2A0_de(arg0, 0, 1);
-        func_802B9CB0_de(0, data);
+        __osSiRawStartDma(0, data);
         func_802BB2A0_de(arg0, 0, 1);
         func_802B7A20_de(sentinel);
-        func_802B9CB0_de(1, data);
+        __osSiRawStartDma(1, data);
         func_802BB2A0_de(arg0, 0, 1);
         *state = sentinel;
     }
-    result = func_802B9CB0_de(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &D_8014D470);
     func_802BB2A0_de(arg0, 0, 1);
     func_802B7AD8_de(&output, arg1);
     func_802B9C80_de();
@@ -152,19 +152,19 @@ s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
     *initialized = 1;
     value = func_802BADC0_de();
     if (value <= 0x0165A0BBULL) {
-        func_802BAC60_de(sp40, (s32)sp58, 1);
+        osCreateMesgQueue(sp40, (s32)sp58, 1);
         func_802BB6C0_de(sp20, 0x0165A0BCULL - value, 0, sp40, sp58);
         func_802BB2A0_de(sp40, (s32)sp58, 1);
     }
     D_8014D46C = 4;
     func_802B7A20_de(0);
-    func_802B9CB0_de(1, &D_8014D470);
+    __osSiRawStartDma(1, &D_8014D470);
     func_802BB2A0_de(arg0, (s32)sp58, 1);
-    result = func_802B9CB0_de(0, &D_8014D470);
+    result = __osSiRawStartDma(0, &D_8014D470);
     func_802BB2A0_de(arg0, (s32)sp58, 1);
     func_802B7AD8_de(arg1, arg2);
     D_8014D4B0 = 0;
     func_802B9BC0_de();
-    func_802BAC60_de(&D_801471C0, (s32)&D_801471D8, 1);
+    osCreateMesgQueue(&D_801471C0, (s32)&D_801471D8, 1);
     return result;
 }

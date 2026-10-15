@@ -4,6 +4,7 @@
 #include "span_1000/code_802BCF1C.h"
 #include "span_1000/code_802BD1A8.h"
 #include "types.h"
+#include "sdk/libgultra.h"
 
 extern u8 D_8014D3E2;
 
@@ -129,7 +130,7 @@ void func_802AF990_us_rev1(void) {
             state.callback.word = word;
             if (word != 0) {
                 func_802BD170_de(1);
-                func_802BD2F0_de();
+                osWritebackDCacheAll();
                 func_802BD010_de(0x80000000, 0x800000);
                 ((void (*)(void))word)();
             }

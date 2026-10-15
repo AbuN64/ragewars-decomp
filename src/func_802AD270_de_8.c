@@ -7,7 +7,7 @@
 
 
 extern s32 func_802AE500_de(s32, s32);
-extern u32 func_802AEA2C_de(RuntimeState *, u32);
+extern u32 __readVarLen(RuntimeState *, u32);
 
 
 s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
@@ -98,7 +98,7 @@ s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result) {
         if ((command_value != 0xC0) && (command_value != 0xD0)) {
             result->second_data = func_802AE500_de(state, index);
             if ((result->status & 0xF0) == 0x90) {
-                result->extra2 = func_802AEA2C_de(state, index);
+                result->extra2 = __readVarLen(state, index);
             }
         } else {
             result->second_data = 0;

@@ -33,7 +33,6 @@
 #include "span_1000/code_802B243C.h"
 #include "span_1000/code_802B4730.h"
 #include "span_1000/code_802B53FC.h"
-#include "span_1000/code_802B8DD0.h"
 #include "span_1000/code_802B9ED8.h"
 #include "span_1000/code_802BA23C.h"
 #include "span_1000/code_802BBC68.h"

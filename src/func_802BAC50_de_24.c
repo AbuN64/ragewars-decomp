@@ -9,7 +9,7 @@
 extern OSThread_s *D_800D526C;
 extern void D_002BC76C(void);
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern void __osRestoreInt(u32 mask);
 
 void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, void *sp, s32 p)
 {
@@ -37,5 +37,5 @@ void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, v
     active = &D_800D526C;
     t->tlnext = *active;
     *active = t;
-    func_802BCF50_de(saveMask);
+    __osRestoreInt(saveMask);
 }

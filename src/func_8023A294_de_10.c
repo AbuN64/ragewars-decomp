@@ -23,7 +23,7 @@ extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 func_80265350_de(void);
 extern void func_802A001C_de(void *pool, s32 count, s32 size);
 extern void func_802AD370_de(s32 arg0, s32 arg1, s32 arg2, u32 addr, s32 arg4, s32 arg5);
-extern void func_802BAC60_de(void *list, void *data, s32 count);
+extern void osCreateMesgQueue(void *list, void *data, s32 count);
 extern void func_802BAC90_de(void *queue, s32 count, void *arg2, s32 arg3, void *data, s32 arg5);
 extern void func_802BB420_de(void *list, void *item, s32 arg2);
 extern void func_802BB550_de(s32 count, void *list, s16 *arg2);
@@ -49,7 +49,7 @@ void func_8023B9C0_eu(void) {
     fill(&D_800FF230, 0, sizeof(State_func_8023B9C0_eu));
     fill(D_800FF230.lookup, 0xFF, sizeof(D_800FF230.lookup));
     fill(D_800FF230.slots, 0xFF, sizeof(D_800FF230.slots));
-    func_802BD230_de();
+    osUnmapTLBAll();
     for (i = 0; i < 24; i++) {
         D_800FF230.entries[i].id = 0xFFFF;
         D_800FF230.entries[i].team = 0xFF;
@@ -63,9 +63,9 @@ void func_8023B9C0_eu(void) {
         func_8023CB60_de(&D_800FF230.fBF0, &D_800FF230.slots[i]);
         D_800FF230.slots[i].index = i;
     }
-    func_802BAC60_de(D_800FF230.list0, D_800FF230.list0Data, 0x21);
-    func_802BAC60_de(D_800FF230.list1, D_800FF230.list1Data, 8);
-    func_802BAC60_de(D_800FF230.list2, D_800FF230.list2Data, 8);
+    osCreateMesgQueue(D_800FF230.list0, D_800FF230.list0Data, 0x21);
+    osCreateMesgQueue(D_800FF230.list1, D_800FF230.list1Data, 8);
+    osCreateMesgQueue(D_800FF230.list2, D_800FF230.list2Data, 8);
     D_800FF230.fD5C = 0x400;
     D_800FF230.fD5E = 0x100;
     D_800FF230.lookupPtr = D_800FF230.lookup;

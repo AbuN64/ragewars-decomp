@@ -10,7 +10,7 @@ void *func_802BA640_de(void) {
 
 extern void *D_800D4414;
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
 void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2) {
     u32 temp_v0;
@@ -21,5 +21,5 @@ void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2) {
     rec->f10 = arg0;
     rec->f14 = arg1;
     rec->f2 = arg2;
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }

@@ -3,9 +3,9 @@
 
 extern void *D_800D4414;
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 
-void func_802BA1B0_de(s32 arg0) {
+void osViBlack(s32 arg0) {
     u32 temp_a0;
     u16 *ptr;
     u16 v;
@@ -19,5 +19,5 @@ void func_802BA1B0_de(s32 arg0) {
         v = *ptr & 0xFFDF;
     }
     *ptr = v;
-    func_802BCF50_de(temp_a0);
+    __osRestoreInt(temp_a0);
 }

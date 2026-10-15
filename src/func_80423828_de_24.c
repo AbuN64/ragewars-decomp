@@ -1,64 +1,73 @@
-#include "span_16E000/code_80423280.h"
-#include "shared/func_8042854C_de_closed.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "span_16E000/code_8041DF04.h"
 #include "span_16E000/code_804264F0.h"
+#include "types.h"
+#include "common/unused.h"
 
-/* Finds a menu item identifier in three selection tables, falling back to the first item of the second table. */
-extern int D_800E1AFC_de[],D_800E5B44[],D_800E1B7C[],D_800E5BC4[],D_800E1ACC_de[],D_800E5B14[];
+/* Places the models of the first two active players on the screen D_800E4690: calls
+   func_802A23C4_de(1) and func_802A2394_de, clears the word at 0xA58, and for each player whose 150-byte
+   status record in D_80146398 has byte 0x78 equal to one maps its kind byte at 0x80 to a 0x70-byte
+   row of D_800E3A58 through func_8041F140_de and shows object 0x38F plus the kind through
+   func_8041CAD8_de in the next 0x4A8-byte view from 0x20 of the screen, using layout 0 of the row
+   (uniform scale, position, float and word) for the first model and layout 2 for the second.
+   Returns zero. */
 
-void func_8042854C_de(u32 arg0, s32 arg1, s32 arg2) {
-    s32 id;
-    MenuWidget *element;
-    MenuWidget *field;
-    s32 value;
 
-    switch (arg0) {
-    case 0:
-        id = 0x1DF + ID_SHIFT;
-        if (arg2 == 0) {
-            id = 0x149 + OPTION_SHIFT;
+
+
+
+
+
+
+
+extern struct Screen_func_80426788_de *D_800E4690;
+extern struct Status D_80146398[];
+
+extern void func_802A2394_de();
+
+extern void func_8041CAD8_de(void *, s32, s32, s32, s32, Vec3, Vec3, f32, s32);
+
+s32 func_80426788_de(void) {
+    s32 shown;
+    s32 layout;
+    s32 view;
+    s32 row;
+    s32 i;
+    Vec3 scale;
+    struct Status *status;
+    s32 offset;
+
+    func_802A23C4_de(1);
+    func_802A2394_de();
+    shown = 0;
+    layout = 0;
+    i = 0;
+    offset = 0;
+    view = 0x20;
+    D_800E4690->wordA58 = 0;
+next:
+    status = (struct Status *)((char *)D_80146398 + offset);
+    if (status->active == 1) {
+        shown++;
+        row = func_8041F140_de(status->kind);
+        scale.x = D_800E3A58[row].scale[layout];
+        scale.y = D_800E3A58[row].scale[layout];
+        scale.z = D_800E3A58[row].scale[layout];
+        func_8041CAD8_de((char *)D_800E4690 + view, 9, status->kind + 0x38F, 0x4B, 0x5DC0, scale,
+                      D_800E3A58[row].position[layout], D_800E3A58[row].distance[layout],
+                      D_800E3A58[row].light[layout]);
+        view += 0x4A8;
+        layout = 2;
+        if (shown >= layout) {
+            goto done;
         }
-        break;
-    case 1:
-        id = 0x1E0 + ID_SHIFT;
-        if (arg2 == 0) {
-            id = 0x14C + OPTION_SHIFT;
-        }
-        break;
-    case 2:
-        id = 0x1E1 + ID_SHIFT;
-        if (arg2 == 0) {
-            id = 0x14D + OPTION_SHIFT;
-        }
-        break;
-    case 3:
-        id = 0x1E2 + ID_SHIFT;
-        if (arg2 == 0) {
-            id = 0x14E + OPTION_SHIFT;
-        }
-        break;
-    case 4:
-        id = 0x1E3 + ID_SHIFT;
-        if (arg2 == 0) {
-            id = 0x14F + OPTION_SHIFT;
-        }
-        break;
-    default:
-        id = 0x149 + OPTION_SHIFT;
-        break;
     }
-    /* the hub's Item view shares the MenuWidget prefix; this unit reads alpha and value through it */
-    element = (MenuWidget *) func_8040EC30_de(D_800E4690->root, id);
-    func_8040E8D8_de(func_8040EC30_de(element, 0x14B + OPTION_SHIFT), 0);
-    value = func_8042863C_de(arg1);
-    field = (MenuWidget *) func_8040EC30_de(element, 0x14A + OPTION_SHIFT);
-    field->alpha = 0x64;
-    field->value = value;
-}
-
-int func_8042863C_de(int id) {
- int i;
- for(i=0;i<8;i++) if(D_800E1AFC_de[i*4]==id) return D_800E5B44[i*4];
- for(i=0;i<4;i++) if(D_800E1B7C[i*4]==id) return D_800E5BC4[i*4];
- for(i=0;i<3;i++) if(D_800E1ACC_de[i*4]==id) return D_800E5B14[i*4];
- return D_800E5BC4[0];
+    i++;
+    offset += 150;
+    if (i < 4) {
+        goto next;
+    }
+done:
+    return 0;
 }

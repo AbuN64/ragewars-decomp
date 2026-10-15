@@ -659,8 +659,9 @@ extern Vector4f *func_802A5020_de(Vector4f *out, u32 bx, u32 by, u32 bz);
 struct func_802A697C_S1;
 typedef struct func_802A697C_S1 func_802A697C_S1;
 
-
-
-
+extern f32 D_800C5E28_de;
+extern f32 D_800C5E2C_de;
+extern f32 D_800C5E30_de;
+extern f32 D_800C5E34_de;
 
 #endif

@@ -7,7 +7,6 @@ typedef struct ViewFlags { s32 flags; } ViewFlags;
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 #include "common/types_1dc8418c21db.h"
-#include "types.h"
 #include "resident_event_handler.h"
 struct Triple;
 struct ObjRecAt260;

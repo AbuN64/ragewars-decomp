@@ -29,7 +29,6 @@ typedef struct ReadWordByte ReadWordByte;
 
 extern s32 func_802B1C68_us_rev1(u32 arg0);
 
-extern s32 func_802B1820_us_rev1(u8 *arg0);
 
 extern void func_802B1F74_us_rev1(s32 arg0);
 

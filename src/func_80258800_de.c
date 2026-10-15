@@ -9,7 +9,7 @@
 #include "types.h"
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_8025BE08_de(void *arg0, s32 arg1);
 extern void func_80259988_de(void *arg0, s32 arg1);
@@ -30,10 +30,10 @@ void func_80258800_de(void *arg0, s32 arg1) {
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
         }
     }
     func_8025BE08_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1);
@@ -48,16 +48,16 @@ void func_80258800_de(void *arg0, s32 arg1) {
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
         }
     }
 }
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_8025BF08_de(void *, s32);
 extern void func_802599EC_de(void *, s32);
 extern void func_802BB420_de(void *, s32, s32);
@@ -79,11 +79,11 @@ void func_802588D4_de(void *arg0, s32 arg1) {
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
     }
     func_8025BF08_de(var_a0, arg1);
@@ -93,15 +93,15 @@ void func_802588D4_de(void *arg0, s32 arg1) {
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(temp_s0, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_8025C008_de(void *arg0, s32 arg1);
 extern void func_80259A50_de(void *arg0, s32 arg1);
@@ -123,11 +123,11 @@ void func_802589A8_de(void *arg0, s32 arg1) {
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
     } else {
-        func_802BCF50_de(temp_a0);
+        __osRestoreInt(temp_a0);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
     }
     func_8025C008_de(var_a0, arg1);
@@ -137,11 +137,11 @@ void func_802589A8_de(void *arg0, s32 arg1) {
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 0) {
-        func_802BCF50_de(temp_v0);
+        __osRestoreInt(temp_v0);
         func_802BB420_de(temp_s0, 0, 1);
         return;
     }
-    func_802BCF50_de(temp_v0);
+    __osRestoreInt(temp_v0);
 }
 
 extern f32 D_800C3EE0_de[];
@@ -223,7 +223,7 @@ void *func_80258BF4_de(void *arg0, int arg1) {
 }
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 extern void func_8025B5F0_de(void *arg0, s32 arg1);
 extern void func_80259918_de(void *arg0, s32 arg1);
@@ -245,10 +245,10 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
         }
     }
     func_8025B5F0_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1);
@@ -264,10 +264,10 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
         }
     }
     func_8025D1BC_de((char *)arg0 + 0x2BC0);
@@ -318,10 +318,10 @@ void func_80258D48_de(void *object, int value) {
     ((ContextRecAt2BC0 *)(object))->field2BB8 = value;
 }
 
-/* Counts how many of an object's seventeen 0xCC-byte slots at 0x1DC0 hold a given owner, holding the object's lock at 0x110 (raised and released under interrupts disabled through func_802BCF30_de and func_802BCF50_de) around the scan. */
+/* Counts how many of an object's seventeen 0xCC-byte slots at 0x1DC0 hold a given owner, holding the object's lock at 0x110 (raised and released under interrupts disabled through func_802BCF30_de and __osRestoreInt) around the scan. */
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32);
+extern void __osRestoreInt(u32);
 extern void func_802BB420_de(void *arg0, s32 arg1, s32 arg2);
 
 
@@ -345,10 +345,10 @@ s32 func_80258D50_de(char *obj, s32 owner)
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_a0);
+            __osRestoreInt(temp_a0);
         }
     }
     for (i = 0; i < 17; i++) {
@@ -366,10 +366,10 @@ s32 func_80258D50_de(char *obj, s32 owner)
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 0) {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
             func_802BB420_de(temp_s0, 0, 1);
         } else {
-            func_802BCF50_de(temp_v0);
+            __osRestoreInt(temp_v0);
         }
     }
     return count;

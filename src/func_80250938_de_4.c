@@ -29,18 +29,18 @@ static inline void acquire(void) {
     s32 count = D_8010515C + 1;
     D_8010515C = count;
     if (count != 1) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB2A0_de(D_801047E0.lock, 0, 1);
-    } else func_802BCF50_de(token);
+    } else __osRestoreInt(token);
 }
 static inline void release(void) {
     u32 token = func_802BCF30_de();
     s32 count = D_8010515C - 1;
     D_8010515C = count;
     if (count != 0) {
-        func_802BCF50_de(token);
+        __osRestoreInt(token);
         func_802BB420_de(D_801047E0.lock, 0, 1);
-    } else func_802BCF50_de(token);
+    } else __osRestoreInt(token);
 }
 static inline void find(u32 key, ResourceLoadRequest **out) {
     ResourceHashEntry *node = D_80101194 + (((key<<5)^(key>>1)^(key>>9)^(key>>17))&D_80101190);

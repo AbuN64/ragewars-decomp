@@ -17,7 +17,7 @@ s32 func_802B72E0_de(u32);
 void func_802B24A0_de(void *, void *);
 void func_802B2480_de(void *, void *);
 void *func_802B0340_de(s32, s32, void *, s32, u32);
-void func_802BAC60_de(void *, void *, s32);
+void osCreateMesgQueue(void *, void *, s32);
 void func_802BB550_de(s32, void *, s32);
 void *func_802A001C_de(void *, s32, u32);
 void func_802BAC90_de(void *, s32, void (*)(void), void *, void *, s32);
@@ -65,9 +65,9 @@ void func_80256880_de(AudioInitializeConfig *config, s32 priority, AudioInitiali
         work->task.stack = 0; work->task.stackSize = 0;
         work->task.output = 0; work->task.outputSize = 0;
     }
-    func_802BAC60_de(&D_80107E80, D_801076D0, 10);
-    func_802BAC60_de(&D_80107E00, D_801076A8, 10);
-    func_802BAC60_de(&D_80107DD8, D_80107EA8, 60);
+    osCreateMesgQueue(&D_80107E80, D_801076D0, 10);
+    osCreateMesgQueue(&D_80107E00, D_801076A8, 10);
+    osCreateMesgQueue(&D_80107DD8, D_80107EA8, 60);
     func_802BB550_de(6, &D_80107E00, 7);
     D_80107DFC = 0;
     D_80107EA0 = config->heap;

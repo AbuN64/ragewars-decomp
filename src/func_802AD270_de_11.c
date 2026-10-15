@@ -16,7 +16,7 @@ extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
 
 extern void func_802AFFC0_de(void *, void *, s32);
 
-extern void func_802B2FB0_de(s32, void *);
+extern void alSynAddPlayer(s32, void *);
 
 
 extern void func_802AFB6C_de(void *, ObjectState10_2 *);
@@ -27,9 +27,9 @@ extern s32 func_802B003C_de(void *, s16 *);
 
 extern void func_802B0258_de(void *, s16);
 
-extern void func_802B36F0_de(void *, void *);
+extern void alSynStopVoice(void *, void *);
 
-extern void func_802B3200_de(void *, void *);
+extern void alSynFreeVoice(void *, void *);
 
 extern void func_802B3480_de(void *, void *, s16, s32);
 
@@ -38,7 +38,7 @@ extern void func_802B33E0_de(void *, void *, f32);
 
 extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);
 
-extern s32 func_802B1888_de(void *, s32);
+extern s32 __vsDelta(void *, s32);
 
 extern void func_802B1B14_de(void *, void *, s32);
 
@@ -96,7 +96,7 @@ void func_802AEAB0_de(void *arg0, InitParams *arg1) {
         node->next = 0;
         node->handler = &D_002AEC20;
         node->clientData = node;
-        func_802B2FB0_de(D_800D4070, node);
+        alSynAddPlayer(D_800D4070, node);
     }
 }
 
@@ -127,8 +127,8 @@ ALMicroTime func_802AEC20_de(void *node)
             break;
         case 5: /* AL_NOTE_END_EVT */
             voice = seqp->nextEvent.msg.note.voice;
-            func_802B36F0_de(seqp->drvr, voice);
-            func_802B3200_de(seqp->drvr, voice);
+            alSynStopVoice(seqp->drvr, voice);
+            alSynFreeVoice(seqp->drvr, voice);
             vs = (ALVoiceState *)voice->clientPrivate;
             if (vs->flags)
                 func_802B1C34_de(seqp, vs);
@@ -152,7 +152,7 @@ ALMicroTime func_802AEC20_de(void *node)
             tremelo = (u32)oscValue;
             *tremeloSlot = tremelo;
             func_802B3480_de(seqp->drvr, &vs->voice, func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
-                          func_802B1888_de(vs, seqp->curTime));
+                          __vsDelta(vs, seqp->curTime));
             evt.type = 22;
             evt.msg.osc.vs = vs;
             evt.msg.osc.oscState = oscState;
@@ -183,7 +183,7 @@ ALMicroTime func_802AEC20_de(void *node)
             seqp->vol = seqp->nextEvent.msg.spvol.type;
             for (vs = seqp->vAllocHead; vs != 0; vs = vs->next) {
                 func_802B3480_de(seqp->drvr, &vs->voice, func_802B1814_de((ALVoiceState *)vs, (ALSeqPlayer *)seqp),
-                              func_802B1888_de(vs, seqp->curTime));
+                              __vsDelta(vs, seqp->curTime));
             }
             break;
         case 15: /* AL_SEQP_PLAY_EVT */
@@ -195,8 +195,8 @@ ALMicroTime func_802AEC20_de(void *node)
         case 16: /* AL_SEQP_STOP_EVT */
             if (seqp->state == 2) {
                 for (vs = seqp->vAllocHead; vs != 0; vs = seqp->vAllocHead) {
-                    func_802B36F0_de(seqp->drvr, &vs->voice);
-                    func_802B3200_de(seqp->drvr, &vs->voice);
+                    alSynStopVoice(seqp->drvr, &vs->voice);
+                    alSynFreeVoice(seqp->drvr, &vs->voice);
                     if (vs->flags)
                         func_802B1C34_de(seqp, vs);
                     func_802B156C_de((List802B663C *)seqp, &vs->voice);

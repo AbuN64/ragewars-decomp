@@ -2,6 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "types.h"
+#include "sdk/libgultra.h"
 
 extern s32 D_8014D3E8;
 

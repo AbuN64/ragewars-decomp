@@ -4,7 +4,6 @@
 #include "common/unused.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
-#include "types.h"
 struct func_80419D04_S1;
 struct func_80419D04_S1 {
     char pad0[0x4];

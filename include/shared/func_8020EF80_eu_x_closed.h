@@ -12,7 +12,6 @@ struct Shared_PickupGoalNode {
 };
 
 #include "common/unused.h"
-#include "types.h"
 
 extern PickupGoalNodeList D_8013B364;
 

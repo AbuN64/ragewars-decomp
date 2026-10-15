@@ -1,1 +1,2 @@
-unsigned char D_auto_func_802B2724_eu_x_padding_B8114[12] = { 0x8C, 0x44, 0x00, 0x0C, 0x8C, 0x82, 0x00, 0x08, 0x00, 0x40, 0xF8, 0x09 };
+/* Data separated from executable functions by the legacy split layout. */
+unsigned int func_802B28A8_eu_x[2] = { 0x8FB00010U, 0x03E00008U };

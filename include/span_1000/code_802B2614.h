@@ -1,7 +1,6 @@
 #include "types.h"
 #ifndef UNBAKE_SPAN_1000_CODE_802B2614_H
 #define UNBAKE_SPAN_1000_CODE_802B2614_H
-#include "types.h"
 #include "common/types_1dc8418c21db.h"
 struct Slot_func_802B2ED0_de;
 typedef struct Slot_func_802B2ED0_de Slot_func_802B2ED0_de;
@@ -38,7 +37,6 @@ struct ALSndPlayer {
 
 struct ALSndPlayer;
 union ALSndpEvent;
-extern void func_802B2780_de(struct ALSndPlayer * arg0, union ALSndpEvent * arg1);
 
 struct func_802B7D18_S2;
 struct func_802B7D18_S2 {
@@ -77,7 +75,6 @@ struct Slot_func_802B2ED0_de {
     char pad22[0xE];
 };
 
-extern s32 func_802B2BBC_de(void *node);
 
 struct ParamsRecAt8V2;
 struct ParamsRecAt8V2 {

@@ -2,7 +2,7 @@
 #include "span_C76B0/data.h"
 #include "common/unused.h"
 extern s32 func_802BCF30_de(void);
-extern void func_802BCF50_de(s32);
+extern void __osRestoreInt(s32);
 extern f32 func_80264EE0_de(PlayerRecAt8 *);
 
 f32 func_802856E0_de(func_80285D00_S1 *pool, Vec3 position) {
@@ -33,7 +33,7 @@ f32 func_802856E0_de(func_80285D00_S1 *pool, Vec3 position) {
             node = node->next;
         }
     }
-    func_802BCF50_de(mask);
+    __osRestoreInt(mask);
     if (value < 0.0f) return 0.0f;
     if (D_800C4EC8_de < value) return D_800C4EC8_de;
     return value;

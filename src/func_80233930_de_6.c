@@ -1,162 +1,57 @@
-#include "span_1000/code_802393F4.h"
-#include "abi.h"
-#include "common/types_8fd754e1e915.h"
+#include "shared/world.h"
 #include "span_1000/code_80233920.h"
-#include "span_1000/code_8026AC38.h"
-#include "n64sdk.h"
-#include "gbi.h"
-#include "span_1000/code_80255BEC.h"
-#include "types.h"
-#include "video_dimensions.h"
-#include "gfx.h"
-extern Gfx *D_80110634;
-extern Frame *D_8011BDC0;
-extern s32 D_800E28D0;
-extern s32 D_800E28D4;
+
+#include "shared/gameplay_camera.h"
+
+void func_80234DE0_de(char *);
+int func_80245798_de(void);
+void func_80245864_de(void *);
+f32 func_802459A0_de(void *);
+float func_80245AD8_de(void);
+void func_8026EF58_de(f32 *, f32 *);
+void func_8026F620_de(f32 *, f32 *, f32 *);
+void func_8026F898_de(f32 *, f32 *, f32 *);
+void func_8026FC9C_de(f32 *, void *);
+void func_802727D8_de(void *);
+void func_80272828_de(f32 *);
+void func_80272CB0_de(void *, f32, f32, f32);
+void func_8027302C(float *, float *);
+void func_802732D0_de(char *, float *);
+void func_802736D4_de(void *, f32);
+void func_802738C0_de(void *, f32);
+void func_80273A98_de(void *, f32);
+void func_80274244_de(f32 *, f32 *);
+
+extern void func_80274870_de(f32 *value, f32 target, f32 rate);
+f32 func_80275DD4_de(void *, f32, f32);
+int func_802A23B4_de(void);
+int func_802A23F0_de(void);
+
+void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
+
+f32 func_802B72B0_de(f32);
+void func_804428F8_de(void *);
+s32 func_802343C8_de();                        /* extern */
+void func_802349C0_de(void *);                        /* extern */
+s32 func_8023AFF0_de();                  /* extern */
+               /* extern */
+s32 func_802B6900_de(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
+
+extern void *D_80145060;
+extern s32 D_80141008;
 extern s32 D_800D297C;
-extern s32 D_80146894;
-extern f32 D_800FF224_de;
 extern f32 D_800D2988;
-extern World_func_80236F1C_de D_80145040;
-extern char D_800CBCC0;
-extern char D_800CBCF0_de;
-extern void func_80253BBC_de(s32, s32);
-extern void func_80235AE0_de(Racer *);
-extern void func_802362E8_de(Racer *, s32);
-extern void func_80239FD4_de(Racer *, s32);
-extern void func_80233C88_de(Racer *);
-extern void func_80238314_de(Race *, Racer *);
-extern void func_804429D4_de(void *);
-extern void func_802372D4_de(Racer *);
-extern s32 func_80245784_de(void);
-extern s32 func_80245798_de(void);
-extern void func_8022A3F8_de(World_func_80236F1C_de *, Racer *);
-/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to func_80253BBC_de, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or func_80245784_de or func_80245798_de reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
-void func_80236F1C_de(Race *race, s32 arg1)
-{
-    Racer *racer;
-    race->self.hit = 0;
-    race->self.boost = 0;
-    race->self.spin = 0;
-    if (race->header.music != 0) {
-        func_80253BBC_de(0, race->header.music);
-    }
-    if (D_80146894 != 0 || race->header.views.count == 3) {
-        D_800FF224_de = 30.0f;
-    }
-    if (D_800FF224_de != 0.0f) {
-        D_800FF224_de -= D_800D2988;
-    }
-    if (D_800FF224_de < 0.0f) {
-        D_800FF224_de = 0.0f;
-    }
-    if (D_800FF224_de != 0.0f) {
-        racer = race->header.views.head;
-        if (racer != 0) {
-            gDPPipeSync(D_80110634++);
-            gSPDisplayList(D_80110634++, ((&D_800CBCC0)));
-            gSPDisplayList(D_80110634++, ((&D_800CBCF0_de)));
-            racer->viewports[D_800D297C].vscale[0] = SCREEN_WD;
-            racer->viewports[D_800D297C].vscale[1] = SCREEN_HT;
-            racer->viewports[D_800D297C].vtrans[0] = SCREEN_WD;
-            racer->viewports[D_800D297C].vtrans[1] = SCREEN_HT;
-            gSPMoveMem(D_80110634++, G_MV_VIEWPORT, 0, 16, ((&racer->viewports[D_800D297C])));
-            gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (int)((float)((0)) * 4.0F), (int)((float)((0)) * 4.0F), (int)((float)((SCREEN_WD - 1)) * 4.0F), (int)((float)((SCREEN_HT - 1)) * 4.0F));
-            gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((D_8011BDC0->colorImage)));
-            gDPSetCycleType(D_80110634++, G_CYC_FILL);
-            gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
-            gDPSetRenderMode(D_80110634++, ((0)), 0);
-            gDPSetFillColor(D_80110634++, ((0x10001)));
-            gDPFillRectangle(D_80110634++, 0, 0, (SCREEN_WD), (SCREEN_HT));
-            func_8026D8F8_de();
-        }
-    }
-    for (racer = race->header.views.head; racer != 0;) {
-        func_80235AE0_de(racer);
-        func_802362E8_de(racer, arg1);
-        if (racer->effect != 0) {
-            func_80239FD4_de(racer, racer->effectArg);
-        }
-        func_80233C88_de(racer);
-        func_80238314_de(race, racer);
-        func_804429D4_de(racer->sound);
-        func_802372D4_de(racer);
-        if (func_80245784_de() != 0 || func_80245798_de() != 0) {
-            racer = 0;
-        } else {
-            racer = racer->next;
-        }
-    }
-    func_80235AE0_de(&race->self);
-    if (race->header.views.count == 0) {
-        func_80233C88_de(&race->self);
-    }
-    func_80238314_de(race, &race->self);
-    if (D_80145040.replay != 0) {
-        racer = race->header.views.head;
-        if (racer != 0) {
-            func_8022A3F8_de(&D_80145040, racer);
-        }
-    }
-    func_804429D4_de(race->self.sound);
-}
-
-
-void func_802372D4_de(Racer *racer) {
-    Entity_func_80233C88_de *entity = (Entity_func_80233C88_de *)racer;
-    f32 x;
-    f32 y;
-    f32 width;
-    f32 height;
-
-    func_8026D8F8_de();
-    x = entity->x;
-    y = entity->y;
-    width = entity->width;
-    height = entity->height;
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
-                     0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
-    gDPSetRenderMode(D_80110634++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-    gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, 0);
-    gDPFillRectangle(D_80110634++, x, y, (x + width) - 1.0f, y + 2.0f);
-    gDPFillRectangle(D_80110634++, x, (y + height) - 2.0f,
-                    (x + width) - 1.0f, (y + height) - 1.0f);
-    gDPFillRectangle(D_80110634++, x, y, x + 2.0f, (y + height) - 1.0f);
-    gDPFillRectangle(D_80110634++, (x + width) - 2.0f, y,
-                    (x + width) - 1.0f, (y + height) - 1.0f);
-    gDPPipeSync(D_80110634++);
-    gDPSetCycleType(D_80110634++, G_CYC_FILL);
-    gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE,
-                     0, 0, 0, SHADE, 0, 0, 0, SHADE);
-    gDPSetRenderMode(D_80110634++, G_RM_NOOP, G_RM_NOOP2);
-    gDPSetFillColor(D_80110634++, (1 << 16) | 1);
-    gDPFillRectangle(D_80110634++, x, y, (x + width) - 1.0f, y);
-    gDPFillRectangle(D_80110634++, x, (y + height) - 1.0f,
-                    (x + width) - 1.0f, (y + height) - 1.0f);
-    gDPFillRectangle(D_80110634++, x, y, x, (y + height) - 1.0f);
-    gDPFillRectangle(D_80110634++, (x + width) - 1.0f, y,
-                    x + width, (y + height) - 1.0f);
-}
-
-/* Posts a text as on-screen messages, one per line: when func_80245784_de reports it, the messages already in
- * the pool's list at 0xE40 are flagged kind 4 and the new ones get kind 1, otherwise kind 2; the text (or
- * D_800D7028 when given D_800D7034) is split at newlines and for each non-empty line the oldest message node
- * of the owner's list at 0xF24 is recycled and set up centred horizontally 80 pixels above the bottom of the
- * screen at unit size. Returns the last message node. */
-
-
-
-
-extern func_80237E70_G1 D_800D7028;
-
-extern func_80237E70_G1 D_800D7034;
-
+extern s32 D_800CD8D0; 
 extern s32 D_800E28D0;
-extern void func_80239CE0_de(void *arg0);
-extern void func_80255ED8_de(void *, Message *);
-extern s32 func_80245784_de(void);
+extern s32 D_800E28D4;                          /* unable to generate initializer: unknown type */
+typedef struct Shared_func_80234FDC_S1 func_80234FDC_S1;
+typedef struct GameplayCamera func_80234FDC_S2;
+typedef struct Shared_func_80234FDC_S3 SharedRecV11;
+typedef struct Shared_func_80234FDC_S4 func_80234FDC_S4;
+typedef struct Shared_func_80234FDC_S5 SharedRecAt0V2;
+typedef struct Shared_func_80234FDC_S6 SharedRecAt1A;
+typedef struct Shared_func_80234FDC_S7 SharedRecV9;
+typedef struct Shared_func_80234FDC_S8 func_80234FDC_S8;
 
 
 
@@ -164,83 +59,287 @@ extern s32 func_80245784_de(void);
 
 
 
+typedef struct Shared_Func_80234FDC_Callback Func_80234FDC_Callback;
+extern Func_80234FDC_Callback D_800CB384_de[];
+extern func_80234FDC_S4 D_80140FF8;
 
 
+/* unable to generate initializer: unknown type; const */
 
+/* Warning: Gap in callee-saved word stack region.
+ * Saved: [0x268, 0x26c, 0x270, 0x274, 0x278, 0x27c, 0x280, 0x284, 0x288, 0x298, 0x29c, 0x2a8, 0x2ac, 0x2b0, 0x2b4], gap at: 0x28c. */
+/* Updates the actor view and projection matrices and applies camera effects. */
+void func_80234FEC_de(GameplayCamera *arg0) {
+    f32 ground_x;
+    func_80234FDC_S8 *temp_s0_2;
+    f32 sp28[16];
+    f32 sp68[16];
+    f32 spA8[16];
+    f32 spE8[16];
+    f32 sp128[16];
+    f32 sp168[16];
+    f32 sp1A8[16];
+    f32 sp1E8[16];
+    f32 sp228[16];
+    s32 (*temp_v0)(s8 *);
+    f32 temp_f0;
+    f32 temp_f1;
+    f32 temp_f20_2;
+    f32 div_stage; 
+    f32 temp_f20_3;
+    f32 temp_f20_4;
+    f32 temp_f21;
+    f32 temp_f21_3;
+    f32 var_f22_2;
+    f32 temp_f22_3;
+    f32 temp_f23;
+    f32 initial_zoom; 
+    f32 temp_f23_3;
+    f32 temp_f24;
+    f32 temp_f2;
+    f32 var_f0;
+    f32 var_f0_2;
+    f32 var_f0_3;
+    f32 var_f0_4;
+    f32 var_f0_5;
+    f32 var_f0_6;
+    f32 var_f0_7;
+    f32 var_f1;
+    f32 var_f22;
+    f32 var_f4;
+    s32 temp_f5;
+    s32 temp_v0_4;
+    s32 captured_state; 
+    s32 var_v1_2;
+    s8 *temp_s0;
+    s8 *var_s1;
+    u16 temp_v0_2;
+    u16 temp_v0_3;
+    u16 var_v1_3;
 
+    SharedRecAt1A *temp_s4;
+    func_80234FDC_S1 *var_s5;
+    func_80234FDC_S1 *var_v1;
+    SharedRecAt0V2 *state; 
 
-static inline Message *recycle(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
-    Message *oldest;
-
-    oldest = owner->activeMessages.head;
-    if (oldest != 0) {
-        func_80239CE0_de(oldest);
-        func_80255ED8_de(&owner->activeMessages, oldest);
-        func_80255D14_de(&pool->freeMessages, oldest);
+    var_v1 = D_80145060;
+    while (var_v1 != 0) {
+        if (var_v1->unk5DC == arg0) {
+            var_s5 = var_v1;
+            goto actor_found;
+        }
+        var_v1 = var_v1->unk16E0;
     }
-    return oldest;
-}
-
-static inline Message *post_lines(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text, s32 kind, f32 size, s32 target) {
-    Message *message;
-    s32 height;
-    u8 *line;
-    u8 *p;
-
-    message = 0;
-    if (pool == 0) {
-        return message;
-    }
-    if (text == D_800D7034.unk0) {
-        text = D_800D7028.unk0;
-    }
-    p = text;
-    line = p;
-    while (*p != 0) {
-        p++;
-        if (*p == '\n' || *p == 0) {
-            if (line != p) {
-                message = recycle(owner, pool);
-                if (message != 0) {
-                    message->kind = kind;
-                    message->text = line;
-                    message->timer = 0;
-                    message->alpha = 1.0f;
-                    message->size = size * 15.0f;
-                    message->target = target;
-                    message->pad20 = 0;
-                    message->pad28 = 0;
-                    message->pad2C = 0;
-                    message->scaleX = 1.0f;
-                    message->scaleY = 1.0f;
-                    height = (&D_800E28D0)[1]; /* FAKEMATCH */
-                    message->x = D_800E28D0 / 2;
-                    message->y = height - 80;
-                }
-                line = p + 1;
-            }
+    var_s5 = 0;
+actor_found:
+    arg0->unk18 = (f32) (arg0->unk18 + D_800D2988);
+    func_802343C8_de(arg0);
+    arg0->unk7C = 1;
+    if (func_80245798_de() == 0) {
+        temp_v0 = D_800CB384_de[arg0->unk14].fn;
+        if (temp_v0 != 0) {
+            temp_v0(arg0);
         }
     }
-    return message;
-}
-
-Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
-    Message *pending;
-    s32 kind;
-
-    kind = 2;
-    if (pool == 0) {
-        return 0;
+    temp_s4 = &arg0->lights[D_800D297C];
+    func_802B6900_de(sp28, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
+    if ((func_80245798_de() != 0) && (arg0 != &D_80141008)) {
+        func_80245864_de(arg0);
     }
-    if (func_80245784_de() != 0) {
-        pending = pool->freeMessages.head;
-        if (pending != 0) {
-            kind = 1;
-            do {
-                pending->kind = 4;
-                pending = pending->next;
-            } while (pending != 0);
+    temp_f24 = arg0->unk5C;
+    initial_zoom = arg0->unk60;
+    func_802349C0_de(arg0);
+    if (func_80245798_de() == 0) {
+        func_802337D0_de(arg0->unkB8);
+        func_802337D0_de(arg0->unkCC);
+        func_802337D0_de(arg0->unkE0);
+    }
+    var_s1 = &arg0->unk160;
+    func_802732D0_de(var_s1, &arg0->position.x);
+    func_8026EF58_de(&arg0->unk1A0, (f32 *) var_s1);
+    func_802736D4_de(spA8, 3.1415927f);
+    func_8026F620_de(sp68, spA8, (f32 *) var_s1);
+    func_8026EF58_de(spE8, sp68);
+    func_8026F620_de(sp128, spE8, sp28);
+    func_8027302C(&arg0->unk220, sp128);
+    if ((var_s5 != 0) && (var_s5->unk664 & 0x40) && (arg0->unk24 == 0) && (func_80245798_de() == 0)) {
+        f32 temp_f20; 
+        var_f1 = (((arg0->unk88 * 0.5f * (func_802B7130_de(arg0->unk90) + 1.0f)) + 0.8f) > 1.0f) ? 1.0f : ((arg0->unk88 * 0.5f * (func_802B7130_de(arg0->unk90) + 1.0f)) + 0.8f);
+        arg0->unk80 = var_f1;
+        var_f4 = (((arg0->unk8C * 0.5f * (func_802B7130_de(arg0->unk94) + 1.0f)) + 0.9f) > 1.0f) ? 1.0f : ((arg0->unk8C * 0.5f * (func_802B7130_de(arg0->unk94) + 1.0f)) + 0.9f);
+        arg0->unk84 = var_f4;
+        arg0->unk90 = (f32) (arg0->unk90 + (D_800D2988 * arg0->unk98));
+        arg0->unk94 = (f32) (arg0->unk94 + (D_800D2988 * arg0->unk9C));
+        var_f22 = var_s5->unk6C8 * 2.5f;
+        var_f0 = 0.0f;
+        if ((var_f22 < 0.0f) || (var_f0 = 1.0f, (var_f22 > 1.0f))) {
+            var_f22 = var_f0;
+        }
+        func_80274870_de(&arg0->unk88, 0.1f, 0.5f);
+        func_80274870_de(&arg0->unk8C, 0.05f, 0.5f);
+        temp_f20 = 1.0f - var_f22;
+        func_80274870_de(&arg0->unk98, (var_f22 * 0.104719765f) + (temp_f20 * 0.06981318f), 0.16666667f);
+        func_80274870_de(&arg0->unk9C, (var_f22 * 0.087266475f) + (temp_f20 * 0.03490659f), 0.16666667f);
+    } else {
+        arg0->unk84 = 1.0f;
+        arg0->unk80 = 1.0f;
+    }
+    temp_v0_2 = arg0->unk124;
+    var_v1_2 = 0x32; 
+    if (temp_v0_2 != var_v1_2) {
+        arg0->unk84 = (f32) (((f32) (var_v1_2 - temp_v0_2) * 0.08f) + 1.0f);
+        temp_f2 = D_800D2988 * 10.0f;
+        if (!(temp_f2 >= 2.1474836e9f)) {
+            var_v1_2 = (s32) temp_f2;
+        } else {
+            var_v1_2 = (s32) (temp_f2 - 2.1474836e9f) | 0x80000000;
+        }
+        temp_v0_3 = arg0->unk124 + var_v1_2;
+        var_v1_3 = temp_v0_3;
+        arg0->unk124 = temp_v0_3;
+        if ((u32) (var_v1_3 & 0xFFFF) >= 0x33U) {
+            var_v1_3 = 0x32;
+        }
+        arg0->unk124 = var_v1_3;
+    }
+    if (func_80245798_de() != 0) {
+        var_f22_2 = func_802459A0_de(arg0);
+    } else {
+        temp_v0_4 = func_802A23B4_de();
+        if ((temp_v0_4 == 1) && (func_802A23F0_de() == temp_v0_4)) {
+            var_f22_2 = 45.0f;
+        } else if (temp_f24 != 0.0f) {
+            var_f22_2 = (temp_f24 * (initial_zoom - 75.0f)) + 75.0f;
+        } else {
+            var_f22_2 = 75.0f;
         }
     }
-    return post_lines(owner, pool, text, kind, 1.0f, -1);
+    if ((func_80245798_de() != 0) && (arg0 != &D_80141008)) {
+        temp_f23 = arg0->unk29C / arg0->unk2A0;
+    } else if (D_80140FF8.unk0 == 2) {
+        temp_f23 = 0.6666667f;
+        if (D_80140FF8.unk122F == 0) {
+            temp_f23 = 2.666666f;
+        }
+    } else {
+        temp_f23 = 1.333333f;
+    }
+    var_f22_2 = var_f22_2 * 0.017453294f;
+    temp_f21 = func_802B7130_de(var_f22_2);
+    temp_f21_3 = temp_f21 / func_802B6560_de(var_f22_2);
+    temp_f20_2 = temp_f21_3 * 1.2792794f;
+    temp_f21_3 = temp_f20_2 / temp_f23;
+    temp_f21_3 = temp_f21_3 / arg0->unk84;
+    temp_f20_3 = temp_f20_2 / arg0->unk80;
+    temp_f1 = 1.0f; 
+    var_f22_2 = func_802745D0_de(func_802B72B0_de(temp_f1 / ((temp_f21_3 * temp_f21_3) + 1.0f)));
+    var_f22_2 = var_f22_2 * 57.295776f; 
+    temp_f0 = arg0->unk528;
+    temp_f23 = temp_f20_3 / temp_f21_3;
+    arg0->unk70 = temp_f23;
+    arg0->unk6C = var_f22_2;
+    arg0->unk74 = (f32) (temp_f0 * temp_f20_3);
+    arg0->unk78 = (f32) (temp_f0 * temp_f21_3);
+    if (func_80245798_de() != 0) {
+        temp_f5 = (s32) func_80245AD8_de();
+        if (temp_f5 > 0) {
+            arg0->unk528 = (f32) temp_f5;
+        }
+    }
+    func_802B6F9C_de(sp168, &arg0->unk68, var_f22_2, temp_f23, 16.0f, arg0->unk528, 1.0f - (temp_f24 * 0.95f));
+    func_80272CB0_de(sp1A8, -1.0f, 1.0f, 1.0f);
+    func_8026F898_de(sp68, sp128, (f32 *) sp168);
+    temp_s0 = &arg0->unk1E0;
+    func_8026F898_de((f32 *) temp_s0, sp68, sp1A8);
+    func_80272828_de((f32 *) temp_s0);
+    func_8026FC9C_de((f32 *) temp_s0, arg0->unk380[D_800D297C]);
+    func_8027302C(sp1E8, sp128);
+    state = &D_80140FF8.state;
+    if (state->unk0 == 4) {
+        func_802738C0_de(sp1E8, arg0->unk18 * 0.010908309f);
+        func_80273A98_de(sp1E8, arg0->unk18 * 0.008726647f);
+    }
+    func_80272828_de(sp1E8);
+    var_f0_2 = sp1E8[0] * 128.0f;
+    if (!(var_f0_2 <= 127.0f)) {
+        var_f0_2 = 127.0f;
+    }
+    temp_s4->unk8 = (s8) (s32) var_f0_2;
+    var_f0_3 = sp1E8[4] * 128.0f;
+    if (!(var_f0_3 <= 127.0f)) {
+        var_f0_3 = 127.0f;
+    }
+    temp_s4->unk9 = (s8) (s32) var_f0_3;
+    var_f0_4 = sp1E8[8] * 128.0f;
+    if (!(var_f0_4 <= 127.0f)) {
+        var_f0_4 = 127.0f;
+    }
+    temp_s4->unkA = (s8) (s32) var_f0_4;
+    var_f0_5 = sp1E8[1] * 128.0f;
+    if (!(var_f0_5 <= 127.0f)) {
+        var_f0_5 = 127.0f;
+    }
+    temp_s4->unk18 = (s8) (s32) var_f0_5;
+    var_f0_6 = sp1E8[5] * 128.0f;
+    if (!(var_f0_6 <= 127.0f)) {
+        var_f0_6 = 127.0f;
+    }
+    temp_s4->unk19 = (s8) (s32) var_f0_6;
+    var_f0_7 = sp1E8[9] * 128.0f;
+    if (!(var_f0_7 <= 127.0f)) {
+        var_f0_7 = 127.0f;
+    }
+    temp_s4->unk1A = (s8) (s32) var_f0_7;
+    temp_s4->unk0 = 0;
+    temp_s4->unk1 = 0;
+    temp_s4->unk2 = 0;
+    temp_s4->unk3 = 0;
+    temp_s4->unk4 = 0;
+    temp_s4->unk5 = 0;
+    temp_s4->unk6 = 0;
+    temp_s4->unk7 = 0;
+    temp_s4->unk10 = 0;
+    temp_s4->unk11 = 0x80;
+    temp_s4->unk12 = 0;
+    temp_s4->unk13 = 0;
+    temp_s4->unk14 = 0;
+    temp_s4->unk15 = 0x80;
+    temp_s4->unk16 = 0;
+    temp_s4->unk17 = 0;
+    func_80234DE0_de(arg0);
+    func_80274244_de(&arg0->unk150, &arg0->unkE54);
+    func_802736D4_de(&arg0->unkE94, arg0->unk138);
+    if (D_80140FF8.unk8 != 0) {
+        func_802B6F9C_de(sp168, &arg0->unk440, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
+        func_802727D8_de(sp128);
+        func_8026F898_de(sp68, sp128, (f32 *) sp168);
+        func_80272CB0_de(sp1A8, -1.0f, 1.0f, 1.0f);
+        func_8026F898_de(sp228, sp68, sp1A8);
+        func_80272828_de(sp228);
+        func_8026FC9C_de(sp228, arg0->unk448[D_800D297C]);
+    }
+    func_8023AFF0_de(&arg0->unk570, arg0);
+    func_804428F8_de(&arg0->messageList);
+    if (func_80245798_de() != 0) {
+        arg0->unk58 = ((void *(*)())func_80286728_de)(&D_8011FE88, &arg0->unk38);
+    }
+    captured_state = D_800CD8D0;
+    arg0->unk64 = captured_state;
+    temp_s0_2 = arg0->unk58;
+    ground_x = arg0->unk38;
+    temp_f23_3 = arg0->unk3C;
+    temp_f20_4 = arg0->unk40;
+    temp_f22_3 = arg0->unk44;
+    if ((temp_s0_2 != 0) && (func_80245798_de() == 0)) {
+        temp_f1 = ((temp_f23_3 + temp_f22_3) - func_80275DD4_de(temp_s0_2, ground_x, temp_f20_4)) * 0.09765625f;
+        if ((temp_f1 < 11.0f) && (temp_f1 > 5.0f)) {
+            arg0->unk64 = (s32) temp_s0_2->unk1C;
+        }
+    }
+    if (func_80245798_de() != 0) {
+        arg0->unk64 = (s32) D_800CD8D0;
+    }
+    if (arg0->unk5C > 0.0f) {
+        arg0->unk64 = (s32) D_800CD8D0;
+    }
 }

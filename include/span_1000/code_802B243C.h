@@ -19,7 +19,6 @@ struct MidiState802B70B8 {
 struct ObjRecAt18V1;
 typedef struct ObjRecAt18V1 ObjRecAt18V1;
 
-extern u32 func_802B2120_de(ObjRecAt18V1 *seq, f32 sec, u32 tempo);
 
 extern double D_800C74E8_de;
 
@@ -59,7 +58,6 @@ typedef struct MidiState802B70B8 MidiState802B70B8;
 
 extern float D_800C74E0_de;
 
-extern f32 func_802B20D4_de(ObjRecAt18V1 *arg0, s32 arg1, s32 arg2);
 
 struct func_802B738C_S2;
 struct func_802B738C_S2 {
@@ -96,7 +94,7 @@ struct ALSeq_s {
 struct ALSeqMarker;
 typedef struct ALSeqMarker ALSeqMarker;
 
-extern void func_802B22D8_de(void *arg0, void *arg1);
+extern void alSeqGetLoc(void *arg0, void *arg1);
 
 struct func_802B738C_S2;
 typedef struct func_802B738C_S2 func_802B738C_S2;

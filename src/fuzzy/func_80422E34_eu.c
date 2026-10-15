@@ -3,8 +3,6 @@
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041A4B0.h"
 #include "types.h"
-#include "types.h"
-#include "common/types_1dc8418c21db.h"
 typedef struct Shared_OptionsScreen Shared_OptionsScreen;
 struct Shared_OptionsScreen {
     u32 unknown00[7];
@@ -49,7 +47,6 @@ struct Shared_MenuData {
     s32 pause;
 };
 
-#include "types.h"
 #include "shared/func_80425674_de_layout.h"
 
 extern Shared_OptionsScreen *D_800E4518;

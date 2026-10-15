@@ -24,10 +24,10 @@ extern s32 func_802B22F4_de(void *arg0, s32 *arg1);
 
 extern s32 func_802B20C8_de(void *arg0);
 
-extern void func_802B22BC_de(void *arg0, void *arg1);
+extern void alSeqSetLoc(void *arg0, void *arg1);
 
 /** Store a new history slot (pointer + selected byte/word fields) into the ring buffer at arg0+0x60. */
-void func_802B1AC0_de(void *arg0, void *arg1, s32 arg2) {
+void __setInstChanState(void *arg0, void *arg1, s32 arg2) {
     s32 stride = arg2 * 0x10;
 
     ((ALChanState10 *)(stride + (s32)((ALSeqPlayer *)arg0)->chanState))->instrument = arg1;
@@ -123,7 +123,7 @@ void func_802B1D24_de(void *arg0) {
         if ((((ObjectLinks88 *)(arg0))->unk_84 != 0) &&
             ((func_802B20C8_de(temp_s0) + sp20) >=
              ((struct func_80254D70_S2 *) ((ObjectLinks88 *) arg0)->unk_80)->unk8)) {
-            func_802B22BC_de(temp_s0, ((ObjectLinks88 *)(arg0))->unk_7C);
+            alSeqSetLoc(temp_s0, ((ObjectLinks88 *)(arg0))->unk_7C);
             temp_v1 = ((ObjectLinks88 *)(arg0))->unk_84;
             if (temp_v1 != -1) {
                 ((ObjectLinks88 *)(arg0))->unk_84 = temp_v1 - 1;

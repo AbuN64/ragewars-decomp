@@ -46,7 +46,7 @@ void func_8028EACC_de(OSSched *sc) {
         if (D_800CD704 == 0) func_802BB5F0_de(&D_80106248, D_800CD8AC_de);
     }
     sc->frameCount++;
-    while (func_802BB2A0_de(&sc->commandQueue, &event, 0) != -1) func_8028F954_de(sc, event);
+    while (func_802BB2A0_de(&sc->commandQueue, &event, 0) != -1) __scAppendList(sc, event);
     D_80142920++;
     if (D_80146CC8 != 0) {
         D_80142920 = 0;
@@ -58,7 +58,7 @@ void func_8028EACC_de(OSSched *sc) {
         schedule = D_801428B0[D_8011B9F4];
         if ((u32)(D_80142920 + 1) >= schedule->duration) {
             D_80142C30 = schedule->task;
-            func_802BA8C0_de(schedule->task);
+            osViSwapBuffer(schedule->task);
             D_80146CD0--;
             D_80146CC8++;
             D_8011B9F4++;
@@ -77,7 +77,7 @@ void func_8028EACC_de(OSSched *sc) {
     }
     D_800CD700++;
     if (D_800CD700 == 0x4B0) *(char *)0 = 0;
-    if (sc->doAudio != 0 && sc->curRSPTask != 0) func_8028FBD8_de(sc);
+    if (sc->doAudio != 0 && sc->curRSPTask != 0) __scYield(sc);
     else {
         flags = (sc->curRSPTask == 0) * 2 | (sc->curRDPTask == 0);
         if (((s32 (*)(void *, s32 *, s32 *, s32))func_8028F544_de)(sc, &value1, &value2, flags) != flags) ((void (*)(void *, s32, s32))func_8028FA60_de)(sc, value1, value2);

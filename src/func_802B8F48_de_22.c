@@ -6,7 +6,7 @@ extern OSPiHandle_s D_801486C0;
 extern OSPiHandle_s *D_800D437C;
 extern void *func_802A001C_de(void *dst, s32 value, u32 size);
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 mask);
+extern void __osRestoreInt(u32 mask);
 
 OSPiHandle_s *func_802B8F48_de(void)
 {
@@ -34,7 +34,7 @@ OSPiHandle_s *func_802B8F48_de(void)
     table = &D_800D437C;
     h->next = *table;
     *table = h;
-    func_802BCF50_de(saveMask);
+    __osRestoreInt(saveMask);
 
     return h;
 }

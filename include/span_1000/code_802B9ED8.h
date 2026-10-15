@@ -1,7 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802B9ED8_H
 #define UNBAKE_SPAN_1000_CODE_802B9ED8_H
 #include "types.h"
-extern int func_802B9FB0_de();
+extern int __osSpDeviceBusy();
 
 struct OSTask_t;
 struct OSTask_t {

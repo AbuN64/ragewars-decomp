@@ -1,5 +1,6 @@
 #include "span_1000/code_802B4730.h"
 #include "types.h"
+#include "sdk/libgultra.h"
 /* _init_lpfilter, drafted from ultralib src/audio/drvrnew.c: derive the low-pass filter's gain and
    its sixteen coefficients from the configured cutoff. This object carries its own copies of the
    1/16384 and 16384.0 double constants, at D_800CC838 and D_800CC840, distinct from the copies the

@@ -9,7 +9,6 @@ struct Shared_Pickup;
 #include "shared/world.h"
 #include "span_16E000/menu_ui_providers.h"
 
-#include "types.h"
 
 
 
@@ -18,7 +17,6 @@ struct Shared_Pickup;
 #include "common/unused.h"
 #include "span_C76B0/data.h"
 
-#include "types.h"
 #include "shared/func_8021E2A0_de_closed.h"
 #include "shared/func_8027AD4C_de_closed.h"
 #include "shared/func_804235A8_eu_closed.h"

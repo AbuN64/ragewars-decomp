@@ -4,7 +4,6 @@
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 extern float D_800C788C_de;
 
 struct ALDelay28;
@@ -56,7 +55,6 @@ struct ALResampler_s {
     s32 motion;
 };
 
-extern void *func_802B625C_de(void *arg0, s32 arg1, s32 arg2, void *arg3);
 
 extern void *jtbl_800C7750[];
 
@@ -128,7 +126,6 @@ extern float D_800C7748_de;
 
 extern float D_800C7880_de;
 
-extern f32 func_802B6300_de(ALDelay28 *d, s32 count);
 
 extern float D_800C7888_de;
 

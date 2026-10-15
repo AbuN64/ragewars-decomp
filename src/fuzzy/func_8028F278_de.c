@@ -51,7 +51,7 @@ void func_8028F278_de(OSSched *sc)
             D_80142CA4 = D_80142920 + 1;
             if (D_80142CA4 >= schedule->duration && D_80146CD0 == 0 && D_80146CC8 == 0) {
                 D_80142C30 = schedule->task;
-                func_802BA8C0_de(schedule->task);
+                osViSwapBuffer(schedule->task);
                 D_80146CC8++;
             } else {
                 D_80146CD0++;

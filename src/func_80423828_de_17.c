@@ -1,87 +1,138 @@
-#include "gfx.h"
-#include "common/types_06e4f7ef1f9e.h"
+#include "span_16E000/code_80423280.h"
 #include "common/types_1dc8418c21db.h"
-#include "span_16E000/code_804264F0.h"
-#include "gbi.h"
+#include "resident_event_handler.h"
+#include "shared/func_8041F2A0_us_rev1_closed.h"
+#include "shared/func_80425674_de_layout.h"
 #include "types.h"
-#include "n64sdk.h"
-/* Draw callback of the results screen D_800E4690: on draw event 1 in states 3, 8 or 9 it resets
-   the fill colour D_800D15E0 to opaque white, and for each of the one or two viewports clips the
-   display list to its rectangle in D_800E41C0 (0, then 2 for the lower view), draws the player's panel through func_8041C7F4_de and restores the
-   full-screen clip. Outside two-player mode (and unless func_80299958_de reports 0x19) it plays sound
-   0x259 past the base at 0xA44 on the twentieth frame, raises the banner blink after six more
-   frames, and fades the two banner sprites out by 30 per frame before hiding them. Returns zero. */
 
+/* Awards earned end-of-match unlocks and lists the first two new rewards. */
+extern Profile D_80102B00[];
 
+extern s32 func_80265650_de(void *, s32);
 
+extern void func_80265688_de(u8 *, s32, s32);
 
+void func_804243E0_de(s32 player, s32 *awarded) {
+    func_8041F2A0_Config *status;
+    Shared_Game *globals;
+    HudStatusShared_MatchRules *rules;
 
+    f32 elapsed;
 
-
-
-extern struct ResultsDrawScreen *D_800E4690;
-extern s32 D_800D15E0;
-extern f32 D_800D15E4[4];
-extern struct Shape_typemap_6 D_800E41C0[];
-extern s32 D_800E28D0;
-extern s32 D_800E28D4;
-extern Gfx *D_80110634;
-
-extern struct SettingsE D_801462C8;
-
-extern void func_8041C7F4_de(char *);
-extern s32 func_80299958_de(void);
-extern void func_804220A8_de(s32);
-extern void func_8040E8D8_de(struct Shape_typemap_21 *, s32);
-
-s32 func_80426CE4_de(void *arg0, void *arg1, s32 event) {
-    s32 views;
+    u32 ok;
+    s32 score;
+    s32 count;
     s32 i;
-    s32 alpha;
-    s32 k;
 
-    if (event == 1 && (D_800E4690->state == 3 || D_800E4690->state == 8 || D_800E4690->state == 9)) {
-        D_800D15E0 = 0;
-        D_800D15E4[0] = 255.0f;
-        D_800D15E4[1] = 255.0f;
-        D_800D15E4[2] = 255.0f;
-        D_800D15E4[3] = 255.0f;
-        views = 1;
-        if (D_801462C8.players == 2) {
-            views = 2;
-        }
-        for (i = 0, k = 0; i < views; i++, k = 2) {
-            gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (s32)((f32)((D_800E41C0[k].field_0)) * 4.0f), (s32)((f32)((D_800E41C0[k].field_4)) * 4.0f), (s32)((f32)((D_800E41C0[k].field_8)) * 4.0f), (s32)((f32)((D_800E41C0[k].field_C)) * 4.0f));
-            func_8041C7F4_de(D_800E4690->panels[i]);
-            gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (s32)((f32)((0)) * 4.0f), (s32)((f32)((0)) * 4.0f), (s32)((f32)((D_800E28D0 - 1)) * 4.0f), (s32)((f32)((D_800E28D4 - 1)) * 4.0f));
-        }
-        if (D_801462C8.players != 2 && func_80299958_de() != 0x19) {
-            if (D_800E4690->frames < 20) {
-                if (++D_800E4690->frames == 20) {
-                    k = D_800E4690->soundBase;
-                    func_804220A8_de(k + 0x259);
-                    D_800E4690->blinkDelay = 0;
-                }
-            }
-            if (D_800E4690->blinkDelay != -1) {
-                if (++D_800E4690->blinkDelay >= 6) {
-                    D_800E4690->blinking = 1;
-                    D_800E4690->blinkDelay = -1;
-                }
-            }
-            if (D_800E4690->blinking == 1) {
-                alpha = D_800E4690->banner->field_10;
-                alpha -= 30;
-                if (alpha <= 0) {
-                    D_800E4690->blinking = 0;
-                    func_8040E8D8_de(D_800E4690->bannerShadow, 0);
-                    func_8040E8D8_de(D_800E4690->banner, 0);
-                    alpha = 0xFF;
-                }
-                D_800E4690->banner->field_10 = alpha;
-                D_800E4690->bannerShadow->field_10 = alpha;
+    count = 0;
+    awarded[0] = -1;
+    awarded[1] = -1;
+    if (func_80426274_de() == 0) {
+        return;
+    }
+    status = &D_80146398[player];
+    if (status->active != 1) {
+        return;
+    }
+    if (status->out != 0) {
+        return;
+    }
+    for (i = 0; i < 0x24; i++) {
+        if (func_80265650_de(D_80102B00[player].achievementFlags, i) == 0 && D_80102B00[player].plays[i] >= 2) {
+            func_80265688_de(D_80102B00[player].achievementFlags, i, 1);
+            if (count < 2) {
+                awarded[count++] = i;
             }
         }
     }
-    return 0;
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x24) == 0) {
+        ok = 0;
+        if ((D_8014222C - 1U < 5 && status->kills >= 15) ||
+            ((rules = &D_801462C8.viewportLayout.rules)->timeLimit >= 0.0f && status->kills >= 15 &&
+             (elapsed = rules->timeLimit * (1.0f / 15.0f),
+              elapsed = (f32) (s32) (elapsed * (1.0f / 60.0f)),
+              (f32) D_801462C8.laps - elapsed) <= 5.0f)) {
+            ok = 1;
+        }
+        if (ok == 1) {
+            func_80265688_de(D_80102B00[player].achievementFlags, 0x24, 1);
+            if (count < 2) {
+                awarded[count++] = 0x24;
+            }
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x25) == 0) {
+        ok = 0;
+        if ((D_8014222C - 1U < 10 && status->kills >= 25) ||
+            ((rules = &D_801462C8.viewportLayout.rules)->timeLimit >= 0.0f && status->kills >= 25 &&
+             (elapsed = rules->timeLimit * (1.0f / 15.0f),
+              elapsed = (f32) (s32) (elapsed * (1.0f / 60.0f)),
+              (f32) D_801462C8.laps - elapsed) <= 10.0f)) {
+            ok = 1;
+        }
+        if (ok == 1) {
+            func_80265688_de(D_80102B00[player].achievementFlags, 0x25, 1);
+            if (count < 2) {
+                awarded[count++] = 0x25;
+            }
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x26) == 0 && status->kills == 0 &&
+        (globals = &D_801462C8)->laps >= 10 && globals->players >= 20) {
+        func_80265688_de(D_80102B00[player].achievementFlags, 0x26, 1);
+        if (count < 2) {
+            awarded[count++] = 0x26;
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x27) == 0 && status->total >= 5) {
+        func_80265688_de(D_80102B00[player].achievementFlags, 0x27, 1);
+        if (count < 2) {
+            awarded[count++] = 0x27;
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x28) == 0 && (globals = &D_801462C8)->players >= 20) {
+        score = status->kills;
+        ok = 1;
+        for (i = 0; i < 4; i++) {
+            if (ok != 1) {
+                break;
+            }
+            if (player != i && (globals->playerSettings[i].enabled != 1 || globals->playerSettings[i].locked != 0 ||
+                                globals->playerSettings[i].score - score < 10)) {
+                ok = 0;
+            }
+        }
+        if (ok == 1) {
+            func_80265688_de(D_80102B00[player].achievementFlags, 0x28, 1);
+            if (count < 2) {
+                awarded[count++] = 0x28;
+            }
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x29) == 0 && D_80102B00[player].statistics.wins > 1000) {
+        func_80265688_de(D_80102B00[player].achievementFlags, 0x29, 1);
+        if (count < 2) {
+            awarded[count++] = 0x29;
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x2A) == 0 && D_80102B00[player].statistics.deaths > 1000) {
+        func_80265688_de(D_80102B00[player].achievementFlags, 0x2A, 1);
+        if (count < 2) {
+            awarded[count++] = 0x2A;
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x2B) == 0 && status->unkA >= 10 &&
+        (globals = &D_801462C8)->laps >= 10 && globals->players >= 20) {
+        func_80265688_de(D_80102B00[player].achievementFlags, 0x2B, 1);
+        if (count < 2) {
+            awarded[count++] = 0x2B;
+        }
+    }
+    if (func_80265650_de(D_80102B00[player].achievementFlags, 0x2C) == 0 && status->score == 0 &&
+        (globals = &D_801462C8)->laps >= 10 && globals->players >= 20) {
+        func_80265688_de(D_80102B00[player].achievementFlags, 0x2C, 1);
+        if (count < 2) {
+            awarded[count] = 0x2C;
+        }
+    }
 }

@@ -5,7 +5,7 @@
 
 
 extern u32 func_802BCF30_de(void);
-extern void func_802BCF50_de(u32 arg0);
+extern void __osRestoreInt(u32 arg0);
 extern void func_802BC36C_de(void *arg0);
 extern s32 func_802BC558_de(OSMesgQueue *arg0);
 extern void func_802BB750_de(s32 arg0);
@@ -21,7 +21,7 @@ s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
     saved = func_802BCF30_de();
     while (arg0->validCount >= arg0->msgCount) {
         if (arg2 != 1) {
-            func_802BCF50_de(saved);
+            __osRestoreInt(saved);
             return -1;
         }
         D_800D5270->state = 8;
@@ -35,6 +35,6 @@ s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
     if (*arg0->mtqueue != 0) {
         func_802BB750_de(func_802BC558_de(arg0));
     }
-    func_802BCF50_de(saved);
+    __osRestoreInt(saved);
     return 0;
 }

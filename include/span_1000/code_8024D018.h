@@ -3,7 +3,6 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct func_8024DEF8_S1;
 struct func_8024DEF8_S1 {
     char pad0[0x18];

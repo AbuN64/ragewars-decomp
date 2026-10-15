@@ -20,7 +20,7 @@ s32 func_802B9FD0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (arg3 & 7) {
         func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3C);
     }
-    if (func_802B9FB0_de() != 0) {
+    if (__osSpDeviceBusy() != 0) {
         return -1;
     }
     IO_READ_WORD(0xA4040000U) = arg1;

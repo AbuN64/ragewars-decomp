@@ -7,7 +7,7 @@
 extern void *D_800D4070;
 s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 extern void func_802AFFC0_de(void *, void *, s32);
-extern void func_802B2FB0_de(void *, void *);
+extern void alSynAddPlayer(void *, void *);
 
 void func_802B03D0_de(SeqInitPlayer *p, SeqInitConfig *c) {
     void *heap = c->heap;
@@ -57,5 +57,5 @@ void func_802B03D0_de(SeqInitPlayer *p, SeqInitConfig *c) {
     p->next = 0;
     p->callback = &D_002B0554;
     p->self = p;
-    func_802B2FB0_de(D_800D4070, p);
+    alSynAddPlayer(D_800D4070, p);
 }

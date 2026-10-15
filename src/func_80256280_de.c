@@ -26,13 +26,13 @@ extern s32 func_802BB160_de(void *, void *, s32);
 extern s32 func_802BB420_de(void *, s32, s32);
 
 void func_80256280_de(s32 arg0, s32 arg1) {
-    extern void func_802BAC60_de(s32 arg0, s32 arg1, s32 arg2);
+    extern void osCreateMesgQueue(s32 arg0, s32 arg1, s32 arg2);
     s32 s0;
     s32 s1;
 
-    func_802BAC60_de(arg0 + 0x230, arg0 + 0x248, 0x200);
+    osCreateMesgQueue(arg0 + 0x230, arg0 + 0x248, 0x200);
     s0 = arg0 + 0xA48;
-    func_802BAC60_de(s0, arg0 + 0xA60, 1);
+    osCreateMesgQueue(s0, arg0 + 0xA60, 1);
     func_802BB550_de(8, s0, 0x7D1);
     func_80255CA0_de(arg0 + 0x5068, 0x18, 0x1C);
     func_80255CA0_de(arg0 + 0x507C, 0x18, 0x1C);
@@ -50,7 +50,7 @@ void func_80256280_de(s32 arg0, s32 arg1) {
 }
 
 void func_8025637C_de(struct CartridgeReadWorker *arg0, u32 arg1, s32 arg2, void *arg3) {
-    extern void func_802BAC60_de(void *arg0, s32 arg1, s32 arg2);
+    extern void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2);
     char queue[0x18];
     s32 queue_init;
     s32 completed;
@@ -58,7 +58,7 @@ void func_8025637C_de(struct CartridgeReadWorker *arg0, u32 arg1, s32 arg2, void
     s32 length;
     Chunk *chunk;
 
-    func_802BAC60_de(queue, (s32) &queue_init, 1);
+    osCreateMesgQueue(queue, (s32) &queue_init, 1);
     remaining = arg2;
     do {
         chunk = func_8025661C_de(arg0);

@@ -1,186 +1,251 @@
-#include "span_16E000/code_804264F0.h"
-#include "common/types_8fd754e1e915.h"
-#include "common/unused.h"
-#include "decomp/argb_color.h"
-#include "shared/func_8042854C_de_closed.h"
-#include "span_1000/code_8021CD70.h"
-#include "span_1000/code_8022A274.h"
-#include "span_1000/code_8023B9A0.h"
-#include "span_1000/code_80243A80.h"
-#include "span_1000/code_80246E34.h"
-#include "span_1000/code_802508E0.h"
-#include "span_1000/code_80256220.h"
-#include "span_1000/code_8025A3EC.h"
-#include "span_1000/code_8025C544.h"
-#include "span_1000/code_80265370.h"
-#include "span_1000/code_8026AC38.h"
-#include "span_1000/code_8027302C.h"
-#include "span_1000/code_8028308C.h"
-#include "span_1000/code_8028CCB8.h"
-#include "span_1000/code_8028DF6C.h"
-#include "span_1000/code_8028FC98.h"
-#include "span_1000/code_802944E8.h"
-#include "span_1000/code_80297CD0.h"
-#include "span_1000/code_802A6AC0.h"
-#include "span_1000/code_802B0388.h"
-#include "span_1000/code_802B243C.h"
-#include "span_1000/code_802B4730.h"
-#include "span_1000/code_802B53FC.h"
-#include "span_1000/code_802B8DD0.h"
-#include "span_1000/code_802B9ED8.h"
-#include "span_1000/code_802BA23C.h"
-#include "span_1000/code_802BBC68.h"
-#include "span_1000/code_802BE0D0.h"
-#include "span_166000/code_80426310.h"
-#include "span_16E000/code_80403BCC.h"
-#include "span_16E000/code_8040B45C.h"
-#include "span_16E000/code_8040F1E0.h"
-#include "span_16E000/code_804143D8.h"
-#include "span_16E000/code_8041BEA8.h"
-#include "span_16E000/code_8041DF04.h"
-#include "span_16E000/code_8041F1FC.h"
-#include "span_16E000/code_804221A0.h"
-#include "span_16E000/code_804251F4.h"
-#include "span_16E000/code_8042BD40.h"
-#include "span_16E000/code_8043962C.h"
-#include "span_16E000/code_8043E9A8.h"
-#include "span_16E000/code_8044ACCC.h"
-#include "types.h"
-#include "common/draft_fields_func_8026DC24_de.h"
-#include "common/draft_fields_func_80283278_de.h"
-#include "common/draft_fields_func_8028D474_de.h"
-#include "common/draft_fields_func_8028D964_de.h"
-#include "shared/func_80425674_de_layout.h"
-#include "shared/func_8041F2A0_us_rev1_closed.h"
+#include "span_16E000/code_80423280.h"
 #include "common/types_1dc8418c21db.h"
-#include "resident_event_handler.h"
-#include "shared/func_80286080_de_closed.h"
-/* Hides every model named by the sixty-four 12-byte entries of D_800E4A84: for each entry it looks
-   up the first and second identifier in the current screen's context at 0x970 through func_8040EC30_de
-   and disables the object with func_8040E8D8_de, and does the same for the third identifier unless it
-   is -1. The identifiers are passed as their low halfword, and the loop walks a manual byte offset
-   so the table address is not hoisted. */
-extern struct Pair D_800E4A84[];
-void func_804273D4_de(void) {
-    s32 missing;
-    s32 offset;
+#include "types.h"
+
+/* Count achievements, store the rank, and select its version-specific title. */
+extern Profile D_80102B00[];
+
+extern s32 func_80265650_de(s32 bits, s32 index);
+
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+extern char *D_800D3200[];
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80152789;
+extern char *D_800E1254[];
+extern char *D_800E1264[];
+extern char *D_800E1274[];
+extern char *D_800E1284[];
+extern char *D_800E1294[];
+extern char *D_800E12A4[];
+extern char *D_800E12B4[];
+extern char *D_800E12C4[];
+extern char *D_800E12D4[];
+extern char *D_800E12E4[];
+extern char *D_800E12F4[];
+extern char *D_800E1304[];
+extern char *D_800E1314[];
+extern char *D_800E1324[];
+extern char *D_800E1334[];
+extern char *D_800E1344[];
+extern char *D_800E1354[];
+extern char *D_800E1364[];
+extern char *D_800E1374_eu[];
+extern char *D_800E1384[];
+#endif
+
+char *func_80424DE8_de(s32 index) {
+    s32 count;
     s32 i;
+    char *text;
+    s32 rank;
+    if (index >= 4) {
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        return (D_800D3200[0]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        return ((D_800E1254)[D_80152789]);
+#endif
+    }
+    count = 0;
     i = 0;
-    missing = -1;
-    offset = i;
-loop:
-    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (offset)))->a & 0xFFFF), 0);
-    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (offset)))->b & 0xFFFF), 0);
-    if (((struct Pair *)((u8 *)D_800E4A84 + (offset)))->c.id != missing) {
-        func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (offset)))->c.half.low), 0);
-    }
-    i += 1;
-    offset += 0xC;
-    if (i < 0x40) {
-        goto loop;
-    }
-}
-
-extern struct EntryRecAt0V1 D_800E4694[];
-extern struct Pair D_800E4A84[];
-extern void func_80265688_de(u8 *, s32, s32);
-extern s32 func_80265650_de(s32, s32);
-extern Preset *func_80425C70_de(s32, s32, s32);
-
-void func_804274B0_de(void) {
-    u8 bits[8];
-    Preset *unlocks;
-    func_8041F2A0_Item *widget;
-    s32 i, j, index;
-    s32 search;
-    s32 value;
-    s32 key;
-    Shared_Game *game, *settings;
-    u8 alpha;
-    func_804273D4_de();
-    for (i = 0; i < 36; i++) {
-        func_80265688_de(bits, i, 0);
-    }
-    func_80265688_de(bits, 0, 1);
-    settings = &D_801462C8;
-    if (settings->controllerMode == 1) {
-        game = settings;
-        for (i = 0; i < 36; i++) {
-            unlocks = func_80425C70_de(i, 0, *(s8 *)((char *)game + D_800E4690->player * 0x96 + 0x150));
-            value = unlocks->bytes[1];
-            if (value > 0) func_80265688_de(bits, value - 1, 1);
-            for (j = 0; j < 3; j++) {
-                value = *((u8 *)unlocks + j + 2);
-                if (value > 0) func_80265688_de(bits, value - 1, 1);
-            }
+    do {
+        if (func_80265650_de((s32)D_80102B00[index].achievementFlags, i) == 1) {
+            count++;
         }
-    } else {
-        for (i = 0; i < 36; i++) {
-            func_80265688_de(bits, i, 1);
-        }
+        i++;
+    } while (i < 50);
+    switch (count) {
+    case 0:
+    case 1:
+        rank = 0;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[0]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1254)[D_80152789]);
+#endif
+        break;
+    case 2:
+    case 3:
+        rank = 1;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[1]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1264)[D_80152789]);
+#endif
+        break;
+    case 4:
+    case 5:
+        rank = 2;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[2]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1274)[D_80152789]);
+#endif
+        break;
+    case 6:
+    case 7:
+        rank = 3;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[3]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1284)[D_80152789]);
+#endif
+        break;
+    case 8:
+    case 9:
+        rank = 4;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[4]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1294)[D_80152789]);
+#endif
+        break;
+    case 10:
+    case 11:
+        rank = 5;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[5]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E12A4)[D_80152789]);
+#endif
+        break;
+    case 12:
+    case 13:
+        rank = 6;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[6]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E12B4)[D_80152789]);
+#endif
+        break;
+    case 14:
+    case 15:
+        rank = 7;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[7]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E12C4)[D_80152789]);
+#endif
+        break;
+    case 16:
+    case 17:
+        rank = 8;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[8]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E12D4)[D_80152789]);
+#endif
+        break;
+    case 18:
+    case 19:
+        rank = 9;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[9]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E12E4)[D_80152789]);
+#endif
+        break;
+    case 20:
+    case 21:
+        rank = 10;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[10]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E12F4)[D_80152789]);
+#endif
+        break;
+    case 22:
+    case 23:
+    case 24:
+        rank = 11;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[11]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1304)[D_80152789]);
+#endif
+        break;
+    case 25:
+    case 26:
+    case 27:
+        rank = 12;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[12]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1314)[D_80152789]);
+#endif
+        break;
+    case 28:
+    case 29:
+    case 30:
+        rank = 13;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[13]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1324)[D_80152789]);
+#endif
+        break;
+    case 31:
+    case 32:
+    case 33:
+        rank = 14;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[14]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1334)[D_80152789]);
+#endif
+        break;
+    case 34:
+    case 35:
+    case 36:
+        rank = 15;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[15]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1344)[D_80152789]);
+#endif
+        break;
+    case 37:
+    case 38:
+    case 39:
+        rank = 16;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[16]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1354)[D_80152789]);
+#endif
+        break;
+    case 40:
+    case 41:
+    case 42:
+    case 43:
+    case 44:
+        rank = 17;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[17]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1364)[D_80152789]);
+#endif
+        break;
+    case 45:
+    case 46:
+    case 47:
+    case 48:
+    case 49:
+        rank = 18;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[18]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1374_eu)[D_80152789]);
+#endif
+        break;
+    default:
+        rank = 19;
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+        text = (D_800D3200[19]);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = ((D_800E1384)[D_80152789]);
+#endif
+        break;
     }
-    for (i = 0; i < 64; i++) {
-        key = D_800E4A84[i].a;
-        for (search = 0; search < 36; search++) {
-            if (D_800E4694[search].value == key) { index = search; goto found1; }
-        }
-        index = 0;
-found1:;
-        if (func_80265650_de((s32)bits, index) == 1) {
-            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].a);
-            func_8040E8D8_de(widget, 1);
-            widget->alpha = 20;
-            key = D_800E4A84[i].b;
-            for (search = 0; search < 36; search++) {
-                if (D_800E4694[search].value == key) { index = search; goto found2; }
-            }
-            index = 0;
-found2:;
-            if (func_80265650_de((s32)bits, index) == 1) {
-                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].b);
-                func_8040E8D8_de(widget, 1);
-                widget->alpha = 20;
-                if (D_800E4A84[i].c.id != -1) {
-                    widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[i].c.half.low);
-                    func_8040E8D8_de(widget, 1);
-                    widget->alpha = 20;
-                }
-            }
-        }
-    }
-    for (i = 0; i < 36; i++) {
-        if (func_80265650_de((s32)D_800E4690->owned, i) == 1) ((void (*)(s32))func_80427D70_de)(i);
-    }
-    for (i = 0; i < 36; i++) {
-        if (func_80265650_de((s32)D_800E4690->pending, i) == 1) func_80265688_de(D_800E4690->owned, i, 1);
-    }
-    for (i = 0; i < 64; i++) {
-        alpha = 170;
-        key = D_800E4A84[i].a;
-        for (search = 0; search < 36; search++) {
-            if (D_800E4694[search].value == key) { index = search; goto found3; }
-        }
-        index = 0;
-found3:;
-        if (func_80265650_de((s32)D_800E4690->owned, index) == 1) {
-            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].a);
-            if (func_80265650_de((s32)D_800E4690->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
-            else widget->alpha = 170;
-            key = D_800E4A84[i].b;
-            for (search = 0; search < 36; search++) {
-                if (D_800E4694[search].value == key) { index = search; goto found4; }
-            }
-            index = 0;
-found4:;
-            if (func_80265650_de((s32)D_800E4690->owned, index) == 1) {
-                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].b);
-                if (func_80265650_de((s32)D_800E4690->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
-                else widget->alpha = 170;
-                if (D_800E4A84[i].c.id != -1) {
-                    widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[i].c.half.low);
-                    widget->alpha = alpha;
-                }
-            }
-        }
-    }
+    D_80102B00[index].rank = rank;
+    return text;
 }

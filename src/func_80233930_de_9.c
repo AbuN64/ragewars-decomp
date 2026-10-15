@@ -1,162 +1,246 @@
-#include "span_1000/code_80233920.h"
-#include "common/types_1dc8418c21db.h"
-#include "common/types_8a8189af7b05.h"
-#include "shared/gameplay_camera.h"
-#include "shared/gameplay_movement.h"
-#include "shared/world.h"
 #include "span_1000/code_802393F4.h"
-#include "span_C76B0/data.h"
+#include "abi.h"
+#include "common/types_8fd754e1e915.h"
+#include "span_1000/code_80233920.h"
+#include "span_1000/code_8026AC38.h"
+#include "n64sdk.h"
+#include "gbi.h"
+#include "span_1000/code_80255BEC.h"
 #include "types.h"
-
-/* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
- * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes
- * at 0xF4 and 0xF8 toward the pair D_800C8668 when the entry is flagged 0x10000 (toward zero when not)
- * and draws each offset component at random within the scaled amplitudes. */
-
-
-
-
-
-
-
-
-
-
-extern void *func_8028B2F8_de(void *, u16 *);
-
+#include "video_dimensions.h"
+#include "gfx.h"
+extern Gfx *D_80110634;
+extern Frame *D_8011BDC0;
+extern s32 D_800E28D0;
+extern s32 D_800E28D4;
+extern s32 D_800D297C;
+extern s32 D_80146894;
+extern f32 D_800FF224_de;
+extern f32 D_800D2988;
+extern World_func_80236F1C_de D_80145040;
+extern char D_800CBCC0;
+extern char D_800CBCF0_de;
+extern void func_80253BBC_de(s32, s32);
+extern void func_80235AE0_de(Racer *);
+extern void func_802362E8_de(Racer *, s32);
+extern void func_80239FD4_de(Racer *, s32);
+extern void func_80233C88_de(Racer *);
+extern void func_80238314_de(Race *, Racer *);
+extern void func_804429D4_de(void *);
+extern void func_802372D4_de(Racer *);
+extern s32 func_80245784_de(void);
 extern s32 func_80245798_de(void);
-
-extern f32 func_80275DD4_de(s32 arg0, f32 arg1, f32 arg2);
-
-extern s32 D_800CD8D0;
-
-extern void *func_8025343C_de(int a, int b, int c, void *d);
-
-extern int D_800C32D0_de;
-
-void *func_8025343C_de(int a, int b, int c, void *d);
-
-extern int D_800C32DC_de;
-
-extern void func_8025E3F0_de(s32 arg0);
-
-extern void func_80253908_de(s32 a);
-
-extern void func_80253838_de(void *arg0, void *arg1);
-
-void func_80239EA4_de(void *arg0, Vec3 *out) {
-    GameplayCamera *o = arg0;
-    f32 value;
-    Shared_Surface *entry;
-    f32 targetX;
-    f32 targetY;
-    f32 scale;
-
-    targetY = 0.0f;
-    targetX = targetY;
-    entry = func_8028B2F8_de(&D_8011FE88, (u16 *)o->unk58);
-    if (entry == 0) {
-        out->x = targetY;
-        out->y = targetY;
-        out->z = targetY;
-        return;
+extern void func_8022A3F8_de(World_func_80236F1C_de *, Racer *);
+/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to func_80253BBC_de, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or func_80245784_de or func_80245798_de reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
+void func_80236F1C_de(Race *race, s32 arg1)
+{
+    Racer *racer;
+    race->self.hit = 0;
+    race->self.boost = 0;
+    race->self.spin = 0;
+    if (race->header.music != 0) {
+        func_80253BBC_de(0, race->header.music);
     }
-    if (entry->flags & 0x10000) {
-        targetX = D_800C8668;
-        targetY = D_800C357C_de;
+    if (D_80146894 != 0 || race->header.views.count == 3) {
+        D_800FF224_de = 30.0f;
     }
-    value = o->shakeHorizontal + (targetX - o->shakeHorizontal) * D_800C3580_de.unk0;
-    scale = D_800C3584_de.unk0;
-    o->shakeHorizontal = value;
-    o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
-    out->x = func_80274A90_de(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
-    out->y = func_80274A90_de(0.0f, o->shakeVertical * D_800C358C_de.unk0);
-    value = -o->shakeHorizontal * scale;
-    out->z = func_80274A90_de(value, o->shakeHorizontal * scale);
-}
-
-/** Preserve the empty hook at VRAM 0x80239FBC. */
-void func_80239FCC_de(void) {
-}
-
-void func_80239FD4_de(void) {
-}
-
-void func_80239FDC_de(void *arg0) {
-    s32 object;
-    GameplayCamera *camera = arg0;
-    f32 value;
-    f32 x;
-    f32 y;
-    f32 z;
-    f32 w;
-
-    if (func_80245798_de() != 0) {
-        camera->unk58 = (Shared_func_80234FDC_S8 *)func_80286728_de(&D_8011FE88, &camera->unk38);
+    if (D_800FF224_de != 0.0f) {
+        D_800FF224_de -= D_800D2988;
     }
-    object = (s32)camera->unk58;
-    x = camera->unk38;
-    y = camera->unk3C;
-    z = camera->unk40;
-    w = camera->unk44;
-    camera->unk64 = D_800CD8D0;
-    if (object != 0 && func_80245798_de() == 0) {
-        value = ((y + w) - func_80275DD4_de(object, x, z)) * D_800C3590_de;
-        if (value < D_800C3594_de && D_800C3598_de < value) {
-            Shared_func_80234FDC_S8 *surface = (Shared_func_80234FDC_S8 *)object;
-            camera->unk64 = surface->unk1C;
+    if (D_800FF224_de < 0.0f) {
+        D_800FF224_de = 0.0f;
+    }
+    if (D_800FF224_de != 0.0f) {
+        racer = race->header.views.head;
+        if (racer != 0) {
+            gDPPipeSync(D_80110634++);
+            gSPDisplayList(D_80110634++, ((&D_800CBCC0)));
+            gSPDisplayList(D_80110634++, ((&D_800CBCF0_de)));
+            racer->viewports[D_800D297C].vscale[0] = SCREEN_WD;
+            racer->viewports[D_800D297C].vscale[1] = SCREEN_HT;
+            racer->viewports[D_800D297C].vtrans[0] = SCREEN_WD;
+            racer->viewports[D_800D297C].vtrans[1] = SCREEN_HT;
+            gSPMoveMem(D_80110634++, G_MV_VIEWPORT, 0, 16, ((&racer->viewports[D_800D297C])));
+            gDPSetScissorFrac(D_80110634++, G_SC_NON_INTERLACE, (int)((float)((0)) * 4.0F), (int)((float)((0)) * 4.0F), (int)((float)((SCREEN_WD - 1)) * 4.0F), (int)((float)((SCREEN_HT - 1)) * 4.0F));
+            gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WD, (u32)((D_8011BDC0->colorImage)));
+            gDPSetCycleType(D_80110634++, G_CYC_FILL);
+            gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE, 0, 0, 0, SHADE);
+            gDPSetRenderMode(D_80110634++, ((0)), 0);
+            gDPSetFillColor(D_80110634++, ((0x10001)));
+            gDPFillRectangle(D_80110634++, 0, 0, (SCREEN_WD), (SCREEN_HT));
+            func_8026D8F8_de();
         }
     }
-    if (func_80245798_de() != 0) {
-        camera->unk64 = D_800CD8D0;
+    for (racer = race->header.views.head; racer != 0;) {
+        func_80235AE0_de(racer);
+        func_802362E8_de(racer, arg1);
+        if (racer->effect != 0) {
+            func_80239FD4_de(racer, racer->effectArg);
+        }
+        func_80233C88_de(racer);
+        func_80238314_de(race, racer);
+        func_804429D4_de(racer->sound);
+        func_802372D4_de(racer);
+        if (func_80245784_de() != 0 || func_80245798_de() != 0) {
+            racer = 0;
+        } else {
+            racer = racer->next;
+        }
     }
-    if (camera->unk5C > 0.0f) {
-        camera->unk64 = D_800CD8D0;
+    func_80235AE0_de(&race->self);
+    if (race->header.views.count == 0) {
+        func_80233C88_de(&race->self);
     }
+    func_80238314_de(race, &race->self);
+    if (D_80145040.replay != 0) {
+        racer = race->header.views.head;
+        if (racer != 0) {
+            func_8022A3F8_de(&D_80145040, racer);
+        }
+    }
+    func_804429D4_de(race->self.sound);
 }
 
-void func_8023A114_de(void *arg0, s32 arg1) {
-    extern void *func_802A001C_de(void *, s32, u32);
-    MessageBuffer *buffer = arg0;
-    s32 *ret;
-    s32 scaled;
-    s32 first;
 
-    scaled = arg1 * 0xED8;
-    buffer->count = arg1;
-    ret = func_8025343C_de(0, scaled, 0x23, (char *)&D_800C32D0_de + 4);
-    buffer->allocation = ret;
-    first = *ret;
-    buffer->first = first;
-    func_802A001C_de(first, 0, scaled);
+void func_802372D4_de(Racer *racer) {
+    Entity_func_80233C88_de *entity = (Entity_func_80233C88_de *)racer;
+    f32 x;
+    f32 y;
+    f32 width;
+    f32 height;
+
+    func_8026D8F8_de();
+    x = entity->x;
+    y = entity->y;
+    width = entity->width;
+    height = entity->height;
+    gDPPipeSync(D_80110634++);
+    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
+    gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
+                     0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
+    gDPSetRenderMode(D_80110634++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+    gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, 0);
+    gDPFillRectangle(D_80110634++, x, y, (x + width) - 1.0f, y + 2.0f);
+    gDPFillRectangle(D_80110634++, x, (y + height) - 2.0f,
+                    (x + width) - 1.0f, (y + height) - 1.0f);
+    gDPFillRectangle(D_80110634++, x, y, x + 2.0f, (y + height) - 1.0f);
+    gDPFillRectangle(D_80110634++, (x + width) - 2.0f, y,
+                    (x + width) - 1.0f, (y + height) - 1.0f);
+    gDPPipeSync(D_80110634++);
+    gDPSetCycleType(D_80110634++, G_CYC_FILL);
+    gDPSetCombineLERP(D_80110634++, 0, 0, 0, SHADE, 0, 0, 0, SHADE,
+                     0, 0, 0, SHADE, 0, 0, 0, SHADE);
+    gDPSetRenderMode(D_80110634++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetFillColor(D_80110634++, (1 << 16) | 1);
+    gDPFillRectangle(D_80110634++, x, y, (x + width) - 1.0f, y);
+    gDPFillRectangle(D_80110634++, x, (y + height) - 1.0f,
+                    (x + width) - 1.0f, (y + height) - 1.0f);
+    gDPFillRectangle(D_80110634++, x, y, x, (y + height) - 1.0f);
+    gDPFillRectangle(D_80110634++, (x + width) - 1.0f, y,
+                    x + width, (y + height) - 1.0f);
 }
 
-void func_8023A190_de(void *arg0, int arg1) {
-    void func_802A001C_de(int a, int b, int c);
-    struct ScreenMessageOwner *owner = arg0;
-    int *ret;
-    int scaled;
-    int first;
-    scaled = arg1 << 6;
-    owner->storage.count = arg1;
-    ret = func_8025343C_de(0, scaled, 0x23, &D_800C32DC_de);
-    owner->storage.allocation = ret;
-    first = *ret;
-    owner->storage.first = first;
-    func_802A001C_de(first, 0, scaled);
-}
+/* Posts a text as on-screen messages, one per line: when func_80245784_de reports it, the messages already in
+ * the pool's list at 0xE40 are flagged kind 4 and the new ones get kind 1, otherwise kind 2; the text (or
+ * D_800D7028 when given D_800D7034) is split at newlines and for each non-empty line the oldest message node
+ * of the owner's list at 0xF24 is recycled and set up centred horizontally 80 pixels above the bottom of the
+ * screen at unit size. Returns the last message node. */
 
-void func_8023A1F4_de(void *arg0) {
-    s32 temp_a1;
 
-    ((struct ScreenMessageOwner *)arg0)->state = 1;
-    func_8025E3F0_de((s32)&((struct ScreenMessageOwner *)arg0)->rendering);
-    func_80253908_de(0);
-    temp_a1 = ((struct ScreenMessageOwner *)arg0)->allocation;
-    if (temp_a1 != 0) {
-        func_80253838_de(0, temp_a1);
-        ((struct ScreenMessageOwner *)arg0)->allocation = 0;
-        ((struct ScreenMessageOwner *)arg0)->allocationSize = 0;
-        ((struct ScreenMessageOwner *)arg0)->count = 0;
+
+
+extern func_80237E70_G1 D_800D7028;
+
+extern func_80237E70_G1 D_800D7034;
+
+extern s32 D_800E28D0;
+extern void func_80239CE0_de(void *arg0);
+extern void func_80255ED8_de(void *, Message *);
+extern s32 func_80245784_de(void);
+
+
+
+
+
+
+
+
+
+
+
+
+static inline Message *recycle(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
+    Message *oldest;
+
+    oldest = owner->activeMessages.head;
+    if (oldest != 0) {
+        func_80239CE0_de(oldest);
+        func_80255ED8_de(&owner->activeMessages, oldest);
+        func_80255D14_de(&pool->freeMessages, oldest);
     }
+    return oldest;
+}
+
+static inline Message *post_lines(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text, s32 kind, f32 size, s32 target) {
+    Message *message;
+    s32 height;
+    u8 *line;
+    u8 *p;
+
+    message = 0;
+    if (pool == 0) {
+        return message;
+    }
+    if (text == D_800D7034.unk0) {
+        text = D_800D7028.unk0;
+    }
+    p = text;
+    line = p;
+    while (*p != 0) {
+        p++;
+        if (*p == '\n' || *p == 0) {
+            if (line != p) {
+                message = recycle(owner, pool);
+                if (message != 0) {
+                    message->kind = kind;
+                    message->text = line;
+                    message->timer = 0;
+                    message->alpha = 1.0f;
+                    message->size = size * 15.0f;
+                    message->target = target;
+                    message->pad20 = 0;
+                    message->pad28 = 0;
+                    message->pad2C = 0;
+                    message->scaleX = 1.0f;
+                    message->scaleY = 1.0f;
+                    height = (&D_800E28D0)[1]; /* FAKEMATCH */
+                    message->x = D_800E28D0 / 2;
+                    message->y = height - 80;
+                }
+                line = p + 1;
+            }
+        }
+    }
+    return message;
+}
+
+Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
+    Message *pending;
+    s32 kind;
+
+    kind = 2;
+    if (pool == 0) {
+        return 0;
+    }
+    if (func_80245784_de() != 0) {
+        pending = pool->freeMessages.head;
+        if (pending != 0) {
+            kind = 1;
+            do {
+                pending->kind = 4;
+                pending = pending->next;
+            } while (pending != 0);
+        }
+    }
+    return post_lines(owner, pool, text, kind, 1.0f, -1);
 }

@@ -5,7 +5,6 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
-#include "types.h"
 struct ObjectLinks14C;
 struct ObjectLinks14C {
     char pad0[0x30];

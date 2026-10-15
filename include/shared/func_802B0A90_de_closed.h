@@ -25,7 +25,7 @@ extern void func_802B0C94_de(ALSeqPlayer *, ALEvent *);           /* __handleMID
 extern void func_802B1DEC_de(ALSeqPlayer *, ALEvent *);           /* __handleMetaMsg */
 extern u8 func_802B22F4_de(struct ALSeq_s *, s32 *);                       /* __alSeqNextDelta (char; unsigned in this build) */
 extern int func_802B20C8_de(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
-extern void func_802B22BC_de(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
+extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
 extern void func_802BAC50_de(char *, char *, s32);                /* __assert */
 
@@ -43,7 +43,7 @@ static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
 
     if (seqp->loopCount) {
         if (func_802B20C8_de(seq) + deltaTicks >= seqp->loopEnd->curTicks) {
-            func_802B22BC_de(seq, seqp->loopStart);
+            alSeqSetLoc(seq, seqp->loopStart);
             if (seqp->loopCount != -1)
                 seqp->loopCount--;
         }
