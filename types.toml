@@ -2194,7 +2194,7 @@ schema = 1
 "func_80290A50_us_rev1" = { evidence = "landed", signature = "void func_80290A50_us_rev1(void)" }
 "func_80290A58_us_rev1" = { evidence = "landed", signature = "void func_80290A58_us_rev1(void)" }
 "func_80290A60_us_rev1" = { evidence = "landed", signature = "void func_80290A60_us_rev1(void)" }
-"func_80290A70_de" = { evidence = "authored", signature = "void func_80290A70_de(void)" }
+"func_80290A70_de" = { evidence = "landed", signature = "void func_80290A70_de(void)" }
 "func_80290A78_de" = { evidence = "authored", signature = "void func_80290A78_de(void)" }
 "func_80290A80_de" = { evidence = "authored", signature = "void func_80290A80_de(void)" }
 "func_80290B80_eu" = { evidence = "authored", signature = "void func_80290B80_eu(void)" }
