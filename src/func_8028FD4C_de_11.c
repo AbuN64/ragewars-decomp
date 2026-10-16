@@ -104,65 +104,65 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 posi
   }
   temp_s0 = ((WorldRecAt3C08 *)(arg0))->free;
   temp_v1 = ((WorldRecAt3C08 *)(arg0))->head;
-  ((WorldRecAt3C08 *)(arg0))->free = (void *) (((Actor_func_80290238_de *)(temp_s0))->next);
+  ((WorldRecAt3C08 *)(arg0))->free = (void *) (((SceneEffect *)(temp_s0))->next);
   if (temp_v1 != 0)
   {
-    ((Actor_func_80290238_de *)(temp_v1))->prev = temp_s0;
+    ((SceneEffect *)(temp_v1))->prev = temp_s0;
   }
   { char *next = ((WorldRecAt3C08 *)(arg0))->head;
-  ((Actor_func_80290238_de *)(temp_s0))->prev = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->next = next; }
+  ((SceneEffect *)(temp_s0))->prev = 0;
+  ((SceneEffect *)(temp_s0))->next = next; }
   ((WorldRecAt3C08 *)(arg0))->head = temp_s0;
   if ((((WorldRecAt3C08 *)(arg0))->tail) == 0)
   {
     ((WorldRecAt3C08 *)(arg0))->tail = temp_s0;
   }
-  ((Actor_func_80290238_de *)(temp_s0))->state = (s32) ((((Actor_func_80290238_de *)(temp_s0))->state) | 1);
+  ((SceneEffect *)(temp_s0))->state = (s32) ((((SceneEffect *)(temp_s0))->state) | 1);
   func_80246184_de(temp_s0);
-  ((Actor_func_80290238_de *)(temp_s0))->lifetime = 0;
+  ((SceneEffect *)(temp_s0))->lifetime = 0;
   temp_v1_2 = func_8028C198_de(&D_8011FE88, temp_v0);
-  ((Actor_func_80290238_de *)(temp_s0))->counter = arg1;
+  ((SceneEffect *)(temp_s0))->counter = arg1;
   if (arg1 != 0)
   {
     *arg1 += 1;
   }
   if (D_801462E5 != 0)
   {
-    ((Actor_func_80290238_de *)(temp_s0))->definition = &D_8011B200;
+    ((SceneEffect *)(temp_s0))->definition = &D_8011B200;
   }
   else
   {
-    ((Actor_func_80290238_de *)(temp_s0))->definition = &D_8011B388;
+    ((SceneEffect *)(temp_s0))->definition = &D_8011B388;
   }
-  ((Actor_func_80290238_de *)(temp_s0))->lifetime = arg10;
-  ((Actor_func_80290238_de *)(temp_s0))->lifetimeState = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->model = temp_v0;
+  ((SceneEffect *)(temp_s0))->lifetime = arg10;
+  ((SceneEffect *)(temp_s0))->lifetimeState = 0;
+  ((SceneEffect *)(temp_s0))->model = temp_v0;
   position.y += 10.24f;
-  ((Actor_func_80290238_de *)(temp_s0))->position = position;
-  ((Actor_func_80290238_de *)(temp_s0))->angle = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->angleState = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->collisionState = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->collisionScale = 1.0f;
-  ((Actor_func_80290238_de *)(temp_s0))->collisionFlags = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->minX = (f32) (position.x - 81.92f);
-  ((Actor_func_80290238_de *)(temp_s0))->minY = (f32) (position.y - 81.92f);
-  ((Actor_func_80290238_de *)(temp_s0))->minZ = (f32) (position.z - 81.92f);
-  ((Actor_func_80290238_de *)(temp_s0))->maxX = (f32) (position.x + 81.92f);
-  ((Actor_func_80290238_de *)(temp_s0))->maxY = (f32) (position.y + 81.92f);
+  ((SceneEffect *)(temp_s0))->position = position;
+  ((SceneEffect *)(temp_s0))->angle = 0;
+  ((SceneEffect *)(temp_s0))->angleState = 0;
+  ((SceneEffect *)(temp_s0))->collisionState = 0;
+  ((SceneEffect *)(temp_s0))->collisionScale = 1.0f;
+  ((SceneEffect *)(temp_s0))->collisionFlags = 0;
+  ((SceneEffect *)(temp_s0))->minX = (f32) (position.x - 81.92f);
+  ((SceneEffect *)(temp_s0))->minY = (f32) (position.y - 81.92f);
+  ((SceneEffect *)(temp_s0))->minZ = (f32) (position.z - 81.92f);
+  ((SceneEffect *)(temp_s0))->maxX = (f32) (position.x + 81.92f);
+  ((SceneEffect *)(temp_s0))->maxY = (f32) (position.y + 81.92f);
   far_z = position.z;
-  ((Actor_func_80290238_de *)(temp_s0))->resource = temp_v1_2;
-  ((Actor_func_80290238_de *)(temp_s0))->animation = -1;
-  ((Actor_func_80290238_de *)(temp_s0))->frame = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->frameState = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->owner = arg9;
-  ((Actor_func_80290238_de *)(temp_s0))->boundsState = 0;
-  ((Actor_func_80290238_de *)(temp_s0))->flags = 0x1A;
-  ((Actor_func_80290238_de *)(temp_s0))->maxZ = (f32) (far_z + 81.92f);
-  ((Actor_func_80290238_de *)(temp_s0))->rotation = rotation;
-  ((Actor_func_80290238_de *)(temp_s0))->effectState = 0;
-  center.x = ((Actor_func_80290238_de *)(temp_s0))->position.x;
-  center.y = (((Actor_func_80290238_de *)(temp_s0))->position.y) + (func_8024D284_de(temp_s0) * 0.5f);
-  center.z = ((Actor_func_80290238_de *)(temp_s0))->position.z;
+  ((SceneEffect *)(temp_s0))->resource = temp_v1_2;
+  ((SceneEffect *)(temp_s0))->animation = -1;
+  ((SceneEffect *)(temp_s0))->frame = 0;
+  ((SceneEffect *)(temp_s0))->frameState = 0;
+  ((SceneEffect *)(temp_s0))->owner = arg9;
+  ((SceneEffect *)(temp_s0))->boundsState = 0;
+  ((SceneEffect *)(temp_s0))->flags = 0x1A;
+  ((SceneEffect *)(temp_s0))->maxZ = (f32) (far_z + 81.92f);
+  ((SceneEffect *)(temp_s0))->rotation = rotation;
+  ((SceneEffect *)(temp_s0))->effectState = 0;
+  center.x = ((SceneEffect *)(temp_s0))->position.x;
+  center.y = (((SceneEffect *)(temp_s0))->position.y) + (func_8024D284_de(temp_s0) * 0.5f);
+  center.z = ((SceneEffect *)(temp_s0))->position.z;
   func_8028C6D4_de(&D_8011FE88, &center, (char *)temp_s0 + 0x1A8);
   return temp_s0;
 }
@@ -176,11 +176,11 @@ void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 posi
 
 extern Box D_801031F0;
 extern f32 D_800D2988;
-extern void func_80290424_de(Actor_func_80290238_de *actor);
+extern void func_80290424_de(SceneEffect *actor);
 
 void func_80290238_de(WorldRecAt3C08 *world) {
-    Actor_func_80290238_de *actor;
-    Actor_func_80290238_de *next;
+    SceneEffect *actor;
+    SceneEffect *next;
     s32 expired;
     f32 lifetime;
 
@@ -239,7 +239,7 @@ extern struct ActorDefinitionHeader D_8011B388;
 
 
 
-void func_80290408_de(Actor_func_80290238_de *arg0) {
+void func_80290408_de(SceneEffect *arg0) {
     arg0->definition = &D_8011B388;
     arg0->active = 3;
     arg0->state = 0;

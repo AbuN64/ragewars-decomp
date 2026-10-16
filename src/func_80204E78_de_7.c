@@ -13,8 +13,8 @@
 #include "span_1000/code_80206258.h"
 #include "span_1000/code_802624A0.h"
 #include "span_1000/code_80279208.h"
-#include "types.h"
 #include "span_1000/code_8028FC98.h"
+#include "types.h"
 
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */
 
@@ -35,7 +35,7 @@ extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
 
 extern s16 func_802798A8_de(WeightedTable *arg0);
 
-extern Actor_func_80290238_de *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref);
+extern SceneEffect *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref);
 
 extern s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner, s32 *refCount, s32 arg4, s32 kind, Vec3 arg6, Vector4f rotation, Vec3 pos, Vec3 *aim, s32 arg10, s32 arg11);
 

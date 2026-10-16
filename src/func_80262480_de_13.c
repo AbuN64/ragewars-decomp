@@ -7,7 +7,7 @@ extern void func_80255ED8_de(void *, void *);
 
 
 
-void func_80263080_de(struct SceneEffectPool *arg0, struct Actor_func_80290238_de *arg1) {
+void func_80263080_de(struct SceneEffectPool *arg0, struct SceneEffect *arg1) {
     s32 *temp_v1;
 
     temp_v1 = arg1->ref;

@@ -44,7 +44,7 @@ struct EffectDesc {
     u16 variant;
 };
 
-extern Actor_func_80290238_de *func_80262A9C_de(struct SceneEffectPool *scene, EffectDesc *desc);
+extern SceneEffect *func_80262A9C_de(struct SceneEffectPool *scene, EffectDesc *desc);
 
 extern void *func_80262FF8_de(s32 arg0, s32 *arg1);
 
@@ -157,13 +157,13 @@ typedef union func_80262ABC_S1_U5F00 func_80262ABC_S1_U5F00;
 
 union func_80262ABC_S1_U5F00;
 union func_80262ABC_S1_U5F00 {
-    struct Actor_func_80290238_de * v0;
+    struct SceneEffect * v0;
     char v1;
 };
 
 struct ObjRecAt5F14;
 struct ObjRecAt5F14 {
-    Actor_func_80290238_de effects[0x20];
+    SceneEffect effects[0x20];
     IntrusiveList unk5F00;
     char pad5F00[0x5F14 - 0x5F00 - sizeof(IntrusiveList)];
     IntrusiveList unk5F14;
@@ -194,7 +194,7 @@ typedef struct Six Six;
 
 /* Shared object layout established by effect-pool consumers. */
 struct SceneEffectPool {
-    Actor_func_80290238_de effects[0x20]; /* 0x0000 */
+    SceneEffect effects[0x20]; /* 0x0000 */
     IntrusiveList freeEffects; /* 0x5F00 */
     IntrusiveList activeEffects; /* 0x5F14 */
 };

@@ -115,8 +115,8 @@ struct func_8028FFB0_S2 {
     char * unk1DC;
 };
 
-struct Actor_func_80290238_de;
-typedef struct Actor_func_80290238_de Actor_func_80290238_de;
+struct SceneEffect;
+typedef struct SceneEffect SceneEffect;
 
 struct func_802905D4_S1;
 struct func_802905D4_S1 {
@@ -158,9 +158,9 @@ struct func_8028FFB0_S4 {
     f32 unk10;
 };
 
-struct Actor_func_80290238_de;
+struct SceneEffect;
 struct ActorDefinitionHeader;
-struct Actor_func_80290238_de {
+struct SceneEffect {
     s8 active;
     char pad1[3];
     s16 model;
@@ -195,20 +195,20 @@ struct Actor_func_80290238_de {
     f32 lifetimeState;
     s32 state;
     s32 *counter;
-    struct Actor_func_80290238_de *prev;
-    struct Actor_func_80290238_de *next;
+    struct SceneEffect *prev;
+    struct SceneEffect *next;
     char pad1E0[0x110];
     signed int * ref;
     unsigned char padding2F4[4];
 };
 
-struct Actor_func_80290238_de;
+struct SceneEffect;
 struct WorldRecAt3C08;
 struct WorldRecAt3C08 {
     char pad0[0x3C00];
-    struct Actor_func_80290238_de *free;
-    struct Actor_func_80290238_de *head;
-    struct Actor_func_80290238_de *tail;
+    struct SceneEffect *free;
+    struct SceneEffect *head;
+    struct SceneEffect *tail;
 };
 
 struct ListNode80290528;
@@ -291,7 +291,7 @@ typedef struct func_802905D4_S1 func_802905D4_S1;
 struct ObjectLinks3C0C;
 typedef struct ObjectLinks3C0C ObjectLinks3C0C;
 
-extern void func_80290408_de(Actor_func_80290238_de *arg0);
+extern void func_80290408_de(SceneEffect *arg0);
 
 struct func_8028FFB0_S1;
 typedef struct func_8028FFB0_S1 func_8028FFB0_S1;

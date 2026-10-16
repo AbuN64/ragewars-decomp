@@ -1595,13 +1595,13 @@ schema = 1
 "func_802625C4_de" = { evidence = "landed", signature = "s32 func_802625C4_de(void *arg0)" }
 "func_802625F0_de" = { evidence = "landed", signature = "void func_802625F0_de(AnimRef *arg0, f32 arg1)" }
 "func_8026269C_de" = { evidence = "landed", signature = "s32 func_8026269C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3)" }
-"func_802627A0_de" = { evidence = "landed", signature = "Actor_func_80290238_de *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
-"func_80262A9C_de" = { evidence = "landed", signature = "Actor_func_80290238_de *func_80262A9C_de(struct SceneEffectPool *scene, EffectDesc *desc)" }
-"func_80262C88_de" = { evidence = "landed", signature = "s32 func_80262C88_de(struct Actor_func_80290238_de *arg0)" }
-"func_80262CE0_de" = { evidence = "landed", signature = "Actor_func_80290238_de *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
+"func_802627A0_de" = { evidence = "landed", signature = "SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
+"func_80262A9C_de" = { evidence = "landed", signature = "SceneEffect *func_80262A9C_de(struct SceneEffectPool *scene, EffectDesc *desc)" }
+"func_80262C88_de" = { evidence = "landed", signature = "s32 func_80262C88_de(struct SceneEffect *arg0)" }
+"func_80262CE0_de" = { evidence = "landed", signature = "SceneEffect *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
 "func_80262E88_de" = { evidence = "landed", signature = "void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1)" }
 "func_80262FF8_de" = { evidence = "landed", signature = "void *func_80262FF8_de(s32 arg0, s32 *arg1)" }
-"func_80263080_de" = { evidence = "landed", signature = "void func_80263080_de(struct SceneEffectPool *arg0, struct Actor_func_80290238_de *arg1)" }
+"func_80263080_de" = { evidence = "landed", signature = "void func_80263080_de(struct SceneEffectPool *arg0, struct SceneEffect *arg1)" }
 "func_802630E0_de" = { evidence = "landed", signature = "void func_802630E0_de(s32 *value, s32 word)" }
 "func_802630EC_de" = { evidence = "landed", signature = "s32 func_802630EC_de(BitReader *arg0, s32 arg1)" }
 "func_80263154_de" = { evidence = "landed", signature = "s32 func_80263154_de(BitReader *arg0, s32 arg1)" }
@@ -2177,7 +2177,7 @@ schema = 1
 "func_8028FF0C_de" = { evidence = "landed", signature = "void func_8028FF0C_de(void *arg0, void *arg1, s32 arg2)" }
 "func_8028FFD0_de" = { evidence = "landed", signature = "void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, Vec3 rotation, Vec3 position, s32 arg9, f32 arg10)" }
 "func_80290238_de" = { evidence = "landed", signature = "void func_80290238_de(WorldRecAt3C08 *world)" }
-"func_80290408_de" = { evidence = "landed", signature = "void func_80290408_de(Actor_func_80290238_de *arg0)" }
+"func_80290408_de" = { evidence = "landed", signature = "void func_80290408_de(SceneEffect *arg0)" }
 "func_80290548_de" = { evidence = "landed", signature = "void func_80290548_de(ListNode80290528 *node)" }
 "func_802905F4_de" = { evidence = "landed", signature = "void func_802905F4_de(char *arg0, char *arg1)" }
 "func_8029076C_de" = { evidence = "landed", signature = "void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *arg1)" }
@@ -4481,13 +4481,13 @@ schema = 1
 "spawnTable4" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable4(void)" }
 "spawnTable5" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable5(void)" }
 "spawnTable6" = { evidence = "landed", signature = "static __inline__ SpawnChoice *spawnTable6(void)" }
-"spawn_effect" = { evidence = "landed", signature = "static inline Actor_func_80290238_de *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
+"spawn_effect" = { evidence = "landed", signature = "static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale, Vec3 direction, Vec3 color, s32 *ref)" }
 "splineRecordSize" = { evidence = "landed", signature = "static inline s32 splineRecordSize(s32 left,s32 right)" }
 "stage_arena" = { evidence = "landed", signature = "static inline s32 stage_arena(s32 cup, s32 stage)" }
 "stamp" = { evidence = "landed", signature = "static inline void stamp(CachedResource *node)" }
 "sync" = { evidence = "landed", signature = "static inline void sync(void)" }
 "take" = { evidence = "landed", signature = "static inline func_8022BC04_S3 *take(s32 active)" }
-"take_effect" = { evidence = "landed", signature = "static inline Actor_func_80290238_de *take_effect(struct SceneEffectPool *scene, s32 *ref)" }
+"take_effect" = { evidence = "landed", signature = "static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref)" }
 "testBit" = { evidence = "landed", signature = "static inline s32 testBit(s32 n, u8 *bits)" }
 "test_bit" = { evidence = "landed", signature = "static inline int test_bit(unsigned char *bits, int index)" }
 "textBegin" = { evidence = "landed", signature = "static inline void textBegin(u8 font, u8 style)" }
@@ -12109,7 +12109,8 @@ schema = 1
 "SampledCurve" = { declaration = "struct SampledCurve { int type; unsigned char samples[0x10]; float length; };", evidence = "authored" }
 "Saved" = { declaration = "struct Saved { u16 values[4]; u8 flag; u8 pad[3]; u8 bytes[8]; u32 checksum; };", evidence = "authored" }
 "Scene" = { declaration = "typedef struct Scene Scene;", evidence = "authored" }
-"SceneEffectPool" = { declaration = "struct SceneEffectPool { Actor_func_80290238_de effects[0x20]; IntrusiveList freeEffects; IntrusiveList activeEffects; };", evidence = "authored" }
+"SceneEffect" = { declaration = "typedef struct SceneEffect SceneEffect;", evidence = "authored" }
+"SceneEffectPool" = { declaration = "struct SceneEffectPool { SceneEffect effects[0x20]; IntrusiveList freeEffects; IntrusiveList activeEffects; };", evidence = "authored" }
 "SceneRecAt10C0" = { declaration = "typedef struct SceneRecAt10C0 SceneRecAt10C0;", evidence = "authored" }
 "SceneRecAt140" = { declaration = "typedef struct SceneRecAt140 SceneRecAt140;", evidence = "authored" }
 "SceneRecAt1B2B4" = { declaration = "struct SceneRecAt1B2B4 { char pad0[0x1B2B0]; struct LightSettings *light; s16 dir[3]; };", evidence = "authored" }
@@ -13345,7 +13346,7 @@ schema = 1
 "WorldRecAt1B40C" = { declaration = "struct WorldRecAt1B40C { char pad0[0x80]; void *tree; char pad84[0x11C0 - 0x84]; s32 nfaces; s32 nedges; void *verts; void *edgeData; struct Face *faces; struct Face *edges; IntrusiveList listA; IntrusiveList listB; Bucket buckets[0x30]; char pad1500[0x1B40C - 0x1500]; s32 group; };", evidence = "authored" }
 "WorldRecAt1B660" = { declaration = "struct WorldRecAt1B660 { char pad0[0x138]; struct ObjectRecAt18 *objects; s32 pad13C; s32 count; char pad144[0x1B620 - 0x144]; ObjectRecAt18 *switches[16]; s32 switchCount; };", evidence = "authored" }
 "WorldRecAt1B6A4" = { declaration = "struct WorldRecAt1B6A4 { char pad0[0x1B664]; Player *objects[16]; s32 count; };", evidence = "authored" }
-"WorldRecAt3C08" = { declaration = "struct WorldRecAt3C08 { char pad0[0x3C00]; struct Actor_func_80290238_de *free; struct Actor_func_80290238_de *head; struct Actor_func_80290238_de *tail; };", evidence = "authored" }
+"WorldRecAt3C08" = { declaration = "struct WorldRecAt3C08 { char pad0[0x3C00]; struct SceneEffect *free; struct SceneEffect *head; struct SceneEffect *tail; };", evidence = "authored" }
 "WorldSortEntry" = { declaration = "typedef struct WorldSortEntry { s32 item; f32 distance; } WorldSortEntry;", evidence = "authored" }
 "World_func_80226A34_de" = { declaration = "struct World_func_80226A34_de { char pad0[0x20]; SharedPlayer_func_80226A34_de *players; char pad24[0x40 - 0x24]; s32 spin; };", evidence = "authored" }
 "World_func_802283B8_de" = { declaration = "struct World_func_802283B8_de { char pad0[0x20]; SharedPlayerRecV2 *players; };", evidence = "authored" }

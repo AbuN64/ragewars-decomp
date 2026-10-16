@@ -61,7 +61,7 @@ void func_80290548_de(ListNode80290528 *node) {
 void func_802905F4_de(char *arg0, char *arg1) {
     WorldRecAt3C08 *world = (void *)arg0;
     GameplayCamera *camera = (void *)arg1;
-    Actor_func_80290238_de *entry;
+    SceneEffect *entry;
     f32 value;
     f32 upper;
     f32 scale;

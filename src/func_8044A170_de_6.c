@@ -3,7 +3,7 @@
 #include "span_1000/code_802624A0.h"
 #include "span_1000/code_80255BEC.h"
 void func_8044ADF0_de(ObjRecAt5F14 *arg0) {
-    Actor_func_80290238_de *var_s0;
+    SceneEffect *var_s0;
     s32 var_s1;
 
     func_80255CA0_de(&arg0->unk5F00, 0x2E8, 0x2EC);

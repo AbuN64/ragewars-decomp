@@ -26,14 +26,14 @@ extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 extern s32 func_8028B25C_de(void *, s32);
 
-extern void func_802466A0_de(Actor_func_80290238_de *, s32, s32, s32, s32, s32, s32, f32, Vec3, s32, Vec3, Vec3, s32);
+extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, Vec3, s32, Vec3, Vec3, s32);
 
-extern void func_8024B2D0_de(Actor_func_80290238_de *);
+extern void func_8024B2D0_de(SceneEffect *);
 
-static inline Actor_func_80290238_de *take_effect(struct SceneEffectPool *scene, s32 *ref) {
-    extern void func_80255ED8_de(void *, Actor_func_80290238_de *);
-    extern void func_80255CB8_de(void *, Actor_func_80290238_de *);
-    Actor_func_80290238_de *effect;
+static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
+    extern void func_80255ED8_de(void *, SceneEffect *);
+    extern void func_80255CB8_de(void *, SceneEffect *);
+    SceneEffect *effect;
 
     if (D_8013B290 == 0 && (unsigned int)scene->activeEffects.count >= 3) {
         return 0;
@@ -69,9 +69,9 @@ static inline s32 overlaps(Effect_func_80262E88_de *effect, f32 *max) {
     return 0;
 }
 
-Actor_func_80290238_de *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale,
+SceneEffect *func_80262CE0_de(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position, f32 scale,
                       Vec3 direction, Vec3 color, s32 *ref) {
-    Actor_func_80290238_de *effect;
+    SceneEffect *effect;
 
     if (D_800CD764_de == 0 || count == 0) {
         return 0;
@@ -140,7 +140,7 @@ void *func_80262FF8_de(s32 arg0, s32 *arg1) {
         if (temp_s0 != 0) {
             func_80255ED8_de((void *)(arg0 + 0x5F00), (s32)temp_s0);
             func_80255CB8_de((void *)(arg0 + 0x5F14), (s32)temp_s0);
-            ((Actor_func_80290238_de *)(temp_s0))->ref = arg1;
+            ((SceneEffect *)(temp_s0))->ref = arg1;
             if (arg1 != 0) {
                 *arg1 += 1;
             }

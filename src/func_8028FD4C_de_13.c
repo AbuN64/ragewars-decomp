@@ -9,8 +9,8 @@
 /** Unlink an active node and return it to the container's free list. */
 void func_80290950_de(void *container, ListNode80290528 *node) {
     WorldRecAt3C08 *world = container;
-    struct Actor_func_80290238_de *actor = (struct Actor_func_80290238_de *)node;
-    struct Actor_func_80290238_de *free_node;
+    struct SceneEffect *actor = (struct SceneEffect *)node;
+    struct SceneEffect *free_node;
 
     if (actor->state & 1) {
         actor->state &= ~1;

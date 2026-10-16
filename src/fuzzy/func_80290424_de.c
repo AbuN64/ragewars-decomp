@@ -5,10 +5,10 @@ extern char D_80100438;
 extern ActorDefinitionHeader D_8011B388;
 extern f32 D_800C53A4_de;
 extern f32 D_800D2988;
-extern void func_8024F4A0_de(Actor_func_80290238_de *);
-extern void func_80243A90_de(Actor_func_80290238_de *, f32, f32, f32, void *);
+extern void func_8024F4A0_de(SceneEffect *);
+extern void func_80243A90_de(SceneEffect *, f32, f32, f32, void *);
 
-void func_80290424_de(Actor_func_80290238_de *arg0)
+void func_80290424_de(SceneEffect *arg0)
 {
   void *var_s1;
   f32 temp_f1;

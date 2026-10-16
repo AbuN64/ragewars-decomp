@@ -23,12 +23,12 @@ extern void func_80253754_de(s32, void **);
 struct Shared_World;
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028B25C_de(void *, s32);
-extern void func_80255ED8_de(void *, Actor_func_80290238_de *);
-extern void func_80255CB8_de(void *, Actor_func_80290238_de *);
-extern void func_802466A0_de(Actor_func_80290238_de *, s32, s32, s32, s32, s32, s32, f32, Vec3, s32, Vec3, Vec3, s32);
-extern void func_8024B2D0_de(Actor_func_80290238_de *);
-static inline Actor_func_80290238_de *take_effect(struct SceneEffectPool *scene, s32 *ref) {
-    Actor_func_80290238_de *effect;
+extern void func_80255ED8_de(void *, SceneEffect *);
+extern void func_80255CB8_de(void *, SceneEffect *);
+extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, Vec3, s32, Vec3, Vec3, s32);
+extern void func_8024B2D0_de(SceneEffect *);
+static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
+    SceneEffect *effect;
     if (D_8013B290 == 0 && (unsigned int)scene->activeEffects.count >= 3) {
         return 0;
     }
@@ -43,9 +43,9 @@ static inline Actor_func_80290238_de *take_effect(struct SceneEffectPool *scene,
     }
     return effect;
 }
-static inline Actor_func_80290238_de *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position,
+static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, Vec3 position,
                                    f32 scale, Vec3 direction, Vec3 color, s32 *ref) {
-    Actor_func_80290238_de *effect;
+    SceneEffect *effect;
     if (D_800CD764_de == 0) {
         return 0;
     }
@@ -69,9 +69,9 @@ static inline Actor_func_80290238_de *spawn_effect(struct SceneEffectPool *scene
     func_8024B2D0_de(effect);
     return effect;
 }
-Actor_func_80290238_de *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
+SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, Vec3 position, f32 scale, Vec3 direction,
                       Vec3 color, s32 *ref) {
-    Actor_func_80290238_de *effect;
+    SceneEffect *effect;
     s32 id;
     s32 key;
     void **descriptor;
