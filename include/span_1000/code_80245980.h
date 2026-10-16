@@ -34,8 +34,8 @@ struct CollisionState {
     s32 active9c;
 };
 
-struct CollisionInfo_func_80246558_de;
-typedef struct CollisionInfo_func_80246558_de CollisionInfo_func_80246558_de;
+struct CollisionInfoCode80243A80;
+typedef struct CollisionInfoCode80243A80 CollisionInfoCode80243A80;
 
 struct func_80246174_S1;
 struct func_80246174_S1 {
@@ -80,8 +80,8 @@ typedef struct Access_s16_108 Access_s16_108;
 
 extern void func_80245AC8_de();
 
-struct CollisionInfo_func_80246558_de;
-struct CollisionInfo_func_80246558_de {
+struct CollisionInfoCode80243A80;
+struct CollisionInfoCode80243A80 {
     s32 flags;
     u8 ground_behavior;
     u8 instance_behavior;

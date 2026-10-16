@@ -172,7 +172,7 @@ void func_8028C6D4_de(Owner_func_8028C6D4_de *owner, s32 time, Block24 *out) {
 
 
 
-EntryRecAt18V4 *func_8028C7E0_de(World_func_8028C7E0_de *world, s32 id) {
+EntryRecAt18V4 *func_8028C7E0_de(WorldCode8028B64C *world, s32 id) {
     s32 i;
     EntryRecAt18V4 *found = 0;
 
@@ -344,7 +344,7 @@ ObjectRecAt1A4 *func_8028CAE0_de(World_func_8028CAE0_de *world, ObjectRecAt1A4 *
 
 
 
-struct EntryRecAt10 *func_8028CBB0_de(struct Owner_func_8028CBB0_de *owner, struct EntryRecAt10 *pos) {
+struct EntryRecAt10 *func_8028CBB0_de(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos) {
     s32 i;
     struct EntryRecAt10 *best;
     f32 min;
@@ -388,7 +388,7 @@ struct EntryRecAt10 *func_8028CBB0_de(struct Owner_func_8028CBB0_de *owner, stru
 
 
 
-ActorRecAt1D8V1 *func_8028CC34_de(Obj_func_8028CC34_de *obj, int id) {
+ActorRecAt1D8V1 *func_8028CC34_de(ObjCode8028B64C *obj, int id) {
     int i;
     ActorRecAt1D8V1 *found;
     int count;

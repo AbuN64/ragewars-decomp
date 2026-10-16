@@ -19,16 +19,16 @@ extern WeaponInfo *D_800D052C[];
 
 extern char D_8011D8D0[];
 
-extern void func_802100E0_de(Brain_func_8020FDB0_de *);
+extern void func_802100E0_de(BrainCode8020EAE0 *);
 
 extern s32 func_8022EB0C_de(SharedPlayer_func_8020FDB0_de *, s32);
 
 extern s32 func_80283228_de(char *, SharedPlayer_func_8020FDB0_de *);
 
 
-extern void func_8020FDB0_de(Brain_func_8020FDB0_de *, s32 *);
+extern void func_8020FDB0_de(BrainCode8020EAE0 *, s32 *);
 
-void func_8020FDB0_de(Brain_func_8020FDB0_de *brain, s32 *ammo) {
+void func_8020FDB0_de(BrainCode8020EAE0 *brain, s32 *ammo) {
     s32 choices[8];
     u32 count;
     s32 holding;
@@ -101,35 +101,35 @@ void func_8020FDB0_de(Brain_func_8020FDB0_de *brain, s32 *ammo) {
 }
 
 int func_80210018_de(void *arg0) {
-    Brain_func_8020FDB0_de *brain = arg0;
+    BrainCode8020EAE0 *brain = arg0;
     char *ammo = brain->player->views18.view18_1.track;
     func_8020FDB0_de(brain, ammo + 0x8C);
     return 1;
 }
 
 int func_80210040_de(void *arg0) {
-    Brain_func_8020FDB0_de *brain = arg0;
+    BrainCode8020EAE0 *brain = arg0;
     char *ammo = brain->player->views18.view18_1.track;
     func_8020FDB0_de(brain, ammo + 0xAC);
     return 1;
 }
 
 int func_80210068_de(void *arg0) {
-    Brain_func_8020FDB0_de *brain = arg0;
+    BrainCode8020EAE0 *brain = arg0;
     char *ammo = brain->player->views18.view18_1.track;
     func_8020FDB0_de(brain, ammo + 0xCC);
     return 1;
 }
 
 int func_80210090_de(void *arg0) {
-    Brain_func_8020FDB0_de *brain = arg0;
+    BrainCode8020EAE0 *brain = arg0;
     char *ammo = brain->player->views18.view18_1.track;
     func_8020FDB0_de(brain, ammo + 0xAC);
     return 1;
 }
 
 int func_802100B8_de(void *arg0) {
-    Brain_func_8020FDB0_de *brain = arg0;
+    BrainCode8020EAE0 *brain = arg0;
     char *ammo = brain->player->views18.view18_1.track;
     func_8020FDB0_de(brain, ammo + 0xAC);
     return 1;

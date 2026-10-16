@@ -14,21 +14,21 @@ extern s32 D_800D297C;
 extern char D_8013B364[];
 
 extern void func_80211020_de(Brain_func_802120A8_eu *);
-extern s32 func_802099B4_de(Brain_func_802120A8_eu *, Actor_func_802120A8_eu *);
+extern s32 func_802099B4_de(Brain_func_802120A8_eu *, Self *);
 extern void func_80209874_de(Brain_func_802120A8_eu *, s32);
 extern f32 func_802726BC_de(Vec3 *, Vec3 *);
 extern f32 func_80209BE0_de(Brain_func_802120A8_eu *);
 extern f32 func_80209DAC_de(Brain_func_802120A8_eu *);
 extern f32 func_80209308_de(Brain_func_802120A8_eu *, Vec3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
-extern void func_80210964_de(Actor_func_802120A8_eu *, s32);
+extern void func_80210964_de(Self *, s32);
 extern void func_80209E80_de(Brain_func_802120A8_eu *);
 extern s32 func_8020D1CC_de(char *, s32, s32);
 
-void func_802120A8_eu(Actor_func_802120A8_eu *actor) {
+void func_802120A8_eu(Self *actor) {
     Brain_func_802120A8_eu *brain;
     s32 mine;
-    Actor_func_802120A8_eu *target;
+    Self *target;
     s32 node;
     f32 speed;
     s32 dir;

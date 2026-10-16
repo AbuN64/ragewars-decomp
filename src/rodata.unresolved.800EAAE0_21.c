@@ -100,7 +100,7 @@ Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *owner, s32 value) {
 }
 
 void func_8041B6E8_de(OwnerRecAt8V1 *owner, s32 index, s32 id) {
-    Context_func_8041B6E8_de *context;
+    ContextCode804196C0 *context;
     Node_func_8041B6E8_de *node;
     s32 i;
 
@@ -164,7 +164,7 @@ s16 func_8041B810_de(struct SlotsRecAt4C *object, s32 index) {
     return object->entries[index]->unkC;
 }
 
-void func_8041B828_de(Context_func_8041B6E8_de *context, s32 index, s32 id) {
+void func_8041B828_de(ContextCode804196C0 *context, s32 index, s32 id) {
     Node_func_8041B6E8_de *node;
     s32 i;
 
@@ -184,7 +184,7 @@ void func_8041B828_de(Context_func_8041B6E8_de *context, s32 index, s32 id) {
     }
 }
 
-void func_8041B8DC_de(Context_func_8041B6E8_de *context, s32 index, Node_func_8041B6E8_de *node) {
+void func_8041B8DC_de(ContextCode804196C0 *context, s32 index, Node_func_8041B6E8_de *node) {
     s32 i;
 
     if (context->locked[index] == 0) {

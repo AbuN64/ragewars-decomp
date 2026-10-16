@@ -9,7 +9,7 @@
 extern void func_80271FC8_de(Vec3 *, f32, Vec3 *, Vec3 *);
 extern f32 func_80275DD4_de(s32, f32, f32);
 extern void func_802761EC_de(s32, f32);
-void func_80206DD4_de(Actor_func_80206DD4_de *actor, Rider_func_80206DD4_de *rider) {
+void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
     Vec3 point;
     SegmentRecAt5C *segment;
     f32 t;

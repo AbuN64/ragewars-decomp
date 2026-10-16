@@ -3,7 +3,7 @@
 extern f32 D_800D2988;
 extern f32 D_800C1B04_de, D_800C1B08_de, D_800C1B0C_de;
 
-void func_80206A20_de(Actor_func_80206DD4_de *arg0, Rider_func_80206DD4_de *arg1) {
+void func_80206A20_de(Actor_func_80206DD4_de *arg0, RiderCode80206258 *arg1) {
     f32 temp_fs0;
     f32 temp_fs0f;
     f32 temp_fv0;

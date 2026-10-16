@@ -75,11 +75,11 @@ struct OwnedImage {
 
 struct OwnedImage;
 
-struct Cell_func_804122CC_de;
-typedef struct Cell_func_804122CC_de Cell_func_804122CC_de;
+struct CellCode8040B45C;
+typedef struct CellCode8040B45C CellCode8040B45C;
 
-struct Cell_func_804122CC_de;
-struct Cell_func_804122CC_de {
+struct CellCode8040B45C;
+struct CellCode8040B45C {
     Layout layout;
     u8 fg;
     u8 bg;

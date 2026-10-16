@@ -27,8 +27,8 @@ struct Record_func_8041B22C_de {
 struct Mixer;
 typedef struct Mixer Mixer;
 
-struct Context_func_8041B6E8_de;
-typedef struct Context_func_8041B6E8_de Context_func_8041B6E8_de;
+struct ContextCode804196C0;
+typedef struct ContextCode804196C0 ContextCode804196C0;
 
 struct Node_func_8041B610_de;
 struct OwnerRecAt44;
@@ -119,8 +119,8 @@ struct Node_func_8041B6E8_de {
     s16 id;
 };
 
-struct Context_func_8041B6E8_de;
-struct Context_func_8041B6E8_de {
+struct ContextCode804196C0;
+struct ContextCode804196C0 {
     s32 words_00[17];
     void *root;
     s32 words_48;
@@ -129,11 +129,11 @@ struct Context_func_8041B6E8_de {
     s32 shared;
 };
 
-struct Context_func_8041B6E8_de;
+struct ContextCode804196C0;
 struct OwnerRecAt8V1;
 struct OwnerRecAt8V1 {
     s32 words_00[2];
-    struct Context_func_8041B6E8_de *context;
+    struct ContextCode804196C0 *context;
 };
 
 struct Record_func_8041B110_de;
@@ -165,7 +165,7 @@ struct Mixer {
     int muted[4];
 };
 
-extern void func_8041B828_de(Context_func_8041B6E8_de *context, s32 index, s32 id);
+extern void func_8041B828_de(ContextCode804196C0 *context, s32 index, s32 id);
 
 struct Record_func_8041B22C_de;
 typedef struct Record_func_8041B22C_de Record_func_8041B22C_de;

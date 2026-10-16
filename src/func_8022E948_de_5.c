@@ -40,69 +40,69 @@ void func_8022F204_de(s32 arg0) {
 }
 
 void func_8022F314_de(void *arg0, unsigned char arg1) {
-    ((Obj_func_8022F3A4_de *)arg0)->value14 = arg1;
+    ((ObjCode8022E938 *)arg0)->value14 = arg1;
 }
 
 /** Advance the byte at offset 0x14 by ten. */
 void func_8022F31C_de(void *object) {
-    ((Obj_func_8022F3A4_de *)object)->value14 += 10;
+    ((ObjCode8022E938 *)object)->value14 += 10;
 }
 
 /** Read the byte at object offset 0x14. */
 unsigned char func_8022F32C_de(void *arg0) {
-    return ((Obj_func_8022F3A4_de *)arg0)->value14;
+    return ((ObjCode8022E938 *)arg0)->value14;
 }
 
 /** Store a byte in the object field at offset 0x15. */
 void func_8022F338_de(void *object, unsigned char value) {
-    ((Obj_func_8022F3A4_de *)object)->value15 = value;
+    ((ObjCode8022E938 *)object)->value15 = value;
 }
 
 int func_8022F340_de(void *arg0) {
-    int v = ((Obj_func_8022F3A4_de *)arg0)->value15 + 0x32;
-    ((Obj_func_8022F3A4_de *)arg0)->value15 = (unsigned char)v;
+    int v = ((ObjCode8022E938 *)arg0)->value15 + 0x32;
+    ((ObjCode8022E938 *)arg0)->value15 = (unsigned char)v;
     return v;
 }
 
 unsigned char func_8022F350_de(void *arg0) {
-    return ((Obj_func_8022F3A4_de *)arg0)->value15;
+    return ((ObjCode8022E938 *)arg0)->value15;
 }
 
 /** Store the supplied byte at offset 0x16. */
 void func_8022F35C_de(void *object, unsigned char value) {
-    ((Obj_func_8022F3A4_de *)object)->value16 = value;
+    ((ObjCode8022E938 *)object)->value16 = value;
 }
 
 int func_8022F364_de(void *arg0) {
-    int v = ((Obj_func_8022F3A4_de *)arg0)->value16 + 0x32;
-    ((Obj_func_8022F3A4_de *)arg0)->value16 = (unsigned char)v;
+    int v = ((ObjCode8022E938 *)arg0)->value16 + 0x32;
+    ((ObjCode8022E938 *)arg0)->value16 = (unsigned char)v;
     return v;
 }
 
 /** Read the object byte at offset 0x16. */
 unsigned char func_8022F374_de(void *object) {
-    return ((Obj_func_8022F3A4_de *)object)->value16;
+    return ((ObjCode8022E938 *)object)->value16;
 }
 
 void func_8022F380_de(void *arg0, int arg1) {
-    ((Obj_func_8022F3A4_de *)arg0)->progress = arg1;
+    ((ObjCode8022E938 *)arg0)->progress = arg1;
 }
 
 /** Advance the word at offset 0x10 by 0x500. */
 void func_8022F388_de(void *object) {
-    ((Obj_func_8022F3A4_de *)object)->progress += 0x500;
+    ((ObjCode8022E938 *)object)->progress += 0x500;
 }
 
 /** Return the word stored at offset 0x10. */
 unsigned int func_8022F398_de(void *object) {
-    return ((Obj_func_8022F3A4_de *)object)->progress;
+    return ((ObjCode8022E938 *)object)->progress;
 }
 
 /* Stores a byte into the object's slot table at 0x18: indices 0 to 10 directly, 17 and 18 into
    slots 11 and 12, and other indices are ignored. */
 
 
-void func_8022F3A4_de(Obj_func_8022F3A4_de *obj, int index, char value) {
+void func_8022F3A4_de(ObjCode8022E938 *obj, int index, char value) {
     if (index == 17) {
         goto is17;
     }

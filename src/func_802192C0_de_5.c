@@ -27,7 +27,7 @@ extern void func_8026925C_de(s32);
 extern void func_80268CE0_de(s32);
 extern void func_802A5498_de(UnitMtx *, s32, s32, s32);
 
-void func_8021C698_de(Player_func_8021C698_de *player) {
+void func_8021C698_de(PlayerCode802192C0 *player) {
     s32 red;
     s32 low;
     s32 high;

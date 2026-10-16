@@ -1,7 +1,7 @@
 #ifndef UNBAKE_DRAFT_FIELDS_FUNC_80283278_DE_H
 #define UNBAKE_DRAFT_FIELDS_FUNC_80283278_DE_H
 /* Measured 4-byte access at 0xFC50; storage view, complete object unknown. */
-struct Measured_func_80283278_de_0de4a5b91c75 { unsigned char padding[64592]; void * value; };
+struct MeasuredCode8028308C { unsigned char padding[64592]; void * value; };
 /* Measured 2-byte access at 4; storage view, complete object unknown. */
 struct Measured_func_80283278_de_8375b44410ce { unsigned char padding[4]; u16 value; };
 /* Measured 4-byte access at 0x1EC; storage view, complete object unknown. */

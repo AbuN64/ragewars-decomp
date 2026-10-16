@@ -87,8 +87,8 @@ struct Char {
 };
 
 struct Char;
-struct Player_func_80432158_de;
-struct Player_func_80432158_de {
+struct PlayerCode8042E080;
+struct PlayerCode8042E080 {
     s32 state;
     char pad4[0xB34 - 0x4];
     struct Char name[8];
@@ -97,11 +97,11 @@ struct Player_func_80432158_de {
 };
 
 struct Block_func_80432158_de;
-struct Player_func_80432158_de;
+struct PlayerCode8042E080;
 struct Block_func_80432158_de {
     char pad0[0x54];
     s32 phase;
-    struct Player_func_80432158_de players[4];
+    struct PlayerCode8042E080 players[4];
 };
 
 struct Record_func_804347CC_de;
@@ -111,8 +111,8 @@ struct Record_func_804347CC_de {
     char padE[400 - 0xE];
 };
 
-struct Player_func_804347CC_de;
-struct Player_func_804347CC_de {
+struct PlayerCode8042E080804347CC;
+struct PlayerCode8042E080804347CC {
     s32 state; /* 0x0 */
     char pad4[0x10];
     s32 back; /* 0x14 */
@@ -124,11 +124,11 @@ struct Player_func_804347CC_de {
 };
 
 struct Block_func_804347CC_de;
-struct Player_func_804347CC_de;
+struct PlayerCode8042E080804347CC;
 struct Record_func_804347CC_de;
 struct Block_func_804347CC_de {
     char pad0[0x58];
-    struct Player_func_804347CC_de players[4];
+    struct PlayerCode8042E080804347CC players[4];
     char pad2DF8[0x2E28 - 0x2DF8];
     struct Record_func_804347CC_de saved[4];
     s32 savedProfile; /* 0x3468 */
@@ -150,8 +150,8 @@ struct Shared_Item {
 
 extern void func_80434B08_de(s32 player);
 
-struct Player_func_8043497C_de;
-struct Player_func_8043497C_de {
+struct PlayerCode8042E0808043497C;
+struct PlayerCode8042E0808043497C {
     char pad0[0x4];
     s32 word4;
     char pad8[0x18 - 0x8];
@@ -263,8 +263,8 @@ struct Item_func_80433BCC_de {
     struct func_8028469C_S2 *label;
 };
 
-struct Player_func_80433BCC_de;
-struct Player_func_80433BCC_de {
+struct PlayerCode8042E08080433BCC;
+struct PlayerCode8042E08080433BCC {
     char pad0[0x18];
     char slots[4][400];
     char pad658[0xAEC - 0x658];
@@ -299,8 +299,8 @@ struct Blk {
     s32 unkBA4;
 };
 
-struct Player_func_80434638_de;
-struct Player_func_80434638_de {
+struct PlayerCode8042E08080434638;
+struct PlayerCode8042E08080434638 {
     s32 first;
     char pad4[0x14 - 0x4];
     s32 second;
@@ -313,29 +313,29 @@ extern void func_80433398_de(s32 arg0);
 
 struct Block_func_80434638_de;
 struct Packet;
-struct Player_func_80434638_de;
+struct PlayerCode8042E08080434638;
 struct Block_func_80434638_de {
     char pad0[0x58];
-    struct Player_func_80434638_de players[4];
+    struct PlayerCode8042E08080434638 players[4];
     char pad2DF8[0x2E28 - 0x2DF8];
     struct Packet packet;
 };
 
 struct Block_func_80433BCC_de;
-struct Player_func_80433BCC_de;
+struct PlayerCode8042E08080433BCC;
 struct Block_func_80433BCC_de {
     void *window;
     void *list;
     char pad8[0x58 - 0x8];
-    struct Player_func_80433BCC_de players[4];
+    struct PlayerCode8042E08080433BCC players[4];
 };
 
 struct Block_func_8043497C_de;
-struct Player_func_8043497C_de;
+struct PlayerCode8042E0808043497C;
 struct Triple;
 struct Block_func_8043497C_de {
     char pad0[0x58];
-    struct Player_func_8043497C_de players[4];
+    struct PlayerCode8042E0808043497C players[4];
     struct Triple places[4];
 };
 

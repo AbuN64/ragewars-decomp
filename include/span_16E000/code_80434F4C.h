@@ -32,8 +32,8 @@ struct ObjectState71 {
     char unk_70;
 };
 
-struct Entry_func_80434EF4_de;
-typedef struct Entry_func_80434EF4_de Entry_func_80434EF4_de;
+struct EntryCode8042E080;
+typedef struct EntryCode8042E080 EntryCode8042E080;
 
 extern void func_80434FB4_de(s32 value);
 
@@ -133,13 +133,13 @@ struct func_80435898_S1 {
 
 extern int D_800E54A0;
 
-struct Entry_func_80435128_de;
-typedef struct Entry_func_80435128_de Entry_func_80435128_de;
+struct EntryCode8042E08080435128;
+typedef struct EntryCode8042E08080435128 EntryCode8042E08080435128;
 
 extern void func_8043542C_de(s32 index);
 
-struct Entry_func_80434EF4_de;
-struct Entry_func_80434EF4_de {
+struct EntryCode8042E080;
+struct EntryCode8042E080 {
     u8 pad0[0xB4C];
     InventorySlot name[8];
     s32 cursor;
@@ -150,25 +150,25 @@ extern s32 func_804352C8_de(s32 first, s32 second);
 
 extern int func_80435340_de(void);
 
-struct Player_func_80435128_de;
-typedef struct Player_func_80435128_de Player_func_80435128_de;
+struct PlayerCode8042E08080435128;
+typedef struct PlayerCode8042E08080435128 PlayerCode8042E08080435128;
 
-struct Entry_func_80435128_de;
-struct Entry_func_80435128_de {
+struct EntryCode8042E08080435128;
+struct EntryCode8042E08080435128 {
     char pad[0x7D];
     signed char state;
     char pad7E[0x190 - 0x7E];
 };
 
-struct Player_func_80435128_de;
-struct Player_func_80435128_de {
-    Entry_func_80435128_de entries[4];
+struct PlayerCode8042E08080435128;
+struct PlayerCode8042E08080435128 {
+    EntryCode8042E08080435128 entries[4];
     char pad[0xB68 - 0x640];
 };
 
 struct Game_func_80435128_de;
 struct Game_func_80435128_de {
-    Player_func_80435128_de players[4];
+    PlayerCode8042E08080435128 players[4];
 };
 
 extern void func_804354C0_de(s32 index);
@@ -244,7 +244,7 @@ struct NameEntryMenu {
     s32 unk4;
     u8 pad8[0x24];
     s32 flags[5];
-    Entry_func_80434EF4_de entries[1];
+    EntryCode8042E080 entries[1];
 };
 
 struct ObjectState71;

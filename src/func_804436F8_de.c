@@ -119,7 +119,7 @@ s32 func_804438BC_de(StateRecAt1C *arg0) {
     TutorialProgress *state;
     s32 temp_v0;
     s32 var_v0;
-    Actor_func_804438BC_de *temp_s0;
+    ActorCode80443868804438BC *temp_s0;
     temp_s0 = arg0->unk1C;
     if ((temp_s0->unk1450 == 0) && (func_8022B178_de(temp_s0) != 0)) {
         temp_v0 = temp_s0->unk1340 + 1;

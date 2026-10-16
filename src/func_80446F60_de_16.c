@@ -61,7 +61,7 @@ extern s32 D_80146898;
 
 extern void func_80214178_de(void *, void *, s32);
 
-extern void func_8021B1E4_de(struct Actor_func_8044A020_de *, s32, s32, s32);
+extern void func_8021B1E4_de(struct ActorCode80447BB0 *, s32, s32, s32);
 
 void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
     extern void func_80448EF4_de(void *, s32, s32);
@@ -234,7 +234,7 @@ initialized:
     ((IntegerState88 *)(state))->unk_84 = 3;
 }
 
-void func_80449DB0_de(struct Record_func_80449DB0_de *record) {
+void func_80449DB0_de(struct RecordCode80447BB0 *record) {
     func_802A001C_de(record, 0, 0x44);
     func_80255CA0_de(&record->listC, 0x16DC, 0x16E0);
     func_80255CA0_de(&record->list20, 0x16DC, 0x16E0);
@@ -281,7 +281,7 @@ void func_80449E18_de(Node_func_80449E18_de *arg0) {
     }
 }
 
-void func_80449EE4_de(char *player, s32 slot, Record_func_80449EE4_de *record) {
+void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
     extern void func_802A6F68_de(char *);
     extern void func_8026367C_de(char *, char *);
     extern void func_8021A78C_de(char *);
@@ -334,8 +334,8 @@ void func_80449EE4_de(char *player, s32 slot, Record_func_80449EE4_de *record) {
     func_802A6F68_de((char *)player + 0xD40);
 }
 
-void func_8044A020_de(struct Actor_func_8044A020_de *actor, void *second) {
-    extern void func_80448EF4_de(struct Actor_func_8044A020_de *, void *, s32);
+void func_8044A020_de(struct ActorCode80447BB0 *actor, void *second) {
+    extern void func_80448EF4_de(struct ActorCode80447BB0 *, void *, s32);
     actor->part->active = 1;
     func_80448EF4_de(actor, second, 1);
     func_80214178_de(&actor->firstEffect, &actor->secondEffect, 2);

@@ -60,7 +60,7 @@ static inline s32 accepts(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly) {
 
 struct Query;
 
-void func_8023E6EC_de(Segment_func_8023E6EC_de *arg0, struct Query *arg1) {
+void func_8023E6EC_de(SegmentCode8023A284 *arg0, struct Query *arg1) {
     f32 start;
     f32 span;
     f32 flat;

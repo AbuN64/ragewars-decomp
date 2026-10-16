@@ -23,8 +23,8 @@ struct Screen_func_8043ACF0_de {
     struct Entry_func_8043ACF0_de entries[4];
 };
 
-struct Entry_func_8043BA5C_de;
-struct Entry_func_8043BA5C_de {
+struct EntryCode8043A0A48043BA5C;
+struct EntryCode8043A0A48043BA5C {
     void *window;
     char pad4[0x4B4 - 0x4];
     s32 selection;
@@ -34,20 +34,20 @@ struct Entry_func_8043BA5C_de {
 
 extern s32 func_8043C2D4_de(s32 *record);
 
-struct Entry_func_8043B6E8_de;
-struct Entry_func_8043B6E8_de {
+struct EntryCode8043A0A48043B6E8;
+struct EntryCode8043A0A48043B6E8 {
     char pad0[0x4B0];
     s32 values[6];
     char pad4C8[0x4CC - 0x4C8];
     s32 mode;
 };
 
-struct Entry_func_8043B6E8_de;
+struct EntryCode8043A0A48043B6E8;
 struct Screen_func_8043B6E8_de;
 struct Screen_func_8043B6E8_de {
     void *window;
     s32 pad4;
-    struct Entry_func_8043B6E8_de entries[4];
+    struct EntryCode8043A0A48043B6E8 entries[4];
 };
 
 struct EntryRecAt4D4;
@@ -81,8 +81,8 @@ struct FourPlayerResultsScreen {
 };
 typedef struct FourPlayerResultsScreen FourPlayerResultsScreen;
 
-struct Entry_func_8043BBB0_de;
-struct Entry_func_8043BBB0_de {
+struct EntryCode8043A0A48043BBB0;
+struct EntryCode8043A0A48043BBB0 {
     char pad[0x4B0];
     s32 state;
     s32 selection;
@@ -91,15 +91,15 @@ struct Entry_func_8043BBB0_de {
 
 extern s32 func_8043C2E0_de(s32 *record);
 
-struct Entry_func_8043BA5C_de;
+struct EntryCode8043A0A48043BA5C;
 struct Screen_func_8043BA5C_de;
 struct Screen_func_8043BA5C_de {
-    struct Entry_func_8043BA5C_de entries[4];
+    struct EntryCode8043A0A48043BA5C entries[4];
 };
 
-struct Entry_func_8043B0CC_de;
+struct EntryCode8043A0A4;
 struct Resource_func_80419E54_de;
-struct Entry_func_8043B0CC_de {
+struct EntryCode8043A0A4 {
     char pad0[0x4A8];
     s32 open;
     s32 column;
@@ -115,12 +115,12 @@ extern s32 func_8043BA24_de();
 
 struct FourPlayerResultsScreen;
 
-struct Entry_func_8043B0CC_de;
+struct EntryCode8043A0A4;
 struct Screen_func_8043B0CC_de;
 struct Screen_func_8043B0CC_de {
     s32 window;
     s32 unk4;
-    struct Entry_func_8043B0CC_de entries[4];
+    struct EntryCode8043A0A4 entries[4];
 };
 
 extern s32 func_8043BFF0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
@@ -132,10 +132,10 @@ struct EntryRecAt4B0 {
     char pad4B4[0x4D0 - 0x4B4];
 };
 
-struct Entry_func_8043BBB0_de;
+struct EntryCode8043A0A48043BBB0;
 struct Screen_func_8043BBB0_de;
 struct Screen_func_8043BBB0_de {
-    struct Entry_func_8043BBB0_de entries[4];
+    struct EntryCode8043A0A48043BBB0 entries[4];
 };
 
 extern int func_8043B854_de();

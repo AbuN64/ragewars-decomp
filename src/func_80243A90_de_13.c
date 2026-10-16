@@ -183,10 +183,10 @@ s32 func_8024643C_de(Instance8020CD74 *arg0, Instance8020CD74 *arg1) {
     return collisions == 0;
 }
 
-s32 func_80246558_de(Instance8020CD74 *arg0, Vec3Words arg1, CollisionInfo_func_80246558_de *arg2) {
-    extern s32 func_80243A90_de(Instance8020CD74 *, Vec3Words, CollisionInfo_func_80246558_de *);
+s32 func_80246558_de(Instance8020CD74 *arg0, Vec3Words arg1, CollisionInfoCode80243A80 *arg2) {
+    extern s32 func_80243A90_de(Instance8020CD74 *, Vec3Words, CollisionInfoCode80243A80 *);
     Instance8020CD74 saved;
-    CollisionInfo_func_80246558_de collision_info;
+    CollisionInfoCode80243A80 collision_info;
     s32 collisions;
 
     saved = *arg0;

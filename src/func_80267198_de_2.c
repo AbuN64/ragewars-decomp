@@ -57,7 +57,7 @@ extern f32 D_800C4450_de;
 
 extern char D_8011D8D0;
 
-extern void func_8022B09C_de(SharedPlayer_func_80267958_de *, Vec3 *);
+extern void func_8022B09C_de(SharedPlayerCode802661FC *, Vec3 *);
 
 extern void func_80271818_de(struct Shape_typemap_165 *, Vec3 *);
 
@@ -151,8 +151,8 @@ have:
     return scale;
 }
 
-void func_80267958_de(SharedPlayer_func_80267958_de *target, Actor_func_80267958_de *actor, Triple position, Vec3 direction, s32 kind) {
-    SharedPlayer_func_80267958_de *player;
+void func_80267958_de(SharedPlayerCode802661FC *target, Actor_func_80267958_de *actor, Triple position, Vec3 direction, s32 kind) {
+    SharedPlayerCode802661FC *player;
     Vec3 v;
     Triple point;
     Triple zero;

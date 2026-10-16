@@ -542,13 +542,13 @@ extern float D_800C2E8C_de;
 
 
 
-struct Obj_func_8022F3A4_de;
-typedef struct Obj_func_8022F3A4_de Obj_func_8022F3A4_de;
+struct ObjCode8022E938;
+typedef struct ObjCode8022E938 ObjCode8022E938;
 
 extern s32 func_8022EF04_de(s32 arg0, s32 arg1);
 
-struct Obj_func_8022F3A4_de;
-struct Obj_func_8022F3A4_de {
+struct ObjCode8022E938;
+struct ObjCode8022E938 {
     char pad[8];
     s32 state; /* 0x08 */
     u8 fieldC;

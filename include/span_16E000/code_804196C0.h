@@ -47,9 +47,9 @@ struct Record_func_8041A280_de {
 struct Animation;
 typedef struct Animation Animation;
 
-struct Object_func_80419F58_de;
+struct ObjectCode804196C0;
 struct Resource_func_80419E54_de;
-struct Object_func_80419F58_de {
+struct ObjectCode804196C0 {
     char pad0[0x44];
     s32 busy;
     char pad48[0x4C - 0x48];

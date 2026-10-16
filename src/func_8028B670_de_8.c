@@ -325,7 +325,7 @@ void func_8028D964_de(void *arg0, s32 arg1) {
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V2 *)(arg0))->value == 0 || ((struct Measured_func_8028D964_de_7705078627e3 *)(arg0))->value != arg1) {
+    if (((struct MeasuredRecAt14V2 *)(arg0))->value == 0 || ((struct MeasuredCode8028B64C *)(arg0))->value != arg1) {
         func_8028DA74_de(arg0);
         if (((struct MeasuredRecAtCV3 *)(arg0))->value != 0) {
             size = 0x10;
@@ -341,7 +341,7 @@ void func_8028D964_de(void *arg0, s32 arg1) {
                 if ((((struct MeasuredRecAt14V6 *)(arg0))->value =
                      func_8025193C_de(0, key, key, sp28, size, 0,
                                    &D_00285160, &D_800C52BC, one)) != 0) {
-                    ((struct Measured_func_8028D964_de_7705078627e3 *)(arg0))->value = arg1;
+                    ((struct MeasuredCode8028B64C *)(arg0))->value = arg1;
                 }
             }
         }

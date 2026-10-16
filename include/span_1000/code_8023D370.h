@@ -304,8 +304,8 @@ struct func_8023EE50_S1 {
     EntryRecAt24 unk28;
 };
 
-struct Segment_func_8023E6EC_de;
-typedef struct Segment_func_8023E6EC_de Segment_func_8023E6EC_de;
+struct SegmentCode8023A284;
+typedef struct SegmentCode8023A284 SegmentCode8023A284;
 
 struct func_8023EE24_S1;
 struct func_8023EE24_S1 {
@@ -324,8 +324,8 @@ struct func_8023EE24_S1 {
     unsigned int unkC4;
 };
 
-struct Segment_func_8023E6EC_de;
-struct Segment_func_8023E6EC_de {
+struct SegmentCode8023A284;
+struct SegmentCode8023A284 {
     char pad0[0x40];
     Field_f32_10 *limits;
     f32 x0;

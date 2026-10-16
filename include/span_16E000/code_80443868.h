@@ -46,19 +46,19 @@ typedef struct ArgRecAt1C ArgRecAt1C;
 
 extern void func_80443CD4_de(ArgRecAt1C *arg0);
 
-struct Actor_func_804438BC_de;
-struct Actor_func_804438BC_de {
+struct ActorCode80443868804438BC;
+struct ActorCode80443868804438BC {
     char pad0[4928];
     s32 unk1340;
     char pad1344[268];
     s32 unk1450;
 };
 
-struct Actor_func_804438BC_de;
+struct ActorCode80443868804438BC;
 struct StateRecAt1C;
 struct StateRecAt1C {
     char pad0[28];
-    struct Actor_func_804438BC_de * unk1C;
+    struct ActorCode80443868804438BC * unk1C;
 };
 
 struct CaptionEntry;
@@ -138,8 +138,8 @@ struct CaptionEntry {
 
 extern void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, Style_func_8043C9AC_de *arg3);
 
-struct Actor_func_804438BC_de;
-typedef struct Actor_func_804438BC_de Actor_func_804438BC_de;
+struct ActorCode80443868804438BC;
+typedef struct ActorCode80443868804438BC ActorCode80443868804438BC;
 
 struct RootRecAt1C;
 extern s32 func_804436F8_de(void *unused, struct RootRecAt1C *root);

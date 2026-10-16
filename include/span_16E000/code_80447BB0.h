@@ -120,8 +120,8 @@ struct func_804499B0_de_S3 {
     s16 unk16D8;
 };
 
-struct Entry_func_80448CC4_de;
-struct Entry_func_80448CC4_de {
+struct EntryCode80447BB0;
+struct EntryCode80447BB0 {
     s32 pad0;
     s32 first;
     s32 second;
@@ -1576,14 +1576,14 @@ struct SharedPlayer_func_8044972C_de {
 
 extern u16 func_80448B84_de(u8 *bytes, s32 count);
 
-struct Record_func_80449EE4_de;
-typedef struct Record_func_80449EE4_de Record_func_80449EE4_de;
+struct RecordCode80447BB080449EE4;
+typedef struct RecordCode80447BB080449EE4 RecordCode80447BB080449EE4;
 
 struct __OSPackId;
 typedef struct __OSPackId __OSPackId;
 
-struct Record_func_80449EE4_de;
-struct Record_func_80449EE4_de {
+struct RecordCode80447BB080449EE4;
+struct RecordCode80447BB080449EE4 {
     char pad0[0x7F];
     signed char slot;
     char pad80;
@@ -1613,10 +1613,10 @@ struct Mode;
 struct Model;
 struct Mount;
 struct Profile;
-struct Record_func_80449EE4_de;
+struct RecordCode80447BB080449EE4;
 struct Rider;
 struct Settings;
-struct SharedPlayer_func_80449EE4_de;
+struct SharedPlayerCode80447BB0;
 struct Shared_Body;
 struct Shared_Hud;
 struct Shared_Model;
@@ -1626,7 +1626,7 @@ struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
 struct View;
-struct SharedPlayer_func_80449EE4_de {
+struct SharedPlayerCode80447BB0 {
     union {
         struct {
             u8 unk0[24];
@@ -1793,15 +1793,15 @@ struct SharedPlayer_func_80449EE4_de {
         } view1D4_21;
         struct {
             char pad[0x1BC];
-            struct SharedPlayer_func_80449EE4_de * unk1D8;
+            struct SharedPlayerCode80447BB0 * unk1D8;
         } view1D8_22;
         struct {
             char pad[0x1BC];
-            struct SharedPlayer_func_80449EE4_de * self;
+            struct SharedPlayerCode80447BB0 * self;
         } view1D8_23;
         struct {
             char pad[0x1BC];
-            struct SharedPlayer_func_80449EE4_de * f1D8;
+            struct SharedPlayerCode80447BB0 * f1D8;
         } view1D8_24;
         struct {
             char pad[0x1BC];
@@ -1922,10 +1922,10 @@ struct SharedPlayer_func_80449EE4_de {
     } views1C;
     union {
         struct {
-            struct Record_func_80449EE4_de * unk5D8;
+            struct RecordCode80447BB080449EE4 * unk5D8;
         } view5D8_0;
         struct {
-            struct Record_func_80449EE4_de * record;
+            struct RecordCode80447BB080449EE4 * record;
         } view5D8_1;
         struct {
             struct Controls * controls;
@@ -3037,13 +3037,13 @@ struct SharedPlayer_func_80449EE4_de {
     char pad16DA[0x6];
     union {
         struct {
-            struct SharedPlayer_func_80449EE4_de * unk16E0;
+            struct SharedPlayerCode80447BB0 * unk16E0;
         } view16E0_0;
         struct {
-            struct SharedPlayer_func_80449EE4_de * next;
+            struct SharedPlayerCode80447BB0 * next;
         } view16E0_1;
         struct {
-            struct SharedPlayer_func_80449EE4_de * next;
+            struct SharedPlayerCode80447BB0 * next;
         } view16E0_2;
     } views16E0;
 };
@@ -3089,9 +3089,9 @@ struct Node_func_80449E18_de {
     struct Node_func_80449E18_de *unk16E0;
 };
 
-struct Actor_func_8044A020_de;
+struct ActorCode80447BB0;
 struct Part;
-struct Actor_func_8044A020_de {
+struct ActorCode80447BB0 {
     char pad[0x2E8];
     char firstEffect[0x170]; /* 0x2E8 */
     char secondEffect[0x180]; /* 0x458 */
@@ -3101,15 +3101,15 @@ struct Actor_func_8044A020_de {
 struct SharedPlayer_func_8044972C_de;
 typedef struct SharedPlayer_func_8044972C_de SharedPlayer_func_8044972C_de;
 
-struct SharedPlayer_func_80449EE4_de;
-typedef struct SharedPlayer_func_80449EE4_de SharedPlayer_func_80449EE4_de;
+struct SharedPlayerCode80447BB0;
+typedef struct SharedPlayerCode80447BB0 SharedPlayerCode80447BB0;
 
 struct ObjectState96;
 typedef struct ObjectState96 ObjectState96;
 
-struct Record_func_80449DB0_de;
+struct RecordCode80447BB0;
 /* A 0x44-byte record: three leading words, two lists of 0x16DC/0x16E0-linked nodes, four trailing words. */
-struct Record_func_80449DB0_de {
+struct RecordCode80447BB0 {
     s32 word0;
     s32 word4;
     s32 word8;

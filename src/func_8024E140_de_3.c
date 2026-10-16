@@ -48,7 +48,7 @@ void func_8024E59C_de(void *arg0, void *arg1, void *arg2) {
 
 /** Return offset 0x34 only when the type byte at offset 0 is 1. */
 int func_8024E610_de(void *arg0) {
-    struct Item_func_8024E6A0_de *item = arg0;
+    struct ItemCode8024E130 *item = arg0;
     if (item->kind == 1) {
         return (int)item->value;
     }
@@ -88,7 +88,7 @@ float func_8024E678_de(Shared_Func80243A80Actor *object) {
     return object->groundY;
 }
 
-void *func_8024E6A0_de(struct Item_func_8024E6A0_de *item) {
+void *func_8024E6A0_de(struct ItemCode8024E130 *item) {
     if (item->kind == 1 && item->value != 0 && (item->flags & 3) != 0) {
         return item->value;
     }

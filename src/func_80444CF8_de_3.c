@@ -227,8 +227,8 @@ s32 func_80444424_de(struct Field *field, struct Menu_func_8043E494_de *holder) 
 }
 
 s32 func_80444488_de(void *first, struct Holder_func_80444488_de *holder) {
-    extern struct Settings_func_80444488_de D_80146302;
-    struct Settings_func_80444488_de *settings = &D_80146302;
+    extern struct SettingsCode80444030 D_80146302;
+    struct SettingsCode80444030 *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
@@ -238,9 +238,9 @@ s32 func_80444488_de(void *first, struct Holder_func_80444488_de *holder) {
 }
 
 s32 func_804444EC_de(struct FieldRecAt14 *field, struct Holder_func_80444488_de *holder) {
-    extern struct Settings_func_80444488_de D_80146302;
+    extern struct SettingsCode80444030 D_80146302;
     s32 result = 0;
-    struct Settings_func_80444488_de *settings = &D_80146302;
+    struct SettingsCode80444030 *settings = &D_80146302;
 
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;

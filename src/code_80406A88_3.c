@@ -11,6 +11,6 @@
  /* opaque address transport */
 
 s32 func_804460E4_eu_x(void *arg0) {
-    ((struct Measured_func_804460E4_eu_x_5a0991979bf8 *)(arg0))->value = &D_800DDCB8; /* types.abi.opaque_pointer: field carries an address only */
+    ((struct MeasuredCode8042FBEC *)(arg0))->value = &D_800DDCB8; /* types.abi.opaque_pointer: field carries an address only */
     return 0;
 }

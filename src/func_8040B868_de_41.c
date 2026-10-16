@@ -474,7 +474,7 @@ void func_804121F0_de(List *list) {
 
 
 
-void func_804122CC_de(ScrollTable *table, Cell_func_804122CC_de *cell, u32 row, u32 col) {
+void func_804122CC_de(ScrollTable *table, CellCode8040B45C *cell, u32 row, u32 col) {
     s32 lastCol;
     s32 lastRow;
     u32 entryCol;

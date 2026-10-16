@@ -101,7 +101,7 @@ extern char D_800D3368;
 extern char D_800D3390;
 extern char D_800D33C0;
 extern char D_800D34C0;
-extern Actor_func_802AB6EC_de *D_80145060;
+extern Other *D_80145060;
 static inline Handler *find_handler(char *table, s32 count, s32 size, s32 id) {
     Handler *entry;
     s32 i;
@@ -116,9 +116,9 @@ static inline Handler *find_handler(char *table, s32 count, s32 size, s32 id) {
     } while (i != -1);
     return 0;
 }
-s32 func_802AB6EC_de(Actor_func_802AB6EC_de *actor, s32 target, s32 id) {
+s32 func_802AB6EC_de(Other *actor, s32 target, s32 id) {
     Handler *entry;
-    Actor_func_802AB6EC_de *other;
+    Other *other;
     s32 result;
     result = 0;
     if (actor->enabled != 0) {

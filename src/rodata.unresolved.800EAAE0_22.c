@@ -10,7 +10,7 @@
 
 extern void func_8029973C_de();
 
-extern void func_8041B8DC_de(struct Context_func_8041B6E8_de *, s32, void *);
+extern void func_8041B8DC_de(struct ContextCode804196C0 *, s32, void *);
 
 /* After func_8029973C_de, forwards an event for a channel to func_802995D4_de with the channel's handler id
    (short at 0xC of the handler at 0x4C) when the channel is not muted (word at 0x5C) and has a handler;
@@ -26,7 +26,7 @@ extern void func_802995D4_de(int, int, int, int, int);
 /* Calls func_802547E4_de with the arguments it was given and returns zero. */
 extern void func_802547E4_de();
 
-s32 func_8041BB3C_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BB3C_de(struct ContextCode804196C0 *owner, s32 arg1, s32 slot, s32 kind) {
     struct Child *child;
 
     func_8029973C_de();
@@ -50,7 +50,7 @@ s32 func_8041BB3C_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot,
     return 0;
 }
 
-s32 func_8041BBD0_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BBD0_de(struct ContextCode804196C0 *owner, s32 arg1, s32 slot, s32 kind) {
     struct ChildRecAt2C *child;
 
     func_8029973C_de();
@@ -74,7 +74,7 @@ s32 func_8041BBD0_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot,
     return 0;
 }
 
-s32 func_8041BC64_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BC64_de(struct ContextCode804196C0 *owner, s32 arg1, s32 slot, s32 kind) {
     struct ChildRecAt38 *child;
 
     func_8029973C_de();
@@ -98,7 +98,7 @@ s32 func_8041BC64_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot,
     return 0;
 }
 
-s32 func_8041BCF8_de(struct Context_func_8041B6E8_de *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BCF8_de(struct ContextCode804196C0 *owner, s32 arg1, s32 slot, s32 kind) {
     struct ChildRecAt30 *child;
 
     func_8029973C_de();

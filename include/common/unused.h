@@ -2689,8 +2689,8 @@ struct ALEvent;
 struct ALFx2C;
 typedef struct ALFx2C ALFx2C;
 
-struct ALFx_func_802B5B94_de;
-typedef struct ALFx_func_802B5B94_de ALFx_func_802B5B94_de;
+struct ALFxCode802BAC64;
+typedef struct ALFxCode802BAC64 ALFxCode802BAC64;
 
 struct ALGlobals_func_802B5B94_de;
 typedef struct ALGlobals_func_802B5B94_de ALGlobals_func_802B5B94_de;
@@ -2704,8 +2704,8 @@ typedef struct ALRAWWaveInfo ALRAWWaveInfo;
 struct ALSeqPlayer88;
 typedef struct ALSeqPlayer88 ALSeqPlayer88;
 
-struct ALSeqPlayer_func_802B0A90_de;
-typedef struct ALSeqPlayer_func_802B0A90_de ALSeqPlayer_func_802B0A90_de;
+struct ALSeqPlayerCode802B54A0;
+typedef struct ALSeqPlayerCode802B54A0 ALSeqPlayerCode802B54A0;
 
 struct ALSndPlayer_func_802B2780_de;
 typedef struct ALSndPlayer_func_802B2780_de ALSndPlayer_func_802B2780_de;
@@ -4138,8 +4138,8 @@ struct ALFx2C {
     void *paramHdl;
 };
 struct ALDelay_func_802B5B94_de;
-struct ALFx_func_802B5B94_de;
-struct ALFx_func_802B5B94_de {
+struct ALFxCode802BAC64;
+struct ALFxCode802BAC64 {
     ALFilter_s14 filter;
     s16 *base;
     s16 *input;
@@ -4212,9 +4212,9 @@ struct ALSeqPlayer88 {
     ALSeqMarker *loopEnd;
     s32 loopCount;
 };
-struct ALSeqPlayer_func_802B0A90_de;
+struct ALSeqPlayerCode802B54A0;
 struct ALSeq_s;
-struct ALSeqPlayer_func_802B0A90_de {
+struct ALSeqPlayerCode802B54A0 {
     char node[0x14];
     void *drvr;
     struct ALSeq_s *target;

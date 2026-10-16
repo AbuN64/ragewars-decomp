@@ -29,8 +29,8 @@ struct func_8022B054_S1 {
     Triple unk16C4;
 };
 
-struct Record_func_8022BA0C_de;
-typedef struct Record_func_8022BA0C_de Record_func_8022BA0C_de;
+struct RecordCode8022AE90;
+typedef struct RecordCode8022AE90 RecordCode8022AE90;
 
 struct ObjectState16DA;
 struct ObjectState16DA {
@@ -68,13 +68,13 @@ struct ScoreTable {
     u8 pad00[0x3C];
     short value[8];
 };
-struct Record_func_8022BA0C_de;
+struct RecordCode8022AE90;
 struct ScoreTable;
-struct Record_func_8022BA0C_de {
+struct RecordCode8022AE90 {
     u8 pad0000[0x5D8];
     struct ScoreTable *scores;
     u8 pad05DC[0x16E0 - 0x5DC];
-    struct Record_func_8022BA0C_de *next;
+    struct RecordCode8022AE90 *next;
     u8 pad16E4[4];
 };
 
@@ -196,12 +196,12 @@ struct func_8022B08C_S1 {
 };
 
 struct Context;
-struct Record_func_8022BA0C_de;
+struct RecordCode8022AE90;
 struct Context {
     u8 pad00[4];
-    struct Record_func_8022BA0C_de *base;
+    struct RecordCode8022AE90 *base;
     u8 pad08[0x18];
-    struct Record_func_8022BA0C_de *head;
+    struct RecordCode8022AE90 *head;
 };
 
 struct Game_func_8022B7F8_de;

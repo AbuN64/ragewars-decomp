@@ -47,8 +47,8 @@ struct func_8024E3B4_S2 {
 struct func_8024E6C8_S1;
 typedef struct func_8024E6C8_S1 func_8024E6C8_S1;
 
-struct Item_func_8024E6A0_de;
-struct Item_func_8024E6A0_de {
+struct ItemCode8024E130;
+struct ItemCode8024E130 {
     unsigned char kind;
     char pad[0x33];
     void *value;

@@ -1673,8 +1673,8 @@ struct ViewState {
     f32 height;
 };
 
-struct Player_func_80228FB8_de;
-typedef struct Player_func_80228FB8_de Player_func_80228FB8_de;
+struct PlayerCode80225D10;
+typedef struct PlayerCode80225D10 PlayerCode80225D10;
 
 struct RulesRecAtA8;
 struct RulesRecAtA8 {
@@ -1724,8 +1724,8 @@ struct Game {
 struct func_80229A54_S1;
 typedef struct func_80229A54_S1 func_80229A54_S1;
 
-struct View_func_80226340_de;
-typedef struct View_func_80226340_de View_func_80226340_de;
+struct ViewCode80225D10;
+typedef struct ViewCode80225D10 ViewCode80225D10;
 
 struct ActorNode;
 struct SubActor;
@@ -1813,8 +1813,8 @@ struct ObjectLinks16E4 {
 struct HudGlobals;
 typedef struct HudGlobals HudGlobals;
 
-struct View_func_80226340_de;
-struct View_func_80226340_de {
+struct ViewCode80225D10;
+struct ViewCode80225D10 {
     char pad0[0x128];
     Triple position;
 };
@@ -1841,7 +1841,7 @@ struct Shared_StateInfo;
 struct Shared_Voice;
 struct StateInfo;
 struct TeamInfo;
-struct View_func_80226340_de;
+struct ViewCode80225D10;
 struct SharedPlayer_func_80226340_de {
     union {
         struct {
@@ -2176,7 +2176,7 @@ struct SharedPlayer_func_80226340_de {
             void * view;
         } view5DC_1;
         struct {
-            struct View_func_80226340_de * view;
+            struct ViewCode80225D10 * view;
         } view5DC_2;
         struct {
             u8 pad4[8];
@@ -4864,8 +4864,8 @@ struct ObjRecV5 {
 struct World_func_802283B8_de;
 typedef struct World_func_802283B8_de World_func_802283B8_de;
 
-struct Player_func_80228FB8_de;
-struct Player_func_80228FB8_de {
+struct PlayerCode80225D10;
+struct PlayerCode80225D10 {
     char pad0[0x5D8];
     ObjRecAt8F *controls;
     char pad5DC[0x1230 - 0x5DC];
@@ -4920,7 +4920,7 @@ struct Round {
 
 struct Actor_func_80228FB8_de;
 struct ModelDef;
-struct Player_func_80228FB8_de;
+struct PlayerCode80225D10;
 struct Actor_func_80228FB8_de {
     char pad0;
     u8 colour;
@@ -4931,7 +4931,7 @@ struct Actor_func_80228FB8_de {
     char padB8[0x140 - 0xB8];
     char views[0x18];
     char pad158[0x1D8 - 0x158];
-    struct Player_func_80228FB8_de *player;
+    struct PlayerCode80225D10 *player;
 };
 
 struct func_80229BE0_S1;

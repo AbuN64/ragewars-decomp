@@ -50,8 +50,8 @@ typedef struct func_80204C68_S2 func_80204C68_S2;
 
 extern void func_802043E0_de(char *arg0, char *arg1);
 
-struct func_80204468_S1;
-struct func_80204468_S1 {
+struct RecCode80203F04;
+struct RecCode80203F04 {
     char pad0[0x2C];
     void * unk2C;
     char pad2C[0x108 - 0x2C - sizeof(void*)];
@@ -84,8 +84,8 @@ struct ObjectStateCC {
 
 extern void func_80204BB4_de(void *arg0, void *arg1);
 
-struct func_80204468_S1;
-typedef struct func_80204468_S1 func_80204468_S1;
+struct RecCode80203F04;
+typedef struct RecCode80203F04 RecCode80203F04;
 
 extern void func_80204468_de(void *arg0, void *arg1);
 

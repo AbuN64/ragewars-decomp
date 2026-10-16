@@ -14,9 +14,9 @@ struct func_80211020_S1 {
 
 extern void func_80212948_de(void *arg0);
 
-struct Actor_func_802120A8_eu;
+struct Self;
 struct Brain_func_802120A8_eu;
-struct Actor_func_802120A8_eu {
+struct Self {
     char pad0[8];
     Vec3 pos;
     char pad14[0x24];
@@ -24,7 +24,7 @@ struct Actor_func_802120A8_eu {
     char pad3C[0x30];
     f32 yaw;
     char pad70[0x168];
-    struct Actor_func_802120A8_eu *self;
+    struct Self *self;
     char pad1DC[0x3F8];
     s32 slot;
     char pad5D8[0xCC];
@@ -34,13 +34,13 @@ struct Actor_func_802120A8_eu {
 };
 
 struct Brain_func_802120A8_eu {
-    struct Actor_func_802120A8_eu *player;
+    struct Self *player;
     s32 route;
     char pad8[8];
     s32 node;
     s32 routeNodes[4]; /* 0x14 */
     char pad24[0x40];
-    struct Actor_func_802120A8_eu *target;
+    struct Self *target;
     struct Player *routeObject; /* 0x68 */
     char pad6C[0x50];
     s32 routeState; /* 0xBC */
@@ -272,8 +272,8 @@ extern float D_800C1FEC_de;
 
 extern void func_80212828_de(void *arg0);
 
-struct Actor_func_802120A8_eu;
-typedef struct Actor_func_802120A8_eu Actor_func_802120A8_eu;
+struct Self;
+typedef struct Self Self;
 
 struct Wheels;
 struct Wheels {
@@ -344,7 +344,7 @@ struct func_802123DC_S3 {
     s32 unk2DC;
 };
 
-extern void func_802120A8_eu(Actor_func_802120A8_eu *actor);
+extern void func_802120A8_eu(Self *actor);
 
 extern int func_80212610_eu(void * arg0);
 

@@ -50496,6 +50496,14 @@ us-rev1 = 0x8041447C
 kind = "data"
 eu = 0x8041483C
 
+[symbol.D_auto_func_80415C1C_de_padding_10605C]
+kind = "data"
+eu-x = 0x8041605C
+
+[symbol.D_auto_func_80415C1C_de_padding_183C9C]
+kind = "data"
+us-rev1 = 0x80415C9C
+
 [symbol.D_auto_func_80415C84_de_padding_17BC84]
 kind = "data"
 de = 0x80415C84
@@ -50564,6 +50572,10 @@ de = 0x8042201C
 kind = "data"
 us = 0x8042204C
 
+[symbol.D_auto_func_80422228_de_padding_188228]
+kind = "data"
+de = 0x80422228
+
 [symbol.D_auto_func_8042251C_eu_padding_19851C]
 kind = "data"
 eu = 0x8042251C
@@ -50592,6 +50604,10 @@ eu-x = 0x8042E788
 kind = "data"
 de = 0x80435B08
 
+[symbol.D_auto_func_804364E4_de_padding_1A46C4]
+kind = "data"
+us-rev1 = 0x804366C4
+
 [symbol.D_auto_func_80436834_eu_padding_1AC834]
 kind = "data"
 eu = 0x80436834
@@ -50600,6 +50616,10 @@ eu = 0x80436834
 kind = "data"
 eu-x = 0x8043697C
 
+[symbol.D_auto_func_80438F0C_de_padding_1A70EC]
+kind = "data"
+us-rev1 = 0x804390EC
+
 [symbol.D_auto_func_804397E8_de_padding_19F7E8]
 kind = "data"
 de = 0x804397E8
@@ -50607,6 +50627,14 @@ de = 0x804397E8
 [symbol.D_auto_func_804399C8_us_padding_19D9C8]
 kind = "data"
 us = 0x804399C8
+
+[symbol.D_auto_func_80439EC4_de_padding_12AEC4]
+kind = "data"
+eu-x = 0x8043AEC4
+
+[symbol.D_auto_func_80439EC4_de_padding_1A80A4]
+kind = "data"
+us-rev1 = 0x8043A0A4
 
 [symbol.D_auto_func_8043A6B8_eu_padding_1B06B8]
 kind = "data"
@@ -78655,8 +78683,8 @@ us-rev1 = 0x80414D4C
 kind = "function"
 de = 0x80415C20
 eu = 0x80416060
-eu-x = 0x8041605C
-us-rev1 = 0x80415C9C
+eu-x = 0x80416060
+us-rev1 = 0x80415CA0
 
 [symbol.func_80415C90_de]
 kind = "function"
@@ -80503,7 +80531,7 @@ us-rev1 = 0x80422218
 
 [symbol.func_80422228_de]
 kind = "function"
-de = 0x80422228
+de = 0x80422230
 eu = 0x80422730
 eu-x = 0x80422730
 us-rev1 = 0x80422260
@@ -82720,7 +82748,7 @@ de = 0x804364F0
 eu = 0x80437220
 eu-x = 0x80437350
 us = 0x804366D0
-us-rev1 = 0x804366C4
+us-rev1 = 0x804366D0
 
 [symbol.func_80436640_us]
 kind = "function"
@@ -83146,7 +83174,7 @@ de = 0x80438F10
 eu = 0x80439DE0
 eu-x = 0x80439F10
 us = 0x804390F0
-us-rev1 = 0x804390EC
+us-rev1 = 0x804390F0
 
 [symbol.func_80438FE0_de]
 kind = "function"
@@ -83437,8 +83465,8 @@ us-rev1 = 0x8043A014
 kind = "function"
 de = 0x80439ED0
 eu = 0x8043ADA0
-eu-x = 0x8043AEC4
-us-rev1 = 0x8043A0A4
+eu-x = 0x8043AED0
+us-rev1 = 0x8043A0B0
 
 [symbol.func_80439F0C_us_rev1]
 kind = "function"

@@ -26,7 +26,7 @@ s32 func_80285F58_de(void *, void *);
 
 void func_80206A20_de(Player *mover, ActorMotionState *rider);
 
-void func_80206DD4_de(Actor_func_80206DD4_de *, Rider_func_80206DD4_de *);
+void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 
 void func_80207910_de(void *object, void *state) {
     Player *arg0 = object;

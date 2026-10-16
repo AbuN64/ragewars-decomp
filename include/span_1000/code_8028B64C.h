@@ -35,17 +35,17 @@ typedef struct func_8028C5E8_S1 func_8028C5E8_S1;
 struct Object_func_8028C934_de;
 typedef struct Object_func_8028C934_de Object_func_8028C934_de;
 
-struct Obj_func_8028CC34_de;
-struct Obj_func_8028CC34_de {
+struct ObjCode8028B64C;
+struct ObjCode8028B64C {
     char pad[0xC50];
     ActorRecAt1D8V1 *actors[0x80];
     int count;
 };
 
-struct Obj_func_8028CC34_de;
-typedef struct Obj_func_8028CC34_de Obj_func_8028CC34_de;
+struct ObjCode8028B64C;
+typedef struct ObjCode8028B64C ObjCode8028B64C;
 
-extern ActorRecAt1D8V1 *func_8028CC34_de(Obj_func_8028CC34_de *obj, int id);
+extern ActorRecAt1D8V1 *func_8028CC34_de(ObjCode8028B64C *obj, int id);
 
 struct func_8028C490_S1;
 typedef struct func_8028C490_S1 func_8028C490_S1;
@@ -125,8 +125,8 @@ typedef struct func_8028C400_S2 func_8028C400_S2;
 struct func_8028C248_S2;
 typedef struct func_8028C248_S2 func_8028C248_S2;
 
-struct World_func_8028C7E0_de;
-typedef struct World_func_8028C7E0_de World_func_8028C7E0_de;
+struct WorldCode8028B64C;
+typedef struct WorldCode8028B64C WorldCode8028B64C;
 
 struct ObjectRecAt1A4;
 typedef struct ObjectRecAt1A4 ObjectRecAt1A4;
@@ -171,14 +171,14 @@ struct EntryRecAt18V4 {
 struct EntryRecAt18V4;
 typedef struct EntryRecAt18V4 EntryRecAt18V4;
 
-struct World_func_8028C7E0_de;
-struct World_func_8028C7E0_de {
+struct WorldCode8028B64C;
+struct WorldCode8028B64C {
     char pad[0x1B664];
     EntryRecAt18V4 *list[16];
     s32 count;
 };
 
-extern EntryRecAt18V4 *func_8028C7E0_de(World_func_8028C7E0_de *world, s32 id);
+extern EntryRecAt18V4 *func_8028C7E0_de(WorldCode8028B64C *world, s32 id);
 
 struct IntegerState54;
 struct IntegerState54 {
@@ -213,16 +213,16 @@ struct EntryRecAt10 {
 };
 
 struct EntryRecAt10;
-struct Owner_func_8028CBB0_de;
-struct Owner_func_8028CBB0_de {
+struct OwnerCode8028B64C;
+struct OwnerCode8028B64C {
     char pad[0x1024];
     struct EntryRecAt10 *entries[0x20];
     s32 count;
 };
 
 struct EntryRecAt10;
-struct Owner_func_8028CBB0_de;
-extern struct EntryRecAt10 *func_8028CBB0_de(struct Owner_func_8028CBB0_de *owner, struct EntryRecAt10 *pos);
+struct OwnerCode8028B64C;
+extern struct EntryRecAt10 *func_8028CBB0_de(struct OwnerCode8028B64C *owner, struct EntryRecAt10 *pos);
 
 struct func_8028C34C_S1;
 struct func_8028C34C_S1 {

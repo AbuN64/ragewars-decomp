@@ -46,8 +46,8 @@ extern int func_80206758_de(void *arg0, void *arg1);
 
 extern void func_802062B0_de(void *arg0);
 
-struct Rider_func_80206DD4_de;
-struct Rider_func_80206DD4_de {
+struct RiderCode80206258;
+struct RiderCode80206258 {
     char pad0[0x35];
     s8 animation;
     char pad36;
@@ -266,7 +266,7 @@ struct Actor_func_80206DD4_de {
     f32 y;
     f32 z;
     s32 model;
-    union { char *track; struct Track_func_80206DD4_de *motionTrack; };
+    union { char *track; struct TrackCode80206258 *motionTrack; };
     char pad1C[0x1C];
     u32 inputFlags;
     char pad3C[0x30];
@@ -315,8 +315,8 @@ struct func_80207910_S2 {
 
 extern s32 func_8020655C_de(s32 arg0);
 
-struct Rider_func_80206DD4_de;
-typedef struct Rider_func_80206DD4_de Rider_func_80206DD4_de;
+struct RiderCode80206258;
+typedef struct RiderCode80206258 RiderCode80206258;
 
 struct func_802077F4_S3;
 struct func_802077F4_S3 {
@@ -384,7 +384,7 @@ struct SegmentRecAt5C {
     f32 duration;
 };
 
-struct Track_func_80206DD4_de {
+struct TrackCode80206258 {
     char prefix[0x14];
     struct SegmentRecAt5C segment;
 };

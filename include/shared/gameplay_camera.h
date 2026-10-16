@@ -12,8 +12,8 @@ struct Shared_func_80234FDC_S5 {
 typedef char Shared_func_80234FDC_S5_size_check[(sizeof(Shared_func_80234FDC_S5) == 0x4) ? 1 : -1];
 
 
-typedef struct Shared_func_80234FDC_S6 Shared_func_80234FDC_S6;
-struct Shared_func_80234FDC_S6 {
+typedef struct Lights Lights;
+struct Lights {
     s8 unk0; /* +0x0: src/func_80234FDC.c */
     s8 unk1; /* +0x1: src/func_80234FDC.c */
     s8 unk2; /* +0x2: src/func_80234FDC.c */
@@ -39,7 +39,7 @@ struct Shared_func_80234FDC_S6 {
     s8 unk1A; /* +0x1A: src/func_80234FDC.c */
     char pad1B[0x5];
 };
-typedef char Shared_func_80234FDC_S6_size_check[(sizeof(Shared_func_80234FDC_S6) == 0x20) ? 1 : -1];
+typedef char Shared_func_80234FDC_S6_size_check[(sizeof(Lights) == 0x20) ? 1 : -1];
 
 
 typedef struct Shared_func_80234FDC_S1 Shared_func_80234FDC_S1;
@@ -130,7 +130,7 @@ struct GameplayCamera {
     Vec3 clipBounds[2];
     Vec3 volumeBounds[2];
     char unk380[2][64]; /* +0x380: double-buffered projection matrices */
-    Shared_func_80234FDC_S6 lights[2]; /* +0x400: double-buffered lights */
+    Lights lights[2]; /* +0x400: double-buffered lights */
     u16 unk440; /* +0x440: src/func_80234FDC.c */
     char pad442[0x6];
     char unk448[3][64]; /* +0x448: src/func_80234FDC.c */
@@ -163,7 +163,7 @@ typedef char Shared_func_80234FDC_S2_size_check[(sizeof(GameplayCamera) == 0xE98
 typedef struct Shared_func_80234FDC_S3 Shared_func_80234FDC_S3;
 struct Shared_func_80234FDC_S3 {
     char pad0[0x400];
-    Shared_func_80234FDC_S6 unk400[2]; /* +0x400: src/func_80234FDC.c */
+    Lights unk400[2]; /* +0x400: src/func_80234FDC.c */
 };
 typedef char Shared_func_80234FDC_S3_size_check[(sizeof(Shared_func_80234FDC_S3) == 0x440) ? 1 : -1];
 

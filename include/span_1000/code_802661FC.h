@@ -53,8 +53,8 @@ struct Actor_func_802676EC_de {
     struct PlayerRecAt122C *player;
 };
 
-struct SharedPlayer_func_80267958_de;
-typedef struct SharedPlayer_func_80267958_de SharedPlayer_func_80267958_de;
+struct SharedPlayerCode802661FC;
+typedef struct SharedPlayerCode802661FC SharedPlayerCode802661FC;
 
 struct Body;
 struct Character;
@@ -68,7 +68,7 @@ struct Mount;
 struct Profile;
 struct Record;
 struct Settings;
-struct SharedPlayer_func_80267958_de;
+struct SharedPlayerCode802661FC;
 struct Shared_Body;
 struct Shared_Hud;
 struct Shared_Model;
@@ -79,7 +79,7 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 struct func_8023945C_S1;
-struct SharedPlayer_func_80267958_de {
+struct SharedPlayerCode802661FC {
     union {
         struct {
             u8 unk0[24];
@@ -246,15 +246,15 @@ struct SharedPlayer_func_80267958_de {
         } view1D4_21;
         struct {
             char pad[0x1BC];
-            struct SharedPlayer_func_80267958_de * unk1D8;
+            struct SharedPlayerCode802661FC * unk1D8;
         } view1D8_22;
         struct {
             char pad[0x1BC];
-            struct SharedPlayer_func_80267958_de * self;
+            struct SharedPlayerCode802661FC * self;
         } view1D8_23;
         struct {
             char pad[0x1BC];
-            struct SharedPlayer_func_80267958_de * f1D8;
+            struct SharedPlayerCode802661FC * f1D8;
         } view1D8_24;
         struct {
             char pad[0x1BC];
@@ -1490,13 +1490,13 @@ struct SharedPlayer_func_80267958_de {
     char pad16DA[0x6];
     union {
         struct {
-            struct SharedPlayer_func_80267958_de * unk16E0;
+            struct SharedPlayerCode802661FC * unk16E0;
         } view16E0_0;
         struct {
-            struct SharedPlayer_func_80267958_de * next;
+            struct SharedPlayerCode802661FC * next;
         } view16E0_1;
         struct {
-            struct SharedPlayer_func_80267958_de * next;
+            struct SharedPlayerCode802661FC * next;
         } view16E0_2;
     } views16E0;
 };
@@ -1504,7 +1504,7 @@ struct SharedPlayer_func_80267958_de {
 struct Actor_func_80267958_de;
 struct Actor_func_80267958_de {
     char pad0[0x1D8];
-    SharedPlayer_func_80267958_de *player;
+    SharedPlayerCode802661FC *player;
 };
 
 struct ResourceManagerState;

@@ -41,13 +41,13 @@ void func_8022EF30_de(void *arg0) {
     func_8022F3A4_de(object, 0x12, 2);
     object[0x17] = 0;
     object[0xF] = 0;
-    ((Obj_func_8022F3A4_de *)object)->totals[2] = 0;
-    ((Obj_func_8022F3A4_de *)object)->totals[0] = 0;
-    ((Obj_func_8022F3A4_de *)object)->totals[1] = 0;
+    ((ObjCode8022E938 *)object)->totals[2] = 0;
+    ((ObjCode8022E938 *)object)->totals[0] = 0;
+    ((ObjCode8022E938 *)object)->totals[1] = 0;
     object[0x25] = 0;
-    ((Obj_func_8022F3A4_de *)object)->state = 0;
+    ((ObjCode8022E938 *)object)->state = 0;
     object[0xC] = 0;
-    ((Obj_func_8022F3A4_de *)object)->fieldD = -1;
+    ((ObjCode8022E938 *)object)->fieldD = -1;
     func_802A001C_de((s32)((char *)object + 0x26), 0, 0x24);
     func_802A001C_de((s32)((char *)object + 0x7D), 0, 1);
     func_802A001C_de((s32)((char *)object + 0x51), 0, 3);
@@ -72,7 +72,7 @@ void func_8022EF30_de(void *arg0) {
     i = 0x23;
     cursor = object + 0x8C;
     do {
-        ((Obj_func_8022F3A4_de *)object)->counters[i] = 0;
+        ((ObjCode8022E938 *)object)->counters[i] = 0;
         i--;
         cursor -= 4;
     } while (i >= 0);

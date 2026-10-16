@@ -33,7 +33,7 @@ extern void func_80219A40_de(SharedPlayer_func_80226340_de *, char *, Slot *);
 
 void func_80226340_de(SharedPlayer_func_80226340_de *player) {
     Slot hit;
-    View_func_80226340_de *view;
+    ViewCode80225D10 *view;
     Held *owner;
     f32 alpha;
     s32 level;

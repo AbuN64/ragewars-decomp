@@ -13,7 +13,7 @@
 
 
 
-extern void func_802A5780_de(s32, State_func_802A2FA4_de *, Node_func_802A2FA4_de *);
+extern void func_802A5780_de(s32, State_func_802A2FA4_de *, Nodes *);
 extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 
 
@@ -21,8 +21,8 @@ extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 
 s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
     LevelActor *object;
-    Node_func_802A2FA4_de *node;
-    Node_func_802A2FA4_de *next;
+    Nodes *node;
+    Nodes *next;
     f32 saved_step;
     f32 zero;
     f32 decay;

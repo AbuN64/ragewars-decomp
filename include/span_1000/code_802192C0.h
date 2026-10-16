@@ -44,8 +44,8 @@ typedef struct func_80219434_S1 func_80219434_S1;
 struct ObjectState8E;
 typedef struct ObjectState8E ObjectState8E;
 
-struct Player_func_8021C698_de;
-struct Player_func_8021C698_de {
+struct PlayerCode802192C0;
+struct PlayerCode802192C0 {
     char pad0[0x1214];
     s32 marker;
     char pad1218[0x147C - 0x1218];
@@ -333,8 +333,8 @@ typedef struct func_8021CBAC_S1 func_8021CBAC_S1;
 struct func_80219490_S1;
 typedef struct func_80219490_S1 func_80219490_S1;
 
-struct Player_func_8021C698_de;
-typedef struct Player_func_8021C698_de Player_func_8021C698_de;
+struct PlayerCode802192C0;
+typedef struct PlayerCode802192C0 PlayerCode802192C0;
 
 struct ObjectLinks16D8;
 typedef struct ObjectLinks16D8 ObjectLinks16D8;

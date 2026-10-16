@@ -49,7 +49,7 @@ typedef struct GameplayCamera func_80234FDC_S2;
 typedef struct Shared_func_80234FDC_S3 SharedRecV11;
 typedef struct Shared_func_80234FDC_S4 func_80234FDC_S4;
 typedef struct Shared_func_80234FDC_S5 SharedRecAt0V2;
-typedef struct Shared_func_80234FDC_S6 SharedRecAt1A;
+typedef struct Lights SharedRecAt1A;
 typedef struct Shared_func_80234FDC_S7 SharedRecV9;
 typedef struct Shared_func_80234FDC_S8 func_80234FDC_S8;
 

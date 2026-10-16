@@ -420,10 +420,10 @@ struct func_802A41D8_S2 {
     Vec3 unk10;
 };
 
-struct Node_func_802A2FA4_de;
-struct Node_func_802A2FA4_de {
+struct Nodes;
+struct Nodes {
     s32 unk0;
-    struct Node_func_802A2FA4_de *next;
+    struct Nodes *next;
     f32 value;
 };
 
@@ -516,7 +516,7 @@ struct ObjectLinksB4 {
     s32 unk_B0;
 };
 
-struct Node_func_802A2FA4_de;
+struct Nodes;
 struct State_func_802A2FA4_de;
 struct State_func_802A2FA4_de {
     u8 pad0[0x1C];
@@ -528,7 +528,7 @@ struct State_func_802A2FA4_de {
     f32 total;
     u8 pad34[8];
     u32 flags;
-    struct Node_func_802A2FA4_de *nodes;
+    struct Nodes *nodes;
     u8 pad44[4];
     s32 active;
     f32 amount;
@@ -629,8 +629,8 @@ struct RibbonVertexPool {
 struct func_802A6A54_S3;
 typedef struct func_802A6A54_S3 func_802A6A54_S3;
 
-struct Node_func_802A2FA4_de;
-typedef struct Node_func_802A2FA4_de Node_func_802A2FA4_de;
+struct Nodes;
+typedef struct Nodes Nodes;
 
 struct func_802A41D8_S2;
 typedef struct func_802A41D8_S2 func_802A41D8_S2;

@@ -100,8 +100,8 @@ struct Holder_func_80444548_de {
 struct Record_func_8043E494_de;
 typedef struct Record_func_8043E494_de Record_func_8043E494_de;
 
-struct Settings_func_80444488_de;
-struct Settings_func_80444488_de {
+struct SettingsCode80444030;
+struct SettingsCode80444030 {
     char pad[0x7C];
     u8 value;
 };
@@ -122,10 +122,10 @@ struct Holder_func_80444AB8_de {
 extern void func_80444094_de(u8 *record, u8 value);
 
 struct Owner_func_80444488_de;
-struct Settings_func_80444488_de;
+struct SettingsCode80444030;
 struct Owner_func_80444488_de {
     char pad[0x5D8];
-    struct Settings_func_80444488_de *settings;
+    struct SettingsCode80444030 *settings;
 };
 struct Holder_func_80444488_de;
 struct Owner_func_80444488_de;

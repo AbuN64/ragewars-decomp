@@ -1471,11 +1471,11 @@ struct func_802100E0_S2 {
     s32 unk2E4;
 };
 
-struct Brain_func_8020FDB0_de;
-typedef struct Brain_func_8020FDB0_de Brain_func_8020FDB0_de;
+struct BrainCode8020EAE0;
+typedef struct BrainCode8020EAE0 BrainCode8020EAE0;
 
-struct Brain_func_8020FDB0_de;
-struct Brain_func_8020FDB0_de {
+struct BrainCode8020EAE0;
+struct BrainCode8020EAE0 {
     SharedPlayer_func_8020FDB0_de *player;
     char pad4[0x2E0];
     s32 switchTimer;

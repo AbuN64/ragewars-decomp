@@ -25,11 +25,11 @@ extern s32 D_800D15E0;
 extern Vector4f D_800D15E4;
 extern s32 D_800D297C;
 extern void func_80268CE0_de(s32);
-extern void func_8024A3B0_de(Actor_func_80228FB8_de *, Player_func_80228FB8_de *, s32, Draw *);
-extern void func_8026CBA4_de(void *, Player_func_80228FB8_de *, s32, s32, char *, s32, s32);
+extern void func_8024A3B0_de(Actor_func_80228FB8_de *, PlayerCode80225D10 *, s32, Draw *);
+extern void func_8026CBA4_de(void *, PlayerCode80225D10 *, s32, s32, char *, s32, s32);
 
 void func_80228FB8_de(Actor_func_80228FB8_de *actor, s32 arg1, Draw *draw) {
-    Player_func_80228FB8_de *player;
+    PlayerCode80225D10 *player;
     Gfx *gfx;
 
     if (actor != 0) {

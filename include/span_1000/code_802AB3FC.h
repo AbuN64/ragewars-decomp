@@ -11,14 +11,14 @@ typedef struct EntryRecAtE EntryRecAtE;
 
 extern void func_802AB1B0_de(u16 *grid, f32 x0, f32 y, f32 sx, f32 sy);
 
-struct Actor_func_802AB6EC_de;
-struct Actor_func_802AB6EC_de {
+struct Other;
+struct Other {
     char pad0[0x5E4];
     s32 enabled;
     char pad5E8[0x1224 - 0x5E8];
     s32 lockOn[2];
     char pad122C[0x16E0 - 0x122C];
-    struct Actor_func_802AB6EC_de *next;
+    struct Other *next;
 };
 
 struct func_802ADB08_S2;
@@ -99,8 +99,8 @@ struct func_802ADBF4_S2 {
     s32 unkC;
 };
 
-struct Actor_func_802AB6EC_de;
-typedef struct Actor_func_802AB6EC_de Actor_func_802AB6EC_de;
+struct Other;
+typedef struct Other Other;
 
 struct LocalizedEffectContext;
 struct LocalizedEffectContext {

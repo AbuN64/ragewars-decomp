@@ -14,16 +14,16 @@ void func_8022B9C4_de(void *arg0) {
 
 /** Return the linked record with the greatest eight-slot score excluding itself. */
 void *func_8022BA0C_de(Context *context) {
-    Record_func_8022BA0C_de *node;
-    Record_func_8022BA0C_de *base;
-    Record_func_8022BA0C_de *bestNode = 0;
+    RecordCode8022AE90 *node;
+    RecordCode8022AE90 *base;
+    RecordCode8022AE90 *bestNode = 0;
     int best = -1;
 
     node = context->head;
     if (node != 0) {
         base = context->base;
         do {
-            unsigned int own = (unsigned int)((u8 *)node - (u8 *)base) / sizeof(Record_func_8022BA0C_de);
+            unsigned int own = (unsigned int)((u8 *)node - (u8 *)base) / sizeof(RecordCode8022AE90);
             int score = 0;
             int i;
             for (i = 0; i < 8; i++) {
