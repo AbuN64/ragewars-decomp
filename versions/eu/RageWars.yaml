@@ -2380,7 +2380,7 @@ segments:
       - [0xB7FC8, data, "func_802B73C8_eu_padding_B7FC8"]
       - [0xB7FD0, c, "func_802B7130_de"]
       - [0xB814C, data, "func_802B754C_eu_padding_B814C"]
-      - [0xB8150, asm, "func_802B72B0_de"]
+      - [0xB8150, c, "func_802B72B0_de"]
       - [0xB815C, asm, "func_802B755C_eu"]
       - [0xB8160, c, "func_802B72C0_de"]
       - [0xB8174, data, "func_802B7574_eu_padding_B8174"]

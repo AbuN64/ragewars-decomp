@@ -2092,7 +2092,7 @@
 "func_802B6DF0_de":{"line":15,"path":"src/func_802BCC90_de_2.c","percent":100.0,"words":[107,107]},
 "func_802B6F9C_de":{"line":14,"path":"src/func_802BCC90_de_3.c","percent":100.0,"words":[99,99]},
 "func_802B7130_de":{"line":18,"path":"src/func_802BCC90_de_4.c","percent":100.0,"words":[95,95]},
-"func_802B72B0_de":{"line":2,"path":"src/fuzzy/func_802B72B0_de.c","percent":0.0,"words":[0,3]},
+"func_802B72B0_de":{"line":2,"path":"src/func_802BCC90_de_29.c","percent":100.0,"words":[3,3]},
 "func_802B72C0_de":{"line":3,"path":"src/func_802BCC90_de_5.c","percent":100.0,"words":[5,5]},
 "func_802B72E0_de":{"line":16,"path":"src/func_802BCC90_de_6.c","percent":100.0,"words":[70,70]},
 "func_802B7400_de":{"line":9,"path":"src/func_802BCC90_de_7.c","percent":100.0,"words":[35,35]},

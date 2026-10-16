@@ -2888,7 +2888,7 @@ schema = 1
 "func_802B6DF0_de" = { evidence = "landed", signature = "void func_802B6DF0_de(s32 *m, u16 *perspNorm, f32 fovy, f32 aspect, f32 near, f32 far, f32 scale)" }
 "func_802B6F9C_de" = { evidence = "landed", signature = "void func_802B6F9C_de(float mf[4][4], u16 *perspNorm, float fovy, float aspect, float near, float far, float scale)" }
 "func_802B7130_de" = { evidence = "landed", signature = "float func_802B7130_de(float x)" }
-"func_802B72B0_de" = { evidence = "authored", signature = "f32 func_802B72B0_de(f32)" }
+"func_802B72B0_de" = { evidence = "landed", signature = "f32 func_802B72B0_de(f32 value)" }
 "func_802B72BC_de" = { evidence = "authored", signature = "void func_802B72BC_de(void)" }
 "func_802B72C0_de" = { evidence = "landed", signature = "unsigned int func_802B72C0_de(void)" }
 "func_802B72E0_de" = { evidence = "landed", signature = "s32 func_802B72E0_de(u32 frequency)" }
@@ -3937,6 +3937,7 @@ schema = 1
 "func_8043944C_de" = { evidence = "landed", signature = "s32 func_8043944C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)" }
 "func_804395F8_de" = { evidence = "landed", signature = "s32 func_804395F8_de(void)" }
 "func_80439628_de" = { evidence = "landed", signature = "s32 func_80439628_de(s32 arg0, s32 arg1, s32 arg2)" }
+"func_804396C0_us_rev1" = { evidence = "landed", signature = "s32 func_804396C0_us_rev1(MenuWidget *tree)" }
 "func_804396F0_de" = { evidence = "landed", signature = "s32 func_804396F0_de(void *first, void *second, u32 event, s32 value)" }
 "func_80439730_de" = { evidence = "landed", signature = "s32 func_80439730_de(void)" }
 "func_80439750_de" = { evidence = "landed", signature = "s32 func_80439750_de(void)" }
