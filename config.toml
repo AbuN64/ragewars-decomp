@@ -1369,3 +1369,25 @@ address = 2152000420
 end = 1821616
 start = 1821604
 table_entry_bias = 0
+
+[[evidence.object]]
+first = "func_80202CA0_de"
+last = "func_80203F04_de"
+source = "AI/ENEMIES/TURRETAI.CPP"
+origin = "SN debug stream left in us-rev1 (src/ragewars_debug_stream_us_rev1.c, ROM 0xE7092..0xF6880): function records at the retail vram"
+
+[layout]  # RW's folder templates (project config over unbake's repo.toml defaults)
+subsystem_source = "src/{subsystem}"
+subsystem_header = "include/{subsystem}.H"
+shared_headers = ["include/TYPES.H", "include/COMMON.H"]
+
+[naming]  # RW's naming style, applied by recipe: upper-case 8.3 stems, evidence spelling kept
+case = "upper"
+stem_max = 8
+source_ext = ".CPP"
+stem = "{vram}"
+subsystem = "{label}/{vram}"
+shared_dir = "src/DATA/{label}"
+data_dir = "src/DATA/{label}"
+part = "{vram}"
+evidence = "keep"

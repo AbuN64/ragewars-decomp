@@ -200,10 +200,6 @@ extern s32 func_80285F58_de(void *, void *);
 const u32 D_auto_rodata_unresolved_800C1D38[2] = {
     0x00031880, 0x96230004,
 };
-#elif defined(VERSION_US)
-const u32 D_auto_rodata_unresolved_800C19B8[6] = {
-    0x6F736856, 0x65727465, 0x42C80000, 0x4F000000, 0x00000800, 0x08000C00,
-};
 #endif
 
 void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {

@@ -11053,6 +11053,7 @@ func_80446F60_de = 0x80447BB0; // type:func
 func_80447130_de = 0x80447D80; // type:func
 func_8044756C_de = 0x804481BC; // type:func
 func_80448A48_eu_x = 0x80448308; // type:func
+D_auto_func_80448A48_eu_x_padding_1B6468 = 0x80448468;
 func_80448470_eu_x = 0x80448470; // type:func
 func_8044799C_de = 0x804485EC; // type:func
 func_80447A38_de = 0x80448688; // type:func

@@ -34,7 +34,6 @@ static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
     func_80274244_de(&q, matrix);
 }
 
-unsigned char D_auto_func_80201A74_de_padding_2674[12] = { 0x27, 0xBD, 0xFF, 0xE8, 0xAF, 0xBF, 0x00, 0x14, 0x0C, 0x08, 0x01, 0x40 };
 
 Vector4f func_80202CA0_de(Vec3 *dir) {
     Vector4f q;
