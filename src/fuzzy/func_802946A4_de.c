@@ -1,5 +1,5 @@
 #include "shared/round_state_variants.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Prepares a session for a new round: clears the round flag, resets the round state, records the round seed when func_80264B6C_de allows, resets the scoreboard and player slot, restarts the arena with the session's arena setting, resets the camera timers and reloads the session's sound bank and music. */
 

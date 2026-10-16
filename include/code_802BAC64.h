@@ -2,7 +2,7 @@
 #define CODE_802BAC64_H
 
 #include "audio_callbacks.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "acmd.h"

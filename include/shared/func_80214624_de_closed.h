@@ -1,6 +1,6 @@
 #ifndef FUNC_80214624_DE_CLOSED_H
 #define FUNC_80214624_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/unused.h"
 #include "span_1000/code_8023EEF0.h"

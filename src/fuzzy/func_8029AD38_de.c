@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "n64sdk.h"
 extern f64 D_800C56D8_de,D_800C56E0_de,D_800C56E8_de,D_800C56F0_de,D_800C56F8_de;
 extern f64 D_800C5700_de,D_800C5708_de,D_800C5710_de,D_800C5718_de,D_800C5720_de,D_800C5728_de,D_800C5730_de,D_800C5738_de;

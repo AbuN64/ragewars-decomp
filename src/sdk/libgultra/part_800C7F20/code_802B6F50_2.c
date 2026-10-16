@@ -1,6 +1,6 @@
 #include "sdk/libgultra.h"
 #include "span_1000/code_802B243C.h"
-#include "types.h"
+#include "TYPES.H"
 
 /** Consume and return one byte from the stream pointer at offset 8. */
 int func_802B23B0_de(struct ALSeq_s *stream) {

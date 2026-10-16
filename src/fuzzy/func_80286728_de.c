@@ -3,7 +3,7 @@
 #include "shared/func_80214624_de_closed.h"
 #include "shared/func_8044DA54_de_closed.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 f32 func_8027525C_de(Node75 *node, f32 x, f32 z);
 extern s32 D_800CD764_de;

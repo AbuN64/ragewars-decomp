@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "n64sdk.h"
 
 typedef struct DraftChoiceEntry {

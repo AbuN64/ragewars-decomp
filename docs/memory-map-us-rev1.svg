@@ -2325,14 +2325,14 @@
 <rect class="q10" x="361" width="9.25" height="6"><title>func_802B3540_de · 100% · 148 B</title></rect>
 <rect class="q5" x="370.25" width="0.5" height="6"><title>func_802B38B4_eu_x · 50% · 8 B</title></rect>
 <rect class="q10" x="371" width="16.25" height="6"><title>func_802B35E0_de · 100% · 260 B</title></rect>
-<rect class="q9" x="388" width="7.75" height="6"><title>alSynStopVoice · 100% · 124 B</title></rect>
+<rect class="q10" x="388" width="7.75" height="6"><title>alSynStopVoice · 100% · 124 B</title></rect>
 <rect class="q10" x="396" width="45.25" height="6"><title>func_802B3770_de · 100% · 724 B</title></rect>
 <rect class="q10" x="441.25" width="27.25" height="6"><title>func_802B3A44_de · 100% · 436 B</title></rect>
 <rect class="q9" x="468.5" width="2.75" height="6"><title>__allocParam · 100% · 44 B</title></rect>
 <rect class="q10" x="471.25" width="1.5" height="6"><title>__freeParam · 100% · 24 B</title></rect>
 <rect class="q10" x="472.75" width="4" height="6"><title>_freePVoice · 100% · 64 B</title></rect>
-<rect class="q9" x="476.75" width="5.25" height="6"><title>_collectPVoices · 100% · 84 B</title></rect>
-<rect class="q9" x="482" width="4" height="6"><title>func_802B3CD0_de · 100% · 64 B</title></rect>
+<rect class="q10" x="476.75" width="5.25" height="6"><title>_collectPVoices · 100% · 84 B</title></rect>
+<rect class="q10" x="482" width="4" height="6"><title>func_802B3CD0_de · 100% · 64 B</title></rect>
 <rect class="q10" x="486" width="10.5" height="6"><title>func_802B3D10_de · 100% · 168 B</title></rect>
 <rect class="q9" x="496.5" width="3.75" height="6"><title>func_802B3DB8_de · 100% · 60 B</title></rect>
 <rect class="q10" x="501" width="13.75" height="6"><title>func_802B40E0_eu_x · 100% · 220 B</title></rect>
@@ -2433,7 +2433,7 @@
 <rect class="q9" x="130" width="4.75" height="6"><title>func_802BA6B0_de · 100% · 76 B</title></rect>
 <rect class="q9" x="135" width="22.25" height="6"><title>func_802BA700_de · 100% · 356 B</title></rect>
 <rect class="q10" x="158" width="4.25" height="6"><title>osViSetYScale · 100% · 68 B</title></rect>
-<rect class="q9" x="163" width="4.25" height="6"><title>osViSwapBuffer · 100% · 68 B</title></rect>
+<rect class="q10" x="163" width="4.25" height="6"><title>osViSwapBuffer · 100% · 68 B</title></rect>
 <rect class="q9" x="168" width="51.75" height="6"><title>func_802BA910_de · 100% · 828 B</title></rect>
 <rect class="q10" x="220" width="0.5" height="6"><title>func_802BAC50_de · 100% · 8 B</title></rect>
 <rect class="q10" x="221" width="2.25" height="6"><title>osCreateMesgQueue · 100% · 36 B</title></rect>

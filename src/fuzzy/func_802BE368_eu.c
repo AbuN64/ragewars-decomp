@@ -4,7 +4,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_802BE0D0_de_closed.h"
 #include "span_1000/code_802BE0D0.h"
-#include "types.h"
+#include "TYPES.H"
 Acmd *func_802BE368_eu(ALLoadFilter48_2 *arg0, s16 *arg1, s32 arg2, s32 unused, Acmd *arg4) {
     u32 sp18;                                     /* compiler-managed */
     s32 sp20;

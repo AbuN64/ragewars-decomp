@@ -1,6 +1,6 @@
 #ifndef UNBAKE_COMMON_TYPES_8FD754E1E915_H
 #define UNBAKE_COMMON_TYPES_8FD754E1E915_H
-#include "types.h"
+#include "TYPES.H"
 #include "gfx.h"
 #include "shared/model_instance.h"
 #include "common/types_8a8189af7b05.h"

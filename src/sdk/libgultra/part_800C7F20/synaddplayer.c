@@ -2,7 +2,7 @@
 #include "audio_callbacks.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B2EF8.h"
-#include "types.h"
+#include "TYPES.H"
 
 s32 func_802BD170_de(s32);
 

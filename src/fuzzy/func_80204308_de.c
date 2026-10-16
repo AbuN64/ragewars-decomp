@@ -1,5 +1,5 @@
 #include "shared/gameplay_sound_table.h"
-#include "types.h"
+#include "TYPES.H"
 typedef struct SoundDescriptor { char pad0[0x2A]; s16 enabled, index; } SoundDescriptor;
 typedef struct SoundObject { char pad0[0x18]; SoundDescriptor *descriptor; } SoundObject;
 typedef struct SoundGuard { char pad0[0x34]; s8 disabled; } SoundGuard;

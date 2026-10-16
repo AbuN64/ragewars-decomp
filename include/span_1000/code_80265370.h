@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80265370_H
 #define UNBAKE_SPAN_1000_CODE_80265370_H
-#include "types.h"
+#include "TYPES.H"
 extern void func_80265DD0_de();
 
 extern float D_800C439C_de;

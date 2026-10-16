@@ -1,10 +1,9 @@
 #ifndef UNBAKE_COMMON_TYPES_1DC8418C21DB_H
 #define UNBAKE_COMMON_TYPES_1DC8418C21DB_H
 #include "audio_callbacks.h"
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_802BAC58.h"
 #include "shared/pak_menu.h"
-#include "span_1000/code_802B7B80.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 struct ItemRecAt20V1;

@@ -1,6 +1,6 @@
 #ifndef SHARED_REACTION_STATISTICS_H
 #define SHARED_REACTION_STATISTICS_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 
 /* Actor, interaction and score views used to select reactions and record statistics. */

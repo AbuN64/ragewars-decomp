@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "stddef.h"
 
 /* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box

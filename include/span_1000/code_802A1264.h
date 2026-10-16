@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A1264_H
 #define UNBAKE_SPAN_1000_CODE_802A1264_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_80296014.h"
 struct Tree;
 extern s32 func_802A1B50_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);

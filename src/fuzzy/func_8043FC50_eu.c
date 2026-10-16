@@ -1,7 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "resident_event_handler.h"
-#include "types.h"
+#include "TYPES.H"
 extern f32 D_800E2390;
 
 typedef struct FlagOwner_func_8043FC50_eu {

@@ -2,7 +2,7 @@
 #include "common/unused.h"
 #include "resident_event_handler.h"
 #include "shared/gameplay_reactions.h"
-#include "types.h"
+#include "TYPES.H"
 void func_80216488_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 void func_80219A40_de(struct Shared_ReactionActor *arg0, void *arg1, struct Shared_ReactionInteraction *arg2);
 void func_8022B60C_de(Shared_ReactionActor *arg0, f32 arg1, s32 arg2) {

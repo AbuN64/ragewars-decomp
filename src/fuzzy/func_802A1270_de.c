@@ -1,6 +1,6 @@
 #include "common/unused.h"
 #include "span_1000/code_802A1264.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern f32 D_800C5D70_de;
 extern f32 D_800C5D74_de;

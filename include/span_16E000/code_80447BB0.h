@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80447BB0_H
 #define UNBAKE_SPAN_16E000_CODE_80447BB0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct Node_func_80449E18_de;
@@ -3120,5 +3120,13 @@ struct RecordCode80447BB0 {
     s32 word3C;
     s32 word40;
 };
+
+extern short D_800CF198[];
+
+s32 func_80264B6C_de(void);
+
+extern s32 func_80448BB4_de(u16 *ptr, u16 *csum, u16 *icsum);
+extern s32 func_80447130_de(OSPfs *pfs);
+extern s32 func_804486B8_de(OSPfs *pfs);
 
 #endif

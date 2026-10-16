@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_06e4f7ef1f9e.h"
 extern f32 D_800C2B74_de, D_800C2B78_de, D_80115DEC;
 extern void func_80274098_de(void *, void *, void *), func_80274244_de(void *, void *), func_80272C60_de(void *, f32, f32, f32), func_8026F620_de(void *, void *, void *);

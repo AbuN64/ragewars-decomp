@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 extern void osViBlack(s32 enabled);
 /* Blink the diagnostic indicator forever except for reason five. */
 void func_80415C1C_de(s32 reason)

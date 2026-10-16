@@ -1,6 +1,6 @@
 #ifndef RW_ACTOR_HEADER_H
 #define RW_ACTOR_HEADER_H
-#include "types.h"
+#include "TYPES.H"
 /* Common actor header occupies player offsets 0 through 0x1B. */
 struct ModelBlend;
 struct Object {

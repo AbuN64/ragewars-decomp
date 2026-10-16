@@ -1,7 +1,7 @@
 #ifndef RAGEWARS_RDP_DMA_IO_H
 #define RAGEWARS_RDP_DMA_IO_H
 
-#include "types.h"
+#include "TYPES.H"
 #include "hardware_io.h"
 
 /* Uncached RDP DMA registers; every access retains the shared volatile word type. */

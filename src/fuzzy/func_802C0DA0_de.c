@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "shared/unsigned_quotient.h"
 
 u64 func_802C0DA0_de(u64 numerator, u64 divisor) {

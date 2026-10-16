@@ -1,6 +1,6 @@
 #ifndef RAGEWARS_NAVIGATION_GRAPH_H
 #define RAGEWARS_NAVIGATION_GRAPH_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 
 struct Player;

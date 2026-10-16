@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BAC58_H
 #define UNBAKE_SPAN_1000_CODE_802BAC58_H
-#include "types.h"
+#include "TYPES.H"
 struct OSThread_s;
 typedef struct OSThread_s OSThread_s;
 

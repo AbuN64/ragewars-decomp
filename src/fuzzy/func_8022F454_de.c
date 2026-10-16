@@ -1,5 +1,5 @@
 #include "span_1000/code_8022F3E8.h"
-#include "types.h"
+#include "TYPES.H"
 
 s32 func_8022F454_de(Obj_func_8022F3F8_de *obj, s32 index) {
     if (index == 17) {

@@ -1,7 +1,7 @@
 #ifndef SHARED_SHARED_FUNC_80286A78_S3_H
 #define SHARED_SHARED_FUNC_80286A78_S3_H
 
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct SharedRecAt91 SharedRecAt91;
 struct SharedRecAt91 {

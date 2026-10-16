@@ -1,5 +1,5 @@
 #include "shared/gameplay_sound_table.h"
-#include "types.h"
+#include "TYPES.H"
 typedef struct Trigger { char pad0[4]; u16 actor; char pad6[2]; u16 action, owner; char padC[4]; u8 sound, table, entry; } Trigger;
 typedef struct TriggerActor { char pad0[0x170]; char component[0x178]; } TriggerActor;
 typedef void (*PrimaryCallback)(TriggerActor *, void *, Trigger *);

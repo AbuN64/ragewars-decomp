@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { s32 offset, size; void *data; } FileBlock;
 typedef struct { u8 pad0[0x23C]; s32 dataOffset; } ArchiveHeader;

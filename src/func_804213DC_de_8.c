@@ -3,7 +3,7 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_16E000/code_80434F4C.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Releases the object D_800E4450 holds through func_802547E4_de, clears D_800E4450 and returns zero. */
 

@@ -1,7 +1,7 @@
 #ifndef RW_ARGB_COLOR_H
 #define RW_ARGB_COLOR_H
 
-#include "types.h"
+#include "TYPES.H"
 
 /* Big-endian AARRGGBB argument representation used by the rectangle renderer.
  * US rev1 func_80415C90_de (80415D10) takes four words at incoming sp+10..1C.

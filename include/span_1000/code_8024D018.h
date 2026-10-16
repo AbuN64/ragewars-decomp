@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8024D018_H
 #define UNBAKE_SPAN_1000_CODE_8024D018_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "resident_event_handler.h"
 struct func_8024DEF8_S1;

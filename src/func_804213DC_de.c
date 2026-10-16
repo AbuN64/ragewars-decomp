@@ -1,6 +1,6 @@
 #include "common/unused.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
-#include "types.h"
+#include "TYPES.H"
 /* Opens the options screen: allocates its 0x3C-byte state into D_800E4400 for window arg0, builds
    its title, heading and the four toggle buttons 0x3B4, 0x3B1, 0x3AD and 0x3AF set from bits of
    D_801462C8, creates the item list and refreshes the limit markers through func_80421234_de. */

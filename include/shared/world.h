@@ -1,6 +1,6 @@
 #include "span_1000/code_80286050.h"
 #pragma once
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028FC98.h"
 struct Shared_Pickup;

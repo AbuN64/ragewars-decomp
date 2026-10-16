@@ -1,7 +1,7 @@
 #ifndef FUNC_8043E444_DE_CLOSED_H
 #define FUNC_8043E444_DE_CLOSED_H
 #include "shared/func_8043F294_de_closed.h"
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_DebugField Shared_DebugField;
 struct Shared_DebugField {
     char *name;

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { u8 pad0[0x79]; u8 yaw, pitch; s8 pitchMode; u8 pad7C; u8 freePitch; } ControlSettings;
 typedef struct { u8 pad0[0x5D8]; ControlSettings *settings; u8 pad5DC[0xC0]; f32 yawInput, pitchInput; u8 pad6A4[0x80]; f32 pitch; u8 pad728[0xC4]; f32 damping; u8 pad7F0[0x9C4]; s32 locked; u8 pad11B8[0x20]; f32 cooldown; } Player;

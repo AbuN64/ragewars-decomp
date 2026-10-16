@@ -3,7 +3,7 @@
 #include "common/unused.h"
 #include "span_1000/code_802B0388.h"
 #include "span_1000/code_802B53FC.h"
-#include "types.h"
+#include "TYPES.H"
 
 void *__mapVoice(void *arg0, s8 arg1, s8 arg2, s8 arg3) {
     ALVoiceState *node;

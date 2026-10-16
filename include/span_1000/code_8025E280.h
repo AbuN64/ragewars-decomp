@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8025E280_H
 #define UNBAKE_SPAN_1000_CODE_8025E280_H
-#include "types.h"
+#include "TYPES.H"
 struct func_8025E544_S1;
 typedef struct func_8025E544_S1 func_8025E544_S1;
 

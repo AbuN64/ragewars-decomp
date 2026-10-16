@@ -1,7 +1,7 @@
 #ifndef RAGEWARS_TLB_SNAPSHOT_H
 #define RAGEWARS_TLB_SNAPSHOT_H
 
-#include "types.h"
+#include "TYPES.H"
 
 /* Compact TLB fields captured by func_802AD42C_de. */
 typedef struct RageWarsTlbSnapshot {

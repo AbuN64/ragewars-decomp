@@ -1,6 +1,7 @@
 #include "span_1000/code_802BE0D0.h"
 #include "span_C76B0/data.h"
 #include "common/unused.h"
+#include "MAIN/802BD1A8.H"
 extern void func_802BF928_de(f32 *, s32, s32, f32 *, f32 *, s32 *);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 

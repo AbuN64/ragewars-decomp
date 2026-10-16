@@ -3,7 +3,7 @@
 #include "common/unused.h"
 #include "resident_event_handler.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 #include "stdarg.h"
 unsigned char *func_802BD3C8_de(unsigned char *string, unsigned char value);
 void func_802BD974_de(_Pft *px, va_list *pap, int code, unsigned char *ac);

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_Profile { char pad0[0x84]; char name[11]; u8 enabled; } Shared_Profile;
 typedef struct SharedPlayerCode80225D10 { char pad0[0x5D8]; Shared_Profile *nameOwner; void *owner; char pad5E0[0xE08]; s32 next; char text[4][25]; } SharedPlayerCode80225D10;
 typedef struct Shared_MatchOptions { char pad0[0x1D]; u8 enabled; } Shared_MatchOptions;

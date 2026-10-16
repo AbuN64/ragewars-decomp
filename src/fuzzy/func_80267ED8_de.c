@@ -1,5 +1,5 @@
 #include "shared/gameplay_sound_table.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Effect callback that plays a sound and runs its hook: the sound of entry arg6.value in D_800D3F58 is started through func_80237E80_de on the emitter of a mirrored player's parent (skipped when it has none) or on the default emitter at D_80145088 + 0x40, and the entry's hook is then run through func_8025E11C_de when present. */
 

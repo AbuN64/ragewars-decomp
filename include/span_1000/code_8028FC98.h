@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8028FC98_H
 #define UNBAKE_SPAN_1000_CODE_8028FC98_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
 struct Node_func_8029076C_de;

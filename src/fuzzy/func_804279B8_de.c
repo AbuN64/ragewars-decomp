@@ -1,5 +1,5 @@
 /* Updates the selected player's appearance and creates its results-screen model. */
-#include "types.h"
+#include "TYPES.H"
 typedef struct Vec { f32 x,y,z; } Vec;
 typedef struct Entry { char pad[0x80]; s8 kind; char tail[0x15]; } Entry;
 typedef struct Settings { char pad[13]; u8 mode; char padE[0xC2]; Entry entries[4]; } Settings;

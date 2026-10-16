@@ -1,7 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "shared/func_8044DA54_de_closed.h"
-#include "types.h"
+#include "TYPES.H"
 s32 func_80265964_de(s32 arg0);
 s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
 void func_8025768C_de(void *arg0) {

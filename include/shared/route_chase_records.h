@@ -1,6 +1,6 @@
 #ifndef RW_ROUTE_CHASE_RECORDS_H
 #define RW_ROUTE_CHASE_RECORDS_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 /* Chase and patrol records retained by the legacy US revision C and its exact
  * native identity measurements. Named members preserve those measured offsets. */

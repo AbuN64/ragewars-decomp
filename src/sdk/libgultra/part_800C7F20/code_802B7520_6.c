@@ -3,7 +3,7 @@
 #include "shared/func_802B2CF0_de_closed.h"
 #include "span_1000/code_802B2614.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* _sndpVoiceHandler, drafted from ultralib src/audio/sndplayer.c: the sound player's synthesizer
    callback; reposts the frame API event or handles the pending event until the next one is in

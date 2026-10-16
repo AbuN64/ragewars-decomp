@@ -1,6 +1,6 @@
 #ifndef FUNC_802BE0D0_DE_CLOSED_H
 #define FUNC_802BE0D0_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "acmd.h"
 #include "span_1000/code_802BE0D0.h"
 

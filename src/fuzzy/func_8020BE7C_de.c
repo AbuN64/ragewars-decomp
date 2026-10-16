@@ -2,7 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 extern f32 D_800C1D70_de;
-#include "types.h"
+#include "TYPES.H"
 f32 func_802726BC_de(void *a, void *b);
 s32 func_8020C078_de(NavigationGraph *, s32, s32, s32, s32, f32 *, f32);
 

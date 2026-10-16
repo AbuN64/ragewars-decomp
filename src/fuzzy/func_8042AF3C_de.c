@@ -1,5 +1,5 @@
 #include "span_16E000/code_80429C10.h"
-#include "types.h"
+#include "TYPES.H"
 
 s32 func_8042AF3C_de(void)
 {

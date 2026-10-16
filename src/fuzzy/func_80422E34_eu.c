@@ -2,7 +2,7 @@
 #include "common/unused.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041A4B0.h"
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_OptionsScreen Shared_OptionsScreen;
 struct Shared_OptionsScreen {
     u32 unknown00[7];

@@ -1,7 +1,7 @@
 struct SceneEffectPool;
 #ifndef UNBAKE_SPAN_1000_CODE_802624A0_H
 #define UNBAKE_SPAN_1000_CODE_802624A0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
@@ -54,7 +54,6 @@ struct Record_func_802627A0_de {
     u16 count;
     u16 angle;
 };
-extern void func_802631B0_de(char * arg0, struct SharedPlayer * arg1);
 
 struct ObjRecAt10V1;
 typedef struct ObjRecAt10V1 ObjRecAt10V1;

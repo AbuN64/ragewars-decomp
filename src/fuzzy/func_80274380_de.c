@@ -4,7 +4,7 @@
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_1000/code_8027302C.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 void func_80274380_de(void *arg0, f32 *arg1) {
     Vector4f vector;
     Vector4f *input = arg0;

@@ -1,9 +1,8 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8041C67C_H
 #define UNBAKE_SPAN_16E000_CODE_8041C67C_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_16E000/code_80403BCC.h"
 #include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802B7B80.h"
 
 
 struct __OSContRequesFormatShort;

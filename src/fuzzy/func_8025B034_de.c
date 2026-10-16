@@ -2,7 +2,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_8025B920_de_closed.h"
 #include "span_1000/code_802B2EF8.h"
-#include "types.h"
+#include "TYPES.H"
 s16 func_8025B034_de(s8 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     ObjRecAt40V2 *temp_s1;
     s16 temp_t2;

@@ -1,5 +1,5 @@
 #include "span_16E000/code_80420E90.h"
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_804220A8_de_closed.h"
 
 /* Tears down the match display: calls func_80245B28_de, stops the objects at D_80145088 and 0x48 bytes

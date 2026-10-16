@@ -2,7 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B0388.h"
 #include "span_1000/code_802B53FC.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern void func_802B2450_de(void *arg0);
 

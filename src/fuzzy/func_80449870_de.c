@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_80425674_de_layout.h"
 typedef struct { u8 pad0[0x8F]; u8 active; } Info_u1;
 typedef struct {

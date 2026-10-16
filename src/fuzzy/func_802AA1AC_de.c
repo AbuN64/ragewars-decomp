@@ -8,7 +8,7 @@
 #include "span_1000/code_802A8A94.h"
 #include "span_C76B0/data.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag);
 void func_802A9EE8_de(void *pTexture, f32 XPos, f32 YPos, int TextureWidth, int TextureHeight, f32 ScaleX, f32 ScaleY);
 void func_802A9CD0_de(void *pTexture, int XPos, int YPos, int TextureWidth, int TextureHeight);

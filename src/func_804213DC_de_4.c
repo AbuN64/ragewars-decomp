@@ -1,5 +1,5 @@
 #include "span_16E000/code_80420E90.h"
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_80421E70_eu_closed.h"
 
 s32 func_80421E70_eu(void) {

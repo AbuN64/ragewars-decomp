@@ -3,7 +3,7 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B243C.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 
 /* alSeqNextEvent, drafted from ultralib src/audio/seq.c: read the next MIDI file event into an

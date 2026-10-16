@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct SaveOwner { u8 pad0[0x554]; u32 list; } SaveOwner;
 typedef struct SavePlayer { u8 pad0[0x5dc]; SaveOwner *owner; u8 pad5e0[0xb8]; s32 value; } SavePlayer;
 typedef struct SaveInfo { u8 pad0[4]; s8 id; } SaveInfo;

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80256220_H
 #define UNBAKE_SPAN_1000_CODE_80256220_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 struct Chunk;

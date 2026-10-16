@@ -2,7 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 void *func_8020993C_de(void *arg0);
 extern f32 D_800C88A8_de;
 

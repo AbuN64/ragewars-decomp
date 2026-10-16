@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804290E8_H
 #define UNBAKE_SPAN_16E000_CODE_804290E8_H
-#include "types.h"
+#include "TYPES.H"
 struct Options;
 struct Options {
     char pad[0x24];

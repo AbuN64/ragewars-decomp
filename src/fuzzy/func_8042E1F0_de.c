@@ -5,7 +5,7 @@
    0xA0 = 100 and 0xA4 = -1; 0xD sets 1 with 0x98 = 1; 0x10 sets 2; 0xE sets 1 with 0x98 = 1 for the
    first such opponent and 0 after; 0xF sets 1 with 0x98 = 1 and 0x9C = 0; any other kind sets 0 and,
    once a kind 0xF opponent was placed, byte 0x95 = 1. */
-#include "types.h"
+#include "TYPES.H"
 
 struct Status {
     char pad0[0x78];

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 /* Rebuilds the loadout of every active player whose entry on the screen D_800E59E0 is in mode 2:
    clears the 22 owned bytes at 0x4C and level bytes at 0x62 of the player's 150-byte record in

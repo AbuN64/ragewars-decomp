@@ -1,6 +1,6 @@
 #include "common/types_8a8189af7b05.h"
 #include "span_16E000/code_8040C780.h"
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct DraftWidget {
     struct DraftWidget *parent;

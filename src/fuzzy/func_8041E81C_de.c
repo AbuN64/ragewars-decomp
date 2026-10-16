@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 /* Deals out random rewards for `count` entries at difficulty `level`: seeds each
    entry at 5 points and takes the level's budget from D_800E37B8[level * 5 +

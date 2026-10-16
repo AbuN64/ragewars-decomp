@@ -1,6 +1,6 @@
 #ifndef RW_PREVIEW_MODEL_IMAGE_H
 #define RW_PREVIEW_MODEL_IMAGE_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern s32 D_800E1E54[];

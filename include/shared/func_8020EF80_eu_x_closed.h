@@ -1,7 +1,7 @@
 struct Obj8020BC50;
 #ifndef FUNC_8020EF80_EU_X_CLOSED_H
 #define FUNC_8020EF80_EU_X_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_PickupGoalNode Shared_PickupGoalNode;
 struct Shared_PickupGoalNode {
     s32 id;

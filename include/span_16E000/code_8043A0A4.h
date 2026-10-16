@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8043A0A4_H
 #define UNBAKE_SPAN_16E000_CODE_8043A0A4_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_16E000/code_8041B020.h"
@@ -158,5 +158,20 @@ struct Screen42 {
     s32 delay;
 };
 extern s8 D_80142358[];
+
+extern void func_8043BA5C_de(s32, s32);
+
+extern void func_8043B49C_de(s32, s32, s32);
+
+extern void func_8043C2F0_de(s32 *, s32);
+extern void func_8043C2F8_de(s32 *, s32, s32, s32);
+
+extern void func_8043B6E8_de(s32);
+
+extern void func_8043ACF0_de(s32, s32);
+
+extern void func_8043AE5C_de(s32, s32);
+
+extern void func_8043B0CC_de(int);
 
 #endif

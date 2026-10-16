@@ -1,7 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802AE254.h"
 #include "span_1000/code_802B8CCC.h"
-#include "types.h"
+#include "TYPES.H"
 /* Walks the arg0 byte stream arg1 times through the cartridge-domain port at D_B2000000, raising the control register mirrors D_B200000C, D_B2000008 and D_B2000004 from the D_8014D3E3/D_8014D3E2/D_8014D3E1 control bytes one strobe step at a time, then handing each stream byte to the port after the D_B2000015 ready bit has been confirmed with D_800D3650 retries each. A final D_B2000011 handshake decides the result: reaching it without a D_8014D3E8 timeout returns 0, a timeout in that last handshake returns 1, and any earlier timeout skips straight to lowering the three control mirrors again. Adapted from func_802AE5AC_us_rev1 with the byte stream loop and the mirrored D_auto_B2000014 clear and D_auto_B2000020 data write added. */
 
 

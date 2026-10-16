@@ -1,7 +1,7 @@
 #ifndef SHARED_SHARED_SCENEFONTRESOURCES_H
 #define SHARED_SHARED_SCENEFONTRESOURCES_H
 
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Shared_SceneFontResources Shared_SceneFontResources;
 struct Shared_SceneFontResources {

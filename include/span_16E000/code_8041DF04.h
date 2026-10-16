@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8041DF04_H
 #define UNBAKE_SPAN_16E000_CODE_8041DF04_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 extern s32 func_8041EAC4_de();

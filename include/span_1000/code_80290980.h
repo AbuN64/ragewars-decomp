@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80290980_H
 #define UNBAKE_SPAN_1000_CODE_80290980_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 extern void func_80290A50_us_rev1(void);
 
@@ -46,14 +46,9 @@ extern void func_80290A48_de(void *source, int *word, float *third, float *fourt
 
 extern void func_80290980_us(void);
 extern void func_80290988_us(void);
-extern void func_80290990_us(void);
 extern void func_80290A70_de(void);
 extern void func_80290A78_de(void);
-extern void func_80290A80_de(void);
 extern void func_80290B80_eu(void);
 extern void func_80290B88_eu(void);
-extern void func_80290B90_eu(void);
-extern void func_80290BB0_eu_x(void);
 extern void func_80290BB8_eu_x(void);
-extern void func_80290BC0_eu_x(void);
 #endif

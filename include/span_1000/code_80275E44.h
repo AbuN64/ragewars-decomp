@@ -1,7 +1,7 @@
 struct ModelTreeNode;
 #ifndef UNBAKE_SPAN_1000_CODE_80275E44_H
 #define UNBAKE_SPAN_1000_CODE_80275E44_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 extern void func_80276298_de(struct ModelTreeNode *arg0, u16 arg1);
 
@@ -109,5 +109,7 @@ struct ModelTreeNode {
     u8 padding004[0xC];
     struct ModelTreeNode *branches[3]; /* 0x10 */
 };
+
+extern f32 func_8027631C_de(u16 *arg0, f32 arg1, u16 arg2);
 
 #endif

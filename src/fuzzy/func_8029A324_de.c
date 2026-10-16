@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { u16 source; s16 device; s16 dimensions; u16 control; u8 pad8[6]; s16 x, y, z; } AxisEvent;
 typedef struct { s16 oldX, oldY, oldZ, x, y, z; } AxisState;

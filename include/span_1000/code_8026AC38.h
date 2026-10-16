@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8026AC38_H
 #define UNBAKE_SPAN_1000_CODE_8026AC38_H
-#include "types.h"
+#include "TYPES.H"
 #include "gfx.h"
 #include "common/types_1dc8418c21db.h"
 struct ObjectState18;

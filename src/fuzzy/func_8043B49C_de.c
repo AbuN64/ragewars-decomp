@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 /* Updates the selected equipment icon, description and label for an active player's menu row; the category-1 arm is duplicated behind a short-circuit test of the player and choice arguments as a block-ordering lever that keeps behaviour identical and reproduces the cartridge's branch polarity in the three-case switch. */
 typedef struct Node
 {

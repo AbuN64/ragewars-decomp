@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "stddef.h"
 typedef struct SequenceResource {
     char pad[0x2B50];

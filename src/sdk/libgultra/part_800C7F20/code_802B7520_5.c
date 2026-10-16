@@ -5,7 +5,7 @@
 #include "span_1000/code_802B0388.h"
 #include "span_1000/code_802B2614.h"
 #include "span_1000/code_802B7488.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* alSndpNew, drafted from ultralib src/audio/sndplayer.c: sets up a sound player from its config,
    allocating the sound states and event items from the heap, registers its voice handler with the

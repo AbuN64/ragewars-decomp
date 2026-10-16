@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 typedef struct DraftConfigAB97C { u8 pad[0x8F]; u8 mode; } DraftConfigAB97C;
 typedef struct DraftChoiceAB97C { s8 enabled, kind; } DraftChoiceAB97C;

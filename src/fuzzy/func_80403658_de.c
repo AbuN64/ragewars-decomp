@@ -1,7 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_16E000/code_80400000.h"
-#include "types.h"
+#include "TYPES.H"
 extern State_func_8040385C_de *D_800E2830;
 extern f32 D_800DCC78;
 extern void *func_8028FDB4_de(void *,s32);

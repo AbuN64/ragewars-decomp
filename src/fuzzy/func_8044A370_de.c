@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct DraftListA370 { void *head, *tail; s32 count, a, b; } DraftListA370;
 typedef struct DraftEntryA370 { void *next, *prev; s32 a, b, c; f32 value; DraftListA370 lists[3]; } DraftEntryA370;
 typedef struct DraftActorA370 { void *next, *prev; s32 index; u8 rest[0xECC]; } DraftActorA370;

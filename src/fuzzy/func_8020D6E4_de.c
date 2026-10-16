@@ -4,7 +4,7 @@
 #include "shared/func_8020EF80_eu_x_closed.h"
 #include "span_1000/code_8020D370.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern s32 func_8020CC0C_de(PickupGoalNodeList *, s32, s32);
 extern Vec3 *func_8020C994_de(PickupGoalNodeList *, s32);

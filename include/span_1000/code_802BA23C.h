@@ -1,8 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BA23C_H
 #define UNBAKE_SPAN_1000_CODE_802BA23C_H
 #include "acmd.h"
-#include "types.h"
-extern void func_802BA210_de(void);
+#include "TYPES.H"
 
 struct __OSViScale;
 struct __OSViScale {
@@ -41,9 +40,7 @@ struct OSDevMgr_func_802BA350_de {
 struct OSIoMesgCode802BA23C;
 typedef struct OSIoMesgCode802BA23C OSIoMesgCode802BA23C;
 
-extern void func_802BA700_de(s32 arg0);
 
-extern void *func_802BA310_de();
 
 struct OSViCommonRegs;
 struct OSViCommonRegs {
@@ -110,7 +107,6 @@ struct OSIoMesgCode802BA23C {
     void *piHandle;
 };
 
-extern void func_802BA910_de();
 
 struct OSViCommonRegs;
 typedef struct OSViCommonRegs OSViCommonRegs;
@@ -134,7 +130,6 @@ struct Modep {
 struct ObjectState28;
 typedef struct ObjectState28 ObjectState28;
 
-extern void osViSetYScale(f32 arg0);
 
 struct Modep;
 typedef struct Modep Modep;

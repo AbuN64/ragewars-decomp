@@ -2,7 +2,7 @@
 #include "span_1000/code_802B53FC.h"
 #include "abi.h"
 #include "acmd.h"
-#include "types.h"
+#include "TYPES.H"
 
 Acmd *func_802B53FC_de(ALMainBus_s *m, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;

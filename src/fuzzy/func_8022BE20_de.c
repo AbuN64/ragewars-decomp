@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct HealingActor {
     u8 pad[0x5E4];

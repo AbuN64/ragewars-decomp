@@ -1,6 +1,6 @@
 #include "span_16E000/code_80405DC0.h"
 #include "common/types_1dc8418c21db.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Reloads a saved controller-pak block when func_80406178_de reports no problem for the selected
    channel: with D_80153780 set it loads the block D_800E28BC points to onto the player found at

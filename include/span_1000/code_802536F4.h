@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802536F4_H
 #define UNBAKE_SPAN_1000_CODE_802536F4_H
-#include "types.h"
+#include "TYPES.H"
 /* The resource API retains an unused arena selector. */
 void func_80253908_de(s32 unusedHeap);
 #include "common/types_1dc8418c21db.h"

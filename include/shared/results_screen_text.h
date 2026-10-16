@@ -1,6 +1,6 @@
 #ifndef RESULTS_SCREEN_TEXT_H
 #define RESULTS_SCREEN_TEXT_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/data.h"
 /* PAL resources provide a string per selected language. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

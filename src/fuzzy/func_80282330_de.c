@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #include "span_1000/code_8027A0F4.h"
 #include "gbi.h"

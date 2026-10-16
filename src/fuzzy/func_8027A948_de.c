@@ -6,7 +6,7 @@
 #include "shared/func_80214624_de_closed.h"
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0xc0, 0xc4, 0xc8, 0xcc, 0xd8, 0xdc, 0xe0, 0xe4], gap at: 0xd0. */
 void func_8027A948_de(void *arg0, Vec3 *arg1) {

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8028308C_H
 #define UNBAKE_SPAN_1000_CODE_8028308C_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 struct Obj_func_80283920_de;
 struct Obj_func_80283920_de {

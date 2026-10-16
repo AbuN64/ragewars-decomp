@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BBC68_H
 #define UNBAKE_SPAN_1000_CODE_802BBC68_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct Func802C1F10Node;
 struct Func802C1F10Node {
@@ -11,7 +11,6 @@ struct Func802C1F10Node {
     u16 field10;
 };
 
-extern void func_802BCC90_de();
 
 
 

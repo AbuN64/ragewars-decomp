@@ -1,7 +1,7 @@
 /* Creates the three-row request screen and shows its selected row. */
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "span_16E000/code_8041DF04.h"
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_804235A8_eu_closed.h"
 
 

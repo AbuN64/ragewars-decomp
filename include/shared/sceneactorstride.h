@@ -1,7 +1,7 @@
 #ifndef SHARED_SHARED_SCENEACTORSTRIDE_H
 #define SHARED_SHARED_SCENEACTORSTRIDE_H
 
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Shared_SceneActorStride Shared_SceneActorStride;
 struct Shared_SceneActorStride {

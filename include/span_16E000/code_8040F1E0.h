@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8040F1E0_H
 #define UNBAKE_SPAN_16E000_CODE_8040F1E0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct SlotRecAtCV1;
 struct SlotRecAtCV1 {

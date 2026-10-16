@@ -8,7 +8,7 @@
 #include "span_1000/code_802B2EF8.h"
 #include "span_C76B0/data.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 int func_80245784_de(void);
 f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2);
 void func_802B2F10_de(void *arg0, s16 arg1);

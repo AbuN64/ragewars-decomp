@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct DraftPlayerRenderInfo { char pad0[0x8F]; u8 team; } DraftPlayerRenderInfo;
 typedef struct DraftPlayerRenderView { char pad0[0x551]; u8 alpha; } DraftPlayerRenderView;

@@ -1,6 +1,6 @@
 #ifndef RW_GAMEPLAY_ROUND_RULES_H
 #define RW_GAMEPLAY_ROUND_RULES_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 /* Complete shared records retained from origin/legacy func_80227014.c and its shared headers. */

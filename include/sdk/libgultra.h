@@ -1,7 +1,7 @@
 #ifndef SDK_LIBGULTRA_H
 #define SDK_LIBGULTRA_H
 
-#include "types.h"
+#include "TYPES.H"
 extern int func_802AEF84_us_rev1(void);
 
 extern s32 func_802AF544_us_rev1(void);
@@ -40,5 +40,10 @@ extern void func_802B31F0_de(s32 *arg0);
 
 #include "span_1000/code_802B4730.h"
 extern void func_802B468C_de(AudioLowPassFilter *lp);
+
+extern int __osDpDeviceBusy();
+
+#include "acmd.h"
+extern void osViSetYScale(f32 arg0);
 
 #endif

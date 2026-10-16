@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct DraftScoreRecord {
     char pad0[4]; s16 kills; s16 score; s16 alternate;

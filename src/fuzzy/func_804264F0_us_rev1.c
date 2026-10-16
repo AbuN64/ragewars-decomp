@@ -8,7 +8,7 @@
 #include "span_16E000/code_8041B020.h"
 #include "span_16E000/code_804221A0.h"
 #include "span_16E000/code_804264F0.h"
-#include "types.h"
+#include "TYPES.H"
 void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);

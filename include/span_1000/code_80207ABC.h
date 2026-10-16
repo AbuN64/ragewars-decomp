@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80207ABC_H
 #define UNBAKE_SPAN_1000_CODE_80207ABC_H
-#include "types.h"
+#include "TYPES.H"
 struct func_80207ABC_S3;
 struct func_80207ABC_S3 {
     char pad0[0x24];

@@ -2,7 +2,7 @@
 #include "audio_callbacks.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B339C.h"
-#include "types.h"
+#include "TYPES.H"
 /* alSynStartVoiceParams, drafted from ultralib src/audio/synstartvoiceparam.c (2.0I branch, no
    fxmix clamp): posts a start-voice-alt update carrying pitch, volume, pan, fx mix, wave table and
    the ramp time in samples to the voice's channel filter. The fx mix is declared signed, since the

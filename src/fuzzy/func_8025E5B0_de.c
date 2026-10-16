@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 extern f32 D_800C4090_de;
 extern void *func_8028FDB4_de(void *, s32);

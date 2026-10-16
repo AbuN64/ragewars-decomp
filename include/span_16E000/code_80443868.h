@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80443868_H
 #define UNBAKE_SPAN_16E000_CODE_80443868_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8043F69C.h"
@@ -158,5 +158,11 @@ struct MenuRules;
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 func_80443998_de(struct LayeredText *field, struct MenuRules *holder);
 #endif
+
+extern s16 D_801422DE[];
+
+extern s16 D_801422DC[];
+
+extern s16 D_801422DA[];
 
 #endif

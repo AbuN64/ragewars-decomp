@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "span_16E000/code_80420E90.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 #include "common/unused.h"

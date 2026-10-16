@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802BB67C_H
 #define UNBAKE_SPAN_1000_CODE_802BB67C_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_802BB8B0_de_closed.h"
 struct Node802C07B0;
 typedef struct Node802C07B0 Node802C07B0;

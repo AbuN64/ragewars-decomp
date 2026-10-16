@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80293A04_H
 #define UNBAKE_SPAN_1000_CODE_80293A04_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_06e4f7ef1f9e.h"
 extern void func_8029437C_de(void);
 
@@ -130,5 +130,9 @@ extern s32 D_800CD77C;
 extern void func_80291FD8_de(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7);
 
 extern s32 D_800CC380;
+
+extern s32 func_80264B6C_de(void);
+extern void func_80286080_de(void *arg0);
+extern void func_802AA7A4_de(void *arg0);
 
 #endif

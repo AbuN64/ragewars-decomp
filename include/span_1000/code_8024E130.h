@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8024E130_H
 #define UNBAKE_SPAN_1000_CODE_8024E130_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct func_8024E560_S2;
 struct func_8024E560_S2 {

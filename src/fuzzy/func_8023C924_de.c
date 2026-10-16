@@ -2,7 +2,7 @@
  * thread object at D_80103720 (entry D_0023CA24, stack top D_800FFB50), then forever receives request
  * messages and dispatches on the request type to func_8023C1F0_de, func_8023CE9C_de, func_8023CCD4_de or
  * func_8023CDD4_de. */
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct {
     s16 type;

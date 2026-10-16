@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804221A0_H
 #define UNBAKE_SPAN_16E000_CODE_804221A0_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/level_actor.h"
 struct func_80422C20_S1;
 struct func_80422C20_S1 {

@@ -3,7 +3,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_1000/code_80246E34.h"
-#include "types.h"
+#include "TYPES.H"
 s32 func_80204308_de(void *, void *, void *);
 void func_80214178_de(void *, void *, s32);
 /* Warning: Gap in callee-saved word stack region.

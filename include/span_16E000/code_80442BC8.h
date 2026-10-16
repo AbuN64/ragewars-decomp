@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80442BC8_H
 #define UNBAKE_SPAN_16E000_CODE_80442BC8_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct Object1C8;
 struct Object1C8 {
@@ -175,5 +175,9 @@ struct ObjectRecAt14 {
     char pad6[0x14 - 6];
     void **target;
 };
+
+extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
+
+extern int D_8014DE50;
 
 #endif

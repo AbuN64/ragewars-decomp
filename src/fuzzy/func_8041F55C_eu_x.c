@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct MenuEventObject {
     u8 pad[0xC];

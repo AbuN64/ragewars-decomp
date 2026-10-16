@@ -5,7 +5,8 @@
 #include "span_1000/code_802624A0.h"
 #include "span_C76B0/data.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
+#include "MAIN/8020F6E0.H"
 
 
 extern f32 D_800C42A4_de;

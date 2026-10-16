@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_802BB67C.h"
 #include "span_1000/code_802BBC68.h"
 

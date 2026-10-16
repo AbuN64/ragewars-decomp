@@ -1,7 +1,7 @@
 #include "span_1000/code_80213ED4.h"
 #include "common/types_8fd754e1e915.h"
 #include "span_1000/code_8027A0F4.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern AudioStateA4 D_801468A0;
 

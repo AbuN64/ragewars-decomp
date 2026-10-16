@@ -1,5 +1,5 @@
 /* Mechanically ported from github/legacy:src/func_8028F258.c by address. */
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #include "span_1000/code_8028DF6C.h"
 #include "span_1000/code_80290980.h"

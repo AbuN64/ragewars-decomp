@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_166000_CODE_80403E88_H
 #define UNBAKE_SPAN_166000_CODE_80403E88_H
-#include "types.h"
+#include "TYPES.H"
 extern double func_804143B0_de();
 
 struct State_func_804219E0_de;

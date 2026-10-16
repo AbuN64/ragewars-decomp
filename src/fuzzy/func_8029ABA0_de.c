@@ -1,5 +1,5 @@
-#include "types.h"
-#include "span_1000/code_8029BBA0.h"
+#include "TYPES.H"
+#include "MAIN/80294AC0.H"
 #include "span_1000/code_8029EB74.h"
 
 extern const f64 D_800C56C0_de;

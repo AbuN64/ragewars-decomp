@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 typedef struct TogglePlayer { u8 pad0[0x5dc]; void *owner; u8 pad5e0[0xc1c]; f32 timer; Vec3 position; s32 mode; u8 pad1210[0x248]; Vec3 source; u8 pad1464[0xc]; Vec3 direction; s32 enabled; u8 pad1480[0x180]; u8 matrix[0x40]; } TogglePlayer;
 extern f32 D_800C2D0C_de;

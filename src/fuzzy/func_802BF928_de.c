@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 void func_802BF928_de(f32 *data,s32 count,s32 sign,f32 *cosines,f32 *sines,s32 *reverse) {
     s32 i,j,k,width,groups,total,step;
     f32 *current,*a,*b,*c,*s;

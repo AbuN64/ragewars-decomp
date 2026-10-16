@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { f32 x, y, z; } ResultVector;
 typedef struct { char bytes[0xC0]; } ResultBadge;

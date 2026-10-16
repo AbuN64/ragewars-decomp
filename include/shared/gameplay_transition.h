@@ -2,7 +2,7 @@
 
 #define RW_GAMEPLAY_TRANSITION_H
 
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_802A6AC0.h"
 
 #include "common/types_8a8189af7b05.h"

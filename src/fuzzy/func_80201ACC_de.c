@@ -1,6 +1,5 @@
-#include "types.h"
+#include "TYPES.H"
 
-typedef struct OSMesgQueue OSMesgQueue;
 typedef struct ControllerRequest {
     u32 header;
     u32 status;

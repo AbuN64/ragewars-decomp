@@ -1,6 +1,6 @@
 #ifndef FUNC_80206724_DE_CLOSED_H
 #define FUNC_80206724_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 typedef void (*Shared_VoidCallback)(void);
 typedef struct Shared_CallbackHook Shared_CallbackHook;
 struct Shared_CallbackHook {

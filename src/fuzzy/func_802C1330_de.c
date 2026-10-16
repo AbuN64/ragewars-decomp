@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 /* Unsigned 64-bit remainder, using restoring division so the runtime
  * primitive does not call itself through a compiler-generated modulo. */

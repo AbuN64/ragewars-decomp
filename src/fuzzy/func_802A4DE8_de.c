@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { s32 mode; f32 red, green, blue; } FadeColor;
 typedef struct { f32 current, target; } FadeAlpha;

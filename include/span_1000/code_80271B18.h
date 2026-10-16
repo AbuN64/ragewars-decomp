@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80271B18_H
 #define UNBAKE_SPAN_1000_CODE_80271B18_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 extern void func_80272C60_de(void *matrix, f32 x, f32 y, f32 z);
 extern void func_80272CB0_de(void *matrix, f32 x, f32 y, f32 z);

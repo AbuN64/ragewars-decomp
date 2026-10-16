@@ -1,7 +1,7 @@
 struct SharedPlayer;
 #ifndef UNBAKE_SPAN_1000_CODE_8022C894_H
 #define UNBAKE_SPAN_1000_CODE_8022C894_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_80200610.h"
 struct IntegerState244;

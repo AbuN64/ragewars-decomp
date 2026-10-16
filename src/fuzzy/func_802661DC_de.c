@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {

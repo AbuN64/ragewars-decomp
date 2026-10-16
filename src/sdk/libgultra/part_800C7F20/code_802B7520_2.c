@@ -2,7 +2,7 @@
 #include "common/unused.h"
 #include "span_1000/code_802B0388.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 
 s16 func_802B2510_de(PoolRecAt44 *pool, void *owner) {
     s32 count = pool->count;

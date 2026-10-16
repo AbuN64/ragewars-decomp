@@ -3,7 +3,7 @@
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_1000/code_8021CD70.h"
 #include "span_1000/code_8022A274.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern void *D_800D052C[];
 

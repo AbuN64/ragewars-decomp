@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802AD504_H
 #define UNBAKE_SPAN_1000_CODE_802AD504_H
-#include "types.h"
+#include "TYPES.H"
 extern s32 func_802B1B10_us_rev1(u32 arg0);
 
 extern s32 func_802B19C0_us_rev1(u32 arg0);

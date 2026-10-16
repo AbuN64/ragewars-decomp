@@ -2,7 +2,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_8021E2A0_de_closed.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 void func_8023CFE0_de(void *arg0) {
     f32 sp0;
     f32 sp4;

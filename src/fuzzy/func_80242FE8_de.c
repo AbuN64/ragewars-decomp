@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_8044DA54_de_closed.h"
 
 void func_802433DC_de(s32 *, void *);

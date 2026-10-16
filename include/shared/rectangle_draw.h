@@ -1,6 +1,6 @@
 #ifndef RAGEWARS_SHARED_RECTANGLE_DRAW_H
 #define RAGEWARS_SHARED_RECTANGLE_DRAW_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 
 /* Five cached flag groups written together by func_80417138_de. */

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct EffectResource {
     f32 value; char pad04[0xC]; s16 attachment; char pad12[0xD]; u8 first, second;

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802B7488_H
 #define UNBAKE_SPAN_1000_CODE_802B7488_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct ContReadFormat;
 typedef struct ContReadFormat ContReadFormat;
@@ -73,7 +73,6 @@ struct ContPad {
     u8 error;
 };
 
-extern int __osDpDeviceBusy();
 
 struct ALSoundState;
 struct ALSoundState {
@@ -87,13 +86,10 @@ struct ALSoundState {
     u8 fxMix;
 };
 
-extern void func_802B784C_de();
 
 struct ContPad;
 typedef struct ContPad ContPad;
 
-extern void func_802B75F4_de(ContPad *data);
 
-extern void func_802B768C_de();
 
 #endif

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "n64sdk.h"
 typedef struct { void *destination; s32 command,unused; u32 address; s32 channel; u32 count; s32 zero; void *reply; } DraftRequest;
 extern s32 D_800C8144_de;

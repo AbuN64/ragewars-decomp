@@ -1,6 +1,6 @@
 #ifndef RW_ACTOR_STATE_FIELDS_H
 #define RW_ACTOR_STATE_FIELDS_H
-#include "types.h"
+#include "TYPES.H"
 /* Consumed fragments of32byte actor state records, separate from24byte
  * player states. Transition routine scans signedstateID+0 and invokes
  * enter+4 with actor/context. Animation routine reads f32scale+20,

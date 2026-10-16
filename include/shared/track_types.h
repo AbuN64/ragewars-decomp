@@ -1,6 +1,6 @@
 #ifndef RW_TRACK_TYPES_H
 #define RW_TRACK_TYPES_H
-#include "types.h"
+#include "TYPES.H"
 
 struct KeyRecAt1C;
 typedef struct KeyRecAt1C KeyRecAt1C;

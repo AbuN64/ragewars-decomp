@@ -1,7 +1,7 @@
 struct ALSeq_s;
 #ifndef FUNC_802B0A90_DE_CLOSED_H
 #define FUNC_802B0A90_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_802B0388.h"
 #include "span_1000/code_802B243C.h"

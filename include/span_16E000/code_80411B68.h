@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80411B68_H
 #define UNBAKE_SPAN_16E000_CODE_80411B68_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 extern void func_80411EEC_de();
 

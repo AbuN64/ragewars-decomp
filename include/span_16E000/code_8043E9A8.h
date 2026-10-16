@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8043E9A8_H
 #define UNBAKE_SPAN_16E000_CODE_8043E9A8_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 extern s32 func_8043EA4C_de(void *arg0, Outer8043E56C *arg1);

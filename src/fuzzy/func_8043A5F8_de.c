@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct DraftWidget3A5F8 { u8 pad[0x14]; u16 x; } DraftWidget3A5F8;
 typedef struct DraftPanel3A5F8 { void *widget; u8 pad[0x4CC]; } DraftPanel3A5F8;
 typedef struct DraftScreen3A5F8 {

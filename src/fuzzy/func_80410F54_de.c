@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 /* Returns a cached image-bank tile texture, loading tile data and uploading oversized tiles on first use. */
 
 typedef struct {

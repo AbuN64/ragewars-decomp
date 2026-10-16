@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804143D8_H
 #define UNBAKE_SPAN_16E000_CODE_804143D8_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 struct Texture;
@@ -53,7 +53,6 @@ extern int D_80153F68;
 
 extern float D_800DD410_de;
 
-extern double func_804147F0_eu_x();
 
 extern void func_80418F8C_de();
 
@@ -61,7 +60,6 @@ extern void func_804191A4_de(void);
 
 extern void func_804190C4_de(s32 mode);
 
-extern void func_80414360_de();
 
 extern void func_804191E8_de(void);
 
@@ -84,7 +82,6 @@ extern const u8 D_800DD1DC[];
 extern const u8 D_800DD1F0[];
 extern const u8 D_800DF230_de[];
 extern const u8 D_800DF240[];
-extern s32 func_80414400_de(u8 *buf, f64 value, s32 ch, s32 width, s32 prec);
 
 extern f64 D_800E1118;
 extern f64 D_800E1130;

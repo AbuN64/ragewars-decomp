@@ -1,6 +1,6 @@
 #ifndef FUNC_80421E70_EU_CLOSED_H
 #define FUNC_80421E70_EU_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_16E000/code_80420E90.h"
 
 /* After func_8029973C_de, opens screen D_800E4400 through func_8042177C_de while its word at 0x34 is

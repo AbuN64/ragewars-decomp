@@ -1,5 +1,5 @@
 
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_802B9ED8.h"
 
 s32 func_802BA140_de(void *arg0)

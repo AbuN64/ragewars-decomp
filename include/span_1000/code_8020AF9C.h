@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8020AF9C_H
 #define UNBAKE_SPAN_1000_CODE_8020AF9C_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/navigation_graph.h"
 #include "common/types_1dc8418c21db.h"
 struct Node8020BC50;

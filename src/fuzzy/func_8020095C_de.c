@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "n64sdk.h"
 extern s32 D_800C8140_de;
 extern u8 D_800F2CE0[],D_800F2CC0[];

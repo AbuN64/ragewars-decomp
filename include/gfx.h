@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SHARED_GFX_H
 #define UNBAKE_SHARED_GFX_H
-#include "types.h"
+#include "TYPES.H"
 
 typedef union Gfx {
     struct { u32 w0; u32 w1; } words;

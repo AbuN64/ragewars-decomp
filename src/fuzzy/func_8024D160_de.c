@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct InteractionDescriptor { s32 kind; char pad4[0x10]; s32 flags; } InteractionDescriptor;
 typedef struct InteractionLink { char pad0[0x1C]; s32 flags; char pad20[0x83C]; s32 linked; } InteractionLink;
 typedef struct InteractionActor {

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8029F3A8_H
 #define UNBAKE_SPAN_1000_CODE_8029F3A8_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 
 /* Matrix constructor record: four header words precede the 4x4 matrix. */

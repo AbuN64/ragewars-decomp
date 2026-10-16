@@ -1,6 +1,6 @@
 #ifndef RW_PLAYER_STATUS_TEXT_H
 #define RW_PLAYER_STATUS_TEXT_H
-#include "types.h"
+#include "TYPES.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 extern char *D_800E1034_eu[];

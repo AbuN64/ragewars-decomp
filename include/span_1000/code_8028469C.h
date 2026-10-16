@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8028469C_H
 #define UNBAKE_SPAN_1000_CODE_8028469C_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 /* Section zero of packed and expanded mesh resources. */
@@ -315,5 +315,8 @@ typedef struct func_80285540_S2 func_80285540_S2;
 
 struct func_8028509C_S2;
 typedef struct func_8028509C_S2 func_8028509C_S2;
+
+s32 func_802AD4C0_de();
+s32 func_802AD940_de();
 
 #endif

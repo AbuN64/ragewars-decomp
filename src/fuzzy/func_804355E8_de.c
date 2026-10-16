@@ -1,5 +1,5 @@
 /* Copies four selected player records and marks absent selections; -fno-strength-reduce reproduces the reference pointer induction exactly. */
-#include "types.h"
+#include "TYPES.H"
 void func_802A0724_de(void *, void *, s32);                       /* extern */
 typedef struct { char pad[12]; s8 unkC, unkD; char rest[0x182]; } Record;
 extern Record D_80102B00[];

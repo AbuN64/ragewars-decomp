@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802B8CCC_H
 #define UNBAKE_SPAN_1000_CODE_802B8CCC_H
-#include "types.h"
+#include "TYPES.H"
 struct func_802BDDC0_S1;
 struct func_802BDDC0_S1 {
     s16 unk0;

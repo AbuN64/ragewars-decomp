@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct SavedPlayer { s32 data[28]; } SavedPlayer;
 typedef struct SavedSettings { s32 data[353]; } SavedSettings;
 typedef struct SavedState {

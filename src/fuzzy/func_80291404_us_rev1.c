@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 extern void func_802BD320_de(void *a, void *b, void *c, void *d);
 extern s32 func_802BCF10_de(void);

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8042BD40_H
 #define UNBAKE_SPAN_16E000_CODE_8042BD40_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_16E000/code_8042E080.h"
 #include "common/types_1dc8418c21db.h"
 struct SettingsRecAt24;

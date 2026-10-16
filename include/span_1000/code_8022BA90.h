@@ -1,7 +1,7 @@
 struct ScreenRectangle;
 #ifndef UNBAKE_SPAN_1000_CODE_8022BA90_H
 #define UNBAKE_SPAN_1000_CODE_8022BA90_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "span_1000/code_80225D10.h"
 extern void *func_8022C454_de(void *arg0);

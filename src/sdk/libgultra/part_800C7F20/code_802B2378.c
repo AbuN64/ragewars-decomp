@@ -1,5 +1,5 @@
 #include "span_1000/code_802AD504.h"
-#include "types.h"
+#include "TYPES.H"
 
 s32 func_802B2378(s32 arg0) {
     if ((arg0 == 0x7CF) || (arg0 == 0xBB7) || (arg0 == 0xF9F) ||

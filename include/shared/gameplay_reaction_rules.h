@@ -1,6 +1,6 @@
 #ifndef RW_GAMEPLAY_REACTION_RULES_H
 #define RW_GAMEPLAY_REACTION_RULES_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_MatchRules Shared_MatchRules;
 struct Shared_MatchRules {
     char pad0[0x20];

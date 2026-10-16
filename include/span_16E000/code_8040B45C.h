@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8040B45C_H
 #define UNBAKE_SPAN_16E000_CODE_8040B45C_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/pak_menu.h"
 #include "common/types_8a8189af7b05.h"
 #include "span_16E000/code_8043F69C.h"

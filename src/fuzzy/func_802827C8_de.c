@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 typedef struct DraftPair827C8 { s32 a, b; } DraftPair827C8;
 typedef struct DraftActions827C8 {

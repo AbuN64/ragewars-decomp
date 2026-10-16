@@ -4,7 +4,7 @@
 #include "shared/func_80425674_de_layout.h"
 
 #include "common/types_1dc8418c21db.h"
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_OptionsScreen Shared_OptionsScreen;
 struct Shared_OptionsScreen {
     u32 unknown00[7];

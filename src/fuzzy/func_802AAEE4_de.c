@@ -2,7 +2,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 void func_802A9734_de(void *pTexture, void *pOpacity, float XPos, float YPos, int TextureWidth, int TextureHeight, float ScaleX, float ScaleY);
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x20, 0x24, 0x28, 0x2c, 0x30, 0x34, 0x38, 0x48, 0x4c, 0x58, 0x5c, 0x68, 0x6c, 0x78, 0x7c, 0x88, 0x8c], gap at: 0x3c. */

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80233920_H
 #define UNBAKE_SPAN_1000_CODE_80233920_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_8023330C.h"
 /* XYZ minimum and maximum bounds, copied as a single record. */
 typedef struct ViewFlags { s32 flags; } ViewFlags;

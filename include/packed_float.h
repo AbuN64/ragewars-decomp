@@ -1,7 +1,7 @@
 #ifndef RAGEWARS_PACKED_FLOAT_H
 #define RAGEWARS_PACKED_FLOAT_H
 
-#include "types.h"
+#include "TYPES.H"
 
 /* Decodes a float stored as its high 16 bits. */
 extern f32 func_802AD520_eu(s32);

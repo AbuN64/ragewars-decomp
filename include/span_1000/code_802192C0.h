@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802192C0_H
 #define UNBAKE_SPAN_1000_CODE_802192C0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
@@ -379,5 +379,9 @@ struct Shared_ActorView;
 s32 func_80229C0C_de(struct Shared_ActorView *, s32);
 void func_8022B530_de(s32);
 extern void *D_800F3D08;
+
+extern void func_8026D914_de(s32 arg0);
+extern void func_8026E378_de(s32 arg0, s32 arg1);
+extern void func_80273A98_de(void *arg0, f32 arg1);
 
 #endif

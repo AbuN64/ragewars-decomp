@@ -3,7 +3,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 s32 func_802799C0_de(void *arg0, s32 arg1);
 float func_8024E678_de(void *object);
 f32 func_8024E2FC_de(Actor_u1 *arg0);

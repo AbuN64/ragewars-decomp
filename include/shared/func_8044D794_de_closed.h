@@ -1,6 +1,6 @@
 #ifndef FUNC_8044D794_DE_CLOSED_H
 #define FUNC_8044D794_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #include "shared/func_8028C568_de_closed.h"
 

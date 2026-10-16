@@ -1,5 +1,5 @@
 #include "span_1000/code_8027302C.h"
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_80214624_de_closed.h"
 #include "span_1000/code_8027A0F4.h"
 #include "shared/world.h"

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8024BA6C_H
 #define UNBAKE_SPAN_1000_CODE_8024BA6C_H
-#include "types.h"
+#include "TYPES.H"
 /* Section one of the resource selected by an actor's resource key. */
 /* Section zero of the resource selected by an actor's resource key. */
 typedef struct ActorResourceHeader {
@@ -311,5 +311,15 @@ struct ActorFrameMetadata {
     u8 reserved0[0x6E];
     u8 renderMode; /* 0x6E */
 };
+
+extern void func_8026F898_de(f32 *, f32 *, f32 *);
+extern void func_8026C6D8_de(s32, s32, s32, s32, void *, s32, s32);
+
+extern Vec3 *func_80275BC8_de(Vec3 *out, Node75 *node);
+
+extern char D_800C3AE8_de;
+extern char D_0026D814;
+extern char D_800C3B28;
+extern char D_800C3B3C;
 
 #endif

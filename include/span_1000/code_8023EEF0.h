@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8023EEF0_H
 #define UNBAKE_SPAN_1000_CODE_8023EEF0_H
-#include "types.h"
+#include "TYPES.H"
 
 /* Sortable render item, moved as an eight-byte record. */
 typedef struct RenderSortRecord {
@@ -24,7 +24,6 @@ struct ObjRecAtCC {
     f32 unkCC;
 };
 
-extern s32 func_80240698_de(void *arg0, s32 arg1, Vec3 t, s32 arg5, s32 arg6, void *arg7);
 
 struct Plane;
 typedef struct Plane Plane;

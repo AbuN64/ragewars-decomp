@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { f32 x, y, z; } AttackPosition;
 typedef struct { char pad0[0x80]; s8 kind; char pad81[0xE]; u8 bonus; char pad90[4]; u8 enabled; } AttackState;

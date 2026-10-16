@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_166000_CODE_8043D1DC_H
 #define UNBAKE_SPAN_166000_CODE_8043D1DC_H
-#include "types.h"
+#include "TYPES.H"
 struct Func8043D458Arg;
 struct Func8043D458Arg {
     s8 pad0[8];

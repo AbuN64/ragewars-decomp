@@ -1,7 +1,8 @@
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "span_1000/code_802BE0D0.h"
-#include "types.h"
+#include "TYPES.H"
+#include "MAIN/802BD1A8.H"
 extern u16 D_800D5350[];
 extern u16 D_800D5374[];
 extern u16 D_8014AE00;

@@ -3,7 +3,7 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_802022E0.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 extern s32 D_00202270;
 extern s32 D_00202284;
 extern u32 D_002022A8;

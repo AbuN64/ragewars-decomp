@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 extern s32 D_80106248;
 extern u8 D_0043C500[];

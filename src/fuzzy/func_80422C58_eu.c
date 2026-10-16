@@ -3,7 +3,7 @@
 #include "shared/func_80425674_de_layout.h"
 #include "span_16E000/code_8041A4B0.h"
 #include "span_16E000/code_8041B020.h"
-#include "types.h"
+#include "TYPES.H"
 void *func_8041ABC0_de(s32 arg0, s32 arg1);
 void func_8041AD34_de(void *menu);
 void func_8041AD10_de(void *menu, s32 index);

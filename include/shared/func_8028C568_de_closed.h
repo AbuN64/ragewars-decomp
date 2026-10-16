@@ -1,6 +1,6 @@
 #ifndef FUNC_8028C568_DE_CLOSED_H
 #define FUNC_8028C568_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #include "packed_float.h"
 

@@ -3,7 +3,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_8044DA54_de_closed.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2);
 extern f32 D_800C4008_de;
 

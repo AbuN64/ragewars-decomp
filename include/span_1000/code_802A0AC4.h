@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A0AC4_H
 #define UNBAKE_SPAN_1000_CODE_802A0AC4_H
-#include "types.h"
+#include "TYPES.H"
 
 /* Resource handle, cursor, size, state, and ready flag. */
 extern s32 D_800CD940_de[5];

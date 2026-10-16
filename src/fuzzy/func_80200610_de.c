@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { u32 first, last, flags; } MemoryRange;
 typedef struct { u32 pageMask, entryHi, entryLo0, entryLo1; } TranslationEntry;

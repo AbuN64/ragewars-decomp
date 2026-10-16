@@ -2,12 +2,11 @@
 #define UNBAKE_SPAN_1000_CODE_802BE0D0_H
 #include "acmd.h"
 #include "audio_callbacks.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 extern float D_801514C0[];
 
-extern void func_802C021C_de();
 
 extern float D_800C7CEC_de;
 
@@ -20,13 +19,11 @@ typedef struct ALLoadFilter48_2 ALLoadFilter48_2;
 
 extern void func_802BFF30_de(float *arg0, float *arg1);
 
-extern void func_802BF514_de();
 
 extern float D_800CCF10;
 
 extern float D_801512C0[];
 
-extern u32 func_802BFE3C_de(void);
 
 extern float D_801510C0[];
 
@@ -128,7 +125,6 @@ extern float D_800CCF20;
 
 extern float D_800C7CE8_de;
 
-extern Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
 
 typedef struct DecodeState {
     s32 first;
@@ -178,6 +174,5 @@ typedef struct DecodeBlock {
     DecodeTable *table;
 } DecodeBlock;
 
-extern u16 func_802BEDB0_de(u16 *, u16, s32, s32, void *);
 
 #endif

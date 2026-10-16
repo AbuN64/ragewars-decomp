@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 extern s32 func_80200500_de(void);
 extern void func_80200538_de(s32);
 extern s32 func_802017E8_de(s32, s32, s32, s32);

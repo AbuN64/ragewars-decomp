@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 typedef struct ImpactParams { s32 a, b; } ImpactParams;
 typedef struct ImpactEvents { ImpactParams params[14]; u16 models[14], particles[14], sounds[14]; } ImpactEvents;

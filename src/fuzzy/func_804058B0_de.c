@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/data.h"
 #include "common/unused.h"
 #include "shared/func_80404D84_de_closed.h"

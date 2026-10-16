@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 /* Sets a field's text to D_800D3DDC when D_80142228 equals D_800DE338, and otherwise to D_800D3DD8, into which D_800E1DF8_de less five is formatted with D_800DE2F8 three bytes before the length func_80441FE8_de reports. Returns zero. */
 struct Field {

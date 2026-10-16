@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "gfx.h"
 #include "gbi.h"
 #include "span_1000/code_8023A284.h"

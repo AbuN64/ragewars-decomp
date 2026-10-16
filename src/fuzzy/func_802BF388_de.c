@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "n64sdk.h"
 typedef struct { s32 kind,start,length,offset; void *table; } DraftBlock;
 typedef struct { char pad[0x18]; u16 header[16]; char gap[0x80]; u16 output[256]; } DraftStream;

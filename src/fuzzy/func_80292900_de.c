@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct Node_func_80442A28_de TimingQueue;
 typedef struct TimingWorld {
  char pad0[0x25B5C]; TimingQueue *unk25B5C;

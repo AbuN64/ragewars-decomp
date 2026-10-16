@@ -1,7 +1,7 @@
 struct Shared_Actor;
 #ifndef UNBAKE_SPAN_1000_CODE_80279208_H
 #define UNBAKE_SPAN_1000_CODE_80279208_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 extern int D_8011BF00;
@@ -48,7 +48,6 @@ extern void func_802791F0_de(void *object);
 struct Trigger;
 typedef struct Trigger Trigger;
 
-extern void func_802794B0_de(ListHeader *list);
 
 struct List802795C0;
 typedef struct List802795C0 List802795C0;
@@ -162,4 +161,10 @@ struct IntegerState5AC {
 };
 
 extern void func_802794A4_de(void * arg0);
+
+extern s32 func_80204308_de(s32 arg0, s32 arg1, s32 arg2);
+
+extern void func_8025E1C4_de(s32);
+extern Vec3 D_801042C8;
+
 #endif

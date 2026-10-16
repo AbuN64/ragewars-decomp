@@ -1,7 +1,7 @@
 #include "span_16E000/code_8041A4B0.h"
 #include "span_16E000/code_8041B020.h"
 #include "span_16E000/code_80423280.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Builds the options-commit state: allocates its 0x28 bytes through func_8025305C_de and keeps the
    record at D_800E4510, creates the fade widget 0x4D/0x4E and the title object 0x4F/0x6E, then builds

@@ -1,6 +1,6 @@
 #include "span_16E000/code_8041F1FC.h"
 #include "span_16E000/code_804251F4.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern Match_func_80420618_de D_801462C8;
 extern s8 D_8014222C;

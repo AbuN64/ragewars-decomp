@@ -1,6 +1,6 @@
 #ifndef PREVIEW_STATISTICS_H
 #define PREVIEW_STATISTICS_H
-#include "types.h"
+#include "TYPES.H"
 extern const char D_800E1F48[];
 #if defined(VERSION_DE)
 extern const char D_auto_800DDF14[];

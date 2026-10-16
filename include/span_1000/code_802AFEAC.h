@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802AFEAC_H
 #define UNBAKE_SPAN_1000_CODE_802AFEAC_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "shared/audio_initialize.h"

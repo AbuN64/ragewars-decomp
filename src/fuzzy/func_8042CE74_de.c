@@ -1,5 +1,5 @@
 #include "shared/preview_model_image.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Shows the model preview of the screen D_800E53C0 when its model id at 0x32C is set: shows item
    the version-specific preview item of the screen window with alpha 0xAF and D_800D3500 at 0x38, then sets up the view at 0x20

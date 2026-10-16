@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct SoundSlot {
     char pad00[0xC]; s32 id; char pad10[8]; s32 rate;

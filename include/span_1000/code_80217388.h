@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80217388_H
 #define UNBAKE_SPAN_1000_CODE_80217388_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct TeamMenu;
@@ -1699,5 +1699,7 @@ typedef struct StickPlayer { char pad00[0x698]; StickInput *input; } StickPlayer
 extern char D_800C2260_de[];
 
 extern void func_802181FC_de(void *, s32, void *);
+
+extern void func_8025E1C4_de(s32);
 
 #endif

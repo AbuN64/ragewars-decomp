@@ -5,7 +5,7 @@
 #include "shared/func_804235A8_eu_layout.h"
 #include "shared/func_8043F294_de_closed.h"
 #include "common/unused.h"
-#include "types.h"
+#include "TYPES.H"
 
 
 

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8043962C_H
 #define UNBAKE_SPAN_16E000_CODE_8043962C_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 struct Tree;
 extern s32 func_80439E34_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);

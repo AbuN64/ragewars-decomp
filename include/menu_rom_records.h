@@ -1,6 +1,6 @@
 #ifndef MENU_ROM_RECORDS_H
 #define MENU_ROM_RECORDS_H
-#include "types.h"
+#include "TYPES.H"
 /* The ROM keeps TLB virtual code addresses (004xxxxx). The incomplete tag
  * represents an address label only: it defines no storage or callable ABI.
  * 8023C084 maps these pages to resident buffers; 80440F10 and 80441384 load

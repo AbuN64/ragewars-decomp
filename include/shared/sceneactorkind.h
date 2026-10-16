@@ -1,7 +1,7 @@
 #ifndef SHARED_SHARED_SCENEACTORKIND_H
 #define SHARED_SHARED_SCENEACTORKIND_H
 
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Shared_SceneActorKind Shared_SceneActorKind;
 struct Shared_SceneActorKind {

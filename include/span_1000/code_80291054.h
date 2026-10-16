@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80291054_H
 #define UNBAKE_SPAN_1000_CODE_80291054_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "gfx.h"
 #include "shared/gameplay_camera.h"
@@ -224,5 +224,21 @@ extern f32 rwFrameBuildSeconds;
 extern f32 D_800C5468;
 extern void func_802539EC_de(s32,s32);
 extern void func_80293268_de(void *);
+
+extern int func_80264B6C_de(void);
+
+extern s32 func_802BCF10_de(void);
+extern void func_80291404(void *arg0);
+extern int D_80146CE8;
+extern int D_800C5400_de;
+extern int D_800C5408_de;
+extern int D_800C5414_de;
+
+extern s32 D_8014286C;
+extern void func_802947C8_de(void *arg0, s32 arg1);
+
+extern int D_8014D460;
+extern int D_8014D42C;
+extern int D_8014D430_de;
 
 #endif

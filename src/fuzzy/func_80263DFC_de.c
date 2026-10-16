@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct { s8 taps; u8 age, repeat, held; } InputButton;
 typedef struct { s32 active; char pad4[0x10]; u32 previous, current, pressed, released, doubleTap, repeating; InputButton buttons[20]; char pad7C[0x48]; s8 x, y; } InputState;

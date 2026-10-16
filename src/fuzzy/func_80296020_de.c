@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_802624A0.h"
 #include "shared/func_8044DA54_de_closed.h"

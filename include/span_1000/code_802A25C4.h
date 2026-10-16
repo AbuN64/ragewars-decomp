@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A25C4_H
 #define UNBAKE_SPAN_1000_CODE_802A25C4_H
-#include "types.h"
+#include "TYPES.H"
 /* Reset and accumulate the scale, weight and displacement of an effect. */
 typedef struct EffectContribution {
     s32 id;

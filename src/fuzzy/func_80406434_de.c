@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 typedef struct DraftUi06434 { u8 pad[0x554]; char message[1]; } DraftUi06434;
 typedef struct DraftPlayer06434 { u8 pad[0x5D8]; ProfileRecAt84 *settings; DraftUi06434 *ui; u8 pad5E0[0xB8]; void *model; } DraftPlayer06434;

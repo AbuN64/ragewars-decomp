@@ -1,5 +1,5 @@
 #include "shared/world.h"
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_8028DF6C.h"
 
 extern Actor_func_8028E284_de *D_800F3CF8[4];

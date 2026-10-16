@@ -2,7 +2,7 @@
 #define UNBAKE_COMMON_UNUSED_H
 #include "shared/particle_lighting.h"
 #include "shared/level_actor.h"
-#include "types.h"
+#include "TYPES.H"
 #include "span_16E000/code_8040C780.h"
 #include "span_1000/code_802B8DD0.h"
 #include "common/types_8a8189af7b05.h"

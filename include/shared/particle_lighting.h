@@ -1,6 +1,6 @@
 #ifndef RW_PARTICLE_LIGHTING_H
 #define RW_PARTICLE_LIGHTING_H
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Shared_ParticleLighting Shared_ParticleLighting;
 struct Shared_ParticleLighting {

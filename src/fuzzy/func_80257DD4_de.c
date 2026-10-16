@@ -9,7 +9,7 @@
 #include "span_1000/code_802BB15C.h"
 #include "span_C76B0/data.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4);
 s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, Vec3 *arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 s32 func_80257DD4_de(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 arg4, s32 arg5, s32 arg6) {

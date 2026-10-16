@@ -1,6 +1,6 @@
 #include "common/unused.h"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern void func_802A2360_de(void);
 extern s32 func_80419E54_de(s32, s32);

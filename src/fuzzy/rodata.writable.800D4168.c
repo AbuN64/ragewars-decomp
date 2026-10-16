@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 u32 data_writable_800D4168[43] = {
     0x00000000, 0x00000000, 0x00000000, 0x54485F47, 0x55415244, 0x5F44414D,

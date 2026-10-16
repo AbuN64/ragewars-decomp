@@ -1,5 +1,5 @@
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Team {
     char pad0[0x92];

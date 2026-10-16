@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #ifndef UNBAKE_SPAN_16E000_CODE_80403BCC_H
 #define UNBAKE_SPAN_16E000_CODE_80403BCC_H
 #include "common/types_1dc8418c21db.h"

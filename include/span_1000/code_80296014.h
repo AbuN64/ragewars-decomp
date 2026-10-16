@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80296014_H
 #define UNBAKE_SPAN_1000_CODE_80296014_H
-#include "types.h"
+#include "TYPES.H"
 extern void func_80295FF4_de();
 
 extern f32 func_802969B0_de(f32 *a, f32 *b);

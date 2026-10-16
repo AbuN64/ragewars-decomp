@@ -1,7 +1,7 @@
 #ifndef LIBASM_80200400_H
 #define LIBASM_80200400_H
 
-#include "types.h"
+#include "TYPES.H"
 extern void func_80200400_de(void);
 
 extern void func_80200400_eu(void);

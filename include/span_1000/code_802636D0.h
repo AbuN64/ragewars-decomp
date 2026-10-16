@@ -1,7 +1,7 @@
 struct ControllerProfile;
 #ifndef UNBAKE_SPAN_1000_CODE_802636D0_H
 #define UNBAKE_SPAN_1000_CODE_802636D0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 
 /* Status and message queue for controller-pak operations. */
@@ -51,7 +51,6 @@ struct func_802636D0_S1 {
     int unk34;
 };
 
-extern s32 func_802636E8_de(s32 arg0);
 
 struct func_802643D8_S1;
 struct func_802643D8_S1 {

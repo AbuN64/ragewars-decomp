@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A208C_H
 #define UNBAKE_SPAN_1000_CODE_802A208C_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_8041F2A0_us_rev1_closed.h"
 extern void func_802A230C_de();
 

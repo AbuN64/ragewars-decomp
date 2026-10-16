@@ -1,6 +1,6 @@
 #ifndef RW_CHARACTER_SELECTION_IDS_H
 #define RW_CHARACTER_SELECTION_IDS_H
-#include "types.h"
+#include "TYPES.H"
 #if defined(VERSION_DE)
 enum { CHARACTER_EMPTY_SLOT = 127 };
 #elif defined(VERSION_EU_X)

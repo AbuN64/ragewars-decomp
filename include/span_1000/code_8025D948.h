@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8025D948_H
 #define UNBAKE_SPAN_1000_CODE_8025D948_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_8a8189af7b05.h"
 struct StateRecAt34;
@@ -18,7 +18,6 @@ struct StateRecAt34 {
 
 extern void func_8025E19C_de(s32 arg0);
 
-extern void func_8025D928_de(void *arg0);
 
 struct ObjectState40;
 struct ObjectState40 {
@@ -77,12 +76,10 @@ typedef struct StateRecAt34 StateRecAt34;
 extern float D_800C4038_de;
 
 struct Track;
-extern void func_8025DD60_de(struct Track *arg0);
 
 struct IntegerState2C_2;
 typedef struct IntegerState2C_2 IntegerState2C_2;
 
-extern void func_8025DC34_de(void *arg0, f32 arg1);
 
 struct func_8025D948_S1;
 typedef struct func_8025D948_S1 func_8025D948_S1;
@@ -126,7 +123,6 @@ struct func_8025DB54_S1 {
 struct func_8025DD80_S1;
 typedef struct func_8025DD80_S1 func_8025DD80_S1;
 
-extern void func_8025DC88_de(void *arg0);
 
 struct ObjectState2BBC;
 struct ObjectState2BBC {

@@ -1,6 +1,6 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_8025E568.h"
-#include "types.h"
+#include "TYPES.H"
 void func_8026033C_de(s32 *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     s32 sp4;
     f32 sp8;

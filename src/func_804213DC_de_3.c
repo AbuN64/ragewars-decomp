@@ -1,7 +1,7 @@
 #include "span_16E000/code_80420E90.h"
 #include "common/types_1dc8418c21db.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Calls func_8040E8D8_de with zero on the object at offset 0x20 of the structure D_800E4400 points
    to, and with one on the entry 0x3AB that func_8040EC30_de finds in the list at offset 8, then sets

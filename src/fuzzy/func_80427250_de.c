@@ -1,7 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_804264F0.h"
 #include "decomp/argb_color.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/draft_fields_func_8026DC24_de.h"
 #include "common/draft_fields_func_80283278_de.h"
 #include "common/draft_fields_func_8028D474_de.h"

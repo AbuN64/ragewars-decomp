@@ -1,10 +1,9 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804379C8_H
 #define UNBAKE_SPAN_16E000_CODE_804379C8_H
-#include "types.h"
+#include "TYPES.H"
 #include "resident_event_handler.h"
 #include "span_1000/code_80293A04.h"
 #include "span_16E000/code_804366C4.h"
-extern void func_80438A88_de();
 
 struct State_func_80438C84_de;
 struct State_func_80438C84_de {
@@ -51,7 +50,6 @@ extern s32 func_804391B0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 struct ActorDefinitionHeader;
 extern s32 func_80438E7C_de(struct ActorDefinitionHeader *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-extern void func_804389C4_de(void);
 
 struct State_func_80439128_de;
 struct State_func_80439128_de {
@@ -63,6 +61,5 @@ struct State_func_80439128_de {
 extern char *func_80424DE8_de(s32);
 
 
-extern void func_80438828_de();
 
 #endif

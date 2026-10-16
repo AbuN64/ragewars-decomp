@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80435CE4_H
 #define UNBAKE_SPAN_16E000_CODE_80435CE4_H
-#include "types.h"
+#include "TYPES.H"
 extern s32 func_80435D90_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct func_80436488_S1;

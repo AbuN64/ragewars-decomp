@@ -4,7 +4,7 @@
 #include "span_1000/code_8028FC98.h"
 #include "n64sdk.h"
 #include "gbi.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Eases a camera's four framing values at 0x29C, 0x2A0, 0x2A4 and 0x2A8 toward their targets by 16 each
  * frame, snapping to the targets when func_80264B6C_de reports a cut and recording the easing rate 30 in

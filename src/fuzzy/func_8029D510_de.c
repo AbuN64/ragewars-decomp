@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 extern f32 D_800C5B04_de;
 extern f32 D_800C5B08_de;
 

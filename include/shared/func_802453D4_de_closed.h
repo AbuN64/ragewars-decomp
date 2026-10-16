@@ -1,7 +1,7 @@
 #ifndef FUNC_802453D4_DE_CLOSED_H
 #define FUNC_802453D4_DE_CLOSED_H
 #include "shared/func_804235A8_eu_layout.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 
 

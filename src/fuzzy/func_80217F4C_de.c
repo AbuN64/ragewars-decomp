@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct DraftConfig17F4C { u8 pad[0x82]; u8 mode; } DraftConfig17F4C;
 typedef struct DraftInput17F4C { u8 pad[0xB0]; u32 pressed; u8 padB4[4]; u32 held; } DraftInput17F4C;
 typedef struct DraftPlayer17F4C {

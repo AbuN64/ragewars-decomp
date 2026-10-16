@@ -1,5 +1,5 @@
 #include "span_1000/code_80200400.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern s32 D_800F1C80_de;
 

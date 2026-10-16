@@ -1,6 +1,6 @@
 #ifndef RW_ROUND_STATE_VARIANTS_H
 #define RW_ROUND_STATE_VARIANTS_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/menu_match_globals.h"
 extern void func_802954E0_us_rev1(void), func_80294F1C_us_rev1(void);
 extern s32 D_800D2970;

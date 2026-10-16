@@ -1,6 +1,6 @@
 #ifndef LEGACY_COLLISION_ACTOR_H
 #define LEGACY_COLLISION_ACTOR_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_Func80243A80Actor Shared_Func80243A80Actor;
 struct Shared_Func80243A80Actor {
     u8 type; /* +0x0: src/func_80243A80.c */

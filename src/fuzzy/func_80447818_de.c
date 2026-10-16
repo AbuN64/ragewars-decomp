@@ -1,8 +1,7 @@
 #include "common/types_1dc8418c21db.h"
 #include "shared/func_802B80B4_eu_closed.h"
-#include "span_1000/code_802B7B80.h"
+#include "TYPES.H"
 #include "span_16E000/code_80447BB0.h"
-#include "types.h"
 void func_8044799C_de(u8 cmd);
 extern u8 D_8014D46C;
 

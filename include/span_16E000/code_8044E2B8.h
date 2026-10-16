@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8044E2B8_H
 #define UNBAKE_SPAN_16E000_CODE_8044E2B8_H
-#include "types.h"
+#include "TYPES.H"
 struct Item_func_8044D668_de;
 typedef struct Item_func_8044D668_de Item_func_8044D668_de;
 

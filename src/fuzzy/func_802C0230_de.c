@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 extern const u8 D_800C88F0[];
 static inline u64 divideWords(u32 n1, u32 n0, u32 d1, u32 d0) {
  u32 n2, q0, q1, b, bm; u64 quotient;

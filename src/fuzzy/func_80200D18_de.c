@@ -1,5 +1,5 @@
 #include "span_1000/code_80200610.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern void func_80200C28_de(s32 address, s32 value);
 extern void func_80200568_de(s32 address, s32 value);

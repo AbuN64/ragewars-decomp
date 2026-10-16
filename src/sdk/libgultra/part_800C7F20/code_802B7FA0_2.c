@@ -3,7 +3,7 @@
 #include "span_1000/code_802B2614.h"
 #include "span_1000/code_802B2EF8.h"
 #include "span_1000/code_802B7488.h"
-#include "types.h"
+#include "TYPES.H"
 
 void func_802B2F00_de(ALSndPlayer *arg0, s16 arg1) {
     arg0->target = (s32) arg1;

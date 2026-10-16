@@ -1,6 +1,6 @@
 #ifndef RW_GAMEPLAY_CAMERA_H
 #define RW_GAMEPLAY_CAMERA_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_80233920.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "span_16E000/code_8043F69C.h"

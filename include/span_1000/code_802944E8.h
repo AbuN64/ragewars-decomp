@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802944E8_H
 #define UNBAKE_SPAN_1000_CODE_802944E8_H
-#include "types.h"
+#include "TYPES.H"
 /* Independent simulation-time scale, adjacent to the current time step. */
 extern f32 D_800D298C;
 #include "common/types_1dc8418c21db.h"

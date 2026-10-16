@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 const u32 data_unresolved_800E1904[35] = {
     0x00000E08, 0x00000018, 0x00439628, 0x00000E06, 0x00000018, 0x004394E0,

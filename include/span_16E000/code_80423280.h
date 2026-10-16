@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80423280_H
 #define UNBAKE_SPAN_16E000_CODE_80423280_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 struct RecRecAt4;
@@ -135,7 +135,6 @@ struct OptionsCommitContext;
 typedef struct OptionsCommitContext OptionsCommitContext;
 
 extern u8 D_8014222C;
-extern s32 func_80426274_de(void);
 
 extern int D_800E1AFC_de[];
 extern int D_800E1B7C[];
@@ -160,10 +159,6 @@ enum MatchEnd {
     MATCH_END_TAG_LIMIT,
     MATCH_END_POINT_TARGET
 };
-extern void func_804259E0_de(s32 a0);
-extern s32 func_80425DFC_de(s32);
-extern void func_80425EE4_de(s32, s32 *);
-extern void func_804259E0_de(s32);
 extern f32 D_800DDB08_de[];
 extern f32 D_800DDB10;
 extern void func_8042D28C_de();

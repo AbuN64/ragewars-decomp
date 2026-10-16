@@ -1,7 +1,7 @@
 #include "shared/world.h"
 #ifndef FUNC_804220A8_DE_CLOSED_H
 #define FUNC_804220A8_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #include "shared/func_802453D4_de_closed.h"
 #include "shared/func_80245618_de_closed.h"

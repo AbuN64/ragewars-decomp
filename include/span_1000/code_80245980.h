@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80245980_H
 #define UNBAKE_SPAN_1000_CODE_80245980_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_80243A80.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"

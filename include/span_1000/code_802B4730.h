@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802B4730_H
 #define UNBAKE_SPAN_1000_CODE_802B4730_H
-#include "types.h"
+#include "TYPES.H"
 struct ALParam_s;
 typedef struct ALParam_s ALParam_s;
 

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 extern f32 D_800C7878_de, D_800C787C_de;
 extern void func_802B6C6C_de(f32 matrix[4][4]);
 extern f32 func_802B72B0_de(f32);

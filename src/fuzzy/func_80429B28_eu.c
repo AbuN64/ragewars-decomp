@@ -1,5 +1,5 @@
 #include "shared/match_menu_message_ids.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Handles the menu message func_80299A08_de reports after func_8029973C_de. 0x1D9 sends code 3 to
    func_8042E988_de unless func_802999A0_de(0) reports 0x16; then it stops the match objects at D_80145088

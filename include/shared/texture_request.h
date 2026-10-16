@@ -1,6 +1,6 @@
 #ifndef RW_TEXTURE_REQUEST_H
 #define RW_TEXTURE_REQUEST_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 extern void *func_8025193C_de(s32, u32, u32, u32, u32, s32, void *, const char *, u32);
 #if defined(VERSION_US_REV1)

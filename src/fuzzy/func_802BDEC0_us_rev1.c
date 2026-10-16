@@ -3,10 +3,9 @@
  * the manager thread at the requested priority, records the thread, queues, and the ROM's PIF DMA
  * handlers in the device-manager block D_800D4360, then restores the previous interrupt mask. */
 #include "span_1000/code_802BAC58.h"
-#include "types.h"
+#include "TYPES.H"
 
 typedef void *OSMesg;
-typedef struct OSMesgQueue OSMesgQueue;
 
 struct OSThread_s_func_802BB5F0_de;
 typedef struct OSThread_s_func_802BB5F0_de OSThread_s_func_802BB5F0_de;

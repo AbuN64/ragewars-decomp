@@ -1,7 +1,7 @@
 #ifndef RAGEWARS_LENS_FLARE_H
 #define RAGEWARS_LENS_FLARE_H
 
-#include "types.h"
+#include "TYPES.H"
 
 /* Seven flare elements: radius, opacity, and RGB components. */
 typedef struct FlareRadii { f32 value[7]; } FlareRadii;

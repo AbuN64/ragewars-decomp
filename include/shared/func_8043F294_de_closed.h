@@ -1,6 +1,6 @@
 #ifndef FUNC_8043F294_DE_CLOSED_H
 #define FUNC_8043F294_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct Shared_MenuSelection {
     u32 unknown0;
     s8 index;

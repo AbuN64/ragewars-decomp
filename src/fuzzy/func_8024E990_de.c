@@ -4,7 +4,7 @@
 #include "shared/func_8027AD4C_de_closed.h"
 #include "shared/world.h"
 #include "span_C76B0/data.h"
-#include "types.h"
+#include "TYPES.H"
 void *func_8028CF6C_de(void *arg0, s32 arg1);
 void func_8024E990_de(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     ((s8 *) arg0)[0 / sizeof(s8)] = 3;

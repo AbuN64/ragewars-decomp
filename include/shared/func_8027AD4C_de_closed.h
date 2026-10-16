@@ -1,6 +1,6 @@
 #ifndef FUNC_8027AD4C_DE_CLOSED_H
 #define FUNC_8027AD4C_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "packed_float.h"
 #include "shared/func_804235A8_eu_layout.h"

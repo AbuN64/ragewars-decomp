@@ -1,0 +1,162 @@
+#include "span_1000/code_80233920.h"
+#include "common/types_1dc8418c21db.h"
+#include "common/types_8a8189af7b05.h"
+#include "shared/gameplay_camera.h"
+#include "shared/gameplay_movement.h"
+#include "shared/world.h"
+#include "span_1000/code_802393F4.h"
+#include "span_C76B0/data.h"
+#include "TYPES.H"
+
+/* Produces a random shake offset for an object: looks up the object's model entry in D_8011FE88 and
+ * zeroes the offset when there is none; otherwise eases the horizontal and vertical shake amplitudes
+ * at 0xF4 and 0xF8 toward the pair D_800C8668 when the entry is flagged 0x10000 (toward zero when not)
+ * and draws each offset component at random within the scaled amplitudes. */
+
+
+
+
+
+
+
+
+
+
+extern void *func_8028B2F8_de(Shared_World *, u16 *);
+
+extern s32 func_80245798_de(void);
+
+extern f32 func_80275DD4_de(s32 arg0, f32 arg1, f32 arg2);
+
+extern s32 D_800CD8D0;
+
+extern void *func_8025343C_de(int a, int b, int c, void *d);
+
+extern int D_800C32D0_de;
+
+void *func_8025343C_de(int a, int b, int c, void *d);
+
+extern int D_800C32DC_de;
+
+extern void func_8025E3F0_de(s32 arg0);
+
+extern void func_80253908_de(s32 a);
+
+extern void func_80253838_de(void *arg0, void *arg1);
+
+void func_80239EA4_de(void *arg0, Vec3 *out) {
+    GameplayCamera *o = arg0;
+    f32 value;
+    Shared_Surface *entry;
+    f32 targetX;
+    f32 targetY;
+    f32 scale;
+
+    targetY = 0.0f;
+    targetX = targetY;
+    entry = func_8028B2F8_de(&D_8011FE88, (u16 *)o->unk58);
+    if (entry == 0) {
+        out->x = targetY;
+        out->y = targetY;
+        out->z = targetY;
+        return;
+    }
+    if (entry->flags & 0x10000) {
+        targetX = D_800C8668;
+        targetY = D_800C357C_de;
+    }
+    value = o->shakeHorizontal + (targetX - o->shakeHorizontal) * D_800C3580_de.unk0;
+    scale = D_800C3584_de.unk0;
+    o->shakeHorizontal = value;
+    o->shakeVertical += (targetY - o->shakeVertical) * D_800C3588_de.unk0;
+    out->x = func_80274A90_de(-o->shakeHorizontal * scale, o->shakeHorizontal * scale);
+    out->y = func_80274A90_de(0.0f, o->shakeVertical * D_800C358C_de.unk0);
+    value = -o->shakeHorizontal * scale;
+    out->z = func_80274A90_de(value, o->shakeHorizontal * scale);
+}
+
+/** Preserve the empty hook at VRAM 0x80239FBC. */
+void func_80239FCC_de(void) {
+}
+
+void func_80239FD4_de(void) {
+}
+
+void func_80239FDC_de(void *arg0) {
+    s32 object;
+    GameplayCamera *camera = arg0;
+    f32 value;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
+
+    if (func_80245798_de() != 0) {
+        camera->unk58 = (Shared_func_80234FDC_S8 *)func_80286728_de(&D_8011FE88, &camera->unk38);
+    }
+    object = (s32)camera->unk58;
+    x = camera->unk38;
+    y = camera->unk3C;
+    z = camera->unk40;
+    w = camera->unk44;
+    camera->unk64 = D_800CD8D0;
+    if (object != 0 && func_80245798_de() == 0) {
+        value = ((y + w) - func_80275DD4_de(object, x, z)) * D_800C3590_de;
+        if (value < D_800C3594_de && D_800C3598_de < value) {
+            Shared_func_80234FDC_S8 *surface = (Shared_func_80234FDC_S8 *)object;
+            camera->unk64 = surface->unk1C;
+        }
+    }
+    if (func_80245798_de() != 0) {
+        camera->unk64 = D_800CD8D0;
+    }
+    if (camera->unk5C > 0.0f) {
+        camera->unk64 = D_800CD8D0;
+    }
+}
+
+void func_8023A114_de(void *arg0, s32 arg1) {
+    extern void *func_802A001C_de(void *, s32, u32);
+    MessageBuffer *buffer = arg0;
+    s32 *ret;
+    s32 scaled;
+    s32 first;
+
+    scaled = arg1 * 0xED8;
+    buffer->count = arg1;
+    ret = func_8025343C_de(0, scaled, 0x23, (char *)&D_800C32D0_de + 4);
+    buffer->allocation = ret;
+    first = *ret;
+    buffer->first = first;
+    func_802A001C_de(first, 0, scaled);
+}
+
+void func_8023A190_de(void *arg0, int arg1) {
+    void func_802A001C_de(int a, int b, int c);
+    struct ScreenMessageOwner *owner = arg0;
+    int *ret;
+    int scaled;
+    int first;
+    scaled = arg1 << 6;
+    owner->storage.count = arg1;
+    ret = func_8025343C_de(0, scaled, 0x23, &D_800C32DC_de);
+    owner->storage.allocation = ret;
+    first = *ret;
+    owner->storage.first = first;
+    func_802A001C_de(first, 0, scaled);
+}
+
+void func_8023A1F4_de(struct ScreenMessageOwner *arg0) {
+    s32 temp_a1;
+
+    arg0->state = 1;
+    func_8025E3F0_de((s32)&arg0->rendering);
+    func_80253908_de(0);
+    temp_a1 = arg0->allocation;
+    if (temp_a1 != 0) {
+        func_80253838_de(0, temp_a1);
+        arg0->allocation = 0;
+        arg0->allocationSize = 0;
+        arg0->count = 0;
+    }
+}

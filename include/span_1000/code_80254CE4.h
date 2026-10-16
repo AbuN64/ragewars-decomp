@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80254CE4_H
 #define UNBAKE_SPAN_1000_CODE_80254CE4_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct func_80255428_S3;
 struct func_80255428_S3 {
@@ -103,7 +103,6 @@ struct BlockRecAt20 {
 struct EntryRecAt18V3;
 typedef struct EntryRecAt18V3 EntryRecAt18V3;
 
-extern void func_80255488_de(s32 arg0);
 
 struct Block80255720;
 struct Pool80255720;
@@ -115,9 +114,7 @@ struct Pool80255720 {
     struct Block80255720 *anchor;
 };
 
-extern void func_80255780_de(Pool80255720 *arg0);
 
-extern s32 func_80255540_de(s32 arg0);
 
 struct func_80255428_S2;
 typedef struct func_80255428_S2 func_80255428_S2;
@@ -176,7 +173,6 @@ struct func_80255428_S1 {
 struct BlockRecAt20;
 typedef struct BlockRecAt20 BlockRecAt20;
 
-extern void func_802552E0_de(s32 capacity);
 
 struct func_80255428_S1;
 typedef struct func_80255428_S1 func_80255428_S1;

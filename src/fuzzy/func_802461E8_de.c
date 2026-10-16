@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct MoveVector461E8 {
     f32 x, y, z;

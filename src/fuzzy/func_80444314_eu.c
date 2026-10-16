@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 /* Stores what func_802B2378 returns for D_8013B2BC in D_801540F4 and sets D_801540F0 to 1. */
 extern s32 D_8013B2BC;

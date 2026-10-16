@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "n64sdk.h"
 typedef struct { char pad[16]; u8 value; } DraftWidget;
 typedef struct { u8 pad[3]; u8 value; } DraftFrame;

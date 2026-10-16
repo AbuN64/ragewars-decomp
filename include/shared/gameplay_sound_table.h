@@ -1,6 +1,6 @@
 #ifndef RW_GAMEPLAY_SOUND_TABLE_H
 #define RW_GAMEPLAY_SOUND_TABLE_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct GameplaySoundEntry { s32 *sound; s32 hook; } GameplaySoundEntry;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern GameplaySoundEntry D_800E45D4[];

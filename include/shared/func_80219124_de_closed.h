@@ -1,6 +1,6 @@
 #ifndef FUNC_80219124_DE_CLOSED_H
 #define FUNC_80219124_DE_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_C76B0/data.h"
 typedef struct Shared_MenuItemRecord Shared_MenuItemRecord;
 struct Shared_MenuItemRecord {

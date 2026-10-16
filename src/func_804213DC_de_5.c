@@ -1,6 +1,6 @@
 #include "span_16E000/code_80420E90.h"
 #include "span_166000/code_80403E88.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Calls func_8029973C_de, then func_8042177C_de when the word at offset 0x34 of the object D_800E4400
    points to is clear, or func_8041A430_de on its first word with 2 and func_804210E8_de otherwise.

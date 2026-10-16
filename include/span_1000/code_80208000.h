@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80208000_H
 #define UNBAKE_SPAN_1000_CODE_80208000_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
@@ -1683,5 +1683,11 @@ typedef struct AiController {
     s32 unk328; /* 0x328 */
     s32 unk32C; /* 0x32C */
 } AiController;
+
+extern void func_802AA794_de(char *, s32);
+
+extern void func_8020EC14_de(void *);
+
+extern void *func_8022A83C_de(char *);
 
 #endif

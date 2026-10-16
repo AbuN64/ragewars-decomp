@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct { u32 unk0; } S1;
 typedef struct { u8 pad0[0x18]; S1 *unk18; } S2;
 int func_8024E2C4_de(void *arg0) {

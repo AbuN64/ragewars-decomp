@@ -1,6 +1,6 @@
 #ifndef RW_MENU_MATCH_GLOBALS_H
 #define RW_MENU_MATCH_GLOBALS_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/gameplay_camera.h"
 #include "common/types_1dc8418c21db.h"
 

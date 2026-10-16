@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802591C0_H
 #define UNBAKE_SPAN_1000_CODE_802591C0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 union func_802598D4_S1_UD8;
@@ -319,7 +319,6 @@ typedef struct CellCode802591C0 CellCode802591C0;
 struct ObjRecAt1E64;
 typedef struct ObjRecAt1E64 ObjRecAt1E64;
 
-extern int func_80259200_de(ObjRecAt1E64 *obj, int id);
 
 struct func_80259AD8_S1;
 struct func_80259AD8_S1 {
@@ -440,7 +439,6 @@ typedef struct Glyphs Glyphs;
 struct ContextCode802591C0;
 typedef struct ContextCode802591C0 ContextCode802591C0;
 
-extern void func_802591A0_de(void *arg0, s16 arg1);
 
 struct LinkPair;
 struct LinkPair {

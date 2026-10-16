@@ -1,6 +1,6 @@
 #ifndef RESIDENT_ARENA_MENU_H
 #define RESIDENT_ARENA_MENU_H
-#include "types.h"
+#include "TYPES.H"
 /* The 28-byte resident menu slots read by 80428120/80428E10 and the
  * four navigation handlers 80428850/804289B4/80428B18/80428C7C.
  * -1 is a missing successor. Handler order is named by byte offset

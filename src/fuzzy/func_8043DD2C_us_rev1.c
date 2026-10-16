@@ -1,5 +1,5 @@
 /* Selects a field's text according to its type and option byte. */
-#include "types.h"
+#include "TYPES.H"
 
 extern u8 D_80142235;
 extern u8 D_80142236;

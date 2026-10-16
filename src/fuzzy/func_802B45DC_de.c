@@ -1,5 +1,5 @@
 #include "span_1000/code_802B4730.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern void func_802B53E0_de(void *arg0, void *a, void *b, s32 c);
 extern s32 func_802B0340_de(s32, s32, void *, s32, s32);

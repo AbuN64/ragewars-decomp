@@ -1,7 +1,7 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802B369C_H
 #define UNBAKE_SPAN_1000_CODE_802B369C_H
 #include "audio_callbacks.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct ALAuxBus_s;
 typedef struct ALAuxBus_s ALAuxBus_s;

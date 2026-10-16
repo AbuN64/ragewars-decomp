@@ -1,6 +1,6 @@
 #ifndef RW_RESOURCE_PAGE_WORKER_H
 #define RW_RESOURCE_PAGE_WORKER_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct ResourcePageMapping {
     struct ResourcePageMapping *next, *prev;
     u16 page;

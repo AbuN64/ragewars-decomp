@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct MemoryBoundaryInit {
     u32 last;

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8041B020_H
 #define UNBAKE_SPAN_16E000_CODE_8041B020_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8fd754e1e915.h"
 struct OwnerRecAt8V1;

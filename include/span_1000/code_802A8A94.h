@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802A8A94_H
 #define UNBAKE_SPAN_1000_CODE_802A8A94_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "shared/func_802453D4_de_closed.h"
 extern void func_802A8710_de();

@@ -1,6 +1,6 @@
 #ifndef RW_MATCH_MENU_MESSAGE_IDS_H
 #define RW_MATCH_MENU_MESSAGE_IDS_H
-#include "types.h"
+#include "TYPES.H"
 #if defined(VERSION_DE)
 enum { MENU_804291A8_473 = 469, MENU_804291A8_474 = 470 };
 #elif defined(VERSION_EU_X)

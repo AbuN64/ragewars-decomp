@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_802508E0_H
 #define UNBAKE_SPAN_1000_CODE_802508E0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 extern int func_80250DE0_de(void *object);

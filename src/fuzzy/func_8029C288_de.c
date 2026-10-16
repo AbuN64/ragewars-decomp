@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 extern f32 func_802B72B0_de(f32);
 extern f32 D_800C5A58_de, D_800C5A5C, D_800C5A60_de, D_800C5A64;

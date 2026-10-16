@@ -6,7 +6,7 @@
 #include "span_1000/code_802A8A94.h"
 #include "span_C76B0/data.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x20, 0x24, 0x28, 0x2c, 0x30, 0x34, 0x38, 0x3c, 0x40, 0x44, 0x58, 0x5c], gap at: 0x48. */
 void func_80238050_de(s32 arg0, void *arg1) {

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_80425674_de_layout.h"
 typedef struct WinRules { u8 pad0[0x18]; s32 limit; u8 pad1c[8]; s32 teams; u8 pad28[4]; s32 scores[5]; u8 pad40[0x68]; s32 humanWon; } WinRules;
 typedef struct WinScore { u8 pad0[4]; s16 score; } WinScore;

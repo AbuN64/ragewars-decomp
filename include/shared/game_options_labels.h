@@ -1,6 +1,6 @@
 #ifndef RW_GAME_OPTIONS_LABELS_H
 #define RW_GAME_OPTIONS_LABELS_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 #if defined(VERSION_DE)
 enum { OPTIONS_HAS_FIRST_LIST = 0, OPTIONS_RESOURCE_SHIFT = 4 };

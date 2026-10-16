@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80413728_H
 #define UNBAKE_SPAN_16E000_CODE_80413728_H
-#include "types.h"
+#include "TYPES.H"
 extern int D_8014DA34;
 
 extern int D_8014DA28;

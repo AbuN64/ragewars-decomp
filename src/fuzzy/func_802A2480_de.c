@@ -2,7 +2,7 @@
 #include "resident_event_handler.h"
 #include "span_C76B0/data.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 void func_802A2480_de(void *arg0) {
     void *temp_a0;
     void *temp_a0_2;

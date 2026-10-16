@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 typedef struct Vec3f { f32 x, y, z; } Vec3f;
 typedef struct SharedDirectionState { char pad0[0x14]; Vec3f direction; s32 ready; } SharedDirectionState;
 

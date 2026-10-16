@@ -4,7 +4,7 @@
 #include "span_1000/code_8020FDB0.h"
 #include "span_1000/code_80225D10.h"
 #include "span_1000/code_8022D944.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern float D_800C2B70_de;
 extern f32 D_80115DEC;

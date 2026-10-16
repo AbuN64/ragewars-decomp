@@ -1,6 +1,6 @@
 #ifndef RW_JOIN_PLAYER_NAMES_H
 #define RW_JOIN_PLAYER_NAMES_H
-#include "types.h"
+#include "TYPES.H"
 typedef struct JoinNameEntry { u8 **names; s32 pad; } JoinNameEntry;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;

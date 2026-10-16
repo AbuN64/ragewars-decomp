@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804366C4_H
 #define UNBAKE_SPAN_16E000_CODE_804366C4_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 struct CellRecAt1A;
 struct Menu_func_804241BC_de;

@@ -1,5 +1,4 @@
-#include "types.h"
-#include "span_1000/code_802B7B80.h"
+#include "TYPES.H"
 typedef struct __OSInode { u16 pages[128]; } __OSInode;
 typedef struct OSInodeCache { __OSInode inode; u8 bank; u8 references[256]; } OSInodeCache;
 s32 func_804488A4_de(OSPfs *, __OSInode *, u8, u8);

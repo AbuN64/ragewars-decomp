@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct MenuTiming {
     u8 pad[0x14];

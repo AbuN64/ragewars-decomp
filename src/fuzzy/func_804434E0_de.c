@@ -1,5 +1,5 @@
 #include "shared/player_status_text.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Formats a player's status line into a menu field's text through func_802BD320_de (sprintf): one message when the player is its own partner, otherwise a message chosen by the player's mode at 0x12F0 (0 to 6), naming the partner's character from 0x84 of its record at 0x5D8 when there is a partner. */
 typedef struct Player {

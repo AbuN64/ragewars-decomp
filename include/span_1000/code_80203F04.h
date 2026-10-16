@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80203F04_H
 #define UNBAKE_SPAN_1000_CODE_80203F04_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 struct Trigger;

@@ -1,6 +1,6 @@
 #ifndef RW_DEBUG_MEMORY_H
 #define RW_DEBUG_MEMORY_H
-#include "types.h"
+#include "TYPES.H"
 /* Inclusive address ranges and transfer permissions, populated by the
  * debug memory-map enumerator. */
 typedef struct MemoryRange { u32 first, last, flags; } MemoryRange;

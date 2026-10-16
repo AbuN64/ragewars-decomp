@@ -1,6 +1,6 @@
 /* __osCheckId, drafted from ultralib src/io/contpfs.c (2.0I branch): reread the controller pak's id
    block from bank zero and report a new pack when it differs from the id cached at initialisation. */
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct {
     int status;

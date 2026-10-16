@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80231F5C_H
 #define UNBAKE_SPAN_1000_CODE_80231F5C_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8022F3E8.h"
 struct PlayerRecAt1450V1;

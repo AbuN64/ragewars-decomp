@@ -1,7 +1,7 @@
 #ifndef SHARED_SHARED_SCENEACTORPREFIX_H
 #define SHARED_SHARED_SCENEACTORPREFIX_H
 
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Shared_SceneActorPrefix Shared_SceneActorPrefix;
 struct Shared_SceneActorPrefix {

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "shared/func_80214624_de_closed.h"
 #include "shared/func_8027AD4C_de_closed.h"
 #include "shared/world.h"

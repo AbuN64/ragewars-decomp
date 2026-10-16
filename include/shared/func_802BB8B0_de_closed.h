@@ -1,7 +1,7 @@
 #ifndef FUNC_802BB8B0_DE_CLOSED_H
 #define FUNC_802BB8B0_DE_CLOSED_H
 /* __osTimerInterrupt, drafted from ultralib src/os/timerintr.c (_FINALROM: no profiler). */
-#include "types.h"
+#include "TYPES.H"
 #include "common/unused.h"
 
 

@@ -1,6 +1,6 @@
 #ifndef RW_FUNC_8022B69C_DE_LAYOUT_H
 #define RW_FUNC_8022B69C_DE_LAYOUT_H
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct {
     char pad0[0x170];

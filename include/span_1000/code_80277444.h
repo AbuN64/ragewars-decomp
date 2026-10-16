@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80277444_H
 #define UNBAKE_SPAN_1000_CODE_80277444_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_06e4f7ef1f9e.h"
 #include "resident_event_handler.h"
 extern void func_80279158_de(void *arg0);
@@ -131,7 +131,6 @@ struct func_80278900_S1 {
 
 extern void func_80279138_de(int arg0, int arg1, void *arg2);
 
-extern s32 func_80278ABC_de(void);
 
 struct ObjectRecAtBC;
 typedef struct ObjectRecAtBC ObjectRecAtBC;

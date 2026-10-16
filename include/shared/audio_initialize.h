@@ -1,6 +1,6 @@
 #ifndef RW_AUDIO_INITIALIZE_H
 #define RW_AUDIO_INITIALIZE_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 typedef union AudioQueueMessage { void *pointer; u32 signal; } AudioQueueMessage;
 typedef struct AudioTask {

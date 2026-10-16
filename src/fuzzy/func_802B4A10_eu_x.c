@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "acmd.h"
 
 typedef struct DraftAudioVoice { char pad0[0xD8]; s32 offset; } DraftAudioVoice;

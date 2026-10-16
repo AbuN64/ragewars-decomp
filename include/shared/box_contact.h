@@ -1,6 +1,6 @@
 #ifndef RW_BOX_CONTACT_H
 #define RW_BOX_CONTACT_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 struct Object_func_8044A07C_de;
 /* A fixed point bone matrix: integer halves, then fraction halves. */

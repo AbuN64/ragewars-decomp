@@ -2,7 +2,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_80438614_de_closed.h"
 #include "span_16E000/code_8043962C.h"
-#include "types.h"
+#include "TYPES.H"
 void func_804399D0(MenuModelItem *item);
 void func_80438614_de(void);
 extern s32 D_800D15E0;

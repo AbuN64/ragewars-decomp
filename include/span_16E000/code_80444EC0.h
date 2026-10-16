@@ -1,8 +1,9 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80444EC0_H
 #define UNBAKE_SPAN_16E000_CODE_80444EC0_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_1dc8418c21db.h"
 #include "span_16E000/code_8043F69C.h"
+#include "common/types_8a8189af7b05.h"
 extern void func_80444E70_de(s16 *record);
 
 struct Options_func_80444D50_de;
@@ -84,5 +85,7 @@ extern u8 *D_800D3624;
 extern u8 *D_800D7DD8;
 extern u8 *D_800D3DB0;
 extern u8 *D_800D3DB4;
+
+s32 func_8026435C_de(Shared_Effect *);
 
 #endif

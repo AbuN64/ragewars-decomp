@@ -1,6 +1,6 @@
 #ifndef RW_GAMEPLAY_MOVEMENT_H
 #define RW_GAMEPLAY_MOVEMENT_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 /* Shared records retained from origin/legacy include/shared and func_80220EB0.c. */
 

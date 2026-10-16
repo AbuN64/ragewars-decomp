@@ -4,7 +4,8 @@
 #include "shared/func_802BB8B0_de_closed.h"
 #include "span_1000/code_802BA23C.h"
 #include "span_1000/code_802BB67C.h"
-#include "types.h"
+#include "TYPES.H"
+#include "MAIN/802BF300.H"
 void osCreateMesgQueue(void *arg0, s32 arg1, s32 arg2);
 void func_802BB550_de(s32 arg0, s32 arg1, s32 arg2);
 s32 func_802BADA0_de(void *arg0);

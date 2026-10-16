@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 extern void *func_8025305C_de(s32 size);
 extern s32 *D_800E44A0;

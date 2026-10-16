@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80255BEC_H
 #define UNBAKE_SPAN_1000_CODE_80255BEC_H
-#include "types.h"
+#include "TYPES.H"
 /* Initializes an empty list whose nodes keep their links at the given offsets. */
 extern void func_80255CA0_de(IntrusiveList *list, s32 prevOffset, s32 nextOffset);
 
@@ -8,7 +8,6 @@ extern void func_80255CA0_de(IntrusiveList *list, s32 prevOffset, s32 nextOffset
 extern s32 func_80255D14_de(IntrusiveList *list, void *node);
 
 struct Pool80255ACC;
-extern void func_80255C4C_de(struct Pool80255ACC *arg0, s32 *arg1, u32 *arg2);
 
 extern void func_80255E24_de(void *arg0, s32 arg1, s32 arg2);
 

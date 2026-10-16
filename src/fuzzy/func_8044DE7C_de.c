@@ -1,5 +1,5 @@
 #include "span_16E000/code_8044ACCC.h"
-#include "types.h"
+#include "TYPES.H"
 
 struct ResetActorDE7C {
     char pad0[0x26825];

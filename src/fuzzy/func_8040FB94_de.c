@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 /* Opens image archives and allocates image, palette, and cached-resource tables. */
 void * func_8025305C_de(s32);
 void func_802547E4_de(void *);

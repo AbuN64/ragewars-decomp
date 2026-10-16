@@ -1,5 +1,5 @@
 #include "span_1000/code_80297CD0.h"
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct DraftEventState {
     s32 pad0, count;

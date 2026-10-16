@@ -1,6 +1,6 @@
 #ifndef UNBAKE_COMMON_TYPES_8A8189AF7B05_H
 #define UNBAKE_COMMON_TYPES_8A8189AF7B05_H
-#include "types.h"
+#include "TYPES.H"
 struct SharedPlayer;
 typedef struct SharedPlayer SharedPlayer;
 struct Box;

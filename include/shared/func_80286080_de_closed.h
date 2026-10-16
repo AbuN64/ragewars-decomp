@@ -1,7 +1,7 @@
 #ifndef FUNC_80286080_DE_CLOSED_H
 #define FUNC_80286080_DE_CLOSED_H
 #include "shared/func_80425674_de_layout.h"
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "span_1000/code_8028FC98.h"
 #include "span_1000/code_80286050.h"

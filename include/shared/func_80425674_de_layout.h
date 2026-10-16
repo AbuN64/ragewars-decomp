@@ -1,7 +1,7 @@
 #ifndef RW_FUNC_80425674_DE_LAYOUT_H
 #define RW_FUNC_80425674_DE_LAYOUT_H
 
-#include "types.h"
+#include "TYPES.H"
 #include "shared/gameplay_settings.h"
 #include "common/types_1dc8418c21db.h"
 typedef struct Shared_GameSlot Shared_GameSlot;

@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8025C544_H
 #define UNBAKE_SPAN_1000_CODE_8025C544_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
@@ -40,9 +40,7 @@ struct func_8025C97C_S2 {
 struct func_8025D370_S3;
 typedef struct func_8025D370_S3 func_8025D370_S3;
 
-extern void func_8025D1BC_de(void *arg0);
 
-extern void func_8025D350_de(void *arg0, s32 arg1);
 
 struct func_8025C67C_S1;
 struct func_8025C67C_S1 {
@@ -222,7 +220,6 @@ struct func_8025CB2C_S2 {
 
 extern void func_8025C5BC_de(struct SlotRecAtB4V2 *arg0);
 
-extern s32 func_8025D238_de(void **arg0, s16 id, s16 avoid);
 
 struct SongHeader;
 typedef struct SongHeader SongHeader;
@@ -358,7 +355,6 @@ struct RecCode8020061080203908 {
     IntrusiveList unk14;
 };
 
-extern void func_8025D3E4_de(void *arg0);
 
 struct func_8025CA44_S2;
 typedef struct func_8025CA44_S2 func_8025CA44_S2;

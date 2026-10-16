@@ -1,6 +1,6 @@
 #ifndef RESIDENT_PICKUP_DESCRIPTORS_H
 #define RESIDENT_PICKUP_DESCRIPTORS_H
-#include "types.h"
+#include "TYPES.H"
 
 /* Item lookup reads the ID at offset four. Pickup handlers read the
  * localized label directory, sound and effect IDs from the shared prefix. */

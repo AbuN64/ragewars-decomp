@@ -1,5 +1,5 @@
 #include "shared/game_options_labels.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Builds screen state D_800E4514: allocates its 0x10 bytes, registers resources (0x1BD - OPTIONS_RESOURCE_SHIFT) and (0x1C2 - OPTIONS_RESOURCE_SHIFT),
    creates list 0x1BB/0x1BC at 0x4 with the three texts gameOptionsLabel(0), gameOptionsLabel(1) and gameOptionsLabel(2) and

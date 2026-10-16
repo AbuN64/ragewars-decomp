@@ -1,5 +1,5 @@
 #include "abi.h"
-#include "types.h"
+#include "TYPES.H"
 #include "gfx.h"
 #include "span_1000/code_8026AC38.h"
 #include "gbi.h"

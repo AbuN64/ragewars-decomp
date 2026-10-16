@@ -1,6 +1,6 @@
 #ifndef RESIDENT_EVENT_HANDLER_H
 #define RESIDENT_EVENT_HANDLER_H
-#include "types.h"
+#include "TYPES.H"
 
 typedef s32 (*ResidentEventHandler)(void *, s32, s32, s32, s32);
 typedef struct ResidentEventHandlerEntry {

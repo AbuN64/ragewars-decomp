@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_8044ACCC_H
 #define UNBAKE_SPAN_16E000_CODE_8044ACCC_H
-#include "types.h"
+#include "TYPES.H"
 #include "shared/level_track.h"
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
@@ -449,7 +449,6 @@ typedef struct State_func_8044D5C4_de State_func_8044D5C4_de;
 struct ObjRecAt8C8;
 typedef struct ObjRecAt8C8 ObjRecAt8C8;
 
-extern s16 func_8044AE70_de();
 
 struct Floats;
 struct Floats {

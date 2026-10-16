@@ -1,6 +1,6 @@
 #ifndef RESET_STORAGE_H
 #define RESET_STORAGE_H
-#include "types.h"
+#include "TYPES.H"
 /* Storage views of measured reset and timer fields; complete objects remain unknown. */
 typedef struct {
     s32 unk0;

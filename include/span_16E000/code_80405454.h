@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_80405454_H
 #define UNBAKE_SPAN_16E000_CODE_80405454_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 struct Body;

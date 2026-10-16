@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct TeamStats {
     /* 0x00 */ char pad0[0x92];

@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 
 /* Copies an eight-byte preset into offset 0x84 of a record, choosing the preset table by the record's kind byte at 0x7F: kinds 1 to 3 use their own tables, kinds 4 to 7 leave the record unchanged, and any other kind uses the default table. */
 extern u8 *D_800D3C44;

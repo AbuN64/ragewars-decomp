@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "gfx.h"
 #include "gbi.h"
 

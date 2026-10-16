@@ -2,7 +2,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_80404D84_de_closed.h"
 #include "stddef.h"
-#include "types.h"
+#include "TYPES.H"
 s32 func_802A037C_de(const void *arg0, const void *arg1);
 extern u8 D_800DE80C[];
 

@@ -1,7 +1,7 @@
 #ifndef RW_ATTACHMENT_EFFECT_ARGS_H
 #define RW_ATTACHMENT_EFFECT_ARGS_H
 
-#include "types.h"
+#include "TYPES.H"
 
 /* Eight-byte attachment effect payload. The event dispatcher writes halfwords
  * at 0/2 and bytes at 4/5/6/7, then passes the two words by value. This is the

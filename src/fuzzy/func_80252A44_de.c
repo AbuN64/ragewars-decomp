@@ -3,7 +3,7 @@
 #include "span_1000/code_80254CE4.h"
 #include "n64sdk.h"
 #include "gbi.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern Gfx *D_80110634;
 extern struct Shape_func_8021A2D4_de_2 D_80105180;

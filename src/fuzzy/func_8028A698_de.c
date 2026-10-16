@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_8028CCB8.h"
 typedef struct DraftSceneA698 {
     u8 pad[0x1B410]; s32 index, state; f32 timer; s32 loaded;

@@ -1,6 +1,6 @@
 #include "sdk/libgultra.h"
 #include "span_1000/code_802B0388.h"
-#include "types.h"
+#include "TYPES.H"
 
 extern void func_802B1E50_de(void *arg0, f32 arg1);
 

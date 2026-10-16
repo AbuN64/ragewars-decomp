@@ -1,6 +1,6 @@
 #ifndef RW_MOTION_STEP_H
 #define RW_MOTION_STEP_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 /* Contact positions and interpolation outputs used by the movement solver. */
 typedef struct MotionSurface { s32 flags; s8 enabled; s8 slopeKind; s8 materialKind; u8 reserved7[5]; f32 response; f32 friction; u8 reserved14[4]; f32 materialResponse; } MotionSurface;

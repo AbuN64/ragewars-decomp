@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8022AE90_H
 #define UNBAKE_SPAN_1000_CODE_8022AE90_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
 extern f32 D_800C7E00;

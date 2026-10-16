@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_176000_CODE_80405DC4_H
 #define UNBAKE_SPAN_176000_CODE_80405DC4_H
-#include "types.h"
+#include "TYPES.H"
 
 extern u32 D_80153778;
 

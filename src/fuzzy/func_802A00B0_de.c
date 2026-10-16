@@ -1,4 +1,4 @@
-#include "types.h"
+#include "TYPES.H"
 /* Binary search followed by the original backward duplicate scan. */
 s32 func_802A00B0_de(s32 *index, u8 *base, s32 count, void *key,
                      s32 stride, s32 (*compare)(void *, void *))

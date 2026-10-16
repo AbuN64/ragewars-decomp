@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_8022E938_H
 #define UNBAKE_SPAN_1000_CODE_8022E938_H
-#include "types.h"
+#include "TYPES.H"
 #include "common/types_8fd754e1e915.h"
 
 /* Handle and bookkeeping words cleared together when releasing this resource. */

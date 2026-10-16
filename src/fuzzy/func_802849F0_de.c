@@ -4,7 +4,7 @@
 #include "resident_event_handler.h"
 #include "shared/func_80214624_de_closed.h"
 #include "shared/func_8027AD4C_de_closed.h"
-#include "types.h"
+#include "TYPES.H"
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x30, 0x34, 0x38, 0x48, 0x4c, 0x50, 0x54], gap at: 0x3c. */
 void func_802849F0_de(void *arg0) {

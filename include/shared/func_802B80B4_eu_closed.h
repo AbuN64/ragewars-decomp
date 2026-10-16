@@ -1,6 +1,6 @@
 #ifndef FUNC_802B80B4_EU_CLOSED_H
 #define FUNC_802B80B4_EU_CLOSED_H
-#include "types.h"
+#include "TYPES.H"
 #include "span_1000/code_802BB15C.h"
 
 

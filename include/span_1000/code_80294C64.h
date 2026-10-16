@@ -1,6 +1,6 @@
 #ifndef UNBAKE_SPAN_1000_CODE_80294C64_H
 #define UNBAKE_SPAN_1000_CODE_80294C64_H
-#include "types.h"
+#include "TYPES.H"
 #include "resident_event_handler.h"
 #include "common/types_1dc8418c21db.h"
 struct ResidentState;
@@ -197,5 +197,14 @@ typedef struct Shared_AnimInfo {
     s32 unk4;
     struct Shared_AnimFrame *frame;
 } Shared_AnimInfo;
+
+extern void func_8028C15C_de(void *arg0, s32 arg1, s32 *arg2, s32 *arg3);
+
+extern void func_802955EC_us_rev1(s32 resource, s32 **data);
+extern void func_802956AC_us_rev1(s32 resource, s32 **data);
+extern s32 D_8014D070;
+extern s32 D_8014D074;
+extern s32 D_8014D078;
+extern s32 D_8014D07C;
 
 #endif

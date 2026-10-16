@@ -1,7 +1,7 @@
 #include "span_16E000/code_80420E90.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
-#include "types.h"
+#include "TYPES.H"
 
 /* Copies the four checkboxes at 0xC to 0x18 of the screen D_800E4400 into the game flags word
    D_801462C8, setting or clearing bits 0x08000000, 0x10000000, 0x8 and 0x20000000 as

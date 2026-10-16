@@ -1,7 +1,7 @@
 #ifndef SHARED_SHARED_SCENEGLOBAL_H
 #define SHARED_SHARED_SCENEGLOBAL_H
 
-#include "types.h"
+#include "TYPES.H"
 
 typedef struct Shared_SceneGlobal Shared_SceneGlobal;
 struct Shared_SceneGlobal {
