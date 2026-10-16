@@ -15,7 +15,7 @@ library = ""
 [[group]]
 name = "code_80200610"
 segment = "span_1000"
-members = ["func_80200610_de", "func_80200800_de", "func_8020095C_de", "func_80200AD8_de", "func_80200B14_de", "func_80200C28_de", "func_80200CA0_de", "func_80200D18_de", "func_80200E04_de", "func_80200F98_de", "func_80201064_de", "func_802010D8_de", "func_802012D8_de", "func_802013E0_de", "func_802014A4_de", "func_802016DC_de", "func_802016FC_de", "func_802017E8_de", "func_802018A0_de", "func_80201A74_de_padding_2674", "func_80201A80_de", "func_80201AD0_de", "func_80201B50_de", "func_80201C80_de", "func_80201DB0_de", "func_80201E94_de", "func_80202018_de", "func_80202198_de", "func_802022E0_de", "func_80202CA0_de", "func_80202E4C_de", "func_80202FDC_de", "func_80203278_de", "func_802034A4_de", "func_80203848_de", "func_8020388C_de", "func_80203908_de", "func_802039F8_de", "func_80203A94_de", "func_80203AB0_de", "func_80203AD8_de", "func_80203B1C_de", "func_80203B60_de", "func_80203C08_de", "func_80203C40_de", "func_80203C84_de", "func_80203CFC_de", "func_80203D4C_de", "func_80203DF0_de", "func_80203E78_de", "func_80203EB0_de"]
+members = ["func_80200610_de", "func_80200800_de", "func_8020095C_de", "func_80200AD8_de", "func_80200B14_de", "func_80200C28_de", "func_80200CA0_de", "func_80200D18_de", "func_80200E04_de", "func_80200F98_de", "func_80201064_de", "func_802010D8_de", "func_802012D8_de", "func_802013E0_de", "func_802014A4_de", "func_802016DC_de", "func_802016FC_de", "func_802017E8_de", "func_802018A0_de", "func_80201A80_de", "func_80201AD0_de", "func_80201B50_de", "func_80201C80_de", "func_80201DB0_de", "func_80201E94_de", "func_80202018_de", "func_80202198_de", "func_802022E0_de", "func_80202CA0_de", "func_80202E4C_de", "func_80202FDC_de", "func_80203278_de", "func_802034A4_de", "func_80203848_de", "func_8020388C_de", "func_80203908_de", "func_802039F8_de", "func_80203A94_de", "func_80203AB0_de", "func_80203AD8_de", "func_80203B1C_de", "func_80203B60_de", "func_80203C08_de", "func_80203C40_de", "func_80203C84_de", "func_80203CFC_de", "func_80203D4C_de", "func_80203DF0_de", "func_80203E78_de", "func_80203EB0_de"]
 evidence = "proven"
 signals = ["callee", "padding", "version"]
 source = "src/func_80200800_de.c"
@@ -92,7 +92,7 @@ library = ""
 [[group]]
 name = "code_802106E0"
 segment = "span_1000"
-members = ["func_802106E0_de", "func_80210964_de", "func_80210C20_de", "func_80210E88_de", "func_80211014_de_padding_11C14", "func_80211034_eu_x_padding_11C14", "func_80211020_de", "func_80211034_eu_padding_11C34", "func_80211034_eu_x_padding_11C34", "func_802110C4_de", "func_80211120_de", "func_8021113C_eu", "func_80211490_eu", "func_80211A9C_eu", "func_802120A8_eu", "func_802123FC_eu", "func_80212470_eu", "func_80212610_eu", "func_80211120_de_padding_13264", "func_80212684_eu_x_padding_13264", "func_80212674_de", "func_80212684_eu_padding_13284", "func_80212684_eu_x_padding_13284", "func_802127F4_de", "func_80212828_de", "func_8021290C_de", "func_80212948_de", "func_80212A40_de", "func_80212A7C_de", "func_80212BD0_de", "func_80212C04_de"]
+members = ["func_802106E0_de", "func_80210964_de", "func_80210C20_de", "func_80210E88_de", "func_80211014_de_padding_11C14", "func_80211034_eu_x_padding_11C14", "func_80211020_de", "func_80211034_eu_padding_11C34", "func_80211034_eu_x_padding_11C34", "func_802110C4_de", "func_80211120_de", "func_80211470_de", "func_80211A7C_de", "func_80212088_de", "func_802123DC_de", "func_80212450_de", "func_80212524_de", "func_802125F0_de", "func_8021113C_eu", "func_80211490_eu", "func_80211A9C_eu", "func_802120A8_eu", "func_802123FC_eu", "func_80212470_eu", "func_80212610_eu", "func_80211120_de_padding_13264", "func_80212684_eu_x_padding_13264", "func_80212674_de", "func_80212684_eu_padding_13284", "func_80212684_eu_x_padding_13284", "func_802127F4_de", "func_80212828_de", "func_8021290C_de", "func_80212948_de", "func_80212A40_de", "func_80212A7C_de", "func_80212BD0_de", "func_80212C04_de"]
 evidence = "proven"
 signals = ["callee", "cap", "version"]
 source = "src/func_802106E0_de.c"
@@ -103,7 +103,7 @@ library = ""
 [[group]]
 name = "code_80212C90"
 segment = "span_1000"
-members = ["func_80212C90_de", "func_80212D60_de", "func_80212D80_eu", "func_80212D80_eu_x", "func_80212D94_de", "func_80212E10_de", "func_80212E30_eu", "func_80212E30_eu_x", "func_80212FBC_de", "func_80212FDC_eu", "func_802131AC_de", "func_802131E0_de", "func_8021333C_de_padding_13F3C", "func_80213340_de", "func_8021335C_eu_padding_13F5C", "func_8021335C_eu_x", "func_80213500_de", "func_802138E8_de_padding_144E8", "func_80213908_eu_x_padding_144E8", "func_802138F0_de", "func_80213908_eu_padding_14508", "func_80213908_eu_x_padding_14508", "func_80213AAC_de", "func_80213AAC_us", "func_80213AAC_us_rev1", "func_80213ACC_eu", "func_80213ACC_eu_x", "func_80213CF8_de"]
+members = ["func_80212C90_de", "func_80212D60_de", "func_80212D80_eu", "func_80212DB4_eu", "func_80212D80_eu_x", "func_80212D94_de", "func_80212E10_de", "func_80212E30_eu", "func_80212E30_eu_x", "func_80212FBC_de", "func_80212FDC_eu", "func_802131AC_de", "func_802131E0_de", "func_8021333C_de_padding_13F3C", "func_80213340_de", "func_8021335C_eu_padding_13F5C", "func_8021335C_eu_x", "func_80213500_de", "func_802138E8_de_padding_144E8", "func_80213908_eu_x_padding_144E8", "func_802138F0_de", "func_80213908_eu_padding_14508", "func_80213908_eu_x_padding_14508", "func_80213AAC_de", "func_80213AAC_us", "func_80213AAC_us_rev1", "func_80213ACC_eu", "func_80213ACC_eu_x", "func_80213CF8_de"]
 evidence = "proven"
 signals = ["callee", "cap", "version"]
 source = "src/func_80212C90_de.c"
@@ -246,7 +246,7 @@ library = ""
 [[group]]
 name = "code_8023A284"
 segment = "span_1000"
-members = ["func_8023A294_de", "func_8023A4DC_de_padding_3B0DC", "func_8023A4E0_de", "func_8023A4EC_eu_padding_3B0EC", "func_8023A51C_eu_x", "func_8023AFF0_de", "func_8023B3F8_de", "func_8023B694_de", "func_8023B718_de", "func_8023B8AC_de", "func_8023B8F8_de", "func_8023B938_de", "func_8023B94C_de", "func_8023B978_de", "func_8023B984_us_padding_3C584", "func_8023B9E4_eu_x_padding_3C594", "func_8023B9B0_de", "func_8023B9C0_eu", "func_8023B9E4_eu_x_padding_3C5E4", "func_8023B9F4_eu_x", "func_8023BC74_de", "func_8023BD34_de", "func_8023C084_de", "func_8023C1F0_de", "func_8023C6BC_de", "func_8023C750_de", "func_8023C78C_de", "func_8023C85C_de", "func_8023C8D4_de", "func_8023C924_de", "func_8023CB60_de", "func_8023CB90_de", "func_8023CBC0_de", "func_8023CC08_de", "func_8023CCD4_de", "func_8023CDD4_de", "func_8023CE9C_de", "func_8023CFB0_us", "func_8023CFD0_de", "func_8023CFE0_de", "func_8023CFE0_eu", "func_8023D010_eu_x", "func_8023D158_de", "func_8023D380_de", "func_8023DAA0_de", "func_8023DDC4_de", "func_8023DF70_de", "func_8023E178_de", "func_8023E45C_de", "func_8023E690_de", "func_8023E6D0_de", "func_8023E6EC_de", "func_8023E838_de", "func_8023E854_de", "func_8023E864_de", "func_8023E8B4_de", "func_8023E8D4_de", "func_8023EA44_de", "func_8023EBD4_de", "func_8023EBFC_de", "func_8023EC54_de", "func_8023ECBC_de", "func_8023ED64_de", "func_8023EE00_de", "func_8023EE34_de", "func_8023EE60_de", "func_8023A4DC_de_padding_B460C"]
+members = ["func_8023A294_de", "func_8023A4DC_de_padding_3B0DC", "func_8023A4E0_de", "func_8023A4EC_eu_padding_3B0EC", "func_8023A51C_eu_x", "func_8023AFF0_de", "func_8023B3F8_de", "func_8023B694_de", "func_8023B718_de", "func_8023B8AC_de", "func_8023B8F8_de", "func_8023B938_de", "func_8023B94C_de", "func_8023B978_de", "func_8023B984_us_padding_3C584", "func_8023B9E4_eu_x_padding_3C594", "func_8023B9B0_de", "func_8023B9C0_eu", "func_8023B9E4_eu_x_padding_3C5E4", "func_8023B9F4_eu_x", "func_8023BC74_de", "func_8023BD34_de", "func_8023C084_de", "func_8023C1F0_de", "func_8023C6BC_de", "func_8023C750_de", "func_8023C78C_de", "func_8023C85C_de", "func_8023C8D4_de", "func_8023C924_de", "func_8023CA14_de", "func_8023CB60_de", "func_8023CB90_de", "func_8023CBC0_de", "func_8023CC08_de", "func_8023CCD4_de", "func_8023CDD4_de", "func_8023CE9C_de", "func_8023CFB0_us", "func_8023CFD0_de", "func_8023CFE0_de", "func_8023CFE0_eu", "func_8023D010_eu_x", "func_8023D158_de", "func_8023D380_de", "func_8023DAA0_de", "func_8023DDC4_de", "func_8023DF70_de", "func_8023E178_de", "func_8023E45C_de", "func_8023E690_de", "func_8023E6D0_de", "func_8023E6EC_de", "func_8023E838_de", "func_8023E854_de", "func_8023E864_de", "func_8023E8B4_de", "func_8023E8D4_de", "func_8023EA44_de", "func_8023EBD4_de", "func_8023EBFC_de", "func_8023EC54_de", "func_8023ECBC_de", "func_8023ED64_de", "func_8023EE00_de", "func_8023EE34_de", "func_8023EE60_de", "func_8023A4DC_de_padding_B460C"]
 evidence = "proven"
 signals = ["callee", "cap", "version"]
 source = "src/func_8023A294_de.c"
@@ -312,7 +312,7 @@ library = ""
 [[group]]
 name = "code_8024D018"
 segment = "span_1000"
-members = ["func_8024D028_de", "func_8024D160_de", "func_8024D268_de_padding_4DE68", "func_8024D270_de", "func_8024D284_de", "func_8024D398_de", "func_8024D4AC_de", "func_8024D728_de", "func_8024D870_de", "func_8024DBC0_de", "func_8024DD10_de", "func_8024DD24_de", "func_8024DD58_de", "func_8024DD8C_de", "func_8024DDB4_de", "func_8024DDDC_de", "func_8024DE10_de", "func_8024DE44_de", "func_8024DE6C_de", "func_8024DEA0_de", "func_8024DEE0_de", "func_8024DF08_de", "func_8024DF5C_de", "func_8024DFA0_de", "func_8024DFC8_de", "func_8024E00C_de", "func_8024E034_de", "func_8024E078_de", "func_8024E0A0_de", "func_8024E0C8_de", "func_8024E0F0_de", "func_8024E118_de"]
+members = ["func_8024D028_de", "func_8024D160_de", "func_8024D270_de", "func_8024D284_de", "func_8024D398_de", "func_8024D4AC_de", "func_8024D728_de", "func_8024D870_de", "func_8024DBC0_de", "func_8024DD10_de", "func_8024DD24_de", "func_8024DD58_de", "func_8024DD8C_de", "func_8024DDB4_de", "func_8024DDDC_de", "func_8024DE10_de", "func_8024DE44_de", "func_8024DE6C_de", "func_8024DEA0_de", "func_8024DEE0_de", "func_8024DF08_de", "func_8024DF5C_de", "func_8024DFA0_de", "func_8024DFC8_de", "func_8024E00C_de", "func_8024E034_de", "func_8024E078_de", "func_8024E0A0_de", "func_8024E0C8_de", "func_8024E0F0_de", "func_8024E118_de"]
 evidence = "proven"
 signals = ["cap", "version"]
 source = "src/func_8024D028_de.c"
@@ -609,7 +609,7 @@ library = ""
 [[group]]
 name = "code_80277444"
 segment = "span_1000"
-members = ["func_802773D4_de", "func_802775B0_de", "func_80277A98_de", "func_80277C54_de", "func_80278020_de", "func_80278274_de", "func_802784C0_de", "func_80278890_de", "func_80278A08_de_padding_795F8", "func_80278A08_de_padding_79608", "func_80278A08_de", "func_80278A08_de_padding_79638", "func_80278A08_de_padding_79668", "func_80278A08_de_padding_79678", "func_80278ABC_de", "func_80278B3C_de", "func_80278BFC_us_padding_797FC", "func_80278C0C_de_padding_7980C", "func_80278C10_de", "func_80278C3C_eu_padding_7983C", "func_80278C6C_eu_x_padding_7986C", "func_80278C7C_us_rev1", "func_80278D78_de", "func_80278E04_de", "func_80278E7C_de", "func_80278F00_de", "func_80278F68_de", "func_80278F84_de", "func_80278FB4_de", "func_80279004_de", "func_80279048_de", "func_8027907C_de", "func_802790C0_de", "func_80279138_de", "func_80279158_de", "func_80279178_de"]
+members = ["func_802773D4_de", "func_802775B0_de", "func_80277A98_de", "func_80277C54_de", "func_80278020_de", "func_80278274_de", "func_802784C0_de", "func_80278890_de", "func_80278A08_de", "func_80278ABC_de", "func_80278B3C_de", "func_80278BFC_us_padding_797FC", "func_80278C0C_de_padding_7980C", "func_80278C10_de", "func_80278C3C_eu_padding_7983C", "func_80278C6C_eu_x_padding_7986C", "func_80278C7C_us_rev1", "func_80278D78_de", "func_80278E04_de", "func_80278E7C_de", "func_80278F00_de", "func_80278F68_de", "func_80278F84_de", "func_80278FB4_de", "func_80279004_de", "func_80279048_de", "func_8027907C_de", "func_802790C0_de", "func_80279138_de", "func_80279158_de", "func_80279178_de"]
 evidence = "proven"
 signals = ["callee", "cap", "version"]
 source = "src/func_802773D4_de.c"
@@ -851,7 +851,7 @@ library = ""
 [[group]]
 name = "code_802A25C4"
 segment = "span_1000"
-members = ["func_802A25C4_de_padding_A31C4", "func_802A25D0_de", "func_802A26DC_eu_padding_A32DC", "func_802A274C_de", "func_802A2B58_de", "func_802A2FA4_de", "func_802A31E8_de", "func_802A339C_de", "func_802A354C_de", "func_802A3718_de", "func_802A3DD4_de", "func_802A4134_de", "func_802A4598_de", "func_802A478C_de", "func_802A4A60_de", "func_802A4DE8_de_padding_A5918", "func_802A4DE8_de_padding_A59E8", "func_802A4DE8_de", "func_802A4DE8_de_padding_A5AF8", "func_802A4DE8_de_padding_A5B38", "func_802A5020_de", "func_802A5180_de", "func_802A5498_de", "func_802A5680_de", "func_802A56C4_de", "func_802A56FC_de", "func_802A5734_de", "func_802A5780_de", "func_802A57D8_de", "func_802A57E0_de", "func_802A58B0_de", "func_802A598C_de", "func_802A5A24_de", "func_802A5A54_de", "func_802A5A64_de", "func_802A4DE8_de_padding_A69D8"]
+members = ["func_802A25C4_de_padding_A31C4", "func_802A25D0_de", "func_802A26DC_eu_padding_A32DC", "func_802A274C_de", "func_802A2B58_de", "func_802A2FA4_de", "func_802A31E8_de", "func_802A339C_de", "func_802A354C_de", "func_802A3718_de", "func_802A3DD4_de", "func_802A4134_de", "func_802A4598_de", "func_802A478C_de", "func_802A4A60_de", "func_802A4DE8_de", "func_802A5020_de", "func_802A5180_de", "func_802A5498_de", "func_802A5680_de", "func_802A56C4_de", "func_802A56FC_de", "func_802A5734_de", "func_802A5780_de", "func_802A57D8_de", "func_802A57E0_de", "func_802A58B0_de", "func_802A598C_de", "func_802A5A24_de", "func_802A5A54_de", "func_802A5A64_de"]
 evidence = "proven"
 signals = ["callee", "cap"]
 source = "src/func_802A25D0_de.c"
@@ -994,7 +994,7 @@ library = ""
 [[group]]
 name = "code_802B3B80"
 segment = "span_1000"
-members = ["func_802AEAB0_de", "func_802AEC20_de", "func_802AF150_de", "func_802AF2E0_de", "func_802AFB6C_de", "func_802AFD00_de", "__CSPRepostEvent", "func_802AFDFC_de", "func_802AFE30_de", "func_802AFEB0_de", "func_802AFF30_de", "func_802AFFC0_de", "func_802B003C_de", "func_802B00D4_de", "alEvtqFlush", "func_802B0258_de", "func_802B0310_de", "func_802B0340_de", "func_802B0630_eu"]
+members = ["func_802AEAB0_de", "func_802AEC20_de", "func_802AF150_de", "func_802AF2E0_de", "func_802AFB6C_de", "func_802AFD00_de", "__CSPRepostEvent", "func_802AFDFC_de", "func_802AFE30_de", "func_802AFEB0_de", "func_802AFF30_de", "func_802AFFC0_de", "func_802B003C_de", "func_802B00D4_de", "alEvtqFlush", "func_802B0258_de", "func_802B0310_de", "func_802B0340_de", "func_802B0630_eu", "func_802B0670_eu"]
 evidence = "authored"
 signals = []
 source = "src/sdk/libgultra/part_800C7F20/code_802B3B80.c"
@@ -1324,7 +1324,7 @@ library = ""
 [[group]]
 name = "code_80406A88"
 segment = "span_F0000"
-members = ["func_80406A90_eu_x", "func_8041D280_eu_x", "func_8041E3A0_eu_x", "func_8041F6E0_eu_x", "func_80421E70_eu_x", "func_804229E0_eu_x", "func_804235E0_eu_x", "func_80423B70_eu_x", "func_80423D30_eu_x", "func_80423DB0_eu_x", "func_80426FA0_eu_x", "func_80429C50_eu_x", "func_80429C78_eu_x", "func_80429DEC_eu_x", "func_8042AFB0_eu_x", "func_8042E790_eu_x", "func_8042FD3C_eu_x", "func_804385F0_eu_x", "func_80438918_eu_x", "func_804389B0_eu_x", "func_8043A4E0_eu_x", "func_8043AD30_eu_x", "func_8043D324_eu_x", "func_8043D55C_eu_x", "func_8043EB6C_eu_x", "func_80444440_eu_x", "func_804460E4_eu_x", "func_80446A50_eu_x", "func_8044A0B0_eu_x"]
+members = ["func_80406A90_eu_x", "func_8041D280_eu_x", "func_8041E3A0_eu_x", "func_8041F6E0_eu_x", "func_80421E70_eu_x", "func_804229E0_eu_x", "func_804235E0_eu_x", "func_80423B70_eu_x", "func_80423D30_eu_x", "func_80423DB0_eu_x", "func_80426FA0_eu_x", "func_80429C50_eu_x", "func_80429C78_eu_x", "func_80429DEC_eu_x", "func_8042AFB0_eu_x", "func_8042E790_eu_x", "func_8042FD3C_eu_x", "func_804385F0_eu_x", "func_80438918_eu_x", "func_804389B0_eu_x", "func_8043A4E0_eu_x", "func_8043AD30_eu_x", "func_8043D324_eu_x", "func_8043D55C_eu_x", "func_8043EB6C_eu_x", "func_80444440_eu_x", "func_80444480_eu_x", "func_804460E4_eu_x", "func_80446A50_eu_x", "func_8044A0B0_eu_x"]
 evidence = "inferred"
 signals = ["version"]
 source = "src/code_80406A88.c"
@@ -1357,7 +1357,7 @@ library = ""
 [[group]]
 name = "code_8040C640"
 segment = "span_164000"
-members = ["func_8040C640_us", "func_8040C648_us", "func_8040C780_us", "func_80419B90_us", "func_8041CEB0_us", "func_8041DFC0_us", "func_8041F120_us", "func_8041F2A0_us", "func_80420B80_us", "func_80435C60_us", "func_80435CE4_us", "func_80436640_us", "func_804396C0_us", "func_80439F10_us", "func_8043C4F4_us", "func_8043C72C_us", "func_80443530_us", "func_80444024_us", "func_80448E88_us", "func_80448E90_us"]
+members = ["func_8040C640_us", "func_8040C648_us", "func_8040C780_us", "func_80419B90_us", "func_8041CEB0_us", "func_8041DFC0_us", "func_8041E170_us", "func_8041E2F0_us", "func_8041F120_us", "func_8041F2A0_us", "func_80420B80_us", "func_80435C60_us", "func_80435CE4_us", "func_80436640_us", "func_804396C0_us", "func_80439F10_us", "func_8043C4F4_us", "func_8043C72C_us", "func_80443530_us", "func_80444024_us", "func_80448E88_us", "func_80448E90_us"]
 evidence = "inferred"
 signals = ["version"]
 source = "src/code_8040C640.c"
@@ -1489,7 +1489,7 @@ library = ""
 [[group]]
 name = "code_8042FBEC"
 segment = "span_176000"
-members = ["func_80444F9C_eu_padding_1350CC", "func_80444FE4_eu_padding_135114", "func_8044502C_eu_padding_13515C", "func_8042FBEC_eu", "func_80436834_eu_padding_1AC834", "func_80437690_eu", "func_804387F0_eu", "func_80438878_eu_padding_1AE878", "func_80438880_eu", "func_8043A3AC_eu_padding_1B03AC", "func_8043A3B0_eu", "func_8043A6B8_eu_padding_1B06B8", "func_8043ABFC_eu_padding_1B0BFC", "func_8043AC00_eu", "func_8043D1F4_eu", "func_8043D42C_eu", "func_8043E9D0_eu", "func_8043FC50_eu", "func_8043FCFC_eu", "func_8043FFB4_eu_padding_1B5FB4", "func_80444308_eu", "func_80444F28_eu_padding_1BAF28", "func_80444F30_eu", "func_80444F9C_eu_padding_1BAF9C", "func_80444FA0_eu", "func_80444FE4_eu_padding_1BAFE4", "func_80444FF0_eu", "func_8044502C_eu_padding_1BB02C", "func_80445030_eu", "func_80445F60_eu", "func_80445FB4_eu", "func_8044605C_eu", "func_80446138_eu", "func_80446920_eu", "func_804471D4_eu_padding_1BD1D4", "func_80447C7C_eu_padding_1BDC7C", "func_80447EBC_eu_padding_1BDEBC", "func_80449F80_eu", "func_8044F224_eu"]
+members = ["func_80444F9C_eu_padding_1350CC", "func_80444FE4_eu_padding_135114", "func_8044502C_eu_padding_13515C", "func_8042FBEC_eu", "func_80436834_eu_padding_1AC834", "func_80437690_eu", "func_804387F0_eu", "func_80438878_eu_padding_1AE878", "func_80438880_eu", "func_8043A3AC_eu_padding_1B03AC", "func_8043A3B0_eu", "func_8043A6B8_eu_padding_1B06B8", "func_8043ABFC_eu_padding_1B0BFC", "func_8043AC00_eu", "func_8043D1F4_eu", "func_8043D42C_eu", "func_8043E9D0_eu", "func_8043E9F4_eu", "func_8043FC50_eu", "func_8043FCFC_eu", "func_8043FFB4_eu_padding_1B5FB4", "func_80444308_eu", "func_80444F28_eu_padding_1BAF28", "func_80444F30_eu", "func_80444F9C_eu_padding_1BAF9C", "func_80444FA0_eu", "func_80444FE4_eu_padding_1BAFE4", "func_80444FF0_eu", "func_8044502C_eu_padding_1BB02C", "func_80445030_eu", "func_80445F60_eu", "func_80445FB4_eu", "func_8044605C_eu", "func_80446138_eu", "func_80446920_eu", "func_804471D4_eu_padding_1BD1D4", "func_80447C7C_eu_padding_1BDC7C", "func_80447EBC_eu_padding_1BDEBC", "func_80449F80_eu", "func_8044F224_eu"]
 evidence = "proven"
 signals = ["cap", "version"]
 source = "src/func_8043768C_eu_padding_1277BC.c"
@@ -1665,7 +1665,7 @@ library = ""
 [[group]]
 name = "code_80447BB0"
 segment = "span_16E000"
-members = ["func_80448A48_eu_x", "func_80448E7C_eu_x", "func_804492B4_eu_x", "func_80446F60_de", "func_8044799C_de", "func_80447A38_de", "func_80447AF0_de", "func_80447F30_de", "func_80448260_de", "func_80448548_de", "func_804486B8_de", "func_804488A4_de", "func_80448B84_de", "func_80448BB4_de", "func_80448BFC_de", "func_80448CC4_de", "func_80448EF4_de", "func_804491E8_de", "func_8044952C_de", "func_8044972C_de", "func_80449870_de", "func_804499B0_de", "func_80449DB0_de", "func_80449E18_de", "func_80449EE4_de", "func_8044A020_de", "func_80448EA4_us_rev1", "func_80449968_us_rev1", "func_80449970_us_rev1"]
+members = ["func_80448A48_eu_x", "func_80448470_eu_x", "func_80448E7C_eu_x", "func_804492B4_eu_x", "func_80446F60_de", "func_8044799C_de", "func_80447A38_de", "func_80447AF0_de", "func_80447F30_de", "func_80448260_de", "func_80448548_de", "func_804486B8_de", "func_804488A4_de", "func_80448B84_de", "func_80448BB4_de", "func_80448BFC_de", "func_80448CC4_de", "func_80448EF4_de", "func_804491E8_de", "func_8044952C_de", "func_8044972C_de", "func_80449870_de", "func_804499B0_de", "func_80449DB0_de", "func_80449E18_de", "func_80449EE4_de", "func_8044A020_de", "func_80448EA4_us_rev1", "func_80449968_us_rev1", "func_80449970_us_rev1"]
 evidence = "proven"
 signals = ["callee", "cap", "rodata", "version"]
 source = "src/func_80446F60_de.c"
@@ -34908,7 +34908,7 @@ omit = []
 path = "src/func_80200800_de_8.c"
 kind = "c"
 group = "code_80200610"
-members = ["func_80202CA0_de", "func_80202E4C_de", "func_80201A74_de_padding_2674"]
+members = ["func_80202CA0_de", "func_80202E4C_de"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -35914,6 +35914,17 @@ path = "src/func_802106E0_de_2.c"
 kind = "c"
 group = "code_802106E0"
 members = ["func_80210E88_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_802106E0_de_20.c"
+kind = "c"
+group = "code_802106E0"
+members = ["func_80212674_de"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -38553,61 +38564,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/func_8023C924_de_padding_3D504.c"
-kind = "data"
-group = "code_8023A284"
-members = ["func_8023C924_de_padding_3D504"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8023C924_de_padding_3D514.c"
-kind = "data"
-group = "code_8023A284"
-members = ["func_8023C924_de_padding_3D514"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8023C924_de_padding_3D524.c"
-kind = "data"
-group = "code_8023A284"
-members = ["func_8023C924_de_padding_3D524"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8023C924_de_padding_3D534.c"
-kind = "data"
-group = "code_8023A284"
-members = ["func_8023C924_de_padding_3D534"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8023C924_de_padding_3D564.c"
-kind = "data"
-group = "code_8023A284"
-members = ["func_8023C924_de_padding_3D564"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/func_8023CE9C_de_padding_3DBA8.c"
 kind = "data"
 group = "code_8023A284"
@@ -39723,17 +39679,6 @@ path = "src/func_8024D028_de.c"
 kind = "c"
 group = "code_8024D018"
 members = ["func_8024D028_de"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8024D028_de_2.c"
-kind = "data"
-group = "code_8024D018"
-members = ["func_8024D268_de_padding_4DE68"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -42307,6 +42252,17 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/func_80271C54_de_7.c"
+kind = "c"
+group = "code_80271B18"
+members = ["func_8027229C_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/func_80272FBC_de.c"
 kind = "c"
 group = "code_8027302C"
@@ -42608,61 +42564,6 @@ path = "src/func_802773D4_de_3.c"
 kind = "c"
 group = "code_80277444"
 members = ["func_80278890_de"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802773D4_de_4.c"
-kind = "data"
-group = "code_80277444"
-members = ["func_80278A08_de_padding_795F8"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802773D4_de_5.c"
-kind = "data"
-group = "code_80277444"
-members = ["func_80278A08_de_padding_79608"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802773D4_de_6.c"
-kind = "data"
-group = "code_80277444"
-members = ["func_80278A08_de_padding_79638"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802773D4_de_7.c"
-kind = "data"
-group = "code_80277444"
-members = ["func_80278A08_de_padding_79668"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802773D4_de_8.c"
-kind = "data"
-group = "code_80277444"
-members = ["func_80278A08_de_padding_79678"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -44271,7 +44172,7 @@ omit = []
 path = "src/func_80294C50_de_6.c"
 kind = "c"
 group = "code_80294C64"
-members = ["func_80295E78_de", "func_80295EAC_de"]
+members = ["func_80295E78_de", "func_80295EAC_de", "func_80295F14_de"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -45258,39 +45159,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/func_802A25D0_de_11.c"
-kind = "data"
-group = "code_802A25C4"
-members = ["func_802A4DE8_de_padding_A59E8"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802A25D0_de_12.c"
-kind = "data"
-group = "code_802A25C4"
-members = ["func_802A4DE8_de_padding_A5AF8"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802A25D0_de_13.c"
-kind = "data"
-group = "code_802A25C4"
-members = ["func_802A4DE8_de_padding_A5B38"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/func_802A25D0_de_14.c"
 kind = "c"
 group = "code_802A25C4"
@@ -45306,17 +45174,6 @@ path = "src/func_802A25D0_de_15.c"
 kind = "c"
 group = "code_802A25C4"
 members = ["func_802A4A60_de", "rodata/func_802A4A60_de/800CAFC8"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802A25D0_de_16.c"
-kind = "data"
-group = "code_802A25C4"
-members = ["func_802A4DE8_de_padding_A69D8"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -45416,17 +45273,6 @@ path = "src/func_802A25D0_de_8.c"
 kind = "c"
 group = "code_802A25C4"
 members = ["func_802A339C_de"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_802A25D0_de_9.c"
-kind = "data"
-group = "code_802A25C4"
-members = ["func_802A4DE8_de_padding_A5918"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -52818,17 +52664,6 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/func_80408AC4_de_padding_16EAC4.c"
-kind = "data"
-group = "code_80405DC0"
-members = ["func_80408AC4_de_padding_16EAC4"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/func_80408CAC_eu_padding_17ECAC.c"
 kind = "data"
 group = "code_80405DC4"
@@ -57809,6 +57644,17 @@ path = "src/func_8043D278_de_12.c"
 kind = "data"
 group = "code_8043D1DC"
 members = ["func_80447818_de_padding_1BEA78"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/func_8043D278_de_13.c"
+kind = "c"
+group = "code_8043D1DC"
+members = ["func_8043DCA4_de", "rodata/func_8043D278_de_13/800DE300"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -71824,17 +71670,6 @@ path = "src/rodata.unresolved.800DCF64.c"
 kind = "data"
 group = "data_800DCF64"
 members = ["rodata/unresolved/800DCF64"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.unresolved.800DCFAC.c"
-kind = "data"
-group = "data_800DCFAC"
-members = ["rodata/unresolved/800DCFAC"]
 toolchain = "gcc-2.8.1-sn64"
 
 [unit.options]
@@ -91489,12 +91324,6 @@ scores = {de = 0.1910828025477707, eu = 0.1910828025477707, eu-x = 0.19108280254
 key = {de = "d8a321c8cb20c0994a45d0ac9480a9e6624350fa964ebdda81e2cc2eeb8907a6", eu = "74057a1872f4ea6bece6c1777b2cfc068b136eaa7d5a45b9030b8a21ca473c4b", eu-x = "0c3c1794a5f1109557407e1ed5bcc47f65584cde5cd5fbff182e4fc2ee01569d", us = "f173924e96b07a7906618f5bec9c06f916f032bbe93649c3ac3ac64f027926f7", us-rev1 = "170360c34ced9912e8dfb70731a0905f8e7f0d983b49a8a83f85766cafb1b952"}
 
 [[fuzzy]]
-member = "func_80212674_de"
-path = "src/fuzzy/func_80212670_de.c"
-scores = {de = 0.8762886597938144, eu = 0.8762886597938144, eu-x = 0.8762886597938144, us = 0.8762886597938144, us-rev1 = 0.8762886597938144}
-key = {de = "fd5f6212639fbaa8b3de46887eda6a5bec94e0833afec75a334e56be8a68320c", eu = "ab78c054d61d23c4fa757637727c4feac4e7b23dadda783379c1f63a47ee5b25", eu-x = "d6e097e8d66186543ee92d331ae82df1964725badba312949bee68b77f6c2641", us = "52543993c0b5ffb1112e06c3151188eca96f0e9a9798b07ec266b0783d4321cc", us-rev1 = "333e866fed581bd30e2e3b3413ef5ae5c7990890e7c87bf76ac9b9665d52da2a"}
-
-[[fuzzy]]
 member = "func_80214178_de"
 path = "src/fuzzy/func_80214178_de.c"
 scores = {de = 1.0, eu = 1.0, eu-x = 1.0, us = 1.0, us-rev1 = 1.0}
@@ -91750,7 +91579,7 @@ key = {de = "d7d5edf3b03311eb1c45fa056f6ae1951cab4c0619a0d71f858fabecc54cf955", 
 member = "func_80257DD4_de"
 path = "src/fuzzy/func_80257DD4_de.c"
 scores = {de = 0.4489795918367347, eu = 0.4489795918367347, eu-x = 0.4489795918367347, us = 0.4489795918367347, us-rev1 = 0.4489795918367347}
-key = {de = "0a4ed5c48c2519eb6c201ab07df211cbc397a45bf6ba43c726ac5a667753478e", eu = "8381c9bec472026fe910afe434b08bc670e60a9450915a8abdea3c4c25d588ad", eu-x = "e26f08f3e1b6fa679c22e4adf9d6bb37de05cdd403e31cb1d3052b23eb7eebbf", us = "2da6826f6e69fb348d5eb53d06731ea93e7f0f98439456c15fcb3f306bb7d8f4", us-rev1 = "f7924d543f143817aa6a9e9ff0bff6cb25cc0a9fd2f1c69c3b2f9e1d664c8daa"}
+key = {de = "fee569983f1f63c8c48afb7b8aba3d66b6e646c8ff02b4b69becac3efac3e78e", eu = "cf450d79a26ac47dca4b2d739397d98ed1197dcd2eb5569127268f85f5f935e1", eu-x = "39a5389e4570d6c55a4684f9e887c0a7cf3ac3f18960394a53797f4838591366", us = "06e71578c8934cde8389657745e14721cf4d4e2e230bd5b99b0ec94b1ea7a0cf", us-rev1 = "fcc16ed1642fdd0ffdaa8946f2580aeff2ce5aa0bc71d928f2e7374d8ee7f060"}
 
 [[fuzzy]]
 member = "func_8025A3CC_de"
@@ -91876,13 +91705,7 @@ key = {de = "8631fdb926df831658a95f881c409f35370a2c000e37d51d0403138d85ed599c", 
 member = "func_80271AA8_de"
 path = "src/fuzzy/func_80271AA8_de.c"
 scores = {de = 0.5887850467289719, eu = 0.5887850467289719, eu-x = 0.5887850467289719, us = 0.5887850467289719, us-rev1 = 0.5887850467289719}
-key = {de = "5fa43e3f271f20e34833468f1aeb476dedc5b7d57cb5a6ff84a28ee5f009ed90", eu = "ea3152be98c8d0261556e230247bcf2d4265c11613e0b35c412317d861c03045", eu-x = "8ae58b444d9ea0e508642c1d4ddda23a375af0062b9aed87b291848f6a2731e2", us = "d25d514167b9bb40d28d8bb2d3cd1202d0b6f7b1c2834ec95437e54a32b72a65", us-rev1 = "7073035e09badcfc318415e56b333313ab6c99cc0b5b7f31942b37c29718b4b7"}
-
-[[fuzzy]]
-member = "func_8027229C_de"
-path = "src/fuzzy/func_8027229C_de.c"
-scores = {de = 0.48863636363636365, eu = 0.48863636363636365, eu-x = 0.48863636363636365, us = 0.48863636363636365, us-rev1 = 0.48863636363636365}
-key = {de = "9261c8baa97d6b7edfc5e14db39e41d21e98670a39ab0804efde5b2ef4dc2bdc", eu = "0e5fba14d2382c5d791f92db43ff4da2dc64701c7611726daf3f7a5a496c8eed", eu-x = "59785dc95f3866470c067d0327c44c7c57e1d884e58c233c7b30ef5ff75a4467", us = "311c2c9347de389635cb56e51d9a584e38a70160fee3b3b9902054e37730ca34", us-rev1 = "53bbc6ee37855c4a304dccd6b5984eb11726240e44dadea0072bc2cd05a4c663"}
+key = {de = "ed91649b5becc4ae67d46dfcbd8d53112132bcaea59e1ef81731eba6035c17a0", eu = "c4aba878d9a92a285116268b99add41655967cf9f49d9d63967ae85661ff9320", eu-x = "f1db10855c01f9d72501fc1e8084912ef04c67ad17bbe021768ad27ce851b02c", us = "9bdbc0956236755aa2a715b5bc1b6b9e237583566e38aef754ac6e3c77f01b6e", us-rev1 = "7a4c16e9907332ba9bf8de0b2dc572febe88036324c1e654bbdd0dac731d56e6"}
 
 [[fuzzy]]
 member = "func_80274380_de"
@@ -92075,12 +91898,6 @@ member = "func_802946A4_de"
 path = "src/fuzzy/func_802946A4_de.c"
 scores = {de = 0.0, eu = 0.0, eu-x = 0.0, us = 0.0, us-rev1 = 0.0}
 key = {de = "faf5d37af3052e1fe68fb2402f537e86f6ed3d9c937d861bf760160086cd276b", eu = "318576810eedd9914c7e3ddebb31849b61cc807afb23bddcb8d35e356045362a", eu-x = "7df306e15229e2997fc4e6b041265f4ae6137569fdf9afe3650fd83d78954b58", us = "c14bb8447dc51b28eb97dbe9660e303e4115b6949e359222807aa01d93f71bff", us-rev1 = "da043bd0469838e365926a0288116db35a3bd332244e599962ee510835c054b7"}
-
-[[fuzzy]]
-member = "func_80295F14_de"
-path = "src/fuzzy/func_80295F14_de.c"
-scores = {de = 1.0, eu = 1.0, eu-x = 1.0, us = 1.0, us-rev1 = 1.0}
-key = {de = "d8a6ad337adb7a0bad58170f4380b1916121b776d3842c7432e1950af85c0a31", eu = "f1d98902a66c9af5b3a82f391dbf3d0b1c2c4f2107bd8cdbbe67522ea92e1831", eu-x = "64bde640f9a71ab7a4c3bddd5e0cd4614cadc54963c1988eafaae8b621aa4007", us = "67f722ab4fc22d919bd260e005f41b459c6ae4a5d036415e94cac835c441c96c", us-rev1 = "ea2e6af3d02d1517d2e534e0431c6ddc1c6394fb6ee684f0feb453ee2e45662f"}
 
 [[fuzzy]]
 member = "func_80296020_de"
@@ -92741,12 +92558,6 @@ member = "func_8043D55C_eu_x"
 path = "src/fuzzy/func_8043D55C_eu_x.c"
 scores = {eu-x = 0.810126582278481}
 key = {eu-x = "1d540f8e9fb0d29c384ecd21551d4485c06181f6fa778cee8113513e29f3c5e9"}
-
-[[fuzzy]]
-member = "func_8043DCA4_de"
-path = "src/fuzzy/func_8043DCA4_de.c"
-scores = {de = 0.9626168224299065, us = 0.9626168224299065}
-key = {de = "9deb324754ab40e4c81f3b3b8f97fbc29787386889da11b1d24b366c80995c6a", us = "d962abd2c776dfc9d744cacce9080057e15b66b73d7d6f64dffe5f43af58b4e4"}
 
 [[fuzzy]]
 member = "func_8043DD2C_us_rev1"

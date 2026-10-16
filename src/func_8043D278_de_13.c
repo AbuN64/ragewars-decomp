@@ -1,35 +1,14 @@
 #include "common/data.h"
-#include "types.h"
 #include "common/reset_storage.h"
-extern s32 D_800D3D14;
-extern s32 D_800D3D18;
-extern s32 D_800D3D1C;
-extern s32 D_800D3D20;
-extern s32 D_800D3D24;
-extern s32 D_800D3D28;
-extern s32 D_800D3D2C;
-extern s32 D_800D3D30;
-extern s32 D_800D3D34;
-extern s32 D_800D3D38;
-extern s32 D_800D3D3C;
-extern s32 D_800D3D40;
-extern s32 D_800D3D44;
-extern s32 D_800D3D48;
-extern s32 D_800D3D4C;
-extern s32 D_800D3D50;
-extern u8 D_80142236;
-extern u8 D_80142237;
-extern u8 D_80142238;
-extern u8 D_80142239;
-extern u8 D_8014223A;
-extern u8 D_8014223B;
-extern u8 D_8014223D;
+#include "types.h"
+#include "span_166000/code_8043D1DC.h"
 
 s32 func_8043DCA4_de(ResetFourStorage *arg0) {
     s32 temp_v0;
 
     temp_v0 = arg0->unk0;
     switch (temp_v0) {
+    case 2:
     default:
         if (D_80142235 != 0) {
             arg0->unk14 = &D_800D3D14;

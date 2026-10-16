@@ -8,7 +8,7 @@ typedef struct {
     s32 unk8;
     s32 unkC;
     u8 padding_10[4];
-    s32 unk14;
+    s32 *unk14;
     s32 unk18;
     u8 padding_1C[8];
     f32 unk24;

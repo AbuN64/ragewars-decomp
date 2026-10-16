@@ -12,7 +12,7 @@ extern char D_00294C90;
 extern char D_800C54F0_de[];
 #endif
 /* Request the texture resource for this bank and variation. */
-static __inline__ void **rw_request_texture(s32 *resource, s32 variation, s32 wait)
+static __inline__ void *rw_request_texture(s32 *resource, s32 variation, s32 wait)
 {
 #if defined(VERSION_US_REV1)
     if (D_800D2AE0 == 0) {

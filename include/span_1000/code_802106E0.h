@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_1000_CODE_802106E0_H
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+#include "span_1000/code_8020AF9C.h"
 extern float D_800C1FD8_de;
 
 struct RecCode802106E0;
@@ -371,5 +372,7 @@ struct func_802125F0_S3 {
     char pad2D8[0x2DC - 0x2D8 - sizeof(s32)];
     s32 unk2DC;
 };
+
+extern s32 func_8020CCE8_de(EntryList8020CCE8 *, s32, s32 *, s32 *);
 
 #endif

@@ -136,5 +136,5 @@ extern float D_800C4898_de;
 
 extern float D_800C4850_de;
 
-extern float func_8027229C_de(void * arg0, void * arg1, void * arg2, void * arg3);
+extern Vec3 *func_8027229C_de(Vec3 *out, Vec3 *value, Vec3 *a, Vec3 *b);
 #endif
