@@ -19,13 +19,13 @@ extern void func_80259988_de(void *arg0, s32 arg1);
 
 
 
-void func_80258800_de(void *arg0, s32 arg1) {
+void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     {
         s32 *temp_s0;
         s32 temp_v1;
         u32 temp_a0;
 
-        temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+        temp_s0 = &arg0->lock;
         temp_a0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -36,14 +36,14 @@ void func_80258800_de(void *arg0, s32 arg1) {
             __osRestoreInt(temp_a0);
         }
     }
-    func_8025BE08_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1);
-    func_80259988_de(&((ContextRecAt2BC0 *)(arg0))->view[0], arg1);
+    func_8025BE08_de(&arg0->menu[0], arg1);
+    func_80259988_de(&arg0->view[0], arg1);
     {
         s32 *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+        temp_s0 = &arg0->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -59,7 +59,8 @@ void func_80258800_de(void *arg0, s32 arg1) {
 extern u32 func_802BCF30_de(void);
 extern void __osRestoreInt(u32);
 extern void func_8025BF08_de(void *, s32);
-extern void func_802599EC_de(void *, s32);
+struct OwnerRecAtD8;
+extern void func_802599EC_de(struct OwnerRecAtD8 *, s32);
 extern void func_802BB420_de(void *, s32, s32);
 
 
@@ -67,28 +68,28 @@ extern void func_802BB420_de(void *, s32, s32);
 
 
 
-void func_802588D4_de(void *arg0, s32 arg1) {
+void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     void *temp_s0;
     void *var_a0;
     s32 temp_v1;
     u32 temp_a0;
     u32 temp_v0;
 
-    temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+    temp_s0 = &arg0->lock;
     temp_a0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(temp_a0);
         func_802BB2A0_de(temp_s0, 0, 1);
-        var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
+        var_a0 = &arg0->menu[0];
     } else {
         __osRestoreInt(temp_a0);
-        var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
+        var_a0 = &arg0->menu[0];
     }
     func_8025BF08_de(var_a0, arg1);
-    func_802599EC_de(&((ContextRecAt2BC0 *)(arg0))->view[0], arg1);
-    temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+    func_802599EC_de(&arg0->view[0], arg1);
+    temp_s0 = &arg0->lock;
     temp_v0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -111,28 +112,28 @@ extern void func_80259A50_de(void *arg0, s32 arg1);
 
 
 
-void func_802589A8_de(void *arg0, s32 arg1) {
+void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     void *temp_s0;
     void *var_a0;
     s32 temp_v1;
     u32 temp_a0;
     u32 temp_v0;
 
-    temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+    temp_s0 = &arg0->lock;
     temp_a0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
         __osRestoreInt(temp_a0);
         func_802BB2A0_de(temp_s0, 0, 1);
-        var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
+        var_a0 = &arg0->menu[0];
     } else {
         __osRestoreInt(temp_a0);
-        var_a0 = &((ContextRecAt2BC0 *)(arg0))->menu[0];
+        var_a0 = &arg0->menu[0];
     }
     func_8025C008_de(var_a0, arg1);
-    func_80259A50_de(&((ContextRecAt2BC0 *)(arg0))->view[0], arg1);
-    temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
+    func_80259A50_de(&arg0->view[0], arg1);
+    temp_s0 = &arg0->lock;
     temp_v0 = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked - 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
@@ -150,16 +151,16 @@ extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
 
 
 
-void func_80258A7C_de(void *arg0, s32 arg1, Vec3 arg2, s32 arg3, s32 arg4, f32 arg5) {
-    ((ContextRecAt2BC0 *)(arg0))->alpha = arg5;
+void func_80258A7C_de(ContextRecAt2BC0 *arg0, s32 arg1, Vec3 arg2, s32 arg3, s32 arg4, f32 arg5) {
+    arg0->alpha = arg5;
     func_80257DD4_de(arg0, arg1, arg2, arg3, arg4);
-    ((ContextRecAt2BC0 *)(arg0))->alpha = D_800C3EE0_de[1];
+    arg0->alpha = D_800C3EE0_de[1];
 }
 
 #include "shared/menu_match_globals.h"
 
 extern s32 func_802934F8_de(void);
-extern void *func_802395A4_de(s32 *arg0, Vec3 *arg1);
+extern void *func_802395A4_de(MenuMatchGlobals *arg0, Vec3 *arg1);
 extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
 
 
@@ -167,15 +168,15 @@ extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
 
 
 
-void func_80258AE0_de(void *arg0) {
+void func_80258AE0_de(ContextRecAt2BC0 *arg0) {
     Vec3 zero;
     void *result;
     Vec3 *vec;
 
     if (D_800CB720 != 0 &&
-        ((ContextRecAt2BC0 *)(arg0))->field2BB4 != 0 &&
+        arg0->field2BB4 != 0 &&
         func_802934F8_de() != 0 &&
-        ((ContextRecAt2BC0 *)(arg0))->track > 0) {
+        arg0->track > 0) {
         {
             register f32 value = 0.0f;
 
@@ -185,27 +186,27 @@ void func_80258AE0_de(void *arg0) {
         }
         result = func_802395A4_de(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
-        if ((((ContextRecAt2BC0 *)(arg0))->frame & 3) == 0) {
-            func_80257DD4_de(arg0, ((ContextRecAt2BC0 *)(arg0))->track, *vec, 0, -1);
+        if ((arg0->frame & 3) == 0) {
+            func_80257DD4_de(arg0, arg0->track, *vec, 0, -1);
         }
     }
 }
 
-void func_80258B8C_de(void *arg0, float arg1) {
-    ((ContextRecAt2BC0 *)(arg0))->red = arg1;
+void func_80258B8C_de(ContextRecAt2BC0 *arg0, float arg1) {
+    arg0->red = arg1;
 }
 
-void func_80258B94_de(void *arg0, int arg1) {
+void func_80258B94_de(ContextRecAt2BC0 *arg0, int arg1) {
     double d = (double)arg1;
     if (arg1 < 0) {
         d = d + D_800C3EE8_de;
     }
-    ((ContextRecAt2BC0 *)(arg0))->green = (float)d;
+    arg0->green = (float)d;
 }
 
 /** Store the second argument at byte offset 0x2BA8 in the first argument. */
-void func_80258BBC_de(void *object, float value) {
-    ((ContextRecAt2BC0 *)(object))->blue = value;
+void func_80258BBC_de(ContextRecAt2BC0 *object, float value) {
+    object->blue = value;
 }
 
 /** Return the indexed twelve-byte record from the table at offset 0x2B70. */
@@ -213,13 +214,13 @@ char *func_80258BC4_de(char *object, int index) {
     return ((ContextRecAt2BC0 *)(object))->table2B70 + index * 12;
 }
 
-void *func_80258BDC_de(void *arg0, int arg1) {
-    return (char *)((ContextRecAt2BC0 *)(arg0))->table2B74 + arg1 * 12;
+void *func_80258BDC_de(ContextRecAt2BC0 *arg0, int arg1) {
+    return (char *)arg0->table2B74 + arg1 * 12;
 }
 
 /** Return the indexed 12-byte entry under object offset 0x2B78. */
-void *func_80258BF4_de(void *arg0, int arg1) {
-    return (char *)((ContextRecAt2BC0 *)(arg0))->table2B78 + arg1 * 12;
+void *func_80258BF4_de(ContextRecAt2BC0 *arg0, int arg1) {
+    return (char *)arg0->table2B78 + arg1 * 12;
 }
 
 extern u32 func_802BCF30_de(void);
@@ -281,12 +282,12 @@ void func_80258CEC_de(int arg0) {
 }
 
 /** Store the second argument at offset 0x2BAC. */
-void func_80258D08_de(void *arg0, int arg1) {
-    ((ContextRecAt2BC0 *)(arg0))->field2BAC = arg1;
+void func_80258D08_de(ContextRecAt2BC0 *arg0, int arg1) {
+    arg0->field2BAC = arg1;
 }
 
-int func_80258D10_de(void *arg0) {
-    return ((ContextRecAt2BC0 *)(arg0))->field2BAC;
+int func_80258D10_de(ContextRecAt2BC0 *arg0) {
+    return arg0->field2BAC;
 }
 
 /** Store a value in the field at offset 0x2BB4. */
@@ -295,8 +296,8 @@ void func_80258D1C_de(char *object, int value) {
 }
 
 /** Store a value in the field at offset 0x2B98. */
-void func_80258D24_de(void *object, int value) {
-    ((ContextRecAt2BC0 *)(object))->field2B98 = value;
+void func_80258D24_de(ContextRecAt2BC0 *object, int value) {
+    object->field2B98 = value;
 }
 
 /** Read the object word at offset 0x2BB0. */
@@ -305,8 +306,8 @@ int func_80258D2C_de(void *object) {
 }
 
 /** Store the supplied word at object offset 0x2BB0. */
-void func_80258D38_de(void *arg0, int arg1) {
-    ((ContextRecAt2BC0 *)(arg0))->field2BB0 = arg1;
+void func_80258D38_de(ContextRecAt2BC0 *arg0, int arg1) {
+    arg0->field2BB0 = arg1;
 }
 
 void *func_80258D40_de(void *arg0) {
@@ -314,8 +315,8 @@ void *func_80258D40_de(void *arg0) {
 }
 
 /** Store a word in the object field at offset 0x2BB8. */
-void func_80258D48_de(void *object, int value) {
-    ((ContextRecAt2BC0 *)(object))->field2BB8 = value;
+void func_80258D48_de(ContextRecAt2BC0 *object, int value) {
+    object->field2BB8 = value;
 }
 
 /* Counts how many of an object's seventeen 0xCC-byte slots at 0x1DC0 hold a given owner, holding the object's lock at 0x110 (raised and released under interrupts disabled through func_802BCF30_de and __osRestoreInt) around the scan. */
@@ -403,14 +404,14 @@ void func_80258E5C_de(ObjRecAt2B9C *obj, float value) {
     obj->level = v * D_800C8FE4;
 }
 
-extern void func_8025DB34_de(int a);
+extern void func_8025DB34_de(Track *a);
 
 /** Thin wrapper forwarding an offset argument to func_8025DB34_de. */
 void func_80258EBC_de(int arg0) {
     func_8025DB34_de(arg0 + 0x1D64);
 }
 
-extern void func_8025DB44_de(int a);
+extern void func_8025DB44_de(Track *a);
 
 /** Thin wrapper forwarding an offset argument to func_8025DB44_de. */
 void func_80258ED8_de(int arg0) {
@@ -429,13 +430,13 @@ extern int func_8025CED0_de(void *arg0, int arg1, float arg2, int arg3);
 
 
 
-int func_80258F10_de(void *arg0, int arg1) {
+int func_80258F10_de(ContextRecAt2BC0 *arg0, int arg1) {
     float var_f0 = (1.0f);
-    float temp_f1 = ((ContextRecAt2BC0 *)(arg0))->blue;
+    float temp_f1 = arg0->blue;
     if (!(var_f0 < temp_f1)) {
         var_f0 = temp_f1;
     }
-    return func_8025CED0_de(&((ContextRecAt2BC0 *)(arg0))->dialog[0], arg1, var_f0, 0x40);
+    return func_8025CED0_de(&arg0->dialog[0], arg1, var_f0, 0x40);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025D1BC_de. */

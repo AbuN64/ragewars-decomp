@@ -95,7 +95,7 @@ struct CallbackState60 {
     void (*callback)(void *, void *);
 };
 
-extern void func_8022FF04_de(void *arg0, void *arg1);
+extern void func_8022FF04_de(void *arg0, WeaponFireState *arg1);
 
 extern void func_8022F5E0_de(char *arg0);
 
@@ -287,7 +287,7 @@ struct func_80230BB8_S2 {
     func_80230BB8_S2_U1D8 unk1D8;
 };
 
-extern void func_80230DA4_de(void *actor, void *weapon);
+extern void func_80230DA4_de(Shared_Actor *actor, WeaponFireState *weapon);
 
 extern float D_800C2FB0_de;
 

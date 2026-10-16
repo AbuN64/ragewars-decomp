@@ -25,7 +25,8 @@ extern void *func_8028CF6C_de(void *arg0, s32 arg1);
 
 extern int func_8028B25C_de(void *arg0, int arg1);
 
-extern s32 func_8022A8F0_de(void *arg0);
+struct Context;
+extern s32 func_8022A8F0_de(struct Context *arg0);
 
 extern int func_8022A414_de(void *arg0);
 

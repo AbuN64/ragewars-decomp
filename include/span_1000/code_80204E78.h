@@ -94,7 +94,8 @@ struct Health {
     s32 time;
 };
 
-extern void func_802056D0_de(void *arg0);
+struct Trigger;
+extern void func_802056D0_de(struct Trigger *arg0);
 
 extern void func_80204F78_de(void *unused, char *object, float value);
 
@@ -139,7 +140,9 @@ typedef struct Damageable Damageable;
 struct EventRecAt30;
 typedef struct EventRecAt30 EventRecAt30;
 
-extern void func_80205494_de(void *arg0, void *arg1);
+struct BreakableHitContext;
+struct ObjectStateCC;
+extern void func_80205494_de(struct BreakableHitContext *arg0, struct ObjectStateCC *arg1);
 
 struct func_80205494_S1;
 struct func_80205494_S1 {
@@ -265,7 +268,7 @@ struct Access_s32_40 {
     int field;
 };
 
-extern int func_8020570C_de(void *arg0);
+extern int func_8020570C_de(struct Hit *arg0);
 
 struct Hit;
 typedef struct Hit Hit;
@@ -294,7 +297,8 @@ struct func_8020520C_S1 {
 struct Actor_func_80205F18_de;
 typedef struct Actor_func_80205F18_de Actor_func_80205F18_de;
 
-extern void func_8020520C_de(void *source, void *dest);
+struct LevelActor;
+extern void func_8020520C_de(struct LevelActor *source, void *dest);
 
 extern int func_80205314_de(void *arg0);
 
@@ -356,13 +360,15 @@ typedef struct {
     char pad1C[0xE4];
     s32 flags;
 } Obj5324;
-extern void func_80285DB0_de(void *, void *, s32);
+struct Shared_World;
+extern void func_80285DB0_de(struct Shared_World *, void *, s32);
 extern void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2);
 extern void func_80216288_de(void *, s32, Triple, s32);
 extern s32 func_8025DE54_de(s16, Vec3, s32, s32);
 struct Player;
 extern void func_802170A0_de(struct Player *, s32 *, s32, s32, s32);
-extern void func_802A5D38_de(void *, s32);
+struct SceneRecAt95A8;
+extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
 
 typedef struct {
     s16 hi;

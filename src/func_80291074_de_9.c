@@ -36,7 +36,7 @@ extern int D_800C5414_de;
 
 extern int D_8011FAC0;
 
-void func_80293394_de(void *arg0) {
+void func_80293394_de(struct GameSession *arg0) {
     s8 color[4];
     f32 value;
     s32 alpha;
@@ -44,7 +44,7 @@ void func_80293394_de(void *arg0) {
     color[0] = 0;
     color[1] = 0;
     color[2] = 0;
-    value = ((struct GameSession *)arg0)->timer;
+    value = arg0->timer;
     alpha = 0xFF;
     if (!(value < 0)) {
         alpha = 0;

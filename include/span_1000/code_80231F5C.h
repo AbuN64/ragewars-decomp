@@ -2,6 +2,7 @@
 #define UNBAKE_SPAN_1000_CODE_80231F5C_H
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
+#include "span_1000/code_8022F3E8.h"
 struct PlayerRecAt1450V1;
 typedef struct PlayerRecAt1450V1 PlayerRecAt1450V1;
 
@@ -213,7 +214,9 @@ struct func_80232BC0_S1 {
 
 extern s32 func_802327D4_de(s32 arg0);
 
-extern void func_80232C88_de(void *arg0, void *arg1);
+struct Shared_ActorView;
+struct WeaponFireState;
+extern void func_80232C88_de(struct Shared_ActorView *arg0, struct WeaponFireState *arg1);
 
 extern void func_80232F8C_de(void *obj, Event *event);
 
@@ -227,7 +230,7 @@ typedef struct func_80232B54_S3 func_80232B54_S3;
 
 extern void func_80232E38_de(void *arg0);
 
-extern void func_802330AC_de(void *arg0, void *arg1);
+extern void func_802330AC_de(struct Shared_ActorView *arg0, struct WeaponFireState *arg1);
 
 extern float D_800C8100;
 
@@ -266,7 +269,9 @@ struct func_80232CDC_S2 {
     s8 unkCB;
 };
 
-extern void func_8023293C_de(void *arg0, void *arg1, void *arg2);
+struct Dest;
+struct Lookup;
+extern void func_8023293C_de(void *arg0, struct Dest *arg1, struct Lookup *arg2);
 
 extern float D_800C2FC8_de;
 
@@ -275,10 +280,9 @@ extern void func_8022FDAC_de(void *arg0, void *arg1);
 extern void func_8022B190_de(s32);
 
 extern void func_802739C4_de(void *, float);
-extern void func_8022AEA0_de(void *arg0, s32 arg1);
+extern void func_8022AEA0_de(struct Shared_ActorView *arg0, s32 arg1);
 extern void func_802739C4_de(void *, f32);
 
-extern void func_8022B9C4_de(void *arg0);
 
 extern void func_8022B1A8(void *, s32);
 

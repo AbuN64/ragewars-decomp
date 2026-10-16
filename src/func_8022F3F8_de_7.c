@@ -4,12 +4,12 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/unused.h"
 #include "menu_text.h"
+#include "shared/func_8021E2A0_de_closed.h"
 #include "shared/gameplay_round_rules.h"
 #include "shared/gameplay_transition.h"
 #include "shared/menu_match_globals.h"
 #include "span_1000/code_8022C894.h"
 #include "types.h"
-#include "shared/func_8021E2A0_de_closed.h"
 
 /* Runs a charge weapon's fire for its holder at 0x1D8: picks the holder's next weapon at 0x770 through
    func_8022F96C_de when the current one cannot be used; while the fire input 0x4000 is held on a weapon
@@ -112,59 +112,59 @@ static inline s32 released(void *actor, char *player) {
     return func_80222AA4_de(player, ((Actor_func_8022D290_de *)player)->unk_0x062E) == 0;
 }
 
-void func_802307FC_de(void *actor, void *fire) {
+void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
     extern void func_80214178_de(void *, void *, s32);
     char *player;
     s32 action;
     char *model;
-    player = ((Shared_Actor *)(actor))->entity;
+    player = actor->entity;
     action = D_800CE8DC[((SharedPlayer_func_8022A398_de *)(player))->views5E8.view650_15.unk650].action;
     if (func_80222AA4_de(player, ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
     }
-    if ((((SharedPlayer_func_8022A398_de *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && ((WeaponFireState *)(fire))->mode == 1) {
+    if ((((SharedPlayer_func_8022A398_de *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
         if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.chargeView.charge >= 50) {
             func_80214178_de(actor, fire, 5);
-            ((WeaponFireState *)(fire))->mode = 2;
+            fire->mode = 2;
         } else {
             func_8025DF34_de(0xD4D);
             if (((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC != 0) {
                 func_80239908_de((D_80145040 + 0x48), ((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               func_8022A5A0_de(D_80145040, player), 1.0f);
             }
-            ((WeaponFireState *)(fire))->mode = 1;
+            fire->mode = 1;
         }
         return;
     }
     if (func_802301F4_de(actor, fire) == 0) {
-        if (!(((Shared_Actor *)(actor))->weaponFlags & 0x400)) {
+        if (!(actor->weaponFlags & 0x400)) {
             func_80214178_de(actor, fire, action);
         }
     } else {
-        ((WeaponFireState *)(fire))->spin += ((WeaponFireState *)(fire))->spin * D_800D2988 * 2.0f;
+        fire->spin += fire->spin * D_800D2988 * 2.0f;
         model = ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view698_37.emitter;
-        if (!(((WeaponFireState *)(fire))->spin < 0.0f ? 1.0f < -((WeaponFireState *)(fire))->spin * 1.7904929f
-                                                     : 1.0f < ((WeaponFireState *)(fire))->spin * 1.7904929f)) {
-            if (((WeaponFireState *)(fire))->spin < 0.0f) {
-                ((WeaponAnimationState *)(model))->speed = -((WeaponFireState *)(fire))->spin * 1.7904929f;
+        if (!(fire->spin < 0.0f ? 1.0f < -fire->spin * 1.7904929f
+                                                     : 1.0f < fire->spin * 1.7904929f)) {
+            if (fire->spin < 0.0f) {
+                ((WeaponAnimationState *)(model))->speed = -fire->spin * 1.7904929f;
             } else {
-                ((WeaponAnimationState *)(model))->speed = ((WeaponFireState *)(fire))->spin * 1.7904929f;
+                ((WeaponAnimationState *)(model))->speed = fire->spin * 1.7904929f;
             }
         } else {
             ((WeaponAnimationState *)(model))->speed = 1.0f;
         }
-        ((WeaponFireState *)(fire))->spinStep = ((WeaponFireState *)(fire))->spin * D_800D2988 * 2.0f;
-        ((WeaponFireState *)(fire))->mode = 1;
+        fire->spinStep = fire->spin * D_800D2988 * 2.0f;
+        fire->mode = 1;
     }
 }
 
-void func_80230B04_de(void *arg0, void *arg1) {
+void func_80230B04_de(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
     extern s32 func_80214178_de(void *, void *, s32);
     s16 temp_a1;
     s32 temp_v1;
     void *temp_a0;
 
-    temp_a0 = ((struct MeasuredRecAt1D8V1 *)(arg0))->value;
+    temp_a0 = arg0->value;
     if (!(((struct MeasuredRecAt6AC *)(temp_a0))->value & 0x2000)) {
         temp_a1 = ((struct MeasuredRecAt62EV2 *)(temp_a0))->value;
         if (temp_a1 != 0) {
@@ -200,13 +200,13 @@ done:
     }
 }
 
-void func_80230BC8_de(void *actor, void *attack) {
+void func_80230BC8_de(LevelActor *actor, Dest *attack) {
     extern void func_80214178_de(void *, void *, s32);
     char *player;
     Vec3 *position;
     char *target;
 
-    player = ((LevelActor *)actor)->controller;
+    player = actor->controller;
     target = ((Actor_func_8022D290_de *)player)->unk_0x05DC;
     if (target != 0) {
         position = &((SharedRecAt564V1 *)target)->position;
@@ -218,17 +218,17 @@ void func_80230BC8_de(void *actor, void *attack) {
         func_8022AF40_de(player);
         func_8022B00C_de(player);
         func_8025DE54_de(0x794, *position, position, -1);
-        func_80274870_de(&((Dest *)attack)->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
+        func_80274870_de(&attack->charge, (f32)D_800CA2D8_de * D_800C2F1C_de, 0.4f);
         return;
     }
-    func_80274870_de(&((Dest *)attack)->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
-    ((Dest *)attack)->cueTimer -= D_800D2988;
-    if (((Dest *)attack)->cueTimer <= 0.0f) {
-        ((Dest *)attack)->cueTimer += D_800C2F24_de;
+    func_80274870_de(&attack->charge, (f32)D_800CA2D8_de * D_800C2F20_de, 0.4f);
+    attack->cueTimer -= D_800D2988;
+    if (attack->cueTimer <= 0.0f) {
+        attack->cueTimer += D_800C2F24_de;
         if (((Actor_func_8022D290_de *)player)->unk_0x1450 == 0 && D_80140FF8 == 1) {
-            func_8021A9A4_de(((LevelActor *)actor)->controller, 0x3F9);
+            func_8021A9A4_de(actor->controller, 0x3F9);
         } else {
-            func_8021A9A4_de(((LevelActor *)actor)->controller, 0x4CB);
+            func_8021A9A4_de(actor->controller, 0x4CB);
         }
     }
 }

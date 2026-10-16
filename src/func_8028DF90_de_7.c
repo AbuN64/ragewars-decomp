@@ -192,20 +192,20 @@ void osScAddClient(void *arg0, void *arg1, s32 arg2) {
     func_802BD170_de(temp_v0);
 }
 
-void func_8028F8BC_de(void *arg0, void *arg1) {
+void func_8028F8BC_de(OSSched *arg0, void *arg1) {
     s32 saved;
     OSScClientWork *cur;
     OSScClientWork *prev;
 
     prev = 0;
-    cur = ((OSSched *)arg0)->clientList;
+    cur = arg0->clientList;
     saved = func_802BD170_de(1);
     while (cur != 0) {
         if (cur == arg1) {
             if (prev != 0) {
                 prev->next = cur->next;
             } else {
-                ((OSSched *)arg0)->clientList = cur->next;
+                arg0->clientList = cur->next;
             }
             break;
         }
@@ -221,32 +221,32 @@ void *func_8028F94C_de(void *object) {
     return &record->unk78;
 }
 
-void __scAppendList(void *arg0, void *arg1) {
+void __scAppendList(OSSched *arg0, void *arg1) {
     void *temp_v0;
 
     if ((((struct OSScTask_s *)arg1)->list.type) == 2) {
-        temp_v0 = ((OSSched *)arg0)->audioListTail;
+        temp_v0 = arg0->audioListTail;
         if (temp_v0 != 0) {
             ((struct OSScTask_s *)temp_v0)->next = arg1;
         } else {
-            ((OSSched *)arg0)->audioListHead = arg1;
+            arg0->audioListHead = arg1;
         }
-        ((OSSched *)arg0)->audioListTail = arg1;
-        ((OSSched *)arg0)->doAudio = 1;
+        arg0->audioListTail = arg1;
+        arg0->doAudio = 1;
     } else {
-        temp_v0 = ((OSSched *)arg0)->gfxListTail;
+        temp_v0 = arg0->gfxListTail;
         if (temp_v0 != 0) {
             ((struct OSScTask_s *)temp_v0)->next = arg1;
         } else {
-            ((OSSched *)arg0)->gfxListHead = arg1;
+            arg0->gfxListHead = arg1;
         }
-        ((OSSched *)arg0)->gfxListTail = arg1;
+        arg0->gfxListTail = arg1;
     }
     ((struct OSScTask_s *)arg1)->next = 0;
     ((struct OSScTask_s *)arg1)->state = (((struct OSScTask_s *)arg1)->flags) & 3;
 }
 
-void *func_8028F9AC_de(void *arg0) {
+void *func_8028F9AC_de(struct OSScTask_s *arg0) {
     s32 f1a;
     s32 f1b;
     void *v2;
@@ -254,12 +254,12 @@ void *func_8028F9AC_de(void *arg0) {
     if (arg0 == 0) {
         return 0;
     }
-    f1a = (s32)((struct OSScTask_s *)arg0)->framebuffer;
+    f1a = (s32)arg0->framebuffer;
     if (f1a == D_80142C38) {
         return 0;
     }
     v2 = func_802BA310_de();
-    f1b = (s32)((struct OSScTask_s *)arg0)->framebuffer;
+    f1b = (s32)arg0->framebuffer;
     if (f1b == (s32)v2) {
         return 0;
     }

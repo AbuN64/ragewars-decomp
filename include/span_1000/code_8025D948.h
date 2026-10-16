@@ -76,7 +76,8 @@ typedef struct StateRecAt34 StateRecAt34;
 
 extern float D_800C4038_de;
 
-extern void func_8025DD60_de(void *arg0);
+struct Track;
+extern void func_8025DD60_de(struct Track *arg0);
 
 struct IntegerState2C_2;
 typedef struct IntegerState2C_2 IntegerState2C_2;
@@ -173,16 +174,18 @@ extern void func_8025E150_de(void);
 
 extern void func_8025E1EC_de(s32 arg0);
 
-extern s32 func_802BEAA4_de(void *, s32, void *);
+struct ALWaveTable_s;
+extern s32 func_802BEAA4_de(void *, s32, struct ALWaveTable_s *);
 extern s32 func_802B51B8_de(void *, s32, void *);
 
 extern void func_80257360_de(void *arg0);
 extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
-extern s32 func_80258D10_de(void *arg0);
-extern void func_80258D08_de(void *arg0, s32 arg1);
+struct ContextRecAt2BC0;
+extern s32 func_80258D10_de(struct ContextRecAt2BC0 *arg0);
+extern void func_80258D08_de(struct ContextRecAt2BC0 *arg0, s32 arg1);
 extern s32 func_8025826C_de(void *, s32, Vec3, s32);
-extern int func_80258D10_de(void *arg0);
-extern void func_80258D08_de(void *arg0, int arg1);
+extern int func_80258D10_de(struct ContextRecAt2BC0 *arg0);
+extern void func_80258D08_de(struct ContextRecAt2BC0 *arg0, int arg1);
 extern int func_8025826C_de(void *arg0, int arg1, Vec3 arg2, int arg3);
 
 extern s32 func_80258D50_de(char *obj, s32 owner);

@@ -111,23 +111,23 @@ void func_80255ED8_de(void *arg0, s32 arg1) {
 }
 
 /** Advance the cursor by its stride and decrement its remaining count. */
-void func_80255F70_de(void *arg0) {
-    char *cursor = ((IntrusiveList *)arg0)->head;
-    int stride = ((IntrusiveList *)arg0)->nextOffset;
+void func_80255F70_de(IntrusiveList *arg0) {
+    char *cursor = arg0->head;
+    int stride = arg0->nextOffset;
     int value = *(int *)(cursor + stride);
-    int count = ((IntrusiveList *)arg0)->count - 1;
-    ((IntrusiveList *)arg0)->count = count;
-    ((IntrusiveList *)arg0)->head = value;
+    int count = arg0->count - 1;
+    arg0->count = count;
+    arg0->head = value;
 }
 
 /** Advance the cursor by its stride and decrement its remaining count. */
-void func_80255F94_de(void *arg0) {
-    char *cursor = ((IntrusiveList *)arg0)->tail;
-    int stride = ((IntrusiveList *)arg0)->prevOffset;
+void func_80255F94_de(IntrusiveList *arg0) {
+    char *cursor = arg0->tail;
+    int stride = arg0->prevOffset;
     int value = *(int *)(cursor + stride);
-    int count = ((IntrusiveList *)arg0)->count - 1;
-    ((IntrusiveList *)arg0)->count = count;
-    ((IntrusiveList *)arg0)->tail = value;
+    int count = arg0->count - 1;
+    arg0->count = count;
+    arg0->tail = value;
 }
 
 void func_80255FB8_de(void *arg0, s32 arg1) {
@@ -230,10 +230,10 @@ void *func_80256190_de(void *arg0) {
     return node;
 }
 
-void func_80256214_de(void *arg0) {
-    s32 node = ((IntrusiveList *)arg0)->head;
+void func_80256214_de(IntrusiveList *arg0) {
+    s32 node = arg0->head;
     if (node != 0) {
-        s32 offset = ((IntrusiveList *)arg0)->nextOffset;
+        s32 offset = arg0->nextOffset;
         node = *(s32 *)(node + offset);
         while (node != 0) {
             node = *(s32 *)(node + offset);
@@ -241,14 +241,14 @@ void func_80256214_de(void *arg0) {
     }
 }
 
-int func_8025623C_de(void *arg0, int arg1) {
-    int node = ((IntrusiveList *)arg0)->head;
+int func_8025623C_de(IntrusiveList *arg0, int arg1) {
+    int node = arg0->head;
     if (node != 0) {
         do {
             if (node == arg1) {
                 return 1;
             }
-            node = *(int *)(node + ((IntrusiveList *)arg0)->nextOffset);
+            node = *(int *)(node + arg0->nextOffset);
         } while (node != 0);
     }
     return 0;

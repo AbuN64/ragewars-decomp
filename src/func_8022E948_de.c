@@ -105,16 +105,16 @@ void func_8022E9A8_de(Player *arg0) {
     }
 }
 
-void func_8022EA3C_de(void *arg0, void *arg1) {
+void func_8022EA3C_de(void *arg0, Vec3 *arg1) {
     f32 first;
     f32 amount;
 
     if (arg0 != 0 && arg1 != 0 &&
         (((Shared_Func80243A80Collision *)arg0)->flags & 0x40)) {
         first = func_8027525C_de(arg0,
-            ((Vec3 *)arg1)->x, ((Vec3 *)arg1)->z);
+            arg1->x, arg1->z);
         amount = (f32)(s32)(first - func_80275DD4_de(arg0,
-            ((Vec3 *)arg1)->x, ((Vec3 *)arg1)->z));
+            arg1->x, arg1->z));
         if (amount < D_800C2E24_de) {
             func_8025E440_de(D_800C2E2C_de - (amount * D_800C2E28_de));
             return;
@@ -210,8 +210,8 @@ int func_8022EBC4_de(void) {
     return 0;
 }
 
-s32 func_8022EBD4_de(void *arg0, void *arg1) {
-    if (((LevelActor *)arg1)->position1.y <= 0.0f && func_8024E62C_de(arg1) != 0) {
+s32 func_8022EBD4_de(void *arg0, LevelActor *arg1) {
+    if (arg1->position1.y <= 0.0f && func_8024E62C_de(arg1) != 0) {
         func_802227F4_de(arg0, arg1, 2);
         return 1;
     }
@@ -226,28 +226,28 @@ s32 func_8022EBD4_de(void *arg0, void *arg1) {
 
 
 
-void func_8022EC3C_de(void *object) {
+void func_8022EC3C_de(ActorRecAt16E0 *object) {
     int suppress = 0;
     float value;
 
-    if (((ActorRecAt16E0 *)object)->unk_0x086C == 0x1144) {
-        suppress = ((ActorRecAt16E0 *)object)->unk_0x010E == 0;
+    if (object->unk_0x086C == 0x1144) {
+        suppress = object->unk_0x010E == 0;
     }
-    if (((ActorRecAt16E0 *)object)->ownerId == D_800CE47C) {
-        ((ActorRecAt16E0 *)object)->unk_0x086C = 0x8A2;
+    if (object->ownerId == D_800CE47C) {
+        object->unk_0x086C = 0x8A2;
         return;
     }
     if (!suppress) {
-        value = ((ActorRecAt16E0 *)object)->unk_0x06C0;
+        value = object->unk_0x06C0;
         if (D_800C2E88_de <= value) {
-            ((ActorRecAt16E0 *)object)->unk_0x086C = 0x8A2;
+            object->unk_0x086C = 0x8A2;
             return;
         }
         if (value <= D_800C2E8C_de) {
-            ((ActorRecAt16E0 *)object)->unk_0x086C = 0x8A7;
+            object->unk_0x086C = 0x8A7;
             return;
         }
-        ((ActorRecAt16E0 *)object)->unk_0x086C = 0x14;
+        object->unk_0x086C = 0x14;
     }
 }
 
@@ -289,17 +289,17 @@ void func_8022ED48_de(ActorRecAt16E0 *arg0)
   arg0->unk_0x086C = 1;
 }
 
-void func_8022EDA4_de(void *arg0) {
+void func_8022EDA4_de(ResourceLoadState *arg0) {
     s32 temp_a1;
 
     func_80264854_de(0);
     func_80253908_de(0);
-    temp_a1 = ((ResourceLoadState *)arg0)->handle;
+    temp_a1 = arg0->handle;
     if (temp_a1 != 0) {
         func_80253838_de(0, temp_a1);
-        ((ResourceLoadState *)arg0)->handle = 0;
-        ((ResourceLoadState *)arg0)->state4 = 0;
-        ((ResourceLoadState *)arg0)->state8 = 0;
+        arg0->handle = 0;
+        arg0->state4 = 0;
+        arg0->state8 = 0;
     }
 }
 

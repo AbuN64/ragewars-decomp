@@ -22,7 +22,7 @@ extern void func_8026DA4C_de();
 
 
 
-void func_8023293C_de(void *arg0, void *arg1, void *arg2) {
+void func_8023293C_de(void *arg0, Dest *arg1, Lookup *arg2) {
     void *actor;
     void *resource;
     s32 result;
@@ -42,7 +42,7 @@ void func_8023293C_de(void *arg0, void *arg1, void *arg2) {
     }
     state = ((Actor_func_8022D290_de *)actor)->unk_0x062E;
     one = 1;
-    if ((state == one) && (((Dest *)arg1)->field144 == 0)) {
+    if ((state == one) && (arg1->field144 == 0)) {
         return;
     }
     if ((state >= 0x12) && (func_8022AB20_de(actor, state) <= 0)) {
@@ -52,7 +52,7 @@ void func_8023293C_de(void *arg0, void *arg1, void *arg2) {
     if ((state == 0xE) || (state == one) || (state == 0)) {
         result = ((Actor_func_8022D290_de *)actor)->unk_0x11F8;
     }
-    func_8026DA4C_de(((Lookup *)arg2)->value,
+    func_8026DA4C_de(arg2->value,
                   ((LevelActor *)arg0)->fieldB4, 1,
                   (char *)arg0 + (D_800D297C * 0x18 + 0x140), 0, result);
 }

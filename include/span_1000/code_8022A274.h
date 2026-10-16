@@ -211,7 +211,8 @@ struct func_8022A8B8_S2 {
 
 extern int func_8022AE28_de(void *arg0, void *arg1);
 
-extern void *func_8022A634_de(void *arg0, u32 arg1);
+struct Context;
+extern void *func_8022A634_de(struct Context *arg0, u32 arg1);
 
 extern void func_8022A95C_de(void *arg0);
 
@@ -261,7 +262,7 @@ struct func_8022A5B0_S2 {
     char * unk16E0;
 };
 
-extern void func_8022A940_de(void *arg0);
+extern void func_8022A940_de(Shared_Effect *arg0);
 
 struct ObjectLinks16E4_3;
 typedef struct ObjectLinks16E4_3 ObjectLinks16E4_3;

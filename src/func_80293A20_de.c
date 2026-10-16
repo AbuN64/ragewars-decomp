@@ -58,12 +58,12 @@ extern void func_802A2224_de(void);
 #endif
 extern void func_80298368_de(s32 arg0);
 extern void func_8040C428_de(s32 arg0);
-extern void func_80293790_de(void *arg0, s32 arg1);
+extern void func_80293790_de(GameSession *arg0, s32 arg1);
 extern void func_80286080_de(void *arg0);
 extern void func_802394B4_de(void *arg0);
 extern void func_802AA7A4_de(void *arg0);
 extern void func_80294F1C_us_rev1(void);
-extern void func_80293394_de(void *arg0);
+extern void func_80293394_de(struct GameSession *arg0);
 
 
 

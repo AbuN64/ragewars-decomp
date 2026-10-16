@@ -92,7 +92,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
 
 #include "shared/menu_match_globals.h"
 
-extern void *func_802395A4_de(s32 *, Vec3 *);
+extern void *func_802395A4_de(MenuMatchGlobals *, Vec3 *);
 extern s32 func_8025BA4C_de(void *, s32);
 extern f32 func_8025C10C_de(Vec3 *, void *);
 extern s32 func_8025BDAC_de(void *, s32, s32);

@@ -97,14 +97,14 @@ fire:
     return 1;
 }
 
-s32 func_8022C7F8_de(void *arg0, void *arg1) {
+s32 func_8022C7F8_de(void *arg0, LevelActor *arg1) {
     f32 field6E4;
 
     if (((Actor_func_8022D290_de *)arg0)->unk_0x07E8 == 0) {
         field6E4 = ((Actor_func_8022D290_de *)arg0)->unk_0x06E4;
         if (!(D_800C2D5C_de < field6E4)) {
-            if (!(((LevelActor *)arg1)->motionState & 0xC0000)) {
-                if (((MovementDescriptor *)((LevelActor *)arg1)->definition)->body.header.flags & 2) {
+            if (!(arg1->motionState & 0xC0000)) {
+                if (((MovementDescriptor *)arg1->definition)->body.header.flags & 2) {
                     if ((((Actor_func_8022D290_de *)arg0)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)arg0)->unk_0x11D8 <= 0.0f)) {
                         func_802227F4_de(arg0, arg1, 5);
                         return 1;
@@ -121,8 +121,8 @@ int func_8022C88C_de(void) {
     return 0;
 }
 
-void func_8022C894_de(void *arg0, void *arg1) {
-    ((LevelActor *)arg1)->position1.x = 0;
-    ((LevelActor *)arg1)->position1.y = 0;
-    ((LevelActor *)arg1)->position1.z = 0;
+void func_8022C894_de(void *arg0, LevelActor *arg1) {
+    arg1->position1.x = 0;
+    arg1->position1.y = 0;
+    arg1->position1.z = 0;
 }

@@ -53,21 +53,21 @@ static inline s32 can_fire(char *player) {
     }
     return ammo;
 }
-void func_80230DA4_de(void *actor, void *weapon) {
+void func_80230DA4_de(Shared_Actor *actor, WeaponFireState *weapon) {
     char *player;
     char *model;
-    player = ((Shared_Actor *)(actor))->entity;
-    if (((WeaponFireState *)(weapon))->variant != 4) {
-        ((WeaponFireState *)(weapon))->spin = func_802747A0_de(((WeaponFireState *)(weapon))->spin, 0.013613569f);
+    player = actor->entity;
+    if (weapon->variant != 4) {
+        weapon->spin = func_802747A0_de(weapon->spin, 0.013613569f);
     }
-    ((WeaponFireState *)(weapon))->spinStep += ((WeaponFireState *)(weapon))->spin * D_800D2988 * 2.0f;
+    weapon->spinStep += weapon->spin * D_800D2988 * 2.0f;
     model = ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view698_37.emitter;
-    if (!(((WeaponFireState *)(weapon))->spin < 0.0f ? 1.0f < -((WeaponFireState *)(weapon))->spin * 1.7904929f
-                                                   : 1.0f < ((WeaponFireState *)(weapon))->spin * 1.7904929f)) {
-        if (((WeaponFireState *)(weapon))->spin < 0.0f) {
-            ((WeaponAnimationState *)(model))->speed = -((WeaponFireState *)(weapon))->spin * 1.7904929f;
+    if (!(weapon->spin < 0.0f ? 1.0f < -weapon->spin * 1.7904929f
+                                                   : 1.0f < weapon->spin * 1.7904929f)) {
+        if (weapon->spin < 0.0f) {
+            ((WeaponAnimationState *)(model))->speed = -weapon->spin * 1.7904929f;
         } else {
-            ((WeaponAnimationState *)(model))->speed = ((WeaponFireState *)(weapon))->spin * 1.7904929f;
+            ((WeaponAnimationState *)(model))->speed = weapon->spin * 1.7904929f;
         }
     } else {
         ((WeaponAnimationState *)(model))->speed = 1.0f;

@@ -52,7 +52,8 @@ extern float D_800C3088_de;
 
 extern float D_800C3064_de;
 
-extern void func_802335EC_de(void *arg0, void *arg1);
+struct MeasuredRecAt1D8V3;
+extern void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1);
 
 extern float D_800C3058_de;
 

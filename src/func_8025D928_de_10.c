@@ -2,17 +2,18 @@
 #include "common/types_1dc8418c21db.h"
 #include "types.h"
 
-s32 func_80258F10_de(s32 *, s32);
+struct ContextRecAt2BC0;
+s32 func_80258F10_de(struct ContextRecAt2BC0 *, s32);
 
 extern s32 D_8010C080;
 
 s32 func_80257A14_de(s32 *, s32);
 
-s32 func_80258800_de(s32 *, s32);
+s32 func_80258800_de(struct ContextRecAt2BC0 *, s32);
 
-s32 func_802588D4_de(s32 *, s32);
+s32 func_802588D4_de(struct ContextRecAt2BC0 *, s32);
 
-s32 func_802589A8_de(s32 *, s32);
+s32 func_802589A8_de(struct ContextRecAt2BC0 *, s32);
 
 s32 func_80258C0C_de(s32 *, s32);
 

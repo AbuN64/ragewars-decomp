@@ -619,7 +619,7 @@ typedef struct SteeringTarget {u8 pad0[0x248];Vec3 position;} SteeringTarget;
 typedef struct SteeringSettings {u8 pad0[0x10];u16 acceleration,speed;} SteeringSettings;
 typedef struct SteeringDescriptor {u8 pad0[0x30];SteeringSettings *motion;} SteeringDescriptor;
 typedef struct SteeringParticle {u8 pad0[8];Vec3 position;u8 pad14[8];Vec3 velocity;u8 pad28[0x34];u32 flags;u8 pad60[0xB8];SteeringDescriptor *descriptor;u8 pad11C[0x18];SteeringTarget *target;u8 pad138[8];f32 time;u8 pad144[0x30];Vec3 direction;u8 pad180[0x5C];SteeringSound *sound;} SteeringParticle;
-extern void *func_8025C95C_de(void *,s32,void *,void *,s32);
+extern void *func_8025C95C_de(void *,s32,Vec3 *,void *,s32);
 
 typedef struct { f32 x, y, z; } AccelSteeringVec;
 typedef struct { char pad[16]; u16 accel, limit; } AccelSteeringParams;

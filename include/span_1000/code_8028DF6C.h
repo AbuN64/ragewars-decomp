@@ -48,7 +48,8 @@ struct ObjRecAtE4V2 {
     u16 unkE4;
 };
 
-extern void *func_8028E770_de(void *object, int index);
+struct Shared_World;
+extern void *func_8028E770_de(struct Shared_World *object, int index);
 
 struct func_8028F934_S2;
 typedef struct func_8028F934_S2 func_8028F934_S2;
@@ -98,7 +99,7 @@ struct Panel {
     s32 field300;
 };
 
-extern s32 func_8028E044_de(void *arg0, void *arg1);
+extern s32 func_8028E044_de(WorldSortEntry *arg0, WorldSortEntry *arg1);
 
 extern int D_800CD710;
 
@@ -212,7 +213,8 @@ struct OSScTask_s {
     struct { s32 type; } list;
 };
 
-extern void func_8028F8BC_de(void *arg0, void *arg1);
+struct OSSched;
+extern void func_8028F8BC_de(struct OSSched *arg0, void *arg1);
 
 struct func_8028FBF0_S1;
 struct func_8028FBF0_S1 {
@@ -274,7 +276,7 @@ struct OSSched {
     s32 doAudio;
 };
 
-extern s32 func_8028E020_de(void *arg0, void *arg1);
+extern s32 func_8028E020_de(WorldSortEntry *arg0, WorldSortEntry *arg1);
 
 struct ImageSet;
 struct ImageSet {
@@ -350,12 +352,12 @@ struct func_8028E6D8_S1 {
     s32 unk1504;
 };
 
-extern void func_8028E068_de(void *arg0);
+extern void func_8028E068_de(struct Shared_World *arg0);
 
 struct func_8028F934_S1;
 typedef struct func_8028F934_S1 func_8028F934_S1;
 
-extern s32 func_8028DF90_de(void *arg0, s32 arg1);
+extern s32 func_8028DF90_de(struct Shared_World *arg0, s32 arg1);
 
 struct func_8028F89C_S1;
 struct func_8028F89C_S1 {
@@ -363,7 +365,7 @@ struct func_8028F89C_S1 {
     char * unk2E0;
 };
 
-extern void *func_8028F9AC_de(void *arg0);
+extern void *func_8028F9AC_de(struct OSScTask_s *arg0);
 
 struct Panel;
 typedef struct Panel Panel;

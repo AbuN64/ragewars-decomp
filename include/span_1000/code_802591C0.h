@@ -203,7 +203,7 @@ struct Node_func_802598B4_de {
     s32 value;
 };
 
-extern void func_80259AF0_de(void **arg0, void *arg1);
+extern void func_80259AF0_de(void **arg0, Field_void_4 *arg1);
 
 struct Slot_func_80259200_de;
 typedef struct Slot_func_80259200_de Slot_func_80259200_de;
@@ -368,7 +368,7 @@ struct func_80259280_S1 {
     s16 unk2B8C;
 };
 
-extern void func_802598B4_de(void *arg0, s32 arg1);
+extern void func_802598B4_de(struct ChannelSet *arg0, s32 arg1);
 
 struct NodeRecAtC8;
 typedef struct NodeRecAtC8 NodeRecAtC8;

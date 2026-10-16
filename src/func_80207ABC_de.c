@@ -14,7 +14,7 @@ typedef struct Owner Owner;
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
 
-extern void func_80285DB0_de(void *, void *, s32);
+extern void func_80285DB0_de(Shared_World *, void *, s32);
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 

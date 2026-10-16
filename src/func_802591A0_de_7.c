@@ -97,16 +97,16 @@ void func_80259784_de(ManagerRecAtD8V2 *manager, s32 index, s32 owner, Vec3 *pos
     manager->scene->selection = -1;
 }
 
-void func_802598B4_de(void *arg0, s32 arg1) {
+void func_802598B4_de(ChannelSet *arg0, s32 arg1) {
     Node_func_802598B4_de *node;
     Node_func_802598B4_de *next;
     Node_func_802598B4_de *end;
     Node_func_802598B4_de *initial_end;
     Node_func_802598B4_de *tail_end;
 
-    node = (Node_func_802598B4_de *)((ChannelSet *)arg0)->free.prev;
-    tail_end = (Node_func_802598B4_de *)&((ChannelSet *)arg0)->active;
-    initial_end = (Node_func_802598B4_de *)&((ChannelSet *)arg0)->free;
+    node = (Node_func_802598B4_de *)arg0->free.prev;
+    tail_end = (Node_func_802598B4_de *)&arg0->active;
+    initial_end = (Node_func_802598B4_de *)&arg0->free;
     if (node != initial_end) {
         end = initial_end;
         do {
@@ -114,10 +114,10 @@ void func_802598B4_de(void *arg0, s32 arg1) {
             if (node->value == arg1) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
-                node->prev = (Node_func_802598B4_de *)((ChannelSet *)arg0)->active.next;
+                node->prev = (Node_func_802598B4_de *)arg0->active.next;
                 node->next = tail_end;
-                ((Node_func_802598B4_de *)((ChannelSet *)arg0)->active.next)->next = node;
-                ((ChannelSet *)arg0)->active.next = (ListLink *)node;
+                ((Node_func_802598B4_de *)arg0->active.next)->next = node;
+                arg0->active.next = (ListLink *)node;
             }
             node = next;
         } while (node != end);
@@ -169,7 +169,7 @@ void func_80259988_de(void *arg0, s32 arg1)
     }
 }
 
-void func_802599EC_de(void *arg0, s32 arg1) {
+void func_802599EC_de(OwnerRecAtD8 *arg0, s32 arg1) {
     ListNode *node;
     ListNode *next;
     ListNode *sentinel;
@@ -177,9 +177,9 @@ void func_802599EC_de(void *arg0, s32 arg1) {
     ListNode *append_sentinel;
     ListNode *tail;
 
-    node = (ListNode *)((OwnerRecAtD8 *)arg0)->activeNext;
-    sentinel = (ListNode *)&((OwnerRecAtD8 *)arg0)->activePrev;
-    append_sentinel = (ListNode *)&((OwnerRecAtD8 *)arg0)->otherPrev;
+    node = (ListNode *)arg0->activeNext;
+    sentinel = (ListNode *)&arg0->activePrev;
+    append_sentinel = (ListNode *)&arg0->otherPrev;
     if (node != sentinel) {
         loop_sentinel = sentinel;
         do {
@@ -187,11 +187,11 @@ void func_802599EC_de(void *arg0, s32 arg1) {
             if (node->valueBC == arg1) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
-                tail = (ListNode *)((OwnerRecAtD8 *)arg0)->otherPrev;
+                tail = (ListNode *)arg0->otherPrev;
                 node->next = append_sentinel;
                 node->prev = tail;
-                ((ListNode *)((OwnerRecAtD8 *)arg0)->otherPrev)->next = node;
-                ((OwnerRecAtD8 *)arg0)->otherPrev = (Node_func_80259918_de *)node;
+                ((ListNode *)arg0->otherPrev)->next = node;
+                arg0->otherPrev = (Node_func_80259918_de *)node;
             }
             node = next;
         } while (node != loop_sentinel);

@@ -15,14 +15,14 @@
 extern char D_002BE514; /* alRaw16Pull */
 extern char D_002BE898; /* the type 2 pull handler */
 
-s32 func_802BEAA4_de(void *filter, s32 paramID, void *param)
+s32 func_802BEAA4_de(void *filter, s32 paramID, struct ALWaveTable_s *param)
 {
     ALLoadFilter48 *a = (ALLoadFilter48 *)filter;
     ALFilter_s14 *f = (ALFilter_s14 *)filter;
 
     switch (paramID) {
         case 5: /* AL_FILTER_SET_WAVETABLE */
-            a->table = (struct ALWaveTable_s *)param;
+            a->table = param;
             a->memin = (s32)a->table->base;
             a->sample = 0;
             switch (a->table->type) {

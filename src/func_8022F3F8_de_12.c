@@ -58,11 +58,11 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_80231BB0_de(void *actor, void *arg1) {
+void func_80231BB0_de(Shared_Actor *actor, void *arg1) {
     char *player;
     s32 action;
 
-    player = ((Shared_Actor *)(actor))->entity;
+    player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (func_80222AA4_de(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
@@ -72,7 +72,7 @@ void func_80231BB0_de(void *actor, void *arg1) {
         func_80214178_de(actor, arg1, 8);
         return;
     }
-    if (func_802301F4_de(actor, arg1) == 0 && !(((Shared_Actor *)(actor))->weaponFlags & 0x400)) {
+    if (func_802301F4_de(actor, arg1) == 0 && !(actor->weaponFlags & 0x400)) {
         func_80214178_de(actor, arg1, action);
     }
 }

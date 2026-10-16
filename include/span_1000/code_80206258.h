@@ -42,9 +42,11 @@ union func_802070D0_S3_U8 {
     f32 v1;
 };
 
-extern int func_80206758_de(void *arg0, void *arg1);
+struct Dest;
+extern int func_80206758_de(void *arg0, struct Dest *arg1);
 
-extern void func_802062B0_de(void *arg0);
+struct Trigger;
+extern void func_802062B0_de(struct Trigger *arg0);
 
 struct RiderCode80206258;
 struct RiderCode80206258 {
@@ -112,7 +114,9 @@ extern float D_800C1AE0_de;
 struct func_802077F4_S3;
 typedef struct func_802077F4_S3 func_802077F4_S3;
 
-extern void func_80206604_de(void *arg0, void *arg1);
+struct ActorMotionState;
+struct LevelActor;
+extern void func_80206604_de(struct LevelActor *arg0, struct ActorMotionState *arg1);
 
 struct func_802070D0_S1;
 struct func_802070D0_S1 {
@@ -204,7 +208,7 @@ struct func_8020655C_S1 {
     void * unk2EC;
 };
 
-extern void func_80206930_de(void *arg0, int arg1, void *arg2);
+extern void func_80206930_de(struct LevelActor *arg0, int arg1, struct Trigger *arg2);
 
 struct func_802062E0_S1;
 typedef struct func_802062E0_S1 func_802062E0_S1;
@@ -257,7 +261,7 @@ typedef struct func_802070D0_S2 func_802070D0_S2;
 union WaypointFlags;
 typedef union WaypointFlags WaypointFlags;
 
-extern void func_80206898_de(void *arg0);
+extern void func_80206898_de(struct Trigger *arg0);
 
 struct Actor_func_80206DD4_de;
 struct Actor_func_80206DD4_de {
@@ -275,7 +279,7 @@ struct Actor_func_80206DD4_de {
     u32 flags;
 };
 
-extern void func_802067FC_de(void *arg0);
+extern void func_802067FC_de(struct Trigger *arg0);
 
 struct func_802070D0_S2;
 struct func_802070D0_S2 {
@@ -404,7 +408,7 @@ typedef struct func_802063EC_S1 func_802063EC_S1;
 struct func_80207910_S1;
 typedef struct func_80207910_S1 func_80207910_S1;
 
-extern void func_80206258_de(void *arg0);
+extern void func_80206258_de(struct Trigger *arg0);
 
 struct func_802070D0_S1;
 typedef struct func_802070D0_S1 func_802070D0_S1;

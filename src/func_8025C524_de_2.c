@@ -49,7 +49,7 @@ void func_8025C8C0_de(void *arg0) {
 void func_8025C8D0_de(void) {
 }
 
-void func_8025C8D8_de(void *arg0, void *arg1, s32 arg2) {
+void func_8025C8D8_de(void *arg0, SoundSourceNode *arg1, s32 arg2) {
     s32 i;
 
     func_80255CA0_de(arg0, 0, 4);
@@ -59,13 +59,13 @@ void func_8025C8D8_de(void *arg0, void *arg1, s32 arg2) {
         do {
             func_80255D14_de(arg0, arg1);
             i += 1;
-            arg1 = (SoundSourceNode *)arg1 + 1;
+            arg1 = arg1 + 1;
         } while (i < arg2);
     }
     ((SoundVoicePool *)arg0)->state = 0;
 }
 
-void *func_8025C95C_de(void *arg0, s32 arg1, void *arg2, void *arg3, s32 arg4) {
+void *func_8025C95C_de(void *arg0, s32 arg1, Vec3 *arg2, void *arg3, s32 arg4) {
     extern void func_80255ED8_de(void *arg0, void *arg1);
     SoundSourceNode *node;
     s32 result;
@@ -76,12 +76,12 @@ void *func_8025C95C_de(void *arg0, s32 arg1, void *arg2, void *arg3, s32 arg4) {
         func_80255D14_de(&((SoundVoicePool *)arg0)->playing, node);
         node->state = -1;
         node->value = -1;
-        result = func_8025DE54_de((s16)arg1, *(Vec3 *)arg2,
+        result = func_8025DE54_de((s16)arg1, *arg2,
                                 (s32)arg3, arg4);
         node->value = result;
         D_800CBB10 = result;
         node->state = arg1;
-        node->position = *(Vec3 *)arg2;
+        node->position = *arg2;
         node->owner = arg3;
     }
     return node;
@@ -128,11 +128,11 @@ void func_8025CAB0_de(void *arg0) {
     pool->state = 1;
 }
 
-void func_8025CB0C_de(void *arg0) {
+void func_8025CB0C_de(SoundVoicePool *arg0) {
     s32 temp_v0;
     SoundSourceNode *var_s0;
 
-    var_s0 = ((SoundVoicePool *)arg0)->playing.head;
+    var_s0 = arg0->playing.head;
     if (var_s0 != 0) {
         do {
             temp_v0 = func_8025DE54_de((s16)var_s0->state,
@@ -144,7 +144,7 @@ void func_8025CB0C_de(void *arg0) {
             D_800CBB1C = temp_v0;
         } while (var_s0 != 0);
     }
-    ((SoundVoicePool *)arg0)->state = 0;
+    arg0->state = 0;
 }
 
 void func_8025CB88_de(void *arg0) {

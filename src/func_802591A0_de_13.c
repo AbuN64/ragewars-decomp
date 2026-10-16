@@ -17,7 +17,7 @@ extern void func_80272BCC_de(void *, Vec3 *, Vec3 *);
 
 
 
-s16 func_80259B10_de(Vec3 *position, void *listener) {
+s16 func_80259B10_de(Vec3 *position, GameplayCamera *listener) {
     Vec3 forward;
     Vec3 offset;
     Vec3 local;
@@ -26,11 +26,11 @@ s16 func_80259B10_de(Vec3 *position, void *listener) {
     if (listener == 0) {
         return 0x40;
     }
-    func_80271F68_de(&offset, &((GameplayCamera *)(listener))->position, position);
+    func_80271F68_de(&offset, &listener->position, position);
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
-    func_80272BCC_de(&((GameplayCamera *)(listener))->unk160, &offset, &local);
+    func_80272BCC_de(&listener->unk160, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];
@@ -50,7 +50,7 @@ s16 func_80259B10_de(Vec3 *position, void *listener) {
 }
 
 /* Updates a view's heading from its controller: clears its turn rates, takes the base angles from the controller's preset (or the heading from its default yaw), adds the stick turn derived from func_80274A90_de of the two stick axes, nudges it up for flag 0x40 and down for flag 0x80, caps it at the limit, optionally records the heading and the pitch step over the step count and the current pitch, and finally maps the heading through the 60-entry curve table D_800CB8EC with linear interpolation. The turn is truncated to 16 bits into an int, and the next table index is its own s16. */
-extern struct Bytes12 *func_80258BDC_de(s32, s32);
+extern struct Bytes12 *func_80258BDC_de(ContextRecAt2BC0 *, s32);
 extern s16 func_802AD270_de(f32);
 
 extern s32 func_8025E584_de(Controller_func_80259C5C_de *);

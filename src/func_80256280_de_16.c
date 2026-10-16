@@ -23,7 +23,7 @@ extern void func_8025CC90_de(void *arg0);
 
 extern void func_8025D450_de(void *arg0);
 extern s32 func_802934F8_de(void);
-extern void *func_802395A4_de(s32 *arg0, Vec3 *arg1);
+extern void *func_802395A4_de(MenuMatchGlobals *arg0, Vec3 *arg1);
 extern s32 func_80257DD4_de(void *, s32, Vec3, s32, s32);
 
 
@@ -109,13 +109,13 @@ extern s32 func_80259AB8_de(void *arg0, s32 arg1);
 
 
 
-s32 func_802585F4_de(void *arg0, s32 arg1) {
+s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
     {
         MenuRules *temp_s0;
         s32 temp_v1;
         u32 temp_a0;
 
-        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
+        temp_s0 = &arg0->lock;
         temp_a0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked + 1;
         temp_s0->locked = temp_v1;
@@ -126,12 +126,12 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
             __osRestoreInt(temp_a0);
         }
     }
-    if (func_8025C17C_de(&((struct ContextRecAt2BC0 *)(arg0))->menu[0], arg1) != 0) {
+    if (func_8025C17C_de(&arg0->menu[0], arg1) != 0) {
         MenuRules *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
+        temp_s0 = &arg0->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
@@ -143,12 +143,12 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         }
         return 1;
     }
-    if (func_80259AB8_de(&((struct ContextRecAt2BC0 *)(arg0))->view[0], arg1) != 0) {
+    if (func_80259AB8_de(&arg0->view[0], arg1) != 0) {
         MenuRules *temp_s0;
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
+        temp_s0 = &arg0->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;
@@ -165,7 +165,7 @@ s32 func_802585F4_de(void *arg0, s32 arg1) {
         s32 temp_v1;
         u32 temp_v0;
 
-        temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
+        temp_s0 = &arg0->lock;
         temp_v0 = func_802BCF30_de();
         temp_v1 = temp_s0->locked - 1;
         temp_s0->locked = temp_v1;

@@ -55,7 +55,7 @@ void func_8028B670_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-void func_8028B7B4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void func_8028B7B4_de(Field_void_80 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern char *func_8028FDB4_de(s32 *, s32);
     void *temp_v0;
     u8 *base1;
@@ -64,7 +64,7 @@ void func_8028B7B4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 idx;
     s32 idx2;
 
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(((Field_void_80 *)(arg0))->value, 0), arg1), 1);
+    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->value, 0), arg1), 1);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);
     base1 = (u8 *) func_8028FDB4_de(temp_v0, 1);
@@ -144,7 +144,7 @@ s32 func_8028B988_de(void *arg0, struct LevelBitRecord *arg1) {
     return (temp_a0[bitIndex >> 3] & mask) != 0;
 }
 
-void func_8028BA38_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void func_8028BA38_de(Field_void_80 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern char *func_8028FDB4_de(s32 *, s32);
     void *temp_v0;
     u8 *base1;
@@ -153,7 +153,7 @@ void func_8028BA38_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 idx;
     s32 idx2;
 
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(((Field_void_80 *)(arg0))->value, 0), arg1), 2);
+    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->value, 0), arg1), 2);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);
     base1 = (u8 *) func_8028FDB4_de(temp_v0, 1);
@@ -211,7 +211,7 @@ void func_8028BB1C_de(void *arg0, void *arg1, s32 arg2) {
     base2[idx2 >> 3] &= ~mask;
 }
 
-s32 func_8028BC0C_de(void *arg0, void *arg1) {
+s32 func_8028BC0C_de(Shared_World *arg0, void *arg1) {
     extern char *func_8028FDB4_de(s32 *, s32);
     s32 bitIndex;
     void *field80;
@@ -221,8 +221,8 @@ s32 func_8028BC0C_de(void *arg0, void *arg1) {
     s32 mask;
 
     bitIndex = ((Record14 *)arg1)->reserved13;
-    field80 = ((Shared_World *)arg0)->bitSections;
-    field1B40C = ((Shared_World *)arg0)->level;
+    field80 = arg0->bitSections;
+    field1B40C = arg0->level;
     temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 2);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);

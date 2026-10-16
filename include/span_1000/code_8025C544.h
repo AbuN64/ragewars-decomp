@@ -193,7 +193,8 @@ struct ObjectStateB4 {
     s32 unk_B0;
 };
 
-extern void func_8025C5DC_de(void *arg0);
+struct SlotRecAtB4V2;
+extern void func_8025C5DC_de(struct SlotRecAtB4V2 *arg0);
 
 struct ContextRecAt2BB8;
 typedef struct ContextRecAt2BB8 ContextRecAt2BB8;
@@ -219,7 +220,7 @@ struct func_8025CB2C_S2 {
     s32 unk1C;
 };
 
-extern void func_8025C5BC_de(void *arg0);
+extern void func_8025C5BC_de(struct SlotRecAtB4V2 *arg0);
 
 extern s32 func_8025D238_de(void **arg0, s16 id, s16 avoid);
 
@@ -307,7 +308,7 @@ struct func_8025C67C_S2 {
     char unk84;
 };
 
-extern void func_8025C578_de(void *arg0);
+extern void func_8025C578_de(struct SlotRecAtB4V2 *arg0);
 
 extern int D_800CBB1C;
 
@@ -362,7 +363,7 @@ extern void func_8025D3E4_de(void *arg0);
 struct func_8025CA44_S2;
 typedef struct func_8025CA44_S2 func_8025CA44_S2;
 
-extern void func_8025C524_de(void *arg0, s32 arg1);
+extern void func_8025C524_de(struct SlotRecAtB4V2 *arg0, s32 arg1);
 
 struct func_8025D370_S3;
 struct func_8025D370_S3 {
@@ -378,7 +379,7 @@ typedef struct Bank Bank;
 struct PlayerRecAt24;
 typedef struct PlayerRecAt24 PlayerRecAt24;
 
-extern void func_8025C65C_de(void *arg0);
+extern void func_8025C65C_de(struct SlotRecAtB4V2 *arg0);
 
 struct func_8025C67C_S1;
 typedef struct func_8025C67C_S1 func_8025C67C_S1;

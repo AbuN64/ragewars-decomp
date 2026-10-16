@@ -49,7 +49,7 @@ void func_8022FDAC_de(void *arg0, void *arg1) {
     func_80214178_de(arg0, arg1, 0);
 }
 
-void func_8022FF04_de(void *arg0, void *arg1) {
+void func_8022FF04_de(void *arg0, WeaponFireState *arg1) {
     extern void ***D_800D052C[];
     s16 temp_s0;
     u16 temp_s2;
@@ -68,18 +68,18 @@ void func_8022FF04_de(void *arg0, void *arg1) {
             ((Shared_ActorView *)temp_s1)->specialChanged = 1;
         }
         ((Shared_ActorView *)temp_s1)->selectedAction = temp_s2;
-        ((WeaponFireState *)arg1)->animation = ((WeaponInfo *)(D_800D052C[(s16)temp_s2]))->animation;
-        ((WeaponFireState *)arg1)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]))->animationCount;
+        arg1->animation = ((WeaponInfo *)(D_800D052C[(s16)temp_s2]))->animation;
+        arg1->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]))->animationCount;
         temp_a1 = ((Shared_ActorView *)temp_s1)->message;
         if ((temp_a1 != 0) && ((u32)D_800CD730 >= 5U)) {
             func_80237E80_de(&D_80145088, temp_a1,
                           **D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]);
         }
-        ((WeaponFireState *)arg1)->spinStep = 0;
-        ((WeaponFireState *)arg1)->spin = 0;
+        arg1->spinStep = 0;
+        arg1->spin = 0;
         ((Shared_Actor *)arg0)->color = 0;
-        ((WeaponFireState *)arg1)->charge = 0;
+        arg1->charge = 0;
     }
-    ((WeaponFireState *)arg1)->mode = 1;
-    ((WeaponFireState *)arg1)->rounds = 1;
+    arg1->mode = 1;
+    arg1->rounds = 1;
 }

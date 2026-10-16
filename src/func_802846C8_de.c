@@ -5,10 +5,10 @@
 #include "span_1000/code_80255BEC.h"
 #include "types.h"
 
-void *func_802846C8_de(void *arg0, s32 arg1, void *arg2) {
+void *func_802846C8_de(EffectSystem *arg0, s32 arg1, EffectEntry *arg2) {
     void *record;
 
-    record = ((EffectEntry *)arg2)->params->listIndex[((EffectSystem *)arg0)->lists].head;
+    record = arg2->params->listIndex[arg0->lists].head;
     if (arg2 != 0) {
         if (record != 0) {
             do {
@@ -34,14 +34,14 @@ void *func_802846C8_de(void *arg0, s32 arg1, void *arg2) {
 extern void func_80255D70_de(void *, s32, s32);
 extern s32 func_80255CB8_de(void *, s32);
 
-void func_80284758_de(void *arg0, void *arg1)
+void func_80284758_de(EffectSystem *arg0, ParticleEffect *arg1)
 {
     void *current;
     s32 key;
 
-    current = ((EffectSystem *)arg0)->groups.head;
+    current = arg0->groups.head;
     if (current != 0) {
-        key = (s32)((ParticleEffect *)arg1)->entry;
+        key = (s32)arg1->entry;
 loop:
         if (((ParticleEffect *)current)->entry != key) {
             current = ((ParticleEffect *)current)->groupNext;
@@ -52,14 +52,14 @@ loop:
     }
 
     if (current != 0) {
-        func_80255D70_de(&((EffectSystem *)arg0)->groups, current, arg1);
-    } else if (((ParticleEffect *)arg1)->entry->flags & 0x2000) {
-        func_80255CB8_de(&((EffectSystem *)arg0)->groups, arg1);
+        func_80255D70_de(&arg0->groups, current, arg1);
+    } else if (arg1->entry->flags & 0x2000) {
+        func_80255CB8_de(&arg0->groups, arg1);
     } else {
-        func_80255D14_de(&((EffectSystem *)arg0)->groups, arg1);
+        func_80255D14_de(&arg0->groups, arg1);
     }
 
-    ((ParticleEffect *)arg1)->flags |= 0x01000000;
+    arg1->flags |= 0x01000000;
 }
 
 extern s32 func_802744D4_de(void);
@@ -79,28 +79,28 @@ void func_80284870_de(f32 arg0) {
 }
 
 /** Return offset 0x180 only when the nested state word is zero. */
-float func_8028489C_de(void *arg0) {
-    void *inner = ((ParticleEffect *)arg0)->entry;
+float func_8028489C_de(ParticleEffect *arg0) {
+    void *inner = arg0->entry;
     if (((EffectEntry *)inner)->unk14 != 0) {
         return 0.0f;
     }
-    return ((ParticleEffect *)arg0)->unk180[0];
+    return arg0->unk180[0];
 }
 
-f32 func_802848BC_de(void *arg0) {
+f32 func_802848BC_de(ParticleEffect *arg0) {
     f32 var_f0;
     var_f0 = 0.0f;
-    if ((((ParticleEffect *)arg0)->entry->unk14) == 0) {
-        var_f0 = (((ParticleEffect *)arg0)->unk180[1]);
+    if ((arg0->entry->unk14) == 0) {
+        var_f0 = (arg0->unk180[1]);
     }
     return var_f0;
 }
 
-s32 func_802848DC_de(void *arg0) {
+s32 func_802848DC_de(ParticleEffect *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((ParticleEffect *)arg0)->kind;
+    temp_v1 = arg0->kind;
     val = temp_v1;
     if (val == 0x56) {
         goto ret1;
@@ -125,11 +125,11 @@ ret0:
     return 0;
 }
 
-s32 func_80284928_de(void *arg0) {
+s32 func_80284928_de(ParticleEffect *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((ParticleEffect *)arg0)->kind;
+    temp_v1 = arg0->kind;
     val = temp_v1;
     if (val == 0x11) {
         goto ret1;
@@ -171,11 +171,11 @@ ret0:
     return 0;
 }
 
-s32 func_802849AC_de(void *arg0) {
+s32 func_802849AC_de(ParticleEffect *arg0) {
     u16 temp_v1;
     s32 val;
 
-    temp_v1 = ((ParticleEffect *)arg0)->kind;
+    temp_v1 = arg0->kind;
     val = temp_v1;
     if (val == 0xD) {
         goto ret1;

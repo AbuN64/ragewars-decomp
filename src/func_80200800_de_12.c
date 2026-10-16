@@ -12,7 +12,7 @@ extern s32 func_80214178_de(void *, void *, s32);
 
 extern s32 func_802170A0_de(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4);
 
-extern void func_80285DB0_de(void *, void *, s32);
+extern void func_80285DB0_de(Shared_World *, void *, s32);
 
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 

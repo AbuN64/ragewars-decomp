@@ -21,26 +21,26 @@ extern s32 func_80214178_de(void *, void *, s32);
 typedef struct Owner Owner;
 
 /** Initialize the dest record's vtable-like fields from source's flag byte. */
-void func_8020520C_de(void *source, void *dest) {
+void func_8020520C_de(LevelActor *source, void *dest) {
     ((SpawnDispatchOwner *)dest)->callbacks = &D_800C8420_de;
     ((SpawnDispatchOwner *)dest)->update = &D_002052C4;
     ((SpawnDispatchOwner *)dest)->draw = &D_00205628;
     ((SpawnDispatchOwner *)dest)->hit = &D_002050A0;
     ((SpawnDispatchOwner *)dest)->spawn = 0;
-    ((SpawnDispatchOwner *)dest)->remaining = ((LevelActor *)source)->field3;
+    ((SpawnDispatchOwner *)dest)->remaining = source->field3;
 }
 
-void func_8020524C_de(void *arg0, void *arg1) {
+void func_8020524C_de(LevelActor *arg0, void *arg1) {
     if (func_80285F58_de(&D_8011FE88, arg0) == 1) {
         func_80214178_de(arg0, arg1, 1);
     } else {
         func_80214178_de(arg0, arg1, 0);
-        ((LevelActor *)arg0)->flags |= 0x10000;
+        arg0->flags |= 0x10000;
     }
 }
 
-void func_802052C4_de(void *arg0, void *arg1) {
-    void *obj = ((Shared_CallbackOwner *)(arg1))->hook;
+void func_802052C4_de(void *arg0, Shared_CallbackOwner *arg1) {
+    void *obj = arg1->hook;
     if (obj != 0) {
         FuncPtr fn = ((Shared_CallbackHook *)(obj))->callback;
         if (fn != 0) {
@@ -100,14 +100,14 @@ block_10:
 }
 
 /** Clear two flags when the controlling byte and nested flag are set. */
-void func_80205494_de(void *arg0, void *arg1) {
-    char *nested = ((BreakableHitContext *)arg0)->unk_18;
-    if (((ObjectStateCC *)arg1)->unk_CB != 0 &&
+void func_80205494_de(BreakableHitContext *arg0, ObjectStateCC *arg1) {
+    char *nested = arg0->unk_18;
+    if (arg1->unk_CB != 0 &&
         (((struct Descriptor *)nested)->damage.flags & 0x4) != 0) {
-        unsigned int flags = ((BreakableHitContext *)arg0)->unk_100;
+        unsigned int flags = arg0->unk_100;
         flags &= ~0x2000;
         flags &= ~0x100;
-        ((BreakableHitContext *)arg0)->unk_100 = flags;
+        arg0->unk_100 = flags;
     }
 }
 

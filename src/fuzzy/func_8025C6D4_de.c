@@ -8,9 +8,11 @@ typedef struct {
     u32 remaining;
 } Block12;
 
-extern void *func_80258BF4_de(void *arg0, s32 arg1);
+struct ContextRecAt2BC0;
+extern void *func_80258BF4_de(struct ContextRecAt2BC0 *arg0, s32 arg1);
 extern s32 func_80258D2C_de(void *arg0);
-extern s16 func_80259B10_de(void *arg0, s32 arg1);
+struct GameplayCamera;
+extern s16 func_80259B10_de(void *arg0, struct GameplayCamera *arg1);
 extern f32 func_802B2350(s32 arg0);
 
 typedef struct func_8025C6F4_S1 func_8025C6F4_S1;

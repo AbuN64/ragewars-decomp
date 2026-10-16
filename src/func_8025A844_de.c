@@ -8,7 +8,7 @@
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
 extern s32 func_80258D2C_de(Owner_func_8025A844_de *);
-extern s16 func_80259B10_de(void *, void *);
+extern s16 func_80259B10_de(void *, GameplayCamera *);
 
 extern void func_802B2F00_de(void *, s16);
 extern void alSndpSetPan(void *, s32);

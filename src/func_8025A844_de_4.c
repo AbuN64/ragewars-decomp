@@ -37,11 +37,11 @@ extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
 
 extern void func_80259F68_de(void *arg0, void *arg1, s32 arg2);
 
-extern void *func_80258BF4_de(void *arg0, s32 arg1);
+extern void *func_80258BF4_de(ContextRecAt2BC0 *arg0, s32 arg1);
 
 extern s32 func_80258D2C_de(void *arg0);
 
-extern s16 func_80259B10_de(void *arg0, s32 arg1);
+extern s16 func_80259B10_de(void *arg0, GameplayCamera *arg1);
 
 extern void func_8025AE1C_de(void *arg0);
 
@@ -213,14 +213,14 @@ void func_8025B8BC_de(SlotRecAtB8 *base, s16 index)
   selected->flags |= 8;
 }
 
-s32 func_8025B920_de(void *record, s16 value, s16 id) {
+s32 func_8025B920_de(RecordD90 *record, s16 value, s16 id) {
     s32 i;
-    SlotCC *cur = ((RecordD90 *)record)->slots;
+    SlotCC *cur = record->slots;
 
     for (i = 0; i < 16; cur++, i++) {
-        if (cur->used != -1 && ((RecordD90 *)record)->header->local != i && cur->value == value && (cur->mode & 0x40) &&
+        if (cur->used != -1 && record->header->local != i && cur->value == value && (cur->mode & 0x40) &&
             cur->id == id) {
-            release(&((RecordD90 *)record)->slots[(s16)i]);
+            release(&record->slots[(s16)i]);
             return (s16)i;
         }
     }

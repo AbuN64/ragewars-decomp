@@ -44,7 +44,8 @@ struct func_8028469C_S1 {
     char unkFC28;
 };
 
-extern float func_8028489C_de(void *arg0);
+struct ParticleEffect;
+extern float func_8028489C_de(struct ParticleEffect *arg0);
 
 struct func_8028469C_S1;
 typedef struct func_8028469C_S1 func_8028469C_S1;
@@ -109,7 +110,7 @@ typedef struct func_80284870_S1 func_80284870_S1;
 struct func_8028469C_S4;
 typedef struct func_8028469C_S4 func_8028469C_S4;
 
-extern f32 func_802848BC_de(void *arg0);
+extern f32 func_802848BC_de(struct ParticleEffect *arg0);
 
 struct func_80284AF4_S3;
 struct func_80284AF4_S3 {

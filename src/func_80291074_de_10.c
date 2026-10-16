@@ -9,24 +9,24 @@
 
 extern int func_80264B6C_de(void);
 
-void func_80293790_de(void *arg0, s32 arg1) {
+void func_80293790_de(GameSession *arg0, s32 arg1) {
     s32 saved;
 
-    saved = ((GameSession *)arg0)->mode;
-    ((GameSession *)arg0)->phase = 1;
-    ((GameSession *)arg0)->timer = 0;
-    ((GameSession *)arg0)->mode = 0x14;
-    ((GameSession *)arg0)->target = arg1;
-    ((GameSession *)arg0)->previousMode = saved;
+    saved = arg0->mode;
+    arg0->phase = 1;
+    arg0->timer = 0;
+    arg0->mode = 0x14;
+    arg0->target = arg1;
+    arg0->previousMode = saved;
     if (func_80264B6C_de() != 0) {
-        ((GameSession *)arg0)->timer = D_800C5494.unk4;
+        arg0->timer = D_800C5494.unk4;
     }
 }
 
 /** Set the state byte and linked value in a large object. */
-void func_80293824_de(void *object, int value) {
-    ((GameSession *)object)->phase = 2;
-    ((GameSession *)object)->target = value;
+void func_80293824_de(GameSession *object, int value) {
+    object->phase = 2;
+    object->target = value;
 }
 
 typedef void (*Handler8029382C)(void *);

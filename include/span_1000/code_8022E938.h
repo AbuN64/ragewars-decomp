@@ -393,7 +393,7 @@ struct func_8022EDEC_S1 {
 struct func_8022EAFC_S2;
 typedef struct func_8022EAFC_S2 func_8022EAFC_S2;
 
-extern void func_8022EC3C_de(void *object);
+extern void func_8022EC3C_de(ActorRecAt16E0 *object);
 
 struct func_8022EAFC_S3;
 struct func_8022EAFC_S3 {
@@ -403,12 +403,13 @@ struct func_8022EAFC_S3 {
     s16 unk5F8;
 };
 
-extern void func_8022EDA4_de(void *arg0);
+extern void func_8022EDA4_de(ResourceLoadState *arg0);
 
 struct func_8022EC2C_S1;
 typedef struct func_8022EC2C_S1 func_8022EC2C_S1;
 
-extern unsigned char func_8022F374_de(void *object);
+struct ObjCode8022E938;
+extern unsigned char func_8022F374_de(struct ObjCode8022E938 *object);
 
 extern void func_8022ECC4_de(void);
 
@@ -428,7 +429,7 @@ struct func_8022EF20_S1 {
     s32 unk74;
 };
 
-extern unsigned char func_8022F32C_de(void *arg0);
+extern unsigned char func_8022F32C_de(struct ObjCode8022E938 *arg0);
 
 extern void func_8022ECCC_de(void);
 
@@ -466,7 +467,7 @@ typedef struct func_8022EF20_S2 func_8022EF20_S2;
 struct func_8022F388_S1;
 typedef struct func_8022F388_S1 func_8022F388_S1;
 
-extern unsigned int func_8022F398_de(void *object);
+extern unsigned int func_8022F398_de(struct ObjCode8022E938 *object);
 
 struct func_8022F34C_S1;
 struct func_8022F34C_S1 {
@@ -474,7 +475,7 @@ struct func_8022F34C_S1 {
     unsigned char unk16;
 };
 
-extern unsigned char func_8022F350_de(void *arg0);
+extern unsigned char func_8022F350_de(struct ObjCode8022E938 *arg0);
 
 struct func_8022EDEC_S2;
 typedef struct func_8022EDEC_S2 func_8022EDEC_S2;

@@ -29,7 +29,7 @@ extern void *func_8028FDB4_de(void *arg0, s32 arg1);
 
 extern void func_80253754_de(s32 arg0, s32 arg1);
 
-void *func_8024C104_de(void *arg0, void *arg1, s32 *arg2) {
+void *func_8024C104_de(Triple *arg0, void *arg1, s32 *arg2) {
     extern void func_80272898_de(void *, void *, void *);
     extern void func_8025E5B0_de(s32 *arg0, s32 arg1, s32 arg2, f32 *arg3);
     char *o1 = (char *) arg1;
@@ -47,7 +47,7 @@ void *func_8024C104_de(void *arg0, void *arg1, s32 *arg2) {
     outVec[0] *= ((LevelActor *)o1)->scale.x;
     outVec[1] *= ((LevelActor *)o1)->scale.y;
     outVec[2] *= ((LevelActor *)o1)->scale.z;
-    *(Triple *) arg0 = *(Triple *) outVec;
+    *arg0 = *(Triple *) outVec;
     return arg0;
 }
 
@@ -71,13 +71,13 @@ void func_8024C1C4_de(char *obj, void *anim)
     }
 }
 
-s32 func_8024C294_de(void *arg0, s32 arg1) {
+s32 func_8024C294_de(LevelActor *arg0, s32 arg1) {
     void *temp_v0;
     Table *temp_v1;
     s32 temp_s0;
 
-    if (((LevelActor *)arg0)->flags & 0x40000) {
-        temp_v0 = func_8025193C_de(0, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
+    if (arg0->flags & 0x40000) {
+        temp_v0 = func_8025193C_de(0, arg0->resource, arg0->resource, arg0->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
         if (temp_v0 != 0) {
             temp_v1 = func_8028FDB4_de(*(void **) temp_v0, 1);
             temp_s0 = temp_v1->deltas[arg1];
@@ -92,7 +92,7 @@ int func_8024C344_de(void) {
     return 0;
 }
 
-void func_8024C34C_de(void *arg0, s32 *arg1) {
+void func_8024C34C_de(LevelActor *arg0, s32 *arg1) {
     extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
     extern void func_8025E5B0_de(s32 *, s32, f32, f32 *);
     Scratch scratch;
@@ -104,13 +104,13 @@ void func_8024C34C_de(void *arg0, s32 *arg1) {
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
-    func_802736D4_de(scratch.matrix, ((LevelActor *)arg0)->yaw);
+    func_802736D4_de(scratch.matrix, arg0->yaw);
     func_80272898_de(scratch.matrix, scratch.in, scratch.out);
-    scratch.position.x = ((LevelActor *)arg0)->position0.x +
-                          (scratch.out[0] * ((LevelActor *)arg0)->scale.x);
-    scratch.position.y = ((LevelActor *)arg0)->position0.y;
-    scratch.position.z = ((LevelActor *)arg0)->position0.z +
-                          (scratch.out[2] * ((LevelActor *)arg0)->scale.z);
-    func_8024E79C_de(arg0, scratch.position, &((LevelActor *)arg0)->position0,
-                  &((LevelActor *)arg0)->model, 0, 0);
+    scratch.position.x = arg0->position0.x +
+                          (scratch.out[0] * arg0->scale.x);
+    scratch.position.y = arg0->position0.y;
+    scratch.position.z = arg0->position0.z +
+                          (scratch.out[2] * arg0->scale.z);
+    func_8024E79C_de(arg0, scratch.position, &arg0->position0,
+                  &arg0->model, 0, 0);
 }

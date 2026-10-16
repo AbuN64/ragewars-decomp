@@ -306,12 +306,12 @@ s32 func_802A70D4_de(Menu_func_802A70D4_de *menu, s32 backward) {
     return cursor;
 }
 
-void func_802A7168_de(void *arg0) {
-    ((EntryRecAt34 *)(arg0))->unk4 = 0;
-    ((EntryRecAt34 *)(arg0))->unk0 = 0;
-    ((EntryRecAt34 *)(arg0))->unkD = 0;
-    ((EntryRecAt34 *)(arg0))->unk18 = 0;
-    ((EntryRecAt34 *)(arg0))->unk1C = 0;
+void func_802A7168_de(EntryRecAt34 *arg0) {
+    arg0->unk4 = 0;
+    arg0->unk0 = 0;
+    arg0->unkD = 0;
+    arg0->unk18 = 0;
+    arg0->unk1C = 0;
 }
 
 void func_802A7180_de(void *arg0, void *arg1) {

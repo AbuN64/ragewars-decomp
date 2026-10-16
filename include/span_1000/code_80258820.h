@@ -10,7 +10,8 @@ typedef struct ObjRecAt2B9C ObjRecAt2B9C;
 struct SortTable;
 typedef struct SortTable SortTable;
 
-extern void *func_80258BF4_de(void *arg0, int arg1);
+struct ContextRecAt2BC0;
+extern void *func_80258BF4_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
 struct SceneRecAt2B5C;
 struct SceneRecAt2B5C {
@@ -71,7 +72,7 @@ typedef struct func_80258BAC_S1 func_80258BAC_S1;
 struct func_80258D68_S1;
 typedef struct func_80258D68_S1 func_80258D68_S1;
 
-extern void func_80258B94_de(void *arg0, int arg1);
+extern void func_80258B94_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
 struct func_80258D44_S1;
 typedef struct func_80258D44_S1 func_80258D44_S1;
@@ -79,7 +80,7 @@ typedef struct func_80258D44_S1 func_80258D44_S1;
 struct func_80258BFC_S1;
 typedef struct func_80258BFC_S1 func_80258BFC_S1;
 
-extern void func_80258BBC_de(void *object, float value);
+extern void func_80258BBC_de(struct ContextRecAt2BC0 *object, float value);
 
 extern int func_80258D2C_de(void *object);
 
@@ -137,7 +138,7 @@ struct func_80258B00_S1 {
 struct func_80258D4C_S1;
 typedef struct func_80258D4C_S1 func_80258D4C_S1;
 
-extern void func_80258D38_de(void *arg0, int arg1);
+extern void func_80258D38_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
 extern int func_80258FF4_de(char *arg0, int id);
 
@@ -163,7 +164,7 @@ struct func_80258BAC_S1 {
     int unk2BA0;
 };
 
-extern void *func_80258BDC_de(void *arg0, int arg1);
+extern void *func_80258BDC_de(struct ContextRecAt2BC0 *arg0, int arg1);
 
 struct Slot_func_80258FF4_de;
 typedef struct Slot_func_80258FF4_de Slot_func_80258FF4_de;
@@ -230,7 +231,7 @@ struct func_80258D68_S1 {
     int unk2BB8;
 };
 
-extern void func_80258B8C_de(void *arg0, float arg1);
+extern void func_80258B8C_de(struct ContextRecAt2BC0 *arg0, float arg1);
 
 struct func_80258A9C_S1;
 struct func_80258A9C_S1 {

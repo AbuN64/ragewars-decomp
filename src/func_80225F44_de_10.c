@@ -85,14 +85,14 @@ void *func_8022A480_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return var_v0;
 }
 
-void *func_8022A504_de(void *arg0, Vec3 position, void *arg4) {
+void *func_8022A504_de(struct Context *arg0, Vec3 position, void *arg4) {
     f32 var_f3;
     Shared_ActorView *var_v1;
     void *var_a1;
     f32 dx, dy, dz, distSq;
 
     var_f3 = D_800C2CE8_de;
-    var_v1 = (void *)((struct Context *)arg0)->head;
+    var_v1 = (void *)arg0->head;
     var_a1 = 0;
     if (var_v1 != 0) {
         do {
@@ -156,7 +156,7 @@ void *func_8022A5F4_de(void *arg0, u32 arg1) {
     return var_v1;
 }
 
-void *func_8022A634_de(void *arg0, u32 arg1) {
+void *func_8022A634_de(struct Context *arg0, u32 arg1) {
     void *var_v1;
     void *temp_v0;
     s32 var_a2;
@@ -164,7 +164,7 @@ void *func_8022A634_de(void *arg0, u32 arg1) {
     var_v1 = 0;
     var_a2 = 0;
     if (arg1 < 8U) {
-        var_v1 = ((struct Context *)arg0)->head;
+        var_v1 = arg0->head;
         if (var_v1 != 0) {
             do {
                 temp_v0 = ((Shared_ActorView *)var_v1)->message;
@@ -263,8 +263,8 @@ void *func_8022A83C_de(char *object) {
     return record;
 }
 
-void func_8022A880_de(void *object) {
-    Shared_ActorView *record = (void *)((struct Context *)object)->head;
+void func_8022A880_de(struct Context *object) {
+    Shared_ActorView *record = (void *)object->head;
     if (record != 0) {
         do {
             func_80285D30_de((char *)record->controller + 0x140);
@@ -285,8 +285,8 @@ void func_8022A8C8_de(char *object, f32 arg1) {
     }
 }
 
-s32 func_8022A8F0_de(void *arg0) {
-    Shared_ActorView *record = (void *)((struct Context *)arg0)->head;
+s32 func_8022A8F0_de(struct Context *arg0) {
+    Shared_ActorView *record = (void *)arg0->head;
     s32 count = 0;
     if (record != 0) {
         do {
@@ -306,10 +306,10 @@ void func_8022A928_de(ObjRecAtB4 *arg0, int arg1) {
     arg0->unk4 = arg1;
 }
 
-void func_8022A940_de(void *arg0) {
-    s32 val = ((Shared_Effect *)(arg0))->state;
+void func_8022A940_de(Shared_Effect *arg0) {
+    s32 val = arg0->state;
     if (val != 0 && val != 3) {
-        ((Shared_Effect *)(arg0))->state = 3;
+        arg0->state = 3;
     }
 }
 
@@ -365,12 +365,12 @@ s32 func_8022AA9C_de(AimPlayer *arg0, s32 arg1) {
     return ((GlobalState *)p)->field24;
 }
 
-s16 func_8022AAD4_de(void *arg0, s32 arg1) {
+s16 func_8022AAD4_de(Player *arg0, s32 arg1) {
     s16 *var_v0;
     WeaponInfo *temp_a0;
 
     temp_a0 = D_800D052C[arg1];
-    if (((Player *)arg0)->gear == 1) {
+    if (arg0->gear == 1) {
         var_v0 = temp_a0->weaponClass;
     } else {
         var_v0 = temp_a0->alternateClass;
@@ -494,8 +494,8 @@ f32 func_8022ADBC_de(void *arg0) {
     return D_800C2D00_de;
 }
 
-f32 func_8022ADF0_de(void *arg0) {
-    if (((LevelActor *)arg0)->definition != 0) {
+f32 func_8022ADF0_de(LevelActor *arg0) {
+    if (arg0->definition != 0) {
         return func_8024D284_de();
     } else {
         return D_800C2D08_de;

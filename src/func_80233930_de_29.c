@@ -123,7 +123,7 @@ void func_802394BC_de(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, Vec3
     set_emitter(node, a * k, b * k, c * k, scale, value, pos);
 }
 
-void *func_802395A4_de(void *arg0, Vec3 *arg1) {
+void *func_802395A4_de(MenuMatchGlobals *arg0, Vec3 *arg1) {
     extern void func_80271F68_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2);
     Vec3 position;
     GameplayCamera *node;
@@ -132,10 +132,10 @@ void *func_802395A4_de(void *arg0, Vec3 *arg1) {
     f32 distSq;
 
     func_8027254C_de(&arg1->x, 20000.0f);
-    if (((MenuMatchGlobals *)arg0)->useFallbackCamera != 0) {
-        return &((MenuMatchGlobals *)arg0)->fallbackCamera;
+    if (arg0->useFallbackCamera != 0) {
+        return &arg0->fallbackCamera;
     }
-    node = ((MenuMatchGlobals *)arg0)->cameras;
+    node = arg0->cameras;
     bestDist = D_800C3548_de;
     bestNode = 0;
     if (node != 0) {
@@ -152,12 +152,12 @@ void *func_802395A4_de(void *arg0, Vec3 *arg1) {
         } while (node != 0);
     }
     if (bestNode == 0) {
-        return &((MenuMatchGlobals *)arg0)->fallbackCamera;
+        return &arg0->fallbackCamera;
     }
     return bestNode;
 }
 
-f32 func_80239678_de(void *arg0, void *arg1) {
+f32 func_80239678_de(Race *arg0, void *arg1) {
     extern void func_80271F68_de(Vec3 *out, void *arg1, void *arg2);
     Vec3 position;
     f32 sum;
@@ -165,10 +165,10 @@ f32 func_80239678_de(void *arg0, void *arg1) {
     f64 divisor;
     s32 count;
 
-    if (((Race *)arg0)->header.views.count == 0) {
+    if (arg0->header.views.count == 0) {
         return 0.0f;
     }
-    node = ((Race *)arg0)->header.views.head;
+    node = arg0->header.views.head;
     sum = 0.0f;
     if (node != 0) {
         do {
@@ -180,7 +180,7 @@ f32 func_80239678_de(void *arg0, void *arg1) {
             node = node->next;
         } while (node != 0);
     }
-    count = ((Race *)arg0)->header.views.count;
+    count = arg0->header.views.count;
     divisor = (f64)count;
     if (count < 0) {
         divisor += D_800C3550_de;

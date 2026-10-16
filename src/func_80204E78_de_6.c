@@ -78,8 +78,8 @@ void func_80205694_de(void *arg0, void *arg1) {
     func_80285DB0_de(&D_8011FE88, arg0, 1);
 }
 
-void func_802056D0_de(void *arg0) {
-    func_8028B670_de(&D_8011FE88, (u16)((Trigger *)arg0)->unk8, (u32)((Trigger *)arg0)->unk4 >> 16, 1);
+void func_802056D0_de(Trigger *arg0) {
+    func_8028B670_de(&D_8011FE88, (u16)arg0->unk8, (u32)arg0->unk4 >> 16, 1);
 }
 
 /** Return the object's 0x200 status bit. */
@@ -88,6 +88,6 @@ unsigned int func_80205700_de(void *object) {
     return hit->flags & 0x200;
 }
 
-int func_8020570C_de(void *arg0) {
-    return ((((Hit *)arg0)->flags >> 9) ^ 1) & 1;
+int func_8020570C_de(Hit *arg0) {
+    return ((arg0->flags >> 9) ^ 1) & 1;
 }

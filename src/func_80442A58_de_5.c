@@ -48,7 +48,8 @@ s32 func_8044345C_de(void) {
 extern s32 D_801540F0;
 extern void func_8025E384_de();
 extern s32 func_8025CC6C_de();
-extern void func_8025CB0C_de(s32);
+struct SoundVoicePool;
+extern void func_8025CB0C_de(struct SoundVoicePool *);
 extern void func_80442384_de(void *, void *, void *);
 extern void func_8026495C_de();
 

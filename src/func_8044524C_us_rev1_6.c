@@ -5,7 +5,8 @@
 /* Passes what func_8025CC6C_de returns to func_8025CB0C_de, then calls func_8025E384_de and func_8025E3CC_de,
    and returns one. */
 extern s32 func_8025CC6C_de();
-extern void func_8025CB0C_de(s32);
+struct SoundVoicePool;
+extern void func_8025CB0C_de(struct SoundVoicePool *);
 
 s32 func_80444E7C_de(void) {
     func_8025CB0C_de(func_8025CC6C_de());

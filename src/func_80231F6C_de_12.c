@@ -43,31 +43,31 @@ extern char D_8011D8D0;
 extern f32 func_80274808_de(f32, f32, s32);
 
 
-void func_802331FC_de(void *arg0, void *arg1) {
-    extern void func_8022AF74_de(void *arg0, s32 arg1);
+void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *arg1) {
+    extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
     extern s32 func_80214178_de(void *, void *, s32);
     void *temp_s0;
     void *temp_a0;
     s16 index;
 
-    temp_s0 = ((Shared_ActorView *)arg0)->self;
-    if (((WeaponFireState *)arg1)->mode == 2) {
+    temp_s0 = arg0->self;
+    if (arg1->mode == 2) {
         func_802227F4_de(temp_s0, temp_s0, 2);
     } else {
-        ((WeaponFireState *)arg1)->cueTimer = D_800C3048_de[0];
+        arg1->cueTimer = D_800C3048_de[0];
         if ((((Shared_ActorView *)temp_s0)->remote == 0) &&
             (D_80140FF8.field_0 == 1)) {
-            func_8021A9A4_de(((Shared_ActorView *)arg0)->self, 0x3FB);
+            func_8021A9A4_de(arg0->self, 0x3FB);
         } else {
-            func_8021A9A4_de(((Shared_ActorView *)arg0)->self, 0x4CD);
+            func_8021A9A4_de(arg0->self, 0x4CD);
         }
         func_80214178_de(arg0, arg1, 4);
         func_8022AEA0_de(temp_s0, 0x977);
         func_8022AF74_de(temp_s0, 0x974);
 
-        temp_a0 = ((Shared_ActorView *)arg0)->self;
+        temp_a0 = arg0->self;
         index = ((Shared_ActorView *)temp_a0)->selectedAction;
-        ((WeaponFireState *)arg1)->charge =
+        arg1->charge =
             ((WeaponInfo *)D_800D052C[index])->chargeRate *
             D_800C3048_de[1];
         if ((((Shared_ActorView *)temp_a0)->selectedAction == 8) &&
@@ -157,7 +157,7 @@ void func_80233544_de(void *a, struct WeaponEventSource *b) {
 }
 
 void func_8023356C_de(void *arg0) {
-    s32 func_8022AF74_de(void *, s32);
+    s32 func_8022AF74_de(Shared_ActorView *, s32);
     void *temp_a0;
     temp_a0 = (((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8);
     if ((((struct IntegerState11C4 *) ((s8 *) temp_a0))->unk_11C0) == 0) {
@@ -165,27 +165,27 @@ void func_8023356C_de(void *arg0) {
     }
 }
 
-void func_80233598_de(void *arg0, void *arg1) {
+void func_80233598_de(LevelActor *arg0, WeaponFireState *arg1) {
     extern s32 func_802301F4_de(void);
     void *temp_s1;
 
-    temp_s1 = ((LevelActor *)arg0)->controller;
-    if (((WeaponFireState *)arg1)->triggerMode != 0) {
-        ((WeaponFireState *)arg1)->mode = 2;
+    temp_s1 = arg0->controller;
+    if (arg1->triggerMode != 0) {
+        arg1->mode = 2;
         if (func_802301F4_de() != 0) {
-            ((WeaponFireState *)arg1)->mode = 1;
+            arg1->mode = 1;
             func_8022B00C_de(temp_s1);
         }
     }
 }
 
-void func_802335EC_de(void *arg0, void *arg1) {
+void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
     f32 temp_f1;
     f32 temp_f2;
     void *temp_s1;
     void *temp_v0;
 
-    temp_s1 = ((struct MeasuredRecAt1D8V3 *)(arg0))->value;
+    temp_s1 = arg0->value;
     if (((struct MeasuredRecAt34 *)(arg1))->value == 5) {
         func_80274870_de(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
     } else {

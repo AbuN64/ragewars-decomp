@@ -312,8 +312,8 @@ int func_8024DEE0_de(void *arg0) {
     }
 }
 
-s32 func_8024DF08_de(void *arg0) {
-    void *temp_a1 = ((LevelActor *)arg0)->definition;
+s32 func_8024DF08_de(LevelActor *arg0) {
+    void *temp_a1 = arg0->definition;
     s32 temp_v1 = ((ModelBlend *)temp_a1)->kind;
 
     if (temp_v1 != 1) {
@@ -324,7 +324,7 @@ s32 func_8024DF08_de(void *arg0) {
     }
     {
         s32 var_v1 = 0;
-        if (((LevelActor *)arg0)->active <= 0 || (((ModelBlend *)temp_a1)->collisionOptions & 2)) {
+        if (arg0->active <= 0 || (((ModelBlend *)temp_a1)->collisionOptions & 2)) {
             var_v1 = 1;
         }
         return var_v1;
@@ -362,14 +362,14 @@ int func_8024DFA0_de(void *arg0) {
     }
 }
 
-s32 func_8024DFC8_de(void *arg0) {
+s32 func_8024DFC8_de(LevelActor *arg0) {
     ModelBlend *temp_a1;
     s32 var_v1;
 
-    temp_a1 = ((LevelActor *)arg0)->definition;
+    temp_a1 = arg0->definition;
     if (temp_a1->kind == 1) {
         var_v1 = 0;
-        if (((LevelActor *)arg0)->active <= 0 || (temp_a1->collisionOptions & 0x800)) {
+        if (arg0->active <= 0 || (temp_a1->collisionOptions & 0x800)) {
             var_v1 = 1;
         }
         return var_v1;
@@ -398,14 +398,14 @@ s32 func_8024E00C_de(void *arg0)
   }
 }
 
-s32 func_8024E034_de(void *arg0) {
+s32 func_8024E034_de(LevelActor *arg0) {
     ModelBlend *temp_a1;
     s32 var_v1;
 
-    temp_a1 = ((LevelActor *)arg0)->definition;
+    temp_a1 = arg0->definition;
     if (temp_a1->kind == 1) {
         var_v1 = 0;
-        if (((LevelActor *)arg0)->active <= 0 || (temp_a1->collisionOptions & 0x10)) {
+        if (arg0->active <= 0 || (temp_a1->collisionOptions & 0x10)) {
             var_v1 = 1;
         }
         return var_v1;

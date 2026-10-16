@@ -8,14 +8,14 @@
 
 
 
-void func_80255C4C_de(void *arg0, s32 *arg1, u32 *arg2) {
+void func_80255C4C_de(Pool80255ACC *arg0, s32 *arg1, u32 *arg2) {
     u32 temp_a0;
     u32 var_v1;
     void *var_a3;
 
     *arg1 = 0;
     *arg2 = 0;
-    var_a3 = ((Pool80255ACC *)arg0)->head;
+    var_a3 = arg0->head;
     if (var_a3 != 0) {
         do {
             *arg1 += (u32)((Block80255720 *)var_a3)->size;

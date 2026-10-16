@@ -3,7 +3,8 @@
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
-extern void func_80204DFC_de(void *arg0);
+struct Trigger;
+extern void func_80204DFC_de(struct Trigger *arg0);
 
 struct ObjRecAt30;
 struct ObjRecAt30 {
@@ -64,7 +65,7 @@ struct RecCode80203F04 {
     int unk12C;
 };
 
-extern void func_802047D8_de(void *arg0);
+extern void func_802047D8_de(struct Trigger *arg0);
 
 struct func_80204728_S1;
 struct func_80204728_S1 {
@@ -72,7 +73,7 @@ struct func_80204728_S1 {
     void * unk10C;
 };
 
-extern void func_80204E48_de(void *arg0);
+extern void func_80204E48_de(struct Trigger *arg0);
 
 struct ObjectStateCC;
 struct ObjectStateCC {
@@ -82,12 +83,15 @@ struct ObjectStateCC {
     s8 unk_CB;
 };
 
-extern void func_80204BB4_de(void *arg0, void *arg1);
+struct Dest;
+extern void func_80204BB4_de(void *arg0, struct Dest *arg1);
 
 struct RecCode80203F04;
 typedef struct RecCode80203F04 RecCode80203F04;
 
-extern void func_80204468_de(void *arg0, void *arg1);
+struct ActorMotionState;
+struct LevelActor;
+extern void func_80204468_de(struct LevelActor *arg0, struct ActorMotionState *arg1);
 
 extern float D_800C1A70_de;
 
@@ -103,9 +107,9 @@ struct func_8020459C_S2 {
     s16 unk20;
 };
 
-extern s32 func_80204620_de(void *arg0);
+extern s32 func_80204620_de(struct LevelActor *arg0);
 
-extern void func_80204738_de(void *object);
+extern void func_80204738_de(struct LevelActor *object);
 
 struct ObjRecAt30;
 typedef struct ObjRecAt30 ObjRecAt30;
@@ -130,7 +134,7 @@ struct func_80204C68_S2 {
 struct func_8020459C_S2;
 typedef struct func_8020459C_S2 func_8020459C_S2;
 
-extern void func_8020478C_de(void *arg0);
+extern void func_8020478C_de(struct Trigger *arg0);
 
 struct RiderRecAt130V2;
 struct RiderRecAt130V2 {

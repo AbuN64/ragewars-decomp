@@ -62,12 +62,12 @@ static inline s32 released(void *actor, Player *player) {
     return func_80222AA4_de(player, player->selectedAction) == 0;
 }
 
-void func_802312C8_de(void *actor, void *attack) {
+void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
     Player *player;
     Vec3 *position;
     SharedRecAt564V1 *target;
 
-    player = ((Shared_Actor *)actor)->entity;
+    player = actor->entity;
     target = player->owner;
     if (target != 0) {
         position = &target->position;
@@ -81,14 +81,14 @@ void func_802312C8_de(void *actor, void *attack) {
         func_8025DE54_de(0x978, *position, (s32)position, -1);
         return;
     }
-    func_80274870_de(&((WeaponFireState *)attack)->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
-    ((WeaponFireState *)attack)->cueTimer -= D_800D2988;
-    if (((WeaponFireState *)attack)->cueTimer <= 0.0f) {
-        ((WeaponFireState *)attack)->cueTimer = D_800C2F64_de;
+    func_80274870_de(&attack->spin, (f32)D_800CA37C * D_800C2F60_de, 0.4f);
+    attack->cueTimer -= D_800D2988;
+    if (attack->cueTimer <= 0.0f) {
+        attack->cueTimer = D_800C2F64_de;
         if (player->computer == 0 && D_80140FF8 == 1) {
-            func_8021A9A4_de(((Shared_Actor *)actor)->entity, 0x3FB);
+            func_8021A9A4_de(actor->entity, 0x3FB);
         } else {
-            func_8021A9A4_de(((Shared_Actor *)actor)->entity, 0x4CD);
+            func_8021A9A4_de(actor->entity, 0x4CD);
         }
     }
 }
@@ -191,50 +191,50 @@ static inline s32 can_fire(Player *player) {
     }
     return ammo;
 }
-void func_80231664_de(void *actor, void *arg1) {
+void func_80231664_de(Shared_Actor *actor, WeaponFireState *arg1) {
     Player *player;
     s32 action;
     s32 single;
-    player = ((Shared_Actor *)(actor))->entity;
+    player = actor->entity;
     action = D_800CE8DC[player->pose].action;
     if (func_80222AA4_de(player, player->selectedAction) == 0) {
-        if (((WeaponFireState *)(arg1))->mode != 2) {
+        if (arg1->mode != 2) {
             goto idle;
         }
-        ((WeaponFireState *)(arg1))->mode = 1;
+        arg1->mode = 1;
         if (func_80222AA4_de(player, player->selectedAction) == 0) {
         idle:
             player->weapon = func_8022F96C_de(player);
             return;
         }
     }
-    if ((player->actionFlags & 0x4000) && can_fire(player) && ((WeaponFireState *)(arg1))->rounds > 0) {
+    if ((player->actionFlags & 0x4000) && can_fire(player) && arg1->rounds > 0) {
         single = 1;
-        if (((WeaponFireState *)(arg1))->mode == single) {
-            ((WeaponFireState *)(arg1))->mode = 2;
+        if (arg1->mode == single) {
+            arg1->mode = 2;
             if (func_80222AA4_de(player, player->selectedAction) == 0) {
                 func_8025DF34_de(0xD4D);
                 if (player->owner != 0) {
                     func_80239908_de(&D_80145040.object, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
                                   func_8022A5A0_de(&D_80145040, player), 1.0f);
                 }
-                ((WeaponFireState *)(arg1))->mode = single;
+                arg1->mode = single;
                 goto spin;
             }
         } else {
-            ((WeaponFireState *)(arg1))->mode = single;
+            arg1->mode = single;
         }
-        ((WeaponFireState *)(arg1))->rounds = single;
+        arg1->rounds = single;
     }
 spin:
-    if (((WeaponFireState *)(arg1))->mode == 1) {
+    if (arg1->mode == 1) {
         if (player->fireSpin > 1.0f) {
             player->fireSpin -= 0.5f;
         }
         if (player->fireSpin < 1.0f) {
             player->fireSpin = 1.0f;
         }
-    } else if (((WeaponFireState *)(arg1))->mode == 2) {
+    } else if (arg1->mode == 2) {
         if (player->fireSpin < 2.0f) {
             player->fireSpin += 0.05f;
         }
@@ -243,7 +243,7 @@ spin:
         }
     }
     player->fireFrame = (player->fireFrame + (s32)player->fireSpin) % 8;
-    if (func_802301F4_de(actor, arg1) == 0 && !(((Shared_Actor *)(actor))->weaponFlags & 0x400)) {
+    if (func_802301F4_de(actor, arg1) == 0 && !(actor->weaponFlags & 0x400)) {
         func_80214178_de(actor, arg1, action);
     }
 }

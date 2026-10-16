@@ -43,27 +43,27 @@ extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 
 extern void func_8044A07C_de(s32 arg0);
 
-void func_8022CF38_de(void *arg0, void *arg1) {
+void func_8022CF38_de(void *arg0, LevelActor *arg1) {
     f32 value;
     f32 minimum;
     ((Shared_ActorView *)arg0)->forwardSpeed *= D_800C2D94_de;
     ((Shared_ActorView *)arg0)->lateralSpeed *= D_800C2D94_de;
 
-    value = ((LevelActor *)arg1)->position1.y * D_800C2D98_de;
+    value = arg1->position1.y * D_800C2D98_de;
     minimum = D_800C2D9C_de;
-    ((LevelActor *)arg1)->position1.y = value;
+    arg1->position1.y = value;
     if (value < minimum) {
-        ((LevelActor *)arg1)->position1.y = minimum;
+        arg1->position1.y = minimum;
     }
 
     ((Shared_ActorView *)arg0)->collisionState = 0;
     func_8023913C_de(((Shared_ActorView *)arg0)->message);
     func_80218464_de(((Shared_func_80227014_S2 *)arg0)->unk938);
 
-    if (((LevelActor *)arg1)->motionState & 0x8000) {
-        func_8025DE54_de(0x2DA, ((LevelActor *)arg1)->position0, 0, -1);
+    if (arg1->motionState & 0x8000) {
+        func_8025DE54_de(0x2DA, arg1->position0, 0, -1);
     } else {
-        func_8025DE54_de(0x2DC, ((LevelActor *)arg1)->position0, 0, -1);
+        func_8025DE54_de(0x2DC, arg1->position0, 0, -1);
     }
 }
 
@@ -118,7 +118,7 @@ void func_8022D040_de(void *arg0, LevelActor *arg1) {
     }
 }
 
-void func_8022D164_de(void *arg0, void *arg1)
+void func_8022D164_de(void *arg0, LevelActor *arg1)
 {
   f32 new_var3;
   f32 *new_var;
@@ -129,9 +129,9 @@ void func_8022D164_de(void *arg0, void *arg1)
   new_var = &((Player *)arg0)->movementScale;
   ((Player *)arg0)->state6C4 = 0;
   *new_var = new_var3;
-  ((LevelActor *)arg1)->position1.x = 0;
-  ((LevelActor *)arg1)->position1.y = 0;
-  ((LevelActor *)arg1)->position1.z = 0;
+  arg1->position1.x = 0;
+  arg1->position1.y = 0;
+  arg1->position1.z = 0;
 }
 
 void func_8022D188_de(void *unused, void *object) {

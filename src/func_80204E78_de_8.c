@@ -12,7 +12,7 @@ extern s32 D_801462C8;
 
 extern int func_80285F58_de(char *a, int b);
 
-extern void func_80285DB0_de(void *a, void *b, int c);
+extern void func_80285DB0_de(Shared_World *a, void *b, int c);
 
 void func_80206080_de(void *arg0, void *arg1) {
     LevelActor *actor = arg0;
@@ -46,43 +46,43 @@ void func_80206080_de(void *arg0, void *arg1) {
     }
 }
 
-void func_8020612C_de(void *arg0, void *arg1) {
+void func_8020612C_de(LevelActor *arg0, ActorMotionState *arg1) {
     extern s32 func_80214178_de(void *, void *, s32);
     AnimationTriggerResource *temp_v0;
     AnimationTriggerDefinition *temp_a2;
     s32 temp_v1;
     s32 var_v0;
 
-    temp_v0 = (void *)((LevelActor *)arg0)->definition;
+    temp_v0 = (void *)arg0->definition;
     temp_a2 = &temp_v0->trigger;
     if (temp_a2->enabled == 0) {
         if (temp_a2->firstAnimation == -1) {
-            ((ActorMotionState *)arg1)->timer = 0.0f;
+            arg1->timer = 0.0f;
             return;
         }
         if (temp_a2->secondAnimation == -1) {
-            ((ActorMotionState *)arg1)->timer = 0.0f;
+            arg1->timer = 0.0f;
             return;
         }
     }
-    if (((ActorMotionState *)arg1)->unk124 == temp_a2->animation) {
-        ((ActorMotionState *)arg1)->timer = 0.0f;
+    if (arg1->unk124 == temp_a2->animation) {
+        arg1->timer = 0.0f;
         return;
     }
     temp_v1 = temp_a2->flags;
     if (!(temp_v1 & 1)) {
-        if (((ActorMotionState *)arg1)->unk128 <= 0) {
+        if (arg1->unk128 <= 0) {
             return;
         }
     }
     var_v0 = temp_v1 & 2;
     if (var_v0 != 0) {
-        if (((LevelActor *)arg0)->flags & 0x200) {
-            ((ActorMotionState *)arg1)->timer = 0.0f;
+        if (arg0->flags & 0x200) {
+            arg1->timer = 0.0f;
             return;
         }
     }
-    if (((ActorMotionState *)arg1)->timer >= ((ActorMotionState *)arg1)->speed) {
+    if (arg1->timer >= arg1->speed) {
         func_80214178_de(arg0, arg1, 1);
     }
 }

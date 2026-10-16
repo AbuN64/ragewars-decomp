@@ -19,15 +19,15 @@ void func_8025DACC_de(StateRecAt34 *arg0) {
     arg0->unk34 = (f32) ((f32) arg0->unk20 / (var_f2 * 60.0f));
 }
 
-void func_8025DB34_de(void *arg0) {
-    ((Track *)arg0)->unk38 = 1;
-    ((Track *)arg0)->unk40 = 0;
+void func_8025DB34_de(Track *arg0) {
+    arg0->unk38 = 1;
+    arg0->unk40 = 0;
 }
 
 /** Clear offset 0x38 and initialize offset 0x40 from D_800C9108. */
-void func_8025DB44_de(void *arg0) {
-    ((Track *)arg0)->unk40 = D_800C9108;
-    ((Track *)arg0)->unk38 = 0;
+void func_8025DB44_de(Track *arg0) {
+    arg0->unk40 = D_800C9108;
+    arg0->unk38 = 0;
 }
 
 s32 func_802AFF90_de(s32);

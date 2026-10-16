@@ -19,11 +19,12 @@ typedef struct Owner Owner;
 
 extern s32 func_80285F58_de(void *, void *);
 
-extern void func_80285DB0_de(void *, void *, s32);
+extern void func_80285DB0_de(Shared_World *, void *, s32);
 
 extern void func_80278D78_de(void *arg0, s32 arg1, void *arg2);
 
-extern void func_802A5D38_de(void *, s32);
+struct SceneRecAt95A8;
+extern void func_802A5D38_de(struct SceneRecAt95A8 *, s32);
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
@@ -68,17 +69,17 @@ void func_802043E0_de(char *arg0, char *arg1) {
     }
 }
 
-void func_80204468_de(void *arg0, void *arg1) {
-    ((ActorMotionState *)arg1)->table = &D_800C8274;
-    ((ActorMotionState *)arg1)->update = &D_002043E0;
-    ((ActorMotionState *)arg1)->unk124 = 0;
-    ((ActorMotionState *)arg1)->unk128 = 0;
-    ((ActorMotionState *)arg1)->unk12C = 0;
-    if (((BreakableDefinition *)((LevelActor *)arg0)->definition)->flags & 1) {
-        ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x10000;
+void func_80204468_de(LevelActor *arg0, ActorMotionState *arg1) {
+    arg1->table = &D_800C8274;
+    arg1->update = &D_002043E0;
+    arg1->unk124 = 0;
+    arg1->unk128 = 0;
+    arg1->unk12C = 0;
+    if (((BreakableDefinition *)arg0->definition)->flags & 1) {
+        arg0->flags = arg0->flags | 0x10000;
         return;
     }
-    ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags & 0xFFFEFFFF;
+    arg0->flags = arg0->flags & 0xFFFEFFFF;
 }
 
 /** Update actor state and clear flags for the relevant actor classes. */
@@ -127,16 +128,16 @@ void func_802045CC_de(void *arg0, void *arg1) {
     state->unk12C = 0;
 }
 
-s32 func_80204620_de(void *arg0) {
+s32 func_80204620_de(LevelActor *arg0) {
     s32 val;
 
-    val = ((BreakableDefinition *)((LevelActor *)arg0)->definition)->health;
+    val = ((BreakableDefinition *)arg0->definition)->health;
     if (val != 0) {
-        ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2000;
+        arg0->flags = arg0->flags | 0x2000;
     } else {
-        s32 flags = ((LevelActor *)arg0)->flags & ~0x2000;
+        s32 flags = arg0->flags & ~0x2000;
         flags &= ~0x100;
-        ((LevelActor *)arg0)->flags = flags;
+        arg0->flags = flags;
     }
     return val;
 }
@@ -174,27 +175,27 @@ void func_80204728_de(void *arg0, void *arg1) {
 }
 
 /** Clear two flag groups when the object's 0x1B0 field exceeds a tunable. */
-void func_80204738_de(void *object) {
-    if (((LevelActor *)object)->motionThreshold > D_800C1A70_de) {
-        int flags = ((LevelActor *)object)->flags;
+void func_80204738_de(LevelActor *object) {
+    if (object->motionThreshold > D_800C1A70_de) {
+        int flags = object->flags;
         flags &= ~0x2000;
         flags &= ~0x100;
-        ((LevelActor *)object)->flags = flags;
+        object->flags = flags;
     }
 }
 
 void func_80204770_de(void *a, void *b) {
     extern void func_80214178_de(void *a, void *b, int c); func_80214178_de(a, b, 0x1); }
 
-void func_8020478C_de(void *arg0) {
-    func_8028B670_de(&D_8011FE88, (u16)((Trigger *)arg0)->unk8, (u32)((Trigger *)arg0)->unk4 >> 16, 1);
+void func_8020478C_de(Trigger *arg0) {
+    func_8028B670_de(&D_8011FE88, (u16)arg0->unk8, (u32)arg0->unk4 >> 16, 1);
 }
 
 void func_802047BC_de(void *a, void *b) {
     extern void func_80214178_de(void *a, void *b, int c); func_80214178_de(a, b, 0x0); }
 
-void func_802047D8_de(void *arg0) {
-    func_8028B670_de(&D_8011FE88, (u16)((Trigger *)arg0)->unk8, (u32)((Trigger *)arg0)->unk4 >> 16, 0);
+void func_802047D8_de(Trigger *arg0) {
+    func_8028B670_de(&D_8011FE88, (u16)arg0->unk8, (u32)arg0->unk4 >> 16, 0);
 }
 
 void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {

@@ -9,7 +9,8 @@
 
 
 
-extern s32 func_80258A7C_de(void *arg0, s32 arg1, Vec3 arg2,
+struct ContextRecAt2BC0;
+extern s32 func_80258A7C_de(struct ContextRecAt2BC0 *arg0, s32 arg1, Vec3 arg2,
                          s32 arg3, s32 arg4, f32 arg5);
 
 

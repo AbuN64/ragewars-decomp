@@ -43,25 +43,25 @@ extern void func_802A3DD4_de(s32, void *, s32);
 
 extern void func_802A25D0_de(void *arg0, void *arg1, f32 *arg2);
 
-void func_802A5D38_de(void *arg0, s32 arg1) {
+void func_802A5D38_de(SceneRecAt95A8 *arg0, s32 arg1) {
     s32 count;
     s32 offset;
     void **slot;
     Particle *node;
     Particle *next;
 
-    if (((SceneRecAt95A8 *)arg0)->free.count != 0x64) {
+    if (arg0->free.count != 0x64) {
         count = 0;
         offset = 0x94E0;
         do {
-            slot = &((SceneRecAt95A8 *)arg0)->lists[count].head;
+            slot = &arg0->lists[count].head;
             node = *slot;
             if (node != 0) {
                 do {
                     next = node->next;
                     if (node->owner == arg1) {
                         func_80255ED8_de(slot, (s32) node);
-                        func_80255D14_de(&((SceneRecAt95A8 *)arg0)->free, node);
+                        func_80255D14_de(&arg0->free, node);
                     }
                     node = next;
                 } while (node != 0);
@@ -221,7 +221,7 @@ void func_802A6068_de(Image *image, Image *texture, Sprite *sprite) {
     }
 }
 
-void func_802A6174_de(void *arg0, void *arg1) {
+void func_802A6174_de(Node44 *arg0, void *arg1) {
     f32 local[16];
     f32 scale;
     void *entry;
@@ -242,13 +242,13 @@ void func_802A6174_de(void *arg0, void *arg1) {
             func_8027347C_de(local, scale, scale, scale);
             func_80272828_de(local);
             func_802732D0_de((char *)local, &((ChildB4 *)arg1)->pos[0]);
-            if (((Node44 *)arg0)->unk_3C & 4) {
+            if (arg0->unk_3C & 4) {
                 func_802732EC_de(local, &((ChildB4 *)arg1)->rot[0]);
             } else {
                 func_8027027C_de(local, arg1 + ((D_800D297C << 6) + 0x28));
             }
         }
-        ((ChildB4 *)arg1)->unk_8 = ((Node44 *)arg0)->unk_8->unk_8;
+        ((ChildB4 *)arg1)->unk_8 = arg0->unk_8->unk_8;
     }
 }
 
@@ -308,10 +308,10 @@ void func_802A63A4_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
     }
 }
 
-void *func_802A6450_de(void *arg0, s32 arg1, s32 arg2) {
+void *func_802A6450_de(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
     State802A6DF8 *node;
 
-    node = ((Owner802A6DF8 *)arg0)->lists.inactive.head;
+    node = arg0->lists.inactive.head;
     if (node != 0) {
         do {
             if ((s32)node->object == arg1) {

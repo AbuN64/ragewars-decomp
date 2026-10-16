@@ -35,7 +35,8 @@ struct func_8024C284_S1 {
     s32 unk100;
 };
 
-extern s32 func_8024C294_de(void *arg0, s32 arg1);
+struct LevelActor;
+extern s32 func_8024C294_de(struct LevelActor *arg0, s32 arg1);
 
 extern float D_800C3BA8;
 
@@ -230,7 +231,7 @@ extern void func_8024BE58_de(void *object, int enabled);
 
 extern void func_8024C92C_de(void *arg0, s32 arg1, void *arg2);
 
-extern void func_8024CA10_de(void *arg0, s32 arg1, void *arg2);
+extern void func_8024CA10_de(void *arg0, s32 arg1, Vector4f *arg2);
 
 struct func_8024BA6C_S1;
 typedef struct func_8024BA6C_S1 func_8024BA6C_S1;

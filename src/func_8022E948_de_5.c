@@ -49,8 +49,8 @@ void func_8022F31C_de(void *object) {
 }
 
 /** Read the byte at object offset 0x14. */
-unsigned char func_8022F32C_de(void *arg0) {
-    return ((ObjCode8022E938 *)arg0)->value14;
+unsigned char func_8022F32C_de(ObjCode8022E938 *arg0) {
+    return arg0->value14;
 }
 
 /** Store a byte in the object field at offset 0x15. */
@@ -64,8 +64,8 @@ int func_8022F340_de(void *arg0) {
     return v;
 }
 
-unsigned char func_8022F350_de(void *arg0) {
-    return ((ObjCode8022E938 *)arg0)->value15;
+unsigned char func_8022F350_de(ObjCode8022E938 *arg0) {
+    return arg0->value15;
 }
 
 /** Store the supplied byte at offset 0x16. */
@@ -80,8 +80,8 @@ int func_8022F364_de(void *arg0) {
 }
 
 /** Read the object byte at offset 0x16. */
-unsigned char func_8022F374_de(void *object) {
-    return ((ObjCode8022E938 *)object)->value16;
+unsigned char func_8022F374_de(ObjCode8022E938 *object) {
+    return object->value16;
 }
 
 void func_8022F380_de(void *arg0, int arg1) {
@@ -94,8 +94,8 @@ void func_8022F388_de(void *object) {
 }
 
 /** Return the word stored at offset 0x10. */
-unsigned int func_8022F398_de(void *object) {
-    return ((ObjCode8022E938 *)object)->progress;
+unsigned int func_8022F398_de(ObjCode8022E938 *object) {
+    return object->progress;
 }
 
 /* Stores a byte into the object's slot table at 0x18: indices 0 to 10 directly, 17 and 18 into

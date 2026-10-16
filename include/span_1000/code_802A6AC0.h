@@ -53,7 +53,8 @@ struct Lists802A6DF8 {
 struct func_802A7164_S4;
 typedef struct func_802A7164_S4 func_802A7164_S4;
 
-extern void func_802A6174_de(void *arg0, void *arg1);
+struct Node44;
+extern void func_802A6174_de(struct Node44 *arg0, void *arg1);
 
 struct func_802A72F4_S1;
 typedef struct func_802A72F4_S1 func_802A72F4_S1;
@@ -109,7 +110,8 @@ struct Frame_func_802A7660_de {
     f32 height;
 };
 
-extern void func_802A7168_de(void *arg0);
+struct EntryRecAt34;
+extern void func_802A7168_de(struct EntryRecAt34 *arg0);
 
 struct Lists802A6DF8;
 typedef struct Lists802A6DF8 Lists802A6DF8;
@@ -482,7 +484,7 @@ struct State802A6FE0 {
     u32 flags;
 };
 
-extern void func_802A5AD0_de(void *arg0);
+extern void func_802A5AD0_de(ObjRecAt3CV1 *arg0);
 
 struct func_802A7480_S2;
 typedef struct func_802A7480_S2 func_802A7480_S2;

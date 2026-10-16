@@ -53,13 +53,13 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_80231F6C_de(void *actor, void *arg1) {
+void func_80231F6C_de(Shared_Actor *actor, WeaponFireState *arg1) {
     char *player;
     s32 action;
     s32 *pos;
     s32 type;
 
-    player = ((Shared_Actor *)(actor))->entity;
+    player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (func_80222AA4_de(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
@@ -69,8 +69,8 @@ void func_80231F6C_de(void *actor, void *arg1) {
     } else {
         pos = (s32 *)&((SharedPlayer *)(player))->views0.view8_2.unk8;
     }
-    if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && (type = ((WeaponFireState *)(arg1))->mode) == 1) {
-        ((WeaponFireState *)(arg1))->mode = 2;
+    if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && (type = arg1->mode) == 1) {
+        arg1->mode = 2;
         if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 0x32) {
             func_8025DE54_de(0xB23, pos[0], pos[1], pos[2], pos, player);
             func_80214178_de(actor, arg1, 5);
@@ -80,16 +80,16 @@ void func_80231F6C_de(void *actor, void *arg1) {
                 func_80239908_de(D_80145040 + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               func_8022A5A0_de(D_80145040, player), D_800C2FC8_de);
             }
-            ((WeaponFireState *)(arg1))->mode = type;
+            arg1->mode = type;
         }
         return;
     }
     if (func_802301F4_de(actor, arg1) == 0) {
-        if (!(((Shared_Actor *)(actor))->weaponFlags & 0x400)) {
+        if (!(actor->weaponFlags & 0x400)) {
             func_80214178_de(actor, arg1, action);
         }
         return;
     }
-    ((WeaponFireState *)(arg1))->mode = 1;
-    ((WeaponFireState *)(arg1))->spinStep = 0.0f;
+    arg1->mode = 1;
+    arg1->spinStep = 0.0f;
 }

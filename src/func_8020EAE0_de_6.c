@@ -29,9 +29,9 @@ extern void *func_8020C994_de(void *, s32);
 
 extern void func_8020D220_de(void *, s32);
 
-extern s32 func_8022AAD4_de(void *, s32);
+extern s32 func_8022AAD4_de(Player *, s32);
 
-s32 func_8020F2A8_de(void *arg0) {
+s32 func_8020F2A8_de(CloseAttackBrain *arg0) {
     s32 data[30];
     s32 *cursor;
     s32 count;
@@ -52,22 +52,22 @@ s32 func_8020F2A8_de(void *arg0) {
     } while (count >= 0);
     data[0] = 0xBD7;
     if (func_8020F150_de(data) == 0) {
-        ((CloseAttackBrain *)arg0)->routeObject = 0;
-        ((CloseAttackBrain *)arg0)->routeState = -1;
+        arg0->routeObject = 0;
+        arg0->routeState = -1;
         return 1;
     }
     value = -1;
     global->result = value;
-    func_8020D0CC_de(global, ((CloseAttackBrain *)arg0)->route);
+    func_8020D0CC_de(global, arg0->route);
     current = global->result;
     if (current != value) {
         entry = func_8020CFE0_de(global, current);
-        ((CloseAttackBrain *)arg0)->destination = global->result;
-        ((CloseAttackBrain *)arg0)->routeObject = entry->object;
-        func_8020D114_de(global, &((CloseAttackBrain *)arg0)->routeNodes[0], 4);
+        arg0->destination = global->result;
+        arg0->routeObject = entry->object;
+        func_8020D114_de(global, &arg0->routeNodes[0], 4);
     } else {
-        ((CloseAttackBrain *)arg0)->routeObject = 0;
-        ((CloseAttackBrain *)arg0)->routeState = current;
+        arg0->routeObject = 0;
+        arg0->routeState = current;
     }
     return 1;
 }
@@ -107,7 +107,7 @@ s32 func_8020F388_de(void *arg0) {
     return 1;
 }
 
-s32 func_8020F444_de(void *arg0) {
+s32 func_8020F444_de(AiController *arg0) {
     NavigationGraph *global;
     NavigationGraph *scanbase;
     NavigationSearchNode *node;
@@ -137,17 +137,17 @@ s32 func_8020F444_de(void *arg0) {
         } while (node != 0);
     }
     if (count == 0) {
-        ((AiController *)arg0)->routeObject = 0;
-        ((AiController *)arg0)->routeState = -1;
+        arg0->routeObject = 0;
+        arg0->routeState = -1;
         return 1;
     }
     value = -1;
     global->result = value;
-    func_8020D0CC_de(global, ((AiController *)arg0)->current);
+    func_8020D0CC_de(global, arg0->current);
     current = global->result;
     if (current != value) {
-        ((AiController *)arg0)->mode = current;
-        func_8020D114_de(global, &((AiController *)arg0)->queue, 4);
+        arg0->mode = current;
+        func_8020D114_de(global, &arg0->queue, 4);
     }
     return 1;
 }

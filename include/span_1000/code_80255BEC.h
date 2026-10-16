@@ -7,7 +7,8 @@ extern void func_80255CA0_de(IntrusiveList *list, s32 prevOffset, s32 nextOffset
 /* Appends node at the tail and returns the new count. */
 extern s32 func_80255D14_de(IntrusiveList *list, void *node);
 
-extern void func_80255C4C_de(void *arg0, s32 *arg1, u32 *arg2);
+struct Pool80255ACC;
+extern void func_80255C4C_de(struct Pool80255ACC *arg0, s32 *arg1, u32 *arg2);
 
 extern void func_80255E24_de(void *arg0, s32 arg1, s32 arg2);
 
@@ -36,7 +37,7 @@ struct func_80255F34_S1 {
 struct func_80255BEC_S2;
 typedef struct func_80255BEC_S2 func_80255BEC_S2;
 
-extern void func_80255F94_de(void *arg0);
+extern void func_80255F94_de(IntrusiveList *arg0);
 
 
 
@@ -59,7 +60,7 @@ struct func_80255BEC_S2 {
     u32 unk14;
 };
 
-extern void func_80256214_de(void *arg0);
+extern void func_80256214_de(IntrusiveList *arg0);
 
 extern void func_802560A4_de(void *arg0, s32 arg1);
 

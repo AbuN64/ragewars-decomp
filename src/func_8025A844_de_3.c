@@ -16,7 +16,7 @@
 #include "shared/menu_match_globals.h"
 
 
-extern s32 func_802395A4_de(void *, Triple *);
+extern s32 func_802395A4_de(MenuMatchGlobals *, Triple *);
 extern void func_802B2F00_de(char *, s32);
 extern s32 func_802B2620_de(char *);
 extern void alSndpStop(char *);
