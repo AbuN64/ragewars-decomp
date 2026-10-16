@@ -9,7 +9,7 @@
 
 
 
-extern s32 func_8028B21C_de(void *, s32);
+extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 s32 func_80439C80_de(struct Record_func_80439C80_de *record, s32 count) {
     record->count = count;

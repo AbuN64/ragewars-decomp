@@ -36,8 +36,8 @@ extern void func_80208AAC_de(void *);
 
 
 
-void func_80213500_de(void *arg0) {
-    void *actor = ((Actor_func_8022D290_de *)(((Shared_Actor *)(arg0))->entity))->unk_0x1454;
+void func_80213500_de(Shared_Actor *arg0) {
+    void *actor = ((Actor_func_8022D290_de *)(arg0->entity))->unk_0x1454;
     void *player;
     s32 busy;
     s32 held;
@@ -117,9 +117,9 @@ extern void *func_8020C994_de(void *, s32);
 
 
 
-void func_802136EC_de(void *arg0)
+void func_802136EC_de(Shared_Actor *arg0)
 {
-    void *actor = ((Actor_func_8022D290_de *)(((Shared_Actor *)(arg0))->entity))->unk_0x1454;
+    void *actor = ((Actor_func_8022D290_de *)(arg0->entity))->unk_0x1454;
 
     ((Brain_func_80212D78_eu_x *)(actor))->unk220 = 0;
     {

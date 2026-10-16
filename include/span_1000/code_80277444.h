@@ -111,7 +111,8 @@ struct func_80278EEC_S1 {
     char unkE;
 };
 
-extern void func_8027907C_de(s32 arg0, s32 arg1, void *arg2);
+struct Trigger;
+extern void func_8027907C_de(s32 arg0, s32 arg1, struct Trigger *arg2);
 
 struct ObjectRecAt8;
 typedef struct ObjectRecAt8 ObjectRecAt8;
@@ -139,6 +140,7 @@ typedef struct Vertex38 { u8 pad0[6]; u16 flags; u8 pad8[4]; s8 x,y,z; u8 padF; 
 typedef struct Vertices38 { s32 stride, count; Vertex38 vertices[1]; } Vertices38;
 typedef struct Light38 { u8 pad0[0x11]; s8 x,y,z; } Light38;
 
-extern s32 func_8028C568_de(void *arg0, void *arg1);
+struct WorldRecAt1B40C;
+extern s32 func_8028C568_de(struct WorldRecAt1B40C *arg0, Record14 *arg1);
 
 #endif

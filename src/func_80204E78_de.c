@@ -16,20 +16,20 @@ int func_80204E78_de(int arg0) {
 }
 
 /** Submit an object's three-word record, then attach it in mode one. */
-void func_80204EA8_de(void *arg0) {
+void func_80204EA8_de(LevelActor *arg0) {
     ResourceManagerState pair;
 
     pair.active = 0;
-    func_80267198_de(arg0, arg0, 6, ((LevelActor *)arg0)->position0, pair);
+    func_80267198_de(arg0, arg0, 6, arg0->position0, pair);
     func_80285DB0_de(&D_8011FE88, arg0, 1);
 }
 
 /** Submit an object's three-word record, then attach it to the global owner. */
-void func_80204F10_de(void *arg0) {
+void func_80204F10_de(LevelActor *arg0) {
     ResourceManagerState pair;
 
     pair.active = 0;
-    func_80267198_de(arg0, arg0, 7, ((LevelActor *)arg0)->position0, pair);
+    func_80267198_de(arg0, arg0, 7, arg0->position0, pair);
     func_80285DB0_de(&D_8011FE88, arg0, 0);
 }
 

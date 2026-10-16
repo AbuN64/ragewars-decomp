@@ -4,7 +4,9 @@ extern s32 D_800C8140_de;
 extern u8 D_800F2CE0[],D_800F2CC0[];
 extern u8 func_80200840_de(u32);
 
-extern s32 func_802B8CF0_de(void *,s32,s32,u32,void *,u32,void *);
+struct OSIoMesg;
+struct Opaque_OSMesgQueue;
+extern s32 func_802B8CF0_de(struct OSIoMesg *,s32,s32,u32,void *,u32,struct Opaque_OSMesgQueue *);
 extern void func_802BB2A0_de(void *,void *,s32);
 void func_8020095C_de(u32 address,u8 *out,u32 count) {
  s32 status = -(D_800C8140_de == 0); u32 word;

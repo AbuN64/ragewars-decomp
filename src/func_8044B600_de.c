@@ -4,7 +4,7 @@
 #include "shared/func_80245BC0_de_closed.h"
 #include "shared/func_8044DA54_de_closed.h"
 #include "span_16E000/code_8044ACCC.h"
-extern s32 func_8028B21C_de(void *, s32);
+extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028C198_de(void *, s32);
 extern void **func_8025193C_de(s32, s32, s32, s32, s32, s32, ResourceCallback33, void *, s32);
 extern s32 func_8028FE28_de(s32 *, s32, s32);

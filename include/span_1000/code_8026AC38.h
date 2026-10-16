@@ -154,6 +154,8 @@ struct BankRecAt94;
 struct Object_func_8028B274_de;
 extern void func_8028B274_de(struct BankRecAt94 *, struct Object_func_8028B274_de *, s32, s32);
 
-extern void func_80285570_de(void *, void *);
+struct MeshMaterial;
+struct PackedMeshMaterial;
+extern void func_80285570_de(struct MeshMaterial *, struct PackedMeshMaterial *);
 
 #endif

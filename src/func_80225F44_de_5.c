@@ -112,7 +112,7 @@ extern void func_80253754_de(s32 arg0, s32 arg1);
 
 extern void *func_802392EC_de(s32);
 
-extern s32 func_8028B21C_de(char *, s32);
+extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 extern void *func_8028C198_de(char *, s32);
 
@@ -396,7 +396,7 @@ generic:
     }
 }
 
-void func_80228958_de(void *game, s32 view) {
+void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     extern s32 D_801468A0[];
     char *player;
     s32 *match;
@@ -410,7 +410,7 @@ void func_80228958_de(void *game, s32 view) {
         team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) func_802392EC_de(view))->name)->team;
     }
     func_8026D980_de();
-    for (player = ((ObjRecAt20V2 *)(game))->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
+    for (player = game->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
         zoomed = 0;
         if (((ObjectLinks16E4 *)(player))->unk_11FC > 0.0f) {
             zoomed = 1;

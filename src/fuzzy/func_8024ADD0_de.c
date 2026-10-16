@@ -6,7 +6,7 @@
 #include "types.h"
 s32 func_802799C0_de(void *arg0, s32 arg1);
 float func_8024E678_de(void *object);
-f32 func_8024E2FC_de(void *arg0);
+f32 func_8024E2FC_de(Actor_u1 *arg0);
 s32 func_8027254C_de(f32 *arg0, f32 arg1);
 void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 void func_80273448_de(char *object, float x, float y, float z);

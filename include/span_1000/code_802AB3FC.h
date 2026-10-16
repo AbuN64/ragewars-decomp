@@ -45,7 +45,8 @@ struct func_802ADA44_S1 {
 
 
 
-extern s32 func_802AD1B4_de(void *arg0);
+struct Shared_ActorView;
+extern s32 func_802AD1B4_de(struct Shared_ActorView *arg0);
 
 
 

@@ -20,7 +20,7 @@ extern void func_802AF990_us_rev1(void);
 extern void func_802BD280_de(void *, s32);
 extern s32 func_802B9A40_de(s32, u32, void *, u32);
 extern void func_802BCF70_de(void *, s32);
-extern void func_80256688_de(s32, void *);
+extern void func_80256688_de(s32, CartridgeReadRequest *);
 
 
 

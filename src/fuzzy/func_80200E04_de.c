@@ -5,7 +5,9 @@ extern s32 D_800C8140_de;
 extern func_802BDDC0_S1 D_800F2CE0;
 extern OSMesgQueue D_800F2CC0;
 extern void func_80200CA0_de(u32, u8);
-extern s32 func_802B8CF0_de(void *, s32, s32, s32, s32, s32, s32);
+struct OSIoMesg;
+struct Opaque_OSMesgQueue;
+extern s32 func_802B8CF0_de(struct OSIoMesg *, s32, s32, s32, s32, s32, struct Opaque_OSMesgQueue *);
 extern s32 func_802BB2A0_de(OSMesgQueue *, void **, s32);
 
 /* Write an arbitrary byte stream to the device, using DMA when aligned
@@ -25,7 +27,7 @@ void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
             remaining -= 4;
         } else {
             dmaResult = func_802B8CF0_de(&D_800F2CE0, 1, 1, address,
-                (s32)source, remaining, (s32)&D_800F2CC0);
+                (s32)source, remaining, &D_800F2CC0);
             if (dmaResult != -1) {
                 func_802BB2A0_de(&D_800F2CC0, 0, 1);
                 remaining = 0;

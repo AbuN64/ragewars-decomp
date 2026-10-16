@@ -127,7 +127,8 @@ typedef struct func_8024E640_S1 func_8024E640_S1;
 struct func_8024E58C_S2;
 typedef struct func_8024E58C_S2 func_8024E58C_S2;
 
-extern int func_8024E2B0_de(void *arg0);
+struct LevelActor;
+extern int func_8024E2B0_de(struct LevelActor *arg0);
 
 struct func_8024E2EC_S2;
 typedef struct func_8024E2EC_S2 func_8024E2EC_S2;

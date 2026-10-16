@@ -112,7 +112,8 @@ struct func_80213340_S2 {
 struct func_80213340_S2;
 typedef struct func_80213340_S2 func_80213340_S2;
 
-extern void func_80212CC4_de(void *arg0);
+struct AiTarget;
+extern void func_80212CC4_de(struct AiTarget *arg0);
 
 extern void func_802131AC_de(void *arg0);
 
@@ -125,7 +126,7 @@ typedef struct func_80212D94_S3 func_80212D94_S3;
 struct func_80213500_S7;
 typedef struct func_80213500_S7 func_80213500_S7;
 
-extern void func_8021321C_de(void *arg0);
+extern void func_8021321C_de(Root802131E0 *arg0);
 
 union func_802138F0_S2_U18;
 typedef union func_802138F0_S2_U18 func_802138F0_S2_U18;
@@ -151,7 +152,7 @@ struct func_802138F0_S1 {
     s16 unk102;
 };
 
-extern void func_802136EC_de(void *arg0);
+extern void func_802136EC_de(Shared_Actor *arg0);
 
 union func_802138F0_S2_U18;
 union func_802138F0_S2_U18 {
@@ -242,9 +243,9 @@ struct func_80213500_S3 {
     s32 unk320;
 };
 
-extern void func_80212C90_de(void *arg0);
+extern void func_80212C90_de(struct AiTarget *arg0);
 
-extern void func_80213500_de(void *arg0);
+extern void func_80213500_de(Shared_Actor *arg0);
 
 struct func_8021321C_S5;
 typedef struct func_8021321C_S5 func_8021321C_S5;

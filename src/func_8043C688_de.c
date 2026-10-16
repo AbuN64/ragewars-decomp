@@ -63,7 +63,8 @@ extern char D_8011FAC0[];
 extern s32 func_8026437C_de(s32 buttons);
 
 
-extern void func_80293284_de(void *menu, s32 target);
+struct GameSession;
+extern void func_80293284_de(struct GameSession *menu, s32 target);
 extern s32 func_802934F8_de(void);
 
 extern void func_8043DE50_de(Shared_MenuInput *pad);

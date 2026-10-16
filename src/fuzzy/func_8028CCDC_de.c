@@ -2,7 +2,8 @@
 #include "resident_event_handler.h"
 #include "shared/gameplay_reactions.h"
 void func_80216488_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
-void func_802171FC_de(void *arg0, void *arg1);
+struct CallbackState114;
+void func_802171FC_de(void *arg0, struct CallbackState114 *arg1);
 void func_8028CCDC_de(void *arg0, s32 arg1, s32 arg2) {
     Shared_ReactionInteraction sp18;
     s32 temp_s2;

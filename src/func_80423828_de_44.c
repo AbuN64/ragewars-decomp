@@ -25,7 +25,7 @@ extern struct MenuSettings D_801462C8;
 
 extern char *func_8042B1B8_de(s32, s32);
 
-extern void func_8028D380_de(void *, char *, char *, s32);
+extern void func_8028D380_de(Shared_World *, char *, char *, s32);
 
 extern char *func_802A0494_de(char *);
 

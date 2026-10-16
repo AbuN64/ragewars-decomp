@@ -21,7 +21,7 @@ static inline u16 *viRetrace(void)
     return &D_80148840;
 }
 
-void func_802BA4C0_de(void *arg)
+void func_802BA4C0_de(struct OSDevMgr *arg)
 {
     struct __OSViContext *vc;
     struct OSDevMgr *dm;
@@ -42,7 +42,7 @@ void func_802BA4C0_de(void *arg)
     if (*retraceInit == 0) {
         *retraceInit = 1;
     }
-    dm = (struct OSDevMgr *)arg;
+    dm = arg;
 
     while (1) {
         func_802BB2A0_de(dm->evtQueue, (OSMesg *)&mb, 1);

@@ -61,11 +61,11 @@ void *func_8020C9B0_de(struct EntryList8020CCE8 *object, int index) {
     return base + (index * stride + 8);
 }
 
-s32 func_8020C9CC_de(void *arg0) {
+s32 func_8020C9CC_de(Link *arg0) {
     u8 temp_v1;
     s32 val;
 
-    temp_v1 = ((Link *)arg0)->type;
+    temp_v1 = arg0->type;
     val = temp_v1;
     if (val == 4) {
         goto ret1;

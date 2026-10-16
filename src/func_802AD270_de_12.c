@@ -5,9 +5,9 @@
 #include "common/unused.h"
 
 /* alAuxBusPull: clears the aux left and right output buffers, then pulls every source filter of the bus into the command list. */
-Acmd *func_802B3E00_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
+Acmd *func_802B3E00_de(ALAuxBus_s *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) {
     Acmd *ptr = p;
-    ALAuxBus_s *m = (ALAuxBus_s *)filter;
+    ALAuxBus_s *m = filter;
     ALFilter_s14 **sources = m->sources;
     s32 i;
 

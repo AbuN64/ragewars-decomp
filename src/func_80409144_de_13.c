@@ -93,7 +93,8 @@ extern void func_80264788_de(s32 ch);
 
 extern void func_8044D528_de(char *, s32, s32);
 
-extern void func_8044DDD4_de(char *);
+struct GameSession;
+extern void func_8044DDD4_de(struct GameSession *);
 
 extern void func_80404E28_de(s32 ch);
 

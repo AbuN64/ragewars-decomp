@@ -20,7 +20,7 @@ extern void func_8026F620_de(void *, void *, void *);
 extern char *func_8028FDB4_de(s32 *, s32);
 
 
-extern void *func_8028B2F8_de(void *, u16 *);
+extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
 extern void func_80240CAC_de(QueryE0 *arg0);
 
@@ -140,10 +140,10 @@ void func_80243814_de(Hit8 *arg0, Hit8 *arg1) {
     *arg1 = temporary;
 }
 
-s32 func_80243850_de(void *arg0, void *arg1) {
+s32 func_80243850_de(Hit8 *arg0, Hit8 *arg1) {
     s32 var_v0;
     var_v0 = 1;
-    if ((((Hit8 *)arg0)->t) < (((Hit8 *)arg1)->t)) {
+    if ((arg0->t) < (arg1->t)) {
         var_v0 = -1;
     }
     return var_v0;

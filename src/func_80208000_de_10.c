@@ -83,8 +83,8 @@ int func_8020D318_de(void *arg0) {
     return node->open == 2;
 }
 
-s32 func_8020D328_de(void *arg0) {
-    NavigationGraph *graph = (NavigationGraph *)arg0;
+s32 func_8020D328_de(NavigationGraph *arg0) {
+    NavigationGraph *graph = arg0;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
         do {

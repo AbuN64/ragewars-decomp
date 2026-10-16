@@ -113,12 +113,12 @@ void func_80279048_de(void *arg0, void *arg1) {
     (((struct FloatState64 *) ((s8 *) arg1))->unk_60) = (f32) (((struct ObjectState104 *) ((s8 *) arg0))->unk_6C);
 }
 
-void func_8027907C_de(s32 arg0, s32 arg1, void *arg2) {
-    if ((u16)((Trigger *)arg2)->unk4 >= 0x100) {
-        func_8025E11C_de((u16)((Trigger *)arg2)->unk4);
+void func_8027907C_de(s32 arg0, s32 arg1, Trigger *arg2) {
+    if ((u16)arg2->unk4 >= 0x100) {
+        func_8025E11C_de((u16)arg2->unk4);
         return;
     }
-    func_8025E2D4_de((u16)((Trigger *)arg2)->unk4);
+    func_8025E2D4_de((u16)arg2->unk4);
 }
 
 void func_802790C0_de(struct Shared_Actor *arg0, s32 *arg1) {

@@ -99,7 +99,7 @@ void func_8022C8FC_de(struct SharedPlayer *arg0, void *arg1) {
     }
 }
 
-void func_8022CA14_de(void *arg0, void *arg1) {
+void func_8022CA14_de(Player *arg0, void *arg1) {
     Vec3 vector;
     f32 scale;
     u8 *result;
@@ -120,7 +120,7 @@ void func_8022CA14_de(void *arg0, void *arg1) {
                       &((LevelActor *)arg1)->position1, &vector);
     }
 
-    state = ((Shared_ControlView *)((Player *)arg0)->profile)->transientFlag;
+    state = ((Shared_ControlView *)arg0->profile)->transientFlag;
     if (state == 1) {
         audio = &D_801468A0;
         if (audio->active != 0) {
@@ -128,25 +128,25 @@ void func_8022CA14_de(void *arg0, void *arg1) {
             switch (mode) {
         case 0:
             func_8025DE54_de(0x18A1,
-                          ((Player *)arg0)->pos,
-                          (s32)&((Player *)arg0)->pos, -1);
+                          arg0->pos,
+                          (s32)&arg0->pos, -1);
             break;
         case 1:
             func_8025DE54_de(0x1969,
-                          ((Player *)arg0)->pos,
-                          (s32)&((Player *)arg0)->pos, -1);
+                          arg0->pos,
+                          (s32)&arg0->pos, -1);
             break;
         case 2:
             func_8025DE54_de(0x1905,
-                          ((Player *)arg0)->pos,
-                          (s32)&((Player *)arg0)->pos, -1);
+                          arg0->pos,
+                          (s32)&arg0->pos, -1);
             break;
             }
         }
     }
 }
 
-void func_8022CB5C_de(void *arg0, void *arg1) {
+void func_8022CB5C_de(void *arg0, LevelActor *arg1) {
     extern void func_802227F4_de(void *, void *, s32);
     f32 scale;
 
@@ -177,8 +177,8 @@ transition:
     func_802227F4_de(arg0, arg1, 6);
     goto finish;
 scale_value:
-    ((LevelActor *)arg1)->position1.y =
-        scale * ((Resource_u1 *)((LevelActor *)arg1)->definition)->value20;
+    arg1->position1.y =
+        scale * ((Resource_u1 *)arg1->definition)->value20;
 finish:
     func_8022CC34_de(arg0, arg1);
 }
@@ -224,7 +224,7 @@ void func_8022CD78_de(void *arg0, void *arg1) {
     (((struct func_8022CA04_S3 *) ((s8 *) arg1))->unk20) = (f32) D_800C2D88_de;
 }
 
-void func_8022CDBC_de(void *arg0, void *arg1) {
+void func_8022CDBC_de(void *arg0, LevelActor *arg1) {
     extern void func_802227F4_de(void *, void *, s32);
     f32 temp_f2;
 
@@ -234,7 +234,7 @@ void func_8022CDBC_de(void *arg0, void *arg1) {
         (((Shared_ActorView *)arg0)->actionTimer >= D_800C2D8C_de)) {
         func_802227F4_de(arg0, arg1, 8);
     } else {
-        ((LevelActor *)arg1)->position1.y = D_800C2D90_de;
+        arg1->position1.y = D_800C2D90_de;
     }
     func_8022CE78_de((s32)arg0, (s32)arg1);
 }

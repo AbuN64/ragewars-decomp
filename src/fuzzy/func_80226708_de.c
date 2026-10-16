@@ -14,7 +14,8 @@ extern struct World D_8011FE88;
 extern s32 D_801468F4, D_80146938;
 extern u8 D_801462D5;
 extern PlayerBonus D_800FEB10[];
-extern void *func_8028CFA0_de(void *, s32, s32);
+struct Shared_World;
+extern void *func_8028CFA0_de(struct Shared_World *, s32, s32);
 
 void func_80226708_de(Player *player) {
     ActorTemplate *model;

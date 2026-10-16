@@ -5,9 +5,9 @@
 #include "span_1000/code_80212C90.h"
 #include "types.h"
 
-void func_80212C90_de(void *arg0) {
+void func_80212C90_de(AiTarget *arg0) {
     AiController *temp_s0;
-    temp_s0 = ((AiTarget *)arg0)->player->controller;
+    temp_s0 = arg0->player->controller;
     ((CloseAttackBrain *)temp_s0)->state = 0;
     func_80209988_de(temp_s0);
     temp_s0->unk2FC = 0;
@@ -26,17 +26,17 @@ extern char D_80145040;
 
 
 
-void func_80212CC4_de(void *arg0) {
+void func_80212CC4_de(AiTarget *arg0) {
     AiController *rec;
     void *v0;
 
-    rec = ((AiTarget *)arg0)->player->controller;
+    rec = arg0->player->controller;
     v0 = func_8022A83C_de(&D_80145040);
     if (v0 == 0 || v0 != (void *)rec->player) {
         func_80209874_de(rec, 2);
         return;
     }
-    rec = ((AiTarget *)arg0)->player->controller;
+    rec = arg0->player->controller;
     func_80211020_de(rec);
     func_80209948_de(rec, rec->mode);
     func_80208410_de(rec);

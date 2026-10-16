@@ -63,7 +63,7 @@ extern void func_8022C490_de(SharedPlayer_func_80226A34_de *);
 extern void func_80220ED4_de(SharedPlayer_func_80226A34_de *);
 extern void func_80220A80_de(SharedPlayer_func_80226A34_de *, SharedPlayer_func_80226A34_de *);
 
-extern s32 func_8026435C_de(void *);
+extern s32 func_8026435C_de(Shared_Effect *);
 
 extern s32 func_802A23B4_de(void);
 extern s32 func_80442A28_de(Menu_func_80226A34_de *);

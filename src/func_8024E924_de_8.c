@@ -63,32 +63,32 @@ void func_8024F4A0_de(void *arg0) {
 
 extern f32 D_800D2988;
 
-void func_8024F5A0_de(void *arg0) {
+void func_8024F5A0_de(StaticObject *arg0) {
     f32 temp_f1;
     f32 threshold;
     f32 final_value;
 
-    if (((StaticObject *)(arg0))->flags & 0x10) {
-        temp_f1 = ((StaticObject *)(arg0))->scaleTime +
+    if (arg0->flags & 0x10) {
+        temp_f1 = arg0->scaleTime +
                   D_800D2988 * D_800C3E00_de;
         threshold = (&D_800C3E00_de)[1];
-        ((StaticObject *)(arg0))->scaleTime = temp_f1;
+        arg0->scaleTime = temp_f1;
         if (temp_f1 < threshold) {
-            ((StaticObject *)(arg0))->scale = temp_f1 * D_800C3E08_de;
+            arg0->scale = temp_f1 * D_800C3E08_de;
             return;
         }
         final_value = D_800C3E0C_de;
-        ((StaticObject *)(arg0))->flags &= 0xFFEF;
-        ((StaticObject *)(arg0))->scale = final_value;
+        arg0->flags &= 0xFFEF;
+        arg0->scale = final_value;
     }
 }
 
 /** Stores D_800D2988 times the float at 0x20 of the object at 0x18 in the float at 0x1A4. */
 extern float D_800D2988;
 
-void func_8024F618_de(void *arg0) {
-    void *p = ((StaticObject *)(arg0))->type;
-    ((StaticObject *)(arg0))->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
+void func_8024F618_de(StaticObject *arg0) {
+    void *p = arg0->type;
+    arg0->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
 }
 
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
@@ -165,18 +165,18 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
 extern s32 D_801462C8;
 extern s32 func_8028B25C_de(void *arg0, s32 arg1);
 
-s32 func_8024F858_de(void *arg0) {
+s32 func_8024F858_de(StaticObject *arg0) {
     void *obj;
     s32 value;
     s32 index;
 
-    obj = ((StaticObject *)(arg0))->type;
+    obj = arg0->type;
     if (*(s32 *)obj == 0xC) {
         return 0;
     }
 
     value = ((PropGeometry *)(obj))->variant;
-    index = func_8028B25C_de(&D_8011FE88, ((StaticObject *)(arg0))->id);
+    index = func_8028B25C_de(&D_8011FE88, arg0->id);
     if (index < 0x6AB) {
         if (index < 0x6A9) {
             return value;

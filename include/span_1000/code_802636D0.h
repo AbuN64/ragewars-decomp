@@ -84,7 +84,7 @@ struct Obj80264124 {
 
 extern void func_80263CF0_de(void *arg0);
 
-extern int func_8026436C_de(void *arg0);
+extern int func_8026436C_de(Shared_Effect *arg0);
 
 
 
@@ -105,7 +105,7 @@ typedef struct func_80264268_S1 func_80264268_S1;
 
 
 
-extern int func_802643E8_de(void *arg0);
+extern int func_802643E8_de(Shared_Effect *arg0);
 
 extern float D_800C4308_de;
 

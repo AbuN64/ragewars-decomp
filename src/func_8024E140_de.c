@@ -97,6 +97,6 @@ unsigned int func_8024E29C_de(char *object) {
 }
 
 /** Report whether the object pointed to at offset 0x18 equals one. */
-int func_8024E2B0_de(void *arg0) {
-    return *(int *)(((LevelActor *)arg0)->definition) == 1;
+int func_8024E2B0_de(LevelActor *arg0) {
+    return *(int *)(arg0->definition) == 1;
 }

@@ -5,16 +5,16 @@
 #include "common/unused.h"
 #include "resident_event_handler.h"
 #include "shared/func_80214624_de_closed.h"
+#include "shared/func_8021E2A0_de_closed.h"
 #include "shared/func_8027AD4C_de_closed.h"
 #include "shared/level_actor.h"
 #include "shared/world.h"
 #include "span_1000/code_802022E0.h"
 #include "span_1000/code_80206258.h"
 #include "span_1000/code_80271B18.h"
+#include "span_C76B0/data.h"
 #include "stddef.h"
 #include "types.h"
-#include "shared/func_8021E2A0_de_closed.h"
-#include "span_C76B0/data.h"
 
 
 void func_80203278_de(SharedPlayer *player, RiderRecAt130V1 *rider, Result *result);
@@ -197,30 +197,30 @@ void func_8020388C_de(struct OwnerRecAtE4 *owner, struct RecordRecAt13C *record)
     }
 }
 
-void func_80203908_de(void *arg0, void *arg1) {
+void func_80203908_de(LevelActor *arg0, struct RecordRecAt13C *arg1) {
     extern s32 func_80214178_de(void *, void *, s32);
     extern f32 D_800C6B30[];
     s32 flags;
     ActorMotionDefinition *record;
 
-    record = &((ActorMotionResource *)((LevelActor *)arg0)->definition)->motion;
-    if (((LevelActor *)arg0)->type == 0x40C) {
-        ((struct RecordRecAt13C *)arg1)->speed = D_800C6B30[1];
+    record = &((ActorMotionResource *)arg0->definition)->motion;
+    if (arg0->type == 0x40C) {
+        arg1->speed = D_800C6B30[1];
     } else {
-        ((struct RecordRecAt13C *)arg1)->speed = 0.0f;
+        arg1->speed = 0.0f;
     }
-    ((struct RecordRecAt13C *)arg1)->pad128 = 0;
-    ((struct RecordRecAt13C *)arg1)->threshold = record->eventThreshold;
+    arg1->pad128 = 0;
+    arg1->threshold = record->eventThreshold;
 
     if (func_80285F58_de(&D_8011FE88, arg0) == 0) {
         if (record->flags & 0x1000) {
-            flags = ((LevelActor *)arg0)->flags & ~0x2000;
+            flags = arg0->flags & ~0x2000;
             flags = flags & ~0x100;
-            ((LevelActor *)arg0)->flags = flags;
+            arg0->flags = flags;
         }
         if (record->flags & 0x800) {
-            ((LevelActor *)arg0)->flags =
-                ((LevelActor *)arg0)->flags & ~0x100;
+            arg0->flags =
+                arg0->flags & ~0x100;
             func_80214178_de(arg0, arg1, 0);
         } else {
             func_80214178_de(arg0, arg1, 1);
@@ -228,7 +228,7 @@ void func_80203908_de(void *arg0, void *arg1) {
     } else {
         func_80214178_de(arg0, arg1, 0x40);
     }
-    ((struct RecordRecAt13C *)arg1)->state = 0;
+    arg1->state = 0;
 }
 
 void func_802039F8_de(char *arg0, Obj *arg1) {

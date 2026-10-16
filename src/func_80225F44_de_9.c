@@ -68,7 +68,7 @@ extern void func_80228AF4_de(void);
    seven other players (the shorts at 0x3C of its stats at 0x5D8) to the total of its team byte at
    0x92, returning 0 at once for a player without a team (0xFF), then returns the first team 0 to 4
    with the highest total. */
-s32 func_80229A80_de(void *game) {
+s32 func_80229A80_de(struct ObjectPool *game) {
     s32 total0;
     s32 total1;
     s32 total2;
@@ -86,8 +86,8 @@ s32 func_80229A80_de(void *game) {
     total2 = 0;
     total1 = 0;
     total0 = 0;
-    for (player = ((struct ObjectPool *)(game))->object_queue.head; player != 0; player = (char *)((struct Shared_ActorView *)(player))->next) {
-        self = (u32) (player - ((struct ObjectPool *)(game))->objects) / 0x16E8;
+    for (player = game->object_queue.head; player != 0; player = (char *)((struct Shared_ActorView *)(player))->next) {
+        self = (u32) (player - game->objects) / 0x16E8;
         for (other = 0; other < 8; other++) {
             if (other == self) {
                 continue;
@@ -141,9 +141,9 @@ s32 func_80229A80_de(void *game) {
 }
 
 /** Return the animation-table offset selected by the actor state. */
-s32 func_80229C0C_de(void *arg0, s32 arg1) {
+s32 func_80229C0C_de(struct Shared_ActorView *arg0, s32 arg1) {
     s32 *types = &D_800CE47C;
-    u16 type = ((struct Shared_ActorView *)(arg0))->kind;
+    u16 type = arg0->kind;
     char *state;
     s32 offset;
 
@@ -168,7 +168,7 @@ s32 func_80229C0C_de(void *arg0, s32 arg1) {
     } else if (type == types[-1]) {
         offset = 0x3E8;
     } else {
-        state = (char *)((struct Shared_ActorView *)(arg0))->controls;
+        state = (char *)arg0->controls;
         switch (((struct Shared_ControlView *)(state))->mode) {
         default:
             ((struct Shared_ControlView *)(state))->mode = 0;
@@ -362,14 +362,14 @@ void func_80229FA0_de(Obj_func_80229FA0_de *arg0, Damage_func_80229FA0_de *arg1)
     }
 }
 
-void func_8022A170_de(void *arg0) {
+void func_8022A170_de(struct ObjectPool *arg0) {
     void *node;
 
     if (*(void **)arg0 != 0) {
         func_80253BBC_de(0, *(void **)arg0);
     }
 
-    node = ((struct ObjectPool *)(arg0))->object_queue.head;
+    node = arg0->object_queue.head;
     if (node != 0) {
         u8 *base = D_801462C8;
 
@@ -385,14 +385,14 @@ void func_8022A170_de(void *arg0) {
     }
 }
 
-void func_8022A1FC_de(void *arg0, void *arg1) {
+void func_8022A1FC_de(struct ObjectPool *arg0, void *arg1) {
     void *node;
     int scale;
     s32 count1;
     s32 count2;
     char *entry;
 
-    node = ((struct ObjectPool *)(arg0))->object_queue.head;
+    node = arg0->object_queue.head;
     if (node != 0) {
         do {
             ((ObjectLinks16E4_2 *)(node))->unk_70 = 0;
@@ -512,7 +512,7 @@ int func_8022A414_de(void *arg0) {
     return (int)context->head;
 }
 
-void *func_8022A420_de(void *arg0) {
+void *func_8022A420_de(struct Context *arg0) {
     extern GlobalState D_801468A0;
     GlobalState *base = &D_801468A0;
     Shared_ActorView *record;
@@ -520,7 +520,7 @@ void *func_8022A420_de(void *arg0) {
     if (base->restricted != 0 && base->restrictionActive != 0) {
         return 0;
     }
-    record = (void *)((struct Context *)arg0)->head;
+    record = (void *)arg0->head;
     if (record != 0) {
         do {
             if (record->controls->transientFlag == 1) {

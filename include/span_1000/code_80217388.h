@@ -10,7 +10,8 @@ extern float D_800C2250_de;
 
 extern float D_800C22A8_de;
 
-extern void func_802174E4_de(void *arg0, void *unused1, Output80216D3C *arg2);
+struct Shared_ActorView;
+extern void func_802174E4_de(struct Shared_ActorView *arg0, void *unused1, Output80216D3C *arg2);
 
 struct SlotRecAt14;
 typedef struct SlotRecAt14 SlotRecAt14;

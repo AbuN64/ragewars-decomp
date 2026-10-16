@@ -420,12 +420,12 @@ s32 func_8041B534_de(struct MenuRecAt54 *menu) {
     return 0;
 }
 
-s32 func_8041B564_de(void *arg0) {
+s32 func_8041B564_de(OwnerRecAt44 *arg0) {
     extern s32 func_8025DF34_de(s32);
     void *p;
 
     func_8025DF34_de(0xE74);
-    p = ((OwnerRecAt44 *)arg0)->root;
+    p = arg0->root;
     if (p != 0) {
         do {
             if ((u16)((Node_func_8041B610_de *)p)->kind != 8) {

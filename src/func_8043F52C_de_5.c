@@ -52,7 +52,7 @@ extern u8 D_80152789;
 
 
 
-extern PreviewWidget *func_8028CFA0_de(void *,int,int);
+extern PreviewWidget *func_8028CFA0_de(Shared_World *,int,int);
 
 void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
     struct List_func_80442574_de *list = params->list;

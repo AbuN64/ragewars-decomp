@@ -81,8 +81,8 @@ extern void *func_8028D244_de(char *a, unsigned char b, short c);
 
 
 
-void *func_80219408_de(void *arg0) {
-    func_8028D244_de(&D_8011FE88, ((Cursor *)(arg0))->clip, ((Cursor *)(arg0))->frame);
+void *func_80219408_de(Cursor *arg0) {
+    func_8028D244_de(&D_8011FE88, arg0->clip, arg0->frame);
 }
 
 extern void *func_8028D244_de(char *a, unsigned char b, short c);
@@ -91,17 +91,17 @@ extern void *func_8028D244_de(char *a, unsigned char b, short c);
 
 
 
-void func_80219434_de(void *arg0) {
-    func_8028D244_de(&D_8011FE88, ((Cursor *)(arg0))->clip, ((Cursor *)(arg0))->previous);
+void func_80219434_de(Cursor *arg0) {
+    func_8028D244_de(&D_8011FE88, arg0->clip, arg0->previous);
 }
 
 /** Initialize the compact state record to its default values. */
-void func_80219460_de(void *record) {
-    ((CompactAnimationState *)(record))->active = 1;
-    ((CompactAnimationState *)record)->state = 0;
-    ((CompactAnimationState *)(record))->cursor = 0;
-    ((CompactAnimationState *)(record))->flags = 0;
-    ((CompactAnimationState *)(record))->clip = -1;
+void func_80219460_de(CompactAnimationState *record) {
+    record->active = 1;
+    record->state = 0;
+    record->cursor = 0;
+    record->flags = 0;
+    record->clip = -1;
 }
 
 void func_80219480_de(void) {

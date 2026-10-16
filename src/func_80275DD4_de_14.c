@@ -18,7 +18,7 @@ extern void func_8027207C_de(f32 *);
 
 
 
-s32 func_80277128_de(void *arg0, u32 arg1, u32 arg2, u32 arg3,
+s32 func_80277128_de(ObjectRecAtBC *arg0, u32 arg1, u32 arg2, u32 arg3,
                   Vec3 *arg4, f32 *arg5) {
     f32 temp_f0;
     f32 var_f0;
@@ -32,7 +32,7 @@ s32 func_80277128_de(void *arg0, u32 arg1, u32 arg2, u32 arg3,
     if (!(D_800C4AC0_de <= var_f3) && !(var_f3 <= D_800C4AC4_de) &&
         !(D_800C4AC0_de <= *(f32 *)&arg2) && !(*(f32 *)&arg2 <= D_800C4AC4_de) &&
         !(D_800C4AC0_de <= *(f32 *)&arg3) && !(*(f32 *)&arg3 <= D_800C4AC4_de)) {
-        temp_v1 = ((ObjectRecAtBC *)arg0)->shape;
+        temp_v1 = arg0->shape;
         switch (temp_v1) {
         case 0:
             var_f20 = (var_f3 * var_f3) + (*(f32 *)&arg2 * *(f32 *)&arg2) +
@@ -81,14 +81,14 @@ s32 func_80277128_de(void *arg0, u32 arg1, u32 arg2, u32 arg3,
         }
 shared:
         var_f20 = D_800C4AD0_de - var_f20;
-        temp_f0 = ((ObjectRecAtBC *)arg0)->falloff;
+        temp_f0 = arg0->falloff;
         if (var_f20 < temp_f0) {
             var_f20 /= temp_f0;
         } else {
             var_f20 = D_800C4AD0_de;
         }
-        if (((ObjectRecAtBC *)arg0)->shape == 1) {
-            *arg4 = ((ObjectRecAtBC *)arg0)->axis;
+        if (arg0->shape == 1) {
+            *arg4 = arg0->axis;
         } else {
             *arg4 = *(Vec3 *)&arg1;
         }

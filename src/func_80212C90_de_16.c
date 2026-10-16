@@ -24,7 +24,7 @@ extern s32 D_801462D0;
 
 
 
-void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 arg4, u8 *out) {
+void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 arg4, u8 *out) {
     s32 send;
     s32 first;
     s32 second;
@@ -40,9 +40,9 @@ void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 a
     level2 = (&D_800C2100_de)[1];
     first = 0;
     second = 0;
-    ((Dest *)voice)->handle = -1;
-    ((Dest *)voice)->pending = 0;
-    ((Dest *)voice)->channel = -1;
+    voice->handle = -1;
+    voice->pending = 0;
+    voice->channel = -1;
     pitch = level;
     if (def != 0) {
         send = ((ActorDefinitionHeader *)def)->send;
@@ -91,9 +91,9 @@ void func_802138F0_de(void *voice, void *def, ResourceManagerState unused, s32 a
     out[3] = send;
     out[1] = first;
     out[2] = second;
-    ((Dest *)voice)->health = pitch;
-    ((Dest *)voice)->level = (s32) level;
-    ((Dest *)voice)->secondaryLevel = (s32) level2;
-    ((Dest *)voice)->health <<= 8;
-    ((Dest *)voice)->maxHealth = ((Dest *)voice)->health;
+    voice->health = pitch;
+    voice->level = (s32) level;
+    voice->secondaryLevel = (s32) level2;
+    voice->health <<= 8;
+    voice->maxHealth = voice->health;
 }

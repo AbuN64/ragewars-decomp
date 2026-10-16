@@ -27,7 +27,7 @@ extern s32 func_802B003C_de(void *, s16 *);
 
 extern void func_802B0258_de(void *, s16);
 
-extern void alSynStopVoice(void *, void *);
+extern void alSynStopVoice(struct Shape_typemap_71 *, void *);
 
 extern void alSynFreeVoice(void *, void *);
 
@@ -103,9 +103,9 @@ void func_802AEAB0_de(void *arg0, InitParams *arg1) {
 /* Drain due compact-sequence events and advance to the next event time.
  * Event-kind10 reads the shared short carrier; kind12 uses its two byte
  * carriers for channel and priority. Existing message/voice views are reused. */
-ALMicroTime func_802AEC20_de(void *node)
+ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
 {
-    ALSeqPlayer *seqp = (ALSeqPlayer *)node;
+    ALSeqPlayer *seqp = node;
     ALEvent evt;
     ALVoice_s *voice;
     ALMicroTime delta;

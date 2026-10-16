@@ -1,12 +1,12 @@
 #include "span_1000/code_802AB3FC.h"
 #include "common/types_1dc8418c21db.h"
+#include "common/unused.h"
 #include "shared/gameplay_transition.h"
 #include "shared/level_actor.h"
 #include "shared/menu_match_globals.h"
+#include "span_1000/code_80204E78.h"
 #include "span_1000/code_80233920.h"
 #include "types.h"
-#include "common/unused.h"
-#include "span_1000/code_80204E78.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
@@ -99,17 +99,17 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
     }
 }
 
-s32 func_802AD1B4_de(void *arg0) {
+s32 func_802AD1B4_de(Shared_ActorView *arg0) {
     f32 value;
     f32 input;
     f32 threshold;
     u32 converted;
 
-    ((Shared_ActorView *)arg0)->field16D4 =
-        ((Shared_ActorView *)arg0)->field16D4 == 0;
-    if (((Shared_ActorView *)arg0)->message != 0) {
+    arg0->field16D4 =
+        arg0->field16D4 == 0;
+    if (arg0->message != 0) {
         input = D_800C62E0;
-        ((Racer *)((Shared_ActorView *)arg0)->message)->pad124 = 0;
+        ((Racer *)arg0->message)->pad124 = 0;
         value = func_80274564_de(input);
         threshold = (&D_800C62E0)[1];
         if (!(threshold <= value)) {
@@ -117,7 +117,7 @@ s32 func_802AD1B4_de(void *arg0) {
         } else {
             converted = (s32)(value - threshold) | 0x80000000;
         }
-        func_802391AC_de(((Shared_ActorView *)arg0)->message, 0xFF, 0xFF, 0xFF,
+        func_802391AC_de(arg0->message, 0xFF, 0xFF, 0xFF,
                       0xFF, (u8)converted, 1, 0);
     }
     return 1;

@@ -11,7 +11,8 @@ extern f32 func_8024E464_de(Vehicle *);
 extern f32 func_8024D398_de(Vehicle *);
 extern f32 func_8024D284_de(Vehicle *);
 extern f32 func_8024E420_de(Vehicle *);
-extern s32 func_8024491C_de(Vehicle *, Vec3, Vec3, char *, f32, f32, f32, f32);
+struct MotionSurface;
+extern s32 func_8024491C_de(Vehicle *, Vec3, Vec3, struct MotionSurface *, f32, f32, f32, f32);
 void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
     Vec3 from;
     Vec3 to;

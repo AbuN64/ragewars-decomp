@@ -6,26 +6,26 @@
 
 extern void func_802A0748_de(s32, s32, s32);
 
-void func_8029EA7C_de(void *arg0, float arg1, float arg2, float arg3,
+void func_8029EA7C_de(MatrixRecord *arg0, float arg1, float arg2, float arg3,
                     float arg4, float arg5, float arg6, float arg7,
                     float arg8, float arg9, float arg10, float arg11,
                     float arg12, float arg13, float arg14, float arg15, float arg16) {
-    ((MatrixRecord *)(arg0))->matrix.m[0] = arg1;
-    ((MatrixRecord *)(arg0))->matrix.m[4] = arg2;
-    ((MatrixRecord *)(arg0))->matrix.m[8] = arg3;
-    ((MatrixRecord *)(arg0))->matrix.m[12] = arg4;
-    ((MatrixRecord *)(arg0))->matrix.m[1] = arg5;
-    ((MatrixRecord *)(arg0))->matrix.m[5] = arg6;
-    ((MatrixRecord *)(arg0))->matrix.m[9] = arg7;
-    ((MatrixRecord *)(arg0))->matrix.m[13] = arg8;
-    ((MatrixRecord *)(arg0))->matrix.m[2] = arg9;
-    ((MatrixRecord *)(arg0))->matrix.m[6] = arg10;
-    ((MatrixRecord *)(arg0))->matrix.m[10] = arg11;
-    ((MatrixRecord *)(arg0))->matrix.m[14] = arg12;
-    ((MatrixRecord *)(arg0))->matrix.m[3] = arg13;
-    ((MatrixRecord *)(arg0))->matrix.m[7] = arg14;
-    ((MatrixRecord *)(arg0))->matrix.m[11] = arg15;
-    ((MatrixRecord *)(arg0))->matrix.m[15] = arg16;
+    arg0->matrix.m[0] = arg1;
+    arg0->matrix.m[4] = arg2;
+    arg0->matrix.m[8] = arg3;
+    arg0->matrix.m[12] = arg4;
+    arg0->matrix.m[1] = arg5;
+    arg0->matrix.m[5] = arg6;
+    arg0->matrix.m[9] = arg7;
+    arg0->matrix.m[13] = arg8;
+    arg0->matrix.m[2] = arg9;
+    arg0->matrix.m[6] = arg10;
+    arg0->matrix.m[10] = arg11;
+    arg0->matrix.m[14] = arg12;
+    arg0->matrix.m[3] = arg13;
+    arg0->matrix.m[7] = arg14;
+    arg0->matrix.m[11] = arg15;
+    arg0->matrix.m[15] = arg16;
 }
 
 void func_8029EAF4_de(s32 arg0) {
@@ -58,10 +58,10 @@ void func_8029EB58_de(f32 *arg0) {
 }
 
 /** Scatter three floats from arg1 into arg0's fields. */
-void func_8029EBC8_de(void *arg0, void *arg1) {
-    ((Matrix *)(arg0))->m[0] = ((Vec3 *)(arg1))->x;
-    ((Matrix *)(arg0))->m[5] = ((Vec3 *)(arg1))->y;
-    ((Matrix *)(arg0))->m[10] = ((Vec3 *)(arg1))->z;
+void func_8029EBC8_de(Matrix *arg0, Vec3 *arg1) {
+    arg0->m[0] = arg1->x;
+    arg0->m[5] = arg1->y;
+    arg0->m[10] = arg1->z;
 }
 
 void func_8029EBE4_de(void *arg0, void *arg1) {
@@ -83,10 +83,10 @@ void func_8029EBE4_de(void *arg0, void *arg1) {
 }
 
 /** Broadcast a float value into three fields of the object. */
-void func_8029ECA8_de(void *arg0, float value) {
-    ((Matrix *)(arg0))->m[0] = value;
-    ((Matrix *)(arg0))->m[5] = value;
-    ((Matrix *)(arg0))->m[10] = value;
+void func_8029ECA8_de(Matrix *arg0, float value) {
+    arg0->m[0] = value;
+    arg0->m[5] = value;
+    arg0->m[10] = value;
 }
 
 void func_8029ECBC_de(void *arg0, f32 arg1) {
@@ -215,17 +215,17 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
 }
 
 /** Clear the three words at object offsets 0x30 through 0x38. */
-void func_8029EFB8_de(void *arg0) {
-    ((Matrix *)(arg0))->m[12] = 0;
-    ((Matrix *)(arg0))->m[13] = 0;
-    ((Matrix *)(arg0))->m[14] = 0;
+void func_8029EFB8_de(Matrix *arg0) {
+    arg0->m[12] = 0;
+    arg0->m[13] = 0;
+    arg0->m[14] = 0;
 }
 
 /** Copy a three-float vector into object offsets 0x30 through 0x38. */
-void func_8029EFC8_de(void *arg0, float *arg1) {
-    ((Matrix *)(arg0))->m[12] = arg1[0];
-    ((Matrix *)(arg0))->m[13] = arg1[1];
-    ((Matrix *)(arg0))->m[14] = arg1[2];
+void func_8029EFC8_de(Matrix *arg0, float *arg1) {
+    arg0->m[12] = arg1[0];
+    arg0->m[13] = arg1[1];
+    arg0->m[14] = arg1[2];
 }
 
 /** Copy the three floating components at offset 0x30. */
@@ -235,10 +235,10 @@ void func_8029EFE4_de(char *object, float *output) {
     output[2] = ((Matrix *)(object))->m[14];
 }
 
-void func_8029F000_de(void *arg0, void *arg1) {
-    (((Matrix *)arg0)->m[12]) = (f32) ((((Matrix *)arg0)->m[12]) + (((struct Vec3 *) ((s8 *) arg1))->x));
-    (((Matrix *)arg0)->m[13]) = (f32) ((((Matrix *)arg0)->m[13]) + (((struct Vec3 *) ((s8 *) arg1))->y));
-    (((Matrix *)arg0)->m[14]) = (f32) ((((Matrix *)arg0)->m[14]) + (((struct Vec3 *) ((s8 *) arg1))->z));
+void func_8029F000_de(Matrix *arg0, void *arg1) {
+    (arg0->m[12]) = (f32) ((arg0->m[12]) + (((struct Vec3 *) ((s8 *) arg1))->x));
+    (arg0->m[13]) = (f32) ((arg0->m[13]) + (((struct Vec3 *) ((s8 *) arg1))->y));
+    (arg0->m[14]) = (f32) ((arg0->m[14]) + (((struct Vec3 *) ((s8 *) arg1))->z));
 }
 
 /** Combine three column vectors into the first three matrix columns. */

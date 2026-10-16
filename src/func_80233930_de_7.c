@@ -28,7 +28,7 @@ extern void func_8028B028_de(char *, char *);
 extern void func_802A5180_de(void *, char *);
 extern void func_802905F4_de(char *, char *);
 extern void func_80286454_de(char *, char *);
-extern void func_80228958_de(void *, char *);
+extern void func_80228958_de(ObjRecAt20V2 *, char *);
 extern void func_8023B3F8_de(char *, char *);
 extern void func_8028B160_de(char *, char *);
 extern void func_802A478C_de(void *, char *);

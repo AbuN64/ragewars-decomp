@@ -1,9 +1,9 @@
 #include "span_1000/code_8022C894.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/unused.h"
 #include "span_1000/code_8022D944.h"
 #include "types.h"
-#include "common/unused.h"
 
 extern u8 D_801462E5;
 
@@ -46,7 +46,7 @@ u8 func_8022E758_de(s32 arg0, s32 arg1) {
     return 1;
 }
 
-void func_8022E78C_de(void *actor, Marker **slot, s32 kind, f32 distance) {
+void func_8022E78C_de(Player *actor, Marker **slot, s32 kind, f32 distance) {
     Marker *marker;
     Vec3 offset;
     Vec3 pos;
@@ -63,7 +63,7 @@ void func_8022E78C_de(void *actor, Marker **slot, s32 kind, f32 distance) {
     offset.y = 0.0f;
     offset.z = distance;
     func_8024BC94_de(&pos, actor, offset);
-    func_80271F34_de(&pos, &pos, &((Player *)(actor))->pos);
+    func_80271F34_de(&pos, &pos, &actor->pos);
     marker->active = 1;
     marker->x = pos.x;
     marker->y = pos.y + func_8024D284_de(actor) * D_800C7F08[1];

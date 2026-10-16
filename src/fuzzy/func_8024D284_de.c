@@ -3,7 +3,7 @@
 #include "shared/func_8027AD4C_de_closed.h"
 #include "span_C76B0/data.h"
 #include "types.h"
-f32 func_8024E3C4_de(void *arg0);
+f32 func_8024E3C4_de(Actor_u1 *arg0);
 extern f32 D_800C3C34_de;
 extern f32 D_800C8D28;
 

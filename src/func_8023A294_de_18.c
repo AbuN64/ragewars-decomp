@@ -10,7 +10,7 @@
 #include "span_C76B0/data.h"
 #include "types.h"
 
-extern void func_80271FC8_de(void *,f32,void *,void *);
+extern void func_80271FC8_de(Vec3 *,f32,void *,void *);
 
 /* Resolve contact response, updating translation and rotation along the contact normal. */
 s32 func_8023D380_de(ActorMotion *a) {

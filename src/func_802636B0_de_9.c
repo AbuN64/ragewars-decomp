@@ -122,13 +122,13 @@ func_802B7C50_de
 }
 
 /** Report whether flag 0x1000 is set in the word at offset 0xB4. */
-int func_8026435C_de(void *object) {
-    int flags = ((Shared_Effect *)(object))->state & 0x1000;
+int func_8026435C_de(Shared_Effect *object) {
+    int flags = object->state & 0x1000;
     return flags != 0;
 }
 
-int func_8026436C_de(void *arg0) {
-    int flag = ((Shared_Effect *)(arg0))->state & 0x1000;
+int func_8026436C_de(Shared_Effect *arg0) {
+    int flag = arg0->state & 0x1000;
     return flag != 0;
 }
 
@@ -159,8 +159,8 @@ int func_802643D0_de(void *arg0) {
     return flag != 0;
 }
 
-int func_802643E8_de(void *arg0) {
-    int flag = ((Shared_Effect *)(arg0))->state & 0x4000;
+int func_802643E8_de(Shared_Effect *arg0) {
+    int flag = arg0->state & 0x4000;
     return flag != 0;
 }
 

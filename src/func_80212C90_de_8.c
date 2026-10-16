@@ -36,14 +36,14 @@ extern void func_80208AAC_de(void *arg0);
 
 
 
-void func_8021321C_de(void *arg0)
+void func_8021321C_de(Root802131E0 *arg0)
 {
     void *state;
     s32 random;
     s32 actor_state;
     u32 flags;
 
-    state = ((Root802131E0 *)arg0)->unk1D8->unk1454;
+    state = arg0->unk1D8->unk1454;
     if (((Shared_ControlView *)((Brain_func_80212D78_eu_x *)state)->player->unk_0x05D8)->transientFlag == 0) {
         func_80209874_de(state, 2);
         return;

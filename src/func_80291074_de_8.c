@@ -47,7 +47,7 @@ void func_80293268_de(void *unused) {
     func_80264404_de();
 }
 
-void func_80293284_de(void *arg0, s32 arg1) {
+void func_80293284_de(GameSession *arg0, s32 arg1) {
     s32 sp18[6];
     s32 var_s0;
 
@@ -60,10 +60,10 @@ void func_80293284_de(void *arg0, s32 arg1) {
     D_801468A0.unk8 = 0;
     D_801468A0.unkC = 0;
     D_801468A0.first = 0;
-    ((GameSession *)arg0)->phase = 2;
-    ((GameSession *)arg0)->selector = var_s0;
-    ((GameSession *)arg0)->selectionActive = 1;
-    ((GameSession *)arg0)->target = 0xD;
+    arg0->phase = 2;
+    arg0->selector = var_s0;
+    arg0->selectionActive = 1;
+    arg0->target = 0xD;
 }
 
 void func_80293334_de(void *arg0, void *arg1, void *arg2) {

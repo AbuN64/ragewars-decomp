@@ -28,7 +28,7 @@ extern void func_802BB160_de(s32 *arg0, void *arg1, s32 arg2);
 
 
 
-s32 func_80255170_de(s32 *arg0, void *arg1) {
+s32 func_80255170_de(s32 *arg0, ResourceLoadRequest *arg1) {
     char sp10[0x18];
     s32 sp28;
     s32 sp2C;
@@ -36,7 +36,7 @@ s32 func_80255170_de(s32 *arg0, void *arg1) {
 
     osCreateMesgQueue(sp10, (s32) &sp28, 1);
     temp = D_800CD8B8_de;
-    ((ResourceLoadRequest *)arg1)->replyQueue = sp10;
+    arg1->replyQueue = sp10;
     D_800CD704 = 2;
     func_802BB5F0_de(arg0, temp);
     func_802BB160_de((s32 *)&((ResourceLoadWorker *)arg0)->requests, arg1, 1);

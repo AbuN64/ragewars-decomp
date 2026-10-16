@@ -291,7 +291,7 @@ typedef struct func_802905D4_S1 func_802905D4_S1;
 struct ObjectLinks3C0C;
 typedef struct ObjectLinks3C0C ObjectLinks3C0C;
 
-extern void func_80290408_de(void *arg0);
+extern void func_80290408_de(Actor_func_80290238_de *arg0);
 
 struct func_8028FFB0_S1;
 typedef struct func_8028FFB0_S1 func_8028FFB0_S1;

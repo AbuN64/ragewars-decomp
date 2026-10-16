@@ -22,7 +22,7 @@ extern s32 D_800CD8D0;
 
 extern s32 D_8013B290;
 
-extern s32 func_8028B21C_de(void *, s32);
+extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 extern s32 func_8028B25C_de(void *, s32);
 

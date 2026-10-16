@@ -415,7 +415,7 @@ typedef struct Session Session;
 struct func_80209BE0_S3;
 typedef struct func_80209BE0_S3 func_80209BE0_S3;
 
-extern void func_8020A2D4_de(void *arg0, void *config);
+extern void func_8020A2D4_de(ObjectLinks2EC *arg0, IntegerState2C *config);
 
 extern float D_800C6E08;
 

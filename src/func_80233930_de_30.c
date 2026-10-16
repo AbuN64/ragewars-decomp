@@ -105,7 +105,7 @@ Message *func_80239908_de(void *owner, void *pool, u8 *text, s32 target, f32 siz
     return pending;
 }
 
-void func_80239AF4_de(s32 arg0, void *arg1) {
+void func_80239AF4_de(struct ScreenMessageOwner *arg0, struct ScreenMessagePool *arg1) {
     extern void func_80255ED8_de(void *, s32);
     extern s32 func_80255CB8_de(void *, s32);
     Node_func_80239AF4_de *var_s1;
@@ -113,15 +113,15 @@ void func_80239AF4_de(s32 arg0, void *arg1) {
     void *var_a0;
 
     if (arg1 != 0) {
-        var_s1 = ((struct ScreenMessagePool *)arg1)->freeMessages.tail;
-        var_a0 = &((struct ScreenMessagePool *)arg1)->freeMessages;
+        var_s1 = arg1->freeMessages.tail;
+        var_a0 = &arg1->freeMessages;
         if (var_s1 != 0) {
             do {
                 temp_s0 = var_s1->next;
                 func_80255ED8_de(var_a0, var_s1);
-                func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, (s32)var_s1);
+                func_80255CB8_de(&arg0->activeMessages, (s32)var_s1);
                 var_s1 = temp_s0;
-                var_a0 = &((struct ScreenMessagePool *)arg1)->freeMessages;
+                var_a0 = &arg1->freeMessages;
             } while (var_s1 != 0);
         }
     }
@@ -172,10 +172,10 @@ void func_80239C20_de(int arg0) {
     func_8044A7D0_de(arg0 + 0x570);
 }
 
-void *func_80239C3C_de(void *arg0, s32 arg1) {
+void *func_80239C3C_de(void *arg0, struct ScreenMessagePool *arg1) {
     extern void func_80255ED8_de(void *, s32);
     struct ScreenMessageOwner *owner = arg0;
-    struct ScreenMessagePool *pool = (struct ScreenMessagePool *)arg1;
+    struct ScreenMessagePool *pool = arg1;
     void *temp_s0;
 
     temp_s0 = owner->activeMessages.head;

@@ -4,7 +4,8 @@ struct Channel;
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_1dc8418c21db.h"
-extern void func_8023A1F4_de(void *arg0);
+struct ScreenMessageOwner;
+extern void func_8023A1F4_de(struct ScreenMessageOwner *arg0);
 
 struct func_80239FCC_S1;
 struct func_80239FCC_S1 {
@@ -132,7 +133,8 @@ struct func_80239E94_S1 {
     f32 unkF8;
 };
 
-extern void func_80239AF4_de(s32 arg0, void *arg1);
+struct ScreenMessagePool;
+extern void func_80239AF4_de(struct ScreenMessageOwner *arg0, struct ScreenMessagePool *arg1);
 
 extern void func_8023A24C_de(void *arg0);
 

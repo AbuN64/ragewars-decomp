@@ -2,10 +2,10 @@
 #include "abi.h"
 #include "acmd.h"
 #include "audio_callbacks.h"
+#include "code_802BAC64.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
 #include "types.h"
-#include "code_802BAC64.h"
 
 /* alResamplePull, drafted from ultralib src/audio/resample.c: at unity pitch pull the source and
    move its output; otherwise clip and quantise the pitch ratio, pull the input sample count it
@@ -69,9 +69,9 @@ s32 func_802B5540_de(Obj_func_802B3EDC_de *arg0, s32 arg1, s32 arg2) {
 
     /* 1 / UNITY_PITCH */
 
-Acmd *func_802B5570_de(void *filter, s16 *outp, s32 outCnt, s32 sampleOffset, Acmd *p)
+Acmd *func_802B5570_de(ALResampler_s *filter, s16 *outp, s32 outCnt, s32 sampleOffset, Acmd *p)
 {
-    ALResampler_s *f = (ALResampler_s *)filter;
+    ALResampler_s *f = filter;
     Acmd *ptr = p;
     s16 inp;
     s32 inCount;
@@ -181,10 +181,10 @@ s32 func_802B5730_de(void *arg0, s32 arg1, s32 arg2) {
 }
 
  /* _saveBuffer */
-Acmd *func_802B57F0_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *func_802B57F0_de(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
-    struct ALFx *r = (struct ALFx *)filter;
+    struct ALFx *r = filter;
     ALFilter_s14_2 *source = (ALFilter_s14_2 *)r->filter.source;
     s16 i, buff1, buff2, input, output;
     s16 *in_ptr, *out_ptr, gain, *prev_out_ptr = 0;

@@ -26,7 +26,7 @@ extern void func_802727D8_de(void *);
 
 
 
-void func_802A31E8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
+void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *arg2, void *arg3) {
     f32 setup[4];
     Vec3 first;
     Vec3 basis;
@@ -35,13 +35,13 @@ void func_802A31E8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
     f32 neg_y;
     f32 neg_z;
 
-    func_80271F68_de(&first, &((Node438C *)arg0)->position,
-                  &((Node438C *)arg1)->position);
+    func_80271F68_de(&first, &arg0->position,
+                  &arg1->position);
     func_8027207C_de(&first);
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    func_80272B38_de(&((GameplayCamera *)arg2)->unk1A0, setup, &basis);
+    func_80272B38_de(&arg2->unk1A0, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;
@@ -52,9 +52,9 @@ void func_802A31E8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
     func_8027207C_de(&cross);
     func_80272018_de(&result, &basis, &cross);
     func_8027207C_de(&result);
-    func_80271F9C_de(&result, &result, ((Node438C *)arg0)->a);
-    func_80271F9C_de(&cross, &cross, ((Node438C *)arg0)->b);
-    func_80271F9C_de(&basis, &basis, ((Node438C *)arg0)->c);
+    func_80271F9C_de(&result, &result, arg0->a);
+    func_80271F9C_de(&cross, &cross, arg0->b);
+    func_80271F9C_de(&basis, &basis, arg0->c);
     func_802727D8_de(arg3);
     ((Matrix *)arg3)->m[0] = result.x;
     ((Matrix *)arg3)->m[1] = result.y;
@@ -65,7 +65,7 @@ void func_802A31E8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
     ((Matrix *)arg3)->m[8] = basis.x;
     ((Matrix *)arg3)->m[9] = basis.y;
     ((Matrix *)arg3)->m[10] = basis.z;
-    ((Matrix *)arg3)->m[12] = ((Node438C *)arg0)->position.x;
-    ((Matrix *)arg3)->m[13] = ((Node438C *)arg0)->position.y;
-    ((Matrix *)arg3)->m[14] = ((Node438C *)arg0)->position.z;
+    ((Matrix *)arg3)->m[12] = arg0->position.x;
+    ((Matrix *)arg3)->m[13] = arg0->position.y;
+    ((Matrix *)arg3)->m[14] = arg0->position.z;
 }

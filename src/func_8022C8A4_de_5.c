@@ -28,7 +28,8 @@ extern f32 func_8024E464_de(void *arg0);
 
 
 
-extern s32 func_8024491C_de(void *arg0, Vec3 arg1, Vec3 arg2, void *arg3,
+struct MotionSurface;
+extern s32 func_8024491C_de(void *arg0, Vec3 arg1, Vec3 arg2, struct MotionSurface *arg3,
                          f32 arg4, f32 arg5, f32 arg6, f32 arg7);
 
 extern char D_80103FCC[];
@@ -51,7 +52,7 @@ extern void func_80219480_de(void *, void *);
 
 
 
-extern struct Entry_func_8022E130_de *func_8028B2F8_de(void *, s32);
+extern struct Entry_func_8022E130_de *func_8028B2F8_de(Shared_World *, s32);
 
 /* Returns the constant after D_800C7EC0 less the cube of its difference from the argument. */
 
@@ -65,19 +66,19 @@ f32 func_8022DBC4_de(f32 arg0) {
     return D_800C2DD4_de - (temp * temp * temp);
 }
 
-void func_8022DBE4_de(void *arg0) {
-    float temp = ((Player *)arg0)->state708;
+void func_8022DBE4_de(Player *arg0) {
+    float temp = arg0->state708;
     float k = D_800C7EC8;
-    ((Player *)arg0)->state714 = 0;
-    ((Player *)arg0)->state70C = temp;
-    ((Player *)arg0)->state710 = k;
+    arg0->state714 = 0;
+    arg0->state70C = temp;
+    arg0->state710 = k;
 }
 
-void func_8022DC00_de(void *arg0) {
-    float temp = ((Player *)arg0)->state708;
-    ((Player *)arg0)->state710 = 0;
-    ((Player *)arg0)->state714 = 0;
-    ((Player *)arg0)->state70C = temp;
+void func_8022DC00_de(Player *arg0) {
+    float temp = arg0->state708;
+    arg0->state710 = 0;
+    arg0->state714 = 0;
+    arg0->state70C = temp;
 }
 
 /** Perform the no-op hook at VRAM 0x8022DC04. */
@@ -93,8 +94,8 @@ void func_8022DC14_de(void) {
 
 
 
-s32 func_8022DC1C_de(void *arg0) {
-    f32 field = ((Shared_ActorView *)arg0)->speed;
+s32 func_8022DC1C_de(Shared_ActorView *arg0) {
+    f32 field = arg0->speed;
     f32 konst = D_800C2DDC_de;
     s32 result = 1;
     if (!(konst < field)) {
@@ -149,18 +150,18 @@ void func_8022DC44_de(Player *arg0, LevelActor *arg1, s32 unused, s32 *flags) {
     }
 }
 
-void func_8022DD94_de(void *arg0) {
+void func_8022DD94_de(Shared_ActorView *arg0) {
     f32 sp10;
     f32 var_f1;
     f32 var_f2;
 
     var_f1 = 0.0f;
-    if ((u32)((u16)((Shared_ActorView *)arg0)->action - 9) < 4U) {
+    if ((u32)((u16)arg0->action - 9) < 4U) {
         var_f1 = D_800C2DF8_de[0];
     }
-    sp10 = ((Shared_ActorView *)arg0)->transitionBlend;
+    sp10 = arg0->transitionBlend;
     func_80274870_de(&sp10, var_f1, 0.25f);
-    var_f2 = sp10 - ((Shared_ActorView *)arg0)->transitionBlend;
+    var_f2 = sp10 - arg0->transitionBlend;
     if (var_f2 < 0.0f) {
         if (-var_f2 < D_800C2DF8_de[1]) {
             goto clamp;
@@ -169,7 +170,7 @@ void func_8022DD94_de(void *arg0) {
 clamp:
         var_f2 = 0.0f;
     }
-    ((Shared_ActorView *)arg0)->transitionBlend = ((Shared_ActorView *)arg0)->transitionBlend + var_f2;
+    arg0->transitionBlend = arg0->transitionBlend + var_f2;
 }
 
 void func_8022DE58_de(Player *arg0, LevelActor *arg1) {

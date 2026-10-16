@@ -463,7 +463,7 @@ struct func_80243864_S1 {
     void * unkA4;
 };
 
-extern s32 func_80243850_de(void *arg0, void *arg1);
+extern s32 func_80243850_de(struct Hit8 *arg0, struct Hit8 *arg1);
 
 struct Bounds;
 typedef struct Bounds Bounds;

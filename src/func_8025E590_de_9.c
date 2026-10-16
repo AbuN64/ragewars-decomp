@@ -6,7 +6,7 @@
 #include "span_C76B0/data.h"
 #include "types.h"
 
-extern void func_80271FC8_de(void *arg0, s32 arg1, void *arg2, void *arg3);
+extern void func_80271FC8_de(Vec3 *arg0, s32 arg1, void *arg2, void *arg3);
 
 extern void func_80270AAC_de(void *arg0, s32 arg1, void *arg2, void *arg3);
 

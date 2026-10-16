@@ -22,7 +22,7 @@
 
 
 
-extern void *func_8028B2F8_de(void *, u16 *);
+extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
 extern s32 func_80245798_de(void);
 
@@ -146,17 +146,17 @@ void func_8023A190_de(void *arg0, int arg1) {
     func_802A001C_de(first, 0, scaled);
 }
 
-void func_8023A1F4_de(void *arg0) {
+void func_8023A1F4_de(struct ScreenMessageOwner *arg0) {
     s32 temp_a1;
 
-    ((struct ScreenMessageOwner *)arg0)->state = 1;
-    func_8025E3F0_de((s32)&((struct ScreenMessageOwner *)arg0)->rendering);
+    arg0->state = 1;
+    func_8025E3F0_de((s32)&arg0->rendering);
     func_80253908_de(0);
-    temp_a1 = ((struct ScreenMessageOwner *)arg0)->allocation;
+    temp_a1 = arg0->allocation;
     if (temp_a1 != 0) {
         func_80253838_de(0, temp_a1);
-        ((struct ScreenMessageOwner *)arg0)->allocation = 0;
-        ((struct ScreenMessageOwner *)arg0)->allocationSize = 0;
-        ((struct ScreenMessageOwner *)arg0)->count = 0;
+        arg0->allocation = 0;
+        arg0->allocationSize = 0;
+        arg0->count = 0;
     }
 }

@@ -26,8 +26,8 @@ s16 func_802171C8_de(Cursor802171C8 *arg0) {
     return (s16) value;
 }
 
-void func_802171FC_de(void *arg0, void *arg1) {
-    FuncPtr fn = ((struct CallbackState114 *)(arg1))->callback;
+void func_802171FC_de(void *arg0, struct CallbackState114 *arg1) {
+    FuncPtr fn = arg1->callback;
     if (fn != 0) {
         fn();
     }
@@ -49,10 +49,10 @@ f32 func_80217224_de(void *arg0, Vec3 v) {
 }
 
 /* Squared XZ distance to a point using the existing by-value vector ABI. */
-f32 func_80217290_de(void *arg0, Vec3 point)
+f32 func_80217290_de(LevelActor *arg0, Vec3 point)
 {
-    f32 dx = point.x - ((LevelActor *)arg0)->position0.x;
-    f32 dz = point.z - ((LevelActor *)arg0)->position0.z;
+    f32 dx = point.x - arg0->position0.x;
+    f32 dz = point.z - arg0->position0.z;
     return dx * dx + dz * dz;
 }
 

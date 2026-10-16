@@ -188,14 +188,14 @@ int func_80250DE0_de(void *object) {
     return nested->farValue;
 }
 
-s8 func_80250E14_de(void *arg0) {
+s8 func_80250E14_de(LevelActor *arg0) {
     void *temp_a1;
 
     if (D_801462E5 != 0) {
-        return ((struct ResourceFadeDefinition *)((LevelActor *)arg0)->definition)->nearValue;
+        return ((struct ResourceFadeDefinition *)arg0->definition)->nearValue;
     }
-    temp_a1 = ((LevelActor *)arg0)->definition;
-    if ((u32)((LevelActor *)arg0)->resourceState < ((struct ResourceFadeDefinition *)temp_a1)->threshold * 2) {
+    temp_a1 = arg0->definition;
+    if ((u32)arg0->resourceState < ((struct ResourceFadeDefinition *)temp_a1)->threshold * 2) {
         return ((struct ResourceFadeDefinition *)temp_a1)->nearValue;
     }
     return ((struct ResourceFadeDefinition *)temp_a1)->farValue;

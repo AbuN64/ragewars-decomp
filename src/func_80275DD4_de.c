@@ -38,7 +38,7 @@ extern int D_80111D30;
 
 extern int D_800CD3E0;
 
-extern void *func_8028B2F8_de(char *arg0, s32 arg1);
+extern void *func_8028B2F8_de(Shared_World *arg0, s32 arg1);
 
 extern f32 func_802B72B0_de(f32);
 

@@ -6,7 +6,9 @@
 #include "resident_event_handler.h"
 #include "span_1000/code_802508E0.h"
 #include "common/types_1dc8418c21db.h"
-extern void func_8024F5A0_de(void *arg0);
+#include "span_1000/code_8024D018.h"
+struct StaticObject;
+extern void func_8024F5A0_de(struct StaticObject *arg0);
 
 struct func_8024F490_Inner;
 struct func_8024F490_Inner {
@@ -51,12 +53,12 @@ struct func_802500A4_S2 {
 
 extern float D_800C3E0C_de;
 
-extern void func_8024F108_de(void *arg0);
+extern void func_8024F108_de(struct StaticObject *arg0);
 
 struct func_8024E914_S1;
 typedef struct func_8024E914_S1 func_8024E914_S1;
 
-extern void func_8024F618_de(void *arg0);
+extern void func_8024F618_de(struct StaticObject *arg0);
 
 struct func_8024F624_S1;
 struct func_8024F624_S1 {
@@ -429,9 +431,9 @@ extern char D_0026D7D4_de[];
 extern char D_800C3E70[];
 
 extern s32 func_8026E340_de(void);
-extern f32 func_8024E2FC_de(void *);
+extern f32 func_8024E2FC_de(Actor_u1 *);
 
-extern s32 func_8024F858_de(void *arg0);
+extern s32 func_8024F858_de(StaticObject *arg0);
 extern s32 func_802784C0_de(s32 a, s32 b, void *c, s32 d, s32 e, void *f);
 
 #endif

@@ -20,7 +20,7 @@ struct ALParam_s1C {
     s32 yetstillmoredata;
 };
 
-extern void alSynStopVoice(void *arg0, void *arg1);
+extern void alSynStopVoice(struct Shape_typemap_71 *arg0, void *arg1);
 
 struct ALResampler;
 typedef struct ALResampler ALResampler;

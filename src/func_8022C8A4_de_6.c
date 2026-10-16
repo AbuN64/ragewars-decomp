@@ -3,12 +3,12 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/unused.h"
 #include "shared/gameplay_transition.h"
 #include "span_1000/code_80225D10.h"
 #include "span_1000/code_8022D944.h"
-#include "types.h"
-#include "common/unused.h"
 #include "span_1000/code_8022E938.h"
+#include "types.h"
 
 
 
@@ -89,7 +89,7 @@ void func_8022E290_de(void *arg0) {
     object->previousTarget = object->pos;
 }
 
-s32 func_8022E3C4_de(void *arg0, s32 arg1, s32 arg2) {
+s32 func_8022E3C4_de(Player *arg0, s32 arg1, s32 arg2) {
     s16 **entry;
     s16 **scan;
     WeaponInfo *resource;
@@ -97,7 +97,7 @@ s32 func_8022E3C4_de(void *arg0, s32 arg1, s32 arg2) {
     s32 i;
 
     resource = D_800D052C[arg1];
-    if (((Player *)arg0)->computer != 0) {
+    if (arg0->computer != 0) {
         entry = resource->computerClasses;
         goto scan_setup;
     }

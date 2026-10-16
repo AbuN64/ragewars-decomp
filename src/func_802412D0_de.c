@@ -7,7 +7,7 @@
 #include "stddef.h"
 #include "types.h"
 
-s32 func_80271FC8_de(void *, u32, void *, void *);
+s32 func_80271FC8_de(Vec3 *, u32, void *, void *);
 
 /* Tests a point against every edge plane of a polygon. */
 

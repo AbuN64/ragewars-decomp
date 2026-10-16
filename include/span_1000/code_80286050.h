@@ -15,7 +15,8 @@ extern void func_8028B4C8_de(void);
 struct TableRecAt8;
 typedef struct TableRecAt8 TableRecAt8;
 
-extern s32 func_8028B5C0_de(void *arg0, s32 arg1);
+struct Shared_World;
+extern s32 func_8028B5C0_de(struct Shared_World *arg0, s32 arg1);
 
 struct Entity;
 typedef struct Entity Entity;
@@ -30,7 +31,7 @@ struct Scene_func_80288EA8_de {
     Gfx *lists[2];
 };
 
-extern void func_8028B4D0_de(void *arg0, s32 arg1, s32 arg2);
+extern void func_8028B4D0_de(struct Shared_World *arg0, s32 arg1, s32 arg2);
 
 struct func_80286254_S1;
 typedef struct func_80286254_S1 func_80286254_S1;

@@ -98,47 +98,47 @@ void func_8023F43C_de(char *obj) {
     }
 }
 
-void func_8023F644_de(void *arg0, f32 *arg1)
+void func_8023F644_de(ActorMotion *arg0, f32 *arg1)
 {
   f32 *new_var;
   f32 temp;
   f32 value;
   s32 *new_var2;
   f32 bound;
-  new_var2 = &((ActorMotion *)arg0)->surface->flags;
-  ((Query *)arg1)->radius = ((ActorMotion *)arg0)->radius;
+  new_var2 = &arg0->surface->flags;
+  ((Query *)arg1)->radius = arg0->radius;
   ((Query *)arg1)->flag = (*new_var2) & 0x400;
-  temp = ((ActorMotion *)arg0)->bottom;
+  temp = arg0->bottom;
   ((Query *)arg1)->bottom = temp;
-  new_var = &((ActorMotion *)arg0)->height;
+  new_var = &arg0->height;
   ((Query *)arg1)->top = temp + (*new_var);
-  ((Query *)arg1)->bottom1 = (((ActorMotion *)arg0)->start.y) + ((Query *)arg1)->bottom;
-  ((Query *)arg1)->top1 = (((ActorMotion *)arg0)->start.y) + ((Query *)arg1)->top;
-  ((Query *)arg1)->bottom2 = (((ActorMotion *)arg0)->end.y) + ((Query *)arg1)->bottom;
-  ((Query *)arg1)->top2 = (((ActorMotion *)arg0)->end.y) + ((Query *)arg1)->top;
-  value = ((ActorMotion *)arg0)->end.x;
-  bound = ((ActorMotion *)arg0)->start.x;
+  ((Query *)arg1)->bottom1 = (arg0->start.y) + ((Query *)arg1)->bottom;
+  ((Query *)arg1)->top1 = (arg0->start.y) + ((Query *)arg1)->top;
+  ((Query *)arg1)->bottom2 = (arg0->end.y) + ((Query *)arg1)->bottom;
+  ((Query *)arg1)->top2 = (arg0->end.y) + ((Query *)arg1)->top;
+  value = arg0->end.x;
+  bound = arg0->start.x;
   if (!(value <= bound))
   {
     value = bound;
   }
   ((Query *)arg1)->minX = value - ((Query *)arg1)->radius;
-  value = ((ActorMotion *)arg0)->end.x;
-  bound = ((ActorMotion *)arg0)->start.x;
+  value = arg0->end.x;
+  bound = arg0->start.x;
   if (!(bound <= value))
   {
     value = bound;
   }
   ((Query *)arg1)->maxX = value + ((Query *)arg1)->radius;
-  value = ((ActorMotion *)arg0)->end.z;
-  bound = ((ActorMotion *)arg0)->start.z;
+  value = arg0->end.z;
+  bound = arg0->start.z;
   if (!(value <= bound))
   {
     value = bound;
   }
   ((Query *)arg1)->minZ = value - ((Query *)arg1)->radius;
-  value = ((ActorMotion *)arg0)->end.z;
-  bound = ((ActorMotion *)arg0)->start.z;
+  value = arg0->end.z;
+  bound = arg0->start.z;
   if (!(bound <= value))
   {
     value = bound;

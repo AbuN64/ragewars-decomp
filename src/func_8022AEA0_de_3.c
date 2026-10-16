@@ -21,20 +21,20 @@ extern void func_80273D6C_de(Matrix *object);
 
 extern void func_8027027C_de(Matrix *src, void *dst);
 
-extern s32 func_8028B21C_de(void *arg0, s32 arg1);
+extern s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1);
 
 extern s32 func_8028C198_de(void *arg0, s32 arg1);
 
 extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-void *func_8022B304_de(void *arg0, void *arg1) {
+void *func_8022B304_de(ForcePlayerList *arg0, void *arg1) {
     Vec3 sp10;
     Shared_ActorView *node;
     void *bestNode;
     f32 bestDist;
     f32 distSq;
 
-    node = (Shared_ActorView *)((ForcePlayerList *)arg0)->head;
+    node = (Shared_ActorView *)arg0->head;
     bestDist = 0.0f;
     bestNode = 0;
     if (node != 0) {

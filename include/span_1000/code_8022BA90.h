@@ -3,6 +3,7 @@ struct ScreenRectangle;
 #define UNBAKE_SPAN_1000_CODE_8022BA90_H
 #include "types.h"
 #include "common/types_1dc8418c21db.h"
+#include "span_1000/code_80225D10.h"
 extern void *func_8022C454_de(void *arg0);
 
 struct func_8022C54C_S3;
@@ -13,7 +14,8 @@ struct func_8022C54C_S3 {
 
 extern float D_800C2D30_de;
 
-extern int func_8022BEDC_de(void *arg0);
+struct Shared_ActorView;
+extern int func_8022BEDC_de(struct Shared_ActorView *arg0);
 
 struct Rules_func_8022C110_de;
 typedef struct Rules_func_8022C110_de Rules_func_8022C110_de;
@@ -179,7 +181,8 @@ struct ObjectState90 {
     s8 unk_8F;
 };
 
-extern void func_8022BC14_de(void *arg0);
+struct Player;
+extern void func_8022BC14_de(struct Player *arg0);
 
 struct func_8022BB70_S2;
 struct func_8022BB70_S2 {
@@ -246,7 +249,6 @@ typedef struct ObjRecAtB8 {
     int unkB8;
 } ObjRecAtB8;
 
-extern void func_8024B4F4_de(void *arg0, s32 arg1);
 extern void func_8022BE20_de(void *arg0, void *arg1);
 
 extern s32 func_8022C460_de(void *);

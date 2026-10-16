@@ -120,7 +120,7 @@ extern float D_800C7CF4_de;
 
 extern float D_800CCF18;
 
-extern Acmd *func_802C3988(void *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
+extern Acmd *func_802C3988(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p);
 
 extern float D_800CCF24;
 

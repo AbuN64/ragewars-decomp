@@ -92,7 +92,7 @@ extern f32 func_8027525C_de(StateFlags *, f32, f32);
 extern s32 func_802799C0_de(void *, s32);
 extern void func_8028C6D4_de(void *, Vec3 *, u8 *);
 extern void *func_8028FDB4_de(void *, s32);
-extern void func_802A57E0_de(void *, Shared_PoseActor *, PoseMatrix *);
+extern void func_802A57E0_de(Owner802A6DF8 *, Shared_PoseActor *, PoseMatrix *);
 extern u32 func_802BCF00_de(void);
 
 static inline Vec3 randVec(void) {

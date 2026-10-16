@@ -5,8 +5,8 @@
 #include "stddef.h"
 #include "common/unused.h"
 /* Edits a byte, integer, or float option and propagates it to the active resource records. */
-s32 func_8026435C_de(s32); /* extern */
-s32 func_8028B2F8_de(char *, s32); /* extern */
+s32 func_8026435C_de(Shared_Effect *); /* extern */
+s32 func_8028B2F8_de(Shared_World *, s32); /* extern */
 void *func_8028FDB4_de(s32, s32); /* extern */
 void func_802BD320_de(s32, char *, s32); /* extern */
 s32 func_80441FE8_de(void *); /* extern */

@@ -60,7 +60,7 @@ void func_802945F8_de(void) { func_80293B28_de(); }
 
 struct func_802077F4_S2;
 
-void func_80294614_de(void *arg0) {
+void func_80294614_de(GameSession *arg0) {
     void *dst;
     s32 field;
     f32 f;
@@ -78,7 +78,7 @@ void func_80294614_de(void *arg0) {
 #else
     f = (1.0f);
 #endif
-    field = ((GameSession *)arg0)->selector;
+    field = arg0->selector;
 #if defined(VERSION_US_REV1)
     D_800D2970 = 0;
 #endif
@@ -86,6 +86,6 @@ void func_80294614_de(void *arg0) {
     D_800D298C = f;
     D_800CD740_de = f;
     func_8044D528_de(dst, field, 0);
-    ((GameSession *)arg0)->mode = 0xD;
+    arg0->mode = 0xD;
     D_80154048 = 0;
 }

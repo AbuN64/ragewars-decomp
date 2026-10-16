@@ -117,10 +117,10 @@ void func_80271F9C_de(void *arg0, void *arg1, f32 arg2) {
 }
 
 /** Lerp a 3-component vector: out = a + t * (b - a). */
-void func_80271FC8_de(void *arg0, f32 t, void *a, void *b) {
-    ((Vec3 *)(arg0))->x = ((Vec3 *)(a))->x + (t * (((Vec3 *)(b))->x - ((Vec3 *)(a))->x));
-    ((Vec3 *)(arg0))->y = ((Vec3 *)(a))->y + (t * (((Vec3 *)(b))->y - ((Vec3 *)(a))->y));
-    ((Vec3 *)(arg0))->z = ((Vec3 *)(a))->z + (t * (((Vec3 *)(b))->z - ((Vec3 *)(a))->z));
+void func_80271FC8_de(Vec3 *arg0, f32 t, void *a, void *b) {
+    arg0->x = ((Vec3 *)(a))->x + (t * (((Vec3 *)(b))->x - ((Vec3 *)(a))->x));
+    arg0->y = ((Vec3 *)(a))->y + (t * (((Vec3 *)(b))->y - ((Vec3 *)(a))->y));
+    arg0->z = ((Vec3 *)(a))->z + (t * (((Vec3 *)(b))->z - ((Vec3 *)(a))->z));
 }
 
 struct Vec3;
@@ -162,36 +162,36 @@ void func_80272104_de(Vec3 *out, Vec3 *a, Vec3 *b, f32 y) {
     }
 }
 
-void *func_80272180_de(void *arg0, void *arg1, void *arg2, f32 arg3) {
+void *func_80272180_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2, f32 arg3) {
     Vec3 tmp;
     f32 temp_f2;
     f32 temp_f3;
     f32 temp_f4;
     f32 temp_f5;
 
-    temp_f5 = ((Vec3 *)arg1)->x;
-    temp_f4 = ((Vec3 *)arg2)->x;
-    temp_f3 = (temp_f5 * temp_f4) + (((Vec3 *)arg1)->y * ((Vec3 *)arg2)->y) + (((Vec3 *)arg1)->z * ((Vec3 *)arg2)->z);
+    temp_f5 = arg1->x;
+    temp_f4 = arg2->x;
+    temp_f3 = (temp_f5 * temp_f4) + (arg1->y * arg2->y) + (arg1->z * arg2->z);
     temp_f2 = (arg3 * temp_f3) + temp_f3;
     tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = ((Vec3 *)arg1)->y - (temp_f2 * ((Vec3 *)arg2)->y);
-    tmp.z = ((Vec3 *)arg1)->z - (temp_f2 * ((Vec3 *)arg2)->z);
-    *(Vec3 *)arg0 = tmp;
+    tmp.y = arg1->y - (temp_f2 * arg2->y);
+    tmp.z = arg1->z - (temp_f2 * arg2->z);
+    *arg0 = tmp;
     return arg0;
 }
 
-void *func_80272214_de(void *arg0, void *arg1, void *arg2) {
+void *func_80272214_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2) {
     Vec3 tmp;
     f32 temp_f2;
     f32 temp_f4;
     f32 temp_f5;
 
-    temp_f5 = ((Vec3 *)arg1)->x;
-    temp_f4 = ((Vec3 *)arg2)->x;
-    temp_f2 = (temp_f5 * temp_f4) + (((Vec3 *)arg1)->y * ((Vec3 *)arg2)->y) + (((Vec3 *)arg1)->z * ((Vec3 *)arg2)->z);
+    temp_f5 = arg1->x;
+    temp_f4 = arg2->x;
+    temp_f2 = (temp_f5 * temp_f4) + (arg1->y * arg2->y) + (arg1->z * arg2->z);
     tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = ((Vec3 *)arg1)->y - (temp_f2 * ((Vec3 *)arg2)->y);
-    tmp.z = ((Vec3 *)arg1)->z - (temp_f2 * ((Vec3 *)arg2)->z);
-    *(Vec3 *)arg0 = tmp;
+    tmp.y = arg1->y - (temp_f2 * arg2->y);
+    tmp.z = arg1->z - (temp_f2 * arg2->z);
+    *arg0 = tmp;
     return arg0;
 }

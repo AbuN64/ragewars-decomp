@@ -257,13 +257,13 @@ void func_802A5780_de(s32 arg0, void *arg1, void *arg2) {
 void func_802A57D8_de(void) {
 }
 
-void func_802A57E0_de(void *arg0, s32 arg1, char *arg2) {
+void func_802A57E0_de(Owner802A6DF8 *arg0, s32 arg1, char *arg2) {
     f32 sp10[16];
     f32 temp;
     f32 zero;
     State802A6DF8 *node;
 
-    node = ((Owner802A6DF8 *)arg0)->lists.inactive.head;
+    node = arg0->lists.inactive.head;
     if (node != 0) {
         zero = 0.0f;
         temp = D_800C5E94_de;
@@ -345,15 +345,15 @@ void func_802A598C_de(Owner802A697C *owner, int object) {
     }
 }
 
-void func_802A5A24_de(void *arg0, s32 arg1)
+void func_802A5A24_de(EffectContribution *arg0, s32 arg1)
 {
-  ((EffectContribution *)arg0)->scale = (f32) D_800C5EA0_de;
-  ((EffectContribution *)arg0)->id = arg1;
-  ((EffectContribution *)arg0)->state = 0;
-  ((EffectContribution *)arg0)->stateC = 0;
-  ((EffectContribution *)arg0)->state10 = 0;
-  ((EffectContribution *)arg0)->weight = 0;
-  ((EffectContribution *)arg0)->x = 0;
-  ((EffectContribution *)arg0)->y = 0;
-  ((EffectContribution *)arg0)->z = 0;
+  arg0->scale = (f32) D_800C5EA0_de;
+  arg0->id = arg1;
+  arg0->state = 0;
+  arg0->stateC = 0;
+  arg0->state10 = 0;
+  arg0->weight = 0;
+  arg0->x = 0;
+  arg0->y = 0;
+  arg0->z = 0;
 }

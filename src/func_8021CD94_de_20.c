@@ -112,16 +112,16 @@ extern s32 D_8013B290;
 
 extern char D_0022ECCC;
 
-extern void *func_8028B2F8_de(void *, u16 *);
+extern void *func_8028B2F8_de(Shared_World *, u16 *);
 extern s32 func_80245618_de(s32 arg0, void *arg1, VoidCallback arg2);
-extern void *func_8028CFA0_de(void *arg0, s32 arg1, s32 arg2);
+extern void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2);
 
 
 
 
 
 
-void func_80225B98_de(void *arg0, void *arg1, s32 arg2)
+void func_80225B98_de(ObjectLinks854 *arg0, void *arg1, s32 arg2)
 {
     s32 enabled;
     u32 resource_flags;
@@ -131,8 +131,8 @@ void func_80225B98_de(void *arg0, void *arg1, s32 arg2)
     enabled = 1;
     resource_flags = 0;
 
-    if (((ObjectLinks854 *)(arg0))->unk_14 != 0) {
-        resource = func_8028B2F8_de(&D_8011FE88, ((ObjectLinks854 *)(arg0))->unk_14);
+    if (arg0->unk_14 != 0) {
+        resource = func_8028B2F8_de(&D_8011FE88, arg0->unk_14);
         if (resource != 0) {
             resource_flags = ((ObjectState108 *)(resource))->unk_44;
         }
@@ -141,7 +141,7 @@ void func_80225B98_de(void *arg0, void *arg1, s32 arg2)
     if (D_8013B290 != 0) {
         enabled = 0;
     }
-    if (((ObjectLinks854 *)(arg0))->unk_664 & 0x8000) {
+    if (arg0->unk_664 & 0x8000) {
         enabled = 0;
     }
     if (D_8013B290 != 0) {
@@ -153,7 +153,7 @@ void func_80225B98_de(void *arg0, void *arg1, s32 arg2)
     if (arg2 == 12) {
         enabled = 0;
     }
-    if (((ObjectLinks854 *)(arg0))->unk_664 & 0x8000) {
+    if (arg0->unk_664 & 0x8000) {
         enabled = 0;
     }
     if (resource_flags & 0x1000000) {
@@ -164,16 +164,16 @@ void func_80225B98_de(void *arg0, void *arg1, s32 arg2)
         enabled = 0;
     }
 
-    ((ObjectLinks854 *)(arg0))->unk_850 = enabled;
+    arg0->unk_850 = enabled;
     if (enabled != 0) {
         if (arg2 == 50) {
             void *data;
 
-            data = ((ObjectLinks854 *)(arg0))->unk_5DC;
+            data = arg0->unk_5DC;
             D_800C9FE4 = 1;
             if (data != 0) {
                 for (i = 0; i < 4; i++) {
-                    D_800FEAD8[i] = ((struct ObjectState521 *) (((u8 *) ((ObjectLinks854 *) arg0)->unk_5DC) + i))->unk_520;
+                    D_800FEAD8[i] = ((struct ObjectState521 *) (((u8 *) arg0->unk_5DC) + i))->unk_520;
                 }
             }
         }
@@ -184,8 +184,8 @@ void func_80225B98_de(void *arg0, void *arg1, s32 arg2)
 
     resource = func_8028CFA0_de(&D_8011FE88, -1, 0xC45);
     if (resource != 0) {
-        ((ObjectLinks854 *)(arg0))->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
-        ((ObjectLinks854 *)(arg0))->unk_54 = ((ObjectState108 *)(resource))->unk_100;
-        ((ObjectLinks854 *)(arg0))->unk_58 = ((ObjectState108 *)(resource))->unk_104;
+        arg0->unk_50 = ((ObjectState108 *)(resource))->unk_FC;
+        arg0->unk_54 = ((ObjectState108 *)(resource))->unk_100;
+        arg0->unk_58 = ((ObjectState108 *)(resource))->unk_104;
     }
 }

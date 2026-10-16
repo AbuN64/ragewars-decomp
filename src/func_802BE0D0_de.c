@@ -2,7 +2,7 @@
 #include "span_1000/code_802BE0D0.h"
 #include "shared/func_802BE0D0_de_closed.h"
 
-Acmd *func_802BE0D0_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *func_802BE0D0_de(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s16 inp;
@@ -19,7 +19,7 @@ Acmd *func_802BE0D0_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, 
     s32 decoded = 0;
     s32 looped = 0;
 
-    ALLoadFilter_func_802BE514_de *f = (ALLoadFilter_func_802BE514_de *)filter;
+    ALLoadFilter_func_802BE514_de *f = filter;
 
     if (outCount == 0)
         return ptr;

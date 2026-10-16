@@ -48,7 +48,7 @@ void func_80278D78_de(void *, s32, void *);
 void func_80278E04_de(s32, s32, void *);
 s32 func_802800C0_de(void *, void *, void *, s32 *, s32, s32, Vec3, Vector4f, Vec3, Vec3 *, s32, s32); /* extern */
 void func_80283278_de(void *, s32);
-s32 func_8028B21C_de(void *, s32);
+s32 func_8028B21C_de(struct Shared_World *, s32);
 void func_8028B898_de(void *, void *, s32);
 void *func_8028FFD0_de(void *, s32 *, s32, Vec3, Vec3, s32, f32); /* extern */
 struct ListNode80290528;

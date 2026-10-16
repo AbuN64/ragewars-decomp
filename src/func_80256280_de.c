@@ -15,7 +15,7 @@ extern void func_802BB750_de(s32 arg0);
 
 extern char D_0025657C;
 
-extern Chunk *func_8025661C_de(void *arg0);
+extern Chunk *func_8025661C_de(CartridgeReadWorker *arg0);
 
 extern s32 func_802BB160_de(void *arg0, void *arg1, s32 arg2);
 

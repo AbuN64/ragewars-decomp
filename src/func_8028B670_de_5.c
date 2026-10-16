@@ -53,24 +53,24 @@ void func_8028C4B4_de(void *arg0, s32 arg1) {
     }
 }
 
-s32 func_8028C568_de(void *arg0, void *arg1) {
+s32 func_8028C568_de(WorldRecAt1B40C *arg0, Record14 *arg1) {
     void *rec;
     f32 val;
     s32 flag;
 
-    rec = ((WorldRecAt1B40C *)(arg0))->listB.head;
+    rec = arg0->listB.head;
     if (rec != 0) {
-        func_80255ED8_de(&((WorldRecAt1B40C *)(arg0))->listB, rec);
-        func_80255CB8_de(&((WorldRecAt1B40C *)(arg0))->listA, rec);
+        func_80255ED8_de(&arg0->listB, rec);
+        func_80255CB8_de(&arg0->listA, rec);
         ((Bucket *)(rec))->object = arg1;
     } else {
-        rec = ((WorldRecAt1B40C *)(arg0))->listA.tail;
+        rec = arg0->listA.tail;
         func_80278C10_de(((Bucket *)(rec))->object);
         ((Bucket *)(rec))->object = arg1;
     }
-    val = recordValue((s32) ((Record14 *)(arg1))->lifetime);
+    val = recordValue((s32) arg1->lifetime);
     ((Bucket *)(rec))->remaining = val;
-    flag = ((Record14 *)(arg1))->flags & 2;
+    flag = arg1->flags & 2;
     if (flag != 0) {
         ((Bucket *)(rec))->remaining = val * D_800C52E8_de;
     }

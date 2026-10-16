@@ -129,16 +129,16 @@ end:
     return result;
 }
 
-void *func_8028CFA0_de(void *arg0, s32 arg1, s32 arg2) {
+void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2) {
     s32 *descriptor;
     s32 count;
     s32 i;
     ActorDefinitionHeader *entry;
 
-    descriptor = ((Shared_World *)arg0)->actorDefinitions;
+    descriptor = arg0->actorDefinitions;
     count = *descriptor;
     for (i = 0; i < count; i++) {
-        entry = func_8028FDB4_de(((Shared_World *)arg0)->actorDefinitions, i);
+        entry = func_8028FDB4_de(arg0->actorDefinitions, i);
         if (arg1 != -1 && entry->kind != arg1) {
             continue;
         }
@@ -175,14 +175,14 @@ s32 func_8028D050_de(Container *arg0, s32 key0, s32 key1, s32 key2, RecordRecAtE
     return count;
 }
 
-void func_8028D108_de(void *arg0) {
+void func_8028D108_de(Shared_World *arg0) {
     s8 color[4];
     s32 state;
     ColorEntry *entry;
     f32 alpha;
     s32 converted;
 
-    state = ((Shared_World *)arg0)->frozen;
+    state = arg0->frozen;
     if (state == 0) {
         return;
     }
@@ -193,12 +193,12 @@ void func_8028D108_de(void *arg0) {
         return;
     }
     {
-        entry = &D_800CD6E4_de[((Shared_World *)arg0)->selectionState];
+        entry = &D_800CD6E4_de[arg0->selectionState];
         if (entry->value != 0.0f) {
             color[0] = entry->red;
             color[1] = entry->green;
             color[2] = entry->blue;
-            alpha = (((Shared_World *)arg0)->selectionTimer * D_800CA3E0[1]) /
+            alpha = (arg0->selectionTimer * D_800CA3E0[1]) /
                     entry->value;
             if (!(D_800C52F8_de <= alpha)) {
                 converted = (s32)alpha;

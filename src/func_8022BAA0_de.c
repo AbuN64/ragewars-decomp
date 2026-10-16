@@ -17,7 +17,7 @@
 
 extern unsigned int D_80146894;
 
-extern void *func_8028CFA0_de(void *arg0, s32 arg1, s32 arg2);
+extern void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2);
 
 extern s32 D_801468F4;
 
@@ -96,10 +96,10 @@ void func_8022BB80_de(void *arg0) {
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, var_a2, ((Shared_ActorView *)arg0)->effectId);
 }
 
-void func_8022BC14_de(void *arg0) {
+void func_8022BC14_de(Player *arg0) {
     s32 var_t0;
 
-    if (((Player *)arg0)->computer != 0) {
+    if (arg0->computer != 0) {
         if (D_8014288C == 0) {
             var_t0 = 0x17;
             goto after;
@@ -107,9 +107,9 @@ void func_8022BC14_de(void *arg0) {
     }
     var_t0 = (D_80140FF8 == 1) ? 0 : 0x17;
 after:
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, &((Player *)arg0)->weaponModel,
-        ((WeaponInfo *)D_800D052C[((Player *)arg0)->selectedAction])->model + var_t0,
-        ((Player *)arg0)->weaponAnimationTable->defaultAnimation);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, &arg0->weaponModel,
+        ((WeaponInfo *)D_800D052C[arg0->selectedAction])->model + var_t0,
+        arg0->weaponAnimationTable->defaultAnimation);
 }
 
 void func_8022BC94_de(void *arg0, s32 arg1) {

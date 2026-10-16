@@ -4815,7 +4815,8 @@ typedef struct Rules_func_80228FB8_de Rules_func_80228FB8_de;
 struct Obj_func_80229FA0_de;
 typedef struct Obj_func_80229FA0_de Obj_func_80229FA0_de;
 
-extern s32 func_80229A80_de(void *game);
+struct ObjectPool;
+extern s32 func_80229A80_de(struct ObjectPool *game);
 
 extern float D_800C2BE0_de;
 
@@ -4971,6 +4972,7 @@ extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
 extern void func_8022BC94_de(void *arg0, s32 arg1);
 extern s32 func_8024B7E4_de(void *arg0, s32 arg1);
 extern void func_8021C9D8_de(void *arg0, void *arg1);
-extern void func_8021CBD0_de(void *arg0, void *arg1);
+struct WeaponMenuView;
+extern void func_8021CBD0_de(void *arg0, struct WeaponMenuView *arg1);
 
 #endif

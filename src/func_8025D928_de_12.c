@@ -45,7 +45,7 @@ extern void func_802B45DC_de(ALEnvMixer4C *, ALHeap *);
 extern s32 func_802B3EDC_de(void *, s32, void *);
 
                    /* alAuxBusParam */
-extern s32 func_802B6480_de(void *, s32, void *);
+extern s32 func_802B6480_de(void *, s32, ALFilter_s14 *);
 
  /* alGlobals */
 

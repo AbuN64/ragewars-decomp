@@ -79,7 +79,7 @@ extern double D_800C5B98_de;
 
 extern double D_800C5BB0_de;
 
-extern void func_8029E2E8_de(void *arg0, void *arg1);
+extern void func_8029E2E8_de(Triple *arg0, Triple *arg1);
 
 extern f64 func_8029DB74_de(void);
 

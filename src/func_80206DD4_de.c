@@ -98,8 +98,9 @@ void func_80206DD4_de(Actor_func_80206DD4_de *actor, RiderCode80206258 *rider) {
  */
 void func_80216808_de(void *, s32, f32, f32);
 void func_802192C0_de(void *);
-void * func_80219408_de(void *);
-void *func_80219434_de(void *);
+struct Cursor;
+void * func_80219408_de(struct Cursor *);
+void *func_80219434_de(struct Cursor *);
 void func_80271F68_de(void *, void *, void *);
 void func_8027207C_de(f32 *);
 

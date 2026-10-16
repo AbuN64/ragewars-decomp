@@ -1,12 +1,12 @@
 #include "span_16E000/code_80423280.h"
 #include "common/types_1dc8418c21db.h"
 #include "common/unused.h"
+#include "shared/func_8021E2A0_de_closed.h"
 #include "shared/menu_match_globals.h"
 #include "shared/world.h"
 #include "span_16E000/code_8042BD40.h"
-#include "types.h"
-#include "shared/func_8021E2A0_de_closed.h"
 #include "span_16E000/code_8042E080.h"
+#include "types.h"
 
 /* Calls func_802A2164_us and func_802A2394_de, then func_80298368_de with 0x11. */
 #if defined(VERSION_EU)
@@ -300,9 +300,9 @@ void func_8042D28C_de(void) {
         D_800D15E0 = 1;
         *level = D_800DDB08_de[1];
 #if defined(VERSION_DE)
-        func_804397F0_auto((char *) state + 0x20);
+        func_804397F0_auto((char *)&state->pad20);
 #else
-        func_804399D0((char *) state + 0x20);
+        func_804399D0((char *)&state->pad20);
 #endif
         D_800D15E0 = 0;
         *level = D_800DDB10;

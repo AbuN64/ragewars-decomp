@@ -86,7 +86,9 @@ struct Polygon {
 struct func_8023E854_S1;
 typedef struct func_8023E854_S1 func_8023E854_S1;
 
-extern void func_8023EC54_de(void *arg0, void *arg1);
+struct ActorMotion;
+struct MotionContactResult;
+extern void func_8023EC54_de(struct ActorMotion *arg0, struct MotionContactResult *arg1);
 
 extern void func_8023EE34_de(void);
 
@@ -193,7 +195,7 @@ struct Dst {
 
 extern float D_800C36D8_de;
 
-extern s32 func_8023E864_de(void *arg0, void *arg1);
+extern s32 func_8023E864_de(struct Input *arg0, Polygon_func_8023E8D4_de *arg1);
 
 struct Polygon;
 
@@ -213,7 +215,7 @@ struct Range {
 
 extern void func_8023E8B4_de(void *arg0, void *arg1);
 
-extern void func_8023EBFC_de(void *arg0, void *arg1);
+extern void func_8023EBFC_de(struct ActorMotion *arg0, struct MotionContactResult *arg1);
 
 extern void func_8023EE00_de();
 

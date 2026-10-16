@@ -5,7 +5,7 @@
 #include "shared/particle_lighting.h"
 #include "shared/func_80425674_de_layout.h"
 extern void func_80272898_de(void *, Vec3 *, Vec3 *);
-extern s32 func_80277128_de(void *, f32, f32, f32, Vec3 *, f32 *);
+extern s32 func_80277128_de(ObjectRecAtBC *, f32, f32, f32, Vec3 *, f32 *);
 extern void func_80271F34_de(void *, void *, void *);
 extern void func_80272A10_de(void *, Vec3 *, Vec3 *);
 extern void func_80271F68_de(void *, void *, void *);

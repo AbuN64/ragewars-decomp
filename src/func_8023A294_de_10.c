@@ -19,7 +19,7 @@
 extern State_func_8023B9C0_eu D_800FF230;
 extern char D_801011B8[];
 
-extern void func_8023CB60_de(s32 *base, Slot_func_8023B9C0_eu *slot);
+extern void func_8023CB60_de(Field_void_4 *base, Slot_func_8023B9C0_eu *slot);
 extern void func_8025637C_de(void *dst, void *rom, void *size, u32 extra);
 extern u32 func_80265350_de(void);
 extern void func_802A001C_de(void *pool, s32 count, s32 size);

@@ -148,7 +148,7 @@ void func_8027E784_de(Shared_Particle *actor) {
     }
 }
 
-void func_8027EB2C_de(void *arg0, void *arg1) {
+void func_8027EB2C_de(void *arg0, struct Shared_ParticleView *arg1) {
     extern s32 func_802799C0_de(void *, s32);
     Vec3 delta;
     void *sp38;
@@ -167,7 +167,7 @@ void func_8027EB2C_de(void *arg0, void *arg1) {
         if (lookup == 0) {
             return;
         }
-        func_80272898_de(&((struct Shared_ParticleView *)arg1)->viewMtx, &((Shared_Particle *)arg0)->inst.pos, &delta);
+        func_80272898_de(&arg1->viewMtx, &((Shared_Particle *)arg0)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;

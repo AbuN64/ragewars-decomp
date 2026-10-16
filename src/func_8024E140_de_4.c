@@ -25,7 +25,7 @@ void func_8024E79C_de(void *arg0, Triple t, void *arg4, s32 *arg5, s32 arg6, s32
 }
 
 int func_8024E7DC_de(void *arg0) {
-    extern int func_8028B2F8_de(char *arg0, int arg1);
+    extern int func_8028B2F8_de(Shared_World *arg0, int arg1);
     int temp_a1 = ((LevelActor *)arg0)->model;
     int var_v0 = 0;
     if (temp_a1 != 0) {
@@ -35,7 +35,7 @@ int func_8024E7DC_de(void *arg0) {
 }
 
 f32 func_8024E80C_de(struct Object_func_8024E80C_de *object) {
-    extern struct func_8022CA04_S3 *func_8028B2F8_de(void *, struct StateFlags *);
+    extern struct func_8022CA04_S3 *func_8028B2F8_de(Shared_World *, struct StateFlags *);
     struct func_8022CA04_S3 *entry;
 
     if (object->key != 0 && (object->key->flags & 1)) {

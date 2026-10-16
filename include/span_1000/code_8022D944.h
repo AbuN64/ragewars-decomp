@@ -14,7 +14,8 @@ struct func_8022E42C_S1 {
 
 extern f32 func_8022DBC4_de(f32 arg0);
 
-extern s32 func_8022DC1C_de(void *arg0);
+struct Shared_ActorView;
+extern s32 func_8022DC1C_de(struct Shared_ActorView *arg0);
 
 struct func_8022E578_S2;
 struct func_8022E578_S2 {
@@ -139,7 +140,8 @@ struct func_8022E3B4_S2 {
     void * unk2C;
 };
 
-extern void func_8022DC00_de(void *arg0);
+struct Player;
+extern void func_8022DC00_de(struct Player *arg0);
 
 struct func_8022E280_S1;
 struct func_8022E280_S1 {
@@ -267,7 +269,7 @@ extern float D_800C7EE0;
 
 extern void func_8022DA04_de(void *arg0);
 
-extern void func_8022DBE4_de(void *arg0);
+extern void func_8022DBE4_de(struct Player *arg0);
 
 struct func_8022DD84_S1;
 typedef struct func_8022DD84_S1 func_8022DD84_S1;
@@ -443,7 +445,7 @@ extern s32 func_8022E5EC_de(struct SharedPlayer *arg0);
 struct ObjRecAt1CV2;
 typedef struct ObjRecAt1CV2 ObjRecAt1CV2;
 
-extern void func_8022DD94_de(void *arg0);
+extern void func_8022DD94_de(struct Shared_ActorView *arg0);
 
 extern float D_800C7EF4;
 

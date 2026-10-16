@@ -95,7 +95,7 @@ Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, 
 extern s32 D_800D9360;
 extern s32 func_802C016C_de();
 extern void func_802BD280_de(s32 buffer, s32 size);
-Acmd *func_802C3988(void *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p)
+Acmd *func_802C3988(ALLoadFilter_func_802BE514_de *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     s32 nbytes;
@@ -103,7 +103,7 @@ Acmd *func_802C3988(void *filter, s16 *outp, s32 byteCount, s32 sampleOffset, Ac
     s32 dmemAlign;
     s32 nSam;
     s32 op;
-    ALLoadFilter_func_802BE514_de *f = (ALLoadFilter_func_802BE514_de *)filter;
+    ALLoadFilter_func_802BE514_de *f = filter;
     s32 *stream;
     op = *outp;
     if (f->table->base == 0) {

@@ -15,8 +15,8 @@ extern s32 func_802BB420_de(Queue *, s32, s32);
 
 
 
-s32 func_802B8CF0_de(void *entry, s32 subtype, s32 arg2, s32 arg3,
-                   s32 arg4, s32 arg5, s32 arg6) {
+s32 func_802B8CF0_de(OSIoMesg *entry, s32 subtype, s32 arg2, s32 arg3,
+                   s32 arg4, s32 arg5, Opaque_OSMesgQueue *arg6) {
     s16 type;
 
     if (D_800D4360 == 0) {
@@ -26,13 +26,13 @@ s32 func_802B8CF0_de(void *entry, s32 subtype, s32 arg2, s32 arg3,
     if (arg2 == 0) {
         type = 11;
     }
-    ((OSIoMesg *)entry)->hdr.type = type;
-    ((OSIoMesg *)entry)->hdr.pri = subtype;
-    ((OSIoMesg *)entry)->hdr.retQueue = (Opaque_OSMesgQueue *)arg6;
-    ((OSIoMesg *)entry)->dramAddr = (void *)arg4;
-    ((OSIoMesg *)entry)->devAddr = arg3;
-    ((OSIoMesg *)entry)->size = arg5;
-    ((OSIoMesg *)entry)->piHandle = 0;
+    entry->hdr.type = type;
+    entry->hdr.pri = subtype;
+    entry->hdr.retQueue = arg6;
+    entry->dramAddr = (void *)arg4;
+    entry->devAddr = arg3;
+    entry->size = arg5;
+    entry->piHandle = 0;
     if (subtype != 1) {
         return func_802BB420_de(func_802B8DA0_de(), (s32)entry, 0);
     }

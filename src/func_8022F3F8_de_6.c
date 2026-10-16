@@ -27,13 +27,13 @@ extern s32 func_8025DE54_de(s16 arg0, Vec3 position, s32 arg4, s32 arg5);
 
 
 
-void func_80230630_de(void *arg0, void *arg1) {
+void func_80230630_de(LevelActor *arg0, void *arg1) {
     s32 state;
     void *actor;
     AudioState *audio;
     s32 mode;
 
-    actor = ((LevelActor *)arg0)->controller;
+    actor = arg0->controller;
     state = *(s16 *)(&D_800CE8DC +
                      (((Actor_func_8022D290_de *)actor)->unk_0x0650 * 0x18));
     if ((s8)((Dest *)arg1)->count != 0) {

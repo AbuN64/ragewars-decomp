@@ -2,9 +2,9 @@
 #include "common/types_1dc8418c21db.h"
 #include "common/types_8a8189af7b05.h"
 #include "common/types_8fd754e1e915.h"
+#include "common/unused.h"
 #include "span_16E000/code_8040C780.h"
 #include "types.h"
-#include "common/unused.h"
 
 
 extern s32 func_802A0C08_de(void *, const char *, ...);
@@ -28,7 +28,7 @@ void func_802A1B24_de(Record_func_802A1990_de *arg0, s32 arg1) {
     func_802A0C08_de(arg0->field_60, D_800CAF20, arg1);
 }
 
-s32 func_802A1B50_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_802A1B50_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 offset;
     s32 wildcard;
@@ -41,7 +41,7 @@ s32 func_802A1B50_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         offset = 0;
         do {
             if (((struct Shape_typemap_3 *) (((char *) (&D_800CD9B0)) + offset))->field_0 == arg1) {
-                actor_kind = ((struct Tree *)arg0)->id;
+                actor_kind = arg0->id;
                 table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800CD9B4)) + offset))->field_0;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
                     return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);

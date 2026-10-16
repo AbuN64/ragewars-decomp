@@ -20,7 +20,7 @@ extern void func_8040E950_de(void *, s32);
 extern s32 func_8040EBD0_de(void *);
 extern s32 func_8042AF28_de(void);
 extern s32 func_8042AFB8_de(void);
-extern void func_8028D380_de(void *, s32, void *, s32);
+extern void func_8028D380_de(Shared_World *, s32, void *, s32);
 extern u8 *func_802A0494_de(u8 *);
 extern void func_802A025C_de(char *, char *);
 

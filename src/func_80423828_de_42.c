@@ -39,7 +39,7 @@ extern u8 D_80152789;
 extern char *D_800E1DA4[];
 #endif
 
-extern void func_8028D380_de(char *, s32, char *, s32);
+extern void func_8028D380_de(Shared_World *, s32, char *, s32);
 
 extern char *func_802A0494_de(char *);
 

@@ -19,7 +19,7 @@ extern f32 func_802B72B0_de(f32);
 extern f32 func_80274808_de(f32, f32, f32);
 extern void func_80271F68_de(Vec3 *, char *, Vec3 *);
 extern void func_80272898_de(f32 *, Vec3 *, Vec3 *);
-extern void func_80271FC8_de(char *, f32, Vec3 *, Vec3 *);
+extern void func_80271FC8_de(Vec3 *, f32, Vec3 *, Vec3 *);
 
 void func_80202FDC_de(Owner *owner, Rider *rider, s32 mode, char *target) {
     Segment *segment;

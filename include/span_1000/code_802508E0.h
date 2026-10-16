@@ -48,7 +48,7 @@ struct func_80250A7C_S1 {
     u8 unkDA;
 };
 
-extern void func_80253300_de(void *arg0);
+extern void func_80253300_de(Node80253610 *arg0);
 
 struct ResourceCacheEntry;
 struct ResourceCacheEntry {
@@ -181,7 +181,8 @@ struct func_802532A0_S1 {
 
 
 
-extern s8 func_80250E14_de(void *arg0);
+struct LevelActor;
+extern s8 func_80250E14_de(struct LevelActor *arg0);
 
 extern void func_80250A9C_de();
 
@@ -214,7 +215,7 @@ typedef struct ResourceHashEntry ResourceHashEntry;
 
 extern void func_802524B0_de(void *arg);
 
-extern void func_8025331C_de(void *arg0);
+extern void func_8025331C_de(Node80253610 *arg0);
 
 struct Owner_func_80250C84_de;
 typedef struct Owner_func_80250C84_de Owner_func_80250C84_de;

@@ -64,7 +64,8 @@ extern char D_800CA8C4_de;
 
 extern void D_0024A7A0();
 
-extern s32 func_8028B21C_de(void *, s32);
+struct Shared_World;
+extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 extern void func_80246184_de(char *);
 

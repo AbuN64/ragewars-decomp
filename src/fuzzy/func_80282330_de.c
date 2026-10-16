@@ -21,7 +21,7 @@ extern void func_8026D914_de(s32 arg0);
 extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
 extern void func_8027DD48_de(Shared_Particle *particle, void *matrix, void *camera, f32 depth);
 extern s32 func_80296B74_de(f32 (*arg0)[4], f32 *arg1);
-extern void func_8027EB2C_de(void *arg0, void *arg1);
+extern void func_8027EB2C_de(void *arg0, struct Shared_ParticleView *arg1);
 extern void func_8027ED6C_de(Shared_Particle *particle, struct Shared_ParticleView *view);
 extern void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *matrix);
 

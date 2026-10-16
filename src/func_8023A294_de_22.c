@@ -52,7 +52,7 @@ static inline s32 accepts(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly) {
 
 extern World *D_80103FCC;
 
-extern void *func_8028B2F8_de(void *, u16 *);
+extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
 s32 func_8023EA44_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, Vec3 *point, f32 radius, s32 keep) {
     if (func_802412D0_de(poly, &ray->start, &ray->end, &poly->t) == 0) {
@@ -76,47 +76,47 @@ void func_8023EBD4_de(void)
   D_80103FCC->unk100 = (D_80103FCC->state = (D_80103FCC->unkC4 = (D_80103FCC->unkB0 = (D_80103FCC->unk9C = (D_80103FCC->unk88 = (D_80103FCC->unk0 = 0))))));
 }
 
-void func_8023EBFC_de(void *arg0, void *arg1) {
+void func_8023EBFC_de(ActorMotion *arg0, MotionContactResult *arg1) {
     s32 temp_a1;
     s32 temp_v1;
 
-    temp_v1 = ((ActorMotion *)arg0)->flags & ~0xE00;
-    ((ActorMotion *)arg0)->flags = temp_v1;
-    temp_a1 = ((MotionContactResult *)arg1)->flags;
+    temp_v1 = arg0->flags & ~0xE00;
+    arg0->flags = temp_v1;
+    temp_a1 = arg1->flags;
     if (temp_a1 & 0x20000000) {
-        ((ActorMotion *)arg0)->flags = temp_v1 | 0x200;
+        arg0->flags = temp_v1 | 0x200;
         return;
     }
     if (temp_a1 & 0x40000000) {
-        ((ActorMotion *)arg0)->flags = temp_v1 | 0x400;
+        arg0->flags = temp_v1 | 0x400;
         return;
     }
     if (temp_a1 < 0) {
-        ((ActorMotion *)arg0)->flags = temp_v1 | 0x800;
+        arg0->flags = temp_v1 | 0x800;
     }
 }
 
-void func_8023EC54_de(void *arg0, void *arg1) {
+void func_8023EC54_de(ActorMotion *arg0, MotionContactResult *arg1) {
     s32 temp_a1;
     s32 temp_v0;
     s32 temp_v1;
     s32 temp_v1_2;
 
-    temp_v1 = ((ActorMotion *)arg0)->flags;
+    temp_v1 = arg0->flags;
     if (temp_v1 & 0x1000) {
-        ((ActorMotion *)arg0)->flags = temp_v1 & ~0x2000;
+        arg0->flags = temp_v1 & ~0x2000;
     }
-    temp_v0 = ((ActorMotion *)arg0)->flags;
+    temp_v0 = arg0->flags;
     temp_v1_2 = temp_v0 & 0xFFFC7FFF;
-    ((ActorMotion *)arg0)->flags = temp_v1_2;
+    arg0->flags = temp_v1_2;
     if (temp_v0 & 0x7000) {
-        temp_a1 = ((MotionContactResult *)arg1)->material;
+        temp_a1 = arg1->material;
         switch (temp_a1) {
         case 8:
-            ((ActorMotion *)arg0)->flags = temp_v1_2 | 0x10000;
+            arg0->flags = temp_v1_2 | 0x10000;
             return;
         case 7:
-            ((ActorMotion *)arg0)->flags = temp_v1_2 | 0x8000;
+            arg0->flags = temp_v1_2 | 0x8000;
             break;
         }
     }
@@ -156,26 +156,26 @@ void func_8023ECBC_de(void *arg0, u16 *arg1)
   }
 }
 
-s32 func_8023ED64_de(void *arg0, void *arg1) {
+s32 func_8023ED64_de(BoxContactRay *arg0, BoxContactPolygon *arg1) {
     f32 temp_f2;
     s32 var_v0;
 
-    temp_f2 = ((BoxContactPolygon *)arg1)->t;
+    temp_f2 = arg1->t;
     if (temp_f2 <= 0.0f) {
-        if (((BoxContactPolygon *)arg1)->kind == 7) {
+        if (arg1->kind == 7) {
             return 0;
         }
-        if ((u32) (((BoxContactPolygon *)arg1)->type - 5) < 2) {
+        if ((u32) (arg1->type - 5) < 2) {
             return 0;
         }
-        if ((temp_f2 * ((BoxContactRay *)arg0)->slack) < -(D_800D0648 * D_800C36D8_de)) {
+        if ((temp_f2 * arg0->slack) < -(D_800D0648 * D_800C36D8_de)) {
             return 0;
         }
     }
     var_v0 = 0;
     {
-        f32 b = ((BoxContactPolygon *)arg1)->t;
-        if (!(((BoxContactRay *)arg0)->nearest.t <= b)) {
+        f32 b = arg1->t;
+        if (!(arg0->nearest.t <= b)) {
             var_v0 = 1;
         }
     }

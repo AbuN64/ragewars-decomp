@@ -166,7 +166,7 @@ struct Transform {
 
 extern void func_802A57D8_de(void);
 
-extern void func_802A5A24_de(void *arg0, s32 arg1);
+extern void func_802A5A24_de(EffectContribution *arg0, s32 arg1);
 
 struct func_802A6A14_S1;
 typedef struct func_802A6A14_S1 func_802A6A14_S1;
@@ -254,7 +254,7 @@ struct FloatStateB0 {
 struct Root752C;
 typedef struct Root752C Root752C;
 
-extern void func_802A5A64_de(void *arg0);
+extern void func_802A5A64_de(EffectContribution *arg0);
 
 struct ObjectLinks54;
 typedef struct ObjectLinks54 ObjectLinks54;

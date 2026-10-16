@@ -8,7 +8,8 @@ extern s32 func_80214624_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_f
 extern Actor_func_80214DD4_de *func_802149C0_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
 extern f32 func_80215868_de(Actor_func_80214DD4_de *arg0, Vec3 pos, Actor_func_80214DD4_de *target, f32 arg3);
 extern f32 func_80216F44_de(Actor_func_80214DD4_de *arg0, Vec3 pos);
-extern Location *func_80219408_de(s8 *slot);
+struct Cursor;
+extern Location *func_80219408_de(struct Cursor *slot);
 extern f32 func_8024D284_de(Actor_func_80214DD4_de *arg0);
 extern f32 func_8024D398_de(Actor_func_80214DD4_de *arg0);
 extern f32 func_8024E464_de(Actor_func_80214DD4_de *arg0);

@@ -9,7 +9,7 @@
 #include "types.h"
 s32 func_8023E8D4_de(CapsuleSweep *ray, Polygon_func_8023E8D4_de *poly, s32 keep);
 void func_8044A07C_de(struct Object_func_8044A07C_de *);
-void func_80271FC8_de(void *, f32, void *, void *);
+void func_80271FC8_de(Vec3 *, f32, void *, void *);
 void func_80265E10_de(void *, void *, s32, s32, Vec3, ContactEffectStyle);
 s32 func_802833D0_de(void *);
 

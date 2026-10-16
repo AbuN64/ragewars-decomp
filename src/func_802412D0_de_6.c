@@ -14,7 +14,8 @@ extern f32 func_8024E420_de(CollisionProbe *);
 
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
-extern s32 func_8024491C_de(CollisionProbe *, Vec3, Vec3, void *, f32, f32, f32, f32);
+struct MotionSurface;
+extern s32 func_8024491C_de(CollisionProbe *, Vec3, Vec3, struct MotionSurface *, f32, f32, f32, f32);
 
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 

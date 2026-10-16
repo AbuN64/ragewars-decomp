@@ -14,8 +14,8 @@ char *func_8028AFEC_de(void *arg0, s32 arg1) {
 }
 
 /** Return an indexed record from the table at object offset 0xA0. */
-void *func_8028B00C_de(void *object, int index) {
-    char *base = (char *)((struct Shared_World *)(object))->records;
+void *func_8028B00C_de(struct Shared_World *object, int index) {
+    char *base = (char *)object->records;
     int stride = *(int *)base;
     return base + (index * stride + 8);
 }
@@ -82,14 +82,14 @@ void func_8028B160_de(s32 arg0, s32 arg1) {
     func_8026D9D0_de();
 }
 
-s32 func_8028B21C_de(void *arg0, s32 arg1)
+s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1)
 {
   s32 count;
   s32 i;
   u16 *ptr;
   void *base;
   s32 masked;
-  base = ((struct Shared_World *)(arg0))->modelIds;
+  base = arg0->modelIds;
   count = ((struct TableRecAt8 *)(base))->count;
   ptr = &((struct TableRecAt8 *)(base))->entries[0];
   i = 0;
@@ -140,28 +140,28 @@ void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *arg1,s32 arg2,s
 
 extern char *func_8028FDB4_de(s32 *, s32);
 
-void *func_8028B2F8_de(void *arg0, u16 *arg1) {
+void *func_8028B2F8_de(Shared_World *arg0, u16 *arg1) {
     s32 base;
     s32 idx;
 
     if (arg1 == 0) {
         return 0;
     }
-    base = func_8028FDB4_de(((Shared_World *)arg0)->modelSections, 0) + 8;
+    base = func_8028FDB4_de(arg0->modelSections, 0) + 8;
     idx = *arg1;
     return (void *)(base + idx * 0x64);
 }
 
 extern char *func_8028FDB4_de(s32 *, s32);
 
-u32 func_8028B350_de(void *arg0, s32 arg1) {
+u32 func_8028B350_de(Shared_World *arg0, s32 arg1) {
     s32 offset;
     s32 result;
 
     if (arg1 == 0) {
         return -1;
     }
-    offset = func_8028FDB4_de(((Shared_World *)arg0)->modelSections, 2) + 8;
+    offset = func_8028FDB4_de(arg0->modelSections, 2) + 8;
     result = arg1 - offset;
     return (u32)result >> 5;
 }
@@ -191,7 +191,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B3E4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void func_8028B3E4_de(struct Shared_World *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *temp_v0;
     u8 *base1;
     u8 *base2;
@@ -199,7 +199,7 @@ void func_8028B3E4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 idx;
     s32 idx2;
 
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(((struct Shared_World *)(arg0))->secondaryLevels, 0), arg1), 0);
+    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->secondaryLevels, 0), arg1), 0);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);
     base1 = (u8 *) func_8028FDB4_de(temp_v0, 1);
@@ -229,7 +229,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B4D0_de(void *arg0, s32 arg1, s32 arg2) {
+void func_8028B4D0_de(struct Shared_World *arg0, s32 arg1, s32 arg2) {
     void *field84;
     s32 field1B40C;
     void *temp_v0;
@@ -239,8 +239,8 @@ void func_8028B4D0_de(void *arg0, s32 arg1, s32 arg2) {
     s32 idx;
     s32 idx2;
 
-    field84 = ((struct Shared_World *)(arg0))->secondaryLevels;
-    field1B40C = ((struct Shared_World *)(arg0))->level;
+    field84 = arg0->secondaryLevels;
+    field1B40C = arg0->level;
     temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);
@@ -268,7 +268,7 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-s32 func_8028B5C0_de(void *arg0, s32 arg1) {
+s32 func_8028B5C0_de(struct Shared_World *arg0, s32 arg1) {
     void *field84;
     s32 field1B40C;
     void *temp_v0;
@@ -276,8 +276,8 @@ s32 func_8028B5C0_de(void *arg0, s32 arg1) {
     s32 mask;
     s32 i;
 
-    field84 = ((struct Shared_World *)(arg0))->secondaryLevels;
-    field1B40C = ((struct Shared_World *)(arg0))->level;
+    field84 = arg0->secondaryLevels;
+    field1B40C = arg0->level;
     temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
     func_8028FDB4_de(temp_v0, 0);
     func_8028FDF8_de((s32) temp_v0, 1);

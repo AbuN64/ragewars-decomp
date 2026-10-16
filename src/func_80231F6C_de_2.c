@@ -65,17 +65,17 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_802321C8_de(void *actor, void *attack) {
+void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
     char *player;
     s32 action;
 
-    player = (char *)((Shared_Actor *)(actor))->entity;
+    player = (char *)actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (func_80222AA4_de(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
     }
     if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player)) {
-        ((WeaponFireState *)(attack))->triggered = 1;
+        attack->triggered = 1;
         if (((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x2000) {
 
 #if defined(VERSION_EU_X)
@@ -84,10 +84,10 @@ void func_802321C8_de(void *actor, void *attack) {
             func_8022B1A8(player, 0);
 #endif
 
-            ((WeaponFireState *)(attack))->alternate = 1;
+            attack->alternate = 1;
         }
-    } else if (((WeaponFireState *)(attack))->triggered != 0) {
-        if (((WeaponFireState *)(attack))->alternate == 0) {
+    } else if (attack->triggered != 0) {
+        if (attack->alternate == 0) {
 
 #if defined(VERSION_EU_X)
             func_80228E60_eu(player, 1);
@@ -96,11 +96,11 @@ void func_802321C8_de(void *actor, void *attack) {
 #endif
 
         } else {
-            ((WeaponFireState *)(attack))->alternate = 0;
+            attack->alternate = 0;
         }
-        ((WeaponFireState *)(attack))->triggered = 0;
+        attack->triggered = 0;
     }
-    if (func_802301F4_de(actor, attack) == 0 && !(((Shared_Actor *)(actor))->weaponFlags & 0x400)) {
+    if (func_802301F4_de(actor, attack) == 0 && !(actor->weaponFlags & 0x400)) {
         func_80214178_de(actor, attack, action);
     }
 }

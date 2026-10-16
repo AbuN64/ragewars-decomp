@@ -17,8 +17,8 @@ int func_8025E518_de(void *object) {
 }
 
 /** Return the signed byte at offset five. */
-int func_8025E524_de(void *arg0) {
-    return ((Controller_func_80259C5C_de *)arg0)->mode;
+int func_8025E524_de(Controller_func_80259C5C_de *arg0) {
+    return arg0->mode;
 }
 
 /** Return the signed halfword at offset eight. */
@@ -53,6 +53,6 @@ unsigned short func_8025E578_de(void *arg0) {
     return ((Controller_func_80259C5C_de *)arg0)->flags & 0x3FFF;
 }
 
-short func_8025E584_de(void *arg0) {
-    return ((Controller_func_80259C5C_de *)arg0)->x;
+short func_8025E584_de(Controller_func_80259C5C_de *arg0) {
+    return arg0->x;
 }

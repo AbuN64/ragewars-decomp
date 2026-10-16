@@ -57,7 +57,7 @@ extern void *func_8022A414_de(void *);
 
 extern ActorList D_80145040;
 
-extern s32 func_8028B350_de(void *table, s32 id);
+extern s32 func_8028B350_de(Shared_World *table, s32 id);
 
 
 

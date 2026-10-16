@@ -30,11 +30,13 @@ extern char D_8011D8D0;
 
 extern s32 func_80283228_de(char *, void *);
 
-extern void func_80284FF4_de(char *, void *, Vec3 *);
+struct EffectSystem;
+extern void func_80284FF4_de(struct EffectSystem *, void *, Vec3 *);
 
 extern f32 func_802726BC_de(Vec3 *, Vec3 *);
 
-extern void func_802850C8_de(void *arg0, void *arg1, f32 *arg2);
+struct LevelActor;
+extern void func_802850C8_de(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
 
 extern f32 func_8020AA0C_de(void *arg0);
 
@@ -185,49 +187,49 @@ void func_8020A028_de(AiController *arg0, AiConfig *arg1)
     }
 }
 
-void func_8020A2D4_de(void *arg0, void *config) {
+void func_8020A2D4_de(ObjectLinks2EC *arg0, IntegerState2C *config) {
     s32 count;
     char *target;
     Vec3 pos;
     f32 range;
     f32 scale;
 
-    if (((ObjectLinks2EC *)(arg0))->unk_2E4 > 0) {
+    if (arg0->unk_2E4 > 0) {
         scale = D_800C6E00;
-        ((ObjectLinks2EC *)(arg0))->unk_2E8 = ((IntegerState2C *)(config))->unk_8;
-        ((ObjectLinks2EC *)(arg0))->unk_2E8 =
-            (f32) ((ObjectLinks2EC *)(arg0))->unk_2E8
-            + func_80274564_de(scale) * (f32) ((IntegerState2C *)(config))->unk_C;
-        ((ObjectLinks2EC *)(arg0))->unk_2E4 -= 1;
+        arg0->unk_2E8 = config->unk_8;
+        arg0->unk_2E8 =
+            (f32) arg0->unk_2E8
+            + func_80274564_de(scale) * (f32) config->unk_C;
+        arg0->unk_2E4 -= 1;
         return;
     }
-    if (((ObjectLinks2EC *)(arg0))->unk_2E4 == 0) {
+    if (arg0->unk_2E4 == 0) {
         count = func_80283228_de(&D_8011D8D0, *(void **) arg0);
         if (count == 3) {
-            ((ObjectLinks2EC *)(arg0))->unk_2E8 = count;
+            arg0->unk_2E8 = count;
         }
-        if (count < ((ObjectLinks2EC *)(arg0))->unk_2E8) {
-            ((ObjectLinks2EC *)(arg0))->unk_23C = 1;
+        if (count < arg0->unk_2E8) {
+            arg0->unk_23C = 1;
             return;
         }
-        ((ObjectLinks2EC *)(arg0))->unk_2E4 = -1;
+        arg0->unk_2E4 = -1;
         scale = D_800C6E04;
-        ((ObjectLinks2EC *)(arg0))->unk_2E8 = ((IntegerState2C *)(config))->unk_24;
-        ((ObjectLinks2EC *)(arg0))->unk_2E8 =
-            (f32) ((ObjectLinks2EC *)(arg0))->unk_2E8
-            + func_80274564_de(scale) * (f32) ((IntegerState2C *)(config))->unk_28;
+        arg0->unk_2E8 = config->unk_24;
+        arg0->unk_2E8 =
+            (f32) arg0->unk_2E8
+            + func_80274564_de(scale) * (f32) config->unk_28;
         return;
     }
-    ((ObjectLinks2EC *)(arg0))->unk_2E8 -= 1;
-    target = ((struct ObjRecAt1D8V2 *) ((ObjectLinks2EC *) arg0)->unk_64)->unk1D8;
+    arg0->unk_2E8 -= 1;
+    target = ((struct ObjRecAt1D8V2 *) arg0->unk_64)->unk1D8;
     func_80284FF4_de(&D_8011D8D0, *(void **) arg0, &pos);
     range = D_800C6E08;
     pos.y = ((Player *)target)->pos.y;
     if (func_802726BC_de(&pos, &((Player *)(target))->pos) < range) {
-        ((ObjectLinks2EC *)(arg0))->unk_2E8 = 0;
+        arg0->unk_2E8 = 0;
     }
-    if (((ObjectLinks2EC *)(arg0))->unk_2E8 == 0) {
-        ((ObjectLinks2EC *)(arg0))->unk_240 = 1;
+    if (arg0->unk_2E8 == 0) {
+        arg0->unk_240 = 1;
         func_8020A95C_de(arg0, config);
     }
 }

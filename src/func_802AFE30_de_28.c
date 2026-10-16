@@ -27,7 +27,7 @@ extern void func_802B1E50_de(ALSeqPlayer *, f32);                   /* __setUspt
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime); /* alEvtqPostEvent */
 extern ALMicroTime func_802B003C_de(ALEventQueue *, ALEvent *);    /* alEvtqNextEvent */
 extern void func_802B0258_de(ALEventQueue *, s16);                 /* alEvtqFlushType */
-extern void alSynStopVoice(void *, ALVoice_s *);                   /* alSynStopVoice */
+extern void alSynStopVoice(struct Shape_typemap_71 *, ALVoice_s *);                   /* alSynStopVoice */
 extern void alSynFreeVoice(void *, ALVoice_s *);                   /* alSynFreeVoice */
 extern void func_802B3480_de(void *, ALVoice_s *, s16, ALMicroTime); /* alSynSetVol */
 extern void func_802B33E0_de(void *, ALVoice_s *, f32);              /* alSynSetPitch */

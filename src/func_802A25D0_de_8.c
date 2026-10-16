@@ -9,7 +9,8 @@
 
 extern void func_80272CB0_de(void *, f32, f32, f32);
 extern void func_802727D8_de(void *);
-extern void func_802A31E8_de(Node438C *, Node438C *, void *, void *);
+struct GameplayCamera;
+extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, void *);
 extern void func_8027027C_de(void *, s32);
 
 

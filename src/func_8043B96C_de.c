@@ -12,7 +12,7 @@
 
 
 extern u8 D_80146398[];
-extern struct Model *func_8028CFA0_de(void *, s32, s32);
+extern struct Model *func_8028CFA0_de(Shared_World *, s32, s32);
 extern void func_8043B6E8_de(s32);
 
 void func_8043B96C_de(void) {

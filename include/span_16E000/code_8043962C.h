@@ -2,7 +2,8 @@
 #define UNBAKE_SPAN_16E000_CODE_8043962C_H
 #include "types.h"
 #include "common/types_8a8189af7b05.h"
-extern s32 func_80439E34_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+struct Tree;
+extern s32 func_80439E34_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 struct State_func_80439B5C_de;
 typedef struct State_func_80439B5C_de State_func_80439B5C_de;
@@ -94,7 +95,7 @@ typedef struct Shared_Body Shared_Body;
 struct MenuModelScreen;
 typedef struct MenuModelScreen MenuModelScreen;
 
-extern s32 func_80439758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+extern s32 func_80439758_de(Shared_Body *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 typedef s32 (*MenuEventHandler)(void *, s32, s32, s32, s32);
 extern MenuEventHandler D_800E595C;

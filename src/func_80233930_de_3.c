@@ -6,7 +6,7 @@
 #include "shared/func_8021E2A0_de_closed.h"
 #include "shared/func_8027AD4C_de_closed.h"
 extern s32 D_800CD730;
-extern void *func_8028B2F8_de(void *, u16 *);
+extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
 void func_802343C8_de(Entity_func_80233C88_de *self) {
     u8 target[4];

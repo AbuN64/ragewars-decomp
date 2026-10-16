@@ -71,7 +71,7 @@ extern s32 func_8024E62C_de(void *);
 
 
 
-void func_80222908_de(void *arg0, void *arg1, void *ground) {
+void func_80222908_de(void *arg0, void *arg1, ObjectState54 *ground) {
     u8 *options;
 
     if ((u16)((Shared_ActorView *)arg0)->action < 2) {
@@ -112,7 +112,7 @@ void func_80222908_de(void *arg0, void *arg1, void *ground) {
         ((Shared_ActorView *)arg0)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
     if (!(((ObjectLinks3C *)(arg1))->unk_38 & 3) && ground != 0
-        && (func_8024E62C_de(arg1) != 0 || (((ObjectState54 *)(ground))->unk_52 & 0x800))) {
-        ((Shared_ActorView *)arg0)->speedFactor *= ((ObjectState54 *)(ground))->unk_30;
+        && (func_8024E62C_de(arg1) != 0 || (ground->unk_52 & 0x800))) {
+        ((Shared_ActorView *)arg0)->speedFactor *= ground->unk_30;
     }
 }

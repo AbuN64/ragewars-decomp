@@ -9,7 +9,7 @@ extern void func_80271F9C_de(void *, void *, f32);
 
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 
-extern void *func_8028B00C_de(void *object, int index);
+extern void *func_8028B00C_de(struct Shared_World *object, int index);
 
 extern void func_80268C1C_de(s32 arg0, void *arg1);
 

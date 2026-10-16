@@ -11,7 +11,7 @@ typedef struct RenderSortRecord {
 #include "common/types_1dc8418c21db.h"
 #include "resident_event_handler.h"
 #include "shared/box_contact.h"
-extern int func_80240638_de(void *left, void *right);
+extern int func_80240638_de(RenderSortRecord *left, RenderSortRecord *right);
 
 struct ObjRecAtCC;
 struct ObjRecAtCC {

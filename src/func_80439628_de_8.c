@@ -88,7 +88,7 @@ extern Handler8043A014 D_800E59B8;
 
 
 
-s32 func_80439E34_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_80439E34_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 index;
     s32 wildcard;
@@ -101,7 +101,7 @@ s32 func_80439E34_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         index = 0;
         do {
             if (D_800E59B0[index].value == arg1) {
-                actor_kind = ((struct Tree *)arg0)->id;
+                actor_kind = arg0->id;
                 table_kind = D_800E59B4[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
                     return (*(Handler8043A014 *)entry)(arg0, arg1, arg2, arg3, arg4);

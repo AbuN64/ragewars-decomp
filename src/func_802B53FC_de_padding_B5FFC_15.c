@@ -6,12 +6,12 @@
 
 
 
-s32 func_802B6480_de(ALSave *arg0, s32 arg1, s32 arg2)
+s32 func_802B6480_de(ALSave *arg0, s32 arg1, ALFilter_s14 *arg2)
 {
   switch (arg1)
   {
     case 1:
-      arg0->filter.source = (ALFilter_s14 *)arg2;
+      arg0->filter.source = arg2;
       goto ret0;
 
     case 6:

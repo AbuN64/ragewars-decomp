@@ -24,7 +24,7 @@ s32 func_8022AC00_de(void *);
 int func_8022B178_de(void *);
 int func_80245784_de(void);
 void func_802830CC_de(void *, s32);
-void * func_8028B2F8_de(void *, u16 *);
+void * func_8028B2F8_de(Shared_World *, u16 *);
 s32 func_802A01E8_de(void);
 
 

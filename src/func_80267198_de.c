@@ -30,7 +30,7 @@ extern s32 D_80146894;
 /* Forwards the actor, event value and three-component input with a zero final flag. */
 
 
-extern void func_80271FC8_de(void *arg0, f32 t, void *a, void *b);
+extern void func_80271FC8_de(Vec3 *arg0, f32 t, void *a, void *b);
 
 extern f32 func_8024D284_de(void *arg0);
 

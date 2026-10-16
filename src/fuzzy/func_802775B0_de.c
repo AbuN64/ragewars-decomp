@@ -16,7 +16,7 @@ extern f32 D_800C4ADC_de, D_800C4AE0_de, D_800C4AE4_de, D_800C4AE8_de;
 extern void func_80270910_de(f32 *, DraftPackedMatrix *);
 extern void func_80272898_de(void *, void *, void *);
 extern void func_80272B38_de(void *, void *, void *);
-extern s32 func_802773D4_de(DraftLight *, Vec3, Vec3, void *, Vec3 *, f32 *);
+extern s32 func_802773D4_de(DraftLight *, Vec3, Vec3, Matrix *, Vec3 *, f32 *);
 extern void func_80271F34_de(Vec3 *, Vec3 *, Vec3 *);
 
 void func_802775B0_de(DraftLight **lights, s32 lightCount, DraftLitMesh *mesh,

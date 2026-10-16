@@ -111,16 +111,16 @@ int func_802532F4_de(void *arg0) {
     return ((Node80253610 *)arg0)->flags & 0x100;
 }
 
-void func_80253300_de(void *arg0) {
-    ((Node80253610 *)arg0)->references = ((Node80253610 *)arg0)->references + 1;
-    ((Node80253610 *)arg0)->flags = ((Node80253610 *)arg0)->flags | 0x100;
+void func_80253300_de(Node80253610 *arg0) {
+    arg0->references = arg0->references + 1;
+    arg0->flags = arg0->flags | 0x100;
 }
 
-void func_8025331C_de(void *arg0) {
+void func_8025331C_de(Node80253610 *arg0) {
     s32 temp_v0;
-    temp_v0 = ((Node80253610 *)arg0)->references - 1;
-    ((Node80253610 *)arg0)->references = temp_v0;
+    temp_v0 = arg0->references - 1;
+    arg0->references = temp_v0;
     if (temp_v0 == 0) {
-        ((Node80253610 *)arg0)->flags = (s32) (((Node80253610 *)arg0)->flags & ~0x100);
+        arg0->flags = (s32) (arg0->flags & ~0x100);
     }
 }

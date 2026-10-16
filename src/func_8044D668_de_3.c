@@ -14,7 +14,7 @@ extern s32 func_8044D220_de(s8 *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4);
 
 
 
-void func_8044DDD4_de(void *arg0) {
+void func_8044DDD4_de(GameSession *arg0) {
     s32 sp18[6];
     s32 var_s0;
 
@@ -26,9 +26,9 @@ void func_8044DDD4_de(void *arg0) {
     D_801468A0.unk4 = 0;
     D_801468A0.unk8 = 0;
     D_801468A0.unkC = 0;
-    ((GameSession *)arg0)->selectionActive = 0;
+    arg0->selectionActive = 0;
     D_801468A0.first = 0;
-    ((GameSession *)arg0)->phase = 2;
-    ((GameSession *)arg0)->selector = var_s0;
-    ((GameSession *)arg0)->target = 0xC;
+    arg0->phase = 2;
+    arg0->selector = var_s0;
+    arg0->target = 0xC;
 }

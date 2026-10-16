@@ -66,9 +66,9 @@ extern const f32 D_800C77D4_de;
 
  /* 1/CONVERT */
 
-s32 func_802B5B94_de(void *filter, s32 paramID, void *param)
+s32 func_802B5B94_de(ALFxCode802BAC64 *filter, s32 paramID, void *param)
 {
-    ALFxCode802BAC64 *f = (ALFxCode802BAC64 *)filter;
+    ALFxCode802BAC64 *f = filter;
     s32 p = (paramID - 2) % 8;
     s32 s = (paramID - 2) / 8;
     s32 val = *(s32 *)param;

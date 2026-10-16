@@ -120,34 +120,34 @@ void func_8024EF28_de(void *actor) {
     func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 
-void func_8024F108_de(void *arg0) {
+void func_8024F108_de(StaticObject *arg0) {
     void *sp28;
     void **resource;
     s32 key;
     s32 found;
     s32 index;
 
-    index = ((StaticObject *)arg0)->model;
-    if (index != ((StaticObject *)arg0)->animation) {
-        resource = func_8025193C_de(0, ((StaticObject *)arg0)->animationKey,
-                                ((StaticObject *)arg0)->animationKey, 0x18,
+    index = arg0->model;
+    if (index != arg0->animation) {
+        resource = func_8025193C_de(0, arg0->animationKey,
+                                arg0->animationKey, 0x18,
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
         if (resource != 0) {
-            key = func_8028FE28_de(*resource, ((StaticObject *)arg0)->animationKey, 1);
+            key = func_8028FE28_de(*resource, arg0->animationKey, 1);
             func_80253838_de(0, resource);
             found = func_802540F4_de(0, &sp28, key, &D_800C3DC0_de, 1);
             if (found != 0) {
-                ((StaticObject *)arg0)->resource = func_8028FE3C_de((s32)sp28, key,
+                arg0->resource = func_8028FE3C_de((s32)sp28, key,
                                                     index % *(s32 *)sp28,
-                                                    &((StaticObject *)arg0)->resourceSize);
-                ((StaticObject *)arg0)->animation = index;
+                                                    &arg0->resourceSize);
+                arg0->animation = index;
                 func_80253838_de(0, (void *)found);
             }
         }
     }
-    if (((StaticObject *)arg0)->resource != 0) {
-        resource = func_8025193C_de(0, ((StaticObject *)arg0)->resource,
-                                ((StaticObject *)arg0)->resource, ((StaticObject *)arg0)->resourceSize,
+    if (arg0->resource != 0) {
+        resource = func_8025193C_de(0, arg0->resource,
+                                arg0->resource, arg0->resourceSize,
                                 0, 0, &D_0026D7F4, &D_800C3DD4_de, 0);
     } else {
         resource = 0;

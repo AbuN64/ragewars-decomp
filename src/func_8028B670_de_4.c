@@ -29,22 +29,22 @@ void func_8028BFD8_de(s32 arg0, s32 arg1, Triple arg2, s32 arg5, f32 arg6) {
     func_8028FFD0_de(arg0 + 0x11778, 0, arg5, zero, arg2, arg1, arg6);
 }
 
-void *func_8028C050_de(void *arg0, void *arg1) {
+void *func_8028C050_de(void *arg0, Vec3 *arg1) {
     f32 lower;
     f32 upper;
     f32 value;
 
     if (arg0 != 0 &&
-        func_80275B10_de(arg0, ((Vec3 *)arg1)->x,
-                          ((Vec3 *)arg1)->z) != 0) {
+        func_80275B10_de(arg0, arg1->x,
+                          arg1->z) != 0) {
         if (!(((Triangle *)arg0)->flags & 0x40)) {
             return arg0;
         }
         lower = func_80275DD4_de(arg0,
-            ((Vec3 *)arg1)->x, ((Vec3 *)arg1)->z);
+            arg1->x, arg1->z);
         upper = func_8027525C_de(arg0,
-            ((Vec3 *)arg1)->x, ((Vec3 *)arg1)->z);
-        value = ((Vec3 *)arg1)->y;
+            arg1->x, arg1->z);
+        value = arg1->y;
         if (lower <= value && value <= upper) {
             return arg0;
         }
@@ -148,14 +148,14 @@ void func_8028C26C_de(char *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     }
 }
 
-void func_8028C370_de(void *arg0, s32 arg1) {
+void func_8028C370_de(Shared_World *arg0, s32 arg1) {
     s32 var_s0;
     s32 var_s0_2;
     Record14 *var_s1;
     Record14 *var_s1_2;
 
-    var_s0 = ((Shared_World *)arg0)->recordCount;
-    var_s1 = ((Shared_World *)arg0)->recordArray;
+    var_s0 = arg0->recordCount;
+    var_s1 = arg0->recordArray;
     var_s0 -= 1;
     if (var_s0 != -1) {
         do {
@@ -166,8 +166,8 @@ void func_8028C370_de(void *arg0, s32 arg1) {
             var_s1 = var_s1 + 1;
         } while (var_s0 != -1);
     }
-    var_s1_2 = ((Shared_World *)arg0)->alternateRecordArray;
-    var_s0_2 = ((Shared_World *)arg0)->alternateRecordCount;
+    var_s1_2 = arg0->alternateRecordArray;
+    var_s0_2 = arg0->alternateRecordCount;
     var_s0_2 -= 1;
     if (var_s0_2 != -1) {
         do {

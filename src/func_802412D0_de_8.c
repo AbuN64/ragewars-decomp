@@ -12,7 +12,8 @@ extern f32 func_8024E464_de(Input_func_802426CC_de *);
 extern f32 func_8024D284_de(Input_func_802426CC_de *);
 extern f32 func_8024E420_de(void *);
 extern f32 func_80241728_de(SurfaceHit *, f32, f32);
-extern s32 func_8024491C_de(Input_func_802426CC_de *, Vec3, Vec3, void *, f32, f32, f32, f32);
+struct MotionSurface;
+extern s32 func_8024491C_de(Input_func_802426CC_de *, Vec3, Vec3, struct MotionSurface *, f32, f32, f32, f32);
 extern void *D_80103FCC;
 extern char D_801000F0;
 

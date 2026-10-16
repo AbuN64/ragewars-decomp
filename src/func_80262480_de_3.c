@@ -16,7 +16,7 @@ extern s32 func_802624D8_de(void *arg0);
 
 extern ResourceEntry D_800C41B0_de[];
 
-void func_802625F0_de(void *arg0, f32 arg1) {
+void func_802625F0_de(AnimRef *arg0, f32 arg1) {
     extern char *func_8028FDB4_de(s32 *, s32);
     s16 *base;
     s32 count;
@@ -27,7 +27,7 @@ void func_802625F0_de(void *arg0, f32 arg1) {
     f32 e_term;
 
     base = (s16 *)((ResidentDataChunk *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->data;
-    count = (s16)((AnimRef *)arg0)->count;
+    count = (s16)arg0->count;
     var_v1 = count - 1;
     temp_f2 = (s32) arg1;
     temp_a0 = temp_f2 + 1;

@@ -15,7 +15,7 @@
 
 
 
-extern void func_8028D380_de(void *, s32, char *, s32);
+extern void func_8028D380_de(Shared_World *, s32, char *, s32);
 
 extern s32 func_802A0494_de(char *);
 
@@ -69,7 +69,7 @@ extern void func_8042854C_de(s32, s32, s32);
 
 extern char D_80102B00[];
 
-extern struct Model *func_8028CFA0_de(void *, s32, s32);
+extern struct Model *func_8028CFA0_de(Shared_World *, s32, s32);
 
 extern s32 func_8022F4DC_de(char *, s32);
 

@@ -18,8 +18,8 @@ extern s32 D_801462C8;
 
 
 
-int func_8022BEDC_de(void *arg0) {
-    short index = ((Shared_ActorView *)arg0)->selectedAction;
+int func_8022BEDC_de(Shared_ActorView *arg0) {
+    short index = arg0->selectedAction;
     return ((WeaponInfo *)D_800D052C[index])->capacity > 0;
 }
 

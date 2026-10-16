@@ -1,6 +1,6 @@
+#include "span_1000/code_802106E0.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
-#include "span_1000/code_802106E0.h"
 #include "types.h"
 
 
@@ -12,8 +12,8 @@
 
 
 
-void func_80212470_eu(void *arg0) {
-    CloseAttackActor *level1 = ((CloseAttackActor *)arg0)->self;
+void func_80212470_eu(CloseAttackActor *arg0) {
+    CloseAttackActor *level1 = arg0->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
 
@@ -35,8 +35,8 @@ void func_80212470_eu(void *arg0) {
 
 
 
-void func_80212544_eu(void *arg0) {
-    CloseAttackActor *level1 = ((CloseAttackActor *)arg0)->self;
+void func_80212544_eu(CloseAttackActor *arg0) {
+    CloseAttackActor *level1 = arg0->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2, r3;
 
@@ -58,8 +58,8 @@ void func_80212544_eu(void *arg0) {
     inner->fireTimer = -1;
 }
 
-int func_80212610_eu(void *arg0) {
-    CloseAttackActor *level1 = ((CloseAttackActor *)arg0)->self;
+int func_80212610_eu(CloseAttackActor *arg0) {
+    CloseAttackActor *level1 = arg0->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2;
 

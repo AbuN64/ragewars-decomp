@@ -53,7 +53,7 @@ extern void func_8024E79C_de(void *arg0, Vec3 value, void *arg4, s32 *arg5,
 
 
 
-void func_8021740C_de(void *arg0, s32 unused, void *arg2, void *arg3,
+void func_8021740C_de(void *arg0, s32 unused, void *arg2, Player *arg3,
                    void *arg4, s32 *arg5) {
     Vec3 offset;
     Vec3 position;
@@ -61,7 +61,7 @@ void func_8021740C_de(void *arg0, s32 unused, void *arg2, void *arg3,
 
     if (arg3 != 0) {
         func_80271F68_de(&offset, &((Player *)(arg2))->pos,
-                       &((Player *)(arg3))->pos);
+                       &arg3->pos);
         offset.y = 0.0f;
         func_8027207C_de(&offset.x);
     } else {
@@ -76,11 +76,11 @@ void func_8021740C_de(void *arg0, s32 unused, void *arg2, void *arg3,
     func_8024E79C_de(arg2, position, arg4, arg5, 0, 0);
 }
 
-void func_802174E4_de(void *arg0, void *unused1, Output80216D3C *arg2) {
+void func_802174E4_de(Shared_ActorView *arg0, void *unused1, Output80216D3C *arg2) {
     Triple local1;
     Triple local2;
 
-    local1 = ((Shared_ActorView *)arg0)->position.words;
+    local1 = arg0->position.words;
     local2.x = 0;
     local2.y = 0;
     local2.z = 0;

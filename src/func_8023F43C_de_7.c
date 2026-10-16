@@ -20,6 +20,6 @@ void func_802405FC_de(RenderSortRecord *left, RenderSortRecord *right) {
 }
 
 /** Order two records by their scalar at offset four. */
-int func_80240638_de(void *left, void *right) {
-    return ((RenderSortRecord *)left)->depth < ((RenderSortRecord *)right)->depth ? -1 : 1;
+int func_80240638_de(RenderSortRecord *left, RenderSortRecord *right) {
+    return left->depth < right->depth ? -1 : 1;
 }

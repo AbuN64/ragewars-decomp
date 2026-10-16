@@ -107,8 +107,8 @@ void func_8029E2CC_de(float *arg0, float *arg1, float *arg2, float *arg3) {
     *arg3 = arg0[2];
 }
 
-void func_8029E2E8_de(void *arg0, void *arg1) {
-    *(Triple *)arg0 = *(Triple *)arg1;
+void func_8029E2E8_de(Triple *arg0, Triple *arg1) {
+    *arg0 = *arg1;
 }
 
 void func_8029E304_de(void *arg0, void *arg1, void *arg2) {

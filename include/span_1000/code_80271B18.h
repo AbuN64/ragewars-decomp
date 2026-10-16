@@ -111,9 +111,9 @@ extern float D_800C48B8_de;
 
 extern float D_800C486C_de;
 
-extern void *func_80272180_de(void *arg0, void *arg1, void *arg2, f32 arg3);
+extern void *func_80272180_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2, f32 arg3);
 
-extern void *func_80272214_de(void *arg0, void *arg1, void *arg2);
+extern void *func_80272214_de(Vec3 *arg0, Vec3 *arg1, Vec3 *arg2);
 
 extern float D_800C4860_de;
 

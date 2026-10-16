@@ -67,7 +67,7 @@ void func_8028FF0C_de(void *arg0, void *arg1, s32 arg2)
 
 void func_80246184_de(void *);
 f32 func_8024D284_de(void *);
-s32 func_8028B21C_de(void *, s32);
+s32 func_8028B21C_de(struct Shared_World *, s32);
 s32 func_8028C198_de(void *, s32);
 void func_8028C6D4_de(void *, Vec3 *, void *);
 void func_80290950_de(void *, void *);
@@ -239,8 +239,8 @@ extern struct ActorDefinitionHeader D_8011B388;
 
 
 
-void func_80290408_de(void *arg0) {
-    ((Actor_func_80290238_de *)(arg0))->definition = &D_8011B388;
-    ((Actor_func_80290238_de *)(arg0))->active = 3;
-    ((Actor_func_80290238_de *)(arg0))->state = 0;
+void func_80290408_de(Actor_func_80290238_de *arg0) {
+    arg0->definition = &D_8011B388;
+    arg0->active = 3;
+    arg0->state = 0;
 }

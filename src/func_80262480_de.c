@@ -35,8 +35,8 @@ s32 func_802624D8_de(void *arg0) {
     return func_802532F4_de(temp) != 0;
 }
 
-void func_80262504_de(void *arg0, void *arg1) {
+void func_80262504_de(void *arg0, Six *arg1) {
     Six *result = (Six *)func_8028FDB4_de((void *)func_8026049C_de(arg0), 6);
 
-    *(Six *)arg1 = *result;
+    *arg1 = *result;
 }

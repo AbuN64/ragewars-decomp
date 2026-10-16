@@ -65,7 +65,7 @@ void func_802127F4_de(void *arg0) {
     (((struct Brain_func_80212D78_eu_x *) ((s8 *) temp_s0))->unk2FC) = 0;
 }
 
-void func_80212828_de(void *arg0)
+void func_80212828_de(CloseAttackActor *arg0)
 {
     extern void func_80209874_de(void *, s32);
     extern void func_80208EB0_de(void *);
@@ -76,7 +76,7 @@ void func_80212828_de(void *arg0)
     CloseAttackBrain *peer_state;
     s32 value;
 
-    state = ((CloseAttackActor *)arg0)->self->brain;
+    state = arg0->self->brain;
     peer = state->target;
     if (peer == 0) {
         func_80211020_de(state);
@@ -106,8 +106,8 @@ void func_80212828_de(void *arg0)
 }
 
 /** Reset the inner record via func_80209988_de, then override two of its fields. */
-void func_8021290C_de(void *arg0) {
-    Shared_ActorView *level1 = ((LevelActor *)arg0)->controller;
+void func_8021290C_de(LevelActor *arg0) {
+    Shared_ActorView *level1 = arg0->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
     func_80209988_de(inner);
@@ -155,8 +155,8 @@ void func_80212948_de(void *arg0)
 }
 
 /** Reset the inner record's flag fields, then clear its state via func_80209988_de. */
-void func_80212A40_de(void *arg0) {
-    Shared_ActorView *level1 = ((LevelActor *)arg0)->controller;
+void func_80212A40_de(LevelActor *arg0) {
+    Shared_ActorView *level1 = arg0->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
     inner->destination = -1;
@@ -164,7 +164,7 @@ void func_80212A40_de(void *arg0) {
     inner->reset2FC = 0;
 }
 
-void func_80212A7C_de(void *arg0)
+void func_80212A7C_de(Shared_Actor *arg0)
 {
     extern char D_8013B364;
     AiController *state;
@@ -175,7 +175,7 @@ void func_80212A7C_de(void *arg0)
     s32 value;
     u32 flags;
 
-    state = ((Player *)((Shared_Actor *)arg0)->entity)->controller;
+    state = ((Player *)arg0->entity)->controller;
     table = (NavigationGraph *)&D_8013B364;
     if (state->mode == -1) {
         func_8020D014_de(table);

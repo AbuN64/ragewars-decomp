@@ -30,7 +30,7 @@ typedef struct Channel_func_8023B9C0_eu Channel_func_8023B9C0_eu;
 struct Mapping;
 typedef struct Mapping Mapping;
 
-extern void func_8023CB90_de(void *arg0, void *arg1);
+extern void func_8023CB90_de(Field_void_4 *arg0, Field_void_4 *arg1);
 
 struct Shape_typemap_110;
 extern void func_8023C8D4_de(struct Shape_typemap_110 *arg0);

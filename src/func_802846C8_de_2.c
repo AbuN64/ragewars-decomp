@@ -19,7 +19,7 @@ extern void func_80282E98_de(void *arg0, void *arg1);
 
 
 
-void func_80284B20_de(void *arg0) {
+void func_80284B20_de(Shared_Particle *arg0) {
     Vec3 point;
     void *node;
     void *point_ptr;
@@ -29,7 +29,7 @@ void func_80284B20_de(void *arg0) {
     f32 radius_sq;
     f32 height_scale;
 
-    amount = ((Shared_Particle *)arg0)->desc->unk10;
+    amount = arg0->desc->unk10;
     radius_sq = (f32)amount;
     if (radius_sq <= 0.0f) {
         return;
@@ -47,12 +47,12 @@ void func_80284B20_de(void *arg0) {
     do {
         point = ((Shared_ActorView *)node)->position.vector;
         stop = 0;
-        if (((Shared_Particle *)arg0)->inst.type != actor_id) {
+        if (arg0->inst.type != actor_id) {
             point.y += func_8024D284_de(node) * height_scale;
         }
-        if (func_802726BC_de(&((Shared_Particle *)arg0)->inst.pos.x, point_ptr) < radius_sq) {
+        if (func_802726BC_de(&arg0->inst.pos.x, point_ptr) < radius_sq) {
             func_80282E98_de(arg0, node);
-            if (((Shared_Particle *)arg0)->inst.type == actor_id) {
+            if (arg0->inst.type == actor_id) {
                 stop = 1;
             }
         }
@@ -137,16 +137,16 @@ void func_80284E9C_de(int context,Obj_func_80284DC4_de **objects,int count) {
  }
 }
 
-void func_80284FF4_de(void *arg0, s32 arg1, void *arg2) {
+void func_80284FF4_de(EffectSystem *arg0, s32 arg1, Vec3 *arg2) {
     f32 temp_f2;
     s32 count;
     u16 v;
     s8 *record;
 
-    ((Vec3 *)arg2)->x = 0.0f;
-    ((Vec3 *)arg2)->y = 0.0f;
-    ((Vec3 *)arg2)->z = 0.0f;
-    record = ((EffectSystem *)arg0)->lists[1].head;
+    arg2->x = 0.0f;
+    arg2->y = 0.0f;
+    arg2->z = 0.0f;
+    record = arg0->lists[1].head;
     count = 0;
     if (record != 0) {
         do {
@@ -154,19 +154,19 @@ void func_80284FF4_de(void *arg0, s32 arg1, void *arg2) {
             if (((v == 0x41E) || (v == 0x3EF)) &&
                 (((ParticleEffect *)record)->owner == arg1) &&
                 (((ParticleEffect *)record)->flags & 0x100)) {
-                ((Vec3 *)arg2)->x += ((ParticleEffect *)record)->pos.x;
-                ((Vec3 *)arg2)->y += ((ParticleEffect *)record)->pos.y;
+                arg2->x += ((ParticleEffect *)record)->pos.x;
+                arg2->y += ((ParticleEffect *)record)->pos.y;
                 count += 1;
-                ((Vec3 *)arg2)->z += ((ParticleEffect *)record)->pos.z;
+                arg2->z += ((ParticleEffect *)record)->pos.z;
             }
             record = ((ParticleEffect *)record)->next;
         } while (record != 0);
     }
     if (count != 0) {
         temp_f2 = (f32)count;
-        ((Vec3 *)arg2)->x = (f32)(((Vec3 *)arg2)->x / temp_f2);
-        ((Vec3 *)arg2)->y = (f32)(((Vec3 *)arg2)->y / temp_f2);
-        ((Vec3 *)arg2)->z = (f32)(((Vec3 *)arg2)->z / temp_f2);
+        arg2->x = (f32)(arg2->x / temp_f2);
+        arg2->y = (f32)(arg2->y / temp_f2);
+        arg2->z = (f32)(arg2->z / temp_f2);
     }
 }
 
@@ -180,16 +180,16 @@ extern f32 func_802726BC_de(f32 *a, f32 *b);
 
 
 
-void func_802850C8_de(void *arg0, void *arg1, f32 *arg2) {
+void func_802850C8_de(EffectSystem *arg0, LevelActor *arg1, f32 *arg2) {
     f32 temp;
     void *node;
 
     *arg2 = D_800C4EA0_de;
-    node = ((EffectSystem *)arg0)->groups.head;
+    node = arg0->groups.head;
     if (node != 0) {
         do {
             if (((ParticleEffect *)node)->owner != arg1 && (((ParticleEffect *)node)->flags & 0x100)) {
-                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &((LevelActor *)arg1)->position0.x);
+                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &arg1->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }

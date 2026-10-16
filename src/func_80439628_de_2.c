@@ -62,7 +62,7 @@ s32 func_80439750_de(void) {
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5954, an actor kind at D_800E5958 and a handler at D_800E595C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
 
-s32 func_80439758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_80439758_de(Shared_Body *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     char *entry;
     s32 index;
     s32 wildcard;
@@ -79,7 +79,7 @@ s32 func_80439758_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #else
             if (D_800E5954[index].value == arg1) {
 #endif
-                actor_kind = ((Shared_Body *)(arg0))->kind;
+                actor_kind = arg0->kind;
                 table_kind = D_800E5958[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
                     return (*(MenuEventHandler *)entry)(arg0, arg1, arg2, arg3, arg4);

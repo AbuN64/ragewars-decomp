@@ -66,7 +66,8 @@ struct func_8021290C_S3 {
     int unk2FC;
 };
 
-extern void func_80212470_eu(void *arg0);
+struct CloseAttackActor;
+extern void func_80212470_eu(struct CloseAttackActor *arg0);
 
 struct ObjectState3C;
 struct ObjectState3C {
@@ -218,7 +219,8 @@ struct func_80212450_S3 {
     s32 unk320;
 };
 
-extern void func_80212A7C_de(void *arg0);
+struct Shared_Actor;
+extern void func_80212A7C_de(struct Shared_Actor *arg0);
 
 extern int func_80210FE8_de(int arg0);
 
@@ -270,7 +272,7 @@ typedef struct Vehicle Vehicle;
 
 extern float D_800C1FEC_de;
 
-extern void func_80212828_de(void *arg0);
+extern void func_80212828_de(CloseAttackActor *arg0);
 
 struct Self;
 typedef struct Self Self;
@@ -293,7 +295,8 @@ struct Vehicle {
 
 extern float D_800C1FE0_de;
 
-extern void func_8021290C_de(void *arg0);
+struct LevelActor;
+extern void func_8021290C_de(struct LevelActor *arg0);
 
 struct func_80212828_S5;
 struct func_80212828_S5 {
@@ -308,7 +311,7 @@ extern void func_802123FC_eu(void *arg0);
 struct func_8021290C_S3;
 typedef struct func_8021290C_S3 func_8021290C_S3;
 
-extern void func_80212A40_de(void *arg0);
+extern void func_80212A40_de(struct LevelActor *arg0);
 
 struct ObjectState2C;
 struct ObjectState2C {
@@ -346,7 +349,7 @@ struct func_802123DC_S3 {
 
 extern void func_802120A8_eu(Self *actor);
 
-extern int func_80212610_eu(void * arg0);
+extern int func_80212610_eu(CloseAttackActor *arg0);
 
 extern s32 func_802744D4_de(void);
 typedef struct func_802125F0_S1 func_802125F0_S1;

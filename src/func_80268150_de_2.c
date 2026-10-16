@@ -72,8 +72,8 @@ void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast
     }
 }
 
-void func_802689BC_de(void *arg0, int arg1, int arg2, Blast blast) {
-    ((LevelActor *)arg0)->effectMode = (u8)blast.radius;
+void func_802689BC_de(LevelActor *arg0, int arg1, int arg2, Blast blast) {
+    arg0->effectMode = (u8)blast.radius;
 }
 
 /* Calls func_80217388_de on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls func_80262C88_de when flag 0x80000 remains set. Adapted from func_802790C0_de with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */

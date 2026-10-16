@@ -343,7 +343,7 @@ struct func_80239184_S1 {
 struct func_80234DD0_S2;
 typedef struct func_80234DD0_S2 func_80234DD0_S2;
 
-extern void func_802391F8_de(void *arg0, s8 *arg1, s8 *arg2, s8 *arg3);
+extern void func_802391F8_de(ThreeChannels *arg0, s8 *arg1, s8 *arg2, s8 *arg3);
 
 extern float D_800C3094_de;
 
@@ -387,7 +387,8 @@ struct ThreeChannels {
     u8 third;
 };
 
-extern void func_8023913C_de(void *arg0);
+struct GameplayCamera;
+extern void func_8023913C_de(struct GameplayCamera *arg0);
 
 extern void func_8023660C_de(char *camera, f32 a, f32 b, f32 c, f32 d);
 

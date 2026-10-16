@@ -15,9 +15,9 @@ void func_8023E838_de(void *);
 
 void func_8023EBD4_de(void *);
 
-void func_8023EBFC_de(void *, void *);
+void func_8023EBFC_de(ActorMotion *, MotionContactResult *);
 
-void func_8023EC54_de(void *, void *);
+void func_8023EC54_de(ActorMotion *, MotionContactResult *);
 
 void func_8023ECBC_de(void *, u16 *);
 
@@ -37,7 +37,7 @@ f32 func_8027525C_de(void *, f32, f32);
 
 f32 func_80275DD4_de(void *, f32, f32);
 
-void * func_8028C050_de(void *, void *);
+void * func_8028C050_de(void *, Vec3 *);
 
 s32 func_8023CFE0_de();
 
@@ -431,7 +431,7 @@ s32 func_802444A4_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3) {
     return count;
 }
 
-s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
+s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, MotionSurface *arg3,
                    f32 arg4) {
     extern s32 func_8023D380_de(void *arg0);
     extern s32 func_8023D158_de(void *arg0);
@@ -485,7 +485,7 @@ s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->surface = arg3;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;
@@ -511,7 +511,7 @@ s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     return count;
 }
 
-s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
+s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, MotionSurface *arg3,
                   Vec3 arg4, f32 arg5) {
     extern void func_8023E690_de(void *arg0, Vec3 arg1, f32 arg2);
     extern s32 func_8023D380_de(void *arg0);
@@ -566,7 +566,7 @@ s32 func_8024491C_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3,
     ((struct ActorMotion *)(out))->candidateIndex = 0;
     ((struct ActorMotion *)(out))->orientationActive = 0;
     ((struct ActorMotion *)(out))->iteration = 0;
-    ((struct ActorMotion *)(out))->surface = (MotionSurface *)arg3;
+    ((struct ActorMotion *)(out))->surface = arg3;
     ((struct ActorMotion *)(out))->queryFlags = 0;
     ((struct ActorMotion *)(out))->horizontalTicks = 0;
     ((struct ActorMotion *)(out))->verticalTicks = 0;

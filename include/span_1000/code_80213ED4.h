@@ -315,7 +315,9 @@ extern float D_800C21E4_de;
 struct Location;
 typedef struct Location Location;
 
-extern s32 func_802169AC_de(void *arg0, void *arg1, void *arg2);
+struct LevelActor;
+struct RouteChaseBot;
+extern s32 func_802169AC_de(struct LevelActor *arg0, struct RouteChaseBot *arg1, struct LevelActor *arg2);
 
 struct func_802172D0_S1;
 typedef struct func_802172D0_S1 func_802172D0_S1;

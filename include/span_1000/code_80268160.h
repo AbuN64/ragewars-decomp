@@ -181,7 +181,7 @@ extern float D_800C4494_de;
 
 extern void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-extern void func_802689BC_de(void *arg0, int arg1, int arg2, Blast blast);
+extern void func_802689BC_de(LevelActor *arg0, int arg1, int arg2, Blast blast);
 
 struct func_802689BC_S2;
 struct func_802689BC_S2 {

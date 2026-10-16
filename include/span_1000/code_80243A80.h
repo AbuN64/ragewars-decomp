@@ -202,7 +202,8 @@ struct Record108 {
     s32 mode;
 };
 
-extern s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, s32 arg3, f32 arg4);
+struct MotionSurface;
+extern s32 func_802446E0_de(char *arg0, Vec3 arg1, Vec3 arg2, struct MotionSurface *arg3, f32 arg4);
 
 extern s32 func_802457E0_de(void);
 
