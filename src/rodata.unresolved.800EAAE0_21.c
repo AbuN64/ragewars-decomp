@@ -150,7 +150,7 @@ s32 func_8041B7C4_de(struct SlotsRecAt5CV2 *object) {
    parallel array at offset 0x5C. */
 
 
-struct WidgetNode *func_8041B7FC_de(struct Slots_func_8041B7FC_de *object, s32 index) {
+struct WidgetNode *func_8041B7FC_de(struct SlotsCode804196C0 *object, s32 index) {
     return object->values[index];
 }
 

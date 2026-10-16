@@ -55,12 +55,12 @@ void func_8042177C_de(void) {
 }
 
 void func_804217D4_de(void) {
-    Frame_func_804217D4_de *func_8040EC30_de(s32, s32);
-    extern State_func_804217D4_de *D_800E4400;
+    CellRecAt1A *func_8040EC30_de(s32, s32);
+    extern Data800E4400Ptr *D_800E4400;
     s32 temp_v0;
-    Frame_func_804217D4_de *temp_a0;
-    Frame_func_804217D4_de *temp_a0_2;
-    Frame_func_804217D4_de *temp_v0_2;
+    CellRecAt1A *temp_a0;
+    CellRecAt1A *temp_a0_2;
+    CellRecAt1A *temp_v0_2;
     temp_v0 = D_800E4400->unk2C - 1;
     D_800E4400->unk2C = temp_v0;
     if (temp_v0 <= 0) {

@@ -41,21 +41,21 @@ void func_8022BF04_de(void *arg0, s32 unused, s32 period, s32 kind) {
     if (D_801462C8 & 1) {
         return;
     }
-    if ((u16)(((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view650_15.unk650) < 2) {
+    if ((u16)(((SharedPlayer *)(arg0))->views5E8.view650_15.unk650) < 2) {
         return;
     }
-    if (((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view80C_107.unk80C != 0) {
+    if (((SharedPlayer *)(arg0))->views5E8.view80C_107.unk80C != 0) {
         period /= 5;
     }
-    if (((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view670_30.unk670 > 0.0f && kind != 0x20) {
+    if (((SharedPlayer *)(arg0))->views5E8.view670_30.unk670 > 0.0f && kind != 0x20) {
         return;
     }
-    tick = (((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view84C_149.unk84C + 1) % period;
-    ((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view84C_149.unk84C = tick;
+    tick = (((SharedPlayer *)(arg0))->views5E8.view84C_149.unk84C + 1) % period;
+    ((SharedPlayer *)(arg0))->views5E8.view84C_149.unk84C = tick;
     if (tick != 0) {
         return;
     }
-    ((((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[0]) = ((((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[0]) - 1 < 0) ? 0 : (((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[0]) - 1);
-    ((((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[1]) = ((((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[1]) - 1 < 0) ? 0 : (((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[1]) - 1);
-    ((((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[2]) = ((((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[2]) - 1 < 0) ? 0 : (((SharedPlayer_func_80209CD8_de *)(arg0))->views5E8.view5F4_11.unk5F4[2]) - 1);
+    ((((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[0]) = ((((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[0]) - 1 < 0) ? 0 : (((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[0]) - 1);
+    ((((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[1]) = ((((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[1]) - 1 < 0) ? 0 : (((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[1]) - 1);
+    ((((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[2]) = ((((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[2]) - 1 < 0) ? 0 : (((SharedPlayer *)(arg0))->views5E8.view5F4_11.unk5F4[2]) - 1);
 }

@@ -92,7 +92,7 @@ s32 func_80421BBC_de(void) {
                      
 
 s32 func_80421BEC_de(void) {
-    extern State_func_80421BEC_de *D_800E4450;
+    extern StateCode80420E90 *D_800E4450;
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_a0;

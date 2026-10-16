@@ -6,11 +6,11 @@ extern f32 D_800C9068;
 
 extern float D_800D0D10;
 
-struct Record_func_8025B758_de;
-typedef struct Record_func_8025B758_de Record_func_8025B758_de;
+struct RecordCode8025A3EC;
+typedef struct RecordCode8025A3EC RecordCode8025A3EC;
 
-struct Record_func_8025B758_de;
-struct Record_func_8025B758_de {
+struct RecordCode8025A3EC;
+struct RecordCode8025A3EC {
     s32 index;
     char pad04[4];
     s32 f08;
@@ -42,19 +42,19 @@ struct Record_func_8025B758_de {
 };
 
 /* A pool header followed by its seventeen complete slot records. */
-typedef struct Pool_func_8025B758_de {
+typedef struct PoolCode8025A3EC {
     s32 owner;
-    Record_func_8025B758_de slots[17];
-} Pool_func_8025B758_de;
+    RecordCode8025A3EC slots[17];
+} PoolCode8025A3EC;
 
 struct ObjRecAt4V6;
 struct ObjRecAt4V6 {
     char pad0[0x4];
-    Record_func_8025B758_de unk4;
+    RecordCode8025A3EC unk4;
 };
 
-struct func_8025BB7C_S1;
-struct func_8025BB7C_S1 {
+struct RecCode8025A3EC;
+struct RecCode8025A3EC {
     char pad0[0x44];
     Triple unk44;
     char pad44[0x50 - 0x44 - sizeof(Triple)];
@@ -99,16 +99,16 @@ typedef struct func_8025C4D4_S1 func_8025C4D4_S1;
 struct ObjRecAt4V6;
 typedef struct ObjRecAt4V6 ObjRecAt4V6;
 
-struct Owner_func_8025B5F0_de;
-typedef struct Owner_func_8025B5F0_de Owner_func_8025B5F0_de;
+struct OwnerCode8025A3EC8025B5F0;
+typedef struct OwnerCode8025A3EC8025B5F0 OwnerCode8025A3EC8025B5F0;
 
-struct func_8025BB7C_S1;
-typedef struct func_8025BB7C_S1 func_8025BB7C_S1;
+struct RecCode8025A3EC;
+typedef struct RecCode8025A3EC RecCode8025A3EC;
 
 extern f32 func_8025C1CC_de(f32 arg0);
 
-struct Owner_func_8025B5F0_de;
-struct Owner_func_8025B5F0_de {
+struct OwnerCode8025A3EC8025B5F0;
+struct OwnerCode8025A3EC8025B5F0 {
     char pad[0x84];
     char sound[0x58];
     s16 samples[20];
@@ -116,7 +116,7 @@ struct Owner_func_8025B5F0_de {
     s32 key;
 };
 
-struct Owner_func_8025B5F0_de;
+struct OwnerCode8025A3EC8025B5F0;
 struct SlotRecAtB0;
 struct SlotRecAtB0 {
     s32 index;
@@ -129,7 +129,7 @@ struct SlotRecAtB0 {
     char pad2[0x54];
     s32 value;
     s32 active;
-    struct Owner_func_8025B5F0_de *owner;
+    struct OwnerCode8025A3EC8025B5F0 *owner;
     char pad3[0x18];
 };
 
@@ -169,8 +169,8 @@ struct func_8025C458_S1 {
     f32 unkC8;
 };
 
-struct Slot_func_8025BDAC_de;
-struct Slot_func_8025BDAC_de {
+struct SlotCode8025A3EC;
+struct SlotCode8025A3EC {
     int id;
     char pad4[0x9C];
     int keyA;
@@ -179,14 +179,14 @@ struct Slot_func_8025BDAC_de {
     char padB0[0x1C];
 };
 
-struct Slot_func_8025BDAC_de;
-typedef struct Slot_func_8025BDAC_de Slot_func_8025BDAC_de;
+struct SlotCode8025A3EC;
+typedef struct SlotCode8025A3EC SlotCode8025A3EC;
 
 struct ObjRecAtCV4;
 struct ObjRecAtCV4 {
     HeaderRecAt102 *owner;
     char pad4[8];
-    Slot_func_8025BDAC_de slots[16];
+    SlotCode8025A3EC slots[16];
 };
 
 extern f32 func_8025C2EC_de(u8 arg0, u8 arg1);
@@ -262,7 +262,7 @@ struct SlotRecAtB4V1 {
     char pad2[0x54];
     s32 other;
     s32 active;
-    Owner_func_8025B5F0_de *owner;
+    OwnerCode8025A3EC8025B5F0 *owner;
     s32 value;
     char pad3[0x14];
 };
@@ -272,8 +272,8 @@ extern float D_800C3F68_de;
 struct Slots;
 typedef struct Slots Slots;
 
-struct Context_func_8025AE1C_de;
-struct Context_func_8025AE1C_de {
+struct ContextCode8025A3EC;
+struct ContextCode8025A3EC {
     char pad0[0x7C];
     Slots slots;
     char padFC[0x104 - 0xFC];
@@ -284,7 +284,7 @@ struct Context_func_8025AE1C_de {
     s32 result;
 };
 
-struct Context_func_8025AE1C_de;
+struct ContextCode8025A3EC;
 struct View_func_8025AE1C_de;
 typedef struct SoundEnvelope {
     u16 flags;
@@ -321,7 +321,7 @@ struct View_func_8025AE1C_de {
     s32 flags;
     s32 trackId;
     s32 done;
-    struct Context_func_8025AE1C_de *context;
+    struct ContextCode8025A3EC *context;
     s32 fieldB4;
     char padB8[4];
     s32 followTrack;
@@ -349,7 +349,7 @@ struct SlotRecAtB4V2 {
     s32 mask;
     s32 value;
     s32 active;
-    Owner_func_8025B5F0_de *owner;
+    OwnerCode8025A3EC8025B5F0 *owner;
     s32 fieldB4;
     char padB8[0x14];
 };
@@ -475,8 +475,8 @@ struct func_8025C4D4_S1 {
 struct IntegerStateB4;
 typedef struct IntegerStateB4 IntegerStateB4;
 
-struct Context_func_8025AE1C_de;
-typedef struct Context_func_8025AE1C_de Context_func_8025AE1C_de;
+struct ContextCode8025A3EC;
+typedef struct ContextCode8025A3EC ContextCode8025A3EC;
 
 struct View_func_8025AE1C_de;
 typedef struct View_func_8025AE1C_de View_func_8025AE1C_de;

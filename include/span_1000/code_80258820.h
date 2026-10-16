@@ -90,8 +90,8 @@ typedef struct func_80258B00_S1 func_80258B00_S1;
 struct func_80258A9C_S1;
 typedef struct func_80258A9C_S1 func_80258A9C_S1;
 
-struct func_80258BDC_S1;
-typedef struct func_80258BDC_S1 func_80258BDC_S1;
+struct RecCode80258820;
+typedef struct RecCode80258820 RecCode80258820;
 
 struct func_80258BE4_S1;
 typedef struct func_80258BE4_S1 func_80258BE4_S1;
@@ -177,8 +177,8 @@ struct func_80258BE4_S1 {
     char * unk2B70;
 };
 
-struct func_80258BDC_S1;
-struct func_80258BDC_S1 {
+struct RecCode80258820;
+struct RecCode80258820 {
     char pad0[0x2BA8];
     int unk2BA8;
 };

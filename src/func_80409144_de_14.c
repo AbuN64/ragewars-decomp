@@ -12,7 +12,7 @@ extern s32 D_8015375C;
 
 extern s32 func_80406178_de(Menu_func_804066BC_de *, s32, s32);
 
-extern void *func_80442574_de(struct func_8025E5B0_S1 *, struct List_func_80442574_de *, s32, s32, s32);
+extern void *func_80442574_de(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 
 static __inline__ void pakShow(Menu_func_804066BC_de *menu) {
     s32 channel;

@@ -4,11 +4,11 @@
 #include "span_1000/code_8025E568.h"
 
 /** Return the signed halfword at offset 0x14 in the supplied object. */
-int func_8025E590_de(Controller_func_80259C5C_de *object) {
+int func_8025E590_de(ControllerCode802591C0 *object) {
     return object->y;
 }
 
 /** Return the signed halfword at offset twelve. */
 int func_8025E59C_de(void *arg0) {
-    return ((Controller_func_80259C5C_de *)arg0)->fieldC;
+    return ((ControllerCode802591C0 *)arg0)->fieldC;
 }

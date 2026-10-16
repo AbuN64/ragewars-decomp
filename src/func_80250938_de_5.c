@@ -114,7 +114,7 @@ extern void func_80255B2C_de(void *, void *);
 extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 static inline void lock(void) {
-    extern Manager_func_802524B0_de D_801047E0;
+    extern Manager D_801047E0;
     u32 token = func_802BCF30_de();
     s32 counter = D_8010515C + 1;
 
@@ -128,7 +128,7 @@ static inline void lock(void) {
 }
 
 static inline void unlock(void) {
-    extern Manager_func_802524B0_de D_801047E0;
+    extern Manager D_801047E0;
     u32 token = func_802BCF30_de();
     s32 counter = D_8010515C - 1;
 
@@ -258,10 +258,10 @@ done:
 void func_802524B0_de(void *arg) {
     extern void func_80255ED8_de(void *, Request_func_802524B0_de *);
     extern void func_80255CB8_de(void *, Request_func_802524B0_de *);
-    extern s32 func_802551FC_de(void *, Request_func_802524B0_de *, Manager_func_802524B0_de *);
+    extern s32 func_802551FC_de(void *, Request_func_802524B0_de *, Manager *);
     extern void func_80254E88_de(s32, Request_func_802524B0_de *);
     extern char D_80106248;
-    extern Manager_func_802524B0_de D_801047E0;
+    extern Manager D_801047E0;
     Request_func_802524B0_de *request;
     Node_func_802524B0_de *node;
     s32 flags;

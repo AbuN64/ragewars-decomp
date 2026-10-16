@@ -10,6 +10,11 @@ docs/memory-map-eu-x.svg
 docs/memory-map-eu.svg
 docs/memory-map-us-rev1.svg
 docs/memory-map-us.svg
+docs/overview-de.svg
+docs/overview-eu-x.svg
+docs/overview-eu.svg
+docs/overview-us-rev1.svg
+docs/overview-us.svg
 generated.txt
 progress.json
 versions/de/report.json

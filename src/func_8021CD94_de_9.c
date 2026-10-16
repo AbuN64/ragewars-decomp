@@ -19,7 +19,7 @@
 extern unsigned char D_801462E5;
 extern s32 func_8022C460_de(void *player);
 
-s32 func_802227F4_de(SharedPlayer_func_802227F4_de *player, void *arg1, s32 state) {
+s32 func_802227F4_de(SharedPlayer *player, void *arg1, s32 state) {
     void (*enter)(void *, void *);
     s32 parameter;
 

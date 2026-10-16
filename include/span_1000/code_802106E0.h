@@ -4,8 +4,8 @@
 #include "common/types_8a8189af7b05.h"
 extern float D_800C1FD8_de;
 
-struct func_80211020_S1;
-struct func_80211020_S1 {
+struct RecCode802106E0;
+struct RecCode802106E0 {
     char pad0[0x21C];
     s32 unk21C;
     char pad21C[0x220 - 0x21C - sizeof(s32)];
@@ -224,8 +224,8 @@ extern void func_80212A7C_de(struct Shared_Actor *arg0);
 
 extern int func_80210FE8_de(int arg0);
 
-struct func_80211020_S1;
-typedef struct func_80211020_S1 func_80211020_S1;
+struct RecCode802106E0;
+typedef struct RecCode802106E0 RecCode802106E0;
 
 struct func_80212948_S3;
 typedef struct func_80212948_S3 func_80212948_S3;

@@ -27,11 +27,11 @@
 #include "span_1000/code_8022C894.h"
 
 extern void func_802394BC_de(char *, f32, f32, f32, f32, s32, Triple);
-extern void func_802227F4_de(SharedPlayer_func_80226340_de *, SharedPlayer_func_80226340_de *, s32);
+extern void func_802227F4_de(SharedPlayer *, SharedPlayer *, s32);
 extern void func_80216488_de(Slot *, Held *, s32, f32, s32, s32);
-extern void func_80219A40_de(SharedPlayer_func_80226340_de *, char *, Slot *);
+extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
 
-void func_80226340_de(SharedPlayer_func_80226340_de *player) {
+void func_80226340_de(SharedPlayer *player) {
     Slot hit;
     ViewCode80225D10 *view;
     Held *owner;

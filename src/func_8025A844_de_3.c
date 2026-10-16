@@ -29,14 +29,14 @@ extern void func_8025AB94_de(View_func_8025AE1C_de *);
 
 
 
-static inline char *selectChannel(Context_func_8025AE1C_de *context, s32 slot) {
-    func_802B2F00_de(((Owner_func_8025A844_de *)context)->sound, context->slots.ids[slot]);
-    return ((Owner_func_8025A844_de *)context)->sound;
+static inline char *selectChannel(ContextCode8025A3EC *context, s32 slot) {
+    func_802B2F00_de(((OwnerCode8025A3EC *)context)->sound, context->slots.ids[slot]);
+    return ((OwnerCode8025A3EC *)context)->sound;
 }
 
 void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     char *channel;
-    Context_func_8025AE1C_de *context;
+    ContextCode8025A3EC *context;
     Slots *slots;
     s32 playing;
 
@@ -54,7 +54,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
             view->tracked = 0;
             context = view->context;
             if (view->frame != context->frame) {
-                channel = ((Owner_func_8025A844_de *)context)->sound;
+                channel = ((OwnerCode8025A3EC *)context)->sound;
                 func_802B2F00_de(channel, context->slots.ids[view->slot]);
                 if (func_802B2620_de(channel) != 0) {
                     alSndpStop(channel);
@@ -69,13 +69,13 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
         return;
     }
     if ((view->flags & 0x18) == 0x10) {
-        func_802B2D80_de(((Owner_func_8025A844_de *)view->context)->sound);
+        func_802B2D80_de(((OwnerCode8025A3EC *)view->context)->sound);
         return;
     }
     if (playing == 0) {
         context = view->context;
         slots = &context->slots;
-        func_802B25D0_de(((Owner_func_8025A844_de *)context)->sound, slots->ids[view->slot]);
+        func_802B25D0_de(((OwnerCode8025A3EC *)context)->sound, slots->ids[view->slot]);
         slots->ids[view->slot] = -1;
         view->field38 = 0;
         view->fieldC = -1;

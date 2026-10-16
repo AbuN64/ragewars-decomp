@@ -96,8 +96,8 @@ struct Entry_func_80259784_de {
     char padB0[0x1C];
 };
 
-struct Scene_func_80259784_de;
-struct Scene_func_80259784_de {
+struct SceneCode802591C0;
+struct SceneCode802591C0 {
     char pad0[0x1DBC];
     Entry_func_80259784_de entries[1];
     char pad1E88[0x2A84 - 0x1E88];
@@ -108,9 +108,9 @@ struct Scene_func_80259784_de {
     s16 pendingSelection;
 };
 struct ManagerRecAtD8V2;
-struct Scene_func_80259784_de;
+struct SceneCode802591C0;
 struct ManagerRecAtD8V2 {
-    struct Scene_func_80259784_de *scene;
+    struct SceneCode802591C0 *scene;
     Link_func_80259784_de active;
     char padC[0xCC];
     Link_func_80259784_de free;
@@ -169,9 +169,9 @@ struct Font {
     char pad0[0xC];
     struct Glyphs *glyphs;
 };
-struct Context_func_80259440_de;
+struct ContextCode802591C0;
 struct Font;
-struct Context_func_80259440_de {
+struct ContextCode802591C0 {
     char pad0[0x7C];
     struct Font *font;
     char pad80[4];
@@ -222,8 +222,8 @@ typedef struct func_80259B30_S1 func_80259B30_S1;
 struct ObjectLinks2B50;
 typedef struct ObjectLinks2B50 ObjectLinks2B50;
 
-struct Cell_func_80259440_de;
-struct Cell_func_80259440_de {
+struct CellCode802591C0;
+struct CellCode802591C0 {
     s32 index;
     s32 pad4;
     s32 texture;
@@ -313,8 +313,8 @@ typedef struct func_80259280_S1 func_80259280_S1;
 struct func_80259AD8_S2;
 typedef struct func_80259AD8_S2 func_80259AD8_S2;
 
-struct Cell_func_80259440_de;
-typedef struct Cell_func_80259440_de Cell_func_80259440_de;
+struct CellCode802591C0;
+typedef struct CellCode802591C0 CellCode802591C0;
 
 struct ObjRecAt1E64;
 typedef struct ObjRecAt1E64 ObjRecAt1E64;
@@ -384,9 +384,9 @@ struct ListHead;
 typedef struct ListHead ListHead;
 
 struct Cache;
-struct Context_func_80259440_de;
+struct ContextCode802591C0;
 struct Cache {
-    struct Context_func_80259440_de *context;
+    struct ContextCode802591C0 *context;
     ListHead pending;
     char padC[0xD8 - 0xC];
     ListHead done;
@@ -437,8 +437,8 @@ typedef struct LinkPair LinkPair;
 struct Glyphs;
 typedef struct Glyphs Glyphs;
 
-struct Context_func_80259440_de;
-typedef struct Context_func_80259440_de Context_func_80259440_de;
+struct ContextCode802591C0;
+typedef struct ContextCode802591C0 ContextCode802591C0;
 
 extern void func_802591A0_de(void *arg0, s16 arg1);
 

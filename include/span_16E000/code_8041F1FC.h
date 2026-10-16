@@ -89,8 +89,8 @@ struct SelectMenu {
 };
 
 
-struct Entry_func_80420308_de;
-struct Entry_func_80420308_de {
+struct EntryCode8041F1FC;
+struct EntryCode8041F1FC {
     void *window;
     char pad4[0x8 - 0x4];
     struct Node_func_8041D134_de *cursor;
@@ -99,10 +99,10 @@ struct Entry_func_80420308_de {
     char pad18[0x4C8 - 0x18];
 };
 
-struct Entry_func_80420308_de;
+struct EntryCode8041F1FC;
 struct Screen_func_80420308_de;
 struct Screen_func_80420308_de {
-    struct Entry_func_80420308_de entries[4];
+    struct EntryCode8041F1FC entries[4];
 };
 
 struct Match_func_80420618_de;

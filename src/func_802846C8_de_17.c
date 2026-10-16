@@ -25,13 +25,13 @@ extern f32 func_80264EE0_de(void *arg0);
 
 
 
-static inline void bind(Node_func_80285B64_de *node, s32 offset, s32 id) {
+static inline void bind(NodeCode8028469C *node, s32 offset, s32 id) {
     extern s32 func_8028CE78_de(void *table, s32 id);
     extern void func_80264DE0_de(void *slot, s32 handle);
     func_80264DE0_de((char *)node + offset, func_8028CE78_de(&D_8011FE88, id));
 }
 
-static inline void init(Node_func_80285B64_de *node, Clip *key, Vec3 position, f32 value0, f32 value1, Node_func_80285B64_de **owner) {
+static inline void init(NodeCode8028469C *node, Clip *key, Vec3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
     node->key = key;
     node->position = position;
     node->value0 = value0;
@@ -48,7 +48,7 @@ static inline IntrusiveList *active_list(PoolRecAt28V1 *pool) {
     return &pool->active;
 }
 
-void func_802858B0_de(Node_func_80285B64_de *arg0, Clip *arg1, Vec3 arg2,
+void func_802858B0_de(NodeCode8028469C *arg0, Clip *arg1, Vec3 arg2,
                    f32 arg5, f32 arg6, void **arg7) {
     extern void *func_8028CE78_de(void *object, int index);
     extern void func_80264DE0_de(unsigned int *record, unsigned int value);
@@ -68,8 +68,8 @@ void func_802858B0_de(Node_func_80285B64_de *arg0, Clip *arg1, Vec3 arg2,
 
 /** Clear the target word when the pointer field is populated. */
 void func_80285960_de(char *object) {
-    struct Node_func_80285B64_de *node = (void *)object;
-    struct Node_func_80285B64_de **target = node->owner;
+    struct NodeCode8028469C *node = (void *)object;
+    struct NodeCode8028469C **target = node->owner;
     if (target != 0) {
         *target = 0;
     }
@@ -123,7 +123,7 @@ void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
     extern void __osRestoreInt(u32);
     extern u32 func_802BCF30_de(void);
     s32 i;
-    Node_func_80285B64_de *p;
+    NodeCode8028469C *p;
     u32 saved;
 
     p = arg1;
@@ -142,12 +142,12 @@ void func_80285AC4_de(void *arg0, void *arg1, s32 arg2) {
     __osRestoreInt(saved);
 }
 
-Node_func_80285B64_de *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, Vec3 position, f32 value0, f32 value1, Node_func_80285B64_de **owner) {
+NodeCode8028469C *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, Vec3 position, f32 value0, f32 value1, NodeCode8028469C **owner) {
     extern void __osRestoreInt(s32 mask);
     extern s32 func_802BCF30_de(void);
-    extern void func_80255ED8_de(IntrusiveList *list, Node_func_80285B64_de *node);
+    extern void func_80255ED8_de(IntrusiveList *list, NodeCode8028469C *node);
     s32 mask;
-    Node_func_80285B64_de *node;
+    NodeCode8028469C *node;
 
     mask = func_802BCF30_de();
     node = pool->free.head;
@@ -164,11 +164,11 @@ void func_80285C78_de(void *arg0) {
     extern void __osRestoreInt(u32);
     extern u32 func_802BCF30_de(void);
     extern void func_80255ED8_de(void *, void *);
-    Node_func_80285B64_de *node;
-    Node_func_80285B64_de *next;
+    NodeCode8028469C *node;
+    NodeCode8028469C *next;
     s32 flag;
     u32 saved;
-    Node_func_80285B64_de **inner;
+    NodeCode8028469C **inner;
 
     saved = func_802BCF30_de();
     for (node = (*active_list(arg0)).head; node != 0; node = next) {
@@ -202,7 +202,7 @@ void func_80285D30_de(void *arg0) {
     node = ((PoolRecAt28V1 *)arg0)->active.head;
     if (node != 0) {
         do {
-            next = ((Node_func_80285B64_de *)node)->next;
+            next = ((NodeCode8028469C *)node)->next;
             func_80255ED8_de(&((PoolRecAt28V1 *)arg0)->active, node);
             func_80255D14_de(arg0, node);
             node = next;

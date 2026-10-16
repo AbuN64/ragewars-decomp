@@ -448,8 +448,8 @@ struct Entry_func_802A70D4_de {
 struct Entry_func_802A70D4_de;
 typedef struct Entry_func_802A70D4_de Entry_func_802A70D4_de;
 
-struct Menu_func_802A70D4_de;
-struct Menu_func_802A70D4_de {
+struct MenuCode802A6AC0;
+struct MenuCode802A6AC0 {
     Entry_func_802A70D4_de entries[4];
     char padE0[0xE4 - 0xE0];
     u16 cursor;
@@ -540,8 +540,8 @@ struct func_802A7480_S1 {
     char * unk7528;
 };
 
-struct Menu_func_802A70D4_de;
-typedef struct Menu_func_802A70D4_de Menu_func_802A70D4_de;
+struct MenuCode802A6AC0;
+typedef struct MenuCode802A6AC0 MenuCode802A6AC0;
 
 struct func_802A7480_S1;
 typedef struct func_802A7480_S1 func_802A7480_S1;

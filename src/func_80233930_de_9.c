@@ -103,17 +103,17 @@ void func_80236F1C_de(Race *race, s32 arg1)
 
 
 void func_802372D4_de(Racer *racer) {
-    Entity_func_80233C88_de *entity = (Entity_func_80233C88_de *)racer;
+    View *entity = (View *)racer;
     f32 x;
     f32 y;
     f32 width;
     f32 height;
 
     func_8026D8F8_de();
-    x = entity->x;
-    y = entity->y;
-    width = entity->width;
-    height = entity->height;
+    x = entity->viewport[2];
+    y = entity->viewport[3];
+    width = entity->viewport[0];
+    height = entity->viewport[1];
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
     gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,

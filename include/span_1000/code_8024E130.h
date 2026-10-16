@@ -150,8 +150,8 @@ struct func_8024E410_S1 {
     f32 unk70;
 };
 
-struct func_8024E534_S2;
-struct func_8024E534_S2 {
+struct MeasuredCode802412C0;
+struct MeasuredCode802412C0 {
     char pad0[0x50];
     float unk50;
 };
@@ -175,8 +175,8 @@ struct func_8024E6C8_S1 {
     s32 unk8;
 };
 
-struct func_8024E534_S2;
-typedef struct func_8024E534_S2 func_8024E534_S2;
+struct MeasuredCode802412C0;
+typedef struct MeasuredCode802412C0 MeasuredCode802412C0;
 
 struct func_8024E2EC_S2;
 struct func_8024E2EC_S2 {

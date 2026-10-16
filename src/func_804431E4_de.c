@@ -31,10 +31,10 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
 
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct List_func_80442574_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
+extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
-void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct List_func_80442574_de *list, s32 a, s32 b, s32 c, s32 d) {
+void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
     s32 size = list->count * 40 + 0x1D8;
     s32 i;
     void **block;

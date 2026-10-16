@@ -41,23 +41,23 @@ struct Element {
 struct ScreenManager;
 typedef struct ScreenManager ScreenManager;
 
-struct Entry_func_80298ECC_de;
-struct Entry_func_80298ECC_de {
+struct Entries;
+struct Entries {
     void *object;
     s32 field4;
     s32 field8;
     StreamBuffer fieldC;
 };
 
-struct Entry_func_80298ECC_de;
-typedef struct Entry_func_80298ECC_de Entry_func_80298ECC_de;
+struct Entries;
+typedef struct Entries Entries;
 
 struct Manager_func_80298FE8_de;
 struct Manager_func_80298FE8_de {
     s32 field0;
     s32 index;
     s32 lowIndex;
-    Entry_func_80298ECC_de *entries;
+    Entries *entries;
     s8 pad10[0x524];
     s32 field534;
     s32 field538;
@@ -168,7 +168,7 @@ struct Manager_func_802995D4_de {
     func_802995D4_de_Callback callback;
     s32 index;
     s32 lowIndex;
-    Entry_func_80298ECC_de *entries;
+    Entries *entries;
     char pad10[0x510];
     s32 dispatching;
     s32 pad524;
@@ -217,21 +217,21 @@ extern float D_800C5678_de;
 
 extern void func_80296CD0_de(s32 direction);
 
-struct Entry_func_80297DBC_de;
+struct EntryCode80296014;
 struct ObjRecAt40V1;
-struct Entry_func_80297DBC_de {
+struct EntryCode80296014 {
     struct ObjRecAt40V1 *unk0;
     s32 unk4;
     s32 unk8;
     StreamBuffer unkC;
 };
-struct Entry_func_80297DBC_de;
+struct EntryCode80296014;
 struct State_func_80297DBC_de;
 struct State_func_80297DBC_de {
     s32 unk0;
     s32 unk4;
     s32 unk8;
-    struct Entry_func_80297DBC_de *unkC;
+    struct EntryCode80296014 *unkC;
     s32 (*unk10)(s32);
 };
 
@@ -241,8 +241,8 @@ typedef struct MenuHandlerTable MenuHandlerTable;
 extern void func_802982C4_de(s32 id, MenuElementHandler event_handler, MenuDrawHandler draw_handler, s32 flags);
 extern MenuElementHandler func_802997E4_de(s32 kind);
 
-struct Args_func_80298FE8_de;
-struct Args_func_80298FE8_de {
+struct ArgsCode80296014;
+struct ArgsCode80296014 {
     s32 word0;
     s32 word4;
     s32 word8;
@@ -258,13 +258,13 @@ struct Args_func_80298FE8_de {
 
 extern int D_800CD8E0;
 
-struct Entry_func_80298ECC_de;
+struct Entries;
 struct Manager_func_80298ECC_de;
 struct Manager_func_80298ECC_de {
     s32 field0;
     s32 index;
     s32 lowIndex;
-    struct Entry_func_80298ECC_de *entries;
+    struct Entries *entries;
 };
 
 struct Element;
@@ -320,8 +320,8 @@ struct ScreenManager {
     s32 cacheCount;
 };
 
-struct Args_func_80298FE8_de;
-typedef struct Args_func_80298FE8_de Args_func_80298FE8_de;
+struct ArgsCode80296014;
+typedef struct ArgsCode80296014 ArgsCode80296014;
 
 struct Manager_func_802995D4_de;
 typedef struct Manager_func_802995D4_de Manager_func_802995D4_de;

@@ -37,8 +37,8 @@ struct ActorRecAt1D8V3 {
 struct Limit;
 typedef struct Limit Limit;
 
-struct func_802689BC_S1;
-struct func_802689BC_S1 {
+struct RecCode80268160;
+struct RecCode80268160 {
     char pad0[0xF];
     char unkF;
 };
@@ -71,8 +71,8 @@ struct Params_func_802681A8_de {
 struct ObjectRecAt17C;
 typedef struct ObjectRecAt17C ObjectRecAt17C;
 
-struct func_802689BC_S2;
-typedef struct func_802689BC_S2 func_802689BC_S2;
+struct RecCode80268160802689BC;
+typedef struct RecCode80268160802689BC RecCode80268160802689BC;
 
 struct OwnerRecAt16D4;
 typedef struct OwnerRecAt16D4 OwnerRecAt16D4;
@@ -146,8 +146,8 @@ struct Filter {
     s32 mask;
 };
 
-struct func_802689BC_S1;
-typedef struct func_802689BC_S1 func_802689BC_S1;
+struct RecCode80268160;
+typedef struct RecCode80268160 RecCode80268160;
 
 struct func_80268C1C_S2;
 struct func_80268C1C_S2 {
@@ -183,8 +183,8 @@ extern void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 
 extern void func_802689BC_de(LevelActor *arg0, int arg1, int arg2, Blast blast);
 
-struct func_802689BC_S2;
-struct func_802689BC_S2 {
+struct RecCode80268160802689BC;
+struct RecCode80268160802689BC {
     char pad0[0x270];
     char unk270;
 };

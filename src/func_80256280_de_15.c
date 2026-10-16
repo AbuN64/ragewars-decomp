@@ -71,7 +71,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
                     voice->pending = 0;
                     voice->flags &= ~0x10;
                 }
-                if ((&((Context_func_8025AE1C_de *)arg0)->slots)[0].ids[i] != -1) {
+                if ((&((ContextCode8025A3EC *)arg0)->slots)[0].ids[i] != -1) {
                     func_8025BA9C_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], i);
                 }
             }

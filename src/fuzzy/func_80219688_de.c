@@ -1,6 +1,6 @@
 #include "types.h"
 typedef struct Shared_Profile { char pad0[0x84]; char name[11]; u8 enabled; } Shared_Profile;
-typedef struct SharedPlayer_func_8022A398_de { char pad0[0x5D8]; Shared_Profile *nameOwner; void *owner; char pad5E0[0xE08]; s32 next; char text[4][25]; } SharedPlayer_func_8022A398_de;
+typedef struct SharedPlayerCode80225D10 { char pad0[0x5D8]; Shared_Profile *nameOwner; void *owner; char pad5E0[0xE08]; s32 next; char text[4][25]; } SharedPlayerCode80225D10;
 typedef struct Shared_MatchOptions { char pad0[0x1D]; u8 enabled; } Shared_MatchOptions;
 extern Shared_MatchOptions D_801462C8;
 extern s32 D_801468F4,D_80146918;
@@ -8,7 +8,7 @@ extern char *D_800D3A40,*D_800D3A44,*D_800D3A48,*D_800D3A54,*D_800D3A58;
 #include "shared/menu_match_globals.h"
 extern void func_802934C0_de(char *,const char *);
 extern void func_80239770_de(void *,void *,char *,f32);
-void func_80219688_de(SharedPlayer_func_8022A398_de *a,SharedPlayer_func_8022A398_de *b) {
+void func_80219688_de(SharedPlayerCode80225D10 *a,SharedPlayerCode80225D10 *b) {
     if (!D_801462C8.enabled) return;
     if (a!=b) {
         if (!a->nameOwner->enabled) return;

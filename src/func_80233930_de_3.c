@@ -8,11 +8,11 @@
 extern s32 D_800CD730;
 extern void *func_8028B2F8_de(Shared_World *, u16 *);
 
-void func_802343C8_de(Entity_func_80233C88_de *self) {
+void func_802343C8_de(View *self) {
     u8 target[4];
     ColorBlendRecord *rec;
-    SharedPlayer_func_8022A398_de *node;
-    SharedPlayer_func_8022A398_de *ownerNode;
+    SharedPlayer *node;
+    SharedPlayer *ownerNode;
     u32 hold;
     u32 freeze;
     u32 fadeA;

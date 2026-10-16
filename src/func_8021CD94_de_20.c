@@ -30,13 +30,13 @@ extern u8 D_801462E5;
 extern s32 D_80146938;
 
 extern void func_8044A07C_de(void);
-extern void func_80442574_de(char *, char *, SharedPlayer_func_80225940_de *, void *, s32);
-extern SharedPlayer_func_80225940_de *func_8022A5F4_de(char *, s32);
-extern void func_8044972C_de(SharedPlayer_func_80225940_de *);
+extern void func_80442574_de(char *, char *, SharedPlayer *, void *, s32);
+extern SharedPlayer *func_8022A5F4_de(char *, s32);
+extern void func_8044972C_de(SharedPlayer *);
 
-void func_80225940_de(SharedPlayer_func_80225940_de *player, BodyRecAt1C *body) {
-    SharedPlayer_func_80225940_de *other;
-    SharedPlayer_func_80225940_de *leader;
+void func_80225940_de(SharedPlayer *player, BodyRecAt1C *body) {
+    SharedPlayer *other;
+    SharedPlayer *leader;
     s32 i;
     s32 active;
     s32 out;

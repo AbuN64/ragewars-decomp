@@ -25,26 +25,26 @@ extern s32 D_80153C40;
 extern s32 D_800E2AC4[3];
 
 typedef union { s16 count; s32 clear; } ArchiveCountWord; /* FAKEMATCH: shared views keep count reloads ordered with record clears. */
-typedef struct func_8040FC14_S1 func_8040FC14_S1;
+typedef struct Images Images;
 typedef struct func_8040FC14_S2 func_8040FC14_S2;
 typedef struct func_8040FC14_S3 func_8040FC14_S3;
 typedef struct func_8040FC14_S4 func_8040FC14_S4;
 typedef struct func_8040FC14_S5 func_8040FC14_S5;
 typedef struct func_8040FC14_S6 func_8040FC14_S6;
-typedef struct func_8040FC14_S7 func_8040FC14_S7;
+typedef struct Palettes Palettes;
 typedef struct func_8040FC14_S8 func_8040FC14_S8;
 typedef struct func_8040FC14_S9 func_8040FC14_S9;
 typedef struct func_8040FC14_S10 func_8040FC14_S10;
 typedef struct func_8040FC14_S11 func_8040FC14_S11;
 typedef struct func_8040FC14_S12 func_8040FC14_S12;
-typedef struct func_8040FC14_S13 func_8040FC14_S13;
+typedef struct Objects Objects;
 typedef struct func_8040FC14_S14 func_8040FC14_S14;
 typedef struct func_8040FC14_S15 func_8040FC14_S15;
 typedef struct func_8040FC14_S16 func_8040FC14_S16;
 typedef struct func_8040FC14_S17 func_8040FC14_S17;
 typedef struct func_8040FC14_S18 func_8040FC14_S18;
 typedef struct func_8040FC14_S19 func_8040FC14_S19;
-struct func_8040FC14_S1 {
+struct Images {
     s32 unk0;
     char unk4[0x204];
     s32 unk208;
@@ -81,7 +81,7 @@ struct func_8040FC14_S5 {
 struct func_8040FC14_S6 {
     char unk0[1];
 };
-struct func_8040FC14_S7 {
+struct Palettes {
     s16 unk0;
     char pad0[0x2];
     void* unk4;
@@ -100,7 +100,7 @@ struct func_8040FC14_S9 {
     void* unkC;
     void* unk10;
 };
-struct func_8040FC14_S13 {
+struct Objects {
     s16 unk0;
     char pad2[2];
     void *raw;
@@ -119,8 +119,8 @@ struct func_8040FC14_S10 {
     s32 unk24;
     u32 unk28;
     char pad28[0x30];
-    func_8040FC14_S13 objects;
-    func_8040FC14_S7 palettes;
+    Objects objects;
+    Palettes palettes;
 };
 extern func_8040FC14_S10 D_8014D934;
 struct func_8040FC14_S11 {
@@ -168,7 +168,7 @@ struct func_8040FC14_S19 {
 };
 extern func_8040FC14_S19 D_8014D924;
 typedef union {
-    func_8040FC14_S1 images;
+    Images images;
     struct { char prefix[0x204]; func_8040FC14_S19 status; } archive;
 } ArchiveContext;
 extern ArchiveContext D_801539B0;
@@ -186,9 +186,9 @@ void func_8040FB94_de(u8 *arg0) {
     void *state; /* FAKEMATCH: recycle the file base for the final status view, ending its old live range. */
     void * regpart_state;
     func_8040FC14_S10 *header;
-    func_8040FC14_S7 *palettes;
+    Palettes *palettes;
     s32 recordData; /* FAKEMATCH: share the field-derived member address and later object counter in one N64 integer local; their lifetimes are disjoint. */
-    func_8040FC14_S13 *objects;
+    Objects *objects;
     func_8040FC14_S15 **objectTable;
     ArchiveCountWord *mapCount;
     s16 temp_a0_3;
@@ -223,21 +223,21 @@ void func_8040FB94_de(u8 *arg0) {
 
     temp_a3 = func_802A0E8C_de(arg0, D_800DD0B0);
     state = &D_801539B0.images;
-    ((func_8040FC14_S1 *)state)->unk0 = temp_a3;
-    func_802A0ED4_de((s32) &((func_8040FC14_S1 *)state)->unk208, 0x54, 1, temp_a3);
-    temp_hi = ((func_8040FC14_S1 *)state)->unk20C / 28;
-    ((func_8040FC14_S1 *)state)->unk25C = temp_hi;
+    ((Images *)state)->unk0 = temp_a3;
+    func_802A0ED4_de((s32) &((Images *)state)->unk208, 0x54, 1, temp_a3);
+    temp_hi = ((Images *)state)->unk20C / 28;
+    ((Images *)state)->unk25C = temp_hi;
     if (temp_hi > 0) {
-        ((func_8040FC14_S1 *)state)->unk26C = func_8025305C_de(temp_hi << 5);
-        ((func_8040FC14_S1 *)state)->unk268 = func_8025305C_de(((func_8040FC14_S1 *)state)->unk25C * 8);
-        ((func_8040FC14_S1 *)state)->unk264 = func_8025305C_de(((func_8040FC14_S1 *)state)->unk25C * 4);
-        temp_v0 = func_8025305C_de((s32) ((func_8040FC14_S1 *)state)->unk20C);
-        ((func_8040FC14_S1 *)state)->unk260 = temp_v0;
-        func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, ((func_8040FC14_S1 *)state)->unk208, 0);
-        func_802A0ED4_de((s32) temp_v0, 0x1C, (s32) ((func_8040FC14_S1 *)state)->unk25C, ((func_8040FC14_S1 *)state)->unk0);
+        ((Images *)state)->unk26C = func_8025305C_de(temp_hi << 5);
+        ((Images *)state)->unk268 = func_8025305C_de(((Images *)state)->unk25C * 8);
+        ((Images *)state)->unk264 = func_8025305C_de(((Images *)state)->unk25C * 4);
+        temp_v0 = func_8025305C_de((s32) ((Images *)state)->unk20C);
+        ((Images *)state)->unk260 = temp_v0;
+        func_802A0F60_de(((Images *)state)->unk0, ((Images *)state)->unk208, 0);
+        func_802A0ED4_de((s32) temp_v0, 0x1C, (s32) ((Images *)state)->unk25C, ((Images *)state)->unk0);
         var_s0 = 0;
-        if (((func_8040FC14_S1 *)state)->unk25C > 0) {
-            recordData = (s32) &((func_8040FC14_S1 *)state)->unk26C;
+        if (((Images *)state)->unk25C > 0) {
+            recordData = (s32) &((Images *)state)->unk26C;
             var_s1 = (void *)temp_v0;
             var_s2 = 0;
             do {
@@ -252,7 +252,7 @@ void func_8040FB94_de(u8 *arg0) {
                 var_s1++;
                 func_80419608_de((u8 *)*((void **)recordData) + temp_a1);
                 var_s2 += 1;
-            } while (var_s0 < ((func_8040FC14_S1 *)state)->unk25C);
+            } while (var_s0 < ((Images *)state)->unk25C);
         }
     }
     palettes = &D_8014D924.header.palettes;
@@ -260,8 +260,8 @@ void func_8040FB94_de(u8 *arg0) {
     palettes->unk0 = (s16) temp_v0_2;
     if ((s32)(temp_v0_2 << 0x10) > 0) {
         palettes->unk4 = func_8025305C_de((s32) D_8014D924.header.unk18);
-        func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, D_8014D924.header.unk14, 0);
-        func_802A0ED4_de((s32) palettes->unk4, (s32) D_8014D924.header.unk18, 1, ((func_8040FC14_S1 *)state)->unk0);
+        func_802A0F60_de(((Images *)state)->unk0, D_8014D924.header.unk14, 0);
+        func_802A0ED4_de((s32) palettes->unk4, (s32) D_8014D924.header.unk18, 1, ((Images *)state)->unk0);
         func_8040F9E0_de(0);
     }
     temp_v0_3 = D_8014D924.header.unk28 / 12;
@@ -273,8 +273,8 @@ void func_8040FB94_de(u8 *arg0) {
             palettes->unk1C = temp_v0_4;
             func_802A0748_de(temp_v0_4, 0, (u32) D_8014D924.header.unk28);
         }
-        func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, D_8014D924.header.unk24, 0);
-        func_802A0ED4_de((s32) palettes->unk18, D_8014D924.header.unk28, 1, ((func_8040FC14_S1 *)state)->unk0);
+        func_802A0F60_de(((Images *)state)->unk0, D_8014D924.header.unk24, 0);
+        func_802A0ED4_de((s32) palettes->unk18, D_8014D924.header.unk28, 1, ((Images *)state)->unk0);
         var_s0 = 0;
         mapCount = &palettes->unk14;
         if (palettes->unk14.count > 0) {
@@ -296,11 +296,11 @@ void func_8040FB94_de(u8 *arg0) {
     if (header->unk0 > 0) {
         var_s0 = 0;
         temp_s7 = func_8025305C_de(header->unk8);
-        func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, header->unk4, 0);
-        func_802A0ED4_de((s32) temp_s7, header->unk8, 1, ((func_8040FC14_S1 *)state)->unk0);
+        func_802A0F60_de(((Images *)state)->unk0, header->unk4, 0);
+        func_802A0ED4_de((s32) temp_s7, header->unk8, 1, ((Images *)state)->unk0);
         header->objects.raw = func_8025305C_de(header->unk0);
-        func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, ((func_8040FC14_S19 *)&D_8014D924)->unkC, 0);
-        func_802A0ED4_de((s32) header->objects.raw, header->unk0, 1, ((func_8040FC14_S1 *)state)->unk0);
+        func_802A0F60_de(((Images *)state)->unk0, ((func_8040FC14_S19 *)&D_8014D924)->unkC, 0);
+        func_802A0ED4_de((s32) header->objects.raw, header->unk0, 1, ((Images *)state)->unk0);
         temp_v1_2 = (u32) header->unk0 >> 5;
         header->objects.unk0 = (s16) temp_v1_2;
         temp_v0_7 = func_8025305C_de((s16) temp_v1_2 * 0x49C);
@@ -325,8 +325,8 @@ void func_8040FB94_de(u8 *arg0) {
             do {
                 temp_s0 = D_80153C28[var_s4].metadata;
                 temp_s1 = (*objectTable) + var_s4;
-                func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, D_8014D924.header.unkC + ((func_8040FC14_S16 *)temp_s0)->unk14, 0);
-                func_802A0ED4_de(&temp_s1->unk4, 8, 0x60, ((func_8040FC14_S1 *)state)->unk0);
+                func_802A0F60_de(((Images *)state)->unk0, D_8014D924.header.unkC + ((func_8040FC14_S16 *)temp_s0)->unk14, 0);
+                func_802A0ED4_de(&temp_s1->unk4, 8, 0x60, ((Images *)state)->unk0);
                 temp_s1->unk484 = func_8025305C_de(temp_s0->unkE * 4);
                 *temp_s1->unk484 = func_8025305C_de(temp_s0->unkE * 0x1080);
                 func_802A0748_de(*temp_s1->unk484, 0, temp_s0->unkE * 0x1080);
@@ -346,8 +346,8 @@ void func_8040FB94_de(u8 *arg0) {
                     var_s2 = ((temp_s0->unk8 * 2) + 7) & ~7;
                     temp_s1->unk488 = func_8025305C_de(temp_a0_3 * 4);
                     *temp_s1->unk488 = func_8025305C_de(temp_s0->unkE * var_s2);
-                    func_802A0F60_de(((func_8040FC14_S1 *)state)->unk0, D_8014D970 + ((s32 *)temp_s7)[temp_a0], 0);
-                    func_802A0ED4_de((s32) *temp_s1->unk488, temp_s0->unkE * var_s2, 1, ((func_8040FC14_S1 *)state)->unk0);
+                    func_802A0F60_de(((Images *)state)->unk0, D_8014D970 + ((s32 *)temp_s7)[temp_a0], 0);
+                    func_802A0ED4_de((s32) *temp_s1->unk488, temp_s0->unkE * var_s2, 1, ((Images *)state)->unk0);
                     var_a1 = 0;
                     if (temp_s0->unkE > 0) {
                         var_a2 = 0;
@@ -364,7 +364,7 @@ void func_8040FB94_de(u8 *arg0) {
 
                 recordData += 1;
                 var_s4 += 1;
-            } while (recordData < ((func_8040FC14_S13 *)&D_80153C20)->unk0);
+            } while (recordData < ((Objects *)&D_80153C20)->unk0);
         }
         func_802547E4_de(temp_s7);
     } else {

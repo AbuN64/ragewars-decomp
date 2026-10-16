@@ -12,14 +12,14 @@
 
 
 
-extern struct Globals_func_80427D70_de D_801462C8;
+extern struct Data801462C8 D_801462C8;
 extern struct Screen_func_80427D70_de *D_800E4690;
 extern struct Table_func_80427D70_de *func_80425C70_de(void *, s32, s32);
 extern s32 func_80265650_de(u8 *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 
 void func_80427D70_de(void *arg0) {
-    struct Globals_func_80427D70_de *globals;
+    struct Data801462C8 *globals;
     struct Table_func_80427D70_de *table;
     unsigned int category;
     s32 kind;
@@ -27,7 +27,7 @@ void func_80427D70_de(void *arg0) {
     s32 i;
 
     category=(unsigned int)&D_801462C8;
-    globals=(struct Globals_func_80427D70_de *)category;
+    globals=(struct Data801462C8 *)category;
     switch (globals->mode) {
     case 1:
         kind = globals->status[D_800E4690->player].kind;

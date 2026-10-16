@@ -18,7 +18,7 @@ s32 func_80404F58_de(s32, s32, s32, s32);
 u32 func_804057F8_de(u8 *, u32, u32);
 s32 func_804057BC_de(u8 *, s32);
 u8 *func_802A025C_de(u8 *, u8 *);
-void *func_80442574_de(struct func_8025E5B0_S1 *, struct List_func_80442574_de *, s32, s32, s32);
+void *func_80442574_de(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 s32 func_80406178_de(void *, s32, s32);
 static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((func_802A0238_de(code) == 4) && (func_802A0238_de(company) == 2) && (func_802A037C_de(code, rw_pak_game_code(&D_80145040.game)) == 0) && (func_802A037C_de(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
 static __inline__ s32 pak_block_has_size(u8 *data,s32 expected) { return *(s32 *)data==expected; }
@@ -47,7 +47,7 @@ s32 func_80407748_de(s32 *selection, Shared_PakMenu *menu) {
     s32 result;
     s32 gameNote;
     s32 i;
-    struct List_func_80442574_de *dialog;
+    struct Dialog *dialog;
     struct Shape_typemap_165 *handle;
     struct Shape_typemap_165 *handle2;
     u8 *payload;

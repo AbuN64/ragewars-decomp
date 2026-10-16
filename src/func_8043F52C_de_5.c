@@ -16,7 +16,7 @@ extern char D_800DE4E8[];
 
 extern void **func_8025343C_de(s32, s32, s32, char *);
 
-extern void func_80440DA0_de(void *, void **, struct List_func_80442574_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
+extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
@@ -55,7 +55,7 @@ extern u8 D_80152789;
 extern PreviewWidget *func_8028CFA0_de(Shared_World *,int,int);
 
 void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *params) {
-    struct List_func_80442574_de *list = params->list;
+    struct Dialog *list = params->list;
     s32 a;
     s32 b;
     s32 c;

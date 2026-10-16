@@ -148,17 +148,17 @@ s32 func_80442488_de(func_8022A404_S1 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 a
 
 void func_80442544_de(void *object) {
     func_80255CA0_de(object, 0x1D0, 0x1D4);
-    ((List_func_804428F8_de *)object)->rotation = 0;
+    ((MessageList *)object)->rotation = 0;
 }
 
 /* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with func_80440DA0_de from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct List_func_80442574_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
+extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
-void *func_80442574_de(struct func_8025E5B0_S1 *owner, struct List_func_80442574_de *list, s32 b, s32 c, s32 d) {
+void *func_80442574_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 b, s32 c, s32 d) {
     s32 size = list->count * 40 + 0x1D8;
     s32 i;
     void **block;
@@ -190,10 +190,10 @@ void *func_80442574_de(struct func_8025E5B0_S1 *owner, struct List_func_80442574
 /* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through func_8025343C_de, builds it with func_80440DA0_de from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct List_func_80442574_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
+extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
-void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct List_func_80442574_de *list) {
+void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -229,10 +229,10 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
 /* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with func_80440DA0_de from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct List_func_80442574_de *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
+extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 extern void func_80255CB8_de(struct func_8025E5B0_S1 *, void *);
 
-void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427C4_de *params, struct List_func_80442574_de *list) {
+void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427C4_de *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -271,12 +271,12 @@ void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427
    the node's optional handler at 0xC of its table at 0x14, clears the three words at 0xB0, 0xB4 and
    0xBC of the state it owns at 0x20, unlinks it with func_80255ED8_de and releases its handle at 0x8
    through func_80253838_de. */
-extern List_func_804428F8_de D_8014561C;
-extern s32 func_80441214_de(Node_func_804428F8_de *, List_func_804428F8_de *);
-extern void func_80255ED8_de(List_func_804428F8_de *, Node_func_804428F8_de *);
+extern MessageList D_8014561C;
+extern s32 func_80441214_de(Node_func_804428F8_de *, MessageList *);
+extern void func_80255ED8_de(MessageList *, Node_func_804428F8_de *);
 extern void func_80253838_de(void *arg0, void *arg1);
 
-void func_804428F8_de(List_func_804428F8_de *list) {
+void func_804428F8_de(MessageList *list) {
     Node_func_804428F8_de *node;
     Node_func_804428F8_de *next;
     StateRecAtBCV1 *state;

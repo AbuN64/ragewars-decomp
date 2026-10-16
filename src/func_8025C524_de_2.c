@@ -19,7 +19,7 @@ extern s32 func_8025E0F4_de(s32 arg0);
 
 int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
     SlotRecAtB4V2 *entry;
-    Context_func_8025AE1C_de *context;
+    ContextCode8025A3EC *context;
     Slots *slots;
     void *owner;
 

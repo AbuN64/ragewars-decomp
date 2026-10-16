@@ -52,12 +52,12 @@ extern char D_800F91F0[];
 extern struct WorldNoteCount_func_80408870_de D_8011FE88;
 extern struct PakLoadBlock_func_80408870_de *D_800E28BC;
 
-extern s32 func_80406178_de(Menu_func_80409144_de *menu, s32 ch, s32 quiet);
+extern s32 func_80406178_de(MenuRecAt24 *menu, s32 ch, s32 quiet);
 extern s32 func_80404858_de(s32 ch, s32 index);
 extern struct PakLoadOwner_func_80408870_de *func_8022A5C0_de(char *profiles, PakMenuSlot *slot);
 extern void func_80442574_de(void *owner, char *message, void *player, void *slot, char *title);
 
-s32 func_80408870_de(void *unused, Menu_func_80409144_de *menu) {
+s32 func_80408870_de(void *unused, MenuRecAt24 *menu) {
     struct PakLoadOwner_func_80408870_de *owner;
     struct WorldNoteCount_func_80408870_de *world;
     s32 channel;

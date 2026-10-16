@@ -112,8 +112,8 @@ struct RecordRecAt2C {
     EntryRecAt4V4 *second[3];
 };
 
-struct Node_func_8027FF58_de;
-typedef struct Node_func_8027FF58_de Node_func_8027FF58_de;
+struct NodeCode8027A0F4;
+typedef struct NodeCode8027A0F4 NodeCode8027A0F4;
 
 struct func_8027EB00_S2;
 typedef struct func_8027EB00_S2 func_8027EB00_S2;
@@ -123,20 +123,12 @@ extern int D_801042C4;
 struct Actor_func_8027DAD0_de;
 typedef struct Actor_func_8027DAD0_de Actor_func_8027DAD0_de;
 
-struct Actor_func_8027E784_de;
-typedef struct Actor_func_8027E784_de Actor_func_8027E784_de;
+struct ActorCode8027A0F4;
+typedef struct ActorCode8027A0F4 ActorCode8027A0F4;
 
-struct Instance_func_8027E784_de;
-typedef struct Instance_func_8027E784_de Instance_func_8027E784_de;
+struct Shared_ParticleInstance;
 
-struct Instance_func_8027E784_de;
-struct Instance_func_8027E784_de {
-    char pad0[8];
-    Vec3 position;
-    char pad14[8];
-    Vec3 velocity;
-    char pad28[0x28];
-};
+struct Shared_ParticleInstance;
 
 struct ActorDef;
 struct ActorDef {
@@ -147,9 +139,9 @@ struct ActorDef {
     ObjRecAt18V3 *size;
 };
 struct ActorDef;
-struct Actor_func_8027E784_de;
-struct Actor_func_8027E784_de {
-    Instance_func_8027E784_de instance;
+struct ActorCode8027A0F4;
+struct ActorCode8027A0F4 {
+    Shared_ParticleInstance instance;
     char pad50[0xC8];
     struct ActorDef *def;
     char pad11C[0x24];
@@ -528,8 +520,8 @@ typedef struct func_80282E6C_S5 func_80282E6C_S5;
 struct func_80282E6C_S2;
 typedef struct func_80282E6C_S2 func_80282E6C_S2;
 
-struct Node_func_8027FF58_de;
-struct Node_func_8027FF58_de {
+struct NodeCode8027A0F4;
+struct NodeCode8027A0F4 {
     char pad0[0x5C];
     s32 flags;
     char pad60[0xD0];
@@ -541,7 +533,7 @@ struct Node_func_8027FF58_de {
     char pad1DA[0xA];
     void *handle;
     char pad1E8[4];
-    struct Node_func_8027FF58_de *next;
+    struct NodeCode8027A0F4 *next;
 };
 
 struct Shared_ParticleTarget;
@@ -606,7 +598,7 @@ struct Actor_func_80281A9C_de {
     char pad6[2];
     Vec3 position;
     char pad14[0x118];
-    SharedPlayer_func_8022A398_de *owner;
+    SharedPlayer *owner;
     char pad130[0x1C];
     s16 crowded;
 };

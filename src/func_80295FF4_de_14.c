@@ -20,9 +20,9 @@ extern void func_80411E18_de(s16 arg0);
 extern f64 func_802A18CC_de(void);
 
 
-extern void func_8040E67C_de(void *, Args_func_80298FE8_de);
+extern void func_8040E67C_de(void *, ArgsCode80296014);
 
-extern s32 func_8040E0D4_de(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, Args_func_80298FE8_de *);
+extern s32 func_8040E0D4_de(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, ArgsCode80296014 *);
 
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
 
@@ -122,7 +122,7 @@ void func_80298ECC_de(void) {
 
 void func_80298FE8_de(void) {
     extern Manager_func_80298FE8_de *D_8014D080;
-    Args_func_80298FE8_de args;
+    ArgsCode80296014 args;
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     s32 delta;

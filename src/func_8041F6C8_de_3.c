@@ -11,7 +11,7 @@
 #include "span_16E000/code_8041F1FC.h"
 
 extern s32 func_8040EBD0_de(struct WidgetNode *);
-extern struct WidgetNode *func_8041B7FC_de(struct Slots_func_8041B7FC_de *, s32);
+extern struct WidgetNode *func_8041B7FC_de(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
 s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {

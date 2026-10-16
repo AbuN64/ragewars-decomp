@@ -17,7 +17,7 @@ typedef struct func_802ADE28_S1 func_802ADE28_S1;
 typedef struct func_802ADE28_S2 func_802ADE28_S2;
 typedef struct func_802ADE28_S3 func_802ADE28_S3;
 typedef struct func_802ADE28_S4 func_802ADE28_S4;
-typedef struct func_802ADE28_S5 func_802ADE28_S5;
+typedef struct RecCode80213ED480216BF4 RecCode80213ED480216BF4;
 struct func_802ADE28_S1 {
     char pad0[0x18];
     func_802ADE28_S2 *unk18;
@@ -50,7 +50,7 @@ struct func_802ADE28_S4 {
     char pad678[0xD40 - 0x678 - sizeof(f32)];
     char unkD40;
 };
-struct func_802ADE28_S5 {
+struct RecCode80213ED480216BF4 {
     char pad0[0xC];
     f32 unkC;
 };

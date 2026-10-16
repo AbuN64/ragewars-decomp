@@ -20,11 +20,11 @@ extern Shared_CollisionResult D_801041F0;
 
 extern char D_8011D8D0;
 
-extern SharedPlayer_func_8022A398_de *D_80145060;
+extern SharedPlayer *D_80145060;
 
 s32 func_80243A90_de(Shared_Particle *particle, Vec3 pos, s32 *flags);
 
-f32 func_8024D284_de(SharedPlayer_func_8022A398_de *player);
+f32 func_8024D284_de(SharedPlayer *player);
 
 void func_80271F68_de(Vec3 *normal, Vec3 *pos, void *surface);
 
@@ -54,7 +54,7 @@ void func_8027CCA0_eu(Shared_Particle *particle);
 
 void func_8027D4A8_de(Shared_Particle *particle);
 
-void func_80282E98_de(Shared_Particle *particle, SharedPlayer_func_8022A398_de *player);
+void func_80282E98_de(Shared_Particle *particle, SharedPlayer *player);
 
 void func_80283E58_de(Shared_Particle *particle);
 
@@ -64,7 +64,7 @@ void func_8028422C_de(Shared_Particle *particle);
 
 /* Squared distance from the particle to a player's position, raised by half the player's height unless the particle
  * is type 0x40F. */
-static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer_func_8022A398_de *player) {
+static inline f32 func_8027B790_distance(Shared_Particle *particle, SharedPlayer *player) {
     Vec3 pos;
     pos = player->views0.view8_3.pos;
     if (particle->inst.type != 0x40F) {
@@ -109,7 +109,7 @@ void func_8027B720_de(Shared_Particle *particle) {
     Box bounds;
     Shared_ParticleOwner *owner;
     Shared_ParticleTarget *target;
-    SharedPlayer_func_8022A398_de *player;
+    SharedPlayer *player;
     f32 savedStep;
     f32 extent;
     f32 scaled; /* FAKEMATCH: one temporary holds the larger scaled size and then the box height; separate locals let local-alloc tie the constants to the products and pick other FPRs. */

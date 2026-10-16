@@ -13,7 +13,7 @@
 
 
 
-extern struct Block_func_8042F7A8_de *D_800E54A4;
+extern struct Data800E54A4Ptr *D_800E54A4;
 extern u8 D_801462D5;
 extern void func_802A2394_de();
 extern void func_802A2360_de();

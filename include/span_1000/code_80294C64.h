@@ -70,8 +70,8 @@ typedef struct func_802953FC_S1 func_802953FC_S1;
 
 extern void func_80294F1C_us_rev1();
 
-struct func_802958D8_S1;
-struct func_802958D8_S1 {
+struct RecCode80294C64;
+struct RecCode80294C64 {
     char unk0;
     char pad0[0x1 - 0x0 - sizeof(char)];
     char unk1;
@@ -139,12 +139,12 @@ struct AnimationInfo {
 
 extern void func_80295890_us_rev1();
 
-struct func_802958D8_S1;
-typedef struct func_802958D8_S1 func_802958D8_S1;
+struct RecCode80294C64;
+typedef struct RecCode80294C64 RecCode80294C64;
 
 extern void func_80294C84_de(void);
-struct Resource_func_80294C8C_de;
-extern void func_80294C8C_de(s32 index, struct Resource_func_80294C8C_de *resource);
+struct ResourceData80295B84;
+extern void func_80294C8C_de(s32 index, struct ResourceData80295B84 *resource);
 
 extern s32 D_auto_800D2AE8;
 

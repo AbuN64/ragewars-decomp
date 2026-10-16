@@ -11,7 +11,7 @@ extern __OSViContext_func_802BA910_de *D_800D4414;
 extern u32 func_802BBBC0_de(void *addr);
 void func_802BA910_de(void)
 {
-    register OSViMode_func_802BA910_de *vm;
+    register Modep *vm;
     register __OSViContext_func_802BA910_de *vc;
     u32 origin;
     u32 hStart;

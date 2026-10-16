@@ -18,7 +18,7 @@ extern f32 D_800C42CC_de;
 extern f32 D_800C42D0_de;
 extern s32 D_800CBB70;
 
-void func_802631B0_de(char *arg0, SharedPlayer_func_80226A34_de *arg1) {
+void func_802631B0_de(char *arg0, SharedPlayer *arg1) {
     void *temp_s1;
     f32 temp_fa1;
     f32 temp_ft0;

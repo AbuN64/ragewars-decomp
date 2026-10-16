@@ -4,16 +4,16 @@
 #include "common/types_8a8189af7b05.h"
 #include "common/types_06e4f7ef1f9e.h"
 #include "common/types_1dc8418c21db.h"
-struct func_802062E0_S1;
-struct func_802062E0_S1 {
+struct RecCode80206258;
+struct RecCode80206258 {
     char pad0[0x124];
     char unk124;
     char pad124[0x128 - 0x124 - sizeof(char)];
     s32 unk128;
 };
 
-struct func_802063EC_S1;
-struct func_802063EC_S1 {
+struct RecCode80206258802063EC;
+struct RecCode80206258802063EC {
     char pad0[0x1C];
     Triple unk1C;
     char pad1C[0x6C - 0x1C - sizeof(Triple)];
@@ -144,8 +144,8 @@ struct func_802070D0_S1 {
     f32 unk16C;
 };
 
-struct func_802064A0_S2;
-struct func_802064A0_S2 {
+struct RecCode80206258802064A0;
+struct RecCode80206258802064A0 {
     char pad0[0x1C];
     Triple unk1C;
     char pad1C[0x5C - 0x1C - sizeof(Triple)];
@@ -210,14 +210,14 @@ struct func_8020655C_S1 {
 
 extern void func_80206930_de(struct LevelActor *arg0, int arg1, struct Trigger *arg2);
 
-struct func_802062E0_S1;
-typedef struct func_802062E0_S1 func_802062E0_S1;
+struct RecCode80206258;
+typedef struct RecCode80206258 RecCode80206258;
 
 struct Actor_func_80206DD4_de;
 typedef struct Actor_func_80206DD4_de Actor_func_80206DD4_de;
 
-struct func_802064A0_S2;
-typedef struct func_802064A0_S2 func_802064A0_S2;
+struct RecCode80206258802064A0;
+typedef struct RecCode80206258802064A0 RecCode80206258802064A0;
 
 struct func_80206604_G1;
 typedef struct func_80206604_G1 func_80206604_G1;
@@ -402,8 +402,8 @@ struct func_80206758_S1 {
 struct SegmentRecAt5C;
 typedef struct SegmentRecAt5C SegmentRecAt5C;
 
-struct func_802063EC_S1;
-typedef struct func_802063EC_S1 func_802063EC_S1;
+struct RecCode80206258802063EC;
+typedef struct RecCode80206258802063EC RecCode80206258802063EC;
 
 struct func_80207910_S1;
 typedef struct func_80207910_S1 func_80207910_S1;

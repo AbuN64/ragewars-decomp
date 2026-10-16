@@ -43,9 +43,9 @@ extern char D_0044FA6C[];
 
 extern char D_8014561C[];
 
-extern SharedPlayer_func_80408C4C_de *func_8022A5C0_de(char *pool, PakMenuSlot *slot);
+extern SharedPlayer *func_8022A5C0_de(char *pool, PakMenuSlot *slot);
 
-extern void func_8044A0C4_de(SharedPlayer_func_80408C4C_de *player, s32 team);
+extern void func_8044A0C4_de(SharedPlayer *player, s32 team);
 
 extern void func_804427C4_de(char *text, Menu_func_80408C4C_de *menu, char *format);
 
@@ -112,13 +112,13 @@ extern char D_0044ED20[];
 
 extern s32 func_804051D4_de(s32 ch);
 
-extern s32 func_80407578_de(void *owner, Menu_func_80409144_de *menu, void *arg);
+extern s32 func_80407578_de(void *owner, MenuRecAt24 *menu, void *arg);
 
 s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
-    extern void func_80442574_de(char *, char *, SharedPlayer_func_80408C4C_de *, PakMenuSlot *, char *);
+    extern void func_80442574_de(char *, char *, SharedPlayer *, PakMenuSlot *, char *);
     extern s32 func_80406178_de(Menu_func_80408C4C_de *menu, s32 ch, s32 mode);
     s32 ch;
-    SharedPlayer_func_80408C4C_de *player;
+    SharedPlayer *player;
     ProfileRecAt84 *profile;
     s32 i;
 
@@ -223,9 +223,9 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     return 1;
 }
 
-s32 func_80409144_de(void *owner, Menu_func_80409144_de *menu, void *arg) {
+s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
     extern void func_80442574_de(char *, char *, void *, PakMenuSlot *, char *);
-    extern s32 func_80406178_de(Menu_func_80409144_de *menu, s32 ch, s32 quiet);
+    extern s32 func_80406178_de(MenuRecAt24 *menu, s32 ch, s32 quiet);
     s32 ch;
 
     switch (D_80153778) {

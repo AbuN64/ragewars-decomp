@@ -53,11 +53,11 @@ s16 func_80259B10_de(Vec3 *position, GameplayCamera *listener) {
 extern struct Bytes12 *func_80258BDC_de(ContextRecAt2BC0 *, s32);
 extern s16 func_802AD270_de(f32);
 
-extern s32 func_8025E584_de(Controller_func_80259C5C_de *);
-extern s32 func_8025E590_de(Controller_func_80259C5C_de *);
+extern s32 func_8025E584_de(ControllerCode802591C0 *);
+extern s32 func_8025E590_de(ControllerCode802591C0 *);
 
 
-void func_80259C5C_de(ViewRecAtB0 *view, Controller_func_80259C5C_de *controller, s32 flags) {
+void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32 flags) {
     s16 x;
     s16 y;
     f32 fx;

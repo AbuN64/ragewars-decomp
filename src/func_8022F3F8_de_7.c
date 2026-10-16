@@ -52,20 +52,20 @@ extern u8 D_80152789;
 
 static inline s32 can_fire(char *player) {
     s32 ammo;
-    if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.view11D8_147.unk11D8 > 0.0f) {
+    if (((SharedPlayer *)(player))->views5E8.view11D8_147.unk11D8 > 0.0f) {
         return 0;
     }
-    if (((SharedPlayer_func_8022A398_de *)(player))->views1450.view1450_0.unk1450 != 0) {
+    if (((SharedPlayer *)(player))->views1450.view1450_0.unk1450 != 0) {
         return 1;
     }
     if (D_801462D5 != 1) {
         return 1;
     }
-    ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer_func_8022A398_de *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E);
+    ammo = func_8022F55C_de(&D_80102B00[((SharedPlayer *)(player))->views1C.view5D4_45.unk5D4 * 0x190], ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E);
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            func_80239908_de(&D_80145088, ((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(D_80145040, player),
+        if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
+            func_80239908_de(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(D_80145040, player),
                           1.0f);
         }
     }
@@ -118,18 +118,18 @@ void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
     s32 action;
     char *model;
     player = actor->entity;
-    action = D_800CE8DC[((SharedPlayer_func_8022A398_de *)(player))->views5E8.view650_15.unk650].action;
-    if (func_80222AA4_de(player, ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
+    action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
+    if (func_80222AA4_de(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
+        ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
     }
-    if ((((SharedPlayer_func_8022A398_de *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
-        if (((SharedPlayer_func_8022A398_de *)(player))->views5E8.chargeView.charge >= 50) {
+    if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player) && fire->mode == 1) {
+        if (((SharedPlayer *)(player))->views5E8.chargeView.charge >= 50) {
             func_80214178_de(actor, fire, 5);
             fire->mode = 2;
         } else {
             func_8025DF34_de(0xD4D);
-            if (((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                func_80239908_de((D_80145040 + 0x48), ((SharedPlayer_func_8022A398_de *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
+            if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
+                func_80239908_de((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               func_8022A5A0_de(D_80145040, player), 1.0f);
             }
             fire->mode = 1;
@@ -142,7 +142,7 @@ void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
         }
     } else {
         fire->spin += fire->spin * D_800D2988 * 2.0f;
-        model = ((SharedPlayer_func_8022A398_de *)(player))->views5E8.view698_37.emitter;
+        model = ((SharedPlayer *)(player))->views5E8.view698_37.emitter;
         if (!(fire->spin < 0.0f ? 1.0f < -fire->spin * 1.7904929f
                                                      : 1.0f < fire->spin * 1.7904929f)) {
             if (fire->spin < 0.0f) {

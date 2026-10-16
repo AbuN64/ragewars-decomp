@@ -26,7 +26,7 @@ typedef struct func_8022A94C_S1 func_8022A94C_S1;
 struct func_8022A67C_S1;
 struct func_8022A67C_S1 {
     char pad0[0x20];
-    SharedPlayer_func_8022A398_de * unk20;
+    SharedPlayer * unk20;
 };
 
 struct Entry190;
@@ -332,8 +332,8 @@ struct ObjRecAtB4 {
     int unkB4;
 };
 
-struct Actor_func_8022AB20_de;
-struct Actor_func_8022AB20_de {
+struct ActorCode80225D10;
+struct ActorCode80225D10 {
     char pad[0x5F4];
     s16 table[1];
 };
@@ -350,8 +350,8 @@ typedef struct func_8022A67C_S1 func_8022A67C_S1;
 struct IntegerState6C;
 typedef struct IntegerState6C IntegerState6C;
 
-struct Actor_func_8022AB20_de;
-typedef struct Actor_func_8022AB20_de Actor_func_8022AB20_de;
+struct ActorCode80225D10;
+typedef struct ActorCode80225D10 ActorCode80225D10;
 
 struct func_8022AE18_S1;
 typedef struct func_8022AE18_S1 func_8022AE18_S1;

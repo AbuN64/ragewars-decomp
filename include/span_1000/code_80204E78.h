@@ -69,8 +69,8 @@ typedef struct Damage Damage;
 struct Cell;
 typedef struct Cell Cell;
 
-struct func_8020520C_S1;
-typedef struct func_8020520C_S1 func_8020520C_S1;
+struct RecCode80204E78;
+typedef struct RecCode80204E78 RecCode80204E78;
 
 struct func_80206080_S2;
 typedef struct func_80206080_S2 func_80206080_S2;
@@ -144,8 +144,8 @@ struct BreakableHitContext;
 struct ObjectStateCC;
 extern void func_80205494_de(struct BreakableHitContext *arg0, struct ObjectStateCC *arg1);
 
-struct func_80205494_S1;
-struct func_80205494_S1 {
+struct RecCode80204E7880205494;
+struct RecCode80204E7880205494 {
     char pad0[0x18];
     char * unk18;
     char pad18[0x100 - 0x18 - sizeof(char*)];
@@ -275,11 +275,11 @@ typedef struct Hit Hit;
 
 extern int func_802054D0_de(void *object);
 
-struct func_80205494_S1;
-typedef struct func_80205494_S1 func_80205494_S1;
+struct RecCode80204E7880205494;
+typedef struct RecCode80204E7880205494 RecCode80204E7880205494;
 
-struct func_8020520C_S1;
-struct func_8020520C_S1 {
+struct RecCode80204E78;
+struct RecCode80204E78 {
     char pad0[0x2C];
     void * unk2C;
     char pad2C[0x108 - 0x2C - sizeof(void*)];
@@ -302,16 +302,16 @@ extern void func_8020520C_de(struct LevelActor *source, void *dest);
 
 extern int func_80205314_de(void *arg0);
 
-struct Descriptor_func_80205F18_de;
-struct Descriptor_func_80205F18_de {
+struct DescriptorCode80204E78;
+struct DescriptorCode80204E78 {
     char pad0[0x14];
     ActionInfo info;
 };
 struct Actor_func_80205F18_de;
-struct Descriptor_func_80205F18_de;
+struct DescriptorCode80204E78;
 struct Actor_func_80205F18_de {
     char pad0[0x18];
-    struct Descriptor_func_80205F18_de *desc;
+    struct DescriptorCode80204E78 *desc;
     char pad1C[0xE4 - 0x1C];
     u16 model;
     char padE6[0x100 - 0xE6];

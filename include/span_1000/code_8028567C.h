@@ -12,7 +12,7 @@ typedef struct func_80285C48_S2 func_80285C48_S2;
 struct func_80285D00_S1;
 typedef struct func_80285D00_S1 func_80285D00_S1;
 
-extern void func_802858B0_de(Node_func_80285B64_de *arg0, Clip *arg1, Vec3 arg2, f32 arg5, f32 arg6, void **arg7);
+extern void func_802858B0_de(NodeCode8028469C *arg0, Clip *arg1, Vec3 arg2, f32 arg5, f32 arg6, void **arg7);
 
 struct func_80285D00_S1;
 struct func_80285D00_S1 {
@@ -24,7 +24,7 @@ struct func_80285D00_S1 {
 
 extern s32 func_8028597C_de(s32 arg0);
 
-struct Node_func_80285B64_de;
+struct NodeCode8028469C;
 struct PoolRecAt28V1;
 struct PoolRecAt28V1 {
     IntrusiveList free;

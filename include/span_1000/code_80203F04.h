@@ -43,8 +43,8 @@ struct BreakableHitContext {
     f32 unk_134;
 };
 
-struct func_80204738_S1;
-typedef struct func_80204738_S1 func_80204738_S1;
+struct RecCode80203F0480204738;
+typedef struct RecCode80203F0480204738 RecCode80203F0480204738;
 
 struct func_80204C68_S2;
 typedef struct func_80204C68_S2 func_80204C68_S2;
@@ -148,8 +148,8 @@ typedef struct func_80204728_S1 func_80204728_S1;
 struct LevelActor;
 extern s32 func_8020459C_de(struct LevelActor *actor);
 
-struct func_80204738_S1;
-struct func_80204738_S1 {
+struct RecCode80203F0480204738;
+struct RecCode80203F0480204738 {
     char pad0[0x100];
     int unk100;
     char pad100[0x1B0 - 0x100 - sizeof(int)];

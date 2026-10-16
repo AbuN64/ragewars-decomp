@@ -17,8 +17,8 @@ extern OSThread D_80148850;
 extern u64 D_8014ED10_de[];
 extern OSMesgQueue D_80149A80;
 extern OSMesg D_80149AA0[5];
-extern OSIoMesg_func_802BA350_de D_80149AC0;
-extern OSIoMesg_func_802BA350_de D_80149AE0;
+extern OSIoMesgCode802BA23C D_80149AC0;
+extern OSIoMesgCode802BA23C D_80149AE0;
 extern void D_002BA4C0(void *arg);
 
 

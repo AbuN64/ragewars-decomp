@@ -15,7 +15,7 @@
 
 extern struct Screen_func_80422960_de *D_800E4518;
 
-extern struct Game_func_80422960_de *D_800E2830;
+extern struct LevelActor *D_800E2830;
 
 extern s32 D_8015402C;
 
@@ -66,8 +66,8 @@ s32 func_80422960_de(void *item, s32 arg1, s32 event) {
             func_8040C428_de(0);
             func_8040E8D8_de(item, 1);
             func_804030E0_de(D_8015402C + 0x259);
-            D_800E2830->selection = -1;
-            D_800E2830->next = state;
+            D_800E2830->resourceHandle = -1;
+            D_800E2830->motionIndex = state;
         } else {
             func_8029973C_de();
             if (D_800E4518->arena == 0 && func_8025E2C4_de() != 0) {

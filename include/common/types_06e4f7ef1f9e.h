@@ -85,7 +85,6 @@ struct ObjRecAt18V3;
 typedef struct ObjRecAt18V3 ObjRecAt18V3;
 
 struct SharedPlayer;
-typedef struct SharedPlayer SharedPlayer;
 
 struct Body;
 struct Character;

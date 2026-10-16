@@ -38,8 +38,8 @@ struct OSDevMgr_func_802BA350_de {
     s32 (*edma)(void *, s32, u32, void *, u32);
 };
 
-struct OSIoMesg_func_802BA350_de;
-typedef struct OSIoMesg_func_802BA350_de OSIoMesg_func_802BA350_de;
+struct OSIoMesgCode802BA23C;
+typedef struct OSIoMesgCode802BA23C OSIoMesgCode802BA23C;
 
 extern void func_802BA700_de(s32 arg0);
 
@@ -58,8 +58,8 @@ struct OSViCommonRegs {
     u32 vCurrent;
 };
 
-struct Rec_func_802BA650_de;
-typedef struct Rec_func_802BA650_de Rec_func_802BA650_de;
+struct RecCode802BA23C;
+typedef struct RecCode802BA23C RecCode802BA23C;
 
 extern double D_800C79D0_de;
 
@@ -69,8 +69,8 @@ typedef struct OSIoMesgHdr_func_802BA350_de OSIoMesgHdr_func_802BA350_de;
 struct OSViFieldRegs;
 typedef struct OSViFieldRegs OSViFieldRegs;
 
-struct Rec_func_802BA650_de;
-struct Rec_func_802BA650_de {
+struct RecCode802BA23C;
+struct RecCode802BA23C {
     char pad0[2];
     s16 f2;
     char pad4[0xC];
@@ -101,8 +101,8 @@ struct __OSViContext_func_802BA6B0_de {
     u32 control;
 };
 
-struct OSIoMesg_func_802BA350_de;
-struct OSIoMesg_func_802BA350_de {
+struct OSIoMesgCode802BA23C;
+struct OSIoMesgCode802BA23C {
     OSIoMesgHdr_func_802BA350_de hdr;
     void *dramAddr;
     u32 devAddr;
@@ -124,8 +124,8 @@ struct OSViFieldRegs {
     u32 vIntr;
 };
 
-struct OSViMode_func_802BA910_de;
-struct OSViMode_func_802BA910_de {
+struct Modep;
+struct Modep {
     u8 type;
     OSViCommonRegs comRegs;
     OSViFieldRegs fldRegs[2];
@@ -136,8 +136,8 @@ typedef struct ObjectState28 ObjectState28;
 
 extern void osViSetYScale(f32 arg0);
 
-struct OSViMode_func_802BA910_de;
-typedef struct OSViMode_func_802BA910_de OSViMode_func_802BA910_de;
+struct Modep;
+typedef struct Modep Modep;
 
 struct OSViMode;
 typedef struct OSViMode OSViMode;
@@ -145,13 +145,13 @@ typedef struct OSViMode OSViMode;
 struct __OSViScale;
 typedef struct __OSViScale __OSViScale;
 
-struct OSViMode_func_802BA910_de;
+struct Modep;
 struct __OSViContext_func_802BA910_de;
 struct __OSViContext_func_802BA910_de {
     u16 state;
     u16 retraceCount;
     void *framep;
-    struct OSViMode_func_802BA910_de *modep;
+    struct Modep *modep;
     u32 control;
     void *msgq;
     void *msg;

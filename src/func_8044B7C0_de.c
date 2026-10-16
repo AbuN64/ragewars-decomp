@@ -18,7 +18,7 @@ extern s32 func_8028FE3C_de(s32,s32,s32,s32 *);
 extern s32 D_00285160;
 extern s32 D_800CD764_de;
 extern char D_800F41F0;
-void func_8044B7C0_de(Level_func_8044B7C0_de *arg0, s32 arg1) {
+void func_8044B7C0_de(LevelCode8044ACCC *arg0, s32 arg1) {
     s32 *sp20;
     s32 *sp24;
     void **temp_v0_10;

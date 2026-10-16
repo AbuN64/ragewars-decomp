@@ -7,14 +7,14 @@
 
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
-extern s32 func_80258D2C_de(Owner_func_8025A844_de *);
+extern s32 func_80258D2C_de(OwnerCode8025A3EC *);
 extern s16 func_80259B10_de(void *, GameplayCamera *);
 
 extern void func_802B2F00_de(void *, s16);
 extern void alSndpSetPan(void *, s32);
 
 static inline void apply_pan(Voice_func_8025A844_de *voice, u8 pan) {
-    Owner_func_8025A844_de *owner = voice->owner;
+    OwnerCode8025A3EC *owner = voice->owner;
     char *sound = owner->sound;
 
     func_802B2F00_de(sound, owner->samples[voice->index]);
@@ -81,7 +81,7 @@ void func_8025AA2C_de(Emitter *emitter) {
     if (emitter->reset != 0) {
         emitter->level = D_800C3F50_de;
     }
-    listener = ((Owner_func_8025A844_de *)emitter->scene)->listener;
+    listener = ((OwnerCode8025A3EC *)emitter->scene)->listener;
     dx = emitter->x - ((GameplayCamera *)listener)->position.x;
     dy = emitter->y - ((GameplayCamera *)listener)->position.y;
     dz = emitter->z - ((GameplayCamera *)listener)->position.z;

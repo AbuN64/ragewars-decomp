@@ -11,7 +11,7 @@
 
 void func_8044A7D0_de(ObjRecAt8C8 *pool) {
     s32 i;
-    struct Entry_func_8044A7D0_de *entry;
+    struct EntryCode8044ACCC *entry;
 
     func_80255CA0_de(&pool->active, 0, 4);
     func_80255CA0_de(&pool->free, 0, 4);

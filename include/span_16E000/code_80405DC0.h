@@ -52,8 +52,7 @@ struct MenuRecAt24 {
     char *prompt;
 };
 
-struct Menu_func_80409144_de;
-typedef struct Menu_func_80409144_de Menu_func_80409144_de;
+struct MenuRecAt24;
 
 struct PakNoteTextEntry;
 typedef struct PakNoteTextEntry PakNoteTextEntry;
@@ -61,22 +60,16 @@ typedef struct PakNoteTextEntry PakNoteTextEntry;
 struct MenuRecAt20V3;
 struct MenuRecAt20V3 {
     char pad0[0x1C];
-    SharedPlayer_func_8022A398_de *player;
+    SharedPlayer *player;
     PakMenuSlot *slot;
 };
 
 extern char *D_800D36D8;
 
-struct Menu_func_80409144_de;
-struct Menu_func_80409144_de {
-    char pad0[0x1C];
-    void *player;
-    PakMenuSlot *slot;
-    char *prompt;
-};
+struct MenuRecAt24;
 
-struct Menu_func_80409144_de;
-extern int func_80409144_de(void * owner, struct Menu_func_80409144_de * menu, void * arg);
+struct MenuRecAt24;
+extern int func_80409144_de(void * owner, struct MenuRecAt24 * menu, void * arg);
 
 extern void func_804098CC_de(void ***handle, void **data, s32 units);
 

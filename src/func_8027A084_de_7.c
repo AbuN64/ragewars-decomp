@@ -41,13 +41,13 @@
 
 
 extern World_func_80281A9C_de D_8011FE88;
-extern SharedPlayer_func_8022A398_de *D_80145060;
+extern SharedPlayer *D_80145060;
 extern void func_80271F68_de(Vec3 *out, Vec3 *a, Vec3 *b);
 
 void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_80281A9C_de **others, s32 count) {
     Vec3 delta;
     World_func_80281A9C_de *world;
-    SharedPlayer_func_8022A398_de *player;
+    SharedPlayer *player;
     s32 i;
     s32 objectCount;
 

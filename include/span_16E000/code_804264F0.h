@@ -40,11 +40,11 @@ struct RowRecAt54 {
     char pad64[0x70 - 0x64];
 };
 
-struct Slot_func_80428214_de;
-typedef struct Slot_func_80428214_de Slot_func_80428214_de;
+struct SlotCode80423280;
+typedef struct SlotCode80423280 SlotCode80423280;
 
-struct Slot_func_80428214_de;
-struct Slot_func_80428214_de {
+struct SlotCode80423280;
+struct SlotCode80423280 {
     u8 flags[0x16];
     u8 unk16[0x16];
     u8 ready;
@@ -54,7 +54,7 @@ struct Slot_func_80428214_de {
 struct State_func_80428214_de;
 struct State_func_80428214_de {
     u8 pad0[0x11C];
-    Slot_func_80428214_de slots[4];
+    SlotCode80423280 slots[4];
 };
 
 extern u8 D_801462D5;
@@ -120,8 +120,8 @@ extern int func_8042863C_de(int id);
 
 extern void func_80428700_de();
 
-struct Screen_func_804273D4_de;
-struct Screen_func_804273D4_de {
+struct ScreenCode80423280;
+struct ScreenCode80423280 {
     char pad0[0x970];
     s32 context;
 };
@@ -154,8 +154,8 @@ struct Entry_func_804279B8_de {
 };
 
 struct Entry_func_804279B8_de;
-struct Globals_func_80427D70_de;
-struct Globals_func_80427D70_de {
+struct Data801462C8;
+struct Data801462C8 {
     char pad0[0xD];
     u8 mode;
     char padE[0xD0 - 0xE];

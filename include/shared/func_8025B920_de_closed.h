@@ -18,7 +18,7 @@ extern s32 func_802B2620_de(void *sound);
 extern void alSndpStop(void *sound);
 
 static __inline__ void release(SlotCC *slot) {
-    Owner_func_8025B5F0_de *owner = slot->owner;
+    OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
     void *sound;
 
     slot->active = 1;

@@ -9,7 +9,7 @@
 void func_8022B09C_de(s32, f32 *);
 void func_802800C0_de(s32 *, void *, void *, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32,
                       f32, f32, f32, s32, s32, s32);
-void func_8028CE94_de(Shared_World *, s32, s32, s32, s32, s32, struct Node_func_80285B64_de **,
+void func_8028CE94_de(Shared_World *, s32, s32, s32, s32, s32, struct NodeCode8028469C **,
                       f32);
 extern s32 D_8011D8D0;
 extern float D_800C43D8_de;

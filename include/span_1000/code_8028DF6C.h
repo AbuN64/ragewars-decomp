@@ -289,8 +289,8 @@ struct ImageSet {
 struct ImageSet;
 typedef struct ImageSet ImageSet;
 
-struct func_8028E044_S1;
-typedef struct func_8028E044_S1 func_8028E044_S1;
+struct RecCode8028DF6C;
+typedef struct RecCode8028DF6C RecCode8028DF6C;
 
 struct OSScClientWork;
 typedef struct OSScClientWork OSScClientWork;
@@ -383,8 +383,8 @@ typedef struct Node_func_8028E930_de Node_func_8028E930_de;
 
 extern void *func_8028F94C_de(void *object);
 
-struct func_8028E044_S1;
-struct func_8028E044_S1 {
+struct RecCode8028DF6C;
+struct RecCode8028DF6C {
     char pad0[0x3C];
     char unk3C;
     char pad3C[0x138 - 0x3C - sizeof(char)];

@@ -16,7 +16,7 @@
 
 
 extern struct Block_func_80430028_de *D_800E54A4;
-extern struct Resource_func_80419E54_de *func_8041B7FC_de(struct Slots_func_8041B7FC_de *, s32);
+extern struct Resource_func_80419E54_de *func_8041B7FC_de(struct SlotsCode804196C0 *, s32);
 extern s32 func_8025DF34_de(s32);
 
 s32 func_80430028_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {

@@ -54,13 +54,13 @@ typedef struct State_func_80423328_de State_func_80423328_de;
 
 extern void func_80424B90_de();
 
-struct Frame_func_804217D4_de;
+struct CellRecAt1A;
 struct Menu_func_804241BC_de;
 struct State_func_804241BC_de;
 struct State_func_804241BC_de {
     struct Menu_func_804241BC_de *menu;
     char pad4[0x8 - 0x4];
-    struct Frame_func_804217D4_de *list;
+    struct CellRecAt1A *list;
     s32 opening;
     char pad10[0x14 - 0x10];
     s32 delay;

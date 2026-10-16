@@ -87,8 +87,8 @@ struct RootRecAt1C {
     struct Middle *middle;
 };
 
-struct Owner_func_8043E1F8_de;
-typedef struct Owner_func_8043E1F8_de Owner_func_8043E1F8_de;
+struct OwnerCode8043DF84;
+typedef struct OwnerCode8043DF84 OwnerCode8043DF84;
 
 struct ActorRecAt260;
 struct ObjectRecAt1C;
@@ -96,23 +96,23 @@ struct ObjectRecAt1C {
     char pad[0xC];
     struct ActorRecAt260 *actor;
     char pad10[0xC];
-    Owner_func_8043E1F8_de *parent;
+    OwnerCode8043DF84 *parent;
 };
 
 extern void func_80443C14_de(ObjectRecAt1C *object);
 
-struct Actor_func_80443844_de;
-struct Actor_func_80443844_de {
+struct ActorCode80443868;
+struct ActorCode80443868 {
     char pad[0x5D0];
     int waiting;
     char pad5D4[4];
     ObjRecAt8F *info;
 };
-struct Actor_func_80443844_de;
+struct ActorCode80443868;
 struct PlayerRecAt1C;
 struct PlayerRecAt1C {
     char pad[0x1C];
-    struct Actor_func_80443844_de *actor;
+    struct ActorCode80443868 *actor;
 };
 
 struct PlayerRecAt1C;

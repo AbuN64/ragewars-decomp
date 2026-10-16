@@ -67,10 +67,10 @@ struct StateRecAtBCV1 {
     s32 field_BC;
 };
 
-struct List_func_804428F8_de;
-typedef struct List_func_804428F8_de List_func_804428F8_de;
+struct MessageList;
+typedef struct MessageList MessageList;
 
-struct List_func_804428F8_de;
+struct MessageList;
 struct Node_func_804428F8_de;
 struct StateRecAtBCV1;
 struct Table_func_804428F8_de;
@@ -87,7 +87,7 @@ struct Node_func_804428F8_de {
     struct Node_func_804428F8_de *next;
 };
 
-struct List_func_804428F8_de {
+struct MessageList {
     struct Node_func_804428F8_de *head;
     char pad04[0x10 - 0x4];
     s32 flag;
@@ -96,7 +96,7 @@ struct List_func_804428F8_de {
 
 struct Table_func_804428F8_de {
     char pad00[0xC];
-    void (*handler)(Node_func_804428F8_de *, List_func_804428F8_de *);
+    void (*handler)(Node_func_804428F8_de *, MessageList *);
 };
 
 struct Params_func_804427C4_de;
@@ -240,7 +240,7 @@ extern float func_8044222C_de(int c, unsigned char next, float sx, float sy);
 struct ParamsRecAt24V1;
 struct ParamsRecAt24V1 {
     char pad[0x18];
-    struct List_func_80442574_de *list;
+    struct Dialog *list;
     s32 b;
     s32 c;
     s32 d;

@@ -1,6 +1,7 @@
 #ifndef UNBAKE_SPAN_16E000_CODE_804221A0_H
 #define UNBAKE_SPAN_16E000_CODE_804221A0_H
 #include "types.h"
+#include "shared/level_actor.h"
 struct func_80422C20_S1;
 struct func_80422C20_S1 {
     char pad0[0x1240];
@@ -29,12 +30,6 @@ struct Screen_func_80422960_de {
     s32 arena;
 };
 
-struct Game_func_80422960_de;
-struct Game_func_80422960_de {
-    char pad0[0x3C];
-    s32 next;
-    char pad40[0xD8 - 0x40];
-    s32 selection;
-};
+struct LevelActor;
 
 #endif

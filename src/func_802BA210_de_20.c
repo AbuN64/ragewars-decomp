@@ -5,9 +5,9 @@
 extern __OSViContext_func_802BA910_de D_800D43B0[2];
 extern __OSViContext_func_802BA910_de *D_800D8440;
 extern __OSViContext_func_802BA910_de *D_800D4414;
-extern OSViMode_func_802BA910_de D_800D4440;
-extern OSViMode_func_802BA910_de D_800D4490;
-extern OSViMode_func_802BA910_de D_800D44E0;
+extern Modep D_800D4440;
+extern Modep D_800D4490;
+extern Modep D_800D44E0;
 extern s32 D_80000300;
 extern void *func_802A001C_de(void *destination, s32 value, u32 size);
 

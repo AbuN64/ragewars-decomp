@@ -224,8 +224,8 @@ struct func_80216D3C_S2 {
 struct Field_f32_9C;
 typedef struct Field_f32_9C Field_f32_9C;
 
-struct func_802165F8_S2;
-typedef struct func_802165F8_S2 func_802165F8_S2;
+struct RecCode80213ED4;
+typedef struct RecCode80213ED4 RecCode80213ED4;
 
 struct Location;
 struct Location {
@@ -383,8 +383,8 @@ struct Field_void_794 {
     void * value;
 };
 
-struct func_802165F8_S2;
-struct func_802165F8_S2 {
+struct RecCode80213ED4;
+struct RecCode80213ED4 {
     char pad0[0x48];
     Vec3 unk48;
     char pad48[0x60 - 0x48 - sizeof(Vec3)];

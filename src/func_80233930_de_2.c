@@ -5,7 +5,7 @@
 extern u32 D_800CD730;
 
 /* Animate the shared light colors and direction, and both actor tint colors. */
-void func_80233DFC_de(Entity_func_80233C88_de *actor) {
+void func_80233DFC_de(View *actor) {
     Vec3 direction;
     f32 phaseScale;
     f32 ambientScale;

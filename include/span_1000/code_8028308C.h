@@ -33,8 +33,8 @@ struct func_8028438C_S1 {
     void * unk1DC;
 };
 
-struct func_80283BA0_S1;
-typedef struct func_80283BA0_S1 func_80283BA0_S1;
+struct RecCode8028308C;
+typedef struct RecCode8028308C RecCode8028308C;
 
 struct D801041F8_Layout;
 struct D801041F8_Layout {
@@ -62,8 +62,8 @@ struct ObjectLinks1E8 {
 struct TrailActor;
 typedef struct TrailActor TrailActor;
 
-struct func_80283BA0_S1;
-struct func_80283BA0_S1 {
+struct RecCode8028308C;
+struct RecCode8028308C {
     char pad0[0x8];
     Triple unk8;
     char pad8[0x1C - 0x8 - sizeof(Triple)];

@@ -37,7 +37,7 @@ void func_8044D668_de(Level *level) {
     func_802458C4_de();
 }
 
-void func_8044D794_de(Owner_func_8044D794_de *arg0) {
+void func_8044D794_de(OwnerCode8044E2B8 *arg0) {
     Entry_func_8044D794_de *entry;
     Entry_func_8044D794_de *next;
 
@@ -55,7 +55,7 @@ extern s32 func_8028C198_de(s32, s32);
 
 void func_8044D804_de(s32 arg0, void ***arg1) {
     void *obj;
-    Group_func_8044D794_de *group;
+    GroupCode8044E2B8 *group;
     Piece *piece;
     s32 base;
     s32 count;
@@ -133,10 +133,10 @@ void func_8044D934_de(s32 arg0, void ***arg1) {
     }
 }
 
-void func_8044DA54_de(Owner_func_8044D794_de *arg0, void ***arg1) {
+void func_8044DA54_de(OwnerCode8044E2B8 *arg0, void ***arg1) {
     void *obj;
-    Frame_func_8044D794_de *frame;
-    Bank_func_8044D794_de *bank;
+    FrameCode8044E2B8 *frame;
+    BankCode8044E2B8 *bank;
     struct EntryRecAt0V3 *items;
     struct EntryRecAt0V3 *item;
     SlotRecAt0V2 *slot;

@@ -15,9 +15,6 @@ struct ObjRecAt260 {
     struct Triple unk260;
 };
 
-struct Entity_func_80233C88_de;
-typedef struct Entity_func_80233C88_de Entity_func_80233C88_de;
-
 /* Color keyframe payload in a 0x64-byte model-section record. */
 typedef struct ColorBlendRecord {
     u8 color[4];
@@ -36,30 +33,6 @@ struct Overlay;
 typedef struct Overlay Overlay;
 
 typedef StateRecAt10 AxisWave;
-
-struct Entity_func_80233C88_de;
-struct Entity_func_80233C88_de {
-    char pad0[0x58];
-    u16 *key;
-    f32 blendOffset;
-    char pad60[0x29C - 0x60];
-    f32 width;
-    f32 height;
-    f32 x;
-    f32 y;
-    char pad2AC[0x518 - 0x2AC];
-    s32 lastKey;
-    f32 blendTime;
-    u8 color[4];
-    u8 secondaryColor[4];
-    f32 blendA;
-    f32 previousA;
-    f32 blendB;
-    f32 previousB;
-    char pad538[4];
-    u32 blendN;
-    u32 previousN;
-};
 
 struct func_8023919C_S1;
 typedef struct func_8023919C_S1 func_8023919C_S1;

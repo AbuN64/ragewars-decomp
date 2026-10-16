@@ -14,7 +14,7 @@ extern void __osRestoreInt(u32);
 
 void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2) {
     u32 temp_v0;
-    Rec_func_802BA650_de *rec;
+    RecCode802BA23C *rec;
 
     temp_v0 = func_802BCF30_de();
     rec = D_800D4414;

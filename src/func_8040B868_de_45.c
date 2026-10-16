@@ -148,7 +148,7 @@ extern u8 *D_80153C88;
 extern u8 D_80153C8F;
 
 u32 func_804137F8_de(s32 x, s32 y) {
-    extern func_8022BECC_S2 *D_80153D54;
+    extern ShapeCode802B54A0 *D_80153D54;
     extern void (*D_80153CD8)(s32 offset);
     extern u32 D_80153C68;
     u32 r;
@@ -186,7 +186,7 @@ u32 func_804137F8_de(s32 x, s32 y) {
 }
 
 s32 func_80413994_de(s32 x, s32 y) {
-    extern struct func_8022BECC_S2 *D_80153D54;
+    extern struct ShapeCode802B54A0 *D_80153D54;
     extern void (*D_80153CD8)(void);
     D_80153C78 = x + y * D_80153D54->unk8;
     D_80153CD8();
@@ -229,7 +229,7 @@ u32 func_804139E0_de(s32 index) {
 }
 
 void func_80413B54_de(s32 x, s32 y, u32 color) {
-    extern func_8022BECC_S2 *D_80153D58;
+    extern ShapeCode802B54A0 *D_80153D58;
     extern u32 D_80153C74;
     u32 r;
     u32 g;
@@ -269,7 +269,7 @@ void func_80413B54_de(s32 x, s32 y, u32 color) {
 }
 
 void func_80413C94_de(s32 x, s32 y, s32 value) {
-    extern struct func_8022BECC_S2 *D_80153D58;
+    extern struct ShapeCode802B54A0 *D_80153D58;
     D_80153C8C = value;
     D_80153C84 = x + y * D_80153D58->unk8;
     D_80153CDC();

@@ -1,4 +1,5 @@
 #include "common/types_8a8189af7b05.h"
+#include "common/types_06e4f7ef1f9e.h"
 #include "span_16E000/code_80405DC0.h"
 #include "types.h"
 
@@ -61,10 +62,10 @@ extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800DE868;
 extern s32 D_800E28BC;
 
-extern SharedPlayer_func_8022A398_de *func_8022A5C0_de(void *profiles, PakMenuSlot *slot);
+extern SharedPlayer *func_8022A5C0_de(void *profiles, PakMenuSlot *slot);
 extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de(s32 heap);
-extern void func_80442574_de(void *buffer, char *message, SharedPlayer_func_8022A398_de *player, char *title, s32 channel);
+extern void func_80442574_de(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
 
 static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
     if (D_8015375C != 0) {
@@ -78,8 +79,8 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
     s32 channel;
     char *label;
     s8 port;
-    SharedPlayer_func_8022A398_de *target;
-    SharedPlayer_func_8022A398_de *player;
+    SharedPlayer *target;
+    SharedPlayer *player;
 
     if (D_800DE860_de != 0 || D_800DE864_de != 0) {
         func_80253908_de(0);

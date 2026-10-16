@@ -68,8 +68,8 @@ typedef struct PresetTable PresetTable;
 struct StateRecAt91;
 typedef struct StateRecAt91 StateRecAt91;
 
-struct Info_func_80426174_de;
-struct Info_func_80426174_de {
+struct InfoCode80423280;
+struct InfoCode80423280 {
     char pad[0x4C];
     unsigned char enabled[22];
     unsigned char values[22];
@@ -77,11 +77,11 @@ struct Info_func_80426174_de {
     char pad79[0x18];
     unsigned char locked;
 };
-struct Info_func_80426174_de;
+struct InfoCode80423280;
 struct PlayerRecAt602;
 struct PlayerRecAt602 {
     char pad[0x5D8];
-    struct Info_func_80426174_de *info;
+    struct InfoCode80423280 *info;
     char pad5DC[0x26];
     struct {
         unsigned char flag;

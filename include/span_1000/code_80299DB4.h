@@ -4,8 +4,8 @@
 struct Callback;
 typedef struct Callback Callback;
 
-struct Event_func_8029A558_de;
-struct Event_func_8029A558_de {
+struct EventCode80299DB4;
+struct EventCode80299DB4 {
     s16 f0;
     s16 f2;
     s16 f4;
@@ -64,8 +64,8 @@ typedef struct Msg Msg;
 struct func_8029BA34_S1;
 typedef struct func_8029BA34_S1 func_8029BA34_S1;
 
-struct Event_func_8029A558_de;
-typedef struct Event_func_8029A558_de Event_func_8029A558_de;
+struct EventCode80299DB4;
+typedef struct EventCode80299DB4 EventCode80299DB4;
 
 struct StreamBuffer;
 extern void func_80299C80_de(struct StreamBuffer *arg0);

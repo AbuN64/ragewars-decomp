@@ -81,8 +81,8 @@ typedef struct func_8021C9B4_S1 func_8021C9B4_S1;
 
 extern float D_800C22FC_de;
 
-struct func_80219408_S1;
-struct func_80219408_S1 {
+struct RecCode802192C0;
+struct RecCode802192C0 {
     char pad0[0x1];
     char unk1;
     char pad1[0x2 - 0x1 - sizeof(char)];
@@ -298,8 +298,8 @@ typedef struct func_80219460_S1 func_80219460_S1;
 
 extern float D_800C22F8_de;
 
-struct func_80219408_S1;
-typedef struct func_80219408_S1 func_80219408_S1;
+struct RecCode802192C0;
+typedef struct RecCode802192C0 RecCode802192C0;
 
 struct ObjectState8E;
 struct ObjectState8E {

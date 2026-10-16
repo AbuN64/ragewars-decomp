@@ -40,7 +40,7 @@ extern Session D_801468A0;
 
 extern s32 D_80146938;
 
-extern void func_8044972C_de(SharedPlayer_func_80209CD8_de *);
+extern void func_8044972C_de(SharedPlayer *);
 
 void func_802095F8_de(Brain *object) {
     void *memory = object;
@@ -342,7 +342,7 @@ multiply:
     return var_f1;
 }
 
-void func_80209CD8_de(SharedPlayer_func_80209CD8_de **arg0) {
+void func_80209CD8_de(SharedPlayer **arg0) {
     s32 limit;
     Controls *controls;
     Session *session;

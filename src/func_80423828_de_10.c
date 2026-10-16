@@ -3,6 +3,7 @@
 #include "shared/func_80425674_de_layout.h"
 #include "shared/gameplay_transition.h"
 #include "types.h"
+#include "span_1000/code_802B369C.h"
 
 struct CompactOptionsScreen {
     s32 slider;
@@ -11,13 +12,8 @@ struct CompactOptionsScreen {
     s32 state;
 };
 
-struct ArenaChoiceState {
-    void *menu;
-    u32 unknown4[5];
-    s32 next;
-};
 
-extern struct ArenaChoiceState *D_800E4600;
+extern struct ALParam_s1C *D_800E4600;
 
 extern s32 D_800E4680;
 
@@ -50,7 +46,7 @@ s32 func_80423F48_de(void) {
 #else
     case 0x45:
 #endif
-        D_800E4600->next = 0x1A;
+        D_800E4600->yetstillmoredata = 0x1A;
         D_801462C8.controllerMode = 0;
         break;
     #if defined(VERSION_EU_X)
@@ -60,7 +56,7 @@ s32 func_80423F48_de(void) {
 #endif
         settings = &D_801462C8;
         status = settings->playerSettings;
-        D_800E4600->next = 7;
+        D_800E4600->yetstillmoredata = 7;
         settings->controllerMode = 2;
         for (i = 0; i < 2; i++) {
             status[i].enabled = 1;
@@ -80,7 +76,7 @@ s32 func_80423F48_de(void) {
         status[0].slot = 0;
         func_8022EF30_de((char *)D_80102B00);
         func_80434FB4_de(7);
-        D_800E4600->next = 0x13;
+        D_800E4600->yetstillmoredata = 0x13;
         D_801462C8.controllerMode = 1;
         break;
     #if defined(VERSION_EU_X)
@@ -88,21 +84,21 @@ s32 func_80423F48_de(void) {
 #else
     case 0x4B:
 #endif
-        D_800E4600->next = 0x1B;
+        D_800E4600->yetstillmoredata = 0x1B;
         break;
     #if defined(VERSION_EU_X)
     case 0x4B:
 #else
     case 0x47:
 #endif
-        D_800E4600->next = 4;
+        D_800E4600->yetstillmoredata = 4;
         break;
     #if defined(VERSION_EU_X)
     case 0x4A:
 #else
     case 0x4C:
 #endif
-        D_800E4600->next = 0x10;
+        D_800E4600->yetstillmoredata = 0x10;
         break;
     #if defined(VERSION_EU_X)
     case 0x4D:
@@ -110,7 +106,7 @@ s32 func_80423F48_de(void) {
     case 0x48:
 #endif
         status = D_801462C8.playerSettings;
-        D_800E4600->next = 7;
+        D_800E4600->yetstillmoredata = 7;
         status->enabled = 1;
         status[0].slot = 0;
         if (D_80102B00[0].player < 0) {
@@ -127,7 +123,7 @@ s32 func_80423F48_de(void) {
     case 0x4A:
 #endif
         status = D_801462C8.playerSettings;
-        D_800E4600->next = 0xA;
+        D_800E4600->yetstillmoredata = 0xA;
         status->enabled = 1;
         status[0].slot = 0;
         if (D_80102B00[0].player < 0) {
@@ -139,6 +135,6 @@ s32 func_80423F48_de(void) {
     default:
         return 0;
     }
-    func_8041A430_de(D_800E4600->menu, 2);
+    func_8041A430_de(D_800E4600->next, 2);
     return 0;
 }

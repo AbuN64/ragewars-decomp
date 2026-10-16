@@ -50,7 +50,7 @@ enum { MENU_80437B10_976 = 976, MENU_80437B10_977 = 977 };
 
  /* const */
 s32 func_80437810_de(void) {
-    extern State_func_80421BEC_de *D_800E5784;
+    extern StateCode80420E90 *D_800E5784;
     s32 temp_a0_2;
     s32 temp_v0;
     s32 temp_v0_2;

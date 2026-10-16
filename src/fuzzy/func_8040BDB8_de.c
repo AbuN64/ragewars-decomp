@@ -1,15 +1,15 @@
 #include "span_1000/code_802BA23C.h"
 
 extern s16 D_8014D500;
-extern OSViMode_func_802BA910_de D_8014D508;
-extern OSViMode_func_802BA910_de D_800D4530[];
+extern Modep D_8014D508;
+extern Modep D_800D4530[];
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void func_802BA6B0_de(void *);
 
 /* Resize the selected VI mode around its original horizontal and field
  * centres, retaining the original lower screen limits. */
 void func_8040BDB8_de(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 borderY) {
-    OSViMode_func_802BA910_de *mode = &D_8014D508;
+    Modep *mode = &D_8014D508;
     s32 centerX, centerY0, centerY1;
     s32 left, right, top0, bottom0, top1, bottom1;
     s32 oldRight, oldBottom0, oldBottom1;

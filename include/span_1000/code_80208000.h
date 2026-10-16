@@ -70,8 +70,8 @@ typedef struct Tutorial Tutorial;
 struct func_80209910_S1;
 typedef struct func_80209910_S1 func_80209910_S1;
 
-struct func_8020986C_S1;
-struct func_8020986C_S1 {
+struct RecCode80208000;
+struct RecCode80208000 {
     char pad0[0x214];
     int unk214;
 };
@@ -87,8 +87,8 @@ struct Brain_func_80209308_de {
     f32 speed[4];
 };
 
-struct func_8020986C_S1;
-typedef struct func_8020986C_S1 func_8020986C_S1;
+struct RecCode80208000;
+typedef struct RecCode80208000 RecCode80208000;
 
 struct func_80209910_S1;
 struct func_80209910_S1 {

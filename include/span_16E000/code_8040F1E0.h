@@ -10,9 +10,9 @@ struct SlotRecAtCV1 {
     char data[0x20];
 };
 
-struct Entry_func_80411518_de;
+struct EntryCode8040B45C80411518;
 struct SlotRecAtCV1;
-struct Entry_func_80411518_de {
+struct EntryCode8040B45C80411518 {
     s32 active;
     char pad4[0x300];
     void *buffers[0x60];
@@ -21,12 +21,12 @@ struct Entry_func_80411518_de {
     ObjRecAtE *def;
     char pad490[0xC];
 };
-struct Entry_func_80411518_de;
+struct EntryCode8040B45C80411518;
 struct Pool_func_80411518_de;
 struct Pool_func_80411518_de {
     s16 count;
     char pad2[6];
-    struct Entry_func_80411518_de *entries;
+    struct EntryCode8040B45C80411518 *entries;
 };
 
 struct Usage;
@@ -143,9 +143,9 @@ struct State_func_804101BC_de {
 
 extern s16 func_80411AA8_de(s32 index);
 
-struct Entry_func_8040F580_de;
+struct EntryCode8040B45C;
 struct SlotRecAtCV2;
-struct Entry_func_8040F580_de {
+struct EntryCode8040B45C {
     s32 active;
     char pad4[0x300];
     void *buffers[0x60];
@@ -155,12 +155,12 @@ struct Entry_func_8040F580_de {
     unsigned char refCount;
     char pad491[0xB];
 };
-struct Entry_func_8040F580_de;
+struct EntryCode8040B45C;
 struct Pool_func_8040F580_de;
 struct Pool_func_8040F580_de {
     s16 count;
     char pad2[6];
-    struct Entry_func_8040F580_de *entries;
+    struct EntryCode8040B45C *entries;
 };
 
 struct Style;

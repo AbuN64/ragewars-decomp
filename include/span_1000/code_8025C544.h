@@ -343,8 +343,8 @@ struct func_8025D1DC_S1 {
     s16 unk1E;
 };
 
-struct func_8025CC0C_S1;
-typedef struct func_8025CC0C_S1 func_8025CC0C_S1;
+struct RecCode8020061080203908;
+typedef struct RecCode8020061080203908 RecCode8020061080203908;
 
 struct func_8025C97C_S2;
 typedef struct func_8025C97C_S2 func_8025C97C_S2;
@@ -352,8 +352,8 @@ typedef struct func_8025C97C_S2 func_8025C97C_S2;
 struct ObjectStateB4;
 typedef struct ObjectStateB4 ObjectStateB4;
 
-struct func_8025CC0C_S1;
-struct func_8025CC0C_S1 {
+struct RecCode8020061080203908;
+struct RecCode8020061080203908 {
     char pad0[0x14];
     IntrusiveList unk14;
 };

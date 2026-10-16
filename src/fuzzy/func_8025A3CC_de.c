@@ -21,9 +21,9 @@ extern f32 D_800C3F4C_de;
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x30, 0x34], gap at: 0x24. */
 void func_8025A3CC_de(View_func_8025AE1C_de *arg0) {
-    Context_func_8025AE1C_de *temp_a0;
-    Context_func_8025AE1C_de *temp_v1_2;
-    Context_func_8025AE1C_de *temp_v1_7;
+    ContextCode8025A3EC *temp_a0;
+    ContextCode8025A3EC *temp_v1_2;
+    ContextCode8025A3EC *temp_v1_7;
     ObjRecAt40V2 *temp_s0;
     ObjRecAt40V2 *temp_s1;
     f32 temp_fa1;

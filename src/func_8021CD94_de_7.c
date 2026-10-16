@@ -592,8 +592,8 @@ void func_80220A80_de(Player_func_80220A80_de *player, Body_func_80220A80_de *bo
     func_8021D774_de(player);
 }
 /* Regenerates a player's health at 0x5E4 toward the cap from func_8022AC00_de: under flag 4 at 0x122C it adds D_800D2988 times gFastRegen's rate and mirrors the result to 0x174 and 0x45C, otherwise, while the flag byte at D_801462E5 is set, the speed at 0x18's 0x24 meets D_800C78B8's threshold, the health is nonzero and the word 0x60F past that flag byte does not hold it back, it adds the speed scaled by D_800C78BC, D_800D2988 and D_800C78C0's rate. */
-extern s32 func_8022AC00_de(SharedPlayer_func_80220D44_de *p);
-void func_80220D44_de(SharedPlayer_func_80220D44_de *p) {
+extern s32 func_8022AC00_de(SharedPlayer *p);
+void func_80220D44_de(SharedPlayer *p) {
     f32 f0;
     f32 f20;
     f32 cur;

@@ -16,7 +16,7 @@ typedef struct func_8041F2A0_Vec3 func_8041F2A0_Vec3;
 /* Selection items are menu widgets; w is the legacy width spelling. */
 typedef MenuWidget func_8041F2A0_Item;
 
-struct func_8041F2A0_Player {
+struct RecCode8041F1FC {
     func_8041F2A0_Item *highlight;
     s32 unk4;
     s32 kind;
@@ -27,12 +27,12 @@ struct func_8041F2A0_Player {
     s32 unk4C0;
     s32 pad4C4;
 };
-typedef struct func_8041F2A0_Player func_8041F2A0_Player;
+typedef struct RecCode8041F1FC RecCode8041F1FC;
 
 struct SelectionScreenState {
     void *screen;
-    struct Slots_func_8041B7FC_de *unk4;
-    func_8041F2A0_Player players[4];
+    struct SlotsCode804196C0 *unk4;
+    RecCode8041F1FC players[4];
     func_8041F2A0_Item *header;
     s32 headerStep;
     func_8041F2A0_Item *footer;

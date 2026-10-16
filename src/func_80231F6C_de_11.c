@@ -60,13 +60,13 @@ void func_80232E64_de(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
     void *temp_v0;
 
     temp_s1 = arg0->value;
-    ((struct MeasuredRecAt124 *)(arg1))->value += (((struct Measured_func_80232E64_de_1121ff480e8c *)(arg1))->value * D_800D2988) * 2.0f;
-    temp_f1 = ((struct Measured_func_80232E64_de_1121ff480e8c *)(arg1))->value;
+    ((struct MeasuredRecAt124 *)(arg1))->value += (((struct MeasuredRecAt128 *)(arg1))->value * D_800D2988) * 2.0f;
+    temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
     temp_v0 = ((struct MeasuredRecAt698V2 *)(temp_s1))->value;
     if (!(temp_f1 < 0.0f
               ? D_800C3028_de < (-temp_f1 * *(&D_800C3020_de + 1))
               : D_800C3030_de[0] < (temp_f1 * D_800C302C_de))) {
-        temp_f2 = ((struct Measured_func_80232E64_de_1121ff480e8c *)(arg1))->value;
+        temp_f2 = ((struct MeasuredRecAt128 *)(arg1))->value;
         if (temp_f2 < 0.0f) {
             ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) (-temp_f2 * D_800C3030_de[1]);
         } else {

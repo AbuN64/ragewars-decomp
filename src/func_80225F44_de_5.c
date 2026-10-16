@@ -294,7 +294,7 @@ void func_802285E8_de(char *arg0) {
             if (owner == 0) {
                 blocked = 0;
             } else {
-                blocked = ((ObjRecAt564 *)(owner))->unk564 != 0;
+                blocked = ((View *)(owner))->unk564 != 0;
             }
             if (blocked == 0) {
                 Block *base;

@@ -75,8 +75,8 @@ struct func_80213500_S7 {
 
 extern float D_800C20F0_de;
 
-struct func_8021321C_S3;
-struct func_8021321C_S3 {
+struct RecCode80212C90;
+struct RecCode80212C90 {
     char pad0[0x38];
     u32 unk38;
     char pad38[0x5D8 - 0x38 - sizeof(u32)];
@@ -221,8 +221,8 @@ struct func_80212D94_S3 {
     void * unk64;
 };
 
-struct func_8021321C_S3;
-typedef struct func_8021321C_S3 func_8021321C_S3;
+struct RecCode80212C90;
+typedef struct RecCode80212C90 RecCode80212C90;
 
 extern void func_80213810_de(void *arg0);
 

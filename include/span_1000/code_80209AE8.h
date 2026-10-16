@@ -26,8 +26,8 @@ extern float D_800C1CFC_de;
 
 extern float D_800C1CF4_de;
 
-struct func_80209E80_S1;
-typedef struct func_80209E80_S1 func_80209E80_S1;
+struct RecCode8020800080209E80;
+typedef struct RecCode8020800080209E80 RecCode8020800080209E80;
 
 struct func_8020A95C_S2;
 struct func_8020A95C_S2 {
@@ -63,8 +63,8 @@ extern float D_800C6E20;
 struct Shared_WeaponSlot;
 typedef struct Shared_WeaponSlot Shared_WeaponSlot;
 
-struct func_80209E80_S1;
-struct func_80209E80_S1 {
+struct RecCode8020800080209E80;
+struct RecCode8020800080209E80 {
     char pad0[0x594];
     s32 unk594;
     char pad594[0x62E - 0x594 - sizeof(s32)];
@@ -102,8 +102,8 @@ struct func_80209B64_S1 {
     void * unk5D8;
 };
 
-struct func_8020A458_S1;
-typedef struct func_8020A458_S1 func_8020A458_S1;
+struct RecCode802080008020A458;
+typedef struct RecCode802080008020A458 RecCode802080008020A458;
 
 extern float D_800C1D00_de;
 
@@ -172,8 +172,8 @@ struct func_8020A458_S2 {
     s32 unk34;
 };
 
-struct func_8020A028_S1;
-struct func_8020A028_S1 {
+struct RecCode802080008020A028;
+struct RecCode802080008020A028 {
     s32 unk0;
     char pad0[0x64 - 0x0 - sizeof(s32)];
     void * unk64;
@@ -197,8 +197,8 @@ struct func_80209B64_S5 {
     s8 unk93;
 };
 
-struct func_8020A884_S1;
-struct func_8020A884_S1 {
+struct RecCode802080008020A884;
+struct RecCode802080008020A884 {
     char pad0[0x23C];
     s32 unk23C;
     char pad23C[0x240 - 0x23C - sizeof(s32)];
@@ -209,8 +209,8 @@ struct func_8020A884_S1 {
 
 extern float D_800C1D2C_de;
 
-struct func_80209DAC_S2;
-struct func_80209DAC_S2 {
+struct RecCode8020800080209DAC;
+struct RecCode8020800080209DAC {
     char pad0[0x93];
     func_80209DAC_S2_U93 unk93;
 };
@@ -344,8 +344,8 @@ extern void func_8020A028_de(struct AiController *arg0, struct AiConfig *arg1);
 
 extern void func_8020A95C_de(void *arg0, void *arg1);
 
-struct func_80209DAC_S2;
-typedef struct func_80209DAC_S2 func_80209DAC_S2;
+struct RecCode8020800080209DAC;
+typedef struct RecCode8020800080209DAC RecCode8020800080209DAC;
 
 extern float D_800C1C90_de;
 
@@ -368,8 +368,8 @@ struct func_80209C5C_S3 {
 struct IntegerState2C;
 typedef struct IntegerState2C IntegerState2C;
 
-struct func_8020A458_S1;
-struct func_8020A458_S1 {
+struct RecCode802080008020A458;
+struct RecCode802080008020A458 {
     char pad0[0x64];
     void * unk64;
     char pad64[0x23C - 0x64 - sizeof(void*)];
@@ -386,13 +386,13 @@ struct func_8020A458_S1 {
 
 extern float D_800C1D04_de;
 
-struct func_8020A884_S1;
-typedef struct func_8020A884_S1 func_8020A884_S1;
+struct RecCode802080008020A884;
+typedef struct RecCode802080008020A884 RecCode802080008020A884;
 
 extern float D_800C1CB4_de;
 
-struct func_8020A028_S1;
-typedef struct func_8020A028_S1 func_8020A028_S1;
+struct RecCode802080008020A028;
+typedef struct RecCode802080008020A028 RecCode802080008020A028;
 
 struct func_80209B64_S5;
 typedef struct func_80209B64_S5 func_80209B64_S5;

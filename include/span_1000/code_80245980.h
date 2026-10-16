@@ -377,8 +377,8 @@ struct func_80245AC8_S1 {
 struct Access_u8_E6;
 typedef struct Access_u8_E6 Access_u8_E6;
 
-struct func_80245990_S1;
-struct func_80245990_S1 {
+struct RecCode80243A80;
+struct RecCode80243A80 {
     char pad0[0x1C];
     f32 unk1C;
     char pad1C[0x38 - 0x1C - sizeof(f32)];
@@ -397,8 +397,8 @@ extern float D_800C8914;
 struct Access_s8_1A5;
 typedef struct Access_s8_1A5 Access_s8_1A5;
 
-struct func_80245990_S1;
-typedef struct func_80245990_S1 func_80245990_S1;
+struct RecCode80243A80;
+typedef struct RecCode80243A80 RecCode80243A80;
 
 extern void func_80245BC0_de();
 

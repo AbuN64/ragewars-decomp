@@ -59,8 +59,8 @@ struct ALADPCMWaveInfo_func_802BE514_de {
     void *loop;
     ALADPCMBook *book;
 };
-struct ALWaveTable_s_func_802BE514_de;
-struct ALWaveTable_s_func_802BE514_de {
+struct ALWaveTableSCode802BE0D0;
+struct ALWaveTableSCode802BE0D0 {
     u8 *base;
     s32 len;
     u8 type;
@@ -70,13 +70,13 @@ struct ALWaveTable_s_func_802BE514_de {
     } waveInfo;
 };
 struct ALLoadFilter_func_802BE514_de;
-struct ALWaveTable_s_func_802BE514_de;
+struct ALWaveTableSCode802BE0D0;
 struct ALLoadFilter_func_802BE514_de {
     ALFilter_s14 filter;
     void *state;
     void *lstate;
     ALRawLoop loop;
-    struct ALWaveTable_s_func_802BE514_de *table;
+    struct ALWaveTableSCode802BE0D0 *table;
     s32 bookSize;
     ALDMAproc dma;
     void *dmaState;

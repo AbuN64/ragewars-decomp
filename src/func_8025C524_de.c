@@ -13,7 +13,7 @@ void func_8025C524_de(SlotRecAtB4V2 *arg0, s32 arg1)
   temp_s0_2 = temp_s0 + 0x84;
   new_var2 = 2;
   new_var = &arg0->index;
-  func_802B2F00_de(temp_s0_2, ((Owner_func_8025B5F0_de *)temp_s0)->samples[*new_var]);
+  func_802B2F00_de(temp_s0_2, ((OwnerCode8025A3EC8025B5F0 *)temp_s0)->samples[*new_var]);
   alSndpSetPan(temp_s0_2, arg1 & 0xFF);
 }
 
@@ -24,7 +24,7 @@ void func_8025C578_de(SlotRecAtB4V2 *arg0)
   void *temp_s0;
   temp_v1 = (s32)arg0->owner;
   temp_s0 = temp_v1 + 0x84;
-  func_802B2F00_de(temp_s0, ((Owner_func_8025B5F0_de *)temp_v1)->samples[arg0->index]);
+  func_802B2F00_de(temp_s0, ((OwnerCode8025A3EC8025B5F0 *)temp_v1)->samples[arg0->index]);
   func_802B2620_de(temp_s0);
 }
 
@@ -44,10 +44,10 @@ void func_8025C5DC_de(SlotRecAtB4V2 *arg0) {
     arg0->active = 1;
     arg0->flag = 0;
     s1 = (void *)(a0 + 0x84);
-    if (arg0->key != ((Owner_func_8025B5F0_de *)a0)->key) {
+    if (arg0->key != ((OwnerCode8025A3EC8025B5F0 *)a0)->key) {
         s32 idx = arg0->index;
         s32 addr = a0 + idx * 2;
-        func_802B2F00_de(s1, ((Owner_func_8025B5F0_de *)a0)->samples[idx]);
+        func_802B2F00_de(s1, ((OwnerCode8025A3EC8025B5F0 *)a0)->samples[idx]);
         if (func_802B2620_de(s1) != 0) {
             alSndpStop(s1);
         }
@@ -62,8 +62,8 @@ void func_8025C65C_de(SlotRecAtB4V2 *arg0) {
     Slots *arrayBase;
     short *slot;
     base = arg0->owner;
-    arrayBase = &((Context_func_8025AE1C_de *)base)->slots;
-    func_802B25D0_de(((Owner_func_8025B5F0_de *)base)->sound, arrayBase->ids[arg0->index]);
+    arrayBase = &((ContextCode8025A3EC *)base)->slots;
+    func_802B25D0_de(((OwnerCode8025A3EC8025B5F0 *)base)->sound, arrayBase->ids[arg0->index]);
     arrayBase->ids[arg0->index] = -1;
     arg0->priority = 0;
     arg0->fieldC = -1;

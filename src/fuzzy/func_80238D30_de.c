@@ -23,7 +23,7 @@ extern void func_80238670_de(void *, f32, f32, f32, s32, s32);
 
 typedef struct func_80238D20_S1 func_80238D20_S1;
 typedef struct func_80238D20_S2 func_80238D20_S2;
-typedef struct func_80238D20_S3 func_80238D20_S3;
+typedef struct RecCode80200610 RecCode80200610;
 struct func_80238D20_S1 {
     char pad0[0x8];
     s32 unk8;
@@ -42,7 +42,7 @@ struct func_80238D20_S2 {
     char pad198[0x1F4 - 0x198 - sizeof(f32)];
     struct func_80238D20_S2 *unk1F4;
 };
-struct func_80238D20_S3 {
+struct RecCode80200610 {
     char pad0[0x4];
     s32 unk4;
 };

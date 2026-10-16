@@ -43,13 +43,13 @@ extern char D_0044FA6C[];
 
 extern s32 func_8026437C_de(s32);
 extern s8 func_80442488_de(Menu_func_8043F37C_eu *, s32, s32, s32, s32, s32);
-extern void func_8044A0C4_de(SharedPlayer_func_8043F37C_eu *, s32);
+extern void func_8044A0C4_de(SharedPlayer *, s32);
 extern void func_8044214C_de(void *, s32, s32);
 extern void func_8025DF34_de(s32);
 extern void func_804427C4_de(void *, Menu_func_8043F37C_eu *, char *);
 
 s32 func_8043F37C_eu(void *arg0, Menu_func_8043F37C_eu *menu, void *arg2) {
-    SharedPlayer_func_8043F37C_eu *player = menu->player;
+    SharedPlayer *player = menu->player;
     ObjRecAt80 *settings = player->views5D8.view5D8_7.settings;
 
     if (func_8026437C_de(menu->input) != 0) {

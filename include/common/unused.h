@@ -1351,8 +1351,8 @@ extern u8 D_8014D3E2;
 
 extern f32 D_800C3B48_de[];
 
-struct func_8022BECC_S2;
-extern struct func_8022BECC_S2 *D_80153D54;
+struct ShapeCode802B54A0;
+extern struct ShapeCode802B54A0 *D_80153D54;
 
 extern FieldRow D_800E58A8[];
 
@@ -1709,7 +1709,7 @@ extern float D_800CD97C;
 
 extern char D_800D38D0[];
 
-extern OSIoMesg_func_802BA350_de D_80149AE0;
+extern OSIoMesgCode802BA23C D_80149AE0;
 
 extern char D_800D38EC[];
 
@@ -2274,8 +2274,8 @@ extern u16 D_80107E9A;
 
 extern FileHeader D_8014D724;
 
-struct func_8022BECC_S2;
-extern struct func_8022BECC_S2 *D_80153D58;
+struct ShapeCode802B54A0;
+extern struct ShapeCode802B54A0 *D_80153D58;
 
 extern s32 D_80109E0C;
 
@@ -2474,7 +2474,7 @@ extern Link_func_8023CC08_de *D_800FFE24;
 
 extern char D_800D782C[];
 
-extern OSIoMesg_func_802BA350_de D_80149AC0;
+extern OSIoMesgCode802BA23C D_80149AC0;
 
 extern ItemRecAt1C D_8010C590[];
 
@@ -2725,8 +2725,8 @@ typedef struct ALSound_s_func_802B2780_de ALSound_s_func_802B2780_de;
 struct ALWaveTable_s;
 typedef struct ALWaveTable_s ALWaveTable_s;
 
-struct ALWaveTable_s_func_802BE514_de;
-typedef struct ALWaveTable_s_func_802BE514_de ALWaveTable_s_func_802BE514_de;
+struct ALWaveTableSCode802BE0D0;
+typedef struct ALWaveTableSCode802BE0D0 ALWaveTableSCode802BE0D0;
 
 struct Access_Callback_4;
 typedef struct Access_Callback_4 Access_Callback_4;
@@ -2794,8 +2794,8 @@ typedef struct Attachment Attachment;
 struct AttackReleaseState;
 typedef struct AttackReleaseState AttackReleaseState;
 
-struct Bank_func_8044D794_de;
-typedef struct Bank_func_8044D794_de Bank_func_8044D794_de;
+struct BankCode8044E2B8;
+typedef struct BankCode8044E2B8 BankCode8044E2B8;
 
 struct Binding;
 typedef struct Binding Binding;
@@ -2863,8 +2863,8 @@ typedef struct Camera_func_80401980_de Camera_func_80401980_de;
 struct ChannelRecord;
 typedef struct ChannelRecord ChannelRecord;
 
-struct Channel_func_80430118_de;
-typedef struct Channel_func_80430118_de Channel_func_80430118_de;
+struct ChannelCode8042E080;
+typedef struct ChannelCode8042E080 ChannelCode8042E080;
 
 struct CharacterNextState;
 typedef struct CharacterNextState CharacterNextState;
@@ -2887,8 +2887,8 @@ typedef struct ContextRecAt2BC0 ContextRecAt2BC0;
 struct ContextRecAt104;
 typedef struct ContextRecAt104 ContextRecAt104;
 
-struct Controller_func_80259C5C_de;
-typedef struct Controller_func_80259C5C_de Controller_func_80259C5C_de;
+struct ControllerCode802591C0;
+typedef struct ControllerCode802591C0 ControllerCode802591C0;
 
 struct Ctx_func_8028F544_de;
 typedef struct Ctx_func_8028F544_de Ctx_func_8028F544_de;
@@ -2944,17 +2944,17 @@ typedef struct ParticleEffect ParticleEffect;
 struct Ent;
 typedef struct Ent Ent;
 
-struct Entity_func_80290424_de;
-typedef struct Entity_func_80290424_de Entity_func_80290424_de;
+struct EntityCode8028FC98;
+typedef struct EntityCode8028FC98 EntityCode8028FC98;
 
-struct Entity_func_8041C7F4_de;
-typedef struct Entity_func_8041C7F4_de Entity_func_8041C7F4_de;
+struct EntityCode8041BEA8;
+typedef struct EntityCode8041BEA8 EntityCode8041BEA8;
 
-struct Entry_func_80250E70_de;
-typedef struct Entry_func_80250E70_de Entry_func_80250E70_de;
+struct EntryCode802508E0;
+typedef struct EntryCode802508E0 EntryCode802508E0;
 
-struct Entry_func_80297DBC_de;
-typedef struct Entry_func_80297DBC_de Entry_func_80297DBC_de;
+struct EntryCode80296014;
+typedef struct EntryCode80296014 EntryCode80296014;
 
 struct Entry_func_80297EA4_de;
 typedef struct Entry_func_80297EA4_de Entry_func_80297EA4_de;
@@ -2965,11 +2965,11 @@ typedef struct Entry_func_80298170_de Entry_func_80298170_de;
 struct Entry_func_802991D4_de;
 typedef struct Entry_func_802991D4_de Entry_func_802991D4_de;
 
-struct Entry_func_8040F580_de;
-typedef struct Entry_func_8040F580_de Entry_func_8040F580_de;
+struct EntryCode8040B45C;
+typedef struct EntryCode8040B45C EntryCode8040B45C;
 
-struct Entry_func_80411518_de;
-typedef struct Entry_func_80411518_de Entry_func_80411518_de;
+struct EntryCode8040B45C80411518;
+typedef struct EntryCode8040B45C80411518 EntryCode8040B45C80411518;
 
 struct Entry_func_8044D794_de;
 typedef struct Entry_func_8044D794_de Entry_func_8044D794_de;
@@ -3034,8 +3034,8 @@ typedef struct FloatState4C FloatState4C;
 struct Font_func_80257360_de;
 typedef struct Font_func_80257360_de Font_func_80257360_de;
 
-struct Frame_func_8044D794_de;
-typedef struct Frame_func_8044D794_de Frame_func_8044D794_de;
+struct FrameCode8044E2B8;
+typedef struct FrameCode8044E2B8 FrameCode8044E2B8;
 
 struct Game1308;
 typedef struct Game1308 Game1308;
@@ -3055,21 +3055,21 @@ typedef struct Globals Globals;
 struct Globals_func_804220A8_de;
 typedef struct Globals_func_804220A8_de Globals_func_804220A8_de;
 
-struct Group_func_8044D794_de;
-typedef struct Group_func_8044D794_de Group_func_8044D794_de;
+struct GroupCode8044E2B8;
+typedef struct GroupCode8044E2B8 GroupCode8044E2B8;
 
 
 struct HudCue;
 typedef struct HudCue HudCue;
 
-struct Info_func_80426174_de;
-typedef struct Info_func_80426174_de Info_func_80426174_de;
+struct InfoCode80423280;
+typedef struct InfoCode80423280 InfoCode80423280;
 
 struct Init;
 typedef struct Init Init;
 
-struct InitParams_func_802B03C4_de;
-typedef struct InitParams_func_802B03C4_de InitParams_func_802B03C4_de;
+struct InitParamsData802B5494;
+typedef struct InitParamsData802B5494 InitParamsData802B5494;
 
 struct IntegerState12F8;
 typedef struct IntegerState12F8 IntegerState12F8;
@@ -3131,8 +3131,8 @@ typedef struct LevelSpawnLevelSpawn LevelSpawnLevelSpawn;
 struct LevelSpawnLevelWorld;
 typedef struct LevelSpawnLevelWorld LevelSpawnLevelWorld;
 
-struct Level_func_8044B7C0_de;
-typedef struct Level_func_8044B7C0_de Level_func_8044B7C0_de;
+struct LevelCode8044ACCC;
+typedef struct LevelCode8044ACCC LevelCode8044ACCC;
 
 struct Link_func_80283A80_de;
 typedef struct Link_func_80283A80_de Link_func_80283A80_de;
@@ -3206,8 +3206,8 @@ typedef struct MenuState MenuState;
 struct Menu_func_802185D0_de;
 typedef struct Menu_func_802185D0_de Menu_func_802185D0_de;
 
-struct Menu_func_8041D4E0_de;
-typedef struct Menu_func_8041D4E0_de Menu_func_8041D4E0_de;
+struct MenuCode8041BEA8;
+typedef struct MenuCode8041BEA8 MenuCode8041BEA8;
 
 struct MenuRecAt14;
 typedef struct MenuRecAt14 MenuRecAt14;
@@ -3280,8 +3280,8 @@ struct OSPiHandle_s;
 struct OSTimer_s;
 typedef struct OSTimer_s OSTimer_s;
 
-struct Obj_func_8027ABF4_de;
-typedef struct Obj_func_8027ABF4_de Obj_func_8027ABF4_de;
+struct ObjCode8027A0F4;
+typedef struct ObjCode8027A0F4 ObjCode8027A0F4;
 
 struct ObjRecAt174;
 typedef struct ObjRecAt174 ObjRecAt174;
@@ -3388,8 +3388,8 @@ typedef struct ObjectState58 ObjectState58;
 struct ObjectState95;
 typedef struct ObjectState95 ObjectState95;
 
-struct Object_func_80401980_de;
-typedef struct Object_func_80401980_de Object_func_80401980_de;
+struct ObjectCode80400000;
+typedef struct ObjectCode80400000 ObjectCode80400000;
 
 struct ParticleView;
 typedef struct ParticleView ParticleView;
@@ -3409,11 +3409,11 @@ typedef struct OptionsScreen OptionsScreen;
 struct OptionsScrollScreen;
 typedef struct OptionsScrollScreen OptionsScrollScreen;
 
-struct Owner_func_8025A844_de;
-typedef struct Owner_func_8025A844_de Owner_func_8025A844_de;
+struct OwnerCode8025A3EC;
+typedef struct OwnerCode8025A3EC OwnerCode8025A3EC;
 
-struct Owner_func_8044D794_de;
-typedef struct Owner_func_8044D794_de Owner_func_8044D794_de;
+struct OwnerCode8044E2B8;
+typedef struct OwnerCode8044E2B8 OwnerCode8044E2B8;
 
 struct PakNotesMenu;
 typedef struct PakNotesMenu PakNotesMenu;
@@ -3520,11 +3520,11 @@ typedef struct PlayerStatusPlayer PlayerStatusPlayer;
 struct Player_func_80212D78_eu_x;
 typedef struct Player_func_80212D78_eu_x Player_func_80212D78_eu_x;
 
-struct Player_func_80226950_de;
-typedef struct Player_func_80226950_de Player_func_80226950_de;
+struct Players;
+typedef struct Players Players;
 
-struct Player_func_80229814_de;
-typedef struct Player_func_80229814_de Player_func_80229814_de;
+struct PlayerCode80225D1080229814;
+typedef struct PlayerCode80225D1080229814 PlayerCode80225D1080229814;
 
 struct PoolRecAt44;
 typedef struct PoolRecAt44 PoolRecAt44;
@@ -3541,8 +3541,8 @@ typedef struct RecordD90 RecordD90;
 struct ResourceRequest;
 typedef struct ResourceRequest ResourceRequest;
 
-struct Resource_func_80294C8C_de;
-typedef struct Resource_func_80294C8C_de Resource_func_80294C8C_de;
+struct ResourceData80295B84;
+typedef struct ResourceData80295B84 ResourceData80295B84;
 
 struct Resource_func_80410E1C_de;
 typedef struct Resource_func_80410E1C_de Resource_func_80410E1C_de;
@@ -3568,11 +3568,11 @@ typedef struct ResultsHeadingStage ResultsHeadingStage;
 struct Root802131E0;
 typedef struct Root802131E0 Root802131E0;
 
-struct Root_func_8027FF58_de;
-typedef struct Root_func_8027FF58_de Root_func_8027FF58_de;
+struct RootCode8027A0F4;
+typedef struct RootCode8027A0F4 RootCode8027A0F4;
 
-struct Root_func_8041C7F4_de;
-typedef struct Root_func_8041C7F4_de Root_func_8041C7F4_de;
+struct RootCode8041BEA8;
+typedef struct RootCode8041BEA8 RootCode8041BEA8;
 
 struct RosterEntry;
 typedef struct RosterEntry RosterEntry;
@@ -3625,8 +3625,8 @@ typedef struct Settings20 Settings20;
 struct Settings580;
 typedef struct Settings580 Settings580;
 
-struct Settings_func_804279B8_de;
-typedef struct Settings_func_804279B8_de Settings_func_804279B8_de;
+struct SettingsCode80423280;
+typedef struct SettingsCode80423280 SettingsCode80423280;
 
 struct SharedPlayer16E4;
 typedef struct SharedPlayer16E4 SharedPlayer16E4;
@@ -3634,14 +3634,8 @@ typedef struct SharedPlayer16E4 SharedPlayer16E4;
 struct SharedPlayer16E4_2;
 typedef struct SharedPlayer16E4_2 SharedPlayer16E4_2;
 
-struct SharedPlayer_func_80210248_eu;
-typedef struct SharedPlayer_func_80210248_eu SharedPlayer_func_80210248_eu;
-
 struct SharedPlayer_func_8021D408_de;
 typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
-
-struct SharedPlayer_func_8021E2A0_de;
-typedef struct SharedPlayer_func_8021E2A0_de SharedPlayer_func_8021E2A0_de;
 
 struct Shared_AnimState;
 typedef struct Shared_AnimState Shared_AnimState;
@@ -3813,9 +3807,6 @@ typedef struct Value Value;
 
 struct Variable;
 typedef struct Variable Variable;
-
-struct View_func_80225940_de;
-typedef struct View_func_80225940_de View_func_80225940_de;
 
 struct ViewRecAt54D;
 typedef struct ViewRecAt54D ViewRecAt54D;
@@ -4472,9 +4463,9 @@ struct AttackReleaseState {
     s16 unk_16;
     s16 unk_18;
 };
-struct Bank_func_8044D794_de;
+struct BankCode8044E2B8;
 struct EntryRecAt0V3;
-struct Bank_func_8044D794_de {
+struct BankCode8044E2B8 {
     s32 unk0;
     s32 count;
     struct EntryRecAt0V3 items[1];
@@ -4647,8 +4638,8 @@ struct ChannelRecord;
 struct ChannelRecord {
     char bytes[0xB68];
 };
-struct Channel_func_80430118_de;
-struct Channel_func_80430118_de {
+struct ChannelCode8042E080;
+struct ChannelCode8042E080 {
     char pad[0x58];
     s32 state;
     s32 mode;
@@ -4805,8 +4796,8 @@ struct ContextRecAt104 {
     char padFC[0x104 - 0xFC];
     s32 frame;
 };
-struct Controller_func_80259C5C_de;
-struct Controller_func_80259C5C_de {
+struct ControllerCode802591C0;
+struct ControllerCode802591C0 {
     s16 group; /* 0x00: sound description group */
     s16 sample; /* 0x02 */
     s8 priority; /* 0x04 */
@@ -5147,8 +5138,8 @@ struct Ent {
     f32 unkEC;
     f32 unkF0;
 };
-struct Entity_func_80290424_de;
-struct Entity_func_80290424_de {
+struct EntityCode8028FC98;
+struct EntityCode8028FC98 {
     char p0[8];
     f32 unk8;
     f32 unkC;
@@ -5168,8 +5159,8 @@ struct Entity_func_80290424_de {
     char p194[0x38];
     f32 unk1CC;
 };
-struct Entity_func_8041C7F4_de;
-struct Entity_func_8041C7F4_de {
+struct EntityCode8041BEA8;
+struct EntityCode8041BEA8 {
     char p0[8];
     Vec3 pos;
     char p14[0x58];
@@ -5182,8 +5173,8 @@ struct Entity_func_8041C7F4_de {
     char p170[0x54];
     Vec3 saved;
 };
-struct Entry_func_80250E70_de;
-struct Entry_func_80250E70_de {
+struct EntryCode802508E0;
+struct EntryCode802508E0 {
     char pad[12];
     s32 value;
     char tail[24];
@@ -5310,8 +5301,8 @@ struct SlotRecAt0V2 {
     s32 item;
     char pad4[0x34];
 };
-struct Frame_func_8044D794_de;
-struct Frame_func_8044D794_de {
+struct FrameCode8044E2B8;
+struct FrameCode8044E2B8 {
     s32 unk0;
     s32 count;
     char pad8[0xC];
@@ -5452,8 +5443,8 @@ struct Piece {
     s32 unk34;
     s32 unk38;
 };
-struct Group_func_8044D794_de;
-struct Group_func_8044D794_de {
+struct GroupCode8044E2B8;
+struct GroupCode8044E2B8 {
     s32 unk0;
     s32 count;
     Piece pieces[1];
@@ -5469,10 +5460,10 @@ struct Owner_func_8043E2D8_de {
     char pad[0x5D8];
     struct Record_func_8043E2D8_de *record;
 };
-struct Holder_func_8043E2D8_de;
+struct HolderCode8043DF84;
 struct Owner_func_8043E2D8_de;
 struct PakMenuSlot;
-struct Holder_func_8043E2D8_de {
+struct HolderCode8043DF84 {
     char pad[0x1C];
     struct Owner_func_8043E2D8_de *owner;
     struct PakMenuSlot *mode;
@@ -5500,8 +5491,8 @@ struct Init {
     u16 model;
     s8 angle;
 };
-struct InitParams_func_802B03C4_de;
-struct InitParams_func_802B03C4_de {
+struct InitParamsData802B5494;
+struct InitParamsData802B5494 {
     s32 count38;
     s32 count1C;
     u8 kind;
@@ -5654,8 +5645,8 @@ struct LevelSpawnLevelWorld {
     s32 f1B618;
     s32 f1B61C;
 };
-struct Level_func_8044B7C0_de;
-struct Level_func_8044B7C0_de {
+struct LevelCode8044ACCC;
+struct LevelCode8044ACCC {
     s32 unk0;
     s32 unk4;
     s32 unk8;
@@ -5803,7 +5794,7 @@ struct Manager52C {
     SharedCallback16 callback;
     s32 index;
     s32 lowIndex;
-    Entry_func_80298ECC_de *entries;
+    Entries *entries;
     char pad10[0x510];
     s32 dispatching;
     s32 pad524;
@@ -5950,9 +5941,9 @@ struct Node_func_8041D4E0_de {
     u8 pad0[0xC];
     s16 unkC;
 };
-struct Menu_func_8041D4E0_de;
+struct MenuCode8041BEA8;
 struct Node_func_8041D4E0_de;
-struct Menu_func_8041D4E0_de {
+struct MenuCode8041BEA8 {
     u8 pad0[0xEC];
     struct Node_func_8041D4E0_de *unkEC;
     u8 pad_F0[0x10C - 0xF0];
@@ -6043,7 +6034,7 @@ struct NavigationNode {
 };
 struct NavigationState;
 struct NavigationState {
-    SharedPlayer_func_80209CD8_de * unk_0;
+    SharedPlayer * unk_0;
     s32 unk_4;
     s32 unk_8;
     s32 unk_C;
@@ -6146,8 +6137,8 @@ struct OSTimer_s {
     Opaque_OSMesgQueue *mq;
     void * msg;
 };
-struct Obj_func_8027ABF4_de;
-struct Obj_func_8027ABF4_de {
+struct ObjCode8027A0F4;
+struct ObjCode8027A0F4 {
     char pad[28];
     Vec3 velocity;
     char gap[0x118 - 40];
@@ -6460,8 +6451,8 @@ struct ObjectState95 {
     unsigned char padding_90[4];
     u8 unk_94;
 };
-struct Object_func_80401980_de;
-struct Object_func_80401980_de {
+struct ObjectCode80400000;
+struct ObjectCode80400000 {
     s32 header[2];
     Vec3 position;
     char pad14[0x58];
@@ -6521,8 +6512,8 @@ struct OptionsScrollScreen {
     s32 done;
     s32 full;
 };
-struct Owner_func_8025A844_de;
-struct Owner_func_8025A844_de {
+struct OwnerCode8025A3EC;
+struct OwnerCode8025A3EC {
     char pad0[0x84];
     char sound[0x58];
     s16 samples[20];
@@ -6530,8 +6521,8 @@ struct Owner_func_8025A844_de {
     void *listener;
 };
 struct Entry_func_8044D794_de;
-struct Owner_func_8044D794_de;
-struct Owner_func_8044D794_de {
+struct OwnerCode8044E2B8;
+struct OwnerCode8044E2B8 {
     char pad0[0x6C];
     void *unk6C;
     char pad70[0xC];
@@ -6609,7 +6600,7 @@ struct PakStatusPakSaveMenu {
     char pad0[0x14];
     char *text;
     char pad18[4];
-    SharedPlayer_func_80209CD8_de *player;
+    SharedPlayer *player;
     PakMenuSlot *slot;
 };
 struct ParamsRecAt18;
@@ -6688,17 +6679,17 @@ struct Player1680 {
     char pad5E0[0x1640 - 0x5E0];
     Mtx views[1];
 };
-struct Player_func_80226950_de;
-struct Player_func_80226950_de {
+struct Players;
+struct Players {
     char pad0[0x1454];
     char *state;
     char pad1458[0x16E8 - 0x1458];
 };
 struct PlayerList;
-struct Player_func_80226950_de;
+struct Players;
 struct PlayerList {
     void **handle;
-    struct Player_func_80226950_de *players;
+    struct Players *players;
     int count;
 };
 struct PlayerRankInner;
@@ -6818,9 +6809,9 @@ struct ViewRecAt54D {
     char pad548[0x54D - 0x548];
     u8 level;
 };
-struct Player_func_80229814_de;
+struct PlayerCode80225D1080229814;
 struct ViewRecAt54D;
-struct Player_func_80229814_de {
+struct PlayerCode80225D1080229814 {
     char pad0[0x100];
     s32 flags;
     char pad104[0x2E8 - 0x104];
@@ -6876,7 +6867,7 @@ struct ReadCommand {
     u8 pad01[3];
     u32 unused;
 };
-struct Owner_func_8025B5F0_de;
+struct OwnerCode8025A3EC8025B5F0;
 struct SlotCC;
 struct SlotCC {
     s32 index;
@@ -6892,7 +6883,7 @@ struct SlotCC {
     s32 mode;
     s32 value;
     s32 active;
-    struct Owner_func_8025B5F0_de *owner;
+    struct OwnerCode8025A3EC8025B5F0 *owner;
     char pad3[0x18];
 };
 struct HeaderRecAt102;
@@ -6909,8 +6900,8 @@ struct ResourceRequest {
     u8 reserved1C[4];
     void *replyQueue;
 };
-struct Resource_func_80294C8C_de;
-struct Resource_func_80294C8C_de {
+struct ResourceData80295B84;
+struct ResourceData80295B84 {
     s32 **handle;
     s32 unk4;
     u32 flags;
@@ -6961,15 +6952,15 @@ struct Root802131E0 {
     u8 pad0[0x1D8];
     struct Mid802131E0 *unk1D8;
 };
-struct Root_func_8027FF58_de;
-struct Root_func_8027FF58_de {
+struct RootCode8027A0F4;
+struct RootCode8027A0F4 {
     char pad[0xFC28];
     HeadRecord heads[3];
 };
-struct Root_func_8041C7F4_de;
-struct Root_func_8041C7F4_de {
+struct RootCode8041BEA8;
+struct RootCode8041BEA8 {
     char p0[0x190];
-    Entity_func_8041C7F4_de obj;
+    EntityCode8041BEA8 obj;
     char p360[0x118];
     int active;
     char p47c[0x10];
@@ -7051,8 +7042,8 @@ struct SessionScreenSettings {
     s8 unk_24;
     s8 unk_25;
 };
-struct Settings_func_804279B8_de;
-struct Settings_func_804279B8_de {
+struct SettingsCode80423280;
+struct SettingsCode80423280 {
     char pad[13];
     u8 mode;
     char padE[0xC2];
@@ -7234,8 +7225,8 @@ struct Shape_func_802079B0_de_6 {
 /* Shape_func_80209C5C_de: partial shape; common base field:field:param:func_80210248_eu:r4:0:1496; size unknown; common-base owner ABI is incomplete or conflicting */
 /* Shape_func_80209C5C_de_2: partial shape; common base field:param:func_80210248_eu:r4:0; size unknown; common-base owner ABI is incomplete or conflicting */
 /* Shape_func_80209C5C_de_3: partial shape; common base param:func_80210248_eu:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8020AF9C_de;
-struct Shape_func_8020AF9C_de {
+struct ShapeCode80208000;
+struct ShapeCode80208000 {
     void * field_0;
     int field_4;
     void * field_8;
@@ -7347,8 +7338,8 @@ struct Shape_func_80212948_de_3 {
     int field_346C;
     unsigned char unknown_3470[4];
 };
-struct Shape_func_80217630_de;
-struct Shape_func_80217630_de {
+struct ShapeCode80217388;
+struct ShapeCode80217388 {
     unsigned char unknown_0[4];
     unsigned char unknown_4[4];
     unsigned char unknown_8[4];
@@ -7387,8 +7378,8 @@ struct Shape_func_8021A2D4_de_11 {
     int field_4;
 };
 /* Shape_func_8021A2D4_de_3: partial shape; common base field:param:func_8021A2D4_de:r4:472; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8021A2D4_de_4;
-struct Shape_func_8021A2D4_de_4 {
+struct ShapeCode80200610;
+struct ShapeCode80200610 {
     int field_0;
     unsigned char padding_4[16];
     unsigned char unknown_14[4];
@@ -7433,8 +7424,8 @@ struct Shape_func_8021D774_de {
     unsigned char padding_1C[228];
     int field_100;
 };
-struct Shape_func_80220ED4_de;
-struct Shape_func_80220ED4_de {
+struct ShapeCode8021CD7080220ED4;
+struct ShapeCode8021CD7080220ED4 {
     unsigned char field_0;
     unsigned char padding_1[19];
     int field_14;
@@ -7478,8 +7469,8 @@ struct Shape_func_80224408_de_2 {
     unsigned char unknown_18[4];
     unsigned char unknown_1C[4];
 };
-struct Shape_func_80226A34_de;
-struct Shape_func_80226A34_de {
+struct ShapeCode80225D10;
+struct ShapeCode80225D10 {
     int field_0;
     int field_4;
     unsigned char padding_8[24];
@@ -7603,16 +7594,16 @@ struct Shape_func_8022E260_de_4 {
     unsigned char padding_0[28];
     int field_1C;
 };
-struct Shape_func_8022E260_de_6;
-struct Shape_func_8022E260_de_6 {
+struct ShapeCode8021CD70;
+struct ShapeCode8021CD70 {
     unsigned char field_0;
     unsigned char padding_1[23];
     void * field_18;
     unsigned char padding_1C[228];
     int field_100;
 };
-struct Shape_func_8022E260_de_8;
-struct Shape_func_8022E260_de_8 {
+struct ShapeCode80206258;
+struct ShapeCode80206258 {
     unsigned char padding_0[8];
     int field_8;
     int field_C;
@@ -7625,8 +7616,8 @@ struct Shape_func_8022E260_de_8 {
     unsigned char padding_584[12];
     unsigned char unknown_590[4];
 };
-struct Shape_func_8022E290_de;
-struct Shape_func_8022E290_de {
+struct ShapeCode8022C8948022E290;
+struct ShapeCode8022C8948022E290 {
     unsigned char padding_0[8];
     int field_8;
     int field_C;
@@ -7708,14 +7699,14 @@ struct Shape_func_8023334C_de_2 {
     int field_14;
     int field_18;
 };
-struct Shape_func_80235AE0_de;
-struct Shape_func_80235AE0_de {
+struct ShapeCode8022C8948022E260;
+struct ShapeCode8022C8948022E260 {
     unsigned char padding_0[272];
     int field_110;
     int field_114;
 };
-struct Shape_func_80236F1C_de;
-struct Shape_func_80236F1C_de {
+struct ShapeCode80233920;
+struct ShapeCode80233920 {
     int field_0;
     int field_4;
     int field_8;
@@ -7760,13 +7751,13 @@ struct Shape_func_8023BD34_de;
 struct Shape_func_8023BD34_de {
     unsigned char unknown_0[4];
 };
-struct Shape_func_8023C1F0_de;
-struct Shape_func_8023C1F0_de {
+struct ShapeData80210228;
+struct ShapeData80210228 {
     unsigned char padding_0[4];
     unsigned char unknown_4[4];
 };
-struct Shape_func_8023C1F0_de_2;
-struct Shape_func_8023C1F0_de_2 {
+struct ShapeCode8023A284;
+struct ShapeCode8023A284 {
     unsigned char unknown_0[4];
 };
 struct Shape_func_8023C1F0_de_3;
@@ -7777,8 +7768,8 @@ struct Shape_func_8023C1F0_de_3 {
     unsigned char padding_A[2];
     int field_C;
 };
-struct Shape_func_80244D70_de;
-struct Shape_func_80244D70_de {
+struct ShapeCode8022C8948022CB5C;
+struct ShapeCode8022C8948022CB5C {
     int field_0;
     int field_4;
     unsigned char unknown_8[4];
@@ -7866,8 +7857,8 @@ struct Shape_func_8024BD08_de_2 {
     unsigned char unknown_10[1];
 };
 /* Shape_func_8024D264_de: partial shape; common base param:func_80299E74_de:r16; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_80254E30_de;
-struct Shape_func_80254E30_de {
+struct ShapeCode80254CE4;
+struct ShapeCode80254CE4 {
     unsigned char padding_0[16];
     unsigned char unknown_10[4];
 };
@@ -7879,8 +7870,8 @@ struct Shape_func_80255630_de {
     int field_C;
     unsigned char unknown_10[4];
 };
-struct Shape_func_80257360_de;
-struct Shape_func_80257360_de {
+struct ShapeCode80256220;
+struct ShapeCode80256220 {
     unsigned char padding_0[36];
     unsigned char unknown_24[4];
     unsigned char unknown_28[4];
@@ -7934,15 +7925,15 @@ struct Shape_func_80257360_de {
     unsigned char unknown_2BB8[4];
     float field_2BBC;
 };
-struct Shape_func_802627A0_de;
-struct Shape_func_802627A0_de {
+struct ShapeCode802624A0;
+struct ShapeCode802624A0 {
     unsigned char padding_0[24320];
     int field_5F00;
     unsigned char padding_5F04[32];
     int field_5F24;
 };
-struct Shape_func_802627A0_de_2;
-struct Shape_func_802627A0_de_2 {
+struct ShapeCode802624A0802627A0;
+struct ShapeCode802624A0802627A0 {
     unsigned char padding_0[752];
     unsigned char unknown_2F0[4];
 };
@@ -7980,8 +7971,8 @@ struct Shape_func_8027ABF4_de_4 {
     unsigned char padding_14[88];
     float field_6C;
 };
-struct Shape_func_8027ABF4_de_6;
-struct Shape_func_8027ABF4_de_6 {
+struct ShapeCode80243A80;
+struct ShapeCode80243A80 {
     unsigned char padding_0[108];
     float field_6C;
     float field_70;
@@ -7999,8 +7990,8 @@ struct Shape_func_8027CC20_de;
 struct Shape_func_8027CC20_de {
     int field_0;
 };
-struct Shape_func_802800C0_de;
-struct Shape_func_802800C0_de {
+struct ShapeCode8027A0F4;
+struct ShapeCode8027A0F4 {
     unsigned char padding_0[64512];
     int field_FC00;
     unsigned char padding_FC04[16];
@@ -8013,8 +8004,8 @@ struct Shape_func_802800C0_de {
     int field_FC64;
     int field_FC68;
 };
-struct Shape_func_80285F58_de;
-struct Shape_func_80285F58_de {
+struct ShapeCode8028469C;
+struct ShapeCode8028469C {
     int field_0;
     unsigned char unknown_4[4];
     unsigned char unknown_8[4];
@@ -8122,8 +8113,8 @@ struct Shape_func_8028B21C_de {
     unsigned char padding_0[4];
     int field_4;
 };
-struct Shape_func_8028F754_de;
-struct Shape_func_8028F754_de {
+struct ShapeCode8028DF6C;
+struct ShapeCode8028DF6C {
     unsigned char unknown_0[2];
     unsigned char padding_2[30];
     unsigned char unknown_20[2];
@@ -15799,7 +15790,6 @@ struct Mount;
 struct Profile;
 struct Record;
 struct Rider;
-struct SharedPlayer_func_80210248_eu;
 struct Shared_Body;
 struct Shared_Hud;
 struct Shared_Model;
@@ -15809,1427 +15799,6 @@ struct Shared_Voice;
 struct StateInfo;
 struct View;
 struct func_80207B5C_S2;
-struct SharedPlayer_func_80210248_eu {
-    union {
-        struct {
-            u8 unk0[24];
-        } view0_0;
-        struct {
-            u8 pad0[24];
-        } view0_1;
-        struct {
-            char pad[0x3];
-            u8 team;
-        } view3_2;
-        struct {
-            char pad[0x8];
-            Vec3 unk8;
-        } view8_2;
-        struct {
-            char pad[0x8];
-            Vec3 pos;
-        } view8_3;
-        struct {
-            char pad[0x8];
-            Vec3 position;
-        } view8_4;
-        struct {
-            char pad[0x14];
-            struct Shared_Model * model;
-        } view14_6;
-        struct { char pad[8]; s32 positionWords[3]; } positionBits;
-    } views0;
-    union {
-        struct {
-            char * unk18;
-        } view18_0;
-        struct {
-            char * track;
-        } view18_1;
-        struct {
-            struct Model * model;
-        } view18_2;
-        struct {
-            struct Body * body;
-        } view18_3;
-        struct {
-            struct Character * character;
-        } view18_4;
-        struct {
-            struct Shared_Body * body;
-        } view18_5;
-    } views18;
-    union {
-        struct {
-            u8 unk1C[344];
-        } view1C_0;
-        struct {
-            u8 pad1[344];
-        } view1C_1;
-        struct {
-            char pad[0x4];
-            f32 velY;
-        } view20_2;
-        struct {
-            char pad[0x1C];
-            s32 unk38;
-        } view38_2;
-        struct {
-            char pad[0x1C];
-            s32 flags;
-        } view38_3;
-        struct {
-            char pad[0x24];
-            f32 unk40;
-        } view40_5;
-        struct {
-            char pad[0x40];
-            Shared_Quad unk5C;
-        } view5C_6;
-        struct {
-            char pad[0x50];
-            f32 unk6C;
-        } view6C_4;
-        struct {
-            char pad[0x50];
-            f32 heading;
-        } view6C_5;
-        struct {
-            char pad[0x50];
-            f32 yaw;
-        } view6C_9;
-        struct {
-            char pad[0xC8];
-            u16 unkE4;
-        } viewE4_6;
-        struct {
-            char pad[0xC8];
-            u16 kind;
-        } viewE4_7;
-        struct {
-            char pad[0xE4];
-            s32 unk100;
-        } view100_8;
-        struct {
-            char pad[0xE4];
-            s32 flags;
-        } view100_9;
-        struct {
-            char pad[0xE8];
-            f32 unk104;
-        } view104_10;
-        struct {
-            char pad[0xE8];
-            f32 idleTime;
-        } view104_11;
-        struct {
-            char pad[0xEC];
-            s16 anim;
-        } view108_16;
-        struct {
-            char pad[0xF2];
-            s8 unk10E;
-        } view10E_12;
-        struct {
-            char pad[0xF2];
-            s8 idle;
-        } view10E_13;
-        struct {
-            char pad[0xF2];
-            s8 replaying;
-        } view10E_14;
-        struct {
-            char pad[0xF2];
-            s8 animPending;
-        } view10E_20;
-        struct {
-            char pad[0x154];
-            char unk170[100];
-        } view170_15;
-        struct {
-            char pad[0x154];
-            char body[100];
-        } view170_16;
-        struct {
-            char pad[0x154];
-            s32 unk170;
-        } view170_23;
-        struct {
-            char pad[0x158];
-            s32 unk174;
-        } view174_17;
-        struct {
-            char pad[0x15C];
-            u8 unk178[740];
-        } view178_18;
-        struct {
-            char pad[0x15C];
-            u8 pad2[740];
-        } view178_19;
-        struct {
-            char pad[0x1B8];
-            f32 unk1D4;
-        } view1D4_20;
-        struct {
-            char pad[0x1B8];
-            f32 holdTime;
-        } view1D4_21;
-        struct {
-            char pad[0x1BC];
-            struct SharedPlayer_func_80210248_eu * unk1D8;
-        } view1D8_22;
-        struct {
-            char pad[0x1BC];
-            struct SharedPlayer_func_80210248_eu * self;
-        } view1D8_23;
-        struct {
-            char pad[0x1BC];
-            struct SharedPlayer_func_80210248_eu * f1D8;
-        } view1D8_24;
-        struct {
-            char pad[0x1BC];
-            void * unk1D8;
-        } view1D8_32;
-        struct {
-            char pad[0x244];
-            Vec3 unk260;
-        } view260_25;
-        struct {
-            char pad[0x244];
-            Vec3 muzzle;
-        } view260_26;
-        struct {
-            char pad[0x2CC];
-            char unk2E8[368];
-        } view2E8_27;
-        struct {
-            char pad[0x2CC];
-            char weapon[368];
-        } view2E8_28;
-        struct {
-            char pad[0x2CC];
-            Shared_Emitter emitter;
-        } view2E8_37;
-        struct {
-            char pad[0x43C];
-            char unk458[384];
-        } view458_29;
-        struct {
-            char pad[0x43C];
-            char ammo[384];
-        } view458_30;
-        struct {
-            char pad[0x43C];
-            s32 unk458;
-        } view458_40;
-        struct {
-            char pad[0x440];
-            s32 unk45C;
-        } view45C_31;
-        struct {
-            char pad[0x444];
-            u8 unk460[376];
-        } view460_32;
-        struct {
-            char pad[0x444];
-            u8 pad3[376];
-        } view460_33;
-        struct {
-            char pad[0x468];
-            struct Shared_Voice * voice;
-        } view484_44;
-        struct {
-            char pad[0x470];
-            s8 unk48C;
-        } view48C_34;
-        struct {
-            char pad[0x470];
-            s8 state;
-        } view48C_35;
-        struct {
-            char pad[0x4A4];
-            void * unk4C0;
-        } view4C0_47;
-        struct {
-            char pad[0x507];
-            s8 unk523;
-        } view523_36;
-        struct {
-            char pad[0x507];
-            s8 busy;
-        } view523_37;
-        struct {
-            char pad[0x578];
-            s32 unk594;
-        } view594_38;
-        struct {
-            char pad[0x578];
-            s32 gear;
-        } view594_39;
-        struct {
-            char pad[0x578];
-            s32 mode;
-        } view594_40;
-        struct {
-            char pad[0x584];
-            f32 unk5A0;
-        } view5A0_41;
-        struct {
-            char pad[0x584];
-            f32 charge;
-        } view5A0_42;
-        struct {
-            char pad[0x5B4];
-            s32 unk5D0;
-        } view5D0_43;
-        struct {
-            char pad[0x5B4];
-            s32 f5D0;
-        } view5D0_44;
-        struct {
-            char pad[0x5B8];
-            s32 unk5D4;
-        } view5D4_45;
-        struct {
-            char pad[0x5B8];
-            s32 slot;
-        } view5D4_46;
-        struct {
-            char pad[0x5B8];
-            s32 profile;
-        } view5D4_47;
-        struct {
-            char pad[0x5B8];
-            s32 f5D4;
-        } view5D4_48;
-    } views1C;
-    union {
-        struct {
-            struct Record * unk5D8;
-        } view5D8_0;
-        struct {
-            struct Record * record;
-        } view5D8_1;
-        struct {
-            struct Controls * controls;
-        } view5D8_2;
-        struct {
-            struct Record * teamInfo;
-        } view5D8_3;
-        struct {
-            struct Ctrl * ctrl;
-        } view5D8_4;
-        struct {
-            unsigned char * info;
-        } view5D8_5;
-        struct {
-            struct Profile * profile;
-        } view5D8_6;
-        struct {
-            struct func_80207B5C_S2 * settings;
-        } view5D8_7;
-        struct {
-            s32 f5D8;
-        } view5D8_8;
-        struct {
-            struct Shared_Profile * profile;
-        } view5D8_9;
-    } views5D8;
-    union {
-        struct {
-            void * unk5DC;
-        } view5DC_0;
-        struct {
-            void * view;
-        } view5DC_1;
-        struct {
-            struct View * view;
-        } view5DC_2;
-        struct {
-            u8 pad4[8];
-        } view5DC_3;
-        struct {
-            void * entity;
-        } view5DC_4;
-        struct {
-            struct Rider * rider;
-        } view5DC_5;
-        struct {
-            char * storage;
-        } view5DC_6;
-        struct {
-            char * messages;
-        } view5DC_7;
-        struct {
-            struct Shared_Hud * hud;
-        } view5DC_8;
-        struct {
-            char pad[0x4];
-            s32 unk5E0;
-        } view5E0_8;
-        struct {
-            char pad[0x4];
-            s32 state;
-        } view5E0_9;
-        struct {
-            char pad[0x4];
-            s32 slot;
-        } view5E0_10;
-    } views5DC;
-    union {
-        struct {
-            s32 unk5E4;
-        } view5E4_0;
-        struct {
-            s32 active;
-        } view5E4_1;
-        struct {
-            s32 health;
-        } view5E4_2;
-        struct {
-            s32 alive;
-        } view5E4_3;
-        struct {
-            s32 holding;
-        } view5E4_4;
-    } views5E4;
-    union {
-        struct {
-            u8 unk5E8[3140];
-        } view5E8_0;
-        struct {
-            u8 pad5[3140];
-        } view5E8_1;
-        struct {
-            char pad[0x2];
-            s16 unk5EA;
-        } view5EA_2;
-        struct {
-            char pad[0x2];
-            s16 respawns;
-        } view5EA_3;
-        struct {
-            char pad[0x2];
-            s16 runType;
-        } view5EA_4;
-        struct {
-            char pad[0x4];
-            s32 unk5EC;
-        } view5EC_5;
-        struct {
-            char pad[0x4];
-            s32 model;
-        } view5EC_6;
-        struct {
-            char pad[0x4];
-            s32 spawnPoint;
-        } view5EC_7;
-        struct {
-            char pad[0x4];
-            s32 f5EC;
-        } view5EC_8;
-        struct {
-            char pad[0x8];
-            s32 unk5F0;
-        } view5F0_9;
-        struct {
-            char pad[0x8];
-            s32 f5F0;
-        } view5F0_10;
-        struct {
-            char pad[0xC];
-            s16 unk5F4[4];
-        } view5F4_11;
-        struct {
-            char pad[0xC];
-            s16 ammo[4];
-        } view5F4_12;
-        struct {
-            char pad[0xC];
-            s16 ammo[3];
-        } view5F4_13;
-        struct {
-            char pad[0x1A];
-            Shared_Slot slots[22];
-        } view602_14;
-        struct {
-            char pad[0x46];
-            s16 unk62E;
-        } view62E_13;
-        struct {
-            char pad[0x46];
-            s16 weapon;
-        } view62E_14;
-        struct {
-            char pad[0x46];
-            s16 character;
-        } view62E_17;
-        struct {
-            char pad[0x68];
-            s16 unk650;
-        } view650_15;
-        struct {
-            char pad[0x68];
-            s16 state;
-        } view650_16;
-        struct {
-            char pad[0x68];
-            s16 action;
-        } view650_17;
-        struct {
-            char pad[0x68];
-            s16 mode;
-        } view650_18;
-        struct {
-            char pad[0x6A];
-            s16 unk652;
-        } view652_19;
-        struct {
-            char pad[0x6A];
-            s16 previous;
-        } view652_20;
-        struct {
-            char pad[0x6A];
-            s16 pad652;
-        } view652_24;
-        struct {
-            char pad[0x6C];
-            s16 prevState;
-        } view654_25;
-        struct {
-            char pad[0x6E];
-            s16 pad656;
-        } view656_26;
-        struct {
-            char pad[0x70];
-            f32 unk658;
-        } view658_21;
-        struct {
-            char pad[0x70];
-            f32 counter;
-        } view658_22;
-        struct {
-            char pad[0x70];
-            f32 stride;
-        } view658_23;
-        struct {
-            char pad[0x70];
-            f32 swimTime;
-        } view658_24;
-        struct {
-            char pad[0x70];
-            f32 stateTime;
-        } view658_31;
-        struct {
-            char pad[0x74];
-            s32 unk65C;
-        } view65C_32;
-        struct {
-            char pad[0x78];
-            s32 unk660;
-        } view660_25;
-        struct {
-            char pad[0x78];
-            s32 previousTimer;
-        } view660_26;
-        struct {
-            char pad[0x7C];
-            s32 unk664;
-        } view664_27;
-        struct {
-            char pad[0x7C];
-            s32 timer;
-        } view664_28;
-        struct {
-            char pad[0x84];
-            f32 unk66C;
-        } view66C_29;
-        struct {
-            char pad[0x88];
-            f32 unk670;
-        } view670_30;
-        struct {
-            char pad[0x88];
-            f32 shield;
-        } view670_31;
-        struct {
-            char pad[0x90];
-            f32 unk678;
-        } view678_40;
-        struct {
-            char pad[0xA0];
-            char unk688[16];
-        } view688_32;
-        struct {
-            char pad[0xA0];
-            char body[16];
-        } view688_33;
-        struct {
-            char pad[0xA0];
-            Shared_Input input;
-        } view688_43;
-        struct {
-            char pad[0xB0];
-            struct Controller * unk698;
-        } view698_34;
-        struct {
-            char pad[0xB0];
-            struct Controller * controller;
-        } view698_35;
-        struct {
-            char pad[0xB0];
-            void * controller;
-        } view698_36;
-        struct {
-            char pad[0xB0];
-            char * emitter;
-        } view698_37;
-        struct {
-            char pad[0xB0];
-            char * title;
-        } view698_38;
-        struct {
-            char pad[0xB4];
-            f32 unk69C;
-        } view69C_39;
-        struct {
-            char pad[0xB4];
-            f32 stick;
-        } view69C_40;
-        struct {
-            char pad[0xBC];
-            f32 unk6A4;
-        } view6A4_41;
-        struct {
-            char pad[0xBC];
-            f32 strafe;
-        } view6A4_42;
-        struct {
-            char pad[0xC0];
-            f32 unk6A8;
-        } view6A8_43;
-        struct {
-            char pad[0xC0];
-            f32 lift;
-        } view6A8_44;
-        struct {
-            char pad[0xC4];
-            s32 unk6AC;
-        } view6AC_45;
-        struct {
-            char pad[0xC8];
-            s32 unk6B0;
-        } view6B0_46;
-        struct {
-            char pad[0xC8];
-            s32 input;
-        } view6B0_47;
-        struct {
-            char pad[0xC8];
-            s32 state;
-        } view6B0_48;
-        struct {
-            char pad[0xD0];
-            s32 unk6B8;
-        } view6B8_49;
-        struct {
-            char pad[0xD0];
-            s32 input;
-        } view6B8_50;
-        struct {
-            char pad[0xD8];
-            f32 unk6C0;
-        } view6C0_51;
-        struct {
-            char pad[0xD8];
-            f32 climb;
-        } view6C0_52;
-        struct {
-            char pad[0xD8];
-            f32 speed;
-        } view6C0_53;
-        struct {
-            char pad[0xD8];
-            f32 velX;
-        } view6C0_64;
-        struct {
-            char pad[0xDC];
-            f32 unk6C4;
-        } view6C4_54;
-        struct {
-            char pad[0xDC];
-            f32 side;
-        } view6C4_55;
-        struct {
-            char pad[0xDC];
-            f32 velZ;
-        } view6C4_67;
-        struct {
-            char pad[0xE0];
-            f32 unk6C8;
-        } view6C8_56;
-        struct {
-            char pad[0xE0];
-            f32 speed;
-        } view6C8_57;
-        struct {
-            char pad[0xE4];
-            f32 lastVelY;
-        } view6CC_70;
-        struct {
-            char pad[0xE8];
-            s32 onGround;
-        } view6D0_71;
-        struct {
-            char pad[0xEC];
-            f32 unk6D4;
-        } view6D4_58;
-        struct {
-            char pad[0xF0];
-            f32 unk6D8;
-        } view6D8_59;
-        struct {
-            char pad[0xF4];
-            f32 unk6DC;
-        } view6DC_60;
-        struct {
-            char pad[0xFC];
-            f32 unk6E4;
-        } view6E4_61;
-        struct {
-            char pad[0xFC];
-            f32 depth;
-        } view6E4_62;
-        struct {
-            char pad[0xFC];
-            f32 airTime;
-        } view6E4_77;
-        struct {
-            char pad[0x100];
-            f32 unk6E8;
-        } view6E8_63;
-        struct {
-            char pad[0x100];
-            Vec3 unk6E8;
-        } view6E8_79;
-        struct {
-            char pad[0x104];
-            f32 unk6EC;
-        } view6EC_64;
-        struct {
-            char pad[0x104];
-            f32 height;
-        } view6EC_65;
-        struct {
-            char pad[0x108];
-            f32 unk6F0;
-        } view6F0_66;
-        struct {
-            char pad[0x10C];
-            f32 unk6F4;
-        } view6F4_83;
-        struct {
-            char pad[0x110];
-            Vec3 unk6F8;
-        } view6F8_84;
-        struct {
-            char pad[0x11C];
-            f32 unk704;
-        } view704_67;
-        struct {
-            char pad[0x11C];
-            f32 lift;
-        } view704_68;
-        struct {
-            char pad[0x130];
-            f32 unk718;
-        } view718_69;
-        struct {
-            char pad[0x130];
-            f32 crouch;
-        } view718_70;
-        struct {
-            char pad[0x134];
-            s32 unk71C;
-        } view71C_89;
-        struct {
-            char pad[0x138];
-            f32 swim;
-        } view720_90;
-        struct {
-            char pad[0x13C];
-            f32 unk724;
-        } view724_71;
-        struct {
-            char pad[0x13C];
-            f32 pitch;
-        } view724_72;
-        struct {
-            char pad[0x140];
-            f32 unk728;
-        } view728_73;
-        struct {
-            char pad[0x140];
-            f32 kickPitch;
-        } view728_74;
-        struct {
-            char pad[0x144];
-            f32 unk72C;
-        } view72C_75;
-        struct {
-            char pad[0x144];
-            f32 kickRoll;
-        } view72C_76;
-        struct {
-            char pad[0x144];
-            f32 lean;
-        } view72C_77;
-        struct {
-            char pad[0x148];
-            f32 unk730[3];
-        } view730_78;
-        struct {
-            char pad[0x148];
-            f32 sway[3];
-        } view730_79;
-        struct {
-            char pad[0x154];
-            f32 unk73C;
-        } view73C_80;
-        struct {
-            char pad[0x154];
-            f32 side;
-        } view73C_81;
-        struct {
-            char pad[0x154];
-            Vec3 weapon;
-        } view73C_82;
-        struct {
-            char pad[0x158];
-            f32 unk740;
-        } view740_83;
-        struct {
-            char pad[0x158];
-            f32 height;
-        } view740_84;
-        struct {
-            char pad[0x15C];
-            f32 unk744;
-        } view744_85;
-        struct {
-            char pad[0x15C];
-            f32 forward;
-        } view744_86;
-        struct {
-            char pad[0x170];
-            f32 unk758;
-        } view758_87;
-        struct {
-            char pad[0x170];
-            f32 bobStrength;
-        } view758_88;
-        struct {
-            char pad[0x174];
-            f32 unk75C;
-        } view75C_89;
-        struct {
-            char pad[0x174];
-            f32 bobSpeed;
-        } view75C_90;
-        struct {
-            char pad[0x188];
-            s16 unk770;
-        } view770_91;
-        struct {
-            char pad[0x188];
-            s16 nextWeapon;
-        } view770_92;
-        struct {
-            char pad[0x188];
-            s16 weapon;
-        } view770_113;
-        struct {
-            char pad[0x18A];
-            s16 pad772;
-        } view772_114;
-        struct {
-            char pad[0x18C];
-            Vec3 unk774;
-        } view774_115;
-        struct {
-            char pad[0x198];
-            f32 unk780;
-        } view780_116;
-        struct {
-            char pad[0x19C];
-            f32 unk784;
-        } view784_117;
-        struct {
-            char pad[0x1A0];
-            s32 unk788;
-        } view788_93;
-        struct {
-            char pad[0x1A0];
-            s32 icons;
-        } view788_94;
-        struct {
-            char pad[0x1B0];
-            s32 unk798;
-        } view798_95;
-        struct {
-            char pad[0x1B0];
-            s32 carried;
-        } view798_96;
-        struct {
-            char pad[0x1B4];
-            Vec3 unk79C;
-        } view79C_97;
-        struct {
-            char pad[0x1B4];
-            Vec3 carriedPosition;
-        } view79C_98;
-        struct {
-            char pad[0x1D0];
-            s32 unk7B8;
-        } view7B8_99;
-        struct {
-            char pad[0x1D0];
-            s32 target;
-        } view7B8_100;
-        struct {
-            char pad[0x1D4];
-            f32 unk7BC;
-        } view7BC_101;
-        struct {
-            char pad[0x1D4];
-            f32 timer;
-        } view7BC_102;
-        struct {
-            char pad[0x1D8];
-            Vec3 unk7C0;
-        } view7C0_103;
-        struct {
-            char pad[0x1D8];
-            Vec3 targetPosition;
-        } view7C0_104;
-        struct {
-            char pad[0x200];
-            s32 unk7E8;
-        } view7E8_105;
-        struct {
-            char pad[0x200];
-            s32 zoomed;
-        } view7E8_106;
-        struct {
-            char pad[0x204];
-            f32 unk7EC;
-        } view7EC_132;
-        struct {
-            char pad[0x208];
-            f32 unk7F0;
-        } view7F0_133;
-        struct {
-            char pad[0x224];
-            struct Mount * unk80C;
-        } view80C_107;
-        struct {
-            char pad[0x224];
-            struct Mount * mount;
-        } view80C_108;
-        struct {
-            char pad[0x228];
-            s32 unk810;
-        } view810_109;
-        struct {
-            char pad[0x228];
-            s32 kind;
-        } view810_110;
-        struct {
-            char pad[0x22C];
-            Triple unk814;
-        } view814_111;
-        struct {
-            char pad[0x22C];
-            Triple offset;
-        } view814_112;
-        struct {
-            char pad[0x250];
-            f32 unk838;
-        } view838_113;
-        struct {
-            char pad[0x250];
-            f32 rideTime;
-        } view838_114;
-        struct {
-            char pad[0x254];
-            f32 unk83C;
-        } view83C_115;
-        struct {
-            char pad[0x254];
-            f32 bump;
-        } view83C_116;
-        struct {
-            char pad[0x258];
-            s32 unk840;
-        } view840_117;
-        struct {
-            char pad[0x258];
-            s32 surfaced;
-        } view840_118;
-        struct {
-            char pad[0x264];
-            s32 unk84C;
-        } view84C_149;
-        struct {
-            char pad[0x26C];
-            f32 unk854;
-        } view854_147;
-        struct {
-            char pad[0x274];
-            s32 unk85C;
-        } view85C_119;
-        struct {
-            char pad[0x274];
-            s32 w85C;
-        } view85C_120;
-        struct {
-            char pad[0x27C];
-            s32 unk864;
-        } view864_121;
-        struct {
-            char pad[0x27C];
-            s32 f864;
-        } view864_122;
-        struct {
-            char pad[0x280];
-            s32 unk868;
-        } view868_123;
-        struct {
-            char pad[0x280];
-            s32 f868;
-        } view868_124;
-        struct {
-            char pad[0x284];
-            s32 unk86C;
-        } view86C_125;
-        struct {
-            char pad[0x284];
-            s32 parameter;
-        } view86C_126;
-        struct {
-            char pad[0x284];
-            s32 animation;
-        } view86C_127;
-        struct {
-            char pad[0x288];
-            s32 unk870;
-        } view870_157;
-        struct {
-            char pad[0x290];
-            Shared_Effect effect;
-        } view878_158;
-        struct {
-            char pad[0x350];
-            char unk938[2188];
-        } view938_128;
-        struct {
-            char pad[0x350];
-            char strokes[2188];
-        } view938_129;
-        struct {
-            char pad[0x350];
-            char strokes[2188];
-        } view938_130;
-        struct {
-            char pad[0x350];
-            s32 unk938;
-        } view938_162;
-        struct {
-            char pad[0x6D0];
-            s32 unkCB8;
-        } viewCB8_163;
-        struct {
-            char pad[0x6E4];
-            s32 unkCCC;
-        } viewCCC_164;
-        struct {
-            char pad[0x758];
-            s32 unkD40;
-        } viewD40_165;
-        struct {
-            char pad[0x96C];
-            s32 unkF54;
-        } viewF54_131;
-        struct {
-            char pad[0x96C];
-            s32 selection;
-        } viewF54_132;
-        struct {
-            char pad[0x9A8];
-            s32 unkF90;
-        } viewF90_133;
-        struct {
-            char pad[0x9A8];
-            s32 choice;
-        } viewF90_134;
-        struct {
-            char pad[0xBCC];
-            s32 unk11B4;
-        } view11B4_135;
-        struct {
-            char pad[0xBCC];
-            s32 locked;
-        } view11B4_136;
-        struct {
-            char pad[0xBD0];
-            s32 unk11B8;
-        } view11B8_137;
-        struct {
-            char pad[0xBD0];
-            s32 frozen;
-        } view11B8_138;
-        struct {
-            char pad[0xBD4];
-            s32 unk11BC;
-        } view11BC_139;
-        struct {
-            char pad[0xBD4];
-            s32 f11BC;
-        } view11BC_140;
-        struct {
-            char pad[0xBD8];
-            s32 unk11C0;
-        } view11C0_141;
-        struct {
-            char pad[0xBD8];
-            s32 f11C0;
-        } view11C0_142;
-        struct {
-            char pad[0xBDC];
-            f32 unk11C4;
-        } view11C4_143;
-        struct {
-            char pad[0xBDC];
-            f32 soundTime;
-        } view11C4_144;
-        struct {
-            char pad[0xBE4];
-            s32 unk11CC;
-        } view11CC_145;
-        struct {
-            char pad[0xBE4];
-            s32 f11CC;
-        } view11CC_146;
-        struct {
-            char pad[0xBF0];
-            f32 unk11D8;
-        } view11D8_147;
-        struct {
-            char pad[0xBF0];
-            f32 recoil;
-        } view11D8_148;
-        struct {
-            char pad[0xBF0];
-            f32 stun;
-        } view11D8_149;
-        struct {
-            char pad[0xBF4];
-            f32 unk11DC;
-        } view11DC_185;
-        struct {
-            char pad[0xBF8];
-            f32 unk11E0;
-        } view11E0_186;
-        struct {
-            char pad[0xC00];
-            s32 unk11E8;
-        } view11E8_150;
-        struct {
-            char pad[0xC00];
-            s32 f11E8;
-        } view11E8_151;
-        struct {
-            char pad[0xC04];
-            f32 unk11EC;
-        } view11EC_189;
-        struct {
-            char pad[0xC28];
-            s32 unk1210;
-        } view1210_152;
-        struct {
-            char pad[0xC28];
-            s32 marker;
-        } view1210_153;
-        struct {
-            char pad[0xC2C];
-            s32 unk1214;
-        } view1214_154;
-        struct {
-            char pad[0xC2C];
-            s32 marker;
-        } view1214_155;
-        struct {
-            char pad[0xC2C];
-            s32 markerShown;
-        } view1214_156;
-        struct {
-            char pad[0xC30];
-            s32 unk1218;
-        } view1218_157;
-        struct {
-            char pad[0xC30];
-            s32 f1218;
-        } view1218_158;
-        struct {
-            char pad[0xC34];
-            s32 unk121C;
-        } view121C_159;
-        struct {
-            char pad[0xC34];
-            s32 f121C;
-        } view121C_160;
-        struct {
-            char pad[0xC38];
-            s32 unk1220;
-        } view1220_161;
-        struct {
-            char pad[0xC38];
-            s32 f1220;
-        } view1220_162;
-        struct { char pad[0xE]; s16 charge; } chargeView;
-        struct { char pad[0x11F4 - 0x5E8]; f32 spin; s32 frame; } rapidFireView;
-    } views5E8;
-    union {
-        struct {
-            u32 unk122C;
-        } view122C_0;
-        struct {
-            u32 flags;
-        } view122C_1;
-        struct {
-            s32 options;
-        } view122C_2;
-        struct {
-            s32 f122C;
-        } view122C_3;
-        struct {
-            s32 fxFlags;
-        } view122C_4;
-    } views122C;
-    f32 fxTime;
-    f32 fxSpeed;
-    s32 fxStage;
-    char pad123C[0x4];
-    f32 unk1240;
-    f32 unk1244;
-    char pad1248[0x7C];
-    union {
-        struct {
-            s32 unk12C4;
-        } view12C4_0;
-        struct {
-            s32 f12C4;
-        } view12C4_1;
-    } views12C4;
-    union {
-        struct {
-            s32 unk12C8;
-        } view12C8_0;
-        struct {
-            s32 f12C8;
-        } view12C8_1;
-    } views12C8;
-    union {
-        struct {
-            s32 unk12CC[8];
-        } view12CC_0;
-        struct {
-            s32 splitsA[8];
-        } view12CC_1;
-    } views12CC;
-    s32 unk12EC;
-    char pad12F0[0x4];
-    union {
-        struct {
-            s32 unk12F4[8];
-        } view12F4_0;
-        struct {
-            s32 splitsB[8];
-        } view12F4_1;
-    } views12F4;
-    char pad1314[0x20];
-    union {
-        struct {
-            s32 unk1334;
-        } view1334_0;
-        struct {
-            s32 f1334;
-        } view1334_1;
-    } views1334;
-    union {
-        struct {
-            s32 unk1338;
-        } view1338_0;
-        struct {
-            s32 f1338;
-        } view1338_1;
-    } views1338;
-    union {
-        struct {
-            s32 unk133C;
-        } view133C_0;
-        struct {
-            s32 laps;
-        } view133C_1;
-        struct {
-            s32 lives;
-        } view133C_2;
-    } views133C;
-    union {
-        struct {
-            s32 unk1340;
-        } view1340_0;
-        struct {
-            s32 stalls;
-        } view1340_1;
-        struct {
-            s32 timer;
-        } view1340_2;
-        struct {
-            s32 respawnTimer;
-        } view1340_3;
-    } views1340;
-    char pad1344[0x70];
-    union {
-        struct {
-            struct StateInfo * unk13B4;
-        } view13B4_0;
-        struct {
-            struct StateInfo * states;
-        } view13B4_1;
-        struct {
-            struct Mode * unk13B4;
-        } view13B4_2;
-        struct {
-            void * character;
-        } view13B4_3;
-        struct {
-            s32 f13B4;
-        } view13B4_4;
-        struct {
-            struct Shared_StateInfo * states;
-        } view13B4_5;
-    } views13B4;
-    char pad13B8[0x10];
-    union {
-        struct {
-            s32 unk13C8;
-        } view13C8_0;
-        struct {
-            s32 w13C8;
-        } view13C8_1;
-        struct {
-            s32 f13C8;
-        } view13C8_2;
-    } views13C8;
-    char pad13CC[0x8];
-    s32 unk13D4;
-    union {
-        struct {
-            struct Held * unk13D8;
-        } view13D8_0;
-        struct {
-            struct Held * held;
-        } view13D8_1;
-    } views13D8;
-    char pad13DC[0xC];
-    s32 messageIndex;
-    char pad13EC[0x64];
-    union {
-        struct {
-            s32 unk1450;
-        } view1450_0;
-        struct {
-            s32 computer;
-        } view1450_1;
-        struct {
-            s32 infinite;
-        } view1450_2;
-        struct {
-            s32 unlimited;
-        } view1450_3;
-        struct {
-            s32 uncounted;
-        } view1450_4;
-        struct {
-            s32 f1450;
-        } view1450_5;
-    } views1450;
-    union {
-        struct {
-            s32 unk1454;
-        } view1454_0;
-        struct {
-            s32 f1454;
-        } view1454_1;
-    } views1454;
-    char pad1458[0xC];
-    union {
-        struct {
-            Vec3 unk1464;
-        } view1464_0;
-        struct {
-            Vec3 aim;
-        } view1464_1;
-    } views1464;
-    char pad1470[0x10];
-    union {
-        struct {
-            Matrix unk1480[2];
-        } view1480_0;
-        struct {
-            Matrix beams[2];
-        } view1480_1;
-    } views1480;
-    union {
-        struct {
-            Matrix unk1500[2];
-        } view1500_0;
-        struct {
-            Matrix lasers[2];
-        } view1500_1;
-    } views1500;
-    union {
-        struct {
-            Matrix unk1580[2];
-        } view1580_0;
-        struct {
-            Matrix dots[2];
-        } view1580_1;
-    } views1580;
-    char pad1600[0xD4];
-    union {
-        struct {
-            s32 unk16D4;
-        } view16D4_0;
-        struct {
-            s32 f16D4;
-        } view16D4_1;
-    } views16D4;
-    u16 unk16D8;
-    char pad16DA[0x6];
-    union {
-        struct {
-            struct SharedPlayer_func_80210248_eu * unk16E0;
-        } view16E0_0;
-        struct {
-            struct SharedPlayer_func_80210248_eu * next;
-        } view16E0_1;
-        struct {
-            struct SharedPlayer_func_80210248_eu * next;
-        } view16E0_2;
-    } views16E0;
-};
 struct Body;
 struct Character;
 struct Controller;
@@ -18686,7 +17255,6 @@ struct Profile;
 struct Record;
 struct Rider;
 struct Settings;
-struct SharedPlayer_func_8021E2A0_de;
 struct Shared_Body;
 struct Shared_Hud;
 struct Shared_Model;
@@ -18697,1427 +17265,6 @@ struct StateInfo;
 struct TeamInfo;
 struct View;
 struct ObjRecAt8F;
-struct SharedPlayer_func_8021E2A0_de {
-    union {
-        struct {
-            u8 unk0[24];
-        } view0_0;
-        struct {
-            u8 pad0[24];
-        } view0_1;
-        struct {
-            char pad[0x3];
-            u8 team;
-        } view3_2;
-        struct {
-            char pad[0x8];
-            Vec3 unk8;
-        } view8_2;
-        struct {
-            char pad[0x8];
-            Vec3 pos;
-        } view8_3;
-        struct {
-            char pad[0x8];
-            Vec3 position;
-        } view8_4;
-        struct {
-            char pad[0x14];
-            struct Shared_Model * model;
-        } view14_6;
-        struct { char pad[8]; s32 positionWords[3]; } positionBits;
-    } views0;
-    union {
-        struct {
-            char * unk18;
-        } view18_0;
-        struct {
-            char * track;
-        } view18_1;
-        struct {
-            struct Model * model;
-        } view18_2;
-        struct {
-            struct Body * body;
-        } view18_3;
-        struct {
-            struct Character * character;
-        } view18_4;
-        struct {
-            struct Shared_Body * body;
-        } view18_5;
-    } views18;
-    union {
-        struct {
-            u8 unk1C[344];
-        } view1C_0;
-        struct {
-            u8 pad1[344];
-        } view1C_1;
-        struct {
-            char pad[0x4];
-            f32 velY;
-        } view20_2;
-        struct {
-            char pad[0x1C];
-            s32 unk38;
-        } view38_2;
-        struct {
-            char pad[0x1C];
-            s32 flags;
-        } view38_3;
-        struct {
-            char pad[0x24];
-            f32 unk40;
-        } view40_5;
-        struct {
-            char pad[0x40];
-            Shared_Quad unk5C;
-        } view5C_6;
-        struct {
-            char pad[0x50];
-            f32 unk6C;
-        } view6C_4;
-        struct {
-            char pad[0x50];
-            f32 heading;
-        } view6C_5;
-        struct {
-            char pad[0x50];
-            f32 yaw;
-        } view6C_9;
-        struct {
-            char pad[0xC8];
-            u16 unkE4;
-        } viewE4_6;
-        struct {
-            char pad[0xC8];
-            u16 kind;
-        } viewE4_7;
-        struct {
-            char pad[0xE4];
-            s32 unk100;
-        } view100_8;
-        struct {
-            char pad[0xE4];
-            s32 flags;
-        } view100_9;
-        struct {
-            char pad[0xE8];
-            f32 unk104;
-        } view104_10;
-        struct {
-            char pad[0xE8];
-            f32 idleTime;
-        } view104_11;
-        struct {
-            char pad[0xEC];
-            s16 anim;
-        } view108_16;
-        struct {
-            char pad[0xF2];
-            s8 unk10E;
-        } view10E_12;
-        struct {
-            char pad[0xF2];
-            s8 idle;
-        } view10E_13;
-        struct {
-            char pad[0xF2];
-            s8 replaying;
-        } view10E_14;
-        struct {
-            char pad[0xF2];
-            s8 animPending;
-        } view10E_20;
-        struct {
-            char pad[0x154];
-            char unk170[100];
-        } view170_15;
-        struct {
-            char pad[0x154];
-            char body[100];
-        } view170_16;
-        struct {
-            char pad[0x154];
-            s32 unk170;
-        } view170_23;
-        struct {
-            char pad[0x158];
-            s32 unk174;
-        } view174_17;
-        struct {
-            char pad[0x15C];
-            u8 unk178[740];
-        } view178_18;
-        struct {
-            char pad[0x15C];
-            u8 pad2[740];
-        } view178_19;
-        struct {
-            char pad[0x1B8];
-            f32 unk1D4;
-        } view1D4_20;
-        struct {
-            char pad[0x1B8];
-            f32 holdTime;
-        } view1D4_21;
-        struct {
-            char pad[0x1BC];
-            struct SharedPlayer_func_8021E2A0_de * unk1D8;
-        } view1D8_22;
-        struct {
-            char pad[0x1BC];
-            struct SharedPlayer_func_8021E2A0_de * self;
-        } view1D8_23;
-        struct {
-            char pad[0x1BC];
-            struct SharedPlayer_func_8021E2A0_de * f1D8;
-        } view1D8_24;
-        struct {
-            char pad[0x1BC];
-            void * unk1D8;
-        } view1D8_32;
-        struct {
-            char pad[0x244];
-            Vec3 unk260;
-        } view260_25;
-        struct {
-            char pad[0x244];
-            Vec3 muzzle;
-        } view260_26;
-        struct {
-            char pad[0x2CC];
-            char unk2E8[368];
-        } view2E8_27;
-        struct {
-            char pad[0x2CC];
-            char weapon[368];
-        } view2E8_28;
-        struct {
-            char pad[0x2CC];
-            Shared_Emitter emitter;
-        } view2E8_37;
-        struct {
-            char pad[0x43C];
-            char unk458[384];
-        } view458_29;
-        struct {
-            char pad[0x43C];
-            char ammo[384];
-        } view458_30;
-        struct {
-            char pad[0x43C];
-            s32 unk458;
-        } view458_40;
-        struct {
-            char pad[0x440];
-            s32 unk45C;
-        } view45C_31;
-        struct {
-            char pad[0x444];
-            u8 unk460[376];
-        } view460_32;
-        struct {
-            char pad[0x444];
-            u8 pad3[376];
-        } view460_33;
-        struct {
-            char pad[0x468];
-            struct Shared_Voice * voice;
-        } view484_44;
-        struct {
-            char pad[0x470];
-            s8 unk48C;
-        } view48C_34;
-        struct {
-            char pad[0x470];
-            s8 state;
-        } view48C_35;
-        struct {
-            char pad[0x4A4];
-            void * unk4C0;
-        } view4C0_47;
-        struct {
-            char pad[0x507];
-            s8 unk523;
-        } view523_36;
-        struct {
-            char pad[0x507];
-            s8 busy;
-        } view523_37;
-        struct {
-            char pad[0x578];
-            s32 unk594;
-        } view594_38;
-        struct {
-            char pad[0x578];
-            s32 gear;
-        } view594_39;
-        struct {
-            char pad[0x578];
-            s32 mode;
-        } view594_40;
-        struct {
-            char pad[0x584];
-            f32 unk5A0;
-        } view5A0_41;
-        struct {
-            char pad[0x584];
-            f32 charge;
-        } view5A0_42;
-        struct {
-            char pad[0x5B4];
-            s32 unk5D0;
-        } view5D0_43;
-        struct {
-            char pad[0x5B4];
-            s32 f5D0;
-        } view5D0_44;
-        struct {
-            char pad[0x5B8];
-            s32 unk5D4;
-        } view5D4_45;
-        struct {
-            char pad[0x5B8];
-            s32 slot;
-        } view5D4_46;
-        struct {
-            char pad[0x5B8];
-            s32 profile;
-        } view5D4_47;
-        struct {
-            char pad[0x5B8];
-            s32 f5D4;
-        } view5D4_48;
-    } views1C;
-    union {
-        struct {
-            struct Record * unk5D8;
-        } view5D8_0;
-        struct {
-            struct Record * record;
-        } view5D8_1;
-        struct {
-            struct ObjRecAt8F * controls;
-        } view5D8_2;
-        struct {
-            struct TeamInfo * teamInfo;
-        } view5D8_3;
-        struct {
-            struct Ctrl * ctrl;
-        } view5D8_4;
-        struct {
-            unsigned char * info;
-        } view5D8_5;
-        struct {
-            struct Profile * profile;
-        } view5D8_6;
-        struct {
-            struct Settings * settings;
-        } view5D8_7;
-        struct {
-            s32 f5D8;
-        } view5D8_8;
-        struct {
-            struct Shared_Profile * profile;
-        } view5D8_9;
-    } views5D8;
-    union {
-        struct {
-            void * unk5DC;
-        } view5DC_0;
-        struct {
-            void * view;
-        } view5DC_1;
-        struct {
-            struct View * view;
-        } view5DC_2;
-        struct {
-            u8 pad4[8];
-        } view5DC_3;
-        struct {
-            void * entity;
-        } view5DC_4;
-        struct {
-            struct Rider * rider;
-        } view5DC_5;
-        struct {
-            char * storage;
-        } view5DC_6;
-        struct {
-            char * messages;
-        } view5DC_7;
-        struct {
-            struct Shared_Hud * hud;
-        } view5DC_8;
-        struct {
-            char pad[0x4];
-            s32 unk5E0;
-        } view5E0_8;
-        struct {
-            char pad[0x4];
-            s32 state;
-        } view5E0_9;
-        struct {
-            char pad[0x4];
-            s32 slot;
-        } view5E0_10;
-    } views5DC;
-    union {
-        struct {
-            s32 unk5E4;
-        } view5E4_0;
-        struct {
-            s32 active;
-        } view5E4_1;
-        struct {
-            s32 health;
-        } view5E4_2;
-        struct {
-            s32 alive;
-        } view5E4_3;
-        struct {
-            s32 holding;
-        } view5E4_4;
-    } views5E4;
-    union {
-        struct {
-            u8 unk5E8[3140];
-        } view5E8_0;
-        struct {
-            u8 pad5[3140];
-        } view5E8_1;
-        struct {
-            char pad[0x2];
-            s16 unk5EA;
-        } view5EA_2;
-        struct {
-            char pad[0x2];
-            s16 respawns;
-        } view5EA_3;
-        struct {
-            char pad[0x2];
-            s16 runType;
-        } view5EA_4;
-        struct {
-            char pad[0x4];
-            s32 unk5EC;
-        } view5EC_5;
-        struct {
-            char pad[0x4];
-            s32 model;
-        } view5EC_6;
-        struct {
-            char pad[0x4];
-            s32 spawnPoint;
-        } view5EC_7;
-        struct {
-            char pad[0x4];
-            s32 f5EC;
-        } view5EC_8;
-        struct {
-            char pad[0x8];
-            s32 unk5F0;
-        } view5F0_9;
-        struct {
-            char pad[0x8];
-            s32 f5F0;
-        } view5F0_10;
-        struct {
-            char pad[0xC];
-            s16 unk5F4[4];
-        } view5F4_11;
-        struct {
-            char pad[0xC];
-            s16 ammo[4];
-        } view5F4_12;
-        struct {
-            char pad[0xC];
-            s16 ammo[3];
-        } view5F4_13;
-        struct {
-            char pad[0x1A];
-            Shared_Slot slots[22];
-        } view602_14;
-        struct {
-            char pad[0x46];
-            s16 unk62E;
-        } view62E_13;
-        struct {
-            char pad[0x46];
-            s16 weapon;
-        } view62E_14;
-        struct {
-            char pad[0x46];
-            s16 character;
-        } view62E_17;
-        struct {
-            char pad[0x68];
-            s16 unk650;
-        } view650_15;
-        struct {
-            char pad[0x68];
-            s16 state;
-        } view650_16;
-        struct {
-            char pad[0x68];
-            s16 action;
-        } view650_17;
-        struct {
-            char pad[0x68];
-            s16 mode;
-        } view650_18;
-        struct {
-            char pad[0x6A];
-            s16 unk652;
-        } view652_19;
-        struct {
-            char pad[0x6A];
-            s16 previous;
-        } view652_20;
-        struct {
-            char pad[0x6A];
-            s16 pad652;
-        } view652_24;
-        struct {
-            char pad[0x6C];
-            s16 prevState;
-        } view654_25;
-        struct {
-            char pad[0x6E];
-            s16 pad656;
-        } view656_26;
-        struct {
-            char pad[0x70];
-            f32 unk658;
-        } view658_21;
-        struct {
-            char pad[0x70];
-            f32 counter;
-        } view658_22;
-        struct {
-            char pad[0x70];
-            f32 stride;
-        } view658_23;
-        struct {
-            char pad[0x70];
-            f32 swimTime;
-        } view658_24;
-        struct {
-            char pad[0x70];
-            f32 stateTime;
-        } view658_31;
-        struct {
-            char pad[0x74];
-            s32 unk65C;
-        } view65C_32;
-        struct {
-            char pad[0x78];
-            s32 unk660;
-        } view660_25;
-        struct {
-            char pad[0x78];
-            s32 previousTimer;
-        } view660_26;
-        struct {
-            char pad[0x7C];
-            s32 unk664;
-        } view664_27;
-        struct {
-            char pad[0x7C];
-            s32 timer;
-        } view664_28;
-        struct {
-            char pad[0x84];
-            f32 unk66C;
-        } view66C_29;
-        struct {
-            char pad[0x88];
-            f32 unk670;
-        } view670_30;
-        struct {
-            char pad[0x88];
-            f32 shield;
-        } view670_31;
-        struct {
-            char pad[0x90];
-            f32 unk678;
-        } view678_40;
-        struct {
-            char pad[0xA0];
-            char unk688[16];
-        } view688_32;
-        struct {
-            char pad[0xA0];
-            char body[16];
-        } view688_33;
-        struct {
-            char pad[0xA0];
-            Shared_Input input;
-        } view688_43;
-        struct {
-            char pad[0xB0];
-            struct Controller * unk698;
-        } view698_34;
-        struct {
-            char pad[0xB0];
-            struct Controller * controller;
-        } view698_35;
-        struct {
-            char pad[0xB0];
-            void * controller;
-        } view698_36;
-        struct {
-            char pad[0xB0];
-            char * emitter;
-        } view698_37;
-        struct {
-            char pad[0xB0];
-            char * title;
-        } view698_38;
-        struct {
-            char pad[0xB4];
-            f32 unk69C;
-        } view69C_39;
-        struct {
-            char pad[0xB4];
-            f32 stick;
-        } view69C_40;
-        struct {
-            char pad[0xBC];
-            f32 unk6A4;
-        } view6A4_41;
-        struct {
-            char pad[0xBC];
-            f32 strafe;
-        } view6A4_42;
-        struct {
-            char pad[0xC0];
-            f32 unk6A8;
-        } view6A8_43;
-        struct {
-            char pad[0xC0];
-            f32 lift;
-        } view6A8_44;
-        struct {
-            char pad[0xC4];
-            s32 unk6AC;
-        } view6AC_45;
-        struct {
-            char pad[0xC8];
-            s32 unk6B0;
-        } view6B0_46;
-        struct {
-            char pad[0xC8];
-            s32 input;
-        } view6B0_47;
-        struct {
-            char pad[0xC8];
-            s32 state;
-        } view6B0_48;
-        struct {
-            char pad[0xD0];
-            s32 unk6B8;
-        } view6B8_49;
-        struct {
-            char pad[0xD0];
-            s32 input;
-        } view6B8_50;
-        struct {
-            char pad[0xD8];
-            f32 unk6C0;
-        } view6C0_51;
-        struct {
-            char pad[0xD8];
-            f32 climb;
-        } view6C0_52;
-        struct {
-            char pad[0xD8];
-            f32 speed;
-        } view6C0_53;
-        struct {
-            char pad[0xD8];
-            f32 velX;
-        } view6C0_64;
-        struct {
-            char pad[0xDC];
-            f32 unk6C4;
-        } view6C4_54;
-        struct {
-            char pad[0xDC];
-            f32 side;
-        } view6C4_55;
-        struct {
-            char pad[0xDC];
-            f32 velZ;
-        } view6C4_67;
-        struct {
-            char pad[0xE0];
-            f32 unk6C8;
-        } view6C8_56;
-        struct {
-            char pad[0xE0];
-            f32 speed;
-        } view6C8_57;
-        struct {
-            char pad[0xE4];
-            f32 lastVelY;
-        } view6CC_70;
-        struct {
-            char pad[0xE8];
-            s32 onGround;
-        } view6D0_71;
-        struct {
-            char pad[0xEC];
-            f32 unk6D4;
-        } view6D4_58;
-        struct {
-            char pad[0xF0];
-            f32 unk6D8;
-        } view6D8_59;
-        struct {
-            char pad[0xF4];
-            f32 unk6DC;
-        } view6DC_60;
-        struct {
-            char pad[0xFC];
-            f32 unk6E4;
-        } view6E4_61;
-        struct {
-            char pad[0xFC];
-            f32 depth;
-        } view6E4_62;
-        struct {
-            char pad[0xFC];
-            f32 airTime;
-        } view6E4_77;
-        struct {
-            char pad[0x100];
-            f32 unk6E8;
-        } view6E8_63;
-        struct {
-            char pad[0x100];
-            Vec3 unk6E8;
-        } view6E8_79;
-        struct {
-            char pad[0x104];
-            f32 unk6EC;
-        } view6EC_64;
-        struct {
-            char pad[0x104];
-            f32 height;
-        } view6EC_65;
-        struct {
-            char pad[0x108];
-            f32 unk6F0;
-        } view6F0_66;
-        struct {
-            char pad[0x10C];
-            f32 unk6F4;
-        } view6F4_83;
-        struct {
-            char pad[0x110];
-            Vec3 unk6F8;
-        } view6F8_84;
-        struct {
-            char pad[0x11C];
-            f32 unk704;
-        } view704_67;
-        struct {
-            char pad[0x11C];
-            f32 lift;
-        } view704_68;
-        struct {
-            char pad[0x130];
-            f32 unk718;
-        } view718_69;
-        struct {
-            char pad[0x130];
-            f32 crouch;
-        } view718_70;
-        struct {
-            char pad[0x134];
-            s32 unk71C;
-        } view71C_89;
-        struct {
-            char pad[0x138];
-            f32 swim;
-        } view720_90;
-        struct {
-            char pad[0x13C];
-            f32 unk724;
-        } view724_71;
-        struct {
-            char pad[0x13C];
-            f32 pitch;
-        } view724_72;
-        struct {
-            char pad[0x140];
-            f32 unk728;
-        } view728_73;
-        struct {
-            char pad[0x140];
-            f32 kickPitch;
-        } view728_74;
-        struct {
-            char pad[0x144];
-            f32 unk72C;
-        } view72C_75;
-        struct {
-            char pad[0x144];
-            f32 kickRoll;
-        } view72C_76;
-        struct {
-            char pad[0x144];
-            f32 lean;
-        } view72C_77;
-        struct {
-            char pad[0x148];
-            f32 unk730[3];
-        } view730_78;
-        struct {
-            char pad[0x148];
-            f32 sway[3];
-        } view730_79;
-        struct {
-            char pad[0x154];
-            f32 unk73C;
-        } view73C_80;
-        struct {
-            char pad[0x154];
-            f32 side;
-        } view73C_81;
-        struct {
-            char pad[0x154];
-            Vec3 weapon;
-        } view73C_82;
-        struct {
-            char pad[0x158];
-            f32 unk740;
-        } view740_83;
-        struct {
-            char pad[0x158];
-            f32 height;
-        } view740_84;
-        struct {
-            char pad[0x15C];
-            f32 unk744;
-        } view744_85;
-        struct {
-            char pad[0x15C];
-            f32 forward;
-        } view744_86;
-        struct {
-            char pad[0x170];
-            f32 unk758;
-        } view758_87;
-        struct {
-            char pad[0x170];
-            f32 bobStrength;
-        } view758_88;
-        struct {
-            char pad[0x174];
-            f32 unk75C;
-        } view75C_89;
-        struct {
-            char pad[0x174];
-            f32 bobSpeed;
-        } view75C_90;
-        struct {
-            char pad[0x188];
-            s16 unk770;
-        } view770_91;
-        struct {
-            char pad[0x188];
-            s16 nextWeapon;
-        } view770_92;
-        struct {
-            char pad[0x188];
-            s16 weapon;
-        } view770_113;
-        struct {
-            char pad[0x18A];
-            s16 pad772;
-        } view772_114;
-        struct {
-            char pad[0x18C];
-            Vec3 unk774;
-        } view774_115;
-        struct {
-            char pad[0x198];
-            f32 unk780;
-        } view780_116;
-        struct {
-            char pad[0x19C];
-            f32 unk784;
-        } view784_117;
-        struct {
-            char pad[0x1A0];
-            s32 unk788;
-        } view788_93;
-        struct {
-            char pad[0x1A0];
-            s32 icons;
-        } view788_94;
-        struct {
-            char pad[0x1B0];
-            s32 unk798;
-        } view798_95;
-        struct {
-            char pad[0x1B0];
-            s32 carried;
-        } view798_96;
-        struct {
-            char pad[0x1B4];
-            Vec3 unk79C;
-        } view79C_97;
-        struct {
-            char pad[0x1B4];
-            Vec3 carriedPosition;
-        } view79C_98;
-        struct {
-            char pad[0x1D0];
-            s32 unk7B8;
-        } view7B8_99;
-        struct {
-            char pad[0x1D0];
-            s32 target;
-        } view7B8_100;
-        struct {
-            char pad[0x1D4];
-            f32 unk7BC;
-        } view7BC_101;
-        struct {
-            char pad[0x1D4];
-            f32 timer;
-        } view7BC_102;
-        struct {
-            char pad[0x1D8];
-            Vec3 unk7C0;
-        } view7C0_103;
-        struct {
-            char pad[0x1D8];
-            Vec3 targetPosition;
-        } view7C0_104;
-        struct {
-            char pad[0x200];
-            s32 unk7E8;
-        } view7E8_105;
-        struct {
-            char pad[0x200];
-            s32 zoomed;
-        } view7E8_106;
-        struct {
-            char pad[0x204];
-            f32 unk7EC;
-        } view7EC_132;
-        struct {
-            char pad[0x208];
-            f32 unk7F0;
-        } view7F0_133;
-        struct {
-            char pad[0x224];
-            struct Mount * unk80C;
-        } view80C_107;
-        struct {
-            char pad[0x224];
-            struct Mount * mount;
-        } view80C_108;
-        struct {
-            char pad[0x228];
-            s32 unk810;
-        } view810_109;
-        struct {
-            char pad[0x228];
-            s32 kind;
-        } view810_110;
-        struct {
-            char pad[0x22C];
-            Triple unk814;
-        } view814_111;
-        struct {
-            char pad[0x22C];
-            Triple offset;
-        } view814_112;
-        struct {
-            char pad[0x250];
-            f32 unk838;
-        } view838_113;
-        struct {
-            char pad[0x250];
-            f32 rideTime;
-        } view838_114;
-        struct {
-            char pad[0x254];
-            f32 unk83C;
-        } view83C_115;
-        struct {
-            char pad[0x254];
-            f32 bump;
-        } view83C_116;
-        struct {
-            char pad[0x258];
-            s32 unk840;
-        } view840_117;
-        struct {
-            char pad[0x258];
-            s32 surfaced;
-        } view840_118;
-        struct {
-            char pad[0x264];
-            s32 unk84C;
-        } view84C_149;
-        struct {
-            char pad[0x26C];
-            f32 unk854;
-        } view854_147;
-        struct {
-            char pad[0x274];
-            s32 unk85C;
-        } view85C_119;
-        struct {
-            char pad[0x274];
-            s32 w85C;
-        } view85C_120;
-        struct {
-            char pad[0x27C];
-            s32 unk864;
-        } view864_121;
-        struct {
-            char pad[0x27C];
-            s32 f864;
-        } view864_122;
-        struct {
-            char pad[0x280];
-            s32 unk868;
-        } view868_123;
-        struct {
-            char pad[0x280];
-            s32 f868;
-        } view868_124;
-        struct {
-            char pad[0x284];
-            s32 unk86C;
-        } view86C_125;
-        struct {
-            char pad[0x284];
-            s32 parameter;
-        } view86C_126;
-        struct {
-            char pad[0x284];
-            s32 animation;
-        } view86C_127;
-        struct {
-            char pad[0x288];
-            s32 unk870;
-        } view870_157;
-        struct {
-            char pad[0x290];
-            Shared_Effect effect;
-        } view878_158;
-        struct {
-            char pad[0x350];
-            char unk938[2188];
-        } view938_128;
-        struct {
-            char pad[0x350];
-            char strokes[2188];
-        } view938_129;
-        struct {
-            char pad[0x350];
-            char strokes[2188];
-        } view938_130;
-        struct {
-            char pad[0x350];
-            s32 unk938;
-        } view938_162;
-        struct {
-            char pad[0x6D0];
-            s32 unkCB8;
-        } viewCB8_163;
-        struct {
-            char pad[0x6E4];
-            s32 unkCCC;
-        } viewCCC_164;
-        struct {
-            char pad[0x758];
-            s32 unkD40;
-        } viewD40_165;
-        struct {
-            char pad[0x96C];
-            s32 unkF54;
-        } viewF54_131;
-        struct {
-            char pad[0x96C];
-            s32 selection;
-        } viewF54_132;
-        struct {
-            char pad[0x9A8];
-            s32 unkF90;
-        } viewF90_133;
-        struct {
-            char pad[0x9A8];
-            s32 choice;
-        } viewF90_134;
-        struct {
-            char pad[0xBCC];
-            s32 unk11B4;
-        } view11B4_135;
-        struct {
-            char pad[0xBCC];
-            s32 locked;
-        } view11B4_136;
-        struct {
-            char pad[0xBD0];
-            s32 unk11B8;
-        } view11B8_137;
-        struct {
-            char pad[0xBD0];
-            s32 frozen;
-        } view11B8_138;
-        struct {
-            char pad[0xBD4];
-            s32 unk11BC;
-        } view11BC_139;
-        struct {
-            char pad[0xBD4];
-            s32 f11BC;
-        } view11BC_140;
-        struct {
-            char pad[0xBD8];
-            s32 unk11C0;
-        } view11C0_141;
-        struct {
-            char pad[0xBD8];
-            s32 f11C0;
-        } view11C0_142;
-        struct {
-            char pad[0xBDC];
-            f32 unk11C4;
-        } view11C4_143;
-        struct {
-            char pad[0xBDC];
-            f32 soundTime;
-        } view11C4_144;
-        struct {
-            char pad[0xBE4];
-            s32 unk11CC;
-        } view11CC_145;
-        struct {
-            char pad[0xBE4];
-            s32 f11CC;
-        } view11CC_146;
-        struct {
-            char pad[0xBF0];
-            f32 unk11D8;
-        } view11D8_147;
-        struct {
-            char pad[0xBF0];
-            f32 recoil;
-        } view11D8_148;
-        struct {
-            char pad[0xBF0];
-            f32 stun;
-        } view11D8_149;
-        struct {
-            char pad[0xBF4];
-            f32 unk11DC;
-        } view11DC_185;
-        struct {
-            char pad[0xBF8];
-            f32 unk11E0;
-        } view11E0_186;
-        struct {
-            char pad[0xC00];
-            s32 unk11E8;
-        } view11E8_150;
-        struct {
-            char pad[0xC00];
-            s32 f11E8;
-        } view11E8_151;
-        struct {
-            char pad[0xC04];
-            f32 unk11EC;
-        } view11EC_189;
-        struct {
-            char pad[0xC28];
-            s32 unk1210;
-        } view1210_152;
-        struct {
-            char pad[0xC28];
-            s32 marker;
-        } view1210_153;
-        struct {
-            char pad[0xC2C];
-            s32 unk1214;
-        } view1214_154;
-        struct {
-            char pad[0xC2C];
-            s32 marker;
-        } view1214_155;
-        struct {
-            char pad[0xC2C];
-            s32 markerShown;
-        } view1214_156;
-        struct {
-            char pad[0xC30];
-            s32 unk1218;
-        } view1218_157;
-        struct {
-            char pad[0xC30];
-            s32 f1218;
-        } view1218_158;
-        struct {
-            char pad[0xC34];
-            s32 unk121C;
-        } view121C_159;
-        struct {
-            char pad[0xC34];
-            s32 f121C;
-        } view121C_160;
-        struct {
-            char pad[0xC38];
-            s32 unk1220;
-        } view1220_161;
-        struct {
-            char pad[0xC38];
-            s32 f1220;
-        } view1220_162;
-        struct { char pad[0xE]; s16 charge; } chargeView;
-        struct { char pad[0x11F4 - 0x5E8]; f32 spin; s32 frame; } rapidFireView;
-    } views5E8;
-    union {
-        struct {
-            u32 unk122C;
-        } view122C_0;
-        struct {
-            u32 flags;
-        } view122C_1;
-        struct {
-            s32 options;
-        } view122C_2;
-        struct {
-            s32 f122C;
-        } view122C_3;
-        struct {
-            s32 fxFlags;
-        } view122C_4;
-    } views122C;
-    f32 fxTime;
-    f32 fxSpeed;
-    s32 fxStage;
-    char pad123C[0x4];
-    f32 unk1240;
-    f32 unk1244;
-    char pad1248[0x7C];
-    union {
-        struct {
-            s32 unk12C4;
-        } view12C4_0;
-        struct {
-            s32 f12C4;
-        } view12C4_1;
-    } views12C4;
-    union {
-        struct {
-            s32 unk12C8;
-        } view12C8_0;
-        struct {
-            s32 f12C8;
-        } view12C8_1;
-    } views12C8;
-    union {
-        struct {
-            s32 unk12CC[8];
-        } view12CC_0;
-        struct {
-            s32 splitsA[8];
-        } view12CC_1;
-    } views12CC;
-    s32 unk12EC;
-    char pad12F0[0x4];
-    union {
-        struct {
-            s32 unk12F4[8];
-        } view12F4_0;
-        struct {
-            s32 splitsB[8];
-        } view12F4_1;
-    } views12F4;
-    char pad1314[0x20];
-    union {
-        struct {
-            s32 unk1334;
-        } view1334_0;
-        struct {
-            s32 f1334;
-        } view1334_1;
-    } views1334;
-    union {
-        struct {
-            s32 unk1338;
-        } view1338_0;
-        struct {
-            s32 f1338;
-        } view1338_1;
-    } views1338;
-    union {
-        struct {
-            s32 unk133C;
-        } view133C_0;
-        struct {
-            s32 laps;
-        } view133C_1;
-        struct {
-            s32 lives;
-        } view133C_2;
-    } views133C;
-    union {
-        struct {
-            s32 unk1340;
-        } view1340_0;
-        struct {
-            s32 stalls;
-        } view1340_1;
-        struct {
-            s32 timer;
-        } view1340_2;
-        struct {
-            s32 respawnTimer;
-        } view1340_3;
-    } views1340;
-    char pad1344[0x70];
-    union {
-        struct {
-            struct StateInfo * unk13B4;
-        } view13B4_0;
-        struct {
-            struct StateInfo * states;
-        } view13B4_1;
-        struct {
-            struct Mode * unk13B4;
-        } view13B4_2;
-        struct {
-            void * character;
-        } view13B4_3;
-        struct {
-            s32 f13B4;
-        } view13B4_4;
-        struct {
-            struct Shared_StateInfo * states;
-        } view13B4_5;
-    } views13B4;
-    char pad13B8[0x10];
-    union {
-        struct {
-            s32 unk13C8;
-        } view13C8_0;
-        struct {
-            s32 w13C8;
-        } view13C8_1;
-        struct {
-            s32 f13C8;
-        } view13C8_2;
-    } views13C8;
-    char pad13CC[0x8];
-    s32 unk13D4;
-    union {
-        struct {
-            struct Held * unk13D8;
-        } view13D8_0;
-        struct {
-            struct Held * held;
-        } view13D8_1;
-    } views13D8;
-    char pad13DC[0xC];
-    s32 messageIndex;
-    char pad13EC[0x64];
-    union {
-        struct {
-            s32 unk1450;
-        } view1450_0;
-        struct {
-            s32 computer;
-        } view1450_1;
-        struct {
-            s32 infinite;
-        } view1450_2;
-        struct {
-            s32 unlimited;
-        } view1450_3;
-        struct {
-            s32 uncounted;
-        } view1450_4;
-        struct {
-            s32 f1450;
-        } view1450_5;
-    } views1450;
-    union {
-        struct {
-            s32 unk1454;
-        } view1454_0;
-        struct {
-            s32 f1454;
-        } view1454_1;
-    } views1454;
-    char pad1458[0xC];
-    union {
-        struct {
-            Vec3 unk1464;
-        } view1464_0;
-        struct {
-            Vec3 aim;
-        } view1464_1;
-    } views1464;
-    char pad1470[0x10];
-    union {
-        struct {
-            Matrix unk1480[2];
-        } view1480_0;
-        struct {
-            Matrix beams[2];
-        } view1480_1;
-    } views1480;
-    union {
-        struct {
-            Matrix unk1500[2];
-        } view1500_0;
-        struct {
-            Matrix lasers[2];
-        } view1500_1;
-    } views1500;
-    union {
-        struct {
-            Matrix unk1580[2];
-        } view1580_0;
-        struct {
-            Matrix dots[2];
-        } view1580_1;
-    } views1580;
-    char pad1600[0xD4];
-    union {
-        struct {
-            s32 unk16D4;
-        } view16D4_0;
-        struct {
-            s32 f16D4;
-        } view16D4_1;
-    } views16D4;
-    u16 unk16D8;
-    char pad16DA[0x6];
-    union {
-        struct {
-            struct SharedPlayer_func_8021E2A0_de * unk16E0;
-        } view16E0_0;
-        struct {
-            struct SharedPlayer_func_8021E2A0_de * next;
-        } view16E0_1;
-        struct {
-            struct SharedPlayer_func_8021E2A0_de * next;
-        } view16E0_2;
-    } views16E0;
-};
 struct Shared_AnimState;
 struct Shared_AnimState {
     char pad0[0xB];
@@ -20449,10 +17596,10 @@ struct TabOptionsScreen {
 };
 struct TargetList;
 struct TargetList {
-    SharedPlayer_func_80210248_eu *self;
+    SharedPlayer *self;
     char pad[0x38 - 4];
     s32 count;
-    SharedPlayer_func_80210248_eu *targets[10];
+    SharedPlayer *targets[10];
     char pad2[0x6C - 0x64];
     s32 scores[10];
     s32 distances[10];
@@ -20581,11 +17728,11 @@ struct TextBoundsText {
     s32 field20;
     s32 field24;
 };
-struct Object_func_80401980_de;
+struct ObjectCode80400000;
 struct Track_func_80401980_de;
 struct Track_func_80401980_de {
     char pad[0x18];
-    struct Object_func_80401980_de *target;
+    struct ObjectCode80400000 *target;
     f32 time;
     char pad20[16];
     f32 start;
@@ -20652,7 +17799,7 @@ struct View_func_8025AB94_de {
     char padB4[4];
     f32 scale;
 };
-struct Owner_func_8025A844_de;
+struct OwnerCode8025A3EC;
 struct Voice_func_8025A844_de;
 struct Voice_func_8025A844_de {
     s32 index;
@@ -20670,7 +17817,7 @@ struct Voice_func_8025A844_de {
     char padA0[4];
     s32 flags;
     char padA8[8];
-    struct Owner_func_8025A844_de *owner;
+    struct OwnerCode8025A3EC *owner;
     char padB4[0xC];
     s32 fixed;
 };
@@ -21255,10 +18402,10 @@ struct func_80422C20_G1;
 struct func_80422C20_G1 {
     struct Screen_func_80422960_de * unk0;
 };
-struct Game_func_80422960_de;
+struct LevelActor;
 struct func_80422C20_G2;
 struct func_80422C20_G2 {
-    struct Game_func_80422960_de * unk0;
+    struct LevelActor * unk0;
 };
 struct func_804302F8_S1;
 struct func_804302F8_S1 {
@@ -21310,8 +18457,8 @@ struct func_8044C410_S1 {
 };
 struct ActorDef;
 typedef struct ActorDef ActorDef;
-struct Actor_func_80443844_de;
-typedef struct Actor_func_80443844_de Actor_func_80443844_de;
+struct ActorCode80443868;
+typedef struct ActorCode80443868 ActorCode80443868;
 struct Actor_func_8044560C_de;
 typedef struct Actor_func_8044560C_de Actor_func_8044560C_de;
 struct Behaviour;
@@ -21324,8 +18471,8 @@ struct Ctrl;
 typedef struct Ctrl Ctrl;
 struct Descriptor;
 typedef struct Descriptor Descriptor;
-struct Descriptor_func_80205F18_de;
-typedef struct Descriptor_func_80205F18_de Descriptor_func_80205F18_de;
+struct DescriptorCode80204E78;
+typedef struct DescriptorCode80204E78 DescriptorCode80204E78;
 struct Descriptor_func_802504B0_de;
 typedef struct Descriptor_func_802504B0_de Descriptor_func_802504B0_de;
 struct Flagged;
@@ -21358,10 +18505,10 @@ struct Owner_func_804066BC_de;
 typedef struct Owner_func_804066BC_de Owner_func_804066BC_de;
 struct Owner_func_8043E494_de;
 typedef struct Owner_func_8043E494_de Owner_func_8043E494_de;
-struct Player_func_80229FA0_de;
-typedef struct Player_func_80229FA0_de Player_func_80229FA0_de;
-struct Scene_func_80259784_de;
-typedef struct Scene_func_80259784_de Scene_func_80259784_de;
+struct PlayerCode80225D1080229FA0;
+typedef struct PlayerCode80225D1080229FA0 PlayerCode80225D1080229FA0;
+struct SceneCode802591C0;
+typedef struct SceneCode802591C0 SceneCode802591C0;
 struct ScoreTable;
 typedef struct ScoreTable ScoreTable;
 struct Scores;

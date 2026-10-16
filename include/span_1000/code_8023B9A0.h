@@ -24,8 +24,8 @@ typedef struct OwnerRecAt8V2 OwnerRecAt8V2;
 
 extern void func_8023CCD4_de(OwnerRecAt8V2 *arg0);
 
-struct Channel_func_8023B9C0_eu;
-typedef struct Channel_func_8023B9C0_eu Channel_func_8023B9C0_eu;
+struct Channels;
+typedef struct Channels Channels;
 
 struct Mapping;
 typedef struct Mapping Mapping;
@@ -135,8 +135,8 @@ struct Block_func_8023C85C_de {
     void *data;
 };
 
-struct Channel_func_8023B9C0_eu;
-struct Channel_func_8023B9C0_eu {
+struct Channels;
+struct Channels {
     char pad0[0x1C];
 };
 
@@ -163,7 +163,7 @@ struct State_func_8023B9C0_eu {
     char list1Data[0xAD8 - 0xAB8];
     char list2[0xAF0 - 0xAD8];
     char list2Data[0xB10 - 0xAF0];
-    Channel_func_8023B9C0_eu channels[8];
+    Channels channels[8];
     s32 fBF0;
     union { s32 fBF4; Link_func_8023CC08_de *tail; };
     u8 lookup[0x100];

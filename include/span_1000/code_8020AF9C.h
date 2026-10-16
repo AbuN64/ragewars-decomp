@@ -123,8 +123,8 @@ extern int func_8020D280_de(void *arg0);
 struct Node8020D114;
 typedef struct Node8020D114 Node8020D114;
 
-struct func_8020CA10_S1;
-struct func_8020CA10_S1 {
+struct RecCode802080008020CA10;
+struct RecCode802080008020CA10 {
     s32 unk0;
     char pad0[0x4 - 0x0 - sizeof(s32)];
     f32 unk4;
@@ -229,8 +229,8 @@ extern int func_8020D308_de(void *arg0);
 struct Node;
 typedef struct Node Node;
 
-struct func_8020CA10_S1;
-typedef struct func_8020CA10_S1 func_8020CA10_S1;
+struct RecCode802080008020CA10;
+typedef struct RecCode802080008020CA10 RecCode802080008020CA10;
 
 extern float D_800C1D8C_de;
 

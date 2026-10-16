@@ -14,7 +14,7 @@ extern f32 D_800C9514_de;
 extern f32 D_800C9FE8;
 extern Triple D_800C94DC_de;
 extern f32 D_800C2AF4_de,D_800C2AF8_de,D_800C2AFC_de,D_800C2B00_de,D_800C2B04_de,D_800C2B08_de,D_800C2B0C_de,D_800C2B10_de,D_800C2B14_de,D_800C2B18_de,D_800C2B1C_de,D_800C2B20_de,D_800C2B24_de,D_800C2B28_de,D_800C2B2C_de,D_800C2B30_de;
-void func_80225F44_de(SharedPlayer_func_802233F0_de *player,func_802165F8_S1 *body) {
+void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     Matrix rotation;
     struct Mount *mount;
     Vec3 *offset;

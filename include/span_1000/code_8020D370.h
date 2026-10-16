@@ -46,8 +46,8 @@ struct Selection_func_8020D4AC_de {
     s32 id;
 };
 
-struct func_8020DC10_S1;
-typedef struct func_8020DC10_S1 func_8020DC10_S1;
+struct RecCode802080008020DC10;
+typedef struct RecCode802080008020DC10 RecCode802080008020DC10;
 
 /* The trajectory mode belongs to the full instance, beyond its 20-byte header. */
 typedef struct BallisticInstance {
@@ -79,8 +79,8 @@ struct ActorRec {
     s32 field284;
 };
 
-struct func_8020DC10_S1;
-struct func_8020DC10_S1 {
+struct RecCode802080008020DC10;
+struct RecCode802080008020DC10 {
     char pad0[0x64];
     s32 unk64;
     char pad64[0x21C - 0x64 - sizeof(s32)];

@@ -6,6 +6,6 @@
 
 
 /** Release every active entry of arg0 and move it onto the spare list. */
-void func_8044D794_de(Owner_func_8044D794_de *owner);
+void func_8044D794_de(OwnerCode8044E2B8 *owner);
 
 #endif

@@ -18,7 +18,7 @@ extern void func_80253838_de(s32, void *);
  * pending resources, and show the channel-specific success/error dialog. */
 s32 func_80407290_de(s32 unused, struct Shared_PakMenu *menu)
 {
-    struct SharedPlayer_func_80226A34_de *player;
+    struct SharedPlayer *player;
     char extension[8];
     char *label;
     char *dialog;

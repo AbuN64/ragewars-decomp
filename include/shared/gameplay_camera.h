@@ -147,7 +147,7 @@ struct GameplayCamera {
     s8 fadeRed, fadeGreen, fadeBlue;
     s8 fadeStart, fadeEnd, fadeStep, fadeState;
     u8 pad552[2];
-    List_func_804428F8_de messageList; /* 0x554 */
+    MessageList messageList; /* 0x554 */
     u8 pad56C[4];
     s8 unk570; /* +0x570: src/func_80234FDC.c */
     char pad571[0xE40 - 0x571];

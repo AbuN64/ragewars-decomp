@@ -192,9 +192,9 @@ struct Player_func_8042F7A8_de {
 struct PakMenuController;
 typedef struct PakMenuController PakMenuController;
 
-struct Block_func_8042F7A8_de;
+struct Data800E54A4Ptr;
 struct Player_func_8042F7A8_de;
-struct Block_func_8042F7A8_de {
+struct Data800E54A4Ptr {
     char pad0[0x8];
     char menu[0x4C - 0x8];
     s32 phase4C;
@@ -235,10 +235,10 @@ struct Shared_Item;
 typedef struct Shared_Item Shared_Item;
 
 struct Block_func_80430028_de;
-struct Slots_func_8041B7FC_de;
+struct SlotsCode804196C0;
 struct Block_func_80430028_de {
     char pad0[4];
-    struct Slots_func_8041B7FC_de *slots;
+    struct SlotsCode804196C0 *slots;
 };
 
 struct Shared_Block;

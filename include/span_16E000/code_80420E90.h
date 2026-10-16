@@ -5,8 +5,7 @@
 #include "common/types_1dc8418c21db.h"
 extern void func_804210E8_de();
 
-struct Frame_func_804217D4_de;
-typedef struct Frame_func_804217D4_de Frame_func_804217D4_de;
+struct CellRecAt1A;
 
 extern float D_800DD600;
 
@@ -16,8 +15,8 @@ extern s32 func_80421A58_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
 extern void func_8042177C_de();
 
-struct State_func_804217D4_de;
-typedef struct State_func_804217D4_de State_func_804217D4_de;
+struct Data800E4400Ptr;
+typedef struct Data800E4400Ptr Data800E4400Ptr;
 
 extern void func_80421234_de();
 
@@ -87,13 +86,13 @@ struct Screen_func_80421884_de {
     union { s32 confirmed; s32 full; };
 };
 
-struct Frame_func_804217D4_de;
-struct State_func_804217D4_de;
-struct State_func_804217D4_de {
+struct CellRecAt1A;
+struct Data800E4400Ptr;
+struct Data800E4400Ptr {
     char a[8];
     s32 unk8;
     char b[0x14];
-    struct Frame_func_804217D4_de *unk20;
+    struct CellRecAt1A *unk20;
     char c[8];
     s32 unk2C;
 };

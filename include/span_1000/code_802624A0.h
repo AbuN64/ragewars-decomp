@@ -54,9 +54,7 @@ struct Record_func_802627A0_de {
     u16 count;
     u16 angle;
 };
-
-struct SharedPlayer_func_80226A34_de;
-extern void func_802631B0_de(char * arg0, struct SharedPlayer_func_80226A34_de * arg1);
+extern void func_802631B0_de(char * arg0, struct SharedPlayer * arg1);
 
 struct ObjRecAt10V1;
 typedef struct ObjRecAt10V1 ObjRecAt10V1;

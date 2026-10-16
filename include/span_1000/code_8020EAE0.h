@@ -101,8 +101,8 @@ struct func_8020F93C_S1 {
     s32 unk6C;
 };
 
-struct func_8020EAE0_S1;
-struct func_8020EAE0_S1 {
+struct RecCode8020EAE0;
+struct RecCode8020EAE0 {
     char pad0[0x4];
     s32 unk4;
     char pad4[0xC - 0x4 - sizeof(s32)];
@@ -163,8 +163,8 @@ struct Actor1DC {
     char **info;
 };
 
-struct func_8020EAE0_S1;
-typedef struct func_8020EAE0_S1 func_8020EAE0_S1;
+struct RecCode8020EAE0;
+typedef struct RecCode8020EAE0 RecCode8020EAE0;
 
 extern s32 func_8020F55C_de(s32 arg0);
 

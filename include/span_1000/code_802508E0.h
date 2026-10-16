@@ -21,14 +21,7 @@ extern int D_801005A0[];
 struct CachedResource;
 typedef struct CachedResource CachedResource;
 
-struct Manager_func_802524B0_de;
-struct Manager_func_802524B0_de {
-    char queue[0x92C];
-    IntrusiveList pending;
-    IntrusiveList active;
-    char padActive[0x20 - sizeof(IntrusiveList)];
-    char lock[0x18];
-};
+struct Manager;
 
 struct Node_func_802524B0_de;
 typedef struct Node_func_802524B0_de Node_func_802524B0_de;
@@ -97,8 +90,8 @@ struct ResourceHashEntry {
     struct ResourceHashEntry *next;
 };
 
-struct Manager_func_802524B0_de;
-typedef struct Manager_func_802524B0_de Manager_func_802524B0_de;
+struct Manager;
+typedef struct Manager Manager;
 
 struct func_80250D88_S1;
 struct func_80250D88_S1 {
@@ -124,7 +117,6 @@ struct ObjectState13 {
 };
 
 struct Manager;
-typedef struct Manager Manager;
 
 struct Node_func_802524B0_de;
 struct Node_func_802524B0_de {

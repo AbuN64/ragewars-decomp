@@ -69,7 +69,7 @@ void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
   {
     if (((slot->used != absent) && (record->header->local != i)) && ((value == absent) || (slot->value != value)))
     {
-      Owner_func_8025B5F0_de *owner = slot->owner;
+      OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
       void *sound;
       slot->active = active;
       slot->flag = 0;
@@ -103,7 +103,7 @@ void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
 
 
 void func_8025B6F8_de(void *arg0, int arg1, int arg2) {
-    Record_func_8025B758_de *slot = arg0;
+    RecordCode8025A3EC *slot = arg0;
     float k = D_800C9068;
 
     slot->f0C = -1;
@@ -133,7 +133,7 @@ void func_8025B758_de(s32 *arg0, s32 arg1) {
     f32 t;
     f32 p;
     s32 off;
-    Record_func_8025B758_de *rec;
+    RecordCode8025A3EC *rec;
     f32 k1;
     f32 k2;
     f32 k3;
@@ -158,7 +158,7 @@ void func_8025B758_de(s32 *arg0, s32 arg1) {
     one = 1;
     off = i;
     do {
-        rec = (Record_func_8025B758_de *)((u32)off + (u32)arg0);
+        rec = (RecordCode8025A3EC *)((u32)off + (u32)arg0);
         rec = &((ObjRecAt4V6 *)(rec))->unk4;
         rec->index = i;
         i += 1;
@@ -189,13 +189,13 @@ s32 func_8025B854_de(s32 arg0, s16 arg1)
   s32 temp_v0;
   s32 temp_v1;
   void *temp_s0;
-  Record_func_8025B758_de *slot;
-  Owner_func_8025B5F0_de *owner;
+  RecordCode8025A3EC *slot;
+  OwnerCode8025A3EC8025B5F0 *owner;
   temp_v0 = (arg1 * 0xCC) + arg0;
   temp_v0 = temp_v0 + 4;
-  slot = (Record_func_8025B758_de *)temp_v0;
+  slot = (RecordCode8025A3EC *)temp_v0;
   temp_v1 = slot->owner;
-  owner = (Owner_func_8025B5F0_de *)temp_v1;
+  owner = (OwnerCode8025A3EC8025B5F0 *)temp_v1;
   temp_s0 = owner->sound;
   func_802B2F00_de(temp_s0, owner->samples[slot->index]);
   func_802B2620_de(temp_s0);
@@ -374,7 +374,7 @@ void func_8025BE08_de(RecordRecAt4V6 *record, s32 value) {
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {
-            Owner_func_8025B5F0_de *owner = slot->owner;
+            OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
             void *sound;
 
             slot->active = 1;
@@ -397,7 +397,7 @@ void func_8025BF08_de(RecordRecAt4V5 *record, s32 value) {
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && slot->value == value) {
-            Owner_func_8025B5F0_de *owner = slot->owner;
+            OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
             void *sound;
 
             slot->active = 1;
@@ -420,7 +420,7 @@ void func_8025C008_de(RecordRecAt4V4 *record, s32 value) {
 
     for (i = 0; i < 17; slot++, i++) {
         if (slot->used != -1 && record->header->local != i && (slot->mask & value) != 0) {
-            Owner_func_8025B5F0_de *owner = slot->owner;
+            OwnerCode8025A3EC8025B5F0 *owner = slot->owner;
             void *sound;
 
             slot->active = 1;
@@ -555,27 +555,27 @@ f32 func_8025C368_de(char *source, char *listener)
 }
 
 void func_8025C438_de(void *arg0, s32 arg1) {
-    Record_func_8025B758_de *slot = arg0;
-    Owner_func_8025B5F0_de *owner;
+    RecordCode8025A3EC *slot = arg0;
+    OwnerCode8025A3EC8025B5F0 *owner;
     s32 temp_s0;
     void *temp_s0_2;
 
     temp_s0 = slot->owner;
-    owner = (Owner_func_8025B5F0_de *)temp_s0;
+    owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
     temp_s0_2 = owner->sound;
     func_802B2F00_de(temp_s0_2, owner->samples[slot->index]);
     func_802B2F10_de(temp_s0_2, (s16)(s32)((f32) arg1 * (slot->fC8)));
 }
 
 void func_8025C4B4_de(void *arg0, f32 arg1) {
-    Record_func_8025B758_de *slot = arg0;
-    Owner_func_8025B5F0_de *owner;
+    RecordCode8025A3EC *slot = arg0;
+    OwnerCode8025A3EC8025B5F0 *owner;
     s32 temp_s0;
     void *temp_s0_2;
     f32 scaled;
 
     temp_s0 = slot->owner;
-    owner = (Owner_func_8025B5F0_de *)temp_s0;
+    owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
     temp_s0_2 = owner->sound;
     func_802B2F00_de(temp_s0_2, owner->samples[slot->index]);
     scaled = arg1 * (slot->f34);

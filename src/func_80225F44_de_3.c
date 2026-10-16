@@ -11,7 +11,7 @@ extern void **func_8025343C_de(int, int, int, char *);
 extern void func_802A001C_de(void *, int, int);
 
 void func_80226950_de(PlayerList *list, int count) {
-    int playerSize = count * sizeof(Player_func_80226950_de);
+    int playerSize = count * sizeof(Players);
     int stateSize = count * 0x330;
     char *states;
     void **handle;
@@ -58,10 +58,10 @@ extern f32 D_800D2988;
 extern Menu_func_80226A34_de D_8014561C;
 extern Game D_8014687C;
 extern s32 D_80146894;
-extern void func_802631B0_de(char *, SharedPlayer_func_80226A34_de *);
-extern void func_8022C490_de(SharedPlayer_func_80226A34_de *);
-extern void func_80220ED4_de(SharedPlayer_func_80226A34_de *);
-extern void func_80220A80_de(SharedPlayer_func_80226A34_de *, SharedPlayer_func_80226A34_de *);
+extern void func_802631B0_de(char *, SharedPlayer *);
+extern void func_8022C490_de(SharedPlayer *);
+extern void func_80220ED4_de(SharedPlayer *);
+extern void func_80220A80_de(SharedPlayer *, SharedPlayer *);
 
 extern s32 func_8026435C_de(Shared_Effect *);
 
@@ -77,7 +77,7 @@ extern void func_80227E8C_de(World_func_80226A34_de *);
 
 void func_80226A34_de(World_func_80226A34_de *world) {
     f32 frameTime;
-    SharedPlayer_func_80226A34_de *player;
+    SharedPlayer *player;
     Rules *rules;
 
     if (D_8014687C.state != 0xB && D_8014687C.state != 8) {

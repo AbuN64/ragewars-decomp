@@ -421,12 +421,12 @@ struct func_8044DE04_S1;
 typedef struct func_8044DE04_S1 func_8044DE04_S1;
 
 struct ObjRecAt8C8;
-struct Entry_func_8044A7D0_de {
+struct EntryCode8044ACCC {
     char pad0[0x228];
 };
 
 struct ObjRecAt8C8 {
-    struct Entry_func_8044A7D0_de entries[4];
+    struct EntryCode8044ACCC entries[4];
     IntrusiveList free;
     IntrusiveList active;
     s16 unk8C8;
