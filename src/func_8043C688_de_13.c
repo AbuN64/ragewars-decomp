@@ -1,14 +1,15 @@
-#include "span_16E000/menu_screen_setup.h"
 #include "shared/func_804235A8_eu_closed.h"
-extern void func_8042A7B4_de(s32);
-extern void func_8042E988_de(s32);
-extern void func_8042B2E4_de(void);
+#include "span_16E000/menu_screen_setup.h"
+#include "span_16E000/code_80423280.h"
+#include "span_16E000/code_80429C10.h"
+#include "span_16E000/code_804366C4.h"
 
 s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
     MenuWidget *item;
     f32 alpha;
-    u32 fade;
-    s32 count;
+    s32 fade;
+    s32 count, previous, level;
+    SetupScreen *countdown;
     if (D_80154020.ready == 1) {
         D_80154020.ready = 0;
         if (D_80154020.value != -1) {
@@ -57,8 +58,14 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         }
         break;
     case 4:
-        count = D_800E4F60->unk3E0 - 1;
-        D_800E4F60->unk3E0 = count < 0 ? 0 : count;
+        countdown = D_800E4F60;
+        previous = countdown->unk3E0;
+        count = previous - 1;
+        /* fakematch: preserve the target's comparison-based decrement,
+         * which a normal saturating countdown would simplify to max(previous - 1, 0). */
+        if (count >= 0) count = previous - (previous >= count);
+        else count = 0;
+        countdown->unk3E0 = count;
         if (D_800E4F60->unk3E0 <= 0 && func_80419F38_de(D_800E4F60->text3E4)) {
             func_80419F24_de(D_800E4F60->text3E4);
             func_8042A7B4_de(10);
@@ -77,7 +84,8 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         break;
     case 6: case 7: break;
     case 8:
-        fade = func_8040EC30_de(root, 0x312)->alpha >> 1;
+        level = func_8040EC30_de(root, 0x312)->alpha;
+        fade = level >> 1;
         func_8042A7B4_de(fade);
         if (fade < 10) {
             D_800E4F60->unk3DC = 3;
@@ -86,7 +94,8 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         }
         break;
     case 9:
-        fade = (func_8040EC30_de(root, 0x312)->alpha + 1) * 2;
+        fade = func_8040EC30_de(root, 0x312)->alpha;
+        fade = (fade + 1) * 2;
         if (fade > 65) { fade = 65; D_800E4F60->unk3DC = 3; }
         func_8042A7B4_de(fade);
         if (D_800E4F60->selection == 0) func_8040E8D8_de(D_800E4F60->unk448, 1);
@@ -96,13 +105,14 @@ s32 func_8042A2B0_de(void *root, s32 unused, s32 delta) {
         D_800E4F60->unk45C += delta;
         if (D_80154020.value == -1) {
             if (D_800E4F60->selection == 0) {
-                alpha = func_802B6560_de((f32)D_800E4F60->unk45C * D_800EE144) * 100.0f + 150.0f;
+                alpha = func_802B6560_de((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
                 item = D_800E4F60->unk448;
+                item->alpha = (u32)alpha;
             } else {
-                alpha = func_802B6560_de((f32)D_800E4F60->unk45C * D_800EE154) * 100.0f + 150.0f;
+                alpha = func_802B6560_de((f32)D_800E4F60->unk45C * 0.0033333334f) * 100.0f + 150.0f;
                 item = D_800E4F60->item;
+                item->alpha = (u32)alpha;
             }
-            item->alpha = (u32)alpha;
         }
     }
     return 0;
