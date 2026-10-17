@@ -79703,6 +79703,187 @@ add = []
 omit = []
 
 [[unit]]
+path = "src/OVL_80400000/80400000/80420E90.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_804210E8_de", "func_80421234_de", "func_804213DC_de", "rodata/func_804213DC_de/800E15C0"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_10.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_8042177C_de", "func_804217D4_de", "func_80421854_de", "func_80421884_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_11.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80421A58_de"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_12.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80421AE8_de"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu-x"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_13.CPP"
+kind = "data"
+group = "code_80420E90"
+members = ["func_8042201C_de_padding_18801C"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_14.CPP"
+kind = "data"
+group = "code_80420E90"
+members = ["func_8042204C_us_rev1"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_15.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80421E70_eu"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_16.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80421F08_eu"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_2.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80421568_de", "rodata/func_80421568_de/800E15E8"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu", "eu-x"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_3.CPP"
+kind = "data"
+group = "code_80420E90"
+members = ["rodata/func_80421568_de/800E15E8"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "us", "us-rev1"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_4.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80421BBC_de", "func_80421BEC_de", "func_80421CE8_de", "func_80421D94_de", "func_80421DD0_de", "func_80421E60_de", "func_80421E6C_de", "func_80421E9C_de", "func_80421FEC_de", "rodata/func_80421CE8_de/800E1610"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_5.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80422020_de", "rodata/func_80422020_de/800E1640"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_6.CPP"
+kind = "data"
+group = "code_80420E90"
+members = ["func_8042251C_eu_x_padding_11251C"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_7.CPP"
+kind = "data"
+group = "code_80420E90"
+members = ["func_80421AE8_de_padding_18FB18"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["us"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_8.CPP"
+kind = "data"
+group = "code_80420E90"
+members = ["func_8042204C_us_padding_18604C"]
+toolchain = "gcc-2.8.1-sn64"
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
+path = "src/OVL_80400000/80400000/80420E90_9.CPP"
+kind = "c"
+group = "code_80420E90"
+members = ["func_80420E20_de"]
+toolchain = "gcc-2.8.1-sn64"
+withheld = ["de", "eu", "eu-x"]
+
+[unit.options]
+add = []
+omit = []
+
+[[unit]]
 path = "src/OVL_80400000/80400000/804221A0.CPP"
 kind = "c"
 group = "code_804221A0"
@@ -87901,192 +88082,11 @@ add = []
 omit = []
 
 [[unit]]
-path = "src/func_804213DC_de.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80420E20_de"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["de", "eu", "eu-x"]
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_10.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80422020_de", "rodata/func_80422020_de/800E1640"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_2.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_804210E8_de", "func_80421234_de", "func_804213DC_de", "rodata/func_804213DC_de/800E15C0"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_3.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_8042177C_de", "func_804217D4_de", "func_80421854_de", "func_80421884_de"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_4.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80421E70_eu"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_5.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80421F08_eu"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_6.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80421A58_de"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_7.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80421AE8_de"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["de", "eu-x"]
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_8.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80421BBC_de", "func_80421BEC_de", "func_80421CE8_de", "func_80421D94_de", "func_80421DD0_de", "func_80421E60_de", "func_80421E6C_de", "func_80421E9C_de", "func_80421FEC_de", "rodata/func_80421CE8_de/800E1610"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_804213DC_de_9.c"
-kind = "data"
-group = "code_80420E90"
-members = ["func_8042204C_us_rev1"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_80421568_de.c"
-kind = "c"
-group = "code_80420E90"
-members = ["func_80421568_de", "rodata/func_80421568_de/800E15E8"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["de", "eu", "eu-x"]
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_80421AE8_de_padding_18FB18.c"
-kind = "data"
-group = "code_80420E90"
-members = ["func_80421AE8_de_padding_18FB18"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["us"]
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8042201C_de_padding_18801C.c"
-kind = "data"
-group = "code_80420E90"
-members = ["func_8042201C_de_padding_18801C"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8042204C_us_padding_18604C.c"
-kind = "data"
-group = "code_80420E90"
-members = ["func_8042204C_us_padding_18604C"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/func_8042251C_eu_x_padding_11251C.c"
-kind = "data"
-group = "code_80420E90"
-members = ["func_8042251C_eu_x_padding_11251C"]
-toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
 path = "src/libgcc/__cmpdi2.c"
 kind = "c"
 group = "code_802BE0D0"
 members = ["__cmpdi2"]
 toolchain = "gcc-2.8.1-sn64"
-
-[unit.options]
-add = []
-omit = []
-
-[[unit]]
-path = "src/rodata.func_80421568_de.800E15E8.c"
-kind = "data"
-group = "code_80420E90"
-members = ["rodata/func_80421568_de/800E15E8"]
-toolchain = "gcc-2.8.1-sn64"
-withheld = ["de", "us", "us-rev1"]
 
 [unit.options]
 add = []
