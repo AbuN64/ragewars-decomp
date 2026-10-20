@@ -31,7 +31,7 @@ extern char D_80141008;
 extern s32 D_auto_800D7068;
 extern s32 func_8028B21C_de(void *, s32);
 extern s32 func_8028C198_de(void *, s32);
-extern void func_80235AE0_de(void *);
+extern void Camera_SetupViewportAndFog(void *);
 extern void func_80272C60_de(void *, f32, f32, f32);
 extern void func_802739C4_de(void *, f32);
 extern void func_80273D6C_de(void *);
@@ -49,7 +49,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
     D_800D15E4[2] = D_800CA4B0;
     D_800D15E4[3] = D_800CA4B0;
     if (handle != -1) {
-        func_80235AE0_de(&D_80141008);
+        Camera_SetupViewportAndFog(&D_80141008);
         func_80272C60_de(matrix, 0.0f, -100.0f, -500.0f);
         func_802739C4_de(matrix, state->unk26DB0 * D_800CA4B4);
         func_80273D6C_de(matrix);

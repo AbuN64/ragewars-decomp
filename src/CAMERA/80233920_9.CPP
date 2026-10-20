@@ -25,7 +25,7 @@ extern World_func_80236F1C_de D_80145040;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void func_80253BBC_de(s32, s32);
-extern void func_80235AE0_de(Racer *);
+extern void Camera_SetupViewportAndFog(Racer *);
 extern void func_802362E8_de(Racer *, s32);
 extern void func_80239FD4_de(Racer *, s32);
 extern void func_80233C88_de(Racer *);
@@ -76,7 +76,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
         }
     }
     for (racer = race->header.views.head; racer != 0;) {
-        func_80235AE0_de(racer);
+        Camera_SetupViewportAndFog(racer);
         func_802362E8_de(racer, arg1);
         if (racer->effect != 0) {
             func_80239FD4_de(racer, racer->effectArg);
@@ -91,7 +91,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
             racer = racer->next;
         }
     }
-    func_80235AE0_de(&race->self);
+    Camera_SetupViewportAndFog(&race->self);
     if (race->header.views.count == 0) {
         func_80233C88_de(&race->self);
     }

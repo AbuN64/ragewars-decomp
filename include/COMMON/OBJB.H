@@ -168,7 +168,7 @@ struct State_func_8044A170_de {
     f32 unk530;
     f32 unk534;
     char pad538[4];
-    s32 unk53C;
+    s32 fogNear;
     s32 unk540;
     s32 unk544;
     u8 unk548;

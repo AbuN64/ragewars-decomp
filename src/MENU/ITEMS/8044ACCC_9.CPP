@@ -64,7 +64,7 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     arg0->unk523 = 0;
     arg0->unk527 = 0;
     arg0->unk51C = temp_f21;
-    arg0->unk53C = 0x3E3;
+    arg0->fogNear = 0x3E3;
     arg0->unk540 = 0x3E3;
     arg0->unk548 = 0;
     arg0->unk7C = 0;

@@ -374,7 +374,7 @@ extern void func_8026D914_de(s32);
 extern void func_802659E0_de(void *);
 static inline void initScale35AE0(Racer *v) { v->screenScaleX=1.0f; v->screenScaleY=1.0f; }
 /* Set projection, viewport and lighting, then draw the view's clear rectangle and fog. */
-void func_80235AE0_de(Racer *view) {
+void Camera_SetupViewportAndFog(Racer *view) {
     struct { u8 red, green, blue; } rgb;
     s16 ulx, uly, lrx, lry;
     s32 flag, near, far, denom;
@@ -445,8 +445,8 @@ void func_80235AE0_de(Racer *view) {
             gSPMoveWord(D_80110634++, G_MW_FOG, 0, 0x64009D00);
         } else {
             gDPSetFogColor(D_80110634++, rgb.red, rgb.green, rgb.blue, 255);
-            far=view->fogNear;denom=1000-far;near=(500-far)<<8;
-            gSPMoveWord(D_80110634++, G_MW_FOG, 0, ((0x1F400/denom)<<16)|((near/denom)&0xFFFF));
+            far=(u16)view->fogNear;denom=1000-far;near=(500-far)*256;
+            gSPMoveWord(D_80110634++, G_MW_FOG, 0, ((u32)(0x1F400/denom)<<16)|((near/denom)&0xFFFF));
         }
         gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, buffer->colorImage);
         if(view->effect!=0) {gDPSetFillColor(D_80110634++, 0x10001);}
@@ -468,5 +468,5 @@ void func_80235AE0_de(Racer *view) {
     gDPPipeSync(D_80110634++);
 }
 #else
-INCLUDE_ASM("span_1000", func_80235AE0_de);
+INCLUDE_ASM("span_1000", Camera_SetupViewportAndFog);
 #endif

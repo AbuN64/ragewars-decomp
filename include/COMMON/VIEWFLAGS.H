@@ -225,8 +225,8 @@ struct Racer {
     u8 hit;
     u8 boost;
     u8 spin;
-    char pad523[0x1B];
-    u16 fogNear; /* 0x53E */
+    char pad523[0x19];
+    s32 fogNear; /* 0x53C: word storage; fog command uses its low 16 bits. */
     char pad540[8];
     s8 mode548; /* 0x548 */
     s8 mode549; /* 0x549 */
