@@ -1,7 +1,7 @@
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "COMMON/INTEGERSTATE14_2.H"
 #include "TYPES.H"
-#include "RESMGR/802A0888_9.H"
+#include "RESMGR/resmgr_stream_callbacks.H"
 #include "MENU/GFX/80414480_3.H"
 #include "SCENE/802508E0_13.H"
 
@@ -10,7 +10,7 @@ typedef void (*FuncPtr)(void);
 typedef s32 (*ReadByteFn_802A0FCC)(s32, u8 *, s32);
 
 extern ReadByteFn_802A0FCC D_800CD92C_de;
-extern FuncPtr D_800CD934_de;
+extern ResourceSeekCallback D_800CD934_de;
 extern FuncPtr D_800CD938_de;
 extern FuncPtr D_800CD93C_de;
 extern s32 D_800CD944_de[3];
@@ -41,8 +41,9 @@ int func_802A0F58_de(void) {
     return 0;
 }
 
-void func_802A0F60_de(void) {
-    D_800CD934_de();
+/* Forward every seek argument and return the configured callback status. */
+s32 Resmgr_SeekStream(s32 handle, s32 offset, s32 origin) {
+    return D_800CD934_de(handle, offset, origin);
 }
 
 void func_802A0F84_de(void) {
@@ -75,7 +76,7 @@ s32 *func_802A100C_de(s32 arg0, s32 arg1) {
     return &D_8014D0D0;
 }
 
-void func_802A1050_de(s32 arg0, s32 arg1, ReadByteFn_802A0FCC arg2, s32 arg3, FuncPtr arg4, FuncPtr arg5, FuncPtr arg6) {
+void func_802A1050_de(s32 arg0, s32 arg1, ReadByteFn_802A0FCC arg2, s32 arg3, ResourceSeekCallback arg4, FuncPtr arg5, FuncPtr arg6) {
     D_800CD924_de = arg0;
     D_800CD928_de = arg1;
     D_800CD92C_de = arg2;

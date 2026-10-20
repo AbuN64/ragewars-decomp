@@ -679,7 +679,7 @@ SECTIONS
         src/RESMGR/802A0888_2.CPP.o(.data);
         src/RESMGR/802A0888_7.CPP.o(.text);
         src/RESMGR/802A0888_8.CPP.o(.text);
-        src/RESMGR/802A0888_9.CPP.o(.text);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.text);
         src/RESMGR/802A2230_3.CPP.o(.text);
         src/RESMGR/802A23A4.CPP.o(.data);
         src/MATH/802A2274.CPP.o(.text);
@@ -1742,7 +1742,7 @@ SECTIONS
         src/RESMGR/802A0888_4.CPP.o(.data);
         src/RESMGR/802A0888_7.CPP.o(.text);
         src/RESMGR/802A0888_8.CPP.o(.text);
-        src/RESMGR/802A0888_9.CPP.o(.text);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.text);
         src/RESMGR/802A2230_3.CPP.o(.text);
         src/RESMGR/802A23A4_2.CPP.o(.data);
         src/MATH/802A2274.CPP.o(.text);
@@ -2805,7 +2805,7 @@ SECTIONS
         src/RESMGR/802A0888_6.CPP.o(.text);
         src/RESMGR/802A0888_7.CPP.o(.text);
         src/RESMGR/802A0888_8.CPP.o(.text);
-        src/RESMGR/802A0888_9.CPP.o(.text);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.text);
         src/RESMGR/802A2230_3.CPP.o(.text);
         src/DATA/MAINCODE/802A13B4_2.CPP.o(.data);
         src/MATH/802A2274.CPP.o(.text);
@@ -3881,7 +3881,7 @@ SECTIONS
         src/RESMGR/802A0888_4.CPP.o(.data);
         src/DATA/MAINCODE/802A0A08.CPP.o(.data);
         src/RESMGR/802A0888_8.CPP.o(.text);
-        src/RESMGR/802A0888_9.CPP.o(.text);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.text);
         src/RESMGR/802A2230_3.CPP.o(.text);
         src/RESMGR/802A2230_3.CPP.o(.data);
         src/MATH/802A2274.CPP.o(.text);
@@ -4964,7 +4964,7 @@ SECTIONS
         src/RESMGR/802A0888_6.CPP.o(.text);
         src/RESMGR/802A0888_7.CPP.o(.text);
         src/RESMGR/802A0888_8.CPP.o(.text);
-        src/RESMGR/802A0888_9.CPP.o(.text);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.text);
         src/RESMGR/802A2230_3.CPP.o(.text);
         src/DATA/MAINCODE/802A13B4.CPP.o(.data);
         src/MATH/802A2274.CPP.o(.text);
@@ -6026,7 +6026,7 @@ SECTIONS
         src/RESMGR/802A0888_2.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_7.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_8.CPP.o(.bss .sbss COMMON);
-        src/RESMGR/802A0888_9.CPP.o(.bss .sbss COMMON);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A2230_3.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A23A4.CPP.o(.bss .sbss COMMON);
         src/MATH/802A2274.CPP.o(.bss .sbss COMMON);
@@ -7066,7 +7066,7 @@ SECTIONS
         src/RESMGR/802A0888_4.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_7.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_8.CPP.o(.bss .sbss COMMON);
-        src/RESMGR/802A0888_9.CPP.o(.bss .sbss COMMON);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A2230_3.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A23A4_2.CPP.o(.bss .sbss COMMON);
         src/MATH/802A2274.CPP.o(.bss .sbss COMMON);
@@ -8105,7 +8105,7 @@ SECTIONS
         src/RESMGR/802A0888_6.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_7.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_8.CPP.o(.bss .sbss COMMON);
-        src/RESMGR/802A0888_9.CPP.o(.bss .sbss COMMON);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A2230_3.CPP.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/802A13B4_2.CPP.o(.bss .sbss COMMON);
         src/MATH/802A2274.CPP.o(.bss .sbss COMMON);
@@ -9130,7 +9130,7 @@ SECTIONS
         src/RESMGR/802A0888_4.CPP.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/802A0A08.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_8.CPP.o(.bss .sbss COMMON);
-        src/RESMGR/802A0888_9.CPP.o(.bss .sbss COMMON);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A2230_3.CPP.o(.bss .sbss COMMON);
         src/MATH/802A2274.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A23A4_5.CPP.o(.bss .sbss COMMON);
@@ -10151,7 +10151,7 @@ SECTIONS
         src/RESMGR/802A0888_6.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_7.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A0888_8.CPP.o(.bss .sbss COMMON);
-        src/RESMGR/802A0888_9.CPP.o(.bss .sbss COMMON);
+        src/RESMGR/resmgr_stream_callbacks.CPP.o(.bss .sbss COMMON);
         src/RESMGR/802A2230_3.CPP.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/802A13B4.CPP.o(.bss .sbss COMMON);
         src/MATH/802A2274.CPP.o(.bss .sbss COMMON);

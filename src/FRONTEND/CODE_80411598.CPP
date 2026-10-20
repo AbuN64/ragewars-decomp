@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
@@ -55,7 +56,6 @@ extern void func_802A0724_de(void *, const void *, s32);
 extern void func_8040F6DC_de(void *, void *, s32);
 extern f64 func_802A18CC_de(void);
 extern s32 func_802A0E8C_de(void *, void *);
-extern void func_802A0F60_de(s32, s32, s32);
 extern void func_802A0EB0_de(s32);
 
 /* Loads entry index of the menu archive into memory and counts the use: in cache mode 1 an entry
@@ -76,7 +76,7 @@ load:
     func_802A18CC_de();
     D_801539B0.map[index].data = func_8025305C_de(D_801539B0.map[index].size);
     D_801539B0.handle = func_802A0E8C_de(&D_801539B0.header, &D_800DD0B0);
-    func_802A0F60_de(D_801539B0.handle, D_801539B0.header.dataOffset + D_801539B0.map[index].offset, 0);
+    Resmgr_SeekStream(D_801539B0.handle, D_801539B0.header.dataOffset + D_801539B0.map[index].offset, 0);
     func_802A0ED4_de(D_801539B0.map[index].data, D_801539B0.map[index].size, 1, D_801539B0.handle);
     if (D_800E2AC4 != 0) {
         D_801539B0.copies[index].data = func_8025305C_de(D_801539B0.map[index].size);

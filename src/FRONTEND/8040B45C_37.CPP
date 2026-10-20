@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
@@ -107,7 +108,6 @@ extern s32 D_800DD0B0;
 extern s32 func_8025305C_de(s32 size);
 extern s32 func_802A0E8C_de(s32 *heap, s32 *name);
 extern void func_802A0EB0_de(s32 handle);
-extern void func_802A0F60_de(s32 handle, s32 at, s32 zero);
 extern void func_802A18CC_de(void);
 extern s32 func_802A1934_de(void);
 extern void func_804133E4_de(Texture *texture);
@@ -190,7 +190,7 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
         size = bank->image->size;
         i = 0;
         bank->offsets[0] = func_8025305C_de(size);
-        func_802A0F60_de(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
+        Resmgr_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
         func_802A0ED4_de(D_80153C28[group].offsets[0], size, 1, D_801539B0.handle);
         do {
             sizes[i] = bank->tiles[i].wid * bank->tiles[i].siz;

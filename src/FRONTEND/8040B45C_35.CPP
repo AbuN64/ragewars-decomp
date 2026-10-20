@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/NODERECAT2A8.H"
 #include "TYPES.H"
@@ -540,7 +541,6 @@ s32 func_802A0E8C_de(void *, void *);
 extern char D_8014D724[];
 extern char D_800DD0B0[];
 void func_802A0EB0_de(s32);
-void func_802A0F60_de(s32, s32, s32);
 void func_80419608_de(void *);
 void func_8040F9E0_de(s32 index);
 
@@ -749,7 +749,7 @@ void func_8040FB94_de(u8 *arg0) {
         ((Images *)state)->unk264 = func_8025305C_de(((Images *)state)->unk25C * 4);
         temp_v0 = func_8025305C_de((s32) ((Images *)state)->unk20C);
         ((Images *)state)->unk260 = temp_v0;
-        func_802A0F60_de(((Images *)state)->unk0, ((Images *)state)->unk208, 0);
+        Resmgr_SeekStream(((Images *)state)->unk0, ((Images *)state)->unk208, 0);
         func_802A0ED4_de((s32) temp_v0, 0x1C, (s32) ((Images *)state)->unk25C, ((Images *)state)->unk0);
         var_s0 = 0;
         if (((Images *)state)->unk25C > 0) {
@@ -776,7 +776,7 @@ void func_8040FB94_de(u8 *arg0) {
     palettes->unk0 = (s16) temp_v0_2;
     if ((s32)(temp_v0_2 << 0x10) > 0) {
         palettes->unk4 = func_8025305C_de((s32) D_8014D924.header.unk18);
-        func_802A0F60_de(((Images *)state)->unk0, D_8014D924.header.unk14, 0);
+        Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unk14, 0);
         func_802A0ED4_de((s32) palettes->unk4, (s32) D_8014D924.header.unk18, 1, ((Images *)state)->unk0);
         func_8040F9E0_de(0);
     }
@@ -789,7 +789,7 @@ void func_8040FB94_de(u8 *arg0) {
             palettes->unk1C = temp_v0_4;
             func_802A0748_de(temp_v0_4, 0, (u32) D_8014D924.header.unk28);
         }
-        func_802A0F60_de(((Images *)state)->unk0, D_8014D924.header.unk24, 0);
+        Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unk24, 0);
         func_802A0ED4_de((s32) palettes->unk18, D_8014D924.header.unk28, 1, ((Images *)state)->unk0);
         var_s0 = 0;
         mapCount = &palettes->unk14;
@@ -812,10 +812,10 @@ void func_8040FB94_de(u8 *arg0) {
     if (header->unk0 > 0) {
         var_s0 = 0;
         temp_s7 = func_8025305C_de(header->unk8);
-        func_802A0F60_de(((Images *)state)->unk0, header->unk4, 0);
+        Resmgr_SeekStream(((Images *)state)->unk0, header->unk4, 0);
         func_802A0ED4_de((s32) temp_s7, header->unk8, 1, ((Images *)state)->unk0);
         header->objects.raw = func_8025305C_de(header->unk0);
-        func_802A0F60_de(((Images *)state)->unk0, ((func_8040FC14_S19 *)&D_8014D924)->unkC, 0);
+        Resmgr_SeekStream(((Images *)state)->unk0, ((func_8040FC14_S19 *)&D_8014D924)->unkC, 0);
         func_802A0ED4_de((s32) header->objects.raw, header->unk0, 1, ((Images *)state)->unk0);
         temp_v1_2 = (u32) header->unk0 >> 5;
         header->objects.unk0 = (s16) temp_v1_2;
@@ -841,7 +841,7 @@ void func_8040FB94_de(u8 *arg0) {
             do {
                 temp_s0 = D_80153C28[var_s4].metadata;
                 temp_s1 = (*objectTable) + var_s4;
-                func_802A0F60_de(((Images *)state)->unk0, D_8014D924.header.unkC + temp_s0->glyphTableOffset, 0);
+                Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unkC + temp_s0->glyphTableOffset, 0);
                 func_802A0ED4_de(&temp_s1->unk4, 8, 0x60, ((Images *)state)->unk0);
                 temp_s1->unk484 = func_8025305C_de(temp_s0->bitmapCount * 4);
                 *temp_s1->unk484 = func_8025305C_de(temp_s0->bitmapCount * 0x1080);
@@ -862,7 +862,7 @@ void func_8040FB94_de(u8 *arg0) {
                     var_s2 = ((temp_s0->glyphWidth * 2) + 7) & ~7;
                     temp_s1->unk488 = func_8025305C_de(temp_a0_3 * 4);
                     *temp_s1->unk488 = func_8025305C_de(temp_s0->bitmapCount * var_s2);
-                    func_802A0F60_de(((Images *)state)->unk0, D_8014D970 + ((s32 *)temp_s7)[temp_a0], 0);
+                    Resmgr_SeekStream(((Images *)state)->unk0, D_8014D970 + ((s32 *)temp_s7)[temp_a0], 0);
                     func_802A0ED4_de((s32) *temp_s1->unk488, temp_s0->bitmapCount * var_s2, 1, ((Images *)state)->unk0);
                     var_a1 = 0;
                     if (temp_s0->bitmapCount > 0) {
@@ -938,7 +938,7 @@ void func_8040F9E0_de(s32 index) {
     }
     size = next - archive->sections[index].start;
     archive->strings = (u8 *)func_8025305C_de(size);
-    func_802A0F60_de(archive->handle, archive->sections[index].start + archive->base, 0);
+    Resmgr_SeekStream(archive->handle, archive->sections[index].start + archive->base, 0);
     func_802A0ED4_de((s32)archive->strings, size, 1, archive->handle);
     if (closeArchive) {
         func_802A0EB0_de(archive->handle);

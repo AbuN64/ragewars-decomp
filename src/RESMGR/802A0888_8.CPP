@@ -2,7 +2,7 @@
 #include "COMMON/INTEGERSTATE14_2.H"
 #include "TYPES.H"
 #include "RESMGR/802A0888_8.H"
-#include "RESMGR/802A0888_9.H"
+#include "RESMGR/resmgr_stream_callbacks.H"
 #include "MENU/GFX/80414480_3.H"
 #include "SCENE/802508E0_13.H"
 
@@ -31,7 +31,8 @@ extern s32 D_002A1198;
 
 extern s32 D_002A11EC;
 
-extern s32 D_002A11F4;
+/* Callable seek entry in the low-address resource callback table. */
+extern s32 D_002A11F4(s32 handle, s32 offset, s32 origin);
 
 extern s32 D_002A1220;
 
@@ -138,7 +139,7 @@ void func_802A0D38_de(void) {
         write_resource_word(&D_800CD940_de[3],0);
         p[2]=one;
     }
-    func_802A1050_de((s32) &D_002A1158, (s32) &D_002A1188, (s32) &D_002A1198, (s32) &D_002A11EC, (s32) &D_002A11F4, (s32) &D_002A1220, (s32) &D_002A1230);
+    func_802A1050_de((s32) &D_002A1158, (s32) &D_002A1188, (s32) &D_002A1198, (s32) &D_002A11EC, D_002A11F4, (s32) &D_002A1220, (s32) &D_002A1230);
 }
 
 void func_802A0E34_de(void) {

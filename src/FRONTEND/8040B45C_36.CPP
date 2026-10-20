@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_stream_callbacks.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SLOTRECATCV1.H"
@@ -80,7 +81,6 @@ extern char D_800DD0B0;
 
 extern s32 func_802A0E8C_de(void *header, void *name);
 
-extern void func_802A0F60_de(s32 file, s32 offset, s32 whence);
 
 extern void func_802A18CC_de();
 
@@ -267,12 +267,12 @@ s32 func_80410674_de(s32 index, s32 mode) {
     texture = id;
     size = stride * entry->unkC * entry->unk8 / 8;
     pixels = func_8025305C_de(size);
-    func_802A0F60_de(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
+    Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
     func_802A0ED4_de(pixels, size, 1, D_801539B0.unk0);
     if (entry->unkE > 0) {
         paletteBytes = entry->unkE * 2;
         palette = func_8025305C_de(paletteBytes);
-        func_802A0F60_de(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
+        Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
         func_802A0ED4_de(palette, paletteBytes, 1, D_801539B0.unk0);
         for (i = 0; i < entry->unkE; i++) {
             if (!(palette[i] & 1)) {
@@ -347,12 +347,12 @@ void func_80410B14_de(s32 index, s32 output) {
     }
     size = stride * entry->unkC * entry->unk8 / 8;
     pixels = func_8025305C_de(size);
-    func_802A0F60_de(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
+    Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk14, 0);
     func_802A0ED4_de(pixels, size, 1, D_801539B0.unk0);
     if (entry->unkE > 0) {
         paletteBytes = entry->unkE * 2;
         palette = func_8025305C_de(paletteBytes);
-        func_802A0F60_de(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
+        Resmgr_SeekStream(D_801539B0.unk0, D_801539B0.unk248 + entry->unk18, 0);
         func_802A0ED4_de(palette, paletteBytes, 1, D_801539B0.unk0);
         for (i = 0; i < entry->unkE; i++) {
             if (!(palette[i] & 0xFF000000)) {
