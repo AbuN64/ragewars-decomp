@@ -1,0 +1,94 @@
+#include "include_asm.h"
+#include "TYPES.H"
+#include "gbi.h"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "COMMON/BALLISTICPARAMS.H"
+#include "COMMON/TRIPLE.H"
+#include "sdk/lib_802BB630/802BBC50.H"
+
+void func_802B6CBC_de(f32 *arg0, s32 *arg1);
+void func_802B6670_de(void *out, f32 ex, f32 ey, f32 ez, f32 ax, f32 ay, f32 az, f32 ux, f32 uy, f32 uz)
+{
+    f32 matrix[4][4];
+    f32 (*matrixPointer)[4] = matrix;
+    f32 x, y, z, rx, ry, rz, vx, vy, vz, scale, one;
+    func_802B6C6C_de(matrixPointer);
+    x = ax - ex; y = ay - ey; z = az - ez;
+    scale = D_800C7870_de / func_802B72B0_de((x*x + y*y) + z*z);
+    x *= scale; z *= scale; y *= scale;
+    rx = uy*z - uz*y;
+    ry = uz*x - ux*z;
+    rz = ux*y - uy*x;
+    one = D_800C7874_de;
+    scale = one / func_802B72B0_de((rx*rx + ry*ry) + rz*rz);
+    rx *= scale; rz *= scale; ry *= scale;
+    vx = y*rz - z*ry;
+    vy = z*rx - x*rz;
+    vz = x*ry - y*rx;
+    scale = one / func_802B72B0_de((vx*vx + vy*vy) + vz*vz);
+    vx *= scale; vy *= scale; vz *= scale;
+    matrix[0][0] = rx; matrix[1][0] = ry; matrix[2][0] = rz;
+    matrix[0][1] = vx; matrix[1][1] = vy; matrix[2][1] = vz;
+    matrix[0][2] = x; matrix[1][2] = y; matrix[2][2] = z;
+    matrix[0][3] = 0.0f; matrix[1][3] = 0.0f; matrix[2][3] = 0.0f;
+    matrix[3][0] = -((ex*rx + ey*ry) + ez*rz);
+    matrix[3][1] = -((ex*vx + ey*vy) + ez*vz);
+    matrix[3][2] = -((ex*x + ey*y) + ez*z);
+    matrix[3][3] = one;
+    func_802B6CBC_de(matrixPointer, out);
+}
+
+extern f32 func_802B72B0_de(f32);
+
+extern f32 D_800C7878_de, D_800C787C_de;
+
+void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
+                      f32 atX, f32 atY, f32 atZ, f32 upX, f32 upY, f32 upZ) {
+    f32 lookX, lookY, lookZ;
+    f32 rightX, rightY, rightZ;
+    f32 scale, one;
+    func_802B6C6C_de(matrix);
+    lookX = atX - eyeX;
+    lookY = atY - eyeY;
+    lookZ = atZ - eyeZ;
+    scale = D_800C7878_de / func_802B72B0_de(lookX * lookX + lookY * lookY + lookZ * lookZ);
+    lookX *= scale;
+    lookZ *= scale;
+    lookY *= scale;
+    rightX = upY * lookZ - upZ * lookY;
+    rightY = upZ * lookX - upX * lookZ;
+    rightZ = upX * lookY - upY * lookX;
+    one = D_800C787C_de;
+    scale = one / func_802B72B0_de(rightX * rightX + rightY * rightY + rightZ * rightZ);
+    rightX *= scale;
+    rightZ *= scale;
+    rightY *= scale;
+    upX = lookY * rightZ - lookZ * rightY;
+    upY = lookZ * rightX - lookX * rightZ;
+    upZ = lookX * rightY - lookY * rightX;
+    scale = one / func_802B72B0_de(upX * upX + upY * upY + upZ * upZ);
+    upX *= scale;
+    upY *= scale;
+    upZ *= scale;
+    matrix[0][0] = rightX;
+    matrix[1][0] = rightY;
+    matrix[2][0] = rightZ;
+    matrix[0][1] = upX;
+    matrix[1][1] = upY;
+    matrix[2][1] = upZ;
+    matrix[0][2] = lookX;
+    matrix[1][2] = lookY;
+    matrix[2][2] = lookZ;
+    matrix[3][0] = -(eyeX * rightX + eyeY * rightY + eyeZ * rightZ);
+    matrix[3][1] = -(eyeX * upX + eyeY * upY + eyeZ * upZ);
+    matrix[3][2] = -(eyeX * lookX + eyeY * lookY + eyeZ * lookZ);
+    matrix[0][3] = 0.0f;
+    matrix[1][3] = 0.0f;
+    matrix[2][3] = 0.0f;
+    matrix[3][3] = one;
+}
+
+#if defined(VERSION_US)
+INCLUDE_DATA("span_1000", rodata_unresolved_802B6AA8);
+#endif

@@ -1,0 +1,9 @@
+
+#if defined(VERSION_US_REV1)
+extern char D_002AD65C[];
+unsigned int D_auto_src_ragewars_pickup_powerups_us_rev1[24] = {
+    0x800D7134, 0x084B0E0C, 0xFFFF0000, 0x00120003, 0x00010000, (unsigned int)D_002AD65C, 0x800D7138, 0x084C0E0C,
+    0xFFFF0000, 0x00130004, 0x00030000, (unsigned int)D_002AD65C, 0x800D713C, 0x084D0E0C, 0xFFFF0000, 0x00140006,
+    0x00010000, (unsigned int)D_002AD65C, 0x800D7144, 0x084F0E0C, 0xFFFF0000, 0x00150005, 0x00010000, (unsigned int)D_002AD65C,
+};
+#endif

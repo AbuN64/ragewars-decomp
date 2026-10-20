@@ -1,0 +1,7 @@
+
+#if defined(VERSION_US_REV1)
+unsigned int D_auto_src_ragewars_character_preview_positions_07_us_rev1[12] = {
+    0x42200000, 0xC2100000, 0xC2C80000, 0xC2200000, 0xC2100000, 0xC2C80000, 0x42040000, 0xC28E0000,
+    0xC2A00000, 0xC2040000, 0xC28E0000, 0xC2A00000,
+};
+#endif

@@ -1,0 +1,229 @@
+#include "COMMON/ITEMRECAT20V1.H"
+#include "include_asm.h"
+#include "COMMON/VECTOR4F.H"
+#include "COMMON/MANAGER.H"
+#include "COMMON/ENTRYRECAT18V3.H"
+#include "TYPES.H"
+#include "COMMON/EXTERNS.H"
+#include "AUDIO_2/80255280_2.H"
+#include "sdk/os.h"
+#include "TEXTURE/80254CE4.H"
+#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/80255C40_7.H"
+
+/* Activates a load request: moves it from the pending to the active list and, when its node is set, looks its key up in the request hash table; an existing request with lower priority is removed from the table and finished, releasing its node's data and node when nothing else holds them, while an existing request with at least the same priority wins and this request's node is released and the request finished, returning the existing one; otherwise, or after replacing, the request is inserted, owns its node and optionally drops the node's pending reference. The hash lookup and node release are the inline forms of func_802517B4_de's lookup and func_80254AD0_de. */
+
+
+
+
+
+
+
+extern char D_80101120;
+extern char D_801051A0;
+extern s32 D_80100570;
+extern struct { CachedResource **value; } D_80100564;
+extern CachedResource *D_80100568;
+extern u32 D_80101190;
+
+
+extern void func_80255B2C_de(void *, void *);
+extern void func_802553B4_de(s32, ResourceLoadRequest *);
+
+static inline void find(s32 key, ResourceLoadRequest **out) {
+    EntryRecAtCV1 *node = D_80101194 + (((key << 5) ^ ((u32)key >> 1) ^ ((u32)key >> 9) ^ ((u32)key >> 17)) & D_80101190);
+
+    if (node->key == key) {
+        *out = node->value;
+        return;
+    }
+    *out = 0;
+    while (node != 0) {
+        if (node->key == key) {
+            *out = node->value;
+            return;
+        }
+        node = node->next;
+    }
+}
+
+
+
+
+static inline void release(s32 node) {
+    func_80255ED8_de(&D_80100570, (void *)node);
+    if (((CachedResource *)node)->flags & 0x1000) {
+        func_80255ED8_de(&((IntrusiveList *)&D_80100570)[1], (void *)node);
+    }
+    if (*(&D_80100570 - 2) == node) {
+        *(&D_80100570 - 2) = 0;
+    }
+    ((CachedResource *)node)->flags = 0;
+    D_80100564.value[((struct Pool *)&D_8010513C)->count] = (CachedResource *)node;
+    *(&D_80100570 + 0x2F3) += 1;
+}
+
+ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, s32 dropReference) {
+    ResourceLoadRequest *existing;
+    CachedResource *node;
+
+    func_80255ED8_de(&D_80101120, request);
+    func_80255CB8_de((char *)&D_80101120 - 0x14, request);
+    if (request->node != 0) {
+        find(request->key, &existing);
+        if (existing != 0) {
+            if (existing->priority < request->priority) {
+                func_80255488_de(existing->key);
+                existing->node->owner = 0;
+                if (!(existing->node->flags & 0x702)) {
+                    func_80255B2C_de(&D_801051A0, existing->node->data);
+                    release((s32)existing->node);
+                }
+                func_80254E88_de(0, existing);
+            } else {
+                func_80255B2C_de(&D_801051A0, request->node->data);
+                release((s32)request->node);
+                func_80254E88_de(0, request);
+                return existing;
+            }
+        }
+        func_802553B4_de(request->key, request);
+        request->node->owner = request;
+        if (dropReference != 0) {
+            node = request->node;
+            if (--node->count == 0) {
+                node->flags &= ~0x100;
+            }
+        }
+        return request;
+    }
+    func_80254E88_de(0, request);
+    return 0;
+}
+
+#ifdef NON_MATCHING
+#include "COMMON/GFX.H"
+#include "COMMON/UNUSED.H"
+#include "COMMON/ENTRYRECAT18V3.H"
+#include "gbi.h"
+#include "TYPES.H"
+
+extern Gfx *D_80110634;
+extern struct Shape_func_8021A2D4_de_2 D_80105180;
+extern char D_80101140[];
+
+extern u32 func_802BCF30_de(void);
+extern void func_80268CE0_de(s32);
+extern void func_8026925C_de(s32);
+
+extern struct BlockRecAt20 *D_801011B0;
+
+/* Draws the heap usage bar: a bordered box with one coloured band per tracked allocation, scaled to the
+ * total heap size. */
+void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
+    struct BlockRecAt20 *span;
+    Node80254C10 *node;
+    u32 total;
+    u32 lock;
+    s32 height;
+    s32 pass;
+    s32 select;
+    s32 lo;
+    s32 hi;
+    s32 r;
+    s32 g;
+    s32 b;
+    s32 full;
+    s32 bright;
+    u32 base;
+    Gfx *cmd;
+
+    gDPPipeSync(D_80110634++);
+    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
+    func_80268CE0_de(0x19);
+    func_8026925C_de(0x15);
+
+    gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0x00);
+    gDPFillRectangle(D_80110634++, left - 1, top - 1, right + 1, bottom + 1);
+    func_8026925C_de(0x1B);
+
+    gDPSetPrimColor(D_80110634++, 0, 0, 0xA0, 0xA0, 0xA0, 0xFF);
+    gDPFillRectangle(D_80110634++, left, top, right, bottom);
+
+    lock = func_802BCF30_de();
+    D_8010515C++;
+    if (D_8010515C != 1) {
+        __osRestoreInt(lock);
+        func_802BB2A0_de(D_80101140, 0, 1);
+    } else {
+        __osRestoreInt(lock);
+    }
+
+    base = 0x80000000;
+    span = D_801011B0;
+    total = (u32)span - base;
+    for (; span != 0; span = span->next) {
+        total += span->size + span->free;
+    }
+
+    cmd = D_80110634++;
+    gDPSetPrimColor(cmd, 0, 0, 0x64, 0x64, 0x00, 0xFF);
+    height = bottom - top;
+    hi = bottom - ((u32)(((u32)D_801011B0 - base) * height) / total) - 1;
+    gDPFillRectangle(D_80110634++, left, hi, right, bottom + 1);
+
+    for (pass = 0; pass < 2; pass++) {
+        for (node = D_80100584.head; node != 0; node = node->next) {
+            if (pass != 0) {
+                select = (node->flags & 0x101) == 0x100;
+            } else {
+                select = (node->flags & 0x101) != 0x100;
+            }
+            if (select == 0) {
+                continue;
+            }
+
+            if (node->flags & 1) { r = 255; g = 255; b = 0; }
+            else if (node->flags & 0x100) { r = 255; g = 0; b = 0; }
+            else if (node->flags & 0x600) { r = 0; g = 0; b = 255; }
+            else { r = 0; g = 255; b = 0; }
+
+            cmd = D_80110634++;
+            gDPSetPrimColor(cmd, 0, 0, r, g, b, 0xFF);
+            hi = bottom - ((u32)(((node->start + node->end) - base) * height) / total) - 1;
+            lo = bottom - ((u32)(((node->start - base) - 0x20) * height) / total) - 1;
+                    if (hi < lo) {
+                gDPFillRectangle(D_80110634++, left, hi, right, lo);
+            }
+
+            gDPSetPrimColor(D_80110634++, 0, 0, ((s32)((u32)r >> 1)) < 0x100 ? ((s32)((u32)r >> 1)) : 0xFF, ((s32)((u32)g >> 1)) < 0x100 ? ((s32)((u32)g >> 1)) : 0xFF,
+                            ((s32)((u32)b >> 1)) < 0x100 ? ((s32)((u32)b >> 1)) : 0xFF, 0xFF);
+            gDPFillRectangle(D_80110634++, left, lo - 1, right, lo);
+
+            if (!(node->flags & 0x702) && (u32)(D_80105180.field_0 - node->stamp) >= 5U) {
+                b = 0xFF;
+                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, 255, 255);
+                for (;;) {
+                    if (hi >= lo) break;
+                    gDPFillRectangle(D_80110634++, left + 8, hi, right, lo);
+                    break;
+                }
+                bright = (b * 3) >> 1;
+                gDPSetPrimColor(D_80110634++, 0, 0, 255, 255, bright < 256 ? bright : 255, 255);
+                gDPFillRectangle(D_80110634++, left + 8, lo - 1, right, lo);
+            }
+        }
+    }
+
+    lock = func_802BCF30_de();
+    D_8010515C--;
+    if (D_8010515C != 0) {
+        __osRestoreInt(lock);
+        func_802BB420_de(D_80101140, 0, 1);
+        return;
+    }
+    __osRestoreInt(lock);
+}
+#else
+INCLUDE_ASM("span_1000", func_80252A44_de);
+#endif

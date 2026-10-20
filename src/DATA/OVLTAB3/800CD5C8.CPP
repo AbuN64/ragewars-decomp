@@ -1,0 +1,7 @@
+
+#if defined(VERSION_US)
+unsigned int D_auto_rodata_unresolved_800CD5C8[10] = {
+    0x4941544F, 0x525F4348, 0x00030405, 0x0608090A, 0x0B0C0E0F, 0x0F0F0F0F, 0x00050708, 0x0A0B0D0E,
+    0x0F0F0F0F, 0x0F0F0F0F,
+};
+#endif

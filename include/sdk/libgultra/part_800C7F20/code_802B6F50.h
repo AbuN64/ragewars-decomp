@@ -1,0 +1,5 @@
+#ifndef SDK_LIBGULTRA_PART_800C7F20_CODE_802B6F50_H
+#define SDK_LIBGULTRA_PART_800C7F20_CODE_802B6F50_H
+#include "COMMON/OBJRECAT18V1.H"
+extern void alSeqGetLoc(void *arg0, void *arg1);
+#endif

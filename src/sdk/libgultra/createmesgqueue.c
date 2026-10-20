@@ -1,0 +1,19 @@
+#include "include_asm.h"
+#include "sdk/libgultra.h"
+#include "COMMON/OSTHREAD_S.H"
+#include "TYPES.H"
+#include "sdk/os.h"
+
+extern s32 D_800D5260;
+void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
+    mq->mtqueue = (void **)&D_800D5260;
+    mq->fullqueue = (void **)&D_800D5260;
+    mq->validCount = 0;
+    mq->first = 0;
+    mq->msgCount = msgCount;
+    mq->msg = msg;
+}
+
+#if defined(VERSION_US)
+INCLUDE_DATA("span_1000", rodata_unresolved_802BABB4);
+#endif

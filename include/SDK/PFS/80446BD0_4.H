@@ -1,0 +1,10 @@
+#ifndef SDK_PFS_80446BD0_4_H
+#define SDK_PFS_80446BD0_4_H
+#include "SDK/OSCONTREQUESFORMATSHORT.H"
+extern s32 func_80446324_de(OSPfs *pfs, __OSInode *inode, int file_size_in_pages, int *first_page, u8 bank,
+                         int *decleared, int *last_page);
+extern s32 func_804464F0_de(OSPfs *pfs, int page_no, u8 *data, u8 bank);
+extern s32 func_804467AC_de(OSPfs *pfs, __OSInode *inode, u8 start_page, u16 *sum, u8 bank,
+                         __OSInodeUnit *last_page, int flag);
+extern s32 func_8044694C_de(OSPfs *pfs, u8 page_no, u16 *sum, u8 bank);
+#endif

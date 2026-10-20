@@ -1,0 +1,12 @@
+#include "include_asm.h"
+
+#if defined(VERSION_DE)
+const unsigned int D_auto_rodata_func_8043C54C_de_800DE188[11] = {
+    0x0043C588, 0x0043C590, 0x0043C598, 0x0043C5A0, 0x0043C5A8, 0x0043C5B0, 0x0043C5B8, 0x0043C5C0,
+    0x0043C5C8, 0x0043C5D0, 0x0043C5D8,
+};
+#endif
+
+#if defined(VERSION_DE)
+INCLUDE_DATA("data_800C", rodata_unresolved_800DE1B4);
+#endif

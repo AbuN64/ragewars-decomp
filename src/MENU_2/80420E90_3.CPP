@@ -1,0 +1,320 @@
+#include "include_asm.h"
+#include "COMMON/NUMBERPADSCREEN.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/AIPROFILE.H"
+#include "COMMON/ENTRYRECAT6C.H"
+#include "TYPES.H"
+#include "FRONTEND/8042E080_42.H"
+#include "MENU_2/80420E90_3.H"
+#include "SCENE/802508E0_13.H"
+extern StateCode80420E90 *D_800E4450;
+extern void func_8041A430_de(void *, s32);
+
+/* Releases the object D_800E4450 holds through func_802547E4_de, clears D_800E4450 and returns zero. */
+
+
+
+/* Advances menu selection timing and dispatches the selected action. */
+
+
+
+void func_80298368_de(s32);
+
+                               /* extern */
+void func_8029973C_de();
+
+                                  /* extern */
+void func_802A2360_de();
+
+                                  /* extern */
+void func_802A2394_de();
+
+                                  /* extern */
+s32 func_8041A470_de(void *);
+
+                          /* extern */
+extern s32 D_800E28E0;
+
+                          
+
+
+/* Handles the menu message func_80299A08_de reports after func_8029973C_de, for messages 0x3A2 to 0x3A7
+   through jtbl_800E1610: five pick option 0, 1, 3, 4 or 2, pass it to func_80434FB4_de and set the
+   result word at offset 0x10 of the screen D_800E4450 to 0x13; the sixth sets it to -1. Both then
+   close the screen's first word through func_8041A430_de with 2. Returns zero. */
+
+
+extern void func_8029973C_de(void);
+
+extern s32 func_80299A08_de(void);
+
+/* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E4450 points to to -1 and
+   calls func_8041A430_de on the object's first word with 2, returning zero. */
+
+
+
+
+extern void func_8029973C_de();
+
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E4454, an actor kind at D_800E4458 and a handler at D_800E445C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+
+
+
+extern s32 D_800E4454;
+
+extern s32 D_800E4458;
+
+extern Handler802A2B50 D_800E445C;
+
+/* Advances a filling or draining bar by the step and writes its level byte at 0x10 of the bar at
+   0xC: while rising it scales the amount for the display and, at or above the wrap point, stores
+   the remainder with the high bit set, and it finishes at 1000 by storing 0xFF, marking 0x4 and
+   calling func_802A2360_de; while falling it does the same from the other pair of constants and
+   finishes at zero. Returns the finished flag. */
+
+
+
+
+
+
+
+extern void func_802A2360_de();
+
+/* Resets a five-word record: clears the first three words, stores a value in the fourth and one
+   in the fifth, then calls func_802A2394_de. */
+
+
+extern void func_802A2394_de();
+
+s32 func_80421BBC_de(void) {
+    func_802547E4_de(D_800E4450);
+    D_800E4450 = 0;
+    return 0;
+}
+
+                     
+
+s32 func_80421BEC_de(void) {
+    s32 temp_v0;
+    s32 temp_v0_2;
+    s32 var_a0;
+    CellRecAt1A *temp_a0;
+    CellRecAt1A *temp_v1;
+
+    if (D_800E28E0 >= 2) {
+        func_802A2394_de();
+        return 0;
+    }
+    func_802A2360_de();
+    temp_v0 = func_8041A470_de(D_800E4450->unk0);
+    switch (temp_v0) {                              /* irregular */
+    case 3:
+        temp_v0_2 = D_800E4450->unkC - 1;
+        D_800E4450->unkC = temp_v0_2;
+        if (temp_v0_2 <= 0) {
+            temp_v1 = D_800E4450->unk8;
+            temp_v1->unk16 = (u16) (temp_v1->unk16 - 1);
+            temp_a0 = D_800E4450->unk8;
+            if (((s16) temp_a0->unk16 + temp_a0->unk1A) < 0) {
+                temp_a0->unk16 = (u16) D_800E4450->unk0->unk44->unk1A;
+            }
+            D_800E4450->unkC = temp_v0;
+        }
+block_12:
+        return 0;
+    case 4:
+        func_8029973C_de();
+        var_a0 = D_800E4450->unk10;
+        if (var_a0 == -1) {
+            var_a0 = 3;
+        }
+        func_80298368_de(var_a0);
+        goto block_12;
+    default:
+        return 0;
+    }
+}
+
+s32 func_80421CE8_de(void) {
+    s32 option;
+    u32 message;
+    func_8029973C_de();
+#if defined(VERSION_DE)
+    message = func_80299A08_de() - 0x39C;
+#elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
+    message = func_80299A08_de() - 0x3A2;
+#elif defined(VERSION_EU_X)
+    message = func_80299A08_de() - 0x3A6;
+#endif
+    if (message >= 6) {
+        return 0;
+    }
+    switch (message) {
+#if defined(VERSION_EU_X)
+        case 0: goto cancel;
+        case 1: goto option_0;
+        case 2: goto option_3;
+        case 3: goto option_4;
+        case 4: goto option_2;
+        case 5: goto option_1;
+#else
+        case 0: goto option_4;
+        case 1: goto option_3;
+        case 2: goto option_0;
+        case 3: goto option_1;
+        case 4: goto cancel;
+        case 5: goto option_2;
+#endif
+        }
+option_0:
+    option = 0;
+    goto choose;
+option_1:
+    option = 1;
+    goto choose;
+option_3:
+    option = 3;
+    goto choose;
+option_4:
+    option = 4;
+    goto choose;
+option_2:
+    option = 2;
+choose:
+    func_80434FB4_de(option);
+    D_800E4450->unk10 = 0x13;
+    goto close;
+cancel:
+    D_800E4450->unk10 = -1;
+close:
+    func_8041A430_de(D_800E4450->unk0, 2);
+done:
+    return 0;
+}
+
+s32 func_80421D94_de(void) {
+    StateCode80420E90 *state;
+
+    func_8029973C_de();
+    state = D_800E4450;
+    state->unk10 = -1;
+    func_8041A430_de(state->unk0, 2);
+    return 0;
+}
+
+s32 func_80421DD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    char *entry;
+    s32 offset;
+    s32 wildcard;
+    s32 actor_kind;
+    s32 table_kind;
+
+    if (D_800E445C != 0) {
+        wildcard = 0x7530;
+        entry = (char *)&D_800E445C;
+        offset = 0;
+        do {
+            if (((struct Shape_typemap_3 *) (((char *) (&D_800E4454)) + offset))->field_0 == arg1) {
+                actor_kind = ((struct ObjRecAtCV1 *) ((char *) arg0))->unkC;
+                table_kind = ((struct Shape_typemap_3 *) (((char *) (&D_800E4458)) + offset))->field_0;
+                if ((table_kind == actor_kind) || (table_kind == wildcard)) {
+                    return (*(Handler802A2B50 *)entry)(arg0, arg1, arg2, arg3, arg4);
+                }
+            }
+            entry += 0xC;
+            offset += 0xC;
+        } while (*(Handler802A2B50 *)entry != 0);
+    }
+    return 0;
+}
+
+/* Returns the word at offset 0x4 of a record. */
+s32 func_80421E60_de(s32 *record) {
+    return record[0x4 / 4];
+}
+
+/* Switches a timer record to a new mode: when the mode at offset 8 changes it stores the mode,
+   loads the countdown at offset 0 with 1000 for a non-zero mode or zero otherwise, and clears the
+   word at offset 4. */
+
+
+void func_80421E6C_de(struct Triple *timer, s32 mode) {
+    if (timer->z != mode) {
+        timer->z = mode;
+        if (mode == 0) {
+            timer->x = 0;
+        } else {
+            timer->x = 1000;
+        }
+        timer->y = 0;
+    }
+}
+
+s32 func_80421E9C_de(struct Meter *meter, s32 step) {
+    struct Resource_func_80419E54_de *bar;
+    s32 level;
+    f32 value;
+
+    if (meter->done == 0) {
+        if (meter->falling == 0) {
+            if (meter->amount < 0x3E8) {
+                value = (f32)meter->amount * D_800DD600;
+                bar = meter->bar;
+                if (!(value >= *(&D_800DD600 + 1))) {
+                    level = (s32)value;
+                } else {
+                    level = (s32)(value - *(&D_800DD600 + 1)) | 0x80000000;
+                }
+                bar->value = level;
+            } else {
+                meter->bar->value = 0xFF;
+                meter->done = 1;
+                func_802A2360_de();
+            }
+            meter->amount = meter->amount + step;
+        } else {
+            if (meter->amount > 0) {
+                value = (f32)meter->amount * D_800DD608;
+                bar = meter->bar;
+                if (!(value >= *(&D_800DD608 + 1))) {
+                    level = (s32)value;
+                } else {
+                    level = (s32)(value - *(&D_800DD608 + 1)) | 0x80000000;
+                }
+                bar->value = level;
+            } else {
+                meter->bar->value = 0;
+                meter->done = 1;
+                func_802A2360_de();
+            }
+            meter->amount = meter->amount - step;
+        }
+    }
+    return meter->done;
+}
+
+void func_80421FEC_de(struct Rec_func_8024C92C_de *record, s32 value) {
+    record->y = 0;
+    record->x = 0;
+    record->z = 0;
+    record->pad0 = value;
+    record->pad1 = 1;
+    func_802A2394_de();
+}
+
+#if defined(VERSION_US)
+INCLUDE_DATA("data_800C", rodata_unresolved_800DC2A8);
+#endif
+
+#if defined(VERSION_EU_X)
+INCLUDE_DATA("data_800C", rodata_unresolved_800E8E38);
+#endif
+
+#if defined(VERSION_EU)
+INCLUDE_DATA("data_800C", rodata_unresolved_800EDC78);
+#endif
+
+#if defined(VERSION_DE)
+INCLUDE_DATA("data_800C", rodata_unresolved_800DD5F8);
+#endif

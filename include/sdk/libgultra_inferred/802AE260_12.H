@@ -1,0 +1,4 @@
+#ifndef SDK_LIBGULTRA_INFERRED_802AE260_12_H
+#define SDK_LIBGULTRA_INFERRED_802AE260_12_H
+extern void func_802AD580_eu_x(void);
+#endif

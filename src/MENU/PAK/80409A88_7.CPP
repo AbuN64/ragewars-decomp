@@ -1,0 +1,142 @@
+#include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "TYPES.H"
+extern PakPreview *D_800E28BC;
+#include "COMMON/UNUSED.H"
+#include "COMMON/MENURECAT24.H"
+#include "MENU/PAK/80409A88_7.H"
+#include "SYSTEM_3/80265370.H"
+
+extern s32 D_8015375C;
+
+
+
+
+
+
+
+
+
+extern char *D_800D7E14[];
+
+
+/* Sets D_80153780 to one; func_8040A490_de clears it. */
+
+
+
+/* Points the output record's table at 0x14 at the variant for the display depth at 0x90 of
+   D_800E28BC: 16 and 32 have their own, 8 and anything else use the default; returns 0. */
+
+
+
+
+
+
+
+
+
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80152789;
+#endif
+
+/* Formats the word at offset 0x1C of the structure D_800E28BC points to, shifted down eight bits,
+   into a field's text with the format D_800E0DA4, three bytes before the length func_80441FE8_de
+   reports, and returns zero. */
+
+
+
+
+
+
+
+extern s32 func_80441FE8_de(struct Field *);
+
+
+/* Selects a menu field's label table from the connection mode and the option index. */
+s32 func_8040A37C_de(struct Field *field, s16 *arg1) {
+    s32 option;
+    u32 rel;
+
+    option = *arg1;
+    rel = option - 3;
+    if (D_80153760 != 0) {
+        if (D_8014D4EC_de != 0) {
+            field->text = D_800D373C;
+        } else {
+            field->text = D_800D3744;
+        }
+        goto done;
+    }
+    if (D_8014D4C0_de != 0) {
+        if (rel < 16) {
+            field->text = D_800D3750;
+            return 0;
+        }
+        if (option == 0x15) {
+            field->text = D_800D7E14;
+        } else if (D_8014D4EC_de != 0) {
+            field->text = D_800D3740;
+        } else {
+            field->text = D_800D3748;
+        }
+        goto done;
+    }
+    if (D_8015375C != 0) {
+        field->text = D_800D3760;
+    }
+done:
+    return 0;
+}
+
+s32 func_8040A458_de(struct ObjRecAt14V1 *record) {
+    if (D_8015375C != 0) {
+        record->unk14 = D_800D7794;
+    }
+    return 0;
+}
+
+void func_8040A47C_de(void) {
+    D_80153780 = 1;
+}
+
+void func_8040A490_de(void) {
+    D_80153780 = 0;
+}
+
+s32 func_8040A4A0_de(struct FieldRecAt14 *field) {
+    if (D_80153780 != 0) {
+        field->text = D_800D77CC;
+    } else {
+        field->text = D_800D77D0;
+    }
+    return 0;
+}
+
+int func_8040A4D4_de(ObjRecAt14V1 *out) {
+    switch (D_800E28BC->depth) {
+    case 8:
+    default:
+        out->unk14 = &D_800D37A8;
+        break;
+    case 16:
+        out->unk14 = &D_800D37AC;
+        break;
+    case 32:
+        out->unk14 = &D_800D37B0;
+        break;
+    }
+    return 0;
+}
+
+s32 func_8040A530_de(struct Field *field) {
+    s32 value = D_800E28BC->value >> 8;
+    char *text =
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        field->text[D_80152789];
+#else
+        *field->text;
+#endif
+
+    func_802658E4_de(text + (func_80441FE8_de(field) - 3), D_800E0DA4, value);
+    return 0;
+}

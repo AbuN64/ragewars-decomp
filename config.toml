@@ -1,0 +1,182 @@
+schema = 4
+name = "RageWars"
+title = "Turok: Rage Wars"
+toolchain = "gcc-2.8.1-sn64"
+names_from = "us-rev1"
+libraries = ["src/libgcc/", "src/sdk/", "src/SDK/"]
+cppflags = ["-DF3DEX_GBI_2", "-Isrc/libgcc"]
+readme_map = "us-rev1"
+
+[version.de]
+sha1 = "a6daacbd0e7f77c73208cf494aefc24703060b17"
+size = 0x800000
+cartridge_id = "NUS-NRWD-0"
+region = "Germany"
+description = "Censored German release."
+segments = [
+  { name = "retained_0", rom = 0x0, kind = "bin" },
+  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
+  { name = "data_800C", rom = 0xC25C0, vram = 0x800C19C0 },
+  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "ovl_80400000", rom = 0x166000, vram = 0x80400000 },
+  { name = "data_8014", rom = 0x1B4144, vram = 0x8014F2FC },
+  { name = "retained_1B78D0", rom = 0x1B78D0, kind = "bin" },
+]
+
+[version.eu]
+sha1 = "46b474fac79a4b21535bb6c78ce3039a2c202359"
+size = 0x800000
+cartridge_id = "NUS-NRWP-0"
+region = "Europe"
+description = "PAL release."
+segments = [
+  { name = "retained_0", rom = 0x0, kind = "bin" },
+  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
+  { name = "data_800C", rom = 0xC2860, vram = 0x800C1C60 },
+  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "ovl_80400000", rom = 0x176000, vram = 0x80400000 },
+  { name = "data_8014", rom = 0x1C5414, vram = 0x801605CC },
+  { name = "retained_1C8BF0", rom = 0x1C8BF0, kind = "bin" },
+]
+
+[version."eu-x"]
+sha1 = "0b54615930a55675955eef8d8a22f1dfc34d2b44"
+size = 0x800000
+cartridge_id = "NUS-NRWX-0"
+region = "Europe"
+description = "PAL multi-language release."
+segments = [
+  { name = "retained_0", rom = 0x0, kind = "bin" },
+  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
+  { name = "data_800C", rom = 0xC28A0, vram = 0x800C1CA0 },
+  { name = "ovl_80400000", rom = 0xF0000, vram = 0x80400000 },
+  { name = "data_8014", rom = 0x13F544, vram = 0x8015A6FC },
+  { name = "retained_142D20", rom = 0x142D20, kind = "bin" },
+]
+
+[version.us]
+sha1 = "9f8cb190831945f6f707aa8c2b20e04fa4276795"
+size = 0x800000
+cartridge_id = "NUS-NRWE-0"
+region = "North America"
+description = "First NTSC release (black cartridge)."
+segments = [
+  { name = "retained_0", rom = 0x0, kind = "bin" },
+  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
+  { name = "data_800C", rom = 0xC24F0, vram = 0x800C18F0 },
+  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "ovl_80400000", rom = 0x164000, vram = 0x80400000 },
+  { name = "data_8014", rom = 0x1B22B4, vram = 0x8014D46C },
+  { name = "retained_1B5A50", rom = 0x1B5A50, kind = "bin" },
+]
+
+[version."us-rev1"]
+sha1 = "037fb397cee2669048ed6b762a64698de4a4d88a"
+size = 0x800000
+cartridge_id = "NUS-NRWE-1"
+region = "North America"
+description = "Revised NTSC release (grey cartridge)."
+segments = [
+  { name = "retained_0", rom = 0x0, kind = "bin" },
+  { name = "span_1000", rom = 0x1000, vram = 0x80200400 },
+  { name = "data_800C", rom = 0xC76B0, vram = 0x800C6AB0 },
+  { name = "rsp_alignment", rom = 0xDD834, kind = "bin" },
+  { name = "data_800C", rom = 0xDD83C, vram = 0x800DCC3C },
+  { name = "rsp_boot", rom = 0xDD840, kind = "bin" },
+  { name = "rsp_graphics_f3dex2_code", rom = 0xDD910, kind = "bin" },
+  { name = "rsp_graphics_l3dex2_code", rom = 0xDECA0, kind = "bin" },
+  { name = "rsp_audio_code", rom = 0xDFE30, kind = "bin" },
+  { name = "rsp_graphics_f3dex2_data", rom = 0xE0C50, kind = "bin" },
+  { name = "rsp_graphics_l3dex2_data", rom = 0xE1070, kind = "bin" },
+  { name = "rsp_audio_data", rom = 0xE1460, kind = "bin" },
+  { name = "data_800C", rom = 0xE1720, vram = 0x800E0B20 },
+  { name = "retained_101000", rom = 0x101000, kind = "bin" },
+  { name = "ovl_80400000", rom = 0x16E000, vram = 0x80400000 },
+  { name = "data_8014", rom = 0x1BCD94, vram = 0x80153F4C },
+  { name = "retained_1C0860", rom = 0x1C0860, kind = "bin" },
+]
+
+[file."src/IO/80200500.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200500_2.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200500_3.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200568.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200568_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+
+[file."src/IO/80200800.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200800_3.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200B14.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/80200B14_2.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/io_hostmemory.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/IO/802013D8.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
+[file."src/MATH/80299368.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
+omit = []
+
+[file."src/SDK/LIBGCC/802C6A00_25.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = ["-mfp64"]
+
+[file."src/SDK/PRINTF/802C1880_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/SDK/PRINTF/802C1880.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/SDK/PRINTF/802C1B60.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/sdk/lib_802BB630/802BC380.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math", "-fno-delayed-branch"]
+omit = []

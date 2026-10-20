@@ -1,0 +1,5 @@
+#ifndef SDK_LIBGULTRA_PART_800C7F20_CODE_802B66A0_3_H
+#define SDK_LIBGULTRA_PART_800C7F20_CODE_802B66A0_3_H
+#include "sdk/BUF16B.H"
+extern void func_802B1990_de(void *);
+#endif

@@ -1,0 +1,91 @@
+#ifndef FRONTEND_ENTRYRECAT4D4_H
+#define FRONTEND_ENTRYRECAT4D4_H
+#include "TYPES.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "COMMON/OWNERRECAT8V1.H"
+#include "COMMON/LABEL.H"
+
+
+
+
+
+struct EntryCode8043A0A48043B6E8;
+struct EntryCode8043A0A48043B6E8 {
+    char pad0[0x4B0];
+    s32 values[6];
+    char pad4C8[0x4CC - 0x4C8];
+    s32 mode;
+};
+
+struct EntryCode8043A0A48043B6E8;
+struct Screen_func_8043B6E8_de;
+struct Screen_func_8043B6E8_de {
+    void *window;
+    s32 pad4;
+    struct EntryCode8043A0A48043B6E8 entries[4];
+};
+
+
+struct ResultsPlayerPanel;
+struct ResultsPlayerPanel {
+    char pad0[0x4A8];
+    s32 state;
+    s32 selection;
+    s32 values[6];
+    struct MenuWidget *item;
+    s32 mode;
+};
+
+struct FourPlayerResultsScreen;
+struct ResultsPlayerPanel;
+struct FourPlayerResultsScreen {
+    void *window;
+    void *menu;
+    struct ResultsPlayerPanel panels[4];
+    char pad1348[0x1358 - 0x1348];
+    s32 state;
+    int timer;
+    char pad1360[0x8];
+    int next;
+    char pad136C[0x4];
+    char badges[4][0xC0];
+};
+typedef struct FourPlayerResultsScreen FourPlayerResultsScreen;
+
+
+
+
+struct Resource_func_80419E54_de;
+
+struct ResultsPlayerPanel;
+struct FourPlayerResultsScreen;
+
+
+struct FourPlayerResultsScreen;
+
+
+
+
+
+extern int func_8043B854_de();
+
+struct Entry42 {
+    MenuWidget *window;
+    struct SlotsRecAt5CV1 *slots;
+    struct Object49C panel;
+    char pad4A8[8];
+    s32 state;
+    s32 selection;
+    char pad4B8[0x18];
+};
+struct Screen42 {
+    struct Entry42 entries[4];
+    char pad1340[0x18];
+    s32 state;
+    s32 next;
+    char pad1360[8];
+    s32 delay;
+};
+extern s8 D_80142358[];
+#endif

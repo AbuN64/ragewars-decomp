@@ -1,0 +1,5 @@
+#ifndef SDK_LIBGULTRA_INFERRED_802B3B80_7_H
+#define SDK_LIBGULTRA_INFERRED_802B3B80_7_H
+#include "COMMON/STATERECAT34.H"
+extern void func_802AFEE0_de(s32 arg0, s32 arg1, s8 arg2);
+#endif

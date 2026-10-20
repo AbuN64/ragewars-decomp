@@ -1,0 +1,89 @@
+#ifndef COMMON_RECORDRECATCV1_H
+#define COMMON_RECORDRECATCV1_H
+#include "TYPES.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/TEXTLAYERMETRICS.H"
+
+
+
+
+struct Target_func_8040A77C_de;
+struct Target_func_8040A77C_de {
+    char pad0[0xA8];
+    s32 first;
+    char padAC[0xD0 - 0xAC];
+    s32 second;
+};
+struct RecordRecAtCV1;
+struct Target_func_8040A77C_de;
+struct RecordRecAtCV1 {
+    char pad[0xC];
+    struct Target_func_8040A77C_de *target;
+};
+
+struct RecordRecAtCV1;
+
+struct PakPreview;
+typedef struct PakPreview PakPreview;
+
+
+struct RecordRecAt20V2;
+struct PakMenuSlot;
+struct RecordRecAt20V2 {
+    char pad[0x1C];
+    s32 result;
+    struct PakMenuSlot *inner;
+};
+
+struct PakPreview;
+/* The pak preview block D_800E28BC: a position, a packed value and the colour depth. */
+struct PakPreview {
+    char pad0[0xC];
+    f32 x;
+    f32 y;
+    f32 z;
+    char pad18[0x1C - 0x18];
+    s32 value; /* shown shifted down eight bits */
+    char pad20[0x24 - 0x20];
+    s32 handle;
+    char pad28[0x90 - 0x28];
+    unsigned int depth;
+};
+
+
+struct RecordRecAt24;
+struct RecordRecAt24 {
+    char pad[0x1C];
+    s32 first;
+    s32 second;
+    void *resource;
+};
+
+struct RecordRecAt24;
+
+struct OwnerRecAt5D8V1;
+
+struct Shared_PakMenu;
+
+struct RecordRecAt20V2;
+
+struct Shared_PakMenu;
+
+
+#if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
+s32 func_8040A300_de(struct LayeredText *field, struct Shared_PakMenu *holder);
+#endif
+
+extern s32 func_802645D0_de(s32);
+
+extern void func_80404E28_de(s32);
+void func_80404E28_de(s32);
+s32 func_80404F04_de(s32);
+
+extern char D_800DCD80[];
+
+extern char D_800DCD84[];
+
+extern char D_800DCD94_de[];
+#endif

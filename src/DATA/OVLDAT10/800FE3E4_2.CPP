@@ -1,0 +1,6 @@
+
+#if defined(VERSION_US)
+unsigned int D_auto_rodata_writable_800FE418[8] = {
+    0x00000000, 0x8FC40030, 0x0C000000, 0x00000000, 0x24020001, 0xAFC2001C, 0x08000000, 0x00000000,
+};
+#endif

@@ -1,0 +1,5 @@
+#ifndef DATA_OVLDAT6_800CF230_H
+#define DATA_OVLDAT6_800CF230_H
+#include "COMMON/OBJRECV5.H"
+extern float D_800C9FEC;
+#endif

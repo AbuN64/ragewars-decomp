@@ -1,0 +1,12 @@
+#include "include_asm.h"
+
+#if !(defined(VERSION_US_REV1))
+INCLUDE_RODATA("data_800C", D_8024CC30_C9870);
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_8024CC30_C9870_us_rev1[12] = {
+    0x4F000000, 0x4F000000, 0x4F000000, 0x4F000000, 0x4F000000, 0x4F000000, 0x4F000000, 0x4F000000,
+    0x4F000000, 0x4F000000, 0x4F000000, 0x4F000000,
+};
+#endif

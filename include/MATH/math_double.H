@@ -1,0 +1,7 @@
+#ifndef MATH_MATH_DOUBLE_H
+#define MATH_MATH_DOUBLE_H
+#include "COMMON/OBJRECAT3CV2.H"
+extern double FloatModulo(double arg0, double arg1);
+extern f64 func_8029AEA4_de(f64 x, f64 y);
+extern double func_8029ABA0_de(double value, int exponent);
+#endif

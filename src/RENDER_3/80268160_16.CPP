@@ -1,0 +1,15 @@
+#include "include_asm.h"
+#include "TYPES.H"
+
+#if defined(VERSION_EU_X)
+u32 data_writable_800CD910[20] = {
+    0xFFFFFFFF, 0xFFFFFFFF, 0x00000001, 0x00000001, 0x00000001, 0x00000001,
+    0x00000001, 0x00000001, 0x00000001, 0x00010000, 0xC4000000, 0xC8000000,
+    0x00000000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000, 0x437F0000,
+    0x00000000, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_EU_X)
+INCLUDE_DATA("data_800C", rodata_unresolved_800CD960);
+#endif

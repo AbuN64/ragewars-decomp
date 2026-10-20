@@ -1,0 +1,12 @@
+#include "include_asm.h"
+
+#if defined(VERSION_EU) || defined(VERSION_US)
+INCLUDE_RODATA("data_800C", D_8027DD48_CA9C4);
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_tail_8027DD48_CA9C4_us_rev1[15] = {
+    0x40A3D70A, 0x40A3D70A, 0x3F83126F, 0x40A3D70A, 0x40A3D70A, 0x3B808081, 0x3D0C0000, 0xBF800000,
+    0x4123D70A, 0x4123D70A, 0x3C010204, 0x3DB2B8C4, 0x4196CBE5, 0x3E800000, 0x422FEDE0,
+};
+#endif

@@ -1,0 +1,7 @@
+
+#if defined(VERSION_US_REV1)
+unsigned int D_auto_src_rw_loadout_abilities_items_us_rev1[16] = {
+    0x000000A9, 0x000013A7, 0x00000005, 0x800D7108, 0x000000AB, 0x0000139E, 0x00000003, 0x800D7100,
+    0x000000AC, 0x00001393, 0x00000006, 0x800D710C, 0x000000B1, 0x0000138B, 0x00000004, 0x800D7104,
+};
+#endif

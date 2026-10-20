@@ -1,0 +1,14 @@
+#include "include_asm.h"
+
+#if !(defined(VERSION_US_REV1))
+INCLUDE_DATA("data_800C", rodata_unresolved_800D0E70);
+#endif
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded exact candidate, normalized from prior lane proof. */
+unsigned int D_blob_2cd1f4ee755023403f6e[19] = {
+    0x00000000, 0x0000F000, 0x0001E800, 0x0001CC00, 0x00000000, 0x00000000, 0xFFFF1000, 0xFFFF3000,
+    0x800C9470, 0x800C9468, 0x800C9460, 0x800C9450, 0x800C9448, 0x800C9440, 0x800C9434, 0x800C9428,
+    0x800C9420, 0x00000000, 0xFFFFFFFF,
+};
+#endif

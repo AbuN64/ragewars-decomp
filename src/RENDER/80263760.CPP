@@ -1,0 +1,9 @@
+#include "include_asm.h"
+
+#if defined(VERSION_EU)
+unsigned char D_auto_func_802636F4_eu_padding_642F4[12] = { 0x46, 0x14, 0x00, 0x32, 0x00, 0x00, 0x00, 0x00, 0x45, 0x00, 0x00, 0x02 };
+#endif
+
+#if defined(VERSION_EU)
+INCLUDE_DATA("span_1000", data_unresolved_80263700);
+#endif

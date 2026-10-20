@@ -1,0 +1,196 @@
+#include "COMMON/SHARED_GAMESLOT.H"
+#include "include_asm.h"
+#include "COMMON/VECTOR4F.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/INTEGERSTATEB0.H"
+#include "TYPES.H"
+#include "COMMON/UNUSED.H"
+#include "COMMON/EXTERNS_6.H"
+#include "COMMON/ROUND_STATE_VARIANTS.H"
+#include "SCENE/80286050.H"
+
+/* Requests a switch of the session into mode 0x14: when the pending 0x1000 flag is set outside modes 0xB and 0xC and a target is given it records that target with phase 2 and clears the flags; otherwise, once func_80245814_de accepts the flags, it saves the current mode, enters mode 0x14 with the given argument at phase 1, and sets the timer when func_80264B6C_de allows. */
+
+
+
+extern s32 func_80245814_de(s32 *flags);
+
+void func_80293A20_de(GameSession *session, s32 arg1, s32 target) {
+    s32 pending;
+    s32 *flags;
+
+    flags = &D_8010B194_de;
+    pending = *flags & 0x1000;
+    if ((unsigned)(session->mode - 0xB) < 2) {
+        pending = 0;
+    }
+    if (pending != 0 && target != -1) {
+        session->phase = 2;
+        session->target = target;
+        *flags = 0;
+        return;
+    }
+    if (func_80245814_de(flags) != 0) {
+        s32 mode = session->mode;
+
+        session->phase = 1;
+        session->timer = 0;
+        session->mode = 0x14;
+        session->target = arg1;
+        session->previousMode = mode;
+        if (func_80264B6C_de() != 0) {
+            session->timer = (1.0f);
+        }
+    }
+}
+
+/* Calls cleanup functions on a game state and optionally transitions control state when conditions change. */
+
+
+
+
+#if defined(VERSION_EU)
+extern void func_802A2344_eu(void);
+#elif defined(VERSION_EU_X)
+extern void func_802A2374_eu_x(void);
+#elif defined(VERSION_US) || defined(VERSION_US_REV1)
+extern void InitFrontendMenus(void);
+#else
+#endif
+extern void func_80298368_de(s32 arg0);
+extern void func_80293790_de(GameSession *arg0, s32 arg1);
+extern void func_802394B4_de(void *arg0);
+extern void func_80293394_de(struct GameSession *arg0);
+
+
+
+
+
+void func_80293B28_de(void *arg0) {
+    GameSession *state;
+    f32 value;
+
+    state = arg0;
+    if (D_8014288C == 1) {
+        value = state->transitionTime;
+        if (D_800C54A4_de < value) {
+            if (D_800C54A8_de < value) {
+                D_8014288C = 0;
+                
+#if defined(VERSION_EU)
+func_802A2344_eu
+#elif defined(VERSION_EU_X)
+func_802A2374_eu_x
+#elif defined(VERSION_US) || defined(VERSION_US_REV1)
+InitFrontendMenus
+#else
+func_802A2224_de
+#endif
+();
+                func_80298368_de(2);
+                func_8040C428_de(0);
+                func_80293790_de(state, 1);
+                state->transitionTime = 0;
+            } else if (D_8010F190 != 0) {
+                D_8014288C = 0;
+                
+#if defined(VERSION_EU)
+func_802A2344_eu
+#elif defined(VERSION_EU_X)
+func_802A2374_eu_x
+#elif defined(VERSION_US) || defined(VERSION_US_REV1)
+InitFrontendMenus
+#else
+func_802A2224_de
+#endif
+();
+                func_80298368_de(2);
+                func_80293790_de(state, 8);
+                state->transitionTime = 0;
+            }
+        }
+    }
+    func_80286080_de(&state->world);
+    func_802394B4_de(state->players);
+    func_802AA7A4_de(&state->hud);
+    /* Only us-rev1 makes this call: us, eu, eu-x and de go straight on to func_80293394_de, two
+       instructions shorter, as each cartridge's own bytes show. */
+#ifdef VERSION_US_REV1
+    func_80294F1C_us_rev1();
+#endif
+    func_80293394_de(state);
+}
+
+#include "COMMON/SESSIONHANDLERROW.H"
+
+
+
+
+
+
+
+
+void func_80293C34_de(GameSession *arg0) {
+    f32 t1;
+    f32 t2;
+    f32 t3;
+
+    if (arg0->clockPaused == 0) {
+        t1 = D_801462C8.counters.ticks + D_800D2988;
+        D_801462C8.counters.ticks = t1;
+        if (D_800C54AC_de <= t1) {
+            t2 = D_801462C8.counters.seconds + D_800C54B0_de;
+            D_801462C8.counters.ticks = t1 - D_800C54AC_de;
+            D_801462C8.counters.seconds = t2;
+            if (D_800C54B4_de <= t2) {
+                t3 = D_801462C8.counters.minutes + D_800C54B0_de;
+                D_801462C8.counters.seconds = t2 - D_800C54B4_de;
+                D_801462C8.counters.minutes = t3;
+                if (D_800C54B4_de <= t3) {
+                    D_801462C8.counters.minutes = t3 - D_800C54B4_de;
+                    D_801462C8.counters.hours = D_801462C8.counters.hours + D_800C54B0_de;
+                }
+            }
+        }
+    }
+}
+
+#include "COMMON/SESSIONHANDLERROW.H"
+extern f32 D_800C54B8_de, D_800C54BC_de;
+extern void func_80286080_de(void *);
+extern void func_802394B4_de(void *);
+extern void func_80298368_de(s32);
+extern void func_80293790_de(GameSession *, s32);
+extern void func_80293394_de(GameSession *);
+extern void func_802AA7A4_de(void *);
+
+void func_80293CE4_de(GameSession *session) {
+    RenderCounters *counters = &D_801462C8.counters;
+    f32 time;
+    if (counters->transitionActive == 1) {
+        time = session->transitionTime;
+        if (D_800C54B8_de < time) {
+            if (D_800C54BC_de < time) {
+                counters->transitionActive = 0;
+                stopRoundPlatform();
+                func_80298368_de(2);
+                func_8040C428_de(0);
+                func_80293790_de(session, 1);
+                session->transitionTime = 0;
+            } else if (D_8010F190 != 0) {
+                counters->transitionActive = 0;
+                stopRoundPlatform();
+                func_80298368_de(2);
+                func_80293790_de(session, 8);
+                session->transitionTime = 0;
+            }
+        }
+    }
+    func_80286080_de(&session->world);
+    func_802394B4_de(session->players);
+    func_802AA7A4_de(&session->hud);
+#ifdef VERSION_US_REV1
+    func_80294F1C_us_rev1();
+#endif
+    func_80293394_de(session);
+}

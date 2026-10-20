@@ -1,0 +1,10 @@
+/.env
+/asm/
+/build/
+/.boards/
+/roms/
+/tools/
+/local.mk
+*.z64
+*.n64
+*.v64

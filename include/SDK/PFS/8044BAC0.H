@@ -1,0 +1,14 @@
+#ifndef SDK_PFS_8044BAC0_H
+#define SDK_PFS_8044BAC0_H
+#include "TYPES.H"
+#include "COMMON/LEVEL_TRACK.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/RESIDENT_EVENT_HANDLER.H"
+#include "COMMON/AUDIO_CALLBACKS.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/PACKED.H"
+#include "COMMON/VECTOR4F.H"
+#include "COMMON/LEVEL_INPUT.H"
+extern s16 func_8044AE70_de();
+extern s32 func_8044B008_de(ControllerProfile *, s32);
+#endif

@@ -1,0 +1,4 @@
+
+#if defined(VERSION_DE)
+unsigned char D_auto_func_802BD2E8_de_padding_BDEE8[8] = { 0x01, 0x0A, 0x48, 0x21, 0x25, 0x29, 0xFF, 0xF0 };
+#endif

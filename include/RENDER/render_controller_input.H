@@ -1,0 +1,8 @@
+#ifndef RENDER_CONTROLLER_INPUT_H
+#define RENDER_CONTROLLER_INPUT_H
+
+#include "TYPES.H"
+struct ControllerProfile;
+void Render_UpdateControllerInput(struct ControllerProfile *state, s8 x, s8 y, u32 buttons);
+
+#endif

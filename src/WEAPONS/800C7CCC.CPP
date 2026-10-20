@@ -1,0 +1,16 @@
+#include "include_asm.h"
+
+#if !(defined(VERSION_US_REV1))
+INCLUDE_RODATA("data_800C", D_80228AF4_C88CC);
+#endif
+
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+INCLUDE_RODATA("data_800C", rodata_func_80228E60_eu_800C2EB4);
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned int D_auto_src_rw_pool_80228AF4_C88CC_us_rev1[14] = {
+    0x3D888889, 0x3C888889, 0x42700000, 0x3F800000, 0x41F00000, 0x3F000000, 0x3F4CCCCD, 0x41200000,
+    0x3F000000, 0x41A00000, 0x3F000000, 0x40E00000, 0x40C00000, 0x41400000,
+};
+#endif

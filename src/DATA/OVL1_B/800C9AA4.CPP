@@ -1,0 +1,6 @@
+
+#if defined(VERSION_US_REV1)
+unsigned int D_d0_8959759877b4f9f3[3] = {
+    0x40C90FDB, 0x40490FDC, 0x4096CBE5,
+};
+#endif

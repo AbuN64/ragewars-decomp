@@ -1,0 +1,10 @@
+#include "sdk/libgultra.h"
+#include "COMMON/EXTERNS_16.H"
+#include "TYPES.H"
+#include "sdk/libgultra/ai.h"
+
+/* Returns whether the audio interface status register at 0xA450000C has its top bit (FIFO full)
+   set. */
+s32 __osAiDeviceBusy(void) {
+    return *(volatile s32 *) 0xA450000C >> 31 != 0;
+}

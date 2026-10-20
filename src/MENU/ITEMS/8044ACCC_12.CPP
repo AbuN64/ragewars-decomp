@@ -1,0 +1,12 @@
+#include "include_asm.h"
+
+#if defined(VERSION_US_REV1)
+const unsigned char D_auto_rodata_func_8044B7C0_de_800CA118_unclaimed_CAD28[17] = {
+    0x67, 0x72, 0x61, 0x70, 0x68, 0x69, 0x63, 0x73, 0x65, 0x74, 0x20, 0x69, 0x6E, 0x64, 0x65, 0x78,
+    0x00,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+INCLUDE_DATA("data_800C", rodata_unresolved_800CA139);
+#endif

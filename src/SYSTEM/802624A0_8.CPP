@@ -1,0 +1,98 @@
+#include "COMMON/WORLD.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/OBJRECAT5F14.H"
+#include "COMMON/VERSION_CALLS.H"
+
+/* Spawns the effect of an item variant: resolves the variant's effect id, loads its descriptor and first record, takes the effect count from the record's model and turns the colour vector by the record's angle, then spawns the effect through the inline spawner of func_80262A9C_de with the given owner, position, scale, direction and counted reference, releasing both resources. Adapted from func_80262A9C_de with the descriptor loading added. */
+#include "TYPES.H"
+#include "SCENE/802508E0_4.H"
+#include "SYSTEM/80255C40_3.H"
+#include "SYSTEM/80255C40_7.H"
+#include "RENDER_4/8028FD2C_6.H"
+extern s32 D_800CD764_de;
+extern s32 D_800CD8D0;
+extern s32 D_8013B290;
+extern s32 func_8028FE28_de(s32, s32, s32);
+extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
+extern s32 func_8028CF6C_de(void *, s32);
+extern f32 func_802B2350(s32);
+extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void func_80253754_de(s32, void **);
+struct Shared_World;
+extern s32 func_8028B21C_de(struct Shared_World *, s32);
+extern s32 func_8028B25C_de(void *, s32);
+extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
+extern void func_8024B2D0_de(SceneEffect *);
+static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
+    SceneEffect *effect;
+    if (D_8013B290 == 0 && (unsigned int)scene->activeEffects.count >= 3) {
+        return 0;
+    }
+    effect = scene->freeEffects.head;
+    if (effect != 0) {
+        func_80255ED8_de(&scene->freeEffects, effect);
+        func_80255CB8_de(&scene->activeEffects, effect);
+        effect->ref = ref;
+        if (ref != 0) {
+            *ref += 1;
+        }
+    }
+    return effect;
+}
+static inline SceneEffect *spawn_effect(struct SceneEffectPool *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position,
+                                   f32 scale, CVector3 direction, CVector3 color, s32 *ref) {
+    SceneEffect *effect;
+    if (D_800CD764_de == 0) {
+        return 0;
+    }
+    if (count == 0) {
+        return 0;
+    }
+    if (id == -1) {
+        id = func_8028B21C_de(&D_8011FE88, variant);
+        if (id == -1) {
+            return 0;
+        }
+    }
+    if ((unsigned int)(variant + 1) < 2) {
+        variant = func_8028B25C_de(&D_8011FE88, id);
+    }
+    effect = take_effect(scene, ref);
+    if (effect == 0) {
+        return 0;
+    }
+    func_802466A0_de(effect, id, variant, D_800CD8D0, count, -1, owner, scale, position, 0x80000, color, direction, 0);
+    func_8024B2D0_de(effect);
+    return effect;
+}
+SceneEffect *func_802627A0_de(struct SceneEffectPool *scene, s32 variant, s32 owner, CVector3 position, f32 scale, CVector3 direction,
+                      CVector3 color, s32 *ref) {
+    SceneEffect *effect;
+    s32 id;
+    s32 key;
+    void **descriptor;
+    void **resource;
+    Record_func_802627A0_de *record;
+    s32 count;
+    s32 size;
+    s32 clip;
+    effect = 0;
+    id = func_8028B21C_de(&D_8011FE88, variant);
+    if (id != -1) {
+        key = func_8028FE28_de((s32)D_8011FE88.indexedDirectory, D_8011FE88.indexedBank, id);
+        descriptor = func_8025193C_de(0, key, key, 0x18, 0, 0, 0, &D_800C4260_de, 1);
+        if (descriptor != 0) {
+            clip = func_8028FE3C_de(*descriptor, key, 0, &size);
+            resource = func_8025193C_de(0, clip, clip, size, 0, 0, 0, &D_800C4274_de, 1);
+            if (resource != 0) {
+                record = func_8028FDB4_de(*resource, 0);
+                count = func_8028CF6C_de(&D_8011FE88, record->count);
+                func_80271F9C_de(&color, &color, func_802B2350(record->angle));
+                effect = spawn_effect(scene, id, variant, count, owner, position, scale, direction, color, ref);
+                func_80253754_de(0, resource);
+            }
+            func_80253754_de(0, descriptor);
+        }
+    }
+    return effect;
+}

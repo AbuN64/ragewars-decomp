@@ -1,0 +1,6 @@
+
+#if defined(VERSION_US)
+unsigned int D_d1_d237130776694981[3] = {
+    0x00000E6D, 0x5F72704F, 0x626A6563,
+};
+#endif

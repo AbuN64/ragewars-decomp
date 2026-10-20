@@ -1,0 +1,8 @@
+
+#if defined(VERSION_US_REV1)
+extern char D_002ADD18[];
+unsigned int D_auto_src_ragewars_pickup_life_us_rev1[10] = {
+    0x00000000, 0x06A90001, 0x00000000, 0x00010000, (unsigned int)D_002ADD18, 0x00000000, 0x06AA0001, 0x00000000,
+    0x000A0000, (unsigned int)D_002ADD18,
+};
+#endif

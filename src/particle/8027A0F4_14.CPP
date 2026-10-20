@@ -1,0 +1,22 @@
+
+#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+/* ROM-grounded data: rodata/Particle_BuildMatrix/800C9D58 */
+#ifdef VERSION_EU
+const unsigned int D_blob_phase2_dd8c1f5242342b4d6994[11] = {
+    0x0027E2DC, 0x0027E464, 0x0027E458, 0x0027E324, 0x0027E458, 0x0027E380, 0x0027E3FC, 0x0027E458,
+    0x0027E464, 0x0027E464, 0x0027E464,
+};
+#endif
+#ifdef VERSION_US
+const unsigned int D_blob_phase2_dd8c1f5242342b4d6994[11] = {
+    0x0027E28C, 0x0027E414, 0x0027E408, 0x0027E2D4, 0x0027E408, 0x0027E330, 0x0027E3AC, 0x0027E408,
+    0x0027E414, 0x0027E414, 0x0027E414,
+};
+#endif
+#ifdef VERSION_US_REV1
+const unsigned int D_blob_phase2_dd8c1f5242342b4d6994[11] = {
+    0x0027E30C, 0x0027E494, 0x0027E488, 0x0027E354, 0x0027E488, 0x0027E3B0, 0x0027E42C, 0x0027E488,
+    0x0027E494, 0x0027E494, 0x0027E494,
+};
+#endif
+#endif

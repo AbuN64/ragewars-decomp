@@ -1,0 +1,32 @@
+#include "include_asm.h"
+
+#if !(defined(VERSION_US_REV1))
+INCLUDE_RODATA("data_800C", D_80286AA8_CAEB0);
+#endif
+
+#if defined(VERSION_US)
+INCLUDE_DATA("data_800C", rodata_unresolved_800C5103);
+#endif
+
+#if defined(VERSION_EU_X)
+INCLUDE_DATA("data_800C", rodata_unresolved_800C54C3);
+#endif
+
+#if defined(VERSION_EU)
+INCLUDE_DATA("data_800C", rodata_unresolved_800C5483);
+#endif
+
+#if defined(VERSION_DE)
+INCLUDE_DATA("data_800C", rodata_unresolved_800C51D3);
+#endif
+
+#if defined(VERSION_US_REV1)
+const unsigned char D_auto_src_rw_text_80286AA8_CAEB0_us_rev1[19] = {
+    0x61, 0x6E, 0x69, 0x6D, 0x61, 0x74, 0x65, 0x64, 0x20, 0x69, 0x6E, 0x73, 0x74, 0x61, 0x6E, 0x63,
+    0x65, 0x73, 0x00,
+};
+#endif
+
+#if defined(VERSION_US_REV1)
+INCLUDE_DATA("data_800C", rodata_unresolved_800CA2C3);
+#endif

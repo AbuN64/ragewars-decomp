@@ -1,0 +1,23 @@
+#ifndef MATH_8029BBA0_7_H
+#define MATH_8029BBA0_7_H
+#include "MATH/DOUBLEBITS.H"
+extern void func_8029E810_de(f32 *arg0, f32 *arg1, f32 *arg2);
+extern void func_8029E8AC_de(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32 oy, f32 sy);
+extern void func_8029E93C_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+extern void func_8029E77C_de(f32 *arg0, f32 *arg1, f32 *arg2);
+extern f32 func_8029E428_de(f32 *a, f32 *b);
+extern void func_8029E3C0_de(f32 *a, f32 *b);
+extern void func_8029E458_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void func_8029E4DC_de(CVector3 *arg0);
+extern void func_8029E304_de(void *arg0, void *arg1, void *arg2);
+extern void func_8029E2A8_de(float *vector);
+extern void func_8029E52C_de(f32 *arg0);
+extern void func_8029E2E8_de(Triple *arg0, Triple *arg1);
+extern void func_8029E338_de(void *arg0, void *arg1, void *arg2);
+extern void func_8029EA44_de(void *arg0, void *arg1);
+extern f32 func_8029E1D4_de(f32 a, f32 b);
+extern void func_8029E2BC_de(void *arg0, float arg1, float arg2, float arg3);
+extern void func_8029E398_de(void *arg0, void *arg1);
+extern void func_8029E36C_de(void *arg0, void *arg1, f32 arg2);
+extern void func_8029E2CC_de(float *arg0, float *arg1, float *arg2, float *arg3);
+#endif

@@ -1,0 +1,23 @@
+#include "include_asm.h"
+
+unsigned char D_auto_rodata_writable_800E3280[33] = {
+    0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
+    0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
+    0x00,
+};
+
+#if defined(VERSION_US)
+INCLUDE_DATA("data_800C", rodata_unresolved_800DDF01);
+#endif
+
+#if defined(VERSION_EU_X)
+INCLUDE_DATA("data_800C", rodata_unresolved_800EAA81);
+#endif
+
+#if defined(VERSION_EU)
+INCLUDE_DATA("data_800C", rodata_unresolved_800EF8C1);
+#endif
+
+#if defined(VERSION_DE)
+INCLUDE_DATA("data_800C", rodata_unresolved_800DF251);
+#endif

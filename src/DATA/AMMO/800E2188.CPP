@@ -1,0 +1,4 @@
+
+#if defined(VERSION_US_REV1)
+char D_auto_rodata_unresolved_800E2104_unclaimed_E2D88[48] = "PHRPUPCFC\000\000\000SUMNT@K\000HNNBWQODCKER\000\000\000\000UCGQJJICDL";
+#endif

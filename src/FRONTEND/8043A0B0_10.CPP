@@ -1,0 +1,176 @@
+#include "include_asm.h"
+#include "COMMON/SHAREDPLAYER.H"
+#include "FRONTEND/ENTRYRECAT4D4.H"
+#include "TYPES.H"
+#include "FRONTEND/8043A0B0_10.H"
+
+/* Fills player p's column values on the screen D_800E59E0 from what the player owns: unless the
+   entry's mode word (0x4D4) is 0, it scans the 4 rows of D_800E5BC4 for column 1, the 3 rows of
+   D_800E5B14 for column 4 and the 8 rows of D_800E5B44 for column 5, and writes the index of each
+   row whose item is marked owned at 0x4C of the player's 150-byte record in D_80146398 into the
+   entry's next value slot (0x4B8 plus four per slot), starting at slot 0, 4 and 2, or at 0, 2 and
+   1 in mode 1. */
+
+
+
+
+
+
+
+extern struct Screen_func_8043B6E8_de *D_800E59E0;
+extern u8 D_80146398[];
+extern struct Shape_typemap_165 D_800E5BC4[];
+extern struct Shape_typemap_165 D_800E5B14[];
+extern struct Shape_typemap_165 D_800E5B44[];
+
+void func_8043B6E8_de(s32 player) {
+    struct Shape_typemap_165 *source;
+    u8 *record;
+    s32 column;
+    s32 count;
+    s32 slot;
+    s32 i;
+
+    if (D_800E59E0->entries[player].mode == 0) {
+        return;
+    }
+    record = &D_80146398[player * 150];
+    for (column = 0; column < 8; column++) {
+        if (D_800E59E0->entries[player].mode == 1) {
+            switch (column) {
+            case 1:
+                source = D_800E5BC4;
+                count = 4;
+                slot = 0;
+                break;
+            case 4:
+                source = D_800E5B14;
+                count = 3;
+                slot = 2;
+                break;
+            case 5:
+                source = D_800E5B44;
+                count = 8;
+                slot = 1;
+                break;
+            default:
+                continue;
+            }
+        } else {
+            switch (column) {
+            case 1:
+                source = D_800E5BC4;
+                count = 4;
+                slot = 0;
+                break;
+            case 4:
+                source = D_800E5B14;
+                count = 3;
+                slot = 4;
+                break;
+            case 5:
+                source = D_800E5B44;
+                count = 8;
+                slot = 2;
+                break;
+            default:
+                continue;
+            }
+        }
+        for (i = 0; i < count; i++) {
+            if ((record + source[i].field_8)[0x4C] == 1) {
+                D_800E59E0->entries[player].values[slot++] = i;
+            }
+        }
+    }
+}
+
+#ifdef NON_MATCHING
+#include "TYPES.H"
+
+/* Rebuilds the loadout of every active player whose entry on the screen D_800E59E0 is in mode 2:
+   clears the 22 owned bytes at 0x4C and level bytes at 0x62 of the player's 150-byte record in
+   D_80146398, then for columns 0 and 1 (16-byte table D_800E5BC4, level column + 1), 2 and 3
+   (D_800E5B44, level column + 3) and 4 (D_800E5B14, level 4) marks the item of the row the entry's
+   value for that column selects as owned at that level, and finally marks item 0 owned at level
+   0. */
+
+struct Entry {
+    char pad0[0x4B0];
+    s32 values[6];
+    char pad4C8[0x4CC - 0x4C8];
+    s32 mode;
+};
+
+struct Screen {
+    void *window;
+    s32 pad4;
+    struct Entry entries[4];
+};
+
+struct Source {
+    s32 pad0;
+    s32 pad4;
+    s32 item;
+    s32 padC;
+};
+
+extern struct Screen *D_800E59E0;
+extern u8 D_80146398[];
+extern struct Source D_800E5BC4[];
+extern struct Source D_800E5B14[];
+extern struct Source D_800E5B44[];
+extern void *jtbl_800E2040[];
+
+void func_8043B854_de(void) {
+    u8 *record;
+    struct Source *source;
+    struct Source *row;
+    s32 level;
+    s32 item;
+    s32 i;
+    s32 column;
+
+    for (i = 0; i < 4; i++) {
+        record = &D_80146398[i * 150];
+        if (record[0x78] != 1) {
+            continue;
+        }
+        if (D_800E59E0->entries[i].mode != 2) {
+            continue;
+        }
+        for (column = 0; column < 22; column++) {
+            (record + column)[0x4C] = 0;
+            (record + column)[0x62] = 0;
+        }
+        for (column = 0; column < 6; column++) {
+            switch (column) {
+            case 0:
+            case 1:
+                source = D_800E5BC4;
+                level = column + 1;
+                break;
+            case 4:
+                source = D_800E5B14;
+                level = 4;
+                break;
+            case 2:
+            case 3:
+                source = D_800E5B44;
+                level = column + 3;
+                break;
+            default:
+                continue;
+            }
+            item = source[D_800E59E0->entries[i].values[column]].item;
+            row = source + D_800E59E0->entries[i].values[column];
+            (record + item)[0x4C] = 1;
+            (record + row->item)[0x62] = level;
+        }
+        record[0x4C] = 1;
+        record[0x62] = 0;
+    }
+}
+#else
+INCLUDE_ASM("ovl_80400000", func_8043B854_de);
+#endif

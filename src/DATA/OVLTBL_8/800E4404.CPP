@@ -1,0 +1,23 @@
+#include "include_asm.h"
+
+#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+INCLUDE_DATA("data_800C", D_src_16391c30);
+#endif
+
+#if defined(VERSION_US) || defined(VERSION_US_REV1)
+/* ROM-grounded exact candidate, normalized from prior lane proof. */
+extern char D_00420E90[];
+extern char D_004218C4[];
+extern char D_004218F4[];
+extern char D_00421998[];
+extern char D_00421A30[];
+unsigned int D_blob_95bfc4689525ee9d507e[18] = {
+    0x00000E08, 0x0000001C, (unsigned int)D_004218F4, 0x00000E06, 0x0000001C, (unsigned int)D_00420E90, 0x00000E03, 0x0000001C,
+    (unsigned int)D_004218C4, 0x00000002, 0x0000001C, (unsigned int)D_00421A30, 0x00000001, 0x0000001C, (unsigned int)D_00421998, 0x00000000,
+    0x00000000, 0x00000000,
+};
+#endif
+
+#if defined(VERSION_US)
+INCLUDE_DATA("data_800C", data_unresolved_800DF0AC);
+#endif

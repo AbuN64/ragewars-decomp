@@ -1,0 +1,54 @@
+#include "include_asm.h"
+
+#if defined(VERSION_EU)
+#include "TYPES.H"
+#include "COMMON/SHAREDPLAYER.H"
+extern s32 D_80106248;
+extern u8 D_0043C500[];
+extern char D_800C6080_eu_x[];
+extern s32 D_800CBC14;
+extern struct Triple D_800D2C90;
+extern s32 func_80255228_de(s32 *);
+extern void func_80253908_de(s32);
+extern void func_80414360_de(void);
+extern void func_802A16F8_de(s32);
+extern void func_80297FA0_de(s32, s32);
+extern void func_8040FB94_de(char *);
+extern void func_8041B5E0_de(void);
+extern void func_8041989C_de(void);
+extern void func_8041A400_de(void);
+extern void func_8041B0E0_de(void);
+extern void func_80419E24_de(void);
+extern void func_8041A550_de(void);
+extern void func_8041AB90_de(void);
+extern void func_802A1960_de(void);
+extern void func_802A2400_de(f32);
+extern void func_802A2418_de(s32);
+extern void func_802A2360_de(void);
+
+void func_802A2344_eu(void) {
+    s32 *selected;
+    func_80255228_de(&D_80106248);
+    func_80253908_de(0);
+    func_80414360_de();
+    func_802A16F8_de(0x3000);
+    func_80297FA0_de(0x23, (s32)D_0043C500);
+    func_8040FB94_de(D_800C6080_eu_x);
+    func_8041B5E0_de();
+    func_8041989C_de();
+    func_8041A400_de();
+    func_8041B0E0_de();
+    func_80419E24_de();
+    func_8041A550_de();
+    func_8041AB90_de();
+    func_802A1960_de();
+    D_800CBC14 = 0x3C;
+    func_802A2400_de(0.0f);
+    func_802A2418_de(1);
+    selected = &D_800D2C90.z;
+    *selected = 1;
+    func_802A2360_de();
+    D_800D2C90.x = 0;
+    func_802A23C4_de(2);
+}
+#endif

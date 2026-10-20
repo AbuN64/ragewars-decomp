@@ -1,0 +1,8 @@
+
+#if defined(VERSION_US_REV1)
+/* ROM-grounded data: src/ragewars_actor_handler_run_CE8FC_us_rev1.c */
+extern char D_0020FA10[];
+unsigned int D_blob_85a9a4929ef086833ec4[2] = {
+    (unsigned int)D_0020FA10, 0x00000000,
+};
+#endif

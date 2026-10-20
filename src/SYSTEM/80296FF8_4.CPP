@@ -1,0 +1,4 @@
+
+#if defined(VERSION_EU)
+unsigned char D_auto_func_80296DE8_eu_padding_979E8[8] = { 0xAC, 0xE6, 0x00, 0x08, 0x16, 0x20, 0x00, 0x19 };
+#endif
