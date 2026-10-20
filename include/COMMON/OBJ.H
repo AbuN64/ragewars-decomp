@@ -179,10 +179,10 @@ struct Rider;
 typedef struct Rider Rider;
 
 extern void func_802022E0_de();
-extern void func_8020238C_de(void);
-extern void func_802023A8_de(void);
-extern int func_802023C4_de();
-extern void func_802023D0_de(int arg0);
+extern void Libgultra_TrwCacheFlush0(void);
+extern void Libgultra_TrwCacheFlush1(void);
+extern int Libgultra_TrwGetSr();
+extern void Libgultra_TrwSetSr(int arg0);
 
 typedef union NavActor { SharedPlayer player; Input80216D3C input; Actor_func_80214624_de actor; struct Owner owner; } NavActor;
 typedef struct NavVec { CVector3 v; f32 fourth; } NavVec;

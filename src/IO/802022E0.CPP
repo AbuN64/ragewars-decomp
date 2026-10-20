@@ -43,8 +43,8 @@ void func_802022E0_de(void) {
         var_t1_2 += 1;
         *var_t2_2++ = temp_t5_2;
     } while (var_t0_2 != &D_002022BC);
-    func_8020238C_de();
-    func_802023A8_de();
+    Libgultra_TrwCacheFlush0();
+    Libgultra_TrwCacheFlush1();
     D_800F3468 = -0x802;
 }
 #else

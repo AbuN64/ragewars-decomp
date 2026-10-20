@@ -1,8 +1,8 @@
 .set noreorder
 .set noat
 .section .text
-.globl func_802023A8_de
-func_802023A8_de:
+.globl Libgultra_TrwCacheFlush1
+Libgultra_TrwCacheFlush1:
     lui $t0, %hi(D_80003FE0)
     addiu $t1, $t0, %lo(D_80003FE0)
 .Lfunc_802023A8_de_008:

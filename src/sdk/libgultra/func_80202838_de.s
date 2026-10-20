@@ -26,15 +26,15 @@ func_80202838_de:
     nop
     beqz $at, .Lfunc_80202838_de_13C
     nop
-    bgez $zero, func_80202460_de+0x1B8
+    bgez $zero, Libgultra_TrwExceptionHandler+0x1B8
     nop
     addiu $at, $zero, -0x1
-    j func_80202460_de+0x1B0
+    j Libgultra_TrwExceptionHandler+0x1B0
     nop
     addiu $at, $zero, -0x1
-    j func_80202460_de+0x1B0
+    j Libgultra_TrwExceptionHandler+0x1B0
     nop
-    j func_80202460_de+0x1AC
+    j Libgultra_TrwExceptionHandler+0x1AC
     nop
     sd $v1, 0x18($k0)
     sd $a0, 0x20($k0)
@@ -69,9 +69,9 @@ func_80202838_de:
     addi $v1, $v1, 0x4
     bne $v0, $a0, .Lfunc_80202838_de_0D4
     nop
-    jal func_8020238C_de
+    jal Libgultra_TrwCacheFlush0
     nop
-    jal func_802023A8_de
+    jal Libgultra_TrwCacheFlush1
     nop
     jr $ra
     nop
@@ -83,7 +83,7 @@ func_80202838_de:
     addiu $at, $at, 0x4
     mtc0 $at, $14
     addiu $at, $zero, 0x0
-    j func_80202460_de+0x1B0
+    j Libgultra_TrwExceptionHandler+0x1B0
     nop
     lui $v0, %hi(D_002013D8)
     addiu $v0, $v0, %lo(D_002013D8)

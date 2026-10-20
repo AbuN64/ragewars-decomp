@@ -1,8 +1,8 @@
 .set noreorder
 .set noat
 .section .text
-.globl func_802023DC_de
-func_802023DC_de:
+.globl Libgultra_TrwReadTlbEntry
+Libgultra_TrwReadTlbEntry:
     addi $sp, $sp, -0x10
     sw $a0, 0x0($sp)
     sw $a1, 0x4($sp)

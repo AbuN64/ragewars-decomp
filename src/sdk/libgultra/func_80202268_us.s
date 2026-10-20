@@ -1,8 +1,8 @@
 .set noreorder
 .set noat
 .section .text
-.globl func_80202268_us
-func_80202268_us:
+.globl Libgultra_TrwExceptionVectors
+Libgultra_TrwExceptionVectors:
     bltz $t0, .Lfunc_80202268_us_024
     sll $zero, $a0, 0
     mtc0 $k0, $30

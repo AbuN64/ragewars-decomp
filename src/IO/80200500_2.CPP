@@ -10,7 +10,7 @@ extern MemoryRange D_800F2D00[48];
 extern TranslationEntry D_800F3470[32];
 extern u32 D_800C8148_de[];
 extern MemoryBoundary D_800CB3A0[];
-extern u32 func_802023DC_de(void);
+extern u32 Libgultra_TrwReadTlbEntry(void);
 
 void func_80200610_de(void) {
     u32 asid, mask, hi, lo0, lo1, size, first, last, count;
@@ -18,7 +18,7 @@ void func_80200610_de(void) {
     MemoryRange *range;
     MemoryBoundary *boundary;
     u32 *masks;
-    asid = func_802023DC_de();
+    asid = Libgultra_TrwReadTlbEntry();
     entry = D_800F3470;
     range = &D_800F2D00[16];
     range->first = -1;

@@ -3,8 +3,8 @@
 .set gp=64
 .set fp=64
 .section .text
-.globl func_80202460_de
-func_80202460_de:
+.globl Libgultra_TrwExceptionHandler
+Libgultra_TrwExceptionHandler:
     lui $k0, %hi(D_800F3130)
     addiu $k0, $k0, %lo(D_800F3130)
     sd $at, 0x328($k0)
@@ -26,7 +26,7 @@ func_80202460_de:
 .elseif VERSION_EU
     bgez $zero, func_80202268_eu+0x1C
 .elseif VERSION_US
-    bgez $zero, func_80202268_us+0x1C
+    bgez $zero, Libgultra_TrwExceptionVectors+0x1C
 .else
     bgez $zero, func_80202268_eu_x+0x1C
 .endif
@@ -140,15 +140,15 @@ func_80202460_de:
     ld $at, 0x328($k0)
     ld $v0, 0x330($k0)
     sd $ra, 0xF8($k0)
-    jal func_80202994_de
+    jal Libgultra_TrwExceptionTail1
     nop
     lui $sp, %hi(D_800F3CB0)
     addiu $sp, $sp, %lo(D_800F3CB0)
     jal func_802014A4_de
     nop
-    jal func_8020238C_de
+    jal Libgultra_TrwCacheFlush0
     nop
-    jal func_802023A8_de
+    jal Libgultra_TrwCacheFlush1
     nop
     lui $k0, %hi(D_800F3130)
     addiu $k0, $k0, %lo(D_800F3130)

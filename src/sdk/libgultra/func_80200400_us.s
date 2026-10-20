@@ -1,8 +1,8 @@
 .set noreorder
 .set noat
 .section .text
-.globl func_80200400_us
-func_80200400_us:
+.globl Libgultra_TrwEntryPoint
+Libgultra_TrwEntryPoint:
     lui $sp, 0x803F
     ori $sp, $sp, 0xFFC0
     addiu $a0, $zero, 0x1E

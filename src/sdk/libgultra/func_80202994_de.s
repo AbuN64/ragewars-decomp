@@ -3,8 +3,8 @@
 .set gp=64
 .set fp=64
 .section .text
-.globl func_80202994_de
-func_80202994_de:
+.globl Libgultra_TrwExceptionTail1
+Libgultra_TrwExceptionTail1:
     sd $zero, 0x0($k0)
     sd $at, 0x8($k0)
     sd $v0, 0x10($k0)
