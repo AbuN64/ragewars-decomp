@@ -298,12 +298,14 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
     }
 }
 
-s32 func_8026B504_de(void *model, void *lights, s32 *flags) {
+typedef struct { s32 flagWord; char pad4[2]; u8 flags; } ModelMaterial;
+
+s32 func_8026B504_de(void *model, void *lights, ModelMaterial *material) {
     CVector3 direction;
     CVector3 position;
     f32 matrix[4][4];
 
-    if (D_80110620 != 0 && (*flags & 0x8000)) {
+    if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
         func_80270700_de((f32 *)matrix, model);
         func_802732D0_de((f32 *)matrix, &position);
         func_80271F68_de(&direction, func_8022A414_de(&D_80145040) + 0x6E8, &position);
@@ -338,13 +340,11 @@ s32 func_8026B504_de(void *model, void *lights, s32 *flags) {
 
 typedef struct { char pad0[0x80]; s8 kind; u8 variant; char pad82[13]; u8 bonus; char pad90[4]; u8 enabled; } ModelState;
 typedef struct { char pad0[0x5D8]; ModelState *state; char pad5DC[0xC10]; f32 glow; char pad11F0[0x3C]; u32 flags; } ModelActor;
-typedef struct { char pad0[6]; u8 flags; } ModelMaterial;
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 extern s32 D_80146918, D_801468F4;
 extern void func_80253BBC_de(s32, void **);
-extern s32 func_8026B504_de(void *, void *, ModelMaterial *);
 extern s32 func_80269A80_de(ModelMaterial *, s32);
 
 void func_8026B6A0_de(void **resource, ModelActor *actor, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
