@@ -18591,30 +18591,30 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "world"
 format = "resource bank child 18: Cinemas index"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 37144
 rom."eu-x" = [[0x798c78, 0x7a1d90]]
 rom."us" = [[0x793b38, 0x79cc50]]
 rom."us-rev1" = [[0x793b38, 0x79cc50]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/9" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/9" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/9" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/9" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/9" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/9" }, { artifact = "batch-004-decode.json", sha256 = "7b37e1abe6670fe180b5885fde275be45d037f8e982488539bdfdf3577c9227f", pointer = "/rows/resource.cinemas" }]
 
 [blob."resource.cinemas.de"]
 type = "world"
 format = "resource bank child 18: Cinemas index"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 37144
 rom."de" = [[0x7919cc, 0x79aae4]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/9" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/9" }, { artifact = "batch-004-decode.json", sha256 = "7b37e1abe6670fe180b5885fde275be45d037f8e982488539bdfdf3577c9227f", pointer = "/rows/resource.cinemas.de" }]
 
 [blob."resource.cinemas.eu"]
 type = "world"
 format = "resource bank child 18: Cinemas index"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 37144
 rom."eu" = [[0x793b50, 0x79cc68]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/9" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/9" }, { artifact = "batch-004-decode.json", sha256 = "7b37e1abe6670fe180b5885fde275be45d037f8e982488539bdfdf3577c9227f", pointer = "/rows/resource.cinemas.eu" }]
 
 [blob."resource.curves"]
 type = "world"
@@ -18648,24 +18648,24 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "world"
 format = "resource bank child 1: intelligence"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 2056
 decoded_size = 24000
 rom."eu" = [[0x5f8720, 0x5f8f28]]
 rom."eu-x" = [[0x5fd860, 0x5fe068]]
 rom."us" = [[0x5f8720, 0x5f8f28]]
 rom."us-rev1" = [[0x5f8720, 0x5f8f28]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/0" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/0" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/0" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/0" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/0" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/0" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/0" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/0" }, { artifact = "batch-004-decode.json", sha256 = "7b37e1abe6670fe180b5885fde275be45d037f8e982488539bdfdf3577c9227f", pointer = "/rows/resource.intelligence" }]
 
 [blob."resource.intelligence.de"]
 type = "world"
 format = "resource bank child 1: intelligence"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 2040
 decoded_size = 23720
 rom."de" = [[0x5f9d74, 0x5fa56c]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/0" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/0" }, { artifact = "batch-004-decode.json", sha256 = "7b37e1abe6670fe180b5885fde275be45d037f8e982488539bdfdf3577c9227f", pointer = "/rows/resource.intelligence.de" }]
 
 [blob."resource.level-bit-sets"]
 type = "world"
