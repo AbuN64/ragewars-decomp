@@ -4137,14 +4137,14 @@ evidence = [{ artifact = "structural.json", sha256 = "68c91513b04a50e388652dd30f
 type = "audio"
 format = "sound: Nintendo audio cue-sequence bank image (container, not an additional audible sample)"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 47792
 rom."de" = [[0x504574, 0x510024]]
 rom."eu" = [[0x503cb8, 0x50f768]]
 rom."eu-x" = [[0x508df8, 0x5148a8]]
 rom."us" = [[0x503cb8, 0x50f768]]
 rom."us-rev1" = [[0x503cb8, 0x50f768]]
-evidence = [{ artifact = "structural.json", sha256 = "68c91513b04a50e388652dd30f504e4314a3aa26d8896d697ceb2704820eb91a", pointer = "/extra/audio-bank.cue-sequence" }]
+evidence = [{ artifact = "structural.json", sha256 = "68c91513b04a50e388652dd30f504e4314a3aa26d8896d697ceb2704820eb91a", pointer = "/extra/audio-bank.cue-sequence" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/audio-bank.cue-sequence" }]
 
 [blob."audio-bank.sample"]
 type = "audio"
@@ -7936,10 +7936,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.463ae0.14fd (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 4851
 rom."de" = [[0x101000, 0x1022f3]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/0" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/0" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.463ae0.14fd" }]
 
 [blob."leftover.de.audio-sample.464fe0.23ee"]
 type = "audio"
@@ -7954,10 +7954,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4673d0.13d4 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 5076
 rom."de" = [[0x1046e9, 0x105abd]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/2" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/2" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4673d0.13d4" }]
 
 [blob."leftover.de.audio-sample.4687a8.2b08"]
 type = "audio"
@@ -7972,19 +7972,19 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.46b2b0.d0b (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3339
 rom."de" = [[0x1085cc, 0x1092d7]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/4" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/4" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.46b2b0.d0b" }]
 
 [blob."leftover.de.audio-sample.46bfc0.119d"]
 type = "audio"
 format = "stale copy of blob audio-sample.46bfc0.119d (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 4509
 rom."de" = [[0x1092dc, 0x10a479]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/4" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/4" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.46bfc0.119d" }]
 
 [blob."leftover.de.audio-sample.46d160.26d9"]
 type = "audio"
@@ -8071,10 +8071,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.47dd40.1803 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6147
 rom."de" = [[0x11b06b, 0x11c86e]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/14" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/14" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.47dd40.1803" }]
 
 [blob."leftover.de.audio-sample.47f548.762"]
 type = "audio"
@@ -8134,19 +8134,19 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4852a8.10ce (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 4302
 rom."de" = [[0x1225d6, 0x12283e], [0x122841, 0x1236a7]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/16" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/18" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/16" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/18" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4852a8.10ce" }]
 
 [blob."leftover.de.audio-sample.486378.d2f"]
 type = "audio"
 format = "stale copy of blob audio-sample.486378.d2f (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3375
 rom."de" = [[0x1236a9, 0x1243d8]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/18" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/18" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.486378.d2f" }]
 
 [blob."leftover.de.audio-sample.4870a8.2058"]
 type = "audio"
@@ -8170,10 +8170,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.489c40.bd0 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3024
 rom."de" = [[0x126f74, 0x127b44]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/20" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/20" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.489c40.bd0" }]
 
 [blob."leftover.de.audio-sample.48a810.2d5a"]
 type = "audio"
@@ -8188,10 +8188,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.48d570.c06 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3078
 rom."de" = [[0x12a8a7, 0x12b4ad]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/22" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/22" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.48d570.c06" }]
 
 [blob."leftover.de.audio-sample.48e178.762"]
 type = "audio"
@@ -8251,10 +8251,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.494870.c96 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3222
 rom."de" = [[0x131baa, 0x132840]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/24" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/24" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.494870.c96" }]
 
 [blob."leftover.de.audio-sample.495508.2490"]
 type = "audio"
@@ -8269,28 +8269,28 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.497998.1035 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 4149
 rom."de" = [[0x134cd5, 0x135d0a]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/26" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/26" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.497998.1035" }]
 
 [blob."leftover.de.audio-sample.4989d0.d80"]
 type = "audio"
 format = "stale copy of blob audio-sample.4989d0.d80 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3456
 rom."de" = [[0x135d0d, 0x13684d], [0x136850, 0x136a90]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/26" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/28" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/26" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/28" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4989d0.d80" }]
 
 [blob."leftover.de.audio-sample.499750.17a9"]
 type = "audio"
 format = "stale copy of blob audio-sample.499750.17a9 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6057
 rom."de" = [[0x136a90, 0x138239]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/28" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/28" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.499750.17a9" }]
 
 [blob."leftover.de.audio-sample.49af00.642"]
 type = "audio"
@@ -8332,10 +8332,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.49cf20.19fb (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6651
 rom."de" = [[0x13a260, 0x13a850], [0x13a853, 0x13bc5e]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/28" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/30" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/28" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/30" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.49cf20.19fb" }]
 
 [blob."leftover.de.audio-sample.49e920.3177"]
 type = "audio"
@@ -8359,10 +8359,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4a3eb8.1986 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6534
 rom."de" = [[0x1411fe, 0x142856], [0x142859, 0x142b87]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/32" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/34" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/32" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/34" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4a3eb8.1986" }]
 
 [blob."leftover.de.audio-sample.4a5840.37d4"]
 type = "audio"
@@ -8386,10 +8386,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4ac408.1b99 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 7065
 rom."de" = [[0x149754, 0x14a85c], [0x14a85f, 0x14b2f0]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/36" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/38" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/36" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/38" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4ac408.1b99" }]
 
 [blob."leftover.de.audio-sample.4adfa8.68a"]
 type = "audio"
@@ -8413,10 +8413,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4aefa0.19aa (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6570
 rom."de" = [[0x14c2ef, 0x14dc99]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/38" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/38" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4aefa0.19aa" }]
 
 [blob."leftover.de.audio-sample.4b0950.4e3"]
 type = "audio"
@@ -8449,10 +8449,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4b3c50.1c5f (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 7263
 rom."de" = [[0x150fa2, 0x152862], [0x152865, 0x152c04]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/40" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/42" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/40" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/42" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4b3c50.1c5f" }]
 
 [blob."leftover.de.audio-sample.4b58b0.471f"]
 type = "audio"
@@ -8467,10 +8467,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4b9fd0.17df (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6111
 rom."de" = [[0x157328, 0x158b07]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/44" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/44" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4b9fd0.17df" }]
 
 [blob."leftover.de.audio-sample.4bb7b0.a17"]
 type = "audio"
@@ -8494,10 +8494,10 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4bcbc0.13e6 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 5094
 rom."de" = [[0x159f18, 0x15a868], [0x15a86b, 0x15b301]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/44" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/46" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/44" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/46" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4bcbc0.13e6" }]
 
 [blob."leftover.de.audio-sample.4bdfa8.7c5"]
 type = "audio"
@@ -8530,37 +8530,37 @@ evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8
 type = "audio"
 format = "stale copy of blob audio-sample.4bf948.e58 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3672
 rom."de" = [[0x15cca3, 0x15dafb]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/46" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/46" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4bf948.e58" }]
 
 [blob."leftover.de.audio-sample.4c07a0.17df"]
 type = "audio"
 format = "stale copy of blob audio-sample.4c07a0.17df (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 6111
 rom."de" = [[0x15dafb, 0x15e86b], [0x15e86e, 0x15f2dd]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/46" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/48" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/46" }, { artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/48" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4c07a0.17df" }]
 
 [blob."leftover.de.audio-sample.4c1f80.f0c"]
 type = "audio"
 format = "stale copy of blob audio-sample.4c1f80.f0c (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 3852
 rom."de" = [[0x15f2de, 0x1601ea]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/48" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/48" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4c1f80.f0c" }]
 
 [blob."leftover.de.audio-sample.4c2e90.12b4"]
 type = "audio"
 format = "stale copy of blob audio-sample.4c2e90.12b4 (us-rev1 bytes), left by the ROM builder; never read"
 codec = "none"
-state = "identified"
+state = "decoded"
 stored_size = 4788
 rom."de" = [[0x1601ee, 0x1614a2]]
-evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/48" }]
+evidence = [{ artifact = "leftover.json", sha256 = "5672d5235c5b3f9ade5e2b1121c8c6ca1c386d3f7ab06dcbe3110101dd0ac197", pointer = "/versions/de/pieces/48" }, { artifact = "batch-002-decode.json", sha256 = "f820f358b46e1c89e9d3d9b9e6014e153114f290703c2fa1549cf78c0624d648", pointer = "/rows/leftover.de.audio-sample.4c2e90.12b4" }]
 
 [blob."leftover.de.audio-sample.4c4148.22fb"]
 type = "audio"
