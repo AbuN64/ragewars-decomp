@@ -72,14 +72,6 @@ stored_size = 144
 rom."us" = [[0x28b244, 0x28b264], [0x50f768, 0x50f7d0], [0x79cc70, 0x79cc78]]
 evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.metadata.us" }]
 
-[blob."accounting.metadata.us-rev1"]
-type = "metadata"
-format = "accounting observations: metadata; per-range readers and limits in evidence"
-state = "observed"
-stored_size = 144
-rom."us-rev1" = [[0x28b244, 0x28b264], [0x50f768, 0x50f7d0], [0x79cc70, 0x79cc78]]
-evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.metadata.us-rev1" }]
-
 [blob."accounting.sn-debug.us"]
 type = "sn-debug"
 format = "accounting observations: sn-debug; per-range readers and limits in evidence"
@@ -18524,6 +18516,24 @@ rom."us" = [[0x507fa0, 0x507fa4], [0x50ebc0, 0x50f768]]
 rom."us-rev1" = [[0x507fa0, 0x507fa4], [0x50ebc0, 0x50f768]]
 evidence = [{ artifact = "audio-catalog/observed.us-rev1.json", sha256 = "0d023b804bdf2f97ab549907aa85f4f28617fe4a53b9aa2cc2f6aef7ccc75c47", pointer = "/rows/1081" }, { artifact = "cross-version.json", sha256 = "9ec388cb5bdcdad99ec835ebe98a742d0d1c4be1676bbbefadc279e08304eb01", pointer = "/versions/de/matches/music-sequence.65" }, { artifact = "cross-version.json", sha256 = "9ec388cb5bdcdad99ec835ebe98a742d0d1c4be1676bbbefadc279e08304eb01", pointer = "/versions/eu/matches/music-sequence.65" }, { artifact = "cross-version.json", sha256 = "9ec388cb5bdcdad99ec835ebe98a742d0d1c4be1676bbbefadc279e08304eb01", pointer = "/versions/eu-x/matches/music-sequence.65" }, { artifact = "cross-version.json", sha256 = "9ec388cb5bdcdad99ec835ebe98a742d0d1c4be1676bbbefadc279e08304eb01", pointer = "/versions/us/matches/music-sequence.65" }, { artifact = "audio-sequences.json", sha256 = "56ac3b193b443e8c7b602ba562d4ed4768b98ca12a873814bb00dda674af0eb5", pointer = "/de/music-sequence.65" }, { artifact = "audio-sequences.json", sha256 = "56ac3b193b443e8c7b602ba562d4ed4768b98ca12a873814bb00dda674af0eb5", pointer = "/eu/music-sequence.65" }, { artifact = "audio-sequences.json", sha256 = "56ac3b193b443e8c7b602ba562d4ed4768b98ca12a873814bb00dda674af0eb5", pointer = "/eu-x/music-sequence.65" }, { artifact = "audio-sequences.json", sha256 = "56ac3b193b443e8c7b602ba562d4ed4768b98ca12a873814bb00dda674af0eb5", pointer = "/us/music-sequence.65" }, { artifact = "audio-sequences.json", sha256 = "56ac3b193b443e8c7b602ba562d4ed4768b98ca12a873814bb00dda674af0eb5", pointer = "/us-rev1/music-sequence.65" }, { artifact = "audio-sequence-ids.json", sha256 = "7994cbd767f026001ee6ebfd729a4bf9a80cd27c203f02e94d8418bc56f9f493", pointer = "/entries/40" }, { artifact = "audio-sequence-ids.json", sha256 = "7994cbd767f026001ee6ebfd729a4bf9a80cd27c203f02e94d8418bc56f9f493", pointer = "/entries/41" }, { artifact = "audio-sequence-ids.json", sha256 = "7994cbd767f026001ee6ebfd729a4bf9a80cd27c203f02e94d8418bc56f9f493", pointer = "/entries/42" }, { artifact = "audio-sequence-ids.json", sha256 = "7994cbd767f026001ee6ebfd729a4bf9a80cd27c203f02e94d8418bc56f9f493", pointer = "/entries/43" }, { artifact = "audio-sequence-ids.json", sha256 = "7994cbd767f026001ee6ebfd729a4bf9a80cd27c203f02e94d8418bc56f9f493", pointer = "/entries/44" }]
 
+[blob."resource.bank-directory.us-rev1"]
+type = "world"
+format = "directory-header"
+codec = "none"
+state = "decoded"
+stored_size = 104
+rom."us-rev1" = [[0x50f768, 0x50f7d0]]
+evidence = [{ artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/2" }]
+
+[blob."resource.bank-pointers.us-rev1"]
+type = "world"
+format = "bank-pairs"
+codec = "none"
+state = "decoded"
+stored_size = 32
+rom."us-rev1" = [[0x28b244, 0x28b264]]
+evidence = [{ artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/1" }]
+
 [blob."resource.binaries-index"]
 type = "world"
 format = "resource bank child 9: binaries index"
@@ -18634,7 +18644,7 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "graphics"
 format = "resource bank child 12: dynamic lights"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 128
 decoded_size = 184
 rom."de" = [[0x7675ec, 0x76766c]]
@@ -18642,7 +18652,16 @@ rom."eu" = [[0x769a60, 0x769ae0]]
 rom."eu-x" = [[0x76eb88, 0x76ec08]]
 rom."us" = [[0x769a48, 0x769ac8]]
 rom."us-rev1" = [[0x769a48, 0x769ac8]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/7" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/7" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/11" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/12" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/13" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/14" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/15" }, { artifact = "native-proof.json", sha256 = "a2b27b7d9bc47946c5f3961cbee1b0b21d64856f3bf45a454ff83d84266bb436", pointer = "/proofs" }]
+
+[blob."resource.empty-directory.us-rev1"]
+type = "world"
+format = "directory-header"
+codec = "none"
+state = "decoded"
+stored_size = 8
+rom."us-rev1" = [[0x79cc70, 0x79cc78]]
+evidence = [{ artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/3" }]
 
 [blob."resource.intelligence"]
 type = "world"
@@ -18736,14 +18755,14 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "graphics"
 format = "resource bank child 4: particle effects"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 8600
 decoded_size = 45424
 rom."eu" = [[0x731e68, 0x734000]]
 rom."eu-x" = [[0x736fa8, 0x739140]]
 rom."us" = [[0x731e68, 0x734000]]
 rom."us-rev1" = [[0x731e68, 0x734000]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/2" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/2" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/2" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/2" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/2" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/2" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/2" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/2" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/4" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/5" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/6" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/7" }, { artifact = "native-proof.json", sha256 = "a2b27b7d9bc47946c5f3961cbee1b0b21d64856f3bf45a454ff83d84266bb436", pointer = "/proofs" }]
 
 [blob."resource.particle-effects.de"]
 type = "graphics"
@@ -18759,13 +18778,13 @@ evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68
 type = "graphics"
 format = "resource bank child 11: particle swooshes"
 codec = "rnc1"
-state = "identified"
+state = "decoded"
 stored_size = 488
 decoded_size = 1712
 rom."eu-x" = [[0x76e9a0, 0x76eb88]]
 rom."us" = [[0x769860, 0x769a48]]
 rom."us-rev1" = [[0x769860, 0x769a48]]
-evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/6" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/6" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/6" }]
+evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/6" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/6" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/6" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/8" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/9" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/10" }, { artifact = "native-proof.json", sha256 = "a2b27b7d9bc47946c5f3961cbee1b0b21d64856f3bf45a454ff83d84266bb436", pointer = "/proofs" }]
 
 [blob."resource.particle-swooshes.de"]
 type = "graphics"
