@@ -1111,7 +1111,6 @@ extern int D_800CD890;
 
 extern unsigned char D_8010B308[];
 
-extern int D_800CD94C_de;
 
 extern int D_800E1344[];
 
@@ -2050,7 +2049,7 @@ extern u8 D_800D0E52;
 
 extern s32 D_800E63B0;
 
-extern s32 D_800CD940_de[5];
+#include "COMMON/INTEGERSTATE14_2.H"
 
 extern char D_800C8380_de;
 
@@ -2413,7 +2412,6 @@ extern Tuning D_800CE82C;
 
 extern char D_800D799C[];
 
-extern s32 D_800CD948_de;
 
 extern u32 D_800CB6F4;
 

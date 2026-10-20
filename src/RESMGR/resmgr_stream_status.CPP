@@ -1,12 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/STATEPAIR.H"
 #include "COMMON/INTEGERSTATE14_2.H"
-#include "RESMGR/802A2230_3.H"
+#include "RESMGR/resmgr_stream_status.H"
 
-extern int D_800CD944_de[2];
-
-int func_802A1230_de(void) {
-    return D_800CD944_de[0] == D_800CD944_de[1];
+int Resmgr_IsMemoryStreamAtEnd(void) {
+    return D_800CD940_de.cursor == D_800CD940_de.size;
 }
 
 /** Store two values in the paired global words. */

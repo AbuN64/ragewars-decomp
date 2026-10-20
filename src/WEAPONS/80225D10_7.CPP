@@ -11,7 +11,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "WEAPONS/80225D10_7.H"
 
 /* Draws an actor's player model with its status tint: sets the other-mode lighting command and render

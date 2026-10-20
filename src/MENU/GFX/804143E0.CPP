@@ -5,14 +5,14 @@
 #include "COMMON/EXTERNS_4.H"
 #include "MATH/8029BBA0_5.H"
 #include "MENU/GFX/804143E0.H"
-#include "RESMGR/802A0888_8.H"
+#include "RESMGR/resmgr_stream_io.H"
 
 void func_80414360_de(void) {
-    func_802A0D38_de();
+    Resmgr_InitializeStreams();
     func_8029D8A0_de();
 }
 
-/* Calls the per-version setup entry and then func_802A0E34_de. */
+/* Calls the per-version setup entry and then Resmgr_ShutdownStreams. */
 
 
 
@@ -38,7 +38,7 @@ func_8029D7E8_auto
 #else
     func_8029D8A8_de();
 #endif
-    func_802A0E34_de();
+    Resmgr_ShutdownStreams();
 }
 
 #if defined(VERSION_US)

@@ -7,7 +7,7 @@
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_42.H"
 #include "SCENE/802508E0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 s32 func_80412CDC_de(Format *format) {
     s32 i;
@@ -116,7 +116,6 @@ extern s32 func_8041369C_de(OwnedImage *image);
 
 extern void *func_8025305C_de(s32 size);
 
-extern void func_802A0724_de(void *dst, void *src, s32 n);
 
 /* The argument is a pointer into 0x8068xxxx whose first byte the debugger read as 0x14, and the
    stride is 52. D_800E2B40, which func_804136D8_de indexes with the same stride and the same
@@ -236,7 +235,7 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
     if ((dst->pixels = func_8025305C_de(size)) == 0) {
         return 1;
     }
-    func_802A0724_de(dst->pixels, src->pixels, size);
+    Resmgr_CopyBytes(dst->pixels, src->pixels, size);
     if (src->paletteCount != 0) {
         size = func_8041369C_de(src);
         if ((dst->palette = func_8025305C_de(size)) == 0) {
@@ -244,7 +243,7 @@ s32 func_80413480_de(OwnedImage *dst, OwnedImage *src) {
             func_802A0748_de(dst, 0, 0x20);
             return 1;
         }
-        func_802A0724_de(dst->palette, src->palette, size);
+        Resmgr_CopyBytes(dst->palette, src->palette, size);
     }
     return 0;
 }

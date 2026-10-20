@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_36.H"
@@ -8,7 +9,7 @@
    the four 12-byte places at 0x2DF8 of the block D_800E54A4 points to whose id is -1, records it in
    the entry func_804351E4_de returns (id 0, value the place, word 8 set to 1), copies the chosen
    400-byte slot from 0x18 of the player's record into that place of D_80102B00 through
-   func_802A0724_de, marks p as its owner at 0xD, clears the player's word at 0x4 and relabels through
+   Resmgr_CopyBytes, marks p as its owner at 0xD, clears the player's word at 0x4 and relabels through
    func_80433BCC_de(-1), returning 1; otherwise it returns 0. */
 
 
@@ -22,7 +23,6 @@
 extern struct Block_func_8043497C_de *D_800E54A4;
 extern struct Record_func_804347CC_de D_80102B00[];
 extern s32 func_804351E4_de();
-extern void func_802A0724_de(void *, void *, s32);
 extern void func_80433BCC_de(s32);
 
 s32 func_8043497C_de(s32 player) {
@@ -52,7 +52,7 @@ s32 func_8043497C_de(s32 player) {
                 D_800E54A4->places[entry].z = 1;
             }
             record = &D_80102B00[found];
-            func_802A0724_de(record, D_800E54A4->players[player].slots[chosen], 400);
+            Resmgr_CopyBytes(record, D_800E54A4->players[player].slots[chosen], 400);
             record->owner = player;
             D_800E54A4->players[player].word4 = 0;
             place = -1;

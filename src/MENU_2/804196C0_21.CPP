@@ -13,7 +13,7 @@
 #include "FRONTEND/8040B45C_35.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Stores a mode at offset 0x58 of an object and plays sound 0xE77 for mode 1 or 0xE76 for mode 2
    through func_8025DF34_de. */

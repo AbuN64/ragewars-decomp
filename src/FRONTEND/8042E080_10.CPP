@@ -12,7 +12,7 @@
 #include "FRONTEND/8042E080_45.H"
 #include "FRONTEND/8042E080_59.H"
 #include "FRONTEND/8042E080_64.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Steps player arg2's menu state machine at 0x58 of its 0xB68-byte record in the block D_800E54A4 points to
    on the event func_8041B810_de reports: each state accepts its events, moves to the next state (by the game
@@ -42,7 +42,6 @@ extern s32 func_804358C0_de(s32, s32);
 extern void func_8022EF30_de(void *);
 extern void func_80404E28_de(s32);
 extern void func_80433610_de(s32);
-extern void func_802A0724_de(void *, void *, s32);
 extern void func_80433BCC_de(s32);
 
 
@@ -505,7 +504,7 @@ s32 func_804306D8_de(s32 arg0, s32 arg1, s32 arg2) {
 #endif
             slot = func_80435128_de(p);
             if (slot >= 0) {
-                func_802A0724_de(&D_800E54A4->players[p].records[slot],
+                Resmgr_CopyBytes(&D_800E54A4->players[p].records[slot],
                                  &D_800E54A4->players[((struct PakMenuTail *) ((u8 *) D_800E54A4 + sizeof(PakMenuController)))->source].records[((struct PakMenuTail *) ((u8 *) D_800E54A4 + sizeof(PakMenuController)))->sourceRecord],
                                  0x190);
                 D_800E54A4->players[p].record = slot;

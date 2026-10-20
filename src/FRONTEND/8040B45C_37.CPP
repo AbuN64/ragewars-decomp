@@ -2,7 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
-#include "RESMGR/802A0888_8.H"
+#include "RESMGR/resmgr_stream_io.H"
 
 /* Advances the deferred-release timers: for each of the D_80153C0C slots (all reset first when mode
    is 1) whose owner is not -1, counts the delay down, and once it has run out releases the slot's
@@ -106,7 +106,6 @@ extern File D_801539B0;
 extern s32 D_800DD0B0;
 
 extern s32 func_8025305C_de(s32 size);
-extern s32 func_802A0E8C_de(s32 *heap, s32 *name);
 extern void func_802A0EB0_de(s32 handle);
 extern void func_802A18CC_de(void);
 extern s32 func_802A1934_de(void);
@@ -186,12 +185,12 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
         Tables *tables = &D_801539B0.tables;
 
         bank = &tables->banks[group];
-        D_801539B0.handle = func_802A0E8C_de(&D_801539B0.name, &D_800DD0B0);
+        D_801539B0.handle = Resmgr_OpenStream(&D_801539B0.name, &D_800DD0B0);
         size = bank->image->size;
         i = 0;
         bank->offsets[0] = func_8025305C_de(size);
         Resmgr_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
-        func_802A0ED4_de(D_80153C28[group].offsets[0], size, 1, D_801539B0.handle);
+        Resmgr_ReadStream(D_80153C28[group].offsets[0], size, 1, D_801539B0.handle);
         do {
             sizes[i] = bank->tiles[i].wid * bank->tiles[i].siz;
             sizes[i] = sizes[i] * code / 8;

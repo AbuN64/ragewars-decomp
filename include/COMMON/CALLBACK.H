@@ -92,10 +92,10 @@ struct func_8029BA34_S1 {
 struct func_8029AA48_S1;
 typedef struct func_8029AA48_S1 func_8029AA48_S1;
 
-/* Sequential read/write buffer, allocated by func_80299C38_de and freed by
- * func_80299C80_de; read and append cursors are independent. */
+/* Sequential read/write buffer, allocated by StreamBufferAllocate and freed by
+ * StreamBufferFree; read and append cursors are independent. */
 typedef struct StreamBuffer {
-    s32 data;
+    u8 *data;
     s32 capacity;
     s32 readPosition;
     s32 writePosition;

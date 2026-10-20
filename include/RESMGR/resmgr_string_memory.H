@@ -13,4 +13,5 @@ extern void func_802A066C_de(s32 n, char *s);
 extern u8 *func_802A0444_de(u8 *s, int c);
 extern s32 func_802A0814_de(u8 *arg0, u8 *arg1, s32 arg2);
 extern void *func_802A0748_de(void *arg0, int arg1, u32 arg2);
+extern void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes);
 #endif

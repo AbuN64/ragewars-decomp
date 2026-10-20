@@ -9,7 +9,7 @@
 #include "MATH/80297CD0_3.H"
 #include "MATH/802A2870.H"
 #include "FRONTEND/8040B45C_32.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "MATH/80299ECC.H"
 
 /* Allocates and zeroes a 0x70-byte overlay node, copies the 0x2C-byte header of the owner's tree root into it, tags it 0x7A51 with kind 0x7D5 and flags 8, links it to its owner and the given value, inserts it under the root through func_8040EDE4_de and records it as the owner's overlay. */

@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "MATH/80297CD0_3.H"
 #include "MENU_2/804196C0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Creates a frame animation for widget id of the current screen: finds the widget through
    func_8040EC30_de, allocates and clears a 0x64-byte animation, sets its type fields, widget and

@@ -13,7 +13,7 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "FRONTEND/8040B45C_35.H"
 #include "MATH/80297CD0.H"
-#include "MATH/80299ECC_6.H"
+#include "MATH/math_stream_lifecycle.H"
 #include "RESMGR/8029AA48_12.H"
 #include "RESMGR/802A23A4_9.H"
 #include "SCENE/802508E0_13.H"
@@ -110,7 +110,7 @@ void func_80298ECC_de(void) {
 
     if (D_8014D080->screens[D_8014D080->current].primary != 0) {
         func_80297EA4_de(D_8014D080->screens[D_8014D080->current - 1].owner);
-        func_80299C80_de(&D_8014D080->screens[D_8014D080->current].data);
+        StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
         {
             Element *element = D_8014D080->screens[D_8014D080->current].primary;
             func_80411E18_de(element->id);

@@ -1,13 +1,13 @@
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/OBJRECAT3CV2.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
-#include "MATH/80299ECC_6.H"
+#include "MATH/math_stream_lifecycle.H"
 #include "SCENE/802508E0_13.H"
 struct Record;
 extern struct Record *func_8025305C_de(s32 size);
 
-extern s32 func_802A0724_de(s32, s32, s32);
 
 s32 func_80253908_de(s32);
 
@@ -15,27 +15,28 @@ s32 func_80255228_de(s32 *);
 
 extern s32 D_80106248;
 
-void func_80299BEC_de(StreamBuffer *arg0, s32 arg1, s32 arg2)
+void StreamBufferRead(StreamBuffer *arg0, void *arg1, s32 arg2)
 {
-  long new_var;
-  int new_var2;
+  const u8 *new_var;
+  const u8 *new_var2;
   new_var2 = arg0->data;
   new_var2 = new_var2 + arg0->readPosition;
   new_var = new_var2;
-  func_802A0724_de(arg1, new_var, arg2);
+  Resmgr_CopyBytes(arg1, new_var, arg2);
   arg0->readPosition = arg0->readPosition + arg2;
 }
 
-void func_80299C38_de(StreamBuffer *arg0, s32 arg1) {
+void StreamBufferAllocate(StreamBuffer *arg0, s32 arg1) {
     if (arg0->data == 0) {
-        arg0->data = (s32)func_8025305C_de(arg1);
+        void *allocation = func_8025305C_de(arg1);
+        arg0->data = allocation;
         arg0->writePosition = 0;
         arg0->capacity = arg1;
     }
 }
 
-void func_80299C80_de(StreamBuffer *arg0) {
-    s32 temp_a0;
+void StreamBufferFree(StreamBuffer *arg0) {
+    void *temp_a0;
     temp_a0 = arg0->data;
     if (temp_a0 != 0) {
         func_802547E4_de(temp_a0);

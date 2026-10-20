@@ -8,7 +8,7 @@
 #include "COMMON/RECORD.H"
 #include "COMMON/TEXTURE.H"
 #include "FRONTEND/8040B45C_35.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 extern Record_func_802A1990_de *func_8040EC30_de(s32 arg0, s32 arg1);
 

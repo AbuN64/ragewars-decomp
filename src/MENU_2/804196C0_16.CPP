@@ -11,7 +11,7 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 extern s32 func_802744D4_de(void);
 extern void func_80419C84_de(func_80419D04_S1 *, s32);
 s32 func_80419F4C_eu_x(func_80419D04_S1 *state) {

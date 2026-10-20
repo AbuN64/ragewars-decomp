@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "FRONTEND/8040B45C_40.H"
 #include "SCENE/802508E0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through func_804122CC_de and drawing it through func_8040D2D0_de with the given style. */
 

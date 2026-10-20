@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_string_memory.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT6C.H"
@@ -25,7 +26,6 @@ s32 func_804355B4_de(void) {
 #ifdef NON_MATCHING
 /* Copies four selected player records and marks absent selections; -fno-strength-reduce reproduces the reference pointer induction exactly. */
 #include "TYPES.H"
-void func_802A0724_de(void *, void *, s32);                       /* extern */
 typedef struct { char pad[12]; s8 unkC, unkD; char rest[0x182]; } Record;
 extern Record D_80102B00[];
 extern void *D_800E54A4;                          /* const */
@@ -48,7 +48,7 @@ void func_804355E8_de(void) {
         temp_v1 = (*(s32 *)(temp_v0+0x2DF8));
         temp_s0 = (*(s32 *)(temp_v0+0x2DFC));
         if (temp_v1 != absent) {
-            func_802A0724_de(var_s1, D_800E54A4 + ((temp_v1 * 0xB68) + 0x58) + ((temp_s0 * 0x190) + 0x18), 0x190);
+            Resmgr_CopyBytes(var_s1, D_800E54A4 + ((temp_v1 * 0xB68) + 0x58) + ((temp_s0 * 0x190) + 0x18), 0x190);
             var_s1->unkC = (s8) temp_s0;
         } else {
             var_s1->unkD = (s8) temp_v1;

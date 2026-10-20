@@ -4,7 +4,7 @@
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "MATH/80297CD0_3.H"
-#include "MATH/80299ECC_6.H"
+#include "MATH/math_stream_lifecycle.H"
 #include "MATH/80297CD0.H"
 
 typedef struct Shared_MenuDefinition Shared_MenuDefinition;
@@ -20,7 +20,7 @@ struct Shared_MenuDefinition {
 };
 void func_80297DBC_de(void);
 void func_80298ECC_de(void);
-void func_80299C80_de(StreamBuffer *);
+void StreamBufferFree(StreamBuffer *);
 void func_80299CC4_de(void);
 f64 func_802A18CC_de(void);
 void Frontend_AcquireArchiveEntry(s32);
@@ -250,7 +250,7 @@ after_focus10:
         temp_a0_5->focus = temp_v0_6->unk44;
         var_s1 = temp_v0_6;
         D_80146E10 = var_s1->unk44;
-        func_80299C80_de(&D_8014D080->screens[D_8014D080->current].data);
+        StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
         temp_v0_7 = D_8014D080->callback2;
         if (temp_v0_7 != 0) {
             (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unk40) = temp_v0_7(arg0);

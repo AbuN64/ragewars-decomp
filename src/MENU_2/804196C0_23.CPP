@@ -13,7 +13,7 @@
 #include "FRONTEND/8040B45C_35.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Allocates and zeroes a 0x118-byte record, copies the header and five-word block of the record func_8040EC30_de finds for the low half of the first argument, links the record func_8040EC30_de finds for the second into it, clears the words at 0x110 and 0x114, and registers it through func_8040EEA4_de and func_8040EF84_de. Adapted from func_8041A580_de with the record size 0x118, the tag 0xB64 and the tail fields changed. */
 

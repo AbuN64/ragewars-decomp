@@ -10,7 +10,7 @@
 #include "FRONTEND/CODE_80411598.H"
 #include "FRONTEND/8040B45C_36.H"
 #include "SCENE/802508E0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 extern BufferPool D_80153C40;
 extern Manager_func_80411D18_de D_80153C20;

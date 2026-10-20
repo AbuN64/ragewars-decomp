@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_string_memory.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
@@ -65,7 +66,6 @@ extern s32 func_804050CC_de(s32, s32 *);
 extern s32 func_80435424_de(void);
 extern s32 func_804057EC_de(s32);
 extern s32 func_80405454_de(s32, char *);
-extern void func_802A0724_de(void *, void *, s32);
 extern u32 func_804057F8_de(void *, u32, u32);
 extern char *func_802A025C_de(char *, char *);
 extern s32 func_80404958_de(s32, s32, void *, char *, char *, char *);
@@ -93,7 +93,7 @@ s32 func_80434428_de(s32 channel)
     if (success) {
         success = 0;
         if (func_80405454_de(channel, extension) == 0) {
-            func_802A0724_de(D_800E54A4->saved, D_800E54A4->players[channel].records, 0x640);
+            Resmgr_CopyBytes(D_800E54A4->saved, D_800E54A4->players[channel].records, 0x640);
             D_800E54A4->savedProfile = D_800E54A4->players[channel].profile;
             D_800E54A4->checksum = func_804057F8_de(D_800E54A4->saved, 0x640, 7);
             for (i = 15; i >= 0; i--) name[i] = 0;

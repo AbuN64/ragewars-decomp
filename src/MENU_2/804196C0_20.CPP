@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "MATH/80297CD0_3.H"
 #include "MENU_2/804196C0_20.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Creates a 0x7C-byte fading widget: finds the frame the low half of the first argument names and
    the item the second names in the current context through func_80299958_de, func_80411DCC_de and

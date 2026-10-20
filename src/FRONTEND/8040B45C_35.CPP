@@ -8,11 +8,11 @@
 #include "COMMON/SLOTRECATCV1.H"
 #include "FRONTEND/8040B45C_35.H"
 #include "FRONTEND/CODE_80411598.H"
-#include "RESMGR/802A0888_8.H"
+#include "RESMGR/resmgr_stream_io.H"
 #include "MATH/802A2870.H"
 #include "SCENE/802508E0_13.H"
 extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, DrawArgs *);
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /* Puts a new node in a tree node's place, taking over its parent and next links and becoming the parent's first child or the successor of the predecessor func_8040ECA8_de's search finds, then makes the old node the new node's only child with its next link and the halfwords at 0x14 and 0x16 cleared.
    Adapted from func_8040EDE4_de with the new node taking the old node's next link and child position and the old node's links reset afterwards changed. */
@@ -537,7 +537,6 @@ INCLUDE_ASM("ovl_80400000", func_8040F9E0_de);
 /* Opens image archives and allocates image, palette, and cached-resource tables. */
 void * func_8025305C_de(s32);
 u8 * func_802A025C_de(u8 *, u8 *);
-s32 func_802A0E8C_de(void *, void *);
 extern char D_8014D724[];
 extern char D_800DD0B0[];
 void func_802A0EB0_de(s32);
@@ -737,10 +736,10 @@ void func_8040FB94_de(u8 *arg0) {
     void *temp_v0_7;
     func_8040FC14_S3 *var_s1;
 
-    temp_a3 = func_802A0E8C_de(arg0, D_800DD0B0);
+    temp_a3 = Resmgr_OpenStream(arg0, D_800DD0B0);
     state = &D_801539B0.images;
     ((Images *)state)->unk0 = temp_a3;
-    func_802A0ED4_de((s32) &((Images *)state)->unk208, 0x54, 1, temp_a3);
+    Resmgr_ReadStream(&((Images *)state)->unk208, 0x54, 1, temp_a3);
     temp_hi = ((Images *)state)->unk20C / 28;
     ((Images *)state)->unk25C = temp_hi;
     if (temp_hi > 0) {
@@ -750,7 +749,7 @@ void func_8040FB94_de(u8 *arg0) {
         temp_v0 = func_8025305C_de((s32) ((Images *)state)->unk20C);
         ((Images *)state)->unk260 = temp_v0;
         Resmgr_SeekStream(((Images *)state)->unk0, ((Images *)state)->unk208, 0);
-        func_802A0ED4_de((s32) temp_v0, 0x1C, (s32) ((Images *)state)->unk25C, ((Images *)state)->unk0);
+        Resmgr_ReadStream(temp_v0, 0x1C, (s32) ((Images *)state)->unk25C, ((Images *)state)->unk0);
         var_s0 = 0;
         if (((Images *)state)->unk25C > 0) {
             recordData = (s32) &((Images *)state)->unk26C;
@@ -777,7 +776,7 @@ void func_8040FB94_de(u8 *arg0) {
     if ((s32)(temp_v0_2 << 0x10) > 0) {
         palettes->unk4 = func_8025305C_de((s32) D_8014D924.header.unk18);
         Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unk14, 0);
-        func_802A0ED4_de((s32) palettes->unk4, (s32) D_8014D924.header.unk18, 1, ((Images *)state)->unk0);
+        Resmgr_ReadStream(palettes->unk4, (s32) D_8014D924.header.unk18, 1, ((Images *)state)->unk0);
         func_8040F9E0_de(0);
     }
     temp_v0_3 = D_8014D924.header.unk28 / 12;
@@ -790,7 +789,7 @@ void func_8040FB94_de(u8 *arg0) {
             func_802A0748_de(temp_v0_4, 0, (u32) D_8014D924.header.unk28);
         }
         Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unk24, 0);
-        func_802A0ED4_de((s32) palettes->unk18, D_8014D924.header.unk28, 1, ((Images *)state)->unk0);
+        Resmgr_ReadStream(palettes->unk18, D_8014D924.header.unk28, 1, ((Images *)state)->unk0);
         var_s0 = 0;
         mapCount = &palettes->unk14;
         if (palettes->unk14.count > 0) {
@@ -813,10 +812,10 @@ void func_8040FB94_de(u8 *arg0) {
         var_s0 = 0;
         temp_s7 = func_8025305C_de(header->unk8);
         Resmgr_SeekStream(((Images *)state)->unk0, header->unk4, 0);
-        func_802A0ED4_de((s32) temp_s7, header->unk8, 1, ((Images *)state)->unk0);
+        Resmgr_ReadStream(temp_s7, header->unk8, 1, ((Images *)state)->unk0);
         header->objects.raw = func_8025305C_de(header->unk0);
         Resmgr_SeekStream(((Images *)state)->unk0, ((func_8040FC14_S19 *)&D_8014D924)->unkC, 0);
-        func_802A0ED4_de((s32) header->objects.raw, header->unk0, 1, ((Images *)state)->unk0);
+        Resmgr_ReadStream(header->objects.raw, header->unk0, 1, ((Images *)state)->unk0);
         temp_v1_2 = (u32) header->unk0 >> 5;
         header->objects.unk0 = (s16) temp_v1_2;
         temp_v0_7 = func_8025305C_de((s16) temp_v1_2 * 0x49C);
@@ -842,7 +841,7 @@ void func_8040FB94_de(u8 *arg0) {
                 temp_s0 = D_80153C28[var_s4].metadata;
                 temp_s1 = (*objectTable) + var_s4;
                 Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unkC + temp_s0->glyphTableOffset, 0);
-                func_802A0ED4_de(&temp_s1->unk4, 8, 0x60, ((Images *)state)->unk0);
+                Resmgr_ReadStream(&temp_s1->unk4, 8, 0x60, ((Images *)state)->unk0);
                 temp_s1->unk484 = func_8025305C_de(temp_s0->bitmapCount * 4);
                 *temp_s1->unk484 = func_8025305C_de(temp_s0->bitmapCount * 0x1080);
                 func_802A0748_de(*temp_s1->unk484, 0, temp_s0->bitmapCount * 0x1080);
@@ -863,7 +862,7 @@ void func_8040FB94_de(u8 *arg0) {
                     temp_s1->unk488 = func_8025305C_de(temp_a0_3 * 4);
                     *temp_s1->unk488 = func_8025305C_de(temp_s0->bitmapCount * var_s2);
                     Resmgr_SeekStream(((Images *)state)->unk0, D_8014D970 + ((s32 *)temp_s7)[temp_a0], 0);
-                    func_802A0ED4_de((s32) *temp_s1->unk488, temp_s0->bitmapCount * var_s2, 1, ((Images *)state)->unk0);
+                    Resmgr_ReadStream(*temp_s1->unk488, temp_s0->bitmapCount * var_s2, 1, ((Images *)state)->unk0);
                     var_a1 = 0;
                     if (temp_s0->bitmapCount > 0) {
                         var_a2 = 0;
@@ -939,7 +938,7 @@ void func_8040F9E0_de(s32 index) {
     size = next - archive->sections[index].start;
     archive->strings = (u8 *)func_8025305C_de(size);
     Resmgr_SeekStream(archive->handle, archive->sections[index].start + archive->base, 0);
-    func_802A0ED4_de((s32)archive->strings, size, 1, archive->handle);
+    Resmgr_ReadStream(archive->strings, size, 1, archive->handle);
     if (closeArchive) {
         func_802A0EB0_de(archive->handle);
         archive->handle = 0;

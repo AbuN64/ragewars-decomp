@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/TEXTURE.H"
 #include "TYPES.H"
 #include "MENU/GFX/80414430_24.H"
@@ -19,14 +20,13 @@ void func_80419430_de(void *source) {
 /* Rewrites an image's pixel rows in place when row fixing is enabled (D_800E32F0): the row length
    in 8-byte pixel groups comes from the image width and the bit depth reported by func_80413608_de
    (4, 8 or 16 bits), odd rows swap the two words of each group and even rows are copied to the
-   write position through func_802A0724_de when source and destination differ. */
+   write position through Resmgr_CopyBytes when source and destination differ. */
 
 
 
 extern s32 D_800E32F0;
 
 extern s32 func_80413608_de(void);
-extern void func_802A0724_de(s32 *dst, s32 *src, s32 size);
 
 void func_80419490_de(Image_func_80419490_de *image) {
     s32 *src;
@@ -66,7 +66,7 @@ void func_80419490_de(Image_func_80419490_de *image) {
             }
         } else {
             if (src != dst) {
-                func_802A0724_de(dst, src, groups * 8);
+                Resmgr_CopyBytes(dst, src, groups * 8);
             }
             dst += groups * 2;
             src += groups * 2;

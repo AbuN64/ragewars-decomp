@@ -11,10 +11,10 @@
 #include "COMMON/UNUSED.H"
 #include "FRONTEND/8040B45C_35.H"
 #include "MATH/80297CD0_3.H"
-#include "MATH/80299ECC_6.H"
+#include "MATH/math_stream_lifecycle.H"
 #include "RESMGR/8029AA48_12.H"
 #include "MATH/80297CD0.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "MATH/80299ECC.H"
 
 /* Refreshes the selected entry and updates its interface state. */
@@ -74,7 +74,7 @@ void func_80297DBC_de(void) {
     func_80297310_de(1, 0xE07, 0, 0, 0);
     D_8014D080->screens[temp_s0].data.readPosition = 0;
     func_80297310_de(1, 0xE02, &D_8014D080->screens[temp_s0].data, 0, 0);
-    func_80299C80_de(&D_8014D080->screens[temp_s0].data);
+    StreamBufferFree(&D_8014D080->screens[temp_s0].data);
 }
 
 int func_80297EA4_de(int arg0) {

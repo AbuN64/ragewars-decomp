@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "FRONTEND/CODE_80411598.H"
 #include "FRONTEND/ARCHIVEDATA.H"
-#include "RESMGR/802A0888_8.H"
+#include "RESMGR/resmgr_stream_io.H"
 #include "SCENE/802508E0_13.H"
 
 /* Unloads entry index of the pool at D_80153C20: releases the data of every loaded slot (flag 1) in
@@ -52,10 +52,9 @@ extern ArchiveFile D_801539B0;
 extern s32 D_800E2AC4;
 extern char D_800DD0B0;
 extern void *func_8025305C_de(s32);
-extern void func_802A0724_de(void *, const void *, s32);
+
 extern void func_8040F6DC_de(void *, void *, s32);
 extern f64 func_802A18CC_de(void);
-extern s32 func_802A0E8C_de(void *, void *);
 extern void func_802A0EB0_de(s32);
 
 /* Loads entry index of the menu archive into memory and counts the use: in cache mode 1 an entry
@@ -67,7 +66,7 @@ void Frontend_AcquireArchiveEntry(s32 index) {
     D_801539B0.useCounts[index]++;
     if (D_801539B0.mode == 1) {
         if (D_801539B0.map[index].data == 0) goto load;
-        func_802A0724_de(D_801539B0.map[index].data, D_801539B0.copies[index].data, D_801539B0.map[index].size);
+        Resmgr_CopyBytes(D_801539B0.map[index].data, D_801539B0.copies[index].data, D_801539B0.map[index].size);
         data = D_801539B0.map[index].data;
         func_8040F6DC_de(data, data, D_801539B0.map[index].offset - D_801539B0.map[0].offset);
     }
@@ -75,12 +74,12 @@ void Frontend_AcquireArchiveEntry(s32 index) {
 load:
     func_802A18CC_de();
     D_801539B0.map[index].data = func_8025305C_de(D_801539B0.map[index].size);
-    D_801539B0.handle = func_802A0E8C_de(&D_801539B0.header, &D_800DD0B0);
+    D_801539B0.handle = Resmgr_OpenStream(&D_801539B0.header, &D_800DD0B0);
     Resmgr_SeekStream(D_801539B0.handle, D_801539B0.header.dataOffset + D_801539B0.map[index].offset, 0);
-    func_802A0ED4_de(D_801539B0.map[index].data, D_801539B0.map[index].size, 1, D_801539B0.handle);
+    Resmgr_ReadStream(D_801539B0.map[index].data, D_801539B0.map[index].size, 1, D_801539B0.handle);
     if (D_800E2AC4 != 0) {
         D_801539B0.copies[index].data = func_8025305C_de(D_801539B0.map[index].size);
-        func_802A0724_de(D_801539B0.copies[index].data, D_801539B0.map[index].data, D_801539B0.map[index].size);
+        Resmgr_CopyBytes(D_801539B0.copies[index].data, D_801539B0.map[index].data, D_801539B0.map[index].size);
     }
     func_802A0EB0_de(D_801539B0.handle);
     D_801539B0.handle = 0;

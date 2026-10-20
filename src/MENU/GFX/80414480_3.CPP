@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_4.H"
 #include "MENU/GFX/80414480_8.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 extern s32 func_802A0238_de(u8 *arg0);
 

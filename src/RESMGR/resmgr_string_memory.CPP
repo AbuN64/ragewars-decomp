@@ -3,11 +3,11 @@
 #include "COMMON/EXTERNS_18.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 
-extern s32 func_8029F470_de(void);
+#include "MATH/802A0470.H"
 
 
 
@@ -344,12 +344,10 @@ void func_802A066C_de(s32 n, char *s) {
     s[len] = '\0';
 }
 
-s32 func_802A0724_de(s32 arg0, s32 unused1, s32 arg2) {
-    s32 result;
-
-    result = arg0;
-    if (arg2 != 0) {
-        result = func_8029F470_de();
+void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes) {
+    void *result = destination;
+    if (bytes != 0) {
+        result = func_8029F470_de(destination, source, bytes);
     }
     return result;
 }

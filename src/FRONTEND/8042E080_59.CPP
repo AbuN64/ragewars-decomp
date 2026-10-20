@@ -1,3 +1,4 @@
+#include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/ENTRYRECAT6C.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_59.H"
@@ -14,7 +15,6 @@
 
 extern struct PlayerSlotTable *D_800E54A4;
 extern char D_80102B00[];
-extern void func_802A0724_de(void *, void *, s32);
 
 
 
@@ -28,7 +28,7 @@ void func_804356BC_de(s32 arg0) {
     owner = D_800E54A4->places[arg0].y;
     record = &D_80102B00[arg0 * 400];
     if (place != -1) {
-        func_802A0724_de(record, D_800E54A4->players[place].slots[owner], 400);
+        Resmgr_CopyBytes(record, D_800E54A4->players[place].slots[owner], 400);
         ((struct RecordRecAtD *)record)->slot = (s8) owner;
     }
     ((struct RecordRecAtD *)record)->place = (s8) place;

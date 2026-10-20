@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "RESMGR/8029AA48_12.H"
 #include "SCENE/802508E0_13.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 
 /** Store a word through the global pointer at D_8014D0B0. */
 

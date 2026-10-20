@@ -2,5 +2,5 @@
 #define RESMGR_802A2230_3_H
 #include "COMMON/INTEGERSTATE14_2.H"
 extern void func_802A124C_de(int first, int second);
-extern int func_802A1230_de(void);
+extern int Resmgr_IsMemoryStreamAtEnd(void);
 #endif

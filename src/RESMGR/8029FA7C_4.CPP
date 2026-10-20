@@ -4,7 +4,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "RESMGR/8029FA7C_4.H"
-#include "RESMGR/802A0888_4.H"
+#include "RESMGR/resmgr_string_memory.H"
 extern void func_8029C6A8_de(f32 *matrix, f32 *angles);
 
 
