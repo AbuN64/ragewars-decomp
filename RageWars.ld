@@ -12112,7 +12112,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0_2.CPP.o(.rodata .rdata);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_5.CPP.o(.rodata .rdata);
@@ -13842,7 +13842,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_6.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0_2.CPP.o(.rodata .rdata);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_4.CPP.o(.rodata .rdata);
@@ -15549,7 +15549,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0_2.CPP.o(.rodata .rdata);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_5.CPP.o(.rodata .rdata);
@@ -17252,7 +17252,7 @@ SECTIONS
         src/DATA/GFXDATA/800DCC34_2.CPP.o(.data);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0_2.CPP.o(.rodata .rdata);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_4.CPP.o(.rodata .rdata);
@@ -20887,7 +20887,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_5.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E2060.CPP.o(.bss .sbss COMMON);
@@ -22157,7 +22157,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_6.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E2060.CPP.o(.bss .sbss COMMON);
@@ -23394,7 +23394,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_5.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E2060.CPP.o(.bss .sbss COMMON);
@@ -24655,7 +24655,7 @@ SECTIONS
         src/DATA/GFXDATA/800DCC34_2.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E2060.CPP.o(.bss .sbss COMMON);
@@ -27246,7 +27246,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0_2.CPP.o(.rodata .rdata);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_5.CPP.o(.rodata .rdata);
@@ -27825,7 +27825,7 @@ SECTIONS
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_5.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB9/800E2054.CPP.o(.bss .sbss COMMON);
@@ -28535,7 +28535,7 @@ SECTIONS
         src/MENU_2/80408AC4_39.CPP.o(.text);
         src/FRONTEND/8043962C_3.CPP.o(.text);
         src/FRONTEND/8043962C_9.CPP.o(.data);
-        src/FRONTEND/8043A0B0_2.CPP.o(.text);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.text);
         src/FRONTEND/8043A0B0_9.CPP.o(.text);
         src/FRONTEND/CODE_8043AED0.CPP.o(.text);
         src/FRONTEND/8043A0B0_10.CPP.o(.text);
@@ -29020,7 +29020,7 @@ SECTIONS
         src/MENU/ITEMS/8042FBEC_12.CPP.o(.text);
         src/FRONTEND/8043962C_3.CPP.o(.text);
         src/FRONTEND/8043962C_17.CPP.o(.data);
-        src/FRONTEND/8043A0B0_2.CPP.o(.text);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.text);
         src/FRONTEND/8043A0B0_9.CPP.o(.text);
         src/FRONTEND/CODE_8043AED0.CPP.o(.text);
         src/FRONTEND/8043A0B0_10.CPP.o(.text);
@@ -29514,7 +29514,7 @@ SECTIONS
         src/MENU_2/80406A88_19.CPP.o(.text);
         src/FRONTEND/8043962C_3.CPP.o(.text);
         src/FRONTEND/8043A0B0_7.CPP.o(.data);
-        src/FRONTEND/8043A0B0_2.CPP.o(.text);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.text);
         src/FRONTEND/8043A0B0_9.CPP.o(.text);
         src/FRONTEND/CODE_8043AED0.CPP.o(.text);
         src/FRONTEND/8043A0B0_10.CPP.o(.text);
@@ -30003,7 +30003,7 @@ SECTIONS
         src/MENU/EVENT/8040C640_12.CPP.o(.text);
         src/FRONTEND/8043962C_3.CPP.o(.text);
         src/FRONTEND/8043A0B0_8.CPP.o(.data);
-        src/FRONTEND/8043A0B0_2.CPP.o(.text);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.text);
         src/FRONTEND/8043A0B0_9.CPP.o(.text);
         src/FRONTEND/CODE_8043AED0.CPP.o(.text);
         src/FRONTEND/8043A0B0_10.CPP.o(.text);
@@ -30463,7 +30463,7 @@ SECTIONS
         src/FRONTEND/8043962C_16.CPP.o(.text);
         src/FRONTEND/8043962C_3.CPP.o(.text);
         src/FRONTEND/8043A0B0_8.CPP.o(.data);
-        src/FRONTEND/8043A0B0_2.CPP.o(.text);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.text);
         src/FRONTEND/8043A0B0_9.CPP.o(.text);
         src/FRONTEND/CODE_8043AED0.CPP.o(.text);
         src/FRONTEND/8043A0B0_10.CPP.o(.text);
@@ -30941,7 +30941,7 @@ SECTIONS
         src/MENU_2/80408AC4_39.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_3.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_9.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_9.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_10.CPP.o(.bss .sbss COMMON);
@@ -31414,7 +31414,7 @@ SECTIONS
         src/MENU/ITEMS/8042FBEC_12.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_3.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_17.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_9.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_10.CPP.o(.bss .sbss COMMON);
@@ -31889,7 +31889,7 @@ SECTIONS
         src/MENU_2/80406A88_19.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_3.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_7.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_9.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_10.CPP.o(.bss .sbss COMMON);
@@ -32354,7 +32354,7 @@ SECTIONS
         src/MENU/EVENT/8040C640_12.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_3.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_8.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_9.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_10.CPP.o(.bss .sbss COMMON);
@@ -32803,7 +32803,7 @@ SECTIONS
         src/FRONTEND/8043962C_16.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043962C_3.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_8.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0_2.CPP.o(.bss .sbss COMMON);
+        src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_9.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_10.CPP.o(.bss .sbss COMMON);

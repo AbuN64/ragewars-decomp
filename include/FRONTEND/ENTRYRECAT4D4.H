@@ -43,10 +43,14 @@ struct FourPlayerResultsScreen {
     void *window;
     void *menu;
     struct ResultsPlayerPanel panels[4];
-    char pad1348[0x1358 - 0x1348];
+    MenuWidget *leftArrow;
+    s32 leftStep;
+    MenuWidget *rightArrow;
+    s32 rightStep;
     s32 state;
     int timer;
-    char pad1360[0x8];
+    void *resource;
+    MenuWidget *message;
     int next;
     char pad136C[0x4];
     char badges[4][0xC0];
