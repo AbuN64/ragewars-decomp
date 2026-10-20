@@ -74,14 +74,15 @@ void func_80419490_de(Image_func_80419490_de *image) {
     }
 }
 
-extern void func_804133E4_de(void);
+extern void func_804133E4_de(int image);
+struct OwnedImage;
+extern void func_80413404_de(struct OwnedImage *image);
 
-void func_80419608_de(void) {
-    func_804133E4_de();
+/* The archive loader passes the image address through these forwarding calls. */
+void Gfx_ResetImage(void *image) {
+    func_804133E4_de((int)image);
 }
 
-extern void func_80413404_de(void);
-
-void func_80419624_de(void) {
-    func_80413404_de();
+void Gfx_ReleaseImage(struct OwnedImage *image) {
+    func_80413404_de(image);
 }

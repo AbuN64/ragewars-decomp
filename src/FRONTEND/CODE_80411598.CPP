@@ -1,3 +1,4 @@
+#include "MENU/GFX/80414430_24.H"
 #include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
@@ -10,7 +11,7 @@
 
 /* Unloads entry index of the pool at D_80153C20: releases the data of every loaded slot (flag 1) in
    each of the entry's slot ns (the n count comes from the entry's definition) through
-   func_80419624_de and clears the flag, frees the entry's buffer through func_802547E4_de and clears the
+   Gfx_ReleaseImage and clears the flag, frees the entry's buffer through func_802547E4_de and clears the
    buffer table when one is held, and marks the entry inactive. */
 
 
@@ -23,7 +24,6 @@
 
 extern Pool_func_80411518_de D_80153C20;
 
-extern void func_80419624_de(char *data);
 
 void func_80411518_de(s32 index) {
     s32 n;
@@ -34,7 +34,7 @@ void func_80411518_de(s32 index) {
         slot = D_80153C20.entries[index].ns[n];
         for (i = 0; i < 0x60; i++) {
             if (slot[i].flags & 1) {
-                func_80419624_de(slot[i].data);
+                Gfx_ReleaseImage((struct OwnedImage *)slot[i].data);
                 slot[i].flags &= ~1;
             }
         }

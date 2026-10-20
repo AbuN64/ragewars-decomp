@@ -1,3 +1,4 @@
+#include "MENU/GFX/80414430_24.H"
 #include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
@@ -7,7 +8,7 @@
 
 /* Advances the deferred-release timers: for each of the D_80153C0C slots (all reset first when mode
    is 1) whose owner is not -1, counts the delay down, and once it has run out releases the slot's
-   loaded resource data through func_80419624_de, clearing its loaded flag, and clears the owner. */
+   loaded resource data through Gfx_ReleaseImage, clearing its loaded flag, and clears the owner. */
 
 
 
@@ -17,7 +18,6 @@
 
 extern PoolRecAtC D_80153C0C;
 
-extern void func_80419624_de(void *data);
 
 void func_80410E1C_de(s32 mode) {
     s32 i;
@@ -32,7 +32,7 @@ void func_80410E1C_de(s32 mode) {
                 D_80153C0C.timers[i].delay--;
             } else {
                 if (D_80153C0C.resources[i].flags & 1) {
-                    func_80419624_de(D_80153C0C.resources[i].data);
+                    Gfx_ReleaseImage((struct OwnedImage *)D_80153C0C.resources[i].data);
                     D_80153C0C.resources[i].flags &= ~1;
                 }
                 D_80153C0C.timers[i].owner = 0;

@@ -1,3 +1,4 @@
+#include "MENU/GFX/80414430_24.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/NODERECAT2A8.H"
@@ -97,7 +98,7 @@ extern s32 D_800E2AB4_de;
 extern struct Shape_typemap_165 D_8014D580;
 
 /* Releases every loaded slot of the active, referenced entries of the pool at D_80153C20: each
-   loaded slot (flag 1) has its data released through func_80419624_de, its flags and owner cleared and
+   loaded slot (flag 1) has its data released through Gfx_ReleaseImage, its flags and owner cleared and
    the entry's reference count decremented, and an entry left without references is unloaded
    through func_80411518_de and marked inactive. Pool layout and indexed slot access follow func_80411518_de. */
 
@@ -111,7 +112,6 @@ extern struct Shape_typemap_165 D_8014D580;
 
 extern Pool_func_8040F580_de D_80153C20;
 
-extern void func_80419624_de(char *data);
 
 /* Relocates a loaded widget list and its children from the stored base to base: for widgets
    flagged 0x10 rebases the four resource words, then by widget type clears an out-of-range image
@@ -463,7 +463,7 @@ void func_8040F580_de(void) {
                 slot = D_80153C20.entries[e].pages[n];
                 for (i = 0; i < 0x60; i++) {
                     if (slot[i].flags & 1) {
-                        func_80419624_de(slot[i].data);
+                        Gfx_ReleaseImage((struct OwnedImage *)slot[i].data);
                         slot[i].flags = 0;
                         slot[i].owner = 0;
                         D_80153C20.entries[e].refCount--;
@@ -540,7 +540,6 @@ u8 * func_802A025C_de(u8 *, u8 *);
 extern char D_8014D724[];
 extern char D_800DD0B0[];
 void func_802A0EB0_de(s32);
-void func_80419608_de(void *);
 void func_8040F9E0_de(s32 index);
 
 
@@ -765,7 +764,7 @@ void func_8040FB94_de(u8 *arg0) {
                 var_s0 += 1;
                 D_80153C10[var_s2].unk0 = ((void *)&((func_8040FC14_S6 *)((*((void **)recordData))))->unk0[temp_a1]);
                 var_s1++;
-                func_80419608_de((u8 *)*((void **)recordData) + temp_a1);
+                Gfx_ResetImage((u8 *)*((void **)recordData) + temp_a1);
                 var_s2 += 1;
             } while (var_s0 < ((Images *)state)->unk25C);
         }

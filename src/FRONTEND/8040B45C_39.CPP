@@ -1,3 +1,4 @@
+#include "MENU/GFX/80414430_24.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -63,7 +64,6 @@ extern s32 *D_80153C14;
 
 extern struct ResourceRecAt6 *D_8014D988;
 
-extern void func_80419624_de(s32);
 
 /* Returns the signed byte at offset 0x9 of entry j in the 8-byte entries that begin record i of
    the 1180-byte record table D_80153C28 points to. */
@@ -225,7 +225,7 @@ void func_80411AF0_de(s32 i) {
             resource->retained--;
         } else {
             if (D_80153C10[i].unk4 & 1) {
-                func_80419624_de(D_80153C10[i].unk0);
+                Gfx_ReleaseImage((struct OwnedImage *)D_80153C10[i].unk0);
                 D_80153C10[i].unk4 &= ~1;
             }
             D_8014D988[i].id = 0;

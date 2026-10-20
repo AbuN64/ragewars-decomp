@@ -1,3 +1,4 @@
+#include "MENU/GFX/80414430_24.H"
 #include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "COMMON/NODERECAT2A8.H"
@@ -41,7 +42,7 @@ extern void func_804118E4_de(s32), func_80410E1C_de(s32), func_80411D18_de(void)
 /* Expires cached UI resources against the current tick from func_802A1934_de unless the cache is
    locked: releases through func_80411AF0_de the first flagged entry whose unretained resource has an
    id below the tick and stops; otherwise, for each live chunk, clears every flagged slot whose time
-   has passed (freeing its data through func_80419624_de) and stops as soon as a chunk still holds live
+   has passed (freeing its data through Gfx_ReleaseImage) and stops as soon as a chunk still holds live
    slots after one expires, freeing through func_80411518_de and clearing each chunk left empty. */
 
 
@@ -60,7 +61,6 @@ extern void func_804118E4_de(s32), func_80410E1C_de(s32), func_80411D18_de(void)
 
 extern s32 func_802A1934_de(void);
 
-extern void func_80419624_de(char *data);
 
 /* Returns a texture's resource id, first loading its pixel and 16-bit palette data, detecting a transparent palette entry and creating the texture resource when it is not yet loaded, and in both cases updates the texture's usage record for the requested mode (1 stamps the next expiry time, 2 pins it, 3 counts a reference); the opened file handle is stored through the header symbol as in the paletted texture loader, and the resource id is held in two locals (the second passed to func_80419640_de), which reproduces the cartridge's three stack slots. */
 
@@ -211,7 +211,7 @@ void func_80410448_de(void) {
                 for (k = 0; k < 0x60; k++) {
                     slot = &slots[k];
                     if ((slot->flags & 1) && slot->owner < now) {
-                        func_80419624_de(slot->data);
+                        Gfx_ReleaseImage((struct OwnedImage *)slot->data);
                         slot->owner = 0;
                         slot->flags &= ~1;
                         D_801539B0.chunks[i].live--;
