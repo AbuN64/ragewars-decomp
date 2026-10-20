@@ -92,7 +92,8 @@ struct Shared_ReactionPlayer {
     char pad4C4[0x110];
     s32 unk5D4;
     Shared_ReactionStatistics * unk5D8;
-    char pad5D8[0x8];
+    void *owner; /* 0x5DC: actor that shows the reaction text */
+    char pad5E0[0x4];
     s32 unk5E4;
     char pad5E8[0x46];
     s16 unk62E;
@@ -118,7 +119,9 @@ struct Shared_ReactionPlayer {
     s32 unk1338;
     char pad1338[0x88];
     s8 unk13C4;
-    char pad13C4[0x8B];
+    char pad13C5[0x23];
+    s32 messageNext; /* 0x13E8: next slot of messages */
+    char messages[4][25]; /* 0x13EC */
     s32 unk1450;
     Shared_ReactionPlayerRecord * unk1454;
 };
@@ -196,11 +199,12 @@ struct Shared_ReactionStatistics {
     u16 deaths_special[8];
     u16 kills_normal[8];
     u16 deaths_normal[8];
-    char pad4C[0x41];
+    char pad4C[0x38];
+    char name[9]; /* 0x84: player name, terminated before counted */
     u8 counted;
     char pad8E[0x1];
     u8 unk8F;
-    char pad8F[0x2];
+    char pad90[0x2];
     u8 unk92;
 };
 
@@ -219,4 +223,5 @@ struct Shared_ReactionPlayerRecord {
 };
 extern f32 gReactionReserveMaximum;
 extern void func_80219A40_de(Shared_ReactionActor *, void *, Shared_ReactionInteraction *);
+extern void func_80219688_de(Shared_ReactionPlayer *, Shared_ReactionPlayer *, Shared_ReactionInteraction *);
 #endif

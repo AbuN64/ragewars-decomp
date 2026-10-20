@@ -370,7 +370,6 @@ typedef struct AnimationSprite {
     s32 active;
 } AnimationSprite;
 
-void func_80219688_de(char *, char *, void *);
 void Particle_RetireOwnedActors(void *, s32);
 s32 func_8021BFC4_de();
 extern s32 D_8014280C[];

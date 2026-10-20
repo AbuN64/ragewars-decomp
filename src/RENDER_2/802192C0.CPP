@@ -197,8 +197,7 @@ void func_80219490_de(char *object, char *camera) {
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
-typedef struct Shared_Profile { char pad0[0x84]; char name[11]; u8 enabled; } Shared_Profile;
-typedef struct SharedPlayerCode80225D10 { char pad0[0x5D8]; Shared_Profile *nameOwner; void *owner; char pad5E0[0xE08]; s32 next; char text[4][25]; } SharedPlayerCode80225D10;
+#include "COMMON/GAMEPLAY_REACTIONS.H"
 typedef struct Shared_MatchOptions { char pad0[0x1D]; u8 enabled; } Shared_MatchOptions;
 extern Shared_MatchOptions D_801462C8;
 extern s32 D_801468F4,D_80146918;
@@ -206,35 +205,35 @@ extern char *D_800D3A40,*D_800D3A44,*D_800D3A48,*D_800D3A54,*D_800D3A58;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void func_802934C0_de(char *,const char *);
 extern void func_80239770_de(void *,void *,char *,f32);
-void func_80219688_de(SharedPlayerCode80225D10 *a,SharedPlayerCode80225D10 *b) {
+void func_80219688_de(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
     if (!D_801462C8.enabled) return;
     if (a!=b) {
-        if (!a->nameOwner->enabled) return;
+        if (!a->unk5D8->unk8F) return;
         if (D_801468F4) {
-            func_802934C0_de(a->text[a->next], D_800D3A40);
-            func_802934C0_de(a->text[a->next]+10, b->nameOwner->name);
-            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->text[a->next],1.5f);
-            a->next++; a->next %= 4;
-            func_802934C0_de(b->text[b->next], D_800D3A44);
-            func_802934C0_de(b->text[b->next]+11, a->nameOwner->name);
+            func_802934C0_de(a->messages[a->messageNext], D_800D3A40);
+            func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
+            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            a->messageNext++; a->messageNext %= 4;
+            func_802934C0_de(b->messages[b->messageNext], D_800D3A44);
+            func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
         } else {
             if (!D_80146918) return;
-            func_802934C0_de(a->text[a->next], D_800D3A48);
-            func_802934C0_de(a->text[a->next]+10, b->nameOwner->name);
-            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->text[a->next],1.5f);
-            a->next++; a->next %= 4;
-            func_802934C0_de(a->text[a->next], D_800D3A54);
-            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->text[a->next],1.5f);
-            a->next++; a->next %= 4;
-            func_802934C0_de(b->text[b->next], D_800D3A44);
-            func_802934C0_de(b->text[b->next]+11, a->nameOwner->name);
-            if (b->owner) func_80239770_de(&D_80145088,b->owner,b->text[b->next],1.5f);
-            b->next++; b->next %= 4;
-            func_802934C0_de(b->text[b->next], D_800D3A58);
+            func_802934C0_de(a->messages[a->messageNext], D_800D3A48);
+            func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
+            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            a->messageNext++; a->messageNext %= 4;
+            func_802934C0_de(a->messages[a->messageNext], D_800D3A54);
+            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            a->messageNext++; a->messageNext %= 4;
+            func_802934C0_de(b->messages[b->messageNext], D_800D3A44);
+            func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
+            if (b->owner) func_80239770_de(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            b->messageNext++; b->messageNext %= 4;
+            func_802934C0_de(b->messages[b->messageNext], D_800D3A58);
         }
-        if (b->owner) func_80239770_de(&D_80145088,b->owner,b->text[b->next],1.5f);
+        if (b->owner) func_80239770_de(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
     }
-    b->next++; b->next %= 4;
+    b->messageNext++; b->messageNext %= 4;
 }
 #else
 INCLUDE_ASM("span_1000", func_80219688_de);
