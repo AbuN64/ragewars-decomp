@@ -37,7 +37,7 @@ extern f32 D_800D2988;
 extern f32 D_800CD740_de;
 extern s32 func_80264B6C_de(void);
 extern void func_80264B8C_de(void);
-extern void func_80293334_de(GameSession *session, s32 arena, s32 arg2);
+extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
 void func_802944F4_de(s32 arg0) {
     func_80293A20_de(arg0, 0xC, 0xC);

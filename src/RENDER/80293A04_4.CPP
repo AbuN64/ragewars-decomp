@@ -30,7 +30,7 @@ extern s32 D_800E28D4;
 
 extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
 
-extern void func_80293334_de(void *arg0, void *arg1, void *arg2);
+extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
 extern void func_80286AA8_de(void *, void *, void *);
 

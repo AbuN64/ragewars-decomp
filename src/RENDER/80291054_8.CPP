@@ -11,9 +11,9 @@
 #include "TYPES.H"
 
 
-void func_8044A370_de(void *a);
+void func_8044A370_de(void *owner, s32 count);
 
-void func_804499B0_de(void *a, void *b, void *c);
+void func_804499B0_de(void *pool, s32 count, s32 force_active);
 
 void func_8029311C_de(void *unused, u8 *color, s32 left, s32 top, s32 right, s32 bottom) {
     if (color[3] != 0) {
@@ -67,7 +67,8 @@ void func_80293284_de(GameSession *arg0, s32 arg1) {
     arg0->target = 0xD;
 }
 
-void func_80293334_de(void *arg0, void *arg1, void *arg2) {
-    func_8044A370_de(((GameSession *)arg0)->players);
-    func_804499B0_de(((GameSession *)arg0)->menu, arg1, arg2);
+void func_80293334_de(void *owner, s32 count, s32 force_active) {
+    GameSession *session = owner;
+    func_8044A370_de(session->players, count);
+    func_804499B0_de(session->menu, count, force_active);
 }

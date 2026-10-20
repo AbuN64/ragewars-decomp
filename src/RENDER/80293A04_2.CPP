@@ -13,7 +13,7 @@
 
 s32 func_802647C4_de();
 
-extern void func_80293334_de(void *arg0, void *arg1, void *arg2);
+extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
 
 
@@ -129,7 +129,7 @@ void func_80293FF0_de(void) {
 }
 
 void func_802940D8_de(void *arg0) {
-    func_80293334_de(arg0, (void *)0, (void *)0);
+    func_80293334_de(arg0, 0, 0);
 }
 
 void func_802940F8_de(struct GameSession *value) {
