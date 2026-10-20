@@ -94,7 +94,7 @@ void func_80239FDC_de(void *arg0) {
     f32 w;
 
     if (func_80245798_de() != 0) {
-        camera->unk58 = (Shared_func_80234FDC_S8 *)func_80286728_de(&D_8011FE88, &camera->unk38);
+        camera->unk58 = (Shared_func_80234FDC_S8 *)Scene_FindFloorPolygon(&D_8011FE88, &camera->unk38);
     }
     object = (s32)camera->unk58;
     x = camera->unk38;

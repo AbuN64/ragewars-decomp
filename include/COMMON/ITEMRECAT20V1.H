@@ -843,7 +843,7 @@ typedef struct ParamsRecAt8V1 ParamsRecAt8V1;
 struct Node75;
 struct Node75 {
     u16 field0;
-    u16 flags; /* +0x02: func_80286728_de, mask0x40 */
+    u16 flags; /* +0x02: Scene_FindFloorPolygon, mask0x40 */
     CVector3 *prev;
     CVector3 *cur;
     CVector3 *next;

@@ -506,7 +506,7 @@ int func_8022AE28_de(void *arg0, void *arg1) {
     int flag;
     CVector3 *src;
     src = arg1;
-    flag = ((int (*)(void *))func_80286728_de)(&D_8011FE88);
+    flag = ((int (*)(void *))Scene_FindFloorPolygon)(&D_8011FE88);
     ((LevelActor *)arg0)->position0 = *src;
     ((LevelActor *)arg0)->model = flag;
     ((Shared_ActorView *)arg0)->weapon.position0 = *src;

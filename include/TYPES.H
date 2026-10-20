@@ -150,7 +150,9 @@ extern void func_80284434_de(void *a);
 
 extern void func_80285C78_de(void *arg0);
 
-extern s32 func_80286728_de(void *, void *);
+struct Shared_World;
+struct CVector3_t;
+extern s32 Scene_FindFloorPolygon(struct Shared_World *, struct CVector3_t *);
 
 extern s32 func_8028B394_de(void *arg0, s32 arg1);
 

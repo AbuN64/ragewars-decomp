@@ -12,7 +12,7 @@ extern s32 func_8028FE3C_de(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
 extern void func_8028FFD0_de(s32, s32, s32, Triple, Triple, s32, f32);
 
-extern s32 func_80275B10_de(void *arg0, f32 arg1, f32 arg2);
+extern s32 func_80275B10_de(Node75 *arg0, f32 arg1, f32 arg2);
 
 extern f32 func_80275DD4_de(void *, f32, f32);
 
@@ -51,7 +51,7 @@ void *func_8028C050_de(void *arg0, CVector3 *arg1) {
             return arg0;
         }
     }
-    return func_80286728_de(&D_8011FE88, arg1);
+    return Scene_FindFloorPolygon(&D_8011FE88, arg1);
 }
 
 /* Searches the counted pointer list at offset 0x1B620 of a world record for the first entry whose definition id at 0x18->0xC equals the given id, returning it or null. */

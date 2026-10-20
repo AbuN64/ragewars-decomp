@@ -259,7 +259,7 @@ void func_80449E18_de(ObjectPool *pool) {
     if (var_s0 != 0) {
         do {
             func_804491E8_de(var_s0);
-            temp_v0 = func_80286728_de(&D_8011FE88, &var_s0->position);
+            temp_v0 = Scene_FindFloorPolygon(&D_8011FE88, &var_s0->position);
             var_s0->weapon.model = temp_v0;
             var_s0->modelId = temp_v0;
             func_80220A80_de(var_s0, var_s0);

@@ -47,7 +47,7 @@ void func_80238F24_de(GameplayCamera *arg0, s32 arg1, f32 arg2, f32 arg3, f32 ar
     arg0->unk5C = arg12;
     arg0->unk60 = arg13;
     if (func_80245798_de() != 0) {
-        arg0->unk58 = (void *)func_80286728_de(&D_8011FE88, &arg0->unk38);
+        arg0->unk58 = (void *)Scene_FindFloorPolygon(&D_8011FE88, &arg0->unk38);
     }
     object = (s32)arg0->unk58;
     x = arg0->unk38;

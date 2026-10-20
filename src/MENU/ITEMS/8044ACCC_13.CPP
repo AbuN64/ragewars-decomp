@@ -150,7 +150,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                 world->unk13C++;
                 memcpy(&D_80141040, rec->vec4, sizeof(CVector3));
                 D_80141040.y += 204.79998779296875f;
-                D_80141060 = func_80286728_de(world, rec->vec4);
+                D_80141060 = Scene_FindFloorPolygon(world, rec->vec4);
                 playerIndex = 0;
                 if (playerIndex < D_80145048) {
                     slot = D_80146398;

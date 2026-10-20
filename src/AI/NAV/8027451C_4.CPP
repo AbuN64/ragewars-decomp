@@ -79,7 +79,7 @@ void func_80275AA4_de(CGameRegion *dst, Packed *src, char *base, int unused, cha
     }
 }
 
-s32 func_80275B10_de(void **arg0, f32 arg1, f32 arg2) {
+s32 func_80275B10_de(Node75 *arg0, f32 arg1, f32 arg2) {
     s32 i;
     CVector3 *point1;
     CVector3 *point2;

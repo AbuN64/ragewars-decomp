@@ -1,3 +1,4 @@
+#include "COMMON/FLOOR_RESOURCE.H"
 #include "include_asm.h"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/EXTERNS_9.H"
@@ -196,120 +197,85 @@ first_pass_done:
 
 INCLUDE_ASM("span_1000", func_80286454_de);
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/APPROACHLOCATION.H"
-#include "COMMON/EXTERNS_14.H"
+#include "COMMON/WORLD.H"
 #include "stddef.h"
-#include "TYPES.H"
 f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 f32 func_8027525C_de(Node75 *node, f32 x, f32 z);
 extern s32 D_800CD764_de;
 
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x28, 0x2c, 0x30, 0x34, 0x40, 0x44, 0x48, 0x4c], gap at: 0x38. */
-s32 func_80286728_de(void *arg0, void *arg1) {
-    f32 temp_fs0;
-    f32 temp_fv0;
-    f32 temp_fv0f;
-    f32 temp_fv0f_2;
-    f32 temp_fv0f_3;
-    f32 var_fs0f;
-    f32 var_fv0;
-    s32 temp_fp;
-    s32 temp_s7;
-    s32 var_s4;
-    s32 var_s6;
-    s8 *temp_v0;
-    u32 var_s2;
-    void *var_s0;
-    void *var_s5;
-    void *var_s1;
-
+/* The floor polygon under pos: a volume polygon (flag 0x40) that holds pos, else the one nearest in height. */
+/* Finds the containing solid volume, or the nearest floor polygon, as a legacy 32-bit handle. */
+s32 Scene_FindFloorPolygon(Shared_World *world, CVector3 *pos) {
+    Node75 *polys;
+    FloorPolygonTable *polygonTable;
+    FloorGrid *grid;
+    FloorCell *cell;
+    FloorCell *cells;
+    Node75 *poly;
+    Node75 *best;
+    f32 bestDist;
+    f32 floor;
+    f32 ceiling;
+    f32 x;
+    f32 z;
+    f32 dist;
+    s32 cellCount;
+    s32 index;
+    s32 i;
+    u32 j;
     if (D_800CD764_de == 0) {
         return 0;
     }
-    var_s4 = 0;
-    var_s6 = 0;
-    var_fs0f = 0.0f;
-    var_s5 = NULL;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_fp = func_8028FDB4_de(*((s32 **) ((u8 *) (arg0) + 108)), 2) + 8;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_v0 = func_8028FDB4_de(*((s32 **) ((u8 *) (arg0) + 108)), 3);
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_s7 = *((s32 *) ((u8 *) (temp_v0) + 4));
-    if (temp_s7 > 0) {
-        var_s1 = temp_v0 + 8;
-loop_4:
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        temp_fv0f = *((f32 *) ((u8 *) (arg1) + 0));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        if ((*((f32 *) ((u8 *) (var_s1) + 0)) <= temp_fv0f) && (temp_fv0f <= *((f32 *) ((u8 *) (var_s1) + 8)))) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            temp_fv0f_2 = *((f32 *) ((u8 *) (arg1) + 8));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            if ((*((f32 *) ((u8 *) (var_s1) + 4)) <= temp_fv0f_2) && (temp_fv0f_2 <= *((f32 *) ((u8 *) (var_s1) + 12)))) {
-                var_s2 = 0;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                if (*((u32 *) ((u8 *) (var_s1) + 16)) != 0) {
-                    var_s0 = (var_s4 << 5) + temp_fp;
-loop_10:
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    if (func_80275B10_de(var_s0, *((f32 *) ((u8 *) (arg1) + 0)), *((f32 *) ((u8 *) (arg1) + 8))) != 0) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        temp_fs0 = func_80275DD4_de(var_s0, *((f32 *) ((u8 *) (arg1) + 0)), *((f32 *) ((u8 *) (arg1) + 8)));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        if (*((u16 *) ((u8 *) (var_s0) + 2)) & 0x40) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            temp_fv0 = func_8027525C_de(var_s0, *((f32 *) ((u8 *) (arg1) + 0)), *((f32 *) ((u8 *) (arg1) + 8)));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            temp_fv0f_3 = *((f32 *) ((u8 *) (arg1) + 4));
-                            if ((temp_fs0 <= temp_fv0f_3) && (temp_fv0f_3 <= temp_fv0)) {
-                                return (s32) var_s0;
+    polygonTable = func_8028FDB4_de(world->modelSections, 2);
+    polys = polygonTable->polygons;
+    index = 0;
+    i = 0;
+    bestDist = 0.0f;
+    best = NULL;
+    grid = func_8028FDB4_de(world->modelSections, 3);
+    cellCount = grid->cellCount;
+    cells = grid->cells;
+    if (cellCount > 0) {
+        do {
+            cell = &cells[i];
+            x = pos->x;
+            if (!(cell->bounds.minX <= x && x <= cell->bounds.maxX)) goto skip_cell;
+            z = pos->z;
+            if (!(cell->bounds.minZ <= z && z <= cell->bounds.maxZ)) goto skip_cell;
+            j = 0;
+            if (cell->count != 0) {
+                /* Preserve the index-first address add emitted by the original compiler. */
+                poly = polys - -index;
+                do {
+                    if (func_80275B10_de(poly, pos->x, pos->z) != 0) {
+                        floor = func_80275DD4_de(poly, pos->x, pos->z);
+                        if (poly->flags & 0x40) {
+                            ceiling = func_8027525C_de(poly, pos->x, pos->z);
+                            if (floor <= pos->y && pos->y <= ceiling) {
+                                return (s32)poly;
                             }
-                            goto block_20;
+                        } else {
+                            dist = pos->y - floor;
+                            if (dist < 0.0f) {
+                                dist = -dist;
+                            }
+                            if (best == NULL || dist < bestDist) {
+                                best = poly;
+                                bestDist = dist;
+                            }
                         }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        var_fv0 = *((f32 *) ((u8 *) (arg1) + 4)) - temp_fs0;
-                        if (var_fv0 < 0.0f) {
-                            var_fv0 = -var_fv0;
-                        }
-                        if ((var_s5 == NULL) || (var_fv0 < var_fs0f)) {
-                            var_s5 = var_s0;
-                            var_fs0f = var_fv0;
-                        }
-                        goto block_20;
                     }
-block_20:
-                    var_s0 += 0x20;
-                    var_s2 += 1;
-                    var_s4 += 1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    if (var_s2 >= (u32) *((u32 *) ((u8 *) (var_s1) + 16))) {
-                        var_s1 += 0x14;
-                        goto block_24;
-                    }
-                    goto loop_10;
-                }
-                goto block_23;
+                    poly++;
+                    index++;
+                } while (cell->count > ++j);
             }
-        }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        var_s4 += *((u32 *) ((u8 *) (var_s1) + 16));
-block_23:
-        var_s1 += 0x14;
-block_24:
-        var_s6 += 1;
-        if (var_s6 >= temp_s7) {
-            goto block_25;
-        }
-        goto loop_4;
+            goto advance_cell;
+        skip_cell:
+            index += cell->count;
+        advance_cell:
+            i++;
+        } while (i < cellCount);
     }
-block_25:
-    return (s32) var_s5;
+    return (s32)best;
 }
-#else
-INCLUDE_ASM("span_1000", func_80286728_de);
-#endif

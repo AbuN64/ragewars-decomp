@@ -324,7 +324,7 @@ actor_found:
     func_8023AFF0_de(&arg0->unk570, arg0);
     func_804428F8_de(&arg0->messageList);
     if (func_80245798_de() != 0) {
-        arg0->unk58 = ((void *(*)())func_80286728_de)(&D_8011FE88, &arg0->unk38);
+        arg0->unk58 = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &arg0->unk38);
     }
     captured_state = D_800CD8D0;
     arg0->unk64 = captured_state;

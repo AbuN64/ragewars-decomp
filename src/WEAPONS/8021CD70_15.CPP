@@ -144,7 +144,7 @@ void func_8022409C_de(void *arg0, void *arg1) {
     func_80271F9C_de(&direction, &direction, D_800D2988);
     func_80271F34_de(&((func_80224078_Arg0 *)(arg0))->unk6E8,
                   &((func_80224078_Arg0 *)(arg0))->unk6E8, &direction);
-    result = func_80286728_de(&D_8011FE88, &((func_80224078_Arg1 *)arg1)->unk8);
+    result = Scene_FindFloorPolygon(&D_8011FE88, &((func_80224078_Arg1 *)arg1)->unk8);
     if (result != 0) {
         ((func_80224078_Arg1 *)arg1)->unk14 = result;
     }
