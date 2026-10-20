@@ -657,7 +657,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.text);
         src/MATH/80299ECC_8.CPP.o(.text);
         src/RESMGR/8029AA48_2.CPP.o(.data);
-        src/MATH/8029AE80.CPP.o(.text);
+        src/MATH/math_controller_events.CPP.o(.text);
         src/RESMGR/8029AA48_11.CPP.o(.text);
         src/MATH/8029AE80_2.CPP.o(.text);
         src/RESMGR/8029AA48_12.CPP.o(.text);
@@ -1720,7 +1720,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.text);
         src/MATH/80299ECC_8.CPP.o(.text);
         src/RESMGR/8029AA48_3.CPP.o(.data);
-        src/MATH/8029AE80.CPP.o(.text);
+        src/MATH/math_controller_events.CPP.o(.text);
         src/RESMGR/8029AA48_11.CPP.o(.text);
         src/MATH/8029AE80_2.CPP.o(.text);
         src/RESMGR/8029AA48_12.CPP.o(.text);
@@ -2782,7 +2782,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.text);
         src/MATH/80299ECC_8.CPP.o(.text);
         src/RESMGR/8029AA48_4.CPP.o(.data);
-        src/MATH/8029AE80.CPP.o(.text);
+        src/MATH/math_controller_events.CPP.o(.text);
         src/RESMGR/8029AA48_11.CPP.o(.text);
         src/MATH/8029AE80_2.CPP.o(.text);
         src/RESMGR/8029AA48_12.CPP.o(.text);
@@ -3859,7 +3859,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.text);
         src/MATH/80299ECC_8.CPP.o(.text);
         src/RESMGR/8029AA48.CPP.o(.data);
-        src/MATH/8029AE80.CPP.o(.text);
+        src/MATH/math_controller_events.CPP.o(.text);
         src/RESMGR/8029AA48_11.CPP.o(.text);
         src/MATH/8029AE80_2.CPP.o(.text);
         src/RESMGR/8029AA48_12.CPP.o(.text);
@@ -4941,7 +4941,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.text);
         src/MATH/80299ECC_8.CPP.o(.text);
         src/RESMGR/8029AA48_10.CPP.o(.data);
-        src/MATH/8029AE80.CPP.o(.text);
+        src/MATH/math_controller_events.CPP.o(.text);
         src/RESMGR/8029AA48_11.CPP.o(.text);
         src/MATH/8029AE80_2.CPP.o(.text);
         src/RESMGR/8029AA48_12.CPP.o(.text);
@@ -6004,7 +6004,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.bss .sbss COMMON);
         src/MATH/80299ECC_8.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_2.CPP.o(.bss .sbss COMMON);
-        src/MATH/8029AE80.CPP.o(.bss .sbss COMMON);
+        src/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_11.CPP.o(.bss .sbss COMMON);
         src/MATH/8029AE80_2.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_12.CPP.o(.bss .sbss COMMON);
@@ -7045,7 +7045,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.bss .sbss COMMON);
         src/MATH/80299ECC_8.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_3.CPP.o(.bss .sbss COMMON);
-        src/MATH/8029AE80.CPP.o(.bss .sbss COMMON);
+        src/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_11.CPP.o(.bss .sbss COMMON);
         src/MATH/8029AE80_2.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_12.CPP.o(.bss .sbss COMMON);
@@ -8082,7 +8082,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.bss .sbss COMMON);
         src/MATH/80299ECC_8.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_4.CPP.o(.bss .sbss COMMON);
-        src/MATH/8029AE80.CPP.o(.bss .sbss COMMON);
+        src/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_11.CPP.o(.bss .sbss COMMON);
         src/MATH/8029AE80_2.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_12.CPP.o(.bss .sbss COMMON);
@@ -9109,7 +9109,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.bss .sbss COMMON);
         src/MATH/80299ECC_8.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48.CPP.o(.bss .sbss COMMON);
-        src/MATH/8029AE80.CPP.o(.bss .sbss COMMON);
+        src/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_11.CPP.o(.bss .sbss COMMON);
         src/MATH/8029AE80_2.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_12.CPP.o(.bss .sbss COMMON);
@@ -10128,7 +10128,7 @@ SECTIONS
         src/MATH/80299ECC_7.CPP.o(.bss .sbss COMMON);
         src/MATH/80299ECC_8.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_10.CPP.o(.bss .sbss COMMON);
-        src/MATH/8029AE80.CPP.o(.bss .sbss COMMON);
+        src/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_11.CPP.o(.bss .sbss COMMON);
         src/MATH/8029AE80_2.CPP.o(.bss .sbss COMMON);
         src/RESMGR/8029AA48_12.CPP.o(.bss .sbss COMMON);

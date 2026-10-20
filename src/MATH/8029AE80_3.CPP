@@ -1,6 +1,6 @@
 #include "COMMON/CALLBACK.H"
 #include "TYPES.H"
-#include "MATH/8029AE80.H"
+#include "MATH/math_controller_events.H"
 
 
 void func_8029AAD8_de(s16 arg0, s16 arg1, s32 arg2) {

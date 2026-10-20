@@ -4,7 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
 #include "MATH/80299ECC.H"
-#include "MATH/8029AE80.H"
+#include "MATH/math_controller_events.H"
 
 #if defined(VERSION_DE)
 INCLUDE_ASM("span_1000", func_80299E84);
@@ -13,11 +13,12 @@ INCLUDE_ASM("span_1000", func_80299E84);
 INCLUDE_ASM("span_1000", func_80299E80_de);
 #endif
 
+extern s32 func_80299B4C_de(void);
+extern s32 func_80299958_de(void);
+
 #ifdef NON_MATCHING
 #include "TYPES.H"
 
-extern s32 func_80299B4C_de(void);
-extern s32 func_80299958_de(void);
 
 #if !defined(VERSION_DE)
 /* Turns one control event into manager events. Controls 4..7 and 11..12 first send their own event on a
@@ -75,32 +76,45 @@ void func_80299E80_de(ControllerEvent *event) {
     }
 }
 #endif
-void func_8029A324_de(ControllerEvent *event) {
+#endif
+
+static inline ControllerAxisState *Controller_FindAxisState(s32 device, s16 control) {
+    return &D_8014D0B0->axes[device][control];
+}
+
+void DispatchControllerAxisEvents(ControllerEvent *event) {
     s32 id, threshold, yValue, xValue, yCode, xCode, yCross, xCross;
-    s32 dimensions, multi;
+    s16 dimensions;
+    s32 device;
+    u32 range;
+    s32 hasZ;
+    u16 sourceId;
     ControllerAxisState *state;
-    id = ((u32)event->source << 16) | (u16)event->device;
-    dimensions = event->kind;
+    sourceId = event->source;
+    device = event->device;
+    dimensions = (u16)event->kind;
+    id = ((u32)sourceId << 16) | (u16)device;
     threshold = func_80299B4C_de();
     yValue = 0;
     xValue = 0;
-    state = &D_8014D0B0->axes[event->device][(s16)(event->control - 0x160)];
+    range = (u16)(dimensions - 3);
+    hasZ = (s16)dimensions == 4;
+    state = Controller_FindAxisState(device, event->control - 0x160);
     state->oldX = state->x;
-    multi = (u16)(dimensions - 3) < 2;
-    if (multi) state->oldY = state->y;
-    if (dimensions == 4) state->oldZ = state->z;
+    if (range < 2) state->oldY = state->y;
+    if (hasZ) state->oldZ = state->z;
     state->x = event->x;
-    if (multi) state->y = event->y;
-    if (dimensions == 4) state->z = event->z;
+    if (range < 2) state->y = event->y;
+    if (hasZ) state->z = event->z;
     yCode = 0; xCode = 0; yCross = 0; xCross = 0;
-    if (state->oldY < state->y) {
-        yCross = state->oldY < threshold && threshold < state->y;
+    if (state->y > state->oldY) {
+        if (state->oldY < threshold) yCross = threshold < state->y;
         yCode = 5; yValue = state->y;
     } else if (state->y < state->oldY) {
         if (-threshold < state->oldY && state->y < -threshold) yCross = 1;
         yCode = 6; yValue = state->y;
     }
-    if (state->oldX < state->x) {
+    if (state->x > state->oldX) {
         if (state->oldX < threshold && threshold < state->x) xCross = 1;
         xCode = 8; xValue = state->x;
     } else if (state->x < state->oldX) {
@@ -112,9 +126,7 @@ void func_8029A324_de(ControllerEvent *event) {
     state->oldX = state->x;
     state->oldY = state->y;
 }
-#else
-INCLUDE_ASM("span_1000", func_8029A324_de);
-#endif
+
 
 extern s32 func_80299958_de(void);
 
@@ -149,7 +161,7 @@ void func_8029A558_de(ControllerEvent *arg0) {
     case 4:
         if (arg0->source == 4) {
             arg0->source = 3;
-            func_8029A324_de(arg0);
+            DispatchControllerAxisEvents(arg0);
         }
         break;
     }
