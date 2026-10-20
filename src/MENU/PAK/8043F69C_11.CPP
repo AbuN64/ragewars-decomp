@@ -9,7 +9,7 @@
 extern u8 D_80152789;
 extern void func_8043F52C_de(LayeredText *, TextLayerMetrics *);
 extern void func_804402DC_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int);
-extern void func_8043FE3C_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, int, int);
+extern void func_8043FE3C_de(LayeredText *, MenuOptionBox *, MenuOptionBox *, int, void *, int);
 
 #if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
 void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBox *bounds, int flags) {

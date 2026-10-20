@@ -20,7 +20,7 @@ extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 extern void func_802A84F8_de(void);
 
-extern void func_802A8F28_de(char *, s32, s32, s32, s32, s32, f32, f32);
+extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
 
 void func_802185D0_de(struct TeamMenu *menu, ItemRecAt18V1 *items, s32 count, WeaponMenuPlayer *player) {
     s32 width;

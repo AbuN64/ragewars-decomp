@@ -4167,7 +4167,7 @@ segments:
       - [0xCB10D, data, data_800C/rodata_unresolved_800CA50D]
       - [0xCB110, rodata, data_800C/D_blob_40d645393b60e9d0f462]
       - [0xCB118, rodata, data_800C/D_blob_391bc1c0dbcea470a354]
-      - [0xCB11C, rodata, data_800C/D_auto_src_rw_pool_80291FD8_CB11C_us_rev1]
+      - [0xCB11C, rodata, data_800C/literals_Render_DrawTextLines]
       - [0xCB138, rodata, data_800C/D_auto_src_rw_pool_80292308_CB138_us_rev1]
       - [0xCB15C, rodata, data_800C/D_blob_f8704a809bee673252d0]
       - [0xCB164, rodata, data_800C/D_blob_f7d27a4ae72091a78b90]

@@ -32,7 +32,7 @@
 #include "sdk/os.h"
 extern void func_80236874_de(RaceViewportState *);
 extern void func_8029311C_de(void *, u8 *, s32,s32,s32,s32);
-extern void func_80291BE8_de(s32, s32,s32,s32,s32,s32);
+extern void func_80291BE8_de(void *, s32,s32,s32,s32,s32);
 extern void func_8029192C_de(TimingWorld *,Frame *);
 static __inline__ s32 hasFadeMode(u8 *mode) { return *mode != 0; }
 void func_80292308_de(TimingWorld *world) {
@@ -94,7 +94,7 @@ void func_80292308_de(TimingWorld *world) {
         if (D_800E28E0 == 0x14) {
             func_8040C09C_de();
         }
-        func_80291BE8_de((s32)world, 0, 0x1E0, 0, 0x168, 0);
+        func_80291BE8_de(world, 0, 0x1E0, 0, 0x168, 0);
         gDPSetScissorFrac(D_80110634++,0,0,0,0x77C,0x59C);
         gDPSetColorImage(D_80110634++,G_IM_FMT_RGBA,G_IM_SIZ_16b,480,D_80146CD8->colorImage);
         gDPSetCycleType(D_80110634++,G_CYC_FILL);

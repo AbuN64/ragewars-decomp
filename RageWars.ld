@@ -612,7 +612,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.text);
         src/RENDER/80291054.CPP.o(.text);
         src/RENDER/80291054_2.CPP.o(.text);
-        src/RENDER/80291054_3.CPP.o(.text);
+        src/RENDER/render_screen_overlay.CPP.o(.text);
         src/RENDER/80291054_4.CPP.o(.text);
         src/RENDER/80291054_5.CPP.o(.text);
         src/RENDER/80291054_6.CPP.o(.text);
@@ -1675,7 +1675,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.text);
         src/RENDER/80291054.CPP.o(.text);
         src/RENDER/80291054_2.CPP.o(.text);
-        src/RENDER/80291054_3.CPP.o(.text);
+        src/RENDER/render_screen_overlay.CPP.o(.text);
         src/RENDER/80291054_4.CPP.o(.text);
         src/RENDER/80291054_5.CPP.o(.text);
         src/RENDER/80291054_6.CPP.o(.text);
@@ -2737,7 +2737,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.text);
         src/RENDER/80291054.CPP.o(.text);
         src/RENDER/80291054_2.CPP.o(.text);
-        src/RENDER/80291054_3.CPP.o(.text);
+        src/RENDER/render_screen_overlay.CPP.o(.text);
         src/RENDER/80291054_4.CPP.o(.text);
         src/RENDER/80291054_5.CPP.o(.text);
         src/RENDER/80291054_6.CPP.o(.text);
@@ -3810,7 +3810,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.text);
         src/RENDER/80291054.CPP.o(.text);
         src/RENDER/80291054_2.CPP.o(.text);
-        src/RENDER/80291054_3.CPP.o(.text);
+        src/RENDER/render_screen_overlay.CPP.o(.text);
         src/RENDER/80291054_4.CPP.o(.text);
         src/RENDER/80291054_5.CPP.o(.text);
         src/RENDER/80291054_6.CPP.o(.text);
@@ -4884,7 +4884,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.text);
         src/RENDER/80291054.CPP.o(.text);
         src/RENDER/80291054_2.CPP.o(.text);
-        src/RENDER/80291054_3.CPP.o(.text);
+        src/RENDER/render_screen_overlay.CPP.o(.text);
         src/RENDER/80291054_4.CPP.o(.text);
         src/RENDER/80291054_5.CPP.o(.text);
         src/RENDER/80291054_6.CPP.o(.text);
@@ -5960,7 +5960,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_2.CPP.o(.bss .sbss COMMON);
-        src/RENDER/80291054_3.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_4.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_5.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_6.CPP.o(.bss .sbss COMMON);
@@ -7001,7 +7001,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_2.CPP.o(.bss .sbss COMMON);
-        src/RENDER/80291054_3.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_4.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_5.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_6.CPP.o(.bss .sbss COMMON);
@@ -8038,7 +8038,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_2.CPP.o(.bss .sbss COMMON);
-        src/RENDER/80291054_3.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_4.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_5.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_6.CPP.o(.bss .sbss COMMON);
@@ -9064,7 +9064,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_2.CPP.o(.bss .sbss COMMON);
-        src/RENDER/80291054_3.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_4.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_5.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_6.CPP.o(.bss .sbss COMMON);
@@ -10071,7 +10071,7 @@ SECTIONS
         src/RENDER/802909E0_14.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_2.CPP.o(.bss .sbss COMMON);
-        src/RENDER/80291054_3.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_4.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_5.CPP.o(.bss .sbss COMMON);
         src/RENDER/80291054_6.CPP.o(.bss .sbss COMMON);
@@ -11456,7 +11456,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.data);
         src/RENDER/800CA4F8_2.CPP.o(.rodata .rdata);
         src/RENDER/800CA518.CPP.o(.rodata .rdata);
-        src/RENDER/800CA51C.CPP.o(.rodata .rdata);
+        src/RENDER/render_screen_overlay.CPP.o(.rodata .rdata);
         src/RENDER/800CA538.CPP.o(.rodata .rdata);
         src/RENDER/800CA55C.CPP.o(.rodata .rdata);
         src/RENDER/800CA564.CPP.o(.rodata .rdata);
@@ -13206,7 +13206,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.data);
         src/RENDER/800CA4F8_2.CPP.o(.rodata .rdata);
         src/RENDER/800CA518.CPP.o(.rodata .rdata);
-        src/RENDER/800CA51C.CPP.o(.rodata .rdata);
+        src/RENDER/render_screen_overlay.CPP.o(.rodata .rdata);
         src/RENDER/800CA538.CPP.o(.rodata .rdata);
         src/RENDER/800CA55C.CPP.o(.rodata .rdata);
         src/RENDER/800CA564.CPP.o(.rodata .rdata);
@@ -14902,7 +14902,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.data);
         src/RENDER/800CA4F8_2.CPP.o(.rodata .rdata);
         src/RENDER/800CA518.CPP.o(.rodata .rdata);
-        src/RENDER/800CA51C.CPP.o(.rodata .rdata);
+        src/RENDER/render_screen_overlay.CPP.o(.rodata .rdata);
         src/RENDER/800CA538.CPP.o(.rodata .rdata);
         src/RENDER/800CA55C.CPP.o(.rodata .rdata);
         src/RENDER/800CA564.CPP.o(.rodata .rdata);
@@ -16604,7 +16604,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.data);
         src/RENDER/800CA4F8.CPP.o(.rodata .rdata);
         src/RENDER/800CA518.CPP.o(.rodata .rdata);
-        src/RENDER/800CA51C.CPP.o(.rodata .rdata);
+        src/RENDER/render_screen_overlay.CPP.o(.rodata .rdata);
         src/RENDER/800CA538.CPP.o(.rodata .rdata);
         src/RENDER/800CA55C.CPP.o(.rodata .rdata);
         src/RENDER/800CA564.CPP.o(.rodata .rdata);
@@ -18355,7 +18355,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.data);
         src/RENDER/800CA510.CPP.o(.rodata .rdata);
         src/RENDER/800CA518.CPP.o(.rodata .rdata);
-        src/RENDER/800CA51C.CPP.o(.rodata .rdata);
+        src/RENDER/render_screen_overlay.CPP.o(.rodata .rdata);
         src/RENDER/800CA538.CPP.o(.rodata .rdata);
         src/RENDER/800CA55C.CPP.o(.rodata .rdata);
         src/RENDER/800CA564.CPP.o(.rodata .rdata);
@@ -20444,7 +20444,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA4F8_2.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA518.CPP.o(.bss .sbss COMMON);
-        src/RENDER/800CA51C.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA538.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA55C.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA564.CPP.o(.bss .sbss COMMON);
@@ -21722,7 +21722,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA4F8_2.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA518.CPP.o(.bss .sbss COMMON);
-        src/RENDER/800CA51C.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA538.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA55C.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA564.CPP.o(.bss .sbss COMMON);
@@ -22956,7 +22956,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA4F8_2.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA518.CPP.o(.bss .sbss COMMON);
-        src/RENDER/800CA51C.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA538.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA55C.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA564.CPP.o(.bss .sbss COMMON);
@@ -24200,7 +24200,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA4F8.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA518.CPP.o(.bss .sbss COMMON);
-        src/RENDER/800CA51C.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA538.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA55C.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA564.CPP.o(.bss .sbss COMMON);
@@ -25563,7 +25563,7 @@ SECTIONS
         src/RENDER/800CA4F8_3.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA510.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA518.CPP.o(.bss .sbss COMMON);
-        src/RENDER/800CA51C.CPP.o(.bss .sbss COMMON);
+        src/RENDER/render_screen_overlay.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA538.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA55C.CPP.o(.bss .sbss COMMON);
         src/RENDER/800CA564.CPP.o(.bss .sbss COMMON);

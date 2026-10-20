@@ -22,7 +22,7 @@ INCLUDE_ASM("span_1000", func_80290BA0_eu);
 #ifdef NON_MATCHING
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
- * draws the backdrop through func_80291FD8_de with half the video height. */
+ * draws the backdrop through Render_DrawTextLines with half the video height. */
 #include "RENDER/80291054_3.H"
 extern s32 D_800D15E0, D_800D297C;
 extern f32 D_800D15E4[4];
@@ -58,7 +58,7 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         func_8026D980_de();
         func_8026DF30_de(handle, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
         func_8026D9D0_de();
-        func_80291FD8_de(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8[0], D_800CA4B8[1]);
+        Render_DrawTextLines(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8[0], D_800CA4B8[1]);
     }
 }
 #endif
@@ -79,11 +79,11 @@ INCLUDE_ASM("span_1000", func_80290A70_us_rev1);
 /* Clears the screen: clears the depth buffer over the whole screen through func_80291BE8_de, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through func_802AAC28_de after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
-extern void func_80291BE8_de(s32 arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
+extern void func_80291BE8_de(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
 extern void func_802A9234_de(s32 alpha);
 extern void func_802AAC28_de(s32 image, s32 frame, s32 x, s32 y, f32 scaleX, f32 scaleY, s32 flags);
-void func_80290C24_de(s32 arg0) {
+void func_80290C24_de(void *arg0) {
     Frame *frame = D_8011BDC0;
     s32 width;
     s32 height;

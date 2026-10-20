@@ -275,7 +275,7 @@ void func_80238050_de(s32 arg0, void *arg1) {
     s32 temp_v1;
     void *temp_s1;
     void *var_s0;
-    void *var_s0_2;
+    Message *var_s0_2;
     void *var_s0_3;
     void *var_s1;
     void *var_v1;
@@ -309,7 +309,7 @@ void func_80238050_de(s32 arg0, void *arg1) {
             temp_fs0_2 = D_800C3400_de;
             do {
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                func_802A8F28_de(*((s32 *) ((u8 *) (var_s0_2) + 36)), (s32) *((f32 *) ((u8 *) (var_s0_2) + 48)), (s32) *((f32 *) ((u8 *) (var_s0_2) + 52)), *((s32 *) ((u8 *) (var_s0_2) + 24)), 1, 1, temp_fs0_2, temp_fs0_2);
+                func_802A8F28_de(var_s0_2->text, (s32)var_s0_2->x, (s32)var_s0_2->y, var_s0_2->timer, 1, 1, temp_fs0_2, temp_fs0_2);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
                 var_s0_2 = *((void **) ((u8 *) (var_s0_2) + 0));
             } while (var_s0_2 != NULL);
@@ -422,7 +422,7 @@ extern const f32 D_800C3434_de, D_800C3438_de, D_800C343C_de, D_800C3440_de;
 extern const f32 D_800C3444_de, D_800C3448_de;
 extern s32 D_800E28D8;
 extern void func_802A84F8_de(void);
-extern void func_802A8F28_de(s32, s32, s32, s32, s32, s32, f32, f32);
+extern void func_802A8F28_de(void *, s32, s32, s32, s32, s32, f32, f32);
 extern float func_802B7130_de(float x);
 
 /* Draws and advances the screen messages of one view, retiring finished ones. */
@@ -475,7 +475,7 @@ void func_80238314_de(Race *race, Racer *racer) {
                 scale = D_800C3430_de;
                 centered = 1;
             }
-            func_802A8F28_de((s32)message->text, (s32)offsetXf, (s32)offsetY, message->timer, centered, centered,
+            func_802A8F28_de(message->text, (s32)offsetXf, (s32)offsetY, message->timer, centered, centered,
                              message->alpha * scaleX * scale, message->alpha * scaleY * scale);
             switch (message->kind) {
             case 2:
