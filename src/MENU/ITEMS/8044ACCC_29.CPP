@@ -67,7 +67,8 @@ void func_8044D1B4_de(char *state) {
 
 extern Node_func_8044D220_de *func_80256190_de(ListRec *);
 
-s32 func_8044D220_de(World *track, s32 kind, s32 key, Object_func_8044D220_de *out, s32 max) {
+s32 func_8044D220_de(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max) {
+    Shared_World *track = world;
     ListRec list;
     Node_func_8044D220_de nodes[64];
     s32 first;
@@ -75,17 +76,17 @@ s32 func_8044D220_de(World *track, s32 kind, s32 key, Object_func_8044D220_de *o
     s32 found;
     s32 *keys;
     s32 *objectTable;
-    Object_func_8044D220_de *objects;
+    Shared_Placed *objects;
     Node_func_8044D220_de *node;
     s32 i;
     s32 match;
     s32 count;
 
     found = 0;
-    count = (keys = func_8028FDB4_de(track->resource, 0))[1];
+    count = (keys = func_8028FDB4_de(track->placedObjectTable, 0))[1];
     keys += 2;
-    objectTable = func_8028FDB4_de(track->resource, 1);
-    objects = (Object_func_8044D220_de *)(objectTable + 2);
+    objectTable = func_8028FDB4_de(track->placedObjectTable, 1);
+    objects = (Shared_Placed *)(objectTable + 2);
     if (func_80265550_de(keys, count, key, &first, &last) != 0) {
         func_80255CA0_de(&list, 4, 8);
         node = nodes;

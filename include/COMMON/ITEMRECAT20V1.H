@@ -3301,7 +3301,11 @@ typedef struct ObjRecAt4V3 ObjRecAt4V3;
 
 struct MenuSettings;
 struct MenuSettings {
-    u8 padding[0x581];
+    u32 flags;
+    s32 optionFlags; /* +4: toggled menu option bits */
+    u8 unknown8[0x1D - 8];
+    u8 local; /* +0x1D: local-player input flag */
+    u8 unknown1E[0x581 - 0x1E];
     u8 language;
 };
 

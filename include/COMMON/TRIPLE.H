@@ -2185,7 +2185,11 @@ extern int D_800D36E4;
 extern u8 *D_800D37D0;
 extern int D_800D3958;
 extern int D_800D3A58;
-extern unsigned char * D_800D3A9C;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern unsigned char *D_800D3A9C[];
+#else
+extern unsigned char *D_800D3A9C;
+#endif
 extern int D_800D3C44;
 extern int D_800D3C48;
 extern int D_800D3C4C;

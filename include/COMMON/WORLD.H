@@ -2,6 +2,7 @@
 #define COMMON_WORLD_H
 #include "COMMON/SCENERECAT10C0.H"
 #include "TYPES.H"
+#include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESULTS.H"
 struct Shared_Pickup;
@@ -42,7 +43,8 @@ typedef struct Shared_World {
     s32 *routeCount; /* +0x7C: PatrolRouteSet */
     void *bitSections; /* 0x80 */
     void *secondaryLevels; /* 0x84 */
-    u8 unknown88[0xC];
+    u8 unknown88[8];
+    void *placedObjectTable; /* 0x90: keys and 20-byte placed track objects */
     struct TableRecAt8 *modelIds; /* 0x94 */
     StridedTable *lookupTable; /* 0x98 */
     struct TableRecAt8 *resourceKindTable; /* +0x9C */
@@ -102,7 +104,7 @@ typedef struct Shared_World {
     s32 frozen;
     f32 selectionTimer; /* 0x1B418 */
     s32 selectionFlags; /* 0x1B41C */
-    u8 unknown1B420[0x14];
+    Shared_Placed selectionSpawn; /* 0x1B420: selected track spawn */
     s32 selectionValues[4]; /* 0x1B434 */
     s32 previewState; /* 0x1B444 */
     s32 previewTimer; /* 0x1B448 */

@@ -77,7 +77,7 @@ extern void func_80278E04_de(struct Shared_Model *, s32, void *);
 
 extern void func_802A65E0_de(void *, void *);
 extern void func_802ACA54_de(void *, void *);
-extern s32 func_8044D220_de(void *, s32, s32, struct Shared_Placed *, s32);
+#include "COMMON/LEVEL_TRACK.H"
 void func_80220ED4_de(SharedPlayer *player)
 {
   CVector3 prev;

@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_TRACK.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -9,7 +10,6 @@
 #include "COMMON/INTEGERSTATEB0.H"
 #include "TYPES.H"
 
-extern s32 func_8044D220_de(s8 *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4);
 
 void func_8044A370_de(void *a);
 
@@ -49,11 +49,11 @@ void func_80293268_de(void *unused) {
 }
 
 void func_80293284_de(GameSession *arg0, s32 arg1) {
-    s32 sp18[6];
+    Shared_Placed spawn;
     s32 var_s0;
 
     var_s0 = arg1;
-    if (func_8044D220_de((s8 *)&D_8011FE88, -1, var_s0, sp18, 1) == 0) {
+    if (func_8044D220_de(&D_8011FE88, -1, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
     D_801462C8.counters.ticks = 0;

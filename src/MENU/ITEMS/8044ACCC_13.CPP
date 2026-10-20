@@ -22,7 +22,6 @@ extern struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *handle, s32 si
 
 extern void *func_8028CF6C_de(void *world, s32 id);
 
-extern s32 func_8044D220_de(World *world, s32 group, s32 set, Object_func_8044D220_de *out, s32 max);
 
 extern s32 func_8044D3E8_de(World *world, void *data, s32 group, void *buf);
 
@@ -71,8 +70,8 @@ extern void func_8044D054_de(char *);
 extern void func_8044D0F0_de(char *);
 
 void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
-    Object_func_8044D220_de spawns[8];
-    Object_func_8044D220_de extra;
+    Shared_Placed spawns[8];
+    Shared_Placed extra;
     s32 n;
     LevelActor *objects;
     s32 mode;
@@ -95,7 +94,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
     LevelActor *obj;
     LevelActor *other;
     SharedPlayer *player;
-    Object_func_8044D220_de *spawn;
+    Shared_Placed *spawn;
     f32 angle;
     f32 best;
     f32 dist;
@@ -165,8 +164,8 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                                 spawn = &spawns[spawnIndex];
                             }
                             rec->resource20 = (u16)spawn->pad12;
-                            func_80274020_de(&spawn->angle);
-                            angle = spawn->angle;
+                            func_80274020_de(&spawn->unkC);
+                            angle = spawn->unkC;
                             if (!(angle > 3.1415927f)) {
                                 if (!(angle < -3.1415927f)) {
                                     if (!(angle > 3.1415927f)) {

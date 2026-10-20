@@ -479,57 +479,69 @@ block_23:
 INCLUDE_ASM("span_1000", func_8028A27C_de);
 #endif
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/COLORENTRY.H"
-typedef struct DraftSceneA698 {
-    u8 pad[0x1B410]; s32 index, state; f32 timer; s32 loaded;
-    u8 data[0x10]; s16 id; u8 pad432[2]; s32 current, pending;
-    u8 pad43C[0x10]; s32 epoch;
-} DraftSceneA698;
+#include "COMMON/WORLD.H"
 extern ColorEntry D_800CD6E4_de[];
 extern f32 D_800D2988;
-extern s32 D_801462CC;
+
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern char D_80141008;
-extern void *D_800D3A9C;
+
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 *D_800D3A9C[];
+#else
+extern u8 *D_800D3A9C;
+#endif
 extern void func_804037D4_de(void), func_804030E0_de(s32);
-extern s32 func_8044D220_de(void *, s32, s32, void *, s32), func_802934F8_de(void);
-extern void func_80286AA8_de(void *, s32, s32), func_80239770_de(void *, void *, void *, f32);
-void func_8028A698_de(DraftSceneA698 *scene)
+extern s32 func_802934F8_de(void);
+extern void func_80286AA8_de(void *, s32, s32);
+extern struct Message *func_80239770_de(void *, void *, u8 *, f32);
+static inline s32 transitionId(Shared_World *scene) {
+    if (scene->selectionFlags != 0) return scene->selectionSpawn.kind;
+    return scene->selectionValues[1];
+}
+void Scene_UpdateSelectionTransition(Shared_World *scene)
 {
-    ColorEntry *entry = &D_800CD6E4_de[scene->index];
+    ColorEntry *entry = &D_800CD6E4_de[scene->selectionState];
     s32 id;
-    if (scene->state == 1) {
-        if (scene->timer == entry->value) {
-            if (scene->pending == 999) { func_804037D4_de(); func_804030E0_de(400); }
-            if (scene->index == 0) scene->state = 0;
-            else scene->state = 2;
-            if (scene->pending < 0) { scene->pending = ~scene->pending; scene->loaded = 0; }
-            else scene->loaded = func_8044D220_de(scene, -1, scene->pending, scene->data, 1);
-            scene->current = scene->pending;
-            if (!scene->loaded) id = scene->pending;
-            else id = scene->id;
-            func_80286AA8_de(scene, id, scene->loaded);
-            if (scene->epoch != D_801462CC && func_802934F8_de()) {
-                func_80239770_de(&D_80145088, &D_80141008, D_800D3A9C, 4.0f);
-                scene->epoch = D_801462CC;
+    MenuSettings *settings;
+    switch (scene->frozen) {
+    case 0:
+        break;
+    case 1:
+        if (scene->selectionTimer == entry->value) {
+            if (scene->selectionValues[1] == 999) { func_804037D4_de(); func_804030E0_de(400); }
+            if (scene->selectionState == 0) scene->frozen = 0;
+            else scene->frozen = 2;
+            if (scene->selectionValues[1] < 0) { scene->selectionValues[1] = ~scene->selectionValues[1]; scene->selectionFlags = 0; }
+            else scene->selectionFlags = func_8044D220_de(scene, -1, scene->selectionValues[1], &scene->selectionSpawn, 1);
+            scene->selectionValues[0] = scene->selectionValues[1];
+            id = transitionId(scene);
+            func_80286AA8_de(scene, id, scene->selectionFlags);
+            settings = &D_80145088.settings;
+            if (scene->previewStart != settings->optionFlags && func_802934F8_de()) {
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+                func_80239770_de(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
+#else
+                func_80239770_de(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
+#endif
+                scene->previewStart = settings->optionFlags;
             }
         } else {
-            scene->timer += D_800D2988;
-            if (entry->value < scene->timer) scene->timer = entry->value;
+            scene->selectionTimer += D_800D2988;
+            if (entry->value < scene->selectionTimer) scene->selectionTimer = entry->value;
         }
-    } else if (scene->state == 2) {
-        if (scene->timer == 0.0f) scene->state = 0;
+        break;
+    case 2:
+        if (scene->selectionTimer == 0.0f) scene->frozen = 0;
         else {
-            scene->timer -= D_800D2988;
-            if (scene->timer < 0.0f) scene->timer = 0.0f;
+            scene->selectionTimer -= D_800D2988;
+            if (scene->selectionTimer < 0.0f) scene->selectionTimer = 0.0f;
         }
+        break;
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_8028A698_de);
-#endif
+
 
 #include "COMMON/WORLD.H"
 #include "COMMON/SHARED_GAMESLOT.H"

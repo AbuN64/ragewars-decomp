@@ -566,7 +566,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.text);
         src/SCENE/80286050_5.CPP.o(.text);
         src/SCENE/80286050_6.CPP.o(.text);
-        src/SCENE/80286050_7.CPP.o(.text);
+        src/SCENE/CODE_80289790.CPP.o(.text);
         src/SCENE/80286050_8.CPP.o(.text);
         src/RENDER_4/8028B64C.CPP.o(.text);
         src/RENDER_4/8028B64C_2.CPP.o(.text);
@@ -1630,7 +1630,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.text);
         src/SCENE/80286050_5.CPP.o(.text);
         src/SCENE/80286050_6.CPP.o(.text);
-        src/SCENE/80286050_7.CPP.o(.text);
+        src/SCENE/CODE_80289790.CPP.o(.text);
         src/SCENE/80286050_8.CPP.o(.text);
         src/RENDER_4/8028B64C.CPP.o(.text);
         src/RENDER_4/8028B64C_2.CPP.o(.text);
@@ -2690,7 +2690,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.text);
         src/SCENE/80286050_5.CPP.o(.text);
         src/SCENE/80286050_6.CPP.o(.text);
-        src/SCENE/80286050_7.CPP.o(.text);
+        src/SCENE/CODE_80289790.CPP.o(.text);
         src/SCENE/80286050_8.CPP.o(.text);
         src/RENDER_4/8028B64C.CPP.o(.text);
         src/RENDER_4/8028B64C_2.CPP.o(.text);
@@ -3766,7 +3766,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.text);
         src/SCENE/80286050_5.CPP.o(.text);
         src/SCENE/80286050_6.CPP.o(.text);
-        src/SCENE/80286050_7.CPP.o(.text);
+        src/SCENE/CODE_80289790.CPP.o(.text);
         src/SCENE/80286050_8.CPP.o(.text);
         src/RENDER_4/8028B64C.CPP.o(.text);
         src/RENDER_4/8028B64C_2.CPP.o(.text);
@@ -4839,7 +4839,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.text);
         src/SCENE/80286050_5.CPP.o(.text);
         src/SCENE/80286050_6.CPP.o(.text);
-        src/SCENE/80286050_7.CPP.o(.text);
+        src/SCENE/CODE_80289790.CPP.o(.text);
         src/SCENE/80286050_8.CPP.o(.text);
         src/RENDER_4/8028B64C.CPP.o(.text);
         src/RENDER_4/8028B64C_2.CPP.o(.text);
@@ -5915,7 +5915,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_5.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_6.CPP.o(.bss .sbss COMMON);
-        src/SCENE/80286050_7.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_8.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C_2.CPP.o(.bss .sbss COMMON);
@@ -6957,7 +6957,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_5.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_6.CPP.o(.bss .sbss COMMON);
-        src/SCENE/80286050_7.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_8.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C_2.CPP.o(.bss .sbss COMMON);
@@ -7992,7 +7992,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_5.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_6.CPP.o(.bss .sbss COMMON);
-        src/SCENE/80286050_7.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_8.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C_2.CPP.o(.bss .sbss COMMON);
@@ -9022,7 +9022,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_5.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_6.CPP.o(.bss .sbss COMMON);
-        src/SCENE/80286050_7.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_8.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C_2.CPP.o(.bss .sbss COMMON);
@@ -10027,7 +10027,7 @@ SECTIONS
         src/SCENE/80286050_4.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_5.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_6.CPP.o(.bss .sbss COMMON);
-        src/SCENE/80286050_7.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/SCENE/80286050_8.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C.CPP.o(.bss .sbss COMMON);
         src/RENDER_4/8028B64C_2.CPP.o(.bss .sbss COMMON);

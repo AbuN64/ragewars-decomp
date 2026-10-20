@@ -1,3 +1,4 @@
+#include "COMMON/LEVEL_TRACK.H"
 #include "include_asm.h"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/INTEGERSTATEB0.H"
@@ -10,7 +11,6 @@
 
 /* Asks func_8044D220_de about D_8011FE88 with a minus-one selector, clears the words of D_801468A0 and puts the object at arg0 into state 0xC with byte 0x26DC1 set to two and the selector, or zero when the lookup failed, stored at 0x26DD8. Adapted from func_80293284_de with the selector fixed at minus one, the word at 0x26DDC cleared before the last word of D_801468A0 instead of set after the selector, and the state 0xC instead of 0xD changed. */
 
-extern s32 func_8044D220_de(s8 *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4);
 
 
 
@@ -18,11 +18,11 @@ extern s32 func_8044D220_de(s8 *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4);
 
 
 void func_8044DDD4_de(GameSession *arg0) {
-    s32 sp18[6];
+    Shared_Placed spawn;
     s32 var_s0;
 
     var_s0 = -1;
-    if (func_8044D220_de((s8 *)&D_8011FE88, var_s0, var_s0, sp18, 1) == 0) {
+    if (func_8044D220_de(&D_8011FE88, var_s0, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
     D_801462C8.counters.ticks = 0;
@@ -51,10 +51,9 @@ struct ResetActorDE7C {
     s32 key;
     s32 counter;
 };
-extern s32 func_8044D220_de(World *, s32, s32, Object_func_8044D220_de *, s32);
 
 void func_8044DE7C_de(struct ResetActorDE7C *actor, s32 key) {
-    Object_func_8044D220_de entry;
+    Shared_Placed entry;
     s32 next;
     if (func_8044D220_de(&D_8011FE88, -1, key, &entry, 1) == 0) {
         key = 0;

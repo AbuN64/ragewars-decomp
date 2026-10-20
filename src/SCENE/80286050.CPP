@@ -40,7 +40,7 @@ void func_80286080_de(void *arg0) {
         D_800CD3F4 = 0;
     }
 
-    func_8028A698_de(state);
+    Scene_UpdateSelectionTransition(state);
     func_8028D64C_de(state);
     state->counter120 = 0;
     state->counter124 = 0;

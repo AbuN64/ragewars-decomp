@@ -12,7 +12,7 @@
 struct func_8044B388_S1;
 typedef struct func_8044B388_S1 func_8044B388_S1;
 
-struct Object_func_8044D220_de;
+struct Shared_Placed;
 
 
 struct func_8044CD58_S2;
@@ -400,7 +400,7 @@ struct func_8044DC48_S1 {
 struct func_8044ADC0_S1;
 typedef struct func_8044ADC0_S1 func_8044ADC0_S1;
 
-struct Object_func_8044D220_de;
+struct Shared_Placed;
 
 
 extern short D_8010F320;

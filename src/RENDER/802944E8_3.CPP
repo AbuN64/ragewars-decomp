@@ -9,7 +9,7 @@
 extern void func_80293B28_de(void *);
 extern s32 D_800E28D0;
 
-extern s32 func_8044D220_de(s8 *, s32, s32, void *, s32);
+
 
 extern s32 D_800CD780;
 
@@ -37,11 +37,11 @@ extern s32 D_801462C8;
 
 void func_802947C8_de(void *arg0, s32 arg1) {
     GameSession *object = arg0;
-    s32 sp18[6];
+    Shared_Placed spawn;
     s32 var_s0;
 
     var_s0 = arg1;
-    if (func_8044D220_de(&D_8011FE88, -1, var_s0, sp18, 1) == 0) {
+    if (func_8044D220_de(&D_8011FE88, -1, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
     object->phase = 2;

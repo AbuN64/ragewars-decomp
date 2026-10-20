@@ -24,7 +24,8 @@ struct Shared_Pickup;
 extern s32 D_800CD3F4;
 
 
-extern void func_8028A698_de(void *);
+struct Shared_World;
+extern void Scene_UpdateSelectionTransition(struct Shared_World *);
 extern void func_8028D64C_de(void *);
 
 struct Node80253610;
