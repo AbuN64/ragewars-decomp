@@ -109,7 +109,7 @@ extern void func_80298368_de(s32 arg0);
 extern void func_8026479C_de(void);
 extern void func_80293790_de(GameSession *session, s32 arg1);
 extern void func_80293848_de(void *session);
-extern void func_80292900_de(void *session);
+extern void Render_UpdateFrameTiming(void *session);
 extern void func_8026480C_de(void);
 
 /* Main game thread: brings up video and the overlays, clears the frame buffers, starts the menu and
@@ -195,7 +195,7 @@ void func_80291404(void *arg0) {
             if (session->mode == 0x14) {
                 D_80142CA8++;
             } else {
-                func_80292900_de(session);
+                Render_UpdateFrameTiming(session);
             }
             break;
         case 4:

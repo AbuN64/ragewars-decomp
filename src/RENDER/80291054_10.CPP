@@ -30,7 +30,7 @@ void func_80293824_de(GameSession *object, int value) {
 typedef void (*Handler8029382C)(void *);
 
 
-extern void func_80292900_de(void *arg0);
+extern void Render_UpdateFrameTiming(void *arg0);
 
 
 
@@ -53,7 +53,7 @@ void func_80293848_de(void *arg0) {
     }
     if (field != 0x14 && D_80142CA8 != 0) {
         D_80142CA8 -= 1;
-        func_80292900_de(arg0);
+        Render_UpdateFrameTiming(arg0);
     }
     D_800CD734 += 1;
 }
