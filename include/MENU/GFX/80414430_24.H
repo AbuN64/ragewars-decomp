@@ -1,6 +1,5 @@
 #ifndef MENU_GFX_80414430_24_H
 #define MENU_GFX_80414430_24_H
-#include "COMMON/TEXTURE.H"
 extern void func_80419430_de(void *source);
 extern void Gfx_ResetImage(void *image);
 struct OwnedImage;
