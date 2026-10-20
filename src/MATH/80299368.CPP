@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "COMMON/CALLBACK.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_INITIALIZE.H"
@@ -22,7 +23,6 @@ void func_80297DBC_de(void);
 void func_80298ECC_de(void);
 void StreamBufferFree(StreamBuffer *);
 void func_80299CC4_de(void);
-f64 func_802A18CC_de(void);
 void Frontend_AcquireArchiveEntry(s32);
 void func_80411E18_de(s32);
 

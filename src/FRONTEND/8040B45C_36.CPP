@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "COMMON/NODERECAT2A8.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -80,8 +81,6 @@ extern s32 *D_80153C14;
 extern char D_800DD0B0;
 
 
-
-extern void func_802A18CC_de();
 
 extern void func_804133E4_de(s32 id);
 

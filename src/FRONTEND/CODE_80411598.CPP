@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"
@@ -54,7 +55,6 @@ extern char D_800DD0B0;
 extern void *func_8025305C_de(s32);
 
 extern void func_8040F6DC_de(void *, void *, s32);
-extern f64 func_802A18CC_de(void);
 extern void func_802A0EB0_de(s32);
 
 /* Loads entry index of the menu archive into memory and counts the use: in cache mode 1 an entry

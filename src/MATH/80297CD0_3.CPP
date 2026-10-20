@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -47,8 +48,6 @@ int func_80299CC4_de();
 
 extern void *func_8025305C_de(s32 size);
 
-
-extern f64 func_802A18CC_de(void);
 
 /* Returns the object loaded for an identifier in the current context: reuses a cached entry whose context and identifier match and whose object still carries that identifier, and otherwise loads it through func_8040EC30_de, counts the load in D_8014D0A0 with its high-water mark in D_8014D09C, and records it while the cache holds fewer than 75 entries. */
 

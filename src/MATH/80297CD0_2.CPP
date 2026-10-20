@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "MATH/SHARED_WIDGETIDE.H"
 #include "COMMON/INTEGERSTATE530.H"
 #include "TYPES.H"
@@ -7,8 +8,6 @@
 #include "COMMON/TRIPLE.H"
 #include "MATH/80297CD0.H"
 #include "FRONTEND/8040B45C_32.H"
-
-extern f64 func_802A18CC_de(void);
 
 static inline s32 menuCategory(s32 event) {
     s32 category;

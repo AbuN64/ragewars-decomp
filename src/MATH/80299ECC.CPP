@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "COMMON/FRUSTUM.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -23,9 +24,6 @@ extern void func_80297EA4_de(s32 arg0);
 
 extern void func_80411E18_de(s16 arg0);
 
-
-
-extern f64 func_802A18CC_de(void);
 
 
 extern void func_8040E67C_de(void *, ArgsCode80296014);

@@ -1,3 +1,4 @@
+#include "MATH/802A2870.H"
 #include "RESMGR/resmgr_stream_callbacks.H"
 #include "include_asm.h"
 #include "COMMON/SLOTRECATCV1.H"
@@ -107,7 +108,6 @@ extern s32 D_800DD0B0;
 
 extern s32 func_8025305C_de(s32 size);
 extern void func_802A0EB0_de(s32 handle);
-extern void func_802A18CC_de(void);
 extern s32 func_802A1934_de(void);
 extern void func_804133E4_de(Texture *texture);
 extern void func_80413404_de(Texture *texture);
