@@ -21,7 +21,6 @@
 
 extern BatchRec D_8014D590[];
 extern struct Shape_typemap_165 D_8014D580;
-extern void func_80418DA0_de(f32 x, f32 y, f32 z, f32 width, f32 height, s32 color);
 extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *widget, DrawArgs *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture

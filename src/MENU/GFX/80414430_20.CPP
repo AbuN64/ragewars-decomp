@@ -150,7 +150,7 @@ void func_804174F4_de(Texture *arg0) {
  }
 }
 
-void func_80417B20_de(f32 arg0, f32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
+void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u32 arg9) {
     s32 sp20;
     s32 sp24;
     s32 sp28;

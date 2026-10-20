@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "MENU/GFX/80414430_21.H"
 
-extern void func_80417B20_de(void *, int, int, int, float, int, int, float, float, int);
+#include "COMMON/RECTANGLE_DRAW.H"
 
 extern Gfx *D_80110634;
 
@@ -16,7 +16,7 @@ extern s32 D_800DF274;
 
 extern s32 D_800DF280;
 
-extern s32 D_80153F60;
+
 
 extern void func_80417034_de(s32 mode);
 
@@ -24,7 +24,7 @@ extern void func_80416CF4_de(s32 mode);
 
 extern void func_80416ECC_de(s32 mode);
 
-extern void func_80415C90_de(f32 x, f32 y, f32 z, f32 a3, s32 a4, s32 a5, s32 a6, s32 a7);
+
 
 static inline void sync(void) {
     Gfx *cmd;
@@ -55,8 +55,8 @@ static inline void beginFrame(void) {
     gDPPipeSync(g);
 }
 
-void func_80418DA0_de(void *a, int b, int c, int d, float e, int f) {
-    func_80417B20_de(a, b, c, d, e, 0, 0, D_800DD410_de, D_800DD410_de, f);
+void func_80418DA0_de(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
+    func_80417B20_de(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
 }
 
 void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
@@ -74,7 +74,7 @@ void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s
         sync();
         emit(0xD7000000, 0x80008000);
     }
-    if (D_80153F60 == 0) {
+    if (D_80153F60.x == 0) {
         func_80416ECC_de(9);
         func_80415C90_de(x, y, z, a4, a5, a6, a7, a8);
     }
