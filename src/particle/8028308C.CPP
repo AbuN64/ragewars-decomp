@@ -227,7 +227,7 @@ void func_80283448_de(void *object) {
     func_80284434_de(object);
 }
 
-extern s32 func_802800C0_de(void *, void *, void *, s32, s32, s32, CVector3, CQuatern, Triple, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 extern void func_80271818_de(CQuatern *, CVector3 *);
 extern Triple D_801002A8;
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
@@ -241,11 +241,11 @@ void func_80283480_de(Obj_func_80283920_de *arg0, s32 arg1) {
         pos = arg0->rotation;
     }
     func_80271818_de(&q, &pos);
-    func_802800C0_de(&D_8011D8D0, arg0,
-                  arg0->effectResource,
-                  arg0->effectIndex,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                  (struct EffectActor *)arg0->effectResource,
+                  (s32 *)arg0->effectIndex,
                   arg0->effectCount, arg1,
-                  pos, q, D_80100290.v, 0, D_80100290.w,
+                  pos, q, *(CVector3 *)&D_80100290.v, 0, D_80100290.w,
                   (arg0->unk5C & 0x200006) | 1);
 }
 
@@ -259,11 +259,11 @@ void func_802835A8_de(Obj_func_80283920_de *arg0, s32 arg1) {
         position = arg0->rotation;
     }
     func_80271818_de(&rotation, &position);
-    func_802800C0_de(&D_8011D8D0, arg0,
-                  arg0->effectResource,
-                  arg0->effectIndex,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                  (struct EffectActor *)arg0->effectResource,
+                  (s32 *)arg0->effectIndex,
                   arg0->effectCount, arg1,
-                  position, rotation, D_801002A8, 0, -3,
+                  position, rotation, *(CVector3 *)&D_801002A8, 0, -3,
                   (arg0->unk5C & 0x200006) | 1);
 }
 
@@ -277,11 +277,11 @@ void func_802836D0_de(Obj_func_80283920_de *arg0, s32 arg1) {
         position = arg0->rotation;
     }
     func_80271818_de(&rotation, &position);
-    func_802800C0_de(&D_8011D8D0, arg0,
-                  arg0->effectResource,
-                  arg0->effectIndex,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                  (struct EffectActor *)arg0->effectResource,
+                  (s32 *)arg0->effectIndex,
                   arg0->effectCount, arg1,
-                  position, rotation, D_801002A8, 0, -2,
+                  position, rotation, *(CVector3 *)&D_801002A8, 0, -2,
                   (arg0->unk5C & 0x200006) | 1);
 }
 
@@ -295,11 +295,11 @@ void func_802837F8_de(Obj_func_80283920_de *arg0, s32 arg1) {
         position = arg0->rotation;
     }
     func_80271818_de(&rotation, &position);
-    func_802800C0_de(&D_8011D8D0, arg0,
-                  arg0->effectResource,
-                  arg0->effectIndex,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                  (struct EffectActor *)arg0->effectResource,
+                  (s32 *)arg0->effectIndex,
                   arg0->effectCount, arg1,
-                  position, rotation, D_801002B8, 0, -5,
+                  position, rotation, *(CVector3 *)&D_801002B8, 0, -5,
                   (arg0->unk5C & 0x200006) | 1);
 }
 

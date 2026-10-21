@@ -48,8 +48,7 @@ extern s32 func_80262CE0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
 
 extern char D_8011D8D0;
 
-extern s32 func_802800C0_de(void *, void *, void *, void *, s32, s32,
-                         CVector3, CQuatern, Triple, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 
 extern char D_80145040;
 
@@ -125,11 +124,11 @@ void func_802064A0_de(void *arg0, ActorMotionState *arg1, Triple arg2,
                    s32 unused5, s32 arg6) {
     s32 result;
 
-    result = func_802800C0_de(&D_8011D8D0, arg0, arg0,
-                           &arg1->unk124, 0, arg6,
+    result = func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0, (struct EffectActor *)arg0,
+                           (s32 *)&arg1->unk124, 0, arg6,
                            ((LevelActor *)arg0)->position1,
                            ((LevelActor *)arg0)->rotation,
-                           arg2, 0, -1, 0);
+                           *(CVector3 *)&arg2, 0, -1, 0);
     arg1->unk128 -= result;
 }
 

@@ -82,7 +82,7 @@ extern char D_801041F0;
 extern void func_80271818_de(CQuatern *, CVector3 *);
 extern void func_80273760_de(f32 *matrix, s32 angle);
 extern void func_80271F34_de(CVector3 *out, CVector3 *a, CVector3 *b);
-extern s32 func_802800C0_de(void *, Actor_func_80279B40_de *, void *, s32, s32, s32, CVector3, CQuatern, CVector3, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 
 static inline f32 offset_x(Actor_func_80279B40_de *actor) {
     if (actor->def->unk14 != 0) {
@@ -135,6 +135,6 @@ void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 fl
         point = moved;
         D_80103FCC = &D_801041F0;
     }
-    func_802800C0_de(&D_8011D8D0, actor, actor->owner, actor->unk130, actor->unk134, model,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->unk130, actor->unk134, model,
                   direction, rotation, point, 0, arg2, flags | (actor->flags & 0x200006));
 }

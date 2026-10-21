@@ -84,8 +84,7 @@ extern s32 func_80276088_de(s32);
 extern void func_80265E10_de(void *, void *, u16, s32, CVector3, struct IntPair);
 extern void func_80271818_de(struct Shape_typemap_165 *, CVector3 *);
 
-extern s32 func_802800C0_de(void *, void *, void *, s32, s32, s32,
-                         CVector3, struct Shape_typemap_165, CVector3, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 
@@ -440,11 +439,11 @@ void func_8027C274_de(Shared_Particle *arg0) {
                 position = arg0->inst.velocity;
             }
             func_80271818_de(&rotation, &position);
-            func_802800C0_de(&D_8011D8D0, arg0,
-                          arg0->owner,
-                          arg0->ownerId,
+            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                          (struct EffectActor *)arg0->owner,
+                          (s32 *)arg0->ownerId,
                           (s32)arg0->target, temp_s2,
-                          position, rotation, D_80100290, 0,
+                          position, *(CQuatern *)&rotation, D_80100290, 0,
                           D_8010029C,
                           (arg0->flags & 0x200006) | 1);
         }
@@ -505,11 +504,11 @@ void func_8027C4F0_de(Shared_Particle *arg0) {
             position = arg0->inst.velocity;
         }
         func_80271818_de(&rotation, &position);
-        func_802800C0_de(&D_8011D8D0, arg0,
-                      arg0->owner,
-                      arg0->ownerId,
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                      (struct EffectActor *)arg0->owner,
+                      (s32 *)arg0->ownerId,
                       (s32)arg0->target, temp_s2,
-                      position, rotation, D_801002B8, 0,
+                      position, *(CQuatern *)&rotation, D_801002B8, 0,
                       -5,
                       (arg0->flags & 0x200006) | 1);
     }
@@ -562,11 +561,11 @@ void func_8027C758_de(Shared_Particle *arg0) {
             position = arg0->inst.velocity;
         }
         func_80271818_de(&rotation, &position);
-        func_802800C0_de(&D_8011D8D0, arg0,
-                      arg0->owner,
-                      arg0->ownerId,
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                      (struct EffectActor *)arg0->owner,
+                      (s32 *)arg0->ownerId,
                       (s32)arg0->target, temp_s2,
-                      position, rotation, D_801002A8, 0,
+                      position, *(CQuatern *)&rotation, D_801002A8, 0,
                       -3,
                       (arg0->flags & 0x200006) | 1);
     }
@@ -617,11 +616,11 @@ void func_8027C9CC_de(Shared_Particle *arg0) {
             position = arg0->inst.velocity;
         }
         func_80271818_de(&rotation, &position);
-        func_802800C0_de(&D_8011D8D0, arg0,
-                      arg0->owner,
-                      arg0->ownerId,
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
+                      (struct EffectActor *)arg0->owner,
+                      (s32 *)arg0->ownerId,
                       (s32)arg0->target, temp_s2,
-                      position, rotation, D_801002A8, 0,
+                      position, *(CQuatern *)&rotation, D_801002A8, 0,
                       -2,
                       (arg0->flags & 0x200006) | 1);
     }

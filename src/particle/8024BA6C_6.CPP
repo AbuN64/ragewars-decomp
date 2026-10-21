@@ -12,10 +12,7 @@ extern char D_8011D8D0;
 
 extern f32 Particle_GetActorHeight(Actor_func_8024A1D0_de *actor);
 
-extern void func_802800C0_de(void *system, Actor_func_8024A1D0_de *source, Actor_func_8024A1D0_de *owner,
-                          s32 arg3, s32 arg4, s32 arg5, CVector3 position,
-                          CQuatern rotation, CVector3 position2, s32 arg15,
-                          s32 arg16, s32 arg17);
+#include "particle/8027A0F4_8.H"
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
@@ -66,7 +63,7 @@ void func_8024C454_de(Actor_func_8024A1D0_de *actor, LookupRecAtC *lookup) {
             (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += Particle_GetActorHeight(actor) * D_800C3B60_de;
-            func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0x94,
+            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {

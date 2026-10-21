@@ -13,8 +13,7 @@ extern char D_8011D8D0;
 extern void func_80271F9C_de(void *, void *, f32);
 extern void func_8024E79C_de(void *, Triple, Triple *, s32 *, s32, s32);
 extern void func_80271818_de(struct Shape_typemap_165 *, Triple *);
-extern s32 func_802800C0_de(void *, void *, void *, s32, s32, s32,
-    Triple, struct Shape_typemap_165, Triple, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 extern void func_80265E10_de(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
 void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *arg3, AttachmentTable *arg4) {
@@ -84,9 +83,9 @@ void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, fu
                             D_800C4960_eu
 #endif
                         ) {
-                            func_802800C0_de(&D_8011D8D0, arg3, arg3, 0, 0, 0xE6, zero, rotation, mapped, 0, -1, temp_s0 | 1);
+                            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg3, (struct EffectActor *)arg3, 0, 0, 0xE6, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, temp_s0 | 1);
                         }
-                        func_802800C0_de(&D_8011D8D0, arg3, arg3, 0, 0, 0x8A, zero, rotation, mapped, 0, -1, temp_s0 | 1);
+                        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg3, (struct EffectActor *)arg3, 0, 0, 0x8A, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&mapped, 0, -1, temp_s0 | 1);
                     }
                     break;
                 case 0x80:

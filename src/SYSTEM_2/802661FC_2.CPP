@@ -65,7 +65,7 @@ extern void func_80271818_de(struct Shape_typemap_165 *, CVector3 *);
 
 extern void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32);
 
-extern void func_802800C0_de(void *, void *, void *, s32, s32, s32, Triple, struct Shape_typemap_165, Triple, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 
 extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
 
@@ -179,7 +179,7 @@ void func_80267958_de(SharedPlayerCode802661FC *target, Actor_func_80267958_de *
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0xE9, zero, rotation, point, 0, -1, kind == 5 ? 3 : 1);
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0xE9, *(CVector3 *)&zero, *(CQuatern *)&rotation, *(CVector3 *)&point, 0, -1, kind == 5 ? 3 : 1);
     point.x = 0;
     point.y = 0;
     point.z = 0;

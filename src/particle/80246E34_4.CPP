@@ -35,7 +35,7 @@ extern s32 func_8026E340_de(void);
 
 extern EffectRecAt154 *func_802830B8_de(void *system);
 
-extern void func_802800C0_de(void *system, void *source, void *owner, s32 arg3, s32 arg4, s32 arg5, CVector3 position, CQuatern rotation, CVector3 position2, s32 arg15, s32 arg16, s32 arg17);
+#include "particle/8027A0F4_8.H"
 extern f32 func_8024D398_de(void *actor);
 extern f32 Particle_GetActorHeight(void *actor);
 static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lookup) {
@@ -50,7 +50,7 @@ static inline void func_8024A1C0_spawn(Actor_func_8024A1D0_de *actor, Lookup *lo
             (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
             position.y += Particle_GetActorHeight(actor) * D_800C8B38[1];
-            func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0x94,
+            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                           actor->position1, actor->rotation, position, 0, -1, 0);
             effect = func_802830B8_de(&D_8011D8D0);
             if (effect != 0) {
@@ -67,7 +67,7 @@ static inline void spawn(LevelActor *actor) {
 
     position = actor->position0;
     position.y += Particle_GetActorHeight(actor) * *(&D_800C3A50_de + 1);
-    func_802800C0_de(&D_8011D8D0, actor, actor, 0, 0, 0x94,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, 0, 0x94,
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 

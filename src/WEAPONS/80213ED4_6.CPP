@@ -15,10 +15,7 @@ extern void func_8024E79C_de(void *actor, Triple input, Triple *output,
 extern void func_8024796C_de(CQuatern *result, CActor_t *actor);
 extern s32 func_8024BE80_de(CActor_t *actor);
 extern void func_8024F478_de(CQuatern *result, CActor_t *actor);
-extern void func_802800C0_de(void *system, CActor_t *source, CActor_t *owner,
-                          s32 arg3, s32 eventValue, s32 arg1,
-                          CVector3 position, CQuatern rotation,
-                          Triple input, s32 arg16, s32 arg17, s32 mode);
+#include "particle/8027A0F4_8.H"
 
 void func_80216288_de(void *actor, s32 arg1, Triple input, s32 unused0) {
     Triple copiedInput;
@@ -59,8 +56,8 @@ void func_80216288_de(void *actor, s32 arg1, Triple input, s32 unused0) {
         break;
     }
 
-    func_802800C0_de(&D_8011D8D0, actor, actor, 0, eventValue, arg1,
-                  position, rotation, copiedInput, 0, -1, mode);
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, eventValue, arg1,
+                  position, rotation, *(CVector3 *)&copiedInput, 0, -1, mode);
 
     if ((((CActor_t *)actor)->type == 1) && (typedActor->objectId == 0x40C)) {
         value = typedActor->eventCount - 1;
