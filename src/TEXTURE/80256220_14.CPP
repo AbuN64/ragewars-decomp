@@ -386,7 +386,9 @@ s32 func_802577F4_de(SoundContext *context, s32 id) {
     index = i;
     if (index == -1) return -1;
     if (index == 16) {
-        func_80259784_de(context->sequence, 16);
+        /* the original leaves the owner and position arguments unset (stale a2/a3); pass an explicit empty owner and origin */
+        static CVector3 origin;
+        func_80259784_de(context->sequence, 16, 0, &origin);
         return -1;
     }
     slot = &context->manager.slots[index];
