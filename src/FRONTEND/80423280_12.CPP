@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/RECRECAT4.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
@@ -53,7 +54,6 @@ extern void func_8042DEA0_de();
 
 extern Game_func_8042D060_de D_8014561C;
 
-extern World D_80145040;
 
 
 extern s32 func_80228070_de(World *world);
@@ -229,17 +229,17 @@ s32 func_8042D060_de(void) {
     if (settings->timeSetting > 0 && D_8014561C.rules.timeLeft == 0.0f) {
         return MATCH_END_TIME_UP;
     }
-    if (func_80228070_de(&D_80145040) != 0) {
+    if (func_80228070_de((World *)&D_80145040) != 0) {
         return MATCH_END_SCORE_LIMIT;
     }
     switch (D_8014DD98) {
     case 0:
-        if (func_802282EC_de(&D_80145040) != 0) {
+        if (func_802282EC_de((World *)&D_80145040) != 0) {
             return MATCH_END_POINT_TARGET;
         }
         break;
     case 1:
-        if (func_802281F0_de(&D_80145040) != 0) {
+        if (func_802281F0_de((World *)&D_80145040) != 0) {
             return MATCH_END_TAG_LIMIT;
         }
         break;

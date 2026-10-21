@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT26DD8.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/WORLD.H"
@@ -19,7 +20,6 @@ extern s32 D_80142898;
 
 extern s32 D_800CD784_de;
 
-extern s8 D_80145040;
 
 extern int func_8022A414_de(void *arg0);
 

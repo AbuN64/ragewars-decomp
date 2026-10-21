@@ -1,4 +1,5 @@
 #include "COMMON/ACTORRESOURCEHEADER.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -24,7 +25,6 @@ extern char D_800CA8C4_de[];
 
 extern void *D_800CB440_de[];
 
-extern ObjectList D_80145040;
 
 /* Applies a blast from a source to a body when an owner is given: the strength comes from the falloff table
  * D_800D06C0 indexed by the source's remaining charges, times 0.5 and 0.3 and the kind (-2 for kind 5);
@@ -110,7 +110,7 @@ void *func_8024C664_de(char *arg0)
         return 0;
     }
     if (type == 11) {
-        list = &D_80145040;
+        list = (ObjectList *)&D_80145040;
         count = list->count;
         i = 0;
         if (count > 0) {

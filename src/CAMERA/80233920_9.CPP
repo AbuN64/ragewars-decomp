@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/CHANNEL.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "abi.h"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/VIEWFLAGS.H"
@@ -22,7 +23,6 @@ extern s32 D_800D297C;
 extern s32 D_80146894;
 extern f32 D_800FF224_de;
 extern f32 D_800D2988;
-extern World_func_80236F1C_de D_80145040;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
 extern void func_80253BBC_de(s32, s32);

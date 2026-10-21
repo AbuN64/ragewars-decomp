@@ -1,4 +1,5 @@
 #include "COMMON/ACTORRECAT260.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/RECORDRECATCV1.H"
@@ -13,7 +14,6 @@ s32 func_8022A5A0_de(s32 *, s32);
  /* extern */
 
  /* extern */
-extern s32 D_80145040;
 
 extern s32 D_801468F4[];
 
@@ -25,7 +25,6 @@ extern s32 D_8015375C[];
 s32 func_8022A5A0_de(int *, s32);
 
                                /* extern */
-extern int D_80145040;
 
  /* const */
 extern void func_80264770_de(s32 kind);
@@ -62,7 +61,7 @@ void func_80443CD4_de(ArgRecAt1C *arg0) {
     }
     temp_a1 = arg0->unk1C;
     if (temp_a1 != 0) {
-        var_s0 = func_8022A5A0_de(&D_80145040, temp_a1);
+        var_s0 = func_8022A5A0_de((s32 *)&D_80145040, temp_a1);
     }
     func_80264770_de(var_s0);
     func_80404E28_de(var_s0);
@@ -85,7 +84,7 @@ void func_80443DD0_de(ArgRecAt1C *arg0) {
     D_800E28C0[0] = 0;
     var_v0 = 0;
     if (temp_a1 != 0) {
-        var_v0 = func_8022A5A0_de(&D_80145040, temp_a1);
+        var_v0 = func_8022A5A0_de((s32 *)&D_80145040, temp_a1);
     }
     func_80264770_de(var_v0);
     temp_v1 = arg0->unkC;

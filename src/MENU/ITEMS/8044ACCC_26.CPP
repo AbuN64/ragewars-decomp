@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/S1_2.H"
 #include "COMMON/OBJB.H"
@@ -51,7 +52,6 @@ void func_8025CBEC_de(void *);
 s32 * func_8025CC6C_de(void);
 void func_8028D59C_de(void *);
 void func_8044A07C_de(void *);
-extern s32 D_80145040;
 /* Shut down the subsystem, free its owned resources, and unlink its list. */
 void func_8044BF90_de(func_8044CBE0_S1 *arg0) {
     s32 temp_v0;

@@ -1,6 +1,7 @@
 #include "COMMON/SELF.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -54,7 +55,6 @@ extern void *func_8022A83C_de(char *);
 
 extern void func_80209948_de(s32 *, s32);
 
-extern char D_80145040;
 
 void func_802127F4_de(void *arg0) {
     void *temp_s0;
@@ -217,7 +217,7 @@ void func_80212C04_de(void *arg0) {
     ObjRecAt1454V1 *actor = object->unk1D8;
 
     rec = actor->unk1454;
-    v0 = func_8022A83C_de(&D_80145040);
+    v0 = func_8022A83C_de((char *)&D_80145040);
     if (v0 == (void *) *rec) {
         func_80209874_de(rec, 10);
         return;

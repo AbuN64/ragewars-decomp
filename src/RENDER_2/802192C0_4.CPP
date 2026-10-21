@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/WORLD.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -67,7 +68,6 @@ extern s32 D_8011D8D0;
 
 
 extern s32 D_8013B364;
-extern struct Shared_GlobalPlayers D_80145040;
 extern struct Shared_GlobalRuntimeState D_80145060;
 
 
@@ -168,7 +168,7 @@ void func_8021B468_de(struct Shared_ActorView *arg0, void *arg1, s32 arg2, s32 a
         && gameplayTransitionEnabled(arg0->controls->germanActive)
         && (var_s3 = 0, (((struct Shared_ActorView *)arg0)->controls->mode == 0xE))) {
         flow->count = (s32) (flow->count + 1);
-        playersGlobal = &D_80145040;
+        playersGlobal = (struct Shared_GlobalPlayers *)&D_80145040;
         if (playersGlobal->count > 0) {
             settingsBase = (s8 *)&D_80146398;
             var_s1 = (struct Shared_PlayerSettingsRecord *)settingsBase;

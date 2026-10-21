@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/PAKQUEUESTATE.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/WORLD.H"
@@ -57,7 +58,6 @@ extern void *func_8022A414_de(void *);
 
 
 
-extern ActorList D_80145040;
 
 extern s32 func_8028B350_de(Shared_World *table, s32 id);
 
@@ -246,9 +246,9 @@ void func_80264B8C_de(void) {
     Snapshot *snapshot;
     ActorList *list;
 
-    list = &D_80145040;
+    list = (ActorList *)&D_80145040;
     snapshot = &D_8010BC40;
-    for (i = 0; i < list->count; i++, list = &D_80145040) {
+    for (i = 0; i < list->count; i++, list = (ActorList *)&D_80145040) {
         actor = &list->actors[i];
         actor->block = snapshot->blocks[i];
         if (snapshot->mode == 1) {
@@ -277,7 +277,7 @@ void func_80264CE0_de(void) {
     Snapshot *snapshot;
     ActorList *list;
 
-    list = &D_80145040;
+    list = (ActorList *)&D_80145040;
     snapshot = &D_8010BC40;
     for (i = 0; i < list->count; i++) {
         actor = &list->actors[i];
@@ -285,7 +285,7 @@ void func_80264CE0_de(void) {
         snapshot->positions[i] = actor->position;
         snapshot->values[i] = actor->field6C;
         snapshot->handles[i] = func_8028B350_de(&D_8011FE88, actor->id);
-        list = &D_80145040;
+        list = (ActorList *)&D_80145040;
     }
 }
 

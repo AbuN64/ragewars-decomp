@@ -2,6 +2,7 @@
 
 #include "stddef.h"
 #include "TYPES.H"
+#include "COMMON/SHARED_WORLDFUNC.H"
 
 typedef struct Team {
     char pad0[0x92];
@@ -36,7 +37,6 @@ typedef struct Chaser {
     s32 dist[10];
 } Chaser;
 
-extern World D_80145040;
 Racer *func_8022A5F4_de(World *arg0, u32 arg1);
 f32 func_802726F8_de(void *arg0, void *arg1);
 s32 func_8021035C_de(Chaser *arg0, s32 arg1);
@@ -55,7 +55,7 @@ s32 func_80210248_eu(Chaser *arg0) {
     }
     count = 0;
     i = count;
-    world = &D_80145040;
+    world = (World *)&D_80145040;
     rules = &world->rules;
     for (; i < 8; i++) {
         other = func_8022A5F4_de(world, i);
