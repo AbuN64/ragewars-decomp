@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "SDK/AUDIO/802BD1A8_19.H"
 #include "RENDER_2/8025DE50_5.H"
+#include "COMMON/CHANNEL.H"
 
 /** Start the actor effect and attach optional source-specific resources; the European cartridges pick
     each resource from a per-language table. */
@@ -41,8 +42,6 @@ extern void *D_800D31C0;
 #endif
 
 extern f32 D_800C2D1C_de;
-
-extern void func_80237E80_de(void *arg0, void *arg1, void *arg2);
 
 
 

@@ -5,6 +5,7 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
+#include "COMMON/CHANNEL.H"
 extern s32 func_802227F4_de(void *, void *, s32);
 
 extern f32 D_800D2988;
@@ -16,8 +17,6 @@ extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
-
-extern void func_80237E80_de(void *, void *, void *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
    func_80223E34_de, turns the view through func_802231D4_de with the crouching tuning D_800CE7FC while the

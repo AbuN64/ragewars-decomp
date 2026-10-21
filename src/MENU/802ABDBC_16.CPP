@@ -8,14 +8,13 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "TYPES.H"
 #include "MENU/802ABDBC_16.H"
+#include "COMMON/CHANNEL.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif
 
 extern void func_80222BE8_de(void *, s16, s16);
-
-extern void func_80237E80_de(void *, void *, void *);
 
 
 

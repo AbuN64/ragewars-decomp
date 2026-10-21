@@ -19,7 +19,7 @@ void func_80267E48_de(s32 arg0, s32 arg1, s32 arg2, Triple t, Vec4s v) {
 
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
-extern void func_80237E80_de(void *, void *, s32);
+#include "COMMON/CHANNEL.H"
 extern void func_8025E11C_de(s32);
 
 void func_80267ED8_de(void *owner, LevelActor *actor, s32 event, Triple position, ResourceManagerState params) {

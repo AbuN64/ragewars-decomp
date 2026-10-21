@@ -6,6 +6,7 @@ struct Channel;
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/AIPROFILE.H"
 struct ScreenMessageOwner;
 extern void func_8023A1F4_de(struct ScreenMessageOwner *arg0);
 
@@ -345,7 +346,7 @@ struct ScreenMessagePool {
 };
 
 struct Message;
-extern struct Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
+extern Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
 
 #endif
 #endif

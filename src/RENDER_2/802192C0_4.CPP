@@ -508,6 +508,7 @@ INCLUDE_ASM("span_1000", func_8021BFC4_de);
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
+#include "COMMON/CHANNEL.H"
 
 
 extern s32 func_8022C460_de(void *arg0);

@@ -91,13 +91,13 @@ typedef struct TogglePlayer { u8 pad0[0x5dc]; void *owner; u8 pad5e0[0xc1c]; f32
 extern f32 D_800C2D0C_de;
 extern void *D_800D311C,*D_800D3120,*D_800D3124;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/CHANNEL.H"
 extern void func_80273198_de(f32 *,CVector3 *);
 extern void func_80271F9C_de(CVector3 *,CVector3 *,f32);
 extern void func_80271F34_de(CVector3 *,CVector3 *,CVector3 *);
 extern void func_80273448_de(f32 *,f32,f32,f32);
 extern void func_80273D6C_de(f32 *);
 extern void func_8027027C_de(f32 *,void *);
-extern void func_80237E80_de(void *,void *,void *);
 void func_8022B1B8_de(TogglePlayer *player,s32 mode) {
     f32 matrix[16];
     CVector3 position;

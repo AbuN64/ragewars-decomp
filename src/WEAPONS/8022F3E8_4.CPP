@@ -9,14 +9,13 @@
 #include "TYPES.H"
 extern void *D_800D052C[];
 #include "WEAPONS/80213ED4.H"
+#include "COMMON/CHANNEL.H"
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern s32 D_800CD730;
 
 
 
-
-extern void func_80237E80_de(void *, void *, void *);
 
 void func_8022FDAC_de(void *arg0, void *arg1) {
     s16 index;

@@ -168,7 +168,6 @@ block_4:
 extern u8 D_80152789;
 #endif
 extern void func_80222BE8_de(void *, s16, s16);
-extern void func_80237E80_de(void *, void *, void *);
 extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -212,7 +211,6 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
 extern u8 D_80152789;
 #endif
 extern s32 func_8022AC00_de(void *arg0);
-extern void func_80237E80_de(void *, void *, void *);
 extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -269,7 +267,6 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 #endif
-extern void func_80237E80_de(void *, void *, void *);
 extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 
 
@@ -328,10 +325,10 @@ extern f32 D_800C62DC;
 extern void D_002AD1B4(void);
 extern void D_002AD264(void);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/CHANNEL.H"
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
-extern void func_80237E80_de(void *, void *, void *);
 extern s32 func_8025DE54_de(s16 arg0, s32 arg1, s32 arg2, s32 arg3,
                          s32 arg4, s32 arg5);
 

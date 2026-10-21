@@ -238,7 +238,6 @@ struct Shared_FullPlayerMenuGlobals {
  * 0x800CB440 = 255.0 (float, D_800C62B0 in this cartridge's tables)
  */
 void func_8022F3F8_de(void *, int);
-void * func_80237E80_de(void *, void *, u8 *);
 
 
 s32 func_802A01E8_de(void);
@@ -708,8 +707,8 @@ typedef struct DraftPlayerAC66C {
 typedef struct DraftPickupAC66C { u8 **text; s16 pad4, sound, event, padA, index, arg1, arg2; } DraftPickupAC66C;
 extern s32 D_801468F4, D_800CE474[2];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/CHANNEL.H"
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
-extern void *func_80237E80_de(void *, void *, u8 *);
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_80222BE8_de(void *, s32, s32);
 s32 func_802AC66C_de(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)

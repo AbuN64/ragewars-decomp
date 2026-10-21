@@ -19,13 +19,13 @@ INCLUDE_ASM("span_1000", func_80294CA0_us_rev1);
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/TEXTURE_REQUEST.H"
+#include "COMMON/CHANNEL.H"
 
 struct MenuGlobalRecAt21B8;
 
 struct SelectionRecAt8;
 
 struct Message;
-extern struct Message *func_80237E80_de(void *owner, void *pool, u8 *text);
 extern struct MenuGlobalRecAt21B8 D_8014AEB0;
 extern s32 D_8014AEC0;
 

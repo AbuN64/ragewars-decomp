@@ -186,9 +186,9 @@ extern u8 D_801462E5;
 extern s32 D_801468F4;
 extern DraftWeaponAB97C *D_800D052C[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/CHANNEL.H"
 extern s32 func_80222BE8_de(void *, s32, s32), func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
-extern void *func_80237E80_de(void *, void *, u8 *);
 s32 func_802AB97C_de(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
 {
     s32 changed = 0;

@@ -36,12 +36,12 @@ extern s32 D_800DCE84[];
 extern s32 D_800DCE90[];
 #endif
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/CHANNEL.H"
 extern s32 D_8014561C;
 extern void func_80218F84_de(TeamMenu *);
 extern void func_80219124_de(TeamMenu *, s32, SharedPlayer_func_80218B84_de *);
 extern s32 func_80218988_de(SharedPlayer_func_80218B84_de *);
 extern s32 func_8021917C_de(TeamMenu *, SharedPlayer_func_80218B84_de *);
-extern void func_80237E80_de(char *, void *, s32);
 
 void func_80218B84_de(TeamMenu *menu, SharedPlayer_func_80218B84_de *player) {
     s32 held;

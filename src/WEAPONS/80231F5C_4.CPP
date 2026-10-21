@@ -10,10 +10,9 @@
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern s32 D_800CD730;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/CHANNEL.H"
 
 
-
-extern void func_80237E80_de(void *, void *, void *);
 
 
 
