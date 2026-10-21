@@ -10,8 +10,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "RENDER/80206258_2.H"
-
-extern void func_802065C0_de(void *a, ActorMotionState *b, unsigned short c);
+#include "RENDER/80206258.H"
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 

@@ -7,4 +7,5 @@ extern void func_80206604_de(struct LevelActor *arg0, struct ActorMotionState *a
 extern void func_80206764_de(void);
 extern s32 func_8020655C_de(s32 arg0);
 extern void func_80206258_de(struct Trigger *arg0);
+extern void func_802065C0_de(void *a, struct ActorMotionState *b, s32 c);
 #endif
