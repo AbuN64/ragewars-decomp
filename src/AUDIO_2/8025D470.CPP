@@ -7,10 +7,11 @@
 #include "COMMON/EXTERNS.H"
 #include "sdk/libgultra_inferred/802B3B80_6.H"
 #include "sdk/libgultra_inferred/802B3AFC.H"
+#include "sdk/libgultra_inferred/802B3B80_7.H"
 #include "RENDER_4/8028FD2C_6.H"
 extern s32 func_802654E8_de(s32,s32,s32);
 extern f32 func_802B2350(u16);
-extern void func_802AE5B8_de(s32, void *);  extern void func_802AFEE0_de(s32, s32, s32);
+extern void func_802AE5B8_de(s32, void *);
 static inline f32 fade_rate(Track *track,f32 time,f32 rate) {track->unk30=time;return (f32)track->unk20/(time*rate);}
 void func_8025D450_de(Track *arg0) {
     f32 temp_f0;
