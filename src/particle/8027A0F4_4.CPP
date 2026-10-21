@@ -8,6 +8,7 @@
 #include "GAME/CODE_8027302C.H"
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
+#include "particle/8027A0F4_4.H"
 
 extern char D_8011AD70;
 extern char D_8011AF38;
@@ -199,7 +200,6 @@ f32 func_8027525C_de(void *node, f32 x, f32 z);
 s32 func_8027254C_de(f32 *vector, f32 limit);
 void func_8027347C_de(void *matrix, f32 sx, f32 sy, f32 sz);
 void func_80273D6C_de(void *matrix);
-void *Particle_ParentTransform(EffectActor *particle, Shared_ActorView *camera);
 void func_8027302C(f32 *dst, f32 *src);
 void func_80272C60_de(void *matrix, f32 x, f32 y, f32 z);
 void func_80273A98_de(void *matrix, f32 angle);

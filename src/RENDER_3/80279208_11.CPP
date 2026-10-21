@@ -3,6 +3,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "particle/80271B18_3.H"
+#include "particle/8027A0F4_4.H"
 
 typedef struct Owner Owner;
 
@@ -80,7 +81,6 @@ extern void *D_80103FCC;
 extern char D_801041F0;
 extern void func_80271818_de(CQuatern *, CVector3 *);
 extern void func_80273760_de(f32 *matrix, s32 angle);
-extern void *Particle_ParentTransform(Actor_func_80279B40_de *actor, s32 index);
 extern void func_80271F34_de(CVector3 *out, CVector3 *a, CVector3 *b);
 extern s32 func_802800C0_de(void *, Actor_func_80279B40_de *, void *, s32, s32, s32, CVector3, CQuatern, CVector3, s32, s32, s32);
 
@@ -124,7 +124,7 @@ void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 fl
         offset.z = 0.0f;
         func_80273760_de(matrix, actor->angle);
         func_80272898_de(matrix, &offset, &turned);
-        parent = Particle_ParentTransform(actor, 0);
+        parent = Particle_ParentTransform((struct EffectActor *)actor, 0);
         if (parent != 0) {
             func_80272898_de(parent, &turned, &carried);
         } else {
