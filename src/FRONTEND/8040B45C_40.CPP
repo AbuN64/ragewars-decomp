@@ -5,6 +5,7 @@
 #include "FRONTEND/8040B45C_40.H"
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/8040B45C_31.H"
 
 /* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through func_804122CC_de and drawing it through func_8040D2D0_de with the given style. */
 
@@ -17,7 +18,6 @@
 extern MenuWidget *func_8040EC30_de(void *root, u16 id);
 extern void func_804122CC_de(GridList *list, UnitMtx *cell, u32 column, u32 row);
 
-extern void func_8040D2D0_de(UnitMtx *cell, NodeEvent style);
 
 /* Allocates and zeroes a 0x60-byte record, copies the header of the record func_8040EC30_de finds for the low half of the first argument, tags it 0xB, stores four byte arguments and three alternating pairs of the last two, allocates and zeroes a width-by-height table of eight-byte cells at 0x44, and registers the record through func_8040ED38_de.
    Adapted from func_8041A580_de with the record size, tag 0xB, the byte fields, the cell table and the func_8040ED38_de registration changed. */
@@ -66,7 +66,7 @@ void func_80412634_de(GridList *arg0, NodeEvent style) {
     for (column = 0; column < list->columns; column++) {
         for (row = 0; row < list->rows; row++) {
             func_804122CC_de(list, &cell, column, row);
-            func_8040D2D0_de(&cell, style);
+            func_8040D2D0_de((TextWidget *)&cell, *(DrawArgs *)&style);
         }
     }
 }
