@@ -2,6 +2,7 @@
 #include "COMMON/S1_4.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
+#include "IO/802BDE70.H"
 
 s32 func_802B8DA0_de(void)
 {

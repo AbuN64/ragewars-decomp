@@ -8,6 +8,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "RENDER/80293A04_2.H"
 #include "RENDER/80293A04_4.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 /* Clears the map-view-active flag, emits a set-color-image display list command for the current frame
  * buffer, then draws image 0x389 scaled to fill the screen dimensions over the image's returned width
@@ -16,8 +17,6 @@
 
 
 
-
-extern void func_802AAC28_de(s32 image, s32 frame, s32 x, s32 y, f32 scaleX, f32 scaleY, s32 flags);
 
 extern Gfx *D_80110634;
 

@@ -2,6 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/UNUSED.H"
+#include "AUDIO_4/802BFE60.H"
 
 /** Return the global word at D_800D92A4. */
 

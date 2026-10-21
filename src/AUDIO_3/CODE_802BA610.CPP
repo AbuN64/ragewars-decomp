@@ -11,6 +11,7 @@
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "SDK/OSINT/802C0CB0.H"
+#include "AUDIO_3/802BFD40.H"
 
 /* alResamplePull, drafted from ultralib src/audio/resample.c: at unity pitch pull the source and
    move its output; otherwise clip and quantise the pitch ratio, pull the input sample count it

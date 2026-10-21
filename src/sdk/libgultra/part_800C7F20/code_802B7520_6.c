@@ -7,6 +7,7 @@
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/code_802B7520_6.h"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "AUDIO_3/802BFD40.H"
 
 /* _sndpVoiceHandler, drafted from ultralib src/audio/sndplayer.c: the sound player's synthesizer
    callback; reposts the frame API event or handles the pending event until the next one is in

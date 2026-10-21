@@ -6,6 +6,7 @@
 #include "sdk/BUF16B.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
+#include "AUDIO_3/802BFD40.H"
 
 /* __handleMIDIMsg, drafted from ultralib src/audio/seqplayer.c: applies one MIDI channel message
    to the sequence player (note on with voice allocation, envelope and oscillator setup, note off,
@@ -71,7 +72,6 @@ extern void func_802B33E0_de(void *, ALVoice_s *, f32);
 extern void __setInstChanState(ALSeqPlayer *, ALInstrument *, s32);
 
  /* __setInstChanState */
-extern void func_802BAC50_de(char *, char *, s32);
 
 void func_802B0A90_de(struct ALSequencePlayer *seqp)
 {

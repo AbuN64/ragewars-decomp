@@ -51,8 +51,6 @@ extern void func_8025DB44_de(Track *a);
 
 extern void func_8025BB3C_de(int a);
 
-extern int func_8025CED0_de(void *arg0, int arg1, float arg2, int arg3);
-
 /* Picks a weighted random entry from the range func_80265550_de finds for an id in a scene's table: -1 when
  * the scene has no table or no range, the single entry when the range has one; otherwise each entry weighs
  * ten times its table value, a random draw selects one, and when avoidance is requested and it equals the

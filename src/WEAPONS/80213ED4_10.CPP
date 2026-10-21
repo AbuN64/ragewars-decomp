@@ -2,6 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/FIELD_VEC_B0.H"
 #include "TYPES.H"
+#include "LISTS/80279520.H"
 
 /* Picks a random entry from a table of mask and id records ending in -1: every id whose mask shares
    a bit with flags and that func_80246A08_de finds for the owner is added to a weighted picker with
@@ -14,8 +15,6 @@
 
 
 extern void func_8027985C_de(WeightedTable *);
-extern void func_80279864_de(WeightedTable *, s32, s32);
-extern s16 func_802798A8_de(WeightedTable *);
 extern s32 func_80246A08_de(s32, s32, s32);
 
 s32 func_802166F4_de(s32 owner, s32 unused, struct IntPair *table, s32 flags) {

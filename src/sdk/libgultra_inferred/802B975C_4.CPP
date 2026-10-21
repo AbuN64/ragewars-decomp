@@ -5,6 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "SDK/OSINT/802C0CB0.H"
+#include "AUDIO_3/802BFD40.H"
 
 #if defined(VERSION_EU)
 INCLUDE_ASM("span_1000", func_802B49D0_eu);
@@ -50,7 +51,6 @@ typedef struct DraftEnv {
 extern s16 D_800D4210[128];
 extern char D_800CC850[], D_800C7604[];
 extern void *D_800D4070;
-extern void func_802BAC50_de(const char *, const char *, s32);
 extern void _freePVoice(void *, DraftAudioVoice *);
 extern void __freeParam(void *);
 extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);
@@ -166,7 +166,7 @@ extern s16 D_800D4210[128]; /* eqpower */
 extern char D_800CC850[]; /* Resident "EX" assertion expression. */
 extern char D_800C7604[]; /* "audio/env.c" */
 
-extern void func_802BAC50_de(const char *, const char *, s32); /* __assert */
+ /* __assert */
   /* _getRate */
 
 Acmd *func_802B4C7C_de(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)

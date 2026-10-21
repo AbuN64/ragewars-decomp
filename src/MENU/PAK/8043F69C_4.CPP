@@ -44,8 +44,6 @@ void func_802A9234_de(s32);
 
 void func_802AA9F4_de(void);
 
-s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
-
 /* unable to generate initializer: unknown type */
 
 void func_8043FE3C_de(func_80254D70_S2 *arg0, func_8043FFAC_S5 *arg1, s32 arg2, func_8043FFAC_S2 *arg3, void *arg4, s32 arg5) {

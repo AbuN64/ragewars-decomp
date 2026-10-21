@@ -5,6 +5,7 @@
 #include "COMMON/GFX.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 extern s32 D_800E28D0;
 
@@ -23,8 +24,6 @@ static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a
 extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
 extern void func_802AA1AC_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
-
-extern s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
 extern void func_80253754_de(s32 arg0, s32 arg1);
 

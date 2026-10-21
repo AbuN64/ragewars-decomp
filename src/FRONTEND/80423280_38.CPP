@@ -59,6 +59,7 @@
 #include "COMMON/EXTERNS_9.H"
 #include "FRONTEND/80423280_38.H"
 #include "FRONTEND/80423280_40.H"
+#include "ACHIEVE/80424E30_3.H"
 
 /* Hides every model named by the sixty-four 12-byte entries of D_800E4A84: for each entry it looks
    up the first and second identifier in the current screen's context at 0x970 through func_8040EC30_de
@@ -90,7 +91,6 @@ extern struct EntryRecAt0V1 D_800E4694[];
 extern struct Pair D_800E4A84[];
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_80265650_de(s32, s32);
-extern Preset *func_80425C70_de(s32, s32, s32);
 
 void func_804274B0_de(void) {
     u8 bits[8];

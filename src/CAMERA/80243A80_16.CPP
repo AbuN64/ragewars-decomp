@@ -13,6 +13,7 @@
 #include "TYPES.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "LISTS/80279520.H"
 
 /* Returns the collisions an object would meet moving to a position, without committing the move: picks the collision set for the object
  * (D_801040D0 for flagged players; otherwise by func_8024DF5C_de and then func_8024DFA0_de or func_8024DEE0_de among
@@ -128,10 +129,6 @@ extern s32 D_800C3864_de[];
 extern s32 func_802654E8_de(void *, s32, s32);
 
 extern void func_8027985C_de(WeightedTable *);
-
-extern s32 func_80279864_de(WeightedTable *, s16, s16);
-
-extern s16 func_802798A8_de(WeightedTable *);
 
 extern void func_80253754_de(s32, void *);
 

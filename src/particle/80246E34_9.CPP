@@ -8,6 +8,7 @@
 #include "particle/80246E34_9.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "LISTS/80279520.H"
 
 extern s32 func_80245798_de(void);
 extern void func_8024D728_de(CQuatern *arg0, void *arg1);
@@ -108,7 +109,6 @@ s32 func_8024B6F4_de(void *arg0, s32 arg1, s32 arg2) {
 extern void func_8027985C_de(WeightedTable *arg0);
 extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
-extern s16 func_802798A8_de(WeightedTable *arg0, u16 arg1);
 
 s16 func_8024B738_de(void *arg0, s16 *arg1, s32 arg2) {
     WeightedTable sp10;
@@ -125,7 +125,7 @@ s16 func_8024B738_de(void *arg0, s16 *arg1, s32 arg2) {
             var_a1 = *(u16 *) arg1;
         } while (*arg1 != -1);
     }
-    return func_802798A8_de(&sp10, var_a1);
+    return func_802798A8_de(&sp10);
 }
 
 extern char D_800C39E0_de;

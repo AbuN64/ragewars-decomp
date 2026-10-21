@@ -2,6 +2,7 @@
 #include "TYPES.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "FRONTEND/80423280_40.H"
+#include "ACHIEVE/80424E30_3.H"
 
 /* Grants unowned unlocks for the completed game using its mode and player kind; an unsigned local carries the globals address before the category value to preserve register scheduling, and the default kind calls the table selector directly. */
 
@@ -15,7 +16,6 @@
 
 extern struct Data801462C8 D_801462C8;
 extern struct Screen_func_80427D70_de *D_800E4690;
-extern struct Table_func_80427D70_de *func_80425C70_de(void *, s32, s32);
 extern s32 func_80265650_de(u8 *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 

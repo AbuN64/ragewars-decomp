@@ -5,6 +5,7 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
+#include "GFX/TEXT/802A8A94_5.H"
 extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
 
 #ifdef NON_MATCHING
@@ -81,7 +82,6 @@ extern f32 D_800C2210_de;
 extern f32 D_800C2218_de;
 extern Gfx *D_80110634;
 extern s32 func_8022EB0C_de(WeaponMenuIconsPlayer *, s32);
-extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 void func_80217630_de(WeaponMenuIconsMenu *menu, WeaponMenuIconsItem *items, s32 count, WeaponMenuIconsPlayer *player) {
     s32 width;

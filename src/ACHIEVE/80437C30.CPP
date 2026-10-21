@@ -1,4 +1,6 @@
 #include "include_asm.h"
+#include "ACHIEVE/80424E30_3.H"
+#include "ACHIEVE/80424E30_2.H"
 
 INCLUDE_RODATA("data_800C", rodata_func_80438614_de_800E1F50);
 
@@ -27,14 +29,12 @@ extern void func_80425D14_de(s32);
 extern s32 func_80265650_de(u8 *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_80425014_de(s32);
-extern s32 func_804253C8_de(s32);
 extern void func_804259E0_de(s32);
 extern void *func_802A001C_de(void *, int, u32);
 extern s32 func_80425674_de(s32);
 extern s32 func_8041F140_de(s32);
 extern void func_802A0C08_de(char *, char *, ...);
 extern void func_802A025C_de(char *, char *);
-extern Active *func_80425C70_de(s32, s32, s32);
 extern void func_8040E950_de(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
 extern void func_8028D380_de(Shared_World *, s32, char *, s32);

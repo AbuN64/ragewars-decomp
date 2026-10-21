@@ -1,6 +1,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "TYPES.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 /* Draws an icon sprite for a view: icons 0x2DA, 0x2E4, 0x2BC and 0x2EF to 0x2F2 sit at the centre of
    the view's viewport, any other icon is placed at a world point projected through func_80239244_de when
@@ -14,7 +15,6 @@
 extern s32 D_800E28D0;
 extern u8 D_801462E5;
 extern void func_80239244_de(View *, CVector3 *, f32 *, f32 *);
-extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 void func_8021E08C_de(View *view, CVector3 *point, s32 icon, f32 frame, f32 scale, f32 size) {
     f32 x;

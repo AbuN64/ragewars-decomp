@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/seqplayer.h"
 #include "sdk/libgultra/part_800C7F20/seqplayer_802B6BE4.h"
+#include "AUDIO_3/802BFD40.H"
 
 struct ALSequencePlayer {
     ALSeqPlayer base;
@@ -38,7 +39,7 @@ extern s16 func_802B1814_de(ALVoiceState *, ALSeqPlayer *);        /* __vsVol */
 extern ALMicroTime __vsDelta(ALVoiceState *, ALMicroTime);  /* __vsDelta */
 extern void func_802B1B14_de(ALSeqPlayer *, ALVoice_s *, ALMicroTime); /* __seqpReleaseVoice */
 extern void func_802B18E4_de(ALSeqPlayer *, void *);               /* __initFromBank */
-extern void func_802BAC50_de(char *, char *, s32);                 /* __assert */
+                 /* __assert */
 
 ALMicroTime func_802B0554_de(void *node)
 {

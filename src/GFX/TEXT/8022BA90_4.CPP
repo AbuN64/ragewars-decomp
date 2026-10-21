@@ -7,6 +7,7 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
+#include "GFX/TEXT/8022BA90_4.H"
 
 extern void func_802227F4_de(void *, void *, s32);
 
@@ -117,7 +118,7 @@ s32 func_8022C7F8_de(void *arg0, LevelActor *arg1) {
 }
 
 /** Return zero. */
-int func_8022C88C_de(void) {
+int func_8022C88C_de(void *arg0, void *arg1, s32 *arg2) {
     return 0;
 }
 

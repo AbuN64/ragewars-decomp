@@ -15,6 +15,7 @@
 #include "RENDER/80291054_6.H"
 #include "SYSTEM_3/802A6AC0_7.H"
 #include "RESMGR/802A0888.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 static inline void toggle(ToggleMenu *menu, MenuItem *item) {
     if ((item->on = !item->on) != 0) {
@@ -26,8 +27,6 @@ static inline void toggle(ToggleMenu *menu, MenuItem *item) {
         item->bounce = -5;
     }
 }
-
-extern s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 /* Clears a record: its four 0x38-byte entries through an inline per-entry clear, its two leading
    flag bytes and trailing words, and sets the word at 0xE6 to -5. */

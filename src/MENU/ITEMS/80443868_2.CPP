@@ -7,6 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
 #include "SDK/PFS/80443868_2.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 extern void func_8044972C_de(void *player);
 /* Forwards arg1's word at 0x1C to func_8044972C_de and always reports success. */
@@ -14,8 +15,6 @@ extern void func_8044972C_de(void *player);
 
 
 /* Pulses the caption intensity on a 512-step triangle wave and redraws the caption sprite centred on the entry, dropped one full line or a short line when the wide-layout flag is clear. */
-
-extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 
 

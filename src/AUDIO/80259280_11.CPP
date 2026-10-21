@@ -11,6 +11,7 @@
 #include "FX_2/80271B18.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
+#include "AUDIO/80259280_11.H"
 
 /* Returns the stereo pan of a sound at a position for a listener: centre (0x40) without a listener, when
  * the sound is horizontally within a small radius or straight ahead; otherwise the horizontal direction
@@ -132,7 +133,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
 extern float D_800CB7F0[];
 extern float D_800C3F34_de;
 extern SoundEnvelope *func_80258BC4_de(ContextRecAt2BC0 *context, int index);
-void func_80259F68_de(Voice *voice, ControllerCode802591C0 *control) {
+void func_80259F68_de(Voice *voice, ControllerCode802591C0 *control, s32 arg2) {
     u8 *colour;
     s32 i;
     f32 from;

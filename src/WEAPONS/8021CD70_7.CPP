@@ -11,6 +11,7 @@
 #include "COMMON/MATH_HELPERS.H"
 #include "stddef.h"
 #include "SDK/AUDIO/802BD1A8_19.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 /* Draws a player's HUD for one frame unless the game state is 8 or 11: ticks the HUD animations,
    draws the health counter and its hurt flash (four corner sprites in an environment colour that
@@ -36,7 +37,6 @@ s16 **Render_StartWorldEffect(void *, s32, s32, s32);
 void func_802A6900_de(void *, Shared_HudPlayer *);
 void func_802A7AA4_de(void *);
 
-s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 s32 func_802BD320_de(char *, const char *, ...);
 f32 func_804422F0_de(char *, f32, f32);
 static inline RenderCounters *hudRules(void) {

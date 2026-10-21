@@ -11,6 +11,7 @@
 #include "COMMON/GFX.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
@@ -534,7 +535,6 @@ extern const f32 D_800C350C_de, D_800C3510_de, D_800C85D0;
 extern s32 D_800E28D0, D_800E28D4;
 extern Gfx *D_80110634;
 extern f32 func_802B72B0_de(f32);
-extern s32 func_802AAC28_de(s32,s32,s16,s16,f32,f32,s32);
 
 void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special) {
     FlareRadii radii = D_800C344C_de;

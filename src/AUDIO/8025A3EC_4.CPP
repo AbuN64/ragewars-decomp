@@ -10,6 +10,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "AUDIO/8025A3EC_4.H"
+#include "AUDIO/80259280_11.H"
 
 /* Releases occupied nonlocal slots unless their value equals the exclusion. */
 
@@ -35,8 +36,6 @@ extern void func_802B2D80_de(void *);
 extern void alSndpStop(void *arg0);
 
 extern void func_80259C5C_de(void *arg0, void *arg1, s32 arg2);
-
-extern void func_80259F68_de(void *arg0, void *arg1, s32 arg2);
 
 extern void *func_80258BF4_de(ContextRecAt2BC0 *arg0, s32 arg1);
 

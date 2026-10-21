@@ -27,7 +27,6 @@ extern s32 func_8040C474_de(void);
 
 extern void func_802A7AA4_de(void *mover);
 extern void func_802AAA54_de(s32 x0, s32 y0, s32 x1, s32 y1, s32 red, s32 green, s32 blue, u8 alpha);
-extern void func_802AAC28_de(s32 image, s32 frame, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 which);
 
 
 

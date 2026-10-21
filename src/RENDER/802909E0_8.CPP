@@ -9,6 +9,7 @@
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "RENDER/802909E0_8.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 #if defined(VERSION_EU_X)
 INCLUDE_ASM("span_1000", func_80290BD0_eu_x);
@@ -82,7 +83,6 @@ extern Gfx *D_80110634;
 extern void func_80291BE8_de(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 interlaced);
 
 extern void func_802A9234_de(s32 alpha);
-extern void func_802AAC28_de(s32 image, s32 frame, s32 x, s32 y, f32 scaleX, f32 scaleY, s32 flags);
 void func_80290C24_de(void *arg0) {
     Frame *frame = D_8011BDC0;
     s32 width;

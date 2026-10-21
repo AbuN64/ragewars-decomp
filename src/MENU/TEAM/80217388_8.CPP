@@ -4,6 +4,7 @@
 #include "COMMON/GFX.H"
 #include "TYPES.H"
 #include "COMMON/SESSIONHANDLERROW.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 extern u8 D_801462DE;
 
@@ -15,8 +16,6 @@ extern s32 D_800E28D4;
 
  /* "Select Team" */
 
-
-extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 extern void func_802A84F8_de(void);
 

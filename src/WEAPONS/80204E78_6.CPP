@@ -17,6 +17,7 @@
 #include "TYPES.H"
 #include "COMMON/INTEGERSTATE1250.H"
 #include "WEAPONS/80213ED4.H"
+#include "LISTS/80279520.H"
 
 /* Dispatch configured object, particle, or weighted-choice spawns and update the owner count. */
 
@@ -33,10 +34,6 @@ extern s32 func_8022A8F0_de(struct Context *arg0);
 extern int func_8022A414_de(void *arg0);
 
 extern void func_8027985C_de(WeightedTable *object);
-
-extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
-
-extern s16 func_802798A8_de(WeightedTable *arg0);
 
 extern SceneEffect *func_80262CE0_de(void *scene, s32 id, s32 variant, s32 count, s32 owner, CVector3 position, f32 scale, CVector3 direction, CVector3 color, s32 *ref);
 

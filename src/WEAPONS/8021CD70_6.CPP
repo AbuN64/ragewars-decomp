@@ -4,8 +4,7 @@
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
 #include "COMMON/TRIPLE.H"
-
-extern s32 func_802AAC28_de(s32,s32,s16,s16,f32,f32,s32);
+#include "GFX/TEXT/802A8A94_5.H"
 
 void func_8021EA54_de(PowerHudPlayer *player, Shared_HudView *view) {
     f32 sx,sy,numberScale,offset,halfWidth,x,y;

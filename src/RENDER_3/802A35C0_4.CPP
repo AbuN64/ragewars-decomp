@@ -12,6 +12,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "RENDER_3/802A35C0_3.H"
+#include "LISTS/80279520.H"
 
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
 extern void func_8027027C_de(void *,void *),func_80270910_de(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
@@ -238,7 +239,6 @@ typedef struct EffectPool { EffectList free, used; } EffectPool;
 typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
 typedef struct EffectInstance { char pad00[0xB0]; EffectActor *actor; } EffectInstance;
 extern void *D_800CDBD0[];
-extern EffectNode *func_8027963C_de(void *);
 extern EffectResource *func_8028AFEC_de(void *, s32);
 extern void func_802794B0_de(void *);
 extern void func_80295E84_de(void *, s32);

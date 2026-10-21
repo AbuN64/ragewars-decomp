@@ -68,6 +68,7 @@
 #include "sdk/libgultra/libasm_802BBC68_7.h"
 #include "sdk/libgultra/libasm_802BBC68_8.h"
 #include "RESMGR/802A0888.H"
+#include "AUDIO_3/802BFD40.H"
 
 /* osInitialize, drafted from ultralib src/os/initialize.c (before 2.0J, _FINALROM): the clock
    rate comes from the ROM header through osPiRawReadIo. */
@@ -134,8 +135,6 @@ func_802BD200_eu_x
     }
 }
 
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
-
 
 int func_802BB060_de(u32 arg0, u32 *arg1) {
     if (arg0 & 3) {
@@ -150,8 +149,6 @@ int func_802BB060_de(u32 arg0, u32 *arg1) {
     *arg1 = *(u32 *)(arg0 | 0xA0000000);
     return 0;
 }
-
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
 
 int func_802BB0F0_de(u32 arg0, u32 arg1) {
     if (arg0 & 3) {

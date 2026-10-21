@@ -4,6 +4,7 @@
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
+#include "AUDIO_3/802BFD40.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 Acmd *func_802B6658_eu_x(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)

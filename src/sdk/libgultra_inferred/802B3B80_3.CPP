@@ -10,6 +10,7 @@
 #include "sdk/libgultra/part_800C7F20/code_802B66A0_3.h"
 #include "sdk/libgultra/part_800C7F20/seqplayer.h"
 #include "sdk/libgultra_inferred/802B3B80_4.H"
+#include "AUDIO_3/802BFD40.H"
 
 extern void *D_800D4070;
 
@@ -46,8 +47,6 @@ extern s32 __vsDelta(void *, s32);
 extern void func_802B1B14_de(void *, void *, s32);
 
 extern void func_802B18E4_de(void *, void *);
-
-extern void func_802BAC50_de(void *, void *, s32);
 
 void func_802AEAB0_de(void *arg0, InitParams *arg1) {
     ALSeqPlayer *obj = arg0;

@@ -5,9 +5,9 @@
 #include "COMMON/UNUSED.H"
 #include "GAMECORE/EXTERNS.H"
 #include "GAMECORE/802BE680.H"
+#include "AUDIO_3/802BFD40.H"
 
 extern OSPiHandle_s *D_800D4380[];
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
 
 s32 func_802B9590_de(OSPiHandle_s *arg0, u32 arg1, u32 *arg2) {
     OSPiHandle_s *previous;

@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/RECRECAT4.H"
 #include "FRONTEND/80423280_39.H"
+#include "ACHIEVE/80424E30_3.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 INCLUDE_ASM("ovl_80400000", func_80427B08_de);
@@ -34,7 +35,6 @@ extern struct ResultsHeadingCharacter D_800DFA6C[];
 extern void func_802A025C_de(char *, char *);
 extern s32 func_8041F140_de(s32);
 extern void func_802A0C08_de(char *, char *, ...);
-extern struct ResultsHeadingStage *func_80425C70_de(s32, s32, s32);
 
 void func_80427B08_de(void) {
     Shared_Game *settings;
@@ -61,7 +61,7 @@ void func_80427B08_de(void) {
         if (time > 0) {
             func_802A0C08_de(buffer, D_800DD9C8, time / 60, time % 60);
         } else {
-            best = func_80425C70_de(D_800E4690->stage, 3, 0)->time;
+            best = ((struct ResultsHeadingStage *) func_80425C70_de(D_800E4690->stage, 3, 0))->time;
             func_802A0C08_de(buffer, D_800DD9C8, (u8)(best / 60), (u8)(best % 60));
         }
         func_8042E9B4_de(D_800E4690->time, D_800DD9D0_de, buffer);

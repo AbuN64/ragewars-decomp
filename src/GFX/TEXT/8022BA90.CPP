@@ -18,6 +18,7 @@
 #include "SCENE/80286050_8.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "GFX/TEXT/8022BA90_2.H"
 
 extern unsigned int D_80146894;
 
@@ -37,8 +38,6 @@ extern void func_8024ADD0_de(void *arg0, CVector3 *arg1, s32 arg2);
 
 extern void func_80253754_de(s32 arg0, s32 arg1);
 
-
-extern void func_8022BEFC_de(void *arg0, void *arg1);
 
 extern void func_8022C060_de(void *arg0, void *arg1);
 

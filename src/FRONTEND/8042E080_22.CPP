@@ -4,6 +4,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "FRONTEND/8042E080_22.H"
 #include "SYSTEM_2/8025E280.H"
+#include "ACHIEVE/80424E30_3.H"
 
 /* Prepares a match: stops the current screen, starts screen 2, resets the eight player status
    records (clearing bytes 0x94 and 0x95 and, for human slots, the team byte 0x92) while counting
@@ -28,7 +29,6 @@ extern s32 D_8014DD98;
 extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);
 extern void func_802A230C_de(void);
-extern s32 func_80425C70_de(s32, s32, s32);
 
 
 

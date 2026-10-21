@@ -10,6 +10,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/MENURECAT24.H"
 #include "RENDER/80293A04_2.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 s32 func_802647C4_de();
 
@@ -28,8 +29,6 @@ extern u32 func_80265350_de(void);
 
 
 
-
-extern void func_802AAC28_de(s32 image, s32 frame, s32 x, s32 y, f32 scaleX, f32 scaleY, s32 flags);
 
 extern Gfx *D_80110634;
 

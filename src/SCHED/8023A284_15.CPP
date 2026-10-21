@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "SCHED/8023A284_15.H"
 #include "sdk/os.h"
+#include "AUDIO_4/802BFE60.H"
 
 #if defined(VERSION_EU_X)
 INCLUDE_ASM("span_1000", func_8023B9C0_eu);
@@ -156,7 +157,6 @@ void func_8023C084_de(ResourcePageMapping *mapping) {
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
 extern s32 D_800CB3F8_de;
 extern f32 D_800C3610_de, D_800C3614_de, D_800C3618_de, D_800C361C_de;
-void *func_802BAD70_de(void);
 u64 func_802BADC0_de(void);
 void *func_8023CBC0_de(u16);
 void osWritebackDCacheAll(void);

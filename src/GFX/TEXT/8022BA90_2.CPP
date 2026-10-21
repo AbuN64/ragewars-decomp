@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/VIEWFLAGS.H"
+#include "GFX/TEXT/8022BA90_2.H"
 
 /* Drains a player's ammunition over time: unless func_80245784_de reports a pause, func_8022C460_de blocks
    the player, D_801371DC is set, bit 1 of D_801462C8 is set or the player's state is below 2, it
@@ -23,7 +24,7 @@ int func_8022BEDC_de(Shared_ActorView *arg0) {
 }
 
 /** Perform the no-op callback at VRAM 0x8022BEEC. */
-void func_8022BEFC_de(void) {
+void func_8022BEFC_de(void *arg0, void *arg1) {
 }
 
 void func_8022BF04_de(void *arg0, s32 unused, s32 period, s32 kind) {

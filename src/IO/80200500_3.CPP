@@ -3,9 +3,9 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "sdk/os.h"
+#include "IO/80200800.H"
 extern s32 D_800C8140_de;
 extern u8 D_800F2CE0[],D_800F2CC0[];
-extern u8 func_80200840_de(u32);
 
 struct OSIoMesg;
 struct Opaque_OSMesgQueue;

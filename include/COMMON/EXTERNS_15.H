@@ -1,10 +1,6 @@
 #ifndef COMMON_EXTERNS_15_H
 #define COMMON_EXTERNS_15_H
 #include "TYPES.H"
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-
-extern int func_80200840_de(int arg0);
 
 extern void func_80200C28_de(s32 address, s32 value);
 

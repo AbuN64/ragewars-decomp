@@ -6,6 +6,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "sdk/libgultra_inferred/802B3B80_4.H"
+#include "AUDIO_3/802BFD40.H"
 
 extern void func_802AE6BC_de(s32 arg0, ALEvent *arg1);
 
@@ -14,8 +15,6 @@ extern s32 func_802AE9B0_de(s32 arg0, s32 *arg1);
 extern void func_802AFB6C_de(void *arg0, ALEvent *arg1);
 
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, s32);
-
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
 
 
 
@@ -46,8 +45,6 @@ extern void func_802B32A0_de(void *, void *, u8);
 extern void func_802B33E0_de(void *, void *, f32);
 
 extern void __setInstChanState(void *, void *, s32);
-
-extern void func_802BAC50_de(void *, void *, s32);
 
 /** Dispatch the current object message and forward any resulting value. */
 void func_802AF150_de(void *rawPlayer) {

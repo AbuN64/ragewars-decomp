@@ -7,6 +7,7 @@
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/LOADOUT.H"
 #include "TYPES.H"
+#include "GFX/TEXT/802A8A94_5.H"
 extern void func_8022A748_de(void *);
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/EXTERNS_6.H"
@@ -75,8 +76,6 @@ void * func_8022C55C_de(void *, u32);
 
 
 
-
-s32 func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 
  /* extern */

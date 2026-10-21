@@ -4,8 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_2.H"
 #include "AUDIO_3/802BEC10.H"
-
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
+#include "AUDIO_3/802BFD40.H"
 
 
 

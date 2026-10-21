@@ -2,10 +2,10 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
+#include "AUDIO_3/802BFD40.H"
 
 extern char D_800C7440;
 extern char D_800C7444;
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
 
 
 

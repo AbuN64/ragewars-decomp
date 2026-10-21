@@ -5,6 +5,7 @@
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
+#include "LISTS/80279520.H"
 
 /* Initializes an empty linked-list header by clearing its two links and count. */
 void func_802794B0_de(ListHeader *list) {

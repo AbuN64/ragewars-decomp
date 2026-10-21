@@ -9,6 +9,7 @@
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "MENU/ITEMS/80442BC8.H"
 #include "SYSTEM/80255C40_7.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 /* Removes every item from a list until its head is null, running each item's optional callback, clearing three words of its state, unlinking it through func_80255ED8_de and releasing its resource through func_80253838_de. Adapted from func_8044334C_de with its body wrapped as an inline helper called in a loop over the list head changed. */
 
@@ -56,8 +57,6 @@ extern void func_804422F0_de(void *, f32, f32);
 
 
 extern void func_8026925C_de(s32);
-
-extern void func_802AAC28_de(s32, s32, s16, s16, f32, f32, s32);
 
 /* Selects the descriptor for a single masked category bit; on eu and eu-x the slot is
    additionally offset by nine descriptors per local player, read from the byte after D_80146848. */

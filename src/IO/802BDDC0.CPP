@@ -3,11 +3,11 @@
 #include "COMMON/S1_4.H"
 #include "TYPES.H"
 #include "sdk/os.h"
+#include "IO/802BDE70.H"
 
 typedef struct Queue Queue;
 
 extern s32 D_800D4360;
-extern Queue *func_802B8DA0_de(void);
 extern s32 func_802BB160_de(Queue *, void *, s32);
 
 

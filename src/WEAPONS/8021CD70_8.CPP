@@ -1,5 +1,6 @@
 #include "COMMON/GAMEPLAY_MOVEMENT.H"
 #include "RENDER_2/802192C0_3.H"
+#include "GFX/TEXT/8022BA90_4.H"
 
 extern s32 D_8014561C;
 #include "COMMON/EFFECTRENDER.H"
@@ -50,7 +51,6 @@ extern void func_8022BD94_de(void *, void *, void *);
 extern void func_8022C080_de(void *, void *);
 extern void func_8022C6E4_de(void *, void *);
 extern s32 func_8022C760_de(void *, void *);
-extern void func_8022C88C_de(void *, void *, s32 *);
 extern s32 func_80243A90_de(void *, CVector3, s32 *);
 struct MotionSurface;
 extern s32 func_8024491C_de(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);

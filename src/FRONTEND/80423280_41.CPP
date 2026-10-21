@@ -6,9 +6,9 @@
 #include "COMMON/UNUSED.H"
 #include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
+#include "ACHIEVE/80424E30_3.H"
 
 extern s32 func_80265650_de(void *, s32);
-extern Preset *func_80425C70_de(s32, s32, s32);
 void func_80427F10_de(void) {
     RenderCounters *state;
     Shared_Game *config;

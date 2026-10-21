@@ -29,7 +29,7 @@ extern u8 func_802B22F4_de(struct ALSeq_s *, s32 *);                       /* __
 extern int func_802B20C8_de(struct ALSeq_s *arg0);                             /* alSeqGetTicks */
 extern void alSeqSetLoc(struct ALSeq_s *, ALSeqMarker *);             /* alSeqSetLoc */
 extern void func_802B00D4_de(ALEventQueue *, ALEvent *, ALMicroTime);  /* alEvtqPostEvent */
-extern void func_802BAC50_de(char *, char *, s32);                /* __assert */
+                /* __assert */
 
 static inline void postNextSeqEvent(struct ALSequencePlayer *seqp)
 {

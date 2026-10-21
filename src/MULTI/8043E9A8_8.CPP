@@ -6,13 +6,13 @@
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/EXTERNS_6.H"
+#include "GFX/TEXT/802A8A94_5.H"
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
 INCLUDE_ASM("ovl_80400000", func_8043EE5C_de);
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-s32 func_802AAC28_de(s32 resource, s32 mode, s16 x, s16 y, f32 scaleX, f32 scaleY, s32 flags);
 
 void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context) {
     struct ItemDef *def = item->def;

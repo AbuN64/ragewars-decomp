@@ -6,6 +6,7 @@
 #include "SDK/OSINT/802C0CB0.H"
 #include "sdk/os.h"
 #include "RENDER_4/8028FD2C_6.H"
+#include "AUDIO/80259280_5.H"
 
 /* Returns the physical address of a cached copy of a data block: finds the cache entry keyed by the
  * block's address and refreshes the copy (and flushes it from the data cache) when the size changed;
@@ -366,7 +367,6 @@ typedef struct SoundContext {
     f32 gain; char pad2BA4[4]; f32 specialGain; char pad2BAC[0xC]; s32 scaled;
 } SoundContext;
 extern f32 D_800C3ED8_de;
-extern void func_80259784_de(void *, s32);
 
 extern void alSndpSetPitch(void *, s32);
 extern void func_802B2DE0_de(void *, u8);

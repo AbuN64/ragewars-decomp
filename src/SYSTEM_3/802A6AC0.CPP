@@ -9,6 +9,7 @@
 #include "SYSTEM_3/802A6AC0.H"
 #include "FX_2/80271B18.H"
 #include "SYSTEM/80255C40_7.H"
+#include "LISTS/80279520.H"
 
 extern func_802A6AC0_S2 D_800D15E0;
 extern func_802077F4_S2 D_800D15F0;
@@ -39,8 +40,6 @@ void func_802A5B4C_de(f32 *arg0) {
         }
     }
 }
-
-extern void *func_8027963C_de(s32 arg0);
 
 
 

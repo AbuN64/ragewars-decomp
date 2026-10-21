@@ -6,8 +6,7 @@
 #include "AUDIO_3/802BF0C0.H"
 #include "sdk/libgultra/sp.h"
 #include "SDK/OSINT/802C0CB0.H"
-
-extern void func_802BAC50_de(void *arg0, void *arg1, s32 arg2);
+#include "AUDIO_3/802BFD40.H"
 
 
 s32 func_802B9FD0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
