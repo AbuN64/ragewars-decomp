@@ -13,7 +13,7 @@
 
 
 
-extern void func_80419C84_de(struct ObjectCode804196C0 *);
+extern void func_80419C84_de(struct ObjectCode804196C0 *, s32);
 
 /* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E3330, an actor kind at D_800E3334 and a handler at D_800E3338: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
 
@@ -59,8 +59,8 @@ s32 func_80419F38_de(struct ObjectRecAt84 *object) {
     return object->busy == 0;
 }
 
-void func_80419F58_de(struct ObjectCode804196C0 *object) {
-    func_80419C84_de(object);
+void func_80419F58_de(struct ObjectCode804196C0 *object, s32 count) {
+    func_80419C84_de(object, count);
     object->busy = 1;
     object->target->value = object->entries[object->index];
 }
