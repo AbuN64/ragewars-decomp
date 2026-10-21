@@ -188,8 +188,8 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
             converted += D_800C4100_de;
         }
         second = func_80260634_de((f32)converted, 6);
-        first = func_80260650_de(first, D_8010AC7C, *(s32 *)&D_8010AC80);
-        second = func_80260650_de(second, D_8010AC7C, *(s32 *)&D_8010AC80);
+        first = func_80260650_de(first, D_8010AC7C, D_8010AC80);
+        second = func_80260650_de(second, D_8010AC7C, D_8010AC80);
     }
     decode.base = first;
     decode.range = second - first;

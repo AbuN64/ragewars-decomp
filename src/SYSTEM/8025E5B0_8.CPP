@@ -82,8 +82,8 @@ void func_8025FFB0_de(Segment8025FFD0 *arg0, u32 *arg1) {
         second = func_802607B8_de(&bits, 6);
         lo = func_80260634_de((f32)first, 6);
         hi = func_80260634_de((f32)second, 6);
-        lo = func_80260650_de(lo, D_8010AC7C, D_8010AC80);
-        hi = func_80260650_de(hi, D_8010AC7C, D_8010AC80);
+        lo = ((f32 (*)(f32, f32, s32))func_80260650_de)(lo, D_8010AC7C, D_8010AC80);
+        hi = ((f32 (*)(f32, f32, s32))func_80260650_de)(hi, D_8010AC7C, D_8010AC80);
     }
     arg0->unk4 = lo;
     arg0->unk8 = hi - lo;
