@@ -1,4 +1,5 @@
 #include "COMMON/CALLBACK.H"
+#include "MATH/80299ECC_3.H"
 #include "MATH/SHARED_WIDGETIDE.H"
 
 s32 func_80299A80_de(struct Shared_WidgetIdE *arg0, NodeEvent event) {

@@ -17,6 +17,7 @@
 #include "FRONTEND/8040B45C_35.H"
 #include "MENU/GFX/80414430_19.H"
 #include "MATH/802A2870.H"
+#include "MATH/80299ECC_3.H"
 #include "FRONTEND/8040B45C_36.H"
 
 extern BatchRec D_8014D590[];
@@ -390,7 +391,6 @@ extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 extern void func_8040E7FC_de(void *, DrawArgs);
 extern s32 func_80299838_de(s32);
-extern s32 func_80299A80_de(void *, DrawArgs);
 extern void func_802A18FC_de(void);
 extern void func_802A18F4_de(void);
 
@@ -475,7 +475,7 @@ void func_8040DB04_de(DraftWidget *widget, DrawArgs args) {
             func_802A18FC_de();
             D_800E2AB8 = 0;
         }
-        if (func_80299A80_de(widget, args) && !(flags & 1)) {
+        if (func_80299A80_de((struct Shared_WidgetIdE *)widget, *(struct NodeEvent *)&args) && !(flags & 1)) {
             func_802A18F4_de();
             D_800E2AB8 = 0;
         }
