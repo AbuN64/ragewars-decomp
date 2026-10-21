@@ -6,6 +6,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "GFX/TEXT/802A8A94_5.H"
+#include "SCENE/802508E0_9.H"
 
 extern s32 D_800E28D0;
 
@@ -25,7 +26,6 @@ extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
 extern void func_802AA1AC_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
-extern void func_80253754_de(s32 arg0, s32 arg1);
 
 extern Gfx *D_80110634;
 
@@ -234,7 +234,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32
         }
     }
 release:
-    func_80253754_de(0, sprites);
+    func_80253754_de(0, (struct Node80253610 *)sprites);
 }
 
 void func_802A84F8_de(void) {

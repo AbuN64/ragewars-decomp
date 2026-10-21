@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
+#include "SCENE/802508E0_9.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/FRUSTUM.H"
 #include "gbi.h"
@@ -90,7 +91,6 @@ extern void func_80273D6C_de(MatrixF *);
 extern void func_8027027C_de(MatrixF *, char *);
 
 extern void func_8024ED90_de(StaticObject *, void **);
-extern void func_80253754_de(s32, void **);
 
 void func_8024EB90_de(StaticObject *obj) {
     MatrixF matrix;

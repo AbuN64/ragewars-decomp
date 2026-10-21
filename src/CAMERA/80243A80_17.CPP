@@ -5,10 +5,10 @@
 #include "COMMON/ACCESS_S8_10F.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_4.H"
+#include "SCENE/802508E0_9.H"
 #include "RENDER_4/8028FD2C_6.H"
 
 extern s32 func_8028FE28_de(s32 *arg0, s32 arg1, s32 arg2);
-extern void func_80253754_de(s32, void *);
 extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
 extern void func_8026EE20_de(void *, s32, void *);
 extern void func_80262480_de(void *);

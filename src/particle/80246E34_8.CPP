@@ -5,6 +5,7 @@
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "particle/80246E34_8.H"
+#include "SCENE/802508E0_9.H"
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 
@@ -25,7 +26,6 @@ extern u8 D_801462E5;
 extern s32 *func_8024BFD4_de(char *, s8);
 
 
-extern void func_80253754_de(s32, s32 *);
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
