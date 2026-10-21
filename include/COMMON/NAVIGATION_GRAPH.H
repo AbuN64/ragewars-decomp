@@ -8,7 +8,13 @@ struct NavigationPlatform;
 
 typedef struct NavigationBuffer { s32 stride; s32 reserved; u8 data[1]; } NavigationBuffer;
 
+/* The ROM attribute word holds flags in its high half and the object id in its low half. Guest memory keeps the word
+   numeric, so a little-endian host finds the low half (object id) at the first halfword address. */
+#if defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+typedef struct NavigationPoint { CVector3 position; u16 objectId; u16 flags; } NavigationPoint;
+#else
 typedef struct NavigationPoint { CVector3 position; u16 flags; u16 objectId; } NavigationPoint;
+#endif
 
 typedef struct NavigationPortal { u16 first, second; u8 kind; } NavigationPortal;
 
@@ -50,10 +56,19 @@ typedef struct NavigationGraph {
 
 /* Resource tables store records with a runtime stride. */
 static __inline__ void *navigationRecord(NavigationBuffer *table, s32 index) { return table->data + index * table->stride; }
-/* The point's flags and object id read as one word (tests that span both halves). */
-static __inline__ u32 navigation_attributes(NavigationPoint *point) {
+/* The point's flags and object id read as the one ROM attribute word (tests that span both halves). */
+static __inline__ u32 navigation_attributes(const NavigationPoint *point) {
     u32 value;
-    __builtin_memcpy(&value, &point->flags, sizeof(value));
+    __builtin_memcpy(&value, &point->position + 1, sizeof(value));
     return value;
+}
+static __inline__ u16 navigation_point_flags(const NavigationPoint *point) {
+    return point->flags;
+}
+static __inline__ u16 navigation_point_object_id(const NavigationPoint *point) {
+    return point->objectId;
+}
+static __inline__ void navigation_point_clear_flags(NavigationPoint *point, u16 flags) {
+    point->flags = (u16)(point->flags & ~flags);
 }
 #endif

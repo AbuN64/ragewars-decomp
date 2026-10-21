@@ -1,3 +1,4 @@
+#include "COMMON/NAVIGATION_GRAPH.H"
 #include "include_asm.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -61,7 +62,7 @@ void func_80213500_de(Shared_Actor *arg0) {
 loop:
                 if (tries < 10) {
                     candidate = func_802744D4_de() % table[1];
-                    if (((NavigationNode *)(func_8020C994_de(table, candidate)))->flags & 0x400) {
+                    if (navigation_point_flags((NavigationPoint *)(func_8020C994_de(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
@@ -139,7 +140,7 @@ void func_802136EC_de(Shared_Actor *arg0)
 loop:
                 if (tries < 10) {
                     candidate = func_802744D4_de() % table[1];
-                    if (((NavigationNode *)(func_8020C994_de(table, candidate)))->flags & 0x400) {
+                    if (navigation_point_flags((NavigationPoint *)(func_8020C994_de(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
@@ -184,7 +185,7 @@ void func_80213810_de(void *arg0)
 loop:
         if (tries < 10) {
             candidate = func_802744D4_de() % table[1];
-            if (((NavigationNode *)(func_8020C994_de(table, candidate)))->flags & 0x400) {
+            if (navigation_point_flags((NavigationPoint *)(func_8020C994_de(table, candidate))) & 0x400) {
                 candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
             }
             tries++;

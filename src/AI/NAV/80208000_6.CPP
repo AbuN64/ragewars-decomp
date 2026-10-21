@@ -1,3 +1,4 @@
+#include "COMMON/NAVIGATION_GRAPH.H"
 #include "include_asm.h"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHAREDCALLBACK5.H"
@@ -37,7 +38,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
   u32 var_v0;
   u32 compare_id;
   Shared_WeaponSlot *temp_s0;
-  Shared_Target *temp_s1;
+  NavigationPoint *temp_s1;
   Shared_Node *var_s5;
   Shared_WeaponSlot *var_s3;
   Shared_World *ww;
@@ -49,12 +50,12 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
     do
     {
       temp_a0 = arg0->unk0;
-      temp_s1 = (Shared_Target *) (&((SharedRecAt0V1 *) temp_a0)->unk0[(var_s5->unk0 * (*temp_a0)) + 8]);
-      if (temp_s1->unkC & 1)
+      temp_s1 = (NavigationPoint *) (&((SharedRecAt0V1 *) temp_a0)->unk0[(var_s5->unk0 * (*temp_a0)) + 8]);
+      if (navigation_point_flags(temp_s1) & 1)
       {
         var_f20 = D_800C1D40[1];
         var_s3 = 0;
-        if (temp_s1->unkE != 0x653)
+        if (navigation_point_object_id(temp_s1) != 0x653)
         {
           var_s4 = 0;
           if (var_s4 < ww->actorCount)
@@ -63,7 +64,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
             do
             {
               temp_s0 = (Shared_WeaponSlot *) (&((SharedRecAt0V1 *) ww->actors)->unk0[var_s2]);
-              compare_id = temp_s1->unkE;
+              compare_id = navigation_point_object_id(temp_s1);
               if (compare_id == 0x64E)
               {
                 var_v0 = temp_s0->unkE4;
@@ -74,7 +75,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
                 goto advance;
               }
               var_v0 = func_8028B25C_de(ww, temp_s0->unk18->unk28);
-              compare_id = temp_s1->unkE;
+              compare_id = navigation_point_object_id(temp_s1);
               compare:
               if (var_v0 == compare_id)
               {
@@ -109,7 +110,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
             }
           }
           var_s5->unk34 = 0;
-          temp_s1->unkC = (u16) (temp_s1->unkC & 0xFFFE);
+          navigation_point_clear_flags(temp_s1, 1);
         }
       }
       next_node:
@@ -171,7 +172,7 @@ void func_8020ABF0_de(NavigationGraph *graph) {
         do {
             point = navigationRecord(graph->points, node->key);
             chosen = 0;
-            if (point->flags & 0x200) {
+            if (navigation_point_flags(point) & 0x200) {
                 best = D_800C1D50_de;
                 i = 0;
                 if (count > 0) {
@@ -221,7 +222,7 @@ void func_8020ABF0_de(NavigationGraph *graph) {
                     node->endpoint = chosenPosition;
                 } else {
                     node->platform = 0;
-                    point->flags &= 0xFDFF;
+                    navigation_point_clear_flags(point, 0x200);
                 }
             }
             node = node->next;
@@ -334,7 +335,7 @@ void func_8020AF9C_de(NavigationGraph *graph, Player *actor) {
                 }
                 point = navigationRecord(graph->points, target);
                 func_80271F68_de(&delta, &point->position, &actor->pos);
-                if (climbing || swimming || (point->flags & 0x200)) {
+                if (climbing || swimming || (navigation_point_flags(point) & 0x200)) {
                     dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
                 } else {
                     dist = delta.x * delta.x + delta.z * delta.z;
@@ -367,7 +368,7 @@ void func_8020AF9C_de(NavigationGraph *graph, Player *actor) {
             if (dy < 0.0f) {
                 dy = -dy;
             }
-            if (portal->kind == 3 || portal->kind == 10 || portal->kind == 5 || (!swimming && (point->flags & 0x20))) {
+            if (portal->kind == 3 || portal->kind == 10 || portal->kind == 5 || (!swimming && (navigation_point_flags(point) & 0x20))) {
                 if (dy < height) {
                     if (!found) {
                         bestDist = -1.0f;

@@ -1,3 +1,4 @@
+#include "COMMON/NAVIGATION_GRAPH.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTLINKS1458.H"
 #include "TYPES.H"
@@ -32,9 +33,9 @@ s32 func_8020F150_de(s32 *ids) {
     count = 0;
     for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
         record = func_8020C994_de(base, node->key);
-        if (((NavigationNode *)record)->flags & 1) {
+        if (navigation_point_flags((NavigationPoint *)record) & 1) {
             for (i = 0; i < 30; i++) {
-                if (((NavigationNode *)record)->reservedE == ids[i] && node->owner != 0
+                if (navigation_point_object_id((NavigationPoint *)record) == ids[i] && node->owner != 0
                     && ((Owner8020F150 *)node->owner)->active != 0) {
                     func_8020D220_de(base, node->key);
                     count++;
@@ -45,9 +46,9 @@ s32 func_8020F150_de(s32 *ids) {
     if (count == 0) {
         for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
             record = func_8020C994_de(base, node->key);
-            if (((NavigationNode *)record)->flags & 1) {
+            if (navigation_point_flags((NavigationPoint *)record) & 1) {
                 for (i = 0; i < 30; i++) {
-                    if (((NavigationNode *)record)->reservedE == ids[i]) {
+                    if (navigation_point_object_id((NavigationPoint *)record) == ids[i]) {
                         func_8020D220_de(base, node->key);
                         count++;
                     }

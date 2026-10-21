@@ -81,7 +81,7 @@ block_14:
                         var_a3 += 1;
                     }
                 }
-                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (var_s7->flags & 2)) {
+                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (navigation_point_flags(var_s7) & 2)) {
                     *var_a3 = arg2;
                     var_a3 += 1;
                     var_s4 += 1;
@@ -699,7 +699,7 @@ block_35:
                             var_fv0f_2 = func_802726F8_de(&temp_s2->position.x,&temp_fp->position.x);
                         }
                         var_fv0f_3 = var_fv0f_2 + var_s0->extra;
-                        if (temp_s2->flags & 0x400) {
+                        if (navigation_point_flags(temp_s2) & 0x400) {
                             var_fv0f_3 += D_800C1D88_de;
                         }
                         if (var_fv0f_3 < 0.0f) {

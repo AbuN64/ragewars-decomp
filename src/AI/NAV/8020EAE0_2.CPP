@@ -82,9 +82,9 @@ void func_8020EEA4_de(void) {
         addVal = D_800C1EE4_de;
         do {
             result = func_8020C994_de(base, node->key);
-            if (result->flags & 1) {
-                field0E = result->objectId;
-                if (func_8020F55C_de(field0E) != 0 || func_8020F57C_de(result->objectId) != 0) {
+            if (navigation_point_flags(result) & 1) {
+                field0E = navigation_point_object_id(result);
+                if (func_8020F55C_de(field0E) != 0 || func_8020F57C_de(navigation_point_object_id(result)) != 0) {
                     node->extra = node->extra + addVal;
                 }
             }

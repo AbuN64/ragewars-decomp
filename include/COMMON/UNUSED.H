@@ -3227,11 +3227,7 @@ typedef struct MotionRecAt24 MotionRecAt24;
 struct NavigationEndpoint;
 typedef struct NavigationEndpoint NavigationEndpoint;
 
-union NavigationFlagWord;
-typedef union NavigationFlagWord NavigationFlagWord;
 
-struct NavigationNode;
-typedef struct NavigationNode NavigationNode;
 
 struct NavigationState;
 typedef struct NavigationState NavigationState;
@@ -5953,17 +5949,6 @@ struct NavigationEndpoint {
     char pad0[0x40];
     func_80204EA8_S1 * unk_40;
     Triple pos;
-};
-union NavigationFlagWord;
-union NavigationFlagWord {
-    s32 v0;
-    u16 v1;
-};
-struct NavigationNode;
-struct NavigationNode {
-    Triple pos;
-    u16 flags;
-    u16 reservedE;
 };
 struct NavigationState;
 struct NavigationState {

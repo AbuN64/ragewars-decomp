@@ -1,3 +1,4 @@
+#include "COMMON/NAVIGATION_GRAPH.H"
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDCALLBACK5.H"
@@ -295,7 +296,7 @@ void Nav_SteerAlongRoute(AiController *arg0) {
                     reach = D_800C1BD8_de;
                 } else {
                     reach = D_800C1BD4_de;
-                    if (point->flags & 0x100) {
+                    if (navigation_point_flags(point) & 0x100) {
                         reach = D_800C1BD8_de;
                     }
                 }
@@ -314,7 +315,7 @@ void Nav_SteerAlongRoute(AiController *arg0) {
     }
     if (arg0->queue[0] != -1) {
         point = func_8020C994_de(graph, arg0->queue[0]);
-        if (point->flags & 2) {
+        if (navigation_point_flags(point) & 2) {
             arg0->destination = arg0->home;
             return;
         }

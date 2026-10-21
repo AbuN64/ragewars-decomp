@@ -129,8 +129,8 @@ s32 func_8020F444_de(AiController *arg0) {
         type = 0x64E;
         do {
             result = func_8020C994_de(scanbase, node->key);
-            if ((result->flags & 1) &&
-                result->objectId == type &&
+            if ((navigation_point_flags(result) & 1) &&
+                navigation_point_object_id(result) == type &&
                 ((ActorMotionState *)node->object->motion)->mode == 0) {
                 func_8020D220_de(scanbase, node->key);
                 count += 1;
@@ -209,8 +209,8 @@ s32 func_8020F614_de(void) {
     if (node != 0) {
         do {
             result = func_8020C994_de(base, node->key);
-            if ((((NavigationNode *)result)->flags & 1) &&
-                ((NavigationNode *)result)->reservedE == 0x64E &&
+            if ((navigation_point_flags((NavigationPoint *)result) & 1) &&
+                navigation_point_object_id((NavigationPoint *)result) == 0x64E &&
                 (s8)((LevelActor *)node->object)->pad1A4 == 0) {
                 func_8020D220_de(base, node->key);
                 count += 1;

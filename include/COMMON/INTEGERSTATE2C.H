@@ -292,12 +292,6 @@ struct SharedRecAt0V1 {
     char unk0[1];
 };
 
-struct Shared_Target;
-struct Shared_Target {
-    char pad0[0xC];
-    u16 unkC;
-    u16 unkE;
-};
 
 extern float D_800C1CF8_de;
 
@@ -322,8 +316,6 @@ struct Shared_WeaponWorld {
     s32 unk140;
 };
 
-struct Shared_Target;
-typedef struct Shared_Target Shared_Target;
 
 struct func_8020A6D8_S1;
 struct func_8020A6D8_S1 {
