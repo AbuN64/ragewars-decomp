@@ -16,6 +16,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "particle/80271B18_3.H"
+#include "particle/8027A0F4_4.H"
 extern void func_80284178_de(void *);
 
 extern void func_80279A00_de(void *arg0);
@@ -47,9 +48,6 @@ extern Triple D_801002B8;
 
  /* extern */
 s32 func_80268BE0_de(void *, s8);
-
- /* extern */
-void Particle_Attach(void *, s32, s32);
 
  /* extern */
 void func_802843B8_de(void *, s32);
@@ -310,7 +308,7 @@ void func_80283920_de(Obj_func_80283920_de *arg0, Params_func_80283920_de *arg1)
     s8 temp_a1;
     s8 temp_a2;
     u16 temp_v1;
-    Particle_Attach(arg0, 0, 0);
+    Particle_Attach((struct Actor_func_8027DAD0_de *)arg0, 0, 0);
     temp_a2 = arg1->unk6;
     if (temp_a2 != -1) {
         func_802A4598_de(&D_801379C0, arg0, temp_a2);

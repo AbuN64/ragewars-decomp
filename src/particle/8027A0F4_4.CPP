@@ -278,7 +278,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     } else {
         lift = 0.0f;
     }
-    Particle_Attach(particle, &position, &heading);
+    Particle_Attach((struct Actor_func_8027DAD0_de *)particle, &position, &heading);
     if (!(particle->flags & 0x30000)) {
         ramp = particle->time;
         if (ramp > 0.0f) {

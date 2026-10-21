@@ -10,6 +10,7 @@
 #include "SYSTEM/80255C40_7.H"
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "particle/8027A0F4_4.H"
 
 /* Spawns the effects that template block 2 of the system lists for a kind: for each template in the kind's range it filters by player mask, existing owner effects, anchor distance, mode, team flags and a percent chance, builds a spawn matrix (source matrix, mirror, translation or rotation), then for a random count allocates effects, fills their timing, spread, colour, render and direction fields from the template's packed floats, links them into their group, aims shots at the held target for kinds 0x2D and 0x4F, and plays their sound. Returns the number spawned. */
 
@@ -48,7 +49,6 @@ extern f32 func_802B2350(s32);
 #endif
 
 extern void func_8022B040_de(s32, ParticleEffect *);
-extern void Particle_Attach(ParticleEffect *, s32, s32);
 extern void func_802A4598_de(void *, ParticleEffect *, s32);
 extern s32 func_80268BE0_de(void *, s32);
 extern void func_802843B8_de(ParticleEffect *, s32);
@@ -578,7 +578,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                 }
                 effect->unk1E0 = D_800CD6B4;
-                Particle_Attach(effect, 0, 0);
+                Particle_Attach((struct Actor_func_8027DAD0_de *)effect, 0, 0);
                 if (entry->unk6 != -1) {
                     func_802A4598_de(&D_801379C0, effect, entry->unk6);
                 }
