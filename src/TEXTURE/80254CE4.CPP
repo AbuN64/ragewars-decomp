@@ -13,7 +13,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern void func_80255FB8_de(void *arg0);
+extern void func_80255FB8_de(void *arg0, s32 arg1);
 extern s32 D_80105180[];
 
 
@@ -70,7 +70,7 @@ void func_80254DA4_de(void *arg0, void *arg1) {
     func_8022BC04_S3 *arg1_record = arg1;
     s32 *p = D_80105180;
     arg1_record->unk10 = *p;
-    func_80255FB8_de((char *)p - 0xC10);
+    func_80255FB8_de((char *)p - 0xC10, (s32)arg1);
 }
 
 void func_80254DD0_de(void *arg0, void *arg1) {
