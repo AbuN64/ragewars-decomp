@@ -59,8 +59,7 @@ extern void func_80271818_de(struct Shape_typemap_165 *, Triple *);
 extern void func_80271F68_de(Triple *, Triple *, Triple *);
 extern void func_80271F9C_de(Triple *, Triple *, f32);
 extern void func_80271F34_de(Triple *, Triple *, Triple *);
-extern s32 func_802800C0_de(void *, void *, void *, s32, s32, s32,
-                         Triple, struct Shape_typemap_165, Triple, s32, s32, s32);
+#include "particle/8027A0F4_8.H"
 void func_8028422C_de(TrailActor *actor) {
         struct Shape_typemap_165 rotation;
         int temp;
@@ -83,7 +82,7 @@ void func_8028422C_de(TrailActor *actor) {
                 if (temp) {
                         divisor = (f32) count + (&D_800C4E88_de)[1];
                         do {
-    do { func_80271F9C_de(&step, &delta, (f32) i / divisor); func_80271F34_de(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de(system, actor, actor->owner, actor->property, actor->type, actor_2, position, rotation, step, 0, -1, 0x20E001); i++; } while (0);
+    do { func_80271F9C_de(&step, &delta, (f32) i / divisor); func_80271F34_de(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
                         } while (count >= i);
                 }
         }
