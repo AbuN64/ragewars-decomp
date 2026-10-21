@@ -16,6 +16,7 @@ extern s32 D_8014561C;
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "SCENE/80286050_8.H"
+#include "AI/NAV/CODE_80208158.H"
 
 
 extern char D_8013B364;
@@ -29,7 +30,6 @@ extern struct Shared_CharInfo *D_800D052C[];
 
 extern struct Shared_StateInfo D_800CED30[];
 extern struct Shared_StateInfo D_800C9684[];
-extern void func_80208158_de(s32);
 extern void func_8020AF9C_de(void *, void *);
 extern void func_80213CF8_de(void *, void *);
 extern void func_80216488_de(void *, s32, s32, s32, s32, s32);
@@ -170,7 +170,7 @@ void func_80220ED4_de(SharedPlayer *player)
   func_8020AF9C_de(&D_8013B364, player);
   if (player->views1450.view1450_0.unk1450 != 0)
   {
-    func_80208158_de(player->views1454.view1454_0.unk1454);
+    func_80208158_de((struct Brain *)player->views1454.view1454_0.unk1454);
   }
   if (game->local != 0)
   {
