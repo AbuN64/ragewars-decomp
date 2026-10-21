@@ -133,7 +133,6 @@ extern s32 func_80299958_de(void);
 
 
 
-extern void func_8029AB24_de(s8 port, s32 stick_x, s32 stick_y);
 
 void func_8029A558_de(ControllerEvent *arg0) {
 
