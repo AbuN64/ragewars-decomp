@@ -1,9 +1,8 @@
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "TYPES.H"
+#include "ANIM/80285290_2.H"
 
 /* Sorts num elements of the given width with a comparator and a swap routine using an iterative quicksort: partitions around the middle element, pushes the larger side onto a 30-entry stack and continues with the smaller, and hands ranges of eight or fewer elements to func_802854B4_de. Written from the classic iterative quicksort structure. */
-
-extern void func_802854B4_de(char *lo, char *hi, u32 width, s32 (*compare)(char *, char *), void (*swap)(char *, char *));
 
 void func_802852C0_de(char *base, u32 num, u32 width, s32 (*compare)(char *, char *), void (*swap)(char *, char *)) {
     char *lo;
@@ -24,7 +23,7 @@ void func_802852C0_de(char *base, u32 num, u32 width, s32 (*compare)(char *, cha
 recurse:
     size = (hi - lo) / width + 1;
     if (size <= 8) {
-        func_802854B4_de(lo, hi, width, compare, swap);
+        func_802854B4_de((u32)lo, (u32)hi, width, (s32 (*)(u32, u32))compare, (void (*)(u32, u32))swap);
     } else {
         swap(lo + (size / 2) * width, lo);
         loguy = lo;

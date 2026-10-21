@@ -1,6 +1,7 @@
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "TYPES.H"
 #include "stddef.h"
+#include "ANIM/80285290_2.H"
 
 /* Sorts fixed-stride records by selecting a maximum and swapping it to the end. */
 void func_802854B4_de(u32 arg0, u32 arg1, s32 arg2, s32 (*arg3)(u32, u32), void (*arg4)(u32, u32)) {
