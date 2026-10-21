@@ -8035,6 +8035,8 @@ segments:
     subsegments:
       - [0x1BCD94, data, data_8014/D_auto_rodata_unresolved_80153F4C]
       - [0x1BCDA8, data, data_8014/D_auto_rodata_writable_80153F60]
+      - [0x1BCDB4, data, data_8014/D_auto_rodata_writable_80153F6C]
+      - [0x1BCDB8, data, data_8014/D_auto_rodata_writable_80153F70]
       - [0x1BCDD3, data, data_8014/rodata_unresolved_80153F8B]
       - [0x1BCDD4, data, data_8014/D_blob_phase2_bd99e9c521151f12e6b9]
       - [0x1BCDD8, data, data_8014/D_auto_rodata_unresolved_80153F90]
