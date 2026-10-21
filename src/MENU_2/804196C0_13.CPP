@@ -4,6 +4,7 @@
 #include "MATH/80297CD0_3.H"
 #include "MENU_2/804196C0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/8040B45C_33.H"
 
 /* Creates a frame animation for widget id of the current screen: finds the widget through
    func_8040EC30_de, allocates and clears a 0x64-byte animation, sets its type fields, widget and
@@ -17,7 +18,6 @@ extern s32 func_80299958_de(void);
 
 extern void *func_80411DCC_de(s32 index);
 
-extern s32 func_8040EC30_de(s32 screen, u16 id);
 
 extern Animation *func_8025305C_de(s32 size);
 
@@ -40,7 +40,7 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
     s32 widget;
     Animation *anim;
 
-    widget = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), id);
+    widget = (s32)func_8040EC30_de(func_80411DCC_de(func_80299958_de()), id);
     func_80411DCC_de(func_80299958_de());
     anim = func_8025305C_de(0x64);
     func_802A0748_de(anim, 0, 0x64);
