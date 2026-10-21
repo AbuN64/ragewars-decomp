@@ -6,6 +6,7 @@
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
+#include "SCENE/802508E0_9.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/SHAREDCALLBACK5.H"
@@ -36,7 +37,6 @@ extern s32 D_80140FF8;
 
 extern void func_8024ADD0_de(void *arg0, CVector3 *arg1, s32 arg2);
 
-extern void func_80253754_de(s32 arg0, s32 arg1);
 
 
 extern void func_8022C060_de(void *arg0, void *arg1);
@@ -134,7 +134,7 @@ void func_8022BC94_de(void *arg0, s32 arg1) {
                     func_8024ADD0_de(arg0, &sp28, arg1);
                 }
             }
-            func_80253754_de(0, (s32)temp_s1);
+            func_80253754_de(0, temp_s1);
         }
     }
 }

@@ -6,6 +6,7 @@
 /* Spawns the effect of an item variant: resolves the variant's effect id, loads its descriptor and first record, takes the effect count from the record's model and turns the colour vector by the record's angle, then spawns the effect through the inline spawner of func_80262A9C_de with the given owner, position, scale, direction and counted reference, releasing both resources. Adapted from func_80262A9C_de with the descriptor loading added. */
 #include "TYPES.H"
 #include "SCENE/802508E0_4.H"
+#include "SCENE/802508E0_9.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "RENDER_4/8028FD2C_6.H"
@@ -17,7 +18,6 @@ extern s32 func_8028FE3C_de(void *, s32, s32, s32 *);
 extern s32 func_8028CF6C_de(void *, s32);
 extern f32 func_802B2350(s32);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
-extern void func_80253754_de(s32, void **);
 struct Shared_World;
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 extern s32 func_8028B25C_de(void *, s32);

@@ -3,10 +3,10 @@
 #include "COMMON/MANAGER.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_7.H"
+#include "SCENE/802508E0_9.H"
 #include "SYSTEM/8025E5B0_9.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-s32 func_80253754_de(s32, s32);
 
 
 
@@ -23,7 +23,7 @@ void func_80262480_de(void *record) {
 }
 
 void func_802624A8_de(void *arg0) {
-    func_80253754_de(0, (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10));
+    func_80253754_de(0, (struct Node80253610 *)(((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10));
     (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10) = 0;
 }
 

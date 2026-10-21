@@ -1,6 +1,7 @@
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/GFX.H"
+#include "SCENE/802508E0_9.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -31,7 +32,6 @@ void func_8021E2A0_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8021EA54_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8022C1E8_de(Shared_HudPlayer *, Shared_HudView *);
 void func_8022C37C_de(Shared_HudPlayer *, Shared_HudView *);
-void func_80253754_de(s32, s16 **);
 s32 func_80283228_de(void *, Shared_HudPlayer *);
 s16 **Render_StartWorldEffect(void *, s32, s32, s32);
 void func_802A6900_de(void *, Shared_HudPlayer *);

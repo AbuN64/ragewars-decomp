@@ -8,6 +8,7 @@
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "COMMON/ACCESS_S8_10F.H"
+#include "SCENE/802508E0_9.H"
 #include "COMMON/LISTHEADER.H"
 #include "CAMERA/80243A80.H"
 #include "TYPES.H"
@@ -130,7 +131,6 @@ extern s32 func_802654E8_de(void *, s32, s32);
 
 extern void func_8027985C_de(WeightedTable *);
 
-extern void func_80253754_de(s32, void *);
 
 s32 func_802462E8_de(Instance8020CD74 *arg0, CVector3 position, char **out) {
 

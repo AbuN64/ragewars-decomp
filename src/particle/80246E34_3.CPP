@@ -3,6 +3,7 @@
 #include "COMMON/UNSIGNED_QUOTIENT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ACTORRESOURCEHEADER.H"
+#include "SCENE/802508E0_9.H"
 
 /* Builds and packs the animated part matrices of an actor, then updates the
  * frame timing totals. */
@@ -77,7 +78,6 @@ extern s32 func_80245798_de(void);
 extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, CVector3, CVector3, s32);
 extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
 extern f32 Particle_GetActorHeight(Shared_PoseActor *);
-extern void func_80253754_de(s32, s32 *);
 extern void func_80261670_de(Shared_AnimState *, s32, s32, s32, s32, s32);
 extern void func_80261E98_de();
 extern void func_802624A8_de(Shared_AnimState *);

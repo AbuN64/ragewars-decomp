@@ -1,6 +1,7 @@
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/ENTRYRECAT8V4.H"
+#include "SCENE/802508E0_9.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -31,7 +32,6 @@ extern char D_800E0B2C;
 extern s32 func_8028FE3C_de(s32 *, s32, s32, s32 *);
 
 
-extern void func_80253754_de(s32, s32 **);
 
 /* Returns 1 unless one of the current record's track-2 references names an item, in the first or
    second item table of D_8011FE88 by its side flag, whose kind and subkind are 1 and 5, 9 and 4,
