@@ -40,7 +40,7 @@ Animation *func_804198CC_de(s32 id, s32 *frames) {
     s32 widget;
     Animation *anim;
 
-    widget = (s32)func_8040EC30_de(func_80411DCC_de(func_80299958_de()), id);
+    widget = (s32)func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)id);
     func_80411DCC_de(func_80299958_de());
     anim = func_8025305C_de(0x64);
     func_802A0748_de(anim, 0, 0x64);

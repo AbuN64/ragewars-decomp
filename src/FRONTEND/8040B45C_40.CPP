@@ -103,21 +103,21 @@ s32 func_80412710_de(s32 arg0, u8 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 a
 }
 
 void func_80412898_de(s32 identifier, s32 row, s32 column, s32 first, s32 second) {
-    Entry_func_80412898_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    Entry_func_80412898_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)identifier);
 
     entry->cells[row * entry->width + column].field_0 = first;
     entry->cells[row * entry->width + column].field_4 = second;
 }
 
 void func_80412940_de(s32 identifier, s32 row, s32 column, s32 *first, s32 *second) {
-    Entry_func_80412898_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    Entry_func_80412898_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)identifier);
 
     *first = entry->cells[row * entry->width + column].field_0;
     *second = entry->cells[row * entry->width + column].field_4;
 }
 
 void func_804129F0_de(s32 identifier, s32 first, s32 second, s32 third) {
-    u8 *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    u8 *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)identifier);
 
     entry[0x54] = second;
     entry[0x56] = third;
@@ -125,7 +125,7 @@ void func_804129F0_de(s32 identifier, s32 first, s32 second, s32 third) {
 }
 
 void func_80412A58_de(s32 identifier, s32 first, s32 second, s32 third) {
-    u8 *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    u8 *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)identifier);
 
     entry[0x55] = second;
     entry[0x57] = third;
@@ -133,14 +133,14 @@ void func_80412A58_de(s32 identifier, s32 first, s32 second, s32 third) {
 }
 
 void func_80412AC0_de(s32 identifier, s32 first, s32 second) {
-    struct Entry_func_80412AC0_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    struct Entry_func_80412AC0_de *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)identifier);
 
     entry->second = second;
     entry->first = first;
 }
 
 void func_80412B18_de(s32 identifier, s32 *first, s32 *second) {
-    struct MenuWidget *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), identifier);
+    struct MenuWidget *entry = func_8040EC30_de(func_80411DCC_de(func_80299958_de()), (u16)identifier);
 
     *first = entry->field_4C;
     *second = entry->field_4D;
