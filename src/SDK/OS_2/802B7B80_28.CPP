@@ -9,7 +9,7 @@ extern OSPifRam D_8014D4C0[4];
 extern u8 D_8014D5C0[32];
 extern OSPifRam D_8014D5E0[4];
 extern u8 D_8014D6E0[32];
-extern u32 D_800D8380[4];
+extern s32 D_800D8380[4];
 extern s32 func_802B84C0_de(OSMesgQueue *mq, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(OSMesgQueue *mq, int channel, u16 address, u8 *buffer, int force);
 extern u8 func_802B8C40_de(u16 address);

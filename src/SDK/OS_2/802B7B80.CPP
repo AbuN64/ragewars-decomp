@@ -6,7 +6,6 @@
 #include "sdk/os.h"
 
 #if defined(VERSION_US)
-extern void *D_800D8380[];
 extern u8 D_8014D4B0;
 extern u8 D_8014D5E0[];
 extern u8 D_8014D6E0;

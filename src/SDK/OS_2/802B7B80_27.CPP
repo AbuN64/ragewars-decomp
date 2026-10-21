@@ -6,7 +6,6 @@
 #include "sdk/os.h"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern void *D_800D8380[];
 extern u8 D_8014D4B0;
 extern u8 D_8014D5E0[];
 extern u8 D_8014D6E0;
@@ -54,7 +53,6 @@ u32 func_802B7F30_eu_x(Triple *arg0) {
     }
 }
 
-extern void *D_800D8380[];
 extern u8 D_8014D4B0;
 extern u8 D_8014D4C0[];
 extern u8 D_8014D5C0;
