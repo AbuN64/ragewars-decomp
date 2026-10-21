@@ -3,11 +3,11 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "DATA/OVLDAT9/800E5320.H"
+#include "FRONTEND/8040B45C_33.H"
 
 extern func_8042CE54_S1 *D_800E53C0;
 
 
-extern void *func_8040EC30_de(void *arg0, u16 arg1);
 extern void func_8040E8D8_de(void *arg0, s32 arg1);
 
 

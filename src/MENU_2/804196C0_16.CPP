@@ -6,6 +6,7 @@
 #include "TYPES.H"
 #include "MATH/80297CD0_3.H"
 #include "MENU_2/804196C0_16.H"
+#include "FRONTEND/8040B45C_33.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #ifdef NON_MATCHING
@@ -56,7 +57,6 @@ extern MenuResourceWidget *func_8025305C_de(int);
 extern int func_80299958_de(void);
 
 
-extern Resource_func_80419E54_de *func_8040EC30_de(int, int);
 
 extern void func_8040EDE4_de(Resource_func_80419E54_de *, MenuResourceWidget *);
 

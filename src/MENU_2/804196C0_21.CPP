@@ -14,6 +14,7 @@
 #include "RENDER_2/8025DE50_5.H"
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/8040B45C_33.H"
 
 /* Stores a mode at offset 0x58 of an object and plays sound 0xE77 for mode 1 or 0xE76 for mode 2
    through func_8025DF34_de. */
@@ -47,7 +48,6 @@ extern s32 func_80299958_de(void);
 
 extern void *func_80411DCC_de(s32 index);
 
-extern MenuSliderWidget *func_8040EC30_de(s32 arg0, s32 arg1);
 
 extern MenuSliderWidget *func_8025305C_de(s32);
 
@@ -179,7 +179,7 @@ MenuSliderWidget *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2) {
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB63;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = func_8040EC30_de(context, arg1 & 0xFFFF);
+    child = func_8040EC30_de((void*)context, arg1 & 0xFFFF);
     result->field_44 = child;
     result->field_48 = child->field_18;
     result->field_4C = arg2;

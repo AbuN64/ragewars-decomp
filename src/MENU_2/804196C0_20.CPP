@@ -4,6 +4,7 @@
 #include "MATH/80297CD0_3.H"
 #include "MENU_2/804196C0_20.H"
 #include "RESMGR/resmgr_string_memory.H"
+#include "FRONTEND/8040B45C_33.H"
 
 /* Creates a 0x7C-byte fading widget: finds the frame the low half of the first argument names and
    the item the second names in the current context through func_80299958_de, func_80411DCC_de and
@@ -22,7 +23,6 @@
 
 extern s32 func_80299958_de(void);
 extern void *func_80411DCC_de(s32 index);
-extern MenuFadeWidget *func_8040EC30_de(s32, s32);
 extern MenuFadeWidget *func_8025305C_de(s32);
 extern void func_8041A47C_de(MenuFadeWidget *);
 extern void func_8041A430_de(MenuFadeWidget *, s32);
@@ -41,7 +41,7 @@ MenuFadeWidget *func_8041A280_de(s32 frameId, s32 itemId) {
     result->field_12 = 8;
     result->field_0C = 0xB60;
     result->frame = frame;
-    result->item = func_8040EC30_de(context, itemId & 0xFFFF);
+    result->item = func_8040EC30_de((void*)context, itemId & 0xFFFF);
     result->scaleX = D_800E1470;
     result->scaleY = D_800E1470;
     result->frame->field_20 = 0;

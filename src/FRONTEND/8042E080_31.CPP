@@ -1,11 +1,11 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
+#include "FRONTEND/8040B45C_33.H"
 
 /* Updates the four player control rows, their visibility, and the selected player label. */
 extern struct Shared_Block *D_800E54A4;
 extern s32 func_80264614_de(s32);
-extern struct Shared_Item *func_8040EC30_de(void *, u16);
 extern void func_8040E950_de(MenuWidget *record, int enable);
 extern struct Shared_Item *func_8041B7FC_de(void *, s32);
 void func_80433D38_de(s32 player) {

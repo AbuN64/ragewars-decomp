@@ -17,6 +17,7 @@
 #include "MATH/80297CD0.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "MATH/80299ECC.H"
+#include "FRONTEND/8040B45C_33.H"
 
 /* Refreshes the selected entry and updates its interface state. */
 
@@ -56,7 +57,6 @@ extern void *func_8025305C_de(s32 size);
 
 
 
-extern struct Tree *func_8040EC30_de(struct Tree *context, u16 id);
 
 void func_80297DBC_de(void) {
     s32 (*temp_v0)(s32);

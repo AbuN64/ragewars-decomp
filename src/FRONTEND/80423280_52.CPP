@@ -8,6 +8,7 @@
 #include "FRONTEND/80423280_50.H"
 #include "FRONTEND/80423280_52.H"
 #include "FRONTEND/80423280_53.H"
+#include "FRONTEND/8040B45C_33.H"
 extern struct Screen_func_8042AFE0_de *D_800E4F60;
 
 /* Stores its argument in D_80154014. */
@@ -42,7 +43,6 @@ extern void func_802A025C_de(char *, char *);
 void func_8040E8D8_de(s32, s32);
 
  /* extern */
-s32 func_8040EC30_de(s32, u16);
 
  /* extern */
 
@@ -95,9 +95,9 @@ void func_8042B0A4_de(void) {
     var_s1 = 0;
     do {
         var_s0 = var_s1 * 0x10;
-        func_8040E8D8_de(func_8040EC30_de(D_800E4F60->field0, *(u16 *)(&D_800E0F16 + var_s0)), 0);
+        func_8040E8D8_de((s32)func_8040EC30_de((void*)D_800E4F60->field0, *(u16 *)(&D_800E0F16 + var_s0)), 0);
         if (*(s32 *)(&D_800E0F18 + var_s0) != -1) {
-            func_8040E8D8_de(func_8040EC30_de(D_800E4F60->field0, *(u16 *)(&D_800E0F1A + var_s0)), 0);
+            func_8040E8D8_de((s32)func_8040EC30_de((void*)D_800E4F60->field0, *(u16 *)(&D_800E0F1A + var_s0)), 0);
         }
             var_s1 += 1;
     } while (var_s1 < 0x28);

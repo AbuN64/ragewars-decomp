@@ -9,8 +9,7 @@
 #include "COMMON/TEXTURE.H"
 #include "FRONTEND/8040B45C_35.H"
 #include "RESMGR/resmgr_string_memory.H"
-
-extern Record_func_802A1990_de *func_8040EC30_de(s32 arg0, s32 arg1);
+#include "FRONTEND/8040B45C_33.H"
 
 extern Record_func_802A1990_de *func_8025305C_de(s32);
 
@@ -33,7 +32,7 @@ Record_func_802A1990_de *func_802A1990_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3
     *(Header44 *)result = *(Header44 *)source;
     result->field_0E = 0xB65;
     *(InstanceHdr *)&result->fields_2C = *(InstanceHdr *)&source->fields_2C;
-    child = func_8040EC30_de(context, arg1 & 0xFFFF);
+    child = func_8040EC30_de((void*)context, arg1 & 0xFFFF);
     result->field_44 = child;
     child->fields_2C[3] = (s32)&result->field_60;
     result->field_4C = arg3;

@@ -6,6 +6,7 @@
 #include "SCENE/802508E0_13.H"
 #include "RESMGR/resmgr_string_memory.H"
 #include "FRONTEND/8040B45C_31.H"
+#include "FRONTEND/8040B45C_33.H"
 
 /* Visits every cell of a list's column-by-row grid, computing each cell's rectangle through func_804122CC_de and drawing it through func_8040D2D0_de with the given style. */
 
@@ -15,7 +16,6 @@
 
 
 
-extern MenuWidget *func_8040EC30_de(void *root, u16 id);
 extern void func_804122CC_de(GridList *list, UnitMtx *cell, u32 column, u32 row);
 
 
