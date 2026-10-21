@@ -238,7 +238,7 @@ typedef struct SoundVoice {
     char pad3E[0x12];
     s32 zero50;
     u8 mode;
-    char pad55[0x4B];
+    char pad55[0x47];
     s32 noteLength;
     s32 noteWord;
     s32 f_A4;
