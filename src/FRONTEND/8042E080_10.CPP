@@ -11,6 +11,7 @@
 #include "FRONTEND/8042E080_39.H"
 #include "FRONTEND/8042E080_45.H"
 #include "FRONTEND/8042E080_59.H"
+#include "FRONTEND/8042E080_62.H"
 #include "FRONTEND/8042E080_64.H"
 #include "RESMGR/resmgr_string_memory.H"
 
@@ -38,7 +39,6 @@ extern void func_8040E8D8_de(void *, s32);
 
 extern s32 func_80404858_de(s32, s32);
 
-extern s32 func_804358C0_de(s32, s32);
 extern void func_8022EF30_de(void *);
 extern void func_80404E28_de(s32);
 extern void func_80433610_de(s32);

@@ -55,6 +55,7 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/NAME.H"
 #include "TYPES.H"
+#include "FRONTEND/8042E080_62.H"
 
 /* Initializes four player-menu slots and selects the first available child node. */
 
@@ -78,7 +79,7 @@ extern PakMenuController *D_800E54A4;
 extern void func_8040E950_de(MenuWidget *record, int enable);
 extern void func_8041B8DC_de(s32,s32,MenuWidget *);
 extern MenuWidget *func_8041B7FC_de(s32,s32);
-extern s32 func_8040EBD0_de(MenuWidget *),func_804358C0_de(s32,s8);
+extern s32 func_8040EBD0_de(MenuWidget *);
 void func_80433914_de(s32 player) {
  s32 i;
  MenuWidget *label,*value;
