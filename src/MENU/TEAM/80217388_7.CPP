@@ -9,6 +9,7 @@
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
+#include "MENU/TEAM/80217388_4.H"
 #include "MENU/TEAM/80217388_7.H"
 
 /** Reset the weapon menu: closed, no cursor or hover, and its thirty-six slots fanned 30 degrees apart. */
@@ -33,14 +34,12 @@ void func_8021836C_de(Menu *menu) {
     }
 }
 
-extern void func_80217928_de(s32 arg0, s32 arg1, s32 arg2);
-
 void func_802183E8_de(s32 arg0, s32 arg1, s32 arg2) {
     Gfx *cmd;
 
     func_802A9234_de(0xFF);
     gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
-    func_80217928_de(arg0, arg1, arg2);
+    func_80217928_de((Menu *)arg0, arg1, arg2);
 }
 
 /** Preserve the empty hook at VRAM 0x80218464. */
