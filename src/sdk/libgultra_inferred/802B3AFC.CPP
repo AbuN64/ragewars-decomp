@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE10_2.H"
 #include "TYPES.H"
+#include "sdk/libgultra_inferred/802B3AFC.H"
 
 extern s32 func_802AE500_de(s32, s32);
 
