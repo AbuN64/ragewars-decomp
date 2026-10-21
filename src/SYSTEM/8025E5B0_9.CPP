@@ -68,8 +68,10 @@ float func_80260634_de(float value, int bits) {
     return value / (float)((1 << bits) - 1);
 }
 
-f32 func_80260650_de(f32 value, f32 lower, f32 upper) {
-    return value * (upper - lower) + lower;
+/* The ROM hands the range over as a word in an integer register and moves it into a float register
+ * unchanged, so the argument is a raw bit pattern, not a number to convert. */
+f32 func_80260650_de(f32 value, f32 lower, s32 upperBits) {
+    return value * (*(f32 *)&upperBits - lower) + lower;
 }
 
 s32 func_80260664_de(s32 arg0) {
