@@ -136,6 +136,10 @@ s32 func_802301F4_de(void *actor, void *attack) {
 #endif
 
 #ifdef NON_MATCHING
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80102B00[];
+extern s32 D_800D30BC;
+#endif
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif

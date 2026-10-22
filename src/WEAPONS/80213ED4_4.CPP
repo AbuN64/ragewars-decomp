@@ -101,7 +101,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 unused, T
 
 #ifdef NON_MATCHING
 #include "COMMON/PROBE.H"
-#include "COMMON/TRIPLE.H"
+extern f32 D_800C2180_de, D_800C2184_de, D_800C2188_de, D_800C218C, D_800C2190_de, D_800C2194, D_800C21C0_de[];
 extern s32 D_801041F0;
 extern s32 func_802462E8_de(Actor_u1 *, CVector3, char **);
 

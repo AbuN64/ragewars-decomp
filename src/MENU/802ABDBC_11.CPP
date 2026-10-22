@@ -329,22 +329,19 @@ extern void D_002AD264(void);
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
-extern s32 func_8025DE54_de(s16 arg0, s32 arg1, s32 arg2, s32 arg3,
-                         s32 arg4, s32 arg5);
-
 
 typedef struct func_802ADE28_S1 func_802ADE28_S1;
 typedef struct func_802ADE28_S2 func_802ADE28_S2;
-typedef struct func_802ADE28_S3 func_802ADE28_S3;
-typedef struct func_802ADE28_S4 func_802ADE28_S4;
 typedef struct RecCode80213ED480216BF4 RecCode80213ED480216BF4;
+typedef struct ActivationSlot ActivationSlot;
+typedef struct ActivationActor ActivationActor;
 struct func_802ADE28_S1 {
     char pad0[0x18];
     func_802ADE28_S2 *unk18;
 };
 typedef struct EffectAmount { char pad[0xC]; f32 amount; } EffectAmount;
 struct func_802ADE28_S2 { char pad[0x14]; EffectAmount payload; };
-struct func_802ADE28_S3 {
+struct ActivationSlot {
     void **resource;
     u16 unk4;
     char pad4[0x6 - 0x4 - sizeof(u16)];
@@ -352,7 +349,7 @@ struct func_802ADE28_S3 {
     char pad6[0x8 - 0x6 - sizeof(s16)];
     s16 unk8;
 };
-struct func_802ADE28_S4 {
+struct ActivationActor {
     char pad0[0x8];
     s32 unk8;
     char pad8[0xC - 0x8 - sizeof(s32)];
@@ -376,7 +373,7 @@ struct RecCode80213ED480216BF4 {
 };
 
 /** Apply a scripted effect command and its optional sound callbacks. */
-s32 func_802ACE38_de(func_802ADE28_S4 *arg0, func_802ADE28_S3 *arg1, func_802ADE28_S1 *arg2) {
+s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_S1 *arg2) {
     void **resource;
     EffectAmount *state_value;
     s32 sound;
@@ -418,9 +415,7 @@ s32 func_802ACE38_de(func_802ADE28_S4 *arg0, func_802ADE28_S3 *arg1, func_802ADE
     }
     if (sound != 0) {
         func_8025DE54_de(sound,
-                      arg0->unk8,
-                      arg0->unkC,
-                      arg0->unk10, 0, -1);
+                      *(CVector3 *)&arg0->unk8, 0, -1);
     }
     if (callback != 0) {
         func_8025E11C_de(callback);

@@ -75,7 +75,13 @@ INCLUDE_ASM("span_1000", func_802661DC_de);
 #include "COMMON/WORLD.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
-#include "COMMON/TRIPLE.H"
+extern float D_800C43C0_de;
+extern float D_800C43C4_de;
+extern float D_800C43C8_de;
+extern float D_800C43CC_de;
+extern float D_800C43D0_de;
+extern struct NodeCode8028469C * * D_800C43D4_de;
+extern float D_800C43DC_de;
 
 void func_8022B09C_de(s32, f32 *);
 void func_802800C0_de(s32 *, void *, void *, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32,
@@ -215,12 +221,16 @@ extern const f32 D_800C43E0_de[16];
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern f32 func_8024BEDC_de(void *);
 extern f32 Particle_GetActorHeight(void *);
+#ifndef NON_MATCHING
 extern f32 func_8024D398_de(void *);
+#endif
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
 extern f32 func_802726F8_de(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
 extern f32 func_802B72B0_de(f32);
+#ifndef NON_MATCHING
 extern void func_80271F9C_de(void *, void *, f32);
+#endif
 extern void func_80216488_de(Shared_DamageEvent *, void *, s32, f32, s32, Shield *);
 extern s32 func_8022AC00_de(void *);
 struct CallbackState114;

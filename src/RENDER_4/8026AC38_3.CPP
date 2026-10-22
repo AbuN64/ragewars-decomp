@@ -177,7 +177,6 @@ extern u32 D_800E28A4;
 
 extern s32 D_800CC364;
 extern u32 D_800CC384;
-extern u32 D_800CC38C;
 extern void func_80253BBC_de(s32, void **);
 
 void func_8026C6D8_de(s32 alpha, s32 resource, void *matrix,
@@ -217,7 +216,7 @@ void func_8026C6D8_de(s32 alpha, s32 resource, void *matrix,
     gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, alpha & 0xFF);
     gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
                      0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
-    gDPSetRenderMode(D_80110634++, D_800CC38C, G_RM_ZB_XLU_DECAL2);
+    gDPSetRenderMode(D_80110634++, (*(u32 *)&D_800CC38C), G_RM_ZB_XLU_DECAL2);
     gSPGeometryMode(D_80110634++, G_SHADE | G_CULL_BACK | G_FOG |
                     G_LIGHTING | G_TEXTURE_GEN | G_SHADING_SMOOTH, 0);
     gSPGeometryMode(D_80110634++, 0, geometry | G_CULL_BACK);

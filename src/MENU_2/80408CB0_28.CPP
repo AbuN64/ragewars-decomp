@@ -13,12 +13,12 @@ INCLUDE_ASM("ovl_80400000", func_804229E0_eu);
 #include "MENU_2/SCROLL.H"
 #include "COMMON/OWNERRECAT8V1.H"
 #include "TYPES.H"
-void *func_8041ABC0_de(s32 arg0, s32 arg1);
-void func_8041AD34_de(void *menu);
-void func_8041AD10_de(void *menu, s32 index);
-u32 func_80265350_de(void);
-void *func_8041A580_de(s32 arg0, s32 arg1, s32 arg2);
-void func_8041A6EC_de(struct Scroll *scroll, s32 item);
+extern MenuListWidget *func_8041ABC0_de(s32, s32);
+extern void func_8041AD34_de(); /* draft callers pass the list, and the second draft also a text */
+extern void func_8041AD10_de(MenuListWidget *, s32);
+extern s32 func_80265350_de(void);
+extern s32 func_8041A580_de(s32, s32, s32);
+extern void func_8041A6EC_de(s32, s32);
 extern SelectionScreenState *D_800E4514;
 
 s32 func_80422C58_eu(void) {
@@ -130,12 +130,6 @@ extern void func_8025E384_de(void);
 
 extern void func_8040E950_de(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
-extern MenuListWidget *func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(MenuListWidget *, char *);
-extern void func_8041AD10_de(MenuListWidget *, s32);
-extern s32 func_80265350_de(void);
-extern s32 func_8041A580_de(s32, s32, s32);
-extern void func_8041A6EC_de(s32, s32);
 extern s32 func_8042AF28_de(void);
 extern void func_8043C210_de(Shared_OptionsScreen *, s32, s32, s32, s32);
 extern void func_8043C278_de(Shared_OptionsScreen *);

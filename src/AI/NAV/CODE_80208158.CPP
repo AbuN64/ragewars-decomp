@@ -340,8 +340,6 @@ NavigationPortal *func_8020C9B0_de(NavigationGraph *,s32);
 NavigationSearchNode *func_8020CFE0_de(NavigationGraph *,s32);
 s32 func_8020CC0C_de(NavigationGraph *,s32,s32);
 s32 func_80209828_de(AiController *);
-typedef struct GroundObject { char pad[0x18]; ActorMotionResource *resource; } GroundObject;
-GroundObject *func_8024E6A0_de(Player *);
 
 extern f32 D_800C1BDC_de;
 extern f32 D_800C1BE0_de;
@@ -500,8 +498,6 @@ NavigationPortal *func_8020C9B0_de(NavigationGraph *,s32);
 NavigationSearchNode *func_8020CFE0_de(NavigationGraph *,s32);
 s32 func_8020CC0C_de(NavigationGraph *,s32,s32);
 s32 func_80209828_de(AiController *);
-typedef struct GroundObject { char pad[0x18]; ActorMotionResource *resource; } GroundObject;
-GroundObject *func_8024E6A0_de(Player *);
 
 extern f32 D_800C1C00;
 extern f32 D_800C1C04;
@@ -513,18 +509,6 @@ extern f32 D_800C1C18;
 extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
-static __inline__ void navigationTurnLeft(CVector3 *v) {
-    v->y = v->x;
-    v->x = -v->z;
-    v->z = v->y;
-    v->y = 0.0f;
-}
-static __inline__ void navigationTurnRight(CVector3 *v) {
-    v->y = v->x;
-    v->x = v->z;
-    v->z = -v->y;
-    v->y = 0.0f;
-}
 void func_80208EB0_de(AiController *arg0) {
     NavigationGraph *graph;
     CVector3 *playerPosition;

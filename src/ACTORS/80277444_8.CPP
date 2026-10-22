@@ -15,11 +15,11 @@ extern s32 func_8025DF34_de(s32 arg0);
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
 #include "COMMON/OBJECTLINKS14.H"
-typedef void (*PrimaryCallback)(NavigationPlatform *, void *, Trigger *);
-typedef void (*SecondaryCallback)(Trigger *);
-typedef struct CallbackPair { PrimaryCallback primary; SecondaryCallback secondary; } CallbackPair;
+typedef void (*NavPrimaryFn)(NavigationPlatform *, void *, Trigger *);
+typedef void (*NavSecondaryFn)(Trigger *);
+typedef struct NavCallbackPair { NavPrimaryFn primary; NavSecondaryFn secondary; } NavCallbackPair;
 
-extern CallbackPair *D_800CD668_de[];
+extern NavCallbackPair *D_800CD668_de[];
 
 extern void *D_800CD730;
 
@@ -29,7 +29,7 @@ extern s32 D_801371D4;
 extern void func_80239908_de(void *, void *, s32, void *, f32);
 extern s32 func_804030E0_de(s32);
 void func_80278C10_de(Trigger *trigger) {
-    CallbackPair *table;
+    NavCallbackPair *table;
     void *fallback;
     u8 index;
     s32 callback;
@@ -51,13 +51,13 @@ void func_80278C10_de(Trigger *trigger) {
         }
         table += trigger->entry;
         if (trigger->owner == D_801371D4) {
-            PrimaryCallback fn;
+            NavPrimaryFn fn;
             NavigationPlatform *actor;
             fn = table->primary;
             actor = &D_8011BF00[trigger->actor];
             if (fn != 0) fn(actor, &actor->motion, trigger);
         } else {
-            SecondaryCallback fn;
+            NavSecondaryFn fn;
             fn = table->secondary;
             if (fn != 0) fn(trigger);
         }

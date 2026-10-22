@@ -60,7 +60,6 @@ void func_80424C50_de(s32 arg0, s32 arg1) {
 INCLUDE_ASM("ovl_80400000", func_80424C50_de);
 #endif
 
-INCLUDE_ASM("ovl_80400000", func_80424DE8_de);
 
 #ifdef NON_MATCHING
 /* Count achievements, store the rank, and select its version-specific title. */
@@ -310,4 +309,6 @@ char *func_80424DE8_de(s32 index) {
     D_80102B00[index].rank = rank;
     return text;
 }
+#else
+INCLUDE_ASM("ovl_80400000", func_80424DE8_de);
 #endif

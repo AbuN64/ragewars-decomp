@@ -88,7 +88,8 @@ extern f32 func_80209B64_de(AttackBrain *);
 extern f32 func_80216F44_de(AttackActor *, AttackPosition);
 extern s32 func_8020D1CC_de(void *, s32, s32);
 
-s32 func_8021035C_de(AttackBrain *brain, s32 index) {
+s32 func_8021035C_de(Chaser *self, s32 index) {
+    AttackBrain *brain = (AttackBrain *)self;
     AttackActor *target = brain->targets[index]->actor;
     s32 accept = 0;
     s32 nearLimit, middleLimit, farLimit, band;

@@ -286,7 +286,6 @@ typedef struct { s16 x, y, z; u16 flags; s16 s, t; u8 r, g, b, a; } ColorVertex;
 typedef struct { s32 tag, count; ColorVertex vertices[1]; } ColorMesh;
 typedef struct { f32 x, y, z; } VertexColor;
 extern u32 D_80142218;
-extern u32 D_801462C8;
 extern f32 D_800C4B00_de, D_800C4B04_de, D_800C4B10_de;
 extern f32 D_800C4B14_de, D_800C4B18_de;
 
@@ -301,7 +300,7 @@ void func_80278274_de(ColorMesh *mesh, VertexColor *colors) {
     }
     v = mesh->vertices;
     count = mesh->count;
-    if (D_801462C8 & 0x4000) {
+    if (*(u32 *)&D_801462C8 & 0x4000) {
         for (i = 0; i < count; i++, v++) {
             v->r = 0; v->g = 0; v->b = 0;
         }

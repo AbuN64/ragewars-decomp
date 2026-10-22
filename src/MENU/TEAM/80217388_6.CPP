@@ -192,7 +192,10 @@ extern void *D_800D052C[];
 extern f32 D_800C2248_de, D_800C913C_de;
 extern s32 func_8022EB0C_de(void *);
 
-void func_802181FC_de(DraftChoiceMenu *menu, void *context, DraftChoicePlayer *player) {
+void func_802181FC_de(void *menuIn, s32 contextIn, void *playerIn) {
+    DraftChoiceMenu *menu = (DraftChoiceMenu *)menuIn;
+    void *context = (void *)contextIn;
+    DraftChoicePlayer *player = (DraftChoicePlayer *)playerIn;
     DraftChoiceEntry *entry = menu->choices;
     s32 i = 0;
     s32 j;

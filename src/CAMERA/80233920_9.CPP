@@ -441,7 +441,7 @@ extern s32 D_800E28D0, D_800E28D4;
 extern Gfx *D_80110634;
 extern f32 func_802B72B0_de(f32);
 
-void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special) {
+void func_80238670_de(FlareActor *actor, f32 x, f32 y, f32 intensity, s32 special, s32 unused) {
     FlareRadii radii = D_800C344C_de;
     FlareAlphas alphas = D_800C3468_de;
     FlareColors colors = D_800C3484_de;
@@ -528,13 +528,11 @@ extern Gfx *D_80110634;
 struct func_80238D20_S2;
 extern struct func_80238D20_S2 *D_8012D4E4;
 typedef struct { s32 unk0; } func_80238D20_G2;
-extern s32 D_800E28D0[2];
 typedef struct { f32 unk0; } func_80238D20_G3;
 extern f32 D_800C3514_de;
 extern void func_802A9234_de(s32);
 extern s32 func_8026925C_de(s32);
 extern void func_80272A10_de(void *, void *, Vector3f *);
-extern void func_80238670_de(void *, f32, f32, f32, s32, s32);
 
 typedef struct func_80238D20_S1 func_80238D20_S1;
 typedef struct func_80238D20_S2 func_80238D20_S2;
@@ -586,12 +584,12 @@ void func_80238D30_de(func_80238D20_S1 *arg0) {
             if ((node->unk5C & mask) &&
                 (*node->unk118 & state_mask)) {
                 func_80272A10_de(&arg0->unk1E0, &node->unk8, &value);
-                half = (f32)(D_800E28D0[0] / 2);
+                half = (f32)(D_800E28D0 / 2);
                 *x = value.x * half + half;
                 *y = value.y *
-                         (f32)(-D_800E28D0[1] / 2) +
-                     (f32)(D_800E28D0[1] / 2);
-                func_80238670_de(arg0, screen_x, screen_y,
+                         (f32)(-(&D_800E28D0)[1] / 2) +
+                     (f32)((&D_800E28D0)[1] / 2);
+                func_80238670_de((FlareActor *)arg0, screen_x, screen_y,
                               node->unk198 * D_800C3514_de,
                               0, 0);
             }

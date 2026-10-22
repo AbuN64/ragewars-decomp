@@ -72,13 +72,13 @@ s32 func_80443464_de(void *first, void *second, void *third) {
 #include "TYPES.H"
 
 /* Formats a player's status line into a menu field's text through func_802BD320_de (sprintf): one message when the player is its own partner, otherwise a message chosen by the player's mode at 0x12F0 (0 to 6), naming the partner's character from 0x84 of its record at 0x5D8 when there is a partner. */
-typedef struct Player {
+typedef struct StatusPlayer {
     char pad0[0x5D8];
     char *record;
     char pad5DC[0x12EC - 0x5DC];
-    struct Player *partner;
+    struct StatusPlayer *partner;
     unsigned int mode;
-} Player;
+} StatusPlayer;
 
 typedef struct {
     char pad0[0x10];
@@ -92,12 +92,12 @@ typedef struct {
 
 typedef struct {
     char pad0[0x1C];
-    Player *player;
+    StatusPlayer *player;
 } Owner;
 
 
 s32 func_804434E0_de(Item *item, Owner *owner) {
-    Player *player = owner->player;
+    StatusPlayer *player = owner->player;
     char *text = *item->field->text;
     if (player->partner == player) {
         func_802BD320_de(text, playerStatusText0());

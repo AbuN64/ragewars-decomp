@@ -217,7 +217,6 @@ extern s32 func_80404F04_de(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
-extern void func_80442574_de(char *, char *, ObjRecAt5DC *, struct Controller *, char *);
 
 static __inline__ char *pakPrompt(s32 *channel) {
     char *result;

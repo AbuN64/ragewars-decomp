@@ -125,8 +125,17 @@ INCLUDE_ASM("span_1000", func_80210964_de);
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/TRIPLE.H"
 #include "TYPES.H"
+extern float D_800C1FB0_de;
+extern float D_800C1FB4_de;
+extern float D_800C1FB8_de;
+extern float D_800C1FBC_de;
+extern float D_800C1FC0_de;
+extern float D_800C1FC4_de;
+extern float D_800C1FC8_de;
+extern float D_800C1FCC_de;
+extern float D_800C1FD0_de;
+extern float D_800C1FD4_de;
 void *func_8020993C_de(void *arg0);
 extern f32 D_800C88A8_de;
 

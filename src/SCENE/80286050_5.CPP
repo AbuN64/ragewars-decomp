@@ -113,7 +113,6 @@ finished:
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
-typedef struct CVector3_t { f32 x,y,z; } CVector3;
 typedef struct SceneBuffer { s32 stride,count; u8 data[0]; } SceneBuffer;
 typedef struct SceneHandle { s32 *data; s32 rest[3]; } SceneHandle;
 typedef struct SceneCell { u8 pad0[16]; s32 loaded; } SceneCell;
@@ -123,9 +122,7 @@ typedef struct SceneWorld { u8 pad0[0x30]; s32 id; u8 pad34[0x30]; s32 catalog; 
 extern Gfx *D_80110634;
 extern char D_0028798C[],D_800C5210_de[],D_800C522C_de[];
 extern void func_8026D980_de(void),func_8026D9D0_de(void);
-extern s32 func_8028FE3C_de(s32,s32,s32,s32 *);
 extern SceneHandle *func_8025343C_de(s32,s32,u32,void *);
-extern void func_80253670_de(s32,SceneHandle *),func_80253754_de(s32,SceneHandle *);
 extern s32 func_80250A64_de(SceneProp *);
 extern s32 func_80250A8C_de(SceneProp *);
 extern SceneHandle **func_80250B24_de(SceneProp *,s32,s32,SceneHandle **);

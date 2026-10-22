@@ -67,7 +67,6 @@ s32 func_80430028_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #include "COMMON/NAME.H"
 s32 func_80299B4C_de();                                /* extern */
 s32 func_8040EBD0_de(void *);                          /* extern */
-MenuWidget *func_8041B7FC_de(s32, s32);                      /* extern */
 void func_8041B8DC_de(s32, s32, void *);                  /* extern */
 void func_80433BCC_de(s32);                               /* extern */
 void func_80433D38_de(s32);                               /* extern */
@@ -112,7 +111,7 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     case 13:
         if ((D_800E54A4->players[temp_s1].sub == 6) && (arg3 == 1)) {
             func_8029973C_de();
-            var_s0 = func_8041B7FC_de(D_800E54A4->root, temp_s1)->next;
+            var_s0 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
 loop_11:
             if (func_8040EBD0_de(var_s0) != 0) {
                 var_s0 = var_s0->next;
@@ -125,7 +124,7 @@ loop_11:
         return 0;
     case 22:
         if (arg3 == 1) {
-            var_s0_2 = func_8041B7FC_de(D_800E54A4->root, temp_s1)->next;
+            var_s0_2 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
 loop_16:
             if (func_8040EBD0_de(var_s0_2) != 0) {
                 var_s0_2 = var_s0_2->next;
@@ -137,7 +136,7 @@ loop_16:
         goto block_24;
     case 27:
         if (arg3 == 1) {
-            var_s0_3 = func_8041B7FC_de(D_800E54A4->root, temp_s1)->next;
+            var_s0_3 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
 loop_21:
             if (func_8040EBD0_de(var_s0_3) != 0) {
                 var_s0_3 = var_s0_3->next;

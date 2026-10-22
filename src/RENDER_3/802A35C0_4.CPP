@@ -224,10 +224,10 @@ loop_4:
 typedef struct EffectResource {
     f32 value; char pad04[0xC]; s16 attachment; char pad12[0xD]; u8 first, second;
 } EffectResource;
-typedef struct EffectActor {
+typedef struct FxActor {
     char pad00[4]; u16 kind; char pad06[0x112]; u32 *flags;
     char pad11C[0x10]; void *owner; char pad130[0xA9]; u8 references;
-} EffectActor;
+} FxActor;
 typedef struct EffectList { void *head, *tail; s32 count; } EffectList;
 typedef struct EffectNode {
     struct EffectNode *previous, *next; EffectResource *resource;
@@ -237,16 +237,14 @@ typedef struct EffectNode {
 } EffectNode;
 typedef struct EffectPool { EffectList free, used; } EffectPool;
 typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
-typedef struct EffectInstance { char pad00[0xB0]; EffectActor *actor; } EffectInstance;
-extern void *D_800CDBD0[];
+typedef struct EffectInstance { char pad00[0xB0]; FxActor *actor; } EffectInstance;
 extern EffectResource *func_8028AFEC_de(void *, s32);
 extern void func_802794B0_de(void *);
 extern void func_80295E84_de(void *, s32);
 extern void func_80283064_de(void *, void *);
 extern void func_802727D8_de(void *);
-extern EffectInstance *func_802A25D0_de(void *, void *, void *);
 
-void func_802A4598_de(EffectWorld *world, EffectActor *actor, s32 resourceId) {
+void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
     EffectNode *node;
     EffectResource *resource;
     void *first, *second;
@@ -262,8 +260,8 @@ void func_802A4598_de(EffectWorld *world, EffectActor *actor, s32 resourceId) {
         node = func_8027963C_de(&world->pool);
         if (!node) return;
         resource = func_8028AFEC_de(&D_8011FE88, resourceId);
-        first = D_800CDBD0[resource->first];
-        second = D_800CDBD0[resource->second];
+        first = ((void **)D_800CDBD0)[resource->first];
+        second = ((void **)D_800CDBD0)[resource->second];
         func_802794B0_de(&node->children);
         node->flags = 2;
         if (*actor->flags & 0x10000) {
@@ -293,7 +291,7 @@ void func_802A4598_de(EffectWorld *world, EffectActor *actor, s32 resourceId) {
     ++actor->references;
     if (*actor->flags & 0x10000) {
         func_802727D8_de(matrix);
-        instance = func_802A25D0_de(world, node, matrix);
+        instance = ((EffectInstance *(*)(void *, void *, void *))func_802A25D0_de)(world, node, matrix);
         if (instance) instance->actor = actor;
     }
 }

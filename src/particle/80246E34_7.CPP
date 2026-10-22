@@ -28,7 +28,9 @@ extern void func_80268A40_de(void *, CVector3, CVector3 *, f32 *);
 extern void func_8027310C_de(f32 *, CVector3 *, f32);
 extern void func_80273448_de(void *, f32, f32, f32);
 extern void func_802735A8_de(f32 *, f32, f32, f32);
+#ifndef NON_MATCHING
 extern void func_80274244_de(void *, f32 *);
+#endif
 extern void func_8026F620_de(void *, f32 *, f32 *);
 extern void func_8024BA7C_de(char *, char *, void *, u8);
 extern void func_8024ADD0_de(struct LevelActor *, CVector3 *, s32);
@@ -107,20 +109,20 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-s32 func_802799C0_de(void *arg0, s32 arg1);
 float func_8024E678_de(void *object);
 f32 func_8024E2FC_de(Actor_u1 *arg0);
 s32 func_8027254C_de(f32 *arg0, f32 arg1);
 void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
-void func_80273448_de(char *object, float x, float y, float z);
+
 void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x60, 0x64, 0x68, 0x6c, 0x70, 0x80, 0x84, 0x88, 0x8c], gap at: 0x74. */
-void func_8024ADD0_de(void *arg0, void *arg1, s32 arg2) {
+void func_8024ADD0_de(struct LevelActor *actorIn, CVector3 *offsetIn, s32 arg2) {
+    void *arg0 = actorIn;
+    void *arg1 = offsetIn;
     f32 sp10[16];
     f32 sp50[3];
     f32 temp_fs0;

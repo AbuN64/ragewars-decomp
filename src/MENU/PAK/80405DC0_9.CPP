@@ -93,7 +93,6 @@ extern s32 func_80405160_de(s32, s32 *);
 extern s32 func_804050CC_de(s32, s32 *);
 extern s32 func_80405454_de(s32, char *);
 extern s32 func_80404958_de(s32, s32, void *, char *, char *, char *);
-extern void func_80442574_de(void *, void *, void *, void *, void *);
 extern void func_80253908_de(s32);
 extern void func_80253838_de(s32, void *);
 /* Save the small controller-pak record when capacity allows, release the
@@ -161,6 +160,7 @@ INCLUDE_ASM("ovl_80400000", func_80407290_de);
 #endif
 
 #ifdef NON_MATCHING
+extern char *D_800D36E0;
 extern u8 *D_8011FECC;
 extern char D_0044FAFC[];
 extern char *D_800D36D8;

@@ -57,17 +57,17 @@ s32 func_8042343C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
    0x580, creates the 0x80-step slider (0x1C0 - OPTIONS_RESOURCE_SHIFT)/(0x1C1 - OPTIONS_RESOURCE_SHIFT) at 0x0 set to the settings word at 0x10,
    registers (0x1C3 - OPTIONS_RESOURCE_SHIFT) and (0x1C4 - OPTIONS_RESOURCE_SHIFT), clears the word at 0xC, resets through func_802A2394_de and returns
    zero. */
-struct Screen {
+struct SliderScreen {
     s32 slider;
     s32 first_list;
     s32 second_list;
     s32 state;
 };
 
-extern struct Screen *D_800E4514;
-typedef struct Settings { char pad0[0x10]; s32 value; char pad14[7]; u8 first; char pad1C[0x564]; u8 second; } Settings;
-extern Settings D_801462C8;
-extern struct Screen *func_8025305C_de(s32);
+extern struct SliderScreen *D_800E4514;
+typedef struct SliderSettings { char pad0[0x10]; s32 value; char pad14[7]; u8 first; char pad1C[0x564]; u8 second; } SliderSettings;
+extern SliderSettings D_801462C8;
+extern struct SliderScreen *func_8025305C_de(s32);
 extern void func_8041B110_de(s32);
 extern s32 func_8041ABC0_de(s32, s32);
 extern void func_8041AD34_de(s32, char *);
@@ -85,7 +85,7 @@ struct func_8042362C_S1 {
 
 s32 func_804234CC_de(void) {
 
-    Settings *settings;
+    SliderSettings *settings;
     s32 list;
     s32 slider;
 

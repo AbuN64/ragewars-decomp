@@ -149,16 +149,15 @@ typedef struct {
     u8 pad1C[0x34]; f32 x, y, z; u8 pad5C[0x118]; s32 health;
     u8 pad178[0x45C]; s32 slot; PlayerInfo *info; s32 pad5DC;
     s32 modelId; s32 maxHealth; u8 pad5E8[0xE68]; s32 bot;
-} Player;
+} BonusPlayer;
 typedef struct { s32 value; u8 pad4[0x18C]; } PlayerBonus;
 struct World;
 extern s32 D_801468F4, D_80146938;
 extern u8 D_801462D5;
-extern PlayerBonus D_800FEB10[];
 struct Shared_World;
 extern void *func_8028CFA0_de(struct Shared_World *, s32, s32);
 
-void func_80226708_de(Player *player) {
+void func_80226708_de(BonusPlayer *player) {
     ActorTemplate *model;
     s32 id, health;
     s8 kind;
@@ -185,7 +184,7 @@ void func_80226708_de(Player *player) {
 fallback_first:
         health = player->model->health << 8;
     }
-    if (D_801462D5 == 1 && player->bot == 0) health += D_800FEB10[player->slot].value;
+    if (D_801462D5 == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
     player->maxHealth = health;
     if (D_80146938 != 0 && player->info->boosted != 0) {
         kind = player->info->kind;
@@ -196,7 +195,7 @@ fallback_first:
 fallback_second:
         health = player->model->health << 8;
     }
-    if (D_801462D5 == 1 && player->bot == 0) health += D_800FEB10[player->slot].value;
+    if (D_801462D5 == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
     player->health = health;
     player->alpha = 0xFF;
 }

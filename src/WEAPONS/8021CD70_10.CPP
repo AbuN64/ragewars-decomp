@@ -253,10 +253,10 @@ invalid:
 #include "TYPES.H"
 
 typedef struct { u8 pad0[0x79]; u8 yaw, pitch; s8 pitchMode; u8 pad7C; u8 freePitch; } ControlSettings;
-typedef struct { u8 pad0[0x5D8]; ControlSettings *settings; u8 pad5DC[0xC0]; f32 yawInput, pitchInput; u8 pad6A4[0x80]; f32 pitch; u8 pad728[0xC4]; f32 damping; u8 pad7F0[0x9C4]; s32 locked; u8 pad11B8[0x20]; f32 cooldown; } Player;
-typedef struct { u8 pad0[0x6C]; f32 yaw; } Body;
+typedef struct { u8 pad0[0x5D8]; ControlSettings *settings; u8 pad5DC[0xC0]; f32 yawInput, pitchInput; u8 pad6A4[0x80]; f32 pitch; u8 pad728[0xC4]; f32 damping; u8 pad7F0[0x9C4]; s32 locked; u8 pad11B8[0x20]; f32 cooldown; } ControlPlayer;
+typedef struct { u8 pad0[0x6C]; f32 yaw; } ControlBody;
 typedef struct { u8 pad0[0x50]; u32 flags; } Surface;
-typedef struct { f32 enableYaw, yawRate, pitchRate, pitchScale, downScale, upScale; } Tuning;
+typedef struct { f32 enableYaw, yawRate, pitchRate, pitchScale, downScale, upScale; } ControlTuning;
 extern void *func_8024E7DC_de(void *);
 extern void func_80274870_de(f32 *, f32, f32);
 extern f32 D_800C287C_de;
@@ -274,7 +274,7 @@ extern f32 D_800C28A8_de;
 extern f32 D_800C28AC_de;
 extern f32 D_800C28B0_de;
 
-void func_802231D4_de(Player *player, Body *body, Tuning *tuning) {
+void func_802231D4_de(ControlPlayer *player, ControlBody *body, ControlTuning *tuning) {
     f32 damp, yawRate, pitchRate, input, value;
     ControlSettings *settings;
     Surface *surface;

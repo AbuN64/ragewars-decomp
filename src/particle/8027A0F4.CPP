@@ -271,7 +271,9 @@ INCLUDE_ASM("span_1000", func_8027A4D0_de);
 #include "TYPES.H"
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0xc0, 0xc4, 0xc8, 0xcc, 0xd8, 0xdc, 0xe0, 0xe4], gap at: 0xd0. */
-void func_8027A948_de(void *arg0, CVector3 *arg1) {
+void func_8027A948_de(AccelSteeringObj *objIn, AccelSteeringVec *vecIn) {
+    void *arg0 = objIn;
+    CVector3 *arg1 = (CVector3 *)vecIn;
     CVector3 sp10;
     CVector3 sp20;
     CQuatern sp30;

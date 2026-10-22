@@ -222,9 +222,11 @@ done:
 }
 #endif
 
+#ifndef NON_MATCHING
 INCLUDE_ASM("ovl_80400000", func_8043829C_de);
 
 INCLUDE_ASM("ovl_80400000", func_80438614_de);
+#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
@@ -306,8 +308,11 @@ INCLUDE_ASM("ovl_80400000", func_80438828_de);
 
 #ifdef NON_MATCHING
 extern Profile D_80102B00[];
+extern char D_800E1F48[];
 
+#if !defined(VERSION_US) && !defined(VERSION_US_REV1)
 extern s32 func_802A0C08_de(void *, s32, ...);
+#endif
 
 /* Fill the selected player's preview statistics and optional rank badge. */
 void func_8043829C_de(void) {

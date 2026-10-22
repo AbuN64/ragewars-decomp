@@ -16,15 +16,16 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/SHARED_MENUREPLY.H"
-#include "FRONTEND/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/ANIMATION.H"
 #include "COMMON/OWNERRECAT8V1.H"
 #include "COMMON/S1_5.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
+extern struct Screen_func_80426788_de *D_800E4690;
+extern struct Status D_80146398[];
+extern MenuWidget *func_8040EC30_de(void *, s32);
 void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
@@ -54,71 +55,71 @@ s32 func_804264F0_us_rev1(MenuWidget *arg0) {
     u8 temp_v1_3;
 
     temp_v0 = func_8025305C_de(0xA80);
-    D_800E4690 = temp_v0;
+    (*(ResultsOptionsScreen **)&D_800E4690) = temp_v0;
     temp_v0->root = arg0;
     var_s0 = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((void * *) ((u8 *) D_800E4690 + 2420))) = func_8041B610_de(arg0, 4);
+    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2420))) = func_8041B610_de(arg0, 4);
     func_8041B6E8_de(arg0, 0, 0x13E);
     func_8041B6E8_de(arg0, 1, 0x13E);
     func_8041B6E8_de(arg0, 2, 0x13E);
     func_8041B6E8_de(arg0, 3, 0x13E);
     var_a1 = 0;
     do {
-        func_80265688_de(D_800E4690->owned, var_a1, 0);
+        func_80265688_de((*(ResultsOptionsScreen **)&D_800E4690)->owned, var_a1, 0);
         temp_a1 = var_s0;
         var_s0 += 1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        func_80265688_de(&(*((u8 *) ((u8 *) D_800E4690 + 2681))), temp_a1, 0);
+        func_80265688_de(&(*((u8 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2681))), temp_a1, 0);
         var_a1 = var_s0;
     } while (var_s0 < 0x24);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2440))) = 1;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2440))) = 1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2444))) = 4;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2444))) = 4;
     temp_v0_2 = func_8040EC30_de(arg0, 0x145);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2424))) = temp_v0_2;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424))) = temp_v0_2;
     temp_v0_2->x = (u16) temp_v0_2->x - (u16) temp_v0_2->width;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    var_v1 = (*((MenuWidget * *) ((u8 *) D_800E4690 + 2424)))->width;
+    var_v1 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)))->width;
     if (var_v1 < 0) {
         var_v1 += 3;
     }
     temp_v1 = var_v1 >> 2;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2428))) = temp_v1;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2428))) = temp_v1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_a2 = (*((MenuWidget * *) ((u8 *) D_800E4690 + 2424)));
+    temp_a2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2424)));
     temp_a2->x = (u16) temp_a2->x + (temp_a2->width - (temp_v1 * 4));
     temp_v0_3 = func_8040EC30_de(arg0, 0x144);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2432))) = temp_v0_3;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432))) = temp_v0_3;
     temp_v0_3->x = (u16) temp_v0_3->x + (u16) temp_v0_3->width;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    var_v1_2 = (*((MenuWidget * *) ((u8 *) D_800E4690 + 2432)))->width;
+    var_v1_2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)))->width;
     if (var_v1_2 < 0) {
         var_v1_2 += 3;
     }
     var_s0_2 = 0;
     temp_v1_2 = var_v1_2 >> 2;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2436))) = temp_v1_2;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2436))) = temp_v1_2;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_a2_2 = (*((MenuWidget * *) ((u8 *) D_800E4690 + 2432)));
+    temp_a2_2 = (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2432)));
     temp_a2_2->x = (u16) temp_a2_2->x - (temp_a2_2->width - (temp_v1_2 * 4));
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((void * *) ((u8 *) D_800E4690 + 2448))) = func_80419E54_de(0x141, 0x6E);
+    (*((void * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2448))) = func_80419E54_de(0x141, 0x6E);
     temp_v0_4 = func_8040EC30_de(arg0, 0x13F);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2452))) = temp_v0_4;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2452))) = temp_v0_4;
     func_8040E8D8_de(temp_v0_4, 0);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2456))) = func_8040EC30_de(arg0, 0x154);
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2456))) = func_8040EC30_de(arg0, 0x154);
     var_a0 = D_80146398;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2460))) = func_8040EC30_de(arg0, 0x155);
-    D_800E4690->player = 0;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2460))) = func_8040EC30_de(arg0, 0x155);
+    (*(ResultsOptionsScreen **)&D_800E4690)->player = 0;
 loop_7:
     if (var_a0[0x78] != 1) {
         var_s0_2 += 1;
@@ -127,7 +128,7 @@ loop_7:
             goto loop_7;
         }
     } else {
-        D_800E4690->player = var_s0_2;
+        (*(ResultsOptionsScreen **)&D_800E4690)->player = var_s0_2;
     }
     var_s0_3 = 0;
     var_v1_3 = D_80146398;
@@ -142,38 +143,38 @@ loop_7:
     func_80427008_de();
     func_80427F10_de();
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2632))) = func_8040EC30_de(arg0, (s32) *(D_800E0646_de + (D_800E4690->selection * 0x1C)));
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = func_8040EC30_de(arg0, (s32) *(D_800E0646_de + ((*(ResultsOptionsScreen **)&D_800E4690)->selection * 0x1C)));
     func_804280BC_de();
     D_80154024 = 0;
     D_80154020.value = -1;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    func_8043C210_de(&(*((s32 *) ((u8 *) D_800E4690 + 0))), 0x67, 0, 0, 0);
+    func_8043C210_de(&(*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 0))), 0x67, 0, 0, 0);
     temp_v0_5 = func_8040EC30_de(arg0, 0x151);
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) D_800E4690 + 2640))) = temp_v0_5;
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2640))) = temp_v0_5;
     temp_v0_5->alpha = 0xFF;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2636))) = 0;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2636))) = 0;
     if (((s32) D_801462D5 < 5) && ((s32) D_801462D5 >= 3)) {
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        (*((s32 *) ((u8 *) D_800E4690 + 2636))) = 1;
-        func_804279B8_de(D_800E4690);
+        (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2636))) = 1;
+        func_804279B8_de((*(ResultsOptionsScreen **)&D_800E4690));
     }
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2664))) = 0;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2664))) = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2668))) = 0;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2668))) = 0;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((s32 *) ((u8 *) D_800E4690 + 2672))) = -1;
+    (*((s32 *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2672))) = -1;
     temp_v1_3 = D_801462D5;
     switch (temp_v1_3) {                            /* switch 1; irregular */
     default:                                        /* switch 1 */
     case 1:                                         /* switch 1 */
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        (*((MenuWidget * *) ((u8 *) D_800E4690 + 2656))) = func_8040EC30_de(arg0, 0x13D);
+        (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2656))) = func_8040EC30_de(arg0, 0x13D);
         func_80422170_de();
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        (*((MenuWidget * *) ((u8 *) D_800E4690 + 2660))) = func_8040EC30_de(arg0, 0x147);
+        (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2660))) = func_8040EC30_de(arg0, 0x147);
         func_8040EC30_de(arg0, 0x148)->alpha = 0x6E;
         /* fallthrough */
     case 2:                                         /* switch 1 */

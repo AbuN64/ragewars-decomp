@@ -4,11 +4,6 @@
 #ifdef NON_MATCHING
 #include "TYPES.H"
 
-typedef struct MemoryBoundaryInit {
-    u32 last;
-    u32 flags;
-} MemoryBoundaryInit;
-extern MemoryBoundaryInit D_800CB3A0[];
 extern u32 D_80000318;
 #include "IO/DEBUG_MEMORY.H"
 extern u8 D_800F3452;

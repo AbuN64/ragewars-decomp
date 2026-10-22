@@ -475,7 +475,7 @@ void func_8040DB04_de(DraftWidget *widget, DrawArgs args) {
             func_802A18FC_de();
             D_800E2AB8 = 0;
         }
-        if (func_80299A80_de((struct Shared_WidgetIdE *)widget, *(struct NodeEvent *)&args) && !(flags & 1)) {
+        if (func_80299A80_de((struct Shared_WidgetIdE *)widget, *(struct DrawArgs *)&args) && !(flags & 1)) {
             func_802A18F4_de();
             D_800E2AB8 = 0;
         }

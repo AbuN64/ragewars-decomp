@@ -42,7 +42,9 @@ extern s32 D_800C9228_de[2];
 void *func_8020C994_de(void *, s32);
 s32 func_8020CB3C_de(void *, void *);
 s32 func_802227F4_de(void *, void *, s32);
+#ifndef NON_MATCHING
 void *func_80237E80_de(void *, void *, u8 *);
+#endif
 void *func_80239770_de(void *, void *, void *, f32); /* extern */
 CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);

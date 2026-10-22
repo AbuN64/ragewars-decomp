@@ -142,7 +142,7 @@ void func_8042DEA0_de(void) {
    once a kind 0xF opponent was placed, byte 0x95 = 1. */
 #include "TYPES.H"
 
-struct Status {
+struct ArenaStatus {
     char pad0[0x78];
     u8 joined;
     char pad79[0x91 - 0x79];
@@ -163,14 +163,13 @@ struct Stage {
     u8 opponents[7][4];
 };
 
-extern struct Status D_80146398[];
-extern struct Stage *D_800E4680;
+extern struct ArenaStatus D_80146398[];
 
 extern s32 func_8042E460_de(u8 *);
 
 void func_8042E1F0_de(void) {
     RenderCounters *match;
-    struct Status *status;
+    struct ArenaStatus *status;
     u8 *settings;
     s32 boss;
     s32 escorted;
@@ -191,28 +190,28 @@ void func_8042E1F0_de(void) {
     for (i = 0; i < 7; i++) {
         on = 1;
         settings = (u8 *)&D_801462C8;
-        if (D_800E4680->opponents[i][0] == 0) {
+        if ((*(struct Stage * *)&D_800E4680)->opponents[i][0] == 0) {
             continue;
         }
-        switch (D_800E4680->opponents[i][0]) {
+        switch ((*(struct Stage * *)&D_800E4680)->opponents[i][0]) {
         case 12:
             match->enabled = 1;
-            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
             settings[slot * 0x96 + 0x164] = 2;
             match->timer = 100;
             match->cooldown = -1;
             break;
         case 13:
             match->enabled = on;
-            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
             settings[slot * 0x96 + 0x164] = on;
             break;
         case 16:
-            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
             settings[slot * 0x96 + 0x164] = 2;
             break;
         case 14:
-            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
             if (boss == 0) {
                 match->enabled = on;
                 settings[slot * 0x96 + 0x164] = on;
@@ -224,12 +223,12 @@ void func_8042E1F0_de(void) {
         case 15:
             match->enabled = on;
             match->unk9C = 0;
-            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
             settings[slot * 0x96 + 0x164] = 1;
             escorted = 1;
             break;
         default:
-            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
             settings[slot * 0x96 + 0x164] = 0;
             if (escorted) {
                 settings[slot * 0x96 + 0x165] = on;
