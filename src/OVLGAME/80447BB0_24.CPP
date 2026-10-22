@@ -47,44 +47,50 @@ void func_8044972C_de(SharedPlayer *player) {
     }
 }
 
+/* Ends a human player's run: counts down the result timer (0x133C) and, when it runs out, clears humanWon and
+ * calls func_8022A748_de; then either respawns the player with the chosen model or settles the run (func_802227F4_de).
+ * NON_MATCHING: 80/80 words, only the order of the a1 load and the a2 move before func_8021B1E4_de differs. */
 #ifdef NON_MATCHING
-#include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
+#include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
+#include "MENU/PAK_LOAD.H"
+/* View of the player fields the end-of-run check reads. */
 typedef struct {
-    u8 pad0[0x10E]; s8 mode; u8 pad10F[0x4C9]; struct Record *info;
-    u8 pad5DC[0x10]; s32 unk5EC; u8 pad5F0[0xD4C];
-    s32 timer; s32 state; u8 pad1344[0x10C]; s32 disabled;
-} Actor_u1;
-extern Shared_Game D_801462C8;
-extern s32 D_80145048;
-extern u8 D_80145040[];
+    u8 pad0[0x10E]; s8 mode; u8 pad10F[0x4C9]; struct AiProfile *profile;
+    u8 pad5DC[0x10]; s32 model; u8 pad5F0[0xD4C];
+    s32 timer; s32 state; u8 pad1344[0x10C]; s32 computer;
+} RunEndView;
+#define RUN_END(p) ((RunEndView *)(p))
 extern void func_8022A748_de(void *);
-extern void func_8044952C_de(Actor_u1 *);
-extern void func_802227F4_de(Actor_u1 *, Actor_u1 *, s32);
-
-void func_80449870_de(Actor_u1 *actor)
+void func_80449870_de(SharedPlayer *player)
 {
-    s32 option = ((D_80145048 < 2) ^ 1) << 1;
-    if (!(D_801462C8.flags & 2) || D_801462C8.local) {
-        if ((D_801462C8.controllerMode == 1 || D_801462C8.controllerMode == 4) && actor->disabled == 0) {
-            if (actor->timer > 0) actor->timer--;
-            if (actor->timer == 0) {
-                D_801462C8.humanWon = 0;
-                func_8022A748_de(D_80145040);
+    s32 scale = ((D_80145048 < 2) ^ 1) << 1;
+    if (!(D_80145040.game.flags & 2) || D_80145040.game.local) {
+        if ((D_80145040.game.controllerMode == 1 || D_80145040.game.controllerMode == 4) && RUN_END(player)->computer == 0) {
+            if (RUN_END(player)->timer > 0) RUN_END(player)->timer--;
+            if (RUN_END(player)->timer == 0) {
+                D_80145040.game.humanWon = 0;
+                func_8022A748_de(&D_80145040);
             }
         }
     }
-    if ((D_801462C8.controllerMode == 1 || D_801462C8.controllerMode == 4) && actor->disabled == 0) {
-        if (actor->timer > 0) {
-            func_8021B1E4_de(actor, actor->unk5EC, option, 1);
-            func_8044952C_de(actor);
-            actor->state = 0;
-            return;
+    {
+        Shared_Game *game = &D_80145040.game;
+        if ((game->controllerMode == 1 || game->controllerMode == 4) && RUN_END(player)->computer == 0) {
+            if (RUN_END(player)->timer <= 0) {
+                if (game->local && RUN_END(player)->mode == 0 && RUN_END(player)->profile->bonus == 0) return;
+                func_802227F4_de(player, player, 0x12);
+                RUN_END(player)->state = 0;
+            } else {
+                func_8021B1E4_de(player, RUN_END(player)->model, scale, 1);
+                func_8044952C_de(player);
+                RUN_END(player)->state = 0;
+            }
+        } else {
+            func_802227F4_de(player, player, 0x12);
+            RUN_END(player)->state = 0;
         }
-        if (D_801462C8.local && actor->mode == 0 && actor->info->unk8F == 0) return;
     }
-    func_802227F4_de(actor, actor, 0x12);
-    actor->state = 0;
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_80449870_de);
