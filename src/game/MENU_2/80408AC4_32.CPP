@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
 typedef struct Func_8042D9F0_State {
     void *unk0;
     void *unk4;
@@ -41,7 +40,4 @@ s32 func_8042D9F0_de(s32 arg0) {
     func_802A0C08_de(D_800E5430->unk14, D_800E1B60, 1);
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8042D9F0_de);
-#endif
 #endif
