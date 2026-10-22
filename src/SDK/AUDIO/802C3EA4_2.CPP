@@ -174,6 +174,7 @@ void Audio_ComplexFft(f32 *data, s32 count, s32 sign, f32 *cosines, f32 *sines, 
 }
 
 #ifdef NON_MATCHING
+/* 49/228 words; remaining: draft builds 254 words, loop shape and register allocation differ from the original */
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"

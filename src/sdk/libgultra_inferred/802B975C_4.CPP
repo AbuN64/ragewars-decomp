@@ -17,6 +17,7 @@ INCLUDE_ASM("span_1000", func_802B4730_de);
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
 #ifdef NON_MATCHING
+/* 99/339 words; remaining: same size as the original, instruction order and register allocation differ */
 #include "TYPES.H"
 #include "acmd.h"
 

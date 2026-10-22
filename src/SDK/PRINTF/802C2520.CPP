@@ -7,6 +7,7 @@
 #include "SDK/PRINTF/802C31B0.H"
 
 #ifdef NON_MATCHING
+/* 104/337 words; remaining: draft builds 355 words, the original format-spec switch and register allocation differ */
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -441,6 +442,7 @@ case_default:
 }
 
 #ifdef NON_MATCHING
+/* 87/148 words; remaining: draft builds 141 words, control flow and register allocation differ from the original */
 #include "TYPES.H"
 
 

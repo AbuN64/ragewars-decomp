@@ -1,27 +1,11 @@
 #include "include_asm.h"
 
 #ifdef NON_MATCHING
-#include "TYPES.H"
-
-/* Unsigned 64-bit remainder, using restoring division so the runtime
- * primitive does not call itself through a compiler-generated modulo. */
-u64 func_802C1330_de(u64 numerator, u64 divisor)
-{
-    u64 remainder = 0;
-    u32 carry;
-    s32 bit;
-    if (divisor == 0) {
-        return 1U / (u32)divisor;
-    }
-    for (bit = 63; bit >= 0; --bit) {
-        carry = (u32)(remainder >> 63);
-        remainder = (remainder << 1) | ((numerator >> bit) & 1);
-        if (carry || remainder >= divisor) {
-            remainder -= divisor;
-        }
-    }
-    return remainder;
-}
+/* 311/317 words with -msplit-addresses (a per-file cflag in config.toml, 278/317 without); remaining: 6 words of hi/lo hazard nops the assembler does not insert */
+/* gcc-2.8.1 libgcc2 __umoddi3 compiled in place; the units name it func_802C1330_de */
+#define __umoddi3 func_802C1330_de
+#define L_umoddi3
+#include "libgcc2.inc.c"
 #else
 INCLUDE_ASM("span_1000", func_802C1330_de);
 #endif
