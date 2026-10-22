@@ -390,45 +390,59 @@ extern f32 D_800C91F8;
 
 /* Expand each encoded track, optionally smooth its four channels in place,
  * then normalize quaternion samples. */
-s32 func_8025F0F4_us_rev1(s32 source, s32 *buffer, s32 tracks,
-                        s32 channels, s32 radius, s32 encoding) {
-    void (*decode)() = 0;
-    u32 stream[2];
+extern s32 D_8010AC88, D_8010AC84;
+extern char D_002611A0_us_rev1[], D_0025EF54_us_rev1[], D_00261258_us_rev1[];
+/* 96/216 words identical (frame, switch, init loops, smoothing core); remaining: callee-saved register assignment (buffer/tracks s5/s6, channels fp, decode s7, stream pointer s3) */
+s32 func_8025F0F4_us_rev1(s32 source, s32 *buffer, s32 tracks, s32 channels, s32 radius, s32 encoding) {
+    void (*decode)(void *, void *, s32) = 0;
+    s32 stream[2];
+    s32 *sp;
     s32 track, index, channel, sample, offset, frames;
     f32 *out;
     f32 total, weight;
-
-    if (encoding == 0) decode = func_80261180_de;
-    else if (encoding == 1) decode = func_8025EF34_de;
-    else if (encoding == 2) decode = func_80261238_de;
+    switch (encoding) {
+    case 0:
+        decode = (void (*)(void *, void *, s32))D_002611A0_us_rev1;
+        break;
+    case 1:
+        decode = (void (*)(void *, void *, s32))D_0025EF54_us_rev1;
+        break;
+    case 2:
+        decode = (void (*)(void *, void *, s32))D_00261258_us_rev1;
+        break;
+    }
     buffer[0] = tracks;
     buffer[1] = (tracks * 4 + 15) & ~7;
-    for (index = 1; index <= tracks; index++) buffer[index + 1] = 0xDEADBEEF;
-    for (track = 0; track < tracks; track++) {
-        for (index = 0; index <= buffer[0]; index++) {
-            if (buffer[index + 1] == (s32)0xDEADBEEF) break;
-        }
-        buffer[index + 1] = buffer[index] + D_8010AC88 * 16;
+    for (index = 1; index <= tracks; index++) {
+        buffer[index + 1] = 0xDEADBEEF;
     }
-    stream[0] = func_80260664_de(source);
     for (track = 0; track < tracks; track++) {
-        out = func_8028FDB4_de(buffer, track);
+        for (index = 0; index <= buffer[0] && (u32)buffer[index + 1] != 0xDEADBEEF; index++) {
+        }
+        index--;
+        buffer[index + 2] = buffer[index + 1] + D_8010AC88 * 16;
+    }
+    sp = stream;
+    sp[0] = func_80260664_de(source);
+    for (track = 0; track < tracks; track++) {
+        out = (f32 *)func_8028FDB4_de(buffer, track);
         for (channel = 0; channel < channels; channel++) {
-            func_802607B8_de(stream, 31);
-            decode(stream, out++, D_8010AC84);
+            func_802607B8_de((u32 *)sp, 0x1F);
+            decode(sp, out, D_8010AC84);
+            out += 1;
         }
     }
     for (track = 0; track < tracks; track++) {
-        out = func_8028FDB4_de(buffer, track);
+        out = (f32 *)func_8028FDB4_de(buffer, track);
         frames = D_8010AC88;
         if (channels == 4 && radius != 0) {
-            for (channel = 0; channel < 4; channel++) {
+            for (channel = 0; channel < channels; channel++) {
                 for (sample = 0; sample < frames; sample++) {
-                    total = 0.0f;
-                    weight = 0.0f;
+                    total = 0;
+                    weight = 0;
                     for (offset = -radius; offset <= radius; offset++) {
                         total += out[((sample + offset + frames) % frames) * 4 + channel];
-                        weight += D_800C91F8;
+                        weight += 1.0f;
                     }
                     out[sample * 4 + channel] = total / weight;
                 }
@@ -437,7 +451,7 @@ s32 func_8025F0F4_us_rev1(s32 source, s32 *buffer, s32 tracks,
     }
     if (channels == 4) {
         for (track = 0; track < tracks; track++) {
-            out = func_8028FDB4_de(buffer, track);
+            out = (f32 *)func_8028FDB4_de(buffer, track);
             for (sample = 0; sample < D_8010AC88; sample++) {
                 func_802741A4_de(out);
                 out += 4;
