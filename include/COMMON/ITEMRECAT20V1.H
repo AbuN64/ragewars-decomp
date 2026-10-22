@@ -556,10 +556,6 @@ struct ObjRecAtB0 {
     s32 unkB0;
 };
 
-struct NodeEvent;
-struct NodeEvent {
-    s32 words[10];
-};
 
 struct Resource_func_80419E54_de;
 typedef struct Resource_func_80419E54_de Resource_func_80419E54_de;
@@ -3002,8 +2998,6 @@ struct func_8023EBEC_S1 {
 struct func_8022CA04_S3;
 typedef struct func_8022CA04_S3 func_8022CA04_S3;
 
-struct NodeEvent;
-typedef struct NodeEvent NodeEvent;
 
 struct MenuStyle;
 typedef struct MenuStyle MenuStyle;

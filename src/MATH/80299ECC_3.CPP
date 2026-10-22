@@ -2,7 +2,7 @@
 #include "MATH/80299ECC_3.H"
 #include "MATH/SHARED_WIDGETIDE.H"
 
-s32 func_80299A80_de(struct Shared_WidgetIdE *arg0, NodeEvent event) {
+s32 func_80299A80_de(struct Shared_WidgetIdE *arg0, DrawArgs event) {
     WidgetCallback cb = func_8029AA80_find(arg0->id);
 
     if (cb != 0) {

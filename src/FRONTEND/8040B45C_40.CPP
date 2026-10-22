@@ -57,7 +57,7 @@ extern void func_8029973C_de();
 
 
 
-void func_80412634_de(GridList *arg0, NodeEvent style) {
+void func_80412634_de(GridList *arg0, DrawArgs style) {
     GridList *list = arg0;
     UnitMtx cell;
     u32 column;
@@ -66,7 +66,7 @@ void func_80412634_de(GridList *arg0, NodeEvent style) {
     for (column = 0; column < list->columns; column++) {
         for (row = 0; row < list->rows; row++) {
             func_804122CC_de(list, &cell, column, row);
-            func_8040D2D0_de((TextWidget *)&cell, *(DrawArgs *)&style);
+            func_8040D2D0_de((TextWidget *)&cell, style);
         }
     }
 }

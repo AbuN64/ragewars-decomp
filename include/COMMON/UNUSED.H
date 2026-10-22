@@ -17748,8 +17748,8 @@ struct WeaponMenuPlayer {
     char pad[0x5DC];
     WeaponMenuView *view;
 };
-struct NodeEvent;
-typedef signed int ( *WidgetCallback)(void *, struct NodeEvent);
+struct DrawArgs;
+typedef signed int ( *WidgetCallback)(void *, struct DrawArgs);
 struct WidgetHandler;
 struct WidgetHandler {
     s32 id;

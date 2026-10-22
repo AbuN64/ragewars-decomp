@@ -2,7 +2,7 @@
 #define MATH_80299ECC_3_H
 #include "TYPES.H"
 struct Shared_WidgetIdE;
-struct NodeEvent;
+struct DrawArgs;
 
-extern s32 func_80299A80_de(struct Shared_WidgetIdE *widget, struct NodeEvent event);
+extern s32 func_80299A80_de(struct Shared_WidgetIdE *widget, struct DrawArgs event);
 #endif
