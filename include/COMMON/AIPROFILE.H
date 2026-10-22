@@ -250,7 +250,7 @@ struct Message {
     s32 target;
     s32 pad20;
     u8 *text;
-    s32 pad28;
+    f32 progress;
     s32 pad2C;
     f32 x;
     f32 y;

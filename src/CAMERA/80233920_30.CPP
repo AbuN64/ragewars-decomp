@@ -64,7 +64,7 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
                     message->alpha = 1.0f;
                     message->target = target;
                     message->pad20 = 0;
-                    message->pad28 = 0;
+                    message->progress = 0;
                     message->pad2C = 0;
                     message->scaleX = 1.0f;
                     message->scaleY = 1.0f;

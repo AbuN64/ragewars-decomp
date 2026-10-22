@@ -16,7 +16,7 @@
 
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
-extern void func_80238050_de(s32 arg0, void *arg1);
+extern void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
 extern s32 D_800E28D0;
 extern s32 D_800E28D4;
 extern s32 D_800D297C;
@@ -213,7 +213,7 @@ static inline Message *post_lines(struct ScreenMessageOwner *owner, struct Scree
                     message->size = size * 15.0f;
                     message->target = target;
                     message->pad20 = 0;
-                    message->pad28 = 0;
+                    message->progress = 0;
                     message->pad2C = 0;
                     message->scaleX = 1.0f;
                     message->scaleY = 1.0f;
@@ -249,173 +249,78 @@ Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessage
     return post_lines(owner, pool, text, kind, 1.0f, -1);
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
-#include "COMMON/EXTERNS_6.H"
-#include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
-#include "COMMON/EXTERNS_10.H"
-#include "COMMON/OBJECTLINKSC_2.H"
-#include "COMMON/TRIPLE.H"
-#include "stddef.h"
-#include "TYPES.H"
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x20, 0x24, 0x28, 0x2c, 0x30, 0x34, 0x38, 0x3c, 0x40, 0x44, 0x58, 0x5c], gap at: 0x48. */
-void func_80238050_de(s32 arg0, void *arg1) {
-    f32 temp_fs0;
-    f32 temp_fs0_2;
-    f32 temp_fs0_3;
-    f32 temp_fs0f;
-    f32 temp_fs1;
-    f32 temp_fs1f;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 temp_fv0f;
-    f32 temp_fv0f_2;
-    s32 temp_v1;
-    void *temp_s1;
-    void *var_s0;
-    Message *var_s0_2;
-    void *var_s0_3;
-    void *var_s1;
-    void *var_v1;
+extern void func_802A84F8_de(void);
+extern void func_802A8800_de(void);
+extern void func_802A8F28_de(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 arg5, f32 scaleX, f32 scaleY);
+void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
+    f32 spacing;
+    f32 fade;
+    Message *node;
+    Message *msg;
+    Message *waiting;
 
-    temp_fs0 = D_800C33F8_de;
-    if (arg1 != NULL) {
+    spacing = 9.0f;
+    if (pool != 0) {
         func_802A84F8_de();
         func_802A8800_de();
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        var_s1 = *((void **) ((u8 *) (arg1) + 3648));
-        if (var_s1 != NULL) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            var_s0 = *((void **) ((u8 *) (var_s1) + 4));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            *((f32 *) ((u8 *) (var_s1) + 52)) = (f32) ((f32) D_800E28D4 * D_800C33FC_de);
-            if (var_s0 != NULL) {
-                do {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    temp_fv0 = *((f32 *) ((u8 *) (var_s1) + 52)) + temp_fs0;
-                    var_s1 = var_s0;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    *((f32 *) ((u8 *) (var_s0) + 52)) = temp_fv0;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    var_s0 = *((void **) ((u8 *) (var_s0) + 4));
-                } while (var_s0 != NULL);
+        node = pool->freeMessages.head;
+        if (node != 0) {
+            node->y = (f32)D_800E28D4 * 0.81f;
+            for (msg = node->next; msg != 0; msg = msg->next) {
+                msg->y = node->y + spacing;
+                node = msg;
             }
         }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        var_s0_2 = *((void **) ((u8 *) (arg1) + 3652));
-        if (var_s0_2 != NULL) {
-            temp_fs0_2 = D_800C3400_de;
-            do {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                func_802A8F28_de(var_s0_2->text, (s32)var_s0_2->x, (s32)var_s0_2->y, var_s0_2->timer, 1, 1, temp_fs0_2, temp_fs0_2);
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                var_s0_2 = *((void **) ((u8 *) (var_s0_2) + 0));
-            } while (var_s0_2 != NULL);
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            var_s0_2 = *((void **) ((u8 *) (arg1) + 3652));
+        for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
+            func_802A8F28_de(msg->text, (s32)msg->x, (s32)msg->y, msg->timer, 1, 1, 1.0f, 1.0f);
         }
-        if (var_s0_2 != NULL) {
-            temp_fs1f = D_800C3404_de;
-            temp_fs1 = D_800C3408_de;
-            temp_fs0f = D_800C340C_de;
-            do {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                temp_v1 = *((s32 *) ((u8 *) (var_s0_2) + 20));
-                temp_fs0_3 = D_800D2988 * D_800C3410_de;
-                if (temp_v1 != 2) {
-                    if (temp_v1 < 3) {
-                        if (temp_v1 == 1) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            *((s32 *) ((u8 *) (var_s0_2) + 24)) = 0;
-                        } else {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            *((s32 *) ((u8 *) (var_s0_2) + 24)) = 0;
-                            goto block_28;
-                        }
-                    } else if (temp_v1 != 3) {
-                        if (temp_v1 != 4) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            *((s32 *) ((u8 *) (var_s0_2) + 24)) = 0;
-block_28:
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            *((s32 *) ((u8 *) (var_s0_2) + 20)) = 0;
-                        } else {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            temp_fv0_2 = func_802B6560_de(*((f32 *) ((u8 *) (var_s0_2) + 40)) * temp_fs1f) * temp_fs1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            temp_fv0f = *((f32 *) ((u8 *) (var_s0_2) + 40)) + temp_fs0_3;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            *((f32 *) ((u8 *) (var_s0_2) + 40)) = temp_fv0f;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                            *((s32 *) ((u8 *) (var_s0_2) + 24)) = (s32) temp_fv0_2;
-                            if (temp_fs0f < temp_fv0f) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                var_v1 = *((void **) ((u8 *) (arg1) + 3648));
-                                if (var_v1 != NULL) {
-                                    do {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                        if (*((s32 *) ((u8 *) (var_v1) + 20)) == 1) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                            *((s32 *) ((u8 *) (var_v1) + 20)) = 2;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                            *((s32 *) ((u8 *) (var_v1) + 40)) = 0;
-                                        }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                        var_v1 = *((void **) ((u8 *) (var_v1) + 4));
-                                    } while (var_v1 != NULL);
-                                }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                *((s32 *) ((u8 *) (var_s0_2) + 20)) = 0;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                                *((f32 *) ((u8 *) (var_s0_2) + 40)) = 0.0f;
-                            }
-                        }
-                    } else {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        *((s32 *) ((u8 *) (var_s0_2) + 24)) = 0xFF;
-                    }
-                } else {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    temp_fv0_3 = func_802B7130_de(*((f32 *) ((u8 *) (var_s0_2) + 40)) * temp_fs1f) * temp_fs1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    temp_fv0f_2 = *((f32 *) ((u8 *) (var_s0_2) + 40)) + temp_fs0_3;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    *((f32 *) ((u8 *) (var_s0_2) + 40)) = temp_fv0f_2;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    *((s32 *) ((u8 *) (var_s0_2) + 24)) = (s32) temp_fv0_3;
-                    if (temp_fs0f < temp_fv0f_2) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        *((s32 *) ((u8 *) (var_s0_2) + 20)) = 3;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        *((f32 *) ((u8 *) (var_s0_2) + 40)) = 0.0f;
-                    }
+        for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
+            fade = D_800D2988 * 0.06666667f;
+            node = msg;
+            switch (msg->kind) {
+            case 2:
+                msg->timer = (s32)(func_802B7130_de(msg->progress * 1.5707964f) * 255.0f);
+                msg->progress += fade;
+                if (msg->progress > 1.0f) {
+                    msg->kind = 3;
+                    msg->progress = 0.0f;
                 }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                var_s0_2 = *((void **) ((u8 *) (var_s0_2) + 0));
-            } while (var_s0_2 != NULL);
+                break;
+            case 1:
+                msg->timer = 0;
+                break;
+            case 3:
+                msg->timer = 255;
+                break;
+            case 4:
+                msg->timer = (s32)(func_802B6560_de(msg->progress * 1.5707964f) * 255.0f);
+                msg->progress += fade;
+                if (msg->progress > 1.0f) {
+                    for (waiting = pool->freeMessages.head; waiting != 0; waiting = waiting->next) {
+                        if (waiting->kind == 1) {
+                            waiting->kind = 2;
+                            waiting->progress = 0.0f;
+                        }
+                    }
+                    node->kind = 0;
+                    node->progress = 0.0f;
+                }
+                break;
+            default:
+                node->timer = 0;
+                node->kind = 0;
+                break;
+            }
         }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        var_s0_3 = *((void **) ((u8 *) (arg1) + 3652));
-        if (var_s0_3 != NULL) {
-            do {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                temp_s1 = *((void **) ((u8 *) (var_s0_3) + 0));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                if (*((s32 *) ((u8 *) (var_s0_3) + 20)) == 0) {
-                    func_80255ED8_de(arg1 + 0xE40, var_s0_3);
-                    func_80255CB8_de(arg0 + 0xF24, var_s0_3);
-                }
-                var_s0_3 = temp_s1;
-            } while (var_s0_3 != NULL);
+        for (msg = pool->freeMessages.tail; msg != 0; msg = node) {
+            node = msg->prev;
+            if (msg->kind == 0) {
+                func_80255ED8_de(&pool->freeMessages, msg);
+                func_80255CB8_de(&owner->activeMessages, msg);
+            }
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80238050_de);
-#endif
 
 extern const f32 D_800C3414_de, D_800C3418_de, D_800C341C_de, D_800C3420_de;
 extern const f32 D_800C3424_de, D_800C3428_de, D_800C342C_de, D_800C3430_de;
@@ -442,7 +347,7 @@ void func_80238314_de(Race *race, Racer *racer) {
     s32 centered;
 
     if (func_80245798_de() != 0) {
-        func_80238050_de((s32)race, racer);
+        Camera_UpdateScreenMessages((struct ScreenMessageOwner *)race, (struct ScreenMessagePool *)racer);
         return;
     }
     scale = D_800C3414_de;

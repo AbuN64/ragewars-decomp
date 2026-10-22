@@ -3510,7 +3510,6 @@ segments:
       - [0xC3E20, rodata, data_800C/literals_func_8023660C_de]
       - [0xC3E50, rodata, data_800C/D_80236874_C9010]
       - [0xC3E54, rodata, data_800C/literals_func_80236F1C_de]
-      - [0xC3F28, rodata, data_800C/D_80238050_C90E8]
       - [0xC3F44, rodata, data_800C/D_80238314_C9104]
       - [0xC3F7C, data, data_800C/D_auto_rodata_unresolved_800C853C]
       - [0xC3F94, rodata, data_800C/rodata_func_80238670_de_800C3394]

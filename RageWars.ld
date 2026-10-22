@@ -10901,7 +10901,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.rodata .rdata);
         src/CAMERA/800C8410.CPP.o(.rodata .rdata);
         src/CAMERA/80233920_9.CPP.o(.rodata .rdata);
-        src/CAMERA/800C84E8.CPP.o(.rodata .rdata);
         src/CAMERA/800C8504.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.data);
         src/DATA/OVLTBL/800C853C_2.CPP.o(.rodata .rdata);
@@ -12649,7 +12648,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.rodata .rdata);
         src/CAMERA/800C8410.CPP.o(.rodata .rdata);
         src/CAMERA/80233920_9.CPP.o(.rodata .rdata);
-        src/CAMERA/800C84E8.CPP.o(.rodata .rdata);
         src/CAMERA/800C8504.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.data);
         src/DATA/OVLTBL/800C853C_3.CPP.o(.rodata .rdata);
@@ -14351,7 +14349,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.rodata .rdata);
         src/CAMERA/800C8410.CPP.o(.rodata .rdata);
         src/CAMERA/80233920_9.CPP.o(.rodata .rdata);
-        src/CAMERA/800C84E8.CPP.o(.rodata .rdata);
         src/CAMERA/800C8504.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.data);
         src/DATA/OVLTBL/800C853C_4.CPP.o(.rodata .rdata);
@@ -16060,7 +16057,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.rodata .rdata);
         src/CAMERA/800C8410.CPP.o(.rodata .rdata);
         src/CAMERA/80233920_9.CPP.o(.rodata .rdata);
-        src/CAMERA/800C84E8.CPP.o(.rodata .rdata);
         src/CAMERA/800C8504.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.data);
         src/DATA/OVLTBL/800C853C.CPP.o(.rodata .rdata);
@@ -17801,7 +17797,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.rodata .rdata);
         src/CAMERA/800C8410.CPP.o(.rodata .rdata);
         src/CAMERA/80233920_9.CPP.o(.rodata .rdata);
-        src/CAMERA/800C84E8.CPP.o(.rodata .rdata);
         src/CAMERA/800C8504.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.data);
         src/DATA/OVLTBL/800C853C_6.CPP.o(.rodata .rdata);
@@ -20052,7 +20047,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8410.CPP.o(.bss .sbss COMMON);
         src/CAMERA/80233920_9.CPP.o(.bss .sbss COMMON);
-        src/CAMERA/800C84E8.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8504.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_2.CPP.o(.bss .sbss COMMON);
@@ -21325,7 +21319,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8410.CPP.o(.bss .sbss COMMON);
         src/CAMERA/80233920_9.CPP.o(.bss .sbss COMMON);
-        src/CAMERA/800C84E8.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8504.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_3.CPP.o(.bss .sbss COMMON);
@@ -22563,7 +22556,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8410.CPP.o(.bss .sbss COMMON);
         src/CAMERA/80233920_9.CPP.o(.bss .sbss COMMON);
-        src/CAMERA/800C84E8.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8504.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_4.CPP.o(.bss .sbss COMMON);
@@ -23807,7 +23799,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8410.CPP.o(.bss .sbss COMMON);
         src/CAMERA/80233920_9.CPP.o(.bss .sbss COMMON);
-        src/CAMERA/800C84E8.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8504.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C.CPP.o(.bss .sbss COMMON);
@@ -25128,7 +25119,6 @@ SECTIONS
         src/CAMERA/8023660C.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8410.CPP.o(.bss .sbss COMMON);
         src/CAMERA/80233920_9.CPP.o(.bss .sbss COMMON);
-        src/CAMERA/800C84E8.CPP.o(.bss .sbss COMMON);
         src/CAMERA/800C8504.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_5.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C853C_6.CPP.o(.bss .sbss COMMON);
