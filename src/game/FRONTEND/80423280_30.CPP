@@ -46,7 +46,6 @@ s32 func_8042343C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-#ifdef NON_MATCHING
 #include "FRONTEND/GAME_OPTIONS_LABELS.H"
 #include "TYPES.H"
 
@@ -120,7 +119,4 @@ s32 func_804234CC_de(void) {
     func_802A2394_de();
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_804234CC_de);
-#endif
 #endif
