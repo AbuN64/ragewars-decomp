@@ -653,12 +653,10 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
 INCLUDE_ASM("span_1000", func_8021BFC4_de);
 #endif
 
-#ifdef NON_MATCHING
 #include "COMMON/FIELD_VEC_B0.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
-#include "COMMON/CHANNEL.H"
 
 
 extern s32 func_8022C460_de(void *arg0);
@@ -685,6 +683,9 @@ void func_8021C45C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
     }
     audio = &D_801462C8.counters;
     if (audio->enabled != 0 &&
+#if defined(VERSION_DE) || defined(VERSION_EU_X)
+        actor->profile->enabled != 0 &&
+#endif
         actor->profile->character == 0xB &&
         audio->timer > 0) {
         return;
@@ -731,6 +732,3 @@ void func_8021C45C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
         return;
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_8021C45C_de);
-#endif
