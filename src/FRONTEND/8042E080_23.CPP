@@ -117,7 +117,7 @@ void func_8042E5EC_de(void) {
             variant = func_802744D4_de() % 3;
             player->variant = (u8)variant;
             func_802A025C_de(player->name,
-                (u8 *)D_800DF7D0[((s8)variant * 0x11) + func_8041F140_de(player->character)].names);
+                (u8 *)D_800DF7D0[((s8)variant * 0x11) + func_8041F140_de((u8)player->character)].names);
         }
     }
     numSpectators = numJoining - 2;
@@ -131,7 +131,7 @@ void func_8042E5EC_de(void) {
             variant = func_802744D4_de() % 3;
             player->variant = (u8)variant;
             func_802A025C_de(player->name,
-                (u8 *)D_800DF7D0[((s8)variant * 0x11) + func_8041F140_de(player->character)].names);
+                (u8 *)D_800DF7D0[((s8)variant * 0x11) + func_8041F140_de((u8)player->character)].names);
         }
     }
     D_8014288C = 1;
