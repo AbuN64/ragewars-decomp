@@ -52,24 +52,29 @@ extern u8 *func_8022A420_de(u8 *);
 extern f32 func_802B72B0_de(f32);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void func_80237E80_de(u8 *, void *, s32);
+/* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
+typedef struct LvDelta {
+    f32 x, y, z;
+} LvDelta;
 void LV_FN(u8 *self, u8 *hit) {
     u8 *state = LV_FIELD(self, u8 *, 0x18) + 0x14;
     u16 kind = LV_FIELD(self, u16, 0xE4);
     u8 *player;
     u8 *table;
+    u8 *table2;
     u8 *record;
     u8 *node;
-    f32 dx, dy, dz;
+    LvDelta d;
     f32 distance;
-    s32 sound;
-    if (kind == 0x64E) {
+    u32 t1;
+    switch (kind) {
+    case 0x64E:
         player = func_8022A420_de((u8 *)&D_80145040);
         if (player != 0 && LV_FIELD(player, s32, 0x5E4) != 0 && LV_FIELD(hit, s8, 0x36) != LV_FIELD(hit, s8, 0x34)) {
             table = (u8 *)&D_80145040 + 0x1860;
             if (LV_FIELD(table, s32, 0x68) == 0 && LV_FIELD(hit, s32, 0x12C) == 0) {
-                record = LV_FIELD(player, u8 *, 0x5D8);
-                if (LV_FIELD(record, u8, 0x8F) == 1) {
-                    LV_FIELD(record, u8, 0x8F) = 0;
+                if (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 1) {
+                    LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
                     LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
                     LV_FIELD(table, s32, 0x74) = 1;
                     LV_FIELD(hit, s32, 0x12C) = 1;
@@ -77,7 +82,11 @@ void LV_FN(u8 *self, u8 *hit) {
                 }
             }
         }
-    } else if (kind >= 0x653 && kind < 0x657) {
+        break;
+    case 0x653:
+    case 0x654:
+    case 0x655:
+    case 0x656:
         if (LV_FIELD(hit, s8, 0x36) == LV_FIELD(hit, s8, 0x34)) {
             return;
         }
@@ -85,53 +94,49 @@ void LV_FN(u8 *self, u8 *hit) {
         if (player == 0 || LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) == 0) {
             return;
         }
-        dx = LV_FIELD(player, f32, 8) - LV_FIELD(self, f32, 8);
-        dy = LV_FIELD(player, f32, 0xC) - LV_FIELD(self, f32, 0xC);
-        dz = LV_FIELD(player, f32, 0x10) - LV_FIELD(self, f32, 0x10);
-        distance = func_802B72B0_de(dx * dx + dy * dy + dz * dz);
-        if ((f32)(s32)distance >= D_800C6B40) {
+        d.x = LV_FIELD(player, f32, 8) - LV_FIELD(self, f32, 8);
+        d.y = LV_FIELD(player, f32, 0xC) - LV_FIELD(self, f32, 0xC);
+        d.z = LV_FIELD(player, f32, 0x10) - LV_FIELD(self, f32, 0x10);
+        distance = func_802B72B0_de(d.x * d.x + d.y * d.y + d.z * d.z);
+        if ((f32)(s32)distance < D_800C6B40) {
+            LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
+            LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
+            LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u16, 8) += 1;
+            func_8022E17C_de(player, player, 3);
+            table2 = (u8 *)&D_80145040 + 0x1860;
+            LV_FIELD(table2, s32, 0x84) = 0;
+            LV_FIELD(table2, s32, 0x80) = 0;
+            switch (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x92)) {
+            case 0:
+                func_8025DF34_de(0x2E6);
+                break;
+            case 1:
+                func_8025DF34_de(0x2E4);
+                break;
+            case 2:
+                func_8025DF34_de(0x2E8);
+                break;
+            case 3:
+                func_8025DF34_de(0x2EC);
+                break;
+            case 4:
+                func_8025DF34_de(0x2EA);
+                break;
+            }
+            for (node = *(u8 **)&D_80145060; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
+                if (LV_FIELD(node, void *, 0x5DC) != 0) {
+                    func_80237E80_de((u8 *)&D_80145088, LV_FIELD(node, void *, 0x5DC), D_auto_800D70DC);
+                }
+            }
+        } else {
             return;
         }
-        record = LV_FIELD(player, u8 *, 0x5D8);
-        LV_FIELD(record, u8, 0x8F) = 0;
-        LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
-        LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u16, 8) += 1;
-        func_8022E17C_de(player, player, 3);
-        table = (u8 *)&D_80145040 + 0x1860;
-        LV_FIELD(table, s32, 0x84) = 0;
-        LV_FIELD(table, s32, 0x80) = 0;
-        switch (LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x92)) {
-        case 0:
-            sound = 0x2E6;
-            break;
-        case 1:
-            sound = 0x2E4;
-            break;
-        case 2:
-            sound = 0x2E8;
-            break;
-        case 3:
-            sound = 0x2EC;
-            break;
-        case 4:
-            sound = 0x2EA;
-            break;
-        default:
-            sound = -1;
-            break;
-        }
-        if (sound != -1) {
-            func_8025DF34_de(sound);
-        }
-        for (node = *(u8 **)&D_80145060; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
-            if (LV_FIELD(node, void *, 0x5DC) != 0) {
-                func_80237E80_de((u8 *)&D_80145088, LV_FIELD(node, void *, 0x5DC), D_auto_800D70DC);
-            }
-        }
+        break;
     }
     if (LV_FIELD(hit, s8, 0xCB) != 0) {
         if (LV_FIELD(state, u32, 0) & 2) {
-            LV_FIELD(self, u32, 0x100) = LV_FIELD(self, u32, 0x100) & ~0x2000 & ~0x100;
+            t1 = LV_FIELD(self, u32, 0x100) & ~0x2000;
+            LV_FIELD(self, u32, 0x100) = t1 & ~0x100;
         }
         if (LV_FIELD(hit, s32, 0x128) != 0) {
             func_80214178_de(self, hit, 0);
