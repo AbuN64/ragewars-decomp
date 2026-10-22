@@ -62,26 +62,72 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     }
 }
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-typedef struct ParticleEvents {
-    struct IntPair params[14];
-    u16 models[14],effects[14],sounds[14];
-} ParticleEvents;
-typedef struct ParticleConfig { char pad0[0x18]; ParticleEvents *events; } ParticleConfig;
-typedef struct ParticleSprite { char pad0[0xc]; f32 scale; s16 x,y,z,active; } ParticleSprite;
-typedef struct StepParticle {
-    char pad0[4]; u16 type; char pad6[2]; CVector3 pos; char pad14[0x48]; u32 flags;
-    char pad60[0xb8]; ParticleConfig *config; char pad11C[0x14]; s32 *references;
-    char pad134[4]; ParticleSprite *sprite; char pad13C[4]; f32 time; char pad144[8]; s16 life;
-    char pad14E[0x4a]; f32 alpha; char pad19C[0x34]; s8 bone; char pad1D1[8]; u8 render;
-    char pad1DA[0xa]; void *list; char pad1E8[4]; struct StepParticle *next;
-} StepParticle;
-typedef struct ParticleList { StepParticle *head; char pad4[0x10]; } ParticleList;
-typedef struct ParticleWorld { char pad0[0xfc00]; IntrusiveList free,render; ParticleList lists[3]; } ParticleWorld;
+/* Views of the SN debug records this pass reads, with their original member names: CParticle_t (0x1F8 bytes),
+ * CParticleSystem_t (0xFC70), CROMParticleEffect_t (0x3C), CROMParticleImpact_t (0xC4) and CDLight_t (0x18). */
+typedef struct CDLight_t {
+    struct CDLight_t *m_pPrev;
+    struct CDLight_t *m_pNext;
+    void *m_pROMLight;
+    f32 m_ColorFade;
+    s16 x;
+    s16 y;
+    s16 z;
+    s16 m_bEnabled;
+} CDLight_t;
+typedef struct CROMParticleImpact_t {
+    struct IntPair m_ImpactEventValue[14];
+    u16 m_ImpactParticleType[14];
+    u16 m_ImpactEventType[14];
+    u16 m_ImpactSoundType[14];
+} CROMParticleImpact_t;
+typedef struct CROMParticleEffect_t {
+    u32 m_dwFlags;
+    char pad4[0x18 - 0x4];
+    CROMParticleImpact_t *m_pImpact;
+    char pad1C[0x3C - 0x1C];
+} CROMParticleEffect_t;
+typedef struct CParticle_t {
+    char pad0[0x4];
+    u16 m_nObjType; /* ah.ih.m_nObjType */
+    char pad6[0x2];
+    CVector3 m_vPos; /* ah.ih.m_vPos */
+    char pad14[0x5C - 0x14];
+    u32 m_dwFlags;
+    char pad60[0x118 - 0x60];
+    CROMParticleEffect_t *m_pEffect;
+    char pad11C[0x130 - 0x11C];
+    s32 *m_pOwnerCount;
+    char pad134[0x4];
+    CDLight_t *m_pDLight;
+    char pad13C[0x4];
+    f32 m_cFrame;
+    char pad144[0x14C - 0x144];
+    s16 m_nFrames;
+    char pad14E[0x198 - 0x14E];
+    f32 m_Alpha;
+    char pad19C[0x1D0 - 0x19C];
+    s8 m_Alignment;
+    char pad1D1[0x1D9 - 0x1D1];
+    u8 m_ActiveSwooshes;
+    char pad1DA[0x1E4 - 0x1DA];
+    IntrusiveList *m_pActiveList;
+    struct CParticle_t *m_pLast;
+    struct CParticle_t *m_pNext;
+    struct CParticle_t *m_pDrawLast;
+    struct CParticle_t *m_pDrawNext;
+} CParticle_t;
+typedef struct CParticleSystem_t {
+    CParticle_t m_ParticleVars[128];
+    IntrusiveList m_FreeList;
+    IntrusiveList m_DrawList;
+    IntrusiveList m_ActiveList[3];
+    void *m_pParticleData;
+    CParticle_t *m_pLastCreatedParticle;
+} CParticleSystem_t;
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
 extern s32 D_801371DC;
 extern Box D_801031F0;
@@ -90,163 +136,158 @@ extern void func_802A42F4_de(void *,void *),func_80268C7C_de(void *,s32);
 extern void func_80279B40_de(void *,s32,s32,s32);
 extern void func_8025DE54_de(s16,CVector3,s32,s32);
 extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
-
-
-void func_80281CA0_de(ParticleWorld *world) {
-    StepParticle *selected[128];
-    StepParticle *actors[128];
-    struct IntPair params;
-    CVector3 delta;
-    ParticleList *list;
-    StepParticle *p,*other,*node,*focus;
-    StepParticle **out,**scan,**pairs,**begin;
-    ParticleConfig *config;
-    ParticleSprite *sprite;
-    s32 count,idx,pairCount,total,i,j,event;
-    s32 one;
-    u32 model,effect,sound;
-    f32 savedStep,range;
-    f32 x,y,z;
-    count = 0;
-    idx = 0;
-    savedStep = D_800D2988;
-    list = world->lists;
-    do {
-        node = world->lists[idx].head;
-        if (node != 0) {
-            out = actors + count;
-            do {
-                ++count;
-                node->flags = (node->flags & 0xFFEFFFFF) | 0x02000000;
-                *out++ = node;
-                node = node->next;
-            } while (node != 0);
-        }
-        ++idx;
-    } while (idx < 3);
-    if (D_80146894 == 0 && D_801371DC == 0) {
-        D_800D2988 = savedStep;
-        D_800D2988 = savedStep * D_800CD740_de;
-        one = 1;
-        pairCount = 0;
-        for (idx = 0; idx < count; ++idx) {
-            p = actors[idx];
-            if ((p->flags & 0x02000100) == 0x02000100) {
-                p->flags &= 0xFFEFFF87;
-                if (p->sprite) p->sprite->active = 0;
-                if (p->time < (f32)p->life && p->life != one && !(p->flags & 0x1000)) {
-                    x = p->pos.x;
-                    if ((x < D_801031F0.max.x && (y=p->pos.y) < D_801031F0.max.y &&
-                         (z=p->pos.z) < D_801031F0.max.z && D_801031F0.min.x <= x &&
-                         D_801031F0.min.y <= y && D_801031F0.min.z <= z) || p->type == 0x41E) {
-                        func_8027B720_de(p);
-                        sprite = p->sprite;
-                        if (sprite) {
-                            sprite->active = one;
-                            sprite->x = (s16)(s32)p->pos.x;
-                            sprite->y = (s16)(s32)p->pos.y;
-                            sprite->z = (s16)(s32)p->pos.z;
-                            sprite->scale = p->alpha * D_800C4E4C_de;
-                        }
-                        p->time += D_800D2988;
-                        goto collect;
-                    }
-                    if (!(p->flags & 0x100)) continue;
-                    if (!(p->flags & 0x800)) {
+/* Frees a particle: runs its end hook (and its swoosh teardown when it has swooshes), hands its dynamic light back to
+ * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
+ * draw list. */
+static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
     func_80279A00_de(p);
-    if (p->render) {
+    if (p->m_ActiveSwooshes) {
         func_80284178_de(p);
-        func_802A42F4_de(&D_801379C0,p);
+        func_802A42F4_de(&D_801379C0, p);
     }
-    if (p->sprite) {
-        func_80268C7C_de(&D_8013B1A8,(s32)p->sprite);
-        p->sprite = 0;
+    if (p->m_pDLight) {
+        func_80268C7C_de(&D_8013B1A8, (s32)p->m_pDLight);
+        p->m_pDLight = 0;
     }
-    if (p->references) --*p->references;
-    p->flags &= 0xFDFFFEFF;
-    func_80255ED8_de(p->list,p);
-    p->list = 0;
-    func_80255CB8_de(&world->free,p);
-    if (p->flags & 0x01000000) func_80255ED8_de(&world->render,p);
-                    }
-                } else {
-                    config = p->config;
-                    event = func_80284068_de(p) ? 12 : 10;
-                    model = config->events->models[event];
-                    effect = config->events->effects[event];
-                    params = config->events->params[event];
-                    sound = config->events->sounds[event];
-                    if (effect != 65535) func_80265E10_de(p,p,effect,-1,p->pos,params);
-                    if (model != 65535) func_80279B40_de(p,model,p->bone,1);
-                    if (sound != 65535) func_8025DE54_de((s16)sound,p->pos,0,-1);
-                    if (!(p->flags & 0x100)) continue;
-                    if (!(p->flags & 0x800)) {
-    func_80279A00_de(p);
-    if (p->render) {
-        func_80284178_de(p);
-        func_802A42F4_de(&D_801379C0,p);
+    if (p->m_pOwnerCount) {
+        --*p->m_pOwnerCount;
     }
-    if (p->sprite) {
-        func_80268C7C_de(&D_8013B1A8,(s32)p->sprite);
-        p->sprite = 0;
-    }
-    if (p->references) --*p->references;
-    p->flags &= 0xFDFFFEFF;
-    func_80255ED8_de(p->list,p);
-    p->list = 0;
-    func_80255CB8_de(&world->free,p);
-    if (p->flags & 0x01000000) func_80255ED8_de(&world->render,p);
-                    }
-                }
-collect:
-                if (p->flags & 0x100) {
-                    switch (p->type) {
-                    case 12: case 34: case 87:
-                        selected[pairCount++] = p;
-                        break;
-                    }
-                }
-            }
-        }
-        i = 0;
-        if (pairCount != 0 && pairCount > 0) {
-            range = D_800C4E50_de;
-            begin = selected;
-            scan = begin;
-            for (i = 0; i < pairCount; ++i) {
-                focus = *scan;
-                switch (focus->type) {
-                case 34:
-                    func_80281A9C_de((s32)world,focus,begin,pairCount);
-                    ++scan;
-                    break;
-                case 87:
-                    j = 0;
-                    if (pairCount > 0) {
-                        pairs = begin;
-                        do {
-                            p = *pairs;
-                            if (p->type == 87) ++j;
-                            else {
-                                func_80271F68_de(&delta,&p->pos,&focus->pos);
-                                ++j;
-                                if (delta.x*delta.x + delta.y*delta.y + delta.z*delta.z <= range) p->life = 1;
-                            }
-                            ++pairs;
-                        } while (j < pairCount);
-                    }
-                default: case 12:
-                    ++scan;
-                    break;
-                }
-            }
-        }
-        D_800D2988 = savedStep;
+    p->m_dwFlags &= 0xFDFFFEFF;
+    func_80255ED8_de(p->m_pActiveList, p);
+    p->m_pActiveList = 0;
+    func_80255CB8_de(&world->m_FreeList, p);
+    if (p->m_dwFlags & 0x01000000) {
+        func_80255ED8_de(&world->m_DrawList, p);
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80281CA0_de);
-#endif
+/* Steps the particle system once: marks every particle on the three active lists, then (outside a pause) advances the
+ * ones in the play box (or of type 0x41E), fires the impact events of the expired ones and frees them, and lets each
+ * collected type 34 particle react to the others and each type 87 particle expire the non-87 ones within range. */
+void func_80281CA0_de(CParticleSystem_t *world) {
+    CParticle_t *colliders[128];
+    CParticle_t *stepped[128];
+    struct IntPair value;
+    CVector3 delta;
+    CParticle_t *p;
+    CParticle_t *node;
+    CParticle_t *focus;
+    CParticle_t **begin;
+    CROMParticleEffect_t *effect;
+    CDLight_t *light;
+    s32 count;
+    s32 idx;
+    s32 pairCount;
+    s32 i;
+    s32 j;
+    s32 event;
+    u32 particleType;
+    u32 eventType;
+    u32 soundType;
+    f32 savedStep;
+    count = 0;
+    savedStep = D_800D2988;
+    for (idx = 0; idx < 3; idx++) {
+        for (node = (world->m_ActiveList + idx)->head; node != 0; node = node->m_pNext) {
+            node->m_dwFlags = (node->m_dwFlags & 0xFFEFFFFF) | 0x02000000;
+            stepped[count++] = node;
+        }
+    }
+    if (D_80146894 != 0 || D_801371DC != 0) {
+        return;
+    }
+    D_800D2988 = savedStep;
+    D_800D2988 = savedStep * D_800CD740_de;
+    pairCount = 0;
+    for (idx = 0; idx < count; idx++) {
+        p = stepped[idx];
+        if ((p->m_dwFlags & 0x02000100) != 0x02000100) {
+            continue;
+        }
+        p->m_dwFlags &= 0xFFEFFF87;
+        if (p->m_pDLight) {
+            p->m_pDLight->m_bEnabled = 0;
+        }
+        if (p->m_cFrame < (f32)p->m_nFrames && p->m_nFrames != 1 && !(p->m_dwFlags & 0x1000)) {
+            if ((D_801031F0.max.x > p->m_vPos.x && D_801031F0.max.y > p->m_vPos.y && D_801031F0.max.z > p->m_vPos.z &&
+                 D_801031F0.min.x <= p->m_vPos.x && D_801031F0.min.y <= p->m_vPos.y && D_801031F0.min.z <= p->m_vPos.z) ||
+                p->m_nObjType == 0x41E) {
+                func_8027B720_de(p);
+                light = p->m_pDLight;
+                if (light) {
+                    light->m_bEnabled = 1;
+                    light->x = p->m_vPos.x;
+                    light->y = p->m_vPos.y;
+                    light->z = p->m_vPos.z;
+                    light->m_ColorFade = p->m_Alpha * D_800C4E4C_de;
+                }
+                p->m_cFrame += D_800D2988;
+            } else {
+                if (!(p->m_dwFlags & 0x100)) {
+                    continue;
+                }
+                if (!(p->m_dwFlags & 0x800)) {
+                    Particle_Free(world, p);
+                }
+            }
+        } else {
+            effect = p->m_pEffect;
+            event = func_80284068_de(p) ? 12 : 10;
+            particleType = effect->m_pImpact->m_ImpactParticleType[event];
+            eventType = effect->m_pImpact->m_ImpactEventType[event];
+            value = effect->m_pImpact->m_ImpactEventValue[event];
+            soundType = effect->m_pImpact->m_ImpactSoundType[event];
+            if (eventType != 0xFFFF) {
+                func_80265E10_de(p, p, eventType, -1, p->m_vPos, value);
+            }
+            if (particleType != 0xFFFF) {
+                func_80279B40_de(p, particleType, p->m_Alignment, 1);
+            }
+            if (soundType != 0xFFFF) {
+                func_8025DE54_de(soundType, p->m_vPos, 0, -1);
+            }
+            if (!(p->m_dwFlags & 0x100)) {
+                continue;
+            }
+            if (!(p->m_dwFlags & 0x800)) {
+                Particle_Free(world, p);
+            }
+        }
+        if (p->m_dwFlags & 0x100) {
+            switch (p->m_nObjType) {
+            case 12:
+            case 34:
+            case 87:
+                colliders[pairCount++] = p;
+                break;
+            }
+        }
+    }
+    if (pairCount != 0) {
+        begin = colliders;
+        for (i = 0; i < pairCount; i++) {
+            focus = begin[i];
+            switch (focus->m_nObjType) {
+            case 34:
+                func_80281A9C_de((s32)world, focus, begin, pairCount);
+                break;
+            case 87:
+                for (j = 0; j < pairCount; j++) {
+                    p = begin[j];
+                    if (p->m_nObjType != 87) {
+                        func_80271F68_de(&delta, &p->m_vPos, &focus->m_vPos);
+                        if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= D_800C4E50_de) {
+                            p->m_nFrames = 1;
+                        }
+                    }
+                }
+                break;
+            case 12:
+                break;
+            }
+        }
+    }
+    D_800D2988 = savedStep;
+}
 
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
