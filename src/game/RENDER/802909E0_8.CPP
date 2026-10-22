@@ -28,7 +28,7 @@ INCLUDE_ASM("span_1000", func_80290BA0_eu);
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
+#if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_DE)
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
  * draws the backdrop through Render_DrawTextLines with half the video height. */
@@ -37,7 +37,12 @@ extern s32 D_800D15E0, D_800D297C;
 extern f32 D_800D15E4[4];
 extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8;
 extern char D_80141008;
+#if defined(VERSION_DE)
+extern s32 D_auto_800D303C;
+#define D_auto_800D7068 D_auto_800D303C
+#else
 extern s32 D_auto_800D7068;
+#endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
 extern f32 D_auto_800C5678[2];
@@ -88,11 +93,6 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
 #endif
     }
 }
-#endif
-#endif
-#ifndef NON_MATCHING
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_80290A90_de);
 #endif
 #endif
 
