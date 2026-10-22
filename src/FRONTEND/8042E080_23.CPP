@@ -122,7 +122,7 @@ void func_8042E5EC_de(void) {
     numSpectators = numJoining - 2;
     if (numSpectators > 0) {
         for (i = 0; i < numSpectators; i++) {
-            player = &settings->playerSettings[i + 4];
+            player = &settings->playerSettings[numJoining + 4 + i];
             player->enabled = 1;
             player->locked = 1;
             player->active = 2;
