@@ -153,7 +153,7 @@ extern int D_800E3B94[];
 extern u8 *D_800E40B4[];
 extern int D_800E40F4[];
 extern int D_800E4134[];
-extern int D_800E4154[];
+extern u8 *D_800E4154[];
 extern int D_800E41B4[];
 extern float D_800EE9B8;
 extern float D_800EEAE0;
