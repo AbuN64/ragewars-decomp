@@ -8,6 +8,7 @@
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/ENTRYRECATE.H"
 #include "SYSTEM_2/8025E280.H"
+#include "COMMON/CHANNEL.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 INCLUDE_ASM("span_1000", func_802ACBCC);
@@ -707,7 +708,6 @@ typedef struct DraftPlayerAC66C {
 typedef struct DraftPickupAC66C { u8 **text; s16 pad4, sound, event, padA, index, arg1, arg2; } DraftPickupAC66C;
 extern s32 D_801468F4, D_800CE474[2];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-#include "COMMON/CHANNEL.H"
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_80222BE8_de(void *, s32, s32);
