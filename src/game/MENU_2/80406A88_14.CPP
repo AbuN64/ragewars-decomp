@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct { void *list; s32 unk4; void *unk8; s32 unkC; s32 unk10; char text14[12]; s32 unk20; } SliderPopupEu;
 typedef struct { u8 pad0[0x10]; u8 alpha; u8 pad11[0x27]; void *text; } SliderItemEu;
@@ -32,13 +31,10 @@ s32 func_8042E790_eu_x(void *window) {
     item->alpha = 0xF;
     D_800E5430->unk4 = func_80419E54_de(0x39F, 0x6E);
     D_800E5430->unkC = 3;
-    item = func_8040EC30_de(window, 0x39D);
+    item = func_8040EC30_de(window, 0x3A1);
     item->text = D_800E5430->text14;
     D_800E5430->unk20 = 1;
     func_802A0C08_de(D_800E5430->text14, D_800E1B60, 1);
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8042E790_eu_x);
-#endif
 #endif
