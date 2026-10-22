@@ -574,7 +574,7 @@ void func_80238D30_de(func_80238D20_S1 *arg0) {
     mask = 8 << arg0->unk8;
     func_802A9234_de(0x64);
     func_8026925C_de(0x1A);
-    gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
+    gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
     node = D_8012D4E4;
     if (node != 0) {
         state_mask = 0x80000;
