@@ -157,4 +157,116 @@ f32 func_80215868_de(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) 
 INCLUDE_ASM("span_1000", func_80215868_de);
 #endif
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C2198, D_800C219C_de, D_800C21A0_de, D_800C21A4_de, D_800C21A8_de, D_800C21AC_de, D_800C21B0_de;
+extern f32 D_800C21B4_de, D_800C21B8_de, D_800C21BC_de;
+extern s32 Weapons_HasAmmoForMode(void *, s32);
+extern void func_8024BC94_de(CVector3 *, void *, f32, f32, f32);
+/* Signed angle between an actor's facing and the direction to a point on the ground plane, clamped by the
+ * given limits before the arccosine (the constants differ per use). */
+static f32 headingToward(Actor_u1 *actor, CVector3 point, f32 high, f32 low) {
+    f32 dx = point.x - actor->position.x;
+    f32 dz = point.z - actor->position.z;
+    f32 length = func_802B72B0_de(dx * dx + dz * dz);
+    f32 heading;
+    f32 cosine;
+    f32 sine;
+    f32 dot;
+    if (length == 0.0f) {
+        return 0.0f;
+    }
+    cosine = func_802B7130_de(actor->yaw);
+    sine = -func_802B6560_de(actor->yaw);
+    dot = (dx * -cosine + dz * sine) / length;
+    if (high < dot) {
+        dot = high;
+    } else if (dot < low) {
+        dot = low;
+    }
+    heading = func_802745D0_de(dot);
+    if (!(dx * sine + dz * cosine > 0.0f)) {
+        heading = -heading;
+    }
+    return heading;
+}
+/* Tells whether an actor can aim at a target within the given tolerance: the target must be a shooting player
+ * with ammo and the aim button (0x2000), or a prop of kind 1 / 4 in the right state; the vertical aim point is
+ * clamped to the actor's height range, the horizontal turn must lie outside the dead zone, and the angle
+ * between the aim direction and the target's forward vector must be within tolerance. Returns 0 when not,
+ * else -1 or 1 for the side the target faces. */
+s32 func_80215B90_de(Actor_u1 *actor, s32 unused, void *target, f32 tolerance) {
+    CVector3 aim;
+    CVector3 from;
+    CVector3 direction;
+    CVector3 forward;
+    f32 low;
+    f32 high;
+    f32 turn;
+    f32 angle;
+    if (target == 0) {
+        return 0;
+    }
+    if (FIELD(u32, target, 0x100) & 0x300000) {
+        void *player = FIELD(void *, target, 0x1D8);
+        if (Weapons_HasAmmoForMode(player, FIELD(s16, player, 0x62E)) <= 0) {
+            return 0;
+        }
+        if ((FIELD(u32, player, 0x6AC) & 0x2000) == 0) {
+            return 0;
+        }
+    } else {
+        s32 kind = FIELD(s32, FIELD(void *, target, 0x18), 0);
+        if (kind == 1) {
+            if (FIELD(s16, target, 0x238) < 0x10CC) {
+                return 0;
+            }
+        } else if (kind == 4) {
+            if (FIELD(s8, target, 0x1A4) != 0x3F) {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+    low = actor->position.y + FIELD(f32, actor, 0x70);
+    high = low + Particle_GetActorHeight((Actor_func_80214310_de *)actor);
+    aim.x = FIELD(f32, target, 0x8);
+    aim.y = FIELD(f32, target, 0xC) + FIELD(f32, target, 0x70) +
+            Particle_GetActorHeight((Actor_func_80214310_de *)target) * D_800C2198;
+    aim.z = FIELD(f32, target, 0x10);
+    from.x = actor->position.x;
+    from.z = actor->position.z;
+    if (high < aim.y) {
+        from.y = high;
+    } else if (aim.y < low) {
+        from.y = low;
+    } else {
+        from.y = aim.y;
+    }
+    angle = headingToward(actor, aim, D_800C219C_de, D_800C21A0_de);
+    if (angle < 0.0f) {
+        turn = -headingToward(actor, aim, D_800C21A4_de, D_800C21A8_de);
+    } else {
+        turn = headingToward(actor, aim, D_800C21AC_de, D_800C21B0_de);
+    }
+    if (D_800C21B4_de < turn && turn < D_800C21B8_de) {
+        return 0;
+    }
+    func_80271F68_de(&direction, &from, &aim);
+    func_8027207C_de(&direction);
+    func_8024BC94_de(&forward, target, 0.0f, 0.0f, D_800C21BC_de);
+    angle = func_802745D0_de(direction.x * forward.x + direction.y * forward.y + direction.z * forward.z);
+    if (!(angle < tolerance * D_800C21C0_de[0])) {
+        return 0;
+    }
+    if (-forward.z * direction.x + direction.z * forward.x < 0.0f) {
+        return -1;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("span_1000", func_80215B90_de);
+#endif

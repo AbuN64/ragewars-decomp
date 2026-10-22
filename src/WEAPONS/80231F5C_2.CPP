@@ -111,4 +111,80 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
 
 /* D_800C2FCC_de is resident shared data supplied by its retained ROM slice. */
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C2FD0_de;
+extern u8 *D_800D30BC;
+extern void func_8022B984_de(void *);
+/* Runs a pending special action of a player: decides from the player's state (0x62E) and its flags whether
+ * the action is blocked, handled by func_802301F4_de, or started; when started it plays the state 5 effect,
+ * checks the state 3 resource through func_8022F55C_de and starts the default action (2, or 0xB when the
+ * weapon state at 0x594 is 2). The request byte at 0xCB is cleared when the action was refused. */
+void func_802323A4_de(void *actor, void *attack) {
+    void *player = FIELD(void *, actor, 0x1D8);
+    s32 refused;
+    s32 started;
+    s32 result;
+    if (FIELD(s8, attack, 0xCB) == 0) {
+        return;
+    }
+    switch (FIELD(s16, player, 0x62E)) {
+    case 4:
+    case 0xE:
+    case 0xF:
+        refused = 0;
+        break;
+    case 0xA:
+        refused = (FIELD(u32, player, 0x6AC) & 0x4000) != 0 && FIELD(s16, player, 0x5F8) != 0;
+        break;
+    case 3:
+        refused = (FIELD(u32, player, 0x6AC) & 0x6000) == 0x6000 && FIELD(s16, player, 0x5F4) != 0 &&
+                  FIELD(s16, player, 0x5F6) == 0;
+        break;
+    default:
+        refused = func_802301F4_de(actor, attack);
+        break;
+    }
+    if (refused != 0) {
+        FIELD(s8, attack, 0xCB) = 0;
+        FIELD(s8, attack, 0x35) = -1;
+        result = 1;
+    } else {
+        if (FIELD(s16, player, 0x62E) == 5) {
+            func_8022B00C_de(player);
+            func_8025DE54_de(0x460, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
+        }
+        if (FIELD(s16, player, 0x62E) == 3) {
+            if (0.0f < FIELD(f32, player, 0x11D8)) {
+                started = 0;
+            } else if (FIELD(s32, player, 0x1450) != 0 || D_801462D5 != 1) {
+                started = 1;
+            } else {
+                started = func_8022F55C_de(D_80102B00 + FIELD(s32, player, 0x5D4) * 400, 3);
+                if (started == 0) {
+                    func_8025DF34_de(0xD4D);
+                    if (FIELD(void *, player, 0x5DC) != 0) {
+                        func_8022A5A0_de(&D_80145040, player);
+                        func_80239908_de(&D_80145088, FIELD(void *, player, 0x5DC), D_800D30BC, started, D_800C2FD0_de);
+                    }
+                }
+            }
+            if (started != 0 && FIELD(s32, player, 0x594) == 2) {
+                func_80214178_de(actor, attack, 0xB);
+                func_8022B984_de(player);
+            } else {
+                func_80214178_de(actor, attack, 2);
+            }
+        } else {
+            func_80214178_de(actor, attack, 2);
+        }
+        result = 1;
+    }
+    FIELD(s32, player, 0x788) = result;
+    FIELD(s32, player, 0x78C) = 0;
+}
+#else
 INCLUDE_ASM("span_1000", func_802323A4_de);
+#endif

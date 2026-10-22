@@ -131,7 +131,81 @@ s32 func_802301F4_de(void *actor, void *attack) {
 }
 #endif
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C2EE8_de, D_800C2EEC_de;
+extern s16 D_800CE8DC[];
+extern void *D_800D052C[];
+/* Per-frame handler for a weapon in its alternate-fire mode: without ammo it drops the mode request and
+ * lets func_8022F96C_de pick the next weapon; while the fire flag 0x4000 is held and the state is a firing
+ * state it toggles the request (0x13C between 1 and 2), plays the empty-click effect when the magazine runs
+ * out, and otherwise runs func_802301F4_de or the default action from the weapon table. */
+void func_802303A0_de(void *actor, void *attack) {
+    void *player = FIELD(void *, actor, 0x1D8);
+    s16 action = D_800CE8DC[FIELD(s16, player, 0x650) * 12];
+    char *info = (char *)D_800D052C[FIELD(s16, player, 0x62E)];
+    s32 ready;
+    s32 handled = 1;
+    if (Weapons_HasAmmoForMode(player, FIELD(s16, player, 0x62E)) == 0) {
+        if (FIELD(s32, attack, 0x13C) == 2) {
+            FIELD(s32, attack, 0x13C) = 1;
+            if ((FIELD(u32, info, 0x14) & 0x20) != 0) {
+                FIELD(s32, player, 0x7E8) = 0;
+            }
+            handled = Weapons_HasAmmoForMode(player, FIELD(s16, player, 0x62E));
+        } else {
+            handled = 0;
+        }
+        if (handled == 0) {
+            FIELD(s16, player, 0x770) = func_8022F96C_de(player);
+            return;
+        }
+    }
+    if ((FIELD(u32, player, 0x6B0) & 0x4000) != 0 && FIELD(s16, player, 0x62E) < 0x12) {
+        if (0.0f < FIELD(f32, player, 0x11D8)) {
+            ready = 0;
+        } else if (FIELD(s32, player, 0x1450) != 0 || D_801462D5 != 1) {
+            ready = 1;
+        } else {
+            ready = func_8022F55C_de(D_80102B00 + FIELD(s32, player, 0x5D4) * 400, 3);
+            if (ready == 0) {
+                func_8025DF34_de(0xD4D);
+                if (FIELD(void *, player, 0x5DC) != 0) {
+                    func_8022A5A0_de(&D_80145040, player);
+                    func_80239908_de(&D_80145088, FIELD(void *, player, 0x5DC), D_800D30BC, ready, D_800C2EE8_de);
+                }
+            }
+        }
+        if (ready != 0) {
+            if (FIELD(s32, attack, 0x13C) != 1) {
+                FIELD(s32, attack, 0x13C) = 1;
+                if ((FIELD(u32, info, 0x14) & 0x20) != 0) {
+                    FIELD(s32, player, 0x7E8) = 0;
+                }
+            } else {
+                FIELD(s32, attack, 0x13C) = 2;
+                if (Weapons_HasAmmoForMode(player, FIELD(s16, player, 0x62E)) == 0) {
+                    func_8025DF34_de(0xD4D);
+                    if (FIELD(void *, player, 0x5DC) != 0) {
+                        s32 result = func_8022A5A0_de(&D_80145040, player);
+                        func_80239908_de((char *)&D_80145040 + 0x48, FIELD(void *, player, 0x5DC), D_800D30BC, result, D_800C2EEC_de);
+                    }
+                    FIELD(s32, attack, 0x13C) = 1;
+                } else if ((FIELD(u32, info, 0x14) & 0x20) != 0) {
+                    FIELD(s32, player, 0x7E8) = 1;
+                }
+            }
+        }
+    }
+    if (func_802301F4_de(actor, attack) == 0 && !(FIELD(u32, actor, 0x100) & 0x400)) {
+        func_80214178_de(actor, attack, action);
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_802303A0_de);
+#endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 INCLUDE_ASM("span_1000", func_80230610_eu);

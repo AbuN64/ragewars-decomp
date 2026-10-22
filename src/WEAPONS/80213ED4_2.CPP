@@ -186,4 +186,134 @@ s32 func_80214624_de(Actor_func_80214624_de *arg0, Plan *arg1, Actor_func_802146
     return 0;
 }
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C2168_de;
+extern void *D_801041F0;
+extern char D_80100030[];
+extern s32 func_80245798_de(void);
+extern s32 func_80245B0C_de(void);
+extern void *func_8022A504_de(void *, f32, f32, f32, void *);
+extern void *func_8022A480_de(void *, f32, f32, f32);
+extern void func_8024E7DC_de(void *);
+extern f32 func_80217224_de(void *, f32, f32, f32);
+extern f32 func_80217290_de(void *, f32, f32, f32);
+extern s32 func_8024DE6C_de(void *);
+extern f32 func_8024E570_de(void *);
+extern char D_80145040[];
+extern s32 func_802444A4_de(void *, f32, f32, f32, CVector3, void *);
+/* Picks the best target for an actor: returns the state's fixed target (0x78) if it has one, otherwise
+ * gathers up to two candidates (the state's remembered one at 0x68 and the nearest player found around the
+ * actor), keeps the nearest within D_800C2168_de that passes the range/visibility tests (func_80214624_de and
+ * a line-of-sight probe through func_802444A4_de when requested), and remembers the actor's position when
+ * nothing qualified. */
+void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
+    void *candidates[3];
+    u8 saved[0x50];
+    CVector3 target;
+    void *best = 0;
+    void *candidate;
+    f32 bestDistance;
+    f32 distance;
+    s32 count = 0;
+    s32 ok;
+    s32 i;
+    s32 blocked;
+    if (FIELD(void *, state, 0x78) != 0) {
+        if (combat != 0) {
+            func_80214624_de(actor, state, FIELD(void *, state, 0x78));
+        }
+        return FIELD(void *, state, 0x78);
+    }
+    ok = 1;
+    if (func_80245798_de() != 0) {
+        ok = 0;
+        if (func_80245B0C_de() >= 10) {
+            ok = func_80245B0C_de() < 0x3D;
+        }
+    }
+    if (ok != 0) {
+        if (combat != 0) {
+            candidate = FIELD(void *, state, 0x68);
+            if (candidate != 0) {
+                candidates[count++] = candidate;
+            }
+        }
+        if ((FIELD(u32, FIELD(void *, actor, 0x18), 4) & 0x400) == 0) {
+            if ((FIELD(u32, actor, 0x100) & 0x300000) != 0) {
+                candidate = func_8022A504_de(&D_80145040, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10),
+                                             FIELD(void *, actor, 0x1D8));
+            } else {
+                candidate = func_8022A480_de(&D_80145040, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10));
+            }
+            if (candidate != 0 && FIELD(s16, candidate, 0x5EA) != 0 && FIELD(s16, candidate, 0x650) != 1) {
+                func_8024E7DC_de(candidate);
+                if (candidate != 0) {
+                    candidates[count++] = candidate;
+                }
+            }
+        }
+        bestDistance = D_800C2168_de;
+        for (i = 0; i < count; i++) {
+            candidate = candidates[i];
+            distance = func_80217224_de(candidate, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10));
+            if (!(distance < bestDistance)) {
+                continue;
+            }
+            if (combat != 0) {
+                if (FIELD(s32, FIELD(void *, actor, 0x18), 0) == 1 && FIELD(s8, state, 0x37) == 0) {
+                    continue;
+                }
+                if (func_8024DE6C_de(actor) != 0) {
+                    f32 reach = func_80217290_de(candidate, FIELD(f32, state, 0xB0), FIELD(f32, state, 0xB4), FIELD(f32, state, 0xB8));
+                    f32 range = func_8024E570_de(actor);
+                    if (range * func_8024E570_de(actor) <= reach) {
+                        continue;
+                    }
+                }
+                if (func_80214624_de(actor, state, candidate) == 0) {
+                    continue;
+                }
+            }
+            if (lineOfSight != 0) {
+                for (blocked = 0; blocked < 0x50; blocked += 4) {
+                    FIELD(s32, saved, blocked) = FIELD(s32, actor, blocked);
+                }
+                FIELD(f32, actor, 0xC) += Particle_GetActorHeight((Actor_func_80214310_de *)actor);
+                FIELD(f32, actor, 0xC) += FIELD(f32, candidate, 0x70);
+                target.x = FIELD(f32, candidate, 0x8);
+                target.y = FIELD(f32, candidate, 0xC);
+                target.z = FIELD(f32, candidate, 0x10);
+                target.y += Particle_GetActorHeight((Actor_func_80214310_de *)candidate);
+                target.y += FIELD(f32, candidate, 0x70);
+                blocked = func_802444A4_de(actor, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10), target, D_80100030);
+                if (D_801041F0 == candidate) {
+                    blocked = 0;
+                }
+                {
+                    s32 k;
+                    for (k = 0; k < 0x50; k += 4) {
+                        FIELD(s32, actor, k) = FIELD(s32, saved, k);
+                    }
+                }
+                if (blocked != 0) {
+                    continue;
+                }
+            }
+            bestDistance = distance;
+            best = candidate;
+        }
+    }
+    if (combat != 0 && best == 0 && func_80214624_de(actor, state, 0) == 0) {
+        FIELD(f32, state, 0xB0) = FIELD(f32, actor, 0x8);
+        FIELD(f32, state, 0xB4) = FIELD(f32, actor, 0xC);
+        FIELD(f32, state, 0xB8) = FIELD(f32, actor, 0x10);
+        FIELD(s32, state, 0xBC) = FIELD(s32, actor, 0x14);
+    }
+    return best;
+}
+#else
 INCLUDE_ASM("span_1000", func_802149C0_de);
+#endif
