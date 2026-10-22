@@ -177,7 +177,6 @@ void Frontend_ShowUnlockedEntries(s32 style) {
     }
 }
 
-#ifdef NON_MATCHING
 /* Advances a cursor over four 400-byte entries, wrapping to 0, until it reaches one whose flag byte in
    D_80102B0D is not negative; after six steps without one it sets the cursor to -1. */
 void func_8041DB30_de(int *cursor) {
@@ -198,9 +197,6 @@ void func_8041DB30_de(int *cursor) {
 }
 
 
-#else
-INCLUDE_ASM("ovl_80400000", func_8041DB30_de);
-#endif
 /* Releases the object D_800E3590 holds through func_802547E4_de, clears D_800E3590 and returns zero.
  * The hub names D_800E3590 as the menu block it points at; the release helper takes a plain pointer
  * and the clear stores a null word. */
