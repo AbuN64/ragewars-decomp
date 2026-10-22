@@ -9,10 +9,7 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "WEAPONS/PLAYERRECAT1450V1.H"
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
-#if defined(VERSION_EU)
-#define func_80230630_de func_80230610_eu
-#endif
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern char D_800CE8DC;
 
 
