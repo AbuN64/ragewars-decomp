@@ -6164,7 +6164,7 @@ segments:
       - [0xE2BE0, rodata, data_800C/literals_Frontend_UpdateFourPlayerResults]
       - [0xE2BFC, rodata, data_800C/literals_Frontend_DrawFourPlayerResults]
       - [0xE2C10, rodata, data_800C/literals_func_8043ACF0_de]
-      - [0xE2C40, rodata, data_800C/D_blob_phase2_48acc91ddba73dc2d583]
+      - [0xE2C40, rodata, data_800C/literals_func_8043B854_de]
       - [0xE2C54, data, data_800C/D_blob_d9b2fec791c4c1fdb586]
       - [0xE2C60, rodata, data_800C/D_auto_src_rw_pool_8043C080_E2C60_us_rev1]
       - [0xE2C7C, data, data_800C/D_blob_8fd5ebd92f05f667595e]
