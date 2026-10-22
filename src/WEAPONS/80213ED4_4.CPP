@@ -156,117 +156,119 @@ f32 func_80215868_de(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) 
 #else
 INCLUDE_ASM("span_1000", func_80215868_de);
 #endif
+/* func_80215868_de's float literals (1, -1, pi/6, pi, +-pi/12), placed here until it is matched. */
+const unsigned int D_80215868_C7E70[6] = {
+    0x3F800000, 0xBF800000, 0x3F060A93, 0x40490FDB, 0x3E860A93, 0xBE860A93,
+};
 
-#ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
-extern f32 D_800C2198, D_800C219C_de, D_800C21A0_de, D_800C21A4_de, D_800C21A8_de, D_800C21AC_de, D_800C21B0_de;
-extern f32 D_800C21B4_de, D_800C21B8_de, D_800C21BC_de;
-extern s32 Weapons_HasAmmoForMode(void *, s32);
-extern void func_8024BC94_de(CVector3 *, void *, f32, f32, f32);
-/* Signed angle between an actor's facing and the direction to a point on the ground plane, clamped by the
- * given limits before the arccosine (the constants differ per use). */
-static f32 headingToward(Actor_u1 *actor, CVector3 point, f32 high, f32 low) {
-    f32 dx = point.x - actor->position.x;
-    f32 dz = point.z - actor->position.z;
-    f32 length = func_802B72B0_de(dx * dx + dz * dz);
-    f32 heading;
-    f32 cosine;
-    f32 sine;
+#include "COMMON/MATH_HELPERS.H"
+extern void func_8027207C_de(CVector3 *);
+extern void func_8024BC94_de(CVector3 *out, void *actor, CVector3 offset);
+extern f32 Particle_GetActorHeight(void *);
+
+/* func_80216F44_de's body: the signed angle between the actor's facing and the direction to the point. */
+static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
+    f32 dx;
+    f32 dz;
+    f32 dist;
+    f32 s;
+    f32 c;
     f32 dot;
-    if (length == 0.0f) {
+    f32 angle;
+
+    dx = point.x - actor->pos.x;
+    dz = point.z - actor->pos.z;
+    dist = func_802B72B0_de(dx * dx + dz * dz);
+    if (dist == 0.0f) {
         return 0.0f;
     }
-    cosine = func_802B7130_de(actor->yaw);
-    sine = -func_802B6560_de(actor->yaw);
-    dot = (dx * -cosine + dz * sine) / length;
-    if (high < dot) {
-        dot = high;
-    } else if (dot < low) {
-        dot = low;
+    do {
+        s = func_802B7130_de(actor->heading);
+    } while (0);
+    c = -func_802B6560_de(actor->heading);
+    dot = (dx * -s + dz * c) / dist;
+    dot = ((RW_MIN(dot, 1.0f)) < ((-1.0f)) ? ((-1.0f)) : (RW_MIN(dot, 1.0f)));
+    angle = func_802745D0_de(dot);
+    if (!(dx * c + dz * s > 0.0f)) {
+        angle = -angle;
     }
-    heading = func_802745D0_de(dot);
-    if (!(dx * sine + dz * cosine > 0.0f)) {
-        heading = -heading;
-    }
-    return heading;
+    return angle;
 }
-/* Tells whether an actor can aim at a target within the given tolerance: the target must be a shooting player
- * with ammo and the aim button (0x2000), or a prop of kind 1 / 4 in the right state; the vertical aim point is
- * clamped to the actor's height range, the horizontal turn must lie outside the dead zone, and the angle
- * between the aim direction and the target's forward vector must be within tolerance. Returns 0 when not,
- * else -1 or 1 for the side the target faces. */
-s32 func_80215B90_de(Actor_u1 *actor, s32 unused, void *target, f32 tolerance) {
-    CVector3 aim;
-    CVector3 from;
-    CVector3 direction;
+
+#define ABS(x) ((x) < 0.0f ? -(x) : (x))
+
+/* Whether the target faces the actor within a cone, and from which side. The target must be armed: a player with ammo
+ * for its current weapon and the fire button held, an AI in anim type 0x10CC or later (kind 1) or in mode 0x3F
+ * (kind 4). Targets 70 to 110 degrees off the actor's heading are skipped. The line from the actor (its height
+ * clamped to the target's aim point) to the target is compared with the target's forward vector: 0 when the angle
+ * between them is not under half the cone, else -1 or 1 for the side. */
+s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func_80214DD4_de *target, f32 cone) {
+    CVector3 dir;
+    CVector3 facing;
     CVector3 forward;
+    CVector3 from;
+    CVector3 to;
+    struct Controller *controller;
     f32 low;
     f32 high;
-    f32 turn;
     f32 angle;
-    if (target == 0) {
+
+    if (target == NULL) {
         return 0;
     }
-    if (FIELD(u32, target, 0x100) & 0x300000) {
-        void *player = FIELD(void *, target, 0x1D8);
-        if (Weapons_HasAmmoForMode(player, FIELD(s16, player, 0x62E)) <= 0) {
+    if (target->flags100 & 0x300000) {
+        controller = target->controller;
+        if (Weapons_HasAmmoForMode(controller, controller->currentWeapon) <= 0) {
             return 0;
         }
-        if ((FIELD(u32, player, 0x6AC) & 0x2000) == 0) {
+        if (!(controller->buttons & 0x2000)) {
             return 0;
         }
     } else {
-        s32 kind = FIELD(s32, FIELD(void *, target, 0x18), 0);
-        if (kind == 1) {
-            if (FIELD(s16, target, 0x238) < 0x10CC) {
+        switch (*target->kind) {
+        case 1:
+            if (target->animType < 0x10CC) {
                 return 0;
             }
-        } else if (kind == 4) {
-            if (FIELD(s8, target, 0x1A4) != 0x3F) {
+            break;
+        case 4:
+            if (target->aiMode != 0x3F) {
                 return 0;
             }
-        } else {
+            break;
+        default:
             return 0;
         }
     }
-    low = actor->position.y + FIELD(f32, actor, 0x70);
-    high = low + Particle_GetActorHeight((Actor_func_80214310_de *)actor);
-    aim.x = FIELD(f32, target, 0x8);
-    aim.y = FIELD(f32, target, 0xC) + FIELD(f32, target, 0x70) +
-            Particle_GetActorHeight((Actor_func_80214310_de *)target) * D_800C2198;
-    aim.z = FIELD(f32, target, 0x10);
-    from.x = actor->position.x;
-    from.z = actor->position.z;
-    if (high < aim.y) {
+    low = self->pos.y + self->height;
+    high = low + Particle_GetActorHeight(self);
+    to.x = target->pos.x;
+    to.y = target->pos.y + target->height + Particle_GetActorHeight(target) * 0.9f;
+    to.z = target->pos.z;
+    from.x = self->pos.x;
+    from.z = self->pos.z;
+    if (high < to.y) {
         from.y = high;
-    } else if (aim.y < low) {
+    } else if (to.y < low) {
         from.y = low;
     } else {
-        from.y = aim.y;
+        from.y = to.y;
     }
-    angle = headingToward(actor, aim, D_800C219C_de, D_800C21A0_de);
-    if (angle < 0.0f) {
-        turn = -headingToward(actor, aim, D_800C21A4_de, D_800C21A8_de);
-    } else {
-        turn = headingToward(actor, aim, D_800C21AC_de, D_800C21B0_de);
-    }
-    if (D_800C21B4_de < turn && turn < D_800C21B8_de) {
+    angle = ABS(angleTo(self, to));
+    if (angle > 70.0f * RW_PI_F6 / 180.0f && angle < 110.0f * RW_PI_F6 / 180.0f) {
         return 0;
     }
-    func_80271F68_de(&direction, &from, &aim);
-    func_8027207C_de(&direction);
-    func_8024BC94_de(&forward, target, 0.0f, 0.0f, D_800C21BC_de);
-    angle = func_802745D0_de(direction.x * forward.x + direction.y * forward.y + direction.z * forward.z);
-    if (!(angle < tolerance * D_800C21C0_de[0])) {
-        return 0;
+    func_80271F68_de(&dir, &from, &to);
+    func_8027207C_de(&dir);
+    forward.x = 0.0f;
+    forward.y = 0.0f;
+    forward.z = 1.0f;
+    func_8024BC94_de(&facing, target, forward);
+    if (func_802745D0_de(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
+        if (dir.x * -facing.z + dir.z * facing.x < 0.0f) {
+            return -1;
+        }
+        return 1;
     }
-    if (-forward.z * direction.x + direction.z * forward.x < 0.0f) {
-        return -1;
-    }
-    return 1;
+    return 0;
 }
-#else
-INCLUDE_ASM("span_1000", func_80215B90_de);
-#endif

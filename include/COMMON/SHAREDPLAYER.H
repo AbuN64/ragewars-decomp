@@ -268,14 +268,22 @@ struct Actor_func_80214DD4_de {
     u16 id;
     u8 padE6[0x1A];
     s32 flags100;
-    u8 pad104[0xD4];
+    u8 pad104[0x1A4 - 0x104];
+    s8 aiMode; /* 0x1A4: CAI_t m_Mode */
+    u8 pad1A5[0x1D8 - 0x1A5];
     struct Controller *controller;
-    u8 pad1DC[0x104];
+    u8 pad1DC[0x238 - 0x1DC];
+    s16 animType; /* 0x238: CAI_t m_AnimType */
+    u8 pad23A[0x2E0 - 0x23A];
     s32 flags2E0;
 };
 
 struct Controller {
-    u8 pad0[0x788];
+    u8 pad0[0x62E];
+    s16 currentWeapon; /* 0x62E: CPlayerLoadSaveData_t m_CurrentWeapon */
+    u8 pad630[0x6AC - 0x630];
+    u32 buttons; /* 0x6AC: CPlayerContState_t m_dwButtons */
+    u8 pad6B0[0x788 - 0x6B0];
     s32 state;
     u8 pad78C[8];
     struct Actor_func_80214DD4_de *owner;
