@@ -166,6 +166,7 @@ void func_8043C324_de(void) {
         ".Lauto_8043C544:\n"
         "jr         $ra\n"
         "addu      $v0, $zero, $zero\n"
+        ".set at\n"
     );
 }
 #else
@@ -490,6 +491,7 @@ void func_8043C688_de(void) {
         "lw         $s0, 0x10($sp)\n"
         "jr         $ra\n"
         "addiu     $sp, $sp, 0x20\n"
+        ".set at\n"
     );
 }
 #else

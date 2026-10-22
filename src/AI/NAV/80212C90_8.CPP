@@ -88,7 +88,7 @@ void func_80212E10_de(void) {
         "jal        func_802744D4_de\n"
         "nop\n"
         "lw         $v1, 0x4($s2)\n"
-        "div        $zero, $v0, $v1\n"
+        "div $zero,$v0,$v1\n"
         "bnez       $v1, .Lauto_80212F44\n"
         "nop\n"
         "break      7\n"
@@ -126,6 +126,7 @@ void func_80212E10_de(void) {
         "lw         $s0, 0x10($sp)\n"
         "jr         $ra\n"
         "addiu     $sp, $sp, 0x20\n"
+        ".set at\n"
     );
 }
 #else

@@ -150,6 +150,7 @@ void func_8043C4F4_us(void) {
         ".Lauto_8043C724:\n"
         "jr         $ra\n"
         "addu      $v0, $zero, $zero\n"
+        ".set at\n"
     );
 }
 #else

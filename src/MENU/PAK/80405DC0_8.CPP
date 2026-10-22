@@ -325,8 +325,6 @@ typedef struct SaveBuffer { u8 pad0[0x60c]; u32 checksums[0]; } SaveBuffer;
 extern s32 D_8014D4C0_de,D_8014D4DC,D_80153760,D_8014D4EC_de,D_800DE874,D_80153784,D_8015375C,D_800E28C0,D_800DE868;
 extern u8 D_0044EA08[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern SaveBuffer *D_8011FECC;
-extern u32 D_8014561C;
 extern s32 D_0044ED44;
 #endif
 extern void func_80404E28_de(s32);
