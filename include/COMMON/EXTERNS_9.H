@@ -37,7 +37,7 @@ extern void func_8028D61C_de(void *);
 extern void func_802A5680_de(void *);
 extern void func_80286284_de(void *);
 extern void func_8028C60C_de(void *);
-extern void func_80281CA0_de(void *);
+extern void Particle_UpdateSystem(void *);
 extern void func_80236F1C_de(void *, void *);
 extern void func_8028D67C_de(void *);
 extern void func_8028D888_de(void *);

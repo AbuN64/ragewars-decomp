@@ -163,7 +163,7 @@ static __inline__ void Particle_Free(CParticleSystem_t *world, CParticle_t *p) {
 /* Steps the particle system once: marks every particle on the three active lists, then (outside a pause) advances the
  * ones in the play box (or of type 0x41E), fires the impact events of the expired ones and frees them, and lets each
  * collected type 34 particle react to the others and each type 87 particle expire the non-87 ones within range. */
-void func_80281CA0_de(CParticleSystem_t *world) {
+void Particle_UpdateSystem(CParticleSystem_t *world) {
     CParticle_t *colliders[128];
     CParticle_t *stepped[128];
     struct IntPair value;

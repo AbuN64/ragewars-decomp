@@ -66,7 +66,7 @@ void func_80286080_de(void *arg0) {
         }
     }
 
-    func_80281CA0_de(state->system1B08);
+    Particle_UpdateSystem(state->system1B08);
     if (state->frozen == 0) {
         func_802285E8_de(&D_80145040);
     }
