@@ -10702,7 +10702,6 @@ SECTIONS
         src/MENU/TEAM/800C72D8.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.data);
-        src/MENU/TEAM/800C72F0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/MENU/TEAM/80217388_4.CPP.o */;
         src/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
@@ -12450,7 +12449,6 @@ SECTIONS
         src/MENU/TEAM/800C72D8.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.data);
-        src/MENU/TEAM/800C72F0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/MENU/TEAM/80217388_4.CPP.o */;
         src/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
@@ -14151,7 +14149,6 @@ SECTIONS
         src/MENU/TEAM/800C72D8.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.data);
-        src/MENU/TEAM/800C72F0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/MENU/TEAM/80217388_4.CPP.o */;
         src/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
@@ -15865,7 +15862,6 @@ SECTIONS
         src/MENU/TEAM/800C72D8.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.data);
-        src/MENU/TEAM/800C72F0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/MENU/TEAM/80217388_4.CPP.o */;
         src/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
@@ -17604,7 +17600,6 @@ SECTIONS
         src/MENU/TEAM/800C72D8.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C72DC.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB1/800C72E4.CPP.o(.data);
-        src/MENU/TEAM/800C72F0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/MENU/TEAM/80217388_4.CPP.o */;
         src/MENU/TEAM/80217388_4.CPP.o(.rodata .rdata);
         src/MENU/TEAM/800C7324.CPP.o(.rodata .rdata);
@@ -19895,7 +19890,6 @@ SECTIONS
         src/WEAPONS/80213ED4_24.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
-        src/MENU/TEAM/800C72F0.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
@@ -21170,7 +21164,6 @@ SECTIONS
         src/WEAPONS/80213ED4_25.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
-        src/MENU/TEAM/800C72F0.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
@@ -22409,7 +22402,6 @@ SECTIONS
         src/WEAPONS/80213ED4_26.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
-        src/MENU/TEAM/800C72F0.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
@@ -23652,7 +23644,6 @@ SECTIONS
         src/WEAPONS/80213ED4_23.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
-        src/MENU/TEAM/800C72F0.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
@@ -24965,7 +24956,6 @@ SECTIONS
         src/MENU/TEAM/800C72D8.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C72DC.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB1/800C72E4.CPP.o(.bss .sbss COMMON);
-        src/MENU/TEAM/800C72F0.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/80217388_4.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7324.CPP.o(.bss .sbss COMMON);
         src/MENU/TEAM/800C7338.CPP.o(.bss .sbss COMMON);
