@@ -54,7 +54,8 @@ struct Player {
     struct Object_func_8028B274_de weaponModel; /* 0x2E8 */
     u8 pad3CE[0xB6];
     struct AiBehaviourTable *weaponAnimationTable; /* 0x484 */
-    u8 pad488[0xF4];
+    u8 pad488[0xF0];
+    s32 weaponAnimationCount; /* 0x578 */
     f32 weaponSpinStep; /* 0x57C: weapon state +0x124 */
     f32 weaponSpin; /* 0x580: weapon state +0x128 */
     u8 pad584[0xC];
@@ -69,11 +70,12 @@ struct Player {
     u8 pad5E8[4];
     s32 model; /* 0x5EC: func_80449870_de passes it to func_8021B1E4_de */
     u8 pad5F0[4];
-    s16 ammo[3]; /* 0x5F4 */
-    u8 pad5FA[8];
+    s16 ammo[7]; /* 0x5F4 */
     s8 actions[22][2]; /* 0x602 */
     s16 selectedAction; /* 0x62E */
-    u8 pad630[0x20];
+    s16 queuedAction; /* 0x630 */
+    s16 lastAction; /* 0x632 */
+    u8 pad634[0x1C];
     s16 pose; /* 0x650 */
     u8 pad652[6];
     f32 poseTimer; /* 0x658 */

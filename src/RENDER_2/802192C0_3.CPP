@@ -2,6 +2,8 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/INTEGERSTATE2C.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "RENDER_2/OBJECTSTATE8E.H"
 #include "TYPES.H"
 #include "COMMON/MULTIPLAYEROPTIONS.H"
@@ -235,6 +237,108 @@ spawn:
         D_800FF140_de[arg0->playerIndex]++;
 }
 
-INCLUDE_ASM("span_1000", func_8021AF6C_de);
+/* Resets a player record for a new round: clears the ammo and the 22 action slots, marks every action but the first
+   unavailable when the match is local and the player has a definition and no bonus, calls the setup for the current mode,
+   sets the starting ammo by whether the player has a definition, and chooses the starting weapon (fixed for states 17 and
+   18, none for a bonus profile, the fourth loadout item of the definition when the player is a computer, else the first
+   action marked 1) before loading the weapon's animation table and count. */
+extern s32 D_801468F4;
+extern void *D_800D052C[];
+extern s32 func_80426090_de(struct Player *);
+extern s32 func_80426174_de(struct Player *);
+extern s32 func_804261DC_de(struct Player *);
+
+void func_8021AF6C_de(struct Player *player) {
+    Shared_Game *game;
+    s32 i;
+    s32 j;
+    s32 k;
+    struct WeaponInfo *weaponInfo;
+    AiCharacterDefinition *definition;
+    for (i = 6; i >= 0; i--) {
+        player->ammo[i] = 0;
+    }
+    for (i = 21; i >= 0; i--) {
+        player->actions[i][0] = 0;
+    }
+    game = &D_801462C8;
+    if (game->local == 1 && player->definition != 0) {
+        if (game->unk62C == 0 || player->profile->bonus == 0) {
+            for (j = 1; j < 22; j++) {
+                player->actions[j][0] = 0;
+                player->actions[j][1] = -1;
+            }
+        }
+        switch (D_801462D5) {
+        case 1:
+            func_80426090_de(player);
+            break;
+        case 4:
+            func_804261DC_de(player);
+            break;
+        default:
+            func_80426174_de(player);
+            break;
+        }
+    }
+    if (player->definition == 0) {
+        player->ammo[0] = 100;
+        player->ammo[1] = 100;
+        player->ammo[2] = 50;
+    } else {
+        player->ammo[0] = 50;
+        player->ammo[1] = 0;
+        player->ammo[2] = 0;
+        player->ammo[3] = 0;
+    }
+    if (player->state == 17) {
+        player->weapon = 16;
+        player->selectedAction = 16;
+        player->queuedAction = 16;
+        player->lastAction = 16;
+    } else if (player->state == 18) {
+        player->weapon = 17;
+        player->selectedAction = 17;
+        player->queuedAction = 17;
+        player->lastAction = 17;
+    } else if (D_801468F4 != 0 && player->profile->bonus != 0) {
+        player->selectedAction = 0;
+        player->weapon = 0;
+        player->queuedAction = 0;
+        player->lastAction = player->selectedAction;
+    } else {
+        if (player->computer != 0) {
+            definition = player->definition;
+            if (definition != 0 && definition->loadout != 0) {
+                player->weapon = definition->loadout[3] - 0x4C3;
+                player->selectedAction = player->weapon;
+            } else {
+                player->weapon = 0;
+                player->selectedAction = 0;
+            }
+        } else {
+            for (k = 0; k < 22; k++) {
+                if (player->actions[k][1] == 1) {
+                    break;
+                }
+            }
+            if (k < 22) {
+                player->weapon = k;
+                player->selectedAction = k;
+            } else {
+                player->weapon = 0;
+                player->selectedAction = 0;
+            }
+        }
+        player->queuedAction = player->selectedAction;
+        player->lastAction = player->selectedAction;
+    }
+    if (D_801462E5 != 0) {
+        weaponInfo = D_800D052C[player->weapon];
+        player->weaponAnimationTable = weaponInfo->animation;
+        weaponInfo = D_800D052C[player->selectedAction];
+        player->weaponAnimationCount = weaponInfo->animationCount;
+    }
+}
 
 INCLUDE_ASM("span_1000", func_8021B1E4_de);
