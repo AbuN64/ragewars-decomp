@@ -11,7 +11,154 @@ INCLUDE_ASM("ovl_80400000", func_8041C614);
 INCLUDE_ASM("ovl_80400000", func_8041C610_de);
 #endif
 
+#ifdef NON_MATCHING
+/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+typedef int M2C_UNK;
+typedef signed char M2C_UNK8;
+typedef short M2C_UNK16;
+typedef int M2C_UNK32;
+typedef long long M2C_UNK64;
+#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
+#define M2C_BITWISE(type, expr) ((type)(expr))
+#define M2C_LWL(expr) (expr)
+#define M2C_FIRST3BYTES(expr) (expr)
+#define M2C_UNALIGNED32(expr) (expr)
+#define M2C_ERROR(desc) (0)
+#define M2C_TRAP_IF(cond) (0)
+#define M2C_BREAK(...) (0)
+#define M2C_SYNC(...) (0)
+#define M2C_DCACHE_CLEAN(addr) (0)
+#define M2C_DCACHE_INVALIDATE(addr) (0)
+#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
+#define M2C_ICACHE_INVALIDATE(addr) (0)
+#define M2C_PREFETCH(addr) (0)
+#define M2C_PREFETCH_STORE(addr) (0)
+#define GLUE_F64(a, b) (0.0)
+#define MULT_HI(a, b) (0)
+#define MULTU_HI(a, b) (0)
+#undef F3DEX_GBI
+#undef F3D_GBI
+#define F3DEX_GBI_2
+#include "COMMON/GFX.H"
+#include "COMMON/GLOBALS.H"
+#include "COMMON/INTEGERSTATEB0.H"
+#include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/SESSIONHANDLERROW.H"
+#include "COMMON/SHARED_MENUREPLY.H"
+#include "COMMON/TRIPLE.H"
+#include "MENU/GFX/80414430_19.H"
+#include "TYPES.H"
+#include "gbi.h"
+#include "particle/80271B18_3.H"
+s32 func_80246E44_de(void *);
+s32 func_80249E28_de(void *, s32 *);
+s32 func_8024B8C4_de(void *);
+s32 func_802737F0_de(void *, f32);
+extern s32 D_80141008;
+
+void func_8041C7F4_de(void *arg0) {
+    s32 sp24;
+    s32 sp28;
+    s32 sp10;
+    s32 sp14;
+    s32 sp18;
+    s32 sp20;
+    Gfx *temp_a0;
+    Gfx *temp_a0_2;
+    Gfx *temp_a1;
+    Gfx *temp_a2;
+    Gfx *temp_v1;
+    s32 temp_s4;
+    s32 temp_v0;
+    void *temp_s0;
+
+    temp_s0 = arg0 + 0x190;
+    if (M2C_FIELD(arg0, s32 *, 0x478) != 0) {
+        temp_s4 = D_800CC380;
+        D_800CC380 = 0;
+        temp_a2 = D_80110634;
+        D_80110634 += 8;
+        gSPMatrix(temp_a2, (u32) ((D_800D297C << 6) + 0x380 + &D_80141008), G_MTX_LOAD | G_MTX_PROJECTION);
+        
+        sp10 = M2C_FIELD(arg0, s32 *, 0x48C);
+        sp14 = M2C_FIELD(arg0, s32 *, 0x490);
+        sp18 = M2C_FIELD(arg0, s32 *, 0x494);
+        func_80272898_de(&D_80141008 + 0x160, &sp10, &sp20);
+        if (func_8025477C_de() == 0) {
+            func_8025476C_de(1U);
+        }
+        func_80417138_de(0x33335);
+        temp_a0 = D_80110634;
+        temp_v1 = D_80110634 + 8;
+        D_80110634 = temp_v1;
+        gDPPipeSync(temp_a0);
+        
+        temp_a0_2 = temp_v1 + 8;
+        D_80110634 = temp_a0_2;
+        M2C_FIELD(D_80110634, s32 *, 8) = 0xE3000A01;
+        temp_a1 = temp_v1 + 0x10;
+        temp_v1->words.w1 = 0x100000;
+        D_80110634 = temp_a1;
+        M2C_FIELD(temp_v1, s32 *, 8) = 0xE3000C00;
+        temp_a0_2->words.w1 = 0x80000;
+        D_80110634 = temp_v1 + 0x18;
+        M2C_FIELD(temp_v1, s32 *, 0x10) = 0xE3001201;
+        temp_a1->words.w1 = 0x2000;
+        func_8026D844_de(temp_a0_2, temp_a1, 0xE3000C00, 0xE3001201);
+        M2C_FIELD(arg0, s32 *, 0x198) = sp20;
+        M2C_FIELD(arg0, s32 *, 0x19C) = sp24;
+        M2C_FIELD(arg0, s32 *, 0x1A0) = sp28;
+        M2C_FIELD(arg0, s32 *, 0x354) = sp20;
+        M2C_FIELD(arg0, s32 *, 0x358) = sp24;
+        M2C_FIELD(arg0, s32 *, 0x35C) = sp28;
+        func_8024B8C4_de(temp_s0);
+        M2C_FIELD(arg0, s32 *, 0x198) = sp20;
+        M2C_FIELD(arg0, s32 *, 0x19C) = sp24;
+        M2C_FIELD(arg0, s32 *, 0x1A0) = sp28;
+        M2C_FIELD(arg0, s32 *, 0x354) = sp20;
+        M2C_FIELD(arg0, s32 *, 0x358) = sp24;
+        M2C_FIELD(arg0, s32 *, 0x35C) = sp28;
+        if ((M2C_FIELD(arg0, s32 *, 0x49C) != 0) || (M2C_FIELD(temp_s0, s8 *, 0x10E) == 0)) {
+            func_80246E44_de(temp_s0);
+            temp_v0 = M2C_FIELD(arg0, s32 *, 0x4A0);
+            if (temp_v0 != 0) {
+                func_802737F0_de(arg0 + 0x204, (f32) temp_v0 * M2C_FIELD(&D_800DD488, f32 *, 0));
+            }
+        }
+        M2C_FIELD(temp_s0, f32 *, 0x6C) = (f32) (M2C_FIELD(arg0, f32 *, 0x498) * M2C_FIELD(&D_800DD488, f32 *, 4));
+        M2C_FIELD(temp_s0, s32 *, 8) = sp20;
+        M2C_FIELD(temp_s0, s32 *, 0xC) = sp24;
+        M2C_FIELD(temp_s0, s32 *, 0x10) = sp28;
+        M2C_FIELD(temp_s0, s32 *, 0x1C4) = sp20;
+        M2C_FIELD(temp_s0, s32 *, 0x1C8) = sp24;
+        M2C_FIELD(temp_s0, s32 *, 0x1CC) = sp28;
+        func_8026D980_de();
+        func_80249E28_de(temp_s0, &D_80141008);
+        M2C_FIELD(temp_s0, s32 *, 0x140) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0);
+        M2C_FIELD(temp_s0, s32 *, 0x144) = (s32) M2C_FIELD(&D_800DF520, s32 *, 4);
+        M2C_FIELD(temp_s0, s32 *, 0x148) = (s32) M2C_FIELD(&D_800DF520, s32 *, 8);
+        M2C_FIELD(temp_s0, s32 *, 0x14C) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0xC);
+        M2C_FIELD(temp_s0, s32 *, 0x150) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x10);
+        M2C_FIELD(temp_s0, s32 *, 0x154) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x14);
+        M2C_FIELD(temp_s0, s32 *, 0x158) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0);
+        M2C_FIELD(temp_s0, s32 *, 0x15C) = (s32) M2C_FIELD(&D_800DF520, s32 *, 4);
+        M2C_FIELD(temp_s0, s32 *, 0x160) = (s32) M2C_FIELD(&D_800DF520, s32 *, 8);
+        M2C_FIELD(temp_s0, s32 *, 0x164) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0xC);
+        M2C_FIELD(temp_s0, s32 *, 0x168) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x10);
+        M2C_FIELD(temp_s0, s32 *, 0x16C) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x14);
+        func_8026D9D0_de();
+        D_800CC380 = temp_s4;
+    }
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8041C7F4_de);
+#endif
 
 INCLUDE_ASM("ovl_80400000", func_8041CAD8_de);
 
