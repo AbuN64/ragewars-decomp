@@ -8,17 +8,21 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 
-#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
+#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_8041E408_de);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
-/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+/* Fuzzy draft in EU and EU-X: their body differs (134 words). */
 extern void *D_800E39C0;
 extern struct RequestRecAt10 D_80153F80[];
 extern struct TextEntry D_800E381C[][17];
 extern u8 *func_802A025C_de(u8 *, u8 *);
+#if defined(VERSION_DE)
+enum { DRAW_ICON=903, DRAW_NAME=905, DRAW_VARIANT=904, DRAW_FIRST=906, DRAW_SECOND=907 };
+#else
 enum { DRAW_ICON=909, DRAW_NAME=911, DRAW_VARIANT=910, DRAW_FIRST=912, DRAW_SECOND=913 };
+#endif
 void func_8041E408_de(s32 index) {
     void *window;
     RequestDrawScreen *screen;
