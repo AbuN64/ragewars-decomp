@@ -70,80 +70,61 @@ s32 func_8042E460_de(u8 *request) {
 }
 
 #ifdef NON_MATCHING
-/* Bootstraps a local multiplayer session: shuffles a 40-word stack array,
- * clears player status flags, configures joining and spectator players,
- * and sets global mode state. */
+/* Sets up the attract-mode demo match: shuffles the character/level tables, seats 2-4 random players (the first group of
+ * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in D_8014DD98. */
 void func_8042E5EC_de(void) {
-    s32 stack[40];
-    s32 i, idx1, idx2, temp;
-    s32 numJoining, numSpectators, variant;
+    s32 table[8] = { 0, 3, 8, 5, 0, 3, 0x1B, 1 };
+    s32 i, a, b, tmp;
+    s32 total, first, costume;
     Shared_PlayerSettingsRecord *player;
-    Shared_Game *settings;
 
-    for (i = 0; i < 40; i++) {
-        stack[i] = i;
-    }
     for (i = 0; i < 100; i++) {
-        idx1 = func_802744D4_de();
-        if (idx1 < 0) idx1 += 3;
-        idx1 %= 4;
-        idx2 = func_802744D4_de();
-        if (idx2 < 0) idx2 += 3;
-        idx2 %= 4;
-        temp = stack[16 + idx1];
-        stack[16 + idx1] = stack[16 + idx2];
-        stack[16 + idx2] = temp;
+        a = func_802744D4_de() % 4;
+        b = func_802744D4_de() % 4;
+        tmp = table[a];
+        table[a] = table[b];
+        table[b] = tmp;
     }
-    numJoining = func_802744D4_de() % 5 + 2;
-    if (numJoining == 3) {
-        numJoining = 2;
+    total = func_802744D4_de() % 3 + 2;
+    first = func_802744D4_de() % total + 1;
+    if (first == 3) {
+        first = 2;
     }
-    settings = &D_801462C8;
     for (i = 0; i < 8; i++) {
-        player = &settings->playerSettings[i];
-        player->enabled = 0;
+        player = &D_801462C8.playerSettings[i];
         player->active = 0;
+        player->pad92[2] = 0;
+        player->enabled = 0;
         player->locked = 0;
-        player->character = 0;
     }
-    if (numJoining > 0) {
-        for (i = 0; i < numJoining; i++) {
-            player = &settings->playerSettings[i];
-            player->enabled = 1;
-            player->locked = 0;
-            player->slot = 2;
-            player->active = 2;
-            player->character = stack[i];
-            variant = func_802744D4_de() % 3;
-            player->variant = (u8)variant;
-            func_802A025C_de(player->name,
-                (u8 *)D_800DF7D0[((s8)variant * 0x11) + func_8041F140_de((u8)player->character)].names);
-        }
+    for (i = 0; i < first; i++) {
+        player = &D_801462C8.playerSettings[4 + i];
+        player->enabled = 1;
+        player->character = table[i];
+        player->locked = 0;
+        player->pad92[1] = 2;
+        costume = func_802744D4_de() % 3;
+        player->variant = costume;
+        func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
-    numSpectators = numJoining - 2;
-    if (numSpectators > 0) {
-        for (i = 0; i < numSpectators; i++) {
-            player = &settings->playerSettings[numJoining + 4 + i];
-            player->enabled = 1;
-            player->locked = 1;
-            player->active = 2;
-            player->character = stack[4 + i + numJoining];
-            variant = func_802744D4_de() % 3;
-            player->variant = (u8)variant;
-            func_802A025C_de(player->name,
-                (u8 *)D_800DF7D0[((s8)variant * 0x11) + func_8041F140_de((u8)player->character)].names);
-        }
+    for (i = 0; i < total - first; i++) {
+        player = &D_801462C8.playerSettings[4 + first + i];
+        player->enabled = 1;
+        player->character = table[first + i];
+        player->locked = 1;
+        player->pad92[1] = 2;
+        costume = func_802744D4_de() % 3;
+        player->variant = costume;
+        func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
     D_8014288C = 1;
-    settings->local = 1;
-    settings->mode1E = 8;
-    settings->controllerMode = 0;
-    settings->reserved20[4] = 0;
-    settings->reserved20[5] = 0;
-    i = func_802744D4_de();
-    D_8014DD98 = i;
-    if (i < 0) i += 3;
-    (&D_8014DD98)[1] = stack[4 + (i % 4)];
+    D_801462C8.local = 1;
+    D_801462C8.mode1E = 8;
+    D_801462C8.controllerMode = 0;
+    D_801462C8.laps = 0;
+    D_801462C8.players = 0;
+    D_8014DD98 = 2;
+    (&D_8014DD98)[1] = table[4 + func_802744D4_de() % 4];
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_8042E5EC_de);
