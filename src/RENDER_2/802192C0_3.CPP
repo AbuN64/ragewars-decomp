@@ -341,4 +341,83 @@ void Render_ResetPlayerWeapons(struct Player *player) {
     }
 }
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C2340_de;
+extern s32 D_801371D4;
+extern char D_8013B364[];
+extern void func_8044A07C_de(void *);
+extern void func_8044D528_de(void *, s32, s32);
+extern f32 func_802726F8_de(void *, void *);
+extern s32 func_8020CB3C_de(void *, void *);
+/* Places an actor at one of the start positions of a model: asks the loader (func_8044D220_de) for the
+ * candidate points of the model (up to 0x20 in multiplayer, one otherwise), in multiplayer picks the point
+ * farthest from every other player (distances via func_802726F8_de over the player list at D_80145060),
+ * copies its position and height into the actor, finds the floor under it and calls func_804491E8_de; when no
+ * point fits it falls back to func_8044D528_de. Finally stores the position's cell in the actor's list head. */
+void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
+    void *actor = player;
+    u8 points[0x20 * 0x14];
+    s32 count;
+    s32 best;
+    s32 i;
+    f32 bestDistance;
+    f32 distance;
+    void *other;
+    s32 floor;
+    func_8044A07C_de(actor);
+    func_802647E8_de((void *)FIELD(s32, actor, 0x698), 0);
+    if (reset != 0) {
+        FIELD(s32, actor, 0x864) = 0;
+        FIELD(s32, actor, 0x868) = 0;
+    }
+    if (D_801462E5 != 0) {
+        count = func_8044D220_de(&D_8011FE88, -1, model, points, 0x20);
+        best = -1;
+        bestDistance = 0.0f;
+        for (i = 0; i < count; i++) {
+            distance = D_800C2340_de;
+            for (other = FIELD(void *, &D_80145060, 0); other != 0; other = FIELD(void *, other, 0x16E0)) {
+                f32 d = func_802726F8_de(points + i * 0x14, (char *)other + 8);
+                if (d < distance) {
+                    distance = d;
+                }
+            }
+            if (bestDistance <= distance) {
+                bestDistance = distance;
+                best = i;
+            }
+        }
+        if (best == -1) {
+            func_8044D528_de(&D_8011FE88, model, arg2);
+        } else {
+            FIELD(CVector3, actor, 0x2F0) = FIELD(CVector3, points, best * 0x14);
+            FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
+            FIELD(f32, actor, 0x354) = FIELD(f32, points, best * 0x14 + 0xC);
+            FIELD(f32, actor, 0x6C) = FIELD(f32, points, best * 0x14 + 0xC);
+            floor = Scene_FindFloorPolygon(&D_8011FE88, (char *)actor + 8);
+            FIELD(s32, actor, 0x2FC) = floor;
+            FIELD(s32, actor, 0x14) = floor;
+            func_804491E8_de(actor);
+        }
+    } else {
+        if (func_8044D220_de(&D_8011FE88, -1, model, points, 1) == 0 || FIELD(s16, points, 0x10) != D_801371D4) {
+            func_8044D528_de(&D_8011FE88, model, arg2);
+        } else {
+            FIELD(CVector3, actor, 0x2F0) = FIELD(CVector3, points, 0);
+            FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
+            FIELD(f32, actor, 0x354) = FIELD(f32, points, 0xC);
+            FIELD(f32, actor, 0x6C) = FIELD(f32, points, 0xC);
+            floor = func_8028B394_de(&D_8011FE88, FIELD(s16, points, 0x12));
+            FIELD(s32, actor, 0x2FC) = floor;
+            FIELD(s32, actor, 0x14) = floor;
+            func_804491E8_de(actor);
+        }
+    }
+    FIELD(s32, FIELD(void *, actor, 0x1454), 4) = func_8020CB3C_de(D_8013B364, (char *)actor + 8);
+}
+#else
 INCLUDE_ASM("span_1000", func_8021B1E4_de);
+#endif

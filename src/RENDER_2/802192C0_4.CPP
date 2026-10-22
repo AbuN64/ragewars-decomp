@@ -501,7 +501,155 @@ case 7:
     }
 }
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C22A8_us, D_800C22AC_us, D_800C22B0_us;
+extern s32 D_801371DC, D_800D2A90;
+extern char D_801468A0[];
+extern s32 func_8022C460_de(void *);
+extern s32 func_8022AC00_de(void *);
+extern void func_8028CE94_de(void *, void *, s32, CVector3, f32, f32);
+extern void func_80239194_de(void *, s32, s32);
+extern void func_8022B11C_de(void *, u16);
+/* Applies damage to a player: ignored while the game is paused, the player is protected or the damage
+ * source is not allowed; scales the amount by one fifth with armour (0x80C); when the health stays above
+ * zero and drops through half of the maximum it respawns the weapon (func_8021B1E4_de); lowers the health
+ * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
+ * reports the kill through func_8021B468_de. */
+s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
+    s32 oldHealth = FIELD(s32, player, 0x5E4);
+    s32 health;
+    s32 threshold;
+    s32 step;
+    s32 found;
+    s32 dead;
+    s32 wasDead;
+    s32 intensity;
+    s32 delay;
+    s32 roll;
+    s32 shifted;
+    if (func_80245784_de() != 0 || func_8022C460_de(player) != 0 || D_801371DC != 0) {
+        return 0;
+    }
+    if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {
+        return 0;
+    }
+    if (FIELD(u16, player, 0x650) < 2) {
+        return 0;
+    }
+    if (FIELD(s32, player, 0x80C) != 0) {
+        amount = amount / 5;
+    }
+    if (0.0f < FIELD(f32, player, 0x670) && kind != 0x20) {
+        return 0;
+    }
+    wasDead = FIELD(s32, player, 0x5E4) == 0;
+    if (FIELD(u32, player, 0x122C) & 0x100) {
+        health = FIELD(s32, player, 0x5E4) - amount;
+        if (health < 0) {
+            health = 0;
+        }
+        step = func_8022AC00_de(player);
+        found = 0;
+        for (threshold = 2; threshold < 5;) {
+            step = step - step / 2;
+            threshold++;
+            if (step < FIELD(s32, player, 0x5E4) && health < step && health > 0) {
+                found = 1;
+                break;
+            }
+        }
+        if (found != 0) {
+            func_8021B1E4_de(player, FIELD(s32, player, 0x5EC), 0, 1);
+        }
+    }
+    if (FIELD(s32, D_801468A0, 0x98) != 0 && FIELD(s8, FIELD(void *, player, 0x5D8), 0x80) == 0xB && FIELD(s32, D_801468A0, 0xA0) > 0) {
+        FIELD(s32, D_801468A0, 0xA0) -= amount >> 8;
+        if (FIELD(s32, D_801468A0, 0xA0) <= 0) {
+            FIELD(s32, D_801468A0, 0xA0) = 0;
+            switch (FIELD(u8, FIELD(void *, player, 0x5D8), 0x93)) {
+            case 0:
+                FIELD(s32, D_801468A0, 0xA4) = 0x4B;
+                break;
+            case 1:
+            case 2:
+                FIELD(s32, D_801468A0, 0xA4) = 0x3C;
+                break;
+            }
+            func_802227F4_de(player, player, 0x2D);
+        }
+        amount = 0;
+    }
+    if (FIELD(s32, player, 0x5E4) != 0) {
+        FIELD(s32, player, 0x13C8) = FIELD(s32, player, 0x5E4) - amount < -0x1DFF;
+    }
+    health = FIELD(s32, player, 0x5E4) - amount;
+    if (health < 0) {
+        health = 0;
+    }
+    FIELD(s32, player, 0x5E4) = health;
+    roll = func_802744D4_de();
+    if ((roll % 2) == 1) {
+        if (FIELD(s32, player, 0x5E4) > 0) {
+            s32 id = func_80229C0C_de((struct Shared_ActorView *)player, 0x138D);
+            if (func_8025E4D4_de(id) == 0) {
+                func_8025DE54_de((s16)id, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
+            }
+        }
+    }
+    dead = FIELD(s32, player, 0x5E4) == 0;
+    FIELD(s32, player, 0x174) = FIELD(s32, player, 0x5E4);
+    FIELD(s32, player, 0x45C) = FIELD(s32, player, 0x5E4);
+    if (dead != 0) {
+        if (wasDead == 0) {
+            func_8021B468_de((struct Shared_ActorView *)player, attacker, arg3, kind);
+        }
+        intensity = 0xFF;
+        delay = 0xC;
+    } else {
+        shifted = amount >> 8;
+        intensity = shifted * 255 / 20;
+        if (intensity >= 0x100) {
+            intensity = 0xFF;
+        } else if (intensity < 0x80) {
+            intensity = 0x80;
+        }
+        delay = 0x1E;
+        if (FIELD(void *, player, 0x5DC) != 0) {
+            if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_801462E5 == 0) {
+                func_80237E80_de(&D_80145088, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
+            }
+        }
+        if ((amount >> 8) != 0) {
+            f32 strength = (f32)(amount >> 8) * D_800C22A8_us;
+            CVector3 zero;
+            if (D_800C22AC_us < strength) {
+                strength = D_800C22AC_us;
+            }
+            zero.x = 0;
+            zero.y = 0;
+            zero.z = 0;
+            func_8028CE94_de(&D_8011FE88, (char *)FIELD(void *, player, 0x698) + 0x140, 0x11, zero, D_800C22B0_us, strength);
+        }
+    }
+    if (dead == 0 && FIELD(s16, player, 0x650) != 0x12 && FIELD(void *, player, 0x5DC) != 0) {
+        s32 hit;
+        if (FIELD(s32, player, 0x16D4) == 0) {
+            func_80239194_de(FIELD(void *, player, 0x5DC), intensity & 0xFF, delay);
+        }
+        hit = amount * 15;
+        if (hit > 100) {
+            hit = 100;
+        }
+        func_8022B11C_de(player, (u16)hit);
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("span_1000", func_8021BFC4_de);
+#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/FIELD_VEC_B0.H"
@@ -517,7 +665,6 @@ extern void func_8022B550_de(void *arg0, f32 arg1, f32 arg2, void *arg3,
                           s32 arg4);
 extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
 extern void func_8022B7F8_de(void *arg0, void *arg1);
-extern void func_802227F4_de(void *, void *, s32);
 
 void func_8021C45C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
     Player *actor = arg0;
