@@ -12199,7 +12199,7 @@ SECTIONS
         src/game/MENU/ITEMS/80442BC8_4.CPP.o(.data);
         src/game/MENU/ITEMS/800E2730.CPP.o(.rodata .rdata);
         src/game/MENU/ITEMS/800E2730.CPP.o(.data);
-        src/game/MENU/ITEMS/80442BC8_5.CPP.o(.rodata .rdata);
+        src/game/MENU/ITEMS/80442BC8_15.CPP.o(.rodata .rdata);
         src/game/MENU/ITEMS/80442BC8_5.CPP.o(.data);
         src/game/MENU/ITEMS/80442BC8_6.CPP.o(.rodata .rdata);
         src/game/MENU/ITEMS/80442BC8_6.CPP.o(.data);
@@ -27368,7 +27368,7 @@ SECTIONS
         src/game/DATA/AMMO/800E272C.CPP.o(.data);
         src/game/MENU/ITEMS/800E2730.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/800E2735.CPP.o(.data);
-        src/game/MENU/ITEMS/80442BC8_5.CPP.o(.rodata .rdata);
+        src/game/MENU/ITEMS/80442BC8_15.CPP.o(.rodata .rdata);
         src/game/DATA/AMMO/800E2754.CPP.o(.data);
         src/game/MENU/ITEMS/80442BC8_6.CPP.o(.rodata .rdata);
         src/game/MENU/ITEMS/800E2774.CPP.o(.rodata .rdata);

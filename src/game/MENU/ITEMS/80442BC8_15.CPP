@@ -67,7 +67,8 @@ s32 func_80443464_de(void *first, void *second, void *third) {
     return 1;
 }
 
-#ifdef NON_MATCHING
+#if defined(VERSION_DE) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
+/* US, EU and EU-X keep their asm: US and EU share the jump table rodata with other tables, EU-X formats a different line. */
 #include "MENU/PLAYER_STATUS_TEXT.H"
 #include "TYPES.H"
 
