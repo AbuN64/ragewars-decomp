@@ -170,7 +170,9 @@ struct IntegerState5AC {
 
 extern void func_802794A4_de(void * arg0);
 
-extern s32 func_80204308_de(struct NavigationPlatform *object, void *guard, s32 actor);
+struct ActorMotionState;
+struct Player;
+extern s32 func_80204308_de(struct NavigationPlatform *object, struct ActorMotionState *guard, struct Player *actor);
 
 extern void func_8025E1C4_de(s32);
 extern CVector3 D_801042C8;

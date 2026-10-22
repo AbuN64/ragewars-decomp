@@ -424,7 +424,10 @@ typedef struct ActorMotionDefinition {
     u8 pad8[4];
     s32 eventMask; /* 0xC */
     s32 secondaryEventMask; /* 0x10 */
-    u8 pad14[0x10];
+    u8 pad14[2];
+    s16 soundEnabled; /* 0x16 */
+    s16 soundIndex; /* 0x18 */
+    u8 pad1A[0xA];
     s32 transitionFlags; /* 0x24 */
     u8 pad28[0x4];
     f32 height; /* 0x2C */
@@ -462,7 +465,8 @@ typedef struct ActorMotionState {
     u8 pad54[0xC];
     f32 height; /* 0x60 */
     f32 speed; /* 0x64 */
-    u8 pad68[0x2C];
+    struct Player *target; /* 0x68 */
+    u8 pad6C[0x28];
     s8 routeMode; /* 0x94 */
     u8 route; /* 0x95 */
     u16 start; /* 0x96 */

@@ -7,7 +7,7 @@ extern s32 D_801371D4;
 
 
 
-s32 func_80279420_de(void *arg0, s32 arg1) {
+s32 func_80279420_de(void *arg0, struct Player *arg1) {
     func_80279490_S1 *object = arg0;
     NavigationPlatform *platform;
 

@@ -18,7 +18,7 @@ extern void func_8028C4B4_de(Shared_World *world, s32 id);
 
 extern void func_80278F00_de(Trigger *trigger);
 
-extern s32 func_80279420_de(Trigger *trigger, s32 arg);
+extern s32 func_80279420_de(Trigger *trigger, struct Player *arg);
 
 extern void func_8028BB1C_de(Shared_World *world, Trigger *trigger, s32 arg);
 
@@ -49,7 +49,7 @@ void func_802791F0_de(void *object) {
     actor->weaponFlags |= 0x10000;
 }
 
-void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 exclude, s32 group, s32 arg) {
+void func_80279204_de(Trigger *triggers, s32 count, s32 require, s32 enter, s32 exclude, s32 group, struct Player *arg) {
     s32 i;
     s32 active;
     s32 usable;
