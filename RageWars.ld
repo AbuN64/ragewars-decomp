@@ -13225,6 +13225,7 @@ SECTIONS
         src/RENDER/800CA5A4.CPP.o(.rodata .rdata);
         src/RENDER/800CA5AC.CPP.o(.rodata .rdata);
         src/RENDER/800CA5B0.CPP.o(.rodata .rdata);
+        src/RENDER/80293A04_3.CPP.o(.rodata .rdata);
         src/RENDER/80293A04_4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/RENDER/CODE_802944E8.CPP.o */;
         src/RENDER/CODE_802944E8.CPP.o(.rodata .rdata);
@@ -14926,6 +14927,7 @@ SECTIONS
         src/RENDER/800CA5A4.CPP.o(.rodata .rdata);
         src/RENDER/800CA5AC.CPP.o(.rodata .rdata);
         src/RENDER/800CA5B0.CPP.o(.rodata .rdata);
+        src/RENDER/80293A04_3.CPP.o(.rodata .rdata);
         src/RENDER/80293A04_4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/RENDER/CODE_802944E8.CPP.o */;
         src/RENDER/CODE_802944E8.CPP.o(.rodata .rdata);

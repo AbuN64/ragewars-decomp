@@ -4062,7 +4062,7 @@ segments:
       - [0xC6364, rodata, data_800C/D_80293CE4_CB1A4]
       - [0xC636C, rodata, data_800C/D_80293DF0_CB1AC]
       - [0xC6370, rodata, data_800C/D_80293F44_CB1B0]
-      - [0xC6374, rodata, data_800C/rodata_func_80294158_de_800C5774]
+      - [0xC6374, rodata, data_800C/literals_func_80294158_de]
       - [0xC637C, rodata, data_800C/literals_func_802941B8_de]
       - [0xC6380, rodata, data_800C/literals_func_802944F4_de]
       - [0xC6384, rodata, data_800C/rodata_func_802946A4_de_800C54D8]
