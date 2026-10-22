@@ -16,16 +16,20 @@ extern void func_80245864_de(void *);
 typedef struct InitView { char pad0[4]; u32 flags; char pad8[0xF4]; f32 x, y, z; } InitView;
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
  * depends on D_801462E5), runs the part setup calls, then copies the view's position into the actor. */
+/* 72/117 words; remaining: scheduling of the part flags store (target keeps it last, in the jal delay slot) and the D_800C73E4 load hoist */
 void func_80449970_us_rev1(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
     char *actor = (char *)player;
-    char *part = actor + 0x2E8;
-    char *aux = actor + 0x458;
     u32 flags;
     u32 flags2;
+    u32 t1, t2, t3;
     InitView *view;
+    *(void **)(actor + 0x1D8) = actor;
     func_8024B3A8_de(actor, rec, (void *)mode, 0);
     *(void **)(actor + 0x1D8) = actor;
-    flags = *(u32 *)(actor + 0x100) | 0x100000 | 0x10000 | 0x1000000 | 0x2000000;
+    t1 = *(u32 *)(actor + 0x100) | 0x100000;
+    t2 = t1 | 0x10000;
+    t3 = t2 | 0x1000000;
+    flags = t3 | 0x2000000;
     *(u32 *)(actor + 0x100) = flags;
     if (D_801462E5 == 0) {
         *(u32 *)(actor + 0x100) = flags | 0x10000000;
@@ -38,7 +42,7 @@ void func_80449970_us_rev1(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s3
         *(void **)(actor + 0x27C) = D_0021A2D4_us_rev1;
     }
     *(void **)(actor + 0x4C0) = actor;
-    func_8024B3A8_de(part, rec, (void *)mode, 0);
+    func_8024B3A8_de((actor + 0x2E8), rec, (void *)mode, 0);
     *(void **)(actor + 0x574) = D_0022F5D0_us_rev1;
     *(s8 *)(actor + 0x48C) = -1;
     flags2 = *(u32 *)(actor + 0x3E8) | 0x200000;
@@ -46,13 +50,15 @@ void func_80449970_us_rev1(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s3
     *(void **)(actor + 0x568) = D_00219A40_us_rev1;
     *(void **)(actor + 0x570) = D_0022E250_us_rev1;
     *(u32 *)(actor + 0x3E8) = flags2;
-    *(s16 *)(actor + 0x62E) = -1;
     *(f32 *)(actor + 0x338) = D_800C73E4;
     *(f32 *)(actor + 0x33C) = D_800C73E4;
     *(f32 *)(actor + 0x340) = D_800C73E4;
-    *(u32 *)(actor + 0x3E8) = flags2 & 0xFFFEFFFF;
-    func_80214178_de(part, aux, 0);
-    func_802325FC_de(part, aux);
+    flags = flags2;
+    *(s16 *)(actor + 0x62E) = -1;
+    flags &= 0xFFFEFFFF;
+    *(u32 *)(actor + 0x3E8) = flags;
+    func_80214178_de((actor + 0x2E8), (actor + 0x458), 0);
+    func_802325FC_de((actor + 0x2E8), (actor + 0x458));
     func_80220A80_de(actor, actor);
     if (*(void **)(actor + 0x5DC) != 0) {
         func_80245864_de(*(void **)(actor + 0x5DC));
