@@ -43,7 +43,6 @@ D_blob_03a78ff7f33b4e58b857 = 0x800C3D3C;
 D_blob_0af0406cbd60fb44de77 = 0x800C3D44;
 D_blob_5a9c85ab6d0a17155d40 = 0x800C3D4C;
 D_blob_b453b23abee7d0469414 = 0x800C3D54;
-D_auto_rodata_func_8024D160_de_800C8CB0 = 0x800C3EB0;
 D_auto_rodata_shared_800C8E9C = 0x800C409C;
 D_auto_rodata_shared_800C8EB0 = 0x800C40B0;
 D_blob_phase2_b1889aeb9007051833a0 = 0x800C40C4;
@@ -1223,7 +1222,7 @@ D_800C53B4_de = 0x800C56A4;
 literals_Frontend_UpdateFocusCaption = 0x800E8D10; // rom:0xE9910
 D_800D2F94 = 0x800CF2D4;
 D_800D3080 = 0x800CF3C0;
-literals_Particle_GetActorHeight = 0x800C3EE8; // rom:0xC4AE8
+literals_func_8024D160_de = 0x800C3EB0; // rom:0xC4AB0
 
 literals_Pak_DrawMenuEntries = 0x800E9CF8; // rom:0xEA8F8
 literals_func_80274380_de = 0x800C4C24; // rom:0xC5824

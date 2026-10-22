@@ -3625,7 +3625,7 @@ segments:
       - [0xC46B0, rodata, data_800C/D_8024CC30_C9870]
       - [0xC46E0, rodata, data_800C/D_8024D028_C98A0]
       - [0xC46E4, rodata, data_800C/D_auto_rodata_unresolved_800C3AE4]
-      - [0xC4728, rodata, data_800C/literals_Particle_GetActorHeight]
+      - [0xC46F0, rodata, data_800C/literals_func_8024D160_de]
       - [0xC4770, rodata, data_800C/literals_func_8024D398_de]
       - [0xC47AC, rodata, data_800C/D_8024D398_C996C]
       - [0xC47B4, rodata, data_800C/literals_func_8024D4AC_de]

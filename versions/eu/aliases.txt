@@ -1210,7 +1210,7 @@ D_800C53B4_de = 0x800C5664;
 literals_Frontend_UpdateFocusCaption = 0x800EDB50; // rom:0xEE750
 D_800D2F94 = 0x800CE904;
 D_800D3080 = 0x800CE9F0;
-literals_Particle_GetActorHeight = 0x800C3EA8; // rom:0xC4AA8
+literals_func_8024D160_de = 0x800C3E70; // rom:0xC4A70
 
 literals_Pak_DrawMenuEntries = 0x800EEB38; // rom:0xEF738
 literals_func_80274380_de = 0x800C4BE4; // rom:0xC57E4

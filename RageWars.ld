@@ -14477,8 +14477,6 @@ SECTIONS
         src/particle/800C8C70.CPP.o(.rodata .rdata);
         src/particle/800C8CA0.CPP.o(.rodata .rdata);
         src/particle/800C8CA0.CPP.o(.data);
-        src/particle/8024D018_6.CPP.o(.rodata .rdata);
-        src/particle/8024D018_6.CPP.o(.data);
         . = ALIGN(8) /* src/particle/8024D018.CPP.o */;
         src/particle/8024D018.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8024D018_2.CPP.o */;
@@ -17930,8 +17928,6 @@ SECTIONS
         src/particle/800C8C70.CPP.o(.rodata .rdata);
         src/particle/800C8CA0.CPP.o(.rodata .rdata);
         src/DATA/OVLDAT2/800C8CA4.CPP.o(.data);
-        src/particle/8024D018_6.CPP.o(.rodata .rdata);
-        src/DATA/OVLDAT2/800C8CE4.CPP.o(.data);
         . = ALIGN(8) /* src/particle/8024D018.CPP.o */;
         src/particle/8024D018.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8024D018_2.CPP.o */;
@@ -22651,7 +22647,6 @@ SECTIONS
         src/particle/800C8C6C.CPP.o(.bss .sbss COMMON);
         src/particle/800C8C70.CPP.o(.bss .sbss COMMON);
         src/particle/800C8CA0.CPP.o(.bss .sbss COMMON);
-        src/particle/8024D018_6.CPP.o(.bss .sbss COMMON);
         src/particle/8024D018.CPP.o(.bss .sbss COMMON);
         src/particle/8024D018_2.CPP.o(.bss .sbss COMMON);
         src/particle/8024D018_5.CPP.o(.bss .sbss COMMON);
@@ -25230,8 +25225,6 @@ SECTIONS
         src/particle/800C8C70.CPP.o(.bss .sbss COMMON);
         src/particle/800C8CA0.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLDAT2/800C8CA4.CPP.o(.bss .sbss COMMON);
-        src/particle/8024D018_6.CPP.o(.bss .sbss COMMON);
-        src/DATA/OVLDAT2/800C8CE4.CPP.o(.bss .sbss COMMON);
         src/particle/8024D018.CPP.o(.bss .sbss COMMON);
         src/particle/8024D018_2.CPP.o(.bss .sbss COMMON);
         src/particle/800C8D6C.CPP.o(.bss .sbss COMMON);

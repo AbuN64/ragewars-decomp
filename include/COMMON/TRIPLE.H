@@ -2411,7 +2411,6 @@ extern int jtbl_800C25E8[];
 extern int jtbl_800C2B80[];
 extern int jtbl_800C2E98[];
 extern int jtbl_800C3650[];
-extern int jtbl_800C3BC0[];
 extern int jtbl_800C3BF8[];
 extern int jtbl_800C3C40[];
 extern int jtbl_800C3D00[];

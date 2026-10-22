@@ -63,7 +63,6 @@ void func_8024D108_de(void *arg0, int **arg1) {
     func_80253E64_de(0, arg1, ret);
 }
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct InteractionDescriptor { s32 kind; char pad4[0x10]; s32 flags; } InteractionDescriptor;
 typedef struct InteractionLink { char pad0[0x1C]; s32 flags; char pad20[0x83C]; s32 linked; } InteractionLink;
@@ -95,18 +94,14 @@ s32 func_8024D160_de(InteractionActor *actor) {
         bit = link->flags & 0x10000;
         return !bit;
     case 4: case 5: case 7: case 10:
-        if (actor->kind == 1) {
-            flags = actor->flags;
-            if (flags & 0x2000) return flags & 0x10000;
-        }
-        return 0;
+        if (actor->kind != 1) return 0;
+        flags = actor->flags;
+        if (!(flags & 0x2000)) return 0;
+        return flags & 0x10000;
     case 12: return actor->descriptor->flags & 1;
     }
     return 0;
 }
-#else
-INCLUDE_ASM("span_1000", func_8024D160_de);
-#endif
 
 
 f32 func_8024E3C4_de(Actor_u1 *actor);

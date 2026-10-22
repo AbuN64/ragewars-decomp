@@ -1,8 +1,6 @@
 
 #if defined(VERSION_EU)
-const unsigned int D_auto_rodata_unresolved_800C3E64[17] = {
-    0x2442EB38, 0xACE20004, 0xACE00024, 0x0024D1E0, 0x0024D20C, 0x0024D1F0, 0x0024D288, 0x0024D248,
-    0x0024D248, 0x0024D288, 0x0024D248, 0x0024D1D8, 0x0024D288, 0x0024D248, 0x0024D198, 0x0024D278,
-    0x00000000,
+const unsigned int D_auto_rodata_unresolved_800C3E64[3] = {
+    0x2442EB38, 0xACE20004, 0xACE00024,
 };
 #endif
