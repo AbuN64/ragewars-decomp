@@ -12079,7 +12079,6 @@ SECTIONS
         src/game/FRONTEND/8042E080_6.CPP.o(.data);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_7.CPP.o */;
         src/game/FRONTEND/8042E080_7.CPP.o(.rodata .rdata);
-        src/game/FRONTEND/8042E080.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_27.CPP.o */;
         src/game/FRONTEND/8042E080_27.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_10.CPP.o */;
@@ -13819,7 +13818,6 @@ SECTIONS
         src/game/FRONTEND/8042E080_6.CPP.o(.data);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_7.CPP.o */;
         src/game/FRONTEND/8042E080_7.CPP.o(.rodata .rdata);
-        src/game/DATA/OVLTBL_9/800EE250.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_27.CPP.o */;
         src/game/FRONTEND/8042E080_27.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_10.CPP.o */;
@@ -15532,7 +15530,6 @@ SECTIONS
         src/game/FRONTEND/8042E080_6.CPP.o(.data);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_7.CPP.o */;
         src/game/FRONTEND/8042E080_7.CPP.o(.rodata .rdata);
-        src/game/FRONTEND/8042E080_17.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_27.CPP.o */;
         src/game/FRONTEND/8042E080_27.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_10.CPP.o */;
@@ -17243,7 +17240,6 @@ SECTIONS
         src/game/FRONTEND/8042E080_6.CPP.o(.data);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_7.CPP.o */;
         src/game/FRONTEND/8042E080_7.CPP.o(.rodata .rdata);
-        src/game/DATA/GFXDATA/800DC880.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_27.CPP.o */;
         src/game/FRONTEND/8042E080_27.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_10.CPP.o */;
@@ -27241,7 +27237,6 @@ SECTIONS
         src/game/DATA/OVLTAB9/800E1BDC.CPP.o(.data);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_7.CPP.o */;
         src/game/FRONTEND/8042E080_7.CPP.o(.rodata .rdata);
-        src/game/FRONTEND/8042E080_8.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_27.CPP.o */;
         src/game/FRONTEND/8042E080_27.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_10.CPP.o */;

@@ -62,7 +62,6 @@ s32 func_80430028_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-#ifdef NON_MATCHING
 /* Handles Controller Pak menu confirmations for the active channel, clearing its status on a confirmed state-12 prompt and returning focus to an enabled widget in the list states. */
 #include "COMMON/NAME.H"
 s32 func_80299B4C_de();                                /* extern */
@@ -151,9 +150,6 @@ block_24:
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80430118_de);
-#endif
 
 /* Handles Controller Pak menu confirmations and returns focus to an enabled widget for the active channel. */
 extern s32 func_80299B4C_de(void);

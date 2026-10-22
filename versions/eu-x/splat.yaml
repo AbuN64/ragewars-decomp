@@ -4659,7 +4659,7 @@ segments:
       - [0xE9FD8, rodata, data_800C/literals_func_8042F91C_de]
       - [0xE9FEC, data, data_800C/rodata_unresolved_800E93EC]
       - [0xE9FF0, rodata, data_800C/literals_func_8042FB48_de]
-      - [0xEA010, rodata, data_800C/data_func_80430118_de_800E9410]
+      - [0xEA010, rodata, data_800C/literals_func_80430118_de]
       - [0xEA070, rodata, data_800C/literals_Frontend_HandlePakMenuConfirm]
       - [0xEA0D0, rodata, data_800C/literals_func_804306D8_de]
       - [0xEA208, rodata, data_800C/D_804322AC_E29F8]

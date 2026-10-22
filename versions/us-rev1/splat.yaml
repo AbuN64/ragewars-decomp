@@ -6126,7 +6126,7 @@ segments:
       - [0xE27C8, rodata, data_800C/literals_func_8042F91C_de]
       - [0xE27DC, data, data_800C/D_blob_88210fa0e4e68b4f01f6]
       - [0xE27E0, rodata, data_800C/literals_func_8042FB48_de]
-      - [0xE2800, rodata, data_800C/data_func_80430118_de_800E1C00]
+      - [0xE2800, rodata, data_800C/literals_func_80430118_de]
       - [0xE2860, rodata, data_800C/literals_Frontend_HandlePakMenuConfirm]
       - [0xE28C0, rodata, data_800C/literals_func_804306D8_de]
       - [0xE29F8, rodata, data_800C/D_blob_e009c53f41fd4006bf5e]
