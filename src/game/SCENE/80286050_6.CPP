@@ -62,8 +62,6 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
     gSPDisplayList(D_80110634++, (unsigned int)scene->lists[0]);
 }
 
-#ifdef NON_MATCHING
-/* 458/460 words; remaining: the model constant li a2,0x33 is emitted before the pointer init addiu v1,v1,8 (target has them swapped, so the blez delay slot differs) */
 #include "stddef.h"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/SCENERECAT10C0.H"
@@ -160,12 +158,12 @@ extern void func_80250274_de(CGameStaticInstance_t *prop, GameplayCamera *camera
 extern void func_8024F294_de(CGameSimpleInstance_t *object, GameplayCamera *camera);
 extern void func_8024EB90_de(CGameSimpleInstance_t *object);
 
-static __inline__ s32 SceneFindModel(TableRecAt8 *table, s32 model) {
+static __inline__ s32 SceneFindShip(TableRecAt8 *table) {
     s32 i;
     s32 count = table->count;
+    u16 *p = table->entries;
     for (i = 0; i < count; i++) {
-        u16 *p = table->entries;
-        if (p[i] == model) {
+        if (p[i] == 0x33) {
             return i;
         }
     }
@@ -205,7 +203,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         return;
     }
     player = func_802392EC_de(camera);
-    shipModel = SceneFindModel(world->m_pusObjectTypes, 0x33);
+    shipModel = SceneFindShip(world->m_pusObjectTypes);
     showShip = 0;
     if (player != NULL && shipModel != -1) {
         showShip = D_801462C8.local == 0;
@@ -316,6 +314,3 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         func_80253838_de(NULL, scene->m_pmeVisibilityData);
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80289084_de);
-#endif
