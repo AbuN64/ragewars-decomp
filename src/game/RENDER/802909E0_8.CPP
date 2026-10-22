@@ -28,14 +28,14 @@ INCLUDE_ASM("span_1000", func_80290BA0_eu);
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
  * draws the backdrop through Render_DrawTextLines with half the video height. */
 #include "RENDER/80291054_3.H"
 extern s32 D_800D15E0, D_800D297C;
 extern f32 D_800D15E4[4];
-extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8[2];
+extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8;
 extern char D_80141008;
 extern s32 D_auto_800D7068;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -61,7 +61,7 @@ extern void func_8026DF30_de(s32, void *, void *, s32, s32);
 #define LOAD_SETUP func_80290A70_us_rev1
 #endif
 void LOAD_SETUP(ObjRecAt26DC1 *state) {
-    s32 handle;
+    s32 handle, h2;
     u8 matrix[0x40];
 
     D_800CC380 = 0;
@@ -77,14 +77,14 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         func_802739C4_de(matrix, state->unk26DB0 * D_800CA4B4);
         func_80273D6C_de(matrix);
         func_8027027C_de(matrix, VIEW_MATRICES + D_800D297C * 64);
-        handle = func_8028C198_de(&D_8011FE88, handle);
+        h2 = func_8028C198_de(&D_8011FE88, handle);
         func_8026D980_de();
-        func_8026DF30_de(handle, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
+        func_8026DF30_de(h2, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
         func_8026D9D0_de();
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        Render_DrawTextLines(state, 0, (void *)((s32 **)D_800CA4B8)[D_80152789], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);
+        Render_DrawTextLines(state, 0, (void *)((s32 **)&D_800CA4B8)[D_80152789], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);
 #else
-        Render_DrawTextLines(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8[0], D_800CA4B8[1]);
+        Render_DrawTextLines(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8, (&D_800CA4B8)[1]);
 #endif
     }
 }
@@ -96,11 +96,6 @@ INCLUDE_ASM("span_1000", func_80290A90_de);
 #endif
 #endif
 
-#ifndef NON_MATCHING
-#if defined(VERSION_US_REV1)
-INCLUDE_ASM("span_1000", func_80290A70_us_rev1);
-#endif
-#endif
 
 #if !(defined(VERSION_US))
 /* Clears the screen: clears the depth buffer over the whole screen through func_80291BE8_de, emits a full-screen scissor, the frame's colour image, fill cycle, combiner, no-op render mode, fill colour 0x10001 and a full-screen fill rectangle, then, when image 0x386 has a size, draws it stretched across the screen through func_802AAC28_de after func_802A9234_de(255). Written with libultra-style display-list macros and the screen size read from D_800E28D0 and D_800E28D4. */
