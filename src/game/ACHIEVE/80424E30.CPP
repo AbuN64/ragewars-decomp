@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-INCLUDE_RODATA("data_800C", rodata_func_80423828_de_19_800E16C8);
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
@@ -61,7 +60,6 @@ INCLUDE_ASM("ovl_80400000", func_80424C50_de);
 #endif
 
 
-#ifdef NON_MATCHING
 /* Count achievements, store the rank, and select its version-specific title. */
 extern Profile D_80102B00[];
 
@@ -309,6 +307,3 @@ char *func_80424DE8_de(s32 index) {
     D_80102B00[index].rank = rank;
     return text;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80424DE8_de);
-#endif
