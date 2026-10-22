@@ -5,9 +5,50 @@
 #include "FRONTEND/80423280_50.H"
 #include "COMMON/SCREEN.H"
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8042B1B8_de);
-#endif
+#include "COMMON/CONTROL.H"
+extern RecordRecAtCV2 D_800E4F64[];
+extern s32 D_800E51E4[];
+extern s32 D_800E51F8[];
+extern s32 D_800E5214[];
+extern s32 D_800E5240[];
+extern s32 D_800E0F20[];
+s32 func_8042B1B8_de(s32 arg0, s32 arg1) {
+    s32 result = 0;
+    s32 *table;
+    s32 key;
+    s32 found;
+    s32 i;
+    if (arg1 == 0) {
+        arg1 = 1;
+    }
+    switch (arg0) {
+    case 0:
+        table = D_800E51E4;
+        break;
+    case 1:
+        table = D_800E51F8;
+        break;
+    case 3:
+        table = D_800E5214;
+        break;
+    case 2:
+        table = D_800E5240;
+        break;
+    default:
+        return 0;
+    }
+    key = table[arg1];
+    found = 0;
+    i = 0;
+    do {
+        if (key == D_800E4F64[i].key) {
+            found = 1;
+            result = D_800E0F20[i * 4];
+        }
+        i++;
+    } while ((i < 0x28) && (found == 0));
+    return result;
+}
 
 s32 Frontend_CategoryToList(s32 category) {
     s32 list;
@@ -725,60 +766,13 @@ extern void func_80439C80_de(void *, s32);
 
 
 
+
+
+
+
+
 /* Calls func_8029973C_de; when the mode word at offset 0x3DC of the object D_800E4F60 points to is 3,
    sets it to 5 and the word at 0x3E0 to 4. Returns zero. */
-
-
-
-
-
-
-
-
-
-s32 func_8042B1B8_de(s32 arg0, s32 arg1) {
-    s32 result = 0;
-    s32 *table;
-    s32 key;
-    s32 found;
-    s32 i;
-
-    if (arg1 == 0) {
-        arg1 = 1;
-    }
-    switch (arg0) {
-    case 0:
-        table = D_800E51E4;
-        break;
-    case 1:
-        table = D_800E51F8;
-        break;
-    case 3:
-        table = D_800E5214;
-        break;
-    case 2:
-        table = D_800E5240;
-        break;
-    default:
-        return 0;
-    }
-    key = table[arg1];
-    found = 0;
-    i = 0;
-    do {
-        if (key == D_800E4F64[i].key) {
-            found = 1;
-            result = D_800E4F64[i].value;
-        }
-        i++;
-    } while ((i < 0x28) && (found == 0));
-    return result;
-}
-
-
-
-
-
 s32 func_8042B4D4_de(void *arg0, void *arg1, void *arg2, s32 event) {
     struct Screen_func_8042B4D4_de *screen;
     s32 changed;
