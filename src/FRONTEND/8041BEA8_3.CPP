@@ -43,4 +43,75 @@ s32 func_8041DBCC_de(void) {
     return 0;
 }
 
+#ifdef NON_MATCHING
+/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+typedef int M2C_UNK;
+typedef signed char M2C_UNK8;
+typedef short M2C_UNK16;
+typedef int M2C_UNK32;
+typedef long long M2C_UNK64;
+#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
+#define M2C_BITWISE(type, expr) ((type)(expr))
+#define M2C_LWL(expr) (expr)
+#define M2C_FIRST3BYTES(expr) (expr)
+#define M2C_UNALIGNED32(expr) (expr)
+#define M2C_ERROR(desc) (0)
+#define M2C_TRAP_IF(cond) (0)
+#define M2C_BREAK(...) (0)
+#define M2C_SYNC(...) (0)
+#define M2C_DCACHE_CLEAN(addr) (0)
+#define M2C_DCACHE_INVALIDATE(addr) (0)
+#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
+#define M2C_ICACHE_INVALIDATE(addr) (0)
+#define M2C_PREFETCH(addr) (0)
+#define M2C_PREFETCH_STORE(addr) (0)
+#define GLUE_F64(a, b) (0.0)
+#define MULT_HI(a, b) (0)
+#define MULTU_HI(a, b) (0)
+#include "COMMON/GFX.H"
+#include "COMMON/SELECTIONSCREENSTATE.H"
+#include "COMMON/SESSIONHANDLERROW.H"
+#include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
+#include "COMMON/TRIPLE.H"
+#include "TYPES.H"
+#include "gbi.h"
+s32 func_804399D0(void *);
+s32 func_80439CC8_de(void *, Gfx **, Gfx *);
+extern s32 D_800D15E0;
+extern s32 D_800D15E4;
+extern f32 D_800DD524_de;
+extern f32 D_800DD52C_de;
+
+s32 func_8041DCC0_de(s32 arg2) {
+    Gfx *temp_a2;
+    f32 temp_f20;
+
+    if ((arg2 == 1) && (D_800E3590->unk216 == 3)) {
+        temp_f20 = D_800DD524_de;
+        D_800D15E0 = 0;
+        temp_a2 = D_80110634;
+        M2C_FIELD(&D_800D15E4, f32 *, 0) = temp_f20;
+        M2C_FIELD(&D_800D15E4, f32 *, 4) = temp_f20;
+        M2C_FIELD(&D_800D15E4, f32 *, 8) = temp_f20;
+        M2C_FIELD(&D_800D15E4, f32 *, 0xC) = temp_f20;
+        D_80110634 += 8;
+        gDPSetScissorFrac(temp_a2, 0, 0, 0, (s32) ((f32) (D_800E28D0 - 1) * D_800DD528_de), (s32) ((f32) (D_800E28D4 - 1) * D_800DD528_de));
+        
+        if (func_80439CC8_de(&D_800E3590->record, &D_80110634, temp_a2) != 0) {
+            D_800D15E0 = arg2;
+            M2C_FIELD(&D_800D15E4, f32 *, 0xC) = (f32) D_800DD52C_de;
+            func_804399D0(&D_800E3590->record);
+            D_800D15E0 = 0;
+            M2C_FIELD(&D_800D15E4, f32 *, 0xC) = temp_f20;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8041DCC0_de);
+#endif
