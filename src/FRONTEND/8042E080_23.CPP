@@ -112,7 +112,7 @@ void func_8042E5EC_de(void) {
             player->active = 1;
             player->locked = 0;
             player->slot = 2;
-            player->character = stack[16 + (i - numJoining) % 4];
+            player->character = stack[i];
             variant = func_802744D4_de() % 3;
             player->variant = (u8)variant;
             func_802A025C_de(player->name,
@@ -126,7 +126,7 @@ void func_8042E5EC_de(void) {
             player->enabled = 1;
             player->locked = 1;
             player->active = 2;
-            player->character = stack[16 + (i + numJoining) % 4];
+            player->character = stack[4 + i + numJoining];
             variant = func_802744D4_de() % 3;
             player->variant = (u8)variant;
             func_802A025C_de(player->name,
