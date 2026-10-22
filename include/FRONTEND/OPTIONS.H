@@ -47,8 +47,8 @@ struct func_804296A4_S1 {
     void * unk30;
 };
 
-struct Screen_func_80429560_de;
-struct Screen_func_80429560_de {
+struct MatchOptionsScreen;
+struct MatchOptionsScreen {
     s32 transition[7];
     void *selectWidget;
     void *cursorWidget;
