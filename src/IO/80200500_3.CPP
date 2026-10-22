@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "sdk/os.h"
 #include "IO/80200800.H"
@@ -25,6 +24,3 @@ void func_8020095C_de(u32 address,u8 *out,u32 count) {
  }
  while(count!=0) { *out++=func_80200840_de(address++); count--; }
 }
-#else
-INCLUDE_ASM("span_1000", func_8020095C_de);
-#endif

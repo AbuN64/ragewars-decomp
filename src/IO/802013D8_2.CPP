@@ -19,7 +19,6 @@ s32 func_802016DC_de(u8 *arg0) {
     return var_v1 - arg0;
 }
 
-#ifdef NON_MATCHING
 /* Shared declarations of the drafts below (one place, so every draft compiles together under -DNON_MATCHING). */
 #include "IO/CONTROLLER_REQUEST.H"
 extern s32 D_002018A0;
@@ -41,7 +40,6 @@ extern s32 func_80200500_de(void);
 extern s32 func_802017E8_de(s32, s32, s32, s32);
 extern void func_80200880_de(u32, void *, s32);
 extern void func_80200D18_de(u32, const void *, u32);
-#endif
 #ifdef NON_MATCHING
 void func_802016FC_de(s32 arg0) {
     if (D_800C8140_de == 0) {
@@ -77,9 +75,7 @@ s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("span_1000", func_802017E8_de);
 #endif
 INCLUDE_ASM("span_1000", func_802018A0_de);
-#ifdef NON_MATCHING
 /* Issue the monitor command with interrupts disabled, then restore them. */
-/* 13/22 words; remaining: this unit's gcc 2.8.1 stores D_800C8144_de through $at; the ROM splits %hi into $a0 and ends jr/addiu like the kmc gcc 2.7.2 IO units */
 s32 func_80201A80_de(void)
 {
     s32 previous;
@@ -90,11 +86,6 @@ s32 func_80201A80_de(void)
     func_80200538_de(previous);
     return result;
 }
-#else
-INCLUDE_ASM("span_1000", func_80201A80_de);
-#endif
-#ifdef NON_MATCHING
-/* 43/43 words, ~10 differ; remaining: the ROM stores D_800C8144_de through an explicit %hi register ($v1) scheduled early, kmc cc1 stores through $at */
 void *func_80201AD0_de(void) {
     ControllerRequest request;
     ControllerResponse response;
@@ -110,10 +101,6 @@ void *func_80201AD0_de(void) {
     func_802BB2A0_de(&D_800F3110, &response.message, 1);
     return response.message;
 }
-#else
-INCLUDE_ASM("span_1000", func_80201AD0_de);
-#endif
-#ifdef NON_MATCHING
 u32 func_80201B50_de(u8 *buffer, s32 argument) {
     ControllerRequest request;
     ControllerResponse response;
@@ -146,9 +133,6 @@ u32 func_80201B50_de(u8 *buffer, s32 argument) {
     }
     return response.status;
 }
-#else
-INCLUDE_ASM("span_1000", func_80201B50_de);
-#endif
 #ifdef NON_MATCHING
 s32 func_80201C80_de(u8 *name, u32 flags) {
     ControllerRequest request;
@@ -180,7 +164,6 @@ s32 func_80201C80_de(u8 *name, u32 flags) {
 #else
 INCLUDE_ASM("span_1000", func_80201C80_de);
 #endif
-#ifdef NON_MATCHING
 s32 func_80201DB0_de(s32 arg0) {
     ControllerRequest request;
     ControllerResponse response;
@@ -207,10 +190,6 @@ s32 func_80201DB0_de(s32 arg0) {
     }
     return response.status;
 }
-#else
-INCLUDE_ASM("span_1000", func_80201DB0_de);
-#endif
-#ifdef NON_MATCHING
 s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
     ControllerRequest request;
     ControllerResponse response;
@@ -260,10 +239,6 @@ s32 func_80201E94_de(s32 channel, u8 *destination, u32 remaining) {
     }
     return total;
 }
-#else
-INCLUDE_ASM("span_1000", func_80201E94_de);
-#endif
-#ifdef NON_MATCHING
 s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
     ControllerRequest request;
     ControllerResponse response;
@@ -305,11 +280,6 @@ s32 func_80202018_de(s32 channel, u8 *source, u32 remaining) {
     }
     return total;
 }
-#else
-INCLUDE_ASM("span_1000", func_80202018_de);
-#endif
-#ifdef NON_MATCHING
-/* 64/64 words, 2 differ; remaining: the ROM loads D_800C8144_de as lui $v0 / lw $v1,%lo($v0) (explicit %hi register), kmc cc1 expands the lw through its destination register */
 s32 func_80202198_de(s32 arg0, u32 arg1, s32 arg2) {
     ControllerRequest request;
     ControllerResponse response;
@@ -330,6 +300,3 @@ s32 func_80202198_de(s32 arg0, u32 arg1, s32 arg2) {
     }
     return response.status;
 }
-#else
-INCLUDE_ASM("span_1000", func_80202198_de);
-#endif

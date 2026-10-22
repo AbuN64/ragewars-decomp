@@ -16,7 +16,6 @@ void func_80200CA0_de(s32 arg0, unsigned char arg1)
   func_80200568_de(arg0, (func_802005A0_de(arg0) & (~(0xFF << temp_s2))) | (new_var = (arg1 & 0xFF) << temp_s2));
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/EXTERNS_15.H"
 #include "TYPES.H"
 
@@ -53,9 +52,6 @@ void func_80200D18_de(s32 address, const u8 *source, u32 length)
   }
 
 }
-#else
-INCLUDE_ASM("span_1000", func_80200D18_de);
-#endif
 
 #ifdef NON_MATCHING
 #include "IO/EXTERNS.H"
