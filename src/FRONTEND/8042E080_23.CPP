@@ -139,7 +139,7 @@ void func_8042E5EC_de(void) {
     settings->reserved20[4] = 0;
     settings->reserved20[5] = 0;
     i = func_802744D4_de();
-    *(s32 *)&D_8014DD98 = i;
+    *(volatile s32 *)0x8014DD98 = i;
     if (i < 0) i += 3;
-    *(s32 *)((u8 *)&D_8014DD98 + 4) = stack[4 + (i % 4)];
+    *(volatile s32 *)(0x8014DD98 + 4) = stack[4 + (i % 4)];
 }
