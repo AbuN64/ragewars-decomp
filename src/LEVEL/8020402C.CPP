@@ -19,11 +19,11 @@
 INCLUDE_ASM("span_1000", func_8020402C_us);
 #endif
 
-#if defined(VERSION_EU_X)
+#if defined(VERSION_EU_X) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_80204030_eu_x);
 #endif
 
-#if defined(VERSION_EU)
+#if defined(VERSION_EU) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_80204030_eu);
 #endif
 
@@ -31,12 +31,16 @@ INCLUDE_ASM("span_1000", func_80204030_eu);
 INCLUDE_ASM("span_1000", func_80204030_de);
 #endif
 
-#if defined(VERSION_US_REV1) || ((defined(VERSION_US) || defined(VERSION_DE)) && defined(NON_MATCHING))
+#if defined(VERSION_US_REV1) || ((defined(VERSION_US) || defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
 /* Fuzzy draft for us and de: the us-rev1 body under each version's own name. */
 #if defined(VERSION_US)
 #define LV_FN func_8020402C_us
 #elif defined(VERSION_DE)
 #define LV_FN func_80204030_de
+#elif defined(VERSION_EU)
+#define LV_FN func_80204030_eu
+#elif defined(VERSION_EU_X)
+#define LV_FN func_80204030_eu_x
 #else
 #define LV_FN func_80204030_us_rev1
 #endif
@@ -155,7 +159,7 @@ extern void func_80239908_de(void *, void *, s32, void *, f32);
 #include "COMMON/OBJECTLINKS14.H"
 /* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
  * keep their asm. */
-#if !defined(VERSION_EU) && !defined(VERSION_EU_X)
+#if (!defined(VERSION_EU) && !defined(VERSION_EU_X)) || defined(NON_MATCHING)
 s32 func_80204308_de(struct NavigationPlatform *object, ActorMotionState *guard, struct Player *player) {
     ActorMotionDefinition *record;
     SoundParent *parent;

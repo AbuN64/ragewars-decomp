@@ -11,8 +11,16 @@
 #include "FRONTEND/CODE_80426EC4.H"
 #include "FRONTEND/8041BEA8_6.H"
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
+#if defined(VERSION_EU)
+#define func_804264F0_us_rev1 func_80426E50_eu
+#endif
+#if defined(VERSION_EU_X)
+#define func_804264F0_us_rev1 func_80426FA0_eu_x
+#endif
 #ifdef NON_MATCHING
+#define D_800E4690 fz_D_800E4690
+#define D_80146398 fz_D_80146398
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -197,6 +205,8 @@ loop_7:
     func_8025DF34_de(0xE78);
     return 0;
 }
+#undef D_800E4690
+#undef D_80146398
 #else
 INCLUDE_ASM("ovl_80400000", func_804264F0_us_rev1);
 #endif

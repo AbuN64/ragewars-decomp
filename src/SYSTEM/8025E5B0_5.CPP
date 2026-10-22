@@ -206,7 +206,13 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
     *stream = decode.stream;
 }
 
-#if defined(VERSION_US)
+#if defined(VERSION_US) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
+#if defined(VERSION_EU)
+#define func_8025F074_us func_8025F094_eu
+#endif
+#if defined(VERSION_EU_X)
+#define func_8025F074_us func_8025F0C4_eu_x
+#endif
 #ifdef NON_MATCHING
 extern s32 D_8010AC88, D_8010AC84;
 extern f32 D_800C91F8;
@@ -283,11 +289,19 @@ INCLUDE_ASM("span_1000", func_8025F074_us);
 #endif
 
 #if defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("span_1000", func_8025F0C4_eu_x);
+#endif
 #endif
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("span_1000", func_8025F094_eu);
+#endif
 #endif
 
 #if defined(VERSION_DE)

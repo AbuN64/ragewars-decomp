@@ -224,7 +224,9 @@ done:
 
 #ifndef NON_MATCHING
 INCLUDE_ASM("ovl_80400000", func_8043829C_de);
+#endif
 
+#ifndef NON_MATCHING
 INCLUDE_ASM("ovl_80400000", func_80438614_de);
 #endif
 

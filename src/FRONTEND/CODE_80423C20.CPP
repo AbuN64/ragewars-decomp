@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 
 
-#if !defined(NON_MATCHING) || defined(VERSION_EU_X)
+#if !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80423A40_de);
 #endif
 
@@ -165,7 +165,7 @@ s32 func_8042418C_de(void) {
 }
 
 #ifdef NON_MATCHING
-#if !defined(VERSION_EU_X)
+#if 1
 extern u8 D_801462E5;
 extern u8 D_801468A0[];
 extern s8 D_800FEB0E[];

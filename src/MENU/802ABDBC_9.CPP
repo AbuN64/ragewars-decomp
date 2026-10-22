@@ -761,9 +761,69 @@ INCLUDE_ASM("span_1000", func_802AC66C_de);
 #endif
 
 #if defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Pickup effect handler: applies the pickup's effect id (0x708..0x70F) to the player (two float settings, an accumulated float
+   or a sound/effect spawn through func_802A6FB8_de) then shows the pickup text in the current language, plays its sound and
+   raises its event. Returns one. */
+extern u8 D_80152789;
+extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
+extern char D_002AD44C_eu[], D_002AD4FC_eu[];
+extern void func_802A6FB8_de();
+s32 func_802ACB98_eu_x(DraftPlayerAC66C *player, DraftPickupAC66C *pickup, void *obj) {
+    u8 **text = pickup->text;
+    s16 sound = pickup->sound;
+    s16 event = pickup->event;
+    f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
+
+    switch ((s16)(pickup->pad4 - 0x708)) {
+    case 0: *(f32 *)((u8 *)player + 0x670) = rodata_func_802ACB58_eu_800C6578; break;
+    case 1: *(f32 *)((u8 *)player + 0x674) = D_auto_800C657C; break;
+    case 2: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
+    case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
+    }
+    if (*(void **)((u8 *)player + 0x5DC) != 0) {
+        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) func_80237E80_de(&D_80145088, player->ui, ((char **)text)[D_80152789]);
+    }
+    if (sound) func_8025DE54_de(sound, player->position, 0, -1);
+    if (event) func_8025E11C_de(event);
+    return 1;
+}
+#else
 INCLUDE_ASM("span_1000", func_802ACB98_eu_x);
+#endif
 #endif
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Pickup effect handler: applies the pickup's effect id (0x708..0x70F) to the player (two float settings, an accumulated float
+   or a sound/effect spawn through func_802A6FB8_de) then shows the pickup text in the current language, plays its sound and
+   raises its event. Returns one. */
+extern u8 D_80152789;
+extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
+extern char D_002AD44C_eu[], D_002AD4FC_eu[];
+extern void func_802A6FB8_de();
+s32 func_802ACB58_eu(DraftPlayerAC66C *player, DraftPickupAC66C *pickup, void *obj) {
+    u8 **text = pickup->text;
+    s16 sound = pickup->sound;
+    s16 event = pickup->event;
+    f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
+
+    switch ((s16)(pickup->pad4 - 0x708)) {
+    case 0: *(f32 *)((u8 *)player + 0x670) = rodata_func_802ACB58_eu_800C6578; break;
+    case 1: *(f32 *)((u8 *)player + 0x674) = D_auto_800C657C; break;
+    case 2: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
+    case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
+    }
+    if (*(void **)((u8 *)player + 0x5DC) != 0) {
+        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) func_80237E80_de(&D_80145088, player->ui, ((char **)text)[D_80152789]);
+    }
+    if (sound) func_8025DE54_de(sound, player->position, 0, -1);
+    if (event) func_8025E11C_de(event);
+    return 1;
+}
+#else
 INCLUDE_ASM("span_1000", func_802ACB58_eu);
+#endif
 #endif
