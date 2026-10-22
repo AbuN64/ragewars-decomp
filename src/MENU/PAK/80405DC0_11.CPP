@@ -7,18 +7,44 @@
 #include "SYSTEM_3/80265370.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("ovl_80400000", func_80407F6C_de);
 #endif
+#endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("ovl_80400000", func_80408118_de);
 #endif
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_ASM("ovl_80400000", func_804082FC_de);
 #endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
+INCLUDE_ASM("ovl_80400000", func_804082FC_de);
+#endif
+#endif
+
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#include "COMMON/SHARED_GAMESLOT.H"
+extern u8 D_80152789;
+extern char *D_800E27B4[];
+extern char *D_800E27C4_eu[];
+extern u8 *D_800E2804_eu[];
+extern s32 D_800E25B4[];
+extern char D_004501C4[];
+#define ENTRY_TEXT(e) ((e)->text[D_80152789])
+#define PAK_HEADER_376C D_800E2804_eu
+#else
+#define ENTRY_TEXT(e) (*(e)->text)
+#define PAK_HEADER_376C (&D_800D376C)
+#endif
 extern s32 D_8015375C;
 
 extern char *D_800D3758;
@@ -58,6 +84,11 @@ extern s32 func_804057EC_de(s32 size);
 static inline int space_required(int size) {size += 0x610; return func_804057EC_de(size);}
 
 extern char D_8014561C[];
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#define PAK_D0044EEF4 D_004501C4
+#else
+#define PAK_D0044EEF4 D_0044EEF4
+#endif
 
 extern char D_0044EEF4[];
 
@@ -92,7 +123,11 @@ static inline s32 findNote(s32 ch, s32 *found)
 {
     char name[16];
     s32 state;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+    s32 game = D_800E25B4[D_80152789];
+#else
     s32 game = D_800D36D8;
+#endif
     s32 i;
 
     D_8014D4FC = -1;
@@ -138,16 +173,25 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     result = func_8040458C_de(ch, index, &exists, name, ext, &size, companyCode, gameCode);
     if (exists != 0 && result == 0) {
         if (func_804057BC_de(name, 16) != 0) {
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+            func_802A025C_de(name, D_800E27B4[D_80152789]);
+#else
             func_802A025C_de(name, D_800D3758);
+#endif
         }
     } else {
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        func_802A025C_de(name, D_800E27C4_eu[D_801462C8.language]);
+        func_802A025C_de(ext, D_800E27C4_eu[D_801462C8.language]);
+#else
         placeholder = &D_800D375C;
         func_802A025C_de(name, *placeholder);
         func_802A025C_de(ext, *placeholder);
+#endif
         size = 0;
     }
     more = 1;
-    dst = *entry->text;
+    dst = ENTRY_TEXT(entry);
     dst += 3;
     for (i = 0; i < 16; i++) {
         if (more) {
@@ -198,7 +242,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         entry->text = &D_800D3754;
         if (func_80405160_de(ch, &freeSpace) == 0) {
             if (D_8014D4EC_de) need=func_804057EC_de(0x18); else need=space_required(D_8011FECC);
-            text = *entry->text;
+            text = ENTRY_TEXT(entry);
             func_802658E4_de(digits.c, D_800E0DA4, freeSpace);
             text += 14;
             *text++ = digits.c[0];
@@ -211,7 +255,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
             text[1] = digits.c[2];
         }
     } else if (D_8015375C != 0) {
-        header = &D_800D376C;
+        header = PAK_HEADER_376C;
         goto fill;
     } else if (D_80153760 != 0) {
         header = &D_800D3754;
@@ -219,7 +263,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         entry->text = header;
         result = func_80405160_de(ch, &freeSpace);
         need = func_804057EC_de(D_8011FECC + 0x610);
-        text = *entry->text;
+        text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;
             format = D_800E0DA4;
@@ -268,7 +312,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     } else if (D_8014D4C0_de != 0) {
         hasNote = findNote(use, &D_8014D4FC);
         if (hasNote != 0 && D_8014D4FC >= 0 && D_8014D4FC < 16) {
-            func_80442574_de(D_8014561C, D_0044EEF4, menu->player, menu->owner, D_0044E4D4);
+            func_80442574_de(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
         func_80407578_de(arg0, menu, arg2);

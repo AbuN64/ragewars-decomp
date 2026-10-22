@@ -3,10 +3,14 @@
 #include "SYSTEM_3/80265370.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("ovl_80400000", func_8043E2D8_de);
 #endif
+#endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 typedef struct Shared_MenuSelection {
     u32 unknown0;
     s8 index;
@@ -47,7 +51,13 @@ extern char *D_800D364C_de[];
 extern char *D_800D3650_de[];
 extern char *D_800D3654[];
 extern char *D_800D3658[];
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80152789;
+extern char *D_auto_800E2364[];
+extern char D_800EE970[];
+#else
 extern char D_800DE2F0[];
+#endif
 extern s32 func_80441FE8_de(struct Field *);
 
 s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
@@ -62,7 +72,11 @@ s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
         switch (holder->selection->index) {
         case 0:
         default:
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+            field->text = D_auto_800E2364;
+#else
             field->text = D_800D7670;
+#endif
             break;
         case 1:
             field->text = D_800D3648_de;
@@ -74,8 +88,13 @@ s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
             field->text = D_800D3650_de;
             break;
         }
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        text = field->text[D_80152789];
+        func_802658E4_de(text + (func_80441FE8_de(field) - 2), D_800EE970, value);
+#else
         text = *field->text;
         func_802658E4_de(text + (func_80441FE8_de(field) - 2), D_800DE2F0, value);
+#endif
     }
     return 0;
 }

@@ -12,14 +12,22 @@
 #include "GFX/TEXT/802A8A94_5.H"
 
 #if defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("span_1000", func_80290BD0_eu_x);
+#endif
 #endif
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("span_1000", func_80290BA0_eu);
 #endif
+#endif
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #ifdef NON_MATCHING
 /* Sets up the loading-screen scene: resets the camera globals, loads the 0xE10 resource, builds a
  * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
@@ -30,6 +38,10 @@ extern f32 D_800D15E4[4];
 extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8[2];
 extern char D_80141008;
 extern s32 D_auto_800D7068;
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80152789;
+extern f32 D_auto_800C5678[2];
+#endif
 extern s32 func_8028B21C_de(void *, s32);
 extern s32 func_8028C198_de(void *, s32);
 extern void Camera_SetupViewportAndFog(void *);
@@ -38,6 +50,12 @@ extern void func_802739C4_de(void *, f32);
 extern void func_80273D6C_de(void *);
 extern void func_8027027C_de(void *, void *);
 extern void func_8026DF30_de(s32, void *, void *, s32, s32);
+#undef LOAD_SETUP
+#if defined(VERSION_EU)
+#define LOAD_SETUP func_80290BA0_eu
+#elif defined(VERSION_EU_X)
+#define LOAD_SETUP func_80290BD0_eu_x
+#endif
 void LOAD_SETUP(ObjRecAt26DC1 *state) {
     s32 handle;
     u8 matrix[0x40];
@@ -59,7 +77,11 @@ void LOAD_SETUP(ObjRecAt26DC1 *state) {
         func_8026D980_de();
         func_8026DF30_de(handle, VIEW_MATRICES + D_800D297C * 64, &D_800D0EF8, 0, -1);
         func_8026D9D0_de();
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+        Render_DrawTextLines(state, 0, (void *)((s32 **)D_800CA4B8)[D_80152789], D_800E28D0 / 2, 0xBE, 0xA, D_auto_800C5678[0], D_auto_800C5678[1]);
+#else
         Render_DrawTextLines(state, 0, (void *)D_auto_800D7068, D_800E28D0 / 2, 0xBE, 0xA, D_800CA4B8[0], D_800CA4B8[1]);
+#endif
     }
 }
 #endif

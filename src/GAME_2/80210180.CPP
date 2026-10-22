@@ -2,14 +2,18 @@
 #include "TYPES.H"
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("span_1000", func_80210198_eu);
+#endif
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 INCLUDE_DATA("data_800C", rodata_unresolved_800C2224);
 #endif
 
-#if !(defined(VERSION_EU))
+#if !(defined(VERSION_EU)) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
 /* Route-following check for a computer driver's brain: when it has a target at 0x64, it calls func_8020DC10_de if func_802099B4_de reports the target reached, and again when its route node at 0xC (unless -1) lies closer than 100 to the position func_8020993C_de gives; always returns one. */
 typedef struct Brain {
     char pad0[0xC];

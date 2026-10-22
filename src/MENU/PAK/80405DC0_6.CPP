@@ -45,10 +45,30 @@ INCLUDE_ASM("ovl_80400000", func_80405DC0_de);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("ovl_80400000", func_80405F48_de);
 #endif
+#endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern u8 D_80152789;
+extern char *D_800E25D4[];
+extern char *D_800E25C4[];
+extern char *D_800E25A4[];
+extern char *D_800E25B4[];
+#define PAK_CODE D_800E25D4[D_80152789]
+#define PAK_COMPANY D_800E25C4[D_80152789]
+#define PAK_TITLE1 D_800E25A4[((u8 *)&D_801462C8)[0x581]]
+#define PAK_TITLE2 D_800E25B4[((u8 *)&D_801462C8)[0x581]]
+#else
+#define PAK_CODE D_800D36E0
+#define PAK_COMPANY D_800D36DC
+#define PAK_TITLE1 D_800D36D4
+#define PAK_TITLE2 D_800D36D8
+#endif
 extern s32 D_800E28C8, D_800DE874;
 extern char *D_800D36D4, *D_800D36D8, *D_800D36DC;
 
@@ -87,21 +107,21 @@ void func_80405F48_de(Shared_PakMenu *menu) {
             switch (D_800DE874) {
                 case 1:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        func_802A037C_de(code, D_800D36E0) == 0 && func_802A037C_de(company, D_800D36DC) == 0) {
+                        func_802A037C_de(code, PAK_CODE) == 0 && func_802A037C_de(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
                         match = 0;
                     }
-                    title = D_800D36D4;
+                    title = PAK_TITLE1;
                     break;
                 case 2:
                     if (func_802A0238_de(code) == 4 && func_802A0238_de(company) == 2 &&
-                        func_802A037C_de(code, D_800D36E0) == 0 && func_802A037C_de(company, D_800D36DC) == 0) {
+                        func_802A037C_de(code, PAK_CODE) == 0 && func_802A037C_de(company, PAK_COMPANY) == 0) {
                         match = 1;
                     } else {
                         match = 0;
                     }
-                    title = D_800D36D8;
+                    title = PAK_TITLE2;
                     break;
                 case 0:
                 default:

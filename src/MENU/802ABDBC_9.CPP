@@ -11,10 +11,14 @@
 #include "COMMON/CHANNEL.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("span_1000", func_802ACBCC);
 #endif
+#endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 extern float D_800C6264;
 extern float D_800C626C;
 extern float D_800C6278_de;

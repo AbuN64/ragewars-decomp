@@ -10,10 +10,14 @@ INCLUDE_RODATA("data_800C", rodata_func_8043F52C_de_800E2460);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
+#else
 INCLUDE_ASM("ovl_80400000", func_8043F52C_de);
 #endif
+#endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 u32 func_80265350_de(void);
 int func_802934F8_de(void);
 u8 *func_8043F290(TextBoundsText *);

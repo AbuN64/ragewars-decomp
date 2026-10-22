@@ -4,8 +4,27 @@
 #include "FRONTEND/80423280_9.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_ASM("ovl_80400000", Frontend_CreateMatchOptions);
+#ifdef NON_MATCHING
+/* Drafted below with the other versions' body. */
 #else
+INCLUDE_ASM("ovl_80400000", Frontend_CreateMatchOptions);
+#endif
+#endif
+
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern char *D_auto_800E1CA4[];
+extern char *D_auto_800E1CB4[];
+extern char *D_auto_800E1CC4[];
+extern char *D_auto_800E1CD4[];
+extern char *D_800E1CE4[];
+extern char *D_auto_800E1CF4[];
+extern char *D_auto_800E1D04[];
+#include "COMMON/SHARED_GAMESLOT.H"
+#define MO_TEXT(i, fixed, eu) ((eu)[D_801462C8.language])
+#else
+#define MO_TEXT(i, fixed, eu) (fixed)
+#endif
 
 #if defined(VERSION_DE)
 enum { OPTIONS_TEXT = 0x35B };
@@ -63,16 +82,16 @@ s32 Frontend_CreateMatchOptions(void *root) {
     widget = func_8041ABC0_de(OPTIONS_TEXT + 8, OPTIONS_TEXT + 9);
     slot = &D_800E4EF0->selectWidget;
     *slot = widget;
-    func_8041AD34_de(widget, D_800D3494);
-    func_8041AD34_de(D_800E4EF0->selectWidget, D_800D3498);
+    func_8041AD34_de(widget, MO_TEXT(0, D_800D3494, D_auto_800E1CA4));
+    func_8041AD34_de(D_800E4EF0->selectWidget, MO_TEXT(1, D_800D3498, D_auto_800E1CB4));
     widget = func_8041ABC0_de(OPTIONS_TEXT + 15, OPTIONS_TEXT + 16);
     slot = &D_800E4EF0->cursorWidget;
     *slot = widget;
-    func_8041AD34_de(widget, D_800D349C);
-    func_8041AD34_de(D_800E4EF0->cursorWidget, D_800D34A0);
-    func_8041AD34_de(D_800E4EF0->cursorWidget, D_800D34A4);
-    func_8041AD34_de(D_800E4EF0->cursorWidget, D_800D34A8);
-    func_8041AD34_de(D_800E4EF0->cursorWidget, D_800D34AC);
+    func_8041AD34_de(widget, MO_TEXT(2, D_800D349C, D_auto_800E1CC4));
+    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(3, D_800D34A0, D_auto_800E1CD4));
+    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(4, D_800D34A4, D_800E1CE4));
+    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(5, D_800D34A8, D_auto_800E1CF4));
+    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(6, D_800D34AC, D_auto_800E1D04));
     func_8041B110_de(OPTIONS_TEXT + 10);
     func_8041B110_de(OPTIONS_TEXT + 11);
     func_8041B110_de(OPTIONS_TEXT + 12);

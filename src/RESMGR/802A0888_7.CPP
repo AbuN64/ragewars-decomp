@@ -5,15 +5,23 @@
 #include "MENU/GFX/80414480_3.H"
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Drafted below with the DE twin. */
+#else
 INCLUDE_ASM("span_1000", func_802A0BE8_eu);
 #endif
+#endif
 
-#if defined(VERSION_DE)
+#if defined(VERSION_DE) || (defined(NON_MATCHING) && defined(VERSION_EU))
 #include "stdarg.h"
 extern int D_8014D0D0;
 extern int D_800CD918;
 
+#if defined(VERSION_EU)
+int *func_802A0BE8_eu(int format, ...) {
+#else
 int *func_802A0AD0_de(int format, ...) {
+#endif
     va_list args;
     va_start(args, format);
     D_800CD918 = func_80414CCC_de(&D_8014D0D0, format, (int)args);
