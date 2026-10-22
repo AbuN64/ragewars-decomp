@@ -79,11 +79,11 @@ ASFLAGS := -march=vr4300 -mabi=32 -EB --no-pad-sections -mips3
 define PREPROCESS_gcc_2_7_2_kmc
 $(Q)$(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_7_2_kmc = { [ ! -f $(@:.o=.s) ] || mv -f $(@:.o=.s) $(@:.o=.s.prev); } && $(CC_gcc_2_7_2_kmc) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s),true) && if [ -z "$(filter-out %.i.ok,$?)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_7_2_kmc) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi
+COMPILE_gcc_2_7_2_kmc = { [ ! -f $(@:.o=.s) ] || mv -f $(@:.o=.s) $(@:.o=.s.prev); } && $(CC_gcc_2_7_2_kmc) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && if [ -z "$(filter-out %.i.ok,$?)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_7_2_kmc) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi
 define PREPROCESS_gcc_2_8_1_sn64
 $(Q)$(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_8_1_sn64 = { [ ! -f $(@:.o=.s) ] || mv -f $(@:.o=.s) $(@:.o=.s.prev); } && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s),true) && sed -i -E 's/^([ \t]*\.word[ \t]+\.L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
+COMPILE_gcc_2_8_1_sn64 = { [ ! -f $(@:.o=.s) ] || mv -f $(@:.o=.s) $(@:.o=.s.prev); } && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && sed -i -E 's/^([ \t]*\.word[ \t]+\.L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
 # Per-file facts ([file] rows of config.toml): a toolchain and flags for a path or a directory.
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
@@ -172,20 +172,23 @@ CODE_SED := -e 's@^(\s*/\* [0-9A-F]+ [0-9A-F]{8} ([0-9A-F]{8}) \*/\s*)[^%]*/\* h
 	-e 's@^(\s*/\* [0-9A-F]+ [0-9A-F]{8} ([0-9A-F]{8}) \*/\s*)(ld|sd|ldl|ldr|sdl|sdr|lld|scd|ddiv|ddivu)\s[^%]*$$@\1.word 0x\2@' \
 	-e 's@^(\s*/\* [0-9A-F]+ [0-9A-F]{8} 1000[0-9A-F]{4} \*/\s*)b(\s+)@\1beq\2$$zero, $$zero, @' \
 	-e 's@^(\s*/\* [0-9A-F]+ [0-9A-F]{8} 0401[0-9A-F]{4} \*/\s*)b(\s+)@\1bgez\2$$zero, @'
-# An object whose data starts off a word boundary in the ROM (NOALIGN in text_sizes.mk) has the alignment its
-# compiler asks for in data sections dropped from its assembly, and its words and halves spelled as unaligned data:
-# the ROM packs that data at the byte, so a pad the assembler adds would shift everything after it.
+# An object whose data starts off an 8-byte boundary in the ROM (NOALIGN in text_sizes.mk, the start's address mod 8)
+# has the alignment its compiler asks for and the start does not meet dropped from the data sections of its assembly:
+# the assembler pads from the section start, so it would pad where the ROM, aligned by address, did not. Off a word
+# boundary the ROM packs the data at the byte: all alignment goes and words and halves are spelled as unaligned data.
 define STRIP_ALIGN
 import re, sys
-path, section, out = sys.argv[1], "text", []
+path, start, section, out = sys.argv[1], int(sys.argv[2]), "text", []
 for line in open(path):
     found = re.match(r"\s*\.section\s+\.?(\w+)", line) or re.match(r"\s*\.(text|data|rdata|sdata|bss|rodata)\b", line)
     if found:
         section = found.group(1)
     elif section in ("data", "rdata", "rodata", "sdata"):
-        if re.match(r"\s*\.(p2)?align\b", line):
+        asked = re.match(r"\s*\.(p2)?align\b\s*(\d*)", line)
+        if asked and (start % 4 or (asked.group(2) and start % (1 << int(asked.group(2))))):
             continue
-        line = re.sub(r"^(\s*)\.word\b", r"\1.4byte", re.sub(r"^(\s*)\.(half|short)\b", r"\1.2byte", line))
+        if start % 4:
+            line = re.sub(r"^(\s*)\.word\b", r"\1.4byte", re.sub(r"^(\s*)\.(half|short)\b", r"\1.2byte", line))
     out.append(line)
 open(path, "w").write("".join(out))
 endef

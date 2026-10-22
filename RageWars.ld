@@ -12112,7 +12112,7 @@ SECTIONS
         src/FRONTEND/8043962C.CPP.o(.data);
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/FRONTEND/CODE_8043A0B0.CPP.o */;
         src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
@@ -13843,7 +13843,7 @@ SECTIONS
         src/FRONTEND/8043962C_5.CPP.o(.data);
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/8043A0B0_6.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/FRONTEND/CODE_8043A0B0.CPP.o */;
         src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
@@ -15551,7 +15551,7 @@ SECTIONS
         src/FRONTEND/8043962C_4.CPP.o(.data);
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/FRONTEND/CODE_8043A0B0.CPP.o */;
         src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
@@ -17255,7 +17255,7 @@ SECTIONS
         src/FRONTEND/8043962C_3.CPP.o(.rodata .rdata);
         src/DATA/GFXDATA/800DCC34_2.CPP.o(.data);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/FRONTEND/CODE_8043A0B0.CPP.o */;
         src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
@@ -20891,7 +20891,6 @@ SECTIONS
         src/FRONTEND/8043962C.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_5.CPP.o(.bss .sbss COMMON);
@@ -22161,7 +22160,6 @@ SECTIONS
         src/FRONTEND/8043962C_5.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_6.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_4.CPP.o(.bss .sbss COMMON);
@@ -23398,7 +23396,6 @@ SECTIONS
         src/FRONTEND/8043962C_4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_5.CPP.o(.bss .sbss COMMON);
@@ -24659,7 +24656,6 @@ SECTIONS
         src/FRONTEND/8043962C_3.CPP.o(.bss .sbss COMMON);
         src/DATA/GFXDATA/800DCC34_2.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_4.CPP.o(.bss .sbss COMMON);
@@ -27250,7 +27246,7 @@ SECTIONS
         src/DATA/OVLTAB9/800E1FB4.CPP.o(.data);
         src/FRONTEND/800E1FC0.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1FC4.CPP.o(.rodata .rdata);
-        src/FRONTEND/8043A0B0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/FRONTEND/CODE_8043A0B0.CPP.o */;
         src/FRONTEND/CODE_8043A0B0.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/CODE_8043AED0.CPP.o */;
         src/FRONTEND/CODE_8043AED0.CPP.o(.rodata .rdata);
@@ -27829,7 +27825,6 @@ SECTIONS
         src/DATA/OVLTAB9/800E1FB4.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/800E1FC4.CPP.o(.bss .sbss COMMON);
-        src/FRONTEND/8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043A0B0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/CODE_8043AED0.CPP.o(.bss .sbss COMMON);
         src/FRONTEND/8043A0B0_5.CPP.o(.bss .sbss COMMON);

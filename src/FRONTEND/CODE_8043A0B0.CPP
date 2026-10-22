@@ -2,8 +2,6 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "RENDER_2/8025DE50_5.H"
 
-INCLUDE_RODATA("data_800C", rodata_func_8043A890_de_800E1FFC);
-
 #include "TYPES.H"
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
@@ -24,6 +22,13 @@ extern void *func_80419E54_de(s32, s32);
 extern void func_8043B96C_de(void);
 extern void func_8043B0CC_de(s32);
 extern void func_802A2394_de(void);
+extern struct StateFlags D_800E5A06[][19];
+extern s32 func_80419F38_de(void *);
+extern void func_80419F24_de(void *);
+extern void func_80419F58_de(void *, int);
+extern void func_80298368_de(s32);
+extern void func_802A2360_de(void);
+extern void func_8029973C_de(void);
 
 /* Construct the four-player results/loadout menu and animate its panels into view. */
 s32 Frontend_CreateFourPlayerResults(void *window) {
@@ -123,6 +128,76 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
 
 INCLUDE_ASM("ovl_80400000", func_8043A330_de);
 
-INCLUDE_ASM("ovl_80400000", func_8043A5F8_de);
+/* Advance the four-player results screen one frame: slide the arrows, count the timer down, step the state. */
+s32 Frontend_UpdateFourPlayerResults(void) {
+    s32 i;
+    s32 player;
+    s32 left;
+    s32 timer;
+    struct FourPlayerResultsScreen *screen;
+    switch (D_800E59E0->state) {
+    case 1:
+        D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x + (u16)D_800E59E0->leftStep;
+        D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x - (u16)D_800E59E0->rightStep;
+        D_800E59E0->timer--;
+        if (D_800E59E0->timer <= 0) {
+            func_8025DF34_de(0xE79);
+            func_8040E8D8_de(D_800E59E0->message, 1);
+            func_80419F58_de(D_800E59E0->resource, 4);
+            D_800E59E0->state = 4;
+            D_800E59E0->timer = 4;
+        }
+        break;
+    case 2:
+        D_800E59E0->leftArrow->x = (u16)D_800E59E0->leftArrow->x - (u16)D_800E59E0->leftStep;
+        D_800E59E0->rightArrow->x = (u16)D_800E59E0->rightArrow->x + (u16)D_800E59E0->rightStep;
+        D_800E59E0->timer--;
+        if (D_800E59E0->timer <= 0) {
+            D_800E59E0->state = 3;
+            func_8029973C_de();
+            func_80298368_de(D_800E59E0->next);
+            return 0;
+        }
+        break;
+    case 3:
+        func_802A2360_de();
+        return 0;
+    case 4:
+        screen = D_800E59E0;
+        timer = screen->timer;
+        left = timer - 1;
+        if (left >= 0) {
+            left = timer - (timer < left ^ 1);
+        } else {
+            left = 0;
+        }
+        screen->timer = left;
+        if (D_800E59E0->timer <= 0) {
+            if (func_80419F38_de(D_800E59E0->resource)) {
+                func_80419F24_de(D_800E59E0->resource);
+                D_800E59E0->state = 3;
+            }
+        }
+        return 0;
+    case 5:
+        func_8025DF34_de(0xE78);
+        D_800E59E0->state = 2;
+        D_800E59E0->timer = 4;
+        func_8040E8D8_de(D_800E59E0->message, 0);
+        for (player = 0; player < 4; player++) {
+            for (i = 0; i < 5; i++) {
+                func_8040E8D8_de(func_8040EC30_de(D_800E59E0->window, D_800E5A06[player][i].value), 0);
+            }
+            func_8040E8D8_de(D_800E59E0->panels[player].item, 0);
+        }
+        break;
+    case 6:
+    case 7:
+        break;
+    }
+    return 0;
+}
+
+INCLUDE_RODATA("data_800C", rodata_func_8043A890_de_800E1FFC);
 
 INCLUDE_ASM("ovl_80400000", func_8043A890_de);

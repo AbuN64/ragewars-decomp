@@ -4691,7 +4691,7 @@ segments:
       - [0xEA3C4, data, data_800C/rodata_unresolved_800E97C4]
       - [0xEA3D0, rodata, data_800C/D_80439EC4_E2BC0]
       - [0xEA3D4, rodata, data_800C/D_8043A330_E2BC4]
-      - [0xEA3F0, rodata, data_800C/D_blob_phase2_6eac0df31239d56ec7a6]
+      - [0xEA3F0, rodata, data_800C/literals_Frontend_UpdateFourPlayerResults]
       - [0xEA40C, rodata, data_800C/rodata_func_8043A890_de_800E1FFC]
       - [0xEA420, rodata, data_800C/literals_func_8043ACF0_de]
       - [0xEA450, rodata, data_800C/D_blob_phase2_48acc91ddba73dc2d583]
