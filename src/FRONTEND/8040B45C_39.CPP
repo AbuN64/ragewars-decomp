@@ -118,7 +118,7 @@ extern char D_801539B0[];
 extern s32 D_800E2AC0;
 
 
-/* Sets the buffer pool flag, then runs Frontend_AcquireArchiveEntry on every buffer pool entry, func_80410674_de in mode 2 on every resource slot and func_80410F54_de on every chunk. */
+/* Sets the buffer pool flag, then runs Frontend_AcquireArchiveEntry on every buffer pool entry, func_80410674_de in mode 2 on every resource slot and Frontend_GetBankTileTexture on every chunk. */
 
 
 
@@ -126,7 +126,7 @@ extern s32 D_800E2AC0;
 
 extern void Frontend_AcquireArchiveEntry(s32 index);
 
-extern void func_80410F54_de(s32 arg0, s32 index, s32 arg2);
+extern void Frontend_GetBankTileTexture(s32 arg0, s32 index, s32 arg2);
 
 /* A stride of 1180 bytes. The debugger showed the global holding 0x80696F50 and the two observed
    indices, 0 and 1, returning 0x80696F50 and 0x806973EC, which differ by exactly 1180. */
@@ -348,7 +348,7 @@ void func_80411F48_de(void) {
         func_80410674_de(i, 2);
     }
     for (i = 0; i < D_80153C20.count; i++) {
-        func_80410F54_de(0, i, 0);
+        Frontend_GetBankTileTexture(0, i, 0);
     }
 }
 

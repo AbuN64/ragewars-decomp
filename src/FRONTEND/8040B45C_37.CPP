@@ -103,7 +103,7 @@ extern void func_80419490_de(Texture *texture);
 extern void func_80419640_de(Texture *into, Texture *from);
 extern void func_804196C8_de(s32 flag);
 
-void *func_80410F54_de(u8 which, s32 group, s32 pass) {
+void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
     s32 sizes[0x60];
     Texture scratch;
     Texture *texture;

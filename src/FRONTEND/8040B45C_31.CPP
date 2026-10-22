@@ -26,7 +26,7 @@ extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
-   once through func_80410F54_de and func_804174F4_de (stopping the page when it cannot load) and drawing
+   once through Frontend_GetBankTileTexture and func_804174F4_de (stopping the page when it cannot load) and drawing
    every batch's run of sprites on that page at depth 10 through func_80418DA0_de; finally it restores
    the clip rectangle and empties the queue. */
 
@@ -50,7 +50,7 @@ extern s32 D_8014D714;
 
 extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
-extern s32 func_80410F54_de(s32 page, s32 a, s32 b);
+extern s32 Frontend_GetBankTileTexture(s32 page, s32 a, s32 b);
 
 extern void func_804174F4_de(s32 texture);
 
@@ -173,7 +173,7 @@ void func_8040CAB0_de(void) {
             while (current == batch->cursor->glyph && batch->count > 0) {
                 sprite = batch->cursor;
                 if (!loaded) {
-                    texture = func_80410F54_de(current & 0xFF, D_8014D710, D_8014D714);
+                    texture = Frontend_GetBankTileTexture(current & 0xFF, D_8014D710, D_8014D714);
                     if (texture == 0) {
                         i = D_8014D570;
                         break;
