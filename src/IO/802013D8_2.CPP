@@ -27,6 +27,7 @@ extern s32 D_800C8144_de;
 extern void *D_800F1C84;
 extern OSMesgQueue D_800F1C90;
 extern void *D_800F2CB0;
+extern u8 D_800F2CE0[];
 extern void *D_800F2CB4;
 extern OSMesgQueue D_800F2CC0;
 extern OSMesgQueue D_800F2F40;
@@ -43,6 +44,7 @@ extern void func_80200D18_de(u32, const void *, u32);
 extern void func_80200E04_de(u32, u8 *, u32);
 extern void func_8020095C_de(u32, u8 *, u32);
 #ifdef NON_MATCHING
+/* 43/59 words; remaining: the ROM's `lui` of D_800F1C90 sits in the first jal's delay slot (addiu later) and the D_800C8140 store precedes the jal; the stack-top argument is a symbol-plus-offset (a bare &D_800F2CB0 is CSE'd into a saved register) */
 void func_802016FC_de(s32 arg0) {
     if (D_800C8140_de == 0) {
         D_800C8140_de = 1;
@@ -51,7 +53,7 @@ void func_802016FC_de(s32 arg0) {
         osCreateMesgQueue(&D_800F3110, &D_800F2F58, 1);
         osCreateMesgQueue(&D_800F1C90, &D_800F1C84, 1);
         func_802BB550_de(0, &D_800F1C90, 1);
-        func_802BAC90_de(&D_800F2F60, 0x4653, &D_002018A0, 0, &D_800F2CB0, arg0);
+        func_802BAC90_de(&D_800F2F60, 0x4653, &D_002018A0, 0, (void **)(D_800F2CE0 - 0x30), arg0);
         func_802BB750_de(&D_800F2F60);
     }
 }
