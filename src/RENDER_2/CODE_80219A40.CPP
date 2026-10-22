@@ -320,7 +320,7 @@ block_88:
                             } else {
                                 var_s2->unk5D8->deaths_normal[temp_s3]++;
                             }
-                            func_80219688_de(temp_s1, var_s2, arg2);
+                            Render_PostKillMessages(temp_s1, var_s2, arg2);
                             if (var_s2 != 0) {
                                 temp_a0_5 = var_s2->unk1338;
                                 temp_v1_9 = temp_a0_5 + 1;

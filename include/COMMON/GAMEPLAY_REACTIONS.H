@@ -223,5 +223,5 @@ struct Shared_ReactionPlayerRecord {
 };
 extern f32 gReactionReserveMaximum;
 extern void func_80219A40_de(Shared_ReactionActor *, void *, Shared_ReactionInteraction *);
-extern void func_80219688_de(Shared_ReactionPlayer *, Shared_ReactionPlayer *, Shared_ReactionInteraction *);
+extern void Render_PostKillMessages(Shared_ReactionPlayer *, Shared_ReactionPlayer *, Shared_ReactionInteraction *);
 #endif

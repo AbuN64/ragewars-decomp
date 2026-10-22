@@ -213,7 +213,7 @@ static inline void nextMessage(s32 *next) {
     *next %= 4;
 }
 
-void func_80219688_de(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
+void Render_PostKillMessages(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
     MenuSettings *settings = &D_80145088.settings;
     MatchModes *modes;
     if (!settings->local) return;
