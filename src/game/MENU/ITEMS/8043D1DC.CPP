@@ -77,10 +77,9 @@ INCLUDE_RODATA("data_800C", rodata_func_8043D278_de_13_800DE300);
 #endif
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
 typedef struct { char pad0[0x80]; s8 choice; } Func_8043DB50_Slot;
-typedef struct { char pad0[0x5D8]; Func_8043DB50_Slot *slot; s32 style; } Func_8043DB50_Rec;
-typedef struct { char pad0[0x1C]; Func_8043DB50_Rec *rec; s32 pad; struct ControllerProfile *player; } Func_8043DB50_Obj;
+typedef struct { char pad0[0x5D8]; Func_8043DB50_Slot *slot; s32 pad5DC; s32 style; } Func_8043DB50_Rec;
+typedef struct { char pad0[0x1C]; Func_8043DB50_Rec *rec; struct ControllerProfile *player; } Func_8043DB50_Obj;
 extern s16 D_auto_800E1DAA[][2];
 extern u8 D_auto_800C9237[][4];
 extern u8 D_auto_800C9233[][4];
@@ -112,9 +111,6 @@ s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
     func_8044214C_de(arg0, 0xB, slot->choice);
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8043DB50_de);
-#endif
 #endif
 
 #if defined(VERSION_DE) && !defined(NON_MATCHING)
