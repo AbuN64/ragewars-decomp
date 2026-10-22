@@ -10,7 +10,7 @@
 #include "COMMON/EXTERNS_10.H"
 extern s32 func_8025DF34_de(s32 arg0);
 
-#ifdef NON_MATCHING
+#if defined(VERSION_US_REV1)
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
@@ -35,10 +35,11 @@ void func_80278C10_de(Trigger *trigger) {
     s32 callback;
     table = D_800CD668_de[trigger->table];
     if (table != 0) {
-        fallback = &D_80145088.fallbackCamera;
         if (D_801462E5 == 0) {
             fallback = D_80145088.cameras;
             if (fallback == 0) fallback = &D_80145088.fallbackCamera;
+        } else {
+            fallback = &D_80145088.fallbackCamera;
         }
         if (D_8011FE88.mode == 4) {
             index = trigger->sound;
