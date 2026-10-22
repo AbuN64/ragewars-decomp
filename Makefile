@@ -100,6 +100,9 @@ $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200B14.CPP.o): CFLAGS := -G0 -mips3 
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
+$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): TC := gcc_2_7_2_kmc
+$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500_2.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500_2.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2

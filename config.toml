@@ -151,6 +151,11 @@ toolchain = "gcc-2.7.2-kmc"
 cflags = []
 omit = []
 
+[file."src/IO/802013D8_2.CPP"]
+toolchain = "gcc-2.7.2-kmc"
+cflags = []
+omit = []
+
 [file."src/MATH/80299368.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
