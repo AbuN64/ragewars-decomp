@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct EuxDrawScreen { void *window; s32 unk4; void *roots[3]; s32 unk14; s32 unk18; s32 count; } EuxDrawScreen;
 typedef struct { u8 pad0[0x10]; u8 alpha; } EuxDrawItem;
@@ -36,8 +35,8 @@ s32 func_8041E3A0_eu_x(void *window) {
     if (func_802999A0_de(0) == 0x16) {
         func_8040E8D8_de(item, 0);
     }
-    D_800E39C0->unk14 = 0;
     D_800E39C0->unk18 = 0;
+    D_800E39C0->unk14 = 0;
     D_800E39C0->roots[0] = func_8040EC30_de(window, 0x390);
     D_800E39C0->roots[1] = func_8040EC30_de(window, 0x399);
     D_800E39C0->roots[2] = func_8040EC30_de(window, 0x39A);
@@ -50,7 +49,4 @@ s32 func_8041E3A0_eu_x(void *window) {
     func_8040E8D8_de(func_8040EC30_de(D_800E39C0->roots[D_800E39C0->unk14], 0x396), 1);
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8041E3A0_eu_x);
-#endif
 #endif
