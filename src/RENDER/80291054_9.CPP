@@ -109,4 +109,64 @@ void func_80293590_de(void *arg0) {
     session->pad26DC0 = 0;
 }
 
+#ifdef NON_MATCHING
+extern f32 D_800C5480_de, D_800C5484_de, D_800C5488_de, D_800C5490_de;
+extern f32 D_800C548C, literals_func_8028D244_de;
+typedef struct FadeState {
+    char pad0[0x26DB4];
+    s32 previous;  /* 0x26DB4 */
+    s32 current;   /* 0x26DB8 */
+    char pad26DBC[4];
+    u8 reverse;    /* 0x26DC0 */
+    u8 mode;       /* 0x26DC1: 0 idle, 1 fading up, 2 fading down */
+    char pad26DC2[2];
+    f32 timer;     /* 0x26DC4 */
+} FadeState;
+/* Steps the fade timer of a screen state by a step that depends on the direction flag: mode 1 raises it until
+ * it reaches the limit, mode 2 lowers it to zero (or below) and then switches to the next screen. */
+void func_802935C0_de(FadeState *state) {
+    f32 step;
+    f32 timer;
+    if (state->mode == 0) {
+        return;
+    }
+    step = D_800C5480_de;
+    if (state->reverse != 0) {
+        step = D_800C5484_de;
+    }
+    if (state->mode == 1) {
+        timer = state->timer;
+        if (literals_func_8028D244_de < D_800C5490_de) {
+            timer = timer + step * D_800C5490_de;
+        } else {
+            timer = timer + step * literals_func_8028D244_de;
+        }
+        state->timer = timer;
+        if (*(f32 *)&D_800C5494 <= timer) {
+            state->mode = 0;
+            state->timer = *(f32 *)&D_800C5494;
+            state->reverse = 0;
+        }
+    } else if (state->mode == 2) {
+        timer = state->timer;
+        if (timer > 0.0f) {
+            timer = timer - step * literals_func_8028D244_de;
+            state->timer = timer;
+            if (timer < 0.0f) {
+                state->timer = 0.0f;
+            }
+        } else {
+            state->timer = timer - D_800C5488_de;
+        }
+        if (state->timer < D_800C548C) {
+            s32 old = state->current;
+            state->current = 0x14;
+            state->timer = 0.0f;
+            state->mode = 1;
+            state->previous = old;
+        }
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_802935C0_de);
+#endif
