@@ -6544,7 +6544,9 @@ struct PatrolRouteSet {
 };
 struct PickupGoalNodeList;
 struct PickupGoalNodeList {
-    u8 pad0[0x18];
+    u8 pad0[0xC];
+    s32 count;
+    u8 pad10[8];
     u32 selected;
 };
 struct PickupGoalObj8020EF60;

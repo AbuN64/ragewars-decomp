@@ -7,6 +7,7 @@
 struct ActorRec;
 typedef struct ActorRec ActorRec;
 
+extern float D_800C1DB4_de;
 extern float D_800C1DB8_de;
 
 struct Obj_func_8020D9C0_de;
@@ -36,14 +37,18 @@ struct Selection_func_8020D4AC_de;
 struct Selection_func_8020D4AC_de {
     char pad0[0xC];
     s32 node;
-    char pad10[0x28];
+    char pad10[4];
+    s32 ids[4];
+    char pad24[0x14];
     s32 objectCount;
     Player *objects[33];
     Stage stages[10];
     CVector3 dirs[10];
-    char pad1B0[0xC];
+    CVector3 result;
     s32 stageCount;
     s32 id;
+    s32 lastNode;
+    s32 failed;
 };
 
 struct RecCode802080008020DC10;

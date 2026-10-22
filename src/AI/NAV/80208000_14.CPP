@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ACTORREC.H"
+#include "AI/SHARED_PICKUPGOALNODE.H"
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
@@ -19,10 +20,9 @@
 
 
 
-extern func_80205628_S3 D_8013B364;
 
-extern Link *func_8020C9B0_de(func_80205628_S3 *, s32);
-extern CVector3 *func_8020C994_de(func_80205628_S3 *, s32);
+extern Link *func_8020C9B0_de(PickupGoalNodeList *, s32);
+extern CVector3 *func_8020C994_de(PickupGoalNodeList *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 
 s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
@@ -33,13 +33,13 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
     Link *link;
     f32 distance;
     f32 term;
-    func_80205628_S3 *route;
+    PickupGoalNodeList *route;
 
     node = 0;
     i = 0;
     stage = 0;
     route = &D_8013B364;
-    for (; i < route->unkC; i++) {
+    for (; i < route->count; i++) {
         link = func_8020C9B0_de(route, i);
         if (link->from == sel->id && link->type == 6) {
             node = func_8020C994_de(route, link->to);
@@ -74,85 +74,79 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
     return 0;
 }
 
+extern s32 func_8020CC0C_de(PickupGoalNodeList *list, s32 from, s32 to);
 #ifdef NON_MATCHING
-#include "COMMON/VECTOR4F.H"
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/SHAREDPLAYER.H"
-#include "AI/SHARED_PICKUPGOALNODE.H"
-#include "COMMON/ACTORREC.H"
-#include "COMMON/TRIPLE.H"
-#include "TYPES.H"
-
-extern s32 func_8020CC0C_de(PickupGoalNodeList *, s32, s32);
-extern CVector3 *func_8020C994_de(PickupGoalNodeList *, s32);
-
 s32 func_8020D6E4_de(Selection_func_8020D4AC_de *sel) {
     CVector3 avg;
     Shared_PickupGoalNode *info;
     CVector3 *node;
+    PickupGoalNodeList *list;
     s32 next;
     s32 best;
     s32 i;
+    s32 max;
     f32 inv;
 
     next = -1;
     i = 0;
+    max = i;
     best = sel->objectCount;
-    if (best > 0) {
-        for (; i < sel->objectCount; i++) {
-            if (0.0f < sel->stages[i].distance) {
-                best = i;
-            }
+    list = &D_8013B364;
+    for (; i < sel->objectCount; i++) {
+        if (sel->stages[i].distance > max) {
+            best = i;
         }
     }
-    if (best != sel->objectCount) {
-        if (sel->stages[best].to >= 0) {
-            for (i = 0; i < 3; i++) {
-                if (sel->ids[i] == sel->id) {
-                    next = sel->ids[i + 1];
-                    break;
-                }
-            }
-            if (next != -1 && func_8020CC0C_de(&D_8013B364, sel->id, sel->stages[best].to) != -1 &&
-                func_8020CC0C_de(&D_8013B364, next, sel->stages[best].to) != -1) {
-                i = 3;
-                do {
-                    if (sel->ids[i - 1] == sel->id) {
-                        sel->ids[i] = sel->stages[best].to;
-                        break;
-                    }
-                    sel->ids[i] = sel->ids[i - 1];
-                    i--;
-                } while (i > 0);
-                avg.z = 0.0f;
-                avg.y = 0.0f;
-                avg.x = 0.0f;
-                for (i = 0; i < sel->objectCount; i++) {
-                    avg.x += sel->dirs[i].x;
-                    avg.y += sel->dirs[i].y;
-                    avg.z += sel->dirs[i].z;
-                }
-                inv = D_800C1DB4_de / (f32)sel->objectCount;
-                avg.x = avg.x * inv;
-                avg.y = avg.y * inv;
-                avg.z = avg.z * inv;
-                info = func_8020CFE0_de(&D_8013B364, sel->stages[best].to);
-                avg.x = avg.x * (f32)info->unknown14[0];
-                avg.y = avg.y * (f32)info->unknown14[0];
-                avg.z = avg.z * (f32)info->unknown14[0];
-                node = func_8020C994_de(&D_8013B364, sel->stages[best].to);
-                sel->result.x = node->x + avg.x;
-                sel->result.y = node->y + avg.y;
-                sel->result.z = node->z + avg.z;
-                sel->stageCount++;
-                sel->lastNode = sel->stages[best].to;
-                return 0;
-            }
+    if (best == sel->objectCount) {
+        sel->failed = 0;
+        sel->stageCount += 0x14;
+        return 1;
+    }
+    if (sel->stages[best].to < 0) {
+        sel->failed = 0;
+        sel->stageCount += 0x14;
+        return 1;
+    }
+    for (i = 0; i < 3; i++) {
+        if (sel->ids[i] == sel->id) {
+            next = sel->ids[i + 1];
+            break;
         }
     }
-    sel->failed = 0;
-    sel->stageCount += 0x14;
-    return 1;
+    if (next == -1 || func_8020CC0C_de(list, sel->id, sel->stages[best].to) == -1 ||
+        func_8020CC0C_de(list, next, sel->stages[best].to) == -1) {
+        sel->failed = 0;
+        sel->stageCount += 0x14;
+        return 1;
+    }
+    for (i = 3; i > 0; i--) {
+        if (sel->ids[i - 1] == sel->id) {
+            sel->ids[i] = sel->stages[best].to;
+            break;
+        }
+        sel->ids[i] = sel->ids[i - 1];
+    }
+    avg.x = avg.y = avg.z = 0.0f;
+    for (i = 0; i < sel->objectCount; i++) {
+        avg.x += sel->dirs[i].x;
+        avg.y += sel->dirs[i].y;
+        avg.z += sel->dirs[i].z;
+    }
+    inv = D_800C1DB4_de / (f32)sel->objectCount;
+    avg.x = avg.x * inv;
+    avg.y = avg.y * inv;
+    avg.z = avg.z * inv;
+    info = func_8020CFE0_de(list, sel->stages[best].to);
+    avg.x = avg.x * info->radius;
+    avg.y = avg.y * info->radius;
+    avg.z = avg.z * info->radius;
+    node = func_8020C994_de(list, sel->stages[best].to);
+    sel->result.x = node->x + avg.x;
+    sel->result.y = node->y + avg.y;
+    sel->result.z = node->z + avg.z;
+    sel->lastNode = sel->stages[best].to;
+    sel->stageCount++;
+    return 0;
 }
 #else
 INCLUDE_ASM("span_1000", func_8020D6E4_de);

@@ -9,7 +9,8 @@ struct Shared_PickupGoalNode {
     s32 id;
     u32 unknown4[3];
     Shared_PickupGoalNode *next;
-    u32 unknown14[8];
+    f32 radius;
+    u32 unknown18[7];
     s32 goal;
 };
 
