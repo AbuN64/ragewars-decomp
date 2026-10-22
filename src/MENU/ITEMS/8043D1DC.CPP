@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/RG.H"
 
-#if defined(VERSION_US)
+#if defined(VERSION_US) || defined(NON_MATCHING)
 s32 func_8043DCA4_de(TextBoundsText *arg0) {
     s32 temp_v0;
 
@@ -77,9 +77,46 @@ INCLUDE_RODATA("data_800C", rodata_func_8043D278_de_13_800DE300);
 #endif
 
 #if defined(VERSION_DE)
+#ifdef NON_MATCHING
+typedef struct { char pad0[0x80]; s8 choice; } Func_8043DB50_Slot;
+typedef struct { char pad0[0x5D8]; Func_8043DB50_Slot *slot; s32 style; } Func_8043DB50_Rec;
+typedef struct { char pad0[0x1C]; Func_8043DB50_Rec *rec; s32 pad; struct ControllerProfile *player; } Func_8043DB50_Obj;
+extern s16 D_auto_800E1DAA[][2];
+extern u8 D_auto_800C9237[][4];
+extern u8 D_auto_800C9233[][4];
+extern char D_0044FA6C[];
+extern s32 func_8026437C_de(struct ControllerProfile *object);
+extern void func_8044A0C4_de(void *rec, s32 choice);
+extern void func_8025DF34_de(s32 id);
+extern void func_804427C4_de(s32 a, void *obj, void *res);
+extern s32 func_80442488_de(void *obj, s32 value, s32 a, s32 b, s32 c, s32 d);
+extern void func_8044214C_de(s32 a, s32 b, s32 c);
+/* Steps the choice byte at 0x80 of the slot the record at 0x1C of arg1 points to: while the player passes func_8026437C_de it plays the sound for the record's style and runs the resource D_0044FA6C; otherwise func_80442488_de moves the choice and the remapping tables D_auto_800C9237 (func_80264388_de) and D_auto_800C9233 (func_802643A0_de or func_8026437C_de) are applied before the display is refreshed; returns 1 or 0. */
+s32 func_8043DB50_de(s32 arg0, Func_8043DB50_Obj *arg1, s32 arg2) {
+    Func_8043DB50_Rec *rec = arg1->rec;
+    Func_8043DB50_Slot *slot = rec->slot;
+    if (func_8026437C_de(arg1->player) != 0) {
+        func_8044A0C4_de(rec, slot->choice);
+        func_8025DF34_de(D_auto_800E1DAA[rec->style][0]);
+        func_804427C4_de(arg2, arg1, D_0044FA6C);
+        return 1;
+    }
+    slot->choice = func_80442488_de(arg1, slot->choice, 1, 0, 0x12, 1);
+    if (func_80264388_de(arg1->player) != 0) {
+        slot->choice = D_auto_800C9237[slot->choice][0];
+    }
+    if (func_802643A0_de(arg1->player) != 0 || func_8026437C_de(arg1->player) != 0) {
+        slot->choice = D_auto_800C9233[slot->choice][0];
+    }
+    func_8044A0C4_de(rec, slot->choice);
+    func_8044214C_de(arg0, 0xB, slot->choice);
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8043DB50_de);
 #endif
+#endif
 
-#if defined(VERSION_DE)
+#if defined(VERSION_DE) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_8043DCA4_de);
 #endif
