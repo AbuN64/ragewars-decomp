@@ -40,6 +40,8 @@ extern s32 func_80200500_de(void);
 extern s32 func_802017E8_de(s32, s32, s32, s32);
 extern void func_80200880_de(u32, void *, s32);
 extern void func_80200D18_de(u32, const void *, u32);
+extern void func_80200E04_de(u32, u8 *, u32);
+extern void func_8020095C_de(u32, u8 *, u32);
 #ifdef NON_MATCHING
 void func_802016FC_de(s32 arg0) {
     if (D_800C8140_de == 0) {
@@ -74,7 +76,43 @@ s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 #else
 INCLUDE_ASM("span_1000", func_802017E8_de);
 #endif
-INCLUDE_ASM("span_1000", func_802018A0_de);
+void func_802018A0_de(void) {
+    ControllerRequest *request;
+    for (;;) {
+        func_802BB2A0_de(&D_800F2F40, (OSMesg *)&request, 1);
+        if (request->status != 0 && request->reserved == 1) {
+            if (request->command & 0x80000000) {
+                D_800C8140_de = 0;
+            }
+            func_80200E04_de(0xB1FF0000, (u8 *)request->header, request->status);
+            if (request->command & 0x80000000) {
+                D_800C8140_de = 1;
+            }
+        }
+        func_802BB2A0_de(&D_800F1C90, 0, 0);
+        func_80200568_de(0xB1FFFFE4, request->argument0);
+        func_80200568_de(0xB1FFFFE8, request->argument1);
+        func_80200568_de(0xB1FFFFEC, request->argument2);
+        func_80200568_de(0xB1FFFFD8, 0x01010101);
+        func_80200568_de(0xB1FFFFE0, (u16)request->command);
+        func_802BB2A0_de(&D_800F1C90, 0, 1);
+        if (request->status != 0 && request->reserved == 0) {
+            s32 length = func_802005A0_de(0xB1FFFFDC);
+            if (length != 0) {
+                if (request->command & 0x80000000) {
+                    D_800C8140_de = 0;
+                }
+                func_8020095C_de(0xB1FF0000, (u8 *)request->header, length);
+                if (request->command & 0x80000000) {
+                    D_800C8140_de = 1;
+                }
+            }
+        }
+        if (request->reply != 0) {
+            func_802BB420_de(request->reply, (OSMesg)func_802005A0_de(0xB1FFFFDC), 1);
+        }
+    }
+}
 /* Issue the monitor command with interrupts disabled, then restore them. */
 s32 func_80201A80_de(void)
 {
