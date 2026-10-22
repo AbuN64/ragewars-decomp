@@ -100,9 +100,6 @@ $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200B14.CPP.o): CFLAGS := -G0 -mips3 
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
-$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): TC := gcc_2_7_2_kmc
-$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
-$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500_2.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200500_2.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
@@ -118,6 +115,9 @@ $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200800_3.CPP.o): CFLAGS := -G0 -mips
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200B14_2.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200B14_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/80200B14_2.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
+$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): TC := gcc_2_7_2_kmc
+$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/IO/802013D8_2.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
 $(foreach v,$(VERSIONS),build/$(v)/src/MATH/80299368.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/MATH/80299368.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/MATH/80299368.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fno-thread-jumps -fno-rerun-cse-after-loop
@@ -237,8 +237,53 @@ for (start, kind, name), (end, _, _) in zip(rows, rows[1:]):
     open(path, "w").write("\n".join(out) + "\n")
 endef
 export FILL_DATA
+# splat writes every extracted file again, so each new date would remake every object of the version (through the
+# extraction stamp and the files a source names) although nothing changed. A file whose bytes are the same gets its old
+# date back. A changed or added file reaches exactly the objects whose lines name it (build/asm.deps), so the stamp
+# keeps its date unless the shared asm/<v>/include changed; an object that named a file the extraction no longer
+# makes (asm.deps as make read it before the extraction) is dated long ago, so make compiles it and says what it lacks.
+define KEEP_DATES
+import hashlib, json, os, sys
+mode, version = sys.argv[1], sys.argv[2]
+root, keep = "asm/" + version, "build/.extract-dates-" + version + ".json"
+stamp = root + "/.extracted"
+def scan():
+    found = {}
+    for here, _, names in os.walk(root):
+        for name in names:
+            path = os.path.join(here, name)
+            if path != stamp:
+                with open(path, "rb") as data:
+                    found[path] = hashlib.sha1(data.read()).hexdigest()
+    return found
+if mode == "save":
+    os.makedirs("build", exist_ok=True)
+    files = {path: [digest, os.stat(path).st_mtime_ns] for path, digest in scan().items()}
+    when = os.stat(stamp).st_mtime_ns if os.path.exists(stamp) else None
+    with open(keep, "w") as out:
+        json.dump({"files": files, "stamp": when}, out)
+else:
+    with open(keep) as saved:
+        old = json.load(saved)
+    files = scan()
+    for path, digest in files.items():
+        if old["files"].get(path, [None])[0] == digest:
+            os.utime(path, ns=(old["files"][path][1], old["files"][path][1]))
+    moved = set(files) ^ set(old["files"]) | {path for path in files if old["files"].get(path, [None])[0] != files[path]}
+    if old["stamp"] is not None and not any(path.startswith(root + "/include/") for path in moved):
+        os.utime(stamp, ns=(old["stamp"], old["stamp"]))
+    gone = set(old["files"]) - set(files)
+    if gone and os.path.exists("build/asm.deps"):
+        for line in open("build/asm.deps"):
+            target, _, named = line.partition(": ")
+            if gone.intersection(named.split()) and os.path.exists(target):
+                os.utime(target, ns=(1000000000, 1000000000))
+    os.remove(keep)
+endef
+export KEEP_DATES
 extract: $(VERSIONS:%=extract-%)
 extract-%:
+	$(Q)python3 -I -c "$$KEEP_DATES" save $*
 	$(Q)$(SPLAT) split versions/$*/splat.yaml
 	$(Q)find asm/$* \( -name '*.data.s' -o -name '*.rodata.s' \) | while read f; do \
 		case $$(grep -m1 -oE '^ */\* [0-9A-F]+ [0-9A-F]{8}' "$$f" | tail -c 2) in \
@@ -248,6 +293,7 @@ extract-%:
 	$(Q)python3 -I -c "$$FILL_DATA" $*
 	$(Q)find asm/$*/nonmatchings -name '*.s' -exec sed -i -E $(CODE_SED) {} +
 	$(Q)touch asm/$*/.extracted
+	$(Q)python3 -I -c "$$KEEP_DATES" restore $*
 # An object assembles extracted files its source only names through a macro: every object follows the extraction.
 asm/%/.extracted: | roms/baserom.%.z64
 	+$(Q)$(MAKE) --no-print-directory extract-$*
@@ -255,6 +301,34 @@ asm/%/.extracted: | roms/baserom.%.z64
 # The link script names every object, so no rule here lists a file.
 $(foreach v,$(VERSIONS),$(eval OBJS_$(v) := $(addprefix build/$(v)/,$(shell $(CPP) -P -undef -D$(VMACRO_$(v)) $(NAME).ld 2>/dev/null | grep -oE '[[:alnum:]_./+-]+[.]o' | sort -u))))
 -include $(foreach v,$(VERSIONS),$(OBJS_$(v):.o=.d))
+
+# The compiler's assembly for a unit holds only an `.include` line for each extracted file its INCLUDE_ASM, INCLUDE_RODATA
+# and INCLUDE_DATA lines name: the assembler reads the file's content, so an edit in place (a symbol renamed by hand or
+# by a tool, with the .i unchanged and the compile answered by the cache) is an input of the object that no other rule
+# lists, and the object would keep the old symbols until it is deleted. Every source's object so depends on the files
+# of each version that its lines name and that exist (a line another version does not extract adds nothing).
+define ASM_DEPS
+import os, re, sys
+named = re.compile(rb'INCLUDE_(ASM|RODATA|DATA)\(\s*"(\w+)"\s*,\s*(\w+)\s*[,)]')
+for here, _, names in sorted(os.walk("src")):
+    for name in sorted(names):
+        path = os.path.join(here, name)
+        with open(path, "rb") as source:
+            found = sorted(set(named.findall(source.read())))
+        for version in sys.argv[1:]:
+            files = []
+            for kind, segment, symbol in found:
+                folder = "nonmatchings" if kind == b"ASM" else "data"
+                asm = "asm/%s/%s/%s/%s.s" % (version, folder, segment.decode(), symbol.decode())
+                if os.path.exists(asm):
+                    files.append(asm)
+            if files:
+                print("build/%s/%s.o: %s" % (version, path, " ".join(files)))
+endef
+$(shell mkdir -p build)
+$(file >build/asm-deps.py,$(ASM_DEPS))
+$(shell python3 -I build/asm-deps.py $(VERSIONS) >build/asm.deps)
+-include build/asm.deps
 
 # An object follows the text its source preprocesses to, not the time its headers were written: the .i is replaced only
 # when its bytes change, so a header edit that leaves a source's text alone (a comment, a part another version reads)
