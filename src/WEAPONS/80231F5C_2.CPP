@@ -39,7 +39,7 @@ extern void func_80228E60_eu(void *, s32);
 
 #else
 #endif
-static inline s32 can_fire(char *player) {
+static inline s32 can_fire(char *player, f32 *scale) {
     s32 ammo;
 
     if (((SharedPlayer *)(player))->views5E8.view11D8_147.unk11D8 > 0.0f) {
@@ -62,7 +62,7 @@ static inline s32 can_fire(char *player) {
 #else
             func_80239908_de(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), func_8022A5A0_de(&D_80145040, player),
 #endif
-                          D_800C2FCC_de);
+                          *scale);
         }
     }
     return ammo;
@@ -77,7 +77,7 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
     }
-    if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player)) {
+    if ((((SharedPlayer *)(player))->views5E8.view6AC_45.unk6AC & 0x4000) && can_fire(player, &D_800C2FCC_de)) {
         attack->triggered = 1;
         if (((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x2000) {
 
@@ -112,78 +112,70 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
 /* D_800C2FCC_de is resident shared data supplied by its retained ROM slice. */
 
 #ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
-extern f32 D_800C2FD0_de;
-extern u8 *D_800D30BC;
-extern void func_8022B984_de(void *);
-/* Runs a pending special action of a player: decides from the player's state (0x62E) and its flags whether
- * the action is blocked, handled by func_802301F4_de, or started; when started it plays the state 5 effect,
- * checks the state 3 resource through func_8022F55C_de and starts the default action (2, or 0xB when the
- * weapon state at 0x594 is 2). The request byte at 0xCB is cleared when the action was refused. */
-void func_802323A4_de(void *actor, void *attack) {
-    void *player = FIELD(void *, actor, 0x1D8);
-    s32 refused;
-    s32 started;
-    s32 result;
-    if (FIELD(s8, attack, 0xCB) == 0) {
-        return;
-    }
-    switch (FIELD(s16, player, 0x62E)) {
-    case 4:
-    case 0xE:
-    case 0xF:
-        refused = 0;
-        break;
-    case 0xA:
-        refused = (FIELD(u32, player, 0x6AC) & 0x4000) != 0 && FIELD(s16, player, 0x5F8) != 0;
-        break;
-    case 3:
-        refused = (FIELD(u32, player, 0x6AC) & 0x6000) == 0x6000 && FIELD(s16, player, 0x5F4) != 0 &&
-                  FIELD(s16, player, 0x5F6) == 0;
-        break;
-    default:
-        refused = func_802301F4_de(actor, attack);
-        break;
-    }
-    if (refused != 0) {
-        FIELD(s8, attack, 0xCB) = 0;
-        FIELD(s8, attack, 0x35) = -1;
-        result = 1;
-    } else {
-        if (FIELD(s16, player, 0x62E) == 5) {
-            func_8022B00C_de(player);
-            func_8025DE54_de(0x460, FIELD(CVector3, player, 0x8), (s32)((char *)player + 8), -1);
+/* 141/143 words; remaining: sched1 loads D_800C2FD0_de before D_800D30BC in the can_fire call: the
+   func_8025DE54_de(0x460, state->position, ...) call sets a3 a second time, so the a3 = v0 copy is not a
+   birthing insn here (the sibling func_802321C8_de sets a3 once and matches). */
+typedef struct HeldPlayerState {
+    u8 pad0[8];
+    CVector3 position;
+    u8 pad14[0x594 - 0x14];
+    s32 mode594;
+    u8 pad598[0x5F4 - 0x598];
+    s16 window5F4;
+    s16 window5F6;
+    s16 charge5F8;
+    u8 pad5FA[0x62E - 0x5FA];
+    s16 mode;
+    u8 pad630[0x6AC - 0x630];
+    s32 buttons;
+    u8 pad6B0[0x788 - 0x6B0];
+    s32 handled788;
+    s32 handled78C;
+} HeldPlayerState;
+
+void func_802323A4_de(Shared_Actor *actor, WeaponFireState *attack) {
+    HeldPlayerState *state;
+    s32 finished;
+    state = actor->entity;
+    if (attack->triggerMode != 0) {
+        if (state->mode == 4 || state->mode == 14 || state->mode == 15) {
+            goto no;
         }
-        if (FIELD(s16, player, 0x62E) == 3) {
-            if (0.0f < FIELD(f32, player, 0x11D8)) {
-                started = 0;
-            } else if (FIELD(s32, player, 0x1450) != 0 || D_801462D5 != 1) {
-                started = 1;
-            } else {
-                started = func_8022F55C_de(D_80102B00 + FIELD(s32, player, 0x5D4) * 400, 3);
-                if (started == 0) {
-                    func_8025DF34_de(0xD4D);
-                    if (FIELD(void *, player, 0x5DC) != 0) {
-                        func_8022A5A0_de(&D_80145040, player);
-                        func_80239908_de(&D_80145088, FIELD(void *, player, 0x5DC), D_800D30BC, started, D_800C2FD0_de);
-                    }
-                }
+        if (state->mode == 10) {
+            if (!(state->buttons & 0x4000)) goto no;
+            if (state->charge5F8 == 0) goto no;
+            goto yes;
+        } else if (state->mode == 3) {
+            if ((state->buttons & 0x6000) != 0x6000) goto no;
+            if (state->window5F4 == 0) goto no;
+            if (state->window5F6 != 0) goto yes;
+        no:
+            finished = 0;
+            goto done;
+        yes:
+            finished = 1;
+        done:;
+        } else {
+            finished = func_802301F4_de(actor, attack);
+        }
+        if (finished != 0) {
+            attack->triggerMode = 0;
+            attack->queuedAction = -1;
+        } else {
+            if (state->mode == 5) {
+                func_8022B00C_de(state);
+                func_8025DE54_de(0x460, state->position, &state->position, -1);
             }
-            if (started != 0 && FIELD(s32, player, 0x594) == 2) {
+            if (state->mode == 3 && can_fire((char *)state, &D_800C2FD0_de) != 0 && state->mode594 == 2) {
                 func_80214178_de(actor, attack, 0xB);
-                func_8022B984_de(player);
+                func_8022B984_de(state);
             } else {
                 func_80214178_de(actor, attack, 2);
             }
-        } else {
-            func_80214178_de(actor, attack, 2);
         }
-        result = 1;
+        state->handled788 = 1;
+        state->handled78C = 0;
     }
-    FIELD(s32, player, 0x788) = result;
-    FIELD(s32, player, 0x78C) = 0;
 }
 #else
 INCLUDE_ASM("span_1000", func_802323A4_de);
