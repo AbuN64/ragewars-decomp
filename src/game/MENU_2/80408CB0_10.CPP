@@ -2,7 +2,34 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-/* Drafted from the other version's body in its unit. */
+#include "TYPES.H"
+typedef struct { u8 pad0[0x14]; char **text; } PakTextEu;
+extern s32 D_80153774;
+extern u8 D_80152789;
+extern s32 func_80441FE8_de(void *);
+extern char D_800E2984_eu[], D_8014B49B[], D_800D2478[], D_8014B494[];
+/* Select the status text and right-align its nonblank characters (the us body with eu addresses; the eu symbol of the
+   pointer table is D_8014B49B, of the last status character D_800D2478, of the status characters D_8014B494). */
+s32 func_8040AB70_eu(PakTextEu *entry) {
+    s32 count = 8;
+    u8 *scan;
+    char *dst;
+    s32 i;
+
+    if (D_80153774 != 0) {
+        entry->text = (char **)D_800E2984_eu;
+        return 0;
+    }
+    entry->text = (char **)D_8014B49B;
+    scan = (u8 *)D_800D2478;
+    while (*scan-- == 0x20 && count != 0) count--;
+    dst = entry->text[D_80152789];
+    dst += func_80441FE8_de(entry) - 8;
+    for (i = 7; i >= 0; i--) dst[i] = 0x20;
+    dst += 8 - count;
+    for (i = 0; i < count; i++) *dst++ = D_8014B494[i];
+    return 0;
+}
 #else
 INCLUDE_ASM("ovl_80400000", func_8040AB70_eu);
 #endif
@@ -11,13 +38,9 @@ INCLUDE_ASM("ovl_80400000", func_8040AB70_eu);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 #include "TYPES.H"
-typedef struct { u8 pad0[0x14]; char **text; } PakTextEu;
-extern s32 D_80153774;
-extern u8 D_80152789;
 extern s8 D_8014D490;
 extern char *D_800E2994[], *D_800E29B4[];
 extern char *D_800E3234[], *D_800E3244[], *D_800E3294[], *D_800E32B4_eu[], *D_800E32C4_eu[];
-extern s32 func_80441FE8_de(void *);
 /* Pak status line: picks the 11-character status text for the state D_8014D490 in the current language and copies it into
    the entry's line; with D_80153774 set it only selects the heading table. */
 s32 func_8040AC68_eu(PakTextEu *entry) {
