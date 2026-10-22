@@ -20,6 +20,9 @@ ifeq ($(filter -j% --jobserver%,$(MAKEFLAGS)),)
 MAKEFLAGS += -j$(JOBS)
 endif
 endif
+ifeq ($(NON_MATCHING),1)
+.DEFAULT_GOAL := nm
+endif
 ifneq ($(filter default undefined,$(origin AS)),)
 AS := mips-linux-gnu-as
 endif
@@ -62,9 +65,9 @@ ROM0_us-rev1 := 0
 STAMPS := tools/n64link/.stamp $(TOOLCHAIN_gcc_2_7_2_sn64) $(TOOLCHAIN_gcc_2_8_1_sn64)
 
 # The first path word under build/ is the version: build/<version>/<source path>.o
-ver = $(firstword $(subst /, ,$1))
-src = $(patsubst $(call ver,$1)/%,%,$1)
-DEFINES = -D$(VMACRO_$(call ver,$*))
+ver = $(firstword $(filter-out nm nmraw,$(subst /, ,$1)))
+src = $(patsubst $(call ver,$1)/%,%,$(patsubst nmraw/%,%,$(patsubst nm/%,%,$1)))
+DEFINES = -D$(VMACRO_$(call ver,$*)) $(if $(filter nmraw/%,$*),-DNON_MATCHING)
 INCLUDES = -Iinclude -I$(dir $<)
 ASINC = -Iasm/$(call ver,$*)
 # Every version macro for the assembler, 1 for the version built and 0 for the others: library assembly keeps the
@@ -133,6 +136,54 @@ $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CFLAG
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/rnc/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/%.o): TC := gcc_2_7_2_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/%.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2 -fno-exceptions
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/%.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/lib_802BB630/%.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/lib_802BB630/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/lib_802BB630/%.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/MATH/80299368.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/MATH/80299368.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/game/MATH/80299368.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -fno-thread-jumps -fno-rerun-cse-after-loop
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200568_3.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_2.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_4.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_4.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/80200800_4.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/802022E0_2.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/802022E0_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libsn/802022E0_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libgcc/802C6A00_25.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/lib_802BB630/802BC380.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/lib_802BB630/802BC380.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/lib_802BB630/802BC380.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -ffast-math -fno-delayed-branch
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1B60.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C1880_2.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32
 # The size each object's .text has in the ROM: a compiler may pad the section past its last function, and a zero tail
 # past that size is cut from the section header before the object links.
 -include $(VERSIONS:%=versions/%/text_sizes.mk)
@@ -381,6 +432,108 @@ build/%/$(NAME).z64: build/%/$(NAME).bin roms/baserom.%.z64
 	$(Q){ head -c $(ROM0_$*) roms/baserom.$*.z64; cat $<; } > $@
 	$(Q)truncate -s $$(wc -c < roms/baserom.$*.z64) $@
 	$(Q)test "$$(sha1sum < $@ | cut -d' ' -f1)" = $(SHA1_$*) || { echo "$@: SHA-1 is not $(SHA1_$*)" >&2; exit 1; }
+
+# make NON_MATCHING=1 (or make nm): every draft compiles in (-DNON_MATCHING) and one ROM per version
+# links under build/nm/<version>/. The drafts compile into a second tree build/nmraw/<version>/ with the
+# matching build's rules and flags. A unit whose NON_MATCHING object keeps the unit's size (NM_PICK: the same
+# sections, a text no longer than the ROM's, zero-filled to it) takes the matching object's place in the link; any
+# other unit keeps its matching object. The ROM so keeps its size and every unit's address, and matches no SHA-1, so
+# nothing here checks one. build/nm/<version>/report.txt names the units whose draft is in (and how many symbols
+# move in them) and the ones left out (and the section that grew).
+define NM_PICK
+import os, shutil, struct, subprocess, sys
+def read(path):
+    d = open(path, "rb").read()
+    o = struct.unpack_from(">I", d, 32)[0]
+    e, c, x = struct.unpack_from(">HHH", d, 46)
+    rows = [struct.unpack_from(">10I", d, o + k * e) for k in range(c)]
+    names = d[rows[x][4]:rows[x][4] + rows[x][5]]
+    name = lambda r: names[r[0]:].split(b"\0")[0].decode()
+    skip = (".pdr", ".comment", ".mdebug", ".reginfo", ".gnu.attributes")
+    sizes = {name(r): r[5] for r in rows if r[1] in (1, 8) and name(r) not in skip}
+    data = {name(r): d[r[4]:r[4] + r[5]] for r in rows if r[1] == 1 and name(r) not in skip}
+    syms, table = set(), {}
+    for k, r in enumerate(rows):
+        if r[1] == 2:
+            strs = d[rows[r[6]][4]:rows[r[6]][4] + rows[r[6]][5]]
+            for j in range(r[5] // 16):
+                n, v, z, i, _, sh = struct.unpack_from(">IIIBBH", d, r[4] + 16 * j)
+                s = strs[n:].split(b"\0")[0].decode()
+                table[(k, j)] = s
+                if 0 < sh < 0xFF00 and i & 15 not in (3, 4) and s and not s.startswith(".L"):
+                    syms.add((s, name(rows[sh]), v))
+    relocs = set()
+    for r in rows:
+        if r[1] == 9 and name(rows[r[7]]) not in skip:
+            for j in range(r[5] // 8):
+                off, info = struct.unpack_from(">II", d, r[4] + 8 * j)
+                relocs.add((name(rows[r[7]]), off, info & 255, table.get((r[6], info >> 8), "")))
+    return sizes, syms, data, relocs
+raw, matching, out, objcopy = sys.argv[1:5]
+a, b = read(raw), read(matching)
+rest = lambda sizes: {k: v for k, v in sizes.items() if k != ".text"}
+if a == b:
+    verdict, pick = "same", matching
+elif a[:2] == b[:2]:
+    verdict, pick = "draft", raw
+elif rest(a[0]) == rest(b[0]) and a[0].get(".text", 0) <= b[0].get(".text", 0):
+    # a shorter text keeps the unit's size when zeros fill the rest: the next unit starts where it did
+    subprocess.run([objcopy, "-O", "binary", "-j", ".text", raw, out + ".text"], check=True)
+    text = open(out + ".text", "rb").read()
+    open(out + ".text", "wb").write(text + bytes(b[0][".text"] - len(text)))
+    subprocess.run([objcopy, "--update-section", ".text=" + out + ".text", raw, out], check=True)
+    os.remove(out + ".text")
+    moved = len({sym[0] for sym in a[1] ^ b[1]})
+    verdict, pick = "draft-padded %d bytes, %d symbols move" % (b[0][".text"] - a[0][".text"], moved), None
+else:
+    grown = [k for k in sorted(set(a[0]) | set(b[0])) if a[0].get(k, 0) != b[0].get(k, 0)]
+    why = " ".join("%s:%d->%d" % (k, b[0].get(k, 0), a[0].get(k, 0)) for k in grown)
+    verdict, pick = "left-out " + (why or "symbols moved"), matching
+if pick:
+    shutil.copyfile(pick, out)
+open(out + ".pick", "w").write("%s %s\n" % (verdict, out))
+endef
+export NM_PICK
+.PHONY: nm
+nm: $(VERSIONS:%=build/nm/%/$(NAME).z64)
+$(foreach v,$(VERSIONS),$(eval OBJS_nm_$(v) := $(patsubst build/$(v)/%,build/nm/$(v)/%,$(OBJS_$(v)))))
+-include $(foreach v,$(VERSIONS),$(patsubst build/$(v)/%,build/nmraw/$(v)/%,$(OBJS_$(v):.o=.d)))
+# A raw object follows the extracted files its matching twin names, and takes the same text sizes.
+$(shell sed -E 's@^build/@build/nmraw/@' build/asm.deps > build/asm-nmraw.deps)
+-include build/asm-nmraw.deps
+$(shell cat $(VERSIONS:%=versions/%/text_sizes.mk) | sed -E 's@^build/@build/nmraw/@' > build/text_sizes_nmraw.mk)
+-include build/text_sizes_nmraw.mk
+build/nm/%.o: build/nmraw/%.o build/%.o
+	$(Q)mkdir -p $(@D)
+	$(Q)python3 -I -c "$$NM_PICK" $^ $@ $(OBJCOPY)
+# An assembly or binary piece is the matching build's.
+build/nm/%.s.o: build/%.s.o
+	$(Q)mkdir -p $(@D)
+	$(Q)cp -p $< $@
+build/nm/%.bin.o: build/%.bin.o
+	$(Q)mkdir -p $(@D)
+	$(Q)cp -p $< $@
+# Static pattern rules: build/%/link.ld would also match build/nm/<version>/link.ld and write an empty script.
+$(VERSIONS:%=build/nm/%/link.ld): build/nm/%/link.ld: build/%/link.ld
+	$(Q)mkdir -p $(@D)
+	$(Q)cp $< $@
+$(VERSIONS:%=build/nm/%/undefined_syms.ld): build/nm/%/undefined_syms.ld: build/%/undefined_syms.ld
+	$(Q)mkdir -p $(@D)
+	$(Q)cp $< $@
+# A draft may define a name that this version's ROM keeps as data, or the other way round: the first definition in link
+# order wins and link.err lists every such name; any other link error stops the build.
+$(VERSIONS:%=build/nm/%/$(NAME).elf): build/nm/%/$(NAME).elf: $$(OBJS_nm_$$*) build/nm/%/link.ld build/nm/%/undefined_syms.ld
+	$(Q)cd build/nm/$* && { $(LD) -T link.ld -o $(NAME).elf 2> link.err \
+	|| $(LD) -T link.ld --allow-multiple-definition -o $(NAME).elf 2>> link.err; } \
+	|| { cat build/nm/$*/link.err >&2; exit 1; }
+$(VERSIONS:%=build/nm/%/$(NAME).bin): build/nm/%/$(NAME).bin: build/nm/%/$(NAME).elf
+	$(Q)$(OBJCOPY) -O binary --gap-fill 0 $< $@
+$(VERSIONS:%=build/nm/%/$(NAME).z64): build/nm/%/$(NAME).z64: build/nm/%/$(NAME).bin roms/baserom.%.z64
+	$(Q){ head -c $(ROM0_$*) roms/baserom.$*.z64; cat $<; } > $@
+	$(Q)truncate -s $$(wc -c < roms/baserom.$*.z64) $@
+	$(Q)cat $(addsuffix .pick,$(OBJS_nm_$*)) 2>/dev/null | grep -v '^same ' | sort > build/nm/$*/report.txt; \
+	echo "NM ROM $*: $$(grep -c '^draft' build/nm/$*/report.txt) unit(s) with drafts in," \
+	"$$(grep -c '^left-out' build/nm/$*/report.txt) left out (build/nm/$*/report.txt)"
 
 tools/n64link/.stamp:
 	$(Q)mkdir -p tools/n64link && curl -fsSL https://github.com/AbuN64/mas-n64/releases/download/v0.2.0/n64link-v0.2.0-linux-x86_64.tar.gz -o tools/n64link.tar.gz && echo '061d7bc69f21228c7029f4f530cd980bab3a35749751a43f2823d03d95be4ef7  tools/n64link.tar.gz' | sha256sum -c - >/dev/null && tar -xzf tools/n64link.tar.gz -C tools/n64link --strip-components=1 n64link-v0.2.0-linux-x86_64/n64link && rm -f tools/n64link.tar.gz && cd tools/n64link && printf '%s\n' '583e544840d04123fa7e26c7416316ffe410139351e07cd3395d4bd5ec609c3c  n64link' | sha256sum -c - >/dev/null && touch .stamp
