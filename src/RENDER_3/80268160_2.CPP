@@ -6,6 +6,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/OBJRECAT5F14.H"
+#include "COMMON/MENU_MATCH_GLOBALS.H"
 
 /* Spawns an effect of the given kind for an object through func_802627A0_de at the object's position with its velocity (none when the object is inactive) and a uniform scale; kind 0x40C instead starts at the camera with no velocity and, once spawned, follows the camera's target through func_802833D0_de, and kinds 0x474 to 0x477 attach to the host's partner effect for active flagged hosts, otherwise the effect is started through func_80262C88_de. */
 
@@ -92,10 +93,6 @@ s32 func_802686EC_de(s32 arg0, Input80216D3C *arg1, s32 arg2, Triple arg3, Extra
     return func_8028FFD0_de((s32)&D_80131600, 0, arg6.id, zero, arg1->vec, 0, 0.0f);
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
-
 typedef struct SoundDefinition { s32 kind; } SoundDefinition;
 typedef struct SoundActor {
     char pad0[0x18];
@@ -106,20 +103,17 @@ typedef struct SoundSource {
     char pad1[0xCF];
     s32 owner;
 } SoundSource;
-extern s32 D_80146894;
-extern u32 D_801462C8;
 extern f32 D_800C4478_de;
 extern f32 D_800C447C;
-extern f32 D_800C9570;
 extern s32 func_8024E968_de(void *);
 extern s32 func_8025DEC0_de(s32, CVector3, s32, s32, f32);
 
-void func_80268768_de(SoundActor *actor, SoundSource *source, s32 unused,
-                     CVector3 position, s16 sound, s32 view) {
+void Render_PlayTeamEffect(SoundActor *actor, SoundSource *source, s32 unused,
+                     CVector3 position, ParamsRecAt4 params) {
     f32 gain = D_800C4478_de;
     s32 owner = -1;
     u8 kind;
-    if (D_80146894 == 0 && func_8024E968_de(actor) == view) {
+    if (D_80145088.status[7] == 0 && func_8024E968_de(actor) == params.team) {
         kind = source->kind;
         switch (kind) {
         case 0:
@@ -127,18 +121,15 @@ void func_80268768_de(SoundActor *actor, SoundSource *source, s32 unused,
             break;
         case 1:
             if (actor->definition->kind == kind) {
-                if (D_801462C8 & 0x40) {
+                if (D_80145088.settings.flags & 0x40) {
                     gain = D_800C447C;
                 }
-                if (D_801462C8 & 0x20) {
-                    gain = D_800C9570;
+                if (D_80145088.settings.flags & 0x20) {
+                    gain = D_800C9570[0];
                 }
             }
             break;
         }
-        func_8025DEC0_de(sound, position, 0, owner, gain);
+        func_8025DEC0_de(params.value, position, 0, owner, gain);
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80268768_de);
-#endif
