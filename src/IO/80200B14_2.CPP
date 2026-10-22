@@ -53,7 +53,6 @@ void func_80200D18_de(s32 address, const u8 *source, u32 length)
 
 }
 
-#ifdef NON_MATCHING
 #include "IO/EXTERNS.H"
 #include "COMMON/EXTERNS_18.H"
 extern s32 D_800C8140_de;
@@ -72,19 +71,19 @@ void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
         remaining--;
     }
     while (remaining >= 4) {
-        if (remaining < 16 || ((u32)source & 15) != 0 || dmaResult == -1) {
-            func_80200568_de(address, ((u32)source[0] << 24) |
-                ((u32)source[1] << 16) | ((u32)source[2] << 8) | source[3]);
-            address += 4;
-            source += 4;
-            remaining -= 4;
-        } else {
+        if (remaining >= 16 && ((((u32)source & 15) == 0) & (dmaResult != -1))) {
             dmaResult = func_802B8CF0_de(&D_800F2CE0, 1, 1, address,
                 source, remaining, &D_800F2CC0);
             if (dmaResult != -1) {
                 func_802BB2A0_de(&D_800F2CC0, 0, 1);
                 remaining = 0;
             }
+        } else {
+            func_80200568_de(address, ((u32)source[0] << 24) |
+                ((u32)source[1] << 16) | ((u32)source[2] << 8) | source[3]);
+            address += 4;
+            source += 4;
+            remaining -= 4;
         }
     }
     while (remaining != 0) {
@@ -92,6 +91,3 @@ void func_80200E04_de(u32 address, u8 *source, u32 remaining) {
         remaining--;
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80200E04_de);
-#endif
