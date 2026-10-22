@@ -7,17 +7,19 @@
 #include "SDK/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
 
-#if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_802B49D0_eu);
-#endif
-
 #if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_802B4730_de);
+#define ENVPULL_NAME func_802B4730_de
+#define ENVPULL_FILE D_800C7600
+extern char D_800C7600[];
+#elif defined(VERSION_EU)
+#define ENVPULL_NAME func_802B49D0_eu
+#define ENVPULL_FILE D_800CC850
+#else
+#define ENVPULL_NAME func_802B4A10_eu_x
+#define ENVPULL_FILE D_800CC850
 #endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_EU))
 #ifdef NON_MATCHING
-/* 99/339 words; remaining: same size as the original, instruction order and register allocation differ */
+/* 94/339 words aligned (same size); remaining: register allocation (127 hoisted into a saved reg, env/count/offset regs permuted) and the jump table stays in rodata */
 #include "TYPES.H"
 #include "acmd.h"
 
@@ -57,7 +59,7 @@ extern void __freeParam(void *);
 extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);
 extern f32 func_802B5288_de(f32, s32, s32, s32);
 
-Acmd *func_802B4A10_eu_x(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands) {
+Acmd *ENVPULL_NAME(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands) {
     s16 input, output;
     DraftAudioEvent *event;
     DraftEnv *parent;
@@ -69,8 +71,8 @@ Acmd *func_802B4A10_eu_x(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset
         nextOffset = env->ctrlList->delta;
         elapsed = nextOffset - previous;
         if (count < elapsed) break;
-        if (elapsed < 0) func_802BAC50_de(D_800CC850, D_800C7604, 0x67);
-        if (elapsed > 160) func_802BAC50_de(D_800CC850, D_800C7604, 0x68);
+        if (elapsed < 0) func_802BAC50_de(ENVPULL_FILE, D_800C7604, 0x67);
+        if (elapsed > 160) func_802BAC50_de(ENVPULL_FILE, D_800C7604, 0x68);
         switch (env->ctrlList->type) {
         case 0:
             event = env->ctrlList;
@@ -87,7 +89,7 @@ Acmd *func_802B4A10_eu_x(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset
                 env->cvolR = (s32)func_802B5288_de(env->cvolR, env->delta, env->rratm, env->rratl);
             } else {
                 env->ltgt = (env->volume * D_800D4210[env->pan]) >> 15;
-                env->rtgt = (env->volume * D_800D4210[127 - env->pan]) >> 15;
+                env->rtgt = (env->volume * D_800D4210[128 - env->pan - 1]) >> 15;
                 env->cvolL = env->ltgt;
                 env->delta = env->segEnd;
                 env->cvolR = env->rtgt;
@@ -103,7 +105,7 @@ Acmd *func_802B4A10_eu_x(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset
             event = env->ctrlList;
             if (event->type == 16) {
                 env->dryamt = D_800D4210[event->data.word];
-                env->wetamt = D_800D4210[127 - event->data.word];
+                env->wetamt = D_800D4210[128 - event->data.word - 1];
             }
             env->first = 1;
             break;
@@ -119,10 +121,10 @@ Acmd *func_802B4A10_eu_x(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset
             env->volume = (event->data.start.volume * event->data.start.volume) >> 15;
             env->pan = event->data.start.pan;
             env->dryamt = D_800D4210[event->data.start.fx];
-            env->wetamt = D_800D4210[127 - event->data.start.fx];
+            env->wetamt = D_800D4210[128 - event->data.start.fx - 1];
             if (event->data.start.duration == 0) {
                 env->cvolL = (env->volume * D_800D4210[env->pan]) >> 15;
-                env->cvolR = (env->volume * D_800D4210[127 - env->pan]) >> 15;
+                env->cvolR = (env->volume * D_800D4210[128 - env->pan - 1]) >> 15;
             } else { env->cvolL = 1; env->cvolR = 1; }
             parent = parent->source;
             if (parent) parent->setParam(parent, 7, event->data.start.pitch);
@@ -155,6 +157,11 @@ remove:
     if (env->segEnd < env->delta) env->delta = env->segEnd;
     return commands;
 }
+#else
+#if defined(VERSION_DE)
+INCLUDE_ASM("span_1000", func_802B4730_de);
+#elif defined(VERSION_EU)
+INCLUDE_ASM("span_1000", func_802B49D0_eu);
 #else
 INCLUDE_ASM("span_1000", func_802B4A10_eu_x);
 #endif
