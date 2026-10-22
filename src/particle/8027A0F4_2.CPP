@@ -65,7 +65,7 @@ void func_8027ABF4_de(AccelSteeringObj *arg0) {
     f32 accel, length, limit;
 
     if (arg0->target != 0 && arg0->distance > 1.0f) {
-        func_8027A948_de(arg0, &arg0->target->point);
+        Particle_SteerToward(arg0, &arg0->target->point);
         return;
     }
     accel = func_802B2350(arg0->link->params->accel);

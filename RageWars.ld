@@ -11288,7 +11288,7 @@ SECTIONS
         src/RENDER_3/800C9C30.CPP.o(.rodata .rdata);
         src/particle/800C9C3C.CPP.o(.rodata .rdata);
         src/particle/800C9C68.CPP.o(.rodata .rdata);
-        src/particle/800C9C98.CPP.o(.rodata .rdata);
+        src/particle/8027A0F4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8027A0F4_2.CPP.o */;
         src/particle/8027A0F4_2.CPP.o(.rodata .rdata);
         src/particle/800C9CBC.CPP.o(.rodata .rdata);
@@ -13039,7 +13039,7 @@ SECTIONS
         src/RENDER_3/800C9C30.CPP.o(.rodata .rdata);
         src/particle/800C9C3C.CPP.o(.rodata .rdata);
         src/particle/800C9C68.CPP.o(.rodata .rdata);
-        src/particle/800C9C98.CPP.o(.rodata .rdata);
+        src/particle/8027A0F4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8027A0F4_2.CPP.o */;
         src/particle/8027A0F4_2.CPP.o(.rodata .rdata);
         src/particle/800C9CBC.CPP.o(.rodata .rdata);
@@ -14741,7 +14741,7 @@ SECTIONS
         src/RENDER_3/800C9C30.CPP.o(.rodata .rdata);
         src/particle/800C9C3C.CPP.o(.rodata .rdata);
         src/particle/800C9C68.CPP.o(.rodata .rdata);
-        src/particle/800C9C98.CPP.o(.rodata .rdata);
+        src/particle/8027A0F4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8027A0F4_2.CPP.o */;
         src/particle/8027A0F4_2.CPP.o(.rodata .rdata);
         src/particle/800C9CBC.CPP.o(.rodata .rdata);
@@ -16449,7 +16449,7 @@ SECTIONS
         src/RENDER_3/800C9C30.CPP.o(.rodata .rdata);
         src/particle/800C9C3C.CPP.o(.rodata .rdata);
         src/particle/800C9C68.CPP.o(.rodata .rdata);
-        src/particle/800C9C98.CPP.o(.rodata .rdata);
+        src/particle/8027A0F4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8027A0F4_2.CPP.o */;
         src/particle/8027A0F4_2.CPP.o(.rodata .rdata);
         src/particle/800C9CBC.CPP.o(.rodata .rdata);
@@ -18194,7 +18194,7 @@ SECTIONS
         src/RENDER_3/800C9C30.CPP.o(.rodata .rdata);
         src/particle/800C9C3C.CPP.o(.rodata .rdata);
         src/particle/800C9C68.CPP.o(.rodata .rdata);
-        src/particle/800C9C98.CPP.o(.rodata .rdata);
+        src/particle/8027A0F4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/particle/8027A0F4_2.CPP.o */;
         src/particle/8027A0F4_2.CPP.o(.rodata .rdata);
         src/particle/800C9CBC.CPP.o(.rodata .rdata);

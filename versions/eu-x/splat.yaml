@@ -3899,7 +3899,7 @@ segments:
       - [0xC5A30, rodata, data_800C/D_80279DD0_CA830]
       - [0xC5A3C, rodata, data_800C/D_8027A084_CA83C]
       - [0xC5A68, rodata, data_800C/D_8027A4D0_CA868]
-      - [0xC5A98, rodata, data_800C/D_8027A948_CA898]
+      - [0xC5A98, rodata, data_800C/literals_Particle_SteerToward]
       - [0xC5AB8, rodata, data_800C/literals_func_8027ABF4_de]
       - [0xC5ABC, rodata, data_800C/D_8027AD4C_CA8BC]
       - [0xC5AE8, rodata, data_800C/literals_func_8027B720_de]

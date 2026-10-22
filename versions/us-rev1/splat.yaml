@@ -4004,7 +4004,7 @@ segments:
       - [0xCA830, rodata, data_800C/D_blob_ed8a5e0d233e5186ece0]
       - [0xCA83C, rodata, data_800C/D_auto_src_rw_pool_8027A084_CA83C_us_rev1]
       - [0xCA868, rodata, data_800C/D_auto_src_rw_pool_8027A4D0_CA868_us_rev1]
-      - [0xCA898, rodata, data_800C/D_auto_src_rw_pool_8027A948_CA898_us_rev1]
+      - [0xCA898, rodata, data_800C/literals_Particle_SteerToward]
       - [0xCA8B8, rodata, data_800C/literals_func_8027ABF4_de]
       - [0xCA8BC, rodata, data_800C/D_auto_src_rw_pool_8027AD4C_CA8BC_us_rev1]
       - [0xCA8E8, rodata, data_800C/literals_func_8027B720_de]
