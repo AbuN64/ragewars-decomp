@@ -6,12 +6,6 @@ extern void func_8042A990_de(void);
 extern void func_8042AFE0_de(void);
 extern void func_8042B080_de(void);
 
-#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_80429A24_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 /* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
    items of the window with their alpha and visibility, resets the selection and the counters at
@@ -42,6 +36,59 @@ INCLUDE_ASM("ovl_80400000", func_80429A24_de);
 
 
 
+#if defined(VERSION_DE)
+#define ID_2FE 0x2FA
+#define ID_2FF 0x2FC
+#define ID_300 0x2FB
+#define ID_301 0x2FD
+#define ID_303 0x2FF
+#define ID_306 0x302
+#define ID_308 0x304
+#define ID_309 0x305
+#define ID_30A 0x307
+#define ID_30B 0x308
+#define ID_30C 0x306
+#define ID_30D 0x309
+#define ID_30E 0x30A
+#define ID_30F 0x30B
+#define ID_310 0x30C
+#define ID_35D 0x359
+#elif defined(VERSION_EU_X)
+#define ID_2FE 0x303
+#define ID_2FF 0x304
+#define ID_300 0x238
+#define ID_301 0x305
+#define ID_303 0x307
+#define ID_306 0x30A
+#define ID_308 0x30C
+#define ID_309 0x30D
+#define ID_30A 0x30F
+#define ID_30B 0x310
+#define ID_30C 0x30E
+#define ID_30D 0x311
+#define ID_30E 0x313
+#define ID_30F 0x312
+#define ID_310 0x314
+#define ID_35D 0x361
+#else
+#define ID_2FE 0x2FE
+#define ID_2FF 0x2FF
+#define ID_300 0x300
+#define ID_301 0x301
+#define ID_303 0x303
+#define ID_306 0x306
+#define ID_308 0x308
+#define ID_309 0x309
+#define ID_30A 0x30A
+#define ID_30B 0x30B
+#define ID_30C 0x30C
+#define ID_30D 0x30D
+#define ID_30E 0x30E
+#define ID_30F 0x30F
+#define ID_310 0x310
+#define ID_35D 0x35D
+#endif
+
 s32 func_80429A24_de(void *window) {
     SetupModelVector scale;
     SetupModelVector position;
@@ -58,40 +105,40 @@ s32 func_80429A24_de(void *window) {
     D_800E4F60 = func_8025305C_de(sizeof(SetupScreen));
     D_800E4F60->window = window;
     D_800E4F60->list = func_8041B610_de(window, 4);
-    func_8041B6E8_de(window, 0, 0x2FF);
-    func_8041B6E8_de(window, 1, 0x2FF);
-    func_8041B6E8_de(window, 2, 0x2FF);
-    func_8041B6E8_de(window, 3, 0x2FF);
+    func_8041B6E8_de(window, 0, ID_2FF);
+    func_8041B6E8_de(window, 1, ID_2FF);
+    func_8041B6E8_de(window, 2, ID_2FF);
+    func_8041B6E8_de(window, 3, ID_2FF);
     D_800E4F60->unk3DC = 1;
     D_800E4F60->unk45C = 0;
     D_800E4F60->unk3E0 = 4;
 
-    item1 = func_8040EC30_de(window, 0x306);
+    item1 = func_8040EC30_de(window, ID_306);
     D_800E4F60->left = item1;
     item1->x -= item1->width;
     D_800E4F60->leftCount = D_800E4F60->left->width / 4;
     x = D_800E4F60->left->width - D_800E4F60->leftCount * 4;
     D_800E4F60->left->x += x;
 
-    item2 = func_8040EC30_de(window, 0x30F);
+    item2 = func_8040EC30_de(window, ID_30F);
     D_800E4F60->right = item2;
     item2->x += item2->width;
     D_800E4F60->rightCount = D_800E4F60->right->width / 4;
     x = D_800E4F60->right->width - D_800E4F60->rightCount * 4;
     D_800E4F60->right->x -= x;
 
-    opacityItem = func_8040EC30_de(window, 0x30A);
+    opacityItem = func_8040EC30_de(window, ID_30A);
     opacityItem->alpha = 0x6E;
-    item3 = func_8040EC30_de(window, 0x35D);
+    item3 = func_8040EC30_de(window, ID_35D);
     D_800E4F60->unk448 = item3;
     item3->alpha = 0x41;
     func_8040E8D8_de(D_800E4F60->unk448, 0);
-    D_800E4F60->text3E4 = func_80419E54_de(0x303, 0x6E);
-    item4 = func_8040EC30_de(window, 0x301);
+    D_800E4F60->text3E4 = func_80419E54_de(ID_303, 0x6E);
+    item4 = func_8040EC30_de(window, ID_301);
     D_800E4F60->unk3E8 = item4;
     func_8040E8D8_de(item4, 0);
-    D_800E4F60->label = func_8040EC30_de(window, 0x30E);
-    D_800E4F60->unk3F0 = func_8040EC30_de(window, 0x310);
+    D_800E4F60->label = func_8040EC30_de(window, ID_30E);
+    D_800E4F60->unk3F0 = func_8040EC30_de(window, ID_310);
     func_8042B080_de();
     D_800E4F60->selection = 0;
     D_800E4F60->category = 0;
@@ -99,23 +146,23 @@ s32 func_80429A24_de(void *window) {
     func_8042AFE0_de();
     D_80154020.ready = 0;
     D_80154020.value = -1;
-    D_800E4F60->unk454 = func_8040EC30_de(window, 0x308);
-    opacityItem = func_8040EC30_de(window, 0x309);
+    D_800E4F60->unk454 = func_8040EC30_de(window, ID_308);
+    opacityItem = func_8040EC30_de(window, ID_309);
     opacityItem->alpha = 0x6E;
     D_800E4F60->unk46C = 0;
-    item5 = func_8040EC30_de(window, 0x30B);
+    item5 = func_8040EC30_de(window, ID_30B);
     D_800E4F60->unk440 = item5;
     item5->alpha = 0x8C;
     func_8040E8D8_de(D_800E4F60->unk440, 1);
-    item6 = func_8040EC30_de(window, 0x30D);
+    item6 = func_8040EC30_de(window, ID_30D);
     D_800E4F60->unk444 = item6;
     item6->alpha = 0x8C;
     func_8040E8D8_de(D_800E4F60->unk444, 0);
-    item7 = func_8040EC30_de(window, 0x30C);
+    item7 = func_8040EC30_de(window, ID_30C);
     D_800E4F60->unk44C = item7;
     item7->alpha = 0xFF;
-    D_800E4F60->unk450 = func_8040EC30_de(window, 0x2FE);
-    item8 = func_8040EC30_de(window, 0x300);
+    D_800E4F60->unk450 = func_8040EC30_de(window, ID_2FE);
+    item8 = func_8040EC30_de(window, ID_300);
     D_800E4F60->unk458 = item8;
     func_8040E8D8_de(item8, 1);
     func_802A2394_de();
@@ -183,4 +230,4 @@ s32 func_80429A24_de(void *window) {
     func_80422170_de();
     return 0;
 }
-#endif
+
