@@ -95,7 +95,6 @@ f32 func_8024E420_de(void *arg0) {
     return 0.0f;
 }
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON.H"
 
@@ -135,29 +134,25 @@ struct MeasureObject {
 
 f32 Sound_GetActorReach(MeasureObject *object) {
     MeasureDefinition *definition;
-    for (;;) {
-        definition = object->definition;
-        switch (definition->kind) {
-        case 4:
-        case 1:
-            return definition->value2C;
-        case 5:
-            return definition->value18;
-        case 11:
-            if (object->kind == 1 && (object->flags & 0x300000) != 0 &&
-                object->owner->redirect != 0) {
-                object = object->owner->redirect;
-                continue;
-            }
-            return object->definition->valueF0;
-        default:
-            if (object->kind != 2) {
-                return 0.0f;
-            }
+top:
+    definition = object->definition;
+    switch (definition->kind) {
+    case 11:
+        if (object->kind == 1 && (object->flags & 0x300000) != 0 &&
+            object->owner->redirect != 0) {
+            object = object->owner->redirect;
+            goto top;
+        }
+        return object->definition->valueF0;
+    case 4:
+    case 1:
+        return definition->value2C;
+    case 5:
+        return definition->value18;
+    default:
+        if (object->kind == 2) {
             return func_802B2350(object->model->resource->packedValue);
         }
+        return 0.0f;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Sound_GetActorReach);
-#endif
