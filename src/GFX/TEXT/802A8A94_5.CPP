@@ -189,32 +189,40 @@ s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
 }
 #endif
 
-#ifdef NON_MATCHING
 #include "GFX/TEXT/802A8A94_6.H"
 extern u8 D_801470C0_de[0x90];
 extern void *func_802BD3A0_de(void *, const void *, int);
+typedef struct ResourceView {
+    u8 *data;
+    u8 type;
+} ResourceView;
 void func_802AAD14_de(void) {
     Table802AB8DC **handle;
     Table802AB8DC *table;
     Entry802AB8DC *entry;
+    ResourceView view;
+    u8 entryTag;
+    s32 remainder;
+    void *result;
     void *base;
-    u8 *data;
     D_800D2F90 = 0;
     handle = Render_StartWorldEffect(&D_8011FE88, 2, 0, 1);
     if (handle != 0) {
         table = *handle;
+        view.data = 0;
         entry = &table->entries[0];
-        data = 0;
+        remainder = 0 % table->count;
+        entry += remainder;
         base = table;
-        data = base + entry->offset;
-        if (data != 0) {
-            data += 0x10;
+        result = base + entry->offset;
+        entryTag = entry->pad4[0];
+        view.type = entryTag;
+        view.data = result;
+        if (view.data != 0) {
+            view.data += 0x10;
         }
-        func_802BD3A0_de(D_801470C0_de, data, 0x90);
+        func_802BD3A0_de(D_801470C0_de, view.data, 0x90);
         func_80253754_de(0, handle);
         D_800D2F90 = D_801470C0_de;
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_802AAD14_de);
-#endif
