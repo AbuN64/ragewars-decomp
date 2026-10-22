@@ -57,6 +57,7 @@ extern s32 func_8022A5A0_de(char *, s32);
 typedef struct SpinnerSetupMenu { char pad0[0xC]; char *object; char pad10[0xC]; s32 id; } SpinnerSetupMenu;
 extern char D_8014641C_us_rev1[];
 extern char *D_800D3C44;
+/* 153/161 words; remaining: scheduling of the final li/subu/sll before the two result stores (same instructions otherwise) */
 int func_80446330_us_rev1(void *arg0) {
     SpinnerSetupMenu *menu = arg0;
     s32 index;
@@ -65,58 +66,72 @@ int func_80446330_us_rev1(void *arg0) {
     s32 trailing;
     s32 remaining;
     s32 i;
-    char *src;
-    char *ref;
+    u8 *src;
+    u8 *ref;
+    u8 *p;
     char *dst;
-    u32 *flags;
     u8 a;
-    u8 b;
+    s32 b;
 
     index = func_8022A5A0_de(D_80145040, menu->id);
-    selected = (index >= 0 && index < 4) ? index : 0;
-    for (k = 0; k < 4; k++) {
-        flags = (u32 *)(menu->object + 0x30 + k * 0x28);
-        if (k == selected) {
-            *flags |= 0x1800000;
-        } else {
-            *flags &= 0xFE7FFFFF;
-        }
+    switch (index) {
+        default:
+        case 0:
+            *(u32 *)(menu->object + 0x30) |= 0x1800000;
+            *(u32 *)(menu->object + 0x58) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0x80) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0xA8) &= 0xFE7FFFFF;
+            break;
+        case 1:
+            *(u32 *)(menu->object + 0x58) |= 0x1800000;
+            *(u32 *)(menu->object + 0x30) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0x80) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0xA8) &= 0xFE7FFFFF;
+            break;
+        case 2:
+            *(u32 *)(menu->object + 0x80) |= 0x1800000;
+            *(u32 *)(menu->object + 0x30) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0x58) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0xA8) &= 0xFE7FFFFF;
+            break;
+        case 3:
+            *(u32 *)(menu->object + 0xA8) |= 0x1800000;
+            *(u32 *)(menu->object + 0x30) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0x58) &= 0xFE7FFFFF;
+            *(u32 *)(menu->object + 0x80) &= 0xFE7FFFFF;
+            break;
     }
     D_800E20A4_de[index].timer = 0;
     dst = D_800E20AC + index * 24;
-    src = D_8014641C_us_rev1 + index * 150;
-    trailing = 0;
+    src = (u8 *)D_8014641C_us_rev1 + index * 150;
     i = 8;
-    do {
+    trailing = 0;
+    while (i > 0) {
         i--;
         if (src[i] != 0x20) {
             break;
         }
         trailing++;
-    } while (i > 0);
-    ref = D_800D3C44;
+    }
+    p = src;
+    ref = (u8 *)D_800D3C44;
     i = 6;
-    {
-        char *p = src;
-        do {
-            b = *p++;
-            a = *ref++;
-            i--;
-            if (b != a || b == 0) {
-                break;
-            }
-        } while (i != 0);
-        if (b == a) {
-            trailing = 8;
+    do {
+        b = *p++;
+        a = *ref++;
+        i--;
+        if ((u8)b != a || (u8)b == 0) {
+            break;
         }
+    } while (i == 0);
+    if (b == a) {
+        trailing = 8;
     }
     for (i = 0; i < 8 - trailing; i++) {
         *dst++ = *src++;
     }
     *dst = 0;
-    D_800E63C0[index].value = 8 - trailing;
-    D_800E20A4_de[index].max = 8 - trailing;
-    return 8 - trailing;
+    return D_800E20A4_de[index].max = D_800E63C0[index].value = 8 - trailing;
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_80446330_us_rev1);
