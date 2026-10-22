@@ -1,5 +1,10 @@
 
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
+#if defined(VERSION_EU)
+#define func_8041CEB0_us_rev1 func_8041D280_eu
+#elif defined(VERSION_EU_X)
+#define func_8041CEB0_us_rev1 func_8041D280_eu_x
+#endif
 /* Builds the player-selection menu block at 0x800E3590 for one menu tree: it allocates the block
  * with a 528-byte window request, remembers the tree and the pool func_8041B610_de returns for it,
  * arms the tree's four option groups with id 513, hands the pool back to func_8041B968_de, and

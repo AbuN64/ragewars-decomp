@@ -2,7 +2,11 @@
 #include "COMMON/ROUTE_CHASE_RECORDS.H"
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Drafted from the shared unit body (other versions' twin). */
+#else
 INCLUDE_ASM("span_1000", func_80212E30_eu);
+#endif
 #endif
 
 #if !(defined(VERSION_DE))

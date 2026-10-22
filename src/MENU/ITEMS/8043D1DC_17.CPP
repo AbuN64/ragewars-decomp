@@ -57,7 +57,11 @@ s32 func_804476B8_de(Func_804476B8_List *arg0, s32 arg1, Func_804476B8_Rec *arg2
     return found;
 }
 #else
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("ovl_80400000", func_804476B8_de);
+#endif
 #endif
 #endif
 

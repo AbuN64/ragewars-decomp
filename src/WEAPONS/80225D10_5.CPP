@@ -496,5 +496,53 @@ void func_80228AF4_de(void *arg0, ViewState *arg1) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+#define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
+extern f32 D_800C2EB4_eu;
+extern void func_8025DF34_de(s32), func_80237E80_de(void *, void *, void *);
+extern void func_80273198_de(void *, void *), func_80271F34_de(void *, void *, void *);
+extern void func_80273448_de(void *, f32, f32, f32), func_80273D6C_de(void *), func_8027027C_de(void *, void *);
+/* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
+   active language, otherwise it rebuilds the ring matrix at 0x1600 from the vectors at 0x1458/0x1470/0x1200 first. */
+void func_80228E60_eu(u8 *player, s32 flag) {
+    u8 mtx[0x40];
+    f32 vec[3];
+    void *ui;
+    char *text;
+
+    if (EUF(player, s32, 0x147C) == 0) {
+        return;
+    }
+    if (EUF(player, f32, 0x11FC) > 0.0f) {
+        EUF(player, f32, 0x11FC) = 0.0f;
+        func_8025DF34_de(0x578);
+        ui = EUF(player, void *, 0x5DC);
+        if (ui == 0) {
+            return;
+        }
+        text = D_800E0EC4[((u8 *)&D_80145088)[0x17C1]];
+    } else {
+        EUF(player, s32, 0x1200) = EUF(player, s32, 0x1458);
+        EUF(player, s32, 0x1204) = EUF(player, s32, 0x145C);
+        EUF(player, s32, 0x1208) = EUF(player, s32, 0x1460);
+        EUF(player, s32, 0x120C) = flag;
+        EUF(player, f32, 0x11FC) = D_800C2EB4_eu;
+        func_80273198_de(mtx, player + 0x1470);
+        func_80271F9C_de((void *)vec, (void *)(player + 0x1470), 5.12f);
+        func_80271F34_de(vec, vec, player + 0x1200);
+        func_80273448_de(mtx, vec[0], vec[1], vec[2]);
+        func_80273D6C_de(mtx);
+        func_8027027C_de(mtx, player + 0x1600);
+        func_8025DF34_de(0x578);
+        ui = EUF(player, void *, 0x5DC);
+        if (ui == 0) {
+            return;
+        }
+        text = flag ? D_800E0ED4[((u8 *)&D_80145088)[0x17C1]] : D_800E0EE4[((u8 *)&D_80145088)[0x17C1]];
+    }
+    func_80237E80_de(&D_80145088, ui, text);
+}
+#else
 INCLUDE_ASM("span_1000", func_80228E60_eu);
+#endif
 #endif

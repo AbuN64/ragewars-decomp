@@ -5,10 +5,14 @@
 #include "RENDER_2/8025DE50_5.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("span_1000", func_802301F4_de);
 #endif
+#endif
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 /* Handles a player's attack trigger: nothing while cooling down past D_800C2EE0_de; the trigger is the
  * controller latch at 0x23C (cleared when read) for a flagged controlled player, else flag 0x2000; when it
  * fires and func_80230058_de accepts the attack, a ranged attack (type 2) that may fire takes action 8 and
@@ -208,5 +212,9 @@ INCLUDE_ASM("span_1000", func_802303A0_de);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("span_1000", func_80230610_eu);
+#endif
 #endif

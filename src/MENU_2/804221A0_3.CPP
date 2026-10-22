@@ -6,7 +6,10 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "RENDER_2/8025DE50_5.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && defined(VERSION_EU_X))
+#if defined(VERSION_EU_X)
+#define func_804235A8_eu func_804235E0_eu_x
+#endif
 s32 func_804235A8_eu(void) {
     s32 temp_s0;
     s32 temp_v0;

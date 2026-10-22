@@ -260,5 +260,9 @@ void func_8022FC20_de(void *arg0, void *arg1) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("span_1000", func_802325FC_de);
+#endif
 #endif

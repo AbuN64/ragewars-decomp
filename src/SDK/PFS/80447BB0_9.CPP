@@ -337,7 +337,10 @@ s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache)
     return 0;
 }
 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
+#if defined(VERSION_EU)
+#define func_80448A48_eu_x func_804476B8_de
+#endif
 #ifdef NON_MATCHING
 /* 35/88 words; remaining: by-value union param is not sra-extracted and the saved-register allocation differs */
 extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 backup, u8 bank);

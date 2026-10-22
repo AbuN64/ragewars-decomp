@@ -4,17 +4,23 @@
 #include "TYPES.H"
 
 #if defined(VERSION_EU)
+#ifdef NON_MATCHING
+/* Drafted from the other version's body in its unit. */
+#else
 INCLUDE_ASM("span_1000", func_8020F6E0_eu);
+#endif
 #endif
 
 #if defined(VERSION_DE) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_8020F6C0_de);
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU)) || (defined(VERSION_DE) && defined(NON_MATCHING))
-/* Fuzzy draft for de: the other versions' body under the de name. */
-#ifdef VERSION_DE
+#if !(defined(VERSION_DE) || defined(VERSION_EU)) || ((defined(VERSION_DE) || defined(VERSION_EU)) && defined(NON_MATCHING))
+/* Fuzzy draft for de and eu: the other versions' body under the de/eu name. */
+#if defined(VERSION_DE)
 #define FX_FN func_8020F6C0_de
+#elif defined(VERSION_EU)
+#define FX_FN func_8020F6E0_eu
 #else
 #define FX_FN func_8020F6D8_eu_x
 #endif

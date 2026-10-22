@@ -8,11 +8,19 @@
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "SYSTEM_3/80265370.H"
 
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80445AB8);
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_US_REV1) || ((defined(VERSION_EU) || defined(VERSION_EU_X)) && defined(NON_MATCHING))
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#include "COMMON/SHARED_GAMESLOT.H"
+extern u8 D_80152789;
+extern char D_800EEE10[], D_800EEE18[];
+#define VOLUME_BYTE D_801462C8.volume[2]
+#else
+#define VOLUME_BYTE D_801462E2
+#endif
 /* Shows one of three fixed volume texts for steps zero, fifteen and minus
  * sixteen from the option byte D_801462E2. Other steps are formatted into
  * the alternate text with the positive or negative format. */
@@ -21,9 +29,8 @@ INCLUDE_ASM("ovl_80400000", func_80445AB8);
 
 extern s32 func_80441FE8_de(LayeredText *);
 
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
 s32 func_80445AB8(LayeredText *field) {
-    s32 step = (D_801462E2 - 0x80) / 8;
+    s32 step = (VOLUME_BYTE - 0x80) / 8;
     char *text;
 
     if (step == 0) {
@@ -68,5 +75,4 @@ s32 func_80445AB8(LayeredText *field) {
     return 0;
 }
 
-#endif
 #endif

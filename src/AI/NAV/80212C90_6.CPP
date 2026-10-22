@@ -5,7 +5,10 @@
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU))
+#if !(defined(VERSION_DE) || defined(VERSION_EU)) || (defined(NON_MATCHING) && defined(VERSION_EU))
+#if defined(VERSION_EU)
+#define func_80212E30_eu_x func_80212E30_eu
+#endif
 /* Runs a computer player's patrol step: starts its route at 0x224 on the first route of D_8011FE88,
    or random roaming (-2) when there are none; once within D_800C23B0_eu_x of its goal node it advances the
    route position at 0x228 (wrapping at the route length) and drops the goal; a dropped goal is then

@@ -9,7 +9,11 @@
 #include "AUDIO_4/802BFE60.H"
 
 #if defined(VERSION_EU_X)
+#ifdef NON_MATCHING
+/* Drafted from the shared unit body (other versions' twin). */
+#else
 INCLUDE_ASM("span_1000", func_8023B9C0_eu);
+#endif
 #endif
 
 #if defined(VERSION_DE)

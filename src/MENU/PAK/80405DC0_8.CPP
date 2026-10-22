@@ -7,7 +7,13 @@
 #include "TYPES.H"
 #include "stddef.h"
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
+#if defined(VERSION_EU)
+#define func_804069F4_de func_80406A90_eu
+#endif
+#if defined(VERSION_EU_X)
+#define func_804069F4_de func_80406A90_eu_x
+#endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 func_8026464C_de(void);
 void func_80293268_de(s32);

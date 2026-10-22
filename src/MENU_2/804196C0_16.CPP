@@ -8,7 +8,10 @@
 #include "MENU_2/804196C0_16.H"
 #include "FRONTEND/8040B45C_33.H"
 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
+#if defined(VERSION_EU)
+#define func_80419F4C_eu_x func_80419F50_eu
+#endif
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
