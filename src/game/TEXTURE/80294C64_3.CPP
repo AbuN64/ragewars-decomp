@@ -53,75 +53,70 @@ extern s8 D_auto_800CA5F8;
 extern s8 D_auto_rodata_func_80294CA0_us_rev1_800CA5D0_unclaimed_CB1E0;
 extern s8 D_auto_src_ragewars_resident_strings_CB1D0_us_rev1;
 
+/* 132/159 words (positional); remaining: one delay-slot fill (move s5,s4 belongs in the bne delay slot; ours annuls with bnel), same instructions otherwise */
 void func_80294CA0_us_rev1(void) {
     u32 sp28;
-    s32 **temp_v0_2;
-    s32 *temp_s2;
-    s32 *temp_s3;
-    s32 *temp_s5;
-    s32 temp_hi;
-    s32 temp_s0;
-    s32 temp_v1;
-    s32 var_a2;
-    s32 var_s0;
-    s8 *var_a0;
-    s8 *var_a1;
-    u32 temp_v0;
-    u8 *temp_v1_2;
-    void *temp_s1;
-    void *temp_v0_3;
-
+    u32 key;
+    s32 **res;
+    s32 *s3;
+    s32 *s2;
+    s32 hi;
+    s32 lo;
+    s32 idx;
+    s32 *s5;
+    char *s1;
+    s32 *sel;
+    s32 t;
+    void *v;
+    Shared_World *w;
+    u8 *name;
+    s32 i;
+    w = &D_8011FE88;
     if (D_8014AECC != NULL) {
         func_80253754_de(NULL, D_8014AECC);
     }
+    sel = (s32 *)&D_8014AEBC;
     D_8014AECC = NULL;
     D_8014AED4 = 0;
     D_8014AED8 = 0;
     D_8014AED0 = 0;
-    temp_v0 = func_8028FE3C_de(D_8011FE88.unk50, D_8011FE88.unk20, M2C_FIELD(&D_8014AEBC, s32 *, 0), &sp28);
-    temp_v0_2 = func_8025193C_de(0, temp_v0 - 1, temp_v0, sp28, 9U, -1, &D_00295B90_us_rev1, &D_auto_src_ragewars_resident_strings_CB1D0_us_rev1, 1U);
-    temp_s3 = *temp_v0_2;
-    temp_s2 = func_8028FDB4_de(temp_s3, 1);
-    temp_s5 = func_8028FDB4_de(temp_s3, 2);
-    if (M2C_FIELD(&D_8014AEBC, s32 *, 4) < 0) {
+    key = func_8028FE3C_de(w->unk50, w->unk20, sel[0], &sp28);
+    res = func_8025193C_de(0, key - 1, key, sp28, 9, -1, &D_00295B90_us_rev1, &D_auto_src_ragewars_resident_strings_CB1D0_us_rev1, 1);
+    s3 = *res;
+    s2 = func_8028FDB4_de(s3, 1);
+    s5 = func_8028FDB4_de(s3, 2);
+    if (sel[1] < 0) {
+        s32 *p = &sel[1];
         do {
-            temp_v1 = M2C_FIELD(&D_8014AEBC, s32 *, 4) + *temp_s2;
-            M2C_FIELD(&D_8014AEBC, s32 *, 4) = temp_v1;
-        } while (temp_v1 < 0);
+            t = *p + *s2;
+            *p = t;
+        } while (t < 0);
     }
-    temp_hi = (s32) M2C_FIELD(&D_8014AEC0, s32 *, 0) % (s32) *temp_s2;
-    temp_s0 = (s32) M2C_FIELD(&D_8014AEC0, s32 *, 0) % (s32) *temp_s5;
-    M2C_FIELD(&D_8014AEC0, s32 ***, 0xC) = temp_v0_2;
-    M2C_FIELD(&D_8014AEC0, void **, 0x14) = func_8028FDB4_de(temp_s2, temp_hi);
-    M2C_FIELD(&D_8014AEC0, void **, 0x18) = func_8028FDB4_de(temp_s5, temp_s0);
-    temp_v0_3 = func_8028FDB4_de(temp_s3, 0);
-    M2C_FIELD(&D_8014AEC0, s32 **, 0x2124) = temp_s5;
-    M2C_FIELD(&D_8014AEC0, void **, 0x10) = temp_v0_3;
-    M2C_FIELD(&D_8014AEC0, s32 *, 8) = 0;
-    M2C_FIELD(&D_8014AEC0, s32 **, 0x211C) = temp_s3;
-    M2C_FIELD(&D_8014AEC0, s32 **, 0x2120) = temp_s2;
-    if (*temp_s3 == 4) {
-        temp_s1 = func_8028FDB4_de(temp_s3, 3);
-        var_s0 = 0;
-loop_7:
-        temp_v1_2 = temp_s1 + var_s0;
-        if (var_s0 < func_802BD400_de(temp_s1)) {
-            var_s0 += 1;
-            if (*temp_v1_2 == 0x2E) {
-                *temp_v1_2 = 0;
-            } else {
-                goto loop_7;
+    s1 = (char *)&D_8014AEC0;
+    hi = *(s32 *)s1 % *s2;
+    lo = *(s32 *)s1 % *s5;
+    *(s32 ***)(s1 + 0xC) = res;
+    *(void **)(s1 + 0x14) = func_8028FDB4_de(s2, hi);
+    *(void **)(s1 + 0x18) = func_8028FDB4_de(s5, lo);
+    v = func_8028FDB4_de(s3, 0);
+    *(s32 **)(s1 + 0x2124) = s5;
+    *(void **)(s1 + 0x10) = v;
+    *(s32 *)(s1 + 8) = 0;
+    *(s32 **)(s1 + 0x211C) = s3;
+    *(s32 **)(s1 + 0x2120) = s2;
+    if (*s3 == 4) {
+        s5 = (s32 *)hi;
+        name = func_8028FDB4_de(s3, 3);
+        for (i = 0; i < func_802BD400_de(name); i++) {
+            if (name[i] == 0x2E) {
+                name[i] = 0;
+                break;
             }
         }
-        var_a0 = &D_8014CFE8_us_rev1;
-        var_a1 = &D_auto_rodata_func_80294CA0_us_rev1_800CA5D0_unclaimed_CB1E0;
-        var_a2 = M2C_FIELD(&D_8014CFE8_us_rev1, s32 *, -0x212C);
+        func_802BD320_de(&D_8014CFE8_us_rev1, &D_auto_rodata_func_80294CA0_us_rev1_800CA5D0_unclaimed_CB1E0, *(s32 *)(&D_8014CFE8_us_rev1 - 0x212C), (s32)s5, *s2, name);
     } else {
-        var_a0 = &D_8014AEC0 + 0x2128;
-        var_a1 = &D_auto_800CA5F8;
-        var_a2 = M2C_FIELD(&D_8014AEC0, s32 *, -4);
+        func_802BD320_de(s1 + 0x2128, &D_auto_800CA5F8, *(s32 *)(s1 - 4), hi, *s2);
     }
-    func_802BD320_de(var_a0, var_a1, var_a2, temp_hi, *temp_s2);
     D_8014D068 = 0;
 }
 #else
