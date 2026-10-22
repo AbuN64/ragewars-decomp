@@ -7,6 +7,8 @@ extern float D_800E1570;
 #include "COMMON/UNUSED.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
+#include "FRONTEND/8041BEA8_6.H"
+#include "COMMON/ANIMATION.H"
 
 s32 func_8041F6E0_eu_x(void *screen)
 {

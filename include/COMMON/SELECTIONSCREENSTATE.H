@@ -139,7 +139,6 @@ extern Node_func_8041B610_de *func_8041B610_de(OwnerRecAt44 *, s32);
 extern void func_8041B6E8_de(OwnerRecAt8V1 *, s32, s32);
 extern void func_8042E9A0_de(s32, s32);
 extern s32 func_8041F18C_de(s32);
-extern void func_8041CAD8_de(void *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(func_8041F2A0_Item *, s32);
 extern void func_80420308_de(s32);

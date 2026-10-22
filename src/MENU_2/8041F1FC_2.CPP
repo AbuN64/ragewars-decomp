@@ -10,6 +10,7 @@
 #include "COMMON/ANIMATION.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "RENDER_2/8025DE50_5.H"
+#include "FRONTEND/8041BEA8_6.H"
 
 extern s32 func_8040EBD0_de(struct WidgetNode *);
 extern struct WidgetNode *func_8041B7FC_de(struct SlotsCode804196C0 *, s32);

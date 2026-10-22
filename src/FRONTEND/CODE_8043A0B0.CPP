@@ -8,6 +8,7 @@ INCLUDE_RODATA("data_800C", rodata_func_8043A890_de_800E1FFC);
 #include "FRONTEND/ENTRYRECAT4D4.H"
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "COMMON/GAMEPLAY_SETTINGS.H"
+#include "FRONTEND/8041BEA8_6.H"
 extern struct FourPlayerResultsScreen *D_800E59E0;
 extern Shared_PlayerSettingsRecord D_80146398[];
 extern struct RowRecAt54 D_800E3A58[];
@@ -19,7 +20,6 @@ extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(MenuWidget *, s32);
 extern s32 func_8041F140_de(s32);
-extern void func_8041CAD8_de(void *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 extern void *func_80419E54_de(s32, s32);
 extern void func_8043B96C_de(void);
 extern void func_8043B0CC_de(s32);

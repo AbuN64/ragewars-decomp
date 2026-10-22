@@ -9,6 +9,7 @@
 #include "FRONTEND/80423280_39.H"
 #include "FRONTEND/80423280_42.H"
 #include "FRONTEND/CODE_80426EC4.H"
+#include "FRONTEND/8041BEA8_6.H"
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #ifdef NON_MATCHING
@@ -220,8 +221,6 @@ extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status D_80146398[];
 
 extern void func_802A2394_de();
-
-extern void func_8041CAD8_de(void *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 
 s32 func_80426788_de(void) {
     s32 shown;

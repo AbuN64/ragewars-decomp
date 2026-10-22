@@ -3,6 +3,8 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
+#include "FRONTEND/8041BEA8_6.H"
+#include "COMMON/ANIMATION.H"
 
 #if defined(VERSION_US_REV1)
 s32 func_8041F2A0_us_rev1(s32 screen)

@@ -193,6 +193,7 @@ found4:;
 #ifdef NON_MATCHING
 /* Updates the selected player's appearance and creates its results-screen model. */
 #include "TYPES.H"
+#include "FRONTEND/8041BEA8_6.H"
 typedef struct Vec { f32 x,y,z; } Vec;
 typedef struct Entry { char pad[0x80]; s8 kind; char tail[0x15]; } Entry;
 typedef struct Settings { char pad[13]; u8 mode; char padE[0xC2]; Entry entries[4]; } Settings;
@@ -205,7 +206,6 @@ extern Row D_800E3A58[];
 extern void func_804284C0_de(s32,Settings *);
 extern Record *func_8028D474_de(void *,s32);
 extern s32 func_8041F140_de(s8);
-extern void func_8041CAD8_de(void *,s32,s32,s32,s32,Vec,Vec,f32,s32);
 typedef struct func_80427B98_S1 func_80427B98_S1;
 struct func_80427B98_S1 {
     char pad0[0x20];
