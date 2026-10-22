@@ -3,8 +3,7 @@ name = "RageWars"
 title = "Turok: Rage Wars"
 toolchain = "gcc-2.8.1-sn64"
 names_from = "us-rev1"
-libraries = ["src/libgcc/", "src/sdk/", "src/SDK/"]
-cppflags = ["-DF3DEX_GBI_2", "-Isrc/libgcc"]
+cppflags = ["-DF3DEX_GBI_2", "-Isrc/sdk/libgcc"]
 readme_map = "us-rev1"
 
 [version.de]
@@ -96,97 +95,67 @@ segments = [
   { name = "retained_1C0860", rom = 0x1C0860, kind = "bin" },
 ]
 
-[file."src/IO/80200500.CPP"]
+[library."src/sdk/lib_802BB630/"]
+origin = "unidentified library"
+
+[library."src/sdk/libgcc/"]
+origin = "gcc libgcc2"
+
+[library."src/sdk/libultra/"]
+origin = "Nintendo libgultra"
+
+[library."src/sdk/rnc/"]
+origin = "Rob Northen compression"
+
+[dir."src/sdk/libsn/"]
 toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200500_2.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200500_3.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200568.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200568_2.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200800.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200800_3.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200B14.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/80200B14_2.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/io_hostmemory.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/802013D8.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/IO/802013D8_2.CPP"]
-toolchain = "gcc-2.7.2-sn64"
-cflags = []
-omit = []
-
-[file."src/MATH/80299368.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
-omit = []
-
-[file."src/SDK/AUDIO/802C5E90.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-msplit-addresses"]
-omit = []
-
-[file."src/SDK/LIBGCC/802C6A00_25.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = ["-mfp64"]
-
-[file."src/SDK/PRINTF/802C1880_2.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = []
-
-[file."src/SDK/PRINTF/802C1880.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = []
-
-[file."src/SDK/PRINTF/802C1B60.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-mfp32"]
-omit = []
 
 [file."src/sdk/lib_802BB630/802BC380.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-ffast-math", "-fno-delayed-branch"]
 omit = []
+[file."src/game/MATH/80299368.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
+omit = []
+
+[file."src/sdk/libultra/audio/802C5E90.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+
+[file."src/sdk/libgcc/802C6A00_25.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = ["-mfp64"]
+
+[file."src/sdk/libultra/libc/802C1880_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/sdk/libultra/libc/802C1880.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/sdk/libultra/libc/802C1B60.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-mfp32"]
+omit = []
+
+[file."src/sdk/libsn/80200568_3.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+
+[file."src/sdk/libsn/80200800_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+
+[file."src/sdk/libsn/80200800_4.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
+
+[file."src/sdk/libsn/802022E0_2.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = []
