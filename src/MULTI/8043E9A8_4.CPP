@@ -36,7 +36,10 @@ INCLUDE_ASM("ovl_80400000", func_8043ECC4_de);
 #endif
 
 #if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043ED48_de);
+/* Stub that reports success. */
+s32 func_8043ED48_de(void) {
+    return 1;
+}
 #endif
 
 #if !(defined(VERSION_DE) || defined(VERSION_US_REV1))

@@ -7,7 +7,10 @@ INCLUDE_ASM("span_1000", func_802BA0D0_de);
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_802BA0F4_de);
+/* Stub that reports failure. */
+s32 func_802BA0F4_de(void) {
+    return -1;
+}
 #endif
 
 #if !(defined(VERSION_DE))
