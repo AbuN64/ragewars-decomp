@@ -41,14 +41,9 @@ void func_80410E1C_de(s32 mode) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-/* Returns a cached image-bank tile texture, loading tile data and uploading oversized tiles on first use. */
-
 typedef struct {
     char pad0[0x20];
 } Texture;
-
 typedef struct {
     char pad0[4];
     s32 stamp;
@@ -56,7 +51,6 @@ typedef struct {
     char pad0A[2];
     Texture texture;
 } TextureSlot;
-
 typedef struct {
     s32 offset;
     s8 fmt;
@@ -64,7 +58,6 @@ typedef struct {
     s8 wid;
     char pad7[1];
 } Tile;
-
 typedef struct {
     char pad0[8];
     s16 depth;
@@ -72,7 +65,6 @@ typedef struct {
     s32 base;
     s32 size;
 } Image;
-
 typedef struct {
     s32 loaded;
     Tile tiles[0x60];
@@ -86,26 +78,20 @@ typedef struct {
     s16 held;
     char pad49A[2];
 } Bank;
-
 typedef struct {
     char pad0[0x30];
     s32 base;
     char pad34[0x24];
     Bank *banks;
 } Tables;
-
 typedef struct {
     s32 handle;
     s32 name;
     char pad8[0x218];
     Tables tables;
 } File;
-
-
-extern Bank * D_80153C28;
 extern File D_801539B0;
 extern s32 D_800DD0B0;
-
 extern s32 func_8025305C_de(s32 size);
 extern void func_802A0EB0_de(s32 handle);
 extern s32 func_802A1934_de(void);
@@ -133,17 +119,17 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
     s32 code;
     s32 stamp;
     s32 size;
+    s32 bytes;
     s32 i;
 
-    slots = D_80153C28[group].slotsByPass[pass];
+    slots = D_801539B0.tables.banks[group].slotsByPass[pass];
     index = which;
     {
-    TextureSlot *cachedSlot = &slots[index];
-    if (cachedSlot->flags & 1) {
+    if (slots[index].flags & 1) {
         Bank *cachedBank;
         stamp = func_802A1934_de() + 0xA;
-        cachedSlot->stamp = stamp;
-        cachedBank = &D_80153C28[group];
+        slots[index].stamp = stamp;
+        cachedBank = &D_801539B0.tables.banks[group];
         if (cachedBank->held == 0 && cachedBank->stamp != -1) {
             cachedBank->stamp = stamp;
         }
@@ -152,9 +138,9 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
     }
     kind = 0;
     func_802A18CC_de();
+    image = D_801539B0.tables.banks[group].image;
+    tile = &D_801539B0.tables.banks[group].tiles[index];
     slot = &slots[index];
-    tile = &D_80153C28[group].tiles[index];
-    image = D_80153C28[group].image;
     code = 0;
     if (tile->fmt == 0 || tile->siz == 0) {
         return 0;
@@ -181,7 +167,7 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
     } else if (code == 0x20) {
         kind = 0xC;
     }
-    if (D_80153C28[group].loaded == 0) {
+    if (D_801539B0.tables.banks[group].loaded == 0) {
         Tables *tables = &D_801539B0.tables;
 
         bank = &tables->banks[group];
@@ -190,7 +176,7 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
         i = 0;
         bank->offsets[0] = func_8025305C_de(size);
         Resmgr_SeekStream(D_801539B0.handle, D_801539B0.tables.base + bank->image->base, 0);
-        Resmgr_ReadStream(D_80153C28[group].offsets[0], size, 1, D_801539B0.handle);
+        Resmgr_ReadStream(D_801539B0.tables.banks[group].offsets[0], size, 1, D_801539B0.handle);
         do {
             sizes[i] = bank->tiles[i].wid * bank->tiles[i].siz;
             sizes[i] = sizes[i] * code / 8;
@@ -204,12 +190,12 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
         i = 0;
         do {
             if (threshold < sizes[i]) {
-                Tile *big = &D_80153C28[group].tiles[i];
+                Tile *big = &D_801539B0.tables.banks[group].tiles[i];
 
                 func_804133E4_de(&scratch);
                 func_80413720_de(&scratch, kind, big->fmt, big->siz, big->wid, big->siz, 0, sizes[i],
-                              D_80153C28[group].offsets[i], 0, image->depth * 2,
-                              D_80153C28[group].listsByPass[pass], image->depth);
+                              D_801539B0.tables.banks[group].offsets[i], 0, image->depth * 2,
+                              D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
                 func_80419490_de(&scratch);
                 func_80413404_de(&scratch);
             }
@@ -219,19 +205,16 @@ void *func_80410F54_de(u8 which, s32 group, s32 pass) {
         D_801539B0.handle = 0;
         bank->loaded = 1;
     }
-    size = tile->wid * tile->siz * code >> 3;
+    bytes = tile->wid * tile->siz * code >> 3;
     func_80413720_de(texture, kind, tile->fmt, tile->siz, tile->wid, tile->siz, 0,
-                  size, D_80153C28[group].offsets[which], 0,
-                  image->depth * 2, D_80153C28[group].listsByPass[pass], image->depth);
+                  bytes, D_801539B0.tables.banks[group].offsets[which], 0,
+                  image->depth * 2, D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
     func_804196C8_de(0);
     func_80419640_de(into, texture);
     func_804196C8_de(1);
     func_802A18CC_de();
     slot->stamp = func_802A1934_de() + 0xA;
-    D_80153C28[group].loads += 1;
+    D_801539B0.tables.banks[group].loads += 1;
     slot->flags |= 1;
     return &slot->texture;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80410F54_de);
-#endif
