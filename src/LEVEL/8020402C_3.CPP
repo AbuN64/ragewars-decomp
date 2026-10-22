@@ -13,7 +13,65 @@
 #include "LEVEL/8020402C_3.H"
 #include "WEAPONS/80213ED4.H"
 
+#ifdef NON_MATCHING
+extern BreakableHitContext D_80150000;
+extern f32 D_800C6B74;
+extern void func_80285DB0_de(Shared_World *, void *, s32);
+extern void func_80267198_de(void *, void *, s32, CVector3, ResourceManagerState);
+void func_80204868_de(void *unused, ObjectStateCC *arg1) {
+    BreakableHitContext *ctx = &D_80150000;
+    u8 *state = ctx->unk_18 + 0x14;
+    f32 *hitFloat = (f32 *)((u8 *)arg1 + 0x40);
+    f32 *hitLimit = (f32 *)((u8 *)arg1 + 0x64);
+    ResourceManagerState local;
+    f32 scale;
+    f32 value;
+    f32 limit;
+    s32 destroy;
+    s8 team;
+    if (((s8 *)state)[8] != -1) {
+        scale = ((s8 *)state)[8] * D_800C6B74;
+        if (ctx->unk_E6 == 1) {
+            destroy = 1;
+        } else {
+            team = arg1->unk_CA;
+            if (ctx->unk_108 != team || ctx->unk_10A != team) {
+                destroy = 0;
+            } else if (arg1->unk_CB != 0 && !(ctx->unk_100 & 0x400)) {
+                destroy = 1;
+            } else {
+                if (ctx->unk_10C < 3 && (ctx->unk_100 & 0x400)) {
+                    value = ctx->unk_12C * scale;
+                    limit = ctx->unk_134;
+                } else {
+                    value = ctx->unk_10C * scale;
+                    limit = ctx->unk_104;
+                }
+                destroy = value <= limit;
+            }
+        }
+        if (destroy) {
+            local.active = 0;
+            func_80267198_de(ctx, ctx, 6, ctx->unk_8, local);
+            func_80285DB0_de(&D_8011FE88, ctx, 1);
+        }
+    }
+    if ((*(u32 *)state & 1) && arg1->unk_CB != 0) {
+        f32 flag = *(f32 *)(state + 4);
+        if (flag == 0.0f || *hitLimit < flag) {
+            if (*hitLimit == 0.0f) {
+                *hitFloat = 0.0f;
+            }
+            *hitLimit = flag;
+        }
+    }
+    if (*hitLimit != 0.0f && *hitLimit <= *hitFloat) {
+        func_80214178_de(ctx, arg1, 1);
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_80204868_de);
+#endif
 
 /* Destroys a breakable object after a hit: when its descriptor has a damage factor at 0x1D, scaled
    by D_800C6B74, and the object is forced at 0xE6, or the hit's team byte at 0xCA matches both ids at

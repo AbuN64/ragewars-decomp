@@ -77,4 +77,37 @@ s32 func_8020EAE0_de(void *arg0) {
     return 1;
 }
 
+#ifdef NON_MATCHING
+extern u8 D_8011D8D0[];
+extern f32 D_800C1E60_de;
+extern s32 func_8020CB3C_de(s32 *, void *);
+extern u8 *func_8020CFE0_de(s32 *, s32);
+void func_8020EC14_de(void *arg) {
+    s32 **arg0 = arg;
+    s32 *ctrl = &D_8013B364;
+    u8 *entry;
+    u8 *node;
+    u8 *link;
+    s32 i;
+    for (i = 0; i < 3; i++) {
+        for (node = *(u8 **)(D_8011D8D0 + 0xFC28 + i * 0x14); node != 0; node = *(u8 **)(node + 0x1EC)) {
+            switch (*(u16 *)(node + 4)) {
+            case 0x402:
+            case 0x404:
+            case 0x40B:
+            case 0x40F:
+                link = *(u8 **)(node + 0x12C);
+                if (link != 0 && *link == 1 && (*(s32 *)(link + 0x100) & 0x300000) && link != (u8 *)*arg0) {
+                    entry = func_8020CFE0_de(ctrl, func_8020CB3C_de(ctrl, node + 8));
+                    *(f32 *)(entry + 0x18) = D_800C1E60_de;
+                }
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_8020EC14_de);
+#endif

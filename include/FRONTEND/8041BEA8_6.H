@@ -3,7 +3,12 @@
 #include "COMMON/LABEL.H"
 extern void func_8041CDDC_de(ObjRecAt48C *arg0, CVector3 v);
 extern void func_8041CE18_de(Unk8041CE88 *arg0);
+#ifdef NON_MATCHING
+/* The draft body reads three more argument registers than the caller sets. */
+extern void func_8041C610_de();
+#else
 extern void func_8041C610_de(struct Unk8041CE88 * arg0);
+#endif
 extern void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1);
 extern void func_8041CDB0_de(ObjRecAt480 *arg0, CVector3 v);
 typedef struct Ret8028CFA0 {

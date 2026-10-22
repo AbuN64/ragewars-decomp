@@ -2,7 +2,63 @@
 
 INCLUDE_RODATA("data_800C", rodata_func_80423828_de_19_800E16C8);
 
+#ifdef NON_MATCHING
+#include "TYPES.H"
+typedef struct AchieveRecord { u8 pad0[0x78]; u8 active; u8 pad79[0x17]; u8 team; u8 pad92[5]; } AchieveRecord;
+typedef struct AchieveCounters { u8 pad0[0x96]; } AchieveCounters;
+extern u8 D_80142369[][0x96];
+extern s32 D_800FEB70[][100];
+extern u8 D_800FEB26[];
+extern s8 D_8014222C;
+extern s8 D_8014222D;
+extern AchieveRecord D_80146398[];
+extern s32 D_800FF140_de[];
+extern s8 D_801462C8[];
+void func_80424C50_de(s32 arg0, s32 arg1) {
+    s32 count;
+    s32 i;
+    s32 eligible;
+    s32 value;
+    if (D_80142369[arg0][0] == 1) {
+        return;
+    }
+    if (D_800FEB70[arg0][0] + 1 > 99999) {
+        D_800FEB70[arg0][0] = 99999;
+    } else {
+        D_800FEB70[arg0][0] = D_800FEB70[arg0][0] + 1;
+    }
+    eligible = 1;
+    if (D_8014222C > 0 || D_8014222D > 0) {
+        count = 0;
+        for (i = 0; i < 8; i++) {
+            if (D_80146398[i].active == 1) {
+                if (D_80146398[i].team != D_80146398[i].active) {
+                    if (D_800FF140_de[i] >= 0x4C) {
+                        count++;
+                    }
+                }
+            }
+        }
+        if (count < 2) {
+            eligible = 0;
+        }
+    } else {
+        eligible = 0;
+    }
+    if (eligible == 1) {
+        if (D_801462C8[0x24] >= 10 || D_801462C8[0x25] >= 10) {
+            value = D_800FEB26[arg1 + arg0 * 400] + 1;
+            if (value >= 6) {
+                D_800FEB26[arg1 + arg0 * 400] = 5;
+            } else {
+                D_800FEB26[arg1 + arg0 * 400] = value;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_80424C50_de);
+#endif
 
 INCLUDE_ASM("ovl_80400000", func_80424DE8_de);
 

@@ -8,7 +8,62 @@
 INCLUDE_ASM("ovl_80400000", func_8041C614);
 #endif
 #if !(defined(VERSION_DE))
+#ifdef NON_MATCHING
+#include "COMMON/WORLD.H"
+extern u8 D_800DD460_de[], D_800DD474[];
+extern void *func_8028FE28_de(void *, void *, s32);
+extern void *func_8028FE3C_de(void *, void *, s32, s32 *);
+extern void *func_8028CF6C_de(void *, u16);
+extern void func_80246BE8_de(void *, void *, void *, s32);
+void func_8041C610_de(arg0, id, extra, expected)
+    struct Unk8041CE88 *arg0;
+    s32 id;
+    s32 extra;
+    s32 expected;
+{
+    u8 *world = (u8 *)&D_8011FE88;
+    u8 *out = (u8 *)arg0 + 0x190;
+    u16 *list = *(u16 **)(world + 0x94);
+    s32 count = *(s32 *)((u8 *)list + 4);
+    s32 i = 0;
+    s32 found = 0;
+    u16 *entry = (u16 *)((u8 *)list + 8);
+    void *name;
+    void **first;
+    void **second;
+    void *resource;
+    u8 *record;
+    s32 size;
+    if (count <= 0) {
+        return;
+    }
+    do {
+        if (*entry == id) {
+            name = func_8028FE28_de(*(void **)(world + 0x54), *(void **)(world + 0x24), i);
+            first = func_8025193C_de(0, (u32)name, (u32)name, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
+            if (first != 0) {
+                resource = func_8028FE3C_de(*first, name, 0, &size);
+                second = func_8025193C_de(0, (u32)resource, (u32)resource, size, 0, 0, 0, (const char *)D_800DD474, 1);
+                if (second != 0) {
+                    record = func_8028CF6C_de(world, *(u16 *)((u8 *)func_8028FDB4_de(*second, 0) + 0x1C));
+                    if (*(s16 *)(record + 0xC) == expected && *(s32 *)record == *(s32 *)arg0) {
+                        *(s16 *)(out + 4) = i;
+                        *(u16 *)(out + 0xE4) = id;
+                        func_80246BE8_de(out, *(void **)(world + 0x54), *(void **)(world + 0x24), extra);
+                        found = 1;
+                    }
+                    func_80253754_de(0, second);
+                }
+                func_80253754_de(0, first);
+            }
+        }
+        i++;
+        entry++;
+    } while (i < count && !found);
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8041C610_de);
+#endif
 #endif
 
 #ifdef NON_MATCHING

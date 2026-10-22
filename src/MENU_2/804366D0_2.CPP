@@ -3,7 +3,47 @@
 #include "TYPES.H"
 #include "MENU_2/804366D0_2.H"
 
+#ifdef NON_MATCHING
+extern struct State_func_804366B8_de *D_800E5690;
+extern s32 D_800D34A4, D_800D34B0, D_800D3470_de, D_800D3474, D_800D34B4, D_800D34B8, D_800D34BC;
+extern s32 func_8025305C_de(s32);
+extern s32 func_8041A280_de(s32, s32);
+extern void func_8041B110_de(s32);
+extern s32 func_8041ABC0_de(s32, s32);
+extern void func_8041AD34_de(s32, s32);
+extern s32 func_8041A580_de(s32, s32, s32);
+extern s32 func_80419E54_de(s32, s32);
+extern s32 func_8040EC30_de(s32, s32);
+s32 func_804364E4_de(s32 arg0) {
+    s32 *state;
+    D_800E5690 = (struct State_func_804366B8_de *)func_8025305C_de(0x64);
+    state = (s32 *)D_800E5690;
+    state[0] = func_8041A280_de(0x5B, 0x5C);
+    func_8041B110_de(0x5E);
+    state[5] = func_8041ABC0_de(0x64, 0x65);
+    func_8041AD34_de(state[5], D_800D34A4);
+    func_8041AD34_de(state[5], D_800D34B0);
+    state[4] = func_8041ABC0_de(0x61, 0x63);
+    func_8041AD34_de(state[4], D_800D3470_de);
+    func_8041AD34_de(state[4], D_800D3474);
+    state[2] = func_8041A580_de(0x66, 0x67, 0xF8);
+    state[3] = func_8041A580_de(0x6A, 0x6B, 0xF8);
+    state[6] = func_8041ABC0_de(0x68, 0x69);
+    func_8041AD34_de(state[6], D_800D34B4);
+    func_8041AD34_de(state[6], D_800D34B8);
+    func_8041AD34_de(state[6], D_800D34BC);
+    func_8041B110_de(0x60);
+    state[1] = func_80419E54_de(0x5D, 0x6E);
+    state[9] = 3;
+    state[8] = -1;
+    state[0xB] = func_8040EC30_de(arg0, 0x5F);
+    state[0xA] = 0;
+    func_804366B8_de(0);
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_804364E4_de);
+#endif
 
 /* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5690 holds through func_8041AD10_de and func_8041A6EC_de. */
 
