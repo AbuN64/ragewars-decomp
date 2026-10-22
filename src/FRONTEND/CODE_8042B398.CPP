@@ -32,7 +32,16 @@ s32 func_8042B2DC_de(void) {
     return 0;
 }
 
-INCLUDE_ASM("ovl_80400000", func_8042B2E4_de);
+#include "COMMON/CONTROL.H"
+#include "COMMON/SELECTIONSCREENSTATE.H"
+
+void func_8042B2E4_de(void) {
+    D_800E4F60->unk454->alpha = 0xFF;
+    D_800E4F60->unk450->alpha = 0xFF;
+    func_8040E8D8_de(D_800E4F60->unk450, 1);
+    func_8040E8D8_de(D_800E4F60->unk454, 1);
+    D_800E4F60->unk46C = 0;
+}
 
 extern char D_80154018[];
 extern void func_80265688_de(void *, s32, s32);
