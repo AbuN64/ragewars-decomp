@@ -187,7 +187,7 @@ extern char ACTOR_TABLE_A;
 extern char ACTOR_TABLE_B;
 extern f32 D_800C7218;
 /* the shared initialiser is declared with five parameters above; this caller also passes the source on the stack */
-typedef void (*SetupInitFn)(SetupActor *, SetupDesc *, f32, f32, f32, SetupSource *);
+typedef void (*SetupInitFn)(SetupActor *, SetupDesc *, SetupVec, SetupSource *);
 extern f32 func_80275DD4_de(void *, f32, f32);
 #if defined(VERSION_EU)
 #define ACTOR_SETUP func_80213ACC_eu
@@ -200,15 +200,17 @@ extern f32 func_80275DD4_de(void *, f32, f32);
 #else
 #define ACTOR_SETUP func_80213AAC_de
 #endif
+/* 134/147 words; remaining: target loads actor->flags before the -1 store group (v0 flags, v1 -1), ours loads it after */
 void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbacks) {
     s32 saved;
+    void *model;
     f32 default_;
 
     saved = actor->field68;
     func_802A001C_de(actor, 0, 0x170);
     actor->flags = 0x40;
     actor->field68 = saved;
-    ((SetupInitFn)func_802138F0_de)(actor, source->desc, source->pos.x, source->pos.y, source->pos.z, source);
+    ((SetupInitFn)func_802138F0_de)(actor, source->desc, source->pos, source);
     actor->table11C = &ACTOR_TABLE_A;
     actor->table10C = &ACTOR_TABLE_B;
     actor->field34 = -1;
@@ -219,27 +221,29 @@ void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbac
     actor->words6C[0] = 0;
     actor->words6C[1] = 0;
     actor->words6C[2] = 0;
+    actor->field60 = source->scale;
     actor->field64 = 0;
     actor->words78[0] = 0;
     actor->words78[1] = 0;
     actor->words78[2] = 0;
     actor->words78[3] = 0;
     actor->words78[4] = 0;
-    actor->field60 = source->scale;
     actor->field8C = source->scale;
     actor->field90 = source->pos.y;
     actor->field9C = source->scale;
     actor->posA0 = source->pos;
     actor->fieldAC = (s32)source->model;
     actor->posB0 = source->pos;
-    actor->modelBC = source->model;
-    if ((source->desc->flags & 4) && source->model != 0) {
-        actor->posB0.y = func_80275DD4_de(source->model, actor->posB0.x, actor->posB0.z);
+    model = source->model;
+    actor->modelBC = model;
+    if ((source->desc->flags & 4) && model != 0) {
+        actor->posB0.y = func_80275DD4_de(model, actor->posB0.x, actor->posB0.z);
     }
     default_ = D_800C7218;
     actor->fieldCA = -1;
     actor->field13 = 0x14;
     actor->field95 = 0xFF;
+    actor->flags &= ~1;
     actor->fieldC8 = -1;
     actor->field35 = -1;
     actor->sentinel14[0] = -1;
@@ -262,7 +266,6 @@ void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbac
     actor->fieldFC = 0;
     actor->fieldC0 = default_;
     actor->fieldC4 = default_;
-    actor->flags &= ~1;
     actor->field18 = default_;
     if (callbacks != 0 && callbacks->first != 0) {
         callbacks->first(source, actor);
