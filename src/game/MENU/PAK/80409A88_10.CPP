@@ -59,35 +59,40 @@ s32 func_8040A83C_us(struct Field *arg0) {
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #ifdef NON_MATCHING
 extern s32 D_80153774;
-extern char D_800D2484[], D_800D37D0[];
-extern char D_800D26A4[], D_800D26A8[], D_800D26BC[], D_800D26C4[], D_800D26C8[];
-extern s8 D_8014D490;
+extern char *D_800D2484, *D_800D37D0;
+extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
+/* 57/62 words; remaining: target stores arg0->text before loading D_8014D490, ours hoists the lb above the sw */
 s32 func_8040A928_us(struct Field *arg0) {
     char *src;
     char *dst;
     s32 i;
     if (D_80153774 != 0) {
-        arg0->text = (char **)D_800D37D0;
+        arg0->text = &D_800D37D0;
     } else {
-        arg0->text = (char **)D_800D2484;
-        switch (D_8014D490) {
-        case 2:
-            src = D_800D26C4;
-            break;
-        case 3:
-            src = D_800D26BC;
+        arg0->text = &D_800D2484;
+        i = D_8014D490;
+        switch (i) {
+        case 0:
+        case 1:
+        case 4:
+        default:
+            src = D_800D26A4;
             break;
         case 5:
             src = D_800D26A8;
             break;
+        case 3:
+            src = D_800D26BC;
+            break;
+        case 2:
+            src = D_800D26C4;
+            break;
         case 14:
             src = D_800D26C8;
             break;
-        default:
-            src = D_800D26A4;
-            break;
         }
-        dst = *arg0->text + (func_80441FE8_de(arg0) - 11);
+        dst = *arg0->text;
+        dst += func_80441FE8_de(arg0) - 11;
         for (i = 0; i < 11; i++) {
             *dst++ = *src++;
         }
