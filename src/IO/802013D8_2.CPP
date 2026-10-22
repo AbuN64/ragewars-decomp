@@ -59,7 +59,7 @@ void func_802016FC_de(s32 arg0) {
 INCLUDE_ASM("span_1000", func_802016FC_de);
 #endif
 #ifdef NON_MATCHING
-/* 29/59 words; remaining: the ROM's `break 1` in the poll loop's failure arm, which plain C cannot express */
+/* 46/46 words; the ROM's `break 1` in the poll loop's failure arm is inline asm (cc1 has no trap builtin), so no ROM-path C */
 s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_80200568_de(0xB1FFFFE4, arg1);
     func_80200568_de(0xB1FFFFE8, arg2);
@@ -68,7 +68,7 @@ s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     do {
         func_802005DC_de(0x3E8);
         if (func_802005A0_de(0xB1FFFFF0) != 0) {
-            /* the ROM executes break 1 here */
+            __asm__ volatile ("break 1");
         }
     } while (func_802005A0_de(0xB1FFFFE0) != 0);
     return func_802005A0_de(0xB1FFFFDC);
