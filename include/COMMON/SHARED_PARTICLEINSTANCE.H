@@ -597,7 +597,9 @@ typedef struct { char pad[16]; u16 accel, limit; } AccelSteeringParams;
 typedef struct { char pad[48]; AccelSteeringParams *params; } AccelSteeringLink;
 typedef struct { char pad[8]; AccelSteeringVec point; } AccelSteeringTarget;
 typedef struct {
-    char pad[28];
+    char pad0[8];
+    AccelSteeringVec position;
+    char pad14[8];
     AccelSteeringVec velocity;
     char gap[0x118 - 40];
     AccelSteeringLink *link;
