@@ -18,7 +18,7 @@
 
 /* The hub spells func_8041DB30_de; these two stay here, matching how the landed units that own
  * them define them: func_8041B968_de writes the word at +0x6C of the object it is handed, and
- * func_8041DA5C_de takes the style word this block keeps at +0x0FC. */
+ * Frontend_ShowUnlockedEntries takes the style word this block keeps at +0x0FC. */
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
  * tree as a pointer; the cast carries that pointer through unchanged. */
@@ -94,7 +94,7 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
     D_800E3590->unk268 = -1;
     func_8041DB30_de(&D_800E3590->unk268);
     func_8041D6A8_de();
-    func_8041DA5C_de(D_800E3590->style);
+    Frontend_ShowUnlockedEntries(D_800E3590->style);
     func_8040EC30_de(arg0, 493)->alpha = 110;
     D_800E3590->focus = 0;
     return 0;

@@ -23,7 +23,7 @@ extern s32 func_80419F38_de(s32 fade);
 extern void func_80419F58_de(s32 fade, s32 speed);
 extern Node_func_8041D134_de *func_8041B7FC_de(void *handle, s32 arg1);
 
-/* func_8041DA5C_de is declared by span code_8041BEA8.h; no local extern needed. */
+/* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
 s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
     Node_func_8041D134_de *node;
@@ -72,10 +72,10 @@ s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
     case 6:
         ((MenuRecAt108 *) D_800E3590)->styleValue += ((MenuRecAt108 *) D_800E3590)->styleStep;
         ((MenuRecAt108 *) D_800E3590)->groupC->style += ((MenuRecAt108 *) D_800E3590)->alphaStep;
-        func_8041DA5C_de(((MenuRecAt108 *) D_800E3590)->styleValue);
+        Frontend_ShowUnlockedEntries(((MenuRecAt108 *) D_800E3590)->styleValue);
         if (--((MenuRecAt108 *) D_800E3590)->timer <= 0) {
             ((MenuRecAt108 *) D_800E3590)->groupC->style = 100;
-            func_8041DA5C_de(0x6E);
+            Frontend_ShowUnlockedEntries(0x6E);
             ((MenuRecAt108 *) D_800E3590)->state = 3;
             func_8040E8D8_de((func_8041F2A0_Item *) ((MenuRecAt108 *) D_800E3590)->cursor, 1);
         }

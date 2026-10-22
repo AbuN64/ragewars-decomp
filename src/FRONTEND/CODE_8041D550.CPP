@@ -163,22 +163,21 @@ void func_8041D960_de(void) {
     }
 }
 
-#ifdef NON_MATCHING
-void func_8041DA5C_de(s32 style) {
+void Frontend_ShowUnlockedEntries(s32 style) {
+    MenuWidget *node;
     s32 i;
-    func_8041F2A0_Item *node;
-
     for (i = 0; i < 50; i++) {
-        node = func_8040EC30_de(D_800E3590->root, (u16) D_800DF544[i].id);
-        if (func_80265650_de(&D_800FEB4A[((MenuRecAt10C *) D_800E3590)->player], i) == 1) {
+        node = func_8040EC30_de(D_800E3590->root, (u16)D_800DF544[i].id);
+        if (func_80265650_de(&D_800FEB4A[D_800E3590->unk268], i) == 1) {
             func_8040E8D8_de(node, 1);
-            ((NodeRecAt10 *) node)->style = style;
+            node->alpha = style;
         } else {
             func_8040E8D8_de(node, 0);
         }
     }
 }
 
+#ifdef NON_MATCHING
 /* Advances a cursor over four 400-byte entries, wrapping to 0, until it reaches one whose flag byte in
    D_80102B0D is not negative; after six steps without one it sets the cursor to -1. */
 void func_8041DB30_de(int *cursor) {
@@ -200,7 +199,6 @@ void func_8041DB30_de(int *cursor) {
 
 
 #else
-INCLUDE_ASM("ovl_80400000", func_8041DA5C_de);
 INCLUDE_ASM("ovl_80400000", func_8041DB30_de);
 #endif
 /* Releases the object D_800E3590 holds through func_802547E4_de, clears D_800E3590 and returns zero.
