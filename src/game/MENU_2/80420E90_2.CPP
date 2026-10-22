@@ -5,16 +5,23 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SCREEN.H"
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
 INCLUDE_RODATA("data_800C", rodata_func_80421568_de_800E15E8);
 #endif
 
-#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
+#if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80421568_de);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
-/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+/* Fuzzy draft in EU and EU-X: their body differs. */
+#if defined(VERSION_DE)
+#define ID_ROW0 946
+#define ID_CLOSE 933
+#else
+#define ID_ROW0 952
+#define ID_CLOSE 939
+#endif
 void func_80421568_de(void) {
     MenuWidget *item;
     char *text;
@@ -29,37 +36,37 @@ void func_80421568_de(void) {
         if (text != 0) {
             index++;
         }
-        item = func_8040EC30_de(D_800E4400->window, 952);
+        item = func_8040EC30_de(D_800E4400->window, ID_ROW0);
         switch (line) {
         case 0:
-            item = func_8040EC30_de(D_800E4400->window, 952);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0);
             break;
         case 1:
-            item = func_8040EC30_de(D_800E4400->window, 953);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 1);
             break;
         case 2:
-            item = func_8040EC30_de(D_800E4400->window, 954);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 2);
             break;
         case 3:
-            item = func_8040EC30_de(D_800E4400->window, 955);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 3);
             break;
         case 4:
-            item = func_8040EC30_de(D_800E4400->window, 956);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 4);
             break;
         case 5:
-            item = func_8040EC30_de(D_800E4400->window, 957);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 5);
             break;
         case 6:
-            item = func_8040EC30_de(D_800E4400->window, 958);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 6);
             break;
         case 7:
-            item = func_8040EC30_de(D_800E4400->window, 959);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 7);
             break;
         case 8:
-            item = func_8040EC30_de(D_800E4400->window, 960);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 8);
             break;
         case 9:
-            item = func_8040EC30_de(D_800E4400->window, 961);
+            item = func_8040EC30_de(D_800E4400->window, ID_ROW0 + 9);
             break;
         }
         item->text = text;
@@ -73,7 +80,7 @@ void func_80421568_de(void) {
         }
     } else {
         func_8040E8D8_de(D_800E4400->pad, 0);
-        func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, 939), 1);
+        func_8040E8D8_de(func_8040EC30_de(D_800E4400->window, ID_CLOSE), 1);
         D_800E4400->cursor = 1;
     }
     if (D_800E4400->length > 0) {
