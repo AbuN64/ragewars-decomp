@@ -84,7 +84,7 @@ extern void func_802647E8_de(void *, int);
 extern void func_80226708_de(struct RespawnPlayer *);
 extern int func_802934F8_de(void);
 
-extern void func_8021AF6C_de(struct RespawnPlayer *);
+extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void func_80208000_de(void *);
 extern void func_80217388_de(LevelActor *, s32 *);
 extern void func_80262C88_de(LevelActor *);
@@ -129,7 +129,7 @@ void func_8044952C_de(struct RespawnPlayer *player) {
         func_8025E11C_de(D_800CF198[player->state]);
     }
     if (isOnline()) {
-        func_8021AF6C_de(player);
+        Render_ResetPlayerWeapons(player);
     }
     player->field11B4 = 0;
     player->field11B8 = 0;

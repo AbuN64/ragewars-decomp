@@ -248,7 +248,7 @@ extern s32 func_80426090_de(struct Player *);
 extern s32 func_80426174_de(struct Player *);
 extern s32 func_804261DC_de(struct Player *);
 
-void func_8021AF6C_de(struct Player *player) {
+void Render_ResetPlayerWeapons(struct Player *player) {
     Shared_Game *game;
     s32 i;
     s32 j;
