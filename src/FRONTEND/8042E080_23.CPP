@@ -109,9 +109,10 @@ void func_8042E5EC_de(void) {
     if (numJoining > 0) {
         for (i = 0; i < numJoining; i++) {
             player = &settings->playerSettings[i];
-            player->active = 1;
+            player->enabled = 1;
             player->locked = 0;
             player->slot = 2;
+            player->active = 2;
             player->character = stack[i];
             variant = func_802744D4_de() % 3;
             player->variant = (u8)variant;
