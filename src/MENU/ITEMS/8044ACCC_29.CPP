@@ -143,24 +143,28 @@ typedef struct SearchOwner {
 extern f32 D_800C52FC_de;
 extern f32 func_802726F8_de(void *a, void *b);
 
+/* NON_MATCHING: 80/80 words; only the tail differs (the target jumps over the return-0 block to load results[best]). */
 s32 func_8044D3E8_de(SearchOwner *owner, void *position, s32 type, SearchPoint *out) {
-    s32 i = 0;
-    s32 best = 0;
+    s32 i;
+    s32 best;
     SearchValues *values;
-    SearchPoints *points;
-    SearchPoint *point;
+    SearchPoints *list;
+    s32 *results;
+    SearchPoint *points;
     s32 count;
     f32 distance;
     f32 minimum;
 
     values = func_8028FDB4_de(owner->resource, 0);
     count = values->count;
-    points = func_8028FDB4_de(owner->resource, 1);
+    results = values->values;
+    list = func_8028FDB4_de(owner->resource, 1);
     minimum = D_800C52FC_de;
-    point = points->points;
-    for (; i < count; i++, point++) {
-        if (point->type == type) {
-            distance = func_802726F8_de(point, position);
+    points = list->points;
+    best = 0;
+    for (i = 0; i < count; i++) {
+        if (points[i].type == type) {
+            distance = func_802726F8_de(&points[i], position);
             if (distance < minimum) {
                 minimum = distance;
                 best = i;
@@ -170,8 +174,8 @@ s32 func_8044D3E8_de(SearchOwner *owner, void *position, s32 type, SearchPoint *
     if (best == 0) {
         return 0;
     }
-    *out = points->points[best];
-    return values->values[best];
+    *out = points[best];
+    return results[best];
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_8044D3E8_de);
