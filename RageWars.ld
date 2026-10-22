@@ -11411,7 +11411,8 @@ SECTIONS
         src/SCENE/800CA310.CPP.o(.data);
         src/SCENE/800CA31C.CPP.o(.rodata .rdata);
         src/SCENE/800CA31C.CPP.o(.data);
-        src/SCENE/800CA330.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/SCENE/CODE_80289790.CPP.o */;
+        src/SCENE/CODE_80289790.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.data);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.rodata .rdata);
@@ -13161,7 +13162,8 @@ SECTIONS
         src/SCENE/800CA310.CPP.o(.data);
         src/SCENE/800CA31C.CPP.o(.rodata .rdata);
         src/SCENE/800CA31C.CPP.o(.data);
-        src/SCENE/800CA330.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/SCENE/CODE_80289790.CPP.o */;
+        src/SCENE/CODE_80289790.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.data);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.rodata .rdata);
@@ -14857,7 +14859,8 @@ SECTIONS
         src/SCENE/800CA310.CPP.o(.data);
         src/SCENE/800CA31C.CPP.o(.rodata .rdata);
         src/SCENE/800CA31C.CPP.o(.data);
-        src/SCENE/800CA330.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/SCENE/CODE_80289790.CPP.o */;
+        src/SCENE/CODE_80289790.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.data);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.rodata .rdata);
@@ -16562,7 +16565,8 @@ SECTIONS
         src/SCENE/800CA310.CPP.o(.data);
         src/SCENE/800CA31C.CPP.o(.rodata .rdata);
         src/SCENE/800CA31C.CPP.o(.data);
-        src/SCENE/800CA330.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/SCENE/CODE_80289790.CPP.o */;
+        src/SCENE/CODE_80289790.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.rodata .rdata);
         src/SCENE/800CA2A4.CPP.o(.data);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.rodata .rdata);
@@ -18310,7 +18314,8 @@ SECTIONS
         src/SCENE/800CA310.CPP.o(.data);
         src/SCENE/800CA31C.CPP.o(.rodata .rdata);
         src/SCENE/800CA31C.CPP.o(.data);
-        src/SCENE/800CA330.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/SCENE/CODE_80289790.CPP.o */;
+        src/SCENE/CODE_80289790.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB2/800CA374.CPP.o(.data);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.rodata .rdata);
@@ -20411,7 +20416,7 @@ SECTIONS
         src/MENU/ITEMS/8044ACCC_7.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA310.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA31C.CPP.o(.bss .sbss COMMON);
-        src/SCENE/800CA330.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA374.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA3AC_2.CPP.o(.bss .sbss COMMON);
@@ -21689,7 +21694,7 @@ SECTIONS
         src/DATA/OVLTAB2/800CA300.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA310.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA31C.CPP.o(.bss .sbss COMMON);
-        src/SCENE/800CA330.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA374.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA3AC_2.CPP.o(.bss .sbss COMMON);
@@ -22922,7 +22927,7 @@ SECTIONS
         src/DATA/OVLTAB2/800CA300.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA310.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA31C.CPP.o(.bss .sbss COMMON);
-        src/SCENE/800CA330.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA374.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA3AC_2.CPP.o(.bss .sbss COMMON);
@@ -24167,7 +24172,7 @@ SECTIONS
         src/DATA/OVLTAB2/800CA300.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA310.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA31C.CPP.o(.bss .sbss COMMON);
-        src/SCENE/800CA330.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA374.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA2A4.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.bss .sbss COMMON);
@@ -25528,7 +25533,7 @@ SECTIONS
         src/DATA/OVLTAB2/800CA300.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA310.CPP.o(.bss .sbss COMMON);
         src/SCENE/800CA31C.CPP.o(.bss .sbss COMMON);
-        src/SCENE/800CA330.CPP.o(.bss .sbss COMMON);
+        src/SCENE/CODE_80289790.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA374.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA380_2.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTAB2/800CA3AC_2.CPP.o(.bss .sbss COMMON);

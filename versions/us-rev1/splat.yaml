@@ -4126,7 +4126,7 @@ segments:
       - [0xCAF19, data, data_800C/rodata_unresolved_800CA319]
       - [0xCAF1C, rodata, data_800C/D_auto_src_rw_text_80288938_CAF1C_us_rev1]
       - [0xCAF2E, data, data_800C/rodata_unresolved_800CA32E]
-      - [0xCAF30, rodata, data_800C/D_auto_src_rw_pool_80289970_CAF30_us_rev1]
+      - [0xCAF30, rodata, data_800C/literals_func_80289970_de]
       - [0xCAF74, rodata, data_800C/D_blob_phase2_2968dfa2b2531d534a4c]
       - [0xCAF7F, data, data_800C/rodata_unresolved_800CA37F]
       - [0xCAF80, rodata, data_800C/D_auto_rodata_shared_800CA380]

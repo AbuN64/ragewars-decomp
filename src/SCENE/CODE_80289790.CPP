@@ -47,9 +47,6 @@ void func_802897B4_de(World37 *world, CVector3 *point, Item37 **output, s32 *tot
     }
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
@@ -57,11 +54,10 @@ void func_802897B4_de(World37 *world, CVector3 *point, Item37 **output, s32 *tot
 extern s32 func_80277128_de(ObjectRecAtBC *, f32, f32, f32, CVector3 *, f32 *);
 extern void func_80272A10_de(void *, CVector3 *, CVector3 *);
 extern f32 func_80278890_de(void *);
-
 static inline f32 sampleDot(CVector3 *a, f32 *b, s32 index) { f32 *d=b+index+128; return a->x*d[0] + a->y*d[1] + a->z*d[2]; }
-void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, CVector3 *arg2, Shared_ParticleLighting *arg3) {
+void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting) {
     Shared_Game *settings;
-    /* First128 floats are weights; the remaining384 hold XYZ directions. */
+    /* The first 128 floats are weights; the remaining 384 hold XYZ directions. */
     f32 samples[512];
     f32 *weights;
     f32 *directions;
@@ -78,51 +74,46 @@ void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, CVector3 *arg2, Shared_Par
     CVector3 animationColor;
     CVector3 animatedContribution;
     ObjectRecAtBC *animatedVolume;
-    CVector3 *transformedPosition;
-    CVector3 *colorPtr;
-    f32 *direction;
-    ObjectRecAtBC **volumeCursor;
     f32 zero;
     f32 one;
-    f32 temp_fs0;
+    f32 scale;
     f32 brightness;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0f;
-    f32 var_fs0f;
-    f32 var_fv0;
-    f32 var_fv0_2;
-    f32 var_fv0_3;
-    f32 var_fv0_4;
-    f32 var_fv0_5;
-    f32 var_fv0f_4;
-    f32 var_fv0f_5;
-    f32 var_fv0f_6;
-    f32 var_fv0f_7;
-    f32 var_fv0f_8;
+    f32 level;
+    f32 pulse;
+    f32 amount;
+    f32 backScale;
+    f32 ambientRed;
+    f32 ambientGreenLevel;
+    f32 ambientBlueLevel;
+    f32 diffuseRedLevel;
+    f32 diffuseGreenLevel;
+    f32 ambientGreen;
+    f32 ambientBlue;
+    f32 diffuseRed;
+    f32 diffuseGreen;
+    f32 diffuseBlue;
     s32 sampleIndex;
-    s32 directionOffset;
     ObjectRecAtBC *volume;
 
     settings = &D_801462C8;
     brightness = (f32)(u32)settings->buttons * 0.003921568859368563f;
     animatedVolume = NULL;
     if (settings->flags & 0x4000) {
-        arg3->ambientCopy[0] = 0;
-        arg3->ambient[0] = 0;
-        arg3->ambientCopy[1] = 0;
-        arg3->ambient[1] = 0;
-        arg3->ambientCopy[2] = 0;
-        arg3->ambient[2] = 0;
-        arg3->diffuseCopy[0] = 0;
-        arg3->diffuse[0] = 0;
-        arg3->diffuseCopy[1] = 0;
-        arg3->diffuse[1] = 0;
-        arg3->diffuseCopy[2] = 0;
-        arg3->diffuse[2] = 0;
-        arg3->direction[0] = 0x7F;
-        arg3->direction[1] = 0;
-        arg3->direction[2] = 0;
+        lighting->ambientCopy[0] = 0;
+        lighting->ambient[0] = 0;
+        lighting->ambientCopy[1] = 0;
+        lighting->ambient[1] = 0;
+        lighting->ambientCopy[2] = 0;
+        lighting->ambient[2] = 0;
+        lighting->diffuseCopy[0] = 0;
+        lighting->diffuse[0] = 0;
+        lighting->diffuseCopy[1] = 0;
+        lighting->diffuse[1] = 0;
+        lighting->diffuseCopy[2] = 0;
+        lighting->diffuse[2] = 0;
+        lighting->direction[0] = 0x7F;
+        lighting->direction[1] = 0;
+        lighting->direction[2] = 0;
         return;
     }
     sampleIndex = 0;
@@ -130,27 +121,26 @@ void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, CVector3 *arg2, Shared_Par
     ambient.x = ambient.y = ambient.z = 0.0f;
     backLight.x = backLight.y = backLight.z = 0.0f;
     diffuse.x = diffuse.y = diffuse.z = 0.0f;
-    if (arg1 > 0) {
+    if (sampleIndex < count) {
 
         
         weights = samples;
         directions = samples + 128;
-        transformedPosition = &transformed;
         do {
             sampleDirection = directions + sampleIndex * 3;
-            volume = arg0[sampleIndex];
-            func_80272898_de(volume->inverse, arg2, transformedPosition);
+            volume = volumes[sampleIndex];
+            func_80272898_de(volume->inverse, position, &transformed);
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
-                func_80271F34_de(&translatedDirection, &localDirection, transformedPosition);
+                func_80271F34_de(&translatedDirection, &localDirection, &transformed);
                 func_80272A10_de(volume->transform, &translatedDirection, &localDirection);
-                func_80271F68_de(sampleDirection, arg2, &localDirection);
+                func_80271F68_de(sampleDirection, position, &localDirection);
                 func_8027207C_de(sampleDirection);
                 color = volume->direction;
                 if (volume->animatedLight != 0) {
-                    temp_fv0 = func_80278890_de(volume);
-                    animationColor.x = temp_fv0;
-                    animationColor.y = temp_fv0;
-                    animationColor.z = temp_fv0;
+                    level = func_80278890_de(volume);
+                    animationColor.x = level;
+                    animationColor.y = level;
+                    animationColor.z = level;
                     func_80271F9C_de(&contribution, &animationColor, weights[sampleIndex] * volume->value);
                     animatedVolume = volume;
                     if (volume->flagB8 != 0) {
@@ -158,19 +148,19 @@ void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, CVector3 *arg2, Shared_Par
                     }
                     func_80271F34_de(&ambient, &ambient, &contribution);
                 }
-                temp_fv0f = volume->value * 0.5f;
-                temp_fs0 = 1.0f - temp_fv0f;
-                func_80271F9C_de(&contribution, &color, weights[sampleIndex] * temp_fv0f);
+                amount = volume->value * 0.5f;
+                scale = 1.0f - amount;
+                func_80271F9C_de(&contribution, &color, weights[sampleIndex] * amount);
                 if (volume->flagB8 != 0) {
                     func_80271F9C_de(&contribution, &contribution, -1.0f);
                 }
                 func_80271F34_de(&ambient, &ambient, &contribution);
-                weights[sampleIndex] *= temp_fs0;
-                temp_fv0f = color.x; if (temp_fv0f < 0.0f) temp_fv0f = -temp_fv0f;
-                if (color.y < 0.0f) temp_fv0f = temp_fv0f - color.y; else temp_fv0f = temp_fv0f + color.y;
-                if (color.z < 0.0f) temp_fs0 = temp_fv0f - color.z; else temp_fs0 = temp_fv0f + color.z;
-                func_80271F9C_de(&contribution, sampleDirection, *&weights[sampleIndex]);
-                func_80271F9C_de(&contribution, &contribution, temp_fs0);
+                weights[sampleIndex] *= scale;
+                amount = color.x; if (amount < 0.0f) amount = -amount;
+                if (color.y < 0.0f) amount = amount - color.y; else amount = amount + color.y;
+                if (color.z < 0.0f) scale = amount - color.z; else scale = amount + color.z;
+                func_80271F9C_de(&contribution, sampleDirection, weights[sampleIndex]);
+                func_80271F9C_de(&contribution, &contribution, scale);
                 func_80271F34_de(&combinedDirection, &combinedDirection, &contribution);
                 if (volume->flagB8 != 0) {
                     weights[sampleIndex] = -weights[sampleIndex];
@@ -185,44 +175,38 @@ void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, CVector3 *arg2, Shared_Par
             
             sampleIndex += 1;
 
-        } while (sampleIndex < arg1);
+        } while (sampleIndex < count);
     }
     func_8027207C_de(&combinedDirection);
     sampleIndex = 0;
-    if (arg1 > 0) {
-
-        directionOffset = 0;
-        volumeCursor = arg0;
+    if (sampleIndex < count) {
         one = 1.0f;
         zero = 0.0f;
-        colorPtr = &color;
         do {
-            temp_fs0 = sampleDot(&combinedDirection, samples, directionOffset);
-            volume = *volumeCursor;
-            var_fs0f = one - temp_fs0; if (temp_fs0 < zero) var_fs0f = one;
-            var_fs0f *= 0.5f;
+            volume = volumes[sampleIndex];
+            scale = sampleDot(&combinedDirection, samples, sampleIndex * 3);
+            backScale = one - scale; if (scale < zero) backScale = one;
+            backScale *= 0.5f;
             color = volume->direction;
-            temp_fs0 = one - var_fs0f;
+            scale = one - backScale;
             if (volume == animatedVolume) {
-                temp_fv0_2 = func_80278890_de(volume);
-                animationColor.x = temp_fv0_2;
-                animationColor.y = temp_fv0_2;
-                animationColor.z = temp_fv0_2;
-                func_80271F9C_de(&animatedContribution, &animationColor, temp_fs0 * samples[sampleIndex]);
+                pulse = func_80278890_de(volume);
+                animationColor.x = pulse;
+                animationColor.y = pulse;
+                animationColor.z = pulse;
+                func_80271F9C_de(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
                 func_80271F34_de(&diffuse, &diffuse, &animatedContribution);
-                func_80271F9C_de(&animatedContribution, &animationColor, var_fs0f * samples[sampleIndex]);
+                func_80271F9C_de(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
                 func_80271F34_de(&backLight, &backLight, &animatedContribution);
             }
-            func_80271F9C_de(&contribution, colorPtr, temp_fs0 * samples[sampleIndex]);
+            func_80271F9C_de(&contribution, &color, scale * samples[sampleIndex]);
             func_80271F34_de(&diffuse, &diffuse, &contribution);
 
 
-            func_80271F9C_de(&contribution, colorPtr, var_fs0f * samples[sampleIndex]);
+            func_80271F9C_de(&contribution, &color, backScale * samples[sampleIndex]);
             func_80271F34_de(&backLight, &backLight, &contribution);
-            volumeCursor++;
             sampleIndex++;
-            directionOffset += 3;
-        } while (sampleIndex < arg1);
+        } while (sampleIndex < count);
     }
     func_80271F9C_de(&backLight, &backLight, 0.5f);
     func_80271F34_de(&ambient, &ambient, &backLight);
@@ -235,47 +219,44 @@ void func_80289970_de(ObjectRecAtBC **arg0, s32 arg1, CVector3 *arg2, Shared_Par
     if (ambient.z < 0.0f) {
         diffuse.z += ambient.z;
     }
-    var_fv0 = ambient.x;
-    if (!(var_fv0 <= 255.0f)) var_fv0 = 255.0f;
-    if (!(5.0f <= var_fv0)) var_fv0 = 5.0f;
-    ambient.x = var_fv0 * (1.0f - brightness) + brightness * 255.0f;
-    var_fv0f_4 = ambient.y;
-    if (!(var_fv0f_4 <= 255.0f)) var_fv0f_4 = 255.0f;
-    var_fv0_2 = var_fv0f_4;
-    if (!(5.0f <= var_fv0_2)) var_fv0_2 = 5.0f;
-    ambient.y = var_fv0_2 * (1.0f - brightness) + brightness * 255.0f;
-    var_fv0f_5 = ambient.z;
-    if (!(var_fv0f_5 <= 255.0f)) var_fv0f_5 = 255.0f;
-    var_fv0_3 = var_fv0f_5;
-    if (!(5.0f <= var_fv0_3)) var_fv0_3 = 5.0f;
-    ambient.z = var_fv0_3 * (1.0f - brightness) + brightness * 255.0f;
-    var_fv0f_6 = diffuse.x;
-    if (!(var_fv0f_6 <= 255.0f)) var_fv0f_6 = 255.0f;
-    var_fv0_4 = var_fv0f_6;
-    if (!(5.0f <= var_fv0_4)) var_fv0_4 = 5.0f;
-    diffuse.x = var_fv0_4 * (1.0f - brightness) + brightness * 255.0f;
-    var_fv0f_7 = diffuse.y;
-    if (!(var_fv0f_7 <= 255.0f)) var_fv0f_7 = 255.0f;
-    var_fv0_5 = var_fv0f_7;
-    if (!(5.0f <= var_fv0_5)) var_fv0_5 = 5.0f;
-    diffuse.y = var_fv0_5 * (1.0f - brightness) + brightness * 255.0f;
-    var_fv0f_8 = diffuse.z;
-    if (!(var_fv0f_8 <= 255.0f)) var_fv0f_8 = 255.0f;
-    if (!(5.0f <= var_fv0f_8)) var_fv0f_8 = 5.0f;
-    diffuse.z = var_fv0f_8 * (1.0f - brightness) + brightness * 255.0f;
-    arg3->ambient[0] = arg3->ambientCopy[0] = (u32)ambient.x;
-    arg3->ambient[1] = arg3->ambientCopy[1] = (u32)ambient.y;
-    arg3->ambient[2] = arg3->ambientCopy[2] = (u32)ambient.z;
-    arg3->diffuse[0] = arg3->diffuseCopy[0] = (u32)diffuse.x;
-    arg3->diffuse[1] = arg3->diffuseCopy[1] = (u32)diffuse.y;
-    arg3->diffuse[2] = arg3->diffuseCopy[2] = (u32)diffuse.z;
-    arg3->direction[0] = (s32)(combinedDirection.x * 127.0f);
-    arg3->direction[1] = (s32)(combinedDirection.y * 127.0f);
-    arg3->direction[2] = (s32)(combinedDirection.z * 127.0f);
+    ambientRed = ambient.x;
+    if (!(ambientRed <= 255.0f)) ambientRed = 255.0f;
+    if (!(5.0f <= ambientRed)) ambientRed = 5.0f;
+    ambient.x = ambientRed * (1.0f - brightness) + brightness * 255.0f;
+    ambientGreen = ambient.y;
+    if (!(ambientGreen <= 255.0f)) ambientGreen = 255.0f;
+    ambientGreenLevel = ambientGreen;
+    if (!(5.0f <= ambientGreenLevel)) ambientGreenLevel = 5.0f;
+    ambient.y = ambientGreenLevel * (1.0f - brightness) + brightness * 255.0f;
+    ambientBlue = ambient.z;
+    if (!(ambientBlue <= 255.0f)) ambientBlue = 255.0f;
+    ambientBlueLevel = ambientBlue;
+    if (!(5.0f <= ambientBlueLevel)) ambientBlueLevel = 5.0f;
+    ambient.z = ambientBlueLevel * (1.0f - brightness) + brightness * 255.0f;
+    diffuseRed = diffuse.x;
+    if (!(diffuseRed <= 255.0f)) diffuseRed = 255.0f;
+    diffuseRedLevel = diffuseRed;
+    if (!(5.0f <= diffuseRedLevel)) diffuseRedLevel = 5.0f;
+    diffuse.x = diffuseRedLevel * (1.0f - brightness) + brightness * 255.0f;
+    diffuseGreen = diffuse.y;
+    if (!(diffuseGreen <= 255.0f)) diffuseGreen = 255.0f;
+    diffuseGreenLevel = diffuseGreen;
+    if (!(5.0f <= diffuseGreenLevel)) diffuseGreenLevel = 5.0f;
+    diffuse.y = diffuseGreenLevel * (1.0f - brightness) + brightness * 255.0f;
+    diffuseBlue = diffuse.z;
+    if (!(diffuseBlue <= 255.0f)) diffuseBlue = 255.0f;
+    if (!(5.0f <= diffuseBlue)) diffuseBlue = 5.0f;
+    diffuse.z = diffuseBlue * (1.0f - brightness) + brightness * 255.0f;
+    lighting->ambient[0] = lighting->ambientCopy[0] = (u32)ambient.x;
+    lighting->ambient[1] = lighting->ambientCopy[1] = (u32)ambient.y;
+    lighting->ambient[2] = lighting->ambientCopy[2] = (u32)ambient.z;
+    lighting->diffuse[0] = lighting->diffuseCopy[0] = (u32)diffuse.x;
+    lighting->diffuse[1] = lighting->diffuseCopy[1] = (u32)diffuse.y;
+    lighting->diffuse[2] = lighting->diffuseCopy[2] = (u32)diffuse.z;
+    lighting->direction[0] = (s32)(combinedDirection.x * 127.0f);
+    lighting->direction[1] = (s32)(combinedDirection.y * 127.0f);
+    lighting->direction[2] = (s32)(combinedDirection.z * 127.0f);
 }
-#else
-INCLUDE_ASM("span_1000", func_80289970_de);
-#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"

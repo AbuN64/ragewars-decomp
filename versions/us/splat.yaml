@@ -3998,7 +3998,7 @@ segments:
       - [0xC5D59, data, data_800C/rodata_unresolved_800C5159]
       - [0xC5D5C, rodata, data_800C/D_80288938_CAF1C]
       - [0xC5D6E, data, data_800C/rodata_unresolved_800C516E]
-      - [0xC5D70, rodata, data_800C/D_80289970_CAF30]
+      - [0xC5D70, rodata, data_800C/literals_func_80289970_de]
       - [0xC5DB4, rodata, data_800C/D_blob_phase2_2968dfa2b2531d534a4c]
       - [0xC5DBF, data, data_800C/rodata_unresolved_800C51BF]
       - [0xC5DC0, rodata, data_800C/D_auto_rodata_shared_800CA380]
