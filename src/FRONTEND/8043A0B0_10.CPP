@@ -95,37 +95,13 @@ void func_8043B6E8_de(s32 player) {
    value for that column selects as owned at that level, and finally marks item 0 owned at level
    0. */
 
-struct Entry {
-    char pad0[0x4B0];
-    s32 values[6];
-    char pad4C8[0x4CC - 0x4C8];
-    s32 mode;
-};
-
-struct Screen {
-    void *window;
-    s32 pad4;
-    struct Entry entries[4];
-};
-
-struct Source {
-    s32 pad0;
-    s32 pad4;
-    s32 item;
-    s32 padC;
-};
-
-extern struct Screen *D_800E59E0;
-extern u8 D_80146398[];
-extern struct Source D_800E5BC4[];
-extern struct Source D_800E5B14[];
-extern struct Source D_800E5B44[];
-extern void *jtbl_800E2040[];
-
+/* 70/70 words under NON_MATCHING; what remains is layout: the switch jump table is the D_blob_phase2_48acc...
+ * words in 8043A0B0_5.CPP, so the C can only replace the asm once that table moves into this unit's .rodata
+ * at the same address (RageWars.ld is generated from config.toml). */
 void func_8043B854_de(void) {
     u8 *record;
-    struct Source *source;
-    struct Source *row;
+    struct Shape_typemap_165 *source;
+    struct Shape_typemap_165 *row;
     s32 level;
     s32 item;
     s32 i;
@@ -162,10 +138,10 @@ void func_8043B854_de(void) {
             default:
                 continue;
             }
-            item = source[D_800E59E0->entries[i].values[column]].item;
+            item = source[D_800E59E0->entries[i].values[column]].field_8;
             row = source + D_800E59E0->entries[i].values[column];
             (record + item)[0x4C] = 1;
-            (record + row->item)[0x62] = level;
+            (record + row->field_8)[0x62] = level;
         }
         record[0x4C] = 1;
         record[0x62] = 0;

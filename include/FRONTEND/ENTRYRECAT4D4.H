@@ -72,7 +72,7 @@ struct FourPlayerResultsScreen;
 
 
 
-extern int func_8043B854_de();
+extern void func_8043B854_de(void);
 
 struct Entry42 {
     MenuWidget *window;
