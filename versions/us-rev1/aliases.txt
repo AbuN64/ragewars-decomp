@@ -2914,3 +2914,4 @@ D_800C21B4_de = 0x800C72A4;
 D_800C21B8_de = 0x800C72A8;
 D_800C21BC_de = 0x800C72AC;
 D_800C21C0_de = 0x800C72B0;
+literals_Frontend_HandlePakMenuConfirm = 0x800E1C60; // rom:0xE2860
