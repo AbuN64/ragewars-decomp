@@ -183,7 +183,10 @@ extern f32 D_800C2D20_de;
 extern f32 D_800C2D24_de;
 extern s32 func_8021BFC4_de(HealingActor *, void *, s32, s32, s32);
 
-void func_8022BE20_de(HealingActor *actor, void *source) {
+/* 43/47 words; remaining: the sum is tied to the recoveryTime load (add.s f0,f0,f1; limit in f1) where the target keeps
+ * it untied in f2 (limit in f0); 12 source shapes (early return, +=, pointer, else-store, separate dt/limit locals) all tie. */
+void func_8022BE20_de(void *arg0, void *source) {
+    HealingActor *actor = arg0;
     f32 elapsed = actor->recoveryTime + D_800D2988;
     s32 missing;
     s32 amount;
