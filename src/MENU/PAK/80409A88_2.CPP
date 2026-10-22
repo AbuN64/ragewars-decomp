@@ -31,7 +31,6 @@ void func_80409A5C_de(struct OwnerRecAt5D8V1 *owner) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct SavedPlayer { s32 data[28]; } SavedPlayer;
 typedef struct SavedSettings { s32 data[353]; } SavedSettings;
@@ -41,9 +40,8 @@ typedef struct SavedState {
 } SavedState;
 typedef struct RestorePlayer { char pad0[0x5E0]; SavedPlayer saved; } RestorePlayer;
 extern SavedState *D_800E28BC;
-extern s32 D_8013B2D4;
+extern s32 D_8013B2D4[]; /* an array: its store may alias the loads through D_800E28BC, so it stays after them */
 extern u8 D_80146848, D_800F91F0[];
-/* 71/72 words; remaining: the store of D_8013B2D4 is scheduled before the swc1 of counters.minutes instead of after the D_80146848 byte setup (scheduling slot only) */
 void func_80409AC0_de(RestorePlayer *player) {
     Shared_World *world = &D_8011FE88;
     s32 i;
@@ -55,12 +53,9 @@ void func_80409AC0_de(RestorePlayer *player) {
     D_801462C8.counters.seconds = D_800E28BC->rules[1];
     D_801462C8.counters.minutes = D_800E28BC->rules[2];
     D_801462C8.counters.hours = D_800E28BC->rules[3];
-    D_8013B2D4 = ((SavedSettings *)&D_801462C8)->data[1];
+    D_8013B2D4[0] = ((SavedSettings *)&D_801462C8)->data[1];
     ((u8 *)&D_801462C8)[0x580] = saved;
     from = D_800E28BC->table;
     to = D_800F91F0;
     for (i = 0; i < world->noteCount; i++) *to++ = *from++;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80409AC0_de);
-#endif
