@@ -19,9 +19,89 @@ s32 func_802016DC_de(u8 *arg0) {
     return var_v1 - arg0;
 }
 
-INCLUDE_ASM("span_1000", func_802016FC_de);
+#ifdef NON_MATCHING
+#include "COMMON/UNUSED.H"
+#include "TYPES.H"
+#include "sdk/os.h"
+s32 func_802BAC90_de(s32 *, s32, s32 *, s32, void **, s32);
+s32 func_802BB550_de(s32, OSMesgQueue *, s32);
+s32 func_802BB750_de(s32 *);
+extern s32 D_002018A0;
+extern void *D_800F1C84;
+extern OSMesgQueue D_800F1C90;
+extern void *D_800F2CB0;
+extern void *D_800F2CB4;
+extern OSMesgQueue D_800F2CC0;
+extern OSMesgQueue D_800F2F40;
+extern void *D_800F2F58;
+extern s32 D_800F2F60;
+extern OSMesgQueue D_800F3110;
 
+void func_802016FC_de(s32 arg0) {
+    if (D_800C8140_de == 0) {
+        D_800C8140_de = 1;
+        osCreateMesgQueue(&D_800F2CC0, &D_800F2CB4, 1);
+        osCreateMesgQueue(&D_800F2F40, &D_800F2CB0, 1);
+        osCreateMesgQueue(&D_800F3110, &D_800F2F58, 1);
+        osCreateMesgQueue(&D_800F1C90, &D_800F1C84, 1);
+        func_802BB550_de(0, &D_800F1C90, 1);
+        func_802BAC90_de(&D_800F2F60, 0x4653, &D_002018A0, 0, &D_800F2CB0, arg0);
+        func_802BB750_de(&D_800F2F60);
+    }
+}
+#else
+INCLUDE_ASM("span_1000", func_802016FC_de);
+#endif
+
+#ifdef NON_MATCHING
+/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+typedef int M2C_UNK;
+typedef signed char M2C_UNK8;
+typedef short M2C_UNK16;
+typedef int M2C_UNK32;
+typedef long long M2C_UNK64;
+#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
+#define M2C_BITWISE(type, expr) ((type)(expr))
+#define M2C_LWL(expr) (expr)
+#define M2C_FIRST3BYTES(expr) (expr)
+#define M2C_UNALIGNED32(expr) (expr)
+#define M2C_ERROR(desc) (0)
+#define M2C_TRAP_IF(cond) (0)
+#define M2C_BREAK(...) (0)
+#define M2C_SYNC(...) (0)
+#define M2C_DCACHE_CLEAN(addr) (0)
+#define M2C_DCACHE_INVALIDATE(addr) (0)
+#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
+#define M2C_ICACHE_INVALIDATE(addr) (0)
+#define M2C_PREFETCH(addr) (0)
+#define M2C_PREFETCH_STORE(addr) (0)
+#define GLUE_F64(a, b) (0.0)
+#define MULT_HI(a, b) (0)
+#define MULTU_HI(a, b) (0)
+#include "IO/80200568.H"
+#include "IO/EXTERNS.H"
+#include "TYPES.H"
+void func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    func_80200568_de(0xB1FFFFE4, arg1);
+    func_80200568_de(0xB1FFFFE8, arg2);
+    func_80200568_de(0xB1FFFFEC, arg3);
+    func_80200568_de(0xB1FFFFE0, arg0);
+    do {
+        func_802005DC_de(0x3E8);
+        if (func_802005A0_de(0xB1FFFFF0) != 0) {
+            M2C_BREAK(1);
+        }
+    } while (func_802005A0_de(0xB1FFFFE0) != 0);
+    func_802005A0_de(0xB1FFFFDC);
+}
+#else
 INCLUDE_ASM("span_1000", func_802017E8_de);
+#endif
 
 INCLUDE_ASM("span_1000", func_802018A0_de);
 
