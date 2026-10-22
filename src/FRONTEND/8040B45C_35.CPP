@@ -528,369 +528,116 @@ void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
     }
 }
 
+#include "FRONTEND/ARCHIVEDATA.H"
+#include "FRONTEND/LAYOUT.H"
+void *func_8025305C_de(s32 size);
+u8 *func_802A025C_de(u8 *dst, u8 *src);
+void func_802A0EB0_de(s32 handle);
+void func_8040F9E0_de(s32 index);
+extern char D_800DD0B0;
+extern s32 D_800E2AC4;
+
+/* Records of the menu resource file (original names from the debug type catalog). */
+/* One texture of the resource's texture table (28 bytes). */
+typedef struct _sm_texture_element {
+    struct OwnedImage *VramAddr;
+    u32 SMFlags;
+    s16 BitsPerPixel;
+    s16 Width;
+    s16 Height;
+    s16 NClutColors;
+    u16 Flags;
+    s16 TPage;
+    s32 ImageOffset;
+    s32 ClutOffset;
+} _sm_texture_element;
+
+/* One glyph of a font (8 bytes). */
+typedef struct sm_char_info {
+    u32 DataOffset;
+    s8 Width;
+    s8 Height;
+    s8 PhysicalWidth;
+    s8 BaselineOffset;
+} sm_char_info;
+
+/* One cached glyph image (44 bytes). */
+typedef struct t_char {
+    s32 __Unused;
+    s32 CharTimer;
+    u16 SMFlags;
+    struct OwnedImage Vram;
+} t_char;
+
+/* One open font (0x49C bytes): its 96 glyphs, their cached images per clut and its font table entry. */
+typedef struct _sm_font {
+    s32 Active;
+    sm_char_info CharInfo[96];
+    u8 *CharBits[96];
+    t_char **Char;
+    u8 **Clut;
+    ArchiveFontRecord *TableEntry;
+    u8 NumInUse;
+    struct ResourceRecAt6 FontTimer;
+} _sm_font;
+
+/* The resource file header (0x54 bytes): where each table sits in the file and how long it is. */
+typedef struct t_res_header {
+    s32 TextureTable;
+    s32 TextureTableLen;
+    s32 FontTable;
+    s32 FontTableLen;
+    s32 FontClutTable;
+    s32 FontClutTableLen;
+    s32 FontData;
+    s32 FontDataLen;
+    s32 LanguageTable;
+    s32 LanguageTableLen;
+    s32 StringTable;
+    s32 StringTableLen;
+    s32 ScreenTable;
+    s32 ScreenTableLen;
+    s32 ScreenData;
+    s32 ScreenDataLen;
+    s32 TextureData;
+    s32 TextureDataLen;
+    s32 CharData;
+    s32 CharDataLen;
+    s32 FirstScreen;
+} t_res_header;
+
+/* The open menu resource (D_801539B0, 0x2A8 bytes). */
+typedef struct t_resource {
+    s32 In;
+    char Name[512];
+    s32 Init;
+    t_res_header Header;
+    s16 NTextures;
+    _sm_texture_element *Texture;
+    u32 *ChromaKey;
+    struct ResourceRecAt6 *TexTimer;
+    struct OwnedImage *VramPool;
+    s16 NFonts;
+    ArchiveFontRecord *FontTable;
+    _sm_font *Font;
+    s16 NLanguages;
+    ArchiveTextIndexEntry *LangTable;
+    s32 CurrentLanguage;
+    char *StringBuffer;
+    char **StringTable;
+    s16 NScreens;
+    ArchiveMapEntry *Screen;
+    ArchiveMapEntry *ScreenOriginal;
+    s16 *ScreenFlags;
+    s16 *RefCount;
+    s32 NeverFreeResources;
+} t_resource;
+
+extern t_resource D_801539B0;
+
 #ifndef NON_MATCHING
 INCLUDE_ASM("ovl_80400000", func_8040F9E0_de);
-#endif
-
-#ifdef NON_MATCHING
-#include "TYPES.H"
-/* Opens image archives and allocates image, palette, and cached-resource tables. */
-void * func_8025305C_de(s32);
-u8 * func_802A025C_de(u8 *, u8 *);
-extern char D_8014D724[];
-extern char D_800DD0B0[];
-void func_802A0EB0_de(s32);
-void func_8040F9E0_de(s32 index);
-
-
-
-
-
-
-extern s32 D_80153C2C;
-extern s32 D_80153C40;
-
-extern s32 D_800E2AC4[3];
-
-typedef union { s16 count; s32 clear; } ArchiveCountWord; /* FAKEMATCH: shared views keep count reloads ordered with record clears. */
-#include "FRONTEND/ARCHIVEDATA.H"
-typedef struct Images Images;
-typedef struct func_8040FC14_S2 func_8040FC14_S2;
-typedef struct func_8040FC14_S3 func_8040FC14_S3;
-typedef struct func_8040FC14_S4 func_8040FC14_S4;
-typedef struct func_8040FC14_S5 func_8040FC14_S5;
-typedef struct func_8040FC14_S6 func_8040FC14_S6;
-typedef struct Palettes Palettes;
-typedef struct func_8040FC14_S9 func_8040FC14_S9;
-typedef struct func_8040FC14_S10 func_8040FC14_S10;
-typedef struct func_8040FC14_S11 func_8040FC14_S11;
-typedef struct func_8040FC14_S12 func_8040FC14_S12;
-typedef struct Objects Objects;
-typedef struct func_8040FC14_S14 func_8040FC14_S14;
-typedef struct func_8040FC14_S15 func_8040FC14_S15;
-typedef struct func_8040FC14_S17 func_8040FC14_S17;
-typedef struct func_8040FC14_S18 func_8040FC14_S18;
-typedef struct func_8040FC14_S19 func_8040FC14_S19;
-struct Images {
-    s32 unk0;
-    char unk4[0x204];
-    s32 unk208;
-    u32 unk20C;
-    char pad20C[0x4C];
-    s16 unk25C;
-    char pad25C[0x2];
-    void* unk260;
-    void* unk264;
-    void* unk268;
-    void* unk26C; /* FAKEMATCH: reload the resource base after linking a descriptor. */
-};
-
-typedef struct { char pad0[0xC]; u32 unkC; char padC[0xC]; s32 unk1C; } ImageHeader;
-extern ImageHeader D_8014D940;
-struct func_8040FC14_S2 {
-    char pad0[0x12];
-    u8 unk12;
-};
-struct func_8040FC14_S3 {
-    void *unk0;
-    s32 unk4;
-    char pad8[0xA];
-    s16 unk12;
-    char pad14[8];
-};
-struct func_8040FC14_S4 {
-    s32 unk0;
-    s16 unk4;
-}; /* FAKEMATCH: order table clears between the two table-base reloads. */
-struct func_8040FC14_S5 {
-    void* unk0;
-};
-struct func_8040FC14_S6 {
-    char unk0[1];
-};
-struct Palettes {
-    s16 unk0;
-    char pad0[0x2];
-    void* unk4;
-    char pad4[0xC];
-    ArchiveCountWord unk14;
-    void* unk18;
-    void* unk1C;
-};
-struct func_8040FC14_S9 {
-    s16 unk0;
-    char pad0[0xA];
-    void* unkC;
-    void* unk10;
-};
-struct Objects {
-    s16 unk0;
-    char pad2[2];
-    void *raw;
-    func_8040FC14_S15 *unk8;
-};
-struct func_8040FC14_S10 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    u32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    u32 unk28;
-    char pad28[0x30];
-    Objects objects;
-    Palettes palettes;
-};
-extern func_8040FC14_S10 D_8014D934;
-struct func_8040FC14_S11 {
-    char pad0[0x48C];
-    void* unk48C;
-};
-struct func_8040FC14_S12 {
-    char unk0[1];
-};
-struct func_8040FC14_S14 {
-    char pad0[0x48C];
-    void* unk48C;
-};
-struct func_8040FC14_S15 {
-    char pad0[0x4];
-    s8 unk4;
-    char pad4[0x47F];
-    void** unk484;
-    void** unk488;
-    ArchiveFontRecord *metadata;
-    char pad490[0xC];
-};
-struct func_8040FC14_S17 {
-    char unk0[1];
-};
-struct func_8040FC14_S18 {
-    char unk0[1];
-};
-struct func_8040FC14_S19 {
-    s32 unk0;
-    char pad4[8];
-    s32 unkC;
-    func_8040FC14_S10 header;
-    char pad98[0x8];
-    s32 unkA0;
-};
-extern func_8040FC14_S19 D_8014D924;
-typedef union {
-    Images images;
-    struct { char prefix[0x204]; func_8040FC14_S19 status; } archive;
-} ArchiveContext;
-extern ArchiveContext D_801539B0;
-
-
-
-extern func_8040FC14_S3 *D_80153C10;
-/* FAKEMATCH: preserve the ordered table-base reloads around the two clears. */
-extern func_8040FC14_S4 *D_8014D988;
-extern func_8040FC14_S15 *D_80153C28;
-/* FAKEMATCH: reload the map table base on each record clear. */
-extern ArchiveMapEntry *D_8014D9B4;
-/* Opens image archives and allocates image, palette, and cached-resource tables. */
-void func_8040FB94_de(u8 *arg0) {
-    void *state; /* FAKEMATCH: recycle the file base for the final status view, ending its old live range. */
-    void * regpart_state;
-    func_8040FC14_S10 *header;
-    Palettes *palettes;
-    s32 recordData; /* FAKEMATCH: share the field-derived member address and later object counter in one N64 integer local; their lifetimes are disjoint. */
-    Objects *objects;
-    func_8040FC14_S15 **objectTable;
-    ArchiveCountWord *mapCount;
-    s16 temp_a0_3;
-    s16 temp_hi;
-    s16 temp_v0_3;
-    s32 temp_a0; /* FAKEMATCH: reuse the record-link offset as the object index to raise its allocator priority. */
-    void **temp_a0_2;
-    void **temp_a0_4;
-    s32 temp_a1;
-    s32 temp_a3;
-    s32 var_s2; /* FAKEMATCH: reuse the descriptor index as the later palette stride to preserve allocation lifetime. */
-    s32 temp_v1;
-    s32 var_a1; /* FAKEMATCH: share the two independent pointer-array indices. */
-    s32 var_a2; /* FAKEMATCH: share the independent linking and block-offset counters. */
-    s32 var_s0; /* FAKEMATCH: reuse the image, map, and record-link indices to preserve their shared saved register. */
-    extern s32 D_8014D970;
-    s32 var_s4;
-    s32 var_v1;
-    u32 temp_v0_2;
-    u32 temp_v1_2;
-    void **temp_v1_3;
-    void **temp_v1_4;
-    ArchiveFontRecord *temp_s0;
-    func_8040FC14_S15 *temp_s1;
-    void *temp_s7;
-    func_8040FC14_S2 *temp_v0;
-    void *temp_v0_4;
-    void *temp_v0_5;
-    void *temp_v0_6;
-    void *temp_v0_7;
-    func_8040FC14_S3 *var_s1;
-
-    temp_a3 = Resmgr_OpenStream(arg0, D_800DD0B0);
-    state = &D_801539B0.images;
-    ((Images *)state)->unk0 = temp_a3;
-    Resmgr_ReadStream(&((Images *)state)->unk208, 0x54, 1, temp_a3);
-    temp_hi = ((Images *)state)->unk20C / 28;
-    ((Images *)state)->unk25C = temp_hi;
-    if (temp_hi > 0) {
-        ((Images *)state)->unk26C = func_8025305C_de(temp_hi << 5);
-        ((Images *)state)->unk268 = func_8025305C_de(((Images *)state)->unk25C * 8);
-        ((Images *)state)->unk264 = func_8025305C_de(((Images *)state)->unk25C * 4);
-        temp_v0 = func_8025305C_de((s32) ((Images *)state)->unk20C);
-        ((Images *)state)->unk260 = temp_v0;
-        Resmgr_SeekStream(((Images *)state)->unk0, ((Images *)state)->unk208, 0);
-        Resmgr_ReadStream(temp_v0, 0x1C, (s32) ((Images *)state)->unk25C, ((Images *)state)->unk0);
-        var_s0 = 0;
-        if (((Images *)state)->unk25C > 0) {
-            recordData = (s32) &((Images *)state)->unk26C;
-            var_s1 = (void *)temp_v0;
-            var_s2 = 0;
-            do {
-                temp_v1 = var_s0;
-                var_s1->unk4 = 0;
-                var_s1->unk12 = 0;
-                temp_a1 = var_s0 << 5;
-                D_8014D988[var_s0].unk4 = 0;
-                D_8014D988[var_s0].unk0 = 0;
-                var_s0 += 1;
-                D_80153C10[var_s2].unk0 = ((void *)&((func_8040FC14_S6 *)((*((void **)recordData))))->unk0[temp_a1]);
-                var_s1++;
-                Gfx_ResetImage((u8 *)*((void **)recordData) + temp_a1);
-                var_s2 += 1;
-            } while (var_s0 < ((Images *)state)->unk25C);
-        }
-    }
-    palettes = &D_8014D924.header.palettes;
-    temp_v0_2 = (u32) D_8014D924.header.unk18 >> 3;
-    palettes->unk0 = (s16) temp_v0_2;
-    if ((s32)(temp_v0_2 << 0x10) > 0) {
-        palettes->unk4 = func_8025305C_de((s32) D_8014D924.header.unk18);
-        Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unk14, 0);
-        Resmgr_ReadStream(palettes->unk4, (s32) D_8014D924.header.unk18, 1, ((Images *)state)->unk0);
-        func_8040F9E0_de(0);
-    }
-    temp_v0_3 = D_8014D924.header.unk28 / 12;
-    palettes->unk14.count = temp_v0_3;
-    if ((s32)((u32)temp_v0_3 << 0x10) > 0) {
-        palettes->unk18 = func_8025305C_de(D_8014D924.header.unk28);
-        if (*D_800E2AC4 != 0) {
-            temp_v0_4 = func_8025305C_de(D_8014D924.header.unk28);
-            palettes->unk1C = temp_v0_4;
-            func_802A0748_de(temp_v0_4, 0, (u32) D_8014D924.header.unk28);
-        }
-        Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unk24, 0);
-        Resmgr_ReadStream(palettes->unk18, D_8014D924.header.unk28, 1, ((Images *)state)->unk0);
-        var_s0 = 0;
-        mapCount = &palettes->unk14;
-        if (palettes->unk14.count > 0) {
-            var_v1 = 0;
-            do {
-                var_s0 += 1;
-                D_8014D9B4[var_v1].data = 0;
-                var_v1 += 1;
-            } while (var_s0 < mapCount->count);
-        }
-        temp_v0_5 = func_8025305C_de((((func_8040FC14_S9 *)(&D_80153C40))->unk0) * 2);
-        (((func_8040FC14_S9 *)(&D_80153C40))->unk10) = temp_v0_5;
-        func_802A0748_de(temp_v0_5, 0, (((func_8040FC14_S9 *)(&D_80153C40))->unk0) * 2);
-        temp_v0_6 = func_8025305C_de((((func_8040FC14_S9 *)(&D_80153C40))->unk0) * 2);
-        (((func_8040FC14_S9 *)(&D_80153C40))->unkC) = temp_v0_6;
-        func_802A0748_de(temp_v0_6, 0, (((func_8040FC14_S9 *)(&D_80153C40))->unk0) * 2);
-    }
-    header = &D_8014D924.header;
-    if (header->unk0 > 0) {
-        var_s0 = 0;
-        temp_s7 = func_8025305C_de(header->unk8);
-        Resmgr_SeekStream(((Images *)state)->unk0, header->unk4, 0);
-        Resmgr_ReadStream(temp_s7, header->unk8, 1, ((Images *)state)->unk0);
-        header->objects.raw = func_8025305C_de(header->unk0);
-        Resmgr_SeekStream(((Images *)state)->unk0, ((func_8040FC14_S19 *)&D_8014D924)->unkC, 0);
-        Resmgr_ReadStream(header->objects.raw, header->unk0, 1, ((Images *)state)->unk0);
-        temp_v1_2 = (u32) header->unk0 >> 5;
-        header->objects.unk0 = (s16) temp_v1_2;
-        temp_v0_7 = func_8025305C_de((s16) temp_v1_2 * 0x49C);
-        header->objects.unk8 = temp_v0_7;
-        func_802A0748_de(temp_v0_7, 0, header->objects.unk0 * 0x49C);
-        recordData = (s32) &header->objects.raw;
-        if (header->objects.unk0 > 0) {
-            var_a2 = 0;
-            do {
-                temp_a0 = var_s0 << 5;
-                var_s0 += 1;
-                D_80153C28[var_a2].metadata = ((void *)&((func_8040FC14_S12 *)(*((void **)recordData)))->unk0[temp_a0]);
-                var_a2 += 1;
-            } while (var_s0 < header->objects.unk0);
-        }
-        objects = &D_8014D924.header.objects;
-        temp_a0 = 0;
-        recordData = 0;
-        if (objects->unk0 > 0) {
-            objectTable = &objects->unk8;
-            var_s4 = 0;
-            do {
-                temp_s0 = D_80153C28[var_s4].metadata;
-                temp_s1 = (*objectTable) + var_s4;
-                Resmgr_SeekStream(((Images *)state)->unk0, D_8014D924.header.unkC + temp_s0->glyphTableOffset, 0);
-                Resmgr_ReadStream(&temp_s1->unk4, 8, 0x60, ((Images *)state)->unk0);
-                temp_s1->unk484 = func_8025305C_de(temp_s0->bitmapCount * 4);
-                *temp_s1->unk484 = func_8025305C_de(temp_s0->bitmapCount * 0x1080);
-                func_802A0748_de(*temp_s1->unk484, 0, temp_s0->bitmapCount * 0x1080);
-                var_a1 = 0;
-                if (temp_s0->bitmapCount > 0) {
-                    var_a2 = 0;
-                    do {
-                        temp_a0_2 = &temp_s1->unk484[var_a1];
-                        temp_v1_3 = temp_s1->unk484;
-                        var_a1 += 1;
-                        *temp_a0_2 = ((void *)&((func_8040FC14_S17 *)((*temp_v1_3)))->unk0[var_a2]);
-                        var_a2 += 0x1080;
-                    } while (var_a1 < temp_s0->bitmapCount);
-                }
-                temp_a0_3 = temp_s0->bitmapCount;
-                if (temp_a0_3 > 0) {
-                    var_s2 = ((temp_s0->glyphWidth * 2) + 7) & ~7;
-                    temp_s1->unk488 = func_8025305C_de(temp_a0_3 * 4);
-                    *temp_s1->unk488 = func_8025305C_de(temp_s0->bitmapCount * var_s2);
-                    Resmgr_SeekStream(((Images *)state)->unk0, D_8014D970 + ((s32 *)temp_s7)[temp_a0], 0);
-                    Resmgr_ReadStream(*temp_s1->unk488, temp_s0->bitmapCount * var_s2, 1, ((Images *)state)->unk0);
-                    var_a1 = 0;
-                    if (temp_s0->bitmapCount > 0) {
-                        var_a2 = 0;
-                        do {
-                            temp_a0_4 = &temp_s1->unk488[var_a1];
-                            temp_v1_4 = temp_s1->unk488;
-                            var_a1 += 1;
-                            *temp_a0_4 = ((void *)&((func_8040FC14_S18 *)((*temp_v1_4)))->unk0[var_a2]);
-                            var_a2 += var_s2;
-                        } while (var_a1 < temp_s0->bitmapCount);
-                    }
-                    temp_a0 += temp_s0->bitmapCount;
-                }
-
-                recordData += 1;
-                var_s4 += 1;
-            } while (recordData < D_80153C20.count);
-        }
-        func_802547E4_de(temp_s7);
-    } else {
-        header->objects.unk0 = 0;
-    }
-    regpart_state = &D_801539B0.archive.status;
-    ((func_8040FC14_S19 *)regpart_state)->unk0 = 1;
-    func_802A025C_de(D_801539B0.images.unk4, arg0);
-    ((func_8040FC14_S19 *)regpart_state)->unkA0 = 0;
-    func_802A0EB0_de(D_801539B0.images.unk0);
-    D_801539B0.images.unk0 = 0;
-}
+#else
 /* Loads the string table of resource archive section index: frees the previous string buffer and
  * pointer table, reads the section's bytes from the archive file into a fresh buffer (its size is the
  * distance to the next section's start, or to the archive end for the last one), then builds the table of
@@ -952,6 +699,114 @@ void func_8040F9E0_de(s32 index) {
         }
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8040FB94_de);
 #endif
+
+/* Opens the menu archive NAME: reads its table of contents, then its image table (with a fresh image
+   and load state per entry), its text index (loading section 0), its resource map (with copies when
+   D_800E2AC4 is set) and its fonts with their bitmap pages and glyph rows; records the name and closes
+   the file. */
+void func_8040FB94_de(u8 *name) {
+    t_resource *res;
+    s32 handle;
+    _sm_texture_element *texture;
+    ArchiveFontRecord *entry;
+    _sm_font *font;
+    s32 *clutOffsets;
+    s32 stride;
+    s32 clut;
+    s32 i;
+    s32 n;
+    s32 j;
+
+    res = &D_801539B0;
+    handle = Resmgr_OpenStream(name, &D_800DD0B0);
+    res->In = handle;
+    Resmgr_ReadStream(&D_801539B0.Header, sizeof(t_res_header), 1, handle);
+    D_801539B0.NTextures = D_801539B0.Header.TextureTableLen / sizeof(_sm_texture_element);
+    if (D_801539B0.NTextures > 0) {
+        D_801539B0.VramPool = func_8025305C_de(D_801539B0.NTextures * sizeof(struct OwnedImage));
+        D_801539B0.TexTimer = func_8025305C_de(D_801539B0.NTextures * sizeof(struct ResourceRecAt6));
+        D_801539B0.ChromaKey = func_8025305C_de(D_801539B0.NTextures * sizeof(void *));
+        texture = D_801539B0.Texture = func_8025305C_de(D_801539B0.Header.TextureTableLen);
+        Resmgr_SeekStream(res->In, D_801539B0.Header.TextureTable, 0);
+        Resmgr_ReadStream(texture, sizeof(_sm_texture_element), D_801539B0.NTextures, res->In);
+        for (i = 0; i < D_801539B0.NTextures; i++, texture++) {
+            texture->SMFlags = 0;
+            texture->TPage = 0;
+            D_801539B0.TexTimer[i].retained = 0;
+            D_801539B0.TexTimer[i].id = 0;
+            D_801539B0.Texture[i].VramAddr = &D_801539B0.VramPool[i];
+            Gfx_ResetImage(&D_801539B0.VramPool[i]);
+        }
+    }
+    D_801539B0.NLanguages = D_801539B0.Header.LanguageTableLen / sizeof(ArchiveTextIndexEntry);
+    if (D_801539B0.NLanguages > 0) {
+        D_801539B0.LangTable = func_8025305C_de(D_801539B0.Header.LanguageTableLen);
+        Resmgr_SeekStream(res->In, D_801539B0.Header.LanguageTable, 0);
+        Resmgr_ReadStream(D_801539B0.LangTable, D_801539B0.Header.LanguageTableLen, 1, res->In);
+        func_8040F9E0_de(0);
+    }
+    D_801539B0.NScreens = D_801539B0.Header.ScreenTableLen / sizeof(ArchiveMapEntry);
+    if (D_801539B0.NScreens > 0) {
+        D_801539B0.Screen = func_8025305C_de(D_801539B0.Header.ScreenTableLen);
+        if (D_800E2AC4 != 0) {
+            D_801539B0.ScreenOriginal = func_8025305C_de(D_801539B0.Header.ScreenTableLen);
+            func_802A0748_de(D_801539B0.ScreenOriginal, 0, D_801539B0.Header.ScreenTableLen);
+        }
+        Resmgr_SeekStream(res->In, D_801539B0.Header.ScreenTable, 0);
+        Resmgr_ReadStream(D_801539B0.Screen, D_801539B0.Header.ScreenTableLen, 1, res->In);
+        for (i = 0; i < D_801539B0.NScreens; i++) {
+            D_801539B0.Screen[i].data = 0;
+        }
+        D_801539B0.RefCount = func_8025305C_de(D_801539B0.NScreens * sizeof(s16));
+        func_802A0748_de(D_801539B0.RefCount, 0, D_801539B0.NScreens * sizeof(s16));
+        D_801539B0.ScreenFlags = func_8025305C_de(D_801539B0.NScreens * sizeof(s16));
+        func_802A0748_de(D_801539B0.ScreenFlags, 0, D_801539B0.NScreens * sizeof(s16));
+    }
+    if (D_801539B0.Header.FontTableLen > 0) {
+        clutOffsets = func_8025305C_de(D_801539B0.Header.FontClutTableLen);
+        Resmgr_SeekStream(res->In, D_801539B0.Header.FontClutTable, 0);
+        Resmgr_ReadStream(clutOffsets, D_801539B0.Header.FontClutTableLen, 1, res->In);
+        D_801539B0.FontTable = func_8025305C_de(D_801539B0.Header.FontTableLen);
+        Resmgr_SeekStream(res->In, D_801539B0.Header.FontTable, 0);
+        Resmgr_ReadStream(D_801539B0.FontTable, D_801539B0.Header.FontTableLen, 1, res->In);
+        D_801539B0.NFonts = D_801539B0.Header.FontTableLen / sizeof(ArchiveFontRecord);
+        D_801539B0.Font = func_8025305C_de(D_801539B0.NFonts * sizeof(_sm_font));
+        func_802A0748_de(D_801539B0.Font, 0, D_801539B0.NFonts * sizeof(_sm_font));
+        for (i = 0; i < D_801539B0.NFonts; i++) {
+            D_801539B0.Font[i].TableEntry = &D_801539B0.FontTable[i];
+        }
+        clut = 0;
+        for (n = 0; n < D_801539B0.NFonts; n++) {
+            entry = D_801539B0.Font[n].TableEntry;
+            font = &D_801539B0.Font[n];
+            Resmgr_SeekStream(res->In, D_801539B0.Header.FontData + entry->glyphTableOffset, 0);
+            Resmgr_ReadStream(font->CharInfo, 8, 0x60, res->In);
+            font->Char = func_8025305C_de(entry->bitmapCount * sizeof(t_char *));
+            font->Char[0] = func_8025305C_de(entry->bitmapCount * 96 * sizeof(t_char));
+            func_802A0748_de(font->Char[0], 0, entry->bitmapCount * 96 * sizeof(t_char));
+            for (j = 0; j < entry->bitmapCount; j++) {
+                font->Char[j] = font->Char[0] + j * 96;
+            }
+            if (entry->bitmapCount > 0) {
+                stride = (entry->glyphWidth * 2 + 7) & ~7;
+                font->Clut = func_8025305C_de(entry->bitmapCount * sizeof(t_char *));
+                font->Clut[0] = func_8025305C_de(entry->bitmapCount * stride);
+                Resmgr_SeekStream(res->In, D_801539B0.Header.CharData + clutOffsets[clut], 0);
+                Resmgr_ReadStream(font->Clut[0], entry->bitmapCount * stride, 1, res->In);
+                for (j = 0; j < entry->bitmapCount; j++) {
+                    font->Clut[j] = font->Clut[0] + j * stride;
+                }
+                clut += entry->bitmapCount + n - n; /* FAKEMATCH: the extra n terms give the font counter the allocation priority the ROM shows. */
+            }
+        }
+        func_802547E4_de(clutOffsets);
+    } else {
+        D_801539B0.NFonts = 0;
+    }
+    D_801539B0.Init = 1;
+    func_802A025C_de(D_801539B0.Name, name);
+    D_801539B0.NeverFreeResources = 0;
+    func_802A0EB0_de(D_801539B0.In);
+    D_801539B0.In = 0;
+}
