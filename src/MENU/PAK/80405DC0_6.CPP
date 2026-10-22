@@ -142,62 +142,89 @@ s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 INCLUDE_ASM("ovl_80400000", func_80406178_de);
 #endif
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-typedef struct DraftUi06434 { u8 pad[0x554]; char message[1]; } DraftUi06434;
-typedef struct DraftPlayer06434 { u8 pad[0x5D8]; ProfileRecAt84 *settings; DraftUi06434 *ui; u8 pad5E0[0xB8]; void *model; } DraftPlayer06434;
-typedef struct DraftSlot06434 { u8 pad[4]; s8 channel; } DraftSlot06434;
-typedef struct DraftMenu06434 { u8 pad[0x1C]; DraftPlayer06434 *player; DraftSlot06434 *slot; } DraftMenu06434;
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800E28C8;
-typedef struct DraftSaved06434 { u16 values[4]; u8 flag, pad[3], bytes[8]; u32 checksum; } DraftSaved06434;
-extern DraftSaved06434 D_80153738;
-extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[], D_0044EA08[], D_0044ED44[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
-extern void func_80404E28_de(s32), func_80405F48_de(void *), func_80442574_de(void *, void *, void *, void *, void *);
-extern s32 func_80404F04_de(s32), func_80404F3C_de(s32), func_80405598_de(s32);
-extern u32 func_804057F8_de(void *, u32, u32);
-void func_80406434_de(DraftMenu06434 *menu)
-{
-    DraftPlayer06434 *player;
-    ProfileRecAt84 *settings;
-    s32 channel, i;
+extern struct Saved D_80153738;
+extern struct { u8 value; } D_8014D4B0_de;
+extern u8 D_8014D4B1, D_8014D4B2, D_8014D4B3;
+extern u8 D_8014D4B4[];
+extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
+extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
+extern char D_0044EA08[], D_0044ED44[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
+extern void func_80404E28_de(s32 ch);
+extern s32 func_80404F04_de(s32 ch);
+extern s32 func_80404F3C_de(s32 ch);
+extern s32 func_80405598_de(s32 ch);
+extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
+extern void func_80442574_de(char *, char *, ObjRecAt5DC *, struct Controller *, char *);
+
+static __inline__ char *pakPrompt(s32 *channel) {
+    char *result;
+    switch (*channel) {
+    case 0:
+    default: result = D_00450BF0_de; break;
+    case 1: result = D_00450C14_de; break;
+    case 2: result = D_00450C38_de; break;
+    case 3: result = D_00450C5C_de; break;
+    }
+    return result;
+}
+
+/* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
+   prompt, else probes the Controller Pak; with no pak data it saves the player's profile (flags, four words
+   and eight name bytes) with its checksum and opens the note list through func_80405F48_de, otherwise it
+   shows the D_0044EA08, D_0044ED44 or D_0044E9C0 prompt. */
+void Pak_BeginProfileSave(Shared_PakMenu *menu) {
+    ObjRecAt5DC *owner = menu->player;
+    ObjRecAt5DC *player;
+    ProfileRecAt84 *profile;
+    s32 channel;
     char *prompt;
-    D_8014D4C0_de = 1; D_8014D4DC = 1; D_80153760 = 0; D_8014D4EC_de = 1;
-    D_800DE874 = 0; D_80153784 = 0; D_8015375C = 0;
-    channel = menu->slot->channel;
-    player = menu->player;
-    if (channel == 1) prompt = D_00450C14_de;
-    else if (channel < 2) prompt = D_00450BF0_de;
-    else if (channel == 2) prompt = D_00450C38_de;
-    else if (channel == 3) prompt = D_00450C5C_de;
-    else prompt = D_00450BF0_de;
+    s32 i;
+
+    D_8014D4C0_de = 1;
+    D_8014D4DC = 1;
+    D_80153760 = 0;
+    D_8014D4EC_de = 1;
+    D_800DE874 = 0;
+    D_80153784 = 0;
+    D_8015375C = 0;
+    channel = menu->slot->unk4;
+    player = owner;
+    prompt = pakPrompt(&channel);
     if (D_800E28C0) {
         D_80153784 = 1;
-        func_80442574_de(menu->player->ui->message, prompt, player, player->model, 0);
+        func_80442574_de(menu->player->unk5DC + 0x554, prompt, player, player->controller, 0);
         return;
     }
-    if (D_8015375C) func_80404E28_de(D_800E28C8);
-    else func_80404E28_de(menu->slot->channel);
+    if (D_8015375C) {
+        func_80404E28_de(D_800E28C8);
+    } else {
+        func_80404E28_de(menu->slot->unk4);
+    }
     if (!func_80404F04_de(channel)) {
-        settings = player->settings;
-        D_80153738.flag = settings->flags;
-        D_80153738.values[0] = settings->words[0];
-        D_80153738.values[1] = settings->words[1];
-        D_80153738.values[2] = settings->words[2];
-        D_80153738.values[3] = settings->words[3];
-        D_80153738.pad[0] = D_80153738.pad[1] = D_80153738.pad[2] = 0;
+        profile = player->profile;
+        D_8014D4B0_de.value = profile->flags;
+        D_80153738.values[0] = profile->words[0];
+        D_8014D4AA.value = profile->words[1];
+        D_8014D4AC_de.value = profile->words[2];
+        D_8014D4AE.value = profile->words[3];
+        D_8014D4B1 = 0;
+        D_8014D4B2 = 0;
+        D_8014D4B3 = 0;
         for (i = 0; i < 8; i++) {
-            D_80153738.bytes[i] = settings->name[i];
+            D_8014D4B4[i] = profile->name[i];
         }
         D_80153738.checksum = func_804057F8_de(&D_80153738, 0x14, 4);
         func_80405F48_de(menu);
         return;
     }
     D_80153784 = 1;
-    if (func_80404F3C_de(channel)) func_80442574_de(D_8014561C, D_0044EA08, player, player->model, prompt);
-    else if (func_80405598_de(channel)) func_80442574_de(D_8014561C, D_0044ED44, player, player->model, D_0044E48C);
-    else func_80442574_de(D_8014561C, D_0044E9C0, player, player->model, prompt);
+    if (func_80404F3C_de(channel)) {
+        func_80442574_de(D_8014561C, D_0044EA08, player, player->controller, prompt);
+    } else if (func_80405598_de(channel)) {
+        func_80442574_de(D_8014561C, D_0044ED44, player, player->controller, D_0044E48C);
+    } else {
+        func_80442574_de(D_8014561C, D_0044E9C0, player, player->controller, prompt);
+    }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80406434_de);
-#endif

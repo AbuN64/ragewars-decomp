@@ -411,8 +411,11 @@ struct PakMenuSlot {
 
 struct ObjRecAt5DC;
 struct ObjRecAt5DC {
-    char pad0[0x5DC];
+    char pad0[0x5D8];
+    struct ProfileRecAt84 *profile;
     char * unk5DC;
+    char pad5E0[0x698 - 0x5E0];
+    struct Controller *controller;
 };
 
 struct PakMenuSlot;
