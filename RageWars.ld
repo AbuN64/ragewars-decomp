@@ -24,7 +24,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.text);
         src/IO/802013D8_2.CPP.o(.text);
         src/DATA/MAINCODE/80202268.CPP.o(.data);
-        src/IO/802022E0.CPP.o(.text);
+        src/sdk/libgultra/func_802022E0_de.s.o(.text);
         src/sdk/libgultra/func_8020238C_de.s.o(.text);
         src/sdk/libgultra/func_802023A8_de.s.o(.text);
         src/sdk/libgultra/func_802023C4_de.s.o(.text);
@@ -1081,7 +1081,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.text);
         src/IO/802013D8_2.CPP.o(.text);
         src/sdk/libgultra/func_80202268_eu.s.o(.text);
-        src/IO/802022E0.CPP.o(.text);
+        src/sdk/libgultra/func_802022E0_de.s.o(.text);
         src/sdk/libgultra/func_8020238C_de.s.o(.text);
         src/sdk/libgultra/func_802023A8_de.s.o(.text);
         src/sdk/libgultra/func_802023C4_de.s.o(.text);
@@ -2139,7 +2139,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.text);
         src/IO/802013D8_2.CPP.o(.text);
         src/sdk/libgultra/func_80202268_eu_x.s.o(.text);
-        src/IO/802022E0.CPP.o(.text);
+        src/sdk/libgultra/func_802022E0_de.s.o(.text);
         src/sdk/libgultra/func_8020238C_de.s.o(.text);
         src/sdk/libgultra/func_802023A8_de.s.o(.text);
         src/sdk/libgultra/func_802023C4_de.s.o(.text);
@@ -3213,7 +3213,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.text);
         src/IO/802013D8_2.CPP.o(.text);
         src/sdk/libgultra/func_80202268_us.s.o(.text);
-        src/IO/802022E0.CPP.o(.text);
+        src/sdk/libgultra/func_802022E0_de.s.o(.text);
         src/sdk/libgultra/func_8020238C_de.s.o(.text);
         src/sdk/libgultra/func_802023A8_de.s.o(.text);
         src/sdk/libgultra/func_802023C4_de.s.o(.text);
@@ -4284,7 +4284,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.text);
         src/IO/802013D8_2.CPP.o(.text);
         src/sdk/libgultra/func_80202268_eu_x.s.o(.text);
-        src/IO/802022E0.CPP.o(.text);
+        src/sdk/libgultra/func_802022E0_de.s.o(.text);
         src/sdk/libgultra/func_8020238C_de.s.o(.text);
         src/sdk/libgultra/func_802023A8_de.s.o(.text);
         src/sdk/libgultra/func_802023C4_de.s.o(.text);
@@ -5387,7 +5387,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.bss .sbss COMMON);
         src/IO/802013D8_2.CPP.o(.bss .sbss COMMON);
         src/DATA/MAINCODE/80202268.CPP.o(.bss .sbss COMMON);
-        src/IO/802022E0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra/func_802022E0_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_8020238C_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023A8_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023C4_de.s.o(.bss .sbss COMMON);
@@ -6417,7 +6417,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.bss .sbss COMMON);
         src/IO/802013D8_2.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_80202268_eu.s.o(.bss .sbss COMMON);
-        src/IO/802022E0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra/func_802022E0_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_8020238C_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023A8_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023C4_de.s.o(.bss .sbss COMMON);
@@ -7454,7 +7454,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.bss .sbss COMMON);
         src/IO/802013D8_2.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_80202268_eu_x.s.o(.bss .sbss COMMON);
-        src/IO/802022E0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra/func_802022E0_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_8020238C_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023A8_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023C4_de.s.o(.bss .sbss COMMON);
@@ -8499,7 +8499,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.bss .sbss COMMON);
         src/IO/802013D8_2.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_80202268_us.s.o(.bss .sbss COMMON);
-        src/IO/802022E0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra/func_802022E0_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_8020238C_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023A8_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023C4_de.s.o(.bss .sbss COMMON);
@@ -9473,7 +9473,7 @@ SECTIONS
         src/IO/802013D8.CPP.o(.bss .sbss COMMON);
         src/IO/802013D8_2.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_80202268_eu_x.s.o(.bss .sbss COMMON);
-        src/IO/802022E0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra/func_802022E0_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_8020238C_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023A8_de.s.o(.bss .sbss COMMON);
         src/sdk/libgultra/func_802023C4_de.s.o(.bss .sbss COMMON);
