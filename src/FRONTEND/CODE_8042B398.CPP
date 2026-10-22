@@ -185,7 +185,42 @@ s32 Frontend_RefreshSetupScreen(void) {
     return 0;
 }
 
-INCLUDE_ASM("ovl_80400000", func_8042BAD0_de);
+#include "COMMON/AIPROFILE.H"
+#include "COMMON/UNUSED.H"
+/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5284, an actor kind at D_800E5288 and a handler at D_800E528C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
+
+typedef s32 (*Handler8042BCB0)(void *, s32, s32, s32, s32);
+
+
+
+extern Handler8042BCB0 D_800E528C;
+s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    Handler8042BCB0 *entry;
+    s32 index;
+    s32 wildcard;
+    s32 actor_kind;
+    s32 table_kind;
+    ObjRecAtCV1 *actor;
+
+    if (D_800E528C != 0) {
+        wildcard = 0x7530;
+        entry = &D_800E528C;
+        index = 0;
+        do {
+            if (D_800E5284[index].value == arg1) {
+                actor = arg0;
+                actor_kind = actor->unkC;
+                table_kind = D_800E5288[index].value;
+                if ((table_kind == actor_kind) || (table_kind == wildcard)) {
+                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                }
+            }
+            entry += 3;
+            index++;
+        } while (*entry != 0);
+    }
+    return 0;
+}
 
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
@@ -686,13 +721,6 @@ extern void func_80439C80_de(void *, s32);
 
 
 
-/* Dispatches event arg1 through this file's 12-byte handler table, whose rows hold an event at D_800E5284, an actor kind at D_800E5288 and a handler at D_800E528C: the first row whose event equals arg1 and whose kind equals the actor's halfword kind at 0xC, or is the wildcard 0x7530, receives all five arguments and its result is returned; with no such row, or an empty table, the result is zero. Adapted from func_802A1B50_de. */
-
-typedef s32 (*Handler8042BCB0)(void *, s32, s32, s32, s32);
-
-
-
-extern Handler8042BCB0 D_800E528C;
 
 s32 func_8042B1B8_de(s32 arg0, s32 arg1) {
     s32 result = 0;
@@ -891,31 +919,4 @@ s32 func_8042B904_de(void *arg0, void *arg1, void *arg2, s32 event) {
 }
 
 
-s32 func_8042BAD0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    Handler8042BCB0 *entry;
-    s32 index;
-    s32 wildcard;
-    s32 actor_kind;
-    s32 table_kind;
-    ObjRecAtCV1 *actor;
-
-    if (D_800E528C != 0) {
-        wildcard = 0x7530;
-        entry = &D_800E528C;
-        index = 0;
-        do {
-            if (D_800E5284[index].value == arg1) {
-                actor = arg0;
-                actor_kind = actor->unkC;
-                table_kind = D_800E5288[index].value;
-                if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
-                }
-            }
-            entry += 3;
-            index++;
-        } while (*entry != 0);
-    }
-    return 0;
-}
 #endif

@@ -1,5 +1,10 @@
 #ifndef INCLUDE_ASM_H
 #define INCLUDE_ASM_H
+#include "COMMON/OBJECTLINKS150C.H"
+#include "TYPES.H"
+#include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/NAVIGATION_GRAPH.H"
+#include "COMMON/PARTICLE_LIGHTING.H"
 #if !defined(M2CTX) && !defined(PERMUTER)
 /* asn64 defines glabel and dlabel itself: the first macro.inc of an object replaces them with splat's */
 #define INCLUDE_PRE ".ifndef _MACRO_INC_GUARD\n    .purgem glabel\n    .purgem dlabel\n    .endif\n"
@@ -19,4 +24,5 @@
 #define INCLUDE_DATA(SEG, NAME)
 #define INCLUDE_BSS(SEG, NAME, SIZE)
 #endif
+extern void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Shared_ParticleLighting *lighting);
 #endif
