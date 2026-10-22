@@ -12,29 +12,31 @@ extern u32 D_800C8148_de[];
 extern MemoryBoundary D_800CB3A0[];
 extern u32 Libgultra_TrwReadTlbEntry(void);
 
+/* 78/124 words; remaining: register assignment of the TLB loop temporaries (entry pointer and the four entry words land in other t/a registers than the ROM) */
 void func_80200610_de(void) {
-    u32 asid, mask, hi, lo0, lo1, size, first, last, count;
-    TranslationEntry *entry;
+    u32 asid, mask, hi, lo0, lo1, size, first, last, count, m, i;
+    u32 *entry;
     MemoryRange *range;
-    MemoryBoundary *boundary;
+    u32 *boundary;
     u32 *masks;
-    asid = Libgultra_TrwReadTlbEntry();
-    entry = D_800F3470;
-    range = &D_800F2D00[16];
-    range->first = -1;
-    do {
-        range->flags = 0;
-        mask = entry->pageMask;
-        hi = entry->entryHi;
-        lo0 = entry->entryLo0;
-        lo1 = entry->entryLo1;
-        entry++;
+    asid = Libgultra_TrwReadTlbEntry() & 0xFF;
+    entry = (u32 *)D_800F3470;
+    for (i = 16; i < 48; i++) {
+        D_800F2D00[i].first = -1;
+        D_800F2D00[i].flags = 0;
+        mask = *entry++;
+        hi = *entry++;
+        lo0 = *entry++;
+        lo1 = *entry++;
         if ((lo0 | lo1) & 2) {
             mask &= 0x1FFE000;
             masks = D_800C8148_de;
             size = 0x1000;
-            while (*masks != mask) {
-                if (*masks++ & 0x80000000) {
+            while (1) {
+                m = *masks;
+                if (m == mask) break;
+                masks++;
+                if (m & 0x80000000) {
                     size = 0;
                     break;
                 }
@@ -42,40 +44,35 @@ void func_80200610_de(void) {
             }
             if (size != 0) {
                 if ((lo0 & lo1 & 3) != 3) {
-                    if ((lo0 & 3) == 2 && (hi & 0xFF) != (asid & 0xFF)) lo0 &= ~2U;
-                    if ((lo1 & 3) == 2 && (hi & 0xFF) != (asid & 0xFF)) lo1 &= ~2U;
+                    if ((lo0 & 3) == 2 && (hi & 0xFF) != asid) lo0 &= ~2U;
+                    if ((lo1 & 3) == 2 && (hi & 0xFF) != asid) lo1 &= ~2U;
                 }
                 first = hi & 0xFFFFE000;
                 if (lo0 & lo1 & 2) size <<= 1;
                 else if (lo1 & 2) first += size;
-                range->first = first;
-                range->last = first + size - 1;
-                range->flags = 3;
+                D_800F2D00[i].first = first;
+                D_800F2D00[i].last = first + size - 1;
+                D_800F2D00[i].flags = 3;
             }
         }
-        range++;
-        if (range < &D_800F2D00[48]) range->first = -1;
-    } while (range < &D_800F2D00[48]);
-    boundary = D_800CB3A0;
+    }
+    boundary = (u32 *)D_800CB3A0;
     first = 0x80000000;
-    if ((s32)boundary->last >= 0) {
-        do { boundary++; } while (boundary->last < 0x80000000);
+    if ((s32)*boundary >= 0) {
+        do { boundary += 2; } while (*boundary < first);
     }
     count = 0;
-    range = D_800F2D00;
     do {
-        range->first = first;
-        last = boundary->last;
-        count++;
-        range->last = last;
+        D_800F2D00[count].first = first;
+        last = *boundary++;
+        D_800F2D00[count].last = last;
         first = last + 1;
-        range->flags = boundary->flags;
-        boundary++;
-        range++;
+        D_800F2D00[count].flags = *boundary++;
+        count++;
     } while (first != 0);
-    for (; count < 16; count++, range++) {
-        range->first = -1;
-        range->flags = 0;
+    for (; count < 16; count++) {
+        D_800F2D00[count].first = -1;
+        D_800F2D00[count].flags = 0;
     }
 }
 #else
