@@ -61,7 +61,7 @@ extern void func_80246E44_de(void *);
 extern void func_80247004_de(void *);
 extern s32 func_8024B6A0_de(void *, s32, s32);
 
-extern f32 func_8024E464_de(void *);
+extern f32 Sound_GetActorReach(void *);
 extern s32 func_8024E62C_de(void *);
 extern struct Shared_Surface *func_8024E7DC_de(void *);
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
@@ -449,7 +449,7 @@ void func_80220ED4_de(SharedPlayer *player)
     rise = (((player->views18.view18_5.body->ceiling - player->views5E8.view780_116.unk780) - player->views5E8.view718_70.crouch) - player->views5E8.view720_90.swim) - player->views5E8.view6F4_83.unk6F4;
     if (rise > 0.0f)
     {
-      f22 = func_8024E464_de(actor);
+      f22 = Sound_GetActorReach(actor);
       f21 = func_8024D398_de(actor);
       f20 = Particle_GetActorHeight(actor);
       f0 = func_8024E420_de(actor);

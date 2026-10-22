@@ -9,7 +9,7 @@
 extern CVector3 D_800C88A0_de[8];
 extern Hit_func_802106E0_de *D_80103FCC;
 extern char D_80103FD0[];
-extern f32 func_8024E464_de(Vehicle *);
+extern f32 Sound_GetActorReach(Vehicle *);
 extern f32 func_8024D398_de(Vehicle *);
 extern f32 Particle_GetActorHeight(Vehicle *);
 extern f32 func_8024E420_de(Vehicle *);
@@ -31,7 +31,7 @@ void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
     to.y += from.y;
     to.z += from.z;
     from.y += 61.44f;
-    a = func_8024E464_de(vehicle);
+    a = Sound_GetActorReach(vehicle);
     b = func_8024D398_de(vehicle);
     c = Particle_GetActorHeight(vehicle);
     if (func_8024491C_de(vehicle, from, to, D_80103FD0, a, b, c, func_8024E420_de(vehicle))) {

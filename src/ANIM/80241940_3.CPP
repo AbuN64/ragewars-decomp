@@ -12,7 +12,7 @@ extern void func_80241F24_de(Actor_func_80242550_de *, OwnerRecAt18 *, Bounds *,
 
 extern f32 func_8024D398_de(void *);
 
-extern f32 func_8024E464_de(Input_func_802426CC_de *);
+extern f32 Sound_GetActorReach(Input_func_802426CC_de *);
 
 extern f32 Particle_GetActorHeight(Input_func_802426CC_de *);
 
@@ -77,7 +77,7 @@ void func_802426CC_de(ActorRecAtB0 *actor, void *owner, Input_func_802426CC_de *
     D_80103FCC = collision;
     hit_y = func_80241728_de(query, input->x, input->z);
     input->owner = owner;
-    extent0 = func_8024E464_de(input);
+    extent0 = Sound_GetActorReach(input);
     extent1 = func_8024D398_de(input);
     extent2 = Particle_GetActorHeight(input);
     extent3 = func_8024E420_de(input);

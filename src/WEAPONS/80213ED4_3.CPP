@@ -15,7 +15,7 @@ struct Cursor;
 extern Location *func_80219408_de(struct Cursor *slot);
 extern f32 Particle_GetActorHeight(Actor_func_80214DD4_de *arg0);
 extern f32 func_8024D398_de(Actor_func_80214DD4_de *arg0);
-extern f32 func_8024E464_de(Actor_func_80214DD4_de *arg0);
+extern f32 Sound_GetActorReach(Actor_func_80214DD4_de *arg0);
 extern void func_8024E79C_de(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector3 *outPos, s32 *outRoom, s32 arg4, s32 arg5);
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
 extern f32 func_80271AA8_de(CVector3 *arg0);
@@ -156,7 +156,7 @@ void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, Tr
         pos.y = RW_MIN_LT(pos.y, func_8024E80C_de(arg0));
     }
     if (boost) {
-        reach = func_8024E464_de(arg0);
+        reach = Sound_GetActorReach(arg0);
         probe.x = arg0->pos.x + reach * func_802B7130_de(arg1->angle);
         probe.y = arg1->height;
         probe.z = arg0->pos.z + reach * func_802B6560_de(arg1->angle);

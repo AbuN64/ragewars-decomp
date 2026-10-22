@@ -26,7 +26,7 @@ extern s32 func_802227F4_de(void *, void *, s32);
 
 
 
-extern f32 func_8024E464_de(void *arg0);
+extern f32 Sound_GetActorReach(void *arg0);
 
 
 
@@ -190,7 +190,7 @@ void func_8022DE58_de(Player *arg0, LevelActor *arg1) {
                   arg0->eyeOffset) -
                  arg0->heightDelta;
     if (var_f23 > 0.0f) {
-        temp_f22 = func_8024E464_de(arg1);
+        temp_f22 = Sound_GetActorReach(arg1);
         temp_f21 = func_8024D398_de(arg1);
         temp_f20 = Particle_GetActorHeight(arg1);
         temp_f0 = func_8024E420_de(arg1);

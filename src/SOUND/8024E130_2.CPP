@@ -133,7 +133,7 @@ struct MeasureObject {
     MeasureOwner *owner;
 };
 
-f32 func_8024E464_de(MeasureObject *object) {
+f32 Sound_GetActorReach(MeasureObject *object) {
     MeasureDefinition *definition;
     for (;;) {
         definition = object->definition;
@@ -159,5 +159,5 @@ f32 func_8024E464_de(MeasureObject *object) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8024E464_de);
+INCLUDE_ASM("span_1000", Sound_GetActorReach);
 #endif

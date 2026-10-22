@@ -30,7 +30,7 @@ f32 Particle_GetActorHeight(void *);
 
 f32 func_8024E420_de(void *);
 
-f32 func_8024E464_de(void *);
+f32 Sound_GetActorReach(void *);
 
 f32 func_80273F94_de(f32, f32);
 
@@ -118,7 +118,7 @@ s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
         var_a1 = (u32) var_a1 < (arg0->status & 0x300000);
     }
     frame.sp1C = var_a1;
-    temp_f22 = func_8024E464_de(arg0);
+    temp_f22 = Sound_GetActorReach(arg0);
     temp_f21 = func_8024D398_de(arg0);
     temp_f20 = Particle_GetActorHeight(arg0);
     func_8023E690_de(&frame.sp18, temp_f22, temp_f21, temp_f20, func_8024E420_de(arg0));
