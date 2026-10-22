@@ -450,7 +450,82 @@ apply:
     func_8027027C_de(matrix, first->matrices[D_800D297C]);
 }
 
+#ifdef NON_MATCHING
+extern f32 D_800C5DF0_de, D_800C5DF4_de;
+extern void func_80270910_de(void *, void *);
+extern void func_8027347C_de(void *, f32, f32, f32);
+extern void func_80272828_de(void *);
+typedef struct LinkNode802A {
+    struct LinkNode802A *parent; /* 0x00 */
+    struct LinkNode802A *next;   /* 0x04 */
+    f32 value;                   /* 0x08 */
+    char padC[4];
+    CVector3 pos;                /* 0x10 */
+    char pad1C[0x0C];
+    f32 matrices[2][16];         /* 0x28, double buffered */
+    char pad_A8[4];
+    f32 length;                  /* 0xAC */
+    void *source;                /* 0xB0: -1 = copy the other buffer, else the node to follow */
+} LinkNode802A;
+typedef struct LinkOwner802A {
+    char pad0[8];
+    f32 **range;      /* 0x08 */
+    char pad0C[0x30];
+    u32 flags;        /* 0x3C */
+    LinkNode802A *head; /* 0x40 */
+    char pad44[8];
+    f32 totalLength;  /* 0x4C */
+} LinkOwner802A;
+/* Updates a chain of linked nodes: nodes following a source take its matrix (scaled by a size flag) or copy the
+ * other matrix buffer, then each node's distance to its parent is measured and summed into the owner's total. */
+void func_802A354C_de(LinkOwner802A *owner) {
+    LinkNode802A *node;
+    s32 changed = 0;
+    f32 delta[3];
+    f32 matrix[16];
+    owner->totalLength = 0.0f;
+    for (node = owner->head; node != 0; node = node->next) {
+        if (node->source != 0) {
+            if (node->source == (void *)-1) {
+                s32 i;
+                for (i = 0; i < 16; i++) {
+                    node->matrices[D_800D297C][i] = node->matrices[D_800D297C ^ 1][i];
+                }
+                node->source = 0;
+            } else {
+                f32 scale;
+                func_80270910_de(matrix, (char *)node->source + D_800D297C * 64 + 0x60);
+                scale = D_800C5DF0_de;
+                if (*(s32 *)(*(char **)((char *)node->source + 0x118) + 0x14) != 0) {
+                    scale = D_800C5DF4_de;
+                }
+                func_8027347C_de(matrix, scale, scale, scale);
+                func_80272828_de(matrix);
+                func_802732D0_de((char *)matrix, &node->pos.x);
+                if (owner->flags & 4) {
+                    func_802732EC_de(matrix, (f32 *)((char *)node + 0x1C));
+                } else {
+                    func_8027027C_de(matrix, node->matrices[D_800D297C]);
+                }
+            }
+            changed = 1;
+            node->value = (*owner->range)[2];
+        }
+        if (node->parent != 0) {
+            f32 length;
+            func_80271F68_de((CVector3 *)delta, &node->pos, &node->parent->pos);
+            length = func_802B72B0_de(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
+            node->parent->length = length;
+            owner->totalLength += length;
+        }
+    }
+    if (changed) {
+        *(f32 *)((char *)owner + 0x24) = (*owner->range)[0];
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_802A354C_de);
+#endif
 
 extern float D_800C5DF8_de, D_800C5DFC, D_800C5E00_de, D_800C5E04_de;
 struct Shared_AnimFrame {

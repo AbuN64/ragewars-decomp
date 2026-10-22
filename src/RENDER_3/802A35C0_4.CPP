@@ -301,4 +301,67 @@ void func_802A4598_de(EffectWorld *world, EffectActor *actor, s32 resourceId) {
 INCLUDE_ASM("span_1000", func_802A4598_de);
 #endif
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+#ifndef PUSH_GFX
+#define PUSH_GFX(w0, w1) do { u32 *cmd_ = (u32 *)D_80110634; cmd_[0] = (w0); cmd_[1] = (u32)(w1); D_80110634 = (void *)(cmd_ + 2); } while (0)
+#endif
+extern void func_8026D8F8_de(void);
+extern void func_80295FF4_de(void);
+extern void func_802A339C_de(void *, void *);
+extern void func_802A3718_de(void *, void *, void *);
+/* Builds a world's ribbon display list once and replays it afterwards: the first call opens a branch list
+ * (patched at the end to jump over the body), sets the fixed render state, then updates and draws every ribbon
+ * of the world's list at 0x7528 -- those with a negative layer at 0x34 first, positive layers second. */
+void func_802A478C_de(void *world, void *camera) {
+    void *node;
+    s32 pass;
+    u32 *start;
+    func_8026D8F8_de();
+    func_80295FF4_de();
+    if (FIELD(void *, world, 0) != 0) {
+        PUSH_GFX(0xDE000000, FIELD(void *, world, 0));
+        return;
+    }
+    FIELD(void *, world, 0) = D_80110634;
+    PUSH_GFX(0xDE010000, 0);
+    PUSH_GFX(0xE7000000, 0);
+    func_8026925C_de(0xE);
+    func_80268CE0_de(0x1C);
+    PUSH_GFX(0xD9F8FB7F, 0);
+    PUSH_GFX(0xD9FFFFFF, 0x200004);
+    PUSH_GFX(0xE3000A01, 0);
+    PUSH_GFX(0xE3000C00, 0x80000);
+    PUSH_GFX(0xD7000000, 0);
+    for (pass = 0; pass < 2; pass++) {
+        for (node = FIELD(void *, world, 0x7528); node != 0; node = FIELD(void *, node, 4)) {
+            s32 layer = FIELD(s32, node, 0x34);
+            if (pass == 0 ? layer < 0 : layer > 0) {
+                if (FIELD(u32, node, 0x3C) & 8) {
+                    func_802A354C_de(node);
+                }
+                if (FIELD(u32, node, 0x3C) & 4) {
+                    func_802A339C_de(node, camera);
+                }
+                if (FIELD(s32, node, 0x48) >= 2) {
+                    if (FIELD(s32, node, 0x34) >= 0) {
+                        func_802A3718_de(world, node, camera);
+                    } else {
+                        ((void (*)(void *, void *, void *))func_802A3DD4_de)(world, node, camera);
+                    }
+                }
+            }
+        }
+    }
+    PUSH_GFX(0xDF000000, 0);
+    start = FIELD(u32 *, world, 0);
+    FIELD(u32 *, world, 0) = start + 2;
+    start[0] = 0xDE010000;
+    start[1] = (u32)D_80110634;
+    PUSH_GFX(0xDE000000, FIELD(void *, world, 0));
+}
+#else
 INCLUDE_ASM("span_1000", func_802A478C_de);
+#endif
