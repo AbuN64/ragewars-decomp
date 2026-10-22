@@ -137,7 +137,127 @@ block_21:
     }
 }
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C4B78_de, D_800C4B7C_de, D_800C4B80_de, D_800C4B84_de, D_800C4B88_de, D_800C4B8C_de;
+extern f32 D_800C4B90_de, D_800C4B94_de, D_800C4B98_de, D_800C4B9C_de, D_800C4BA0_de, D_800C4BA4_de;
+extern char D_8011D8D0[];
+extern void func_8022B09C_de(void *, CVector3 *);
+extern void func_80283D50_de(void *);
+extern void func_80284570_de(void *, void *);
+extern f32 func_802745D0_de(f32);
+/* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
+ * sound alive, drops the target after D_800C4B78_de seconds, ends the particle when it gets close enough,
+ * otherwise turns the direction toward the target by a blend rate chosen from the turn angle and age,
+ * resets the velocity along the new direction and applies the descriptor's acceleration (clamped to its
+ * top speed). */
+void func_8027A4D0_de(void *particle) {
+    SteeringParticle *arg0 = particle;
+    CQuatern q78;
+    CQuatern q88;
+    CQuatern q98;
+    Matrix mA8;
+    CVector3 v18;
+    CVector3 v28;
+    CVector3 v38;
+    CQuatern v48;
+    CVector3 v58;
+    CVector3 v68;
+    CVector3 vE8;
+    CVector3 vF8;
+    CVector3 *direction;
+    void *owner;
+    f32 speed;
+    f32 distance;
+    f32 angle;
+    f32 rate;
+    f32 accel;
+    f32 limit;
+    f32 speed2;
+    func_80271818_de(&q78, &arg0->direction);
+    speed = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
+                             arg0->velocity.z * arg0->velocity.z);
+    owner = FIELD(void *, FIELD(void *, arg0, 0x12C), 0x1D8);
+    if (arg0->sound != 0) {
+        if (arg0->sound->id != 0x8AC || arg0->sound->handle == -1) {
+            func_80284434_de(arg0);
+            goto create_sound;
+        }
+    } else {
+create_sound:
+        arg0->sound = func_8025C95C_de(func_8025CC6C_de(), 0x8AC, &arg0->position, &arg0->position, -1);
+    }
+    if (FIELD(void *, arg0, 0x134) != 0) {
+        if (D_800C4B78_de <= arg0->time) {
+            FIELD(void *, arg0, 0x134) = 0;
+        }
+    }
+    if (FIELD(void *, arg0, 0x134) == 0) {
+        v58.x = 0;
+        v58.y = 0;
+        v58.z = D_800C4B7C_de;
+        func_8022B09C_de(owner, &v58);
+        func_80271F68_de(&v68, &v58, &arg0->position);
+        distance = func_802B72B0_de(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
+        if (distance < D_800C4B80_de && D_800C4B84_de < arg0->time) {
+            func_80283D50_de(arg0);
+            func_80284570_de(D_8011D8D0, arg0);
+            func_80284434_de(arg0);
+            return;
+        }
+    } else {
+        void *target = FIELD(void *, arg0, 0x134);
+        v18 = FIELD(CVector3, target, 0x8);
+        v18.y += Particle_GetActorHeight(target) * D_800C4B88_de;
+        func_80271F68_de(&v68, &v18, &arg0->position);
+    }
+    v28 = v68;
+    func_8027207C_de(&v28);
+    func_80271818_de(&q88, &v28);
+    func_802741A4_de(&q88);
+    func_802741A4_de(&q78);
+    func_8027207C_de(&v28);
+    v38 = arg0->direction;
+    func_8027207C_de(&v38);
+    angle = func_802745D0_de(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
+    rate = 0.0f;
+    if (!(arg0->time < D_800C4B8C_de)) {
+        rate = D_800C4B94_de;
+        if ((angle < D_800C4B90_de && D_800C4B98_de < arg0->time) || FIELD(void *, arg0, 0x134) != 0) {
+            rate = D_800C4B9C_de;
+        }
+    }
+    func_80270CD0_de(&q98, rate, &q78, &q88);
+    func_80274244_de(&q98, mA8.m);
+    direction = &arg0->direction;
+    v48.x = 0;
+    v48.y = 0;
+    v48.z = D_800C4BA0_de;
+    func_80272898_de(&mA8, &v48, direction);
+    func_80271F9C_de(&arg0->velocity, direction, speed);
+    if (D_800C4BA4_de <= arg0->time) {
+        FIELD(s8, arg0, 0x1B9) = 0;
+        FIELD(s8, arg0, 0x1BA) = 0;
+    }
+    accel = func_802B2350((s32)arg0->descriptor->motion->acceleration);
+    if (accel != 0.0f) {
+        vF8 = arg0->direction;
+        func_80271F9C_de(&vE8, &vF8, accel);
+        func_80271F34_de(&arg0->velocity, &arg0->velocity, &vE8);
+        speed2 = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
+                                  arg0->velocity.z * arg0->velocity.z);
+        limit = func_802B2350((s32)arg0->descriptor->motion->speed);
+        if (accel > 0.0f ? limit < speed2 : speed2 < limit) {
+            func_80271F9C_de(&arg0->velocity, &vF8, limit);
+        }
+    }
+    func_80279DD0_de(arg0, 1.0f);
+}
+#else
 INCLUDE_ASM("span_1000", func_8027A4D0_de);
+#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/VECTOR4F.H"
