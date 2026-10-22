@@ -47,13 +47,13 @@ INCLUDE_RODATA("data_800C", rodata_func_80445964_de_800E2810);
 #endif
 
 #if defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
 typedef struct SpinnerTimer { f32 timer; s32 max; char pad[16]; } SpinnerTimer;
 typedef struct SpinnerValue { s32 value; char pad[20]; } SpinnerValue;
 extern char D_80145040[];
 extern SpinnerTimer D_800E20A4_de[];
 extern SpinnerValue D_800E63C0[];
 extern s32 func_8022A5A0_de(char *, s32);
+#ifdef NON_MATCHING
 typedef struct SpinnerSetupMenu { char pad0[0xC]; char *object; char pad10[0xC]; s32 id; } SpinnerSetupMenu;
 extern char D_8014641C_us_rev1[];
 extern char *D_800D3C44;
@@ -124,7 +124,6 @@ INCLUDE_ASM("ovl_80400000", func_80446330_us_rev1);
 #endif
 
 #if defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
 extern f32 D_800E2810;
 extern f32 D_800D2988;
 s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
@@ -150,7 +149,4 @@ s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80445964_de);
-#endif
 #endif
