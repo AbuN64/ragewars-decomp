@@ -54,7 +54,96 @@ void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *o
     }
 }
 
+#ifdef NON_MATCHING
+#define AC_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+extern void *func_8028FDB4_de(void *, s32);
+s32 func_80277C54_de(void *bounds, void **outList, s32 *outCount) {
+    f32 *box = bounds;
+    u8 **out = (u8 **)outList;
+    u8 *items[0x40];
+    s32 keys[0x40];
+    s32 flag = 0;
+    s32 matches = 0;
+    s32 count = 0;
+    s32 i;
+    s32 k;
+    s32 n;
+    s32 j;
+    s32 sum;
+    s32 dup;
+    u8 *item;
+    u8 *table;
+    u8 *entry;
+    f32 *other;
+    for (i = 0; i < AC_FIELD(&D_8011FE88, s32, 0x1500); i++) {
+        item = (u8 *)&D_8011FE88 + 0x1508 + i * 0xC;
+        other = AC_FIELD(item, f32 *, 4);
+        if (box[0] < other[2] && other[0] < box[3] && box[2] < other[3] && other[1] < box[5]) {
+            items[matches++] = item;
+        }
+    }
+    if (matches == 1) {
+        table = func_8028FDB4_de(**(void ***)items[0], 2);
+        entry = table + 8;
+        for (n = AC_FIELD(table, s32, 4) - 1; n != -1; n--, entry += 0xC0) {
+            if (AC_FIELD(entry, f32, 0xA0) < box[3] && box[0] < AC_FIELD(entry, f32, 0xAC) &&
+                AC_FIELD(entry, f32, 0xA8) < box[5] && box[2] < AC_FIELD(entry, f32, 0xB4) &&
+                AC_FIELD(entry, f32, 0xA4) < box[4] && box[1] < AC_FIELD(entry, f32, 0xB0)) {
+                out[count++] = entry;
+                if (AC_FIELD(entry, u8, 0xBA) != 0) {
+                    flag = 1;
+                }
+                if (count == 0x40) {
+                    break;
+                }
+            }
+        }
+    } else if (matches == 0) {
+        *outCount = count;
+        return flag;
+    } else {
+        for (k = 0; k < matches; k++) {
+            table = func_8028FDB4_de(**(void ***)items[k], 2);
+            entry = table + 8;
+            for (n = AC_FIELD(table, s32, 4) - 1; n != -1; n--, entry += 0xC0) {
+                if (AC_FIELD(entry, f32, 0xA0) < box[3] && box[0] < AC_FIELD(entry, f32, 0xAC) &&
+                    AC_FIELD(entry, f32, 0xA8) < box[5] && box[2] < AC_FIELD(entry, f32, 0xB4) &&
+                    AC_FIELD(entry, f32, 0xA4) < box[4] && box[1] < AC_FIELD(entry, f32, 0xB0)) {
+                    sum = 0;
+                    for (j = 0; j < 16; j++) {
+                        sum += AC_FIELD(entry, s32, 0x60 + j * 4);
+                    }
+                    dup = 0;
+                    if (k != 0) {
+                        for (j = 0; j < count; j++) {
+                            if (keys[j] == sum) {
+                                dup = 1;
+                                break;
+                            }
+                        }
+                    }
+                    if (dup == 0) {
+                        out[count] = entry;
+                        keys[count] = sum;
+                        count++;
+                        if (AC_FIELD(entry, u8, 0xBA) != 0) {
+                            flag = 1;
+                        }
+                        if (count == 0x40) {
+                            *outCount = count;
+                            return flag;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    *outCount = count;
+    return flag;
+}
+#else
 INCLUDE_ASM("span_1000", func_80277C54_de);
+#endif
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
@@ -243,4 +332,97 @@ void func_80278274_de(ColorMesh *mesh, VertexColor *colors) {
 INCLUDE_ASM("span_1000", func_80278274_de);
 #endif
 
+#ifdef NON_MATCHING
+extern u8 D_800C4B1C_de[];
+extern f32 D_80111D70[];
+extern s32 D_800D2850;
+extern u8 *func_8028FDC8_de();
+extern u8 **func_8025343C_de();
+extern void func_802BD3A0_de();
+extern void Actors_AccumulateVertexLighting();
+s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    u8 buffer[0x100];
+    s32 hasOwner;
+    s32 size;
+    u8 *model;
+    u8 **memory;
+    u8 *data;
+    u8 *colors = 0;
+    u8 *table;
+    s32 count;
+    s32 i;
+    s32 sum;
+    s32 word;
+    u8 *header;
+    func_80278020_de((void *)arg2, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)arg5);
+    model = func_8028FDC8_de(arg0, 0, &size);
+    count = *(s32 *)(model + 4);
+    for (i = 0; i < count; i++) {
+        D_80111D70[i * 3] = 0;
+        D_80111D70[i * 3 + 1] = 0;
+        D_80111D70[i * 3 + 2] = 0;
+    }
+    if (arg5 != 0) {
+        memory = func_8025343C_de(0, 0, size + count * 4 + 0x10, D_800C4B1C_de);
+        if (memory == 0) {
+            return 0;
+        }
+        header = *memory;
+        *(s32 *)header = 1;
+        *(s32 *)(header + 4) = 0x10;
+        *(s32 *)(header + 0xC) = 0xDEADBEEF;
+        *(s32 *)(header + 8) = size + 0x10;
+        data = *memory + *(s32 *)(header + 4);
+        colors = *memory + *(s32 *)(header + 8);
+    } else {
+        memory = func_8025343C_de(0, 0, size + 8, D_800C4B1C_de);
+        if (memory == 0) {
+            return 0;
+        }
+        *(s32 *)*memory = 0;
+        data = *memory + 8;
+    }
+    func_802BD3A0_de(data, model, size);
+    table = func_8028FDB4_de(arg0, 1);
+    if (*(s32 *)(table + 4) != 0) {
+        for (i = 0; i < count; i++) {
+            word = *(s32 *)(table + 8 + i * 4);
+            D_80111D70[i * 3] += (s8)(word >> 16) * 2;
+            D_80111D70[i * 3 + 1] += (s8)(word >> 8) * 2;
+            D_80111D70[i * 3 + 2] += (s8)word * 2;
+        }
+    }
+    if (D_800D2850 == 0) {
+        func_80277A98_de((void *)data, (void *)arg3, (void *)D_80111D70, arg4);
+    } else if (hasOwner != 0) {
+        Actors_AccumulateVertexLighting(buffer, hasOwner, data, arg3, D_80111D70, arg4);
+    } else {
+        sum = 0;
+        for (i = 0; i < *(s32 *)((u8 *)&D_8011FE88 + 0x1500); i++) {
+            sum += *(s32 *)((u8 *)func_8028FDB4_de(**(void ***)((u8 *)&D_8011FE88 + 0x1508 + i * 0xC), 2) + 4);
+        }
+        if (sum == 0) {
+            func_80277A98_de((void *)data, (void *)arg3, (void *)D_80111D70, arg4);
+        }
+    }
+    func_80278274_de((void *)data, (void *)D_80111D70);
+    if (arg5 != 0) {
+        for (i = 0; i < *(s32 *)(data + 4); i++) {
+            u8 *vertex = data + 8 + i * 0x10;
+            s32 channel;
+            for (channel = 0; channel < 3; channel++) {
+                u8 value = vertex[0xC + channel];
+                if (value > 0xE1) {
+                    value = 0xE1;
+                } else if (value < 0x1E) {
+                    value = 0x1E;
+                }
+                colors[i * 4 + channel] = value;
+            }
+        }
+    }
+    return (s32)memory;
+}
+#else
 INCLUDE_ASM("span_1000", func_802784C0_de);
+#endif

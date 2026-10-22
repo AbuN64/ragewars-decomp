@@ -126,7 +126,86 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
 }
 
 
+#ifdef NON_MATCHING
+typedef struct ResultsTriple { s32 x; s32 y; s32 z; } ResultsTriple;
+extern s32 func_80439B5C_de(void *, s32, ResultsTriple, ResultsTriple);
+extern void func_80439BE0_de(void *, ResultsTriple);
+extern void func_80439C30_de(void *, ResultsTriple);
+extern f32 D_800E1FC4, D_800DDF98_de, D_800DDF9C, D_800E1FD0, D_800E1FD4, D_800DDFA8, D_800DDFAC_de;
+extern u16 D_800E19DE[];
+s32 func_8043A330_de(void) {
+    ResultsTriple scale;
+    ResultsTriple spin;
+    ResultsTriple pos;
+        ResultsTriple dirOffset;
+    f32 offsetY;
+    u8 *screen;
+    u8 *entry;
+    MenuWidget *widget;
+    s32 i;
+    s32 x;
+    s32 *slot;
+    func_802A23C4_de(1);
+    *(f32 *)&scale.x = D_800E1FC4;
+    *(f32 *)&scale.y = D_800E1FC4;
+    *(f32 *)&scale.z = D_800E1FC4;
+    pos.x = 0;
+    pos.y = 0;
+    pos.z = 0;
+    spin.x = 0;
+    spin.y = 0;
+    spin.z = 0;
+    dirOffset.x = 0;
+    dirOffset.y = 0;
+    *(f32 *)&spin.y = D_800DDF98_de;
+    *(f32 *)&dirOffset.z = D_800DDF9C;
+    x = 0;
+    for (i = 0; i < 4; i++) {
+        switch (i) {
+        case 0:
+            *(f32 *)&dirOffset.y = D_800E1FD0;
+            break;
+        case 1:
+            *(f32 *)&dirOffset.y = D_800E1FD4;
+            break;
+        case 2:
+            *(f32 *)&dirOffset.y = D_800DDFA8;
+            break;
+        case 3:
+            *(f32 *)&dirOffset.y = D_800DDFAC_de;
+            break;
+        }
+        *(f32 *)&pos.y = (f32)(x + func_802744D4_de() % 10);
+        x += 0x2D;
+        func_80439B5C_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), 0, scale, dirOffset);
+        func_80439BE0_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), pos);
+        func_80439C30_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), spin);
+    }
+    for (i = 0; i < 4; i++) {
+        if (*((u8 *)&D_80146398[0] + i * 0x96 + 0x78) == 1) {
+            widget = func_8040EC30_de(*(void **)D_800E59E0, D_800E19DE[i * 0x26]);
+            func_8040E928_de(widget, 0);
+            *((u8 *)widget + 0x10) = 0x23;
+            screen = (u8 *)D_800E59E0 + i * 0x4D0;
+            switch (*(s32 *)(screen + 0x4D4)) {
+            case 0:
+                *(s32 *)(screen + 0x4B4) = 5;
+                func_8043BA5C_de(i, 5);
+                break;
+            case 1:
+            case 2:
+                *(s32 *)(screen + 0x4B4) = 0;
+                func_8043BA5C_de(i, 0);
+                break;
+            }
+        }
+    }
+    func_8025DF34_de(0xE78);
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8043A330_de);
+#endif
 
 /* Advance the four-player results screen one frame: slide the arrows, count the timer down, step the state. */
 s32 Frontend_UpdateFourPlayerResults(void) {

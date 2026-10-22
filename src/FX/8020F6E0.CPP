@@ -12,7 +12,89 @@ INCLUDE_ASM("span_1000", func_8020F6C0_de);
 #endif
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU))
+#ifdef NON_MATCHING
+#define FX_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+extern s32 D_801468C4;
+extern void *func_8020993C_de(void *);
+extern f32 func_802726F8_de(void *, void *);
+extern s32 func_80209A94_de(void *);
+extern s32 func_8020F93C_de(void *);
+extern s32 func_8020F984_de(void *);
+s32 func_8020F6D8_eu_x(void *self) {
+    void *camera;
+    u8 *link;
+    u8 *target;
+    u8 *linkObj = 0;
+    u8 *altObj = 0;
+    u8 *alt;
+    f32 linkDist = 0.0f;
+    f32 altDist = 0.0f;
+    s32 i;
+    camera = func_8020993C_de(self);
+    link = FX_FIELD(self, u8 *, 0x64);
+    if (link != 0) {
+        linkObj = FX_FIELD(link, u8 *, 0x1D8);
+        if (FX_FIELD(linkObj, s32, 0x5E4) == 0) {
+            FX_FIELD(self, u8 *, 0x64) = 0;
+        }
+        if (FX_FIELD(linkObj, s32, 0x122C) & 0x20) {
+            FX_FIELD(self, u8 *, 0x64) = 0;
+        }
+        if (D_801468C4 != 0) {
+            if (FX_FIELD(FX_FIELD(FX_FIELD(self, u8 *, 0), u8 *, 0x5D8), u8, 0x92) == FX_FIELD(FX_FIELD(linkObj, u8 *, 0x5D8), u8, 0x92)) {
+                FX_FIELD(self, u8 *, 0x64) = 0;
+            }
+        }
+    }
+    link = FX_FIELD(self, u8 *, 0x64);
+    if (link != 0) {
+        linkObj = FX_FIELD(link, u8 *, 0x1D8);
+        linkDist = func_802726F8_de(camera, linkObj + 8);
+    } else {
+        linkObj = 0;
+        linkDist = 0.0f;
+    }
+    alt = FX_FIELD(self, u8 *, 0x28C);
+    if (alt != 0 && (FX_FIELD(alt, s32, 0x100) & 0x300000)) {
+        altObj = FX_FIELD(alt, u8 *, 0x1D8);
+        altDist = func_802726F8_de(camera, altObj + 8);
+    } else {
+        altObj = 0;
+        altDist = 0.0f;
+    }
+    if (func_80209A94_de(self) == 0 || linkObj == 0) {
+        if (func_8020F93C_de(self) == 0) {
+            FX_FIELD(self, u8 *, 0x64) = 0;
+            return 1;
+        }
+        if (altObj != 0 && func_8020F8F0_de(self) != 0) {
+            target = altObj;
+        } else {
+            i = func_8020F984_de(self);
+            target = FX_FIELD(self, u8 *, 0x3C + i * 4);
+        }
+    } else if (altObj != 0 && altDist <= linkDist) {
+        target = altObj;
+    } else {
+        i = func_8020F984_de(self);
+        if (i != -1 && (f32)FX_FIELD(self, s32, 0x94 + i * 4) < linkDist) {
+            target = FX_FIELD(self, u8 *, 0x3C + i * 4);
+        } else if (FX_FIELD(self, s32, 0x21C) == 1 && D_800C21F0_eu_x.unk4 < linkDist) {
+            FX_FIELD(self, u8 *, 0x64) = 0;
+            return 1;
+        } else {
+            target = FX_FIELD(self, u8 *, 0x64);
+        }
+    }
+    FX_FIELD(self, u8 *, 0x64) = target;
+    FX_FIELD(self, f32, 0x258) = FX_FIELD(target, f32, 8);
+    FX_FIELD(self, f32, 0x25C) = FX_FIELD(target, f32, 0xC);
+    FX_FIELD(self, f32, 0x260) = FX_FIELD(target, f32, 0x10);
+    return 1;
+}
+#else
 INCLUDE_ASM("span_1000", func_8020F6D8_eu_x);
+#endif
 #endif
 
 /* Returns 1 when one of the object's ten entries at 0x3C matches its current value at 0x28C and the

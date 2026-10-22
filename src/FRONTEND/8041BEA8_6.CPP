@@ -215,7 +215,77 @@ void func_8041C7F4_de(void *arg0) {
 INCLUDE_ASM("ovl_80400000", func_8041C7F4_de);
 #endif
 
+#ifdef NON_MATCHING
+#include "COMMON/WORLD.H"
+#define FR_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+#define D_80141008_BYTES ((u8 *)&D_80141008)
+extern s32 D_800D297C, D_800E28D0, D_800E28D4;
+extern s32 D_800CD8D0;
+extern void func_802A001C_de();
+extern u8 *func_8028CFA0_de();
+extern void func_80272898_de();
+extern void func_802466A0_de();
+extern void func_8024B2D0_de();
+void func_8041CAD8_de(Obj8041CAD8 *arg0, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing, f32 scale, s32 arg8) {
+    u8 *self = (u8 *)arg0;
+    CVector3 local60;
+    CVector3 localPos;
+    CVector3 localFacing;
+    CVector3 local80;
+    f32 scaleX;
+    f32 scaleY;
+    f32 scaleZ;
+    u8 *copy;
+    u8 *source;
+    u8 *drawState;
+    u32 *displayList;
+    u8 *link;
+    s32 i;
+    func_802A001C_de(&local60, 0, 0xC);
+    displayList = (u32 *)D_80110634;
+    D_80110634 = (Gfx *)(displayList + 2);
+    displayList[0] = 0xDA380007;
+    displayList[1] = (u32)(D_80141008_BYTES + 0x380 + D_800D297C * 64);
+    FR_FIELD(self, s32, 0x49C) = 1;
+    FR_FIELD(self, s32, 0x4A0) = arg8;
+    drawState = self + 0x190;
+    source = func_8028CFA0_de(&D_8011FE88, id, arg2, displayList);
+    if (source == 0) {
+        FR_FIELD(self, s32, 0x478) = 0;
+        return;
+    }
+    FR_FIELD(self, s32, 0) = id;
+    FR_FIELD(self, s32, 0x478) = 1;
+    FR_FIELD(self, f32, 0x498) = scale;
+    for (i = 0; i < 0x188; i++) {
+        self[4 + i] = source[i];
+    }
+    FR_FIELD(self, CVector3, 0x480) = position;
+    FR_FIELD(self, CVector3, 0x48C) = facing;
+    FR_FIELD(self, s32, 4) = 0;
+    FR_FIELD(self, s32, 8) = 0;
+    FR_FIELD(self, s32, 0x18) = 0;
+    FR_FIELD(self, s32, 0x1C) = 0;
+    FR_FIELD(self, s32, 0x20) = 0;
+    FR_FIELD(self, f32, 0xC) = D_800DD490_de;
+    scaleX = FR_FIELD(self, f32, 0x480) * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
+    scaleZ = FR_FIELD(self, f32, 0x488) * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
+    scaleY = FR_FIELD(self, f32, 0x484) * (FR_FIELD(D_80141008_BYTES, f32, 0x2A0) / (f32)D_800E28D4);
+    FR_FIELD(drawState, f32, 0x50) = scaleX;
+    FR_FIELD(drawState, f32, 0x54) = scaleY;
+    FR_FIELD(drawState, f32, 0x58) = scaleZ;
+    localFacing = FR_FIELD(self, CVector3, 0x48C);
+    func_80272898_de(D_80141008_BYTES + 0x160, &localFacing, &local80);
+    link = self + 4;
+    func_802466A0_de(drawState, -1, arg3, D_800CD8D0, link, -1, 0, FR_FIELD(self, f32, 0x498) * (&D_800DD490_de)[1], local80, 0, FR_FIELD(self, CVector3, 0x480), local60, 0);
+    func_8024B2D0_de(drawState);
+    if (FR_FIELD(self, s32, 0) == 9) {
+        ((void (*)(u8 *, s32, s32, s32))func_8041CE18_de)(self, arg3, arg4, arg2);
+    }
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8041CAD8_de);
+#endif
 
 /* Copies the three-word vector passed by value into the object's vector at 0x480. */
 
