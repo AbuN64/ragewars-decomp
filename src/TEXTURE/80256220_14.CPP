@@ -161,42 +161,23 @@ u32 func_802571F0_de(s32 offset, s32 length) {
     return func_802BBBC0_de(word) + odd;
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/AUDIO_CONTEXT.H"
+#include "COMMON/EXTERNS_14.H"
+#include "COMMON/ALAUXBUS_S.H"
+#include "COMMON/AUDIO_INITIALIZE.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 extern int D_8014D420_de, D_8014D45C;
 extern float D_800C3ED0_de, D_800C3ED4;
-extern u8 D_801462E1;
-/* Initialises the audio context: takes the recursive lock at +0x110, sets up the frame heap and
- * the synth player, loads the bank resource and sorts the first instrument's sounds by address, seeds
- * the voice handles and mix gains from the saved volume bytes, then drops the lock. */
-typedef struct SynthSetup80257360 {
-    s32 voices;
-    s32 physVoices;
-    s32 updates;
-    s32 pad1C;
-    s32 reserved;
-    ALHeap *heap;
-    s32 pad28;
-    u8 kind;
-    u8 pad2D[3];
-    void *effects;
-    s32 pad34;
-} SynthSetup80257360;
-typedef struct SynthRate80257360 {
-    s32 rate;
-    s32 count;
-    s32 size;
-} SynthRate80257360;
-typedef struct LoadedAudio80257360 {
-    s32 header0;
+typedef struct AudioBankHeader {
+    s32 reserved0;
     s32 table;
-    s32 header8;
+    s32 reserved8;
     ALBankFile *bankFile;
-} LoadedAudio80257360;
-extern void func_802567A4_de(void *lock);
+} AudioBankHeader;
+extern void func_802567A4_de(MenuRules *lock);
 extern u32 func_802BCF30_de(void);
 extern void __osRestoreInt(u32);
-extern void func_80256880_de(SynthSetup80257360 *, s32, SynthRate80257360 *);
+extern void func_80256880_de(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void func_802B2650_de(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);
 extern void func_8025D844_de(void *, void *);
@@ -204,74 +185,86 @@ extern void func_802596B4_de(void *, void *);
 extern void func_8025B758_de(void *, void *);
 extern void func_8025D158_de(void *, void *);
 extern s32 D_800CD8C0_de;
-extern int D_800CB724;
+extern s32 D_800CB724;
+extern s32 D_800CB720;
+extern s32 D_801076A0;
 s32 func_80265964_de(s32 arg0);
 void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
-void func_80257360_de(ContextRecAt2BC0 *ctx) {
-    MenuRules *lock;
-    ALHeap *frames;
-    SynthSetup80257360 synth;
-    SynthRate80257360 rate;
-    LoadedAudio80257360 *loaded;
-    ALInstrument *instrument;
-    s32 total, used;
-    s32 i, j, count;
-    u32 token;
-    ALSound_s *tmp;
-
-    lock = &ctx->lock;
-    func_802567A4_de(lock);
-    token = func_802BCF30_de();
-    lock->locked = lock->locked + 1;
-    if (lock->locked != 1) {
-        __osRestoreInt(token);
-        func_802BB2A0_de((OSMesgQueue *)lock, 0, 1);
-        frames = &ctx->frames[0];
+static inline void LockEnter(MenuRules *lock) {
+    u32 mask = func_802BCF30_de();
+    if (++lock->locked != 1) {
+        __osRestoreInt(mask);
+        func_802BB2A0_de(lock, 0, 1);
     } else {
-        __osRestoreInt(token);
-        frames = &ctx->frames[0];
+        __osRestoreInt(mask);
     }
+}
+static inline void LockLeave(MenuRules *lock) {
+    u32 mask = func_802BCF30_de();
+    if (--lock->locked != 0) {
+        __osRestoreInt(mask);
+        func_802BB420_de(lock, 0, 1);
+    } else {
+        __osRestoreInt(mask);
+    }
+}
+
+/* Initialises the audio context: creates and takes its lock, sets up the frame heap and the synthesizer,
+ * loads the sound bank and sorts the first instrument sounds by address, creates the sound player, clears the
+ * voice handles and seeds the mix volumes from the saved settings bytes, then releases the lock. */
+void func_80257360_de(ContextRecAt2BC0 *ctx) {
+    ALSynConfig config;
+    AudioInitializeTiming timing;
+    AudioBankHeader *loaded;
+    ALInstrument *instrument;
+    ALSound *swap;
+    s32 size;
+    s32 j, i;
+    s32 n;
+
+    func_802567A4_de(&ctx->lock);
+    LockEnter(&ctx->lock);
     ctx->soundState = 0;
-    alHeapInit(frames, D_8014D420_de, D_8014D45C);
-    synth.voices = 0x25;
-    synth.physVoices = 0x25;
-    synth.updates = 0x100;
-    synth.kind = 6;
-    synth.effects = &D_800CB724;
-    rate.rate = 0x5622;
-    rate.count = 1;
-    rate.size = 0x800;
-    synth.reserved = 0;
-    synth.heap = frames;
-    func_80256880_de(&synth, D_800CD8C0_de, &rate);
+    alHeapInit(ctx->frames, D_8014D420_de, D_8014D45C);
+    config.maxVVoices = 0x25;
+    config.maxPVoices = 0x25;
+    config.maxUpdates = 0x100;
+    config.fxType = 6;
+    config.params = &D_800CB724;
+    timing.frequency = 0x5622;
+    timing.frameTime = 1;
+    config.dmaproc = 0;
+    config.heap = ctx->frames;
+    timing.samples = 0x800;
+    func_80256880_de(&config, D_800CD8C0_de, &timing);
     D_801076A0 = func_80265964_de(8);
-    total = func_80265964_de(4);
-    used = func_80265964_de(0);
-    total = total - used;
-    loaded = (LoadedAudio80257360 *)func_8023C78C_de(total, 0, func_80265964_de(0));
+    size = func_80265964_de(4) - func_80265964_de(0);
+    loaded = func_8023C78C_de(size, 0, func_80265964_de(0));
     ctx->field1D6C = loaded->table;
     ctx->resource = loaded->bankFile;
     ctx->font = ctx->resource->bankArray[0];
     func_8025768C_de(ctx);
     func_8025D844_de(ctx->panel, ctx);
     instrument = ctx->font->instArray[0];
-    count = instrument->soundCount;
-    for (i = 0; i < count; i++) {
+    for (i = 0; i < instrument->soundCount; i++) {
         for (j = i + 1; j < instrument->soundCount; j++) {
             if ((u32)instrument->soundArray[j] < (u32)instrument->soundArray[i]) {
-                tmp = instrument->soundArray[j];
-                instrument->soundArray[j] = instrument->soundArray[i];
-                instrument->soundArray[i] = tmp;
+                swap = instrument->soundArray[i];
+                instrument->soundArray[i] = instrument->soundArray[j];
+                instrument->soundArray[j] = swap;
             }
         }
-        count = instrument->soundCount;
     }
     ctx->field24 = 0x11;
     ctx->field28 = 0xC0;
-    ctx->field2C = frames;
+    ctx->field2C = ctx->frames;
     func_802B2650_de(ctx->list, &ctx->field24);
-    for (i = 15; i >= 0; i--) {
-        ctx->handles[i] = -1;
+    {
+        s16 noHandle = -1;
+
+        for (n = 15; n >= 0; n--) {
+            ctx->handles[n] = noHandle;
+        }
     }
     ctx->selectedHandle = -1;
     ctx->field2B8C = -1;
@@ -284,27 +277,17 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     ctx->field2B9C = 0;
     func_802596B4_de(ctx->view, ctx);
     func_8025B758_de(ctx->menu, ctx);
-    ctx->red = (f32)(&D_801462E1)[0] * D_800C3ED0_de;
-    ctx->green = (f32)(&D_801462E1)[-1] * D_800C3ED0_de;
-    ctx->blue = (f32)(&D_801462E1)[1] * D_800C3ED0_de;
+    ctx->red = D_801462C8.volume[1] * D_800C3ED0_de;
+    ctx->green = D_801462C8.volume[0] * D_800C3ED0_de;
+    ctx->blue = D_801462C8.volume[2] * D_800C3ED0_de;
     ctx->field2BAC = 0;
-    ctx->field2BB0 = (&D_801462E1)[-2];
+    ctx->field2BB0 = D_801462C8.unknown17;
     ctx->field2BB4 = 1;
     ctx->alpha = D_800C3ED4;
     func_8025D158_de(ctx->dialog, ctx);
     D_800CB720 = 1;
-    token = func_802BCF30_de();
-    lock->locked = lock->locked - 1;
-    if (lock->locked != 0) {
-        __osRestoreInt(token);
-        func_802BB420_de((OSMesgQueue *)lock, 0, 1);
-    } else {
-        __osRestoreInt(token);
-    }
+    LockLeave(&ctx->lock);
 }
-#else
-INCLUDE_ASM("span_1000", func_80257360_de);
-#endif
 
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/EXTERNS_14.H"
