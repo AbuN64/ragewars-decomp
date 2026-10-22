@@ -21,7 +21,12 @@
 
 
 extern struct RecordRecAt189 D_80102B00[];
-extern s32 D_800E4680;
+/* The stage entry of the current match: seven opponent records from +5. */
+struct Stage {
+    char pad0[5];
+    u8 opponents[7][4];
+};
+extern struct Stage *D_800E4680;
 extern s32 D_8015402C;
 extern s32 D_80146948;
 extern s32 D_8014DD98;
@@ -89,7 +94,7 @@ void func_8042DEA0_de(void) {
             break;
         }
         D_80146948 = 0;
-        func_8042E1F0_de();
+        Frontend_PlaceStageOpponents();
     }
     switch (D_8014DD98) {
     case 0:
@@ -132,111 +137,81 @@ void func_8042DEA0_de(void) {
     }
 }
 
-#ifdef NON_MATCHING
-/* Places the computer opponents of the stage entry D_800E4680: first frees the status slots
-   (from 0x80146398) still marked joined and computer, then for each of the entry's seven opponent
-   records with a nonzero kind places it through func_8042E460_de and, by kind, sets byte 0x94 of the
-   returned slot's status and the words at 0x98 to 0xA4 of D_801468A0: kind 0xC sets 2 with 0x98 = 1,
-   0xA0 = 100 and 0xA4 = -1; 0xD sets 1 with 0x98 = 1; 0x10 sets 2; 0xE sets 1 with 0x98 = 1 for the
-   first such opponent and 0 after; 0xF sets 1 with 0x98 = 1 and 0x9C = 0; any other kind sets 0 and,
-   once a kind 0xF opponent was placed, byte 0x95 = 1. */
-#include "TYPES.H"
-
-struct ArenaStatus {
-    char pad0[0x78];
-    u8 joined;
-    char pad79[0x91 - 0x79];
-    u8 computer;
-    char pad92[0x96 - 0x92];
-};
-
-struct Match {
-    char pad0[0x98];
-    s32 rules;
-    s32 escorts;
-    s32 limit;
-    s32 leader;
-};
-
-struct Stage {
-    char pad0[5];
-    u8 opponents[7][4];
-};
-
-extern struct ArenaStatus D_80146398[];
-
+/* Places the computer opponents of the stage entry D_800E4680: first frees the player settings
+   records still marked joined and locked, then for each of the entry's seven opponent records with a
+   nonzero kind places it through func_8042E460_de and, by kind, sets the returned slot's controlMode
+   and the match counters: kind 12 sets 2 with enabled, timer 100 and cooldown -1; 13 sets 1 with
+   enabled; 16 sets 2; 14 sets 1 with enabled for the first such opponent and 0 afterwards; 15 sets 1
+   with enabled and clears unk9C; any other kind sets 0 and, once a kind 15 opponent was placed,
+   marks the slot active. */
 extern s32 func_8042E460_de(u8 *);
-
-void func_8042E1F0_de(void) {
+void Frontend_PlaceStageOpponents(void) {
     RenderCounters *match;
-    struct ArenaStatus *status;
-    u8 *settings;
+    Shared_PlayerSettingsRecord *player;
     s32 boss;
     s32 escorted;
     s32 i;
-    s32 on;
     s32 slot;
+    s32 on;
+    Shared_Game *game;
 
     boss = 0;
     escorted = 0;
     match = &D_801462C8.counters;
-    status = D_80146398;
     for (i = 0; i < 8; i++) {
-        if (status[i].joined == 1 && status[i].computer == status[i].joined) {
-            status[i].joined = 0;
-            status[i].computer = 0;
+        player = &D_801462C8.playerSettings[i];
+        if (player->enabled == 1 && player->locked == player->enabled) {
+            player->enabled = 0;
+            player->locked = 0;
         }
     }
     for (i = 0; i < 7; i++) {
         on = 1;
-        settings = (u8 *)&D_801462C8;
-        if ((*(struct Stage * *)&D_800E4680)->opponents[i][0] == 0) {
+        game = &D_801462C8;
+        if (D_800E4680->opponents[i][0] == 0) {
             continue;
         }
-        switch ((*(struct Stage * *)&D_800E4680)->opponents[i][0]) {
+        switch (D_800E4680->opponents[i][0]) {
         case 12:
-            match->enabled = 1;
-            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
-            settings[slot * 0x96 + 0x164] = 2;
+            match->enabled = on;
+            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            (game->playerSettings + slot)->controlMode = 2;
             match->timer = 100;
             match->cooldown = -1;
             break;
         case 13:
             match->enabled = on;
-            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
-            settings[slot * 0x96 + 0x164] = on;
+            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            (game->playerSettings + slot)->controlMode = on;
             break;
         case 16:
-            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
-            settings[slot * 0x96 + 0x164] = 2;
+            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            (game->playerSettings + slot)->controlMode = 2;
             break;
         case 14:
-            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
+            slot = func_8042E460_de(D_800E4680->opponents[i]);
             if (boss == 0) {
-                match->enabled = on;
-                settings[slot * 0x96 + 0x164] = on;
                 boss = 1;
+                match->enabled = on;
+                (game->playerSettings + slot)->controlMode = on;
             } else {
-                settings[slot * 0x96 + 0x164] = 0;
+                (game->playerSettings + slot)->controlMode = 0;
             }
             break;
         case 15:
+            escorted = 1;
             match->enabled = on;
             match->unk9C = 0;
-            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
-            settings[slot * 0x96 + 0x164] = 1;
-            escorted = 1;
+            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            (game->playerSettings + slot)->controlMode = on;
             break;
         default:
-            slot = func_8042E460_de((*(struct Stage * *)&D_800E4680)->opponents[i]);
-            settings[slot * 0x96 + 0x164] = 0;
+            slot = func_8042E460_de(D_800E4680->opponents[i]);
+            game->playerSettings[slot].controlMode = 0;
             if (escorted) {
-                settings[slot * 0x96 + 0x165] = on;
+                game->playerSettings[slot].active = on;
             }
             break;
         }
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8042E1F0_de);
-#endif

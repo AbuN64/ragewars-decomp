@@ -12061,7 +12061,7 @@ SECTIONS
         src/FRONTEND/80423280_12.CPP.o(.data);
         src/MENU_2/800E1B60.CPP.o(.rodata .rdata);
         src/MENU_2/800E1B60.CPP.o(.data);
-        src/FRONTEND/8042E080_3.CPP.o(.rodata .rdata);
+        src/FRONTEND/8042E080_22.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1B84.CPP.o(.rodata .rdata);
         src/MENU_2/80408AC4_3.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/8042E080_5.CPP.o */;
@@ -13797,6 +13797,7 @@ SECTIONS
         src/FRONTEND/80423280_12.CPP.o(.data);
         src/MENU_2/800E1B60.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL_9/800EE1B4.CPP.o(.rodata .rdata);
+        src/FRONTEND/8042E080_22.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1B84.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL_9/800EE1E0.CPP.o(.data);
         . = ALIGN(8) /* src/FRONTEND/8042E080_5.CPP.o */;
@@ -15507,7 +15508,7 @@ SECTIONS
         src/FRONTEND/80423280_12.CPP.o(.data);
         src/MENU_2/800E1B60.CPP.o(.rodata .rdata);
         src/MENU_2/800E1B60.CPP.o(.data);
-        src/FRONTEND/8042E080_3.CPP.o(.rodata .rdata);
+        src/FRONTEND/8042E080_22.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1B84.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/8042E080_5.CPP.o */;
         src/FRONTEND/8042E080_5.CPP.o(.rodata .rdata);
@@ -17213,6 +17214,7 @@ SECTIONS
         src/FRONTEND/80423280_12.CPP.o(.data);
         src/MENU_2/800E1B60.CPP.o(.rodata .rdata);
         src/DATA/GFXDATA/800DC7E4.CPP.o(.rodata .rdata);
+        src/FRONTEND/8042E080_22.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1B84.CPP.o(.rodata .rdata);
         src/DATA/GFXDATA/800DC810.CPP.o(.data);
         . = ALIGN(8) /* src/FRONTEND/8042E080_5.CPP.o */;
@@ -27199,7 +27201,7 @@ SECTIONS
         src/DATA/OVLTAB9/800E1B5C.CPP.o(.data);
         src/MENU_2/800E1B60.CPP.o(.rodata .rdata);
         src/DATA/OVLTAB9/800E1B64.CPP.o(.data);
-        src/FRONTEND/8042E080_3.CPP.o(.rodata .rdata);
+        src/FRONTEND/8042E080_22.CPP.o(.rodata .rdata);
         src/FRONTEND/800E1B84.CPP.o(.rodata .rdata);
         src/FRONTEND/8042E080_4.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/FRONTEND/8042E080_5.CPP.o */;
