@@ -70,7 +70,6 @@ void func_8028EDA0_de(void *object) {
  if(func_8028F544_de(scheduler,&nextRsp,&nextRdp,flags)!=flags) func_8028FA60_de(scheduler,nextRsp,nextRdp);
 }
 
-#ifdef NON_MATCHING
 /* Mechanically ported from github/legacy:src/func_8028F258.c by address. */
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -142,6 +141,3 @@ void func_8028F278_de(OSSched *sc)
         func_8028FA60_de(sc, value1, value2);
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_8028F278_de);
-#endif
