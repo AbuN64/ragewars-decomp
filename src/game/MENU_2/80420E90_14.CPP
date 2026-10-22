@@ -3,12 +3,41 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "TYPES.H"
 
-#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_ASM("ovl_80400000", func_80421AE8_de);
+#if defined(VERSION_DE)
+#define ID_SCREEN 0x398
+#define ID_SCREEN_B 0x399
+#define ID_ROW0 0x39F
+#define ID_ROW1 0x39E
+#define ID_ROW2 0x3A1
+#define ID_ROW3 0x39D
+#define ID_ROW4 0x39C
+#define ID_ROW5 0x3A0
+#define ID_WINDOW 0x39A
+#define ID_LABEL 0x39B
+#elif defined(VERSION_EU_X)
+#define ID_SCREEN 0x3A2
+#define ID_SCREEN_B 0x3A3
+#define ID_ROW0 0x3AB
+#define ID_ROW1 0x3A7
+#define ID_ROW2 0x3AA
+#define ID_ROW3 0x3A8
+#define ID_ROW4 0x3A9
+#define ID_ROW5 0x3A6
+#define ID_WINDOW 0x3A4
+#define ID_LABEL 0x3A5
+#else
+#define ID_SCREEN 0x39E
+#define ID_SCREEN_B 0x39F
+#define ID_ROW0 0x3A5
+#define ID_ROW1 0x3A4
+#define ID_ROW2 0x3A7
+#define ID_ROW3 0x3A3
+#define ID_ROW4 0x3A2
+#define ID_ROW5 0x3A6
+#define ID_WINDOW 0x3A0
+#define ID_LABEL 0x3A1
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
-/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 extern void func_802A2360_de(void);
 extern s32 func_80419E54_de(s32, s32);
 extern s32 func_8041A280_de(s32, s32);
@@ -24,20 +53,19 @@ s32 func_80421AE8_de(s32 arg0) {
     /* the hub's allocation helper returns its SelectionScreenState view; this unit keeps its own screen state type */
     D_800E4450 = (struct ScreenState *) func_8025305C_de(0x14);
     func_802A2360_de();
-    screen = func_8041A280_de(0x39E, 0x39F);
+    screen = func_8041A280_de(ID_SCREEN, ID_SCREEN_B);
     D_800E4450->screen = screen;
     func_8041A47C_de(screen);
-    func_8041B110_de(0x3A5);
-    func_8041B110_de(0x3A4);
-    func_8041B110_de(0x3A7);
-    func_8041B110_de(0x3A3);
-    func_8041B110_de(0x3A2);
-    func_8041B110_de(0x3A6);
-    window = func_8040EC30_de(arg0, 0x3A0);
+    func_8041B110_de(ID_ROW0);
+    func_8041B110_de(ID_ROW1);
+    func_8041B110_de(ID_ROW2);
+    func_8041B110_de(ID_ROW3);
+    func_8041B110_de(ID_ROW4);
+    func_8041B110_de(ID_ROW5);
+    window = func_8040EC30_de(arg0, ID_WINDOW);
     D_800E4450->window = window;
     window->alpha = 0xF;
-    D_800E4450->label = func_80419E54_de(0x3A1, 0x6E);
+    D_800E4450->label = func_80419E54_de(ID_LABEL, 0x6E);
     D_800E4450->state = 3;
     return 0;
 }
-#endif
