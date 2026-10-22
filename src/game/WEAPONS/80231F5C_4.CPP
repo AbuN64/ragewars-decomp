@@ -7,7 +7,7 @@
 #include "COMMON/RESOURCELOADSTATE.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
-#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 extern s32 D_800CD730;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
