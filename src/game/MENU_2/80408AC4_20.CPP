@@ -1,8 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
-typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 pad18; s32 unk1C; } Func_8041DF50_State;
+typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 unk1C; } Func_8041DF50_State;
 extern Func_8041DF50_State *D_800E39C0;
 extern void *func_8025305C_de(s32);
 extern void *func_8041B610_de(s32, s32);
@@ -29,8 +28,8 @@ s32 func_8041DF50_de(s32 arg0) {
     if (func_802999A0_de(0) == 0x16) {
         func_8040E8D8_de(widget, 0);
     }
+    D_800E39C0->sel = 0;
     D_800E39C0->w14 = 0;
-    D_800E39C0->pad18 = 0;
     D_800E39C0->w8[0] = func_8040EC30_de(arg0, 0x386);
     D_800E39C0->w8[1] = func_8040EC30_de(arg0, 0x38F);
     D_800E39C0->w8[2] = func_8040EC30_de(arg0, 0x390);
@@ -44,7 +43,4 @@ s32 func_8041DF50_de(s32 arg0) {
     func_8040E8D8_de(func_8040EC30_de((s32)D_800E39C0->w8[(s32)D_800E39C0->w14], 0x38C), 1);
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8041DF50_de);
-#endif
 #endif
