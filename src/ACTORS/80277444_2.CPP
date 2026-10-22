@@ -146,6 +146,7 @@ INCLUDE_ASM("span_1000", func_80277C54_de);
 #endif
 
 #ifdef NON_MATCHING
+/* 142/149 words; remaining: ids pointer and idx counter materialise differently than the original (list->count / ids++ forms) */
 #include "TYPES.H"
 #include "stddef.h"
 
@@ -217,7 +218,8 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
         return func_80277C54_de(bounds, out, countOut);
     }
     boxTable = func_8028FDB4_de(table, 2);
-    idx = boxTable->count - 1;
+    idx = boxTable->count;
+    idx--;
     box = boxTable->boxes;
     outAt = out;
     for (; idx != -1; idx--) {
@@ -229,8 +231,9 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
                 idTable = func_8028FDB4_de(table, 3);
                 if (*idTable > 0) {
                     list = func_8028FDB4_de(idTable, idx);
+                    ids = (s16 *)list;
                     len = list->count;
-                    ids = list->ids;
+                    ids++;
                     key = func_80250938_de(wanted, table);
                     n = 0;
                     if (found < len) {
