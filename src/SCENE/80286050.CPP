@@ -195,7 +195,89 @@ first_pass_done:
     func_8025CB88_de(func_8025CC6C_de());
 }
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+#ifndef PUSH_GFX
+#define PUSH_GFX(w0, w1) do { u32 *cmd_ = (u32 *)D_80110634; cmd_[0] = (w0); cmd_[1] = (u32)(w1); D_80110634 = (void *)(cmd_ + 2); } while (0)
+#endif
+extern f32 D_800C50FC_de;
+extern u32 *D_80110634;
+extern char D_0028DFE4[], D_0028E044[];
+typedef struct SortEntry { void *object; f32 distance; } SortEntry;
+extern void func_802390D0_de(void *, void *);
+extern void func_802852C0_de(void *, s32, s32, void *, void *);
+extern void func_80250A9C_de(void *, void *);
+extern void func_8024EB90_de(void *);
+extern void func_80249E28_de(void *, void *);
+/* Draws a world's scene objects back to front: emits the world's static display list if there is one, then
+ * measures each object's squared distance to the camera (offset by a jittered vector from func_802390D0_de),
+ * sorts the list with func_802852C0_de and draws each object by its kind (0 actor, 1 prop, 3 effect). */
+void func_80286454_de(void *world, void *camera) {
+    SortEntry entries[0x800];
+    f32 jitter[3];
+    s32 count;
+    s32 i;
+    f32 ox;
+    f32 oy;
+    f32 oz;
+    if (FIELD(void *, world, 0x124) != 0) {
+        PUSH_GFX(0xDE000000, FIELD(void *, world, 0x124));
+    }
+    count = FIELD(s32, world, 0x10BC);
+    if (count == 0) {
+        return;
+    }
+    PUSH_GFX(0xDB040004, 1);
+    PUSH_GFX(0xDB04000C, 1);
+    PUSH_GFX(0xDB040014, 0xFFFF);
+    PUSH_GFX(0xDB04001C, 0xFFFF);
+    func_802390D0_de(jitter, camera);
+    ox = jitter[0] * D_800C50FC_de;
+    func_802390D0_de(jitter, camera);
+    oy = jitter[1] * D_800C50FC_de;
+    func_802390D0_de(jitter, camera);
+    oz = jitter[2] * D_800C50FC_de;
+    for (i = 0; i < count; i++) {
+        void *object = FIELD(void *, world, 0x10C0 + i * 4);
+        f32 x;
+        f32 y;
+        f32 z;
+        u8 kind = FIELD(u8, object, 0);
+        if (kind != 1 && kind < 2 && kind == 0) {
+            x = FIELD(f32, object, 0xB8) + FIELD(f32, object, 0xC4) + ox;
+            y = FIELD(f32, object, 0xBC) + FIELD(f32, object, 0xC8) + oy;
+            z = FIELD(f32, object, 0xC0) + FIELD(f32, object, 0xCC) + oz;
+        } else {
+            x = FIELD(f32, object, 0x8) + FIELD(f32, object, 0x8) + ox;
+            y = FIELD(f32, object, 0xC) + FIELD(f32, object, 0xC) + oy;
+            z = FIELD(f32, object, 0x10) + FIELD(f32, object, 0x10) + oz;
+        }
+        entries[i].object = object;
+        entries[i].distance = x * x + y * y + z * z;
+    }
+    func_802852C0_de(entries, count, 8, D_0028E044, D_0028DFE4);
+    func_8026D980_de();
+    for (i = 0; i < count; i++) {
+        void *object = entries[i].object;
+        switch (FIELD(u8, object, 0)) {
+        case 0:
+            func_80250A9C_de(object, camera);
+            break;
+        case 1:
+            func_80249E28_de(object, camera);
+            break;
+        case 3:
+            func_8024EB90_de(object);
+            break;
+        }
+    }
+    func_8026D9D0_de();
+}
+#else
 INCLUDE_ASM("span_1000", func_80286454_de);
+#endif
 
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/WORLD.H"

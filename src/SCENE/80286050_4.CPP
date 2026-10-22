@@ -43,7 +43,156 @@ void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
     }
 }
 
+#ifdef NON_MATCHING
+#ifndef FIELD
+#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#endif
+extern f32 D_800C5208;
+extern s32 func_80285180_de(void *, s32);
+extern void *func_80254480_de(s32, void *, s32);
+extern void func_80253D10_de(s32, void *, void *);
+extern void func_8028FF0C_de(void *, void *, s32);
+extern s32 func_8028FD90_de(void *);
+extern s32 func_8028FDF8_de(void *, s32);
+extern void func_802BD3A0_de(void *, void *, s32);
+extern void func_8024F960_eu(void *, void *, s32, void *, f32);
+extern void func_8024FD6C_eu(void *, void *, s32, void *);
+extern void func_8024E990_de(void *, void *, s32, void *);
+extern void func_80276CB0_de(void *, void *);
+/* Packs a loaded scene's five resource tables into one buffer: header (a count word and offset words), then
+ * the placed props (0xE8 bytes each, from tables 0 and 1), the placed actors (0x1C8 each, table 2, with a
+ * visibility bit looked up per entry), the 0xC0-byte records of table 3 and the raw bytes of table 4, and
+ * finally lets func_80289970_de position every actor against the packed records. */
+void func_8028798C_de(void *scene, void *owner) {
+    void *root;
+    void *table0;
+    void *table1;
+    void *table2;
+    void *table3;
+    void *table4;
+    s32 count0;
+    s32 count1;
+    s32 count2;
+    s32 count3;
+    s32 size0;
+    s32 size2;
+    s32 size3;
+    s32 size4;
+    s32 offset;
+    s32 sections;
+    s32 i;
+    s32 j;
+    u32 *buffer;
+    u8 *header;
+    u8 *props;
+    u8 *actors;
+    u8 *records;
+    void *segments;
+    void *pointers[0x80];
+    CVector3 position;
+    u8 *source;
+    u8 *dest;
+    if (func_80285180_de(owner, 1) == 0) {
+        return;
+    }
+    root = **(void ***)owner;
+    table0 = func_8028FDB4_de(root, 0);
+    count0 = FIELD(s32, table0, 4);
+    table1 = func_8028FDB4_de(root, 1);
+    count1 = FIELD(s32, table1, 4);
+    size0 = (count0 + count1) * 0xE8 + 8;
+    table2 = func_8028FDB4_de(root, 2);
+    count2 = FIELD(s32, table2, 4);
+    size2 = count2 * 0x1C8 + 8;
+    table3 = func_8028FDB4_de(root, 3);
+    count3 = FIELD(s32, table3, 4);
+    size3 = count3 * 0xC0 | 8;
+    table4 = func_8028FDB4_de(root, 4);
+    size4 = (*(s32 *)table4 * 4 + 0xF) & ~7;
+    buffer = func_80254480_de(0, owner, 0x18 + size2 + size0 + size3 + size4);
+    if (buffer != 0) {
+        header = (u8 *)*(u32 **)buffer;
+        offset = 0x18;
+        sections = 1;
+        *(s32 *)header = 0;
+        FIELD(s32, header, 4) = 0x18;
+        func_8028FF0C_de(table0, header + offset, 1);
+        func_8028FF0C_de(table1, header + offset, 1);
+        FIELD(s32, header, 0x18) = 0xE8;
+        FIELD(s32, header + offset, 4) = count0 + count1;
+        segments = (char *)func_8028FDB4_de(FIELD(void *, scene, 0x6C), 2) + 8;
+        props = header + 0x20;
+        for (i = 0; i < count0; i++) {
+            func_8024F960_eu(props + i * 0xE8, (char *)table0 + 8 + i * 0x1C,
+                             func_8028FE28_de(FIELD(void *, scene, 0x54), FIELD(void *, scene, 0x24), FIELD(u16, (char *)table0 + 8 + i * 0x1C, 8)),
+                             segments, **(f32 **)((char *)scene + 0x20000 - 0x4D50));
+        }
+#if !defined(VERSION_DE)
+        for (j = 0; j < count1; j++) {
+            func_8024FD6C_eu(props + (j + count0) * 0xE8, (char *)table1 + 8 + j * 0x34,
+                             func_8028FE28_de(FIELD(void *, scene, 0x54), FIELD(void *, scene, 0x24), FIELD(u16, (char *)table1 + 8 + j * 0x34, 0x28)),
+                             segments);
+        }
+#endif
+        offset += size0;
+        *(s32 *)header = sections;
+        FIELD(s32, header, 4 + *(s32 *)header * 4) = offset;
+        func_8028FF0C_de(table2, header + offset, 1);
+        sections++;
+        FIELD(s32, header + offset, 0) = 0x1C8;
+        FIELD(s32, header + offset, 4) = count2;
+        actors = header + offset + 8;
+        for (i = 0; i < count2; i++) {
+            u8 *entry = actors + i * 0x1C8;
+            s32 bit;
+            u8 *bits;
+            void *mask;
+            func_8024E990_de(entry, (char *)table2 + 8 + i * 0x20,
+                             func_8028FE28_de(FIELD(void *, scene, 0x54), FIELD(void *, scene, 0x24), FIELD(u16, (char *)table2 + 8 + i * 0x20, 0x14)),
+                             segments);
+            bit = FIELD(u16, entry, 0x19E);
+            mask = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(FIELD(void *, scene, 0x80), 0), FIELD(s32, scene, 0x20000 - 0x4BF4)), 1);
+            func_8028FDB4_de(mask, 0);
+            func_8028FDF8_de(mask, 1);
+            bits = func_8028FDB4_de(mask, 1);
+            if (bits[bit / 8] & (1 << (bit & 7))) {
+                FIELD(u16, entry, 0x19C) |= 1;
+            }
+        }
+        offset += size2;
+        *(s32 *)header = sections;
+        sections++;
+        FIELD(s32, header, 4 + *(s32 *)header * 4) = offset;
+        func_8028FF0C_de(table3, header + offset, 1);
+        FIELD(s32, header + offset, 0) = 0xC0;
+        FIELD(s32, header + offset, 4) = count3;
+        records = header + offset + 8;
+        for (i = 0; i < count3; i++) {
+            func_80276CB0_de(records + i * 0xC0, (char *)table3 + 8 + i * 0x4C);
+        }
+        offset += size3;
+        *(s32 *)header = sections;
+        sections++;
+        FIELD(s32, header, 4 + *(s32 *)header * 4) = offset;
+        func_802BD3A0_de(header + offset, table4, func_8028FD90_de(table4));
+        *(s32 *)header = sections;
+        FIELD(s32, header, 4 + sections * 4) = offset + size4;
+        for (i = 0; i < count3; i++) {
+            pointers[i] = records + i * 0xC0;
+        }
+        for (i = 0; i < count2; i++) {
+            u8 *entry = actors + i * 0x1C8;
+            position.x = FIELD(f32, entry, 0x8);
+            position.y = FIELD(f32, entry, 0xC) + Particle_GetActorHeight((Actor_func_80214310_de *)entry) * D_800C5208;
+            position.z = FIELD(f32, entry, 0x10);
+            func_80289970_de((ObjectRecAtBC **)pointers, count3, &position, (Shared_ParticleLighting *)(entry + 0x1A8));
+        }
+    }
+    func_80253D10_de(0, owner, buffer);
+}
+#else
 INCLUDE_ASM("span_1000", func_8028798C_de);
+#endif
 
 #ifndef NON_MATCHING
 INCLUDE_ASM("span_1000", func_80287F18_de);
