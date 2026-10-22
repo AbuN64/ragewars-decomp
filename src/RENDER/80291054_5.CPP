@@ -68,7 +68,7 @@ void Render_UpdateFrameTiming(TimingWorld *arg0) {
     u64 temp_v0;
 
     temp_ret = func_802BADC0_de();
-    temp_ret_2 = func_802C0DA0_de((temp_ret-D_801428A0)<<6,3000);
+    temp_ret_2 = __udivdi3((temp_ret-D_801428A0)<<6,3000);
 #if defined(VERSION_DE)
     temp_fs0 = (f32)temp_ret_2 * D_800C546C * D_800C5470;
 #else

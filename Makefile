@@ -121,6 +121,9 @@ $(foreach v,$(VERSIONS),build/$(v)/src/MATH/80299368.CPP.o): CFLAGS := -G0 -mips
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/io_hostmemory.CPP.o): TC := gcc_2_7_2_kmc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/io_hostmemory.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/IO/io_hostmemory.CPP.o): CFLAGS := -G0 -mips3 -mgp32 -mfp32 -O2
+$(foreach v,$(VERSIONS),build/$(v)/src/SDK/AUDIO/802C5E90.CPP.o): TC := gcc_2_8_1_sn64
+$(foreach v,$(VERSIONS),build/$(v)/src/SDK/AUDIO/802C5E90.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
+$(foreach v,$(VERSIONS),build/$(v)/src/SDK/AUDIO/802C5E90.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
 $(foreach v,$(VERSIONS),build/$(v)/src/SDK/PRINTF/802C1880.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/SDK/PRINTF/802C1880.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/SDK/PRINTF/802C1880.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -mfp32

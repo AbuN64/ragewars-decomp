@@ -1,6 +1,6 @@
 #include "sdk/libgultra.h"
 
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 unsigned int D_auto_src_rw_u64_remainder_normalization_width_us_rev1[64] = {
     0x00010202, 0x03030303, 0x04040404, 0x04040404, 0x05050505, 0x05050505, 0x05050505, 0x05050505,
     0x06060606, 0x06060606, 0x06060606, 0x06060606, 0x06060606, 0x06060606, 0x06060606, 0x06060606,

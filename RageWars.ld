@@ -11731,6 +11731,10 @@ SECTIONS
         src/GAMECORE/800CCF28.CPP.o(.rodata .rdata);
         src/GAMECORE/800CCF38.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C7CF8.CPP.o(.data);
+        src/sdk/libgultra_inferred/800CD394_13.CPP.o(.data);
+        . = ALIGN(8) /* src/SDK/AUDIO/802C5E90.CPP.o */;
+        src/SDK/AUDIO/802C5E90.CPP.o(.rodata .rdata);
+        src/sdk/libgultra_inferred/800CD394_14.CPP.o(.data);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.rodata .rdata);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.data);
         . = ALIGN(8) /* src/SDK/LIBGCC/802C6A00_25.CPP.o */;
@@ -13471,6 +13475,10 @@ SECTIONS
         src/GAMECORE/800CCF28.CPP.o(.rodata .rdata);
         src/GAMECORE/800CCF38.CPP.o(.rodata .rdata);
         src/DATA/OVLDAT2/800C88E8.CPP.o(.data);
+        src/sdk/libgultra_inferred/800CD394_13.CPP.o(.data);
+        . = ALIGN(8) /* src/SDK/AUDIO/802C5E90.CPP.o */;
+        src/SDK/AUDIO/802C5E90.CPP.o(.rodata .rdata);
+        src/sdk/libgultra_inferred/800CD394_14.CPP.o(.data);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.rodata .rdata);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.data);
         . = ALIGN(8) /* src/SDK/LIBGCC/802C6A00_25.CPP.o */;
@@ -15176,6 +15184,11 @@ SECTIONS
         src/GAMECORE/800CCF28.CPP.o(.rodata .rdata);
         src/GAMECORE/800CCF38.CPP.o(.rodata .rdata);
         src/SYSTEM/800C92B8.CPP.o(.data);
+        src/sdk/libgultra_inferred/800CD394_13.CPP.o(.data);
+        . = ALIGN(8) /* src/SDK/AUDIO/802C5E90.CPP.o */;
+        src/SDK/AUDIO/802C5E90.CPP.o(.rodata .rdata);
+        src/sdk/libgultra_inferred/800CD394_14.CPP.o(.data);
+        src/sdk/libgultra_inferred/800CD394_15.CPP.o(.data);
         . = ALIGN(8) /* src/SDK/LIBGCC/802C6A00_25.CPP.o */;
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.rodata .rdata);
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.data);
@@ -16869,6 +16882,8 @@ SECTIONS
         src/GAMECORE/800CCF38.CPP.o(.rodata .rdata);
         src/DATA/OVLTBL/800C7C18.CPP.o(.data);
         src/sdk/libgultra_inferred/800CD394_13.CPP.o(.data);
+        . = ALIGN(8) /* src/SDK/AUDIO/802C5E90.CPP.o */;
+        src/SDK/AUDIO/802C5E90.CPP.o(.rodata .rdata);
         src/sdk/libgultra_inferred/800CD394.CPP.o(.data);
         . = ALIGN(8) /* src/SDK/LIBGCC/802C6A00_25.CPP.o */;
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.rodata .rdata);
@@ -18671,6 +18686,8 @@ SECTIONS
         src/sdk/libgultra_inferred/800CD394_11.CPP.o(.data);
         src/sdk/libgultra_inferred/800CD394_12.CPP.o(.data);
         src/sdk/libgultra_inferred/800CD394_13.CPP.o(.data);
+        . = ALIGN(8) /* src/SDK/AUDIO/802C5E90.CPP.o */;
+        src/SDK/AUDIO/802C5E90.CPP.o(.rodata .rdata);
         src/sdk/libgultra_inferred/800CD394_14.CPP.o(.data);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.data);
         . = ALIGN(8) /* src/SDK/LIBGCC/802C6A00_25.CPP.o */;
@@ -20635,6 +20652,9 @@ SECTIONS
         src/GAMECORE/800CCF28.CPP.o(.bss .sbss COMMON);
         src/GAMECORE/800CCF38.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C7CF8.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_13.CPP.o(.bss .sbss COMMON);
+        src/SDK/AUDIO/802C5E90.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_14.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.bss .sbss COMMON);
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_17.CPP.o(.bss .sbss COMMON);
@@ -21908,6 +21928,9 @@ SECTIONS
         src/GAMECORE/800CCF28.CPP.o(.bss .sbss COMMON);
         src/GAMECORE/800CCF38.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLDAT2/800C88E8.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_13.CPP.o(.bss .sbss COMMON);
+        src/SDK/AUDIO/802C5E90.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_14.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.bss .sbss COMMON);
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_17.CPP.o(.bss .sbss COMMON);
@@ -23144,6 +23167,10 @@ SECTIONS
         src/GAMECORE/800CCF28.CPP.o(.bss .sbss COMMON);
         src/GAMECORE/800CCF38.CPP.o(.bss .sbss COMMON);
         src/SYSTEM/800C92B8.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_13.CPP.o(.bss .sbss COMMON);
+        src/SDK/AUDIO/802C5E90.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_14.CPP.o(.bss .sbss COMMON);
+        src/sdk/libgultra_inferred/800CD394_15.CPP.o(.bss .sbss COMMON);
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_17.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_18.CPP.o(.bss .sbss COMMON);
@@ -24386,6 +24413,7 @@ SECTIONS
         src/GAMECORE/800CCF38.CPP.o(.bss .sbss COMMON);
         src/DATA/OVLTBL/800C7C18.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_13.CPP.o(.bss .sbss COMMON);
+        src/SDK/AUDIO/802C5E90.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394.CPP.o(.bss .sbss COMMON);
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_17.CPP.o(.bss .sbss COMMON);
@@ -25826,6 +25854,7 @@ SECTIONS
         src/sdk/libgultra_inferred/800CD394_11.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_12.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_13.CPP.o(.bss .sbss COMMON);
+        src/SDK/AUDIO/802C5E90.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_14.CPP.o(.bss .sbss COMMON);
         src/sdk/libgultra_inferred/800CD394_15.CPP.o(.bss .sbss COMMON);
         src/SDK/LIBGCC/802C6A00_25.CPP.o(.bss .sbss COMMON);
