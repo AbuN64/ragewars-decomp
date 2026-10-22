@@ -302,9 +302,51 @@ s32 func_8042B78C_de(void *arg0, void *arg1, void *arg2, s32 event) {
 }
 #undef SCR78C
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8042B904_de);
-#endif
+#define SCR904 ((struct Screen_func_8042B78C_de *)D_800E4F60)
+s32 func_8042B904_de(void *arg0, void *arg1, void *arg2, s32 event) {
+    s32 changed;
+    s32 count;
+
+    func_8029973C_de();
+    if (event != 1) {
+        return 0;
+    }
+    changed = 0;
+    if (SCR904->category != 3) {
+        changed = SCR904->category == 0;
+        if (changed) {
+            changed = 1;
+            if (SCR904->selection >= 11) {
+                SCR904->selection = 21 - SCR904->selection;
+            } else {
+                SCR904->category = changed;
+            }
+        } else {
+            changed = 1;
+            SCR904->category = SCR904->category + changed;
+        }
+    }
+    if (changed != 1) {
+        return 0;
+    }
+    func_8025DF34_de(0xE7D);
+    func_8042B2E4_de();
+    SCR904->word45C = 0;
+    SCR904->word464 = 0;
+    SCR904->item->alpha = 0x41;
+    count = func_8042B154_de(Frontend_CategoryToList(SCR904->category));
+    if (SCR904->selection >= count) {
+        SCR904->selection = count - 1;
+    }
+    func_8042A990_de();
+    if (SCR904->selection == 0) {
+        func_80439C80_de(SCR904->view, SCR904->category + 0xEA6);
+        func_8040E8D8_de(SCR904->marker, 1);
+        SCR904->marker->x = SCR904->category * 34 + 0x7C;
+    }
+    return 0;
+}
+#undef SCR904
 
 s32 Frontend_EndSetupInput(void) {
     func_8029973C_de();
@@ -855,51 +897,6 @@ extern void func_80439C80_de(void *, s32);
 
 /* Calls func_8029973C_de; when the mode word at offset 0x3DC of the object D_800E4F60 points to is 3,
    sets it to 5 and the word at 0x3E0 to 4. Returns zero. */
-s32 func_8042B904_de(void *arg0, void *arg1, void *arg2, s32 event) {
-    struct Screen_func_8042B78C_de *screen;
-    s32 changed;
-    s32 count;
-
-    func_8029973C_de();
-    if (event != 1) {
-        return 0;
-    }
-    screen = (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))));
-    changed = 0;
-    if (screen->category != 3) {
-        changed = screen->category == 0;
-        if (changed) {
-            changed = 1;
-            if (screen->selection >= 11) {
-                screen->selection = 21 - screen->selection;
-            } else {
-                screen->category = changed;
-            }
-        } else {
-            changed = 1;
-            screen->category = screen->category + changed;
-        }
-    }
-    if (changed != 1) {
-        return 0;
-    }
-    func_8025DF34_de(0xE7D);
-    func_8042B2E4_de();
-    (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->word45C = 0;
-    (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->word464 = 0;
-    (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->item->alpha = 0x41;
-    count = func_8042B154_de(Frontend_CategoryToList((*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->category));
-    if ((*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->selection >= count) {
-        (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->selection = count - 1;
-    }
-    func_8042A990_de();
-    if ((*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->selection == 0) {
-        func_80439C80_de((*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->view, (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->category + 0xEA6);
-        func_8040E8D8_de((*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->marker, 1);
-        (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->marker->x = (*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B78C_de * *)&(*(struct Screen_func_8042B4D4_de * *)&(*(func_8042B4C4_S1 * *)&D_800E4F60))))->category * 34 + 0x7C;
-    }
-    return 0;
-}
 
 
 #endif
