@@ -195,46 +195,55 @@ void func_80219490_de(char *object, char *camera) {
     func_8026E378_de(0, 0x20);
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
-typedef struct Shared_MatchOptions { char pad0[0x1D]; u8 enabled; } Shared_MatchOptions;
-extern Shared_MatchOptions D_801462C8;
-extern s32 D_801468F4,D_80146918;
-extern char *D_800D3A40,*D_800D3A44,*D_800D3A48,*D_800D3A54,*D_800D3A58;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/GAMEPLAY_REACTIONS.H"
+#include "COMMON/MENU_MATCH_GLOBALS.H"
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern char *D_800D3A40[], *D_800D3A44[], *D_800D3A48[], *D_800D3A54[], *D_800D3A58[];
+static inline char *reactionText(char **text, MenuSettings *settings) { return text[settings->language]; }
+#else
+extern char *D_800D3A40, *D_800D3A44, *D_800D3A48, *D_800D3A54, *D_800D3A58;
+static inline char *reactionText(char *text, MenuSettings *settings) { return text; }
+#endif
 extern void func_802934C0_de(char *,const char *);
 extern void func_80239770_de(void *,void *,char *,f32);
+static inline void nextMessage(s32 *next) {
+    (*next)++;
+    *next %= 4;
+}
+
 void func_80219688_de(Shared_ReactionPlayer *a,Shared_ReactionPlayer *b,Shared_ReactionInteraction *unused) {
-    if (!D_801462C8.enabled) return;
+    MenuSettings *settings = &D_80145088.settings;
+    MatchModes *modes;
+    if (!settings->local) return;
     if (a!=b) {
         if (!a->unk5D8->unk8F) return;
-        if (D_801468F4) {
-            func_802934C0_de(a->messages[a->messageNext], D_800D3A40);
+        modes = &D_80145088.modes;
+        if (modes->tag) {
+            func_802934C0_de(a->messages[a->messageNext], reactionText(D_800D3A40, settings));
             func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
             if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
-            a->messageNext++; a->messageNext %= 4;
-            func_802934C0_de(b->messages[b->messageNext], D_800D3A44);
-            func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
-        } else {
-            if (!D_80146918) return;
-            func_802934C0_de(a->messages[a->messageNext], D_800D3A48);
-            func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
-            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
-            a->messageNext++; a->messageNext %= 4;
-            func_802934C0_de(a->messages[a->messageNext], D_800D3A54);
-            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
-            a->messageNext++; a->messageNext %= 4;
-            func_802934C0_de(b->messages[b->messageNext], D_800D3A44);
+            nextMessage(&a->messageNext);
+            func_802934C0_de(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
             func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
             if (b->owner) func_80239770_de(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
-            b->messageNext++; b->messageNext %= 4;
-            func_802934C0_de(b->messages[b->messageNext], D_800D3A58);
+        } else {
+            if (!modes->captureFlag) return;
+            func_802934C0_de(a->messages[a->messageNext], reactionText(D_800D3A48, settings));
+            func_802934C0_de(a->messages[a->messageNext]+10, b->unk5D8->name);
+            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            nextMessage(&a->messageNext);
+            func_802934C0_de(a->messages[a->messageNext], reactionText(D_800D3A54, settings));
+            if (a->owner) func_80239770_de(&D_80145088,a->owner,a->messages[a->messageNext],1.5f);
+            nextMessage(&a->messageNext);
+            func_802934C0_de(b->messages[b->messageNext], reactionText(D_800D3A44, settings));
+            func_802934C0_de(b->messages[b->messageNext]+11, a->unk5D8->name);
+            if (b->owner) func_80239770_de(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
+            nextMessage(&b->messageNext);
+            func_802934C0_de(b->messages[b->messageNext], reactionText(D_800D3A58, settings));
+            if (b->owner) func_80239770_de(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
         }
-        if (b->owner) func_80239770_de(&D_80145088,b->owner,b->messages[b->messageNext],1.5f);
     }
-    b->messageNext++; b->messageNext %= 4;
+    nextMessage(&b->messageNext);
 }
-#else
-INCLUDE_ASM("span_1000", func_80219688_de);
-#endif
