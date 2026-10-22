@@ -206,7 +206,7 @@ extern void func_8025D158_de(void *, void *);
 extern s32 D_800CD8C0_de;
 extern int D_800CB724;
 s32 func_80265964_de(s32 arg0);
-s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
+void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
 void func_80257360_de(ContextRecAt2BC0 *ctx) {
     MenuRules *lock;
     ALHeap *frames;
@@ -310,7 +310,7 @@ INCLUDE_ASM("span_1000", func_80257360_de);
 #include "COMMON/EXTERNS_14.H"
 #include "TYPES.H"
 s32 func_80265964_de(s32 arg0);
-s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
+void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2);
 void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     s32 total;
     s32 *index;
@@ -324,7 +324,7 @@ void func_8025768C_de(ContextRecAt2BC0 *ctx) {
     void *section;
 
     total = func_80265964_de(0x14) - func_80265964_de(0x10);
-    ctx->soundData = (void *)func_8023C78C_de(total, 0, func_80265964_de(0x10));
+    ctx->soundData = func_8023C78C_de(total, 0, func_80265964_de(0x10));
     section = func_8028FDB4_de(ctx->soundData, 0);
     func_8028FDB4_de(ctx->soundData, 1);
     tables = func_8028FDB4_de(section, 0);

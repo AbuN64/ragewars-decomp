@@ -81,14 +81,14 @@ void func_8023C750_de(void) {
     func_802AD370_de(0x1F, 0x1FE000, 0x200000, 0, 0x100000, 7);
 }
 
-s32 func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
+void *func_8023C78C_de(s32 arg0, s32 arg1_unused, s32 arg2)
 {
   char sp10[0x18];
   int new_var2;
   Block10 blk;
   s32 sp38;
   u32 temp_s1;
-  s32 sp3C;
+  void *sp3C;
   u32 rounded;
   void **temp_v0;
   Draw *temp_v1;
