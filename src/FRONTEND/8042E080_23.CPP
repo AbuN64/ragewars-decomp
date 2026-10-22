@@ -74,7 +74,7 @@ s32 func_8042E460_de(u8 *request) {
  * clears player status flags, configures joining and spectator players,
  * and sets global mode state. */
 void func_8042E5EC_de(void) {
-    static s32 stack[40];
+    s32 stack[40];
     s32 i, idx1, idx2, temp;
     s32 numJoining, numSpectators, variant;
     Shared_PlayerSettingsRecord *player;
@@ -140,9 +140,9 @@ void func_8042E5EC_de(void) {
     settings->reserved20[4] = 0;
     settings->reserved20[5] = 0;
     i = func_802744D4_de();
-    *(volatile s32 *)0x8014DD98 = i;
+    D_8014DD98 = i;
     if (i < 0) i += 3;
-    *(volatile s32 *)(0x8014DD98 + 4) = stack[4 + (i % 4)];
+    (&D_8014DD98)[1] = stack[4 + (i % 4)];
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_8042E5EC_de);
