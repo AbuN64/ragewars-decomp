@@ -59,16 +59,12 @@ void func_802AA9F4_de(void) {
 #endif
 
 #if defined(VERSION_EU_X)
-#ifdef NON_MATCHING
 void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
  gDPPipeSync(D_80110634++);
  gDPSetPrimColor(D_80110634++, 255, 255, r, g, b, a);
  gDPFillRectangle(D_80110634++, ((x0))>((0))?((x0)):((0)), ((y0))>((0))?((y0)):((0)), ((x1))>((0))?((x1)):((0)), ((y1))>((0))?((y1)):((0)));
 }
-#else
-INCLUDE_ASM("span_1000", func_802AAA54_de);
-#endif
 #endif
 
 #if defined(VERSION_EU_X)
