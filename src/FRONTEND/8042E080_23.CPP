@@ -69,6 +69,7 @@ s32 func_8042E460_de(u8 *request) {
     return result;
 }
 
+#ifdef NON_MATCHING
 /* Bootstraps a local multiplayer session: shuffles a 40-word stack array,
  * clears player status flags, configures joining and spectator players,
  * and sets global mode state. */
@@ -143,3 +144,6 @@ void func_8042E5EC_de(void) {
     if (i < 0) i += 3;
     *(volatile s32 *)(0x8014DD98 + 4) = stack[4 + (i % 4)];
 }
+#else
+INCLUDE_ASM("ovl_80400000", func_8042E5EC_de);
+#endif
