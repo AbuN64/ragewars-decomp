@@ -136,10 +136,6 @@ s32 func_802301F4_de(void *actor, void *attack) {
 #endif
 
 #ifdef NON_MATCHING
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern u8 D_80102B00[];
-extern s32 D_800D30BC;
-#endif
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -177,7 +173,7 @@ void func_802303A0_de(void *actor, void *attack) {
         } else if (FIELD(s32, player, 0x1450) != 0 || D_801462D5 != 1) {
             ready = 1;
         } else {
-            ready = func_8022F55C_de(D_80102B00 + FIELD(s32, player, 0x5D4) * 400, 3);
+            ready = func_8022F55C_de((char *)D_80102B00 + FIELD(s32, player, 0x5D4) * 400, 3);
             if (ready == 0) {
                 func_8025DF34_de(0xD4D);
                 if (FIELD(void *, player, 0x5DC) != 0) {
