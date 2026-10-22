@@ -53,7 +53,7 @@ extern s8 D_auto_800CA5F8;
 extern s8 D_auto_rodata_func_80294CA0_us_rev1_800CA5D0_unclaimed_CB1E0;
 extern s8 D_auto_src_ragewars_resident_strings_CB1D0_us_rev1;
 
-extern void func_80294CA0_us_rev1(void) {
+void func_80294CA0_us_rev1(void) {
     u32 sp28;
     s32 **temp_v0_2;
     s32 *temp_s2;

@@ -7,11 +7,17 @@
 INCLUDE_ASM("span_1000", func_8020F6E0_eu);
 #endif
 
-#if defined(VERSION_DE)
+#if defined(VERSION_DE) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_8020F6C0_de);
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU))
+#if !(defined(VERSION_DE) || defined(VERSION_EU)) || (defined(VERSION_DE) && defined(NON_MATCHING))
+/* Fuzzy draft for de: the other versions' body under the de name. */
+#ifdef VERSION_DE
+#define FX_FN func_8020F6C0_de
+#else
+#define FX_FN func_8020F6D8_eu_x
+#endif
 #ifdef NON_MATCHING
 #define FX_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_801468C4;
@@ -20,7 +26,7 @@ extern f32 func_802726F8_de(void *, void *);
 extern s32 func_80209A94_de(void *);
 extern s32 func_8020F93C_de(void *);
 extern s32 func_8020F984_de(void *);
-s32 func_8020F6D8_eu_x(void *self) {
+s32 FX_FN(void *self) {
     void *camera;
     u8 *link;
     u8 *target;

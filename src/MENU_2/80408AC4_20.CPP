@@ -1,5 +1,50 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
+#ifdef NON_MATCHING
+typedef struct { s32 owner; void *list; void *w8[3]; void *w14; s32 sel; s32 pad18; s32 unk1C; } Func_8041DF50_State;
+extern Func_8041DF50_State *D_800E39C0;
+extern void *func_8025305C_de(s32);
+extern void *func_8041B610_de(s32, s32);
+extern void func_8041B6E8_de(s32, s32, s32);
+extern u8 *func_8040EC30_de(s32, s32);
+extern s32 func_802999A0_de(s32);
+extern void func_8040E8D8_de(void *, s32);
+extern void *func_8041EB50_de(void);
+extern void func_802A2360_de(void);
+extern void func_8041E408_de(s32);
+/* Opens the 0x20-byte screen state D_800E39C0 for owner arg0: a four-row list, the widgets 0x385, 0x386, 0x38F, 0x390 and three 0x38C rows (shown one by one through func_8041E408_de); returns zero. */
+s32 func_8041DF50_de(s32 arg0) {
+    u8 *widget;
+    s32 i;
+    D_800E39C0 = (Func_8041DF50_State *)func_8025305C_de(0x20);
+    D_800E39C0->owner = arg0;
+    D_800E39C0->list = func_8041B610_de(arg0, 4);
+    func_8041B6E8_de(arg0, 0, 0x383);
+    func_8041B6E8_de(arg0, 1, 0x383);
+    func_8041B6E8_de(arg0, 2, 0x383);
+    func_8041B6E8_de(arg0, 3, 0x383);
+    widget = func_8040EC30_de(arg0, 0x385);
+    widget[0x10] = 0x8C;
+    if (func_802999A0_de(0) == 0x16) {
+        func_8040E8D8_de(widget, 0);
+    }
+    D_800E39C0->w14 = 0;
+    D_800E39C0->pad18 = 0;
+    D_800E39C0->w8[0] = func_8040EC30_de(arg0, 0x386);
+    D_800E39C0->w8[1] = func_8040EC30_de(arg0, 0x38F);
+    D_800E39C0->w8[2] = func_8040EC30_de(arg0, 0x390);
+    D_800E39C0->unk1C = (s32)func_8041EB50_de();
+    for (i = 0; i < 3; ) {
+        func_8041E408_de(i);
+        func_8040E8D8_de(func_8040EC30_de((s32)D_800E39C0->w8[i], 0x38C), 0);
+        i++;
+    }
+    func_802A2360_de();
+    func_8040E8D8_de(func_8040EC30_de((s32)D_800E39C0->w8[(s32)D_800E39C0->w14], 0x38C), 1);
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8041DF50_de);
+#endif
 #endif

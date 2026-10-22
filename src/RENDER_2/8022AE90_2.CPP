@@ -98,7 +98,7 @@ extern void func_80271F34_de(CVector3 *,CVector3 *,CVector3 *);
 extern void func_80273448_de(f32 *,f32,f32,f32);
 extern void func_80273D6C_de(f32 *);
 extern void func_8027027C_de(f32 *,void *);
-void func_8022B1B8_de(TogglePlayer *player,s32 mode) {
+void func_8022B1A8(TogglePlayer *player,s32 mode) {
     f32 matrix[16];
     CVector3 position;
     void *owner,*message;

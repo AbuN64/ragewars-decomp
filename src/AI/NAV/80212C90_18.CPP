@@ -189,6 +189,17 @@ extern f32 D_800C7218;
 /* the shared initialiser is declared with five parameters above; this caller also passes the source on the stack */
 typedef void (*SetupInitFn)(SetupActor *, SetupDesc *, f32, f32, f32, SetupSource *);
 extern f32 func_80275DD4_de(void *, f32, f32);
+#if defined(VERSION_EU)
+#define ACTOR_SETUP func_80213ACC_eu
+#elif defined(VERSION_EU_X)
+#define ACTOR_SETUP func_80213ACC_eu_x
+#elif defined(VERSION_US)
+#define ACTOR_SETUP func_80213AAC_us
+#elif defined(VERSION_US_REV1)
+#define ACTOR_SETUP func_80213AAC_us_rev1
+#else
+#define ACTOR_SETUP func_80213AAC_de
+#endif
 void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbacks) {
     s32 saved;
     f32 default_;

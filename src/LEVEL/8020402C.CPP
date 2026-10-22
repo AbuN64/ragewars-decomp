@@ -15,7 +15,7 @@
 #include "LEVEL/8020402C.H"
 #include "WEAPONS/80213ED4.H"
 
-#if defined(VERSION_US)
+#if defined(VERSION_US) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_8020402C_us);
 #endif
 
@@ -27,11 +27,19 @@ INCLUDE_ASM("span_1000", func_80204030_eu_x);
 INCLUDE_ASM("span_1000", func_80204030_eu);
 #endif
 
-#if defined(VERSION_DE)
+#if defined(VERSION_DE) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_80204030_de);
 #endif
 
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_US_REV1) || ((defined(VERSION_US) || defined(VERSION_DE)) && defined(NON_MATCHING))
+/* Fuzzy draft for us and de: the us-rev1 body under each version's own name. */
+#if defined(VERSION_US)
+#define LV_FN func_8020402C_us
+#elif defined(VERSION_DE)
+#define LV_FN func_80204030_de
+#else
+#define LV_FN func_80204030_us_rev1
+#endif
 #ifdef NON_MATCHING
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
@@ -40,7 +48,7 @@ extern u8 *func_8022A420_de(u8 *);
 extern f32 func_802B72B0_de(f32);
 extern void func_8022E17C_de(void *, void *, s32);
 extern void func_80237E80_de(u8 *, void *, s32);
-void func_80204030_us_rev1(u8 *self, u8 *hit) {
+void LV_FN(u8 *self, u8 *hit) {
     u8 *state = LV_FIELD(self, u8 *, 0x18) + 0x14;
     u16 kind = LV_FIELD(self, u16, 0xE4);
     u8 *player;

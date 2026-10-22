@@ -16,7 +16,7 @@ extern f32 D_800DCC78;
 extern void func_80400E50_de(CVector3 *,void *,s32,s32);
 extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
 extern f32 func_802725FC_de(CVector3 *),func_80271AA8_de(CVector3 *);
-CVector3 func_80403658_de(void) {
+CVector3 func_80403660_de(void) {
     CVector3 first,second,delta,result,temp,fallback;
     StridedTable *table;
     if (D_800E2830->active == 0) {

@@ -132,7 +132,7 @@ extern f32 D_800C88A8_de;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x30, 0x34, 0x38, 0x3c, 0x40, 0x44, 0x50, 0x54], gap at: 0x48. */
-void func_80210C14_de(void **arg0) {
+void func_80210C20_de(void **arg0) {
     f32 sp10;
     f32 sp14;
     f32 sp18;

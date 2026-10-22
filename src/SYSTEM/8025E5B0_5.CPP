@@ -207,7 +207,79 @@ void func_8025EF34_de(u32 *stream, Output8025EF54 *out, s32 count) {
 }
 
 #if defined(VERSION_US)
+#ifdef NON_MATCHING
+extern s32 D_8010AC88, D_8010AC84;
+extern f32 D_800C91F8;
+extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
+/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
+void func_8025F074_us(s32 arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    void (*callback)(void *, void *, s32) = 0;
+    s32 i, j, k, a, slot;
+    s32 state[2];
+    f32 *row;
+    f32 sum, count;
+    s32 *p;
+    slot = 1;
+    switch (arg5) {
+    case 0:
+        callback = (void (*)(void *, void *, s32))D_00261180_de;
+        break;
+    case 1:
+        callback = (void (*)(void *, void *, s32))D_0025EF34_de;
+        break;
+    case 2:
+        callback = (void (*)(void *, void *, s32))D_00261238_de;
+        break;
+    }
+    arg1[0] = arg2;
+    arg1[1] = (arg2 * 4 + 15) & ~7;
+    for (i = 1; i <= arg2; i++) {
+        arg1[i + 1] = 0xDEADBEEF;
+    }
+    for (i = 0; i < arg2; i++) {
+        for (a = 0; a <= arg1[0] && (u32)arg1[a + 1] != 0xDEADBEEF; a++) {
+        }
+        a--;
+        arg1[a + 2] = arg1[a + 1] + D_8010AC88 * 16;
+    }
+    state[0] = func_80260664_de(0);
+    for (i = 0; i < arg2; i++) {
+        row = (f32 *)func_8028FDB4_de(arg1, i);
+        for (j = 0; j < arg3; j++) {
+            func_802607B8_de((u32 *)state, 0x1F);
+            callback(state, row, D_8010AC84);
+            row += 1;
+        }
+    }
+    for (i = 0; i < arg2; i++) {
+        row = (f32 *)func_8028FDB4_de(arg1, i);
+        if (arg3 == 4 && arg4 != 0) {
+            for (j = 0; j < arg3; j++) {
+                for (k = 0; k < D_8010AC88; k++) {
+                    sum = 0;
+                    count = 0;
+                    for (a = -arg4; a <= arg4; a++) {
+                        sum += row[((k + a + D_8010AC88) % D_8010AC88) * 4 + j];
+                        count += D_800C91F8;
+                    }
+                    row[k * 4 + j] = sum / count;
+                }
+            }
+        }
+    }
+    if (arg3 == 4) {
+        for (i = 0; i < arg2; i++) {
+            row = (f32 *)func_8028FDB4_de(arg1, i);
+            for (k = 0; k < D_8010AC88; k++) {
+                func_802741A4_de(row);
+                row += 4;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_8025F074_us);
+#endif
 #endif
 
 #if defined(VERSION_EU_X)
@@ -219,7 +291,79 @@ INCLUDE_ASM("span_1000", func_8025F094_eu);
 #endif
 
 #if defined(VERSION_DE)
+#ifdef NON_MATCHING
+extern s32 D_8010AC88, D_8010AC84;
+extern f32 D_800C91F8;
+extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
+/* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
+void func_8025F0D4_de(s32 arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    void (*callback)(void *, void *, s32) = 0;
+    s32 i, j, k, a, slot;
+    s32 state[2];
+    f32 *row;
+    f32 sum, count;
+    s32 *p;
+    slot = 1;
+    switch (arg5) {
+    case 0:
+        callback = (void (*)(void *, void *, s32))D_00261180_de;
+        break;
+    case 1:
+        callback = (void (*)(void *, void *, s32))D_0025EF34_de;
+        break;
+    case 2:
+        callback = (void (*)(void *, void *, s32))D_00261238_de;
+        break;
+    }
+    arg1[0] = arg2;
+    arg1[1] = (arg2 * 4 + 15) & ~7;
+    for (i = 1; i <= arg2; i++) {
+        arg1[i + 1] = 0xDEADBEEF;
+    }
+    for (i = 0; i < arg2; i++) {
+        for (a = 0; a <= arg1[0] && (u32)arg1[a + 1] != 0xDEADBEEF; a++) {
+        }
+        a--;
+        arg1[a + 2] = arg1[a + 1] + D_8010AC88 * 16;
+    }
+    state[0] = func_80260664_de(0);
+    for (i = 0; i < arg2; i++) {
+        row = (f32 *)func_8028FDB4_de(arg1, i);
+        for (j = 0; j < arg3; j++) {
+            func_802607B8_de((u32 *)state, 0x1F);
+            callback(state, row, D_8010AC84);
+            row += 1;
+        }
+    }
+    for (i = 0; i < arg2; i++) {
+        row = (f32 *)func_8028FDB4_de(arg1, i);
+        if (arg3 == 4 && arg4 != 0) {
+            for (j = 0; j < arg3; j++) {
+                for (k = 0; k < D_8010AC88; k++) {
+                    sum = 0;
+                    count = 0;
+                    for (a = -arg4; a <= arg4; a++) {
+                        sum += row[((k + a + D_8010AC88) % D_8010AC88) * 4 + j];
+                        count += D_800C91F8;
+                    }
+                    row[k * 4 + j] = sum / count;
+                }
+            }
+        }
+    }
+    if (arg3 == 4) {
+        for (i = 0; i < arg2; i++) {
+            row = (f32 *)func_8028FDB4_de(arg1, i);
+            for (k = 0; k < D_8010AC88; k++) {
+                func_802741A4_de(row);
+                row += 4;
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_8025F0D4_de);
+#endif
 #endif
 
 #if defined(VERSION_US_REV1)

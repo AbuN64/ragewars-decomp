@@ -15,12 +15,7 @@ extern void *func_8028FE28_de(void *, void *, s32);
 extern void *func_8028FE3C_de(void *, void *, s32, s32 *);
 extern void *func_8028CF6C_de(void *, u16);
 extern void func_80246BE8_de(void *, void *, void *, s32);
-void func_8041C610_de(arg0, id, extra, expected)
-    struct Unk8041CE88 *arg0;
-    s32 id;
-    s32 extra;
-    s32 expected;
-{
+void func_8041C610_de(struct Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected) {
     u8 *world = (u8 *)&D_8011FE88;
     u8 *out = (u8 *)arg0 + 0x190;
     u16 *list = *(u16 **)(world + 0x94);
@@ -326,7 +321,11 @@ void func_8041CE10_de(struct Object49C *object, s32 value) {
 /* Sets field 0x274 of arg0 to 0xFFFF and then calls func_8041C610_de on it. */
 void func_8041CE18_de(Unk8041CE88 *arg0) {
     arg0->unk274 = 0xFFFF;
+#ifdef NON_MATCHING
+    func_8041C610_de(arg0, 0, 0, 0);
+#else
     func_8041C610_de(arg0);
+#endif
 }
 
 #if defined(VERSION_US)

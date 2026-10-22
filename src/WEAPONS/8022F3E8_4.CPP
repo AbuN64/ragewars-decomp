@@ -121,7 +121,7 @@ typedef long long M2C_UNK64;
 s32 func_80283228_de(s32 *, void *);
 extern s32 D_8011D8D0;
 
-extern s32 func_80230058_de(void *arg0, void *arg1) {
+s32 func_80230058_de(void *arg0, void *arg1) {
     s16 temp_v0;
     s32 var_v0;
     void *temp_s0;

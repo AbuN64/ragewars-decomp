@@ -272,7 +272,7 @@ static __inline__ s32 navigationNeighbors(NavigationGraph *graph, s32 key, s32 *
     return count;
 }
 
-s32 func_8020BE7C_de(NavigationGraph *arg0, s32 arg1, u8 arg2, s32 arg3) {
+s32 func_8020BE80_de(NavigationGraph *arg0, s32 arg1, u8 arg2, s32 arg3) {
     s32 sp20[64];
     s32 sp120[64];
     f32 sp220;
