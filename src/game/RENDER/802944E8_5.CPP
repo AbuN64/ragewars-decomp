@@ -7,7 +7,6 @@ void func_80294AA8_de(void) {
 }
 
 #if defined(VERSION_US)
-#ifdef NON_MATCHING
 extern s32 D_800E28D8;
 extern char D_auto_800D3460[], D_800D4530[];
 extern f32 rodata_func_8029499C_us_800C5410;
@@ -25,7 +24,11 @@ void func_802949A0_us(char *state) {
     void (*handler)(char *);
     s32 mode;
     if (SCR_W(state, 0x26DD0) != 0) {
-        func_802BA6B0_de(D_800E28D8 != 0 ? D_auto_800D3460 : D_800D4530);
+        char *label = D_auto_800D3460;
+        if (D_800E28D8 == 0) {
+            label = D_800D4530;
+        }
+        func_802BA6B0_de(label);
         osViSetYScale(rodata_func_8029499C_us_800C5410);
         func_802BA700_de(2);
     }
@@ -42,7 +45,4 @@ void func_802949A0_us(char *state) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_802949A0_us);
-#endif
 #endif
