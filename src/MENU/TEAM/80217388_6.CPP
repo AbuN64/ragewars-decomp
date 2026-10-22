@@ -30,7 +30,7 @@ extern s32 func_80217B3C_de(void *);
 
 
 
-void func_80217D74_de(s32 *menu, void *player) {
+void func_80217D74_de(s32 *menu, void *player, s32 arg2) {
     s32 held;
     s32 slot;
     s32 category;
@@ -100,8 +100,6 @@ void func_80217D74_de(s32 *menu, void *player) {
     menu[0x390 / 4] = slot;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
 typedef struct DraftConfig17F4C { u8 pad[0x82]; u8 mode; } DraftConfig17F4C;
 typedef struct DraftInput17F4C { u8 pad[0xB0]; u32 pressed; u8 padB4[4]; u32 held; } DraftInput17F4C;
 typedef struct DraftPlayer17F4C {
@@ -119,10 +117,11 @@ typedef struct DraftState17F4C {
     u8 pad18[0x380 - 0x18]; s32 mode; u8 pad384[4]; s32 selection;
 } DraftState17F4C;
 extern f32 D_800D2988, D_800C2234_de, D_800C2238_de, D_800C223C_de, D_800C2240_de, D_800C2244_de;
-extern s32 func_80245784_de(void), func_80232ABC_de(void *), func_8022FAF8_de(void *);
-extern void func_80217D74_de(void *, void *, s32), func_80285974_de(void *, s32);
-extern s32 func_8021846C_de(void *, void *);
-void func_80217F4C_de(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
+
+s32 func_8021846C_de(void *, void *);
+s16 func_8022FAF8_de(void *);
+s32 func_80285974_de(s32, s32);
+void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2)
 {
     if ((u32)(player->type - 17) < 2) return;
     if (player->blocked) return;
@@ -135,11 +134,11 @@ void func_80217F4C_de(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2
     } else if ((player->input->held & 0x8000) && player->config->mode) {
         player->choice = func_8022FAF8_de(player);
     } else if (player->config->mode != 1 || (player->selection != -1 && state->selection != 8)) {
-        func_80217D74_de(state, player, arg2);
+        func_80217D74_de(&state->state, player, arg2);
     }
     if (player->choice != player->oldChoice) {
         if (player->effect) {
-            func_80285974_de(player->effect, 0);
+            func_80285974_de((s32)player->effect, 0);
             player->effect = 0;
         }
         player->word11F0 = 0; player->word11F8 = -1;
@@ -165,9 +164,6 @@ void func_80217F4C_de(DraftState17F4C *state, DraftPlayer17F4C *player, s32 arg2
     if (state->state) state->angle += D_800D2988 * D_800C2244_de;
     else player->active = 0;
 }
-#else
-INCLUDE_ASM("span_1000", func_80217F4C_de);
-#endif
 
 #ifdef NON_MATCHING
 #include "TYPES.H"

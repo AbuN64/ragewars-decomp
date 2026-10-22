@@ -33,7 +33,7 @@ extern struct Shared_StateInfo D_800C9684[];
 extern void func_8020AF9C_de(void *, void *);
 extern void func_80213CF8_de(void *, void *);
 extern void func_80216488_de(void *, s32, s32, s32, s32, s32);
-extern void func_80217F4C_de(void *, void *, void *);
+extern void Team_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
 extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
@@ -717,7 +717,7 @@ void func_80220ED4_de(SharedPlayer *player)
       player->unk16D8 = count - drain;
     }
   }
-  func_80217F4C_de(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
+  Team_UpdateDraftPanel(&player->views5E8.view938_162.unk938, player, &player->views1C.view458_40.unk458);
   func_80218B84_de(&player->views5E8.viewCCC_164.unkCCC, player, &player->views1C.view458_40.unk458);
   if (player->views5E8.view62E_17.character == 0)
   {
