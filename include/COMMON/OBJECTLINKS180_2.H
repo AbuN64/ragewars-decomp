@@ -528,6 +528,6 @@ typedef struct ActorRenderSettings {
     s32 reserved8;
     s32 view;
     s32 reserved10;
-    s32 shadowType;
+    CVector3 *shadowOffset; /* 0x14: offset of the blob shadow from the actor */
 } ActorRenderSettings;
 #endif

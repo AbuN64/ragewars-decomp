@@ -31,7 +31,7 @@ extern void func_802735A8_de(f32 *, f32, f32, f32);
 extern void func_80274244_de(void *, f32 *);
 extern void func_8026F620_de(void *, f32 *, f32 *);
 extern void func_8024BA7C_de(char *, char *, void *, u8);
-extern void func_8024ADD0_de(char *, s32, s32);
+extern void func_8024ADD0_de(struct LevelActor *, CVector3 *, s32);
 void func_8024AA18_de(char *obj, s32 unused, char *info) {
     CVector3 dir;
     f32 projection[16];
@@ -99,7 +99,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
         }
         func_8024BA7C_de(obj, info, ((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->shadowAlpha);
     } else {
-        func_8024ADD0_de(obj, ((struct ActorRenderSettings *)(info))->shadowType, 0);
+        func_8024ADD0_de((struct LevelActor *)obj, ((struct ActorRenderSettings *)(info))->shadowOffset, 0);
     }
 }
 
