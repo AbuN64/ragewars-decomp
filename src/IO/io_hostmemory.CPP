@@ -53,7 +53,6 @@ void func_80201064_de(s32 address, s32 port, s32 count) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "IO/DEBUG_MEMORY.H"
 extern void func_80200610_de(void);
 extern u8 D_8F0F3130[];
@@ -65,22 +64,22 @@ extern void func_80200B14_de(u32, u32, u32);
 
 /* Split the debugger's memory transfer at permission boundaries. */
 void func_802010D8_de(u32 mode) {
-    u32 address, remaining, chunk, flags, port = 0xB1FE0000;
-    s32 i;
+    u32 address, remaining, chunk, flags, port;
+    u32 i;
     func_80200610_de();
+    port = 0xB1FE0000;
     address = func_802005A0_de(0xB1FFFFF4);
     remaining = func_802005A0_de(0xB1FFFFF8);
     if (address > 0xEFFFFFFF) address += (u32)D_8F0F3130;
     while (remaining != 0) {
-        for (i = 0; i < 48; i++) {
-            if (address >= D_800F2D00[i].first && address <= D_800F2D00[i].last) break;
-        }
-        if (i < 48) {
-            flags = D_800F2D00[i].flags;
-            chunk = D_800F2D00[i].last - address + 1;
-        } else {
+        i = 0;
+        while (address < D_800F2D00[i].first || address > D_800F2D00[i].last) i++;
+        if (i >= 48) {
             flags = 0;
             chunk = 0x1000 - (address & 0xFFF);
+        } else {
+            flags = D_800F2D00[i].flags;
+            chunk = (D_800F2D00[i].last + 1) - address;
         }
         if (remaining < chunk) chunk = remaining;
         if ((flags & mode) == 0) {
@@ -100,9 +99,6 @@ void func_802010D8_de(u32 mode) {
         remaining -= chunk;
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_802010D8_de);
-#endif
 
 extern s32 func_802005A0_de(s32 address);
 
