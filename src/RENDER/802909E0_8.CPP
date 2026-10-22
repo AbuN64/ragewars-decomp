@@ -55,6 +55,10 @@ extern void func_8026DF30_de(s32, void *, void *, s32, s32);
 #define LOAD_SETUP func_80290BA0_eu
 #elif defined(VERSION_EU_X)
 #define LOAD_SETUP func_80290BD0_eu_x
+#elif defined(VERSION_DE)
+#define LOAD_SETUP func_80290A90_de
+#else
+#define LOAD_SETUP func_80290A70_us_rev1
 #endif
 void LOAD_SETUP(ObjRecAt26DC1 *state) {
     s32 handle;
