@@ -425,4 +425,61 @@ block_55:
 INCLUDE_ASM("span_1000", func_80257DD4_de);
 #endif
 
+#ifdef NON_MATCHING
+/* Starts a sound-bank entry: looks up the entry's record in the bank table at 0x2B4C, resets the current
+ * selection (0x2B88/0x2B8C/0x2B90), takes the recursive lock at 0x110 to hand out a new play id (counter
+ * at 0x10C), then starts every voice record of the entry through func_80257BB4_de at the given position;
+ * returns the play id, or -1 for an out-of-range index or an empty entry. */
+s32 func_8025826C_de(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 arg3) {
+    u32 *entry;
+    u32 count;
+    u32 i;
+    s32 playId = -1;
+    if (index >= self->instrumentCount) {
+        return -1;
+    }
+    self->field2B88 = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 0);
+    self->field2B8C = 0x100;
+    self->field2B90 = -1;
+    entry = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 1);
+    count = entry[1];
+    if (count != 0) {
+        {
+            char *queue = &self->lock;
+            u32 token = func_802BCF30_de();
+            s32 held = ((MenuRules *)(queue))->locked + 1;
+            ((MenuRules *)(queue))->locked = held;
+            if (held != 1) {
+                __osRestoreInt(token);
+                func_802BB2A0_de(queue, 0, 1);
+            } else {
+                __osRestoreInt(token);
+            }
+        }
+        playId = *(s32 *)((char *)self + 0x10C) + 1;
+        {
+            char *queue = &self->lock;
+            u32 token;
+            s32 held;
+            *(s32 *)((char *)self + 0x10C) = playId;
+            token = func_802BCF30_de();
+            held = ((MenuRules *)(queue))->locked - 1;
+            ((MenuRules *)(queue))->locked = held;
+            if (held != 0) {
+                __osRestoreInt(token);
+                func_802BB420_de(queue, 0, 1);
+            } else {
+                __osRestoreInt(token);
+            }
+        }
+    }
+    if (count != 0) {
+        for (i = 0; i < count; i++) {
+            func_80257BB4_de(self, (Item57BD4 *)((char *)entry + 8 + i * entry[0]), &position, index, playId, 0, arg3);
+        }
+    }
+    return playId;
+}
+#else
 INCLUDE_ASM("span_1000", func_8025826C_de);
+#endif
