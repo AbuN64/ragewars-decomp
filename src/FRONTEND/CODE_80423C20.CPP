@@ -158,16 +158,13 @@ s32 Frontend_ApplyModeChoice(void) {
     return 0;
 }
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8042418C_de);
-#endif
-
-#ifdef NON_MATCHING
 s32 func_8042418C_de(void) {
     func_802547E4_de(D_800E4600);
     D_800E4600 = 0;
     return 0;
 }
+
+#ifdef NON_MATCHING
 #if !defined(VERSION_EU_X)
 extern u8 D_801462E5;
 extern u8 D_801468A0[];
