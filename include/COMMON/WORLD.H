@@ -95,7 +95,9 @@ typedef struct Shared_World {
     u8 system1B08[0x11778 - 0x1B08];
     WorldRecAt3C08 system11778;
     u8 unknown15384[4];
-    u8 effectPool[0x1B308 - 0x15388]; /* 0x15388: SceneEffectPool */
+    u8 effectPool[0x1B2B0 - 0x15388]; /* 0x15388: SceneEffectPool */
+    struct LightSettings *levelInfo; /* 0x1B2B0 */
+    u8 unknown1B2B4[0x1B308 - 0x1B2B4];
     f32 elapsed;
     u8 unknown1B30C[0xFC];
     s32 visibilityEnabled; /* 0x1B408 */

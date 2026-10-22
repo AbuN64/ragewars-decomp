@@ -164,6 +164,7 @@ struct PlacedProp {
     char padDB;
     s32 fieldDC;
     u8 fade;
+    char padE1[0xE8 - 0xE1];
 };
 
 struct PlacedProp;

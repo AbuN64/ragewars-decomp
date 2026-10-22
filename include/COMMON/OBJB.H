@@ -36,7 +36,8 @@ struct World;
 
 struct LightSettings;
 struct LightSettings {
-    char pad0[0xA];
+    f32 gridDistance;
+    char pad4[0xA - 0x4];
     u8 color[3];
     u8 ambient[3];
     char pad10;
