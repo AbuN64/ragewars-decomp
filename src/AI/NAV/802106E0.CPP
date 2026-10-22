@@ -53,7 +53,73 @@ void func_802106E0_de(Vehicle *vehicle, s32 wheel) {
     }
 }
 
+#ifdef NON_MATCHING
+#define NV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+typedef struct WheelProbe { f32 x; f32 y; f32 z; } WheelProbe;
+extern f32 D_800C1F98_de, D_800C1F9C_de, D_800C1FA0_de, D_800C1FA4_de, D_800C1FA8_de, D_800C1FAC_de;
+void func_80210964_de(u8 *self, s32 wheel) {
+    u8 *wheels = NV_FIELD(self, u8 *, 0x1454);
+    f32 *reach = (f32 *)(wheels + 0x1F0) + wheel;
+    WheelProbe offset;
+    WheelProbe position;
+    WheelProbe below;
+    u8 flags[0x1C];
+    f32 length;
+    f32 range;
+    f32 radius;
+    f32 height;
+    f32 base;
+    f32 stepX;
+    f32 stepZ;
+    s32 steps;
+    s32 i = 0;
+    s32 last;
+    *reach = D_800C1F98_de;
+    range = Sound_GetActorReach(self);
+    length = *(f32 *)(NV_FIELD(self, u8 *, 0x1454) + 0x1F0 + wheel * 4);
+    if (length < range) {
+        return;
+    }
+    offset = *(WheelProbe *)&D_800C88A0_de[wheel];
+    stepX = offset.x * D_800C1F9C_de * range;
+    stepZ = offset.z * D_800C1F9C_de * range;
+    steps = (s32)(length / (range * D_800C1F9C_de) + D_800C1FA0_de);
+    radius = func_8024D398_de((Vehicle *)self);
+    height = Particle_GetActorHeight(self);
+    base = func_8024E420_de(self);
+    position = NV_FIELD(self, WheelProbe, 8);
+    NV_FIELD(flags, s32, 0) = 0xC008;
+    NV_FIELD(flags, u8, 4) = 1;
+    NV_FIELD(flags, u8, 5) = 1;
+    NV_FIELD(flags, u8, 6) = 1;
+    NV_FIELD(flags, s32, 8) = 0;
+    NV_FIELD(flags, s32, 0xC) = 0;
+    NV_FIELD(flags, s32, 0x10) = 0;
+    NV_FIELD(flags, s32, 0x14) = 0;
+    NV_FIELD(flags, s32, 0x18) = 0;
+    position.y += D_800C1FA4_de;
+    while (i < steps) {
+        position.x += stepX;
+        position.z += stepZ;
+        below = position;
+        below.y -= D_800C1FA8_de;
+        if (func_8024491C_de((Vehicle *)self, *(CVector3 *)&position, *(CVector3 *)&below, (struct MotionSurface *)flags, range, radius, height, base) != 0 &&
+            (NV_FIELD((u8 *)D_80103FCC, s32, 0xFC) - 5) >= 2U &&
+            !(NV_FIELD((u8 *)D_80103FCC, f32, 0xE8) <= below.y - D_800C1FAC_de)) {
+            i++;
+            continue;
+        }
+        last = i - 1;
+        if (last < 0) {
+            last = 0;
+        }
+        *(f32 *)(NV_FIELD(self, u8 *, 0x1454) + wheel * 4 + 0x1F0) = (f32)last * range;
+        return;
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_80210964_de);
+#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/AUDIO_CALLBACKS.H"
