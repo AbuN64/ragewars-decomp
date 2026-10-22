@@ -804,35 +804,48 @@ void Particle_HitTarget(void *particle) {
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
-typedef struct ImpactEvents { struct IntPair params[14]; u16 models[14], particles[14], sounds[14]; } ImpactEvents;
-typedef struct ImpactDef { u32 flags; char pad4[0x14]; ImpactEvents *events; } ImpactDef;
-typedef struct ImpactOwner { u8 kind; char pad1[0xFF]; u32 flags; char pad104[0xD4]; void *state; } ImpactOwner;
+typedef struct CROMParticleImpact_t {
+    struct IntPair m_ImpactEventValue[14];
+    u16 m_ImpactParticleType[14];
+    u16 m_ImpactEventType[14];
+    u16 m_ImpactSoundType[14];
+} CROMParticleImpact_t;
+typedef struct CROMParticleEffect_t {
+    u32 m_dwFlags;
+    char pad4[0x18 - 0x4];
+    CROMParticleImpact_t *m_pImpact;
+    char pad1C[0x3C - 0x1C];
+} CROMParticleEffect_t;
 typedef struct ImpactParticle {
     char pad0[4]; u16 type; char pad6[2]; CVector3 position;
     char pad14[8]; CVector3 facing;
-    char pad28[0x34]; u32 flags; char pad60[0xB8]; ImpactDef *definition;
-    char pad11C[0x10]; ImpactOwner *owner; char pad130[8]; void *sound;
+    char pad28[0x34]; u32 flags; char pad60[0xB8]; CROMParticleEffect_t *definition;
+    char pad11C[0x10]; Shared_ParticleOwner *owner; char pad130[8]; void *sound;
     char pad13C[0x10]; s16 dead; char pad14E[0x6B]; s8 state, nextState;
     char pad1BB[0x15]; s8 modelOffset; char pad1D1[8]; u8 active;
 } ImpactParticle;
-extern CVector3 D_801002E0;
+extern s32 func_80216108_de(void *);
+extern void func_80284178_de(void *);
+extern void func_802A42F4_de(void *, void *);
+extern void func_80279B40_de(void *, s32, s32, s32);
 extern u32 D_801002F0;
 extern void func_802A5BE4_de(void *, CVector3, CVector3, s32, s32);
 extern void func_8022B064_de(void *, CVector3 *);
-
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
+/* 292/309 words; remaining: controlled-impact index register rotation (a0/v0/v1 local-alloc order) and one lhu/ori schedule in the impact branch */
 void func_8027D4A8_de(void *particleArg) {
     ImpactParticle *particle = particleArg;
-    ImpactDef *definition, *controlledDefinition;
+    CROMParticleEffect_t *definition, *controlledDefinition;
     Shared_ParticleTarget *source;
     void *eventSource;
-    s32 kind, controlledKind, selection;
-    s32 model, sound, effect, halfOffset, paramOffset;
+    s32 kind;
+    short controlledKind;
+    s32 model, sound, effect;
     struct IntPair params;
     CVector3 normal;
     struct IntPair controlledParams;
-    ImpactOwner *owner;
+    Shared_ParticleOwner *owner;
     ImpactContext *context;
     CVector3 *normalSource;
 
@@ -847,11 +860,10 @@ void func_8027D4A8_de(void *particleArg) {
         controlledDefinition = particle->definition;
         if (func_80284068_de(particle)) controlledKind = 12;
         else controlledKind = 10;
-        halfOffset = controlledKind * 2;
-        kind = controlledDefinition->events->models[controlledKind];
-        effect = controlledDefinition->events->particles[controlledKind];
-        controlledParams = controlledDefinition->events->params[controlledKind];
-        sound = controlledDefinition->events->sounds[controlledKind];
+        kind = controlledDefinition->m_pImpact->m_ImpactParticleType[controlledKind];
+        effect = controlledDefinition->m_pImpact->m_ImpactEventType[controlledKind];
+        controlledParams = controlledDefinition->m_pImpact->m_ImpactEventValue[controlledKind];
+        sound = controlledDefinition->m_pImpact->m_ImpactSoundType[controlledKind];
         if (effect != 0xFFFF) {
             func_80265E10_de(particle, particle, effect, -1, particle->position, controlledParams);
         }
@@ -866,7 +878,7 @@ void func_8027D4A8_de(void *particleArg) {
         case 0:
         case 2:
         case 3:
-            if (definition->flags & 0x800000) {
+            if (definition->m_dwFlags & 0x800000) {
                 context = &D_801001F8;
                 func_802A5BE4_de(&D_801379C0, context->position, context->normal, kind, 0);
             }
@@ -893,24 +905,21 @@ void func_8027D4A8_de(void *particleArg) {
                 particle->sound = 0;
             }
         }
-        normalSource = &D_801002E0;
+        normalSource = &D_801001F8.normal;
         normal = *normalSource;
         func_8027207C_de(&normal.x);
         func_80271F9C_de(&normal, &normal, 1.024f);
         func_80271F34_de(&particle->position, &particle->position, &normal);
-        selection = kind;
-        halfOffset = kind * 2;
-        paramOffset = kind * 8;
-        kind = definition->events->models[selection];
-        effect = definition->events->particles[selection];
-        params = definition->events->params[selection];
-        sound = definition->events->sounds[selection];
+        model = definition->m_pImpact->m_ImpactParticleType[kind];
+        effect = definition->m_pImpact->m_ImpactEventType[kind];
+        params = definition->m_pImpact->m_ImpactEventValue[kind];
+        sound = definition->m_pImpact->m_ImpactSoundType[kind];
         if (effect != 0xFFFF) {
             eventSource = source;
             if (D_800CC134[effect].flags & 2) eventSource = particle;
             func_80265E10_de(eventSource, particle, effect, -1, D_801001F8.position, params);
         }
-        if (kind != 0xFFFF) func_80279B40_de(particle, kind, -8, 1);
+        if (model != 0xFFFF) func_80279B40_de(particle, model, -8, 1);
         if (sound != 0xFFFF) func_8025DE54_de((s16)sound, D_801001F8.position, 0, (s32)particle);
         if (particle->flags & 0x30000) return;
         if (particle->state != 1) return;
