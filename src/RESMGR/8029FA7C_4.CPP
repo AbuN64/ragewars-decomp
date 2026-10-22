@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "RESMGR/8029FA7C_4.H"
 #include "RESMGR/resmgr_string_memory.H"
-extern void func_8029C6A8_de(f32 *matrix, f32 *angles);
+extern void MatrixFromAngles(f32 *matrix, f32 *angles);
 
 
 void func_8029EA7C_de(MatrixRecord *arg0, float arg1, float arg2, float arg3,
@@ -129,7 +129,7 @@ void func_8029ED54_de(Mtx3x4_8029FD54 *arg0) {
 
 void func_8029EDA0_de(s32 arg0, f32 *angles) {
     f32 buf[16];
-    func_8029C6A8_de(buf, angles);
+    MatrixFromAngles(buf, angles);
     func_8029CE3C_de(arg0, buf, arg0);
 }
 
@@ -383,7 +383,7 @@ void func_8029F254_de(struct MatrixF *arg0, CVector3 *arg1, f32 arg2) {
 void func_8029F368_de(void *arg0, CVector3 *arg1, void *arg2, CVector3 *arg3) {
     Matrix *m = arg0;
 
-    func_8029C6A8_de(arg0, arg2);
+    MatrixFromAngles(arg0, arg2);
 
     m->m[0] = m->m[0] * arg1->x;
     m->m[1] = m->m[1] * arg1->x;

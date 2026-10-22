@@ -75,7 +75,7 @@ s32 func_8029C4A0_de(CVector3 *out, s32 *outCount, CVector3 *in, s32 n, f32 a, f
 #include "COMMON/ITEMRECAT20V1.H"
 extern f32 D_800C5A90_de, D_800C5A94, D_800C5A98_de, D_800C5A9C, D_800C5AA0_de;
 
-void func_8029C6A8_de(MatrixF *matrix, f32 *angles) {
+void MatrixFromAngles(MatrixF *matrix, f32 *angles) {
     u16 mask = 0;
     f32 sy, cy, sx, cx, sz, cz, one;
     if (angles[0] != 0.0f) mask = 4;
