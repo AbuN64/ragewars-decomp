@@ -145,8 +145,6 @@ s32 func_80277C54_de(void *bounds, void **outList, s32 *outCount) {
 INCLUDE_ASM("span_1000", func_80277C54_de);
 #endif
 
-#ifdef NON_MATCHING
-/* 142/149 words; remaining: ids pointer and idx counter materialise differently than the original (list->count / ids++ forms) */
 #include "TYPES.H"
 #include "stddef.h"
 
@@ -210,7 +208,6 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
     IdList *list;
     HitBoxTable *boxTable;
     HitBox *box;
-    void **outAt;
 
     foundCount = 0;
     result = 0;
@@ -221,23 +218,23 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
     idx = boxTable->count;
     idx--;
     box = boxTable->boxes;
-    outAt = out;
     for (; idx != -1; idx--) {
         if (bounds->maxX > box->minX && bounds->minX < box->maxX
             && bounds->maxZ > box->minZ && bounds->minZ < box->maxZ
             && bounds->maxY > box->minY && bounds->minY < box->maxY) {
-            if (box->flagBD != 0 && *wanted != 1) {
+            if (box->flagBD != 0) {
                 found = 0;
-                idTable = func_8028FDB4_de(table, 3);
-                if (*idTable > 0) {
-                    list = func_8028FDB4_de(idTable, idx);
-                    ids = (s16 *)list;
-                    len = list->count;
-                    ids++;
-                    key = func_80250938_de(wanted, table);
-                    n = 0;
-                    if (found < len) {
-                        do {
+                if (*wanted == 1) {
+                    found = 1;
+                } else {
+                    idTable = func_8028FDB4_de(table, 3);
+                    if (*idTable > 0) {
+                        list = func_8028FDB4_de(idTable, idx);
+                        ids = (s16 *)list;
+                        len = list->count;
+                        ids++;
+                        key = func_80250938_de(wanted, table);
+                        for (n = 0; n < len; n++) {
                             id = *ids;
                             if (id >= 0x1770) {
                                 id -= 0x1770;
@@ -246,21 +243,19 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
                             } else if (id >= 0x7D0) {
                                 id -= 0x7D0;
                             }
-                            n++;
                             if (id == key) {
                                 found = 1;
                                 break;
                             }
                             ids++;
-                        } while (n < len);
+                        }
                     }
                 }
             } else {
                 found = 1;
             }
             if (found != 0) {
-                *outAt = box;
-                outAt++;
+                out[foundCount] = box;
                 foundCount++;
                 if (box->flagBA != 0) {
                     result = 1;
@@ -275,9 +270,6 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
     *countOut = foundCount;
     return result;
 }
-#else
-INCLUDE_ASM("span_1000", func_80278020_de);
-#endif
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
