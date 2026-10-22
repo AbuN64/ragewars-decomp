@@ -111,7 +111,8 @@ extern s32 func_80200500_de(void);
 extern s32 func_802017E8_de(s32, s32, s32, s32);
 extern s32 D_800C8144_de;
 /* Issue the monitor command with interrupts disabled, then restore them. */
-s32 func_80201A74_de(void)
+/* 13/22 words; remaining: this unit's gcc 2.8.1 stores D_800C8144_de through $at; the ROM splits %hi into $a0 and ends jr/addiu like the kmc gcc 2.7.2 IO units */
+s32 func_80201A80_de(void)
 {
     s32 previous;
     s32 result;
