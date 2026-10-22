@@ -190,7 +190,6 @@ found4:;
     }
 }
 
-#ifdef NON_MATCHING
 /* Updates the selected player's appearance and creates its results-screen model. */
 #include "TYPES.H"
 #include "FRONTEND/8041BEA8_6.H"
@@ -207,7 +206,6 @@ struct func_80427B98_S1 {
     char unk20;
 };
 
-/* 84/84 words; remaining: entries base add order (a1+0xD0 first) and position copy reusing %hi for its z word */
 void func_804279B8_de(void) {
     CVector3 scale;
     s32 record;
@@ -217,7 +215,7 @@ void func_804279B8_de(void) {
     PreviewSettings *settings = (PreviewSettings *)&D_801462C8;
     if (settings->mode == 4) {
         record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;
-        entry = &settings->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
+        entry = &((PreviewSettings *)&D_801462C8)->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
         func_804284C0_de(record, settings);
         kind = func_8028D474_de(&D_8011FE88, record)->kind;
         entry->kind = kind;
@@ -230,6 +228,3 @@ void func_804279B8_de(void) {
                          D_800E3A58[index].light[0]);
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_804279B8_de);
-#endif
