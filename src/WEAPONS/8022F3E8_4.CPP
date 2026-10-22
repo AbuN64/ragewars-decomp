@@ -85,4 +85,101 @@ void func_8022FF04_de(void *arg0, WeaponFireState *arg1) {
 }
 #endif
 
+#ifdef NON_MATCHING
+/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+typedef int M2C_UNK;
+typedef signed char M2C_UNK8;
+typedef short M2C_UNK16;
+typedef int M2C_UNK32;
+typedef long long M2C_UNK64;
+#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
+#define M2C_BITWISE(type, expr) ((type)(expr))
+#define M2C_LWL(expr) (expr)
+#define M2C_FIRST3BYTES(expr) (expr)
+#define M2C_UNALIGNED32(expr) (expr)
+#define M2C_ERROR(desc) (0)
+#define M2C_TRAP_IF(cond) (0)
+#define M2C_BREAK(...) (0)
+#define M2C_SYNC(...) (0)
+#define M2C_DCACHE_CLEAN(addr) (0)
+#define M2C_DCACHE_INVALIDATE(addr) (0)
+#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
+#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
+#define M2C_ICACHE_INVALIDATE(addr) (0)
+#define M2C_PREFETCH(addr) (0)
+#define M2C_PREFETCH_STORE(addr) (0)
+#define GLUE_F64(a, b) (0.0)
+#define MULT_HI(a, b) (0)
+#define MULTU_HI(a, b) (0)
+#include "COMMON/EXTERNS_6.H"
+#include "COMMON/OBJECTLINKS14C.H"
+#include "TYPES.H"
+s32 func_80283228_de(s32 *, void *);
+extern s32 D_8011D8D0;
+
+extern s32 func_80230058_de(void *arg0, void *arg1) {
+    s16 temp_v0;
+    s32 var_v0;
+    void *temp_s0;
+
+    temp_s0 = M2C_FIELD(arg0, void **, 0x1D8);
+    var_v0 = 0;
+    if (!(M2C_FIELD(arg1, f32 *, 0x130) > 0.0f) && (var_v0 = 0, (Weapons_HasAmmoForMode(temp_s0, (s32) M2C_FIELD(temp_s0, s16 *, 0x62E)) != 0)) && ((M2C_FIELD(M2C_FIELD(temp_s0, void **, 0x5D8), u8 *, 0x8F) != 1) || (var_v0 = 0, (D_801468F4 == 0))) && (var_v0 = 0, !(M2C_FIELD(temp_s0, f32 *, 0x11D8) > 0.0f)) && (var_v0 = 0, (M2C_FIELD(temp_s0, s32 *, 0x11B4) == 0))) {
+        temp_v0 = (u16) M2C_FIELD(temp_s0, s16 *, 0x62E) - 1;
+        switch (temp_v0) {
+        case 10:
+            var_v0 = 1;
+            if (M2C_FIELD(temp_s0, s32 *, 0x6AC) & 0x4000) {
+                return 0;
+            }
+            /* Duplicate return node #23. Try simplifying control flow for better match */
+            return var_v0;
+        case 17:
+            if (M2C_FIELD(temp_s0, s32 *, 0x788) != 2) {
+                return 0;
+            }
+        default:
+block_22:
+            var_v0 = 1;
+            /* Duplicate return node #23. Try simplifying control flow for better match */
+            return var_v0;
+        case 8:
+            if ((!(M2C_FIELD(arg1, f32 *, 0x148) > 0.0f) || (var_v0 = 0, (M2C_FIELD(arg1, s32 *, 0x13C) != 2))) && ((M2C_FIELD(temp_s0, s16 *, 0x5F6) >= 0x32) || (var_v0 = 0, (M2C_FIELD(arg1, s32 *, 0x13C) != 2)))) {
+                var_v0 = 1;
+                if (M2C_FIELD(temp_s0, s16 *, 0x5F6) < 0xA) {
+                    if (M2C_FIELD(arg1, s32 *, 0x13C) == 1) {
+                        return 0;
+                    }
+                    /* Duplicate return node #23. Try simplifying control flow for better match */
+                    return var_v0;
+                }
+                goto block_22;
+            }
+            /* Duplicate return node #23. Try simplifying control flow for better match */
+            return var_v0;
+        case 11:
+            var_v0 = 1;
+            if (func_80283228_de(&D_8011D8D0, temp_s0) >= 3) {
+                return 0;
+            }
+            /* Duplicate return node #23. Try simplifying control flow for better match */
+            return var_v0;
+        case 0:
+            var_v0 = 0;
+            if (M2C_FIELD(arg1, s32 *, 0x144) != 0) {
+                goto block_22;
+            }
+            /* Duplicate return node #23. Try simplifying control flow for better match */
+            return var_v0;
+        }
+    } else {
+        return var_v0;
+    }
+}
+#else
 INCLUDE_ASM("span_1000", func_80230058_de);
+#endif
