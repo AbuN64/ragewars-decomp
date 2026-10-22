@@ -8,30 +8,7 @@ extern struct State_func_80437444_de *D_800E5780;
 extern void func_8041A430_de(void *, s32);
 extern s32 func_80265650_de(void *, s32);
 
-#if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_804373E4_de);
-#endif
-
-#if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_80437414_de);
-#endif
-
-#if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_80437444_de);
-#endif
-
-#if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_80437574_de);
-#endif
-
-#if defined(VERSION_US)
-INCLUDE_ASM("ovl_80400000", func_804375B0_de);
-#endif
-
-#if !(defined(VERSION_US))
 /* Releases the object D_800E5780 holds through func_802547E4_de, clears D_800E5780 and returns zero. */
-
-
 
 #if defined(VERSION_DE)
 enum { MENU_RESOURCE = 0x139 };
@@ -39,7 +16,7 @@ enum { MENU_RESOURCE = 0x139 };
 enum { MENU_RESOURCE = 0x13b };
 #elif defined(VERSION_EU_X)
 enum { MENU_RESOURCE = 0x13f };
-#elif defined(VERSION_US_REV1)
+#elif defined(VERSION_US_REV1) || defined(VERSION_US)
 enum { MENU_RESOURCE = 0x13b };
 #endif
 
@@ -50,14 +27,6 @@ enum { MENU_RESOURCE = 0x13b };
    count, and restarts the delay at 3; when the menu reports 4 it calls func_8029973C_de and leaves
    through func_80298368_de with the target at 0x10, or 3 when that is -1. Returns zero. Adapted from
    func_8042DAF8_de with the stage test removed, case 1 added and the -1 target mapped to 3. */
-
-
-
-
-
-
-
-
 
 extern u8 D_80102B00[];
 
@@ -72,11 +41,7 @@ extern void func_80298368_de(s32);
 /* Calls func_8029973C_de, then sets the word at offset 0x10 of the object D_800E5780 points to to -1 and
    calls func_8041A430_de on the object's first word with 2, returning zero. */
 
-
-
-
 /* Handles menu selection and updates the active menu state. */
-
 
  extern u8 D_800FEB0F, D_80102B7E, D_80142358;
 
@@ -202,4 +167,3 @@ s32 func_804375B0_de(void) {
     func_8041A430_de(D_800E5780->menu, 2);
     return 0;
 }
-#endif

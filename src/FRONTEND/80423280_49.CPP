@@ -6,11 +6,12 @@ extern void func_8042A990_de(void);
 extern void func_8042AFE0_de(void);
 extern void func_8042B080_de(void);
 
-#if defined(VERSION_DE) || defined(VERSION_EU_X)
+#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80429A24_de);
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 /* Opens the screen D_800E4F60: allocates its 0x470-byte state for the window, sets up the list,
    the left and right arrows (shifted by their width and snapped to 4 pixels), the labels and
    items of the window with their alpha and visibility, resets the selection and the counters at

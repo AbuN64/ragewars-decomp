@@ -8,11 +8,12 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_8041E408_de);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 extern void *D_800E39C0;
 extern struct RequestRecAt10 D_80153F80[];
 extern struct TextEntry D_800E381C[][17];

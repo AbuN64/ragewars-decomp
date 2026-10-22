@@ -8,11 +8,12 @@
 #include "COMMON/EXTERNS_6.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_8043EE5C_de);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 
 void func_8043EE5C_de(struct ItemRecAt18V2 *item, MenuOptionBox *box, s32 unused, struct Holder_func_8043F048_de *context) {
     struct ItemDef *def = item->def;

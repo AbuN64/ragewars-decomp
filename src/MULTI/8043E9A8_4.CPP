@@ -7,60 +7,7 @@
 #include "MULTI/8043E9A8_4.H"
 #include "SYSTEM_2/8025E280.H"
 
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043EA98_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043EB70_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043EBE4_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043EC40_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043EC6C_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043EC98_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043ECC4_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-/* Stub that reports success. */
-s32 func_8043ED48_de(void) {
-    return 1;
-}
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043ED50_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_US_REV1))
-INCLUDE_ASM("ovl_80400000", func_8043ED78_de);
-#endif
-
-#if defined(VERSION_DE) || defined(VERSION_US_REV1)
 /* Starts a match from the menu: clears byte 0x1D and sets byte 0x1E of D_801462C8, clears the active byte 0x78 of its eight 150-byte status records, then gives the menu at 0x20 the first of the four 0x224-byte controller profiles of D_8010F328 that func_8026437C_de reports active, marking the settings D_80146302 at 0x78 and recording its index in D_801422C1, before calling func_8025E384_de, resetting D_8011FAC0 through func_8044DE7C_de and setting D_80154048. */
-
-
-
-
-
-
-
-
-
 
 extern struct Part D_80146302;
 
@@ -81,11 +28,6 @@ extern s32 func_80264690_de(void);
 /* Sets the option bytes at 0x1D and 0x1E of D_801462C8 to 1 and 4, clears the first byte of each
    of the eight 150-byte player records at 0x148, then calls func_804427C4_de with the third argument,
    the second and the resource D_0044FEA8, and returns one. */
-
-
-
-
-
 
 extern char D_0044FEA8[];
 
@@ -114,8 +56,6 @@ extern s32 D_800E63B4;
 extern s32 D_800E63B8;
 
 extern char D_00451094[];
-
-
 
 extern void func_802649FC_de();
 
@@ -221,4 +161,3 @@ s32 func_8043ED78_de(void *first, void *second, void *third) {
     func_804427C4_de(third, second, D_0044FFEC);
     return 1;
 }
-#endif

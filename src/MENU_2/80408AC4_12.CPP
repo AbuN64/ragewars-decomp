@@ -1,7 +1,27 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
+#ifdef NON_MATCHING
+extern u32 D_80153778;
+extern char D_800D7A0C[];
+extern char D_800DE7BC[];
+typedef struct { char pad0[0x14]; char *text; } Func_8040BB40_Obj;
+/* Points the text pointer at 0x14 of arg0 at D_800DE7BC for states 1 and 2 of D_80153778 and at D_800D7A0C otherwise; returns zero. */
+s32 func_8040BB40_de(Func_8040BB40_Obj *arg0) {
+    switch (D_80153778) {
+    case 1:
+    case 2:
+        arg0->text = D_800DE7BC;
+        break;
+    default:
+        arg0->text = D_800D7A0C;
+        break;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_8040BB40_de);
+#endif
 #endif
 
 #if defined(VERSION_DE)

@@ -3,11 +3,12 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80437304_de);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 typedef struct Shared_MenuWidgetState { s32 unk0; s32 unk4; void *unk8; s32 unkC; s32 unk10; s32 unk14; } Shared_MenuWidgetState;
 extern Shared_MenuWidgetState *D_800E5780;
 extern char D_80102B7E[];

@@ -2,11 +2,12 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 
-#if defined(VERSION_DE)
+#if (defined(VERSION_DE)) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_802566E8_de);
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_US))
+#if !(defined(VERSION_DE) || defined(VERSION_US)) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 /* Steps an object's nesting count at 0x1C up and back down while it is nonzero, each step bracketed by func_802BCF30_de and __osRestoreInt: going up past one calls func_802BB2A0_de, and coming down to anything but zero calls func_802BB420_de. */
 typedef struct Object {
     char pad0[0x1C];

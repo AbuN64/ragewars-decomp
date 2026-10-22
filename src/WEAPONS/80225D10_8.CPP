@@ -5,11 +5,11 @@
 #include "WEAPONS/80225D10_8.H"
 #include "WEAPONS/80213ED4.H"
 
-#if defined(VERSION_DE) || defined(VERSION_EU_X)
+#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_80229814_de);
 #endif
 
-#if defined(VERSION_DE) || defined(VERSION_EU_X)
+#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_RODATA("data_800C", rodata_func_80229814_de_800C7D48);
 #endif
 
@@ -17,7 +17,8 @@ INCLUDE_RODATA("data_800C", rodata_func_80229814_de_800C7D48);
 INCLUDE_DATA("data_800C", rodata_unresolved_800C2F64);
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 typedef struct {
     char pad0[0x98];
     s32 rule;

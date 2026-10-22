@@ -3,11 +3,12 @@
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "TYPES.H"
 
-#if defined(VERSION_DE) || defined(VERSION_EU_X)
+#if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80421AE8_de);
 #endif
 
-#if !(defined(VERSION_DE) || defined(VERSION_EU_X))
+#if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 extern void func_802A2360_de(void);
 extern s32 func_80419E54_de(s32, s32);
 extern s32 func_8041A280_de(s32, s32);

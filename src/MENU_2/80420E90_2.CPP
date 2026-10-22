@@ -9,11 +9,12 @@
 INCLUDE_RODATA("data_800C", rodata_func_80421568_de_800E15E8);
 #endif
 
-#if !(defined(VERSION_US) || defined(VERSION_US_REV1))
+#if (!(defined(VERSION_US) || defined(VERSION_US_REV1))) && !defined(NON_MATCHING)
 INCLUDE_ASM("ovl_80400000", func_80421568_de);
 #endif
 
-#if defined(VERSION_US) || defined(VERSION_US_REV1)
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 void func_80421568_de(void) {
     MenuWidget *item;
     char *text;

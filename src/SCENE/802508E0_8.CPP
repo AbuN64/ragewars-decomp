@@ -9,11 +9,12 @@
 #include "SCENE/802508E0_2.H"
 #include "sdk/os.h"
 
-#if defined(VERSION_US)
+#if (defined(VERSION_US)) && !defined(NON_MATCHING)
 INCLUDE_ASM("span_1000", func_80253344_de);
 #endif
 
-#if !(defined(VERSION_US))
+#if !(defined(VERSION_US)) || defined(NON_MATCHING)
+/* Fuzzy draft: the other versions' body, not diffed against this version's asm. */
 extern OSMesgQueue D_80101140;
 extern State802532E4 D_8010117C;
 
