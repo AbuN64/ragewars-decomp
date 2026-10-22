@@ -198,6 +198,52 @@ s32 Frontend_UpdateFourPlayerResults(void) {
     return 0;
 }
 
-INCLUDE_RODATA("data_800C", rodata_func_8043A890_de_800E1FFC);
-
-INCLUDE_ASM("ovl_80400000", func_8043A890_de);
+#include "gbi.h"
+extern Gfx *D_80110634;
+extern s32 D_800E28D0;
+extern void func_8041C7F4_de(struct ResultsPlayerPanel *);
+extern s32 func_80439CC8_de(char *);
+#if defined(VERSION_DE)
+extern void func_804397F0_auto(char *);
+#else
+extern void func_804399D0(char *);
+#endif
+extern s32 D_800D15E0;
+extern f32 D_800D15E4[4];
+extern struct Shape_typemap_6 D_800E41C0[];
+extern s32 D_800E28D4;
+extern struct FourPlayerResultsScreen *D_800E59E0;
+/* Draw callback of the four-player results screen: on draw event 1 in state 3 it resets the fill colour D_800D15E0
+   and the colour table D_800D15E4, scissors the display list to each active panel rectangle in D_800E41C0 and draws
+   the panel, then clips to the full screen and draws the badge of every panel whose state is 1. Returns zero. */
+s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
+    s32 i;
+    if (event == 1 && D_800E59E0->state == 3) {
+        D_800D15E0 = 0;
+        D_800D15E4[0] = 255.0f;
+        D_800D15E4[1] = 255.0f;
+        D_800D15E4[2] = 255.0f;
+        D_800D15E4[3] = 255.0f;
+        for (i = 0; i < 4; i++) {
+            if (D_800E59E0->panels[i].state == 1 || D_800E59E0->panels[i].state == 2) {
+                gDPSetScissorFrac(D_80110634++, 0, (s32)((f32)((D_800E41C0[i].field_0)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_4)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_8)) * 4.0f), (s32)((f32)((D_800E41C0[i].field_C)) * 4.0f));
+                func_8041C7F4_de(&D_800E59E0->panels[i]);
+            }
+        }
+        gDPSetScissorFrac(D_80110634++, 0, 0, 0, (s32)((f32)(D_800E28D0 - 1) * 4.0f), (s32)((f32)(D_800E28D4 - 1) * 4.0f));
+        for (i = 0; i < 4; i++) {
+            if (D_800E59E0->panels[i].state == 1 && func_80439CC8_de(D_800E59E0->badges[i]) != 0) {
+                D_800D15E0 = 1;
+                D_800D15E4[3] = 150.0f;
+#if defined(VERSION_DE)
+                func_804397F0_auto(D_800E59E0->badges[i]);
+#else
+                func_804399D0(D_800E59E0->badges[i]);
+#endif
+                D_800D15E0 = 0;
+                D_800D15E4[3] = 255.0f;
+            }
+        }
+    }
+    return 0;
+}
