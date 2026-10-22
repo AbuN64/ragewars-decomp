@@ -97,62 +97,62 @@ segments = [
 ]
 
 [file."src/IO/80200500.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200500_2.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200500_3.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200568.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200568_2.CPP"]
-toolchain = "gcc-2.8.1-sn64"
-cflags = ["-msplit-addresses"]
+toolchain = "gcc-2.7.2-sn64"
+cflags = []
 omit = []
 
 [file."src/IO/80200800.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200800_3.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200B14.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/80200B14_2.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/io_hostmemory.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/802013D8.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
 [file."src/IO/802013D8_2.CPP"]
-toolchain = "gcc-2.7.2-kmc"
+toolchain = "gcc-2.7.2-sn64"
 cflags = []
 omit = []
 
