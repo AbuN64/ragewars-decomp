@@ -489,7 +489,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
         if (temporaryFlag) player->flags &= ~0x8000;
         if ((u32)(player->state - 0x11) < 2) return;
     if (player->state == 15) return;
-    if (player->controls->unk8F && D_80145088.regenPaused) return;
+    if (player->controls->unk8F && D_80145088.modes.tag) return;
     if (player->health == 0) return;
     if (player->kind == D_800CE47C) return;
     if (player->flags & 0x20) return;
@@ -499,7 +499,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
         goto weapon;
     } else {
         if (D_801462E5) {
-            if (player->controls->unk8F && D_80145088.regenPaused && player->health == 0) return;
+            if (player->controls->unk8F && D_80145088.modes.tag && player->health == 0) return;
             if (D_801462E5 && (player->hidden || player->kind == D_800C9228_de) &&
                 player->health == 0) return;
         }
@@ -518,7 +518,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
     }
     if ((u32)(player->state - 0x11) < 2) return;
     if (player->state == 15) return;
-    if (player->controls->unk8F && D_80145088.regenPaused) return;
+    if (player->controls->unk8F && D_80145088.modes.tag) return;
     if (player->health == 0) return;
     if (player->kind == D_800CE47C) return;
     if (player->flags & 0x20) return;

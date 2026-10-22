@@ -616,7 +616,7 @@ void func_80220D44_de(SharedPlayer *p) {
     if (f20 < D_800C78B8) return;
     cur = p->views5E4.view5E4_2.health;
     if (cur == 0.0f) return;
-    if (p->views5D8.view5D8_4.ctrl->flag != 0 && D_80145088.regenPaused != 0) return;
+    if (p->views5D8.view5D8_4.ctrl->flag != 0 && D_80145088.modes.tag != 0) return;
     f20 = cur + (s32)(f20 * D_800C78BC) * (D_800D2988 * D_800C78C0.first);
     p->views5E4.view5E4_2.health = RW_MIN_LT(f20, func_8022AC00_de(p));
 }
