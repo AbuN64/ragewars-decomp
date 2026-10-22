@@ -1,7 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
 extern u16 D_8014D48C;
 extern char *D_auto_800D3770, *D_auto_800D3774, *D_auto_800D3778, *D_auto_800D377C, *D_auto_800D3780, *D_auto_800D3784;
 extern char *D_auto_800D3788, *D_auto_800D378C, *D_auto_800D3790, *D_auto_800D3794, *D_auto_800D3798, *D_auto_800D379C;
@@ -12,25 +11,24 @@ s32 func_80408AD0_de(Func_80408AD0_Obj *arg0) {
     char *src = 0;
     char *dst;
     s32 i;
-    if (v < 0x32) src = D_auto_800D3770;
-    else if (v - 0x32 < 0x64) src = D_auto_800D3774;
-    else if (v - 0x96 < 0x96) src = D_auto_800D3778;
-    else if (v - 0x12C < 0xC8) src = D_auto_800D377C;
-    else if (v - 0x1F4 < 0x12C) src = D_auto_800D3780;
-    else if (v - 0x320 < 0x1F4) src = D_auto_800D3784;
-    else if (v - 0x514 < 0x2BC) src = D_auto_800D3788;
-    else if (v - 0x7D0 < 0x3E8) src = D_auto_800D378C;
-    else if (v - 0xBB8 < 0x5DC) src = D_auto_800D3790;
-    else if (v - 0x1194 < 0x7D0) src = D_auto_800D3794;
-    else if (v - 0x1964 < 0xDAB) src = D_auto_800D3798;
-    else if (v >= 0x270F) src = D_auto_800D379C;
-    dst = *arg0->text + 8;
+    if (v < 50) src = D_auto_800D3770;
+    else if (v >= 50 && v < 150) src = D_auto_800D3774;
+    else if (v >= 150 && v < 300) src = D_auto_800D3778;
+    else if (v >= 300 && v < 500) src = D_auto_800D377C;
+    else if (v >= 500 && v < 800) src = D_auto_800D3780;
+    else if (v >= 800 && v < 1300) src = D_auto_800D3784;
+    else if (v >= 1300 && v < 2000) src = D_auto_800D3788;
+    else if (v >= 2000 && v < 3000) src = D_auto_800D378C;
+    else if (v >= 3000 && v < 4500) src = D_auto_800D3790;
+    else if (v >= 4500 && v < 6500) src = D_auto_800D3794;
+    else if (v >= 6500 && v < 9999) src = D_auto_800D3798;
+    else if ((s32)v >= 9999) src = D_auto_800D379C;
+    dst = *arg0->text;
+    dst += 8;
     if (src != 0) {
-        for (i = 0; i < 12; i++) *dst++ = *src++;
+        i = 0;
+        do { *dst++ = *src++; i++; } while (i < 12);
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80408AD0_de);
-#endif
 #endif
