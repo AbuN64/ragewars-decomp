@@ -72,13 +72,11 @@ s32 func_8029C4A0_de(CVector3 *out, s32 *outCount, CVector3 *in, s32 n, f32 a, f
     return clipped;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-
+#include "COMMON/ITEMRECAT20V1.H"
 extern f32 D_800C5A90_de, D_800C5A94, D_800C5A98_de, D_800C5A9C, D_800C5AA0_de;
 
-void func_8029C6A8_de(f32 *matrix, f32 *angles) {
-    u32 mask = 0;
+void func_8029C6A8_de(MatrixF *matrix, f32 *angles) {
+    u16 mask = 0;
     f32 sy, cy, sx, cx, sz, cz, one;
     if (angles[0] != 0.0f) mask = 4;
     if (angles[1] != 0.0f) mask |= 2;
@@ -87,46 +85,47 @@ void func_8029C6A8_de(f32 *matrix, f32 *angles) {
     case 0:
         func_802A0748_de(matrix, 0, 64);
         one = D_800C5A90_de;
-        matrix[0] = one; matrix[5] = one; matrix[10] = one; matrix[15] = one;
+        matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         return;
     case 2:
         func_802A0748_de(matrix, 0, 64);
         one = D_800C5A94;
-        matrix[0] = one; matrix[5] = one; matrix[10] = one; matrix[15] = one;
+        matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         func_8029BBB0_de(angles[1], &sy, &cy);
-        matrix[8] = sy; matrix[0] = cy; matrix[2] = -sy; matrix[10] = cy;
+        matrix->m[2][0] = sy; matrix->m[0][0] = cy; matrix->m[0][2] = -sy; matrix->m[2][2] = cy;
         return;
     case 4:
         func_802A0748_de(matrix, 0, 64);
         one = D_800C5A98_de;
-        matrix[0] = one; matrix[5] = one; matrix[10] = one; matrix[15] = one;
+        matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         func_8029BBB0_de(angles[0], &sx, &cx);
-        matrix[5] = cx; matrix[9] = -sx; matrix[6] = sx; matrix[10] = cx;
+        matrix->m[1][1] = cx; matrix->m[2][1] = -sx; matrix->m[1][2] = sx; matrix->m[2][2] = cx;
         return;
     case 1:
         func_802A0748_de(matrix, 0, 64);
         one = D_800C5A9C;
-        matrix[0] = one; matrix[5] = one; matrix[10] = one; matrix[15] = one;
+        matrix->m[0][0] = one; matrix->m[1][1] = one; matrix->m[2][2] = one; matrix->m[3][3] = one;
         func_8029BBB0_de(angles[2], &sz, &cz);
-        matrix[0] = cz; matrix[4] = -sz; matrix[1] = sz; matrix[5] = cz;
+        matrix->m[0][0] = cz; matrix->m[1][0] = -sz; matrix->m[0][1] = sz; matrix->m[1][1] = cz;
         return;
     }
     func_8029BBB0_de(angles[0], &sx, &cx);
     func_8029BBB0_de(angles[1], &sy, &cy);
     func_8029BBB0_de(angles[2], &sz, &cz);
-    matrix[2] = -sy;
-    matrix[0] = cy * cz;
-    matrix[1] = cy * sz;
-    matrix[10] = cx * cy;
-    matrix[14] = 0.0f; matrix[13] = 0.0f; matrix[12] = 0.0f;
-    matrix[11] = 0.0f; matrix[7] = 0.0f; matrix[3] = 0.0f;
-    matrix[15] = D_800C5AA0_de;
-    matrix[6] = sx * cy;
-    matrix[4] = sx * sy * cz - cx * sz;
-    matrix[8] = cx * cz * sy + sx * sz;
-    matrix[5] = sx * sy * sz + cx * cz;
-    matrix[9] = cx * sz * sy - sx * cz;
+    {
+        f32 sxsy = sx * sy;
+        f32 cxcz = cx * cz;
+        f32 cxsz = cx * sz;
+        matrix->m[0][0] = cy * cz;
+        matrix->m[1][0] = sxsy * cz - cxsz;
+        matrix->m[2][0] = cxcz * sy + sx * sz;
+        matrix->m[0][1] = cy * sz;
+        matrix->m[1][1] = sxsy * sz + cxcz;
+        matrix->m[2][1] = cxsz * sy - sx * cz;
+        matrix->m[0][2] = -sy;
+        matrix->m[1][2] = sx * cy;
+        matrix->m[2][2] = cx * cy;
+        matrix->m[0][3] = matrix->m[1][3] = matrix->m[2][3] = matrix->m[3][0] = matrix->m[3][1] = matrix->m[3][2] = 0.0f;
+        matrix->m[3][3] = D_800C5AA0_de;
+    }
 }
-#else
-INCLUDE_ASM("span_1000", func_8029C6A8_de);
-#endif
