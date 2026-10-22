@@ -96,7 +96,7 @@ void func_8044E0CC_de(void) {
 }
 /* Starts the panel's two movers: each is reset to (0, -0x28) and (0, -0x14) with its target word cleared, and
  * given its frame table (D_800CDE94, D_800CDEA4) through func_802AA70C_de. */
-void func_8044E0D4_de(PanelMovers *panel) {
+void Ovlgame_StartPanelMovers(PanelMovers *panel) {
     panel->firstTarget = 0;
     func_802AA6D0_de(panel->first, 0, -0x28);
     func_802AA70C_de(panel->first, &D_800CDE94);

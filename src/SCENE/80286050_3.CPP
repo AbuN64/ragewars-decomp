@@ -91,7 +91,7 @@ extern void func_8044D5C4_de();
 extern void func_8044D668_de();
 extern void Ovlgame_InitEffectPool();
 extern void func_8044DF60_de();
-extern void func_8044E0D4_de(void *panel);
+extern void Ovlgame_StartPanelMovers(void *panel);
 
 
 extern unsigned char D_00285160[];
@@ -283,7 +283,7 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     func_8023EE00_de();
     func_8044B0E0_de(&((struct SharedRecAt1B92C *)arg0)->address1B320);
     func_8025C8D8_de(&D_8011F260, &D_8011AFC0, 0xF);
-    func_8044E0D4_de(&D_801376F8);
+    Ovlgame_StartPanelMovers(&D_801376F8);
     do {
         var_s1_4 = func_8022A5F4_de(&D_80145040, var_s2);
         if (var_s1_4 != 0) {
