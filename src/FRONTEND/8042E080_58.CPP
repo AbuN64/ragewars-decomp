@@ -9,55 +9,32 @@
    offset 0x58. */
 
 
-extern struct PlayerRecAt58 *D_800E54A4;
+extern struct PlayerSlotTable *D_800E54A4;
 
 s32 func_804355B4_de(void) {
     s32 count = 0;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (D_800E54A4[i].state != 0) {
+        if (D_800E54A4->players[i].state != 0) {
             count++;
         }
     }
     return count;
 }
 
-#ifdef NON_MATCHING
-/* Copies four selected player records and marks absent selections; -fno-strength-reduce reproduces the reference pointer induction exactly. */
-#include "TYPES.H"
-typedef struct { char pad[12]; s8 unkC, unkD; char rest[0x182]; } Record;
-extern Record D_80102B00[];
-extern void *D_800E54A4;                          /* const */
+typedef struct { char pad[12]; s8 unkC, unkD; char rest[0x182]; } MatchProfile58;
+extern MatchProfile58 D_80102B00[];
+extern void *Resmgr_CopyBytes(void *destination, const void *source, s32 bytes);
 
 void func_804355E8_de(void) {
-    Record *var_s1;
-    s32 temp_s0;
-    s32 temp_v1;
-    s32 var_s2;
-    s32 var_s3;
-    void *temp_v0;
-
-    s32 absent;
-    var_s3 = 0;
-    absent = -1;
-    var_s1 = D_80102B00;
-    var_s2 = 0;
+    s32 i = 0; s32 none = -1;
     do {
-        temp_v0 = D_800E54A4 + var_s2;
-        temp_v1 = (*(s32 *)(temp_v0+0x2DF8));
-        temp_s0 = (*(s32 *)(temp_v0+0x2DFC));
-        if (temp_v1 != absent) {
-            Resmgr_CopyBytes(var_s1, D_800E54A4 + ((temp_v1 * 0xB68) + 0x58) + ((temp_s0 * 0x190) + 0x18), 0x190);
-            var_s1->unkC = (s8) temp_s0;
-        } else {
-            var_s1->unkD = (s8) temp_v1;
-        }
-        var_s1++;
-        var_s3 += 1;
-        var_s2 += 0xC;
-    } while (var_s3 < 4);
+        s32 player = D_800E54A4->places[i].x;
+        s32 entry = D_800E54A4->places[i].y;
+        MatchProfile58 *dst = &D_80102B00[i];
+        if (player != none) { Resmgr_CopyBytes(dst, D_800E54A4->players[player].slots[entry], 0x190); dst->unkC = entry; }
+        else { dst->unkD = player; }
+        i++;
+    } while (i < 4);
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_804355E8_de);
-#endif

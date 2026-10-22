@@ -238,5 +238,5 @@ struct IntegerState3470;
 typedef struct IntegerState3470 IntegerState3470;
 
 
-extern int func_804355E8_de(void);
+extern void func_804355E8_de(void);
 #endif
