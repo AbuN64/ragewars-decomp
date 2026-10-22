@@ -207,18 +207,28 @@ struct func_80427B98_S1 {
     char unk20;
 };
 
+/* 84/84 words; remaining: entries base add order (a1+0xD0 first) and position copy reusing %hi for its z word */
 void func_804279B8_de(void) {
- CVector3 scale; s32 record,index; u8 kind; Entry *entry; PreviewSettings *settings=(PreviewSettings *)&D_801462C8; PreviewScreen *screen=(PreviewScreen *)D_800E4690;
- if(settings->mode==4) {
- record=screen->record;
- entry = &settings->entries[screen->player];
- func_804284C0_de(record,settings);
- kind=func_8028D474_de(&D_8011FE88,record)->kind;
- entry->kind=kind;
- index=func_8041F140_de((s8)kind);
- scale.x=((PreviewRow *)D_800E3A58)[index].scale[0]; scale.y=((PreviewRow *)D_800E3A58)[index].scale[0]; scale.z=((PreviewRow *)D_800E3A58)[index].scale[0];
- func_8041CAD8_de(screen->preview,9,entry->kind+0x38F,0x4B,0x5DC0,scale,((PreviewRow *)D_800E3A58)[index].position[0],((PreviewRow *)D_800E3A58)[index].distance[0],((PreviewRow *)D_800E3A58)[index].light[0]);
- }
+    CVector3 scale;
+    s32 record;
+    s32 index;
+    u8 kind;
+    Entry *entry;
+    PreviewSettings *settings = (PreviewSettings *)&D_801462C8;
+    if (settings->mode == 4) {
+        record = (*(ResultsOptionsScreen **)&D_800E4690)->selection;
+        entry = &settings->entries[(*(ResultsOptionsScreen **)&D_800E4690)->player];
+        func_804284C0_de(record, settings);
+        kind = func_8028D474_de(&D_8011FE88, record)->kind;
+        entry->kind = kind;
+        index = func_8041F140_de((s8)kind);
+        scale.x = D_800E3A58[index].scale[0];
+        scale.y = D_800E3A58[index].scale[0];
+        scale.z = D_800E3A58[index].scale[0];
+        func_8041CAD8_de((Obj8041CAD8 *)(*(ResultsOptionsScreen **)&D_800E4690)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
+                         D_800E3A58[index].position[0], D_800E3A58[index].distance[0],
+                         D_800E3A58[index].light[0]);
+    }
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_804279B8_de);
