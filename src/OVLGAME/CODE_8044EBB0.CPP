@@ -92,12 +92,11 @@ void Ovlgame_ResetHudCharTables(HudTables *hud) {
     func_802AB35C_de((int)hud, D_800D2F94, pairs, hud->tableB);
 }
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8044E0CC_de);
-INCLUDE_ASM("ovl_80400000", func_8044E0D4_de);
-#else
 void func_8044E0CC_de(void) {
 }
+#ifndef NON_MATCHING
+INCLUDE_ASM("ovl_80400000", func_8044E0D4_de);
+#else
 
 /* Starts the panel's two movers: each is reset to (0, -0x28) and (0, -0x14) with its target word cleared, and
  * given its frame table (D_800D316C_us_rev1, D_800D317C_us_rev1) through func_802AA70C_de. */
