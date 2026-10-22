@@ -92,7 +92,132 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
 }
 #endif
 
+#ifdef NON_MATCHING
+#include "COMMON/WORLD.H"
+#define PD_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+typedef struct PakVec { f32 x; f32 y; f32 z; } PakVec;
+typedef struct Copy188 { u8 bytes[0x188]; } Copy188;
+extern u32 *D_80110634;
+extern s32 D_800D297C, D_800E28D0, D_800E28D4, D_800E1E20, D_800CD730, D_800CD8D0, D_8014DE50;
+extern f32 D_800DE480_de, D_800DE484, D_800DE488, D_800DE498_de[], D_800DE4A0, literals_func_8028D244_de;
+extern s32 D_800CE430[];
+extern u8 D_00443128[], D_00443104[];
+extern void func_802A001C_de();
+extern u8 *func_8028CFA0_de();
+extern void func_80272898_de();
+extern void func_802466A0_de();
+extern void func_8024B2D0_de();
+extern f32 func_802B7130_de();
+extern s32 func_8025477C_de();
+extern void func_8025476C_de();
+extern void func_8028B274_de();
+extern void func_8024B8C4_de();
+extern void func_80246E44_de();
+extern void func_8026D980_de();
+extern void func_80249E28_de();
+extern void func_8026D9D0_de();
+void func_80440838_de(u8 *self, s32 *selected, void *unused, u8 *ctx) {
+    PakVec zero50;
+    PakVec scaled;
+    PakVec offset;
+    PakVec placed;
+    u8 *widget;
+    u8 *def;
+    u8 *draw;
+    u8 *link = 0;
+    u8 *owner;
+    u8 *source;
+    u32 *list;
+    f32 ratioX;
+    f32 ratioY;
+    f32 wobble;
+    s32 id;
+    func_802A001C_de(&zero50, 0, 0xC);
+    widget = PD_FIELD(self, u8 *, 0x20);
+    if (widget == 0 || PD_FIELD(widget, s32, 0x478) == 0) {
+        return;
+    }
+    def = PD_FIELD(self, u8 *, 0x14);
+    draw = widget + 0x190;
+    list = D_80110634;
+    list[0] = 0xDA380007;
+    list[1] = PD_FIELD(ctx, u32, 0x40) + 0x380 + D_800D297C * 64;
+    ratioX = PD_FIELD(PD_FIELD(ctx, u8 *, 0x40), f32, 0x29C) / (f32)D_800E28D0;
+    scaled.x = PD_FIELD(def, f32, 0x18) * ratioX;
+    scaled.z = PD_FIELD(def, f32, 0x20) * ratioX;
+    ratioY = PD_FIELD(PD_FIELD(ctx, u8 *, 0x40), f32, 0x2A0) / (f32)D_800E28D4;
+    scaled.y = PD_FIELD(def, f32, 0x1C) * ratioY;
+    D_80110634 = list + 2;
+    PD_FIELD(widget, f32, 0x47C) = PD_FIELD(widget, f32, 0xF8);
+    if (!(PD_FIELD(self, u32, 8) & 0x2000000)) {
+        id = PD_FIELD(def, s32, 4);
+        owner = PD_FIELD(self, u8 *, 0x20);
+        source = func_8028CFA0_de(&D_8011FE88, id, PD_FIELD(def, s32, 8));
+        if (source != 0) {
+            PD_FIELD(owner, s32, 0) = id;
+            PD_FIELD(owner, s32, 0x478) = 1;
+            *(Copy188 *)(owner + 4) = *(Copy188 *)source;
+            PD_FIELD(owner, s32, 4) = 0;
+            PD_FIELD(owner, s32, 8) = 0;
+            PD_FIELD(owner, s32, 0x18) = 0;
+            PD_FIELD(owner, s32, 0x1C) = 0;
+            PD_FIELD(owner, s32, 0x20) = 0;
+            PD_FIELD(owner, f32, 0xC) = D_800DE480_de;
+            PD_FIELD(owner, f32, 0x47C) = PD_FIELD(owner, f32, 0xF8);
+            link = owner + 4;
+        } else {
+            PD_FIELD(owner, s32, 0x478) = 0;
+        }
+    }
+    offset = PD_FIELD(def, PakVec, 0xC);
+    offset.y = offset.y - PD_FIELD(widget, f32, 0x47C) * scaled.y * D_800DE484;
+    func_80272898_de(PD_FIELD(ctx, u8 *, 0x40) + 0x160, &offset, &placed);
+    if (link != 0 && !(PD_FIELD(self, u32, 8) & 0x2000000)) {
+        func_802466A0_de(draw, -1, PD_FIELD(def, s32, 0), D_800CD8D0, link, -1, 0,
+                         PD_FIELD(PD_FIELD(ctx, u8 *, 0x40), f32, 0x28) + D_800DE488, placed, 0,
+                         PD_FIELD(def, PakVec, 0x18), zero50, 0);
+        func_8024B2D0_de(draw);
+        PD_FIELD(self, u32, 8) |= 0x2000000;
+    }
+    wobble = func_802B7130_de((f32)(u32)(D_800CD730 * 10) * D_800DE498_de[0]);
+    D_8014DE50 = (s32)(PD_FIELD(ctx, f32, 0x30) * PD_FIELD(ctx, f32, 0x34) * ((wobble + D_800DE498_de[1]) * D_800DE4A0 + D_800DE4A0));
+    PD_FIELD(draw, u8 *, 0x27C) = PD_FIELD(ctx, s16, 0) == selected[0] ? D_00443128 : D_00443104;
+    if (func_8025477C_de() == 0) {
+        func_8025476C_de(1);
+    }
+    if (PD_FIELD(widget, s32, 0) == 0xB) {
+        func_8028B274_de(&D_8011FE88, draw, D_800CE430[PD_FIELD(PD_FIELD(draw, u8 *, 0x18), s16, 0xC)], 1);
+    }
+    if (D_800E1E20 != 4) {
+        D_800E1E20 = 4;
+        list = D_80110634;
+        list[0] = 0xE7000000;
+        list[1] = 0;
+        list[2] = 0xE3000A01;
+        list[3] = 0x100000;
+        list[4] = 0xE3000C00;
+        list[5] = 0x80000;
+        list[6] = 0xE3001201;
+        list[7] = 0x2000;
+        D_80110634 = list + 8;
+    }
+    PD_FIELD(draw, PakVec, 0x50) = scaled;
+    PD_FIELD(draw, PakVec, 8) = placed;
+    PD_FIELD(draw, PakVec, 0x1C4) = placed;
+    func_8024B8C4_de(draw);
+    PD_FIELD(draw, PakVec, 8) = placed;
+    PD_FIELD(draw, PakVec, 0x1C4) = placed;
+    func_80246E44_de(draw);
+    PD_FIELD(draw, f32, 0x6C) = PD_FIELD(draw, f32, 0x6C) + PD_FIELD(def, f32, 0x2C) * literals_func_8028D244_de;
+    PD_FIELD(draw, PakVec, 8) = placed;
+    PD_FIELD(draw, PakVec, 0x1C4) = placed;
+    func_8026D980_de(draw, PD_FIELD(ctx, u8 *, 0x40));
+    func_80249E28_de(draw);
+    func_8026D9D0_de();
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_80440838_de);
+#endif
 
 #ifdef NON_MATCHING
 #define MP_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))

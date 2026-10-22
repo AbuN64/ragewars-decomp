@@ -52,7 +52,127 @@ void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
     } while ((entry->flags & 0x1800000) != 0x1800000 || entry->target->locked == 0);
 }
 
+#ifdef NON_MATCHING
+#define PK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+extern f32 literals_func_8028D244_de;
+extern f32 D_800E24D4, D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
+typedef s32 (*MenuCallback)();
+s32 func_80441214_de(u8 *menu, u8 *ctx) {
+    s32 hold = 0;
+    u8 *entry;
+    u8 *current;
+    s32 i;
+    s32 flags;
+    s32 allowRepeat;
+    s32 pad;
+    s32 state;
+    MenuCallback callback;
+    callback = PK_FIELD(PK_FIELD(menu, u8 *, 0x14), MenuCallback, 0x14);
+    if (callback != 0) {
+        hold = callback();
+    }
+    entry = PK_FIELD(menu, u8 *, 0xC);
+    for (i = PK_FIELD(menu, s32, 0x10) - 1; i != -1; i--, entry += 0x28) {
+        callback = PK_FIELD(PK_FIELD(entry, u8 *, 0x18), MenuCallback, 0x18);
+        if (callback != 0) {
+            callback(entry, menu, ctx);
+        }
+    }
+    current = PK_FIELD(menu, u8 *, 0xC) + PK_FIELD(menu, s16, 0) * 0x28;
+    PK_FIELD(menu, f32, 0x2C) += literals_func_8028D244_de;
+    flags = PK_FIELD(current, s32, 8) & 0x400000;
+    func_80442B5C_de(menu);
+    switch (PK_FIELD(menu, s16, 0x28)) {
+    case 0:
+        PK_FIELD(menu, f32, 0x30) += literals_func_8028D244_de;
+        if (PK_FIELD(menu, f32, 0x30) >= D_800E24D4) {
+            PK_FIELD(menu, f32, 0x30) = D_800E24D4;
+            PK_FIELD(menu, s16, 0x28) = 1;
+        }
+        break;
+    case 1:
+        PK_FIELD(menu, f32, 0x34) += literals_func_8028D244_de * D_800DE4A8;
+        if (PK_FIELD(menu, f32, 0x34) >= D_800DE4AC) {
+            PK_FIELD(menu, f32, 0x34) = D_800DE4AC;
+            PK_FIELD(menu, s16, 0x28) = 2;
+        }
+        break;
+    case 3:
+        PK_FIELD(menu, f32, 0x34) -= literals_func_8028D244_de * D_800DE4B0_de;
+        if (PK_FIELD(menu, f32, 0x34) <= 0.0f) {
+            PK_FIELD(menu, f32, 0x34) = 0.0f;
+            PK_FIELD(menu, s16, 0x28) = 4;
+        }
+        break;
+    case 4:
+        PK_FIELD(menu, f32, 0x30) -= literals_func_8028D244_de;
+        if (PK_FIELD(menu, f32, 0x30) <= 0.0f) {
+            PK_FIELD(menu, f32, 0x30) = 0.0f;
+            return 1;
+        }
+        break;
+    }
+    state = PK_FIELD(menu, s16, 0x28);
+    if (state >= 3 || state < 0) {
+        return 0;
+    }
+    if (hold != 0) {
+        PK_FIELD(menu, s16, 0x28) = 4;
+    }
+    if (PK_FIELD(current, s32, 8) & 8) {
+        return 0;
+    }
+    allowRepeat = 1;
+    if (PK_FIELD(current, s16, 4) == 2) {
+        pad = PK_FIELD(PK_FIELD(menu, u8 *, 0x20), s32, 0xB0);
+        if (pad & 0x20202) {
+            allowRepeat = 0;
+            PK_FIELD(current, s32, 0x1C) -= 2;
+            if (PK_FIELD(current, s32, 0x1C) < 0) {
+                PK_FIELD(current, s32, 0x1C) = 0;
+            }
+        } else if (pad & 0x40101) {
+            PK_FIELD(current, s32, 0x1C) += 2;
+            allowRepeat = 0;
+            if (PK_FIELD(current, s32, 0x1C) >= 0x100) {
+                PK_FIELD(current, s32, 0x1C) = 0xFF;
+            }
+        }
+    }
+    if (flags == 0) {
+        if (func_80264388_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+            func_804410AC_de(menu, 0x10);
+        }
+        if (func_802643A0_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+            func_804410AC_de(menu, 0x11);
+        }
+    } else if (PK_FIELD(PK_FIELD(menu, u8 *, 0x20), s32, 0xB0) & 0x60303) {
+        allowRepeat = 0;
+    }
+    if (allowRepeat != 0) {
+        if (func_802643B8_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+            func_804410AC_de(menu, 0x12);
+        }
+        if (func_802643D0_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+            func_804410AC_de(menu, 0x13);
+        }
+    }
+    if (PK_FIELD(menu, s16, 0x28) != 2) {
+        return 0;
+    }
+    if (func_8026437C_de(PK_FIELD(menu, u8 *, 0x20)) != 0 ||
+        ((func_80264388_de(PK_FIELD(menu, u8 *, 0x20)) != 0 || func_802643A0_de(PK_FIELD(menu, u8 *, 0x20)) != 0) && flags != 0)) {
+        callback = PK_FIELD(PK_FIELD(current, u8 *, 0x18), MenuCallback, 0x1C);
+        if (callback != 0 && callback(current, menu, ctx) == 0) {
+            return 0;
+        }
+        PK_FIELD(menu, s16, 0x28) = 3;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("ovl_80400000", func_80441214_de);
+#endif
 
 
 extern void *func_80442A58_de(s8 *);
