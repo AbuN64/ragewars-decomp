@@ -74,7 +74,7 @@ s32 func_8042E460_de(u8 *request) {
  * clears player status flags, configures joining and spectator players,
  * and sets global mode state. */
 void func_8042E5EC_de(void) {
-    s32 stack[40];
+    static s32 stack[40];
     s32 i, idx1, idx2, temp;
     s32 numJoining, numSpectators, variant;
     Shared_PlayerSettingsRecord *player;
