@@ -1,11 +1,5 @@
 
-#if defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
-#if defined(VERSION_EU)
-#define func_8043C500_us_rev1 func_8043D1F4_eu
-#endif
-#if defined(VERSION_EU_X)
-#define func_8043C500_us_rev1 func_8043D324_eu_x
-#endif
+#if defined(VERSION_US_REV1)
 /* Maps an id from 1 to 33 to the address of its data block, returning 0 for any other id. */
 #include "TYPES.H"
 #include "MENU/EXTERNS_2.H"
