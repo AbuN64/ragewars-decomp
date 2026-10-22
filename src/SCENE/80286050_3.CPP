@@ -91,7 +91,7 @@ extern void func_8044D5C4_de();
 extern void func_8044D668_de();
 extern void Ovlgame_InitEffectPool();
 extern void func_8044DF60_de();
-extern void func_8044E0D4_de();
+extern void func_8044E0D4_de(void *panel);
 
 
 extern unsigned char D_00285160[];

@@ -14,8 +14,8 @@ extern void func_802AA6D0_de(void *mover, s16 x, s16 y);
 extern s32 func_802AA70C_de(void *mover, s32 *frames);
 extern unsigned char D_800D3080[];
 extern unsigned char D_800D2F94[];
-extern s32 D_800D316C_us_rev1;
-extern s32 D_800D317C_us_rev1;
+extern s32 D_800CDE94;
+extern s32 D_800CDEA4;
 
 
 typedef struct ActorWorld {
@@ -94,18 +94,13 @@ void Ovlgame_ResetHudCharTables(HudTables *hud) {
 
 void func_8044E0CC_de(void) {
 }
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8044E0D4_de);
-#else
-
 /* Starts the panel's two movers: each is reset to (0, -0x28) and (0, -0x14) with its target word cleared, and
- * given its frame table (D_800D316C_us_rev1, D_800D317C_us_rev1) through func_802AA70C_de. */
+ * given its frame table (D_800CDE94, D_800CDEA4) through func_802AA70C_de. */
 void func_8044E0D4_de(PanelMovers *panel) {
     panel->firstTarget = 0;
     func_802AA6D0_de(panel->first, 0, -0x28);
-    func_802AA70C_de(panel->first, &D_800D316C_us_rev1);
+    func_802AA70C_de(panel->first, &D_800CDE94);
     panel->secondTarget = 0;
     func_802AA6D0_de(panel->second, 0, -0x14);
-    func_802AA70C_de(panel->second, &D_800D317C_us_rev1);
+    func_802AA70C_de(panel->second, &D_800CDEA4);
 }
-#endif
