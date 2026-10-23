@@ -37,7 +37,7 @@ extern void func_804356BC_de(s32);
 extern void func_8043577C_de(s32);
 extern void func_8040E8D8_de(void *, s32);
 
-extern s32 func_80404858_de(s32, s32);
+extern s32 Pak_DeleteNote(s32, s32);
 
 extern void func_8022EF30_de(void *);
 extern void func_80404E28_de(s32);
@@ -408,7 +408,7 @@ s32 func_804306D8_de(s32 arg0, s32 arg1, s32 arg2) {
 #else
         case 0x2D0:
 #endif
-            if (func_80404858_de(p, D_800E54A4->players[p].slot) == 0) {
+            if (Pak_DeleteNote(p, D_800E54A4->players[p].slot) == 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                 if (func_802A03F4_de((u8 *)D_800E25A4[D_80152789],
 #else

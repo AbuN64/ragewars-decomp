@@ -30,7 +30,7 @@ extern struct List D_0044EB04;
 extern void func_80264770_de(int arg0);
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
-   func_804097E8_de, then reallocates a fresh scoreboard entry via func_80442574_de using arg1's fields
+   func_804097E8_de, then reallocates a fresh scoreboard entry via Pak_OpenDialog using arg1's fields
    at 0x1C and 0x20 against the D_44F100 list, and always reports success. Sibling of
    func_8043E568_de, which also fires func_8025E214_de(-1) and uses the D_44F0B8 list instead. */
 
@@ -110,19 +110,19 @@ void func_8043E97C_de(void *arg0) {
 struct List;
 
 struct Owner;
-extern void *func_80442574_de(void *owner, void *list, s32 b, s32 c, s32 d);
+extern void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 extern char D_8014561C[];
 
-/** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to func_80442574_de; ignores arg0. */
+/** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to Pak_OpenDialog; ignores arg0. */
 s32 func_8043E9A8_de(void *arg0, Obj8043EB20 *arg1) {
     func_80264770_de(arg1->unk20->unk4);
-    func_80442574_de(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
+    Pak_OpenDialog(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
     return 1;
 }
 
 s32 func_8043EA00_de(void *arg0, Arg1Struct *arg1) {
     func_804097E8_de();
-    func_80442574_de(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
+    Pak_OpenDialog(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
     return 1;
 }
 

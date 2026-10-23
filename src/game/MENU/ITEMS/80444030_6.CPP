@@ -30,7 +30,7 @@ extern char D_8010B0E0;
 
 
 
-/* Replaces the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) with what func_804423BC_de returns for the second argument, that byte, 1, 0, 1 and 1, returning zero. Adapted from func_80444610_de with the settings byte made the signed byte at 0x7B. */
+/* Replaces the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, returning zero. Adapted from func_80444610_de with the settings byte made the signed byte at 0x7B. */
 
 
 
@@ -40,7 +40,7 @@ extern char D_8010B0E0;
 
 
 
-extern s32 func_804423BC_de(void *, s32, s32, s32, s32, s32);
+extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 /* Points an option field at the text D_800D75E0 when the signed byte at offset 0x7B of the second argument's owner settings (or the defaults D_80146302) is zero and at D_800D75E4 when it is one, returning zero. Adapted from func_80444674_de with the settings byte made the signed byte at 0x7B and the texts changed. */
 
@@ -56,7 +56,7 @@ extern s32 func_804423BC_de(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7C of the second argument's owner settings (or the defaults D_80146302) with what func_804423BC_de returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. */
+/* Replaces the byte at offset 0x7C of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. */
 
 
 
@@ -79,7 +79,7 @@ extern s32 func_804423BC_de(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7D of the second argument's owner settings (or the defaults D_80146302) with what func_804423BC_de returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from func_80444488_de with the settings byte 0x7D changed. */
+/* Replaces the byte at offset 0x7D of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from func_80444488_de with the settings byte 0x7D changed. */
 
 
 
@@ -103,7 +103,7 @@ extern s32 func_804423BC_de(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) with what func_804423BC_de returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from func_80444488_de with the settings byte 0x7E changed. */
+/* Replaces the byte at offset 0x7E of the second argument's owner settings (or the defaults D_80146302) with what Pak_AdjustValue returns for the second argument, that byte, 1, 0, 1 and 1, and returns zero. Adapted from func_80444488_de with the settings byte 0x7E changed. */
 
 
 
@@ -127,13 +127,13 @@ extern s32 func_804423BC_de(void *, s32, s32, s32, s32, s32);
 
 
 
-/* Replaces the option byte D_801462E3 with what func_804423BC_de returns for the second argument, that
+/* Replaces the option byte D_801462E3 with what Pak_AdjustValue returns for the second argument, that
    byte, 1, 0, 2 and 1, and returns zero. */
 
 
 
 
-/* Replaces the option byte D_801462E7 with what func_804423BC_de returns for the second argument, that
+/* Replaces the option byte D_801462E7 with what Pak_AdjustValue returns for the second argument, that
    byte, 1, 0, 1 and 1, and returns zero. */
 
 /* Updates the menu item visibility and text for the current configuration. */
@@ -203,7 +203,7 @@ s32 func_804443C0_de(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7B = func_804423BC_de(holder, settings->option7B, 1, 0, 1, 1);
+    settings->option7B = Pak_AdjustValue(holder, settings->option7B, 1, 0, 1, 1);
     return 0;
 }
 
@@ -230,7 +230,7 @@ s32 func_80444488_de(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7C = func_804423BC_de(holder, settings->option7C, 1, 0, 1, 1);
+    settings->option7C = Pak_AdjustValue(holder, settings->option7C, 1, 0, 1, 1);
     return 0;
 }
 
@@ -257,7 +257,7 @@ s32 func_80444548_de(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7D = func_804423BC_de(holder, settings->option7D, 1, 0, 1, 1);
+    settings->option7D = Pak_AdjustValue(holder, settings->option7D, 1, 0, 1, 1);
     return 0;
 }
 
@@ -284,7 +284,7 @@ s32 func_80444610_de(void *first, struct ActorRecAt1C *holder) {
     if (holder->owner != 0 && holder->owner->settings != 0) {
         settings = holder->owner->settings;
     }
-    settings->option7E = func_804423BC_de(holder, settings->option7E, 1, 0, 1, 1);
+    settings->option7E = Pak_AdjustValue(holder, settings->option7E, 1, 0, 1, 1);
     return 0;
 }
 
@@ -308,7 +308,7 @@ s32 func_80444674_de(struct Field *field, struct ActorRecAt1C *holder) {
 s32 func_804446D8_de(void *first, void *second) {
     u8 *option = &D_801462E3;
 
-    *option = func_804423BC_de(second, *option, 1, 0, 2, 1);
+    *option = Pak_AdjustValue(second, *option, 1, 0, 2, 1);
     return 0;
 }
 
@@ -332,7 +332,7 @@ s32 func_8044472C_de(struct FieldRecAt14 *field) {
 s32 func_804447A0_de(void *first, void *second) {
     u8 *option = &D_801462E7;
 
-    *option = func_804423BC_de(second, *option, 1, 0, 1, 1);
+    *option = Pak_AdjustValue(second, *option, 1, 0, 1, 1);
     return 0;
 }
 

@@ -125,7 +125,7 @@ extern int D_800DF270,D_800E32E4,D_8014DCDC;
 extern Gfx *D_80110634;
 static inline void sync(void){D_800E32E4=1;gDPPipeSync(D_80110634++);}
 
-void func_80416CF4_de(int mode){
+void Gfx_SetCombineMode(int mode){
  if(mode!=D_800DF270){
  D_800DF270=mode;
  if(!D_800E32E4)sync();
@@ -141,7 +141,7 @@ void func_80416CF4_de(int mode){
 }
 
 /* Selects vertex mode when it differs from D_800DF278: mode 9 loads an identity model matrix
-   through func_8029EB14_de and func_80419430_de, transforms the point (0, 0, D_800DD3FC) by the view
+   through func_8029EB14_de and Gfx_EmitMatrix, transforms the point (0, 0, D_800DD3FC) by the view
    D_80141168, loads four white vertices at that point and marks each vertex's screen position for
    modification. */
 
@@ -166,7 +166,7 @@ void func_80416ECC_de(s32 mode) {
     }
     if (mode == 9) {
         func_8029EB14_de(&identity);
-        func_80419430_de(&identity);
+        Gfx_EmitMatrix(&identity);
         point.x = 0.0f;
         point.y = 0.0f;
         point.z = D_800DD3FC;
@@ -197,7 +197,7 @@ void func_80416ECC_de(s32 mode) {
 }
 
 /* Selects render mode 11 or 12 (always 11 while D_80153F60's enable word is clear) when it differs
-   from the cached mode D_800E32CC: flushes through func_80418F8C_de and applies the mode word built
+   from the cached mode D_800E32CC: flushes through Gfx_ResetRenderState and applies the mode word built
    from the mode's base bits (0x53 or 0x33, with bit 2 when the first switch is set), then 0x300 or
    0x500, 0x3000 or 0x5000 and 0x30000 or 0x50000 chosen by the three further switches, through
    func_80417138_de. */
@@ -206,7 +206,7 @@ extern Triple D_80153F60;
 
 extern s32 D_800E32CC;
 
-void func_80417034_de(s32 mode) {
+void Gfx_SetRenderMode(s32 mode) {
     s32 bits;
 
     if (D_80153F60.y == 0) {
@@ -217,12 +217,12 @@ void func_80417034_de(s32 mode) {
     }
     D_800E32CC = mode;
     if (mode == 11) {
-        func_80418F8C_de();
+        Gfx_ResetRenderState();
         bits = D_80153F60.x ? 0x55 : 0x53;
         bits |= D_80153F60.z ? 0x300 : 0x500;
         func_80417138_de(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));
     } else if (mode == 12) {
-        func_80418F8C_de();
+        Gfx_ResetRenderState();
         bits = D_80153F60.x ? 0x35 : 0x33;
         bits |= D_80153F60.z ? 0x300 : 0x500;
         func_80417138_de(bits | (D_8014DCDC ? 0x3000 : 0x5000) | (D_8014DCE0 ? 0x30000 : 0x50000));

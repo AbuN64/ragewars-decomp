@@ -51,7 +51,7 @@ extern s32 func_802645D0_de(s32);
 
 extern void func_80404E28_de(s32);
 void func_80404E28_de(s32);
-s32 func_80404F04_de(s32);
+s32 Pak_GetStatus(s32);
 
 extern char D_800DCD80[];
 

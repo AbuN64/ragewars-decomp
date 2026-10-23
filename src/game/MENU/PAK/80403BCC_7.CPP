@@ -27,7 +27,7 @@ extern u8 D_8010FC00[];
 
 extern s32 func_802B7FD8_de(u8 *a0, u8 *a1, s32 a2);
 
-extern s32 func_80404018_de(s32 a0);
+extern s32 Pak_UpdateStatus(s32 a0);
 
 extern void func_8026454C_de(void);
 
@@ -53,7 +53,7 @@ void func_80404DDC_de(void) {
     D_800E2850 = 0;
 }
 
-/* Probes the Controller Pak slot for kind and records its state: 2 when the probe succeeds, otherwise 3 or 1 depending on func_80404018_de. */
+/* Probes the Controller Pak slot for kind and records its state: 2 when the probe succeeds, otherwise 3 or 1 depending on Pak_UpdateStatus. */
 void func_80404E28_de(s32 kind)
 {
     u8 *cur;
@@ -74,7 +74,7 @@ void func_80404E28_de(s32 kind)
 
     if (ready != 0) {
         D_801534F0[kind] = 2;
-    } else if (func_80404018_de(kind) != 0) {
+    } else if (Pak_UpdateStatus(kind) != 0) {
         D_801534F0[kind] = 3;
     } else {
         D_801534F0[kind] = 1;
@@ -86,7 +86,7 @@ void func_80404E28_de(s32 kind)
 
 
 
-s32 func_80404F04_de(s32 index) {
+s32 Pak_GetStatus(s32 index) {
     if (D_801534F0[index] != 3) {
         return -2;
     }

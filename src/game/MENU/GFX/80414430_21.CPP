@@ -18,9 +18,9 @@ extern s32 D_800DF280;
 
 
 
-extern void func_80417034_de(s32 mode);
+extern void Gfx_SetRenderMode(s32 mode);
 
-extern void func_80416CF4_de(s32 mode);
+extern void Gfx_SetCombineMode(s32 mode);
 
 extern void func_80416ECC_de(s32 mode);
 
@@ -55,15 +55,15 @@ static inline void beginFrame(void) {
     gDPPipeSync(g);
 }
 
-void func_80418DA0_de(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
+void Gfx_DrawRect(f32 x, f32 y, f32 unused, f32 width, f32 height, u32 color) {
     func_80417B20_de(x, y, unused, width, height, 0.0f, 0.0f, D_800DD410_de, D_800DD410_de, color);
 }
 
 void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s32 a7, s32 a8) {
     D_800DF290 = 0;
     D_800E32E4 = 0;
-    func_80417034_de(0xC);
-    func_80416CF4_de(5);
+    Gfx_SetRenderMode(0xC);
+    Gfx_SetCombineMode(5);
     if (D_800DF274 != 7) {
         D_800DF274 = 7;
         sync();
@@ -80,7 +80,7 @@ void func_80418DE0_de(f32 x, f32 y, s32 unused, f32 z, f32 a4, s32 a5, s32 a6, s
     }
 }
 
-void func_80418F8C_de(void) {
+void Gfx_ResetRenderState(void) {
     if (D_800DF250 != 0) {
         D_800DF250 = 0;
         D_800DF270 = 0;

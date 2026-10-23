@@ -15,7 +15,7 @@
    block D_801462C8 plus the word at its 0x580 (keeping the byte D_80146848 there), the four floats at
    0x8 into D_801468A0, D_801427E4, D_801427E8 and D_801427EC, the word at D_8011FE88+0x44 as a byte
    count for the block at 0x60C copied into D_800F91F0 - then shows the D_0044EAE0 prompt through
-   func_80442574_de; otherwise it retries func_80404858_de on note D_8014D4FC and shows the
+   Pak_OpenDialog; otherwise it retries Pak_DeleteNote on note D_8014D4FC and shows the
    D_0044EB70/D_0044EBDC result. func_80409144_de's state 4 flow with the load path added; returns 1. */
 
 struct PakLoadBlock_func_80408870_de {
@@ -53,9 +53,9 @@ extern char D_800F91F0[];
 extern struct PakLoadBlock_func_80408870_de *D_800E28BC;
 
 extern s32 func_80406178_de(MenuRecAt24 *menu, s32 ch, s32 quiet);
-extern s32 func_80404858_de(s32 ch, s32 index);
+extern s32 Pak_DeleteNote(s32 ch, s32 index);
 extern struct PakLoadOwner_func_80408870_de *func_8022A5C0_de(char *profiles, PakMenuSlot *slot);
-extern void func_80442574_de(void *owner, char *message, void *player, void *slot, char *title);
+extern void Pak_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
 
 s32 func_80408870_de(void *unused, MenuRecAt24 *menu) {
     struct PakLoadOwner_func_80408870_de *owner;
@@ -151,7 +151,7 @@ s32 func_80408870_de(void *unused, MenuRecAt24 *menu) {
         callSlot = owner->slot698;
         callTitle = 0;
     } else {
-        if (func_80404858_de(channel, D_8014D4FC) == 0) {
+        if (Pak_DeleteNote(channel, D_8014D4FC) == 0) {
             message = D_0044EB70;
         } else {
             message = D_0044EBDC;
@@ -161,7 +161,7 @@ s32 func_80408870_de(void *unused, MenuRecAt24 *menu) {
         callSlot = menu->slot;
         callTitle = menu->prompt;
     }
-    func_80442574_de(callOwner, message, callPlayer, callSlot, callTitle);
+    Pak_OpenDialog(callOwner, message, callPlayer, callSlot, callTitle);
     return 1;
 }
 #else

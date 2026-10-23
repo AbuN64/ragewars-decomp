@@ -13,7 +13,7 @@
    over the selected channel; with a profile loaded (D_80153730) it creates the player through
    func_8022A5C0_de, copies the loaded profile (flags, four words and eight name bytes) into the
    player's profile, applies the loaded team through func_8044A0C4_de and shows the player's message
-   through func_804427C4_de; otherwise it deletes the chosen note through func_80404858_de and shows the
+   through func_804427C4_de; otherwise it deletes the chosen note through Pak_DeleteNote and shows the
    D_44F7C0 or D_44F82C result prompt. Returns 1. */
 
 
@@ -54,7 +54,7 @@ extern void func_8044A0C4_de(SharedPlayer *player, s32 team);
 
 extern void func_804427C4_de(char *text, Menu_func_80408C4C_de *menu, char *format);
 
-extern s32 func_80404858_de(s32 ch, s32 index);
+extern s32 Pak_DeleteNote(s32 ch, s32 index);
 
 /* Closes the current pak menu prompt by its kind D_80153788: kind 8 is refused (returns 0); kinds
    9 and 5 release the slot's controller through func_80264248_de and func_802647E8_de; kind 9 then either
@@ -102,7 +102,7 @@ extern void func_8044DDD4_de(struct GameSession *);
 
 extern void func_80404E28_de(s32 ch);
 
-extern s32 func_80404F04_de(s32 ch);
+extern s32 Pak_GetStatus(s32 ch);
 
 extern s32 func_80264580_de(s32 ch);
 
@@ -150,10 +150,10 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
         func_804427C4_de(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
         return 1;
     }
-    if (func_80404858_de(ch, D_8014D4FC) == 0) {
-        func_80442574_de(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
+    if (Pak_DeleteNote(ch, D_8014D4FC) == 0) {
+        Pak_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
     } else {
-        func_80442574_de(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+        Pak_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
     }
     return 1;
 }
@@ -199,26 +199,26 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
     }
     if (D_80153788 == 4 && D_80153760 != 0 && D_8014D4EC_de == 0) {
         func_80404E28_de(ch);
-        status = func_80404F04_de(ch);
+        status = Pak_GetStatus(ch);
         connected = func_80264580_de(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
-            func_80442574_de(D_8014561C, D_0044E4B0, menu->player, menu->slot, 0);
+            Pak_OpenDialog(D_8014561C, D_0044E4B0, menu->player, menu->slot, 0);
         } else {
-            func_80442574_de(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
+            Pak_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
         }
     } else if (D_80153788 == 3 && D_8014D4D4 != 0) {
         func_80404E28_de(ch);
-        status = func_80404F04_de(ch);
+        status = Pak_GetStatus(ch);
         connected = func_80264580_de(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
-            func_80442574_de(D_8014561C, D_0044E4D4, menu->player, menu->slot, 0);
+            Pak_OpenDialog(D_8014561C, D_0044E4D4, menu->player, menu->slot, 0);
         }
     } else {
         if (menu->prompt == (char *)1) {
             menu->prompt = 0;
         }
         if (menu->prompt != 0) {
-            func_80442574_de(menu->prompt != D_0044E48C && menu->player != 0 ?
+            Pak_OpenDialog(menu->prompt != D_0044E48C && menu->player != 0 ?
                               menu->player->messages->text : D_8014561C,
                           menu->prompt, menu->player, menu->slot, ch);
         }
@@ -239,14 +239,14 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             }
             if (func_80406178_de(menu, ch, 1) != 0) {
                 D_80153784 = 1;
-                func_80442574_de(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
+                Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
             func_80404E28_de(ch);
-            if (func_80404858_de(ch, D_8014D4C4) == 0) {
-                func_80442574_de(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
+            if (Pak_DeleteNote(ch, D_8014D4C4) == 0) {
+                Pak_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
             } else {
-                func_80442574_de(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+                Pak_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
             }
             break;
         case 3:
@@ -257,15 +257,15 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             }
             if (func_80406178_de(menu, ch, 1) != 0) {
                 D_80153784 = 1;
-                func_80442574_de(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
+                Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
             func_80404E28_de(ch);
-            if (func_80404858_de(ch, D_8014D4FC) == 0) {
+            if (Pak_DeleteNote(ch, D_8014D4FC) == 0) {
                 func_80407578_de(owner, menu, arg);
                 return 1;
             }
-            func_80442574_de(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
+            Pak_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
             break;
         case 0:
             if (D_8015375C != 0) {
@@ -275,14 +275,14 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             }
             if (func_80406178_de(menu, ch, 1) != 0) {
                 D_80153784 = 1;
-                func_80442574_de(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
+                Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
             func_80404E28_de(ch);
             if (func_804051D4_de(ch) == 0) {
-                func_80442574_de(D_8014561C, D_0044EB94, menu->player, menu->slot, menu->prompt);
+                Pak_OpenDialog(D_8014561C, D_0044EB94, menu->player, menu->slot, menu->prompt);
             } else {
-                func_80442574_de(D_8014561C, D_0044ED20, menu->player, menu->slot, menu->prompt);
+                Pak_OpenDialog(D_8014561C, D_0044ED20, menu->player, menu->slot, menu->prompt);
             }
             break;
         case 1:
@@ -290,7 +290,7 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             if (D_8015375C != 0) {
                 D_80142CAC = 1;
             }
-            func_80442574_de(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
+            Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
             break;
     }
     return 1;

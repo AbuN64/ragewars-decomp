@@ -24,7 +24,7 @@ INCLUDE_ASM("ovl_80400000", func_8043F52C_de);
 u32 func_80265350_de(void);
 int func_802934F8_de(void);
 u8 *func_8043F290(TextBoundsText *);
-f32 func_804422F0_de(u8 *, f32, f32);
+f32 Pak_MeasureLine(u8 *, f32, f32);
 void *func_80442A58_de(s8 *);
 extern s32 D_800E28D4;
 extern s32 D_800E28D0;
@@ -79,7 +79,7 @@ void func_8043F52C_de(TextBoundsText *text, CItemInfo *metrics) {
             } else {
                 string = ((u8 **)text->text)[0];
             }
-            w = func_804422F0_de(string, size, size);
+            w = Pak_MeasureLine(string, size, size);
         } else {
             count = 0;
             if (text->mode == 5) {

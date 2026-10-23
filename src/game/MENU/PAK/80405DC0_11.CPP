@@ -78,7 +78,7 @@ extern u8 *D_800D376C;
 
 extern u8 *D_800D7E14;
 
-extern s32 func_80405160_de(s32 ch, s32 *freeSpace);
+extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 
 extern s32 func_804057EC_de(s32 size);
 
@@ -99,17 +99,17 @@ extern void func_80407290_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
 extern void func_80407578_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
-extern void func_80405338_de(s32 ch, s32 note, s32 *state);
+extern void Pak_GetNoteGameName(s32 ch, s32 note, s32 *state);
 
 extern void func_80405648_de(s32 state, char *name, s32 size);
 
 extern s32 func_802A037C_de(char *name, s32 game);
 
-extern void func_80442574_de(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
+extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
 extern void func_80404E28_de(s32 ch);
 
-extern s32 func_80404F04_de(s32 ch);
+extern s32 Pak_GetStatus(s32 ch);
 
 static inline void pickChannel(Shared_PakMenu *menu, s32 *ch)
 {
@@ -133,7 +133,7 @@ static inline s32 findNote(s32 ch, s32 *found)
 
     D_8014D4FC = -1;
     for (i = 0; i < 16; i++) {
-        func_80405338_de(ch, i, &state);
+        Pak_GetNoteGameName(ch, i, &state);
         func_80405648_de(state, name, 16);
         if (func_802A037C_de(name, game) == 0) {
             if (found != 0) {
@@ -241,7 +241,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     buffer = &digits;
     if (D_8014D4C0_de != 0) {
         entry->text = &D_800D3754;
-        if (func_80405160_de(ch, &freeSpace) == 0) {
+        if (Pak_GetFreePages(ch, &freeSpace) == 0) {
             if (D_8014D4EC_de) need=func_804057EC_de(0x18); else need=space_required(D_8011FECC);
             text = ENTRY_TEXT(entry);
             func_802658E4_de(digits.c, D_800E0DA4, freeSpace);
@@ -262,7 +262,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         header = &D_800D3754;
     fill:
         entry->text = header;
-        result = func_80405160_de(ch, &freeSpace);
+        result = Pak_GetFreePages(ch, &freeSpace);
         need = func_804057EC_de(D_8011FECC + 0x610);
         text = ENTRY_TEXT(entry);
         if (result == 0) {
@@ -313,7 +313,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     } else if (D_8014D4C0_de != 0) {
         hasNote = findNote(use, &D_8014D4FC);
         if (hasNote != 0 && D_8014D4FC >= 0 && D_8014D4FC < 16) {
-            func_80442574_de(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
+            Pak_OpenDialog(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
         func_80407578_de(arg0, menu, arg2);
@@ -329,7 +329,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
         }
         for (tries = 0; tries < 4; tries++) {
             func_80404E28_de(next);
-            if (func_80404F04_de(next) != -2) {
+            if (Pak_GetStatus(next) != -2) {
                 break;
             }
             next++;

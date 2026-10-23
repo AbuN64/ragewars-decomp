@@ -30,7 +30,7 @@ extern u8 D_801462E5;
 extern s32 D_80146938;
 
 extern void func_8044A07C_de(void);
-extern void func_80442574_de(char *, char *, SharedPlayer *, void *, s32);
+extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
 extern SharedPlayer *func_8022A5F4_de(char *, s32);
 extern void func_8044972C_de(SharedPlayer *);
 
@@ -49,16 +49,16 @@ void func_80225940_de(SharedPlayer *player, BodyRecAt1C *body) {
         if (player->views1450.view1450_2.infinite == 0) {
             switch (player->views1C.view5D4_46.slot) {
             case 0:
-                func_80442574_de(player->views5DC.view5DC_2.view->menu, &D_00450AD0, player, player->views5E8.view698_36.controller, 0);
+                Pak_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450AD0, player, player->views5E8.view698_36.controller, 0);
                 break;
             case 1:
-                func_80442574_de(player->views5DC.view5DC_2.view->menu, &D_00450AF4, player, player->views5E8.view698_36.controller, 0);
+                Pak_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450AF4, player, player->views5E8.view698_36.controller, 0);
                 break;
             case 2:
-                func_80442574_de(player->views5DC.view5DC_2.view->menu, &D_00450B18, player, player->views5E8.view698_36.controller, 0);
+                Pak_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450B18, player, player->views5E8.view698_36.controller, 0);
                 break;
             case 3:
-                func_80442574_de(player->views5DC.view5DC_2.view->menu, &D_00450B3C, player, player->views5E8.view698_36.controller, 0);
+                Pak_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450B3C, player, player->views5E8.view698_36.controller, 0);
                 break;
             }
         }
@@ -96,9 +96,9 @@ void func_80225940_de(SharedPlayer *player, BodyRecAt1C *body) {
         }
     } else if (player->views5DC.view5DC_2.view != 0) {
         if (player->views5E8.view5EA_3.respawns != 0) {
-            func_80442574_de(player->views5DC.view5DC_2.view->menu, &D_0044F82C_de, player, player->views5E8.view698_36.controller, 0);
+            Pak_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_0044F82C_de, player, player->views5E8.view698_36.controller, 0);
         } else {
-            func_80442574_de(player->views5DC.view5DC_2.view->menu, &D_00450178, player, player->views5E8.view698_36.controller, 0);
+            Pak_OpenDialog(player->views5DC.view5DC_2.view->menu, &D_00450178, player, player->views5E8.view698_36.controller, 0);
         }
     }
 }

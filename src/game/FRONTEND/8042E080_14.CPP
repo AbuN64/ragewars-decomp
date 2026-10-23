@@ -20,7 +20,7 @@ extern s32 func_8040458C_de(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *
 extern s32 func_804057BC_de(char *, s32);
 extern void func_802A025C_de(char *, char *);
 extern void func_802A0C08_de(char *, char *, ...);
-extern s32 func_80405160_de(s32, s32 *);
+extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 func_80435424_de(void);
 extern s32 func_804057EC_de(s32);
 extern void func_804322AC_de(s32, s32);
@@ -139,7 +139,7 @@ D_800DDEC0,
     if (failed == 0) {
         /* the hub EC30 returns the item view; Label is this unit's text-bearing view of it */
         item = (Label *)func_8040EC30_de(D_800E54A4->slots[player].menu, PAK_RESOURCE_2D8);
-        if (func_80405160_de(player, &size) == 0) {
+        if (Pak_GetFreePages(player, &size) == 0) {
             func_802A0C08_de(D_800E54A4->slots[player].free,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 D_800DDEC0,

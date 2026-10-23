@@ -7,7 +7,7 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "MENU/MISC/8043DF84_5.H"
 
-extern s8 func_804423BC_de(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+extern s8 Pak_AdjustValue(Outer8043E458 *arg0, s8 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
 extern void func_804427C4_de(void *arg0, void *arg1, void *arg2);
 
@@ -39,7 +39,7 @@ extern void func_80264770_de(s32 kind);
 
 /* Restarts a round for the player passed in arg1: clears the world timer flag D_800E28C0 via
    func_804097E8_de, cancels the active countdown sound through func_8025E214_de, then reallocates a
-   fresh scoreboard entry via func_80442574_de using arg1's fields at 0x1C and 0x20, and always
+   fresh scoreboard entry via Pak_OpenDialog using arg1's fields at 0x1C and 0x20, and always
    reports success. */
 
 extern s32 D_8014561C;
@@ -48,14 +48,14 @@ extern s32 D_0044E468;
 
 void func_804097E8_de(void);
 
-void *func_80442574_de(void *owner, void *list, s32 b, s32 c, s32 d);
+void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 
-/** Runs a target's animation/state transition through func_804423BC_de and stores the new state. */
+/** Runs a target's animation/state transition through Pak_AdjustValue and stores the new state. */
 s32 func_8043E3CC_de(void *arg0, Outer8043E458 *arg1) {
     Target8043E458 *temp_s0;
 
     temp_s0 = arg1->unk1C->unk5D8;
-    temp_s0->unk7B = func_804423BC_de(arg1, temp_s0->unk7B, 1, 0, 1, 1);
+    temp_s0->unk7B = Pak_AdjustValue(arg1, temp_s0->unk7B, 1, 0, 1, 1);
     return 0;
 }
 
@@ -110,7 +110,7 @@ s32 func_8043E568_de(void *arg0, Arg1Struct *arg1) {
     val1C = arg1->unk1C;
     func_804097E8_de();
     ((s32 (*)(s32))func_8025E214_de)(-1);
-    func_80442574_de(&D_8014561C, &D_0044E468, val1C, arg1->unk20, 0);
+    Pak_OpenDialog(&D_8014561C, &D_0044E468, val1C, arg1->unk20, 0);
     return 1;
 }
 

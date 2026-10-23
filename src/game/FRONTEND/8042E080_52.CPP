@@ -4,8 +4,8 @@
 
 /* Reads two values and reports whether the first reaches the rounded object size when the second is nonzero. */
 
-extern s32 func_80405160_de(void *a0, s32 *a1);
-extern s32 func_804050CC_de(void *a0, s32 *a1);
+extern s32 Pak_GetFreePages(void *a0, s32 *a1);
+extern s32 Pak_CountFreeNotes(void *a0, s32 *a1);
 
 extern s32 func_804057EC_de(s32 a0);
 
@@ -17,9 +17,9 @@ s32 func_80435384_de(void *arg0, s32 *out)
 
     *out = 0;
 
-    ret = func_80405160_de(arg0, &a);
+    ret = Pak_GetFreePages(arg0, &a);
     if (ret == 0) {
-        ret = func_804050CC_de(arg0, &b);
+        ret = Pak_CountFreeNotes(arg0, &b);
         if (ret == 0) {
             val = func_804057EC_de(func_80435424_de());
             if (b == 0) {

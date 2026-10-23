@@ -8,11 +8,11 @@
 struct Node80253610;
 extern void func_80253BBC_de(s32 heap, struct Node80253610 *resource);
 
-/* Draws a text string in the current font style D_801376F8: when centring, measures it through func_804422F0_de at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through func_802A88F0_de, first as a shadow when requested. */
+/* Draws a text string in the current font style D_801376F8: when centring, measures it through Pak_MeasureLine at the style size scaled by the language-dependent factors for D_80147150, shrinks the scale so it fits 44 pixels inside the screen width D_800E28D0 and shifts x left by half the width; then sets the environment colour from the style with the given alpha and the primitive colour from the style, and draws the string through func_802A88F0_de, first as a shadow when requested. */
 
 extern s32 D_800E28D0;
 extern Gfx *D_80110634;
-extern f32 func_804422F0_de(u8 *text, f32 size, f32 spacing);
+extern f32 Pak_MeasureLine(u8 *text, f32 size, f32 spacing);
 
 
 void func_802A8F28_de(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 shadow, f32 scaleX, f32 scaleY) {
@@ -76,7 +76,7 @@ void func_802A8F28_de(void * text, s32 x, s32 y, s32 alpha, s32 centred, s32 sha
             spacing = 1.0f;
             break;
         }
-        width = func_804422F0_de(text, size, spacing);
+        width = Pak_MeasureLine(text, size, spacing);
         limit = D_800E28D0 - 0x2C;
         if (limit < width) {
             ratio = limit / width;

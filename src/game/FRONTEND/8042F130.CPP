@@ -213,7 +213,7 @@ extern void func_804322AC_de(s32);
 extern void func_80264770_de(s32);
 extern void func_8022EF30_de(PakSetupRecord *);
 extern void func_80404E28_de(s32);
-extern s32 func_80404F04_de(s32);
+extern s32 Pak_GetStatus(s32);
 extern void func_8040C428_de(s32);
 extern void func_802A2394_de(void);
 extern void func_802A2418_de(s32);
@@ -370,7 +370,7 @@ s32 func_8042F130_us_rev1(void *screen) {
         if (D_800DF4C4 == 0) {
             for (i = 0; i < 4; i++) {
                 func_80404E28_de(i);
-                switch (func_80404F04_de(i)) {
+                switch (Pak_GetStatus(i)) {
                 case -4:
                 case -3:
                 case -1:
@@ -384,7 +384,7 @@ s32 func_8042F130_us_rev1(void *screen) {
             }
         } else {
             func_80404E28_de(D_800DF4C0);
-            switch (func_80404F04_de(D_800DF4C0)) {
+            switch (Pak_GetStatus(D_800DF4C0)) {
             case -4:
             case -3:
             case -1:

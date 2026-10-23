@@ -27,7 +27,7 @@ extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
    once through Frontend_GetBankTileTexture and func_804174F4_de (stopping the page when it cannot load) and drawing
-   every batch's run of sprites on that page at depth 10 through func_80418DA0_de; finally it restores
+   every batch's run of sprites on that page at depth 10 through Gfx_DrawRect; finally it restores
    the clip rectangle and empties the queue. */
 
 
@@ -181,7 +181,7 @@ void func_8040CAB0_de(void) {
                     func_804174F4_de(texture);
                     loaded = 1;
                 }
-                func_80418DA0_de(sprite->x, sprite->y, 10.0f, sprite->width, sprite->height, sprite->color);
+                Gfx_DrawRect(sprite->x, sprite->y, 10.0f, sprite->width, sprite->height, sprite->color);
                 batch->cursor++;
                 batch->count--;
             }
@@ -224,7 +224,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
         D_800E2AB8 = 1;
     }
     func_804174F4_de(texture);
-    func_80418DA0_de(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
+    Gfx_DrawRect(area.field_0, area.field_8, 0.0f, area.field_4 - area.field_0 + 1, area.field_C - area.field_8 + 1, color);
     if (clipped) {
         func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     }

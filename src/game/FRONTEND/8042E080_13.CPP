@@ -10,7 +10,7 @@
 
 extern PakMenuController *D_800E54A4;
 
-extern s32 func_80404F04_de(s32);
+extern s32 Pak_GetStatus(s32);
 extern s32 func_80404BE8_de(void *, s32, s32 *);
 extern s32 func_80434638_de(s32, s32);
 extern s32 func_80435128_de(s32);
@@ -23,7 +23,7 @@ void func_80433610_de(s32 player)
   s32 random;
   s32 done = 1;
   s32 result;
-  s32 status = func_80404F04_de(player);
+  s32 status = Pak_GetStatus(player);
   short one = done;
   do
   {

@@ -36,7 +36,7 @@ extern PakRecord D_80153330[];
 
 s32 func_802B7FD8_de(OSMesgQueue *mq, OSPfs *pfs, int channel);
 
-extern s32 func_80404018_de(s32);
+extern s32 Pak_UpdateStatus(s32);
 
 extern u8 D_800DE80C[];
 
@@ -101,7 +101,7 @@ s32 func_80403E90_de(s32 ch) {
     return result;
 }
 
-s32 func_80404018_de(s32 ch) {
+s32 Pak_UpdateStatus(s32 ch) {
     extern u8 D_8010FC00[];
     s32 tries;
     s32 result;
@@ -160,7 +160,7 @@ void func_804041F0_de(void) {
             present = record->present;
         }
         if (present) D_801534F0[channel] = 2;
-        else if (func_80404018_de(channel) != 0) D_801534F0[channel] = 3;
+        else if (Pak_UpdateStatus(channel) != 0) D_801534F0[channel] = 3;
         else D_801534F0[channel] = 1;
     }
     func_8026454C_de();
@@ -171,7 +171,7 @@ s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, 
 s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                   u8 *company, u8 *code) {
     extern s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, u8 *game_name, u8 *ext_name);
-    extern s32 func_80404018_de(s32 ch);
+    extern s32 Pak_UpdateStatus(s32 ch);
     s32 result;
     u8 name[16];
     u8 ext[4];
@@ -207,7 +207,7 @@ s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, 
                 result = -1;
             }
         }
-        func_80404018_de(ch);
+        Pak_UpdateStatus(ch);
     }
     func_8026454C_de();
     return result;

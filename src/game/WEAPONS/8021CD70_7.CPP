@@ -38,7 +38,7 @@ void func_802A6900_de(void *, Shared_HudPlayer *);
 void func_802A7AA4_de(void *);
 
 s32 func_802BD320_de(char *, const char *, ...);
-f32 func_804422F0_de(char *, f32, f32);
+f32 Pak_MeasureLine(char *, f32, f32);
 static inline CGameStatus *hudRules(void) {
     return &D_801462C8.counters;
 }
@@ -319,7 +319,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                                 func_802AAB3C_de(0, 0, 0, 1, 1, 1);
                                 textScale = D_801377B0 * 0.5f * scaleX * func_802AA864_de();
                                 scaleY *= nameZoom;
-                                w = func_804422F0_de(text, textScale, func_802AA864_de());
+                                w = Pak_MeasureLine(text, textScale, func_802AA864_de());
                                 player->nameWidths[i] = w;
                                 width = w;
                                 for (j = player->nameHead; i < j; j--) {

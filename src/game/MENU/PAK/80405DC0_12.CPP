@@ -40,7 +40,7 @@ extern s32 D_800E28BC;
 extern SharedPlayer *func_8022A5C0_de(void *profiles, PakMenuSlot *slot);
 extern void func_80253838_de(void *arg0, void *arg1);
 extern void func_80253908_de(s32 heap);
-extern void func_80442574_de(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
+extern void Pak_OpenDialog(void *buffer, char *message, SharedPlayer *player, char *title, s32 channel);
 
 static inline void get_channel(MenuRecAt20V3 *menu, s32 *channel) {
     if (D_8015375C != 0) {
@@ -77,14 +77,14 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
         D_80146D60 = 0;
         D_8014AD9C = 1;
         D_80142CAC = 0;
-        func_80442574_de(D_8014561C, D_0044E4F8, 0, (char *)menu->slot, 0);
+        Pak_OpenDialog(D_8014561C, D_0044E4F8, 0, (char *)menu->slot, 0);
         return 1;
     }
     if (D_8014D4EC_de != 0) {
         if (D_80153760 != 0) {
             D_80153784 = 1;
             target = func_8022A5C0_de(D_80145040, menu->slot);
-            func_80442574_de(target->views5DC.view5DC_6.storage + 0x554, D_0044FB2C, target, target->views5E8.view698_38.title, channel);
+            Pak_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, D_0044FB2C, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (D_8014D4C0_de != 0) {
@@ -108,14 +108,14 @@ s32 func_804085E0_de(void *unused, MenuRecAt20V3 *menu) {
                 label = D_00450C5C_de;
                 break;
             }
-            func_80442574_de(target->views5DC.view5DC_6.storage + 0x554, label, target, target->views5E8.view698_38.title, channel);
+            Pak_OpenDialog(target->views5DC.view5DC_6.storage + 0x554, label, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
     } else {
         target = func_8022A5C0_de(D_80145040, menu->slot);
         if (D_80153760 != 0) {
             D_80153784 = 1;
-            func_80442574_de(D_80145040 + 0x5DC, D_0044FFA4, target, target->views5E8.view698_38.title, channel);
+            Pak_OpenDialog(D_80145040 + 0x5DC, D_0044FFA4, target, target->views5E8.view698_38.title, channel);
             return 1;
         }
         if (D_8014D4C0_de != 0) {

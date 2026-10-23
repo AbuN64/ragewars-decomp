@@ -40,7 +40,7 @@ void func_80417138_de(s32 flags) {
     groups.z = (flags & 0x300) == 0x300;
     groups.pad0 = (flags & 0x3000) == 0x3000;
     groups.pad1 = (flags & 0x30000) == 0x30000;
-    func_80418F8C_de();
+    Gfx_ResetRenderState();
     D_800E32E4 = 0;
     sync();
     plain = groups.y == 0;

@@ -58,7 +58,7 @@ extern s32 func_802A0C08_de(void *, const char *, ...);
 
 extern s32 func_80404BE8_de(s32, s32, s32 *);
 
-extern s32 func_80404F04_de(s32);
+extern s32 Pak_GetStatus(s32);
 
 extern s32 func_80435384_de(s32,u32 *);
 
@@ -101,7 +101,7 @@ extern void func_802A2394_de();
 
 extern void func_8029973C_de();
 
-/* Refreshes each of the four ports through func_80404E28_de and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through func_80404F04_de, clearing it otherwise. */
+/* Refreshes each of the four ports through func_80404E28_de and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */
 
 
 
@@ -109,7 +109,7 @@ extern void func_8029973C_de();
 
 extern void func_80404E28_de(s32 port);
 
-extern s32 func_80404F04_de(s32 port);
+extern s32 Pak_GetStatus(s32 port);
 
 /* Advances the slot-dialog retry counter. Before the fourth attempt it updates
  * the dialog; later attempts start the transition and mark it active. */
@@ -208,7 +208,7 @@ void func_8041BE90_de(void) {
         func_8041C19C_de();
         if (D_800E3518->ready == 1) {
             func_80404E28_de(D_800DF4C0);
-            temp_v0_2 = func_80404F04_de(D_800DF4C0);
+            temp_v0_2 = Pak_GetStatus(D_800DF4C0);
             switch (temp_v0_2) { /* irregular */
             case 0:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -312,7 +312,7 @@ void func_8041C19C_de(void) {
     D_800E3518->ready = 0;
     for (port = 0; port < 4; port++) {
         func_80404E28_de(port);
-        switch (func_80404F04_de(port)) {
+        switch (Pak_GetStatus(port)) {
         case 0:
             D_800E3518->ready = 1;
             return;

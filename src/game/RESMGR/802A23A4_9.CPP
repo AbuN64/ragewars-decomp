@@ -13,4 +13,4 @@
 void func_802A18F4_de(void) {
 }
 
-void func_802A18FC_de(void) { func_80418F8C_de(); }
+void func_802A18FC_de(void) { Gfx_ResetRenderState(); }

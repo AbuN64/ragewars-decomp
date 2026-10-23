@@ -95,7 +95,7 @@ extern void func_80218E98_de(void *);
 extern u32 func_8022F454_de(void *, s32);
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
 extern void func_8044952C_de(struct RespawnPlayer *);
-extern void func_80442574_de(void *, void *, void *, s32, s32);
+extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
 /* Resets a player/actor record for a new run: marks it active, stores the character, picks up the HUD
  * object, clears the per-slot counters and weapon tables, selects the start mode from the multiplayer setting
  * and zeroes the per-player entries of the two global tables. */
@@ -178,7 +178,7 @@ void func_80448EF4_de(void *actor, s32 character) {
         } else {
             table = D_0044FF80;
         }
-        func_80442574_de((char *)FIELD(void *, actor, 0x5DC) + 0x554, table, actor, FIELD(s32, actor, 0x698), FIELD(s32, actor, 0x5D4));
+        Pak_OpenDialog((char *)FIELD(void *, actor, 0x5DC) + 0x554, table, actor, FIELD(s32, actor, 0x698), FIELD(s32, actor, 0x5D4));
     }
     D_800FEAE0[FIELD(s32, actor, 0x5D4)] = 0;
     D_800FF140_de[FIELD(s32, actor, 0x5D4)] = 0;

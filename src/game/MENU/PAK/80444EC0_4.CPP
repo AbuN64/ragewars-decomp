@@ -13,7 +13,7 @@
 s32 func_8028B2F8_de(Shared_World *, s32); /* extern */
 s32 func_80441FE8_de(void *); /* extern */
 s32 func_80442384_de(void *, void *, s32); /* extern */
-s32 func_804423BC_de(void *, s32, s32, s32, s32, s32); /* extern */
+s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
 
 s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, f32 arg7) {
     s32 temp_a1_2;
@@ -41,18 +41,18 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
                 switch (arg3) { /* irregular */
                 case 0:
                     var_s1 = *temp_s0;
-                    var_s1 = func_804423BC_de(arg1, var_s1, arg5, 0, arg6, 1);
+                    var_s1 = Pak_AdjustValue(arg1, var_s1, arg5, 0, arg6, 1);
                     *temp_s0 = var_s1;
                     break;
                 case 1:
                     var_s1 = *(s32 *)temp_s0;
-                    var_s1 = func_804423BC_de(arg1, var_s1, arg5, 0, arg6, arg3);
+                    var_s1 = Pak_AdjustValue(arg1, var_s1, arg5, 0, arg6, arg3);
                     *(s32 *)temp_s0 = var_s1;
                     break;
                 case 2:
                     var_s1 = (s32)*(f32 *)temp_s0;
                     var_v1 = arg6;
-                    var_s1 = func_804423BC_de(arg1, var_s1, arg5, 0, var_v1, 1);
+                    var_s1 = Pak_AdjustValue(arg1, var_s1, arg5, 0, var_v1, 1);
                     *(f32 *)temp_s0 = var_s1;
                     break;
                 }

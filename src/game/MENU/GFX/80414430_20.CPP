@@ -71,7 +71,7 @@ static __inline__ void rectangleSync(void) {
 
 static inline f32 scaleClip(f32 delta, f32 ratio) { return ratio * delta; }
 
-s32 func_8041737C_de(s32 bits, void *palette) {
+s32 Gfx_LoadPalette(s32 bits, void *palette) {
     s32 result;
 
     result = 1;
@@ -115,7 +115,7 @@ void func_804174F4_de(Texture *arg0) {
  D_800DF260_de=0;
  if(flags>0 && size>2048) D_800DF260_de=1;
  if(flags==0 && size>4096) D_800DF260_de=1;
- paletteSame=func_8041737C_de(D_800DF268_de,D_800DF254->palette);
+ paletteSame=Gfx_LoadPalette(D_800DF268_de,D_800DF254->palette);
  if(D_800DF260_de==0) {
   if(D_800DF268_de==4) {
    gDPSetTextureImage(D_80110634++,G_IM_FMT_CI,G_IM_SIZ_16b,1,D_800DF254->data);
@@ -199,8 +199,8 @@ void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
     if ((D_80153F60.z == 0) || (D_80153F60.y == 0)) {
         D_800DF290 = 0;
         D_800E32E4 = 0;
-        func_80417034_de(0xC);
-        func_80416CF4_de(5);
+        Gfx_SetRenderMode(0xC);
+        Gfx_SetCombineMode(5);
         if (D_800DF274 != 7) {
             D_800DF274 = 7;
             rectangleSync();
@@ -219,7 +219,7 @@ void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
         }
     } else if (D_80153F60.x == 0) {
         D_800E32E4 = 0;
-        func_80417034_de(0xC);
+        Gfx_SetRenderMode(0xC);
         defaultMode = 0xD;
         var_a0 = defaultMode;
         if (D_80153F68 == 0) {
@@ -247,7 +247,7 @@ void func_80417B20_de(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5
         if (D_800DF26C_de != 0) {
             var_a0_2 = 1;
         }
-        func_80416CF4_de(var_a0_2);
+        Gfx_SetCombineMode(var_a0_2);
         var_s0 = (s32) temp_fs3;
         var_s1 = (s32) temp_fs3f;
         D_800DF290 = 0x13;
@@ -305,7 +305,7 @@ block_51:
             if ((var_fs1 < var_fs0) || (var_fs1f < var_fs0f) || (D_800DF260_de != 0)) {
                 func_804181A4_de(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
             } else {
-                func_80419278_de(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
+                Gfx_EmitTextureRect(var_s0, var_s1, var_s2, var_s3, var_fs0, var_fs0f, var_fs1, var_fs1f);
             }
         }
     }

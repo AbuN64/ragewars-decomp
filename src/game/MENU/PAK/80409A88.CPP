@@ -23,7 +23,7 @@ extern char D_800ED414[];
 extern s32 func_80441FE8_de(LayeredText *);
 
 
-/* Draws an item's label at its position into the text layer D_8014561C through func_80442574_de, using
+/* Draws an item's label at its position into the text layer D_8014561C through Pak_OpenDialog, using
    the fixed label D_44F0B8 instead of the item's own when D_80153730 is set; returns 1. */
 
 
@@ -31,7 +31,7 @@ extern char D_8014561C[];
 
 extern char D_0044E468[];
 
-extern void func_80442574_de(char *, char *, int, int, int);
+extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 /* Clears the word held in D_80153788. */
 
@@ -196,9 +196,9 @@ s32 func_8040A9F8_de(struct FieldRecAt14 *field) {
 
 int func_8040AA4C_de(int unused, ItemRecAt24 *item) {
     if (D_80153730 != 0) {
-        func_80442574_de(D_8014561C, D_0044E468, item->x, item->y, 0);
+        Pak_OpenDialog(D_8014561C, D_0044E468, item->x, item->y, 0);
     } else {
-        func_80442574_de(D_8014561C, item->label, item->x, item->y, 0);
+        Pak_OpenDialog(D_8014561C, item->label, item->x, item->y, 0);
     }
     return 1;
 }

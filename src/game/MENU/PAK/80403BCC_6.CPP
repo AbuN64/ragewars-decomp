@@ -9,7 +9,7 @@
    takes the controller lock and, when the pak has no pending error, converts the extension and
    game name to pak font codes, allocates the note rounded up to whole 256-byte blocks through
    osPfsAllocateFile (func_80445F80_de), writes the data through osPfsReadWriteFile (func_80447AF0_de),
-   deletes the note again if the write fails, refreshes the pak state through func_80404018_de and
+   deletes the note again if the write fails, refreshes the pak state through Pak_UpdateStatus and
    returns 0 or -1. */
 
 
@@ -80,7 +80,7 @@ static inline void func_8040458C_decode(u8 *dst, u8 *src, s32 n) {
 /* Saves data as a Controller Pak note on channel ch and verifies it: refuses with -2 unless the pak
    is ready, then up to four times writes the note through func_804042F0_de with the D_800D36DC
    company code, reads it back into a temporary buffer through an inlined note read, and stops when
-   the bytes compare equal or deletes the note through func_80404858_de and retries, returning the
+   the bytes compare equal or deletes the note through Pak_DeleteNote and retries, returning the
    write result. */
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
@@ -106,7 +106,7 @@ extern s32 func_80265444_de(void *a, void *b, s32 size);
 extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 
-extern s32 func_80404858_de(s32 ch, s32 index);
+extern s32 Pak_DeleteNote(s32 ch, s32 index);
 
 static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     s32 result;
@@ -165,9 +165,9 @@ s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *siz
     return 0;
 }
 
-s32 func_80404858_de(s32 ch, s32 index) {
+s32 Pak_DeleteNote(s32 ch, s32 index) {
     extern s32 func_80446580_de(OSPfs *pfs, u16 company_code, u32 game_code, char *game_name, char *ext_name);
-    extern void func_80404018_de(s32 ch);
+    extern void Pak_UpdateStatus(s32 ch);
     s32 result;
 
     if (D_801534F0[ch] != 3) {
@@ -185,13 +185,13 @@ s32 func_80404858_de(s32 ch, s32 index) {
         if (result != 0) {
             result = -1;
         }
-        func_80404018_de(ch);
+        Pak_UpdateStatus(ch);
     }
     func_8026454C_de();
     return result;
 }
 
-s32 func_80404958_de(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
+s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     s32 result;
     s32 file_no;
     void **handle;
@@ -213,7 +213,7 @@ s32 func_80404958_de(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) 
         if (func_80404958_read(ch, file_no, buf, blocks) == 0 && func_80265444_de(buf, data, size) == 0) {
             break;
         }
-        if (func_80404858_de(ch, file_no) != 0) {
+        if (Pak_DeleteNote(ch, file_no) != 0) {
             break;
         }
     }

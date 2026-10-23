@@ -46,12 +46,12 @@ s32 func_80446000_us_rev1(struct FieldRecAt14 *field, struct Holder *holder) {
     return 0;
 }
 
-/* Replaces D_800D0EBC with what func_804423BC_de returns for the second argument, D_800D0EBC, 1, 0, 1 and 1,
+/* Replaces D_800D0EBC with what Pak_AdjustValue returns for the second argument, D_800D0EBC, 1, 0, 1 and 1,
    and returns zero. */
-extern s32 func_804423BC_de(void *, s32, s32, s32, s32, s32);
+extern s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32);
 
 s32 func_80446048_us_rev1(void *first, void *second) {
-    D_800D0EBC = func_804423BC_de(second, D_800D0EBC, 1, 0, 1, 1);
+    D_800D0EBC = Pak_AdjustValue(second, D_800D0EBC, 1, 0, 1, 1);
     return 0;
 }
 #endif

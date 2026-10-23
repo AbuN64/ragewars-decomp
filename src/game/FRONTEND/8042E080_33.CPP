@@ -6,7 +6,7 @@
    records D_800E54A4 points to and, when func_804057F8_de checksums its first 0x640 bytes to the
    word stored after them, copies those bytes to the data at 0x18 of the player's 2920-byte record
    at 0x58 and the trailing word at 0x640 to the record's last word, returning 1; otherwise it reports the failure through
-   func_80404858_de, marks both of the record's states at 0x0 and 0x14 as 2 and returns 0. Written
+   Pak_DeleteNote, marks both of the record's states at 0x0 and 0x14 as 2 and returns 0. Written
    from the assembly with nested tests each reporting the failure, which GCC cross-jumps into one
    call. */
 
@@ -19,7 +19,7 @@
 extern struct Block_func_80434638_de *D_800E54A4;
 extern s32 func_80404F58_de(s32, s32, struct Packet *, s32);
 extern s32 func_804057F8_de(struct Packet *, s32, s32);
-extern void func_80404858_de(s32, s32);
+extern void Pak_DeleteNote(s32, s32);
 
 s32 func_80434638_de(s32 player, s32 channel) {
     struct Packet *packet;
@@ -33,10 +33,10 @@ s32 func_80434638_de(s32 player, s32 channel) {
             received = 1;
             D_800E54A4->players[player].tail = D_800E54A4->packet.tail;
         } else {
-            func_80404858_de(player, channel);
+            Pak_DeleteNote(player, channel);
         }
     } else {
-        func_80404858_de(player, channel);
+        Pak_DeleteNote(player, channel);
     }
     if (received == 0) {
         D_800E54A4->players[player].second = 2;

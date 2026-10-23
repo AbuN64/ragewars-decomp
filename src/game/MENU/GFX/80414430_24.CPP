@@ -8,7 +8,7 @@ extern void *func_802A15E4_de(int);
 extern void func_802B6CBC_de(void *, void *);
 extern struct Command *D_80110634;
 
-void func_80419430_de(void *source) {
+void Gfx_EmitMatrix(void *source) {
     void *allocation = func_802A15E4_de(0x40);
     struct Command *command;
 
@@ -29,7 +29,7 @@ extern s32 D_800E32F0;
 
 extern s32 func_80413608_de(u8 *record);
 
-void func_80419490_de(Image_func_80419490_de *image) {
+void Gfx_SwizzleImage(Image_func_80419490_de *image) {
     s32 *src;
     s32 *dst;
     s32 groups;

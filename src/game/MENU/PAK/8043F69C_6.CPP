@@ -67,7 +67,7 @@ f32 func_8044222C_de(s32 arg0, u8 arg1, f32 arg2, f32 arg3) {
 
 /* Sums the glyph advances that func_8044222C_de returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
 
-f32 func_804422F0_de(u8 *p, f32 sx, f32 sy) {
+f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
     f32 total;
     u8 c;
 
@@ -103,7 +103,7 @@ s32 func_8026437C_de(s32); /* extern */
  /* extern */
  /* extern */
 
-s32 func_804423BC_de(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
+s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 maximum,s32 wrap) {
  if(((s32 (*)(s32))func_80264388_de)(menu->unk20))value-=step;
  if(((s32 (*)(s32))func_802643A0_de)(menu->unk20)||func_8026437C_de(menu->unk20))value+=step;
  if(value<minimum) {
@@ -161,7 +161,7 @@ extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
 extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 
-void *func_80442574_de(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
+void *Pak_OpenDialog(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
     struct func_8025E5B0_S1 *owner;
     s32 size = list->count * 40 + 0x1D8;
     s32 i;

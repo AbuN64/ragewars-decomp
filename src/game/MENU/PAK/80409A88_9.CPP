@@ -41,7 +41,7 @@ extern char D_8014561C[];
 
 extern char D_0044E4B0[];
 
-extern void func_80442574_de(void *, void *, s32, s32, s32);
+extern void Pak_OpenDialog(void *, void *, s32, s32, s32);
 
 /* Stores 1 in D_80153730 and 0 in D_80153774. */
 extern s32 D_80153730;
@@ -97,9 +97,9 @@ s32 func_8040A6A8_de(struct FieldRecAt14 *field) {
 s32 func_8040A6DC_de(void *unused, struct RecordRecAt24 *record) {
     do {
         if (D_80153780 != 0) {
-            func_80442574_de(D_8014561C, D_0044E4B0, record->first, record->second, 0);
+            Pak_OpenDialog(D_8014561C, D_0044E4B0, record->first, record->second, 0);
         } else {
-            func_80442574_de(D_8014561C, record->resource, record->first, record->second, 0);
+            Pak_OpenDialog(D_8014561C, record->resource, record->first, record->second, 0);
         }
     } while (0);
     return 1;

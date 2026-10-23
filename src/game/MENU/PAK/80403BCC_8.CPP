@@ -49,7 +49,7 @@ void func_80263740_de();
 void func_8026454C_de();
 
  /* extern */
-void func_80404018_de(s32);
+void Pak_UpdateStatus(s32);
 
  /* extern */
 s32 func_80447F30_de(void *);
@@ -135,7 +135,7 @@ s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
 }
 
 /* Counts empty Controller Pak note slots on channel ch when the pak is ready and returns its error status, or -2 when not ready. */
-s32 func_804050CC_de(s32 ch, s32 *count) {
+s32 Pak_CountFreeNotes(s32 ch, s32 *count) {
     s32 i;
 
     if (D_801534F0[ch] != 3) {
@@ -152,7 +152,7 @@ s32 func_804050CC_de(s32 ch, s32 *count) {
     return D_80153500[ch];
 }
 
-int func_80405160_de(int slot, int *score) {
+int Pak_GetFreePages(int slot, int *score) {
     if (D_801534F0[slot] != 3) {
         return -2;
     }
@@ -180,7 +180,7 @@ s32 func_804051D4_de(s32 arg0) {
         if (var_s0 != 0) {
             var_s0 = -1;
         }
-        func_80404018_de(arg0);
+        Pak_UpdateStatus(arg0);
     }
     func_8026454C_de();
     return var_s0;
@@ -198,12 +198,12 @@ s32 func_80405290_de(s32 arg0) {
     if (var_s0 != 0) {
         var_s0 = -1;
     }
-    func_80404018_de(arg0);
+    Pak_UpdateStatus(arg0);
     func_8026454C_de();
     return var_s0;
 }
 
-s32 func_80405338_de(s32 index, s32 entry, char **out) {
+s32 Pak_GetNoteGameName(s32 index, s32 entry, char **out) {
     if (D_801534F0[index] != 3) {
         return -2;
     }

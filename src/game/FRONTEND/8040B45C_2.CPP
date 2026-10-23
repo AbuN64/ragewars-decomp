@@ -89,7 +89,7 @@ extern char D_800D39A8[];
 
 extern char D_800D39BC[];
 
-extern void func_80442574_de(void *dst, void *text, void *arg2, void *arg3, void *arg4);
+extern void Pak_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *arg4);
 extern char D_8014561C[];
 extern s32 D_80153778;
 /* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through func_80406178_de; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
@@ -103,10 +103,10 @@ s32 Frontend_OpenPakChannel(s32 arg0, Shared_PakMenu *menu) {
     }
     if (func_80406178_de(menu, channel, 1) != 0) {
         D_80153784 = 1;
-        func_80442574_de(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
+        Pak_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
         return 1;
     }
-    func_80442574_de(D_8014561C, &D_0044EE88, menu->player, menu->owner, menu->unk24);
+    Pak_OpenDialog(D_8014561C, &D_0044EE88, menu->player, menu->owner, menu->unk24);
     return 1;
 }
 
@@ -127,10 +127,10 @@ s32 func_8040B58C_de(void *arg0, Shared_PakMenu *arg1) {
         } else {
             buffer = D_8014561C;
         }
-        func_80442574_de(buffer, arg1->unk24, arg1->player, arg1->owner, 0);
+        Pak_OpenDialog(buffer, arg1->unk24, arg1->player, arg1->owner, 0);
         return 1;
     }
-    func_80442574_de(D_8014561C, arg1->unk24, arg1->player, arg1->owner, 0);
+    Pak_OpenDialog(D_8014561C, arg1->unk24, arg1->player, arg1->owner, 0);
     return 1;
 }
 
@@ -148,7 +148,7 @@ s32 func_8040B648_de(s32 arg0, ActionRecAt24 *arg1) {
         } else {
             var_a0 = D_8014561C;
         }
-        func_80442574_de(var_a0, (void *)arg1->unk24, (void *)arg1->unk1C, (void *)arg1->unk20, 0);
+        Pak_OpenDialog(var_a0, (void *)arg1->unk24, (void *)arg1->unk1C, (void *)arg1->unk20, 0);
     }
     return 1;
 }

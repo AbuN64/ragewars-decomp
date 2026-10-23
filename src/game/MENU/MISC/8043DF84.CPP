@@ -67,9 +67,9 @@ extern void func_802647E8_de(PakMenuSlot *, s32);
 
 
 
-/** Runs func_804423BC_de on a byte in arg1->unk1C->unk5D8[0x83] and writes the result back into that byte. */
+/** Runs Pak_AdjustValue on a byte in arg1->unk1C->unk5D8[0x83] and writes the result back into that byte. */
 
-extern s32 func_804423BC_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+extern s32 Pak_AdjustValue(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
 
 void func_8043DFC8_de(void) {
     StatusStep *status;
@@ -216,7 +216,7 @@ s32 func_8043E28C_de(void *arg0, void *arg1) {
 
     p = (void *)((MenuRecAt20V2 *)arg1)->owner;
     bytep = &p->controls->selection;
-    result = func_804423BC_de(arg1, *bytep, 1, 0, 0xA, 0);
+    result = Pak_AdjustValue(arg1, *bytep, 1, 0, 0xA, 0);
     *bytep = (u8)result;
     return 0;
 }

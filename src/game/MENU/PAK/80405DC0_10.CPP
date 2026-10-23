@@ -20,7 +20,7 @@ s32 func_80404F58_de(s32, s32, s32, s32);
 u32 func_804057F8_de(u8 *, u32, u32);
 s32 func_804057BC_de(u8 *, s32);
 u8 *func_802A025C_de(u8 *, u8 *);
-void *func_80442574_de(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
+void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 s32 func_80406178_de(void *, s32, s32);
 static __inline__ s32 pak_note_has_game_id(u8 *company, u8 *code) { if ((func_802A0238_de(code) == 4) && (func_802A0238_de(company) == 2) && (func_802A037C_de(code, rw_pak_game_code(&D_80145040.game)) == 0) && (func_802A037C_de(company, rw_pak_company(&D_80145040.game)) == 0)) return 1; return 0; }
 static __inline__ s32 pak_block_has_size(u8 *data,s32 expected) { return *(s32 *)data==expected; }
@@ -95,7 +95,7 @@ s32 func_80407748_de(s32 *selection, Shared_PakMenu *menu) {
                 }
                     *rw_pak_loaded_profile() =D_80153738;
                     D_8014D4FC=noteIndex;
-                    func_80442574_de(&D_80145040.dialogOwner, rw_pak_selected_profile_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
+                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_profile_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
                     return 1;
 profile_failed:
                 readError=1;
@@ -120,7 +120,7 @@ profile_failed:
                     func_804057F8_de(D_800E28BC,*(s32 *)D_800E28BC-4,11)==*(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4)) &&
                     D_8011FECC==((s32 *)D_800E28BC)[1]) {
                     D_8014D4FC=noteIndex;
-                    func_80442574_de(&D_80145040.dialogOwner, rw_pak_selected_block_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
+                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_selected_block_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
                     return 1;
                 }
                 blockState=0;
@@ -164,7 +164,7 @@ profile_failed:
                         i += 1;
                         text += 1;
                     } while (i < 4);
-                    func_80442574_de(&D_80145040.dialogOwner, rw_pak_other_note_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
+                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_other_note_dialog(), (s32)menu->player, (s32)menu->slot, (s32)menu->dialogData);
                         return 1;
                 }
             }
@@ -187,7 +187,7 @@ profile_failed:
                     goto done;
                 }
                     *rw_pak_loaded_profile() =D_80153738;
-                    func_80442574_de(&D_80145040.dialogOwner, rw_pak_loaded_profile_dialog(), (s32)menu->player, (s32)menu->slot, 0);
+                    Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_profile_dialog(), (s32)menu->player, (s32)menu->slot, 0);
                     return 1;
                 }
             }
@@ -214,7 +214,7 @@ profile_failed:
                     if (func_80404F58_de(channel, noteIndex, (s32)D_800E28BC, pages << 8) == 0) {
                         length = *(s32 *)D_800E28BC;
                         if ((length == expectedSize) && (func_804057F8_de(D_800E28BC, length - 4, 0xBU) == *(s32 *)(D_800E28BC+(*(s32 *)D_800E28BC-4))) && (D_8011FECC == ((s32 *)D_800E28BC)[1])) {
-                            func_80442574_de(&D_80145040.dialogOwner, rw_pak_loaded_block_dialog(), (s32)menu->player, (s32)menu->slot, 0);
+                            Pak_OpenDialog(&D_80145040.dialogOwner, rw_pak_loaded_block_dialog(), (s32)menu->player, (s32)menu->slot, 0);
                         return 1;
                         }
                     }
@@ -248,7 +248,7 @@ show_error:
         else messageExtra = D_0044E4B0;
         dialog = rw_pak_load_error_dialog();
         D_8014D4C4 = noteIndex;
-        func_80442574_de(&D_80145040.dialogOwner, dialog, (s32)menu->player, (s32)menu->slot, (s32)messageExtra);
+        Pak_OpenDialog(&D_80145040.dialogOwner, dialog, (s32)menu->player, (s32)menu->slot, (s32)messageExtra);
         result = 1;
     }
     return result;

@@ -72,7 +72,7 @@ void func_804191F8_de(u32 color) {
     gDPSetPrimColor(gfx, 0, 0, color >> 16, (color & 0xFF00) >> 8, color, color >> 24);
 }
 
-void func_80419278_de(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 v0, f32 u1, f32 v1) {
+void Gfx_EmitTextureRect(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 v0, f32 u1, f32 v1) {
     f32 scaleU;
     f32 scaleV;
     s32 dsdx;

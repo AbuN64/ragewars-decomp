@@ -20,6 +20,6 @@ typedef struct TextSprite {
     u16 glyph;
     u16 pad16;
 } TextSprite;
-/* Arena allocator, also used as a pointer-returning API by func_80419430_de. */
+/* Arena allocator, also used as a pointer-returning API by Gfx_EmitMatrix. */
 extern void *func_802A15E4_de(s32 size);
 #endif

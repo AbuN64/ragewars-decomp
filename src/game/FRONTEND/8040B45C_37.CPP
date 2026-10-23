@@ -99,7 +99,7 @@ extern void func_804133E4_de(Texture *texture);
 extern void func_80413404_de(Texture *texture);
 extern void func_80413720_de(Texture *texture, s32 kind, s8 fmt, s8 siz, s32 wid, s32 siz2, s32 zero,
                           s32 bytes, void *offset, s32 zero2, s32 pitch, s32 *list, s32 depth);
-extern void func_80419490_de(Texture *texture);
+extern void Gfx_SwizzleImage(Texture *texture);
 extern void func_80419640_de(Texture *into, Texture *from);
 extern void func_804196C8_de(s32 flag);
 
@@ -196,7 +196,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
                 func_80413720_de(&scratch, kind, big->fmt, big->siz, big->wid, big->siz, 0, sizes[i],
                               D_801539B0.tables.banks[group].offsets[i], 0, image->depth * 2,
                               D_801539B0.tables.banks[group].listsByPass[pass], image->depth);
-                func_80419490_de(&scratch);
+                Gfx_SwizzleImage(&scratch);
                 func_80413404_de(&scratch);
             }
             i += 1;

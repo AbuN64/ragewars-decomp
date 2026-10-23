@@ -15,7 +15,7 @@ extern s32 D_8015375C;
 
 extern s32 func_80406178_de(Menu_func_804066BC_de *, s32, s32);
 
-extern void *func_80442574_de(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
+extern void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 
 static __inline__ void pakShow(Menu_func_804066BC_de *menu) {
     s32 channel;
@@ -23,9 +23,9 @@ static __inline__ void pakShow(Menu_func_804066BC_de *menu) {
     else channel = menu->slot->unk4;
     if (func_80406178_de(menu, channel, 1)) {
         D_80153784 = 1;
-        func_80442574_de(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
+        Pak_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
     } else {
-        func_80442574_de(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
+        Pak_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
     }
 }
 
@@ -61,7 +61,7 @@ static __inline__ void *menuPrompt(Menu_func_804066BC_de *menu) {
 void func_80404E28_de(s32);
 
  /* extern */
-s32 func_80404F04_de(s32);
+s32 Pak_GetStatus(s32);
 
 /* Clears the word held in D_800E28C0. */
 extern s32 D_800E28C0;
@@ -90,11 +90,11 @@ s32 func_80409448_de(void *unused, Menu_func_804066BC_de *menu) {
         if (!prompt) prompt = menu->prompt;
         if (menu->player) owner = menu->player->unk5DC + 0x554;
         else owner = &D_80145040.dialogOwner;
-        func_80442574_de(owner, prompt, (s32)menu->player, (s32)menu->slot, 0);
+        Pak_OpenDialog(owner, prompt, (s32)menu->player, (s32)menu->slot, 0);
         return 1;
     default: return 1;
     }
-    func_80442574_de(owner, prompt, (s32)player, (s32)slot, 0);
+    Pak_OpenDialog(owner, prompt, (s32)player, (s32)slot, 0);
     return 1;
 }
 
@@ -109,7 +109,7 @@ void func_80409744_de(void) {
     unavailable = -2;
 loop_2:
         func_80404E28_de(var_s0);
-        if (func_80404F04_de(var_s0) == unavailable) {
+        if (Pak_GetStatus(var_s0) == unavailable) {
             var_s0 += 1;
             if (var_s0 >= 4) {
                 var_s0 = 0;

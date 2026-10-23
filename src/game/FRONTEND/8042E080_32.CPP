@@ -59,15 +59,15 @@ void func_80434250_de(s32 player, s32 direction) {
 #include "COMMON/NAME.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
 extern s32 func_80404BE8_de(char *, s32, s32 *);
-extern s32 func_80404858_de(s32, s32);
-extern s32 func_80405160_de(s32, s32 *);
-extern s32 func_804050CC_de(s32, s32 *);
+extern s32 Pak_DeleteNote(s32, s32);
+extern s32 Pak_GetFreePages(s32, s32 *);
+extern s32 Pak_CountFreeNotes(s32, s32 *);
 extern s32 func_80435424_de(void);
 extern s32 func_804057EC_de(s32);
 extern s32 func_80405454_de(s32, char *);
 extern u32 func_804057F8_de(void *, u32, u32);
 extern char *func_802A025C_de(char *, char *);
-extern s32 func_80404958_de(s32, s32, void *, char *, char *, char *);
+extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void func_804322AC_de(s32);
 /* Replace or create the selected port's four-profile Controller Pak note. */
 s32 func_80434428_de(s32 channel)
@@ -78,11 +78,11 @@ s32 func_80434428_de(s32 channel)
     s32 success = 0;
     status = func_80404BE8_de(rw_pak_save_name(), channel, &note);
     if (status == 1) {
-        success = func_80404858_de(channel, note) == 0;
+        success = Pak_DeleteNote(channel, note) == 0;
     } else {
-        status = func_80405160_de(channel, &bytes);
+        status = Pak_GetFreePages(channel, &bytes);
         if (status == 0) {
-            status = func_804050CC_de(channel, &slots);
+            status = Pak_CountFreeNotes(channel, &slots);
             if (status == 0) {
                 required = func_804057EC_de(func_80435424_de());
                 success = slots != 0 && bytes >= required;
@@ -97,7 +97,7 @@ s32 func_80434428_de(s32 channel)
             (*(struct Block_func_804347CC_de * *)&D_800E54A4)->checksum = func_804057F8_de((*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved, 0x640, 7);
             for (i = 15; i >= 0; i--) name[i] = 0;
             func_802A025C_de(name, rw_pak_save_name());
-            success = func_80404958_de(channel, 0x648, (*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved,
+            success = Pak_SaveNote(channel, 0x648, (*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved,
                                        name, extension, rw_pak_save_code()) == 0;
         }
     }
