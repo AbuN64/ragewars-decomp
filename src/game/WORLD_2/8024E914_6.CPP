@@ -67,7 +67,7 @@ extern char D_800C3DC0_de;
 
 extern char D_800C3DD4_de;
 
-void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **arg1) {
+void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **resource) {
     CVector3 position;
     CQuatern rotation;
     EffectRecAt154 *effect;
@@ -77,7 +77,7 @@ void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **arg1) {
     if (func_8026E340_de() != 0) {
         rotation.x = rotation.y = rotation.z = 0.0f;
         rotation.w = D_800C3D90_de;
-        node = func_8028FDB4_de(*arg1, 2);
+        node = func_8028FDB4_de(*resource, 2);
         if ((*node != 0) &&
             (*((s32 *)func_8028FDB4_de(func_8028FDB4_de(node, 0), 0)) & 0x8000)) {
             position = actor->position0;
@@ -120,34 +120,34 @@ void func_8024EF28_de(void *actor) {
     func_8026992C_de((char *)actor + ((D_800D297C << 6) + 0xE8), 1, 0x96);
 }
 
-void func_8024F108_de(StaticObject *arg0) {
+void func_8024F108_de(StaticObject *staticObject) {
     void *sp28;
     void **resource;
     s32 key;
     s32 found;
     s32 index;
 
-    index = arg0->model;
-    if (index != arg0->animation) {
-        resource = func_8025193C_de(0, arg0->animationKey,
-                                arg0->animationKey, 0x18,
+    index = staticObject->model;
+    if (index != staticObject->animation) {
+        resource = func_8025193C_de(0, staticObject->animationKey,
+                                staticObject->animationKey, 0x18,
                                 0, 0, 0, &D_800C3DA8_de + 4, 1);
         if (resource != 0) {
-            key = func_8028FE28_de(*resource, arg0->animationKey, 1);
+            key = func_8028FE28_de(*resource, staticObject->animationKey, 1);
             func_80253838_de(0, resource);
             found = func_802540F4_de(0, &sp28, key, &D_800C3DC0_de, 1);
             if (found != 0) {
-                arg0->resource = func_8028FE3C_de((s32)sp28, key,
+                staticObject->resource = func_8028FE3C_de((s32)sp28, key,
                                                     index % *(s32 *)sp28,
-                                                    &arg0->resourceSize);
-                arg0->animation = index;
+                                                    &staticObject->resourceSize);
+                staticObject->animation = index;
                 func_80253838_de(0, (void *)found);
             }
         }
     }
-    if (arg0->resource != 0) {
-        resource = func_8025193C_de(0, arg0->resource,
-                                arg0->resource, arg0->resourceSize,
+    if (staticObject->resource != 0) {
+        resource = func_8025193C_de(0, staticObject->resource,
+                                staticObject->resource, staticObject->resourceSize,
                                 0, 0, &D_0026D7F4, &D_800C3DD4_de, 0);
     } else {
         resource = 0;

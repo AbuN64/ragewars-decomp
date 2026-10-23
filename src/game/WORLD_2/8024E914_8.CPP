@@ -17,9 +17,9 @@ void func_8024F470_de(void *arg0) {
 }
 
 void func_8024D870_de(f32 *, void *);
-f32 *func_8024F478_de(f32 *arg0, void *arg1) {
-    func_8024D870_de(arg0, arg1);
-    return arg0;
+f32 *func_8024F478_de(f32 *rotation, void *actor) {
+    func_8024D870_de(rotation, actor);
+    return rotation;
 }
 
 
@@ -68,32 +68,32 @@ void func_8024F4A0_de(void *arg0) {
 
 extern f32 D_800D2988;
 
-void func_8024F5A0_de(StaticObject *arg0) {
+void func_8024F5A0_de(StaticObject *staticObject) {
     f32 temp_f1;
     f32 threshold;
     f32 final_value;
 
-    if (arg0->flags & 0x10) {
-        temp_f1 = arg0->scaleTime +
+    if (staticObject->flags & 0x10) {
+        temp_f1 = staticObject->scaleTime +
                   D_800D2988 * D_800C3E00_de;
         threshold = (&D_800C3E00_de)[1];
-        arg0->scaleTime = temp_f1;
+        staticObject->scaleTime = temp_f1;
         if (temp_f1 < threshold) {
-            arg0->scale = temp_f1 * D_800C3E08_de;
+            staticObject->scale = temp_f1 * D_800C3E08_de;
             return;
         }
         final_value = D_800C3E0C_de;
-        arg0->flags &= 0xFFEF;
-        arg0->scale = final_value;
+        staticObject->flags &= 0xFFEF;
+        staticObject->scale = final_value;
     }
 }
 
 /** Stores D_800D2988 times the float at 0x20 of the object at 0x18 in the float at 0x1A4. */
 extern float D_800D2988;
 
-void func_8024F618_de(StaticObject *arg0) {
-    void *p = arg0->type;
-    arg0->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
+void func_8024F618_de(StaticObject *staticObject) {
+    void *p = staticObject->type;
+    staticObject->frameDelta = (D_800D2988) * (((PropGeometry *)(p))->speed);
 }
 
 extern void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
@@ -105,23 +105,23 @@ extern void func_8027027C_de(void *arg0, void *arg1);
 
 void func_8024F634_de(void *arg0) {
     char *o = (char *) arg0;
-    f32 sp10[16];
+    f32 matrix[16];
 
     if (*(s32 *)((StaticObject *)o)->type == 8) {
-        func_802736D4_de(sp10, D_8013B190);
+        func_802736D4_de(matrix, D_8013B190);
     } else {
-        func_802736D4_de(sp10, ((StaticObject *)o)->angle);
+        func_802736D4_de(matrix, ((StaticObject *)o)->angle);
     }
 
-    func_8027347C_de(sp10, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale);
+    func_8027347C_de(matrix, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale, ((StaticObject *)(o))->scale);
 
     func_8027254C_de(&((StaticObject *)(o))->position.x, 20000.0f);
 
-    func_80273448_de((char *) sp10, ((StaticObject *)(o))->position.x, ((StaticObject *)(o))->position.y + ((StaticObject *)(o))->height, ((StaticObject *)(o))->position.z);
+    func_80273448_de((char *) matrix, ((StaticObject *)(o))->position.x, ((StaticObject *)(o))->position.y + ((StaticObject *)(o))->height, ((StaticObject *)(o))->position.z);
 
-    func_80273D6C_de(sp10);
+    func_80273D6C_de(matrix);
 
-    func_8027027C_de(sp10, (D_800D297C << 6) + 0x68 + o);
+    func_8027027C_de(matrix, (D_800D297C << 6) + 0x68 + o);
 }
 
 extern void func_80253838_de(void *arg0, void *arg1);
@@ -169,18 +169,18 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
 extern s32 D_801462C8;
 extern s32 func_8028B25C_de(void *arg0, s32 arg1);
 
-s32 func_8024F858_de(StaticObject *arg0) {
+s32 func_8024F858_de(StaticObject *staticObject) {
     void *obj;
     s32 value;
     s32 index;
 
-    obj = arg0->type;
+    obj = staticObject->type;
     if (*(s32 *)obj == 0xC) {
         return 0;
     }
 
     value = ((PropGeometry *)(obj))->variant;
-    index = func_8028B25C_de(&D_8011FE88, arg0->id);
+    index = func_8028B25C_de(&D_8011FE88, staticObject->id);
     if (index < 0x6AB) {
         if (index < 0x6A9) {
             return value;
