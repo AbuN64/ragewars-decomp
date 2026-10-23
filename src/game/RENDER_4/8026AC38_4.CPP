@@ -144,6 +144,8 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
 }
 
 #ifdef NON_MATCHING
+#include "COMMON/AIPROFILE.H"
+#include "COMMON/PACKEDMESHMATERIAL.H"
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -153,7 +155,8 @@ extern char D_801468A0[], D_80146918[], D_801468F4[];
 /* Draws a character model's parts with the shared material D_8013B2D8, choosing each part by the 0x38 bits of
  * its material byte 6: on the special state 0x12 the part must equal the bits for the variant at 0x81, otherwise
  * the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) was computed first. */
-void func_8026CE20_de(void **resource, void *owner, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
+/* 6/281 aligned edits; remaining: settings-base CSE and material-store scheduling. */
+void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -162,36 +165,34 @@ void func_8026CE20_de(void **resource, void *owner, void *matrix, s32 segment, v
     s32 count;
     s32 i;
     s32 hide = 0;
-    s32 bonus = 0;
-    s32 glow = 0;
-    u32 flags;
-    u8 *shared;
+    s32 bonus, glow;
+    s32 flags;
+    MeshMaterial *shared;
+    bonus=0;glow=0;
     if (matrix == 0) {
         return;
     }
     if (FIELD(s32, D_801468A0, 0x98) != 0) {
-        void *state = FIELD(void *, owner, 0x5D8);
-        if (FIELD(s8, state, 0x80) == 0xB && FIELD(u8, state, 0x94) != 0) {
+        AiProfile *state = owner->profile;
+        if (state->character == 0xB && state->enabled != 0) {
             hide = 0 < FIELD(s32, D_801468A0, 0xA0);
         }
     }
-    if (FIELD(u32, owner, 0x122C) & 0x8000) {
+    if (owner->reactionFlags & 0x8000) {
         hide = 1;
     }
-    if (0.0f < FIELD(f32, owner, 0x11EC)) {
+    if (0.0f < owner->glow) {
         glow = 1;
     }
-    if (FIELD(s32, D_80146918, 0) != 0 && FIELD(u8, FIELD(void *, owner, 0x5D8), 0x8F) == 1) {
+    if (FIELD(s32, D_80146918, 0) != 0 && owner->profile->bonus == 1) {
         bonus = 1;
     }
-    shared = (u8 *)&D_8013B2D8;
-    flags = *(u32 *)shared;
-    *(u32 *)shared = flags | 0x400;
-    D_800D15E4[2] = D_800C46A0_de;
-    D_800D15E4[1] = D_800C46A0_de;
-    D_800D15E4[0] = D_800C46A0_de;
+    shared = (MeshMaterial *)&D_8013B2D8;
+    flags = shared->flags;
+    shared->flags = flags | 0x400;
+    D_800D15E4[0] = D_800D15E4[1] = D_800D15E4[2] = D_800C46A0_de;
     D_800D15E4[3] = D_800C46A4_de;
-    *(u32 *)shared = flags | 0x1402;
+    shared->flags = flags | 0x1402;
     D_800D15E0 = 3;
     if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
         return;
@@ -204,7 +205,7 @@ void func_8026CE20_de(void **resource, void *owner, void *matrix, s32 segment, v
             Gfx *cmd = D_80110634++;
             gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
             cmd = D_80110634++;
-            gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, (char *)lights + 8);
+            gSPMoveMem(cmd, G_MV_LIGHT, 48, 16, lights->diffuse);
             cmd = D_80110634++;
             gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
         }
@@ -218,59 +219,63 @@ void func_8026CE20_de(void **resource, void *owner, void *matrix, s32 segment, v
         parts = func_8028FDB4_de(header, 2);
         count = *(s32 *)parts;
         for (i = 0; i < count; i++) {
-            void *state;
+            AiProfile *state;
             u32 bits;
             part = func_8028FDB4_de(parts, i);
             material = func_8028FDB4_de(part, 0);
             if (i == 0) {
                 func_8026B504_de(matrix, lights, material);
             }
-            state = FIELD(void *, owner, 0x5D8);
-            if (FIELD(s8, state, 0x80) == 0x12 && (FIELD(s32, D_801468F4, 0) == 0 || FIELD(u8, state, 0x8F) == 0)) {
-                u32 want;
-                switch (FIELD(s8, state, 0x81)) {
+            state = owner->profile;
+            if (state->character == 0x12 && (FIELD(s32, D_801468F4, 0) == 0 || state->bonus == 0)) {
+                switch (state->variant) {
                 case 0:
-                    want = 0x28;
+                    if ((material[6] & 0x38) == 0x28) {
+                        if (func_80269A80_de(material, pass) != 0) {
+                            void *list = func_8028FDB4_de(part, 1);
+                            Gfx *cmd = D_80110634++;
+                            gSPDisplayList(cmd, (unsigned int)list);
+                        }
+                    }
                     break;
                 case 1:
-                    want = 0x20;
+                    if ((material[6] & 0x38) == 0x20) {
+                        if (func_80269A80_de(material, pass) != 0) {
+                            void *list = func_8028FDB4_de(part, 1);
+                            Gfx *cmd = D_80110634++;
+                            gSPDisplayList(cmd, (unsigned int)list);
+                        }
+                    }
                     break;
                 case 2:
-                    want = 0x18;
+                    if ((material[6] & 0x38) == 0x18) {
+                        if (func_80269A80_de(material, pass) != 0) {
+                            void *list = func_8028FDB4_de(part, 1);
+                            Gfx *cmd = D_80110634++;
+                            gSPDisplayList(cmd, (unsigned int)list);
+                        }
+                    }
                     break;
-                default:
-                    continue;
-                }
-                if ((material[6] & 0x38) != want) {
-                    continue;
                 }
             } else {
                 bits = material[6] & 0x38;
-                if (bits == 0x38 && hide == 0) {
-                    continue;
-                }
-                if (bits == 0x30 && bonus == 0) {
-                    continue;
-                }
-                if (bits == 0x10 && glow == 0) {
-                    continue;
-                }
-            }
-            if (func_80269A80_de(material, pass) == 0) {
-                continue;
-            }
-            {
-                Gfx *cmd;
-                void *list = func_8028FDB4_de(part, 1);
-                cmd = D_80110634++;
-                gSPDisplayList(cmd, (unsigned int)list);
+                if (bits == 0x38 && hide == 0) continue;
+                if (bits == 0x30 && bonus == 0) continue;
+                if (bits == 0x10 && glow == 0) continue;
+                {
+                        if (func_80269A80_de(material, pass) != 0) {
+                            void *list = func_8028FDB4_de(part, 1);
+                            Gfx *cmd = D_80110634++;
+                            gSPDisplayList(cmd, (unsigned int)list);
+                        }
+                    }
             }
         }
-        D_800D15E0 = 0;
     }
+    D_800D15E0 = 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_8026CE20_de);
+INCLUDE_ASM("span_1000", Render_DrawCharacterEffectParts);
 #endif
 
 #ifdef NON_MATCHING

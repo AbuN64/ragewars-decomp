@@ -16,13 +16,13 @@ typedef struct AiProfile {
     u8 pitchMode; /* 0x7D */
     u8 pad7E[2];
     s8 character; /* 0x80 */
-    s8 variant; /* 0x81: func_8026CE20_de */
+    s8 variant; /* 0x81: Render_DrawCharacterEffectParts */
     u8 pad82[0xD];
-    u8 bonus; /* 0x8F: func_8026CE20_de, func_80449870_de */
+    u8 bonus; /* 0x8F: Render_DrawCharacterEffectParts, func_80449870_de */
     s8 state90; /* 0x90 */
     u8 pad91[2];
     u8 difficulty; /* 0x93 */
-    u8 enabled; /* 0x94: func_8026CE20_de */
+    u8 enabled; /* 0x94: Render_DrawCharacterEffectParts */
 } AiProfile;
 
 
@@ -158,7 +158,7 @@ struct Player {
     u8 pad11DC[8];
     f32 pending; /* 0x11E4 */
     u8 pad11E8[4];
-    f32 glow; /* 0x11EC: func_8026CE20_de */
+    f32 glow; /* 0x11EC: Render_DrawCharacterEffectParts */
     u8 pad11F0[4];
     f32 fireSpin; /* 0x11F4 */
     s32 fireFrame; /* 0x11F8 */
