@@ -206,7 +206,7 @@ void func_8020ABF0_de(CNavData *graph) {
                         if (distance < best || best == sentinel) {
                             chosen = platforms[i];
                             best = distance;
-                            chosenPosition = start;
+                            chosenPosition = chosen->motion.base;
                         }
                         distance = func_802726F8_de(point, &end);
                         if (distance < best || best == sentinel) {
