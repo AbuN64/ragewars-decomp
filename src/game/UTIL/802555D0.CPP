@@ -328,7 +328,7 @@ void *func_80255A34_de(HeapRecAtC *heap, s32 request)
     return 0;
 }
 
-s32 func_80255B2C_de(Pool80255ACC *arg0, char *arg1) {
+s32 func_80255B2C_de(Pool80255ACC *arena, char *arg1) {
     Block80255720 *block;
     Block80255720 *header;
     Block80255720 *other;
@@ -362,18 +362,18 @@ s32 func_80255B2C_de(Pool80255ACC *arg0, char *arg1) {
             *(Block80255720 **)next = block;
         }
         other->next = block;
-        if (arg0->tail == other) {
-            arg0->tail = block;
+        if (arena->tail == other) {
+            arena->tail = block;
         }
         goto merge;
 insert_head:
-        block->next = arg0->head;
-        if (arg0->head != 0) {
-            arg0->head->prev = block;
+        block->next = arena->head;
+        if (arena->head != 0) {
+            arena->head->prev = block;
         } else {
-            arg0->tail = block;
+            arena->tail = block;
         }
-        arg0->head = block;
+        arena->head = block;
     }
 
 merge:
@@ -390,8 +390,8 @@ merge:
         if (header->next != 0) {
             header->next->prev = header->prev;
         }
-        if (arg0->tail == header) {
-            arg0->tail = header->prev;
+        if (arena->tail == header) {
+            arena->tail = header->prev;
         }
     }
     return block->size - 0x20;

@@ -11,8 +11,8 @@
 #include "TYPES.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
-void func_80279990_de(void *arg0) {
-    s32 *p = (s32 *)arg0;
+void func_80279990_de(void *batch) {
+    s32 *p = (s32 *)batch;
     p[2] = p[1];
     p[3] = p[0] + ((p[1] * D_800D297C) << 6);
 }

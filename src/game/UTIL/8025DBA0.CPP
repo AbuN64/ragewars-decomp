@@ -60,7 +60,7 @@ void func_8025DC34_de(void *arg0, f32 arg1) {
 void func_8025DC88_de(void *arg0) {
     ObjectState40 *o = arg0;
     f32 var_f20;
-    ContextRecAt2BC0 *temp_v0;
+    ContextRecAt2BC0 *context;
 
     if (o->unk_38 != 0) {
         f32 prod = o->context->green;
@@ -70,9 +70,9 @@ void func_8025DC88_de(void *arg0) {
         var_f20 = var_f20 * o->unk_3C;
         goto do_update;
     }
-    temp_v0 = o->context;
-    var_f20 = (f32) (o->unk_24) * (temp_v0->green * D_800C4028_de);
-    if (temp_v0->field2BB8 != 0) {
+    context = o->context;
+    var_f20 = (f32) (o->unk_24) * (context->green * D_800C4028_de);
+    if (context->field2BB8 != 0) {
         var_f20 = var_f20 * (0.699999988079071f);
     }
     if (var_f20 != o->unk_2C) {
@@ -82,22 +82,22 @@ do_update:
     }
 }
 
-void func_8025DD60_de(Track *arg0) {
+void func_8025DD60_de(Track *track) {
     s32 i;
     f32 scaled;
 
     i = 0;
-    func_802AE5B8_de(arg0->unk10, arg0->unkC);
-    func_802AFF30_de(arg0->unk14, arg0->unk10);
-    func_802AFEB0_de(arg0->unk14,
-                  arg0->unk8->field_4);
+    func_802AE5B8_de(track->unk10, track->unkC);
+    func_802AFF30_de(track->unk14, track->unk10);
+    func_802AFEB0_de(track->unk14,
+                  track->unk8->field_4);
     do {
-        func_802AFEE0_de(arg0->unk14, i & 0xFF, 0);
+        func_802AFEE0_de(track->unk14, i & 0xFF, 0);
         i++;
     } while (i < 0x14);
 
-    scaled = (f32)arg0->unk24 *
-             (arg0->unk0->unk2BA4 * (&D_800C4030_de)[1]);
-    func_802AFF60_de(arg0->unk14, (s16)(s32)(scaled * D_800C4038_de));
-    arg0->unk2C = scaled;
+    scaled = (f32)track->unk24 *
+             (track->unk0->unk2BA4 * (&D_800C4030_de)[1]);
+    func_802AFF60_de(track->unk14, (s16)(s32)(scaled * D_800C4038_de));
+    track->unk2C = scaled;
 }
