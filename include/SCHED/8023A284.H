@@ -29,7 +29,7 @@ struct Scene {
     struct ObjectRecAt220 *lastObject;
     s32 objectPrevOffset, objectNextOffset;
     s32 count;
-    u16 effectMask; /* +0x8C8: func_8023AFF0_de */
+    u16 effectMask; /* +0x8C8: Sched_UpdateSceneEffects */
     u8 reserved8CA[2];
 };
 struct IntegerState8A4 {

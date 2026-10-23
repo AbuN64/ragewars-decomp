@@ -29,7 +29,7 @@ struct Host {
 
 struct DescriptorRecAt29;
 struct DescriptorRecAt29 {
-    s16 texture; /* +0: func_8023AFF0_de passes it to func_80295E84_de */
+    s16 texture; /* +0: Sched_UpdateSceneEffects passes it to func_80295E84_de */
     u8 red, green, blue;
     u8 envRed, envGreen, envBlue;
     f32 spinRate;

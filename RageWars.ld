@@ -10941,7 +10941,6 @@ SECTIONS
         src/game/SCHED/8023A284_37.CPP.o(.data);
         . = ALIGN(8) /* src/game/SCHED/8023A284_4.CPP.o */;
         src/game/SCHED/8023A284_4.CPP.o(.rodata .rdata);
-        src/game/SCHED/800C86C4.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86E0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.data);
@@ -12693,7 +12692,6 @@ SECTIONS
         src/game/SCHED/8023A284_38.CPP.o(.data);
         . = ALIGN(8) /* src/game/SCHED/8023A284_4.CPP.o */;
         src/game/SCHED/8023A284_4.CPP.o(.rodata .rdata);
-        src/game/SCHED/800C86C4.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86E0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.data);
@@ -14396,7 +14394,6 @@ SECTIONS
         src/game/SCHED/8023A284_39.CPP.o(.data);
         . = ALIGN(8) /* src/game/SCHED/8023A284_4.CPP.o */;
         src/game/SCHED/8023A284_4.CPP.o(.rodata .rdata);
-        src/game/SCHED/800C86C4.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86E0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.data);
@@ -16108,7 +16105,6 @@ SECTIONS
         src/game/SCHED/8023A284_36.CPP.o(.data);
         . = ALIGN(8) /* src/game/SCHED/8023A284_4.CPP.o */;
         src/game/SCHED/8023A284_4.CPP.o(.rodata .rdata);
-        src/game/SCHED/800C86C4.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86E0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.data);
@@ -17853,7 +17849,6 @@ SECTIONS
         src/game/DATA/OVLTBL/800C869C.CPP.o(.data);
         . = ALIGN(8) /* src/game/SCHED/8023A284_4.CPP.o */;
         src/game/SCHED/8023A284_4.CPP.o(.rodata .rdata);
-        src/game/SCHED/800C86C4.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86E0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.rodata .rdata);
         src/game/SCHED/800C86F0.CPP.o(.data);
@@ -20096,7 +20091,6 @@ SECTIONS
         src/game/SCHED/8023A284.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_37.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_4.CPP.o(.bss .sbss COMMON);
-        src/game/SCHED/800C86C4.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86E0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86F0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C8700.CPP.o(.bss .sbss COMMON);
@@ -21360,7 +21354,6 @@ SECTIONS
         src/game/SCHED/8023A284.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_38.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_4.CPP.o(.bss .sbss COMMON);
-        src/game/SCHED/800C86C4.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86E0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86F0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C8700.CPP.o(.bss .sbss COMMON);
@@ -22592,7 +22585,6 @@ SECTIONS
         src/game/SCHED/8023A284.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_39.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_4.CPP.o(.bss .sbss COMMON);
-        src/game/SCHED/800C86C4.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86E0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86F0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C8700.CPP.o(.bss .sbss COMMON);
@@ -23831,7 +23823,6 @@ SECTIONS
         src/game/SCHED/8023A284.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_36.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_4.CPP.o(.bss .sbss COMMON);
-        src/game/SCHED/800C86C4.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86E0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86F0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C8700.CPP.o(.bss .sbss COMMON);
@@ -25147,7 +25138,6 @@ SECTIONS
         src/game/SCHED/8023A284.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTBL/800C869C.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/8023A284_4.CPP.o(.bss .sbss COMMON);
-        src/game/SCHED/800C86C4.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86E0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C86F0.CPP.o(.bss .sbss COMMON);
         src/game/SCHED/800C8700.CPP.o(.bss .sbss COMMON);

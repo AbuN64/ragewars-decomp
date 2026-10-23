@@ -3559,7 +3559,6 @@ segments:
       - [0xC4494, rodata, data_800C/literals_func_8023A294_de]
       - [0xC449C, data, data_800C/rodata_unresolved_800C389C]
       - [0xC44A0, rodata, data_800C/literals_func_8023A4E0_de]
-      - [0xC44C4, rodata, data_800C/D_8023AFF0_C92C4]
       - [0xC44E0, rodata, data_800C/D_8023B718_C92E0]
       - [0xC44F0, rodata, data_800C/D_8023C78C_C92F0]
       - [0xC44FF, data, data_800C/rodata_unresolved_800C38FF]

@@ -36,7 +36,7 @@ f32 func_802B72B0_de(f32);
 void func_804428F8_de(void *);
 s32 func_802343C8_de();                        /* extern */
 void func_802349C0_de(void *);                        /* extern */
-s32 func_8023AFF0_de();                  /* extern */
+void Sched_UpdateSceneEffects(void *scene, void *host);                  /* extern */
                /* extern */
 s32 func_802B6900_de(f32 *, f32, f32, f32, f32, f32, f32, f32, f32, f32); /* extern */
 
@@ -321,7 +321,7 @@ actor_found:
         func_80272828_de(sp228);
         func_8026FC9C_de(sp228, camera->unk448[D_800D297C]);
     }
-    func_8023AFF0_de(&camera->unk570, camera);
+    Sched_UpdateSceneEffects(&camera->unk570, camera);
     func_804428F8_de(&camera->messageList);
     if (func_80245798_de() != 0) {
         camera->unk58 = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);

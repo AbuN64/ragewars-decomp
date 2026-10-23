@@ -184,7 +184,6 @@ draw_face:
     }
 }
 
-#ifdef NON_MATCHING
 /* Updates the scene's effect objects for one host: spawns an object for every enabled effect
  * descriptor bit that has none yet, then fades each active object up or down, advances its phase and
  * texture scroll, sets its depth from the host, and returns objects that have faded out to the free list. */
@@ -204,7 +203,6 @@ extern DescriptorRecAt29 *D_801370C8;
 extern s32 D_801370CC;
 extern char D_8011FE88;
 extern f32 D_800D2988;
-extern f32 D_800C35D4_de, D_800C35D8_de, D_800C35DC_de, D_800C35E0_de, D_800C35E4_de, D_800C35E8_de, D_800C35EC_de;
 extern Shared_ReactionFlags *func_8028B2F8_de(void *, void *);
 extern f32 func_80275DD4_de(void *, s32, s32);
 extern void func_802390D0_de(CVector3 *, void *);
@@ -212,7 +210,61 @@ extern void func_80295E84_de(s32 *, s32);
 extern void func_80255ED8_de(void *, void *);
 extern void func_80255D14_de(void *, void *);
 extern void func_80255CB8_de(void *, void *);
-void func_8023AFF0_de(Scene *scene, HostView8023AFF0 *host) {
+static inline ObjectRecAt220 *allocateSceneEffect(Scene *scene) {
+    ObjectRecAt220 *object = (ObjectRecAt220 *)scene->freeObjects.head;
+    if (object != 0) {
+        func_80255ED8_de(&scene->freeObjects, object);
+        func_80255D14_de(&scene->objects, object);
+    }
+    return object;
+}
+
+static inline s32 updateSceneEffect(ObjectRecAt220 *object, HostView8023AFF0 *host, u16 mask, s32 below, f32 hostDepth, f32 limit) {
+    DescriptorRecAt29 *descriptor = object->descriptor;
+    f32 value, step, depth, wrapPeriod, fadeStep;
+    if (object->mask & mask) {
+        value = object->throttle;
+        fadeStep = descriptor->throttleRate * D_800D2988;
+        value += fadeStep;
+        if (1.0f < value) {
+            value = 1.0f;
+        }
+        object->throttle = value;
+    } else if (object->throttle == 0.0f) {
+        return 1;
+    } else {
+        value = object->throttle - descriptor->throttleRate * D_800D2988;
+        if (value < 0.0f) {
+            value = 0.0f;
+        }
+        object->throttle = value;
+    }
+    object->phase = object->phase + D_800D2988 * descriptor->phaseRate * object->phaseScale;
+    step = D_800D2988 * D_800CD744_de * descriptor->spinRate;
+    value = object->offsetS + step * 1.536f;
+    wrapPeriod = 20480.0f;
+    object->offsetS = value;
+    if (wrapPeriod < value) {
+        object->offsetS = value - wrapPeriod;
+    }
+    value = object->offsetT + step * 3.072f;
+    object->offsetT = value;
+    if (wrapPeriod < value) {
+        object->offsetT = value - wrapPeriod;
+    }
+    depth = descriptor->baseSpeed + object->trim;
+    if (below && host->stalled == 0) {
+        depth += hostDepth;
+    } else if (descriptor->flags & 1) {
+        depth += host->speed * descriptor->hostScale;
+    } else if (descriptor->flags & 2) {
+        depth += limit;
+    }
+    object->depth = depth;
+    return 0;
+}
+
+void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     CVector3 anchor;
     CVector3 probe;
     Shared_ReactionFlags *entry;
@@ -220,10 +272,9 @@ void func_8023AFF0_de(Scene *scene, HostView8023AFF0 *host) {
     ObjectRecAt220 *object;
     ObjectRecAt220 *next;
     void *resource;
-    f32 hostDepth, limit, fadeLimit, step, value, depth;
+    f32 hostDepth, limit, fadeLimit, value;
     s32 below;
     s32 count;
-    s32 remove;
     u16 mask;
     u32 bit;
 
@@ -239,59 +290,52 @@ void func_8023AFF0_de(Scene *scene, HostView8023AFF0 *host) {
         return;
     }
     hostDepth = 0.0f;
-    below = 0;
     limit = func_80275DD4_de(resource, host->field38, host->field40);
+    below = 0;
     if (entry->flags & 1) {
         func_802390D0_de(&anchor, host);
-        fadeLimit = D_800C35D4_de;
+        fadeLimit = 0.5f;
         value = (entry->height - anchor.y) * fadeLimit;
-        if (D_800C35D8_de < value) {
-            fadeLimit = D_800C35D8_de;
+        if (20.48f < value) {
+            fadeLimit = 20.48f;
         } else {
             func_802390D0_de(&probe, host);
             fadeLimit = (entry->height - probe.y) * fadeLimit;
         }
         func_802390D0_de(&anchor, host);
-        if (anchor.y < entry->height) {
-            below = 1;
-        } else {
+        if (!(anchor.y < entry->height)) {
             below = 0;
+        } else {
+            below = 1;
         }
         hostDepth = entry->height - fadeLimit;
     }
     mask = entry->mask;
-    count = D_801370CC - 1;
+    count = D_801370CC;
     descriptor = D_801370C8;
-    if (count != -1) {
-        bit = 1;
-        do {
-            if ((mask & bit) && descriptor->texture != 0 && !(scene->effectMask & bit)) {
-                object = (ObjectRecAt220 *)scene->freeObjects.head;
-                if (object != 0) {
-                    func_80255ED8_de(&scene->freeObjects, object);
-                    func_80255D14_de(&scene->objects, object);
-                }
-                if (object != 0) {
-                    object->descriptor = descriptor;
-                    object->mask = bit;
-                    func_80295E84_de(object->texture, descriptor->texture);
-                    object->offsetS = 0.0f;
-                    object->offsetT = 0.0f;
-                    object->throttle = 0.0f;
-                    object->phase = 0.0f;
-                    object->phaseScale = D_800C35DC_de;
-                    object->textureScale = D_800C35DC_de;
-                    object->trim = 0.0f;
-                    object->opacity = D_800C35DC_de;
-                    scene->effectMask |= bit;
-                }
+    bit = 1;
+    while (--count != -1) {
+        if ((u16)(mask & bit) && descriptor->texture != 0 && !(scene->effectMask & bit)) {
+            object = allocateSceneEffect(scene);
+            if (object != 0) {
+                object->descriptor = descriptor;
+                object->mask = bit;
+                func_80295E84_de(object->texture, descriptor->texture);
+                object->offsetS = 0.0f;
+                object->offsetT = 0.0f;
+                object->throttle = 0.0f;
+                object->phase = 0.0f;
+                object->phaseScale = 1.0f;
+                object->textureScale = 1.0f;
+                object->trim = 0.0f;
+                object->opacity = 1.0f;
+                scene->effectMask |= bit;
             }
-            descriptor++;
-            count--;
-            bit <<= 1;
-        } while (count != -1);
+        }
+        descriptor++;
+        bit <<= 1;
     }
-    if (mask == 0) {
+    if ((u16)mask == 0) {
         return;
     }
     object = scene->objects;
@@ -300,46 +344,7 @@ void func_8023AFF0_de(Scene *scene, HostView8023AFF0 *host) {
     }
     do {
         next = object->next;
-        descriptor = object->descriptor;
-        remove = 0;
-        if (object->mask & mask) {
-            value = object->throttle + descriptor->throttleRate * D_800D2988;
-            if (D_800C35E0_de < value) {
-                value = D_800C35E0_de;
-            }
-            object->throttle = value;
-        } else if (object->throttle == 0.0f) {
-            remove = 1;
-        } else {
-            value = object->throttle - descriptor->throttleRate * D_800D2988;
-            if (value < 0.0f) {
-                value = 0.0f;
-            }
-            object->throttle = value;
-        }
-        if (!remove) {
-            object->phase = object->phase + D_800D2988 * descriptor->phaseRate * object->phaseScale;
-            step = D_800D2988 * D_800CD744_de * descriptor->spinRate;
-            value = object->offsetS + step * D_800C35E4_de;
-            object->offsetS = value;
-            if (D_800C35E8_de < value) {
-                object->offsetS = value - D_800C35E8_de;
-            }
-            value = object->offsetT + step * D_800C35EC_de;
-            object->offsetT = value;
-            if (D_800C35E8_de < value) {
-                object->offsetT = value - D_800C35E8_de;
-            }
-            depth = descriptor->baseSpeed + object->trim;
-            if (below && host->stalled == 0) {
-                depth += hostDepth;
-            } else if (descriptor->flags & 1) {
-                depth += host->speed * descriptor->hostScale;
-            } else if (descriptor->flags & 2) {
-                depth += limit;
-            }
-            object->depth = depth;
-        } else {
+        if (updateSceneEffect(object, host, mask, below, hostDepth, limit)) {
             scene->effectMask &= ~object->mask;
             func_80255ED8_de(&scene->objects, object);
             func_80255CB8_de(&scene->freeObjects, object);
@@ -347,6 +352,3 @@ void func_8023AFF0_de(Scene *scene, HostView8023AFF0 *host) {
         object = next;
     } while (object != 0);
 }
-#else
-INCLUDE_ASM("span_1000", func_8023AFF0_de);
-#endif
