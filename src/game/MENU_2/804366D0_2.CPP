@@ -3,51 +3,53 @@
 #include "TYPES.H"
 #include "MENU_2/804366D0_2.H"
 
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || (!defined(VERSION_EU) && !defined(VERSION_EU_X))
+#if defined(VERSION_DE)
+#define PLAYER_SETTINGS_ID(id) ((id) - 2)
+#else
+#define PLAYER_SETTINGS_ID(id) (id)
+#endif
 extern struct State_func_804366B8_de *D_800E5690;
-extern s32 D_800D34A4, D_800D34B0, D_800D3470_de, D_800D3474, D_800D34B4, D_800D34B8, D_800D34BC;
-extern s32 func_8025305C_de(s32);
-extern s32 func_8041A280_de(s32, s32);
+extern char *D_800D34A4[1], *D_800D34B0[1], *D_800D3470_de[1], *D_800D3474[1], *D_800D34B4[1], *D_800D34B8[1], *D_800D34BC[1];
+extern void *func_8025305C_de(s32);
+extern void *func_8041A280_de(s32, s32);
 extern void func_8041B110_de(s32);
-extern s32 func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(s32, s32);
-extern s32 func_8041A580_de(s32, s32, s32);
-extern s32 func_80419E54_de(s32, s32);
-extern s32 func_8040EC30_de(s32, s32);
-#define ST ((s32 *)D_800E5690)
-/* 100/114 words; remaining: scheduling: the target stores each handle before loading the second argument and keeps the argument move in the call delay slot */
-s32 func_804364E4_de(s32 arg0) {
-    s32 t;
+extern void *func_8041ABC0_de(s32, s32);
+extern void func_8041AD34_de(void *, char *);
+extern void *func_8041A580_de(s32, s32, s32);
+extern void *func_80419E54_de(s32, s32);
+extern void *func_8040EC30_de(s32, s32);
+#define ST ((void **)D_800E5690)
+/* Builds the five player-settings controls and opens their parent screen. */
+s32 Menu_InitPlayerSettingsScreen(s32 arg0) {
     D_800E5690 = (struct State_func_804366B8_de *)func_8025305C_de(0x64);
-    ST[0] = func_8041A280_de(0x5B, 0x5C);
-    func_8041B110_de(0x5E);
-    t = func_8041ABC0_de(0x64, 0x65);
-    ST[5] = t;
-    func_8041AD34_de(t, D_800D34A4);
-    func_8041AD34_de(ST[5], D_800D34B0);
-    t = func_8041ABC0_de(0x61, 0x63);
-    ST[4] = t;
-    func_8041AD34_de(t, D_800D3470_de);
-    func_8041AD34_de(ST[4], D_800D3474);
-    ST[2] = func_8041A580_de(0x66, 0x67, 0xF8);
-    ST[3] = func_8041A580_de(0x6A, 0x6B, 0xF8);
-    t = func_8041ABC0_de(0x68, 0x69);
-    ST[6] = t;
-    func_8041AD34_de(t, D_800D34B4);
-    func_8041AD34_de(ST[6], D_800D34B8);
-    func_8041AD34_de(ST[6], D_800D34BC);
-    func_8041B110_de(0x60);
-    ST[1] = func_80419E54_de(0x5D, 0x6E);
-    ST[9] = 3;
-    ST[8] = -1;
-    ST[0xB] = func_8040EC30_de(arg0, 0x5F);
-    ST[0xA] = 0;
+    ST[0] = func_8041A280_de(PLAYER_SETTINGS_ID(0x5B), PLAYER_SETTINGS_ID(0x5C));
+    func_8041B110_de(PLAYER_SETTINGS_ID(0x5E));
+    D_800E5690->a = func_8041ABC0_de(PLAYER_SETTINGS_ID(0x64), PLAYER_SETTINGS_ID(0x65));
+    func_8041AD34_de(D_800E5690->a, D_800D34A4[0]);
+    func_8041AD34_de(D_800E5690->a, D_800D34B0[0]);
+    D_800E5690->b = func_8041ABC0_de(PLAYER_SETTINGS_ID(0x61), PLAYER_SETTINGS_ID(0x63));
+    func_8041AD34_de(D_800E5690->b, D_800D3470_de[0]);
+    func_8041AD34_de(D_800E5690->b, D_800D3474[0]);
+    D_800E5690->c = func_8041A580_de(PLAYER_SETTINGS_ID(0x66), PLAYER_SETTINGS_ID(0x67), 0xF8);
+    D_800E5690->d = func_8041A580_de(PLAYER_SETTINGS_ID(0x6A), PLAYER_SETTINGS_ID(0x6B), 0xF8);
+    D_800E5690->e = func_8041ABC0_de(PLAYER_SETTINGS_ID(0x68), PLAYER_SETTINGS_ID(0x69));
+    func_8041AD34_de(D_800E5690->e, D_800D34B4[0]);
+    func_8041AD34_de(D_800E5690->e, D_800D34B8[0]);
+    func_8041AD34_de(D_800E5690->e, D_800D34BC[0]);
+    func_8041B110_de(PLAYER_SETTINGS_ID(0x60));
+    ST[1] = func_80419E54_de(PLAYER_SETTINGS_ID(0x5D), 0x6E);
+    ((s32 *)D_800E5690)[9] = 3;
+    ((s32 *)D_800E5690)[8] = -1;
+    ST[0xB] = func_8040EC30_de(arg0, PLAYER_SETTINGS_ID(0x5F));
+    ((s32 *)D_800E5690)[10] = 0;
     func_804366B8_de(0);
     return 0;
 }
 #undef ST
+#undef PLAYER_SETTINGS_ID
 #else
-INCLUDE_ASM("ovl_80400000", func_804364E4_de);
+INCLUDE_ASM("ovl_80400000", Menu_InitPlayerSettingsScreen);
 #endif
 
 /* Stores arg0 into its own D_80146417 entry and pushes the five settings of slot arg0 of the D_80102C89 table into the objects D_800E5690 holds through func_8041AD10_de and func_8041A6EC_de. */
