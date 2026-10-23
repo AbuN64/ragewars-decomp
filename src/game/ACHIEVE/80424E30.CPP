@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHAREDPLAYER.H"
 
 
 #ifdef NON_MATCHING

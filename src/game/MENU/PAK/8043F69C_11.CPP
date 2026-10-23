@@ -107,7 +107,6 @@ extern u8 *func_8028CFA0_de();
 extern void func_80272898_de();
 extern void func_802466A0_de();
 extern void func_8024B2D0_de();
-extern f32 func_802B7130_de();
 extern s32 func_8025477C_de();
 extern void func_8025476C_de();
 extern void func_8028B274_de();
