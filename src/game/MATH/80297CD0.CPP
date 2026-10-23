@@ -229,7 +229,7 @@ extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);
 /* Send an event through the menu, selected element and its child trees,
  * restoring each dispatcher's handled flag before applying default actions. */
-s32 func_80297310_de(s32 recurse, s32 event, s32 arg2, s32 arg3, s32 arg4)
+s32 DispatchCurrentScreenEvent(s32 recurse, s32 event, s32 arg2, s32 arg3, s32 arg4)
 {
     ScreenManager *table = D_8014D080;
     ScreenManager *tree;
@@ -288,7 +288,7 @@ s32 func_80297310_de(s32 recurse, s32 event, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_80297310_de);
+INCLUDE_ASM("span_1000", DispatchCurrentScreenEvent);
 #endif
 
 #ifdef NON_MATCHING

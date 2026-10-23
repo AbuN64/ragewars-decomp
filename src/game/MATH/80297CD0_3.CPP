@@ -69,10 +69,10 @@ void func_80297DBC_de(void) {
         value = temp_v0(param);
         ((struct ObjRecAt40V1 *)D_8014D080->screens[current].primary)->unk40 = value;
     }
-    func_80297310_de(1, 0xE06, 0, 0, 0);
-    func_80297310_de(1, 0xE07, 0, 0, 0);
+    DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
+    DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
     D_8014D080->screens[current].data.readPosition = 0;
-    func_80297310_de(1, 0xE02, &D_8014D080->screens[current].data, 0, 0);
+    DispatchCurrentScreenEvent(1, 0xE02, &D_8014D080->screens[current].data, 0, 0);
     StreamBufferFree(&D_8014D080->screens[current].data);
 }
 
@@ -94,7 +94,7 @@ int func_80297EA4_de(int arg0) {
  if(result==1) { D_8014D080->handled=arg0; goto done; }
  D_8014D080->handled=arg0;
  }
- func_80297310_de(1,0xE03,event,0,0);
+ DispatchCurrentScreenEvent(1,0xE03,event,0,0);
  }
  done:
  D_8014D080->field530=0;

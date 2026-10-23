@@ -207,7 +207,7 @@ block_found_trampoline:
                     }
                     D_8014D080->handled = handled;
                 }
-                func_80297310_de(1, 0xE07, 0, 0, 0);
+                DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
                 goto block_27;
             } else {
 block_27:
@@ -269,7 +269,7 @@ after_focus10:
                 }
                 D_8014D080->handled = temp_s0_5;
             }
-            func_80297310_de(1, 0xE06, 0, 0, 0);
+            DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
         }
 after_e06:
         if (((ScreenManager *)D_8014D080)->current != -1) {
@@ -285,7 +285,7 @@ after_e06:
                 }
                 D_8014D080->handled = temp_s0_6;
             }
-            func_80297310_de(1, 0xE07, 0, 0, 0);
+            DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
         }
         goto block_78;
     }
@@ -377,7 +377,7 @@ after_e03:
             }
             D_8014D080->handled = temp_s0_9;
         }
-        func_80297310_de(1, 0xE06, 0, 0, 0);
+        DispatchCurrentScreenEvent(1, 0xE06, 0, 0, 0);
     }
 after_e06_second:
     if (((ScreenManager *)D_8014D080)->current != -1) {
@@ -393,7 +393,7 @@ after_e06_second:
             }
             D_8014D080->handled = temp_s0_10;
         }
-        func_80297310_de(1, 0xE07, 0, 0, 0);
+        DispatchCurrentScreenEvent(1, 0xE07, 0, 0, 0);
     }
 after_e07_second:
     if (func_80299958_de() != index) {
@@ -449,7 +449,7 @@ after_focus:
             D_8014D080->handled = temp_s0_12;
         }
         temp_f2 = (s32)(func_802A18CC_de() * 1000.0);
-        func_80297310_de(1, 0xE08, temp_f2 - D_8014D080->frames, temp_f2, 0);
+        DispatchCurrentScreenEvent(1, 0xE08, temp_f2 - D_8014D080->frames, temp_f2, 0);
     }
 after_e08:
 }

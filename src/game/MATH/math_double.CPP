@@ -91,7 +91,7 @@ static inline f64 Frexp(f64 value, s32 *exponent)
   *exponent = 0;
   return D_800C56E0_de;
 }
-f64 func_8029AD38_de(f64 value)
+f64 NaturalLogDouble(f64 value)
 {
   s32 exponent;
   f64 x;
@@ -104,18 +104,39 @@ f64 func_8029AD38_de(f64 value)
     return D_800C56D8_de;
   }
   x = Frexp(value, &exponent);
- do { if (D_800C56E8_de < x) { denominator = x * D_800C56F0_de; x = x - D_800C56F0_de; x = x - D_800C56F0_de; denominator += D_800C56F0_de; } else { x = x - D_800C56F8_de; denominator = x * D_800C56F8_de; exponent--; denominator += D_800C56F8_de; } x = x / denominator; square = x * x; numerator = ((square * D_800C5700_de) + D_800C5708_de) * square; denominator = (((square - D_800C5710_de) * square) + D_800C5718_de) * square; numerator = square * (numerator - D_800C5720_de); denominator = denominator - D_800C5728_de; } while (0);
+  do {
+    if (D_800C56E8_de < x)
+    {
+      denominator = x * D_800C56F0_de;
+      x = x - D_800C56F0_de;
+      x = x - D_800C56F0_de;
+      denominator += D_800C56F0_de;
+    }
+    else
+    {
+      x = x - D_800C56F8_de;
+      denominator = x * D_800C56F8_de;
+      exponent--;
+      denominator += D_800C56F8_de;
+    }
+    x = x / denominator;
+    square = x * x;
+    numerator = ((square * D_800C5700_de) + D_800C5708_de) * square;
+    denominator = (((square - D_800C5710_de) * square) + D_800C5718_de) * square;
+    numerator = square * (numerator - D_800C5720_de);
+    denominator = denominator - D_800C5728_de;
+  } while (0);
   correction = x * (numerator / denominator);
   return ((exponent * D_800C5730_de) + (x + correction)) + (exponent * D_800C5738_de);
 }
 #else
-INCLUDE_ASM("span_1000", func_8029AD38_de);
+INCLUDE_ASM("span_1000", NaturalLogDouble);
 #endif
 
-/* Raises x to the power y: 1 for a zero exponent, 0 or infinity for a zero base, exp(y log x) through func_8029AD38_de (log) and an inline exponential scaled by func_8029ABA0_de (ldexp) for a positive base, and for a negative base the same magnitude signed by the parity of an integer exponent, or negated when the exponent's reciprocal is odd, otherwise negative infinity. */
+/* Raises x to the power y: 1 for a zero exponent, 0 or infinity for a zero base, exp(y log x) through NaturalLogDouble (log) and an inline exponential scaled by func_8029ABA0_de (ldexp) for a positive base, and for a negative base the same magnitude signed by the parity of an integer exponent, or negated when the exponent's reciprocal is odd, otherwise negative infinity. */
 
 
-extern f64 func_8029AD38_de(f64 value);
+extern f64 NaturalLogDouble(f64 value);
 
 static inline f64 exp_inline(f64 x) {
     f64 t;
@@ -156,7 +177,7 @@ f64 func_8029AEA4_de(f64 x, f64 y) {
     if (x < 0.0) {
         k = y;
         if (k == y) {
-            t = func_8029AD38_de(-x) * y;
+            t = NaturalLogDouble(-x) * y;
             if (k & 1) {
                 return -exp_inline(t);
             }
@@ -166,9 +187,9 @@ f64 func_8029AEA4_de(f64 x, f64 y) {
         if (!(-2.710504946537621e-20 < y - k * y && y - k * y < 2.710504946537621e-20 && (k & 1))) {
             return -1.0 / 0.0;
         }
-        return -exp_inline(func_8029AD38_de(-x) * y);
+        return -exp_inline(NaturalLogDouble(-x) * y);
     }
-    return exp_inline(func_8029AD38_de(x) * y);
+    return exp_inline(NaturalLogDouble(x) * y);
 }
 
 /* Rounds toward negative infinity by the 2^52 add-and-subtract trick; a negative value goes through

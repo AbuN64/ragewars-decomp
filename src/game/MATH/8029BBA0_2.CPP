@@ -466,7 +466,7 @@ extern f32 D_800C5A58_de, D_800C5A5C, D_800C5A60_de, D_800C5A64;
 extern f32 D_800C5A68_de, D_800C5A6C, D_800C5A70_de, D_800C5A74;
 extern f32 D_800C5A78_de, D_800C5A7C, D_800C5A80_de;
 
-f32 func_8029C288_de(f32 *a, f32 *b) {
+f32 VectorAngle(f32 *a, f32 *b) {
     f32 lengthA, lengthB, product, value, polynomial, root, result;
     s32 negative;
     lengthA = a[0]*a[0] + a[1]*a[1] + a[2]*a[2];
@@ -496,5 +496,5 @@ f32 func_8029C288_de(f32 *a, f32 *b) {
     return result;
 }
 #else
-INCLUDE_ASM("span_1000", func_8029C288_de);
+INCLUDE_ASM("span_1000", VectorAngle);
 #endif

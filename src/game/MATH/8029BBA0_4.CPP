@@ -383,7 +383,7 @@ extern f32 D_800C5B08_de;
 
 /* Invert a 4x4 matrix with partial pivoting. Return one for a singular
  * matrix, leaving the destination untouched until elimination succeeds. */
-s32 func_8029D510_de(f32 output[4][4], f32 input[4][4])
+s32 InvertMatrix(f32 output[4][4], f32 input[4][4])
 {
     f32 rows[4][8];
     s32 order[4];
@@ -439,5 +439,5 @@ s32 func_8029D510_de(f32 output[4][4], f32 input[4][4])
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_8029D510_de);
+INCLUDE_ASM("span_1000", InvertMatrix);
 #endif

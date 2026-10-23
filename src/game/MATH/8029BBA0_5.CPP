@@ -38,7 +38,7 @@ static inline f64 round_down(f64 arg0) {
 
 
 
-extern f64 func_8029AD38_de(void);
+extern f64 NaturalLogDouble(void);
 
 /* Returns e raised to a double: 1 for arguments of negligible magnitude, and otherwise splits the argument into k ln 2 plus a remainder r, evaluates the rational approximation 1/2 + p(r)/(q(r) - p(r)) and scales it by two to the power k + 1 through func_8029ABA0_de. */
 
@@ -202,7 +202,7 @@ s32 func_8029DB58_de(s32 fifth) {
 }
 
 f64 func_8029DB74_de(void) {
-    return func_8029AD38_de() * D_800C5B60_de;
+    return NaturalLogDouble() * D_800C5B60_de;
 }
 
 f64 func_8029DB9C_de(f64 x) {
