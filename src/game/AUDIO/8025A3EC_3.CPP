@@ -106,92 +106,68 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
 #include "AUDIO/EXTERNS.H"
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
-s16 func_8025B034_de(s8 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    ObjRecAt40V2 *temp_s1;
-    s16 temp_t2;
-    s16 temp_v1;
-    s16 var_a0;
-    s16 var_a3;
-    s16 var_t0;
-    s16 var_v0;
-    s32 var_v0_2;
-    s8 *var_a2;
-    void *temp_a0;
-    void *temp_s0;
-    void *temp_s0_2;
-    void *temp_t1;
-    void *temp_t3;
-    void *temp_v1_2;
-    void *var_a1;
-
-    var_a3 = (s16) arg3;
-    var_t0 = -1;
-    var_a2 = arg0 + 4;
-    var_a0 = 0;
-    temp_t2 = var_a3;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_t1 = *((void **) ((u8 *) (arg0) + 0));
-    temp_t3 = temp_t1 + 0x7C;
-    var_a1 = temp_t3;
-loop_1:
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    if (*((s16 *) ((u8 *) (var_a1) + 96)) != -1) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        temp_v1 = *((s16 *) ((u8 *) (var_a2) + 56));
-        if ((temp_v1 < temp_t2) && (var_a3 >= temp_v1) && (temp_v1 != 0x64)) {
-            var_a3 = temp_v1;
-            var_t0 = var_a0;
+typedef struct ListNode_8025B034 {
+    char pad0[4];
+    struct ListNode_8025B034 *next;
+    char pad8[0x38];
+    s16 priority;
+} ListNode_8025B034;
+s16 func_8025B034_de(char *player, s32 variant, s32 count, s32 priority, s32 arg4) {
+    ContextCode8025A3EC *context;
+    View_func_8025AE1C_de *view;
+    View_func_8025AE1C_de *iter;
+    s32 cur;
+    Slots *slots;
+    ListNode_8025B034 *head;
+    ListNode_8025B034 *node;
+    char *channel;
+    s32 best;
+    s32 found;
+    s32 limit;
+    s32 i;
+    s32 ret;
+    context = *(ContextCode8025A3EC **)player;
+    iter = (View_func_8025AE1C_de *)(player + 4);
+    slots = &context->slots;
+    best = (s16)priority;
+    found = -1;
+    limit = best;
+    for (i = 0; i < 16; i++) {
+        if (slots->ids[i] == -1) {
+            return i;
         }
-        var_a2 += 0xCC;
-        var_a0 += 1;
-        var_a1 += 2;
-        if (var_a0 >= 0x10) {
-            if (var_t0 != -1) {
-                if (*((s16 *) ((u8 *) ((temp_t3 + (var_t0 * 2))) + 96)) == -1) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    temp_v1_2 = *((void **) ((u8 *) (temp_t1) + 320));
-                    var_v0_2 = var_t0 << 0x10;
-                    if (temp_v1_2 != (temp_t1 + 0x13C)) {
-                        var_v0_2 = var_t0 << 0x10;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        if ((s16) arg3 < *((s16 *) ((u8 *) (temp_v1_2) + 64))) {
-                            goto block_11;
-                        }
-                    }
-                    return (s16) (var_v0_2 >> 0x10);
-                }
-                temp_s0 = (var_t0 * 0xCC) + arg0;
-                temp_s0_2 = temp_s0 + 4;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                temp_a0 = *((void **) ((u8 *) (temp_s0_2) + 176));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                *((s32 *) ((u8 *) (temp_s0_2) + 172)) = 1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                *((s32 *) ((u8 *) (temp_s0_2) + 80)) = 0;
-                temp_s1 = temp_a0 + 0x84;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                if (*((s32 *) ((u8 *) (temp_s0_2) + 16)) != *((s32 *) ((u8 *) (temp_a0) + 260))) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    func_802B2F00_de(temp_s1, *((s16 *) ((u8 *) ((temp_a0 + (*((s32 *) ((u8 *) (temp_s0) + 4)) * 2))) + 220)));
-                    if (func_802B2620_de(temp_s1) != 0) {
-                        alSndpStop(temp_s1);
-                    }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    *((s32 *) ((u8 *) (temp_s0_2) + 4)) = -1;
-                }
-                var_v0 = -1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                if (*((s32 *) ((u8 *) (arg0) + 3280)) == -1) {
-                    var_v0 = 0x10;
-                }
-                return var_v0;
-            }
-block_11:
+        cur = ((View_func_8025AE1C_de *)((char *)iter + i * 0xCC))->field38;
+        if (cur < limit && best >= cur && cur != 100) {
+            best = cur;
+            found = i;
+        }
+    }
+    if (found == -1) {
+        return -1;
+    }
+    if (slots->ids[found] == -1) {
+        node = *(ListNode_8025B034 **)((char *)context + 0x140);
+        if (node != (ListNode_8025B034 *)((char *)context + 0x13C) && (s16)priority < node->priority) {
             return -1;
         }
-        goto loop_1;
+        return found;
     }
-    return var_a0;
+    view = (View_func_8025AE1C_de *)((char *)iter + (s16)found * 0xCC);
+    view->done = 1;
+    view->tracked = 0;
+    context = view->context;
+    channel = ((OwnerCode8025A3EC *)context)->sound;
+    if (view->frame != context->frame) {
+        func_802B2F00_de(channel, context->slots.ids[view->slot]);
+        if (func_802B2620_de(channel) != 0) {
+            alSndpStop(channel);
+        }
+        view->handle = -1;
+    }
+    if (*(s32 *)(player + 0xCD0) != -1) {
+        return -1;
+    }
+    return 0x10;
 }
 #else
 INCLUDE_ASM("span_1000", func_8025B034_de);
