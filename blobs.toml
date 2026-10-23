@@ -76,8 +76,8 @@ evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d
 type = "sn-debug"
 format = "accounting observations: sn-debug; per-range readers and limits in evidence"
 state = "observed"
-stored_size = 683803
-rom."us" = [[0x1028f4, 0x158000], [0x158003, 0x160000], [0x160012, 0x164000], [0x1b5a50, 0x1e2000], [0x1e2006, 0x1f2000], [0x1f6d86, 0x200000]]
+stored_size = 1246
+rom."us" = [[0x157f9e, 0x158000], [0x15fca9, 0x160000], [0x1b5a50, 0x1b5a67], [0x1e1ef3, 0x1e2000], [0x1fffff, 0x200000]]
 evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.sn-debug.us" }]
 
 [blob."accounting.stale-code.de"]
@@ -14814,6 +14814,60 @@ state = "decoded"
 stored_size = 202656
 rom."us-rev1" = [[0x1c0860, 0x1f2000]]
 evidence = [{ artifact = "sn-debug-us-rev1-1c0869.json", sha256 = "5b8f657c7a8e93ed421e40c29a3d6ed14c85de797cbe48b3e0bb15d4d389b7e2" }, { artifact = "blobs-boundary-proof.json", sha256 = "db8b0c22d7041ee8795869649fbb8aeea23fc85262a6d6ee5762c6616f1891cb", pointer = "/rows/341" }]
+
+[blob."leftover.us.sn-debug.1028f4"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 349866
+rom."us" = [[0x1028f4, 0x157f9e]]
+evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/0" }]
+
+[blob."leftover.us.sn-debug.158003"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 31910
+rom."us" = [[0x158003, 0x15fca9]]
+evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/1" }]
+
+[blob."leftover.us.sn-debug.160012"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 16366
+rom."us" = [[0x160012, 0x164000]]
+evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/2" }]
+
+[blob."leftover.us.sn-debug.1b5a67"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 181388
+rom."us" = [[0x1b5a67, 0x1e1ef3]]
+evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/3" }]
+
+[blob."leftover.us.sn-debug.1e2006"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 65530
+rom."us" = [[0x1e2006, 0x1f2000]]
+evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/4" }]
+
+[blob."leftover.us.sn-debug.1f6d86"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 37497
+rom."us" = [[0x1f6d86, 0x1fffff]]
+evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/5" }]
 
 [blob."level.0"]
 name = "PROVING GROUNDS"
