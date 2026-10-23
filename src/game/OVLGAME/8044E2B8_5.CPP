@@ -57,15 +57,15 @@ extern void func_8022A880_de(struct Context *);
 
 
 void func_8044DD50_de(char *match) {
-    RenderCounters *state;
+    CGameStatus *state;
 
     func_80264854_de(0);
     func_80285D30_de(D_8010EC90);
     func_8022A880_de(D_80145040);
     state = &D_801462C8.counters;
     state->teams = 0;
-    state->option54 = 0;
-    state->option78 = 0;
+    state->m_bFragTagOn = 0;
+    state->m_bCTFOn = 0;
     state->first = 0;
     state->transitionActive = 0;
     ((GameSession *)match)->phase = 2;

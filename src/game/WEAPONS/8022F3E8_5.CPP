@@ -243,7 +243,7 @@ extern s32 func_8025DE54_de(s16 arg0, CVector3 position, s32 arg4, s32 arg5);
 void func_80230630_de(LevelActor *arg0, void *arg1) {
     s32 state;
     void *actor;
-    RenderCounters *audio;
+    CGameStatus *audio;
     s32 mode;
 
     actor = arg0->controller;
@@ -265,7 +265,7 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
     ((Dest *)arg1)->field138 = 0;
 
     audio = &D_801462C8.counters;
-    if ((audio->option54 != 0) &&
+    if ((audio->m_bFragTagOn != 0) &&
         (((Shared_ActorView *)actor)->controls->transientFlag != 0)) {
         if (((Actor_func_8022D290_de *)actor)->unk_0x06B0 & 0x2000) {
             mode = audio->teamColour;

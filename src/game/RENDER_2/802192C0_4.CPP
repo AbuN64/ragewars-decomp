@@ -669,7 +669,7 @@ extern void func_8022B7F8_de(void *arg0, void *arg1);
 void func_8021C45C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
     Player *actor = arg0;
     Shared_Particle *event = arg3;
-    RenderCounters *audio;
+    CGameStatus *audio;
     u16 type;
 
     if (actor->health == 0) {

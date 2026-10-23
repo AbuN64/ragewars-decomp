@@ -353,7 +353,7 @@ void func_80229FA0_de(Obj_func_80229FA0_de *arg0, Damage_func_80229FA0_de *arg1)
                 break;
             }
         }
-        { RenderCounters *state=(&D_801462C8.counters);
+        { CGameStatus *state=(&D_801462C8.counters);
         if ((state->teams != 0) && (((unsigned char *)state)[-0x5B0] == 0) && ((var_a3->unk1450 == 0) || (arg0->unk1450 == 0)) && (arg0->unk5D8->unk92 == var_a3->unk5D8->unk92)) {
             arg1->unk4 = 0;
         }}
@@ -511,10 +511,10 @@ int func_8022A414_de(void *arg0) {
 }
 
 void *func_8022A420_de(struct Context *arg0) {
-    RenderCounters *base = (&D_801462C8.counters);
+    CGameStatus *base = (&D_801462C8.counters);
     Shared_ActorView *record;
 
-    if (base->option54 != 0 && base->restrictionActive != 0) {
+    if (base->m_bFragTagOn != 0 && base->restrictionActive != 0) {
         return 0;
     }
     record = (void *)arg0->head;

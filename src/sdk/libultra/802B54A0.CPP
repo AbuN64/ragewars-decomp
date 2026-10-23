@@ -10,7 +10,7 @@ s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);
 
-void func_802B03D0_de(SeqInitPlayer *p, SeqInitConfig *c) {
+void func_802B03D0_de(SeqInitPlayer *p, ALSeqpConfig *c) {
     void *heap = c->heap;
     void *driver = D_800D4070;
     SeqFreeVoice *voice;

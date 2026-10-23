@@ -37,12 +37,12 @@ s32 func_8020F2A8_de(CloseAttackBrain *arg0) {
     s32 data[30];
     s32 *cursor;
     s32 count;
-    NavigationGraph *global;
+    CNavData *global;
     s32 value;
     s32 current;
     NavigationSearchNode *entry;
 
-    global = (NavigationGraph *)&D_8013B364;
+    global = (CNavData *)&D_8013B364;
     func_8020D014_de(global);
     func_8020D1FC_de((s32)global);
     count = 29;
@@ -99,9 +99,9 @@ s32 func_8020F388_de(void *arg0) {
         return 1;
     }
     value = -1;
-    ((NavigationGraph *)global)->result = value;
+    ((CNavData *)global)->result = value;
     func_8020D0CC_de(global, ((RouteChaseBot *)arg0)->node);
-    current = ((NavigationGraph *)global)->result;
+    current = ((CNavData *)global)->result;
     if (current != value) {
         ((RouteChaseBot *)arg0)->goal = current;
         func_8020D114_de(global, &((AiController *)arg0)->queue[0], 4);
@@ -110,8 +110,8 @@ s32 func_8020F388_de(void *arg0) {
 }
 
 s32 func_8020F444_de(AiController *arg0) {
-    NavigationGraph *global;
-    NavigationGraph *scanbase;
+    CNavData *global;
+    CNavData *scanbase;
     NavigationSearchNode *node;
     NavigationPoint *result;
     s32 count;
@@ -119,7 +119,7 @@ s32 func_8020F444_de(AiController *arg0) {
     s32 value;
     s32 current;
 
-    global = (NavigationGraph *)&D_8013B364;
+    global = (CNavData *)&D_8013B364;
     func_8020D014_de(global);
     func_8020D1FC_de((s32)global);
     count = 0;
@@ -204,7 +204,7 @@ s32 func_8020F614_de(void) {
     s32 count;
 
     base = &D_8013B364;
-    node = ((NavigationGraph *)base)->nodes;
+    node = ((CNavData *)base)->nodes;
     count = 0;
     if (node != 0) {
         do {

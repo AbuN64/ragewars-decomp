@@ -14,9 +14,9 @@ extern void func_8020D1FC_de(void *);
 
 extern void func_8020D220_de(void *, s32);
 
-extern void func_8020C5A0_de(NavigationGraph *, NavigationSearchNode *);
+extern void func_8020C5A0_de(CNavData *, NavigationSearchNode *);
 
-s32 func_8020B95C_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
+s32 func_8020B95C_de(CNavData *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     NavigationPoint *var_s7;
     NavigationBuffer *temp_v1;
     NavigationBuffer *temp_v1_2;
@@ -39,7 +39,7 @@ s32 func_8020B95C_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 a
     }
     var_t0 = 0;
     var_s4 = 0;
-    if (arg0->portalCount > 0) {
+    if (arg0->m_nNavLinks > 0) {
         s32 reversibleKind4 = 4;
         s32 reversibleKind1 = 1;
         s32 reversibleKind7 = 7;
@@ -47,7 +47,7 @@ s32 func_8020B95C_de(NavigationGraph *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 a
         s32 forwardExcludedKind = 6;
         var_a3 = arg3;
         do {
-            temp_v1_2 = arg0->portals;
+            temp_v1_2 = arg0->m_pusNavLinks;
             temp_v1_3 = navigationRecord(temp_v1_2, var_t0);
             if (arg4 != 0) {
                 if (temp_v1_3->second == arg1) {
@@ -120,7 +120,7 @@ block_32:
                 }
             }
             var_t0 += 1;
-        } while (var_t0 < arg0->portalCount);
+        } while (var_t0 < arg0->m_nNavLinks);
     }
     if (arg2 == -1) return var_s4;
     if (var_s7 != 0) {
@@ -244,14 +244,14 @@ search_done:
 extern f32 D_800C1D70_de;
 #include "TYPES.H"
 f32 func_802726BC_de(void *a, void *b);
-s32 func_8020C078_de(NavigationGraph *, s32, s32, u8, s32, f32 *, f32);
+s32 func_8020C078_de(CNavData *, s32, s32, u8, s32, f32 *, f32);
 
-static __inline__ s32 navigationNeighbors(NavigationGraph *graph, s32 key, s32 *out, s32 *edges) {
+static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s32 *edges) {
     s32 i = 0;
     s32 count = 0;
-    if (graph->portalCount > 0) {
+    if (graph->m_nNavLinks > 0) {
         do {
-            NavigationPortal *portal = navigationRecord(graph->portals, i);
+            NavigationPortal *portal = navigationRecord(graph->m_pusNavLinks, i);
             if (portal->first == key) {
                 count++;
                 *out = portal->second;
@@ -267,12 +267,12 @@ static __inline__ s32 navigationNeighbors(NavigationGraph *graph, s32 key, s32 *
                 out++;
             }
             i++;
-        } while (i < graph->portalCount);
+        } while (i < graph->m_nNavLinks);
     }
     return count;
 }
 
-s32 func_8020BE80_de(NavigationGraph *arg0, s32 arg1, u8 arg2, s32 arg3) {
+s32 func_8020BE80_de(CNavData *arg0, s32 arg1, u8 arg2, s32 arg3) {
     s32 sp20[64];
     s32 sp120[64];
     f32 sp220;
@@ -298,11 +298,11 @@ s32 func_8020BE80_de(NavigationGraph *arg0, s32 arg1, u8 arg2, s32 arg3) {
 
     var_fp = -1;
     var_s0 = 0;
-    temp_v0 = arg0->portalCount;
+    temp_v0 = arg0->m_nNavLinks;
     var_fs0 = D_800C1D70_de;
     if (temp_v0 > 0) {
         s32 stride;
-        temp_a1 = arg0->portals;
+        temp_a1 = arg0->m_pusNavLinks;
         stride = temp_a1->stride;
         var_a0 = 8;
         do {
@@ -338,7 +338,7 @@ INCLUDE_ASM("span_1000", func_8020BE80_de);
 extern f32 D_800C1D74_de;
 #include "TYPES.H"
 f32 func_802726BC_de(void *a, void *b);
-s32 func_8020C078_de(NavigationGraph *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 *arg5, f32 arg6) {
+s32 func_8020C078_de(CNavData *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 *arg5, f32 arg6) {
     s32 sp20[64];
     s32 sp120[64];
     f32 sp220;
@@ -366,10 +366,10 @@ s32 func_8020C078_de(NavigationGraph *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg
     var_fs0 = D_800C1D74_de;
     var_fp = -1;
     var_s0 = 0;
-    temp_v0 = arg0->portalCount;
+    temp_v0 = arg0->m_nNavLinks;
     if (temp_v0 > 0) {
         s32 stride;
-        temp_a2 = arg0->portals;
+        temp_a2 = arg0->m_pusNavLinks;
         stride = temp_a2->stride;
         var_a0 = 8;
         do {
@@ -388,10 +388,10 @@ block_5:
     var_t1 = 0;
     var_a0_2 = sp20;
     temp_s4 = navigationRecord(temp_v1_2, arg1);
-    if (arg0->portalCount > 0) {
+    if (arg0->m_nNavLinks > 0) {
         var_a2 = sp120;
         do {
-            temp_v1_3 = arg0->portals;
+            temp_v1_3 = arg0->m_pusNavLinks;
             temp_v1_4 = navigationRecord(temp_v1_3, var_t0);
             if (temp_v1_4->first == arg1) {
                 var_t1 += 1;
@@ -408,7 +408,7 @@ block_5:
                 var_a0_2 += 1;
             }
             var_t0 += 1;
-        } while (var_t0 < arg0->portalCount);
+        } while (var_t0 < arg0->m_nNavLinks);
     }
     for (var_s0 = 0; var_s0 < var_t1; var_s0++) {
         NavigationBuffer *table = arg0->points;
@@ -437,7 +437,7 @@ extern f32 D_800C1D78_de;
 extern const f32 D_800C1D7C_de;
 extern f32 func_802726F8_de(f32 *, f32 *);
 
-f32 func_8020C2E8_de(NavigationGraph *graph, NavigationSearchNode *node)
+f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
 {
     s32 neighbors[64];
     s32 portalIds[64];
@@ -462,7 +462,7 @@ f32 func_8020C2E8_de(NavigationGraph *graph, NavigationSearchNode *node)
     origin = navigationRecord(graph->points, node->key);
     for (goalIndex = 0; goalIndex < 64; goalIndex++)
     {
-        goal = graph->goals[goalIndex];
+        goal = graph->m_nGoalList[goalIndex];
         if (goal == -1)
         {
             continue;
@@ -491,13 +491,13 @@ f32 func_8020C2E8_de(NavigationGraph *graph, NavigationSearchNode *node)
         s32 *portalOut;
         NavigationBuffer *links;
         NavigationPortal *link;
-        if (graph->portalCount > portalIndex)
+        if (graph->m_nNavLinks > portalIndex)
         {
             portalOut = portalBase;
             neighborOut = neighborBase;
             do
             {
-                links = graph->portals;
+                links = graph->m_pusNavLinks;
                 link = navigationRecord(links, portalIndex);
                 if (link->first == key)
                 {
@@ -517,14 +517,14 @@ f32 func_8020C2E8_de(NavigationGraph *graph, NavigationSearchNode *node)
                 }
                 portalIndex += 1;
             }
-            while (portalIndex < graph->portalCount);
+            while (portalIndex < graph->m_nNavLinks);
         }
         neighborCount = count;
     }
     {
         for (neighborIndex = 0; neighborIndex < neighborCount; neighborIndex++)
         {
-            portalTable = graph->portals;
+            portalTable = graph->m_pusNavLinks;
             portal = navigationRecord(portalTable, portalIds[neighborIndex]);
             if ((portal->kind == 9) && (portal->first == node->key))
             {
@@ -532,7 +532,7 @@ f32 func_8020C2E8_de(NavigationGraph *graph, NavigationSearchNode *node)
                 exitPoint = navigationRecord(exitPoints, portal->second);
                 for (goalIndex = 0; goalIndex < 64; goalIndex++)
                 {
-                    exitGoal = graph->goals[goalIndex];
+                    exitGoal = graph->m_nGoalList[goalIndex];
                     if (exitGoal == -1)
                     {
                         continue;
@@ -555,18 +555,18 @@ f32 func_8020C2E8_de(NavigationGraph *graph, NavigationSearchNode *node)
 #ifdef NON_MATCHING
 #include "COMMON/OBJECTLINKS14.H"
 extern f32 D_800C1D80_de,D_800C1D84_de,D_800C1D88_de;
-extern f32 func_8020C2E8_de(NavigationGraph *, NavigationSearchNode *);
+extern f32 func_8020C2E8_de(CNavData *, NavigationSearchNode *);
 extern f32 func_802726F8_de(f32 *,f32 *);
 
-static inline s32 hasOpen35(NavigationGraph *g,s32 status){NavigationSearchNode *n=g->nodes;while(n){if(n->open==status)return 1;n=n->next;}return 0;}
-static __inline__ NavigationSearchNode *choose35(NavigationGraph *g,s32 status,f32 initial,f32 sentinel){NavigationSearchNode *n=g->nodes,*best=0;f32 minimum=initial;while(n){if(n->open==status){if(n->total<minimum){best=n;minimum=n->total;}else if(minimum==sentinel){best=n;minimum=n->total;}}n=n->next;}if(best)best->open=0;return best;}
-static inline NavigationSearchNode *find35(NavigationGraph *g,s32 key){NavigationSearchNode *n=g->nodes;while(n){if(n->key==key)return n;n=n->next;}return 0;}
-static inline s32 neighbors35(NavigationGraph *arg0, NavigationSearchNode *node,s32 *out,s32 *ids) {
+static inline s32 hasOpen35(CNavData *g,s32 status){NavigationSearchNode *n=g->nodes;while(n){if(n->open==status)return 1;n=n->next;}return 0;}
+static __inline__ NavigationSearchNode *choose35(CNavData *g,s32 status,f32 initial,f32 sentinel){NavigationSearchNode *n=g->nodes,*best=0;f32 minimum=initial;while(n){if(n->open==status){if(n->total<minimum){best=n;minimum=n->total;}else if(minimum==sentinel){best=n;minimum=n->total;}}n=n->next;}if(best)best->open=0;return best;}
+static inline NavigationSearchNode *find35(CNavData *g,s32 key){NavigationSearchNode *n=g->nodes;while(n){if(n->key==key)return n;n=n->next;}return 0;}
+static inline s32 neighbors35(CNavData *arg0, NavigationSearchNode *node,s32 *out,s32 *ids) {
  s32 temp_t1=node->key,var_a3=0,var_t0=0; s32 *var_a0_3=out,*var_a1=ids; NavigationBuffer *temp_v1;NavigationPortal *temp_v1_2;
-        if (arg0->portalCount > 0) {
+        if (arg0->m_nNavLinks > 0) {
 
             do {
-                temp_v1 = arg0->portals;
+                temp_v1 = arg0->m_pusNavLinks;
                 temp_v1_2=navigationRecord(temp_v1,var_a3);
                 if (temp_v1_2->first == temp_t1) {
                     var_t0 += 1;
@@ -583,11 +583,11 @@ static inline s32 neighbors35(NavigationGraph *arg0, NavigationSearchNode *node,
                     var_a0_3++;
                 }
                 var_a3 += 1;
-            } while (var_a3 < arg0->portalCount);
+            } while (var_a3 < arg0->m_nNavLinks);
         }
 return var_t0;
 }
-void func_8020C5A0_de(NavigationGraph *arg0, NavigationSearchNode *arg1) {
+void func_8020C5A0_de(CNavData *arg0, NavigationSearchNode *arg1) {
     s32 sp10[64];
     s32 sp110[64];
     s32 *sp210;
@@ -669,7 +669,7 @@ var_t0=neighbors35(arg0,var_a0,sp10,sp110);
                 var_a1_2 = arg0->nodes;
                 temp_s2=navigationRecord(temp_v1_3,temp_a0_2);
                 var_s0=find35(arg0,temp_a0_2);
-                temp_a0_3 = arg0->portals;
+                temp_a0_3 = arg0->m_pusNavLinks;
                 temp_a0_4=navigationRecord(temp_a0_3,sp110[var_s1_2]);
                 temp_v1_4 = temp_a0_4->kind;
                 if (temp_v1_4 != 4) {

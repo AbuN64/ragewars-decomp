@@ -149,16 +149,16 @@ void func_8042ECD8_de(void) {
 extern u8 D_801462D5;
 void func_8042ED70_de(f32 rate, s32 identifier, s32 argument2, s32 argument3,
                      s32 argument4, s32 argument5, s32 argument6) {
-    RenderCounters *state = &D_801462C8.counters;
+    CGameStatus *state = &D_801462C8.counters;
     f32 scale;
     s32 i;
-    state->option58 = argument2;
-    state->counter80 = 0;
+    state->m_FragTagLimit = argument2;
+    state->m_CTFPlayerWithFlag = 0;
     state->unk7C = argument3;
-    state->option54 = argument4;
+    state->m_bFragTagOn = argument4;
     state->teams = argument5;
     scale = D_800DDB54;
-    state->option78 = argument6;
+    state->m_bCTFOn = argument6;
     if ((u32)(D_801462D5 - 2) < 2) {
         scale = D_800DDB58;
     }

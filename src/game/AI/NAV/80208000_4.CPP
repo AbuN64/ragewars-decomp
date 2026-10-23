@@ -20,7 +20,7 @@ f32 func_802726F8_de(f32 *, f32 *);
 
 extern void *func_8020C994_de(void *, s32);
 
-extern NavigationGraph D_8013B364;
+extern CNavData D_8013B364;
 
 extern char D_80103FD0;
 
@@ -347,7 +347,7 @@ multiply:
 void func_80209CD8_de(SharedPlayer **arg0) {
     s32 limit;
     Controls *controls;
-    RenderCounters *session;
+    CGameStatus *session;
     s8 mode;
 
     if (D_80146938 != 0) {

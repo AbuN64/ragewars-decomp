@@ -39,7 +39,7 @@ void func_802A7AA4_de(void *);
 
 s32 func_802BD320_de(char *, const char *, ...);
 f32 func_804422F0_de(char *, f32, f32);
-static inline RenderCounters *hudRules(void) {
+static inline CGameStatus *hudRules(void) {
     return &D_801462C8.counters;
 }
 void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
@@ -348,7 +348,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                     }
                 }
             }
-            if (hudRules()->option54 != 0) {
+            if (hudRules()->m_bFragTagOn != 0) {
                 n = player->owner->count;
                 if (player->countLast != n) {
                     func_802AA70C_de(&player->countAnim, &D_800C9468);
@@ -389,7 +389,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                                       scaleY, 1);
                     }
                 }
-            } else if (hudRules()->option78 != 0) {
+            } else if (hudRules()->m_bCTFOn != 0) {
                 if (player->owner->team != 0xFF) {
                     score = hudRules()->counts[player->owner->team];
                 } else {
@@ -540,10 +540,10 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
             }
         }
         if (hudRules()->state == 0) {
-            if (player->owner->active == 1 && hudRules()->option54 != 0) {
+            if (player->owner->active == 1 && hudRules()->m_bFragTagOn != 0) {
                 func_8022C1E8_de(player, view);
             }
-            if (hudRules()->state == 0 && hudRules()->option78 != 0 && player->owner->active != 0) {
+            if (hudRules()->state == 0 && hudRules()->m_bCTFOn != 0 && player->owner->active != 0) {
                 func_8022C37C_de(player, view);
             }
         }

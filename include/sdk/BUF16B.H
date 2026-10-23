@@ -79,13 +79,13 @@ struct func_802B52B0_S1 {
 };
 
 typedef struct SeqFreeVoice { struct SeqFreeVoice *next; char pad[0x34]; } SeqFreeVoice;
-typedef struct SeqInitConfig {
+typedef struct ALSeqpConfig {
     s32 voices, events;
     u8 channels, debug;
     u8 pad[2];
     void *heap;
     void *initOsc, *updateOsc, *stopOsc;
-} SeqInitConfig;
+} ALSeqpConfig;
 typedef struct SeqInitPlayer {
     void *next;
     struct SeqInitPlayer *self;

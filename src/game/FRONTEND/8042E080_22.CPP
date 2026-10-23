@@ -51,7 +51,7 @@ void func_8042DEA0_de(void) {
     s32 humans;
     s32 i;
     s32 first;
-    RenderCounters *match;
+    CGameStatus *match;
 
     func_8029973C_de();
     func_80298368_de(2);
@@ -146,7 +146,7 @@ void func_8042DEA0_de(void) {
    marks the slot active. */
 extern s32 func_8042E460_de(u8 *);
 void Frontend_PlaceStageOpponents(void) {
-    RenderCounters *match;
+    CGameStatus *match;
     Shared_PlayerSettingsRecord *player;
     s32 boss;
     s32 escorted;

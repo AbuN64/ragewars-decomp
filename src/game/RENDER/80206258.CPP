@@ -86,11 +86,11 @@ void func_802062B0_de(Trigger *arg0) {
 
 void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params, s32 kind) {
     SpawnDispatchActor *node;
-    RenderCounters *settings;
+    CGameStatus *settings;
 
     if (kind == 0xBD7) {
         settings = &D_801462C8.counters;
-        if (settings->option78 != 0 && settings->counter80 != 0) {
+        if (settings->m_bCTFOn != 0 && settings->m_CTFPlayerWithFlag != 0) {
             return;
         }
     }

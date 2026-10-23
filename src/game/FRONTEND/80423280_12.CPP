@@ -204,10 +204,10 @@ func_802A2224_de
 }
 
 void func_8042CFDC_de(void) {
-    RenderCounters *state = &D_801462C8.counters;
+    CGameStatus *state = &D_801462C8.counters;
 
-    state->option78 = 0;
-    state->option54 = 0;
+    state->m_bCTFOn = 0;
+    state->m_bFragTagOn = 0;
     if (func_8042AF28_de() == 0 || func_8042ACD8_de() == 0) {
         func_80298368_de(0x14);
     } else {
@@ -216,10 +216,10 @@ void func_8042CFDC_de(void) {
 }
 
 void func_8042D034_de(void) {
-    RenderCounters *state = &D_801462C8.counters;
+    CGameStatus *state = &D_801462C8.counters;
 
-    state->option78 = 0;
-    state->option54 = 0;
+    state->m_bCTFOn = 0;
+    state->m_bFragTagOn = 0;
     func_80298368_de(0xF);
 }
 

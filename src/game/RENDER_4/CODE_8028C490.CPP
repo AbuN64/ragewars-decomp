@@ -439,10 +439,10 @@ void func_8028CCA4_de(void *arg0, s32 arg1) {
     }
 }
 
-extern void func_80216488_de(Shared_DamageEvent *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
-extern void func_802171FC_de(LevelActor *actor, s32 *behavior, Shared_DamageEvent *event);
+extern void func_80216488_de(CDamageInfo *event, void *target, s32 damage, f32 radius, s32 flags, Shield *shield);
+extern void func_802171FC_de(LevelActor *actor, s32 *behavior, CDamageInfo *event);
 void func_8028CCDC_de(Shared_World *world, s32 damage, s32 flags) {
-    Shared_DamageEvent event;
+    CDamageInfo event;
     LevelActor **actors;
     s32 count;
     s32 i;

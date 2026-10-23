@@ -23,7 +23,7 @@
 
 void func_80291208_de(RenderState *state) {
     u32 i, count, previous, next;
-    RenderCounters *counters;
+    CGameStatus *counters;
     Frame *view;
     osCreateMesgQueue(&D_801428C0, (s32)D_80142CB8, 0x1000);
     func_802A001C_de(D_800EFC80_de, 7, 0x2000);

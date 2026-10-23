@@ -10,7 +10,7 @@
 
 extern s32 func_80265650_de(void *, s32);
 void func_80427F10_de(void) {
-    RenderCounters *state;
+    CGameStatus *state;
     Shared_Game *config;
     Preset *preset;
     s32 value, choice, i;

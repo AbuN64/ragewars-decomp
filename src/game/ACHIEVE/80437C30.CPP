@@ -52,7 +52,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
     Active *preset;
     func_8041F2A0_Config *config;
     Shared_Game *game;
-    RenderCounters *counters;
+    CGameStatus *counters;
     s32 achievement;
     s32 time;
     s32 slot;

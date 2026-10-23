@@ -29,13 +29,13 @@ typedef struct Shared_DamageParameters {
     };
 } Shared_DamageParameters;
 
-typedef struct Shared_DamageEvent {
+typedef struct CDamageInfo_t {
     Shared_ReactionActor *target;
     s32 damage;
     f32 radius;
     s32 flags;
     Shield *shield;
-} Shared_DamageEvent;
+} CDamageInfo;
 
 struct Shared_ReactionObjectKind {
     u8 unk0;

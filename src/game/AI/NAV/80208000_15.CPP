@@ -20,8 +20,8 @@ extern void *func_8020C994_de(void *, s32);
 
 
 
-extern Link *func_8020C9B0_de(NavigationGraph *, int);
-extern NavigationGraph D_8013B364;
+extern Link *func_8020C9B0_de(CNavData *, int);
+extern CNavData D_8013B364;
 
 s32 func_8020D9C0_de(Obj_func_8020D9C0_de *obj) {
     CVector3 sum;
@@ -60,12 +60,12 @@ int func_8020DB14_de(Obj_func_8020DB14_de *obj) {
     int j;
     int i;
     Link *link;
-    NavigationGraph *graph = &D_8013B364;
+    CNavData *graph = &D_8013B364;
 
     obj->node = -1;
     obj->pending = 0;
     for (j = 0; j < 4; j++) {
-        for (i = 0; i < graph->portalCount; i++) {
+        for (i = 0; i < graph->m_nNavLinks; i++) {
             link = func_8020C9B0_de(graph, i);
             if (link->from == obj->nodes[j] && link->type == 6) {
                 obj->hits++;

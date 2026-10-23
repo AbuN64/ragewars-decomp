@@ -14,7 +14,7 @@
 extern f32 D_800C20C0_de[];
 extern s32 func_80209874_de(void *, s32);
 extern void func_80208EB0_de(void *);
-extern NavigationGraph D_8013B364;
+extern CNavData D_8013B364;
 
 extern void func_80211020_de(void *);
 
@@ -161,7 +161,7 @@ void func_80212A40_de(LevelActor *arg0) {
 void func_80212A7C_de(Shared_Actor *arg0)
 {
     AiController *state;
-    NavigationGraph *table;
+    CNavData *table;
     NavigationPoint *entry;
     f32 threshold;
     s32 index;
@@ -175,7 +175,7 @@ void func_80212A7C_de(Shared_Actor *arg0)
         func_8020D1FC_de((s32)table);
         threshold = D_800C20CC_de;
         index = 0;
-        if (table->pointCount > 0) {
+        if (table->m_nNavNodes > 0) {
             do {
                 entry = func_8020C994_de(table, index);
                 if (func_802726BC_de(&state->player->pos.x, entry) < threshold &&
@@ -183,7 +183,7 @@ void func_80212A7C_de(Shared_Actor *arg0)
                     func_8020D220_de(table, index);
                 }
                 index++;
-            } while (index < table->pointCount);
+            } while (index < table->m_nNavNodes);
         }
         func_8020D0CC_de(table, state->current);
         func_8020D114_de(table, &state->queue, 4);

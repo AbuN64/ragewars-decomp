@@ -111,16 +111,16 @@ s32 func_802282EC_de(Round *arg0);
 
 
 void func_80227038_de(s8 *arg0) {
-    RenderCounters *initial_rules; 
-    RenderCounters *select_rules; 
-    RenderCounters *case2_rules; 
-    RenderCounters *case3_entry; 
-    RenderCounters *case3_loop; 
-    RenderCounters *case4_entry; 
-    RenderCounters *case6_entry; 
-    RenderCounters *case4_loop; 
-    RenderCounters *case6_active_rules; 
-    RenderCounters *rules;
+    CGameStatus *initial_rules; 
+    CGameStatus *select_rules; 
+    CGameStatus *case2_rules; 
+    CGameStatus *case3_entry; 
+    CGameStatus *case3_loop; 
+    CGameStatus *case4_entry; 
+    CGameStatus *case6_entry; 
+    CGameStatus *case4_loop; 
+    CGameStatus *case6_active_rules; 
+    CGameStatus *rules;
     u32 state;
     s32 var_a0;
     s32 var_a0_3;
@@ -178,7 +178,7 @@ void func_80227038_de(s8 *arg0) {
     func_80227014_S19 *temp_v1_3;
     func_80227014_S22 *temp_v1_4;
 
-    if ((func_80245784_de() == 0) && (func_80245798_de() == 0) && ((initial_rules = &D_801462C8.counters)->option54 != 0)) {
+    if ((func_80245784_de() == 0) && (func_80245798_de() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
         if ((func_802281F0_de(arg0) != 0) && (initial_rules->elapsed == 0)) {
             func_8022A748_de(arg0);
             return;
@@ -196,7 +196,7 @@ void func_80227038_de(s8 *arg0) {
             case 1:
                 func_8022C5DC_de(arg0);
                 if (temp_v0 > 0) {
-                    temp_s1 = (select_rules = &D_801462C8.counters)->setupState;
+                    temp_s1 = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
                     if (temp_s1 == 3) {
                         temp_v0_2 = func_802744D4_de();
                         temp_v0_3 = temp_v0_2 / temp_v0;
@@ -565,7 +565,7 @@ void func_80227E8C_de(Round *arg0) {
     s32 count2;
     ActorNode *node;
     SubActor *temp;
-    RenderCounters *state;
+    CGameStatus *state;
     s32 three; /* FAKEMATCH: constant-holding local places the li */
     s32 found; /* FAKEMATCH: flag local keeps the loop exit from being threaded past the found check */
 

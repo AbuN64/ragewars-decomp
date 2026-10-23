@@ -18,7 +18,7 @@ s32 func_8043E5D0_de(void) {
 
 
 s32 func_8043E5D8_de(void) {
-    RenderCounters *s = &D_801462C8.counters;
+    CGameStatus *s = &D_801462C8.counters;
     s32 result;
 
     result = 0;

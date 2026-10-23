@@ -93,10 +93,10 @@ void func_80443734_de(ObjRecAt1CV1 *arg0, CaptionEntry *arg1, s32 arg2, MenuStyl
 }
 
 int func_80443844_de(int unused, PlayerRecAt1C *player) {
-    RenderCounters *sync = &D_801462C8.counters;
+    CGameStatus *sync = &D_801462C8.counters;
     int team;
 
-    if (sync->option54 != 0) {
+    if (sync->m_bFragTagOn != 0) {
         team = player->actor->info->unk8F;
         if (team == 1) {
             sync->unk74 = team;
@@ -111,7 +111,7 @@ int func_80443844_de(int unused, PlayerRecAt1C *player) {
 }
 
 s32 func_804438BC_de(StateRecAt1C *arg0) {
-    RenderCounters *state;
+    CGameStatus *state;
     s32 temp_v0;
     s32 var_v0;
     ActorCode80443868804438BC *temp_s0;

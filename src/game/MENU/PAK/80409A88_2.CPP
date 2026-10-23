@@ -51,8 +51,8 @@ void func_80409AC0_de(RestorePlayer *player) {
     *(SavedSettings *)&D_801462C8 = D_800E28BC->settings;
     D_801462C8.counters.ticks = D_800E28BC->rules[0];
     D_801462C8.counters.seconds = D_800E28BC->rules[1];
-    D_801462C8.counters.minutes = D_800E28BC->rules[2];
-    D_801462C8.counters.hours = D_800E28BC->rules[3];
+    D_801462C8.counters.m_GameTimeMinutes = D_800E28BC->rules[2];
+    D_801462C8.counters.m_GameTimeHours = D_800E28BC->rules[3];
     D_8013B2D4[0] = ((SavedSettings *)&D_801462C8)->data[1];
     ((u8 *)&D_801462C8)[0x580] = saved;
     from = D_800E28BC->table;

@@ -249,7 +249,7 @@ s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
 }
 
 void *func_8020CFE0_de(char *object, s32 arg1) {
-    NavigationGraph *graph = (NavigationGraph *)object;
+    CNavData *graph = (CNavData *)object;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
         do {

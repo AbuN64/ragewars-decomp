@@ -35,7 +35,7 @@ void func_80208158_de(Brain *brain) {
     s32 maximum;
     f32 meter;
     s32 kind;
-    RenderCounters *tutorial;
+    CGameStatus *tutorial;
     SharedPlayer_func_80208158_de *player;
 
     if (brain->player->views1450.view1450_1.computer == 0) {
@@ -107,17 +107,17 @@ void func_80208158_de(Brain *brain) {
     }
 }
 
-extern NavigationGraph D_8013B364;
+extern CNavData D_8013B364;
 float func_802726F8_de(void *, void *);
 void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
 float func_802B72B0_de(float);
-NavigationPoint *func_8020C994_de(NavigationGraph *,s32);
-NavigationPortal *func_8020C9B0_de(NavigationGraph *,s32);
-NavigationSearchNode *func_8020CFE0_de(NavigationGraph *,s32);
-s32 func_8020CC0C_de(NavigationGraph *,s32,s32);
+NavigationPoint *func_8020C994_de(CNavData *,s32);
+NavigationPortal *func_8020C9B0_de(CNavData *,s32);
+NavigationSearchNode *func_8020CFE0_de(CNavData *,s32);
+s32 func_8020CC0C_de(CNavData *,s32,s32);
 s32 func_80209828_de(AiController *);
 typedef struct GroundObject { char pad[0x18]; ActorMotionResource *resource; } GroundObject;
 GroundObject *func_8024E6A0_de(Player *);
@@ -131,7 +131,7 @@ extern f32 D_800C1BD0_de;
 extern f32 D_800C1BD4_de;
 extern f32 D_800C1BD8_de;
 void Nav_SteerAlongRoute(AiController *arg0) {
-    NavigationGraph *graph = &D_8013B364;
+    CNavData *graph = &D_8013B364;
     CVector3 delta;
     Player *player;
     NavigationPoint *point;
@@ -328,17 +328,17 @@ void Nav_SteerAlongRoute(AiController *arg0) {
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
-extern NavigationGraph D_8013B364;
+extern CNavData D_8013B364;
 float func_802726F8_de(void *, void *);
 void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
 float func_802B72B0_de(float);
-NavigationPoint *func_8020C994_de(NavigationGraph *,s32);
-NavigationPortal *func_8020C9B0_de(NavigationGraph *,s32);
-NavigationSearchNode *func_8020CFE0_de(NavigationGraph *,s32);
-s32 func_8020CC0C_de(NavigationGraph *,s32,s32);
+NavigationPoint *func_8020C994_de(CNavData *,s32);
+NavigationPortal *func_8020C9B0_de(CNavData *,s32);
+NavigationSearchNode *func_8020CFE0_de(CNavData *,s32);
+s32 func_8020CC0C_de(CNavData *,s32,s32);
 s32 func_80209828_de(AiController *);
 
 extern f32 D_800C1BDC_de;
@@ -364,7 +364,7 @@ static __inline__ void navigationTurnRight(CVector3 *v) {
     v->y = 0.0f;
 }
 void func_80208AAC_de(AiController *arg0) {
-    NavigationGraph *graph;
+    CNavData *graph;
     CVector3 *playerPosition;
     CVector3 sp10;
     CVector3 v20;
@@ -486,17 +486,17 @@ INCLUDE_ASM("span_1000", func_80208AAC_de);
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
-extern NavigationGraph D_8013B364;
+extern CNavData D_8013B364;
 float func_802726F8_de(void *, void *);
 void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
 float func_802B72B0_de(float);
-NavigationPoint *func_8020C994_de(NavigationGraph *,s32);
-NavigationPortal *func_8020C9B0_de(NavigationGraph *,s32);
-NavigationSearchNode *func_8020CFE0_de(NavigationGraph *,s32);
-s32 func_8020CC0C_de(NavigationGraph *,s32,s32);
+NavigationPoint *func_8020C994_de(CNavData *,s32);
+NavigationPortal *func_8020C9B0_de(CNavData *,s32);
+NavigationSearchNode *func_8020CFE0_de(CNavData *,s32);
+s32 func_8020CC0C_de(CNavData *,s32,s32);
 s32 func_80209828_de(AiController *);
 
 extern f32 D_800C1C00;
@@ -510,7 +510,7 @@ extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
 void func_80208EB0_de(AiController *arg0) {
-    NavigationGraph *graph;
+    CNavData *graph;
     CVector3 *playerPosition;
     CVector3 sp10;
     CVector3 v20;

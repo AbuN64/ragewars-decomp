@@ -58,8 +58,8 @@ void func_80293284_de(GameSession *arg0, s32 arg1) {
     }
     D_801462C8.counters.ticks = 0;
     D_801462C8.counters.seconds = 0;
-    D_801462C8.counters.minutes = 0;
-    D_801462C8.counters.hours = 0;
+    D_801462C8.counters.m_GameTimeMinutes = 0;
+    D_801462C8.counters.m_GameTimeHours = 0;
     D_801462C8.counters.first = 0;
     arg0->phase = 2;
     arg0->selector = var_s0;

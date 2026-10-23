@@ -41,7 +41,7 @@ int func_8020D280_de(void *arg0) {
 }
 
 void *func_8020D28C_de(void *arg0) {
-    NavigationGraph *graph = arg0;
+    CNavData *graph = arg0;
     NavigationSearchNode *node;
     NavigationSearchNode *best;
     f32 best_value;
@@ -84,8 +84,8 @@ int func_8020D318_de(void *arg0) {
     return node->open == 2;
 }
 
-s32 func_8020D328_de(NavigationGraph *arg0) {
-    NavigationGraph *graph = arg0;
+s32 func_8020D328_de(CNavData *arg0) {
+    CNavData *graph = arg0;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
         do {

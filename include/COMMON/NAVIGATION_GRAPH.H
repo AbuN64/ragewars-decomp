@@ -39,11 +39,11 @@ typedef struct NavigationSearchNode {
     CVector3 endpoint; /* 0x44 */
 } NavigationSearchNode;
 
-typedef struct NavigationGraph {
+typedef struct CNavData_t {
     NavigationBuffer * points; /* 0x0 */
-    s32 pointCount; /* 0x4 */
-    NavigationBuffer * portals; /* 0x8 */
-    s32 portalCount; /* 0xC */
+    s32 m_nNavNodes; /* 0x4 */
+    NavigationBuffer * m_pusNavLinks; /* 0x8 */
+    s32 m_nNavLinks; /* 0xC */
     NavigationBuffer * links; /* 0x10 */
     u8 pad14[0x4];
     s32 result; /* 0x18 */
@@ -51,8 +51,8 @@ typedef struct NavigationGraph {
     s32 selected; /* 0x20 */
     NavigationSearchNode * nodes; /* 0x24 */
     u8 pad28[0x10];
-    s32 goals[64]; /* 0x38 */
-} NavigationGraph;
+    s32 m_nGoalList[64]; /* 0x38 */
+} CNavData;
 
 /* Resource tables store records with a runtime stride. */
 static __inline__ void *navigationRecord(NavigationBuffer *table, s32 index) { return table->data + index * table->stride; }

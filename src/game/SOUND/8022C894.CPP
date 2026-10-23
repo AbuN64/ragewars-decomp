@@ -105,7 +105,7 @@ void func_8022CA14_de(Player *arg0, void *arg1) {
     u8 *result;
     u8 state;
     s32 mode;
-    RenderCounters *audio;
+    CGameStatus *audio;
 
     scale = D_800C2D60_de;
     if (D_8013B2BC == 0x1DB1) {
@@ -123,7 +123,7 @@ void func_8022CA14_de(Player *arg0, void *arg1) {
     state = ((Shared_ControlView *)arg0->profile)->transientFlag;
     if (state == 1) {
         audio = &D_801462C8.counters;
-        if (audio->option54 != 0) {
+        if (audio->m_bFragTagOn != 0) {
             mode = audio->teamColour;
             switch (mode) {
         case 0:

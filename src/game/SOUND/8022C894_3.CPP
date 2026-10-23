@@ -59,7 +59,7 @@ void func_8022D290_de(Actor_func_8022D290_de *arg0) {
 void func_8022D308_de(Actor_func_8022D290_de *arg0) {
     f32 wait;
     f32 D_800C7EA0_1;
-    RenderCounters *mode;
+    CGameStatus *mode;
 
     arg0->flags &= 0xFF7FFFFF;
     arg0->unk_0x001C = 0;

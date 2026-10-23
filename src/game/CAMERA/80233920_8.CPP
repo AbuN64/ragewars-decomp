@@ -55,7 +55,7 @@ void func_80236874_de(RaceViewportState *state) {
     u32 mode;
     ViewFlags *flags;
     Shared_Game *settings;
-    RenderCounters *layout;
+    CGameStatus *layout;
     GameplayCamera *view;
     Box *clip, *bounds;
     ViewFlags initialFlags;

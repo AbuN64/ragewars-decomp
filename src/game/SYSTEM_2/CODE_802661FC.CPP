@@ -231,10 +231,10 @@ extern f32 func_802B72B0_de(f32);
 #ifndef NON_MATCHING
 extern void func_80271F9C_de(void *, void *, f32);
 #endif
-extern void func_80216488_de(Shared_DamageEvent *, void *, s32, f32, s32, Shield *);
+extern void func_80216488_de(CDamageInfo *, void *, s32, f32, s32, Shield *);
 extern s32 func_8022AC00_de(void *);
 struct CallbackState114;
-extern void func_802171FC_de(void *, struct CallbackState114 *, Shared_DamageEvent *);
+extern void func_802171FC_de(void *, struct CallbackState114 *, CDamageInfo *);
 extern s32 func_80282C8C_de(Shared_ReactionObjectKind *);
 extern s32 func_80282D38_de(Shared_ReactionObjectKind *);
 extern s32 func_80282DEC_de(Shared_ReactionObjectKind *);
@@ -248,18 +248,18 @@ static inline void storePlayerHealth(Shared_ReactionPlayer *player, s32 value) {
     player->unk174 = player->unk5E4;
     storeActorHealth(&player->actor2E8, player->unk5E4);
 }
-static inline void buildDamage(Shared_DamageEvent *event, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
+static inline void buildDamage(CDamageInfo *event, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
     func_80216488_de(event, target, (s32)damage, radius, flags, *shield);
 }
 static inline void reflectedProjectile(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
-    Shared_DamageEvent event;
-    Shared_DamageEvent *p = &event;
+    CDamageInfo event;
+    CDamageInfo *p = &event;
     buildDamage(p, target, damage * 2.0f, radius, flags, shield);
     if (damage * D_800C43E0_de[9] > 0.0f) func_802171FC_de(player, &player->unk170, p);
 }
 static inline void reflectedActor(Shared_ReactionPlayer *player, Shared_ReactionActor *target, f32 damage, f32 radius, s32 flags, Shield **shield) {
-    Shared_DamageEvent event;
-    Shared_DamageEvent *p = &event;
+    CDamageInfo event;
+    CDamageInfo *p = &event;
     f32 value = damage * D_800C43E0_de[13];
     buildDamage(p, target, value, radius, flags, shield);
     if (value > 0.0f) func_802171FC_de(player, &player->unk170, p);
@@ -393,8 +393,8 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
     u8 category;
     Shield *shield;
     Shared_ReactionObjectKind *projectile;
-    Shared_DamageEvent hit;
-    Shared_DamageEvent *event;
+    CDamageInfo hit;
+    CDamageInfo *event;
     f32 radius;
     s32 maximum3;
     Shared_ReactionPlayer *attacker;

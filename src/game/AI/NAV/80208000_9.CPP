@@ -24,7 +24,7 @@ void func_8020D070_de(void *arg0, s32 arg1, s32 arg2) {
 
 /** Find a keyed node in the object's list and pass it to func_8020C5A0_de. */
 void func_8020D0CC_de(void *arg0, s32 key) {
-    NavigationSearchNode *node = ((NavigationGraph *)arg0)->nodes;
+    NavigationSearchNode *node = ((CNavData *)arg0)->nodes;
 
     if (node == 0) {
         goto not_found;
@@ -53,8 +53,8 @@ void func_8020D114_de(char *owner, s32 *output, s32 count) {
         output[i] = -1;
     }
 
-    node = ((NavigationGraph *)owner)->nodes;
-    value = ((NavigationGraph *)owner)->result;
+    node = ((CNavData *)owner)->nodes;
+    value = ((CNavData *)owner)->result;
     done = 0;
     if (node == 0) {
         goto not_found;
@@ -94,10 +94,10 @@ s32 func_8020D1CC_de(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void func_8020D1FC_de(s32 arg0) {
-    NavigationGraph *graph = (NavigationGraph *)arg0;
+    CNavData *graph = (CNavData *)arg0;
     s32 i;
     s32 value = -1;
     for (i = 63; i >= 0; i--) {
-        graph->goals[i] = value;
+        graph->m_nGoalList[i] = value;
     }
 }

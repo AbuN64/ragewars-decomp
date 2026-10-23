@@ -91,7 +91,7 @@ s32 func_8020FA10_de(void *arg0) {
     temp_s3 = M2C_FIELD(temp_v0_2, s16 *, 0x5F6);
     temp_s4 = M2C_FIELD(temp_v0_2, s16 *, 0x5F8);
     temp_v0_3 = func_8022A83C_de(&D_80145040);
-    if ((temp_v0_3 != NULL) && (D_80145040.game.counters.option78 != 0)) {
+    if ((temp_v0_3 != NULL) && (D_80145040.game.counters.m_bCTFOn != 0)) {
         if (temp_v0_3 == M2C_FIELD(arg0, void **, 0)) {
             var_a1 = 0xA;
             goto block_48;

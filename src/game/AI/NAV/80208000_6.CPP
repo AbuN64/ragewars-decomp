@@ -132,7 +132,7 @@ extern PlatformRoute *func_8028D218_de(void *, s32);
 extern CVector3 *func_8028D244_de(void *, s32, s32);
 extern f32 func_802726F8_de(void *, void *);
 
-void func_8020ABF0_de(NavigationGraph *graph) {
+void func_8020ABF0_de(CNavData *graph) {
     NavigationPlatform *platforms[30];
     CVector3 chosenPosition, start, end;
     NavigationSearchNode *node;
@@ -246,7 +246,7 @@ void func_80271F68_de(CVector3 *, void *, CVector3 *);
 
 /* Collisions the actor would meet moving to a point (61.44 above it), without committing the move: the actor's 0x50-byte header is saved and
  * restored around the trial move. */
-static __inline__ s32 navigationBlocked(Player *actor, NavigationGraph *graph, s32 index) {
+static __inline__ s32 navigationBlocked(Player *actor, CNavData *graph, s32 index) {
     CVector3 position;
     NavigationCollisionQuery query;
     u8 saved[0x50];
@@ -270,12 +270,12 @@ static __inline__ s32 navigationBlocked(Player *actor, NavigationGraph *graph, s
     return result;
 }
 /* Collects the points one portal away from a point, with the portal joining each; returns how many. */
-static __inline__ s32 navigationNeighbours(NavigationGraph *graph, s32 current, s32 *targets, s32 *portals) {
+static __inline__ s32 navigationNeighbours(CNavData *graph, s32 current, s32 *targets, s32 *portals) {
     NavigationPortal *portal;
     s32 count = 0;
     s32 i;
-    for (i = 0; i < graph->portalCount; i++) {
-        portal = navigationRecord(graph->portals, i);
+    for (i = 0; i < graph->m_nNavLinks; i++) {
+        portal = navigationRecord(graph->m_pusNavLinks, i);
         if (portal->first == current) {
             targets[count] = portal->second;
             portals[count] = i;
@@ -291,7 +291,7 @@ static __inline__ s32 navigationNeighbours(NavigationGraph *graph, s32 current, 
 }
 /* Picks the controller's next point: follows a queued point when the actor may take it, otherwise the nearest reachable neighbour
  * (special portals and drops first while within the starting height). */
-void func_8020AF9C_de(NavigationGraph *graph, Player *actor) {
+void func_8020AF9C_de(CNavData *graph, Player *actor) {
     s32 targets[64];
     s32 portalIds[64];
     CVector3 delta;
@@ -356,7 +356,7 @@ void func_8020AF9C_de(NavigationGraph *graph, Player *actor) {
     for (i = 0; i < count; i++) {
         target = targets[i];
         point = navigationRecord(graph->points, target);
-        portal = navigationRecord(graph->portals, portalIds[i]);
+        portal = navigationRecord(graph->m_pusNavLinks, portalIds[i]);
         if (!(navigation_attributes(point) & 0x300000) || swimming || climbing) {
             func_80271F68_de(&delta, &point->position, &actor->pos);
             if (climbing || swimming) {

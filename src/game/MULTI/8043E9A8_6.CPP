@@ -26,7 +26,7 @@ s32 func_8043EDDC_de(void) {
 extern f32 D_800D2988;
 
 s32 func_8043EE24_de(void) {
-    RenderCounters *state = &D_801462C8.counters;
+    CGameStatus *state = &D_801462C8.counters;
     f32 timer = state->countdown - D_800D2988;
 
     state->countdown = timer;

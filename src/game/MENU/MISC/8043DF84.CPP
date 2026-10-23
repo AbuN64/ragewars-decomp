@@ -144,7 +144,7 @@ void func_8043E124_de(void) {
 
 s32 func_8043E134_de(void) {
     f32 time;
-    RenderCounters *base;
+    CGameStatus *base;
 
     time = D_8015404C + D_800D2988;
     D_8015404C = time;
@@ -175,7 +175,7 @@ s32 func_8043E1B8_de(void) {
 
 /** True if any of three flags inside the D_801468A0 record are set. */
 s32 func_8043E1C0_de(void) {
-    RenderCounters *base = &D_801462C8.counters;
+    CGameStatus *base = &D_801462C8.counters;
     s32 result;
 
     result = 0;
@@ -199,7 +199,7 @@ s32 func_8043E1F8_de(s32 arg0, MenuRecAt20V2 *menu) {
 
 s32 func_8043E254_de(void) {
     s32 var_a0;
-    RenderCounters *state;
+    CGameStatus *state;
 
     state = &D_801462C8.counters;
     var_a0 = 0;

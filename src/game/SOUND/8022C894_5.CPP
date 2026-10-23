@@ -282,7 +282,7 @@ s32 func_8022E130_de(struct func_80204468_S3 *object) {
 #include "COMMON/SESSIONHANDLERROW.H"
 
 void func_8022E17C_de(TargetSelectionObj *a, TargetSelectionObj *b, s32 mode) {
-    RenderCounters *c = &D_801462C8.counters;
+    CGameStatus *c = &D_801462C8.counters;
     s32 teamA;
     s32 teamB;
     s32 *win;
@@ -303,7 +303,7 @@ void func_8022E17C_de(TargetSelectionObj *a, TargetSelectionObj *b, s32 mode) {
             loss = &losses[teamA];
             switch (mode) {
             case 0:
-                if (c->option78 == 0 && c->option54 == 0) {
+                if (c->m_bCTFOn == 0 && c->m_bFragTagOn == 0) {
                     *win -= 1;
                 }
                 break;

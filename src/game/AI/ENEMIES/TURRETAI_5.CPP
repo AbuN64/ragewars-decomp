@@ -113,7 +113,7 @@ void Turret_SpecialEffects(void *arg0, ObjRecAt8V1 *event) {
     }
 }
 
-void Turret_DecreaseHealth(void *arg0, Dest *arg1, Shared_DamageEvent *arg2) {
+void Turret_DecreaseHealth(void *arg0, Dest *arg1, CDamageInfo *arg2) {
     s32 var_v1;
 
     var_v1 = arg1->health - arg2->damage;

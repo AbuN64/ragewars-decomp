@@ -186,8 +186,8 @@ void *func_8022A634_de(struct Context *arg0, u32 arg1) {
 int func_8022A68C_de(char *arg0) {
     Shared_ActorView *p;
     int count;
-    RenderCounters *s;
-    RenderCounters *t;
+    CGameStatus *s;
+    CGameStatus *t;
 
     if (func_80245798_de() != 0 || func_80245784_de() != 0 || D_801371DC != 0) {
         return 0;
@@ -212,7 +212,7 @@ int func_8022A68C_de(char *arg0) {
 }
 
 void func_8022A748_de(void *arg0) {
-    RenderCounters *state;
+    CGameStatus *state;
     Round *round = arg0;
     Node_func_8022A748_de *node;
 

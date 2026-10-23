@@ -101,7 +101,7 @@ void func_80294614_de(GameSession *arg0) {
 
 /* Prepares a session for a new round: clears the round flag, resets the round state, records the round seed when func_80264B6C_de allows, resets the scoreboard and player slot, restarts the arena with the session's arena setting, resets the camera timers and reloads the session's sound bank and music. */
 void Render_StartRound(GameSession *session) {
-    RenderCounters *counters;
+    CGameStatus *counters;
     Shared_Game *game;
 
     D_800CD730 = 0;
@@ -111,7 +111,7 @@ void Render_StartRound(GameSession *session) {
     }
     counters = &D_801462C8.counters;
     counters->state = 0;
-    counters->setupState = 3;
+    counters->m_FragTagSelectionType = 3;
     game = &D_801462C8;
     game->local = 1;
     game->mode1E = 8;

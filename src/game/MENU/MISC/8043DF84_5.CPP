@@ -98,7 +98,7 @@ void func_8043E504_de(struct Shared_PakMenu *arg0) {
 }
 
 s32 func_8043E530_de(void) {
-    RenderCounters *state = &D_801462C8.counters;
+    CGameStatus *state = &D_801462C8.counters;
 
     return state->round != 0 || state->elapsed != 0 || state->state != 0;
 }

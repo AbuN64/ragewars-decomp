@@ -14,8 +14,8 @@ extern s32 func_8020BC50_de(void *arg0, s32 arg1, s32 arg2, void *arg3);
 /** Reset the float field of each occupied player slot's table entry to the default value. */
 
 
-extern char *func_8020CFE0_de(NavigationGraph *, int);
-extern NavigationGraph D_8013B364;
+extern char *func_8020CFE0_de(CNavData *, int);
+extern CNavData D_8013B364;
 
 extern void *func_8020C994_de(void *, s32);
 
@@ -38,7 +38,7 @@ s32 func_8020ED50_de(Func8020ED50Arg *arg0) {
 }
 
 void func_8020EDCC_de(char *arg0) {
-    NavigationGraph *table = &D_8013B364;
+    CNavData *table = &D_8013B364;
     int i;
     float value;
 
@@ -70,7 +70,7 @@ void func_8020EE50_de(void) {
 }
 
 void func_8020EEA4_de(void) {
-    NavigationGraph *base;
+    CNavData *base;
     NavigationSearchNode *node;
     NavigationPoint *result;
     f32 addVal;

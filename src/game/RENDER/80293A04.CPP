@@ -143,12 +143,12 @@ void func_80293C34_de(GameSession *arg0) {
             D_801462C8.counters.ticks = t1 - D_800C54AC_de;
             D_801462C8.counters.seconds = t2;
             if (D_800C54B4_de <= t2) {
-                t3 = D_801462C8.counters.minutes + D_800C54B0_de;
+                t3 = D_801462C8.counters.m_GameTimeMinutes + D_800C54B0_de;
                 D_801462C8.counters.seconds = t2 - D_800C54B4_de;
-                D_801462C8.counters.minutes = t3;
+                D_801462C8.counters.m_GameTimeMinutes = t3;
                 if (D_800C54B4_de <= t3) {
-                    D_801462C8.counters.minutes = t3 - D_800C54B4_de;
-                    D_801462C8.counters.hours = D_801462C8.counters.hours + D_800C54B0_de;
+                    D_801462C8.counters.m_GameTimeMinutes = t3 - D_800C54B4_de;
+                    D_801462C8.counters.m_GameTimeHours = D_801462C8.counters.m_GameTimeHours + D_800C54B0_de;
                 }
             }
         }
@@ -165,7 +165,7 @@ extern void func_80293394_de(GameSession *);
 extern void func_802AA7A4_de(void *);
 
 void func_80293CE4_de(GameSession *session) {
-    RenderCounters *counters = &D_801462C8.counters;
+    CGameStatus *counters = &D_801462C8.counters;
     f32 time;
     if (counters->transitionActive == 1) {
         time = session->transitionTime;

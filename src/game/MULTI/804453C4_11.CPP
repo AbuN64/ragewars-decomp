@@ -93,7 +93,7 @@ func_804440F0_de
 }
 
 s32 func_80445EF4_de(void) {
-    RenderCounters *s = &D_801462C8.counters;
+    CGameStatus *s = &D_801462C8.counters;
     s32 ret;
 
     ret = 0;

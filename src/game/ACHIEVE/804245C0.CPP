@@ -19,7 +19,7 @@ extern void func_80265688_de(u8 *, s32, s32);
 void func_804243E0_de(s32 player, s32 *awarded) {
     func_8041F2A0_Config *status;
     Shared_Game *globals;
-    RenderCounters *rules;
+    CGameStatus *rules;
 
     f32 elapsed;
 

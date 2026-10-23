@@ -12,7 +12,7 @@ extern s32 func_8024E924_de(void *arg0);
 s32 func_80216108_de(void *arg0)
 {
     char *actor = arg0;
-    RenderCounters *audio;
+    CGameStatus *audio;
     s32 type;
 
     type = func_8024E924_de(actor);

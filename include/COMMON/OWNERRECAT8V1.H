@@ -123,7 +123,7 @@ struct sm_dlmultiuser_t;
 struct sm_dlmultiuser_t {
     s32 words_00[17];
     void *root;
-    s32 words_48;
+    s32 NUsers;
     Node_func_8041B6E8_de *shown[4];
     s32 locked[4];
     s32 shared;

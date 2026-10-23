@@ -41,9 +41,9 @@ func_802A2224_de
 
 void func_804389F0_de(void) {
     s32 next;
-    RenderCounters *layout = &D_801462C8.counters;
-    layout->option78 = 0;
-    layout->option54 = 0;
+    CGameStatus *layout = &D_801462C8.counters;
+    layout->m_bCTFOn = 0;
+    layout->m_bFragTagOn = 0;
     if (layout->humanWon == 1 && D_8015402C >= 35) {
         switch (D_801462C8.controllerMode) {
         case 4:

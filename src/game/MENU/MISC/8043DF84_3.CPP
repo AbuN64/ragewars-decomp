@@ -33,16 +33,16 @@ extern f32 D_800DE320, D_800DE324_de;
 
 void func_8043DF34_de(f32 duration, s32 mode, s32 option, s32 teams, s32 last) {
     s32 i;
-    RenderCounters *state = &D_801462C8.counters;
-    RenderCounters *result;
-    state->option54 = option;
+    CGameStatus *state = &D_801462C8.counters;
+    CGameStatus *result;
+    state->m_bFragTagOn = option;
     state->teams = teams;
-    state->counter80 = 0;
+    state->m_CTFPlayerWithFlag = 0;
     state->timeLimit = duration * D_800DE320;
     state->mask = 0xA00;
     state->mode = mode;
     state->elapsed = 0;
-    state->option78 = last;
+    state->m_bCTFOn = last;
     for (i = 0; i < 5; i++) {
         state->scores[i] = 0;
         state->counts[i] = 0;
