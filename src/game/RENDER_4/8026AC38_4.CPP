@@ -145,17 +145,19 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
 
 #ifdef NON_MATCHING
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
 extern f32 D_800C46A0_de, D_800C46A4_de;
 extern f32 D_800D15E4[4];
-extern char D_801468A0[], D_80146918[], D_801468F4[];
+extern CGameStatus D_801468A0;
+extern char D_80146918[], D_801468F4[];
 /* Draws a character model's parts with the shared material D_8013B2D8, choosing each part by the 0x38 bits of
  * its material byte 6: on the special state 0x12 the part must equal the bits for the variant at 0x81, otherwise
  * the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) was computed first. */
-/* 6/281 aligned edits; remaining: settings-base CSE and material-store scheduling. */
+/* 4/281 aligned edits; remaining: material-store scheduling. */
 void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
     void *header;
     void *base;
@@ -168,14 +170,16 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     s32 bonus, glow;
     s32 flags;
     MeshMaterial *shared;
+    CGameStatus *settings;
     bonus=0;glow=0;
     if (matrix == 0) {
         return;
     }
-    if (FIELD(s32, D_801468A0, 0x98) != 0) {
+    settings = &D_801468A0;
+    if (settings->enabled != 0) {
         AiProfile *state = owner->profile;
         if (state->character == 0xB && state->enabled != 0) {
-            hide = 0 < FIELD(s32, D_801468A0, 0xA0);
+            hide = 0 < settings->timer;
         }
     }
     if (owner->reactionFlags & 0x8000) {
