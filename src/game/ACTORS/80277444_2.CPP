@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "TYPES.H"
 #include "COMMON/WORLD.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/EFFECTRENDER.H"
@@ -290,53 +291,67 @@ typedef struct { s32 tag, count; ColorVertex vertices[1]; } ColorMesh;
 typedef struct { f32 x, y, z; } VertexColor;
 extern u32 D_80142218;
 
-void func_80278274_de(ColorMesh *mesh, VertexColor *colors) {
-    f32 blend, c;
+void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
+    f32 whiteBlend, channelIntensity;
     VertexColor color;
-    ColorVertex *v;
-    s32 count, i, n;
+    ColorVertex *vertex;
+    s32 count, i, channelValue;
     if (1.0f < (f32)D_80142218 * (1.0f / 255.0f)) {
-        blend = 1.0f;
+        whiteBlend = 1.0f;
     } else {
-        blend = (f32)D_80142218 * (1.0f / 255.0f);
+        whiteBlend = (f32)D_80142218 * (1.0f / 255.0f);
     }
-    v = mesh->vertices;
+    vertex = mesh->vertices;
     count = mesh->count;
-    if (*(u32 *)&D_801462C8 & 0x4000) {
-        for (i = 0; i < count; i++, v++) {
-            v->r = 0; v->g = 0; v->b = 0;
+    if (D_801462C8.flags & 0x4000) {
+        for (i = 0; i < count; i++, vertex++) {
+            vertex->r = 0;
+            vertex->g = 0;
+            vertex->b = 0;
         }
     } else {
-        for (i = 0; i < count; i++, v++) {
+        for (i = 0; i < count; i++, vertex++) {
             color = *colors++;
-            c = color.x;
-            if (!(c <= 255.0f)) c = 255.0f;
-            if (!(5.0f <= c)) c = 5.0f;
-            color.x = c * (1.0f - blend) + blend * 255.0f;
-            c = color.y;
-            if (!(c <= 255.0f)) c = 255.0f;
-            if (!(5.0f <= c)) c = 5.0f;
-            color.y = c * (1.0f - blend) + blend * 255.0f;
-            c = color.z;
-            if (!(c <= 255.0f)) c = 255.0f;
-            if (!(5.0f <= c)) c = 5.0f;
-            color.z = c * (1.0f - blend) + blend * 255.0f;
-            if (!(v->flags & 0x80)) {
-                n = (s32)color.x;
-                n = (n < 256) ? ((n < 0) ? 0 : n) : 255;
-                v->r = n;
-                n = (s32)color.y;
-                n = (n < 256) ? ((n < 0) ? 0 : n) : 255;
-                v->g = n;
-                n = (s32)color.z;
-                n = (n < 256) ? ((n < 0) ? 0 : n) : 255;
-                v->b = n;
+            channelIntensity = color.x;
+            if (!(channelIntensity <= 255.0f)) {
+                channelIntensity = 255.0f;
+            }
+            if (!(5.0f <= channelIntensity)) {
+                channelIntensity = 5.0f;
+            }
+            color.x = channelIntensity * (1.0f - whiteBlend) + whiteBlend * 255.0f;
+            channelIntensity = color.y;
+            if (!(channelIntensity <= 255.0f)) {
+                channelIntensity = 255.0f;
+            }
+            if (!(5.0f <= channelIntensity)) {
+                channelIntensity = 5.0f;
+            }
+            color.y = channelIntensity * (1.0f - whiteBlend) + whiteBlend * 255.0f;
+            channelIntensity = color.z;
+            if (!(channelIntensity <= 255.0f)) {
+                channelIntensity = 255.0f;
+            }
+            if (!(5.0f <= channelIntensity)) {
+                channelIntensity = 5.0f;
+            }
+            color.z = channelIntensity * (1.0f - whiteBlend) + whiteBlend * 255.0f;
+            if (!(vertex->flags & 0x80)) {
+                channelValue = (s32)color.x;
+                channelValue = (channelValue < 256) ? ((channelValue < 0) ? 0 : channelValue) : 255;
+                vertex->r = channelValue;
+                channelValue = (s32)color.y;
+                channelValue = (channelValue < 256) ? ((channelValue < 0) ? 0 : channelValue) : 255;
+                vertex->g = channelValue;
+                channelValue = (s32)color.z;
+                channelValue = (channelValue < 256) ? ((channelValue < 0) ? 0 : channelValue) : 255;
+                vertex->b = channelValue;
             }
         }
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80278274_de);
+INCLUDE_ASM("span_1000", Actors_ApplyVertexColors);
 #endif
 
 #ifdef NON_MATCHING
@@ -416,7 +431,7 @@ s32 Actors_BuildLitModel(s32 deref2, s32 arg1, void *bounds, void *matrices, s32
             func_80277A98_de((void *)data, (void *)matrices, (void *)D_80111D70, arg4);
         }
     }
-    func_80278274_de((void *)data, (void *)D_80111D70);
+    Actors_ApplyVertexColors((void *)data, (void *)D_80111D70);
     if (needsColors != 0) {
         for (trailerIndex = 0; trailerIndex < *(s32 *)(data + 4); trailerIndex++) {
             u8 *vertex = data + 8 + trailerIndex * 0x10;
