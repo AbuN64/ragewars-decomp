@@ -12342,7 +12342,6 @@ D_auto_src_rw_video_arguments_r1_m1_E35A0_us_rev1 = 0x800E29A0; // rom:0xE35A0
 D_blob_328907464fb4dfd82cf2 = 0x800E29B8; // rom:0xE35B8
 D_auto_src_rw_video_arguments_r1_m2_E35BC_us_rev1 = 0x800E29BC; // rom:0xE35BC
 D_auto_rodata_unresolved_800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548_unclaimed_E359C_unclaimed_E35B8_unclaimed_E35D4 = 0x800E29D4; // rom:0xE35D4
-D_blob_93abb19b3a58a8d2b351 = 0x800E2A4C; // rom:0xE364C
 D_blob_ff836bdcbb913926843d = 0x800E2A50; // rom:0xE3650
 D_blob_a9aacaf4b59c5f05e221 = 0x800E2A58; // rom:0xE3658
 D_blob_d7bc9d786b4ba3dca97b = 0x800E2A64; // rom:0xE3664
