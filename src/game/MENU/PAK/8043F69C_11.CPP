@@ -224,8 +224,10 @@ INCLUDE_ASM("ovl_80400000", func_80440838_de);
 extern u8 D_800E1F22[], D_800E1F26[], D_800E1F2A[], D_800E1F2F[], D_800E1F33[], D_800E1F37[];
 typedef void (*MenuEntryInit)(u8 *, u8 *);
 typedef void (*MenuEntryHook)(u8 *, u8 *, u8 *);
+/* 72/195 words (123 aligned edits); remaining: register allocation (the ROM keeps def in s0 and self in s2); extra lives in memory */
 void func_80440DA0_de(u8 *self, s32 arg1, u8 *def, s32 arg3, s32 arg4, u8 *arg5, s32 arg6, u8 *arg7) {
     u8 *extra;
+    u8 **pe = &extra;
     u8 *entry;
     u8 *src;
     s32 count;
@@ -243,7 +245,7 @@ void func_80440DA0_de(u8 *self, s32 arg1, u8 *def, s32 arg3, s32 arg4, u8 *arg5,
     MP_FIELD(self, u16, 4) = MP_FIELD(def, u16, 0x1C);
     count = MP_FIELD(def, s16, 4);
     MP_FIELD(self, s32, 0x10) = count;
-    extra = self + 0x1D8 + count * 0x28;
+    *pe = self + 0x1D8 + count * 0x28;
     for (i = 0; i < MP_FIELD(def, s16, 4); i++) {
         entry = MP_FIELD(self, u8 *, 0xC) + i * 0x28;
         src = MP_FIELD(def, u8 *, 0) + i * 0x24;
@@ -262,11 +264,11 @@ void func_80440DA0_de(u8 *self, s32 arg1, u8 *def, s32 arg3, s32 arg4, u8 *arg5,
         MP_FIELD(entry, s32, 0x14) = MP_FIELD(src, s32, 0x10);
         size = MP_FIELD(src, s16, 0) == 3 ? 0x480 : 0;
         if (size != 0) {
-            MP_FIELD(entry, u8 *, 0x20) = extra;
+            MP_FIELD(entry, u8 *, 0x20) = *pe;
             if (MP_FIELD(src, s16, 0) == 3) {
-                MP_FIELD(extra, s32, 0x478) = 1;
+                MP_FIELD(*pe, s32, 0x478) = 1;
             }
-            extra += size;
+            *pe += size;
         }
     }
     MP_FIELD(self, u8 *, 0x14) = def;
