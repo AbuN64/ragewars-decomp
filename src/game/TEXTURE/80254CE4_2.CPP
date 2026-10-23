@@ -30,7 +30,7 @@ extern s32 func_802BB160_de(OSMesgQueue *queue, void *message, s32 block);
 
 
 
-s32 func_80255170_de(ResourceLoadWorker *arg0, ResourceLoadRequest *arg1) {
+s32 func_80255170_de(ResourceLoadWorker *arg0, ResourceLoadRequest *message) {
     OSMesgQueue sp10;
     s32 sp28;
     void *sp2C;
@@ -38,10 +38,10 @@ s32 func_80255170_de(ResourceLoadWorker *arg0, ResourceLoadRequest *arg1) {
 
     osCreateMesgQueue(&sp10, &sp28, 1);
     temp = D_800CD8B8_de;
-    arg1->replyQueue = &sp10;
+    message->replyQueue = &sp10;
     D_800CD704 = 2;
     func_802BB5F0_de(arg0, temp);
-    func_802BB160_de(&arg0->requests, arg1, 1);
+    func_802BB160_de(&arg0->requests, message, 1);
     func_802BB2A0_de(&sp10, &sp2C, 1);
     return 1;
 }
@@ -57,13 +57,13 @@ extern s32 func_802BB5F0_de(void *, s32);
 
 
 
-s32 func_80255228_de(ResourceLoadWorker *arg0) {
-    if (arg0->requests.validCount != 0) {
+s32 func_80255228_de(ResourceLoadWorker *resourceLoadWorker) {
+    if (resourceLoadWorker->requests.validCount != 0) {
         do {
-            func_802BB5F0_de(arg0, D_800CD8B8_de);
-        } while (arg0->requests.validCount != 0);
+            func_802BB5F0_de(resourceLoadWorker, D_800CD8B8_de);
+        } while (resourceLoadWorker->requests.validCount != 0);
     }
-    return func_802BB5F0_de(arg0, D_800CD8AC_de);
+    return func_802BB5F0_de(resourceLoadWorker, D_800CD8AC_de);
 }
 
 #if defined(VERSION_US)

@@ -18,7 +18,7 @@ typedef struct {
 } Resource;
 
 /* Recolours the RGBA5551 frames of a resource by the global or per-resource colour mode, then rebuilds it as a three-part block holding the header, one selected entry of list 1 and one of list 2. */
-void func_80294C8C_de(s32 arg0, Resource *arg1) {
+void func_80294C8C_de(s32 arg0, Resource *handle) {
     u32 size;
     s32 rem1;
     s32 rem2;
@@ -41,10 +41,10 @@ void func_80294C8C_de(s32 arg0, Resource *arg1) {
     s32 *hdr;
     s32 *entry;
 
-    if (func_80285180_de(arg1, arg0 >= 0) == 0) {
+    if (func_80285180_de(handle, arg0 >= 0) == 0) {
         return;
     }
-    obj = *arg1->handle;
+    obj = *handle->handle;
     if (*obj == 0) {
         return;
     }
@@ -60,7 +60,7 @@ void func_80294C8C_de(s32 arg0, Resource *arg1) {
     if (D_800CD894_de != 0) {
         mode = 4;
     } else {
-        mode = arg1->flags >> 30;
+        mode = handle->flags >> 30;
     }
     if (mode != 0) {
         kind = *(u8 *)func_8028FDB4_de(obj, 0);
@@ -106,7 +106,7 @@ void func_80294C8C_de(s32 arg0, Resource *arg1) {
     total += (len1 + 7) & ~7;
     off2 = total;
     total += (len2 + 7) & ~7;
-    res = func_80254480_de(0, arg1, total);
+    res = func_80254480_de(0, handle, total);
     if (res != 0) {
         hdr = *res;
         hdr[0] = 3;
@@ -127,7 +127,7 @@ void func_80294C8C_de(s32 arg0, Resource *arg1) {
             entry[0] = 0;
         }
     }
-    func_80253D10_de(0, arg1, res);
+    func_80253D10_de(0, handle, res);
 }
 
 #if !(defined(VERSION_US_REV1))

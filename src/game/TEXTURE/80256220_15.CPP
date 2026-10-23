@@ -37,7 +37,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
     void *temp_s0;
     void *var_a0;
     s32 temp_v1;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_v0;
     s32 found;
     s32 i;
@@ -48,15 +48,15 @@ s32 func_80257A14_de(void *arg0, s32 id) {
         return found;
     }
     temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
-    temp_a0 = func_802BCF30_de();
+    mask = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         func_802BB2A0_de(temp_s0, 0, 1);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     } else {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         var_a0 = &((ContextRecAt2BC0 *)(arg0))->view[0];
     }
     func_802598B4_de(var_a0, id);
@@ -212,12 +212,12 @@ s32 Texture_PlaySoundAtPosition(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 ar
     s32 temp_v0_2;
     s32 temp_v1;
     s32 temp_v1_2;
-    s32 var_a0;
-    s32 var_a1;
+    s32 i;
+    s32 j;
     s32 var_a1_2;
     s32 var_a1_3;
     s32 var_a3;
-    s32 var_a3_2;
+    s32 k;
     s32 var_a3_3;
     s32 var_s0;
     s32 var_s0_2;
@@ -225,16 +225,16 @@ s32 Texture_PlaySoundAtPosition(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 ar
     s32 var_s0_4;
     s32 var_s1;
     s32 var_s2;
-    s32 var_v0;
+    s32 result;
     s32 var_v0_2;
     s32 var_v0_3;
     s32 var_v1;
     s8 *temp_v0_3;
     u16 temp_s1;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_s5;
     u32 temp_v0_4;
-    u32 var_s0_5;
+    u32 l;
     void *var_v1_2;
 
     xbits.word = arg2; ybits.word = arg3; zbits.word = arg4;
@@ -243,19 +243,19 @@ s32 Texture_PlaySoundAtPosition(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 ar
     if (((s16 *) arg0)[258 / sizeof(s16)] != -1) {
         var_v1 = 1;
     } else {
-        var_a1 = 0;
+        j = 0;
         if (arg1 < 0x100) {
-            var_a0 = 0;
+            i = 0;
             var_v1_2 = arg0;
             do {
                 if (((s32 *) var_v1_2)[7780 / sizeof(s32)] == arg1) {
-                    var_a1 += 1;
+                    j += 1;
                 }
-                var_a0 += 1;
+                i += 1;
                 var_v1_2 += 0xCC;
-            } while (var_a0 < 0x11);
+            } while (i < 0x11);
             var_v1 = 1;
-            if (var_a1 < 6) {
+            if (j < 6) {
                 goto block_8;
             }
         } else {
@@ -263,7 +263,7 @@ block_8:
             var_v1 = 0;
         }
     }
-    var_v0 = -1;
+    result = -1;
     if (var_v1 == 0) {
         if (arg1 < 0x100) {
             temp_s1 = ((u16 *) arg0)[306 / sizeof(u16)];
@@ -282,17 +282,17 @@ block_8:
                         } while (sp24 >= var_a1_2);
                     }
                     temp_a2 = func_802744D4_de() % var_s0;
-                    var_a3_2 = sp20;
+                    k = sp20;
                     var_s0_2 = 0;
-                    if (var_a3_2 < sp24) {
-                        var_a0_3 = (var_a3_2 * 4) + ((s32 *) arg0)[11100 / sizeof(s32)];
+                    if (k < sp24) {
+                        var_a0_3 = (k * 4) + ((s32 *) arg0)[11100 / sizeof(s32)];
 loop_19:
                         var_s0_2 += *var_a0_3 * 0xA;
                         var_v0_2 = temp_s1 << 0x10;
                         if (var_s0_2 < temp_a2) {
-                            var_a3_2 += 1;
+                            k += 1;
                             var_a0_3 += 4;
-                            if (var_a3_2 >= sp24) {
+                            if (k >= sp24) {
                                 goto block_21;
                             }
                             goto loop_19;
@@ -301,12 +301,12 @@ loop_19:
 block_21:
                         var_v0_2 = temp_s1 << 0x10;
                     }
-                    var_s1 = var_a3_2;
-                    if ((var_v0_2 != 0) && (var_a3_2 == ((s32 *) arg0)[304 / sizeof(s32)])) {
-                        if (var_a3_2 != sp24) {
-                            var_a3 = var_a3_2 + 1;
+                    var_s1 = k;
+                    if ((var_v0_2 != 0) && (k == ((s32 *) arg0)[304 / sizeof(s32)])) {
+                        if (k != sp24) {
+                            var_a3 = k + 1;
                         } else {
-                            var_a3 = var_a3_2 - 1;
+                            var_a3 = k - 1;
                         }
                         goto block_28;
                     }
@@ -363,7 +363,7 @@ block_41:
                 var_s1 = -1;
             }
         }
-        var_v0 = -1;
+        result = -1;
         if (var_s1 != -1) {
             ((s8 **) arg0)[11144 / sizeof(s8 *)] = func_8028FDB4_de(func_8028FDB4_de(((s32 **) arg0)[11084 / sizeof(s32 *)], (s32) (s16) var_s1), 0);
             ((s16 *) arg0)[11148 / sizeof(s16)] = (s16) arg1;
@@ -373,14 +373,14 @@ block_41:
             var_s2 = -1;
             if (temp_s5 != 0) {
                 lock = &((ContextRecAt2BC0 *)arg0)->lock;
-                temp_a0 = func_802BCF30_de();
+                mask = func_802BCF30_de();
                 temp_v1 = lock->locked + 1;
                 lock->locked = temp_v1;
                 if (temp_v1 != 1) {
-                    __osRestoreInt(temp_a0);
+                    __osRestoreInt(mask);
                     func_802BB2A0_de((OSMesgQueue *)lock, NULL, 1);
                 } else {
-                    __osRestoreInt(temp_a0);
+                    __osRestoreInt(mask);
                 }
                 unlock = &((ContextRecAt2BC0 *)arg0)->lock;
                 var_s2 = ((s32 *) arg0)[268 / sizeof(s32)] + 1;
@@ -400,23 +400,23 @@ block_41:
                     ((s32 *) arg0)[304 / sizeof(s32)] = var_s1;
                     goto block_55;
                 }
-                var_s0_5 = 0;
+                l = 0;
             } else {
 block_55:
-                var_s0_5 = 0;
+                l = 0;
             }
             if (temp_s5 != 0) {
                 do {
-                    temp_lo = var_s0_5 * ((s32 *) temp_v0_3)[0 / sizeof(s32)];
-                    var_s0_5 += 1;
+                    temp_lo = l * ((s32 *) temp_v0_3)[0 / sizeof(s32)];
+                    l += 1;
                     func_80257BB4_de(arg0, (void *)(temp_v0_3 + temp_lo + 8), &position, var_s1, var_s2, 0, arg5);
-                } while (var_s0_5 < temp_s5);
+                } while (l < temp_s5);
             }
             ((s32 *) arg0)[11152 / sizeof(s32)] = -1;
-            var_v0 = var_s2;
+            result = var_s2;
         }
     }
-    return var_v0;
+    return result;
 }
 #else
 INCLUDE_ASM("span_1000", Texture_PlaySoundAtPosition);

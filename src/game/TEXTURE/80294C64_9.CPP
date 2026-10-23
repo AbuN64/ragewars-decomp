@@ -12,11 +12,11 @@ extern ResidentSlot D_8014AEC8;
 extern ResidentEntry D_8014AECC;
 extern s32 D_8014AED8;
 
-void func_802956AC_us_rev1(s32 arg0, s32 **arg1) {
+void func_802956AC_us_rev1(s32 resource, s32 **palette) {
     s32 var_v1;
     s32 var_v1_2;
 
-    if ((D_800D2AE0 != 0) && (*arg1 != 0)) {
+    if ((D_800D2AE0 != 0) && (*palette != 0)) {
         if (D_8014AEC8.unk0 != 0) {
             return;
         }
@@ -29,12 +29,12 @@ void func_802956AC_us_rev1(s32 arg0, s32 **arg1) {
         } else {
             var_v1_2 = 1;
         }
-        if (arg0 == D_8014AECC.unk0) {
+        if (resource == D_8014AECC.unk0) {
             if (var_v1_2 != 0) {
-                *arg1 = &D_8014AECC.unk2010;
+                *palette = &D_8014AECC.unk2010;
                 return;
             }
-            *arg1 = (s32 *)D_8014AED8;
+            *palette = (s32 *)D_8014AED8;
         }
     }
 }

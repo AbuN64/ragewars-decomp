@@ -15,19 +15,19 @@ extern u32 func_802BCF30_de(void);
 
 
 
-void *func_8025661C_de(CartridgeReadWorker *arg0) {
-    u32 temp_s2;
-    void *temp_s0;
+void *func_8025661C_de(CartridgeReadWorker *cartridgeReadWorker) {
+    u32 mask;
+    void *head;
 
-    temp_s2 = func_802BCF30_de();
-    temp_s0 = arg0->available.head;
-    if (temp_s0 != 0) {
-        func_80255ED8_de(&arg0->available, temp_s0);
-        ((CartridgeReadRequest *)temp_s0)->active = 1;
-        func_80255CB8_de(&arg0->pending, temp_s0);
+    mask = func_802BCF30_de();
+    head = cartridgeReadWorker->available.head;
+    if (head != 0) {
+        func_80255ED8_de(&cartridgeReadWorker->available, head);
+        ((CartridgeReadRequest *)head)->active = 1;
+        func_80255CB8_de(&cartridgeReadWorker->pending, head);
     }
-    __osRestoreInt(temp_s2);
-    return temp_s0;
+    __osRestoreInt(mask);
+    return head;
 }
 
 extern u32 func_802BCF30_de(void);
@@ -37,14 +37,14 @@ extern u32 func_802BCF30_de(void);
 
 
 
-void func_80256688_de(s32 arg0, CartridgeReadRequest *arg1) {
-    u32 temp_s2;
+void func_80256688_de(s32 worker, CartridgeReadRequest *request) {
+    u32 mask;
 
-    temp_s2 = func_802BCF30_de();
-    func_80255ED8_de(&((CartridgeReadWorker *)arg0)->pending, arg1);
-    arg1->active = 0;
-    func_80255CB8_de(&((CartridgeReadWorker *)arg0)->available, arg1);
-    __osRestoreInt(temp_s2);
+    mask = func_802BCF30_de();
+    func_80255ED8_de(&((CartridgeReadWorker *)worker)->pending, request);
+    request->active = 0;
+    func_80255CB8_de(&((CartridgeReadWorker *)worker)->available, request);
+    __osRestoreInt(mask);
 }
 
 #if defined(VERSION_US)

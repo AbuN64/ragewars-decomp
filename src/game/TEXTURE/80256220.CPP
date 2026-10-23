@@ -26,7 +26,7 @@ typedef struct Queue Queue;
 extern s32 func_802BB160_de(void *, void *, s32);
 
 
-void func_80256280_de(s32 arg0, s32 arg1) {
+void func_80256280_de(s32 arg0, s32 count) {
     s32 s0;
     s32 s1;
 
@@ -44,12 +44,12 @@ void func_80256280_de(s32 arg0, s32 arg1) {
         s1 += 1;
         s0 += 0x20;
     } while (s1 < 0x210);
-    func_802A001C_de(arg0 + 0xA68, arg1, 0x400);
-    func_802BAC90_de(arg0, arg1, &D_0025657C, arg0, arg0 + 0xE68, D_800CD8C4_de);
+    func_802A001C_de(arg0 + 0xA68, count, 0x400);
+    func_802BAC90_de(arg0, count, &D_0025657C, arg0, arg0 + 0xE68, D_800CD8C4_de);
     func_802BB750_de(arg0);
 }
 
-void func_8025637C_de(struct CartridgeReadWorker *arg0, u32 arg1, s32 arg2, void *arg3) {
+void func_8025637C_de(struct CartridgeReadWorker *cartridgeReadWorker, u32 arg1, s32 arg2, void *extra) {
     char queue[0x18];
     s32 queue_init;
     s32 completed;
@@ -60,19 +60,19 @@ void func_8025637C_de(struct CartridgeReadWorker *arg0, u32 arg1, s32 arg2, void
     osCreateMesgQueue(queue, (s32) &queue_init, 1);
     remaining = arg2;
     do {
-        chunk = func_8025661C_de(arg0);
+        chunk = func_8025661C_de(cartridgeReadWorker);
         length = 0x2000;
         if (chunk == 0) {
             break;
         }
         chunk->source = arg1 + (arg2 - remaining);
-        chunk->destination = (char *) arg3 + (arg2 - remaining);
+        chunk->destination = (char *) extra + (arg2 - remaining);
         if ((u32) remaining < 0x2001U) {
             length = remaining;
         }
         chunk->length = length;
         chunk->queue = queue;
-        func_802BB160_de(&arg0->requestQueueStorage, chunk, 1);
+        func_802BB160_de(&cartridgeReadWorker->requestQueueStorage, chunk, 1);
         func_802BB2A0_de(queue, &completed, 1);
         remaining -= length;
     } while (remaining != 0);

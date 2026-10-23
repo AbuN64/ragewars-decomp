@@ -113,17 +113,17 @@ s32 func_802585F4_de(struct ContextRecAt2BC0 *arg0, s32 arg1) {
     {
         MenuRules *temp_s0;
         s32 temp_v1;
-        u32 temp_a0;
+        u32 mask;
 
         temp_s0 = &arg0->lock;
-        temp_a0 = func_802BCF30_de();
+        mask = func_802BCF30_de();
         temp_v1 = temp_s0->locked + 1;
         temp_s0->locked = temp_v1;
         if (temp_v1 != 1) {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(mask);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(mask);
         }
     }
     if (func_8025C17C_de(&arg0->menu[0], arg1) != 0) {
@@ -186,21 +186,21 @@ extern u32 func_802BCF30_de(void);
 
 
 
-void func_80258740_de(s32 *arg0) {
-    MenuRules *temp_s0;
+void func_80258740_de(s32 *engine) {
+    MenuRules *menuRules;
     s32 temp_v1;
-    u32 temp_a0;
+    u32 mask;
 
-    temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
-    temp_a0 = func_802BCF30_de();
-    temp_v1 = temp_s0->locked + 1;
-    temp_s0->locked = temp_v1;
+    menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
+    mask = func_802BCF30_de();
+    temp_v1 = menuRules->locked + 1;
+    menuRules->locked = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
-        func_802BB2A0_de(temp_s0, 0, 1);
+        __osRestoreInt(mask);
+        func_802BB2A0_de(menuRules, 0, 1);
         return;
     }
-    __osRestoreInt(temp_a0);
+    __osRestoreInt(mask);
 }
 
 extern u32 func_802BCF30_de(void);
@@ -210,19 +210,19 @@ extern u32 func_802BCF30_de(void);
 
 
 
-void func_802587A4_de(s32 *arg0) {
-    MenuRules *temp_s0;
+void func_802587A4_de(s32 *engine) {
+    MenuRules *menuRules;
     s32 temp_v1;
-    u32 temp_v0;
+    u32 mask;
 
-    temp_s0 = &((struct ContextRecAt2BC0 *)(arg0))->lock;
-    temp_v0 = func_802BCF30_de();
-    temp_v1 = temp_s0->locked - 1;
-    temp_s0->locked = temp_v1;
+    menuRules = &((struct ContextRecAt2BC0 *)(engine))->lock;
+    mask = func_802BCF30_de();
+    temp_v1 = menuRules->locked - 1;
+    menuRules->locked = temp_v1;
     if (temp_v1 != 0) {
-        __osRestoreInt(temp_v0);
-        func_802BB420_de(temp_s0, 0, 1);
+        __osRestoreInt(mask);
+        func_802BB420_de(menuRules, 0, 1);
         return;
     }
-    __osRestoreInt(temp_v0);
+    __osRestoreInt(mask);
 }

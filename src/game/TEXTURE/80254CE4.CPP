@@ -90,13 +90,13 @@ void func_80254DD0_de(void *arg0, void *arg1) {
 
 void *func_80254E30_de(void) {
     IntrusiveList *p = &D_801010F8;
-    void *temp_s0 = p->head;
-    if (temp_s0 != 0) {
-        func_80255ED8_de(p, temp_s0);
-        ((ResourceLoadRequest *)temp_s0)->flags = 1;
-        func_80255CB8_de(((char *)p + sizeof(IntrusiveList)), temp_s0);
+    void *head = p->head;
+    if (head != 0) {
+        func_80255ED8_de(p, head);
+        ((ResourceLoadRequest *)head)->flags = 1;
+        func_80255CB8_de(((char *)p + sizeof(IntrusiveList)), head);
     }
-    return temp_s0;
+    return head;
 }
 
 void func_80254E88_de(s32 arg0, void *arg1) {
@@ -115,7 +115,7 @@ void *func_80254ED0_de(s32 unused,s32 flags) {
  return node;
 }
 
-void func_80254F9C_de(s32 unused, s32 arg1) {
+void func_80254F9C_de(s32 unused, s32 request) {
     s32 mask;
     u32 count;
     s32 new_var;
@@ -123,12 +123,12 @@ void func_80254F9C_de(s32 unused, s32 arg1) {
     s32 offset;
     u32 limit;
 
-    if (D_801005A0[arg1] != 0) {
-        D_801005A0[arg1] = 0;
+    if (D_801005A0[request] != 0) {
+        D_801005A0[request] = 0;
         func_802BB420_de(&D_80101160, 0, 1);
     }
     mask = -0x201;
-    if (arg1 != 0) {
+    if (request != 0) {
         mask = -0x401;
     }
     do { count = 0; limit = D_800CB6E0; } while (0);
@@ -142,7 +142,7 @@ void func_80254F9C_de(s32 unused, s32 arg1) {
             offset += 0x28;
         } while (count < new_var2);
     }
-    do { D_80101134[arg1] = 0; } while (0);
+    do { D_80101134[request] = 0; } while (0);
 }
 
 EntryRecAt18V3 *func_80255048_de(s32 unused, EntryList *list, EntryRecAt18V3 **recent)

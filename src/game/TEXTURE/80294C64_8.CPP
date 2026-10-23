@@ -14,11 +14,11 @@ extern s32 *D_8014AED4;
 
 
 
-void func_802955EC_us_rev1(s32 arg0, s32 **arg1) {
+void func_802955EC_us_rev1(s32 resource, s32 **texture) {
     s32 enabled;
     s32 choose;
 
-    if ((D_800D2AE0 != 0) && (*arg1 != 0) && (*(s32 *)&D_8014AEC8[0] == 0)) {
+    if ((D_800D2AE0 != 0) && (*texture != 0) && (*(s32 *)&D_8014AEC8[0] == 0)) {
         enabled = 0;
         if (D_8014AEB0 != 0) {
             enabled = (u32)D_800D2AE0 > 0U;
@@ -28,12 +28,12 @@ void func_802955EC_us_rev1(s32 arg0, s32 **arg1) {
         } else {
             choose = 1;
         }
-        if (arg0 == D_8014AECC.value) {
+        if (resource == D_8014AECC.value) {
             if (choose != 0) {
-                *arg1 = &D_8014AECC.alternative;
+                *texture = &D_8014AECC.alternative;
                 return;
             }
-            *arg1 = D_8014AED4;
+            *texture = D_8014AED4;
         }
     }
 }
