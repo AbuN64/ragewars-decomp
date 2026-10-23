@@ -126,36 +126,65 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
     angles->heading = func_802AD270_de(result);
 }
 
-#ifdef NON_MATCHING
 /* Starts or retunes a voice's pan: seeds the gain from the sound table (the id compared with each entry of the
  * 0x1F pairs at D_800CB7F0 gives its scale), halves it when the shared flag says so, takes the pan angles from the
  * preset or the controller yaw, measures how loudly the listener hears it (squared distance falloff raised to the
  * power the voice kind asks for) and writes the left and right levels, interpolating the pan over the given
  * steps when the controller asks for a ramp. */
-extern float D_800CB7F0[];
+typedef struct SoundEnvelopeControl {
+    u16 flags, initial, target;
+    s16 frames;
+    s16 delay;
+    u16 reservedA;
+} SoundEnvelopeControl;
+
+typedef struct SoundMixParameters {
+    s32 frame, reserved4;
+    s32 left, right;
+    u8 reserved10[0xC];
+    f32 attenuation, baseAttenuation, field24;
+    s16 priority, channel;
+    u8 reserved2C[8];
+    CVector3 position;
+    void *tracked;
+    s8 curve;
+    u8 reserved45[0x1F];
+} SoundMixParameters;
+
+typedef struct VoiceScaleEntry { f32 soundId, scale; } VoiceScaleEntry;
+extern VoiceScaleEntry D_800CB7F0[];
 extern float D_800C3F34_de;
 extern SoundEnvelope *func_80258BC4_de(ContextRecAt2BC0 *context, int index);
+static inline s32 lookupPanValue(s32 panAngle) {
+    if ((f32)panAngle < 0.0f) return D_80107FA0[-panAngle];
+    return D_80107FA0[panAngle];
+}
+
 void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
-    u8 *colour;
+    SoundMixParameters *mix;
+    SoundEnvelopeControl *envelope;
+    u8 *gainRange;
     s32 i;
-    f32 from;
-    f32 to;
-    f32 reach;
-    f32 level;
+    f32 minimumGain;
+    f32 maximumGain;
+    f32 gain;
+    f32 attenuation;
+    CVector3 *sourcePosition;
+    CVector3 *listenerPosition;
     f32 dx, dy, dz;
-    f32 distance;
-    f32 span;
-    s32 angle;
-    s32 index;
-    s32 stepped;
+    f32 distanceSquared;
+    f32 panDelta;
+    s32 panAngle;
+    s32 scaledPan;
     SoundEnvelope *preset;
 
-    colour = voice->context->field2B88;
+    mix = (SoundMixParameters *)voice->reserved10;
+    gainRange = voice->context->field2B88;
     voice->volumeScale = D_800C3F20_de;
     if (voice->soundId < 0x100) {
         for (i = 0; i < 0x1F; i++) {
-            if (voice->soundId == (s32)D_800CB7F0[i * 2]) {
-                voice->volumeScale = D_800CB7F0[i * 2 + 1];
+            if (voice->soundId == (s32)D_800CB7F0[i].soundId) {
+                voice->volumeScale = D_800CB7F0[i].scale;
                 break;
             }
         }
@@ -163,80 +192,66 @@ void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32
     if (func_80245798_de()) {
         voice->volumeScale = voice->volumeScale * D_800C3F24_de;
     }
+    envelope = (SoundEnvelopeControl *)voice->envelope;
     if (control->field8 != -1) {
         preset = func_80258BC4_de(voice->context, control->field8);
-        voice->envelope[0] = preset->flags;
-        voice->envelope[1] = preset->initial;
-        voice->envelope[2] = preset->target;
-        voice->envelopeFrames = preset->frames;
-        voice->envelopeExtra = preset->reserved8;
+        *(SoundEnvelope *)voice->envelope = *preset;
     } else {
-        voice->envelope[0] = func_802AD270_de((f32)control->fieldF);
+        envelope->flags = func_802AD270_de((f32)control->fieldF);
     }
-    if ((control->flags & 0x800) || voice->fieldC0 == 1 || voice->context->field2B98 == 0) {
-        reach = D_800C3F34_de;
-        voice->field2C = reach;
-        voice->field30 = reach;
-    } else {
-        from = (f32)colour[0] * D_800C3F28_de;
-        to = (f32)colour[1] * D_800C3F28_de;
-        reach = D_800C3F2C_de;
-        if (from != reach) {
-            reach = from;
-            if (to != from) {
-                reach = from + func_80274564_de(to - from);
-            }
-        }
-        dx = voice->position.x - voice->context->field2B98->position.x;
-        dy = voice->position.y - voice->context->field2B98->position.y;
-        dz = voice->position.z - voice->context->field2B98->position.z;
-        distance = dx * dx + dy * dy + dz * dz;
-        level = 0.0f;
-        if (!(D_800D0D10 <= distance)) {
-            level = D_800C3F30_de - distance / D_800D0D10;
-        }
-        switch (voice->distanceMode) {
-        case 0:
-            level = level * level;
-            level = level * level;
-        case 1:
-            level = level * level;
-            voice->field2C = level;
-            break;
+    if (!(control->flags & 0x800) && voice->fieldC0 != 1 && voice->context->field2B98 != 0) {
+        minimumGain = (f32)gainRange[0] * D_800C3F28_de;
+        maximumGain = (f32)gainRange[1] * D_800C3F28_de;
+        if (minimumGain == D_800C3F2C_de) gain = D_800C3F2C_de;
+        else if (maximumGain == minimumGain) gain = minimumGain;
+        else gain = minimumGain + func_80274564_de(maximumGain - minimumGain);
+        sourcePosition = &mix->position;
+        listenerPosition = &voice->context->field2B98->position;
+        dx = sourcePosition->x - listenerPosition->x;
+        dy = sourcePosition->y - listenerPosition->y;
+        dz = sourcePosition->z - listenerPosition->z;
+        distanceSquared = dx * dx + dy * dy + dz * dz;
+        attenuation = D_800D0D10 <= distanceSquared ? 0.0f : D_800C3F30_de - distanceSquared / D_800D0D10;
+        switch (mix->curve) {
         case 2:
-            voice->field2C = level;
+            mix->attenuation = attenuation;
+            break;
+        case 0:
+            attenuation = attenuation * attenuation;
+            attenuation = attenuation * attenuation;
+        case 1:
+            attenuation = attenuation * attenuation;
+            mix->attenuation = attenuation;
             break;
         default:
-            level = 0.0f;
-            voice->field2C = level;
+            attenuation = 0.0f;
+            mix->attenuation = attenuation;
             break;
         }
-        voice->field30 = level;
+        mix->baseAttenuation = attenuation;
+    } else {
+        gain = D_800C3F34_de;
+        mix->attenuation = gain;
+        mix->baseAttenuation = gain;
     }
     if (control->flags & 4) {
-        voice->left = (s32)func_802B2350(voice->envelope[0]);
-        span = func_802B2350(voice->envelope[1]);
-        span -= func_802B2350(voice->envelope[2]);
-        if (voice->envelopeFrames == 0) {
+        mix->left = (s32)func_802B2350(envelope->flags);
+        panDelta = func_802B2350(envelope->initial);
+        panDelta -= func_802B2350(envelope->target);
+        if (envelope->frames == 0) {
             voice->envelopeStep = 0.0f;
         } else {
-            voice->envelopeStep = span / voice->envelopeFrames;
+            voice->envelopeStep = panDelta / envelope->frames;
         }
-        voice->envelopeValue = func_802B2350(voice->envelope[1]);
-        angle = (s32)func_802B2350(voice->envelope[0]);
-        index = angle < 0 ? -angle : angle;
-        stepped = (s32)((f32)D_80107FA0[index] * voice->envelopeValue);
-        voice->left = (s32)((f32)stepped * reach);
-        index = angle < 0 ? -angle : angle;
-        voice->envelope[0] = func_802AD270_de((f32)D_80107FA0[index] * reach);
-        voice->right = (s32)func_802B2350(voice->envelope[0]);
+        voice->envelopeValue = func_802B2350(envelope->initial);
+        panAngle = (s32)func_802B2350(envelope->flags);
+        scaledPan = (s32)((f32)lookupPanValue(panAngle) * voice->envelopeValue);
+        mix->left = (s32)((f32)scaledPan * gain);
+        envelope->flags = func_802AD270_de((f32)lookupPanValue(panAngle) * gain);
+        mix->right = (s32)func_802B2350(envelope->flags);
     } else {
-        angle = (s32)func_802B2350(voice->envelope[0]);
-        index = angle < 0 ? -angle : angle;
-        voice->left = (s32)((f32)D_80107FA0[index] * reach);
-        voice->right = voice->left;
+        panAngle = (s32)func_802B2350(envelope->flags);
+        mix->left = (s32)((f32)lookupPanValue(panAngle) * gain);
+        mix->right = mix->left;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Audio_InitializeVoiceMix);
-#endif
