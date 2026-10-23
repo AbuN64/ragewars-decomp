@@ -2338,10 +2338,6 @@ struct func_8020478C_S1;
 typedef struct func_8020478C_S1 func_8020478C_S1;
 
 struct Access_s32_50;
-struct Access_s32_50 {
-    char pad[0x50];
-    s32 field;
-};
 
 union func_8026E158_S1_U8;
 union func_8026E158_S1_U8 {

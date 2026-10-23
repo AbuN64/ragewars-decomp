@@ -1,6 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "WORLD_2/8024E914.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "TYPES.H"

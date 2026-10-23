@@ -187,23 +187,6 @@ struct DescriptorRecAt24 {
 
 struct DescriptorRecAt24;
 struct Owner_func_80250274_de;
-struct Owner_func_80250274_de {
-    char pad0[8];
-    CVector3 position; /* 0x08 */
-    char pad14[4];
-    struct DescriptorRecAt24 *descriptor;
-    char pad1C[4];
-    s32 field20;
-    char pad24[4];
-    char transform[0xA8];
-    s32 flagsD0;
-    char padD4[4];
-    u16 flagsD8;
-    u8 colorFrame;
-    char padDB;
-    u32 timer;
-    s8 fade;
-};
 
 struct func_802500A4_S2;
 typedef struct func_802500A4_S2 func_802500A4_S2;
@@ -236,11 +219,6 @@ struct GlobalStateRecAt1C;
 typedef struct GlobalStateRecAt1C GlobalStateRecAt1C;
 
 struct GlobalStateRecAt1C;
-struct GlobalStateRecAt1C {
-    s32 field0;
-    u8 pad4[0x18];
-    s32 field1C;
-};
 
 struct func_8024F590_S1;
 struct func_8024F590_S1 {
@@ -256,38 +234,6 @@ struct func_8024F624_S1;
 typedef struct func_8024F624_S1 func_8024F624_S1;
 
 struct StaticObject;
-struct StaticObject {
-    u8 state;
-    s8 model;
-    char pad2;
-    s8 material;
-    u16 id;
-    char pad6[2];
-    CVector3 position;
-    void *room;
-    s32 *type;
-    char pad1C[0x34];
-    s32 animationKey;
-    s32 animation;
-    s32 resource;
-    s32 resourceSize;
-    s32 *renderResource;
-    char pad64[4];
-    char matrices[4][0x40];
-    char pad168[0xC];
-    f32 angle;
-    char pad178[4];
-    char effect[0x18];
-    f32 scale;
-    f32 height;
-    u16 flags;
-    char pad19E[2];
-    f32 scaleTime;
-    f32 frameDelta;
-    char lights[0x18];
-    s32 scene;
-    Gfx *cached;
-};
 
 struct Descriptor_func_802504B0_de;
 struct Descriptor_func_802504B0_de {
@@ -298,18 +244,6 @@ struct Descriptor_func_802504B0_de {
 };
 struct Descriptor_func_802504B0_de;
 struct ModelOwner;
-struct ModelOwner {
-    char pad0[0x18];
-    struct Descriptor_func_802504B0_de *descriptor;
-    char pad1C[4];
-    s32 field20;
-    char pad24[4];
-    char transform[0xA8];
-    s32 flagsD0;
-    char padD4[4];
-    u16 flagsD8;
-    u8 colorFrame;
-};
 
 struct func_8024F590_S1;
 typedef struct func_8024F590_S1 func_8024F590_S1;
@@ -320,12 +254,6 @@ typedef struct StaticObject StaticObject;
 extern f32 D_8013B190;
 
 struct Actor_func_8024ED90_de;
-struct Actor_func_8024ED90_de {
-    u32 pad0[2];
-    CVector3 position0;
-    u32 pad14[2];
-    CVector3 position1;
-};
 
 struct PlacedPropRecord;
 typedef struct PlacedPropRecord PlacedPropRecord;
@@ -405,16 +333,6 @@ struct func_8024F8CC_S1 {
 struct func_8024EF18_S1;
 typedef struct func_8024EF18_S1 func_8024EF18_S1;
 
-typedef struct ResourceObject23 {
-    s8 pad0;
-    s8 type;
-    char pad2[0x50-2];
-    s32 model;
-    s32 loadedType;
-    s32 resourceName;
-    s32 resourceSize;
-    CachedResource *blockNode;
-} ResourceObject23;
 extern char D_0024F8DC;
 extern char D_800C3DAC_de;
 extern char D_800C8ED0;
