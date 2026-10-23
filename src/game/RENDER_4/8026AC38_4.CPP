@@ -276,6 +276,7 @@ INCLUDE_ASM("span_1000", func_8026CE20_de);
 #ifdef NON_MATCHING
 extern f32 D_800C46A8_de, D_800D15F0;
 extern void func_8026B504_de(void *, void *, void *);
+/* 15/157 aligned edits; remaining: target hoists the flags load and the D_800C46A8_de load above the colour byte stores */
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first
  * part's material is registered through func_8026B504_de with the caller's two inputs. */
@@ -304,9 +305,9 @@ void func_8026D280_de(void **resource, void *matrix, s32 segment, void *arg3, vo
     shared[0x12] = 0x77;
     shared[0x13] = 0x40;
     *(u32 *)shared = flags | 0x400;
-    D_800D15F0 = D_800C46A8_de;
-    *(u32 *)shared = flags | 0x1402;
     D_800D15E0 = 1;
+    *(u32 *)shared = flags | 0x1402;
+    D_800D15F0 = D_800C46A8_de;
     if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
         return;
     }
