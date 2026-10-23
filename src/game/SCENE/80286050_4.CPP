@@ -106,7 +106,7 @@ extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void func_8024FD6C_eu(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
 extern void func_8024E990_de(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
-extern void func_80276CB0_de(ObjectRecAtBC *volume, LightVolumeRecord *record);
+extern void Anim_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
 extern f32 Particle_GetActorHeight(void *);
 
 #define ALIGN8(size) (((size) + 7) & ~7)
@@ -241,7 +241,7 @@ void func_8028798C_de(Shared_World *world, void ***handle) {
             for (i = 0; i < volumeCount; i++) {
                 LightVolumeRecord *record = &volumeRecords[i];
 
-                func_80276CB0_de(&volumes[i], record);
+                Anim_DecodeBoxTransform(&volumes[i], record);
             }
 
             offset += volumeSize;

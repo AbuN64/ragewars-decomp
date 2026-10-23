@@ -22,7 +22,8 @@ extern void func_802738C0_de(void *, f32);
 extern void func_80273448_de(void *, f32, f32, f32);
 extern void func_8026EF58_de(void *, void *);
 extern void func_80275954_de(void *, s32, void *);
-void func_80276CB0_de(u8 *self, u8 *src) {
+/* 276/286 words (20 aligned edits); remaining: jump.c cross-jumps the three |rotation| checks into one tail (ROM keeps each likely-set) */
+void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     SkelVec translation;
     SkelVec rotation;
     SkelVec scale;
@@ -48,12 +49,13 @@ void func_80276CB0_de(u8 *self, u8 *src) {
         up.x = 0;
         up.y = (-1.0f);
         up.z = 0;
-        tilt.y = SK_FIELD(src, s32, 0xC) * 9.31322575e-09f;
-        tilt.z = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
+        tilt.x = SK_FIELD(src, s32, 0xC) * 9.31322575e-09f;
+        tilt.y = SK_FIELD(src, s32, 0x10) * 9.31322575e-09f;
+        tilt.z = SK_FIELD(src, s32, 0x14) * 9.31322575e-09f;
         matrix = self + 0x60;
         func_802727D8_de(matrix);
-        func_80273C68_de(matrix, tilt.y);
-        func_80273A98_de(matrix, tilt.z);
+        func_80273C68_de(matrix, tilt.x);
+        func_80273A98_de(matrix, tilt.y);
         func_80272A10_de(matrix, &up, self + 0x14);
         rotation.x = 0;
         rotation.y = 0;
@@ -74,7 +76,6 @@ void func_80276CB0_de(u8 *self, u8 *src) {
     } else if (rotation.y > 0.00999999978f) {
         inside = 0;
     }
-    SK_FIELD(self, u8, 0xB9) = 0;
     if (rotation.z < 0) {
         if (-rotation.z > 0.00999999978f) {
             inside = 0;
@@ -82,6 +83,7 @@ void func_80276CB0_de(u8 *self, u8 *src) {
     } else if (rotation.z > 0.00999999978f) {
         inside = 0;
     }
+    SK_FIELD(self, u8, 0xB9) = 0;
     if (inside != 0) {
         SK_FIELD(self, u8, 0xB9) = 1;
     }
@@ -111,9 +113,18 @@ void func_80276CB0_de(u8 *self, u8 *src) {
     func_80273448_de(matrix, translation.x, translation.y, translation.z);
     func_8026EF58_de(self + 0x20, matrix);
     for (i = 0; i < 8; i++) {
-        x = (i & 1) ? (-1.0f) : 1.0f;
-        y = (i & 2) ? (-1.0f) : 1.0f;
-        z = (i & 4) ? (-1.0f) : 1.0f;
+        x = 1.0f;
+        y = 1.0f;
+        z = 1.0f;
+        if (i & 1) {
+            x = -1.0f;
+        }
+        if (i & 2) {
+            y = -1.0f;
+        }
+        if (i & 4) {
+            z = -1.0f;
+        }
         probe.x = x;
         probe.y = y;
         probe.z = z;
@@ -122,7 +133,7 @@ void func_80276CB0_de(u8 *self, u8 *src) {
     func_80275954_de(self + 0xA0, 8, corners);
 }
 #else
-INCLUDE_ASM("span_1000", func_80276CB0_de);
+INCLUDE_ASM("span_1000", Anim_DecodeBoxTransform);
 #endif
 
 
