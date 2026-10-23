@@ -2388,7 +2388,7 @@ extern int D_800DE9CC[];
 extern int D_800DE9D0[];
 extern int D_800DEAD4[];
 extern int D_800DF268_de;
-extern int D_800DF520;
+extern Box D_800DF520;
 extern int D_800E01B0_de[];
 extern int D_800E0286[];
 extern int D_800EB1AC;

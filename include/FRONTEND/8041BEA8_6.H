@@ -31,9 +31,7 @@ typedef struct Obj8041CAD8At190 {
     s8 unk3;
     u16 unk4;
     char pad6[0x8 - 0x6];
-    f32 unk8;
-    f32 unkC;
-    f32 unk10;
+    CVector3 unk8;
     s32 unk14;
     void *unk18;
     s32 unk1C;
@@ -58,7 +56,7 @@ typedef struct Obj8041CAD8At190 {
     s32 unk68;
     f32 unk6C;
     s32 unk70;
-    char pad74[0xB4 - 0x74];
+    Matrix unk74;
     s32 unkB4;
     s32 unkB8;
     s32 unkBC;
@@ -88,23 +86,15 @@ typedef struct Obj8041CAD8At190 {
     char pad13A[0x13B - 0x13A];
     s8 unk13B;
     char pad13C[0x140 - 0x13C];
-    s32 unk140;
-    s32 unk144;
-    s32 unk148;
-    s32 unk14C;
-    s32 unk150;
-    s32 unk154;
-    s32 unk158;
-    s32 unk15C;
-    s32 unk160;
-    s32 unk164;
-    s32 unk168;
-    s32 unk16C;
+    Box unk140;
+    Box unk158;
     char pad170[0x1A0 - 0x170];
     s32 unk1A0;
     char pad1A4[0x1A5 - 0x1A4];
     s8 unk1A5;
-    char pad1A6[0x1D8 - 0x1A6];
+    char pad1A6[0x1C4 - 0x1A6];
+    CVector3 unk1C4;
+    char pad1D0[0x1D8 - 0x1D0];
     s32 unk1D8;
     char pad1DC[0x23A - 0x1DC];
     s8 unk23A;
@@ -130,5 +120,5 @@ typedef struct Obj8041CAD8 {
     s32 unk49C;
     s32 unk4A0;
 } Obj8041CAD8;
-extern void func_8041CAD8_de(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
+extern void *func_8041CAD8_de(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 #endif

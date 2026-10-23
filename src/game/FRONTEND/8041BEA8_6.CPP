@@ -94,6 +94,7 @@ typedef long long M2C_UNK64;
 #undef F3DEX_GBI
 #undef F3D_GBI
 #define F3DEX_GBI_2
+#endif
 #include "COMMON/GFX.H"
 #include "COMMON/GLOBALS.H"
 #include "COMMON/INTEGERSTATEB0.H"
@@ -107,108 +108,61 @@ typedef long long M2C_UNK64;
 #include "gbi.h"
 #include "particle/80271B18_3.H"
 s32 func_80246E44_de(void *);
-s32 func_80249E28_de(void *, s32 *);
+s32 func_80249E28_de(void *, void *);
 s32 func_8024B8C4_de(void *);
 s32 func_802737F0_de(void *, f32);
-extern s32 D_80141008;
-
-void func_8041C7F4_de(void *arg0) {
-    s32 sp24;
-    s32 sp28;
-    s32 sp10;
-    s32 sp14;
-    s32 sp18;
-    s32 sp20;
-    Gfx *temp_a0;
-    Gfx *temp_a0_2;
-    Gfx *temp_a1;
-    Gfx *temp_a2;
-    Gfx *temp_v1;
-    s32 temp_s4;
-    s32 temp_v0;
-    void *temp_s0;
-
-    temp_s0 = arg0 + 0x190;
-    if (M2C_FIELD(arg0, s32 *, 0x478) != 0) {
-        temp_s4 = D_800CC380;
+extern MenuModelScreen D_80141008[];
+void func_8041C7F4_de(Obj8041CAD8 *self) {
+    CVector3 local10;
+    CVector3 local20;
+    MenuModelScreen *view;
+    Obj8041CAD8At190 *draw;
+    s32 saved;
+    view = D_80141008;
+    draw = &self->sub190;
+    if (self->unk478 != 0) {
+        saved = D_800CC380;
         D_800CC380 = 0;
-        temp_a2 = D_80110634;
-        D_80110634 += 8;
-        gSPMatrix(temp_a2, (u32) ((D_800D297C << 6) + 0x380 + &D_80141008), G_MTX_LOAD | G_MTX_PROJECTION);
-        
-        sp10 = M2C_FIELD(arg0, s32 *, 0x48C);
-        sp14 = M2C_FIELD(arg0, s32 *, 0x490);
-        sp18 = M2C_FIELD(arg0, s32 *, 0x494);
-        func_80272898_de(&D_80141008 + 0x160, &sp10, &sp20);
+        {
+            Gfx *g = D_80110634++;
+            char *address = (char *)(u32)(D_800D297C << 6);
+            address += 0x380;
+            address += (u32)view;
+            gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
+        }
+        local10 = self->unk48C;
+        func_80272898_de(&view->camera, &local10, &local20);
         if (func_8025477C_de() == 0) {
-            func_8025476C_de(1U);
+            func_8025476C_de(1);
         }
         func_80417138_de(0x33335);
-        temp_a0 = D_80110634;
-        temp_v1 = D_80110634 + 8;
-        D_80110634 = temp_v1;
-        gDPPipeSync(temp_a0);
-        
-        temp_a0_2 = temp_v1 + 8;
-        D_80110634 = temp_a0_2;
-        M2C_FIELD(D_80110634, s32 *, 8) = 0xE3000A01;
-        temp_a1 = temp_v1 + 0x10;
-        temp_v1->words.w1 = 0x100000;
-        D_80110634 = temp_a1;
-        M2C_FIELD(temp_v1, s32 *, 8) = 0xE3000C00;
-        temp_a0_2->words.w1 = 0x80000;
-        D_80110634 = temp_v1 + 0x18;
-        M2C_FIELD(temp_v1, s32 *, 0x10) = 0xE3001201;
-        temp_a1->words.w1 = 0x2000;
-        func_8026D844_de(temp_a0_2, temp_a1, 0xE3000C00, 0xE3001201);
-        M2C_FIELD(arg0, s32 *, 0x198) = sp20;
-        M2C_FIELD(arg0, s32 *, 0x19C) = sp24;
-        M2C_FIELD(arg0, s32 *, 0x1A0) = sp28;
-        M2C_FIELD(arg0, s32 *, 0x354) = sp20;
-        M2C_FIELD(arg0, s32 *, 0x358) = sp24;
-        M2C_FIELD(arg0, s32 *, 0x35C) = sp28;
-        func_8024B8C4_de(temp_s0);
-        M2C_FIELD(arg0, s32 *, 0x198) = sp20;
-        M2C_FIELD(arg0, s32 *, 0x19C) = sp24;
-        M2C_FIELD(arg0, s32 *, 0x1A0) = sp28;
-        M2C_FIELD(arg0, s32 *, 0x354) = sp20;
-        M2C_FIELD(arg0, s32 *, 0x358) = sp24;
-        M2C_FIELD(arg0, s32 *, 0x35C) = sp28;
-        if ((M2C_FIELD(arg0, s32 *, 0x49C) != 0) || (M2C_FIELD(temp_s0, s8 *, 0x10E) == 0)) {
-            func_80246E44_de(temp_s0);
-            temp_v0 = M2C_FIELD(arg0, s32 *, 0x4A0);
-            if (temp_v0 != 0) {
-                func_802737F0_de(arg0 + 0x204, (f32) temp_v0 * M2C_FIELD(&D_800DD488, f32 *, 0));
+        gDPPipeSync(D_80110634++);
+        gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+        gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
+        gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
+        func_8026D844_de();
+        draw->unk8 = local20;
+        draw->unk1C4 = local20;
+        func_8024B8C4_de(draw);
+        draw->unk8 = local20;
+        draw->unk1C4 = local20;
+        if (self->unk49C != 0 || draw->unk10E == 0) {
+            func_80246E44_de(draw);
+            if (self->unk4A0 != 0) {
+                func_802737F0_de(&draw->unk74, (f32)self->unk4A0 * D_800DD488);
             }
         }
-        M2C_FIELD(temp_s0, f32 *, 0x6C) = (f32) (M2C_FIELD(arg0, f32 *, 0x498) * M2C_FIELD(&D_800DD488, f32 *, 4));
-        M2C_FIELD(temp_s0, s32 *, 8) = sp20;
-        M2C_FIELD(temp_s0, s32 *, 0xC) = sp24;
-        M2C_FIELD(temp_s0, s32 *, 0x10) = sp28;
-        M2C_FIELD(temp_s0, s32 *, 0x1C4) = sp20;
-        M2C_FIELD(temp_s0, s32 *, 0x1C8) = sp24;
-        M2C_FIELD(temp_s0, s32 *, 0x1CC) = sp28;
+        draw->unk6C = self->unk498 * *(&D_800DD488 + 1);
+        draw->unk8 = local20;
+        draw->unk1C4 = local20;
         func_8026D980_de();
-        func_80249E28_de(temp_s0, &D_80141008);
-        M2C_FIELD(temp_s0, s32 *, 0x140) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0);
-        M2C_FIELD(temp_s0, s32 *, 0x144) = (s32) M2C_FIELD(&D_800DF520, s32 *, 4);
-        M2C_FIELD(temp_s0, s32 *, 0x148) = (s32) M2C_FIELD(&D_800DF520, s32 *, 8);
-        M2C_FIELD(temp_s0, s32 *, 0x14C) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0xC);
-        M2C_FIELD(temp_s0, s32 *, 0x150) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x10);
-        M2C_FIELD(temp_s0, s32 *, 0x154) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x14);
-        M2C_FIELD(temp_s0, s32 *, 0x158) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0);
-        M2C_FIELD(temp_s0, s32 *, 0x15C) = (s32) M2C_FIELD(&D_800DF520, s32 *, 4);
-        M2C_FIELD(temp_s0, s32 *, 0x160) = (s32) M2C_FIELD(&D_800DF520, s32 *, 8);
-        M2C_FIELD(temp_s0, s32 *, 0x164) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0xC);
-        M2C_FIELD(temp_s0, s32 *, 0x168) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x10);
-        M2C_FIELD(temp_s0, s32 *, 0x16C) = (s32) M2C_FIELD(&D_800DF520, s32 *, 0x14);
+        func_80249E28_de(draw, view);
+        draw->unk140 = D_800DF520;
+        draw->unk158 = D_800DF520;
         func_8026D9D0_de();
-        D_800CC380 = temp_s4;
+        D_800CC380 = saved;
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8041C7F4_de);
-#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
@@ -217,66 +171,57 @@ INCLUDE_ASM("ovl_80400000", func_8041C7F4_de);
 extern s32 D_800D297C, D_800E28D0, D_800E28D4;
 extern s32 D_800CD8D0;
 extern void func_802A001C_de();
-extern u8 *func_8028CFA0_de();
+extern void *func_8028CFA0_de(void *, s32, s32, void *);
 extern void func_80272898_de();
-extern void func_802466A0_de();
+extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de();
-void func_8041CAD8_de(Obj8041CAD8 *arg0, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing, f32 scale, s32 arg8) {
-    u8 *self = (u8 *)arg0;
+void *func_8041CAD8_de(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing,
+                       f32 scale, s32 arg8) {
+    CVector3 scales;
     CVector3 local60;
-    CVector3 localPos;
-    CVector3 localFacing;
+    CVector3 local70;
     CVector3 local80;
-    f32 scaleX;
-    f32 scaleY;
-    f32 scaleZ;
-    u8 *copy;
-    u8 *source;
     u8 *drawState;
     u32 *displayList;
-    u8 *link;
-    s32 i;
+    Ret8028CFA0 *source;
     func_802A001C_de(&local60, 0, 0xC);
     displayList = (u32 *)D_80110634;
     D_80110634 = (Gfx *)(displayList + 2);
     displayList[0] = 0xDA380007;
     displayList[1] = (u32)(D_80141008_BYTES + 0x380 + D_800D297C * 64);
-    FR_FIELD(self, s32, 0x49C) = 1;
-    FR_FIELD(self, s32, 0x4A0) = arg8;
-    drawState = self + 0x190;
-    source = func_8028CFA0_de(&D_8011FE88, id, arg2, displayList);
+    self->unk4A0 = arg8;
+    drawState = (u8 *)self + 0x190;
+    self->unk49C = 1;
+    source = (Ret8028CFA0 *)func_8028CFA0_de(&D_8011FE88, id, arg2, displayList);
     if (source == 0) {
-        FR_FIELD(self, s32, 0x478) = 0;
-        return;
+        self->unk478 = 0;
+        return 0;
     }
-    FR_FIELD(self, s32, 0) = id;
-    FR_FIELD(self, s32, 0x478) = 1;
-    FR_FIELD(self, f32, 0x498) = scale;
-    for (i = 0; i < 0x188; i++) {
-        self[4 + i] = source[i];
-    }
-    FR_FIELD(self, CVector3, 0x480) = position;
-    FR_FIELD(self, CVector3, 0x48C) = facing;
-    FR_FIELD(self, s32, 4) = 0;
-    FR_FIELD(self, s32, 8) = 0;
-    FR_FIELD(self, s32, 0x18) = 0;
-    FR_FIELD(self, s32, 0x1C) = 0;
-    FR_FIELD(self, s32, 0x20) = 0;
-    FR_FIELD(self, f32, 0xC) = D_800DD490_de;
-    scaleX = FR_FIELD(self, f32, 0x480) * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
-    scaleZ = FR_FIELD(self, f32, 0x488) * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
-    scaleY = FR_FIELD(self, f32, 0x484) * (FR_FIELD(D_80141008_BYTES, f32, 0x2A0) / (f32)D_800E28D4);
-    FR_FIELD(drawState, f32, 0x50) = scaleX;
-    FR_FIELD(drawState, f32, 0x54) = scaleY;
-    FR_FIELD(drawState, f32, 0x58) = scaleZ;
-    localFacing = FR_FIELD(self, CVector3, 0x48C);
-    func_80272898_de(D_80141008_BYTES + 0x160, &localFacing, &local80);
-    link = self + 4;
-    func_802466A0_de(drawState, -1, arg3, D_800CD8D0, link, -1, 0, FR_FIELD(self, f32, 0x498) * (&D_800DD490_de)[1], local80, 0, FR_FIELD(self, CVector3, 0x480), local60, 0);
+    self->unk0 = id;
+    self->unk478 = 1;
+    self->unk498 = scale;
+    self->copy4 = *source;
+    self->copy4.unk0 = 0;
+    self->copy4.unk4 = 0;
+    self->copy4.unk14 = 0;
+    self->copy4.unk18 = 0;
+    self->copy4.unk1C = 0;
+    self->copy4.unk8 = D_800DD490_de;
+    self->unk480 = position;
+    self->unk48C = facing;
+    scales.x = self->unk480.x * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
+    scales.z = self->unk480.z * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
+    scales.y = self->unk480.y * (FR_FIELD(D_80141008_BYTES, f32, 0x2A0) / (f32)D_800E28D4);
+    FR_FIELD(drawState, CVector3, 0x50) = scales;
+    local70 = self->unk48C;
+    func_80272898_de(D_80141008_BYTES + 0x160, &local70, &local80);
+    func_802466A0_de(drawState, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * (&D_800DD490_de)[1],
+                     local80, 0, self->unk480, local60, 0);
     func_8024B2D0_de(drawState);
-    if (FR_FIELD(self, s32, 0) == 9) {
-        ((void (*)(u8 *, s32, s32, s32))func_8041CE18_de)(self, arg3, arg4, arg2);
+    if (self->unk0 == 9) {
+        ((void (*)(Obj8041CAD8 *, s32, s32, s32))func_8041CE18_de)(self, arg3, arg4, arg2);
     }
+    return &self->copy4;
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_8041CAD8_de);
