@@ -4,18 +4,6 @@
 struct Callback;
 typedef struct Callback Callback;
 
-/* Shared button/axis event produced by 8029AAD8 and 8029AB24. */
-typedef struct ControllerEvent {
-    s16 source;
-    s16 device;
-    s16 kind;
-    s16 control;
-    s32 reserved08;
-    s16 pressed;
-    s16 x;
-    s16 y;
-    s16 z;
-} ControllerEvent;
 
 typedef struct ControllerAxisState {
     s16 oldX, oldY, oldZ;

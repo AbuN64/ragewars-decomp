@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT3CV2.H"
+#include "MATH/8029BBA0.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/ITEMRECAT20V1.H"

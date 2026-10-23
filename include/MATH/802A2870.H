@@ -1,6 +1,14 @@
 #ifndef MATH_802A2870_H
 #define MATH_802A2870_H
 #include "TYPES.H"
+struct CommandListController {
+    u8 padding000[8];
+    struct LinkedCommandEntry *entries; /* 0x08 */
+    u8 padding00C[0x3C];
+    s32 progress; /* 0x48 */
+    u8 padding04C[0x10];
+    s32 state; /* 0x5C */
+};
 extern u32 D_800CD990_de;
 extern u32 D_800CD994;
 extern u32 D_800CD998;

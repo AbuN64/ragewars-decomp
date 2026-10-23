@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/STATEPAIR.H"
+#include "MATH/802A2870.H"
 #include "TYPES.H"
 #include "RESMGR/802A2230_4.H"
 #include "SCENE/802508E0_13.H"

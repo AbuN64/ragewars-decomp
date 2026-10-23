@@ -72,14 +72,6 @@ struct LinkedCommandEntry {
     u16 kind; /* 0x0E */
     u8 command; /* 0x10, consumers only store this byte */
 };
-struct CommandListController {
-    u8 padding000[8];
-    struct LinkedCommandEntry *entries; /* 0x08 */
-    u8 padding00C[0x3C];
-    s32 progress; /* 0x48 */
-    u8 padding04C[0x10];
-    s32 state; /* 0x5C */
-};
 struct CommandListMenu {
     u8 padding000[8];
     struct LinkedCommandEntry *entries; /* 0x08 */

@@ -1,0 +1,16 @@
+#ifndef MATH_8029AE80_H
+#define MATH_8029AE80_H
+#include "TYPES.H"
+/* Shared button/axis event produced by 8029AAD8 and 8029AB24. */
+typedef struct ControllerEvent {
+    s16 source;
+    s16 device;
+    s16 kind;
+    s16 control;
+    s32 reserved08;
+    s16 pressed;
+    s16 x;
+    s16 y;
+    s16 z;
+} ControllerEvent;
+#endif

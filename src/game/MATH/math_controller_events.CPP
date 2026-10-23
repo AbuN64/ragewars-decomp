@@ -3,6 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CALLBACK.H"
+#include "MATH/8029AE80.H"
 #include "MATH/80299ECC.H"
 #include "MATH/math_controller_events.H"
 

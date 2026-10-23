@@ -4,6 +4,7 @@
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
+#include "MATH/802A2870.H"
 #include "RESMGR/802A2230_4.H"
 #include "RENDER_2/8025DE50_5.H"
 
