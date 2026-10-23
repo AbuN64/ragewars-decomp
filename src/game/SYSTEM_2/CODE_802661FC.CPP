@@ -52,7 +52,7 @@ static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
     }
     return allowed;
 }
-s32 func_802661DC_de(DamageActor *source, DamageActor *target) {
+s32 System_CanDamageActor(DamageActor *source, DamageActor *target) {
     DamageActor *owner;
     if (source == target) {
         return 0;
@@ -84,7 +84,7 @@ s32 func_802661DC_de(DamageActor *source, DamageActor *target) {
     return canDamage(source, target);
 }
 #else
-INCLUDE_ASM("span_1000", func_802661DC_de);
+INCLUDE_ASM("span_1000", System_CanDamageActor);
 #endif
 
 #ifdef NON_MATCHING
@@ -406,7 +406,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
     if (source->flags & 0x300000) {
         attacker = source->unk1D8;
     }
-    if (func_802661DC_de(source, target) != 0) {
+    if (System_CanDamageActor(source, target) != 0) {
         adjusted = adjustHit(target, &position);
         radius = (f32) params.radius * D_800C43E0_de[1];
         radius *= hitSize(target);
