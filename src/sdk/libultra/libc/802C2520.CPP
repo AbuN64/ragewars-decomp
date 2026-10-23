@@ -239,7 +239,6 @@ case_default:
 }
 
 #ifdef NON_MATCHING
-/* 87/148 words; remaining: draft builds 141 words, control flow and register allocation differ from the original */
 #include "TYPES.H"
 
 
@@ -252,7 +251,12 @@ extern s64 func_802C0230_de(s64 numerator, s64 denominator);
 extern s64 func_802C0820_de(s64 numerator, s64 denominator);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
-/* ~125/148 words; remaining: the quotient of the first division stays in s0/s1 (ROM spills it to the stack slot and reloads it), table index lands in v1 (ROM v0), loop entry branch-likely */
+static inline void lldivInline(LldivResult *result, s64 numerator, s64 denominator) {
+    result->quot = func_802C0230_de(numerator, denominator);
+    result->rem = func_802C0820_de(numerator, denominator);
+}
+/* Formats px->v.ll into px->s in the radix selected by code (o/x/X/d/i/u), zero-padding to the precision.
+ * 145/148 words; remaining: the first digit is looked up through v1 instead of v0 (register choice only). */
 void func_802BDDE0_de(_Pft *px, unsigned char code) {
     char buffer[0x18];
     const u8 *table;
@@ -280,8 +284,7 @@ void func_802BDDE0_de(_Pft *px, unsigned char code) {
     while (px->v.ll > 0 && i > 0) {
         num = px->v.ll;
         den = base;
-        qr.quot = func_802C0230_de(num, den);
-        qr.rem = func_802C0820_de(num, den);
+        lldivInline(&qr, num, den);
         px->v.ll = qr.quot;
         buffer[--i] = table[qr.rem];
     }
