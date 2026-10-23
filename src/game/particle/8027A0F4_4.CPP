@@ -209,6 +209,7 @@ void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
 
 
 
+/* 640/655 aligned words; remaining: depth-clamp floating register allocation. */
 static inline f32 particleDepthScale(struct Shared_ParticleDesc *desc, f32 depth) {
     f32 near;
     f32 farness;
@@ -218,13 +219,12 @@ static inline f32 particleDepthScale(struct Shared_ParticleDesc *desc, f32 depth
         size = depth;
         near = size - 16.0f;
         farness = RW_MIN_LT(1.0f, RW_MAX_GT(0.0f, near) * (1.0f / 2032.0f));
-        size *= desc->distanceRange->minimum
-            + (desc->distanceRange->maximum - desc->distanceRange->minimum) * farness;
-        size *= 0.001f;
+        size = depth * (desc->distanceRange->minimum + (desc->distanceRange->maximum - desc->distanceRange->minimum) * farness);
+        depth = size * 0.001f;
     } else {
-        size = 1.0f;
+        depth = 1.0f;
     }
-    return size;
+    return depth;
 }
 
 /* Builds a particle's display matrix: its size scaled for camera depth and field of view, its wobble, its
