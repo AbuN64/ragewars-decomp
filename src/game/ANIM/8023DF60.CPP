@@ -5,7 +5,7 @@
 /* Tests a swept sphere against a polygon: shifts the ray from 0x44 to 0x50 back along the polygon normal by
  * the radius (plus an optional offset), intersects the shifted ray with the polygon's plane through
  * func_802412D0_de under the same acceptance rules as func_8023E8D4_de, requires the shifted hit point to pass
- * func_802406D0_de at that radius, then places the hit on the unshifted ray and optionally keeps the polygon
+ * Anim_TestPointNearPolygon at that radius, then places the hit on the unshifted ray and optionally keeps the polygon
  * as the ray's nearest hit. Adapted from func_8023E8D4_de with its static acceptance helper.
  */
 
@@ -21,7 +21,7 @@ extern s32 func_802412D0_de(Polygon *, CVector3 *, CVector3 *, f32 *);
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
-extern s32 func_802406D0_de(Polygon *, CVector3 *, f32);
+extern s32 Anim_TestPointNearPolygon(Polygon *, CVector3 *, f32);
 
 static inline s32 accepts(CapsuleSweep *ray, Polygon *poly) {
     if (poly->t <= 0.0f) {
@@ -64,7 +64,7 @@ s32 func_8023DF70_de(CapsuleSweep *ray, CVector3 *offset, f32 radius, Polygon *p
         return 0;
     }
     func_80271FC8_de(&hit, poly->t, &start, &end);
-    if (func_802406D0_de(poly, &hit, radius) == 0) {
+    if (Anim_TestPointNearPolygon(poly, &hit, radius) == 0) {
         return 0;
     }
     func_80271FC8_de(&poly->hit, poly->t, &ray->start, &ray->end);
