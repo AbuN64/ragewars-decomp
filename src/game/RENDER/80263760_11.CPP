@@ -9,7 +9,8 @@
 extern u32 D_8010C070;
 extern u32 D_8010C07C;
 
-static inline u32 sample_bits(s32 width) {
+extern u16 D_8010C07E;
+static inline void advance_bits(s32 width) {
     u32 previous = D_8010C07C;
     s32 available = D_8010C080_de;
     s32 remaining = available - width;
@@ -21,13 +22,12 @@ static inline u32 sample_bits(s32 width) {
         u32 next = *cursor++;
         D_8010C084 = cursor;
         D_8010C080_de = remaining + 8;
-        D_8010C07C = shifted | (next << (remaining & 31));
+        D_8010C07C = shifted | (next << remaining);
     }
-    return previous & ((1U << width) - 1);
 }
-
 static inline u32 predictor_bits(void) {
     u32 previous = D_8010C070;
+    u32 bits = previous & 63;
     s32 available = D_8010C074;
     s32 remaining = available - 6;
     u32 shifted = previous >> 6;
@@ -38,21 +38,28 @@ static inline u32 predictor_bits(void) {
         u32 next = *cursor++;
         D_8010C078 = cursor;
         D_8010C074 = remaining + 8;
-        D_8010C070 = shifted | (next << (remaining & 31));
+        D_8010C070 = shifted | (next << remaining);
     }
-    return previous & 63;
+    return bits;
 }
 
+/* Decodes count ADPCM-style samples: 3-bit deltas scaled by a per-group shift and two predictor taps (group of 4 samples
+ * per 6-bit descriptor), integrated into a running sample clamped to 16 bits.
+ * 63 aligned edits of 148 words; remaining: the ROM keeps the -8 sign-fill constant in a loop-hoisted register (so the
+ * s16 extension survives) and allocates s0-s2 for hoisted constants; ours folds the extension and uses no s1/s2. */
 void func_80264F60_de(s32 destination, s32 count) {
     s16 *out = (s16 *)destination;
     s32 previous = 0;
     s32 older = 0;
-    s32 sample = (s8)D_8010C07C * 256;
+    s32 sample;
+    u8 head = D_8010C07F;
     s32 group = 0;
-    s32 shift, first, second;
+    u8 shift;
+    s32 first, second;
     s32 delta, predicted, clamped;
     u32 raw, descriptor;
-    sample_bits(8);
+    advance_bits(8);
+    sample = (s8)head * 256;
     while (count > 0) {
         count--;
         if (group-- == 0) {
@@ -62,7 +69,8 @@ void func_80264F60_de(s32 destination, s32 count) {
             first = D_800CBC30[descriptor >> 4];
             second = D_800CBC40[descriptor >> 4];
         }
-        raw = sample_bits(3);
+        raw = D_8010C07E & 7;
+        advance_bits(3);
         delta = raw & 4 ? (s16)(raw | ~7U) : raw;
         delta *= 1 << shift;
         predicted = (s32)((u32)previous * (u32)first + (u32)older * (u32)second);
