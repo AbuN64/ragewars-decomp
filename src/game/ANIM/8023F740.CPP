@@ -176,57 +176,78 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
 }
 
 #ifdef NON_MATCHING
-#define AN_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+/* 99/182 aligned edits; remaining: register roles of the loop locals (self/state/owner/candidate) */
 #include "COMMON/WORLD.H"
-typedef struct SortedCandidate { u8 *object; f32 distance; } SortedCandidate;
-extern u8 **D_80103FCC;
+#include "COMMON/LEVEL_ACTOR.H"
+typedef struct SortedCandidate { LevelActor *object; f32 distance; } SortedCandidate;
+typedef struct HitState {
+    u32 flags;
+    s8 mode;
+} HitState;
+typedef struct HitOwner {
+    u8 kind;
+    u8 pad1[0x117];
+    u32 *rules; /* 0x118 */
+    u8 pad11C[0x10];
+    LevelActor *target; /* 0x12C */
+} HitOwner;
+typedef struct HitSelf {
+    HitOwner *owner; /* 0 */
+    u8 pad4[0x3C];
+    HitState *state; /* 0x40 */
+    u8 pad44[0x40];
+    Box box; /* 0x84 */
+    u8 pad9C[0xE0];
+    f32 range; /* 0x17C */
+} HitSelf;
+extern LevelActor **D_80103FCC;
 extern u8 D_801462C8[];
 extern char D_002405FC[], D_00240638[];
 extern void func_802852C0_de();
 extern void func_8023F644_de(void *, void *);
-void func_80240260_de(u8 *self) {
-    u8 *state = AN_FIELD(self, u8 *, 0x40);
+void func_80240260_de(HitSelf *self) {
+    HitState *state = self->state;
     SortedCandidate list[0x20];
     u8 scratch[0x30];
-    u8 *owner;
-    u8 *candidate;
+    HitOwner *owner;
+    LevelActor *candidate;
     s32 total;
     s32 count = 0;
     s32 i;
     s32 kind;
     f32 distance;
-    if (AN_FIELD(state, s8, 4) == 0 || !(AN_FIELD(state, u32, 0) & 0x10000)) {
+    if (state->mode == 0 || !(state->flags & 0x10000)) {
         return;
     }
-    owner = AN_FIELD(self, u8 *, 0);
-    total = AN_FIELD(&D_8011FE88, s32, 0xB48);
+    owner = self->owner;
+    total = D_8011FE88.moverCount;
     for (i = 0; i < total && count < 0x20; i++) {
-        candidate = AN_FIELD(&D_8011FE88, u8 *, 0x948 + i * 4);
-        if (candidate == owner) {
+        candidate = D_8011FE88.movers[i];
+        if (candidate == (LevelActor *)owner) {
             continue;
         }
-        if (AN_FIELD(state, s8, 4) == 7 && *D_80103FCC == candidate) {
+        if (state->mode == 7 && *D_80103FCC == candidate) {
             continue;
         }
-        if ((AN_FIELD(state, u32, 0) & 0x8000) && AN_FIELD(candidate, u16, 0xE4) == 0x64F) {
+        if ((state->flags & 0x8000) && candidate->type == 0x64F) {
             continue;
         }
-        if (AN_FIELD(owner, u8, 0) == 2 && AN_FIELD(owner, u8 *, 0x12C) == candidate) {
-            if (AN_FIELD(AN_FIELD(owner, u8 *, 0x118), u32, 0) & 0x40) {
+        if (owner->kind == 2 && owner->target == candidate) {
+            if (*owner->rules & 0x40) {
                 continue;
             }
-            kind = AN_FIELD(AN_FIELD(candidate, u8 *, 0x18), s32, 0);
+            kind = *(s32 *)candidate->definition;
             if (kind == 1 || kind == 4) {
                 continue;
             }
         }
-        if (!(AN_FIELD(candidate, f32, 0xE8) < AN_FIELD(self, f32, 0x90))) continue;
-        if (!(AN_FIELD(self, f32, 0x84) < AN_FIELD(candidate, f32, 0xF4))) continue;
-        if (!(AN_FIELD(candidate, f32, 0xF0) < AN_FIELD(self, f32, 0x98))) continue;
-        if (!(AN_FIELD(self, f32, 0x8C) < AN_FIELD(candidate, f32, 0xFC))) continue;
-        if (!(AN_FIELD(candidate, f32, 0xEC) < AN_FIELD(self, f32, 0x94))) continue;
-        if (!(AN_FIELD(self, f32, 0x88) < AN_FIELD(candidate, f32, 0xF8))) continue;
-        if (func_8023DAA0_de(self, candidate + 0xE8, &distance) != 0) {
+        if (!(candidate->bounds.min.x < self->box.max.x)) continue;
+        if (!(self->box.min.x < candidate->bounds.max.x)) continue;
+        if (!(candidate->bounds.min.z < self->box.max.z)) continue;
+        if (!(self->box.min.z < candidate->bounds.max.z)) continue;
+        if (!(candidate->bounds.min.y < self->box.max.y)) continue;
+        if (!(self->box.min.y < candidate->bounds.max.y)) continue;
+        if (func_8023DAA0_de(self, &candidate->bounds, &distance) != 0) {
             list[count].object = candidate;
             list[count].distance = distance;
             count++;
@@ -237,15 +258,15 @@ void func_80240260_de(u8 *self) {
     }
     func_802852C0_de(list, count, 8, D_00240638, D_002405FC);
     for (i = 0; i < count; i++) {
-        if (!(list[i].distance < AN_FIELD(self, f32, 0x17C))) {
+        if (!(list[i].distance < self->range)) {
             return;
         }
         candidate = list[i].object;
-        if ((AN_FIELD(candidate, u32, 0x100) & 0x300000) && D_801462C8[0x1D] == 0) {
+        if ((candidate->flags & 0x300000) && D_801462C8[0x1D] == 0) {
             func_8023F644_de(self, scratch);
             Anim_TestEntityContact(self, scratch, candidate);
         } else {
-            func_8023FD18_de(self, candidate, owner + 8, self + 0x84);
+            func_8023FD18_de(self, candidate, (u8 *)owner + 8, &self->box);
         }
     }
 }
