@@ -71,13 +71,24 @@ s32 func_8042E460_de(u8 *request) {
 
 #ifdef NON_MATCHING
 /* Sets up the attract-mode demo match: shuffles the character/level tables, seats 2-4 random players (the first group of
- * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in D_8014DD98. */
+ * 1-2 as unlocked, the rest locked) with random costumes and names, and picks the level goal in D_8014DD98.
+ * 4 aligned edits of 231 words; remaining: the dead 8-iteration loop keeps its a0=1 / v1=0xD0 inits in the ROM. */
 void func_8042E5EC_de(void) {
-    s32 table[8] = { 0, 3, 8, 5, 0, 3, 0x1B, 1 };
+    s32 table[4];
+    s32 alt[4];
+    s32 *goal;
     s32 i, a, b, tmp;
-    s32 total, first, costume;
+    s32 total, first, one;
     Shared_PlayerSettingsRecord *player;
-
+    Shared_Game *g;
+    table[0] = 0;
+    table[1] = 3;
+    table[2] = 8;
+    table[3] = 5;
+    alt[0] = 0;
+    alt[1] = 3;
+    alt[2] = 0x1B;
+    alt[3] = 1;
     for (i = 0; i < 100; i++) {
         a = func_802744D4_de() % 4;
         b = func_802744D4_de() % 4;
@@ -90,41 +101,45 @@ void func_8042E5EC_de(void) {
     if (first == 3) {
         first = 2;
     }
+    g = &D_801462C8;
     for (i = 0; i < 8; i++) {
-        player = &D_801462C8.playerSettings[i];
-        player->active = 0;
+        player = &g->playerSettings[i];
         player->pad92[2] = 0;
+        player->active = 0;
         player->enabled = 0;
         player->locked = 0;
     }
     for (i = 0; i < first; i++) {
-        player = &D_801462C8.playerSettings[4 + i];
+        player = &g->playerSettings[4 + i];
         player->enabled = 1;
         player->character = table[i];
         player->locked = 0;
         player->pad92[1] = 2;
-        costume = func_802744D4_de() % 3;
-        player->variant = costume;
+        player->variant = func_802744D4_de() % 3;
         func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
     for (i = 0; i < total - first; i++) {
-        player = &D_801462C8.playerSettings[4 + first + i];
+        player = &g->playerSettings[4 + first + i];
         player->enabled = 1;
-        player->character = table[first + i];
+        player->character = table[i + first];
         player->locked = 1;
         player->pad92[1] = 2;
-        costume = func_802744D4_de() % 3;
-        player->variant = costume;
+        player->variant = func_802744D4_de() % 3;
         func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
+    for (i = 0; i < 8; i++) {
+        player = &g->playerSettings[i];
+        one = 1;
+    }
     D_8014288C = 1;
-    D_801462C8.local = 1;
-    D_801462C8.mode1E = 8;
-    D_801462C8.controllerMode = 0;
-    D_801462C8.laps = 0;
-    D_801462C8.players = 0;
-    D_8014DD98 = 2;
-    (&D_8014DD98)[1] = table[4 + func_802744D4_de() % 4];
+    g->local = 1;
+    g->mode1E = 8;
+    g->controllerMode = 0;
+    g->laps = 0;
+    g->players = 0;
+    goal = &D_8014DD98;
+    goal[0] = 2;
+    goal[1] = alt[func_802744D4_de() % 4];
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_8042E5EC_de);
