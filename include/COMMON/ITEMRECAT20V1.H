@@ -829,10 +829,6 @@ struct HudStatusShared_MatchRules;
 typedef struct HudStatusShared_MatchRules HudStatusShared_MatchRules;
 
 struct func_8022CA04_S3;
-struct func_8022CA04_S3 {
-    char pad0[0x20];
-    f32 unk20;
-};
 
 struct ParamsRecAt8V1;
 typedef struct ParamsRecAt8V1 ParamsRecAt8V1;
