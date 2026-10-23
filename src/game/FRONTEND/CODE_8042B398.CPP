@@ -415,7 +415,7 @@ extern s8 D_80102B0D[], D_800FEB0E[];
 extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 extern void func_8043C278_de(s32 *);
 extern void func_80424B90_de(void);
-extern void func_8042C6CC_de(void);
+extern void Frontend_SortResultsPlayers(void);
 extern void Achieve_UpdateMatchCounters(void *, s32);
 extern void func_80425D14_de(s32);
 extern void Frontend_FillResultRows(void);
@@ -454,7 +454,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
         screen->icons[i][1] = -1;
     }
     D_800E53C0->selection = -1;
-    func_8042C6CC_de();
+    Frontend_SortResultsPlayers();
     game = &D_801462C8;
     switch (game->controllerMode) {
     case 0:
@@ -668,105 +668,100 @@ void Frontend_FillResultRows(void) {
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-typedef struct CPlayerOptions_t {
-    char pad0[4]; s16 m_TotalKills; s16 m_TotalTags; s16 m_TotalCaptures;
-    char padA[0x6E]; u8 active;
-    char pad79[0x19]; u8 team;
-    char pad93[3];
-} CPlayerOptions;
-typedef struct DraftScoreScreen { char pad0[0xE8]; s32 selection; s32 count; s32 order[8]; } DraftScoreScreen;
 extern s32 D_8014DD98;
 extern s32 func_8042D060_de(void);
 
-void func_8042C6CC_de(void) {
-    DraftScoreScreen *screen;
-    CPlayerOptions *a, *b;
-    s32 teams[5];
-    s32 i, j, k, pass, mode, value, first, second;
-    s16 killsA, killsB, scoreA, scoreB;
-    u32 team;
-    screen = (*(DraftScoreScreen * *)&D_800E53C0);
-    screen->selection = 0;
+static inline s32 resultsTeamTotal(CGameStatus *stats, s32 group) { if (D_8014DD98==0) return stats->counts[group]; return stats->scores[group]; }
+/* 294/362 aligned edits remain in sorting-loop scheduling and register allocation. */
+void Frontend_SortResultsPlayers(void) {
+    extern CGameStatus D_801468A0;
+    CGameStatus *stats = &D_801468A0;
+    MatchScoreScreen *screen;
+    Shared_PlayerSettingsRecord *left, *right;
+    s32 groups[5];
+    s32 *order;
+    s32 i, j, k, pass, mode, swappedPlayer, leftTotal, rightTotal;
+    s16 leftKills, rightKills, leftScore, rightScore;
+    s32 group;
+    screen = D_800E53C0;
+    screen->first = 0;
     screen->count = 0;
     for (i = 0; i < 8; i++) {
-        screen->order[i] = -1;
-        if (((CPlayerOptions *)D_80146398)[i].active == 1) {
-            screen->order[screen->count] = i;
+        screen->players[i] = -1;
+        if (((Shared_PlayerSettingsRecord *)D_80146398)[i].enabled == 1) {
+            screen->players[screen->count] = i;
             screen->count++;
         }
     }
     mode = func_8042D060_de();
+    order = D_800E53C0->players;
     if (mode == 0) {
         if (D_8014DD98 == 1) mode = 2;
         else if (D_8014DD98 == 0) mode = 3;
         else mode = 1;
     }
     if (D_8014DD98 == 3 || D_8014DD98 == 0) {
-        for (i = 4; i >= 0; i--) teams[i] = i;
+        for (i = 4; i >= 0; i--) groups[i] = i;
         for (pass = 0; pass < 5; pass++) {
             for (i = 0; i < 4; i++) {
-                if (D_8014DD98 == 0) first = D_801462C8.counters.counts[teams[i]];
-                else first = D_801462C8.counters.scores[teams[i]];
-                if (D_8014DD98 == 0) second = D_801462C8.counters.counts[teams[i + 1]];
-                else second = D_801462C8.counters.scores[teams[i + 1]];
-                if (first < second) { value = teams[i]; teams[i] = teams[i + 1]; teams[i + 1] = value; }
+                leftTotal = resultsTeamTotal(stats, groups[i]);
+                rightTotal = resultsTeamTotal(stats, groups[i + 1]);
+                if (leftTotal < rightTotal) { swappedPlayer = groups[i]; groups[i] = groups[i + 1]; groups[i + 1] = swappedPlayer; }
             }
         }
-        screen = (*(DraftScoreScreen * *)&D_800E53C0);
-        for (pass = 0; pass < (*(DraftScoreScreen * *)&D_800E53C0)->count; pass++) {
-            for (i = 0; i < (*(DraftScoreScreen * *)&D_800E53C0)->count - 1; i++) {
-                team = ((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i]].team;
-                first = -1;
-                if (team < 5) {
-                    if (D_8014DD98 == 0) first = D_801462C8.counters.counts[team];
-                    else first = D_801462C8.counters.scores[team];
+        screen = D_800E53C0;
+        for (pass = 0; pass < D_800E53C0->count; pass++) {
+            for (i = 0; i < D_800E53C0->count - 1; i++) {
+                group = D_801462C8.playerSettings[D_800E53C0->players[i]].rank;
+                leftTotal = -1;
+                if (group < 5) {
+                    leftTotal = resultsTeamTotal(&D_801462C8.counters, group);
                 }
-                team = ((CPlayerOptions *)D_80146398)[screen->order[i + 1]].team;
-                second = -1;
-                if (team < 5) {
-                    if (D_8014DD98 == 0) second = D_801462C8.counters.counts[team];
-                    else second = D_801462C8.counters.scores[team];
+                group = D_801462C8.playerSettings[order[i + 1]].rank;
+                rightTotal = -1;
+                if (group < 5) {
+                    rightTotal = resultsTeamTotal(&D_801462C8.counters, group);
                 }
-                if (first < second) { value = screen->order[i]; screen->order[i] = screen->order[i + 1]; screen->order[i + 1] = value; }
+                if (leftTotal < rightTotal) { swappedPlayer = order[i]; order[i] = order[i + 1]; order[i + 1] = swappedPlayer; }
             }
         }
-        screen = (*(DraftScoreScreen * *)&D_800E53C0);
+        screen = D_800E53C0;
         for (k = 0; k < 5; k++) {
-            team = teams[k];
-            for (pass = 0; pass < (*(DraftScoreScreen * *)&D_800E53C0)->count; pass++) {
-                for (j = 0; j < (*(DraftScoreScreen * *)&D_800E53C0)->count - 1; j++) {
-                    a = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[j]];
-                    b = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[j + 1]];
-                    killsA = a->m_TotalKills; killsB = b->m_TotalKills;
-                    if (a->team == team && b->team == team) {
-                        if (mode == 1 || mode != 3) { scoreA = killsA; scoreB = killsB; }
-                        else { scoreA = a->m_TotalCaptures; scoreB = b->m_TotalCaptures; }
-                        if (scoreA < scoreB || (scoreA == scoreB && killsA < killsB)) {
-                            value = screen->order[j]; screen->order[j] = screen->order[j + 1]; screen->order[j + 1] = value;
+            group = groups[k];
+            for (pass = 0; pass < D_800E53C0->count; pass++) {
+                for (j = 0; j < D_800E53C0->count - 1; j++) {
+                    left = &D_801462C8.playerSettings[D_800E53C0->players[j]];
+                    right = &D_801462C8.playerSettings[D_800E53C0->players[j + 1]];
+                    leftKills = left->score; rightKills = right->score;
+                    if (left->rank == group && right->rank == group) {
+                        if (mode == 3) { leftScore = left->resultAlternate; rightScore = right->resultAlternate; }
+                        else { leftScore = leftKills; rightScore = rightKills; }
+                        if (leftScore < rightScore || (leftScore == rightScore && leftKills < rightKills)) {
+                            swappedPlayer = order[j]; order[j] = order[j + 1]; order[j + 1] = swappedPlayer;
                         }
                     }
                 }
             }
         }
     } else {
-        screen = (*(DraftScoreScreen * *)&D_800E53C0);
-        for (pass = 0; pass < (*(DraftScoreScreen * *)&D_800E53C0)->count; pass++) {
-            for (i = 0; i < (*(DraftScoreScreen * *)&D_800E53C0)->count - 1; i++) {
-                a = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i]];
-                b = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i + 1]];
-                killsA = a->m_TotalKills; killsB = b->m_TotalKills;
-                if (mode == 2) { scoreA = a->m_TotalTags; scoreB = b->m_TotalTags; }
-                else if (mode < 3 || mode != 3) { scoreA = killsA; scoreB = killsB; }
-                else { scoreA = a->m_TotalCaptures; scoreB = b->m_TotalCaptures; }
-                if (scoreA < scoreB || (scoreA == scoreB && killsA < killsB)) {
-                    value = screen->order[i]; screen->order[i] = screen->order[i + 1]; screen->order[i + 1] = value;
+        screen = D_800E53C0;
+        for (pass = 0; pass < D_800E53C0->count; pass++) {
+            for (i = 0; i < D_800E53C0->count - 1; i++) {
+                left = &D_801462C8.playerSettings[D_800E53C0->players[i]];
+                right = &D_801462C8.playerSettings[D_800E53C0->players[i + 1]];
+                leftKills = left->score; rightKills = right->score;
+                if (mode == 2) { leftScore = left->resultScore; rightScore = right->resultScore; }
+                else if (mode < 3 || mode != 3) { leftScore = leftKills; rightScore = rightKills; }
+                else { leftScore = left->resultAlternate; rightScore = right->resultAlternate; }
+                if (leftScore < rightScore || (leftScore == rightScore && leftKills < rightKills)) {
+                    swappedPlayer = order[i]; order[i] = order[i + 1]; order[i + 1] = swappedPlayer;
                 }
             }
         }
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8042C6CC_de);
+INCLUDE_ASM("ovl_80400000", Frontend_SortResultsPlayers);
 #endif
 
 #ifdef NON_MATCHING

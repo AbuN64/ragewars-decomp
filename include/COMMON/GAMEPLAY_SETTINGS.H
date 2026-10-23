@@ -8,7 +8,9 @@ typedef struct Shared_PlayerSettingsRecord Shared_PlayerSettingsRecord;
 struct Shared_PlayerSettingsRecord {
     char pad0[4];
     s16 score; /* +0x04: end-of-match reward statistic */
-    char pad6[0x4C - 6];
+    s16 resultScore; /* +0x06: results ordering score */
+    s16 resultAlternate; /* +0x08: alternate results ordering score */
+    char padA[0x4C - 0xA];
     u8 weapons[0x16]; /* +0x4C: owned flag per weapon id (results weapon menu) */
     char pad62[0x78 - 0x62];
     u8 enabled; /* +0x78: Frontend_ApplyModeChoice ROM joining-player stores */
