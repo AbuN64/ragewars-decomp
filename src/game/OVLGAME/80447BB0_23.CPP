@@ -209,6 +209,8 @@ extern void func_80278E04_de(void *, s32, void *);
 /* Prepares an actor's per-run HUD state: runs the mode-specific setup when the session byte is set, resets
  * the record at 0x878 to its defaults, lays out the nine on-screen widgets at 0xE2C..0x10C0 (position, then
  * their string tables), the two score fields and the 0x10FC panel, and copies the parent's four-word block. */
+/* 0/209 aligned instruction edits in us-rev1; literal-pool placement is withheld because sync --place counts the obsolete same-address func_804491E8_de assembly as a second reader. */
+typedef struct { s32 a, b, c, d; } HudQuad;
 void Ovlgame_InitActorHudState(void *actor) {
     char *globals = (char *)&D_801462C8;
     char *sub;
@@ -230,12 +232,12 @@ void Ovlgame_InitActorHudState(void *actor) {
     FIELD(s32, sub, 0xA8) = 0;
     FIELD(s32, sub, 0x9C) = 0;
     FIELD(s32, sub, 0xA4) = 0;
-    FIELD(f32, sub, 0xAC) = D_800C2300_de;
-    FIELD(f32, sub, 0xB0) = D_800C2304_de;
-    FIELD(f32, sub, 0x90) = D_800C2308_de;
-    FIELD(f32, sub, 0x94) = D_800C73FC;
-    FIELD(f32, sub, 0x98) = D_800C2308_de;
-    FIELD(f32, sub, 0xA0) = D_800C2310_de;
+    FIELD(f32, sub, 0xAC) = 437.5f;
+    FIELD(f32, sub, 0xB0) = (-675.0f);
+    FIELD(f32, sub, 0x90) = 0.25f;
+    FIELD(f32, sub, 0x94) = 0.1875f;
+    FIELD(f32, sub, 0x98) = 0.25f;
+    FIELD(f32, sub, 0xA0) = 1.5707965f;
     FIELD(s32, actor, 0x11B0) = 0;
     func_802647E8_de((void *)FIELD(s32, actor, 0x698), 1);
     FIELD(s32, actor, 0x678) = 0;
@@ -264,7 +266,7 @@ void Ovlgame_InitActorHudState(void *actor) {
     func_802AA6D0_de(widget, -0x52, 0x10);
     func_802AA70C_de(widget, D_800C942C_de);
     widget = (char *)actor + 0x1084;
-    FIELD(f32, actor, 0x107C) = D_800C2314_de;
+    FIELD(f32, actor, 0x107C) = 255.0f;
     func_802AA6D0_de(widget, -0x52, 0x44);
     func_802AA70C_de(widget, D_800C9458);
     widget = (char *)actor + 0x10C0;
@@ -277,15 +279,12 @@ void Ovlgame_InitActorHudState(void *actor) {
     FIELD(s32, actor, 0x7BC) = 0;
     FIELD(s32, actor, 0x1134) = FIELD(s32, actor, 0x5E4);
     if (FIELD(void *, actor, 0x5DC) != 0) {
-        FIELD(s32, actor, 0x760) = FIELD(s32, FIELD(void *, actor, 0x5DC), 0x140);
-        FIELD(s32, actor, 0x764) = FIELD(s32, FIELD(void *, actor, 0x5DC), 0x144);
-        FIELD(s32, actor, 0x768) = FIELD(s32, FIELD(void *, actor, 0x5DC), 0x148);
-        FIELD(s32, actor, 0x76C) = FIELD(s32, FIELD(void *, actor, 0x5DC), 0x14C);
+        *(HudQuad *)((char *)actor + 0x760) = *(HudQuad *)((char *)FIELD(void *, actor, 0x5DC) + 0x140);
     }
     func_8021A78C_de(actor);
     enabled = 0;
     if (func_80245784_de() == 0) {
-        enabled = 0 < (D_8013B2BC ^ 0x3E7);
+        enabled = enabled < (u32)(D_8013B2BC ^ 0x3E7);
     }
     if (D_8013B290 != 0) {
         enabled = 1;
