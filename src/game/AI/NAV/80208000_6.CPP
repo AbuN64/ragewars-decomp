@@ -133,7 +133,7 @@ extern PlatformRoute *func_8028D218_de(void *, s32);
 extern CVector3 *func_8028D244_de(void *, s32, s32);
 extern f32 func_802726F8_de(void *, void *);
 
-void func_8020ABF0_de(CNavData *graph) {
+void Nav_AssignPlatformEndpoints(CNavData *graph) {
     NavigationPlatform *platforms[30];
     CVector3 chosenPosition, start, end;
     NavigationSearchNode *node;
@@ -231,7 +231,7 @@ void func_8020ABF0_de(CNavData *graph) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8020ABF0_de);
+INCLUDE_ASM("span_1000", Nav_AssignPlatformEndpoints);
 #endif
 
 #include "COMMON/SHAREDCALLBACK5.H"

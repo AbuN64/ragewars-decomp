@@ -8,7 +8,7 @@
    requested at 0xC, the request is already active at 0x4, or it continues the committed request at
    0x28 through valid links at 0x14 and 0x18 that are already current or that func_8020CC0C_de joins;
    otherwise it resets the controller, runs the pending release passes flagged at 0x2F4, 0x2F8 and
-   0x2FC, rebuilds through func_8020EC14_de, loads the request, clears the controller's link word,
+   0x2FC, rebuilds through Nav_SetPickupGoalWeights, loads the request, clears the controller's link word,
    reselects the active entry, copies the four link words from 0x14 and records the request as
    committed. Always returns 1. Written from its own assembly with early returns. */
 
@@ -65,7 +65,7 @@ s32 func_8020EAE0_de(void *arg0) {
     if (((Func8020ED50Arg *)arg0)->releaseFlags[2] != 0) {
         func_8020EEA4_de(arg0);
     }
-    func_8020EC14_de(arg0);
+    Nav_SetPickupGoalWeights(arg0);
     func_8020D1FC_de(base);
     func_8020D220_de(base, ((Func8020ED50Arg *)arg0)->fieldC);
     base[6] = -1;
@@ -81,7 +81,7 @@ s32 func_8020EAE0_de(void *arg0) {
 extern u8 D_8011D8D0[];
 extern s32 func_8020CB3C_de(s32 *, void *);
 extern u8 *func_8020CFE0_de(s32 *, s32);
-void func_8020EC14_de(void *arg) {
+void Nav_SetPickupGoalWeights(void *arg) {
     s32 *ctrl = &D_8013B364;
     u8 *entry;
     u8 *node;
@@ -113,5 +113,5 @@ void func_8020EC14_de(void *arg) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8020EC14_de);
+INCLUDE_ASM("span_1000", Nav_SetPickupGoalWeights);
 #endif

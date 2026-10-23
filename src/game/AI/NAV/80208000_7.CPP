@@ -169,7 +169,7 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
     obj->value = D_800C1D6C_de;
     func_8020D1FC_de(obj);
     found = 0;
-    func_8020EC14_de(owner);
+    Nav_SetPickupGoalWeights(owner);
     func_8020D220_de(obj, requested);
 
     {

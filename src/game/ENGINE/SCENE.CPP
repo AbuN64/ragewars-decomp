@@ -50,7 +50,7 @@
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
 extern void World_ResetPlayerState();
-extern void func_8020ABF0_de();
+extern void Nav_AssignPlatformEndpoints();
 extern s32 func_8020CB3C_de();
 extern void * func_8022A5F4_de();
 extern void func_80236874_de();
@@ -693,7 +693,7 @@ block_122:
     count = (char *)&((struct SharedRecAt1B92C *)table)->unk1B4DC - (char *)table;
     temp_v0_2 = (char *)table + count;
     func_8020AA40_de(temp_v0_2);
-    func_8020ABF0_de(temp_v0_2);
+    Nav_AssignPlatformEndpoints(temp_v0_2);
     (((struct SharedRecAt1B92C *)(table))->unk0) = 4;
     func_80449E18_de(&D_80145040);
     group = &D_80145040.object;

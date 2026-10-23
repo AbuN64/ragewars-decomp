@@ -53,11 +53,13 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     if (carrier != 0 && D_80145040.game.counters.m_bCTFOn != 0) {
         if (carrier == controller->player) {
             nextState = 10;
-            goto changeState;
+            func_80209874_de(controller, nextState);
+            return 1;
         }
         if (controller->target != 0) {
             nextState = 1;
-            goto changeState;
+            func_80209874_de(controller, nextState);
+            return 1;
         }
     }
     if (D_801468A0.m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
@@ -70,7 +72,8 @@ s32 Nav_SelectPlayerState(AiController *controller) {
             return 1;
         }
         nextState = 11;
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     }
     threshold = (s32)((1.0f - func_80209B64_de(controller)) * 80.0f);
     if (D_80146938 != 0 && controller->player->profile->enabled != 0) {
@@ -79,44 +82,48 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)threshold) {
         controller->routeState = 1;
         nextState = 8;
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     }
     if (func_80209AD8_de(controller) == 0 && ammoPercent < 10.0f) {
         controller->routeState = func_8020F5A4_de(controller);
         nextState = 8;
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     }
     state = controller->state;
     if ((state == 3 || state == 4 || state == 13) && ammo0 < 10 && ammo1 < 10 && ammo2 <= 0) {
         controller->routeState = 4;
         nextState = 8;
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     }
     if (func_80209A94_de(controller) != 0 && controller->target == 0) {
         nextState = 2;
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     }
     if (func_8020EA10_de(controller) != 0 && (state = controller->state) != 9) {
         if (state == 1 || state == 2) {
             nextState = 9;
-            goto changeState;
+            func_80209874_de(controller, nextState);
+            return 1;
         }
     } else if (func_80209AD8_de(controller) != 0 && (f32)threshold < healthPercent && 10.0f < ammoPercent) {
         nextState = 2;
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     } else if (func_80209A94_de(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
         if (controller->player->profile->enabled != 0 && controller->player->profile->character == 12) {
             nextState = 13;
         } else {
             nextState = 1;
         }
-        goto changeState;
+        func_80209874_de(controller, nextState);
+        return 1;
     }
     return 1;
 
-changeState:
-    func_80209874_de(controller, nextState);
-    return 1;
 }
 #else
 INCLUDE_ASM("span_1000", Nav_SelectPlayerState);

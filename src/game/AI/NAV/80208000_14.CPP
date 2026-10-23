@@ -76,7 +76,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
 
 extern s32 func_8020CC0C_de(PickupGoalNodeList *list, s32 from, s32 to);
 #ifdef NON_MATCHING
-s32 func_8020D6E4_de(Selection_func_8020D4AC_de *sel) {
+s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
     CVector3 avg;
     Shared_PickupGoalNode *info;
     CVector3 *node;
@@ -149,5 +149,5 @@ s32 func_8020D6E4_de(Selection_func_8020D4AC_de *sel) {
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_8020D6E4_de);
+INCLUDE_ASM("span_1000", Nav_InsertPickupRouteNode);
 #endif

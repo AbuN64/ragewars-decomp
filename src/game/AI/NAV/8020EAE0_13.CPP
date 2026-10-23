@@ -39,7 +39,7 @@ typedef struct Chaser {
 
 Racer *func_8022A5F4_de(World *arg0, u32 arg1);
 f32 func_802726F8_de(void *arg0, void *arg1);
-s32 func_8021035C_de(Chaser *arg0, s32 arg1);
+s32 Nav_EvaluateAttackTarget(Chaser *arg0, s32 arg1);
 
 s32 func_80210248_eu(Chaser *self) {
     s32 i;
@@ -64,7 +64,7 @@ s32 func_80210248_eu(Chaser *self) {
             && (other->stateBits >> 8) > 0) {
             self->target[count] = other;
             self->dist[count] = func_802726F8_de(&self->self->pos, &other->pos);
-            self->cost[count] = func_8021035C_de(self, count);
+            self->cost[count] = Nav_EvaluateAttackTarget(self, count);
             count++;
         }
     }
@@ -88,7 +88,7 @@ extern f32 func_80209B64_de(AttackBrain *);
 extern f32 func_80216F44_de(AttackActor *, AttackPosition);
 extern s32 func_8020D1CC_de(void *, s32, s32);
 
-s32 func_8021035C_de(Chaser *self, s32 index) {
+s32 Nav_EvaluateAttackTarget(Chaser *self, s32 index) {
     AttackBrain *brain = (AttackBrain *)self;
     AttackActor *target = brain->targets[index]->actor;
     s32 accept = 0;
@@ -130,9 +130,14 @@ s32 func_8021035C_de(Chaser *self, s32 index) {
     if (brain->last != target || brain->timer < 451) return 0;
     if (brain->weights[index] < (nearLimit << 1)) {
         switch (band) {
-        case 1: scale = D_800C1F74_de; goto rescale;
-        case 2: scale = D_800C1F78_de;
-rescale: brain->weights[index] = (s32)((f32)brain->weights[index] * scale); break;
+        case 1:
+            scale = D_800C1F74_de;
+            brain->weights[index] = (s32)((f32)brain->weights[index] * scale);
+            break;
+        case 2:
+            scale = D_800C1F78_de;
+            brain->weights[index] = (s32)((f32)brain->weights[index] * scale);
+            break;
         }
         speed = func_80209B64_de(brain);
         brain->weights[index] = (s32)((f32)brain->weights[index] * ((D_800C1F7C_de - speed) * D_800C1F80_de + D_800C1F80_de));
@@ -141,7 +146,7 @@ rescale: brain->weights[index] = (s32)((f32)brain->weights[index] * scale); brea
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_8021035C_de);
+INCLUDE_ASM("span_1000", Nav_EvaluateAttackTarget);
 #endif
 
 #if defined(VERSION_US)

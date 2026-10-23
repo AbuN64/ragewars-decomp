@@ -3,7 +3,7 @@
 /* Advances a committed selection's stage against the node list D_8013B364: finishes through
    func_8020DB14_de when there are no stages at 0x1BC, counts once into 0x1C8 the list's kind-6 nodes whose
    id matches the selection id at 0x1C0, then runs func_8020D4AC_de while the stage is within that count,
-   func_8020D6E4_de on the stage right after it and func_8020D9C0_de on the one after that. */
+   Nav_InsertPickupRouteNode on the stage right after it and func_8020D9C0_de on the one after that. */
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 /* Navigation selection/list/node canonical ownership remains unresolved. */
@@ -18,7 +18,7 @@ extern NodeList D_8013B364;
 
 extern Node_func_8020D364_de *func_8020C9B0_de(NodeList *list, s32 index);
 extern s32 func_8020D4AC_de(Selection *sel);
-extern s32 func_8020D6E4_de(Selection *sel);
+extern s32 Nav_InsertPickupRouteNode(Selection *sel);
 extern s32 func_8020D9C0_de(Selection *sel);
 extern s32 func_8020DB14_de(Selection *sel);
 
@@ -46,7 +46,7 @@ s32 func_8020D370_de(Selection *sel)
         return func_8020D4AC_de(sel);
     }
     if (sel->stage == sel->matches + 1) {
-        return func_8020D6E4_de(sel);
+        return Nav_InsertPickupRouteNode(sel);
     }
     if (sel->stage == sel->matches + 2) {
         return func_8020D9C0_de(sel);
