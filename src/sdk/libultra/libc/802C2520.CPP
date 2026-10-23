@@ -43,7 +43,7 @@ extern const char D_800D52D4[];
         } \
     }
 extern unsigned int D_auto_data_unresolved_800CCD48[];
-s32 func_802BD430_de(void *(*prout)(void *, const char *, s32), void *arg, const char *fmt, va_list ap) {
+s32 Libc_FormatToCallback(void *(*prout)(void *, const char *, s32), void *arg, const char *fmt, va_list ap) {
     _Pft x;
     x.nchar = 0;
     for (;;) {
@@ -114,7 +114,7 @@ s32 func_802BD430_de(void *(*prout)(void *, const char *, s32), void *arg, const
 }
 
 #else
-INCLUDE_ASM("span_1000", func_802BD430_de);
+INCLUDE_ASM("span_1000", Libc_FormatToCallback);
 #endif
 
 extern size_t func_802BD400_de(const unsigned char *s);

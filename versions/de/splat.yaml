@@ -4299,7 +4299,7 @@ segments:
       - [0xC86F8, data, data_800C/D_auto_data_unresolved_800C7AF8]
       - [0xC8710, rodata, data_800C/D_802BD430_CD960]
       - [0xC8714, data, data_800C/rodata_unresolved_800C7B14]
-      - [0xC8718, rodata, data_800C/literals_func_802BD430_de]
+      - [0xC8718, rodata, data_800C/literals_Libc_FormatToCallback]
       - [0xC8868, data, data_800C/D_auto_rodata_unresolved_800C7C68]
       - [0xC88C0, rodata, data_800C/D_802BF514_CDB10]
       - [0xC88D0, rodata, data_800C/D_802BF67C_CDB20]

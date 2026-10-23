@@ -4309,7 +4309,7 @@ segments:
       - [0xC9CB8, data, data_800C/D_auto_data_unresolved_800C90B8]
       - [0xC9CD0, rodata, data_800C/D_802BD430_CD960]
       - [0xC9CD4, data, data_800C/rodata_unresolved_800C90D4]
-      - [0xC9CD8, rodata, data_800C/literals_func_802BD430_de]
+      - [0xC9CD8, rodata, data_800C/literals_Libc_FormatToCallback]
       - [0xC9E28, data, data_800C/D_auto_rodata_unresolved_800C9228]
       - [0xC9E80, rodata, data_800C/D_802BF514_CDB10]
       - [0xC9E90, rodata, data_800C/D_802BF67C_CDB20]
