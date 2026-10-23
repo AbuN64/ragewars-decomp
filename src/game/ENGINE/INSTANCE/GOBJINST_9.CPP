@@ -8,7 +8,7 @@
 #include "FX_2/80271B18.H"
 
 /* Draws an object's cast shadow: objects without shadow flag 0x10000000 get the blob shadow of
- * func_8024ADD0_de; otherwise, once per frame the shadow model from func_802799C0_de is built for an object above
+ * Instance_DrawBlobShadow; otherwise, once per frame the shadow model from func_802799C0_de is built for an object above
  * the ground: the light of the current view (direction from its signed bytes, strength from its colour)
  * is sampled at the object through func_80268A40_de, the shadow alpha is 128 plus 56 per unit of light (faded
  * by D_800D15F0 during a fade), the light direction is kept at least 0.15 from horizontal, and the shadow
@@ -33,7 +33,7 @@ extern void func_80274244_de(void *, f32 *);
 #endif
 extern void func_8026F620_de(void *, f32 *, f32 *);
 extern void func_8024BA7C_de(char *, char *, void *, u8);
-extern void func_8024ADD0_de(struct LevelActor *, CVector3 *, s32);
+extern void Instance_DrawBlobShadow(struct LevelActor *, CVector3 *, s32);
 void func_8024AA18_de(char *obj, s32 unused, char *info) {
     CVector3 dir;
     f32 projection[16];
@@ -101,7 +101,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
         }
         func_8024BA7C_de(obj, info, ((struct LevelActor *)(obj))->shadow, ((struct LevelActor *)(obj))->shadowAlpha);
     } else {
-        func_8024ADD0_de((struct LevelActor *)obj, ((struct ActorRenderSettings *)(info))->shadowOffset, 0);
+        Instance_DrawBlobShadow((struct LevelActor *)obj, ((struct ActorRenderSettings *)(info))->shadowOffset, 0);
     }
 }
 
@@ -118,94 +118,72 @@ void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz);
 
 void func_8027027C_de(f32 *src, PackedMatrixWords *dst);
 void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x60, 0x64, 0x68, 0x6c, 0x70, 0x80, 0x84, 0x88, 0x8c], gap at: 0x74. */
-void func_8024ADD0_de(struct LevelActor *actorIn, CVector3 *offsetIn, s32 arg2) {
-    void *arg0 = actorIn;
-    void *arg1 = offsetIn;
+/* 29/167 aligned edits; remaining: radius/float allocation and call setup. */
+void Instance_DrawBlobShadow(struct LevelActor *actor, CVector3 *offset, s32 raised) {
     f32 matrix[16];
-    f32 sp50[3];
+    CVector3 position;
     f32 scale;
-    f32 temp_fs0f;
-    f32 temp_fs1;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0f;
-    f32 temp_fv1;
-    f32 var_fv0;
-    f32 var_fv0_2;
-    f32 var_fv0_3;
-    f32 var_fv1;
-    s32 temp_v0;
-    s32 var_v0;
-    s32 var_v1;
-    u8 temp_v1;
+    f32 groundHeight;
+    f32 height;
+    f32 baseRadius;
+    f32 opacity;
+    f32 shrink;
+    f32 limitedRadius;
+    f32 radius;
+    f32 scaleFactor;
+    f32 lift;
+    PackedMatrixWords *packed;
+    u8 targetAlpha;
 
-    temp_v0 = func_802799C0_de(&D_8011FFB0, 1);
-    if (temp_v0 != 0) {
-        temp_fs0f = func_8024E678_de(arg0);
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        temp_fs1 = (*((f32 *) ((u8 *) (arg0) + 12)) + *((f32 *) ((u8 *) (arg0) + 112))) - temp_fs0f;
-        temp_fv0 = func_8024E2FC_de(arg0);
-        temp_fv1 = temp_fs1 * D_800C3AB8_de;
-        var_fv0 = temp_fv0 - temp_fv1;
-        if (!(var_fv0 <= temp_fv0)) {
-            var_fv0 = temp_fv0;
+    packed = func_802799C0_de(&D_8011FFB0, 1);
+    if (packed != 0) {
+        groundHeight = func_8024E678_de(actor);
+        height = (actor->position0.y + actor->eyeHeight) - groundHeight;
+        baseRadius = func_8024E2FC_de((Actor_u1 *)actor);
+        shrink = height * D_800C3AB8_de;
+        limitedRadius = baseRadius - shrink;
+        if (!(limitedRadius <= baseRadius)) {
+            limitedRadius = baseRadius;
         }
-        var_fv0_2 = 0.0f;
-        if (!(var_fv0 < 0.0f)) {
-            var_fv0_2 = temp_fv0 - temp_fv1;
-            if (!(var_fv0_2 <= temp_fv0)) {
-                var_fv0_2 = temp_fv0;
+        radius = 0.0f;
+        if (!(limitedRadius < 0.0f)) {
+            radius = baseRadius - shrink;
+            if (!(radius <= baseRadius)) {
+                radius = baseRadius;
             }
         }
-        if (arg2 != 0) {
-            var_fv0_3 = D_800C3ABC_de;
-            var_fv1 = D_800C3AC0_de;
+        if (raised != 0) {
+            scaleFactor = D_800C3ABC_de;
+            lift = D_800C3AC0_de;
         } else {
-            var_fv0_3 = D_800C3AC4_de;
-            var_fv1 = 0.0f;
+            scaleFactor = D_800C3AC4_de;
+            lift = 0.0f;
         }
-        scale = var_fv0_2 * var_fv0_3;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        sp50[0] = *((f32 *) ((u8 *) (arg0) + 8)) + *((f32 *) ((u8 *) (arg1) + 0));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        sp50[2] = *((f32 *) ((u8 *) (arg0) + 16)) + *((f32 *) ((u8 *) (arg1) + 8));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        sp50[1] = temp_fs0f + var_fv1 + *((f32 *) ((u8 *) (arg1) + 4));
-        func_8027254C_de(sp50, 20000.0f);
-        func_80274244_de(arg0 + 0x5C, matrix);
+        scale = radius * scaleFactor;
+        position.x = actor->position0.x + offset->x;
+        position.z = actor->position0.z + offset->z;
+        position.y = groundHeight + lift + offset->y;
+        func_8027254C_de((f32 *)&position, 20000.0f);
+        func_80274244_de(&actor->rotation, matrix);
         func_8027347C_de(matrix, scale, 1.0f, scale);
-        func_80273448_de((s8 *) matrix, sp50[0], sp50[1], sp50[2]);
-        func_8027027C_de(matrix, (PackedMatrixWords *) temp_v0);
-        temp_fv0f = D_800C3ACC_de - (temp_fs1 * D_800C3AC8_de);
-        var_v0 = 0xFF;
-        if (!(D_800C8BC0 < temp_fv0f)) {
-            var_v0 = 0;
-            if (!(temp_fv0f < 0.0f)) {
-                var_v0 = 0xFF;
-                if (!(D_800C8BC0 < temp_fv0f)) {
-                    if (D_800C3AD4_de <= temp_fv0f) {
-                        var_v0 = (s32) (temp_fv0f - D_800C3AD4_de) | 0x80000000;
-                    } else {
-                        var_v0 = (s32) temp_fv0f;
-                    }
+        func_80273448_de((s8 *) matrix, position.x, position.y, position.z);
+        func_8027027C_de(matrix, (PackedMatrixWords *) packed);
+        opacity = D_800C3ACC_de - (height * D_800C3AC8_de);
+        targetAlpha = 0xFF;
+        if (!(D_800C8BC0 < opacity)) {
+            targetAlpha = 0;
+            if (!(opacity < 0.0f)) {
+                targetAlpha = 0xFF;
+                if (!(D_800C8BC0 < opacity)) {
+                    targetAlpha = (u8)opacity;
                 }
             }
         }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        temp_v1 = *((u8 *) ((u8 *) (arg0) + 314));
-        temp_fv0_2 = (f32) temp_v1 + ((f32) ((var_v0 & 0xFF) - temp_v1) * D_800C3AD8_de);
-        if (D_800C3ADC_de <= temp_fv0_2) {
-            var_v1 = (s32) (temp_fv0_2 - D_800C3ADC_de) | 0x80000000;
-        } else {
-            var_v1 = (s32) temp_fv0_2;
-        }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        *((u8 *) ((u8 *) (arg0) + 314)) = (u8) var_v1;
-        func_8026992C_de((void *) temp_v0, arg2 == 0, var_v1 & 0xFF);
+        actor->shadowAlpha = (u8)(actor->shadowAlpha +
+            ((s32)targetAlpha - actor->shadowAlpha) * D_800C3AD8_de);
+        func_8026992C_de(packed, raised == 0, actor->shadowAlpha);
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8024ADD0_de);
+INCLUDE_ASM("span_1000", Instance_DrawBlobShadow);
 #endif

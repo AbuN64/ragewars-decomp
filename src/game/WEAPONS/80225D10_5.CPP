@@ -99,7 +99,7 @@ extern void func_80246E44_de(char *);
 
 
 
-extern void func_8024ADD0_de(void *arg0, CVector3 *arg1, s32 arg2);
+extern void Instance_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
 
 extern void func_80253754_de(s32 arg0, s32 arg1);
 
@@ -368,7 +368,7 @@ void func_80228798_de(void *arg0, void *view) {
                                     delta.y = 0.0f;
                                     delta.z = ((ObjRecAt130 *)(((func_80228774_S5 *)(linked))->unk5DC))->unk130 -
                                               ((ObjRecAt1D8V3 *)(actor))->unk10;
-                                    func_8024ADD0_de(actor, &delta, 1);
+                                    Instance_DrawBlobShadow(actor, &delta, 1);
                                 }
                                 func_80253754_de(0, (s32)resource);
                             }

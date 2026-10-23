@@ -35,7 +35,7 @@ extern s32 D_80140FF8;
 
 
 
-extern void func_8024ADD0_de(void *arg0, CVector3 *arg1, s32 arg2);
+extern void Instance_DrawBlobShadow(void *arg0, CVector3 *arg1, s32 arg2);
 
 
 
@@ -131,7 +131,7 @@ void func_8022BC94_de(void *actorIn, s32 arg1) {
                     sp28.x = message->position.x - object->unk_8.x;
                     sp28.y = 0.0f;
                     sp28.z = ((SharedRecAt564V1 *)actor->message)->position.z - object->unk_8.z;
-                    func_8024ADD0_de(actorIn, &sp28, arg1);
+                    Instance_DrawBlobShadow(actorIn, &sp28, arg1);
                 }
             }
             func_80253754_de(0, temp_s1);
