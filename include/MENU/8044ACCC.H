@@ -22,7 +22,7 @@ struct State_func_8044D5C4_de {
 };
 struct SceneRecAt1B2B4 {
     char pad0[0x1B2B0];
-    struct LightSettings *light;
+    struct CROMLevel_t *light;
     s16 dir[3];
 };
 struct func_8044B27C_S1 {

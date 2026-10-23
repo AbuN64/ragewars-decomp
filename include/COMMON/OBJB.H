@@ -26,16 +26,16 @@ typedef struct ObjB ObjB;
 struct World;
 
 
-struct LightSettings;
-struct LightSettings {
-    f32 gridDistance;
+struct CROMLevel_t;
+struct CROMLevel_t {
+    f32 m_GridDistance;
     char pad4[0xA - 0x4];
-    u8 color[3];
-    u8 ambient[3];
+    u8 m_DirectionalLight[3];
+    u8 m_AmbientLight[3];
     char pad10;
-    signed char dir[3];
+    signed char m_Direction[3];
 };
-struct LightSettings;
+struct CROMLevel_t;
 struct SceneRecAt1B2B4;
 
 struct func_8044B27C_S1;

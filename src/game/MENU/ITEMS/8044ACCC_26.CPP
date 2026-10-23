@@ -27,18 +27,18 @@ void func_8044BE04_de(SceneRecAt1B2B4 *scene) {
     f32 length;
     u8 *light;
     for (i = 0; i < 3; i++) {
-        c = scene->light->ambient[i];
+        c = scene->light->m_AmbientLight[i];
         light = D_800CBC90;
         light[i] = c;
         D_800CBC94[i] = c;
-        c = scene->light->color[i];
+        c = scene->light->m_DirectionalLight[i];
         light[i + 8] = c;
         D_800CBC9C[i] = c;
-        D_800CBCA0[i] = scene->light->dir[i];
+        D_800CBCA0[i] = scene->light->m_Direction[i];
     }
-    v[0] = scene->light->dir[0];
-    v[1] = scene->light->dir[1];
-    v[2] = scene->light->dir[2];
+    v[0] = scene->light->m_Direction[0];
+    v[1] = scene->light->m_Direction[1];
+    v[2] = scene->light->m_Direction[2];
     length = func_802B72B0_de(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     if (length != 0.0f) {
         func_80271F9C_de(v, v, D_800CA1F0 / length);

@@ -81,12 +81,12 @@ typedef struct ObjRecAt120C ObjRecAt120C;
 
 struct Timer;
 struct Timer {
-    float step;
-    float duration;
+    float m_DamagePerFrame;
+    float m_FramesRemaining;
     int kind;
-    float target;
-    float elapsed;
-    int tag;
+    float m_TotalDamage;
+    float m_DamageIssued;
+    int m_bIsInflator;
 };
 
 struct Obj_func_8022B550_de;

@@ -126,14 +126,14 @@ void func_8022B550_de(Obj_func_8022B550_de *obj, float target, float rate, int k
 
     for (i = 0; i < 5; i++) {
         Timer *t = &obj->timers[i];
-        if (t->duration <= 0.0f) {
+        if (t->m_FramesRemaining <= 0.0f) {
             t->kind = kind;
-            t->target = target;
-            t->elapsed = 0.0f;
-            t->tag = tag;
-            t->duration = rate * D_800C7E00;
+            t->m_TotalDamage = target;
+            t->m_DamageIssued = 0.0f;
+            t->m_bIsInflator = tag;
+            t->m_FramesRemaining = rate * D_800C7E00;
             do {
-                t->step = target / t->duration;
+                t->m_DamagePerFrame = target / t->m_FramesRemaining;
                 return;
             } while (0);
         }

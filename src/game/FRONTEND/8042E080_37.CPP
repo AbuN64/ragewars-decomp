@@ -33,7 +33,7 @@ void func_80434B08_de(s32 player) {
     globals = &D_801462C8;
     for (i = 0; i < 4; i++) {
         if (D_800FEB0E[i * 400] == 0 && D_80102B0D[i * 400] == player &&
-            globals->status[i].active == 1 && globals->status[i].out == 0) {
+            globals->status[i].active == 1 && globals->status[i].m_IsBot == 0) {
             Resmgr_CopyBytes(D_800E54A4->players[player].slots[D_800FEB0C[i * 400]],
                           &D_80102B00[i * 400], size);
         }

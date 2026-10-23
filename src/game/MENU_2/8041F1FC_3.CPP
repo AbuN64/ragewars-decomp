@@ -338,11 +338,11 @@ void func_80420618_de(int player, int choice) {
     for (i = 0; i < 8; i++) {
         slot[i].active = 0;
         if (D_800E42D0->players[i].unkC == 3) {
-            slot[i].out = 0;
+            slot[i].m_IsBot = 0;
             slot[i].active = 1;
-            slot[i].slot = i;
+            slot[i].m_nController = i;
             kind = func_8041F1D8_de(D_800E42D0->players[i].kind);
-            slot[i].character = kind;
+            slot[i].m_nCharacter = kind;
             if (D_801462C8->trialKind == 1) {
                 D_800FEB0F[i * 0x190] = kind;
             }

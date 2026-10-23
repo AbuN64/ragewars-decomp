@@ -668,19 +668,19 @@ void Frontend_FillResultRows(void) {
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-typedef struct DraftScoreRecord {
-    char pad0[4]; s16 kills; s16 score; s16 alternate;
+typedef struct CPlayerOptions_t {
+    char pad0[4]; s16 m_TotalKills; s16 m_TotalTags; s16 m_TotalCaptures;
     char padA[0x6E]; u8 active;
     char pad79[0x19]; u8 team;
     char pad93[3];
-} DraftScoreRecord;
+} CPlayerOptions;
 typedef struct DraftScoreScreen { char pad0[0xE8]; s32 selection; s32 count; s32 order[8]; } DraftScoreScreen;
 extern s32 D_8014DD98;
 extern s32 func_8042D060_de(void);
 
 void func_8042C6CC_de(void) {
     DraftScoreScreen *screen;
-    DraftScoreRecord *a, *b;
+    CPlayerOptions *a, *b;
     s32 teams[5];
     s32 i, j, k, pass, mode, value, first, second;
     s16 killsA, killsB, scoreA, scoreB;
@@ -690,7 +690,7 @@ void func_8042C6CC_de(void) {
     screen->count = 0;
     for (i = 0; i < 8; i++) {
         screen->order[i] = -1;
-        if (((DraftScoreRecord *)D_80146398)[i].active == 1) {
+        if (((CPlayerOptions *)D_80146398)[i].active == 1) {
             screen->order[screen->count] = i;
             screen->count++;
         }
@@ -715,13 +715,13 @@ void func_8042C6CC_de(void) {
         screen = (*(DraftScoreScreen * *)&D_800E53C0);
         for (pass = 0; pass < (*(DraftScoreScreen * *)&D_800E53C0)->count; pass++) {
             for (i = 0; i < (*(DraftScoreScreen * *)&D_800E53C0)->count - 1; i++) {
-                team = ((DraftScoreRecord *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i]].team;
+                team = ((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i]].team;
                 first = -1;
                 if (team < 5) {
                     if (D_8014DD98 == 0) first = D_801462C8.counters.counts[team];
                     else first = D_801462C8.counters.scores[team];
                 }
-                team = ((DraftScoreRecord *)D_80146398)[screen->order[i + 1]].team;
+                team = ((CPlayerOptions *)D_80146398)[screen->order[i + 1]].team;
                 second = -1;
                 if (team < 5) {
                     if (D_8014DD98 == 0) second = D_801462C8.counters.counts[team];
@@ -735,12 +735,12 @@ void func_8042C6CC_de(void) {
             team = teams[k];
             for (pass = 0; pass < (*(DraftScoreScreen * *)&D_800E53C0)->count; pass++) {
                 for (j = 0; j < (*(DraftScoreScreen * *)&D_800E53C0)->count - 1; j++) {
-                    a = &((DraftScoreRecord *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[j]];
-                    b = &((DraftScoreRecord *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[j + 1]];
-                    killsA = a->kills; killsB = b->kills;
+                    a = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[j]];
+                    b = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[j + 1]];
+                    killsA = a->m_TotalKills; killsB = b->m_TotalKills;
                     if (a->team == team && b->team == team) {
                         if (mode == 1 || mode != 3) { scoreA = killsA; scoreB = killsB; }
-                        else { scoreA = a->alternate; scoreB = b->alternate; }
+                        else { scoreA = a->m_TotalCaptures; scoreB = b->m_TotalCaptures; }
                         if (scoreA < scoreB || (scoreA == scoreB && killsA < killsB)) {
                             value = screen->order[j]; screen->order[j] = screen->order[j + 1]; screen->order[j + 1] = value;
                         }
@@ -752,12 +752,12 @@ void func_8042C6CC_de(void) {
         screen = (*(DraftScoreScreen * *)&D_800E53C0);
         for (pass = 0; pass < (*(DraftScoreScreen * *)&D_800E53C0)->count; pass++) {
             for (i = 0; i < (*(DraftScoreScreen * *)&D_800E53C0)->count - 1; i++) {
-                a = &((DraftScoreRecord *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i]];
-                b = &((DraftScoreRecord *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i + 1]];
-                killsA = a->kills; killsB = b->kills;
-                if (mode == 2) { scoreA = a->score; scoreB = b->score; }
+                a = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i]];
+                b = &((CPlayerOptions *)D_80146398)[(*(DraftScoreScreen * *)&D_800E53C0)->order[i + 1]];
+                killsA = a->m_TotalKills; killsB = b->m_TotalKills;
+                if (mode == 2) { scoreA = a->m_TotalTags; scoreB = b->m_TotalTags; }
                 else if (mode < 3 || mode != 3) { scoreA = killsA; scoreB = killsB; }
-                else { scoreA = a->alternate; scoreB = b->alternate; }
+                else { scoreA = a->m_TotalCaptures; scoreB = b->m_TotalCaptures; }
                 if (scoreA < scoreB || (scoreA == scoreB && killsA < killsB)) {
                     value = screen->order[i]; screen->order[i] = screen->order[i + 1]; screen->order[i + 1] = value;
                 }

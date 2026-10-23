@@ -77,7 +77,7 @@ s32 Achieve_MatchQualifies(void) {
     count = 0;
     for (i = 0; i < 8; i++) {
         slot = &D_801462C8.slots[i];
-        if (slot->active == 1 && slot->locked != slot->active && D_800FF140_de[i] >= 76) {
+        if (slot->active == 1 && slot->m_IsBot != slot->active && D_800FF140_de[i] >= 76) {
             count++;
         }
     }

@@ -928,11 +928,11 @@ struct ListScreenRecord {
     char pad0[0x78];
     u8 active;
     char pad79[6];
-    u8 slot; /* +0x7F */
-    s8 character; /* +0x80 */
+    u8 m_nController; /* +0x7F */
+    s8 m_nCharacter; /* +0x80 */
     u8 variant; /* +0x81: selected costume */
     char pad82[0xF];
-    u8 out;
+    u8 m_IsBot;
     char pad92[0x4];
 };
 

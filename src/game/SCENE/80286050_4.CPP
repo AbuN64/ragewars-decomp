@@ -196,7 +196,7 @@ void func_8028798C_de(Shared_World *world, void ***handle) {
 
                 func_8024F960_eu(&props[i], &efficient[i],
                                  func_8028FE28_de(world->indexedDirectory, world->indexedBank, efficient[i].id),
-                                 segments, world->levelInfo->gridDistance);
+                                 segments, world->levelInfo->m_GridDistance);
             }
             for (j = 0; j < staticCount; j++) {
                 func_8024FD6C_eu(&props[j + efficientCount], &statics[j],

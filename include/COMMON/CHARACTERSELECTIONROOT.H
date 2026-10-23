@@ -211,7 +211,7 @@ struct RosterSlot {
     unsigned char kind;
     unsigned char variant;
     char pad82[0xF];
-    unsigned char locked;
+    unsigned char m_IsBot;
     char pad92[4];
 };
 

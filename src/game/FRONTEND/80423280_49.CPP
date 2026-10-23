@@ -172,9 +172,9 @@ s32 func_80429A24_de(void *window) {
 
     for (i = 0; i < 8; i++) {
         record = &D_80146398[i];
-        if (record->out == 1) {
+        if (record->m_IsBot == 1) {
             record->active = 0;
-            record->out = 0;
+            record->m_IsBot = 0;
         }
     }
     func_802A23C4_de(1);
