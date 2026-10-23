@@ -25,7 +25,7 @@ extern s32 func_8025F0C4_eu_x(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US)
 extern s32 func_8025F074_us(void *, void *, s32, s32, s32, s32);
 #elif defined(VERSION_US_REV1)
-extern s32 func_8025F0F4_us_rev1(void *, void *, s32, s32, s32, s32);
+extern s32 System_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 #else
 extern s32 func_8025F0D4_de(void *, void *, s32, s32, s32, s32);
 #endif
@@ -110,7 +110,7 @@ func_8025F0C4_eu_x
 #elif defined(VERSION_US)
 func_8025F074_us
 #elif defined(VERSION_US_REV1)
-func_8025F0F4_us_rev1
+System_ExpandAnimationTracks
 #else
 func_8025F0D4_de
 #endif
@@ -130,7 +130,7 @@ func_8025F0C4_eu_x
 #elif defined(VERSION_US)
 func_8025F074_us
 #elif defined(VERSION_US_REV1)
-func_8025F0F4_us_rev1
+System_ExpandAnimationTracks
 #else
 func_8025F0D4_de
 #endif

@@ -400,7 +400,6 @@ INCLUDE_ASM("span_1000", func_8025F0D4_de);
 #endif
 
 #if defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
 #include "TYPES.H"
 
 #include "COMMON/STREAM.H"
@@ -411,12 +410,16 @@ extern f32 D_800C91F8;
  * then normalize quaternion samples. */
 extern s32 D_8010AC88, D_8010AC84;
 extern char D_002611A0_us_rev1[], D_0025EF54_us_rev1[], D_00261258_us_rev1[];
-/* 96/216 words identical (frame, switch, init loops, smoothing core); remaining: callee-saved register assignment (buffer/tracks s5/s6, channels fp, decode s7, stream pointer s3) */
-s32 func_8025F0F4_us_rev1(s32 source, s32 *buffer, s32 tracks, s32 channels, s32 radius, s32 encoding) {
+typedef struct {
+    s32 count;
+    s32 offsets[1];
+} AnimationSampleTable;
+
+s32 System_ExpandAnimationTracks(s32 source, AnimationSampleTable *buffer, s32 tracks, s32 channels, s32 radius, s32 encoding) {
     void (*decode)(void *, void *, s32) = 0;
     s32 stream[2];
-    s32 *sp;
-    s32 track, index, channel, sample, offset, frames;
+    s32 *cursor;
+    s32 i, index, j, offset, frames;
     f32 *out;
     f32 total, weight;
     switch (encoding) {
@@ -430,56 +433,68 @@ s32 func_8025F0F4_us_rev1(s32 source, s32 *buffer, s32 tracks, s32 channels, s32
         decode = (void (*)(void *, void *, s32))D_00261258_us_rev1;
         break;
     }
-    buffer[0] = tracks;
-    buffer[1] = (tracks * 4 + 15) & ~7;
+    buffer->count = tracks;
+    buffer->offsets[0] = (tracks * 4 + 15) & ~7;
     for (index = 1; index <= tracks; index++) {
-        buffer[index + 1] = 0xDEADBEEF;
+        buffer->offsets[index] = 0xDEADBEEF;
     }
-    for (track = 0; track < tracks; track++) {
-        for (index = 0; index <= buffer[0] && (u32)buffer[index + 1] != 0xDEADBEEF; index++) {
+    for (i = 0; i < tracks; i++) {
+        for (index = 0; index <= buffer->count && (u32)buffer->offsets[index] != 0xDEADBEEF; index++) {
         }
         index--;
-        buffer[index + 2] = buffer[index + 1] + D_8010AC88 * 16;
+        buffer->offsets[index + 1] = buffer->offsets[index] + D_8010AC88 * 16;
     }
-    sp = stream;
-    sp[0] = func_80260664_de(source);
-    for (track = 0; track < tracks; track++) {
-        out = (f32 *)func_8028FDB4_de(buffer, track);
-        for (channel = 0; channel < channels; channel++) {
-            func_802607B8_de((u32 *)sp, 0x1F);
-            decode(sp, out, D_8010AC84);
-            out += 1;
-        }
+    stream[0] = func_80260664_de(source);
+    i = 0;
+    if (tracks > 0) {
+        cursor = stream;
+        do {
+            f32 *values = (f32 *)func_8028FDB4_de(buffer, i);
+            j = 0;
+            if (channels > 0) {
+                out = values;
+                do {
+                    func_802607B8_de((u32 *)cursor, 0x1F);
+                    decode(cursor, out, D_8010AC84);
+                    out += 1;
+                    j++;
+                } while (j < channels);
+            }
+            i++;
+        } while (i < tracks);
     }
-    for (track = 0; track < tracks; track++) {
-        out = (f32 *)func_8028FDB4_de(buffer, track);
-        frames = D_8010AC88;
+    for (i = 0; i < tracks; i++) {
+        s32 component;
+        f32 *values;
+        values = (f32 *)func_8028FDB4_de(buffer, i);
         if (channels == 4 && radius != 0) {
-            for (channel = 0; channel < channels; channel++) {
-                for (sample = 0; sample < frames; sample++) {
+            for (component = 0; component < channels; component++) {
+                frames = D_8010AC88;
+                for (j = 0; j < frames; j++) {
                     total = 0;
                     weight = 0;
                     for (offset = -radius; offset <= radius; offset++) {
-                        total += out[((sample + offset + frames) % frames) * 4 + channel];
+                        total += values[((j + offset + frames) % frames) * 4 + component];
                         weight += 1.0f;
                     }
-                    out[sample * 4 + channel] = total / weight;
+                    values[j * 4 + component] = total / weight;
                 }
             }
         }
     }
     if (channels == 4) {
-        for (track = 0; track < tracks; track++) {
-            out = (f32 *)func_8028FDB4_de(buffer, track);
-            for (sample = 0; sample < D_8010AC88; sample++) {
-                func_802741A4_de(out);
-                out += 4;
+        for (j = 0; j < tracks; j++) {
+            f32 *values = (f32 *)func_8028FDB4_de(buffer, j);
+            i = 0;
+            if (D_8010AC88 > 0) {
+                out = values;
+                do {
+                    func_802741A4_de(out);
+                    out += 4;
+                } while (++i < D_8010AC88);
             }
         }
     }
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", func_8025F0F4_us_rev1);
-#endif
 #endif

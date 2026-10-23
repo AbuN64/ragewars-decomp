@@ -18043,7 +18043,8 @@ SECTIONS
         src/game/SYSTEM/800C9184.CPP.o(.rodata .rdata);
         src/game/SYSTEM/802609CC_10.CPP.o(.rodata .rdata);
         src/game/SYSTEM/800C91E8.CPP.o(.rodata .rdata);
-        src/game/SYSTEM/800C91F8.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/SYSTEM/8025E5B0_5.CPP.o */;
+        src/game/SYSTEM/8025E5B0_5.CPP.o(.rodata .rdata);
         src/game/SYSTEM/800C91FC.CPP.o(.rodata .rdata);
         src/game/SYSTEM/800C920C.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/SYSTEM/8025E5B0_7.CPP.o */;
@@ -25288,7 +25289,7 @@ SECTIONS
         src/game/SYSTEM/800C9184.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/802609CC_10.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/800C91E8.CPP.o(.bss .sbss COMMON);
-        src/game/SYSTEM/800C91F8.CPP.o(.bss .sbss COMMON);
+        src/game/SYSTEM/8025E5B0_5.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/800C91FC.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/800C920C.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/8025E5B0_7.CPP.o(.bss .sbss COMMON);

@@ -34,7 +34,7 @@ extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void func_80253D10_de(s32, void **, void *);
 
-extern s32 func_8025F0F4_us_rev1(void *, void *, s32, s32, s32, s32);
+extern s32 System_ExpandAnimationTracks(void *, void *, s32, s32, s32, s32);
 
 extern const f32 D_800C411C_de, D_800C4120_de, D_800C4124_de;
 
@@ -164,7 +164,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
             D_8010AC7C = D_800C4120_de;
             D_8010AC80 = D_800C4124_de;
             D_8010AC70 = newHeader->duration;
-            if (func_8025F0F4_us_rev1(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
+            if (System_ExpandAnimationTracks(rotations, newRotations, newHeader->translations, 3, newHeader->channels, newHeader->flags) == 0) {
                 success = 0;
             } else {
                 D_8010AC78 = 0;
@@ -172,7 +172,7 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
                 D_8010AC7C = D_800C4128_de;
                 D_8010AC80 = D_800C412C_de;
                 D_8010AC70 = newHeader->duration;
-                success = func_8025F0F4_us_rev1(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
+                success = System_ExpandAnimationTracks(translations, newTranslations, newHeader->rotations, 4, newHeader->channels, newHeader->flags) != 0;
             }
             if (success == 0) {
                 func_80253838_de(0, output);
