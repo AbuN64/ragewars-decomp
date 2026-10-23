@@ -10,7 +10,7 @@ extern f32 D_800C73E4;
 extern void func_8024B3A8_de(), func_80214178_de(), func_802325FC_de(), func_80220A80_de(), func_80245864_de();
 /* Initialises a player record: links it to itself, sets the base flags (and the extra flag when D_801462E5 is clear), fills the
    callback slots and builds the attached sub-record at 0x2E8 and the body record at 0x458, then copies the start position. */
-void func_80449970_us_rev1(u8 *p, void *a1, void *a2) {
+void Ovlgame_InitActorParts(u8 *p, void *a1, void *a2) {
     u8 *sub = p + 0x2E8;
     u8 *body = p + 0x458;
     u32 flags;
@@ -59,6 +59,6 @@ void func_80449970_us_rev1(u8 *p, void *a1, void *a2) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80449970_us_rev1);
+INCLUDE_ASM("ovl_80400000", Ovlgame_InitActorParts);
 #endif
 #endif

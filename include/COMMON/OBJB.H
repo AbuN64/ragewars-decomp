@@ -436,5 +436,5 @@ extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
 
 extern void *memcpy(void *, const void *, unsigned int);
 extern s32 D_80141060;
-extern void func_80449970_us_rev1(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
+extern void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index);
 #endif

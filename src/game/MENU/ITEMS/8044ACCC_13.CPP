@@ -190,7 +190,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
                                 spawnIndex = 0;
                             }
                         }
-                        func_80449970_us_rev1(player, rec, mode, i);
+                        Ovlgame_InitActorParts(player, rec, mode, i);
                         slot++;
                         playerIndex++;
                     } while (playerIndex < D_80145048);

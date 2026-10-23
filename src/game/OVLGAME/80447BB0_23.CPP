@@ -4,7 +4,6 @@
 #include "RENDER_2/802192C0_3.H"
 
 #if defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
 extern f32 D_800C73E4;
 extern u8 D_0024B52C_us_rev1[], D_0022E0A0_us_rev1[], D_00219A40_us_rev1[], D_0022E250_us_rev1[];
 extern u8 D_0021A2D4_us_rev1[], D_0022F5D0_us_rev1[];
@@ -16,59 +15,70 @@ extern void func_80245864_de(void *);
 typedef struct InitView { char pad0[4]; u32 flags; char pad8[0xF4]; f32 x, y, z; } InitView;
 /* Initialises an actor and its embedded part at 0x2E8: sets the shared table pointers and flag bits (one flag
  * depends on D_801462E5), runs the part setup calls, then copies the view's position into the actor. */
-/* 94/117 words; remaining: scheduling: the target loads D_800C73E4 after the 0x3E8 load and keeps the 0x3E8 flags store last, in the func_80214178_de delay slot */
-void func_80449970_us_rev1(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
+typedef struct ActorInitPart {
+    u8 pad0[0x18]; InitView *view;
+    u8 pad1C[0x34]; f32 x, y, z;
+    u8 pad5C[0xA4]; u32 flags;
+    u8 pad104[0xA0]; s8 marker;
+    u8 pad1A5[0x33]; void *owner;
+    u8 pad1DC[0xA0]; void *action;
+    void *table280; u8 pad284[4]; void *table288;
+    void *table28C; void *table290; u8 pad294[0x54];
+} ActorInitPart;
+typedef struct ActorInitRecord {
+    ActorInitPart part[2];
+    u8 pad5D0[0xC]; void *auxiliary;
+    u8 pad5E0[0x4E]; s16 selection;
+} ActorInitRecord;
+void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s32 index) {
     char *actor = (char *)player;
+    ActorInitRecord *record = (ActorInitRecord *)player;
     u32 flags;
-    u32 flags2;
     u32 t1, t2, t3;
     InitView *view;
-    *(void **)(actor + 0x1D8) = actor;
+    record->part[0].owner = actor;
     func_8024B3A8_de(actor, rec, (void *)mode, 0);
-    *(void **)(actor + 0x1D8) = actor;
-    t1 = *(u32 *)(actor + 0x100) | 0x100000;
+    record->part[0].owner = actor;
+    t1 = record->part[0].flags | 0x100000;
     t2 = t1 | 0x10000;
     t3 = t2 | 0x1000000;
     flags = t3 | 0x2000000;
-    *(u32 *)(actor + 0x100) = flags;
+    record->part[0].flags = flags;
     if (D_801462E5 == 0) {
-        *(u32 *)(actor + 0x100) = flags | 0x10000000;
+        record->part[0].flags = flags | 0x10000000;
     }
-    *(void **)(actor + 0x28C) = D_0024B52C_us_rev1;
-    *(void **)(actor + 0x290) = D_0022E0A0_us_rev1;
-    *(void **)(actor + 0x280) = D_00219A40_us_rev1;
-    *(void **)(actor + 0x288) = D_0022E250_us_rev1;
+    record->part[0].table28C = D_0024B52C_us_rev1;
+    record->part[0].table290 = D_0022E0A0_us_rev1;
+    record->part[0].table280 = D_00219A40_us_rev1;
+    record->part[0].table288 = D_0022E250_us_rev1;
     if (D_801462E5 != 0) {
-        *(void **)(actor + 0x27C) = D_0021A2D4_us_rev1;
+        record->part[0].action = D_0021A2D4_us_rev1;
     }
-    *(void **)(actor + 0x4C0) = actor;
+    record->part[1].owner = actor;
     func_8024B3A8_de((actor + 0x2E8), rec, (void *)mode, 0);
-    *(void **)(actor + 0x574) = D_0022F5D0_us_rev1;
-    *(f32 *)(actor + 0x338) = D_800C73E4;
-    *(f32 *)(actor + 0x33C) = D_800C73E4;
-    *(f32 *)(actor + 0x340) = D_800C73E4;
-    *(s8 *)(actor + 0x48C) = -1;
-    *(u32 *)(actor + 0x3E8) |= 0x200000;
-    *(void **)(actor + 0x4C0) = actor;
-    *(void **)(actor + 0x568) = D_00219A40_us_rev1;
-    *(void **)(actor + 0x570) = D_0022E250_us_rev1;
-    *(s16 *)(actor + 0x62E) = -1;
-    *(u32 *)(actor + 0x3E8) &= 0xFFFEFFFF;
+    record->part[1].table28C = D_0022F5D0_us_rev1;
+    record->part[1].marker = -1;
+    record->part[1].flags |= 0x200000;
+    record->part[1].x = D_800C73E4;
+    record->part[1].y = D_800C73E4;
+    record->part[1].z = D_800C73E4;
+    record->part[1].owner = actor;
+    record->part[1].table280 = D_00219A40_us_rev1;
+    record->part[1].table288 = D_0022E250_us_rev1;
+    record->selection = -1;
+    record->part[1].flags &= 0xFFFEFFFF;
     func_80214178_de((actor + 0x2E8), (actor + 0x458), 0);
     func_802325FC_de((actor + 0x2E8), (actor + 0x458));
     func_80220A80_de(actor, actor);
-    if (*(void **)(actor + 0x5DC) != 0) {
-        func_80245864_de(*(void **)(actor + 0x5DC));
+    if (record->auxiliary != 0) {
+        func_80245864_de(record->auxiliary);
     }
-    view = *(InitView **)(actor + 0x18);
-    *(f32 *)(actor + 0x50) = view->x;
-    *(f32 *)(actor + 0x54) = view->y;
-    *(f32 *)(actor + 0x58) = view->z;
+    record->part[0].x = (record->part[0].view)->x;
+    record->part[0].y = (record->part[0].view)->y;
+    record->part[0].z = (record->part[0].view)->z;
+    view = record->part[0].view;
     view->flags &= ~4;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80449970_us_rev1);
-#endif
 #endif
 
 #ifdef NON_MATCHING
