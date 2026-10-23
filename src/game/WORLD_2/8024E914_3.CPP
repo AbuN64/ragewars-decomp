@@ -64,7 +64,7 @@ typedef struct SimpleInstanceOut {
     s32 f1C4;
 } SimpleInstanceOut;
 /* 121/128 words (7 aligned edits); remaining: store scheduling of the box max z and the two zero words at 0x1A0 */
-void func_8024E990_de(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, char *segments) {
+void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, char *segments) {
     CVector3 v;
     inst->kind = 3;
     inst->type = rec->type;
@@ -105,7 +105,7 @@ void func_8024E990_de(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, c
     inst->f1C4 = 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_8024E990_de);
+INCLUDE_ASM("span_1000", World_InitSimpleInstance);
 #endif
 
 /* Draws a static object through its cached display list, building the cache on first use: emits a branch placeholder, loads the object's model, builds its rotation (the shared D_8013B190 angle for type 8), scale and position raised by its height offset into the current matrix slot, draws the model with its material through func_8026DA4C_de and func_8024ED90_de unless the type is 12, ends the list, patches the placeholder to skip past it and calls the cached list. The display list writes match only as block-scoped initialisers taking D_80110634++. */

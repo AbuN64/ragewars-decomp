@@ -105,7 +105,7 @@ extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
 extern void func_8024FD6C_eu(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
-extern void func_8024E990_de(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
+extern void World_InitSimpleInstance(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
 extern void Anim_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
 extern f32 Particle_GetActorHeight(void *);
 
@@ -214,7 +214,7 @@ void func_8028798C_de(Shared_World *world, void ***handle) {
             simpleRecords = (SimpleInstanceRecord *)(simpleSet + 1);
             simples = (SimpleInstance *)(dst + 8);
             for (k = 0; k < simpleCount; k++) {
-                func_8024E990_de(&simples[k], &simpleRecords[k],
+                World_InitSimpleInstance(&simples[k], &simpleRecords[k],
                                  func_8028FE28_de(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
                                  segments);
                 id = simples[k].id;
