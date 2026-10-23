@@ -8,8 +8,8 @@ struct ObjRecAt26DD8 {
     s32 unk26DD8;
 };
 extern void func_80294530_de(s32 arg0);
-extern void func_80294514_de(void);
-extern void func_80294580_de(void);
-extern void func_802945F8_de(void);
+extern void Render_DrawMode11Session(void *session);
+extern void Render_DrawMode10Session(void *session);
+extern void Render_DrawMode12Session(void *session);
 extern void func_8029459C_de(int arg0);
 #endif

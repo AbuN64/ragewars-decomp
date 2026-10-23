@@ -16,7 +16,7 @@
 extern void func_80293A20_de(s32 arg0, s32 arg1, s32 arg2);
 extern void func_8028D90C_de(void);
 
-extern void func_80293B28_de(void);
+extern void func_80293B28_de(void *session);
 
 /* Resets the menu viewport and selects the row identified by the owner's current index. */
 
@@ -43,7 +43,7 @@ void func_802944F4_de(s32 arg0) {
     func_80293A20_de(arg0, 0xC, 0xC);
 }
 
-void func_80294514_de(void) { func_80293B28_de(); }
+void Render_DrawMode11Session(void *session) { func_80293B28_de(session); }
 
 void func_80294530_de(s32 arg0) {
     func_8028D90C_de();
@@ -54,7 +54,7 @@ void func_80294560_de(s32 arg0) {
     func_80293A20_de(arg0, 0xD, 8);
 }
 
-void func_80294580_de(void) { func_80293B28_de(); }
+void Render_DrawMode10Session(void *session) { func_80293B28_de(session); }
 
 void func_8029459C_de(int arg0) {
     func_8028D90C_de();
@@ -65,7 +65,7 @@ void func_802945D8_de(s32 arg0) {
     func_80293A20_de(arg0, 0xD, 0xD);
 }
 
-void func_802945F8_de(void) { func_80293B28_de(); }
+void Render_DrawMode12Session(void *session) { func_80293B28_de(session); }
 
 struct func_802077F4_S2;
 
