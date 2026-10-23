@@ -46,7 +46,7 @@ void func_8021CF28_de(void *, void *, AimActor **, void *);
 CQuatern func_8024796C_de(char *);
 typedef struct func_8021CD70_S1 func_8021CD70_S1;
 typedef struct func_8021CD70_S2 func_8021CD70_S2;
-s32 func_8021CD94_de(func_8021CD70_S1 *, func_8021CD70_S2 *);
+s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 f32 Particle_GetActorHeight(void *);
 void func_8021D774_de(AimPlayer *arg0) {
     AimOutput sp20;
@@ -232,7 +232,7 @@ block_15:
             temp_a1_2 = arg0->unk794;
             spF0 = temp_a1_2;
             if (temp_a1_2 != NULL) {
-                if (func_8021CD94_de((void *)arg0, (void *)temp_a1_2) == 0) {
+                if (Weapons_CanLockTarget((void *)arg0, (void *)temp_a1_2) == 0) {
                     arg0->unk788 = 1;
                     arg0->unk78C = 0.0f;
                 }

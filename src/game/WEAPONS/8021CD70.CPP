@@ -15,87 +15,66 @@
 #include "FX_2/80271B18.H"
 
 s32 func_80216BF4_de(void *, void *, void *);
-/* Checks whether the player's current weapon can lock onto the target. */
-s32 func_8021CD94_de(func_8021CD70_S1 *arg0, func_8021CD70_S2 *arg1) {
-    s16 temp_a1;
-    s32 temp_v1_3;
-    s32 var_a0;
-    s32 var_v0;
-    s32 var_v0_2;
-    s16 shielded;
-    s8 temp_v1;
-    s8 temp_v1_2;
-    s8 temp_v1_4;
-    ObjRecAt14V3 *temp_a1_2;
-    View *temp_a1_3;
-    View *temp_v0;
-    temp_a1 = arg0->unk62E;
-    if (temp_a1 == 0x12) {
-        if (arg1->unk100 & 0x300000) {
-            if (arg1->unk18->unk14 & 0x20) {
-                temp_v1 = arg1->unk1A4;
-                if ((temp_v1 != 0x26) && (temp_v1 != temp_a1) && (arg1->unk174 != 0)) {
-                    temp_v0 = arg1->unk5DC;
-                    if (temp_v0 == NULL) {
-                        var_v0 = 0;
-                    } else {
-                        var_v0 = temp_v0->unk564 != 0;
-                    }
-                    if (var_v0 != 0) {
-                        return 0;
-                    }
-                    goto block_25;
-                }
-                /* Duplicate return node #35. Try simplifying control flow for better match */
+/* Whether the target's view reports an active shield. */
+static inline s32 Weapons_TargetShielded(func_8021CD70_S2 *target) {
+    View *view = target->unk5DC;
+    if (view == NULL) {
+        return 0;
+    }
+    return view->unk564 != 0;
+}
+/* Checks whether the player's current weapon can lock onto the target. Kind 0 and 7 targets never lock. */
+s32 Weapons_CanLockTarget(func_8021CD70_S1 *attacker, func_8021CD70_S2 *target) {
+    s16 weapon;
+    s8 mode;
+    s32 canLock;
+
+    weapon = attacker->unk62E;
+    if (weapon == 0x12) {
+        if (target->unk100 & 0x300000) {
+            if (!(target->unk18->unk14 & 0x20)) {
                 return 0;
             }
-            goto block_34;
-        }
-        temp_a1_2 = arg1->unk18;
-        if (temp_a1_2->unk0 == 1) {
-            if ((temp_a1_2->unk14 & 0x2400) == 0) {
-                goto block_34;
+            mode = target->unk1A4;
+            if (mode == 0x26 || mode == weapon || target->unk174 == 0) {
+                return 0;
             }
-            temp_v1_2 = arg1->unk1A4;
-            if (((temp_v1_2 == 0x21) || (temp_v1_2 == 0x34) ||
-                 (temp_v1_2 == 0x3C) || (temp_v1_2 == 0x3D)) ||
-                (arg1->unk174 == 0)) {
-                goto block_34;
+            if (!Weapons_TargetShielded(target)) {
+                return func_80216BF4_de(attacker, &attacker->unk170, target) == 0;
             }
-            goto block_25;
+            return 0;
         }
-        goto block_19;
+        if (target->unk18->unk0 == 1) {
+            if (!(target->unk18->unk14 & 0x2400)) {
+                return 0;
+            }
+            mode = target->unk1A4;
+            if (mode == 0x21 || mode == 0x34 || mode == 0x3C || mode == 0x3D) {
+                return 0;
+            }
+            if (target->unk174 != 0) {
+                return func_80216BF4_de(attacker, &attacker->unk170, target) == 0;
+            }
+            return 0;
+        }
     }
-block_19:
-    temp_v1_3 = arg1->unk18->unk0;
-    if (temp_v1_3 == 4) goto block_24;
-    if (temp_v1_3 < 5) return 0;
-    if (temp_v1_3 == 7) goto block_34;
-    if (temp_v1_3 == 11) goto block_27;
-    return 0;
-block_24:
-    do {
-        if (arg1->unk174 == 0) goto block_34;
-    } while (0);
-block_25:
-    return func_80216BF4_de(arg0, &arg0->unk170, arg1) == 0;
-block_27:
-    temp_v1_4 = arg1->unk1A4;
-    var_a0 = 0;
-    if (temp_v1_4 == 0x26) goto block_33;
-    if (temp_v1_4 == 0x12) goto block_33;
-    if (arg1->unk174 == 0) goto block_33;
-    var_v0_2 = 0;
-    temp_a1_3 = arg1->unk5DC;
-    if (temp_a1_3 != NULL) {
-        /* FAKEMATCH: keep the shield predicate in a named flag for register selection. */
-        shielded = temp_a1_3->unk564 != 0;
-        var_v0_2 = shielded;
+    switch (target->unk18->unk0) {
+    case 4:
+        if (target->unk174 != 0) {
+            return func_80216BF4_de(attacker, &attacker->unk170, target) == 0;
+        }
+        return 0;
+    case 0:
+    case 7:
+        return 0;
+    case 11:
+        canLock = 0;
+        mode = target->unk1A4;
+        if (mode != 0x26 && mode != 0x12 && target->unk174 != 0 && !Weapons_TargetShielded(target)) {
+            canLock = 1;
+        }
+        return canLock;
     }
-    if (var_v0_2 == 0) var_a0 = 1;
-block_33:
-    return var_a0;
-block_34:
     return 0;
 }
 
@@ -103,7 +82,7 @@ block_34:
 extern void *func_8024BC94_de(void *arg0, s32 unused1, struct IntPair arg2);
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
-extern s32 func_8021CD94_de(func_8021CD70_S1 *, func_8021CD70_S2 *);
+extern s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
 extern CQuatern func_8024796C_de(char *);
 extern void func_80274098_de(void *, void *, void *);
@@ -150,7 +129,7 @@ CQuatern func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
                 firstSpecial = 0x12;
                 scale = D_800C2394_de;
                 do {
-                if (func_8021CD94_de((void *)player, (void *)other) && other != player) {
+                if (Weapons_CanLockTarget((void *)player, (void *)other) && other != player) {
                     if (player->weapon == firstSpecial) candidate = other->specialAim;
                     else {
                         candidate = other->position;
@@ -177,7 +156,7 @@ CQuatern func_8021CF28_de(DraftAimPlayer *player, DraftAimPlayer **target,
             scale = D_800C2398_de;
             do {
             other = (void *)D_8011CA18[i];
-            if (func_8021CD94_de((void *)player, (void *)other)) {
+            if (Weapons_CanLockTarget((void *)player, (void *)other)) {
                 if (player->weapon == secondSpecial) candidate = other->specialAim;
                 else {
                     candidate = other->position;
