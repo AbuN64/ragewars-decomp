@@ -25,7 +25,7 @@ extern func_802077F4_S2 *func_80442DDC_de(void *, s32);
 
 extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, Style_func_80445BC0_de *);
 
-void func_80445BC0_de(void *menu, ItemRecAt20V1 *item, void *arg2, Style_func_80445BC0_de *style) {
+void func_80445BC0_de(void *menu, ItemRecAt20V1 *item, void *third, Style_func_80445BC0_de *style) {
     s32 i;
     f32 width;
     f32 alpha;
@@ -42,6 +42,6 @@ void func_80445BC0_de(void *menu, ItemRecAt20V1 *item, void *arg2, Style_func_80
         func_802A7DE4_de(x, item->y - 2, (f32)x + width, item->y, 0, 0, 0xFF, 0xFF, 0xFF,
                       (u8)(bits = !((2147483648.0f) <= alpha) ? (s32)alpha : (bits = (s32)(alpha - (2147483648.0f))) | 0x80000000));
     }
-    func_8044208C_de(menu, item, arg2, style);
+    func_8044208C_de(menu, item, third, style);
 }
 #endif
