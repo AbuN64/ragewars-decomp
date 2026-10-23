@@ -4,8 +4,9 @@
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
+#include "MENU/PAK/8043F69C_11.H"
 
-/* Allocates a block sized for the entries of the list the parameters point at through func_8025343C_de, builds it with func_80440DA0_de from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
+/* Allocates a block sized for the entries of the list the parameters point at through func_8025343C_de, builds it with Pak_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
 
 
 
@@ -18,7 +19,6 @@ extern char D_800DE4E8[];
 
 extern void **func_8025343C_de(s32, s32, s32, char *);
 
-extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -85,7 +85,7 @@ void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *p
         }
         first = *block;
         if (first != 0) {
-            func_80440DA0_de(first, block, list, a, b, c, d, owner);
+            Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
             func_80255CB8_de(owner, first);
             if (++owner->unk14 >= 4) {
                 owner->unk14 = 0;

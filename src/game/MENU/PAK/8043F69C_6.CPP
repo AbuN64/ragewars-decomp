@@ -7,6 +7,7 @@
 #include "MENU/PAK/8043F69C_6.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
+#include "MENU/PAK/8043F69C_11.H"
 
 /* Returns the address 0x190 bytes into the block at offset 0x20 of an object, or null when the
    object has no block. */
@@ -155,11 +156,10 @@ void func_80442544_de(void *object) {
     ((MessageList *)object)->rotation = 0;
 }
 
-/* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with func_80440DA0_de from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and three values passed as arguments and a zero as the first value changed. */
+/* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 
 void *Pak_OpenDialog(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
     struct func_8025E5B0_S1 *owner;
@@ -183,7 +183,7 @@ void *Pak_OpenDialog(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
     if (first == 0) {
         return 0;
     }
-    func_80440DA0_de(first, block, list, 0, b, c, d, arg0);
+    Pak_InitializeMenu(first, block, list, 0, b, c, d, arg0);
     func_80255CB8_de(arg0, first);
     owner = arg0;
     if (++owner->unk14 >= 4) {
@@ -192,10 +192,9 @@ void *Pak_OpenDialog(void *arg0, struct Dialog *list, s32 b, s32 c, s32 d) {
     return first;
 }
 
-/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through func_8025343C_de, builds it with func_80440DA0_de from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
+/* Allocates a block sized for the entries of a list (forty bytes each plus 0x480 for every entry of type three, over a 0x1D8 header) through func_8025343C_de, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. */
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 
 void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *params, struct Dialog *list) {
     s32 a = params->a;
@@ -222,7 +221,7 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
     if (first == 0) {
         return 0;
     }
-    func_80440DA0_de(first, block, list, a, b, c, d, owner);
+    Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
     func_80255CB8_de(owner, first);
     if (++owner->unk14 >= 4) {
         owner->unk14 = 0;
@@ -230,10 +229,9 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
     return first;
 }
 
-/* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with func_80440DA0_de from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
+/* Allocates a block sized for the entries of a list through func_8025343C_de, builds it with Pak_InitializeMenu from four parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_80442690_de with the first parameter read from offset 0x14 instead of 0x18. */
 extern char D_800DE4E8[];
 extern void **func_8025343C_de(s32, s32, s32, char *);
-extern void func_80440DA0_de(void *, void **, struct Dialog *, s32, s32, s32, s32, struct func_8025E5B0_S1 *);
 
 void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427C4_de *params, struct Dialog *list) {
     s32 a = params->a;
@@ -260,7 +258,7 @@ void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427
     if (first == 0) {
         return 0;
     }
-    func_80440DA0_de(first, block, list, a, b, c, d, owner);
+    Pak_InitializeMenu(first, block, list, a, b, c, d, owner);
     func_80255CB8_de(owner, first);
     if (++owner->unk14 >= 4) {
         owner->unk14 = 0;
