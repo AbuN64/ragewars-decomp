@@ -27,7 +27,7 @@ void func_8022E6A4_de(Shared_ActorView *player, LevelActor *actor) {
     if ((temp_v0 != 0) && (((Shared_Surface *)temp_v0)->flags & 0x4000)) {
         actor->position1.y = 0;
     } else if (actor->position0.y < (D_801370C4 - D_800C7F08)) {
-        func_8021B1E4_de(player, player->spawn, 0, 0);
+        Render_PlacePlayerAtSpawnPoint(player, player->spawn, 0, 0);
     }
     if (func_8024E62C_de(actor) != 0) {
         player->contactPosition = actor->position0;

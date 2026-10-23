@@ -68,7 +68,7 @@ struct Player {
     s32 state; /* 0x5E0 */
     s32 health; /* 0x5E4 */
     u8 pad5E8[4];
-    s32 model; /* 0x5EC: func_80449870_de passes it to func_8021B1E4_de */
+    s32 model; /* 0x5EC: func_80449870_de passes it to Render_PlacePlayerAtSpawnPoint */
     u8 pad5F0[4];
     s16 ammo[7]; /* 0x5F4 */
     s8 actions[22][2]; /* 0x602 */

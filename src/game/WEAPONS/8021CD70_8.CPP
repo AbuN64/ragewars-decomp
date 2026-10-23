@@ -570,7 +570,7 @@ void func_80220ED4_de(SharedPlayer *player)
               world->offset = diff;
             }
             func_8025DE54_de(0x230, player->views0.view8_3.pos, 0, -1);
-            func_8021B1E4_de(player, def->item, 0, 0);
+            Render_PlacePlayerAtSpawnPoint(player, def->item, 0, 0);
             break;
           }
         }
@@ -613,7 +613,7 @@ void func_80220ED4_de(SharedPlayer *player)
   else
     if (actor->views0.view8_3.pos.y < (D_801370C4 - 5120.0f))
   {
-    func_8021B1E4_de(player, player->views5E8.view5EC_5.unk5EC, 0, 0);
+    Render_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_5.unk5EC, 0, 0);
   }
   if (func_8024E62C_de(actor) != 0)
   {

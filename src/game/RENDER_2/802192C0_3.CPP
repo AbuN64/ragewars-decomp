@@ -342,9 +342,10 @@ void Render_ResetPlayerWeapons(struct Player *player) {
 }
 
 #ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
+#include "COMMON/GAMEPLAY_TRANSITION.H"
+#include "COMMON/LEVEL_TRACK.H"
+#include "COMMON/WORLD.H"
+#include "COMMON/SHAREDCALLBACK5.H"
 extern f32 D_800C2340_de;
 extern s32 D_801371D4;
 extern char D_8013B364[];
@@ -352,78 +353,70 @@ extern void func_8044A07C_de(void *);
 extern void func_8044D528_de(void *, s32, s32);
 extern f32 func_802726F8_de(void *, void *);
 extern s32 func_8020CB3C_de(void *, void *);
-/* Places an actor at one of the start positions of a model: asks the loader (func_8044D220_de) for the
- * candidate points of the model (up to 0x20 in multiplayer, one otherwise), in multiplayer picks the point
- * farthest from every other player (distances via func_802726F8_de over the player list at D_80145060),
- * copies its position and height into the actor, finds the floor under it and calls Ovlgame_InitActorHudState; when no
- * point fits it falls back to func_8044D528_de. Finally stores the position's cell in the actor's list head. */
-/* Puts a player at a spawn point of the level: in multiplayer picks the point farthest from the other players, else
- * takes the single point matching D_801371D4; falls back to func_8044D528_de when none fits. 83 aligned edits of 161
- * words; remaining: the ROM keeps the level pointer in s1 and the model argument in fp (ours spills the model). */
-typedef struct SpawnPoint { CVector3 position; f32 heading; s16 ref; s16 floor; } SpawnPoint;
-void func_8021B1E4_de(struct Player *player, s32 model, s32 scale, s32 reset) {
-    void *actor = player;
-    void *world = &D_8011FE88;
-    SpawnPoint single;
-    SpawnPoint points[0x20];
+/* Places the player at the matching level spawn. In multiplayer, choose the last
+ * point tied for the greatest distance to its nearest player. Fall back when no
+ * point is available, then update the controller's current cell.
+ * 43/161 aligned edits remain: actor/point-offset registers and fallback layout. */
+void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale, s32 reset) {
+    Shared_ActorView *actor = (Shared_ActorView *)player;
+    Shared_World *world;
+    Shared_Placed single;
+    Shared_Placed points[32];
     s32 count;
     s32 best;
     s32 i;
     f32 bestDistance;
     f32 distance;
-    void *other;
+    Shared_ActorView *other;
     s32 floor;
+    s32 cell;
     func_8044A07C_de(actor);
-    func_802647E8_de((void *)FIELD(s32, actor, 0x698), 0);
-    if (reset != 0) {
-        FIELD(s32, actor, 0x864) = 0;
-        FIELD(s32, actor, 0x868) = 0;
+    func_802647E8_de(actor->controller, 0);
+    world = &D_8011FE88;
+    if (reset) {
+        actor->field864 = 0;
+        actor->field868 = 0;
     }
-    if (D_801462E5 != 0) {
-        count = func_8044D220_de(world, -1, model, points, 0x20);
+    if (D_801462E5) {
+        count = func_8044D220_de(world, -1, model, points, 32);
         best = -1;
         bestDistance = 0.0f;
         for (i = 0; i < count; i++) {
             distance = D_800C2340_de;
-            for (other = FIELD(void *, &D_80145060, 0); other != 0; other = FIELD(void *, other, 0x16E0)) {
-                f32 d = func_802726F8_de(&points[i], (char *)other + 8);
-                if (d < distance) {
-                    distance = d;
-                }
+            for (other = D_80145060.actorList; other; other = other->next) {
+                f32 d = func_802726F8_de(&points[i].pos, &other->position.vector);
+                if (d < distance) distance = d;
             }
             if (bestDistance <= distance) {
                 bestDistance = distance;
                 best = i;
             }
         }
-        if (best == -1) {
-            func_8044D528_de(world, model, scale);
-        } else {
-            FIELD(CVector3, actor, 0x2F0) = points[best].position;
-            FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
-            FIELD(f32, actor, 0x354) = points[best].heading;
-            FIELD(f32, actor, 0x6C) = points[best].heading;
-            floor = Scene_FindFloorPolygon(world, (char *)actor + 8);
-            FIELD(s32, actor, 0x2FC) = floor;
-            FIELD(s32, actor, 0x14) = floor;
-            Ovlgame_InitActorHudState(actor);
-        }
+        if (best == -1) goto fallback;
+        actor->weapon.position0 = points[best].pos;
+        actor->position.vector = actor->weapon.position0;
+        ((LevelActor *)actor)->yaw = actor->weapon.yaw = points[best].unkC;
+        floor = Scene_FindFloorPolygon(&D_8011FE88, &actor->position.vector);
     } else {
-        if (func_8044D220_de(world, -1, model, &single, 1) == 0 || single.ref != D_801371D4) {
+        if (func_8044D220_de(world, -1, model, &single, 1) == 0 || single.kind != D_801371D4) {
             func_8044D528_de(world, model, scale);
-        } else {
-            FIELD(CVector3, actor, 0x2F0) = single.position;
-            FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
-            FIELD(f32, actor, 0x354) = single.heading;
-            FIELD(f32, actor, 0x6C) = single.heading;
-            floor = func_8028B394_de(world, single.floor);
-            FIELD(s32, actor, 0x2FC) = floor;
-            FIELD(s32, actor, 0x14) = floor;
-            Ovlgame_InitActorHudState(actor);
+            goto done;
         }
+        actor->weapon.position0 = single.pos;
+        actor->position.vector = actor->weapon.position0;
+        ((LevelActor *)actor)->yaw = actor->weapon.yaw = single.unkC;
+        floor = func_8028B394_de(world, single.pad12);
     }
-    FIELD(s32, FIELD(void *, actor, 0x1454), 4) = func_8020CB3C_de(D_8013B364, (char *)actor + 8);
+    actor->weapon.model = floor;
+    actor->modelId = floor;
+    Ovlgame_InitActorHudState(actor);
+    goto done;
+fallback:
+    func_8044D528_de(&D_8011FE88, model, scale);
+done:
+    cell = func_8020CB3C_de(D_8013B364, &actor->position.vector);
+    ((AiController *)actor->owner)->current = cell;
 }
 #else
-INCLUDE_ASM("span_1000", func_8021B1E4_de);
+INCLUDE_ASM("span_1000", Render_PlacePlayerAtSpawnPoint);
 #endif

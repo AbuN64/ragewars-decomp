@@ -57,7 +57,7 @@ void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 /* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Ovlgame_ResetPlayerForRound with the
    actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
-   func_8021B1E4_de with D_80146898, zero and one. */
+   Render_PlacePlayerAtSpawnPoint with D_80146898, zero and one. */
 
 
 
@@ -329,5 +329,5 @@ void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Ovlgame_ResetPlayerForRound(actor, character, 1);
     func_80214178_de(&actor->firstEffect, &actor->secondEffect, 2);
-    func_8021B1E4_de(actor, D_80146898, 0, 1);
+    Render_PlacePlayerAtSpawnPoint(actor, D_80146898, 0, 1);
 }

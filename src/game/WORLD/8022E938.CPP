@@ -334,7 +334,7 @@ void func_8022EDFC_de(void *player) {
     func_80218464_de((char *)player + 0x938);
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
     func_80214178_de(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
-    func_8021B1E4_de(player, ((Shared_ActorView *)player)->spawn, 0, 1);
+    Render_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
     func_80226708_de(player);
 }
 

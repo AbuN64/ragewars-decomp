@@ -271,7 +271,7 @@ void func_80227038_de(s8 *world) {
                                 func_80218464_de(&player->unk938);
                                 player->unk11B4 = 0;
                                 func_80214178_de(&player->unk2E8, &player->unk458, 1);
-                                func_8021B1E4_de(player, player->unk5EC, 0, 1);
+                                Render_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
                                 func_80226708_de(player);
                                 player->unk5E4 = (s32) D_8014284C;
                             } else {
@@ -345,7 +345,7 @@ void func_80227038_de(s8 *world) {
                     func_80218464_de(&temp_v0_6->unk938);
                     temp_v0_6->unk11B4 = 0;
                     func_80214178_de(&temp_v0_6->unk2E8, &temp_v0_6->unk458, 1);
-                    func_8021B1E4_de(temp_v0_6, temp_v0_6->unk5EC, 0, 1);
+                    Render_PlacePlayerAtSpawnPoint(temp_v0_6, temp_v0_6->unk5EC, 0, 1);
                     func_80226708_de(temp_v0_6);
                 }
                 var_s2 = 0;
@@ -426,7 +426,7 @@ void func_80227038_de(s8 *world) {
                     func_80218464_de(&temp_v0_8->unk938);
                     temp_v0_8->unk11B4 = 0;
                     func_80214178_de(&temp_v0_8->unk2E8, &temp_v0_8->unk458, 1);
-                    func_8021B1E4_de(temp_v0_8, temp_v0_8->unk5EC, 0, 1);
+                    Render_PlacePlayerAtSpawnPoint(temp_v0_8, temp_v0_8->unk5EC, 0, 1);
                     func_80226708_de(temp_v0_8);
                 }
                 var_s2 = 0;
@@ -509,12 +509,12 @@ void func_80227038_de(s8 *world) {
                                 func_80218464_de(&temp_v0_11->unk938);
                                 temp_v0_11->unk11B4 = 0;
                                 func_80214178_de(&temp_v0_11->unk2E8, &temp_v0_11->unk458, 1);
-                                func_8021B1E4_de(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
+                                Render_PlacePlayerAtSpawnPoint(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
                                 func_80226708_de(temp_v0_11);
                             } else {
                                 temp_v1_3->unk90 = 0;
                                 temp_v0_11->unk5D8->unk8F = 0U;
-                                func_8021B1E4_de(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
+                                Render_PlacePlayerAtSpawnPoint(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
                             }
                             temp_v1_4 = temp_v0_11->unk5D8;
                             if (temp_v1_4->unk8F != 0) {

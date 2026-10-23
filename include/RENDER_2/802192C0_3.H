@@ -3,5 +3,5 @@
 #include "TYPES.H"
 struct Player;
 extern void func_8021A78C_de(void *arg0);
-extern void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 arg3);
+extern void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 arg2, s32 arg3);
 #endif

@@ -7,7 +7,7 @@
 #include "COMMON/RESULTSOPTIONSSCREEN.H"
 #include "RENDER_2/802192C0_3.H"
 
-/* Starts a player's run: in a multiplayer session (D_801462E5) picks the lap count from the chosen track through func_8022F454_de in mode 1 or from the loaded course in mode 4 for a human player, sets the run type at 0x5EA (1, or 3 in single player), clears 0x13C8 and 0x85C around func_8044952C_de, then starts its vehicle through func_8021B1E4_de with model 0xC1D for a computer player in state 12 during stage 9 and its own model otherwise, doubled when D_80145048 is two or more. */
+/* Starts a player's run: in a multiplayer session (D_801462E5) picks the lap count from the chosen track through func_8022F454_de in mode 1 or from the loaded course in mode 4 for a human player, sets the run type at 0x5EA (1, or 3 in single player), clears 0x13C8 and 0x85C around func_8044952C_de, then starts its vehicle through Render_PlacePlayerAtSpawnPoint with model 0xC1D for a computer player in state 12 during stage 9 and its own model otherwise, doubled when D_80145048 is two or more. */
 
 
 
@@ -41,15 +41,15 @@ void func_8044972C_de(SharedPlayer *player) {
     func_8044952C_de(player);
     player->views5E8.view85C_120.w85C = 0;
     if (player->views5DC.view5E0_9.state == 12 && player->views1450.view1450_1.computer != 0 && D_801371D4 == 9) {
-        func_8021B1E4_de(player, 0xC1D, scale, 1);
+        Render_PlacePlayerAtSpawnPoint(player, 0xC1D, scale, 1);
     } else {
-        func_8021B1E4_de(player, player->views5E8.view5EC_6.model, scale, 1);
+        Render_PlacePlayerAtSpawnPoint(player, player->views5E8.view5EC_6.model, scale, 1);
     }
 }
 
 /* Ends a human player's run: counts down the result timer (0x133C) and, when it runs out, clears humanWon and
  * calls func_8022A748_de; then either respawns the player with the chosen model or settles the run (func_802227F4_de).
- * NON_MATCHING: 80/80 words, only the order of the a1 load and the a2 move before func_8021B1E4_de differs. */
+ * NON_MATCHING: 80/80 words, only the order of the a1 load and the a2 move before Render_PlacePlayerAtSpawnPoint differs. */
 #ifdef NON_MATCHING
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "WEAPONS/PLAYER_MOVEMENT_INTERFACES.H"
@@ -82,7 +82,7 @@ void func_80449870_de(SharedPlayer *player)
                 func_802227F4_de(player, player, 0x12);
                 RUN_END(player)->state = 0;
             } else {
-                func_8021B1E4_de(player, RUN_END(player)->model, scale, 1);
+                Render_PlacePlayerAtSpawnPoint(player, RUN_END(player)->model, scale, 1);
                 func_8044952C_de(player);
                 RUN_END(player)->state = 0;
             }

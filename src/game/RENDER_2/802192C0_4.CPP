@@ -185,7 +185,7 @@ settings_loop:
                     temp_v0 = ((struct Shared_ActorView *)temp_s0)->model;
                     ((struct Shared_ModelView *)temp_v0)->flags = (s32) (((struct Shared_ModelView *)temp_v0)->flags & ~4);
                     func_80214178_de(&((struct Shared_ActorView *)temp_s0)->weapon, &((struct Shared_ActorView *)temp_s0)->weapon.behaviorFlags, 2);
-                    func_8021B1E4_de(temp_s0, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
+                    Render_PlacePlayerAtSpawnPoint(temp_s0, ((struct Shared_PlayerSettingsView *)settingsBase)->effect, 0, 0);
                     func_80255ED8_de(playersGlobal->controller, temp_s0);
                     func_80255CB8_de(&playersGlobal->effects, temp_s0);
                     } else if (((struct Shared_PlayerSettingsView *)settingsBase)->state < 3) {
@@ -517,7 +517,7 @@ extern void func_80239194_de(void *, s32, s32);
 extern void func_8022B11C_de(void *, u16);
 /* Applies damage to a player: ignored while the game is paused, the player is protected or the damage
  * source is not allowed; scales the amount by one fifth with armour (0x80C); when the health stays above
- * zero and drops through half of the maximum it respawns the weapon (func_8021B1E4_de); lowers the health
+ * zero and drops through half of the maximum it respawns the weapon (Render_PlacePlayerAtSpawnPoint); lowers the health
  * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
  * reports the kill through func_8021B468_de. */
 /* Exact for us and us-rev1; de/eu/eu-x add extra checks (0x1450, 0x94) and keep their asm. */
@@ -566,7 +566,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             }
         }
         if (found != 0) {
-            func_8021B1E4_de(player, FIELD(s32, player, 0x5EC), 0, 1);
+            Render_PlacePlayerAtSpawnPoint(player, FIELD(s32, player, 0x5EC), 0, 1);
         }
     }
     state = D_801468A0;
