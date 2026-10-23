@@ -87,6 +87,11 @@ void func_8040E894_de(void) {
 
 void func_8040E8D8_de(void *object, int enabled) {
     u16 *flags = &((Widget *)(object))->flags;
+#ifdef NON_MATCHING
+    if (object == 0) {
+        return;
+    }
+#endif
     if (enabled) {
         *flags |= 8;
     } else {
