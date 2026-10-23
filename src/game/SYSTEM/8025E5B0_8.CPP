@@ -97,9 +97,9 @@ void func_8025FFB0_de(Segment8025FFD0 *arg0, u32 *arg1) {
     *arg1 = bits;
 }
 
-float func_80260138_de(Stream *p,float t) {
-    seek(p,(u32)t);
-    return evaluate(*(Poly *)&p->coeff[0],t-p->unk24);
+float System_EvaluateAnimationCurve(Stream *stream, float time) {
+    seek(stream, (u32)time);
+    return evaluate(*(Poly *)&stream->coeff[0], time - stream->unk24);
 }
 
 #include "SYSTEM/PACKED_BIT_WORDS.H"

@@ -12,7 +12,7 @@
 
 extern void func_8025FFB0_de(Track_func_80261180_de *track, char **cursor);
 
-extern f32 func_8026108C_de(Track_func_80261180_de *track, f32 time, s32 arg2, s32 arg3);
+extern f32 System_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond);
 
 
 
@@ -51,7 +51,7 @@ void func_80261180_de(char **stream, f32 *out, s32 frames)
     cursor = *stream;
     func_8025FFB0_de(&track, &cursor);
     for (i = 0; i < frames; i++) {
-        *out = func_8026108C_de(&track, i, 0, 0);
+        *out = System_SampleAnimationCurve(&track, i, 0, 0);
         out += 4;
     }
     cursor += track.stride * (track.keys * 4 + 6);

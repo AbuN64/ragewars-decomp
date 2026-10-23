@@ -1,4 +1,5 @@
 #include "COMMON/LOCALDECODERANGE.H"
+#include "COMMON/STREAM.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "TYPES.H"
@@ -55,7 +56,7 @@ static inline f32 decode(u32 *stream, Func802608ECResult range) {
     return result;
 }
 
-extern void func_80260138_de(void);
+extern f32 System_EvaluateAnimationCurve(Stream *stream, f32 time);
 
 /* Opens the next entry of a packed file: finds the last filled slot before the 0xDEADBEEF end marker in the offset table, records the following slot's offset as that slot's offset plus the given size, optionally hands the slot's data to func_802BD3A0_de, and returns a pointer to it. */
 
@@ -101,9 +102,9 @@ void func_8026107C_de(int *arg0, int arg1) {
     *arg0 = *arg0 + arg1;
 }
 
-/** Thin wrapper around func_80260138_de. */
-void func_8026108C_de(void) {
-    func_80260138_de();
+/** Samples the parsed animation track at the supplied frame time. */
+f32 System_SampleAnimationCurve(Track_func_80261180_de *track, f32 time, s32 unusedFirst, s32 unusedSecond) {
+    return System_EvaluateAnimationCurve((Stream *)track, time);
 }
 
 void func_802610A8_de(void *arg0, s32 arg1) {
