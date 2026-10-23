@@ -70,8 +70,7 @@ void func_8041E408_de(s32 index) {
 #endif
 
 #ifdef NON_MATCHING
-/* NON_MATCHING: 81 words vs 74. Loop optimisation strength-reduces slot*150 and the name pointer, where the target
- * recomputes slot*150 each pass and keeps i and i*28 as separate counters. */
+/* Takes the first free player settings slot from the top for each of the three requests; the loop shape is closer to the ROM than the earlier draft (49 edits vs 71). */
 extern struct RequestRecAt10 D_80153F80[];
 extern u8 *func_802A025C_de(u8 *, u8 *);
 void func_8041E5F8_de(void) {
@@ -79,16 +78,16 @@ void func_8041E5F8_de(void) {
     Shared_PlayerSettingsRecord *probe;
     s32 slot = 7;
     s32 i = 0;
-    player = &D_801462C8.playerSettings[7];
+    Shared_Game *g = &D_801462C8;
+    player = &g->playerSettings[7];
     do {
         if (slot <= 0) return;
         if (D_80153F80[i].id >= 0) {
-            probe = &D_801462C8.playerSettings[slot];
-            while (probe->enabled == 1) {
+            probe = &g->playerSettings[slot];
+            while (slot > 0 && probe->enabled == 1) {
                 probe--;
                 slot--;
                 player--;
-                if (slot <= 0) break;
             }
             if (slot >= 0) {
                 player->locked = 1;

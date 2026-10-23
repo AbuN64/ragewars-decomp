@@ -82,21 +82,21 @@ extern u8 D_8011D8D0[];
 extern s32 func_8020CB3C_de(s32 *, void *);
 extern u8 *func_8020CFE0_de(s32 *, s32);
 void func_8020EC14_de(void *arg) {
-    s32 **arg0 = arg;
     s32 *ctrl = &D_8013B364;
     u8 *entry;
     u8 *node;
     u8 *link;
     s32 i;
+    u8 *tbl = D_8011D8D0;
     if (ctrl == 0) {
         return;
     }
     for (i = 0; i < 3; i++) {
-        for (node = *(u8 **)(D_8011D8D0 + 0xFC28 + i * 0x14); node != 0; node = *(u8 **)(node + 0x1EC)) {
+        for (node = *(u8 **)(tbl + 0xFC28 + i * 0x14); node != 0; node = *(u8 **)(node + 0x1EC)) {
             switch (*(u16 *)(node + 4)) {
             case 0x41E:
                 link = *(u8 **)(node + 0x12C);
-                if (link == 0 || *link != 1 || !(*(s32 *)(link + 0x100) & 0x300000) || link == (u8 *)*arg0) {
+                if (link == 0 || *link != 1 || !(*(s32 *)(link + 0x100) & 0x300000) || link == (u8 *)*(s32 **)arg) {
                     break;
                 }
             case 0x402:
