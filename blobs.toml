@@ -34547,6 +34547,141 @@ stored_size = 2
 rom."eu-x" = [[0x1bdc72, 0x1bdc74]]
 evidence = [{ artifact = "stale-menus-referenced.json", sha256 = "720fa631fc30daa30ab0618ad28c81729febac880b788c3ca3499e06cb1f3ef5", pointer = "/rows/27" }, { artifact = "stale-menus-references.json", sha256 = "108226aff5617b251d4e3f7ffeb7648a7406e3f452f4f5eed2ae2f157962981a", pointer = "" }]
 
+[blob."stale-data.eu-x.text-pointers.15a9d0"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu-x" = [[0x15a9d0, 0x15a9dc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/15" }]
+
+[blob."stale-data.eu-x.text-pointers.15a9e0"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu-x" = [[0x15a9e0, 0x15a9ec]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/16" }]
+
+[blob."stale-data.eu-x.text-pointers.15aa1c"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 24
+rom."eu-x" = [[0x15aa1c, 0x15aa34]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/17" }]
+
+[blob."stale-data.eu-x.text-pointers.160170"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 24
+rom."eu-x" = [[0x160170, 0x160188]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/18" }]
+
+[blob."stale-data.eu-x.text-pointers.16018c"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 64
+rom."eu-x" = [[0x16018c, 0x1601cc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/19" }]
+
+[blob."stale-data.eu-x.text-pointers.1601e0"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x1601e0, 0x1601f0]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/20" }]
+
+[blob."stale-data.eu-x.text-pointers.160200"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 32
+rom."eu-x" = [[0x160200, 0x160220]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/21" }]
+
+[blob."stale-data.eu-x.text-pointers.160244"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x160244, 0x160254]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/22" }]
+
+[blob."stale-data.eu-x.text-pointers.160268"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 44
+rom."eu-x" = [[0x160268, 0x160294]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/23" }]
+
+[blob."stale-data.eu-x.text-pointers.1602a4"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 20
+rom."eu-x" = [[0x1602a4, 0x1602b8]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/24" }]
+
+[blob."stale-data.eu-x.text-pointers.1602c8"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu-x" = [[0x1602c8, 0x1602d4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/25" }]
+
+[blob."stale-data.eu-x.text-pointers.1602d8"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu-x" = [[0x1602d8, 0x1602e4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/26" }]
+
+[blob."stale-data.eu-x.text-pointers.1602e8"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x1602e8, 0x1602f8]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/27" }]
+
+[blob."stale-data.eu-x.text-pointers.160338"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 116
+rom."eu-x" = [[0x160338, 0x1603ac]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/28" }]
+
+[blob."stale-data.eu-x.text-pointers.1603bc"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 88
+rom."eu-x" = [[0x1603bc, 0x160414]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/29" }]
+
 [blob."stale-data.eu.language-addresses.173154"]
 type = "stale-data"
 format = "graph"
@@ -34924,6 +35059,141 @@ state = "decoded"
 stored_size = 2
 rom."eu" = [[0x14ad4a, 0x14ad4c]]
 evidence = [{ artifact = "stale-menus-referenced.json", sha256 = "720fa631fc30daa30ab0618ad28c81729febac880b788c3ca3499e06cb1f3ef5", pointer = "/rows/20" }, { artifact = "stale-menus-references.json", sha256 = "108226aff5617b251d4e3f7ffeb7648a7406e3f452f4f5eed2ae2f157962981a", pointer = "" }]
+
+[blob."stale-data.eu.text-pointers.1659d0"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu" = [[0x1659d0, 0x1659dc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/0" }]
+
+[blob."stale-data.eu.text-pointers.1659e0"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu" = [[0x1659e0, 0x1659ec]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/1" }]
+
+[blob."stale-data.eu.text-pointers.165a1c"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 24
+rom."eu" = [[0x165a1c, 0x165a34]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/2" }]
+
+[blob."stale-data.eu.text-pointers.16b170"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 24
+rom."eu" = [[0x16b170, 0x16b188]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/3" }]
+
+[blob."stale-data.eu.text-pointers.16b18c"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 64
+rom."eu" = [[0x16b18c, 0x16b1cc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/4" }]
+
+[blob."stale-data.eu.text-pointers.16b1e0"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x16b1e0, 0x16b1f0]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/5" }]
+
+[blob."stale-data.eu.text-pointers.16b200"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 32
+rom."eu" = [[0x16b200, 0x16b220]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/6" }]
+
+[blob."stale-data.eu.text-pointers.16b244"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x16b244, 0x16b254]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/7" }]
+
+[blob."stale-data.eu.text-pointers.16b268"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 44
+rom."eu" = [[0x16b268, 0x16b294]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/8" }]
+
+[blob."stale-data.eu.text-pointers.16b2a4"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 20
+rom."eu" = [[0x16b2a4, 0x16b2b8]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/9" }]
+
+[blob."stale-data.eu.text-pointers.16b2c8"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu" = [[0x16b2c8, 0x16b2d4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/10" }]
+
+[blob."stale-data.eu.text-pointers.16b2d8"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."eu" = [[0x16b2d8, 0x16b2e4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/11" }]
+
+[blob."stale-data.eu.text-pointers.16b2e8"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x16b2e8, 0x16b2f8]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/12" }]
+
+[blob."stale-data.eu.text-pointers.16b338"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 116
+rom."eu" = [[0x16b338, 0x16b3ac]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/13" }]
+
+[blob."stale-data.eu.text-pointers.16b3bc"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 88
+rom."eu" = [[0x16b3bc, 0x16b414]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/14" }]
 
 [blob."stale-data.us.motion-types-definition"]
 type = "leftover"
@@ -38047,6 +38317,690 @@ state = "decoded"
 stored_size = 33
 rom."eu-x" = [[0x14b6a4, 0x14b6c5]]
 evidence = [{ artifact = "stale-cstrings.json", sha256 = "e41e8436db8b4de36b1cfdf67c30a5fddb47fa71a906cce3a10137b8caea0b6c", pointer = "/rows/59" }]
+
+[blob."stale-text.eu-x.diagnostic.143688"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 17
+rom."eu-x" = [[0x143688, 0x143699]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/112" }]
+
+[blob."stale-text.eu-x.diagnostic.14369c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 19
+rom."eu-x" = [[0x14369c, 0x1436af]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/113" }]
+
+[blob."stale-text.eu-x.diagnostic.1436b0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 13
+rom."eu-x" = [[0x1436b0, 0x1436bd]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/114" }]
+
+[blob."stale-text.eu-x.diagnostic.14395c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."eu-x" = [[0x14395c, 0x143973]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/115" }]
+
+[blob."stale-text.eu-x.diagnostic.144834"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 46
+rom."eu-x" = [[0x144834, 0x144862]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/116" }]
+
+[blob."stale-text.eu-x.diagnostic.14487c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 37
+rom."eu-x" = [[0x14487c, 0x1448a1]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/117" }]
+
+[blob."stale-text.eu-x.diagnostic.1448a4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 48
+rom."eu-x" = [[0x1448a4, 0x1448d4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/118" }]
+
+[blob."stale-text.eu-x.diagnostic.1448e4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu-x" = [[0x1448e4, 0x144902]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/119" }]
+
+[blob."stale-text.eu-x.diagnostic.144904"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x144904, 0x144923]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/120" }]
+
+[blob."stale-text.eu-x.diagnostic.144924"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x144924, 0x144943]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/121" }]
+
+[blob."stale-text.eu-x.diagnostic.14495c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 22
+rom."eu-x" = [[0x14495c, 0x144972]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/122" }]
+
+[blob."stale-text.eu-x.diagnostic.144974"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 38
+rom."eu-x" = [[0x144974, 0x14499a]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/123" }]
+
+[blob."stale-text.eu-x.diagnostic.14499c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 41
+rom."eu-x" = [[0x14499c, 0x1449c5]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/124" }]
+
+[blob."stale-text.eu-x.diagnostic.1449c8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."eu-x" = [[0x1449c8, 0x1449df]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/125" }]
+
+[blob."stale-text.eu-x.diagnostic.1449e0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 43
+rom."eu-x" = [[0x1449e0, 0x144a0b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/126" }]
+
+[blob."stale-text.eu-x.diagnostic.144a0c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."eu-x" = [[0x144a0c, 0x144a23]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/127" }]
+
+[blob."stale-text.eu-x.diagnostic.144a24"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 43
+rom."eu-x" = [[0x144a24, 0x144a4f]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/128" }]
+
+[blob."stale-text.eu-x.diagnostic.144a50"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 27
+rom."eu-x" = [[0x144a50, 0x144a6b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/129" }]
+
+[blob."stale-text.eu-x.diagnostic.144b74"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 17
+rom."eu-x" = [[0x144b74, 0x144b85]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/130" }]
+
+[blob."stale-text.eu-x.diagnostic.144c1c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 11
+rom."eu-x" = [[0x144c1c, 0x144c27]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/131" }]
+
+[blob."stale-text.eu-x.diagnostic.144c38"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu-x" = [[0x144c38, 0x144c56]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/132" }]
+
+[blob."stale-text.eu-x.diagnostic.144c78"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 17
+rom."eu-x" = [[0x144c78, 0x144c89]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/133" }]
+
+[blob."stale-text.eu-x.diagnostic.145028"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x145028, 0x145047]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/134" }]
+
+[blob."stale-text.eu-x.diagnostic.145048"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu-x" = [[0x145048, 0x145066]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/135" }]
+
+[blob."stale-text.eu-x.diagnostic.145068"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 29
+rom."eu-x" = [[0x145068, 0x145085]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/136" }]
+
+[blob."stale-text.eu-x.diagnostic.145088"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu-x" = [[0x145088, 0x1450aa]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/137" }]
+
+[blob."stale-text.eu-x.diagnostic.1450ac"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu-x" = [[0x1450ac, 0x1450ce]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/138" }]
+
+[blob."stale-text.eu-x.diagnostic.1450d0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 28
+rom."eu-x" = [[0x1450d0, 0x1450ec]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/139" }]
+
+[blob."stale-text.eu-x.diagnostic.1450ec"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 33
+rom."eu-x" = [[0x1450ec, 0x14510d]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/140" }]
+
+[blob."stale-text.eu-x.diagnostic.145110"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu-x" = [[0x145110, 0x14512e]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/141" }]
+
+[blob."stale-text.eu-x.diagnostic.145130"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu-x" = [[0x145130, 0x145152]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/142" }]
+
+[blob."stale-text.eu-x.diagnostic.1456a0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu-x" = [[0x1456a0, 0x1456da]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/143" }]
+
+[blob."stale-text.eu-x.diagnostic.145730"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 60
+rom."eu-x" = [[0x145730, 0x14576c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/144" }]
+
+[blob."stale-text.eu-x.diagnostic.14576c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 54
+rom."eu-x" = [[0x14576c, 0x1457a2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/145" }]
+
+[blob."stale-text.eu-x.diagnostic.1457a4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 54
+rom."eu-x" = [[0x1457a4, 0x1457da]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/146" }]
+
+[blob."stale-text.eu-x.diagnostic.1457e8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 42
+rom."eu-x" = [[0x1457e8, 0x145812]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/147" }]
+
+[blob."stale-text.eu-x.diagnostic.145838"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu-x" = [[0x145838, 0x145872]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/148" }]
+
+[blob."stale-text.eu-x.diagnostic.145874"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 64
+rom."eu-x" = [[0x145874, 0x1458b4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/149" }]
+
+[blob."stale-text.eu-x.diagnostic.1459e0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 98
+rom."eu-x" = [[0x1459e0, 0x145a42]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/150" }]
+
+[blob."stale-text.eu-x.diagnostic.145a44"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 87
+rom."eu-x" = [[0x145a44, 0x145a9b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/151" }]
+
+[blob."stale-text.eu-x.diagnostic.145a9c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 87
+rom."eu-x" = [[0x145a9c, 0x145af3]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/152" }]
+
+[blob."stale-text.eu-x.diagnostic.145af4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 72
+rom."eu-x" = [[0x145af4, 0x145b3c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/153" }]
+
+[blob."stale-text.eu-x.diagnostic.145b3c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 67
+rom."eu-x" = [[0x145b3c, 0x145b7f]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/154" }]
+
+[blob."stale-text.eu-x.diagnostic.145b80"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu-x" = [[0x145b80, 0x145bba]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/155" }]
+
+[blob."stale-text.eu-x.diagnostic.145bbc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu-x" = [[0x145bbc, 0x145bf6]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/156" }]
+
+[blob."stale-text.eu-x.diagnostic.145bf8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 40
+rom."eu-x" = [[0x145bf8, 0x145c20]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/157" }]
+
+[blob."stale-text.eu-x.diagnostic.145cc8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 45
+rom."eu-x" = [[0x145cc8, 0x145cf5]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/158" }]
+
+[blob."stale-text.eu-x.diagnostic.146100"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu-x" = [[0x146100, 0x146122]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/159" }]
+
+[blob."stale-text.eu-x.diagnostic.14794c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 51
+rom."eu-x" = [[0x14794c, 0x14797f]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/160" }]
+
+[blob."stale-text.eu-x.diagnostic.148c8c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 128
+rom."eu-x" = [[0x148c8c, 0x148d0c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/161" }]
+
+[blob."stale-text.eu-x.diagnostic.148d5c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 29
+rom."eu-x" = [[0x148d5c, 0x148d79]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/162" }]
+
+[blob."stale-text.eu-x.diagnostic.148d7c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 15
+rom."eu-x" = [[0x148d7c, 0x148d8b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/163" }]
+
+[blob."stale-text.eu-x.diagnostic.14bd94"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 18
+rom."eu-x" = [[0x14bd94, 0x14bda6]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/164" }]
+
+[blob."stale-text.eu-x.diagnostic.14bda8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 25
+rom."eu-x" = [[0x14bda8, 0x14bdc1]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/165" }]
+
+[blob."stale-text.eu-x.diagnostic.14bdc4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14bdc4, 0x14bde3]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/166" }]
+
+[blob."stale-text.eu-x.diagnostic.14bde4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 33
+rom."eu-x" = [[0x14bde4, 0x14be05]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/167" }]
+
+[blob."stale-text.eu-x.diagnostic.14be08"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14be08, 0x14be27]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/168" }]
+
+[blob."stale-text.eu-x.diagnostic.14be28"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14be28, 0x14be47]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/169" }]
+
+[blob."stale-text.eu-x.diagnostic.14be48"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14be48, 0x14be67]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/170" }]
+
+[blob."stale-text.eu-x.diagnostic.14be68"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14be68, 0x14be87]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/171" }]
+
+[blob."stale-text.eu-x.diagnostic.14be88"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14be88, 0x14bea7]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/172" }]
+
+[blob."stale-text.eu-x.diagnostic.14bea8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu-x" = [[0x14bea8, 0x14bec7]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/173" }]
+
+[blob."stale-text.eu-x.diagnostic.14becc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14becc, 0x14bedc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/174" }]
+
+[blob."stale-text.eu-x.diagnostic.14bedc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bedc, 0x14beec]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/175" }]
+
+[blob."stale-text.eu-x.diagnostic.14beec"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14beec, 0x14befc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/176" }]
+
+[blob."stale-text.eu-x.diagnostic.14befc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14befc, 0x14bf0c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/177" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf0c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf0c, 0x14bf1c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/178" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf1c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf1c, 0x14bf2c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/179" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf2c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf2c, 0x14bf3c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/180" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf3c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf3c, 0x14bf4c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/181" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf4c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf4c, 0x14bf5c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/182" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf5c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf5c, 0x14bf6c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/183" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf6c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf6c, 0x14bf7c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/184" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf7c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu-x" = [[0x14bf7c, 0x14bf8c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/185" }]
+
+[blob."stale-text.eu-x.diagnostic.14bf90"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 18
+rom."eu-x" = [[0x14bf90, 0x14bfa2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/186" }]
+
+[blob."stale-text.eu-x.diagnostic.14bfa4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 14
+rom."eu-x" = [[0x14bfa4, 0x14bfb2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/187" }]
 
 [blob."stale-text.eu-x.language.14d384"]
 type = "stale-data"
@@ -44455,6 +45409,744 @@ state = "decoded"
 stored_size = 33
 rom."eu" = [[0x1566a4, 0x1566c5]]
 evidence = [{ artifact = "stale-cstrings.json", sha256 = "e41e8436db8b4de36b1cfdf67c30a5fddb47fa71a906cce3a10137b8caea0b6c", pointer = "/rows/30" }]
+
+[blob."stale-text.eu.diagnostic.14d254"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 35
+rom."eu" = [[0x14d254, 0x14d277]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/30" }]
+
+[blob."stale-text.eu.diagnostic.14d3d0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 10
+rom."eu" = [[0x14d3d0, 0x14d3da]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/31" }]
+
+[blob."stale-text.eu.diagnostic.14d3dc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 22
+rom."eu" = [[0x14d3dc, 0x14d3f2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/32" }]
+
+[blob."stale-text.eu.diagnostic.14dbb0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 22
+rom."eu" = [[0x14dbb0, 0x14dbc6]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/33" }]
+
+[blob."stale-text.eu.diagnostic.14dbe4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 19
+rom."eu" = [[0x14dbe4, 0x14dbf7]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/34" }]
+
+[blob."stale-text.eu.diagnostic.14dbf8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 18
+rom."eu" = [[0x14dbf8, 0x14dc0a]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/35" }]
+
+[blob."stale-text.eu.diagnostic.14e688"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 17
+rom."eu" = [[0x14e688, 0x14e699]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/36" }]
+
+[blob."stale-text.eu.diagnostic.14e69c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 19
+rom."eu" = [[0x14e69c, 0x14e6af]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/37" }]
+
+[blob."stale-text.eu.diagnostic.14e6b0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 13
+rom."eu" = [[0x14e6b0, 0x14e6bd]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/38" }]
+
+[blob."stale-text.eu.diagnostic.14e95c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."eu" = [[0x14e95c, 0x14e973]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/39" }]
+
+[blob."stale-text.eu.diagnostic.14f834"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 46
+rom."eu" = [[0x14f834, 0x14f862]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/40" }]
+
+[blob."stale-text.eu.diagnostic.14f87c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 37
+rom."eu" = [[0x14f87c, 0x14f8a1]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/41" }]
+
+[blob."stale-text.eu.diagnostic.14f8a4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 48
+rom."eu" = [[0x14f8a4, 0x14f8d4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/42" }]
+
+[blob."stale-text.eu.diagnostic.14f8e4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu" = [[0x14f8e4, 0x14f902]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/43" }]
+
+[blob."stale-text.eu.diagnostic.14f904"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x14f904, 0x14f923]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/44" }]
+
+[blob."stale-text.eu.diagnostic.14f924"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x14f924, 0x14f943]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/45" }]
+
+[blob."stale-text.eu.diagnostic.14f95c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 22
+rom."eu" = [[0x14f95c, 0x14f972]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/46" }]
+
+[blob."stale-text.eu.diagnostic.14f974"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 38
+rom."eu" = [[0x14f974, 0x14f99a]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/47" }]
+
+[blob."stale-text.eu.diagnostic.14f99c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 41
+rom."eu" = [[0x14f99c, 0x14f9c5]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/48" }]
+
+[blob."stale-text.eu.diagnostic.14f9c8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."eu" = [[0x14f9c8, 0x14f9df]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/49" }]
+
+[blob."stale-text.eu.diagnostic.14f9e0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 43
+rom."eu" = [[0x14f9e0, 0x14fa0b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/50" }]
+
+[blob."stale-text.eu.diagnostic.14fa0c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."eu" = [[0x14fa0c, 0x14fa23]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/51" }]
+
+[blob."stale-text.eu.diagnostic.14fa24"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 43
+rom."eu" = [[0x14fa24, 0x14fa4f]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/52" }]
+
+[blob."stale-text.eu.diagnostic.14fa50"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 27
+rom."eu" = [[0x14fa50, 0x14fa6b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/53" }]
+
+[blob."stale-text.eu.diagnostic.14fb74"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 17
+rom."eu" = [[0x14fb74, 0x14fb85]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/54" }]
+
+[blob."stale-text.eu.diagnostic.14fc1c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 11
+rom."eu" = [[0x14fc1c, 0x14fc27]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/55" }]
+
+[blob."stale-text.eu.diagnostic.14fc38"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu" = [[0x14fc38, 0x14fc56]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/56" }]
+
+[blob."stale-text.eu.diagnostic.14fc78"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 17
+rom."eu" = [[0x14fc78, 0x14fc89]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/57" }]
+
+[blob."stale-text.eu.diagnostic.150028"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x150028, 0x150047]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/58" }]
+
+[blob."stale-text.eu.diagnostic.150048"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu" = [[0x150048, 0x150066]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/59" }]
+
+[blob."stale-text.eu.diagnostic.150068"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 29
+rom."eu" = [[0x150068, 0x150085]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/60" }]
+
+[blob."stale-text.eu.diagnostic.150088"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu" = [[0x150088, 0x1500aa]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/61" }]
+
+[blob."stale-text.eu.diagnostic.1500ac"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu" = [[0x1500ac, 0x1500ce]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/62" }]
+
+[blob."stale-text.eu.diagnostic.1500d0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 28
+rom."eu" = [[0x1500d0, 0x1500ec]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/63" }]
+
+[blob."stale-text.eu.diagnostic.1500ec"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 33
+rom."eu" = [[0x1500ec, 0x15010d]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/64" }]
+
+[blob."stale-text.eu.diagnostic.150110"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."eu" = [[0x150110, 0x15012e]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/65" }]
+
+[blob."stale-text.eu.diagnostic.150130"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu" = [[0x150130, 0x150152]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/66" }]
+
+[blob."stale-text.eu.diagnostic.1506a0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu" = [[0x1506a0, 0x1506da]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/67" }]
+
+[blob."stale-text.eu.diagnostic.150730"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 60
+rom."eu" = [[0x150730, 0x15076c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/68" }]
+
+[blob."stale-text.eu.diagnostic.15076c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 54
+rom."eu" = [[0x15076c, 0x1507a2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/69" }]
+
+[blob."stale-text.eu.diagnostic.1507a4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 54
+rom."eu" = [[0x1507a4, 0x1507da]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/70" }]
+
+[blob."stale-text.eu.diagnostic.1507e8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 42
+rom."eu" = [[0x1507e8, 0x150812]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/71" }]
+
+[blob."stale-text.eu.diagnostic.150838"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu" = [[0x150838, 0x150872]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/72" }]
+
+[blob."stale-text.eu.diagnostic.150874"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 64
+rom."eu" = [[0x150874, 0x1508b4]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/73" }]
+
+[blob."stale-text.eu.diagnostic.1509e0"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 98
+rom."eu" = [[0x1509e0, 0x150a42]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/74" }]
+
+[blob."stale-text.eu.diagnostic.150a44"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 87
+rom."eu" = [[0x150a44, 0x150a9b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/75" }]
+
+[blob."stale-text.eu.diagnostic.150a9c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 87
+rom."eu" = [[0x150a9c, 0x150af3]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/76" }]
+
+[blob."stale-text.eu.diagnostic.150af4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 72
+rom."eu" = [[0x150af4, 0x150b3c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/77" }]
+
+[blob."stale-text.eu.diagnostic.150b3c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 67
+rom."eu" = [[0x150b3c, 0x150b7f]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/78" }]
+
+[blob."stale-text.eu.diagnostic.150b80"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu" = [[0x150b80, 0x150bba]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/79" }]
+
+[blob."stale-text.eu.diagnostic.150bbc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 58
+rom."eu" = [[0x150bbc, 0x150bf6]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/80" }]
+
+[blob."stale-text.eu.diagnostic.150bf8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 40
+rom."eu" = [[0x150bf8, 0x150c20]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/81" }]
+
+[blob."stale-text.eu.diagnostic.150cc8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 45
+rom."eu" = [[0x150cc8, 0x150cf5]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/82" }]
+
+[blob."stale-text.eu.diagnostic.151100"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 34
+rom."eu" = [[0x151100, 0x151122]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/83" }]
+
+[blob."stale-text.eu.diagnostic.15294c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 51
+rom."eu" = [[0x15294c, 0x15297f]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/84" }]
+
+[blob."stale-text.eu.diagnostic.153c8c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 128
+rom."eu" = [[0x153c8c, 0x153d0c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/85" }]
+
+[blob."stale-text.eu.diagnostic.153d5c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 29
+rom."eu" = [[0x153d5c, 0x153d79]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/86" }]
+
+[blob."stale-text.eu.diagnostic.153d7c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 15
+rom."eu" = [[0x153d7c, 0x153d8b]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/87" }]
+
+[blob."stale-text.eu.diagnostic.156d94"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 18
+rom."eu" = [[0x156d94, 0x156da6]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/88" }]
+
+[blob."stale-text.eu.diagnostic.156da8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 25
+rom."eu" = [[0x156da8, 0x156dc1]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/89" }]
+
+[blob."stale-text.eu.diagnostic.156dc4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156dc4, 0x156de3]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/90" }]
+
+[blob."stale-text.eu.diagnostic.156de4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 33
+rom."eu" = [[0x156de4, 0x156e05]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/91" }]
+
+[blob."stale-text.eu.diagnostic.156e08"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156e08, 0x156e27]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/92" }]
+
+[blob."stale-text.eu.diagnostic.156e28"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156e28, 0x156e47]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/93" }]
+
+[blob."stale-text.eu.diagnostic.156e48"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156e48, 0x156e67]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/94" }]
+
+[blob."stale-text.eu.diagnostic.156e68"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156e68, 0x156e87]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/95" }]
+
+[blob."stale-text.eu.diagnostic.156e88"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156e88, 0x156ea7]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/96" }]
+
+[blob."stale-text.eu.diagnostic.156ea8"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 31
+rom."eu" = [[0x156ea8, 0x156ec7]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/97" }]
+
+[blob."stale-text.eu.diagnostic.156ecc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156ecc, 0x156edc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/98" }]
+
+[blob."stale-text.eu.diagnostic.156edc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156edc, 0x156eec]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/99" }]
+
+[blob."stale-text.eu.diagnostic.156eec"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156eec, 0x156efc]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/100" }]
+
+[blob."stale-text.eu.diagnostic.156efc"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156efc, 0x156f0c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/101" }]
+
+[blob."stale-text.eu.diagnostic.156f0c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f0c, 0x156f1c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/102" }]
+
+[blob."stale-text.eu.diagnostic.156f1c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f1c, 0x156f2c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/103" }]
+
+[blob."stale-text.eu.diagnostic.156f2c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f2c, 0x156f3c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/104" }]
+
+[blob."stale-text.eu.diagnostic.156f3c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f3c, 0x156f4c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/105" }]
+
+[blob."stale-text.eu.diagnostic.156f4c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f4c, 0x156f5c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/106" }]
+
+[blob."stale-text.eu.diagnostic.156f5c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f5c, 0x156f6c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/107" }]
+
+[blob."stale-text.eu.diagnostic.156f6c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f6c, 0x156f7c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/108" }]
+
+[blob."stale-text.eu.diagnostic.156f7c"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."eu" = [[0x156f7c, 0x156f8c]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/109" }]
+
+[blob."stale-text.eu.diagnostic.156f90"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 18
+rom."eu" = [[0x156f90, 0x156fa2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/110" }]
+
+[blob."stale-text.eu.diagnostic.156fa4"]
+type = "stale-data"
+format = "c-string"
+codec = "none"
+state = "decoded"
+stored_size = 14
+rom."eu" = [[0x156fa4, 0x156fb2]]
+evidence = [{ artifact = "stale-debug-text-pointers.json", sha256 = "52b801d304255de8e450733dfb594241444dcd650cb93d51af88aceef7e86daf", pointer = "/rows/111" }]
 
 [blob."stale-text.eu.language.158384"]
 type = "stale-data"
