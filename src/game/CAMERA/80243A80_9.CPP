@@ -10,7 +10,7 @@
 /* Calls Menu_UpdateTrackCamera when the globally selected record's word at 0x38 is non-zero. */
 
 
-extern void Menu_UpdateTrackCamera(void);
+#include "MENU_2/80400000_16.H"
 
 /* Calls func_80402BA0_de when the globally selected record's word at 0x38 is non-zero. */
 
@@ -67,10 +67,10 @@ unsigned int func_80245850_de(void) {
     return D_800E2830->state3C;
 }
 
-void func_80245864_de(void) {
+void func_80245864_de(void *camera) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
-        Menu_UpdateTrackCamera();
+        Menu_UpdateTrackCamera(camera);
     }
 }
 

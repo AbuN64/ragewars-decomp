@@ -40,7 +40,6 @@ f32 func_8040184C_de(f32 t) {
     return key[-1].first * ((*(&D_800DCB38 + 1)) - u) + key->first * u;
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
 extern f32 D_800DCB40[];
 extern u8 D_80100030[];
@@ -54,10 +53,10 @@ extern void func_80272E3C_de(void *, f32, f32, f32);
 extern void func_80272898_de(void *, CVector3 *, CVector3 *);
 extern void func_80288470_de(void *);
 extern s32 func_80243A90_de(SharedTrackObject *, f32, f32, f32, void *);
-extern s32 func_8028D888_de(void *);
+extern void func_8028D888_de(void *);
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
 extern f32 func_802725FC_de(CVector3 *);
-/* 252/253 words (18 aligned edits); remaining: regalloc, the world-hit flag takes $v0 instead of $s0 so one move drops */
+/* Follow the keyframe camera and keep the collision result across world cleanup. */
 void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     CVector3 eye;
     CVector3 target;
@@ -66,7 +65,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     f32 matrix[16];
     CVector3 rotated;
     SharedTrackObject *actor;
-    s32 hit;
+    s32 collisionHit;
     f32 yaw;
     f32 pitch;
     f32 scale;
@@ -120,10 +119,10 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
             saved = actor->prefix;
             actor->prefix.position = target;
             func_80288470_de(&D_8011FE88);
-            func_80243A90_de(actor, eye.x, eye.y, eye.z, D_80100030);
-            hit = func_8028D888_de(&D_8011FE88);
+            collisionHit = func_80243A90_de(actor, eye.x, eye.y, eye.z, D_80100030);
+            func_8028D888_de(&D_8011FE88);
             actor->prefix = saved;
-            if (hit != 0) {
+            if (collisionHit != 0) {
                 eye = *(CVector3 *)&D_801001F8;
             }
         }
@@ -134,6 +133,3 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     camera->pitch = -pitch;
     camera->position = eye;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Menu_UpdateTrackCamera);
-#endif
