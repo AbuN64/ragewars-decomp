@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/PLAYERRECAT64E.H"
+#include "MULTI/8043E9A8.H"
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"

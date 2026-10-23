@@ -2,6 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/MENURECAT20V1.H"
+#include "MULTI/804453C4.H"
 #include "TYPES.H"
 #include "GFX/TEXT/802A8A94_5.H"
 

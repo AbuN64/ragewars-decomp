@@ -16,13 +16,6 @@ struct PlayerRecAt64E {
 
 struct Holder_func_8043F048_de;
 struct PlayerRecAt64E;
-struct Holder_func_8043F048_de {
-    char pad[0x1C];
-    struct PlayerRecAt64E *player;
-    char pad20[0x30 - 0x20];
-    f32 fade;
-    f32 alpha;
-};
 
 struct Flagged;
 struct Flagged {
@@ -31,11 +24,6 @@ struct Flagged {
 };
 struct Flagged;
 struct Obj8043ECE8;
-struct Obj8043ECE8 {
-    s16 unk0;
-    u8 pad2[10];
-    struct Flagged *unkC;
-};
 
 
 struct ItemDef;
@@ -47,11 +35,6 @@ struct ItemDef {
 
 struct ItemDef;
 struct ItemRecAt18V2;
-struct ItemRecAt18V2 {
-    char pad[0x14];
-    s32 resource;
-    struct ItemDef *def;
-};
 
 
 struct Obj8043EB20;
@@ -73,11 +56,6 @@ struct Inner8043E56C;
 typedef struct Inner8043E56C Inner8043E56C;
 
 struct Obj8043EB20;
-struct Obj8043EB20 {
-    u8 pad0[0x1C];
-    s32 unk1C;
-    Inner8043E56C *unk20;
-};
 
 struct Obj8043ECE8;
 typedef struct Obj8043ECE8 Obj8043ECE8;

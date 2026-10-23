@@ -6,12 +6,6 @@
 extern float D_800E2810;
 
 struct MenuRecAt20V1;
-struct MenuRecAt20V1 {
-    s16 state;
-    char pad2[0x1A];
-    s32 id;
-    s32 input;
-};
 
 struct Actor_func_8044560C_de;
 struct Actor_func_8044560C_de {
@@ -22,11 +16,6 @@ struct Actor_func_8044560C_de {
 };
 struct Actor_func_8044560C_de;
 struct PlayerRecAtC;
-struct PlayerRecAtC {
-    s16 state;
-    char pad2[0xA];
-    struct Actor_func_8044560C_de *actor;
-};
 
 struct PlayerRecAtC;
 typedef struct PlayerRecAtC PlayerRecAtC;
@@ -36,24 +25,11 @@ struct Spinner;
 typedef struct Spinner Spinner;
 
 struct Style_func_80445BC0_de;
-struct Style_func_80445BC0_de {
-    char pad0[0x1C];
-    s32 id;
-    char pad20[0x10];
-    f32 alpha;
-    f32 fade;
-};
 
 struct State_func_80445EF4_de;
 typedef struct State_func_80445EF4_de State_func_80445EF4_de;
 
 struct EntryRecAtCV2;
-struct EntryRecAtCV2 {
-    s32 value;
-    f32 timer;
-    s32 count;
-    u8 text[12];
-};
 
 struct State_func_80445EF4_de;
 struct State_func_80445EF4_de {
@@ -66,10 +42,6 @@ struct State_func_80445EF4_de {
 
 
 struct EntryRecAt1C;
-struct EntryRecAt1C {
-    char pad[0x1C];
-    ObjRecAt5D8 *unk1C;
-};
 
 
 
@@ -91,12 +63,6 @@ struct TextEntryRecAtC;
 typedef struct TextEntryRecAtC TextEntryRecAtC;
 
 struct Spinner;
-struct Spinner {
-    s32 value;
-    f32 timer;
-    s32 max;
-    char padC[0xC];
-};
 
 
 struct MenuRecAt20V1;
@@ -107,12 +73,6 @@ typedef struct LocalizedInputState LocalizedInputState;
 
 
 struct TextEntryRecAtC;
-struct TextEntryRecAtC {
-    s32 length;
-    s32 cursor;
-    s32 count;
-    char text[12];
-};
 
 struct EntryRecAt1C;
 typedef struct EntryRecAt1C EntryRecAt1C;

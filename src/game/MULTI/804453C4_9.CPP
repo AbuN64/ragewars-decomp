@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/MENURECAT20V1.H"
+#include "MULTI/804453C4.H"
 #include "TYPES.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "MENU/PAK/pak_menu_entries.H"

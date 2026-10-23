@@ -5890,10 +5890,6 @@ struct Variable {
 };
 struct MenuRecAt14;
 struct Variable;
-struct MenuRecAt14 {
-    char pad[0x14];
-    struct Variable *unk14;
-};
 struct Target802131E0;
 struct Target802131E0 {
     u8 pad0[0x220];

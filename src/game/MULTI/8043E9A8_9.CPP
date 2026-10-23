@@ -1,4 +1,5 @@
 #include "COMMON/PLAYERRECAT64E.H"
+#include "MULTI/8043E9A8.H"
 #include "TYPES.H"
 #include "MULTI/8043E9A8_9.H"
 
