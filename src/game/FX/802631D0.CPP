@@ -27,7 +27,7 @@ extern f32 D_800C42D0_de;
 extern s32 D_800CBB70;
 
 /* 103/307 aligned edits; remaining: float scheduling and controller pointer live ranges. */
-void Fx_BuildControllerState(char *arg0, SharedPlayer *arg1) {
+void Fx_BuildControllerState(char *arg0, SharedPlayer *player) {
     void *temp_s1;
     f32 response;
     f32 rate;
@@ -56,8 +56,8 @@ void Fx_BuildControllerState(char *arg0, SharedPlayer *arg1) {
     s8 temp_v1_3;
     void *temp_a3;
 
-    temp_s1 = arg1->views5D8.view5D8_0.unk5D8;
-    temp_ft0 = D_800C4298_de - (arg1->views5E8.view7EC_132.unk7EC * D_800C4290_de);
+    temp_s1 = player->views5D8.view5D8_0.unk5D8;
+    temp_ft0 = D_800C4298_de - (player->views5E8.view7EC_132.unk7EC * D_800C4290_de);
     temp_a3 = ((void **) arg0)[16 / sizeof(void *)];
     response = (f32)((u8 *)temp_s1)[0x7A] * D_800C4294_de;
     response = response - D_800C4298_de;
@@ -130,7 +130,7 @@ loop_6:
         }
         if (((u8 *) temp_s1)[0x7D] != 0) {
             ((f32 *) arg0)[4 / sizeof(f32)] = (f32) ((f32) ((s8 *) temp_a3)[199 / sizeof(s8)] * D_800C42B8_de);
-        } else if (arg1->views5E8.view11B4_135.unk11B4 == 0) {
+        } else if (player->views5E8.view11B4_135.unk11B4 == 0) {
             temp_v0 = ((s8 *) temp_a3)[199 / sizeof(s8)];
             if (temp_v0 != 0) {
                 ((f32 *) arg0)[4 / sizeof(f32)] = (f32) (((f32 *) arg0)[4 / sizeof(f32)] + (temp_ft0f * D_800C42BC_de * (f32) temp_v0));
@@ -153,7 +153,7 @@ loop_6:
         } else {
             ((f32 *) arg0)[8 / sizeof(f32)] = (f32) D_800C42D0_de;
         }
-        if (arg1->views5E8.view11B4_135.unk11B4 != 0) {
+        if (player->views5E8.view11B4_135.unk11B4 != 0) {
             ((f32 *) arg0)[12 / sizeof(f32)] = 0.0f;
         } else {
             ((f32 *) arg0)[12 / sizeof(f32)] = (f32) ((f32) ((s8 *) temp_a3)[199 / sizeof(s8)] * D_800C42D4_de);
@@ -177,7 +177,7 @@ block_59:
                 ((f32 *) arg0)[4 / sizeof(f32)] = var_fv0f;
             } else if (((u8 *) temp_s1)[0x7D] != 0) {
                 temp_fa1 = ((f32 *) arg0)[12 / sizeof(f32)];
-                if ((temp_fa1 != 0.0f) && (arg1->views5E8.view7E8_105.unk7E8 == 0)) {
+                if ((temp_fa1 != 0.0f) && (player->views5E8.view7E8_105.unk7E8 == 0)) {
                     var_fa1 = temp_fa1 * (temp_ft0 * D_800C42E8_de);
                     if (var_fa1 < 0.0f) {
                         var_fa1 = -var_fa1;
@@ -212,7 +212,7 @@ block_59:
 INCLUDE_ASM("span_1000", Fx_BuildControllerState);
 #endif
 
-void func_8026367C_de(void *arg0, s32 arg1) {
+void func_8026367C_de(void *arg0, s32 attributes) {
     func_802636B0_de(arg0);
-    (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10) = arg1;
+    (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10) = attributes;
 }

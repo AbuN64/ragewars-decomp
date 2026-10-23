@@ -196,35 +196,35 @@ s32 func_8020F93C_de(void *arg0)
 }
 
 
-s32 func_8020F984_de(void *arg0) {
+s32 func_8020F984_de(void *self) {
     f32 temp_f0;
     f32 temp_f2;
     f32 var_f1;
-    s32 temp_v0;
+    s32 count;
     s32 mask;
     s32 var_a1;
-    s32 var_v1;
+    s32 i;
     ObjRecAt28C *var_a0;
 
-    var_a0 = arg0;
+    var_a0 = self;
     var_a1 = -1;
     var_f1 = D_800C21F0_eu_x.unk4;
-    var_v1 = 0;
+    i = 0;
     if (var_a0->count > 0) {
         mask = 0x300000;
         temp_f2 = var_f1;
-        temp_v0 = var_a0->count;
+        count = var_a0->count;
         do {
-            struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)var_a0->keys[var_v1];
+            struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)var_a0->keys[i];
             if ((actor->flags100 & mask) &&
-                ((temp_f0 = (f32)var_a0->distances[var_v1], temp_f0 < var_f1) ||
+                ((temp_f0 = (f32)var_a0->distances[i], temp_f0 < var_f1) ||
                  (var_f1 == temp_f2)) &&
-                (var_a0->flags[var_v1] != 0)) {
+                (var_a0->flags[i] != 0)) {
                 var_f1 = temp_f0;
-                var_a1 = var_v1;
+                var_a1 = i;
             }
-            var_v1 += 1;
-        } while (var_v1 < temp_v0);
+            i += 1;
+        } while (i < count);
     }
     return var_a1;
 }
