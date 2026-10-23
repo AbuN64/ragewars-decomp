@@ -5800,7 +5800,7 @@ segments:
       - [0xE18B0, rodata, data_800C/D_blob_1e787ed495c7598eacb2]
       - [0xE18B4, rodata, data_800C/D_blob_2f2966fe540613a7b9f9]
       - [0xE18B8, data, data_800C/D_blob_faa43fd035d6fbf8c0aa]
-      - [0xE18C0, rodata, data_800C/literals_func_80403E90_de]
+      - [0xE18C0, rodata, data_800C/literals_Pak_RefreshNotes]
       - [0xE18F0, rodata, data_800C/D_blob_b06b7084ca1b1e249054]
       - [0xE1900, rodata, data_800C/D_auto_rodata_shared_800E0D00]
       - [0xE1916, data, data_800C/rodata_unresolved_800E0D16]

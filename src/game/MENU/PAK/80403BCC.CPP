@@ -74,7 +74,7 @@ static inline void func_804042F0_encode(u8 *dst, u8 *src, s32 n) {
 extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *file_no, u8 *ext_name,
                          u8 *company, u8 *code);
 
-s32 func_80403E90_de(s32 ch) {
+s32 Pak_RefreshNotes(s32 ch) {
     s32 i;
     s32 result;
     s32 free;
@@ -136,7 +136,7 @@ s32 Pak_UpdateStatus(s32 ch) {
     goto finish;
 ready:
     D_801534F0[ch]=3;
-    if(func_80403E90_de(ch)!=0) D_80153500[ch]=-4;
+    if(Pak_RefreshNotes(ch)!=0) D_80153500[ch]=-4;
     else D_80153500[ch]=0;
 finish:
     return D_80153500[ch]==0 || D_80153500[ch]==-4;
