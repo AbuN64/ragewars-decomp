@@ -589,7 +589,7 @@ static inline s32 navCollectNeighbors(CNavData *graph, NavigationSearchNode *nod
         }
     return count;
 }
-/* 250/253 words (32 aligned edits); remaining: loop.c hoists 0.0f out of the outer loop (f20/f21 swap), the -1 fill constant and the neighbor-collect setup order; the 10/11 skips fill no likely slots. */
+/* 29/253 aligned edits; remaining: floating zero lifetime, invalid-index fill and neighbor-collection setup. */
 void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     s32 neighbors[64];
     s32 portals[64];
@@ -669,68 +669,61 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
             neighborOut++;
         } while (index < 0x40);
 count=navCollectNeighbors(graph,current,neighbors,portals);
-        index = 0;
-        if (count > 0) {
-            byteOffset = 0;
-            do {
-                neighborTable = graph->points;
-                neighborKey = *(s32 *)((u8 *)neighborBase + byteOffset);
-                nodeList = graph->nodes;
-                destination=navigationRecord(neighborTable,neighborKey);
-                next=navFindNode(graph,neighborKey);
-                linkTable = graph->m_pusNavLinks;
-                portal=navigationRecord(linkTable,*(s32 *)((u8 *)portals + byteOffset));
-                kind = portal->kind;
-                switch (kind) {
-                    case 1:
-                    case 4:
-                    case 7:
-                        reversible = 1;
-                        break;
-                    default:
-                        reversible = 0;
-                        break;
+        for (index = 0, byteOffset = 0; index < count; index++, byteOffset += 4) {
+            neighborTable = graph->points;
+            neighborKey = *(s32 *)((u8 *)neighborBase + byteOffset);
+            nodeList = graph->nodes;
+            destination=navigationRecord(neighborTable,neighborKey);
+            next=navFindNode(graph,neighborKey);
+            linkTable = graph->m_pusNavLinks;
+            portal=navigationRecord(linkTable,*(s32 *)((u8 *)portals + byteOffset));
+            kind = portal->kind;
+            switch (kind) {
+                case 1:
+                case 4:
+                case 7:
+                    reversible = 1;
+                    break;
+                default:
+                    reversible = 0;
+                    break;
+            }
+            if (reversible == 0 && portal->first != current->key) continue;
+            edgeKind = portal->kind;
+            if (edgeKind == 0xA) continue;
+            if (edgeKind == 0xB) continue;
+            if (edgeKind == 9) {
+                distance = 0.0f;
+            } else {
+                distance = func_802726F8_de(&destination->position.x,&origin->position.x);
+            }
+            edgeCost = distance + next->extra;
+            if (navigation_point_flags(destination) & 0x400) {
+                edgeCost += D_800C1D88_de;
+            }
+            if (edgeCost < 0.0f) {
+                edgeCost = 0.0f;
+            }
+            state = next->open;
+            cost = current->cost + edgeCost;
+            if (((state ^ 2) == 0) || ((state ^ 1) == 0)) {
+                if (!(next->cost <= cost)) {
+                    goto update_neighbor;
                 }
-                if ((reversible != 0) || (portal->first == current->key)) {
-                    edgeKind = portal->kind;
-                    if (edgeKind != 0xA) if (edgeKind != 0xB) {
-                        if (edgeKind == 9) {
-                            distance = 0.0f;
-                        } else {
-                            distance = func_802726F8_de(&destination->position.x,&origin->position.x);
-                        }
-                        edgeCost = distance + next->extra;
-                        if (navigation_point_flags(destination) & 0x400) {
-                            edgeCost += D_800C1D88_de;
-                        }
-                        if (edgeCost < 0.0f) {
-                            edgeCost = 0.0f;
-                        }
-                        state = next->open;
-                        cost = current->cost + edgeCost;
-                        if (((state ^ 2) == 0) || ((state ^ 1) == 0)) {
-                            if (!(next->cost <= cost)) {
-                                goto update_neighbor;
-                            }
-                        } else {
+            } else {
 update_neighbor:
-                            next->parent = current;
-                            next->cost = cost;
-                            estimate = func_8020C2E8_de(graph, next);
-                            next->estimate = estimate;
-                            next->total = (next->cost + estimate);
-                            if ((next->open ^ 2) == 0) {
-                                next->open = 0;
-                            }
-                            if ((next->open ^ open) != 0) {
-                                next->open=open;
-                            }
-                        }
-                    }
+                next->parent = current;
+                next->cost = cost;
+                estimate = func_8020C2E8_de(graph, next);
+                next->estimate = estimate;
+                next->total = (next->cost + estimate);
+                if ((next->open ^ 2) == 0) {
+                    next->open = 0;
                 }
-                index += 1;
-                byteOffset += 4;
-            } while (index < count);
+                if ((next->open ^ open) != 0) {
+                    next->open=open;
+                }
+            }
         }
         current->open = 2;
     }
