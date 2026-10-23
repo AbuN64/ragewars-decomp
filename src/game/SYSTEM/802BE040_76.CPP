@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US))
-/* ROM-grounded data: rodata/func_802B92F0_eu_x/800CCB80 */
+/* ROM-grounded data: rodata/System_RunPiManager/800CCB80 */
 #ifdef VERSION_DE
 const unsigned int D_blob_phase2_4abd2dc3cf6e7a8e8e8d[7] = {
     0x002B9354, 0x002B9274, 0x002B92A8, 0x002B9364, 0x002B9364, 0x002B92DC, 0x002B9318,
