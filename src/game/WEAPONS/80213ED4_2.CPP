@@ -210,26 +210,28 @@ extern s32 func_802444A4_de(void *, f32, f32, f32, CVector3, void *);
  * a line-of-sight probe through func_802444A4_de when requested), and remembers the actor's position when
  * nothing qualified. */
 typedef struct Copy50_802149C0 { s32 words[20]; } Copy50_802149C0;
+/* 8/261 aligned edits; remaining: the 0x650 != 1 test keeps 1 in $s2 and a second null test after func_8024E7DC_de. */
 void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
     void *candidates[3];
     u8 spare[0x1F0];
     Copy50_802149C0 saved;
     CVector3 target;
-    void *best = 0;
+    void *best;
     void *candidate;
     f32 bestDistance;
     f32 distance;
-    s32 count = 0;
+    s32 count;
     s32 ok;
     s32 i;
     s32 blocked;
-    spare[0] = 0;
     if (FIELD(void *, state, 0x78) != 0) {
         if (combat != 0) {
             func_80214624_de(actor, state, FIELD(void *, state, 0x78));
         }
         return FIELD(void *, state, 0x78);
     }
+    count = 0;
+    best = 0;
     ok = 1;
     if (func_80245798_de() != 0) {
         ok = 0;
@@ -259,6 +261,7 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
             }
         }
         bestDistance = D_800C2168_de;
+        best = 0;
         for (i = 0; i < count; i++) {
             candidate = candidates[i];
             distance = func_80217224_de(candidate, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10));
@@ -284,9 +287,7 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
                 saved = *(Copy50_802149C0 *)actor;
                 FIELD(f32, actor, 0xC) += Particle_GetActorHeight((Actor_func_80214310_de *)actor);
                 FIELD(f32, actor, 0xC) += FIELD(f32, candidate, 0x70);
-                target.x = FIELD(f32, candidate, 0x8);
-                target.y = FIELD(f32, candidate, 0xC);
-                target.z = FIELD(f32, candidate, 0x10);
+                target = FIELD(CVector3, candidate, 0x8);
                 target.y += Particle_GetActorHeight((Actor_func_80214310_de *)candidate);
                 target.y += FIELD(f32, candidate, 0x70);
                 blocked = func_802444A4_de(actor, FIELD(f32, actor, 0x8), FIELD(f32, actor, 0xC), FIELD(f32, actor, 0x10), target, D_80100030);
@@ -303,9 +304,7 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
         }
     }
     if (combat != 0 && best == 0 && func_80214624_de(actor, state, 0) == 0) {
-        FIELD(f32, state, 0xB0) = FIELD(f32, actor, 0x8);
-        FIELD(f32, state, 0xB4) = FIELD(f32, actor, 0xC);
-        FIELD(f32, state, 0xB8) = FIELD(f32, actor, 0x10);
+        FIELD(CVector3, state, 0xB0) = FIELD(CVector3, actor, 0x8);
         FIELD(s32, state, 0xBC) = FIELD(s32, actor, 0x14);
     }
     return best;
