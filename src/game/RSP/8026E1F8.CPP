@@ -13,13 +13,13 @@ extern void func_80253F8C_de(s32 arg0, s32 arg1);
 
 
 
-void func_8026E1F8_de(void **arg0) {
+void func_8026E1F8_de(void **resource) {
     void *temp_v0;
     s32 count;
     s32 i;
     void *rec;
 
-    temp_v0 = func_8028FDB4_de(*arg0, 2);
+    temp_v0 = func_8028FDB4_de(*resource, 2);
     count = *(s32 *)temp_v0;
     for (i = 0; i < count; i++) {
         rec = func_8028FDB4_de(func_8028FDB4_de(temp_v0, i), 0);
@@ -36,7 +36,7 @@ extern void **func_80295EAC_de(void *arg0, s32 arg1);
 
 
 
-s32 *func_8026E27C_de(void **arg0, s32 arg1, s32 *arg2) {
+s32 *func_8026E27C_de(void **arg0, s32 variation, s32 *arg2) {
     void *temp_v0;
     s32 count;
     s32 i;
@@ -52,7 +52,7 @@ s32 *func_8026E27C_de(void **arg0, s32 arg1, s32 *arg2) {
         if (((struct ResourceSectionReference *)(rec))->resource == 0) {
             continue;
         }
-        result = func_80295EAC_de(&((struct ResourceSectionReference *)(rec))->resource, arg1);
+        result = func_80295EAC_de(&((struct ResourceSectionReference *)(rec))->resource, variation);
         if (result != 0) {
             *out = result;
             out += 1;
