@@ -190,7 +190,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
         func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            func_80237E80_de(&D_80145088,
+            Camera_PostScreenMessage(&D_80145088,
                           ((struct Actor_func_802AB400_de *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[D_80152789]);
@@ -246,7 +246,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
             func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
                           0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (resource != 0) {
-                func_80237E80_de(&D_80145088,
+                Camera_PostScreenMessage(&D_80145088,
                               ((struct Actor_func_802AB400_de *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[D_80152789]);
@@ -299,7 +299,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
         func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            func_80237E80_de(&D_80145088,
+            Camera_PostScreenMessage(&D_80145088,
                           ((struct Actor_func_802AB400_de *)(arg0))->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[D_80152789]);
@@ -406,7 +406,7 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
         func_802391AC_de(arg0->unk5DC,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            func_80237E80_de(&D_80145088,
+            Camera_PostScreenMessage(&D_80145088,
                           arg0->unk5DC,
                           *resource);
         }

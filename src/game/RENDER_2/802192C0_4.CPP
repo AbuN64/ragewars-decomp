@@ -43,7 +43,7 @@ void *func_8020C994_de(void *, s32);
 s32 func_8020CB3C_de(void *, void *);
 s32 func_802227F4_de(void *, void *, s32);
 #ifndef NON_MATCHING
-void *func_80237E80_de(void *, void *, u8 *);
+void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
 void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); /* extern */
 CQuatern func_8024796C_de(char *);
@@ -363,7 +363,7 @@ case 7:
                         do {
                             temp_a1_2 = ((struct Shared_ActorView *)var_s0)->message;
                             if (temp_a1_2 != 0) {
-                                func_80237E80_de(gameplayMessageContext(messageContext), temp_a1_2, gameplayResetMessage(localization->language));
+                                Camera_PostScreenMessage(gameplayMessageContext(messageContext), temp_a1_2, gameplayResetMessage(localization->language));
                             }
                             var_s0 = ((struct Shared_ActorView *)var_s0)->next;
                         } while (var_s0 != 0);
@@ -621,7 +621,7 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
         delay = 0x1E;
         if (FIELD(void *, player, 0x5DC) != 0) {
             if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_801462E5 == 0) {
-                func_80237E80_de(&D_80145088, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
+                Camera_PostScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), (u8 *)D_800D2A90);
             }
         }
         if ((amount >> 8) != 0) {

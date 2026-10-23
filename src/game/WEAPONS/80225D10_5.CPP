@@ -499,7 +499,7 @@ void func_80228AF4_de(void *arg0, ViewState *arg1) {
 #ifdef NON_MATCHING
 #define EUF(p, t, o) (*(t *)((u8 *)(p) + (o)))
 extern f32 D_800C2EB4_eu;
-extern void func_8025DF34_de(s32), func_80237E80_de(void *, void *, void *);
+extern void func_8025DF34_de(s32), Camera_PostScreenMessage(void *, void *, void *);
 extern void func_80273198_de(void *, void *), func_80271F34_de(void *, void *, void *);
 extern void func_80273448_de(void *, f32, f32, f32), func_80273D6C_de(void *), func_8027027C_de(void *, void *);
 /* Pulse of the player's ring effect: with the timer at 0x11FC running it only plays sound 0x578 and re-shows the text of the
@@ -540,7 +540,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         }
         text = flag ? D_800E0ED4[((u8 *)&D_80145088)[0x17C1]] : D_800E0EE4[((u8 *)&D_80145088)[0x17C1]];
     }
-    func_80237E80_de(&D_80145088, ui, text);
+    Camera_PostScreenMessage(&D_80145088, ui, text);
 }
 #else
 INCLUDE_ASM("span_1000", func_80228E60_eu);

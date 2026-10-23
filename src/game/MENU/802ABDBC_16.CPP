@@ -36,7 +36,7 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
         func_802391AC_de(arg0->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            func_80237E80_de(&D_80145088,
+            Camera_PostScreenMessage(&D_80145088,
                           arg0->owner,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[D_80152789]);
@@ -80,7 +80,7 @@ void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
         func_802391AC_de(((Shared_ActorView *)arg0)->message,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
-            func_80237E80_de(&D_80145088,
+            Camera_PostScreenMessage(&D_80145088,
                           ((Shared_ActorView *)arg0)->message,
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
                           ((void **)resource)[D_80145088.settings.language]);

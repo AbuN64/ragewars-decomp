@@ -19,6 +19,7 @@ extern Gfx *D_80110634;
 extern void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
 extern s32 D_800E28D0;
 extern s32 D_800E28D4;
+extern s32 D_800E28D4;
 extern s32 D_800D297C;
 extern s32 D_80146894;
 extern f32 D_800FF224_de;
@@ -159,6 +160,7 @@ extern func_80237E70_G1 D_800D7028;
 extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
+extern s32 D_800E28D4;
 extern void func_80239CE0_de(void *arg0);
 extern s32 func_80245784_de(void);
 
@@ -217,7 +219,7 @@ static inline Message *post_lines(struct ScreenMessageOwner *owner, struct Scree
                     message->pad2C = 0;
                     message->scaleX = 1.0f;
                     message->scaleY = 1.0f;
-                    height = (&D_800E28D0)[1]; /* FAKEMATCH */
+                    height = D_800E28D4;
                     message->x = D_800E28D0 / 2;
                     message->y = height - 80;
                 }
@@ -228,7 +230,7 @@ static inline Message *post_lines(struct ScreenMessageOwner *owner, struct Scree
     return message;
 }
 
-Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
+Message *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
     Message *pending;
     s32 kind;
 

@@ -29,16 +29,16 @@ void func_80267ED8_de(void *owner, LevelActor *actor, s32 event, Triple position
         void *parent = player->message;
         if (parent != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-            func_80237E80_de(&D_80145088, parent, D_800E45D4[params.active].sound[D_80145088.settings.language]);
+            Camera_PostScreenMessage(&D_80145088, parent, D_800E45D4[params.active].sound[D_80145088.settings.language]);
 #else
-            func_80237E80_de(&D_80145088, parent, gameplaySoundValue(params.active));
+            Camera_PostScreenMessage(&D_80145088, parent, gameplaySoundValue(params.active));
 #endif
         }
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        func_80237E80_de(&D_80145088, &D_80145088.fallbackCamera, D_800E45D4[params.active].sound[D_80145088.settings.language]);
+        Camera_PostScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800E45D4[params.active].sound[D_80145088.settings.language]);
 #else
-        func_80237E80_de(&D_80145088, &D_80145088.fallbackCamera, gameplaySoundValue(params.active));
+        Camera_PostScreenMessage(&D_80145088, &D_80145088.fallbackCamera, gameplaySoundValue(params.active));
 #endif
     }
     if (gameplaySoundHook(params.active) != 0) {

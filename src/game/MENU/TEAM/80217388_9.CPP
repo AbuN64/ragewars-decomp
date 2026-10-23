@@ -105,41 +105,41 @@ run:
         switch (player->views5D8.view5D8_2.controls->team) {
         case 0:
 #ifdef VERSION_EU
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800E0FF4[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E0FF4[((u8 *) &D_80145088)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE6C[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE6C[((u8 *) &D_80145088)[0x17C1]]);
 #else
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800D3168);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3168);
 #endif
             func_8025DF34_de(0x2E6);
             break;
         case 1:
 #ifdef VERSION_EU
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800E1004[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E1004[((u8 *) &D_80145088)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE78[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE78[((u8 *) &D_80145088)[0x17C1]]);
 #else
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800D316C);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D316C);
 #endif
             func_8025DF34_de(0x2E4);
             break;
         case 2:
 #ifdef VERSION_EU
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800E1014[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E1014[((u8 *) &D_80145088)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE84[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE84[((u8 *) &D_80145088)[0x17C1]]);
 #else
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800D3170);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3170);
 #endif
             func_8025DF34_de(0x2E8);
             break;
         case 3:
 #ifdef VERSION_EU
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800E1024[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800E1024[((u8 *) &D_80145088)[0x17C1]]);
 #elif defined(VERSION_EU_X)
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE90[((u8 *) &D_80145088)[0x17C1]]);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800DCE90[((u8 *) &D_80145088)[0x17C1]]);
 #else
-            func_80237E80_de(&D_80145088, player->views5DC.view5DC_1.view, D_800D3174);
+            Camera_PostScreenMessage(&D_80145088, player->views5DC.view5DC_1.view, D_800D3174);
 #endif
             func_8025DF34_de(0x2EC);
             break;

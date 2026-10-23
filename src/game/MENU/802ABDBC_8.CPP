@@ -184,7 +184,7 @@ typedef struct DraftPlayerAB97C {
 typedef struct DraftPickupAB97C { u8 **label; s16 pad4, sound, event, padA, index, arg1, arg2; } DraftPickupAB97C;
 extern DraftWeaponAB97C *D_800D052C[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void *func_80237E80_de(void *, void *, u8 *);
+extern void *Camera_PostScreenMessage(void *, void *, u8 *);
 extern s32 func_80222BE8_de(void *, s32, s32), func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
 
@@ -215,7 +215,7 @@ s32 Menu_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
     label = pickup->label; sound = pickup->sound; event = pickup->event;
     if (player->ui) {
         func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (label != 0) func_80237E80_de(&D_80145088, player->ui, label[MENU_LANGUAGE]);
+        if (label != 0) Camera_PostScreenMessage(&D_80145088, player->ui, label[MENU_LANGUAGE]);
     }
     if (sound) func_8025DE54_de(sound, player->position, 0, -1);
     if (event) func_8025E11C_de(event);

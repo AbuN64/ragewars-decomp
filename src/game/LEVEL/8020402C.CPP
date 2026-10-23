@@ -49,7 +49,7 @@ extern s32 D_auto_800D70DC;
 extern u8 *func_8022A420_de(u8 *);
 extern f32 func_802B72B0_de(f32);
 extern void func_8022E17C_de(void *, void *, s32);
-extern void func_80237E80_de(u8 *, void *, s32);
+extern void Camera_PostScreenMessage(u8 *, void *, s32);
 /* 182/182 words in us-rev1 and de (local j targets aside); not exact on the ROM path only because the switch jump table (D_auto_rodata_func_8020402C_us_rev1_800C6B48) still lives in a separate rodata file; us/eu/eu-x differ in prologue size */
 typedef struct LvDelta {
     f32 x, y, z;
@@ -123,7 +123,7 @@ void LV_FN(u8 *self, u8 *hit) {
             }
             for (node = *(u8 **)&D_80145060; node != 0; node = LV_FIELD(node, u8 *, 0x16E0)) {
                 if (LV_FIELD(node, void *, 0x5DC) != 0) {
-                    func_80237E80_de((u8 *)&D_80145088, LV_FIELD(node, void *, 0x5DC), D_auto_800D70DC);
+                    Camera_PostScreenMessage((u8 *)&D_80145088, LV_FIELD(node, void *, 0x5DC), D_auto_800D70DC);
                 }
             }
         } else {

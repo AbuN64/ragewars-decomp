@@ -346,7 +346,7 @@ struct ScreenMessagePool {
 };
 
 struct Message;
-extern Message *func_80237E80_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
+extern Message *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
 
 #endif
 #endif

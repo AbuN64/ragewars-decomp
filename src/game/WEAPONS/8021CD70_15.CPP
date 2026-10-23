@@ -154,7 +154,7 @@ void func_8022409C_de(void *arg0, void *arg1) {
         func_802227F4_de(arg0, arg1, 2);
         data = ((func_80224078_Arg0 *)arg0)->unk5DC;
         if (data != 0) {
-            func_80237E80_de(&D_80145088, data, &D_800C2950_de);
+            Camera_PostScreenMessage(&D_80145088, data, &D_800C2950_de);
         }
     }
 }

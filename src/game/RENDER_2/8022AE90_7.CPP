@@ -75,9 +75,9 @@ void func_8022B7F8_de(void *arg0, void *arg1) {
     settings = &game->settings;
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_80237E80_de(game, owner, D_800D31B4_de[settings->language]);
+    Camera_PostScreenMessage(game, owner, D_800D31B4_de[settings->language]);
 #else
-    func_80237E80_de(&D_80145088, owner, D_800D31B4_de);
+    Camera_PostScreenMessage(&D_80145088, owner, D_800D31B4_de);
 #endif
     if (source == 0) {
         return;
@@ -105,21 +105,21 @@ void func_8022B7F8_de(void *arg0, void *arg1) {
 #endif
                   source->controls->pad84);
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_80237E80_de(game, state->message, payload);
+    Camera_PostScreenMessage(game, state->message, payload);
 #else
-    func_80237E80_de(&D_80145088, state->message, payload);
+    Camera_PostScreenMessage(&D_80145088, state->message, payload);
 #endif
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_80237E80_de(game, state->message, D_800E1154[settings->language]);
+    Camera_PostScreenMessage(game, state->message, D_800E1154[settings->language]);
 #else
-    func_80237E80_de(&D_80145088, state->message, D_800E1154);
+    Camera_PostScreenMessage(&D_80145088, state->message, D_800E1154);
 #endif
 #else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_80237E80_de(game, state->message, D_800D31C0[settings->language]);
+    Camera_PostScreenMessage(game, state->message, D_800D31C0[settings->language]);
 #else
-    func_80237E80_de(&D_80145088, state->message, D_800D31C0);
+    Camera_PostScreenMessage(&D_80145088, state->message, D_800D31C0);
 #endif
 #endif
 }

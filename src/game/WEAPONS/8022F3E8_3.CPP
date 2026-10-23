@@ -308,7 +308,7 @@ void func_802325FC_de(void *arg0, void *arg1) {
         ((WeaponFireState *)arg1)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
         owner = ((Shared_ActorView *)state)->message;
         if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
-            func_80237E80_de(&D_80145088, owner,
+            Camera_PostScreenMessage(&D_80145088, owner,
                 *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
         }
         ((WeaponFireState *)arg1)->spinStep = 0;

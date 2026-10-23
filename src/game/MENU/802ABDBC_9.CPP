@@ -426,7 +426,7 @@ loop_37:
                     if (temp_s0 != arg0) {
                         temp_a1 = temp_s0->unk5DC;
                         if (temp_a1 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1, D_800D30AC[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1, D_800D30AC[MENU_LANGUAGE]);
                         }
                     }
                     temp_s0 = temp_s0->unk16E0;
@@ -449,7 +449,7 @@ case_BD8:
                     arg0->unk11E4 = temp_f20;
                     arg0->unk13E0 = 0;
                     if (temp_a1_2 != 0) {
-                        func_80237E80_de(&D_80145088, temp_a1_2, D_800D31B8[MENU_LANGUAGE]);
+                        Camera_PostScreenMessage(&D_80145088, temp_a1_2, D_800D31B8[MENU_LANGUAGE]);
                     }
                 } else {
                     temp_fp = arg0->unk122C & 0x6000;
@@ -479,7 +479,7 @@ case_BD8:
                                 }
                                 temp_a1_3 = temp_s0->unk5DC;
                                 if (temp_a1_3 != 0) {
-                                    func_80237E80_de(&D_80145088, temp_a1_3, D_800D3128[MENU_LANGUAGE]);
+                                    Camera_PostScreenMessage(&D_80145088, temp_a1_3, D_800D3128[MENU_LANGUAGE]);
                                 }
                             } while (++var_s1 < D_80140F84.tail.count);
                         }
@@ -489,7 +489,7 @@ case_BD8:
                         func_8025E11C_de(0x164);
                         temp_a1_4 = arg0->unk5DC;
                         if (temp_a1_4 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_4, D_800D312C[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_4, D_800D312C[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800C626C;
                         temp_duration = arg0->unk1230;
@@ -502,7 +502,7 @@ case_BD8:
                         if (temp_a1_11 != 0) {
                             var_a2 = D_800D3130[MENU_LANGUAGE];
 block_119:
-                            func_80237E80_de(&D_80145088, temp_a1_11, var_a2);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_11, var_a2);
                         }
                         break;
                     case 0x8:                       /* switch 3 */
@@ -510,7 +510,7 @@ block_119:
                         func_8025E11C_de(0x165);
                         temp_a1_5 = arg0->unk5DC;
                         if (temp_a1_5 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_5, D_800D3134[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_5, D_800D3134[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800C6278_de;
                         temp_duration = arg0->unk1230;
@@ -523,7 +523,7 @@ block_114:
                         func_8025E11C_de(0x160);
                         temp_a1_6 = arg0->unk5DC;
                         if (temp_a1_6 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_6, D_800D3138[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_6, D_800D3138[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800CB410;
                         temp_duration = arg0->unk1230;
@@ -571,7 +571,7 @@ block_114:
                         func_8025E11C_de(0x16A);
                         temp_a1_7 = arg0->unk5DC;
                         if (temp_a1_7 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_7, D_800D3150[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_7, D_800D3150[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800C6298;
                         temp_duration = arg0->unk1230;
@@ -582,7 +582,7 @@ block_114:
                         func_8025E11C_de(0x163);
                         temp_a1_8 = arg0->unk5DC;
                         if (temp_a1_8 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_8, D_800D3154[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_8, D_800D3154[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800C62A0;
                         temp_duration = arg0->unk1230;
@@ -595,7 +595,7 @@ block_114:
                         func_8025E11C_de(0x168);
                         temp_a1_9 = arg0->unk5DC;
                         if (temp_a1_9 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_9, D_800D3158[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_9, D_800D3158[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800C62A8;
                         temp_duration = arg0->unk1230;
@@ -606,7 +606,7 @@ block_114:
                         func_8025E11C_de(0x15F);
                         temp_a1_10 = arg0->unk5DC;
                         if (temp_a1_10 != 0) {
-                            func_80237E80_de(&D_80145088, temp_a1_10, D_800D315C[MENU_LANGUAGE]);
+                            Camera_PostScreenMessage(&D_80145088, temp_a1_10, D_800D315C[MENU_LANGUAGE]);
                         }
                         temp_alpha = D_800C62B0;
                         temp_duration = arg0->unk1230;
@@ -624,7 +624,7 @@ block_116:
 block_default:
                     temp_a1_11 = arg0->unk5DC;
                     if (temp_a1_11 != 0) {
-                        func_80237E80_de(&D_80145088, temp_a1_11, D_800D3160[MENU_LANGUAGE]);
+                        Camera_PostScreenMessage(&D_80145088, temp_a1_11, D_800D3160[MENU_LANGUAGE]);
                     }
 block_after_alpha:
                     arg0->unk122C = (s32) (arg0->unk122C | temp_fp);
@@ -684,7 +684,7 @@ command_done:
         if (arg0->unk5DC != 0) {
             func_802391AC_de(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (temp_s0_2 != 0) {
-                func_80237E80_de(&D_80145088, arg0->unk5DC, *temp_s0_2);
+                Camera_PostScreenMessage(&D_80145088, arg0->unk5DC, *temp_s0_2);
             }
         }
         if (temp_s1 != 0) {
@@ -723,7 +723,7 @@ static inline void announce(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)
     s32 event = pickup->event;
     if (player->ui) {
         func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) func_80237E80_de(&D_80145088, player->ui, *text);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->ui, *text);
     }
     if (sound) func_8025DE54_de(sound, player->position, 0, -1);
     if (event) func_8025E11C_de(event);
@@ -778,7 +778,7 @@ s32 func_802ACB98_eu_x(DraftPlayerAC66C *player, DraftPickupAC66C *pickup, void 
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
         func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) func_80237E80_de(&D_80145088, player->ui, ((char **)text)[D_80152789]);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->ui, ((char **)text)[D_80152789]);
     }
     if (sound) func_8025DE54_de(sound, player->position, 0, -1);
     if (event) func_8025E11C_de(event);
@@ -812,7 +812,7 @@ s32 func_802ACB58_eu(DraftPlayerAC66C *player, DraftPickupAC66C *pickup, void *o
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
         func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) func_80237E80_de(&D_80145088, player->ui, ((char **)text)[D_80152789]);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->ui, ((char **)text)[D_80152789]);
     }
     if (sound) func_8025DE54_de(sound, player->position, 0, -1);
     if (event) func_8025E11C_de(event);

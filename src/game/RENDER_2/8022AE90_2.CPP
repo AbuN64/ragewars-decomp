@@ -126,7 +126,7 @@ void func_8022B1A8(TogglePlayer *player,s32 mode) {
             message = D_800D3124;
             if (mode != 0) message = D_800D3120;
         }
-        func_80237E80_de(&D_80145088,owner,message);
+        Camera_PostScreenMessage(&D_80145088,owner,message);
     }
 }
 #else

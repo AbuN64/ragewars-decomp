@@ -188,7 +188,7 @@ f32 func_80239678_de(Race *arg0, void *arg1) {
 }
 
 void *func_80239740_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
-    struct Message *message = func_80237E80_de(owner, pool, text);
+    struct Message *message = Camera_PostScreenMessage(owner, pool, text);
     if (message != 0) {
         message->pad20 = 1;
     }

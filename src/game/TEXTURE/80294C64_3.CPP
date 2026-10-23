@@ -184,10 +184,10 @@ void func_80294F1C_us_rev1(void) {
         if (D_8010B3D8 & 0x10) {
             if (D_auto_800D2AFC == 0) {
                 if (D_8014AEB0.alternateTitle == 0) {
-                    func_80237E80_de(&D_80145088, (u8 *)&D_80145088 + 0x40, D_800CA60C);
+                    Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, D_800CA60C);
                     D_8014AEB0.titleWasShown = 1;
                 } else {
-                    func_80237E80_de(&D_80145088, (u8 *)&D_80145088 + 0x40, D_auto_800CA620);
+                    Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, D_auto_800CA620);
                 }
                 D_auto_800D2AFC = 1;
                 D_8014AEB0.alternateTitle = (u8) ((u8) D_8014AEB0.alternateTitle < 1U);

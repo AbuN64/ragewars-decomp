@@ -39,7 +39,7 @@ void func_8022FDAC_de(void *arg0, void *arg1) {
         ((WeaponFireState *)arg1)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
         owner = ((Shared_ActorView *)state)->message;
         if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
-            func_80237E80_de(&D_80145088, owner,
+            Camera_PostScreenMessage(&D_80145088, owner,
                 *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
         }
         ((WeaponFireState *)arg1)->spinStep = 0;
@@ -72,7 +72,7 @@ void func_8022FF04_de(void *arg0, WeaponFireState *arg1) {
         arg1->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]))->animationCount;
         temp_a1 = ((Shared_ActorView *)temp_s1)->message;
         if ((temp_a1 != 0) && ((u32)D_800CD730 >= 5U)) {
-            func_80237E80_de(&D_80145088, temp_a1,
+            Camera_PostScreenMessage(&D_80145088, temp_a1,
                           **(void ***)D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]);
         }
         arg1->spinStep = 0;
