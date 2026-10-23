@@ -29,7 +29,7 @@ extern f32 func_802760BC_de(s32 arg0, s32 arg1);
 
 
 /** Resolve the shared effect object selected by the actor state. */
-void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *arg1) {
+void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     char output[0x40];
     char state[0x10];
     void *shared;
@@ -60,16 +60,16 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *arg1) {
         func_80273198_de(shared, (char *)arg0 + 0x174);
         return shared;
     sw_state_neg_6:
-        if (arg1 == 0) {
+        if (camera == 0) {
             return 0;
         }
-        return arg1->effectOffsetTransform;
+        return camera->effectOffsetTransform;
     sw_state_neg_4:
     sw_state_neg_1:
-        if (arg1 == 0) {
+        if (camera == 0) {
             return 0;
         }
-        return arg1->effectTransform;
+        return camera->effectTransform;
     sw_state_neg_3:
         value = func_80275DD4_de(0, arg0->pos.x,
             arg0->pos.z);

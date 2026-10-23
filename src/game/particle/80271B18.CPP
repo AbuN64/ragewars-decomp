@@ -55,7 +55,7 @@ extern f32 D_800C48AC_de;
 f32 func_80271C54_de(f32 arg0, f32 arg1) {
     extern f32 D_800C48A8_de;
     f32 var_f0;
-    f32 var_f0_2;
+    f32 result;
     f32 var_f0_3;
     f32 var_f0_4;
     f32 var_f14;
@@ -94,19 +94,19 @@ f32 func_80271C54_de(f32 arg0, f32 arg1) {
                 var_f14 -= D_800C4878_de;
             } while (D_800C4874_de < var_f14);
         }
-        var_f0_2 = arg0 - var_f14;
-        if (var_f0_2 < *(&D_800C4878_de + 1)) {
+        result = arg0 - var_f14;
+        if (result < *(&D_800C4878_de + 1)) {
             do {
-                var_f0_2 += D_800C4880_de;
-            } while (var_f0_2 < *(&D_800C4878_de + 1));
+                result += D_800C4880_de;
+            } while (result < *(&D_800C4878_de + 1));
         }
-        if (*(&D_800C4880_de + 1) < var_f0_2) {
+        if (*(&D_800C4880_de + 1) < result) {
             do {
-                var_f0_2 -= D_800C4888_de;
-            } while (*(&D_800C4880_de + 1) < var_f0_2);
-            return var_f0_2;
+                result -= D_800C4888_de;
+            } while (*(&D_800C4880_de + 1) < result);
+            return result;
         }
-        return var_f0_2;
+        return result;
     }
     if (var_f14 < D_800C488C_de) {
         do {
@@ -206,36 +206,36 @@ void func_80272104_de(CVector3 *out, CVector3 *a, CVector3 *b, f32 y) {
     }
 }
 
-void *func_80272180_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3) {
+void *func_80272180_de(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2, f32 arg3) {
     CVector3 tmp;
     f32 temp_f2;
     f32 temp_f3;
     f32 temp_f4;
     f32 temp_f5;
 
-    temp_f5 = arg1->x;
+    temp_f5 = remaining->x;
     temp_f4 = arg2->x;
-    temp_f3 = (temp_f5 * temp_f4) + (arg1->y * arg2->y) + (arg1->z * arg2->z);
+    temp_f3 = (temp_f5 * temp_f4) + (remaining->y * arg2->y) + (remaining->z * arg2->z);
     temp_f2 = (arg3 * temp_f3) + temp_f3;
     tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = arg1->y - (temp_f2 * arg2->y);
-    tmp.z = arg1->z - (temp_f2 * arg2->z);
+    tmp.y = remaining->y - (temp_f2 * arg2->y);
+    tmp.z = remaining->z - (temp_f2 * arg2->z);
     *arg0 = tmp;
     return arg0;
 }
 
-void *func_80272214_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2) {
+void *func_80272214_de(CVector3 *arg0, CVector3 *remaining, CVector3 *arg2) {
     CVector3 tmp;
     f32 temp_f2;
     f32 temp_f4;
     f32 temp_f5;
 
-    temp_f5 = arg1->x;
+    temp_f5 = remaining->x;
     temp_f4 = arg2->x;
-    temp_f2 = (temp_f5 * temp_f4) + (arg1->y * arg2->y) + (arg1->z * arg2->z);
+    temp_f2 = (temp_f5 * temp_f4) + (remaining->y * arg2->y) + (remaining->z * arg2->z);
     tmp.x = temp_f5 - (temp_f2 * temp_f4);
-    tmp.y = arg1->y - (temp_f2 * arg2->y);
-    tmp.z = arg1->z - (temp_f2 * arg2->z);
+    tmp.y = remaining->y - (temp_f2 * arg2->y);
+    tmp.z = remaining->z - (temp_f2 * arg2->z);
     *arg0 = tmp;
     return arg0;
 }

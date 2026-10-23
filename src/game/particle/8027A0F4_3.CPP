@@ -400,21 +400,21 @@ void Particle_Update(Shared_Particle *particle) {
     D_800D2988 = savedStep;
 }
 
-void func_8027C274_de(Shared_Particle *arg0) {
+void func_8027C274_de(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
-    s32 temp_s2;
+    s32 kind;
     s32 sound;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *desc;
     struct IntPair *temp_v0_2;
 
-    if ((arg0->flags & 0x400) != 0) {
-        if ((arg0->desc->flags & 0x800) != 0) {
+    if ((particle->flags & 0x400) != 0) {
+        if ((particle->desc->flags & 0x800) != 0) {
             goto skip_effects;
         }
     }
@@ -423,57 +423,57 @@ void func_8027C274_de(Shared_Particle *arg0) {
         if (var_a0 == 10) {
             var_a0 = 0;
         }
-        temp_s1 = arg0->desc;
+        desc = particle->desc;
         temp_a1 = var_a0;
-        temp_v0 = temp_s1->events;
-        temp_s2 = temp_v0->particles[temp_a1];
-        temp_a2 = temp_v0->effects[temp_a1];
-        temp_v0_2 = &temp_v0->parameters[var_a0];
+        events = desc->events;
+        kind = events->particles[temp_a1];
+        temp_a2 = events->effects[temp_a1];
+        temp_v0_2 = &events->parameters[var_a0];
         pair = *temp_v0_2;
-        sound = temp_s1->events->sounds[temp_a1];
+        sound = desc->events->sounds[temp_a1];
         if (temp_a2 != 0xFFFF) {
-            func_80265E10_de(arg0, arg0, temp_a2, -1, D_80100290, pair);
+            func_80265E10_de(particle, particle, temp_a2, -1, D_80100290, pair);
         }
-        if (temp_s2 != 0xFFFF) {
-            if ((arg0->desc->flags & 0x10) != 0) {
+        if (kind != 0xFFFF) {
+            if ((particle->desc->flags & 0x10) != 0) {
                 position = D_801042C8;
             } else {
-                position = arg0->inst.velocity;
+                position = particle->inst.velocity;
             }
             func_80271818_de(&rotation, &position);
-            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                          (struct EffectActor *)arg0->owner,
-                          (s32 *)arg0->ownerId,
-                          (s32)arg0->target, temp_s2,
+            func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+                          (struct EffectActor *)particle->owner,
+                          (s32 *)particle->ownerId,
+                          (s32)particle->target, kind,
                           position, *(CQuatern *)&rotation, D_80100290, 0,
                           D_8010029C,
-                          (arg0->flags & 0x200006) | 1);
+                          (particle->flags & 0x200006) | 1);
         }
         if (sound != 0xFFFF) {
             func_8025DE54_de((s16)sound, D_80100290, 0, -1);
         }
     }
 skip_effects:
-    func_80271F9C_de(&arg0->rotSpeed, &arg0->rotSpeed,
-                  arg0->rotationScale);
-    arg0->flags |= 0x400;
-    if (arg0->unk1B9 == 1) {
-        func_80284570_de(&D_8011D8D0, arg0);
-        func_80284434_de(arg0);
+    func_80271F9C_de(&particle->rotSpeed, &particle->rotSpeed,
+                  particle->rotationScale);
+    particle->flags |= 0x400;
+    if (particle->unk1B9 == 1) {
+        func_80284570_de(&D_8011D8D0, particle);
+        func_80284434_de(particle);
     }
 }
 
-void func_8027C4F0_de(Shared_Particle *arg0) {
+void func_8027C4F0_de(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
-    s32 temp_s2;
+    s32 kind;
     s32 sound;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *desc;
     struct IntPair *temp_v0_2;
 
     switch (D_801042C4) {
@@ -488,53 +488,53 @@ void func_8027C4F0_de(Shared_Particle *arg0) {
         var_a0 = 8;
         break;
     }
-    temp_s1 = arg0->desc;
+    desc = particle->desc;
     temp_a1 = var_a0;
-    temp_v0 = temp_s1->events;
-    temp_s2 = temp_v0->particles[temp_a1];
-    temp_a2 = temp_v0->effects[temp_a1];
-    temp_v0_2 = &temp_v0->parameters[var_a0];
+    events = desc->events;
+    kind = events->particles[temp_a1];
+    temp_a2 = events->effects[temp_a1];
+    temp_v0_2 = &events->parameters[var_a0];
     pair = *temp_v0_2;
-    sound = temp_s1->events->sounds[temp_a1];
+    sound = desc->events->sounds[temp_a1];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1, D_801002B8, pair);
+        func_80265E10_de(particle, particle, temp_a2, -1, D_801002B8, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        if ((arg0->desc->flags & 0x10) != 0) {
+    if (kind != 0xFFFF) {
+        if ((particle->desc->flags & 0x10) != 0) {
             position = D_801042C8;
         } else {
-            position = arg0->inst.velocity;
+            position = particle->inst.velocity;
         }
         func_80271818_de(&rotation, &position);
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                      (struct EffectActor *)arg0->owner,
-                      (s32 *)arg0->ownerId,
-                      (s32)arg0->target, temp_s2,
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+                      (struct EffectActor *)particle->owner,
+                      (s32 *)particle->ownerId,
+                      (s32)particle->target, kind,
                       position, *(CQuatern *)&rotation, D_801002B8, 0,
                       -5,
-                      (arg0->flags & 0x200006) | 1);
+                      (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
         func_8025DE54_de((s16)sound, D_801002B8, 0, -1);
     }
-    arg0->flags |= 0x200;
-    if ((arg0->desc->flags & 0x20000) != 0) {
-        func_80284570_de(&D_8011D8D0, arg0);
-        func_80284434_de(arg0);
+    particle->flags |= 0x200;
+    if ((particle->desc->flags & 0x20000) != 0) {
+        func_80284570_de(&D_8011D8D0, particle);
+        func_80284434_de(particle);
     }
 }
 
-void func_8027C758_de(Shared_Particle *arg0) {
+void func_8027C758_de(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
-    s32 temp_s2;
+    s32 kind;
     s32 sound;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *desc;
     struct IntPair *temp_v0_2;
 
     if (func_802757E4_de(0) != 0) {
@@ -545,96 +545,96 @@ void func_8027C758_de(Shared_Particle *arg0) {
     if (var_a0 == 10) {
         var_a0 = 0;
     }
-    temp_s1 = arg0->desc;
+    desc = particle->desc;
     temp_a1 = var_a0;
-    temp_v0 = temp_s1->events;
-    temp_s2 = temp_v0->particles[temp_a1];
-    temp_a2 = temp_v0->effects[temp_a1];
-    temp_v0_2 = &temp_v0->parameters[var_a0];
+    events = desc->events;
+    kind = events->particles[temp_a1];
+    temp_a2 = events->effects[temp_a1];
+    temp_v0_2 = &events->parameters[var_a0];
     pair = *temp_v0_2;
-    sound = temp_s1->events->sounds[temp_a1];
+    sound = desc->events->sounds[temp_a1];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1, D_801002A8, pair);
+        func_80265E10_de(particle, particle, temp_a2, -1, D_801002A8, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        if ((arg0->desc->flags & 0x10) != 0) {
+    if (kind != 0xFFFF) {
+        if ((particle->desc->flags & 0x10) != 0) {
             position = D_801042C8;
         } else {
-            position = arg0->inst.velocity;
+            position = particle->inst.velocity;
         }
         func_80271818_de(&rotation, &position);
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                      (struct EffectActor *)arg0->owner,
-                      (s32 *)arg0->ownerId,
-                      (s32)arg0->target, temp_s2,
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+                      (struct EffectActor *)particle->owner,
+                      (s32 *)particle->ownerId,
+                      (s32)particle->target, kind,
                       position, *(CQuatern *)&rotation, D_801002A8, 0,
                       -3,
-                      (arg0->flags & 0x200006) | 1);
+                      (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
         func_8025DE54_de((s16)sound, D_801002A8, 0, -1);
     }
-    func_80271F9C_de(&arg0->rotSpeed, &arg0->rotSpeed,
-                  arg0->rotationScale);
-    arg0->flags |= 0x200;
-    if (arg0->unk1BA == 1) {
-        func_80284570_de(&D_8011D8D0, arg0);
-        func_80284434_de(arg0);
+    func_80271F9C_de(&particle->rotSpeed, &particle->rotSpeed,
+                  particle->rotationScale);
+    particle->flags |= 0x200;
+    if (particle->unk1BA == 1) {
+        func_80284570_de(&D_8011D8D0, particle);
+        func_80284434_de(particle);
     }
 }
 
-void func_8027C9CC_de(Shared_Particle *arg0) {
+void func_8027C9CC_de(Shared_Particle *particle) {
     struct IntPair pair;
     struct Shape_typemap_165 rotation;
     CVector3 position;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
-    s32 temp_s2;
+    s32 kind;
     s32 sound;
-    struct Shared_ParticleDesc *temp_s1;
+    struct Shared_ParticleDesc *desc;
     struct IntPair *temp_v0_2;
 
     var_a0 = func_80276088_de(0);
     if (var_a0 == 10) {
         var_a0 = 0;
     }
-    temp_s1 = arg0->desc;
+    desc = particle->desc;
     temp_a1 = var_a0;
-    temp_v0 = temp_s1->events;
-    temp_s2 = temp_v0->particles[temp_a1];
-    temp_a2 = temp_v0->effects[temp_a1];
-    temp_v0_2 = &temp_v0->parameters[var_a0];
+    events = desc->events;
+    kind = events->particles[temp_a1];
+    temp_a2 = events->effects[temp_a1];
+    temp_v0_2 = &events->parameters[var_a0];
     pair = *temp_v0_2;
-    sound = temp_s1->events->sounds[temp_a1];
+    sound = desc->events->sounds[temp_a1];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1, D_801002A8, pair);
+        func_80265E10_de(particle, particle, temp_a2, -1, D_801002A8, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        if ((arg0->desc->flags & 0x10) != 0) {
+    if (kind != 0xFFFF) {
+        if ((particle->desc->flags & 0x10) != 0) {
             position = D_801042C8;
         } else {
-            position = arg0->inst.velocity;
+            position = particle->inst.velocity;
         }
         func_80271818_de(&rotation, &position);
-        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                      (struct EffectActor *)arg0->owner,
-                      (s32 *)arg0->ownerId,
-                      (s32)arg0->target, temp_s2,
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
+                      (struct EffectActor *)particle->owner,
+                      (s32 *)particle->ownerId,
+                      (s32)particle->target, kind,
                       position, *(CQuatern *)&rotation, D_801002A8, 0,
                       -2,
-                      (arg0->flags & 0x200006) | 1);
+                      (particle->flags & 0x200006) | 1);
     }
     if (sound != 0xFFFF) {
         func_8025DE54_de((s16)sound, D_801002A8, 0, -1);
     }
-    func_80271F9C_de(&arg0->rotSpeed, &arg0->rotSpeed,
-                  arg0->rotationScale);
-    arg0->flags |= 0x200;
-    if (arg0->unk1BA == 1) {
-        func_80284570_de(&D_8011D8D0, arg0);
-        func_80284434_de(arg0);
+    func_80271F9C_de(&particle->rotSpeed, &particle->rotSpeed,
+                  particle->rotationScale);
+    particle->flags |= 0x200;
+    if (particle->unk1BA == 1) {
+        func_80284570_de(&D_8011D8D0, particle);
+        func_80284434_de(particle);
     }
 }
 

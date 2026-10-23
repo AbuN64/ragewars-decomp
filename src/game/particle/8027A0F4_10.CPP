@@ -125,57 +125,57 @@ extern void func_80284570_de(void *, void *);
 
 
 
-void func_80282E98_de(void *arg0, void *arg1) {
+void func_80282E98_de(void *particle, void *player) {
     Triple scratch;
     struct IntPair pair;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
-    s32 temp_s2;
+    s32 model;
     s32 temp_s3;
     struct Shared_ParticleDesc *temp_s1;
     void *temp_v0_2;
     void *temp_v1;
 
     func_802A001C_de(&scratch, 0, 0xC);
-    if (((Shared_Particle *)arg0)->inst.type == 0x40F) {
-        func_8025DE54_de(0xCDA, ((Shared_ActorView *)arg1)->position.vector,
-                      (s32)&((Shared_ActorView *)arg1)->position.vector, -1);
-        func_8022B550_de(arg1, 30.0f, 3.0f,
-                     ((Shared_Particle *)arg0)->owner, 0);
+    if (((Shared_Particle *)particle)->inst.type == 0x40F) {
+        func_8025DE54_de(0xCDA, ((Shared_ActorView *)player)->position.vector,
+                      (s32)&((Shared_ActorView *)player)->position.vector, -1);
+        func_8022B550_de(player, 30.0f, 3.0f,
+                     ((Shared_Particle *)particle)->owner, 0);
         func_8028CE94_de(&D_8011FE88,
-                      (char *)((Shared_ActorView *)arg1)->controller + 0x140,
+                      (char *)((Shared_ActorView *)player)->controller + 0x140,
                       0x14, scratch, D_800C4E58_de[1], D_800C4E60_de);
-        ((Shared_ActorView *)arg1)->impactTimer = (&D_800C4E60_de)[1];
+        ((Shared_ActorView *)player)->impactTimer = (&D_800C4E60_de)[1];
     }
 
-    temp_s1 = ((Shared_Particle *)arg0)->desc;
-    if (func_80284068_de(arg0) != 0) {
+    temp_s1 = ((Shared_Particle *)particle)->desc;
+    if (func_80284068_de(particle) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
     }
     temp_a1 = var_a0 * 2;
-    temp_v0 = temp_s1->events;
-    temp_v1 = (char *)temp_v0 + temp_a1;
-    temp_s2 = temp_v0->particles[var_a0];
-    temp_a2 = temp_v0->effects[var_a0];
-    temp_v0_2 = (char *)temp_v0 + (var_a0 * 8);
-    pair = temp_v0->parameters[var_a0];
+    events = temp_s1->events;
+    temp_v1 = (char *)events + temp_a1;
+    model = events->particles[var_a0];
+    temp_a2 = events->effects[var_a0];
+    temp_v0_2 = (char *)events + (var_a0 * 8);
+    pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1,
-                     ((Shared_Particle *)arg0)->inst.pos, pair);
+        func_80265E10_de(particle, particle, temp_a2, -1,
+                     ((Shared_Particle *)particle)->inst.pos, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        func_80279B40_de(arg0, temp_s2, ((Shared_Particle *)arg0)->space, 1);
+    if (model != 0xFFFF) {
+        func_80279B40_de(particle, model, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
-        func_8025DE54_de((s16)temp_s3, ((Shared_Particle *)arg0)->inst.pos, 0, -1);
+        func_8025DE54_de((s16)temp_s3, ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
-    func_80284570_de(&D_8011D8D0, arg0);
-    func_80284434_de(arg0);
+    func_80284570_de(&D_8011D8D0, particle);
+    func_80284434_de(particle);
 }
 
 extern u8 D_801462E3;
@@ -183,12 +183,12 @@ extern u8 D_801462E3;
 
 
 
-void func_80283064_de(void *arg0, s32 *arg1) {
+void func_80283064_de(void *actor, s32 *arg1) {
     s32 result;
 
     result = 0;
-    if ((((Shared_Particle *)arg0)->desc->flags) & 0x02000000) {
-        if (((Shared_Particle *)arg0)->flags & 2) {
+    if ((((Shared_Particle *)actor)->desc->flags) & 0x02000000) {
+        if (((Shared_Particle *)actor)->flags & 2) {
             result = 2;
         } else if (D_801462E3 == 2) {
             result = 1;

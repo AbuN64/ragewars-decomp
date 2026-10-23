@@ -59,25 +59,25 @@ static inline s32 is_group_c(Actor_func_8027B428_de *actor) {
     return 0;
 }
 
-void func_8027ABF4_de(AccelSteeringObj *arg0) {
+void func_8027ABF4_de(AccelSteeringObj *particle) {
     AccelSteeringVec delta, direction;
     AccelSteeringVec *velocity;
     f32 accel, length, limit;
 
-    if (arg0->target != 0 && arg0->distance > 1.0f) {
-        Particle_SteerToward(arg0, &arg0->target->point);
+    if (particle->target != 0 && particle->distance > 1.0f) {
+        Particle_SteerToward(particle, &particle->target->point);
         return;
     }
-    accel = func_802B2350(arg0->link->params->accel);
+    accel = func_802B2350(particle->link->params->accel);
     if (accel != 0.0f) {
         do {
-            direction = arg0->direction;
+            direction = particle->direction;
             func_80271F9C_de(&delta, &direction, accel);
-            velocity = &arg0->velocity;
+            velocity = &particle->velocity;
             func_80271F34_de(velocity, velocity, &delta);
         } while (0);
-        length = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y + arg0->velocity.z * arg0->velocity.z);
-        limit = func_802B2350(arg0->link->params->limit);
+        length = func_802B72B0_de(particle->velocity.x * particle->velocity.x + particle->velocity.y * particle->velocity.y + particle->velocity.z * particle->velocity.z);
+        limit = func_802B2350(particle->link->params->limit);
         if (accel > 0.0f) {
             if (!(limit < length)) goto done;
         } else {
@@ -86,7 +86,7 @@ void func_8027ABF4_de(AccelSteeringObj *arg0) {
         func_80271F9C_de(velocity, &direction, limit);
 done:;
     }
-    func_80279DD0_de(arg0, 1.0f);
+    func_80279DD0_de(particle, 1.0f);
 }
 
 void func_8027AD4C_de(Shared_Particle *arg0)

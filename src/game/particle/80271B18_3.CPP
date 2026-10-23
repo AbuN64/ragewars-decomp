@@ -20,20 +20,20 @@ static __inline__ CVector3 project(CVector3 *arg0, CVector3 *arg1) {
 
 extern f32 func_802B72B0_de(f32 arg0);
 
-CVector3 func_802723FC_de(CVector3 *arg0, CVector3 *arg1) {
+CVector3 func_802723FC_de(CVector3 *remaining, CVector3 *arg1) {
     CVector3 projected;
     f32 projectedMagnitude;
     f32 magnitudeRatio;
 
-    projected = project(arg0, arg1);
+    projected = project(remaining, arg1);
 
     projectedMagnitude = func_802B72B0_de((projected.x * projected.x) +
                                        (projected.y * projected.y) +
                                        (projected.z * projected.z));
     if (projectedMagnitude != 0.0f) {
-        magnitudeRatio = func_802B72B0_de((arg0->x * arg0->x) +
-                                       (arg0->y * arg0->y) +
-                                       (arg0->z * arg0->z)) / projectedMagnitude;
+        magnitudeRatio = func_802B72B0_de((remaining->x * remaining->x) +
+                                       (remaining->y * remaining->y) +
+                                       (remaining->z * remaining->z)) / projectedMagnitude;
 
         projected.x *= magnitudeRatio;
         projected.y *= magnitudeRatio;
@@ -66,7 +66,7 @@ s32 func_8027254C_de(f32 *arg0, f32 arg1) {
 void func_802725F4_de(void) {
 }
 
-f32 func_802725FC_de(f32 *arg0) {
+f32 func_802725FC_de(f32 *delta) {
     f32 y;
     f32 zero;
     f32 x;
@@ -74,10 +74,10 @@ f32 func_802725FC_de(f32 *arg0) {
     f32 magnitude_squared;
     f32 ratio;
 
-    y = arg0[1];
+    y = delta[1];
     zero = 0.0f;
-    x = arg0[0];
-    z = arg0[2];
+    x = delta[0];
+    z = delta[2];
     if (y == zero) {
         return zero;
     }
@@ -112,18 +112,18 @@ f32 func_802726F8_de(f32 *a, f32 *b) {
     return func_802B72B0_de((dx * dx) + (dy * dy) + (dz * dz));
 }
 
-void func_80272748_de(CVector3 *arg0, f32 arg1) {
+void func_80272748_de(CVector3 *motion, f32 arg1) {
     f32 magSq;
     f32 mag;
     f32 scale;
 
-    magSq = (arg0->x * arg0->x) + (arg0->y * arg0->y) + (arg0->z * arg0->z);
+    magSq = (motion->x * motion->x) + (motion->y * motion->y) + (motion->z * motion->z);
     if ((arg1 * arg1) < magSq) {
         mag = func_802B72B0_de(magSq);
         scale = arg1 / mag;
-        arg0->x = arg0->x * scale;
-        arg0->y = arg0->y * scale;
-        arg0->z = arg0->z * scale;
+        motion->x = motion->x * scale;
+        motion->y = motion->y * scale;
+        motion->z = motion->z * scale;
     }
 }
 
@@ -154,17 +154,17 @@ void func_80272828_de(f32 *arg0) {
     f32 *var_a0;
     f32 *var_v1;
     f32 temp_f0;
-    s32 var_a1;
-    s32 var_a2;
+    s32 i;
+    s32 j;
     f32 maxVal;
     f32 minVal;
 
     maxVal = *(&D_800C99B0 + 1);
     minVal = D_800C48C8_de;
     var_a0 = arg0;
-    var_a2 = 0;
+    j = 0;
     do {
-        var_a1 = 0;
+        i = 0;
         var_v1 = var_a0;
         do {
             temp_f0 = *var_v1;
@@ -173,12 +173,12 @@ void func_80272828_de(f32 *arg0) {
             } else if (temp_f0 < minVal) {
                 *var_v1 = minVal;
             }
-            var_a1 += 1;
+            i += 1;
             var_v1 += 1;
-        } while (var_a1 < 4);
-        var_a2 += 1;
+        } while (i < 4);
+        j += 1;
         var_a0 += 4;
-    } while (var_a2 < 4);
+    } while (j < 4);
 }
 
 void func_80272898_de(void *arg0, void *arg1, void *arg2) {
@@ -216,21 +216,21 @@ void func_80272944_de(f32 *m, f32 *in, f32 *out, u32 count) {
     }
 }
 
-void func_80272A10_de(void *arg0, void *arg1, CVector3 *arg2) {
-    Matrix *m = arg0;
+void func_80272A10_de(void *matrix, void *arg1, CVector3 *localDirection) {
+    Matrix *m = matrix;
     CVector3 *v = arg1;
     f32 w;
     f32 scale;
 
-    arg2->x = (m->m[0] * v->x)
+    localDirection->x = (m->m[0] * v->x)
                        + (m->m[4] * v->y)
                        + (m->m[8] * v->z)
                        + m->m[12];
-    arg2->y = (m->m[1] * v->x)
+    localDirection->y = (m->m[1] * v->x)
                        + (m->m[5] * v->y)
                        + (m->m[9] * v->z)
                        + m->m[13];
-    arg2->z = (m->m[2] * v->x)
+    localDirection->z = (m->m[2] * v->x)
                        + (m->m[6] * v->y)
                        + (m->m[10] * v->z)
                        + m->m[14];
@@ -240,9 +240,9 @@ void func_80272A10_de(void *arg0, void *arg1, CVector3 *arg2) {
         + m->m[15];
     if (w != 0.0f) {
         scale = *(&D_800C48C8_de + 1) / w;
-        arg2->x = arg2->x * scale;
-        arg2->y = arg2->y * scale;
-        arg2->z = arg2->z * scale;
+        localDirection->x = localDirection->x * scale;
+        localDirection->y = localDirection->y * scale;
+        localDirection->z = localDirection->z * scale;
     }
 }
 
@@ -262,8 +262,8 @@ void func_80272B38_de(void *arg0, void *arg1, void *arg2) {
                        + (m->m[10] * v->z);
 }
 
-void func_80272BCC_de(void *arg0, void *arg1, void *arg2) {
-    Matrix *m = arg0;
+void func_80272BCC_de(void *matrix, void *arg1, void *arg2) {
+    Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
 
@@ -278,8 +278,8 @@ void func_80272BCC_de(void *arg0, void *arg1, void *arg2) {
                        + (m->m[10] * v->z);
 }
 
-void func_80272C60_de(void *arg0, f32 arg1, f32 arg2, f32 arg3) {
-    Matrix *o = arg0;
+void func_80272C60_de(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+    Matrix *o = matrix;
     f32 val = D_800C48D0_de;
     f32 zero = 0.0f;
 

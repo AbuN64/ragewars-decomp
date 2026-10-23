@@ -19,29 +19,29 @@ extern void Particle_BuildMatrix(void *, s32, s32, f32);
 
 
 
-void func_80284178_de(void *arg0) {
+void func_80284178_de(void *particle) {
     CVector3 delta;
-    void *arg1;
+    void *camera;
     f32 amount;
     s32 *state;
 
     state = D_80140FF8;
     if (state[0] == 1) {
-        arg1 = (void *)state[-4];
-        func_80272898_de(&((struct Shared_ParticleView *)arg1)->viewMtx, &((Shared_Particle *)arg0)->inst.pos, &delta);
+        camera = (void *)state[-4];
+        func_80272898_de(&((struct Shared_ParticleView *)camera)->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
         }
-        Particle_BuildMatrix(arg0,
-                      (s32)((char *)arg0 + ((D_800D297C << 6) + 0x60)),
-                      (s32)arg1, amount);
+        Particle_BuildMatrix(particle,
+                      (s32)((char *)particle + ((D_800D297C << 6) + 0x60)),
+                      (s32)camera, amount);
     } else {
-        Particle_BuildMatrix(arg0,
-                      (s32)((char *)arg0 + ((D_800D297C << 6) + 0x60)),
+        Particle_BuildMatrix(particle,
+                      (s32)((char *)particle + ((D_800D297C << 6) + 0x60)),
                       0, 0.0f);
     }
-    ((Shared_Particle *)arg0)->flags |= 0x100000;
+    ((Shared_Particle *)particle)->flags |= 0x100000;
 }
 
 /* Spawns a sequence of effects along an object's motion segment. */

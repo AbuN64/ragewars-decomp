@@ -157,10 +157,10 @@ void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
 }
 
 /** Reset three byte-sized fields. */
-void func_8024DD10_de(signed char *arg0) {
-    arg0[3] = -1;
-    arg0[1] = 0;
-    arg0[2] = 0;
+void func_8024DD10_de(signed char *prop) {
+    prop[3] = -1;
+    prop[1] = 0;
+    prop[2] = 0;
 }
 
 s32 func_8024DD24_de(void *arg0)
@@ -195,31 +195,31 @@ s32 func_8024DD58_de(void *arg0)
     return 0;
 }
 
-int func_8024DD8C_de(void *arg0) {
-    Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+int func_8024DD8C_de(void *other) {
+    Actor_u1 *actor = other;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags14 & 1;
+        return resource->flags14 & 1;
     } else {
-        return temp_a0->flags14 & 1;
+        return resource->flags14 & 1;
     }
 }
 
 int func_8024DDB4_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags14 & 2;
+        return resource->flags14 & 2;
     } else {
-        return temp_a0->flags14 & 2;
+        return resource->flags14 & 2;
     }
 }
 
@@ -257,15 +257,15 @@ s32 func_8024DE10_de(void *arg0)
 
 int func_8024DE44_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags14 & 0x200;
+        return resource->flags14 & 0x200;
     } else {
-        return temp_a0->flags14 & 0x200;
+        return resource->flags14 & 0x200;
     }
 }
 
@@ -301,21 +301,21 @@ s32 func_8024DEA0_de(void *arg0) {
 
 int func_8024DEE0_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags4C & 1;
+        return resource->flags4C & 1;
     } else {
-        return temp_a0->flags4C & 1;
+        return resource->flags4C & 1;
     }
 }
 
-s32 func_8024DF08_de(LevelActor *arg0) {
-    void *temp_a1 = arg0->definition;
-    s32 temp_v1 = ((ModelBlend *)temp_a1)->kind;
+s32 func_8024DF08_de(LevelActor *actor) {
+    void *definition = actor->definition;
+    s32 temp_v1 = ((ModelBlend *)definition)->kind;
 
     if (temp_v1 != 1) {
         if (temp_v1 != 0xB) {
@@ -324,56 +324,56 @@ s32 func_8024DF08_de(LevelActor *arg0) {
         return 1;
     }
     {
-        s32 var_v1 = 0;
-        if (arg0->active <= 0 || (((ModelBlend *)temp_a1)->collisionOptions & 2)) {
-            var_v1 = 1;
+        s32 result = 0;
+        if (actor->active <= 0 || (((ModelBlend *)definition)->collisionOptions & 2)) {
+            result = 1;
         }
-        return var_v1;
+        return result;
     }
 ret0:
     return 0;
 }
 
-s32 func_8024DF5C_de(void *arg0) {
-    ModelBlend *temp_a1;
-    s32 var_v1;
+s32 func_8024DF5C_de(void *actor) {
+    ModelBlend *modelBlend;
+    s32 result;
 
-    temp_a1 = ((LevelActor *)arg0)->definition;
-    if (temp_a1->kind == 1) {
-        var_v1 = 0;
-        if (((LevelActor *)arg0)->active <= 0 || (temp_a1->collisionOptions & 4)) {
-            var_v1 = 1;
+    modelBlend = ((LevelActor *)actor)->definition;
+    if (modelBlend->kind == 1) {
+        result = 0;
+        if (((LevelActor *)actor)->active <= 0 || (modelBlend->collisionOptions & 4)) {
+            result = 1;
         }
-        return var_v1;
+        return result;
     }
     return 0;
 }
 
 int func_8024DFA0_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags4C & 8;
+        return resource->flags4C & 8;
     } else {
-        return temp_a0->flags4C & 8;
+        return resource->flags4C & 8;
     }
 }
 
-s32 func_8024DFC8_de(LevelActor *arg0) {
-    ModelBlend *temp_a1;
-    s32 var_v1;
+s32 func_8024DFC8_de(LevelActor *actor) {
+    ModelBlend *definition;
+    s32 result;
 
-    temp_a1 = arg0->definition;
-    if (temp_a1->kind == 1) {
-        var_v1 = 0;
-        if (arg0->active <= 0 || (temp_a1->collisionOptions & 0x800)) {
-            var_v1 = 1;
+    definition = actor->definition;
+    if (definition->kind == 1) {
+        result = 0;
+        if (actor->active <= 0 || (definition->collisionOptions & 0x800)) {
+            result = 1;
         }
-        return var_v1;
+        return result;
     }
     return 0;
 }
@@ -399,32 +399,32 @@ s32 func_8024E00C_de(void *arg0)
   }
 }
 
-s32 func_8024E034_de(LevelActor *arg0) {
-    ModelBlend *temp_a1;
-    s32 var_v1;
+s32 func_8024E034_de(LevelActor *actor) {
+    ModelBlend *definition;
+    s32 result;
 
-    temp_a1 = arg0->definition;
-    if (temp_a1->kind == 1) {
-        var_v1 = 0;
-        if (arg0->active <= 0 || (temp_a1->collisionOptions & 0x10)) {
-            var_v1 = 1;
+    definition = actor->definition;
+    if (definition->kind == 1) {
+        result = 0;
+        if (actor->active <= 0 || (definition->collisionOptions & 0x10)) {
+            result = 1;
         }
-        return var_v1;
+        return result;
     }
     return 0;
 }
 
 int func_8024E078_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags4C & 0x20;
+        return resource->flags4C & 0x20;
     } else {
-        return temp_a0->flags4C & 0x20;
+        return resource->flags4C & 0x20;
     }
 }
 
@@ -447,15 +447,15 @@ s32 func_8024E0A0_de(void *arg0)
 
 int func_8024E0C8_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags4C & 0x400;
+        return resource->flags4C & 0x400;
     } else {
-        return temp_a0->flags4C & 0x400;
+        return resource->flags4C & 0x400;
     }
 }
 
@@ -484,14 +484,14 @@ s32 func_8024E0F0_de(void *arg0)
 
 int func_8024E118_de(void *arg0) {
     Actor_u1 *actor = arg0;
-    Resource_u1 *temp_a0 = actor->resource;
+    Resource_u1 *resource = actor->resource;
     unsigned int new_var = 0;
-    if (temp_a0->kind != 1) {
+    if (resource->kind != 1) {
         return new_var;
     }
     if (new_var) {
-        return temp_a0->flags4C & 0x4000;
+        return resource->flags4C & 0x4000;
     } else {
-        return temp_a0->flags4C & 0x4000;
+        return resource->flags4C & 0x4000;
     }
 }

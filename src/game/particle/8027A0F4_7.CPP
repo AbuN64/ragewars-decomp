@@ -26,31 +26,31 @@ extern void func_802A42F4_de(void *arg0, void *arg1);
 void func_8027FF58_de(void *arg0) {
     s32 *temp_v1_2;
     s32 temp_a1;
-    s32 temp_v1;
-    s32 var_s3;
+    s32 flags;
+    s32 i;
     s32 clear_mask;
     s32 remove_offset;
     s32 active_mask;
     s32 flagged_offset;
     s32 head_offset;
     ParticleEffect *temp_s0;
-    ParticleEffect *var_s1;
+    ParticleEffect *next;
     u8 *head_cursor;
 
-    var_s3 = 0;
+    i = 0;
     clear_mask = 0xFDFFFEFF;
     remove_offset = 0xFC00;
     active_mask = 0x01000000;
     flagged_offset = 0xFC14;
     do {
-        __builtin_memcpy(&var_s1, &((EffectSystem *)arg0)->lists[var_s3].head, sizeof(var_s1));
-        if (var_s1 != 0) {
+        __builtin_memcpy(&next, &((EffectSystem *)arg0)->lists[i].head, sizeof(next));
+        if (next != 0) {
             do {
-                temp_s0 = var_s1;
-                var_s1 = var_s1->next;
-                temp_v1 = temp_s0->flags;
-                if (temp_v1 & 0x100) {
-                  if (!(temp_v1 & 0x800)) {
+                temp_s0 = next;
+                next = next->next;
+                flags = temp_s0->flags;
+                if (flags & 0x100) {
+                  if (!(flags & 0x800)) {
                     func_80279A00_de(temp_s0);
                     if (temp_s0->unk1D9 != 0) {
                         func_80284178_de(temp_s0);
@@ -74,8 +74,8 @@ void func_8027FF58_de(void *arg0) {
                     }
                   }
                 }
-            } while (var_s1 != 0);
+            } while (next != 0);
         }
-        var_s3 += 1;
-    } while (var_s3 < 3);
+        i += 1;
+    } while (i < 3);
 }

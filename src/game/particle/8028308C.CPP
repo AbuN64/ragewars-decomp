@@ -79,26 +79,26 @@ extern void func_80265E10_de(void *, void *, s32, s32, CVector3, struct IntPair)
 extern void func_80279B40_de(void *, s32, s8, s32);
 
 /** Return the word at offset 0xFC68. */
-int func_802830B8_de(struct EffectSystem *arg0) {
-    return (s32)arg0->last;
+int func_802830B8_de(struct EffectSystem *effectSystem) {
+    return (s32)effectSystem->last;
 }
 
-void func_802830CC_de(struct EffectSystem *arg0, s32 arg1) {
+void func_802830CC_de(struct EffectSystem *effectSystem, s32 arg1) {
     s32 *temp_v1_3;
     s32 temp_a1;
-    s32 temp_v1_2;
-    u16 temp_v1;
-    ParticleEffect *temp_s1;
+    s32 flags;
+    u16 kind;
+    ParticleEffect *next;
     ParticleEffect *var_s0;
 
-    var_s0 = arg0->lists[1].head;
+    var_s0 = effectSystem->lists[1].head;
     if (var_s0 != 0) {
         do {
-            temp_v1 = var_s0->kind;
-            temp_s1 = var_s0->next;
-            if ((temp_v1 == 0x41E) || (temp_v1 == 0x3EF)) {
-                temp_v1_2 = var_s0->flags;
-                if ((temp_v1_2 & 0x100) && (var_s0->owner == (void *)arg1) && !(temp_v1_2 & 0x800)) {
+            kind = var_s0->kind;
+            next = var_s0->next;
+            if ((kind == 0x41E) || (kind == 0x3EF)) {
+                flags = var_s0->flags;
+                if ((flags & 0x100) && (var_s0->owner == (void *)arg1) && !(flags & 0x800)) {
                     func_80279A00_de(var_s0);
                     if (var_s0->unk1D9 != 0) {
                         func_80284178_de(var_s0);
@@ -116,23 +116,23 @@ void func_802830CC_de(struct EffectSystem *arg0, s32 arg1) {
                     var_s0->flags = var_s0->flags & 0xFDFFFEFF;
                     func_80255ED8_de(var_s0->list, var_s0);
                     var_s0->list = 0;
-                    func_80255CB8_de(&arg0->free, var_s0);
+                    func_80255CB8_de(&effectSystem->free, var_s0);
                     if (var_s0->flags & 0x01000000) {
-                        func_80255ED8_de(&arg0->groups, var_s0);
+                        func_80255ED8_de(&effectSystem->groups, var_s0);
                     }
                 }
             }
-            var_s0 = temp_s1;
+            var_s0 = next;
         } while (var_s0 != 0);
     }
 }
 
-s32 func_80283228_de(struct EffectSystem *arg0, s32 arg1) {
+s32 func_80283228_de(struct EffectSystem *effectSystem, s32 arg1) {
     ParticleEffect *record;
     s32 count;
     u16 v;
 
-    record = arg0->lists[1].head;
+    record = effectSystem->lists[1].head;
     count = 0;
     if (record != 0) {
         do {
@@ -146,24 +146,24 @@ s32 func_80283228_de(struct EffectSystem *arg0, s32 arg1) {
     return count;
 }
 
-void func_80283278_de(struct EffectSystem *arg0, s32 arg1) {
+void func_80283278_de(struct EffectSystem *effectSystem, s32 arg1) {
     s32 *temp_v1_3;
     s32 temp_a1;
-    s32 temp_v1_2;
-    u16 temp_v1;
-    ParticleEffect *temp_s1;
+    s32 flags;
+    u16 kind;
+    ParticleEffect *next;
     ParticleEffect *var_s0;
 
-    var_s0 = arg0->lists[2].head;
+    var_s0 = effectSystem->lists[2].head;
     if (var_s0 != 0) {
         do {
-            temp_v1 = var_s0->kind;
-            temp_s1 = var_s0->next;
-            if (((temp_v1 == 0x414) || (temp_v1 == 0x42D)) &&
+            kind = var_s0->kind;
+            next = var_s0->next;
+            if (((kind == 0x414) || (kind == 0x42D)) &&
                 (var_s0->owner == (void *)arg1)) {
-                temp_v1_2 = var_s0->flags;
-                if (temp_v1_2 & 0x100) {
-                  if (!(temp_v1_2 & 0x800)) {
+                flags = var_s0->flags;
+                if (flags & 0x100) {
+                  if (!(flags & 0x800)) {
                     func_80279A00_de(var_s0);
                     if (var_s0->unk1D9 != 0) {
                         func_80284178_de(var_s0);
@@ -182,14 +182,14 @@ void func_80283278_de(struct EffectSystem *arg0, s32 arg1) {
                         var_s0->flags & 0xFDFFFEFF;
                     func_80255ED8_de(var_s0->list, var_s0);
                     var_s0->list = 0;
-                    func_80255CB8_de(&arg0->free, var_s0);
+                    func_80255CB8_de(&effectSystem->free, var_s0);
                     if (var_s0->flags & 0x01000000) {
-                        func_80255ED8_de(&arg0->groups, var_s0);
+                        func_80255ED8_de(&effectSystem->groups, var_s0);
                     }
                   }
                 }
             }
-            var_s0 = temp_s1;
+            var_s0 = next;
         } while (var_s0 != 0);
     }
 }
@@ -231,96 +231,96 @@ void func_80283448_de(void *object) {
 extern void func_80271818_de(CQuatern *, CVector3 *);
 extern Triple D_801002A8;
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
-void func_80283480_de(Obj_func_80283920_de *arg0, s32 arg1) {
+void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
     CQuatern q;
     CVector3 pos;
 
-    if ((*arg0->effectFlags & 0x10) != 0) {
+    if ((*source->effectFlags & 0x10) != 0) {
         pos = D_801042C8;
     } else {
-        pos = arg0->rotation;
+        pos = source->rotation;
     }
     func_80271818_de(&q, &pos);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                  (struct EffectActor *)arg0->effectResource,
-                  (s32 *)arg0->effectIndex,
-                  arg0->effectCount, arg1,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+                  (struct EffectActor *)source->effectResource,
+                  (s32 *)source->effectIndex,
+                  source->effectCount, kind,
                   pos, q, *(CVector3 *)&D_80100290.v, 0, D_80100290.w,
-                  (arg0->unk5C & 0x200006) | 1);
+                  (source->unk5C & 0x200006) | 1);
 }
 
-void func_802835A8_de(Obj_func_80283920_de *arg0, s32 arg1) {
+void func_802835A8_de(Obj_func_80283920_de *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
-    if ((*arg0->effectFlags & 0x10) != 0) {
+    if ((*source->effectFlags & 0x10) != 0) {
         position = D_801042C8;
     } else {
-        position = arg0->rotation;
+        position = source->rotation;
     }
     func_80271818_de(&rotation, &position);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                  (struct EffectActor *)arg0->effectResource,
-                  (s32 *)arg0->effectIndex,
-                  arg0->effectCount, arg1,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+                  (struct EffectActor *)source->effectResource,
+                  (s32 *)source->effectIndex,
+                  source->effectCount, kind,
                   position, rotation, *(CVector3 *)&D_801002A8, 0, -3,
-                  (arg0->unk5C & 0x200006) | 1);
+                  (source->unk5C & 0x200006) | 1);
 }
 
-void func_802836D0_de(Obj_func_80283920_de *arg0, s32 arg1) {
+void func_802836D0_de(Obj_func_80283920_de *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
-    if ((*arg0->effectFlags & 0x10) != 0) {
+    if ((*source->effectFlags & 0x10) != 0) {
         position = D_801042C8;
     } else {
-        position = arg0->rotation;
+        position = source->rotation;
     }
     func_80271818_de(&rotation, &position);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                  (struct EffectActor *)arg0->effectResource,
-                  (s32 *)arg0->effectIndex,
-                  arg0->effectCount, arg1,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+                  (struct EffectActor *)source->effectResource,
+                  (s32 *)source->effectIndex,
+                  source->effectCount, kind,
                   position, rotation, *(CVector3 *)&D_801002A8, 0, -2,
-                  (arg0->unk5C & 0x200006) | 1);
+                  (source->unk5C & 0x200006) | 1);
 }
 
-void func_802837F8_de(Obj_func_80283920_de *arg0, s32 arg1) {
+void func_802837F8_de(Obj_func_80283920_de *source, s32 kind) {
     CQuatern rotation;
     CVector3 position;
 
-    if (*arg0->effectFlags & 0x10) {
+    if (*source->effectFlags & 0x10) {
         position = D_801042C8;
     } else {
-        position = arg0->rotation;
+        position = source->rotation;
     }
     func_80271818_de(&rotation, &position);
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)arg0,
-                  (struct EffectActor *)arg0->effectResource,
-                  (s32 *)arg0->effectIndex,
-                  arg0->effectCount, arg1,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
+                  (struct EffectActor *)source->effectResource,
+                  (s32 *)source->effectIndex,
+                  source->effectCount, kind,
                   position, rotation, *(CVector3 *)&D_801002B8, 0, -5,
-                  (arg0->unk5C & 0x200006) | 1);
+                  (source->unk5C & 0x200006) | 1);
 }
 
-void func_80283920_de(Obj_func_80283920_de *arg0, Params_func_80283920_de *arg1) {
+void func_80283920_de(Obj_func_80283920_de *actor, Params_func_80283920_de *arg1) {
     s32 temp_t0;
     s8 temp_a1;
-    s8 temp_a2;
+    s8 resourceId;
     u16 temp_v1;
-    Particle_Attach((struct Actor_func_8027DAD0_de *)arg0, 0, 0);
-    temp_a2 = arg1->unk6;
-    if (temp_a2 != -1) {
-        func_802A4598_de(&D_801379C0, arg0, temp_a2);
+    Particle_Attach((struct Actor_func_8027DAD0_de *)actor, 0, 0);
+    resourceId = arg1->unk6;
+    if (resourceId != -1) {
+        func_802A4598_de(&D_801379C0, actor, resourceId);
     }
     temp_a1 = arg1->unk7;
-    arg0->unk138 = temp_a1 == -1 ? 0 : func_80268BE0_de(&D_8013B1A8, temp_a1);
-    if (!(arg0->unk5C & 0x200000) && (temp_t0 = arg1->unkC, (temp_t0 != 0))) {
-        switch(arg0->unk4) {
+    actor->unk138 = temp_a1 == -1 ? 0 : func_80268BE0_de(&D_8013B1A8, temp_a1);
+    if (!(actor->unk5C & 0x200000) && (temp_t0 = arg1->unkC, (temp_t0 != 0))) {
+        switch(actor->unk4) {
         case 0x22: case 0x5f: case 0x60:
-            func_802843B8_de(arg0,temp_t0); break;
+            func_802843B8_de(actor,temp_t0); break;
         default:
-            func_8025DE54_de(temp_t0, *(CVector3 *)&arg0->unk8, 0, -1); break;
+            func_8025DE54_de(temp_t0, *(CVector3 *)&actor->unk8, 0, -1); break;
         }
     }
 }
@@ -413,49 +413,49 @@ s32 func_80283D38_de(s32 arg0) {
     return arg0;
 }
 
-void func_80283D50_de(void *arg0) {
+void func_80283D50_de(void *actor) {
     struct IntPair pair;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
-    s32 temp_s2;
+    s32 model;
     s32 temp_s3;
     struct Shared_ParticleDesc *temp_s1;
     void *temp_v0_2;
     void *temp_v1;
 
-    temp_s1 = ((Shared_Particle *)arg0)->desc;
-    if (func_80284068_de(arg0) != 0) {
+    temp_s1 = ((Shared_Particle *)actor)->desc;
+    if (func_80284068_de(actor) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
     }
     temp_a1 = var_a0 * 2;
-    temp_v0 = temp_s1->events;
-    temp_v1 = (char *)temp_v0 + temp_a1;
-    temp_s2 = temp_v0->particles[var_a0];
-    temp_a2 = temp_v0->effects[var_a0];
-    temp_v0_2 = (char *)temp_v0 + (var_a0 * 8);
-    pair = temp_v0->parameters[var_a0];
+    events = temp_s1->events;
+    temp_v1 = (char *)events + temp_a1;
+    model = events->particles[var_a0];
+    temp_a2 = events->effects[var_a0];
+    temp_v0_2 = (char *)events + (var_a0 * 8);
+    pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1,
-                     ((Shared_Particle *)arg0)->inst.pos, pair);
+        func_80265E10_de(actor, actor, temp_a2, -1,
+                     ((Shared_Particle *)actor)->inst.pos, pair);
     }
-    if (temp_s2 != 0xFFFF) {
-        func_80279B40_de(arg0, temp_s2, ((Shared_Particle *)arg0)->space, 1);
+    if (model != 0xFFFF) {
+        func_80279B40_de(actor, model, ((Shared_Particle *)actor)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
         func_8025DE54_de((s16)temp_s3,
-                      ((Shared_Particle *)arg0)->inst.pos, 0, -1);
+                      ((Shared_Particle *)actor)->inst.pos, 0, -1);
     }
 }
 
-void func_80283E58_de(void *arg0) {
+void func_80283E58_de(void *particle) {
     struct IntPair pair;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
     s32 temp_s2;
@@ -464,38 +464,38 @@ void func_80283E58_de(void *arg0) {
     void *temp_v0_2;
     void *temp_v1;
 
-    temp_s1 = ((Shared_Particle *)arg0)->desc;
-    if (func_80284068_de(arg0) != 0) {
+    temp_s1 = ((Shared_Particle *)particle)->desc;
+    if (func_80284068_de(particle) != 0) {
         var_a0 = 0xD;
     } else {
         var_a0 = 0xB;
     }
     temp_a1 = var_a0 * 2;
-    temp_v0 = temp_s1->events;
-    temp_v1 = (char *)temp_v0 + temp_a1;
-    temp_s2 = temp_v0->particles[var_a0];
-    temp_a2 = temp_v0->effects[var_a0];
-    temp_v0_2 = (char *)temp_v0 + (var_a0 * 8);
-    pair = temp_v0->parameters[var_a0];
+    events = temp_s1->events;
+    temp_v1 = (char *)events + temp_a1;
+    temp_s2 = events->particles[var_a0];
+    temp_a2 = events->effects[var_a0];
+    temp_v0_2 = (char *)events + (var_a0 * 8);
+    pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1,
-                     ((Shared_Particle *)arg0)->inst.pos, pair);
+        func_80265E10_de(particle, particle, temp_a2, -1,
+                     ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (temp_s2 != 0xFFFF) {
-        func_80279B40_de(arg0, temp_s2, ((Shared_Particle *)arg0)->space, 1);
+        func_80279B40_de(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
         func_8025DE54_de((s16)temp_s3,
-                      ((Shared_Particle *)arg0)->inst.pos,
-                      (s32)&((Shared_Particle *)arg0)->inst.pos, (s32)arg0);
+                      ((Shared_Particle *)particle)->inst.pos,
+                      (s32)&((Shared_Particle *)particle)->inst.pos, (s32)particle);
     }
 }
 
-void func_80283F60_de(void *arg0) {
+void func_80283F60_de(void *particle) {
     struct IntPair pair;
     s32 temp_a1;
-    struct Shared_ParticleEvents *temp_v0;
+    struct Shared_ParticleEvents *events;
     s32 var_a0;
     s32 temp_a2;
     s32 temp_s2;
@@ -504,30 +504,30 @@ void func_80283F60_de(void *arg0) {
     void *temp_v0_2;
     void *temp_v1;
 
-    temp_s1 = ((Shared_Particle *)arg0)->desc;
-    if (func_80284068_de(arg0) != 0) {
+    temp_s1 = ((Shared_Particle *)particle)->desc;
+    if (func_80284068_de(particle) != 0) {
         var_a0 = 0xC;
     } else {
         var_a0 = 0xA;
     }
     temp_a1 = var_a0 * 2;
-    temp_v0 = temp_s1->events;
-    temp_v1 = (char *)temp_v0 + temp_a1;
-    temp_s2 = temp_v0->particles[var_a0];
-    temp_a2 = temp_v0->effects[var_a0];
-    temp_v0_2 = (char *)temp_v0 + (var_a0 * 8);
-    pair = temp_v0->parameters[var_a0];
+    events = temp_s1->events;
+    temp_v1 = (char *)events + temp_a1;
+    temp_s2 = events->particles[var_a0];
+    temp_a2 = events->effects[var_a0];
+    temp_v0_2 = (char *)events + (var_a0 * 8);
+    pair = events->parameters[var_a0];
     temp_s3 = temp_s1->events->sounds[var_a0];
     if (temp_a2 != 0xFFFF) {
-        func_80265E10_de(arg0, arg0, temp_a2, -1,
-                     ((Shared_Particle *)arg0)->inst.pos, pair);
+        func_80265E10_de(particle, particle, temp_a2, -1,
+                     ((Shared_Particle *)particle)->inst.pos, pair);
     }
     if (temp_s2 != 0xFFFF) {
-        func_80279B40_de(arg0, temp_s2, ((Shared_Particle *)arg0)->space, 1);
+        func_80279B40_de(particle, temp_s2, ((Shared_Particle *)particle)->space, 1);
     }
     if (temp_s3 != 0xFFFF) {
         func_8025DE54_de((s16)temp_s3,
-                      ((Shared_Particle *)arg0)->inst.pos, 0, -1);
+                      ((Shared_Particle *)particle)->inst.pos, 0, -1);
     }
 }
 
