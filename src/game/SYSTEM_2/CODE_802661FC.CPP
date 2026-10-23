@@ -10,10 +10,6 @@
 #include "SYSTEM_2/CODE_802661FC.H"
 extern void func_8027207C_de(f32 *arg0);
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "FX_2/80271B18.H"
-
 typedef struct DamageDefinition { s32 kind; } DamageDefinition;
 typedef struct DamageActor {
     u8 category; char pad01[3]; u16 kind; char pad06[0x12];
@@ -21,7 +17,14 @@ typedef struct DamageActor {
     char pad1C[0xC8]; u16 team; char padE6[0x1A]; u32 flags;
     char pad104[0x14]; u32 *properties;
     char pad11C[0x10]; struct DamageActor *owner;
+    char pad130[0xA8]; struct ReactionPlayer *player;
 } DamageActor;
+
+#ifdef NON_MATCHING
+#include "TYPES.H"
+#include "FX_2/80271B18.H"
+
+
 extern u8 D_801462E5;
 extern s32 D_8013B290;
 extern s32 func_8024D160_de(void *);
@@ -96,131 +99,116 @@ extern float D_800C43C4_de;
 extern float D_800C43C8_de;
 extern float D_800C43CC_de;
 extern float D_800C43D0_de;
-extern struct NodeCode8028469C * * D_800C43D4_de;
+extern float D_800C43D4_de;
 extern float D_800C43DC_de;
 
 void func_8022B09C_de(s32, f32 *);
-void func_802800C0_de(s32 *, void *, void *, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32,
-                      f32, f32, f32, s32, s32, s32);
-void func_8028CE94_de(Shared_World *, s32, s32, s32, s32, s32, struct NodeCode8028469C **,
-                      f32);
+void func_8028CE94_de(Shared_World *, s32, s32, CVector3, f32, f32);
 extern s32 D_8011D8D0;
 extern float D_800C43D8_de;
 
-void System_ApplyDamageReaction(void *object, char *param_2, s32 param_3, CVector3 position, CVector3 impulse,
-                      s32 param_10, void *shield, u32 param_12) {
-    s32 param_1 = (s32)object;
-    char cVar1;
-    s32 iVar2;
-    f32 uVar3;
-    s32 iVar4;
-    f32 fVar5;
-    f32 uVar6;
-    f32 uVar7;
-    f32 local_68;
-    f32 local_64;
-    f32 local_60;
-    f32 local_58;
-    f32 local_54;
-    f32 local_50;
-    f32 local_48;
-    f32 local_44;
-    f32 local_40;
-    f32 local_38;
-    f32 local_34;
-    f32 local_30;
-    f32 local_2c;
-    s32 auStack_28[2];
-    s32 doCall;
-    CVector3 vec;
+#include "particle/8027A0F4_8.H"
+typedef struct ReactionDisplay {
+    char pad000[0x128];
+    CVector3 origin;
+} ReactionDisplay;
+typedef struct ReactionPlayer {
+    char pad000[0x5DC];
+    ReactionDisplay *display;
+    char pad5E0[0xB8];
+    s32 sound;
+} ReactionPlayer;
+typedef struct ReactionActor {
+    u8 category; char pad01[7];
+    CVector3 position;
+    char pad14[4];
+    DamageDefinition *definition;
+    CVector3 velocity;
+    char pad28[0x44];
+    f32 turn;
+    char pad70[0x90];
+    u32 flags;
+    char pad104[0x6C];
+    u32 eventFlags;
+    char pad174[0x38];
+    u32 effectFlags;
+    char pad1B0[0x28];
+    ReactionPlayer *player;
+} ReactionActor;
+typedef struct ReactionShield {
+    char pad00[0x66];
+    u8 effectKind;
+} ReactionShield;
 
-    iVar4 = (s32)shield;
-    iVar2 = param_10;
-    if (*param_2 == '\x01') {
-        *(u32 *)(param_2 + 0x170) = *(u32 *)(param_2 + 0x170) | 0x8000;
-        if (((*(u32 *)(param_1 + 0x100) & 0x300000) != 0) &&
-            (*(s32 *)(*(s32 *)(param_1 + 0x1d8) + 0x5dc) != 0)) {
-            doCall = 0;
-            uVar3 = 0.0f;
-            uVar6 = 0.0f;
-            uVar7 = 0.0f;
-            if ((*(u32 *)(param_2 + 0x1ac) & 0x4000) == 0) {
-                if ((*(u32 *)(param_2 + 0x1ac) & 0x2000) != 0) {
-                    uVar3 = 50.0f;
-                    uVar7 = D_800C43CC_de;
-                    uVar6 = D_800C43C8_de;
-                    doCall = 1;
-                }
-            } else {
-                uVar3 = 100.0f;
-                uVar7 = D_800C43C4_de;
-                uVar6 = D_800C43C0_de;
-                doCall = 1;
-            }
-            if (doCall) {
-                vec.x = position.x;
-                vec.y = position.y;
-                vec.z = position.z;
-                func_80239324_de(*(char **)(*(s32 *)(param_1 + 0x1d8) + 0x5dc), uVar7, uVar3, uVar7,
-                                 uVar6, 1, vec);
+static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *player,
+                                       CVector3 position, CVector3 impulse, ReactionShield *reaction) {
+    s32 effectKind = reaction->effectKind;
+    CVector3 localImpulse;
+    CVector3 effectPosition;
+    CVector3 zero;
+    CQuatern rotation;
+    s32 hit[2];
+    if (player->display) {
+        player = target->player;
+        localImpulse.x = -impulse.x;
+        localImpulse.y = impulse.y;
+        localImpulse.z = impulse.z;
+        func_8022B09C_de((s32)player, &localImpulse.x);
+        localImpulse.x -= player->display->origin.x;
+        localImpulse.y -= player->display->origin.y;
+        localImpulse.z -= player->display->origin.z;
+        func_80271818_de(&rotation, &localImpulse.x);
+        func_8024E79C_de((Actor_func_80214624_de *)target, position,
+                         &effectPosition, hit, 0, 1);
+        effectPosition = position;
+        effectPosition.y += D_800C43D0_de;
+        zero.x = 0.0f; zero.y = 0.0f; zero.z = 0.0f;
+        func_802800C0_de((struct EffectSystem *)&D_8011D8D0,
+                         (struct EffectActor *)target, (struct EffectActor *)target,
+                         0, 0, 0xE9, zero, rotation, effectPosition, 0, -1,
+                         effectKind == 5 ? 3 : 1);
+        effectPosition.x = 0.0f; effectPosition.y = 0.0f; effectPosition.z = 0.0f;
+        func_8028CE94_de(&D_8011FE88, player->sound + 0x140, 3,
+                         effectPosition, D_800C43D4_de, D_800C43D8_de);
+    }
+}
+
+/* 6/253 aligned instruction edits; remaining: prologue and shield-kind load ordering. */
+void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 absorbImpulse, CVector3 position, CVector3 impulse,
+                      s32 applyTurn, void *shield, u32 hitFlags) {
+    ReactionActor *target = (ReactionActor *)targetObject;
+    ReactionActor *source = (ReactionActor *)sourceObject;
+    ReactionShield *reaction = (ReactionShield *)shield;
+    f32 angle;
+    if (target->category == 1) {
+        DamageActor *victim = (DamageActor *)target;
+        target->eventFlags |= 0x8000;
+        if ((source->flags & 0x300000) && source->player->display) {
+            if (target->effectFlags & 0x4000) {
+                func_80239324_de((char *)source->player->display, D_800C43C4_de,
+                                 100.0f, D_800C43C4_de, D_800C43C0_de, 1, position);
+            } else if (target->effectFlags & 0x2000) {
+                func_80239324_de((char *)source->player->display, D_800C43CC_de,
+                                 50.0f, D_800C43CC_de, D_800C43C8_de, 1, position);
             }
         }
-        if (param_3 != 0) {
-            if (((iVar4 != 0) && ((*(u32 *)(param_2 + 0x100) & 0x300000) != 0)) &&
-                (((u32)(u8)((Shield *)iVar4)->effectKind - 4) < 2)) {
-                cVar1 = ((Shield *)iVar4)->effectKind;
-                if (*(s32 *)(*(s32 *)(param_2 + 0x1d8) + 0x5dc) != 0) {
-                    iVar4 = *(s32 *)(param_2 + 0x1d8);
-                    local_68 = -impulse.x;
-                    local_64 = impulse.y;
-                    local_60 = impulse.z;
-                    func_8022B09C_de(iVar4, &local_68);
-                    local_68 = local_68 - *(f32 *)(*(s32 *)(iVar4 + 0x5dc) + 0x128);
-                    local_64 = local_64 - *(f32 *)(*(s32 *)(iVar4 + 0x5dc) + 0x12c);
-                    local_60 = local_60 - *(f32 *)(*(s32 *)(iVar4 + 0x5dc) + 0x130);
-                    func_80271818_de(&local_38, &local_68);
-                    vec.x = position.x;
-                    vec.y = position.y;
-                    vec.z = position.z;
-                    func_8024E79C_de((Actor_func_80214624_de *)param_2, vec, &local_58, auStack_28,
-                                     0, 1);
-                    local_50 = position.z;
-                    local_48 = 0.0f;
-                    local_54 = position.y + D_800C43D0_de;
-                    local_44 = 0.0f;
-                    local_40 = 0.0f;
-                    if (cVar1 == '\x05') {
-                        uVar7 = 3;
-                    } else {
-                        uVar7 = 1;
-                    }
-                    local_58 = position.x;
-                    func_802800C0_de(&D_8011D8D0, param_2, param_2, 0, 0, 0xe9, 0, 0, 0, local_38,
-                                     local_34, local_30, local_2c, position.x, local_54, position.z, 0,
-                                     -1, uVar7);
-                    local_58 = 0.0f;
-                    local_54 = 0.0f;
-                    local_50 = 0.0f;
-                    func_8028CE94_de(&D_8011FE88, *(s32 *)(iVar4 + 0x698) + 0x140, 3, 0, 0, 0,
-                                     D_800C43D4_de, D_800C43D8_de);
-                }
+        if (absorbImpulse) {
+            if (reaction && (victim->flags & 0x300000) &&
+                (u32)(reaction->effectKind - 4) < 2) {
+                applyShieldReaction(target, victim->player, position, impulse, reaction);
             }
-            impulse.x = 0.0f;
-            impulse.y = 0.0f;
-            impulse.z = 0.0f;
+            impulse.x = 0.0f; impulse.y = 0.0f; impulse.z = 0.0f;
         }
-        if (((*(u32 *)(param_2 + 0x100) & 0x300000) != 0) && ((param_12 & 0x200) != 0)) {
-            func_80278D78_de((void *)param_1, 0x10, param_2);
+        if ((victim->flags & 0x300000) && (hitFlags & 0x200)) {
+            func_80278D78_de((struct Shared_Actor *)source, 0x10, victim);
         }
     }
-    if (((**(s32 **)(param_1 + 0x18) == 1) || (**(s32 **)(param_1 + 0x18) == 0xb)) &&
-        (func_80271F34_de((void *)(param_1 + 0x1c), (void *)(param_1 + 0x1c), &impulse),
-         iVar2 != 0)) {
-        vec.x = *(f32 *)(param_2 + 8);
-        vec.y = *(f32 *)(param_2 + 0xc);
-        vec.z = *(f32 *)(param_2 + 0x10);
-        fVar5 = func_80216F44_de((Actor_func_80214624_de *)param_1, vec);
-        *(f32 *)(param_1 + 0x6c) = *(f32 *)(param_1 + 0x6c) + fVar5 * D_800C43DC_de;
+    if (source->definition->kind == 1 || source->definition->kind == 11) {
+        func_80271F34_de(&source->velocity, &source->velocity, &impulse);
+        if (applyTurn) {
+            angle = func_80216F44_de((Actor_func_80214624_de *)source, target->position);
+            source->turn += angle * D_800C43DC_de;
+        }
     }
 }
 #else
