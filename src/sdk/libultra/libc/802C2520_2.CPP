@@ -4,7 +4,7 @@
 #include "TYPES.H"
 
 void lldiv(LldivResult *result, s64 numerator, s64 denominator) {
-    result->quot = func_802C0230_de(numerator, denominator);
+    result->quot = Libc_SignedDivide(numerator, denominator);
     result->rem = Libc_SignedRemainder(numerator, denominator);
 }
 
