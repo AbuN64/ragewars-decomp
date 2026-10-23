@@ -68,10 +68,10 @@ int Multi_SetupNameSpinner(void *spinnerSetupMenu) {
     s32 trailing;
     s32 remaining;
     s32 i;
-    u8 *src;
-    u8 *ref;
+    u8 *sourceName;
+    u8 *defaultName;
     u8 *p;
-    char *dst;
+    char *destinationName;
     u8 a;
     s32 b;
 
@@ -104,23 +104,23 @@ int Multi_SetupNameSpinner(void *spinnerSetupMenu) {
             break;
     }
     D_800E20A4_de[index].timer = 0;
-    dst = D_800E20AC + index * 24;
-    src = (u8 *)D_8014641C_us_rev1 + index * 150;
+    destinationName = D_800E20AC + index * 24;
+    sourceName = (u8 *)D_8014641C_us_rev1 + index * 150;
     i = 8;
     trailing = 0;
     while (i > 0) {
         i--;
-        if (src[i] != 0x20) {
+        if (sourceName[i] != 0x20) {
             break;
         }
         trailing++;
     }
-    p = src;
-    ref = (u8 *)D_800D3C44;
+    p = sourceName;
+    defaultName = (u8 *)D_800D3C44;
     i = 6;
     do {
         b = *p++;
-        a = *ref++;
+        a = *defaultName++;
         i--;
         if ((u8)b != a || (u8)b == 0) {
             break;
@@ -130,9 +130,9 @@ int Multi_SetupNameSpinner(void *spinnerSetupMenu) {
         trailing = 8;
     }
     for (i = 0; i < 8 - trailing; i++) {
-        *dst++ = *src++;
+        *destinationName++ = *sourceName++;
     }
-    *dst = 0;
+    *destinationName = 0;
     D_800E63C0[index].value = i;
     D_800E20A4_de[index].max = i;
     return i;
