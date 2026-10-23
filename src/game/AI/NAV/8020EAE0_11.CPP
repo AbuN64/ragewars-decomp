@@ -1,6 +1,5 @@
 #include "include_asm.h"
 
-#ifdef NON_MATCHING
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/TRIPLE.H"
@@ -19,15 +18,15 @@ s32 func_8022AC00_de(void *);
 s32 func_8022ACB8_de(void *, s32, s32);
 extern CGameStatus D_801468A0;
 
-/* 55/232 aligned edits; remaining: branch layout, constant bases and scheduling. */
 /* Choose the next AI state from game objectives, supplies and the current target. */
 s32 Nav_SelectPlayerState(AiController *controller) {
     s32 nextState;
     s32 health;
-    s32 count;
+    s32 maxHealth;
+    s32 ammoCount;
     s32 capacity;
     s32 ammoType;
-    s32 threshold;
+    s32 healthThreshold;
     s32 state;
     f32 healthPercent;
     f32 ammoPercent;
@@ -35,14 +34,16 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     s32 ammo1;
     s32 ammo2;
     Player *carrier;
+    CGameStatus *gameStatus;
 
     health = controller->player->health >> 8;
-    healthPercent = (f32)health / (f32)(func_8022AC00_de(controller->player) >> 8) * 100.0f;
-    count = func_8022AB20_de(controller->player, controller->player->selectedAction);
+    maxHealth = func_8022AC00_de(controller->player) >> 8;
+    healthPercent = (f32)health / (f32)maxHealth * 100.0f;
+    ammoCount = func_8022AB20_de(controller->player, controller->player->selectedAction);
     ammoType = func_8022AAD4_de(controller->player, controller->player->selectedAction);
     capacity = func_8022ACB8_de(controller->player, ammoType, 1);
-    if (capacity != 0 && count != -1) {
-        ammoPercent = (f32)count / (f32)capacity * 100.0f;
+    if (capacity != 0 && ammoCount != -1) {
+        ammoPercent = (f32)ammoCount / (f32)capacity * 100.0f;
     } else {
         ammoPercent = 100.0f;
     }
@@ -62,12 +63,12 @@ s32 Nav_SelectPlayerState(AiController *controller) {
             return 1;
         }
     }
-    if (D_801468A0.m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
-        if (D_801468A0.restrictionActive > 0) {
+    gameStatus = &D_801468A0;
+    if (gameStatus->m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
+        if (gameStatus->restrictionActive > 0) {
             if (controller->state != 2) {
                 func_80209874_de(controller, 2);
-                controller->unk2F4 = 1;
-                controller->unk2F8 = 1;
+                return controller->unk2F8 = controller->unk2F4 = 1;
             }
             return 1;
         }
@@ -75,11 +76,11 @@ s32 Nav_SelectPlayerState(AiController *controller) {
         func_80209874_de(controller, nextState);
         return 1;
     }
-    threshold = (s32)((1.0f - func_80209B64_de(controller)) * 80.0f);
+    healthThreshold = (s32)((1.0f - func_80209B64_de(controller)) * 80.0f);
     if (D_80146938 != 0 && controller->player->profile->enabled != 0) {
-        threshold = 0;
+        healthThreshold = 0;
     }
-    if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)threshold) {
+    if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)healthThreshold) {
         controller->routeState = 1;
         nextState = 8;
         func_80209874_de(controller, nextState);
@@ -109,22 +110,20 @@ s32 Nav_SelectPlayerState(AiController *controller) {
             func_80209874_de(controller, nextState);
             return 1;
         }
-    } else if (func_80209AD8_de(controller) != 0 && (f32)threshold < healthPercent && 10.0f < ammoPercent) {
+    } else if (func_80209AD8_de(controller) != 0 && (f32)healthThreshold < healthPercent && 10.0f < ammoPercent) {
         nextState = 2;
         func_80209874_de(controller, nextState);
         return 1;
     } else if (func_80209A94_de(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
-        if (controller->player->profile->enabled != 0 && controller->player->profile->character == 12) {
-            nextState = 13;
-        } else {
-            nextState = 1;
+        if (controller->player->profile->enabled != 0) {
+            if (controller->player->profile->character == 12) {
+                func_80209874_de(controller, 13);
+                return 1;
+            }
         }
-        func_80209874_de(controller, nextState);
+        func_80209874_de(controller, 1);
         return 1;
     }
     return 1;
 
 }
-#else
-INCLUDE_ASM("span_1000", Nav_SelectPlayerState);
-#endif

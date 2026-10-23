@@ -2495,3 +2495,4 @@ literals_Anim_DecodeBoxTransform = 0x800C4A60; // rom:0xC5660 size:0x60
 literals_Audio_StartNoteVoice = 0x800C3F6C; // rom:0xC4B6C size:0xC
 literals_Texture_InitializeAudioWorker = 0x800C3EB0; // rom:0xC4AB0 size:0x18
 literals_Level_UpdateBreakableHit = 0x800C1A80; // rom:0xC2680 size:0x4
+literals_Nav_SelectPlayerState = 0x800C1F20; // rom:0xC2B20 size:0x18

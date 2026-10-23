@@ -2937,3 +2937,4 @@ literals_Audio_StartNoteVoice = 0x800C905C; // rom:0xC9C5C size:0xC
 literals_System_ExpandAnimationTracks = 0x800C91F8; // rom:0xC9DF8 size:0x4
 literals_Texture_InitializeAudioWorker = 0x800C8FA0; // rom:0xC9BA0 size:0x18
 literals_Level_UpdateBreakableHit = 0x800C6B70; // rom:0xC7770 size:0x4
+literals_Nav_SelectPlayerState = 0x800C7010; // rom:0xC7C10 size:0x18
