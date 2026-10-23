@@ -26,43 +26,59 @@ extern u8 D_801462E5;
 extern s32 D_8013B290;
 extern s32 func_8024D160_de(void *);
 
+/* Whether source may hurt target: false against itself, against a target whose hit is refused, against a stand-in
+ * (category 2) whose owner is an unattackable player or is the attacker with the 0x40 property, and so on; players
+ * (category 1) are checked by canDamage. 101 aligned edits of 144 words; remaining: the ROM keeps source in s1 and
+ * target in s0 (ours is swapped), and copies target to a1 for the owner tests. */
+static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
+    s32 allowed = 1;
+    s32 kind;
+    if (!D_801462E5) {
+        allowed = 0;
+        if (actor->team != source->team && (source->flags & 0x310000) &&
+            (!D_8013B290 || (actor->flags & 0x300000) || (source->flags & 0x300000))) {
+            switch (source->definition->kind) {
+            case 1:
+            case 4:
+            case 7:
+            case 11:
+                allowed = 1;
+                break;
+            }
+        }
+    }
+    return allowed;
+}
 s32 func_802661DC_de(DamageActor *source, DamageActor *target) {
     DamageActor *owner;
-    s32 allowed, kind;
-    if (source == target) return 0;
-    if ((source->flags & 0x300000) && !func_8024D160_de(source)) return 0;
-    if (target->category == 1) {
-        allowed = 1;
-        if (!D_801462E5) {
-            allowed = 0;
-            if (target->team != source->team && (source->flags & 0x310000) &&
-                (!D_8013B290 || (target->flags & 0x300000) || (source->flags & 0x300000))) {
-                kind = source->definition->kind;
-                if (kind == 4 || kind == 1 || kind == 7 || kind == 11) allowed = 1;
+    if (source == target) {
+        return 0;
+    }
+    if ((source->flags & 0x300000) && !func_8024D160_de(source)) {
+        return 0;
+    }
+    if (target->category != 1) {
+        if (target->category != 2) {
+            return 1;
+        }
+        owner = target->owner;
+        if (owner) {
+            if (owner->category == 1 && !canDamage(source, owner)) {
+                return 0;
+            }
+            if (source == target->owner && (*target->properties & 0x40)) {
+                return 0;
             }
         }
-        return allowed;
-    }
-    if (target->category != 2) return 1;
-    owner = target->owner;
-    if (owner) {
-        if (owner->category == 1) {
-            allowed = 1;
-            if (!D_801462E5) {
-                allowed = 0;
-                if (owner->team != source->team && (source->flags & 0x310000) &&
-                    (!D_8013B290 || (owner->flags & 0x300000) || (source->flags & 0x300000))) {
-                    kind = source->definition->kind;
-                    if (kind == 4 || kind == 1 || kind == 7 || kind == 11) allowed = 1;
-                }
-            }
-            if (!allowed) return 0;
+        if (target->kind != 0x14) {
+            return 1;
         }
-        if (source == target->owner && (*target->properties & 0x40)) return 0;
+        if (source->definition->kind == 1 && source->team == 0xCA) {
+            return 0;
+        }
+        return 1;
     }
-    if (target->kind != 0x14) return 1;
-    if (source->definition->kind == 1 && source->team == 0xCA) return 0;
-    return 1;
+    return canDamage(source, target);
 }
 #else
 INCLUDE_ASM("span_1000", func_802661DC_de);
