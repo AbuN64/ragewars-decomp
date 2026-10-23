@@ -61,7 +61,16 @@ struct View_func_8025AE1C_de {
     char pad3C[0x44 - 0x3C];
     Triple position;
     Triple *tracked;
-    u8 pad54[0x88 - 0x54];
+    s8 distanceMode; /* 0x54 */
+    u8 reserved55[0x74 - 0x55];
+    u16 volumeInitial; /* 0x74 */
+    u16 reserved76;
+    u16 volumeTarget; /* 0x78 */
+    u16 reserved7A;
+    s16 volumeDelay; /* 0x7C */
+    u8 reserved7E[2];
+    f32 volume; /* 0x80 */
+    f32 volumeStep; /* 0x84 */
     s32 sweeping; /* 0x88 */
     SoundEnvelope envelope; /* 0x8C */
     f32 value; /* 0x98 */
@@ -75,6 +84,8 @@ struct View_func_8025AE1C_de {
     char padB8[4];
     s32 followTrack;
     s32 fixed; /* 0xC0 */
+    s32 attenuate; /* 0xC4 */
+    f32 volumeScale; /* 0xC8 */
 };
 struct RecordRecAt4V6 {
     struct HeaderRecAt102 *header;

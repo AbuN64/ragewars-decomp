@@ -29,7 +29,7 @@ extern short func_8025E500_de(void *arg0);
 extern s32 func_802395A4_de(MenuMatchGlobals *, Triple *);
 extern void func_802B2D80_de(char *);
 extern void func_802B25D0_de(char *, s32);
-extern void func_8025A3CC_de(View_func_8025AE1C_de *);
+extern void Audio_UpdateVoiceVolume(View_func_8025AE1C_de *);
 extern void func_8025A844_de(View_func_8025AE1C_de *);
 extern void func_8025AB94_de(View_func_8025AE1C_de *);
 
@@ -95,7 +95,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     if (view->tracked != 0) {
         view->position = *view->tracked;
     }
-    func_8025A3CC_de(view);
+    Audio_UpdateVoiceVolume(view);
     func_8025A844_de(view);
     func_8025AB94_de(view);
 }

@@ -30,7 +30,7 @@ extern f32 D_800C3F4C_de;
 
 /* Warning: Gap in callee-saved word stack region.
  * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x30, 0x34], gap at: 0x24. */
-void func_8025A3CC_de(View_func_8025AE1C_de *arg0) {
+void Audio_UpdateVoiceVolume(View_func_8025AE1C_de *arg0) {
     ContextCode8025A3EC *temp_a0;
     ContextCode8025A3EC *temp_v1_2;
     ContextCode8025A3EC *temp_v1_7;
@@ -75,8 +75,7 @@ void func_8025A3CC_de(View_func_8025AE1C_de *arg0) {
         var_fv0f_2 = var_fv0f * temp_fv0;
     }
     D_800D0D10 = var_fv0f_2;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    temp_v1 = (*((s8 *) ((u8 *) arg0 + 84)));
+    temp_v1 = (arg0->distanceMode);
     switch (temp_v1) {                              /* irregular */
     case 2:
         var_fv0 = D_800C3F3C_de;
@@ -89,19 +88,15 @@ block_10:
     }
     temp_v1_2 = arg0->context;
     if (arg0->flags & 0x200) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        var_fs0f = *((f32 *) ((u8 *) (temp_v1_2) + 11176));
+        var_fs0f = ((ContextRecAt2BC0 *)temp_v1_2)->blue;
     } else {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        var_fs0f = *((f32 *) ((u8 *) (temp_v1_2) + 11168));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        if ((*((s32 *) ((u8 *) (arg0) + 196)) != 0) && (*((s32 *) ((u8 *) (temp_v1_2) + 11192)) != 0)) {
+        var_fs0f = ((ContextRecAt2BC0 *)temp_v1_2)->red;
+        if ((arg0->attenuate != 0) && (((ContextRecAt2BC0 *)temp_v1_2)->field2BB8 != 0)) {
             var_fs0f *= D_800C3F44_de;
         }
     }
     temp_v1_3 = arg0->flags;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    if ((temp_v1_3 & 0x400) && (*((s32 *) ((u8 *) (arg0) + 192)) == 0) && (temp_v1_4 = &arg0->frame + 0x34, ((temp_v1_3 & 0x800) == 0))) {
+    if ((temp_v1_3 & 0x400) && (arg0->fixed == 0) && (temp_v1_4 = &arg0->frame + 0x34, ((temp_v1_3 & 0x800) == 0))) {
         temp_v0 = arg0->context->result;
         temp_fv1 = *((f32 *) ((u8 *) (&arg0->frame) + 52)) - ((f32 *) temp_v0)[296 / sizeof(f32)];
         temp_v0_2 = temp_v0 + 0x128;
@@ -144,38 +139,27 @@ block_31:
     }
     temp_v1_6 = arg0->flags;
     if (temp_v1_6 & 4) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        if ((*((s16 *) ((u8 *) arg0 + 124))) > 0) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            (*((s16 *) ((u8 *) arg0 + 124))) = (u16) (*((s16 *) ((u8 *) arg0 + 124))) - 1;
+        if ((arg0->volumeDelay) > 0) {
+            (arg0->volumeDelay) = (u16) (arg0->volumeDelay) - 1;
         } else {
             var_s0 = 0;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            if ((*((f32 *) ((u8 *) arg0 + 132))) < 0.0f) {
+            if ((arg0->volumeStep) < 0.0f) {
                 var_s0 = 1;
             }
             if (var_s0 != 0) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                if ((*((f32 *) ((u8 *) arg0 + 128))) < func_802B2350((s32) (*((u16 *) ((u8 *) arg0 + 120))))) {
+                if ((arg0->volume) < func_802B2350((s32) (arg0->volumeTarget))) {
                     goto block_47;
                 }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-            } else if (func_802B2350((s32) (*((u16 *) ((u8 *) arg0 + 120)))) < (*((f32 *) ((u8 *) arg0 + 128)))) {
+            } else if (func_802B2350((s32) (arg0->volumeTarget)) < (arg0->volume)) {
 block_47:
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                (*((f32 *) ((u8 *) arg0 + 128))) -= (*((f32 *) ((u8 *) arg0 + 132)));
+                (arg0->volume) -= (arg0->volumeStep);
                 if (var_s0 != 0) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    if (func_802B2350((s32) (*((u16 *) ((u8 *) arg0 + 120)))) < (*((f32 *) ((u8 *) arg0 + 128)))) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                        (*((f32 *) ((u8 *) arg0 + 128))) = func_802B2350((s32) (*((u16 *) ((u8 *) arg0 + 120))));
+                    if (func_802B2350((s32) (arg0->volumeTarget)) < (arg0->volume)) {
+                        (arg0->volume) = func_802B2350((s32) (arg0->volumeTarget));
                     }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                } else if ((*((f32 *) ((u8 *) arg0 + 128))) < func_802B2350((s32) (*((u16 *) ((u8 *) arg0 + 120))))) {
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    temp_fv0_4 = func_802B2350((s32) (*((u16 *) ((u8 *) arg0 + 120))));
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                    (*((f32 *) ((u8 *) arg0 + 128))) = temp_fv0_4;
+                } else if ((arg0->volume) < func_802B2350((s32) (arg0->volumeTarget))) {
+                    temp_fv0_4 = func_802B2350((s32) (arg0->volumeTarget));
+                    (arg0->volume) = temp_fv0_4;
                     if (temp_fv0_4 == 0.0f) {
                         temp_a0 = arg0->context;
                         arg0->done = 1;
@@ -192,8 +176,7 @@ block_47:
                 }
             }
         }
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-        temp_ft0 = (s32) (func_802B2350((s32) *((u16 *) ((u8 *) (arg0) + 116))) * (*((f32 *) ((u8 *) arg0 + 128))));
+        temp_ft0 = (s32) (func_802B2350((s32) arg0->volumeInitial) * (arg0->volume));
         var_fv0_2 = (f32) temp_ft0 * *((f32 *) ((u8 *) (&arg0->frame) + 28));
         *((s32 *) ((u8 *) (&arg0->frame) + 8)) = temp_ft0;
     } else {
@@ -207,11 +190,10 @@ block_47:
     temp_v1_7 = arg0->context;
     temp_s1 = (void *) ((u8 *) &temp_v1_7->slots + 8);
     func_802B2F00_de(temp_s1, temp_v1_7->slots.ids[arg0->slot]);
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    func_802B2F10_de(temp_s1, (s16) (s32) ((f32) (s32) (var_fv0_2 * var_fs0f) * *((f32 *) ((u8 *) (arg0) + 200))));
+    func_802B2F10_de(temp_s1, (s16) (s32) ((f32) (s32) (var_fv0_2 * var_fs0f) * arg0->volumeScale));
 }
 #else
-INCLUDE_ASM("span_1000", func_8025A3CC_de);
+INCLUDE_ASM("span_1000", Audio_UpdateVoiceVolume);
 #endif
 
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
