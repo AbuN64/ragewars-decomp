@@ -14,7 +14,7 @@ extern s32 D_800CD708, D_800CD70C, D_800E28D8;
 extern f32 D_800C5350_de;
 extern OSViMode D_800D47B0, D_800D4530;
 extern void osViSetYScale(f32);
-extern void func_802BA6B0_de(OSViMode *);
+extern void osViSetMode(OSViMode *);
 extern void osViBlack(s32);
 extern void func_802BA700_de(s32);
 extern void func_8028EACC_de(OSSched *);
@@ -39,7 +39,7 @@ void func_8028EA40_eu(OSSched *sc) {
                 osViSetYScale(D_800C5350_de);
                 mode = &D_800D47B0;
                 if (D_800E28D8 == 0) mode = &D_800D4530;
-                func_802BA6B0_de(mode);
+                osViSetMode(mode);
                 osViBlack(1);
                 func_802BA700_de(2);
                 for (;;) {}

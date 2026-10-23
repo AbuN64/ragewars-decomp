@@ -12,7 +12,7 @@ extern char D_auto_800D3460[], D_800D4530[];
 extern f32 rodata_func_8029499C_us_800C5410;
 extern s32 D_80142CA8;
 extern void *D_auto_rodata_unresolved_800CD698[];
-extern void func_802BA6B0_de(void *);
+extern void osViSetMode(void *);
 extern void osViSetYScale(f32);
 extern void func_802BA700_de(s32);
 extern void func_802456A0_de(void);
@@ -28,7 +28,7 @@ void func_802949A0_us(char *state) {
         if (D_800E28D8 == 0) {
             label = D_800D4530;
         }
-        func_802BA6B0_de(label);
+        osViSetMode(label);
         osViSetYScale(rodata_func_8029499C_us_800C5410);
         func_802BA700_de(2);
     }

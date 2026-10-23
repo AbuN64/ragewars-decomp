@@ -21,7 +21,7 @@ extern void func_8028FC10_de(void *arg0);
 extern void *func_8025CC6C_de(void);
 extern void func_8025CBEC_de(void *arg0);
 
-extern void func_802BA6B0_de(void *arg0);
+extern void osViSetMode(void *arg0);
 extern void osViBlack(s32 arg0);
 
 
@@ -74,7 +74,7 @@ event_29a:
             if (D_800E28D8 == 0) {
                 resource = &D_800D4530;
             }
-            func_802BA6B0_de(resource);
+            osViSetMode(resource);
             osViBlack(1);
             func_802BA700_de(2);
             for (;;) {

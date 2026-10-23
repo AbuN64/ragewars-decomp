@@ -1,0 +1,17 @@
+vram	name	basis
+0x8028F8BC	osScRemoveClient	machine code
+0x802AFDFC	__setUsptFromTempo	machine code
+0x802B0310	alCopy	machine code
+0x802B03D0	alCSPNew	machine code
+0x802B3E00	alAuxBusPull	machine code
+0x802B43A4	alLoadNew	machine code
+0x802B4454	alMainBusNew	machine code
+0x802B44B0	alAuxBusNew	machine code
+0x802B4598	alSaveNew	machine code
+0x802B5300	frexp	machine code
+0x802B53E0	alFilterNew	machine code
+0x802B5400	alMainBusPull	machine code
+0x802BA310	osViGetCurrentFramebuffer	machine code
+0x802BA6B0	osViSetMode	machine code
+0x802BD378	proutSprintf	machine code
+0x802BE030	lldiv	machine code

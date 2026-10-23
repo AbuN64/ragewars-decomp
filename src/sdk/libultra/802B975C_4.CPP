@@ -401,7 +401,7 @@ f32 func_802B5288_de(f32 arg0, s32 arg1, s32 arg2, s32 arg3)
 }
 
 
-f64 func_802B5300_de(f64 arg0, s32 *arg2) {
+f64 frexp(f64 arg0, s32 *arg2) {
     f64 value;
 
     *arg2 = 0;

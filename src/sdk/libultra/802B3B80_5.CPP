@@ -27,7 +27,7 @@ void func_802AFB6C_de(void *arg0, ObjectState10_2 *arg1) {
             return;
         }
         scale = ((ObjectState4C *)(arg0))->unk_24;
-        func_802AFDFC_de(arg0,
+        __setUsptFromTempo(arg0,
                       (f32)((arg1->unk_B << 16) | (arg1->unk_C << 8) | arg1->unk_D));
         node = ((struct ObjectLinks54_2 *) ((char *) arg0))->link;
         while (node != 0) {
@@ -111,7 +111,7 @@ done:
     func_802BD170_de(saved);
 }
 
-void func_802AFDFC_de(void *arg0, f32 arg1) {
+void __setUsptFromTempo(void *arg0, f32 arg1) {
     ALSeqPlayer *player = arg0;
     ALCSeq_s *temp_v0;
 

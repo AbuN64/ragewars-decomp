@@ -111,7 +111,7 @@ typedef struct ALEnvMixer ALEnvMixer;
 
 extern f64 func_802B53B4_de(f64 arg0, s32 arg1);
 
-extern f64 func_802B5300_de(f64 arg0, s32 *arg2);
+extern f64 frexp(f64 arg0, s32 *arg2);
 
 extern float D_800C770C_de;
 

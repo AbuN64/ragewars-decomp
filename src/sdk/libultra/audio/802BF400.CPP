@@ -11,7 +11,7 @@
 
 extern Field_void_4 *D_800D8440;
 
-void *func_802BA310_de(void) {
+void *osViGetCurrentFramebuffer(void) {
     void *result = func_802BCF30_de();
     void *saved = D_800D8440->value;
     __osRestoreInt(result);

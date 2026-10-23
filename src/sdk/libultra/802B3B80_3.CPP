@@ -228,7 +228,7 @@ ALMicroTime func_802AEC20_de(ALSeqPlayer *node)
             if (seqp->state == 1)
                 func_802BAC50_de(D_800C7350_de, D_800C7354_de, 295);
             seqp->target = seqp->nextEvent.msg.spseq.unk0;
-            func_802AFDFC_de(seqp, 500000.0f);
+            __setUsptFromTempo(seqp, 500000.0f);
             if (seqp->bank)
                 func_802B18E4_de(seqp, seqp->bank);
             break;

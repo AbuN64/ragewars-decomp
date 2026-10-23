@@ -54,7 +54,7 @@ void *func_8028F9AC_de(struct OSScTask_s *arg0) {
     if (f1a == D_80142C38) {
         return 0;
     }
-    v2 = func_802BA310_de();
+    v2 = osViGetCurrentFramebuffer();
     f1b = (s32)arg0->framebuffer;
     if (f1b == (s32)v2) {
         return 0;

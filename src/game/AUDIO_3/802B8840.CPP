@@ -12,13 +12,13 @@
 extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);
 
        /* alHeapDBAlloc */
-extern void func_802B4598_de(ALSave *);
+extern void alSaveNew(ALSave *);
 
                              /* alSaveNew */
-extern void func_802B44B0_de(ALAuxBus_s *, void *, s32);
+extern void alAuxBusNew(ALAuxBus_s *, void *, s32);
 
               /* alAuxBusNew */
-extern void func_802B4454_de(ALMainBus_s *, void *, s32);
+extern void alMainBusNew(ALMainBus_s *, void *, s32);
 
              /* alMainBusNew */
 extern void *func_802B64C0_de(ALSynth *, s16, ALSynConfig *, ALHeap *);
@@ -30,7 +30,7 @@ extern s32 alMainBusParam(void *, s32, void *);
 
 
                    /* alLink */
-extern void func_802B43A4_de(ALLoadFilter *, ALDMANew, ALHeap *);
+extern void alLoadNew(ALLoadFilter *, ALDMANew, ALHeap *);
 
    /* alLoadNew */
 
@@ -81,17 +81,17 @@ void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
     drvr->dma = (ALDMANew)c->dmaproc;
 
     save = func_802B0340_de(0, 0, hp, 1, sizeof(ALSave));
-    func_802B4598_de(save);
+    alSaveNew(save);
     drvr->outputFilter = (ALFilter_s14 *)save;
 
     drvr->auxBus = func_802B0340_de(0, 0, hp, 1, sizeof(ALAuxBus_s));
     drvr->maxAuxBusses = 1;
     sources = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(ALFilter_s14 *));
-    func_802B44B0_de(drvr->auxBus, sources, c->maxPVoices);
+    alAuxBusNew(drvr->auxBus, sources, c->maxPVoices);
 
     drvr->mainBus = func_802B0340_de(0, 0, hp, 1, sizeof(ALMainBus_s));
     sources = func_802B0340_de(0, 0, hp, c->maxPVoices, sizeof(ALFilter_s14 *));
-    func_802B4454_de(drvr->mainBus, sources, c->maxPVoices);
+    alMainBusNew(drvr->mainBus, sources, c->maxPVoices);
 
     if (c->fxType != 0) {
         func_802B64C0_de(drvr, 0, c, hp);
@@ -111,7 +111,7 @@ void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
         func_802B2480_de((ListLink *)pv, &drvr->pFreeList);
         pv->vvoice = 0;
 
-        func_802B43A4_de(&pv->decoder, drvr->dma, hp);
+        alLoadNew(&pv->decoder, drvr->dma, hp);
         func_802BEAA4_de(&pv->decoder, 1, 0); /* AL_FILTER_SET_SOURCE */
 
         func_802B450C_de(&pv->resampler, hp);

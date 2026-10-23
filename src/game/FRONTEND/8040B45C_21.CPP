@@ -77,7 +77,7 @@ extern s16 D_8014D500;
 extern Modep D_8014D508;
 extern Modep D_800D4530[];
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
-extern void func_802BA6B0_de(void *);
+extern void osViSetMode(void *);
 
 /* Resize the selected VI mode around its original horizontal and field
  * centres, retaining the original lower screen limits. */
@@ -119,7 +119,7 @@ void func_8040BDB8_de(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 bord
     mode->comRegs.hStart = ((u32)left << 16) | (u16)right;
     mode->fldRegs[0].vStart = ((u32)top0 << 16) | (u16)bottom0;
     mode->fldRegs[1].vStart = ((u32)top1 << 16) | (u16)bottom1;
-    func_802BA6B0_de(mode);
+    osViSetMode(mode);
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_8040BDB8_de);

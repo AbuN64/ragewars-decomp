@@ -15,7 +15,7 @@
 
 extern __OSViContext_func_802BA6B0_de *D_800D4414;
 
-void func_802BA6B0_de(OSViMode *modep) {
+void osViSetMode(OSViMode *modep) {
     register u32 saveMask = func_802BCF30_de();
 
     D_800D4414->modep = modep;

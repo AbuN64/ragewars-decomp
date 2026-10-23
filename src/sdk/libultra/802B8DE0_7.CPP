@@ -15,7 +15,7 @@ void func_802B450C_de(ALResampler_s *arg0, s32 arg1) {
     s32 result;
     f32 k;
 
-    func_802B53E0_de(arg0, &D_002B5570, &D_002B5730, 1);
+    alFilterNew(arg0, &D_002B5570, &D_002B5730, 1);
     result = func_802B0340_de(0, 0, arg1, 1, 0x20);
     k = D_800C75E0_de;
     arg0->state = (void *)result;
@@ -30,8 +30,8 @@ void func_802B450C_de(ALResampler_s *arg0, s32 arg1) {
 
 extern s32 D_002B6380;
 extern s32 D_002B6480;
-void func_802B4598_de(ALSave *arg0) {
-    func_802B53E0_de(arg0, (s32) &D_002B6380, (s32) &D_002B6480, 3);
+void alSaveNew(ALSave *arg0) {
+    alFilterNew(arg0, (s32) &D_002B6380, (s32) &D_002B6480, 3);
     arg0->dramout = 0;
     arg0->first = 1;
 }
@@ -43,7 +43,7 @@ void func_802B45DC_de(ALEnvMixer *arg0, ALHeap *arg1) {
     s32 result;
     ALEnvMixer *mixer = arg0;
 
-    func_802B53E0_de(arg0, &D_002B4730, &D_002B51B8, 4);
+    alFilterNew(arg0, &D_002B4730, &D_002B51B8, 4);
     result = func_802B0340_de(0, 0, arg1, 1, 0x50);
     mixer->state = (void *)result;
     mixer->first = 1;

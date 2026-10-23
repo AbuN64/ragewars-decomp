@@ -63,7 +63,7 @@ s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 ar
             var_v1 = 0;
         } else if ((s32)temp_s0->framebuffer == D_80142C38) {
             var_v1 = 0;
-        } else if (temp_s0->framebuffer == func_802BA310_de()) {
+        } else if (temp_s0->framebuffer == osViGetCurrentFramebuffer()) {
             var_v1 = 0;
         } else if ((s32)temp_s0->framebuffer == D_80142C30) {
             var_v1 = 0;

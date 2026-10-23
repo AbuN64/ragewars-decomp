@@ -222,7 +222,7 @@ extern void func_802AF150_de(void *rawPlayer);
 
 extern void func_802AFD00_de(void *arg0);
 
-extern void func_802AFDFC_de(void *arg0, f32 arg1);
+extern void __setUsptFromTempo(void *arg0, f32 arg1);
 
 extern f32 func_802AFE30_de(s32 arg0);
 
@@ -232,7 +232,7 @@ extern void func_802AFF30_de(s32 arg0, s32 arg1);
 
 extern void func_802AFF60_de(s32 arg0, s16 arg1);
 
-extern void func_802B0310_de(unsigned char *source, unsigned char *destination, int count);
+extern void alCopy(unsigned char *source, unsigned char *destination, int count);
 
 extern s32 func_802B15D0_de(void *arg0, s32 arg1, s32 arg2);
 

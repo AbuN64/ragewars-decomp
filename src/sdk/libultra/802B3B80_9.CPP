@@ -42,7 +42,7 @@ s32 func_802B003C_de(void *arg0, s16 *arg1) {
     node = ((ALEventQueue *)arg0)->allocList.next;
     if (node != 0) {
         func_802B2450_de(node);
-        ((void (*)(void *, void *, s32))func_802B0310_de)(&((ALEventListItem *)node)->evt, arg1, 0x10);
+        ((void (*)(void *, void *, s32))alCopy)(&((ALEventListItem *)node)->evt, arg1, 0x10);
         func_802B2480_de(node, arg0);
         result = ((ALEventListItem *)node)->delta;
     } else {
@@ -73,7 +73,7 @@ void func_802B00D4_de(ALEventQueue *evtq, ALEvent *evt, s32 delta)
     }
 
     func_802B2450_de((ListLink *)item);
-    ((void (*)(void *, void *, s32))func_802B0310_de)(evt, &item->evt, sizeof(*evt));
+    ((void (*)(void *, void *, s32))alCopy)(evt, &item->evt, sizeof(*evt));
 
     if (delta == 0x7FFFFFFF)
         postAtEnd = -1;

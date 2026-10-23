@@ -30,7 +30,7 @@ void osScAddClient(OSSched *arg0, OSScClientWork *arg1, OSMesgQueue *arg2) {
     func_802BD170_de(temp_v0);
 }
 
-void func_8028F8BC_de(OSSched *arg0, void *arg1) {
+void osScRemoveClient(OSSched *arg0, void *arg1) {
     s32 saved;
     OSScClientWork *cur;
     OSScClientWork *prev;

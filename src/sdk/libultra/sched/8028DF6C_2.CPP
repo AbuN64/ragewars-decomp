@@ -15,7 +15,7 @@ extern s32 D_800CD708, D_800CD70C, D_800E28D8;
 extern f32 D_800C5350_de;
 extern char D_800D47B0[], D_800D4530[];
 extern void osViSetYScale(f32);
-extern void func_802BA6B0_de(void *);
+extern void osViSetMode(void *);
 extern void osViBlack(s32);
 extern void func_802BA700_de(s32);
 extern void func_8028EACC_de(OSSched *);

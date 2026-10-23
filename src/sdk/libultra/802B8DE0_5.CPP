@@ -81,7 +81,7 @@ void func_802B3F10_de(ALFx *r, ALSynConfig *c, ALHeap *hp)
     ALFilter_s14 *f = &r->filter;
     ALDelay28 *d;
 
-    func_802B53E0_de(f, 0, (s32)&D_002B60D8, 5);
+    alFilterNew(f, 0, (s32)&D_002B60D8, 5);
     f->handler = &D_002B57F0;
     r->paramHdl = &D_002B5B94;
 
@@ -175,8 +175,8 @@ void func_802B3F10_de(ALFx *r, ALSynConfig *c, ALHeap *hp)
     }
 }
 
-void func_802B43A4_de(void *arg0, FuncPtr arg1, s32 arg2) {
-    func_802B53E0_de(arg0, &D_002BE0D0, &D_002BEAA4, 0);
+void alLoadNew(void *arg0, FuncPtr arg1, s32 arg2) {
+    alFilterNew(arg0, &D_002BE0D0, &D_002BEAA4, 0);
     ((ALLoadFilter48_2 *)arg0)->state = func_802B0340_de(0, 0, arg2, 1, 0x20);
     ((ALLoadFilter48_2 *)arg0)->lstate = func_802B0340_de(0, 0, arg2, 1, 0x20);
     ((ALLoadFilter48_2 *)arg0)->dma = arg1(&((ALLoadFilter48_2 *)arg0)->dmaState);

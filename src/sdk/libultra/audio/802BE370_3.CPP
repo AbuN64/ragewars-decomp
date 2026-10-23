@@ -326,7 +326,7 @@ s32 func_802BEAA4_de(void *filter, s32 paramID, struct ALWaveTable_s *param)
                         a->loop.start = a->table->waveInfo.adpcmWave.loop->start;
                         a->loop.end = a->table->waveInfo.adpcmWave.loop->end;
                         a->loop.count = a->table->waveInfo.adpcmWave.loop->count;
-                        ((void (*)(void *, void *, s32))func_802B0310_de)(a->table->waveInfo.adpcmWave.loop->state,
+                        ((void (*)(void *, void *, s32))alCopy)(a->table->waveInfo.adpcmWave.loop->state,
                                       a->lstate, sizeof(ADPCM_STATE));
                     } else {
                         a->loop.start = a->loop.end = a->loop.count = 0;

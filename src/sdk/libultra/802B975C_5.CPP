@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ALPARAM_S.H"
 
-void func_802B53E0_de(void *arg0, void *arg1, void *arg2, int arg3) {
+void alFilterNew(void *arg0, void *arg1, void *arg2, int arg3) {
     struct ALFilter_s *filter = arg0;
     filter->source = 0;
     filter->handler = arg1;

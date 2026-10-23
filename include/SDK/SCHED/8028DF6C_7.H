@@ -5,7 +5,7 @@ extern void osScAddClient(OSSched *, OSScClientWork *, OSMesgQueue *);
 extern OSSched D_80142928;
 extern OSMesgQueue D_801428C0;
 extern OSScClientWork D_80146CC0;
-extern void func_8028F8BC_de(struct OSSched *arg0, void *arg1);
+extern void osScRemoveClient(struct OSSched *arg0, void *arg1);
 extern int func_8028FD44_de(int arg0);
 extern void *func_8028F9AC_de(struct OSScTask_s *arg0);
 extern void *func_8028F94C_de(void *object);
