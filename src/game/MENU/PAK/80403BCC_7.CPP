@@ -15,7 +15,7 @@ extern int D_800E2854;
 
 extern int *D_800DE808;
 
-extern void func_80263740_de(void);
+extern void Render_ReadControllerStates(void);
 
 extern u8 D_8010BBB8;
 
@@ -60,7 +60,7 @@ void func_80404E28_de(s32 kind)
     s32 ready;
 
     ((void (*)(s32))func_802644FC_de)(1);
-    func_80263740_de();
+    Render_ReadControllerStates();
     D_8010BBB8 = 2;
 
     cur = D_80153330 + kind * 112;

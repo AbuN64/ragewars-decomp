@@ -225,9 +225,9 @@ struct ObjectState224 {
 
 extern void func_80264404_de();
 
-extern f32 func_802856E0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+extern f32 Render_GetSpatialEffectLevel(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
-extern void func_80263740_de(void);
+extern void Render_ReadControllerStates(void);
 extern void func_802644A8_de(void *arg0);
 extern s32 func_802A23A4_de(void);
 

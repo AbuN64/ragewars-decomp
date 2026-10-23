@@ -57,7 +57,7 @@ void func_80264248_de(ControllerProfile *arg0) {
         if (func_802BB2A0_de(&D_8010FBC0, 0, 1) == 0) {
             D_800CBC1C = func_802BAD80_de(0);
         }
-        func_80263740_de();
+        Render_ReadControllerStates();
         D_8010BBB8 = 2;
         ((Obj80264124 *)o)->state = 0;
         ((Obj80264124 *)o)->amount = 0;

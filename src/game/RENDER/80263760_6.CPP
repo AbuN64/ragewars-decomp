@@ -49,8 +49,8 @@ reset:
         } else {
             object = arg0->object;
             func_80285C78_de(object);
-            first = func_802856E0_de(&D_8010EC90, arg0->x, arg0->y, arg0->z);
-            arg0->amount = first + func_802856E0_de(object, zero.x, zero.y, zero.z);
+            first = Render_GetSpatialEffectLevel(&D_8010EC90, arg0->x, arg0->y, arg0->z);
+            arg0->amount = first + Render_GetSpatialEffectLevel(object, zero.x, zero.y, zero.z);
         }
         if (arg0->active != 0) {
             if (arg0->amount != 0.0f) {

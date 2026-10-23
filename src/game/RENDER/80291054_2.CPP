@@ -369,7 +369,7 @@ extern s32 D_800D297C;
 extern s32 D_800E28D0;
 extern s32 D_800E28D4;
 
-f32 func_802917D8_de(void *world) {
+f32 Render_BeginFrameDisplayList(void *world) {
     UnitVp *viewport;
     s32 height;
     s32 width;
@@ -399,7 +399,7 @@ f32 func_802917D8_de(void *world) {
     return bottom;
 }
 #else
-INCLUDE_ASM("span_1000", func_802917D8_de);
+INCLUDE_ASM("span_1000", Render_BeginFrameDisplayList);
 #endif
 
 #ifdef NON_MATCHING
@@ -411,7 +411,7 @@ extern void osWritebackDCacheAll(void);
 extern void func_8028FD4C_de(void *, OSScTask_s *);
 /* Fills the frame's graphics task (and the second one when the frame is dual), hands them to the scheduler,
    then advances the ring and gives the next frame the other pair of command buffers. */
-void func_8029192C_de(Display *display, Frame *frame)
+void Render_SubmitFrameTasks(Display *display, Frame *frame)
 {
     OSScTask_s *task;
     s32 size;
@@ -479,5 +479,5 @@ void func_8029192C_de(Display *display, Frame *frame)
     else display->current->secondCommands = D_8014D42C;
 }
 #else
-INCLUDE_ASM("span_1000", func_8029192C_de);
+INCLUDE_ASM("span_1000", Render_SubmitFrameTasks);
 #endif

@@ -124,7 +124,7 @@ typedef struct FadeState {
 } FadeState;
 /* Steps the fade timer of a screen state by a step that depends on the direction flag: mode 1 raises it until
  * it reaches the limit, mode 2 lowers it to zero (or below) and then switches to the next screen. */
-void func_802935C0_de(FadeState *state) {
+void Render_UpdateFadeTransition(FadeState *state) {
     f32 step;
     f32 timer;
     if (state->mode == 0) {
@@ -168,5 +168,5 @@ void func_802935C0_de(FadeState *state) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_802935C0_de);
+INCLUDE_ASM("span_1000", Render_UpdateFadeTransition);
 #endif

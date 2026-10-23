@@ -9,7 +9,7 @@
 #include "sdk/os.h"
 
 #if !(defined(VERSION_EU)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80263740_de);
+INCLUDE_ASM("span_1000", Render_ReadControllerStates);
 #endif
 #if defined(VERSION_EU)
 INCLUDE_ASM("span_1000", func_80263704);
@@ -42,7 +42,7 @@ void func_80263AF4_de(void) {
             D_800CBC1C = func_802BAD80_de(0);
         }
         if (locked) {
-            func_80263740_de();
+            Render_ReadControllerStates();
             for (i = 0; i < 4; i++) {
                 func_80264104_de(&D_8010F328[i]);
             }
@@ -237,7 +237,7 @@ extern ContPad D_8010AEA0[4];
 extern float D_800C42F0_de;
 extern void func_802B7538_de(void *);
 extern void func_802B7740_de(void *, void *);
-void func_80263740_de(void) {
+void Render_ReadControllerStates(void) {
     PadSummary8026374 *summary;
     PadSummary8026374 *states;
     s32 i;

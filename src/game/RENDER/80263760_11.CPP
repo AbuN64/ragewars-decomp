@@ -47,7 +47,7 @@ static inline u32 predictor_bits(void) {
  * per 6-bit descriptor), integrated into a running sample clamped to 16 bits.
  * 63 aligned edits of 148 words; remaining: the ROM keeps the -8 sign-fill constant in a loop-hoisted register (so the
  * s16 extension survives) and allocates s0-s2 for hoisted constants; ours folds the extension and uses no s1/s2. */
-void func_80264F60_de(s32 destination, s32 count) {
+void Render_DecodeThreeBitSamples(s32 destination, s32 count) {
     s16 *out = (s16 *)destination;
     s32 previous = 0;
     s32 older = 0;
@@ -84,7 +84,7 @@ void func_80264F60_de(s32 destination, s32 count) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80264F60_de);
+INCLUDE_ASM("span_1000", Render_DecodeThreeBitSamples);
 #endif
 
 #include "TYPES.H"
@@ -93,7 +93,7 @@ INCLUDE_ASM("span_1000", func_80264F60_de);
 
 extern u32 D_8010C070;
 extern u32 D_8010C07C;
-extern void func_80264F60_de(s32 samples, s32 count);
+extern void Render_DecodeThreeBitSamples(s32 samples, s32 count);
 
 /* Initializes the packed control and sample bit streams, then decodes each output channel. */
 s32 func_802651B0_de(s32 destinations, void *encoded, s32 channel_count) {
@@ -132,7 +132,7 @@ s32 func_802651B0_de(s32 destinations, void *encoded, s32 channel_count) {
         D_8010C078 = cursor;
         tail <<= 24;
         D_8010C070 |= tail;
-        func_80264F60_de(channels[i], sample_count);
+        Render_DecodeThreeBitSamples(channels[i], sample_count);
     }
     return sample_count;
 }

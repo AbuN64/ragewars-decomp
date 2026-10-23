@@ -33,7 +33,7 @@
 extern void func_80236874_de(RaceViewportState *);
 extern void func_8029311C_de(void *, u8 *, s32,s32,s32,s32);
 extern void func_80291BE8_de(void *, s32,s32,s32,s32,s32);
-extern void func_8029192C_de(TimingWorld *,Frame *);
+extern void Render_SubmitFrameTasks(TimingWorld *,Frame *);
 static __inline__ s32 hasFadeMode(u8 *mode) { return *mode != 0; }
 void func_80292308_de(TimingWorld *world) {
     u8 color[4];
@@ -63,7 +63,7 @@ void func_80292308_de(TimingWorld *world) {
     func_802539EC_de(0, D_800D297C);
     func_80295FF4_de();
     func_8026D844_de();
-    func_802917D8_de(world);
+    Render_BeginFrameDisplayList(world);
     func_80265DD0_de();
     func_80263C24_de();
     func_80236874_de(&world->viewport);
@@ -120,7 +120,7 @@ void func_80292308_de(TimingWorld *world) {
     elapsed = (f32)duration;
     rwFrameBuildSeconds = elapsed * D_800C5450_de;
     if (func_80253AD4_de(0) != 0) {
-        func_8029192C_de(world, D_80146CD8);
+        Render_SubmitFrameTasks(world, D_80146CD8);
     } else {
         func_802BB420_de(&D_801428C0, &D_80146CD8->done, 1);
     }

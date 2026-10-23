@@ -24,7 +24,7 @@ extern u8 D_8010BBB8;
 
 extern u8 D_800DE80C[];
 
-extern void func_80263740_de(void);
+extern void Render_ReadControllerStates(void);
 
 extern void func_8026454C_de(void);
 
@@ -124,7 +124,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     handle = func_8025343C_de(0, blocks, 0x23, D_800DCCD0);
     buf = *handle;
     ((void (*)(s32))func_802644FC_de)(1);
-    func_80263740_de();
+    Render_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;
     if (result == 0) {
@@ -174,7 +174,7 @@ s32 Pak_DeleteNote(s32 ch, s32 index) {
         return -2;
     }
     ((void (*)(s32))func_802644FC_de)(1);
-    func_80263740_de();
+    Render_ReadControllerStates();
     result = D_80153500[ch];
     D_8010BBB8 = 2;
     if (result == 0) {

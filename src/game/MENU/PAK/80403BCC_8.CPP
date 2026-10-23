@@ -26,7 +26,7 @@ extern void func_8025476C_de(s32);
 
 extern s32 func_8025477C_de(void);
 
-extern void func_80263740_de(void);
+extern void Render_ReadControllerStates(void);
 
 extern void func_8026454C_de(void);
 
@@ -42,7 +42,7 @@ extern s32 func_80447AF0_de(Device *, s32, s32, s32, s32, s32);
 
 
 /* Refreshes a controller slot and resolves its pending device state. */
-void func_80263740_de();
+void Render_ReadControllerStates();
 
  /* extern */
  /* extern */
@@ -110,7 +110,7 @@ s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
   buf = func_8025343C_de(0, size, 0x23, D_800DCCD0);
   addr = *buf;
   ((void (*)(s32))func_802644FC_de)(1);
-  func_80263740_de();
+  Render_ReadControllerStates();
   result = D_80153500[slot];
   D_8010BBB8 = 2;
   if (result == 0)
@@ -172,7 +172,7 @@ s32 func_804051D4_de(s32 arg0) {
         return -2;
     }
     ((void (*)(s32))func_802644FC_de)(1);
-    func_80263740_de();
+    Render_ReadControllerStates();
     var_s0 = D_80153500[arg0];
     D_8010BBB8 = 2;
     if (var_s0 == -4) {
@@ -192,7 +192,7 @@ s32 func_80405290_de(s32 arg0) {
         return -2;
     }
     ((void (*)(s32))func_802644FC_de)(1);
-    func_80263740_de();
+    Render_ReadControllerStates();
     D_8010BBB8 = 2;
     var_s0 = func_80447F30_de(&D_8014D280[arg0]);
     if (var_s0 != 0) {
