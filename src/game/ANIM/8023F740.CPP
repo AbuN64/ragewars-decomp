@@ -243,7 +243,7 @@ void func_80240260_de(u8 *self) {
         candidate = list[i].object;
         if ((AN_FIELD(candidate, u32, 0x100) & 0x300000) && D_801462C8[0x1D] == 0) {
             func_8023F644_de(self, scratch);
-            func_8023EF00_de(self, scratch, candidate);
+            Anim_TestEntityContact(self, scratch, candidate);
         } else {
             func_8023FD18_de(self, candidate, owner + 8, self + 0x84);
         }

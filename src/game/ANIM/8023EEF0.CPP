@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/LEVEL_ACTOR.H"
 #include "include_asm.h"
 #include "COMMON/UNUSED.H"
 #include "COMMON/MOTION_STEP.H"
@@ -8,142 +9,140 @@
 
 #if !(defined(VERSION_EU))
 #ifdef NON_MATCHING
-#define HIT_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-typedef struct HitEventCopy { u8 bytes[0xDC]; } HitEventCopy;
-typedef struct HitPoint { f32 x; f32 y; f32 z; } HitPoint;
-extern f32 D_800C36E0_de, D_800C36E4_de;
-extern f32 func_8024D398_de();
-extern f32 func_8024E420_de();
-extern f32 Particle_GetActorHeight();
-extern void func_80242550_de();
-extern void func_80242288_de();
-extern s32 func_802AB400_de();
-extern void func_80271FC8_de();
-extern void func_8023E8D4_de();
-extern void func_8023E178_de();
-void func_8023EF00_de(void *selfArg, struct Query *boundsArg, u8 *obj) {
-    u8 *self = selfArg;
-    u8 *bounds = boundsArg;
-    u8 event[0xDC];
-    HitPoint point;
-    f32 box[4];
-    u8 *owner;
-    u8 *config;
-    f32 objX = HIT_FIELD(obj, f32, 8);
-    f32 objZ = HIT_FIELD(obj, f32, 0x10);
+extern f32 func_8024D398_de(void *);
+extern f32 func_8024E420_de(void *);
+extern f32 Particle_GetActorHeight(void *);
+extern void func_80242550_de(void *, void *);
+extern void func_80242288_de(void *, void *);
+extern s32 func_802AB400_de(void *, void *);
+extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
+extern s32 func_8023E8D4_de(void *, void *, s32);
+extern s32 func_8023E178_de(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
+/* NON_MATCHING: hand C from us-rev1 8023EEF0..8023F42C.
+ * The query is read-only (0x30 bytes); contact storage is local (0xDC).
+ * Floor/ceiling crossings use opposite signed height tests. Their normal
+ * constants are -1/+1 in all five ROMs (us-rev1 ROM 0xC93D0/0xC93D4). */
+void Anim_TestEntityContact(void *motionAddress, struct Query *sweep, u8 *entityAddress) {
+    ActorMotion *motion = motionAddress;
+    LevelActor *entity = (LevelActor *)entityAddress;
+    LevelActor *owner;
+    MotionSurface *surface;
+    BoxContactPolygon contact;
+    CVector3 point;
+    f32 minimumX;
+    f32 maximumX;
+    f32 minimumZ;
+    f32 maximumZ;
     f32 radius;
     f32 bottom;
     f32 top;
     f32 ownerX;
     f32 ownerZ;
-    f32 t;
-    f32 dx;
-    f32 dz;
+    f32 time;
+    f32 deltaX;
+    f32 deltaZ;
     f32 reach;
     s32 special = 0;
-    s32 kind;
-    radius = func_8024D398_de(obj);
-    box[0] = objX - radius;
-    box[1] = objZ - radius;
-    box[2] = objX + radius;
-    box[3] = objZ + radius;
-    if (!(box[0] < HIT_FIELD(bounds, f32, 0x24) && HIT_FIELD(bounds, f32, 0x1C) < box[2] &&
-          box[1] < HIT_FIELD(bounds, f32, 0x28) && HIT_FIELD(bounds, f32, 0x20) < box[3])) {
+
+    radius = func_8024D398_de(entity);
+    minimumX = entity->position0.x - radius;
+    maximumX = entity->position0.x + radius;
+    minimumZ = entity->position0.z - radius;
+    maximumZ = entity->position0.z + radius;
+    if (!(minimumX < sweep->maxX && sweep->minX < maximumX &&
+          minimumZ < sweep->maxZ && sweep->minZ < maximumZ)) {
         return;
     }
-    owner = HIT_FIELD(self, u8 *, 0);
-    config = HIT_FIELD(self, u8 *, 0x40);
-    if (HIT_FIELD(owner, u8, 0) == 1 && HIT_FIELD(HIT_FIELD(owner, u8 *, 0x18), s32, 0) == 2) {
-        if (HIT_FIELD(obj, u8, 0) == HIT_FIELD(owner, u8, 0)) {
-            func_80242550_de(self, obj);
+    owner = motion->actor;
+    surface = motion->surface;
+    if (owner->kind == 1 && owner->definition->kind == 2) {
+        if (entity->kind == owner->kind) {
+            func_80242550_de(motion, entity);
         }
         return;
     }
-    if (HIT_FIELD(obj, u8, 0) == 1 && HIT_FIELD(HIT_FIELD(obj, u8 *, 0x18), s32, 0) == 2) {
-        if (HIT_FIELD(owner, u8, 0) == HIT_FIELD(obj, u8, 0)) {
-            func_80242288_de(self, obj);
+    if (entity->kind == 1 && entity->definition->kind == 2) {
+        if (owner->kind == entity->kind) {
+            func_80242288_de(motion, entity);
         }
         return;
     }
-    if (HIT_FIELD(obj, u8, 0) == 3) {
-        if (func_802AB400_de(obj, owner) == 0) {
+    if (entity->kind == 3) {
+        if (func_802AB400_de(entity, owner) == 0) {
             return;
         }
         special = 1;
     }
-    HIT_FIELD(event, s32, 0) = 7;
-    HIT_FIELD(event, s32, 4) = 0;
-    HIT_FIELD(event, s32, 0xC) = 0;
-    HIT_FIELD(event, s32, 0x10) = 0;
-    HIT_FIELD(event, s32, 0x14) = 1;
-    HIT_FIELD(event, u8 *, 0x54) = obj;
-    HIT_FIELD(event, s32, 0x58) = -1;
-    bottom = HIT_FIELD(obj, f32, 0xC) + func_8024E420_de(obj);
-    top = bottom + Particle_GetActorHeight(obj);
-    if (HIT_FIELD(bounds, s32, 0x2C) != 0) {
-        HIT_FIELD(bounds, f32, 0x48) = 0;
-    }
-    ownerX = HIT_FIELD(owner, f32, 8);
-    ownerZ = HIT_FIELD(owner, f32, 0x10);
-    reach = HIT_FIELD(bounds, f32, 0) + radius;
-    if (HIT_FIELD(bounds, s32, 0x2C) != 0 && HIT_FIELD(self, f32, 0x60) != 0.0f) {
-        if (HIT_FIELD(bounds, f32, 0xC) <= bottom && bottom < HIT_FIELD(bounds, f32, 0x14)) {
-            t = (bottom - HIT_FIELD(bounds, f32, 0xC)) / HIT_FIELD(self, f32, 0x60);
-            if (t < HIT_FIELD(self, f32, 0x17C)) {
-                func_80271FC8_de(&point, t, owner + 8, self + 0x50);
-                dx = objX - point.x;
-                dz = objZ - point.z;
-                if (dx * dx + dz * dz < reach * reach) {
-                    HIT_FIELD(event, s32, 8) = 7;
-                    HIT_FIELD(event, HitPoint, 0x18) = point;
-                    HIT_FIELD(event, s32, 0x48) = 0;
-                    HIT_FIELD(event, s32, 0x50) = 0;
-                    HIT_FIELD(event, f32, 0x4C) = D_800C36E0_de;
-                    func_8023E8D4_de(self, event, 1);
+    contact.type = 7;
+    contact.response = 0.0f;
+    contact.count = 0;
+    contact.flags = 0;
+    contact.valid = 1;
+    contact.actor = (BoxContactActor *)entity;
+    contact.index = -1;
+    bottom = entity->position0.y + func_8024E420_de(entity);
+    top = bottom + Particle_GetActorHeight(entity);
+    ownerX = owner->position0.x;
+    ownerZ = owner->position0.z;
+    reach = sweep->radius + radius;
+    if (sweep->flag != 0 && motion->velocity.y != 0.0f) {
+        if (sweep->top1 <= bottom && bottom < sweep->top2) {
+            time = (bottom - sweep->top1) / motion->velocity.y;
+            if (time < motion->blend) {
+                func_80271FC8_de(&point, time, &owner->position0, &motion->end);
+                deltaX = entity->position0.x - point.x;
+                deltaZ = entity->position0.z - point.z;
+                if (deltaX * deltaX + deltaZ * deltaZ < reach * reach) {
+                    contact.kind = 7;
+                    contact.point = point;
+                    contact.normal.x = 0.0f;
+                    contact.normal.z = 0.0f;
+                    contact.normal.y = -1.0f;
+                    func_8023E8D4_de(motion, &contact, 1);
                 }
             }
         }
-        if (HIT_FIELD(bounds, f32, 0x10) <= top && top < HIT_FIELD(bounds, f32, 0x18)) {
-            t = (top - HIT_FIELD(bounds, f32, 0x10)) / HIT_FIELD(self, f32, 0x60);
-            if (t < HIT_FIELD(self, f32, 0x17C)) {
-                func_80271FC8_de(&point, t, owner + 8, self + 0x50);
-                dx = objX - point.x;
-                dz = objZ - point.z;
-                if (dx * dx + dz * dz < reach * reach) {
-                    kind = HIT_FIELD(config, s8, 4);
-                    if (kind == 1) {
-                        HIT_FIELD(event, s32, 8) = kind;
+        if (top <= sweep->bottom1 && sweep->bottom2 < top) {
+            time = (top - sweep->bottom1) / motion->velocity.y;
+            if (time < motion->blend) {
+                func_80271FC8_de(&point, time, &owner->position0, &motion->end);
+                deltaX = entity->position0.x - point.x;
+                deltaZ = entity->position0.z - point.z;
+                if (deltaX * deltaX + deltaZ * deltaZ < reach * reach) {
+                    if (surface->enabled == 1) {
+                        contact.kind = 1;
                     } else {
-                        HIT_FIELD(event, s32, 8) = (HIT_FIELD(HIT_FIELD(obj, u8 *, 0x18), u32, 4) & 0x80) ? 2 : 7;
+                        contact.kind = entity->definition->gate & 0x80 ? 2 : 7;
                     }
-                    HIT_FIELD(event, HitPoint, 0x18) = point;
-                    HIT_FIELD(event, s32, 0x48) = 0;
-                    HIT_FIELD(event, s32, 0x50) = 0;
-                    HIT_FIELD(event, f32, 0x4C) = D_800C36E4_de;
-                    func_8023E8D4_de(self, event, 1);
+                    contact.point = point;
+                    contact.normal.x = 0.0f;
+                    contact.normal.z = 0.0f;
+                    contact.normal.y = 1.0f;
+                    func_8023E8D4_de(motion, &contact, 1);
                 }
             }
         }
     }
-    if (special != 0) {
-        HIT_FIELD(event, s32, 8) = 7;
-    } else {
-        HIT_FIELD(event, s32, 8) = HIT_FIELD(config, s8, 4);
-    }
-    func_8023E178_de(self, obj + 8, radius, top - HIT_FIELD(bounds, f32, 4), bottom - HIT_FIELD(bounds, f32, 8), 1, event, 1);
-    if (special != 0 && HIT_FIELD(self, u8 *, 0x104) != obj && HIT_FIELD(bounds, f32, 0x10) <= top && bottom < HIT_FIELD(bounds, f32, 0xC)) {
-        dx = objX - ownerX;
-        dz = objZ - ownerZ;
-        if (dx * dx + dz * dz < reach * reach) {
-            HIT_FIELD(event, s32, 0x48) = 0;
-            HIT_FIELD(event, s32, 0x4C) = 0;
-            HIT_FIELD(event, s32, 0x50) = 0;
-            *(HitEventCopy *)(self + 0xB0) = *(HitEventCopy *)event;
+    contact.kind = special != 0 ? 7 : surface->enabled;
+    func_8023E178_de(motion, &entity->position0, reach,
+                    top - sweep->bottom, bottom - sweep->top, 1, &contact, 1);
+    if (special != 0 && *(LevelActor **)((u8 *)motion + 0x104) != entity &&
+        sweep->bottom1 <= top && bottom < sweep->top1) {
+        deltaX = entity->position0.x - ownerX;
+        deltaZ = entity->position0.z - ownerZ;
+        if (deltaX * deltaX + deltaZ * deltaZ < reach * reach) {
+            contact.normal.x = 0.0f;
+            contact.normal.y = 0.0f;
+            contact.normal.z = 0.0f;
+            contact.t = 0.0f;
+            contact.hit = motion->start;
+            *(BoxContactPolygon *)&motion->collisionState = contact;
         }
     }
 }
+
 #else
-INCLUDE_ASM("span_1000", func_8023EF00_de);
+INCLUDE_ASM("span_1000", Anim_TestEntityContact);
 #endif
 #endif
 #if defined(VERSION_EU)
@@ -154,7 +153,7 @@ typedef struct Query Query;
 /* Queries the registered entities an object may collide with: when the object's shape is enabled and is
  * not the null shape, a query holds the object's radius, its vertical span and that span offset by the
  * shape heights at 0x48 and 0x54, its horizontal bounds widened by the radius and the shape's 0x400 flag;
- * then func_8023EF00_de is run for every entity other than the object itself, except type 1 entities without
+ * then Anim_TestEntityContact is run for every entity other than the object itself, except type 1 entities without
  * a body at 0x174 when the shape is flagged 1 and type 3 entities when the shape is not flagged 0x20. */
 
 
@@ -164,7 +163,7 @@ typedef struct Query Query;
 
 
 extern Shape D_80100170;
-extern void func_8023EF00_de(void *, Query *, u8 *);
+extern void Anim_TestEntityContact(void *, Query *, u8 *);
 
 
 
@@ -239,7 +238,7 @@ void func_8023F43C_de(char *obj) {
             }
             break;
         }
-        func_8023EF00_de(obj, &query, entity);
+        Anim_TestEntityContact(obj, &query, entity);
     }
 }
 
