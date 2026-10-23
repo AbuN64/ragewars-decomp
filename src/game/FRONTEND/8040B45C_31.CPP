@@ -363,7 +363,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     }
 }
 
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "TYPES.H"
@@ -394,80 +394,84 @@ extern s32 func_80299838_de(s32);
 extern void func_802A18FC_de(void);
 extern void func_802A18F4_de(void);
 
-void func_8040DB04_de(DraftWidget *widget, DrawArgs args) {
-    switch (widget->type) {
-    case 1: {
-        DrawArgs local;
-        struct Shape_typemap_165 box;
-        struct Shape_typemap_165 area;
-        struct Shape_typemap_165 saved;
-        struct Shape_typemap_165 clip;
-        s32 clipped;
-        local = args;
-        clipped = 0;
-        if (func_8040E0D4_de(&area, &box, widget, &local)) {
-            if (widget->flags & 0x200) {
-                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
-                clip = saved;
-                if (!func_8040F488_de(&clip, &box)) return;
-                clipped = 1;
-                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
-            }
-            func_8040E7FC_de(widget->child, local);
-            if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
-        }
-        break;
-    }
-    case 2: {
-        DrawArgs local;
-        struct Shape_typemap_165 box;
-        struct Shape_typemap_165 saved;
-        struct Shape_typemap_165 clip;
-        struct Shape_typemap_165 area;
-        s32 clipped;
-        local = args;
-        clipped = 0;
-        D_800E2AB8 = 0;
-        if (func_8040E0D4_de(&area, &box, widget, &local)) {
-            if (widget->flags & 0x200) {
-                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
-                clip = saved;
-                if (!func_8040F488_de(&clip, &box)) return;
-                clipped = 1;
-                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
-            }
-            func_8040E7FC_de(widget->child, local);
-            if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
-        }
-        break;
-    }
-    case 3:
-        func_8040CD50_de((Widget_func_8040CD50_de *)widget, args);
-        break;
-    case 4:
-        func_8040D2D0_de((TextWidget *)widget, args);
-        break;
-    case 6:
-        func_8040CF8C_de((WidgetLayout *)widget, args);
-        break;
-    case 8: {
-        DrawArgs local;
+void Frontend_DrawWidget(DraftWidget *, DrawArgs);
+static inline void drawWidgetChoice(DraftWidget *widget, DrawArgs args) {
         struct Shape_typemap_165 area;
         struct Shape_typemap_165 box;
         DraftWidget *child;
-        local = args;
-        if (func_8040E0D4_de(&area, &box, widget, &local)) {
-            if (local.flags & 0x100) child = widget->disabled;
-            else if (local.flags & 0x40) child = widget->selected;
+        if (func_8040E0D4_de(&area, &box, widget, &args)) {
+            if (args.flags & 0x100) child = widget->disabled;
+            else if (args.flags & 0x40) child = widget->selected;
             else child = widget->normal;
             if (child) {
-                local.x -= (s32)(child->x * local.scaleX);
-                local.y -= (s32)(child->y * local.scaleY);
-                func_8040DB04_de(child, local);
+                args.x -= (s32)(child->x * args.scaleX);
+                args.y -= (s32)(child->y * args.scaleY);
+                Frontend_DrawWidget(child, args);
             }
         }
+}
+
+static inline void drawWidgetResetGroup(DraftWidget *widget, DrawArgs args) {
+        struct Shape_typemap_165 box;
+        struct Shape_typemap_165 saved;
+        struct Shape_typemap_165 clip;
+        struct Shape_typemap_165 area;
+        s32 clipped;
+        clipped = 0;
+        D_800E2AB8 = 0;
+        if (func_8040E0D4_de(&area, &box, widget, &args)) {
+            if (widget->flags & 0x200) {
+                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                clip = saved;
+                if (!func_8040F488_de(&clip, &box)) return;
+                clipped = 1;
+                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+            }
+            func_8040E7FC_de(widget->child, args);
+            if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+        }
+}
+
+static inline void drawWidgetGroup(DraftWidget *widget, DrawArgs args) {
+        struct Shape_typemap_165 box;
+        struct Shape_typemap_165 area;
+        struct Shape_typemap_165 saved;
+        struct Shape_typemap_165 clip;
+        s32 clipped;
+        clipped = 0;
+        if (func_8040E0D4_de(&area, &box, widget, &args)) {
+            if (widget->flags & 0x200) {
+                func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
+                clip = saved;
+                if (!func_8040F488_de(&clip, &box)) return;
+                clipped = 1;
+                func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
+            }
+            func_8040E7FC_de(widget->child, args);
+            if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
+        }
+}
+
+void Frontend_DrawWidget(DraftWidget *widget, DrawArgs args) {
+    switch (widget->type) {
+    case 3:
+        func_8040CD50_de((void *)widget, args);
         break;
-    }
+    case 4:
+        func_8040D2D0_de((void *)widget, args);
+        break;
+    case 6:
+        func_8040CF8C_de((void *)widget, args);
+        break;
+    case 8:
+        drawWidgetChoice(widget, args);
+        break;
+    case 2:
+        drawWidgetResetGroup(widget, args);
+        break;
+    case 1:
+        drawWidgetGroup(widget, args);
+        break;
     default: {
         s32 flags;
         flags = func_80299838_de(widget->type);
@@ -475,7 +479,7 @@ void func_8040DB04_de(DraftWidget *widget, DrawArgs args) {
             func_802A18FC_de();
             D_800E2AB8 = 0;
         }
-        if (func_80299A80_de((struct Shared_WidgetIdE *)widget, *(struct DrawArgs *)&args) && !(flags & 1)) {
+        if (func_80299A80_de((void *)widget, args) && !(flags & 1)) {
             func_802A18F4_de();
             D_800E2AB8 = 0;
         }
@@ -484,7 +488,7 @@ void func_8040DB04_de(DraftWidget *widget, DrawArgs args) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040DB04_de);
+INCLUDE_ASM("ovl_80400000", Frontend_DrawWidget);
 #endif
 
 #ifdef NON_MATCHING

@@ -11,7 +11,7 @@
 /* Draws a visible widget (flag 8): when func_8040E0D4_de places it, and its draw flags ask for
    clipping (0x200), it narrows the current scissor from func_802A1898_de to the widget's box through
    func_8040F488_de (skipping the draw when nothing is left) and applies it with func_802A1870_de; it then
-   draws the widget through func_8040DB04_de and restores the saved scissor if it was narrowed. */
+   draws the widget through Frontend_DrawWidget and restores the saved scissor if it was narrowed. */
 
 
 
@@ -33,7 +33,7 @@ extern int D_800DEA60;
 extern int D_800E2AB4_de;
 
 extern struct Shape_typemap_165 D_8014D580;
-extern void func_8040DB04_de(Widget *widget, DrawArgs_func_8040E67C_de args);
+extern void Frontend_DrawWidget(Widget *widget, DrawArgs_func_8040E67C_de args);
 
 void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
     struct Shape_typemap_165 box;
@@ -56,7 +56,7 @@ void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
                 clipped = 1;
                 func_802A1870_de(clip.field_0, clip.field_8, clip.field_4, clip.field_C);
             }
-            func_8040DB04_de(widget, args);
+            Frontend_DrawWidget(widget, args);
             if (clipped) {
                 func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
             }
@@ -68,7 +68,7 @@ void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
 void func_8040E7FC_de(Widget *node, DrawArgs_func_8040E67C_de event) {
     for (; node != 0; node = node->next) {
         if (node->flags & 8) {
-            func_8040DB04_de(node, event);
+            Frontend_DrawWidget(node, event);
         }
     }
 }

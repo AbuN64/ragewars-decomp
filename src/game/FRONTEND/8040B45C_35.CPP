@@ -53,7 +53,7 @@ extern short func_80411C60_de(s32 index);
 /* Draws a widget's variant image: when func_8040E0D4_de accepts the widget at the position, picks the
    pressed (flag 0x100), highlighted (flag 0x40) or normal image of the widget, and when present
    moves the position back by the image's offset scaled by the style's scale factors and draws it
-   through func_8040DB04_de with the same flags and style. */
+   through Frontend_DrawWidget with the same flags and style. */
 
 
 
@@ -67,7 +67,7 @@ extern short func_80411C60_de(s32 index);
 
 
 
-extern void func_8040DB04_de(struct Pair14 *image, Triple at, Style style);
+extern void Frontend_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
 /* Draws the child at 0x8 of a window with the arguments passed by value after clearing D_800E2AB8 once func_8040E0D4_de resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with D_800E2AB8 cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
 
@@ -347,7 +347,7 @@ void func_8040F230_de(ButtonWidget *widget, Triple at, Style style) {
         if (image != 0) {
             at.x -= (s32)(image->first * style.scaleX);
             at.y -= (s32)(image->second * style.scaleY);
-            func_8040DB04_de(image, at, style);
+            Frontend_DrawWidget(image, at, style);
         }
     }
 }

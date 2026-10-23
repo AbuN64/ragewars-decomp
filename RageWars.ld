@@ -27073,7 +27073,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/FRONTEND/8040B45C_8.CPP.o */;
         src/game/FRONTEND/8040B45C_8.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB9/800E10AC.CPP.o(.data);
-        src/game/DATA/GFXDATA/DATA_800E10B0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/FRONTEND/8040B45C_31.CPP.o */;
+        src/game/FRONTEND/8040B45C_31.CPP.o(.rodata .rdata);
         src/game/FRONTEND/800E10D0.CPP.o(.rodata .rdata);
         src/game/FRONTEND/800E10E0.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB9/800E10E4.CPP.o(.data);
@@ -27707,7 +27708,7 @@ SECTIONS
         src/game/DATA/OVLTAB9/800E1094.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8040B45C_8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB9/800E10AC.CPP.o(.bss .sbss COMMON);
-        src/game/DATA/GFXDATA/DATA_800E10B0.CPP.o(.bss .sbss COMMON);
+        src/game/FRONTEND/8040B45C_31.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/800E10D0.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/800E10E0.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB9/800E10E4.CPP.o(.bss .sbss COMMON);

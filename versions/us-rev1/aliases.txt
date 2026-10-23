@@ -2936,3 +2936,4 @@ literals_func_80204030_us_rev1 = 0x800C6B40; // rom:0xC7740 size:0x1C
 literals_func_80261E98_de = 0x800C92E8; // rom:0xC9EE8 size:0x60
 literals_func_8042F130_us_rev1 = 0x800E1B90; // rom:0xE2790 size:0x20
 literals_func_8043DD30_us_rev1 = 0x800E2330; // rom:0xE2F30 size:0x20
+literals_Frontend_DrawWidget = 0x800E10B0; // rom:0xE1CB0 size:0x20
