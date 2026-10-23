@@ -30,13 +30,4 @@ struct Func802C1F10Node;
 typedef struct Func802C1F10Node Func802C1F10Node;
 
 
-/* Disk transfer state embedded at offset 0x14 in the PI device handle. */
-typedef struct DiskTransferInfo {
-    u16 command;
-    u16 mode;
-    u32 block;
-    s32 sector;
-    u32 deviceAddress;
-    u32 bmControl;
-} DiskTransferInfo;
 #endif

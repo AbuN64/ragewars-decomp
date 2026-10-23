@@ -3061,10 +3061,6 @@ struct func_8024B8DC_S2;
 typedef struct func_8024B8DC_S2 func_8024B8DC_S2;
 
 struct func_80205494_S3;
-struct func_80205494_S3 {
-    char pad0[0x14];
-    unsigned int unk14;
-};
 
 struct TextLayerRect;
 struct TextLayerRect {
