@@ -7,21 +7,21 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [███████████████████░]  96.32% (~98.28%)  40,402,286 of 41,943,040 bytes</code><br><code>de       [███████████████████░]  95.54% (~98.28%)  8,014,771 of 8,388,608 bytes</code><br><code>eu       [██████████████████▒░]  94.68% (~96.56%)  7,942,621 of 8,388,608 bytes</code><br><code>eu-x     [██████████████████▒░]  94.61% (~96.65%)  7,936,864 of 8,388,608 bytes</code><br><code>us       [███████████████████░]  98.30% (~99.90%)  8,246,522 of 8,388,608 bytes</code><br><code>us-rev1  [███████████████████▒]  98.48% (~100.00%)  8,261,508 of 8,388,608 bytes</code></pre>
+<pre><code>all      [███████████████████░]  96.39% (~98.34%)  40,430,114 of 41,943,040 bytes</code><br><code>de       [███████████████████░]  95.68% (~98.42%)  8,026,599 of 8,388,608 bytes</code><br><code>eu       [██████████████████▒░]  94.78% (~96.66%)  7,951,007 of 8,388,608 bytes</code><br><code>eu-x     [██████████████████▒░]  94.70% (~96.74%)  7,944,478 of 8,388,608 bytes</code><br><code>us       [███████████████████░]  98.30% (~99.90%)  8,246,522 of 8,388,608 bytes</code><br><code>us-rev1  [███████████████████▒]  98.48% (~100.00%)  8,261,508 of 8,388,608 bytes</code></pre>
 
 <a href="https://itsmo.me/attic/cake-unbake/#ragewars-decomp-us-rev1"><img src="docs/overview-us-rev1.svg" width="720"></a>
 
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
-| <pre><code>code      [█████████████████▒▒░]  86.12% (~99.96%)  952,888 of 1,106,440</code><br><code>data      [████████████████████]  100.00%  243,976 of 243,976</code><br><code>functions [███████████████████░]  95.37% (~99.97%)  4,042 of 4,238</code><br><code>blobs     [███████████████████░]  96.82% (~97.91%)  6,781,619 of 7,004,336</code></pre> |
+| <pre><code>code      [█████████████████▒▒░]  86.12% (~99.96%)  952,888 of 1,106,440</code><br><code>data      [████████████████████]  100.00%  243,976 of 243,976</code><br><code>functions [███████████████████░]  95.37% (~99.97%)  4,042 of 4,238</code><br><code>blobs     [███████████████████░]  96.98% (~98.08%)  6,793,447 of 7,004,336</code></pre> |
 
 | eu (NUS-NRWP-0, Europe). PAL release. SHA256 `d763cbbe485a5f9e1b7be97d5ac16735087e23d0bb62c05dc844e01b7e1156d1` |
 |---|
-| <pre><code>code      [█████████████████▒▒░]  85.71% (~99.83%)  953,412 of 1,112,292</code><br><code>data      [████████████████████]  100.00%  259,116 of 259,116</code><br><code>functions [██████████████████▒░]  94.98% (~99.95%)  4,036 of 4,249</code><br><code>blobs     [███████████████████░]  95.89% (~95.90%)  6,709,901 of 6,997,008</code></pre> |
+| <pre><code>code      [█████████████████▒▒░]  85.71% (~99.83%)  953,412 of 1,112,292</code><br><code>data      [████████████████████]  100.00%  259,116 of 259,116</code><br><code>functions [██████████████████▒░]  94.98% (~99.95%)  4,036 of 4,249</code><br><code>blobs     [███████████████████░]  96.01% (~96.02%)  6,718,287 of 6,997,008</code></pre> |
 
 | eu-x (NUS-NRWX-0, Europe). PAL multi-language release. SHA256 `511f6c876586bf401faf01a270c67f26fcb7db55ed3f35759c71ab15a29de750` |
 |---|
-| <pre><code>code      [█████████████████▒▒░]  85.18% (~99.83%)  947,724 of 1,112,592</code><br><code>data      [████████████████████]  100.00%  189,488 of 189,488</code><br><code>functions [███████████████████░]  95.01% (~99.95%)  4,037 of 4,249</code><br><code>blobs     [███████████████████░]  95.94% (~96.05%)  6,779,460 of 7,066,336</code></pre> |
+| <pre><code>code      [█████████████████▒▒░]  85.18% (~99.83%)  947,724 of 1,112,592</code><br><code>data      [████████████████████]  100.00%  189,488 of 189,488</code><br><code>functions [███████████████████░]  95.01% (~99.95%)  4,037 of 4,249</code><br><code>blobs     [███████████████████░]  96.04% (~96.16%)  6,787,074 of 7,066,336</code></pre> |
 
 | us (NUS-NRWE-0, North America). First NTSC release (black cartridge). SHA256 `0433043aaba2649bdd1fe717c4020550ac663c0362527aa082490f5977a3e46b` |
 |---|
