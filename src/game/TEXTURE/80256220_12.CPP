@@ -59,6 +59,7 @@ func_8023B9B0_de
 
 #ifdef NON_MATCHING
 #include "COMMON/AUDIO_INITIALIZE.H"
+#include "COMMON/ALAUXBUS_S.H"
 extern u8 D_80107DF0;
 extern u32 D_80107E98, D_80107E9C;
 extern s32 D_80107DFC;
@@ -69,6 +70,7 @@ extern s16 *D_80107E20[2];
 extern u32 D_801076D0[10], D_801076A8[10], D_80107EA8[60];
 extern u8 D_801076F8[], D_800E5400[0x2800];
 extern u8 D_800D8C10[0xD0], D_800DB200[0x1000], D_800DC830_de[0x800];
+extern u8 D_800D8CE0[];
 extern f32 D_800C3EB8_de;
 extern char D_00256E6C, D_00256C90;
 s32 *func_80256E6C_de(s32 **);
@@ -80,24 +82,20 @@ void func_802BB550_de(s32, void *, s32);
 void func_802BAC90_de(void *, s32, void (*)(void), void *, void *, s32);
 void func_802BB750_de(void *);
 
-void func_80256880_de(AudioInitializeConfig *config, s32 priority, AudioInitializeTiming *timing) {
-    u32 count, i;
-    s32 integral;
-    f32 samples, rounded;
-    AudioWork *work;
+/* 4/260 aligned edits; remaining: callback store and frequency-load scheduling. */
+void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
+    u32 i;
+    f32 samples;
     D_80107DF0 = 0;
-    config->callback = (s32 *(*)(s32 **))&D_00256E6C;
-    config->frequency = func_802B72E0_de(timing->frequency);
-    samples = timing->frameTime;
-    samples = samples * config->frequency * D_800C3EB8_de;
-    integral = samples;
-    count = integral;
-    rounded = count;
-    if (rounded < samples) count++;
-    if (count & 15) count = (count & ~15U) + 16;
-    D_80107E98 = count;
+    config->dmaproc = (void *)&D_00256E6C;
+    config->outputRate = func_802B72E0_de(timing->frequency);
+    samples = (f32)timing->frameTime * config->outputRate * D_800C3EB8_de;
+    D_80107E98 = (s32)samples;
+    if ((f32)D_80107E98 < samples) D_80107E98++;
+    if (D_80107E98 & 15) D_80107E98 = (D_80107E98 & ~15U) + 16;
     func_802B24A0_de(&D_80107E34, config);
-    D_80107928[0].next = 0; D_80107928[0].prev = 0;
+    D_80107928[0].prev = 0;
+    D_80107928[0].next = 0;
     for (i = 0; i < 59; i++) {
         func_802B2480_de(&D_80107928[i+1], &D_80107928[i]);
         D_80107928[i].buffer = func_802B0340_de(0, 0, config->heap, 1, 0x300);
@@ -107,18 +105,17 @@ void func_80256880_de(AudioInitializeConfig *config, s32 priority, AudioInitiali
     D_80107E9C = timing->samples;
     for (i = 0; i < 3; i++) {
         D_80107E28[i] = func_802B0340_de(0, 0, config->heap, 1, sizeof(AudioWork));
-        work = D_80107E28[i];
-        work->samples = func_802B0340_de(0, 0, config->heap, 1, D_80107E98 * 4);
-        work->queue = &D_80107E80;
-        work->message = work;
-        work->task.type = 2;
-        work->task.boot = D_800D8C10; work->task.bootSize = sizeof(D_800D8C10);
-        work->task.flags = 0;
-        work->task.code = D_800DB200; work->task.codeSize = sizeof(D_800DB200);
-        work->task.codeData = D_800DC830_de; work->task.codeDataSize = sizeof(D_800DC830_de);
-        work->task.yield = 0; work->task.yieldSize = 0;
-        work->task.stack = 0; work->task.stackSize = 0;
-        work->task.output = 0; work->task.outputSize = 0;
+        D_80107E28[i]->samples = func_802B0340_de(0, 0, config->heap, 1, D_80107E98 * 4);
+        D_80107E28[i]->queue = &D_80107E80;
+        D_80107E28[i]->message = D_80107E28[i];
+        D_80107E28[i]->task.type = 2;
+        D_80107E28[i]->task.boot = D_800D8C10; D_80107E28[i]->task.bootSize = (u32)D_800D8CE0 - (u32)D_800D8C10;
+        D_80107E28[i]->task.flags = 0;
+        D_80107E28[i]->task.code = D_800DB200; D_80107E28[i]->task.codeSize = sizeof(D_800DB200);
+        D_80107E28[i]->task.codeData = D_800DC830_de; D_80107E28[i]->task.codeDataSize = sizeof(D_800DC830_de);
+        D_80107E28[i]->task.yield = 0; D_80107E28[i]->task.yieldSize = 0;
+        D_80107E28[i]->task.stack = 0; D_80107E28[i]->task.stackSize = 0;
+        D_80107E28[i]->task.output = 0; D_80107E28[i]->task.outputSize = 0;
     }
     osCreateMesgQueue(&D_80107E80, D_801076D0, 10);
     osCreateMesgQueue(&D_80107E00, D_801076A8, 10);
@@ -132,5 +129,5 @@ void func_80256880_de(AudioInitializeConfig *config, s32 priority, AudioInitiali
     func_802BB420_de(&D_80107E00, (OSMesg)7, 0);
 }
 #else
-INCLUDE_ASM("span_1000", func_80256880_de);
+INCLUDE_ASM("span_1000", Texture_InitializeAudioWorker);
 #endif

@@ -178,7 +178,7 @@ typedef struct AudioBankHeader {
 extern void func_802567A4_de(MenuRules *lock);
 extern u32 func_802BCF30_de(void);
 extern void __osRestoreInt(u32);
-extern void func_80256880_de(ALSynConfig *, s32, AudioInitializeTiming *);
+extern void Texture_InitializeAudioWorker(ALSynConfig *, s32, AudioInitializeTiming *);
 extern void func_802B2650_de(void *, void *);
 extern void func_8025768C_de(ContextRecAt2BC0 *);
 extern void func_8025D844_de(void *, void *);
@@ -237,7 +237,7 @@ void func_80257360_de(ContextRecAt2BC0 *ctx) {
     config.dmaproc = 0;
     config.heap = ctx->frames;
     timing.samples = 0x800;
-    func_80256880_de(&config, D_800CD8C0_de, &timing);
+    Texture_InitializeAudioWorker(&config, D_800CD8C0_de, &timing);
     D_801076A0 = func_80265964_de(8);
     size = func_80265964_de(4) - func_80265964_de(0);
     loaded = func_8023C78C_de(size, 0, func_80265964_de(0));
