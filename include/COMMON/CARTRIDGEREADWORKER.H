@@ -39,13 +39,6 @@ struct Item57BD4;
 typedef struct Item57BD4 Item57BD4;
 
 struct Chunk;
-struct Chunk {
-    u32 source; /* cartridge device address */
-    void *destination;
-    s32 length;
-    void *queue;
-    s32 value;
-};
 
 
 struct func_8025663C_S1;
@@ -81,16 +74,6 @@ struct func_8025844C_S1 {
 extern int D_800CB714;
 
 struct CartridgeReadRequest;
-struct CartridgeReadRequest {
-    u32 devAddr;
-    void *buffer;
-    s32 size;
-    void *replyQueue;
-    void *replyMsg;
-    s32 active; /* 0x14 */
-    void *next;
-    void *prev;
-};
 
 
 
@@ -129,12 +112,6 @@ struct Chunk;
 typedef struct Chunk Chunk;
 
 struct Item57BD4;
-struct Item57BD4 {
-    s16 field0;
-    s16 field2;
-    s16 field4;
-    u16 flags;
-};
 
 struct Window;
 struct Window {
@@ -216,12 +193,6 @@ struct func_80257BD4_S1 {
 };
 
 struct ObjectLinksC;
-struct ObjectLinksC {
-    u8 unk_0;
-    unsigned char padding_1[3];
-    s32 unk_4;
-    s32 *unk_8;
-};
 
 struct CacheEntry;
 struct CacheEntry {
@@ -252,7 +223,6 @@ typedef struct CacheEntry CacheEntry;
 struct func_8025844C_S1;
 typedef struct func_8025844C_S1 func_8025844C_S1;
 
-typedef struct CacheCountdownEntry { struct CacheCountdownEntry *next; char pad4[4]; u16 state; } CacheCountdownEntry;
 #include "COMMON/AUDIO_QUEUES.H"
 #include "COMMON/AUDIO_SYNTH.H"
 extern u32 D_800CB70C_de;

@@ -4,6 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ENTRYRECAT18V3.H"
+#include "TEXTURE/80254CE4.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"

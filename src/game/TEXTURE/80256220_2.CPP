@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_18.H"
+#include "TEXTURE/80256220.H"
 
 #if defined(VERSION_US_REV1)
 /* Phase1 source candidate; contract holds and immutable inputs in per-function JSON. */

@@ -5,6 +5,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
+#include "TEXTURE/80256220.H"
 #include "COMMON/LISTNODE.H"
 #include "TYPES.H"
 #include "sdk/os.h"

@@ -26,10 +26,4 @@ typedef struct AudioCacheEntry {
     u8 reserved0C[4];
     void *buffer; /* +0x10: 80256880 allocator stores, entries stride 0x14. */
 } AudioCacheEntry;
-typedef struct AudioInitializeConfig {
-    u8 reserved0[0x10]; s32 *(*callback)(s32 **);
-    ALHeap *heap;
-    s32 frequency;
-} AudioInitializeConfig;
-typedef struct AudioInitializeTiming { u32 frequency, frameTime, samples; } AudioInitializeTiming;
 #endif

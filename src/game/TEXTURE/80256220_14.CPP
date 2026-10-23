@@ -165,6 +165,7 @@ u32 func_802571F0_de(s32 offset, s32 length) {
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/AUDIO_INITIALIZE.H"
+#include "TEXTURE/80256220.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 extern int D_8014D420_de, D_8014D45C;
 extern float D_800C3ED0_de, D_800C3ED4;

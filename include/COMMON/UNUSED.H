@@ -6634,13 +6634,6 @@ struct RecordD90 {
     SlotCC slots[17];
 };
 struct ResourceRequest;
-struct ResourceRequest {
-    u8 reserved[0x14];
-    void (*dispatch)(s32 argument, ResourceRequest *request);
-    s32 argument;
-    u8 reserved1C[4];
-    void *replyQueue;
-};
 struct ResourceData80295B84;
 struct ResourceData80295B84 {
     s32 **handle;

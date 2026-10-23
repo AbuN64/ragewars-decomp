@@ -19,10 +19,6 @@ struct EntryRecAt18V3 {
 
 struct EntryList;
 struct EntryRecAt18V3;
-struct EntryList {
-    s32 pad0;
-    struct EntryRecAt18V3 *first;
-};
 
 struct Pool80255720;
 typedef struct Pool80255720 Pool80255720;
@@ -175,14 +171,6 @@ struct func_802551C8_S1 {
 extern s32 D_80100560;
 
 
-/* Resource-loader thread, its request queue, message slots and stack. */
-typedef struct ResourceLoadWorker {
-    u8 thread[0x230];
-    struct OSMesgQueue requests;
-    s32 messages[128];
-    u8 stack[0x1000];
-    s32 timestamp; /* 0x1448: frame of last dispatched request */
-} ResourceLoadWorker;
 
 extern s32 D_800CD8AC_de;
 extern s32 D_800CD704;

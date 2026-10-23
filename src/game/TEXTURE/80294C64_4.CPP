@@ -1,4 +1,5 @@
 #include "COMMON/RESIDENTSTATE.H"
+#include "TEXTURE/80294C64.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TEXTURE_REQUEST.H"

@@ -1,5 +1,6 @@
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
+#include "TEXTURE/80256220.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "TEXTURE/80294C64.H"
 
 #if defined(VERSION_US_REV1)
 #ifdef NON_MATCHING

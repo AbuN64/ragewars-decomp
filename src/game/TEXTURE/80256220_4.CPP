@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
+#include "TEXTURE/80256220.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 #include "SYSTEM/80255C40_3.H"

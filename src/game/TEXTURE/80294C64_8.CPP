@@ -1,5 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENTSTATE.H"
+#include "TEXTURE/80294C64.H"
 #include "TYPES.H"
 #include "COMMON/TEXTURE_REQUEST.H"
 

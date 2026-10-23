@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "TEXTURE/80256220.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "TYPES.H"
 #include "TEXTURE/80256220_12.H"
