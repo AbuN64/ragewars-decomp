@@ -2,6 +2,7 @@
 #include "COMMON/GFX.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT4V7.H"
+#include "RSP/8026E1F8.H"
 #include "TYPES.H"
 #include "abi.h"
 #include "gbi.h"

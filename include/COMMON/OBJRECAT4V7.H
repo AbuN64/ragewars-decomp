@@ -69,14 +69,6 @@ struct BoxRecAtC;
 typedef struct BoxRecAtC BoxRecAtC;
 
 struct TreeNode;
-struct TreeNode {
-    unsigned int key;
-    unsigned char padding[12];
-    struct TreeNode *link10;
-    struct TreeNode *link14;
-    struct TreeNode *link18;
-    struct TreeNode *link1c;
-};
 
 extern unsigned char D_800CC3AA;
 
