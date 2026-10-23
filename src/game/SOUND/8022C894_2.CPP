@@ -23,7 +23,7 @@ extern s32 func_8025DE54_de(s16 arg0, CVector3 arg1, s32 arg4, s32 arg5);
    or 0x14 by the stick at 0x6C0 against D_800C7E94 and D_800C7E98, and switches to state 3 once the
    timer at 0x658 passes D_800C7E9C without input bit 0x20000. */
 
-extern void func_802231D4_de(void *, void *, void *);
+extern void Weapons_UpdateViewAngles(void *, void *, void *);
 
 extern void func_802238E0_de(void *, void *, void *);
 
@@ -94,7 +94,7 @@ void func_8022D040_de(void *arg0, LevelActor *actor) {
     } else {
         player->pose = 0xE;
     }
-    func_802231D4_de(player, actor, &D_800CE88C);
+    Weapons_UpdateViewAngles(player, actor, &D_800CE88C);
     func_802238E0_de(player, actor, &D_800CE8A4);
     busy = 0;
     if (player->animation == 0x1144) {

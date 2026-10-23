@@ -76,7 +76,7 @@ extern void **D_80103FCC;
 extern char D_80103FD0;
 
 
-extern void func_802231D4_de(void *, void *, void *);
+extern void Weapons_UpdateViewAngles(void *, void *, void *);
 extern void func_8021CF28_de(Shared_Quad *, void *, void **, Shared_Quad *);
 extern f32 func_802726F8_de(f32 *, f32 *);
 extern s32 func_802444A4_de(void *, CVector3, CVector3, void *);
@@ -102,7 +102,7 @@ void func_80226548_de(void *arg0, void *body) {
     f32 *position;
     f32 temp_f1;
 
-    func_802231D4_de(arg0, body, &D_800CE7E4);
+    Weapons_UpdateViewAngles(arg0, body, &D_800CE7E4);
     if (((Shared_ActorView *)arg0)->targeting != 0) {
         func_8021CF28_de(&sp20, arg0, &sp50, &sp30);
         if (sp50 != 0) {

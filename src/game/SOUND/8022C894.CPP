@@ -13,7 +13,7 @@
 #include "TYPES.H"
 extern s32 func_802227F4_de(void *, void *, s32);
 extern void func_802233F0_de(void *, void *, void *);
-extern void func_802231D4_de(void *, void *, void *);
+extern void Weapons_UpdateViewAngles(void *, void *, void *);
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/RENDERCOUNTERS.H"
 
@@ -70,7 +70,7 @@ void func_8022C8FC_de(struct SharedPlayer *player, void *arg1) {
     func_8022404C_de(player, arg1);
     zero = 0.0f;
     func_80274870_de(&player->views5E8.view72C_75.unk72C, zero, 0.25f);
-    func_802231D4_de(player, arg1, &D_800CE7FC);
+    Weapons_UpdateViewAngles(player, arg1, &D_800CE7FC);
     func_802233F0_de(player, arg1, &D_800CE7C0);
     if (!(player->views5E8.view6AC_45.unk6AC & 0x10)) {
         func_802227F4_de(player, arg1, 2);
@@ -187,7 +187,7 @@ void func_8022CC34_de(void *player, void *body) {
     s32 value;
 
     func_80274870_de(&((Player *)player)->lean, 0.0f, 0.25f);
-    func_802231D4_de(player, body, &D_800CE7E4);
+    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     if (!(((Player *)player)->flags660 & 0x8000)) {
         func_802233F0_de(player, body, &D_800C94EC_de);
     }
@@ -237,7 +237,7 @@ void func_8022CDBC_de(void *player, LevelActor *actor) {
 
 void func_8022CE78_de(s32 player, s32 body) {
     func_80274870_de(player + 0x72C, 0.0f, 0.25f);
-    func_802231D4_de((void *)player, (void *)body, &D_800CE7E4);
+    Weapons_UpdateViewAngles((void *)player, (void *)body, &D_800CE7E4);
     func_802233F0_de((void *)player, (void *)body, &D_800C9558_de);
     if (((LevelActor *)body)->position1.y <= 0.0f) {
         if (func_8024E62C_de((void *) body) != 0) {

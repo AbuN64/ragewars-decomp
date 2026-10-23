@@ -19,7 +19,7 @@ extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
 /* Runs a player's standing and walking state for its body: settles the weapon sway through
-   func_80223E34_de, turns the view through func_802231D4_de with the crouching tuning D_800CE7FC while the
+   func_80223E34_de, turns the view through Weapons_UpdateViewAngles with the crouching tuning D_800CE7FC while the
    crouch at 0x718 is past 5.12 or the standing tuning D_800CE7E4 otherwise, and unless a jump releases
    the player into mode 5 it hands strafing at 0x6A4 or lifting at 0x6A8 (outside zoom mode 2) to mode
    3; then, unless an unfinished pickup, reload or wave animation is playing, it picks the animation at
@@ -44,7 +44,7 @@ extern char D_800CED30;
 
 extern void func_80223E34_de(SharedPlayer_func_80224408_de *, Body_func_80224408_de *);
 
-extern void func_802231D4_de(SharedPlayer_func_80224408_de *, Body_func_80224408_de *, char *);
+extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224408_de *, Body_func_80224408_de *, char *);
 
 static inline s32 try_jump(SharedPlayer_func_80224408_de *player, Body_func_80224408_de *body) {
     if (player->views5E8.view7E8_106.zoomed == 0 && !(11.25f < player->views5E8.view6E4_62.depth) && !(body->flags & 0xC0000)
@@ -168,9 +168,9 @@ void func_80224408_de(SharedPlayer_func_80224408_de *player, Body_func_80224408_
     heading = body->heading;
     crouching = 5.12f < player->views5E8.view718_70.crouch;
     if (crouching) {
-        func_802231D4_de(player, body, &D_800CE7FC);
+        Weapons_UpdateViewAngles(player, body, &D_800CE7FC);
     } else {
-        func_802231D4_de(player, body, &D_800CE7E4);
+        Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     }
     heading = body->heading - heading;
     if (try_jump(player, body)) {

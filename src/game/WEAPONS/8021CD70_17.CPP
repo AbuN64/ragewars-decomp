@@ -3,7 +3,7 @@
 #include "TYPES.H"
 
 /* Runs a player's wading state for its body: sets the movement mode at 0x650 to 9 when still and 10
-   when moving, settles the roll kick at 0x72C, turns the view and moves the body through func_802231D4_de
+   when moving, settles the roll kick at 0x72C, turns the view and moves the body through Weapons_UpdateViewAngles
    and func_802233F0_de with tunings D_800CE7E4 and D_800CE82C, and leaves the state (clearing the strokes
    at 0x938, release mode 3) once the body loses surface flag 0x2000; otherwise looking down past 40
    degrees while lifting at 0x6A8 lowers the eye height at 0x6EC and sets flag 0x100000 of D_80104418
@@ -27,7 +27,7 @@ extern Tuning D_800CE82C;
 extern s32 D_80104418[];
 extern f32 D_800D2988;
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
-extern void func_802231D4_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, char *);
+extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, char *);
 extern void func_802233F0_de(SharedPlayer_func_80224C4C_de *, Body_func_80224C4C_de *, Tuning *);
 
 extern void func_80218464_de(char *);
@@ -52,7 +52,7 @@ void func_80224C4C_de(SharedPlayer_func_80224C4C_de *player, Body_func_80224C4C_
         player->views5E8.view650_18.mode = 0xA;
     }
     func_80274870_de(&player->views5E8.view72C_76.kickRoll, 0.0f, 0.25f);
-    func_802231D4_de(player, body, &D_800CE7E4);
+    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     func_802233F0_de(player, body, &D_800CE82C);
     if (!(body->flags & 0x2000)) {
         func_80218464_de(player->views5E8.view938_129.strokes);

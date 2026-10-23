@@ -3,7 +3,7 @@
 #include "TYPES.H"
 
 /* Runs a player's floating movement state for its body: sets the movement mode at 0x650 to 11 when
-   still and 12 when moving (speed at 0x6C8), turns the view through func_802231D4_de with tuning
+   still and 12 when moving (speed at 0x6C8), turns the view through Weapons_UpdateViewAngles with tuning
    D_800CE874, sways the weapon on three sine waves of the state time at 0x658, moves the body through
    func_802238E0_de with tuning D_800CE850, and once the state time passes 2 without the body's flag
    0x1000 it ends the state: clears the strokes at 0x938 and the body's 0x20, plays sound 0x2DE, clears
@@ -22,7 +22,7 @@
 extern Tuning D_800CE850;
 extern char D_800CE874;
 extern f32 D_800D2988;
-extern void func_802231D4_de(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, char *);
+extern void Weapons_UpdateViewAngles(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, char *);
 
 extern void func_802238E0_de(SharedPlayer_func_80224F5C_de *, Body_func_80224F5C_de *, Tuning *);
 extern void func_80218464_de(char *);
@@ -38,7 +38,7 @@ void func_80224F5C_de(SharedPlayer_func_80224F5C_de *player, Body_func_80224F5C_
     } else {
         player->views5E8.view650_18.mode = 0xC;
     }
-    func_802231D4_de(player, body, &D_800CE874);
+    Weapons_UpdateViewAngles(player, body, &D_800CE874);
     player->views5E8.view730_79.sway[0] = 2.0f * func_802B7130_de(player->views5E8.view658_24.swimTime * 0.06981318f) * 0.017453294f;
     player->views5E8.view730_79.sway[1] = 2.0f * func_802B7130_de(player->views5E8.view658_24.swimTime * 0.08726647496f) * 0.017453294f;
     player->views5E8.view730_79.sway[2] = 2.0f * func_802B7130_de(player->views5E8.view658_24.swimTime * 0.10471976548f) * 0.017453294f;

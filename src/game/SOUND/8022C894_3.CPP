@@ -23,7 +23,7 @@ extern f32 D_800C2DB0_de[];
 
 
 
-extern void func_802231D4_de(s32, s32, void *);
+extern void Weapons_UpdateViewAngles(s32, s32, void *);
 
 
 
@@ -97,7 +97,7 @@ void func_8022D3F4_de(void) {
 }
 
 void func_8022D3FC_de(s32 player, s32 body) {
-    func_802231D4_de(player, body, &D_800CE7E4);
+    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
 }
 
 /** Perform no operation. */

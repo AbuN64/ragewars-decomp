@@ -4,7 +4,7 @@
 #include "COMMON/VECTOR4F.H"
 
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
-extern void func_802231D4_de(SharedPlayer *,func_802165F8_S1 *,char *);
+extern void Weapons_UpdateViewAngles(SharedPlayer *,func_802165F8_S1 *,char *);
 extern char D_800CE7E4,D_800CE7FC,D_800CED30;
 extern f32 D_800D2988;
 extern f32 D_800C29C0_de,D_800C29C4_de,D_800C29C8_de,D_800C29CC_de,D_800C29D0_de,D_800C29D4_de,D_800C29D8_de,D_800C29DC_de,D_800C29E0_de,D_800C29E4_de,D_800C29E8_de,D_800C29EC_de,D_800C29F0_de,D_800C29F4_de,D_800C29F8_de,D_800C29FC_de;
@@ -36,9 +36,9 @@ void func_8022470C_de(void *playerContext, void *bodyContext) {
         var_v0 = 0;
     }
     if (var_v0 != 0) {
-        func_802231D4_de(player, body, &D_800CE7FC);
+        Weapons_UpdateViewAngles(player, body, &D_800CE7FC);
     } else {
-        func_802231D4_de(player, body, &D_800CE7E4);
+        Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     }
     var_v0_2 = 1;
     if (!(player->views5E8.view718_70.crouch > D_800C29C4_de)) {

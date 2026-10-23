@@ -24,13 +24,13 @@ typedef struct { u8 pad0[0x6C]; f32 yaw; u8 pad70[0x2E4]; f32 bodyYaw; u8 pad358
 extern f32 D_800D2988;
 extern f32 D_800C2AE0_de, D_800C2AE4_de, D_800C2AE8_de, D_800C2AEC_de, D_800C2AF0_de;
 
-extern void func_802231D4_de(void *, void *, void *);
+extern void Weapons_UpdateViewAngles(void *, void *, void *);
 extern void func_802227F4_de(void *, void *, s32);
 
 void func_80225D34_de(TravelPlayer *player, void *body) {
     f32 yaw, targetYaw, distance, otherDistance, alternate, duration, t;
     Position pos;
-    func_802231D4_de(player, body, &D_800CE7E4);
+    Weapons_UpdateViewAngles(player, body, &D_800CE7E4);
     if (player->target != 0) {
         player->elapsed += D_800D2988;
         yaw = player->yaw;
@@ -72,7 +72,7 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
 INCLUDE_ASM("span_1000", func_80225D34_de);
 #endif
 
-extern void func_802231D4_de(void *,void *,void *);
+extern void Weapons_UpdateViewAngles(void *,void *,void *);
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern f32 D_800C9514_de;
 extern f32 D_800C9FE8;
@@ -96,7 +96,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     func_80274870_de(&body->unk6C,force,0.9f);
     yaw=((yaw-body->unk6C)+player->views5E8.view69C_40.stick*D_800C2B0C_de)*unit;
     func_80274870_de(&player->views5E8.view72C_76.kickRoll,yaw,0.1f);
-    func_802231D4_de(player,body,&D_800C95D0);
+    Weapons_UpdateViewAngles(player,body,&D_800C95D0);
     offset=0;
     if(player->views5E8.view6B8_50.input&8) {
         func_80214178_de(mount,&mount->animation,0x2e);
