@@ -34,9 +34,9 @@ s32 func_8042F91C_de(s32 arg0, s32 arg1, s32 arg2) {
         switch (temp_v0) {
         case 1:
             temp_a1 = D_800E54A4->unk3C;
-            temp_a1->value = (u16) (temp_a1->value + D_800E54A4->unk42);
+            temp_a1->value = (u16) (temp_a1->value + (u16) D_800E54A4->unk40);
             temp_a1_2 = D_800E54A4->unk44;
-            temp_a1_2->value = (u16) (temp_a1_2->value - D_800E54A4->unk4A);
+            temp_a1_2->value = (u16) (temp_a1_2->value - (u16) D_800E54A4->unk48);
             temp_v0_2 = D_800E54A4->unk50 - 1;
             D_800E54A4->unk50 = temp_v0_2;
             if (temp_v0_2 <= 0) {
@@ -50,9 +50,9 @@ s32 func_8042F91C_de(s32 arg0, s32 arg1, s32 arg2) {
             break;
         case 2:
             temp_a0 = D_800E54A4->unk3C;
-            temp_a0->value = (u16) (temp_a0->value - D_800E54A4->unk42);
+            temp_a0->value = (u16) (temp_a0->value - (u16) D_800E54A4->unk40);
             temp_a0_2 = D_800E54A4->unk44;
-            temp_a0_2->value = (u16) (temp_a0_2->value + D_800E54A4->unk4A);
+            temp_a0_2->value = (u16) (temp_a0_2->value + (u16) D_800E54A4->unk48);
             temp_v0_3 = D_800E54A4->unk50 - 1;
             D_800E54A4->unk50 = temp_v0_3;
             if (temp_v0_3 <= 0) {

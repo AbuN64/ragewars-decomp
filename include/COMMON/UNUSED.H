@@ -17442,11 +17442,9 @@ struct State_func_8042F91C_de {
     s32 unk28;
     char pad2[0x10];
     Field_u16_14 *unk3C;
-    u16 unk40;
-    u16 unk42;
+    s32 unk40; /* slide step, stored as a word and read back as its low half */
     Field_u16_14 *unk44;
-    u16 unk48;
-    u16 unk4A;
+    s32 unk48; /* slide step, stored as a word and read back as its low half */
     s32 unk4C;
     s32 unk50;
     char pad3[0x341C];
