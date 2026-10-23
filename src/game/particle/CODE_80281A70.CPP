@@ -68,16 +68,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
 #include "COMMON/SHAREDPLAYER.H"
 /* Views of the SN debug records this pass reads, with their original member names: CParticle_t (0x1F8 bytes),
  * CParticleSystem_t (0xFC70), CROMParticleEffect_t (0x3C), CROMParticleImpact_t (0xC4) and CDLight_t (0x18). */
-typedef struct CDLight_t {
-    struct CDLight_t *m_pPrev;
-    struct CDLight_t *m_pNext;
-    void *m_pROMLight;
-    f32 m_ColorFade;
-    s16 x;
-    s16 y;
-    s16 z;
-    s16 m_bEnabled;
-} CDLight_t;
+typedef struct CDLight_t CDLight_t;
 typedef struct CROMParticleImpact_t {
     struct IntPair m_ImpactEventValue[14];
     u16 m_ImpactParticleType[14];

@@ -2,10 +2,10 @@
 #define OVLGAME_8044BD30_H
 #include "TYPES.H"
 #include "COMMON/OBJB.H"
-/* A list of the pool's eight records and a second, empty list. */
+/* The dynamic-light pool: the active list, the free list holding all eight records, and the records. */
 struct CGameDynamicLight_t {
-    IntrusiveList empty;
-    IntrusiveList records;
-    struct PoolRecord entries[8];
+    IntrusiveList m_ActiveList;
+    IntrusiveList m_FreeList;
+    struct CDLight_t m_DLights[8];
 };
 #endif

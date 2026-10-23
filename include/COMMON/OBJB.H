@@ -146,8 +146,8 @@ typedef struct SceneRecAt1B2B4 SceneRecAt1B2B4;
 
 struct Level_func_8044CD8C_de;
 
-struct PoolRecord;
-typedef struct PoolRecord PoolRecord;
+struct CDLight_t;
+typedef struct CDLight_t CDLight;
 
 typedef IntrusiveList ListRec;
 
@@ -242,17 +242,16 @@ struct func_8044DE04_S1 {
     s32 unk1B440;
 };
 
-struct PoolRecord;
-/* One of a pool's eight 0x18-byte records, threaded through its lists by prev (+0) and next (+4). */
-struct PoolRecord {
-    void *prev;
-    void *next;
-    s32 unk8;
-    f32 unkC;
-    char q[6];
-    s16 unk16;
+struct CDLight_t;
+/* One of the dynamic-light pool's eight 0x18-byte records, threaded through its lists by m_pPrev (+0) and m_pNext (+4). */
+struct CDLight_t {
+    struct CDLight_t *m_pPrev;
+    struct CDLight_t *m_pNext;
+    void *m_pROMLight;
+    f32 m_ColorFade;
+    s16 x, y, z;
+    s16 m_bEnabled;
 };
-
 struct CGameDynamicLight_t;
 
 extern float D_800CA1F0;

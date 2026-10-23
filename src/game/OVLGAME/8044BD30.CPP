@@ -12,23 +12,23 @@ void func_8044B0E0_de(struct CGameDynamicLight_t *arg0) {
     f32 temp_f20;
     s32 var_s1;
     s32 var_s2;
-    PoolRecord *temp_s0;
+    CDLight *temp_s0;
     void *base;
 
-    func_80255CA0_de(&arg0->empty, 0, 4);
-    func_80255CA0_de(&arg0->records, 0, 4);
+    func_80255CA0_de(&arg0->m_ActiveList, 0, 4);
+    func_80255CA0_de(&arg0->m_FreeList, 0, 4);
     var_s2 = 0;
     var_s1 = 0x28;
     temp_f20 = 1.0f;
     do {
         base = arg0;
         temp_s0 = base + var_s1;
-        func_80255D14_de(&arg0->records, temp_s0);
+        func_80255D14_de(&arg0->m_FreeList, temp_s0);
         var_s1 += 0x18;
         var_s2 += 1;
-        temp_s0->unk8 = 0;
-        temp_s0->unkC = temp_f20;
-        temp_s0->unk16 = 0;
+        temp_s0->m_pROMLight = 0;
+        temp_s0->m_ColorFade = temp_f20;
+        temp_s0->m_bEnabled = 0;
     } while (var_s2 < 8);
 }
 
