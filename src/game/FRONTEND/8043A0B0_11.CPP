@@ -304,78 +304,44 @@ s32 func_8043BFF0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #ifdef NON_MATCHING
-/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
-typedef int M2C_UNK;
-typedef signed char M2C_UNK8;
-typedef short M2C_UNK16;
-typedef int M2C_UNK32;
-typedef long long M2C_UNK64;
-#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
-#define M2C_BITWISE(type, expr) ((type)(expr))
-#define M2C_LWL(expr) (expr)
-#define M2C_FIRST3BYTES(expr) (expr)
-#define M2C_UNALIGNED32(expr) (expr)
-#define M2C_ERROR(desc) (0)
-#define M2C_TRAP_IF(cond) (0)
-#define M2C_BREAK(...) (0)
-#define M2C_SYNC(...) (0)
-#define M2C_DCACHE_CLEAN(addr) (0)
-#define M2C_DCACHE_INVALIDATE(addr) (0)
-#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
-#define M2C_ICACHE_INVALIDATE(addr) (0)
-#define M2C_PREFETCH(addr) (0)
-#define M2C_PREFETCH_STORE(addr) (0)
-#define GLUE_F64(a, b) (0.0)
-#define MULT_HI(a, b) (0)
-#define MULTU_HI(a, b) (0)
+/* 96/100 words; remaining: three-case switch tree on D_800E28D8 lays out its branches differently */
+#include "gbi.h"
 #include "COMMON/GFX.H"
-#include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
 #include "GFX/TEXT/802A8A94_5.H"
-#include "TYPES.H"
-extern s32 D_80141008;
-
-void func_8043C080_de(void *arg0) {
-    Gfx *temp_a2;
-    Gfx *temp_t0;
-    f32 var_f2;
-    s32 temp_s0;
-    s32 temp_s2;
-
-    temp_s0 = M2C_FIELD(arg0, s32 *, 0x18);
-    if (temp_s0 == 1) {
-        temp_s2 = M2C_FIELD(arg0, s32 *, 0x14);
+extern float D_800E2064;
+extern float D_80141008[];
+void func_8043C080_de(u8 *arg0) {
+    s32 arg14;
+    float b, a;
+    float *screen;
+    Gfx *cmd;
+    Gfx *next;
+    if (*(s32 *)(arg0 + 0x18) == 1) {
+        arg14 = *(s32 *)(arg0 + 0x14);
+        screen = D_80141008;
         func_802A84F8_de();
         func_8026925C_de(0x15);
-        var_f2 = D_800DE030_de;
-        if (D_800E28D8 != temp_s0) {
-            switch (D_800E28D8) {                   /* irregular */
-            case 2:
-                var_f2 = M2C_FIELD(&D_800DE040, f32 *, 0);
-                /* fallthrough */
-            case 0:
-                break;
-            }
-        } else {
-            var_f2 = D_800DE038;
+        a = D_800DE030_de;
+        b = a;
+        switch (D_800E28D8) {
+        case 1:
+            a = D_800E2064;
+            b = D_800DE038;
+            break;
+        case 2:
+            a = D_800DE03C_de;
+            b = D_800DE040;
+            break;
+        case 0:
+            break;
         }
-        temp_t0 = D_80110634;
-        temp_a2 = D_80110634 + 8;
-        D_80110634 = temp_a2;
-        temp_t0->words.w0 = 0xFB000000;
-        D_80110634 = temp_a2 + 8;
-        temp_t0->words.w1 = (M2C_FIELD(arg0, u8 *, 7) << 0x18) | (M2C_FIELD(arg0, u8 *, 0xB) << 0x10) | (M2C_FIELD(arg0, u8 *, 0xF) << 8) | 0xFF;
-        M2C_FIELD(D_80110634, s32 *, 8) = 0xFA000000;
-        temp_a2->words.w1 = 0xE00000FF;
-        func_802AAC28_de(M2C_FIELD(arg0, s32 *, 0), temp_s2, (s16) (s32) M2C_FIELD(&D_80141008, f32 *, 0x2A4), (s16) (s32) M2C_FIELD(&D_80141008, f32 *, 0x2A8), M2C_BITWISE(f32, M2C_BITWISE(f64, (var_f2 * D_800DE048_de))), M2C_ERROR(/* Unable to find stack arg 0x14 in block */), 1);
+        gDPSetEnvColor(D_80110634++, arg0[7], arg0[0xB], arg0[0xF], 0xFF);
+        gDPSetPrimColor(D_80110634++, 0, 0, 0xE0, 0, 0, 0xFF);
+        func_802AAC28_de(*(s32 *)arg0, arg14, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
+                         a * (&D_800DE040)[1], b * D_800DE048_de, 1);
     }
 }
 #else
