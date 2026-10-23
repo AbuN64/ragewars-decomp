@@ -375,7 +375,7 @@ extern f32 D_800DDF3C_de;
    toward 0x96 in state 0, holds in state 2 while the countdown (unkC) runs, and ramps back down to 10 in
    state 1, then moves the selection on. */
 void func_80438828_de(void) {
-    s32 temp_s1;
+    s32 selected;
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;
@@ -383,52 +383,52 @@ void func_80438828_de(void) {
     s32 temp_v1_2;
     s32 var_v0;
 
-    temp_s1 = D_800E5830->selected;
+    selected = D_800E5830->selected;
     /* The word at +0x1C0 of the screen state has no shared field name yet. */
-    if ((D_800E5830->rows[temp_s1].unk0 >= 0) && (*((s32 *) ((u8 *) (D_800E5830) + 448)) != 0)) {
+    if ((D_800E5830->rows[selected].unk0 >= 0) && (*((s32 *) ((u8 *) (D_800E5830) + 448)) != 0)) {
         D_800D15E0 = 1;
-        D_800D15F0[0] = (f32) D_800E5830->rows[temp_s1].unk8;
+        D_800D15F0[0] = (f32) D_800E5830->rows[selected].unk8;
         func_804399D0((void *)&D_800E5830->modelWorkspace);
         D_800D15F0[0] = D_800DDF3C_de;
-        temp_v1 = D_800E5830->rows[temp_s1].unk4;
+        temp_v1 = D_800E5830->rows[selected].unk4;
         D_800D15E0 = 0;
         switch (temp_v1) {                          /* irregular */
         case 0:
-            temp_v0 = D_800E5830->rows[temp_s1].unk8 + 2;
-            D_800E5830->rows[temp_s1].unk8 = temp_v0;
+            temp_v0 = D_800E5830->rows[selected].unk8 + 2;
+            D_800E5830->rows[selected].unk8 = temp_v0;
             if (temp_v0 >= 0x97) {
-                D_800E5830->rows[temp_s1].unk8 = 0x96;
-                D_800E5830->rows[temp_s1].unk4 = 2;
-                if (temp_s1 <= 0) {
-                    var_v0 = temp_s1 * 4;
-                    if (D_800E5830->rows[temp_s1 + 1].unk0 > 0) {
-                        D_800E5830->rows[temp_s1].unkC = 0x96;
+                D_800E5830->rows[selected].unk8 = 0x96;
+                D_800E5830->rows[selected].unk4 = 2;
+                if (selected <= 0) {
+                    var_v0 = selected * 4;
+                    if (D_800E5830->rows[selected + 1].unk0 > 0) {
+                        D_800E5830->rows[selected].unkC = 0x96;
                         return;
                     }
                     goto block_15;
                 }
-                var_v0 = temp_s1 * 4;
+                var_v0 = selected * 4;
 block_15:
-                D_800E5830->rows[temp_s1].unkC = 0x38F;
+                D_800E5830->rows[selected].unkC = 0x38F;
                 return;
             }
             break;
         case 2:
-            temp_v1_2 = D_800E5830->rows[temp_s1].unkC;
+            temp_v1_2 = D_800E5830->rows[selected].unkC;
             if (temp_v1_2 != 0x38F) {
                 temp_v0_2 = temp_v1_2 - 1;
-                D_800E5830->rows[temp_s1].unkC = temp_v0_2;
+                D_800E5830->rows[selected].unkC = temp_v0_2;
                 if (temp_v0_2 <= 0) {
-                    D_800E5830->rows[temp_s1].unk4 = 1;
+                    D_800E5830->rows[selected].unk4 = 1;
                     return;
                 }
             }
             break;
         case 1:
-            temp_v0_3 = D_800E5830->rows[temp_s1].unk8 - 2;
-            D_800E5830->rows[temp_s1].unk8 = temp_v0_3;
+            temp_v0_3 = D_800E5830->rows[selected].unk8 - 2;
+            D_800E5830->rows[selected].unk8 = temp_v0_3;
             if (temp_v0_3 < 0xA) {
-                D_800E5830->rows[temp_s1].unk8 = 0xA;
+                D_800E5830->rows[selected].unk8 = 0xA;
                 D_800E5830->selected += 1;
                 func_80438614_de();
             }

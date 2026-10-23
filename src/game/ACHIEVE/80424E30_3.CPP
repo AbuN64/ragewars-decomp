@@ -359,28 +359,28 @@ s32 func_80426004_de(s32 index) {
 void func_80426090_de(Arg *arg0) {
     s32 temp_s0;
     s32 temp_v0;
-    s32 var_s1;
+    s32 i;
     StateRecAt91 *temp_a0;
-    Model *var_s2;
+    Model *model;
     s32 temp_s3;
     temp_a0 = arg0->unk5D8;
     if (temp_a0->unk91 != 1) {
-        var_s1 = 0;
+        i = 0;
         if (temp_a0->unk78 != 0) {
-            var_s2 = (Model *)arg0->unk18;
+            model = (Model *)arg0->unk18;
             temp_s3 = temp_a0->unk7F * 0x190;
                         do {
-                temp_s0 = var_s2->slots[var_s1];
+                temp_s0 = model->slots[i];
                 if (temp_s0 >= 0x4C3) {
                     temp_s0 = temp_s0 - 0x4C3;
                     temp_v0 = func_8022F4DC_de(temp_s3 + D_80102B00->name, temp_s0);
                     if (temp_v0 == 1) {
                         arg0->slots[temp_s0].available = temp_v0;
-                        arg0->slots[temp_s0].slot = var_s1;
+                        arg0->slots[temp_s0].slot = i;
                     }
                 }
-                var_s1 += 1;
-            } while (var_s1 < 8);
+                i += 1;
+            } while (i < 8);
         }
     }
 }
