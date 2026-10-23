@@ -48,8 +48,8 @@ static inline void fire(char *arg0, s32 arg1, s32 arg2, Triple arg3, struct IntP
     func_80266810_de((void *)arg0, arg1, arg2, arg3, arg6, 1, 0, 0x200);
 }
 
-void func_80268150_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
-    func_80266810_de((void *)arg0, arg1, arg2, arg3, arg6, 1, 1, 0x400);
+void func_80268150_de(s32 source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
+    func_80266810_de((void *)source, target, kind, position, arg6, 1, 1, 0x400);
 }
 
 void func_802681A8_de(func_8024E8F0_S1 *arg0, Context_func_802681A8_de *arg1, s32 unused2, Triple arg3, Params_func_802681A8_de arg6) {
@@ -115,21 +115,21 @@ void func_8026826C_de(ObjectRecAt17C *arg0, ObjectRecAt17C *arg1, s32 arg2, CVec
     func_8025DEC0_de(arg6.value, arg3, 0, selected, scale);
 }
 
-void func_8026835C_de(void *arg0, Filter *arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
-    ObjRecAt1 *object = arg0;
-    switch (arg1->type) {
+void func_8026835C_de(void *actor, Filter *filter, s32 arg2, Triple position, struct IntPair arg6) {
+    ObjRecAt1 *object = actor;
+    switch (filter->type) {
     case 0:
         if (object->unk1 != arg6.field_4) {
             return;
         }
         break;
     case 1:
-        if (!(arg1->mask & (arg1->type << arg6.field_4))) {
+        if (!(filter->mask & (filter->type << arg6.field_4))) {
             return;
         }
         break;
     }
-    func_80216288_de(arg0, arg6.field_0, arg3, 0);
+    func_80216288_de(actor, arg6.field_0, position, 0);
 }
 
 void func_802683E0_de(char *arg0, s32 arg1, s32 arg2, Triple_func_802683E0_de arg3, struct IntPair arg6)

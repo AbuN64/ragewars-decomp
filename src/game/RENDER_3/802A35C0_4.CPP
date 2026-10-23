@@ -126,7 +126,7 @@ s32 func_802A4134_de(AnimationFrameState *state,
 void func_802A42F4_de(Root752C *arg0, Entity1DC *arg1) {
     f32 sp10[16];
     f32 temp_f1;
-    f32 var_f0;
+    f32 scale;
     f32 var_f0_2;
     s32 temp_v1;
     u8 temp_v0;
@@ -153,11 +153,11 @@ loop_4:
                                 var_s0->unk_B0 = 0;
                             } else {
                                 func_80270910_de(&sp10, (char *)arg1 + ((D_800D297C << 6) + 0x60));
-                                var_f0 = D_800C5E28_de;
+                                scale = D_800C5E28_de;
                                 if (arg1->unk_118->unk14 != 0) {
-                                    var_f0 = D_800C5E2C_de;
+                                    scale = D_800C5E2C_de;
                                 }
-                                func_8027347C_de(&sp10, var_f0, var_f0, var_f0);
+                                func_8027347C_de(&sp10, scale, scale, scale);
                                 func_80272828_de(&sp10);
                                 func_802732D0_de(&sp10, var_s0->pos);
                                 if (var_s1->unk_3C & 4) {

@@ -66,6 +66,6 @@ void func_80268A40_de(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
     }
 }
 
-void *func_80268BE0_de(s32 arg0, s32 arg1) {
-    return func_80268C1C_de(arg0, func_8028B00C_de(&D_8011FE88, arg1));
+void *func_80268BE0_de(s32 arg0, s32 index) {
+    return func_80268C1C_de(arg0, func_8028B00C_de(&D_8011FE88, index));
 }

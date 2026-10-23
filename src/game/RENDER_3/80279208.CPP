@@ -39,8 +39,8 @@ void func_802791B8_de(void *arg0) {
     func_8025E260_de((((struct ObjRecAt6V1 *) ((s8 *) arg0))->unk6));
 }
 
-void func_802791D8_de(struct Shared_Actor *arg0) {
-    arg0->weaponFlags &= ~0x10000;
+void func_802791D8_de(struct Shared_Actor *actor) {
+    actor->weaponFlags &= ~0x10000;
 }
 
 /** Set flag 0x10000 in the word at offset 0x100. */

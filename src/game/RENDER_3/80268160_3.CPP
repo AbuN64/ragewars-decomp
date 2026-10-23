@@ -51,7 +51,7 @@ extern f32 D_800C9570[];
 extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
 extern void func_8022B11C_de(OwnerRecAt16D4 *, s32);
 
-void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast) {
+void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast blast) {
     CVector3 delta;
     OwnerRecAt16D4 *owner;
     f32 range;
@@ -61,7 +61,7 @@ void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast
         owner = arg0->owner;
         if (owner->alive != 0) {
             range = (f32)blast.radius * D_800C9570[1];
-            func_80271F68_de(&delta, &owner->pos, &arg1->pos);
+            func_80271F68_de(&delta, &owner->pos, &player->pos);
             dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
             range = range * range;
             if (range < dist) {
@@ -72,8 +72,8 @@ void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *arg1, s32 arg2, Blast blast
     }
 }
 
-void func_802689BC_de(LevelActor *arg0, int arg1, int arg2, Blast blast) {
-    arg0->effectMode = (u8)blast.radius;
+void func_802689BC_de(LevelActor *actor, int arg1, int arg2, Blast blast) {
+    actor->effectMode = (u8)blast.radius;
 }
 
 /* Calls func_80217388_de on an object and its block at 0x170, sets bit 0x20 in that block's first word, clears flags 0x10000, 0x2000 and 0x100 at offset 0x100, and calls func_80262C88_de when flag 0x80000 remains set. Adapted from func_802790C0_de with the block taken at offset 0x170 of the object, a by-value record added as the fourth argument, and each flag update written as a compound assignment to memory. */

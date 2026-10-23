@@ -65,18 +65,18 @@ extern s32 D_800CC364;
 
 extern Gfx *D_80110634;
 
-s32 func_8026925C_de(s32 arg0) {
+s32 func_8026925C_de(s32 tailEnum) {
 
-    if (D_800CC364 == arg0) {
+    if (D_800CC364 == tailEnum) {
         return 0;
     }
-    D_800CC364 = arg0;
+    D_800CC364 = tailEnum;
 
     {
-        if ((u32)arg0 > 30) {
+        if ((u32)tailEnum > 30) {
             goto sw_mode_default;
         }
-        switch (arg0) {
+        switch (tailEnum) {
         case 0: goto sw_mode_0;
         case 1: goto sw_mode_1;
         case 2: goto sw_mode_2;
@@ -110,7 +110,7 @@ s32 func_8026925C_de(s32 arg0) {
         case 30: goto sw_mode_30;
         }
     }
-    switch (arg0) {
+    switch (tailEnum) {
     case 0: sw_mode_0: {
         if (D_800CC370) gDPSetRenderMode(D_80110634++, 0x0C1849D8, 0) else gDPSetRenderMode(D_80110634++, 0x0C184A50, 0);
         break;

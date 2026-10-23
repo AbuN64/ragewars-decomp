@@ -16,16 +16,16 @@ void func_802A5A54_de(void *animator, int arg1) {
     animation->script = (f32 *)arg1;
 }
 
-void func_802A5A64_de(EffectContribution *arg0) {
-    if (arg0->weight != 0.0f) {
-        D_800D15E0.unk4 = arg0->x;
-        D_800D15E0.unk8 = arg0->y;
-        D_800D15E0.unkC = arg0->z;
+void func_802A5A64_de(EffectContribution *effectContribution) {
+    if (effectContribution->weight != 0.0f) {
+        D_800D15E0.unk4 = effectContribution->x;
+        D_800D15E0.unk8 = effectContribution->y;
+        D_800D15E0.unkC = effectContribution->z;
     } else {
         D_800D15E0.unk4 = 0.0f;
         D_800D15E0.unk8 = 0.0f;
         D_800D15E0.unkC = 0.0f;
     }
-    D_800D15F0.unk0 = arg0->weight;
-    D_800D15F0.unk4 = arg0->scale;
+    D_800D15F0.unk0 = effectContribution->weight;
+    D_800D15F0.unk4 = effectContribution->scale;
 }

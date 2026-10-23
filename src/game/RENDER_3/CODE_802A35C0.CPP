@@ -98,7 +98,7 @@ extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, vo
 extern void func_80271F9C_de(void *, void *, f32);
 extern void func_8027027C_de(void *, f32 *);
 
-void *func_802A25D0_de(void *arg0, void *arg1, void *arg2) {
+void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
     CVector3 sp10;
     f32 temp_f0;
     f32 temp_f0_2;
@@ -113,12 +113,12 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *arg2) {
         ((ObjectLinks54 *)(arg1))->unk_50 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_8 = ((struct ObjectState20 *) ((ObjectLinks54 *) arg1)->unk_8)->unk_8;
         ((ObjectLinksB4 *)(var_s0))->unk_B0 = 0;
-        func_802732D0_de(arg2, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
+        func_802732D0_de(local, &((ObjectLinksB4 *)(var_s0))->unk_10.v0);
         if (((ObjectLinks54 *)(arg1))->unk_3C & 4) {
-            func_802732EC_de(arg2, &((ObjectLinksB4 *)(var_s0))->unk_1C);
+            func_802732EC_de(local, &((ObjectLinksB4 *)(var_s0))->unk_1C);
         } else {
-            func_8027027C_de(arg2, &((ObjectLinksB4 *)(var_s0))->unk_28);
-            func_8027027C_de(arg2, &((ObjectLinksB4 *)(var_s0))->unk_68);
+            func_8027027C_de(local, &((ObjectLinksB4 *)(var_s0))->unk_28);
+            func_8027027C_de(local, &((ObjectLinksB4 *)(var_s0))->unk_68);
         }
         temp_s1 = *(void **)var_s0;
         ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
@@ -257,7 +257,7 @@ void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 sca
     }
 }
 
-s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
+s32 func_802A2FA4_de(s32 owner, State_func_802A2FA4_de *state) {
     LevelActor *object;
     Nodes *node;
     Nodes *next;
@@ -305,7 +305,7 @@ s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
                 updated = value - decay;
                 node->value = updated;
                 if (updated < cutoff) {
-                    func_802A5780_de(arg0, state, node);
+                    func_802A5780_de(owner, state, node);
                 }
             } else {
                 updated = value - D_800D2988;
@@ -337,7 +337,7 @@ s32 func_802A2FA4_de(s32 arg0, State_func_802A2FA4_de *state) {
     return 1;
 }
 
-void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *arg2, void *arg3) {
+void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, void *matrix) {
     f32 setup[4];
     CVector3 first;
     CVector3 basis;
@@ -352,7 +352,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *arg2, void
     setup[0] = 0;
     setup[1] = 0;
     setup[2] = D_800C5DE8_de[1];
-    func_80272B38_de(&arg2->unk1A0, setup, &basis);
+    func_80272B38_de(&camera->unk1A0, setup, &basis);
     neg_y = -basis.y;
     neg_z = -basis.z;
     basis.y = neg_y;
@@ -366,24 +366,24 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *arg2, void
     func_80271F9C_de(&result, &result, arg0->a);
     func_80271F9C_de(&cross, &cross, arg0->b);
     func_80271F9C_de(&basis, &basis, arg0->c);
-    func_802727D8_de(arg3);
-    ((Matrix *)arg3)->m[0] = result.x;
-    ((Matrix *)arg3)->m[1] = result.y;
-    ((Matrix *)arg3)->m[2] = result.z;
-    ((Matrix *)arg3)->m[4] = cross.x;
-    ((Matrix *)arg3)->m[5] = cross.y;
-    ((Matrix *)arg3)->m[6] = cross.z;
-    ((Matrix *)arg3)->m[8] = basis.x;
-    ((Matrix *)arg3)->m[9] = basis.y;
-    ((Matrix *)arg3)->m[10] = basis.z;
-    ((Matrix *)arg3)->m[12] = arg0->position.x;
-    ((Matrix *)arg3)->m[13] = arg0->position.y;
-    ((Matrix *)arg3)->m[14] = arg0->position.z;
+    func_802727D8_de(matrix);
+    ((Matrix *)matrix)->m[0] = result.x;
+    ((Matrix *)matrix)->m[1] = result.y;
+    ((Matrix *)matrix)->m[2] = result.z;
+    ((Matrix *)matrix)->m[4] = cross.x;
+    ((Matrix *)matrix)->m[5] = cross.y;
+    ((Matrix *)matrix)->m[6] = cross.z;
+    ((Matrix *)matrix)->m[8] = basis.x;
+    ((Matrix *)matrix)->m[9] = basis.y;
+    ((Matrix *)matrix)->m[10] = basis.z;
+    ((Matrix *)matrix)->m[12] = arg0->position.x;
+    ((Matrix *)matrix)->m[13] = arg0->position.y;
+    ((Matrix *)matrix)->m[14] = arg0->position.z;
 }
 
 struct GameplayCamera;
 
-void func_802A339C_de(void *arg0, void *arg1) {
+void func_802A339C_de(void *arg0, void *camera) {
     f32 matrix[16];
     Node438C *first;
     Node438C *next;
@@ -431,7 +431,7 @@ z_test:
         goto z_test;
 boundary:
         if (a != 0 && b != 0) {
-            func_802A31E8_de(a, b, arg1, matrix);
+            func_802A31E8_de(a, b, camera, matrix);
             goto apply;
         }
 no_pair:

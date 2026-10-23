@@ -203,11 +203,11 @@ void func_802A5498_de(u32 arg0) {
     func_80295FF4_de();
 }
 
-void func_802A5680_de(s32 arg0) {
+void func_802A5680_de(s32 owner) {
     D_800CDBE8 = 0;
     if (D_80146894 == 0) {
-        func_802A5E08_de((void *)arg0);
-        func_802A5EE0_de(arg0);
+        func_802A5E08_de((void *)owner);
+        func_802A5EE0_de(owner);
     }
 }
 
@@ -237,25 +237,25 @@ void func_802A56FC_de(void *object) {
 }
 
 s32 func_802A5734_de(void *arg0, s32 arg1) {
-    s32 temp_s0;
-    temp_s0 = (((struct IntegerState6A94 *) ((s8 *) arg0))->unk_6A90);
-    if (temp_s0 != 0) {
-        Lists_Remove(arg0 + 0x6A90, (ListLink *)temp_s0);
-        Lists_Append(arg1 + 0x40, temp_s0);
+    s32 actors;
+    actors = (((struct IntegerState6A94 *) ((s8 *) arg0))->unk_6A90);
+    if (actors != 0) {
+        Lists_Remove(arg0 + 0x6A90, (ListLink *)actors);
+        Lists_Append(arg1 + 0x40, actors);
     }
-    return temp_s0;
+    return actors;
 }
 
-void func_802A5780_de(s32 arg0, void *arg1, void *arg2) {
-    (((struct FloatState50 *) ((s8 *) arg1))->unk_4C) = (f32) ((((struct FloatState50 *) ((s8 *) arg1))->unk_4C) - (((struct FloatStateB0 *) ((s8 *) arg2))->unk_AC));
-    Lists_Remove(arg1 + 0x40, arg2);
-    Lists_Append(arg0 + 0x6A90, arg2);
+void func_802A5780_de(s32 arg0, void *arg1, void *actors) {
+    (((struct FloatState50 *) ((s8 *) arg1))->unk_4C) = (f32) ((((struct FloatState50 *) ((s8 *) arg1))->unk_4C) - (((struct FloatStateB0 *) ((s8 *) actors))->unk_AC));
+    Lists_Remove(arg1 + 0x40, actors);
+    Lists_Append(arg0 + 0x6A90, actors);
 }
 
 void func_802A57D8_de(void) {
 }
 
-void func_802A57E0_de(Owner802A6DF8 *arg0, s32 arg1, char *arg2) {
+void func_802A57E0_de(Owner802A6DF8 *arg0, s32 actor, char *arg2) {
     f32 sp10[16];
     f32 temp;
     f32 zero;
@@ -266,7 +266,7 @@ void func_802A57E0_de(Owner802A6DF8 *arg0, s32 arg1, char *arg2) {
         zero = 0.0f;
         temp = D_800C5E94_de;
         do {
-            if ((s32)node->object == arg1 && node->value > zero) {
+            if ((s32)node->object == actor && node->value > zero) {
                 func_8027302C(sp10, (f32 *)(arg2 + (node->node->matrixIndex << 6)));
                 func_8027347C_de(sp10, temp, temp, temp);
                 func_80272828_de(sp10);
@@ -277,7 +277,7 @@ void func_802A57E0_de(Owner802A6DF8 *arg0, s32 arg1, char *arg2) {
     }
 }
 
-void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWords *arg2) {
+void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *particle, PackedMatrixWords *packedMatrixWords) {
     f32 local[16];
     f32 scale;
     f32 zero;
@@ -287,12 +287,12 @@ void func_802A58B0_de(ObjRecAt7528 *arg0, Shared_Particle *arg1, PackedMatrixWor
     if (node != 0) {
         zero = 0.0f;
         do {
-            if (node->unk1C == arg1 &&
+            if (node->unk1C == particle &&
                 node->unk24 > zero &&
                 node->unk24 > zero) {
-                func_80270910_de(local, arg2);
+                func_80270910_de(local, packedMatrixWords);
                 scale = D_800C5E98_de;
-                if (arg1->desc->renderModel != 0) {
+                if (particle->desc->renderModel != 0) {
                     scale = D_800C5E9C_de;
                 }
                 func_8027347C_de(local, scale, scale, scale);
