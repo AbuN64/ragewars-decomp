@@ -41,8 +41,8 @@ void func_8022C67C_de(void *arg0) {
     obj->unkA0 = f4;
 }
 
-s32 func_8022C6E4_de(void *arg0, void *arg1) {
-    s16 state = ((Actor_func_8022D290_de *)arg0)->unk_0x0650;
+s32 func_8022C6E4_de(void *player, void *arg1) {
+    s16 state = ((Actor_func_8022D290_de *)player)->unk_0x0650;
     s32 blocked;
 
     if ((state == 0x15) || (state == 0x13) || (state == 0x14)) {
@@ -54,20 +54,20 @@ s32 func_8022C6E4_de(void *arg0, void *arg1) {
         if ((((LevelActor *)arg1)->motionState & 0x20000) == 0) {
             return 0;
         }
-        if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0xD) {
+        if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0xD) {
             return 0;
         }
-        if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0xE) {
+        if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0xE) {
             return 0;
         }
-        func_802227F4_de(arg0, arg1, 0xD);
+        func_802227F4_de(player, arg1, 0xD);
         return 1;
     }
     return 0;
 }
 
-s32 func_8022C760_de(void *arg0, void *arg1) {
-    s16 state = ((Actor_func_8022D290_de *)arg0)->unk_0x0650;
+s32 func_8022C760_de(void *player, void *arg1) {
+    s16 state = ((Actor_func_8022D290_de *)player)->unk_0x0650;
     s32 blocked;
     s32 flags;
 
@@ -78,10 +78,10 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
     }
     if (blocked == 0) {
         if (((MovementDescriptor *)((LevelActor *)arg1)->definition)->body.header.flags & 1) {
-            if (((Actor_func_8022D290_de *)arg0)->unk_0x0650 == 0x26) {
+            if (((Actor_func_8022D290_de *)player)->unk_0x0650 == 0x26) {
                 return 0;
             }
-            if (((Actor_func_8022D290_de *)arg0)->unk_0x0664 & 0x8000) {
+            if (((Actor_func_8022D290_de *)player)->unk_0x0664 & 0x8000) {
                 return 0;
             }
             flags = ((LevelActor *)arg1)->motionState;
@@ -94,20 +94,20 @@ s32 func_8022C760_de(void *arg0, void *arg1) {
     return 0;
 fire:
     ((LevelActor *)arg1)->motionState = flags | 0x100;
-    func_802227F4_de(arg0, arg1, 0xF);
+    func_802227F4_de(player, arg1, 0xF);
     return 1;
 }
 
-s32 func_8022C7F8_de(void *arg0, LevelActor *arg1) {
+s32 func_8022C7F8_de(void *player, LevelActor *actor) {
     f32 field6E4;
 
-    if (((Actor_func_8022D290_de *)arg0)->unk_0x07E8 == 0) {
-        field6E4 = ((Actor_func_8022D290_de *)arg0)->unk_0x06E4;
+    if (((Actor_func_8022D290_de *)player)->unk_0x07E8 == 0) {
+        field6E4 = ((Actor_func_8022D290_de *)player)->unk_0x06E4;
         if (!(D_800C2D5C_de < field6E4)) {
-            if (!(arg1->motionState & 0xC0000)) {
-                if (((MovementDescriptor *)arg1->definition)->body.header.flags & 2) {
-                    if ((((Actor_func_8022D290_de *)arg0)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)arg0)->unk_0x11D8 <= 0.0f)) {
-                        func_802227F4_de(arg0, arg1, 5);
+            if (!(actor->motionState & 0xC0000)) {
+                if (((MovementDescriptor *)actor->definition)->body.header.flags & 2) {
+                    if ((((Actor_func_8022D290_de *)player)->unk_0x06B0 & 0x10) && (((Actor_func_8022D290_de *)player)->unk_0x11D8 <= 0.0f)) {
+                        func_802227F4_de(player, actor, 5);
                         return 1;
                     }
                 }
@@ -122,8 +122,8 @@ int func_8022C88C_de(void *arg0, void *arg1, s32 *arg2) {
     return 0;
 }
 
-void func_8022C894_de(void *arg0, LevelActor *arg1) {
-    arg1->position1.x = 0;
-    arg1->position1.y = 0;
-    arg1->position1.z = 0;
+void func_8022C894_de(void *arg0, LevelActor *actor) {
+    actor->position1.x = 0;
+    actor->position1.y = 0;
+    actor->position1.z = 0;
 }

@@ -125,7 +125,7 @@ void func_8022C110_de(PlayerRecAt1450V2 *player) {
     player->timer = 0;
 }
 
-void func_8022C1E8_de(char *arg0, char *arg1) {
+void func_8022C1E8_de(char *player, char *view) {
     f32 x, y;
     f32 sx, sy;
     f32 bx, by;
@@ -135,17 +135,17 @@ void func_8022C1E8_de(char *arg0, char *arg1) {
 
     func_802A9234_de(D_801462DE);
 
-    x = ((Shared_HudView *)arg1)->width;
+    x = ((Shared_HudView *)view)->width;
     sx = x / (f32) D_800E28D0;
     bx = sx * D_800C2D2C_de;
 
-    y = ((Shared_HudView *)arg1)->height;
+    y = ((Shared_HudView *)view)->height;
     sy = y / (f32) D_800E28D4;
     by = sy * D_800C2D2C_de;
 
-    t1 = ((Shared_HudView *)arg1)->x + x;
-    t2 = ((Shared_HudView *)arg1)->y + y;
-    w = ((SharedPlayer *)arg0)->views5E8.view7BC_101.unk7BC;
+    t1 = ((Shared_HudView *)view)->x + x;
+    t2 = ((Shared_HudView *)view)->y + y;
+    w = ((SharedPlayer *)player)->views5E8.view7BC_101.unk7BC;
 
     screenX = t1 + bx;
     screenY = t2 + by;
@@ -179,7 +179,7 @@ void func_8022C2B4_de(void *arg0, struct ScreenRectangle *arg1)
   func_802AAC28_de(0x1FB, 0, (s16) ((s32) (((arg1->width) + ax) - bx)), (s16) ((s32) screenY), sx, sy, 1);
 }
 
-void func_8022C37C_de(char *arg0, char *arg1) {
+void func_8022C37C_de(char *player, char *view) {
     f32 x, y;
     f32 sx, sy;
     f32 bx, by, cz;
@@ -189,19 +189,19 @@ void func_8022C37C_de(char *arg0, char *arg1) {
 
     func_802A9234_de(D_801462DE);
 
-    x = ((Shared_HudView *)arg1)->width;
+    x = ((Shared_HudView *)view)->width;
     sx = x / (f32) D_800E28D0;
     bx = sx * D_800C2D38_de;
 
-    y = ((Shared_HudView *)arg1)->height;
+    y = ((Shared_HudView *)view)->height;
     sy = y / (f32) D_800E28D4;
     by = sy * D_800C2D38_de;
 
     cz = sy * D_800C2D3C_de;
 
-    t1 = ((Shared_HudView *)arg1)->x + x;
-    t2 = ((Shared_HudView *)arg1)->y + y;
-    w = ((SharedPlayer *)arg0)->views5E8.view7BC_101.unk7BC;
+    t1 = ((Shared_HudView *)view)->x + x;
+    t2 = ((Shared_HudView *)view)->y + y;
+    w = ((SharedPlayer *)player)->views5E8.view7BC_101.unk7BC;
 
     screenX = t1 + bx;
     screenY = t2 + by;
@@ -218,9 +218,9 @@ void *func_8022C454_de(void *arg0) {
 
 s32 func_8022C460_de(void *arg0) {
     Shared_ActorView *player = arg0;
-    s16 temp_v1;
-    temp_v1 = player->action;
-    if ((temp_v1 == 0x15) || (temp_v1 == 0x13) || (temp_v1 == 0x14)) {
+    s16 action;
+    action = player->action;
+    if ((action == 0x15) || (action == 0x13) || (action == 0x14)) {
         return 1;
     }
     return 0;
@@ -239,26 +239,26 @@ void func_8022C490_de(Player1680 *player) {
 
 void *func_8022C55C_de(void *arg0, u32 arg1) {
     struct World24 *world = arg0;
-    Shared_ActorView *var_v1;
+    Shared_ActorView *actor;
     s32 var_a2;
 
-    var_v1 = 0;
+    actor = 0;
     var_a2 = 0;
     if (arg1 < 8U) {
-        var_v1 = (void *)world->players;
-        if (var_v1 != 0) {
+        actor = (void *)world->players;
+        if (actor != 0) {
             do {
-                if ((u8)var_v1->controls->resetFlag == 0) {
+                if ((u8)actor->controls->resetFlag == 0) {
                     if (var_a2 == (s32) arg1) {
-                        return var_v1;
+                        return actor;
                     }
                     var_a2 += 1;
                 }
-                var_v1 = var_v1->next;
-            } while (var_v1 != 0);
+                actor = actor->next;
+            } while (actor != 0);
         }
     }
-    return var_v1;
+    return actor;
 }
 
 void func_8022C5AC_de(char *object) {

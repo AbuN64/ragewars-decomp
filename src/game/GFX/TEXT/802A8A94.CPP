@@ -152,7 +152,7 @@ void func_802A7DE4_de(s32 x0,s32 y0,s32 x1,s32 y1,s32 border,s32 invert,s32 red,
     rectangle(x0,y0,x0+border,y1,darkR,darkG,darkB,a);
 }
 
-void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32 rightAlign, s32 minDigits) {
+void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 scaleY, s32 arg5, s32 rightAlign, s32 minDigits) {
     s32 sprites;
     s32 negative;
     s32 thousands;
@@ -196,7 +196,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32
         last = minDigits - 1;
     }
     if (negative) {
-        func_802AAC28_de(4, 10, x, y, size, arg4, arg5);
+        func_802AAC28_de(4, 10, x, y, size, scaleY, arg5);
         x += size * 13.0f;
     }
     for (i = last; i >= 0; i--) {
@@ -228,7 +228,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32
             x -= width;
         }
         if ((u32)digit < 10) {
-            Text_DrawTileGrid(sprites, digit, x, y, size, arg4, arg5);
+            Text_DrawTileGrid(sprites, digit, x, y, size, scaleY, arg5);
         }
         if (!rightAlign) {
             x += width;

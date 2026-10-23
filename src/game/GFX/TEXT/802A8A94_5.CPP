@@ -76,11 +76,11 @@ extern s32 Render_StartWorldEffect(void *,s32,s32,s32);
 extern void func_802AA8EC_de(s32,s32,void **,s32 *);
 extern void func_80253754_de(s32,s32);
 
-void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
+void func_802AAB3C_de(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
     D_80137798[0] = arg0;
     D_80137798[1] = arg1;
     D_80137798[2] = arg2;
-    D_80137798[3] = arg3;
+    D_80137798[3] = alpha;
     D_80137798[4] = arg4;
     D_80137798[5] = arg5;
 }
@@ -94,26 +94,26 @@ void func_802AAB68_de(float arg0, float arg1) {
 #endif
 
 #if defined(VERSION_EU_X)
-void func_802AAB7C_de(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void func_802AAB7C_de(u8 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 alpha, s32 arg7) {
     if (arg5 != 0) {
-        func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 1, arg6, arg7);
+        func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 1, alpha, arg7);
     }
-    func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 0, arg6, arg7);
+    func_802A88F0_de(arg0, arg1, arg2, arg3, arg4, 0, alpha, arg7);
 }
 #endif
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
-s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6) {
+s32 func_802AAC28_de(s32 icon, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 which) {
 
     s32 temp_v0;
 
     if ((u32)(D_800E28A4 - (((u32)D_80110634 - (u32)D_8011BDC0->commands) >> 3)) < 0x3E8
         || D_800CD764_de == 0
-        || (temp_v0 = Render_StartWorldEffect(&D_8011FE88, arg0, 0, 1), temp_v0 == 0)) {
+        || (temp_v0 = Render_StartWorldEffect(&D_8011FE88, icon, 0, 1), temp_v0 == 0)) {
         return 0;
     }
-    Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
+    Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, which);
     func_80253754_de(0, temp_v0);
     return 1;
 }

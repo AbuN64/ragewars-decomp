@@ -45,10 +45,10 @@ void func_802AA6D0_de(void *arg0, s16 arg1, s16 arg2)
   mover->y = (f32) arg2;
 }
 
-s32 func_802AA70C_de(void *arg0, s32 *arg1) {
-    (((struct ObjectLinksC_2 *) ((s8 *) arg0))->unk_4) = arg1;
-    (((struct ObjectLinksC_2 *) ((s8 *) arg0))->unk_8) = 2;
-    return func_802A7AA4_de(arg0);
+s32 func_802AA70C_de(void *widget, s32 *arg1) {
+    (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_4) = arg1;
+    (((struct ObjectLinksC_2 *) ((s8 *) widget))->unk_8) = 2;
+    return func_802A7AA4_de(widget);
 }
 
 s32 func_802AA730_de(void *arg0, s32 arg1, s32 arg2) {
