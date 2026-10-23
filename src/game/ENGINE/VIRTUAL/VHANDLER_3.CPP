@@ -136,7 +136,7 @@ void func_8023C8D4_de(struct PagerCounters *arg0) {
 
 /* Resource manager thread setup and loop: fills a 0x200-byte stack with a marker, creates and starts the
  * thread object at D_80103720 (entry D_0023CA24, stack top D_800FFB50), then forever receives request
- * messages and dispatches on the request type to func_8023C1F0_de, Sched_FinishPageJob, func_8023CCD4_de or
+ * messages and dispatches on the request type to Virtual_HandleResourcePageRequest, Sched_FinishPageJob, func_8023CCD4_de or
  * func_8023CDD4_de. */
 extern char D_800FF950[];
 extern char D_0023CA24[];
@@ -154,7 +154,7 @@ void func_8023C924_de(void) {
         func_802BB2A0_de(&D_800FF254, &request, 1);
         switch (((Request *)request)->type) {
         case 0:
-            func_8023C1F0_de();
+            Virtual_HandleResourcePageRequest();
             break;
         case 1:
             Sched_FinishPageJob(request);

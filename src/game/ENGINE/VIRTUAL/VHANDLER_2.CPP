@@ -454,31 +454,41 @@ void *func_8023CBC0_de(u16);
 void osWritebackDCacheAll(void);
 void func_802BD170_de(s32);
 void func_802BB750_de(void *);
-/* Firmware restart entry at80000400, called by the native fatal-fault path. */
-void rw_boot_entry(void);
 
 static __inline__ void detachPage(ResourcePageMapping *mapping) {
-    if (mapping->prev) mapping->prev->next = mapping->next;
+    if (readLink(&mapping->prev)) readLink(&mapping->prev)->next = readLink(&mapping->next);
     else {
-        D_800FF230.head = mapping->next;
-        mapping->next->prev = 0;
+        D_800FFE20 = readLink(&mapping->next);
+        readLink(&mapping->next)->prev = 0;
     }
-    if (mapping->next) mapping->next->prev = mapping->prev;
+    if (readLink(&mapping->next)) readLink(&mapping->next)->prev = readLink(&mapping->prev);
     else {
-        D_800FF230.tail = mapping->prev;
-        mapping->prev->next = 0;
+        D_800FFE24 = readLink(&mapping->prev);
+        readLink(&mapping->prev)->next = 0;
     }
 }
-void func_8023C1F0_de(void) {
+/* 33/307 aligned edits remain: region/counter registers and job-source scheduling. */
+/* The pager uses the same two-pointer list operations as its worker. */
+static __inline__ void appendPage(Field_void_4 *list, void *node) {
+    void *tail;
+    *(void **)node = 0;
+    ((Field_void_4 *)node)->value = list->value;
+    tail = list->value;
+    if (tail) *(void **)tail = node;
+    list->value = node;
+    if (!*(void **)list) *(void **)list = node;
+}
+void Virtual_HandleResourcePageRequest(void) {
     ResourcePageThread *thread;
     Region *region;
     ResourcePageMapping *mapping;
     ResourcePageJob *job;
-    void *message;
     u8 *slot;
     u32 page, kind;
     u64 start, elapsed;
     f32 duration;
+    f32 scale;
+    f32 limit;
     thread = func_802BAD70_de();
     kind = thread->message & 0x7C;
     if (kind == 4 || kind == 8) {
@@ -497,27 +507,22 @@ void func_8023C1F0_de(void) {
                 if (mapping->slot == 0xFF) {
                     detachPage(mapping);
                     func_8023BD34_de(page, mapping, thread->slot, slot);
-                    mapping->next = 0;
-                    mapping->prev = D_800FF230.tail;
-                    if (D_800FF230.tail) D_800FF230.tail->next = mapping;
-                    D_800FF230.tail = mapping;
-                    if (!D_800FF230.head) D_800FF230.head = mapping;
+                    appendPage((Field_void_4 *)&D_800FFE20, mapping);
                 }
                 thread->state = 2;
                 func_802BB750_de(thread);
                 return;
             }
-            func_802BB2A0_de(&D_800FF230.jobs, &message, 1);
-            job = message;
+            func_802BB2A0_de(&D_800FF230.jobs, (void **)&job, 1);
             D_800FF230.counters.misses++;
             job->size = 4096;
             job->source = region->source[page - region->start];
-            mapping = D_800FF230.head;
+            mapping = D_800FFE20;
             detachPage(mapping);
             func_8023C084_de(mapping);
             if (mapping->id != 0xFFFF) {
-                region = func_8023CBC0_de(mapping->id);
-                region->map[mapping->id - region->start] = 0xFF;
+                Region *previousRegion = func_8023CBC0_de(mapping->id);
+                previousRegion->map[mapping->id - previousRegion->start] = 0xFF;
                 mapping->id = 0xFFFF;
             }
             mapping->fieldC = 0;
@@ -529,24 +534,28 @@ void func_8023C1F0_de(void) {
             return;
         }
         start = func_802BADC0_de();
+        scale = D_800C3610_de;
+        limit = D_800C3614_de;
         do {
             elapsed = ((func_802BADC0_de() - start) << 6) / 3000;
             duration = elapsed;
-        } while (duration * D_800C3610_de < D_800C3614_de);
+        } while (duration * scale < limit);
     } else {
         start = func_802BADC0_de();
+        scale = D_800C3618_de;
+        limit = D_800C361C_de;
         do {
             elapsed = ((func_802BADC0_de() - start) << 6) / 3000;
             duration = elapsed;
-        } while (duration * D_800C3618_de < D_800C361C_de);
+        } while (duration * scale < limit);
     }
     osWritebackDCacheAll();
     func_802BD170_de(1);
-    rw_boot_entry();
+    ((void (*)(void))0x80000400)();
     D_800CB3F8_de = -1;
     thread->state = 2;
     func_802BB750_de(thread);
 }
 #else
-INCLUDE_ASM("span_1000", func_8023C1F0_de);
+INCLUDE_ASM("span_1000", Virtual_HandleResourcePageRequest);
 #endif
