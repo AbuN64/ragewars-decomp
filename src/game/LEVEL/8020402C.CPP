@@ -44,10 +44,8 @@ INCLUDE_ASM("span_1000", func_80204030_de);
 #else
 #define LV_FN func_80204030_us_rev1
 #endif
-#ifdef NON_MATCHING
 #define LV_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 extern s32 D_auto_800D70DC;
-extern f32 D_800C6B40;
 extern u8 *func_8022A420_de(u8 *);
 extern f32 func_802B72B0_de(f32);
 extern void func_8022E17C_de(void *, void *, s32);
@@ -98,7 +96,7 @@ void LV_FN(u8 *self, u8 *hit) {
         d.y = LV_FIELD(player, f32, 0xC) - LV_FIELD(self, f32, 0xC);
         d.z = LV_FIELD(player, f32, 0x10) - LV_FIELD(self, f32, 0x10);
         distance = func_802B72B0_de(d.x * d.x + d.y * d.y + d.z * d.z);
-        if ((f32)(s32)distance < D_800C6B40) {
+        if ((f32)(s32)distance < 122.88f) {
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x8F) = 0;
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u8, 0x90) = 1;
             LV_FIELD(LV_FIELD(player, u8 *, 0x5D8), u16, 8) += 1;
@@ -146,9 +144,6 @@ void LV_FN(u8 *self, u8 *hit) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_80204030_us_rev1);
-#endif
 #endif
 
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"

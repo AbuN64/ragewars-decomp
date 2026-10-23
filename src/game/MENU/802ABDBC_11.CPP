@@ -317,11 +317,8 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))
-#ifdef NON_MATCHING
 #include "TYPES.H"
 
-extern f32 D_800C62D8;
-extern f32 D_800C62DC;
 extern void D_002AD1B4(void);
 extern void D_002AD264(void);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
@@ -384,10 +381,10 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
     command = arg1->unk4 - 0x708;
     switch (command) {
     case 0:
-        arg0->unk670 = D_800C62D8;
+        arg0->unk670 = 120.0f;
         break;
     case 1:
-        arg0->unk674 = D_800C62DC;
+        arg0->unk674 = 120.0f;
         break;
     case 2:
     case 3:
@@ -422,7 +419,4 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
     }
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", func_802ACE38_de);
-#endif
 #endif
