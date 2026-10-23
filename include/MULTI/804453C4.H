@@ -42,5 +42,5 @@ struct TextEntryRecAtC {
     s32 count;
     char text[12];
 };
-extern int func_80446330_us_rev1(void * arg0);
+extern int Multi_SetupNameSpinner(void * arg0);
 #endif

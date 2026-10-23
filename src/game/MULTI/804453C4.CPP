@@ -59,8 +59,8 @@ extern s32 func_8022A5A0_de(char *, s32);
 typedef struct SpinnerSetupMenu { char pad0[0xC]; char *object; char pad10[0xC]; s32 id; } SpinnerSetupMenu;
 extern char D_8014641C_us_rev1[];
 extern char *D_800D3C44;
-/* 157/161 words; remaining: li/subu are scheduled before the index*24 sll chain, the ROM schedules them after it (same instructions otherwise) */
-int func_80446330_us_rev1(void *arg0) {
+/* 157/161 aligned words; remaining: return-count register and tail index scheduling. */
+int Multi_SetupNameSpinner(void *arg0) {
     SpinnerSetupMenu *menu = arg0;
     s32 index;
     s32 k;
@@ -133,12 +133,12 @@ int func_80446330_us_rev1(void *arg0) {
         *dst++ = *src++;
     }
     *dst = 0;
-    D_800E63C0[index].value = 8 - trailing;
-    D_800E20A4_de[index].max = 8 - trailing;
-    return 8 - trailing;
+    D_800E63C0[index].value = i;
+    D_800E20A4_de[index].max = i;
+    return i;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80446330_us_rev1);
+INCLUDE_ASM("ovl_80400000", Multi_SetupNameSpinner);
 #endif
 #endif
 
