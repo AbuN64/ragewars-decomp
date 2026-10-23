@@ -16,32 +16,51 @@ extern f32 D_800DCC78;
 extern void func_80400E50_de(CVector3 *,void *,s32,s32);
 extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
 extern f32 func_802725FC_de(CVector3 *),func_80271AA8_de(CVector3 *);
+static inline CVector3 TrackStart(void) {
+    CVector3 sp10;
+    CVector3 sp20;
+    StridedTable *temp_v0;
+    if (D_800E2830->active == 0) {
+        sp20.x = 0;
+        sp20.y = 0;
+        sp20.z = 0;
+        return sp20;
+    }
+    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
+    func_80400E50_de(&sp10, temp_v0->data, temp_v0->count, 0);
+    return sp10;
+}
+static inline CVector3 TrackEnd(void) {
+    CVector3 sp10;
+    CVector3 sp20;
+    StridedTable *temp_v0;
+    if (D_800E2830->active == 0) {
+        sp20.y = 0;
+        sp20.z = 0;
+        sp20.x = D_800DCC78;
+        return sp20;
+    }
+    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
+    func_80400E50_de(&sp10, temp_v0->data, temp_v0->count, 0);
+    return sp10;
+}
+/* 6/93 aligned edits (4 real + the 2 pre-prologue words the preceding padding blob holds); remaining: target keeps the second lookup's frame base in s0 */
 CVector3 func_80403660_de(void) {
-    CVector3 first,second,delta,result,temp,fallback;
-    StridedTable *table;
+    CVector3 first,second,delta,result;
     if (D_800E2830->active == 0) {
         result.x = 0;
         result.y = 0;
+        result.z = 0;
+        return result;
     } else {
-        table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource,0),0),0);
-        func_80400E50_de(&temp,table->data,table->count,0);
-        first = temp;
-        if (D_800E2830->active == 0) {
-            fallback.x = D_800DCC78;
-            fallback.y = 0;
-            fallback.z = 0;
-            second = fallback;
-        } else {
-            table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource,0),0),1);
-            func_80400E50_de(&temp,table->data,table->count,0);
-            second = temp;
-        }
+        first = TrackStart();
+        second = TrackEnd();
         func_80271F68_de(&delta,&second,&first);
         result.x = -func_802725FC_de(&delta);
         result.y = func_80271AA8_de(&delta);
+        result.z = 0;
+        return result;
     }
-    result.z = 0;
-    return result;
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_80403660_de);
