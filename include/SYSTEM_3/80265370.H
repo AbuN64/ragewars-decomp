@@ -1,6 +1,14 @@
 #ifndef SYSTEM_3_80265370_H
 #define SYSTEM_3_80265370_H
 #include "TYPES.H"
+#include "COMMON/LIGHTDATA.H"
+struct LightNode {
+    char pad0[8];
+    LightData *data;
+    f32 intensity;
+    s16 position[3];
+    s16 active;
+};
 /* Text formatting helpers: each passes its arguments on to sprintf unchanged. */
 extern void func_802658E4_de(char *buffer, const char *format, s32 value);
 extern void func_80265900_de(char *buffer, const char *format, s32 value);

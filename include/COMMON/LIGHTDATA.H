@@ -15,13 +15,6 @@ struct LightData;
 typedef struct LightData LightData;
 
 struct LightNode;
-struct LightNode {
-    char pad0[8];
-    LightData *data;
-    f32 intensity;
-    s16 position[3];
-    s16 active;
-};
 
 extern int func_8026581C_de(u32 address);
 

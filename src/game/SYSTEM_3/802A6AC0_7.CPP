@@ -2,6 +2,7 @@
 #include "COMMON/OBJRECAT18V6.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "SYSTEM_3/802A6AC0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "gbi.h"

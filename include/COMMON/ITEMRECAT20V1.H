@@ -1125,10 +1125,6 @@ struct func_80258614_S1;
 typedef struct func_80258614_S1 func_80258614_S1;
 
 struct State_func_8042D8C4_de;
-struct State_func_8042D8C4_de {
-    char pad[0xE8];
-    s32 count;
-};
 
 union func_8026E158_S1_U8;
 typedef union func_8026E158_S1_U8 func_8026E158_S1_U8;
@@ -3112,18 +3108,6 @@ struct func_8022E3B4_S3 {
 extern int D_80100598[];
 
 struct ObjRecAt3CV1;
-struct ObjRecAt3CV1 {
-    char pad0[0x14];
-    f32 unk14;
-    char pad14[0x24 - 0x14 - sizeof(f32)];
-    f32 unk24;
-    char pad24[0x34 - 0x24 - sizeof(f32)];
-    f32 unk34;
-    char pad34[0x38 - 0x34 - sizeof(f32)];
-    f32 unk38;
-    char pad38[0x3C - 0x38 - sizeof(f32)];
-    f32 unk3C;
-};
 
 struct func_80204468_S2;
 typedef struct func_80204468_S2 func_80204468_S2;

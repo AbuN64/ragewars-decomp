@@ -61,18 +61,6 @@ struct func_802A72AC_S2;
 typedef struct func_802A72AC_S2 func_802A72AC_S2;
 
 struct ObjRecAt18V6;
-struct ObjRecAt18V6 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    f32 unkC;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    s32 unk10;
-    char pad10[0x14 - 0x10 - sizeof(s32)];
-    s32 unk14;
-    char pad14[0x18 - 0x14 - sizeof(s32)];
-    s32 unk18;
-};
 
 struct Bar;
 struct Bar {
@@ -130,16 +118,6 @@ struct func_802A72AC_S2 {
 
 
 struct func_802A6AC0_S2;
-struct func_802A6AC0_S2 {
-    char pad0[0x4];
-    f32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(f32)];
-    f32 unk8;
-    char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unkC;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    f32 unk10;
-};
 
 struct EntryRecAt34;
 typedef struct EntryRecAt34 EntryRecAt34;
@@ -148,13 +126,6 @@ struct State802A6DF8;
 typedef struct State802A6DF8 State802A6DF8;
 
 struct Input_func_802A65E0_de;
-struct Input_func_802A65E0_de {
-    char pad0[0x5DC];
-    struct View *view; /* 0x5DC: viewport owner used by the toggle-menu renderer */
-    char pad5E0[0x6AC - 0x5E0];
-    s32 held;
-    s32 pressed;
-};
 
 struct func_802A7FA8_S4;
 typedef struct func_802A7FA8_S4 func_802A7FA8_S4;
@@ -166,17 +137,6 @@ struct func_802A7440_S2;
 typedef struct func_802A7440_S2 func_802A7440_S2;
 
 struct Sprite;
-struct Sprite {
-    s32 format;
-    char *data;
-    s32 field8;
-    s32 fieldC;
-    f32 width;
-    f32 height;
-    f32 extentX;
-    f32 extentY;
-    f32 step;
-};
 
 extern float D_800C5EB0_de;
 
@@ -327,14 +287,6 @@ struct MenuItem {
 };
 
 struct ToggleMenu;
-struct ToggleMenu {
-    u8 state;
-    u8 timer;
-    MenuItem items[4];
-    u16 selected;
-    s16 blink;
-    s32 frame;
-};
 
 struct ObjectLinks7598;
 typedef struct ObjectLinks7598 ObjectLinks7598;
@@ -342,12 +294,6 @@ typedef struct ObjectLinks7598 ObjectLinks7598;
 extern float D_800C5EA8_de;
 
 struct ObjectLinks7598;
-struct ObjectLinks7598 {
-    char pad0[0x7588];
-    char unk_7588;
-    char pad7588[0x7594 - 0x7588 - sizeof(char)];
-    void * unk_7594;
-};
 
 struct func_802A7FA8_S1;
 struct func_802A7FA8_S1 {
@@ -358,33 +304,11 @@ struct func_802A7FA8_S1 {
 };
 
 struct ObjectState30_2;
-struct ObjectState30_2 {
-    unsigned char padding_0[4];
-    s32 unk_4;
-    unsigned char padding_8[16];
-    s16 unk_18;
-    unsigned char padding_1A[2];
-    s32 unk_1C;
-    f32 unk_20;
-    s32 unk_24;
-    f32 unk_28;
-    s32 unk_2C;
-};
 
 struct Hud;
 typedef struct Hud Hud;
 
 struct ObjectLinks14_2;
-struct ObjectLinks14_2 {
-    char pad0[0x4];
-    void * next;
-    char pad4[0x8 - 0x4 - sizeof(void*)];
-    f32 unk_8;
-    char pad8[0xC - 0x8 - sizeof(f32)];
-    f32 unk_C;
-    char padC[0x10 - 0xC - sizeof(f32)];
-    s32 unk_10;
-};
 
 struct Sprite;
 typedef struct Sprite Sprite;
@@ -443,11 +367,6 @@ struct Entry_func_802A70D4_de;
 typedef struct Entry_func_802A70D4_de Entry_func_802A70D4_de;
 
 struct MenuCode802A6AC0;
-struct MenuCode802A6AC0 {
-    Entry_func_802A70D4_de entries[4];
-    char padE0[0xE4 - 0xE0];
-    u16 cursor;
-};
 
 struct func_802A7440_S2;
 struct func_802A7440_S2 {
@@ -467,16 +386,6 @@ struct RecordRecAtE8;
 typedef struct RecordRecAtE8 RecordRecAtE8;
 
 struct State802A6FE0;
-struct State802A6FE0 {
-    u8 pad0[8];
-    Node802A697C *node;
-    u8 padC[0x10];
-    void *object;
-    u8 pad20[4];
-    f32 value;
-    u8 pad28[0x14];
-    u32 flags;
-};
 
 
 struct func_802A7480_S2;
@@ -492,10 +401,6 @@ struct func_802A72AC_S1;
 typedef struct func_802A72AC_S1 func_802A72AC_S1;
 
 struct CallbackState1C;
-struct CallbackState1C {
-    unsigned char padding_0[24];
-    void (*callback)(void *);
-};
 
 
 struct RecordRecAtE8;
