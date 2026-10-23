@@ -96,5 +96,5 @@ struct AnimationInfo {
     void * unk8;
 };
 extern f32 func_8023A294_de(s32 arg0, f32 value, f32 target, f32 step);
-extern Message *func_8023A344_de(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target);
+extern Message *Sched_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target);
 #endif

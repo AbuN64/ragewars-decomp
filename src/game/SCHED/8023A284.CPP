@@ -69,7 +69,7 @@ static inline Message *recycle(void *owner, void *pool) {
     return oldest;
 }
 
-Message *func_8023A344_de(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
+Message *Sched_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
     Message *message;
     u8 *line;
     u8 *p;
@@ -100,7 +100,7 @@ Message *func_8023A344_de(void *owner, void *pool, u8 *text, s32 kind, f32 size,
                     message->pad2C = 0;
                     message->scaleX = 1.0f;
                     message->scaleY = 1.0f;
-                    height = (&D_800E28D0)[1]; /* FAKEMATCH */
+                    height = D_800E28D4;
                     message->x = D_800E28D0 / 2;
                     message->y = height - 80;
                     message->size = size * 15.0f;
