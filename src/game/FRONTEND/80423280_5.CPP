@@ -90,8 +90,8 @@ s32 func_80426918_de(void *arg0, void *arg1, s32 delta) {
     }
     switch (D_800E4690->state) {
     case 1:
-        D_800E4690->left->x += D_800E4690->leftSpeed;
-        D_800E4690->right->x -= D_800E4690->rightSpeed;
+        D_800E4690->left->x += (u16)D_800E4690->leftSpeed;
+        D_800E4690->right->x -= (u16)D_800E4690->rightSpeed;
         if (--D_800E4690->timer > 0) {
             break;
         }
@@ -102,8 +102,8 @@ s32 func_80426918_de(void *arg0, void *arg1, s32 delta) {
         D_800E4690->timer = 4;
         break;
     case 2:
-        D_800E4690->left->x -= D_800E4690->leftSpeed;
-        D_800E4690->right->x += D_800E4690->rightSpeed;
+        D_800E4690->left->x -= (u16)D_800E4690->leftSpeed;
+        D_800E4690->right->x += (u16)D_800E4690->rightSpeed;
         if (--D_800E4690->timer > 0) {
             break;
         }

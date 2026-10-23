@@ -166,15 +166,15 @@ extern s16 D_auto_800CF1EE[];
 #endif
 static inline s32 strideSound(s32 index) {
 #if defined(VERSION_DE)
-    return D_auto_800C9FAA[index * 2];
+    return (s16)((s32 *)((char *)D_auto_800C9FAA - 2))[index];
 #elif defined(VERSION_EU)
-    return D_auto_800CAB8E[index * 2];
+    return (s16)((s32 *)((char *)D_auto_800CAB8E - 2))[index];
 #elif defined(VERSION_EU_X)
-    return D_auto_800CB55E[index * 2];
+    return (s16)((s32 *)((char *)D_auto_800CB55E - 2))[index];
 #elif defined(VERSION_US)
-    return D_auto_800C9EBE[index * 2];
+    return (s16)((s32 *)((char *)D_auto_800C9EBE - 2))[index];
 #else
-    return D_auto_800CF1EE[index * 2];
+    return (s16)((s32 *)((char *)D_auto_800CF1EE - 2))[index];
 #endif
 }
 

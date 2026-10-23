@@ -154,11 +154,9 @@ struct Screen_func_80426918_de;
 struct Screen_func_80426918_de {
     char pad0[0x978];
     struct MenuMarker *left;
-    char pad97C[2];
-    u16 leftSpeed;
+    s32 leftSpeed; /* slide step, stored as a word and read back as its low half */
     struct MenuMarker *right;
-    char pad984[2];
-    u16 rightSpeed;
+    s32 rightSpeed; /* slide step, stored as a word and read back as its low half */
     s32 state;
     s32 timer;
     void *prompt;
