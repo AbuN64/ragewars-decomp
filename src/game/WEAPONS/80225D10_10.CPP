@@ -183,7 +183,7 @@ void *func_8022A634_de(struct Context *context, u32 arg1) {
     return result;
 }
 
-int func_8022A68C_de(char *arg0) {
+int func_8022A68C_de(char *forcePlayerList) {
     Shared_ActorView *p;
     int count;
     CGameStatus *s;
@@ -197,7 +197,7 @@ int func_8022A68C_de(char *arg0) {
         return 0;
     }
     count = 0;
-    for (p = (Shared_ActorView *)((ForcePlayerList *)arg0)->head; p != 0; p = p->next) {
+    for (p = (Shared_ActorView *)((ForcePlayerList *)forcePlayerList)->head; p != 0; p = p->next) {
         if (p->controls->roundEnded == 1) {
             count++;
         }
@@ -479,7 +479,7 @@ int func_8022ACB8_de(Player_func_8022ACB8_de *player, int slot) {
 }
 
 /** Report whether the signed word at byte offset 0x5E4 is below 0x6400. */
-int func_8022ADB0_de(struct SharedPlayer *object, s32 arg1) {
+int func_8022ADB0_de(struct SharedPlayer *object, s32 unused1) {
     return object->views5E4.view5E4_0.unk5E4 < 0x6400;
 }
 

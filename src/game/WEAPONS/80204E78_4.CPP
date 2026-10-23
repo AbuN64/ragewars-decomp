@@ -46,8 +46,8 @@ void func_802052C4_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
 }
 
 /** Return the nested record's field, or a fallback constant when zero. */
-int func_802052F8_de(void *arg0) {
-    int temp = ((Hold5324 *)((Owner *)arg0)->track)->r.sound;
+int func_802052F8_de(void *owner) {
+    int temp = ((Hold5324 *)((Owner *)owner)->track)->r.sound;
     if (temp != 0) {
         return temp;
     }

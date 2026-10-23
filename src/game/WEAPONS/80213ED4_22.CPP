@@ -26,7 +26,7 @@ s16 func_802171C8_de(Cursor802171C8 *arg0) {
     return (s16) value;
 }
 
-void func_802171FC_de(void *arg0, struct CallbackState114 *arg1) {
+void func_802171FC_de(void *unused0, struct CallbackState114 *arg1) {
     FuncPtr fn = arg1->callback;
     if (fn != 0) {
         fn();
@@ -56,7 +56,7 @@ f32 func_80217290_de(LevelActor *arg0, CVector3 point)
     return dx * dx + dz * dz;
 }
 
-void func_802172C4_de(void *arg0, void *arg1, Func802172C4Value arg2) {
+void func_802172C4_de(void *unused0, void *unused1, Func802172C4Value unused2) {
 }
 
 extern void *func_8025CC6C_de(void);

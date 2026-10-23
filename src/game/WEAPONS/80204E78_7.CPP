@@ -15,9 +15,9 @@ extern int func_80285F58_de(char *a, int b);
 
 extern void func_80285DB0_de(Shared_World *a, void *b, int c);
 
-void func_80206080_de(void *arg0, void *arg1) {
-    LevelActor *actor = arg0;
-    ActorMotionState *motion = arg1;
+void func_80206080_de(void *levelActor, void *actorMotionState) {
+    LevelActor *actor = levelActor;
+    ActorMotionState *motion = actorMotionState;
     AnimationTriggerResource *resource;
     AnimationTriggerDefinition *base;
     char *ctx;

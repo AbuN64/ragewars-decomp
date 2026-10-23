@@ -17,7 +17,7 @@ extern s32 D_800CD730;
 
 
 
-void func_8022FDAC_de(void *arg0, void *arg1) {
+void func_8022FDAC_de(void *arg0, void *weaponFireState) {
     s16 index;
     u16 unsigned_index;
     void *owner;
@@ -35,19 +35,19 @@ void func_8022FDAC_de(void *arg0, void *arg1) {
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;
-        ((WeaponFireState *)arg1)->animation = ((WeaponInfo *)D_800D052C[(s16)unsigned_index])->animation;
-        ((WeaponFireState *)arg1)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
+        ((WeaponFireState *)weaponFireState)->animation = ((WeaponInfo *)D_800D052C[(s16)unsigned_index])->animation;
+        ((WeaponFireState *)weaponFireState)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
         owner = ((Shared_ActorView *)state)->message;
         if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
             Camera_PostScreenMessage(&D_80145088, owner,
                 *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
         }
-        ((WeaponFireState *)arg1)->spinStep = 0;
-        ((WeaponFireState *)arg1)->spin = 0;
+        ((WeaponFireState *)weaponFireState)->spinStep = 0;
+        ((WeaponFireState *)weaponFireState)->spin = 0;
         ((Shared_Actor *)arg0)->color = 0;
-        ((WeaponFireState *)arg1)->charge = 0;
+        ((WeaponFireState *)weaponFireState)->charge = 0;
     }
-    func_80214178_de(arg0, arg1, 0);
+    func_80214178_de(arg0, weaponFireState, 0);
 }
 
 void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {

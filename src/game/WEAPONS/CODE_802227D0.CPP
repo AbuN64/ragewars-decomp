@@ -72,36 +72,36 @@ extern s32 func_8024E62C_de(void *);
 
 
 
-void func_80222908_de(void *arg0, void *arg1, ObjectState54 *ground) {
+void func_80222908_de(void *actorView, void *arg1, ObjectState54 *ground) {
     u8 *options;
 
-    if ((u16)((Shared_ActorView *)arg0)->action < 2) {
-        ((Shared_ActorView *)arg0)->speedFactor = D_800C2848_de[0];
+    if ((u16)((Shared_ActorView *)actorView)->action < 2) {
+        ((Shared_ActorView *)actorView)->speedFactor = D_800C2848_de[0];
         return;
     }
-    ((Shared_ActorView *)arg0)->speedFactor = ((MovementDescriptor *)(((ObjectLinks3C *)arg1)->unk_18))->speed;
-    if (((Shared_ActorView *)arg0)->remote != 0) {
-        switch (((Shared_ActorView *)arg0)->controls->difficulty) {
+    ((Shared_ActorView *)actorView)->speedFactor = ((MovementDescriptor *)(((ObjectLinks3C *)arg1)->unk_18))->speed;
+    if (((Shared_ActorView *)actorView)->remote != 0) {
+        switch (((Shared_ActorView *)actorView)->controls->difficulty) {
         default:
-            ((Shared_ActorView *)arg0)->controls->difficulty = 0;
+            ((Shared_ActorView *)actorView)->controls->difficulty = 0;
         case 0:
-            ((Shared_ActorView *)arg0)->speedFactor *= D_800C2848_de[1];
+            ((Shared_ActorView *)actorView)->speedFactor *= D_800C2848_de[1];
             break;
         case 1:
-            ((Shared_ActorView *)arg0)->speedFactor *= D_800C2850_de[0];
+            ((Shared_ActorView *)actorView)->speedFactor *= D_800C2850_de[0];
             break;
         case 2:
             break;
         }
-        if (((Shared_ActorView *)arg0)->remote != 0) {
-            switch (((Shared_ActorView *)arg0)->controls->difficulty) {
+        if (((Shared_ActorView *)actorView)->remote != 0) {
+            switch (((Shared_ActorView *)actorView)->controls->difficulty) {
             default:
-                ((Shared_ActorView *)arg0)->controls->difficulty = 0;
+                ((Shared_ActorView *)actorView)->controls->difficulty = 0;
             case 0:
-                ((Shared_ActorView *)arg0)->speedFactor *= D_800C2850_de[1];
+                ((Shared_ActorView *)actorView)->speedFactor *= D_800C2850_de[1];
                 break;
             case 1:
-                ((Shared_ActorView *)arg0)->speedFactor *= D_800C7948;
+                ((Shared_ActorView *)actorView)->speedFactor *= D_800C7948;
                 break;
             case 2:
                 break;
@@ -110,11 +110,11 @@ void func_80222908_de(void *arg0, void *arg1, ObjectState54 *ground) {
     }
     options = (u8 *)&D_801462C8;
     if (options[0x1D] != 0) {
-        ((Shared_ActorView *)arg0)->speedFactor *= ((Shared_Game *)options)->speedFactor;
+        ((Shared_ActorView *)actorView)->speedFactor *= ((Shared_Game *)options)->speedFactor;
     }
     if (!(((ObjectLinks3C *)(arg1))->unk_38 & 3) && ground != 0
         && (func_8024E62C_de(arg1) != 0 || (ground->unk_52 & 0x800))) {
-        ((Shared_ActorView *)arg0)->speedFactor *= ground->unk_30;
+        ((Shared_ActorView *)actorView)->speedFactor *= ground->unk_30;
     }
 }
 

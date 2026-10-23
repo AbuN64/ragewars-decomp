@@ -46,8 +46,8 @@ void func_802054E0_de(Obj54E0 *arg0, void *arg1) {
 }
 
 /** Clear two flags when the controlling byte and nested flag are set. */
-void func_802055EC_de(void *arg0, void *arg1) {
-    LevelActor *object = arg0;
+void func_802055EC_de(void *levelActor, void *arg1) {
+    LevelActor *object = levelActor;
     BreakableDefinition *nested = (void *)object->definition;
     ObjectStateCC *state = arg1;
     if (state->unk_CB != 0 &&
@@ -61,9 +61,9 @@ void func_802055EC_de(void *arg0, void *arg1) {
 
 /* Draw callback installed by func_8020520C_de; the animation lookup is
  * the same third callback argument consumed by func_8024A1D0_de. */
-void func_80205628_de(void *arg0, void *arg1, void *arg2) {
-    LevelActor *actor = arg0;
-    SpawnDispatchOwner *owner = arg1;
+void func_80205628_de(void *levelActor, void *spawnDispatchOwner, void *arg2) {
+    LevelActor *actor = levelActor;
+    SpawnDispatchOwner *owner = spawnDispatchOwner;
     Lookup *lookup = arg2;
 
     actor->mask = 1 << owner->spawn;

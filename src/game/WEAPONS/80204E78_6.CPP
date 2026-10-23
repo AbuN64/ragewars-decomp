@@ -324,9 +324,9 @@ void func_80205720_de(SpawnDispatchObject *object, SpawnDispatchOwner *owner) {
     }
 }
 
-void func_80205EC4_de(void *arg0, void *arg1) {
-    LevelActor *actor = arg0;
-    ActorMotionState *state = arg1;
+void func_80205EC4_de(void *levelActor, void *actorMotionState) {
+    LevelActor *actor = levelActor;
+    ActorMotionState *state = actorMotionState;
     BreakableDefinition *inner = (BreakableDefinition *)actor->definition;
 
     state->table = &D_800C854C;

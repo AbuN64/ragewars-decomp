@@ -7,8 +7,8 @@
 #include "WEAPONS/80213ED4.H"
 #include "RENDER_2/8025DE50_5.H"
 
-void func_80232744_de(void *arg0, s32 arg1, s32 arg2) {
-    AiTarget *target = arg0;
+void func_80232744_de(void *aiTarget, s32 unused1, s32 arg2) {
+    AiTarget *target = aiTarget;
     func_8021A9A4_de(target->player, arg2);
 }
 
