@@ -12,13 +12,13 @@
 
 extern struct Part D_80146302;
 
-extern char D_8010F328[];
+extern struct ControllerProfile D_8010F328[4];
 
 #include "COMMON/GAME_SESSION.H"
 
 extern s32 D_80154048;
 
-extern s32 func_8026437C_de(char *);
+extern s32 func_8026437C_de(struct ControllerProfile *);
 
 extern void func_8025E384_de(void);
 
@@ -65,11 +65,10 @@ extern void func_802649FC_de();
 extern char D_0044FFEC[];
 extern Shared_Game D_801462C8;
 
-void func_8043EA98_de(void *arg0, struct ObjRecAt20V2 *menu) {
+void Multi_SelectInitialController(void *arg0, struct ObjRecAt20V2 *menu) {
     Shared_Game *globals;
     struct Part *settings;
-    char *profile;
-    s32 on;
+    struct ControllerProfile *profile;
     s32 i;
 
     globals = &D_801462C8;
@@ -80,16 +79,14 @@ void func_8043EA98_de(void *arg0, struct ObjRecAt20V2 *menu) {
     }
     i = 0;
     settings = &D_80146302;
-    /* FAKEMATCH: constant-holding local places the li */
-    on = 1;
-    for (profile = D_8010F328; i < 4; i++) {
+    for (; i < 4; i++) {
+        profile = &D_8010F328[i];
         if (func_8026437C_de(profile) != 0) {
-            settings->active = on;
+            settings->active = 1;
             D_801422C1 = i;
             menu->unk20 = profile;
             break;
         }
-        profile += 0x224;
     }
     func_8025E384_de();
     func_8044DE7C_de(&D_8011FAC0, -1);
