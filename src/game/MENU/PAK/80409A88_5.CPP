@@ -183,37 +183,45 @@ char *func_8040A038_de(int unused, int kind) {
     }
 }
 
-char *func_8040A09C_de(struct Shared_PakMenu *menu) {
-    s32 channel[2]; /* FAKEMATCH: unused second slot keeps channel in the frame */
+static inline void Pak_GetPromptChannel(struct Shared_PakMenu *menu, s32 *channel) {
+    if (D_8015375C != 0) {
+        *channel = D_800E28C8;
+    } else {
+        *channel = menu->owner->unk4;
+    }
+}
+
+static inline char *Pak_GetChannelPrompt(s32 channel) {
+    char *prompt;
+    switch (channel) {
+    case 0:
+    default:
+        prompt = D_00450BF0_de;
+        break;
+    case 1:
+        prompt = D_00450C14_de;
+        break;
+    case 2:
+        prompt = D_00450C38_de;
+        break;
+    case 3:
+        prompt = D_00450C5C_de;
+        break;
+    }
+    return prompt;
+}
+
+char *Pak_GetPromptText(struct Shared_PakMenu *menu) {
+    s32 channel;
     char *text;
-    char *prompt; /* FAKEMATCH: copy-only local routes the switch result through its own register before text */
 
     text = 0;
     if (D_8014D4C0_de != 0) {
         if (D_8014D4EC_de == 0) {
             return text;
         }
-        if (D_8015375C != 0) {
-            channel[0] = D_800E28C8;
-        } else {
-            channel[0] = menu->owner->unk4;
-        }
-        switch (channel[0]) {
-        case 0:
-        default:
-            prompt = D_00450BF0_de;
-            break;
-        case 1:
-            prompt = D_00450C14_de;
-            break;
-        case 2:
-            prompt = D_00450C38_de;
-            break;
-        case 3:
-            prompt = D_00450C5C_de;
-            break;
-        }
-        text = prompt;
+        Pak_GetPromptChannel(menu, &channel);
+        text = Pak_GetChannelPrompt(channel);
     } else if (D_80153760 != 0) {
         text = D_0044FFA4;
         if (D_8014D4EC_de != 0) {
