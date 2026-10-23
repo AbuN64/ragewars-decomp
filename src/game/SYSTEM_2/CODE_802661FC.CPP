@@ -264,23 +264,23 @@ static inline void reflectedActor(Shared_ReactionPlayer *player, Shared_Reaction
     buildDamage(p, target, value, radius, flags, shield);
     if (value > 0.0f) func_802171FC_de(player, &player->unk170, p);
 }
-static inline s32 adjustHit(Shared_ReactionActor *arg1, CVector3 *position) {
-    s32 var_a2;
-    s16 temp_v1;
-    Shared_ReactionPlayer *temp_s0;
+static inline s32 adjustHit(Shared_ReactionActor *target, CVector3 *position) {
+    s32 adjusted;
+    s16 ownerState;
+    Shared_ReactionPlayer *owner;
     CVector3 body, origin;
-        var_a2 = 0;
-        if ((arg1->category == 1) && (arg1->flags & 0x300000)) {
-            temp_s0 = arg1->unk1D8;
-            if (((void *)arg1 == (void *)&temp_s0->actor2E8) && ((temp_v1 = temp_s0->unk62E, (temp_v1 == 0)) || (temp_v1 == 0x11) || (temp_v1 == 0x10))) {
+        adjusted = 0;
+        if ((target->category == 1) && (target->flags & 0x300000)) {
+            owner = target->unk1D8;
+            if (((void *)target == (void *)&owner->actor2E8) && ((ownerState = owner->unk62E, (ownerState == 0)) || (ownerState == 0x11) || (ownerState == 0x10))) {
                 body = (*position);
-                origin = temp_s0->position;
+                origin = owner->position;
                 func_80271FC8_de(&(*position), 0.75f, &body, &origin);
-                (*position).y += Particle_GetActorHeight(temp_s0) * D_800C43E0_de[0];
-                var_a2 = 1;
+                (*position).y += Particle_GetActorHeight(owner) * D_800C43E0_de[0];
+                adjusted = 1;
             }
         }
-        return var_a2;
+        return adjusted;
 }
 static inline f32 hitSize(Shared_ReactionActor *target) {
     if (target->category == 1) return func_8024BEDC_de(target);

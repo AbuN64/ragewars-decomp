@@ -164,14 +164,14 @@ void func_802A0EB0_de(void) {
     D_800CD928_de();
 }
 
-s32 Resmgr_ReadStream(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    s32 lo;
+s32 Resmgr_ReadStream(void *destination, s32 elementSize, s32 count, s32 handle) {
+    s32 totalBytes;
     s32 result;
 
-    lo = arg1 * arg2;
-    if (lo == 0) {
+    totalBytes = elementSize * count;
+    if (totalBytes == 0) {
         return 0;
     }
-    result = D_800CD92C_de(arg3, arg0, lo);
-    return result / arg1;
+    result = D_800CD92C_de(handle, destination, totalBytes);
+    return result / elementSize;
 }

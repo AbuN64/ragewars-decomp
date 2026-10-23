@@ -89,21 +89,21 @@ void func_802A1050_de(ResourceOpenCallback arg0, s32 arg1, ResourceReadCallback 
 }
 
 void Resmgr_LoadMemoryStream(void) {
-    void *temp_v0;
+    void *buffer;
     IntegerState14_2 *stream;
     if (D_800CD940_de.ready != 1) {
 #if defined(VERSION_DE)
         D_800CD940_de.size = 0x8BB01;
-        temp_v0 = func_8025305C_de(0x8BB01);
+        buffer = func_8025305C_de(0x8BB01);
 #elif defined(VERSION_EU) || defined(VERSION_US) || defined(VERSION_US_REV1)
         D_800CD940_de.size = 0x8B245;
-        temp_v0 = func_8025305C_de(0x8B245);
+        buffer = func_8025305C_de(0x8B245);
 #elif defined(VERSION_EU_X)
         D_800CD940_de.size = 0x90385;
-        temp_v0 = func_8025305C_de(0x90385);
+        buffer = func_8025305C_de(0x90385);
 #endif
-        D_800CD940_de.data = temp_v0;
-        func_8025637C_de(&D_801011B8, 0x200000, D_800CD940_de.size, temp_v0);
+        D_800CD940_de.data = buffer;
+        func_8025637C_de(&D_801011B8, 0x200000, D_800CD940_de.size, buffer);
         stream = &D_800CD940_de;
         stream->opened = 0;
         D_800CD940_de.ready = 1;
@@ -121,11 +121,11 @@ void Resmgr_FreeMemoryStream(void) {
 
 /* Reset the memory stream and return its single valid handle. */
 s32 Resmgr_OpenMemoryStream(const void *name, const void *mode) {
-    const u8 *arg1 = mode;
-    while (*arg1 != 0) {
-        arg1++;
+    const u8 *modeCursor = mode;
+    while (*modeCursor != 0) {
+        modeCursor++;
     }
-    arg1++;
+    modeCursor++;
     D_800CD940_de.cursor = 0;
     D_800CD940_de.opened = 1;
     return 1;
@@ -149,12 +149,12 @@ int func_802A11EC_de(void) {
     return 0;
 }
 
-s32 Resmgr_SeekMemoryStream(s32 arg0, s32 arg1, s32 arg2) {
+s32 Resmgr_SeekMemoryStream(s32 handle, s32 offset, s32 origin) {
 
-    if (arg2 == 0) {
+    if (origin == 0) {
         D_800CD940_de.cursor = 0;
     }
-    D_800CD940_de.cursor = D_800CD940_de.cursor + arg1;
+    D_800CD940_de.cursor = D_800CD940_de.cursor + offset;
     return 0;
 }
 

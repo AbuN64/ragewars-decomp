@@ -74,111 +74,109 @@ extern s32 func_80285F58_de(void *, void *);
 
 typedef struct Owner Owner;
 
-s32 Turret_TrackTarget(NavActor *arg0,NavRider *arg1) {
+s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
     NavWork work;
-    SharedPlayer *temp_s6;
-    f32 temp_fs1;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0f;
-    f32 temp_fv0f_2;
-    f32 temp_fv1;
-    f32 var_fs0;
-    f32 var_fs0f;
-    s32 var_condition_bit;
-    s32 var_s7;
-    u16 temp_v1;
-    u8 var_a2;
-    CTurretIntelligence *temp_s4;
+    SharedPlayer *target;
+    f32 heightScale;
+    f32 maxTurn;
+    f32 minTurn;
+    f32 fireCone;
+    f32 turnLimit;
+    f32 turnedAimError;
+    f32 aimError;
+    f32 desiredSpeed;
+    s32 inFireCone;
+    u16 actorKind;
+    CTurretIntelligence *turret;
 
-    var_s7 = 0;
-    temp_s4 = &arg0->player.views18.navigationTrack->segment;
-    work.heading = arg0->player.views1C.view6C_4.unk6C - arg1->nav.heading;
+    inFireCone = 0;
+    turret = &actor->player.views18.navigationTrack->segment;
+    work.heading = actor->player.views1C.view6C_4.unk6C - riderState->nav.heading;
     func_80274020_de(&work.heading);
-    temp_v1 = arg0->player.views1C.viewE4_6.unkE4;
-    switch (temp_v1) {                              /* irregular */
+    actorKind = actor->player.views1C.viewE4_6.unkE4;
+    switch (actorKind) {                              /* irregular */
     case 0x40B:
-        func_80216D3C_de(&arg0->input, arg1, &work.result.output, 0, 1);
+        func_80216D3C_de(&actor->input, riderState, &work.result.output, 0, 1);
         break;
     case 0x40C:
-        AI_DynTurretGetTargetInfo(&arg0->player,&arg1->target,&work.result.result);
+        AI_DynTurretGetTargetInfo(&actor->player,&riderState->target,&work.result.result);
         break;
     }
-    temp_s6 = arg1->target.target;
-    if ((temp_s6 != NULL) && (work.result.result.distance <= temp_s4->m_SightRadius)) {
-        temp_fs1 = D_800C1A28;
-        work.origin.v=arg0->player.views0.view8_2.unk8;
-        var_fs0f=Particle_GetActorHeight(&arg0->player);
-        work.origin.v.y+=var_fs0f*temp_fs1;
-        work.destination.v=temp_s6->views0.view8_2.unk8;
-        var_fs0f=Particle_GetActorHeight(temp_s6);
-        work.destination.v.y+=var_fs0f*temp_fs1;
-        work.aim.v.x = arg1->nav.aim.x;
-        work.aim.v.y = arg1->nav.aim.y;
-        work.aim.v.z = arg1->nav.aim.z;
+    target = riderState->target.target;
+    if ((target != NULL) && (work.result.result.distance <= turret->m_SightRadius)) {
+        heightScale = D_800C1A28;
+        work.origin.v=actor->player.views0.view8_2.unk8;
+        desiredSpeed=Particle_GetActorHeight(&actor->player);
+        work.origin.v.y+=desiredSpeed*heightScale;
+        work.destination.v=target->views0.view8_2.unk8;
+        desiredSpeed=Particle_GetActorHeight(target);
+        work.destination.v.y+=desiredSpeed*heightScale;
+        work.aim.v.x = riderState->nav.aim.x;
+        work.aim.v.y = riderState->nav.aim.y;
+        work.aim.v.z = riderState->nav.aim.z;
         /* SN64 struct-return ABI writes directly to the caller-supplied CQuatern. */
         navRotation(&work.rotation,&work.aim.v);
         func_80274244_de(&work.rotation.x,work.matrix);
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
         func_80271F34_de(&work.destination.v, &work.destination.v, &work.origin.v);
         func_80271F68_de(&work.relative.v, &work.destination.v, &work.origin.v);
-        var_fs0f = func_802725FC_de(&work.relative.v.x);
-        var_fs0 = func_80216F44_de(&arg0->actor,work.destination.v);
-        work.result.workspace.projection = var_fs0;
-        if (work.result.result.distance <= temp_s4->range) {
-            temp_fv0f = temp_s4->m_FireAngle * temp_fs1;
-            if (var_fs0 < 0.0f) {
-                if (!(-var_fs0 < temp_fv0f)) {
+        desiredSpeed = func_802725FC_de(&work.relative.v.x);
+        aimError = func_80216F44_de(&actor->actor,work.destination.v);
+        work.result.workspace.projection = aimError;
+        if (work.result.result.distance <= turret->range) {
+            fireCone = turret->m_FireAngle * heightScale;
+            if (aimError < 0.0f) {
+                if (!(-aimError < fireCone)) {
 
                 } else {
                     goto block_12;
                 }
-            } else if (var_fs0 < temp_fv0f) {
+            } else if (aimError < fireCone) {
 block_12:
-                var_s7 = 1;
+                inFireCone = 1;
             }
         }
-        temp_fv0f_2 = temp_s4->limit;
-        if (temp_fv0f_2 < D_800C1A2C) {
-            temp_fv0 = temp_fv0f_2 * D_800C1A30;
-            temp_fv1 = work.heading + var_fs0;
-            if (temp_fv0 < temp_fv1) {
-                var_fs0 = temp_fv0 - work.heading;
+        turnLimit = turret->limit;
+        if (turnLimit < D_800C1A2C) {
+            maxTurn = turnLimit * D_800C1A30;
+            turnedAimError = work.heading + aimError;
+            if (maxTurn < turnedAimError) {
+                aimError = maxTurn - work.heading;
             } else {
-                temp_fv0_2 = -temp_fv0;
-                if (temp_fv1 < temp_fv0_2) {
-                    var_fs0 = temp_fv0_2 - work.heading;
+                minTurn = -maxTurn;
+                if (turnedAimError < minTurn) {
+                    aimError = minTurn - work.heading;
                 }
             }
         }
-        Turret_Move(&arg0->owner,&arg1->rider,temp_s4->m_TargetVisibleMotionType,temp_s6);
+        Turret_Move(&actor->owner,&riderState->rider,turret->m_TargetVisibleMotionType,target);
     } else {
-        var_fs0f = 0.0f;
+        desiredSpeed = 0.0f;
         
-        var_fs0 = -work.heading;
-        Turret_Move(&arg0->owner,&arg1->rider,temp_s4->m_TargetNotVisibleMotionType,temp_s6);
+        aimError = -work.heading;
+        Turret_Move(&actor->owner,&riderState->rider,turret->m_TargetNotVisibleMotionType,target);
     }
 
-    if(var_fs0<0.0f) {
-        if(D_800C1A34_de < -var_fs0) goto changed;
-    } else if(D_800C1A38_de < var_fs0) goto changed;
-    if(arg1->nav.speed != var_fs0f) {
+    if(aimError<0.0f) {
+        if(D_800C1A34_de < -aimError) goto changed;
+    } else if(D_800C1A38_de < aimError) goto changed;
+    if(riderState->nav.speed != desiredSpeed) {
 changed:
-        func_802172D0_de(arg0,arg1,0xC3F);
-    } else func_80217388_de(arg0,arg1);
+        func_802172D0_de(actor,riderState,0xC3F);
+    } else func_80217388_de(actor,riderState);
     /* The second ABI word is the actual rider pointer, used as such by this callee. */
-    ((void (*)(void *,void *,f32,f32))func_80216808_de)(arg0,arg1, temp_s4->rate, var_fs0);
-    arg1->nav.speed = func_80274808_de(arg1->nav.speed, var_fs0f, temp_s4->rate);
-    return var_s7;
+    ((void (*)(void *,void *,f32,f32))func_80216808_de)(actor,riderState, turret->rate, aimError);
+    riderState->nav.speed = func_80274808_de(riderState->nav.speed, desiredSpeed, turret->rate);
+    return inFireCone;
 }
 
-s32 Turret_BuildPlaneRot(s32 arg0, s32 arg1, struct RotationObject *arg2) {
-    f32 sp10[3];
-    sp10[0] = arg2->angleX;
-    sp10[1] = arg2->angleY;
-    sp10[2] = arg2->angleZ;
-    ((void (*)(s32, f32 *))CVector3__GetDirectionRotation2)(arg0, sp10);
-    return arg0;
+s32 Turret_BuildPlaneRot(s32 out, s32 arg1, struct RotationObject *rotation) {
+    f32 angles[3];
+    angles[0] = rotation->angleX;
+    angles[1] = rotation->angleY;
+    angles[2] = rotation->angleZ;
+    ((void (*)(s32, f32 *))CVector3__GetDirectionRotation2)(out, angles);
+    return out;
 }
 void Turret_Construct(struct OwnerRecAtE4 *owner, struct RecordRecAt13C *record)
 {
@@ -198,46 +196,46 @@ void Turret_Construct(struct OwnerRecAtE4 *owner, struct RecordRecAt13C *record)
     }
 }
 
-void Turret_Setup(LevelActor *arg0, struct RecordRecAt13C *arg1) {
+void Turret_Setup(LevelActor *actor, struct RecordRecAt13C *turret) {
     s32 flags;
     ActorMotionDefinition *record;
 
-    record = &((ActorMotionResource *)arg0->definition)->motion;
-    if (arg0->type == 0x40C) {
-        arg1->speed = (&D_800C6B30)[1];
+    record = &((ActorMotionResource *)actor->definition)->motion;
+    if (actor->type == 0x40C) {
+        turret->speed = (&D_800C6B30)[1];
     } else {
-        arg1->speed = 0.0f;
+        turret->speed = 0.0f;
     }
-    arg1->pad128 = 0;
-    arg1->threshold = record->eventThreshold;
+    turret->pad128 = 0;
+    turret->threshold = record->eventThreshold;
 
-    if (func_80285F58_de(&D_8011FE88, arg0) == 0) {
+    if (func_80285F58_de(&D_8011FE88, actor) == 0) {
         if (record->flags & 0x1000) {
-            flags = arg0->flags & ~0x2000;
+            flags = actor->flags & ~0x2000;
             flags = flags & ~0x100;
-            arg0->flags = flags;
+            actor->flags = flags;
         }
         if (record->flags & 0x800) {
-            arg0->flags =
-                arg0->flags & ~0x100;
-            func_80214178_de(arg0, arg1, 0);
+            actor->flags =
+                actor->flags & ~0x100;
+            func_80214178_de(actor, turret, 0);
         } else {
-            func_80214178_de(arg0, arg1, 1);
+            func_80214178_de(actor, turret, 1);
         }
     } else {
-        func_80214178_de(arg0, arg1, 0x40);
+        func_80214178_de(actor, turret, 0x40);
     }
-    arg1->state = 0;
+    turret->state = 0;
 }
 
-void Turret_Advance(char *arg0, Obj *arg1) {
-    if (arg1->hook != 0 && arg1->hook->fn != 0) {
-        arg1->hook->fn(arg0, arg1);
+void Turret_Advance(char *actor, Obj *state) {
+    if (state->hook != 0 && state->hook->fn != 0) {
+        state->hook->fn(actor, state);
     }
-    if (((struct OwnerRecAtE4 *)(arg0))->id == 0x40C) {
-        arg1->timer += D_800D2988;
-        if (D_800C1A48_de < arg1->timer || arg1->count <= 0) {
-            func_80214178_de(arg0, arg1, 0x40);
+    if (((struct OwnerRecAtE4 *)(actor))->id == 0x40C) {
+        state->timer += D_800D2988;
+        if (D_800C1A48_de < state->timer || state->count <= 0) {
+            func_80214178_de(actor, state, 0x40);
         }
     }
 }

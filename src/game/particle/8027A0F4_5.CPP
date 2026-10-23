@@ -148,10 +148,10 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     }
 }
 
-void Particle_DrawModel(void *arg0, struct Shared_ParticleView *arg1) {
+void Particle_DrawModel(void *particle, struct Shared_ParticleView *view) {
     CVector3 delta;
-    void *sp38;
-    void *lookup;
+    void *modelTable;
+    void *matrix;
     void **resource;
     s32 key;
     s32 found;
@@ -160,47 +160,47 @@ void Particle_DrawModel(void *arg0, struct Shared_ParticleView *arg1) {
 
     index = 0;
     if (D_80140FF8 == 1) {
-        lookup = (char *)arg0 + ((D_800D297C << 6) + 0x60);
+        matrix = (char *)particle + ((D_800D297C << 6) + 0x60);
     } else {
-        lookup = func_802799C0_de(&D_8011FFB0, 1);
-        if (lookup == 0) {
+        matrix = func_802799C0_de(&D_8011FFB0, 1);
+        if (matrix == 0) {
             return;
         }
-        func_80272898_de(&arg1->viewMtx, &((Shared_Particle *)arg0)->inst.pos, &delta);
+        func_80272898_de(&view->viewMtx, &((Shared_Particle *)particle)->inst.pos, &delta);
         amount = delta.z;
         if (amount < 0.0f) {
             amount = -amount;
         }
-        Particle_BuildMatrix(arg0, (s32)lookup, (s32)arg1, amount);
+        Particle_BuildMatrix(particle, (s32)matrix, (s32)view, amount);
     }
 
-    if (((Shared_Particle *)arg0)->resource == 0) {
-        resource = func_8025193C_de(0, ((Shared_Particle *)arg0)->desc->renderModel,
-                                ((Shared_Particle *)arg0)->desc->renderModel, 0x18,
+    if (((Shared_Particle *)particle)->resource == 0) {
+        resource = func_8025193C_de(0, ((Shared_Particle *)particle)->desc->renderModel,
+                                ((Shared_Particle *)particle)->desc->renderModel, 0x18,
                                 0, 0, 0, &D_800C4D38_de, 1);
         if (resource != 0) {
             key = func_8028FE28_de(*resource,
-                                ((Shared_Particle *)arg0)->desc->renderModel, 1);
+                                ((Shared_Particle *)particle)->desc->renderModel, 1);
             func_80253838_de(0, resource);
-            found = func_802540F4_de(0, &sp38, key, &D_800C4D50_de, 1);
+            found = func_802540F4_de(0, &modelTable, key, &D_800C4D50_de, 1);
             if (found != 0) {
-                ((Shared_Particle *)arg0)->resource = func_8028FE3C_de(
-                    (s32)sp38, key, index % *(s32 *)sp38,
-                    &((Shared_Particle *)arg0)->resourceSize);
+                ((Shared_Particle *)particle)->resource = func_8028FE3C_de(
+                    (s32)modelTable, key, index % *(s32 *)modelTable,
+                    &((Shared_Particle *)particle)->resourceSize);
                 func_80253838_de(0, (void *)found);
             }
         }
-        if (((Shared_Particle *)arg0)->resource == 0) {
+        if (((Shared_Particle *)particle)->resource == 0) {
             return;
         }
     }
 
-    resource = func_8025193C_de(0, ((Shared_Particle *)arg0)->resource,
-                            ((Shared_Particle *)arg0)->resource, ((Shared_Particle *)arg0)->resourceSize,
+    resource = func_8025193C_de(0, ((Shared_Particle *)particle)->resource,
+                            ((Shared_Particle *)particle)->resource, ((Shared_Particle *)particle)->resourceSize,
                             0, 0, &D_0026D7F4, &D_800C4D68_de, 1);
     if (resource != 0) {
-        Render_QueueModelInstance(resource, lookup, 0,
-                      (char *)arg0 + (((D_800D297C * 3) << 3) + 0xE0), 0, -1);
+        Render_QueueModelInstance(resource, matrix, 0,
+                      (char *)particle + (((D_800D297C * 3) << 3) + 0xE0), 0, -1);
         func_80253754_de(0, resource);
     }
 }

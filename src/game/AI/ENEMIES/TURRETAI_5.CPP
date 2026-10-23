@@ -63,23 +63,23 @@ extern f32 Particle_GetActorHeight(Player *);
 
 extern s32 func_802444A4_de(Player *, CVector3, CVector3, char *);
 
-void Turret_LinkEffect_Activate(void *arg0, WeaponFireState *arg1, s32 arg2) {
-    if ((func_80285F58_de(&D_8011FE88, arg0) == 0) &&
-        (arg1->variant == 0)) {
-        Turret_LinkEffect_MakeVisible(arg0, arg1, arg2);
-        func_80214178_de(arg0, arg1, 1);
+void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedArg) {
+    if ((func_80285F58_de(&D_8011FE88, actor) == 0) &&
+        (state->variant == 0)) {
+        Turret_LinkEffect_MakeVisible(actor, state, unusedArg);
+        func_80214178_de(actor, state, 1);
     }
 }
 
-void Turret_BuildPlaneOrient(void *unused0, struct RotationObject *arg1, f32 *arg2) {
-    f32 sp10[4];
-    f32 sp20[3];
+void Turret_BuildPlaneOrient(void *unused0, struct RotationObject *object, f32 *out) {
+    f32 orientation[4];
+    f32 angles[3];
 
-    sp20[0] = arg1->angleX;
-    sp20[1] = arg1->angleY;
-    sp20[2] = arg1->angleZ;
-    CVector3__GetDirectionRotation2(sp10, sp20);
-    func_80274244_de(sp10, arg2);
+    angles[0] = object->angleX;
+    angles[1] = object->angleY;
+    angles[2] = object->angleZ;
+    CVector3__GetDirectionRotation2(orientation, angles);
+    func_80274244_de(orientation, out);
 }
 
 void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *object, CVector3 *pivot, CVector3 *point) {
@@ -92,37 +92,37 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
     func_80271F34_de(point, point, pivot);
 }
 
-void Turret_SpecialEffects(void *arg0, ObjRecAt8V1 *event) {
-    ObjRecAt294 *temp_a0;
-    CTurretIntelligence *temp_s1;
-    ObjRecAt294 *temp_v0;
+void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
+    ObjRecAt294 *eventOwner;
+    CTurretIntelligence *turretInfo;
+    ObjRecAt294 *headingOwner;
 
     struct NavigationTrack *track;
 
-    temp_a0 = event->unk8;
-    track = (void *)temp_a0->unk18;
-    temp_s1 = &track->segment;
-    if (event->unk4 == temp_s1->m_GunNode) {
-        func_802738C0_de(arg0, temp_a0->unk294);
+    eventOwner = event->unk8;
+    track = (void *)eventOwner->unk18;
+    turretInfo = &track->segment;
+    if (event->unk4 == turretInfo->m_GunNode) {
+        func_802738C0_de(actor, eventOwner->unk294);
     }
-    if (event->unk4 == temp_s1->m_RotNode) {
-        temp_v0 = event->unk8;
-        func_80273C68_de(arg0,
-                      temp_v0->targetHeading -
-                          temp_v0->heading);
+    if (event->unk4 == turretInfo->m_RotNode) {
+        headingOwner = event->unk8;
+        func_80273C68_de(actor,
+                      headingOwner->targetHeading -
+                          headingOwner->heading);
     }
 }
 
-void Turret_DecreaseHealth(void *arg0, Dest *arg1, CDamageInfo *arg2) {
-    s32 var_v1;
+void Turret_DecreaseHealth(void *actor, Dest *state, CDamageInfo *damage) {
+    s32 health;
 
-    var_v1 = arg1->health - arg2->damage;
-    if (var_v1 < 0) {
-        var_v1 = 0;
+    health = state->health - damage->damage;
+    if (health < 0) {
+        health = 0;
     }
-    arg1->health = var_v1;
-    if (var_v1 == 0) {
-        func_80214178_de(arg0, arg1, 0x40);
+    state->health = health;
+    if (health == 0) {
+        func_80214178_de(actor, state, 0x40);
     }
 }
 
