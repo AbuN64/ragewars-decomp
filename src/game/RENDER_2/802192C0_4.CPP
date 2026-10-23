@@ -61,7 +61,7 @@ void *func_8028FFD0_de(void *, s32 *, s32, CVector3, CVector3, s32, f32); /* ext
 struct ListNode80290528;
 void func_80290548_de(struct ListNode80290528 *);
 s32 func_802A01E8_de(void);
-s32 func_80448EF4_de(void *, s8, s32);         /* extern */
+s32 Ovlgame_ResetPlayerForRound(void *, s8, s32);         /* extern */
 void func_8044972C_de(void *);
 void func_8044A07C_de(void *);
 
@@ -181,7 +181,7 @@ settings_loop:
                 if (var_s1->active != 0) {
                     if (((struct Shared_PlayerSettingsView *)settingsBase)->state == 1) {
                     ((struct Shared_ActorView *)temp_s0)->actorState = (s32) ((struct Shared_PlayerSettingsView *)settingsBase)->state;
-                    func_80448EF4_de(temp_s0, var_s1->character, 1);
+                    Ovlgame_ResetPlayerForRound(temp_s0, var_s1->character, 1);
                     temp_v0 = ((struct Shared_ActorView *)temp_s0)->model;
                     ((struct Shared_ModelView *)temp_v0)->flags = (s32) (((struct Shared_ModelView *)temp_v0)->flags & ~4);
                     func_80214178_de(&((struct Shared_ActorView *)temp_s0)->weapon, &((struct Shared_ActorView *)temp_s0)->weapon.behaviorFlags, 2);

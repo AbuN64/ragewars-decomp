@@ -81,7 +81,7 @@ void Ovlgame_InitActorParts(SharedPlayer *player, InputRecAt27 *rec, s32 mode, s
 }
 #endif
 
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || defined(VERSION_US_REV1) || defined(VERSION_US) || defined(VERSION_DE)
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 extern s32 D_800FEAE0[], D_800FF140_de[];
 extern char D_80102B00[];
@@ -99,10 +99,23 @@ extern void Pak_OpenDialog(void *, void *, void *, s32, s32);
 /* Resets a player/actor record for a new run: marks it active, stores the character, picks up the HUD
  * object, clears the per-slot counters and weapon tables, selects the start mode from the multiplayer setting
  * and zeroes the per-player entries of the two global tables. */
-void func_80448EF4_de(void *actor, s32 character) {
+typedef struct PlayerRoundStats {
+    s16 totals[6];
+    s16 counts[4][8];
+} PlayerRoundStats;
+
+typedef struct PlayerRoundReset {
+    u8 reserved0[0x5D8];
+    PlayerRoundStats *stats;
+    u8 reserved5DC[0x68];
+    u8 counters[2][6];
+} PlayerRoundReset;
+
+void Ovlgame_ResetPlayerForRound(void *actor, s32 character) {
     s32 i;
+    unsigned long counterAddress;
     s32 openFlag = 0;
-#define globals ((char *)&D_801462C8)
+    char *globals;
     func_80264B6C_de();
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
@@ -117,12 +130,18 @@ void func_80448EF4_de(void *actor, s32 character) {
     func_8021836C_de((char *)actor + 0x938);
     func_80218E98_de((char *)actor + 0xCCC);
     FIELD(s16, actor, 0x5E8) = 0;
-    for (i = 5; i >= 0; i--) {
-        FIELD(u8, actor, 0x644 + i) = 0;
-    }
-    for (i = 5; i >= 0; i--) {
-        FIELD(u8, actor, 0x64A + i) = 0;
-    }
+    i = 5;
+    counterAddress = (unsigned long)actor + i;
+    do {
+        *(u8 *)(counterAddress + 0x644) = 0;
+        counterAddress--;
+    } while (--i >= 0);
+    i = 5;
+    counterAddress = (unsigned long)actor + i;
+    do {
+        *(u8 *)(counterAddress + 0x64A) = 0;
+        counterAddress--;
+    } while (--i >= 0);
     if (D_801462E5 != 0) {
         if (D_801462D5 == 1 && FIELD(s32, actor, 0x1450) == 0) {
             u32 value = func_8022F454_de(D_80102B00 + FIELD(s32, actor, 0x5D4) * 0x190, FIELD(s8, FIELD(void *, actor, 0x5D8), 0x80));
@@ -142,10 +161,10 @@ void func_80448EF4_de(void *actor, s32 character) {
     FIELD(s32, actor, 0x86C) = -1;
     FIELD(s32, actor, 0x870) = -1;
     for (i = 0; i < 8; i++) {
-        FIELD(s16, FIELD(void *, actor, 0x5D8), 0x2C + i * 2) = 0;
-        FIELD(s16, FIELD(void *, actor, 0x5D8), 0x3C + i * 2) = 0;
-        FIELD(s16, FIELD(void *, actor, 0x5D8), 0xC + i * 2) = 0;
-        FIELD(s16, FIELD(void *, actor, 0x5D8), 0x1C + i * 2) = 0;
+        ((PlayerRoundReset *)actor)->stats->counts[2][i] = 0;
+        ((PlayerRoundReset *)actor)->stats->counts[3][i] = 0;
+        ((PlayerRoundReset *)actor)->stats->counts[0][i] = 0;
+        ((PlayerRoundReset *)actor)->stats->counts[1][i] = 0;
     }
     FIELD(s16, FIELD(void *, actor, 0x5D8), 0x0) = 0;
     FIELD(s16, FIELD(void *, actor, 0x5D8), 0x2) = 0;
@@ -162,6 +181,7 @@ void func_80448EF4_de(void *actor, s32 character) {
     FIELD(s32, actor, 0x640) = 0;
     FIELD(s32, actor, 0x868) = 1;
     func_8044952C_de((struct RespawnPlayer *)actor);
+    globals = (char *)&D_801462C8;
     if (FIELD(u8, globals, 0x1D) != 0) {
         FIELD(s32, actor, 0x13E8) = 0;
     }
@@ -182,10 +202,10 @@ void func_80448EF4_de(void *actor, s32 character) {
     }
     D_800FEAE0[FIELD(s32, actor, 0x5D4)] = 0;
     D_800FF140_de[FIELD(s32, actor, 0x5D4)] = 0;
-#undef globals
+
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80448EF4_de);
+INCLUDE_ASM("ovl_80400000", Ovlgame_ResetPlayerForRound);
 #endif
 
 #ifdef NON_MATCHING

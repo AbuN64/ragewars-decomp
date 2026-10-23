@@ -27,7 +27,7 @@ extern void func_80253838_de(void *arg0, void *arg1);
 
 extern void func_80226950_de(ObjectPool *, s32);
 extern s32 D_800C9684[];
-extern void func_80448EF4_de(void *actor, s32 character, s32 active);
+extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
 
 
@@ -55,7 +55,7 @@ s32 func_802934F8_de(void);
                             /* extern */
 void Ovlgame_InitActorHudState(Shared_ActorView *);
 
-/* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls func_80448EF4_de with the
+/* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls Ovlgame_ResetPlayerForRound with the
    actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
    func_8021B1E4_de with D_80146898, zero and one. */
 
@@ -165,7 +165,7 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field16D8 = 0;
             func_802A6F68_de(&((Shared_ActorView *)object)->record);
             if (((ObjectState96 *)(entry))->unk_78 != 0) {
-                func_80448EF4_de(object, ((ObjectState96 *)(entry))->unk_80, 1);
+                Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->unk_80, 1);
                 func_80255ED8_de(&pool->active_queue, object);
                 func_80255CB8_de(&pool->object_queue, object);
             }
@@ -220,7 +220,7 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field16D4 = 0;
         ((struct Shared_ActorView *)(object))->field16D8 = 0;
         func_802A6F68_de(&((Shared_ActorView *)object)->record);
-        func_80448EF4_de(object, ((ObjectState96 *)(entry))->unk_80, force_active);
+        Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->unk_80, force_active);
         func_80255ED8_de(&pool->active_queue, object);
         func_80255CB8_de(&pool->object_queue, object);
     }
@@ -327,7 +327,7 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
 
 void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
-    func_80448EF4_de(actor, character, 1);
+    Ovlgame_ResetPlayerForRound(actor, character, 1);
     func_80214178_de(&actor->firstEffect, &actor->secondEffect, 2);
     func_8021B1E4_de(actor, D_80146898, 0, 1);
 }
