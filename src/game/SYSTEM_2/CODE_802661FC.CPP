@@ -551,11 +551,11 @@ void func_802671FC_de(void *arg0, void *arg1, s32 arg2, CVector3 arg3, ResourceM
     }
 }
 
-void func_80267260_de(void *arg0, CVector3 input, s32 arg4) {
+void func_80267260_de(void *actor, CVector3 input, s32 arg4) {
     CVector3 output;
     s32 value;
 
-    func_8024E79C_de(arg0, input, &output, &value, 0, 0);
+    func_8024E79C_de(actor, input, &output, &value, 0, 0);
     if (arg4 != 0) {
         func_80276184_de((void *)value);
     } else {
@@ -563,9 +563,9 @@ void func_80267260_de(void *arg0, CVector3 input, s32 arg4) {
     }
 }
 
-f32 func_802672D0_de(u8 *arg0) {
-    if (*arg0 == 1) {
-        return func_8024BEDC_de(arg0);
+f32 func_802672D0_de(u8 *other) {
+    if (*other == 1) {
+        return func_8024BEDC_de(other);
     } else {
         return D_800C4420_de;
     }

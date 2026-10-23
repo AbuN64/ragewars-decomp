@@ -187,18 +187,18 @@ void func_80267958_de(SharedPlayerCode802661FC *target, Actor_func_80267958_de *
     func_8028CE94_de(&D_8011FE88, player->views5E8.view698_37.emitter + 0x140, 3, point, *(&D_800C9538 + 1), D_800C4450_de);
 }
 
-void func_80267B68_de(unsigned char *arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
-    if (*arg0 == 1) {
-        func_80266810_de(arg0, arg1, arg2, arg3, arg6, 0, 0, 0x80);
+void func_80267B68_de(unsigned char *source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
+    if (*source == 1) {
+        func_80266810_de(source, target, kind, position, arg6, 0, 0, 0x80);
     }
 }
 
-void func_80267BC8_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
-    func_80266810_de((void *)arg0, arg1, arg2, arg3, arg6, 1, 0, 0x80);
+void func_80267BC8_de(s32 source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
+    func_80266810_de((void *)source, target, kind, position, arg6, 1, 0, 0x80);
 }
 
-void func_80267C20_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair arg6) {
-    func_80266810_de((void *)arg0, arg1, arg2, arg3, arg6, 1, 1, 0x80);
+void func_80267C20_de(s32 source, s32 target, s32 kind, Triple position, struct IntPair arg6) {
+    func_80266810_de((void *)source, target, kind, position, arg6, 1, 1, 0x80);
 }
 
 void func_80267C78_de(int arg0, int arg1, int arg2, int arg3) {
