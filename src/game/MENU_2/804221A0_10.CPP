@@ -25,12 +25,12 @@ s32 func_80422228_de(void) {
 
 
 /* Event callback for screen D_800E44A0: on event 1 while func_8043C308_de reports the screen in state
-   1 it advances the screen through func_8043C080_de and func_8043C2A4_de, and when that leaves it in
+   1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in
    state 2 it tears the match display down through func_80422020_de and func_8042DEA0_de and calls
    func_80264854_de(1). Returns zero. */
 
 
-extern void func_8043C080_de(void *);
+extern void Frontend_DrawMenuImage(void *);
 
 extern void func_8043C2A4_de(void *);
 
@@ -98,7 +98,7 @@ s32 func_804222A8_de(s32 unused0, s32 unused1, s32 event) {
         if (func_8043C308_de(D_800E44A0) != 1) {
             return 0;
         }
-        func_8043C080_de(D_800E44A0);
+        Frontend_DrawMenuImage(D_800E44A0);
         func_8043C2A4_de(D_800E44A0);
         if (func_8043C308_de(D_800E44A0) != 2) {
             return 0;

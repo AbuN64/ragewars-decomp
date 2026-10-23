@@ -26,7 +26,7 @@
 
 
 /* Handles event 1 on the screen D_800E5830: unless func_8043C308_de reports its menu in state 1 it
-   calls func_80438828_de; otherwise it advances the menu with func_8043C080_de and func_8043C2A4_de and,
+   calls func_80438828_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
    once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 calls func_8029973C_de, clears
    D_80146918 and D_801468F4 and leaves through func_80298368_de for screen 0xA unless D_80146948 is 1
    and D_8015402C is at least 35, in which case it leaves for screen 7 when option D_801462D5 is 1
@@ -47,7 +47,7 @@
 extern struct SelectionMessageScreen *D_800E5830;
 extern s32 func_8043C308_de(struct MenuRules *);
 
-extern void func_8043C080_de(struct MenuRules *);
+extern void Frontend_DrawMenuImage(struct MenuRules *);
 
 extern void func_8043C2A4_de(struct MenuRules *);
 
@@ -112,7 +112,7 @@ s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
     }
     state = func_8043C308_de(&D_800E5830->rules);
     if (state == event) {
-        func_8043C080_de(&D_800E5830->rules);
+        Frontend_DrawMenuImage(&D_800E5830->rules);
         func_8043C2A4_de(&D_800E5830->rules);
         if (func_8043C308_de(&D_800E5830->rules) != 2) {
             return 0;

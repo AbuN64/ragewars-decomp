@@ -30,7 +30,7 @@ extern void func_8041B7B4_de(s32, s32, s32);
 extern void func_804322AC_de(s32);
 extern void func_80434D70_de(s32);
 extern s32 func_80435384_de(s32, s32 *);
-extern s32 func_80434428_de(s32);
+extern s32 Frontend_SavePlayerRecords(s32);
 extern s32 func_80435128_de(s32);
 extern void func_8043599C_de(s32, s32, s32);
 extern void func_804356BC_de(s32);
@@ -231,7 +231,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[3] = settings[0x7A];
                 D_800E54A4->players[p].records[D_800E54A4->players[p].record].setting[4] = settings[0x82];
             }
-            if (func_80434428_de(p) == 1) {
+            if (Frontend_SavePlayerRecords(p) == 1) {
                 switch (D_800E54A4->phase) {
                 case 0:
                     if (func_80435128_de(p) >= 0) {
@@ -456,7 +456,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 func_8022EF30_de(&((Profile *) D_80102B00)[other]);
             }
             func_8022EF30_de(&D_800E54A4->players[p].records[i]);
-            if (func_80434428_de(p) == 1) {
+            if (Frontend_SavePlayerRecords(p) == 1) {
                 if (D_800E54A4->players[p].sub == 5) {
                     switch (D_800E54A4->phase) {
                     case 0:
@@ -511,7 +511,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].records[slot].owner = slot;
                 D_800E54A4->players[p].records[slot].time = D_800E54A4->players[p].profile;
             }
-            if (func_80434428_de(p) == 1) {
+            if (Frontend_SavePlayerRecords(p) == 1) {
                 if (D_800E54A4->phase == 2) {
                     if (D_800E54A4->players[p].host == 1) {
                         func_80434D70_de(p);
@@ -832,7 +832,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         case 0x2E8:
 #endif
             func_80434B08_de(p);
-            if (func_80434428_de(p) == 1) {
+            if (Frontend_SavePlayerRecords(p) == 1) {
                 D_800E54A4->players[p].state = 0xE;
                 func_804322AC_de(p);
             }

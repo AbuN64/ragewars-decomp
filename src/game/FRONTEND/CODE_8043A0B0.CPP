@@ -77,7 +77,7 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
             scale.x = D_800E3A58[row].scale[player];
             scale.y = D_800E3A58[row].scale[player];
             scale.z = D_800E3A58[row].scale[player];
-            func_8041CAD8_de(&D_800E59E0->panels[player], 9, config->character + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[player], D_800E3A58[row].distance[player], D_800E3A58[row].light[player]);
+            Frontend_InitModelPreview(&D_800E59E0->panels[player], 9, config->character + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[row].position[player], D_800E3A58[row].distance[player], D_800E3A58[row].light[player]);
         }
     }
     D_800E59E0->state = 1;

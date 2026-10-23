@@ -126,7 +126,7 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 
 
 /* Handles event 1 on the screen D_800E53C0: unless func_8043C308_de reports its menu in state 1 it
-   calls func_8042D28C_de; otherwise it advances the menu with func_8043C080_de and func_8043C2A4_de and,
+   calls func_8042D28C_de; otherwise it advances the menu with Frontend_DrawMenuImage and func_8043C2A4_de and,
    once func_8043C308_de reports 2, acts on the choice at 0x1C: choice 0 hides the window argument,
    calls func_8029973C_de, clears D_80146918 and D_801468F4 and leaves for screen 0xF when option
    D_801462D5 is set, otherwise through func_8042DEA0_de when func_8042AF28_de and func_8042ACD8_de both
@@ -143,7 +143,7 @@ enum { ITEM0 = 621, ITEM1 = 620, ITEM2 = 619, ITEM3 = 618 };
 
 extern s32 func_8043C308_de(void *);
 
-extern void func_8043C080_de(void *);
+extern void Frontend_DrawMenuImage(void *);
 
 extern void func_8043C2A4_de(void *);
 
@@ -425,7 +425,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
     }
     state = func_8043C308_de(D_800E53C0);
     if (state == event) {
-        func_8043C080_de(D_800E53C0);
+        Frontend_DrawMenuImage(D_800E53C0);
         func_8043C2A4_de(D_800E53C0);
         if (func_8043C308_de(D_800E53C0) != 2) {
             return 0;

@@ -25,7 +25,7 @@ extern s32 D_8015402C;
 
 
 extern s32 func_8043C308_de(struct Screen_func_80422960_de *);
-extern void func_8043C080_de(struct Screen_func_80422960_de *);
+extern void Frontend_DrawMenuImage(struct Screen_func_80422960_de *);
 extern void func_8043C2A4_de(struct Screen_func_80422960_de *);
 extern void func_8040C428_de(s32);
 extern void func_8040E8D8_de(void *, s32);
@@ -55,7 +55,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
         if (state != event) {
             return 0;
         }
-        func_8043C080_de(D_800E4518);
+        Frontend_DrawMenuImage(D_800E4518);
         func_8043C2A4_de(D_800E4518);
         if (func_8043C308_de(D_800E4518) != 2) {
             return 0;

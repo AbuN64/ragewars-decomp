@@ -89,9 +89,9 @@ extern struct ResourceRecAt6 *D_8014D988;
    pointer to bytes. */
 extern char **D_8014D9AC;
 
-/* Calls func_8040F9E0_de when the halfword D_80153C2C is non-zero. */
+/* Calls Frontend_LoadLanguageStrings when the halfword D_80153C2C is non-zero. */
 
-extern void func_8040F9E0_de(s32);
+extern void Frontend_LoadLanguageStrings(s32);
 
 /* Twelve bytes of stride and a load at offset 8. The debugger showed the global holding
    0x80697F80 and the results being 0, 0x8067E570, 0x8067F870 and 0x80697E00, so the third word is
@@ -296,7 +296,7 @@ s16 func_80411D94_de(void) {
 
 void func_80411DA4_de(s32 arg0) {
     if (D_80153C2C != 0) {
-        func_8040F9E0_de(arg0);
+        Frontend_LoadLanguageStrings(arg0);
     }
 }
 

@@ -124,7 +124,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
                                 scale.x = D_800E3A58[temp_v1].scale[i];
                                 scale.y = D_800E3A58[temp_v1].scale[i];
                                 scale.z = D_800E3A58[temp_v1].scale[i];
-                                func_8041CAD8_de(D_800E42D0->players[i].model, 9, temp_s0 + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[temp_v1].position[i], D_800E3A58[temp_v1].distance[i], D_800E3A58[temp_v1].light[i]);
+                                Frontend_InitModelPreview(D_800E42D0->players[i].model, 9, temp_s0 + 0x38F, 0x4B, 0x5DC0, scale, D_800E3A58[temp_v1].position[i], D_800E3A58[temp_v1].distance[i], D_800E3A58[temp_v1].light[i]);
                             } else {
                                 func_80420850_de(i);
                             }

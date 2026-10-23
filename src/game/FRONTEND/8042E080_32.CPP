@@ -70,22 +70,22 @@ extern char *func_802A025C_de(char *, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void func_804322AC_de(s32);
 /* Replace or create the selected port's four-profile Controller Pak note. */
-s32 func_80434428_de(s32 channel)
+s32 Frontend_SavePlayerRecords(s32 channel)
 {
     char extension[8];
     char name[16];
-    s32 note, bytes, slots, status, required, i;
+    s32 note, freePages, freeNotes, status, requiredPages, i;
     s32 success = 0;
     status = Pak_FindNoteByName(rw_pak_save_name(), channel, &note);
     if (status == 1) {
         success = Pak_DeleteNote(channel, note) == 0;
     } else {
-        status = Pak_GetFreePages(channel, &bytes);
+        status = Pak_GetFreePages(channel, &freePages);
         if (status == 0) {
-            status = Pak_CountFreeNotes(channel, &slots);
+            status = Pak_CountFreeNotes(channel, &freeNotes);
             if (status == 0) {
-                required = func_804057EC_de(func_80435424_de());
-                success = slots != 0 && bytes >= required;
+                requiredPages = func_804057EC_de(func_80435424_de());
+                success = freeNotes != 0 && freePages >= requiredPages;
             }
         }
     }
@@ -109,5 +109,5 @@ s32 func_80434428_de(s32 channel)
     return success;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80434428_de);
+INCLUDE_ASM("ovl_80400000", Frontend_SavePlayerRecords);
 #endif

@@ -385,7 +385,7 @@ void func_80420850_de(s32 player) {
         scale.x = D_800E3A50[index].scale[player];
         scale.y = D_800E3A50[index].scale[player];
         scale.z = D_800E3A50[index].scale[player];
-        func_8041CAD8_de(D_800E42D0->players[player].model, 9, kind + 0x38F, 75, 24000, scale,
+        Frontend_InitModelPreview(D_800E42D0->players[player].model, 9, kind + 0x38F, 75, 24000, scale,
                       D_800E3A50[index].m_vPos[player], D_800E3A50[index].m_fRotY[player],
                       D_800E3A50[index].flags[player]);
     }

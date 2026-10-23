@@ -18,7 +18,7 @@
 extern s32 D_800D2C90;
 extern StatePair D_800CDA30_de;
 extern s8 D_8010BBB8;
-extern void func_8042E5EC_de(void);
+extern void Frontend_SetupRandomTeams(void);
 void func_802A2090_de(void) {
     s32 mode;
     s32 value;
@@ -49,7 +49,7 @@ mode_inactive:
         active = 0;
 mode_done:
         if ((D_8014288C == 0) && (active == 1) && ((f32)(value * 15) < D_800CDA30_de.value)) {
-            func_8042E5EC_de();
+            Frontend_SetupRandomTeams();
             func_8042DEA0_de();
             func_802A2400_de(0.0f);
         }

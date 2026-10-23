@@ -313,7 +313,7 @@ s32 func_8043BFF0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #include "GFX/TEXT/802A8A94_5.H"
 extern float D_800E2064;
 extern float D_80141008[];
-void func_8043C080_de(u8 *arg0) {
+void Frontend_DrawMenuImage(u8 *arg0) {
     s32 arg14;
     float b, a;
     float *screen;
@@ -345,5 +345,5 @@ void func_8043C080_de(u8 *arg0) {
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043C080_de);
+INCLUDE_ASM("ovl_80400000", Frontend_DrawMenuImage);
 #endif

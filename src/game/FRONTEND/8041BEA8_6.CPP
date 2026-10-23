@@ -173,7 +173,7 @@ extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVect
 extern void func_8024B2D0_de();
 #ifdef NON_MATCHING
 /* 31/182 aligned edits; remaining: register allocation of the setup prologue (s0/s2/s3 roles) */
-void *func_8041CAD8_de(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing,
+void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing,
                        f32 scale, s32 arg8) {
     CVector3 scales;
     CVector3 local60;
@@ -228,7 +228,7 @@ void *func_8041CAD8_de(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, 
     return &self->copy4;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8041CAD8_de);
+INCLUDE_ASM("ovl_80400000", Frontend_InitModelPreview);
 #endif
 
 /* Copies the three-word vector passed by value into the object's vector at 0x480. */
@@ -260,7 +260,7 @@ void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1) {
 }
 
 /* Stores a value into the word at offset 0x49C of an object; func_80420618_de and func_8043AB40_de call
-   it with zero, func_8041CAD8_de writes the same word directly and func_8041C7F4_de reads it. */
+   it with zero, Frontend_InitModelPreview writes the same word directly and func_8041C7F4_de reads it. */
 
 
 void func_8041CE10_de(struct Object49C *object, s32 value) {

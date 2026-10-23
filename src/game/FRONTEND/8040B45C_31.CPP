@@ -512,18 +512,18 @@ s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_ty
     s32 centerFlag;
     s32 unscaledHalfWidth;
     s32 unscaledHalfHeight;
-    s32 temp_v0_2;
-    s32 temp_v0_3;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 temp_v1_3;
-    s32 temp_v1_4;
+    s32 hitRight;
+    s32 hitBottom;
+    s32 hitLeft;
+    s32 hitTop;
+    s32 clippedLeft;
+    s32 clippedTop;
     s32 halfWidth;
     s32 halfHeight;
-    s32 var_v0;
-    s32 var_v0_2;
-    s32 var_v0_3;
-    s32 var_v0_4;
+    s32 visible;
+    s32 bottom;
+    s32 left;
+    s32 top;
     u16 widgetFlags;
     u16 widgetHeight;
 
@@ -545,7 +545,7 @@ s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_ty
     if (context->flags & 1) {
         context->alpha = (u8) ((u8) context->alpha >> 1);
     }
-    var_v0 = 0;
+    visible = 0;
     if (context->alpha != 0) {
         if (!(layout->flags & 8)) {
             return 0;
@@ -588,86 +588,86 @@ s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_ty
                 hit->field_0 = (s32) ((hitCenterX - halfWidth) + context->x);
                 hit->field_8 = (s32) ((hitCenterY - halfHeight) + context->y);
                 hit->field_4 = (s32) (hitCenterX + halfWidth + context->x);
-                var_v0_2 = hitCenterY + halfHeight + context->y;
+                bottom = hitCenterY + halfHeight + context->y;
                 goto storeHitBottom;
             }
         } else {
             if (offsetHitBox == 0) {
                 if (parentScaleX != 1.0f) {
-                    var_v0_3 = (s32) ((f32) widgetX * parentScaleX) + context->x;
+                    left = (s32) ((f32) widgetX * parentScaleX) + context->x;
                 } else {
-                    var_v0_3 = widgetX + context->x;
+                    left = widgetX + context->x;
                 }
-                hit->field_0 = var_v0_3;
+                hit->field_0 = left;
                 hit->field_4 = (s32) (hit->field_0 + (s16) ((u16)layout->width));
                 if (parentScaleY != 1.0f) {
-                    var_v0_4 = (s32) ((f32) layout->y * parentScaleY) + context->y;
+                    top = (s32) ((f32) layout->y * parentScaleY) + context->y;
                 } else {
-                    var_v0_4 = layout->y + context->y;
+                    top = layout->y + context->y;
                 }
-                hit->field_8 = var_v0_4;
-                var_v0_2 = hit->field_8 + (s16) ((u16)layout->height);
+                hit->field_8 = top;
+                bottom = hit->field_8 + (s16) ((u16)layout->height);
             } else {
                 hit->field_0 = (s32) ((hitCenterX - unscaledHalfWidth) + layout->offsetX + context->x);
                 hit->field_8 = (s32) ((hitCenterY - unscaledHalfHeight) + layout->offsetY + context->y);
                 hit->field_4 = (s32) (hitCenterX + unscaledHalfWidth + layout->offsetX + context->x);
-                var_v0_2 = hitCenterY + unscaledHalfHeight + layout->offsetY + context->y;
+                bottom = hitCenterY + unscaledHalfHeight + layout->offsetY + context->y;
             }
 storeHitBottom:
-            hit->field_C = var_v0_2;
+            hit->field_C = bottom;
         }
-        temp_v1 = hit->field_0;
-        if (temp_v1 < 0) {
+        hitLeft = hit->field_0;
+        if (hitLeft < 0) {
             hit->field_0 = 0;
             goto clipRight;
         }
-        var_v0 = 0;
-        if (D_800DEA60 >= temp_v1) {
+        visible = 0;
+        if (D_800DEA60 >= hitLeft) {
 clipRight:
-            temp_v0_2 = hit->field_4;
-            if (temp_v0_2 < 0) {
+            hitRight = hit->field_4;
+            if (hitRight < 0) {
                 return 0;
             }
-            if (D_800DEA60 < temp_v0_2) {
+            if (D_800DEA60 < hitRight) {
                 hit->field_4 = (s32) D_800DEA60;
             }
-            temp_v1_2 = hit->field_8;
-            if (temp_v1_2 < 0) {
+            hitTop = hit->field_8;
+            if (hitTop < 0) {
                 hit->field_8 = 0;
                 goto clipBottom;
             }
-            var_v0 = 0;
-            if (D_800E2AB4_de >= temp_v1_2) {
+            visible = 0;
+            if (D_800E2AB4_de >= hitTop) {
 clipBottom:
-                temp_v0_3 = hit->field_C;
-                if (temp_v0_3 < 0) {
+                hitBottom = hit->field_C;
+                if (hitBottom < 0) {
                     return 0;
                 }
-                if (D_800E2AB4_de < temp_v0_3) {
+                if (D_800E2AB4_de < hitBottom) {
                     hit->field_C = (s32) D_800E2AB4_de;
                 }
-                temp_v1_3 = hit->field_0;
-                if (temp_v1_3 >= hit->field_4) {
-                    hit->field_4 = (s32) (temp_v1_3 + 1);
+                clippedLeft = hit->field_0;
+                if (clippedLeft >= hit->field_4) {
+                    hit->field_4 = (s32) (clippedLeft + 1);
                 }
-                temp_v1_4 = hit->field_8;
-                if (temp_v1_4 >= hit->field_C) {
-                    hit->field_C = (s32) (temp_v1_4 + 1);
+                clippedTop = hit->field_8;
+                if (clippedTop >= hit->field_C) {
+                    hit->field_C = (s32) (clippedTop + 1);
                 }
                 context->x = (s32) draw->field_0;
-                var_v0 = 1;
+                visible = 1;
                 context->y = (s32) draw->field_8;
                 context->Rgn[0] = (s32) draw->field_0;
                 context->Rgn[1] = (s32) draw->field_4;
                 context->Rgn[2] = (s32) draw->field_8;
                 context->Rgn[3] = (s32) draw->field_C;
-                return var_v0;
+                return visible;
             }
-            return var_v0;
+            return visible;
         }
-        return var_v0;
+        return visible;
     }
-    return var_v0;
+    return visible;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Frontend_ComputeWidgetBounds);

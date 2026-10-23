@@ -346,7 +346,7 @@ void func_804279B8_de(void) {
         scale.x = D_800E3A58[index].scale[0];
         scale.y = D_800E3A58[index].scale[0];
         scale.z = D_800E3A58[index].scale[0];
-        func_8041CAD8_de((Obj8041CAD8 *)(*(ResultsOptionsScreen **)&D_800E4690)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
+        Frontend_InitModelPreview((Obj8041CAD8 *)(*(ResultsOptionsScreen **)&D_800E4690)->panels, 9, entry->kind + 0x38F, 0x4B, 0x5DC0, scale,
                          D_800E3A58[index].position[0], D_800E3A58[index].distance[0],
                          D_800E3A58[index].light[0]);
     }

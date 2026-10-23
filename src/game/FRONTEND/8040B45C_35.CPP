@@ -533,7 +533,7 @@ void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
 void *func_8025305C_de(s32 size);
 u8 *func_802A025C_de(u8 *dst, u8 *src);
 void func_802A0EB0_de(s32 handle);
-void func_8040F9E0_de(s32 index);
+void Frontend_LoadLanguageStrings(s32 index);
 extern char D_800DD0B0;
 extern s32 D_800E2AC4;
 
@@ -629,24 +629,24 @@ typedef struct t_resource {
 extern t_resource D_801539B0;
 
 #ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8040F9E0_de);
+INCLUDE_ASM("ovl_80400000", Frontend_LoadLanguageStrings);
 #else
 /* Loads the string table of resource archive section index: frees the previous string buffer and
  * pointer table, reads the section's bytes from the archive file into a fresh buffer (its size is the
  * distance to the next section's start, or to the archive end for the last one), then builds the table of
  * string starts: entry 0 is the buffer, and every byte after a terminating zero starts the next string. */
 void func_802547E4_de(void *arg0);
-void func_8040F9E0_de(s32 index) {
-    s32 count;
-    s32 next;
-    s32 size;
-    s32 slot;
+void Frontend_LoadLanguageStrings(s32 languageIndex) {
+    s32 stringCount;
+    s32 nextOffset;
+    s32 bufferSize;
+    s32 stringIndex;
     s32 closeArchive;
-    u8 *p;
-    s32 off;
+    u8 *character;
+    s32 languageOffset;
 
-    off = index * 8;
-    count = ((ArchiveTextIndexEntry *)(off + (s32)D_801539B0.LangTable))->count;
+    languageOffset = languageIndex * 8;
+    stringCount = ((ArchiveTextIndexEntry *)(languageOffset + (s32)D_801539B0.LangTable))->count;
     closeArchive = 0;
     if (D_801539B0.StringBuffer != 0) {
         func_802547E4_de(D_801539B0.StringBuffer);
@@ -656,26 +656,26 @@ void func_8040F9E0_de(s32 index) {
         func_802547E4_de(D_801539B0.StringTable);
     }
     D_801539B0.StringTable = 0;
-    if (index < D_801539B0.NLanguages - 1) {
-        next = ((ArchiveTextIndexEntry *)(off + (s32)D_801539B0.LangTable))[1].start;
+    if (languageIndex < D_801539B0.NLanguages - 1) {
+        nextOffset = ((ArchiveTextIndexEntry *)(languageOffset + (s32)D_801539B0.LangTable))[1].start;
     } else {
-        next = D_801539B0.Header.StringTableLen;
+        nextOffset = D_801539B0.Header.StringTableLen;
     }
-    size = next - ((ArchiveTextIndexEntry *)(off + (s32)D_801539B0.LangTable))->start;
-    D_801539B0.StringBuffer = (char *)func_8025305C_de(size);
-    Resmgr_SeekStream(D_801539B0.In, D_801539B0.LangTable[index].start + D_801539B0.Header.StringTable, 0);
-    Resmgr_ReadStream(D_801539B0.StringBuffer, size, 1, D_801539B0.In);
+    bufferSize = nextOffset - ((ArchiveTextIndexEntry *)(languageOffset + (s32)D_801539B0.LangTable))->start;
+    D_801539B0.StringBuffer = (char *)func_8025305C_de(bufferSize);
+    Resmgr_SeekStream(D_801539B0.In, D_801539B0.LangTable[languageIndex].start + D_801539B0.Header.StringTable, 0);
+    Resmgr_ReadStream(D_801539B0.StringBuffer, bufferSize, 1, D_801539B0.In);
     if (closeArchive) {
         func_802A0EB0_de(D_801539B0.In);
         D_801539B0.In = 0;
     }
-    D_801539B0.StringTable = (char **)func_8025305C_de(count << 2);
+    D_801539B0.StringTable = (char **)func_8025305C_de(stringCount << 2);
     D_801539B0.StringTable[0] = D_801539B0.StringBuffer;
-    slot = 1;
-    for (p = (u8 *)D_801539B0.StringBuffer + 1; p < (u8 *)D_801539B0.StringBuffer + size && slot < count; p++) {
-        if (*p == 0) {
-            D_801539B0.StringTable[slot] = (char *)(p + 1);
-            slot++;
+    stringIndex = 1;
+    for (character = (u8 *)D_801539B0.StringBuffer + 1; character < (u8 *)D_801539B0.StringBuffer + bufferSize && stringIndex < stringCount; character++) {
+        if (*character == 0) {
+            D_801539B0.StringTable[stringIndex] = (char *)(character + 1);
+            stringIndex++;
         }
     }
 }
@@ -724,7 +724,7 @@ void func_8040FB94_de(u8 *name) {
         D_801539B0.LangTable = func_8025305C_de(D_801539B0.Header.LanguageTableLen);
         Resmgr_SeekStream(res->In, D_801539B0.Header.LanguageTable, 0);
         Resmgr_ReadStream(D_801539B0.LangTable, D_801539B0.Header.LanguageTableLen, 1, res->In);
-        func_8040F9E0_de(0);
+        Frontend_LoadLanguageStrings(0);
     }
     D_801539B0.NScreens = D_801539B0.Header.ScreenTableLen / sizeof(ArchiveMapEntry);
     if (D_801539B0.NScreens > 0) {

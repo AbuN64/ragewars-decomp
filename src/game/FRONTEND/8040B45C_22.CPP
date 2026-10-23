@@ -148,7 +148,7 @@ struct VideoViewList {
 };
 extern struct VideoViewList D_80140FE8_de;
 extern int D_800E28D0, D_800E28D4;
-extern void func_8040BDB8_de(unsigned, int, int, int, int, int);
+extern void Frontend_SetVideoViewport(unsigned, int, int, int, int, int);
 
 void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, int a4, int a5) {
     int flags = 0;
@@ -165,7 +165,7 @@ void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, i
     if (D_800CC374) flags |= 2;
     if (width > 320) flags |= 1;
     D_8014D500 = VideoModeIds[region][flags];
-    func_8040BDB8_de(width, a1, a2, a3, a4, a5);
+    Frontend_SetVideoViewport(width, a1, a2, a3, a4, a5);
     node = &D_80140FE8_de.defaultView;
     if (node) {
         node->width = D_800E28D0;

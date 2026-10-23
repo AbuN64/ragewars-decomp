@@ -4,13 +4,13 @@
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
 
-/* Event callback for screen D_800E5554: on event 1 while func_8043C308_de reports the screen in state 1 it advances the screen through func_8043C080_de and func_8043C2A4_de, and when that leaves it in state 2 it calls func_8040C428_de(0) and func_8029973C_de, clears the pause word D_80146894 (0x180C past the match objects at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24 of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, stores 8 at 0x17F0 past the match objects, passes the screen's word at 0x1C to func_80298368_de and calls func_8025E384_de, returning zero. Adapted from func_804362A8_de with the screen D_800E5558 changed to D_800E5554, a func_8040C428_de(0) call added, and the trailing func_8042DEA0_de call replaced by the store of 8 and the func_80298368_de call before func_8025E384_de. */
+/* Event callback for screen D_800E5554: on event 1 while func_8043C308_de reports the screen in state 1 it advances the screen through Frontend_DrawMenuImage and func_8043C2A4_de, and when that leaves it in state 2 it calls func_8040C428_de(0) and func_8029973C_de, clears the pause word D_80146894 (0x180C past the match objects at D_80145088), stops those objects and the ones 0x48 bytes before them, releases resource 0x24 of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, stores 8 at 0x17F0 past the match objects, passes the screen's word at 0x1C to func_80298368_de and calls func_8025E384_de, returning zero. Adapted from func_804362A8_de with the screen D_800E5558 changed to D_800E5554, a func_8040C428_de(0) call added, and the trailing func_8042DEA0_de call replaced by the store of 8 and the func_80298368_de call before func_8025E384_de. */
 
 extern MenuRules *D_800E5554;
 
 
 extern s32 func_8043C308_de(void *);
-extern void func_8043C080_de(void *);
+extern void Frontend_DrawMenuImage(void *);
 extern void func_8043C2A4_de(void *);
 extern void func_8040C428_de(s32);
 extern void func_8029973C_de(void);
@@ -28,7 +28,7 @@ s32 func_80435F14_de(s32 unused0, s32 unused1, s32 event) {
         if (func_8043C308_de(D_800E5554) != 1) {
             return 0;
         }
-        func_8043C080_de(D_800E5554);
+        Frontend_DrawMenuImage(D_800E5554);
         func_8043C2A4_de(D_800E5554);
         if (func_8043C308_de(D_800E5554) != 2) {
             return 0;

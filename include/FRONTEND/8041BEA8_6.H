@@ -113,5 +113,5 @@ typedef struct Obj8041CAD8 {
     s32 unk49C;
     s32 unk4A0;
 } Obj8041CAD8;
-extern void *func_8041CAD8_de(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
+extern void *Frontend_InitModelPreview(Obj8041CAD8 *, s32, s32, s32, s32, CVector3, CVector3, f32, s32);
 #endif
