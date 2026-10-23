@@ -12,7 +12,7 @@ extern s32 D_8013B290;
 extern f32 D_800C2160_de[],D_800C215C_de;
 extern f32 func_80216F44_de(Actor_func_80214624_de *,CVector3);
 extern f32 func_8024D398_de(Actor_u1 *);
-extern f32 func_80271AA8_de(CVector3 *);
+extern f32 Particle_GetHorizontalAngle(CVector3 *);
 struct Cursor;
 extern ApproachLocation *func_80219408_de(struct Cursor *);
 extern s32 func_80240660_de(Actor_func_80214624_de *,CVector3,s32,s32,CVector3 *);

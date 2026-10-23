@@ -13,7 +13,7 @@ extern f32 D_800CB430_de[],D_800D2988[];
 
 extern s32 func_8024E62C_de(Actor_func_80245D30_de *);
 
-extern f32 func_80271AA8_de(CVector3 *);
+extern f32 Particle_GetHorizontalAngle(CVector3 *);
 
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 
@@ -86,7 +86,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
             rider=actor;
             v20=v10;
             v20.y = 0.0f;
-            temp_f0_2 = func_80271AA8_de(&v20);
+            temp_f0_2 = Particle_GetHorizontalAngle(&v20);
             temp_f1 = actor->yaw;
             sp34 = temp_f0_2;
             sp30 = temp_f1;

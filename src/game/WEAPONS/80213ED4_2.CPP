@@ -175,7 +175,7 @@ s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80
             tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);
         }
         func_80271F68_de(&hit, &hit, &actor->pos);
-        tracker->unk8C = (f32) (func_80271AA8_de(&hit) + D_800C2160_de[1]);
+        tracker->unk8C = (f32) (Particle_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
         return 1;
     }
     if (var_s1 == 1) {

@@ -16,7 +16,7 @@ extern s32 func_8024E7DC_de(void *);
 
 extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
 
-extern f32 func_80271AA8_de(CVector3 *arg0);
+extern f32 Particle_GetHorizontalAngle(CVector3 *arg0);
 
 extern void func_80218464_de();
 
@@ -126,7 +126,7 @@ void func_8022D970_de(void *arg0, void *arg1) {
         sp10.z = ((ModelBlend *)temp_v0)->effectOffset.z;
         func_80271F68_de(&sp20, &sp10, &((Shared_ActorView *)o)->effectPosition);
         sp20.y = 0.0f;
-        ((Shared_ActorView *)o)->modelDistance = func_80271AA8_de(&sp20);
+        ((Shared_ActorView *)o)->modelDistance = Particle_GetHorizontalAngle(&sp20);
     }
 }
 

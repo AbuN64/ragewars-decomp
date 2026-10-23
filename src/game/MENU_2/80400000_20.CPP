@@ -15,7 +15,7 @@
 extern f32 D_800DCC78;
 extern void func_80400E50_de(CVector3 *,void *,s32,s32);
 extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
-extern f32 func_802725FC_de(CVector3 *),func_80271AA8_de(CVector3 *);
+extern f32 func_802725FC_de(CVector3 *),Particle_GetHorizontalAngle(CVector3 *);
 static inline CVector3 TrackStart(void) {
     CVector3 sp10;
     CVector3 sp20;
@@ -57,7 +57,7 @@ CVector3 func_80403660_de(void) {
         second = TrackEnd();
         func_80271F68_de(&delta,&second,&first);
         result.x = -func_802725FC_de(&delta);
-        result.y = func_80271AA8_de(&delta);
+        result.y = Particle_GetHorizontalAngle(&delta);
         result.z = 0;
         return result;
     }

@@ -55,7 +55,7 @@ extern void func_80272898_de(void *, CVector3 *, CVector3 *);
 extern void func_80288470_de(void *);
 extern s32 func_80243A90_de(SharedTrackObject *, f32, f32, f32, void *);
 extern s32 func_8028D888_de(void *);
-extern f32 func_80271AA8_de(CVector3 *);
+extern f32 Particle_GetHorizontalAngle(CVector3 *);
 extern f32 func_802725FC_de(CVector3 *);
 /* 252/253 words (18 aligned edits); remaining: regalloc, the world-hit flag takes $v0 instead of $s0 so one move drops */
 void Menu_UpdateTrackCamera(SharedTrackCamera *out) {
@@ -128,7 +128,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *out) {
             }
         }
     }
-    yaw = func_80271AA8_de(&delta);
+    yaw = Particle_GetHorizontalAngle(&delta);
     pitch = func_802725FC_de(&delta);
     out->distance += yaw;
     out->pitch = -pitch;

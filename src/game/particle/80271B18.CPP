@@ -19,7 +19,7 @@ extern f32 D_800C4840_de;
 extern f32 D_800C4844_de;
 
 
-f32 func_80271AA8_de(CVector3 *direction) {
+f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
     f32 z = direction->z;
     f32 length = x * x + z * z;
@@ -45,7 +45,7 @@ f32 func_80271AA8_de(CVector3 *direction) {
     return angle;
 }
 #else
-INCLUDE_ASM("span_1000", func_80271AA8_de);
+INCLUDE_ASM("span_1000", Particle_GetHorizontalAngle);
 #endif
 
 extern f32 func_802B72B0_de(f32);

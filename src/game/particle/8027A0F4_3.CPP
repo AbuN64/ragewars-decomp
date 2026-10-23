@@ -54,7 +54,7 @@ void func_8027CC20_de(Shared_Particle *particle);
 void Particle_HitTarget(void *particle);
 #endif
 
-void func_8027D4A8_de(void *particle);
+void Particle_ApplyImpactResponse(void *particle);
 
 void func_80282E98_de(Shared_Particle *particle, SharedPlayer *player);
 
@@ -372,7 +372,7 @@ void Particle_Update(Shared_Particle *particle) {
             if (particle->flags & 0x100) {
                 if (D_801041F0.current != NULL) {
                     if ((particle->unk1B4 & 0x4000) && D_801041F0.current->kind == 0) {
-                        func_8027D4A8_de(particle);
+                        Particle_ApplyImpactResponse(particle);
                     } else {
 #if defined(VERSION_DE)
                         func_8027CC20_de(particle);
@@ -1434,7 +1434,7 @@ extern void func_8022B064_de(void *, CVector3 *);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
 /* 292/309 words; remaining: controlled-impact index register rotation (a0/v0/v1 local-alloc order) and one lhu/ori schedule in the impact branch */
-void func_8027D4A8_de(void *particleArg) {
+void Particle_ApplyImpactResponse(void *particleArg) {
     ImpactParticle *particle = particleArg;
     CROMParticleEffect_t *definition, *controlledDefinition;
     Shared_ParticleTarget *source;
@@ -1528,5 +1528,5 @@ void func_8027D4A8_de(void *particleArg) {
     func_80284434_de(particle);
 }
 #else
-INCLUDE_ASM("span_1000", func_8027D4A8_de);
+INCLUDE_ASM("span_1000", Particle_ApplyImpactResponse);
 #endif
