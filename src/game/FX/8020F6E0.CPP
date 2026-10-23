@@ -19,94 +19,138 @@ INCLUDE_ASM("span_1000", func_8020F6C0_de);
 #if !(defined(VERSION_DE) || defined(VERSION_EU)) || ((defined(VERSION_DE) || defined(VERSION_EU)) && defined(NON_MATCHING))
 /* Fuzzy draft for de and eu: the other versions' body under the de/eu name. */
 #if defined(VERSION_DE)
-#define FX_FN func_8020F6C0_de
+#define Fx_UpdateTargetSelection func_8020F6C0_de
 #elif defined(VERSION_EU)
-#define FX_FN func_8020F6E0_eu
-#else
-#define FX_FN func_8020F6D8_eu_x
+#define Fx_UpdateTargetSelection func_8020F6E0_eu
+
 #endif
 #ifdef NON_MATCHING
-#define FX_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+typedef struct TrackingTarget {
+    u8 pad0[8];
+    CVector3 position;
+    u8 pad14[0xEC];
+    u32 flags;
+    u8 pad104[0xD4];
+    Player *player;
+} TrackingTarget;
+
+typedef struct TargetSelection {
+    Player *player;
+    u8 pad04[0x34];
+    s32 count;
+    TrackingTarget *targets[10];
+    TrackingTarget *target;
+    void *routeObject;
+    s32 enabled[10];
+    s32 distances[10];
+    u8 padBC[0x160];
+    s32 state;
+    u8 pad220[0x38];
+    CVector3 targetPosition;
+    u8 pad264[0x28];
+    TrackingTarget *preferred;
+} TargetSelection;
+
+typedef struct TargetTeamProfile {
+    u8 pad0[0x92];
+    u8 team;
+} TargetTeamProfile;
+
 extern s32 D_801468C4;
 extern void *func_8020993C_de(void *);
 extern f32 func_802726F8_de(void *, void *);
 extern s32 func_80209A94_de(void *);
 extern s32 func_8020F93C_de(void *);
 extern s32 func_8020F984_de(void *);
-s32 FX_FN(void *self) {
-    void *camera;
-    u8 *link;
-    u8 *target;
-    u8 *linkObj = 0;
-    u8 *altObj = 0;
-    u8 *alt;
-    f32 linkDist = 0.0f;
-    f32 altDist = 0.0f;
-    s32 i;
-    camera = func_8020993C_de(self);
-    link = FX_FIELD(self, u8 *, 0x64);
-    if (link != 0) {
-        linkObj = FX_FIELD(link, u8 *, 0x1D8);
-        if (FX_FIELD(linkObj, s32, 0x5E4) == 0) {
-            FX_FIELD(self, u8 *, 0x64) = 0;
+
+static inline TrackingTarget *setSelectedTarget(TargetSelection *self, TrackingTarget *target) {
+    self->target = target;
+    return target;
+}
+
+/* NON_MATCHING: 7 aligned edits / 140 ROM words; remaining: first alternate-copy scheduling and indexed-target tail sharing. */
+s32 Fx_UpdateTargetSelection(void *object) {
+    TargetSelection *self = object;
+    CVector3 *position;
+    Player *linked;
+    Player *alternate;
+    f32 linkedDistance;
+    f32 alternateDistance;
+    s32 index;
+    TrackingTarget *target;
+
+    position = func_8020993C_de(self);
+    if (self->target != 0) {
+        linked = self->target->player;
+        if (linked->health == 0) {
+            self->target = 0;
         }
-        if (FX_FIELD(linkObj, s32, 0x122C) & 0x20) {
-            FX_FIELD(self, u8 *, 0x64) = 0;
+        if (linked->reactionFlags & 0x20) {
+            self->target = 0;
         }
         if (D_801468C4 != 0) {
-            if (FX_FIELD(FX_FIELD(FX_FIELD(self, u8 *, 0), u8 *, 0x5D8), u8, 0x92) == FX_FIELD(FX_FIELD(linkObj, u8 *, 0x5D8), u8, 0x92)) {
-                FX_FIELD(self, u8 *, 0x64) = 0;
+            if (((TargetTeamProfile *)self->player->profile)->team ==
+                ((TargetTeamProfile *)linked->profile)->team) {
+                self->target = 0;
             }
         }
-    }
-    link = FX_FIELD(self, u8 *, 0x64);
-    if (link != 0) {
-        linkObj = FX_FIELD(link, u8 *, 0x1D8);
-        linkDist = func_802726F8_de(camera, linkObj + 8);
+        if (self->target != 0) {
+            linked = self->target->player;
+            linkedDistance = func_802726F8_de(position, &linked->pos);
+        } else {
+            linked = 0;
+            linkedDistance = 0.0f;
+        }
     } else {
-        linkObj = 0;
-        linkDist = 0.0f;
+        linked = 0;
+        linkedDistance = 0.0f;
     }
-    alt = FX_FIELD(self, u8 *, 0x28C);
-    if (alt != 0 && (FX_FIELD(alt, s32, 0x100) & 0x300000)) {
-        altObj = FX_FIELD(alt, u8 *, 0x1D8);
-        altDist = func_802726F8_de(camera, altObj + 8);
+    if (self->preferred != 0 && (self->preferred->flags & 0x300000)) {
+        alternate = self->preferred->player;
+        alternateDistance = func_802726F8_de(position, &alternate->pos);
     } else {
-        altObj = 0;
-        altDist = 0.0f;
+        alternate = 0;
+        alternateDistance = 0.0f;
     }
-    if (func_80209A94_de(self) == 0 || linkObj == 0) {
+    /* The range limit is the first float; unk4 is the adjacent -1 sentinel. */
+    if (func_80209A94_de(self) == 0 || linked == 0) {
         if (func_8020F93C_de(self) == 0) {
-            FX_FIELD(self, u8 *, 0x64) = 0;
+            self->target = 0;
             return 1;
         }
-        if (altObj != 0 && func_8020F8F0_de(self) != 0) {
-            target = altObj;
+        if (alternate != 0 && func_8020F8F0_de((ObjRecAt28C *)self) != 0) {
+            self->target = (TrackingTarget *)alternate;
+            self->targetPosition.x = alternate->pos.x;
+            target = (TrackingTarget *)alternate;
+            goto copyRest;
         } else {
-            i = func_8020F984_de(self);
-            target = FX_FIELD(self, u8 *, 0x3C + i * 4);
+            index = func_8020F984_de(self);
+            target = setSelectedTarget(self, self->targets[index]);
         }
-    } else if (altObj != 0 && altDist <= linkDist) {
-        target = altObj;
+    } else if (alternate != 0 && alternateDistance <= linkedDistance) {
+        self->target = (TrackingTarget *)alternate;
+        self->targetPosition.x = alternate->pos.x;
+        target = (TrackingTarget *)alternate;
+        goto copyRest;
     } else {
-        i = func_8020F984_de(self);
-        if (i != -1 && (f32)FX_FIELD(self, s32, 0x94 + i * 4) < linkDist) {
-            target = FX_FIELD(self, u8 *, 0x3C + i * 4);
-        } else if (FX_FIELD(self, s32, 0x21C) == 1 && D_800C21F0_eu_x.unk4 < linkDist) {
-            FX_FIELD(self, u8 *, 0x64) = 0;
+        index = func_8020F984_de(self);
+        if (index != -1 && (f32)self->distances[index] < linkedDistance) {
+            target = setSelectedTarget(self, self->targets[index]);
+        } else if (self->state == 1 && *(f32 *)&D_800C21F0_eu_x < linkedDistance) {
+            self->target = 0;
             return 1;
         } else {
-            target = FX_FIELD(self, u8 *, 0x64);
+            target = self->target;
         }
     }
-    FX_FIELD(self, u8 *, 0x64) = target;
-    FX_FIELD(self, f32, 0x258) = FX_FIELD(target, f32, 8);
-    FX_FIELD(self, f32, 0x25C) = FX_FIELD(target, f32, 0xC);
-    FX_FIELD(self, f32, 0x260) = FX_FIELD(target, f32, 0x10);
+    self->targetPosition.x = target->position.x;
+copyRest:
+    self->targetPosition.y = target->position.y;
+    self->targetPosition.z = target->position.z;
     return 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_8020F6D8_eu_x);
+INCLUDE_ASM("span_1000", Fx_UpdateTargetSelection);
 #endif
 #endif
 
