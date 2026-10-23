@@ -3,9 +3,9 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "sdk/BUF16B.H"
 #include "sdk/libgultra/part_800C7F20/code_802B66A0_3.h"
+#include "sdk/al_globals.h"
 
 #if !(defined(VERSION_EU))
-extern void *D_800D4070;
 s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e);
 extern void func_802AFFC0_de(void *, void *, s32);
 extern void alSynAddPlayer(void *, void *);

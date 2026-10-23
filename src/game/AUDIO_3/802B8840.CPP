@@ -8,6 +8,7 @@
 #include "TYPES.H"
 #include "sdk/libgultra_inferred/802B8DE0_2.H"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/al_globals.h"
 
 extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);
 
@@ -141,7 +142,6 @@ void func_802B3770_de(ALSynth *drvr, ALSynConfig *c)
 
 Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
 {
-    extern ALGlobals *D_800D4070;
     ALPlayer_s14 *client;
     ALFilter_sC *output;
     ALSynth4C *drvr = &D_800D4070->drvr;
@@ -185,22 +185,20 @@ Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
 }
 
 void *__allocParam(void) {
-    extern func_802B8CC8_S1 *D_800D4070;
     void *head;
     void *param;
 
-    head = D_800D4070->unk2C;
+    head = D_800D4070->drvr.paramList;
     param = 0;
     if (head != 0) {
         param = head;
-        D_800D4070->unk2C = *(void **)param;
+        D_800D4070->drvr.paramList = *(void **)param;
         *(void **)param = 0;
     }
     return param;
 }
 
 void __freeParam(void *arg0) {
-    extern void *D_800D4070;
     struct ALParam_s1C *parameter = arg0;
     ALGlobals *head = D_800D4070;
     parameter->next = head->drvr.paramList;

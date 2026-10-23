@@ -5,10 +5,10 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 extern void func_802B7A20_de(s32 arg0);
 
-extern char D_8014D470;
 
 s32 func_802B74B0_de(s32 arg0) {
     s32 result;

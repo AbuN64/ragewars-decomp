@@ -15,7 +15,6 @@ extern s32 D_800D8380[];
 
 extern u8 D_8014D4C0[];
 extern u8 D_8014D5C0;
-extern u8 D_80154110[];
 
 extern void func_802B9C14_de(void);
 extern u32 func_802B8C88_de(void *arg0);

@@ -8,11 +8,11 @@
 #include "TYPES.H"
 #include "SDK/OS_2/802BC630_2.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 extern void func_802B768C_de(void);
 
 s32 func_802B7560_de(s32 arg0) {
-    extern char D_8014D470;
     s32 result;
     u8 *p;
 

@@ -11,8 +11,9 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "SDK/OSINT/802C0CB0.H"
+#include "COMMON/ALAUXBUS_S.H"
+#include "sdk/al_globals.h"
 
-extern ALGlobals_func_802B5B94_de *D_800D4070;
 
  /* alGlobals */
 
@@ -20,11 +21,8 @@ extern ALGlobals_func_802B5B94_de *D_800D4070;
 
  /* 2^32 */
 
-extern const f32 D_800C77CC_de;
 
-extern const f32 D_800C77D0_de;
 
-extern const f32 D_800C77D4_de;
 
 
 /* _saveBuffer, drafted from ultralib src/audio/reverb.c: write count samples from the DMEM buffer
@@ -93,7 +91,7 @@ s32 func_802B5B94_de(ALFxCode802BAC64 *filter, s32 paramID, void *param)
             f->delay[s].gain = (s16)val;
             break;
         case 5:
-            f->delay[s].rsinc = (((f32)val * D_800C77B8_de) * 2.0f) / D_800D4070->drvr.unk44;
+            f->delay[s].rsinc = (((f32)val * D_800C77B8_de) * 2.0f) / D_800D4070->drvr.outputRate;
             break;
         case 6: {
             f32 fval = (f32)val;

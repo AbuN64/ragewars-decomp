@@ -7,8 +7,8 @@
 #include "TYPES.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 void func_8044799C_de(u8 cmd);
-extern u8 D_8014D46C;
 
 s32 func_80447818_de(OSMesgQueue *arg0, s8 *arg1) {
     EntryRecAt3 sp10;
@@ -27,31 +27,31 @@ s32 func_80447818_de(OSMesgQueue *arg0, s8 *arg1) {
     func_802B9C14_de();
     do {
         func_8044799C_de(0U);
-        __osSiRawStartDma(1, D_80154110);
+        __osSiRawStartDma(1, (u8 *)&D_80154110);
         func_802BB2A0_de(arg0, &sp20, 1);
-        temp_s6 = __osSiRawStartDma(0, D_80154110);
+        temp_s6 = __osSiRawStartDma(0, (u8 *)&D_80154110);
         func_802BB2A0_de(arg0, &sp20, 1);
         func_80447A38_de(&sp24, &sp10);
         var_a0 = 0;
-        if (D_8014D46C != 0) {
+        if (D_8014D46C[0] != 0) {
             var_v1 = &sp10;
 loop_3:
             if (var_v1->team & 4) {
                 var_a0 += 1;
                 var_v1 += 4;
-                if (var_a0 < (s32) D_8014D46C) {
+                if (var_a0 < (s32) D_8014D46C[0]) {
                     goto loop_3;
                 }
             } else {
                 var_s0 -= 1;
             }
         }
-        if (var_a0 == D_8014D46C) {
+        if (var_a0 == D_8014D46C[0]) {
             var_s0 = 0;
         }
     } while (var_s0 > 0);
     var_a0_2 = 0;
-    if (D_8014D46C != 0) {
+    if (D_8014D46C[0] != 0) {
         var_v1_2 = &sp10;
         do {
             if ((var_v1_2->slot == 0) && (var_v1_2->team & 1)) {
@@ -59,7 +59,7 @@ loop_3:
             }
             var_a0_2 += 1;
             var_v1_2 += 4;
-        } while (var_a0_2 < (s32) D_8014D46C);
+        } while (var_a0_2 < (s32) D_8014D46C[0]);
     }
     func_802B9C80_de();
     *arg1 = var_s2;

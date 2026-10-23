@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
+#include "sdk/os_pif.h"
 
 /* Clears the controller PIF RAM block, sets its status word to execute, and packs one request-status command with the given command byte per controller followed by the end marker (libultra __osPackRequestData). Adapted from func_802B768C_de with the request format and command argument changed, the clearing loop counting up and the status word written through a local pointer to the PIF RAM block. */
 
@@ -13,8 +14,6 @@
 
 
 void func_802B7A20_de(u8 cmd) {
-    extern OSPifRam D_8014D470;
-    extern u8 D_8014D46C;
     u8 *ptr;
     __OSContRequesFormat requestformat;
     s32 i;
@@ -36,7 +35,7 @@ void func_802B7A20_de(u8 cmd) {
     requestformat.status = 0xFF;
     requestformat.dummy1 = 0xFF;
 
-    count = &D_8014D46C;
+    count = D_8014D46C;
     for (i = 0; i < *count; i++) {
         *(__OSContRequesFormat *)ptr = requestformat;
         ptr += sizeof(requestformat);
@@ -45,8 +44,6 @@ void func_802B7A20_de(u8 cmd) {
 }
 
 void func_802B7AD8_de(u8 *valid, EntryRecAt3 *data) {
-    extern char D_8014D470;
-    extern u8 D_8014D46C[];
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;

@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/OBJECTSTATE10_2.H"
-extern void *D_800D4070;
+#include "sdk/al_globals.h"
 extern s32 D_002B0554;
 extern void *func_802B0340_de(s32, s32, void *, s32, s32);
 extern void func_802B1990_de(void *);

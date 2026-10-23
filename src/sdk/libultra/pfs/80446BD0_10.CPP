@@ -5,6 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "SDK/PFS/80446BD0_10.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 /* __osPfsGetStatus, drafted from ultralib src/io/pfsgetstatus.c (2.0I branch): send a status request
    to one controller through the pak PIF RAM block and turn its reply into a pack-present, new-pack
@@ -37,7 +38,6 @@
 
 s32 func_80446D80_de(void *queue, int channel)
 {
-    extern char D_80154110;
     s32 ret = 0;
     void *dummy;
     EntryRecAt3 data;
@@ -65,7 +65,6 @@ s32 func_80446D80_de(void *queue, int channel)
 
 void func_80446E58_de(int channel)
 {
-    extern OSPifRam D_80154110;
     u8 *base;
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
@@ -93,7 +92,6 @@ void func_80446E58_de(int channel)
 }
 
 void func_80446EE4_de(s32 channel, EntryRecAt3 *data) {
-    extern char D_80154110;
     u8 *ptr;
     __OSContRequesFormatShort requestformat;
     s32 i;

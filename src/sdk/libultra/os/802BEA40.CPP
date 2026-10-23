@@ -5,6 +5,7 @@
 #include "TYPES.H"
 #include "SDK/OSINT/802BEA40.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 
 /* Takes the access token from the message queue D_8014EA58, first creating that one-message queue
@@ -15,26 +16,18 @@
 
 
 static inline void create_access_queue(void) {
-    extern Slot D_8014EA58;
-    extern OSMesg D_8014EA50;
-    extern s32 D_800D83C0[];
     D_800D83C0[0] = 1;
     osCreateMesgQueue(&D_8014EA58, &D_8014EA50, 1);
     func_802BB420_de(&D_8014EA58, 0, 0);
 }
 
 void func_802B9950_de(void) {
-    extern s32 D_8014EA58;
-    extern s32 D_8014EA50;
-    extern s32 D_800D83C0;
-    D_800D83C0 = 1;
+    D_800D83C0[0] = 1;
     osCreateMesgQueue(&D_8014EA58, &D_8014EA50, 1);
     func_802BB420_de(&D_8014EA58, 0, 0);
 }
 
 void func_802B99A4_de(void) {
-    extern Slot D_8014EA58;
-    extern s32 D_800D83C0[];
     OSMesg token;
 
     if (!D_800D83C0[0]) {

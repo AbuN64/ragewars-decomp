@@ -9,8 +9,8 @@
 #include "SDK/OS_2/802BC630_2.H"
 #include "SDK/OS_2/802BC630_3.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
-extern s8 D_8014D46C;
 
 extern void func_802B7A20_de(s32 arg0);
 
@@ -19,9 +19,8 @@ extern void func_802B7AD8_de(s32 *arg0, s32 arg1);
 extern void func_802B784C_de(void);
 
 void func_802B75F4_de(ContPad *data) {
-    extern u8 D_8014D470[];
-    u8 *ptr = D_8014D470;
-    u8 *count = &D_8014D46C;
+    u8 *ptr = (u8 *)&D_8014D470;
+    u8 *count = D_8014D46C;
     ContReadFormat readformat;
     s32 i;
 
@@ -40,7 +39,6 @@ void func_802B75F4_de(ContPad *data) {
 void func_802B768C_de(void);
 
 void func_802B768C_de(void) {
-    extern OSPifRam D_8014D470;
     ContReadFormat readformat;
     u8 *ptr;
     u8 *count;
@@ -60,7 +58,7 @@ void func_802B768C_de(void) {
     readformat.stick_x = -1;
     readformat.stick_y = -1;
 
-    count = &D_8014D46C;
+    count = D_8014D46C;
     for (i = 0; i < *count; i++) {
         *(ContReadFormat *)ptr = readformat;
         ptr += sizeof(ContReadFormat);
@@ -69,7 +67,6 @@ void func_802B768C_de(void) {
 }
 
 s32 func_802B7740_de(s32 arg0, s32 arg1) {
-    extern char D_8014D470;
     s32 output;
     s32 result;
     u8 *state;

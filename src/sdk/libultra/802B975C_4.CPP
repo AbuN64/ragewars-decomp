@@ -22,6 +22,7 @@ extern char D_800C7600[];
 /* 94/339 words aligned (same size); remaining: register allocation (127 hoisted into a saved reg, env/count/offset regs permuted) and the jump table stays in rodata */
 #include "TYPES.H"
 #include "acmd.h"
+#include "sdk/al_globals.h"
 
 typedef struct DraftAudioVoice { char pad0[0xD8]; s32 offset; } DraftAudioVoice;
 typedef struct DraftAudioEvent {
@@ -53,7 +54,6 @@ typedef struct DraftEnv {
 } DraftEnv;
 extern s16 D_800D4210[128];
 extern char D_800CC850[], D_800C7604[];
-extern void *D_800D4070;
 extern void _freePVoice(void *, DraftAudioVoice *);
 extern void __freeParam(void *);
 extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);

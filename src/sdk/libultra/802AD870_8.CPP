@@ -6,6 +6,8 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra_inferred/802AD870_8.H"
+extern u32 __readVarLen(ALCSeq_s *, u32);
+extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *);
 
 /* alCSeqNewMarker, drafted from ultralib src/audio/cseq.c: fill a compressed-sequence marker
    with the track state of the first event at or after the given tick count, stepping a scratch
@@ -25,7 +27,6 @@
  /* 1.0f */
 static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
 {
-    extern u32 __readVarLen(ALCSeq_s *, u32);
     u32 i, tmpOff, flagTmp;
     f64 t;
     s32 division;
@@ -59,8 +60,6 @@ static inline void alCSeqNew(ALCSeq_s *seq, u8 *ptr)
 
 static inline void alCSeqNextEvent(ALCSeq_s *seq, ALEvent *evt)
 {
-    extern u32 __readVarLen(ALCSeq_s *, u32);
-    extern u32 func_802AE030_de(ALCSeq_s *, u32, ALEvent *);
     u32 i;
     u32 firstTime = 0xFFFFFFFF;
     u32 firstTrack;
@@ -148,7 +147,6 @@ u8 func_802AE500_de(ALCSeq_s *seq, u32 track)
 }
 
 void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
-    extern u32 __readVarLen(RuntimeStateRecAtB8 *state, u32 index);
     f64 converted;
     s32 count;
     u32 entry;
@@ -168,7 +166,7 @@ void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
         if (entry != 0) {
             state->active |= 1U << i;
             state->objects[i] = (void *)(base + entry);
-            state->results[i] = __readVarLen(state, i);
+            state->results[i] = __readVarLen((ALCSeq_s *)state, i);
         } else {
             state->objects[i] = 0;
         }
@@ -183,8 +181,6 @@ void func_802AE5B8_de(RuntimeStateRecAtB8 *state, u32 base) {
 }
 
 void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result) {
-    extern u32 __readVarLen(RuntimeState *state, u32 index);
-    extern s32 func_802AE030_de(RuntimeState *state, u32 index, DecodeResult *result);
     u32 minimum;
     u32 index;
     u32 selected;
@@ -206,14 +202,14 @@ void func_802AE6BC_de(RuntimeState *state, DecodeResult_func_802AE6BC_de *result
         index++;
     } while (index < 16);
 
-    func_802AE030_de(state, selected, result);
+    func_802AE030_de((ALCSeq_s *)state, selected, (ALEvent *)result);
     result->value = minimum;
     state->previous = minimum;
     state->total += minimum;
     if (result->type != 0x12) {
         u32 delta;
 
-        delta = __readVarLen(state, selected);
+        delta = __readVarLen((ALCSeq_s *)state, selected);
         state->results[selected] += delta;
     }
     state->first = 1;

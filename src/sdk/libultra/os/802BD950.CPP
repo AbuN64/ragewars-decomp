@@ -7,6 +7,7 @@
 #include "COMMON/UNUSED.H"
 #include "SDK/OS_2/802BD950_2.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 /* Writes a 32-byte block to a controller pak address through the PIF RAM, re-reading the reply up to three times until the data CRC matches, and returns 0, 1 for no pak, 4 for a CRC failure or the pak status error (libultra __osContRamWrite). Adapted from func_802B84C0_de with the read command 2 changed to the write command 3 packed by func_802B8AA0_de, a guard returning 0 for label-area addresses below 7 unless forced, the CRC taken over the caller's buffer with no copy back, and the DMA results assigned to the result as libultra does. */
 
@@ -31,12 +32,12 @@ u32 func_802B8880_de(s32 arg0, s32 arg1, u16 arg2, u8 *arg3, s32 arg4) {
     func_802B9C14_de();
     D_8014D4B0 = 3;
     func_802B8AA0_de(arg1, arg2 & 0xFFFF, arg3);
-    result = __osSiRawStartDma(1, D_80154110);
+    result = __osSiRawStartDma(1, (u8 *)&D_80154110);
     func_802BB2A0_de(arg0, 0, 1);
     do {
-        result = __osSiRawStartDma(0, D_80154110);
+        result = __osSiRawStartDma(0, (u8 *)&D_80154110);
         func_802BB2A0_de(arg0, 0, 1);
-        source = D_80154110;
+        source = (u8 *)&D_80154110;
         if (arg1 != 0) {
             i = 0;
             if (arg1 > 0) {

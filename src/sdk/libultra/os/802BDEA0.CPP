@@ -4,10 +4,10 @@
 #include "TYPES.H"
 #include "COMMON/OSVISCALE.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 extern OSDevMgr D_800D4360;
-extern s32 D_800D83C0;
 extern struct OSThread_s D_80147470;
-extern OSMesgQueue D_801486A0, D_8014EA58;
+extern OSMesgQueue D_801486A0;
 extern void *D_801486B8[1];
 extern char D_801476A0[0x1000];
 extern s32 D_002B9A40(s32, u32, void *, u32);
@@ -33,7 +33,7 @@ void func_802B8DC8_de(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
     osCreateMesgQueue(cmdQ, cmdBuf, cmdMsgCnt);
     osCreateMesgQueue(&D_801486A0, D_801486B8, 1);
 
-    if (!D_800D83C0) {
+    if (!D_800D83C0[0]) {
         func_802B9950_de();
     }
 

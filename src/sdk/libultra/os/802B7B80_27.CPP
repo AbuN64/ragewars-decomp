@@ -4,12 +4,12 @@
 #include "TYPES.H"
 #include "COMMON/ARG.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern u8 D_8014D4B0;
 extern u8 D_8014D5E0[];
 extern u8 D_8014D6E0;
-extern u8 D_80154110[];
 
 
 extern u32 func_802B8C88_de(void *arg0);
@@ -20,7 +20,7 @@ u32 func_802B7F30_eu_x(Triple *arg0) {
     u8 *source;
     s32 i;
 
-    source = D_80154110;
+    source = (u8 *)&D_80154110;
     if (D_800D8380[arg0->z] == 0) {
         return 5;
     } else {
@@ -31,7 +31,7 @@ u32 func_802B7F30_eu_x(Triple *arg0) {
         D_8014D4B0 = 3;
         __osSiRawStartDma(1, &D_8014D5E0[arg0->z << 6]);
         func_802BB2A0_de(arg0->y, 0, 1);
-        __osSiRawStartDma(0, D_80154110);
+        __osSiRawStartDma(0, (u8 *)&D_80154110);
         func_802BB2A0_de(arg0->y, 0, 1);
         count = arg0->z;
         if (count != 0) {
@@ -56,7 +56,6 @@ u32 func_802B7F30_eu_x(Triple *arg0) {
 extern u8 D_8014D4B0;
 extern u8 D_8014D4C0[];
 extern u8 D_8014D5C0;
-extern u8 D_80154110[];
 
 
 extern u32 func_802B8C88_de(void *arg0);
@@ -67,7 +66,7 @@ u32 func_802B80F4_eu_x(Triple *arg0) {
     u8 *source;
     s32 i;
 
-    source = D_80154110;
+    source = (u8 *)&D_80154110;
     if (D_800D8380[arg0->z] == 0) {
         return 5;
     } else {
@@ -78,7 +77,7 @@ u32 func_802B80F4_eu_x(Triple *arg0) {
         D_8014D4B0 = 3;
         __osSiRawStartDma(1, &D_8014D4C0[arg0->z << 6]);
         func_802BB2A0_de(arg0->y, 0, 1);
-        __osSiRawStartDma(0, D_80154110);
+        __osSiRawStartDma(0, (u8 *)&D_80154110);
         func_802BB2A0_de(arg0->y, 0, 1);
         count = arg0->z;
         if (count != 0) {

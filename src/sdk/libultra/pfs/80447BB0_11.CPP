@@ -4,6 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 extern void func_802B9C14_de(void);
@@ -12,8 +13,6 @@ extern void func_8044799C_de(u8);
 extern void func_80447A38_de(u8 *, EntryRecAt3 *);
 
 s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
-    extern OSPifRam D_80154110;
-    extern u8 D_8014D46C;
     EntryRecAt3 data[4];
     void *dummy;
     u8 bitpattern;
@@ -30,15 +29,15 @@ s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
         ret = __osSiRawStartDma(0, &D_80154110);
         func_802BB2A0_de(queue, &dummy, 1);
         func_80447A38_de(&bitpattern, data);
-        for (i = 0; i < D_8014D46C; i++) {
+        for (i = 0; i < D_8014D46C[0]; i++) {
             if (!(data[i].team & 4)) {
                 retry--;
                 break;
             }
         }
-        if (i == D_8014D46C) retry = 0;
+        if (i == D_8014D46C[0]) retry = 0;
     } while (retry > 0);
-    count = &D_8014D46C;
+    count = D_8014D46C;
     for (i = 0; i < *count; i++) {
         if (data[i].slot == 0 && (data[i].team & 1)) patternmask |= 1 << i;
     }
@@ -57,7 +56,7 @@ s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
 
 
 
-/* Decodes the controller status replies in D_80154110 for each of D_8014D46C[0] channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from func_802B7AD8_de. */
+/* Decodes the controller status replies in D_80154110 for each of D_8014D46C channels, recording the error bits from each reply's receive size and, for a channel without error, its type and status, and stores the mask of answering channels through arg0. Adapted from func_802B7AD8_de. */
 
 
 
@@ -66,8 +65,6 @@ s32 func_80448470_eu_x(OSMesgQueue *queue, u8 *pattern) {
 
 
 void func_8044799C_de(u8 cmd) {
-    extern OSPifRam D_80154110;
-    extern u8 D_8014D46C;
     u8 *ptr;
     __OSContRequesFormat requestformat;
     s32 i;
@@ -85,7 +82,7 @@ void func_8044799C_de(u8 cmd) {
     requestformat.status = 0xFF;
     requestformat.dummy1 = 0xFF;
 
-    count = &D_8014D46C;
+    count = D_8014D46C;
     for (i = 0; i < *count; i++) {
         *(__OSContRequesFormat *)ptr = requestformat;
         ptr += sizeof(requestformat);
@@ -94,8 +91,6 @@ void func_8044799C_de(u8 cmd) {
 }
 
 void func_80447A38_de(u8 *valid, EntryRecAt3 *data) {
-    extern char D_80154110;
-    extern u8 D_8014D46C[];
     u8 *ptr;
     __OSContRequesFormat readformat;
     s32 i;

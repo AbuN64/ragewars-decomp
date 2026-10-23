@@ -10,6 +10,7 @@ extern s32 D_8014D3E8;
 extern s32 (*D_800D364C)(s32 arg0);
 
 extern s32 func_802AE5AC_us_rev1(s32);
+extern s32 func_802AE380_us_rev1(u8 *);
 
 extern u8 D_800CB480;
 
@@ -20,7 +21,6 @@ extern s32 func_802BD400_de(u8 *arg0);
 extern void func_802AE834_us_rev1(s32, s32, void *);
 
 s32 func_802AEE48_us_rev1(void) {
-    extern void func_802AE380_us_rev1(u8 *arg0);
     ReadWord first;
     s32 word;
     u32 value;
@@ -66,7 +66,6 @@ s32 func_802AEE48_us_rev1(void) {
 }
 
 s32 func_802AEF84_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWordRecAt4 first;
     u32 word;
     s32 result;
@@ -118,7 +117,6 @@ s32 func_802AEF84_us_rev1(void) {
 }
 
 s32 func_802AF0E4_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadHalfword first;
     s32 word;
     s32 result;
@@ -158,7 +156,6 @@ s32 func_802AF0E4_us_rev1(void) {
 }
 
 s32 func_802AF1F0_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWord first;
     ReadWord second;
     s32 word;
@@ -214,7 +211,6 @@ block_9:
 }
 
 s32 func_802AF33C_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWord first;
     s32 word;
     s32 result;
@@ -250,7 +246,6 @@ s32 func_802AF33C_us_rev1(void) {
 }
 
 s32 func_802AF424_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWord first;
     s32 word;
     s32 result;
@@ -292,7 +287,6 @@ s32 func_802AF424_us_rev1(void) {
 }
 
 s32 func_802AF544_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWord first;
     ReadWord second;
     s32 word;
@@ -349,7 +343,6 @@ block_9:
 }
 
 s32 func_802AF6A0_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWord first;
     ReadWord second;
     s32 word;
@@ -405,7 +398,6 @@ block_9:
 }
 
 s32 func_802AF7F8_us_rev1(void) {
-    extern s32 func_802AE380_us_rev1(u8 *);
     ReadWord first;
     ReadWord second;
     s32 word;

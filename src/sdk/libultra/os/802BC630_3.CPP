@@ -9,8 +9,8 @@
 #include "SDK/OS_2/802BC630_3.H"
 #include "SDK/OS_2/802BECB0.H"
 #include "sdk/os.h"
+#include "sdk/os_pif.h"
 
-extern s8 D_8014D46C;
 
 extern void func_802B7A20_de(s32 arg0);
 
@@ -21,7 +21,6 @@ extern void func_802BB6C0_de(void *arg0, u64 arg1, u64 arg2, void *arg3, void *a
 void func_802B784C_de(void);
 
 void func_802B784C_de(void) {
-    extern char D_8014D470;
     OSPifRam *ram = (OSPifRam *)&D_8014D470;
     s32 var_v0;
     u8 *var_v1;
@@ -40,7 +39,6 @@ void func_802B784C_de(void) {
 }
 
 s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
-    extern char D_8014D470;
     s32 sp20[8];
     s32 sp40[6];
     s32 sp58[2];
@@ -58,7 +56,7 @@ s32 func_802B7880_de(s32 arg0, s32 *arg1, s32 arg2) {
         func_802BB6C0_de(sp20, 0x0165A0BCULL - value, 0, sp40, sp58);
         func_802BB2A0_de(sp40, (s32)sp58, 1);
     }
-    D_8014D46C = 4;
+    D_8014D46C[0] = 4;
     func_802B7A20_de(0);
     __osSiRawStartDma(1, &D_8014D470);
     func_802BB2A0_de(arg0, (s32)sp58, 1);

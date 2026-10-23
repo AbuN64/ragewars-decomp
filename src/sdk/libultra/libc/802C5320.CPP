@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) && !defined(__i386__) && !defined(__x86_64__)
 /* 371/379 words with -msplit-addresses (a per-file cflag in config.toml, 343/379 without); remaining: 8 words of hi/lo hazard nops the assembler does not insert */
 #if defined(VERSION_US)
 #define __divdi3 func_802C0164

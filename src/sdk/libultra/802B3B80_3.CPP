@@ -11,8 +11,8 @@
 #include "sdk/libgultra/part_800C7F20/seqplayer.h"
 #include "sdk/libgultra_inferred/802B3B80_4.H"
 #include "AUDIO_3/802BFD40.H"
+#include "sdk/al_globals.h"
 
-extern void *D_800D4070;
 
 
 extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
@@ -52,7 +52,7 @@ void func_802AEAB0_de(void *arg0, InitParams *arg1) {
     ALSeqPlayer *obj = arg0;
     InitParams *params = arg1;
     s32 context = params->context;
-    s32 global = D_800D4070;
+    s32 global = (s32)D_800D4070;
     s32 allocation;
     s32 i;
 

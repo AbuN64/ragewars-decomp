@@ -3,6 +3,7 @@
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/al_globals.h"
 
 void func_802B2450_de(ListLink *arg0) {
     if (arg0->next != 0) {
@@ -26,25 +27,23 @@ void func_802B2480_de(void *arg0, void **arg1) {
     *arg1 = arg0;
 }
 
-extern void *D_800D4070;
 extern void func_802B3770_de(void);
 
 void func_802B24A0_de(void *arg0) {
     void **p;
 
-    p = &D_800D4070;
+    p = (void **)&D_800D4070;
     if (*p == 0) {
         *p = arg0;
         func_802B3770_de();
     }
 }
 
-extern void *D_800D4070;
 
 void func_802B24D0_de(s32 *arg0) {
     void **p;
 
-    p = &D_800D4070;
+    p = (void **)&D_800D4070;
     if (*p != 0) {
         func_802B31F0_de(arg0);
         *p = 0;

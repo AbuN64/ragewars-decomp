@@ -4,8 +4,8 @@
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
 #include "SDK/OS_2/802BD950_2.H"
+#include "sdk/os_pif.h"
 
-extern u32 D_80154110[];
 extern u32 func_802B8C40_de(u32 arg0);
 
 void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2) {
@@ -16,9 +16,9 @@ void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2) {
     u32 checksum;
     s32 shifted;
 
-    dst = (u8 *)D_80154110;
+    dst = (u8 *)&D_80154110;
     tail = 0xFF;
-    D_80154110[0xF] = 1;
+    D_80154110.pifstatus = 1;
     packet.bytes[0] = tail;
     packet.bytes[1] = 0x23;
     packet.bytes[2] = 1;

@@ -70,7 +70,11 @@ s32 func_802017E8_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     do {
         func_802005DC_de(0x3E8);
         if (func_802005A0_de(0xB1FFFFF0) != 0) {
+#if defined(__i386__) || defined(__x86_64__)
+            __builtin_trap();
+#else
             __asm__ volatile ("break 1");
+#endif
         }
     } while (func_802005A0_de(0xB1FFFFE0) != 0);
     return func_802005A0_de(0xB1FFFFDC);
