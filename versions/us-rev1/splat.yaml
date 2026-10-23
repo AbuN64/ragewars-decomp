@@ -6350,7 +6350,7 @@ segments:
       - [0xE65B0, data, data_800C/D_auto_src_rw_menu_event_handlers_E65B0_us_rev1]
       - [0xE65E0, data, data_800C/D_blob_phase2_a7e3ca7f679e1d0808f4]
       - [0xE65E6, data, data_800C/D_blob_e8ba979c74d51b52ece3]
-      - [0xE65E8, data, data_800C/D_auto_data_unresolved_800E59E8]
+      - [0xE65E8, data, data_800C/g_frontendLoadoutResourceHalfwords]
       - [0xE6714, data, data_800C/D_auto_src_rw_loadout_equipment_items_us_rev1]
       - [0xE6744, data, data_800C/D_auto_src_rw_loadout_weapons_items_us_rev1]
       - [0xE67C4, data, data_800C/D_auto_src_rw_loadout_abilities_items_us_rev1]
