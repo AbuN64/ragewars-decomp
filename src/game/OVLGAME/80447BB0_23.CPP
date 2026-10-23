@@ -232,32 +232,32 @@ extern void func_80278E04_de(void *, s32, void *);
 /* 0/209 aligned instruction edits in us-rev1; literal-pool placement is withheld because sync --place counts the obsolete same-address func_804491E8_de assembly as a second reader. */
 typedef struct { s32 a, b, c, d; } HudQuad;
 void Ovlgame_InitActorHudState(void *actor) {
-    char *globals = (char *)&D_801462C8;
-    char *sub;
+    char *session = (char *)&D_801462C8;
+    char *hud;
     char *widget;
     s32 enabled;
-    if (FIELD(u8, globals, 0x1D) != 0) {
+    if (FIELD(u8, session, 0x1D) != 0) {
         Text_LoadActorModel(actor);
         func_8022BB80_de(actor);
-        if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, globals, 0xD) == 1) {
+        if (FIELD(u8, FIELD(void *, actor, 0x5D8), 0x91) == 0 && FIELD(u8, session, 0xD) == 1) {
             func_80426090_de(actor);
         }
     }
-    sub = (char *)actor + 0x878;
-    FIELD(s32, sub, 0xB4) = 0;
-    FIELD(s32, sub, 0x8) = 0;
-    FIELD(s32, sub, 0xB8) = 0;
-    FIELD(s32, sub, 0x4) = -1;
+    hud = (char *)actor + 0x878;
+    FIELD(s32, hud, 0xB4) = 0;
+    FIELD(s32, hud, 0x8) = 0;
+    FIELD(s32, hud, 0xB8) = 0;
+    FIELD(s32, hud, 0x4) = -1;
     FIELD(s32, actor, 0x878) = -1;
-    FIELD(s32, sub, 0xA8) = 0;
-    FIELD(s32, sub, 0x9C) = 0;
-    FIELD(s32, sub, 0xA4) = 0;
-    FIELD(f32, sub, 0xAC) = 437.5f;
-    FIELD(f32, sub, 0xB0) = (-675.0f);
-    FIELD(f32, sub, 0x90) = 0.25f;
-    FIELD(f32, sub, 0x94) = 0.1875f;
-    FIELD(f32, sub, 0x98) = 0.25f;
-    FIELD(f32, sub, 0xA0) = 1.5707965f;
+    FIELD(s32, hud, 0xA8) = 0;
+    FIELD(s32, hud, 0x9C) = 0;
+    FIELD(s32, hud, 0xA4) = 0;
+    FIELD(f32, hud, 0xAC) = 437.5f;
+    FIELD(f32, hud, 0xB0) = (-675.0f);
+    FIELD(f32, hud, 0x90) = 0.25f;
+    FIELD(f32, hud, 0x94) = 0.1875f;
+    FIELD(f32, hud, 0x98) = 0.25f;
+    FIELD(f32, hud, 0xA0) = 1.5707965f;
     FIELD(s32, actor, 0x11B0) = 0;
     func_802647E8_de((void *)FIELD(s32, actor, 0x698), 1);
     FIELD(s32, actor, 0x678) = 0;

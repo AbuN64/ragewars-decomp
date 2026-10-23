@@ -31,7 +31,7 @@ extern s32 D_800CD6E0_de;
 
 extern func_8022ECBC_S1 *D_800FE9F0;
 
-extern void func_80449870_de(void *);
+extern void Ovlgame_UpdateRunEndPlayer(void *);
 
 extern s32 D_80102A48;
 
@@ -259,7 +259,7 @@ void func_8022ECC4_de(void) {
 
 void func_8022ECCC_de(void) {
     if (D_800FE9F0->unk5EA == 1) {
-        func_80449870_de((s32)D_800FE9F0);
+        Ovlgame_UpdateRunEndPlayer((s32)D_800FE9F0);
     } else {
         func_802227F4_de(D_800FE9F0, D_800FE9F0, 0x22);
     }
@@ -268,7 +268,7 @@ void func_8022ECCC_de(void) {
 }
 
 void func_8022ED24_de(void) {
-    func_80449870_de(D_80102A48);
+    Ovlgame_UpdateRunEndPlayer(D_80102A48);
 }
 
 void func_8022ED48_de(ActorRecAt16E0 *arg0)

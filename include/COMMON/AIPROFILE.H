@@ -18,7 +18,7 @@ typedef struct AiProfile {
     s8 character; /* 0x80 */
     s8 variant; /* 0x81: Render_DrawCharacterEffectParts */
     u8 pad82[0xD];
-    u8 bonus; /* 0x8F: Render_DrawCharacterEffectParts, func_80449870_de */
+    u8 bonus; /* 0x8F: Render_DrawCharacterEffectParts, Ovlgame_UpdateRunEndPlayer */
     s8 state90; /* 0x90 */
     u8 pad91[2];
     u8 difficulty; /* 0x93 */
@@ -68,7 +68,7 @@ struct Player {
     s32 state; /* 0x5E0 */
     s32 health; /* 0x5E4 */
     u8 pad5E8[4];
-    s32 model; /* 0x5EC: func_80449870_de passes it to Render_PlacePlayerAtSpawnPoint */
+    s32 model; /* 0x5EC: Ovlgame_UpdateRunEndPlayer passes it to Render_PlacePlayerAtSpawnPoint */
     u8 pad5F0[4];
     s16 ammo[7]; /* 0x5F4 */
     s8 actions[22][2]; /* 0x602 */
@@ -173,7 +173,7 @@ struct Player {
     u8 pad123F;
     f32 opacity; /* 0x1240 */
     u8 pad1244[0xF8];
-    s32 countdown; /* 0x133C: func_80449870_de */
+    s32 countdown; /* 0x133C: Ovlgame_UpdateRunEndPlayer */
     s32 resetState; /* 0x1340 */
     u8 pad1344[0x70];
     void *animationTable; /* 0x13B4 */

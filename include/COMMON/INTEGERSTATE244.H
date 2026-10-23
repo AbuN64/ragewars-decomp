@@ -681,7 +681,7 @@ extern void func_8022D3EC_de(void);
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 extern void func_8022CE78_de(s32 arg0, s32 arg1);
 
-extern void func_80449870_de(void *);
+extern void Ovlgame_UpdateRunEndPlayer(void *);
 struct ObjectLinks854;
 extern void func_80225B98_de(struct ObjectLinks854 *a, void *b, int c);
 

@@ -62,9 +62,9 @@ typedef struct {
 } RunEndView;
 #define RUN_END(p) ((RunEndView *)(p))
 extern void func_8022A748_de(void *);
-void func_80449870_de(SharedPlayer *player)
+void Ovlgame_UpdateRunEndPlayer(SharedPlayer *player)
 {
-    s32 scale = ((D_80145048 < 2) ^ 1) << 1;
+    s32 modelScale = ((D_80145048 < 2) ^ 1) << 1;
     if (!(D_80145040.game.flags & 2) || D_80145040.game.local) {
         if ((D_80145040.game.controllerMode == 1 || D_80145040.game.controllerMode == 4) && RUN_END(player)->computer == 0) {
             if (RUN_END(player)->timer > 0) RUN_END(player)->timer--;
@@ -75,14 +75,14 @@ void func_80449870_de(SharedPlayer *player)
         }
     }
     {
-        Shared_Game *game = &D_80145040.game;
-        if ((game->controllerMode == 1 || game->controllerMode == 4) && RUN_END(player)->computer == 0) {
+        Shared_Game *settings = &D_80145040.game;
+        if ((settings->controllerMode == 1 || settings->controllerMode == 4) && RUN_END(player)->computer == 0) {
             if (RUN_END(player)->timer <= 0) {
-                if (game->local && RUN_END(player)->mode == 0 && RUN_END(player)->profile->bonus == 0) return;
+                if (settings->local && RUN_END(player)->mode == 0 && RUN_END(player)->profile->bonus == 0) return;
                 func_802227F4_de(player, player, 0x12);
                 RUN_END(player)->state = 0;
             } else {
-                Render_PlacePlayerAtSpawnPoint(player, RUN_END(player)->model, scale, 1);
+                Render_PlacePlayerAtSpawnPoint(player, RUN_END(player)->model, modelScale, 1);
                 func_8044952C_de(player);
                 RUN_END(player)->state = 0;
             }
@@ -93,5 +93,5 @@ void func_80449870_de(SharedPlayer *player)
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80449870_de);
+INCLUDE_ASM("ovl_80400000", Ovlgame_UpdateRunEndPlayer);
 #endif

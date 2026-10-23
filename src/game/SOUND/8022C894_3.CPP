@@ -111,7 +111,7 @@ void func_8022D428_de(void *player) {
             func_80274870_de(&actor->unk_0x072C, 1.308997f, 0.25f);
         }
         if (actor->unk_0x0658 > D_800C2DB8_de) {
-            func_80449870_de(player);
+            Ovlgame_UpdateRunEndPlayer(player);
         }
     }
 }
@@ -137,7 +137,7 @@ void func_8022D4BC_de(void *arg0)
     ((ObjectLinks1458_2 *)(arg0))->unk_1238 = -1;
     ((ObjectLinks1458_2 *)(arg0))->unk_1230 = 0;
     ((ObjectLinks1458_2 *)(arg0))->unk_122C = (((ObjectLinks1458_2 *)(arg0))->unk_122C) & (~0x20);
-    func_80449870_de(arg0);
+    Ovlgame_UpdateRunEndPlayer(arg0);
     ((ObjectLinks1458_2 *)(arg0))->unk_50 = D_800C2DC0_de;
     ((ObjectLinks1458_2 *)(arg0))->unk_54 = D_800C2DC0_de;
     ((ObjectLinks1458_2 *)(arg0))->unk_58 = D_800C2DC0_de;
@@ -165,7 +165,7 @@ void func_8022D57C_de(void *player) {
     }
     value = actor->unk_0x0658;
     if (D_800C2DC4_de < value) {
-        func_80449870_de(player);
+        Ovlgame_UpdateRunEndPlayer(player);
     }
 }
 
