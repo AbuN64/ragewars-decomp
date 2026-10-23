@@ -194,16 +194,15 @@ extern s32 func_8022EB0C_de(void *);
 
 void func_802181FC_de(void *menuIn, s32 contextIn, void *playerIn) {
     DraftChoiceMenu *menu = (DraftChoiceMenu *)menuIn;
-    void *context = (void *)contextIn;
     DraftChoicePlayer *player = (DraftChoicePlayer *)playerIn;
-    DraftChoiceEntry *entry = menu->choices;
-    s32 i = 0;
+    s32 i;
     s32 j;
     s32 filter;
     s32 accept;
     menu->active = 0;
-    menu->context = context;
+    menu->context = (void *)contextIn;
     menu->selected = -1;
+    i = 0;
     do {
         for (j = 0; j < 22; j++) {
             if (i == player->map[j].slot) break;
@@ -217,25 +216,22 @@ void func_802181FC_de(void *menuIn, s32 contextIn, void *playerIn) {
                 accept = 0;
                 if (i == filter || i == filter + 1) accept = 1;
             }
-            if (!accept) {
-                entry->index = -1;
-                entry->enabled = 0;
-            } else {
-                entry->index = j;
-                if (player->selected == j) menu->selected = i;
-                entry->resource = D_800D052C[j];
-                if (func_8022EB0C_de(player) == 0) entry->enabled = 0;
-                else entry->enabled = 1;
-                entry->value = 0.0f;
-                entry->scale = D_800C913C_de;
-                entry->angle = (f32)i * D_800C2248_de;
-            }
-        } else {
-            entry->index = -1;
-            entry->enabled = 0;
+            if (accept) goto accepted;
         }
+        menu->choices[i].index = -1;
+        menu->choices[i].enabled = 0;
+        goto tail;
+accepted:
+        menu->choices[i].index = j;
+        if (player->selected == j) menu->selected = i;
+        menu->choices[i].resource = D_800D052C[j];
+        if (func_8022EB0C_de(player) != 0) menu->choices[i].enabled = 1;
+        else menu->choices[i].enabled = 0;
+        menu->choices[i].value = 0.0f;
+        menu->choices[i].scale = D_800C913C_de;
+        menu->choices[i].angle = (f32)i * D_800C2248_de;
+tail:
         i++;
-        entry++;
     } while (i < 8);
     menu->ready = 1;
 }

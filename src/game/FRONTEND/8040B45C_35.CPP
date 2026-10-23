@@ -642,59 +642,46 @@ INCLUDE_ASM("ovl_80400000", func_8040F9E0_de);
  * pointer table, reads the section's bytes from the archive file into a fresh buffer (its size is the
  * distance to the next section's start, or to the archive end for the last one), then builds the table of
  * string starts: entry 0 is the buffer, and every byte after a terminating zero starts the next string. */
-typedef struct ArchiveView8040F9E0 {
-    s32 handle;
-    u8 pad04[0x22C];
-    s32 base;
-    s32 end;
-    u8 pad238[0x44];
-    s16 count;
-    u8 pad27E[2];
-    ArchiveTextIndexEntry *sections;
-    u8 pad284[4];
-    u8 *strings;
-    u8 **stringTable;
-} ArchiveView8040F9E0;
 void func_802547E4_de(void *arg0);
 void func_8040F9E0_de(s32 index) {
-    ArchiveView8040F9E0 *archive;
     s32 count;
     s32 next;
     s32 size;
     s32 slot;
     s32 closeArchive;
     u8 *p;
+    s32 off;
 
-    archive = (ArchiveView8040F9E0 *)&D_801539B0;
-    count = archive->sections[index].count;
+    off = index * 8;
+    count = ((ArchiveTextIndexEntry *)(off + (s32)D_801539B0.LangTable))->count;
     closeArchive = 0;
-    if (archive->strings != 0) {
-        func_802547E4_de(archive->strings);
+    if (D_801539B0.StringBuffer != 0) {
+        func_802547E4_de(D_801539B0.StringBuffer);
     }
-    archive->strings = 0;
-    if (archive->stringTable != 0) {
-        func_802547E4_de(archive->stringTable);
+    D_801539B0.StringBuffer = 0;
+    if (D_801539B0.StringTable != 0) {
+        func_802547E4_de(D_801539B0.StringTable);
     }
-    archive->stringTable = 0;
-    if (index < archive->count - 1) {
-        next = archive->sections[index + 1].start;
+    D_801539B0.StringTable = 0;
+    if (index < D_801539B0.NLanguages - 1) {
+        next = ((ArchiveTextIndexEntry *)(off + (s32)D_801539B0.LangTable))[1].start;
     } else {
-        next = archive->end;
+        next = D_801539B0.Header.StringTableLen;
     }
-    size = next - archive->sections[index].start;
-    archive->strings = (u8 *)func_8025305C_de(size);
-    Resmgr_SeekStream(archive->handle, archive->sections[index].start + archive->base, 0);
-    Resmgr_ReadStream(archive->strings, size, 1, archive->handle);
+    size = next - ((ArchiveTextIndexEntry *)(off + (s32)D_801539B0.LangTable))->start;
+    D_801539B0.StringBuffer = (char *)func_8025305C_de(size);
+    Resmgr_SeekStream(D_801539B0.In, D_801539B0.LangTable[index].start + D_801539B0.Header.StringTable, 0);
+    Resmgr_ReadStream(D_801539B0.StringBuffer, size, 1, D_801539B0.In);
     if (closeArchive) {
-        func_802A0EB0_de(archive->handle);
-        archive->handle = 0;
+        func_802A0EB0_de(D_801539B0.In);
+        D_801539B0.In = 0;
     }
-    archive->stringTable = (u8 **)func_8025305C_de(count << 2);
-    archive->stringTable[0] = archive->strings;
+    D_801539B0.StringTable = (char **)func_8025305C_de(count << 2);
+    D_801539B0.StringTable[0] = D_801539B0.StringBuffer;
     slot = 1;
-    for (p = archive->strings + 1; p < archive->strings + size && slot < count; p++) {
+    for (p = (u8 *)D_801539B0.StringBuffer + 1; p < (u8 *)D_801539B0.StringBuffer + size && slot < count; p++) {
         if (*p == 0) {
-            archive->stringTable[slot] = p + 1;
+            D_801539B0.StringTable[slot] = (char *)(p + 1);
             slot++;
         }
     }
