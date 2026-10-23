@@ -422,7 +422,7 @@ void func_8029192C_de(Display *display, Frame *frame)
     task->list.type = 1;
     task->list.ucode_boot = D_800D8C10;
     base = D_8014D428;
-    task->list.ucode_boot_size = 0xD0;
+    task->list.ucode_boot_size = (u8 *)D_800D8CE0 - (u8 *)D_800D8C10;
     task->list.ucode_size = 0x1000;
     task->list.ucode_data_size = 0x800;
     task->list.yield_data_ptr = D_800E4000;
@@ -439,7 +439,7 @@ void func_8029192C_de(Display *display, Frame *frame)
     task->msgQ = &D_801428C0;
     task->msg = &frame->done;
     task->framebuffer = frame->colorImage;
-    task->flags = frame->dual ? 3 : 0x23;
+    if (frame->dual) task->flags = 3; else task->flags = 0x23;
     if (frame->dual) {
         task = &frame->secondTask;
         task->list.data_ptr = (u64 *)frame->secondCommands;
@@ -447,7 +447,7 @@ void func_8029192C_de(Display *display, Frame *frame)
         task->list.type = 1;
         task->list.ucode_boot = D_800D8C10;
         base = D_8014D428;
-        task->list.ucode_boot_size = 0xD0;
+        task->list.ucode_boot_size = (u8 *)D_800D8CE0 - (u8 *)D_800D8C10;
         task->list.ucode_size = 0x1000;
         task->list.ucode_data_size = 0x800;
         task->list.yield_data_ptr = D_800E4000;
