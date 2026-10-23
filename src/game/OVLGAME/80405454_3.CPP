@@ -227,23 +227,26 @@ extern s32 D_800DCD4C;
 extern u8 D_800DCD00_de[];
 #include "COMMON/DISPLAY.H"
 
-/* 51/254 aligned edits; remaining: tail global-store scheduling (D_800E28A4 held in s1), empty count loop, register allocation. */
+/* 32/254 aligned edits; remaining: command-buffer setup register allocation and empty-loop scheduling. */
 int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
-    void **puVar2;
+    void **handleSlot;
     void **clearSlot;
     s32 clearIndex;
-    u32 uVar3;
-    s32 *piVar4;
-    s32 *compactHandle;
-    u32 compactCount;
-    s32 *piVar5;
-    u32 uVar6;
-    u32 uVar7;
-    s32 iVar8;
-    u32 blockSize;
-    u32 memoryAddress;
+    u32 ramSize;
+    s32 *depthHandle;
+    s32 *combinedHandle;
+    u32 colorCount;
+    s32 *colorHandle;
+    s32 releasedCount;
+    u32 graphicsCount;
+    s32 overlayCount;
+    u32 finalCount;
+    Gfx *commands;
+    s32 vertexMemory;
+    u32 bufferBytes;
+    u32 memoryEnd;
     u32 megabyte = 0x100000;
-    u32 count;
+    u32 frameCount;
     u32 i;
 
     if (((void **)record)[1] != 0) {
@@ -258,15 +261,15 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     if (((void **)record)[7] != 0) {
         func_80253838_de(0, ((void **)record)[7]);
     }
-    iVar8 = 0;
-    puVar2 = ((void **)record);
+    releasedCount = 0;
+    handleSlot = ((void **)record);
     do {
-        if (puVar2[3] != 0) {
-            func_80253838_de(0, puVar2[3]);
+        if (handleSlot[3] != 0) {
+            func_80253838_de(0, handleSlot[3]);
         }
-        iVar8 = iVar8 + 1;
-        puVar2 = puVar2 + 1;
-    } while (iVar8 < 3);
+        releasedCount = releasedCount + 1;
+        handleSlot = handleSlot + 1;
+    } while (releasedCount < 3);
 
     clearIndex = 2;
     clearSlot = ((void **)record) + 2;
@@ -281,61 +284,60 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
         clearSlot = clearSlot - 1;
     } while (-1 < clearIndex);
 
-    uVar3 = func_80265350_de();
-    if (uVar3 >= 6 * megabyte) {
-        blockSize = 0x54600;
-        uVar3 = func_80265350_de();
-        memoryAddress = uVar3 | 0x80000000;
+    ramSize = func_80265350_de();
+    if (ramSize >= 6 * megabyte) {
+        bufferBytes = 0x54600;
+        ramSize = func_80265350_de();
+        memoryEnd = ramSize | 0x80000000;
         D_800DE850 = 3;
-        piVar4 = (s32 *)func_80253530_de(0, (s32)(memoryAddress - megabyte), 0x54600,
+        depthHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - megabyte), 0x54600,
                                          D_800DCD00_de);
-        piVar5 = (s32 *)func_80253530_de(0, (s32)(memoryAddress - 2 * megabyte),
-                                         D_800DE850 * blockSize, D_800DCD0C);
-        func_802A001C_de((void *)*piVar5, 0, 0xfd200);
-        func_802A001C_de((void *)*piVar4, 0, 0x54600);
-        ((void **)record)[6] = piVar4;
-        ((void **)record)[3] = piVar5;
+        colorHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - 2 * megabyte),
+                                         D_800DE850 * bufferBytes, D_800DCD0C);
+        func_802A001C_de((void *)*colorHandle, 0, 0xfd200);
+        func_802A001C_de((void *)*depthHandle, 0, 0x54600);
+        ((void **)record)[6] = depthHandle;
+        ((void **)record)[3] = colorHandle;
         D_801536E8 = *(void **)((void **)record)[6];
-        count = D_800DE850;
-        for (i = 0; i < count; i++) {
-            D_8014D468_de[i] = (void *)(*piVar5 + i * blockSize);
+        frameCount = D_800DE850;
+        for (i = 0; i < frameCount; i++) {
+            D_8014D468_de[i] = (void *)(*colorHandle + i * bufferBytes);
         }
-        } else {
-        blockSize = 0x1ecc0;
-        memoryAddress = 0x80400000U;
-        compactHandle = (s32 *)func_80253530_de(0, (s32)(memoryAddress - (D_800DE850 + 1) * blockSize),
-                                         (D_800DE850 + 1) * blockSize, D_800DCD1C);
-        compactCount = D_800DE850;
-        ((void **)record)[3] = compactHandle;
-        for (i = 0; i < compactCount; i++) {
-            D_8014D468_de[i] = (void *)(*compactHandle + blockSize * i);
+    } else {
+        bufferBytes = 0x1ecc0;
+        memoryEnd = 0x80400000U;
+        combinedHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - (D_800DE850 + 1) * bufferBytes),
+                                         (D_800DE850 + 1) * bufferBytes, D_800DCD1C);
+        colorCount = D_800DE850;
+        ((void **)record)[3] = combinedHandle;
+        for (i = 0; i < colorCount; i++) {
+            D_8014D468_de[i] = (void *)(*combinedHandle + bufferBytes * i);
         }
-        D_801536E8 = (void *)(*compactHandle + blockSize * i);
-        }
+        D_801536E8 = (void *)(*combinedHandle + bufferBytes * i);
+    }
 
     for (i = 0; i < D_800DE850; i++) {
-        func_802A001C_de(D_8014D468_de[i], 0, blockSize);
+        func_802A001C_de(D_8014D468_de[i], 0, bufferBytes);
     }
-    func_802A001C_de(D_801536E8, 0, blockSize);
+    func_802A001C_de(D_801536E8, 0, bufferBytes);
 
     ((void **)record)[1] = func_8025343C_de(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
     ((void **)record)[2] = func_8025343C_de(0, 0x8000, 0x23, &D_800DCD4C);
     ((void **)record)[7] = func_8025343C_de(0, 0x22000, 0x23, D_800DCD54);
-    iVar8 = D_800E28A4;
+    graphicsCount = D_800E28A4;
+    overlayCount = D_800DE858;
+    finalCount = D_800DE850;
+    commands = *(Gfx **)((void **)record)[1];
+    vertexMemory = *(s32 *)((void **)record)[7];
     D_8014D424 = 0x8000;
     D_8014D45C = 0x22000;
-    D_8014D460 = *(Gfx **)((void **)record)[1];
-    D_8014D420_de = *(s32 *)((void **)record)[7];
-    D_8014D42C = D_8014D460 + iVar8;
-    D_8014D464 = D_8014D42C + D_800DE858;
+    D_8014D460 = commands;
+    D_8014D42C = commands + graphicsCount;
+    D_8014D464 = commands + graphicsCount + overlayCount;
+    D_8014D430_de = commands + graphicsCount + overlayCount + graphicsCount;
+    D_8014D420_de = vertexMemory;
     D_8014D428 = *(u64 **)((void **)record)[2];
-    D_8014D430_de = D_8014D464 + iVar8;
-    if (D_800DE850 != 0) {
-        uVar6 = 1;
-        do {
-            uVar7 = uVar6 < D_800DE850;
-            uVar6 = uVar6 + 1;
-        } while (uVar7);
+    for (i = 0; i < finalCount; i++) {
     }
     *((void **)record) = (void *)1;
     return 1;
