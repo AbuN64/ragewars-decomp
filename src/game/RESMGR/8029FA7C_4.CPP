@@ -61,10 +61,10 @@ void func_8029EB58_de(f32 *arg0) {
 }
 
 /** Scatter three floats from arg1 into arg0's fields. */
-void func_8029EBC8_de(Matrix *arg0, CVector3 *arg1) {
-    arg0->m[0] = arg1->x;
-    arg0->m[5] = arg1->y;
-    arg0->m[10] = arg1->z;
+void func_8029EBC8_de(Matrix *matrix, CVector3 *arg1) {
+    matrix->m[0] = arg1->x;
+    matrix->m[5] = arg1->y;
+    matrix->m[10] = arg1->z;
 }
 
 void func_8029EBE4_de(void *arg0, void *arg1) {
@@ -86,10 +86,10 @@ void func_8029EBE4_de(void *arg0, void *arg1) {
 }
 
 /** Broadcast a float value into three fields of the object. */
-void func_8029ECA8_de(Matrix *arg0, float value) {
-    arg0->m[0] = value;
-    arg0->m[5] = value;
-    arg0->m[10] = value;
+void func_8029ECA8_de(Matrix *matrix, float value) {
+    matrix->m[0] = value;
+    matrix->m[5] = value;
+    matrix->m[10] = value;
 }
 
 void func_8029ECBC_de(void *arg0, f32 arg1) {
@@ -217,17 +217,17 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
 }
 
 /** Clear the three words at object offsets 0x30 through 0x38. */
-void func_8029EFB8_de(Matrix *arg0) {
-    arg0->m[12] = 0;
-    arg0->m[13] = 0;
-    arg0->m[14] = 0;
+void func_8029EFB8_de(Matrix *matrix) {
+    matrix->m[12] = 0;
+    matrix->m[13] = 0;
+    matrix->m[14] = 0;
 }
 
 /** Copy a three-float vector into object offsets 0x30 through 0x38. */
-void func_8029EFC8_de(Matrix *arg0, float *arg1) {
-    arg0->m[12] = arg1[0];
-    arg0->m[13] = arg1[1];
-    arg0->m[14] = arg1[2];
+void func_8029EFC8_de(Matrix *matrix, float *arg1) {
+    matrix->m[12] = arg1[0];
+    matrix->m[13] = arg1[1];
+    matrix->m[14] = arg1[2];
 }
 
 /** Copy the three floating components at offset 0x30. */
@@ -237,10 +237,10 @@ void func_8029EFE4_de(char *object, float *output) {
     output[2] = ((Matrix *)(object))->m[14];
 }
 
-void func_8029F000_de(Matrix *arg0, void *arg1) {
-    (arg0->m[12]) = (f32) ((arg0->m[12]) + (((struct CVector3_t *) ((s8 *) arg1))->x));
-    (arg0->m[13]) = (f32) ((arg0->m[13]) + (((struct CVector3_t *) ((s8 *) arg1))->y));
-    (arg0->m[14]) = (f32) ((arg0->m[14]) + (((struct CVector3_t *) ((s8 *) arg1))->z));
+void func_8029F000_de(Matrix *matrix, void *arg1) {
+    (matrix->m[12]) = (f32) ((matrix->m[12]) + (((struct CVector3_t *) ((s8 *) arg1))->x));
+    (matrix->m[13]) = (f32) ((matrix->m[13]) + (((struct CVector3_t *) ((s8 *) arg1))->y));
+    (matrix->m[14]) = (f32) ((matrix->m[14]) + (((struct CVector3_t *) ((s8 *) arg1))->z));
 }
 
 /** Combine three column vectors into the first three matrix columns. */
@@ -326,7 +326,7 @@ void func_8029F1A0_de(void *arg0, void *arg1, void *arg2, s32 arg3) {
     }
 }
 
-void func_8029F254_de(struct MatrixF *arg0, CVector3 *arg1, f32 arg2) {
+void func_8029F254_de(struct MatrixF *matrixF, CVector3 *arg1, f32 arg2) {
     f32 sine;
     f32 cosine;
     f32 cosine_value;
@@ -363,28 +363,28 @@ void func_8029F254_de(struct MatrixF *arg0, CVector3 *arg1, f32 arg2) {
     sy = sine * arg1->y;
     sz = sine * arg1->z;
     zero = 0.0f;
-    arg0->m[3][2] = zero;
-    arg0->m[3][1] = zero;
-    arg0->m[3][0] = zero;
-    arg0->m[2][3] = zero;
-    arg0->m[1][3] = zero;
-    arg0->m[0][3] = zero;
-    arg0->m[3][3] = one;
-    arg0->m[0][0] = txx + cosine_value;
-    arg0->m[0][1] = txy + sz;
-    arg0->m[0][2] = txz - sy;
-    arg0->m[1][0] = txy - sz;
-    arg0->m[1][1] = tyy + cosine_value;
-    arg0->m[1][2] = tyz + sx;
-    arg0->m[2][0] = txz + sy;
-    arg0->m[2][1] = tyz - sx;
-    arg0->m[2][2] = tzz + cosine_value;
+    matrixF->m[3][2] = zero;
+    matrixF->m[3][1] = zero;
+    matrixF->m[3][0] = zero;
+    matrixF->m[2][3] = zero;
+    matrixF->m[1][3] = zero;
+    matrixF->m[0][3] = zero;
+    matrixF->m[3][3] = one;
+    matrixF->m[0][0] = txx + cosine_value;
+    matrixF->m[0][1] = txy + sz;
+    matrixF->m[0][2] = txz - sy;
+    matrixF->m[1][0] = txy - sz;
+    matrixF->m[1][1] = tyy + cosine_value;
+    matrixF->m[1][2] = tyz + sx;
+    matrixF->m[2][0] = txz + sy;
+    matrixF->m[2][1] = tyz - sx;
+    matrixF->m[2][2] = tzz + cosine_value;
 }
 
-void func_8029F368_de(void *arg0, CVector3 *arg1, void *arg2, CVector3 *arg3) {
-    Matrix *m = arg0;
+void func_8029F368_de(void *matrix, CVector3 *arg1, void *angles, CVector3 *arg3) {
+    Matrix *m = matrix;
 
-    MatrixFromAngles(arg0, arg2);
+    MatrixFromAngles(matrix, angles);
 
     m->m[0] = m->m[0] * arg1->x;
     m->m[1] = m->m[1] * arg1->x;

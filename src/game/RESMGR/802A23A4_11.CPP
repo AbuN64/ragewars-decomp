@@ -43,7 +43,7 @@ s32 func_802A1B50_de(struct Tree *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
     return 0;
 }
 
-void func_802A1BE0_de(void *arg0, Args args) {
+void func_802A1BE0_de(void *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
@@ -51,8 +51,8 @@ void func_802A1BE0_de(void *arg0, Args args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, arg0, &args) != 0) {
-        if ((((Widget *)arg0)->flags & 0x200) != 0) {
+    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+        if ((((Widget *)widget)->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             func_8040F488_de(&transformed, &basis);
@@ -60,7 +60,7 @@ void func_802A1BE0_de(void *arg0, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(((struct Tree *)arg0)->child, args);
+        func_8040E7FC_de(((struct Tree *)widget)->child, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }

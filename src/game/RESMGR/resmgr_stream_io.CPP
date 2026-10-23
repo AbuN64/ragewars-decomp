@@ -81,12 +81,12 @@ extern FuncPtr D_800CD928_de;
 extern ResourceReadCallback D_800CD92C_de;
 
 /** Pass the variadic tail address to the formatter and retain its result. */
-s32 func_802A0C08_de(void *arg0, s32 arg1, ...) {
+s32 func_802A0C08_de(void *goal, s32 arg1, ...) {
     s32 result;
     char *args;
 
     args = __builtin_next_arg(arg1);
-    result = func_80414CCC_de(arg0, arg1, (s32)args);
+    result = func_80414CCC_de(goal, arg1, (s32)args);
     D_800CD918 = result;
     return result;
 }

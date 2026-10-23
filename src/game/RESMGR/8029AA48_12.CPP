@@ -13,10 +13,10 @@ void *func_8025305C_de(s32);
 
 
 void func_8029AA78_de(void) {
-    Callback *temp_v0;
-    temp_v0 = func_8025305C_de(0xC44);
-    D_8014D0B0 = temp_v0;
-    func_802A0748_de(temp_v0, 0, 0xC44);
+    Callback *callback;
+    callback = func_8025305C_de(0xC44);
+    D_8014D0B0 = callback;
+    func_802A0748_de(callback, 0, 0xC44);
 }
 
 void func_8029AAAC_de(void) {
