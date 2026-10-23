@@ -15,41 +15,55 @@ extern void *func_8028FE28_de(void *, void *, s32);
 extern void *func_8028FE3C_de(void *, void *, s32, s32 *);
 extern void *func_8028CF6C_de(void *, u16);
 extern void func_80246BE8_de(void *, void *, void *, s32);
-void func_8041C610_de(struct Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected) {
-    u8 *world = (u8 *)&D_8011FE88;
-    u8 *out = (u8 *)arg0 + 0x190;
-    u16 *list = *(u16 **)(world + 0x94);
-    s32 count = *(s32 *)((u8 *)list + 4);
+#include "COMMON/SCENERECAT10C0.H"
+#include "COMMON/ACTOR_DEFINITION.H"
+typedef struct FrontendModelHeader {
+    u8 prefix[0x1C];
+    u16 definitionIndex;
+} FrontendModelHeader;
+
+static inline struct TableRecAt8 *Frontend_GetPreviewModelIds(Shared_World *world) {
+    return world->modelIds;
+}
+
+/* 19/121 aligned edits; remaining: world-pointer setup and failed-index branch scheduling. */
+void Frontend_SelectMatchingPreviewModel(struct Unk8041CE88 *preview, s32 id, s32 extra, s32 expected) {
+    Shared_World *world;
+    Obj8041CAD8At190 *previewState = &((Obj8041CAD8 *)preview)->sub190;
+    struct TableRecAt8 *list = Frontend_GetPreviewModelIds(&D_8011FE88);
+    s32 count = list->count;
     s32 i = 0;
     s32 found = 0;
-    u16 *entry = (u16 *)((u8 *)list + 8);
-    void *name;
-    void **first;
-    void **second;
-    void *resource;
-    u8 *record;
-    s32 size;
+    u16 *entry;
+    void *modelName;
+    void **indexResource;
+    void **modelResource;
+    void *modelData;
+    ActorDefinitionHeader *definition;
+    s32 modelSize;
     if (count <= 0) {
         return;
     }
+    world = &D_8011FE88;
+    entry = list->entries;
     do {
         if (*entry == id) {
-            name = func_8028FE28_de(*(void **)(world + 0x54), *(void **)(world + 0x24), i);
-            first = func_8025193C_de(0, (u32)name, (u32)name, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
-            if (first != 0) {
-                resource = func_8028FE3C_de(*first, name, 0, &size);
-                second = func_8025193C_de(0, (u32)resource, (u32)resource, size, 0, 0, 0, (const char *)D_800DD474, 1);
-                if (second != 0) {
-                    record = func_8028CF6C_de(world, *(u16 *)((u8 *)func_8028FDB4_de(*second, 0) + 0x1C));
-                    if (*(s16 *)(record + 0xC) == expected && *(s32 *)record == *(s32 *)arg0) {
-                        *(s16 *)(out + 4) = i;
-                        *(u16 *)(out + 0xE4) = id;
-                        func_80246BE8_de(out, *(void **)(world + 0x54), *(void **)(world + 0x24), extra);
+            modelName = func_8028FE28_de(world->indexedDirectory, (void *)world->indexedBank, i);
+            indexResource = func_8025193C_de(0, (u32)modelName, (u32)modelName, 0x18, 0, 0, 0, (const char *)D_800DD460_de, 1);
+            if (indexResource != 0) {
+                modelData = func_8028FE3C_de(*indexResource, modelName, 0, &modelSize);
+                modelResource = func_8025193C_de(0, (u32)modelData, (u32)modelData, modelSize, 0, 0, 0, (const char *)D_800DD474, 1);
+                if (modelResource != 0) {
+                    definition = func_8028CF6C_de(world, ((FrontendModelHeader *)func_8028FDB4_de(*modelResource, 0))->definitionIndex);
+                    if (definition->character == expected && definition->kind == ((Obj8041CAD8 *)preview)->unk0) {
+                        previewState->unk4 = i;
+                        previewState->unkE4 = id;
+                        func_80246BE8_de(previewState, world->indexedDirectory, (void *)world->indexedBank, extra);
                         found = 1;
                     }
-                    func_80253754_de(0, second);
+                    func_80253754_de(0, (struct Node80253610 *)modelResource);
                 }
-                func_80253754_de(0, first);
+                func_80253754_de(0, (struct Node80253610 *)indexResource);
             }
         }
         i++;
@@ -57,7 +71,7 @@ void func_8041C610_de(struct Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected)
     } while (i < count && !found);
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8041C610_de);
+INCLUDE_ASM("ovl_80400000", Frontend_SelectMatchingPreviewModel);
 #endif
 #endif
 
@@ -267,10 +281,10 @@ void func_8041CE10_de(struct Object49C *object, s32 value) {
     object->value = value;
 }
 
-/* Sets field 0x274 of arg0 to 0xFFFF and then calls func_8041C610_de on it, passing its other three arguments through. */
+/* Sets field 0x274 of arg0 to 0xFFFF and then calls Frontend_SelectMatchingPreviewModel on it, passing its other three arguments through. */
 void func_8041CE18_de(Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected) {
     arg0->unk274 = 0xFFFF;
-    func_8041C610_de(arg0, id, extra, expected);
+    Frontend_SelectMatchingPreviewModel(arg0, id, extra, expected);
 }
 
 #if defined(VERSION_US)
