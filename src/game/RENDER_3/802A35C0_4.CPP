@@ -325,7 +325,7 @@ extern void func_802A3718_de(void *, void *, void *);
 /* Builds a world's ribbon display list once and replays it afterwards: the first call opens a branch list
  * (patched at the end to jump over the body), sets the fixed render state, then updates and draws every ribbon
  * of the world's list at 0x7528 -- those with a negative layer at 0x34 first, positive layers second. */
-void func_802A478C_de(void *world, void *camera) {
+void Render_DrawLinkedGeometry(void *world, void *camera) {
     void *node;
     s32 pass;
     u32 *start;
@@ -350,7 +350,7 @@ void func_802A478C_de(void *world, void *camera) {
             s32 layer = FIELD(s32, node, 0x34);
             if (pass == 0 ? layer < 0 : layer > 0) {
                 if (FIELD(u32, node, 0x3C) & 8) {
-                    func_802A354C_de(node);
+                    Render_UpdateLinkedNodeTransforms(node);
                 }
                 if (FIELD(u32, node, 0x3C) & 4) {
                     func_802A339C_de(node, camera);
@@ -373,5 +373,5 @@ void func_802A478C_de(void *world, void *camera) {
     PUSH_GFX(0xDE000000, FIELD(void *, world, 0));
 }
 #else
-INCLUDE_ASM("span_1000", func_802A478C_de);
+INCLUDE_ASM("span_1000", Render_DrawLinkedGeometry);
 #endif

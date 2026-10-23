@@ -36,7 +36,7 @@ extern void func_802732EC_de(void *arg0, f32 *arg1);
 
 extern void func_8027027C_de(void *arg0, s32 arg1);
 
-extern void func_802A354C_de(void *arg0);
+extern void Render_UpdateLinkedNodeTransforms(void *arg0);
 
 extern void func_802A339C_de(void *, void *);
 
@@ -276,7 +276,7 @@ void func_802A62BC_de(void *arg0) {
 void func_802A6304_de(s32 pool, void *arg1, s32 camera) {
     State802A6DF8 *state = arg1;
     if (state->flags & 8) {
-        func_802A354C_de(arg1);
+        Render_UpdateLinkedNodeTransforms(arg1);
     }
     if (state->flags & 4) {
         func_802A339C_de(arg1, camera);
@@ -333,7 +333,7 @@ void func_802A6490_de(void *pool, void *camera) {
     while (node != 0) {
         if (node->renderMode < 0) {
             if (node->flags & 8) {
-                func_802A354C_de(node);
+                Render_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
                 func_802A339C_de(node, camera);
@@ -353,7 +353,7 @@ void func_802A6490_de(void *pool, void *camera) {
     while (node != 0) {
         if (node->renderMode > 0) {
             if (node->flags & 8) {
-                func_802A354C_de(node);
+                Render_UpdateLinkedNodeTransforms(node);
             }
             if (node->flags & 4) {
                 func_802A339C_de(node, camera);

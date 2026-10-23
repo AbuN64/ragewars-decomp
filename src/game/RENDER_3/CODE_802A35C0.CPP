@@ -480,7 +480,7 @@ typedef struct LinkOwner802A {
 } LinkOwner802A;
 /* Updates a chain of linked nodes: nodes following a source take its matrix (scaled by a size flag) or copy the
  * other matrix buffer, then each node's distance to its parent is measured and summed into the owner's total. */
-void func_802A354C_de(LinkOwner802A *owner) {
+void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
     LinkNode802A *node;
     s32 changed = 0;
     f32 delta[3];
@@ -526,7 +526,7 @@ void func_802A354C_de(LinkOwner802A *owner) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_802A354C_de);
+INCLUDE_ASM("span_1000", Render_UpdateLinkedNodeTransforms);
 #endif
 
 extern float D_800C5DF8_de, D_800C5DFC, D_800C5E00_de, D_800C5E04_de;
