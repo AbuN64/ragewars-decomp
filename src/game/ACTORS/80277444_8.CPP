@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKS150C.H"
+#include "ACTORS/80277444.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LEVEL_ACTOR.H"

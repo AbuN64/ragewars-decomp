@@ -41,10 +41,6 @@ struct ObjectRecAt8 {
 };
 
 struct ObjRecAt6V2;
-struct ObjRecAt6V2 {
-    char pad0[0x6];
-    short unk6;
-};
 
 
 struct ObjectLinks150C;
@@ -73,16 +69,6 @@ struct Record14 {
 };
 
 struct ObjectState104;
-struct ObjectState104 {
-    unsigned char padding_0[8];
-    f32 unk_8;
-    f32 unk_C;
-    f32 unk_10;
-    unsigned char padding_14[88];
-    f32 unk_6C;
-    unsigned char padding_70[144];
-    s32 unk_100;
-};
 
 struct func_80278EEC_S1;
 typedef struct func_80278EEC_S1 func_80278EEC_S1;
@@ -95,20 +81,8 @@ typedef struct ObjRecAt6V2 ObjRecAt6V2;
 
 
 struct FloatState64;
-struct FloatState64 {
-    unsigned char padding_0[72];
-    f32 unk_48;
-    f32 unk_4C;
-    f32 unk_50;
-    unsigned char padding_54[12];
-    f32 unk_60;
-};
 
 struct func_80278EEC_S1;
-struct func_80278EEC_S1 {
-    char pad0[0xE];
-    char unkE;
-};
 
 struct Trigger;
 
@@ -131,9 +105,6 @@ struct func_80278900_S1 {
 struct ObjectRecAtBC;
 typedef struct ObjectRecAtBC ObjectRecAtBC;
 
-typedef struct Vertex38 { s16 px, py, pz; u16 flags; s16 s, t; s8 x, y, z; u8 alpha; } Vertex38;
-typedef struct Vertices38 { s32 stride, count; Vertex38 vertices[1]; } Vertices38;
-typedef struct Light38 { u8 pad0[0x11]; s8 x,y,z; } Light38;
 
 struct WorldRecAt1B40C;
 extern s32 func_8028C568_de(struct WorldRecAt1B40C *arg0, Record14 *arg1);

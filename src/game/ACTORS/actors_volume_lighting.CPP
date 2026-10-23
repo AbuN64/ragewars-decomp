@@ -2,6 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTLINKS150C.H"
+#include "ACTORS/80277444.H"
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
