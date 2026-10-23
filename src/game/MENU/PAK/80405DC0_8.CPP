@@ -9,10 +9,10 @@
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || (defined(NON_MATCHING) && (defined(VERSION_EU) || defined(VERSION_EU_X)))
 #if defined(VERSION_EU)
-#define func_804069F4_de func_80406A90_eu
+#define Pak_CheckControllerPak func_80406A90_eu
 #endif
 #if defined(VERSION_EU_X)
-#define func_804069F4_de func_80406A90_eu_x
+#define Pak_CheckControllerPak func_80406A90_eu_x
 #endif
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 func_8026464C_de(void);
@@ -54,36 +54,54 @@ extern s32 D_8011FECC;
 #include "COMMON/GAME_SESSION.H"
 extern s32 D_8014561C;
 extern s32 D_8015375C;
-void func_804069F4_de(Shared_PakMenu *arg0) {
-    u8 sp18[16];
-    s32 sp28;
-    s32 sp2C;
-    s8 *sp30;
-    s8 *sp34;
-    s32 sp38;
-    s32 sp3C;
-    s32 *var_a1;
-    s32 temp_a0;
-    s32 temp_a0_2;
-    s32 temp_s1;
-    s32 temp_s1_2;
-    s32 temp_s2;
-    s32 temp_v1;
-    s32 var_s0;
-    s32 var_s0_2;
-    s32 var_s0_3;
-    s32 var_s0_4; /* FAKEMATCH: reuse the dead second note cursor for the Pak error status. */
-    s32 var_s1;
-    s32 var_s1_2;
-    s32 var_s2; /* FAKEMATCH: reuse the completed retry count for the second note name. */
-    s32 regpart_var_s2; /* FAKEMATCH: split the second note flag from the dead retry counter. */
-    s32 var_s3;
-    s32 var_s3_2;
-    /* FAKEMATCH: keep the absent-channel sentinel live across the retry scan. */
-    s32 var_s5;
-    s32 var_s6;
-    u32 temp_a0_3;
-    u32 temp_s1_3;
+/* Pak_FindNextAvailableChannel's scan: from the channel after currentChannel (or 0), the first channel whose probe is not -2; -1 if none. */
+static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
+    s32 channel = 0;
+    s32 attempts;
+    if (currentChannel != -1) {
+        channel = currentChannel + 1;
+        if (channel >= 4) {
+            channel = 0;
+        }
+    }
+    attempts = 0;
+    do {
+        func_80404E28_de(channel);
+        if (func_80404F04_de(channel) != -2) {
+            break;
+        }
+        channel++;
+        if (channel >= 4) {
+            channel = 0;
+        }
+        attempts++;
+    } while (attempts < 4);
+    if (attempts == 4) {
+        channel = -1;
+    }
+    return channel;
+}
+void Pak_CheckControllerPak(Shared_PakMenu *menu) {
+    u8 noteText[16];
+    s32 firstChannel;
+    s32 freeChannel;
+    s8 *note1;
+    s8 *note2;
+    s32 freeBytes;
+    s32 freeNotes;
+    s32 channelArg1;
+    s32 channelArg2;
+    s32 channel1;
+    s32 channel2;
+    s32 firstNoteName;
+    s32 noteIndex;
+    s32 noteIndex2; /* second note cursor, then the Pak error status */
+    s32 retries; /* channel retries, then the second note name */
+    s32 hasNote2; /* second note found */
+    s32 status;
+    s32 hasNote1;
+    u32 minBytes;
+    u32 maxBytes;
     D_8014D4C0_de = 0;
     D_8014D4DC = 1;
     D_80153760 = 0;
@@ -95,60 +113,51 @@ void func_804069F4_de(Shared_PakMenu *arg0) {
         D_80153784 = 1;
         D_8014AD9C = 0;
 #if defined(VERSION_DE)
-        func_80442574_de(&D_8014561C, &D_0044EABC, (s32)arg0->player, (s32) arg0->slot, 0);
+        func_80442574_de(&D_8014561C, &D_0044EABC, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-        func_80442574_de(&D_8014561C, &D_0044F70C, (s32)arg0->player, (s32) arg0->slot, 0);
+        func_80442574_de(&D_8014561C, &D_0044F70C, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_US)
-        func_80442574_de(&D_8014561C, &D_0044EC2C, (s32)arg0->player, (s32) arg0->slot, 0);
+        func_80442574_de(&D_8014561C, &D_0044EC2C, (s32)menu->player, (s32) menu->slot, 0);
 #endif
         D_800E28CC = 1;
         D_8014AD94 = 0;
         return;
     }
-    var_s0 = 0;
     if (D_800E28C8 == -1) {
-        var_s1 = 0;
-        do {
-        func_80404E28_de(var_s0);
-        if (func_80404F04_de(var_s0) == -2) {
-            var_s0 += 1;
-            if (var_s0 >= 4) {
-                var_s0 = 0;
-            }
-            var_s1 += 1;
-        } else {
-            break;
+        D_800E28C8 = Pak_ScanNextChannel(-1);
+        if (D_800E28C8 == -1) {
+            D_80153784 = 1;
+            D_8014AD9C = 0;
+#if defined(VERSION_DE)
+            func_80442574_de(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+            func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
+#elif defined(VERSION_US)
+            func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
+#endif
+            D_8014AD94 = 0;
+            D_800E28CC = 1;
+            return;
         }
-        } while (var_s1 < 4);
-        if (var_s1 == 4) {
-            var_s0 = -1;
-        }
-        D_800E28C8 = var_s0;
-        if (var_s0 != -1) {
-            goto block_11;
-        }
-        goto block_35;
     }
-block_11:
     if (func_80405598_de(D_800E28C8) == 0) {
         func_80293268_de((s32) &D_8011FAC0);
-        if ((arg0->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
+        if ((menu->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
             D_80146D60 = 1;
             D_800E28CC = 1;
         }
-        var_s0 = 1;
-        D_800E28CC = var_s0;
-        if ((D_80142CAC != 0) || (var_s3 = 0, (D_80146D60 != 0))) {
+        D_800E28CC = 1;
+        if ((D_80142CAC != 0) || (D_80146D60 != 0)) {
             func_80404E28_de(D_800E28C8);
             if (func_80404F04_de(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
 #if defined(VERSION_DE)
-                func_80442574_de(&D_8014561C, &D_0044EA74, (s32)arg0->player, (s32) arg0->slot, 0);
+                func_80442574_de(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)arg0->player, (s32) arg0->slot, 0);
+                func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_US)
-                func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)arg0->player, (s32) arg0->slot, 0);
+                func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
 #endif
                 D_8014AD94 = 0;
                 D_800E28CC = 1;
@@ -156,128 +165,97 @@ block_11:
             }
             goto block_60;
         }
-        /* FAKEMATCH: preserve the status-to-counter copy across a compiler loop boundary. */
-        do {} while (0);
-        /* FAKEMATCH: redundant copies preserve the status-to-counter register move. */
-        temp_s1_2 = var_s3;
-        var_s3 = temp_s1_2;
-        var_s2 = var_s3;
-        sp2C = -1;
-        var_s5 = -1;
-        sp28 = D_800E28C8;
-        var_s6 = -2;
-loop_20:
-        if ((D_800E28C8 == var_s5) || (var_s3 = func_80406858_de(arg0, D_800E28C8, &sp28, &sp2C), var_s0_2 = 0, (var_s3 == 0))) {
-            var_s0_3 = 0;
-            if (D_800E28C8 != var_s5) {
-                var_s0_3 = D_800E28C8 + 1;
-                if (var_s0_3 >= 4) {
-                    var_s0_3 = 0;
+        status = 0;
+        retries = 0;
+        freeChannel = -1;
+        firstChannel = D_800E28C8;
+        do {
+            if (D_800E28C8 != -1) {
+                status = func_80406858_de(menu, D_800E28C8, &firstChannel, &freeChannel);
+                if (status != 0) {
+                    break;
                 }
             }
-            var_s1_2 = 0;
-loop_26:
-            func_80404E28_de(var_s0_3);
-            if (func_80404F04_de(var_s0_3) == var_s6) {
-                var_s0_3 += 1;
-                if (var_s0_3 >= 4) {
-                    var_s0_3 = 0;
-                }
-                var_s1_2 += 1;
-                if (var_s1_2 < 4) {
-                    goto loop_26;
-                }
-            }
-            if (var_s1_2 == 4) {
-                var_s0_3 = -1;
-            }
-            D_800E28C8 = var_s0_3;
-            var_s2 += 1;
-            if (var_s2 >= 4) {
-                var_s0_2 = 0;
-                if (var_s3 == 0) {
-                    D_800E28C8 = sp28;
-                    func_80404E28_de(sp28);
-                    if (func_80404F04_de(D_800E28C8) == -2) {
-block_35:
-block_36:
+            D_800E28C8 = Pak_ScanNextChannel(D_800E28C8);
+        } while (++retries < 4);
+        if (status == 0) {
+            D_800E28C8 = firstChannel;
+            func_80404E28_de(firstChannel);
+            if (func_80404F04_de(D_800E28C8) == -2) {
                         D_80153784 = 1;
                         D_8014AD9C = 0;
 #if defined(VERSION_DE)
-                        func_80442574_de(&D_8014561C, &D_0044EA74, (s32)arg0->player, (s32) arg0->slot, 0);
+                        func_80442574_de(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)arg0->player, (s32) arg0->slot, 0);
+                        func_80442574_de(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_US)
-                        func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)arg0->player, (s32) arg0->slot, 0);
+                        func_80442574_de(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
 #endif
                         D_8014AD94 = 0;
                         D_800E28CC = 1;
                         return;
-                    }
-                }
-                goto block_39;
             }
-            goto loop_20;
         }
         goto block_39;
 /* FAKEMATCH: place found-note exits before the loops to preserve branch layout. */
 first_note_found:
-        var_s3_2 = 1;
+        hasNote1 = 1;
         goto second_note_search;
 second_note_found:
-        regpart_var_s2 = 1;
+        hasNote2 = 1;
         goto notes_checked;
 block_39:
-        temp_s2 = D_800D36D4;
-        temp_s1 = D_800E28C8;
-        temp_a0 = temp_s1;
+        noteIndex = 0;
+        firstNoteName = D_800D36D4;
+        channel1 = D_800E28C8;
+        channelArg1 = channel1;
 loop_40:
-        func_80405338_de(temp_a0, var_s0_2, &sp30);
-        func_80405648_de((u8 *) sp30, sp18, 0x10);
-        if (func_802A037C_de(sp18, temp_s2) == 0) {
+        func_80405338_de(channelArg1, noteIndex, &note1);
+        func_80405648_de((u8 *) note1, noteText, 0x10);
+        if (func_802A037C_de(noteText, firstNoteName) == 0) {
             goto first_note_found;
         }
-        var_s0_2 += 1;
-        if (var_s0_2 < 0x10) {
+        noteIndex += 1;
+        if (noteIndex < 0x10) {
             goto loop_40;
         }
-        var_s3_2 = 0;
+        hasNote1 = 0;
 second_note_search:
-        var_s0_4 = 0;
-        var_s2 = D_800D36D8;
-        temp_s1_2 = D_800E28C8;
-        temp_a0_2 = temp_s1_2;
+        noteIndex2 = 0;
+        retries = D_800D36D8;
+        channel2 = D_800E28C8;
+        channelArg2 = channel2;
 loop_44:
-        func_80405338_de(temp_a0_2, var_s0_4, &sp34);
-        func_80405648_de((u8 *) sp34, sp18, 0x10);
-        if (func_802A037C_de(sp18, var_s2) == 0) {
+        func_80405338_de(channelArg2, noteIndex2, &note2);
+        func_80405648_de((u8 *) note2, noteText, 0x10);
+        if (func_802A037C_de(noteText, retries) == 0) {
             goto second_note_found;
         }
-        var_s0_4 += 1;
-        if (var_s0_4 < 0x10) {
+        noteIndex2 += 1;
+        if (noteIndex2 < 0x10) {
             goto loop_44;
         }
-        regpart_var_s2 = 0;
+        hasNote2 = 0;
 notes_checked:
-        if ((var_s3_2 == 0) && (regpart_var_s2 == 0)) {
-            if ((func_80405160_de(D_800E28C8, &sp38) == 0) && (var_s0_4 = func_804050CC_de(D_800E28C8, &sp3C), (var_s0_4 == 0))) {
-                temp_s1_3 = func_804057EC_de(D_8011FECC + 0x610);
-                temp_a0_3 = func_804057EC_de(0x18U);
-                if ((sp3C != 0) && (sp38 >= (s32) temp_a0_3)) {
-                    if (sp38 < (s32) temp_s1_3) {
+        if ((hasNote1 == 0) && (hasNote2 == 0)) {
+            if ((func_80405160_de(D_800E28C8, &freeBytes) == 0) && (noteIndex2 = func_804050CC_de(D_800E28C8, &freeNotes), (noteIndex2 == 0))) {
+                maxBytes = func_804057EC_de(D_8011FECC + 0x610);
+                minBytes = func_804057EC_de(0x18U);
+                if ((freeNotes != 0) && (freeBytes >= (s32) minBytes)) {
+                    if (freeBytes < (s32) maxBytes) {
                         D_80153784 = 1;
                         D_80146D60 = 1;
 #if defined(VERSION_DE)
-                        func_80442574_de(&D_8014561C, &D_0044EED0, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+                        func_80442574_de(&D_8014561C, &D_0044EED0, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        func_80442574_de(&D_8014561C, &D_0044FB20, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+                        func_80442574_de(&D_8014561C, &D_0044FB20, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_US)
-                        func_80442574_de(&D_8014561C, &D_0044F040, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+                        func_80442574_de(&D_8014561C, &D_0044F040, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #endif
                         goto prompt_checked;
                     }
                     /* FAKEMATCH: retain the repeated minimum-size test and its target branch. */
-                    if (sp38 < (s32) temp_a0_3) {
+                    if (freeBytes < (s32) minBytes) {
                         goto block_56;
                     }
                 } else {
@@ -285,15 +263,15 @@ block_56:
                     D_80153784 = 1;
                     D_80146D60 = 1;
 #if defined(VERSION_DE)
-                    func_80442574_de(&D_8014561C, &D_0044EEAC, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+                    func_80442574_de(&D_8014561C, &D_0044EEAC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                    func_80442574_de(&D_8014561C, &D_0044FAFC, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+                    func_80442574_de(&D_8014561C, &D_0044FAFC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_US)
-                    func_80442574_de(&D_8014561C, &D_0044F01C, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+                    func_80442574_de(&D_8014561C, &D_0044F01C, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #endif
                 }
 prompt_checked:
-                if (var_s0_4 != 0) {
+                if (noteIndex2 != 0) {
                     goto block_59;
                 }
             } else {
@@ -305,10 +283,10 @@ prompt_checked:
 block_59:
     D_80153784 = 1;
     D_80146D60 = 1;
-    func_80442574_de(&D_8014561C, &D_0044ED44, (s32)arg0->player, (s32) arg0->slot, (s32) &D_0044E4F8);
+    func_80442574_de(&D_8014561C, &D_0044ED44, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 block_60:
     if (D_80153784 == 0) {
-        func_80405F48_de(arg0);
+        func_80405F48_de(menu);
     }
     D_8014AD94 = 0;
     D_800E28CC = 1;
