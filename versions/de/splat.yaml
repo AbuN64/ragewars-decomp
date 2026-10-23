@@ -4659,7 +4659,7 @@ segments:
       - [0xDEB54, rodata, data_800C/literals_func_804399D0]
       - [0xDEB58, rodata, data_800C/rodata_unresolved_800DDF58]
       - [0xDEB68, data, data_800C/rodata_unresolved_800DDF68]
-      - [0xDEB70, rodata, data_800C/literals_func_80439D58_de]
+      - [0xDEB70, rodata, data_800C/literals_Frontend_UpdateTimedTransition]
       - [0xDEB84, data, data_800C/rodata_unresolved_800DDF84]
       - [0xDEB90, rodata, data_800C/D_80439EC4_E2BC0]
       - [0xDEB94, rodata, data_800C/D_8043A330_E2BC4]

@@ -24,37 +24,28 @@ enum { MENU_80439F38_986 = 990, MENU_80439F38_987 = 991 };
 enum { MENU_80439F38_986 = 986, MENU_80439F38_987 = 987 };
 #endif
 
-s32 func_80439D58_de(void) {
-    /* FAKEMATCH: preserve resident jump-table labels and recovered dispatch schedule. */
+s32 Frontend_UpdateTimedTransition(void) {
     s32 time;
-    u32 setting;
 
     func_8029973C_de();
     switch (func_80299A08_de()) {
     case MENU_80439F38_986:
-        setting = D_801462D5;
-        if (setting >= 5) {
-            goto wait_3;
+        switch (D_801462D5) {
+        case 0:
+            time = 20;
+            break;
+        case 2:
+            time = 15;
+            break;
+        case 3:
+        case 4:
+            time = 10;
+            break;
+        case 1:
+        default:
+            time = 3;
+            break;
         }
-        switch (setting) {
-        case 0: goto wait_20;
-        case 1: goto wait_3;
-        case 2: goto wait_15;
-        case 3: goto wait_10;
-        case 4: goto wait_10;
-        }
-    wait_20:
-        time = 20;
-        goto wait;
-    wait_15:
-        time = 15;
-        goto wait;
-    wait_10:
-        time = 10;
-        goto wait;
-    wait_3:
-        time = 3;
-    wait:
         func_80298368_de(time);
         return 0;
     case MENU_80439F38_987:
