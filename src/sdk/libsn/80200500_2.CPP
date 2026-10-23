@@ -13,45 +13,45 @@ extern MemoryBoundary D_800CB3A0[];
 extern u32 Libgultra_TrwReadTlbEntry(void);
 
 /* 78/124 words; remaining: register assignment of the TLB loop temporaries (entry pointer and the four entry words land in other t/a registers than the ROM) */
-void func_80200610_de(void) {
-    u32 asid, mask, hi, lo0, lo1, size, first, last, count, m, i;
+void Libsn_EnumerateMemoryRanges(void) {
+    u32 addressSpaceId, pageMask, entryHi, entryLo0, entryLo1, pageSize, first, last, rangeCount, supportedMask, i;
     u32 *entry;
     MemoryRange *range;
     u32 *boundary;
-    u32 *masks;
-    asid = Libgultra_TrwReadTlbEntry() & 0xFF;
+    u32 *supportedMasks;
+    addressSpaceId = Libgultra_TrwReadTlbEntry() & 0xFF;
     entry = (u32 *)D_800F3470;
     for (i = 16; i < 48; i++) {
         D_800F2D00[i].first = -1;
         D_800F2D00[i].flags = 0;
-        mask = *entry++;
-        hi = *entry++;
-        lo0 = *entry++;
-        lo1 = *entry++;
-        if ((lo0 | lo1) & 2) {
-            mask &= 0x1FFE000;
-            masks = D_800C8148_de;
-            size = 0x1000;
+        pageMask = *entry++;
+        entryHi = *entry++;
+        entryLo0 = *entry++;
+        entryLo1 = *entry++;
+        if ((entryLo0 | entryLo1) & 2) {
+            pageMask &= 0x1FFE000;
+            supportedMasks = D_800C8148_de;
+            pageSize = 0x1000;
             while (1) {
-                m = *masks;
-                if (m == mask) break;
-                masks++;
-                if (m & 0x80000000) {
-                    size = 0;
+                supportedMask = *supportedMasks;
+                if (supportedMask == pageMask) break;
+                supportedMasks++;
+                if (supportedMask & 0x80000000) {
+                    pageSize = 0;
                     break;
                 }
-                size <<= 2;
+                pageSize <<= 2;
             }
-            if (size != 0) {
-                if ((lo0 & lo1 & 3) != 3) {
-                    if ((lo0 & 3) == 2 && (hi & 0xFF) != asid) lo0 &= ~2U;
-                    if ((lo1 & 3) == 2 && (hi & 0xFF) != asid) lo1 &= ~2U;
+            if (pageSize != 0) {
+                if ((entryLo0 & entryLo1 & 3) != 3) {
+                    if ((entryLo0 & 3) == 2 && (entryHi & 0xFF) != addressSpaceId) entryLo0 &= ~2U;
+                    if ((entryLo1 & 3) == 2 && (entryHi & 0xFF) != addressSpaceId) entryLo1 &= ~2U;
                 }
-                first = hi & 0xFFFFE000;
-                if (lo0 & lo1 & 2) size <<= 1;
-                else if (lo1 & 2) first += size;
+                first = entryHi & 0xFFFFE000;
+                if (entryLo0 & entryLo1 & 2) pageSize <<= 1;
+                else if (entryLo1 & 2) first += pageSize;
                 D_800F2D00[i].first = first;
-                D_800F2D00[i].last = first + size - 1;
+                D_800F2D00[i].last = first + pageSize - 1;
                 D_800F2D00[i].flags = 3;
             }
         }
@@ -61,20 +61,20 @@ void func_80200610_de(void) {
     if ((s32)*boundary >= 0) {
         do { boundary += 2; } while (*boundary < first);
     }
-    count = 0;
+    rangeCount = 0;
     do {
-        D_800F2D00[count].first = first;
+        D_800F2D00[rangeCount].first = first;
         last = *boundary++;
-        D_800F2D00[count].last = last;
+        D_800F2D00[rangeCount].last = last;
         first = last + 1;
-        D_800F2D00[count].flags = *boundary++;
-        count++;
+        D_800F2D00[rangeCount].flags = *boundary++;
+        rangeCount++;
     } while (first != 0);
-    for (; count < 16; count++) {
-        D_800F2D00[count].first = -1;
-        D_800F2D00[count].flags = 0;
+    for (; rangeCount < 16; rangeCount++) {
+        D_800F2D00[rangeCount].first = -1;
+        D_800F2D00[rangeCount].flags = 0;
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80200610_de);
+INCLUDE_ASM("span_1000", Libsn_EnumerateMemoryRanges);
 #endif

@@ -45,7 +45,7 @@ extern void func_80200E04_de(u32, u8 *, u32);
 extern void func_8020095C_de(u32, u8 *, u32);
 #ifdef NON_MATCHING
 /* 43/59 words; remaining: the ROM's `lui` of D_800F1C90 sits in the first jal's delay slot (addiu later) and the D_800C8140 store precedes the jal; the stack-top argument is a symbol-plus-offset (a bare &D_800F2CB0 is CSE'd into a saved register) */
-void func_802016FC_de(s32 arg0) {
+void Libsn_InitializeHostRequestThread(s32 threadPriority) {
     if (D_800C8140_de == 0) {
         D_800C8140_de = 1;
         osCreateMesgQueue(&D_800F2CC0, &D_800F2CB4, 1);
@@ -53,12 +53,12 @@ void func_802016FC_de(s32 arg0) {
         osCreateMesgQueue(&D_800F3110, &D_800F2F58, 1);
         osCreateMesgQueue(&D_800F1C90, &D_800F1C84, 1);
         func_802BB550_de(0, &D_800F1C90, 1);
-        func_802BAC90_de(&D_800F2F60, 0x4653, &D_002018A0, 0, (void **)(D_800F2CE0 - 0x30), arg0);
+        func_802BAC90_de(&D_800F2F60, 0x4653, &D_002018A0, 0, (void **)(D_800F2CE0 - 0x30), threadPriority);
         func_802BB750_de(&D_800F2F60);
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_802016FC_de);
+INCLUDE_ASM("span_1000", Libsn_InitializeHostRequestThread);
 #endif
 #ifdef NON_MATCHING
 /* 46/46 words; the ROM's `break 1` in the poll loop's failure arm is inline asm (cc1 has no trap builtin), so no ROM-path C */
@@ -134,7 +134,7 @@ void *func_80201AD0_de(void) {
     ControllerRequest request;
     ControllerResponse response;
     D_800C8144_de = 2;
-    func_802016FC_de(0xFF);
+    Libsn_InitializeHostRequestThread(0xFF);
     request.status = 0;
     request.command = 0x80000101;
     request.argument0 = 0;

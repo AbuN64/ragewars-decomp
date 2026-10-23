@@ -54,7 +54,7 @@ void func_80201064_de(s32 address, s32 port, s32 count) {
 }
 
 #include "IO/DEBUG_MEMORY.H"
-extern void func_80200610_de(void);
+extern void Libsn_EnumerateMemoryRanges(void);
 extern u8 D_8F0F3130[];
 extern void func_80200F98_de(s32, s32, u32);
 extern void func_80201064_de(s32, s32, s32);
@@ -66,7 +66,7 @@ extern void func_80200B14_de(u32, u32, u32);
 void func_802010D8_de(u32 mode) {
     u32 address, remaining, chunk, flags, port;
     u32 i;
-    func_80200610_de();
+    Libsn_EnumerateMemoryRanges();
     port = 0xB1FE0000;
     address = func_802005A0_de(0xB1FFFFF4);
     remaining = func_802005A0_de(0xB1FFFFF8);
