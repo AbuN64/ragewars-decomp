@@ -46,17 +46,17 @@ OSTask *func_802B9D90_de(OSTask *intp)
     return tp;
 }
 
-void func_802B9E78_de(OSTask *arg0) {
+void func_802B9E78_de(OSTask *intp) {
     OSTask *block;
     s32 result;
 
-    block = func_802B9D90_de(arg0);
+    block = func_802B9D90_de(intp);
     if (block->t.flags & 1) {
         block->t.ucode_data = block->t.yield_data_ptr;
         block->t.ucode_data_size = block->t.yield_data_size;
-        arg0->t.flags &= ~1;
+        intp->t.flags &= ~1;
         if (block->t.flags & 4) {
-            block->t.ucode = (u64 *)IO_READ_WORD(((u32)arg0->t.yield_data_ptr + 0xBFCU) | 0xA0000000U);
+            block->t.ucode = (u64 *)IO_READ_WORD(((u32)intp->t.yield_data_ptr + 0xBFCU) | 0xA0000000U);
         }
     }
     func_802BD280_de(block, 0x40);
