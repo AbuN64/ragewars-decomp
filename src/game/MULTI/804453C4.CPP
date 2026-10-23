@@ -59,7 +59,7 @@ extern s32 func_8022A5A0_de(char *, s32);
 typedef struct SpinnerSetupMenu { char pad0[0xC]; char *object; char pad10[0xC]; s32 id; } SpinnerSetupMenu;
 extern char D_8014641C_us_rev1[];
 extern char *D_800D3C44;
-/* 153/161 words; remaining: scheduling of the final li/subu/sll before the two result stores (same instructions otherwise) */
+/* 157/161 words; remaining: li/subu are scheduled before the index*24 sll chain, the ROM schedules them after it (same instructions otherwise) */
 int func_80446330_us_rev1(void *arg0) {
     SpinnerSetupMenu *menu = arg0;
     s32 index;
@@ -133,7 +133,9 @@ int func_80446330_us_rev1(void *arg0) {
         *dst++ = *src++;
     }
     *dst = 0;
-    return D_800E20A4_de[index].max = D_800E63C0[index].value = 8 - trailing;
+    D_800E63C0[index].value = 8 - trailing;
+    D_800E20A4_de[index].max = 8 - trailing;
+    return 8 - trailing;
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_80446330_us_rev1);
