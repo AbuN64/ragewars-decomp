@@ -345,15 +345,13 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
 #include "COMMON/MENU_UI_PROVIDERS.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/VIDEO_DIMENSIONS.H"
-typedef struct EntryBounds { s32 pad[5]; s32 left; s32 right; s32 top; s32 bottom; } EntryBounds;
 extern f32 D_800E2504;
 extern void func_802AA9F4_de();
-/* 69/180 words (111 aligned edits); remaining: the ROM frame is 16 bytes larger (extra stack words) and keeps a dead load of unused->8 & 0x3FE0 */
-void func_80441BE0_de(u8 *self, void *unused, s32 relative) {
+/* 35/180 aligned edits; remaining: dead entry-flag load, float scheduling and alpha call setup. */
+void Pak_DrawMenuPanel(u8 *self, void *unused, s32 relative) {
     u8 *view = *(u8 **)(self + 0x40);
-    EntryBounds bounds;
-    struct { s32 xMin, xMax, yMin, yMax; } box;
-    struct { s32 w, h; } size;
+    CItemInfo box;
+    CItemInfo bounds;
     s32 i;
     f32 centerX;
     f32 margin;
@@ -361,39 +359,32 @@ void func_80441BE0_de(u8 *self, void *unused, s32 relative) {
     f32 top;
     f32 fade;
     s32 alpha;
-    box.xMin = 0x400;
-    box.xMax = -0x400;
-    box.yMin = 0x400;
-    box.yMax = -0x400;
-    bounds.pad[1] = 0;
-    bounds.pad[2] = 0;
+    box.left = 0x400;
+    box.right = -0x400;
+    box.m_Top = 0x400;
+    box.m_Bottom = -0x400;
+    bounds.width = 0;
+    bounds.height = 0;
     bounds.left = 0;
     bounds.right = 0;
-    bounds.top = 0;
-    bounds.bottom = 0;
+    bounds.m_Top = 0;
+    bounds.m_Bottom = 0;
     for (i = 0; i < *(s32 *)(self + 0x10); i++) {
-        func_8043F52C_de((TextBoundsText *)(*(u8 **)(self + 0xC) + i * 0x28), (CItemInfo *)&bounds);
-        if (bounds.left < box.xMin) {
-            box.xMin = bounds.left;
-        }
-        if (bounds.right > box.xMax) {
-            box.xMax = bounds.right;
-        }
-        if (bounds.top < box.yMin) {
-            box.yMin = bounds.top;
-        }
-        if (bounds.bottom > box.yMax) {
-            box.yMax = bounds.bottom;
-        }
+        func_8043F52C_de((TextBoundsText *)(*(u8 **)(self + 0xC) + i * 0x28), &bounds);
+        box.left = box.left < bounds.left ? box.left : bounds.left;
+        box.right = box.right > bounds.right ? box.right : bounds.right;
+        box.m_Top = box.m_Top < bounds.m_Top ? box.m_Top : bounds.m_Top;
+        box.m_Bottom = box.m_Bottom > bounds.m_Bottom ? box.m_Bottom : bounds.m_Bottom;
     }
-    size.w = box.xMax - box.xMin;
-    size.h = box.yMax - box.yMin;
-    if (size.w < 0 || size.h < 0) {
+    box.width = box.right - box.left;
+    box.height = box.m_Bottom - box.m_Top;
+    if (box.width < 0 || box.height < 0) {
         return;
     }
     centerX = *(f32 *)(view + 0x2A4) + *(f32 *)(view + 0x29C) * D_800E2504 + *(s16 *)(self + 2);
-    box.xMin = (s32)(centerX - D_800E28D0 / 2);
-    box.xMax = (s32)(centerX + D_800E28D0 / 2);
+    box.width = D_800E28D0;
+    box.left = (s32)(centerX - box.width / 2);
+    box.right = (s32)(centerX + box.width / 2);
     margin = D_800E28D4 * D_800DE4D8;
     gap = D_800E28D4 < 0xDF ? D_800DE4DC : D_800DE4E0_de;
     margin = margin - gap;
@@ -402,8 +393,9 @@ void func_80441BE0_de(u8 *self, void *unused, s32 relative) {
     } else {
         top = *(f32 *)(view + 0x2A8) + *(s16 *)(self + 4);
     }
-    box.yMin = (s32)top;
-    box.yMax = (s32)(box.yMin + margin);
+    box.m_Top = (s32)top;
+    box.m_Bottom = (s32)(box.m_Top + margin);
+    box.height = box.m_Bottom - box.m_Top;
     func_802AA9F4_de();
     fade = *(f32 *)(self + 0x30) * D_800DE4E4;
     if (fade >= *(f32 *)D_800DE4E8) {
@@ -411,8 +403,8 @@ void func_80441BE0_de(u8 *self, void *unused, s32 relative) {
     } else {
         alpha = (s32)fade;
     }
-    func_802A7DE4_de(box.xMin, box.yMin, box.xMax, box.yMax, 1, 0, 0, 0, 0, alpha & 0xFF);
+    func_802A7DE4_de(box.left, box.m_Top, box.right, box.m_Bottom, 1, 0, 0, 0, 0, alpha & 0xFF);
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80441BE0_de);
+INCLUDE_ASM("ovl_80400000", Pak_DrawMenuPanel);
 #endif

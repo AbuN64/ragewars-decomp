@@ -22,7 +22,7 @@ u32 func_80265350_de(void);
 
 int func_802934F8_de(void);
 
-void func_80441BE0_de();
+void Pak_DrawMenuPanel(u8 *self, void *entry, s32 relative);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern u8 D_80152789;
@@ -82,8 +82,8 @@ block_5:
         if (arg3->unk3C != 0) {
             arg3->unk38 = 0;
         }
-        func_80441BE0_de(arg3, arg0, 1);
-        func_80441BE0_de(arg3, arg0, 0);
+        Pak_DrawMenuPanel((u8 *)arg3, arg0, 1);
+        Pak_DrawMenuPanel((u8 *)arg3, arg0, 0);
         var_s5 = 0;
     }
     if (arg3->unk38 == 0) {
