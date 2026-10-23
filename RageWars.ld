@@ -27194,7 +27194,8 @@ SECTIONS
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_22.CPP.o */;
         src/game/FRONTEND/8042E080_22.CPP.o(.rodata .rdata);
         src/game/FRONTEND/800E1B84.CPP.o(.rodata .rdata);
-        src/game/FRONTEND/8042E080_4.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/FRONTEND/8042F130.CPP.o */;
+        src/game/FRONTEND/8042F130.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/FRONTEND/8042E080_5.CPP.o */;
         src/game/FRONTEND/8042E080_5.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB9/800E1BC4.CPP.o(.data);
@@ -27789,7 +27790,7 @@ SECTIONS
         src/game/DATA/OVLTAB9/800E1B64.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_22.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/800E1B84.CPP.o(.bss .sbss COMMON);
-        src/game/FRONTEND/8042E080_4.CPP.o(.bss .sbss COMMON);
+        src/game/FRONTEND/8042F130.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_5.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB9/800E1BC4.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_6.CPP.o(.bss .sbss COMMON);
@@ -30342,6 +30343,8 @@ SECTIONS
         src/game/FRONTEND/8042E080_23.CPP.o(.text);
         src/game/FRONTEND/8042E080_24.CPP.o(.text);
         src/game/FRONTEND/8042E080_25.CPP.o(.text);
+        src/game/FRONTEND/8042F12C.CPP.o(.data);
+        src/game/FRONTEND/8042F130.CPP.o(.text);
         src/game/FRONTEND/8042E080_5.CPP.o(.text);
         src/game/FRONTEND/8042E080_6.CPP.o(.text);
         src/game/FRONTEND/8042E080_7.CPP.o(.text);
@@ -32682,6 +32685,8 @@ SECTIONS
         src/game/FRONTEND/8042E080_23.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_24.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_25.CPP.o(.bss .sbss COMMON);
+        src/game/FRONTEND/8042F12C.CPP.o(.bss .sbss COMMON);
+        src/game/FRONTEND/8042F130.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_5.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_6.CPP.o(.bss .sbss COMMON);
         src/game/FRONTEND/8042E080_7.CPP.o(.bss .sbss COMMON);
