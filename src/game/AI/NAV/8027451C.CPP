@@ -326,7 +326,7 @@ f32 func_802749B4_de(f32 angleA, f32 angleB) {
     return -difference;
 }
 
-f32 func_80274A90_de(f32 arg0, f32 arg1) {
+f32 func_80274A90_de(f32 shakeMin, f32 arg1) {
     f32 blend;
     u32 seed;
     s32 randomValue;
@@ -336,7 +336,7 @@ f32 func_80274A90_de(f32 arg0, f32 arg1) {
     randomValue = randomValue % 10000;
     blend = (f32)randomValue * D_800C4998_de;
     D_80111D24 = seed;
-    return (blend * arg0) + ((D_800C499C_de - blend) * arg1);
+    return (blend * shakeMin) + ((D_800C499C_de - blend) * arg1);
 }
 
 s32 func_80274B44_de(f32 *arg0)

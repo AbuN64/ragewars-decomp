@@ -33,7 +33,7 @@ extern void func_8020D220_de(void *, s32);
 
 extern s32 func_8022AAD4_de(Player *, s32);
 
-s32 func_8020F2A8_de(CloseAttackBrain *arg0) {
+s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
     s32 data[30];
     s32 *cursor;
     s32 count;
@@ -54,22 +54,22 @@ s32 func_8020F2A8_de(CloseAttackBrain *arg0) {
     } while (count >= 0);
     data[0] = 0xBD7;
     if (func_8020F150_de(data) == 0) {
-        arg0->routeObject = 0;
-        arg0->routeState = -1;
+        closeAttackBrain->routeObject = 0;
+        closeAttackBrain->routeState = -1;
         return 1;
     }
     value = -1;
     global->result = value;
-    func_8020D0CC_de(global, arg0->route);
+    func_8020D0CC_de(global, closeAttackBrain->route);
     current = global->result;
     if (current != value) {
         entry = func_8020CFE0_de(global, current);
-        arg0->destination = global->result;
-        arg0->routeObject = entry->object;
-        func_8020D114_de(global, &arg0->routeNodes[0], 4);
+        closeAttackBrain->destination = global->result;
+        closeAttackBrain->routeObject = entry->object;
+        func_8020D114_de(global, &closeAttackBrain->routeNodes[0], 4);
     } else {
-        arg0->routeObject = 0;
-        arg0->routeState = current;
+        closeAttackBrain->routeObject = 0;
+        closeAttackBrain->routeState = current;
     }
     return 1;
 }
@@ -109,7 +109,7 @@ s32 func_8020F388_de(void *arg0) {
     return 1;
 }
 
-s32 func_8020F444_de(AiController *arg0) {
+s32 func_8020F444_de(AiController *controller) {
     CNavData *global;
     CNavData *scanbase;
     NavigationSearchNode *node;
@@ -139,25 +139,25 @@ s32 func_8020F444_de(AiController *arg0) {
         } while (node != 0);
     }
     if (count == 0) {
-        arg0->routeObject = 0;
-        arg0->routeState = -1;
+        controller->routeObject = 0;
+        controller->routeState = -1;
         return 1;
     }
     value = -1;
     global->result = value;
-    func_8020D0CC_de(global, arg0->current);
+    func_8020D0CC_de(global, controller->current);
     current = global->result;
     if (current != value) {
-        arg0->mode = current;
-        func_8020D114_de(global, &arg0->queue, 4);
+        controller->mode = current;
+        func_8020D114_de(global, &controller->queue, 4);
     }
     return 1;
 }
 
 /** Return whether arg0 is within the range [0x6BA, 0x6BC). */
-s32 func_8020F55C_de(s32 arg0) {
-    if (arg0 < 0x6BC) {
-        if (arg0 >= 0x6BA) {
+s32 func_8020F55C_de(s32 field0E) {
+    if (field0E < 0x6BC) {
+        if (field0E >= 0x6BA) {
             return 1;
         }
     }

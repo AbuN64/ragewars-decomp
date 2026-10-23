@@ -170,7 +170,7 @@ changed:
     return inFireCone;
 }
 
-s32 Turret_BuildPlaneRot(s32 out, s32 arg1, struct RotationObject *rotation) {
+s32 Turret_BuildPlaneRot(s32 out, s32 actor, struct RotationObject *rotation) {
     f32 angles[3];
     angles[0] = rotation->angleX;
     angles[1] = rotation->angleY;

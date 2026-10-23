@@ -233,63 +233,63 @@ void func_8020A2D4_de(ObjectLinks2EC *arg0, IntegerState2C *config) {
 }
 
 void func_8020A458_de(void *object, void *settings) {
-    AiController *arg0 = object;
+    AiController *controller = object;
     AiConfig *arg1 = settings;
     s32 timer;
     s32 minus_one;
     Player *record;
     f32 distance;
 
-    if (arg0 == 0) {
+    if (controller == 0) {
         return;
     }
 
-    timer = arg0->unk2EC;
+    timer = controller->unk2EC;
     if (timer == 0) {
         f32 value;
 
-        func_802850C8_de(&D_8011D8D0, arg0->player, &value);
+        func_802850C8_de(&D_8011D8D0, controller->player, &value);
         if (value < D_800C1D1C_de) {
             f32 k = D_800C1D24_de;
             f32 threshold = func_80274564_de(D_800C1D20_de) + k;
 
             if ((f32) arg1->unk34 < threshold) {
                 s32 base = arg1->unk24;
-                arg0->unk240 =
+                controller->unk240 =
                     (s32) ((f32) base + func_80274564_de(k) * (f32) arg1->unk28);
             }
-            arg0->unk2EC = arg1->unk2C;
-            arg0->unk2EC =
-                (s32) ((f32) arg0->unk2EC +
+            controller->unk2EC = arg1->unk2C;
+            controller->unk2EC =
+                (s32) ((f32) controller->unk2EC +
                        func_80274564_de(k) * (f32) arg1->unk30);
-            arg0->unk2EC += arg0->unk240;
+            controller->unk2EC += controller->unk240;
         }
     } else {
-        arg0->unk2EC = timer - 1;
+        controller->unk2EC = timer - 1;
     }
 
-    timer = arg0->unk2E4;
+    timer = controller->unk2E4;
     if (timer > 0) {
-        arg0->unk2E4 = timer - 1;
+        controller->unk2E4 = timer - 1;
         return;
     }
     minus_one = -1;
     if (timer == minus_one) {
-        arg0->unk23C = 1;
-        arg0->unk2E8 += minus_one;
+        controller->unk23C = 1;
+        controller->unk2E8 += minus_one;
     } else {
-        record = arg0->target->player;
-        distance = func_80216F44_de(arg0->player,
+        record = controller->target->player;
+        distance = func_80216F44_de(controller->player,
                                  record->pos);
-        if (Nav_GetEngagementDistance(arg0) < distance) {
+        if (Nav_GetEngagementDistance(controller) < distance) {
             return;
         }
-        arg0->unk23C = 1;
-        arg0->unk2E4 = minus_one;
+        controller->unk23C = 1;
+        controller->unk2E4 = minus_one;
     }
-    if (arg0->unk2E8 == 0) {
-        arg0->unk23C = 0;
-        func_8020A95C_de(arg0, arg1);
+    if (controller->unk2E8 == 0) {
+        controller->unk23C = 0;
+        func_8020A95C_de(controller, arg1);
     }
 }
 
@@ -322,50 +322,50 @@ void func_8020A604_de(void *arg0) {
     } while (s2 < 0x16);
 }
 
-void func_8020A6D8_de(void *arg0, void *arg1) {
+void func_8020A6D8_de(void *controller, void *settings) {
     s32 timer;
     s32 minus_one;
     Player *record;
     f32 distance;
 
-    if (arg0 == 0) {
+    if (controller == 0) {
         return;
     }
-    func_8020A884_de(arg0, arg1);
-    timer = ((AiController *)arg0)->unk2E4;
+    func_8020A884_de(controller, settings);
+    timer = ((AiController *)controller)->unk2E4;
     if (timer > 0) {
-        ((AiController *)arg0)->unk2E4 = timer - 1;
+        ((AiController *)controller)->unk2E4 = timer - 1;
         return;
     }
     minus_one = -1;
     if (timer == minus_one) {
-        ((AiController *)arg0)->unk23C = 1;
-        ((AiController *)arg0)->unk2E8 += minus_one;
+        ((AiController *)controller)->unk23C = 1;
+        ((AiController *)controller)->unk2E8 += minus_one;
     } else {
-        record = ((AiController *)arg0)->target->player;
-        distance = func_80216F44_de(((AiController *)arg0)->player, record->pos);
-        if (Nav_GetEngagementDistance(arg0) < distance) {
+        record = ((AiController *)controller)->target->player;
+        distance = func_80216F44_de(((AiController *)controller)->player, record->pos);
+        if (Nav_GetEngagementDistance(controller) < distance) {
             return;
         }
-        ((AiController *)arg0)->unk23C = 1;
-        ((AiController *)arg0)->unk2E4 = minus_one;
+        ((AiController *)controller)->unk23C = 1;
+        ((AiController *)controller)->unk2E4 = minus_one;
     }
-    if (((AiController *)arg0)->unk2E8 == 0) {
-        ((AiController *)arg0)->unk23C = 0;
-        func_8020A95C_de(arg0, arg1);
+    if (((AiController *)controller)->unk2E8 == 0) {
+        ((AiController *)controller)->unk23C = 0;
+        func_8020A95C_de(controller, settings);
     }
 }
 
-void func_8020A7B0_de(void *arg0, void *arg1) {
-    AiController *brain = arg0;
+void func_8020A7B0_de(void *controller, void *settings) {
+    AiController *brain = controller;
     s32 timer;
     Player *record;
     f32 distance;
 
-    if (arg0 == 0) {
+    if (controller == 0) {
         return;
     }
-    func_8020A884_de(arg0, arg1);
+    func_8020A884_de(controller, settings);
     timer = brain->unk2E4;
     if (timer > 0) {
         brain->unk2E4 = timer - 1;
@@ -381,17 +381,17 @@ void func_8020A7B0_de(void *arg0, void *arg1) {
     brain->unk2E4 = -1;
     record = brain->target->player;
     distance = func_80216F44_de(brain->player, record->pos);
-    if (Nav_GetEngagementDistance(arg0) < distance) {
+    if (Nav_GetEngagementDistance(controller) < distance) {
         brain->unk23C = 1;
         return;
     }
     brain->unk23C = 0;
-    func_8020A95C_de(arg0, arg1);
+    func_8020A95C_de(controller, settings);
 }
 
-void func_8020A884_de(void *arg0, void *arg1) {
+void func_8020A884_de(void *arg0, void *settings) {
     AiController *o = arg0;
-    AiConfig *i = arg1;
+    AiConfig *i = settings;
     s32 timer = o->unk2EC;
 
     if (timer == 0) {
@@ -401,7 +401,7 @@ void func_8020A884_de(void *arg0, void *arg1) {
 
             if ((f32) i->unk18 < threshold) {
                 o->unk240 = 1;
-                func_8020A95C_de(arg0, arg1);
+                func_8020A95C_de(arg0, settings);
             }
             o->unk2EC = i->unk10;
             o->unk2EC =
@@ -414,15 +414,15 @@ void func_8020A884_de(void *arg0, void *arg1) {
 }
 
 void func_8020A95C_de(void *object, void *settings) {
-    AiController *arg0 = object;
-    AiConfig *arg1 = settings;
+    AiController *controller = object;
+    AiConfig *aiConfig = settings;
     f32 k = D_800C6E20;
 
-    arg0->unk2E4 = arg1->unk0;
-    arg0->unk2E4 = (s32) ((f32) arg0->unk2E4 + (func_80274564_de(k) * (f32) arg1->unk4));
-    arg0->unk2E8 = arg1->unk8;
-    arg0->unk2E8 = (s32) ((f32) arg0->unk2E8 + (func_80274564_de(k) * (f32) arg1->unkC));
-    if (arg1->unk18 == 0x64) {
-        arg0->unk240 = 1;
+    controller->unk2E4 = aiConfig->unk0;
+    controller->unk2E4 = (s32) ((f32) controller->unk2E4 + (func_80274564_de(k) * (f32) aiConfig->unk4));
+    controller->unk2E8 = aiConfig->unk8;
+    controller->unk2E8 = (s32) ((f32) controller->unk2E8 + (func_80274564_de(k) * (f32) aiConfig->unkC));
+    if (aiConfig->unk18 == 0x64) {
+        controller->unk240 = 1;
     }
 }

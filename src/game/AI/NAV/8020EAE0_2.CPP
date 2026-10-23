@@ -19,19 +19,19 @@ extern CNavData D_8013B364;
 
 extern void *func_8020C994_de(void *, s32);
 
-s32 func_8020ED50_de(Func8020ED50Arg *arg0) {
+s32 func_8020ED50_de(Func8020ED50Arg *owner) {
     s32 *base;
 
     base = &D_8013B364;
     if (base != 0) {
-        if (arg0->field10 == -1) {
+        if (owner->field10 == -1) {
             return 1;
         }
-        if (arg0->field4 == arg0->field10) {
+        if (owner->field4 == owner->field10) {
             return 1;
         }
-        if (func_8020D1CC_de(base, arg0->field4, arg0->field10) == 0) {
-            arg0->fieldC = func_8020BC50_de(base, arg0->field4, arg0->field10, arg0);
+        if (func_8020D1CC_de(base, owner->field4, owner->field10) == 0) {
+            owner->fieldC = func_8020BC50_de(base, owner->field4, owner->field10, owner);
         }
     }
     return 1;
@@ -54,18 +54,18 @@ void func_8020EDCC_de(char *arg0) {
 }
 
 void func_8020EE50_de(void) {
-    NavigationSearchNode *var_a0;
+    NavigationSearchNode *node;
     f32 k;
 
-    var_a0 = D_801372C8;
-    if (var_a0 != 0) {
+    node = D_801372C8;
+    if (node != 0) {
         k = D_800C1EE0_de;
         do {
-            var_a0->extra =
-                var_a0->extra +
-                (f32) (var_a0->ticks * 0x1E) * k;
-            var_a0 = var_a0->next;
-        } while (var_a0 != 0);
+            node->extra =
+                node->extra +
+                (f32) (node->ticks * 0x1E) * k;
+            node = node->next;
+        } while (node != 0);
     }
 }
 

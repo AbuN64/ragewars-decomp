@@ -41,7 +41,7 @@ Racer *func_8022A5F4_de(World *arg0, u32 arg1);
 f32 func_802726F8_de(void *arg0, void *arg1);
 s32 func_8021035C_de(Chaser *arg0, s32 arg1);
 
-s32 func_80210248_eu(Chaser *arg0) {
+s32 func_80210248_eu(Chaser *self) {
     s32 i;
     s32 count;
     Racer *other;
@@ -49,9 +49,9 @@ s32 func_80210248_eu(Chaser *arg0) {
     Rules *rules;
 
     for (i = 0; i < 10; i++) {
-        arg0->target[i] = NULL;
-        arg0->cost[i] = 0;
-        arg0->dist[i] = -1;
+        self->target[i] = NULL;
+        self->cost[i] = 0;
+        self->dist[i] = -1;
     }
     count = 0;
     i = count;
@@ -59,16 +59,16 @@ s32 func_80210248_eu(Chaser *arg0) {
     rules = &world->rules;
     for (; i < 8; i++) {
         other = func_8022A5F4_de(world, i);
-        if (other != NULL && other != arg0->self
-            && (rules->teamsEnabled == 0 || other->team->id != arg0->self->team->id)
+        if (other != NULL && other != self->self
+            && (rules->teamsEnabled == 0 || other->team->id != self->self->team->id)
             && (other->stateBits >> 8) > 0) {
-            arg0->target[count] = other;
-            arg0->dist[count] = func_802726F8_de(&arg0->self->pos, &other->pos);
-            arg0->cost[count] = func_8021035C_de(arg0, count);
+            self->target[count] = other;
+            self->dist[count] = func_802726F8_de(&self->self->pos, &other->pos);
+            self->cost[count] = func_8021035C_de(self, count);
             count++;
         }
     }
-    arg0->count = count;
+    self->count = count;
     return 1;
 }
 

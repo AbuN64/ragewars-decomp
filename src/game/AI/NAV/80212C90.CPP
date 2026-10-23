@@ -7,9 +7,9 @@
 #include "TYPES.H"
 #include "AI/NAV/80212C90.H"
 
-void func_80212C90_de(AiTarget *arg0) {
+void func_80212C90_de(AiTarget *aiTarget) {
     AiController *controller;
-    controller = arg0->player->controller;
+    controller = aiTarget->player->controller;
     ((CloseAttackBrain *)controller)->state = 0;
     func_80209988_de(controller);
     controller->unk2FC = 0;
@@ -27,17 +27,17 @@ extern char D_80145040;
 
 
 
-void func_80212CC4_de(AiTarget *arg0) {
+void func_80212CC4_de(AiTarget *aiTarget) {
     AiController *controller;
     void *v0;
 
-    controller = arg0->player->controller;
+    controller = aiTarget->player->controller;
     v0 = func_8022A83C_de(&D_80145040);
     if (v0 == 0 || v0 != (void *)controller->player) {
         func_80209874_de(controller, 2);
         return;
     }
-    controller = arg0->player->controller;
+    controller = aiTarget->player->controller;
     func_80211020_de(controller);
     func_80209948_de(controller, controller->mode);
     Nav_SteerAlongRoute(controller);

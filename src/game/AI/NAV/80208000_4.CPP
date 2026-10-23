@@ -152,12 +152,12 @@ void func_80209910_de(AiController *controller, float amount) {
     }
 }
 
-CVector3 *func_8020993C_de(AiController *arg0) {
-    return &arg0->player->pos;
+CVector3 *func_8020993C_de(AiController *controller) {
+    return &controller->player->pos;
 }
 
-void func_80209948_de(AiController *arg0, s32 arg1) {
-    func_802726F8_de(&arg0->player->pos.x, func_8020C994_de(&D_8013B364, arg1));
+void func_80209948_de(AiController *controller, s32 arg1) {
+    func_802726F8_de(&controller->player->pos.x, func_8020C994_de(&D_8013B364, arg1));
 }
 
 /** Reset three state words and set the final state to one. */
@@ -344,14 +344,14 @@ multiply:
     return value;
 }
 
-void func_80209CD8_de(SharedPlayer **arg0) {
+void func_80209CD8_de(SharedPlayer **brain) {
     s32 limit;
     Controls *controls;
     CGameStatus *session;
     s8 mode;
 
     if (D_80146938 != 0) {
-        mode = (*arg0)->views5D8.view5D8_2.controls->mode;
+        mode = (*brain)->views5D8.view5D8_2.controls->mode;
         if (mode == 0xC || mode == 0xF) {
             limit = 0x384;
         } else {
@@ -360,25 +360,25 @@ void func_80209CD8_de(SharedPlayer **arg0) {
     } else {
         limit = 0x1E;
     }
-    if (limit < (*arg0)->views1340.view1340_2.timer) {
+    if (limit < (*brain)->views1340.view1340_2.timer) {
         session = &D_801462C8.counters;
         do {
-            (*arg0)->views1340.view1340_2.timer = 0;
+            (*brain)->views1340.view1340_2.timer = 0;
         } while (0);
         if (session->enabled != 0) {
-            controls = (*arg0)->views5D8.view5D8_2.controls;
+            controls = (*brain)->views5D8.view5D8_2.controls;
             if (controls->team == 0) {
                 if (controls->active == 0 || session->unk9C == 3) {
-                    func_8044972C_de(*arg0);
+                    func_8044972C_de(*brain);
                 }
             } else {
                 mode = controls->mode;
                 if (mode == 0xC || mode == 0xF) {
-                    func_8044972C_de(*arg0);
+                    func_8044972C_de(*brain);
                 }
             }
         } else {
-            func_8044972C_de(*arg0);
+            func_8044972C_de(*brain);
         }
     }
 }

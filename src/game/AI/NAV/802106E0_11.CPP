@@ -35,23 +35,23 @@ extern float D_800C22D0_eu[];
 
 void func_80211490_eu(CloseAttackActor *actor) {
  char *routes;int mine,theirs,dir; CloseAttackActor *player;
-    CloseAttackActor *temp_a1;
+    CloseAttackActor *target;
     CloseAttackActor *temp_s0;
     CloseAttackActor *temp_v1_3;
-    CloseAttackBrain *temp_s1;
+    CloseAttackBrain *brain;
     CVector3 *temp_s0_2;
     f32 temp_f0;
     f32 temp_f1;
     f32 temp_f1_2;
     f32 temp_f20;
     f32 temp_f21;
-    f32 temp_f2;
+    f32 distance;
     f32 temp_f2_2;
-    s32 temp_s2;
+    s32 route;
     s32 temp_v0;
     s32 temp_v0_6;
     s32 temp_v1;
-    s32 temp_v1_2;
+    s32 pattern;
     s32 var_a1;
     s32 var_v0;
     s32 var_v0_2;
@@ -59,62 +59,62 @@ void func_80211490_eu(CloseAttackActor *actor) {
     s32 var_v0_4;
     s32 var_v0_5;
 
-    temp_s1 = actor->self->brain;
-    func_80211020_de(temp_s1);
-    temp_a1 = temp_s1->target;routes=D_8013B364;
-    if (temp_a1 != 0) {
-        if (!(temp_s1->frames & 3)) {
-            temp_s1->visible = func_802099B4_de(temp_s1, temp_a1);
+    brain = actor->self->brain;
+    func_80211020_de(brain);
+    target = brain->target;routes=D_8013B364;
+    if (target != 0) {
+        if (!(brain->frames & 3)) {
+            brain->visible = func_802099B4_de(brain, target);
         }
-        temp_s1->frames += 1;
-        temp_s0 = temp_s1->target->self;
-        mine=temp_s1->player->flags&0x3000;theirs=(temp_s0->flags&0x3000)!=0;
+        brain->frames += 1;
+        temp_s0 = brain->target->self;
+        mine=brain->player->flags&0x3000;theirs=(temp_s0->flags&0x3000)!=0;
         if (mine && !theirs) {
-            func_80209874_de(temp_s1,12);return;
+            func_80209874_de(brain,12);return;
         }
-        temp_s2 = temp_s0->brain->route;
-        if (func_8020C994_de(routes, temp_s2)->flags & 0x400) {
-            temp_s1->target = 0;
-            func_8020FA10_de(temp_s1);
+        route = temp_s0->brain->route;
+        if (func_8020C994_de(routes, route)->flags & 0x400) {
+            brain->target = 0;
+            func_8020FA10_de(brain);
             return;
         }
-        if (temp_s1->visible != 0) {
-            temp_f21 = func_80209BE0_de(temp_s1);
-            temp_v0 = temp_s1->timer - 1;
+        if (brain->visible != 0) {
+            temp_f21 = func_80209BE0_de(brain);
+            temp_v0 = brain->timer - 1;
             temp_f20 = temp_f21 * 0.6f;
-            temp_s1->timer = temp_v0;
+            brain->timer = temp_v0;
             if (temp_v0 <= 0) {
-                temp_s1->timer=func_802744D4_de()%4+12;
-                temp_s1->pattern = func_802744D4_de() % 2;
-                temp_s1->distance = (func_802744D4_de() % 250000) + 0x57E40;
+                brain->timer=func_802744D4_de()%4+12;
+                brain->pattern = func_802744D4_de() % 2;
+                brain->distance = (func_802744D4_de() % 250000) + 0x57E40;
             }
             temp_s0_2 = &temp_s0->pos;
-            func_80209308_de(temp_s1, temp_s0_2, 2.0f, func_80209DAC_de(temp_s1));
-            temp_f0 = func_802726BC_de(temp_s0_2, &temp_s1->player->pos);
+            func_80209308_de(brain, temp_s0_2, 2.0f, func_80209DAC_de(brain));
+            temp_f0 = func_802726BC_de(temp_s0_2, &brain->player->pos);
             temp_f1 = temp_f0 + 10000.0f;
-            temp_f2 = (f32) temp_s1->distance;
+            distance = (f32) brain->distance;
             if (temp_f1 < 0.0f) {
-                if (temp_f2 < -temp_f1) {
+                if (distance < -temp_f1) {
                     goto block_19;
                 }
                 goto block_23;
             }
-            if (temp_f2 < temp_f1) {
+            if (distance < temp_f1) {
 block_19:
-                dir = func_80210EFC_de(temp_s1->player->yaw - 3.1415927f);
-                player = temp_s1->player;
+                dir = func_80210EFC_de(brain->player->yaw - 3.1415927f);
+                player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     func_80210964_de(player, dir);
                 }
-                if (!(temp_s1->walk[dir] < 100.0f)) {
-                    temp_s1->player->forward = 1.0f;
+                if (!(brain->walk[dir] < 100.0f)) {
+                    brain->player->forward = 1.0f;
                 } else {
                     goto block_31;
                 }
             } else {
 block_23:
                 temp_f1_2 = temp_f0 - 10000.0f;
-                temp_f2_2 = (f32) temp_s1->distance;
+                temp_f2_2 = (f32) brain->distance;
                 if (temp_f1_2 < 0.0f) {
                     if (-temp_f1_2 < temp_f2_2) {
                         goto block_27;
@@ -123,69 +123,69 @@ block_23:
                 }
                 if (temp_f1_2 < temp_f2_2) {
 block_27:
-                    dir = func_80210EFC_de(temp_s1->player->yaw);
-                    player = temp_s1->player;
+                    dir = func_80210EFC_de(brain->player->yaw);
+                    player = brain->player;
                     if ((player->slot % 2) == D_800D297C) {
                         func_80210964_de(player, dir);
                     }
-                    if (!(temp_s1->walk[dir] < 100.0f)) {
-                        temp_s1->player->forward = -1.0f;
+                    if (!(brain->walk[dir] < 100.0f)) {
+                        brain->player->forward = -1.0f;
                     } else {
                         goto block_31;
                     }
                 } else {
 block_31:
-                    temp_s1->player->forward = 0.0f;
+                    brain->player->forward = 0.0f;
                 }
             }
-            temp_v1_2 = temp_s1->pattern;
-            if (temp_v1_2 == 0) {
-                dir = func_80210EFC_de((temp_s1->player->yaw - 3.1415927f) - 1.5707964f);
-                player = temp_s1->player;
+            pattern = brain->pattern;
+            if (pattern == 0) {
+                dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
+                player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     func_80210964_de(player, dir);
                 }
-                if (!(temp_s1->walk[dir] < 100.0f)) {
-                    temp_s1->player->strafe = -temp_f20;
+                if (!(brain->walk[dir] < 100.0f)) {
+                    brain->player->strafe = -temp_f20;
                 } else {
                     goto block_41;
                 }
-            } else if (temp_v1_2 == 1) {
-                dir = func_80210EFC_de((temp_s1->player->yaw - 3.1415927f) + 1.5707964f);
-                player = temp_s1->player;
+            } else if (pattern == 1) {
+                dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) + 1.5707964f);
+                player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
                     func_80210964_de(player, dir);
                 }
-                if (temp_s1->walk[dir] < 100.0f) {
+                if (brain->walk[dir] < 100.0f) {
 block_41:
-                    temp_s1->player->strafe = 0.0f;
-                    temp_s1->pattern = 2;
+                    brain->player->strafe = 0.0f;
+                    brain->pattern = 2;
                 } else {
-                    temp_s1->player->strafe = temp_f20;
+                    brain->player->strafe = temp_f20;
                 }
             } else {
-                temp_s1->player->strafe = 0.0f;
+                brain->player->strafe = 0.0f;
             }
-            temp_s1->routeNodes[0] = -1;
-            temp_v0_6 = temp_s1->fireTimer - 1;
-            temp_s1->fireTimer = temp_v0_6;
+            brain->routeNodes[0] = -1;
+            temp_v0_6 = brain->fireTimer - 1;
+            brain->fireTimer = temp_v0_6;
             if ((temp_v0_6 == 0) && ((func_802744D4_de() % 100) < (s32) temp_f21)) {
-                temp_v1_3 = temp_s1->player;
+                temp_v1_3 = brain->player;
                 temp_v1_3->buttons |= 0x10;
             }
-            if (temp_s1->fireTimer < 0) {
-                temp_s1->fireTimer = ((func_802744D4_de() % 2) + 2) * 0xF;
+            if (brain->fireTimer < 0) {
+                brain->fireTimer = ((func_802744D4_de() % 2) + 2) * 0xF;
             }
-            func_80209E80_de(temp_s1);
+            func_80209E80_de(brain);
         } else {
-            temp_s1->destination = temp_s2;
-            Nav_SteerAlongRoute(temp_s1);
-            func_80208AAC_de(temp_s1);
+            brain->destination = route;
+            Nav_SteerAlongRoute(brain);
+            func_80208AAC_de(brain);
         }
-        if (temp_s2 != temp_s1->node) {
-            temp_s1->node = temp_s2;
-            if (func_8020D1CC_de(routes, temp_s1->route, temp_s2) == 0) {
-                func_80209874_de(temp_s1,1);
+        if (route != brain->node) {
+            brain->node = route;
+            if (func_8020D1CC_de(routes, brain->route, route) == 0) {
+                func_80209874_de(brain,1);
             }
         }
     }

@@ -16,30 +16,30 @@ extern void func_8020D220_de(void *, s32);
 
 extern void Nav_SearchPath(CNavData *, NavigationSearchNode *);
 
-s32 func_8020B95C_de(CNavData *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
-    NavigationPoint *var_s7;
-    NavigationBuffer *temp_v1;
+s32 func_8020B95C_de(CNavData *graph, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
+    NavigationPoint *point;
+    NavigationBuffer *points;
     NavigationBuffer *temp_v1_2;
     s32 *var_a3;
-    s32 var_s2;
+    s32 i;
     s32 var_s4;
-    s32 var_s5;
-    s32 var_t0;
+    s32 j;
+    s32 k;
     s32 var_v0;
     s32 var_v0_2;
-    s32 temp_a0;
+    s32 kind;
     s32 temp_a0_2;
     NavigationPortal *temp_v1_3;
 
     if (arg2 != -1) {
-        temp_v1 = arg0->points;
-        var_s7 = navigationRecord(temp_v1, arg2);
+        points = graph->points;
+        point = navigationRecord(points, arg2);
     } else {
-        var_s7 = NULL;
+        point = NULL;
     }
-    var_t0 = 0;
+    k = 0;
     var_s4 = 0;
-    if (arg0->m_nNavLinks > 0) {
+    if (graph->m_nNavLinks > 0) {
         s32 reversibleKind4 = 4;
         s32 reversibleKind1 = 1;
         s32 reversibleKind7 = 7;
@@ -47,8 +47,8 @@ s32 func_8020B95C_de(CNavData *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
         s32 forwardExcludedKind = 6;
         var_a3 = arg3;
         do {
-            temp_v1_2 = arg0->m_pusNavLinks;
-            temp_v1_3 = navigationRecord(temp_v1_2, var_t0);
+            temp_v1_2 = graph->m_pusNavLinks;
+            temp_v1_3 = navigationRecord(temp_v1_2, k);
             if (arg4 != 0) {
                 if (temp_v1_3->second == arg1) {
                     var_s4 += 1;
@@ -56,18 +56,18 @@ s32 func_8020B95C_de(CNavData *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
                     var_a3 += 1;
                 }
                 if (temp_v1_3->first == arg1) {
-                    temp_a0 = temp_v1_3->kind;
-                    if (temp_a0 != reversibleKind4) {
-                        if ((s32) temp_a0 < 5) {
+                    kind = temp_v1_3->kind;
+                    if (kind != reversibleKind4) {
+                        if ((s32) kind < 5) {
                             var_v0 = 0;
-                            if (temp_a0 != reversibleKind1) {
+                            if (kind != reversibleKind1) {
 
                             } else {
                                 goto block_14;
                             }
                         } else {
                             var_v0 = 0;
-                            if (temp_a0 == reversibleKind7) {
+                            if (kind == reversibleKind7) {
                                 goto block_14;
                             }
                         }
@@ -81,7 +81,7 @@ block_14:
                         var_a3 += 1;
                     }
                 }
-                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (var_s7 != NULL) && (navigation_point_flags(var_s7) & 2)) {
+                if ((arg2 != noRoom) && (temp_v1_3->first == arg1) && (temp_v1_3->second == arg2) && (point != NULL) && (navigation_point_flags(point) & 2)) {
                     *var_a3 = arg2;
                     var_a3 += 1;
                     var_s4 += 1;
@@ -119,23 +119,23 @@ block_32:
                     }
                 }
             }
-            var_t0 += 1;
-        } while (var_t0 < arg0->m_nNavLinks);
+            k += 1;
+        } while (k < graph->m_nNavLinks);
     }
     if (arg2 == -1) return var_s4;
-    if (var_s7 != 0) {
-            for (var_s5 = 0; var_s5 < var_s4 - 1; var_s5++) {
-                for (var_s2 = var_s5 + 1; var_s2 < var_s4; var_s2++) {
-                    NavigationBuffer *table = arg0->points;
-                    s32 firstIndex = arg3[var_s5] * table->stride;
-                    s32 secondIndex = arg3[var_s2] * table->stride;
+    if (point != 0) {
+            for (j = 0; j < var_s4 - 1; j++) {
+                for (i = j + 1; i < var_s4; i++) {
+                    NavigationBuffer *table = graph->points;
+                    s32 firstIndex = arg3[j] * table->stride;
+                    s32 secondIndex = arg3[i] * table->stride;
                     void *first = table->data + firstIndex;
                     void *other = table->data + secondIndex;
-                    f32 distance = func_802726BC_de(&var_s7->position.x, first);
-                    if (func_802726BC_de(&var_s7->position.x, other) < distance) {
-                        s32 saved = arg3[var_s5];
-                        arg3[var_s5] = arg3[var_s2];
-                        arg3[var_s2] = saved;
+                    f32 distance = func_802726BC_de(&point->position.x, first);
+                    if (func_802726BC_de(&point->position.x, other) < distance) {
+                        s32 saved = arg3[j];
+                        arg3[j] = arg3[i];
+                        arg3[i] = saved;
                     }
                 }
             }
@@ -272,7 +272,7 @@ static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s3
     return count;
 }
 
-s32 func_8020BE80_de(CNavData *arg0, s32 arg1, u8 arg2, s32 arg3) {
+s32 func_8020BE80_de(CNavData *graph, s32 arg1, u8 arg2, s32 arg3) {
     s32 sp20[64];
     s32 sp120[64];
     f32 sp220;
@@ -280,7 +280,7 @@ s32 func_8020BE80_de(CNavData *arg0, s32 arg1, u8 arg2, s32 arg3) {
     f32 var_fs0;
     NavigationBuffer *temp_a1;
     NavigationBuffer *temp_a2;
-    NavigationBuffer *temp_v1_2;
+    NavigationBuffer *points;
     NavigationBuffer *temp_v1_3;
     s32 *var_a0_2;
     s32 *var_a1;
@@ -288,7 +288,7 @@ s32 func_8020BE80_de(CNavData *arg0, s32 arg1, u8 arg2, s32 arg3) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 var_a0;
-    s32 var_fp;
+    s32 result;
     s32 var_s0;
     s32 var_t0;
     s32 var_t1;
@@ -296,13 +296,13 @@ s32 func_8020BE80_de(CNavData *arg0, s32 arg1, u8 arg2, s32 arg3) {
     NavigationPortal *temp_v1;
     NavigationPortal *temp_v1_4;
 
-    var_fp = -1;
+    result = -1;
     var_s0 = 0;
-    temp_v0 = arg0->m_nNavLinks;
+    temp_v0 = graph->m_nNavLinks;
     var_fs0 = D_800C1D70_de;
     if (temp_v0 > 0) {
         s32 stride;
-        temp_a1 = arg0->m_pusNavLinks;
+        temp_a1 = graph->m_pusNavLinks;
         stride = temp_a1->stride;
         var_a0 = 8;
         do {
@@ -313,19 +313,19 @@ s32 func_8020BE80_de(CNavData *arg0, s32 arg1, u8 arg2, s32 arg3) {
         } while (var_s0 < temp_v0);
     }
 block_7:
-    temp_v1_2 = arg0->points;
-    sp224 = navigationRecord(temp_v1_2, arg1);
-    var_t1 = navigationNeighbors(arg0, arg1, sp20, sp120);
+    points = graph->points;
+    sp224 = navigationRecord(points, arg1);
+    var_t1 = navigationNeighbors(graph, arg1, sp20, sp120);
     for (var_s0 = 0; var_s0 < var_t1; var_s0++) {
-        NavigationBuffer *table = arg0->points;
+        NavigationBuffer *table = graph->points;
         sp220 = func_802726BC_de(sp224, navigationRecord(table, sp20[var_s0]));
-        temp_v0_2 = func_8020C078_de(arg0, arg1, sp20[var_s0], (u8)arg2, arg3 - 1, &sp220, var_fs0);
+        temp_v0_2 = func_8020C078_de(graph, arg1, sp20[var_s0], (u8)arg2, arg3 - 1, &sp220, var_fs0);
         if (temp_v0_2 != -1) {
             var_fs0 = sp220;
-            var_fp = temp_v0_2;
+            result = temp_v0_2;
         }
     }
-    return var_fp;
+    return result;
 }
 #else
 INCLUDE_ASM("span_1000", func_8020BE80_de);
@@ -338,7 +338,7 @@ INCLUDE_ASM("span_1000", func_8020BE80_de);
 extern f32 D_800C1D74_de;
 #include "TYPES.H"
 f32 func_802726BC_de(void *a, void *b);
-s32 func_8020C078_de(CNavData *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 *arg5, f32 arg6) {
+s32 func_8020C078_de(CNavData *graph, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 *arg5, f32 arg6) {
     s32 sp20[64];
     s32 sp120[64];
     f32 sp220;
@@ -348,28 +348,28 @@ s32 func_8020C078_de(CNavData *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 
     f32 var_fs0;
     NavigationBuffer *temp_a0;
     NavigationBuffer *temp_a2;
-    NavigationBuffer *temp_v1_2;
+    NavigationBuffer *points;
     NavigationBuffer *temp_v1_3;
     s32 *var_a0_2;
     s32 *var_a2;
     s32 *var_s1;
     s32 temp_v0;
     s32 var_a0;
-    s32 var_fp;
+    s32 result;
     s32 var_s0;
-    s32 var_t0;
+    s32 i;
     s32 var_t1;
     s32 var_v0;
     NavigationPortal *temp_v1;
     NavigationPortal *temp_v1_4;
 
     var_fs0 = D_800C1D74_de;
-    var_fp = -1;
+    result = -1;
     var_s0 = 0;
-    temp_v0 = arg0->m_nNavLinks;
+    temp_v0 = graph->m_nNavLinks;
     if (temp_v0 > 0) {
         s32 stride;
-        temp_a2 = arg0->m_pusNavLinks;
+        temp_a2 = graph->m_pusNavLinks;
         stride = temp_a2->stride;
         var_a0 = 8;
         do {
@@ -380,54 +380,54 @@ s32 func_8020C078_de(CNavData *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 
         } while (var_s0 < temp_v0);
     }
 block_5:
-    var_t0 = 0;
+    i = 0;
     if (arg4 == 0) {
         return -1;
     }
-    temp_v1_2 = arg0->points;
+    points = graph->points;
     var_t1 = 0;
     var_a0_2 = sp20;
-    temp_s4 = navigationRecord(temp_v1_2, arg1);
-    if (arg0->m_nNavLinks > 0) {
+    temp_s4 = navigationRecord(points, arg1);
+    if (graph->m_nNavLinks > 0) {
         var_a2 = sp120;
         do {
-            temp_v1_3 = arg0->m_pusNavLinks;
-            temp_v1_4 = navigationRecord(temp_v1_3, var_t0);
+            temp_v1_3 = graph->m_pusNavLinks;
+            temp_v1_4 = navigationRecord(temp_v1_3, i);
             if (temp_v1_4->first == arg1) {
                 var_t1 += 1;
                 *var_a0_2 = (s32) temp_v1_4->second;
-                *var_a2 = var_t0;
+                *var_a2 = i;
                 var_a2 += 1;
                 var_a0_2 += 1;
             }
             if (temp_v1_4->second == arg1) {
                 var_t1 += 1;
                 *var_a0_2 = (s32) temp_v1_4->first;
-                *var_a2 = var_t0;
+                *var_a2 = i;
                 var_a2 += 1;
                 var_a0_2 += 1;
             }
-            var_t0 += 1;
-        } while (var_t0 < arg0->m_nNavLinks);
+            i += 1;
+        } while (i < graph->m_nNavLinks);
     }
     for (var_s0 = 0; var_s0 < var_t1; var_s0++) {
-        NavigationBuffer *table = arg0->points;
+        NavigationBuffer *table = graph->points;
         void *point = navigationRecord(table, sp20[var_s0]);
         if (point != temp_s4) {
             sp220 = *arg5 + func_802726BC_de(temp_s4, point);
             if (sp220 < arg6) {
-                var_v0 = func_8020C078_de(arg0, arg2, sp20[var_s0], (u8)arg3, arg4 - 1, &sp220, arg6);
+                var_v0 = func_8020C078_de(graph, arg2, sp20[var_s0], (u8)arg3, arg4 - 1, &sp220, arg6);
             } else var_v0 = -1;
             if (var_v0 != -1 && sp220 < var_fs0) {
                 var_fs0 = sp220;
-                var_fp = var_v0;
+                result = var_v0;
             }
         }
     }
     if (var_fs0 < arg6) {
         *arg5 = var_fs0;
     }
-    return var_fp;
+    return result;
 }
 #else
 INCLUDE_ASM("span_1000", func_8020C078_de);

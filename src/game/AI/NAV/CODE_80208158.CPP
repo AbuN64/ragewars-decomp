@@ -130,7 +130,7 @@ extern f32 D_800C1BCC_de;
 extern f32 D_800C1BD0_de;
 extern f32 D_800C1BD4_de;
 extern f32 D_800C1BD8_de;
-void Nav_SteerAlongRoute(AiController *arg0) {
+void Nav_SteerAlongRoute(AiController *controller) {
     CNavData *graph = &D_8013B364;
     CVector3 delta;
     Player *player;
@@ -151,149 +151,149 @@ void Nav_SteerAlongRoute(AiController *arg0) {
     s32 riding;
     s32 moving;
 
-    player = arg0->player;
-    if (arg0->mode != -1) {
-        arg0->unk300 = 0;
-        arg0->unk310 = 0;
-        arg0->unk304 = 0;
-        arg0->unk308 = 0;
-        arg0->unk30C = 0;
-        if (arg0->queue[0] != -1) {
-                point = func_8020C994_de(graph, arg0->queue[0]);
-                pos = &arg0->player->pos;
+    player = controller->player;
+    if (controller->mode != -1) {
+        controller->unk300 = 0;
+        controller->unk310 = 0;
+        controller->unk304 = 0;
+        controller->unk308 = 0;
+        controller->unk30C = 0;
+        if (controller->queue[0] != -1) {
+                point = func_8020C994_de(graph, controller->queue[0]);
+                pos = &controller->player->pos;
                 distance = func_802726F8_de(pos, point);
-                arg0->unk304 = (navigation_attributes(point) & 0x300000) != 0;
-                if (arg0->queue[0] == arg0->current) {
-                    link = func_8020CC0C_de(graph, arg0->previous, arg0->queue[0]);
+                controller->unk304 = (navigation_attributes(point) & 0x300000) != 0;
+                if (controller->queue[0] == controller->current) {
+                    link = func_8020CC0C_de(graph, controller->previous, controller->queue[0]);
                 } else {
-                    link = func_8020CC0C_de(graph, arg0->current, arg0->queue[0]);
+                    link = func_8020CC0C_de(graph, controller->current, controller->queue[0]);
                 }
                 if (link > 0) {
                     portal = func_8020C9B0_de(graph, link);
                     if (portal->kind == 4) {
-                        arg0->unk30C = 1;
+                        controller->unk30C = 1;
                     }
                     if (portal->kind == 8) {
-                        func_802726F8_de(pos, func_8020C994_de(graph, arg0->current));
-                        goal = func_8020C994_de(graph, arg0->queue[0]);
-                        arg0->unk308 = 1;
-                        if (link != arg0->unk32C) {
-                            arg0->unk314 = 0;
-                            arg0->unk32C = link;
+                        func_802726F8_de(pos, func_8020C994_de(graph, controller->current));
+                        goal = func_8020C994_de(graph, controller->queue[0]);
+                        controller->unk308 = 1;
+                        if (link != controller->unk32C) {
+                            controller->unk314 = 0;
+                            controller->unk32C = link;
                         }
-                        if (arg0->unk314 == 0) {
-                            start = func_8020C994_de(graph, arg0->current);
+                        if (controller->unk314 == 0) {
+                            start = func_8020C994_de(graph, controller->current);
                             func_80271F68_de(&delta, pos, &start->position);
                             if (!(func_802B72B0_de(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
-                                arg0->destination = start->position;
+                                controller->destination = start->position;
                                 return;
                             }
-                            arg0->unk314 = 1;
+                            controller->unk314 = 1;
                         }
-                        if (arg0->unk314 == 1) {
-                            arg0->destination = goal->position;
-                            offset = func_80209308_de(arg0, &arg0->destination, 2.0f, 0.0f);
+                        if (controller->unk314 == 1) {
+                            controller->destination = goal->position;
+                            offset = func_80209308_de(controller, &controller->destination, 2.0f, 0.0f);
                             if (offset < 0.0f ? D_800C1BBC_de < -offset : D_800C1BC0_de < offset) {
-                                arg0->unk310 = 1;
+                                controller->unk310 = 1;
                                 return;
                             }
-                            arg0->unk314 = 2;
+                            controller->unk314 = 2;
                         }
-                        if (arg0->unk314 == 2) {
-                            arg0->destination = goal->position;
-                            arg0->unk314 = 3;
+                        if (controller->unk314 == 2) {
+                            controller->destination = goal->position;
+                            controller->unk314 = 3;
                             return;
                         }
-                        if (arg0->unk314 == 3) {
-                            arg0->destination = goal->position;
-                            arg0->unk314 = 4;
+                        if (controller->unk314 == 3) {
+                            controller->destination = goal->position;
+                            controller->unk314 = 4;
                             return;
                         }
-                        if (arg0->unk314 == 4) {
-                            arg0->destination = goal->position;
-                            arg0->unk314 = 5;
+                        if (controller->unk314 == 4) {
+                            controller->destination = goal->position;
+                            controller->unk314 = 5;
                             return;
                         }
-                        if (arg0->unk314 == 5) {
-                            arg0->destination = goal->position;
+                        if (controller->unk314 == 5) {
+                            controller->destination = goal->position;
                             player->actionFlags |= 0x10;
-                            arg0->unk314 = 6;
+                            controller->unk314 = 6;
                             return;
                         }
-                        if (arg0->unk314 == 6) {
+                        if (controller->unk314 == 6) {
                             {
                             s32 jumping, falling;
-                            moving = arg0->player->movementFlags;
+                            moving = controller->player->movementFlags;
                             jumping = moving & 0x2000;
                             falling = moving & 0x1000;
                             if (jumping || falling) {
-                                arg0->unk314 = 2;
+                                controller->unk314 = 2;
                             }
                             }
-                            arg0->destination = goal->position;
+                            controller->destination = goal->position;
                         }
                     } else if (portal->kind == 5) {
-                        if (arg0->unk314 == 0) {
-                            entry = func_8020C994_de(graph, arg0->current);
+                        if (controller->unk314 == 0) {
+                            entry = func_8020C994_de(graph, controller->current);
                             if (!(func_802726F8_de(pos, entry) < D_800C1BC4_de)) {
-                                arg0->destination = entry->position;
+                                controller->destination = entry->position;
                                 return;
                             }
-                            arg0->unk314 = 1;
+                            controller->unk314 = 1;
                         }
-                        if (arg0->unk314 == 1) {
-                            node = func_8020CFE0_de(graph, arg0->current);
+                        if (controller->unk314 == 1) {
+                            node = func_8020CFE0_de(graph, controller->current);
                             if (func_802726F8_de(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
-                                arg0->destination = node->platform->pos;
+                                controller->destination = node->platform->pos;
                                 player->actionFlags |= 0x10;
-                                arg0->unk314 = 2;
+                                controller->unk314 = 2;
                                 return;
                             }
-                            arg0->destination = node->endpoint;
-                            arg0->unk310 = 1;
+                            controller->destination = node->endpoint;
+                            controller->unk310 = 1;
                         }
-                        if (arg0->unk314 == 2) {
+                        if (controller->unk314 == 2) {
                             riding = 0;
-                            ground = func_8024E6A0_de(arg0->player);
+                            ground = func_8024E6A0_de(controller->player);
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
-                            func_80271F68_de(&delta, pos, &func_8020CFE0_de(graph, arg0->current)->platform->pos);
+                            func_80271F68_de(&delta, pos, &func_8020CFE0_de(graph, controller->current)->platform->pos);
                             gap = func_802B72B0_de(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
-                                arg0->unk314 = 3;
+                                controller->unk314 = 3;
                             } else {
-                                arg0->destination = func_8020CFE0_de(graph, arg0->current)->platform->pos;
+                                controller->destination = func_8020CFE0_de(graph, controller->current)->platform->pos;
                                 return;
                             }
                         }
-                        if (arg0->unk314 == 3) {
+                        if (controller->unk314 == 3) {
                             riding = 0;
-                            ground = func_8024E6A0_de(arg0->player);
+                            ground = func_8024E6A0_de(controller->player);
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
                             if (riding == 0) {
-                                arg0->unk314 = 0;
+                                controller->unk314 = 0;
                             }
-                            point = func_8020C994_de(graph, arg0->queue[0]);
-                            node = func_8020CFE0_de(graph, arg0->queue[0]);
+                            point = func_8020C994_de(graph, controller->queue[0]);
+                            node = func_8020CFE0_de(graph, controller->queue[0]);
                             if (func_802726F8_de(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
-                                arg0->destination = point->position;
+                                controller->destination = point->position;
                                 player->actionFlags |= 0x10;
                             } else {
-                                arg0->destination = point->position;
-                                arg0->unk310 = 1;
+                                controller->destination = point->position;
+                                controller->unk310 = 1;
                                 return;
                             }
                         }
                     } else {
-                        arg0->unk314 = 0;
+                        controller->unk314 = 0;
                     }
                 } else {
-                    arg0->unk314 = 0;
+                    controller->unk314 = 0;
                 }
-                if (arg0->queue[1] == -1) {
+                if (controller->queue[1] == -1) {
                     reach = D_800C1BD8_de;
                 } else {
                     reach = D_800C1BD4_de;
@@ -301,26 +301,26 @@ void Nav_SteerAlongRoute(AiController *arg0) {
                         reach = D_800C1BD8_de;
                     }
                 }
-                if (distance < reach && arg0->current == arg0->queue[0]) {
-                    if (func_80209828_de(arg0) == 0) {
+                if (distance < reach && controller->current == controller->queue[0]) {
+                    if (func_80209828_de(controller) == 0) {
                         return;
                     }
                 }
         } else {
-            arg0->unk300 = 1;
+            controller->unk300 = 1;
             return;
         }
     } else {
-        arg0->unk300 = 1;
+        controller->unk300 = 1;
         return;
     }
-    if (arg0->queue[0] != -1) {
-        point = func_8020C994_de(graph, arg0->queue[0]);
+    if (controller->queue[0] != -1) {
+        point = func_8020C994_de(graph, controller->queue[0]);
         if (navigation_point_flags(point) & 2) {
-            arg0->destination = arg0->home;
+            controller->destination = controller->home;
             return;
         }
-        arg0->destination = point->position;
+        controller->destination = point->position;
     }
 }
 
@@ -363,7 +363,7 @@ static __inline__ void navigationTurnRight(CVector3 *v) {
     v->z = -v->y;
     v->y = 0.0f;
 }
-void func_80208AAC_de(AiController *arg0) {
+void func_80208AAC_de(AiController *controller) {
     CNavData *graph;
     CVector3 *playerPosition;
     CVector3 sp10;
@@ -371,7 +371,7 @@ void func_80208AAC_de(AiController *arg0) {
     CVector3 v30;
     CVector3 v40;
     NavigationPoint *temp_v0_3;
-    Player *temp_v0;
+    Player *player;
     CVector3 *temp_s0;
     f32 temp_fa0;
     f32 temp_fa1;
@@ -391,53 +391,53 @@ void func_80208AAC_de(AiController *arg0) {
     f32 temp_fv1f;
     s32 temp_s3;
     s32 temp_s6;
-    s32 temp_v0_2;
+    s32 movementFlags;
 
-    if (arg0->unk300 == 0) {
-        temp_s0 = &arg0->destination;
-        temp_v0 = arg0->player;
-        playerPosition = &temp_v0->pos;
-        temp_v0_2 = temp_v0->movementFlags;
-        temp_s6 = temp_v0_2 & 0x2000;
-        temp_s3 = temp_v0_2 & 0x1000;
+    if (controller->unk300 == 0) {
+        temp_s0 = &controller->destination;
+        player = controller->player;
+        playerPosition = &player->pos;
+        movementFlags = player->movementFlags;
+        temp_s6 = movementFlags & 0x2000;
+        temp_s3 = movementFlags & 0x1000;
         func_80271F68_de(&sp10, temp_s0, playerPosition);
         temp_fv0f = func_802B72B0_de((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
         graph = &D_8013B364;
         if (temp_s3 != 0) {
             if (D_800C1BDC_de < temp_fv0f) {
                 value = 0.0f;
-                temp_fs0f = func_80209308_de(arg0, temp_s0, 2.0f, value);
+                temp_fs0f = func_80209308_de(controller, temp_s0, 2.0f, value);
                 if (temp_fs0f < value) {
                     if (-temp_fs0f < D_800C1BE0_de) {
                         goto block_7;
                     }
                 } else if (temp_fs0f < D_800C1BE4_de) {
 block_7:
-                    temp_v0->forward = D_800C1BE8_de;
+                    player->forward = D_800C1BE8_de;
                 }
-                if (((temp_s6 != 0) || (temp_s3 != 0)) && (arg0->unk304 != 0)) {
+                if (((temp_s6 != 0) || (temp_s3 != 0)) && (controller->unk304 != 0)) {
                     value = sp10.y;
-                    func_80209910_de(arg0, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
-                    temp_v0->forward = D_800C1BEC_de;
+                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
+                    player->forward = D_800C1BEC_de;
                 }
             }
         } else {
             value = 0.0f;
-            func_80209308_de(arg0, temp_s0, 2.0f, value);
-            temp_fs0f = arg0->player->heading + D_800C1BF0_de;
+            func_80209308_de(controller, temp_s0, 2.0f, value);
+            temp_fs0f = controller->player->heading + D_800C1BF0_de;
             v30.x = func_802B7130_de(temp_fs0f);
             v30.y = value;
             v30.z = func_802B6560_de(temp_fs0f);
-            temp_fs0f = func_8029C044_de(arg0->destination.z - playerPosition->z, arg0->destination.x - playerPosition->x);
+            temp_fs0f = func_8029C044_de(controller->destination.z - playerPosition->z, controller->destination.x - playerPosition->x);
             v20.x = func_802B6560_de(temp_fs0f);
             v20.y = value;
             temp_fv0_3 = func_802B7130_de(temp_fs0f);
             v20.z = temp_fv0_3;
-            temp_v0->forward = (v20.x * v30.x) + (v20.y * v30.y) + (temp_fv0_3 * v30.z);
-            temp_v0_3 = func_8020C994_de(graph, arg0->current);
+            player->forward = (v20.x * v30.x) + (v20.y * v30.y) + (temp_fv0_3 * v30.z);
+            temp_v0_3 = func_8020C994_de(graph, controller->current);
             v40 = temp_v0_3->position;
-            v40.x -= arg0->destination.x;
-            v40.z -= arg0->destination.z;
+            v40.x -= controller->destination.x;
+            v40.z -= controller->destination.z;
             navigationTurnLeft(&v40);
             value = func_8029C044_de(v40.z, v40.x);
             v40.x = func_802B6560_de(value);
@@ -458,23 +458,23 @@ block_7:
             v40.x = temp_ft0;
             v40.z = temp_fv1_2;
             v40.z = temp_fv0f_3;
-            temp_v0->strafe = temp_fv0f_3;
+            player->strafe = temp_fv0f_3;
         }
-        if (((temp_s6 != 0) || (temp_s3 != 0)) && (arg0->unk304 != 0)) {
+        if (((temp_s6 != 0) || (temp_s3 != 0)) && (controller->unk304 != 0)) {
             value = sp10.y;
-                    func_80209910_de(arg0, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
-            temp_v0->forward = D_800C1BF4_de;
+                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
+            player->forward = D_800C1BF4_de;
         }
-        if (arg0->player->pose == 0xF) {
-            if (arg0->destination.y < playerPosition->y) {
-                temp_v0->forward = D_800C1BF8_de;
+        if (controller->player->pose == 0xF) {
+            if (controller->destination.y < playerPosition->y) {
+                player->forward = D_800C1BF8_de;
             } else {
-                temp_v0->forward = D_800C1BFC;
+                player->forward = D_800C1BFC;
             }
         }
-        if (arg0->unk310 != 0) {
-            temp_v0->strafe = 0.0f;
-            temp_v0->forward = 0.0f;
+        if (controller->unk310 != 0) {
+            player->strafe = 0.0f;
+            player->forward = 0.0f;
         }
     }
 }
@@ -509,7 +509,7 @@ extern f32 D_800C1C18;
 extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
-void func_80208EB0_de(AiController *arg0) {
+void func_80208EB0_de(AiController *controller) {
     CNavData *graph;
     CVector3 *playerPosition;
     CVector3 sp10;
@@ -538,20 +538,20 @@ void func_80208EB0_de(AiController *arg0) {
     s32 temp_s6;
     s32 temp_v0_2;
 
-    temp_v1 = arg0->target;
+    temp_v1 = controller->target;
     if (temp_v1 == 0) {
         goto block_6;
     }
-    if ((arg0->unk308 != 0) || (arg0->unk30C != 0) || (arg0->unk314 != 0)) {
+    if ((controller->unk308 != 0) || (controller->unk30C != 0) || (controller->unk314 != 0)) {
 block_6:
-        func_80209308_de(arg0, &arg0->destination, 2.0f, 0.0f);
+        func_80209308_de(controller, &controller->destination, 2.0f, 0.0f);
     } else {
-        func_80209308_de(arg0, &temp_v1->player->pos, 2.0f, 0.0f);
-        func_80209E80_de(arg0);
+        func_80209308_de(controller, &temp_v1->player->pos, 2.0f, 0.0f);
+        func_80209E80_de(controller);
     }
-    if (arg0->unk300 == 0) {
-        temp_s2 = &arg0->destination;
-        temp_v0 = arg0->player;
+    if (controller->unk300 == 0) {
+        temp_s2 = &controller->destination;
+        temp_v0 = controller->player;
         playerPosition = &temp_v0->pos;
         temp_v0_2 = temp_v0->movementFlags;
         temp_s6 = temp_v0_2 & 0x2000;
@@ -562,7 +562,7 @@ block_6:
         if (temp_s4 != 0) {
             if (D_800C1C00 < temp_fv0f) {
                 value = 0.0f;
-                temp_fs0f = func_80209308_de(arg0, temp_s2, 2.0f, value);
+                temp_fs0f = func_80209308_de(controller, temp_s2, 2.0f, value);
                 if (temp_fs0f < value) {
                     if (-temp_fs0f < D_800C1C04) {
                         goto block_15;
@@ -571,24 +571,24 @@ block_6:
 block_15:
                     temp_v0->forward = D_800C1C0C;
                 }
-                if (((temp_s6 != 0) || (temp_s4 != 0)) && (arg0->unk304 != 0)) {
+                if (((temp_s6 != 0) || (temp_s4 != 0)) && (controller->unk304 != 0)) {
                     value = sp10.y;
-                    func_80209910_de(arg0, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
+                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
                     temp_v0->forward = D_800C1C10;
                 }
             }
         } else {
-            temp_fs0f = arg0->player->heading + D_800C1C14;
+            temp_fs0f = controller->player->heading + D_800C1C14;
             v30.x = func_802B7130_de(temp_fs0f);
             v30.y = 0.0f;
             v30.z = func_802B6560_de(temp_fs0f);
-            v20.x = arg0->destination.x - playerPosition->x;
+            v20.x = controller->destination.x - playerPosition->x;
             v20.y = 0.0f;
-            v20.z = arg0->destination.z - playerPosition->z;
-            temp_v0_3 = func_8020C994_de(graph, arg0->current);
+            v20.z = controller->destination.z - playerPosition->z;
+            temp_v0_3 = func_8020C994_de(graph, controller->current);
             v40 = temp_v0_3->position;
-            v40.x -= arg0->destination.x;
-            v40.z -= arg0->destination.z;
+            v40.x -= controller->destination.x;
+            v40.z -= controller->destination.z;
             navigationTurnLeft(&v40);
             value = func_8029C044_de(v40.z, v40.x);
             v40.x = func_802B6560_de(value);
@@ -607,19 +607,19 @@ block_15:
             navigationTurnRight(&v30);
             temp_v0->strafe = extra.x * v30.x + extra.z * v30.z;
         }
-        if (((temp_s6 != 0) || (temp_s4 != 0)) && (arg0->unk304 != 0)) {
+        if (((temp_s6 != 0) || (temp_s4 != 0)) && (controller->unk304 != 0)) {
             value = sp10.y;
-                    func_80209910_de(arg0, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
+                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
             temp_v0->forward = D_800C1C18;
         }
-        if (arg0->player->pose == 0xF) {
-            if (arg0->destination.y < playerPosition->y) {
+        if (controller->player->pose == 0xF) {
+            if (controller->destination.y < playerPosition->y) {
                 temp_v0->forward = D_800C1C1C;
             } else {
                 temp_v0->forward = D_800C1C20;
             }
         }
-        if (arg0->unk310 != 0) {
+        if (controller->unk310 != 0) {
             temp_v0->strafe = 0.0f;
             temp_v0->forward = 0.0f;
         }

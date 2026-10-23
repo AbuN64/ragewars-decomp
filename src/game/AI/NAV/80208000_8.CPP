@@ -248,12 +248,12 @@ s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     return result == 0;
 }
 
-void *func_8020CFE0_de(char *object, s32 arg1) {
+void *func_8020CFE0_de(char *object, s32 current) {
     CNavData *graph = (CNavData *)object;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
         do {
-            if (record->key == arg1) {
+            if (record->key == current) {
                 return record;
             }
             record = record->next;
