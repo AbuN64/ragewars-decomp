@@ -53,19 +53,43 @@ typedef struct GameRecord80445074 {
     u8 flag2B;
     u8 enabled[10];
     u8 pad36[4];
-    SlotSettings80445074 slots[9];
+    SlotSettings80445074 defaultSlot;
+    SlotSettings80445074 slots[8];
     u8 flag580;
 } GameRecord80445074;
 
 extern f32 D_800E2798;
 
+static __inline__ void resetPlayerSlot(SlotSettings80445074 *slot, u8 index) {
+        slot->f78 = 0;
+        slot->f79 = 0x86;
+        slot->f7A = 0x84;
+        slot->f7C = 0;
+        slot->f7B = 0;
+        slot->f7D = 1;
+        slot->f7E = 0;
+        slot->f7F = index;
+        slot->f80 = 0;
+        slot->f82 = 0;
+        slot->f83 = 0;
+        slot->f81 = 0;
+        slot->f94 = 0;
+        slot->f95 = 0;
+        RESET_SLOT_80445074((u8 *)slot);
+}
+
+/* 17/117 aligned edits; remaining: enabled-loop induction and header word stores. */
 void Items_ResetGameOptions(GameRecord80445074 *game) {
     s32 i;
+    u8 initialHudByte;
+    f32 speed;
 
     game->colorR = 0x80;
     game->colorG = 0xFA;
     game->colorB = 0xFF;
     game->options = 0x80;
+    initialHudByte = (u8)game->options;
+    speed = D_800E2798;
     game->mode = 0x10;
     game->flags = 0;
     game->next = 0;
@@ -86,8 +110,8 @@ void Items_ResetGameOptions(GameRecord80445074 *game) {
     game->flag29 = 0;
     game->flag2A = 0;
     game->flag2B = 1;
-    game->hudCopy = (u8)game->options;
-    game->speedFactor = D_800E2798;
+    game->hudCopy = initialHudByte;
+    game->speedFactor = speed;
     for (i = 9; i >= 0; i--) {
         game->enabled[i] = 1;
     }
@@ -96,42 +120,27 @@ void Items_ResetGameOptions(GameRecord80445074 *game) {
     game->pad36[2] = 0;
     game->pad36[3] = 3;
     for (i = 0; i < 8; i++) {
-        SlotSettings80445074 *s = &game->slots[i + 1];
-        s->f78 = 0;
-        s->f79 = 0x86;
-        s->f7A = 0x84;
-        s->f7C = 0;
-        s->f7B = 0;
-        s->f7D = 1;
-        s->f7E = 0;
-        s->f7F = i;
-        s->f80 = 0;
-        s->f82 = 0;
-        s->f83 = 0;
-        s->f81 = 0;
-        s->f94 = 0;
-        s->f95 = 0;
-        RESET_SLOT_80445074((u8 *)s);
+        resetPlayerSlot(&game->slots[i], i);
     }
     {
-        SlotSettings80445074 *s = &game->slots[0];
-        s->f79 = 0x86;
-        s->f78 = 0;
-        s->f7A = 0x84;
-        s->f7C = 0;
-        s->f7B = 0;
-        s->f7D = 1;
-        s->f7E = 0;
-        s->f7F = 0;
-        s->f80 = 0;
-        s->f82 = 0;
-        s->f83 = 0;
-        s->f81 = 0;
-        s->f94 = 0;
-        s->f95 = 0;
-        RESET_SLOT_80445074((u8 *)s);
+        SlotSettings80445074 *slot = &game->defaultSlot;
+        slot->f79 = 0x86;
+        slot->f78 = 0;
+        slot->f7A = 0x84;
+        slot->f7C = 0;
+        slot->f7B = 0;
+        slot->f7D = 1;
+        slot->f7E = 0;
+        slot->f7F = 0;
+        slot->f80 = 0;
+        slot->f82 = 0;
+        slot->f83 = 0;
+        slot->f81 = 0;
+        slot->f94 = 0;
+        slot->f95 = 0;
+        RESET_SLOT_80445074((u8 *)slot);
     }
-    game->slots[0].f78 = 1;
+    game->defaultSlot.f78 = 1;
     game->field1D = 0;
     game->field1E = 1;
     game->field0D = 0;
