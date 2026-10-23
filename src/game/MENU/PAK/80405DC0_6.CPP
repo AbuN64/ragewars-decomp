@@ -142,7 +142,18 @@ void func_80405F48_de(Shared_PakMenu *menu) {
 }
 #endif
 
-#ifdef NON_MATCHING
+extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
+static __inline__ char *pakPrompt(s32 *channel) {
+    char *result;
+    switch (*channel) {
+    case 0:
+    default: result = D_00450BF0_de; break;
+    case 1: result = D_00450C14_de; break;
+    case 2: result = D_00450C38_de; break;
+    case 3: result = D_00450C5C_de; break;
+    }
+    return result;
+}
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
@@ -157,24 +168,22 @@ extern void func_80442574_de(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char 
 s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 {
     s32 result, busy, slot;
-    char *prompt = 0;
+    char *prompt, *sel;
     char *message;
     func_80404E28_de(channel);
     result = func_80404F04_de(channel);
+    sel = 0;
     if (D_8014D4C0_de) {
         if (D_8014D4EC_de) {
             if (D_8015375C) slot = D_800E28C8;
             else slot = menu->slot->unk4;
-            if (slot == 1) prompt = D_00450C14_de;
-            else if (slot < 2) prompt = D_00450BF0_de;
-            else if (slot == 2) prompt = D_00450C38_de;
-            else if (slot == 3) prompt = D_00450C5C_de;
-            else prompt = D_00450BF0_de;
+            sel = pakPrompt(&slot);
         }
     } else if (D_80153760) {
-        prompt = D_0044FFA4;
-        if (D_8014D4EC_de) prompt = D_0044FB50;
-    } else if (D_8015375C) prompt = D_0044E4F8;
+        sel = D_0044FFA4;
+        if (D_8014D4EC_de) sel = D_0044FB50;
+    } else if (D_8015375C) sel = D_0044E4F8;
+    prompt = sel;
     if (!prompt) return 0;
     busy = func_80264580_de(channel);
     if ((result == 0 || busy != 0) && result != -2) {
@@ -188,8 +197,8 @@ s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
         D_80153784 = 1;
         if (D_8015375C) message = D_0044E9E4;
         else {
-            message = D_0044EA2C;
             if (D_8014D4C0_de) message = D_0044EA08;
+            else message = D_0044EA2C;
         }
         func_80442574_de(D_8014561C, message, menu->player, menu->slot, prompt);
     } else if (!quiet) {
@@ -200,9 +209,6 @@ s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
     } else if (result != -2) result = 0;
     return result;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80406178_de);
-#endif
 
 #include "COMMON/SHAREDPLAYER.H"
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0, D_800E28C8;
@@ -219,17 +225,6 @@ extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
 
-static __inline__ char *pakPrompt(s32 *channel) {
-    char *result;
-    switch (*channel) {
-    case 0:
-    default: result = D_00450BF0_de; break;
-    case 1: result = D_00450C14_de; break;
-    case 2: result = D_00450C38_de; break;
-    case 3: result = D_00450C5C_de; break;
-    }
-    return result;
-}
 
 /* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
    prompt, else probes the Controller Pak; with no pak data it saves the player's profile (flags, four words
