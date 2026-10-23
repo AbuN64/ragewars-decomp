@@ -2560,3 +2560,4 @@ literals_func_80424DE8_de = 0x800E8ED8; // rom:0xE9AD8 size:0xC8
 literals_func_8043D1DC_de = 0x800E9AF8; // rom:0xEA6F8 size:0x2C
 D_auto_rodata_func_8043D1DC_de_800E9B24 = 0x800E9B24; // rom:0xEA724
 literals_func_80261E98_de = 0x800C44E8; // rom:0xC50E8 size:0x60
+literals_func_8042FD40_eu_x = 0x800E93A0; // rom:0xE9FA0 size:0x20

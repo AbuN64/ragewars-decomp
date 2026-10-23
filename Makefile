@@ -82,11 +82,11 @@ ASFLAGS := -march=vr4300 -mabi=32 -EB --no-pad-sections -mips3
 define PREPROCESS_gcc_2_7_2_sn64
 $(Q)$(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_7_2_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi
+COMPILE_gcc_2_7_2_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && $(if $(HILO),python3 -I -c "$$HILO_HAZARD" $(@:.o=.s),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi
 define PREPROCESS_gcc_2_8_1_sn64
 $(Q)$(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_8_1_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
+COMPILE_gcc_2_8_1_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && $(if $(HILO),python3 -I -c "$$HILO_HAZARD" $(@:.o=.s),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
 # Per-file facts ([file] rows of config.toml): a toolchain and flags for a path or a directory.
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
@@ -241,6 +241,30 @@ for line in open(path):
 open(path, "w").write("".join(out))
 endef
 export STRIP_ALIGN
+# The R4000 reads HI/LO late: an mfhi/mflo needs two instructions before the next mult/div/mthi/mtlo. The assembler the
+# ROMs were made with wrote two nops where the compiler placed the two back to back (gas lays the gap itself only when
+# one instruction is already between, so here they stay adjacent). A toolchain row's hilo_hazard_nops puts those two
+# nops into the compiler's assembly, only in `.set reorder` text, where the assembler owns the slots.
+define HILO_HAZARD
+import re, sys
+path, out, last, reorder = sys.argv[1], [], None, True
+for line in open(path):
+    text = line.split("#", 1)[0].strip()
+    if text.startswith(".set"):
+        if re.match(r"\.set\s+noreorder\b", text):
+            reorder = False
+        elif re.match(r"\.set\s+reorder\b", text):
+            reorder = True
+    elif text and not text.startswith(".") and not re.match(r"[\w.\x24]+:", text):
+        word = text.split(None, 1)[0]
+        if word in ("mult", "multu", "dmult", "dmultu", "div", "divu", "ddiv", "ddivu", "mthi", "mtlo"):
+            if reorder and last == 0 and (len(text.split(",")) < 3 or word.startswith("m")):
+                out.append("\tnop\n\tnop\n")
+        last = 0 if word in ("mfhi", "mflo") else (None if last is None else last + 1)
+    out.append(line)
+open(path, "w").write("".join(out))
+endef
+export HILO_HAZARD
 # A data piece is the ROM bytes from its address to the next row of splat.yaml: splat drops string padding, a partial
 # last word and whole tiny pieces, so each extracted data file is rewritten as its ROM slice, every label kept at its
 # offset (from the ROM column of the line after it).

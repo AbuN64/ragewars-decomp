@@ -1,5 +1,125 @@
 #include "include_asm.h"
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_US_REV1) || defined(VERSION_EU) || defined(VERSION_DE) || defined(VERSION_EU_X)
+#if defined(VERSION_EU)
+#define func_8042F130_us_rev1 func_8042FBF0_eu
+#elif defined(VERSION_DE)
+#define func_8042F130_us_rev1 func_8042EF50_de
+#elif defined(VERSION_EU_X)
+#define func_8042F130_us_rev1 func_8042FD40_eu_x
+#endif
+/* Sprite ids of the setup screen: the first column is the id in the US rev 1 and EU builds. */
+#if defined(VERSION_DE)
+#define SPRITE_285 0x281
+#elif defined(VERSION_EU_X)
+#define SPRITE_285 0x28A
+#else
+#define SPRITE_285 0x285
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2FB 0x29E
+#elif defined(VERSION_EU_X)
+#define SPRITE_2FB 0x300
+#else
+#define SPRITE_2FB 0x2FB
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2A2 0x2F7
+#elif defined(VERSION_EU_X)
+#define SPRITE_2A2 0x2A7
+#else
+#define SPRITE_2A2 0x2A2
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_286 0x282
+#elif defined(VERSION_EU_X)
+#define SPRITE_286 0x28B
+#else
+#define SPRITE_286 0x286
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_287 0x283
+#elif defined(VERSION_EU_X)
+#define SPRITE_287 0x28C
+#else
+#define SPRITE_287 0x287
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2FC 0x29F
+#elif defined(VERSION_EU_X)
+#define SPRITE_2FC 0x301
+#else
+#define SPRITE_2FC 0x2FC
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2A3 0x2F8
+#elif defined(VERSION_EU_X)
+#define SPRITE_2A3 0x2A8
+#else
+#define SPRITE_2A3 0x2A3
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2FD 0x2F6
+#elif defined(VERSION_EU_X)
+#define SPRITE_2FD 0x302
+#else
+#define SPRITE_2FD 0x2FD
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2FA 0x2F9
+#elif defined(VERSION_EU_X)
+#define SPRITE_2FA 0x2FF
+#else
+#define SPRITE_2FA 0x2FA
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_293 0x289
+#elif defined(VERSION_EU_X)
+#define SPRITE_293 0x28D
+#else
+#define SPRITE_293 0x293
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_296 0x287
+#elif defined(VERSION_EU_X)
+#define SPRITE_296 0x290
+#else
+#define SPRITE_296 0x296
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_288 0x284
+#elif defined(VERSION_EU_X)
+#define SPRITE_288 0x28E
+#else
+#define SPRITE_288 0x288
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_2A1 0x288
+#elif defined(VERSION_EU_X)
+#define SPRITE_2A1 0x28F
+#else
+#define SPRITE_2A1 0x2A1
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_295 0x285
+#elif defined(VERSION_EU_X)
+#define SPRITE_295 0x291
+#else
+#define SPRITE_295 0x295
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_289 0x28A
+#elif defined(VERSION_EU_X)
+#define SPRITE_289 0x292
+#else
+#define SPRITE_289 0x289
+#endif
+#if defined(VERSION_DE)
+#define SPRITE_297 0x294
+#elif defined(VERSION_EU_X)
+#define SPRITE_297 0x29D
+#else
+#define SPRITE_297 0x297
+#endif
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
@@ -124,33 +244,33 @@ s32 func_8042F130_us_rev1(void *screen) {
     block->screen = screen;
     func_8043C210_de(block->setup, 0x67, 0, 0, 0);
     D_800E54A4->menu = func_8041B610_de(screen, 4);
-    func_8041B6E8_de(screen, 0, 0x285);
-    func_8041B6E8_de(screen, 1, 0x285);
-    func_8041B6E8_de(screen, 2, 0x285);
-    func_8041B6E8_de(screen, 3, 0x285);
+    func_8041B6E8_de(screen, 0, SPRITE_285);
+    func_8041B6E8_de(screen, 1, SPRITE_285);
+    func_8041B6E8_de(screen, 2, SPRITE_285);
+    func_8041B6E8_de(screen, 3, SPRITE_285);
     for (i = 0; i < 4; i++) {
         D_800E54A4->counts[i] = 0;
     }
     D_800E54A4->ready = 1;
     D_800E54A4->slots = 4;
-    D_800E54A4->top = func_8040EC30_de(screen, 0x2FB);
+    D_800E54A4->top = func_8040EC30_de(screen, SPRITE_2FB);
     D_800E54A4->top->x -= D_800E54A4->top->w;
     D_800E54A4->topStep = D_800E54A4->top->w / 4;
     rest = D_800E54A4->top->w - D_800E54A4->topStep * 4;
     D_800E54A4->top->x += rest;
-    D_800E54A4->bottom = func_8040EC30_de(screen, 0x2A2);
+    D_800E54A4->bottom = func_8040EC30_de(screen, SPRITE_2A2);
     D_800E54A4->bottom->x += D_800E54A4->bottom->w;
     D_800E54A4->bottomStep = D_800E54A4->bottom->w / 4;
     rest = D_800E54A4->bottom->w - D_800E54A4->bottomStep * 4;
     D_800E54A4->bottom->x -= rest;
-    func_8040EC30_de(screen, 0x286)->alpha = 0x6E;
-    D_800E54A4->music = func_80419E54_de(0x287, 0xFF);
-    D_800E54A4->title = func_8040EC30_de(screen, 0x287);
+    func_8040EC30_de(screen, SPRITE_286)->alpha = 0x6E;
+    D_800E54A4->music = func_80419E54_de(SPRITE_287, 0xFF);
+    D_800E54A4->title = func_8040EC30_de(screen, SPRITE_287);
     func_8040E8D8_de(D_800E54A4->title, 0);
-    D_800E54A4->players[0].sprite = func_8040EC30_de(screen, 0x2FC);
-    D_800E54A4->players[1].sprite = func_8040EC30_de(screen, 0x2A3);
-    D_800E54A4->players[2].sprite = func_8040EC30_de(screen, 0x2FD);
-    D_800E54A4->players[3].sprite = func_8040EC30_de(screen, 0x2FA);
+    D_800E54A4->players[0].sprite = func_8040EC30_de(screen, SPRITE_2FC);
+    D_800E54A4->players[1].sprite = func_8040EC30_de(screen, SPRITE_2A3);
+    D_800E54A4->players[2].sprite = func_8040EC30_de(screen, SPRITE_2FD);
+    D_800E54A4->players[3].sprite = func_8040EC30_de(screen, SPRITE_2FA);
     D_800E54A4->mode = D_800E54A0;
     for (i = 0; i < 4; i++) {
         D_800E54A4->links[i].player = -1;
@@ -159,32 +279,32 @@ s32 func_8042F130_us_rev1(void *screen) {
     }
     switch (D_800E54A4->mode) {
     case 5:
-        sprite = func_8040EC30_de(screen, 0x293);
+        sprite = func_8040EC30_de(screen, SPRITE_293);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 6:
-        sprite = func_8040EC30_de(screen, 0x296);
+        sprite = func_8040EC30_de(screen, SPRITE_296);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 4:
-        sprite = func_8040EC30_de(screen, 0x288);
+        sprite = func_8040EC30_de(screen, SPRITE_288);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 0:
-        sprite = func_8040EC30_de(screen, 0x2A1);
+        sprite = func_8040EC30_de(screen, SPRITE_2A1);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 3:
-        sprite = func_8040EC30_de(screen, 0x295);
+        sprite = func_8040EC30_de(screen, SPRITE_295);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         break;
     case 1:
-        sprite = func_8040EC30_de(screen, 0x289);
+        sprite = func_8040EC30_de(screen, SPRITE_289);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         for (i = 0; i < 4; i++) {
@@ -205,7 +325,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     case 7:
         break;
     case 2:
-        sprite = func_8040EC30_de(screen, 0x297);
+        sprite = func_8040EC30_de(screen, SPRITE_297);
         func_8040E8D8_de(sprite, 1);
         sprite->alpha = 0xFF;
         break;
