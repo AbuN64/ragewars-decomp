@@ -8,10 +8,6 @@ struct ObjectLinks150C;
 typedef struct ObjectLinks150C ObjectLinks150C;
 
 struct IntegerState1504;
-struct IntegerState1504 {
-    char pad0[0x1500];
-    s32 unk_1500;
-};
 
 struct IntegerState1504;
 typedef struct IntegerState1504 IntegerState1504;
@@ -34,20 +30,11 @@ struct ObjectRecAtBC {
 };
 
 struct ObjectRecAt8;
-struct ObjectRecAt8 {
-    u8 pad00[4];
-    s32 count;
-    u8 records[1];
-};
 
 struct ObjRecAt6V2;
 
 
 struct ObjectLinks150C;
-struct ObjectLinks150C {
-    unsigned char padding_0[5384];
-    s32 *unk_1508;
-};
 
 
 struct FloatState64;
