@@ -502,7 +502,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view854_147.unk854 = after->timer;
       }
     }
-    func_8028A27C_de(&D_8011FE88, actor, &prev, &actor->views0.view8_3.pos);
+    Scene_UpdateMovementTriggers(&D_8011FE88, actor, &prev, &actor->views0.view8_3.pos);
     if (hit != 0)
     {
       if ((D_801041F0 != 0) && ((*D_801041F0) == 1))

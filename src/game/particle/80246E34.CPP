@@ -66,7 +66,7 @@ void func_80246E44_de(Actor36 *actor) {
         func_80271F34_de(&after, &after, &actor->displacement);
         func_8024715C_de((void *)actor, &after);
         if (*actor->kind == 1) {
-            func_8028A27C_de(&D_8011FE88, actor, &before, &actor->position);
+            Scene_UpdateMovementTriggers(&D_8011FE88, actor, &before, &actor->position);
         }
     }
     func_80247004_de((void *)actor);
