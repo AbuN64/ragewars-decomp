@@ -4070,7 +4070,6 @@ segments:
       - [0xCADD1, data, data_800C/rodata_unresolved_800CA1D1]
       - [0xCADD4, rodata, data_800C/D_blob_8d7034946fc8f7f96aef]
       - [0xCADD8, rodata, data_800C/literals_func_80286080_de]
-      - [0xCADEC, rodata, data_800C/D_blob_314b999703436be9ae53]
       - [0xCADF0, rodata, data_800C/D_blob_d65eceaaaa414f568800]
       - [0xCADF4, rodata, data_800C/D_blob_0369ebfa80ed0a96c156]
       - [0xCADFD, data, data_800C/rodata_unresolved_800CA1FD]

@@ -3961,7 +3961,6 @@ segments:
       - [0xC5F91, data, data_800C/rodata_unresolved_800C5391]
       - [0xC5F94, rodata, data_800C/D_80286080_CADD4]
       - [0xC5F98, rodata, data_800C/literals_func_80286080_de]
-      - [0xC5FAC, rodata, data_800C/D_80286454_CADEC]
       - [0xC5FB0, rodata, data_800C/D_8044BE04_CADF0]
       - [0xC5FB4, rodata, data_800C/D_80286AA8_CADF4]
       - [0xC5FBD, data, data_800C/rodata_unresolved_800C53BD]

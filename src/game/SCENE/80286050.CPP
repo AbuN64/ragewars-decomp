@@ -195,7 +195,6 @@ first_pass_done:
     func_8025CB88_de(func_8025CC6C_de());
 }
 
-#ifdef NON_MATCHING
 extern Gfx *D_80110634;
 extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
@@ -215,8 +214,8 @@ typedef struct SceneStaticBounds {
     u8 pad0[0xB8];
     Box bounds;
 } SceneStaticBounds;
-/* 23/181 aligned edits; remaining: distance-case branching and register allocation. */
 void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
+    LevelActor *object;
     SortEntry entries[0x800];
     CVector3 jitter;
     s32 count;
@@ -242,10 +241,10 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     func_802390D0_de(&jitter, camera);
     oz = jitter.z * -2.0f;
     for (i = 0; i < count; i++) {
-        LevelActor *object = world->drawables[i];
         f32 x;
         f32 y;
         f32 z;
+        object = world->drawables[i];
         switch (object->kind) {
         case 0:
             x = ((SceneStaticBounds *)object)->bounds.min.x + ((SceneStaticBounds *)object)->bounds.max.x + ox;
@@ -253,10 +252,12 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
             z = ((SceneStaticBounds *)object)->bounds.min.z + ((SceneStaticBounds *)object)->bounds.max.z + oz;
             break;
         case 1:
+        case 3:
         default:
             x = object->position0.x + object->position0.x + ox;
             y = object->position0.y + object->position0.y + oy;
             z = object->position0.z + object->position0.z + oz;
+            break;
         }
         entries[i].object = object;
         entries[i].distance = x * x + y * y + z * z;
@@ -264,7 +265,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     func_802852C0_de(entries, count, 8, D_0028E044, D_0028DFE4);
     func_8026D980_de();
     for (i = 0; i < count; i++) {
-        LevelActor *object = entries[i].object;
+        object = entries[i].object;
         switch (object->kind) {
         case 0:
             func_80250A9C_de(object, camera);
@@ -279,9 +280,7 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     }
     func_8026D9D0_de();
 }
-#else
-INCLUDE_ASM("span_1000", Scene_DrawTransparentObjects);
-#endif
+
 
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/WORLD.H"
