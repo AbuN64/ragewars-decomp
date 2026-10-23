@@ -34,7 +34,7 @@ extern void func_80228958_de(ObjRecAt20V2 *, char *);
 extern void func_8023B3F8_de(char *, char *);
 extern void func_8028B160_de(char *, char *);
 extern void func_802A478C_de(void *, char *);
-extern void func_80238D30_de(char *);
+extern void Camera_DrawObjectFlares(char *);
 extern void func_8022A328_de(void *, char *);
 extern void func_8026925C_de(s32);
 
@@ -65,7 +65,7 @@ void func_802362E8_de(char *view, char *world) {
     func_8023B3F8_de(view + 0x570, view);
     func_8028B160_de(world, view);
     func_802A478C_de(&D_801379C0, view);
-    func_80238D30_de(view);
+    Camera_DrawObjectFlares(view);
     if (func_80245798_de() == 0 && func_802934F8_de() != 0) {
         func_8022A328_de(&D_80145040, view);
     }

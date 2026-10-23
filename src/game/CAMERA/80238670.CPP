@@ -126,7 +126,7 @@ struct RecCode80200610 {
     s32 unk4;
 };
 
-void func_80238D30_de(func_80238D20_S1 *view) {
+void Camera_DrawObjectFlares(func_80238D20_S1 *view) {
     Vector3f value;
     f32 screen_x;
     f32 screen_y;
@@ -164,5 +164,5 @@ void func_80238D30_de(func_80238D20_S1 *view) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80238D30_de);
+INCLUDE_ASM("span_1000", Camera_DrawObjectFlares);
 #endif
