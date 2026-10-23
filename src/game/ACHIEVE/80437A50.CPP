@@ -157,7 +157,7 @@ void func_80437A50_de(void) {
         "lui        $v1, %hi(D_800E5830)\n"
         "lw         $v1, %lo(D_800E5830)($v1)\n"
         "addu       $a0, $v0, $zero\n"
-        "jal        func_804253C8_de\n"
+        "jal        Achieve_GetResultText\n"
         "sw        $a0, 0x9C($v1)\n"
         "lui        $v1, %hi(D_800E5830)\n"
         "lw         $v1, %lo(D_800E5830)($v1)\n"

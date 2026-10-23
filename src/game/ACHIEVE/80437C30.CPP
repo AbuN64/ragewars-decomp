@@ -97,7 +97,7 @@ s32 func_80437C30_us_rev1(MenuWidget *menu) {
                 }
             }
             D_800E5830->rows[0].unk0 = func_80425014_de(D_800E5830->player);
-            D_800E5830->rows[0].unk10 = func_804253C8_de(D_800E5830->rows[0].unk0);
+            D_800E5830->rows[0].unk10 = Achieve_GetResultText(D_800E5830->rows[0].unk0);
 done:
             D_800E5830->badge = -1;
             switch (D_8015402C) {

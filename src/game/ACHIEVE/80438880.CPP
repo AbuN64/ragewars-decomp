@@ -14,7 +14,7 @@ extern u8 D_80152789;
 extern char *D_auto_800E2054[], *D_auto_800E20B4[], *D_auto_800E20A4[], *D_800E2044_eu[], *D_800E2074_eu[], *D_800E2094_eu[], *D_800E2084[], *D_auto_800E2034[];
 extern u8 D_800FEB0F[], D_800FEB17[], D_800FEB4A[], D_800FEB54[], D_80102C24[], D_8010EB7D[], D_80142358[];
 extern s32 D_8010EB94[], D_80146894;
-extern void *func_8025305C_de(), *func_8040EC30_de(), *func_80425C70_de(), *func_804253C8_de();
+extern void *func_8025305C_de(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), func_8041F140_de();
 extern void func_8040E8D8_de(), func_8040E950_de(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
 extern void func_80265688_de(), func_802A001C_de(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), func_8043829C_de(), func_80438614_de();
@@ -67,7 +67,7 @@ s32 func_80438880_eu(void *root) {
             } else {
                 v = func_80425014_de(SG(g, s32, 0x94));
                 SG(g, s32, 0x9C) = v;
-                SG(g, void *, 0xAC) = func_804253C8_de(v);
+                SG(g, void *, 0xAC) = Achieve_GetResultText(v);
                 SG(g, s32, 0x98) = -1;
                 switch (D_8015402C) {
                 case 4: label = 0x2D; break;
