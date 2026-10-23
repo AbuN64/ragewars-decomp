@@ -3,7 +3,7 @@
 #include "TYPES.H"
 
 extern u8 *func_802A025C_de(u8 *, u8 *);
-extern void func_80239770_de(void *, s32, void *, f32);
+extern void Camera_PostScaledScreenMessage(void *, s32, void *, f32);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
 
@@ -21,7 +21,7 @@ void func_8022B75C_de(void *arg0, u8 *arg1, f32 arg2) {
     func_802A025C_de(((Shared_ActorView *)arg0)->messageHistory[((Shared_ActorView *)arg0)->messageIndex], arg1);
     temp = (s32)((Shared_ActorView *)arg0)->message;
     if (temp != 0) {
-        func_80239770_de(&D_80145088, temp,
+        Camera_PostScaledScreenMessage(&D_80145088, temp,
                       ((Shared_ActorView *)arg0)->messageHistory[((Shared_ActorView *)arg0)->messageIndex],
                       arg2);
     }

@@ -477,7 +477,7 @@ extern u8 *D_800D3A9C;
 extern void func_804037D4_de(void), func_804030E0_de(s32);
 extern s32 func_802934F8_de(void);
 extern void func_80286AA8_de(void *, s32, s32);
-extern struct Message *func_80239770_de(void *, void *, u8 *, f32);
+extern struct Message *Camera_PostScaledScreenMessage(void *, void *, u8 *, f32);
 static inline s32 transitionId(Shared_World *scene) {
     if (scene->selectionFlags != 0) return scene->selectionSpawn.kind;
     return scene->selectionValues[1];
@@ -503,9 +503,9 @@ void Scene_UpdateSelectionTransition(Shared_World *scene)
             settings = &D_80145088.settings;
             if (scene->previewStart != settings->optionFlags && func_802934F8_de()) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                func_80239770_de(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
+                Camera_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C[settings->language], 4.0f);
 #else
-                func_80239770_de(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
+                Camera_PostScaledScreenMessage(&D_80145088, &D_80145088.fallbackCamera, D_800D3A9C, 4.0f);
 #endif
                 scene->previewStart = settings->optionFlags;
             }

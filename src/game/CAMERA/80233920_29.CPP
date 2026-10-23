@@ -48,6 +48,7 @@ extern func_80237E70_G1 D_800D7028;
 extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
+extern s32 D_800E28D4;
 
 extern void func_80239CE0_de(void *arg0);
 
@@ -84,7 +85,7 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
             if (line != p) {
                 message = recycle(owner, pool);
                 if (message != 0) {
-                    s32 half = D_800E28D0; /* FAKEMATCH */
+                    s32 half = D_800E28D0 / 2;
                     message->kind = kind;
                     message->text = line;
                     message->timer = 0;
@@ -95,8 +96,8 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
                     message->pad2C = 0;
                     message->scaleX = 1.0f;
                     message->scaleY = 1.0f;
-                    height = (&D_800E28D0)[1]; /* FAKEMATCH */
-                    message->x = half / 2;
+                    height = D_800E28D4;
+                    message->x = half;
                     message->y = height - 80;
                     message->size = size * 15.0f;
                 }
@@ -194,6 +195,6 @@ void *func_80239740_de(struct ScreenMessageOwner *owner, struct ScreenMessagePoo
     return message;
 }
 
-Message *func_80239770_de(void *owner, void *pool, u8 *text, f32 size) {
+Message *Camera_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
     return post_lines(owner, pool, text, 2, size, -1);
 }

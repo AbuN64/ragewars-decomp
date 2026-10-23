@@ -45,7 +45,7 @@ s32 func_802227F4_de(void *, void *, s32);
 #ifndef NON_MATCHING
 void *func_80237E80_de(void *, void *, u8 *);
 #endif
-void *func_80239770_de(void *, void *, void *, f32); /* extern */
+void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); /* extern */
 CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);
 void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32); /* extern */
@@ -382,7 +382,7 @@ case 7:
                         ((struct Shared_ActorView *)var_s0_2)->pending = 0;
                         ((struct Shared_ActorView *)var_s0_2)->parent = 0;
                         if (temp_a1_3 != 0) {
-                            func_80239770_de(gameplayMessageContext(messageContext), temp_a1_3, gameplayReleaseMessage(localization->language), 1.0f);
+                            Camera_PostScaledScreenMessage(gameplayMessageContext(messageContext), temp_a1_3, gameplayReleaseMessage(localization->language), 1.0f);
                         }
                     }
                     var_s0_2 = ((struct Shared_ActorView *)var_s0_2)->next;
