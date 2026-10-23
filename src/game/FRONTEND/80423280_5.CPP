@@ -137,13 +137,13 @@ s32 func_80426918_de(void *arg0, void *arg1, s32 delta) {
         case 4:
             func_804281A8_de();
         }
-        func_804273D4_de();
+        Frontend_HideTrialCatalogueWidgets();
         D_800E4690->state = 2;
         D_800E4690->timer = 4;
         break;
     case 8:
         D_800E4690->state = 3;
-        func_804273D4_de();
+        Frontend_HideTrialCatalogueWidgets();
         func_8042E988_de(0xB);
         return 0;
     case 9:

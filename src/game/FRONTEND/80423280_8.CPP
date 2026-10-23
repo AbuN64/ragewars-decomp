@@ -110,7 +110,7 @@ extern s32 func_80265650_de(u8 *, s32);
 
 
 
-/* Calls func_8029973C_de and func_804273D4_de, passes the two words after the identifier in the
+/* Calls func_8029973C_de and Frontend_HideTrialCatalogueWidgets, passes the two words after the identifier in the
    28-byte entry D_800E4690's selection at 0xA44 picks from D_800E4694 to func_8042E9A0_de, then
    calls func_8042E988_de with 0x19. Returns zero. */
 
@@ -336,7 +336,7 @@ s32 func_80428C7C_de(void *parent, s32 arg1, s32 arg2, s32 event) {
 
 s32 func_80428DE0_de(void) {
     func_8029973C_de();
-    func_804273D4_de();
+    Frontend_HideTrialCatalogueWidgets();
     func_8042E988_de(0xE);
     return 0;
 }
@@ -345,7 +345,7 @@ s32 func_80428E10_de(void) {
     s32 selection;
 
     func_8029973C_de();
-    func_804273D4_de();
+    Frontend_HideTrialCatalogueWidgets();
     selection = D_800E4690->selection;
     func_8042E9A0_de(D_800E4694[selection].first, D_800E4694[selection].second);
     func_8042E988_de(0x19);

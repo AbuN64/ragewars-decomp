@@ -47,7 +47,7 @@ extern void func_8040E8D8_de(struct Shape_typemap_21 *, s32);
 /* Loads the stage list of the results screen D_800E4690: clears its two 36-bit sets at 0xA74 and
    0xA79, copies into the first the 36 cleared-stage bits that the player record D_80102B00[index at
    0xA5C] keeps for the current mode D_801462D5 (at 0x7E, 0x83, 0x88 or 0x8D for modes 1 to 4), and
-   refreshes the list through func_804274B0_de. */
+   refreshes the list through Frontend_RefreshTrialCatalogueWidgets. */
 
 
 
@@ -152,7 +152,7 @@ void func_80427008_de(void) {
         } while (i < 36);
         break;
     }
-    func_804274B0_de();
+    Frontend_RefreshTrialCatalogueWidgets();
 }
 
 extern struct EntryRecAt0V1 D_800E4694[];

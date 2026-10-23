@@ -67,128 +67,251 @@
    is -1. The identifiers are passed as their low halfword, and the loop walks a manual byte offset
    so the table address is not hoisted. */
 extern struct Pair D_800E4A84[];
-void func_804273D4_de(void) {
-    s32 missing;
-    s32 offset;
-    s32 i;
-    i = 0;
-    missing = -1;
-    offset = i;
+/* Read the optional resource as the low half of its word value on every host. */
+#ifdef NON_MATCHING
+void Frontend_HideTrialCatalogueWidgets(void) {
+    s32 absentResource;
+    s32 byteOffset;
+    s32 index;
+    index = 0;
+    absentResource = -1;
+    byteOffset = index;
 loop:
-    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (offset)))->a & 0xFFFF), 0);
-    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (offset)))->b & 0xFFFF), 0);
-    if (((struct Pair *)((u8 *)D_800E4A84 + (offset)))->c.id != missing) {
-        func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (offset)))->c.half.low), 0);
+    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->a & 0xFFFF), 0);
+    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->b & 0xFFFF), 0);
+    if (((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->c.id != absentResource) {
+        func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->c.id & 0xFFFF), 0);
     }
-    i += 1;
-    offset += 0xC;
-    if (i < 0x40) {
+    index += 1;
+    byteOffset += 0xC;
+    if (index < 0x40) {
         goto loop;
     }
 }
+#else
+void Frontend_HideTrialCatalogueWidgets(void) {
+    s32 absentResource;
+    s32 byteOffset;
+    s32 index;
+    index = 0;
+    absentResource = -1;
+    byteOffset = index;
+loop:
+    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->a & 0xFFFF), 0);
+    func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->b & 0xFFFF), 0);
+    if (((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->c.id != absentResource) {
+        func_8040E8D8_de(func_8040EC30_de(D_800E4690->root, ((struct Pair *)((u8 *)D_800E4A84 + (byteOffset)))->c.half.low), 0);
+    }
+    index += 1;
+    byteOffset += 0xC;
+    if (index < 0x40) {
+        goto loop;
+    }
+}
+#endif
 
 extern struct EntryRecAt0V1 D_800E4694[];
 extern struct Pair D_800E4A84[];
 extern void func_80265688_de(u8 *, s32, s32);
 extern s32 func_80265650_de(s32, s32);
 
-void func_804274B0_de(void) {
-    u8 bits[8];
-    Preset *unlocks;
+#ifdef NON_MATCHING
+void Frontend_RefreshTrialCatalogueWidgets(void) {
+    u8 availableFlags[8];
+    Preset *unlockedPreset;
     func_8041F2A0_Item *widget;
-    s32 i, j, index;
-    s32 search;
-    s32 value;
-    s32 key;
-    Shared_Game *game, *settings;
-    u8 alpha;
-    func_804273D4_de();
-    for (i = 0; i < 36; i++) {
-        func_80265688_de(bits, i, 0);
+    s32 entryIndex, unlockSlot, unlockIndex;
+    s32 searchIndex;
+    s32 unlockValue;
+    s32 resourceKey;
+    Shared_Game *playerSettings, *settings;
+    u8 opacity;
+    Frontend_HideTrialCatalogueWidgets();
+    for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+        func_80265688_de(availableFlags, entryIndex, 0);
     }
-    func_80265688_de(bits, 0, 1);
+    func_80265688_de(availableFlags, 0, 1);
     settings = &D_801462C8;
     if (settings->controllerMode == 1) {
-        game = settings;
-        for (i = 0; i < 36; i++) {
-            unlocks = func_80425C70_de(i, 0, *(s8 *)((char *)game + D_800E4690->player * 0x96 + 0x150));
-            value = unlocks->bytes[1];
-            if (value > 0) func_80265688_de(bits, value - 1, 1);
-            for (j = 0; j < 3; j++) {
-                value = *((u8 *)unlocks + j + 2);
-                if (value > 0) func_80265688_de(bits, value - 1, 1);
+        playerSettings = settings;
+        for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+            unlockedPreset = func_80425C70_de(entryIndex, 0, *(s8 *)((char *)playerSettings + D_800E4690->player * 0x96 + 0x150));
+            unlockValue = unlockedPreset->bytes[1];
+            if (unlockValue > 0) func_80265688_de(availableFlags, unlockValue - 1, 1);
+            for (unlockSlot = 0; unlockSlot < 3; unlockSlot++) {
+                unlockValue = *((u8 *)unlockedPreset + unlockSlot + 2);
+                if (unlockValue > 0) func_80265688_de(availableFlags, unlockValue - 1, 1);
             }
         }
     } else {
-        for (i = 0; i < 36; i++) {
-            func_80265688_de(bits, i, 1);
+        for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+            func_80265688_de(availableFlags, entryIndex, 1);
         }
     }
-    for (i = 0; i < 64; i++) {
-        key = D_800E4A84[i].a;
-        for (search = 0; search < 36; search++) {
-            if (D_800E4694[search].value == key) { index = search; goto found1; }
+    for (entryIndex = 0; entryIndex < 64; entryIndex++) {
+        resourceKey = D_800E4A84[entryIndex].a;
+        for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+            if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found1; }
         }
-        index = 0;
+        unlockIndex = 0;
 found1:;
-        if (func_80265650_de((s32)bits, index) == 1) {
-            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].a);
+        if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
+            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
             func_8040E8D8_de(widget, 1);
             widget->alpha = 20;
-            key = D_800E4A84[i].b;
-            for (search = 0; search < 36; search++) {
-                if (D_800E4694[search].value == key) { index = search; goto found2; }
+            resourceKey = D_800E4A84[entryIndex].b;
+            for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+                if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found2; }
             }
-            index = 0;
+            unlockIndex = 0;
 found2:;
-            if (func_80265650_de((s32)bits, index) == 1) {
-                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].b);
+            if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
+                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
                 func_8040E8D8_de(widget, 1);
                 widget->alpha = 20;
-                if (D_800E4A84[i].c.id != -1) {
-                    widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[i].c.half.low);
+                if (D_800E4A84[entryIndex].c.id != -1) {
+                    widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
                     func_8040E8D8_de(widget, 1);
                     widget->alpha = 20;
                 }
             }
         }
     }
-    for (i = 0; i < 36; i++) {
-        if (func_80265650_de((s32)D_800E4690->owned, i) == 1) ((void (*)(s32))func_80427D70_de)(i);
+    for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+        if (func_80265650_de((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))func_80427D70_de)(entryIndex);
     }
-    for (i = 0; i < 36; i++) {
-        if (func_80265650_de((s32)D_800E4690->pending, i) == 1) func_80265688_de(D_800E4690->owned, i, 1);
+    for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+        if (func_80265650_de((s32)D_800E4690->pending, entryIndex) == 1) func_80265688_de(D_800E4690->owned, entryIndex, 1);
     }
-    for (i = 0; i < 64; i++) {
-        alpha = 170;
-        key = D_800E4A84[i].a;
-        for (search = 0; search < 36; search++) {
-            if (D_800E4694[search].value == key) { index = search; goto found3; }
+    for (entryIndex = 0; entryIndex < 64; entryIndex++) {
+        opacity = 170;
+        resourceKey = D_800E4A84[entryIndex].a;
+        for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+            if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found3; }
         }
-        index = 0;
+        unlockIndex = 0;
 found3:;
-        if (func_80265650_de((s32)D_800E4690->owned, index) == 1) {
-            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].a);
-            if (func_80265650_de((s32)D_800E4690->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
+        if (func_80265650_de((s32)D_800E4690->owned, unlockIndex) == 1) {
+            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
+            if (func_80265650_de((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
             else widget->alpha = 170;
-            key = D_800E4A84[i].b;
-            for (search = 0; search < 36; search++) {
-                if (D_800E4694[search].value == key) { index = search; goto found4; }
+            resourceKey = D_800E4A84[entryIndex].b;
+            for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+                if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found4; }
             }
-            index = 0;
+            unlockIndex = 0;
 found4:;
-            if (func_80265650_de((s32)D_800E4690->owned, index) == 1) {
-                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[i].b);
-                if (func_80265650_de((s32)D_800E4690->pending, index) == 1) { widget->alpha = 70; alpha = 70; }
+            if (func_80265650_de((s32)D_800E4690->owned, unlockIndex) == 1) {
+                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
+                if (func_80265650_de((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
                 else widget->alpha = 170;
-                if (D_800E4A84[i].c.id != -1) {
-                    widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[i].c.half.low);
-                    widget->alpha = alpha;
+                if (D_800E4A84[entryIndex].c.id != -1) {
+                    widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].c.id);
+                    widget->alpha = opacity;
                 }
             }
         }
     }
 }
+#else
+void Frontend_RefreshTrialCatalogueWidgets(void) {
+    u8 availableFlags[8];
+    Preset *unlockedPreset;
+    func_8041F2A0_Item *widget;
+    s32 entryIndex, unlockSlot, unlockIndex;
+    s32 searchIndex;
+    s32 unlockValue;
+    s32 resourceKey;
+    Shared_Game *playerSettings, *settings;
+    u8 opacity;
+    Frontend_HideTrialCatalogueWidgets();
+    for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+        func_80265688_de(availableFlags, entryIndex, 0);
+    }
+    func_80265688_de(availableFlags, 0, 1);
+    settings = &D_801462C8;
+    if (settings->controllerMode == 1) {
+        playerSettings = settings;
+        for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+            unlockedPreset = func_80425C70_de(entryIndex, 0, *(s8 *)((char *)playerSettings + D_800E4690->player * 0x96 + 0x150));
+            unlockValue = unlockedPreset->bytes[1];
+            if (unlockValue > 0) func_80265688_de(availableFlags, unlockValue - 1, 1);
+            for (unlockSlot = 0; unlockSlot < 3; unlockSlot++) {
+                unlockValue = *((u8 *)unlockedPreset + unlockSlot + 2);
+                if (unlockValue > 0) func_80265688_de(availableFlags, unlockValue - 1, 1);
+            }
+        }
+    } else {
+        for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+            func_80265688_de(availableFlags, entryIndex, 1);
+        }
+    }
+    for (entryIndex = 0; entryIndex < 64; entryIndex++) {
+        resourceKey = D_800E4A84[entryIndex].a;
+        for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+            if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found1; }
+        }
+        unlockIndex = 0;
+found1:;
+        if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
+            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
+            func_8040E8D8_de(widget, 1);
+            widget->alpha = 20;
+            resourceKey = D_800E4A84[entryIndex].b;
+            for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+                if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found2; }
+            }
+            unlockIndex = 0;
+found2:;
+            if (func_80265650_de((s32)availableFlags, unlockIndex) == 1) {
+                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
+                func_8040E8D8_de(widget, 1);
+                widget->alpha = 20;
+                if (D_800E4A84[entryIndex].c.id != -1) {
+                    widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[entryIndex].c.half.low);
+                    func_8040E8D8_de(widget, 1);
+                    widget->alpha = 20;
+                }
+            }
+        }
+    }
+    for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+        if (func_80265650_de((s32)D_800E4690->owned, entryIndex) == 1) ((void (*)(s32))func_80427D70_de)(entryIndex);
+    }
+    for (entryIndex = 0; entryIndex < 36; entryIndex++) {
+        if (func_80265650_de((s32)D_800E4690->pending, entryIndex) == 1) func_80265688_de(D_800E4690->owned, entryIndex, 1);
+    }
+    for (entryIndex = 0; entryIndex < 64; entryIndex++) {
+        opacity = 170;
+        resourceKey = D_800E4A84[entryIndex].a;
+        for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+            if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found3; }
+        }
+        unlockIndex = 0;
+found3:;
+        if (func_80265650_de((s32)D_800E4690->owned, unlockIndex) == 1) {
+            widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].a);
+            if (func_80265650_de((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
+            else widget->alpha = 170;
+            resourceKey = D_800E4A84[entryIndex].b;
+            for (searchIndex = 0; searchIndex < 36; searchIndex++) {
+                if (D_800E4694[searchIndex].value == resourceKey) { unlockIndex = searchIndex; goto found4; }
+            }
+            unlockIndex = 0;
+found4:;
+            if (func_80265650_de((s32)D_800E4690->owned, unlockIndex) == 1) {
+                widget = func_8040EC30_de(D_800E4690->parent, (u16)D_800E4A84[entryIndex].b);
+                if (func_80265650_de((s32)D_800E4690->pending, unlockIndex) == 1) { widget->alpha = 70; opacity = 70; }
+                else widget->alpha = 170;
+                if (D_800E4A84[entryIndex].c.id != -1) {
+                    widget = func_8040EC30_de(D_800E4690->parent, D_800E4A84[entryIndex].c.half.low);
+                    widget->alpha = opacity;
+                }
+            }
+        }
+    }
+}
+#endif
 
 /* Updates the selected player's appearance and creates its results-screen model. */
 #include "TYPES.H"
