@@ -6121,6 +6121,7 @@ segments:
       - [0xE35BC, data, data_800C/D_auto_src_rw_video_arguments_r1_m2_E35BC_us_rev1]
       - [0xE35D4, data, data_800C/D_auto_rodata_unresolved_800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548_unclaimed_E359C_unclaimed_E35B8_unclaimed_E35D4]
       - [0xE3610, data, data_800C/D_auto_src_rw_video_configurations_E3610_us_rev1]
+      - [0xE364C, data, data_800C/D_blob_93abb19b3a58a8d2b351]
       - [0xE364E, data, data_800C/D_blob_105e3243f2c82bd38d7e]
       - [0xE3650, data, data_800C/D_blob_ff836bdcbb913926843d]
       - [0xE3658, data, data_800C/D_blob_a9aacaf4b59c5f05e221]

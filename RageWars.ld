@@ -27394,6 +27394,7 @@ SECTIONS
         src/game/DATA/OVLDAT8/800E29B8.CPP.o(.data);
         src/game/DATA/OVLDAT8/800E29D4.CPP.o(.data);
         src/game/DATA/OVLDAT8/800E29D4_2.CPP.o(.data);
+        src/game/DATA/OVLDAT8/800E2A4C.CPP.o(.data);
         src/game/DATA/OVLDAT8/800E2A4C_2.CPP.o(.data);
         src/game/DATA/OVLDAT8/800E2A50.CPP.o(.data);
         src/game/DATA/OVLDAT8/800E2A58.CPP.o(.data);
@@ -27937,6 +27938,7 @@ SECTIONS
         src/game/DATA/OVLDAT8/800E29B8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT8/800E29D4.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT8/800E29D4_2.CPP.o(.bss .sbss COMMON);
+        src/game/DATA/OVLDAT8/800E2A4C.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT8/800E2A4C_2.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT8/800E2A50.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT8/800E2A58.CPP.o(.bss .sbss COMMON);
