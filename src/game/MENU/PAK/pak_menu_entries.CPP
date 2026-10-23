@@ -219,7 +219,7 @@ INCLUDE_ASM("ovl_80400000", func_80441214_de);
 
 
 extern void *func_80442A58_de(s8 *);
-extern void func_8043F52C_de(TextBoundsText *, TextBoundsMetrics *);
+extern void func_8043F52C_de(TextBoundsText *, CItemInfo *);
 extern void func_802AA9F4_de(void);
 extern void func_802A7DE4_de(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 extern u32 D_800CD730;
@@ -228,7 +228,7 @@ extern const f32 g_menuCenterFraction;
 
 /* Lay out visible menu entries and draw their callbacks with a pulsing selection highlight. */
 void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
-    TextBoundsMetrics bounds, metrics, placed;
+    CItemInfo bounds, metrics, placed;
     TextBoundsData *data;
     TextBoundsText *entry;
     s32 i;
@@ -237,22 +237,22 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     data = func_80442A58_de(member);
     bounds.left = 1024;
     bounds.right = -1024;
-    bounds.top = 1024;
-    bounds.bottom = -1024;
+    bounds.m_Top = 1024;
+    bounds.m_Bottom = -1024;
     metrics.width = 0;
     metrics.height = 0;
     metrics.left = 0;
     metrics.right = 0;
-    metrics.top = 0;
-    metrics.bottom = 0;
+    metrics.m_Top = 0;
+    metrics.m_Bottom = 0;
     for (i = 0; i < menu->count; i++) {
         entry = &menu->entries[i];
         if (entry->flags & 0x800000) {
             if (entry->flags & 0x20000000) {
                 metrics.left = 1024;
                 metrics.right = -1024;
-                metrics.top = 1024;
-                metrics.bottom = -1024;
+                metrics.m_Top = 1024;
+                metrics.m_Bottom = -1024;
                 metrics.width = 0;
                 metrics.height = 0;
             } else {
@@ -260,12 +260,12 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
             }
             bounds.left = bounds.left < metrics.left ? bounds.left : metrics.left;
             bounds.right = bounds.right > metrics.right ? bounds.right : metrics.right;
-            bounds.top = bounds.top < metrics.top ? bounds.top : metrics.top;
-            bounds.bottom = bounds.bottom > metrics.bottom ? bounds.bottom : metrics.bottom;
+            bounds.m_Top = bounds.m_Top < metrics.m_Top ? bounds.m_Top : metrics.m_Top;
+            bounds.m_Bottom = bounds.m_Bottom > metrics.m_Bottom ? bounds.m_Bottom : metrics.m_Bottom;
         }
     }
     bounds.width = bounds.right - bounds.left;
-    bounds.height = bounds.bottom - bounds.top;
+    bounds.height = bounds.m_Bottom - bounds.m_Top;
     if (bounds.width < 0 || bounds.height < 0) {
         return;
     }
@@ -275,14 +275,14 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
     centerY = data->y + data->unk_2A0 * g_menuCenterFraction + menu->y;
     bounds.left = centerX - bounds.width / 2;
     bounds.right = centerX + bounds.width / 2;
-    bounds.top = centerY - bounds.height / 2;
-    bounds.bottom = centerY + bounds.height / 2;
+    bounds.m_Top = centerY - bounds.height / 2;
+    bounds.m_Bottom = centerY + bounds.height / 2;
     metrics.width = 0;
     metrics.height = 0;
     metrics.left = 0;
     metrics.right = 0;
-    metrics.top = 0;
-    metrics.bottom = 0;
+    metrics.m_Top = 0;
+    metrics.m_Bottom = 0;
     D_800E1E20 = -1;
     for (i = 0; i < menu->count; i++) {
         entry = &menu->entries[i];
@@ -294,8 +294,8 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
                 metrics.height = 0;
                 metrics.left = data->x;
                 metrics.right = 0;
-                metrics.top = data->y;
-                metrics.bottom = 0;
+                metrics.m_Top = data->y;
+                metrics.m_Bottom = 0;
             } else {
                 func_8043F52C_de(entry, &metrics);
             }
@@ -303,8 +303,8 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
             if (!(entry->flags & 0x20000000)) {
                 placed.left += bounds.left;
                 placed.right += bounds.left;
-                placed.top += bounds.top;
-                placed.bottom += bounds.top;
+                placed.m_Top += bounds.m_Top;
+                placed.m_Bottom += bounds.m_Top;
             }
             if (entry->flags & 1) {
                 placed.left = centerX - metrics.width / 2;
@@ -320,8 +320,8 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
             }
             if (entry->flags & 0x800000) {
                 if (menu->state == i && entry->mode != 3 && !(entry->flags & 8)) {
-                    top = placed.top;
-                    bottom = placed.bottom;
+                    top = placed.m_Top;
+                    bottom = placed.m_Bottom;
                     /* Preserve the highlight extent calculation and its float rounding. */
                     bottom = top + (bottom - top);
                     func_802AA9F4_de();
@@ -372,7 +372,7 @@ void func_80441BE0_de(u8 *self, void *unused, s32 relative) {
     bounds.top = 0;
     bounds.bottom = 0;
     for (i = 0; i < *(s32 *)(self + 0x10); i++) {
-        func_8043F52C_de((TextBoundsText *)(*(u8 **)(self + 0xC) + i * 0x28), (TextBoundsMetrics *)&bounds);
+        func_8043F52C_de((TextBoundsText *)(*(u8 **)(self + 0xC) + i * 0x28), (CItemInfo *)&bounds);
         if (bounds.left < box.xMin) {
             box.xMin = bounds.left;
         }

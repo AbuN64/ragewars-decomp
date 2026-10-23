@@ -142,7 +142,7 @@ extern void func_80298368_de(int);
 
 
 
-extern Choice D_800E3A50[];
+extern s_CharacterData D_800E3A50[];
 
 extern s32 func_802744D4_de(void);
 
@@ -386,7 +386,7 @@ void func_80420850_de(s32 player) {
         scale.y = D_800E3A50[index].scale[player];
         scale.z = D_800E3A50[index].scale[player];
         func_8041CAD8_de(D_800E42D0->players[player].model, 9, kind + 0x38F, 75, 24000, scale,
-                      D_800E3A50[index].position[player], D_800E3A50[index].angle[player],
+                      D_800E3A50[index].m_vPos[player], D_800E3A50[index].m_fRotY[player],
                       D_800E3A50[index].flags[player]);
     }
     costumes = D_800FEB57[player][kind];

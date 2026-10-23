@@ -2,7 +2,7 @@
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-extern Choice D_800E3A50[];
+extern s_CharacterData D_800E3A50[];
 
 /* Returns the index of the first of the seventeen 0x70-byte slots of D_800E3A50 whose leading word equals the argument, or zero when none does. Adapted from func_8041F140_de with the slot word D_800E3A50 changed. */
 

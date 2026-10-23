@@ -12,7 +12,7 @@
 #include "RESMGR/resmgr_stream_io.H"
 #include "MATH/802A2870.H"
 #include "SCENE/802508E0_13.H"
-extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, DrawArgs *);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, sm_dldc *);
 #include "RESMGR/resmgr_string_memory.H"
 
 /* Puts a new node in a tree node's place, taking over its parent and next links and becoming the parent's first child or the successor of the predecessor func_8040ECA8_de's search finds, then makes the old node the new node's only child with its next link and the halfwords at 0x14 and 0x16 cleared.
@@ -336,7 +336,7 @@ void func_8040F230_de(ButtonWidget *widget, Triple at, Style style) {
     Shared_Quad box1;
     struct Pair14 *image;
 
-    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&box0, (struct Shape_typemap_165 *)&box1, (WidgetLayout *)widget, (DrawArgs *)&at) != 0) {
+    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&box0, (struct Shape_typemap_165 *)&box1, (WidgetLayout *)widget, (sm_dldc *)&at) != 0) {
         if (at.z & 0x100) {
             image = widget->pressed;
         } else if (at.z & 0x40) {
@@ -362,7 +362,7 @@ void func_8040F350_de(WidgetLayout *arg0, Args args) {
 
     changed = 0;
     D_800E2AB8 = 0;
-    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, arg0, (DrawArgs *)&args) != 0) {
+    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, arg0, (sm_dldc *)&args) != 0) {
         if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;

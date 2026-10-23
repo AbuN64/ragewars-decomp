@@ -168,15 +168,15 @@ void Team_UpdateDraftPanel(DraftState17F4C *state, DraftPlayer17F4C *player, s32
 #ifdef NON_MATCHING
 #include "TYPES.H"
 
-typedef struct DraftChoiceEntry {
-    s32 index;
+typedef struct CBarrelWeapon_t {
+    s32 m_Weapon;
     void *resource;
     s32 enabled;
-    f32 angle, value, scale;
-} DraftChoiceEntry;
+    f32 m_Rot, value, scale;
+} CBarrelWeapon;
 typedef struct DraftChoiceMenu {
     u8 pad0[0x1C];
-    DraftChoiceEntry choices[8];
+    CBarrelWeapon choices[8];
     u8 padDC[0x37C-0xDC];
     s32 selected, ready;
     void *context;
@@ -218,18 +218,18 @@ void func_802181FC_de(void *menuIn, s32 contextIn, void *playerIn) {
             }
             if (accept) goto accepted;
         }
-        menu->choices[i].index = -1;
+        menu->choices[i].m_Weapon = -1;
         menu->choices[i].enabled = 0;
         goto tail;
 accepted:
-        menu->choices[i].index = j;
+        menu->choices[i].m_Weapon = j;
         if (player->selected == j) menu->selected = i;
         menu->choices[i].resource = D_800D052C[j];
         if (func_8022EB0C_de(player) != 0) menu->choices[i].enabled = 1;
         else menu->choices[i].enabled = 0;
         menu->choices[i].value = 0.0f;
         menu->choices[i].scale = D_800C913C_de;
-        menu->choices[i].angle = (f32)i * D_800C2248_de;
+        menu->choices[i].m_Rot = (f32)i * D_800C2248_de;
 tail:
         i++;
     } while (i < 8);

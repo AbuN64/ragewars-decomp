@@ -4,10 +4,10 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WIDGETRECAT1A.H"
 #include "MATH/802A2870.H"
-extern s32 Frontend_ComputeWidgetBounds(Shared_Quad *, Shared_Quad *, MenuWidget *, DrawArgs *);
+extern s32 Frontend_ComputeWidgetBounds(Shared_Quad *, Shared_Quad *, MenuWidget *, sm_dldc *);
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 extern s32 func_8040F488_de(Shared_Quad *, Shared_Quad *);
-extern void func_8040E7FC_de(MenuWidget *, DrawArgs);
+extern void func_8040E7FC_de(MenuWidget *, sm_dldc);
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 s32 func_8040C9F8_eu_x(void) {
@@ -15,7 +15,7 @@ s32 func_8040C9F8_eu_x(void) {
 }
 
 #if defined(VERSION_EU_X)
-void func_8040CA08(MenuWidget *widget, DrawArgs args) {
+void func_8040CA08(MenuWidget *widget, sm_dldc args) {
     Shared_Quad area;
     Shared_Quad basis;
     Shared_Quad saved;
@@ -39,7 +39,7 @@ void func_8040CA08(MenuWidget *widget, DrawArgs args) {
 }
 #endif
 #if defined(VERSION_US_REV1)
-void func_8040C648(MenuWidget *widget, DrawArgs args) {
+void func_8040C648(MenuWidget *widget, sm_dldc args) {
     Shared_Quad area;
     Shared_Quad basis;
     Shared_Quad saved;

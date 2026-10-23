@@ -125,8 +125,8 @@ struct RowRecAt18 {
     struct StateFlags options[3];
 };
 
-struct Choice;
-typedef struct Choice Choice;
+struct CharacterData_t;
+typedef struct CharacterData_t s_CharacterData;
 
 struct Panel_func_8041FC50_de;
 struct Panel_func_8041FC50_de {
@@ -148,14 +148,14 @@ struct FourPlayerScreen {
     s32 state;
 };
 
-struct Choice;
-struct Choice {
+struct CharacterData_t;
+struct CharacterData_t {
     s32 id;
     s32 value; /* +0x4: second word of the slot, func_8041F1D8_de */
     char pad8[4];
     f32 scale[4];
-    f32 angle[4];
-    CVector3 position[4];
+    f32 m_fRotY[4];
+    CVector3 m_vPos[4];
     s32 flags[4];
     char pad6C[4];
 };

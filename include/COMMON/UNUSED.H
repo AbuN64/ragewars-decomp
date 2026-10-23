@@ -3748,8 +3748,8 @@ typedef struct TextBoundsDescriptor TextBoundsDescriptor;
 struct TextBoundsFont;
 typedef struct TextBoundsFont TextBoundsFont;
 
-struct TextBoundsMetrics;
-typedef struct TextBoundsMetrics TextBoundsMetrics;
+struct CItemInfo_t;
+typedef struct CItemInfo_t CItemInfo;
 
 struct TextBoundsRecord23;
 typedef struct TextBoundsRecord23 TextBoundsRecord23;
@@ -17346,23 +17346,23 @@ struct TextBoundsDescriptor {
     s8 * unk_44;
 };
 struct TextBoundsFont;
-struct TextBoundsMetrics;
-struct TextBoundsMetrics {
+struct CItemInfo_t;
+struct CItemInfo_t {
     s32 field0;
     s32 width;
     s32 height;
-    f32 scaleX; /* 0x0C */
-    f32 scaleY; /* 0x10 */
+    f32 m_ScaleX; /* 0x0C */
+    f32 m_ScaleY; /* 0x10 */
     s32 left; /* 0x14 */
     s32 right; /* 0x18 */
-    s32 top; /* 0x1C */
-    s32 bottom; /* 0x20 */
+    s32 m_Top; /* 0x1C */
+    s32 m_Bottom; /* 0x20 */
 };
 struct TextBoundsRecord23;
 struct TextBoundsText;
 struct TextBoundsHandlers {
     char pad0[0x14];
-    void (*draw)(TextBoundsText *, TextBoundsMetrics *, TextBoundsMetrics *, void *);
+    void (*draw)(TextBoundsText *, CItemInfo *, CItemInfo *, void *);
 };
 struct TextBoundsText {
     s32 value;
@@ -17460,8 +17460,8 @@ struct WeaponMenuView {
     f32 viewport[4];
 };
 struct WeaponMenuPlayer;
-struct DrawArgs;
-typedef signed int ( *WidgetCallback)(void *, struct DrawArgs);
+struct t_dldc;
+typedef signed int ( *WidgetCallback)(void *, struct t_dldc);
 struct WidgetHandler;
 struct WidgetHandler {
     s32 id;

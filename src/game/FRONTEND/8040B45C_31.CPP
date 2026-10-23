@@ -22,7 +22,7 @@
 
 extern BatchRec D_8014D590[];
 extern struct Shape_typemap_165 D_8014D580;
-extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *widget, DrawArgs *);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *widget, sm_dldc *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
@@ -191,7 +191,7 @@ void func_8040CAB0_de(void) {
     D_8014D570 = 0;
 }
 
-void func_8040CD50_de(Widget_func_8040CD50_de *widget, DrawArgs args) {
+void func_8040CD50_de(Widget_func_8040CD50_de *widget, sm_dldc args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -230,7 +230,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, DrawArgs args) {
     }
 }
 
-void func_8040CF8C_de(WidgetLayout *widget, DrawArgs args) {
+void func_8040CF8C_de(WidgetLayout *widget, sm_dldc args) {
     struct Shape_typemap_165 box;
     struct Shape_typemap_165 area;
     struct Shape_typemap_165 saved;
@@ -273,7 +273,7 @@ void func_8040CF8C_de(WidgetLayout *widget, DrawArgs args) {
     }
 }
 
-void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
+void func_8040D2D0_de(TextWidget *widget, sm_dldc args) {
     struct Shape_typemap_165 box, saved, clip, area, current;
     s32 clipped, length, width, mismatch, count, i, tempX, tempY;
     u8 font, style;
@@ -312,7 +312,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
             textBegin(font, style);
         }
     } else textBegin(font, style);
-    width = func_8040F160_de((s8)font, text, length) * args.scaleX;
+    width = func_8040F160_de((s8)font, text, length) * args.XScale;
     x = 0.0f;
     switch (widget->align & 3) {
         case 0: x=area.field_0; break;
@@ -321,17 +321,17 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     }
     y = 0.0f;
     switch (widget->align & 12) {
-        case 0: y=area.field_8; y-=D_8014D56C*args.scaleY; break;
+        case 0: y=area.field_8; y-=D_8014D56C*args.YScale; break;
         case 4:
-            y=(area.field_8+area.field_C)/2; y-=D_8014D56C*args.scaleY; y-=(D_8014D568/2)*args.scaleY; break;
+            y=(area.field_8+area.field_C)/2; y-=D_8014D56C*args.YScale; y-=(D_8014D568/2)*args.YScale; break;
         case 8:
-            sub=(D_8014D568+D_8014D56C)*args.scaleY;
+            sub=(D_8014D568+D_8014D56C)*args.YScale;
             y=area.field_C; y-=sub; break;
     }
     batch=&D_8014D590[D_8014D570];
     tempX=x; batch->area.field_0=tempX; batch->area.field_4=tempX+width;
-    tempY=(s32)y+(s32)(D_8014D56C*args.scaleY);
-    batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(D_8014D568*args.scaleY);
+    tempY=(s32)y+(s32)(D_8014D56C*args.YScale);
+    batch->area.field_8=tempY; batch->area.field_C=tempY+(s32)(D_8014D568*args.YScale);
     if (batch->area.field_0 >= batch->area.field_4) batch->area.field_4=batch->area.field_0+1;
     if (batch->area.field_C <= batch->area.field_8) batch->area.field_C=batch->area.field_8+1;
     if (textOverlaps(batch)) { func_8040CAB0_de(); textBegin(font, style); }
@@ -347,12 +347,12 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
         glyph=&D_8014D560->glyphs[glyphId];
         sprite->color=color;
         sprite->x=x;
-        sprite->y=y+glyph->BaselineOffset*args.scaleY;
-        sprite->width=glyph->width*args.scaleX;
-        sprite->height=glyph->height*args.scaleY;
+        sprite->y=y+glyph->BaselineOffset*args.YScale;
+        sprite->width=glyph->width*args.XScale;
+        sprite->height=glyph->height*args.YScale;
         text++;
         if (sprite->x<D_800DEA60 && sprite->x+sprite->width>0.0f) { sprite++; count++; }
-        x+=glyph->width*args.scaleX; x+=D_8014D564*args.scaleX;
+        x+=glyph->width*args.XScale; x+=D_8014D564*args.XScale;
     }
     if (clipped) func_802A1870_de(saved.field_0, saved.field_8, saved.field_4, saved.field_C);
     if (count>0) {
@@ -389,13 +389,13 @@ typedef struct DraftWidget {
 extern s32 D_800E2AB8;
 extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
-extern void func_8040E7FC_de(void *, DrawArgs);
+extern void func_8040E7FC_de(void *, sm_dldc);
 extern s32 func_80299838_de(s32);
 extern void func_802A18FC_de(void);
 extern void func_802A18F4_de(void);
 
-void Frontend_DrawWidget(DraftWidget *, DrawArgs);
-static inline void drawWidgetChoice(DraftWidget *widget, DrawArgs args) {
+void Frontend_DrawWidget(DraftWidget *, sm_dldc);
+static inline void drawWidgetChoice(DraftWidget *widget, sm_dldc args) {
         struct Shape_typemap_165 area;
         struct Shape_typemap_165 box;
         DraftWidget *child;
@@ -404,14 +404,14 @@ static inline void drawWidgetChoice(DraftWidget *widget, DrawArgs args) {
             else if (args.flags & 0x40) child = widget->selected;
             else child = widget->normal;
             if (child) {
-                args.x -= (s32)(child->x * args.scaleX);
-                args.y -= (s32)(child->y * args.scaleY);
+                args.x -= (s32)(child->x * args.XScale);
+                args.y -= (s32)(child->y * args.YScale);
                 Frontend_DrawWidget(child, args);
             }
         }
 }
 
-static inline void drawWidgetResetGroup(DraftWidget *widget, DrawArgs args) {
+static inline void drawWidgetResetGroup(DraftWidget *widget, sm_dldc args) {
         struct Shape_typemap_165 box;
         struct Shape_typemap_165 saved;
         struct Shape_typemap_165 clip;
@@ -432,7 +432,7 @@ static inline void drawWidgetResetGroup(DraftWidget *widget, DrawArgs args) {
         }
 }
 
-static inline void drawWidgetGroup(DraftWidget *widget, DrawArgs args) {
+static inline void drawWidgetGroup(DraftWidget *widget, sm_dldc args) {
         struct Shape_typemap_165 box;
         struct Shape_typemap_165 area;
         struct Shape_typemap_165 saved;
@@ -452,7 +452,7 @@ static inline void drawWidgetGroup(DraftWidget *widget, DrawArgs args) {
         }
 }
 
-void Frontend_DrawWidget(DraftWidget *widget, DrawArgs args) {
+void Frontend_DrawWidget(DraftWidget *widget, sm_dldc args) {
     switch (widget->type) {
     case 3:
         func_8040CD50_de((void *)widget, args);
@@ -497,7 +497,7 @@ extern s32 D_800DEA60, D_800E2AB4_de;
 
 /* Propagate widget opacity and scale, compute its bounds, then clip the hit box. */
 /* 168/362 aligned words; remaining: scaled bounds scheduling and register allocation. */
-s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, void *widget, DrawArgs *context) {
+s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, void *widget, sm_dldc *context) {
     WidgetLayout *layout = widget;
     f32 scaledCenterX,scaledCenterY,scaleX,scaleY,scaledHalfWidth,scaledHalfHeight;
     f32 parentScaleX;
@@ -529,8 +529,8 @@ s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_ty
 
     widgetFlags = layout->flags;
     parentFlags = context->flags;
-    parentScaleX = context->scaleX;
-    parentScaleY = context->scaleY;
+    parentScaleX = context->XScale;
+    parentScaleY = context->YScale;
     centerFlag = widgetFlags & 0x800 & 0xFFFF;
     offsetHitBox = widgetFlags & 0x400 & 0xFFFF;
     unscaledHalfWidth = (s32) (((u16)layout->width) << 0x10) >> 0x11;
@@ -550,15 +550,15 @@ s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_ty
         if (!(layout->flags & 8)) {
             return 0;
         }
-        if ((context->scaleX != 1.0f) || (context->scaleY != 1.0f) || (layout->scaleX != 1.0f) || (layout->scaleY != 1.0f)) {
+        if ((context->XScale != 1.0f) || (context->YScale != 1.0f) || (layout->scaleX != 1.0f) || (layout->scaleY != 1.0f)) {
             scaledCenterX=(f32)(layout->x+layout->offsetX)+(f32)(s16)layout->width*0.5f;
-            scaledCenterX*=context->scaleX;
-            scaleX=context->scaleX*layout->scaleX;
-            context->scaleX=scaleX;
-            scaleY=context->scaleY*layout->scaleY;
+            scaledCenterX*=context->XScale;
+            scaleX=context->XScale*layout->scaleX;
+            context->XScale=scaleX;
+            scaleY=context->YScale*layout->scaleY;
             scaledCenterY=(f32)(layout->y+layout->offsetY)+(f32)(s16)layout->height*0.5f;
-            scaledCenterY*=context->scaleY;
-            context->scaleY=scaleY;
+            scaledCenterY*=context->YScale;
+            context->YScale=scaleY;
             scaledHalfWidth=(f32)(s16)layout->width*scaleX; scaledHalfWidth*=0.5f;
             scaledHalfHeight=(f32)(s16)layout->height*scaleY; scaledHalfHeight*=0.5f;
             centerX=(s32)scaledCenterX;
@@ -657,10 +657,10 @@ clipBottom:
                 context->x = (s32) draw->field_0;
                 var_v0 = 1;
                 context->y = (s32) draw->field_8;
-                context->v[0] = (s32) draw->field_0;
-                context->v[1] = (s32) draw->field_4;
-                context->v[2] = (s32) draw->field_8;
-                context->v[3] = (s32) draw->field_C;
+                context->Rgn[0] = (s32) draw->field_0;
+                context->Rgn[1] = (s32) draw->field_4;
+                context->Rgn[2] = (s32) draw->field_8;
+                context->Rgn[3] = (s32) draw->field_C;
                 return var_v0;
             }
             return var_v0;

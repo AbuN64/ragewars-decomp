@@ -55,9 +55,9 @@ static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
 
 /* Measures a text item into its metrics: size by kind (glyph run, image, three-part composite, box), then the scaled screen
  * rectangle from the item position (284 x 222 virtual screen). */
-void func_8043F52C_de(TextBoundsText *text, TextBoundsMetrics *metrics) {
+void func_8043F52C_de(TextBoundsText *text, CItemInfo *metrics) {
     TextBoundsText part;
-    TextBoundsMetrics first, second, third;
+    CItemInfo first, second, third;
     TextBoundsData *data;
     TextBoundsFont *font;
     TextBoundsRecord23 *box;
@@ -66,8 +66,8 @@ void func_8043F52C_de(TextBoundsText *text, TextBoundsMetrics *metrics) {
     f32 size, w, boxW, boxH, sx, sy, x, y;
 
     data = func_80442A58_de(text->descriptor->unk_44);
-    metrics->scaleY = D_800DE428;
-    metrics->scaleX = D_800DE428;
+    metrics->m_ScaleY = D_800DE428;
+    metrics->m_ScaleX = D_800DE428;
     switch (text->mode) {
     case 0:
     case 5:
@@ -123,8 +123,8 @@ void func_8043F52C_de(TextBoundsText *text, TextBoundsMetrics *metrics) {
             sx = D_800E28D0 * D_800DE458;
             sy = D_800E28D4 * D_800E248C;
         }
-        metrics->scaleX = sx;
-        metrics->scaleY = sy;
+        metrics->m_ScaleX = sx;
+        metrics->m_ScaleY = sy;
         break;
     case 2:
         first = *metrics;
@@ -166,15 +166,15 @@ void func_8043F52C_de(TextBoundsText *text, TextBoundsMetrics *metrics) {
             metrics->left = x;
         }
     }
-    metrics->right = metrics->left + metrics->width * metrics->scaleX;
+    metrics->right = metrics->left + metrics->width * metrics->m_ScaleX;
     y = text->y * D_800E28D4 / 222;
     if (!(text->flags & 0x20000)) {
         if (text->flags & 0x10000) {
-            metrics->top = metrics->bottom + y;
+            metrics->m_Top = metrics->m_Bottom + y;
         } else {
-            metrics->top = y;
+            metrics->m_Top = y;
         }
     }
-    metrics->bottom = metrics->top + metrics->height * metrics->scaleY;
+    metrics->m_Bottom = metrics->m_Top + metrics->height * metrics->m_ScaleY;
 }
 #endif

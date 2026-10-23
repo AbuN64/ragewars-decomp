@@ -36,8 +36,8 @@ struct WidgetRecAtE {
 };
 
 
-struct DrawArgs;
-typedef struct DrawArgs DrawArgs;
+struct t_dldc;
+typedef struct t_dldc sm_dldc;
 
 extern int D_800DEA6C;
 
@@ -143,16 +143,16 @@ struct NodeRecAt16 {
 
 struct NodeRecAt16;
 
-struct DrawArgs;
-struct DrawArgs {
+struct t_dldc;
+struct t_dldc {
     s32 x;
     s32 y;
     s32 flags;
-    f32 scaleX;
-    f32 scaleY;
+    f32 XScale;
+    f32 YScale;
     u8 alpha;
     u8 pad15[3];
-    s32 v[4];
+    s32 Rgn[4];
 };
 
 struct WidgetNode;

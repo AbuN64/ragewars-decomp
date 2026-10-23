@@ -57,7 +57,7 @@ extern void func_8029973C_de();
 
 
 
-void func_80412634_de(GridList *arg0, DrawArgs style) {
+void func_80412634_de(GridList *arg0, sm_dldc style) {
     GridList *list = arg0;
     UnitMtx cell;
     u32 column;
