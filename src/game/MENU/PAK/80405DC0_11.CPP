@@ -95,7 +95,7 @@ extern char D_0044EEF4[];
 
 extern s32 func_80406178_de(Shared_PakMenu *menu, s32 ch, s32 mode);
 
-extern void func_80407290_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
+extern s32 Pak_SaveControllerRecord(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
 extern void func_80407578_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
@@ -307,7 +307,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     }
     if (D_8014D4EC_de != 0) {
         if (D_8014D4C0_de != 0) {
-            func_80407290_de(arg0, menu, arg2);
+            Pak_SaveControllerRecord(arg0, menu, arg2);
             return 1;
         }
     } else if (D_8014D4C0_de != 0) {

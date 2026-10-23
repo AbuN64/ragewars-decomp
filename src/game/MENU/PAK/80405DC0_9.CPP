@@ -97,22 +97,35 @@ extern void func_80253908_de(s32);
 extern void func_80253838_de(s32, void *);
 /* Save the small controller-pak record when capacity allows, release the
  * pending resources, and show the channel-specific success/error dialog. */
-s32 func_80407290_de(s32 unused, struct Shared_PakMenu *menu)
+static inline ObjRecAt5DC *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
+    if (D_8015375C != 0) {
+        *channel = D_800E28C8;
+        return 0;
+    }
+    *channel = menu->owner->unk4;
+    return menu->player;
+}
+
+static inline char *pakRecordChannelLabel(s32 channel) {
+    switch (channel) {
+    case 0:
+    default: return D_00450BF0_de;
+    case 1: return D_00450C14_de;
+    case 2: return D_00450C38_de;
+    case 3: return D_00450C5C_de;
+    }
+}
+
+/* us-rev1: 2/186 aligned edits remain: channel-argument load scheduling. */
+s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unusedEvent)
 {
-    struct SharedPlayer *player;
+    ObjRecAt5DC *player, *selectedPlayer;
     char extension[8];
-    char *label;
-    char *dialog;
     s32 channel, freeBytes, slots, required, status = 0;
     s32 insufficient = 1;
     s32 attempted = 0;
-    if (D_8015375C == 0) {
-        player = menu->player;
-        channel = menu->owner->unk4;
-    } else {
-        player = 0;
-        channel = D_800E28C8;
-    }
+    selectedPlayer = pakRecordChannel(menu, &channel);
+    player = selectedPlayer;
     if (D_8014D4C0_de != 0) {
         required = func_804057EC_de(0x18);
         status = Pak_GetFreePages(channel, &freeBytes);
@@ -131,7 +144,7 @@ s32 func_80407290_de(s32 unused, struct Shared_PakMenu *menu)
             }
             if (insufficient != 0) {
                 Pak_OpenDialog(D_8014561C, rw_pak_no_space_dialog(), player,
-                                player->views5E8.view698_34.unk698, menu->dialogData);
+                                (PakMenuSlot *)player->controller, menu->dialogData);
                 return 0;
             }
         }
@@ -144,19 +157,17 @@ s32 func_80407290_de(s32 unused, struct Shared_PakMenu *menu)
     D_800DE868 = 0;
     D_800E28BC = 0;
     if (!attempted) return 1;
-    switch (channel) {
-    case 1: label = D_00450C14_de; break;
-    case 2: label = D_00450C38_de; break;
-    case 3: label = D_00450C5C_de; break;
-    default: label = D_00450BF0_de; break;
+    if (status == 0) {
+        Pak_OpenDialog(D_8014561C, rw_pak_save_success_dialog(), player,
+                        (PakMenuSlot *)player->controller, pakRecordChannelLabel(channel));
+    } else {
+        Pak_OpenDialog(D_8014561C, rw_pak_save_error_dialog(), player,
+                        (PakMenuSlot *)player->controller, pakRecordChannelLabel(channel));
     }
-    dialog = status != 0 ? rw_pak_save_error_dialog() : rw_pak_save_success_dialog();
-    Pak_OpenDialog(D_8014561C, dialog, player,
-                    player->views5E8.view698_34.unk698, label);
     return 1;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80407290_de);
+INCLUDE_ASM("ovl_80400000", Pak_SaveControllerRecord);
 #endif
 
 #ifdef NON_MATCHING
