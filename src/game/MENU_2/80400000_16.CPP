@@ -58,7 +58,7 @@ extern s32 func_8028D888_de(void *);
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
 extern f32 func_802725FC_de(CVector3 *);
 /* 252/253 words (18 aligned edits); remaining: regalloc, the world-hit flag takes $v0 instead of $s0 so one move drops */
-void Menu_UpdateTrackCamera(SharedTrackCamera *out) {
+void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     CVector3 eye;
     CVector3 target;
     CVector3 delta;
@@ -88,7 +88,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *out) {
     scale = D_800DCB40[0];
     func_80271F9C_de(&eye, &eye, scale);
     func_80271F9C_de(&target, &target, scale);
-    out->distance = 0.0f;
+    camera->distance = 0.0f;
     func_80271F68_de(&delta, &target, &eye);
     if (((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) || (D_800E2830->spec.flags & 2)) {
         actor = D_80145060.actorList;
@@ -130,9 +130,9 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *out) {
     }
     yaw = Particle_GetHorizontalAngle(&delta);
     pitch = func_802725FC_de(&delta);
-    out->distance += yaw;
-    out->pitch = -pitch;
-    out->position = eye;
+    camera->distance += yaw;
+    camera->pitch = -pitch;
+    camera->position = eye;
 }
 #else
 INCLUDE_ASM("ovl_80400000", Menu_UpdateTrackCamera);

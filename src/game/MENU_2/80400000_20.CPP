@@ -45,25 +45,25 @@ static inline CVector3 TrackEnd(void) {
     return sp10;
 }
 /* 6/93 aligned edits (4 real + the 2 pre-prologue words the preceding padding blob holds); remaining: target keeps the second lookup's frame base in s0 */
-CVector3 func_80403660_de(void) {
-    CVector3 first,second,delta,result;
+CVector3 Menu_GetTrackStartAngles(void) {
+    CVector3 eye,target,direction,angles;
     if (D_800E2830->active == 0) {
-        result.x = 0;
-        result.y = 0;
-        result.z = 0;
-        return result;
+        angles.x = 0;
+        angles.y = 0;
+        angles.z = 0;
+        return angles;
     } else {
-        first = TrackStart();
-        second = TrackEnd();
-        func_80271F68_de(&delta,&second,&first);
-        result.x = -func_802725FC_de(&delta);
-        result.y = Particle_GetHorizontalAngle(&delta);
-        result.z = 0;
-        return result;
+        eye = TrackStart();
+        target = TrackEnd();
+        func_80271F68_de(&direction,&target,&eye);
+        angles.x = -func_802725FC_de(&direction);
+        angles.y = Particle_GetHorizontalAngle(&direction);
+        angles.z = 0;
+        return angles;
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80403660_de);
+INCLUDE_ASM("ovl_80400000", Menu_GetTrackStartAngles);
 #endif
 
 /* Sets the word at offset 0xB4 of the object D_800E2830 points to. */
