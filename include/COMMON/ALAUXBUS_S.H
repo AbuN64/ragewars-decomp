@@ -26,10 +26,6 @@ struct ALResampler;
 typedef struct ALResampler ALResampler;
 
 struct func_802B8CC8_S1;
-struct func_802B8CC8_S1 {
-    char pad0[0x2C];
-    void * unk2C;
-};
 
 struct ALParam_s1C;
 typedef struct ALParam_s1C ALParam_s1C;
@@ -72,9 +68,6 @@ struct ALSynth4C {
 typedef void ( *SharedRecV12)(void *, signed int, void *);
 
 struct ALEnvMixer4C;
-struct ALEnvMixer4C {
-    char pad[0x4C];
-};
 
 struct ALSynth;
 typedef struct ALSynth ALSynth;
@@ -157,15 +150,6 @@ typedef struct ALEnvMixer4C ALEnvMixer4C;
 
 struct Opaque_ALVoice_s;
 struct PVoice_s;
-struct PVoice_s {
-    ListLink node;
-    struct Opaque_ALVoice_s *vvoice;
-    ALFilter_s14 *channelKnob;
-    ALLoadFilter decoder;
-    ALResampler resampler;
-    ALEnvMixer4C envmixer;
-    s32 offset;
-};
 
 struct ALMainBus_s;
 typedef struct ALMainBus_s ALMainBus_s;
@@ -189,24 +173,6 @@ struct ALGlobals;
 typedef struct ALGlobals ALGlobals;
 
 struct ALSynth;
-struct ALSynth {
-    void *head;
-    ListLink pFreeList;
-    ListLink pAllocList;
-    ListLink pLameList;
-    s32 paramSamples;
-    s32 curSamples;
-    ALDMANew dma;
-    ALHeap *heap;
-    ALParam_s1C *paramList;
-    ALMainBus_s *mainBus;
-    ALAuxBus_s *auxBus;
-    ALFilter_s14 *outputFilter;
-    s32 numPVoices;
-    s32 maxAuxBusses;
-    s32 outputRate;
-    s32 maxOutSamples;
-};
 
 struct ALSave;
 struct ALSave {

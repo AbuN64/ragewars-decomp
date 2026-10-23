@@ -10,10 +10,6 @@ struct ALDelay28;
 typedef struct ALDelay28 ALDelay28;
 
 struct CallbackStateC;
-struct CallbackStateC {
-    unsigned char padding_0[8];
-    void (*callback)(void *, s32, s32);
-};
 
 
 struct func_802BB32C_S2;
@@ -132,18 +128,6 @@ extern float D_800C7888_de;
 extern float D_800C7884_de;
 
 struct IntegerState34;
-struct IntegerState34 {
-    char pad0[0x18];
-    s32 unk_18;
-    char pad18[0x1C - 0x18 - sizeof(s32)];
-    s32 unk_1C;
-    char pad1C[0x20 - 0x1C - sizeof(s32)];
-    s32 unk_20;
-    char pad20[0x24 - 0x20 - sizeof(s32)];
-    s32 unk_24;
-    char pad24[0x30 - 0x24 - sizeof(s32)];
-    s32 unk_30;
-};
 
 struct func_802BB32C_S1;
 typedef struct func_802BB32C_S1 func_802BB32C_S1;
@@ -172,11 +156,6 @@ typedef struct ALFilter_u1 {
     s16 outp;
     s32 type;
 } ALFilter_u1;
-typedef struct ALSave_u1 {
-    ALFilter_u1 filter;
-    s32 dramout;
-    s32 first;
-} ALSave_u1;
 extern char D_800C8DB0_eu_x[];
 extern char D_800C8DB4_eu_x[];
 #endif

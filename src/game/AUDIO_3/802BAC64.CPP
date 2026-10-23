@@ -8,6 +8,7 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
 #include "COMMON/ALDELAY28.H"
+#include "AUDIO_3/802B6380.H"
 #include "TYPES.H"
 #include "AUDIO_3/802BFD40.H"
 Acmd *func_802B6658_eu_x(ALSave_u1 *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)

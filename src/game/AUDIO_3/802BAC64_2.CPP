@@ -4,6 +4,7 @@
 #include "acmd.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
+#include "AUDIO_3/802BAC64.H"
 #include "sdk/libgultra.h"
 #include "COMMON/ALPARAM_S.H"
 #include "COMMON/ALDELAY28.H"

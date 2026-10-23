@@ -7,6 +7,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ALDELAY28.H"
+#include "AUDIO_3/CODE_802BA610.H"
 #include "TYPES.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"

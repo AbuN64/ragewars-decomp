@@ -4108,19 +4108,7 @@ struct ALFx2C {
 };
 struct ALDelay_func_802B5B94_de;
 struct ALFxCode802BAC64;
-struct ALFxCode802BAC64 {
-    ALFilter_s14 filter;
-    s16 *base;
-    s16 *input;
-    u32 length;
-    struct ALDelay_func_802B5B94_de *delay;
-    u8 section_count;
-    void *paramHdl;
-};
 struct ALGlobals_func_802B5B94_de;
-struct ALGlobals_func_802B5B94_de {
-    func_8022E694_S1 drvr;
-};
 struct ALRAWWaveInfo;
 struct ALRAWWaveInfo {
     ALRawLoop *loop;

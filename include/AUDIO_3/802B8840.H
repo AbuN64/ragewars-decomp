@@ -1,0 +1,40 @@
+#ifndef AUDIO_3_802B8840_H
+#define AUDIO_3_802B8840_H
+#include "TYPES.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/ALAUXBUS_S.H"
+struct func_802B8CC8_S1 {
+    char pad0[0x2C];
+    void * unk2C;
+};
+struct ALEnvMixer4C {
+    char pad[0x4C];
+};
+struct PVoice_s {
+    ListLink node;
+    struct Opaque_ALVoice_s *vvoice;
+    ALFilter_s14 *channelKnob;
+    ALLoadFilter decoder;
+    ALResampler resampler;
+    ALEnvMixer4C envmixer;
+    s32 offset;
+};
+struct ALSynth {
+    void *head;
+    ListLink pFreeList;
+    ListLink pAllocList;
+    ListLink pLameList;
+    s32 paramSamples;
+    s32 curSamples;
+    ALDMANew dma;
+    ALHeap *heap;
+    ALParam_s1C *paramList;
+    ALMainBus_s *mainBus;
+    ALAuxBus_s *auxBus;
+    ALFilter_s14 *outputFilter;
+    s32 numPVoices;
+    s32 maxAuxBusses;
+    s32 outputRate;
+    s32 maxOutSamples;
+};
+#endif
