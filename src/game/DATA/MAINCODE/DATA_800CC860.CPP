@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US))
-/* ROM-grounded data: rodata/func_802B4A10_eu_x/800CC860 */
+/* ROM-grounded data: rodata/Libultra_PullEnvelope/800CC860 */
 #ifdef VERSION_DE
 const unsigned int D_blob_phase2_66dc9ef10576bbe710b0[17] = {
     0x002B4B6C, 0x002B4B94, 0x002B4B94, 0x002B4B94, 0x002B4B94, 0x002B4B94, 0x002B4B94, 0x002B4B94,

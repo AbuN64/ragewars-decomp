@@ -4232,7 +4232,7 @@ segments:
       - [0xC8204, rodata, data_800C/D_blob_9403cb48fa28ff2e541b]
       - [0xC8210, rodata, data_800C/D_blob_phase2_66dc9ef10576bbe710b0]
       - [0xC8254, data, data_800C/rodata_unresolved_800C7654]
-      - [0xC8258, rodata, data_800C/literals_func_802B4730_de]
+      - [0xC8258, rodata, data_800C/literals_Libultra_PullEnvelope]
       - [0xC8308, rodata, data_800C/D_802B5288_CD558]
       - [0xC8310, rodata, data_800C/D_802B5300_CD560]
       - [0xC8338, data, data_800C/rodata_unresolved_800C7738]

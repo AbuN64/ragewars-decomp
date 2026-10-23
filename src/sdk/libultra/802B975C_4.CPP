@@ -7,38 +7,27 @@
 #include "SDK/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
 
-#if defined(VERSION_DE)
-#define ENVPULL_NAME func_802B4730_de
-#define ENVPULL_FILE D_800C7600
-extern char D_800C7600[];
-#elif defined(VERSION_EU)
-#define ENVPULL_NAME func_802B49D0_eu
-#define ENVPULL_FILE D_800CC850
-#else
-#define ENVPULL_NAME func_802B4A10_eu_x
-#define ENVPULL_FILE D_800CC850
-#endif
 #ifdef NON_MATCHING
-/* 94/339 words aligned (same size); remaining: register allocation (127 hoisted into a saved reg, env/count/offset regs permuted) and the jump table stays in rodata */
+/* 20/339 aligned edits remain: event-pointer allocation and instruction scheduling. */
 #include "TYPES.H"
 #include "acmd.h"
 #include "sdk/al_globals.h"
 
-typedef struct DraftAudioVoice { char pad0[0xD8]; s32 offset; } DraftAudioVoice;
-typedef struct DraftAudioEvent {
-    struct DraftAudioEvent *next;
+typedef struct EnvelopeVoice { char pad0[0xD8]; s32 offset; } EnvelopeVoice;
+typedef struct EnvelopeEvent {
+    struct EnvelopeEvent *next;
     s32 delta;
     s16 type, flag;
     union {
         s32 word;
-        DraftAudioVoice *voice;
+        EnvelopeVoice *voice;
         struct { s16 unused, pan; } panChange;
         struct { s32 pitch; s16 volume; u8 pan, fx; s32 duration; s32 sound; } start;
         struct { s32 value, duration; } volume;
     } data;
-} DraftAudioEvent;
-typedef struct DraftEnv {
-    struct DraftEnv *source;
+} EnvelopeEvent;
+typedef struct EnvelopeFilter {
+    struct EnvelopeFilter *source;
     void *handler;
     s32 (*setParam)(void *, s32, s32);
     s16 inp, outp;
@@ -50,49 +39,75 @@ typedef struct DraftEnv {
     u16 rratl;
     s16 rratm, rtgt;
     s32 delta, segEnd, first;
-    DraftAudioEvent *ctrlList, *ctrlTail;
-} DraftEnv;
+    EnvelopeEvent *ctrlList, *ctrlTail;
+} EnvelopeFilter;
+Acmd *Libultra_PullEnvelope(EnvelopeFilter *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands);
 extern s16 D_800D4210[128];
 extern char D_800CC850[], D_800C7604[];
-extern void _freePVoice(void *, DraftAudioVoice *);
+extern void _freePVoice(void *, EnvelopeVoice *);
 extern void __freeParam(void *);
 extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);
 extern f32 func_802B5288_de(f32, s32, s32, s32);
 
-Acmd *ENVPULL_NAME(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands) {
+Acmd *Libultra_PullEnvelope(EnvelopeFilter *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands) {
     s16 input, output;
-    DraftAudioEvent *event;
-    DraftEnv *parent;
-    s32 nextOffset, elapsed, previous;
-    input = 0;
+    s16 *equalPower;
+    EnvelopeEvent *startEvent;
+    EnvelopeEvent *changeEvent;
+    EnvelopeEvent *waveEvent;
+    EnvelopeEvent *freeEvent;
+    EnvelopeEvent *event;
+    EnvelopeFilter *parent;
+    EnvelopeFilter *source;
+    s32 nextOffset, elapsed, previous, delta, end;
     output = 0;
-    previous = sampleOffset;
+    input = 0;
+    nextOffset = sampleOffset;
     while (env->ctrlList) {
+        equalPower = D_800D4210;
+        previous = nextOffset;
         nextOffset = env->ctrlList->delta;
         elapsed = nextOffset - previous;
         if (count < elapsed) break;
-        if (elapsed < 0) func_802BAC50_de(ENVPULL_FILE, D_800C7604, 0x67);
-        if (elapsed > 160) func_802BAC50_de(ENVPULL_FILE, D_800C7604, 0x68);
+        if (elapsed < 0) func_802BAC50_de(D_800CC850, D_800C7604, 0x67);
+        if (elapsed > 160) func_802BAC50_de(D_800CC850, D_800C7604, 0x68);
         switch (env->ctrlList->type) {
-        case 0:
-            event = env->ctrlList;
-            event->data.voice->offset = 0;
-            count -= elapsed;
-            _freePVoice(D_800D4070, event->data.voice);
-            goto remove;
+        case 13:
+            startEvent = env->ctrlList;
+            parent = env;
+            if (startEvent->flag) env->setParam(env, 8, 0);
+            env->setParam(env, 5, startEvent->data.start.sound);
+            env->setParam(env, 9, 0);
+            env->first = 1;
+            env->delta = 0;
+            env->segEnd = startEvent->data.start.duration;
+            env->volume = (startEvent->data.start.volume * startEvent->data.start.volume) >> 15;
+            env->pan = startEvent->data.start.pan;
+            env->dryamt = equalPower[startEvent->data.start.fx];
+            env->wetamt = equalPower[128 - startEvent->data.start.fx - 1];
+            if (startEvent->data.start.duration != 0) {
+                env->cvolL = 1;
+                env->cvolR = 1;
+            } else {
+                env->cvolL = (env->volume * equalPower[env->pan]) >> 15;
+                env->cvolR = (env->volume * equalPower[128 - env->pan - 1]) >> 15;
+            }
+            source = parent->source;
+            if (source) source->setParam(source, 7, startEvent->data.start.pitch);
+            break;
         case 11:
         case 12:
         case 16:
             commands = func_802B4C7C_de(env, &input, &output, elapsed, sampleOffset, commands);
-            if (env->delta < env->segEnd) {
-                env->cvolL = (s32)func_802B5288_de(env->cvolL, env->delta, env->lratm, env->lratl);
-                env->cvolR = (s32)func_802B5288_de(env->cvolR, env->delta, env->rratm, env->rratl);
-            } else {
-                env->ltgt = (env->volume * D_800D4210[env->pan]) >> 15;
-                env->rtgt = (env->volume * D_800D4210[128 - env->pan - 1]) >> 15;
+            if (env->delta >= env->segEnd) {
+                env->ltgt = (env->volume * equalPower[env->pan]) >> 15;
+                env->rtgt = (env->volume * equalPower[128 - env->pan - 1]) >> 15;
                 env->cvolL = env->ltgt;
                 env->delta = env->segEnd;
                 env->cvolR = env->rtgt;
+            } else {
+                env->cvolL = (s32)func_802B5288_de(env->cvolL, env->delta, env->lratm, env->lratl);
+                env->cvolR = (s32)func_802B5288_de(env->cvolR, env->delta, env->rratm, env->rratl);
             }
             if (env->cvolL == 0) env->cvolL = 1;
             if (env->cvolR == 0) env->cvolR = 1;
@@ -102,42 +117,27 @@ Acmd *ENVPULL_NAME(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset, Acmd
                 env->volume = (env->ctrlList->data.volume.value * env->ctrlList->data.volume.value) >> 15;
                 env->segEnd = env->ctrlList->data.volume.duration;
             }
-            event = env->ctrlList;
-            if (event->type == 16) {
-                env->dryamt = D_800D4210[event->data.word];
-                env->wetamt = D_800D4210[128 - event->data.word - 1];
+            changeEvent = env->ctrlList;
+            if (changeEvent->type == 16) {
+                env->dryamt = equalPower[changeEvent->data.word];
+                env->wetamt = equalPower[128 - changeEvent->data.word - 1];
             }
             env->first = 1;
             break;
-        case 13:
-            event = env->ctrlList;
-            parent = env;
-            if (event->flag) env->setParam(env, 8, 0);
-            env->setParam(env, 5, event->data.start.sound);
-            env->setParam(env, 9, 0);
-            env->first = 1;
-            env->delta = 0;
-            env->segEnd = event->data.start.duration;
-            env->volume = (event->data.start.volume * event->data.start.volume) >> 15;
-            env->pan = event->data.start.pan;
-            env->dryamt = D_800D4210[event->data.start.fx];
-            env->wetamt = D_800D4210[128 - event->data.start.fx - 1];
-            if (event->data.start.duration == 0) {
-                env->cvolL = (env->volume * D_800D4210[env->pan]) >> 15;
-                env->cvolR = (env->volume * D_800D4210[128 - env->pan - 1]) >> 15;
-            } else { env->cvolL = 1; env->cvolR = 1; }
-            parent = parent->source;
-            if (parent) parent->setParam(parent, 7, event->data.start.pitch);
-            break;
         case 14:
-            event = env->ctrlList;
-            if (event->flag) env->setParam(env, 8, 0);
-            env->setParam(env, 5, event->data.word);
+            waveEvent = env->ctrlList;
+            if (waveEvent->flag) env->setParam(env, 8, 0);
+            env->setParam(env, 5, waveEvent->data.word);
             env->setParam(env, 9, 0);
             break;
         case 15:
             commands = func_802B4C7C_de(env, &input, &output, elapsed, sampleOffset, commands);
             env->setParam(env, 4, 0);
+            break;
+        case 0:
+            freeEvent = env->ctrlList;
+            freeEvent->data.voice->offset = 0;
+            _freePVoice(D_800D4070, freeEvent->data.voice);
             break;
         default:
             commands = func_802B4C7C_de(env, &input, &output, elapsed, sampleOffset, commands);
@@ -145,26 +145,20 @@ Acmd *ENVPULL_NAME(DraftEnv *env, s16 *unused, s32 count, s32 sampleOffset, Acmd
             break;
         }
         count -= elapsed;
-remove:
         event = env->ctrlList;
         output += elapsed << 1;
         env->ctrlList = event->next;
         if (!env->ctrlList) env->ctrlTail = 0;
         __freeParam(event);
-        previous = nextOffset;
     }
     commands = func_802B4C7C_de(env, &input, &output, count, sampleOffset, commands);
-    if (env->segEnd < env->delta) env->delta = env->segEnd;
+    delta = env->delta;
+    end = env->segEnd;
+    if (end < delta) env->delta = end;
     return commands;
 }
 #else
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_802B4730_de);
-#elif defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_802B49D0_eu);
-#else
-INCLUDE_ASM("span_1000", func_802B4A10_eu_x);
-#endif
+INCLUDE_ASM("span_1000", Libultra_PullEnvelope);
 #endif
 
 /* _pullSubFrame, drafted from ultralib src/audio/env.c: when the envelope mixer is playing, pull

@@ -4386,7 +4386,7 @@ segments:
       - [0xCD454, rodata, data_800C/D_blob_9403cb48fa28ff2e541b]
       - [0xCD460, rodata, data_800C/D_blob_phase2_66dc9ef10576bbe710b0]
       - [0xCD4A4, data, data_800C/D_blob_8d0aa5a0a94ec31140ea]
-      - [0xCD4A8, rodata, data_800C/literals_func_802B4A10_eu_x]
+      - [0xCD4A8, rodata, data_800C/literals_Libultra_PullEnvelope]
       - [0xCD558, rodata, data_800C/D_blob_7cfc0ff81f0572c9de9f]
       - [0xCD560, rodata, data_800C/D_auto_src_rw_pool_802B5300_CD560_us_rev1]
       - [0xCD588, data, data_800C/D_blob_b9083d43d7e7677e6d8a]
