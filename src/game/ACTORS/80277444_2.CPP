@@ -341,6 +341,7 @@ extern void Actors_AccumulateVertexLighting();
 s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     u8 buffer[0x100];
     s32 hasOwner;
+    s32 hasMatch;
     s32 size;
     u8 *model;
     u8 **memory;
@@ -352,7 +353,7 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
     s32 sum;
     s32 word;
     u8 *header;
-    func_80278020_de((void *)arg2, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)arg5);
+    hasMatch = func_80278020_de((void *)arg2, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)arg5);
     model = func_8028FDC8_de(arg0, 0, &size);
     count = *(s32 *)(model + 4);
     for (i = 0; i < count; i++) {
@@ -360,8 +361,8 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
         D_80111D70[i * 3 + 1] = 0;
         D_80111D70[i * 3 + 2] = 0;
     }
-    if (arg5 != 0) {
-        memory = func_8025343C_de(0, 0, size + count * 4 + 0x10, D_800C4B1C_de);
+    if (hasMatch != 0) {
+        memory = func_8025343C_de(0, size + count * 4 + 0x10, 0, D_800C4B1C_de);
         if (memory == 0) {
             return 0;
         }
@@ -373,7 +374,7 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
         data = *memory + *(s32 *)(header + 4);
         colors = *memory + *(s32 *)(header + 8);
     } else {
-        memory = func_8025343C_de(0, 0, size + 8, D_800C4B1C_de);
+        memory = func_8025343C_de(0, size + 8, 0, D_800C4B1C_de);
         if (memory == 0) {
             return 0;
         }
@@ -404,7 +405,7 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
         }
     }
     func_80278274_de((void *)data, (void *)D_80111D70);
-    if (arg5 != 0) {
+    if (hasMatch != 0) {
         for (i = 0; i < *(s32 *)(data + 4); i++) {
             u8 *vertex = data + 8 + i * 0x10;
             s32 channel;
