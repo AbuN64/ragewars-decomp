@@ -65,7 +65,7 @@ void func_8040C09C_de(void)
 }
 /* Stores its argument in D_800E28D8, which func_8040C474_de returns, and calls func_8040BBB0_de. */
 extern s32 D_800E28D8;
-void func_8040C2D4_de(s32 value) {
+void Frontend_ApplyScreenModeValue(s32 value) {
     D_800E28D8 = value;
     func_8040BBB0_de();
 }

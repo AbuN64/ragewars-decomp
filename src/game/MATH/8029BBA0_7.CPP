@@ -221,7 +221,7 @@ void Vector3RotateRoll(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     *arg0 = tmp;
 }
 
-void func_8029E77C_de(f32 *arg0, f32 *arg1, f32 *arg2) {
+void Vector3Angles(f32 *arg0, f32 *arg1, f32 *arg2) {
     f32 magnitude_squared;
     f32 magnitude;
     f32 x;
@@ -242,7 +242,7 @@ void func_8029E77C_de(f32 *arg0, f32 *arg1, f32 *arg2) {
     *arg1 = -func_8029C044_de(arg0[1], magnitude);
 }
 
-void func_8029E810_de(f32 *arg0, f32 *arg1, f32 *arg2) {
+void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2) {
     f32 magnitude_squared;
     f32 magnitude;
     f32 x;

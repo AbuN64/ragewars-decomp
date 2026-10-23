@@ -32,7 +32,7 @@ extern u32 D_800DF28C;
 
 extern Texture *D_800DF254;
 
-void func_804190C4_de(s32 mode) {
+void Gfx_SetTextureMode(s32 mode) {
     if (D_80153F68 == 0) {
         mode = 14;
     }
@@ -45,7 +45,7 @@ void func_804190C4_de(s32 mode) {
     }
 }
 
-void func_804191A4_de(void) {
+void Gfx_SyncPipeline(void) {
     Gfx *gfx;
 
     if (D_800E32E4 == 0) {
@@ -54,11 +54,11 @@ void func_804191A4_de(void) {
     }
 }
 
-void func_804191E8_de(void) {
+void Gfx_ResetPipelineSync(void) {
     D_800E32E4 = 0;
 }
 
-void func_804191F8_de(u32 color) {
+void Gfx_SetPackedColor(u32 color) {
     Gfx *gfx;
 
     if (color == D_800DF28C) {

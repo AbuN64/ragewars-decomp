@@ -1,10 +1,10 @@
 #ifndef MATH_8029BBA0_7_H
 #define MATH_8029BBA0_7_H
 #include "MATH/DOUBLEBITS.H"
-extern void func_8029E810_de(f32 *arg0, f32 *arg1, f32 *arg2);
+extern void Vector3AnglesInverse(f32 *arg0, f32 *arg1, f32 *arg2);
 extern void Vector3ProjectArray(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32 oy, f32 sy);
 extern void Vector3IntersectPlane(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
-extern void func_8029E77C_de(f32 *arg0, f32 *arg1, f32 *arg2);
+extern void Vector3Angles(f32 *arg0, f32 *arg1, f32 *arg2);
 extern f32 Vector3Dot(f32 *a, f32 *b);
 extern void Vector3Distance(f32 *a, f32 *b);
 extern void Vector3Cross(CVector3 *out, CVector3 *a, CVector3 *b);

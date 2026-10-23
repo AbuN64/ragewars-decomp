@@ -331,7 +331,7 @@ void func_8040F218_de(struct QuadRecAt2C *record, s32 first, s32 second, s32 thi
     record->values[3] = fourth;
 }
 
-void func_8040F230_de(ButtonWidget *widget, Triple at, Style style) {
+void Frontend_DrawButtonImage(ButtonWidget *widget, Triple at, Style style) {
     Shared_Quad box0;
     Shared_Quad box1;
     struct Pair14 *image;
@@ -352,7 +352,7 @@ void func_8040F230_de(ButtonWidget *widget, Triple at, Style style) {
     }
 }
 
-void func_8040F350_de(WidgetLayout *arg0, Args args) {
+void Frontend_DrawClippedChildren(WidgetLayout *arg0, Args args) {
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
     Quad_func_802A1BE0_de transformed;
