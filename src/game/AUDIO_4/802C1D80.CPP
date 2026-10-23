@@ -7,20 +7,20 @@
 #include "AUDIO_4/802C1D80.H"
 
 void func_802BCC90_de(void) {
-    DiskTransferInfo *temp_a2;
+    DiskTransferInfo *diskTransferInfo;
     u32 status;
 
     status = *(volatile u32 *)0xA4600010;
-    temp_a2 = (DiskTransferInfo *)(D_801487B4 + 0x14);
+    diskTransferInfo = (DiskTransferInfo *)(D_801487B4 + 0x14);
     while (status & 3) {
         status = *(volatile u32 *)0xA4600010;
     }
-    *(volatile u32 *)0xA5000510 = temp_a2->bmControl | 0x10000000;
+    *(volatile u32 *)0xA5000510 = diskTransferInfo->bmControl | 0x10000000;
     status = *(volatile u32 *)0xA4600010;
     while (status & 3) {
         status = *(volatile u32 *)0xA4600010;
     }
-    *(volatile u32 *)0xA5000510 = temp_a2->bmControl;
+    *(volatile u32 *)0xA5000510 = diskTransferInfo->bmControl;
     func_802BCD64_de();
     {
         volatile u32 *statusAddr = (volatile u32 *)0xA4600010;
