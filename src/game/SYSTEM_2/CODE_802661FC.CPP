@@ -91,7 +91,7 @@ void func_8028CE94_de(Shared_World *, s32, s32, s32, s32, s32, struct NodeCode80
 extern s32 D_8011D8D0;
 extern float D_800C43D8_de;
 
-void func_8026641C_de(void *object, char *param_2, s32 param_3, CVector3 position, CVector3 impulse,
+void System_ApplyDamageReaction(void *object, char *param_2, s32 param_3, CVector3 position, CVector3 impulse,
                       s32 param_10, void *shield, u32 param_12) {
     s32 param_1 = (s32)object;
     char cVar1;
@@ -151,10 +151,8 @@ void func_8026641C_de(void *object, char *param_2, s32 param_3, CVector3 positio
         }
         if (param_3 != 0) {
             if (((iVar4 != 0) && ((*(u32 *)(param_2 + 0x100) & 0x300000) != 0)) &&
-    /* FAKEMATCH: Fuzzy draft keeps native byte reads from opaque actor storage. */
-                (((u32)(u8)*(char *)(iVar4 + 0x66) - 4) < 2)) {
-    /* FAKEMATCH: Fuzzy draft keeps native byte reads from opaque actor storage. */
-                cVar1 = *(char *)(iVar4 + 0x66);
+                (((u32)(u8)((Shield *)iVar4)->effectKind - 4) < 2)) {
+                cVar1 = ((Shield *)iVar4)->effectKind;
                 if (*(s32 *)(*(s32 *)(param_2 + 0x1d8) + 0x5dc) != 0) {
                     iVar4 = *(s32 *)(param_2 + 0x1d8);
                     local_68 = -impulse.x;
@@ -210,7 +208,7 @@ void func_8026641C_de(void *object, char *param_2, s32 param_3, CVector3 positio
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8026641C_de);
+INCLUDE_ASM("span_1000", System_ApplyDamageReaction);
 #endif
 
 #include "stddef.h"
@@ -512,7 +510,7 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
             }
             if (damage != 0.0f) {
                 func_802171FC_de(source, &source->unk170, &hit);
-                func_8026641C_de(source, target, adjusted, position, impulse, knockback, shield, flags);
+                System_ApplyDamageReaction(source, target, adjusted, position, impulse, knockback, shield, flags);
             }
         }
     }

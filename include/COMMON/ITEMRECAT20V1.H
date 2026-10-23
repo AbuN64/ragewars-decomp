@@ -1544,7 +1544,9 @@ typedef struct Actor_func_80214310_de Actor_func_80214310_de;
 
 struct Shield;
 struct Shield {
-    char pad0[0x68];
+    char pad0[0x66];
+    char effectKind; /* 0x66: impact response variant (4 or 5) */
+    u8 reserved67;
     f32 factor;
 };
 
