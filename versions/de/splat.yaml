@@ -3328,7 +3328,6 @@ segments:
       - [0xC2D74, rodata, data_800C/D_800C2174_de]
       - [0xC2D78, rodata, data_800C/D_800C2178_de]
       - [0xC2D7C, rodata, data_800C/literals_func_80215410_de]
-      - [0xC2D80, rodata, data_800C/D_80215868_C7E70]
       - [0xC2D98, rodata, data_800C/literals_Weapons_GetFacingSide]
       - [0xC2DC4, rodata, data_800C/D_blob_9daadc9a9b5d98ac85dc]
       - [0xC2DC8, rodata, data_800C/D_blob_3bef34a9452fab132562]

@@ -99,49 +99,65 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
     arg3->flatDist = func_802B72B0_de((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/PROBE.H"
-extern f32 D_800C2180_de, D_800C2184_de, D_800C2188_de, D_800C218C, D_800C2190_de, D_800C2194, D_800C21C0_de[];
 extern s32 D_801041F0;
 extern s32 func_802462E8_de(Actor_u1 *, CVector3, char **);
 
 /* Aim toward a point; when obstructed, try progressively wider left/right
  * directions and choose the first clear probe. */
-f32 func_80215868_de(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) {
+extern f32 func_8024D398_de(Actor_u1 *);
+#include "COMMON/MATH_HELPERS.H"
+static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
+    f32 dx;
+    f32 dz;
+    f32 dist;
+    f32 s;
+    f32 c;
+    f32 dot;
+    f32 angle;
+
+    dx = point.x - actor->position.x;
+    dz = point.z - actor->position.z;
+    dist = func_802B72B0_de(dx * dx + dz * dz);
+    if (dist == 0.0f) {
+        return 0.0f;
+    }
+    do {
+        s = func_802B7130_de(actor->yaw);
+    } while (0);
+    c = -func_802B6560_de(actor->yaw);
+    dot = (dx * -s + dz * c) / dist;
+    dot = ((RW_MIN(dot, 1.0f)) < (-1.0f) ? (-1.0f) : (RW_MIN(dot, 1.0f)));
+    angle = func_802745D0_de(dot);
+    if (!(dx * c + dz * s > 0.0f)) {
+        angle = -angle;
+    }
+    return angle;
+}
+f32 Weapons_FindClearAimAngle(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) {
     CVector3 probe;
     char *hit;
-    f32 dx = point.x - actor->position.x;
-    f32 dz = point.z - actor->position.z;
-    f32 length = func_802B72B0_de(dx * dx + dz * dz);
-    f32 heading, cosine, sine, dot, offset, angle, bias;
-    s32 step, side;
-    if (length == 0.0f) {
-        heading = 0.0f;
-    } else {
-        cosine = func_802B7130_de(actor->yaw);
-        sine = -func_802B6560_de(actor->yaw);
-        dot = (dx * -cosine + dz * sine) / length;
-        if (dot < D_800C2184_de) dot = D_800C2184_de;
-        else if (D_800C2180_de < dot) dot = D_800C2180_de;
-        heading = func_802745D0_de(dot);
-        if (!(dx * sine + dz * cosine > 0.0f)) heading = -heading;
-    }
+    f32 heading = Weapons_ProbeHeading(actor, point);
+    f32 cosine, sine, offset, angle, bias;
+    s32 step, side, parity;
     if ((actor->flags & 0x200) && func_802462E8_de(actor, point, &hit)) {
         if (target != 0 && D_801041F0 == target) return heading;
+        parity = ((u32)actor % 744U) & 1;
         probe.y = actor->position.y;
         for (step = 1; step < 6; step++) {
-            offset = (f32)step * D_800C2188_de;
+            offset = (f32)step * (RW_PI_F6 / 6.0f);
             for (side = 0; side < 2; side++) {
-                if (side != (((s32)actor % 744) & 1)) {
-                    angle = heading + offset;
-                    bias = D_800C2190_de;
+                angle = heading;
+                if (side != parity) {
+                    angle += offset;
+                    bias = (RW_PI_F6 / 12.0f);
                 } else {
-                    angle = heading - offset;
-                    bias = D_800C2194;
+                    angle -= offset;
+                    bias = (-RW_PI_F6 / 12.0f);
                 }
-                cosine = func_802B7130_de(actor->yaw + D_800C218C + angle);
+                cosine = func_802B7130_de(actor->yaw + 3.1415927f + angle);
                 probe.x = actor->position.x + cosine * (distance * func_8024D398_de(actor));
-                sine = func_802B6560_de(actor->yaw + D_800C218C + angle);
+                sine = func_802B6560_de(actor->yaw + 3.1415927f + angle);
                 probe.z = actor->position.z + sine * (distance * func_8024D398_de(actor));
                 if (!func_802462E8_de(actor, probe, 0)) {
                     angle += bias;
@@ -153,13 +169,6 @@ f32 func_80215868_de(Actor_u1 *actor, CVector3 point, s32 target, f32 distance) 
     }
     return heading;
 }
-#else
-INCLUDE_ASM("span_1000", func_80215868_de);
-#endif
-/* func_80215868_de's float literals (1, -1, pi/6, pi, +-pi/12), placed here until it is matched. */
-const unsigned int D_80215868_C7E70[6] = {
-    0x3F800000, 0xBF800000, 0x3F060A93, 0x40490FDB, 0x3E860A93, 0xBE860A93,
-};
 
 #include "COMMON/MATH_HELPERS.H"
 extern void func_8027207C_de(CVector3 *);
