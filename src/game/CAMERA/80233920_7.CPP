@@ -29,7 +29,7 @@ extern void func_8022A2A0_de(void *, char *);
 extern void func_8028B028_de(char *, char *);
 extern void func_802A5180_de(void *, char *);
 extern void func_802905F4_de(char *, char *);
-extern void func_80286454_de(char *, char *);
+extern void Scene_DrawTransparentObjects(char *, char *);
 extern void func_80228958_de(ObjRecAt20V2 *, char *);
 extern void func_8023B3F8_de(char *, char *);
 extern void func_8028B160_de(char *, char *);
@@ -60,7 +60,7 @@ void func_802362E8_de(char *view, char *world) {
     if (func_80245798_de() == 0) {
         func_802905F4_de(world + 0x11778, view);
     }
-    func_80286454_de(world, view);
+    Scene_DrawTransparentObjects(world, view);
     func_80228958_de(&D_80145040, view);
     func_8023B3F8_de(view + 0x570, view);
     func_8028B160_de(world, view);

@@ -196,14 +196,7 @@ first_pass_done:
 }
 
 #ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
-#ifndef PUSH_GFX
-#define PUSH_GFX(w0, w1) do { u32 *cmd_ = (u32 *)D_80110634; cmd_[0] = (w0); cmd_[1] = (u32)(w1); D_80110634 = (void *)(cmd_ + 2); } while (0)
-#endif
-extern f32 D_800C50FC_de;
-extern u32 *D_80110634;
+extern Gfx *D_80110634;
 extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
 extern void func_802390D0_de(void *, void *);
@@ -214,45 +207,56 @@ extern void func_80249E28_de(void *, void *);
 /* Draws a world's scene objects back to front: emits the world's static display list if there is one, then
  * measures each object's squared distance to the camera (offset by a jittered vector from func_802390D0_de),
  * sorts the list with func_802852C0_de and draws each object by its kind (0 actor, 1 prop, 3 effect). */
-void func_80286454_de(void *world, void *camera) {
+#include "COMMON/WORLD.H"
+#include "COMMON/LEVEL_ACTOR.H"
+#include "gbi.h"
+/* The static-instance bounds view also used by the adjacent scene pass. */
+typedef struct SceneStaticBounds {
+    u8 pad0[0xB8];
+    Box bounds;
+} SceneStaticBounds;
+/* 23/181 aligned edits; remaining: distance-case branching and register allocation. */
+void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     SortEntry entries[0x800];
-    f32 jitter[3];
+    CVector3 jitter;
     s32 count;
     s32 i;
     f32 ox;
     f32 oy;
     f32 oz;
-    if (FIELD(void *, world, 0x124) != 0) {
-        PUSH_GFX(0xDE000000, FIELD(void *, world, 0x124));
+    if ((void *)world->counter124 != 0) {
+        gSPDisplayList(D_80110634++, (void *)world->counter124);
     }
-    count = FIELD(s32, world, 0x10BC);
+    count = world->drawableCount;
     if (count == 0) {
         return;
     }
-    PUSH_GFX(0xDB040004, 1);
-    PUSH_GFX(0xDB04000C, 1);
-    PUSH_GFX(0xDB040014, 0xFFFF);
-    PUSH_GFX(0xDB04001C, 0xFFFF);
-    func_802390D0_de(jitter, camera);
-    ox = jitter[0] * D_800C50FC_de;
-    func_802390D0_de(jitter, camera);
-    oy = jitter[1] * D_800C50FC_de;
-    func_802390D0_de(jitter, camera);
-    oz = jitter[2] * D_800C50FC_de;
+    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_1);
+    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
+    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
+    gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
+    func_802390D0_de(&jitter, camera);
+    ox = jitter.x * -2.0f;
+    func_802390D0_de(&jitter, camera);
+    oy = jitter.y * -2.0f;
+    func_802390D0_de(&jitter, camera);
+    oz = jitter.z * -2.0f;
     for (i = 0; i < count; i++) {
-        void *object = FIELD(void *, world, 0x10C0 + i * 4);
+        LevelActor *object = world->drawables[i];
         f32 x;
         f32 y;
         f32 z;
-        u8 kind = FIELD(u8, object, 0);
-        if (kind != 1 && kind < 2 && kind == 0) {
-            x = FIELD(f32, object, 0xB8) + FIELD(f32, object, 0xC4) + ox;
-            y = FIELD(f32, object, 0xBC) + FIELD(f32, object, 0xC8) + oy;
-            z = FIELD(f32, object, 0xC0) + FIELD(f32, object, 0xCC) + oz;
-        } else {
-            x = FIELD(f32, object, 0x8) + FIELD(f32, object, 0x8) + ox;
-            y = FIELD(f32, object, 0xC) + FIELD(f32, object, 0xC) + oy;
-            z = FIELD(f32, object, 0x10) + FIELD(f32, object, 0x10) + oz;
+        switch (object->kind) {
+        case 0:
+            x = ((SceneStaticBounds *)object)->bounds.min.x + ((SceneStaticBounds *)object)->bounds.max.x + ox;
+            y = ((SceneStaticBounds *)object)->bounds.min.y + ((SceneStaticBounds *)object)->bounds.max.y + oy;
+            z = ((SceneStaticBounds *)object)->bounds.min.z + ((SceneStaticBounds *)object)->bounds.max.z + oz;
+            break;
+        case 1:
+        default:
+            x = object->position0.x + object->position0.x + ox;
+            y = object->position0.y + object->position0.y + oy;
+            z = object->position0.z + object->position0.z + oz;
         }
         entries[i].object = object;
         entries[i].distance = x * x + y * y + z * z;
@@ -260,23 +264,23 @@ void func_80286454_de(void *world, void *camera) {
     func_802852C0_de(entries, count, 8, D_0028E044, D_0028DFE4);
     func_8026D980_de();
     for (i = 0; i < count; i++) {
-        void *object = entries[i].object;
-        switch (FIELD(u8, object, 0)) {
+        LevelActor *object = entries[i].object;
+        switch (object->kind) {
         case 0:
             func_80250A9C_de(object, camera);
             break;
-        case 1:
-            func_80249E28_de(object, camera);
-            break;
         case 3:
             func_8024EB90_de(object);
+            break;
+        case 1:
+            func_80249E28_de(object, camera);
             break;
         }
     }
     func_8026D9D0_de();
 }
 #else
-INCLUDE_ASM("span_1000", func_80286454_de);
+INCLUDE_ASM("span_1000", Scene_DrawTransparentObjects);
 #endif
 
 #include "COMMON/APPROACHLOCATION.H"
