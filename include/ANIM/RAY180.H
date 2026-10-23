@@ -497,7 +497,7 @@ typedef struct CollisionVertex {
 } CollisionVertex;
 
 
-extern void func_80242FE8_de(void *arg0, void *arg1);
+extern void Anim_TraceMeshDisplayList(void *arg0, void *arg1);
 
 extern void D_00243814();
 extern void D_00243850();

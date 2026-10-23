@@ -58,7 +58,7 @@ void func_80243874_de(void *arg0) {
         var_s0 = 0;
         if (temp_s1 > 0) {
             do {
-                func_80242FE8_de(arg0, func_8028FDB4_de((void *) temp_v0, var_s0));
+                Anim_TraceMeshDisplayList(arg0, func_8028FDB4_de((void *) temp_v0, var_s0));
                 var_s0 += 1;
             } while (var_s0 < temp_s1);
         }

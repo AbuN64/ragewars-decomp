@@ -2,129 +2,137 @@
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
-#include "COMMON/EXTERNS_14.H"
+#include "ANIM/RAY180.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-void func_802433DC_de(s32 *, void *);
-
-void func_80242FE8_de(s32 *param_1, void *param_2) {
-    u32 *puVar2;
-    s32 iVar3;
-    u32 uVar4;
-    u32 uVar5;
-    u32 *puVar6;
-    float *pfVar7;
-    s16 *psVar8;
-    s16 *psVar9;
-    u32 uVar10;
-    u32 *puVar11;
-    s32 iVar12;
-    u32 uVar13;
-    u8 bVar1;
-    u32 scratch[0x100];
-    char *auStack_448 = (char *)scratch;
-    float *afStack_448 = (float *)&auStack_448[0];
-    u32 *auStack_430 = (u32 *)&auStack_448[0x18];
+typedef union CollisionDisplayVertex {
+    CollisionVertex canonical;
     struct {
-        float *local_48;
-        s32 local_44;
-        float *local_40;
-    } tri;
-    f32 local_38;
-    f32 local_34;
-    f32 local_30;
+        CVector3 point;
+        u8 reserved[0xC];
+        u32 clipFlags;
+        s16 *source;
+    } decoded;
+} CollisionDisplayVertex;
 
-    puVar2 = (u32 *)func_8028FDB4_de(param_2, 0);
-    iVar12 = *param_1;
-    param_1[0x18] = *puVar2;
-    iVar3 = param_1[0x17];
-    uVar13 = *puVar2 & 4;
-    if (iVar3 == 1) {
-        uVar13 = 1;
-    } else if ((0 < iVar3) && (iVar3 < 9) && (6 < iVar3)) {
-        uVar13 = 1;
+typedef union CollisionFloatWord {
+    f32 value;
+    u32 bits;
+} CollisionFloatWord;
+
+extern void func_802433DC_de(ContextB0 *, CollisionVertex **);
+
+/* Hand C from the 0x3F4-byte MIPS body. Resource commands are logical words:
+ * the opcode and vertex indices come from their value, independent of host
+ * byte order. Thirty-two transformed slots retain the original 0x20 stride. */
+void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
+    ContextB0 *context = contextAddress;
+    CollisionDisplayVertex vertices[32];
+    CollisionVertex *triangle[3];
+    CollisionVertex *saved;
+    CollisionFloatWord coordinate;
+    CollisionFloatWord limit;
+    CollisionFloatWord reach;
+    u32 *flags;
+    u32 *commands;
+    u32 opcode;
+    u32 reverse;
+    u32 count;
+    u32 end;
+    u32 slot;
+    u32 word;
+    u32 first;
+    u32 second;
+    u32 third;
+    s32 wordIndex;
+    s16 *source;
+    struct Ray180 *ray;
+    f32 x;
+    f32 y;
+    f32 z;
+
+    flags = func_8028FDB4_de(resource, 0);
+    ray = context->ray;
+    context->flags = *flags;
+    reverse = *flags & 4;
+    if (context->kind == 1 || context->kind == 7 || context->kind == 8) {
+        reverse = 1;
     }
-    puVar2 = (u32 *)func_8028FDB4_de(param_2, 1);
-    puVar11 = puVar2 + 1;
-    while (1) {
-        bVar1 = *(u8 *)puVar2;
-        switch (bVar1) {
-        case 1: {
-            psVar8 = (s16 *)((puVar11[0] & 0xffffff) + param_1[0x29]);
-            psVar9 = psVar8 + 2;
-            uVar10 = (u32)((puVar2[0] >> 0xc) & 0xff);
-            iVar3 = ((puVar2[0] & 0xfe) >> 1) - uVar10;
-            pfVar7 = afStack_448 + iVar3 * 8;
-            puVar6 = auStack_430 + iVar3 * 8;
+    commands = func_8028FDB4_de(resource, 1);
+    for (;;) {
+        opcode = commands[0] >> 24;
+        switch (opcode) {
+        case 1:
+            source = (s16 *)((u8 *)context->vertices + (commands[1] & 0xFFFFFF));
+            count = (commands[0] >> 12) & 0xFF;
+            end = (commands[0] & 0xFE) >> 1;
+            slot = end - count;
+            limit.value = ray->radius;
+            reach.value = context->reach;
             do {
-                puVar6[1] = (u32)psVar8;
-                local_38 = (f32)(s32)*psVar8;
-                local_34 = (f32)(s32)psVar9[-1];
-                local_30 = (f32)(s32)*psVar9;
-                *pfVar7 = ((f32 *)param_1)[0x19] * (f32)(s32)*psVar8 +
-                          ((f32 *)param_1)[0x1d] * (f32)(s32)psVar9[-1] +
-                          ((f32 *)param_1)[0x21] * (f32)(s32)*psVar9 + ((f32 *)param_1)[0x25];
-                *puVar6 = ((u32)(*(u32 *)(iVar12 + 0x18) - (*(u32 *)pfVar7 & 0x7fffffff)) >> 31)
-                          << (*(u32 *)pfVar7 >> 31);
-                ((f32 *)puVar6)[-5] = (((f32 *)param_1)[0x1a] * local_38 + ((f32 *)param_1)[0x1e] * local_34 +
-                                   ((f32 *)param_1)[0x22] * local_30 + ((f32 *)param_1)[0x26]);
-                *puVar6 |= ((u32)(*(u32 *)(iVar12 + 0x18) - (puVar6[-5] & 0x7fffffff)) >> 31)
-                           << (2 + (puVar6[-5] >> 31));
-                psVar8 = psVar8 + 8;
-                uVar10 = uVar10 - 1;
-                psVar9 = psVar9 + 8;
-                pfVar7 = pfVar7 + 8;
-                ((f32 *)puVar6)[-4] = (((f32 *)param_1)[0x1b] * local_38 + ((f32 *)param_1)[0x1f] * local_34 +
-                                   ((f32 *)param_1)[0x23] * local_30 + ((f32 *)param_1)[0x27]);
-                uVar4 = puVar6[-4];
-                uVar5 = *puVar6 | ((~(uVar4 >> 31) & ((*(u32 *)(iVar12 + 0x18) - uVar4) >> 31)) << 4);
-                *puVar6 = uVar5 | (((uVar4 >> 31) & (((u32)param_1[0x13] - (uVar4 & 0x7fffffff)) >> 31)) << 5);
-                puVar6 = puVar6 + 8;
-            } while (uVar10 != 0);
+                vertices[slot].decoded.source = source;
+                x = source[0];
+                y = source[1];
+                z = source[2];
+                coordinate.value = context->transform.m[0][0] * x +
+                    context->transform.m[1][0] * y + context->transform.m[2][0] * z +
+                    context->transform.m[3][0];
+                vertices[slot].decoded.point.x = coordinate.value;
+                vertices[slot].decoded.clipFlags =
+                    ((limit.bits - (coordinate.bits & 0x7FFFFFFF)) >> 31) <<
+                    (coordinate.bits >> 31);
+                coordinate.value = context->transform.m[0][1] * x +
+                    context->transform.m[1][1] * y + context->transform.m[2][1] * z +
+                    context->transform.m[3][1];
+                vertices[slot].decoded.point.y = coordinate.value;
+                vertices[slot].decoded.clipFlags |=
+                    ((limit.bits - (coordinate.bits & 0x7FFFFFFF)) >> 31) <<
+                    (2 + (coordinate.bits >> 31));
+                coordinate.value = context->transform.m[0][2] * x +
+                    context->transform.m[1][2] * y + context->transform.m[2][2] * z +
+                    context->transform.m[3][2];
+                vertices[slot].decoded.point.z = coordinate.value;
+                vertices[slot].decoded.clipFlags |=
+                    ((~(coordinate.bits >> 31) & ((limit.bits - coordinate.bits) >> 31)) << 4) |
+                    (((coordinate.bits >> 31) &
+                      ((reach.bits - (coordinate.bits & 0x7FFFFFFF)) >> 31)) << 5);
+                source += 8;
+                slot++;
+                count--;
+            } while (count != 0);
             break;
-        }
-        case 6: {
-            uVar4 = (puVar11[0] & 0xfe0000) >> 0xc;
-            tri.local_48 = (float *)(&auStack_448[0] + uVar4);
-            uVar5 = (puVar11[0] & 0xfe00) >> 4;
-            tri.local_44 = (s32)(&auStack_448[0] + uVar5);
-            uVar10 = (u32)(u8)(puVar11[0] >> 1);
-            tri.local_40 = afStack_448 + uVar10 * 8;
-            if (((*(u32 *)((s32)auStack_430 + uVar4) &
-                  *(u32 *)((s32)auStack_430 + uVar5) & auStack_430[uVar10 * 8]) == 0) &&
-                (func_802433DC_de(param_1, &tri), pfVar7 = tri.local_48, uVar13 != 0)) {
-                tri.local_48 = tri.local_40;
-                tri.local_40 = pfVar7;
-                func_802433DC_de(param_1, &tri);
-            }
-            /* fall through */
-        }
-        case 5: {
-            uVar4 = (puVar2[0] & 0xfe0000) >> 0xc;
-            tri.local_48 = (float *)(&auStack_448[0] + uVar4);
-            uVar5 = (puVar2[0] & 0xfe00) >> 4;
-            tri.local_44 = (s32)(&auStack_448[0] + uVar5);
-            uVar10 = (u32)(u8)(puVar2[0] >> 1);
-            tri.local_40 = afStack_448 + uVar10 * 8;
-            if (((*(u32 *)((s32)auStack_430 + uVar4) & *(u32 *)((s32)auStack_430 + uVar5) &
-                  auStack_430[uVar10 * 8]) == 0) &&
-                (func_802433DC_de(param_1, &tri), pfVar7 = tri.local_48, uVar13 != 0)) {
-                tri.local_48 = tri.local_40;
-                tri.local_40 = pfVar7;
-                func_802433DC_de(param_1, &tri);
-            }
+        case 5:
+        case 6:
+            wordIndex = opcode == 6 ? 1 : 0;
+            do {
+                word = commands[wordIndex];
+                first = (word >> 17) & 0x7F;
+                second = (word >> 9) & 0x7F;
+                third = (word >> 1) & 0x7F;
+                triangle[0] = &vertices[first].canonical;
+                triangle[1] = &vertices[second].canonical;
+                triangle[2] = &vertices[third].canonical;
+                if ((vertices[first].decoded.clipFlags & vertices[second].decoded.clipFlags &
+                     vertices[third].decoded.clipFlags) == 0) {
+                    func_802433DC_de(context, triangle);
+                    if (reverse != 0) {
+                        saved = triangle[0];
+                        triangle[0] = triangle[2];
+                        triangle[2] = saved;
+                        func_802433DC_de(context, triangle);
+                    }
+                }
+                wordIndex--;
+            } while (wordIndex >= 0);
             break;
-        }
+        case 0xDF:
+            return;
         default:
             break;
         }
-        puVar11 = puVar11 + 2;
-        puVar2 = puVar2 + 2;
-        if (bVar1 == 0xdf) {
-            return;
-        }
+        commands += 2;
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80242FE8_de);
+INCLUDE_ASM("span_1000", Anim_TraceMeshDisplayList);
 #endif
