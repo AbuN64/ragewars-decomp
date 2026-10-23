@@ -11,45 +11,45 @@
 extern OSPiHandle_s *D_800D4380[];
 
 /** Update changed PI timing registers, then write through the uncached transfer address. */
-s32 func_802B9730_de(OSPiHandle_s *arg0, u32 arg1, u32 arg2) {
+s32 func_802B9730_de(OSPiHandle_s *handle, u32 arg1, u32 arg2) {
     OSPiHandle_s *previous;
     s32 index;
 
     while (*(volatile u32 *)0xA4600010 & 3) {
     }
-    index = arg0->domain;
+    index = handle->domain;
     previous = D_800D4380[index];
-    if (previous != arg0) {
+    if (previous != handle) {
         if (index == 0) {
-            if (previous->latency != arg0->latency) {
-                *(volatile u32 *)0xA4600014 = arg0->latency;
+            if (previous->latency != handle->latency) {
+                *(volatile u32 *)0xA4600014 = handle->latency;
             }
-            if (previous->pageSize != arg0->pageSize) {
-                *(volatile u32 *)0xA460001C = arg0->pageSize;
+            if (previous->pageSize != handle->pageSize) {
+                *(volatile u32 *)0xA460001C = handle->pageSize;
             }
-            if (previous->relDuration != arg0->relDuration) {
-                *(volatile u32 *)0xA4600020 = arg0->relDuration;
+            if (previous->relDuration != handle->relDuration) {
+                *(volatile u32 *)0xA4600020 = handle->relDuration;
             }
-            if (previous->pulse != arg0->pulse) {
-                *(volatile u32 *)0xA4600018 = arg0->pulse;
+            if (previous->pulse != handle->pulse) {
+                *(volatile u32 *)0xA4600018 = handle->pulse;
             }
         } else {
-            if (previous->latency != arg0->latency) {
-                *(volatile u32 *)0xA4600024 = arg0->latency;
+            if (previous->latency != handle->latency) {
+                *(volatile u32 *)0xA4600024 = handle->latency;
             }
-            if (previous->pageSize != arg0->pageSize) {
-                *(volatile u32 *)0xA460002C = arg0->pageSize;
+            if (previous->pageSize != handle->pageSize) {
+                *(volatile u32 *)0xA460002C = handle->pageSize;
             }
-            if (previous->relDuration != arg0->relDuration) {
-                *(volatile u32 *)0xA4600030 = arg0->relDuration;
+            if (previous->relDuration != handle->relDuration) {
+                *(volatile u32 *)0xA4600030 = handle->relDuration;
             }
-            if (previous->pulse != arg0->pulse) {
-                *(volatile u32 *)0xA4600028 = arg0->pulse;
+            if (previous->pulse != handle->pulse) {
+                *(volatile u32 *)0xA4600028 = handle->pulse;
             }
         }
-        D_800D4380[index] = arg0;
+        D_800D4380[index] = handle;
     }
-    *(volatile u32 *)(arg0->baseAddress | arg1 | 0xA0000000) = arg2;
+    *(volatile u32 *)(handle->baseAddress | arg1 | 0xA0000000) = arg2;
     return 0;
 }
 
