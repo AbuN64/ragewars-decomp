@@ -17,11 +17,6 @@ struct ActorRecAt5E0 {
 
 struct ActorList;
 struct ActorRecAt5E0;
-struct ActorList {
-    s32 pad0;
-    struct ActorRecAt5E0 *actors;
-    s32 count;
-};
 
 struct Snapshot;
 struct Snapshot {
@@ -43,13 +38,6 @@ struct SampledCurve {
 };
 
 struct SampledCurve;
-/* Type 1 curves choose a new random value each period. */
-typedef struct RandomCurve {
-    s32 type;
-    f32 period;
-    u8 minimum;
-    u8 maximum;
-} RandomCurve;
 
 struct PlayerRecAt8;
 struct PlayerRecAt8 {

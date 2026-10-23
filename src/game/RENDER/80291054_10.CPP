@@ -3,6 +3,8 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/SESSIONHANDLERROW.H"
+#include "RENDER/80291054.H"
+#include "RENDER/802909E0.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"

@@ -2,6 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
+#include "RENDER/80291054.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/EXTERNS_12.H"

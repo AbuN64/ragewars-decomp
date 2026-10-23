@@ -1,5 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT26DD8.H"
+#include "RENDER/802944E8.H"
 #include "TYPES.H"
 #include "RENDER/802944E8_10.H"
 

@@ -1,4 +1,5 @@
 #include "COMMON/REC.H"
+#include "RENDER/80206258.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"

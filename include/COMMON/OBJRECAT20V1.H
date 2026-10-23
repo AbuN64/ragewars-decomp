@@ -24,16 +24,6 @@ extern void func_80290A14_de(void *arg0, void *arg1);
 
 
 struct ObjRecAt20V1;
-struct ObjRecAt20V1 {
-    char pad0[0x8];
-    float unk8;
-    char pad8[0xC - 0x8 - sizeof(float)];
-    float unkC;
-    char padC[0x10 - 0xC - sizeof(float)];
-    float unk10;
-    char pad10[0x20 - 0x10 - sizeof(float)];
-    int unk20;
-};
 
 extern void func_80290A0C_de(void *schedule);
 

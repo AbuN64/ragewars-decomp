@@ -1908,10 +1908,6 @@ struct ObjRecAt26DD4;
 typedef struct ObjRecAt26DD4 ObjRecAt26DD4;
 
 struct ObjRecAt26DD4;
-struct ObjRecAt26DD4 {
-    char pad0[0x26DD4];
-    s32 unk26DD4;
-};
 
 struct func_80435010_S3;
 struct func_80435010_S3 {

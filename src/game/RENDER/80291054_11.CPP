@@ -1,5 +1,6 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/SESSIONHANDLERROW.H"
+#include "RENDER/80291054.H"
 #include "TYPES.H"
 
 extern void func_8044A370_de(void *arg0, s32 arg1);

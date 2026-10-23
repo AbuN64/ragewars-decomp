@@ -10,11 +10,6 @@
 #include "COMMON/DISPLAY.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
 #include "SDK/PFS/8044E8B0.H"
-/* One state-dispatch row in D_800CD78C, stride 0xC. */
-typedef struct SessionHandlerRow {
-    void (*update)(void *);
-    char reserved4[8];
-} SessionHandlerRow;
 
 
 
@@ -41,12 +36,6 @@ struct func_8029382C_S1;
 typedef struct func_8029382C_S1 func_8029382C_S1;
 
 struct ObjRecAt255C8;
-struct ObjRecAt255C8 {
-    char pad0[0x25580];
-    char unk25580;
-    char pad25580[0x255C8 - 0x25580 - sizeof(char)];
-    char unk255C8;
-};
 
 struct func_80293318_S1;
 typedef struct func_80293318_S1 func_80293318_S1;
@@ -110,19 +99,7 @@ struct func_80293774_S1;
 typedef struct func_80293774_S1 func_80293774_S1;
 
 
-typedef struct ObjRecAt26DC1 {
-    char pad0[0x26DB0];
-    f32 unk26DB0;
-    char pad26DB4[0x26DBC - 0x26DB4];
-    s32 unk26DBC;
-    char pad26DC0[1];
-    s8 unk26DC1;
-} ObjRecAt26DC1;
 
-typedef struct RenderState {
-    union { Frame views[4]; Display display; } ring; char pad500[0x2688C]; RenderSettings settings; char pad26DB0[4]; s32 handle;
-    char pad26DB8[0x10]; s32 enabled, field26DCC, field26DD0, field26DD4;
-} RenderState;
 #include "COMMON/RENDERCOUNTERS.H"
 
 extern char D_80142CB8[];

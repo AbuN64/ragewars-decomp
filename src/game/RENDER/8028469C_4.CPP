@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
+#include "RENDER/8028469C.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "sdk/libgultra_inferred/802AD870_2.H"

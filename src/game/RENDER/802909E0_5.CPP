@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT20V1.H"
+#include "RENDER/802909E0.H"
 #include "RENDER/802909E0_5.H"
 
 /** Copy four scalar fields from the source into output pointers. */

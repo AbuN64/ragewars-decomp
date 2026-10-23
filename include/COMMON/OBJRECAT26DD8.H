@@ -28,22 +28,8 @@ struct Prompt;
 typedef struct Prompt Prompt;
 
 struct Prompt;
-struct ObjRecAt26DD8 {
-    char pad0[0x26DB8];
-    s32 unk26DB8;
-    char pad26DB8[0x1C];
-    s32 unk26DD8;
-};
-struct Prompt {
-    char pad[0x88];
-    s32 unk88;
-};
 
 struct func_80294BB0_S1;
-struct func_80294BB0_S1 {
-    char pad0[0x1284];
-    Prompt unk1284;
-};
 
 
 

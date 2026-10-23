@@ -29,14 +29,6 @@ typedef struct MeshMaterial {
 } MeshMaterial;
 
 struct Obj_func_80284DC4_de;
-struct Obj_func_80284DC4_de {
-    char pad[4];
-    unsigned short unk4;
-    char pad6[2];
-    f32 pos[3];
-    char pad14[0x138];
-    short unk14C;
-};
 
 struct func_8028469C_S1;
 struct func_8028469C_S1 {
@@ -182,10 +174,6 @@ struct func_8028469C_S4 {
 };
 
 struct ObjRecAt4V2;
-struct ObjRecAt4V2 {
-    void * unk0;
-    s32 unk4;
-};
 
 struct func_8028509C_S1;
 struct func_8028509C_S1 {
@@ -209,21 +197,8 @@ struct func_8028509C_S2 {
 };
 
 struct ObjRecAt12;
-struct ObjRecAt12 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    char pad8[0x6];
-    s8 unk12;
-};
 
 struct Arg1;
-struct Arg1 {
-    char pad0[0x24];
-    s32 field24;
-    char pad28[0x100];
-    CVector3 position128;
-};
 
 struct func_80284AF4_S1;
 struct func_80284AF4_S1 {
