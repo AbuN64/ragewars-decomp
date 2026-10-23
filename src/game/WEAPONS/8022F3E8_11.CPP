@@ -53,13 +53,13 @@ static inline s32 can_fire(char *player) {
     return ammo;
 }
 
-void func_8023196C_de(Shared_Actor *actor, WeaponFireState *arg1) {
+void func_8023196C_de(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
 
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
-    arg1->mode = 1;
+    fireState->mode = 1;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
         ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
         return;
@@ -68,7 +68,7 @@ void func_8023196C_de(Shared_Actor *actor, WeaponFireState *arg1) {
         if (((SharedPlayer *)(player))->views5E8.view5F4_11.unk5F4[0] >= 0x19) {
             func_8025DE54_de(0x42E, ((SharedPlayer *)(player))->views0.positionBits.positionWords[0], ((SharedPlayer *)(player))->views0.positionBits.positionWords[1], ((SharedPlayer *)(player))->views0.positionBits.positionWords[2], player + 0x8,
                           -1);
-            func_80214178_de(actor, arg1, 0xB);
+            func_80214178_de(actor, fireState, 0xB);
         } else if (((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) {
             func_8025DF34_de(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
@@ -78,7 +78,7 @@ void func_8023196C_de(Shared_Actor *actor, WeaponFireState *arg1) {
         }
         return;
     }
-    if (func_802301F4_de(actor, arg1) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, arg1, action);
+    if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
+        func_80214178_de(actor, fireState, action);
     }
 }

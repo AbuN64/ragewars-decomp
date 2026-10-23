@@ -30,8 +30,8 @@ extern void func_8026F620_de(void *, void *, void *);
 
 extern s32 func_80265650_de(void *, s32);
 extern void func_80265688_de(u8 *, s32, s32);
-void func_8022F4BC_de(Profile *arg0, s32 arg1) {
-    func_80265688_de(&arg0->achievementFlags[0x2F], arg1, 1);
+void func_8022F4BC_de(Profile *player, s32 arg1) {
+    func_80265688_de(&player->achievementFlags[0x2F], arg1, 1);
 }
 
 s32 func_8022F4DC_de(u8 *arg0, s32 arg1)
@@ -54,57 +54,57 @@ s32 func_8022F4DC_de(u8 *arg0, s32 arg1)
   return func_80265650_de(arg0 + 0x79, arg1);
 }
 
-void func_8022F514_de(Profile *arg0, s32 arg1) {
+void func_8022F514_de(Profile *player, s32 arg1) {
     u8 *var_a0;
     s32 var_a1 = arg1;
 
     switch (var_a1) {
     case 16:
-        var_a0 = &arg0->achievementFlags[0x2E];
+        var_a0 = &player->achievementFlags[0x2E];
         var_a1 = 0;
         break;
     case 17:
-        var_a0 = &arg0->achievementFlags[0x2E];
+        var_a0 = &player->achievementFlags[0x2E];
         var_a1 = 1;
         break;
     default:
-        var_a0 = &arg0->achievementFlags[0x31];
+        var_a0 = &player->achievementFlags[0x31];
         break;
     }
     func_80265688_de(var_a0, var_a1, 1);
 }
 
-s32 func_8022F55C_de(Profile *arg0, s32 arg1) {
+s32 func_8022F55C_de(Profile *profile, s32 arg1) {
     u8 *var_a0;
-    s32 var_a1 = arg1;
+    s32 index = arg1;
 
-    switch (var_a1) {
+    switch (index) {
     case 16:
-        var_a0 = &arg0->achievementFlags[0x2E];
-        var_a1 = 0;
+        var_a0 = &profile->achievementFlags[0x2E];
+        index = 0;
         break;
     case 17:
-        var_a0 = &arg0->achievementFlags[0x2E];
-        var_a1 = 1;
+        var_a0 = &profile->achievementFlags[0x2E];
+        index = 1;
         break;
     default:
-        var_a0 = &arg0->achievementFlags[0x31];
+        var_a0 = &profile->achievementFlags[0x31];
         break;
     }
-    return func_80265650_de(var_a0, var_a1);
+    return func_80265650_de(var_a0, index);
 }
 
-void func_8022F5A4_de(Profile *arg0, s32 arg1) {
-    func_80265688_de(&arg0->achievementFlags[7], arg1, 1);
+void func_8022F5A4_de(Profile *record, s32 arg1) {
+    func_80265688_de(&record->achievementFlags[7], arg1, 1);
 }
 
 /** Thin wrapper forwarding an offset argument to func_80265650_de. */
-void func_8022F5C4_de(Profile *arg0, s32 arg1) {
-    func_80265650_de(&arg0->achievementFlags[7], arg1);
+void func_8022F5C4_de(Profile *record, s32 index) {
+    func_80265650_de(&record->achievementFlags[7], index);
 }
 
 void func_8022F5E0_de(char *arg0) {
-    CVector3 sp10;
+    CVector3 position;
     Matrix sp20;
     CVector3 sp60;
     CVector3 sp70;
@@ -129,18 +129,18 @@ void func_8022F5E0_de(char *arg0) {
     func_80272CB0_de(&sp80, sp60.x, sp60.y, sp60.z);
     func_80271F9C_de(&sp70, &sp70, -10.24f);
     if (((ObjectState630 *)(object))->unk_5DC.v0 != 0) {
-        func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &sp10);
+        func_802732D0_de(((ObjectState630 *)(object))->unk_5DC.v1 + 0x160, &position);
         func_80274244_de((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
                       &sp20);
     } else {
         func_80226DD0_de(object, &spC0);
         func_80226C60_de(object, &sp100);
-        func_802732D0_de((char *)&spC0, &sp10);
+        func_802732D0_de((char *)&spC0, &position);
         func_80274244_de(&sp100, &sp20);
     }
     orientation = arg0 + 0x74;
     func_80273448_de(&sp80, sp70.x, sp70.y, sp70.z);
     func_80273D6C_de(&sp80);
     func_8026F620_de((Matrix *)orientation, &sp80, &sp20);
-    func_80273448_de((Matrix *)orientation, sp10.x, sp10.y, sp10.z);
+    func_80273448_de((Matrix *)orientation, position.x, position.y, position.z);
 }

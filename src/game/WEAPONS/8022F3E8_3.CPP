@@ -154,13 +154,13 @@ s32 func_8022F96C_de(void *arg0)
     return 0;
 }
 
-s32 func_8022FAF8_de(Object_func_8022FAF8_de *arg0) {
+s32 func_8022FAF8_de(Object_func_8022FAF8_de *player) {
     s32 value;
     s32 number;
     s32 index;
     s32 result;
 
-    value = arg0->values[arg0->selected * 2];
+    value = player->values[player->selected * 2];
     if (value < 0) {
         value = 0;
     }
@@ -170,28 +170,28 @@ s32 func_8022FAF8_de(Object_func_8022FAF8_de *arg0) {
     value++;
     while (value < 8) {
         number = 0;
-        while ((number < 22) && (value != arg0->values[number * 2])) {
+        while ((number < 22) && (value != player->values[number * 2])) {
             number++;
         }
-        if ((number < 22) && (func_8022EB0C_de(arg0, number) != 0)) {
+        if ((number < 22) && (func_8022EB0C_de(player, number) != 0)) {
             return number;
         }
         value++;
     }
-    value = arg0->values[arg0->selected * 2];
+    value = player->values[player->selected * 2];
     number = 1;
     while (number < value) {
         index = 0;
-        while ((index < 22) && (number != arg0->values[index * 2])) {
+        while ((index < 22) && (number != player->values[index * 2])) {
             index++;
         }
-        if ((index < 22) && (func_8022EB0C_de(arg0, index) != 0)) {
+        if ((index < 22) && (func_8022EB0C_de(player, index) != 0)) {
             return index;
         }
         number++;
     }
     func_8025DF34_de(0xD4D);
-    result = arg0->selected;
+    result = player->selected;
     return result;
 }
 
@@ -286,13 +286,13 @@ extern s32 D_800CD730;
 
 
 
-void func_802325FC_de(void *arg0, void *arg1) {
+void func_802325FC_de(void *part, void *body) {
     s16 index;
     u16 unsigned_index;
     void *owner;
     void *state;
 
-    state = ((Shared_ActorView *)arg0)->self;
+    state = ((Shared_ActorView *)part)->self;
     index = ((Shared_ActorView *)state)->nextWeapon;
     unsigned_index = (u16)((Shared_ActorView *)state)->nextWeapon;
     if ((((Shared_ActorView *)state)->selectedAction != index) || (D_8011FE88.mode != 4)) {
@@ -304,17 +304,17 @@ void func_802325FC_de(void *arg0, void *arg1) {
             ((Shared_ActorView *)state)->specialChanged = 1;
         }
         ((Shared_ActorView *)state)->selectedAction = unsigned_index;
-        ((WeaponFireState *)arg1)->animation = ((WeaponInfo *)D_800D052C[(s16)unsigned_index])->animation;
-        ((WeaponFireState *)arg1)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
+        ((WeaponFireState *)body)->animation = ((WeaponInfo *)D_800D052C[(s16)unsigned_index])->animation;
+        ((WeaponFireState *)body)->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)state)->selectedAction]))->animationCount;
         owner = ((Shared_ActorView *)state)->message;
         if ((owner != 0) && ((u32)D_800CD730 >= 5U)) {
             Camera_PostScreenMessage(&D_80145088, owner,
                 *(void **)*(void **)D_800D052C[((Shared_ActorView *)state)->selectedAction]);
         }
-        ((WeaponFireState *)arg1)->spinStep = 0;
-        ((WeaponFireState *)arg1)->spin = 0;
-        ((Shared_Actor *)arg0)->color = 0;
-        ((WeaponFireState *)arg1)->charge = 0;
+        ((WeaponFireState *)body)->spinStep = 0;
+        ((WeaponFireState *)body)->spin = 0;
+        ((Shared_Actor *)part)->color = 0;
+        ((WeaponFireState *)body)->charge = 0;
     }
 }
 #else

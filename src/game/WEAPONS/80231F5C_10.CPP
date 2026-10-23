@@ -21,23 +21,23 @@ extern void func_8022AF74_de(Shared_ActorView *arg0, s32 arg1);
 
 
 
-void func_80232B64_de(LevelActor *arg0, WeaponFireState *arg1) {
-    void *temp_v0;
+void func_80232B64_de(LevelActor *actor, WeaponFireState *fireState) {
+    void *controller;
 
-    temp_v0 = arg0->controller;
-    ((Shared_ActorView *)temp_v0)->controllerMode = 1;
-    ((Shared_ActorView *)temp_v0)->controllerOwner = 0;
-    ((Player *)temp_v0)->controllerTimer = 0;
-    arg1->spinStep = 0;
-    arg1->spin = 0;
-    if ((arg1->triggerMode != 0) && (func_802301F4_de(arg0, arg1) == 0)) {
-        func_80214178_de(arg0, arg1, 2);
+    controller = actor->controller;
+    ((Shared_ActorView *)controller)->controllerMode = 1;
+    ((Shared_ActorView *)controller)->controllerOwner = 0;
+    ((Player *)controller)->controllerTimer = 0;
+    fireState->spinStep = 0;
+    fireState->spin = 0;
+    if ((fireState->triggerMode != 0) && (func_802301F4_de(actor, fireState) == 0)) {
+        func_80214178_de(actor, fireState, 2);
     }
 }
 
-s32 func_80232BD0_de(LevelActor *arg0, void *arg1, Shared_ActorView *arg2) {
+s32 func_80232BD0_de(LevelActor *actor, void *arg1, Shared_ActorView *arg2) {
     s32 temp_v0;
-    void *temp_v1;
+    void *owner;
 
     {
         f32 field = arg2->stun;
@@ -45,10 +45,10 @@ s32 func_80232BD0_de(LevelActor *arg0, void *arg1, Shared_ActorView *arg2) {
             return 1;
         }
     }
-    if ((arg0->flags & 0x300000) && (arg2->remote != 0)) {
-        temp_v1 = arg2->owner;
-        temp_v0 = ((LevelActor *)temp_v1)->actionReady;
-        ((LevelActor *)temp_v1)->actionReady = 0;
+    if ((actor->flags & 0x300000) && (arg2->remote != 0)) {
+        owner = arg2->owner;
+        temp_v0 = ((LevelActor *)owner)->actionReady;
+        ((LevelActor *)owner)->actionReady = 0;
         return temp_v0 == 0;
     }
     if (arg2->actionFlags & 0x2000) {
@@ -64,26 +64,26 @@ void func_80232C68_de(void *arg0) {
     func_8044A07C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link));
 }
 
-void func_80232C88_de(Shared_ActorView *arg0, WeaponFireState *arg1) {
+void func_80232C88_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
     void *temp_a0;
     s16 idx;
 
     temp_a0 = arg0->self;
     idx = ((Shared_ActorView *)temp_a0)->selectedAction;
-    arg1->charge = ((WeaponInfo *)D_800D052C[idx])->chargeRate * D_800C3020_de;
+    fireState->charge = ((WeaponInfo *)D_800D052C[idx])->chargeRate * D_800C3020_de;
     if ((((Shared_ActorView *)temp_a0)->selectedAction == 8) && (((Shared_ActorView *)temp_a0)->field11C0 == 0)) {
         func_8022AF74_de(temp_a0, 0xA3C);
     }
 }
 
-void func_80232CEC_de(void *arg0, void *arg1) {
+void func_80232CEC_de(void *actor, void *attack) {
     Player *state;
 
-    state = ((Shared_Actor *)arg0)->entity;
-    if (((WeaponFireState *)arg1)->triggerMode != 0) {
-        if (func_802301F4_de(arg0, arg1) != 0) {
-            ((WeaponFireState *)arg1)->triggerMode = 0;
-            ((WeaponFireState *)arg1)->queuedAction = -1;
+    state = ((Shared_Actor *)actor)->entity;
+    if (((WeaponFireState *)attack)->triggerMode != 0) {
+        if (func_802301F4_de(actor, attack) != 0) {
+            ((WeaponFireState *)attack)->triggerMode = 0;
+            ((WeaponFireState *)attack)->queuedAction = -1;
         } else {
             switch (state->selectedAction) {
             case 8:
@@ -92,10 +92,10 @@ void func_80232CEC_de(void *arg0, void *arg1) {
             case 0:
             case 14:
                 func_8022B00C_de(state);
-                func_80214178_de(arg0, arg1, 2);
+                func_80214178_de(actor, attack, 2);
                 break;
             default:
-                func_80214178_de(arg0, arg1, 2);
+                func_80214178_de(actor, attack, 2);
                 break;
             }
         }

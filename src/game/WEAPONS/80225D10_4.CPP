@@ -110,7 +110,7 @@ s32 func_802282EC_de(Round *arg0);
 
 
 
-void func_80227038_de(s8 *arg0) {
+void func_80227038_de(s8 *world) {
     CGameStatus *initial_rules; 
     CGameStatus *select_rules; 
     CGameStatus *case2_rules; 
@@ -171,7 +171,7 @@ void func_80227038_de(s8 *arg0) {
     SharedRecAt564V2 *temp_s1_4;
     SharedRecAt564V4 *temp_s1_5;
     func_80227014_S18 *temp_v0_11;
-    func_80227014_S2 *temp_v0_5;
+    func_80227014_S2 *player;
     func_80227014_S8 *temp_v0_6;
     func_80227014_S13 *temp_v0_8;
     func_80227014_S3 *temp_v1;
@@ -179,22 +179,22 @@ void func_80227038_de(s8 *arg0) {
     func_80227014_S22 *temp_v1_4;
 
     if ((func_80245784_de() == 0) && (func_80245798_de() == 0) && ((initial_rules = &D_801462C8.counters)->m_bFragTagOn != 0)) {
-        if ((func_802281F0_de(arg0) != 0) && (initial_rules->elapsed == 0)) {
-            func_8022A748_de(arg0);
+        if ((func_802281F0_de(world) != 0) && (initial_rules->elapsed == 0)) {
+            func_8022A748_de(world);
             return;
         }
-        temp_v0 = func_8022C620_de(arg0);
+        temp_v0 = func_8022C620_de(world);
         if (temp_v0 > 0) {
             state = D_80146914;
             switch (state) {
             case 0:
             default:
-                func_8022C5AC_de(arg0);
-                func_8022C5DC_de(arg0);
+                func_8022C5AC_de(world);
+                func_8022C5DC_de(world);
                 D_80146914 = 1;
                 return;
             case 1:
-                func_8022C5DC_de(arg0);
+                func_8022C5DC_de(world);
                 if (temp_v0 > 0) {
                     temp_s1 = (select_rules = &D_801462C8.counters)->m_FragTagSelectionType;
                     if (temp_s1 == 3) {
@@ -233,7 +233,7 @@ void func_80227038_de(s8 *arg0) {
                     case2_rules->restrictionActive = 0xE1;
                     case2_rules->unk5C = (s32) case2_rules->unk60;
                 }
-                func_8022C5DC_de(arg0);
+                func_8022C5DC_de(world);
                 return;
             case 5:                                 /* switch 1 */
                 var_s2 = 0;
@@ -241,11 +241,11 @@ void func_80227038_de(s8 *arg0) {
                     banner_half = D_800C2BA0_de;
                     banner_size = D_800C2BA4_de;
                     do {
-                        temp_v0_5 = func_8022A5F4_de(arg0, var_s2);
-                        if (temp_v0_5 != 0) {
-                            temp_v1 = temp_v0_5->unk5D8;
+                        player = func_8022A5F4_de(world, var_s2);
+                        if (player != 0) {
+                            temp_v1 = player->unk5D8;
                             if (temp_v1->unk90 == 0) {
-                                temp_s1_2 = temp_v0_5->unk5DC;
+                                temp_s1_2 = player->unk5DC;
                                 if ((temp_s1_2 != 0) && (temp_s1_2->unk564 == 0)) {
                                     func_802A9234_de((s32) D_801462DE);
                                     temp_f2 = temp_s1_2->unk29C;
@@ -256,24 +256,24 @@ void func_80227038_de(s8 *arg0) {
                                     temp_f3_2 = temp_f3 / (f32) D_800E28D4;
                                     func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_2->unk2A4 + scaled5x) - (temp_f2_2 * banner_size)), (s16) (s32) ((temp_s1_2->unk2A8 + scaled5y) - (temp_f3_2 * banner_size)), temp_f2_2, temp_f3_2, 1);
                                 }
-                                temp_v0_5->unk5D8->unk8F = 1;
+                                player->unk5D8->unk8F = 1;
                                 switch (D_80142850) {
                                 case 0:
-                                    func_8025DE54_de(0x18A1, temp_v0_5->position, (s32)&temp_v0_5->position, -1);
+                                    func_8025DE54_de(0x18A1, player->position, (s32)&player->position, -1);
                                     break;
                                 case 1:
-                                    func_8025DE54_de(0x1969, temp_v0_5->position, (s32)&temp_v0_5->position, -1);
+                                    func_8025DE54_de(0x1969, player->position, (s32)&player->position, -1);
                                     break;
                                 case 2:
-                                    func_8025DE54_de(0x1905, temp_v0_5->position, (s32)&temp_v0_5->position, -1);
+                                    func_8025DE54_de(0x1905, player->position, (s32)&player->position, -1);
                                     break;
                                 }
-                                func_80218464_de(&temp_v0_5->unk938);
-                                temp_v0_5->unk11B4 = 0;
-                                func_80214178_de(&temp_v0_5->unk2E8, &temp_v0_5->unk458, 1);
-                                func_8021B1E4_de(temp_v0_5, temp_v0_5->unk5EC, 0, 1);
-                                func_80226708_de(temp_v0_5);
-                                temp_v0_5->unk5E4 = (s32) D_8014284C;
+                                func_80218464_de(&player->unk938);
+                                player->unk11B4 = 0;
+                                func_80214178_de(&player->unk2E8, &player->unk458, 1);
+                                func_8021B1E4_de(player, player->unk5EC, 0, 1);
+                                func_80226708_de(player);
+                                player->unk5E4 = (s32) D_8014284C;
                             } else {
                                 if ((D_80146938 != 0) && (temp_v1->unk94 != 0)) {
                                     temp_v1_2 = temp_v1->unk80;
@@ -286,22 +286,22 @@ void func_80227038_de(s8 *arg0) {
                                     } else if (temp_v1_2 == 13) {
                                     var_a0 = 0x12C00;
                                     } else {
-                                        var_a0 = temp_v0_5->unk18->unk18 << 8;
+                                        var_a0 = player->unk18->unk18 << 8;
                                     }
                                 } else {
-                                    var_a0 = temp_v0_5->unk18->unk18 << 8;
+                                    var_a0 = player->unk18->unk18 << 8;
                                 }
-                                if ((D_801462D5 == 1) && (temp_v0_5->unk1450 == 0)) {
-                                    var_a0 += D_800FEB10[temp_v0_5->unk5D4].value;
+                                if ((D_801462D5 == 1) && (player->unk1450 == 0)) {
+                                    var_a0 += D_800FEB10[player->unk5D4].value;
                                 }
-                                temp_v0_5->unk5E4 = var_a0;
-                                temp_v0_5->unk174 = var_a0;
+                                player->unk5E4 = var_a0;
+                                player->unk174 = var_a0;
                             }
                         }
                         var_s2 += 1;
                     } while (temp_v0 >= (s32) var_s2);
                 }
-                func_8022C5AC_de(arg0);
+                func_8022C5AC_de(world);
                 D_80146914 = 6;
                 return;
             case 3:
@@ -313,7 +313,7 @@ void func_80227038_de(s8 *arg0) {
 
                 }
                 case3_entry->restrictionActive = 0;
-                temp_v0_6 = func_8022C55C_de(arg0, (u32) ((s32) case3_entry->unk5C % temp_v0));
+                temp_v0_6 = func_8022C55C_de(world, (u32) ((s32) case3_entry->unk5C % temp_v0));
                 temp_s1_3 = temp_v0_6->unk5DC;
                 if ((temp_s1_3 != 0) && (temp_s1_3->unk564 == 0)) {
                     func_802A9234_de((s32) D_801462DE);
@@ -328,7 +328,7 @@ void func_80227038_de(s8 *arg0) {
                 temp_a0 = rules->unk5C + 1;
                 rules->unk5C = temp_a0;
                 if (temp_a0 >= (((5 - temp_v0) * 0x14) - rules->unk60)) {
-                    func_8022C5AC_de(arg0);
+                    func_8022C5AC_de(world);
                     rules->unk74 = 7;
                     temp_v0_6->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
@@ -394,7 +394,7 @@ void func_80227038_de(s8 *arg0) {
 
                 }
                 case4_entry->restrictionActive = 0;
-                temp_v0_8 = func_8022C55C_de(arg0, (u32) ((s32) case4_entry->unk5C % temp_v0));
+                temp_v0_8 = func_8022C55C_de(world, (u32) ((s32) case4_entry->unk5C % temp_v0));
                 temp_s1_4 = temp_v0_8->unk5DC;
                 if ((temp_s1_4 != 0) && (temp_s1_4->unk564 == 0)) {
                     func_802A9234_de((s32) D_801462DE);
@@ -409,7 +409,7 @@ void func_80227038_de(s8 *arg0) {
                 temp_a0_2 = rules->unk5C + 1;
                 rules->unk5C = temp_a0_2;
                 if (temp_a0_2 >= (((5 - temp_v0) * 0x14) - rules->unk60)) {
-                    func_8022C5AC_de(arg0);
+                    func_8022C5AC_de(world);
                     rules->unk74 = 7;
                     temp_v0_8->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
@@ -479,7 +479,7 @@ void func_80227038_de(s8 *arg0) {
                     banner_half = D_800C2BB8_de;
                     banner_size = D_800C2BBC_de;
                     do {
-                        temp_v0_11 = func_8022A5F4_de(arg0, var_s2);
+                        temp_v0_11 = func_8022A5F4_de(world, var_s2);
                         if (temp_v0_11 != 0) {
                             temp_v1_3 = temp_v0_11->unk5D8;
                             if (temp_v1_3->unk8F == 0) {

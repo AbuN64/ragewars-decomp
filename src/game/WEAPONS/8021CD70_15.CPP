@@ -55,7 +55,7 @@ static inline s32 try_jump(SharedPlayer_func_80224408_de *player, Body_func_8022
     return 0;
 }
 
-void func_8022409C_de(void *arg0, void *arg1) {
+void func_8022409C_de(void *player, void *arg1) {
     CVector3 direction;
     f32 held;
     f32 value;
@@ -63,23 +63,23 @@ void func_8022409C_de(void *arg0, void *arg1) {
     s32 result;
     void *data;
 
-    if (((func_80224078_Arg0 *)arg0)->unk650 == 0 &&
-        !(((func_80224078_Arg0 *)arg0)->unk6AC & 0xE000)) {
-        ((func_80224078_Arg0 *)arg0)->unk650 = 1;
+    if (((func_80224078_Arg0 *)player)->unk650 == 0 &&
+        !(((func_80224078_Arg0 *)player)->unk6AC & 0xE000)) {
+        ((func_80224078_Arg0 *)player)->unk650 = 1;
     }
-    ((func_80224078_Arg0 *)arg0)->unk72C = 0;
+    ((func_80224078_Arg0 *)player)->unk72C = 0;
 
     held = (&D_800C2960_de)[1];
     func_80274870_de(&((func_80224078_Arg1 *)(arg1))->unk6C,
                   ((func_80224078_Arg1 *)arg1)->unk6C +
-                      (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)arg0)->unk698)->x * D_800C2960_de,
+                      (f32)((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->x * D_800C2960_de,
                   held);
-    func_80274870_de(&((func_80224078_Arg0 *)(arg0))->unk724,
-                  ((func_80224078_Arg0 *)arg0)->unk724 +
-                      (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)arg0)->unk698)->y * D_800C2968_de,
+    func_80274870_de(&((func_80224078_Arg0 *)(player))->unk724,
+                  ((func_80224078_Arg0 *)player)->unk724 +
+                      (f32)-((ControllerRecAtC7 *)((func_80224078_Arg0 *)player)->unk698)->y * D_800C2968_de,
                   held);
 
-    value = ((func_80224078_Arg0 *)arg0)->unk6A8;
+    value = ((func_80224078_Arg0 *)player)->unk6A8;
     if (value != 0.0f) {
         f32 step;
         f32 limit;
@@ -89,14 +89,14 @@ void func_8022409C_de(void *arg0, void *arg1) {
         } else {
             limit = value * D_800C2974_de;
         }
-        ((func_80224078_Arg0 *)arg0)->unk6C0 =
-            func_802746A0_de(((func_80224078_Arg0 *)arg0)->unk6C0, step, limit);
+        ((func_80224078_Arg0 *)player)->unk6C0 =
+            func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C0, step, limit);
     } else {
-        ((func_80224078_Arg0 *)arg0)->unk6C0 =
-            func_802747A0_de(((func_80224078_Arg0 *)arg0)->unk6C0, D_800C2978_de);
+        ((func_80224078_Arg0 *)player)->unk6C0 =
+            func_802747A0_de(((func_80224078_Arg0 *)player)->unk6C0, D_800C2978_de);
     }
 
-    value = ((func_80224078_Arg0 *)arg0)->unk6A4;
+    value = ((func_80224078_Arg0 *)player)->unk6A4;
     if (value != 0.0f) {
         f32 step;
         f32 limit;
@@ -106,14 +106,14 @@ void func_8022409C_de(void *arg0, void *arg1) {
         } else {
             limit = value * D_800C2984_de;
         }
-        ((func_80224078_Arg0 *)arg0)->unk6C4 =
-            func_802746A0_de(((func_80224078_Arg0 *)arg0)->unk6C4, step, limit);
+        ((func_80224078_Arg0 *)player)->unk6C4 =
+            func_802746A0_de(((func_80224078_Arg0 *)player)->unk6C4, step, limit);
     } else {
-        ((func_80224078_Arg0 *)arg0)->unk6C4 =
-            func_802747A0_de(((func_80224078_Arg0 *)arg0)->unk6C4, D_800C2988_de);
+        ((func_80224078_Arg0 *)player)->unk6C4 =
+            func_802747A0_de(((func_80224078_Arg0 *)player)->unk6C4, D_800C2988_de);
     }
 
-    flags = ((func_80224078_Arg0 *)arg0)->unk6AC;
+    flags = ((func_80224078_Arg0 *)player)->unk6AC;
     if (flags & 0x10) {
         ((func_80224078_Arg1 *)arg1)->unk20 =
             func_802746A0_de(((func_80224078_Arg1 *)arg1)->unk20, D_800C298C_de, 71.68f);
@@ -129,30 +129,30 @@ void func_8022409C_de(void *arg0, void *arg1) {
         f32 angle;
         angle = ((func_80224078_Arg1 *)arg1)->unk6C;
         angle += (held = D_800C2998_de);
-        direction.x = ((func_80224078_Arg0 *)arg0)->unk6C0 * func_802B7130_de(angle);
+        direction.x = ((func_80224078_Arg0 *)player)->unk6C0 * func_802B7130_de(angle);
     }
     direction.y = ((func_80224078_Arg1 *)arg1)->unk20;
-    direction.z = ((func_80224078_Arg0 *)arg0)->unk6C0 *
+    direction.z = ((func_80224078_Arg0 *)player)->unk6C0 *
                   func_802B6560_de(((func_80224078_Arg1 *)arg1)->unk6C + held);
     held = D_800C299C_de;
-    direction.x += ((func_80224078_Arg0 *)arg0)->unk6C4 *
+    direction.x += ((func_80224078_Arg0 *)player)->unk6C4 *
                    func_802B7130_de(((func_80224078_Arg1 *)arg1)->unk6C - held);
-    direction.z += ((func_80224078_Arg0 *)arg0)->unk6C4 *
+    direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
                    func_802B6560_de(((func_80224078_Arg1 *)arg1)->unk6C - held);
 
     func_80271F9C_de(&direction, &direction, D_800D2988);
-    func_80271F34_de(&((func_80224078_Arg0 *)(arg0))->unk6E8,
-                  &((func_80224078_Arg0 *)(arg0))->unk6E8, &direction);
+    func_80271F34_de(&((func_80224078_Arg0 *)(player))->unk6E8,
+                  &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
     result = Scene_FindFloorPolygon(&D_8011FE88, &((func_80224078_Arg1 *)arg1)->unk8);
     if (result != 0) {
         ((func_80224078_Arg1 *)arg1)->unk14 = result;
     }
 
-    if (((func_80224078_Arg0 *)arg0)->unk650 == 1 &&
-        (((func_80224078_Arg0 *)arg0)->unk6AC & 0xE000) == 0xE000 &&
-        (((func_80224078_Arg0 *)arg0)->unk6B0 & 0xE000)) {
-        func_802227F4_de(arg0, arg1, 2);
-        data = ((func_80224078_Arg0 *)arg0)->unk5DC;
+    if (((func_80224078_Arg0 *)player)->unk650 == 1 &&
+        (((func_80224078_Arg0 *)player)->unk6AC & 0xE000) == 0xE000 &&
+        (((func_80224078_Arg0 *)player)->unk6B0 & 0xE000)) {
+        func_802227F4_de(player, arg1, 2);
+        data = ((func_80224078_Arg0 *)player)->unk5DC;
         if (data != 0) {
             Camera_PostScreenMessage(&D_80145088, data, &D_800C2950_de);
         }

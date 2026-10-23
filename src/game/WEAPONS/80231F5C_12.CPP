@@ -49,29 +49,29 @@ extern char D_8011D8D0;
 extern f32 func_80274808_de(f32, f32, s32);
 
 
-void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *arg1) {
-    void *temp_s0;
+void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
+    void *player;
     void *temp_a0;
     s16 index;
 
-    temp_s0 = arg0->self;
-    if (arg1->mode == 2) {
-        func_802227F4_de(temp_s0, temp_s0, 2);
+    player = arg0->self;
+    if (fireState->mode == 2) {
+        func_802227F4_de(player, player, 2);
     } else {
-        arg1->cueTimer = D_800C3048_de[0];
-        if ((((Shared_ActorView *)temp_s0)->remote == 0) &&
+        fireState->cueTimer = D_800C3048_de[0];
+        if ((((Shared_ActorView *)player)->remote == 0) &&
             (D_80140FF8.field_0 == 1)) {
             func_8021A9A4_de(arg0->self, 0x3FB);
         } else {
             func_8021A9A4_de(arg0->self, 0x4CD);
         }
-        func_80214178_de(arg0, arg1, 4);
-        func_8022AEA0_de(temp_s0, 0x977);
-        func_8022AF74_de(temp_s0, 0x974);
+        func_80214178_de(arg0, fireState, 4);
+        func_8022AEA0_de(player, 0x977);
+        func_8022AF74_de(player, 0x974);
 
         temp_a0 = arg0->self;
         index = ((Shared_ActorView *)temp_a0)->selectedAction;
-        arg1->charge =
+        fireState->charge =
             ((WeaponInfo *)D_800D052C[index])->chargeRate *
             D_800C3048_de[1];
         if ((((Shared_ActorView *)temp_a0)->selectedAction == 8) &&
@@ -84,20 +84,20 @@ void func_802331FC_de(Shared_ActorView *arg0, WeaponFireState *arg1) {
 void func_80233314_de(void) {
 }
 
-void func_8023331C_de(void *arg0, struct Shared_Particle *arg1) {
-    arg1->unk148 = D_800C3050_de;
-    func_80214178_de(arg0, arg1, 8);
+void func_8023331C_de(void *arg0, struct Shared_Particle *particle) {
+    particle->unk148 = D_800C3050_de;
+    func_80214178_de(arg0, particle, 8);
 }
 
 /** Perform the no-op callback at VRAM 0x80233334. */
 void func_80233344_de(void) {
 }
 
-void func_8023334C_de(void *arg0, void *arg1) {
+void func_8023334C_de(void *arg0, void *attack) {
     void *actor;
 
     actor = ((LevelActor *)arg0)->controller;
-    ((WeaponFireState *)arg1)->mode = 2;
+    ((WeaponFireState *)attack)->mode = 2;
     if (Weapons_HasAmmoForMode(actor, ((Shared_ActorView *)actor)->selectedAction) == 0) {
         ((Shared_ActorView *)actor)->nextWeapon = func_8022F96C_de(actor);
         return;
@@ -111,17 +111,17 @@ void func_8023334C_de(void *arg0, void *arg1) {
 
     if (!((((Shared_ActorView *)actor)->actionFlags & 0x4000) &&
           (((Shared_ActorView *)actor)->health != 0))) {
-        func_80214178_de(arg0, arg1, 2);
+        func_80214178_de(arg0, attack, 2);
         func_8022B9C4_de(actor);
-        ((WeaponFireState *)arg1)->mode = 1;
+        ((WeaponFireState *)attack)->mode = 1;
     }
 
-    if (func_802301F4_de(arg0, arg1) != 0) {
+    if (func_802301F4_de(arg0, attack) != 0) {
         func_8022B9C4_de(actor);
     }
 }
 
-void func_80233438_de(void *arg0, void *arg1) {
+void func_80233438_de(void *arg0, void *attack) {
     void *actor;
     s16 idx;
     s32 value;
@@ -142,9 +142,9 @@ void func_80233438_de(void *arg0, void *arg1) {
         if (func_80283228_de(&D_8011D8D0, actor) == 0) {
             ((ObjectLinks11DC *)(actor))->unk_770 = func_8022F96C_de(actor);
         }
-    } else if (func_802301F4_de(arg0, arg1) == 0 &&
+    } else if (func_802301F4_de(arg0, attack) == 0 &&
                !(((ObjectLinks1DC_3 *)arg0)->unk_100 & 0x400)) {
-        func_80214178_de(arg0, arg1, value);
+        func_80214178_de(arg0, attack, value);
     }
 }
 
@@ -162,15 +162,15 @@ void func_8023356C_de(void *arg0) {
     }
 }
 
-void func_80233598_de(LevelActor *arg0, WeaponFireState *arg1) {
-    void *temp_s1;
+void func_80233598_de(LevelActor *actor, WeaponFireState *fireState) {
+    void *controller;
 
-    temp_s1 = arg0->controller;
-    if (arg1->triggerMode != 0) {
-        arg1->mode = 2;
-        if (func_802301F4_de(arg0, arg1) != 0) {
-            arg1->mode = 1;
-            func_8022B00C_de(temp_s1);
+    controller = actor->controller;
+    if (fireState->triggerMode != 0) {
+        fireState->mode = 2;
+        if (func_802301F4_de(actor, fireState) != 0) {
+            fireState->mode = 1;
+            func_8022B00C_de(controller);
         }
     }
 }
@@ -178,17 +178,17 @@ void func_80233598_de(LevelActor *arg0, WeaponFireState *arg1) {
 void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
     f32 temp_f1;
     f32 temp_f2;
-    void *temp_s1;
+    void *value;
     void *temp_v0;
 
-    temp_s1 = arg0->value;
+    value = arg0->value;
     if (((struct MeasuredRecAt34 *)(arg1))->value == 5) {
         func_80274870_de(arg1 + 0x128, (f32) D_800CA2D8_de * D_800C3058_de, 0.4f);
     } else {
         func_80274870_de(arg1 + 0x128, 0.0f, 0.4f);
     }
     temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
-    temp_v0 = ((struct MeasuredRecAt698V1 *)(temp_s1))->value;
+    temp_v0 = ((struct MeasuredRecAt698V1 *)(value))->value;
     if (!(temp_f1 < 0.0f
               ? D_800C3060_de < (-temp_f1 * D_800C305C_de)
               : D_800C3068_de[0] < (temp_f1 * D_800C3064_de))) {
@@ -203,22 +203,22 @@ void func_802335EC_de(struct MeasuredRecAt1D8V3 *arg0, void *arg1) {
     ((struct MeasuredRecAt168V2 *)(temp_v0))->value = (f32) D_800C3074_de;
 }
 
-void func_8023371C_de(void *arg0, struct WeaponFireState *arg1) {
+void func_8023371C_de(void *arg0, struct WeaponFireState *fireState) {
     f32 temp_f0;
-    f32 temp_f20;
+    f32 target;
 
-    temp_f20 = D_800C3078_de;
-    temp_f0 = func_80274808_de(arg1->spinStep, temp_f20, D_800CA7A0_de);
-    arg1->spinStep = temp_f0;
-    if (temp_f20 <= temp_f0) {
-        func_80214178_de(arg0, arg1, 2);
+    target = D_800C3078_de;
+    temp_f0 = func_80274808_de(fireState->spinStep, target, D_800CA7A0_de);
+    fireState->spinStep = temp_f0;
+    if (target <= temp_f0) {
+        func_80214178_de(arg0, fireState, 2);
     }
 }
 
-void func_8023378C_de(void *arg0, void *arg1) {
+void func_8023378C_de(void *matrix, void *arg1) {
     ObjRecAt8V1 *event = arg1;
     if (event->unk4 == 6) {
         LevelActor *actor = event->unk8;
-        func_802733B4_de(arg0, 0.0f, actor->pitch, 0.0f);
+        func_802733B4_de(matrix, 0.0f, actor->pitch, 0.0f);
     }
 }

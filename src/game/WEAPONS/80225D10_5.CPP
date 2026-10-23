@@ -330,7 +330,7 @@ void func_802285E8_de(char *arg0) {
     }
 }
 
-void func_80228798_de(void *arg0, void *arg1) {
+void func_80228798_de(void *arg0, void *view) {
     void *node;
 
     node = ((func_80228774_S1 *)(arg0))->unk20;
@@ -340,7 +340,7 @@ void func_80228798_de(void *arg0, void *arg1) {
 
             owner = ((ObjRecAt16E0V2 *)(node))->unk5DC;
             if (owner != 0) {
-                if (owner == arg1) {
+                if (owner == view) {
                     void *actor;
 
                     actor = &((ObjRecAt16E0V2 *)(node))->unk2E8;
@@ -437,7 +437,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     func_8026D9D0_de();
 }
 
-void func_80228AF4_de(void *arg0, ViewState *arg1) {
+void func_80228AF4_de(void *arg0, ViewState *viewState) {
     f32 x;
     f32 y;
     f32 center_x;
@@ -461,9 +461,9 @@ void func_80228AF4_de(void *arg0, ViewState *arg1) {
 
     position = ((HudState *)&hud->state)->timer * D_800C2BDC_de;
     x = (f32)(s32)(position * D_800C2BE0_de);
-    scale_x = arg1->width / (f32)D_800E28D0;
+    scale_x = viewState->width / (f32)D_800E28D0;
     position -= x * ((D_800C7470_Pair *)&D_800C2BE0_de)->second;
-    scale_y = arg1->height / (f32)((struct IntPair *)&D_800E28D0)->field_4;
+    scale_y = viewState->height / (f32)((struct IntPair *)&D_800E28D0)->field_4;
     if ((x < D_800C2BE8_de) && (position < D_800C2BEC_de) &&
         ((D_800CD730 % 15U) < 5U)) {
         return;

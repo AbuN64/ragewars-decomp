@@ -39,11 +39,11 @@ extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
 
 
 /** Subtract obj->y from arg2 in-place via func_80271F68_de, then return the squared length of (arg1, arg2', arg3). */
-f32 func_80217224_de(void *arg0, CVector3 v) {
+f32 func_80217224_de(void *candidate, CVector3 v) {
     f32 temp_f1;
 
-    func_80271F68_de(&v, &v, &((Actor_func_80214310_de *)(arg0))->position);
-    temp_f1 = v.y - ((Actor_func_80214310_de *)(arg0))->eye;
+    func_80271F68_de(&v, &v, &((Actor_func_80214310_de *)(candidate))->position);
+    temp_f1 = v.y - ((Actor_func_80214310_de *)(candidate))->eye;
     v.y = temp_f1;
     return (v.x * v.x) + (temp_f1 * temp_f1) + (v.z * v.z);
 }
@@ -69,7 +69,7 @@ extern s32 func_8025CA24_de(void *, void *);
 
 
 
-void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
+void func_802172D0_de(void *actor, void *arg1, s32 sixth) {
     CLoopingSoundData *node;
     void *fallback;
     s32 kind;
@@ -77,24 +77,24 @@ void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
     node = ((Dest *)arg1)->sound;
     fallback = (void *)-1;
     if (node != 0) {
-        if (node->state == arg2) {
+        if (node->state == sixth) {
             return;
         }
         func_8025CA24_de(func_8025CC6C_de(), ((Dest *)arg1)->sound);
     }
 
-    kind = *(u8 *)arg0;
+    kind = *(u8 *)actor;
     if (kind != 0) {
         if (kind >= 0) {
             if (kind < 3) {
-                fallback = arg0;
+                fallback = actor;
             }
         }
     } else {
-        fallback = (void *)((LevelActor *)arg0)->resourceFlags;
+        fallback = (void *)((LevelActor *)actor)->resourceFlags;
     }
 
     ((Dest *)arg1)->sound =
-        func_8025C95C_de(func_8025CC6C_de(), arg2, &((LevelActor *)arg0)->position0,
-                      &((LevelActor *)arg0)->position0, (s32)fallback);
+        func_8025C95C_de(func_8025CC6C_de(), sixth, &((LevelActor *)actor)->position0,
+                      &((LevelActor *)actor)->position0, (s32)fallback);
 }

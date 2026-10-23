@@ -93,7 +93,7 @@ void func_80213ED4_de(Source110 *src, Dest *dst) {
 #include "COMMON/WORLD.H"
 extern void func_80217388_de(void *, void *);
 
-s32 func_80214178_de(void *arg0, void *arg1, s32 arg2) {
+s32 func_80214178_de(void *arg0, void *arg1, s32 action) {
     struct ActorStateTable *node;
     StateEntry *entry;
     StateEntry *scan;
@@ -109,19 +109,19 @@ s32 func_80214178_de(void *arg0, void *arg1, s32 arg2) {
     ((Dest *)arg1)->requestedState = ((Dest *)arg1)->state;
     ((Source110 *)arg0)->animationChanged = 1;
     ((Source110 *)arg0)->stateChanged = 1;
-    if ((((Dest *)arg1)->entry != 0) && (((Dest *)arg1)->state == arg2)) {
+    if ((((Dest *)arg1)->entry != 0) && (((Dest *)arg1)->state == action)) {
         return 1;
     }
 
     node = ((Dest *)arg1)->table;
     entry = 0;
-    ((Dest *)arg1)->state = arg2;
+    ((Dest *)arg1)->state = action;
     ((Dest *)arg1)->stateTimer = 0;
     while (node != 0) {
         scan = node->entries;
         if (scan->id != -1) {
             while (scan->id != -1) {
-                if (scan->id == arg2) {
+                if (scan->id == action) {
                     entry = scan;
                     node = 0;
                     break;
@@ -157,5 +157,5 @@ s32 func_80214178_de(void *arg0, void *arg1, s32 arg2) {
         ((Source110 *)arg0)->velocity.y = 0;
         ((Source110 *)arg0)->velocity.z = 0;
     }
-    return ((Dest *)arg1)->state == arg2;
+    return ((Dest *)arg1)->state == action;
 }

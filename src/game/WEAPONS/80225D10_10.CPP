@@ -56,10 +56,10 @@ extern Profile D_80102B00[];
 extern f32 Particle_GetActorHeight(void);
 
 
-void *func_8022A480_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void *func_8022A480_de(void *arg0, s32 point, s32 arg2, s32 arg3) {
     f32 var_f3;
     func_8022A470_S2 *var_v1;
-    void *var_v0;
+    void *result;
     f32 dx, dy, dz, distSq;
 
     func_80228774_S1 *object;
@@ -67,10 +67,10 @@ void *func_8022A480_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     var_f3 = D_800C2CE0_de[1];
     object = arg0;
     var_v1 = object->unk20;
-    var_v0 = 0;
+    result = 0;
     if (var_v1 != 0) {
         do {
-            dx = var_v1->unk8 - *(f32 *)&arg1;
+            dx = var_v1->unk8 - *(f32 *)&point;
             dx = dx * dx;
             dy = var_v1->unkC - *(f32 *)&arg2;
             dy = dy * dy;
@@ -79,40 +79,40 @@ void *func_8022A480_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
             distSq = (dx + dy) + dz;
             if (distSq < var_f3) {
                 var_f3 = distSq;
-                var_v0 = var_v1;
+                result = var_v1;
             }
             var_v1 = var_v1->unk16E0;
         } while (var_v1 != 0);
     }
-    return var_v0;
+    return result;
 }
 
-void *func_8022A504_de(struct Context *arg0, CVector3 position, void *arg4) {
+void *func_8022A504_de(struct Context *context, CVector3 position, void *arg4) {
     f32 var_f3;
-    Shared_ActorView *var_v1;
+    Shared_ActorView *actor;
     void *var_a1;
     f32 dx, dy, dz, distSq;
 
     var_f3 = D_800C2CE8_de;
-    var_v1 = (void *)arg0->head;
+    actor = (void *)context->head;
     var_a1 = 0;
-    if (var_v1 != 0) {
+    if (actor != 0) {
         do {
-            if (var_v1->health != 0 && var_v1 != arg4) {
-                dx = ((LevelActor *)var_v1)->position0.x - position.x;
+            if (actor->health != 0 && actor != arg4) {
+                dx = ((LevelActor *)actor)->position0.x - position.x;
                 dx = dx * dx;
-                dy = ((LevelActor *)var_v1)->position0.y - position.y;
+                dy = ((LevelActor *)actor)->position0.y - position.y;
                 dy = dy * dy;
-                dz = ((LevelActor *)var_v1)->position0.z - position.z;
+                dz = ((LevelActor *)actor)->position0.z - position.z;
                 dz = dz * dz;
                 distSq = (dx + dy) + dz;
                 if (distSq < var_f3) {
                     var_f3 = distSq;
-                    var_a1 = var_v1;
+                    var_a1 = actor;
                 }
             }
-            var_v1 = var_v1->next;
-        } while (var_v1 != 0);
+            actor = actor->next;
+        } while (actor != 0);
     }
     return var_a1;
 }
@@ -137,50 +137,50 @@ void *func_8022A5C0_de(char *object, s32 arg1) {
     return 0;
 }
 
-void *func_8022A5F4_de(void *arg0, u32 arg1) {
-    Shared_ActorView *var_v1;
+void *func_8022A5F4_de(void *world, u32 arg1) {
+    Shared_ActorView *actor;
     s32 var_a2;
 
-    var_v1 = 0;
+    actor = 0;
     var_a2 = 0;
     if (arg1 < 8U) {
-        var_v1 = ((struct Context *)arg0)->head;
-        if (var_v1 != 0) {
+        actor = ((struct Context *)world)->head;
+        if (actor != 0) {
             do {
                 if (var_a2 == (s32)arg1) {
-                    return var_v1;
+                    return actor;
                 }
-                var_v1 = var_v1->next;
+                actor = actor->next;
                 var_a2 += 1;
-            } while (var_v1 != 0);
+            } while (actor != 0);
         }
     }
-    return var_v1;
+    return actor;
 }
 
-void *func_8022A634_de(struct Context *arg0, u32 arg1) {
-    void *var_v1;
+void *func_8022A634_de(struct Context *context, u32 arg1) {
+    void *result;
     void *temp_v0;
     s32 var_a2;
 
-    var_v1 = 0;
+    result = 0;
     var_a2 = 0;
     if (arg1 < 8U) {
-        var_v1 = arg0->head;
-        if (var_v1 != 0) {
+        result = context->head;
+        if (result != 0) {
             do {
-                temp_v0 = ((Shared_ActorView *)var_v1)->message;
+                temp_v0 = ((Shared_ActorView *)result)->message;
                 if (temp_v0 != 0 && ((GameplayCamera *)temp_v0)->messageList.flag == 0) {
                     if (var_a2 == (s32) arg1) {
-                        return var_v1;
+                        return result;
                     }
                     var_a2 += 1;
                 }
-                var_v1 = ((Shared_ActorView *)var_v1)->next;
-            } while (var_v1 != 0);
+                result = ((Shared_ActorView *)result)->next;
+            } while (result != 0);
         }
     }
-    return var_v1;
+    return result;
 }
 
 int func_8022A68C_de(char *arg0) {
@@ -285,8 +285,8 @@ void func_8022A8C8_de(char *object, f32 arg1) {
     }
 }
 
-s32 func_8022A8F0_de(struct Context *arg0) {
-    Shared_ActorView *record = (void *)arg0->head;
+s32 func_8022A8F0_de(struct Context *context) {
+    Shared_ActorView *record = (void *)context->head;
     s32 count = 0;
     if (record != 0) {
         do {
@@ -306,10 +306,10 @@ void func_8022A928_de(ObjRecAtB4 *arg0, int arg1) {
     arg0->unk4 = arg1;
 }
 
-void func_8022A940_de(Shared_Effect *arg0) {
-    s32 val = arg0->state;
+void func_8022A940_de(Shared_Effect *effect) {
+    s32 val = effect->state;
     if (val != 0 && val != 3) {
-        arg0->state = 3;
+        effect->state = 3;
     }
 }
 
@@ -357,20 +357,20 @@ f32 func_8022AA44_de(SharedRecAt848 *arg0) {
     return 1.0f - value;
 }
 
-s32 func_8022AA9C_de(AimPlayer *arg0, s32 arg1) {
+s32 func_8022AA9C_de(AimPlayer *aimPlayer, s32 arg1) {
     void *p = D_800D052C[arg1];
-    if (arg0->unk594 == 1) {
+    if (aimPlayer->unk594 == 1) {
         return ((GlobalState *)p)->field20;
     }
     return ((GlobalState *)p)->field24;
 }
 
-s16 func_8022AAD4_de(Player *arg0, s32 arg1) {
+s16 func_8022AAD4_de(Player *player, s32 arg1) {
     s16 *var_v0;
     WeaponInfo *temp_a0;
 
     temp_a0 = D_800D052C[arg1];
-    if (arg0->gear == 1) {
+    if (player->gear == 1) {
         var_v0 = temp_a0->weaponClass;
     } else {
         var_v0 = temp_a0->alternateClass;
@@ -381,19 +381,19 @@ s16 func_8022AAD4_de(Player *arg0, s32 arg1) {
     return -1;
 }
 
-s16 func_8022AB20_de(void *arg0, s32 arg1) {
+s16 func_8022AB20_de(void *actor, s32 arg1) {
     s16 *var_v0;
     s32 temp_v1;
-    WeaponInfo *temp_v0;
+    WeaponInfo *weapon;
 
-    if ((arg1 == 1) && (((Shared_ActorView *)arg0)->actions[1].kind != 0)) {
+    if ((arg1 == 1) && (((Shared_ActorView *)actor)->actions[1].kind != 0)) {
         return -1;
     }
-    temp_v0 = D_800D052C[arg1];
-    if (((Player *)arg0)->gear == 1) {
-        var_v0 = temp_v0->weaponClass;
+    weapon = D_800D052C[arg1];
+    if (((Player *)actor)->gear == 1) {
+        var_v0 = weapon->weaponClass;
     } else {
-        var_v0 = temp_v0->alternateClass;
+        var_v0 = weapon->alternateClass;
     }
     if (var_v0 != 0) {
         temp_v1 = *var_v0;
@@ -401,21 +401,21 @@ s16 func_8022AB20_de(void *arg0, s32 arg1) {
         temp_v1 = -1;
     }
     if (temp_v1 != -1) {
-        return ((Shared_ActorView *)arg0)->ammo[temp_v1];
+        return ((Shared_ActorView *)actor)->ammo[temp_v1];
     }
     return -1;
 }
 
-s32 func_8022AB9C_de(void *arg0) {
+s32 func_8022AB9C_de(void *player) {
     s16 *var_v0;
     s32 temp_v1;
-    WeaponInfo *temp_v0;
+    WeaponInfo *weapon;
 
-    temp_v0 = D_800D052C[((Shared_ActorView *)arg0)->selectedAction];
-    if (((Player *)arg0)->gear == 1) {
-        var_v0 = temp_v0->weaponClass;
+    weapon = D_800D052C[((Shared_ActorView *)player)->selectedAction];
+    if (((Player *)player)->gear == 1) {
+        var_v0 = weapon->weaponClass;
     } else {
-        var_v0 = temp_v0->alternateClass;
+        var_v0 = weapon->alternateClass;
     }
     if (var_v0 != 0) {
         temp_v1 = *var_v0;
@@ -485,17 +485,17 @@ int func_8022ADB0_de(struct SharedPlayer *object, s32 arg1) {
 
 f32 func_8022ADBC_de(void *arg0) {
     struct Object *object = arg0;
-    struct ModelBlend *temp_v0;
+    struct ModelBlend *owner;
 
-    temp_v0 = object->owner;
-    if (temp_v0 != 0) {
-        return temp_v0->height * D_800C2D04_de;
+    owner = object->owner;
+    if (owner != 0) {
+        return owner->height * D_800C2D04_de;
     }
     return D_800C2D00_de;
 }
 
-f32 func_8022ADF0_de(LevelActor *arg0) {
-    if (arg0->definition != 0) {
+f32 func_8022ADF0_de(LevelActor *actor) {
+    if (actor->definition != 0) {
         return Particle_GetActorHeight();
     } else {
         return D_800C2D08_de;

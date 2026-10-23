@@ -84,8 +84,8 @@ extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
 
 
 extern func_8020CA10_G1 D_800D2988;
-void func_802292B8_de(void *arg0) {
-    Slot sp18;
+void func_802292B8_de(void *actor) {
+    Slot damage;
     f32 temp_f0;
     f32 temp_f1;
     f32 temp_f21;
@@ -93,16 +93,16 @@ void func_802292B8_de(void *arg0) {
     f32 var_f20;
     f32 zero;
     s32 var_s2;
-    s32 var_s3;
+    s32 i;
     void *temp_a0;
     void *temp_s0;
 
     zero = 0.0f;
     temp_f21 = D_800C2C40_de[1];
-    var_s3 = 0;
+    i = 0;
     var_s2 = 0x1248;
     do {
-        temp_s0 = (char *)arg0 + var_s2;
+        temp_s0 = (char *)actor + var_s2;
         temp_f2 = ((ObjectLinks18_3 *)(temp_s0))->unk_4;
         if (temp_f2 > zero) {
             temp_f1 = D_800D2988.unk0;
@@ -125,47 +125,47 @@ void func_802292B8_de(void *arg0) {
                 var_f20 *= D_800C2C48_de.unk0;
             }
             if (((ObjectLinks18_3 *)(temp_s0))->unk_14 != 0) {
-                func_8022B60C_de(arg0, 0.0933333337f, ((ObjectLinks18_3 *)(temp_s0))->unk_8);
-                if ((f32)((ObjectState5E8 *)(arg0))->unk_5E4 <= var_f20) {
+                func_8022B60C_de(actor, 0.0933333337f, ((ObjectLinks18_3 *)(temp_s0))->unk_8);
+                if ((f32)((ObjectState5E8 *)(actor))->unk_5E4 <= var_f20) {
                     var_f20 = D_800C2C4C_de.unk0;
                 }
             }
-            func_80216488_de((void *)&sp18, (s32)((ObjectLinks18_3 *)(temp_s0))->unk_8,
+            func_80216488_de((void *)&damage, (s32)((ObjectLinks18_3 *)(temp_s0))->unk_8,
                           (s32)var_f20, 25.599998f, 0x100080, 0);
-            func_80219A40_de(arg0, &((ObjectState5E8 *)(arg0))->unk_170, (void *)&sp18);
+            func_80219A40_de(actor, &((ObjectState5E8 *)(actor))->unk_170, (void *)&damage);
         }
-        var_s3++;
+        i++;
         var_s2 += 0x18;
-    } while (var_s3 < 5);
+    } while (i < 5);
 }
 
 /* Transfers a randomly selected inventory quantity into an empty recipient slot. */
 
 s32 func_802744D4_de(); /* extern */
 
-void func_80229468_de(Inventory *arg0, Receiver *arg1) {
+void func_80229468_de(Inventory *inventory, Receiver *receiver) {
  s32 amount;
  s32 index;
  s32 value;
  void *scan;
- if (arg1->amount == 0) {
+ if (receiver->amount == 0) {
   amount=15;
   index=func_802744D4_de()%3;
-  value=arg0->items[index];
+  value=inventory->items[index];
   if(value<16) amount=value;
   if(amount==0) {
    func_802744D4_de();
-   scan=arg0;
+   scan=inventory;
    for(index=0;index<3;index++) {
-    s16 item=arg0->items[index];
+    s16 item=inventory->items[index];
     if(item>0) { s32 v=item; if(amount<v) v=amount; amount=v; }
    }
    index=2;
   }
   if(amount!=0) {
-   arg0->items[index]-=amount;
-   arg1->index=index;
-   arg1->amount=amount;
+   inventory->items[index]-=amount;
+   receiver->index=index;
+   receiver->amount=amount;
   }
  }
 }

@@ -14,9 +14,9 @@ extern f32 func_802B72B0_de(f32);
 
 
 
-void func_802165F8_de(Player *arg0, ActorMotionState *arg1, OffsetResult *result) {
-    func_80271F68_de(&result->first, &arg0->pos,
-                  &arg1->position);
+void func_802165F8_de(Player *player, ActorMotionState *motionState, OffsetResult *result) {
+    func_80271F68_de(&result->first, &player->pos,
+                  &motionState->position);
     result->first_normalized = result->first;
     func_8027207C_de(&result->first_normalized.x);
     result->first_length = func_802B72B0_de(
@@ -32,6 +32,6 @@ void func_802165F8_de(Player *arg0, ActorMotionState *arg1, OffsetResult *result
         result->flat.x * result->flat.x +
         result->flat.y * result->flat.y +
         result->flat.z * result->flat.z);
-    result->height = arg0->heading -
-                     arg1->height;
+    result->height = player->heading -
+                     motionState->height;
 }

@@ -97,55 +97,55 @@ void func_802312C8_de(Shared_Actor *actor, WeaponFireState *attack) {
 
 
 
-void func_80231474_de(Shared_Actor *arg0, WeaponFireState *arg1) {
-    f32 temp_f12;
+void func_80231474_de(Shared_Actor *actor, WeaponFireState *fireState) {
+    f32 spin;
     f32 temp_f1;
     f32 temp_f2;
-    Player *temp_s1;
-    void *temp_v0;
+    Player *entity;
+    void *weaponAnimation;
 
-    temp_s1 = (Player *)arg0->entity;
-    if (arg1->variant != 4) {
-        temp_f12 = arg1->spin;
-        if (temp_f12 > 0.0f) {
-            arg1->spin = func_802747A0_de(temp_f12, D_800C2F68_de);
+    entity = (Player *)actor->entity;
+    if (fireState->variant != 4) {
+        spin = fireState->spin;
+        if (spin > 0.0f) {
+            fireState->spin = func_802747A0_de(spin, D_800C2F68_de);
         } else {
-            f32 value = arg1->spinStep;
+            f32 value = fireState->spinStep;
             f32 period = D_800C2F6C_de;
-            arg1->spin = 0.0f;
+            fireState->spin = 0.0f;
             if (period <= value) {
                 do {
                     value -= period;
-                    arg1->spinStep = value;
+                    fireState->spinStep = value;
                 } while (period <= value);
             }
-            period = arg1->spinStep;
+            period = fireState->spinStep;
             if (period < D_800C2F70_de) {
-                func_80274870_de(&arg1->spinStep, 0.0f, 0.125f);
+                func_80274870_de(&fireState->spinStep, 0.0f, 0.125f);
             } else if (period < D_800C2F74_de) {
-                func_80274870_de(&arg1->spinStep, 2.0943952f, 0.125f);
+                func_80274870_de(&fireState->spinStep, 2.0943952f, 0.125f);
             } else if (period < D_800C2F78_de) {
-                func_80274870_de(&arg1->spinStep, 4.1887903f, 0.125f);
+                func_80274870_de(&fireState->spinStep, 4.1887903f, 0.125f);
             } else {
-                func_80274870_de(&arg1->spinStep, 6.2831855f, 0.125f);
+                func_80274870_de(&fireState->spinStep, 6.2831855f, 0.125f);
             }
         }
     }
-    arg1->spinStep += (arg1->spin * D_800D2988) * 2.0f;
-    temp_f1 = arg1->spin;
-    temp_v0 = temp_s1->weaponAnimation;
+    fireState->spinStep += (fireState->spin * D_800D2988) * 2.0f;
+    temp_f1 = fireState->spin;
+    weaponAnimation = entity->weaponAnimation;
     if (!(temp_f1 < 0.0f
               ? D_800C2F80_de < (-temp_f1 * D_800C2F7C_de)
               : D_800C2F88_de < (temp_f1 * D_800C2F84_de))) {
-        temp_f2 = arg1->spin;
+        temp_f2 = fireState->spin;
         if (temp_f2 < 0.0f) {
-            ((WeaponAnimationState *)temp_v0)->speed = (f32) (-temp_f2 * D_800C2F8C_de);
+            ((WeaponAnimationState *)weaponAnimation)->speed = (f32) (-temp_f2 * D_800C2F8C_de);
             return;
         }
-        ((WeaponAnimationState *)temp_v0)->speed = (f32) (temp_f2 * D_800C2F90_de);
+        ((WeaponAnimationState *)weaponAnimation)->speed = (f32) (temp_f2 * D_800C2F90_de);
         return;
     }
-    ((WeaponAnimationState *)temp_v0)->speed = (f32) D_800C2F94_de;
+    ((WeaponAnimationState *)weaponAnimation)->speed = (f32) D_800C2F94_de;
 }
 
 /* Runs a player's rapid-fire action: when the current action is not allowed a type 2 request drops to type 1
@@ -192,50 +192,50 @@ static inline s32 can_fire(Player *player) {
     }
     return ammo;
 }
-void func_80231664_de(Shared_Actor *actor, WeaponFireState *arg1) {
+void func_80231664_de(Shared_Actor *actor, WeaponFireState *fireState) {
     Player *player;
     s32 action;
     s32 single;
     player = actor->entity;
     action = D_800CE8DC[player->pose].action;
     if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
-        if (arg1->mode != 2) {
+        if (fireState->mode != 2) {
             goto idle;
         }
-        arg1->mode = 1;
+        fireState->mode = 1;
         if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
         idle:
             player->weapon = func_8022F96C_de(player);
             return;
         }
     }
-    if ((player->actionFlags & 0x4000) && can_fire(player) && arg1->rounds > 0) {
+    if ((player->actionFlags & 0x4000) && can_fire(player) && fireState->rounds > 0) {
         single = 1;
-        if (arg1->mode == single) {
-            arg1->mode = 2;
+        if (fireState->mode == single) {
+            fireState->mode = 2;
             if (Weapons_HasAmmoForMode(player, player->selectedAction) == 0) {
                 func_8025DF34_de(0xD4D);
                 if (player->owner != 0) {
                     Camera_PostTargetedScreenMessage(&D_80145040.object, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
                                   func_8022A5A0_de(&D_80145040, player), 1.0f);
                 }
-                arg1->mode = single;
+                fireState->mode = single;
                 goto spin;
             }
         } else {
-            arg1->mode = single;
+            fireState->mode = single;
         }
-        arg1->rounds = single;
+        fireState->rounds = single;
     }
 spin:
-    if (arg1->mode == 1) {
+    if (fireState->mode == 1) {
         if (player->fireSpin > 1.0f) {
             player->fireSpin -= 0.5f;
         }
         if (player->fireSpin < 1.0f) {
             player->fireSpin = 1.0f;
         }
-    } else if (arg1->mode == 2) {
+    } else if (fireState->mode == 2) {
         if (player->fireSpin < 2.0f) {
             player->fireSpin += 0.05f;
         }
@@ -244,7 +244,7 @@ spin:
         }
     }
     player->fireFrame = (player->fireFrame + (s32)player->fireSpin) % 8;
-    if (func_802301F4_de(actor, arg1) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, arg1, action);
+    if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
+        func_80214178_de(actor, fireState, action);
     }
 }

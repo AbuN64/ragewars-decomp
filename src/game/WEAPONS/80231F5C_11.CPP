@@ -56,20 +56,20 @@ void func_80232E38_de(void *arg0) {
     }
 }
 
-void func_80232E64_de(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
+void func_80232E64_de(struct MeasuredRecAt1D8V2 *actor, void *attack) {
     f32 temp_f1;
     f32 temp_f2;
-    void *temp_s1;
+    void *value;
     void *temp_v0;
 
-    temp_s1 = arg0->value;
-    ((struct MeasuredRecAt124 *)(arg1))->value += (((struct MeasuredRecAt128 *)(arg1))->value * D_800D2988) * 2.0f;
-    temp_f1 = ((struct MeasuredRecAt128 *)(arg1))->value;
-    temp_v0 = ((struct MeasuredRecAt698V2 *)(temp_s1))->value;
+    value = actor->value;
+    ((struct MeasuredRecAt124 *)(attack))->value += (((struct MeasuredRecAt128 *)(attack))->value * D_800D2988) * 2.0f;
+    temp_f1 = ((struct MeasuredRecAt128 *)(attack))->value;
+    temp_v0 = ((struct MeasuredRecAt698V2 *)(value))->value;
     if (!(temp_f1 < 0.0f
               ? D_800C3028_de < (-temp_f1 * *(&D_800C3020_de + 1))
               : D_800C3030_de[0] < (temp_f1 * D_800C302C_de))) {
-        temp_f2 = ((struct MeasuredRecAt128 *)(arg1))->value;
+        temp_f2 = ((struct MeasuredRecAt128 *)(attack))->value;
         if (temp_f2 < 0.0f) {
             ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) (-temp_f2 * D_800C3030_de[1]);
         } else {
@@ -79,11 +79,11 @@ void func_80232E64_de(struct MeasuredRecAt1D8V2 *arg0, void *arg1) {
         ((struct MeasuredRecAt168V1 *)(temp_v0))->value = (f32) D_800C303C_de;
     }
 
-    if (((struct MeasuredRecAtCB *)(arg1))->value != 0) {
-        ((struct MeasuredRecAt13CV1 *)(arg1))->value = 2;
-        if (func_802301F4_de(arg0, arg1) != 0) {
-            ((struct MeasuredRecAt13CV1 *)(arg1))->value = 1;
-            func_8022B00C_de(temp_s1);
+    if (((struct MeasuredRecAtCB *)(attack))->value != 0) {
+        ((struct MeasuredRecAt13CV1 *)(attack))->value = 2;
+        if (func_802301F4_de(actor, attack) != 0) {
+            ((struct MeasuredRecAt13CV1 *)(attack))->value = 1;
+            func_8022B00C_de(value);
         }
     }
 }
@@ -100,33 +100,33 @@ void func_80232F8C_de(void *obj, Event *event) {
     }
 }
 
-void func_80232FF8_de(void *arg0, ObjectState140 *arg1) {
-    char *o = (char *) arg0;
+void func_80232FF8_de(void *actor, ObjectState140 *attack) {
+    char *o = (char *) actor;
     void *temp_s0;
     s16 idx;
-    s32 temp_s3;
+    s32 action;
 
     temp_s0 = (void *)((Actor_func_8022D290_de *)o)->self;
     idx = ((Actor_func_8022D290_de *)temp_s0)->unk_0x0650;
-    temp_s3 = D_800CE8DC[idx].action;
+    action = D_800CE8DC[idx].action;
 
     if (Weapons_HasAmmoForMode(temp_s0, ((Actor_func_8022D290_de *)temp_s0)->unk_0x062E) == 0) {
         ((Actor_func_8022D290_de *)temp_s0)->unk_0x0770 = func_8022F96C_de(temp_s0);
     } else {
-        arg1->unk_13C = 1;
-        if (func_802301F4_de(arg0, arg1) == 0 && !(((Actor_func_8022D290_de *)o)->flags & 0x400)) {
-            func_80214178_de(arg0, arg1, temp_s3);
+        attack->unk_13C = 1;
+        if (func_802301F4_de(actor, attack) == 0 && !(((Actor_func_8022D290_de *)o)->flags & 0x400)) {
+            func_80214178_de(actor, attack, action);
         }
     }
 }
 
-void func_802330AC_de(Shared_ActorView *arg0, WeaponFireState *arg1) {
+void func_802330AC_de(Shared_ActorView *arg0, WeaponFireState *fireState) {
     Shared_ActorView *temp_s0;
     Shared_ActorView *temp_a0;
     s16 index;
 
     temp_s0 = arg0->self;
-    arg1->cueTimer = 0;
+    fireState->cueTimer = 0;
     if ((temp_s0->remote == 0) &&
         (D_80140FF8 == 1)) {
         func_8021A9A4_de(arg0->self, 0x3F9);
@@ -138,7 +138,7 @@ void func_802330AC_de(Shared_ActorView *arg0, WeaponFireState *arg1) {
 
     temp_a0 = arg0->self;
     index = temp_a0->selectedAction;
-    arg1->charge =
+    fireState->charge =
         ((WeaponInfo *)D_800D052C[index])->chargeRate *
         D_800C3044_de;
     if ((temp_a0->selectedAction == 8) &&

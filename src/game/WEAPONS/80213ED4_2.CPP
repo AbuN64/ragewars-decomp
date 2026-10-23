@@ -110,7 +110,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   return 1;
 }
 
-s32 func_80214624_de(Actor_func_80214624_de *arg0, Plan *arg1, Actor_func_80214624_de *arg2) {
+s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80214624_de *candidate) {
     CVector3 pos,hit;
     s32 room;
     f32 temp_f20;
@@ -118,69 +118,69 @@ s32 func_80214624_de(Actor_func_80214624_de *arg0, Plan *arg1, Actor_func_802146
     s32 temp_v0_2;
     s32 var_s1;
     s32 var_v0;
-    ApproachLocation *temp_v0;
-    Runtime *temp_v1;
+    ApproachLocation *approachLocation;
+    Runtime *runtime;
 
-    if (arg1->unk4 == 0) {
+    if (tracker->unk4 == 0) {
         var_s1 = 6;
-    } else if (arg2 == 0) {
+    } else if (candidate == 0) {
         var_s1 = 3;
-        if (arg1->unk94 != 0) {
+        if (tracker->unk94 != 0) {
             var_s1 = 4;
         }
     } else {
         var_s1 = 2;
-        if (arg2 != arg1->unk68) {
-            if (*arg2->unk18 == 5) var_s1=5;
-            else if(arg2->unkE4==0x64F) var_s1=7;
+        if (candidate != tracker->unk68) {
+            if (*candidate->unk18 == 5) var_s1=5;
+            else if(candidate->unkE4==0x64F) var_s1=7;
             else {
                 var_s1=0;
                 if(!D_8013B290) {
-                    if((!(arg2->unk100&0x300000) || arg2->unk1D8->unk794!=arg0 || (var_s1=1,arg2->unk1D8->unk788!=2)) && (!(arg0->unk2E0&2) || (var_s1=1,arg0->unkE4==0xCA))) var_s1=0;
+                    if((!(candidate->unk100&0x300000) || candidate->unk1D8->unk794!=actor || (var_s1=1,candidate->unk1D8->unk788!=2)) && (!(actor->unk2E0&2) || (var_s1=1,actor->unkE4==0xCA))) var_s1=0;
                 }
             }
         }
     }
     switch (var_s1) {
     case 6:
-        pos = arg0->pos;
-        room = arg0->unk14;
+        pos = actor->pos;
+        room = actor->unk14;
         break;
     case 4:
-        temp_v0 = func_80219408_de(&arg1->unk94);
-        pos = temp_v0->pos;
-        room = temp_v0->unkC;
+        approachLocation = func_80219408_de(&tracker->unk94);
+        pos = approachLocation->pos;
+        room = approachLocation->unkC;
         break;
     case 3:
-        pos = arg1->pos;
-        room = arg1->unkBC;
+        pos = tracker->pos;
+        room = tracker->unkBC;
         break;
     case 7:
-        approach(arg0,arg2,arg1->unk80,&pos,&room);
+        approach(actor,candidate,tracker->unk80,&pos,&room);
         break;
     case 1:
-        temp_v0_2 = func_80240698_de(arg0, arg1->unk84, arg2->pos, arg2->unk14, arg1->unk30->unkC, &pos);
+        temp_v0_2 = func_80240698_de(actor, tracker->unk84, candidate->pos, candidate->unk14, tracker->unk30->unkC, &pos);
         room = temp_v0_2;
         if (temp_v0_2 == 0) {
         default:
-            pos = arg2->pos;
-            room = arg2->unk14;
+            pos = candidate->pos;
+            room = candidate->unk14;
         }
         break;
     }
-    if (func_80240660_de(arg0, pos, room, arg1->unk30->unkC, &hit) != 0) {
-        if (func_80275B10_de(arg0->unk14, hit.x, hit.z) != 0) {
-            arg1->unk90 = hit.y;
+    if (func_80240660_de(actor, pos, room, tracker->unk30->unkC, &hit) != 0) {
+        if (func_80275B10_de(actor->unk14, hit.x, hit.z) != 0) {
+            tracker->unk90 = hit.y;
         } else {
-            arg1->unk90 = (f32) (hit.y + D_800C2160_de[0]);
+            tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);
         }
-        func_80271F68_de(&hit, &hit, &arg0->pos);
-        arg1->unk8C = (f32) (func_80271AA8_de(&hit) + D_800C2160_de[1]);
+        func_80271F68_de(&hit, &hit, &actor->pos);
+        tracker->unk8C = (f32) (func_80271AA8_de(&hit) + D_800C2160_de[1]);
         return 1;
     }
     if (var_s1 == 1) {
-        arg1->unk90 = pos.y;
-        arg1->unk8C = (f32) (arg0->unk6C + func_80216F44_de(arg0, pos));
+        tracker->unk90 = pos.y;
+        tracker->unk8C = (f32) (actor->unk6C + func_80216F44_de(actor, pos));
         return 1;
     }
     return 0;

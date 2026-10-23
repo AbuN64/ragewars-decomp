@@ -56,38 +56,38 @@ static inline s32 can_fire(char *player) {
     }
     return ammo;
 }
-void func_80230FDC_de(Shared_Actor *actor, WeaponFireState *arg1) {
+void func_80230FDC_de(Shared_Actor *actor, WeaponFireState *fireState) {
     char *player;
     s32 action;
     player = actor->entity;
     action = D_800CE8DC[((SharedPlayer *)(player))->views5E8.view650_15.unk650].action;
     if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
-        if (arg1->mode != 2) {
+        if (fireState->mode != 2) {
             ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
             return;
         }
-        arg1->mode = 1;
+        fireState->mode = 1;
         if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
             ((SharedPlayer *)(player))->views5E8.view770_91.unk770 = func_8022F96C_de(player);
             return;
         }
     }
     if ((((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) && can_fire(player)) {
-        if (arg1->mode == 1 && can_fire(player)) {
-            arg1->mode = 2;
+        if (fireState->mode == 1 && can_fire(player)) {
+            fireState->mode = 2;
             if (Weapons_HasAmmoForMode(player, ((SharedPlayer *)(player))->views5E8.view62E_13.unk62E) == 0) {
                 func_8025DF34_de(0xD4D);
                 if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
                     Camera_PostTargetedScreenMessage((D_80145040 + 0x48), ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                                   func_8022A5A0_de(D_80145040, player), 1.0f);
                 }
-                arg1->mode = 1;
+                fireState->mode = 1;
             }
         } else {
-            arg1->mode = 1;
+            fireState->mode = 1;
         }
     }
-    if (func_802301F4_de(actor, arg1) == 0 && !(actor->weaponFlags & 0x400)) {
-        func_80214178_de(actor, arg1, action);
+    if (func_802301F4_de(actor, fireState) == 0 && !(actor->weaponFlags & 0x400)) {
+        func_80214178_de(actor, fireState, action);
     }
 }

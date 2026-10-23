@@ -17,7 +17,7 @@ extern s32 func_8024BE80_de(CActor_t *actor);
 extern void func_8024F478_de(CQuatern *result, CActor_t *actor);
 #include "particle/8027A0F4_8.H"
 
-void func_80216288_de(void *actor, s32 arg1, Triple input, s32 unused0) {
+void func_80216288_de(void *actor, s32 kind, Triple input, s32 unused0) {
     Triple copiedInput;
     CVector3 position;
     CQuatern rotation;
@@ -56,7 +56,7 @@ void func_80216288_de(void *actor, s32 arg1, Triple input, s32 unused0) {
         break;
     }
 
-    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, eventValue, arg1,
+    func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)actor, (struct EffectActor *)actor, 0, eventValue, kind,
                   position, rotation, *(CVector3 *)&copiedInput, 0, -1, mode);
 
     if ((((CActor_t *)actor)->type == 1) && (typedActor->objectId == 0x40C)) {

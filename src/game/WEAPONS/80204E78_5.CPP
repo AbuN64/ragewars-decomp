@@ -78,8 +78,8 @@ void func_80205694_de(void *arg0, void *arg1) {
     func_80285DB0_de(&D_8011FE88, arg0, 1);
 }
 
-void func_802056D0_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 1);
+void func_802056D0_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 /** Return the object's 0x200 status bit. */

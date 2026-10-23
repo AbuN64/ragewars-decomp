@@ -48,13 +48,13 @@ typedef struct func_8021CD70_S1 func_8021CD70_S1;
 typedef struct func_8021CD70_S2 func_8021CD70_S2;
 s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 f32 Particle_GetActorHeight(void *);
-void func_8021D774_de(AimPlayer *arg0) {
+void func_8021D774_de(AimPlayer *player) {
     AimOutput sp20;
     CVector3 sp30;
     CVector3 sp40;
-    CVector3 sp50;
-    f32 sp60[16];
-    CVector3 spA0;
+    CVector3 desired;
+    f32 matrix[16];
+    CVector3 current;
     CQuatern spB0;
     AimWeapon *weapon;
     AimOutput spC0;
@@ -66,41 +66,41 @@ void func_8021D774_de(AimPlayer *arg0) {
     s16 temp_v1, temp_v1_2;
     s32 var_s4;
     s32 temp_v1_3, var_s0, var_s5;
-    AimActor *temp_a1, *temp_a1_2;
-    AimView *temp_s0;
+    AimActor *temp_a1, *target;
+    AimView *view;
     spF0 = NULL;
-    temp_s0 = arg0->view;
+    view = player->view;
     temp_fs1f = D_800C23B4_de;
     temp_fs2 = D_800C23B8_de;
-    if (temp_s0) { switch (temp_s0->mode) { case 1: func_80226DD0_de(arg0, sp60); func_8022B144_de(arg0, &spA0.x); break; default: func_8027302C(sp60, temp_s0->matrix); spA0 = temp_s0->origin; break; } } else { func_80226DD0_de(arg0, sp60); func_8022B144_de(arg0, &spA0.x); }
+    if (view) { switch (view->mode) { case 1: func_80226DD0_de(player, matrix); func_8022B144_de(player, &current.x); break; default: func_8027302C(matrix, view->matrix); current = view->origin; break; } } else { func_80226DD0_de(player, matrix); func_8022B144_de(player, &current.x); }
     sp30.x = 0.0f;
     sp30.y = 0;
     sp30.z = D_800C23BC_de;
-    func_80272898_de(sp60, &sp30, &sp50);
-    if (func_802444A4_de((char *)arg0, spA0, sp50, (s32) &D_80103FD0) != 0) {
-        arg0->aim = D_80103FCC->point;
-        arg0->normal = D_80103FCC->normal;
-        arg0->target = D_80103FCC->actor;
+    func_80272898_de(matrix, &sp30, &desired);
+    if (func_802444A4_de((char *)player, current, desired, (s32) &D_80103FD0) != 0) {
+        player->aim = D_80103FCC->point;
+        player->normal = D_80103FCC->normal;
+        player->target = D_80103FCC->actor;
     } else {
-        arg0->aim = sp50;
-        arg0->target = NULL;
+        player->aim = desired;
+        player->target = NULL;
     }
     sp30.x = 0.0f;
     sp30.y = 0;
     sp30.z = D_800C23C0_de;
-    func_80272898_de(sp60, &sp30, &sp50);
-    if (arg0->enabled != 0) {
-        if ((func_802444A4_de((char *)arg0, spA0, sp50, (s32) &D_801000F0) != 0) && (temp_a1 = D_80103FCC->actor, (temp_a1 != NULL))) {
+    func_80272898_de(matrix, &sp30, &desired);
+    if (player->enabled != 0) {
+        if ((func_802444A4_de((char *)player, current, desired, (s32) &D_801000F0) != 0) && (temp_a1 = D_80103FCC->actor, (temp_a1 != NULL))) {
             if (temp_a1->kind == 1) {
                 if (temp_a1->flags & 0x300000) {
-                    func_80271F68_de((CVector3 *)&spB0, &temp_a1->pos, &arg0->unk8);
+                    func_80271F68_de((CVector3 *)&spB0, &temp_a1->pos, &player->unk8);
                     temp_fv0 = func_802B72B0_de((spB0.x * spB0.x) + (spB0.y * spB0.y) + (spB0.z * spB0.z));
                     spE0 = sp30;
                     func_8027207C_de(&spE0);
                     func_80271F9C_de(&spC0.xyz, &spE0, temp_fv0);
-                    func_80272898_de(sp60, &spC0.xyz, &spD0.xyz);
-                    arg0->aim2 = spD0.xyz;
-                    func_8021D408_de((void *)arg0, &spD0.xyz, &D_80103FCC->normal);
+                    func_80272898_de(matrix, &spC0.xyz, &spD0.xyz);
+                    player->aim2 = spD0.xyz;
+                    func_8021D408_de((void *)player, &spD0.xyz, &D_80103FCC->normal);
                 } else {
                     goto block_14;
                 }
@@ -110,18 +110,18 @@ void func_8021D774_de(AimPlayer *arg0) {
         } else {
 block_14:
 block_15:
-            arg0->aim2 = arg0->aim;
-            func_8021D408_de((void *)arg0, &arg0->aim, &D_80103FCC->normal);
+            player->aim2 = player->aim;
+            func_8021D408_de((void *)player, &player->aim, &D_80103FCC->normal);
         }
     } else {
-        arg0->aim2 = sp50;
+        player->aim2 = desired;
     }
-    if (arg0->unk62E == 1 && arg0->unk594 == 2) {
+    if (player->unk62E == 1 && player->unk594 == 2) {
         var_s4 = 0x2C6;
     } else {
-        weapon=D_800D052C[arg0->unk62E]; var_s4=weapon->idle;
+        weapon=D_800D052C[player->unk62E]; var_s4=weapon->idle;
     }
-    temp_v1 = arg0->unk62E;
+    temp_v1 = player->unk62E;
     var_s5 = var_s4 + 0x64;
     var_s0 = 1;
     if ((temp_v1 == 1) || (temp_v1 == 0x12)) {
@@ -131,122 +131,122 @@ block_15:
         var_fs0f = 0.0f;
         var_fs1 = 0.0f;
     }
-    switch (arg0->unk62E) {
+    switch (player->unk62E) {
     case 7:
-        if (arg0->unk7E8 != 0) {
+        if (player->unk7E8 != 0) {
             var_s4 = 0x2E4;
             var_s5 = -1;
         }
         break;
     case 2:
-        if (arg0->unk7E8 != 0) {
+        if (player->unk7E8 != 0) {
             var_s4 = 0x2BC;
             var_s5 = -1;
         }
         break;
     case 1:
     case 0x12:
-        func_8021CF28_de(&spB0, arg0, &spF0, &sp20.words);
+        func_8021CF28_de(&spB0, player, &spF0, &sp20.words);
         var_s0 = 0;
         break;
     default:
         var_s5 = -1;
         break;
     }
-    spB0 = func_8024796C_de((char *)arg0);
-    arg0->rotation = spB0;
-    spC0.xyz = arg0->aim;
+    spB0 = func_8024796C_de((char *)player);
+    player->rotation = spB0;
+    spC0.xyz = player->aim;
     spC0.xyz.x -= D_800C23C8_de;
-    spD0.xyz = arg0->aim;
+    spD0.xyz = player->aim;
     spD0.xyz.x += D_800C23C8_de;
-    spC0.xyz = arg0->aim;
+    spC0.xyz = player->aim;
     spC0.xyz.z -= D_800C23C8_de;
-    spD0.xyz = arg0->aim;
+    spD0.xyz = player->aim;
     spD0.xyz.z += D_800C23C8_de;
-    spC0.xyz = arg0->aim;
+    spC0.xyz = player->aim;
     spC0.xyz.y -= D_800C23C8_de;
-    spD0.xyz = arg0->aim;
+    spD0.xyz = player->aim;
     spD0.xyz.y += D_800C23C8_de;
     if (spF0 == NULL) {
-        sp20.xyz = sp50;
-        if ((arg0->unk5D8->active != 0) && (var_s0 != 0)) {
-            func_8021CF28_de(&spD0.words, arg0, &spF4, &spC0.words);
+        sp20.xyz = desired;
+        if ((player->unk5D8->active != 0) && (var_s0 != 0)) {
+            func_8021CF28_de(&spD0.words, player, &spF4, &spC0.words);
             if (spF4 != NULL) {
-                arg0->rotation = spD0.full;
+                player->rotation = spD0.full;
             }
         }
         if (spF0 == NULL) {
-            arg0->unk794 = NULL;
+            player->unk794 = NULL;
         }
     }
     if (var_s4 == -1) {
-        arg0->unk788 = 0;
-    } else if (arg0->unk788 == 0) {
-        arg0->unk788 = 1;
-        arg0->out = sp50;
-        arg0->velocity.x = 0;
-        arg0->velocity.y = 0;
-        arg0->velocity.z = 0;
-        arg0->smooth = sp50;
-        arg0->smoothVelocity.x = 0;
-        arg0->smoothVelocity.y = 0;
-        arg0->smoothVelocity.z = 0;
+        player->unk788 = 0;
+    } else if (player->unk788 == 0) {
+        player->unk788 = 1;
+        player->out = desired;
+        player->velocity.x = 0;
+        player->velocity.y = 0;
+        player->velocity.z = 0;
+        player->smooth = desired;
+        player->smoothVelocity.x = 0;
+        player->smoothVelocity.y = 0;
+        player->smoothVelocity.z = 0;
     }
-    temp_s2 = &arg0->smooth;
+    temp_s2 = &player->smooth;
     temp_fs0 = D_800C23CC_de;
     func_80271F68_de(&sp40, &sp20.xyz, temp_s2);
     func_80271F9C_de(&sp40, &sp40, temp_fs1f * temp_fs0);
-    temp_s0_2 = &arg0->smoothVelocity;
+    temp_s0_2 = &player->smoothVelocity;
     func_80271F34_de(temp_s0_2, temp_s0_2, &sp40);
     func_80271F34_de(temp_s2, temp_s2, temp_s0_2);
     func_80271F9C_de(temp_s0_2, temp_s0_2, temp_fs2 * temp_fs0);
     if (spF0 != NULL) {
-        weapon=D_800D052C[arg0->unk62E]; arg0->unk7B8=weapon->locked+0x64;
+        weapon=D_800D052C[player->unk62E]; player->unk7B8=weapon->locked+0x64;
     } else {
-        arg0->unk7B8 = var_s5;
+        player->unk7B8 = var_s5;
     }
-    switch (arg0->unk788) {
+    switch (player->unk788) {
     case 1:
-        if ((spF0 == NULL) || (arg0->unk794 != spF0)) {
-            arg0->unk794 = spF0;
-            arg0->unk78C = 0.0f;
+        if ((spF0 == NULL) || (player->unk794 != spF0)) {
+            player->unk794 = spF0;
+            player->unk78C = 0.0f;
         }
-        temp_fv0_2 = arg0->unk78C + D_800D2988;
-        arg0->unk78C = temp_fv0_2;
+        temp_fv0_2 = player->unk78C + D_800D2988;
+        player->unk78C = temp_fv0_2;
         if (var_fs1 <= temp_fv0_2) {
-            arg0->unk788 = 2;
-            arg0->unk78C = 0.0f;
+            player->unk788 = 2;
+            player->unk78C = 0.0f;
         }
         goto reset_position;
     case 2:
-            if (arg0->unk7B4 != spF0) {
-                arg0->unk7B4 = spF0;
-                arg0->unk78C = 0.0f;
+            if (player->unk7B4 != spF0) {
+                player->unk7B4 = spF0;
+                player->unk78C = 0.0f;
             } else {
-                arg0->unk78C += D_800D2988;
+                player->unk78C += D_800D2988;
             }
-            if ((spF0 != NULL) && (arg0->unk794 != spF0) && (var_fs0f <= arg0->unk78C)) {
-                arg0->unk794 = spF0;
-                arg0->unk78C = 0.0f;
+            if ((spF0 != NULL) && (player->unk794 != spF0) && (var_fs0f <= player->unk78C)) {
+                player->unk794 = spF0;
+                player->unk78C = 0.0f;
             }
-            temp_a1_2 = arg0->unk794;
-            spF0 = temp_a1_2;
-            if (temp_a1_2 != NULL) {
-                if (Weapons_CanLockTarget((void *)arg0, (void *)temp_a1_2) == 0) {
-                    arg0->unk788 = 1;
-                    arg0->unk78C = 0.0f;
+            target = player->unk794;
+            spF0 = target;
+            if (target != NULL) {
+                if (Weapons_CanLockTarget((void *)player, (void *)target) == 0) {
+                    player->unk788 = 1;
+                    player->unk78C = 0.0f;
                 }
-                if (arg0->unk62E == 0x12) {
+                if (player->unk62E == 0x12) {
                     sp20.xyz = spF0->focus;
                 } else {
                     sp20.xyz = spF0->pos;
                     sp20.xyz.y = sp20.xyz.y + spF0->height;
                     sp20.xyz.y += Particle_GetActorHeight(spF0) * D_800C23D0_de;
                 }
-                if (arg0->unk62E == 1 && arg0->unk594 == 2) {
+                if (player->unk62E == 1 && player->unk594 == 2) {
                     var_s4 = 0x2C7;
                 } else {
-                    weapon=D_800D052C[arg0->unk62E]; var_s4=weapon->locked;
+                    weapon=D_800D052C[player->unk62E]; var_s4=weapon->locked;
                 }
             } else {
                 goto reset_position;
@@ -254,18 +254,18 @@ block_15:
         break;
     case 0:
 reset_position:
-        sp20.xyz = sp50;
+        sp20.xyz = desired;
         break;
     default:
         break;
     }
     var_a0 = &sp40;
-    temp_s2_2 = &arg0->out;
+    temp_s2_2 = &player->out;
     func_80271F68_de(var_a0, &sp20.xyz, temp_s2_2);
     func_80271F9C_de(&sp40, &sp40, temp_fs1f);
-    temp_s1 = &arg0->velocity;
+    temp_s1 = &player->velocity;
     func_80271F34_de(temp_s1, temp_s1, &sp40);
     func_80271F34_de(temp_s2_2, temp_s2_2, temp_s1);
     func_80271F9C_de(temp_s1, temp_s1, temp_fs2);
-    arg0->unk798 = (s32) var_s4;
+    player->unk798 = (s32) var_s4;
 }

@@ -47,43 +47,43 @@ void func_80206080_de(void *arg0, void *arg1) {
     }
 }
 
-void func_8020612C_de(LevelActor *arg0, ActorMotionState *arg1) {
-    AnimationTriggerResource *temp_v0;
+void func_8020612C_de(LevelActor *actor, ActorMotionState *motionState) {
+    AnimationTriggerResource *definition;
     AnimationTriggerDefinition *temp_a2;
-    s32 temp_v1;
+    s32 flags;
     s32 var_v0;
 
-    temp_v0 = (void *)arg0->definition;
-    temp_a2 = &temp_v0->trigger;
+    definition = (void *)actor->definition;
+    temp_a2 = &definition->trigger;
     if (temp_a2->enabled == 0) {
         if (temp_a2->firstAnimation == -1) {
-            arg1->timer = 0.0f;
+            motionState->timer = 0.0f;
             return;
         }
         if (temp_a2->secondAnimation == -1) {
-            arg1->timer = 0.0f;
+            motionState->timer = 0.0f;
             return;
         }
     }
-    if (arg1->unk124 == temp_a2->animation) {
-        arg1->timer = 0.0f;
+    if (motionState->unk124 == temp_a2->animation) {
+        motionState->timer = 0.0f;
         return;
     }
-    temp_v1 = temp_a2->flags;
-    if (!(temp_v1 & 1)) {
-        if (arg1->unk128 <= 0) {
+    flags = temp_a2->flags;
+    if (!(flags & 1)) {
+        if (motionState->unk128 <= 0) {
             return;
         }
     }
-    var_v0 = temp_v1 & 2;
+    var_v0 = flags & 2;
     if (var_v0 != 0) {
-        if (arg0->flags & 0x200) {
-            arg1->timer = 0.0f;
+        if (actor->flags & 0x200) {
+            motionState->timer = 0.0f;
             return;
         }
     }
-    if (arg1->timer >= arg1->speed) {
-        func_80214178_de(arg0, arg1, 1);
+    if (motionState->timer >= motionState->speed) {
+        func_80214178_de(actor, motionState, 1);
     }
 }
 

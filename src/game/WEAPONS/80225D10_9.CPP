@@ -140,9 +140,9 @@ s32 func_80229A80_de(struct ObjectPool *game) {
 }
 
 /** Return the animation-table offset selected by the actor state. */
-s32 func_80229C0C_de(struct Shared_ActorView *arg0, s32 arg1) {
+s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
     s32 *types = &D_800CE47C;
-    u16 type = arg0->kind;
+    u16 type = player->kind;
     char *state;
     s32 offset;
 
@@ -167,7 +167,7 @@ s32 func_80229C0C_de(struct Shared_ActorView *arg0, s32 arg1) {
     } else if (type == types[-1]) {
         offset = 0x3E8;
     } else {
-        state = (char *)arg0->controls;
+        state = (char *)player->controls;
         switch (((struct Shared_ControlView *)(state))->mode) {
         default:
             ((struct Shared_ControlView *)(state))->mode = 0;
@@ -383,7 +383,7 @@ void func_8022A170_de(struct ObjectPool *arg0) {
     }
 }
 
-void func_8022A1FC_de(struct ObjectPool *arg0, void *arg1) {
+void func_8022A1FC_de(struct ObjectPool *arg0, void *world) {
     void *node;
     int scale;
     s32 count1;
@@ -397,20 +397,20 @@ void func_8022A1FC_de(struct ObjectPool *arg0, void *arg1) {
             ((ObjectLinks16E4_2 *)(node))->unk_358 = 0;
             if (func_8024D160_de(node) != 0) {
                 if (node) {
-                    count1 = ((IntegerState948 *)(arg1))->unk_944;
+                    count1 = ((IntegerState948 *)(world))->unk_944;
                 } else {
-                    count1 = ((IntegerState948 *)(arg1))->unk_944;
+                    count1 = ((IntegerState948 *)(world))->unk_944;
                 }
                 if (count1 != 0x200) {
                     scale = 4;
-                    ((ObjectLinks148 *)(((s32)arg1 + count1 * scale)))->unk_144 = node;
-                    ((IntegerState948 *)(arg1))->unk_944 = count1 + 1;
+                    ((ObjectLinks148 *)(((s32)world + count1 * scale)))->unk_144 = node;
+                    ((IntegerState948 *)(world))->unk_944 = count1 + 1;
                 }
                 count1 = 0xB48;
-                count2 = ((IntegerStateB4C *)arg1)->unk_B48;
+                count2 = ((IntegerStateB4C *)world)->unk_B48;
                 if (count2 != 0x80) {
-                    ((struct ObjectLinks94C *) (entry = (char *) (((s32) arg1) + (count2 * 4))))->unk_948 = node;
-                    ((IntegerStateB4C *)arg1)->unk_B48 = count2 + 1;
+                    ((struct ObjectLinks94C *) (entry = (char *) (((s32) world) + (count2 * 4))))->unk_948 = node;
+                    ((IntegerStateB4C *)world)->unk_B48 = count2 + 1;
                 }
             }
             node = ((ObjectLinks16E4_2 *)(node))->unk_16E0;
@@ -418,7 +418,7 @@ void func_8022A1FC_de(struct ObjectPool *arg0, void *arg1) {
     }
 }
 
-void func_8022A2A0_de(void *arg0, void *arg1) {
+void func_8022A2A0_de(void *arg0, void *view) {
     func_80228774_S1 *object;
     func_80207B5C_S2 *argument;
     func_8022A274_S2 *cur;
@@ -428,11 +428,11 @@ void func_8022A2A0_de(void *arg0, void *arg1) {
     cur = object->unk20;
     if (cur != 0) {
         do {
-            argument = arg1;
-            if (cur->unk5DC != arg1 ||
+            argument = view;
+            if (cur->unk5DC != view ||
                 argument->unk24 == 1 ||
                 func_80245908_de() != 0) {
-                func_8021C9D8_de(cur, arg1);
+                func_8021C9D8_de(cur, view);
             }
             cur = cur->unk16E0;
         } while (cur != 0);
@@ -441,7 +441,7 @@ void func_8022A2A0_de(void *arg0, void *arg1) {
 }
 
 /* Removes entity from list if owned by specific owner, with version-specific check. */
-void func_8022A328_de(void *arg0, void *arg1) {
+void func_8022A328_de(void *arg0, void *view) {
     func_80228774_S1 *object;
     func_80207B5C_S2 *argument;
     ObjRecAt16E0V3 *var_s0;
@@ -453,11 +453,11 @@ void func_8022A328_de(void *arg0, void *arg1) {
     var_s0 = object->unk20;
         if (var_s0 != 0) {
             do {
-                argument = arg1;
-                if (var_s0->unk5DC == arg1 &&
+                argument = view;
+                if (var_s0->unk5DC == view &&
                     argument->unk24 == 0 &&
                     var_s0->unkE4 != D_800CE47C) {
-                    func_8021CBD0_de(var_s0, arg1);
+                    func_8021CBD0_de(var_s0, view);
                 }
                 var_s0 = var_s0->unk16E0;
             } while (var_s0 != 0);
@@ -468,11 +468,11 @@ void func_8022A328_de(void *arg0, void *arg1) {
     var_s0 = object->unk20;
     if (var_s0 != 0) {
         do {
-            argument = arg1;
-            if (var_s0->unk5DC == arg1 &&
+            argument = view;
+            if (var_s0->unk5DC == view &&
                 argument->unk24 == 0 &&
                 var_s0->unkE4 != D_800CE47C) {
-                func_8021CBD0_de(var_s0, arg1);
+                func_8021CBD0_de(var_s0, view);
             }
             var_s0 = var_s0->unk16E0;
         } while (var_s0 != 0);
@@ -481,19 +481,19 @@ void func_8022A328_de(void *arg0, void *arg1) {
 }
 
 /* Notifies the entity list associated with arg0 about arg1 and calls a handler for each owner. */
-void func_8022A398_de(void *arg0, void *arg1) {
+void func_8022A398_de(void *arg0, void *entity) {
     Round *round = arg0;
     Shared_ActorView *var_s0;
 
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {
 #endif
-        func_8023942C_de(arg1);
+        func_8023942C_de(entity);
         var_s0 = round->players;
         if (var_s0 != 0) {
             do {
-                if (var_s0->message == arg1) {
-                    func_8021EEFC_de(var_s0, arg1);
+                if (var_s0->message == entity) {
+                    func_8021EEFC_de(var_s0, entity);
                 }
                 var_s0 = var_s0->next;
             } while (var_s0 != 0);
@@ -510,14 +510,14 @@ int func_8022A414_de(void *arg0) {
     return (int)context->head;
 }
 
-void *func_8022A420_de(struct Context *arg0) {
+void *func_8022A420_de(struct Context *context) {
     CGameStatus *base = (&D_801462C8.counters);
     Shared_ActorView *record;
 
     if (base->m_bFragTagOn != 0 && base->restrictionActive != 0) {
         return 0;
     }
-    record = (void *)arg0->head;
+    record = (void *)context->head;
     if (record != 0) {
         do {
             if (record->controls->transientFlag == 1) {

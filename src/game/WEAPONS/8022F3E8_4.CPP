@@ -50,7 +50,7 @@ void func_8022FDAC_de(void *arg0, void *arg1) {
     func_80214178_de(arg0, arg1, 0);
 }
 
-void func_8022FF04_de(void *arg0, WeaponFireState *arg1) {
+void func_8022FF04_de(void *arg0, WeaponFireState *fireState) {
     s16 temp_s0;
     u16 temp_s2;
     void *temp_a1;
@@ -68,20 +68,20 @@ void func_8022FF04_de(void *arg0, WeaponFireState *arg1) {
             ((Shared_ActorView *)temp_s1)->specialChanged = 1;
         }
         ((Shared_ActorView *)temp_s1)->selectedAction = temp_s2;
-        arg1->animation = ((WeaponInfo *)(D_800D052C[(s16)temp_s2]))->animation;
-        arg1->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]))->animationCount;
+        fireState->animation = ((WeaponInfo *)(D_800D052C[(s16)temp_s2]))->animation;
+        fireState->animationCount = ((WeaponInfo *)(D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]))->animationCount;
         temp_a1 = ((Shared_ActorView *)temp_s1)->message;
         if ((temp_a1 != 0) && ((u32)D_800CD730 >= 5U)) {
             Camera_PostScreenMessage(&D_80145088, temp_a1,
                           **(void ***)D_800D052C[((Shared_ActorView *)temp_s1)->selectedAction]);
         }
-        arg1->spinStep = 0;
-        arg1->spin = 0;
+        fireState->spinStep = 0;
+        fireState->spin = 0;
         ((Shared_Actor *)arg0)->color = 0;
-        arg1->charge = 0;
+        fireState->charge = 0;
     }
-    arg1->mode = 1;
-    arg1->rounds = 1;
+    fireState->mode = 1;
+    fireState->rounds = 1;
 }
 #endif
 
@@ -118,10 +118,10 @@ s32 func_80283228_de(s32 *, void *);
 extern s32 D_8011D8D0;
 extern s32 D_801468F4;
 s32 func_80230058_de(void *owner, void *slot) {
-    WeaponOwner *arg0 = (WeaponOwner *)owner;
-    WeaponSlot *arg1 = (WeaponSlot *)slot;
-    WeaponPlayer *player = arg0->player;
-    if (arg1->delay > 0.0f || !Weapons_HasAmmoForMode(player, player->mode)) return 0;
+    WeaponOwner *weaponOwner = (WeaponOwner *)owner;
+    WeaponSlot *weaponSlot = (WeaponSlot *)slot;
+    WeaponPlayer *player = weaponOwner->player;
+    if (weaponSlot->delay > 0.0f || !Weapons_HasAmmoForMode(player, player->mode)) return 0;
     if ((player->record->flag8F == 1 && D_801468F4 != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
     switch ((s16)(player->mode - 1)) {
     case 10:
@@ -131,17 +131,17 @@ s32 func_80230058_de(void *owner, void *slot) {
         if (player->state788 != 2) return 0;
         break;
     case 8:
-        if (arg1->timer148 > 0.0f && arg1->mode13C == 2) return 0;
-        if (player->ammo < 0x32 && arg1->mode13C == 2) return 0;
+        if (weaponSlot->timer148 > 0.0f && weaponSlot->mode13C == 2) return 0;
+        if (player->ammo < 0x32 && weaponSlot->mode13C == 2) return 0;
         if (player->ammo < 10) {
-            if (arg1->mode13C == 1) return 0;
+            if (weaponSlot->mode13C == 1) return 0;
         }
         break;
     case 11:
         if (func_80283228_de(&D_8011D8D0, player) >= 3) return 0;
         break;
     case 0:
-        if (arg1->flag144 == 0) return 0;
+        if (weaponSlot->flag144 == 0) return 0;
         break;
     }
     return 1;

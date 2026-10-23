@@ -162,11 +162,11 @@ void func_802307FC_de(Shared_Actor *actor, WeaponFireState *fire) {
 void func_80230B04_de(struct MeasuredRecAt1D8V1 *arg0, void *arg1) {
     s16 temp_a1;
     s32 temp_v1;
-    void *temp_a0;
+    void *value;
 
-    temp_a0 = arg0->value;
-    if (!(((struct MeasuredRecAt6AC *)(temp_a0))->value & 0x2000)) {
-        temp_a1 = ((struct MeasuredRecAt62EV2 *)(temp_a0))->value;
+    value = arg0->value;
+    if (!(((struct MeasuredRecAt6AC *)(value))->value & 0x2000)) {
+        temp_a1 = ((struct MeasuredRecAt62EV2 *)(value))->value;
         if (temp_a1 != 0) {
             if (temp_a1 == 2) {
                 temp_v1 = ((struct MeasuredRecAt13CV2 *)(arg1))->value;
@@ -190,7 +190,7 @@ check_height:
         }
         goto done;
 check_state:
-        if (func_8022AB20_de(temp_a0, temp_a1) == 1) {
+        if (func_8022AB20_de(value, temp_a1) == 1) {
             func_80214178_de(arg0, arg1, 7);
         } else {
             func_80214178_de(arg0, arg1, 5);

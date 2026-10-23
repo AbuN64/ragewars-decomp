@@ -42,23 +42,23 @@ static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx,
     }
     return 0;
 }
-void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 unused, TrackResult *arg3) {
+void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused, TrackResult *arg3) {
     CVector3 pos;
     CVector3 delta;
     f32 height;
     s32 kind;
     Actor_func_80214DD4_de *target;
     Location *point;
-    if ((arg1->team == D_8011CD20) && !(arg0->kind[1] & 0x400) && (!(arg1->flags & 0x80000) || (arg1->unk78 != 0))) {
-        arg1->anchor = func_802149C0_de(arg0, arg1, 1, 0);
+    if ((tracker->team == D_8011CD20) && !(arg0->kind[1] & 0x400) && (!(tracker->flags & 0x80000) || (tracker->unk78 != 0))) {
+        tracker->anchor = func_802149C0_de(arg0, tracker, 1, 0);
     }
-    if ((*arg0->kind == 1) && (arg1->mode == 0xB)
-        && func_80215410_kind(arg0, arg1, arg1->target) == 4) {
-        target = arg1->target;
+    if ((*arg0->kind == 1) && (tracker->mode == 0xB)
+        && func_80215410_kind(arg0, tracker, tracker->target) == 4) {
+        target = tracker->target;
         kind = 4;
     } else {
-        target = arg1->anchor;
-        kind = func_80215410_kind(arg0, arg1, target);
+        target = tracker->anchor;
+        kind = func_80215410_kind(arg0, tracker, target);
     }
     if (target != NULL) {
         pos = target->pos;
@@ -66,7 +66,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 unused, T
     } else {
         switch (kind) {
             case 4:
-                point = func_80219408_de(&arg1->slot);
+                point = func_80219408_de(&tracker->slot);
                 pos = point->pos;
                 if (point->flags & 1) {
                     height = point->heading * 0.0174532942f - arg0->heading;
@@ -75,8 +75,8 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 unused, T
                 }
                 break;
             case 3:
-                pos = arg1->homePos;
-                height = arg1->homeYaw - arg0->heading;
+                pos = tracker->homePos;
+                height = tracker->homeYaw - arg0->heading;
                 break;
             case 6:
                 pos = arg0->pos;

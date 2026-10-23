@@ -26,17 +26,17 @@ void func_8020520C_de(LevelActor *source, void *dest) {
     ((SpawnDispatchOwner *)dest)->remaining = source->field3;
 }
 
-void func_8020524C_de(LevelActor *arg0, void *arg1) {
-    if (func_80285F58_de(&D_8011FE88, arg0) == 1) {
-        func_80214178_de(arg0, arg1, 1);
+void func_8020524C_de(LevelActor *actor, void *arg1) {
+    if (func_80285F58_de(&D_8011FE88, actor) == 1) {
+        func_80214178_de(actor, arg1, 1);
     } else {
-        func_80214178_de(arg0, arg1, 0);
-        arg0->flags |= 0x10000;
+        func_80214178_de(actor, arg1, 0);
+        actor->flags |= 0x10000;
     }
 }
 
-void func_802052C4_de(void *arg0, Shared_CallbackOwner *arg1) {
-    void *obj = arg1->hook;
+void func_802052C4_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
+    void *obj = callbackOwner->hook;
     if (obj != 0) {
         FuncPtr fn = ((Shared_CallbackHook *)(obj))->callback;
         if (fn != 0) {
@@ -59,7 +59,7 @@ int func_80205314_de(void *arg0) {
 }
 
 void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
-    s32 temp_s3;
+    s32 mode;
     Rec5324 *rec;
     Shared_World *pFlag;
 
@@ -74,8 +74,8 @@ void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
         arg0->flags &= ~0x2000;
         arg0->flags &= ~0x100;
     }
-    temp_s3 = pFlag->mode;
-    if (temp_s3 == 4) {
+    mode = pFlag->mode;
+    if (mode == 4) {
         if (rec->unk20.whole != -1) {
             func_8025DE54_de(rec->unk20.half.id, arg0->pos.v, 0, -1);
         }
@@ -86,7 +86,7 @@ void func_80205324_de(Obj5324 *arg0, s32 *arg1) {
         /* func_802A5D38_de unlinks the walker by the object's 32-bit identity;
          * the registry holds those identities as s32. */
         func_802A5D38_de(&D_801379C0, (s32)arg0);
-        if (pFlag->mode != temp_s3) {
+        if (pFlag->mode != mode) {
             goto block_10;
         }
     } else {
@@ -96,14 +96,14 @@ block_10:
 }
 
 /** Clear two flags when the controlling byte and nested flag are set. */
-void func_80205494_de(BreakableHitContext *arg0, ObjectStateCC *arg1) {
-    char *nested = arg0->unk_18;
+void func_80205494_de(BreakableHitContext *breakableHitContext, ObjectStateCC *arg1) {
+    char *nested = breakableHitContext->unk_18;
     if (arg1->unk_CB != 0 &&
         (((struct Descriptor *)nested)->damage.flags & 0x4) != 0) {
-        unsigned int flags = arg0->unk_100;
+        unsigned int flags = breakableHitContext->unk_100;
         flags &= ~0x2000;
         flags &= ~0x100;
-        arg0->unk_100 = flags;
+        breakableHitContext->unk_100 = flags;
     }
 }
 

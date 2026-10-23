@@ -93,7 +93,7 @@ extern f32 func_80271AA8_de(CVector3 *);
 
 
 
-void func_80226548_de(void *arg0, void *arg1) {
+void func_80226548_de(void *arg0, void *body) {
     Shared_Quad sp20;
     Shared_Quad sp30;
     CVector3 sp40;
@@ -102,7 +102,7 @@ void func_80226548_de(void *arg0, void *arg1) {
     f32 *position;
     f32 temp_f1;
 
-    func_802231D4_de(arg0, arg1, &D_800CE7E4);
+    func_802231D4_de(arg0, body, &D_800CE7E4);
     if (((Shared_ActorView *)arg0)->targeting != 0) {
         func_8021CF28_de(&sp20, arg0, &sp50, &sp30);
         if (sp50 != 0) {
@@ -115,8 +115,8 @@ void func_80226548_de(void *arg0, void *arg1) {
                     func_80271F68_de(&sp40, &((Shared_ActorView *)sp50)->position.vector, (CVector3 *)position);
                     sp54 = func_80271AA8_de(&sp40);
                     func_80274020_de(&sp54);
-                    func_80274020_de(&((LevelActor *)arg1)->yaw);
-                    temp_f1 = ((LevelActor *)arg1)->yaw;
+                    func_80274020_de(&((LevelActor *)body)->yaw);
+                    temp_f1 = ((LevelActor *)body)->yaw;
                     if (D_800C2B50_de < temp_f1) {
                         if (sp54 < D_800C2B54_de) {
                             sp54 += D_800C2B58_de;
@@ -127,12 +127,12 @@ void func_80226548_de(void *arg0, void *arg1) {
 positive:
                         temp_f1 = sp54;
                         if (D_800C2B5C_de < temp_f1 &&
-                            ((LevelActor *)arg1)->yaw < D_800C2B60_de) {
-                            ((LevelActor *)arg1)->yaw =
-                                ((LevelActor *)arg1)->yaw + D_800C2B64_de;
+                            ((LevelActor *)body)->yaw < D_800C2B60_de) {
+                            ((LevelActor *)body)->yaw =
+                                ((LevelActor *)body)->yaw + D_800C2B64_de;
                         }
                     }
-                    func_80274870_de(&((LevelActor *)arg1)->yaw, sp54, D_800C9FEC);
+                    func_80274870_de(&((LevelActor *)body)->yaw, sp54, D_800C9FEC);
                 }
             }
         }

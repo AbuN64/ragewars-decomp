@@ -13,7 +13,7 @@ extern u8 D_801462E5;
 extern s32 func_80442A28_de(void *arg0);
 extern s32 func_8022AB20_de(void *arg0, s16 arg1);
 
-void func_8023293C_de(void *arg0, Dest *arg1, Lookup *arg2) {
+void func_8023293C_de(void *arg0, Dest *arg1, Lookup *lookup) {
     void *actor;
     void *resource;
     s32 result;
@@ -43,7 +43,7 @@ void func_8023293C_de(void *arg0, Dest *arg1, Lookup *arg2) {
     if ((state == 0xE) || (state == one) || (state == 0)) {
         result = ((Actor_func_8022D290_de *)actor)->unk_0x11F8;
     }
-    func_8026DA4C_de(arg2->value,
+    func_8026DA4C_de(lookup->value,
                   ((LevelActor *)arg0)->fieldB4, 1,
                   (char *)arg0 + (D_800D297C * 0x18 + 0x140), 0, result);
 }
@@ -90,22 +90,22 @@ extern s32 func_8022EB0C_de(void *arg0, s32 arg1);
 
 
 
-s32 func_80232ABC_de(void *arg0) {
-    s32 var_s1;
+s32 func_80232ABC_de(void *player) {
+    s32 weapon;
     s32 var_s0;
 
-    var_s1 = ((Shared_ActorView *)arg0)->selectedAction;
+    weapon = ((Shared_ActorView *)player)->selectedAction;
     var_s0 = func_802744D4_de() % 22;
     if (var_s0 >= 0) {
         do {
-            var_s1 += 1;
-            if (var_s1 >= 0x10) {
-                var_s1 = 0;
+            weapon += 1;
+            if (weapon >= 0x10) {
+                weapon = 0;
             }
-            if (func_8022EB0C_de(arg0, var_s1) != 0) {
+            if (func_8022EB0C_de(player, weapon) != 0) {
                 var_s0 -= 1;
             }
         } while (var_s0 >= 0);
     }
-    return var_s1;
+    return weapon;
 }

@@ -6,19 +6,19 @@
 #include "COMMON/APPROACHLOCATION.H"
 #include "WEAPONS/80213ED4_13.H"
 
-s32 func_802169AC_de(LevelActor *arg0, RouteChaseBot *arg1, LevelActor *arg2) {
-    void *temp_a2;
+s32 func_802169AC_de(LevelActor *actor, RouteChaseBot *routeChaseBot, LevelActor *arg2) {
+    void *controller;
 
-    if (arg1->node == 0) {
+    if (routeChaseBot->node == 0) {
         return 6;
     }
     if (arg2 == 0) {
-        if (arg1->routeReady != 0) {
+        if (routeChaseBot->routeReady != 0) {
             return 4;
         }
         return 3;
     }
-    if (arg2 == arg1->target) {
+    if (arg2 == routeChaseBot->target) {
         return 2;
     }
     if (arg2->definition->kind == 5) {
@@ -29,14 +29,14 @@ s32 func_802169AC_de(LevelActor *arg0, RouteChaseBot *arg1, LevelActor *arg2) {
     }
     if (D_8013B290 == 0) {
         if (arg2->flags & 0x300000) {
-            temp_a2 = arg2->controller;
-            if ((((Shared_ActorView *)temp_a2)->controllerOwner == arg0) &&
-                (((Shared_ActorView *)temp_a2)->controllerMode == 2)) {
+            controller = arg2->controller;
+            if ((((Shared_ActorView *)controller)->controllerOwner == actor) &&
+                (((Shared_ActorView *)controller)->controllerMode == 2)) {
                 return 1;
             }
         }
-        if (arg0->renderFlags & 2) {
-            if (arg0->type != 0xCA) {
+        if (actor->renderFlags & 2) {
+            if (actor->type != 0xCA) {
                 return 1;
             }
         }

@@ -98,7 +98,7 @@ extern Profile D_80102B00[];
 
 
 
-s32 func_80222D64_de(void *arg0, s32 arg1) {
+s32 func_80222D64_de(void *context, s32 arg1) {
     void *pickup;
     s32 slot;
     s16 *count;
@@ -110,21 +110,21 @@ s32 func_80222D64_de(void *arg0, s32 arg1) {
         return 0;
     }
     slot = ((AmmoPickupDefinition *)(pickup))->slot;
-    count = (&((Actor_func_8022D290_de *)(arg0))->unk_0x05F4 + slot);
+    count = (&((Actor_func_8022D290_de *)(context))->unk_0x05F4 + slot);
     if (slot == -1) {
         cap = 0;
     } else {
         if (D_801462D5 != 1) {
-            base = ((Desc *)((Actor_func_8022D290_de *)(arg0))->field_0x18)->caps[slot];
+            base = ((Desc *)((Actor_func_8022D290_de *)(context))->field_0x18)->caps[slot];
         } else {
             base = D_800CE3E8[slot];
-            if (((Actor_func_8022D290_de *)(arg0))->unk_0x1450 == 0) {
+            if (((Actor_func_8022D290_de *)(context))->unk_0x1450 == 0) {
                 if (slot == 0) {
-                    base += D_80102B00[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus0;
+                    base += D_80102B00[((Actor_func_8022D290_de *)(context))->unk_0x05D4].bonus0;
                 } else if (slot == 1) {
-                    base += D_80102B00[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus1;
+                    base += D_80102B00[((Actor_func_8022D290_de *)(context))->unk_0x05D4].bonus1;
                 } else if (slot == 2) {
-                    base += D_80102B00[((Actor_func_8022D290_de *)(arg0))->unk_0x05D4].bonus2;
+                    base += D_80102B00[((Actor_func_8022D290_de *)(context))->unk_0x05D4].bonus2;
                 }
             }
         }
@@ -147,12 +147,12 @@ extern s32 func_802227F4_de(void *, void *, s32);
 
 
 
-s32 func_80222EA4_de(void *arg0, void *arg1) {
+s32 func_80222EA4_de(void *player, void *arg1) {
     s16 state;
     s32 hit;
 
     if (((Actor_func_802238E0_de *)(arg1))->inputFlags & 0x1000) {
-        state = ((Actor_func_8022D290_de *)(arg0))->unk_0x0650;
+        state = ((Actor_func_8022D290_de *)(player))->unk_0x0650;
         if (state != 0xB) {
             if (state != 0xC) {
                 if (state != 9) {
@@ -164,10 +164,10 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
                                 hit = 0;
                             }
                             if (hit) {
-                                ((Actor_func_8022D290_de *)(arg0))->unk_0x0038 |= 0x1000;
+                                ((Actor_func_8022D290_de *)(player))->unk_0x0038 |= 0x1000;
                                 return 0;
                             }
-                            func_802227F4_de(arg0, arg1, 0xC);
+                            func_802227F4_de(player, arg1, 0xC);
                             return 1;
                         }
                     }
@@ -175,7 +175,7 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
             }
         }
     }
-    state = ((Actor_func_8022D290_de *)(arg0))->unk_0x0650;
+    state = ((Actor_func_8022D290_de *)(player))->unk_0x0650;
     if (state == 0x15 || state == 0x13 || state == 0x14) {
         hit = 1;
     } else {
@@ -193,7 +193,7 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
     if (!(D_800C7948[1] < ((Actor_func_802238E0_de *)(arg1))->unk20)) {
         return 0;
     }
-    state = ((Actor_func_8022D290_de *)(arg0))->unk_0x0650;
+    state = ((Actor_func_8022D290_de *)(player))->unk_0x0650;
     if (state == 0xB) {
         return 0;
     }
@@ -209,7 +209,7 @@ s32 func_80222EA4_de(void *arg0, void *arg1) {
     if (state == 0x26) {
         return 0;
     }
-    func_802227F4_de(arg0, arg1, 0xA);
+    func_802227F4_de(player, arg1, 0xA);
     return 1;
 }
 
