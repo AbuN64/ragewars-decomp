@@ -244,3 +244,58 @@ s32 func_802BF388_de(DraftStream *stream) {
 #else
 INCLUDE_ASM("span_1000", func_802BF388_de);
 #endif
+#if defined(VERSION_US_REV1) && defined(NON_MATCHING)
+/* structure matches; remaining: register allocation (const 16 in s0, table bases in regs) */
+extern u16 D_800D5350[];
+extern u16 D_800D5374[];
+extern u16 D_8014AE00;
+u16 func_802C3EA4(u16 *dst, u16 bits, u16 count, s32 sign, void **stream) {
+    s16 i;
+    s32 sg;
+    u16 *left = &D_800D54B8;
+    u16 *cur = &D_8014AE00;
+    u16 *tab = D_800D5350;
+    u16 *mask = &tab[bits];
+    u16 *sbit = &D_800D5374[bits];
+    u16 *out;
+    s32 rem;
+    u16 v;
+    if (*left == 0) {
+        u16 *p = (u16 *)stream[5];
+        stream[5] = p + 1;
+        *left = 16;
+        *cur = *p;
+    }
+    i = 0;
+    if (count != 0) {
+    sg = (s16)sign;
+    do {
+        out = dst + i;
+        if (*left < bits) {
+            rem = bits - *left;
+            *out = (*cur & tab[*left]) << rem;
+            {
+                u16 *p = (u16 *)stream[5];
+                stream[5] = p + 1;
+                *cur = *p;
+            }
+            v = *out | ((*cur >> (16 - rem)) & tab[rem]);
+            *out = v;
+            if (sg != 0 && ((s16)v & *sbit)) {
+                *out = v | ~*mask;
+            }
+            *left = 16 - rem;
+        } else {
+            v = (*cur >> (*left - bits)) & *mask;
+            *out = v;
+            if (sg != 0 && ((s16)v & *sbit)) {
+                *out = v | ~*mask;
+            }
+            *left -= bits;
+        }
+        i++;
+    } while (i < count);
+    }
+    return 1;
+}
+#endif

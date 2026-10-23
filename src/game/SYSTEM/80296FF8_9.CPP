@@ -63,6 +63,55 @@ void func_80296020_de(void *storage, s32 first, s32 second,
         }
     }
 }
+#if defined(VERSION_US_REV1)
+extern void func_802630E0_de(BitReader *, void *);
+void func_80297024(ResourceBitGrid *grid, s32 first, s32 second,
+                   DraftStreamData *source, CVector3 *position) {
+    union { f32 f[4]; s32 i[4]; } lo, hi;
+    s32 count, selected, row, column, code, index;
+    grid->originX = first;
+    grid->originY = second;
+    count = source->count;
+    selected = 1;
+    while ((u32)selected < (u32)count) {
+        func_802630E0_de(&grid->reader, func_8028FDB4_de(&source->count, selected));
+        lo.i[0] = func_80263154_de(&grid->reader, 32);
+        lo.i[1] = func_80263154_de(&grid->reader, 32);
+        lo.i[2] = func_80263154_de(&grid->reader, 32);
+        hi.i[0] = func_80263154_de(&grid->reader, 32);
+        hi.i[1] = func_80263154_de(&grid->reader, 32);
+        hi.i[2] = func_80263154_de(&grid->reader, 32);
+        if (lo.f[0] < position->x && position->x < hi.f[0] &&
+            lo.f[1] < position->y && position->y < hi.f[1] &&
+            lo.f[2] < position->z && position->z < hi.f[2]) break;
+        selected++;
+    }
+    if (selected == count) {
+        func_802630E0_de(&grid->reader, func_8028FDB4_de(&source->count, 0));
+    }
+    index = 0;
+    for (row = 0; row < 17; row++) {
+        for (column = 0; column < 17; column++) {
+            code = func_80263154_de(&grid->reader, 2);
+            if (code == 1) grid->cells[index] = -2;
+            else if (code == 0) grid->cells[index] = -3;
+            else if (code == 2) grid->cells[index] = 0;
+            else if (code == 3) grid->cells[index] = code;
+            index++;
+        }
+    }
+    index = 0;
+    for (row = 0; row < 17; row++) {
+        for (column = 0; column < 17; column++) {
+            if (grid->cells[index] == 0) {
+                grid->cells[index] = (u16)grid->reader.bitPos;
+                grid->reader.bitPos += func_80263154_de(&grid->reader, 9);
+            }
+            index++;
+        }
+    }
+}
+#endif
 #else
 #if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
 INCLUDE_ASM("span_1000", func_80296020_de);
