@@ -30,12 +30,6 @@ struct Shared_Func80243A80Actor {
 
 
 typedef struct Shared_Func80243A80Global Shared_Func80243A80Global;
-struct Shared_Func80243A80Global {
-    u8 pad[216]; /* +0x0: src/func_80243A80.c */
-    s32 x; /* +0xD8: src/func_80243A80.c */
-    f32 y; /* +0xDC: src/func_80243A80.c */
-    s32 z; /* +0xE0: src/func_80243A80.c */
-};
 
 
 
@@ -132,16 +126,6 @@ struct Shared_Func80243A80Frame {
 
 
 typedef struct Shared_Func80243A80Bits Shared_Func80243A80Bits;
-struct Shared_Func80243A80Bits {
-    union {
-        struct {
-            f32 f; /* +0x0: src/func_80243A80.c */
-        } view0_0;
-        struct {
-            s32 i; /* +0x0: src/func_80243A80.c */
-        } view0_1;
-    } views0;
-};
 
 typedef Shared_Func80243A80Actor Func80243A80Actor;
 typedef Shared_Func80243A80Global Func80243A80Global;

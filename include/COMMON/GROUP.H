@@ -15,11 +15,6 @@ struct func_80245958_S1 {
 };
 
 struct Group;
-struct Group {
-    void *lead;
-    char pad4[0x24];
-    char members[1];
-};
 
 extern void func_802458D8_de();
 
@@ -55,11 +50,6 @@ struct Record_func_80244FB4_de;
 typedef struct Record_func_80244FB4_de Record_func_80244FB4_de;
 
 struct VectorPair;
-struct VectorPair {
-    CVector3 first;
-    CVector3 second;
-    char pad[8];
-};
 
 struct Group;
 typedef struct Group Group;
@@ -157,9 +147,6 @@ struct func_80244E48_S2 {
 };
 
 struct Work80244494;
-struct Work80244494 {
-    char data[0x1B8];
-};
 
 struct func_802456FC_S1;
 typedef struct func_802456FC_S1 func_802456FC_S1;

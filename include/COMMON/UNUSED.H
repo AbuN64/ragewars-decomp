@@ -4289,10 +4289,6 @@ struct Access_s32_AC {
     s32 field;
 };
 struct Access_s8_E6;
-struct Access_s8_E6 {
-    char pad[0xE6];
-    s8 field;
-};
 struct Access_u32_0;
 struct Access_u32_0 {
     u32 field;

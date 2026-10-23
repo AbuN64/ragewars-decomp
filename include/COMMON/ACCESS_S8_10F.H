@@ -28,11 +28,6 @@ struct Access_u8_E6 {
 extern f32 func_802459A0_de();
 
 struct CollisionState;
-struct CollisionState {
-    s32 active0;
-    u8 pad[0x98];
-    s32 active9c;
-};
 
 struct CollisionInfoCode80243A80;
 typedef struct CollisionInfoCode80243A80 CollisionInfoCode80243A80;
@@ -81,13 +76,6 @@ typedef struct Access_s16_108 Access_s16_108;
 extern void func_80245AC8_de();
 
 struct CollisionInfoCode80243A80;
-struct CollisionInfoCode80243A80 {
-    s32 flags;
-    u8 ground_behavior;
-    u8 instance_behavior;
-    u8 pad[2];
-    s32 w[5];
-};
 
 struct Access_s8_10E;
 typedef struct Access_s8_10E Access_s8_10E;
@@ -191,10 +179,6 @@ extern void * D_800DE7F4_de;
 extern void func_80245A30_de();
 
 struct Access_s32_C4;
-struct Access_s32_C4 {
-    char pad[0xC4];
-    s32 field;
-};
 
 struct func_80245A20_S1;
 struct func_80245A20_S1 {
@@ -209,10 +193,6 @@ struct func_80245A20_S1 {
 };
 
 struct Access_s32_D0;
-struct Access_s32_D0 {
-    char pad[0xD0];
-    s32 field;
-};
 
 struct func_80246690_S1;
 typedef struct func_80246690_S1 func_80246690_S1;
@@ -243,16 +223,6 @@ struct Access_s8_10F {
 
 
 struct Material_func_80245D30_de;
-struct Material_func_80245D30_de {
-    char pad0[0x52];
-    u16 flags;
-    char pad54[9];
-    u8 strength;
-    char pad5e[1];
-    s8 x;
-    s8 y;
-    s8 z;
-};
 
 struct Access_s16_10A;
 struct Access_s16_10A {
@@ -352,17 +322,6 @@ struct Access_s8_23A {
 };
 
 struct Actor_func_80245D30_de;
-struct Actor_func_80245D30_de {
-    u8 kind;
-    char pad1[0x1f];
-    f32 vertical;
-    char pad24[4];
-    CVector3 current;
-    char pad34[4];
-    s32 flags;
-    char pad3c[0x30];
-    f32 yaw;
-};
 
 struct Material_func_80245D30_de;
 typedef struct Material_func_80245D30_de Material_func_80245D30_de;

@@ -2,29 +2,13 @@
 #define COMMON_VIEWFLAGS_H
 #include "TYPES.H"
 #include "COMMON/STATERECAT10.H"
-/* XYZ minimum and maximum bounds, copied as a single record. */
-typedef struct ViewFlags { s32 flags; } ViewFlags;
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 struct Triple;
 struct ObjRecAt260;
-struct ObjRecAt260 {
-    char pad0[0x260];
-    struct Triple unk260;
-};
 
-/* Color keyframe payload in a 0x64-byte model-section record. */
-typedef struct ColorBlendRecord {
-    u8 color[4];
-    u8 heldColor[4];
-    u32 n, heldN;
-    f32 a, b, heldA, heldB;
-    u8 unknown20[4];
-    f32 period;
-    u8 unknown28[0x64 - 0x28];
-} ColorBlendRecord;
 
 struct Racer;
 typedef struct Racer Racer;
@@ -70,40 +54,9 @@ struct func_8023912C_S2;
 typedef struct func_8023912C_S2 func_8023912C_S2;
 
 struct Overlay;
-struct Overlay {
-    char pad0[0x538];
-    f32 timer;
-    char pad53C[8];
-    u32 state;
-    char pad548[2];
-    u8 alphaMax;
-    u8 fadeIn;
-    u8 hold;
-    u8 fadeOut;
-    char pad54E[3];
-    u8 alpha;
-};
 
 
 struct ObjRecAtE4V1;
-struct ObjRecAtE4V1 {
-    char pad0[0xA8];
-    CVector3 unkA8;
-    char padA8[0xB4 - 0xA8 - sizeof(CVector3)];
-    f32 unkB4;
-    char padB4[0xB8 - 0xB4 - sizeof(f32)];
-    s32 unkB8;
-    char padB8[0xBC - 0xB8 - sizeof(s32)];
-    f32 unkBC;
-    char padBC[0xCC - 0xBC - sizeof(f32)];
-    s32 unkCC;
-    char padCC[0xD0 - 0xCC - sizeof(s32)];
-    f32 unkD0;
-    char padD0[0xE0 - 0xD0 - sizeof(f32)];
-    s32 unkE0;
-    char padE0[0xE4 - 0xE0 - sizeof(s32)];
-    f32 unkE4;
-};
 
 struct Effect33920;
 typedef struct Effect33920 Effect33920;
@@ -287,23 +240,6 @@ struct func_80238F14_S1;
 typedef struct func_80238F14_S1 func_80238F14_S1;
 
 struct State44;
-struct State44 {
-    s32 unk_0;
-    s32 unk_4;
-    s32 unk_8;
-    s32 unk_C;
-    s32 unk_10;
-    s32 unk_14;
-    s32 unk_18;
-    s32 unk_1C;
-    union {s32 i; f32 f;} unk_20;
-    CVector3 v;
-    f32 unk_30;
-    s32 unk_34;
-    f32 unk_38;
-    f32 unk_3C;
-    s32 unk_40;
-};
 
 struct func_80239184_S1;
 struct func_80239184_S1 {
@@ -352,12 +288,6 @@ struct func_80234DD0_S1 {
 };
 
 struct ThreeChannels;
-struct ThreeChannels {
-    char pad0[0x520];
-    u8 first;
-    u8 second;
-    u8 third;
-};
 
 struct GameplayCamera;
 
@@ -420,8 +350,6 @@ extern float D_800C3524_de;
 
 extern void func_802391AC_de(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
 
-typedef union Rotation { f32 f[4]; u32 word[4]; } Rotation;
-typedef union TransformVector { CVector3 value; u32 word[3]; } TransformVector;
 
 typedef char AxisWave_size_check[(sizeof(AxisWave) == 0x14) ? 1 : -1];
 typedef char Effect33920_size_check[(sizeof(Effect33920) == 0x54) ? 1 : -1];

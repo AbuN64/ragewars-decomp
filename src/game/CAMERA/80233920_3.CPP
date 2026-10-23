@@ -3,6 +3,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/VIEWFLAGS.H"
+#include "CAMERA/80233920.H"
 #include "COMMON/EXTERNS_6.H"
 #include "COMMON/BALLISTICPARAMS.H"
 #include "RENDER_4/8028FD2C_6.H"

@@ -1,4 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
+#include "CAMERA/80233920.H"
 #include "TYPES.H"
 #include "CAMERA/80233920_17.H"
 

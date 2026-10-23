@@ -1,5 +1,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VIEWFLAGS.H"
+#include "CAMERA/80233920.H"
 
 /* Clears effect state and initializes its scalar, vector and resource defaults. */
 #include "TYPES.H"
