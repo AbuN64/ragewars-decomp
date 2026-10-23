@@ -246,6 +246,7 @@ extern f32 D_800C1D70_de;
 f32 func_802726BC_de(void *a, void *b);
 s32 Nav_SearchPortalRoute(CNavData *, s32, s32, u8, s32, f32 *, f32);
 
+/* 18/127 aligned edits; remaining: neighbor-scan registers and setup. */
 static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s32 *edges) {
     s32 i = 0;
     s32 count = 0;
@@ -275,14 +276,10 @@ static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s3
 s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDepth) {
     s32 neighborNodes[64];
     s32 neighborLinks[64];
-    f32 routeDistance;
-    f32 *startPosition;
+    struct { f32 distance; f32 *origin; } route;
     f32 bestDistance;
-    NavigationBuffer *portals;
     NavigationBuffer *points;
-    s32 portalCount;
-    s32 portalNode;
-    s32 portalOffset;
+    s32 foundNode;
     s32 result;
     s32 index;
     s32 neighborCount;
@@ -290,30 +287,21 @@ s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDe
 
     result = -1;
     index = 0;
-    portalCount = graph->m_nNavLinks;
     bestDistance = D_800C1D70_de;
-    if (portalCount > 0) {
-        s32 stride;
-        portals = graph->m_pusNavLinks;
-        stride = portals->stride;
-        portalOffset = 8;
-        do {
-            portal = (void *)(portals->data + (portalOffset - 8));
-            index++;
-            if (portal->first == startNode && portal->kind == (u8)portalKind) return startNode;
-            portalOffset += stride;
-        } while (index < portalCount);
+    for (index = 0; index < graph->m_nNavLinks; index++) {
+        portal = navigationRecord(graph->m_pusNavLinks, index);
+        if (portal->first == startNode && portal->kind == portalKind) return startNode;
     }
     points = graph->points;
-    startPosition = navigationRecord(points, startNode);
+    route.origin = navigationRecord(points, startNode);
     neighborCount = navigationNeighbors(graph, startNode, neighborNodes, neighborLinks);
     for (index = 0; index < neighborCount; index++) {
         NavigationBuffer *table = graph->points;
-        routeDistance = func_802726BC_de(startPosition, navigationRecord(table, neighborNodes[index]));
-        portalNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], (u8)portalKind, maxDepth - 1, &routeDistance, bestDistance);
-        if (portalNode != -1) {
-            bestDistance = routeDistance;
-            result = portalNode;
+        route.distance = func_802726BC_de(route.origin, navigationRecord(table, neighborNodes[index]));
+        foundNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], (u8)portalKind, maxDepth - 1, &route.distance, bestDistance);
+        if (foundNode != -1) {
+            bestDistance = route.distance;
+            result = foundNode;
         }
     }
     return result;
