@@ -97,13 +97,13 @@ s32 func_802414F4_de(func_80204468_S3 *arg0, void *arg1) {
     return 1;
 }
 
-s32 func_80241614_de(void *arg0, void *arg1, f32 arg2, void *arg3) {
+s32 func_80241614_de(void *arg0, void *arg1, f32 radius, void *arg3) {
     CVector3 *first = arg1;
     CVector3 *second = arg3;
     f32 dx = first->x - second->x;
     f32 dz = first->z - second->z;
     s32 result = 1;
-    if (!((dx * dx + dz * dz) <= (arg2 * arg2))) {
+    if (!((dx * dx + dz * dz) <= (radius * radius))) {
         result = 0;
     }
     return result;
@@ -138,7 +138,7 @@ s32 func_80241668_de(Footprint *fp, CVector3 *p)
     return 1;
 }
 
-f32 func_80241728_de(void *arg0, f32 arg1, f32 arg2) {
+f32 func_80241728_de(void *arg0, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
 
@@ -147,5 +147,5 @@ f32 func_80241728_de(void *arg0, f32 arg1, f32 arg2) {
         return ((SurfaceHit *)arg0)->point.y;
     }
     point = ((SurfaceHit *)arg0)->point;
-    return (((point.z - arg2) * normal.z) + ((point.x - arg1) * normal.x) + (point.y * normal.y)) / normal.y;
+    return (((point.z - z) * normal.z) + ((point.x - x) * normal.x) + (point.y * normal.y)) / normal.y;
 }

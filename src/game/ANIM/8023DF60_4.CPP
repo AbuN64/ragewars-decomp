@@ -77,47 +77,47 @@ void func_8023EBD4_de(void)
   D_80103FCC->unk100 = (D_80103FCC->state = (D_80103FCC->unkC4 = (D_80103FCC->unkB0 = (D_80103FCC->unk9C = (D_80103FCC->unk88 = (D_80103FCC->unk0 = 0))))));
 }
 
-void func_8023EBFC_de(ActorMotion *arg0, MotionContactResult *arg1) {
-    s32 temp_a1;
-    s32 temp_v1;
+void func_8023EBFC_de(ActorMotion *motion, MotionContactResult *contact) {
+    s32 contactFlags;
+    s32 clearedFlags;
 
-    temp_v1 = arg0->flags & ~0xE00;
-    arg0->flags = temp_v1;
-    temp_a1 = arg1->flags;
-    if (temp_a1 & 0x20000000) {
-        arg0->flags = temp_v1 | 0x200;
+    clearedFlags = motion->flags & ~0xE00;
+    motion->flags = clearedFlags;
+    contactFlags = contact->flags;
+    if (contactFlags & 0x20000000) {
+        motion->flags = clearedFlags | 0x200;
         return;
     }
-    if (temp_a1 & 0x40000000) {
-        arg0->flags = temp_v1 | 0x400;
+    if (contactFlags & 0x40000000) {
+        motion->flags = clearedFlags | 0x400;
         return;
     }
-    if (temp_a1 < 0) {
-        arg0->flags = temp_v1 | 0x800;
+    if (contactFlags < 0) {
+        motion->flags = clearedFlags | 0x800;
     }
 }
 
-void func_8023EC54_de(ActorMotion *arg0, MotionContactResult *arg1) {
-    s32 temp_a1;
+void func_8023EC54_de(ActorMotion *motion, MotionContactResult *contact) {
+    s32 material;
     s32 temp_v0;
     s32 temp_v1;
     s32 temp_v1_2;
 
-    temp_v1 = arg0->flags;
+    temp_v1 = motion->flags;
     if (temp_v1 & 0x1000) {
-        arg0->flags = temp_v1 & ~0x2000;
+        motion->flags = temp_v1 & ~0x2000;
     }
-    temp_v0 = arg0->flags;
+    temp_v0 = motion->flags;
     temp_v1_2 = temp_v0 & 0xFFFC7FFF;
-    arg0->flags = temp_v1_2;
+    motion->flags = temp_v1_2;
     if (temp_v0 & 0x7000) {
-        temp_a1 = arg1->material;
-        switch (temp_a1) {
+        material = contact->material;
+        switch (material) {
         case 8:
-            arg0->flags = temp_v1_2 | 0x10000;
+            motion->flags = temp_v1_2 | 0x10000;
             return;
         case 7:
-            arg0->flags = temp_v1_2 | 0x8000;
+            motion->flags = temp_v1_2 | 0x8000;
             break;
         }
     }
@@ -157,28 +157,28 @@ void func_8023ECBC_de(void *arg0, u16 *arg1)
   }
 }
 
-s32 func_8023ED64_de(BoxContactRay *arg0, BoxContactPolygon *arg1) {
-    f32 temp_f2;
-    s32 var_v0;
+s32 func_8023ED64_de(BoxContactRay *ray, BoxContactPolygon *polygon) {
+    f32 hitT;
+    s32 isNearer;
 
-    temp_f2 = arg1->t;
-    if (temp_f2 <= 0.0f) {
-        if (arg1->kind == 7) {
+    hitT = polygon->t;
+    if (hitT <= 0.0f) {
+        if (polygon->kind == 7) {
             return 0;
         }
-        if ((u32) (arg1->type - 5) < 2) {
+        if ((u32) (polygon->type - 5) < 2) {
             return 0;
         }
-        if ((temp_f2 * arg0->slack) < -(D_800D0648 * D_800C36D8_de)) {
+        if ((hitT * ray->slack) < -(D_800D0648 * D_800C36D8_de)) {
             return 0;
         }
     }
-    var_v0 = 0;
+    isNearer = 0;
     {
-        f32 b = arg1->t;
-        if (!(arg0->nearest.t <= b)) {
-            var_v0 = 1;
+        f32 b = polygon->t;
+        if (!(ray->nearest.t <= b)) {
+            isNearer = 1;
         }
     }
-    return var_v0;
+    return isNearer;
 }

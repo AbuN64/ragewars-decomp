@@ -79,23 +79,23 @@ void func_80275AA4_de(CGameRegion *dst, Packed *src, char *base, int unused, cha
     }
 }
 
-s32 func_80275B10_de(Node75 *arg0, f32 arg1, f32 arg2) {
+s32 func_80275B10_de(Node75 *triangle, f32 x, f32 z) {
     s32 i;
-    CVector3 *point1;
-    CVector3 *point2;
+    CVector3 *vertexA;
+    CVector3 *vertexB;
 
-    if (arg0 == 0) {
+    if (triangle == 0) {
         return 1;
     }
 
     for (i = 0; i < 3; i++) {
-        point1 = ((Triangle *)arg0)->vertices[i];
-        point2 = ((Triangle *)arg0)->vertices[(i + 1) % 3];
-        if (((point2->z -
-              point1->z) *
-             (arg1 - point1->x)) +
-                ((point1->x - point2->x) *
-                 (arg2 - point1->z)) <
+        vertexA = ((Triangle *)triangle)->vertices[i];
+        vertexB = ((Triangle *)triangle)->vertices[(i + 1) % 3];
+        if (((vertexB->z -
+              vertexA->z) *
+             (x - vertexA->x)) +
+                ((vertexA->x - vertexB->x) *
+                 (z - vertexA->z)) <
             0.0f) {
             return 0;
         }

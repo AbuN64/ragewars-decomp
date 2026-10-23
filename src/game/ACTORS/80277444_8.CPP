@@ -179,17 +179,17 @@ void func_8027907C_de(s32 arg0, s32 arg1, Trigger *arg2) {
     func_8025E2D4_de(arg2->unk6);
 }
 
-void func_802790C0_de(struct Shared_Actor *arg0, s32 *arg1) {
-    s32 temp_v0;
+void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
+    s32 flags;
 
     func_80217388_de();
-    *arg1 |= 0x20;
-    temp_v0 = arg0->weaponFlags & 0xFFFEFFFF;
-    temp_v0 = temp_v0 & ~0x2000;
-    temp_v0 = temp_v0 & ~0x100;
-    arg0->weaponFlags = temp_v0;
-    if (temp_v0 & 0x80000) {
-        func_80262C88_de(arg0);
+    *stateFlags |= 0x20;
+    flags = actor->weaponFlags & 0xFFFEFFFF;
+    flags = flags & ~0x2000;
+    flags = flags & ~0x100;
+    actor->weaponFlags = flags;
+    if (flags & 0x80000) {
+        func_80262C88_de(actor);
     }
 }
 

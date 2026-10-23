@@ -39,13 +39,13 @@ void func_80241180_de(struct Quad *quad, CVector3 *points) {
 
 s32 func_80241260_de(void *arg0, CVector3 *arg1) {
     Plane *object = arg0;
-    CVector3 sp10;
-    s32 var_v0;
+    CVector3 offset;
+    s32 outside;
 
-    func_80271F68_de(&sp10, arg1, &object->pos);
-    var_v0 = 0;
-    if (!((object->normal.x * sp10.x) + (object->normal.y * sp10.y) + (object->normal.z * sp10.z) >= 0.0f)) {
-        var_v0 = 1;
+    func_80271F68_de(&offset, arg1, &object->pos);
+    outside = 0;
+    if (!((object->normal.x * offset.x) + (object->normal.y * offset.y) + (object->normal.z * offset.z) >= 0.0f)) {
+        outside = 1;
     }
-    return var_v0;
+    return outside;
 }

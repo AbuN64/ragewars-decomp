@@ -187,11 +187,11 @@ f32 func_80239678_de(Race *arg0, void *arg1) {
 }
 
 void *func_80239740_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
-    struct Message *temp_v0 = func_80237E80_de(owner, pool, text);
-    if (temp_v0 != 0) {
-        temp_v0->pad20 = 1;
+    struct Message *message = func_80237E80_de(owner, pool, text);
+    if (message != 0) {
+        message->pad20 = 1;
     }
-    return temp_v0;
+    return message;
 }
 
 Message *func_80239770_de(void *owner, void *pool, u8 *text, f32 size) {

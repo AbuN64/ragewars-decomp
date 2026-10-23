@@ -95,35 +95,35 @@ void func_802744B4_de(void) {
 }
 
 s32 func_802744D4_de(void) {
-    u32 temp_v1;
+    u32 seed;
 
-    temp_v1 = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
-    D_80111D24 = temp_v1;
-    return ((temp_v1 << 0x10) | (temp_v1 >> 0x10)) & 0x7FFFFFFF;
+    seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
+    D_80111D24 = seed;
+    return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
 s32 func_8027451C_de(void) {
-    u32 temp_v1;
+    u32 seed;
 
-    temp_v1 = (D_80111D28 * 0xA84A5B53) + 0x58348C2D;
-    D_80111D28 = temp_v1;
-    return ((temp_v1 << 0x10) | (temp_v1 >> 0x10)) & 0x7FFFFFFF;
+    seed = (D_80111D28 * 0xA84A5B53) + 0x58348C2D;
+    D_80111D28 = seed;
+    return ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
 }
 
 /** LCG PRNG step scaled into [0, arg0 * D_800C9A38) as a float. */
-f32 func_80274564_de(f32 arg0) {
-    f64 var_f1;
-    s32 temp_v0;
-    u32 temp_v1;
+f32 func_80274564_de(f32 range) {
+    f64 value;
+    s32 randomBits;
+    u32 seed;
 
-    temp_v1 = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
-    temp_v0 = (s32)((temp_v1 >> 0x10) & 0x7FFF);
-    var_f1 = (f64)temp_v0;
-    D_80111D24 = temp_v1;
-    if (temp_v0 < 0) {
-        var_f1 = var_f1 + D_800C4940_de;
+    seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
+    randomBits = (s32)((seed >> 0x10) & 0x7FFF);
+    value = (f64)randomBits;
+    D_80111D24 = seed;
+    if (randomBits < 0) {
+        value = value + D_800C4940_de;
     }
-    return (f32)var_f1 * arg0 * D_800C9A38;
+    return (f32)value * range * D_800C9A38;
 }
 
 f32 func_802745D0_de(f32 arg0) {
@@ -156,63 +156,63 @@ f32 func_802745D0_de(f32 arg0) {
     return D_800CD3D8;
 }
 
-f32 func_802746A0_de(f32 arg0, f32 arg1, f32 arg2) {
-    if (arg1 < 0.0f) {
-        if (arg0 <= -arg2) {
-            return arg0;
+f32 func_802746A0_de(f32 value, f32 velocity, f32 limit) {
+    if (velocity < 0.0f) {
+        if (value <= -limit) {
+            return value;
         }
     }
-    if (0.0f < arg1) {
-        if (arg2 <= arg0) {
-            return arg0;
+    if (0.0f < velocity) {
+        if (limit <= value) {
+            return value;
         }
     }
-    if ((arg0 < 0.0f && 0.0f < arg1) ||
-        (0.0f < arg0 && arg1 < 0.0f)) {
-        arg1 *= D_800C4960_de[0];
+    if ((value < 0.0f && 0.0f < velocity) ||
+        (0.0f < value && velocity < 0.0f)) {
+        velocity *= D_800C4960_de[0];
     }
-    arg0 += arg1 * D_800D2988;
-    if (arg1 < 0.0f) {
-        if (arg0 < -arg2) {
-            arg0 = -arg2;
+    value += velocity * D_800D2988;
+    if (velocity < 0.0f) {
+        if (value < -limit) {
+            value = -limit;
         }
-    } else if (arg2 < arg0) {
-        arg0 = arg2;
+    } else if (limit < value) {
+        value = limit;
     }
-    return arg0;
+    return value;
 }
 
-f32 func_802747A0_de(f32 arg0, f32 arg1) {
+f32 func_802747A0_de(f32 value, f32 rate) {
     f32 zero;
 
     zero = 0.0f;
-    if (zero < arg0) {
-        arg0 -= arg1 * D_800D2988;
-        if (arg0 < zero) {
-            arg0 = zero;
+    if (zero < value) {
+        value -= rate * D_800D2988;
+        if (value < zero) {
+            value = zero;
         }
-    } else if (arg0 < zero) {
-        arg0 += arg1 * D_800D2988;
-        if (zero < arg0) {
-            arg0 = zero;
+    } else if (value < zero) {
+        value += rate * D_800D2988;
+        if (zero < value) {
+            value = zero;
         }
     }
-    return arg0;
+    return value;
 }
 
-f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2) {
+f32 func_80274808_de(f32 current, f32 target, f32 rate) {
     f32 value;
-    value = arg0;
-    if (value < arg1) {
-        value += arg2 * D_800D2988;
-        if (arg1 < value) {
-            value = arg1;
+    value = current;
+    if (value < target) {
+        value += rate * D_800D2988;
+        if (target < value) {
+            value = target;
         }
     }
-    else if (arg1 < value) {
-        value -= arg2 * D_800D2988;
-        if (value < arg1) {
-            value = arg1;
+    else if (target < value) {
+        value -= rate * D_800D2988;
+        if (value < target) {
+            value = target;
         }
     }
     return value;
@@ -297,46 +297,46 @@ f32 func_80274944_de(f32 arg0)
   return -val;
 }
 
-f32 func_802749B4_de(f32 arg0, f32 arg1) {
-    f32 var_f0;
-    f32 var_f14;
+f32 func_802749B4_de(f32 angleA, f32 angleB) {
+    f32 difference;
+    f32 wrappedB;
 
-    var_f14 = arg1;
-    if (var_f14 < D_800C4978_de) {
+    wrappedB = angleB;
+    if (wrappedB < D_800C4978_de) {
         do {
-            var_f14 += *(&D_800C4978_de + 1);
-        } while (var_f14 < D_800C4978_de);
+            wrappedB += *(&D_800C4978_de + 1);
+        } while (wrappedB < D_800C4978_de);
     }
-    if (D_800C4980_de < var_f14) {
+    if (D_800C4980_de < wrappedB) {
         do {
-            var_f14 -= *(&D_800C4980_de + 1);
-        } while (D_800C4980_de < var_f14);
+            wrappedB -= *(&D_800C4980_de + 1);
+        } while (D_800C4980_de < wrappedB);
     }
-    var_f0 = arg0 - var_f14;
-    if (var_f0 < D_800C4988_de) {
+    difference = angleA - wrappedB;
+    if (difference < D_800C4988_de) {
         do {
-            var_f0 += *(&D_800C4988_de + 1);
-        } while (var_f0 < D_800C4988_de);
+            difference += *(&D_800C4988_de + 1);
+        } while (difference < D_800C4988_de);
     }
-    if (D_800C4990_de < var_f0) {
+    if (D_800C4990_de < difference) {
         do {
-            var_f0 -= *(&D_800C4990_de + 1);
-        } while (D_800C4990_de < var_f0);
+            difference -= *(&D_800C4990_de + 1);
+        } while (D_800C4990_de < difference);
     }
-    return -var_f0;
+    return -difference;
 }
 
 f32 func_80274A90_de(f32 arg0, f32 arg1) {
-    f32 temp_f1;
-    u32 temp_a1;
-    s32 rotated;
+    f32 blend;
+    u32 seed;
+    s32 randomValue;
 
-    temp_a1 = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
-    rotated = ((temp_a1 << 0x10) | (temp_a1 >> 0x10)) & 0x7FFFFFFF;
-    rotated = rotated % 10000;
-    temp_f1 = (f32)rotated * D_800C4998_de;
-    D_80111D24 = temp_a1;
-    return (temp_f1 * arg0) + ((D_800C499C_de - temp_f1) * arg1);
+    seed = (D_80111D24 * 0xA84A5B53) + 0x58348C2D;
+    randomValue = ((seed << 0x10) | (seed >> 0x10)) & 0x7FFFFFFF;
+    randomValue = randomValue % 10000;
+    blend = (f32)randomValue * D_800C4998_de;
+    D_80111D24 = seed;
+    return (blend * arg0) + ((D_800C499C_de - blend) * arg1);
 }
 
 s32 func_80274B44_de(f32 *arg0)

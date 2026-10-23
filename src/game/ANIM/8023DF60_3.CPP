@@ -112,16 +112,16 @@ void func_8023E854_de(void *arg0) {
     input->contactNormal.z = 0.0f;
 }
 
-s32 func_8023E864_de(struct Input *arg0, Polygon_func_8023E8D4_de *arg1) {
-    s32 var_v0;
+s32 func_8023E864_de(struct Input *input, Polygon_func_8023E8D4_de *polygon) {
+    s32 same;
 
-    var_v0 = 0;
-    if ((arg0->contactNormal.x == arg1->normal.x) &&
-        (arg0->contactNormal.y == arg1->normal.y) &&
-        (arg0->contactNormal.z == arg1->normal.z)) {
-        var_v0 = 1;
+    same = 0;
+    if ((input->contactNormal.x == polygon->normal.x) &&
+        (input->contactNormal.y == polygon->normal.y) &&
+        (input->contactNormal.z == polygon->normal.z)) {
+        same = 1;
     }
-    return var_v0;
+    return same;
 }
 
 /** Copy three words from offsets 0x48..0x50 to offsets 0x18C..0x194. */

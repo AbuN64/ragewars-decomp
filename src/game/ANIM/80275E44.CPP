@@ -101,20 +101,20 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
     return out;
 }
 
-u8 func_80276054_de(s32 arg0) {
-    ModelBlend *temp = func_8028B2F8_de(&D_8011FE88, arg0);
-    if (temp == 0) {
+u8 func_80276054_de(s32 modelId) {
+    ModelBlend *blend = func_8028B2F8_de(&D_8011FE88, modelId);
+    if (blend == 0) {
         return 0;
     }
-    return temp->byte58;
+    return blend->byte58;
 }
 
-u8 func_80276088_de(s32 arg0) {
-    ModelBlend *temp = func_8028B2F8_de(&D_8011FE88, arg0);
-    if (temp == 0) {
+u8 func_80276088_de(s32 modelId) {
+    ModelBlend *blend = func_8028B2F8_de(&D_8011FE88, modelId);
+    if (blend == 0) {
         return 0;
     }
-    return temp->byte59;
+    return blend->byte59;
 }
 
 f32 func_802760BC_de(void *arg0, s32 arg1) {

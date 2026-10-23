@@ -63,24 +63,24 @@ void *func_8020C9B0_de(struct EntryList8020CCE8 *object, int index) {
     return base + (index * stride + 8);
 }
 
-s32 func_8020C9CC_de(Link *arg0) {
-    u8 temp_v1;
-    s32 val;
+s32 func_8020C9CC_de(Link *link) {
+    u8 linkTypeByte;
+    s32 linkType;
 
-    temp_v1 = arg0->type;
-    val = temp_v1;
-    if (val == 4) {
+    linkTypeByte = link->type;
+    linkType = linkTypeByte;
+    if (linkType == 4) {
         goto ret1;
     }
-    if (val >= 5) {
+    if (linkType >= 5) {
         goto ge_5;
     }
-    if (val == 1) {
+    if (linkType == 1) {
         goto ret1;
     }
     goto ret0;
 ge_5:
-    if (val != 7) {
+    if (linkType != 7) {
         goto ret0;
     }
 ret1:
@@ -128,32 +128,32 @@ void func_8020CA10_de(void *arg0, s32 arg1)
   }
 }
 
-s32 func_8020CB3C_de(struct Obj8020BC50 *arg0, void *arg1) {
-    CVector3 sp10;
-    f32 temp_f2;
-    f32 var_f20;
+s32 func_8020CB3C_de(struct Obj8020BC50 *pointSet, void *point) {
+    CVector3 offset;
+    f32 distanceSq;
+    f32 bestDistanceSq;
     void *items;
     s32 stride;
-    s32 var_s0;
-    s32 var_s1;
+    s32 index;
+    s32 bestIndex;
 
-    var_s1 = -1;
-    var_f20 = 0.0f;
-    var_s0 = 0;
-    if (arg0->count > 0) {
+    bestIndex = -1;
+    bestDistanceSq = 0.0f;
+    index = 0;
+    if (pointSet->count > 0) {
         do {
-            items = arg0->records;
+            items = pointSet->records;
             stride = *(s32 *)items;
-            func_80271F68_de(&sp10, arg1, (char *)items + (var_s0 * stride + 8));
-            temp_f2 = (sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z);
-            if ((var_s1 < 0) || (temp_f2 < var_f20)) {
-                var_s1 = var_s0;
-                var_f20 = temp_f2;
+            func_80271F68_de(&offset, point, (char *)items + (index * stride + 8));
+            distanceSq = (offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z);
+            if ((bestIndex < 0) || (distanceSq < bestDistanceSq)) {
+                bestIndex = index;
+                bestDistanceSq = distanceSq;
             }
-            var_s0 += 1;
-        } while (var_s0 < arg0->count);
+            index += 1;
+        } while (index < pointSet->count);
     }
-    return var_s1;
+    return bestIndex;
 }
 
 int func_8020CC0C_de(Graph *graph, int from, int to) {
@@ -262,26 +262,26 @@ void *func_8020CFE0_de(char *object, s32 arg1) {
     return 0;
 }
 
-void func_8020D014_de(struct Obj8020BC50 *arg0) {
-    struct Node8020BC50 *var_v0;
+void func_8020D014_de(struct Obj8020BC50 *graph) {
+    struct Node8020BC50 *node;
     f32 k;
 
-    var_v0 = arg0->nodes;
-    if (var_v0 != 0) {
+    node = graph->nodes;
+    if (node != 0) {
         k = (-1.0f);
         do {
-            var_v0->value = k;
-            var_v0->state = -1;
-            var_v0->field18 = 0;
-            var_v0->field1C = 0;
-            var_v0->field20 = 0;
-            var_v0->field24 = 0;
-            var_v0->field28 = 0;
-            var_v0->field2C = 0;
-            var_v0->field30 = 0;
-            var_v0 = var_v0->next;
-        } while (var_v0 != 0);
+            node->value = k;
+            node->state = -1;
+            node->field18 = 0;
+            node->field1C = 0;
+            node->field20 = 0;
+            node->field24 = 0;
+            node->field28 = 0;
+            node->field2C = 0;
+            node->field30 = 0;
+            node = node->next;
+        } while (node != 0);
     }
-    arg0->value = (-1.0f);
-    arg0->selected = -1;
+    graph->value = (-1.0f);
+    graph->selected = -1;
 }

@@ -93,25 +93,25 @@ found:
 
 /* Rounds a value up to a power of two by locating its highest set bit and bumping it unless exactly one bit is set. Adapted from func_80261614_de, with a signed loop counter, an exactly-one-bit test, and 1 << bit returned instead of the bit index. */
 
-s32 func_80255540_de(s32 arg0) {
-    s32 var_a1;
-    s32 var_a2;
-    s32 var_v1;
+s32 func_80255540_de(s32 mask) {
+    s32 bitCount;
+    s32 highestBit;
+    s32 bit;
 
-    var_a1 = 0;
-    var_a2 = 0;
-    var_v1 = 0;
+    bitCount = 0;
+    highestBit = 0;
+    bit = 0;
     do {
-        if (arg0 & (u32)(1 << var_v1)) {
-            var_a1 += 1;
-            var_a2 = var_v1;
+        if (mask & (u32)(1 << bit)) {
+            bitCount += 1;
+            highestBit = bit;
         }
-        var_v1 += 1;
-    } while (var_v1 < 0x20);
-    if (var_a1 != 1) {
-        var_a2 += 1;
+        bit += 1;
+    } while (bit < 0x20);
+    if (bitCount != 1) {
+        highestBit += 1;
     }
-    return 1 << var_a2;
+    return 1 << highestBit;
 }
 
 void func_8025558C_de(void) {

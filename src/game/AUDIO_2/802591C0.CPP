@@ -434,10 +434,10 @@ void func_80258F6C_de(SortTable *table) {
 
 
 
-int func_80258FF4_de(char *arg0, int id) {
+int func_80258FF4_de(char *context, int id) {
     Voice *slot;
     int i;
-    slot = ((ContextRecAt2BC0 *)arg0)->voices;
+    slot = ((ContextRecAt2BC0 *)context)->voices;
     if (id == -1) {
         return -1;
     }

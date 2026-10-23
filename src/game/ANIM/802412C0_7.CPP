@@ -30,13 +30,13 @@ void func_80243814_de(Hit8 *arg0, Hit8 *arg1) {
     *arg1 = temporary;
 }
 
-s32 func_80243850_de(Hit8 *arg0, Hit8 *arg1) {
-    s32 var_v0;
-    var_v0 = 1;
-    if ((arg0->t) < (arg1->t)) {
-        var_v0 = -1;
+s32 func_80243850_de(Hit8 *a, Hit8 *b) {
+    s32 order;
+    order = 1;
+    if ((a->t) < (b->t)) {
+        order = -1;
     }
-    return var_v0;
+    return order;
 }
 
 void func_80243874_de(void *arg0) {

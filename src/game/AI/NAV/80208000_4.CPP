@@ -115,20 +115,20 @@ void func_8020986C_de(AiController *object, AiBehaviourTable *value) {
     object->table = value;
 }
 
-s32 func_80209874_de(AiController *arg0, s32 arg1) {
+s32 func_80209874_de(AiController *controller, s32 behaviourId) {
     AiBehaviourTable *node;
     AiBehaviourEntry *entry;
     AiBehaviourEntry *found;
     void (*callback)(Player *, s32);
 
-    node = arg0->table;
+    node = controller->table;
     found = 0;
-    arg0->state = arg1;
+    controller->state = behaviourId;
     while (node != 0) {
         entry = node->entries;
         if (entry->id != -1) {
             while (entry->id != -1) {
-                if (entry->id == arg1) {
+                if (entry->id == behaviourId) {
                     found = entry;
                     node = 0;
                     break;
@@ -139,16 +139,16 @@ s32 func_80209874_de(AiController *arg0, s32 arg1) {
         if (node != 0) node = node->next;
     }
     if (found == 0) return 0;
-    arg0->behaviour = found;
+    controller->behaviour = found;
     callback = found->enter;
-    if (callback != 0) callback(arg0->player, 0);
+    if (callback != 0) callback(controller->player, 0);
     return 1;
 }
 
-void func_80209910_de(AiController *arg0, float arg1) {
-    float result = arg1 * D_800C1C88_de;
-    if (arg0 != 0) {
-        arg0->player->pitch = -result;
+void func_80209910_de(AiController *controller, float amount) {
+    float result = amount * D_800C1C88_de;
+    if (controller != 0) {
+        controller->player->pitch = -result;
     }
 }
 
@@ -162,55 +162,55 @@ void func_80209948_de(AiController *arg0, s32 arg1) {
 
 /** Reset three state words and set the final state to one. */
 void func_80209988_de(void *object) {
-    AiController *arg0 = object;
-    arg0->unk2F4 = 0;
-    arg0->unk2F8 = 0;
-    arg0->unk2FC = 1;
+    AiController *controller = object;
+    controller->unk2F4 = 0;
+    controller->unk2F8 = 0;
+    controller->unk2FC = 1;
 }
 
 /** Clear five consecutive object words beginning at offset 0x300. */
-void func_8020999C_de(AiController *arg0) {
-    arg0->unk300 = 0;
-    arg0->unk304 = 0;
-    arg0->unk308 = 0;
-    arg0->unk30C = 0;
-    arg0->unk310 = 0;
+void func_8020999C_de(AiController *controller) {
+    controller->unk300 = 0;
+    controller->unk304 = 0;
+    controller->unk308 = 0;
+    controller->unk30C = 0;
+    controller->unk310 = 0;
 }
 
-s32 func_802099B4_de(Player **arg0, Player *arg1) {
+s32 func_802099B4_de(Player **fromRef, Player *target) {
     CVector3 first;
     CVector3 second;
 
-    if (arg0 == 0 || arg1 == 0) {
+    if (fromRef == 0 || target == 0) {
         return 0;
     }
 
-    first = (*arg0)->pos;
-    second = arg1->pos;
+    first = (*fromRef)->pos;
+    second = target->pos;
     first.y += D_800C1C8C_de;
     second.y += D_800C1C8C_de;
-    if (func_802444A4_de(*arg0, first, second, &D_80103FD0) != 0) {
-        return *D_80103FCC == arg1;
+    if (func_802444A4_de(*fromRef, first, second, &D_80103FD0) != 0) {
+        return *D_80103FCC == target;
     }
     return 1;
 }
 
-s32 func_80209A94_de(AiController *arg0) {
-    s32 val;
+s32 func_80209A94_de(AiController *controller) {
+    s32 state;
 
-    val = arg0->state;
-    if (val >= 8) {
+    state = controller->state;
+    if (state >= 8) {
         goto ge_8;
     }
-    if (val >= 3) {
+    if (state >= 3) {
         goto ret1;
     }
-    if (val == 1) {
+    if (state == 1) {
         goto ret1;
     }
     goto ret0;
 ge_8:
-    if (val != 0xD) {
+    if (state != 0xD) {
         goto ret0;
     }
 ret1:
@@ -260,22 +260,22 @@ f32 func_80209AE8_de(AiController *arg0)
 
 }
 
-f32 func_80209B64_de(AiController *arg0) {
+f32 func_80209B64_de(AiController *controller) {
     f32 value;
-    u8 state;
-    Player *base;
+    u8 difficulty;
+    Player *player;
     AiCharacterDefinition *definition;
 
-    base = arg0->player;
-    definition = base->definition;
-    state = base->profile->difficulty;
+    player = controller->player;
+    definition = player->definition;
+    difficulty = player->profile->difficulty;
     value = definition->unk28;
     value *= D_800C1C9C_de;
-    switch (state) {
+    switch (difficulty) {
     case 1:
         break;
     default:
-        arg0->player->profile->difficulty = 0;
+        controller->player->profile->difficulty = 0;
     case 0:
         value *= D_800C1CA0_de;
         break;
@@ -286,62 +286,62 @@ f32 func_80209B64_de(AiController *arg0) {
     return value;
 }
 
-f32 func_80209BE0_de(AiController *arg0) {
-    f32 var_f0;
-    f32 var_f1;
-    u8 state;
-    Player *base;
+f32 func_80209BE0_de(AiController *controller) {
+    f32 difficultyScale;
+    f32 value;
+    u8 difficulty;
+    Player *player;
     AiCharacterDefinition *definition;
 
-    base = arg0->player;
-    definition = base->definition;
-    state = base->profile->difficulty;
-    var_f1 = definition->unk34;
-    var_f1 *= D_800C1CA8_de;
-    switch (state) {
+    player = controller->player;
+    definition = player->definition;
+    difficulty = player->profile->difficulty;
+    value = definition->unk34;
+    value *= D_800C1CA8_de;
+    switch (difficulty) {
     case 1:
         goto done;
     default:
-        arg0->player->profile->difficulty = 0;
+        controller->player->profile->difficulty = 0;
     case 0:
-        var_f0 = D_800C1CAC_de;
+        difficultyScale = D_800C1CAC_de;
         goto multiply;
     case 2:
-        var_f0 = D_800C1CB0_de;
+        difficultyScale = D_800C1CB0_de;
     }
 multiply:
-    var_f1 *= var_f0;
+    value *= difficultyScale;
 done:
-    return var_f1;
+    return value;
 }
 
-f32 func_80209C5C_de(AiController *arg0) {
-    f32 var_f0;
-    f32 var_f1;
-    u8 state;
-    Player *base;
+f32 func_80209C5C_de(AiController *controller) {
+    f32 difficultyScale;
+    f32 value;
+    u8 difficulty;
+    Player *player;
     AiCharacterDefinition *definition;
 
-    base = arg0->player;
-    definition = base->definition;
-    state = base->profile->difficulty;
-    var_f1 = definition->unk30;
-    var_f1 *= D_800C1CB4_de;
-    switch (state) {
+    player = controller->player;
+    definition = player->definition;
+    difficulty = player->profile->difficulty;
+    value = definition->unk30;
+    value *= D_800C1CB4_de;
+    switch (difficulty) {
     case 1:
         break;
     default:
-        arg0->player->profile->difficulty = 0;
+        controller->player->profile->difficulty = 0;
     case 0:
-        var_f0 = D_800C1CB8_de;
+        difficultyScale = D_800C1CB8_de;
         goto multiply;
     case 2:
-        var_f0 = D_800C1CBC_de;
+        difficultyScale = D_800C1CBC_de;
 multiply:
-        var_f1 *= var_f0;
+        value *= difficultyScale;
         break;
     }
-    return var_f1;
+    return value;
 }
 
 void func_80209CD8_de(SharedPlayer **arg0) {
@@ -385,32 +385,32 @@ void func_80209CD8_de(SharedPlayer **arg0) {
 
 f32 func_80209DAC_de(void *arg0) {
     AiController *brain = arg0;
-    f32 temp_f20;
-    f32 var_f14;
-    u8 state;
+    f32 aim;
+    f32 aimLimit;
+    u8 difficulty;
 
-    state = brain->player->profile->difficulty;
-    switch (state) {
+    difficulty = brain->player->profile->difficulty;
+    switch (difficulty) {
     default:
         brain->player->profile->difficulty = 0;
     case 0:
-        var_f14 = (1.2217305898666382f);
+        aimLimit = (1.2217305898666382f);
         break;
     case 1:
-        var_f14 = (0.8726646900177002f);
+        aimLimit = (0.8726646900177002f);
         break;
     case 2:
-        var_f14 = (0.523598849773407f);
+        aimLimit = (0.523598849773407f);
         break;
     }
-    temp_f20 = brain->aim;
-    if (temp_f20 < func_80274A90_de(-var_f14, var_f14)) {
-        temp_f20 += D_800C1CC0_de;
+    aim = brain->aim;
+    if (aim < func_80274A90_de(-aimLimit, aimLimit)) {
+        aim += D_800C1CC0_de;
     } else {
-        temp_f20 -= D_800C1CC4_de;
+        aim -= D_800C1CC4_de;
     }
-    brain->aim = temp_f20;
-    return temp_f20;
+    brain->aim = aim;
+    return aim;
 }
 
 #if defined(VERSION_US)

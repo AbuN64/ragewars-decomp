@@ -194,9 +194,9 @@ Acmd *func_802B5F68_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
     return ptr;
 }
 
-int alFxParam(int *arg0, int arg1, int arg2) {
-    if (arg1 == 1) {
-        *arg0 = arg2;
+int alFxParam(int *filter, int paramId, int param) {
+    if (paramId == 1) {
+        *filter = param;
     }
     return 0;
 }

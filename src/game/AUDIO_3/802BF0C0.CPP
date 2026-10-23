@@ -9,25 +9,25 @@
 #include "AUDIO_3/802BFD40.H"
 
 
-s32 func_802B9FD0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    if (arg1 & 7) {
+s32 func_802B9FD0_de(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {
+    if (deviceAddress & 7) {
         func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3A);
     }
-    if (arg2 & 7) {
+    if (dramAddress & 7) {
         func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3B);
     }
-    if (arg3 & 7) {
+    if (size & 7) {
         func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3C);
     }
     if (__osSpDeviceBusy() != 0) {
         return -1;
     }
-    IO_READ_WORD(0xA4040000U) = arg1;
-    IO_READ_WORD(0xA4040004U) = func_802BBBC0_de(arg2);
-    if (arg0 == 0) {
-        IO_READ_WORD(0xA404000CU) = arg3 - 1;
+    IO_READ_WORD(0xA4040000U) = deviceAddress;
+    IO_READ_WORD(0xA4040004U) = func_802BBBC0_de(dramAddress);
+    if (direction == 0) {
+        IO_READ_WORD(0xA404000CU) = size - 1;
     } else {
-        IO_READ_WORD(0xA4040008U) = arg3 - 1;
+        IO_READ_WORD(0xA4040008U) = size - 1;
     }
     return 0;
 }

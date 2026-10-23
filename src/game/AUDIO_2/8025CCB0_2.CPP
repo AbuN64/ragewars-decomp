@@ -110,16 +110,16 @@ void func_8025D158_de(struct Shape_typemap_110 *record, s32 resource) {
 void func_8025D1BC_de(void *arg0) {
 
     PlayerRecAt1E *player = arg0;
-    void *temp_v0_2;
-    s32 temp_v0;
+    void *soundPlayer;
+    s32 state;
 
     func_80258740_de((s32 *)player->bank);
-    temp_v0 = player->state;
-    if (temp_v0 != 2 && temp_v0 != 0) {
+    state = player->state;
+    if (state != 2 && state != 0) {
         player->state = 2;
-        temp_v0_2 = func_80258D40_de(player->bank);
-        func_802B2F00_de(temp_v0_2, player->id);
-        alSndpStop(temp_v0_2);
+        soundPlayer = func_80258D40_de(player->bank);
+        func_802B2F00_de(soundPlayer, player->id);
+        alSndpStop(soundPlayer);
     }
     func_802587A4_de((s32 *)player->bank);
 }
@@ -163,35 +163,35 @@ s32 func_8025D238_de(void **arg0, s16 id, s16 avoid) {
     return result;
 }
 
-void func_8025D350_de(void *arg0, s32 arg1) {
+void func_8025D350_de(void *arg0, s32 songIndex) {
     PlayerRecAt24 *player = arg0;
-    f64 var_f2;
-    s32 temp_v0_2;
-    SongHeader *temp_v0;
+    f64 tempoValue;
+    s32 tempo;
+    SongHeader *song;
 
-    temp_v0 = func_8028FDB4_de(player->bank->songs, arg1 * 2);
-    temp_v0_2 = temp_v0->tempo;
-    var_f2 = (f64) temp_v0_2;
-    if (temp_v0_2 < 0) {
-        var_f2 += D_800C3FB8_de;
+    song = func_8028FDB4_de(player->bank->songs, songIndex * 2);
+    tempo = song->tempo;
+    tempoValue = (f64) tempo;
+    if (tempo < 0) {
+        tempoValue += D_800C3FB8_de;
     }
-    player->tempoScale = (f32) var_f2 * D_800C3FC0_de;
-    player->volume = (f32) temp_v0->volume;
-    func_8028FDB4_de(player->bank->songs, (arg1 * 2) | 1);
+    player->tempoScale = (f32) tempoValue * D_800C3FC0_de;
+    player->volume = (f32) song->volume;
+    func_8028FDB4_de(player->bank->songs, (songIndex * 2) | 1);
 }
 
 void func_8025D3E4_de(void *arg0) {
 
     PlayerRecAt1E *player = arg0;
-    void *temp_v0_2;
-    s32 temp_v0;
+    void *soundPlayer;
+    s32 state;
 
-    temp_v0 = player->state;
-    if (temp_v0 != 2 && temp_v0 != 0) {
+    state = player->state;
+    if (state != 2 && state != 0) {
         player->state = 2;
-        temp_v0_2 = func_80258D40_de(player->bank);
-        func_802B2F00_de(temp_v0_2, player->id);
-        alSndpStop(temp_v0_2);
+        soundPlayer = func_80258D40_de(player->bank);
+        func_802B2F00_de(soundPlayer, player->id);
+        alSndpStop(soundPlayer);
     }
 }
 

@@ -336,23 +336,23 @@ void func_80425EE4_de(s32 player, s32 *award) {
 }
 
  /* extern */
-s32 func_80426004_de(s32 arg0) {
-    s32 temp_s2;
-    s32 var_s0;
-    s32 var_s1;
-    void *var_a0;
-    var_s1 = 0;
-    var_s0 = 0;
-    temp_s2 = arg0 * 0x190;
-    var_a0 = temp_s2 + D_800FEB4A;
+s32 func_80426004_de(s32 index) {
+    s32 recordOffset;
+    s32 slot;
+    s32 count;
+    void *record;
+    count = 0;
+    slot = 0;
+    recordOffset = index * 0x190;
+    record = recordOffset + D_800FEB4A;
     do {
-        if (func_80265650_de(temp_s2 + D_800FEB4A, var_s0) == 1) {
-            var_s1 += 1;
+        if (func_80265650_de(recordOffset + D_800FEB4A, slot) == 1) {
+            count += 1;
         }
-        var_s0 += 1;
-        var_a0 = temp_s2 + D_800FEB4A;
-    } while (var_s0 < 0x32);
-    return var_s1;
+        slot += 1;
+        record = recordOffset + D_800FEB4A;
+    } while (slot < 0x32);
+    return count;
 }
 
 void func_80426090_de(Arg *arg0) {

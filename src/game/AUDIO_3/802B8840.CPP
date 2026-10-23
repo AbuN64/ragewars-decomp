@@ -185,17 +185,17 @@ Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
 
 void *__allocParam(void) {
     extern func_802B8CC8_S1 *D_800D4070;
-    void *temp_v0;
-    void *var_v1;
+    void *head;
+    void *param;
 
-    temp_v0 = D_800D4070->unk2C;
-    var_v1 = 0;
-    if (temp_v0 != 0) {
-        var_v1 = temp_v0;
-        D_800D4070->unk2C = *(void **)var_v1;
-        *(void **)var_v1 = 0;
+    head = D_800D4070->unk2C;
+    param = 0;
+    if (head != 0) {
+        param = head;
+        D_800D4070->unk2C = *(void **)param;
+        *(void **)param = 0;
     }
-    return var_v1;
+    return param;
 }
 
 void __freeParam(void *arg0) {

@@ -136,28 +136,28 @@ func_802BD200_eu_x
 }
 
 
-int func_802BB060_de(u32 arg0, u32 *arg1) {
-    if (arg0 & 3) {
+int func_802BB060_de(u32 deviceAddress, u32 *data) {
+    if (deviceAddress & 3) {
         func_802BAC50_de(D_800CCC30, &D_800C79E4_de, 0x33);
     }
-    if (arg1 == 0) {
+    if (data == 0) {
         func_802BAC50_de(D_800CCC30, &D_800C79E4_de, 0x34);
     }
     if (func_802B9D70_de() != 0) {
         return -1;
     }
-    *arg1 = *(u32 *)(arg0 | 0xA0000000);
+    *data = *(u32 *)(deviceAddress | 0xA0000000);
     return 0;
 }
 
-int func_802BB0F0_de(u32 arg0, u32 arg1) {
-    if (arg0 & 3) {
+int func_802BB0F0_de(u32 deviceAddress, u32 data) {
+    if (deviceAddress & 3) {
         func_802BAC50_de(&D_800C7A00_de, &D_800C7A04_de, 0x34);
     }
     if (func_802B9D70_de() != 0) {
         return -1;
     }
-    *(u32 *)(arg0 | 0xA0000000) = arg1;
+    *(u32 *)(deviceAddress | 0xA0000000) = data;
     return 0;
 }
 

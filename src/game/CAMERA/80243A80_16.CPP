@@ -164,20 +164,20 @@ s32 func_802462E8_de(Instance8020CD74 *arg0, CVector3 position, char **out) {
     return collisions;
 }
 
-s32 func_8024643C_de(Instance8020CD74 *arg0, Instance8020CD74 *arg1) {
+s32 func_8024643C_de(Instance8020CD74 *from, Instance8020CD74 *to) {
 
-    Instance8020CD74 saved;
+    Instance8020CD74 savedFrom;
     CVector3 desired;
     f32 scale;
     s32 collisions;
 
-    saved = *arg0;
+    savedFrom = *from;
     scale = D_800C3828_de;
-    ((struct Actor_func_80214DD4_de *)arg0)->pos.y += Particle_GetActorHeight(arg0) * scale;
-    desired = ((struct Actor_func_80214DD4_de *)arg1)->pos;
-    desired.y += Particle_GetActorHeight(arg1) * scale;
-    collisions = func_80243A90_de(arg0, desired, &D_80103FD0);
-    *arg0 = saved;
+    ((struct Actor_func_80214DD4_de *)from)->pos.y += Particle_GetActorHeight(from) * scale;
+    desired = ((struct Actor_func_80214DD4_de *)to)->pos;
+    desired.y += Particle_GetActorHeight(to) * scale;
+    collisions = func_80243A90_de(from, desired, &D_80103FD0);
+    *from = savedFrom;
 
     return collisions == 0;
 }

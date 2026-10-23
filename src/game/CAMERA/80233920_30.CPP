@@ -104,22 +104,22 @@ Message *func_80239908_de(void *owner, void *pool, u8 *text, s32 target, f32 siz
     return pending;
 }
 
-void func_80239AF4_de(struct ScreenMessageOwner *arg0, struct ScreenMessagePool *arg1) {
-    Node_func_80239AF4_de *var_s1;
-    Node_func_80239AF4_de *temp_s0;
-    void *var_a0;
+void func_80239AF4_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
+    Node_func_80239AF4_de *message;
+    Node_func_80239AF4_de *nextMessage;
+    void *freeList;
 
-    if (arg1 != 0) {
-        var_s1 = arg1->freeMessages.tail;
-        var_a0 = &arg1->freeMessages;
-        if (var_s1 != 0) {
+    if (pool != 0) {
+        message = pool->freeMessages.tail;
+        freeList = &pool->freeMessages;
+        if (message != 0) {
             do {
-                temp_s0 = var_s1->next;
-                func_80255ED8_de(var_a0, var_s1);
-                func_80255CB8_de(&arg0->activeMessages, var_s1);
-                var_s1 = temp_s0;
-                var_a0 = &arg1->freeMessages;
-            } while (var_s1 != 0);
+                nextMessage = message->next;
+                func_80255ED8_de(freeList, message);
+                func_80255CB8_de(&owner->activeMessages, message);
+                message = nextMessage;
+                freeList = &pool->freeMessages;
+            } while (message != 0);
         }
     }
 }
@@ -170,15 +170,15 @@ void func_80239C20_de(int arg0) {
 void *func_80239C3C_de(void *arg0, struct ScreenMessagePool *arg1) {
     struct ScreenMessageOwner *owner = arg0;
     struct ScreenMessagePool *pool = arg1;
-    void *temp_s0;
+    void *message;
 
-    temp_s0 = owner->activeMessages.head;
-    if (temp_s0 != 0) {
-        func_80239CE0_de(temp_s0);
-        func_80255ED8_de(&owner->activeMessages, temp_s0);
-        func_80255D14_de(&pool->freeMessages, temp_s0);
+    message = owner->activeMessages.head;
+    if (message != 0) {
+        func_80239CE0_de(message);
+        func_80255ED8_de(&owner->activeMessages, message);
+        func_80255D14_de(&pool->freeMessages, message);
     }
-    return temp_s0;
+    return message;
 }
 
 void func_80239C9C_de(s32 arg0, s32 arg1, s32 arg2) {
@@ -233,31 +233,31 @@ f32 func_80239D1C_de(struct Wave *wave) {
 /** Zero the object's vector fields and reset the scale field to the default. */
 void func_80239D90_de(void *arg0) {
     struct RecordRecAt18 *o = arg0;
-    struct Channel *v0;
-    struct Channel *v1;
-    struct Channel *v2;
+    struct Channel *channel0;
+    struct Channel *channel1;
+    struct Channel *channel2;
     f32 diag;
 
     diag = D_800C3570_de;
-    v0 = &o->channels[0];
+    channel0 = &o->channels[0];
     o->triple.x = 0;
     o->triple.y = 0;
     o->triple.z = 0;
     o->value = diag;
-    v0->level = 0;
-    v0->state[0] = 0;
-    v0->state[1] = 0;
-    v0->state[2] = 0;
-    v1 = &o->channels[1];
-    v2 = &o->channels[2];
-    v1->level = 0;
-    v1->state[0] = 0;
-    v1->state[1] = 0;
-    v1->state[2] = 0;
-    v2->level = 0;
-    v2->state[0] = 0;
-    v2->state[1] = 0;
-    v2->state[2] = 0;
+    channel0->level = 0;
+    channel0->state[0] = 0;
+    channel0->state[1] = 0;
+    channel0->state[2] = 0;
+    channel1 = &o->channels[1];
+    channel2 = &o->channels[2];
+    channel1->level = 0;
+    channel1->state[0] = 0;
+    channel1->state[1] = 0;
+    channel1->state[2] = 0;
+    channel2->level = 0;
+    channel2->state[0] = 0;
+    channel2->state[1] = 0;
+    channel2->state[2] = 0;
 }
 
 /* Configures a three-channel record: copies a by-value three-word block to offset 8 and a value to

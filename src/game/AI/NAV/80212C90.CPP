@@ -8,11 +8,11 @@
 #include "AI/NAV/80212C90.H"
 
 void func_80212C90_de(AiTarget *arg0) {
-    AiController *temp_s0;
-    temp_s0 = arg0->player->controller;
-    ((CloseAttackBrain *)temp_s0)->state = 0;
-    func_80209988_de(temp_s0);
-    temp_s0->unk2FC = 0;
+    AiController *controller;
+    controller = arg0->player->controller;
+    ((CloseAttackBrain *)controller)->state = 0;
+    func_80209988_de(controller);
+    controller->unk2FC = 0;
 }
 
 extern s32 func_80209874_de(void *, s32);
@@ -28,20 +28,20 @@ extern char D_80145040;
 
 
 void func_80212CC4_de(AiTarget *arg0) {
-    AiController *rec;
+    AiController *controller;
     void *v0;
 
-    rec = arg0->player->controller;
+    controller = arg0->player->controller;
     v0 = func_8022A83C_de(&D_80145040);
-    if (v0 == 0 || v0 != (void *)rec->player) {
-        func_80209874_de(rec, 2);
+    if (v0 == 0 || v0 != (void *)controller->player) {
+        func_80209874_de(controller, 2);
         return;
     }
-    rec = arg0->player->controller;
-    func_80211020_de(rec);
-    func_80209948_de(rec, rec->mode);
-    Nav_SteerAlongRoute(rec);
-    func_80208EB0_de(rec);
+    controller = arg0->player->controller;
+    func_80211020_de(controller);
+    func_80209948_de(controller, controller->mode);
+    Nav_SteerAlongRoute(controller);
+    func_80208EB0_de(controller);
 }
 
 #if defined(VERSION_EU_X)

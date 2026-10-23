@@ -117,46 +117,46 @@ void func_80239FDC_de(void *arg0) {
     }
 }
 
-void func_8023A114_de(void *arg0, s32 arg1) {
+void func_8023A114_de(void *arg0, s32 count) {
     MessageBuffer *buffer = arg0;
-    s32 *ret;
-    s32 scaled;
-    s32 first;
+    s32 *allocation;
+    s32 bytes;
+    s32 firstBlock;
 
-    scaled = arg1 * 0xED8;
-    buffer->count = arg1;
-    ret = func_8025343C_de(0, scaled, 0x23, (char *)&D_800C32D0_de + 4);
-    buffer->allocation = ret;
-    first = *ret;
-    buffer->first = first;
-    func_802A001C_de(first, 0, scaled);
+    bytes = count * 0xED8;
+    buffer->count = count;
+    allocation = func_8025343C_de(0, bytes, 0x23, (char *)&D_800C32D0_de + 4);
+    buffer->allocation = allocation;
+    firstBlock = *allocation;
+    buffer->first = firstBlock;
+    func_802A001C_de(firstBlock, 0, bytes);
 }
 
-void func_8023A190_de(void *arg0, int arg1) {
+void func_8023A190_de(void *arg0, int count) {
     struct ScreenMessageOwner *owner = arg0;
-    int *ret;
-    int scaled;
-    int first;
-    scaled = arg1 << 6;
-    owner->storage.count = arg1;
-    ret = func_8025343C_de(0, scaled, 0x23, &D_800C32DC_de);
-    owner->storage.allocation = ret;
-    first = *ret;
-    owner->storage.first = first;
-    func_802A001C_de(first, 0, scaled);
+    int *allocation;
+    int bytes;
+    int firstBlock;
+    bytes = count << 6;
+    owner->storage.count = count;
+    allocation = func_8025343C_de(0, bytes, 0x23, &D_800C32DC_de);
+    owner->storage.allocation = allocation;
+    firstBlock = *allocation;
+    owner->storage.first = firstBlock;
+    func_802A001C_de(firstBlock, 0, bytes);
 }
 
-void func_8023A1F4_de(struct ScreenMessageOwner *arg0) {
-    s32 temp_a1;
+void func_8023A1F4_de(struct ScreenMessageOwner *owner) {
+    s32 allocation;
 
-    arg0->state = 1;
-    func_8025E3F0_de((s32)&arg0->rendering);
+    owner->state = 1;
+    func_8025E3F0_de((s32)&owner->rendering);
     func_80253908_de(0);
-    temp_a1 = arg0->allocation;
-    if (temp_a1 != 0) {
-        func_80253838_de(0, temp_a1);
-        arg0->allocation = 0;
-        arg0->allocationSize = 0;
-        arg0->count = 0;
+    allocation = owner->allocation;
+    if (allocation != 0) {
+        func_80253838_de(0, allocation);
+        owner->allocation = 0;
+        owner->allocationSize = 0;
+        owner->count = 0;
     }
 }

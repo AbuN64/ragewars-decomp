@@ -56,12 +56,12 @@ extern void *func_8022A83C_de(char *);
 extern void func_80209948_de(s32 *, s32);
 
 
-void func_802127F4_de(void *arg0) {
-    void *temp_s0;
-    temp_s0 = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8))->unk1454);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) temp_s0))->unk220) = 0;
-    func_80209988_de(temp_s0);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) temp_s0))->unk2FC) = 0;
+void func_802127F4_de(void *actor) {
+    void *brain;
+    brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
+    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk220) = 0;
+    func_80209988_de(brain);
+    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
 }
 
 void func_80212828_de(CloseAttackActor *arg0)
@@ -102,8 +102,8 @@ void func_80212828_de(CloseAttackActor *arg0)
 }
 
 /** Reset the inner record via func_80209988_de, then override two of its fields. */
-void func_8021290C_de(LevelActor *arg0) {
-    Shared_ActorView *level1 = arg0->controller;
+void func_8021290C_de(LevelActor *actor) {
+    Shared_ActorView *level1 = actor->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
     func_80209988_de(inner);
@@ -149,8 +149,8 @@ void func_80212948_de(void *arg0)
 }
 
 /** Reset the inner record's flag fields, then clear its state via func_80209988_de. */
-void func_80212A40_de(LevelActor *arg0) {
-    Shared_ActorView *level1 = arg0->controller;
+void func_80212A40_de(LevelActor *actor) {
+    Shared_ActorView *level1 = actor->controller;
     CloseAttackBrain *inner = level1->owner;
     inner->state = 0;
     inner->destination = -1;
@@ -201,12 +201,12 @@ void func_80212A7C_de(Shared_Actor *arg0)
     }
 }
 
-void func_80212BD0_de(void *arg0) {
-    void *temp_s0;
-    temp_s0 = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) arg0))->unk1D8))->unk1454);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) temp_s0))->unk220) = 0;
-    func_80209988_de(temp_s0);
-    (((struct Brain_func_80212D78_eu_x *) ((s8 *) temp_s0))->unk2FC) = 0;
+void func_80212BD0_de(void *actor) {
+    void *brain;
+    brain = (((struct ObjRecAt1454V2 *) ((s8 *) ((struct ObjRecAt1D8V1 *) ((s8 *) actor))->unk1D8))->unk1454);
+    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk220) = 0;
+    func_80209988_de(brain);
+    (((struct Brain_func_80212D78_eu_x *) ((s8 *) brain))->unk2FC) = 0;
 }
 
 void func_80212C04_de(void *arg0) {

@@ -1,17 +1,17 @@
 #include "COMMON/NODERECAT1C.H"
 
-void func_802BB870_de(void **arg0, void *arg1) {
-    void **a0;
-    void *v0;
+void func_802BB870_de(void **listHead, void *node) {
+    void **link;
+    void *current;
 
-    a0 = arg0;
-    v0 = *a0;
-    while (v0 != 0) {
-        if (v0 != arg1) {
-            a0 = (void **)v0;
-            v0 = *a0;
+    link = listHead;
+    current = *link;
+    while (current != 0) {
+        if (current != node) {
+            link = (void **)current;
+            current = *link;
         } else {
-            *a0 = *(void **)v0;
+            *link = *(void **)current;
             return;
         }
     }

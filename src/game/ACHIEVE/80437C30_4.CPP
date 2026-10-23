@@ -29,7 +29,7 @@ extern Handler8043905C D_800E583C;
 
 
 
-s32 func_80438E7C_de(ActorDefinitionHeader *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_80438E7C_de(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3, s32 arg4) {
     Handler8043905C *entry;
     s32 index;
     s32 wildcard;
@@ -41,11 +41,11 @@ s32 func_80438E7C_de(ActorDefinitionHeader *arg0, s32 arg1, s32 arg2, s32 arg3, 
         entry = &D_800E583C;
         index = 0;
         do {
-            if (D_800E5834[index].value == arg1) {
-                actor_kind = arg0->character;
+            if (D_800E5834[index].value == event) {
+                actor_kind = actor->character;
                 table_kind = D_800E5838[index].value;
                 if ((table_kind == actor_kind) || (table_kind == wildcard)) {
-                    return (*entry)(arg0, arg1, arg2, arg3, arg4);
+                    return (*entry)(actor, event, arg2, arg3, arg4);
                 }
             }
             entry += 3;
