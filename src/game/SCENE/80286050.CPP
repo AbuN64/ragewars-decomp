@@ -53,7 +53,7 @@ void func_80286080_de(void *arg0) {
         manager = &D_801379C0;
         func_802A56FC_de(manager);
         func_8022A170_de(&D_80145040);
-        func_80287F18_de(state);
+        Engine_UpdateActorVisibility(state);
         func_80288470_de(state);
         func_8028D61C_de(state);
 

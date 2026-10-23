@@ -270,18 +270,13 @@ void func_8028798C_de(Shared_World *world, void ***handle) {
 INCLUDE_ASM("span_1000", func_8028798C_de);
 #endif
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("span_1000", func_80287F18_de);
-#endif
-
-#ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-#include "COMMON/SHARED_GAMESLOT.H"
+#include "COMMON/SHARED_OPTIONSSCREEN.H"
 #include "COMMON/OBJRECAT5F14.H"
 
-extern char D_80145040[];
+extern Shared_MenuData D_80145040;
 extern Shared_Game D_801462C8;
 extern Box D_800FF208;
 extern Box D_801031F0;
@@ -296,36 +291,47 @@ extern f32 func_8023946C_de(void *camera, CVector3 *position);
 extern s32 func_80296B74_de(void *planes, void *bounds);
 extern void func_80262E88_de(struct SceneEffectPool *scene, void *world);
 
+typedef struct SceneVisibilitySettings {
+    u32 mask;
+    u8 reserved04[0x11];
+    u8 local;
+} SceneVisibilitySettings;
+
 /* Whether the actor's bounding box overlaps the box. */
-static inline s32 overlaps(LevelActor *actor, Box *box) {
-    return actor->bounds.min.x < box->max.x && box->min.x < actor->bounds.max.x &&
-           actor->bounds.min.z < box->max.z && box->min.z < actor->bounds.max.z &&
-           actor->bounds.min.y < box->max.y && box->min.y < actor->bounds.max.y;
-}
+#define ACTOR_OVERLAPS(actor, box) ((box)->x > (actor)->bounds.min.x && \
+    ((Box *)((u8 *)(box) - 12))->min.x < (actor)->bounds.max.x && \
+    (box)->z > (actor)->bounds.min.z && \
+    ((Box *)((u8 *)(box) - 12))->min.z < (actor)->bounds.max.z && \
+    (box)->y > (actor)->bounds.min.y && \
+    ((Box *)((u8 *)(box) - 12))->min.y < (actor)->bounds.max.y)
 
 /* Per-frame visibility scan over the world's actors. Rebuilds the lists of registered, interactive, mover, flagged and
  * per-model actors from the actors that are visible this frame (inside the clip box and the camera frustum, or within
  * range for kind 14), copies each actor's visible bit into bit 15 of its flags, then culls the scene's effects. */
-void func_80287F18_de(Shared_World *world) {
+
+void Engine_UpdateActorVisibility(Shared_World *world) {
+    SceneVisibilitySettings *settings;
     LevelActor *actors;
     LevelActor *actor;
     GameplayCamera *camera;
     ActorDefinitionHeader *definition;
-    u32 mask;
-    s32 limit;
+    CVector3 *clipBox;
+    CVector3 *rangeBox;
     s32 end;
+    u32 mask;
     s32 i;
     s32 visible;
     s32 cull;
 
-    mask = D_801462C8.sceneMask;
+    settings = (SceneVisibilitySettings *)&D_80145040.game.sceneMask;
+    mask = settings->mask;
     world->registeredCount = 0;
     world->kind1Count = 0;
     world->flaggedCount = 0;
-    func_8022A1FC_de(D_80145040, world);
+    func_8022A1FC_de((u8 *)settings - 0x1290, world);
     camera = 0;
-    if (D_801462C8.local == 0) {
-        camera = *(GameplayCamera **)(D_80145040 + 0x68);
+    if (settings->local == 0) {
+        camera = *(GameplayCamera **)((u8 *)settings - 0x1228);
     }
     cull = 0;
     if (func_80245798_de() == 0) {
@@ -335,6 +341,8 @@ void func_80287F18_de(Shared_World *world) {
     end = world->actorCount;
     actors = (LevelActor *)world->actors;
     for (; i < end; i++) {
+        clipBox = &D_800FF208.max;
+        rangeBox = &D_801031F0.max;
         actor = &actors[i];
         if (!(actor->flags & 0x100)) {
             continue;
@@ -342,23 +350,32 @@ void func_80287F18_de(Shared_World *world) {
         definition = actor->definition;
         visible = 0;
         if (definition->gate & mask) {
-            if (cull && !(actor->flags & 2) && actor->animationChanged == 0 && !(actor->flags & 0x400) &&
-                definition->kind != 3 && (definition->kind == 14 || !func_8024D160_de(actor))) {
-                if (definition->kind != 14 && !overlaps(actor, &D_800FF208)) {
-                    visible = 0;
-                } else if (definition->kind == 14) {
-                    visible = func_8023946C_de(camera, &actor->position0) < D_800C520C;
-                } else if (camera != 0) {
-                    visible = func_80296B74_de(camera->clipPlanes, &actor->bounds);
-                } else {
+            if (cull && !(actor->flags & 2) && actor->animationChanged == 0 &&
+                !(actor->flags & 0x400) && definition->kind != 3) {
+                if (definition->kind == 14) {
+                    goto distance_visible;
+                }
+                if (!func_8024D160_de(actor)) {
+                    if (ACTOR_OVERLAPS(actor, clipBox)) {
+                        if (camera != 0) {
+                            visible = func_80296B74_de(camera->clipPlanes, &actor->bounds);
+                        } else {
+                            visible = 1;
+                        }
+                    }
+                    goto visibility_ready;
+                }
+            }
+            if (definition->kind == 14) {
+            distance_visible:
+                if (func_8023946C_de(camera, &actor->position0) < D_800C520C) {
                     visible = 1;
                 }
-            } else if (definition->kind == 14) {
-                visible = func_8023946C_de(camera, &actor->position0) < D_800C520C;
             } else {
-                visible = overlaps(actor, &D_801031F0);
+                visible = ACTOR_OVERLAPS(actor, rangeBox);
             }
         }
+    visibility_ready:
         if (func_80245798_de() && D_800CD6E0_de) {
             if (!(definition->gate & 0x200)) {
                 visible = 0;
@@ -371,42 +388,41 @@ void func_80287F18_de(Shared_World *world) {
         } else {
             actor->flags &= ~0x8000;
         }
-        if (!visible) {
+        if (visible) {
+            actor->flags |= 0x80000000;
+            if (definition->kind == 14) {
+                continue;
+            }
+            func_8024B8C4_de(actor);
+            if (func_8024D160_de(actor) && world->interactiveCount != 0x200) {
+                world->interactive[world->interactiveCount++] = actor;
+            }
+            if (func_8024E1B4_de(actor) && world->moverCount != 0x80) {
+                world->movers[world->moverCount++] = actor;
+            }
+            if (world->registeredCount < 0x80) {
+                world->registered[world->registeredCount++] = actor;
+            }
+            if (world->kind1Count < 0x40 && actor->definition->kind == 1) {
+                world->kind1[world->kind1Count] = actor;
+                /* byte 0x23E of the word actionReady holds the slot */
+                ((u8 *)&actor->actionReady)[2] = world->kind1Count++;
+            }
+            if (world->flaggedCount < 0x20 && (actor->flags & 2)) {
+                world->flagged[world->flaggedCount++] = actor;
+            }
+            if (world->kind5Count < 0x10 && actor->definition->kind == 5) {
+                world->kind5[world->kind5Count++] = actor;
+            }
+            if (world->model64FCount < 0x20 && actor->type == 0x64F) {
+                world->model64F[world->model64FCount++] = actor;
+            }
+            if (actor->type == 0x64D && world->model64DCount < 4) {
+                world->model64D[world->model64DCount++] = actor;
+            }
+        } else {
             actor->flags &= 0x7FFFFFFF;
             actor->flags &= ~0x200;
-            continue;
-        }
-        actor->flags |= 0x80000000;
-        if (definition->kind == 14) {
-            continue;
-        }
-        func_8024B8C4_de(actor);
-        if (func_8024D160_de(actor) && world->interactiveCount != 0x200) {
-            world->interactive[world->interactiveCount++] = actor;
-        }
-        if (func_8024E1B4_de(actor) && world->moverCount != 0x80) {
-            world->movers[world->moverCount++] = actor;
-        }
-        if (world->registeredCount < 0x80) {
-            world->registered[world->registeredCount++] = actor;
-        }
-        if (world->kind1Count < 0x40 && actor->definition->kind == 1) {
-            world->kind1[world->kind1Count] = actor;
-            /* byte 0x23E of the word actionReady holds the slot */
-            ((u8 *)&actor->actionReady)[2] = world->kind1Count;
-            world->kind1Count++;
-        }
-        if (world->flaggedCount < 0x20 && (actor->flags & 2)) {
-            world->flagged[world->flaggedCount++] = actor;
-        }
-        if (world->kind5Count < 0x10 && actor->definition->kind == 5) {
-            world->kind5[world->kind5Count++] = actor;
-        }
-        if (world->model64FCount < 0x20 && actor->type == 0x64F) {
-            world->model64F[world->model64FCount++] = actor;
-        }
-        if (actor->type == 0x64D && world->model64DCount < 4) {
-            world->model64D[world->model64DCount++] = actor;
         }
     }
     func_80262E88_de((struct SceneEffectPool *)world->effectPool, world);
@@ -415,4 +431,4 @@ void func_80287F18_de(Shared_World *world) {
         world->kind1Cursor = 0;
     }
 }
-#endif
+#undef ACTOR_OVERLAPS
