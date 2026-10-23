@@ -303,152 +303,128 @@ void func_80299CF0_de(struct NodeRecAt12 *, s32, s32, s32, s32, s32);
 void func_8029973C_de(void);
 void func_80298368_de(s32);
 
-void func_8029764C_de(s32 param_1, s32 param_2, s32 param_3, void *param_4, s32 param_5) {
-    /* FAKEMATCH: Published void interface discards native callback result. */
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-    struct ScreenManager *table = D_8014D080;
-    s32 uVar13 = 0;
-    s32 (*pcCallback)(s32, s32, s32, s32);
-    MenuElementHandler pcHandler;
-    s32 iVar6;
-    s32 iVar10;
-    s32 *piVar11;
-    s32 uVar9;
-    s32 local_res8;
-    s32 local_48;
-    s32 iVar14;
-    u32 uVar7;
-    int bVar1;
-    int bVar2;
-    int bVar3;
-    Entry_func_802991D4_de *record;
-    Element *iVar8;
-
-    pcCallback = table->callback;
-    piVar11 = &table->handled;
-    if (pcCallback != 0) {
-        uVar9 = table->handled;
-        table->handled = 0;
-        uVar13 = pcCallback(param_2, param_3, (s32)param_4, param_5);
-        iVar6 = table->handled;
-        table->handled = uVar9;
-        if (iVar6 == 1) {
+/* 123/250 aligned edits; remaining: event-loop scheduling and register allocation. */
+static inline void Screen_DispatchChildren(Element *element, s32 event, s32 value, s32 argument, s32 context) {
+    ScreenManager *manager;
+    s32 saved;
+    s32 *handled;
+    if (element != 0) {
+        manager = D_8014D080;
+        handled = &manager->handled;
+        saved = manager->handled;
+        manager->handled = 0;
+        if (element->left != 0) {
+            func_80299CF0_de(element->left, event, value, argument, context, 1);
+        }
+        if (manager->handled != 0) {
+            *handled = saved;
             return;
         }
-    }
-    local_48 = table->lowIndex;
-    iVar6 = table->current;
-    if (local_48 <= iVar6) {
-        bVar1 = 0xfff < (u32)param_2 - 0x1000;
-        bVar2 = 0x1ff < (u32)param_2 - 0xe00;
-        bVar3 = (u32)param_2 - 0x4000 < 0x4000;
-        iVar14 = local_48 * 0x1c;
-        local_res8 = param_3;
-        do {
-            if (((int)param_2 < 0xe03) && (0xe00 < (int)param_2)) {
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                record = (Entry_func_802991D4_de *)((char *)table->screens + iVar14);
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                local_res8 = (s32)((char *)record + 0xc);
-            }
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-            record = (Entry_func_802991D4_de *)((char *)table->screens + iVar14);
-            iVar8 = record->primary;
-            pcHandler = iVar8->handler;
-            if (pcHandler != 0) {
-                iVar10 = *piVar11;
-                *piVar11 = 0;
-                uVar13 = pcHandler(iVar8, param_2, local_res8, (s32)param_4, param_5);
-                if (*piVar11 == 1) {
-                    *piVar11 = iVar10;
-                    return;
-                }
-                *piVar11 = iVar10;
-            }
-            if (param_1 != 0) {
-                D_80146E18 = record->owner;
-                iVar10 = *piVar11;
-                *piVar11 = 0;
-                if (iVar8 != 0) {
-                    uVar9 = table->handled;
-                    table->handled = 0;
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                    if (*(s32 *)((char *)iVar8 + 4) != 0) {
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                        func_80299CF0_de(*(struct NodeRecAt12 **)((char *)iVar8 + 4), param_2, local_res8, (s32)param_4,
-                                         param_5, 1);
-                    }
-                    if (table->handled == 0) {
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                        if (*(s32 *)((char *)iVar8 + 8) != 0) {
-    /* FAKEMATCH: Native scalar child links lack named Element fields. */
-                            func_80299CF0_de(*(struct NodeRecAt12 **)((char *)iVar8 + 8), param_2, local_res8,
-                                             (s32)param_4, param_5, 1);
-                        }
-                        table->handled = uVar9;
-                    } else {
-                        table->handled = uVar9;
-                    }
-                }
-                D_80146E18 = -1;
-                if (*piVar11 == 1) {
-                    *piVar11 = iVar10;
-                    return;
-                }
-                *piVar11 = iVar10;
-            }
-            uVar7 = 0;
-            if (0xdff < (u32)param_2) {
-                uVar7 = 1;
-                if (bVar1) {
-                    uVar7 = 2;
-                    if (bVar2) {
-                        uVar7 = 0;
-                        if (bVar3) {
-                            uVar7 = 3;
-                        }
-                    }
-                }
-            }
-            if (uVar7 == 0) {
-                switch ((u32)param_2 - 1) {
-                case 0:
-                    if ((iVar8->flags & 0x10) != 0) {
-                        if (iVar8->linked_id != 0) {
-                            func_8029973C_de();
-                            func_80298368_de(iVar8->linked_id);
-                        }
-                    }
-                    break;
-                case 1:
-                    if (1 <= table->current) {
-                        func_802998A8_de();
-                    }
-                    break;
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                    if ((s32)param_4 == 1) {
-                        func_80296CD0_de(param_2);
-                    }
-                    break;
-                case 0xe:
-                    func_8040E928_de(iVar8, 1);
-                    break;
-                case 0xf:
-                    func_8040E928_de(iVar8, 0);
-                    break;
-                default:
-                    break;
-                }
-            }
-            uVar13 = 0;
-            iVar14 = iVar14 + 0x1c;
-            local_48 = local_48 + 1;
-        } while (local_48 <= iVar6);
+        if (element->right != 0) {
+            func_80299CF0_de(element->right, event, value, argument, context, 1);
+        }
+        *handled = saved;
     }
 }
+
+static inline s32 Screen_DispatchStandardEvent(Element *element, s32 event, s32 argument, s32 systemEvents, s32 screenEvents, s32 userEvents) {
+    s32 result = 0;
+    s32 category = result;
+    if ((u32)event >= 0xE00U) {
+        category = 1;
+        if (!systemEvents) {
+            category = 2;
+            if (!screenEvents) {
+                category = result;
+                if (userEvents) category = 3;
+            }
+        }
+    }
+    switch (category) {
+    case 0:
+        switch (event) {
+        case 5: case 6: case 7: case 8:
+            if (argument == 1) func_80296CD0_de(event);
+            break;
+        case 1:
+            if (element->flags & 0x10) {
+                if (element->linked_id != 0) {
+                    func_8029973C_de();
+                    func_80298368_de(element->linked_id);
+                }
+            }
+            break;
+        case 2:
+            if (D_8014D080->current > 0) func_802998A8_de();
+            break;
+        case 15: func_8040E928_de(element, 1); break;
+        case 16: func_8040E928_de(element, 0); break;
+        }
+        break;
+    case 1: result = 0; break;
+    case 2: result = 0; break;
+    case 3: result = 0; break;
+    }
+    return result;
+}
+
+s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, s32 context) {
+    s32 first, last;
+    s32 systemEvents, screenEvents, userEvents;
+    s32 result = 0;
+    s32 saved, consumed;
+    s32 *handled;
+    ScreenManager *manager = D_8014D080;
+    Element *element;
+    MenuElementHandler handler;
+    handled = &manager->handled;
+    if (manager->callback != 0) {
+        saved = manager->handled;
+        manager->handled = 0;
+        result = manager->callback(event, value, (s32)argument, context);
+        consumed = manager->handled;
+        manager->handled = saved;
+        if (consumed == 1) return result;
+    }
+    first = D_8014D080->lowIndex;
+    last = D_8014D080->current;
+    if (first > last) return result;
+    systemEvents = (u32)event - 0x1000U < 0x1000U;
+    screenEvents = (u32)event - 0xE00U < 0x200U;
+    userEvents = (u32)event - 0x4000U < 0x4000U;
+    do {
+        if (event < 0xE03 && event > 0xE00) {
+            value = (s32)&D_8014D080->screens[first].data;
+        }
+        element = D_8014D080->screens[first].primary;
+        handler = element->handler;
+        if (handler != 0) {
+            saved = *handled;
+            *handled = 0;
+            result = handler(element, event, value, (s32)argument, context);
+            if (*handled == 1) {
+                *handled = saved;
+                return result;
+            }
+            *handled = saved;
+        }
+        if (recurse != 0) {
+            D_80146E18 = D_8014D080->screens[first].owner;
+            saved = *handled;
+            *handled = 0;
+            Screen_DispatchChildren(element, event, value, (s32)argument, context);
+            D_80146E18 = -1;
+            if (*handled == 1) {
+                *handled = saved;
+                return result;
+            }
+            *handled = saved;
+        }
+        result = Screen_DispatchStandardEvent(element, event, (s32)argument, systemEvents, screenEvents, userEvents);
+        first++;
+    } while (first <= last);
+    return result;
+}
 #else
-INCLUDE_ASM("span_1000", func_8029764C_de);
+INCLUDE_ASM("span_1000", DispatchScreenRangeEvent);
 #endif

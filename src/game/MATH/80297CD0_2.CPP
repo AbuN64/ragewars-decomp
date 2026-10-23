@@ -49,7 +49,7 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
         saved=*handled;
         *handled=0;
         /* This dispatch passes a scalar event word as its fourth ABI argument. */
-        ((void (*)(s32,s32,s32,s32,s32))func_8029764C_de)(1,event,value,amount,context);
+        ((void (*)(s32,s32,s32,s32,s32))DispatchScreenRangeEvent)(1,event,value,amount,context);
         *handled=saved;
         break;
     case 1:

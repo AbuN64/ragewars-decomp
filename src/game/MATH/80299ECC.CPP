@@ -151,7 +151,7 @@ void func_80298FE8_de(void) {
     }
     delta = now - D_800CD8E0;
     D_800CD8E0 = now;
-    func_8029764C_de(0, 0xE0A, 0, &args, delta);
+    DispatchScreenRangeEvent(0, 0xE0A, 0, &args, delta);
 
     index = D_8014D080->lowIndex;
     if (D_8014D080->current >= index) {
@@ -167,7 +167,7 @@ void func_80298FE8_de(void) {
             offset += 0x1C;
         } while (D_8014D080->current >= index);
     }
-    func_8029764C_de(0, 0xE0A, 1, 0, delta);
+    DispatchScreenRangeEvent(0, 0xE0A, 1, 0, delta);
     D_8014D0A0 = 0;
 }
 
