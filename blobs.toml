@@ -34934,6 +34934,15 @@ stored_size = 23
 rom."us" = [[0x1b5a50, 0x1b5a67]]
 evidence = [{ artifact = "stale-motion-enum.json", sha256 = "4d1cde634cccc6c65a21041b7e08ac6932c197b5d11006f45cdff33499036a30", pointer = "/rows/0" }]
 
+[blob."stale-data.us.pak-object-metadata"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 4288
+rom."us" = [[0x101834, 0x1028f4]]
+evidence = [{ artifact = "stale-pak-object-metadata.json", sha256 = "38b9e242efb1a92db08cd227404ac927af0ab301db042f3d877cd25c7e81297b", pointer = "/rows/0" }]
+
 [blob."stale-text.eu-x.cstring.142d48"]
 type = "stale-data"
 format = "c-string"
