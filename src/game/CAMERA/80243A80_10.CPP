@@ -25,9 +25,9 @@ void func_80245B74_de(s32 unused) {
 void func_80245BC0_de(void) {
     if (D_800E2830->closed == 0) {
         {
-            void *temp_a1 = D_800E2830->owner;
-            if (temp_a1 != 0) {
-                func_80253838_de(0, temp_a1);
+            void *owner = D_800E2830->owner;
+            if (owner != 0) {
+                func_80253838_de(0, owner);
             }
         }
         {

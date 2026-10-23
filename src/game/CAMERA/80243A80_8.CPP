@@ -21,14 +21,14 @@ extern f32 D_800C37D0_de;
 
 void func_802456A0_de(void) {
     if (func_80245784_de() != 0) {
-        s32 temp_a1;
+        s32 owner;
         Shared_MenuContext *record;
 
         func_80245B74_de(1);
         func_80245BC0_de();
-        temp_a1 = (s32)D_800E2830->owner;
-        if (temp_a1 != 0) {
-            func_80253838_de(0, temp_a1);
+        owner = (s32)D_800E2830->owner;
+        if (owner != 0) {
+            func_80253838_de(0, owner);
         }
         record = D_800E2830;
         record->owner = 0;
@@ -63,12 +63,12 @@ int func_80245784_de(void) {
 
 int func_80245798_de(void) {
     Shared_MenuContext *record = D_800E2830;
-    float temp_f1;
+    float time;
     int var_a0 = 0;
 
     if (record->active != 0) {
-        temp_f1 = record->time;
-        if (record->start <= temp_f1 && temp_f1 <= record->end) {
+        time = record->time;
+        if (record->start <= time && time <= record->end) {
             var_a0 = 1;
         }
     }

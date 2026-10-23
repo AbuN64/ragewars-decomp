@@ -75,18 +75,18 @@ extern void func_8023E838_de(void *arg0);
 
 extern void func_8023E45C_de(void *arg0);
 
-s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
+s32 func_80243A90_de(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *arg4) {
     s32 func_8023D380_de();
     Func80243A80Frame frame;
     f32 temp_f0;
     f32 temp_f0_2;
-    f32 temp_f20;
-    f32 temp_f21;
+    f32 high;
+    f32 count;
     f32 temp_f22;
     f32 temp_f22_2;
     f32 var_f2;
     s32 temp_v0;
-    s32 temp_v1_3;
+    s32 flags;
     s32 var_a1; 
     s32 var_a1_3;
     s32 var_s0;
@@ -96,7 +96,7 @@ s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
     s32 var_v1_2;
     s32 var_v1_3;
     s32 var_v1_4;
-    u16 *temp_s0;
+    u16 *surface;
     u32 temp_a0;
     u32 temp_v1;
     u32 temp_v1_2;
@@ -110,40 +110,40 @@ s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
     f32 savedY; 
 
     func_8023EBD4_de(&frame.sp18);
-    __builtin_memcpy(&D_80103FCC->x, &arg0->room, 12);
-    arg0->flags = (u32) (arg0->flags & ~0x18);
-    frame.sp18 = arg0;
+    __builtin_memcpy(&D_80103FCC->x, &actor->room, 12);
+    actor->flags = (u32) (actor->flags & ~0x18);
+    frame.sp18 = actor;
     var_a1 = 0;
-    if (arg0->type == 1) {
-        var_a1 = (u32) var_a1 < (arg0->status & 0x300000);
+    if (actor->type == 1) {
+        var_a1 = (u32) var_a1 < (actor->status & 0x300000);
     }
     frame.sp1C = var_a1;
-    temp_f22 = Sound_GetActorReach(arg0);
-    temp_f21 = func_8024D398_de(arg0);
-    temp_f20 = Particle_GetActorHeight(arg0);
-    func_8023E690_de(&frame.sp18, temp_f22, temp_f21, temp_f20, func_8024E420_de(arg0));
-    *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&arg0->x;
+    temp_f22 = Sound_GetActorReach(actor);
+    count = func_8024D398_de(actor);
+    high = Particle_GetActorHeight(actor);
+    func_8023E690_de(&frame.sp18, temp_f22, count, high, func_8024E420_de(actor));
+    *(Func80243A80Vec3 *)&frame.sp5C = *(Func80243A80Vec3 *)&actor->x;
     __builtin_memcpy(&frame.sp68, &pos, 12);
-    __builtin_memcpy(&frame.sp8C, &arg0->room, 12);
-    frame.spC4 = arg0->collision;
+    __builtin_memcpy(&frame.sp8C, &actor->room, 12);
+    frame.spC4 = actor->collision;
     var_v1 = 0;
-    if ((*arg4 & 0x200) && (arg0->velY <= 0.0f)) {
+    if ((*arg4 & 0x200) && (actor->velY <= 0.0f)) {
         var_v1 = 1;
     }
     frame.sp3C = var_v1;
     frame.sp38 = ((u32) *arg4 >> 1) & 1;
-    frame.sp40 = (((u32) arg0->flags >> 2) ^ 1) & 1;
+    frame.sp40 = (((u32) actor->flags >> 2) ^ 1) & 1;
     frame.sp44 = 1;
-    frame.sp54 = arg0->flags;
+    frame.sp54 = actor->flags;
     frame.sp34 = frame.sp28 * D_800C3790_de;
     frame.sp50 = ((u32) *arg4 >> 0x13) & 1;
     frame.sp58 = arg4;
     func_8023CFE0_de(&frame.sp18);
     if ((frame.sp3C != 0) && (frame.sp54 & 7) && !(frame.sp54 & 0x2000)) {
-        __builtin_memcpy(&frame.sp210, &arg0->contactX, 12);
-        frame.sp1E0 = arg0->x;
-        frame.sp1E4 = arg0->groundY;
-        frame.sp1E8 = arg0->z;
+        __builtin_memcpy(&frame.sp210, &actor->contactX, 12);
+        frame.sp1E0 = actor->x;
+        frame.sp1E4 = actor->groundY;
+        frame.sp1E8 = actor->z;
         func_8023E6EC_de(&frame.sp18, &frame.sp1C8);
     }
     if ((frame.sp1C != 0) || (frame.sp5C != frame.sp68) || (frame.sp60 != frame.sp6C) || (var_v0 = 0, (frame.sp64 != frame.sp70))) {
@@ -153,12 +153,12 @@ s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
         }
         D_800CB414_de = var_v1_2;
         if ((arg4 != &D_80100338) && (arg4 != &D_801001D0) && (arg4 != &D_80103FD0) && (arg4 != &D_80100170)) {
-            arg0->attached = 0;
+            actor->attached = 0;
             frame.sp54 &= ~0x7B;
         }
         frame.sp54 &= ~0x80;
-        if (arg0->type == 1) {
-            frame.sp2C8 = arg0->angle;
+        if (actor->type == 1) {
+            frame.sp2C8 = actor->angle;
         } else {
             frame.sp2C8 = 0.0f;
         }
@@ -171,7 +171,7 @@ s32 func_80243A90_de(Func80243A80Actor *arg0, Func80243A80Vec3 pos, u32 *arg4) {
         } else if (temp_v1 & 0x800) {
             var_s0 = 3;
         } else {
-            if (arg0->type == 1) var_s0 = 4;
+            if (actor->type == 1) var_s0 = 4;
             else var_s0 = 1;
         }
         var_v1_3 = var_s0;
@@ -223,8 +223,8 @@ block_42:
         } else if (var_s0 != 0) {
             goto loop_34;
         }
-        __builtin_memcpy(&arg0->x, &frame.sp5C, 12);
-        __builtin_memcpy(&arg0->room, &frame.sp8C, 12);
+        __builtin_memcpy(&actor->x, &frame.sp5C, 12);
+        __builtin_memcpy(&actor->room, &frame.sp8C, 12);
         frame.sp54 &= ~4;
         if (*arg4 & 0x40000) {
             __builtin_memcpy(&frame.sp68, &frame.sp5C, 12);
@@ -241,10 +241,10 @@ block_42:
             frame.sp2A8 = temp_v1_2 | (*arg4 & 0x180008);
             frame.sp50 = 0;
             func_8023E838_de(&frame.sp18);
-            arg0->contactX = 0.0f;
-            arg0->contactZ = 0.0f;
-            arg0->contactBits = D_800C379C_de;
-            arg0->groundY = (f32) (arg0->y - dropDistance);
+            actor->contactX = 0.0f;
+            actor->contactZ = 0.0f;
+            actor->contactBits = D_800C379C_de;
+            actor->groundY = (f32) (actor->y - dropDistance);
 loop_49:
             if (func_8023D158_de((s8 *) &frame.sp18) != 0) {
                 if (frame.spD0 == 7) {
@@ -252,18 +252,18 @@ loop_49:
                 }
                 func_8023D380_de(&frame.sp18);
                 var_a1_3 = 0;
-                arg0->groundY = frame.sp19C;
-                __builtin_memcpy(&arg0->contactX, &frame.sp110, 12);
-                actorY = arg0->y;
+                actor->groundY = frame.sp19C;
+                __builtin_memcpy(&actor->contactX, &frame.sp110, 12);
+                actorY = actor->y;
                 hitY = frame.sp19C;
                 var_f2 = actorY - hitY;
                 if ((frame.sp3C != 0) && (var_f2 < D_800C37A0_de)) {
                     frame.sp3C = 0;
-                    arg0->velY = 0.0f;
-                    var_f2 = arg0->velY;
-                    arg0->y = hitY;
+                    actor->velY = 0.0f;
+                    var_f2 = actor->velY;
+                    actor->y = hitY;
                 }
-                if ((arg0->velY <= 0.0f) && (var_f2 < D_800C37A4_de)) {
+                if ((actor->velY <= 0.0f) && (var_f2 < D_800C37A4_de)) {
                     if (frame.spC8 == 5) {
                         frame.sp54 |= 0x2004;
                         func_8023EC54_de(&frame.sp18, &frame.spC8);
@@ -275,11 +275,11 @@ loop_49:
                         if (frame.spC8 < 7) goto no_attach;
                         if (frame.sp11C->type != 1) goto no_attach;
                         attachedActor = frame.sp11C;
-                        arg0->attached = attachedActor;
-                        temp_v1_3 = attachedActor->flags;
-                        attachedActor->flags = (s32) (temp_v1_3 | 0x20);
+                        actor->attached = attachedActor;
+                        flags = attachedActor->flags;
+                        attachedActor->flags = (s32) (flags | 0x20);
                         if (frame.sp1C != 0) {
-                            attachedActor->flags = (s32) (temp_v1_3 | 0x60);
+                            attachedActor->flags = (s32) (flags | 0x60);
                         }
                         var_v0_2 = (frame.sp54 & ~3) | 2;
                         goto attach_done;
@@ -306,8 +306,8 @@ block_71:
         temp_a0 = frame.sp54;
         frame.sp54 = temp_a0 & ~0x100;
         if ((frame.sp38 != 0) || (temp_a0 & 0x80)) {
-            __builtin_memcpy(&frame.sp5C, &arg0->x, 12);
-            __builtin_memcpy(&frame.sp68, &arg0->x, 12);
+            __builtin_memcpy(&frame.sp5C, &actor->x, 12);
+            __builtin_memcpy(&frame.sp68, &actor->x, 12);
             frame.sp44 = 0;
             frame.sp48 = 0;
             frame.sp4C = 0;
@@ -318,13 +318,13 @@ block_71:
             if ((func_8023D158_de((s8 *) &frame.sp18) != 0) && (frame.spC8 == 4)) {
                 if (frame.sp38 != 0) {
                     func_8023D380_de(&frame.sp18);
-                    arg0->x = frame.sp198;
-                    arg0->z = frame.sp1A0;
+                    actor->x = frame.sp198;
+                    actor->z = frame.sp1A0;
                     frame.sp54 |= 0x100;
                     func_8023EBFC_de(&frame.sp18, &frame.spC8);
-                    if (arg0->type == 1) {
+                    if (actor->type == 1) {
                         func_80274870_de(&frame.sp2C8, frame.sp2C8 - func_80273F94_de(frame.sp2C8, func_802417C4_de((f32 *) &frame.spC8)), 0.9f);
-                        arg0->angle = frame.sp2C8;
+                        actor->angle = frame.sp2C8;
                     }
                 }
             } else {
@@ -332,28 +332,28 @@ block_71:
             }
         }
         if (*arg4 & 0x80000) {
-            temp_s0 = func_8028C050_de(frame.spC4, &arg0->x);
+            surface = func_8028C050_de(frame.spC4, &actor->x);
             frame.sp54 &= ~0x5000;
-            if ((temp_s0 != 0) && ((((Func80243A80Collision *)temp_s0)->flags & 0x41) == 0x41) && (func_80275DD4_de(temp_s0, arg0->x, arg0->z) <= arg0->y)) {
-                temp_f0_2 = func_8027525C_de(temp_s0, arg0->x, arg0->z);
-                if (arg0->y <= temp_f0_2) {
+            if ((surface != 0) && ((((Func80243A80Collision *)surface)->flags & 0x41) == 0x41) && (func_80275DD4_de(surface, actor->x, actor->z) <= actor->y)) {
+                temp_f0_2 = func_8027525C_de(surface, actor->x, actor->z);
+                if (actor->y <= temp_f0_2) {
                     frame.sp54 |= 0x4000;
                 }
                 temp_f0_2 += frame.sp34;
-                if (arg0->y <= temp_f0_2) {
+                if (actor->y <= temp_f0_2) {
                     frame.sp54 |= 0x1000;
                 }
-                func_8023ECBC_de(&frame.sp18, temp_s0);
+                func_8023ECBC_de(&frame.sp18, surface);
             }
-            arg0->collision = temp_s0;
+            actor->collision = surface;
         }
-        arg0->flags = frame.sp54;
+        actor->flags = frame.sp54;
         return var_s3;
     }
     return 0;
 }
 
-s32 func_802444A4_de(char *arg0, CVector3 arg1, CVector3 arg2, s32 arg3) {
+s32 func_802444A4_de(char *arg0, CVector3 arg1, CVector3 desired, s32 arg3) {
     extern s32 func_8023D380_de(void *arg0);
     Work80244494 work;
     VectorPair vectors;
@@ -369,7 +369,7 @@ s32 func_802444A4_de(char *arg0, CVector3 arg1, CVector3 arg2, s32 arg3) {
     func_8023E6D0_de(work.data, 0.0f);
     out = work.data;
     vectors.first = arg1;
-    vectors.second = arg2;
+    vectors.second = desired;
     func_8023EBD4_de(out);
     if (vectors.first.x == vectors.second.x &&
         vectors.first.y == vectors.second.y &&

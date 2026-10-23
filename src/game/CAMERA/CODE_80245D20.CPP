@@ -25,13 +25,13 @@ static inline s32 currentEnabled(Actor_func_80245D30_de *actor) {
     return 0;
 }
 
-void func_80245D30_de(Actor_func_80245D30_de *arg0, Material_func_80245D30_de *arg1, CVector3 *arg2, s32 arg3) {
+void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *arg1, CVector3 *arg2, s32 arg3) {
     Actor_func_80245D30_de *rider;
     f32 speed;
     CVector3 v10,v20;
     f32 sp30;
     f32 sp34;
-    f32 temp_f0;
+    f32 strength;
     f32 temp_f0_2;
     f32 temp_f0_3;
     f32 temp_f0_4;
@@ -48,46 +48,46 @@ void func_80245D30_de(Actor_func_80245D30_de *arg0, Material_func_80245D30_de *a
     s32 var_condition_bit;
     s32 var_v0;
     s32 var_v1;
-    u16 temp_v1_2;
+    u16 flags;
     CVector3 *var_a0;
 
-    if (arg0->kind == 1) {
-        rider=arg0;
-        var_v1=currentEnabled(arg0);
+    if (actor->kind == 1) {
+        rider=actor;
+        var_v1=currentEnabled(actor);
         var_v0 = rider->flags & 3;
     } else {
         var_v1 = 0;
         var_v0 = 0;
     }
     if ((var_v0 != 0) || ((var_v1 == 0) && !(arg1->flags & 0x8000))) {
-        arg0->current.x = 0.0f;
-        arg0->current.y = 0.0f;
-        arg0->current.z = 0.0f;
+        actor->current.x = 0.0f;
+        actor->current.y = 0.0f;
+        actor->current.z = 0.0f;
         return;
     }
     if ((arg1->flags & 0x100) && (arg3 != 0)) {
         v10.x = (f32) arg1->x * 0.007874016f;
         v10.y = (f32) arg1->y * 0.007874016f;
         v10.z = (f32) arg1->z * 0.007874016f;
-        temp_f0 = (f32) arg1->strength;
-        speed=temp_f0 * 3.0f;
-        var_f20 = (temp_f0 + 1.0f) * 0.00872664712369442f;
+        strength = (f32) arg1->strength;
+        speed=strength * 3.0f;
+        var_f20 = (strength + 1.0f) * 0.00872664712369442f;
         func_80271F9C_de(&v10,&v10,speed);
-        temp_v1_2 = arg1->flags;
-        if (temp_v1_2 & 0x600) {
-            if (temp_v1_2 & 0x400) {
+        flags = arg1->flags;
+        if (flags & 0x600) {
+            if (flags & 0x400) {
                 var_f20 = -var_f20;
             }
-            if (arg0->kind == 1) {
-                arg0->yaw = (f32) (arg0->yaw + var_f20);
+            if (actor->kind == 1) {
+                actor->yaw = (f32) (actor->yaw + var_f20);
             }
         }
-        if ((arg1->flags & 0x2000) && (arg0->kind == 1)) {
-            rider=arg0;
+        if ((arg1->flags & 0x2000) && (actor->kind == 1)) {
+            rider=actor;
             v20=v10;
             v20.y = 0.0f;
             temp_f0_2 = func_80271AA8_de(&v20);
-            temp_f1 = arg0->yaw;
+            temp_f1 = actor->yaw;
             sp34 = temp_f0_2;
             sp30 = temp_f1;
             if (temp_f0_2 != temp_f1) {
@@ -119,21 +119,21 @@ void func_80245D30_de(Actor_func_80245D30_de *arg0, Material_func_80245D30_de *a
     }
     var_f0_2 = (f32) arg1->strength * D_800CB430_de[0] * D_800D2988[0];
     var_f0_2 = ((var_f0_2 < 0.0f ? 0.0f : var_f0_2) > 1.0f ? 1.0f : (var_f0_2 < 0.0f ? 0.0f : var_f0_2));
-    var_a0=&arg0->current;
+    var_a0=&actor->current;
     func_80271FC8_de(var_a0, var_f0_2, var_a0, &v10);
-    arg2->x = (f32) (arg2->x + arg0->current.x);
-    arg2->z = (f32) (arg2->z + arg0->current.z);
+    arg2->x = (f32) (arg2->x + actor->current.x);
+    arg2->z = (f32) (arg2->z + actor->current.z);
     if (arg1->flags & 0x100) {
         if (v10.y != 0.0f) {
-            arg0->vertical = 0.0f;
+            actor->vertical = 0.0f;
         } else {
-            temp_f0_5 = arg0->current.y;
-            arg0->current.y = (f32) (temp_f0_5 + ((v10.y - temp_f0_5) * 0.2f));
+            temp_f0_5 = actor->current.y;
+            actor->current.y = (f32) (temp_f0_5 + ((v10.y - temp_f0_5) * 0.2f));
         }
-        arg0->vertical = (f32) (arg0->vertical + ((2.0f * (arg0->current.y * 10.24f)) + 4.0f));
+        actor->vertical = (f32) (actor->vertical + ((2.0f * (actor->current.y * 10.24f)) + 4.0f));
         return;
     }
-    arg0->current.y += (v10.y-arg0->current.y)*0.2f;
+    actor->current.y += (v10.y-actor->current.y)*0.2f;
 }
 
 /* Resets an object through func_8024DD10_de, then clears its words from 0x1C to 0x38 and at 0x40, 0x44

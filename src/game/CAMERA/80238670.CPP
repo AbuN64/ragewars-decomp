@@ -126,7 +126,7 @@ struct RecCode80200610 {
     s32 unk4;
 };
 
-void func_80238D30_de(func_80238D20_S1 *arg0) {
+void func_80238D30_de(func_80238D20_S1 *view) {
     Vector3f value;
     f32 screen_x;
     f32 screen_y;
@@ -137,7 +137,7 @@ void func_80238D30_de(func_80238D20_S1 *arg0) {
     s32 state_mask;
     func_80238D20_S2 *node;
 
-    mask = 8 << arg0->unk8;
+    mask = 8 << view->unk8;
     func_802A9234_de(0x64);
     func_8026925C_de(0x1A);
     gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
@@ -149,13 +149,13 @@ void func_80238D30_de(func_80238D20_S1 *arg0) {
         do {
             if ((node->unk5C & mask) &&
                 (*node->unk118 & state_mask)) {
-                func_80272A10_de(&arg0->unk1E0, &node->unk8, &value);
+                func_80272A10_de(&view->unk1E0, &node->unk8, &value);
                 half = (f32)(D_800E28D0 / 2);
                 *x = value.x * half + half;
                 *y = value.y *
                          (f32)(-(&D_800E28D0)[1] / 2) +
                      (f32)((&D_800E28D0)[1] / 2);
-                func_80238670_de((FlareActor *)arg0, screen_x, screen_y,
+                func_80238670_de((FlareActor *)view, screen_x, screen_y,
                               node->unk198 * D_800C3514_de,
                               0, 0);
             }

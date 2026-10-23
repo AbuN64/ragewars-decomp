@@ -46,9 +46,9 @@ void func_802349C0_de(void *arg0) {
     f32 m68[16],mA8[16],mE8[16],m128[16],m168[16],m1A8[16];
     CVector3 sp1E8,result,transformed;
     f32 zero,cosineInput;
-    Effect33920 *var_s0;
+    Effect33920 *effect;
     f32 *temp_s3;
-    f32 *var_s1;
+    f32 *matrix;
     f32 temp_fs0;
     f32 temp_fs0_2;
     f32 temp_fs0_3;
@@ -110,24 +110,24 @@ void func_802349C0_de(void *arg0) {
             func_802337D0_de(&actor->effect.y);
             func_802337D0_de(&actor->effect.z);
             if (arg0 != &D_80141008) {
-                var_s0 = ((TransformWorld*)(void*)&D_80141008)->effects;
-                if (var_s0 != 0) {
+                effect = ((TransformWorld*)(void*)&D_80141008)->effects;
+                if (effect != 0) {
                     do {
-                        func_80233930_de(var_s0, actor->position.value, &result);
-                        var_s0 = var_s0->next;
-                    } while (var_s0 != 0);
+                        func_80233930_de(effect, actor->position.value, &result);
+                        effect = effect->next;
+                    } while (effect != 0);
                 }
             }
             func_8026F620_de(m168, m68, mE8);
             func_80272898_de(m168, &result, &transformed);
             func_8026F620_de(m168, m68, mA8);
-            var_s1 = m1A8;
-            func_8026F620_de(var_s1, m168, mE8);
+            matrix = m1A8;
+            func_8026F620_de(matrix, m168, mE8);
             func_80272C60_de(m128,
                 actor->position.value.x + transformed.x,
                 actor->position.value.y + sp1E8.y + transformed.y,
                 actor->position.value.z + transformed.z);
-            func_8026F620_de(actor->matrix, var_s1, m128);
+            func_8026F620_de(actor->matrix, matrix, m128);
         } else {
             cosineInput = actor->roll;
             temp_fs0_3 = D_800C31FC_de;

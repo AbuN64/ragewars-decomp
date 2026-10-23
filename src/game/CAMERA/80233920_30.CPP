@@ -126,7 +126,7 @@ void func_80239AF4_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool
 }
 
 void func_80239B64_de(s32 arg0) {
-    Node_func_80239AF4_de *temp_s0;
+    Node_func_80239AF4_de *next;
     Node_func_80239AF4_de *temp_s0_2;
     Node_func_80239AF4_de *var_s1;
     Node_func_80239AF4_de *var_s1_2;
@@ -138,10 +138,10 @@ void func_80239B64_de(s32 arg0) {
         var_s1 = ((struct ScreenMessagePool *)temp_s2)->freeMessages.tail;
         if (var_s1 != 0) {
             do {
-                temp_s0 = var_s1->next;
+                next = var_s1->next;
                 func_80255ED8_de(&((struct ScreenMessagePool *)temp_s2)->freeMessages, var_s1);
                 func_80255CB8_de(&((struct ScreenMessageOwner *)arg0)->activeMessages, var_s1);
-                var_s1 = temp_s0;
+                var_s1 = next;
             } while (var_s1 != 0);
         }
     }
@@ -207,9 +207,9 @@ void func_80239CEC_de(void *arg0) {
 
 
 
-void func_80239D00_de(struct Channel *arg0, float arg1, int arg2) {
-    arg0->level = arg1 * (D_800C8658);
-    arg0->mode = arg2;
+void func_80239D00_de(struct Channel *channel, float arg1, int arg2) {
+    channel->level = arg1 * (D_800C8658);
+    channel->mode = arg2;
 }
 
 /* Evaluates a wave: kind 1 returns func_802B7130_de of the phase at 0x10 scaled by D_800C865C, times
@@ -285,7 +285,7 @@ void func_80239DE8_de(struct RecordRecAt18 *record, f32 first, f32 second, f32 t
 }
 
 s32 func_80239E48_de(s32 arg0) {
-    s32 var_v1;
+    s32 result;
     u32 temp_s0;
     u32 temp_s1;
     u32 temp_v0;
@@ -293,9 +293,9 @@ s32 func_80239E48_de(s32 arg0) {
     temp_s1 = func_802337D0_de(arg0 + 0x18);
     temp_s0 = func_802337D0_de(arg0 + 0x2C);
     temp_v0 = func_802337D0_de(arg0 + 0x40);
-    var_v1 = 0;
+    result = 0;
     if ((temp_s1 != 0) && (temp_s0 != 0)) {
-        var_v1 = temp_v0 > 0U;
+        result = temp_v0 > 0U;
     }
-    return var_v1;
+    return result;
 }

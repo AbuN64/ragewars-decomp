@@ -124,23 +124,23 @@ void func_802394BC_de(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVec
     set_emitter(node, a * k, b * k, c * k, scale, value, pos);
 }
 
-void *func_802395A4_de(MenuMatchGlobals *arg0, CVector3 *arg1) {
+void *func_802395A4_de(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
     CVector3 position;
     GameplayCamera *node;
     void *bestNode;
     f32 bestDist;
     f32 distSq;
 
-    func_8027254C_de(&arg1->x, 20000.0f);
-    if (arg0->useFallbackCamera != 0) {
-        return &arg0->fallbackCamera;
+    func_8027254C_de(&zero->x, 20000.0f);
+    if (menuMatchGlobals->useFallbackCamera != 0) {
+        return &menuMatchGlobals->fallbackCamera;
     }
-    node = arg0->cameras;
+    node = menuMatchGlobals->cameras;
     bestDist = D_800C3548_de;
     bestNode = 0;
     if (node != 0) {
         do {
-            func_80271F68_de(&position, arg1, &node->position);
+            func_80271F68_de(&position, zero, &node->position);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);
@@ -152,7 +152,7 @@ void *func_802395A4_de(MenuMatchGlobals *arg0, CVector3 *arg1) {
         } while (node != 0);
     }
     if (bestNode == 0) {
-        return &arg0->fallbackCamera;
+        return &menuMatchGlobals->fallbackCamera;
     }
     return bestNode;
 }

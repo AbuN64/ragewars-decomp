@@ -54,12 +54,12 @@ extern void func_802A025C_de(void *arg0, int arg1);
 extern void func_80253838_de(void *arg0, void *arg1);
 
 s32 func_80245814_de(void) {
-    s32 var_v0;
-    var_v0 = 0;
+    s32 result;
+    result = 0;
     if (func_80245784_de() == 0) {
-        var_v0 = func_8024576C_de() == 0;
+        result = func_8024576C_de() == 0;
     }
-    return var_v0;
+    return result;
 }
 
 /** Return the word at offset 0x3C of the current global object. */
@@ -143,16 +143,16 @@ void func_80245990_de(void *arg0) {
 
 f32 func_802459A0_de(void) {
     Shared_MenuContext *record = D_800E2830;
-    f32 temp_f1;
+    f32 response;
 
     if (record->active == 0) {
         return D_800C37D4_de;
     }
-    temp_f1 = record->response;
-    if (!(D_800C37D8_de < temp_f1)) {
+    response = record->response;
+    if (!(D_800C37D8_de < response)) {
         return func_8040184C_de(record->time);
     }
-    return temp_f1;
+    return response;
 }
 
 void func_80245A00_de(float arg0) {
@@ -187,10 +187,10 @@ void func_80245A5C_de(int arg0, int arg1, int arg2, int arg3) {
     record->unknown104[4] = arg3;
 }
 
-void func_80245A78_de(int arg0) {
+void func_80245A78_de(int goal) {
     Shared_MenuContext *record = D_800E2830;
     int idx = record->messageCount;
-    func_802A025C_de(record->messages[idx], arg0);
+    func_802A025C_de(record->messages[idx], goal);
     record = D_800E2830;
     record->messageCount = record->messageCount + 1;
 }
@@ -221,10 +221,10 @@ static void func_80245B20_de(void) {
 }
 
 void func_80245B28_de(void) {
-    int temp_a1 = (s32)D_800E2830->owner;
+    int owner = (s32)D_800E2830->owner;
     Shared_MenuContext *record;
-    if (temp_a1 != 0) {
-        func_80253838_de(0, temp_a1);
+    if (owner != 0) {
+        func_80253838_de(0, owner);
     }
     record = D_800E2830;
     record->owner = 0;
