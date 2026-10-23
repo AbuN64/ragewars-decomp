@@ -79,7 +79,6 @@ void func_804070F4_de(Shared_PakMenu *menu)
   }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
 extern s32 D_8015375C, D_800E28C8, D_8014D4C0_de;
@@ -116,6 +115,7 @@ static inline char *pakRecordChannelLabel(s32 channel) {
     }
 }
 
+#ifdef NON_MATCHING
 /* us-rev1: 2/186 aligned edits remain: channel-argument load scheduling. */
 s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unusedEvent)
 {
@@ -172,55 +172,64 @@ INCLUDE_ASM("ovl_80400000", Pak_SaveControllerRecord);
 
 #ifdef NON_MATCHING
 extern char *D_800D36E0;
-extern u8 *D_8011FECC;
+extern u32 D_8011FECC;
 extern char D_0044FAFC[];
 extern char *D_800D36D8;
-s32 Pak_SaveSnapshotAndClose(void *unused, u8 *menu) {
+/* Snapshot titles and the capacity prompt use the active release language. */
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+extern s32 D_800E25B4[];
+extern char D_0045017C[];
+static inline char *pakSnapshotName(void) {
+    return (char *)D_800E25B4[D_801462C8.language];
+}
+static inline char *pakSnapshotCapacityPrompt(void) { return D_0045017C; }
+#else
+static inline char *pakSnapshotName(void) { return D_800D36D8; }
+#if defined(VERSION_US_REV1)
+static inline char *pakSnapshotCapacityPrompt(void) { return D_0044FAFC; }
+#elif defined(VERSION_US)
+extern char D_0044F01C[];
+static inline char *pakSnapshotCapacityPrompt(void) { return D_0044F01C; }
+#else
+extern char D_0044EEAC[];
+static inline char *pakSnapshotCapacityPrompt(void) { return D_0044EEAC; }
+#endif
+#endif
+/* us-rev1: 4/116 aligned edits remain: snapshot title load scheduling. */
+/* Save the snapshot only when both page and note capacity are available;
+ * retain pending resources while showing the insufficient-capacity prompt. */
+s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
+    ObjRecAt5DC *player, *selectedPlayer;
+    char extension[8];
+    s32 channel, freePages, freeNotes;
+    s32 snapshotBytes, required, status;
     s32 showPrompt = 1;
-    s32 channel;
-    u8 *player;
-    u8 *snapshotSize;
-    s32 status;
-    s32 freePages;
-    s32 freeNotes;
-    s32 extension[3];
-    if (D_8015375C != 0) {
-        channel = D_800E28C8;
-        player = 0;
-    } else {
-        player = *(u8 **)(menu + 0x1C);
-        channel = *(s8 *)(*(u8 **)(menu + 0x20) + 4);
-    }
-    snapshotSize = D_8011FECC + 0x610;
+    selectedPlayer = pakRecordChannel(menu, &channel);
+    player = selectedPlayer;
+    snapshotBytes = D_8011FECC + 0x610;
     if (D_8014D4C0_de != 0) {
-        func_804057EC_de((s32)snapshotSize);
+        required = func_804057EC_de(snapshotBytes);
         status = Pak_GetFreePages(channel, &freePages);
         if (status == 0) {
-            if (freePages >= status) {
-                if (Pak_CountFreeNotes(channel, &freeNotes) == 0) {
+            if (required <= freePages) {
+                if (Pak_CountFreeNotes(channel, &freeNotes) == 0 && freeNotes != 0) {
                     showPrompt = 0;
-                    if (freeNotes != 0) {
-                        if (func_80405454_de(channel, (char *)&extension[0]) == 0) {
-                            Pak_SaveNote(channel, (s32)snapshotSize, (void *)D_800DE868, D_800D36D8, (char *)&extension[0], D_800D36E0);
-                        }
+                    if (func_80405454_de(channel, extension) == 0) {
+                        Pak_SaveNote(channel, snapshotBytes, (void *)D_800DE868,
+                                     pakSnapshotName(), extension, rw_pak_save_code());
                     }
                 }
             }
             if (showPrompt != 0) {
-                Pak_OpenDialog(D_8014561C, D_0044FAFC, player, (void *)*(s32 *)(player + 0x698), (void *)*(s32 *)(menu + 0x14));
+                Pak_OpenDialog(D_8014561C, pakSnapshotCapacityPrompt(), player,
+                                (PakMenuSlot *)player->controller, menu->dialogData);
                 return 0;
             }
         }
     }
-    if (D_800DE860_de != 0 || D_800DE864_de != 0) {
-        func_80253908_de(0);
-    }
-    if (D_800DE860_de != 0) {
-        func_80253838_de(0, D_800DE860_de);
-    }
-    if (D_800DE864_de != 0) {
-        func_80253838_de(0, D_800DE864_de);
-    }
+    if (D_800DE860_de != 0 || D_800DE864_de != 0) func_80253908_de(0);
+    if (D_800DE860_de != 0) func_80253838_de(0, D_800DE860_de);
+    if (D_800DE864_de != 0) func_80253838_de(0, D_800DE864_de);
     D_800DE860_de = 0;
     D_800DE864_de = 0;
     D_800DE868 = 0;
