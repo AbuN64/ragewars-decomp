@@ -227,7 +227,7 @@ extern s32 D_800DCD4C;
 extern u8 D_800DCD00_de[];
 #include "COMMON/DISPLAY.H"
 
-/* 54/254 aligned edits; remaining: register allocation and buffer setup scheduling. */
+/* 51/254 aligned edits; remaining: tail global-store scheduling (D_800E28A4 held in s1), empty count loop, register allocation. */
 int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     void **puVar2;
     void **clearSlot;
@@ -295,7 +295,7 @@ int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
         func_802A001C_de((void *)*piVar4, 0, 0x54600);
         ((void **)record)[6] = piVar4;
         ((void **)record)[3] = piVar5;
-        D_801536E8 = (void *)*piVar4;
+        D_801536E8 = *(void **)((void **)record)[6];
         count = D_800DE850;
         for (i = 0; i < count; i++) {
             D_8014D468_de[i] = (void *)(*piVar5 + i * blockSize);
