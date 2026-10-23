@@ -58,10 +58,12 @@ s32 func_8040A83C_us(struct Field *arg0) {
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 #ifdef NON_MATCHING
+/* D_8014D490 is read through a struct view so the compiler keeps the load behind the preceding store. */
+typedef struct { s8 value; } PakModeByte;
 extern s32 D_80153774;
 extern char *D_800D2484, *D_800D37D0;
 extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
-/* 57/62 words; remaining: target stores arg0->text before loading D_8014D490, ours hoists the lb above the sw */
+/* 62/62 words at object level; only the jump table is not yet moved into this unit */
 s32 func_8040A928_us(struct Field *arg0) {
     char *src;
     char *dst;
@@ -70,7 +72,7 @@ s32 func_8040A928_us(struct Field *arg0) {
         arg0->text = &D_800D37D0;
     } else {
         arg0->text = &D_800D2484;
-        i = D_8014D490;
+        i = ((PakModeByte *)&D_8014D490)->value;
         switch (i) {
         case 0:
         case 1:
