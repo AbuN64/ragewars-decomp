@@ -244,7 +244,7 @@ search_done:
 extern f32 D_800C1D70_de;
 #include "TYPES.H"
 f32 func_802726BC_de(void *a, void *b);
-s32 func_8020C078_de(CNavData *, s32, s32, u8, s32, f32 *, f32);
+s32 Nav_SearchPortalRoute(CNavData *, s32, s32, u8, s32, f32 *, f32);
 
 static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s32 *edges) {
     s32 i = 0;
@@ -272,63 +272,54 @@ static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s3
     return count;
 }
 
-s32 func_8020BE80_de(CNavData *graph, s32 arg1, u8 arg2, s32 arg3) {
-    s32 sp20[64];
-    s32 sp120[64];
-    f32 sp220;
-    f32 *sp224;
-    f32 var_fs0;
-    NavigationBuffer *temp_a1;
-    NavigationBuffer *temp_a2;
+s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDepth) {
+    s32 neighborNodes[64];
+    s32 neighborLinks[64];
+    f32 routeDistance;
+    f32 *startPosition;
+    f32 bestDistance;
+    NavigationBuffer *portals;
     NavigationBuffer *points;
-    NavigationBuffer *temp_v1_3;
-    s32 *var_a0_2;
-    s32 *var_a1;
-    s32 *var_s1;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 var_a0;
+    s32 portalCount;
+    s32 portalNode;
+    s32 portalOffset;
     s32 result;
-    s32 var_s0;
-    s32 var_t0;
-    s32 var_t1;
-    s32 var_v0;
-    NavigationPortal *temp_v1;
-    NavigationPortal *temp_v1_4;
+    s32 index;
+    s32 neighborCount;
+    NavigationPortal *portal;
 
     result = -1;
-    var_s0 = 0;
-    temp_v0 = graph->m_nNavLinks;
-    var_fs0 = D_800C1D70_de;
-    if (temp_v0 > 0) {
+    index = 0;
+    portalCount = graph->m_nNavLinks;
+    bestDistance = D_800C1D70_de;
+    if (portalCount > 0) {
         s32 stride;
-        temp_a1 = graph->m_pusNavLinks;
-        stride = temp_a1->stride;
-        var_a0 = 8;
+        portals = graph->m_pusNavLinks;
+        stride = portals->stride;
+        portalOffset = 8;
         do {
-            temp_v1 = (void *)(temp_a1->data + (var_a0 - 8));
-            var_s0++;
-            if (temp_v1->first == arg1 && temp_v1->kind == (u8)arg2) return arg1;
-            var_a0 += stride;
-        } while (var_s0 < temp_v0);
+            portal = (void *)(portals->data + (portalOffset - 8));
+            index++;
+            if (portal->first == startNode && portal->kind == (u8)portalKind) return startNode;
+            portalOffset += stride;
+        } while (index < portalCount);
     }
-block_7:
     points = graph->points;
-    sp224 = navigationRecord(points, arg1);
-    var_t1 = navigationNeighbors(graph, arg1, sp20, sp120);
-    for (var_s0 = 0; var_s0 < var_t1; var_s0++) {
+    startPosition = navigationRecord(points, startNode);
+    neighborCount = navigationNeighbors(graph, startNode, neighborNodes, neighborLinks);
+    for (index = 0; index < neighborCount; index++) {
         NavigationBuffer *table = graph->points;
-        sp220 = func_802726BC_de(sp224, navigationRecord(table, sp20[var_s0]));
-        temp_v0_2 = func_8020C078_de(graph, arg1, sp20[var_s0], (u8)arg2, arg3 - 1, &sp220, var_fs0);
-        if (temp_v0_2 != -1) {
-            var_fs0 = sp220;
-            result = temp_v0_2;
+        routeDistance = func_802726BC_de(startPosition, navigationRecord(table, neighborNodes[index]));
+        portalNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], (u8)portalKind, maxDepth - 1, &routeDistance, bestDistance);
+        if (portalNode != -1) {
+            bestDistance = routeDistance;
+            result = portalNode;
         }
     }
     return result;
 }
 #else
-INCLUDE_ASM("span_1000", func_8020BE80_de);
+INCLUDE_ASM("span_1000", Nav_FindPortalRoute);
 #endif
 
 #ifdef NON_MATCHING
@@ -338,99 +329,94 @@ INCLUDE_ASM("span_1000", func_8020BE80_de);
 extern f32 D_800C1D74_de;
 #include "TYPES.H"
 f32 func_802726BC_de(void *a, void *b);
-s32 func_8020C078_de(CNavData *graph, s32 arg1, s32 arg2, u8 arg3, s32 arg4, f32 *arg5, f32 arg6) {
-    s32 sp20[64];
-    s32 sp120[64];
-    f32 sp220;
-    f32 *temp_a1;
-    f32 *temp_s4;
-    f32 temp_fv0f;
-    f32 var_fs0;
-    NavigationBuffer *temp_a0;
-    NavigationBuffer *temp_a2;
+s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8 portalKind, s32 remainingDepth, f32 *routeDistance, f32 distanceLimit) {
+    s32 neighborNodes[64];
+    s32 neighborLinks[64];
+    f32 candidateDistance;
+    f32 *previousPosition;
+    f32 bestDistance;
+    NavigationBuffer *portals;
     NavigationBuffer *points;
-    NavigationBuffer *temp_v1_3;
-    s32 *var_a0_2;
-    s32 *var_a2;
-    s32 *var_s1;
-    s32 temp_v0;
-    s32 var_a0;
+    NavigationBuffer *linkTable;
+    s32 *neighborNodeOut;
+    s32 *neighborLinkOut;
+    s32 portalCount;
+    s32 portalOffset;
     s32 result;
-    s32 var_s0;
+    s32 index;
     s32 i;
-    s32 var_t1;
-    s32 var_v0;
-    NavigationPortal *temp_v1;
-    NavigationPortal *temp_v1_4;
+    s32 neighborCount;
+    s32 portalNode;
+    NavigationPortal *portal;
+    NavigationPortal *link;
 
-    var_fs0 = D_800C1D74_de;
+    bestDistance = D_800C1D74_de;
     result = -1;
-    var_s0 = 0;
-    temp_v0 = graph->m_nNavLinks;
-    if (temp_v0 > 0) {
+    index = 0;
+    portalCount = graph->m_nNavLinks;
+    if (portalCount > 0) {
         s32 stride;
-        temp_a2 = graph->m_pusNavLinks;
-        stride = temp_a2->stride;
-        var_a0 = 8;
+        portals = graph->m_pusNavLinks;
+        stride = portals->stride;
+        portalOffset = 8;
         do {
-            temp_v1 = (void *)(temp_a2->data + (var_a0 - 8));
-            var_s0++;
-            if (temp_v1->first == arg2 && temp_v1->kind == (u8)arg3) return arg2;
-            var_a0 += stride;
-        } while (var_s0 < temp_v0);
+            portal = (void *)(portals->data + (portalOffset - 8));
+            index++;
+            if (portal->first == currentNode && portal->kind == (u8)portalKind) return currentNode;
+            portalOffset += stride;
+        } while (index < portalCount);
     }
-block_5:
     i = 0;
-    if (arg4 == 0) {
+    if (remainingDepth == 0) {
         return -1;
     }
     points = graph->points;
-    var_t1 = 0;
-    var_a0_2 = sp20;
-    temp_s4 = navigationRecord(points, arg1);
+    neighborCount = 0;
+    neighborNodeOut = neighborNodes;
+    previousPosition = navigationRecord(points, previousNode);
     if (graph->m_nNavLinks > 0) {
-        var_a2 = sp120;
+        neighborLinkOut = neighborLinks;
         do {
-            temp_v1_3 = graph->m_pusNavLinks;
-            temp_v1_4 = navigationRecord(temp_v1_3, i);
-            if (temp_v1_4->first == arg1) {
-                var_t1 += 1;
-                *var_a0_2 = (s32) temp_v1_4->second;
-                *var_a2 = i;
-                var_a2 += 1;
-                var_a0_2 += 1;
+            linkTable = graph->m_pusNavLinks;
+            link = navigationRecord(linkTable, i);
+            if (link->first == previousNode) {
+                neighborCount += 1;
+                *neighborNodeOut = (s32) link->second;
+                *neighborLinkOut = i;
+                neighborLinkOut += 1;
+                neighborNodeOut += 1;
             }
-            if (temp_v1_4->second == arg1) {
-                var_t1 += 1;
-                *var_a0_2 = (s32) temp_v1_4->first;
-                *var_a2 = i;
-                var_a2 += 1;
-                var_a0_2 += 1;
+            if (link->second == previousNode) {
+                neighborCount += 1;
+                *neighborNodeOut = (s32) link->first;
+                *neighborLinkOut = i;
+                neighborLinkOut += 1;
+                neighborNodeOut += 1;
             }
             i += 1;
         } while (i < graph->m_nNavLinks);
     }
-    for (var_s0 = 0; var_s0 < var_t1; var_s0++) {
+    for (index = 0; index < neighborCount; index++) {
         NavigationBuffer *table = graph->points;
-        void *point = navigationRecord(table, sp20[var_s0]);
-        if (point != temp_s4) {
-            sp220 = *arg5 + func_802726BC_de(temp_s4, point);
-            if (sp220 < arg6) {
-                var_v0 = func_8020C078_de(graph, arg2, sp20[var_s0], (u8)arg3, arg4 - 1, &sp220, arg6);
-            } else var_v0 = -1;
-            if (var_v0 != -1 && sp220 < var_fs0) {
-                var_fs0 = sp220;
-                result = var_v0;
+        void *point = navigationRecord(table, neighborNodes[index]);
+        if (point != previousPosition) {
+            candidateDistance = *routeDistance + func_802726BC_de(previousPosition, point);
+            if (candidateDistance < distanceLimit) {
+                portalNode = Nav_SearchPortalRoute(graph, currentNode, neighborNodes[index], (u8)portalKind, remainingDepth - 1, &candidateDistance, distanceLimit);
+            } else portalNode = -1;
+            if (portalNode != -1 && candidateDistance < bestDistance) {
+                bestDistance = candidateDistance;
+                result = portalNode;
             }
         }
     }
-    if (var_fs0 < arg6) {
-        *arg5 = var_fs0;
+    if (bestDistance < distanceLimit) {
+        *routeDistance = bestDistance;
     }
     return result;
 }
 #else
-INCLUDE_ASM("span_1000", func_8020C078_de);
+INCLUDE_ASM("span_1000", Nav_SearchPortalRoute);
 #endif
 
 extern f32 D_800C1D78_de;
