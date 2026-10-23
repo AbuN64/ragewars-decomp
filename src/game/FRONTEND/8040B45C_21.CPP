@@ -79,48 +79,67 @@ extern Modep D_800D4530[];
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void osViSetMode(void *);
 
-/* Resize the selected VI mode around its original horizontal and field
- * centres, retaining the original lower screen limits. */
+typedef union VideoInterval {
+    u32 packed;
+    struct { u16 first, last; } half;
+} VideoInterval;
+
+typedef union VideoHorizontal {
+    u32 packed;
+    struct { s32 first : 16; u32 last : 16; } edge;
+} VideoHorizontal;
+
+/* 92/185 aligned edits; remaining: halfword and scale scheduling. */
+/* Resize the selected VI mode around its horizontal and field centres. */
 void Frontend_SetVideoViewport(s32 width, s32 height, s32 x, s32 y, s32 borderX, s32 borderY) {
+    VideoInterval vertical[2];
+    VideoInterval originalVertical[2];
+    u16 centerY[2];
     Modep *mode = &D_8014D508;
-    s32 centerX, evenCenterY, oddCenterY;
-    s32 left, right, evenTop, evenBottom, oddTop, oddBottom;
-    s32 oldRight, oldEvenBottom, oldOddBottom;
+    VideoHorizontal horizontal, originalHorizontal;
     u32 scaleY;
+    s32 centerX, scaleX;
 
     func_802BD3A0_de(mode, &D_800D4530[D_8014D500], 0x50);
-    oldRight = (s16)mode->comRegs.hStart;
-    oldEvenBottom = (s16)mode->fldRegs[0].vStart;
-    oldOddBottom = (s16)mode->fldRegs[1].vStart;
-    centerX = ((oldRight - ((s32)mode->comRegs.hStart >> 16)) / 2 +
-               ((s32)mode->comRegs.hStart >> 16)) - x;
-    evenCenterY = (mode->fldRegs[0].vStart >> 16) +
-        (oldEvenBottom - (s16)(mode->fldRegs[0].vStart >> 16)) / 2 - y;
-    oddCenterY = (mode->fldRegs[1].vStart >> 16) +
-        (oldOddBottom - (s16)(mode->fldRegs[1].vStart >> 16)) / 2 - y;
-    left = (s16)(centerX - width / 2 + borderX / 2);
-    right = (s16)(centerX + width / 2 - borderX * 2);
-    evenTop = (s16)(evenCenterY - height / 2 + borderY / 2);
-    evenBottom = (s16)(evenCenterY + height / 2 - borderY * 2);
-    oddTop = (s16)(oddCenterY - height / 2 + borderY / 2);
-    oddBottom = (s16)(oddCenterY + height / 2 - borderY * 2 - 3);
-    mode->comRegs.xScale = (width << 10) / (right - left);
-    scaleY = (mode->fldRegs[0].yScale & 0xFFFF0000) |
-        (((height << 11) / (evenBottom - evenTop)) & 0xFFFF);
-    evenBottom = (s16)(evenBottom - 3);
-    if (oldEvenBottom < evenBottom) evenBottom = oldEvenBottom;
-    if (oldOddBottom < oddBottom) oddBottom = oldOddBottom;
-    if (oldRight < right) right = oldRight;
+    horizontal.packed = mode->comRegs.hStart;
+    scaleY = mode->fldRegs[0].yScale;
+    vertical[0].packed = mode->fldRegs[0].vStart;
+    originalHorizontal = horizontal;
+    centerX = ((s16)horizontal.edge.last - horizontal.edge.first) / 2 + horizontal.edge.first - x;
+    horizontal.edge.first = centerX - width / 2 + borderX / 2;
+    horizontal.edge.last = centerX + width / 2 - borderX * 2;
+    centerY[0] = vertical[0].half.first + ((s16)vertical[0].half.last - (s16)vertical[0].half.first) / 2;
+    centerY[0] -= y;
+    vertical[0].half.first = centerY[0] - height / 2 + borderY / 2;
+    vertical[0].half.last = centerY[0] + height / 2 - borderY * 2;
+    scaleY &= 0xFFFF0000;
+    scaleY |= (((height << 11) /
+        ((s16)vertical[0].half.last - (s16)vertical[0].half.first)) & 0xFFFF);
+    originalVertical[0].packed = mode->fldRegs[0].vStart;
+    vertical[0].half.last -= 3;
+    vertical[1].packed = mode->fldRegs[1].vStart;
+    centerY[1] = vertical[1].half.first + ((s16)vertical[1].half.last - (s16)vertical[1].half.first) / 2;
+    centerY[1] -= y;
+    vertical[1].half.first = centerY[1] - height / 2 + borderY / 2;
+    vertical[1].half.last = centerY[1] + height / 2 - borderY * 2;
+    originalVertical[1].packed = mode->fldRegs[1].vStart;
+    vertical[1].half.last -= 3;
+    scaleX = (width << 10) / ((s16)horizontal.edge.last - horizontal.edge.first);
+    if ((s16)originalVertical[0].half.last < (s16)vertical[0].half.last) vertical[0].half.last = originalVertical[0].half.last;
+    if ((s16)originalVertical[1].half.last < (s16)vertical[1].half.last) vertical[1].half.last = originalVertical[1].half.last;
+    if ((s16)originalHorizontal.edge.last < (s16)horizontal.edge.last) horizontal.edge.last = originalHorizontal.edge.last;
     mode->fldRegs[0].yScale = scaleY;
     mode->fldRegs[1].yScale = scaleY;
     mode->fldRegs[0].origin = 0;
     mode->fldRegs[1].origin = width * 2;
     mode->comRegs.width = width;
-    mode->comRegs.hStart = ((u32)left << 16) | (u16)right;
-    mode->fldRegs[0].vStart = ((u32)evenTop << 16) | (u16)evenBottom;
-    mode->fldRegs[1].vStart = ((u32)oddTop << 16) | (u16)oddBottom;
+    mode->comRegs.xScale = scaleX;
+    mode->comRegs.hStart = horizontal.packed;
+    mode->fldRegs[0].vStart = vertical[0].packed;
+    mode->fldRegs[1].vStart = vertical[1].packed;
     osViSetMode(mode);
 }
+
 #else
 INCLUDE_ASM("ovl_80400000", Frontend_SetVideoViewport);
 #endif
