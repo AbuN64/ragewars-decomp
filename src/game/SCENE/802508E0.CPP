@@ -136,7 +136,7 @@ void func_80250C2C_de(void *arg0, s32 **arg1)
   struct ResourceBinding *binding = arg0;
   s32 new_var;
   new_var = *(*arg1);
-  func_80253E64_de(0, arg1, func_802784C0_de(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, arg0));
+  func_80253E64_de(0, arg1, Actors_BuildLitModel(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, arg0));
 }
 
 void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 arg2, s32 key) {

@@ -340,10 +340,13 @@ extern u8 *func_8028FDC8_de();
 extern u8 **func_8025343C_de();
 extern void func_802BD3A0_de();
 extern void Actors_AccumulateVertexLighting();
-s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+/* NON_MATCHING: 180 aligned edits / 244 ROM words; remaining: register allocation and scheduling.
+ * The query return selects the color trailer; the output count selects the light list.
+ * The allocator takes the byte count before the flags. */
+s32 Actors_BuildLitModel(s32 arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, void *arg5) {
     u8 buffer[0x100];
     s32 hasOwner;
-    s32 hasMatch;
+    s32 needsColors;
     s32 size;
     u8 *model;
     u8 **memory;
@@ -351,20 +354,20 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
     u8 *colors = 0;
     u8 *table;
     s32 count;
-    s32 i;
+    s32 clearIndex, colorIndex, sectorIndex, trailerIndex;
     s32 sum;
     s32 word;
     u8 *header;
-    hasMatch = func_80278020_de((void *)arg2, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)arg5);
+    needsColors = func_80278020_de((void *)arg2, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)arg5);
     model = func_8028FDC8_de(arg0, 0, &size);
     count = *(s32 *)(model + 4);
-    for (i = 0; i < count; i++) {
-        D_80111D70[i * 3] = 0;
-        D_80111D70[i * 3 + 1] = 0;
-        D_80111D70[i * 3 + 2] = 0;
+    for (clearIndex = 0; clearIndex < count; clearIndex++) {
+        D_80111D70[clearIndex * 3] = 0;
+        D_80111D70[clearIndex * 3 + 1] = 0;
+        D_80111D70[clearIndex * 3 + 2] = 0;
     }
-    if (hasMatch != 0) {
-        memory = func_8025343C_de(0, size + count * 4 + 0x10, 0, D_800C4B1C_de);
+    if (needsColors != 0) {
+        memory = func_8025343C_de(0, size + (*(s32 *)(model + 4) * 4 + 0x10), 0, D_800C4B1C_de);
         if (memory == 0) {
             return 0;
         }
@@ -386,11 +389,11 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
     func_802BD3A0_de(data, model, size);
     table = func_8028FDB4_de(arg0, 1);
     if (*(s32 *)(table + 4) != 0) {
-        for (i = 0; i < count; i++) {
-            word = *(s32 *)(table + 8 + i * 4);
-            D_80111D70[i * 3] += (s8)(word >> 16) * 2;
-            D_80111D70[i * 3 + 1] += (s8)(word >> 8) * 2;
-            D_80111D70[i * 3 + 2] += (s8)word * 2;
+        for (colorIndex = 0; colorIndex < count; colorIndex++) {
+            word = *(s32 *)(table + 8 + colorIndex * 4);
+            D_80111D70[colorIndex * 3] += (s8)(word >> 16) * 2;
+            D_80111D70[colorIndex * 3 + 1] += (s8)(word >> 8) * 2;
+            D_80111D70[colorIndex * 3 + 2] += (s8)word * 2;
         }
     }
     if (D_800D2850 == 0) {
@@ -399,17 +402,17 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
         Actors_AccumulateVertexLighting(buffer, hasOwner, data, arg3, D_80111D70, arg4);
     } else {
         sum = 0;
-        for (i = 0; i < *(s32 *)((u8 *)&D_8011FE88 + 0x1500); i++) {
-            sum += *(s32 *)((u8 *)func_8028FDB4_de(**(void ***)((u8 *)&D_8011FE88 + 0x1508 + i * 0xC), 2) + 4);
+        for (sectorIndex = 0; sectorIndex < *(s32 *)((u8 *)&D_8011FE88 + 0x1500); sectorIndex++) {
+            sum += *(s32 *)((u8 *)func_8028FDB4_de(**(void ***)((u8 *)&D_8011FE88 + 0x1508 + sectorIndex * 0xC), 2) + 4);
         }
         if (sum == 0) {
             func_80277A98_de((void *)data, (void *)arg3, (void *)D_80111D70, arg4);
         }
     }
     func_80278274_de((void *)data, (void *)D_80111D70);
-    if (hasMatch != 0) {
-        for (i = 0; i < *(s32 *)(data + 4); i++) {
-            u8 *vertex = data + 8 + i * 0x10;
+    if (needsColors != 0) {
+        for (trailerIndex = 0; trailerIndex < *(s32 *)(data + 4); trailerIndex++) {
+            u8 *vertex = data + 8 + trailerIndex * 0x10;
             s32 channel;
             for (channel = 0; channel < 3; channel++) {
                 u8 value = vertex[0xC + channel];
@@ -418,12 +421,12 @@ s32 func_802784C0_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
                 } else if (value < 0x1E) {
                     value = 0x1E;
                 }
-                colors[i * 4 + channel] = value;
+                colors[trailerIndex * 4 + channel] = value;
             }
         }
     }
     return (s32)memory;
 }
 #else
-INCLUDE_ASM("span_1000", func_802784C0_de);
+INCLUDE_ASM("span_1000", Actors_BuildLitModel);
 #endif

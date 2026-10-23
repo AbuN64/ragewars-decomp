@@ -45,7 +45,7 @@ void func_8024D028_de(f32 *m, f32 *q, f32 *t)
     m[15] = D_800C8CA0;
 }
 
-extern int func_802784C0_de(int a, int b, void *c, void *d, int e, void *f);
+extern int Actors_BuildLitModel(int a, int b, void *c, void *d, int e, void *f);
 extern void func_80253E64_de(int a, int **b, int c);
 
 
@@ -59,7 +59,7 @@ void func_8024D108_de(void *arg0, int **arg1) {
 
     deref1 = *arg1;
     deref2 = *deref1;
-    ret = func_802784C0_de(deref2, 0, &object->bounds, object->fieldB4, 1, arg0);
+    ret = Actors_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, arg0);
     func_80253E64_de(0, arg1, ret);
 }
 
