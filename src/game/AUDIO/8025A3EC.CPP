@@ -14,6 +14,8 @@
 #include "COMMON.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "AUDIO/EXTERNS.H"
+#include "COMMON/AUDIO_CONTEXT.H"
+#include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SHAREDRECV4.H"
 #include "COMMON/TRIPLE.H"
@@ -28,169 +30,135 @@ void func_802B2F10_de(void *arg0, s16 arg1);
 
 extern f32 D_800C3F4C_de;
 
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x30, 0x34], gap at: 0x24. */
-void Audio_UpdateVoiceVolume(View_func_8025AE1C_de *arg0) {
-    ContextCode8025A3EC *temp_a0;
-    ContextCode8025A3EC *temp_v1_2;
-    ContextCode8025A3EC *temp_v1_7;
-    ObjRecAt40V2 *temp_s0;
-    ObjRecAt40V2 *temp_s1;
-    f32 temp_fa1;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 temp_fv0_4;
-    f32 temp_fv1;
-    f32 temp_fv1f;
-    f32 var_fa1;
-    f32 var_fs0;
-    f32 var_fs0f;
-    f32 var_fv0;
-    f32 var_fv0_2;
-    f32 var_fv0f;
-    f32 var_fv0f_2;
-    f32 var_fv0f_3;
-    s32 temp_ft0;
-    s32 temp_v0;
-    s32 temp_v1_3;
-    s32 temp_v1_6;
-    s32 var_condition_bit;
-    s32 var_s0;
-    s8 temp_v1;
-    s8 temp_v1_5;
-    void *temp_v0_2;
-    void *temp_v1_4;
+/* Spatial mix and runtime envelope controls embedded in a sound voice. */
+typedef struct AudioVolumeMix {
+    s32 frame, reserved4;
+    s32 left, right;
+    u8 reserved10[0xC];
+    f32 attenuation, baseAttenuation, field24;
+    s16 priority, channel;
+    u8 reserved2C[8];
+    CVector3 position;
+    void *tracked;
+    s8 curve;
+    u8 reserved45[0x1F];
+} AudioVolumeMix;
 
-    temp_fv0 = *((f32 *) ((u8 *) (arg0->context->result) + 1320));
-    var_condition_bit = temp_fv0 < D_800C3F38_de;
-    var_fv0f = temp_fv0;
-    if (temp_fv0 < D_800C3F38_de) {
-        var_fv0f = D_800C3F38_de;
-        var_condition_bit = temp_fv0 < D_800C3F38_de;
-    }
-    if (var_condition_bit) {
-        var_fv0f_2 = var_fv0f * D_800C3F38_de;
-    } else {
-        var_fv0f_2 = var_fv0f * temp_fv0;
-    }
-    D_800D0D10 = var_fv0f_2;
-    temp_v1 = (arg0->distanceMode);
-    switch (temp_v1) {                              /* irregular */
-    case 2:
-        var_fv0 = D_800C3F3C_de;
-block_10:
-        D_800D0D10 = var_fv0f_2 + (var_fv0f_2 * var_fv0);
-        break;
-    case 1:
-        var_fv0 = D_800C3F40_de;
-        goto block_10;
-    }
-    temp_v1_2 = arg0->context;
-    if (arg0->flags & 0x200) {
-        var_fs0f = ((ContextRecAt2BC0 *)temp_v1_2)->blue;
-    } else {
-        var_fs0f = ((ContextRecAt2BC0 *)temp_v1_2)->red;
-        if ((arg0->attenuate != 0) && (((ContextRecAt2BC0 *)temp_v1_2)->field2BB8 != 0)) {
-            var_fs0f *= D_800C3F44_de;
-        }
-    }
-    temp_v1_3 = arg0->flags;
-    if ((temp_v1_3 & 0x400) && (arg0->fixed == 0) && (temp_v1_4 = &arg0->frame + 0x34, ((temp_v1_3 & 0x800) == 0))) {
-        temp_v0 = arg0->context->result;
-        temp_fv1 = *((f32 *) ((u8 *) (&arg0->frame) + 52)) - ((f32 *) temp_v0)[296 / sizeof(f32)];
-        temp_v0_2 = temp_v0 + 0x128;
-        temp_fv1f = ((f32 *) temp_v1_4)[4 / sizeof(f32)] - ((f32 *) temp_v0_2)[4 / sizeof(f32)];
-        temp_fv0_2 = ((f32 *) temp_v1_4)[8 / sizeof(f32)] - ((f32 *) temp_v0_2)[8 / sizeof(f32)];
-        temp_fv0_3 = (temp_fv1 * temp_fv1) + (temp_fv1f * temp_fv1f) + (temp_fv0_2 * temp_fv0_2);
-        if (!(D_800D0D10 <= temp_fv0_3)) {
-            var_fa1 = D_800C3F48_de - (temp_fv0_3 / D_800D0D10);
-        } else {
-            var_fa1 = 0.0f;
-        }
-        temp_v1_5 = *((s8 *) ((u8 *) (&arg0->frame) + 68));
-        if (temp_v1_5 != 1) {
-            if (temp_v1_5 < 2) {
-                if (temp_v1_5 != 0) {
-                    goto block_32;
-                }
-                temp_fa1 = var_fa1 * var_fa1;
-                var_fa1 = temp_fa1 * temp_fa1;
-                goto block_31;
-            }
-            var_fs0 = var_fa1;
-            if (temp_v1_5 == 2) {
+typedef struct AudioVolumeControl {
+    u16 levels[3];
+    s16 frames;
+    s16 delay;
+    u16 reservedA;
+} AudioVolumeControl;
 
+typedef struct AudioVolumeVoice {
+    s32 unk0, sound, unk8, unkC;
+    AudioVolumeMix mix;
+    AudioVolumeControl control;
+    f32 envelopeValue, envelopeStep;
+    u8 reserved88[0x18];
+    s32 pending, flags, soundId, fieldAC;
+    ContextRecAt2BC0 *context;
+    s32 fieldB4;
+    f32 fieldB8;
+    s32 fieldBC, fieldC0, fieldC4;
+    f32 volumeScale;
+} AudioVolumeVoice;
+
+/* 62/286 aligned edits; remaining: float registers and mix/envelope lifetimes. */
+/* Updates spatial attenuation and the volume envelope, then applies the scaled level. */
+void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
+    AudioVolumeMix *mix;
+    u16 *envelope;
+    ContextRecAt2BC0 *context;
+    ALSndPlayer *sound;
+    GameplayCamera *listener;
+    CVector3 *position;
+    CVector3 *ear;
+    f32 distance, radius, limit, squared;
+    f32 dx, dy, dz;
+    f32 gain, falloff, level;
+    f32 result;
+    s32 rising;
+    s32 value;
+    s32 volume;
+    listener=voice->context->field2B98;
+    radius=listener->unk528;
+    limit=D_800C3F38_de;
+    squared=radius < limit ? limit : radius;
+    squared *= radius < limit ? limit : radius;
+    D_800D0D10=squared;
+    switch(voice->mix.curve) {
+    case 0: break;
+    case 2: D_800D0D10=squared+squared*D_800C3F3C_de;break;
+    case 1: D_800D0D10=squared+squared*D_800C3F40_de;break;
+    }
+    mix=&voice->mix;
+    envelope=voice->control.levels;
+    context=voice->context;
+    if(voice->flags & 0x200) gain=context->blue;
+    else {
+        gain=context->red;
+        if(voice->fieldC4 && context->field2BB8) gain*=D_800C3F44_de;
+    }
+    if((voice->flags & 0x400) && voice->fieldC0==0 && !(voice->flags & 0x800)) {
+        listener=voice->context->field2B98;
+        position=&mix->position;
+        ear=&listener->position;
+        dx=position->x-ear->x;dy=position->y-ear->y;dz=position->z-ear->z;
+        distance=dx*dx+dy*dy+dz*dz;
+        if(D_800D0D10 <= distance) falloff=0.0f;
+        else falloff=D_800C3F48_de-distance/D_800D0D10;
+        switch(mix->curve) {
+        case 0: falloff*=falloff;falloff*=falloff;
+        case 1: falloff*=falloff;level=falloff;break;
+        case 2: level=falloff;break;
+        default: level=0.0f;break;
+        }
+        if(func_80245784_de()==0) mix->attenuation=level;
+        else mix->attenuation=func_80274808_de(mix->attenuation,level,0.017f);
+    } else mix->attenuation=D_800C3F4C_de;
+    if(voice->flags & 4) {
+        if(voice->control.delay>0) voice->control.delay--;
+        else {
+            rising=0;
+            if(voice->envelopeStep<0.0f) rising=1;
+            if(rising) {
+                if(!(voice->envelopeValue < func_802B2350(envelope[2]))) goto ramp_done;
             } else {
-block_32:
-                var_fs0 = 0.0f;
+                if(!(func_802B2350(envelope[2]) < voice->envelopeValue)) goto ramp_done;
             }
-        } else {
-block_31:
-            var_fs0 = var_fa1 * var_fa1;
-        }
-        if (func_80245784_de() == 0) {
-            *((f32 *) ((u8 *) (&arg0->frame) + 28)) = var_fs0;
-        } else {
-            *((f32 *) ((u8 *) (&arg0->frame) + 28)) = func_80274808_de(*((f32 *) ((u8 *) (&arg0->frame) + 28)), var_fs0, 0.017f);
-        }
-    } else {
-        *((f32 *) ((u8 *) (&arg0->frame) + 28)) = (f32) D_800C3F4C_de;
-    }
-    temp_v1_6 = arg0->flags;
-    if (temp_v1_6 & 4) {
-        if ((arg0->volumeDelay) > 0) {
-            (arg0->volumeDelay) = (u16) (arg0->volumeDelay) - 1;
-        } else {
-            var_s0 = 0;
-            if ((arg0->volumeStep) < 0.0f) {
-                var_s0 = 1;
-            }
-            if (var_s0 != 0) {
-                if ((arg0->volume) < func_802B2350((s32) (arg0->volumeTarget))) {
-                    goto block_47;
-                }
-            } else if (func_802B2350((s32) (arg0->volumeTarget)) < (arg0->volume)) {
-block_47:
-                (arg0->volume) -= (arg0->volumeStep);
-                if (var_s0 != 0) {
-                    if (func_802B2350((s32) (arg0->volumeTarget)) < (arg0->volume)) {
-                        (arg0->volume) = func_802B2350((s32) (arg0->volumeTarget));
-                    }
-                } else if ((arg0->volume) < func_802B2350((s32) (arg0->volumeTarget))) {
-                    temp_fv0_4 = func_802B2350((s32) (arg0->volumeTarget));
-                    (arg0->volume) = temp_fv0_4;
-                    if (temp_fv0_4 == 0.0f) {
-                        temp_a0 = arg0->context;
-                        arg0->done = 1;
-                        arg0->tracked = NULL;
-                        temp_s0 = (void *) ((u8 *) &temp_a0->slots + 8);
-                        if (arg0->frame != temp_a0->frame) {
-                            func_802B2F00_de(temp_s0, temp_a0->slots.ids[arg0->slot]);
-                            if (func_802B2620_de(temp_s0) != 0) {
-                                alSndpStop(temp_s0);
-                            }
-                            arg0->handle = -1;
-                        }
+            voice->envelopeValue-=voice->envelopeStep;
+            if(rising) {
+                if(func_802B2350(envelope[2])<voice->envelopeValue)
+                    voice->envelopeValue=func_802B2350(envelope[2]);
+            } else if(voice->envelopeValue < func_802B2350(envelope[2])) {
+                voice->envelopeValue=func_802B2350(envelope[2]);
+                if(voice->envelopeValue==0.0f) {
+                    context=voice->context;
+                    voice->fieldAC=1;voice->mix.tracked=0;
+                    sound=context->list;
+                    if(voice->mix.frame != context->frame) {
+                        func_802B2F00_de(sound,context->handles[voice->unk0]);
+                        if(func_802B2620_de(sound)) alSndpStop(sound);
+                        voice->sound=-1;
                     }
                 }
             }
         }
-        temp_ft0 = (s32) (func_802B2350((s32) arg0->volumeInitial) * (arg0->volume));
-        var_fv0_2 = (f32) temp_ft0 * *((f32 *) ((u8 *) (&arg0->frame) + 28));
-        *((s32 *) ((u8 *) (&arg0->frame) + 8)) = temp_ft0;
+ramp_done:
+        value=(s32)(func_802B2350(voice->control.levels[0])*voice->envelopeValue);
+        result=(f32)value*mix->attenuation;
+        mix->left=value;
     } else {
-        if (temp_v1_6 & 0x400) {
-            var_fv0f_3 = *((f32 *) ((u8 *) (&arg0->frame) + 28));
-        } else {
-            var_fv0f_3 = *((f32 *) ((u8 *) (&arg0->frame) + 32));
-        }
-        var_fv0_2 = (f32) *((s32 *) ((u8 *) (&arg0->frame) + 8)) * var_fv0f_3;
+        if(voice->flags & 0x400) falloff=mix->attenuation;
+        else falloff=mix->baseAttenuation;
+        result=(f32)mix->left*falloff;
     }
-    temp_v1_7 = arg0->context;
-    temp_s1 = (void *) ((u8 *) &temp_v1_7->slots + 8);
-    func_802B2F00_de(temp_s1, temp_v1_7->slots.ids[arg0->slot]);
-    func_802B2F10_de(temp_s1, (s16) (s32) ((f32) (s32) (var_fv0_2 * var_fs0f) * arg0->volumeScale));
+    context=voice->context;sound=context->list;
+    volume=(s32)(result*gain);
+    func_802B2F00_de(sound,context->handles[voice->unk0]);
+    func_802B2F10_de(sound,(s16)(s32)((f32)volume*voice->volumeScale));
 }
 #else
 INCLUDE_ASM("span_1000", Audio_UpdateVoiceVolume);
