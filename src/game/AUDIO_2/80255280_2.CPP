@@ -117,26 +117,26 @@ s32 func_80255540_de(s32 mask) {
 void func_8025558C_de(void) {
     s32 var_a1;
     s32 var_v1;
-    u32 var_a0;
-    u32 var_a0_2;
+    u32 i;
+    u32 j;
     u32 limit;
     Shared_HashLink *var_v0;
     Shared_HashLink *buckets;
 
     var_a1 = 0;
-    var_a0 = var_a1;
+    i = var_a1;
     limit = D_800CB6F0;
     if (limit != 0) {
         var_v1 = limit;
         do {
-            var_a0 += 1;
-        } while (var_a0 < (u32)var_v1);
+            i += 1;
+        } while (i < (u32)var_v1);
     }
-    var_a0_2 = 0;
+    j = 0;
     if (D_800CB6F0 != 0) {
         buckets = (Shared_HashLink *)D_80101194;
         do {
-            var_v0 = &buckets[var_a0_2];
+            var_v0 = &buckets[j];
             var_v1 = 0;
             if (var_v0 != 0) {
                 do {
@@ -147,9 +147,9 @@ void func_8025558C_de(void) {
             if (var_v1 < var_a1) {
                 var_v1 = var_a1;
             }
-            var_a0_2 += 1;
+            j += 1;
             var_a1 = var_v1;
-        } while (var_a0_2 < D_800CB6F0);
+        } while (j < D_800CB6F0);
     }
     if (D_800CB6F8 != 0) {
         D_800CB6F8 = 0;

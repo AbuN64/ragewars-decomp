@@ -42,10 +42,10 @@ void func_8025D844_de(struct AudioStateD844 *state, struct AudioRootD844 *root) 
     state->fourth = D_800C3FF8_de;
 }
 
-void func_8025D928_de(void *arg0) {
-    ObjectState40 *o = arg0;
+void func_8025D928_de(void *queue) {
+    ObjectState40 *o = queue;
     f32 temp_f1;
-    f32 temp_f2;
+    f32 targetGain;
     f32 var_f0;
     s32 temp_f3;
 
@@ -60,21 +60,21 @@ void func_8025D928_de(void *arg0) {
         }
     } else if (o->unk_38 != 0) {
         temp_f1 = o->unk_3C;
-        temp_f2 = o->targetGain;
-        if (temp_f2 < temp_f1) {
+        targetGain = o->targetGain;
+        if (targetGain < temp_f1) {
             var_f0 = temp_f1 - D_800C4000_de;
-            if (temp_f2 <= var_f0) {
+            if (targetGain <= var_f0) {
                 goto store;
             }
             goto clamp;
         }
-        if (temp_f1 < temp_f2) {
+        if (temp_f1 < targetGain) {
             var_f0 = temp_f1 + (0.01666666753590107f);
-            if (var_f0 <= temp_f2) {
+            if (var_f0 <= targetGain) {
                 goto store;
             }
 clamp:
-            var_f0 = temp_f2;
+            var_f0 = targetGain;
 store:
             o->unk_3C = var_f0;
         }

@@ -64,17 +64,17 @@ void func_80258800_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     {
         s32 *temp_s0;
         s32 temp_v1;
-        u32 temp_a0;
+        u32 mask;
 
         temp_s0 = &arg0->lock;
-        temp_a0 = func_802BCF30_de();
+        mask = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(mask);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(mask);
         }
     }
     func_8025BE08_de(&arg0->menu[0], arg1);
@@ -101,24 +101,24 @@ struct OwnerRecAtD8;
 
 void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     void *temp_s0;
-    void *var_a0;
+    void *record;
     s32 temp_v1;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_v0;
 
     temp_s0 = &arg0->lock;
-    temp_a0 = func_802BCF30_de();
+    mask = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         func_802BB2A0_de(temp_s0, 0, 1);
-        var_a0 = &arg0->menu[0];
+        record = &arg0->menu[0];
     } else {
-        __osRestoreInt(temp_a0);
-        var_a0 = &arg0->menu[0];
+        __osRestoreInt(mask);
+        record = &arg0->menu[0];
     }
-    func_8025BF08_de(var_a0, arg1);
+    func_8025BF08_de(record, arg1);
     func_802599EC_de(&arg0->view[0], arg1);
     temp_s0 = &arg0->lock;
     temp_v0 = func_802BCF30_de();
@@ -134,24 +134,24 @@ void func_802588D4_de(ContextRecAt2BC0 *arg0, s32 arg1) {
 
 void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     void *temp_s0;
-    void *var_a0;
+    void *record;
     s32 temp_v1;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_v0;
 
     temp_s0 = &arg0->lock;
-    temp_a0 = func_802BCF30_de();
+    mask = func_802BCF30_de();
     temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
     ((MenuRules *)(temp_s0))->locked = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         func_802BB2A0_de(temp_s0, 0, 1);
-        var_a0 = &arg0->menu[0];
+        record = &arg0->menu[0];
     } else {
-        __osRestoreInt(temp_a0);
-        var_a0 = &arg0->menu[0];
+        __osRestoreInt(mask);
+        record = &arg0->menu[0];
     }
-    func_8025C008_de(var_a0, arg1);
+    func_8025C008_de(record, arg1);
     func_80259A50_de(&arg0->view[0], arg1);
     temp_s0 = &arg0->lock;
     temp_v0 = func_802BCF30_de();
@@ -165,9 +165,9 @@ void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
     __osRestoreInt(temp_v0);
 }
 
-void func_80258A7C_de(ContextRecAt2BC0 *arg0, s32 arg1, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
+void func_80258A7C_de(ContextRecAt2BC0 *arg0, s32 track, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
     arg0->alpha = arg5;
-    Texture_PlaySoundAtPosition(arg0, arg1, arg2, arg3, arg4);
+    Texture_PlaySoundAtPosition(arg0, track, arg2, arg3, arg4);
     arg0->alpha = D_800C3EE0_de[1];
 }
 
@@ -230,17 +230,17 @@ void func_80258C0C_de(void *arg0, s32 arg1) {
     {
         s32 *temp_s0;
         s32 temp_v1;
-        u32 temp_a0;
+        u32 mask;
 
         temp_s0 = &((ContextRecAt2BC0 *)(arg0))->lock;
-        temp_a0 = func_802BCF30_de();
+        mask = func_802BCF30_de();
         temp_v1 = ((MenuRules *)(temp_s0))->locked + 1;
         ((MenuRules *)(temp_s0))->locked = temp_v1;
         if (temp_v1 != 1) {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(mask);
             func_802BB2A0_de(temp_s0, 0, 1);
         } else {
-            __osRestoreInt(temp_a0);
+            __osRestoreInt(mask);
         }
     }
     func_8025B5F0_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1);
@@ -395,13 +395,13 @@ void func_80258EF4_de(int arg0) {
     func_8025BB3C_de(arg0 + 0x1DB8);
 }
 
-int func_80258F10_de(ContextRecAt2BC0 *arg0, int arg1) {
-    float var_f0 = (1.0f);
-    float temp_f1 = arg0->blue;
-    if (!(var_f0 < temp_f1)) {
-        var_f0 = temp_f1;
+int func_80258F10_de(ContextRecAt2BC0 *arg0, int group) {
+    float scale = (1.0f);
+    float blue = arg0->blue;
+    if (!(scale < blue)) {
+        scale = blue;
     }
-    return func_8025CED0_de(&arg0->dialog[0], arg1, var_f0, 0x40);
+    return func_8025CED0_de(&arg0->dialog[0], group, scale, 0x40);
 }
 
 /** Thin wrapper forwarding an offset argument to func_8025D1BC_de. */
@@ -488,12 +488,12 @@ s32 func_80259038_de(SceneRecAt2B5C *scene, s16 id, s16 avoid) {
     return -1;
 }
 
-void func_802591A0_de(void *arg0, s16 arg1) {
-    func_8028FDB4_de(func_8028FDB4_de((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) arg1), 0);
+void func_802591A0_de(void *arg0, s16 index) {
+    func_8028FDB4_de(func_8028FDB4_de((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 0);
 }
 
-void func_802591D0_de(void *arg0, s16 arg1) {
-    func_8028FDB4_de(func_8028FDB4_de((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) arg1), 1);
+void func_802591D0_de(void *arg0, s16 index) {
+    func_8028FDB4_de(func_8028FDB4_de((((struct ObjectLinks2B50 *) ((s8 *) arg0))->unk_2B4C), (s32) index), 1);
 }
 
 /* Returns 1 when the object's owner at 0x102 is set, or when the id is below 256 and at least six of
