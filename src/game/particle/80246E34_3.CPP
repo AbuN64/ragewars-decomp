@@ -577,67 +577,100 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 arg2) {
     return ret;
 }
 
-#ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
-#ifndef PUSH_GFX
-#define PUSH_GFX(w0, w1) do { u32 *cmd_ = (u32 *)D_80110634; cmd_[0] = (w0); cmd_[1] = (u32)(w1); D_80110634 = (void *)(cmd_ + 2); } while (0)
-#endif
+#include "COMMON/VIEWFLAGS.H"
+#include "gbi.h"
 extern char D_800C3A20_de[];
 extern s32 D_80146894;
-extern u32 *D_80110634;
-typedef struct DrawContext { s32 visible; s32 hasSecond; void *camera; void *first; void *second; f32 *offset; s32 pad; } DrawContext;
-extern void *func_8024BFD4_de(void *, s32);
+extern Gfx *D_80110634;
+typedef struct SceneModelRef {
+    u8 pad0[0x1C];
+    u32 viewMask; /* 0x1C */
+} SceneModelRef;
+typedef struct SceneObject SceneObject;
+typedef struct DrawContext {
+    s32 visible;
+    s32 hasSecond;
+    struct Racer *camera;
+    void *first;
+    void *second;
+    f32 *offset;
+    s32 pad;
+} DrawContext;
+struct SceneObject {
+    u8 pad0;
+    s8 firstKey; /* 1 */
+    s8 secondKey; /* 2 */
+    u8 pad3[0x11];
+    SceneModelRef *model; /* 0x14 */
+    u8 pad18[0x5C];
+    f32 transform[16]; /* 0x74 */
+    u8 padB4[0xC];
+    Gfx *cached; /* 0xC0 */
+    s32 resource; /* 0xC4 */
+    u8 padC8[8];
+    s32 resourceFlags; /* 0xD0 */
+    u8 padD4[0x14];
+    Box bounds; /* 0xE8 */
+    u32 flags; /* 0x100 */
+    u8 pad104[0x6C];
+    s32 behaviorFlags; /* 0x170 */
+    u8 pad174[0x108];
+    void (*draw)(SceneObject *, void *, DrawContext *); /* 0x27C */
+    u8 pad280[0xC];
+    void (*update)(SceneObject *, void *); /* 0x28C */
+};
+extern void *func_8024BFD4_de(SceneObject *, s32);
 extern s32 func_80296B74_de(void *, void *);
 extern void func_8026D8F8_de(void);
 extern void func_80295FF4_de(void);
-/* Draws one scene object: loads its model, culls its bounding box (0xE8..0xFC) against the camera's frustum
- * box (0x350..0x364) and plane test, then records the object's draw callback (0x27C) into a display list
- * cached at 0xC0 (a branch placeholder is patched at the end) or replays the cached list. */
-void func_80249E28_de(void *object, void *camera) {
+/* Draws one scene object: loads its model, culls its bounding box against the camera's clip box and plane test,
+ * then records the object's draw callback into a display list cached on the object (a branch placeholder is
+ * patched at the end) or replays the cached list.
+ * Byte-exact for us-rev1. */
+void func_80249E28_de(SceneObject *object, struct Racer *camera) {
     void **mem;
     void *model;
     void *first;
     void *second;
     s32 visible;
     s32 second_needed;
-    DrawContext context;
     f32 offset[3];
-    u32 *start;
-    u32 flags = FIELD(u32, object, 0x100);
-    if (!(flags & 0x40000) || FIELD(void *, object, 0x27C) == 0) {
+    s32 spare[6];
+    DrawContext context;
+
+    if (!(object->flags & 0x40000) || object->draw == 0) {
         return;
     }
-    if (!(flags & 0x2000)) {
-        FIELD(u32, object, 0x100) = flags & ~0x200;
+    if (!(object->flags & 0x2000)) {
+        object->flags &= ~0x200;
         return;
     }
-    mem = func_8025193C_de(0, FIELD(s32, object, 0xC4), FIELD(s32, object, 0xC4), FIELD(s32, object, 0xD0), 0, 0, 0, D_800C3A20_de, 1);
+    mem = func_8025193C_de(0, object->resource, object->resource, object->resourceFlags, 0, 0, 0, D_800C3A20_de, 1);
     if (mem == 0) {
         return;
     }
     model = func_8028FDB4_de(*mem, 0);
     if (D_80146894 != 0) {
-        ((void (*)(void *, void *))FIELD(void *, object, 0x28C))(object, (char *)object + 0x170);
-        func_8026EE20_de((char *)object + 0x74, (s32)model, (char *)object + 0xE8);
+        object->update(object, &object->behaviorFlags);
+        func_8026EE20_de(object->transform, (s32)model, &object->bounds);
     }
     visible = 1;
-    second_needed = 1;
-    if (!(FIELD(u32, object, 0x100) & 0x200000)) {
-        visible = 0;
-        second_needed = 0;
-        if (FIELD(void *, object, 0x14) == 0 || (FIELD(u32, camera, 0x64) & FIELD(u32, FIELD(void *, object, 0x14), 0x1C))) {
-            if (FIELD(f32, object, 0xE8) < FIELD(f32, camera, 0x35C) && FIELD(f32, camera, 0x350) < FIELD(f32, object, 0xF4) &&
-                FIELD(f32, object, 0xF0) < FIELD(f32, camera, 0x364) && FIELD(f32, camera, 0x358) < FIELD(f32, object, 0xFC) &&
-                FIELD(f32, object, 0xEC) < FIELD(f32, camera, 0x360) && FIELD(f32, camera, 0x354) < FIELD(f32, object, 0xF8) &&
-                func_80296B74_de((char *)camera + 0x2F0, (char *)object + 0xE8) != 0) {
+    if (!(object->flags & 0x200000)) {
+        second_needed = visible = 0;
+        if (object->model == 0 || (camera->visibilityFlags & object->model->viewMask)) {
+            if (camera->clipBounds[1].x > object->bounds.min.x && camera->clipBounds[0].x < object->bounds.max.x &&
+                camera->clipBounds[1].z > object->bounds.min.z && camera->clipBounds[0].z < object->bounds.max.z &&
+                camera->clipBounds[1].y > object->bounds.min.y && camera->clipBounds[0].y < object->bounds.max.y &&
+                func_80296B74_de((char *)camera + 0x2F0, &object->bounds) != 0) {
                 visible = 1;
-                if (FIELD(void *, object, 0x14) != 0) {
-                    second_needed = 1;
+                if (object->model != 0) {
+                    goto sync;
                 }
             }
         }
+    } else {
+    sync:
+        second_needed = visible;
     }
     if (visible == 0 && second_needed == 0) {
         func_80253754_de(0, mem);
@@ -645,52 +678,44 @@ void func_80249E28_de(void *object, void *camera) {
     }
     func_8026D8F8_de();
     func_80295FF4_de();
-    if (FIELD(void *, object, 0xC0) != 0) {
-        PUSH_GFX(0xDE000000, FIELD(void *, object, 0xC0));
+    if (object->cached != 0) {
+        gSPDisplayList(D_80110634++, (unsigned int)object->cached);
         func_80253754_de(0, mem);
         return;
     }
-    first = func_8024BFD4_de(object, FIELD(s8, object, 1));
+    first = func_8024BFD4_de(object, object->firstKey);
     if (first == 0) {
         func_80253754_de(0, mem);
         return;
     }
-    if ((FIELD(u32, object, 0x100) & 0x200) == 0 && func_802484B0_de(object, *(void **)first, (s32)model) == 0) {
+    if ((object->flags & 0x200) == 0 && func_802484B0_de(object, *(void **)first, (s32)model) == 0) {
         func_80253754_de(0, first);
         func_80253754_de(0, mem);
         return;
     }
-    offset[0] = 0.0f;
-    offset[1] = 0.0f;
-    offset[2] = 0.0f;
+    offset[0] = offset[1] = offset[2] = 0.0f;
     if (second_needed != 0) {
-        second = func_8024BFD4_de(object, FIELD(s8, object, 2));
+        second = func_8024BFD4_de(object, object->secondKey);
         second_needed = second != 0;
     } else {
         second = 0;
     }
-    context.visible = visible;
     context.hasSecond = second_needed;
+    context.visible = visible;
     context.camera = camera;
     context.first = first;
     context.second = second;
     context.offset = offset;
     context.pad = 0;
-    FIELD(void *, object, 0xC0) = D_80110634;
-    PUSH_GFX(0xDE010000, 0);
-    ((void (*)(void *, void *, void *))FIELD(void *, object, 0x27C))(object, (char *)object + 0x170, &context);
-    PUSH_GFX(0xDF000000, 0);
-    start = FIELD(u32 *, object, 0xC0);
-    FIELD(u32 *, object, 0xC0) = start + 2;
-    start[0] = 0xDE010000;
-    start[1] = (u32)D_80110634;
-    PUSH_GFX(0xDE000000, FIELD(void *, object, 0xC0));
+    object->cached = D_80110634;
+    gSPBranchList(D_80110634++, 0);
+    object->draw(object, &object->behaviorFlags, &context);
+    gSPEndDisplayList(D_80110634++);
+    gSPBranchList(object->cached++, (unsigned int)D_80110634);
+    gSPDisplayList(D_80110634++, (unsigned int)object->cached);
     func_80253754_de(0, first);
     if (second != 0) {
         func_80253754_de(0, second);
     }
     func_80253754_de(0, mem);
 }
-#else
-INCLUDE_ASM("span_1000", func_80249E28_de);
-#endif
