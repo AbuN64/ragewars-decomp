@@ -18,7 +18,7 @@ typedef struct SharedRecAt148 SharedRecAt148;
 struct Shared_func_8043DEDC_S3;
 typedef struct Shared_func_8043DEDC_S3 Shared_func_8043DEDC_S3;
 
-extern void func_8043DE50_de(func_80250BD4_S1 *arg0);
+extern void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *arg0);
 
 struct SharedRecAt224;
 typedef struct SharedRecAt224 SharedRecAt224;

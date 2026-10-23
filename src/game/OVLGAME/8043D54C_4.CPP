@@ -19,11 +19,10 @@ extern struct SharedRecAt148 D_80142622[];
 
 
 
-void func_8043DE50_de(func_80250BD4_S1 *arg0) {
+void Ovlgame_SelectConfirmingController(func_80250BD4_S1 *arg0) {
     Shared_func_8043DEDC_S3 *settings;
     s8 *status;
     s32 *profile;
-    s32 on;
     s32 i;
 
     i = 7;
@@ -34,11 +33,10 @@ void func_8043DE50_de(func_80250BD4_S1 *arg0) {
     }
     i = 0;
     settings = (Shared_func_8043DEDC_S3 *)&D_80146302;
-    /* FAKEMATCH: constant-holding local places li across the callback. */
-    on = 1;
-    for (profile = &D_8010F328; i < 4; i++, profile = &((SharedRecAt224 *)profile)->unk224) {
+    for (; i < 4; i++) {
+        profile = (s32 *)((char *)&D_8010F328 + i * 0x224);
         if (func_8026437C_de(profile) != 0) {
-            settings->unk78 = on;
+            settings->unk78 = 1;
             settings->unk7F = i;
             arg0->unk20 = profile;
             break;
