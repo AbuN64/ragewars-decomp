@@ -126,82 +126,79 @@ s32 Frontend_CreateFourPlayerResults(void *window) {
 }
 
 
-#ifdef NON_MATCHING
-typedef struct ResultsTriple { s32 x; s32 y; s32 z; } ResultsTriple;
-extern s32 func_80439B5C_de(void *, s32, ResultsTriple, ResultsTriple);
-extern void func_80439BE0_de(void *, ResultsTriple);
-extern void func_80439C30_de(void *, ResultsTriple);
+#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
+extern s32 func_80439B5C_de(void *, s32, CVector3, CVector3);
+extern void func_80439BE0_de(void *, CVector3);
+extern void func_80439C30_de(void *, CVector3);
 extern f32 D_800E1FC4, D_800DDF98_de, D_800DDF9C, D_800E1FD0, D_800E1FD4, D_800DDFA8, D_800DDFAC_de;
 extern u16 D_800E19DE[];
-/* Seats the four result cards: scatters four spinning models with random heights, then for each enabled player shows
- * the player widget and starts the player slot in mode 5 (state 0) or mode 0 (states 1 and 2).
- * 2 aligned edits of 178 words; remaining: the loop-invariant moves (x = 0 copy and the 0x1370 giv) swap order. */
-s32 func_8043A330_de(void) {
-    ResultsTriple scale;
-    ResultsTriple dirOffset;
-    ResultsTriple pos;
-    ResultsTriple spin;
-    f32 offsetY;
-    u8 *screen;
-    u8 *entry;
+/* Initialize four rotating result badges and reveal enabled player cards. */
+s32 Frontend_StartFourPlayerResults(void) {
+    CVector3 scale;
+    CVector3 position;
+    CVector3 rotation;
+    CVector3 angularVelocity;
+    struct FourPlayerResultsScreen *screen;
     MenuWidget *widget;
     s32 i;
-    s32 x;
-    s32 *slot;
-    u8 *cfg;
+    s32 baseAngle;
+    s32 badgeOffset;
+    Shared_PlayerSettingsRecord *config;
     func_802A23C4_de(1);
     i = 0;
-    *(f32 *)&scale.x = D_800E1FC4;
-    *(f32 *)&scale.y = D_800E1FC4;
-    *(f32 *)&scale.z = D_800E1FC4;
-    pos.x = 0;
-    pos.y = 0;
-    pos.z = 0;
-    spin.x = 0;
-    spin.z = 0;
-    dirOffset.x = 0;
-    dirOffset.y = 0;
-    *(f32 *)&spin.y = D_800DDF98_de;
-    *(f32 *)&dirOffset.z = D_800DDF9C;
-    x = i;
+    badgeOffset = (s32)&((struct FourPlayerResultsScreen *)0)->badges;
+    scale.x = D_800E1FC4;
+    scale.y = D_800E1FC4;
+    scale.z = D_800E1FC4;
+    rotation.x = 0;
+    rotation.y = 0;
+    rotation.z = 0;
+    angularVelocity.x = 0;
+    angularVelocity.z = 0;
+    position.x = 0;
+    position.y = 0;
+    angularVelocity.y = D_800DDF98_de;
+    position.z = D_800DDF9C;
+    baseAngle = i;
     for (; i < 4; i++) {
         switch (i) {
         case 0:
-            *(f32 *)&dirOffset.y = D_800E1FD0;
+            position.y = D_800E1FD0;
             break;
         case 1:
-            *(f32 *)&dirOffset.y = D_800E1FD4;
+            position.y = D_800E1FD4;
             break;
         case 2:
-            *(f32 *)&dirOffset.y = D_800DDFA8;
+            position.y = D_800DDFA8;
             break;
         case 3:
-            *(f32 *)&dirOffset.y = D_800DDFAC_de;
+            position.y = D_800DDFAC_de;
             break;
         }
-        *(f32 *)&pos.y = (f32)(x + func_802744D4_de() % 10);
-        x += 0x2D;
-        func_80439B5C_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), 0, scale, dirOffset);
-        func_80439BE0_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), pos);
-        func_80439C30_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), spin);
+        rotation.y = (f32)(baseAngle + func_802744D4_de() % 10);
+        baseAngle += 0x2D;
+        func_80439B5C_de((u8 *)D_800E59E0 + badgeOffset, 0, scale, position);
+        func_80439BE0_de((u8 *)D_800E59E0 + badgeOffset, rotation);
+        func_80439C30_de((u8 *)D_800E59E0 + badgeOffset, angularVelocity);
+        badgeOffset += sizeof(D_800E59E0->badges[0]);
     }
     for (i = 0; i < 4; i++) {
-        cfg = (u8 *)&D_80146398[i];
-        if (cfg[0x78] == 1) {
-            widget = func_8040EC30_de(*(void **)D_800E59E0, D_800E19DE[i * 0x26]);
+        config = &D_80146398[i];
+        if (config->enabled == 1) {
+            widget = func_8040EC30_de(D_800E59E0->window, D_800E19DE[i * 0x26]);
             func_8040E928_de(widget, 0);
-            *((u8 *)widget + 0x10) = 0x23;
-            screen = (u8 *)D_800E59E0 + i * 0x4D0;
-            switch (*(s32 *)(screen + 0x4D4)) {
+            widget->alpha = 0x23;
+            screen = D_800E59E0;
+            switch (screen->panels[i].mode) {
             case 0:
-                func_8043BA5C_de(i, *(s32 *)(screen + 0x4B4) = 5);
+                func_8043BA5C_de(i, screen->panels[i].selection = 5);
                 break;
             case 1:
-                *(s32 *)(screen + 0x4B4) = 0;
+                screen->panels[i].selection = 0;
                 func_8043BA5C_de(i, 0);
                 break;
             case 2:
-                *(s32 *)(screen + 0x4B4) = 0;
+                screen->panels[i].selection = 0;
                 func_8043BA5C_de(i, 0);
                 break;
             }
@@ -211,7 +208,7 @@ s32 func_8043A330_de(void) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8043A330_de);
+INCLUDE_ASM("ovl_80400000", Frontend_StartFourPlayerResults);
 #endif
 
 /* Advance the four-player results screen one frame: slide the arrows, count the timer down, step the state. */
