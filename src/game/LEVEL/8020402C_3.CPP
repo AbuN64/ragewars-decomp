@@ -151,8 +151,8 @@ void func_80204BD0_de(void *arg0, void *arg1) {
     }
 }
 
-void func_80204C34_de(void *arg0, Shared_CallbackOwner *arg1) {
-    Shared_CallbackHook *obj = arg1->hook;
+void func_80204C34_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
+    Shared_CallbackHook *obj = callbackOwner->hook;
     if (obj != 0) {
         Shared_VoidCallback fn = obj->callback;
         if (fn != 0) {
@@ -162,7 +162,7 @@ void func_80204C34_de(void *arg0, Shared_CallbackOwner *arg1) {
 }
 
 extern void func_802A5D38_de(SceneRecAt95A8 *, s32);
-void func_80204C68_de(void *arg0, ActorMotionState *arg1) {
+void func_80204C68_de(void *arg0, ActorMotionState *motionState) {
     ResourceManagerState local;
     Shared_World *flag;
 
@@ -170,7 +170,7 @@ void func_80204C68_de(void *arg0, ActorMotionState *arg1) {
     flag = &D_8011FE88;
     func_80285DB0_de(flag, arg0, 1);
     func_80278D78_de(arg0, 0x4000, arg0);
-    arg1->speed = 0;
+    motionState->speed = 0;
     func_802A5D38_de(&D_801379C0, (s32)arg0);
     if (flag->mode != 4) {
         func_80267198_de(arg0, arg0, 6,
@@ -179,32 +179,32 @@ void func_80204C68_de(void *arg0, ActorMotionState *arg1) {
     }
 }
 
-void func_80204D2C_de(BreakableHitContext *arg0) {
+void func_80204D2C_de(BreakableHitContext *breakableHitContext) {
     ResourceManagerState local;
     Shared_World *flag;
 
     local.active = 0;
     flag = &D_8011FE88;
-    func_80285DB0_de(flag, arg0, 0);
-    func_80278D78_de(arg0, 0x8000, arg0);
-    func_802A5D38_de(&D_801379C0, (s32)arg0);
+    func_80285DB0_de(flag, breakableHitContext, 0);
+    func_80278D78_de(breakableHitContext, 0x8000, breakableHitContext);
+    func_802A5D38_de(&D_801379C0, (s32)breakableHitContext);
     if (flag->mode != 4) {
-        func_80267198_de(arg0, arg0, 7,
-                      arg0->unk_8, local);
-        arg0->unk_100 |= 0x08000000;
+        func_80267198_de(breakableHitContext, breakableHitContext, 7,
+                      breakableHitContext->unk_8, local);
+        breakableHitContext->unk_100 |= 0x08000000;
     }
 }
 
 void func_80204DE0_de(void *a, void *b) {
     func_80214178_de(a, b, 0x0); }
 
-void func_80204DFC_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 1);
+void func_80204DFC_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 void func_80204E2C_de(void *a, void *b) {
     func_80214178_de(a, b, 0x1); }
 
-void func_80204E48_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 0);
+void func_80204E48_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
 }

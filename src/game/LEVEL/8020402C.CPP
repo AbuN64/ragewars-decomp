@@ -244,17 +244,17 @@ void func_802043E0_de(char *arg0, char *arg1) {
     }
 }
 
-void func_80204468_de(LevelActor *arg0, ActorMotionState *arg1) {
-    arg1->table = &D_800C8274;
-    arg1->update = &D_002043E0;
-    arg1->unk124 = 0;
-    arg1->unk128 = 0;
-    arg1->unk12C = 0;
-    if (((BreakableDefinition *)arg0->definition)->flags & 1) {
-        arg0->flags = arg0->flags | 0x10000;
+void func_80204468_de(LevelActor *actor, ActorMotionState *motionState) {
+    motionState->table = &D_800C8274;
+    motionState->update = &D_002043E0;
+    motionState->unk124 = 0;
+    motionState->unk128 = 0;
+    motionState->unk12C = 0;
+    if (((BreakableDefinition *)actor->definition)->flags & 1) {
+        actor->flags = actor->flags | 0x10000;
         return;
     }
-    arg0->flags = arg0->flags & 0xFFFEFFFF;
+    actor->flags = actor->flags & 0xFFFEFFFF;
 }
 
 /** Update actor state and clear flags for the relevant actor classes. */
@@ -302,27 +302,27 @@ void func_802045CC_de(void *arg0, void *arg1) {
     state->unk12C = 0;
 }
 
-s32 func_80204620_de(LevelActor *arg0) {
+s32 func_80204620_de(LevelActor *actor) {
     s32 val;
 
-    val = ((BreakableDefinition *)arg0->definition)->health;
+    val = ((BreakableDefinition *)actor->definition)->health;
     if (val != 0) {
-        arg0->flags = arg0->flags | 0x2000;
+        actor->flags = actor->flags | 0x2000;
     } else {
-        s32 flags = arg0->flags & ~0x2000;
+        s32 flags = actor->flags & ~0x2000;
         flags &= ~0x100;
-        arg0->flags = flags;
+        actor->flags = flags;
     }
     return val;
 }
 
 void func_80204658_de(void *arg0) {
-    BreakableDefinition *temp_s1;
+    BreakableDefinition *breakableDefinition;
     s32 temp_v1;
     s32 masked;
     Shared_World *pFlag;
 
-    temp_s1 = (BreakableDefinition *)((LevelActor *)arg0)->definition;
+    breakableDefinition = (BreakableDefinition *)((LevelActor *)arg0)->definition;
     pFlag = &D_8011FE88;
     func_80285DB0_de(pFlag, arg0, 1);
     if (D_800C8270_de == 0) {
@@ -332,7 +332,7 @@ void func_80204658_de(void *arg0) {
     if (pFlag->mode != 4) {
         temp_v1 = ((LevelActor *)arg0)->flags | 0x08000000;
         ((LevelActor *)arg0)->flags = temp_v1;
-        if (temp_s1->flags & 2) {
+        if (breakableDefinition->flags & 2) {
             masked = temp_v1 & ~0x2000;
             masked = masked & ~0x100;
             ((LevelActor *)arg0)->flags = masked;
@@ -361,15 +361,15 @@ void func_80204738_de(LevelActor *object) {
 void func_80204770_de(void *a, void *b) {
     func_80214178_de(a, b, 0x1); }
 
-void func_8020478C_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 1);
+void func_8020478C_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 void func_802047BC_de(void *a, void *b) {
     func_80214178_de(a, b, 0x0); }
 
-void func_802047D8_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 0);
+void func_802047D8_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
 }
 
 void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input, Lookup *lookup) {
