@@ -26,7 +26,7 @@ extern void func_80273D6C_de(void *);
 
 s32 func_80285F58_de(void *, void *);
 
-void func_80206A20_de(Player *mover, ActorMotionState *rider);
+void Render_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
 
 void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 
@@ -61,7 +61,7 @@ void func_802079B0_de(Player *mover, ActorMotionState *rider) {
         rider->hooks->onStep(mover, rider);
     }
     rider->progress += body->progressScale * D_800D2988;
-    func_80206A20_de(mover, rider);
+    Render_UpdateTriggeredMotion(mover, rider);
     if (rider->mode != 4) {
         func_80206DD4_de((void *)mover, (void *)rider);
     }

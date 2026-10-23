@@ -1,6 +1,6 @@
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
-/* ROM-grounded data: rodata/func_80206A20_de/800C6BE0 */
+/* ROM-grounded data: rodata/Render_UpdateTriggeredMotion/800C6BE0 */
 #ifdef VERSION_DE
 const unsigned int D_blob_phase2_f6d5ea33b5f44a7b0f4e[8] = {
     0x00206A74, 0x00206BDC, 0x00206C9C, 0x00206B3C, 0x00206D14, 0xBF03126F, 0x3F03126F, 0x42340000,
