@@ -167,7 +167,7 @@ void func_802589A8_de(ContextRecAt2BC0 *arg0, s32 arg1) {
 
 void func_80258A7C_de(ContextRecAt2BC0 *arg0, s32 arg1, CVector3 arg2, s32 arg3, s32 arg4, f32 arg5) {
     arg0->alpha = arg5;
-    func_80257DD4_de(arg0, arg1, arg2, arg3, arg4);
+    Texture_PlaySoundAtPosition(arg0, arg1, arg2, arg3, arg4);
     arg0->alpha = D_800C3EE0_de[1];
 }
 
@@ -190,7 +190,7 @@ void func_80258AE0_de(ContextRecAt2BC0 *arg0) {
         result = func_802395A4_de(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((arg0->frame & 3) == 0) {
-            func_80257DD4_de(arg0, arg0->track, *vec, 0, -1);
+            Texture_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);
         }
     }
 }

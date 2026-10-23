@@ -192,15 +192,15 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
 #include "stddef.h"
 #include "TYPES.H"
 s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
-s32 func_80257DD4_de(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 arg4, s32 arg5, s32 arg6) {
+s32 Texture_PlaySoundAtPosition(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 arg4, s32 arg5, s32 arg6) {
     union { u32 word; f32 value; } xbits, ybits, zbits;
     CVector3 position;
     s32 sp20;
     s32 sp24;
     s32 sp28;
     s32 sp2C;
-    OSMesgQueue *temp_s0;
-    OSMesgQueue *temp_s0_2;
+    MenuRules *lock;
+    MenuRules *unlock;
     s32 *var_a0_2;
     s32 *var_a0_3;
     s32 *var_a0_4;
@@ -372,29 +372,25 @@ block_41:
             temp_s5 = ((u32 *) temp_v0_3)[4 / sizeof(u32)];
             var_s2 = -1;
             if (temp_s5 != 0) {
-                temp_s0 = arg0 + 0x110;
+                lock = &((ContextRecAt2BC0 *)arg0)->lock;
                 temp_a0 = func_802BCF30_de();
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                temp_v1 = *((s32 *) ((u8 *) (temp_s0) + 28)) + 1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                *((s32 *) ((u8 *) (temp_s0) + 28)) = temp_v1;
+                temp_v1 = lock->locked + 1;
+                lock->locked = temp_v1;
                 if (temp_v1 != 1) {
                     __osRestoreInt(temp_a0);
-                    func_802BB2A0_de(temp_s0, NULL, 1);
+                    func_802BB2A0_de((OSMesgQueue *)lock, NULL, 1);
                 } else {
                     __osRestoreInt(temp_a0);
                 }
-                temp_s0_2 = arg0 + 0x110;
+                unlock = &((ContextRecAt2BC0 *)arg0)->lock;
                 var_s2 = ((s32 *) arg0)[268 / sizeof(s32)] + 1;
                 ((s32 *) arg0)[268 / sizeof(s32)] = var_s2;
                 temp_v0_4 = func_802BCF30_de();
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                temp_v1_2 = *((s32 *) ((u8 *) (temp_s0_2) + 28)) - 1;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-                *((s32 *) ((u8 *) (temp_s0_2) + 28)) = temp_v1_2;
+                temp_v1_2 = unlock->locked - 1;
+                unlock->locked = temp_v1_2;
                 if (temp_v1_2 != 0) {
                     __osRestoreInt(temp_v0_4);
-                    func_802BB420_de(temp_s0_2, 0, 1);
+                    func_802BB420_de((OSMesgQueue *)unlock, 0, 1);
                     var_v0_3 = arg1 < 0x100;
                 } else {
                     __osRestoreInt(temp_v0_4);
@@ -423,7 +419,7 @@ block_55:
     return var_v0;
 }
 #else
-INCLUDE_ASM("span_1000", func_80257DD4_de);
+INCLUDE_ASM("span_1000", Texture_PlaySoundAtPosition);
 #endif
 
 #ifdef NON_MATCHING

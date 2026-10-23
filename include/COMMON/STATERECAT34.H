@@ -155,6 +155,6 @@ struct ALWaveTable_s;
 extern s32 func_802BEAA4_de(void *, s32, struct ALWaveTable_s *);
 extern s32 func_802B51B8_de(void *, s32, void *);
 
-extern s32 func_80257DD4_de(void *, s32, CVector3, s32, s32);
+extern s32 Texture_PlaySoundAtPosition(void *, s32, CVector3, s32, s32);
 struct ContextRecAt2BC0;
 #endif

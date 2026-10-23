@@ -27,7 +27,6 @@ extern void func_8025CC90_de(void *arg0);
 extern void func_8025D450_de(void *arg0);
 extern s32 func_802934F8_de(void);
 extern void *func_802395A4_de(MenuMatchGlobals *arg0, CVector3 *arg1);
-extern s32 func_80257DD4_de(void *, s32, CVector3, s32, s32);
 
 
 
@@ -95,7 +94,7 @@ s32 func_8025842C_de(void *arg0) {
         result = func_802395A4_de(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((((struct ContextRecAt2BC0 *)(object))->frame & 3) == 0) {
-            func_80257DD4_de(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);
+            Texture_PlaySoundAtPosition(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);
         }
     }
     return ++((struct ContextRecAt2BC0 *)(object))->frame;

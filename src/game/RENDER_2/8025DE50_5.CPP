@@ -32,7 +32,7 @@ s32 func_8025DE54_de(s16 arg0, CVector3 arg1, s32 arg4, s32 arg5) {
     if (D_801427D0 != 0) {
         return -1;
     }
-    return func_80257DD4_de(&D_8010C080, arg0, arg1, arg4, arg5);
+    return Texture_PlaySoundAtPosition(&D_8010C080, arg0, arg1, arg4, arg5);
 }
 
 s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
@@ -58,7 +58,7 @@ s32 func_8025DF34_de(s32 arg0) {
         vec.x = zero;
         temp_s1 = func_80258D10_de(&D_8010C080);
         func_80258D08_de(&D_8010C080, 1);
-        temp_s0 = func_80257DD4_de(&D_8010C080, (s16)arg0, vec, 0, -1);
+        temp_s0 = Texture_PlaySoundAtPosition(&D_8010C080, (s16)arg0, vec, 0, -1);
         func_80258D08_de(&D_8010C080, temp_s1);
     }
     return temp_s0;
