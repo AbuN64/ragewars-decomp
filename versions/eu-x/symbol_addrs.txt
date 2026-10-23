@@ -4608,7 +4608,7 @@ func_8020478C_de = 0x802047B0; // type:func rom:0x53B0
 func_802047BC_de = 0x802047E0; // type:func rom:0x53E0
 func_802047D8_de = 0x802047FC; // type:func rom:0x53FC
 func_80204808_de = 0x8020482C; // type:func rom:0x542C
-func_80204868_de = 0x8020488C; // type:func rom:0x548C
+Level_UpdateBreakableHit = 0x80204890; // type:func rom:0x5490
 func_80204A68_de = 0x80204A88; // type:func rom:0x5688
 func_80204BB4_de = 0x80204BD4; // type:func rom:0x57D4
 func_80204BD0_de = 0x80204BF0; // type:func rom:0x57F0
@@ -12742,3 +12742,5 @@ literals_Frontend_DrawFourPlayerResults = 0x800E980C; // rom:0xEA40C size:0x14
 Frontend_DrawFourPlayerResults = 0x8043B890; // type:func rom:0x12B890
 literals_Weapons_GetFacingSide = 0x800C2478; // rom:0xC3078 size:0x2C
 literals_func_80238670_de = 0x800C37C8; // rom:0xC43C8 size:0x3C
+
+Level_UpdateBreakableHit_padding_eu_x = 0x8020488C; // rom:0x548C

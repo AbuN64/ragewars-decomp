@@ -3229,6 +3229,7 @@ segments:
       - [0xC25A0, rodata, data_800C/D_80204738_C7760]
       - [0xC25A4, rodata, data_800C/D_80204808_C7764]
       - [0xC25AC, data, data_800C/rodata_unresolved_800C19AC]
+      - [0xC25B0, rodata, data_800C/literals_Level_UpdateBreakableHit]
       - [0xC25B4, rodata, data_800C/D_80204A68_C7774]
       - [0xC25B8, rodata, data_800C/D_auto_rodata_unresolved_800C19B8]
       - [0xC25C0, rodata, data_800C/literals_func_802050C0_eu_x]

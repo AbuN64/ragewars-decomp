@@ -2560,3 +2560,4 @@ literals_func_8042FBF0_eu = 0x800EE1E0; // rom:0xEEDE0 size:0x20
 literals_Anim_DecodeBoxTransform = 0x800C4D10; // rom:0xC5910 size:0x60
 literals_Audio_StartNoteVoice = 0x800C421C; // rom:0xC4E1C size:0xC
 literals_Texture_InitializeAudioWorker = 0x800C4160; // rom:0xC4D60 size:0x18
+literals_Level_UpdateBreakableHit = 0x800C1D20; // rom:0xC2920 size:0x4

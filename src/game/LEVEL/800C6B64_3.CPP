@@ -7,8 +7,8 @@ const unsigned int D_80204808_C7764[2] = {
 #endif
 
 #if defined(VERSION_US)
-unsigned int rodata_unresolved_800C19AC[2] = {
-    0x00080020, 0x3C010204,
+unsigned int rodata_unresolved_800C19AC[1] = {
+    0x00080020,
 };
 #endif
 

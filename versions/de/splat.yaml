@@ -3230,7 +3230,7 @@ segments:
       - [0xC2670, rodata, data_800C/D_80204738_C7760]
       - [0xC2674, rodata, data_800C/D_80204808_C7764]
       - [0xC267C, data, data_800C/rodata_unresolved_800C1A7C]
-      - [0xC2680, rodata, data_800C/rodata_func_80204868_de_800C1A80]
+      - [0xC2680, rodata, data_800C/literals_Level_UpdateBreakableHit]
       - [0xC2684, rodata, data_800C/D_80204A68_C7774]
       - [0xC2688, data, data_800C/rodata_unresolved_800C1A88]
       - [0xC2690, rodata, data_800C/literals_func_802050A0_de]

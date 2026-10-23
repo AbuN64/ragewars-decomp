@@ -2579,3 +2579,5 @@ literals_Anim_TestEntityContact = 0x800C3610; // rom:0xC4210 size:0x8
 literals_Anim_DecodeBoxTransform = 0x800C4990; // rom:0xC5590 size:0x60
 literals_Audio_StartNoteVoice = 0x800C3E9C; // rom:0xC4A9C size:0xC
 literals_Texture_InitializeAudioWorker = 0x800C3DE0; // rom:0xC49E0 size:0x18
+
+literals_Level_UpdateBreakableHit = 0x800C19B0; // rom:0xC25B0 size:0x4
