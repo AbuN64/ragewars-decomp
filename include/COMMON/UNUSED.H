@@ -4366,26 +4366,6 @@ struct AnglesRecAt8 {
     s16 pad0A;
 };
 struct Animator;
-struct Animator {
-    s32 unk0;
-    s32 mode;
-    f32 time;
-    f32 *loop;
-    f32 *script;
-    f32 value;
-    f32 valueFrom;
-    f32 valueTo;
-    f32 valueDuration;
-    f32 alpha;
-    f32 alphaFrom;
-    f32 alphaTo;
-    f32 colourDuration;
-    f32 rgb[3];
-    char pad40[4];
-    f32 rgbFrom[3];
-    char pad50[4];
-    f32 rgbTo[3];
-};
 struct ArenaPageNode;
 struct ArenaPageNode {
     char pad0[0x10];
@@ -4564,11 +4544,6 @@ struct CameraBlock {
     CameraRecord records[8];
 };
 struct Camera_func_8026851C_de;
-struct Camera_func_8026851C_de {
-    char pad0[0xE4];
-    CVector3 position;
-    CVector3 offset;
-};
 struct Camera_func_80401980_de;
 struct Camera_func_80401980_de {
     char pad[0x28];
@@ -17290,20 +17265,7 @@ struct Slot_func_8042FB48_de {
     char tail[0xAF8];
 };
 struct SourceRecAt1C;
-struct SourceRecAt1C {
-    unsigned char active;
-    char pad1[7];
-    CVector3 position;
-    s32 id;
-    char pad18[4];
-    CVector3 velocity;
-};
 struct Spawn;
-struct Spawn {
-    CVector3 position;
-    s32 kind;
-    f32 size;
-};
 struct State1204;
 struct State1204 {
     void ** unk_0;

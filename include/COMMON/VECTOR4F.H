@@ -1727,10 +1727,6 @@ struct func_802077F4_S2 {
 };
 
 struct ObjRecAt1;
-struct ObjRecAt1 {
-    char pad0[0x1];
-    s8 unk1;
-};
 
 struct func_80203908_S2;
 typedef struct func_80203908_S2 func_80203908_S2;

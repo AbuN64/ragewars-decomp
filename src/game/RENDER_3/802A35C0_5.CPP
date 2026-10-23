@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/UNUSED.H"
+#include "RENDER_3/802A35C0.H"
 #include "COMMON/EXTERNS_6.H"
 
 /* Animator exists in COMMON/UNUSED.H; active owning contract is pending. */

@@ -407,10 +407,6 @@ struct Resource_func_80419E54_de {
 };
 
 struct Field_s32_2E0;
-struct Field_s32_2E0 {
-    char pad[0x2E0];
-    s32 value;
-};
 
 struct Entry802AB8DC;
 typedef struct Entry802AB8DC Entry802AB8DC;
@@ -1933,11 +1929,6 @@ struct Limit {
 };
 
 struct Triple_func_802683E0_de;
-struct Triple_func_802683E0_de {
-    s32 x;
-    f32 y;
-    s32 z;
-};
 
 struct World;
 struct World {

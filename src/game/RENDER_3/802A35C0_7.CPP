@@ -1,4 +1,5 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
+#include "RENDER_3/802A35C0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"

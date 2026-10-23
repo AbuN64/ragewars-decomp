@@ -1,4 +1,5 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
+#include "RENDER_3/802A35C0.H"
 #include "abi.h"
 #include "RENDER_3/DRAW_MATRIX_SCRATCH.H"
 #include "COMMON/VECTOR4F.H"

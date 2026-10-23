@@ -1,5 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/EFFECTCONTRIBUTION.H"
+#include "RENDER_3/CODE_802A35C0.H"
+#include "RENDER_3/802A35C0.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
