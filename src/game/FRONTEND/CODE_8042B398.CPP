@@ -416,7 +416,7 @@ extern void func_8043C210_de(s32 *, s32, s32, s32, s32);
 extern void func_8043C278_de(s32 *);
 extern void func_80424B90_de(void);
 extern void func_8042C6CC_de(void);
-extern void func_80424C50_de(void *, s32);
+extern void Achieve_UpdateMatchCounters(void *, s32);
 extern void func_80425D14_de(s32);
 extern void Frontend_FillResultRows(void);
 extern void func_8042CE74_de(void);
@@ -458,7 +458,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     game = &D_801462C8;
     switch (game->controllerMode) {
     case 0:
-        func_80424C50_de(D_800E53C0->data, D_8015402C);
+        Achieve_UpdateMatchCounters(D_800E53C0->data, D_8015402C);
         func_8042D118_de();
         D_800E53C0->mode = 0;
         break;

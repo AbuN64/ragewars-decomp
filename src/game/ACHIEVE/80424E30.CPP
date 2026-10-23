@@ -2,7 +2,6 @@
 #include "COMMON/SHAREDPLAYER.H"
 
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct AchieveRecord { u8 pad0[0x78]; u8 active; u8 pad79[0x18]; u8 team; u8 pad92[4]; } AchieveRecord;
 typedef struct AchieveCounters { u8 pad0[0x96]; } AchieveCounters;
@@ -15,8 +14,8 @@ extern AchieveRecord D_80146398[];
 extern s32 D_800FF140_de[];
 typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
 extern Settings D_801462C8;
-/* 86/102 words; remaining: register assignment of the loop temporaries (count, eligible, i<<2) and the base bias of the record pointer */
-void func_80424C50_de(s32 arg0, s32 arg1) {
+/* Increment the capped player match count and eligible level count. */
+void Achieve_UpdateMatchCounters(s32 arg0, s32 arg1) {
     s32 count;
     s32 i;
     s32 eligible;
@@ -33,12 +32,13 @@ void func_80424C50_de(s32 arg0, s32 arg1) {
     } else {
         D_800FEB70[arg0][0] = value;
     }
-    eligible = 1;
     if (D_8014222C <= 0 && D_8014222D <= 0) {
         result = 0;
     } else {
+        eligible = 1;
         count = 0;
-        for (i = 0, rec = D_80146398; i < 8; i++, rec++) {
+        for (i = 0; i < 8; i++) {
+            rec = &D_80146398[i];
             if (rec->active == 1) {
                 if (rec->team != rec->active) {
                     if (D_800FF140_de[i] >= 0x4C) {
@@ -64,9 +64,6 @@ void func_80424C50_de(s32 arg0, s32 arg1) {
         }
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80424C50_de);
-#endif
 
 
 /* Count achievements, store the rank, and select its version-specific title. */
