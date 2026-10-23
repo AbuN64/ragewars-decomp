@@ -7,6 +7,7 @@
 #include "abi.h"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/80414430.H"
 #include "MENU/GFX/80414430_19.H"
 #include "MENU/GFX/80414430_21.H"
 #include "MENU/GFX/80414430_24.H"

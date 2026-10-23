@@ -19,14 +19,6 @@ struct func_8044CD58_S2;
 typedef struct func_8044CD58_S2 func_8044CD58_S2;
 
 struct State_func_8044D5C4_de;
-struct State_func_8044D5C4_de {
-    char p[0x11C0];
-    s32 unk11C0;
-    s32 unk11C4;
-    char q[8];
-    s32 unk11D0;
-    s32 unk11D4;
-};
 
 struct ObjB;
 typedef struct ObjB ObjB;
@@ -45,37 +37,8 @@ struct LightSettings {
 };
 struct LightSettings;
 struct SceneRecAt1B2B4;
-struct SceneRecAt1B2B4 {
-    char pad0[0x1B2B0];
-    struct LightSettings *light;
-    s16 dir[3];
-};
 
 struct func_8044B27C_S1;
-struct func_8044B27C_S1 {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    IntrusiveList unkC;
-    IntrusiveList unk20;
-    char pad34[0x38 - 0x34];
-    s32 unk38;
-    char pad38[0x40 - 0x38 - sizeof(s32)];
-    char unk40;
-    char pad40[0xF18 - 0x40 - sizeof(char)];
-    s32 unkF18;
-    char padF18[0xF1C - 0xF18 - sizeof(s32)];
-    s32 unkF1C;
-    char padF1C[0xF20 - 0xF1C - sizeof(s32)];
-    s32 unkF20;
-    char padF20[0xF24 - 0xF20 - sizeof(s32)];
-    IntrusiveList unkF24;
-    char padF24[0x1200 - 0xF24 - sizeof(IntrusiveList)];
-    s32 unk1200;
-};
 
 struct func_8044CBE0_S1;
 typedef struct func_8044CBE0_S1 func_8044CBE0_S1;
@@ -182,13 +145,6 @@ struct SceneRecAt1B2B4;
 typedef struct SceneRecAt1B2B4 SceneRecAt1B2B4;
 
 struct Level_func_8044CD8C_de;
-struct Level_func_8044CD8C_de {
-    char pad0[0x30];
-    s32 key;
-    char pad34[0x64 - 0x34];
-    s32 file;
-    void *grid;
-};
 
 struct PoolRecord;
 typedef struct PoolRecord PoolRecord;
@@ -210,10 +166,6 @@ struct State_func_8044D528_de;
 typedef struct State_func_8044D528_de State_func_8044D528_de;
 
 struct Node_func_8044D220_de;
-struct Node_func_8044D220_de {
-    s32 index;
-    s32 link[2];
-};
 
 struct ObjA;
 typedef struct ObjA ObjA;
@@ -249,39 +201,8 @@ union func_8044CBE0_S1_U1B500;
 typedef union func_8044CBE0_S1_U1B500 func_8044CBE0_S1_U1B500;
 
 struct func_8044CBE0_S1;
-struct func_8044CBE0_S1 {
-    char pad0[0xB8];
-    void * unkB8;
-    void * unkBC;
-    void * unkC0;
-    void * unkC4;
-    void * unkC8;
-    void * unkCC;
-    void * unkD0;
-    void * unkD4;
-    char padD4[0x10];
-    void * unkE8;
-    void * unkEC;
-    void * unkF0;
-    void * unkF4;
-    char padF4[0x4];
-    void * unkFC;
-    void * unk100;
-    char pad100[0x1B3FC];
-    IntrusiveList unk1B500;
-};
 
 struct State_func_8044D0F0_de;
-struct State_func_8044D0F0_de {
-    char pad[0x3C];
-    int resource;
-    char pad40[8];
-    int bank;
-    char pad4c[0x1B3C0];
-    int selection;
-    char pad1b410[12];
-    int changed;
-};
 
 struct World;
 
@@ -337,13 +258,6 @@ struct CGameDynamicLight_t;
 extern float D_800CA1F0;
 
 struct ObjA;
-struct ObjA {
-    s8 pad0;
-    s8 type;
-    char pad2[0x20 - 2];
-    void **block;
-    char pad24[0xE8 - 0x24];
-};
 
 struct Level_func_8044CD8C_de;
 typedef struct Level_func_8044CD8C_de Level_func_8044CD8C_de;
@@ -401,15 +315,6 @@ struct Shared_Placed;
 extern short D_8010F320;
 
 struct State_func_8044D528_de;
-struct State_func_8044D528_de {
-    char pad[0x1B2B0];
-    Resource_func_80419E54_de *input;
-    char pad1b2b4[0x15C];
-    int mode;
-    int active;
-    char pad1b418[0x20];
-    int selection;
-};
 
 struct func_8044D9DC_S1;
 typedef struct func_8044D9DC_S1 func_8044D9DC_S1;
@@ -422,12 +327,6 @@ struct EntryCode8044ACCC {
     char pad0[0x228];
 };
 
-struct ObjRecAt8C8 {
-    struct EntryCode8044ACCC entries[4];
-    IntrusiveList free;
-    IntrusiveList active;
-    s16 unk8C8;
-};
 
 struct func_8044B388_S1;
 struct func_8044B388_S1 {
@@ -532,30 +431,7 @@ typedef union CollisionBuildTriangle { struct {
     union CollisionBuildTriangle *adj[3];
     s32 mask;
 } fields; CGameRegion canonical; s32 words[8]; } CollisionBuildTriangle;
-typedef struct CollisionBuildHeader {
-    s32 count;
-    s32 offsets[5];
-} CollisionBuildHeader;
 typedef Packed CollisionBuildFace;
-typedef struct CollisionBuildList {
-    s32 kind;
-    s32 count;
-    CollisionBuildFace items[0];
-} CollisionBuildList;
-typedef union CollisionBuildMeshHandle {
-    struct Shape_typemap_165 canonical;
-    struct { void *data; s32 size,refs,flags; } payload;
-} CollisionBuildMeshHandle;
-typedef struct CollisionBuildVertexList { s32 kind,count; CollisionBuildVertex items[0]; } CollisionBuildVertexList;
-typedef struct CollisionBuildTriangleList { s32 kind,count; CollisionBuildTriangle items[0]; } CollisionBuildTriangleList;
-typedef struct CollisionBuildWorld {
-    char pad0[0x84];
-    int *tree;
-    char pad88[0x1B2FC - 0x88];
-    f32 minY;
-    char pad1B300[0x1B40C - 0x1B300];
-    s32 group;
-} CollisionBuildWorld;
 extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
 
 extern void *memcpy(void *, const void *, unsigned int);

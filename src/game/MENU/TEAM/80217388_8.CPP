@@ -1,5 +1,6 @@
 #include "MENU/TEAMMENU.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/80217388.H"
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "TYPES.H"

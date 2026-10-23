@@ -244,15 +244,6 @@ typedef struct AmmoPickupDefinition {
 } AmmoPickupDefinition;
 
 
-/* Timed pickup family: common effect payload followed by a word amount. */
-typedef struct TimedItemEffect {
-    void *resource;
-    s16 id;
-    s16 sound;
-    s16 callback;
-    s16 reservedA;
-    s32 amount;
-} TimedItemEffect;
 
 /* Three-channel pickups extend the common two-argument effect record. */
 typedef struct MultiChannelItemEffect {

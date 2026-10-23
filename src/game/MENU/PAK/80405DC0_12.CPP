@@ -1,6 +1,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MENURECAT24.H"
+#include "MENU/80405DC0.H"
 #include "TYPES.H"
 #include "MENU/PAK/80405DC0_12.H"
 

@@ -1,6 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "include_asm.h"
 #include "COMMON/MENURECAT24.H"
+#include "MENU/80405DC0.H"
 
 #ifdef NON_MATCHING
 #include "COMMON/MENURECAT24.H"

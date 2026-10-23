@@ -1,5 +1,6 @@
 #include "RESMGR/resmgr_string_memory.H"
 #include "COMMON/TEXTURE.H"
+#include "MENU/80414430.H"
 #include "TYPES.H"
 #include "MENU/GFX/80414430_24.H"
 

@@ -1,4 +1,5 @@
 #include "COMMON/OBJB.H"
+#include "MENU/8044ACCC.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"

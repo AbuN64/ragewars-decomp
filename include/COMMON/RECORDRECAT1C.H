@@ -43,17 +43,6 @@ struct Owner_func_804066BC_de {
 };
 struct Menu_func_804066BC_de;
 struct Owner_func_804066BC_de;
-struct Menu_func_804066BC_de {
-    s16 state;
-    char pad2[0xA];
-    struct Owner_func_804066BC_de *owner;
-    char pad10[4];
-    char *dialogData; /* 0x14 */
-    char pad18[4];
-    ObjRecAt5DC *player;
-    PakMenuSlot *slot;
-    struct Dialog *prompt; /* 0x24: dialog resource */
-};
 
 struct func_80408C78_S1;
 struct func_80408C78_S1 {
@@ -67,12 +56,6 @@ struct func_80408C78_S1 {
 };
 
 struct Menu_func_80408C4C_de;
-struct Menu_func_80408C4C_de {
-    char pad0[0x1C];
-    SharedPlayer *player;
-    PakMenuSlot *slot;
-    char *prompt;
-};
 
 struct RecordRecAt1C;
 

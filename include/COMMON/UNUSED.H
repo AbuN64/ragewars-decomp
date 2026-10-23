@@ -4802,9 +4802,6 @@ struct ActorStateTable {
     u8 pad4[0x1C];
     StateEntry entries[1];
 };
-struct Digits {
-    char c[4];
-};
 struct EffectActorModel;
 struct EffectActorModel {
     u32 flags;
@@ -5403,10 +5400,6 @@ struct IntegerStateDC {
 };
 struct Binding;
 struct ItemRecAt14;
-struct ItemRecAt14 {
-    char pad[20];
-    struct Binding *binding;
-};
 struct JoinRequestItem;
 struct JoinRequestItem {
     char pad[0x10];
@@ -5500,69 +5493,6 @@ struct LevelSpawnLevelWorld {
     s32 f1B61C;
 };
 struct LevelCode8044ACCC;
-struct LevelCode8044ACCC {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    s32 unk20;
-    s32 unk24;
-    s32 unk28;
-    s32 unk2C;
-    char pad30[4];
-    s32 unk34;
-    s32 unk38;
-    s32 unk3C;
-    char pad40[48];
-    s32 unk70;
-    char pad74[4];
-    s32 unk78;
-    char pad7C[4];
-    void *unk80;
-    void *unk84;
-    s32 unk88;
-    char pad8C[4];
-    s32 unk90;
-    s32 unk94;
-    s32 unk98;
-    s32 unk9C;
-    s32 unkA0;
-    s32 unkA4;
-    s32 unkA8;
-    s32 unkAC;
-    s32 unkB0;
-    void *unkB4;
-    char padB8[56];
-    s32 unkF0;
-    s32 unkF4;
-    s32 unkF8;
-    s32 unkFC;
-    char pad100[12];
-    void *unk10C;
-    char pad110[16];
-    s32 unk120;
-    s32 unk124;
-    char pad128[111072];
-    s32 unk1B308;
-    char pad1B30C[16];
-    s32 unk1B31C;
-    char pad1B320[236];
-    s32 unk1B40C;
-    char pad1B410[516];
-    s32 unk1B614;
-    s32 unk1B618;
-    s32 unk1B61C;
-    char pad1B620[64];
-    s32 unk1B660;
-    char pad1B664[64];
-    s32 unk1B6A4;
-    char pad1B6A8[4];
-    s32 unk1B6AC;
-};
 struct Params_func_80283A80_de;
 struct Params_func_80283A80_de {
     char pad[16];
@@ -6288,10 +6218,6 @@ struct ObjectCode80400000 {
     f32 yaw;
 };
 struct Object_func_80443128_de;
-struct Object_func_80443128_de {
-    char pad[0x140];
-    Shared_ParticleLighting view[1];
-};
 struct OptionsOpenItem;
 struct OptionsOpenItem {
     char pad0[0x1A];
@@ -17332,14 +17258,6 @@ struct State_func_8043577C_de {
     s32 unk3470;
 };
 struct State_func_8044D054_de;
-struct State_func_8044D054_de {
-    char pad0[4];
-    s32 unk4;
-    char pad8[48];
-    s32 unk38;
-    char pad3C[8];
-    s32 unk44;
-};
 struct StyleNextState;
 struct StyleNextState {
     char a[0x14];
@@ -17429,25 +17347,12 @@ struct TaskSetup {
     void *name;
 };
 struct TextBoundsData;
-struct TextBoundsData {
-    char pad0[0x29C];
-    f32 unk_29C;
-    f32 unk_2A0;
-    f32 x; /* 0x2A4 */
-    f32 y; /* 0x2A8 */
-};
 struct TextBoundsDescriptor;
 struct TextBoundsDescriptor {
     char pad0[0x44];
     s8 * unk_44;
 };
 struct TextBoundsFont;
-struct TextBoundsFont {
-    s32 kind;
-    f32 width;
-    f32 height;
-    s32 rest[4];
-};
 struct TextBoundsMetrics;
 struct TextBoundsMetrics {
     s32 field0;
@@ -17461,11 +17366,6 @@ struct TextBoundsMetrics {
     s32 bottom; /* 0x20 */
 };
 struct TextBoundsRecord23;
-struct TextBoundsRecord23 {
-    char pad0[0x24];
-    s32 unk_24;
-    s32 unk_28;
-};
 struct TextBoundsText;
 struct TextBoundsHandlers {
     char pad0[0x14];
@@ -17549,11 +17449,6 @@ struct Vtx_tn {
     u8 a;
 };
 union Vtx10;
-union Vtx10 {
-    Vtx_t v;
-    Vtx_tn n;
-    s64 force_structure_alignment;
-};
 struct WeaponMenuMenu;
 struct WeaponMenuMenu {
     s32 active;
@@ -17572,10 +17467,6 @@ struct WeaponMenuView {
     f32 viewport[4];
 };
 struct WeaponMenuPlayer;
-struct WeaponMenuPlayer {
-    char pad[0x5DC];
-    WeaponMenuView *view;
-};
 struct DrawArgs;
 typedef signed int ( *WidgetCallback)(void *, struct DrawArgs);
 struct WidgetHandler;

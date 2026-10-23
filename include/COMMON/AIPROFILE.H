@@ -195,10 +195,6 @@ struct ObjRecAt1D8V2;
 typedef struct ObjRecAt1D8V2 ObjRecAt1D8V2;
 
 struct func_8022A404_S1;
-struct func_8022A404_S1 {
-    char pad0[0x20];
-    int unk20;
-};
 
 struct func_80237E70_G1;
 struct func_80237E70_G1 {

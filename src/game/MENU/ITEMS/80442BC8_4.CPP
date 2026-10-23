@@ -3,6 +3,7 @@
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/80442BC8.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
 extern int D_800D15E0;

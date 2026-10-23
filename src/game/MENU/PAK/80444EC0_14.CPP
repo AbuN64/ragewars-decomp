@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "MENU/80409A88.H"
 #include "MENU/OPTIONEDITSTATE.H"
 #include "TYPES.H"
 #include "stddef.h"

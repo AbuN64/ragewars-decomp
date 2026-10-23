@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT0V3.H"
+#include "MENU/80403BCC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
 #include "TYPES.H"

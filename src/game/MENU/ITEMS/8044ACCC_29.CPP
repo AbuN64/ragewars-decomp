@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJB.H"
+#include "MENU/8044ACCC.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_14.H"

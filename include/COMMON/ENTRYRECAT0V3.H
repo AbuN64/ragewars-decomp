@@ -82,25 +82,13 @@ struct Device;
 typedef struct Device Device;
 
 struct RecordRecAt12;
-struct RecordRecAt12 {
-    char pad[0x11];
-    unsigned char kind;
-    unsigned char subtype;
-};
 
 struct Device;
-struct Device {
-    s8 pad0[0x68];
-};
 
 struct NoteState;
 typedef struct NoteState NoteState;
 
 struct PakDirectory;
-struct PakDirectory {
-    s32 free;
-    NoteState notes[16];
-};
 
 
 

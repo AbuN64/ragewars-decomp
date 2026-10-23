@@ -1,6 +1,7 @@
 #include "COMMON/WORLD.H"
 #include "include_asm.h"
 #include "COMMON/ENTRYRECAT0V3.H"
+#include "MENU/80403BCC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "MENU/PAK/80403BCC_4.H"

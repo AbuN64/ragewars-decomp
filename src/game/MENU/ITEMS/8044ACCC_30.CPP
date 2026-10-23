@@ -1,4 +1,5 @@
 #include "COMMON/OBJB.H"
+#include "MENU/8044ACCC.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
 

@@ -15,12 +15,6 @@ struct func_8043FFAC_S2;
 typedef struct func_8043FFAC_S2 func_8043FFAC_S2;
 
 struct TextLayerMetrics;
-struct TextLayerMetrics {
-    int field0;
-    int width;
-    int height;
-    int rest[7];
-};
 
 struct TextLayerMetrics;
 typedef struct TextLayerMetrics TextLayerMetrics;
@@ -103,49 +97,16 @@ struct Table_func_804428F8_de {
 };
 
 struct Params_func_804427C4_de;
-struct Params_func_804427C4_de {
-    char pad[0x14];
-    s32 a;
-    s32 pad18;
-    s32 b;
-    s32 c;
-    s32 d;
-};
 
 struct StateRecAtBCV1;
 typedef struct StateRecAtBCV1 StateRecAtBCV1;
 
 struct ParamsRecAt24V2;
-struct ParamsRecAt24V2 {
-    char pad[0x18];
-    s32 a;
-    s32 b;
-    s32 c;
-    s32 d;
-};
 
 struct CMenuFontInfo_t;
-struct CMenuFontInfo_t {
-    s32 unk0;
-    char pad0[0x8];
-    f32 unkC;
-    f32 unk10;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A;
-    u8 pad1B;
-};
 
 struct MenuRules;
 struct Outer;
-struct Outer {
-    char pad[0x14];
-    struct MenuRules *inner;
-};
 
 struct Outer;
 
@@ -163,12 +124,6 @@ struct EntryRecAt18V2 {
 
 struct EntryRecAt18V2;
 struct MenuRecAt10;
-struct MenuRecAt10 {
-    s16 cursor;
-    char pad2[0xA];
-    struct EntryRecAt18V2 *entries;
-    s32 count;
-};
 
 struct PreviewWidget;
 typedef struct PreviewWidget PreviewWidget;
@@ -198,12 +153,6 @@ struct StateRecAt47C {
 
 struct StateRecAt47C;
 struct WidgetRecAt20;
-struct WidgetRecAt20 {
-    char reserved00[8];
-    u32 flags; /* +0x08: 80440838 tests/sets 0x02000000. */
-    char reserved0C[0x14];
-    struct StateRecAt47C *state;
-};
 
 struct NodeRecAt1D0;
 struct NodeRecAt1D0 {
@@ -219,19 +168,11 @@ typedef struct WidgetRecAt20 WidgetRecAt20;
 
 struct NodeRecAt1D0;
 struct OwnerRecAt4;
-struct OwnerRecAt4 {
-    char pad[4];
-    struct NodeRecAt1D0 *head;
-};
 
 struct func_8043FFAC_S5;
 typedef struct func_8043FFAC_S5 func_8043FFAC_S5;
 
 struct Object_func_804420B4_de;
-struct Object_func_804420B4_de {
-    char pad[0x17];
-    u8 character;
-};
 
 
 typedef struct CMenu_t Node_func_80442A28_de;
@@ -241,22 +182,8 @@ typedef struct CMenuFontInfo_t CMenuFontInfo;
 
 
 struct ParamsRecAt24V1;
-struct ParamsRecAt24V1 {
-    char pad[0x18];
-    struct Dialog *list;
-    s32 b;
-    s32 c;
-    s32 d;
-};
 
 struct func_8043FFAC_S5;
-struct func_8043FFAC_S5 {
-    s32 unk0;
-    char pad0[0x10];
-    s32 unk14;
-    char pad14[0x4];
-    s32 unk1C;
-};
 
 struct ObjRecAt20V2;
 #endif

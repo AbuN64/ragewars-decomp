@@ -15,18 +15,8 @@ typedef struct Image_func_80419490_de Image_func_80419490_de;
 extern void func_8029D7E8_auto(void);
 
 struct Image_func_80419490_de;
-struct Image_func_80419490_de {
-    char pad0[8];
-    s16 width;
-    s16 height;
-    char padC[0xC];
-    s32 *pixels;
-};
 
 struct Command;
-struct Command {
-    unsigned words[2];
-};
 
 extern int D_8014DCE0;
 

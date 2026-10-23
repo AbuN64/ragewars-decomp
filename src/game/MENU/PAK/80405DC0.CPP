@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/MENURECAT24.H"
+#include "MENU/80405DC0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/WORLD.H"

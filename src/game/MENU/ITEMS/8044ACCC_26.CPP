@@ -3,6 +3,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/S1_2.H"
 #include "COMMON/OBJB.H"
+#include "MENU/8044ACCC.H"
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "stddef.h"

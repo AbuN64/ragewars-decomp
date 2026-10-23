@@ -6,12 +6,6 @@
 #include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "COMMON/SHAREDRECAT1B92C.H"
 #include "COMMON/LEVEL_INPUT.H"
-/* The resource header is followed by count input records or runtime actors. */
-typedef struct LevelBlock {
-    s32 size;
-    s32 count;
-    LevelActor objects[1];
-} LevelBlock;
 typedef struct LevelNode {
     s32 size;
     s32 count;

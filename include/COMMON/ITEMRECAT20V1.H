@@ -1255,10 +1255,6 @@ struct Owner_func_8043E494_de {
 };
 struct Menu_func_8043E494_de;
 struct Owner_func_8043E494_de;
-struct Menu_func_8043E494_de {
-    char pad[0x1C];
-    struct Owner_func_8043E494_de *owner;
-};
 
 struct func_8025C8F8_S1;
 typedef struct func_8025C8F8_S1 func_8025C8F8_S1;
@@ -3131,10 +3127,6 @@ typedef struct StateCode80420E90 StateCode80420E90;
 
 struct RecordRecAt20V1;
 struct ObjRecAtB0;
-struct RecordRecAt20V1 {
-    char pad[0x20];
-    struct ObjRecAtB0 *inner;
-};
 
 struct Status;
 struct Status {

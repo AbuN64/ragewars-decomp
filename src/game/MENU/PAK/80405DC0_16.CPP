@@ -1,4 +1,5 @@
 #include "COMMON/MENURECAT24.H"
+#include "MENU/80405DC0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "stddef.h"
 #include "TYPES.H"

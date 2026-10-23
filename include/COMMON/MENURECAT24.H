@@ -42,12 +42,6 @@ extern int D_800D2424;
 
 struct MenuRecAt24;
 struct PlayerRecAt5EC;
-struct MenuRecAt24 {
-    char pad0[0x1C];
-    struct PlayerRecAt5EC *player;
-    PakMenuSlot *slot;
-    char *prompt;
-};
 
 struct MenuRecAt24;
 
@@ -55,11 +49,6 @@ struct PakNoteTextEntry;
 typedef struct PakNoteTextEntry PakNoteTextEntry;
 
 struct MenuRecAt20V3;
-struct MenuRecAt20V3 {
-    char pad0[0x1C];
-    SharedPlayer *player;
-    PakMenuSlot *slot;
-};
 
 extern char *D_800D36D8;
 
@@ -109,10 +98,6 @@ typedef struct IntegerState610 IntegerState610;
 
 
 struct IntegerState610;
-struct IntegerState610 {
-    unsigned char padding_0[1548];
-    s32 unk_60C;
-};
 
 
 extern s32 D_800DE874;
@@ -127,11 +112,6 @@ struct func_80408E1C_S1 {
 extern int D_800D2444;
 
 struct PakNoteTextEntry;
-struct PakNoteTextEntry {
-    s32 id;
-    char pad4[0x10];
-    u8 **text;
-};
 
 extern char *D_800D36D4;
 

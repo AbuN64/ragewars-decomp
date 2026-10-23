@@ -2,6 +2,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
+#include "MENU/8043F69C.H"
 #include "TYPES.H"
 #include "COMMON/MENU_TEXT.H"
 #include "COMMON/MENU_UI_PROVIDERS.H"

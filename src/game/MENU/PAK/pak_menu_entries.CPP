@@ -1,9 +1,11 @@
 #include "include_asm.h"
 #include "MENU/PAK/pak_menu_entries.H"
 #include "COMMON/TEXTLAYERMETRICS.H"
+#include "MENU/pak_menu_entries.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/8043F69C.H"
 
 /* Moves a menu cursor through its entry table in one direction (16 to 19, reading the step byte at that offset of the current entry), wrapping at either end, recording the reverse step on the new entry when its flag allows, until it reaches an entry flagged 0x1800000 whose descriptor word at 0x1C is set. */
 

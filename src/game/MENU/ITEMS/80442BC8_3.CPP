@@ -1,6 +1,7 @@
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "MENU/OBJECT1C8.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/80442BC8.H"
 #include "TYPES.H"
 
 /* Writes a numeric menu value through its bound storage callback using the selected scalar type. */

@@ -3,6 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/8043F69C.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
 #if defined(VERSION_EU)

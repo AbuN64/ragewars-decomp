@@ -10,6 +10,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHARED_MENUREPLY.H"
 #include "COMMON/OBJB.H"
+#include "MENU/8044ACCC.H"
 #include "RENDER_4/8028FD2C_6.H"
 struct Shape_typemap_165;
 extern struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2);

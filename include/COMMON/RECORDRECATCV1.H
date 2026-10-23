@@ -17,10 +17,6 @@ struct Target_func_8040A77C_de {
 };
 struct RecordRecAtCV1;
 struct Target_func_8040A77C_de;
-struct RecordRecAtCV1 {
-    char pad[0xC];
-    struct Target_func_8040A77C_de *target;
-};
 
 struct RecordRecAtCV1;
 
@@ -30,35 +26,11 @@ typedef struct PakPreview PakPreview;
 
 struct RecordRecAt20V2;
 struct PakMenuSlot;
-struct RecordRecAt20V2 {
-    char pad[0x1C];
-    s32 result;
-    struct PakMenuSlot *inner;
-};
 
 struct PakPreview;
-/* The pak preview block D_800E28BC: a position, a packed value and the colour depth. */
-struct PakPreview {
-    char pad0[0xC];
-    f32 x;
-    f32 y;
-    f32 z;
-    char pad18[0x1C - 0x18];
-    s32 value; /* shown shifted down eight bits */
-    char pad20[0x24 - 0x20];
-    s32 handle;
-    char pad28[0x90 - 0x28];
-    unsigned int depth;
-};
 
 
 struct RecordRecAt24;
-struct RecordRecAt24 {
-    char pad[0x1C];
-    s32 first;
-    s32 second;
-    void *resource;
-};
 
 struct RecordRecAt24;
 

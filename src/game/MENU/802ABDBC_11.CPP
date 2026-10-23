@@ -5,6 +5,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECATE.H"
+#include "MENU/802ABDBC.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 

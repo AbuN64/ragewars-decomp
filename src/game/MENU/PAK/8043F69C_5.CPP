@@ -1,4 +1,5 @@
 #include "COMMON/TEXTLAYERMETRICS.H"
+#include "MENU/8043F69C.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"

@@ -1,6 +1,7 @@
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/80442BC8.H"
 
 f32 func_80442EC0_de(ItemRecAt14 *arg0) {
  Binding *v = arg0->binding;

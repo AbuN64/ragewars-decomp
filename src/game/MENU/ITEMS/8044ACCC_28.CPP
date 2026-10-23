@@ -1,5 +1,6 @@
 #include "COMMON/OBJB.H"
 #include "COMMON/UNUSED.H"
+#include "MENU/8044ACCC.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_4.H"
 

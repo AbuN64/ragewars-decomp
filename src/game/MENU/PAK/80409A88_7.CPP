@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "MENU/80409A88.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 extern PakPreview *D_800E28BC;
