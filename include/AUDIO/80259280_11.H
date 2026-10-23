@@ -3,5 +3,5 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
-extern void func_80259F68_de(Voice *voice, ControllerCode802591C0 *control, s32 arg2);
+extern void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 arg2);
 #endif

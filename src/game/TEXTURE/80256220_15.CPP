@@ -107,7 +107,7 @@ extern void *Audio_StartNoteVoice(void *, Item57BD4 *, s32, s32);
 extern void func_8025BB5C_de(void *, CVector3 *, s32);
 
 extern void func_8025BB84_de(void *, Item57BD4 *, s32);
-extern void func_802577F4_de(void *, void *, s32, CVector3 *);
+extern void Texture_UpdateSoundSlot(void *, void *, s32, CVector3 *);
 extern u32 func_802BCF30_de(void);
 
 
@@ -162,7 +162,7 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
             __osRestoreInt(token);
         }
     }
-    func_802577F4_de(arg0, ((Draw *)(node))->model, 0, arg2);
+    Texture_UpdateSoundSlot(arg0, ((Draw *)(node))->model, 0, arg2);
     {
         char *queue = &((ContextRecAt2BC0 *)(arg0))->lock;
         u32 token = func_802BCF30_de();
@@ -192,228 +192,228 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
 #include "stddef.h"
 #include "TYPES.H"
 s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
-s32 Texture_PlaySoundAtPosition(void *arg0, s32 arg1, u32 arg2, u32 arg3, u32 arg4, s32 arg5, s32 arg6) {
+s32 Texture_PlaySoundAtPosition(void *context, s32 soundId, u32 positionXBits, u32 positionYBits, u32 positionZBits, s32 voiceParameter, s32 ownerId) {
     union { u32 word; f32 value; } xbits, ybits, zbits;
     CVector3 position;
-    s32 sp20;
-    s32 sp24;
-    s32 sp28;
-    s32 sp2C;
+    s32 firstSoundVariant;
+    s32 lastSoundVariant;
+    s32 firstInstrumentVariant;
+    s32 lastInstrumentVariant;
     MenuRules *lock;
     MenuRules *unlock;
-    s32 *var_a0_2;
-    s32 *var_a0_3;
-    s32 *var_a0_4;
-    s32 *var_a0_5;
-    s32 temp_a2;
-    s32 temp_a2_2;
-    s32 temp_lo;
-    s32 temp_v0;
-    s32 temp_v0_2;
-    s32 temp_v1;
-    s32 temp_v1_2;
+    s32 *soundWeightCursor;
+    s32 *soundChoiceCursor;
+    s32 *instrumentWeightCursor;
+    s32 *instrumentChoiceCursor;
+    s32 soundChoice;
+    s32 instrumentChoice;
+    s32 entryOffset;
+    s32 soundWeight;
+    s32 instrumentWeight;
+    s32 lockCount;
+    s32 remainingLocks;
     s32 i;
     s32 j;
-    s32 var_a1_2;
-    s32 var_a1_3;
-    s32 var_a3;
+    s32 soundWeightIndex;
+    s32 instrumentWeightIndex;
+    s32 soundVariant;
     s32 k;
-    s32 var_a3_3;
-    s32 var_s0;
-    s32 var_s0_2;
-    s32 var_s0_3;
-    s32 var_s0_4;
-    s32 var_s1;
-    s32 var_s2;
+    s32 instrumentVariant;
+    s32 totalSoundWeight;
+    s32 cumulativeSoundWeight;
+    s32 totalInstrumentWeight;
+    s32 cumulativeInstrumentWeight;
+    s32 selectedVariant;
+    s32 playId;
     s32 result;
-    s32 var_v0_2;
-    s32 var_v0_3;
-    s32 var_v1;
-    s8 *temp_v0_3;
-    u16 temp_s1;
+    s32 repeatGuardBits;
+    s32 isSound;
+    s32 blocked;
+    s8 *entries;
+    u16 repeatGuard;
     u32 mask;
-    u32 temp_s5;
-    u32 temp_v0_4;
+    u32 entryCount;
+    u32 unlockMask;
     u32 l;
-    void *var_v1_2;
+    void *voiceCursor;
 
-    xbits.word = arg2; ybits.word = arg3; zbits.word = arg4;
+    xbits.word = positionXBits; ybits.word = positionYBits; zbits.word = positionZBits;
     position.x = xbits.value; position.y = ybits.value; position.z = zbits.value;
 
-    if (((s16 *) arg0)[258 / sizeof(s16)] != -1) {
-        var_v1 = 1;
+    if (((ContextRecAt2BC0 *)context)->selectedHandle != -1) {
+        blocked = 1;
     } else {
         j = 0;
-        if (arg1 < 0x100) {
+        if (soundId < 0x100) {
             i = 0;
-            var_v1_2 = arg0;
+            voiceCursor = context;
             do {
-                if (((s32 *) var_v1_2)[7780 / sizeof(s32)] == arg1) {
+                if (((s32 *) voiceCursor)[7780 / sizeof(s32)] == soundId) {
                     j += 1;
                 }
                 i += 1;
-                var_v1_2 += 0xCC;
+                voiceCursor += 0xCC;
             } while (i < 0x11);
-            var_v1 = 1;
+            blocked = 1;
             if (j < 6) {
-                goto block_8;
+                goto allowSound;
             }
         } else {
-block_8:
-            var_v1 = 0;
+allowSound:
+            blocked = 0;
         }
     }
     result = -1;
-    if (var_v1 == 0) {
-        if (arg1 < 0x100) {
-            temp_s1 = ((u16 *) arg0)[306 / sizeof(u16)];
-            var_s0 = 0;
-            if ((((s32 *) arg0)[11092 / sizeof(s32)] != 0) && (func_80265550_de(((u32 **) arg0)[11096 / sizeof(u32 *)], ((s32 *) arg0)[11092 / sizeof(s32)], (u32) (s16) arg1, &sp20, &sp24) != 0)) {
-                var_a3 = sp20;
-                if (var_a3 != sp24) {
-                    var_a1_2 = var_a3;
-                    if (sp24 >= var_a3) {
-                        var_a0_2 = (var_a3 * 4) + ((s32 *) arg0)[11100 / sizeof(s32)];
+    if (blocked == 0) {
+        if (soundId < 0x100) {
+            repeatGuard = ((u16 *) context)[306 / sizeof(u16)];
+            totalSoundWeight = 0;
+            if ((((ContextRecAt2BC0 *)context)->instrumentCount != 0) && (func_80265550_de((u32 *)((ContextRecAt2BC0 *)context)->instrumentData, ((ContextRecAt2BC0 *)context)->instrumentCount, (u32) (s16) soundId, &firstSoundVariant, &lastSoundVariant) != 0)) {
+                soundVariant = firstSoundVariant;
+                if (soundVariant != lastSoundVariant) {
+                    soundWeightIndex = soundVariant;
+                    if (lastSoundVariant >= soundVariant) {
+                        soundWeightCursor = (soundVariant * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
                         do {
-                            temp_v0 = *var_a0_2;
-                            var_a0_2 += 4;
-                            var_a1_2 += 1;
-                            var_s0 += temp_v0 * 0xA;
-                        } while (sp24 >= var_a1_2);
+                            soundWeight = *soundWeightCursor;
+                            soundWeightCursor += 4;
+                            soundWeightIndex += 1;
+                            totalSoundWeight += soundWeight * 0xA;
+                        } while (lastSoundVariant >= soundWeightIndex);
                     }
-                    temp_a2 = func_802744D4_de() % var_s0;
-                    k = sp20;
-                    var_s0_2 = 0;
-                    if (k < sp24) {
-                        var_a0_3 = (k * 4) + ((s32 *) arg0)[11100 / sizeof(s32)];
-loop_19:
-                        var_s0_2 += *var_a0_3 * 0xA;
-                        var_v0_2 = temp_s1 << 0x10;
-                        if (var_s0_2 < temp_a2) {
+                    soundChoice = func_802744D4_de() % totalSoundWeight;
+                    k = firstSoundVariant;
+                    cumulativeSoundWeight = 0;
+                    if (k < lastSoundVariant) {
+                        soundChoiceCursor = (k * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
+selectSoundVariant:
+                        cumulativeSoundWeight += *soundChoiceCursor * 0xA;
+                        repeatGuardBits = repeatGuard << 0x10;
+                        if (cumulativeSoundWeight < soundChoice) {
                             k += 1;
-                            var_a0_3 += 4;
-                            if (k >= sp24) {
-                                goto block_21;
+                            soundChoiceCursor += 4;
+                            if (k >= lastSoundVariant) {
+                                goto finishSoundSelection;
                             }
-                            goto loop_19;
+                            goto selectSoundVariant;
                         }
                     } else {
-block_21:
-                        var_v0_2 = temp_s1 << 0x10;
+finishSoundSelection:
+                        repeatGuardBits = repeatGuard << 0x10;
                     }
-                    var_s1 = k;
-                    if ((var_v0_2 != 0) && (k == ((s32 *) arg0)[304 / sizeof(s32)])) {
-                        if (k != sp24) {
-                            var_a3 = k + 1;
+                    selectedVariant = k;
+                    if ((repeatGuardBits != 0) && (k == ((s32 *) context)[304 / sizeof(s32)])) {
+                        if (k != lastSoundVariant) {
+                            soundVariant = k + 1;
                         } else {
-                            var_a3 = k - 1;
+                            soundVariant = k - 1;
                         }
-                        goto block_28;
+                        goto useAdjacentVariant;
                     }
                 } else {
-block_28:
-                    var_s1 = var_a3;
+useAdjacentVariant:
+                    selectedVariant = soundVariant;
                 }
             } else {
-                var_s1 = -1;
+                selectedVariant = -1;
             }
-            ((s8 *) arg0)[11156 / sizeof(s8)] = (s8) (s32) func_80274564_de(D_800C3EDC_de);
+            ((ContextRecAt2BC0 *)context)->field2B94 = (s8) (s32) func_80274564_de(D_800C3EDC_de);
         } else {
-            var_s0_3 = 0;
-            if (((s32 *) arg0)[11092 / sizeof(s32)] != 0) {
-                var_s1 = -1;
-                if (func_80265550_de(((u32 **) arg0)[11096 / sizeof(u32 *)], ((s32 *) arg0)[11092 / sizeof(s32)], (u32) (s16) arg1, &sp28, &sp2C) != 0) {
-                    var_a3_3 = sp28;
-                    if (var_a3_3 != sp2C) {
-                        var_a1_3 = var_a3_3;
-                        if (sp2C >= var_a3_3) {
-                            var_a0_4 = (var_a3_3 * 4) + ((s32 *) arg0)[11100 / sizeof(s32)];
+            totalInstrumentWeight = 0;
+            if (((ContextRecAt2BC0 *)context)->instrumentCount != 0) {
+                selectedVariant = -1;
+                if (func_80265550_de((u32 *)((ContextRecAt2BC0 *)context)->instrumentData, ((ContextRecAt2BC0 *)context)->instrumentCount, (u32) (s16) soundId, &firstInstrumentVariant, &lastInstrumentVariant) != 0) {
+                    instrumentVariant = firstInstrumentVariant;
+                    if (instrumentVariant != lastInstrumentVariant) {
+                        instrumentWeightIndex = instrumentVariant;
+                        if (lastInstrumentVariant >= instrumentVariant) {
+                            instrumentWeightCursor = (instrumentVariant * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
                             do {
-                                temp_v0_2 = *var_a0_4;
-                                var_a0_4 += 4;
-                                var_a1_3 += 1;
-                                var_s0_3 += temp_v0_2 * 0xA;
-                            } while (sp2C >= var_a1_3);
+                                instrumentWeight = *instrumentWeightCursor;
+                                instrumentWeightCursor += 4;
+                                instrumentWeightIndex += 1;
+                                totalInstrumentWeight += instrumentWeight * 0xA;
+                            } while (lastInstrumentVariant >= instrumentWeightIndex);
                         }
-                        temp_a2_2 = func_802744D4_de() % var_s0_3;
-                        var_a3_3 = sp28;
-                        var_s0_4 = 0;
-                        if (var_a3_3 < sp2C) {
-                            var_a0_5 = (var_a3_3 * 4) + ((s32 *) arg0)[11100 / sizeof(s32)];
-loop_39:
-                            var_s0_4 += *var_a0_5 * 0xA;
-                            var_s1 = var_a3_3;
-                            if (var_s0_4 < temp_a2_2) {
-                                var_a3_3 += 1;
-                                var_a0_5 += 4;
-                                if (var_a3_3 >= sp2C) {
-                                    goto block_41;
+                        instrumentChoice = func_802744D4_de() % totalInstrumentWeight;
+                        instrumentVariant = firstInstrumentVariant;
+                        cumulativeInstrumentWeight = 0;
+                        if (instrumentVariant < lastInstrumentVariant) {
+                            instrumentChoiceCursor = (instrumentVariant * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
+selectInstrumentVariant:
+                            cumulativeInstrumentWeight += *instrumentChoiceCursor * 0xA;
+                            selectedVariant = instrumentVariant;
+                            if (cumulativeInstrumentWeight < instrumentChoice) {
+                                instrumentVariant += 1;
+                                instrumentChoiceCursor += 4;
+                                if (instrumentVariant >= lastInstrumentVariant) {
+                                    goto finishInstrumentSelection;
                                 }
-                                goto loop_39;
+                                goto selectInstrumentVariant;
                             }
                         } else {
-                            goto block_41;
+                            goto finishInstrumentSelection;
                         }
                     } else {
-block_41:
-                        var_s1 = var_a3_3;
+finishInstrumentSelection:
+                        selectedVariant = instrumentVariant;
                     }
                 }
             } else {
-                var_s1 = -1;
+                selectedVariant = -1;
             }
         }
         result = -1;
-        if (var_s1 != -1) {
-            ((s8 **) arg0)[11144 / sizeof(s8 *)] = func_8028FDB4_de(func_8028FDB4_de(((s32 **) arg0)[11084 / sizeof(s32 *)], (s32) (s16) var_s1), 0);
-            ((s16 *) arg0)[11148 / sizeof(s16)] = (s16) arg1;
-            ((s32 *) arg0)[11152 / sizeof(s32)] = arg6;
-            temp_v0_3 = func_8028FDB4_de(func_8028FDB4_de(((s32 **) arg0)[11084 / sizeof(s32 *)], (s32) (s16) var_s1), 1);
-            temp_s5 = ((u32 *) temp_v0_3)[4 / sizeof(u32)];
-            var_s2 = -1;
-            if (temp_s5 != 0) {
-                lock = &((ContextRecAt2BC0 *)arg0)->lock;
+        if (selectedVariant != -1) {
+            ((ContextRecAt2BC0 *)context)->field2B88 = func_8028FDB4_de(func_8028FDB4_de(((ContextRecAt2BC0 *)context)->instrumentIndex, (s32) (s16) selectedVariant), 0);
+            ((ContextRecAt2BC0 *)context)->field2B8C = (s16) soundId;
+            ((ContextRecAt2BC0 *)context)->field2B90 = ownerId;
+            entries = func_8028FDB4_de(func_8028FDB4_de(((ContextRecAt2BC0 *)context)->instrumentIndex, (s32) (s16) selectedVariant), 1);
+            entryCount = ((u32 *) entries)[4 / sizeof(u32)];
+            playId = -1;
+            if (entryCount != 0) {
+                lock = &((ContextRecAt2BC0 *)context)->lock;
                 mask = func_802BCF30_de();
-                temp_v1 = lock->locked + 1;
-                lock->locked = temp_v1;
-                if (temp_v1 != 1) {
+                lockCount = lock->locked + 1;
+                lock->locked = lockCount;
+                if (lockCount != 1) {
                     __osRestoreInt(mask);
                     func_802BB2A0_de((OSMesgQueue *)lock, NULL, 1);
                 } else {
                     __osRestoreInt(mask);
                 }
-                unlock = &((ContextRecAt2BC0 *)arg0)->lock;
-                var_s2 = ((s32 *) arg0)[268 / sizeof(s32)] + 1;
-                ((s32 *) arg0)[268 / sizeof(s32)] = var_s2;
-                temp_v0_4 = func_802BCF30_de();
-                temp_v1_2 = unlock->locked - 1;
-                unlock->locked = temp_v1_2;
-                if (temp_v1_2 != 0) {
-                    __osRestoreInt(temp_v0_4);
+                unlock = &((ContextRecAt2BC0 *)context)->lock;
+                playId = ((s32 *) context)[268 / sizeof(s32)] + 1;
+                ((s32 *) context)[268 / sizeof(s32)] = playId;
+                unlockMask = func_802BCF30_de();
+                remainingLocks = unlock->locked - 1;
+                unlock->locked = remainingLocks;
+                if (remainingLocks != 0) {
+                    __osRestoreInt(unlockMask);
                     func_802BB420_de((OSMesgQueue *)unlock, 0, 1);
-                    var_v0_3 = arg1 < 0x100;
+                    isSound = soundId < 0x100;
                 } else {
-                    __osRestoreInt(temp_v0_4);
-                    var_v0_3 = arg1 < 0x100;
+                    __osRestoreInt(unlockMask);
+                    isSound = soundId < 0x100;
                 }
-                if (var_v0_3 != 0) {
-                    ((s32 *) arg0)[304 / sizeof(s32)] = var_s1;
-                    goto block_55;
+                if (isSound != 0) {
+                    ((s32 *) context)[304 / sizeof(s32)] = selectedVariant;
+                    goto startEntries;
                 }
                 l = 0;
             } else {
-block_55:
+startEntries:
                 l = 0;
             }
-            if (temp_s5 != 0) {
+            if (entryCount != 0) {
                 do {
-                    temp_lo = l * ((s32 *) temp_v0_3)[0 / sizeof(s32)];
+                    entryOffset = l * ((s32 *) entries)[0 / sizeof(s32)];
                     l += 1;
-                    func_80257BB4_de(arg0, (void *)(temp_v0_3 + temp_lo + 8), &position, var_s1, var_s2, 0, arg5);
-                } while (l < temp_s5);
+                    func_80257BB4_de(context, (void *)(entries + entryOffset + 8), &position, selectedVariant, playId, 0, voiceParameter);
+                } while (l < entryCount);
             }
-            ((s32 *) arg0)[11152 / sizeof(s32)] = -1;
-            result = var_s2;
+            ((ContextRecAt2BC0 *)context)->field2B90 = -1;
+            result = playId;
         }
     }
     return result;
@@ -427,7 +427,7 @@ INCLUDE_ASM("span_1000", Texture_PlaySoundAtPosition);
  * selection (0x2B88/0x2B8C/0x2B90), takes the recursive lock at 0x110 to hand out a new play id (counter
  * at 0x10C), then starts every voice record of the entry through func_80257BB4_de at the given position;
  * returns the play id, or -1 for an out-of-range index or an empty entry. */
-s32 func_8025826C_de(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 arg3) {
+s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
     u32 *entry;
     u32 count;
     u32 i;
@@ -472,11 +472,11 @@ s32 func_8025826C_de(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 a
     }
     if (count != 0) {
         for (i = 0; i < count; i++) {
-            func_80257BB4_de(self, (Item57BD4 *)((char *)entry + 8 + i * entry[0]), &position, index, playId, 0, arg3);
+            func_80257BB4_de(self, (Item57BD4 *)((char *)entry + 8 + i * entry[0]), &position, index, playId, 0, voiceParameter);
         }
     }
     return playId;
 }
 #else
-INCLUDE_ASM("span_1000", func_8025826C_de);
+INCLUDE_ASM("span_1000", Texture_PlayInstrumentAtPosition);
 #endif

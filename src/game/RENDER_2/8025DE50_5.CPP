@@ -68,7 +68,7 @@ s32 func_8025DFE8_de(s32 index, CVector3 position, s32 arg2) {
     if (D_801427D0 != 0) {
         return -1;
     }
-    return func_8025826C_de(&D_8010C080, index, position, arg2);
+    return Texture_PlayInstrumentAtPosition(&D_8010C080, index, position, arg2);
 }
 
 int func_8025E04C_de(int index) {
@@ -87,7 +87,7 @@ int func_8025E04C_de(int index) {
         vec.x = zero;
         temp_s1 = func_80258D10_de(&D_8010C080);
         func_80258D08_de(&D_8010C080, 1);
-        temp_s0 = func_8025826C_de(&D_8010C080, index, vec, 0);
+        temp_s0 = Texture_PlayInstrumentAtPosition(&D_8010C080, index, vec, 0);
         func_80258D08_de(&D_8010C080, temp_s1);
     }
     return temp_s0;

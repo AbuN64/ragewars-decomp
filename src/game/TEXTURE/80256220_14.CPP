@@ -357,7 +357,7 @@ extern void func_802B2DE0_de(void *, u8);
 extern void alSndpSetPan(void *, u8);
 extern void func_802B2F10_de(void *, s16);
 
-s32 func_802577F4_de(SoundContext *context, s32 id) {
+s32 Texture_UpdateSoundSlot(SoundContext *context, s32 id) {
     s32 i;
     s16 index;
     SoundSlot *slot;
@@ -400,5 +400,5 @@ s32 func_802577F4_de(SoundContext *context, s32 id) {
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_802577F4_de);
+INCLUDE_ASM("span_1000", Texture_UpdateSoundSlot);
 #endif

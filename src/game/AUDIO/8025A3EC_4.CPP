@@ -292,7 +292,7 @@ void func_8025BB84_de(void *arg0, void *desc, s32 extra) {
     void *record;
 
     func_80259C5C_de(arg0, desc, extra);
-    func_80259F68_de(arg0, desc, extra);
+    Audio_InitializeVoiceMix(arg0, desc, extra);
     ((struct View_func_8025AE1C_de *)(arg0))->priority = 0x40;
     index = ((struct Shared_Body *)(desc))->kind;
     if (index != -1) {

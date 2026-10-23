@@ -135,7 +135,7 @@ void func_80259C5C_de(ViewRecAtB0 *view, ControllerCode802591C0 *controller, s32
 extern float D_800CB7F0[];
 extern float D_800C3F34_de;
 extern SoundEnvelope *func_80258BC4_de(ContextRecAt2BC0 *context, int index);
-void func_80259F68_de(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
+void Audio_InitializeVoiceMix(Voice *voice, ControllerCode802591C0 *control, s32 unused2) {
     u8 *colour;
     s32 i;
     f32 from;
@@ -238,5 +238,5 @@ void func_80259F68_de(Voice *voice, ControllerCode802591C0 *control, s32 unused2
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80259F68_de);
+INCLUDE_ASM("span_1000", Audio_InitializeVoiceMix);
 #endif
