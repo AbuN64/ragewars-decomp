@@ -14,7 +14,7 @@ extern void func_8020D1FC_de(void *);
 
 extern void func_8020D220_de(void *, s32);
 
-extern void func_8020C5A0_de(CNavData *, NavigationSearchNode *);
+extern void Nav_SearchPath(CNavData *, NavigationSearchNode *);
 
 s32 func_8020B95C_de(CNavData *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     NavigationPoint *var_s7;
@@ -233,7 +233,7 @@ s32 func_8020BC50_de(Obj8020BC50 *obj, s32 key, s32 requested, void *owner) {
 not_found:
     node = 0;
 search_done:
-    func_8020C5A0_de(obj, node);
+    Nav_SearchPath(obj, node);
     return obj->selected = obj->result;
 }
 
@@ -558,183 +558,199 @@ extern f32 D_800C1D80_de,D_800C1D84_de,D_800C1D88_de;
 extern f32 func_8020C2E8_de(CNavData *, NavigationSearchNode *);
 extern f32 func_802726F8_de(f32 *,f32 *);
 
-static inline s32 hasOpen35(CNavData *g,s32 status){NavigationSearchNode *n=g->nodes;while(n){if(n->open==status)return 1;n=n->next;}return 0;}
-static __inline__ NavigationSearchNode *choose35(CNavData *g,s32 status,f32 initial,f32 sentinel){NavigationSearchNode *n=g->nodes,*best=0;f32 minimum=initial;while(n){if(n->open==status){if(n->total<minimum){best=n;minimum=n->total;}else if(minimum==sentinel){best=n;minimum=n->total;}}n=n->next;}if(best)best->open=0;return best;}
-static inline NavigationSearchNode *find35(CNavData *g,s32 key){NavigationSearchNode *n=g->nodes;while(n){if(n->key==key)return n;n=n->next;}return 0;}
-static inline s32 neighbors35(CNavData *arg0, NavigationSearchNode *node,s32 *out,s32 *ids) {
- s32 temp_t1=node->key,var_a3=0,var_t0=0; s32 *var_a0_3=out,*var_a1=ids; NavigationBuffer *temp_v1;NavigationPortal *temp_v1_2;
-        if (arg0->m_nNavLinks > 0) {
+static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
+    NavigationSearchNode *node = graph->nodes;
+    while (node) {
+        if (node->open == status) return 1;
+        node = node->next;
+    }
+    return 0;
+}
+static inline NavigationSearchNode *navChooseOpenNode(CNavData *graph, s32 status, f32 initial, f32 sentinel) {
+    NavigationSearchNode *node = graph->nodes, *best = 0;
+    f32 minimum = initial;
+    while (node) {
+        if (node->open == status) {
+            if (node->total < minimum) {
+                best = node;
+                minimum = node->total;
+            } else if (minimum == sentinel) {
+                best = node;
+                minimum = node->total;
+            }
+        }
+        node = node->next;
+    }
+    if (best) best->open = 0;
+    return best;
+}
+static inline NavigationSearchNode *navFindNode(CNavData *graph, s32 key) {
+    NavigationSearchNode *node = graph->nodes;
+    while (node) {
+        if (node->key == key) return node;
+        node = node->next;
+    }
+    return 0;
+}
+static inline s32 navCollectNeighbors(CNavData *graph, NavigationSearchNode *node,s32 *out,s32 *ids) {
+    s32 key = node->key, index = 0, count = 0;
+    s32 *neighborOut = out, *portalOut = ids;
+    NavigationBuffer *links;
+    NavigationPortal *portal;
+        if (graph->m_nNavLinks > 0) {
 
             do {
-                temp_v1 = arg0->m_pusNavLinks;
-                temp_v1_2=navigationRecord(temp_v1,var_a3);
-                if (temp_v1_2->first == temp_t1) {
-                    var_t0 += 1;
-                    *var_a0_3 = temp_v1_2->second;
-                    *var_a1 = var_a3;
-                    var_a1++;
-                    var_a0_3++;
+                links = graph->m_pusNavLinks;
+                portal=navigationRecord(links,index);
+                if (portal->first == key) {
+                    count += 1;
+                    *neighborOut = portal->second;
+                    *portalOut = index;
+                    portalOut++;
+                    neighborOut++;
                 }
-                if (temp_v1_2->second == temp_t1) {
-                    var_t0 += 1;
-                    *var_a0_3 = temp_v1_2->first;
-                    *var_a1 = var_a3;
-                    var_a1++;
-                    var_a0_3++;
+                if (portal->second == key) {
+                    count += 1;
+                    *neighborOut = portal->first;
+                    *portalOut = index;
+                    portalOut++;
+                    neighborOut++;
                 }
-                var_a3 += 1;
-            } while (var_a3 < arg0->m_nNavLinks);
+                index += 1;
+            } while (index < graph->m_nNavLinks);
         }
-return var_t0;
+    return count;
 }
-void func_8020C5A0_de(CNavData *arg0, NavigationSearchNode *arg1) {
-    s32 sp10[64];
-    s32 sp110[64];
-    s32 *sp210;
-    NavigationPoint *temp_fp;
-    NavigationPoint *temp_s2;
-    f32 temp_fs0f;
-    f32 temp_fv0;
-    f32 temp_fv0_2;
-    f32 temp_fv0_3;
-    f32 temp_fv0f;
-    f32 var_fv0f;
-    f32 var_fv0f_2;
-    f32 var_fv0f_3;
-    NavigationBuffer *temp_a0;
-    NavigationBuffer *temp_a0_3;
-    NavigationBuffer *temp_v1;
-    NavigationBuffer *temp_v1_3;
-    s32 *var_a0_2;
-    s32 *var_a0_3;
-    s32 *var_a1;
-    s32 *var_v1_3;
-    s32 temp_a0_2;
-    s32 temp_a1;
-    s32 temp_t1;
-    s32 temp_v1_5;
-    s32 var_a3;
-    s32 var_s1;
-    s32 var_s1_2;
-    s32 var_s4;
-    s32 var_t0;
-    s32 var_v0;
-    const s32 one = 1;
-    s32 var_v0_2;
-    u8 temp_a0_5;
-    s32 temp_v1_4;
-    NavigationPortal *temp_a0_4;
-    NavigationPortal *temp_v1_2;
-    NavigationSearchNode *var_a0;
-    NavigationSearchNode *var_a1_2;
-    NavigationSearchNode *var_s0;
-    NavigationSearchNode *var_v1;
-    NavigationSearchNode *var_v1_2;
+static inline s32 navReversible(s32 kind) {
+    switch (kind) {
+        case 1:
+        case 4:
+        case 7:
+            return 1;
+        default:
+            return 0;
+    }
+}
+/* 195/253 aligned words; remaining: open-list and neighbor-loop register allocation. */
+void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
+    s32 neighbors[64];
+    s32 portals[64];
+    s32 *neighborBase;
+    NavigationPoint *origin;
+    NavigationPoint *destination;
+    f32 sentinel;
+    f32 initialEstimate;
+    f32 estimate;
+    f32 cost;
+    f32 distance;
+    f32 edgeCost;
+    NavigationBuffer *pointTable;
+    NavigationBuffer *linkTable;
+    NavigationBuffer *neighborTable;
+    s32 *portalOut;
+    s32 *neighborOut;
+    s32 neighborKey;
+    s32 currentKey;
+    s32 state;
+    s32 index;
+    s32 byteOffset;
+    s32 count;
+    const s32 open = 1;
+    s32 reversible;
+    u8 edgeKind;
+    s32 kind;
+    NavigationPortal *portal;
+    NavigationSearchNode *current;
+    NavigationSearchNode *nodeList;
+    NavigationSearchNode *next;
 
-    arg1->cost = 0.0f;
-    temp_fv0 = func_8020C2E8_de(arg0,arg1);
-    temp_fs0f = D_800C1D80_de;
-    sp210=sp10;
-    arg1->estimate = temp_fv0;
-    arg1->parent = 0;
-    arg1->open=one;
-    arg1->total = (arg1->cost + temp_fv0);
-loop_1:
- if(hasOpen35(arg0,one)){
- var_a0=choose35(arg0,one,D_800C1D84_de,temp_fs0f);
-        temp_a0 = arg0->points;
-        temp_a1 = var_a0->key;
-        temp_fp=navigationRecord(temp_a0,temp_a1);
-        if (var_a0->goal != 0) {
-            arg0->result = temp_a1;
+    start->cost = 0.0f;
+    initialEstimate = func_8020C2E8_de(graph,start);
+    sentinel = D_800C1D80_de;
+    neighborBase=neighbors;
+    start->estimate = initialEstimate;
+    start->parent = 0;
+    start->open=open;
+    start->total = (start->cost + initialEstimate);
+search_next:
+ if(navHasOpenNode(graph,open)){
+ current=navChooseOpenNode(graph,open,D_800C1D84_de,sentinel);
+        pointTable = graph->points;
+        currentKey = current->key;
+        origin=navigationRecord(pointTable,currentKey);
+        if (current->goal != 0) {
+            graph->result = currentKey;
             return;
         }
-        var_s1_2 = 0;
-        var_a0_2=sp110;
-        var_v1_3=sp10;
+        index = 0;
+        portalOut=portals;
+        neighborOut=neighbors;
         do {
-            *var_v1_3 = -1;
-            *var_a0_2 = -1;
-            var_a0_2++;
-            var_s1_2 += 1;
-            var_v1_3++;
-        } while (var_s1_2 < 0x40);
-var_t0=neighbors35(arg0,var_a0,sp10,sp110);
-        var_s1_2 = 0;
-        if (var_t0 > 0) {
-            var_s4 = 0;
+            *neighborOut = -1;
+            *portalOut = -1;
+            portalOut++;
+            index += 1;
+            neighborOut++;
+        } while (index < 0x40);
+count=navCollectNeighbors(graph,current,neighbors,portals);
+        index = 0;
+        if (count > 0) {
+            byteOffset = 0;
             do {
-                temp_v1_3 = arg0->points;
-                temp_a0_2 = sp210[var_s1_2];
-                var_a1_2 = arg0->nodes;
-                temp_s2=navigationRecord(temp_v1_3,temp_a0_2);
-                var_s0=find35(arg0,temp_a0_2);
-                temp_a0_3 = arg0->m_pusNavLinks;
-                temp_a0_4=navigationRecord(temp_a0_3,sp110[var_s1_2]);
-                temp_v1_4 = temp_a0_4->kind;
-                if (temp_v1_4 != 4) {
-                    if (temp_v1_4 < 5) {
-                        var_v0_2 = 0;
-                        if (temp_v1_4 != 1) {
-
+                neighborTable = graph->points;
+                neighborKey = *(s32 *)((u8 *)neighborBase + byteOffset);
+                nodeList = graph->nodes;
+                destination=navigationRecord(neighborTable,neighborKey);
+                next=navFindNode(graph,neighborKey);
+                linkTable = graph->m_pusNavLinks;
+                portal=navigationRecord(linkTable,*(s32 *)((u8 *)portals + byteOffset));
+                kind = portal->kind;
+                reversible = navReversible(kind);
+                if ((reversible != 0) || (portal->first == current->key)) {
+                    edgeKind = portal->kind;
+                    if ((edgeKind != 0xA) && (edgeKind != 0xB)) {
+                        if (edgeKind == 9) {
+                            distance = 0.0f;
                         } else {
-                            goto block_35;
+                            distance = func_802726F8_de(&destination->position.x,&origin->position.x);
                         }
-                    } else {
-                        var_v0_2 = 0;
-                        if (temp_v1_4 == 7) {
-                            goto block_35;
+                        edgeCost = distance + next->extra;
+                        if (navigation_point_flags(destination) & 0x400) {
+                            edgeCost += D_800C1D88_de;
                         }
-                    }
-                } else {
-block_35:
-                    var_v0_2 = 1;
-                }
-                if ((var_v0_2 != 0) || (temp_a0_4->first == var_a0->key)) {
-                    temp_a0_5 = temp_a0_4->kind;
-                    if ((temp_a0_5 != 0xA) && (temp_a0_5 != 0xB)) {
-                        if (temp_a0_5 == 9) {
-                            var_fv0f_2 = 0.0f;
-                        } else {
-                            var_fv0f_2 = func_802726F8_de(&temp_s2->position.x,&temp_fp->position.x);
+                        if (edgeCost < 0.0f) {
+                            edgeCost = 0.0f;
                         }
-                        var_fv0f_3 = var_fv0f_2 + var_s0->extra;
-                        if (navigation_point_flags(temp_s2) & 0x400) {
-                            var_fv0f_3 += D_800C1D88_de;
-                        }
-                        if (var_fv0f_3 < 0.0f) {
-                            var_fv0f_3 = 0.0f;
-                        }
-                        temp_v1_5 = var_s0->open;
-                        temp_fv0f = var_a0->cost + var_fv0f_3;
-                        if (((temp_v1_5 ^ 2) == 0) || ((temp_v1_5 ^ 1) == 0)) {
-                            if (!(var_s0->cost <= temp_fv0f)) {
-                                goto block_51;
+                        state = next->open;
+                        cost = current->cost + edgeCost;
+                        if (((state ^ 2) == 0) || ((state ^ 1) == 0)) {
+                            if (!(next->cost <= cost)) {
+                                goto update_neighbor;
                             }
                         } else {
-block_51:
-                            var_s0->parent = var_a0;
-                            var_s0->cost = temp_fv0f;
-                            temp_fv0_3 = func_8020C2E8_de(arg0, var_s0);
-                            var_s0->estimate = temp_fv0_3;
-                            var_s0->total = (var_s0->cost + temp_fv0_3);
-                            if ((var_s0->open ^ 2) == 0) {
-                                var_s0->open = 0;
+update_neighbor:
+                            next->parent = current;
+                            next->cost = cost;
+                            estimate = func_8020C2E8_de(graph, next);
+                            next->estimate = estimate;
+                            next->total = (next->cost + estimate);
+                            if ((next->open ^ 2) == 0) {
+                                next->open = 0;
                             }
-                            if ((var_s0->open ^ one) != 0) {
-                                var_s0->open=one;
+                            if ((next->open ^ open) != 0) {
+                                next->open=open;
                             }
                         }
                     }
                 }
-                var_s1_2 += 1;
-                var_s4 += 4;
-            } while (var_s1_2 < var_t0);
+                index += 1;
+                byteOffset += 4;
+            } while (index < count);
         }
-        var_a0->open = 2;
-        goto loop_1;
+        current->open = 2;
+        goto search_next;
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8020C5A0_de);
+INCLUDE_ASM("span_1000", Nav_SearchPath);
 #endif

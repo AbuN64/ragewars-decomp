@@ -13,7 +13,7 @@ extern void func_8020D220_de(void *, s32);
 
 extern void func_8020D0CC_de(void *arg0, s32 arg1);
 
-extern void func_8020C5A0_de(void *arg0, void *node);
+extern void Nav_SearchPath(void *arg0, void *node);
 
 void func_8020D070_de(void *arg0, s32 arg1, s32 arg2) {
     func_8020D014_de(arg0);
@@ -22,7 +22,7 @@ void func_8020D070_de(void *arg0, s32 arg1, s32 arg2) {
     func_8020D0CC_de(arg0, arg1);
 }
 
-/** Find a keyed node in the object's list and pass it to func_8020C5A0_de. */
+/** Find a keyed node in the object's list and pass it to Nav_SearchPath. */
 void func_8020D0CC_de(void *arg0, s32 key) {
     NavigationSearchNode *node = ((CNavData *)arg0)->nodes;
 
@@ -40,7 +40,7 @@ loop:
 not_found:
     node = 0;
 found:
-    func_8020C5A0_de(arg0, node);
+    Nav_SearchPath(arg0, node);
 }
 
 void func_8020D114_de(char *owner, s32 *output, s32 count) {
