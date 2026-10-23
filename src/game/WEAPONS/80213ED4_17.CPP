@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 
-extern void func_80214DD4_de(void *, void *, s32, void *);
+extern void Weapons_ResolveTrackGoal(void *, void *, s32, void *);
 extern void func_80215410_de(void *, void *, s32, void *);
 
 
@@ -29,7 +29,7 @@ void func_80216D3C_de(Input80216D3C *arg0, void *arg1, Output80216D3C *arg2, s32
         }
     }
     if (arg3 != 0) {
-        func_80214DD4_de(arg0, tracker, (s32)tracker->target, &arg2[1]);
+        Weapons_ResolveTrackGoal(arg0, tracker, (s32)tracker->target, &arg2[1]);
     } else {
         Output80216D3C *out = &arg2[1];
         first = arg0->vec;

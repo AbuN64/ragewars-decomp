@@ -26,7 +26,7 @@ extern void func_80271F9C_de(CVector3 *result, CVector3 *vec, f32 scale);
 
 extern f32 func_802B72B0_de(f32 value);
 /* Places the goal beside kind-7 targets: pushed away from the anchor by both extents. */
-static inline void func_80214DD4_place_beside(Actor_func_80214DD4_de *arg0, Actor_func_80214DD4_de *target, Actor_func_80214DD4_de *anchor, CVector3 *outPos, s32 *outRoom) {
+static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_func_80214DD4_de *target, Actor_func_80214DD4_de *anchor, CVector3 *outPos, s32 *outRoom) {
     CVector3 dir;
     CVector3 goal;
     if (anchor != 0) {
@@ -38,14 +38,14 @@ static inline void func_80214DD4_place_beside(Actor_func_80214DD4_de *arg0, Acto
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
-    func_80271F9C_de(&dir, &dir, func_8024D398_de(target) + func_8024D398_de(arg0) + D_800C216C_de);
+    func_80271F9C_de(&dir, &dir, func_8024D398_de(target) + func_8024D398_de(actor) + D_800C216C_de);
     func_80271F34_de(&goal, &target->pos, &dir);
     func_8024E79C_de(target, goal, outPos, outRoom, 0, 0);
 }
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
     fills out with the kind, target, reach, goal position and its offset from the actor, both in 3D
-    and flattened to the ground plane. The third parameter is reused as the boost flag. */
-void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, TrackResult *out) {
+    and flattened to the ground plane. The third parameter is overwritten: it serves as the boost flag. */
+void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, TrackResult *out) {
     CVector3 pos;
     CVector3 probe;
     CVector3 away;
@@ -59,28 +59,28 @@ void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, Tr
     f32 angle;
     f32 reach;
     Location *loc;
-    boost = 0; /* FAKEMATCH: reuses the third parameter as the boost flag; a separate local gives the right code but not the target register numbering. Owner-accepted 2026-09-28; clean draft 395/399. */
-    if (*arg0->kind != 1) {
+    boost = 0; /* the shared tracker-callback slot (unused, as in func_80215410_de) holds the boost flag */
+    if (*actor->kind != 1) {
         mode = -1;
     }
-    if (arg1->team == D_8011CD20) {
-        if ((arg1->flags & 0x40000) && arg1->unk78 == 0) {
-            if (func_80214624_de(arg0, arg1, arg1->target) == 0) {
-                arg1->flags &= ~0x40000;
+    if (tracker->team == D_8011CD20) {
+        if ((tracker->flags & 0x40000) && tracker->unk78 == 0) {
+            if (func_80214624_de(actor, tracker, tracker->target) == 0) {
+                tracker->flags &= ~0x40000;
             }
         } else {
-            arg1->target = func_802149C0_de(arg0, arg1, 0, 1);
+            tracker->target = func_802149C0_de(actor, tracker, 0, 1);
         }
     }
-    target = arg1->target;
+    target = tracker->target;
     kind = 6;
-    if (arg1->active != 0) {
+    if (tracker->active != 0) {
         if (target == 0) {
             kind = 3;
-            if (arg1->slot != 0) {
+            if (tracker->slot != 0) {
                 kind = 4;
             }
-        } else if (target == arg1->self) {
+        } else if (target == tracker->self) {
             kind = 2;
         } else if (*target->kind == 5) {
             kind = 5;
@@ -88,9 +88,9 @@ void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, Tr
             kind = 7;
         } else if (D_8013B290 != 0) {
             kind = 0;
-        } else if (((target->flags100 & 0x300000) && target->controller->owner == arg0 &&
+        } else if (((target->flags100 & 0x300000) && target->controller->owner == actor &&
                     target->controller->state == 2) ||
-                   ((arg0->flags2E0 & 2) && arg0->id != 0xCA)) {
+                   ((actor->flags2E0 & 2) && actor->id != 0xCA)) {
             kind = 1;
         } else {
             kind = 0;
@@ -98,7 +98,7 @@ void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, Tr
     }
     if (target != 0) {
         if (kind == 7) {
-            func_80214DD4_place_beside(arg0, target, arg1->anchor, &pos, &room);
+            Weapons_PlaceGoalBeside(actor, target, tracker->anchor, &pos, &room);
         } else {
             pos = target->pos;
             room = target->room;
@@ -106,7 +106,7 @@ void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, Tr
                 pos.y += target->height + Particle_GetActorHeight(target) * D_800C2170_de;
             }
         }
-        gap = func_8024D398_de(target) + func_8024D398_de(arg0);
+        gap = func_8024D398_de(target) + func_8024D398_de(actor);
         switch (kind) {
             case 2:
                 gap += D_800C2174_de;
@@ -120,52 +120,52 @@ void func_80214DD4_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 boost, Tr
                 break;
         }
     } else {
-        gap = func_8024D398_de(arg0);
+        gap = func_8024D398_de(actor);
         switch (kind) {
             case 4:
-                loc = func_80219408_de(&arg1->slot);
+                loc = func_80219408_de(&tracker->slot);
                 pos = loc->pos;
                 gap = 0.0f;
                 room = loc->room;
-                if (arg1->slot == 2 || arg1->slot == kind) {
+                if (tracker->slot == 2 || tracker->slot == kind) {
                     boost = 1;
                 }
                 break;
             case 3:
-                pos = arg1->homePos;
-                room = arg1->homeRoom;
+                pos = tracker->homePos;
+                room = tracker->homeRoom;
                 boost = 1;
                 break;
             case 6:
-                pos = arg0->pos;
-                room = arg0->room;
+                pos = actor->pos;
+                room = actor->room;
                 if (mode == 2) {
-                    pos.y = func_8024E80C_de(arg0);
+                    pos.y = func_8024E80C_de(actor);
                 }
                 break;
         }
     }
-    func_80271F34_de(&pos, &pos, &arg1->offset);
+    func_80271F34_de(&pos, &pos, &tracker->offset);
     if (gap > 0.0f) {
-        func_80271F68_de(&away, &arg0->pos, &pos);
+        func_80271F68_de(&away, &actor->pos, &pos);
         angle = func_80271AA8_de(&away);
         pos.x -= gap * func_802B7130_de(angle);
         pos.z -= gap * func_802B6560_de(angle);
     }
     if (mode == 2) {
-        pos.y = RW_MIN_LT(pos.y, func_8024E80C_de(arg0));
+        pos.y = RW_MIN_LT(pos.y, func_8024E80C_de(actor));
     }
     if (boost) {
-        reach = Sound_GetActorReach(arg0);
-        probe.x = arg0->pos.x + reach * func_802B7130_de(arg1->angle);
-        probe.y = arg1->height;
-        probe.z = arg0->pos.z + reach * func_802B6560_de(arg1->angle);
-        range = func_80215868_de(arg0, probe, target, D_800C2178_de);
-        pos.y = arg1->height;
+        reach = Sound_GetActorReach(actor);
+        probe.x = actor->pos.x + reach * func_802B7130_de(tracker->angle);
+        probe.y = tracker->height;
+        probe.z = actor->pos.z + reach * func_802B6560_de(tracker->angle);
+        range = func_80215868_de(actor, probe, target, D_800C2178_de);
+        pos.y = tracker->height;
     } else {
-        range = func_80216F44_de(arg0, pos);
+        range = func_80216F44_de(actor, pos);
     }
-    func_80271F68_de(&delta, &pos, &arg0->pos);
+    func_80271F68_de(&delta, &pos, &actor->pos);
     out->kind = kind;
     out->target = target;
     out->range = range;
