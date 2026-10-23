@@ -1,10 +1,16 @@
 
 #if defined(VERSION_US_REV1)
 extern char D_002ADB08[];
-unsigned int D_auto_src_ragewars_pickup_weapons_us_rev1[30] = {
-    0x800D71F0, 0x0BC40DB6, 0x00000000, 0x00010064, (unsigned int)D_002ADB08, 0x800D71F4, 0x0BC50DB6, 0x00000000,
-    0x00010064, (unsigned int)D_002ADB08, 0x800D71F8, 0x0BC60DAC, 0x00000000, 0x00000032, (unsigned int)D_002ADB08, 0x800D71FC,
-    0x0BC70DAC, 0x00000000, 0x00000032, (unsigned int)D_002ADB08, 0x800D7200, 0x0BC80DC0, 0x00000000, 0x00020005,
-    (unsigned int)D_002ADB08, 0x800D7204, 0x0BC90DC0, 0x00000000, 0x00020005, (unsigned int)D_002ADB08,
+struct {
+    unsigned int w0;
+    unsigned short h1[6];
+    unsigned int w2;
+} D_auto_src_ragewars_pickup_weapons_us_rev1[6] = {
+    { 0x800D71F0, { 0x0BC4, 0x0DB6, 0x0000, 0x0000, 0x0001, 0x0064 }, (unsigned int)D_002ADB08 },
+    { 0x800D71F4, { 0x0BC5, 0x0DB6, 0x0000, 0x0000, 0x0001, 0x0064 }, (unsigned int)D_002ADB08 },
+    { 0x800D71F8, { 0x0BC6, 0x0DAC, 0x0000, 0x0000, 0x0000, 0x0032 }, (unsigned int)D_002ADB08 },
+    { 0x800D71FC, { 0x0BC7, 0x0DAC, 0x0000, 0x0000, 0x0000, 0x0032 }, (unsigned int)D_002ADB08 },
+    { 0x800D7200, { 0x0BC8, 0x0DC0, 0x0000, 0x0000, 0x0002, 0x0005 }, (unsigned int)D_002ADB08 },
+    { 0x800D7204, { 0x0BC9, 0x0DC0, 0x0000, 0x0000, 0x0002, 0x0005 }, (unsigned int)D_002ADB08 },
 };
 #endif

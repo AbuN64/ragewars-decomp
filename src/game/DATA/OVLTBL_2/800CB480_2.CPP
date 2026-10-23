@@ -1,7 +1,8 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_802AEF84_us_rev1_CC080_us_rev1.c */
-const unsigned short D_blob_64f120561c6a85014be6[5] = {
-    0x4E36, 0x3420, 0x5631, 0x2E30, 0x3000,
+/* "N64 V1.00" and its terminator: text, so bytes. */
+const unsigned char D_blob_64f120561c6a85014be6[10] = {
+    0x4E, 0x36, 0x34, 0x20, 0x56, 0x31, 0x2E, 0x30, 0x30, 0x00,
 };
 #endif

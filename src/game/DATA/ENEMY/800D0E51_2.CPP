@@ -1,32 +1,67 @@
 
 /* ROM-grounded data: rodata/writable/800D0E52 */
 #ifdef VERSION_DE
-unsigned short D_blob_phase2_92fa79f50dd8dc42e292[15] = {
-    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF, 0xFFFF, 0x0000, 0x0001, 0x0000, 0xF000, 0x0001,
-    0xE800, 0x0001, 0xCC00,
+/* A halfword, then seven words read as words (lw) at 0x800D0E54; packed because the words start 2 bytes in. */
+struct {
+    unsigned short h0;
+    unsigned int w1[7];
+} __attribute__((packed)) D_blob_phase2_92fa79f50dd8dc42e292 = {
+    0x0000,
+    {
+        0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000001,
+        0x0000F000, 0x0001E800, 0x0001CC00,
+    },
 };
 #endif
 #ifdef VERSION_EU
-unsigned short D_blob_phase2_92fa79f50dd8dc42e292[15] = {
-    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF, 0xFFFF, 0x0000, 0x0001, 0x4C45, 0x5552, 0x2043,
-    0x4F4D, 0x5052, 0x4548,
+/* A halfword, then seven words read as words (lw) at 0x800D0E54; packed because the words start 2 bytes in. */
+struct {
+    unsigned short h0;
+    unsigned int w1[7];
+} __attribute__((packed)) D_blob_phase2_92fa79f50dd8dc42e292 = {
+    0x0000,
+    {
+        0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000001,
+        0x4C455552, 0x20434F4D, 0x50524548,
+    },
 };
 #endif
 #ifdef VERSION_EU_X
-unsigned short D_blob_phase2_92fa79f50dd8dc42e292[15] = {
-    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF, 0xFFFF, 0x0000, 0x0001, 0x3F83, 0x5A18, 0x3F83,
-    0x34A1, 0x3F83, 0x0F24,
+/* A halfword, then seven words read as words (lw) at 0x800D0E54; packed because the words start 2 bytes in. */
+struct {
+    unsigned short h0;
+    unsigned int w1[7];
+} __attribute__((packed)) D_blob_phase2_92fa79f50dd8dc42e292 = {
+    0x0000,
+    {
+        0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000001,
+        0x3F835A18, 0x3F8334A1, 0x3F830F24,
+    },
 };
 #endif
 #ifdef VERSION_US
-unsigned short D_blob_phase2_92fa79f50dd8dc42e292[15] = {
-    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF, 0xFFFF, 0x0000, 0x0001, 0x4542, 0x5241, 0x4C5F,
-    0x424F, 0x5245, 0x5F42,
+/* A halfword, then seven words read as words (lw) at 0x800D0E54; packed because the words start 2 bytes in. */
+struct {
+    unsigned short h0;
+    unsigned int w1[7];
+} __attribute__((packed)) D_blob_phase2_92fa79f50dd8dc42e292 = {
+    0x0000,
+    {
+        0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000001,
+        0x45425241, 0x4C5F424F, 0x52455F42,
+    },
 };
 #endif
 #ifdef VERSION_US_REV1
-unsigned short D_blob_phase2_92fa79f50dd8dc42e292[15] = {
-    0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0xFFFF, 0xFFFF, 0x0000, 0x0001, 0x3F83, 0xEFAF, 0x3F83,
-    0xCA53, 0x3F83, 0xA4F0,
+/* A halfword, then seven words read as words (lw) at 0x800D0E54; packed because the words start 2 bytes in. */
+struct {
+    unsigned short h0;
+    unsigned int w1[7];
+} __attribute__((packed)) D_blob_phase2_92fa79f50dd8dc42e292 = {
+    0x0000,
+    {
+        0x00000000, 0x00000000, 0xFFFFFFFF, 0x00000001,
+        0x3F83EFAF, 0x3F83CA53, 0x3F83A4F0,
+    },
 };
 #endif
