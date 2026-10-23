@@ -285,7 +285,7 @@ extern void func_8026B504_de(void *, void *, void *);
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first
  * part's material is registered through func_8026B504_de with the caller's two inputs. */
-void func_8026D280_de(void **resource, void *matrix, s32 segment, void *arg3, void *textures, s32 pass) {
+void func_8026D280_de(void **resource, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -335,7 +335,7 @@ void func_8026D280_de(void **resource, void *matrix, s32 segment, void *arg3, vo
         part = func_8028FDB4_de(parts, i);
         material = func_8028FDB4_de(part, 0);
         if (i == 0) {
-            func_8026B504_de(matrix, arg3, material);
+            func_8026B504_de(matrix, lights, material);
         }
         {
             Gfx *cmd;

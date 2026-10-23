@@ -60,9 +60,9 @@ void func_80290548_de(ListNode80290528 *node) {
     }
 }
 
-void func_802905F4_de(char *arg0, char *arg1) {
+void func_802905F4_de(char *arg0, char *view) {
     WorldRecAt3C08 *world = (void *)arg0;
-    GameplayCamera *camera = (void *)arg1;
+    GameplayCamera *camera = (void *)view;
     SceneEffect *entry;
     f32 value;
     f32 upper;
@@ -98,7 +98,7 @@ void func_802905F4_de(char *arg0, char *arg1) {
     func_8026D9D0_de();
 }
 
-void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *arg1) {
+void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *results) {
     f32 *bounds;
     s32 count;
     s32 mask;
@@ -123,10 +123,10 @@ void func_8029076C_de(ContainerRecAt3C04 *arg0, Results *arg1) {
                 (bounds[-1] < node->y2) &&
                 (bounds[1] > node->x1) &&
                 (bounds[-2] < node->y1)) {
-                count = arg1->count;
+                count = results->count;
                 if (count != limit) {
-                    arg1->nodes[count] = node;
-                    arg1->count = count + 1;
+                    results->nodes[count] = node;
+                    results->count = count + 1;
                 }
             }
             node = node->next;

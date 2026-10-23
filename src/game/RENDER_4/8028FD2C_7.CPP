@@ -4,9 +4,9 @@
 #include "RENDER_4/8028FD2C_7.H"
 
 /** Add an indexed word from the first argument to the second argument. */
-int func_8028FE28_de(int *arg0, int arg1, int arg2) {
-    arg0 += arg2;
-    return arg1 + arg0[1];
+int func_8028FE28_de(int *directory, int arg1, int level) {
+    directory += level;
+    return arg1 + directory[1];
 }
 
 s32 func_8028FE3C_de(void *arg0, s32 arg1, s32 arg2, s32 *arg3) {

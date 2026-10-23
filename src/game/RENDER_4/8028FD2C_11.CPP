@@ -241,10 +241,10 @@ extern struct ActorDefinitionHeader D_8011B388;
 
 
 
-void func_80290408_de(struct EffectSlot *arg0) {
-    arg0->definition = &D_8011B388;
-    arg0->active = 3;
-    arg0->state = 0;
+void func_80290408_de(struct EffectSlot *effectSlot) {
+    effectSlot->definition = &D_8011B388;
+    effectSlot->active = 3;
+    effectSlot->state = 0;
 }
 
 #include "COMMON/MULTIPLAYEROPTIONS.H"

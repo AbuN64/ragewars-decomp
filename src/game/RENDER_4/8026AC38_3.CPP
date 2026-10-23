@@ -114,11 +114,11 @@ void func_8026C020_de(void) {
 }
 
                           
-void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 arg5) {
+void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 direct) {
         s32 *sp28;
         s32 sp2C;
         s32 **temp_v0;
-        s32 **temp_v0_4;
+        s32 **resource;
         s32 temp_s0;
         s32 temp_s1;
         s32 temp_v0_2;
@@ -135,20 +135,20 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
                         temp_v0_3 = *sp28;
                         temp_s0 = func_8028FE3C_de((s32) sp28, temp_s1, arg3 % temp_v0_3, &sp2C);
                         func_80253754_de(0, (void *) temp_v0_2);
-                        temp_v0_4 = func_8025193C_de(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &D_800C4694_de, arg5);
-                        if (temp_v0_4 != 0) {
-                                temp_s1_2 = func_8028FDB4_de(*temp_v0_4, 0);
-                                if (D_8011064C != temp_v0_4 || D_8010C564 != arg4 || D_80110640 == 0x20) {
+                        resource = func_8025193C_de(0, temp_s0, temp_s0, sp2C, 0, 0, &D_0026D7F4, &D_800C4694_de, direct);
+                        if (resource != 0) {
+                                temp_s1_2 = func_8028FDB4_de(*resource, 0);
+                                if (D_8011064C != resource || D_8010C564 != arg4 || D_80110640 == 0x20) {
                                         func_8026BC60_de();
                                         if (D_80111310 != 0x100) {
-                                                func_80253670_de(0, temp_v0_4);
-                                                D_80111318[D_80111310] = temp_v0_4;
+                                                func_80253670_de(0, resource);
+                                                D_80111318[D_80111310] = resource;
                                                 D_80111310 += 1;
                                                 goto block_11;
                                         }
                                 } else {
                                         block_11:
-                                        D_8011064C = temp_v0_4;
+                                        D_8011064C = resource;
 
                                         D_8010C564 = arg4;
                                         temp_v1 = D_80110640;
@@ -159,7 +159,7 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
                                         temp_v1_2->unk4 = arg2;
                                         temp_v1_2->unk8 = temp_s1_2;
                                 }
-                                func_80253754_de(0, temp_v0_4);
+                                func_80253754_de(0, resource);
                         }
                 }
         }

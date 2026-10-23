@@ -119,18 +119,18 @@ void func_8026D980_de(void) {
 
 void func_8026D9D0_de(void) {
     s32 temp_s0;
-    s32 var_s1;
+    s32 i;
 
     func_8026BC60_de();
-    var_s1 = 0;
+    i = 0;
     func_8026C020_de();
     if (D_80111310 > 0) {
         do {
-            temp_s0 = D_80111318[var_s1];
+            temp_s0 = D_80111318[i];
             func_80253BBC_de(0, temp_s0);
             func_80253754_de(0, temp_s0);
-            var_s1 += 1;
-        } while (var_s1 < D_80111310);
+            i += 1;
+        } while (i < D_80111310);
     }
 }
 
@@ -250,8 +250,8 @@ void func_8026DD50_de(void **resource, s32 unused, s32 matrix, s32 segment, s32 
     }
 }
 
-void func_8026DF30_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
-    func_8026C484_de(arg0, arg1, arg2, arg3, arg4, 1);
+void func_8026DF30_de(s32 model, void *arg1, void *arg2, s32 arg3, s32 arg4) {
+    func_8026C484_de(model, arg1, arg2, arg3, arg4, 1);
 }
 
 void func_8026DF58_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4) {
