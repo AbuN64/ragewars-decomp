@@ -110,7 +110,7 @@ void func_8041A47C_de(struct Access_s32_5C *object) {
     object->field = 1;
 }
 
-/* Clears the flag word at offset 0x5C that func_8041A47C_de sets to one. func_80423A40_de calls it on
+/* Clears the flag word at offset 0x5C that func_8041A47C_de sets to one. Frontend_InitPlayModeMenu calls it on
    the object func_8041A280_de has just returned. */
 
 
