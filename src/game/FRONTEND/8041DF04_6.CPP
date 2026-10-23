@@ -75,7 +75,6 @@ extern struct RequestRecAt10 D_80153F80[];
 extern u8 *func_802A025C_de(u8 *, u8 *);
 void func_8041E5F8_de(void) {
     Shared_PlayerSettingsRecord *player;
-    Shared_PlayerSettingsRecord *probe;
     s32 slot = 7;
     s32 i = 0;
     Shared_Game *g = &D_801462C8;
@@ -83,9 +82,7 @@ void func_8041E5F8_de(void) {
     do {
         if (slot <= 0) return;
         if (D_80153F80[i].id >= 0) {
-            probe = &g->playerSettings[slot];
-            while (slot > 0 && probe->enabled == 1) {
-                probe--;
+            while (slot > 0 && g->playerSettings[slot].enabled == 1) {
                 slot--;
                 player--;
             }

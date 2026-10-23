@@ -177,8 +177,10 @@ void func_80226708_de(BonusPlayer *player) {
     }
     if (D_80146938 != 0 && player->info->boosted != 0) {
         kind = player->info->kind;
-        if (kind == 0xB || kind == 0xC) health = 0x19000;
-        else if (kind == 0xE || kind == 0xD) health = 0x12C00;
+        if (kind == 0xB) health = 0x19000;
+        else if (kind == 0xC) health = 0x19000;
+        else if (kind == 0xE) health = 0x12C00;
+        else if (kind == 0xD) health = 0x12C00;
         else goto fallback_first;
     } else {
 fallback_first:
@@ -188,8 +190,10 @@ fallback_first:
     player->maxHealth = health;
     if (D_80146938 != 0 && player->info->boosted != 0) {
         kind = player->info->kind;
-        if (kind == 0xB || kind == 0xC) health = 0x19000;
-        else if (kind == 0xE || kind == 0xD) health = 0x12C00;
+        if (kind == 0xB) health = 0x19000;
+        else if (kind == 0xC) health = 0x19000;
+        else if (kind == 0xE) health = 0x12C00;
+        else if (kind == 0xD) health = 0x12C00;
         else goto fallback_second;
     } else {
 fallback_second:
