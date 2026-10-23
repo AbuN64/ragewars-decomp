@@ -57,14 +57,14 @@ s32 func_8040A83C_us(struct Field *arg0) {
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
+#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 /* D_8014D490 is read through a struct view so the compiler keeps the load behind the preceding store. */
 typedef struct { s8 value; } PakModeByte;
 extern s32 D_80153774;
 extern char *D_800D2484, *D_800D37D0;
 extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
-/* 62/62 words at object level; only the jump table is not yet moved into this unit */
-s32 func_8040A928_us(struct Field *arg0) {
+/* Select the pak status label and right-align its eleven characters. */
+s32 Pak_UpdateStatusText(struct Field *arg0) {
     char *src;
     char *dst;
     s32 i;
@@ -102,6 +102,6 @@ s32 func_8040A928_us(struct Field *arg0) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040A928_us);
+INCLUDE_ASM("ovl_80400000", Pak_UpdateStatusText);
 #endif
 #endif
