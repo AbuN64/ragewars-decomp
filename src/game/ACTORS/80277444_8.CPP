@@ -11,7 +11,7 @@
 #include "COMMON/EXTERNS_10.H"
 extern s32 func_8025DF34_de(s32 arg0);
 
-#if defined(VERSION_US_REV1)
+#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "COMMON/GAMEPLAY_SOUND_TABLE.H"
 #include "TYPES.H"
 #include "RENDER_2/8025DE50_5.H"
@@ -29,7 +29,7 @@ extern s32 D_801371D4;
 
 extern void func_80239908_de(void *, void *, s32, void *, f32);
 extern s32 func_804030E0_de(s32);
-void func_80278C10_de(Trigger *trigger) {
+void Actors_DispatchTrigger(Trigger *trigger) {
     NavCallbackPair *table;
     void *fallback;
     u8 index;
@@ -66,7 +66,7 @@ void func_80278C10_de(Trigger *trigger) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80278C10_de);
+INCLUDE_ASM("span_1000", Actors_DispatchTrigger);
 #endif
 
 extern s32 func_80279204_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, void *arg6);
@@ -121,7 +121,7 @@ void func_80278E7C_de(void *arg0) {
         func_8028C568_de(&D_8011FE88, arg0);
         return;
     }
-    func_80278C10_de(arg0);
+    Actors_DispatchTrigger(arg0);
 }
 
 void func_80278F00_de(Record14 *arg0) {
@@ -133,7 +133,7 @@ void func_80278F00_de(Record14 *arg0) {
         copy = *arg0;
         ((u8 *)&copy)[0x12] = 2;
         ((u8 *)&copy)[0x10] = 0;
-        func_80278C10_de(&copy);
+        Actors_DispatchTrigger(&copy);
     }
 }
 

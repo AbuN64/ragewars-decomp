@@ -53,7 +53,7 @@ void func_8044D794_de(OwnerCode8044E2B8 *arg0) {
     entry = arg0->active;
     while (entry != 0) {
         next = entry->next;
-        func_80278C10_de(entry->handle);
+        Actors_DispatchTrigger(entry->handle);
         func_80255ED8_de(&arg0->active, entry);
         func_80255CB8_de(&arg0->spare, entry);
         entry = next;

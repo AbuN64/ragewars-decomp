@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Spawns an entity through func_80278C10_de when its bit is set in the current level's placement mask and it either names no flag or its flag in the global flag table D_8011FF08 is clear. */
+/* Spawns an entity through Actors_DispatchTrigger when its bit is set in the current level's placement mask and it either names no flag or its flag in the global flag table D_8011FF08 is clear. */
 
 
 
@@ -13,7 +13,7 @@
 
 extern void *D_8011FF08;
 extern s32 func_8028FDF8_de(void *table, s32 index);
-extern void func_80278C10_de(Entity *entity);
+extern void Actors_DispatchTrigger(Entity *entity);
 
 void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
     s32 index;
@@ -40,7 +40,7 @@ void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
                 return;
             }
         }
-        func_80278C10_de(entity);
+        Actors_DispatchTrigger(entity);
     }
 }
 

@@ -72,7 +72,7 @@ s32 func_8028C568_de(WorldRecAt1B40C *arg0, Record14 *arg1) {
         ((Bucket *)(rec))->object = arg1;
     } else {
         rec = arg0->listA.tail;
-        func_80278C10_de(((Bucket *)(rec))->object);
+        Actors_DispatchTrigger(((Bucket *)(rec))->object);
         ((Bucket *)(rec))->object = arg1;
     }
     val = recordValue((s32) arg1->lifetime);
@@ -119,7 +119,7 @@ void func_8028C60C_de(void *arg0) {
                 }
             }
             if (expired != 0) {
-                func_80278C10_de(object);
+                Actors_DispatchTrigger(object);
             }
             if (remove != 0) {
                 func_80255ED8_de(&((WorldRecAt1B40C *)(arg0))->listA, node);

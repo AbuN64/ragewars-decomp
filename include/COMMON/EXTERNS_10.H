@@ -6,7 +6,7 @@
 
 
 struct Trigger;
-extern void func_80278C10_de(struct Trigger *);
+extern void Actors_DispatchTrigger(struct Trigger *);
 #if defined(VERSION_EU)
 #else
 #endif
