@@ -103,27 +103,27 @@ void *func_8028CE78_de(Shared_World *world, s32 index) {
     return bytes + (index * stride + 8);
 }
 
-void func_8028CE94_de(Object_func_8028CE94_de *arg0,s32 arg1,s32 arg2,Triple pos,D_800C7470_Pair scale) {
- s32 sp20,sp24; void *data; s32 count; StridedTable *temp_v1; s32 var_s0; StridedTable *temp_v0;
+void func_8028CE94_de(Object_func_8028CE94_de *arg0,s32 resource,s32 arg2,Triple pos,D_800C7470_Pair scale) {
+ s32 sp20,sp24; void *data; s32 count; StridedTable *temp_v1; s32 i; StridedTable *temp_v0;
  f32 arg6,arg7;
  temp_v0=arg0->unkA8;
  arg6=scale.first;arg7=scale.second;
  data=temp_v0->data;count=temp_v0->count;
  if(func_80265550_de(data,count,arg2,&sp20,&sp24)) {
-  for(var_s0=sp20;var_s0<=sp24;var_s0++) {
+  for(i=sp20;i<=sp24;i++) {
    temp_v1=arg0->unkAC;
-   func_80285B64_de(arg1,(char *)temp_v1+(var_s0*temp_v1->stride+8),pos,arg6,arg7,0);
+   func_80285B64_de(resource,(char *)temp_v1+(i*temp_v1->stride+8),pos,arg6,arg7,0);
   }
  }
 }
 
-void *func_8028CF6C_de(void *arg0, s32 arg1) {
+void *func_8028CF6C_de(void *world, s32 index) {
     void *result;
 
-    if (arg1 == -1) {
+    if (index == -1) {
         goto ret_null;
     }
-    result = func_8028FDB4_de(((struct ObjRecAt78V1 *) ((s8 *) arg0))->unk78, arg1);
+    result = func_8028FDB4_de(((struct ObjRecAt78V1 *) ((s8 *) world))->unk78, index);
     goto end;
 ret_null:
     result = 0;
@@ -131,23 +131,23 @@ end:
     return result;
 }
 
-void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2) {
+void *func_8028CFA0_de(Shared_World *world, s32 selection, s32 modelKind) {
     s32 *descriptor;
     s32 count;
     s32 i;
     ActorDefinitionHeader *entry;
 
-    descriptor = arg0->actorDefinitions;
+    descriptor = world->actorDefinitions;
     count = *descriptor;
     for (i = 0; i < count; i++) {
-        entry = func_8028FDB4_de(arg0->actorDefinitions, i);
-        if (arg1 != -1 && entry->kind != arg1) {
+        entry = func_8028FDB4_de(world->actorDefinitions, i);
+        if (selection != -1 && entry->kind != selection) {
             continue;
         }
-        if (arg2 == -1) {
+        if (modelKind == -1) {
             return entry;
         }
-        if (entry->character != arg2) {
+        if (entry->character != modelKind) {
             continue;
         }
         return entry;
@@ -156,10 +156,10 @@ void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2) {
 }
 
 /* Collects up to max records of arg0 (indices unk13C to unk140) whose unkE4, unk18->unk0 and unk18->unkC match key0, key1 and key2 (each skipped when -1) into out, returning the count. */
-s32 func_8028D050_de(Container *arg0, s32 key0, s32 key1, s32 key2, RecordRecAtE4 **out, s32 max) {
-    s32 i = arg0->unk13C;
-    s32 end = arg0->unk140;
-    RecordRecAtE4 *base = arg0->unk138;
+s32 func_8028D050_de(Container *container, s32 key0, s32 key1, s32 key2, RecordRecAtE4 **out, s32 max) {
+    s32 i = container->unk13C;
+    s32 end = container->unk140;
+    RecordRecAtE4 *base = container->unk138;
     s32 count = 0;
     RecordRecAtE4 *rec;
 
@@ -177,14 +177,14 @@ s32 func_8028D050_de(Container *arg0, s32 key0, s32 key1, s32 key2, RecordRecAtE
     return count;
 }
 
-void func_8028D108_de(Shared_World *arg0) {
+void func_8028D108_de(Shared_World *world) {
     s8 color[4];
     s32 state;
     ColorEntry *entry;
     f32 alpha;
     s32 converted;
 
-    state = arg0->frozen;
+    state = world->frozen;
     if (state == 0) {
         return;
     }
@@ -195,12 +195,12 @@ void func_8028D108_de(Shared_World *arg0) {
         return;
     }
     {
-        entry = &D_800CD6E4_de[arg0->selectionState];
+        entry = &D_800CD6E4_de[world->selectionState];
         if (entry->value != 0.0f) {
             color[0] = entry->red;
             color[1] = entry->green;
             color[2] = entry->blue;
-            alpha = (arg0->selectionTimer * D_800CA3E0[1]) /
+            alpha = (world->selectionTimer * D_800CA3E0[1]) /
                     entry->value;
             if (!(D_800C52F8_de <= alpha)) {
                 converted = (s32)alpha;

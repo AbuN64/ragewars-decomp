@@ -22,13 +22,13 @@ extern s32 func_8028FE28_de(s32 *arg0, s32 arg1, s32 arg2);
 
 extern void func_80278E7C_de(void *arg0);
 
-void func_8028BFD8_de(s32 arg0, s32 arg1, Triple arg2, s32 arg5, f32 arg6) {
+void func_8028BFD8_de(s32 arg0, s32 arg1, Triple position, s32 arg5, f32 arg6) {
     Triple zero;
 
     zero.x = 0;
     zero.y = 0;
     zero.z = 0;
-    func_8028FFD0_de(arg0 + 0x11778, 0, arg5, zero, arg2, arg1, arg6);
+    func_8028FFD0_de(arg0 + 0x11778, 0, arg5, zero, position, arg1, arg6);
 }
 
 void *func_8028C050_de(void *arg0, CVector3 *arg1) {
@@ -79,11 +79,11 @@ void func_8028C15C_de(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
     *arg2 = func_8028FE3C_de((((struct IntegerState54 *) ((s8 *) arg0))->unk_50), (((struct IntegerState54 *) ((s8 *) arg0))->unk_20), arg1, arg3);
 }
 
-s32 func_8028C198_de(Shared_World *world, s32 arg1) {
+s32 func_8028C198_de(Shared_World *world, s32 type) {
     s32 *directory = world->indexedDirectory;
 
-    if (arg1 < *directory) {
-        return func_8028FE28_de(directory, world->indexedBank, arg1);
+    if (type < *directory) {
+        return func_8028FE28_de(directory, world->indexedBank, type);
     }
     return 0;
 }
@@ -148,26 +148,26 @@ void func_8028C26C_de(char *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     }
 }
 
-void func_8028C370_de(Shared_World *arg0, s32 arg1) {
+void func_8028C370_de(Shared_World *world, s32 arg1) {
     s32 var_s0;
     s32 var_s0_2;
-    Record14 *var_s1;
+    Record14 *trigger;
     Record14 *var_s1_2;
 
-    var_s0 = arg0->recordCount;
-    var_s1 = arg0->recordArray;
+    var_s0 = world->recordCount;
+    trigger = world->recordArray;
     var_s0 -= 1;
     if (var_s0 != -1) {
         do {
-            if (var_s1->kind == arg1) {
-                func_80278E7C_de(var_s1);
+            if (trigger->kind == arg1) {
+                func_80278E7C_de(trigger);
             }
             var_s0 -= 1;
-            var_s1 = var_s1 + 1;
+            trigger = trigger + 1;
         } while (var_s0 != -1);
     }
-    var_s1_2 = arg0->alternateRecordArray;
-    var_s0_2 = arg0->alternateRecordCount;
+    var_s1_2 = world->alternateRecordArray;
+    var_s0_2 = world->alternateRecordCount;
     var_s0_2 -= 1;
     if (var_s0_2 != -1) {
         do {

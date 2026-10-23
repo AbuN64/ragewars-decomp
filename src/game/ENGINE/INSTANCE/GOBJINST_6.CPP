@@ -71,11 +71,11 @@ static inline void spawn(LevelActor *actor) {
                   actor->position1, actor->rotation, position, 0, -1, 0);
 }
 
-void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *arg1, Lookup *lookup) {
+void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *context, Lookup *lookup) {
     s32 one;
 
     if (lookup->unk4 != 0) {
-        func_8024AA18_de(actor, arg1, lookup);
+        func_8024AA18_de(actor, context, lookup);
     }
     if (lookup->unk0 != 0) {
         one = 1;
@@ -87,7 +87,7 @@ void func_8024A1D0_de(Actor_func_8024A1D0_de *actor, void *arg1, Lookup *lookup)
     D_800D15E0 = 0;
 }
 
-void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *arg1, s32 arg2, Draw *params) {
+void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 arg2, Draw *params) {
     EffectRecAt154 *effect;
     f32 scale;
     s32 *node;
@@ -96,7 +96,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *arg1, s32 arg2, Dra
         func_8024AA18_de(actor, arg2, params);
     }
     if (params->drawModel != 0) {
-        func_8026B6A0_de(params->model, arg1, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
+        func_8026B6A0_de(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
         if (func_8026E340_de() != 0) {
             node = func_8028FDB4_de(*params->model, 2);
             if ((*node != 0) &&

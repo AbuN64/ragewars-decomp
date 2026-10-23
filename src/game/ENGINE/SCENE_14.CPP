@@ -106,59 +106,59 @@ s32 func_8028D28C_de(void *arg0, s32 arg1, void *arg2) {
     return (s32)bestIndex;
 }
 
-void func_8028D380_de(Shared_World *arg0, s32 arg1, void *arg2, s32 arg3) {
-    s32 sp20;
+void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) {
+    s32 specialTable;
     s32 tempv0;
     s32 temps2;
     CachedResource *node;
     s32 count;
 
-    tempv0 = func_8028FE28_de(arg0->resourceDirectory, arg0->resourceBank, arg1);
-    temps2 = func_80254284_de(0, &sp20, tempv0, &D_800C5110_de);
-    node = func_80254408_de(0, sp20, 8, tempv0, (s32)arg0, 0, &D_800C5280_de + 4);
+    tempv0 = func_8028FE28_de(world->resourceDirectory, world->resourceBank, type);
+    temps2 = func_80254284_de(0, &specialTable, tempv0, &D_800C5110_de);
+    node = func_80254408_de(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
     count = node->unk04;
     if (arg3 < count) {
         count = arg3;
     }
-    func_802BD3A0_de(arg2, node->data, count);
+    func_802BD3A0_de(levelName, node->data, count);
     func_80253838_de(0, (s32)node);
-    if (arg0->level != arg1) {
+    if (world->level != type) {
         func_80253838_de(0, temps2);
     }
 }
 
-void *func_8028D474_de(void *arg0, s32 arg1) {
+void *func_8028D474_de(void *world, s32 record) {
     s32 sp28;
     void **resource;
     s32 key;
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V4 *)(arg0))->value == 0 || ((struct MeasuredCode8028B64C *)(arg0))->value != arg1) {
-        func_8028DA74_de(arg0);
-        if (((struct MeasuredRecAtCV4 *)(arg0))->value != 0) {
+    if (((struct MeasuredRecAt14V4 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != record) {
+        func_8028DA74_de(world);
+        if (((struct MeasuredRecAtCV4 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV4 *)(arg0))->value,
-                                     ((struct MeasuredRecAtCV4 *)(arg0))->value,
-                                     ((struct MeasuredRecAt10V1 *)(arg0))->value, size, 0, 0,
+            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV4 *)(world))->value,
+                                     ((struct MeasuredRecAtCV4 *)(world))->value,
+                                     ((struct MeasuredRecAt10V1 *)(world))->value, size, 0, 0,
                                      &D_800C5290_de, one);
             if (resource != 0) {
-                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV4 *)(arg0))->value,
-                                    arg1, &sp28);
+                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
+                                    record, &sp28);
                 func_80253838_de(0, resource);
-                if ((((struct MeasuredRecAt14V1 *)(arg0))->value =
+                if ((((struct MeasuredRecAt14V1 *)(world))->value =
                      func_8025193C_de(0, key, key, sp28, size, 0,
                                    &D_00285160, &D_800C52BC, one)) != 0) {
-                    ((struct MeasuredCode8028B64C *)(arg0))->value = arg1;
+                    ((struct MeasuredCode8028B64C *)(world))->value = record;
                 } else {
                     return 0;
                 }
             }
         }
     }
-    if (((struct MeasuredRecAt14V1 *)(arg0))->value != 0) {
-        return *((struct MeasuredRecAt14V5 *)(arg0))->value;
+    if (((struct MeasuredRecAt14V1 *)(world))->value != 0) {
+        return *((struct MeasuredRecAt14V5 *)(world))->value;
     }
     return 0;
 }
@@ -319,30 +319,30 @@ void func_8028D90C_de(void) {
     func_80245A5C_de(var_a0, var_a1, 0, 0);
 }
 
-void func_8028D964_de(void *arg0, s32 arg1) {
+void func_8028D964_de(void *world, s32 arg1) {
     s32 sp28;
     void **resource;
     s32 key;
     s32 size;
     s32 one;
 
-    if (((struct MeasuredRecAt14V2 *)(arg0))->value == 0 || ((struct MeasuredCode8028B64C *)(arg0))->value != arg1) {
-        func_8028DA74_de(arg0);
-        if (((struct MeasuredRecAtCV3 *)(arg0))->value != 0) {
+    if (((struct MeasuredRecAt14V2 *)(world))->value == 0 || ((struct MeasuredCode8028B64C *)(world))->value != arg1) {
+        func_8028DA74_de(world);
+        if (((struct MeasuredRecAtCV3 *)(world))->value != 0) {
             size = 0x10;
             one = 1;
-            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV3 *)(arg0))->value,
-                                     ((struct MeasuredRecAtCV3 *)(arg0))->value,
-                                     ((struct MeasuredRecAt10V2 *)(arg0))->value, size, 0, 0,
+            resource = func_8025193C_de(0, ((struct MeasuredRecAtCV3 *)(world))->value,
+                                     ((struct MeasuredRecAtCV3 *)(world))->value,
+                                     ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
                                      &D_800C5290_de, one);
             if (resource != 0) {
-                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV3 *)(arg0))->value,
+                key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
                                     arg1, &sp28);
                 func_80253838_de(0, resource);
-                if ((((struct MeasuredRecAt14V6 *)(arg0))->value =
+                if ((((struct MeasuredRecAt14V6 *)(world))->value =
                      func_8025193C_de(0, key, key, sp28, size, 0,
                                    &D_00285160, &D_800C52BC, one)) != 0) {
-                    ((struct MeasuredCode8028B64C *)(arg0))->value = arg1;
+                    ((struct MeasuredCode8028B64C *)(world))->value = arg1;
                 }
             }
         }

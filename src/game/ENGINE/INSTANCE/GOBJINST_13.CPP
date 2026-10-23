@@ -90,8 +90,8 @@ float func_8024BE2C_de(void) {
 }
 
 /** Thin wrapper forwarding arg0 and an offset of it to func_802164A8_de. */
-void func_8024BE3C_de(void *arg0) {
-    func_802164A8_de(arg0, (char *)arg0 + 0x170);
+void func_8024BE3C_de(void *base) {
+    func_802164A8_de(base, (char *)base + 0x170);
 }
 
 /** Set or clear status bit two according to the supplied boolean. */
@@ -105,13 +105,13 @@ void func_8024BE58_de(void *object, int enabled) {
     }
 }
 
-s32 func_8024BE80_de(void *arg0) {
+s32 func_8024BE80_de(void *typedActor) {
     void **temp_s0;
     char *temp_v0;
     s32 result;
 
     result = -1;
-    temp_s0 = func_8024BFD4_de(arg0, ((LevelActor *)arg0)->team);
+    temp_s0 = func_8024BFD4_de(typedActor, ((LevelActor *)typedActor)->team);
     if (temp_s0 != 0) {
         temp_v0 = func_8028FDB4_de((int *)*temp_s0, 5);
         result = ((struct ActorFrameMetadata *)temp_v0)->renderMode;

@@ -138,7 +138,7 @@ extern void func_80272D00_de(f32 *, f32, f32, f32, f32);
 
 extern void func_8026F620_de(f32 *, f32 *, f32 *);
 
-void func_802472F0_de(void *arg0) {
+void func_802472F0_de(void *actor) {
     CVector3 first;
     CVector3 second;
     CVector3 saved;
@@ -153,82 +153,82 @@ void func_802472F0_de(void *arg0) {
     f32 value;
 
     if (D_8011FE88.mode == 4) {
-        if ((s8)((Actor36 *)arg0)->currentTrack.active == 0)
-            ((Actor36 *)arg0)->currentTrack.blending = 1;
-        if ((s8)((Actor36 *)arg0)->previousTrack.active == 0)
-            ((Actor36 *)arg0)->previousTrack.blending = 1;
-        if ((s8)((Actor36 *)arg0)->currentTrack.active == 0 && !(((Actor36 *)arg0)->flags & 0x400))
+        if ((s8)((Actor36 *)actor)->currentTrack.active == 0)
+            ((Actor36 *)actor)->currentTrack.blending = 1;
+        if ((s8)((Actor36 *)actor)->previousTrack.active == 0)
+            ((Actor36 *)actor)->previousTrack.blending = 1;
+        if ((s8)((Actor36 *)actor)->currentTrack.active == 0 && !(((Actor36 *)actor)->flags & 0x400))
             return;
-        if (!(((Actor36 *)arg0)->flags & 0x2000))
+        if (!(((Actor36 *)actor)->flags & 0x2000))
             return;
     }
 
-    resource = func_8025193C_de(0, ((Actor36 *)arg0)->animationKey, ((Actor36 *)arg0)->animationKey,
-        ((((Actor36 *)arg0)->animationCount * 4) + 0xF) & ~7, 4, 0, 0,
+    resource = func_8025193C_de(0, ((Actor36 *)actor)->animationKey, ((Actor36 *)actor)->animationKey,
+        ((((Actor36 *)actor)->animationCount * 4) + 0xF) & ~7, 4, 0, 0,
         &D_800C3930_de + 4, 0);
     if (resource == 0)
         return;
 
-    track0 = &((Actor36 *)(arg0))->currentTrack;
-    track1 = &((Actor36 *)(arg0))->previousTrack;
-    func_80261670_de(track0, (s32)*resource, ((Actor36 *)arg0)->animationKey, 1, &active, track1);
+    track0 = &((Actor36 *)(actor))->currentTrack;
+    track1 = &((Actor36 *)(actor))->previousTrack;
+    func_80261670_de(track0, (s32)*resource, ((Actor36 *)actor)->animationKey, 1, &active, track1);
     if (func_802624D8_de(track0) != 0) {
         void *entry;
-        func_8026193C_de(track0, &first, &first_value, arg0);
+        func_8026193C_de(track0, &first, &first_value, actor);
         value = first_value;
         saved = first;
         if (active != 0 && ((Anim *)track1)->current != -1) {
             u16 count;
             entry = func_80262564_de(track0);
             if (((AnimationBlendEntry *)entry)->frames != 0) {
-                ((Actor36 *)arg0)->flags |= 0x400;
+                ((Actor36 *)actor)->flags |= 0x400;
                 count = ((AnimationBlendEntry *)entry)->frames;
-                ((Actor36 *)arg0)->blendTime = 0.0f;
-                ((Actor36 *)arg0)->blendFrames = count;
-                ((Actor36 *)arg0)->blendStart = ((AnimationBlendEntry *)entry)->start;
-                ((Actor36 *)arg0)->blendEnd = ((AnimationBlendEntry *)entry)->end;
+                ((Actor36 *)actor)->blendTime = 0.0f;
+                ((Actor36 *)actor)->blendFrames = count;
+                ((Actor36 *)actor)->blendStart = ((AnimationBlendEntry *)entry)->start;
+                ((Actor36 *)actor)->blendEnd = ((AnimationBlendEntry *)entry)->end;
             } else {
-                ((Actor36 *)arg0)->flags &= ~0x400;
+                ((Actor36 *)actor)->flags &= ~0x400;
             }
         }
-        if (((Actor36 *)arg0)->flags & 0x400) {
-            func_80261670_de(track1, (s32)*resource, ((Actor36 *)arg0)->animationKey, 0, 0, 0);
+        if (((Actor36 *)actor)->flags & 0x400) {
+            func_80261670_de(track1, (s32)*resource, ((Actor36 *)actor)->animationKey, 0, 0, 0);
             if (func_802624D8_de(track1) != 0) {
                 f32 time;
                 f32 end;
-                time = ((Actor36 *)arg0)->blendTime + D_800D2988;
-                end = (f32)((Actor36 *)arg0)->blendFrames;
-                ((Actor36 *)arg0)->blendTime = time;
+                time = ((Actor36 *)actor)->blendTime + D_800D2988;
+                end = (f32)((Actor36 *)actor)->blendFrames;
+                ((Actor36 *)actor)->blendTime = time;
                 if (end < time) {
-                    ((Actor36 *)arg0)->flags &= ~0x400;
+                    ((Actor36 *)actor)->flags &= ~0x400;
                 } else {
-                    f32 a = (f32)((Actor36 *)arg0)->blendEnd;
-                    f32 b = (f32)((Actor36 *)arg0)->blendStart;
+                    f32 a = (f32)((Actor36 *)actor)->blendEnd;
+                    f32 b = (f32)((Actor36 *)actor)->blendStart;
                     f32 t = time / (end + D_800D2988);
-                    ((Actor36 *)arg0)->blend = (((a + D_800C3948_de + b) * t * t * t) +
+                    ((Actor36 *)actor)->blend = (((a + D_800C3948_de + b) * t * t * t) +
                         ((((&D_800C3948_de)[1] - a) - (2.0f * b)) * t * t) + (b * t));
-                    func_8026193C_de(&((Actor36 *)(arg0))->previousTrack, &second, &second_value, arg0);
-                    func_80271FC8_de(&saved, ((Actor36 *)arg0)->blend, &second, &first);
-                    value = func_80273EE4_de(((Actor36 *)arg0)->blend, second_value, first_value);
+                    func_8026193C_de(&((Actor36 *)(actor))->previousTrack, &second, &second_value, actor);
+                    func_80271FC8_de(&saved, ((Actor36 *)actor)->blend, &second, &first);
+                    value = func_80273EE4_de(((Actor36 *)actor)->blend, second_value, first_value);
                 }
                 func_802624A8_de(track1);
             } else {
-                ((Actor36 *)arg0)->flags &= ~0x400;
+                ((Actor36 *)actor)->flags &= ~0x400;
             }
         }
         func_802624A8_de(track0);
-        if (((Actor36 *)arg0)->flags & 0x20000) {
-            ((Actor36 *)arg0)->heading -= value;
-            func_80274020_de(&((Actor36 *)(arg0))->heading);
+        if (((Actor36 *)actor)->flags & 0x20000) {
+            ((Actor36 *)actor)->heading -= value;
+            func_80274020_de(&((Actor36 *)(actor))->heading);
             saved.z = saved.y;
             saved.y = 0.0f;
-            func_802736D4_de(&matrix, ((Actor36 *)arg0)->heading);
+            func_802736D4_de(&matrix, ((Actor36 *)actor)->heading);
             func_80272898_de(&matrix, &saved, &moved);
-            ((Actor36 *)arg0)->position.x += moved.x * ((Actor36 *)arg0)->scaleX;
-            ((Actor36 *)arg0)->position.z += moved.z * ((Actor36 *)arg0)->scaleZ;
-        } else if (!(((Actor36 *)arg0)->flags & 0x300000) && ((Actor36 *)arg0)->ownerId == 0x137) {
-            ((Actor36 *)arg0)->heading -= value;
-            func_80274020_de(&((Actor36 *)(arg0))->heading);
+            ((Actor36 *)actor)->position.x += moved.x * ((Actor36 *)actor)->scaleX;
+            ((Actor36 *)actor)->position.z += moved.z * ((Actor36 *)actor)->scaleZ;
+        } else if (!(((Actor36 *)actor)->flags & 0x300000) && ((Actor36 *)actor)->ownerId == 0x137) {
+            ((Actor36 *)actor)->heading -= value;
+            func_80274020_de(&((Actor36 *)(actor))->heading);
         }
     }
     func_80253754_de(0, resource);

@@ -31,14 +31,14 @@ extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair)
 extern void func_80253754_de(s32 arg0, s32 arg1);
 extern void System_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
 
-void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *arg2) {
+void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *anim) {
     char *o1 = (char *) arg1;
     char mtx[0x40];
     f32 spVec[3];
     f32 inVec[3];
     f32 outVec[3];
 
-    System_SampleVectorTrack(arg2, 0, arg2->time, spVec);
+    System_SampleVectorTrack(anim, 0, anim->time, spVec);
     inVec[0] = spVec[0];
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
@@ -70,13 +70,13 @@ void func_8024C1C4_de(char *obj, void *anim)
     }
 }
 
-s32 func_8024C294_de(LevelActor *arg0, s32 arg1) {
+s32 func_8024C294_de(LevelActor *actor, s32 arg1) {
     void *temp_v0;
     Table *temp_v1;
     s32 temp_s0;
 
-    if (arg0->flags & 0x40000) {
-        temp_v0 = func_8025193C_de(0, arg0->resource, arg0->resource, arg0->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
+    if (actor->flags & 0x40000) {
+        temp_v0 = func_8025193C_de(0, actor->resource, actor->resource, actor->resourceFlags, 4, 0, 0, &D_800C3830_de, 1);
         if (temp_v0 != 0) {
             temp_v1 = func_8028FDB4_de(*(void **) temp_v0, 1);
             temp_s0 = temp_v1->deltas[arg1];
@@ -91,7 +91,7 @@ int func_8024C344_de(void) {
     return 0;
 }
 
-void func_8024C34C_de(LevelActor *arg0, AnimChannel *arg1) {
+void func_8024C34C_de(LevelActor *actor, AnimChannel *arg1) {
     Scratch scratch;
     f32 zero;
 
@@ -101,13 +101,13 @@ void func_8024C34C_de(LevelActor *arg0, AnimChannel *arg1) {
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
-    func_802736D4_de(scratch.matrix, arg0->yaw);
+    func_802736D4_de(scratch.matrix, actor->yaw);
     func_80272898_de(scratch.matrix, scratch.in, scratch.out);
-    scratch.position.x = arg0->position0.x +
-                          (scratch.out[0] * arg0->scale.x);
-    scratch.position.y = arg0->position0.y;
-    scratch.position.z = arg0->position0.z +
-                          (scratch.out[2] * arg0->scale.z);
-    func_8024E79C_de(arg0, scratch.position, &arg0->position0,
-                  &arg0->model, 0, 0);
+    scratch.position.x = actor->position0.x +
+                          (scratch.out[0] * actor->scale.x);
+    scratch.position.y = actor->position0.y;
+    scratch.position.z = actor->position0.z +
+                          (scratch.out[2] * actor->scale.z);
+    func_8024E79C_de(actor, scratch.position, &actor->position0,
+                  &actor->model, 0, 0);
 }

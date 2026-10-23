@@ -172,7 +172,7 @@ s32 func_8024643C_de(Instance8020CD74 *from, Instance8020CD74 *to) {
     return collisions == 0;
 }
 
-s32 func_80246558_de(Instance8020CD74 *arg0, CVector3 arg1, CollisionInfoCode80243A80 *arg2) {
+s32 func_80246558_de(Instance8020CD74 *arg0, CVector3 position, CollisionInfoCode80243A80 *arg2) {
     Instance8020CD74 saved;
     CollisionInfoCode80243A80 collision_info;
     s32 collisions;
@@ -181,7 +181,7 @@ s32 func_80246558_de(Instance8020CD74 *arg0, CVector3 arg1, CollisionInfoCode802
     collision_info = *arg2;
     collision_info.ground_behavior = 0;
     collision_info.instance_behavior = 1;
-    func_80243A90_de(arg0, arg1, &collision_info);
+    func_80243A90_de(arg0, position, &collision_info);
     *arg0 = saved;
 
     collisions = D_801041F0.active0 || D_801041F0.active9c;
@@ -189,8 +189,8 @@ s32 func_80246558_de(Instance8020CD74 *arg0, CVector3 arg1, CollisionInfoCode802
 }
 
 /** Thin wrapper around func_8024E968_de, discarding its result. */
-void func_80246684_de(void *arg0) {
-    func_8024E968_de(arg0);
+void func_80246684_de(void *record) {
+    func_8024E968_de(record);
 }
 
 void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s32 effect, s32 owner, f32 heading,
@@ -264,7 +264,7 @@ Nav_InitSpawnedActor
     }
 }
 
-s32 func_80246A08_de(LevelActor *arg0, s32 arg1, s32 arg2) {
+s32 func_80246A08_de(LevelActor *owner, s32 arg1, s32 arg2) {
     WeightedTable table;
     void **resource;
     s32 *entries;
@@ -273,11 +273,11 @@ s32 func_80246A08_de(LevelActor *arg0, s32 arg1, s32 arg2) {
     s32 total;
     s32 original;
 
-    if (!(arg0->flags & 0x40000)) {
+    if (!(owner->flags & 0x40000)) {
         goto fail;
     }
-    resource = func_8025193C_de(0, ((struct Access_s32_C4 *)(arg0))->field,
-                             ((struct Access_s32_C4 *)(arg0))->field, ((struct Access_s32_D0 *)(arg0))->field,
+    resource = func_8025193C_de(0, ((struct Access_s32_C4 *)(owner))->field,
+                             ((struct Access_s32_C4 *)(owner))->field, ((struct Access_s32_D0 *)(owner))->field,
                              0, 0, 0, D_800C3864_de, 1);
     if (resource == 0) {
         goto fail;
@@ -285,7 +285,7 @@ s32 func_80246A08_de(LevelActor *arg0, s32 arg1, s32 arg2) {
     data = func_8028FDB4_de(*resource, 1);
     entries = &((struct func_80254D70_S2 *)(data))->unk8;
     total = ((struct func_80203E78_S1 *)(data))->unk4;
-    count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(arg0))->field, arg1);
+    count = func_802654E8_de(entries, ((struct Access_s8_E6 *)(owner))->field, arg1);
     if (count != -1) {
         original = count;
         while (count > 0) {

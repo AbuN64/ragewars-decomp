@@ -18,50 +18,50 @@ extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
 
 
 
-void func_8024BEDC_de(void *arg0) {
-    float temp_f12 = ((LevelActor *)arg0)->scale.x;
-    float temp_f1 = ((LevelActor *)arg0)->scale.y;
-    float temp_f0 = ((LevelActor *)arg0)->scale.z;
+void func_8024BEDC_de(void *target) {
+    float temp_f12 = ((LevelActor *)target)->scale.x;
+    float temp_f1 = ((LevelActor *)target)->scale.y;
+    float temp_f0 = ((LevelActor *)target)->scale.z;
     func_802B72B0_de(((temp_f12 * temp_f12) + (temp_f1 * temp_f1) + (temp_f0 * temp_f0)) * (0.3333333432674408f));
 }
 
 f32 func_8024BF24_de(void *arg0) {
-    f32 var_f20;
+    f32 result;
     void **temp_s0;
 
-    var_f20 = D_800C3B5C;
+    result = D_800C3B5C;
     if (((LevelActor *)arg0)->flags & 0x40000) {
         temp_s0 = func_8025193C_de(0, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resource, ((LevelActor *)arg0)->resourceFlags, 4, 0, 0, &D_800C3AE8_de, 1);
         if (temp_s0 != 0) {
-            var_f20 = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)func_8028FDB4_de(*temp_s0, 0))->particleScale);
+            result = RW_BITS_TO_FLOAT((s32) ((ActorResourceHeader *)func_8028FDB4_de(*temp_s0, 0))->particleScale);
             func_80253754_de(0, temp_s0);
         }
     }
-    return var_f20;
+    return result;
 }
 
-void **func_8024BFD4_de(MenuPanelRoot *arg0, s32 arg1) {
+void **func_8024BFD4_de(MenuPanelRoot *actor, s32 arg1) {
     void **resource;
 
     if (arg1 < 0) {
         return 0;
     }
-    if (arg1 != arg0->selected) {
-        resource = func_8025193C_de(0, arg0->resource,
-                                 arg0->resource, arg0->resourceSize,
+    if (arg1 != actor->selected) {
+        resource = func_8025193C_de(0, actor->resource,
+                                 actor->resource, actor->resourceSize,
                                  0, 0, 0, &D_800C3B28, 1);
         if (resource != 0) {
-            arg0->selectedResource = func_8028FE3C_de((s32)*resource,
-                                                arg0->resource,
+            actor->selectedResource = func_8028FE3C_de((s32)*resource,
+                                                actor->resource,
                                                 arg1 % *(s32 *)*resource,
-                                                &arg0->window);
-            arg0->selected = arg1;
+                                                &actor->window);
+            actor->selected = arg1;
             func_80253754_de(0, resource);
         }
     }
-    if (arg0->selectedResource != 0) {
-        return func_8025193C_de(0, arg0->selectedResource,
-                             arg0->selectedResource, arg0->window,
+    if (actor->selectedResource != 0) {
+        return func_8025193C_de(0, actor->selectedResource,
+                             actor->selectedResource, actor->window,
                              0, 0, &D_0026D814, &D_800C3B3C, 0);
     }
     return 0;

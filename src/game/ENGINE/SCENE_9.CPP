@@ -17,17 +17,17 @@ extern s32 func_8028FE3C_de(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 extern s32 D_00285160;
 
 
-s32 func_8028BDAC_de(void *arg0, s32 arg1) {
+s32 func_8028BDAC_de(void *world, s32 arg1) {
     void *temp_v0;
     u8 *result;
 
-    temp_v0 = func_8028FDB4_de((((struct Field_void_80 *) ((s8 *) arg0))->value), 1);
+    temp_v0 = func_8028FDB4_de((((struct Field_void_80 *) ((s8 *) world))->value), 1);
     func_8028FDB4_de(temp_v0, 0);
     result = (u8 *)((char *)func_8028FDB4_de(temp_v0, 1)) + arg1;
     return *result == 0;
 }
 
-void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 arg2, s32 arg3) {
+void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 mode, s32 direct) {
     StridedTable *table;
     s32 idx;
     s32 sp28;
@@ -39,7 +39,7 @@ void *func_8028BE08_de(Shared_World *world, s32 arg1, s32 arg2, s32 arg3) {
         return 0;
     }
     result = func_8028FE3C_de(world->lookupDirectory, world->lookupBank, idx, &sp28);
-    return func_8025193C_de(0, result, result, sp28, arg2, 0, &D_00285160, &D_800C51D8, arg3);
+    return func_8025193C_de(0, result, result, sp28, mode, 0, &D_00285160, &D_800C51D8, direct);
 }
 
 /* Starts a sound effect from the world's sound table: looks the id up (0 or unknown returns 0),

@@ -110,20 +110,20 @@ extern void func_8027985C_de(WeightedTable *arg0);
 extern s32 func_80246A08_de(void *arg0, s32 arg1, s32 arg2);
 extern s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2);
 
-s16 func_8024B738_de(void *arg0, s16 *arg1, s32 arg2) {
+s16 func_8024B738_de(void *arg0, s16 *callback, s32 arg2) {
     WeightedTable sp10;
     u16 var_a1;
 
     func_8027985C_de(&sp10);
-    var_a1 = *(u16 *) arg1;
-    if (*arg1 != -1) {
+    var_a1 = *(u16 *) callback;
+    if (*callback != -1) {
         do {
             if (func_80246A08_de(arg0, (s32) (s16) var_a1, arg2) != -1) {
-                func_80279864_de(&sp10, arg1[0], arg1[1]);
+                func_80279864_de(&sp10, callback[0], callback[1]);
             }
-            arg1 += 2;
-            var_a1 = *(u16 *) arg1;
-        } while (*arg1 != -1);
+            callback += 2;
+            var_a1 = *(u16 *) callback;
+        } while (*callback != -1);
     }
     return func_802798A8_de(&sp10);
 }
@@ -180,25 +180,25 @@ extern s32 D_800D297C;
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 
-void func_8024B8EC_de(void *arg0, void *arg1, void *arg2) {
+void func_8024B8EC_de(void *actor, void *arg1, void *arg2) {
     s8 index;
     s32 one;
 
-    index = ((struct LevelActor *)(arg0))->team;
+    index = ((struct LevelActor *)(actor))->team;
     if (index != -1) {
-        ((struct LevelActor *)(arg0))->mask = 1 << index;
+        ((struct LevelActor *)(actor))->mask = 1 << index;
         if (((struct ActorRenderSettings *)(arg2))->drawShadow != 0) {
-            func_8024AA18_de(arg0, arg1, arg2);
+            func_8024AA18_de(actor, arg1, arg2);
         }
         if (*(s32 *)arg2 != 0) {
             one = 1;
             func_8026DA4C_de(((struct ActorRenderSettings *)(arg2))->view,
-                          ((struct LevelActor *)(arg0))->fieldB4, one,
-                          (char *)arg0
+                          ((struct LevelActor *)(actor))->fieldB4, one,
+                          (char *)actor
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
-                          0, ((struct LevelActor *)(arg0))->field3);
-            func_8024C454_de(arg0, arg2);
+                          0, ((struct LevelActor *)(actor))->field3);
+            func_8024C454_de(actor, arg2);
         }
     }
 }
@@ -207,26 +207,26 @@ extern s32 D_800D297C;
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_8024C454_de(void *arg0, void *arg1);
 
-void func_8024B990_de(void *arg0, void *arg1, void *arg2, Block24 *arg3) {
+void func_8024B990_de(void *actor, void *arg1, void *arg2, Block24 *arg3) {
     s8 index;
     s32 one;
 
-    ((ObjectRecAt140 *)arg0)->blocks[D_800D297C] = *arg3;
-    index = ((struct LevelActor *)(arg0))->team;
+    ((ObjectRecAt140 *)actor)->blocks[D_800D297C] = *arg3;
+    index = ((struct LevelActor *)(actor))->team;
     if (index != -1) {
-        ((struct LevelActor *)(arg0))->mask = 1 << index;
+        ((struct LevelActor *)(actor))->mask = 1 << index;
         if (((struct ActorRenderSettings *)(arg2))->drawShadow != 0) {
-            func_8024AA18_de(arg0, arg1, arg2);
+            func_8024AA18_de(actor, arg1, arg2);
         }
         if (*(s32 *)arg2 != 0) {
             one = 1;
             func_8026DA4C_de(((struct ActorRenderSettings *)(arg2))->view,
-                          ((struct LevelActor *)(arg0))->fieldB4, one,
-                          (char *)arg0
+                          ((struct LevelActor *)(actor))->fieldB4, one,
+                          (char *)actor
                               + ((((D_800D297C << one) + D_800D297C) << 3)
                                  + 0x140),
-                          0, ((struct LevelActor *)(arg0))->field3);
-            func_8024C454_de(arg0, arg2);
+                          0, ((struct LevelActor *)(actor))->field3);
+            func_8024C454_de(actor, arg2);
         }
     }
 }

@@ -11,8 +11,8 @@
 #include "ENGINE/SCENE_6.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-char *func_8028AFEC_de(void *arg0, s32 arg1) {
-    return func_8028FDB4_de((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), arg1);
+char *func_8028AFEC_de(void *arg0, s32 resourceId) {
+    return func_8028FDB4_de((((struct ObjectLinks74 *) ((s8 *) arg0))->unk_70), resourceId);
 }
 
 /** Return an indexed record from the table at object offset 0xA0. */
@@ -68,7 +68,7 @@ extern Gfx *D_80110634;
 extern void Particle_DrawRenderList(s32 arg0, s32 arg1);
 
 
-void func_8028B160_de(s32 arg0, s32 arg1) {
+void func_8028B160_de(s32 world, s32 view) {
     Gfx *cmd;
 
     cmd = D_80110634++;
@@ -80,7 +80,7 @@ void func_8028B160_de(s32 arg0, s32 arg1) {
     cmd = D_80110634++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFF);
     func_8026D980_de();
-    Particle_DrawRenderList(arg0 + 0x1B08, arg1);
+    Particle_DrawRenderList(world + 0x1B08, view);
     func_8026D9D0_de();
 }
 
@@ -132,36 +132,36 @@ static inline s32 find(TableRecAt8 *table,u16 id) {
  if(count>0) { do {if(*entry==id) return index; index++;entry++;} while(index<count); }
  return -1;
 }
-void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *arg1,s32 arg2,s32 arg3) {
+void func_8028B274_de(BankRecAt94 *arg0,Object_func_8028B274_de *draw,s32 arg2,s32 arg3) {
  s32 index=0;
- if(arg1->id!=arg2) {
+ if(draw->id!=arg2) {
  index=find(arg0->table,arg2);
- if(index!=-1){arg1->index=index;arg1->id=arg2;func_80246BE8_de(arg1,arg0->field54,arg0->field24,arg3);}
+ if(index!=-1){draw->index=index;draw->id=arg2;func_80246BE8_de(draw,arg0->field54,arg0->field24,arg3);}
  }
 }
 
 
-void *func_8028B2F8_de(Shared_World *arg0, u16 *arg1) {
+void *func_8028B2F8_de(Shared_World *world, u16 *arg1) {
     s32 base;
     s32 idx;
 
     if (arg1 == 0) {
         return 0;
     }
-    base = ((char *)func_8028FDB4_de(arg0->modelSections, 0)) + 8;
+    base = ((char *)func_8028FDB4_de(world->modelSections, 0)) + 8;
     idx = *arg1;
     return (void *)(base + idx * 0x64);
 }
 
 
-u32 func_8028B350_de(Shared_World *arg0, s32 arg1) {
+u32 func_8028B350_de(Shared_World *world, s32 arg1) {
     s32 offset;
     s32 result;
 
     if (arg1 == 0) {
         return -1;
     }
-    offset = ((char *)func_8028FDB4_de(arg0->modelSections, 2)) + 8;
+    offset = ((char *)func_8028FDB4_de(world->modelSections, 2)) + 8;
     result = arg1 - offset;
     return (u32)result >> 5;
 }
@@ -172,11 +172,11 @@ u32 func_8028B350_de(Shared_World *arg0, s32 arg1) {
 
 
 
-s32 func_8028B394_de(void *arg0, s32 arg1) {
+s32 func_8028B394_de(void *world, s32 arg1) {
     s32 raw;
     s32 base;
 
-    raw = func_8028FDB4_de(((Shared_World *)arg0)->modelSections, 2);
+    raw = func_8028FDB4_de(((Shared_World *)world)->modelSections, 2);
     base = raw + 8;
     if (arg1 < 0 || arg1 >= ((StridedTable *)raw)->count) {
         return 0;
@@ -189,18 +189,18 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B3E4_de(struct Shared_World *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *temp_v0;
+void func_8028B3E4_de(struct Shared_World *world, s32 index, s32 arg2, s32 arg3) {
+    void *table;
     u8 *base1;
     u8 *base2;
     s32 mask;
     s32 idx;
     s32 idx2;
 
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(arg0->secondaryLevels, 0), arg1), 0);
-    func_8028FDB4_de(temp_v0, 0);
-    func_8028FDF8_de((s32) temp_v0, 1);
-    base1 = (u8 *) func_8028FDB4_de(temp_v0, 1);
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(world->secondaryLevels, 0), index), 0);
+    func_8028FDB4_de(table, 0);
+    func_8028FDF8_de((s32) table, 1);
+    base1 = (u8 *) func_8028FDB4_de(table, 1);
     base2 = base1;
     mask = 1 << (arg2 & 7);
     if (arg3 != 0) {
@@ -226,22 +226,22 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-void func_8028B4D0_de(struct Shared_World *arg0, s32 arg1, s32 arg2) {
+void func_8028B4D0_de(struct Shared_World *world, s32 arg1, s32 arg2) {
     void *field84;
     s32 field1B40C;
-    void *temp_v0;
+    void *table;
     u8 *base1;
     u8 *base2;
     s32 mask;
     s32 idx;
     s32 idx2;
 
-    field84 = arg0->secondaryLevels;
-    field1B40C = arg0->level;
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
-    func_8028FDB4_de(temp_v0, 0);
-    func_8028FDF8_de((s32) temp_v0, 1);
-    base1 = (u8 *) func_8028FDB4_de(temp_v0, 1);
+    field84 = world->secondaryLevels;
+    field1B40C = world->level;
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
+    func_8028FDB4_de(table, 0);
+    func_8028FDF8_de((s32) table, 1);
+    base1 = (u8 *) func_8028FDB4_de(table, 1);
     base2 = base1;
     mask = 1 << (arg1 & 7);
     if (arg2 != 0) {
@@ -264,20 +264,20 @@ extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
 
 
-s32 func_8028B5C0_de(struct Shared_World *arg0, s32 arg1) {
+s32 func_8028B5C0_de(struct Shared_World *world, s32 arg1) {
     void *field84;
     s32 field1B40C;
-    void *temp_v0;
+    void *table;
     u8 *temp_a0;
     s32 mask;
     s32 i;
 
-    field84 = arg0->secondaryLevels;
-    field1B40C = arg0->level;
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
-    func_8028FDB4_de(temp_v0, 0);
-    func_8028FDF8_de((s32) temp_v0, 1);
-    temp_a0 = (u8 *) func_8028FDB4_de(temp_v0, 1);
+    field84 = world->secondaryLevels;
+    field1B40C = world->level;
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field84, 0), field1B40C), 0);
+    func_8028FDB4_de(table, 0);
+    func_8028FDF8_de((s32) table, 1);
+    temp_a0 = (u8 *) func_8028FDB4_de(table, 1);
     mask = 1 << (arg1 & 7);
     i = arg1;
     if (i < 0) {

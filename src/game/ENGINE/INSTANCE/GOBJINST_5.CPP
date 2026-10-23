@@ -258,7 +258,7 @@ static inline void packMtx(u32 *out, PoseMatrix m) {
 
 }
 
-s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 arg2) {
+s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
     PoseMatrix mtx[129];
     CVector3 pos;
     Shared_PoseContext ctx;
@@ -321,7 +321,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 arg2) {
             ctx.actor = actor;
             ctx.handle = actor->handle;
             ctx.mtx = &mtx[1];
-            ctx.arg2 = arg2;
+            ctx.arg2 = model;
             ctx.arg1 = arg1;
             ctx.animA = animA;
             ctx.animB = animB;

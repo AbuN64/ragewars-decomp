@@ -277,7 +277,7 @@ typedef struct SceneTriggerDefinition {
     f32 touchRadius;
 } SceneTriggerDefinition;
 /* 12/263 aligned edits; remaining: scalar load scheduling and loop join. */
-void Scene_UpdateMovementTriggers(void *arg0, void *arg1, CVector3 *arg2, CVector3 *arg3) {
+void Scene_UpdateMovementTriggers(void *arg0, void *actor, CVector3 *before, CVector3 *arg3) {
     s32 sp10;
     s32 sp14;
     f32 temp_fs0f;
@@ -295,10 +295,10 @@ void Scene_UpdateMovementTriggers(void *arg0, void *arg1, CVector3 *arg2, CVecto
     f32 var_fs0;
     f32 var_ft0f;
     s32 temp_v0;
-    s32 temp_v0_2;
+    s32 flags;
     s32 temp_v0_3;
     s32 temp_v0_4;
-    s32 temp_v1;
+    s32 kind;
     s32 var_a0;
     s32 var_a1;
     s32 var_a2;
@@ -307,42 +307,42 @@ void Scene_UpdateMovementTriggers(void *arg0, void *arg1, CVector3 *arg2, CVecto
     s32 var_s2;
     s32 var_s3;
     s32 var_s4;
-    s32 var_s5;
+    s32 i;
     s32 var_v0;
     s32 var_v1;
     s32 var_v1_2;
-    SceneTriggerDefinition *temp_a0;
+    SceneTriggerDefinition *definition;
     LevelActor *temp_s0;
 
-    if ((arg2->x != arg3->x) || (arg2->y != arg3->y) || (arg2->z != arg3->z)) {
-        temp_v0 = ((LevelActor *)arg1)->definition->kind;
+    if ((before->x != arg3->x) || (before->y != arg3->y) || (before->z != arg3->z)) {
+        temp_v0 = ((LevelActor *)actor)->definition->kind;
         sp10 = temp_v0 == 0xB;
         sp14 = temp_v0 == 1;
-        temp_fs1f = ((LevelActor *)arg1)->position0.y + func_8024E420_de(arg1);
-        var_s5 = 0;
-        temp_fs2 = temp_fs1f + Particle_GetActorHeight(arg1);
+        temp_fs1f = ((LevelActor *)actor)->position0.y + func_8024E420_de(actor);
+        i = 0;
+        temp_fs2 = temp_fs1f + Particle_GetActorHeight(actor);
         if (((Shared_World *)arg0)->flaggedCount > 0) {
             do {
-                temp_s0 = ((Shared_World *)arg0)->flagged[var_s5];
+                temp_s0 = ((Shared_World *)arg0)->flagged[i];
                 var_s4 = 0;
-                if (temp_s0 != arg1) {
+                if (temp_s0 != actor) {
                     var_s1 = 0;
                     temp_fs0f = temp_s0->position0.y + func_8024E420_de(temp_s0);
                     temp_fv0 = temp_fs0f + Particle_GetActorHeight(temp_s0);
-                    temp_a0 = (SceneTriggerDefinition *)temp_s0->definition;
-                    temp_v1 = temp_a0->header.kind;
-                    switch (temp_v1) {
+                    definition = (SceneTriggerDefinition *)temp_s0->definition;
+                    kind = definition->header.kind;
+                    switch (kind) {
                     case 6:
                         var_s2 = 0;
                         var_s4 = 1;
                         var_s3 = 1;
-                        temp_v0_2 = temp_a0->header.flags;
-                        var_ft0f = temp_a0->enterRadius;
-                        var_fs0 = temp_a0->exitRadius;
-                        var_a0 = temp_v0_2 & 4;
-                        var_v1 = temp_v0_2 & 8;
-                        var_a2 = temp_v0_2 & 0x10;
-                        var_a1 = temp_v0_2 & 0x20;
+                        flags = definition->header.flags;
+                        var_ft0f = definition->enterRadius;
+                        var_fs0 = definition->exitRadius;
+                        var_a0 = flags & 4;
+                        var_v1 = flags & 8;
+                        var_a2 = flags & 0x10;
+                        var_a1 = flags & 0x20;
                         break;
                     case 10:
                         var_s2 = 1;
@@ -350,8 +350,8 @@ void Scene_UpdateMovementTriggers(void *arg0, void *arg1, CVector3 *arg2, CVecto
                         var_a2 = 0;
                         var_a1 = 0;
                         var_s1 = 1;
-                        temp_v0_3 = temp_a0->header.flags;
-                        var_ft0f = temp_a0->exitRadius;
+                        temp_v0_3 = definition->header.flags;
+                        var_ft0f = definition->exitRadius;
                         var_fs0 = 0.0f;
                         var_a0 = temp_v0_3 & 4;
                         var_v1 = temp_v0_3 & 8;
@@ -362,8 +362,8 @@ void Scene_UpdateMovementTriggers(void *arg0, void *arg1, CVector3 *arg2, CVecto
                         var_a2 = 0;
                         var_a1 = 0;
                         var_s1 = 1;
-                        temp_v0_4 = temp_a0->header.flags;
-                        var_ft0f = temp_a0->touchRadius;
+                        temp_v0_4 = definition->header.flags;
+                        var_ft0f = definition->touchRadius;
                         var_fs0 = 0.0f;
                         var_a0 = temp_v0_4 & 8;
                         var_v1 = temp_v0_4 & 0x10;
@@ -401,8 +401,8 @@ block_23:
                         }
                     }
                     if ((var_v0 != 0) || (var_s1_2 != 0)) {
-                        temp_fv1f = arg2->x - temp_s0->position0.x;
-                        temp_fv1 = arg2->z - temp_s0->position0.z;
+                        temp_fv1f = before->x - temp_s0->position0.x;
+                        temp_fv1 = before->z - temp_s0->position0.z;
                         temp_fv0f = arg3->x - temp_s0->position0.x;
                         temp_fv0_3 = arg3->z - temp_s0->position0.z;
                         temp_fv0 = (temp_fv1f * temp_fv1f) + (temp_fv1 * temp_fv1);
@@ -424,7 +424,7 @@ block_23:
                             }
                             if (var_v1_2 != 0) {
                                 if ((temp_s0->definition->kind == 0xA) && (var_s2 == 1)) {
-                                    var_v1_2 = func_80204308_de(temp_s0, &temp_s0->behaviorFlags, arg1);
+                                    var_v1_2 = func_80204308_de(temp_s0, &temp_s0->behaviorFlags, actor);
                                 }
                                 if (var_v1_2 != 0) {
                                     func_80214178_de(temp_s0, &temp_s0->behaviorFlags, var_s2);
@@ -452,8 +452,8 @@ block_23:
                         }
                     }
                 }
-                var_s5 += 1;
-            } while (var_s5 < ((Shared_World *)arg0)->flaggedCount);
+                i += 1;
+            } while (i < ((Shared_World *)arg0)->flaggedCount);
         }
     }
 }

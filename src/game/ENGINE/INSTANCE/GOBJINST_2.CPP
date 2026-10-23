@@ -21,7 +21,7 @@ extern char D_800C38C4_de;
 
 
 
-void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 arg3) {
+void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 extra) {
     s32 *sp28;
     void **resource1;
     void **resource2;
@@ -60,21 +60,21 @@ void func_80246BE8_de(void *arg0, s32 *arg1, s32 arg2, s32 arg3) {
             func_80262480_de((char *)arg0 + 0x118);
             ((LevelActor *)arg0)->stateE6 = (u8)((ResourceManagerState *)func_8028FDB4_de(node, 1))->count;
             ((LevelActor *)arg0)->flags |= 0x40000;
-            if (arg3 > 0) {
-                arg3 = func_80246A08_de(arg0, arg3, -1);
+            if (extra > 0) {
+                extra = func_80246A08_de(arg0, extra, -1);
             } else {
-                arg3 = -arg3;
+                extra = -extra;
             }
-            if (arg3 == -1) {
-                arg3 = 0;
+            if (extra == -1) {
+                extra = 0;
             }
-            ((LevelActor *)arg0)->nextAnimation = arg3;
+            ((LevelActor *)arg0)->nextAnimation = extra;
             ((LevelActor *)arg0)->animationPending = 0;
-            if (((LevelActor *)arg0)->animation != arg3) {
+            if (((LevelActor *)arg0)->animation != extra) {
                 ((LevelActor *)arg0)->animationChanged = 1;
             }
             ((LevelActor *)arg0)->animationState = -1;
-            ((LevelActor *)arg0)->lean = arg3;
+            ((LevelActor *)arg0)->lean = extra;
             func_80253754_de(0, resource2);
         }
         func_80253754_de(0, resource1);

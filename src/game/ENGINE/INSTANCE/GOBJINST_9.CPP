@@ -123,9 +123,9 @@ void func_8026992C_de(void *matrix, s32 pass, u32 alpha);
 void func_8024ADD0_de(struct LevelActor *actorIn, CVector3 *offsetIn, s32 arg2) {
     void *arg0 = actorIn;
     void *arg1 = offsetIn;
-    f32 sp10[16];
+    f32 matrix[16];
     f32 sp50[3];
-    f32 temp_fs0;
+    f32 scale;
     f32 temp_fs0f;
     f32 temp_fs1;
     f32 temp_fv0;
@@ -166,7 +166,7 @@ void func_8024ADD0_de(struct LevelActor *actorIn, CVector3 *offsetIn, s32 arg2) 
             var_fv0_3 = D_800C3AC4_de;
             var_fv1 = 0.0f;
         }
-        temp_fs0 = var_fv0_2 * var_fv0_3;
+        scale = var_fv0_2 * var_fv0_3;
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
         sp50[0] = *((f32 *) ((u8 *) (arg0) + 8)) + *((f32 *) ((u8 *) (arg1) + 0));
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
@@ -174,10 +174,10 @@ void func_8024ADD0_de(struct LevelActor *actorIn, CVector3 *offsetIn, s32 arg2) 
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
         sp50[1] = temp_fs0f + var_fv1 + *((f32 *) ((u8 *) (arg1) + 4));
         func_8027254C_de(sp50, 20000.0f);
-        func_80274244_de(arg0 + 0x5C, sp10);
-        func_8027347C_de(sp10, temp_fs0, 1.0f, temp_fs0);
-        func_80273448_de((s8 *) sp10, sp50[0], sp50[1], sp50[2]);
-        func_8027027C_de(sp10, (PackedMatrixWords *) temp_v0);
+        func_80274244_de(arg0 + 0x5C, matrix);
+        func_8027347C_de(matrix, scale, 1.0f, scale);
+        func_80273448_de((s8 *) matrix, sp50[0], sp50[1], sp50[2]);
+        func_8027027C_de(matrix, (PackedMatrixWords *) temp_v0);
         temp_fv0f = D_800C3ACC_de - (temp_fs1 * D_800C3AC8_de);
         var_v0 = 0xFF;
         if (!(D_800C8BC0 < temp_fv0f)) {

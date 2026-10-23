@@ -160,7 +160,7 @@ extern struct Shared_SceneActorTables D_800F3CD0; /* const */
 /* const */
 
 /* Initializes scene resources, actors, and game mode state. */
-void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
+void func_80286AA8_de(void *table, s32 target, s32 arg2) {
     s32 *temp_a0;
     struct Shape_typemap_165 *temp_v0_4;
     s32 temp_s4; 
@@ -170,7 +170,7 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     s32 temp_v0_16;
     s32 temp_v0_20;
     s32 temp_v0_21;
-    s32 temp_v0_5;
+    s32 resourceKey;
     s32 temp_v0_8;
     s32 temp_v0_9;
     s32 temp_v1_2;
@@ -178,9 +178,9 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     s32 temp_v1_4;
     s32 var_a0_2;
     s32 var_a0_3;
-    s32 var_a2;
-    s32 var_a3;
-    s32 var_s0;
+    s32 i;
+    s32 j;
+    s32 count;
     s32 kind_actor; 
     s32 kind_654;
     s32 kind_653;
@@ -195,11 +195,11 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     s32 header_copy3;
     s32 header_copy4;
     s32 header_copy5;
-    Record *var_s0_2;
+    Record *record;
     s32 loop_buffer; 
     s32 var_s0_4;
     s32 var_s1_3;
-    s32 var_s1_5;
+    s32 k;
     s32 var_s2;
     s32 var_s2_2;
     s32 var_s2_4;
@@ -215,7 +215,7 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     s32 first_actor_kind; 
     s32 actor_type3; 
     s32 var_v1_2;
-    s32 temp_v1_8;
+    s32 kind;
     u8 temp_v0_3;
     void **temp_v0_10;
     void **temp_v0_11;
@@ -228,7 +228,7 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     void *temp_a2;
     void *temp_s0;
     void *temp_s0_2;
-    void *temp_s0_3;
+    void *group;
     struct func_80203E78_S1 *temp_v0_13;
     struct func_80203E78_S1 *temp_v0_15;
     struct func_80203E78_S1 *temp_v0_18;
@@ -248,40 +248,40 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
     struct Shared_func_80286A78_S2 *var_s1_4; 
     void *var_v0;
 
-    var_s6 = arg1;
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B2FC) = D_800C51D4;
+    var_s6 = target;
+    (((struct SharedRecAt1B92C *)(table))->unk1B2FC) = D_800C51D4;
     var_s5 = arg2;
-    if ((((struct SharedRecAt1B92C *)(arg0))->unk1B40C) != -1) {
-        func_8044D794_de(arg0);
+    if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
+        func_8044D794_de(table);
     }
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B6AC) = 0;
-    if ((func_80245784_de() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(arg0))->unk1B41C) != 0) && (D_8014288C == 0)) {
+    (((struct SharedRecAt1B92C *)(table))->unk1B6AC) = 0;
+    if ((func_80245784_de() == 0) && (var_s5 != 0) && ((((struct SharedRecAt1B92C *)(table))->unk1B41C) != 0) && (D_8014288C == 0)) {
         func_8028D90C_de();
-        temp_v0 = (((struct SharedRecAt1B92C *)(arg0))->unk1B434);
+        temp_v0 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
         if ((u32) (temp_v0 - 0xBC2) < 0x15FU) {
             func_804037E8_de(((temp_v0 - 0xBC2) / 10) + 0x259);
         }
         Scene_ShowResultsGoal();
     }
-    func_8028D888_de(arg0);
-    (((struct SharedRecAt1B92C *)(arg0))->unk0) = 0;
+    func_8028D888_de(table);
+    (((struct SharedRecAt1B92C *)(table))->unk0) = 0;
     func_80255228_de(&D_80106248);
-    func_8028DA74_de(arg0);
+    func_8028DA74_de(table);
     func_80253908_de(0);
-    if ((((struct SharedRecAt1B92C *)(arg0))->unk1B40C) != -1) {
-        func_8044BF90_de(arg0);
+    if ((((struct SharedRecAt1B92C *)(table))->unk1B40C) != -1) {
+        func_8044BF90_de(table);
     }
     func_80253908_de(0);
     D_800CD730 = 0;
     func_8025476C_de(8);
-    func_8028D64C_de(arg0);
-    func_8044B400_de(&((struct SharedRecAt1B92C *)arg0)->address1B08, *(((struct SharedRecAt1B92C *)(arg0))->unkB4));
+    func_8028D64C_de(table);
+    func_8044B400_de(&((struct SharedRecAt1B92C *)table)->address1B08, *(((struct SharedRecAt1B92C *)(table))->unkB4));
     var_s2 = 0;
-    Ovlgame_InitEffectPool(&((struct SharedRecAt1B92C *)arg0)->address11778);
-    func_8044ADF0_de(&((struct SharedRecAt1B92C *)arg0)->address15388);
+    Ovlgame_InitEffectPool(&((struct SharedRecAt1B92C *)table)->address11778);
+    func_8044ADF0_de(&((struct SharedRecAt1B92C *)table)->address15388);
     func_8044DF60_de(&D_801376F8.actors);
     func_8023EE00_de();
-    func_8044B0E0_de(&((struct SharedRecAt1B92C *)arg0)->address1B320);
+    func_8044B0E0_de(&((struct SharedRecAt1B92C *)table)->address1B320);
     func_8025C8D8_de(&D_8011F260, &D_8011AFC0, 0xF);
     Ovlgame_StartPanelMovers(&D_801376F8);
     do {
@@ -308,17 +308,17 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
         }
         var_s2 += 1;
     } while (var_s2 < 8);
-    temp_v1_2 = *(((struct SharedRecAt1B92C *)(arg0))->unk4C);
+    temp_v1_2 = *(((struct SharedRecAt1B92C *)(table))->unk4C);
     if (temp_v1_2 < var_s6) {
         var_s6 = temp_v1_2 - 1;
         var_s5 = 0;
     }
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B40C) = var_s6;
+    (((struct SharedRecAt1B92C *)(table))->unk1B40C) = var_s6;
     if (var_s5 == 0) {
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B41C) = 0;
+        (((struct SharedRecAt1B92C *)(table))->unk1B41C) = 0;
     }
-    func_8028D380_de(arg0, var_s6, &((struct SharedRecAt1B92C *)arg0)->address1B2BC, 0x3F);
-    temp_v1_3 = (((struct SharedRecAt1B92C *)(arg0))->unk1B434);
+    func_8028D380_de(table, var_s6, &((struct SharedRecAt1B92C *)table)->address1B2BC, 0x3F);
+    temp_v1_3 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
     if (temp_v1_3 < 0x1CEA) {
         if (temp_v1_3 < 0x1CE8) {
             if (temp_v1_3 != 0x1BBC) {
@@ -349,17 +349,17 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
         }
     }
 scene_flag_on:
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B408) = 1;
+    (((struct SharedRecAt1B92C *)(table))->unk1B408) = 1;
     goto scene_flag_done;
 scene_flag_off:
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B408) = 0;
+    (((struct SharedRecAt1B92C *)(table))->unk1B408) = 0;
 scene_flag_done:
-    temp_v1_4 = (((struct SharedRecAt1B92C *)(arg0))->unk1B434);
+    temp_v1_4 = (((struct SharedRecAt1B92C *)(table))->unk1B434);
     if (temp_v1_4 < 0x1CEA) {
         if (temp_v1_4 < 0x1CE8) {
             if (temp_v1_4 != 0x1BBC) {
                 if (temp_v1_4 < 0x1BBD) {
-                    var_s0 = 0x320;
+                    count = 0x320;
                     if (temp_v1_4 == 0x123A) {
                         goto scene_size_c80;
                     }
@@ -368,7 +368,7 @@ scene_flag_done:
                 if (temp_v1_4 == 0x1C20) {
                     goto scene_size_c80;
                 }
-                var_s0 = 0x320;
+                count = 0x320;
                 if (temp_v1_4 == 0x1C84) {
                     goto scene_size_c80;
                 }
@@ -382,7 +382,7 @@ scene_flag_done:
     }
     if (temp_v1_4 < 0x1DB2) {
         if (temp_v1_4 < 0x1D4E) {
-            var_s0 = 0x320;
+            count = 0x320;
             if (temp_v1_4 < 0x1D4C) {
                 goto scene_size_done;
             }
@@ -390,112 +390,112 @@ scene_flag_done:
         }
         goto scene_size_320;
     }
-    var_s0 = 0x320;
+    count = 0x320;
     if (temp_v1_4 == 0x1DB2) {
         goto scene_size_c80;
     }
     goto scene_size_done;
 scene_size_c80:
-    var_s0 = 0xC80;
+    count = 0xC80;
     goto scene_size_done;
 scene_size_4b0:
-    var_s0 = 0x4B0;
+    count = 0x4B0;
     goto scene_size_done;
 scene_size_320:
-    var_s0 = 0x320;
+    count = 0x320;
 scene_size_done:
     if (D_801462E5 != 0) {
-        var_s0 += 0x200;
+        count += 0x200;
     }
     func_80253908_de(0);
-    temp_v0_4 = func_8025343C_de(0, var_s0 << 6, 3, &D_800C5104_de);
-    (((struct SharedRecAt1B92C *)(arg0))->unkE8) = (void *)temp_v0_4;
-    Items_InitEntryBatch(&((struct SharedRecAt1B92C *)arg0)->address128, temp_v0_4->field_0, var_s0);
-    temp_v0_5 = func_8028FE28_de((((struct SharedRecAt1B92C *)(arg0))->unk4C), (((struct SharedRecAt1B92C *)(arg0))->unk1C), var_s6);
-    (((struct SharedRecAt1B92C *)(arg0))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)arg0)->unk60, temp_v0_5, &D_800C5110_de);
-    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 1, temp_v0_5, arg0, &D_0044C3D4, &D_800C511C_de);
-    (((struct SharedRecAt1B92C *)(arg0))->unkBC) = temp_v0_6;
-    (((struct SharedRecAt1B92C *)(arg0))->unk6C) = (void *) *temp_v0_6;
-    temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 4, temp_v0_5, arg0, &D_00285160, &D_800C5128_de);
-    (((struct SharedRecAt1B92C *)(arg0))->unkC0) = temp_v0_7;
-    (((struct SharedRecAt1B92C *)(arg0))->unk68) = (void *) *temp_v0_7;
-    temp_v0_8 = func_8028FE28_de((((struct SharedRecAt1B92C *)(arg0))->unk60), temp_v0_5, 5);
-    (((struct SharedRecAt1B92C *)(arg0))->unk30) = temp_v0_8;
-    (((struct SharedRecAt1B92C *)(arg0))->unkC4) = func_80254284_de(0, &((struct SharedRecAt1B92C *)arg0)->address64, temp_v0_8, &D_800C5134_de);
-    if (*(((struct SharedRecAt1B92C *)(arg0))->unk60) >= 0xD) {
-        temp_v0_9 = func_8028FE28_de((((struct SharedRecAt1B92C *)(arg0))->unk60), temp_v0_5, 0xC);
-        (((struct SharedRecAt1B92C *)(arg0))->unk40) = temp_v0_9;
-        (((struct SharedRecAt1B92C *)(arg0))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)arg0)->unk8C, temp_v0_9, &D_800C5148_de);
-        temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk8C), 0, (((struct SharedRecAt1B92C *)(arg0))->unk40), arg0, 0, &D_800C5154_de);
+    temp_v0_4 = func_8025343C_de(0, count << 6, 3, &D_800C5104_de);
+    (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
+    Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
+    resourceKey = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
+    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk60, resourceKey, &D_800C5110_de);
+    temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 1, resourceKey, table, &D_0044C3D4, &D_800C511C_de);
+    (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
+    (((struct SharedRecAt1B92C *)(table))->unk6C) = (void *) *temp_v0_6;
+    temp_v0_7 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 4, resourceKey, table, &D_00285160, &D_800C5128_de);
+    (((struct SharedRecAt1B92C *)(table))->unkC0) = temp_v0_7;
+    (((struct SharedRecAt1B92C *)(table))->unk68) = (void *) *temp_v0_7;
+    temp_v0_8 = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 5);
+    (((struct SharedRecAt1B92C *)(table))->unk30) = temp_v0_8;
+    (((struct SharedRecAt1B92C *)(table))->unkC4) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->address64, temp_v0_8, &D_800C5134_de);
+    if (*(((struct SharedRecAt1B92C *)(table))->unk60) >= 0xD) {
+        temp_v0_9 = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk60), resourceKey, 0xC);
+        (((struct SharedRecAt1B92C *)(table))->unk40) = temp_v0_9;
+        (((struct SharedRecAt1B92C *)(table))->unk100) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk8C, temp_v0_9, &D_800C5148_de);
+        temp_v0_10 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk8C), 0, (((struct SharedRecAt1B92C *)(table))->unk40), table, 0, &D_800C5154_de);
         temp_v1_5 = *temp_v0_10;
-        *(struct SharedRecAt14 *)&((struct SharedRecAt1B92C *)arg0)->unk1B910 = *temp_v1_5;
+        *(struct SharedRecAt14 *)&((struct SharedRecAt1B92C *)table)->unk1B910 = *temp_v1_5;
         func_80253838_de(0, temp_v0_10);
-        if ((((struct SharedRecAt1B92C *)(arg0))->unk1B920) != 0 || (((struct SharedRecAt1B92C *)(arg0))->unk1B924) != 0) {
-            (((struct SharedRecAt1B92C *)(arg0))->unk1B92C) = 1;
+        if ((((struct SharedRecAt1B92C *)(table))->unk1B920) != 0 || (((struct SharedRecAt1B92C *)(table))->unk1B924) != 0) {
+            (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 1;
         } else {
-            (((struct SharedRecAt1B92C *)(arg0))->unk1B92C) = 0;
+            (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 0;
         }
     } else {
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B92C) = 0;
+        (((struct SharedRecAt1B92C *)(table))->unk1B92C) = 0;
     }
-    (((struct SharedRecAt1B92C *)(arg0))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 7, temp_v0_5, arg0, &D_0044C108, &D_800C5160_de);
-    (((struct SharedRecAt1B92C *)(arg0))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 2, temp_v0_5, arg0, &D_0044DA54, &D_800C5168_de);
-    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 0, temp_v0_5, arg0, 0, &D_800C5174_de);
-    (((struct SharedRecAt1B92C *)(arg0))->unkC8) = temp_v0_11;
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B2B0) = (void *) *temp_v0_11;
-    func_8044BE04_de(arg0);
-    resource_count = *(((struct SharedRecAt1B92C *)(arg0))->unk60);
-    D_800CC380 = ((u8) (((struct SharedRecAt10V2 *)(((struct SharedRecAt1B92C *)(arg0))->unk1B2B0))->unk10) >> 2) & 1;
+    (((struct SharedRecAt1B92C *)(table))->unkD4) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 7, resourceKey, table, &D_0044C108, &D_800C5160_de);
+    (((struct SharedRecAt1B92C *)(table))->unkEC) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 2, resourceKey, table, &D_0044DA54, &D_800C5168_de);
+    temp_v0_11 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0, resourceKey, table, 0, &D_800C5174_de);
+    (((struct SharedRecAt1B92C *)(table))->unkC8) = temp_v0_11;
+    (((struct SharedRecAt1B92C *)(table))->unk1B2B0) = (void *) *temp_v0_11;
+    func_8044BE04_de(table);
+    resource_count = *(((struct SharedRecAt1B92C *)(table))->unk60);
+    D_800CC380 = ((u8) (((struct SharedRecAt10V2 *)(((struct SharedRecAt1B92C *)(table))->unk1B2B0))->unk10) >> 2) & 1;
     if (resource_count >= 9) {
-        temp_v0_12 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 9, temp_v0_5, arg0, &D_00285160, &D_800C5180_de);
-        (((struct SharedRecAt1B92C *)(arg0))->unkF0) = temp_v0_12;
+        temp_v0_12 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 9, resourceKey, table, &D_00285160, &D_800C5180_de);
+        (((struct SharedRecAt1B92C *)(table))->unkF0) = temp_v0_12;
         temp_v0_13 = *temp_v0_12;
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B4DC) = temp_v0_13;
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B4E0) = (s32) temp_v0_13->unk4;
-        temp_v0_14 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 0xA, temp_v0_5, arg0, &D_00285160, &D_800C5190_de);
-        (((struct SharedRecAt1B92C *)(arg0))->unkF4) = temp_v0_14;
+        (((struct SharedRecAt1B92C *)(table))->unk1B4DC) = temp_v0_13;
+        (((struct SharedRecAt1B92C *)(table))->unk1B4E0) = (s32) temp_v0_13->unk4;
+        temp_v0_14 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0xA, resourceKey, table, &D_00285160, &D_800C5190_de);
+        (((struct SharedRecAt1B92C *)(table))->unkF4) = temp_v0_14;
         temp_v0_15 = *temp_v0_14;
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B4E4) = temp_v0_15;
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B4E8) = (s32) temp_v0_15->unk4;
-        func_80255CA0_de(&((struct SharedRecAt1B92C *)arg0)->address1B500, 0xC, 0x10);
-        temp_v0_16 = (((struct SharedRecAt1B92C *)(arg0))->unk1B4E0);
+        (((struct SharedRecAt1B92C *)(table))->unk1B4E4) = temp_v0_15;
+        (((struct SharedRecAt1B92C *)(table))->unk1B4E8) = (s32) temp_v0_15->unk4;
+        func_80255CA0_de(&((struct SharedRecAt1B92C *)table)->address1B500, 0xC, 0x10);
+        temp_v0_16 = (((struct SharedRecAt1B92C *)(table))->unk1B4E0);
         if (temp_v0_16 > 0) {
-            var_s0_2 = func_8025305C_de(temp_v0_16 * 0x50);
+            record = func_8025305C_de(temp_v0_16 * 0x50);
             
             var_s2 = 0;
-            if ((((struct SharedRecAt1B92C *)(arg0))->unk1B4E0) > 0) {
+            if ((((struct SharedRecAt1B92C *)(table))->unk1B4E0) > 0) {
                 do {
-                    func_8020CA10_de(var_s0_2, var_s2);
-                    func_80255D14_de(&((struct SharedRecAt1B92C *)arg0)->address1B500, var_s0_2);
-                    var_s0_2 = (void *)((char *)var_s0_2 + 0x50);
-                } while ((((struct SharedRecAt1B92C *)arg0)->unk1B4E0) > ++var_s2);
+                    func_8020CA10_de(record, var_s2);
+                    func_80255D14_de(&((struct SharedRecAt1B92C *)table)->address1B500, record);
+                    record = (void *)((char *)record + 0x50);
+                } while ((((struct SharedRecAt1B92C *)table)->unk1B4E0) > ++var_s2);
             }
         }
     }
-    if (*(((struct SharedRecAt1B92C *)(arg0))->unk60) >= 0xC) {
-        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 0xB, temp_v0_5, arg0, &D_00285160, &D_800C51A0_de);
-        (((struct SharedRecAt1B92C *)(arg0))->unkFC) = temp_v0_17;
+    if (*(((struct SharedRecAt1B92C *)(table))->unk60) >= 0xC) {
+        temp_v0_17 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 0xB, resourceKey, table, &D_00285160, &D_800C51A0_de);
+        (((struct SharedRecAt1B92C *)(table))->unkFC) = temp_v0_17;
         temp_v0_18 = *temp_v0_17;
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B4EC) = temp_v0_18;
-        (((struct SharedRecAt1B92C *)(arg0))->unk1B4F0) = (s32) temp_v0_18->unk4;
+        (((struct SharedRecAt1B92C *)(table))->unk1B4EC) = temp_v0_18;
+        (((struct SharedRecAt1B92C *)(table))->unk1B4F0) = (s32) temp_v0_18->unk4;
     }
-    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 6, temp_v0_5, arg0, &D_00285160, &D_800C51B4_de);
-    (((struct SharedRecAt1B92C *)(arg0))->unkCC) = temp_v0_19;
+    temp_v0_19 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 6, resourceKey, table, &D_00285160, &D_800C51B4_de);
+    (((struct SharedRecAt1B92C *)(table))->unkCC) = temp_v0_19;
     temp_v1_6 = *temp_v0_19;
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B300) = (void *) (&((struct SharedRecAt8V1 *)temp_v1_6)->address8);
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B304) = (s32) (((struct SharedRecAt8V1 *)(temp_v1_6))->unk4);
-    (((struct SharedRecAt1B92C *)(arg0))->unk0) = 1;
-    (((struct SharedRecAt1B92C *)(arg0))->unk138) = 0;
-    (((struct SharedRecAt1B92C *)(arg0))->unk140) = 0;
-    (((struct SharedRecAt1B92C *)(arg0))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(arg0))->unk60), 3, temp_v0_5, arg0, &D_0044C7B8, &D_800C51C0_de);
-    func_80286950_de(arg0);
+    (((struct SharedRecAt1B92C *)(table))->unk1B300) = (void *) (&((struct SharedRecAt8V1 *)temp_v1_6)->address8);
+    (((struct SharedRecAt1B92C *)(table))->unk1B304) = (s32) (((struct SharedRecAt8V1 *)(temp_v1_6))->unk4);
+    (((struct SharedRecAt1B92C *)(table))->unk0) = 1;
+    (((struct SharedRecAt1B92C *)(table))->unk138) = 0;
+    (((struct SharedRecAt1B92C *)(table))->unk140) = 0;
+    (((struct SharedRecAt1B92C *)(table))->unkD0) = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 3, resourceKey, table, &D_0044C7B8, &D_800C51C0_de);
+    func_80286950_de(table);
     
-    var_a2 = 0;
+    i = 0;
     var_v1 = 0xF;
     
-    var_a0_3 = (s32)(((struct SharedRecAt1B92C *)(arg0))->unk138);
-    var_v0 = &((struct SharedRecAt1B92C *)arg0)->address3C;
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B6A4) = 0;
+    var_a0_3 = (s32)(((struct SharedRecAt1B92C *)(table))->unk138);
+    var_v0 = &((struct SharedRecAt1B92C *)table)->address3C;
+    (((struct SharedRecAt1B92C *)(table))->unk1B6A4) = 0;
     do {
         (((struct SharedRecAt1B664V2 *)(var_v0))->unk1B664) = 0;
         var_v1 -= 1;
@@ -504,35 +504,35 @@ scene_size_done:
     
     var_v1 = 0;
     
-    if ((((struct SharedRecAt1B92C *)(arg0))->unk140) > 0) {
+    if ((((struct SharedRecAt1B92C *)(table))->unk140) > 0) {
         first_actor_kind = 0xE;
-        var_a1 = (void *)(var_a2 * sizeof(void *) + (u32)arg0);
+        var_a1 = (void *)(i * sizeof(void *) + (u32)table);
 loop_81:
         if (*(((struct ObjRecAt18V2 *)((void *)var_a0_3))->unk18) == first_actor_kind) {
             (((struct SharedRecAt1B664V1 *)(var_a1))->unk1B664) = (void *)var_a0_3;
             var_a1 += 4;
-            var_a2 += 1;
-            var_v0_2 = var_a2 < 0x10;
+            i += 1;
+            var_v0_2 = i < 0x10;
         } else {
-            var_v0_2 = var_a2 < 0x10;
+            var_v0_2 = i < 0x10;
         }
         if (var_v0_2 != 0) {
             var_a0_3 = (s32)NEXT_SCENE_ACTOR((void *)var_a0_3);
             var_v1 += 1;
-            if (var_v1 < (((struct SharedRecAt1B92C *)(arg0))->unk140)) {
+            if (var_v1 < (((struct SharedRecAt1B92C *)(table))->unk140)) {
                 goto loop_81;
             }
         }
     }
     
     var_s1_3 = 3;
-    scene_actor_ptr = (((struct SharedRecAt1B92C *)(arg0))->unk138);
+    scene_actor_ptr = (((struct SharedRecAt1B92C *)(table))->unk138);
     actor_type3 = 3;
     actor_kind_bd7 = 0xBD7;
     var_v0_3 = 3 * sizeof(void *);
     
     
-    (((struct SharedRecAt1B92C *)(arg0))->unk1B6A4) = var_a2;
+    (((struct SharedRecAt1B92C *)(table))->unk1B6A4) = i;
     D_800F3CD0.primary.kindBd7 = 0;
     do {
         *(void **)((char *)D_800F3CD0.primary.actors + var_v0_3) = 0;
@@ -540,7 +540,7 @@ loop_81:
         var_v0_3 -= sizeof(void *);
     } while (var_s1_3 >= 0);
     var_s1_3 = 0;
-    if ((((struct SharedRecAt1B92C *)(arg0))->unk140) > 0) {
+    if ((((struct SharedRecAt1B92C *)(table))->unk140) > 0) {
         kind_actor = 0xA;
         kind_654 = 0x654;
         kind_653 = 0x653;
@@ -558,20 +558,20 @@ loop_89:
             goto block_109;
         } else {
             if (temp_v0_20 == kind_actor) {
-                temp_v1_8 = var_s2_3->kind;
-                if (temp_v1_8 == kind_654) {
+                kind = var_s2_3->kind;
+                if (kind == kind_654) {
                     goto actor_kind_654;
                 }
-                if (temp_v1_8 < 0x655) {
-                    if (temp_v1_8 == kind_653) {
+                if (kind < 0x655) {
+                    if (kind == kind_653) {
                         goto actor_kind_653;
                     }
                         goto block_108;
                 }
-                if (temp_v1_8 == kind_655) {
+                if (kind == kind_655) {
                     goto actor_kind_655;
                 }
-                if (temp_v1_8 == kind_656) {
+                if (kind == kind_656) {
                         goto actor_kind_656;
                 }
                 goto block_108;
@@ -591,18 +591,18 @@ block_108:
             var_s2_3 = NEXT_SCENE_ACTOR(var_s2_3);
             scene_actor_ptr = NEXT_SCENE_ACTOR(scene_actor_ptr);
             var_s1_3 += 1;
-            if (var_s1_3 >= (((struct SharedRecAt1B92C *)(arg0))->unk140)) {
+            if (var_s1_3 >= (((struct SharedRecAt1B92C *)(table))->unk140)) {
                 goto block_109;
             }
             goto loop_89;
         }
     } else {
 block_109:
-        var_a3 = 0;
+        j = 0;
     }
     
     var_a0_3 = 9;
-    var_a2_2 = (((struct SharedRecAt1B92C *)(arg0))->unk138);
+    var_a2_2 = (((struct SharedRecAt1B92C *)(table))->unk138);
     var_v0_4 = 9 * sizeof(void *);
     
     
@@ -613,7 +613,7 @@ block_109:
         var_v0_4 -= sizeof(void *);
     } while (var_a0_3 >= 0);
     var_a0_3 = 0;
-    if ((((struct SharedRecAt1B92C *)(arg0))->unk140) > 0) {
+    if ((((struct SharedRecAt1B92C *)(table))->unk140) > 0) {
         second_type3 = 3;
         second_kind_bd6 = 0xBD6;
         second_type10 = 0xA;
@@ -628,16 +628,16 @@ loop_114:
             }
         } else if (temp_v0_21 == second_type10) {
             if (var_a1_2->kind == second_kind_64e) {
-                D_800F3CD0.kind64e[var_a3] = var_a2_2;
-                var_a3 += 1;
+                D_800F3CD0.kind64e[j] = var_a2_2;
+                j += 1;
             }
         }
-        var_v0_5 = var_a3 < 0xA;
+        var_v0_5 = j < 0xA;
         if (var_v0_5 != 0) {
             var_a1_2 = NEXT_SCENE_ACTOR(var_a1_2);
             var_a2_2 = NEXT_SCENE_ACTOR(var_a2_2);
             var_a0_3 += 1;
-            if (var_a0_3 >= (((struct SharedRecAt1B92C *)(arg0))->unk140)) {
+            if (var_a0_3 >= (((struct SharedRecAt1B92C *)(table))->unk140)) {
                 goto block_122;
             }
             goto loop_114;
@@ -646,16 +646,16 @@ loop_114:
 block_122:
         D_80142850 = func_802A01E8_de(var_a0_3) % 3;
     }
-    (((struct SharedRecAt1B92C *)(arg0))->unk0) = 2;
-    func_8044D5C4_de(arg0);
-    temp_s4 = (((struct SharedRecAt1B92C *)(arg0))->unk140);
-    var_s1_3 = (((struct SharedRecAt1B92C *)(arg0))->unk13C);
-    (((struct SharedRecAt1B92C *)(arg0))->unk0) = 3;
+    (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
+    func_8044D5C4_de(table);
+    temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
+    var_s1_3 = (((struct SharedRecAt1B92C *)(table))->unk13C);
+    (((struct SharedRecAt1B92C *)(table))->unk0) = 3;
     if (var_s1_3 < temp_s4) {
         var_s0_4 = var_s1_3 * sizeof(struct Shared_SceneActorStride);
         do {
             var_s1_3 += 1;
-            func_8024B2D0_de((((struct SharedRecAt1B92C *)(arg0))->unk138) + var_s0_4);
+            func_8024B2D0_de((((struct SharedRecAt1B92C *)(table))->unk138) + var_s0_4);
             var_s0_4 += sizeof(struct Shared_SceneActorStride);
         } while (var_s1_3 < temp_s4);
     }
@@ -666,7 +666,7 @@ block_122:
         do {
             func_8024B2D0_de(temp_v0_2);
             func_8024B2D0_de(NEXT_SCENE_ACTOR(temp_v0_2));
-            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = func_8020CB3C_de(&((struct SharedRecAt1B92C *)arg0)->unk1B4DC, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
+            (((struct func_80203E78_S1 *)(((struct SharedRecAt16E0V3 *)(var_s1_4))->unk1454))->unk4) = func_8020CB3C_de(&((struct SharedRecAt1B92C *)table)->unk1B4DC, &((struct SharedRecAt16E0V3 *)var_s1_4)->address8);
             var_s1_4 = (((struct SharedRecAt16E0V3 *)(var_s1_4))->unk16E0);
             if (var_s1_4 == 0) {
                 break;
@@ -674,31 +674,31 @@ block_122:
             temp_v0_2 = var_s1_4;
         } while (1);
     }
-    func_8044D668_de(arg0);
-    temp_s4 = (((struct SharedRecAt1B92C *)(arg0))->unk140);
-    var_s1_5 = (((struct SharedRecAt1B92C *)(arg0))->unk13C);
-    if (var_s1_5 < temp_s4) {
-        var_s2_4 = var_s1_5 * sizeof(struct Shared_SceneActorStride);
+    func_8044D668_de(table);
+    temp_s4 = (((struct SharedRecAt1B92C *)(table))->unk140);
+    k = (((struct SharedRecAt1B92C *)(table))->unk13C);
+    if (k < temp_s4) {
+        var_s2_4 = k * sizeof(struct Shared_SceneActorStride);
         do {
-            var_s1_5 += 1;
+            k += 1;
             
-            temp_v0_2 = (((struct SharedRecAt1B92C *)(arg0))->unk138) + var_s2_4;
+            temp_v0_2 = (((struct SharedRecAt1B92C *)(table))->unk138) + var_s2_4;
             func_8024BE3C_de(temp_v0_2);
             func_80246E44_de(temp_v0_2);
             var_s2_4 += sizeof(struct Shared_SceneActorStride);
-        } while (var_s1_5 < temp_s4);
+        } while (k < temp_s4);
     }
     
     
-    var_s0 = (char *)&((struct SharedRecAt1B92C *)arg0)->unk1B4DC - (char *)arg0;
-    temp_v0_2 = (char *)arg0 + var_s0;
+    count = (char *)&((struct SharedRecAt1B92C *)table)->unk1B4DC - (char *)table;
+    temp_v0_2 = (char *)table + count;
     func_8020AA40_de(temp_v0_2);
     func_8020ABF0_de(temp_v0_2);
-    (((struct SharedRecAt1B92C *)(arg0))->unk0) = 4;
+    (((struct SharedRecAt1B92C *)(table))->unk0) = 4;
     func_80449E18_de(&D_80145040);
-    temp_s0_3 = &D_80145040.object;
-    func_8044A6CC_de(temp_s0_3);
-    func_80236874_de(temp_s0_3);
+    group = &D_80145040.object;
+    func_8044A6CC_de(group);
+    func_80236874_de(group);
 }
 
 /* Native resident constant storage; absolute access symbols retain their addresses. */

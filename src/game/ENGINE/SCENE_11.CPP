@@ -27,27 +27,27 @@ extern void func_80278F00_de(Rec_func_8024C92C_de *arg0);
 
 
 
-void func_8028C4B4_de(void *arg0, s32 arg1) {
-    Rec_func_8024C92C_de *var_s1;
+void func_8028C4B4_de(void *world, s32 arg1) {
+    Rec_func_8024C92C_de *trigger;
     Rec_func_8024C92C_de *var_s1_2;
     s32 var_s0;
     s32 var_s0_2;
 
-    var_s0 = ((WorldRecAt1B40C *)(arg0))->nfaces;
-    var_s1 = ((WorldRecAt1B40C *)(arg0))->faces;
+    var_s0 = ((WorldRecAt1B40C *)(world))->nfaces;
+    trigger = ((WorldRecAt1B40C *)(world))->faces;
     var_s0 -= 1;
     if (var_s0 != -1) {
         do {
-            if (((Record14 *)(var_s1))->kind == arg1) {
-                func_80278F00_de(var_s1);
+            if (((Record14 *)(trigger))->kind == arg1) {
+                func_80278F00_de(trigger);
             }
             var_s0 -= 1;
-            var_s1 += 1;
+            trigger += 1;
         } while (var_s0 != -1);
     }
 
-    var_s0_2 = ((WorldRecAt1B40C *)(arg0))->nedges;
-    var_s1_2 = ((WorldRecAt1B40C *)(arg0))->edges;
+    var_s0_2 = ((WorldRecAt1B40C *)(world))->nedges;
+    var_s1_2 = ((WorldRecAt1B40C *)(world))->edges;
     var_s0_2 -= 1;
     if (var_s0_2 != -1) {
         do {

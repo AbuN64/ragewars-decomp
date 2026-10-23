@@ -71,8 +71,8 @@ extern s32 func_8028FE3C_de(s32 *, s32, s32, s32 *);
 
 extern void func_80265E10_de(void *, void *, s32, s32, Triple, ResourceManagerState);
 
-s32 func_802500FC_de(void *arg0, s32 arg1) {
-    Owner_func_80250274_de *owner = arg0;
+s32 func_802500FC_de(void *prop, s32 arg1) {
+    Owner_func_80250274_de *owner = prop;
     GameplayCamera *camera = (void *)arg1;
     CVector3 sp10;
     f32 temp_f0;
@@ -83,7 +83,7 @@ s32 func_802500FC_de(void *arg0, s32 arg1) {
     u16 temp_v1;
     u16 var_v0;
     u8 next_timer;
-    DescriptorRecAt24 *temp_a0;
+    DescriptorRecAt24 *descriptor;
 
     func_80271F68_de(&sp10, &camera->position,
                   &owner->position);
@@ -94,12 +94,12 @@ s32 func_802500FC_de(void *arg0, s32 arg1) {
     } else {
         var_v1 = (s32)(temp_f0 - threshold) | 0x80000000;
     }
-    temp_a0 = owner->descriptor;
+    descriptor = owner->descriptor;
     owner->timer = var_v1;
-    if ((u32)var_v1 >= (u32)(temp_a0->period * 2)) {
-        var_v1_2 = temp_a0->key2;
+    if ((u32)var_v1 >= (u32)(descriptor->period * 2)) {
+        var_v1_2 = descriptor->key2;
     } else {
-        var_v1_2 = temp_a0->key;
+        var_v1_2 = descriptor->key;
     }
 
     if (var_v1_2 == -1) {
@@ -143,7 +143,7 @@ block_20:
 
 void func_80250274_de(Owner_func_80250274_de *owner) {
     DescriptorRecAt24 *descriptor;
-    s32 arg2;
+    s32 remaining;
     s32 key;
     void *instance;
     CachedResource *resource;
@@ -155,7 +155,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
         return;
     }
     descriptor = owner->descriptor;
-    arg2 = descriptor->argument;
+    remaining = descriptor->argument;
     key = select_key(descriptor, owner->timer);
     if (key == -1) {
         if (owner->fade <= 0) {
@@ -193,9 +193,9 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
                 data = (char *)(header + 2);
             }
             if (D_800D15E0 != 0) {
-                func_8026DA4C_de(instance, owner->transform, 0, 0, data, arg2);
+                func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
             } else {
-                Render_QueueModelInstance(instance, owner->transform, 0, 0, data, arg2);
+                Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
             }
             func_80253754_de(0, resource);
         }
@@ -207,7 +207,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
 }
 
 void func_802504B0_de(ModelOwner *owner) {
-    s32 arg2;
+    s32 remaining;
     void *instance;
     CachedResource *resource;
     s32 *header;
@@ -216,7 +216,7 @@ void func_802504B0_de(ModelOwner *owner) {
     if (owner->flagsD8 & 0x40) {
         return;
     }
-    arg2 = owner->descriptor->argument;
+    remaining = owner->descriptor->argument;
     instance = func_802507AC_de(owner, owner->descriptor->key);
     if (instance == 0) {
         return;
@@ -238,9 +238,9 @@ void func_802504B0_de(ModelOwner *owner) {
             data = (char *)&header[2];
         }
         if (D_800D15E0 != 0) {
-            func_8026DA4C_de(instance, owner->transform, 0, 0, data, arg2);
+            func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
         } else {
-            Render_QueueModelInstance(instance, owner->transform, 0, 0, data, arg2);
+            Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
         }
         func_80253754_de(0, resource);
     }
