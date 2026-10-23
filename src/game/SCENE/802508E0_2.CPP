@@ -86,7 +86,7 @@ extern int D_8010515C;
 extern Manager D_801047E0;
 
 void func_80250E70_de(s32 arg0, s32 arg1) {
-    struct ResMgr *mgr = (struct ResMgr *)&D_80100560;
+#define mgr ((struct ResMgr *)&D_80100560)
     u32 mask;
     u32 i;
     void *thread;
@@ -149,6 +149,7 @@ void func_80250E70_de(s32 arg0, s32 arg1) {
     func_802A001C_de(&D_801008F8, arg1, 0x800);
     func_802BAC90_de(thread, arg1, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
     func_802BB750_de(thread);
+#undef mgr
 }
 #else
 INCLUDE_ASM("span_1000", func_80250E70_de);

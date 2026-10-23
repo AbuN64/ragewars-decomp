@@ -102,7 +102,7 @@ extern void func_80442574_de(void *, void *, void *, s32, s32);
 void func_80448EF4_de(void *actor, s32 character) {
     s32 i;
     s32 openFlag = 0;
-    char *globals = (char *)&D_801462C8;
+#define globals ((char *)&D_801462C8)
     func_80264B6C_de();
     FIELD(s32, actor, 0x5D0) = 1;
     FIELD(s32, actor, 0x5E0) = character;
@@ -182,6 +182,7 @@ void func_80448EF4_de(void *actor, s32 character) {
     }
     D_800FEAE0[FIELD(s32, actor, 0x5D4)] = 0;
     D_800FF140_de[FIELD(s32, actor, 0x5D4)] = 0;
+#undef globals
 }
 #else
 INCLUDE_ASM("ovl_80400000", func_80448EF4_de);
