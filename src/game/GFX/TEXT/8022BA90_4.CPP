@@ -118,7 +118,7 @@ s32 func_8022C7F8_de(void *player, LevelActor *actor) {
 }
 
 /** Return zero. */
-int func_8022C88C_de(void *arg0, void *arg1, s32 *arg2) {
+int func_8022C88C_de(void *unused0, void *unused1, s32 *unused2) {
     return 0;
 }
 

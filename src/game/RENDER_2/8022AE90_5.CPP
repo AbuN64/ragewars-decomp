@@ -45,7 +45,7 @@ void func_8022B69C_de(void *actor, f32 arg1, void *arg2) {
 
 
 
-void func_8022B730_de(void *arg0, f32 arg1) {
-    ((Shared_ActorView *)arg0)->impulse = ((Shared_ActorView *)arg0)->impulse + arg1 * D_800C7E08;
-    ((Shared_ActorView *)arg0)->field122C = ((Shared_ActorView *)arg0)->field122C | 0x2000;
+void func_8022B730_de(void *actorView, f32 arg1) {
+    ((Shared_ActorView *)actorView)->impulse = ((Shared_ActorView *)actorView)->impulse + arg1 * D_800C7E08;
+    ((Shared_ActorView *)actorView)->field122C = ((Shared_ActorView *)actorView)->field122C | 0x2000;
 }

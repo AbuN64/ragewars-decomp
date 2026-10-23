@@ -52,7 +52,7 @@ void func_80268150_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, struct IntPair 
     func_80266810_de((void *)arg0, arg1, arg2, arg3, arg6, 1, 1, 0x400);
 }
 
-void func_802681A8_de(func_8024E8F0_S1 *arg0, Context_func_802681A8_de *arg1, s32 arg2, Triple arg3, Params_func_802681A8_de arg6) {
+void func_802681A8_de(func_8024E8F0_S1 *arg0, Context_func_802681A8_de *arg1, s32 unused2, Triple arg3, Params_func_802681A8_de arg6) {
     void *resource;
 
     if ((arg0->unk0 == 1) && (arg0->unk100 & 0x300000)) {
@@ -142,7 +142,7 @@ void func_802683E0_de(char *arg0, s32 arg1, s32 arg2, Triple_func_802683E0_de ar
     }
 }
 
-void func_802684B8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void func_802684B8_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
     u8 temp = *(u8 *)arg0;
     if (temp == 1) {
         s32 *p = &arg3;
@@ -150,7 +150,7 @@ void func_802684B8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 ar
     }
 }
 
-void func_802684E8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void func_802684E8_de(void *arg0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
     u8 temp = *(u8 *)arg0;
     if (temp == 1) {
         s32 *p = &arg3;

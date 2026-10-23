@@ -145,14 +145,14 @@ int func_802643A0_de(struct ControllerProfile *object) {
     return (object->buttonState & 0x40101) != 0;
 }
 
-int func_802643B8_de(void *arg0) {
-    ControllerProfile *profile = arg0;
+int func_802643B8_de(void *controllerProfile) {
+    ControllerProfile *profile = controllerProfile;
     int flag = profile->buttonState & 0x10808;
     return flag != 0;
 }
 
-int func_802643D0_de(void *arg0) {
-    ControllerProfile *profile = arg0;
+int func_802643D0_de(void *controllerProfile) {
+    ControllerProfile *profile = controllerProfile;
     int flag = profile->buttonState & 0x80404;
     return flag != 0;
 }
@@ -192,8 +192,8 @@ void func_80264404_de(void) {
 }
 
 /** Shift the trailing state-history slots down and clear the newest slot. */
-void func_802644A8_de(void *arg0) {
-    ControllerProfile *o = arg0;
+void func_802644A8_de(void *controllerProfile) {
+    ControllerProfile *o = controllerProfile;
     u8 t_c4;
     u8 t_c5;
     s32 t_b0;

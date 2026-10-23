@@ -1,11 +1,11 @@
 #include "RENDER_3/RANGENODE.H"
 
-int func_80268CBC_de(void *arg0) {
-    IntrusiveList *list = arg0;
+int func_80268CBC_de(void *intrusiveList) {
+    IntrusiveList *list = intrusiveList;
     return (int)list->head;
 }
 
-int func_80268CC8_de(void *arg0, void *arg1) {
-    RangeNode *node = arg1;
+int func_80268CC8_de(void *unused0, void *rangeNode) {
+    RangeNode *node = rangeNode;
     return (int)node->next;
 }

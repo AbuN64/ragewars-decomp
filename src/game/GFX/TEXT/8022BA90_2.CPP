@@ -24,7 +24,7 @@ int func_8022BEDC_de(Shared_ActorView *actor) {
 }
 
 /** Perform the no-op callback at VRAM 0x8022BEEC. */
-void func_8022BEFC_de(void *arg0, void *arg1) {
+void func_8022BEFC_de(void *unused0, void *unused1) {
 }
 
 void func_8022BF04_de(void *player, s32 unused, s32 period, s32 kind) {

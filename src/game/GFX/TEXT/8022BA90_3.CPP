@@ -78,7 +78,7 @@ void func_8022C060_de(s32 arg0, s32 arg1) {
     func_8022BF04_de(arg0, arg1, 5, 0x1B);
 }
 
-void func_8022C080_de(void *arg0, void *arg1) {
+void func_8022C080_de(void *actorView, void *arg1) {
     void *result;
     f32 t0;
     f32 t1;
@@ -86,11 +86,11 @@ void func_8022C080_de(void *arg0, void *arg1) {
     result = (void *)func_8024E7DC_de(arg1);
     if (result != 0) {
         t0 = ((ModelBlend *)result)->blend;
-        t1 = ((Shared_ActorView *)arg0)->modelBlend;
+        t1 = ((Shared_ActorView *)actorView)->modelBlend;
         t0 = t0 - t1;
         t0 = t0 * D_800C2D28_de;
         t1 = t1 + t0;
-        ((Shared_ActorView *)arg0)->modelBlend = t1;
+        ((Shared_ActorView *)actorView)->modelBlend = t1;
     }
 }
 

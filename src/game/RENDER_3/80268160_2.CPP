@@ -81,7 +81,7 @@ void func_8026851C_de(SourceRecAt1C *source, Shared_ParticleOwner *host, s32 unu
     }
 }
 
-s32 func_802686EC_de(s32 arg0, Input80216D3C *arg1, s32 arg2, Triple arg3, Extra arg6) {
+s32 func_802686EC_de(s32 unused0, Input80216D3C *arg1, s32 unused2, Triple unused3, Extra arg6) {
     CVector3 scale;
     Triple zero;
 

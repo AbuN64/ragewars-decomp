@@ -55,8 +55,8 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
     return bestNode;
 }
 
-void func_8022B3D0_de(char *arg0, s32 arg1, CVector3 *arg2) {
-    Shared_ActorView *actor = (Shared_ActorView *)arg0;
+void func_8022B3D0_de(char *actorView, s32 unused1, CVector3 *arg2) {
+    Shared_ActorView *actor = (Shared_ActorView *)actorView;
     Matrix matrix;
     CVector3 offset;
 

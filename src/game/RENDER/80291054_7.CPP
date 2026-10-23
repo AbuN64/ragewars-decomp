@@ -36,13 +36,13 @@ void func_80292F48_de(void) {
     func_802BB750_de((s32)D_8011B590);
 }
 
-void func_80292FC0_de(s32 *arg0, s32 arg1) {
+void func_80292FC0_de(s32 *gameSession, s32 arg1) {
     func_802A001C_de((s32)D_800E7C80_de, 1, 0x8000);
     func_802BAC90_de((s32)D_8011B7C0, 1, D_00293534, arg1, (s32)D_800EFC80_de, D_800CD8B4);
     func_802BB750_de((s32)D_8011B7C0);
     {
         s32 temp = D_800CD8A0_de;
-        ((GameSession *)arg0)->enabled = 0;
+        ((GameSession *)gameSession)->enabled = 0;
         func_802BB5F0_de(0, temp);
     }
 loop_1:

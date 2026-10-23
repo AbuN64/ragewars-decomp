@@ -665,7 +665,7 @@ extern void func_8022B550_de(void *arg0, f32 arg1, f32 arg2, void *arg3,
 extern void func_8022B60C_de(void *arg0, f32 arg1, void *arg2);
 extern void func_8022B7F8_de(void *arg0, void *arg1);
 
-void func_8021C45C_de(void *arg0, void *arg1, s32 arg2, void *arg3) {
+void func_8021C45C_de(void *arg0, void *unused1, s32 unused2, void *arg3) {
     Player *actor = arg0;
     Shared_Particle *event = arg3;
     CGameStatus *audio;

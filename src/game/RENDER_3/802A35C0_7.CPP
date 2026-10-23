@@ -9,8 +9,8 @@ extern func_802A6A54_S2 D_800D15E0;
 
 extern func_802A6A54_S3 D_800D15F0;
 
-void func_802A5A54_de(void *arg0, int arg1) {
-    Animator *animation = arg0;
+void func_802A5A54_de(void *animator, int arg1) {
+    Animator *animation = animator;
     animation->mode = 0;
     animation->loop = (f32 *)arg1;
     animation->script = (f32 *)arg1;

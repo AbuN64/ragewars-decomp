@@ -67,21 +67,21 @@ void func_80254D44_de(s32 arg0, s32 arg1)
   D_80101134[arg1] = 0;
 }
 
-void func_80254DA4_de(void *arg0, void *arg1) {
+void func_80254DA4_de(void *unused0, void *arg1) {
     func_8022BC04_S3 *arg1_record = arg1;
     s32 *p = D_80105180;
     arg1_record->unk10 = *p;
     func_80255FB8_de((char *)p - 0xC10, (s32)arg1);
 }
 
-void func_80254DD0_de(void *arg0, void *arg1) {
+void func_80254DD0_de(void *unused0, void *resourceCacheEntry) {
     void *temp_v0;
     void *temp_s0;
 
-    temp_v0 = ((ResourceCacheEntry *)arg1)->owner;
+    temp_v0 = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
     if (temp_v0 != 0) {
         func_80255488_de(((ResourceLoadRequest *)temp_v0)->key);
-        temp_s0 = ((ResourceCacheEntry *)arg1)->owner;
+        temp_s0 = ((ResourceCacheEntry *)resourceCacheEntry)->owner;
         func_80255ED8_de(&D_8010110C, temp_s0);
         ((ResourceLoadRequest *)temp_s0)->flags = 0;
         func_80255CB8_de(&D_801010F8, temp_s0);
@@ -99,7 +99,7 @@ void *func_80254E30_de(void) {
     return head;
 }
 
-void func_80254E88_de(s32 arg0, void *arg1) {
+void func_80254E88_de(s32 unused0, void *arg1) {
     func_80255ED8_de(&D_8010110C, arg1);
     ((Request_func_802524B0_de *)arg1)->flags = 0;
     func_80255CB8_de((char *)&D_8010110C - 0x14, arg1);

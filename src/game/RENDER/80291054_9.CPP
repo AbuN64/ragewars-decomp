@@ -102,8 +102,8 @@ void func_80293534_de(void) {
 }
 
 /** Reset three large-offset fields and mark the record active. */
-void func_80293590_de(void *arg0) {
-    struct GameSession *session = arg0;
+void func_80293590_de(void *gameSession) {
+    struct GameSession *session = gameSession;
     session->phase = 1;
     session->timer = 0;
     session->pad26DC0 = 0;

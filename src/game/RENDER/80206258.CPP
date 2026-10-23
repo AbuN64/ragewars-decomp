@@ -196,7 +196,7 @@ void func_80206724_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
     }
 }
 
-int func_80206758_de(void *arg0, Dest *arg1) {
+int func_80206758_de(void *unused0, Dest *arg1) {
     return arg1->field124;
 }
 

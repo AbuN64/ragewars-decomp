@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 
-void func_802567A4_de(void *arg0) {
-    (((struct MenuRules *) ((s8 *) arg0))->locked) = 0;
-    osCreateMesgQueue(arg0, arg0 + 0x18, 1);
+void func_802567A4_de(void *menuRules) {
+    (((struct MenuRules *) ((s8 *) menuRules))->locked) = 0;
+    osCreateMesgQueue(menuRules, menuRules + 0x18, 1);
 }

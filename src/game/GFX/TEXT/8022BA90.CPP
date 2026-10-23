@@ -185,8 +185,8 @@ extern void Render_ApplyPlayerDamage(HealingActor *, void *, s32, s32, s32);
 
 /* 43/47 words; remaining: the sum is tied to the recoveryTime load (add.s f0,f0,f1; limit in f1) where the target keeps
  * it untied in f2 (limit in f0); 12 source shapes (early return, +=, pointer, else-store, separate dt/limit locals) all tie. */
-void func_8022BE20_de(void *arg0, void *source) {
-    HealingActor *actor = arg0;
+void func_8022BE20_de(void *healingActor, void *source) {
+    HealingActor *actor = healingActor;
     f32 elapsed = actor->recoveryTime + D_800D2988;
     s32 missing;
     s32 amount;

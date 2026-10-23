@@ -115,8 +115,8 @@ extern void func_8026480C_de(void);
 
 /* Main game thread: brings up video and the overlays, clears the frame buffers, starts the menu and
    player state, then serves the scheduler's messages forever. */
-void func_80291404(void *arg0) {
-    GameSession *session = arg0;
+void func_80291404(void *gameSession) {
+    GameSession *session = gameSession;
     u32 i;
     s16 *msg;
 

@@ -30,7 +30,7 @@ extern void func_8028C370_de(Shared_World *world, s32 id);
 
 extern void func_80278E7C_de(Trigger *trigger);
 
-void func_80279198_de(int arg0, int arg1, void *arg2) {
+void func_80279198_de(int unused0, int unused1, void *arg2) {
     ObjRecAt6V1 *arg2_record = arg2;
     func_8025E260_de(arg2_record->unk6);
 }

@@ -14,21 +14,21 @@ extern Entry80294AC4 D_800CD788[];
 
 
 
-void func_80294AB0_de(void *arg0) {
-    void (*callback)(void *arg0);
+void func_80294AB0_de(void *gameSession) {
+    void (*callback)(void *gameSession);
     s32 index;
 
     if ((D_80142CA8 == 2) &&
-        (((struct GameSession *)arg0)->transitionBlocked == 0)) {
-        index = ((struct GameSession *)arg0)->target;
-        ((struct GameSession *)arg0)->transitionTime = 0;
-        ((struct GameSession *)arg0)->mode = index;
+        (((struct GameSession *)gameSession)->transitionBlocked == 0)) {
+        index = ((struct GameSession *)gameSession)->target;
+        ((struct GameSession *)gameSession)->transitionTime = 0;
+        ((struct GameSession *)gameSession)->mode = index;
         func_802456A0_de();
         func_8025E214_de(-1);
         func_80264854_de(0);
-        callback = D_800CD788[((struct GameSession *)arg0)->mode].callback;
+        callback = D_800CD788[((struct GameSession *)gameSession)->mode].callback;
         if (callback != 0) {
-            callback(arg0);
+            callback(gameSession);
         }
     }
 }

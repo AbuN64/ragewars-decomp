@@ -27,15 +27,15 @@ extern void func_80256688_de(s32, CartridgeReadRequest *);
 
 
 
-void func_8025651C_us_rev1(s32 arg0) {
+void func_8025651C_us_rev1(s32 cartridgeReadWorker) {
     struct OSTimer_s timer;
     struct CartridgeReadRequest *request;
     void *done;
 
     for (;;) {
-        func_802BB2A0_de(&((struct CartridgeReadWorker *)(arg0))->requestQueueStorage, &request, 1);
+        func_802BB2A0_de(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, &request, 1);
         if (request == (struct CartridgeReadRequest *)0xBEEFDEAD) {
-            func_802BB6C0_de(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(arg0))->requestQueueStorage, (void *)0xDEADBEEF);
+            func_802BB6C0_de(&timer, 0, 0x393870, &((struct CartridgeReadWorker *)(cartridgeReadWorker))->requestQueueStorage, (void *)0xDEADBEEF);
         } else if (request == (struct CartridgeReadRequest *)0xDEADBEEF) {
             if (func_802955C8_us_rev1() != 0) {
                 func_802AF990_us_rev1();
@@ -43,12 +43,12 @@ void func_8025651C_us_rev1(s32 arg0) {
         } else {
             func_802BD280_de(request->buffer, request->size);
             func_802B9A40_de(0, request->devAddr, request->buffer, request->size);
-            func_802BB2A0_de(&((struct CartridgeReadWorker *)(arg0))->completionQueueStorage, &done, 1);
+            func_802BB2A0_de(&((struct CartridgeReadWorker *)(cartridgeReadWorker))->completionQueueStorage, &done, 1);
             func_802BCF70_de(request->buffer, request->size);
             if (request->replyQueue != 0) {
                 func_802BB420_de(request->replyQueue, request->replyMsg, 1);
             }
-            func_80256688_de(arg0, request);
+            func_80256688_de(cartridgeReadWorker, request);
         }
     }
 }
