@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RESOURCELOCKSTATE.H"
+#include "SCENE/802508E0.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "SCENE/802508E0_2.H"

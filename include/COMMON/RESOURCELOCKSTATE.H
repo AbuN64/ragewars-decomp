@@ -30,10 +30,6 @@ typedef struct NodePair80253E04 NodePair80253E04;
 extern int D_80101108;
 
 struct NodePair80253E04;
-struct NodePair80253E04 {
-    Node80253610 *first;
-    Node80253610 *second;
-};
 
 extern int func_802547AC_de(void);
 
@@ -46,10 +42,4 @@ struct func_8025398C_S1 {
     char unkB98;
 };
 
-/* Resource manager slot and its wait queue (D_801005A8 / D_80101140). */
-typedef struct ResourceLockState {
-    s32 slot;
-    u8 reserved4[0xB98 - 4];
-    OSMesgQueue waitQueue;
-} ResourceLockState;
 #endif

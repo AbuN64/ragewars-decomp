@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SCENERECAT10C0.H"
+#include "SCENE/80286050.H"
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 

@@ -9,17 +9,6 @@ typedef struct FloorCell {
     u32 count;
 } FloorCell;
 
-typedef struct FloorGrid {
-    s32 stride;
-    s32 cellCount;
-    FloorCell cells[0];
-} FloorGrid;
 
-/* Counted polygon records in model resource section 2. */
-typedef struct FloorPolygonTable {
-    s32 stride;
-    s32 count;
-    Node75 polygons[1];
-} FloorPolygonTable;
 
 #endif

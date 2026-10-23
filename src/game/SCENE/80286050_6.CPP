@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/SCENERECAT10C0.H"
+#include "SCENE/80286050.H"
 #include "gbi.h"
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"

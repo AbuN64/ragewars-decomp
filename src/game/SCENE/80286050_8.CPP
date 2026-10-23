@@ -5,6 +5,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "COMMON/SCENERECAT10C0.H"
+#include "SCENE/80286050.H"
 #include "TYPES.H"
 #include "gbi.h"
 #include "SCENE/80286050_8.H"

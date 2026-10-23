@@ -1,5 +1,6 @@
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/MANAGER.H"
+#include "SCENE/802508E0.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
 #include "COMMON/EXTERNS_10.H"
 #include "COMMON/ARG.H"

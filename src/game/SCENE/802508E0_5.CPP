@@ -1,4 +1,5 @@
 #include "COMMON/MANAGER.H"
+#include "SCENE/802508E0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/S1.H"
 #include "COMMON/EXTERNS_18.H"

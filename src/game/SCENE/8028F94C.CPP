@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/WORLDSORTENTRY.H"
+#include "SCENE/8028F94C.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"

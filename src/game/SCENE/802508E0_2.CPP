@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/MANAGER.H"
+#include "SCENE/802508E0.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"

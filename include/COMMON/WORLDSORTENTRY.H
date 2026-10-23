@@ -267,10 +267,6 @@ struct Node_func_8028FC10_de;
 typedef struct Node_func_8028FC10_de Node_func_8028FC10_de;
 
 struct ObjRecAt78V2;
-struct ObjRecAt78V2 {
-    char pad0[0x78];
-    char unk78;
-};
 
 struct func_8028E6D8_S2;
 typedef struct func_8028E6D8_S2 func_8028E6D8_S2;

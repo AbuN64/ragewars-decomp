@@ -6,6 +6,7 @@
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_11.H"
 #include "COMMON/MANAGER.H"
+#include "SCENE/802508E0.H"
 #include "SCENE/802508E0_2.H"
 #include "sdk/os.h"
 

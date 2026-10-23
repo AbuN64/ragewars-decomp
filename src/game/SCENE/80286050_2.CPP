@@ -1,4 +1,5 @@
 #include "COMMON/SCENERECAT10C0.H"
+#include "SCENE/80286050.H"
 #include "TYPES.H"
 
 /* Collects up to sixteen switch objects (descriptor type 0xD) of a world into its switch list, first syncing each one's flag 4 with the switch table D_800E4680 when its kind is 0xD34 to 0xD37: model 0xD2B follows table byte 1, models 0xD2C to 0xD2E follow their own table byte, and any other model clears the flag; the flag is set when the byte is zero. */

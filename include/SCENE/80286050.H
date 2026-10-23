@@ -1,5 +1,62 @@
 #ifndef SCENE_80286050_H
 #define SCENE_80286050_H
 #include "COMMON/INTEGERSTATEB0.H"
+#include "COMMON/FLOOR_RESOURCE.H"
+#include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SCENERECAT10C0.H"
+typedef struct FloorGrid {
+    s32 stride;
+    s32 cellCount;
+    FloorCell cells[0];
+} FloorGrid;
+/* Counted polygon records in model resource section 2. */
+typedef struct FloorPolygonTable {
+    s32 stride;
+    s32 count;
+    Node75 polygons[1];
+} FloorPolygonTable;
+struct Object_func_80288EA8_de {
+    char pad0[0xD8];
+    u16 flags;
+};
+struct WorldRecAt1B660 {
+    char pad0[0x138];
+    struct ObjectRecAt18 *objects;
+    s32 pad13C;
+    s32 count;
+    char pad144[0x1B620 - 0x144];
+    ObjectRecAt18 *switches[16];
+    s32 switchCount;
+};
+struct Entity {
+    char pad0[0xF];
+    unsigned char flag;
+    char pad10[3];
+    unsigned char index;
+};
+struct GlobalMode {
+    char pad[0x1295];
+    u8 mode;
+};
+struct ObjectLinks74 {
+    unsigned char padding_0[112];
+    void *unk_70;
+};
+typedef struct DraftStreamTable {
+    s32 stride, count;
+    union { f32 coordinates[1]; DraftStreamCell cells[1]; } data;
+} DraftStreamTable;
+typedef struct DraftStreamWorld {
+    char pad0[0x30]; s32 key;
+    char pad34[0xC]; s32 resourceKey;
+    char pad44[0x20]; void *table, *grid;
+    char pad6C[0x20]; void *specialTable;
+    char pad90[0x1470]; s32 entryCount, activeCount;
+    DraftStreamEntry entries[128];
+    char pad1B08[0x19BA8]; DraftStreamHandle *special;
+    char specialState[0x25C];
+    f32 originX, originZ, cellX, cellZ;
+    char pad1B920[8]; s32 specialPresent, specialEnabled;
+} DraftStreamWorld;
 extern void func_80286080_de(void *arg0);
 #endif

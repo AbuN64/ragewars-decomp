@@ -5,15 +5,6 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 
 struct Manager;
-struct Manager {
-    char queue[0x92C];
-    IntrusiveList pending;
-    IntrusiveList active;
-    char padActive[0x20 - sizeof(IntrusiveList)];
-    char lock[0x18];
-    char unk978[0x24];
-    s32 mask;
-};
 
 extern int D_801005A0[];
 
@@ -108,10 +99,6 @@ struct Request_func_802524B0_de;
 typedef struct Request_func_802524B0_de Request_func_802524B0_de;
 
 struct ObjectState13;
-struct ObjectState13 {
-    unsigned char padding_0[18];
-    signed char unk_12;
-};
 
 struct Manager;
 
@@ -132,15 +119,6 @@ struct Request_func_802524B0_de {
 };
 
 struct Owner_func_80250C84_de;
-struct Owner_func_80250C84_de {
-    char pad0[0x20];
-    s32 field20;
-    char pad24[4];
-    char transform[0xA8];
-    s32 flagsD0;
-    char padD4[6];
-    u8 colorFrame;
-};
 
 struct ResourceCacheEntry;
 typedef struct ResourceCacheEntry ResourceCacheEntry;
@@ -188,12 +166,6 @@ struct ObjectLinksDC;
 typedef struct ObjectLinksDC ObjectLinksDC;
 
 struct ObjectLinksDC;
-struct ObjectLinksDC {
-    char pad0[0x18];
-    char * unk_18;
-    char pad18[0xD8 - 0x18 - sizeof(char*)];
-    unsigned short unk_D8;
-};
 
 struct ResourceHashEntry;
 typedef struct ResourceHashEntry ResourceHashEntry;
@@ -209,12 +181,6 @@ struct ResourceLoadRequest;
 typedef struct ResourceLoadRequest ResourceLoadRequest;
 
 struct Shape_func_802BC570_de;
-struct Shape_func_802BC570_de {
-    int field_0;
-    int field_4;
-    int field_8;
-    int field_C;
-};
 
 struct ResourceLoadRequest;
 
@@ -225,33 +191,6 @@ typedef struct func_80250D88_S1 func_80250D88_S1;
 
 
 
-/* Shared object layout established by resource-binding consumers. */
-struct ResourceBinding {
-    u8 padding000[1];
-    s8 variant; /* 0x01 */
-    u8 padding002[0x1E];
-    s32 *resource; /* 0x20: loaded resource descriptor */
-    u8 padding024[4];
-    u8 transform[0x8C]; /* 0x28 */
-    void *loadedResource; /* 0xB4 */
-    u8 runtimeState[0x18]; /* 0xB8 */
-    s32 registrationFlags; /* 0xD0 */
-    u8 padding0D4[4];
-    u16 status; /* 0xD8 */
-    u8 colorFrame; /* 0xDA */
-};
 
-typedef struct State802532E4 {
-    s32 active;
-    s32 count;
-} State802532E4;
 
-/* Actor resource fade selects the near/far value using its frame threshold. */
-struct ResourceFadeDefinition {
-    u8 reserved0[0xE];
-    s8 nearValue; /* 0xE */
-    s8 farValue; /* 0xF */
-    u8 reserved10[0x14];
-    u32 threshold; /* 0x24 */
-};
 #endif

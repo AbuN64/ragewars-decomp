@@ -40,10 +40,6 @@ struct BankRecAt94;
 typedef struct BankRecAt94 BankRecAt94;
 
 struct Object_func_80288EA8_de;
-struct Object_func_80288EA8_de {
-    char pad0[0xD8];
-    u16 flags;
-};
 
 struct DescriptorRecAt20;
 typedef struct DescriptorRecAt20 DescriptorRecAt20;
@@ -81,15 +77,6 @@ typedef struct ObjectRecAt18 ObjectRecAt18;
 
 struct ObjectRecAt18;
 struct WorldRecAt1B660;
-struct WorldRecAt1B660 {
-    char pad0[0x138];
-    struct ObjectRecAt18 *objects;
-    s32 pad13C;
-    s32 count;
-    char pad144[0x1B620 - 0x144];
-    ObjectRecAt18 *switches[16];
-    s32 switchCount;
-};
 
 struct func_8028B370_S0;
 struct func_8028B370_S0 {
@@ -101,12 +88,6 @@ struct func_8028B238_S1;
 typedef struct func_8028B238_S1 func_8028B238_S1;
 
 struct Entity;
-struct Entity {
-    char pad0[0xF];
-    unsigned char flag;
-    char pad10[3];
-    unsigned char index;
-};
 
 struct func_8028AFE8_S1;
 struct func_8028AFE8_S1 {
@@ -118,19 +99,11 @@ struct func_8028AFE8_S1;
 typedef struct func_8028AFE8_S1 func_8028AFE8_S1;
 
 struct GlobalMode;
-struct GlobalMode {
-    char pad[0x1295];
-    u8 mode;
-};
 
 struct Object_func_80288EA8_de;
 typedef struct Object_func_80288EA8_de Object_func_80288EA8_de;
 
 struct ObjectLinks74;
-struct ObjectLinks74 {
-    unsigned char padding_0[112];
-    void *unk_70;
-};
 
 struct func_8028B1F8_S2;
 typedef struct func_8028B1F8_S2 func_8028B1F8_S2;
@@ -213,19 +186,9 @@ typedef struct Object_func_8028B274_de Object_func_8028B274_de;
 struct func_8028B1F8_S1;
 typedef struct func_8028B1F8_S1 func_8028B1F8_S1;
 
-typedef struct Bounds37 { f32 minX,minY,minZ,maxX,maxY,maxZ; } Bounds37;
-typedef struct Item37 { u8 pad0[0xA0]; Bounds37 bounds; u8 padB8[8]; } Item37;
-typedef struct Items37 { s32 stride, count; Item37 items[1]; } Items37;
 typedef struct Bounds2D37 { f32 minX,minZ,maxX,maxZ; } Bounds2D37;
-typedef struct Resource37 { void *data; } Resource37;
-typedef struct Region37 { Resource37 *resource; Bounds2D37 *bounds; s32 flags; } Region37;
-typedef struct World37 { u8 pad0[0x1504]; s32 count; Region37 regions[1]; } World37;
 
 typedef struct DraftStreamCell { f32 minX, minZ, maxX, maxZ; s32 occupied; } DraftStreamCell;
-typedef struct DraftStreamTable {
-    s32 stride, count;
-    union { f32 coordinates[1]; DraftStreamCell cells[1]; } data;
-} DraftStreamTable;
 typedef struct DraftStreamData { s32 count; } DraftStreamData;
 typedef struct DraftStreamHandle { DraftStreamData *data; } DraftStreamHandle;
 typedef struct DraftStreamEntry {
@@ -236,18 +199,6 @@ typedef struct DraftStreamViewer {
     char pad8[0x120]; CVector3 position;
     char pad134[0x234]; CVector3 minimum, maximum;
 } DraftStreamViewer;
-typedef struct DraftStreamWorld {
-    char pad0[0x30]; s32 key;
-    char pad34[0xC]; s32 resourceKey;
-    char pad44[0x20]; void *table, *grid;
-    char pad6C[0x20]; void *specialTable;
-    char pad90[0x1470]; s32 entryCount, activeCount;
-    DraftStreamEntry entries[128];
-    char pad1B08[0x19BA8]; DraftStreamHandle *special;
-    char specialState[0x25C];
-    f32 originX, originZ, cellX, cellZ;
-    char pad1B920[8]; s32 specialPresent, specialEnabled;
-} DraftStreamWorld;
 typedef struct DraftStreamPair { f32 first, second; } DraftStreamPair;
 extern DraftStreamPair D_800FF200;
 extern char D_800C5220_de[];

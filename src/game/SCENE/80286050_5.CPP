@@ -7,6 +7,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/SCENERECAT10C0.H"
+#include "SCENE/80286050.H"
 #include "SCENE/802508E0_4.H"
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
