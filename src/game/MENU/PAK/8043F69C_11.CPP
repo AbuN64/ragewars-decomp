@@ -95,18 +95,38 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
 
 #ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
-#define PD_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-typedef struct PakVec { f32 x; f32 y; f32 z; } PakVec;
-typedef struct Copy188 { s32 words[98]; } Copy188;
-extern u32 *D_80110634;
+#include "COMMON/OBJECTRECAT28.H"
+#include "gbi.h"
+typedef struct PakModelDefinition {
+    s32 kind, model, variant;
+    CVector3 offset, scale;
+    u8 reserved24[8];
+    f32 rotationSpeed;
+} PakModelDefinition;
+typedef struct PakModelEntry {
+    u8 reserved0[8];
+    u32 flags;
+    u8 reservedC[8];
+    PakModelDefinition *definition;
+    u8 reserved18[8];
+    StateRecAt47C *state;
+} PakModelEntry;
+typedef struct PakModelContext {
+    s16 selection;
+    u8 reserved2[0x2E];
+    f32 fade, alpha;
+    u8 reserved38[8];
+    MenuModelScreen *screen;
+} PakModelContext;
+extern Gfx *D_80110634;
 extern s32 D_800D297C, D_800E28D0, D_800E28D4, D_800E1E20, D_800CD730, D_800CD8D0, D_8014DE50;
 extern f32 D_800DE480_de, D_800DE484, D_800DE488, D_800DE498_de[], D_800DE4A0, literals_func_8028D244_de;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
 extern void func_802A001C_de(void *, s32, s32);
 extern u8 *func_8028CFA0_de(void *, s32, s32);
-extern void func_80272898_de(void *, PakVec *, PakVec *);
-extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, PakVec, s32, PakVec, PakVec, s32);
+extern void func_80272898_de(void *, CVector3 *, CVector3 *);
+extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de(u8 *);
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(s32);
@@ -116,107 +136,110 @@ extern void func_80246E44_de(u8 *);
 extern void func_8026D980_de(u8 *, u8 *);
 extern void func_80249E28_de();
 extern void func_8026D9D0_de();
-void func_80440838_de(u8 *self, s32 *selected, void *unused, u8 *ctx) {
-    PakVec zero50;
-    PakVec scaled;
-    PakVec offset;
-    PakVec placed;
-    u8 *widget;
-    u8 *def;
-    u8 *draw;
-    u8 *link = 0;
-    u8 *owner;
-    u8 *source;
-    u32 *list;
+static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
+    StateRecAt47C *owner = entry->state;
+    PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&D_8011FE88, id, variant);
+    if (source == 0) {
+        owner->active = 0;
+        return 0;
+    }
+    owner->selection = id;
+    owner->active = 1;
+    owner->model = *source;
+    owner->model.x = 0.0f;
+    owner->model.y = 0.0f;
+    owner->model.dx = 0.0f;
+    owner->model.dy = 0.0f;
+    owner->model.dz = 0.0f;
+    owner->model.depth = D_800DE480_de;
+    owner->size = owner->model.size;
+    return &owner->model;
+}
+/* 18/346 aligned edits; remaining: opacity float registers and final screen-load scheduling. */
+void Pak_DrawMenuModel(PakModelEntry *entry, s32 *selected, void *unused, PakModelContext *context) {
+    CVector3 zero;
+    CVector3 offset;
+    CVector3 placed;
+    CVector3 scaled;
+    StateRecAt47C *widget, *selectedWidget;
+    PakModelDefinition *def;
+    LevelActor *draw;
+    PreviewWidget *link;
     f32 ratioX;
     f32 ratioY;
-    f32 wobble;
-    s32 id;
-    func_802A001C_de(&zero50, 0, 0xC);
-    widget = PD_FIELD(self, u8 *, 0x20);
-    if (widget == 0 || PD_FIELD(widget, s32, 0x478) == 0) {
-        return;
+    f32 wobble, opacity;
+    func_802A001C_de(&zero, 0, 0xC);
+    selectedWidget = entry->state;
+    if (selectedWidget == 0) return;
+    widget = selectedWidget;
+    def = entry->definition;
+    draw = &widget->actor;
+    if (widget->active == 0) return;
+    gSPMatrix(D_80110634++, &context->screen->matrices[D_800D297C], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
+    {
+        MenuModelScreen *screen = context->screen;
+        ratioX = screen->width / (f32)D_800E28D0;
+        ratioY = screen->height;
+        scaled.x = def->scale.x * ratioX;
+        scaled.z = def->scale.z * ratioX;
+        ratioY /= (f32)D_800E28D4;
+        scaled.y = def->scale.y * ratioY;
     }
-    def = PD_FIELD(self, u8 *, 0x14);
-    draw = widget + 0x190;
-    list = D_80110634;
-    list[0] = 0xDA380007;
-    list[1] = PD_FIELD(ctx, u32, 0x40) + 0x380 + D_800D297C * 64;
-    ratioX = PD_FIELD(PD_FIELD(ctx, u8 *, 0x40), f32, 0x29C) / (f32)D_800E28D0;
-    scaled.x = PD_FIELD(def, f32, 0x18) * ratioX;
-    scaled.z = PD_FIELD(def, f32, 0x20) * ratioX;
-    ratioY = PD_FIELD(PD_FIELD(ctx, u8 *, 0x40), f32, 0x2A0) / (f32)D_800E28D4;
-    scaled.y = PD_FIELD(def, f32, 0x1C) * ratioY;
-    D_80110634 = list + 2;
-    PD_FIELD(widget, f32, 0x47C) = PD_FIELD(widget, f32, 0xF8);
-    if (!(PD_FIELD(self, u32, 8) & 0x2000000)) {
-        id = PD_FIELD(def, s32, 4);
-        owner = PD_FIELD(self, u8 *, 0x20);
-        source = func_8028CFA0_de(&D_8011FE88, id, PD_FIELD(def, s32, 8));
-        if (source != 0) {
-            PD_FIELD(owner, s32, 0) = id;
-            PD_FIELD(owner, s32, 0x478) = 1;
-            *(Copy188 *)(owner + 4) = *(Copy188 *)source;
-            PD_FIELD(owner, s32, 4) = 0;
-            PD_FIELD(owner, s32, 8) = 0;
-            PD_FIELD(owner, s32, 0x18) = 0;
-            PD_FIELD(owner, s32, 0x1C) = 0;
-            PD_FIELD(owner, s32, 0x20) = 0;
-            PD_FIELD(owner, f32, 0xC) = D_800DE480_de;
-            PD_FIELD(owner, f32, 0x47C) = PD_FIELD(owner, f32, 0xF8);
-            link = owner + 4;
-        } else {
-            PD_FIELD(owner, s32, 0x478) = 0;
-        }
+    widget->size = widget->model.size;
+    link = 0;
+    if (!(entry->flags & 0x2000000)) {
+        link = pakLoadModel(entry, def->model, def->variant);
     }
-    offset = PD_FIELD(def, PakVec, 0xC);
-    offset.y = offset.y - PD_FIELD(widget, f32, 0x47C) * scaled.y * D_800DE484;
-    func_80272898_de(PD_FIELD(ctx, u8 *, 0x40) + 0x160, &offset, &placed);
-    if (link != 0 && !(PD_FIELD(self, u32, 8) & 0x2000000)) {
-        func_802466A0_de(draw, -1, PD_FIELD(def, s32, 0), D_800CD8D0, link, -1, 0,
-                         PD_FIELD(PD_FIELD(ctx, u8 *, 0x40), f32, 0x28) + D_800DE488, placed, 0,
-                         PD_FIELD(def, PakVec, 0x18), zero50, 0);
+    offset = def->offset;
+    offset.y = offset.y - widget->size * scaled.y * D_800DE484;
+    func_80272898_de(&context->screen->camera, &offset, &placed);
+    if (link != 0 && !(entry->flags & 0x2000000)) {
+        func_802466A0_de(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
+                         context->screen->heading + D_800DE488, placed, 0,
+                         def->scale, zero, 0);
         func_8024B2D0_de(draw);
-        PD_FIELD(self, u32, 8) |= 0x2000000;
+        entry->flags |= 0x2000000;
     }
-    wobble = func_802B7130_de((f32)(u32)(D_800CD730 * 10) * D_800DE498_de[0]);
-    D_8014DE50 = (s32)(PD_FIELD(ctx, f32, 0x30) * PD_FIELD(ctx, f32, 0x34) * ((wobble + D_800DE498_de[1]) * D_800DE4A0 + D_800DE4A0));
-    PD_FIELD(draw, u8 *, 0x27C) = PD_FIELD(ctx, s16, 0) == selected[0] ? D_00443128 : D_00443104;
+    wobble = func_802B7130_de((f32)(u32)((u32)D_800CD730 * 10U) * D_800DE498_de[0]);
+    wobble += 1.0f;
+    opacity = context->fade;
+    opacity *= context->alpha;
+    wobble = wobble * D_800DE4A0 + D_800DE4A0;
+    D_8014DE50 = (s32)(opacity * wobble);
+    if (context->selection == selected[0]) {
+        draw->update = D_00443128;
+    } else {
+        draw->update = D_00443104;
+    }
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    if (PD_FIELD(widget, s32, 0) == 0xB) {
-        func_8028B274_de(&D_8011FE88, draw, D_800CE430[PD_FIELD(PD_FIELD(draw, u8 *, 0x18), s16, 0xC)], 1);
+    if (widget->selection == 0xB) {
+        func_8028B274_de(&D_8011FE88, draw, D_800CE430[draw->definition->character], 1);
     }
     if (D_800E1E20 != 4) {
         D_800E1E20 = 4;
-        list = D_80110634;
-        list[0] = 0xE7000000;
-        list[1] = 0;
-        list[2] = 0xE3000A01;
-        list[3] = 0x100000;
-        list[4] = 0xE3000C00;
-        list[5] = 0x80000;
-        list[6] = 0xE3001201;
-        list[7] = 0x2000;
-        D_80110634 = list + 8;
+        gDPPipeSync(D_80110634++);
+        gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
+        gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
+        gDPSetTextureFilter(D_80110634++, G_TF_BILERP);
     }
-    PD_FIELD(draw, PakVec, 0x50) = scaled;
-    PD_FIELD(draw, PakVec, 8) = placed;
-    PD_FIELD(draw, PakVec, 0x1C4) = placed;
+    draw->scale = scaled;
+    draw->position0 = placed;
+    draw->referencePosition = placed;
     func_8024B8C4_de(draw);
-    PD_FIELD(draw, PakVec, 8) = placed;
-    PD_FIELD(draw, PakVec, 0x1C4) = placed;
+    draw->position0 = placed;
+    draw->referencePosition = placed;
     func_80246E44_de(draw);
-    PD_FIELD(draw, f32, 0x6C) = PD_FIELD(draw, f32, 0x6C) + PD_FIELD(def, f32, 0x2C) * literals_func_8028D244_de;
-    PD_FIELD(draw, PakVec, 8) = placed;
-    PD_FIELD(draw, PakVec, 0x1C4) = placed;
-    func_8026D980_de(draw, PD_FIELD(ctx, u8 *, 0x40));
+    draw->yaw = draw->yaw + def->rotationSpeed * literals_func_8028D244_de;
+    draw->position0 = placed;
+    draw->referencePosition = placed;
+    func_8026D980_de(draw, context->screen);
     func_80249E28_de(draw);
     func_8026D9D0_de();
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80440838_de);
+INCLUDE_ASM("ovl_80400000", Pak_DrawMenuModel);
 #endif
 
 #ifdef NON_MATCHING

@@ -69,7 +69,8 @@ struct LevelActor {
     f32 motionThreshold; /* 0x1B0 */
     u8 pad1B4[4];
     CVector3 aimPosition; /* 0x1B8 */
-    u8 pad1C4[0x14];
+    CVector3 referencePosition; /* 0x1C4: reset alongside position0 for menu rendering */
+    u8 pad1D0[8];
     void *controller; /* 0x1D8: linked actor */
     u8 pad1DC[0x14];
     char *lockOn; /* 0x1F0 */

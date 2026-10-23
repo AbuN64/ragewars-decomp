@@ -64,7 +64,9 @@ struct State_func_80439B5C_de {
 
 struct MenuModelScreen;
 struct MenuModelScreen {
-    char p0[0x160];
+    char p0[0x28];
+    f32 heading;
+    char p2C[0x160 - 0x2C];
     Matrix camera;
     char p1[0x29C-0x1A0];
     f32 width;

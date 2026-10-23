@@ -1,6 +1,7 @@
 #ifndef COMMON_TEXTLAYERMETRICS_H
 #define COMMON_TEXTLAYERMETRICS_H
 #include "TYPES.H"
+#include "COMMON/LEVEL_ACTOR.H"
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char D_800EED80[];
 #endif
@@ -146,7 +147,8 @@ struct StateRecAt47C;
 struct StateRecAt47C {
     int selection;
     PreviewWidget model;
-    char pad18c[0x2EC];
+    s32 reserved18C;
+    LevelActor actor; /* 0x190 */
     int active;
     float size;
 };
