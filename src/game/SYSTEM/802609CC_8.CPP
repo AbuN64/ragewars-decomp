@@ -8,7 +8,7 @@
 #include "COMMON/EXTERNS_14.H"
 #include "COMMON/MTX.H"
 #include "TYPES.H"
-#include "particle/80246E34_2.H"
+#include "ENGINE/INSTANCE/GOBJINST_4.H"
 #include "GAME/CODE_8027302C.H"
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM/8025E5B0_9.H"

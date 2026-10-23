@@ -4,7 +4,7 @@
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/OSTASK_T.H"
-#include "AUDIO_3/802BF0C0.H"
+#include "sdk/libultra/io/sprawdma.H"
 #include "AUDIO_3/802BF1C0.H"
 #include "AUDIO_3/802BF1F0.H"
 #include "sdk/libgultra/sp.h"

@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/EXTERNS_2.H"
-#include "AUDIO_3/802BEC10.H"
+#include "sdk/libultra/io/pirawread.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 

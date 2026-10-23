@@ -4,7 +4,7 @@
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
 #include "COMMON/OBJECTSTATE18.H"
-#include "SCENE/80286050_8.H"
+#include "ENGINE/SCENE_6.H"
 
 /* Releases the two handles at offsets 0x11BC and 0x11C0 of an object: each goes to func_8025CA24_de
    with what func_8025CC6C_de returns, and each is then cleared. */

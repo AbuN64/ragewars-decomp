@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "TYPES.H"
-#include "particle/8027A0F4_5.H"
+#include "ENGINE/PARTICLE.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 #include "RENDER_2/8025DE50_5.H"

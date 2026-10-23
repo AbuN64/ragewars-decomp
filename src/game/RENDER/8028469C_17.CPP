@@ -18,7 +18,7 @@
 #include "sdk/os.h"
 #include "RENDER/80263760_8.H"
 #include "SYSTEM/80255C40_7.H"
-#include "RENDER_4/8028B64C_6.H"
+#include "ENGINE/SCENE_12.H"
 
 
 static inline f32 distanceToNode(CVector3 from, func_80285880_S1 *node) {
@@ -71,7 +71,7 @@ INCLUDE_ASM("span_1000", func_80285634);
 
 #include "sdk/os.h"
 #include "RENDER/80263760_8.H"
-#include "RENDER_4/8028B64C_6.H"
+#include "ENGINE/SCENE_12.H"
 
 /* With interrupts masked, takes the first node of a pool's free list, moves it onto the pool's active list and initialises it with its key, position, two values and owner slot (storing the node there), then binds the two handles named by the key's identifiers, returning the node or null. */
 

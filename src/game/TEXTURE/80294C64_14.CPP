@@ -2,7 +2,7 @@
 #include "TYPES.H"
 #include "COMMON/TEXTURE_REQUEST.H"
 #include "COMMON/WORLD.H"
-#include "RENDER_4/8028B64C_4.H"
+#include "ENGINE/SCENE_10.H"
 #include "TEXTURE/80294C64_14.H"
 
 /** Store two words into a two-word value. */

@@ -16,7 +16,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESOURCELOADSTATE.H"
-#include "SCENE/80286050_8.H"
+#include "ENGINE/SCENE_6.H"
 #include "SCENE/802508E0_4.H"
 #include "RENDER_4/8028FD2C_6.H"
 #include "GFX/TEXT/8022BA90_2.H"

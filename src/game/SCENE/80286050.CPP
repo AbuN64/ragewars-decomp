@@ -14,8 +14,8 @@
 #include "ACHIEVE/80437C30_2.H"
 #include "RENDER_4/8028FD2C_11.H"
 #include "SCENE/80286050.H"
-#include "SCENE/80286050_4.H"
-#include "SCENE/80286050_5.H"
+#include "ENGINE/SCENE_2.H"
+#include "ENGINE/SCENE_3.H"
 #include "WEAPONS/80225D10_5.H"
 #include "RENDER_4/8028FD2C_6.H"
 

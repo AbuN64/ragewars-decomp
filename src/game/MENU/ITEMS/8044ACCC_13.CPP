@@ -11,7 +11,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "TYPES.H"
-#include "particle/80246E34_8.H"
+#include "ENGINE/INSTANCE/GOBJINST_10.H"
 #include "particle/8024D018_4.H"
 #include "WEAPONS/80213ED4_22.H"
 #include "SCENE/802508E0_4.H"

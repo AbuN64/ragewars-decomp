@@ -58,7 +58,7 @@
 #include "COMMON/OBJB.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_3.H"
-#include "AUDIO_3/802BEC10.H"
+#include "sdk/libultra/io/pirawread.H"
 #include "AUDIO_3/802BEE60.H"
 #include "AUDIO_3/802BFF30.H"
 #include "SCHED/8023A284_16.H"
