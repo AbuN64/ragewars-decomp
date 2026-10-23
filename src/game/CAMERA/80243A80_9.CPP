@@ -7,10 +7,10 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 
-/* Calls func_80401980_de when the globally selected record's word at 0x38 is non-zero. */
+/* Calls Menu_UpdateTrackCamera when the globally selected record's word at 0x38 is non-zero. */
 
 
-extern void func_80401980_de(void);
+extern void Menu_UpdateTrackCamera(void);
 
 /* Calls func_80402BA0_de when the globally selected record's word at 0x38 is non-zero. */
 
@@ -70,7 +70,7 @@ unsigned int func_80245850_de(void) {
 void func_80245864_de(void) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
-        func_80401980_de();
+        Menu_UpdateTrackCamera();
     }
 }
 
