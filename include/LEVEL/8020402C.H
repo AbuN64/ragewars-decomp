@@ -1,6 +1,11 @@
 #ifndef LEVEL_8020402C_H
 #define LEVEL_8020402C_H
 #include "COMMON/OBJRECAT30.H"
+#include "COMMON/VECTOR4F.H"
+struct ObjRecAt30 {
+    char pad0[0x30];
+    Hook * unk30;
+};
 extern void func_80204728_de(void *arg0, void *arg1);
 extern void func_802043E0_de(char *arg0, char *arg1);
 extern void func_802047D8_de(struct Trigger *arg0);

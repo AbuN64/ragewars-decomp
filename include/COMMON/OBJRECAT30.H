@@ -6,10 +6,6 @@
 struct Trigger;
 
 struct ObjRecAt30;
-struct ObjRecAt30 {
-    char pad0[0x30];
-    Hook * unk30;
-};
 
 struct func_80204620_S2;
 typedef struct func_80204620_S2 func_80204620_S2;
