@@ -566,24 +566,6 @@ static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
     }
     return 0;
 }
-static inline NavigationSearchNode *navChooseOpenNode(CNavData *graph, s32 status, f32 initial, f32 sentinel) {
-    NavigationSearchNode *node = graph->nodes, *best = 0;
-    f32 minimum = initial;
-    while (node) {
-        if (node->open == status) {
-            if (node->total < minimum) {
-                best = node;
-                minimum = node->total;
-            } else if (minimum == sentinel) {
-                best = node;
-                minimum = node->total;
-            }
-        }
-        node = node->next;
-    }
-    if (best) best->open = 0;
-    return best;
-}
 static inline NavigationSearchNode *navFindNode(CNavData *graph, s32 key) {
     NavigationSearchNode *node = graph->nodes;
     while (node) {
@@ -594,7 +576,7 @@ static inline NavigationSearchNode *navFindNode(CNavData *graph, s32 key) {
 }
 static inline s32 navCollectNeighbors(CNavData *graph, NavigationSearchNode *node,s32 *out,s32 *ids) {
     s32 key = node->key, index = 0, count = 0;
-    s32 *neighborOut = out, *portalOut = ids;
+    s32 *portalOut = ids, *neighborOut = out;
     NavigationBuffer *links;
     NavigationPortal *portal;
         if (graph->m_nNavLinks > 0) {
@@ -621,17 +603,7 @@ static inline s32 navCollectNeighbors(CNavData *graph, NavigationSearchNode *nod
         }
     return count;
 }
-static inline s32 navReversible(s32 kind) {
-    switch (kind) {
-        case 1:
-        case 4:
-        case 7:
-            return 1;
-        default:
-            return 0;
-    }
-}
-/* 195/253 aligned words; remaining: open-list and neighbor-loop register allocation. */
+/* 250/253 words (32 aligned edits); remaining: loop.c hoists 0.0f out of the outer loop (f20/f21 swap), the -1 fill constant and the neighbor-collect setup order; the 10/11 skips fill no likely slots. */
 void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     s32 neighbors[64];
     s32 portals[64];
@@ -661,6 +633,9 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     s32 kind;
     NavigationPortal *portal;
     NavigationSearchNode *current;
+    NavigationSearchNode *node;
+    NavigationSearchNode *best;
+    f32 minimum;
     NavigationSearchNode *nodeList;
     NavigationSearchNode *next;
 
@@ -672,9 +647,24 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     start->parent = 0;
     start->open=open;
     start->total = (start->cost + initialEstimate);
-search_next:
- if(navHasOpenNode(graph,open)){
- current=navChooseOpenNode(graph,open,D_800C1D84_de,sentinel);
+    while (navHasOpenNode(graph, open)) {
+        node = graph->nodes;
+        best = 0;
+        minimum = D_800C1D84_de;
+        while (node) {
+            if (node->open == open) {
+                if (node->total < minimum) {
+                    best = node;
+                    minimum = node->total;
+                } else if (minimum == sentinel) {
+                    best = node;
+                    minimum = node->total;
+                }
+            }
+            node = node->next;
+        }
+        if (best) best->open = 0;
+        current = best;
         pointTable = graph->points;
         currentKey = current->key;
         origin=navigationRecord(pointTable,currentKey);
@@ -684,7 +674,7 @@ search_next:
         }
         index = 0;
         portalOut=portals;
-        neighborOut=neighbors;
+        neighborOut=neighborBase;
         do {
             *neighborOut = -1;
             *portalOut = -1;
@@ -705,10 +695,19 @@ count=navCollectNeighbors(graph,current,neighbors,portals);
                 linkTable = graph->m_pusNavLinks;
                 portal=navigationRecord(linkTable,*(s32 *)((u8 *)portals + byteOffset));
                 kind = portal->kind;
-                reversible = navReversible(kind);
+                switch (kind) {
+                    case 1:
+                    case 4:
+                    case 7:
+                        reversible = 1;
+                        break;
+                    default:
+                        reversible = 0;
+                        break;
+                }
                 if ((reversible != 0) || (portal->first == current->key)) {
                     edgeKind = portal->kind;
-                    if ((edgeKind != 0xA) && (edgeKind != 0xB)) {
+                    if (edgeKind != 0xA) if (edgeKind != 0xB) {
                         if (edgeKind == 9) {
                             distance = 0.0f;
                         } else {
@@ -748,7 +747,6 @@ update_neighbor:
             } while (index < count);
         }
         current->open = 2;
-        goto search_next;
     }
 }
 #else
