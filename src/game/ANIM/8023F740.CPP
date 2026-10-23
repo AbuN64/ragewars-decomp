@@ -205,7 +205,7 @@ extern u8 D_801462C8[];
 extern char D_002405FC[], D_00240638[];
 extern void func_802852C0_de();
 extern void func_8023F644_de(void *, void *);
-void func_80240260_de(HitSelf *self) {
+void Anim_ProcessEntityContacts(HitSelf *self) {
     HitState *state = self->state;
     SortedCandidate list[0x20];
     u8 scratch[0x30];
@@ -271,7 +271,7 @@ void func_80240260_de(HitSelf *self) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80240260_de);
+INCLUDE_ASM("span_1000", Anim_ProcessEntityContacts);
 #endif
 
 #if defined(VERSION_US)

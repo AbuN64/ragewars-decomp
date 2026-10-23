@@ -96,7 +96,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     }
     if (object->distance != 0.0f) {
         if (*flags & 0x10000) {
-            func_80240260_de(object);
+            Anim_ProcessEntityContacts(object);
         }
         if (*flags & 0x4000) {
             func_80242BF0_de(object);
