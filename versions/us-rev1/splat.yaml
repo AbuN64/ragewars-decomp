@@ -5976,7 +5976,7 @@ segments:
       - [0xE2AF8, rodata, data_800C/D_d1_9dcf29fb4105728c]
       - [0xE2B08, rodata, data_800C/literals_func_8043577C_de]
       - [0xE2B1C, data, data_800C/D_blob_ab6839a05c1028537c00]
-      - [0xE2B20, rodata, data_800C/literals_func_80436044_de]
+      - [0xE2B20, rodata, data_800C/literals_Frontend_UpdateTimedScreen]
       - [0xE2B34, data, data_800C/D_d1_616d89d0ea61ab14]
       - [0xE2B40, rodata, data_800C/D_blob_8953d58d3c35985f217c]
       - [0xE2B44, rodata, data_800C/D_blob_83fae0a1897e2dffd396]

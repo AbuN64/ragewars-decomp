@@ -26,10 +26,7 @@ enum { MENU_80436224_979 = 983, MENU_80436224_981 = 985 };
 enum { MENU_80436224_979 = 979, MENU_80436224_981 = 981 };
 #endif
 
-s32 func_80436044_de(void) {
-    /* FAKEMATCH: preserve resident jump-table labels and recovered dispatch schedule. */
-    u32 setting;
-
+s32 Frontend_UpdateTimedScreen(void) {
     func_8029973C_de();
     switch (func_80299A08_de()) {
     case MENU_80436224_981:
@@ -40,29 +37,22 @@ s32 func_80436044_de(void) {
             func_8025E2D4_de(0x34);
         }
         func_802A2394_de();
-        setting = D_801462D5;
-        if (setting >= 5) {
-            goto timer_20;
+        switch (D_801462D5) {
+        case 1:
+            D_800E5554->locked = 10;
+            break;
+        case 2:
+            D_800E5554->locked = 15;
+            break;
+        case 3:
+        case 4:
+            D_800E5554->locked = 10;
+            break;
+        case 0:
+        default:
+            D_800E5554->locked = 20;
+            break;
         }
-        switch (setting) {
-        case 0: goto timer_20;
-        case 1: goto timer_10;
-        case 2: goto timer_15;
-        case 3: goto timer_10_again;
-        case 4: goto timer_10_again;
-        }
-    timer_10:
-        D_800E5554->locked = 10;
-        goto show;
-    timer_15:
-        D_800E5554->locked = 15;
-        goto show;
-    timer_10_again:
-        D_800E5554->locked = 10;
-        goto show;
-    timer_20:
-        D_800E5554->locked = 20;
-    show:
         func_8043C278_de(D_800E5554);
         return 0;
     }

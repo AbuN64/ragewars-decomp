@@ -1200,7 +1200,6 @@ literals_func_804322AC_de = 0x800E9610; // rom:0xEA210 size:0x98
 literals_func_80433398_de = 0x800E96A8; // rom:0xEA2A8 size:0x10
 literals_func_80433610_de = 0x800E96B8; // rom:0xEA2B8 size:0x38
 literals_func_8043577C_de = 0x800E9718; // rom:0xEA318 size:0x14
-literals_func_80436044_de = 0x800E9730; // rom:0xEA330 size:0x14
 literals_func_804395F8_de = 0x800E9780; // rom:0xEA380 size:0x10
 literals_func_804399D0 = 0x800E9794; // rom:0xEA394 size:0x4
 literals_func_80439D58_de = 0x800E97B0; // rom:0xEA3B0 size:0x14
