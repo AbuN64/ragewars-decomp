@@ -550,30 +550,25 @@ typedef struct SpeedParams { u32 flags; char pad4[0x20]; SpeedCurve *curve; } Sp
  * between the curve's low and high values, then the result is blended with the field at 0x6C of the third argument. */
 f32 func_80284090_de(void *arg0, f32 speed, void *arg2) {
     SpeedParams *params = *(SpeedParams **)((char *)arg0 + 0x118);
-    f32 base;
     f32 over;
     f32 ramp;
     f32 mix;
+    f32 scaled;
     if (params->flags & 4) {
         over = speed - D_800C4E68_de;
-        if (over < 0.0f) {
-            ramp = 0.0f;
-        } else {
-            ramp = over * D_800C4E6C_de;
-            if (D_800C4E70_de < ramp) {
-                ramp = D_800C4E70_de;
-            } else if (over < 0.0f) {
-                ramp = 0.0f;
-            } else {
-                ramp = over * D_800C4E74_de;
-            }
-        }
-        base = speed * (params->curve->low + (params->curve->high - params->curve->low) * ramp) * D_800C4E78_de;
+        if (!(over < 0.0f)) {
+            scaled = over * D_800C4E6C_de;
+            if (!(scaled > D_800C4E70_de)) {
+                if (!(over < 0.0f)) ramp = over * D_800C4E74_de;
+                else ramp = 0.0f;
+            } else ramp = D_800C4E70_de;
+        } else ramp = 0.0f;
+        speed = speed * (params->curve->low + (params->curve->high - params->curve->low) * ramp) * D_800C4E78_de;
     } else {
-        base = D_800C4E7C_de;
+        speed = D_800C4E7C_de;
     }
     mix = *(f32 *)((char *)arg2 + 0x6C);
-    return base * D_800C4E88_de * (mix + (D_800C4E80_de - mix) * D_800C4E84_de);
+    return speed * D_800C4E88_de * (mix + (D_800C4E80_de - mix) * D_800C4E84_de);
 }
 #else
 INCLUDE_ASM("span_1000", func_80284090_de);

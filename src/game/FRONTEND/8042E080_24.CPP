@@ -146,7 +146,7 @@ void func_8042ECD8_de(void) {
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
-extern u8 D_801462D5;
+/* Starts a match counter block: stores the six option words, scales the time limit by the mode's factor, and clears the score and count rows. */
 void func_8042ED70_de(f32 rate, s32 identifier, s32 argument2, s32 argument3,
                      s32 argument4, s32 argument5, s32 argument6) {
     CGameStatus *state = &D_801462C8.counters;
@@ -159,7 +159,7 @@ void func_8042ED70_de(f32 rate, s32 identifier, s32 argument2, s32 argument3,
     state->teams = argument5;
     scale = D_800DDB54;
     state->m_bCTFOn = argument6;
-    if ((u32)(D_801462D5 - 2) < 2) {
+    if ((u32)(D_801462C8.controllerMode - 2) < 2) {
         scale = D_800DDB58;
     }
     state->timeLimit = rate * scale;
