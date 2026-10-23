@@ -13031,7 +13031,6 @@ rodata_unresolved_psyq_name_suffix_os = 0x800E6490; // rom:0xE7090
 data_unresolved_8020DDD4 = 0x8020DDD4; // rom:0xE9D4
 func_80297024 = 0x80297024; // type:func rom:0x97C24
 func_802C3EA4 = 0x802C3EA4; // type:func rom:0xC4AA4
-func_802C5914 = 0x802C5914; // type:func rom:0xC6514
 func_8040C648 = 0x8040C648; // type:func rom:0x17A648
 func_8042250C_us_rev1_padding_19050C = 0x8042250C; // rom:0x19050C
 

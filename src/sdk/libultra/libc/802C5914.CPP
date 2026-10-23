@@ -21,15 +21,7 @@ s64 func_802C0820_de(s64 numerator, s64 denominator) {
     return numerator < 0 ? -remainder : remainder;
 }
 #else
-#if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
 INCLUDE_ASM("span_1000", func_802C0820_de);
-#endif
-#if defined(VERSION_EU_X)
-INCLUDE_ASM("span_1000", func_802C0B04);
-#endif
-#if defined(VERSION_US_REV1)
-INCLUDE_ASM("span_1000", func_802C5914);
-#endif
 #endif
 
 #if defined(VERSION_US)
