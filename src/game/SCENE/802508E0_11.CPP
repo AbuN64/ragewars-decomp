@@ -42,7 +42,7 @@ extern char D_800C3EA0_de;
 
 extern s32 func_8028FE3C_de(void *arg0, s32 arg1, s32 arg2, s32 *arg3);
 
-void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_typemap_165 *arg2) {
+void func_80253D10_de(s32 unused, struct Shape_typemap_165 **handle, struct Shape_typemap_165 *arg2) {
     extern OSMesgQueue D_80101140;
     s32 counter;
     s32 counter2;
@@ -61,7 +61,7 @@ void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_
         __osRestoreInt(token);
     }
 
-    node = *arg1;
+    node = *handle;
     node->field_C &= ~2;
     if (node->field_8 != 0) {
     loop_1:
@@ -79,7 +79,7 @@ void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct Shape_
         func_80255B2C_de(&D_801051A0, node->field_0);
         func_80254AD0_de(0, node);
     }
-    *arg1 = arg2;
+    *handle = arg2;
 
     token2 = func_802BCF30_de();
     counter2 = D_8010515C - 1;
@@ -96,7 +96,7 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
     extern OSMesgQueue D_80101140;
     s32 temp_v1;
     s32 temp_v1_2;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_v0;
     NodePair80253E04 *temp_s0;
     Node80253610 *temp_s1;
@@ -104,14 +104,14 @@ void func_80253E64_de(s32 arg0, NodePair80253E04 *arg1, Node80253610 *arg2) {
 
     temp_s0 = arg1;
     temp_s1 = arg2;
-    temp_a0 = func_802BCF30_de();
+    mask = func_802BCF30_de();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
     }
 
     node = temp_s0->first;
@@ -145,20 +145,20 @@ void func_80253F8C_de(s32 arg0, s32 arg1) {
     extern OSMesgQueue D_80101140;
     s32 temp_v1;
     s32 temp_v1_2;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_v0;
     HashNode *node;
     void *value;
     void **out;
 
-    temp_a0 = func_802BCF30_de();
+    mask = func_802BCF30_de();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
     }
 
     out = &value;
@@ -205,7 +205,7 @@ found:
     __osRestoreInt(temp_v0);
 }
 
-void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
+void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 direct) {
     extern OSMesgQueue D_80101140;
     void **resource;
     s32 size;
@@ -214,7 +214,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
     u32 token;
     u32 token2;
 
-    resource = func_8025193C_de(0, arg2, arg2, 4, 0, 0, 0, &D_800C3EA0_de, arg4);
+    resource = func_8025193C_de(0, arg2, arg2, 4, 0, 0, 0, &D_800C3EA0_de, direct);
     if (resource != 0) {
         size = **(s32 **)resource;
         token = func_802BCF30_de();
@@ -237,7 +237,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
             __osRestoreInt(token2);
         }
         resource = func_8025193C_de(0, arg2, arg2, ((size * 4) + 0xF) & ~7,
-                                 0, 0, 0, arg3, arg4);
+                                 0, 0, 0, arg3, direct);
         if (resource != 0) {
             *arg1 = *resource;
             return resource;
@@ -246,7 +246,7 @@ void **func_802540F4_de(s32 arg0, void **arg1, s32 arg2, void *arg3, s32 arg4) {
     return 0;
 }
 
-s32 func_80254284_de(s32 arg0, void **arg1, s32 arg2, void *arg3) {
+s32 func_80254284_de(s32 arg0, void **handle, s32 tempv0, void *arg3) {
     extern OSMesgQueue D_80101140;
     void **resource;
     s32 size;
@@ -256,7 +256,7 @@ s32 func_80254284_de(s32 arg0, void **arg1, s32 arg2, void *arg3) {
     u32 token2;
     s32 one = 1;
 
-    resource = func_8025193C_de(0, arg2, arg2, 4, 0x1B, 0, 0, &D_800C3EA0_de, one);
+    resource = func_8025193C_de(0, tempv0, tempv0, 4, 0x1B, 0, 0, &D_800C3EA0_de, one);
     size = **(s32 **)resource;
     token = func_802BCF30_de();
     counter = D_8010515C + one;
@@ -277,15 +277,15 @@ s32 func_80254284_de(s32 arg0, void **arg1, s32 arg2, void *arg3) {
     } else {
         __osRestoreInt(token2);
     }
-    resource = func_8025193C_de(0, arg2, arg2, ((size * 4) + 0xF) & ~7, 0x1B, 0, 0, arg3, 1);
-    *arg1 = *resource;
+    resource = func_8025193C_de(0, tempv0, tempv0, ((size * 4) + 0xF) & ~7, 0x1B, 0, 0, arg3, 1);
+    *handle = *resource;
     return (s32)resource;
 }
 
-void **func_80254408_de(s32 arg0, void *arg1, s32 arg2, s32 arg3, void *arg4, void *arg5, void *arg6) {
+void **func_80254408_de(s32 arg0, void *handle, s32 arg2, s32 tempv0, void *world, void *arg5, void *arg6) {
     s32 sp28;
     s32 temp_v0;
 
-    temp_v0 = func_8028FE3C_de(arg1, arg3, arg2, &sp28);
-    return (void **)func_8025193C_de(0, temp_v0, temp_v0, sp28, 0x1B, arg4, arg5, arg6, 1);
+    temp_v0 = func_8028FE3C_de(handle, tempv0, arg2, &sp28);
+    return (void **)func_8025193C_de(0, temp_v0, temp_v0, sp28, 0x1B, world, arg5, arg6, 1);
 }

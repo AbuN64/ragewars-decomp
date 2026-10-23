@@ -51,16 +51,16 @@ int func_80250938_de(void *wanted,int key) {
  count=h->count; entries=(char *)h->records;
 i=0; if(count>0) {offset=i; do {if(entries+offset!=wanted) {i++;offset+=232;} else {result=i;break;}}while(i<count);}return result;}
 
-void func_802509A8_de(void *arg0) {
-    struct ResourceBinding *o = (struct ResourceBinding *) arg0;
+void func_802509A8_de(void *owner) {
+    struct ResourceBinding *o = (struct ResourceBinding *) owner;
     void *temp_v0;
     CachedResource *ret2;
 
     if (!(o->status & 0x40)) {
-        temp_v0 = func_802507AC_de(arg0, o->variant);
+        temp_v0 = func_802507AC_de(owner, o->variant);
         if (temp_v0 != 0) {
             func_8026E158_de((void **) temp_v0);
-            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, arg0, &D_00250C2C, &D_800C3E40_de, 0);
+            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, owner, &D_00250C2C, &D_800C3E40_de, 0);
             if (ret2 != 0) {
                 func_80253754_de(0, (s32)ret2);
             }
@@ -98,19 +98,19 @@ void func_80250AD4_de(void *arg0) {
     }
 }
 
-s32 *func_80250B24_de(void *arg0, s32 arg1, s32 arg2, s32 *arg3) {
-    struct ResourceBinding *o = (struct ResourceBinding *) arg0;
+s32 *func_80250B24_de(void *prop, s32 model, s32 arg2, s32 *nextResource) {
+    struct ResourceBinding *o = (struct ResourceBinding *) prop;
     void *temp_v0;
     s32 *var_s1;
     CachedResource *ret2;
 
-    var_s1 = arg3;
-    temp_v0 = func_802507AC_de(arg0, arg2);
+    var_s1 = nextResource;
+    temp_v0 = func_802507AC_de(prop, arg2);
     if (temp_v0 != 0) {
         o->loadedResource = temp_v0;
         *var_s1 = (s32) temp_v0;
-        var_s1 = func_8026E27C_de(temp_v0, arg1, var_s1 + 1);
-        ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, arg0, &D_00250C2C, &D_800C3E40_de, 1);
+        var_s1 = func_8026E27C_de(temp_v0, model, var_s1 + 1);
+        ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, prop, &D_00250C2C, &D_800C3E40_de, 1);
         if (ret2 != 0) {
             *var_s1 = (s32)ret2;
             var_s1 += 1;
@@ -139,7 +139,7 @@ void func_80250C2C_de(void *arg0, s32 **arg1)
   func_80253E64_de(0, arg1, Actors_BuildLitModel(new_var, *binding->resource, binding->runtimeState, (s32)binding->transform, 0, arg0));
 }
 
-void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 arg2, s32 key) {
+void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 remaining, s32 key) {
     void *instance;
     CachedResource *resource;
     s32 *header;
@@ -166,9 +166,9 @@ void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 arg2, s32 k
             data = (char *)&header[2];
         }
         if (D_800D15E0 != 0) {
-            func_8026DA4C_de(instance, owner->transform, 0, 0, data, arg2);
+            func_8026DA4C_de(instance, owner->transform, 0, 0, data, remaining);
         } else {
-            Render_QueueModelInstance(instance, owner->transform, 0, 0, data, arg2);
+            Render_QueueModelInstance(instance, owner->transform, 0, 0, data, remaining);
         }
         func_80253754_de(0, (s32)resource);
     }
@@ -187,15 +187,15 @@ int func_80250DE0_de(void *object) {
     return nested->farValue;
 }
 
-s8 func_80250E14_de(LevelActor *arg0) {
-    void *temp_a1;
+s8 func_80250E14_de(LevelActor *actor) {
+    void *definition;
 
     if (D_801462E5 != 0) {
-        return ((struct ResourceFadeDefinition *)arg0->definition)->nearValue;
+        return ((struct ResourceFadeDefinition *)actor->definition)->nearValue;
     }
-    temp_a1 = arg0->definition;
-    if ((u32)arg0->resourceState < ((struct ResourceFadeDefinition *)temp_a1)->threshold * 2) {
-        return ((struct ResourceFadeDefinition *)temp_a1)->nearValue;
+    definition = actor->definition;
+    if ((u32)actor->resourceState < ((struct ResourceFadeDefinition *)definition)->threshold * 2) {
+        return ((struct ResourceFadeDefinition *)definition)->nearValue;
     }
-    return ((struct ResourceFadeDefinition *)temp_a1)->farValue;
+    return ((struct ResourceFadeDefinition *)definition)->farValue;
 }

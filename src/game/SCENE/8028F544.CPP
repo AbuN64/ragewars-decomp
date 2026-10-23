@@ -31,59 +31,59 @@ extern void func_802BAC90_de(char *list, s32 count, void *template, Panel *owner
 extern void func_802BB750_de(char *list);
 
 s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 arg3) {
-    OSScTask_s *temp_s0;
-    OSScTask_s *temp_v1_0;
-    OSScTask_s *temp_v0;
+    OSScTask_s *gfxListHead;
+    OSScTask_s *audioListHead;
+    OSScTask_s *next;
     OSScTask_s *var_v1;
     s32 temp_s5;
     s32 temp_v0_2;
-    s32 temp_v1;
+    s32 state;
     s32 var_s1;
 
     var_s1 = arg3;
-    temp_s0 = arg0->gfxListHead;
-    temp_v1_0 = arg0->audioListHead;
+    gfxListHead = arg0->gfxListHead;
+    audioListHead = arg0->audioListHead;
     temp_s5 = var_s1;
     if ((arg0->doAudio != 0) && (var_s1 & 2)) {
-        if ((temp_s0 == 0) || !(temp_s0->flags & 0x10)) {
-            *arg1 = temp_v1_0;
+        if ((gfxListHead == 0) || !(gfxListHead->flags & 0x10)) {
+            *arg1 = audioListHead;
             arg0->doAudio = 0;
-            temp_v0 = arg0->audioListHead->next;
+            next = arg0->audioListHead->next;
             var_s1 &= ~2;
-            arg0->audioListHead = temp_v0;
-            if (temp_v0 == 0) {
+            arg0->audioListHead = next;
+            if (next == 0) {
                 arg0->audioListTail = 0;
             }
         } else {
-            *arg1 = temp_s0;
+            *arg1 = gfxListHead;
             var_s1 &= ~2;
         }
     } else {
-        if (temp_s0 == 0) {
+        if (gfxListHead == 0) {
             var_v1 = 0;
-        } else if ((s32)temp_s0->framebuffer == D_80142C38) {
+        } else if ((s32)gfxListHead->framebuffer == D_80142C38) {
             var_v1 = 0;
-        } else if (temp_s0->framebuffer == osViGetCurrentFramebuffer()) {
+        } else if (gfxListHead->framebuffer == osViGetCurrentFramebuffer()) {
             var_v1 = 0;
-        } else if ((s32)temp_s0->framebuffer == D_80142C30) {
+        } else if ((s32)gfxListHead->framebuffer == D_80142C30) {
             var_v1 = 0;
         } else {
-            var_v1 = temp_s0;
+            var_v1 = gfxListHead;
         }
         if (var_v1 != 0) {
-            temp_v0_2 = temp_s0->flags & 7;
+            temp_v0_2 = gfxListHead->flags & 7;
             switch (temp_v0_2) {
             case 1:
             case 4:
             case 5:
                 break;
             case 3:
-                if (temp_s0->state & 0x20) {
+                if (gfxListHead->state & 0x20) {
                     if (var_s1 & 2) {
-                        *arg1 = temp_s0;
+                        *arg1 = gfxListHead;
                         var_s1 &= ~2;
-                        if (temp_s0->state & 1) {
-                            *arg2 = temp_s0;
+                        if (gfxListHead->state & 1) {
+                            *arg2 = gfxListHead;
                             var_s1 &= ~1;
                         }
                         arg0->gfxListHead = arg0->gfxListHead->next;
@@ -92,8 +92,8 @@ s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 ar
                         }
                     }
                 } else if (var_s1 == 3) {
-                    *arg2 = temp_s0;
-                    *arg1 = temp_s0;
+                    *arg2 = gfxListHead;
+                    *arg1 = gfxListHead;
                     arg0->gfxListHead = arg0->gfxListHead->next;
                     var_s1 = 0;
                     if (arg0->gfxListHead == 0) {
@@ -104,14 +104,14 @@ s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 ar
             case 2:
             case 6:
             case 7:
-                temp_v1 = temp_s0->state;
-                if (temp_v1 & 2) {
+                state = gfxListHead->state;
+                if (state & 2) {
                     if (var_s1 & 2) {
-                        *arg1 = temp_s0;
+                        *arg1 = gfxListHead;
                         var_s1 &= ~2;
                     }
-                } else if ((temp_v1 & 1) && (var_s1 & 1)) {
-                    *arg2 = temp_s0;
+                } else if ((state & 1) && (var_s1 & 1)) {
+                    *arg2 = gfxListHead;
                     arg0->gfxListHead = arg0->gfxListHead->next;
                     var_s1 &= ~1;
                     if (arg0->gfxListHead == 0) {
@@ -128,7 +128,7 @@ s32 func_8028F544_de(OSSched *arg0, OSScTask_s **arg1, OSScTask_s **arg2, s32 ar
     return var_s1;
 }
 
-void func_8028F754_de(Panel *panel, s32 arg1, s32 arg2, s32 arg3, unsigned char style) {
+void func_8028F754_de(Panel *panel, s32 arg1, s32 priority, s32 arg3, unsigned char style) {
     panel->active = 1;
     panel->field2F4 = 0;
     panel->field2F8 = 0;
@@ -146,6 +146,6 @@ void func_8028F754_de(Panel *panel, s32 arg1, s32 arg2, s32 arg3, unsigned char 
     func_802BB550_de(9, panel->row0, 0x29C);
     func_802BB550_de(0xE, panel->row0, 0x29D);
     func_802BA650_de(panel->row0, 0x29A, style);
-    func_802BAC90_de(panel->elements, 7, &D_0028E930, panel, arg1, arg2);
+    func_802BAC90_de(panel->elements, 7, &D_0028E930, panel, arg1, priority);
     func_802BB750_de(panel->elements);
 }

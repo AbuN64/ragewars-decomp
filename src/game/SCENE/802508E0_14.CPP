@@ -28,48 +28,48 @@ extern void *func_80255920_de(void *, s32);
 
 extern void func_80255D70_de(void *, s32, s32);
 
-void func_80254990_de(void *unused, struct IntrusiveList *arg1) {
+void func_80254990_de(void *unused, struct IntrusiveList *resource) {
     s32 temp_v0;
 
-    arg1->nextOffset = arg1->nextOffset & ~2;
-    if (arg1->prevOffset != 0) {
+    resource->nextOffset = resource->nextOffset & ~2;
+    if (resource->prevOffset != 0) {
     loop_1:
         do {
-            temp_v0 = arg1->prevOffset - 1;
-            arg1->prevOffset = temp_v0;
+            temp_v0 = resource->prevOffset - 1;
+            resource->prevOffset = temp_v0;
             if (temp_v0 != 0) {
                 goto loop_1;
             }
-            arg1->nextOffset = arg1->nextOffset & ~0x100;
-        } while (arg1->prevOffset != 0);
+            resource->nextOffset = resource->nextOffset & ~0x100;
+        } while (resource->prevOffset != 0);
     }
-    if (!(arg1->nextOffset & 0x702)) {
-        func_80254DD0_de(0, arg1);
-        func_80255B2C_de(&D_801051A0, *(s32 *) arg1);
-        func_80254AD0_de(0, arg1);
+    if (!(resource->nextOffset & 0x702)) {
+        func_80254DD0_de(0, resource);
+        func_80255B2C_de(&D_801051A0, *(s32 *) resource);
+        func_80254AD0_de(0, resource);
     }
 }
 
 void *func_80254A28_de(s32 unused0, s32 arg1) {
     extern void **D_80100564;
-    struct ResourceCacheEntry *temp_s0;
+    struct ResourceCacheEntry *cacheEntry;
     struct Pool *pool = (struct Pool *)&D_8010513C;
 
     if (pool->count == 0) {
         return 0;
     }
     pool->count -= 1;
-    temp_s0 = D_80100564[D_8010513C];
-    temp_s0->flags = 0x800;
-    temp_s0->references = 0;
-    temp_s0->resource = 0;
-    temp_s0->callback = 0;
-    temp_s0->pending = 0;
-    temp_s0->owner = 0;
-    temp_s0->lastUsed = pool->field44;
-    func_80255CB8_de((char *)pool - 0xBCC, temp_s0);
-    temp_s0->flags |= (arg1 & 0xC);
-    return temp_s0;
+    cacheEntry = D_80100564[D_8010513C];
+    cacheEntry->flags = 0x800;
+    cacheEntry->references = 0;
+    cacheEntry->resource = 0;
+    cacheEntry->callback = 0;
+    cacheEntry->pending = 0;
+    cacheEntry->owner = 0;
+    cacheEntry->lastUsed = pool->field44;
+    func_80255CB8_de((char *)pool - 0xBCC, cacheEntry);
+    cacheEntry->flags |= (arg1 & 0xC);
+    return cacheEntry;
 }
 
 void func_80254AD0_de(s32 arg0, s32 arg1) {

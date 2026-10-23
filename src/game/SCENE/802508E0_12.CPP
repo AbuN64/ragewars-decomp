@@ -23,7 +23,7 @@ extern void func_80254AD0_de(s32 arg0, s32 arg1);
 
 /** Read the global word at VRAM 0x8010513C. */
 
-struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2) {
+struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *handle, s32 total) {
     struct Shape_typemap_165 *node;
     s32 result;
     s32 counter;
@@ -41,15 +41,15 @@ struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *arg1, s32 arg2) {
     } else {
         __osRestoreInt(token);
     }
-    flags = ((ResourceLoadRequest *)arg1)->mode;
+    flags = ((ResourceLoadRequest *)handle)->mode;
     node = func_802514A8_de(0, flags);
     if (node != 0) {
         node->field_8++;
         node->field_C |= 0x100;
-        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, arg2, (flags >> 5) & 1, flags);
+        result = ((s32 (*)(s32, s32, s32, u32))func_80254B8C_de)(0, total, (flags >> 5) & 1, flags);
         node->field_0 = result;
         if (result != 0) {
-            node->field_4 = arg2;
+            node->field_4 = total;
             node->field_C |= flags;
             func_80254C70_de(0, node);
         } else {

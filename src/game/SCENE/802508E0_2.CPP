@@ -85,7 +85,7 @@ extern int D_800CB6E0;
 extern int D_8010515C;
 extern Manager D_801047E0;
 
-void func_80250E70_de(s32 arg0, s32 arg1) {
+void func_80250E70_de(s32 arg0, s32 count) {
 #define mgr ((struct ResMgr *)&D_80100560)
     u32 mask;
     u32 i;
@@ -146,8 +146,8 @@ void func_80250E70_de(s32 arg0, s32 arg1) {
     }
     /* thread block D_801008F8 - 0x348 followed by its 0x800-byte stack at D_801008F8 */
     thread = (char *)&D_801008F8 - 0x348;
-    func_802A001C_de(&D_801008F8, arg1, 0x800);
-    func_802BAC90_de(thread, arg1, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
+    func_802A001C_de(&D_801008F8, count, 0x800);
+    func_802BAC90_de(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
     func_802BB750_de(thread);
 #undef mgr
 }
@@ -205,23 +205,23 @@ static inline ResourceCacheEntry *find_stale(ResourceCacheEntry **recent) {
 
 
 static inline void *pool_alloc(s32 arg1) {
-    struct ResourceCacheEntry *temp_s0;
+    struct ResourceCacheEntry *cacheEntry;
 
     if (((struct Pool *)&D_8010513C)->count == 0) {
         return 0;
     }
     ((struct Pool *)&D_8010513C)->count -= 1;
-    temp_s0 = D_80100564[((struct Pool *)&D_8010513C)->count];
-    temp_s0->flags = 0x800;
-    temp_s0->references = 0;
-    temp_s0->resource = 0;
-    temp_s0->callback = 0;
-    temp_s0->pending = 0;
-    temp_s0->owner = 0;
-    temp_s0->lastUsed = ((struct Pool *)&D_8010513C)->field44;
-    func_80255CB8_de((char *)&D_8010513C - 0xBCC, temp_s0);
-    temp_s0->flags |= (arg1 & 0xC);
-    return temp_s0;
+    cacheEntry = D_80100564[((struct Pool *)&D_8010513C)->count];
+    cacheEntry->flags = 0x800;
+    cacheEntry->references = 0;
+    cacheEntry->resource = 0;
+    cacheEntry->callback = 0;
+    cacheEntry->pending = 0;
+    cacheEntry->owner = 0;
+    cacheEntry->lastUsed = ((struct Pool *)&D_8010513C)->field44;
+    func_80255CB8_de((char *)&D_8010513C - 0xBCC, cacheEntry);
+    cacheEntry->flags |= (arg1 & 0xC);
+    return cacheEntry;
 }
 
 extern s32 func_80255920_de(void *, s32);
@@ -247,10 +247,10 @@ void func_802511AC_de(void) {
     s32 temp_v1;
     s32 temp_v1_2;
     s32 var_s0;
-    s32 var_s0_2;
+    s32 i;
     s32 var_s1;
     u32 temp_a0;
-    u32 temp_v0;
+    u32 mask;
 
     var_s1 = 0;
     var_s0 = 0;
@@ -270,22 +270,22 @@ block_7:
         }
     } while (var_s0 < 2);
     if (var_s1 != 0) {
-        temp_v0 = func_802BCF30_de();
+        mask = func_802BCF30_de();
         temp_v1 = D_8010515C - 1;
         D_8010515C = temp_v1;
         if (temp_v1 != 0) {
-            __osRestoreInt(temp_v0);
+            __osRestoreInt(mask);
             func_802BB420_de(&D_80101140, 0, 1);
-            var_s0_2 = 0;
+            i = 0;
         } else {
-            __osRestoreInt(temp_v0);
-            var_s0_2 = 0;
+            __osRestoreInt(mask);
+            i = 0;
         }
         if (var_s1 > 0) {
             do {
                 func_802BB2A0_de(&D_80101160, 0, 1);
-                var_s0_2 += 1;
-            } while (var_s0_2 < var_s1);
+                i += 1;
+            } while (i < var_s1);
         }
         temp_a0 = func_802BCF30_de();
         temp_v1_2 = D_8010515C + 1;
@@ -408,21 +408,21 @@ drain:
 void *func_802517B4_de(s32 arg0, s32 arg1) {
     s32 temp_v1;
     s32 temp_v1_2;
-    u32 temp_a0;
+    u32 mask;
     u32 temp_v0;
     HashNode *node;
     void *value;
     void **out;
     struct IntrusiveList *object;
 
-    temp_a0 = func_802BCF30_de();
+    mask = func_802BCF30_de();
     temp_v1 = D_8010515C + 1;
     D_8010515C = temp_v1;
     if (temp_v1 != 1) {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
         func_802BB2A0_de(&D_80101140, 0, 1);
     } else {
-        __osRestoreInt(temp_a0);
+        __osRestoreInt(mask);
     }
 
     out = &value;
