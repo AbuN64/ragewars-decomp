@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/WORLDRECAT1B6A4.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "RENDER_4/8028B64C.H"
 #include "COMMON/WORLD.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"

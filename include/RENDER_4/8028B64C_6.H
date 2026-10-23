@@ -1,6 +1,7 @@
 #ifndef RENDER_4_8028B64C_6_H
 #define RENDER_4_8028B64C_6_H
 #include "COMMON/COLORENTRY.H"
+#include "RENDER_4/8028B64C.H"
 #include "COMMON/WORLD.H"
 extern void *func_8028CE78_de(Shared_World *world, s32 index);
 extern s32 func_8028D050_de(Container *arg0, s32 key0, s32 key1, s32 key2, RecordRecAtE4 **out, s32 max);

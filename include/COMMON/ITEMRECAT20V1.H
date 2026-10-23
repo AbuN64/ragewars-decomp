@@ -2018,10 +2018,6 @@ struct func_802165F8_S1 {
 };
 
 struct Field_void_80;
-struct Field_void_80 {
-    char pad[0x80];
-    void * value;
-};
 
 struct func_802558C0_S1;
 struct func_802558C0_S1 {

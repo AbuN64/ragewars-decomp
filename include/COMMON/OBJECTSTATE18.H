@@ -109,16 +109,8 @@ struct Node_func_8026BC60_de;
 typedef struct Node_func_8026BC60_de Node_func_8026BC60_de;
 
 struct Material;
-struct Material {
-    u8 pad[6];
-    u8 flags;
-};
 
 struct Owner104;
-struct Owner104 {
-    char pad0[0x102];
-    unsigned short flags;
-};
 
 
 struct Group18;
@@ -131,12 +123,6 @@ extern void func_8026D844_de();
 extern void func_8026D9D0_de();
 
 struct ObjectState18;
-struct ObjectState18 {
-    s32 flags;
-    u8 padding4[0xC];
-    u8 color[4];
-    u8 fog[4];
-};
 
 
 

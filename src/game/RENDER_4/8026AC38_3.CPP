@@ -2,6 +2,7 @@
 #include "COMMON/OBJECTSTATE18.H"
 #include "abi.h"
 #include "COMMON/UNUSED.H"
+#include "RENDER_4/8026AC38.H"
 #include "gbi.h"
 #include "TYPES.H"
 #include "RENDER_4/8026AC38_2.H"

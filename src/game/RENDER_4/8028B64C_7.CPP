@@ -1,4 +1,5 @@
 #include "COMMON/COLORENTRY.H"
+#include "RENDER_4/8028B64C.H"
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 

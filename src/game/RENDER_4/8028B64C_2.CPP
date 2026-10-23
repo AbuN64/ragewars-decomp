@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "RENDER_4/8028B64C.H"
 #include "COMMON/WORLDRECAT1B6A4.H"
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"

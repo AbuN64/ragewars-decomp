@@ -76,11 +76,6 @@ struct func_8028D628_S1 {
 
 struct Object_func_8028CE94_de;
 struct StridedTable;
-struct Object_func_8028CE94_de {
-    char pad[0xA8];
-    struct StridedTable *unkA8;
-    struct StridedTable *unkAC;
-};
 
 struct Object_func_8028CE94_de;
 typedef struct Object_func_8028CE94_de Object_func_8028CE94_de;
@@ -109,12 +104,6 @@ struct RecordRecAtE4 {
 
 struct Container;
 struct RecordRecAtE4;
-struct Container {
-    char pad0[0x138];
-    struct RecordRecAtE4 *unk138;
-    s32 unk13C;
-    s32 unk140;
-};
 
 
 struct func_8028CD44_S1;
@@ -154,19 +143,11 @@ struct func_8028D728_S2 {
 };
 
 struct ObjRecAt78V1;
-struct ObjRecAt78V1 {
-    char pad0[0x78];
-    void * unk78;
-};
 
 struct ObjRecAt10BC;
 typedef struct ObjRecAt10BC ObjRecAt10BC;
 
 struct ObjRecAt10BC;
-struct ObjRecAt10BC {
-    char pad0[0x10BC];
-    int unk10BC;
-};
 
 struct func_8028CE54_S1;
 struct func_8028CE54_S1 {
@@ -192,10 +173,6 @@ struct func_8028CD44_S1 {
 };
 
 struct ObjRecAt7C;
-struct ObjRecAt7C {
-    char pad0[0x7C];
-    void * unk7C;
-};
 
 struct func_8028D7A0_S1;
 struct func_8028D7A0_S1 {
@@ -235,18 +212,6 @@ struct func_8028D268_S3 {
 extern float D_800C5300_de;
 
 struct Owner_func_8028D888_de;
-struct Owner_func_8028D888_de {
-    char pad0[0x944];
-    s32 unk944;
-    char pad948[0xC4C - 0x948];
-    s32 unkC4C;
-    char padC50[0x10BC - 0xC50];
-    s32 unk10BC;
-    char pad10C0[0x1500 - 0x10C0];
-    s32 prevCount;
-    s32 count;
-    Triple entries[1];
-};
 
 struct func_8028D728_S2;
 typedef struct func_8028D728_S2 func_8028D728_S2;
@@ -268,9 +233,4 @@ typedef struct AnimationPoseFrame {
     u8 poseData[0x38 - sizeof(CVector3)];
 } AnimationPoseFrame;
 
-typedef struct AnimationPoseFrameSet {
-    s32 stride;
-    s32 count;
-    AnimationPoseFrame frames[1];
-} AnimationPoseFrameSet;
 #endif

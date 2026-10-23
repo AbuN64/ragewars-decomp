@@ -1,5 +1,6 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/UNUSED.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "abi.h"
 #include "COMMON/MEASUREDRECAT0V1.H"

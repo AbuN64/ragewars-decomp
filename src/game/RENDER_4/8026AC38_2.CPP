@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE18.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "abi.h"
 #include "COMMON/GFX.H"

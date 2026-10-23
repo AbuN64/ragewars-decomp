@@ -18044,12 +18044,6 @@ struct func_8025DBA0_S3 {
     f32 unk30;
 };
 struct ObjRecAtCV2;
-struct ObjRecAtCV2 {
-    void *unk0;
-    void *unk4;
-    void *unk8;
-    s32 unkC;
-};
 struct func_8028C544_S1;
 struct func_8028C544_S1 {
     char pad0[0x11D8];

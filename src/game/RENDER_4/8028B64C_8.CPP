@@ -10,6 +10,7 @@
 #include "COMMON/OBJECTLINKS150C.H"
 #include "COMMON/SCENERECAT10C0.H"
 #include "COMMON/COLORENTRY.H"
+#include "RENDER_4/8028B64C.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "RENDER_4/8028B64C_8.H"

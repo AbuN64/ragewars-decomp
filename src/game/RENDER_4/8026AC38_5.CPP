@@ -1,5 +1,6 @@
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/OBJECTSTATE18.H"
+#include "RENDER_4/8026AC38.H"
 #include "gbi.h"
 #include "TYPES.H"
 #include "RENDER_4/8026AC38_5.H"

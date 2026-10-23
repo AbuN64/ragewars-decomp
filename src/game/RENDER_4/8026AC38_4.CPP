@@ -2,6 +2,7 @@
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTSTATE18.H"
+#include "RENDER_4/8026AC38.H"
 #include "abi.h"
 #include "gbi.h"
 #include "TYPES.H"
