@@ -17,7 +17,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 
 | eu (NUS-NRWP-0, Europe). PAL release. SHA256 `d763cbbe485a5f9e1b7be97d5ac16735087e23d0bb62c05dc844e01b7e1156d1` |
 |---|
-| <pre><code>code      [█████████████████▒▒░]  87.42% (~99.71%)  971,964 of 1,111,820</code><br><code>data      [███████████████████░]  99.94%  259,432 of 259,584</code><br><code>functions [███████████████████░]  95.43% (~99.92%)  4,058 of 4,252</code><br><code>blobs     [███████████████████░]  96.57% (~96.58%)  6,757,561 of 6,997,012</code></pre> |
+| <pre><code>code      [█████████████████▒▒░]  87.42% (~99.71%)  971,968 of 1,111,824</code><br><code>data      [███████████████████░]  99.94%  259,428 of 259,580</code><br><code>functions [███████████████████░]  95.43% (~99.92%)  4,059 of 4,253</code><br><code>blobs     [███████████████████░]  96.57% (~96.58%)  6,757,561 of 6,997,012</code></pre> |
 
 | eu-x (NUS-NRWX-0, Europe). PAL multi-language release. SHA256 `511f6c876586bf401faf01a270c67f26fcb7db55ed3f35759c71ab15a29de750` |
 |---|
@@ -25,7 +25,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 
 | us (NUS-NRWE-0, North America). First NTSC release (black cartridge). SHA256 `0433043aaba2649bdd1fe717c4020550ac663c0362527aa082490f5977a3e46b` |
 |---|
-| <pre><code>code      [█████████████████▒▒░]  89.59% (~99.87%)  982,480 of 1,096,584</code><br><code>data      [███████████████████░]  99.94%  270,152 of 270,308</code><br><code>functions [███████████████████░]  96.42% (~99.97%)  4,048 of 4,198</code><br><code>blobs     [███████████████████░]  99.95%  6,998,605 of 7,001,524</code></pre> |
+| <pre><code>code      [█████████████████▒▒░]  89.59% (~99.87%)  982,484 of 1,096,588</code><br><code>data      [███████████████████░]  99.94%  270,148 of 270,304</code><br><code>functions [███████████████████░]  96.42% (~99.97%)  4,049 of 4,199</code><br><code>blobs     [███████████████████░]  99.95%  6,998,605 of 7,001,524</code></pre> |
 
 | us-rev1 (NUS-NRWE-1, North America). Revised NTSC release (grey cartridge). SHA256 `5dfbae59e4a3860b740ccbb28f33aad624315e30bfca6d60abd62d12a89e0089` |
 |---|
