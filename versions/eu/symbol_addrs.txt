@@ -11508,7 +11508,6 @@ func_802131D8_de_padding_13DF8 = 0x802131F8; // rom:0x13DF8
 func_8023EF14 = 0x8023EF14; // type:func rom:0x3FB14
 func_802566E8_de_padding_572A8 = 0x802566A8; // rom:0x572A8
 func_8025E574 = 0x8025E574; // type:func rom:0x5F174
-func_80263704 = 0x80263704; // type:func rom:0x64304
 func_80264EE0_de_padding_65B1C = 0x80264F1C; // rom:0x65B1C
 func_80290B98_eu_padding_91798 = 0x80290B98; // rom:0x91798
 func_80294C8C_de_padding_959A8 = 0x80294DA8; // rom:0x959A8

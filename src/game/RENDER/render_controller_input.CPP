@@ -8,12 +8,87 @@
 #include "AUDIO_4/802BFE60.H"
 #include "sdk/os.h"
 
-#if !(defined(VERSION_EU)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", Render_ReadControllerStates);
-#endif
-#if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_80263704);
-#endif
+#include "SDK/OS_2/802BC630_2.H"
+/* Reads the four controllers once per frame and folds them into the combined input record D_8010B0E0.
+ * State 0 starts a read through the message queue, converts the pads to the four per-player input
+ * records (Render_UpdateControllerInput), ORs their button words into the combined record, adds the stick
+ * bytes, and rescales the combined sticks by D_800C42F0_de. States 1 and 3 restart or query the
+ * controllers, state 2 does nothing. */
+extern ControllerProfile D_8010B0E0;
+extern u8 D_8010BBB8;
+extern char D_8010FC00;
+extern ContPad D_8010AEA0[4];
+extern float D_800C42F0_de;
+extern void func_802B7538_de(void *);
+extern void func_802B7740_de(void *, void *);
+void Render_ReadControllerStates(void) {
+    ControllerProfile *summary;
+    s32 i;
+    f32 scale;
+
+    switch (D_8010BBB8) {
+    case 0:
+        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
+        func_802B75F4_de(D_8010AEA0);
+        D_8010B0E0.port = -1;
+        D_8010B0E0.connected = 0;
+        D_8010B0E0.stickX = 0;
+        D_8010B0E0.stickY = 0;
+        D_8010B0E0.previousStickX = 0;
+        D_8010B0E0.previousStickY = 0;
+        D_8010B0E0.buttons = 0;
+        D_8010B0E0.previousButtons = 0;
+        D_8010B0E0.pressedButtons = 0;
+        D_8010B0E0.history[0] = 0;
+        D_8010B0E0.history[1] = 0;
+        D_8010B0E0.buttonState = 0;
+        D_8010B0E0.inputButtons = 0;
+        D_8010B0E0.inputPreviousButtons = 0;
+        D_8010B0E0.inputPressedButtons = 0;
+        D_8010B0E0.inputHistory[0] = 0;
+        D_8010B0E0.inputHistory[1] = 0;
+        D_8010B0E0.inputHistory[2] = 0;
+        summary = &D_8010B0E0;
+        for (i = 0; i < 4; i++) {
+            Render_UpdateControllerInput(&D_8010F328[i], D_8010AEA0[i].stick_x, D_8010AEA0[i].stick_y,
+                             D_8010AEA0[i].button);
+            summary->connected |= D_8010F328[i].connected;
+            summary->stickX += D_8010F328[i].stickX;
+            summary->stickY += D_8010F328[i].stickY;
+            summary->previousStickX += D_8010F328[i].previousStickX;
+            summary->previousStickY += D_8010F328[i].previousStickY;
+            summary->buttons |= D_8010F328[i].buttons;
+            summary->pressedButtons |= D_8010F328[i].pressedButtons;
+            summary->history[0] |= D_8010F328[i].history[0];
+            summary->history[1] |= D_8010F328[i].history[1];
+            summary->buttonState |= D_8010F328[i].buttonState;
+            summary->inputButtons |= D_8010F328[i].inputButtons;
+            summary->inputPreviousButtons |= D_8010F328[i].inputPreviousButtons;
+            summary->inputPressedButtons |= D_8010F328[i].inputPressedButtons;
+            summary->inputHistory[0] |= D_8010F328[i].inputHistory[0];
+            summary->inputHistory[1] |= D_8010F328[i].inputHistory[1];
+            summary->inputHistory[2] |= D_8010F328[i].inputHistory[2];
+        }
+        scale = D_800C42F0_de;
+        D_8010B0E0.stickX = (s32)(D_8010B0E0.stickX * scale);
+        D_8010B0E0.stickY = (s32)(D_8010B0E0.stickY * scale);
+        D_8010B0E0.previousStickX = (s32)(D_8010B0E0.previousStickX * scale);
+        D_8010B0E0.previousStickY = (s32)(D_8010B0E0.previousStickY * scale);
+        break;
+    case 1:
+        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
+        func_802B7538_de(D_8010BBE0);
+        for (i = 0; i < 4; i++) {
+            func_80263CF0_de(&D_8010F328[i]);
+        }
+        break;
+    case 2:
+        break;
+    case 3:
+        func_802B7740_de(&D_8010FC00, D_8010BBE0);
+        break;
+    }
+}
 
 /* Polls the controller paks when they are enabled: after func_80285C78_de it tries to take the pak lock
  * D_8010FBC0 without blocking and, holding it, refreshes the four pak entries through func_80264104_de and
@@ -24,9 +99,7 @@ INCLUDE_ASM("span_1000", func_80263704);
 extern u8 D_800CBC10;
 extern char D_8010EC90;
 extern ControllerProfile D_8010F328[4];
-extern u8 D_8010BBB8;
 
-extern char D_8010FC00;
 
 extern void func_80264104_de(void *);
 extern void func_802B74B0_de(void *);
@@ -208,101 +281,3 @@ void Render_UpdateControllerInput(ControllerProfile *state, s8 x, s8 y, u32 butt
         mask <<= 1;
     } while (i-- != 0);
 }
-
-#if !defined(VERSION_EU) && defined(NON_MATCHING)
-#include "SDK/OS_2/802BC630_2.H"
-/* Reads the four controllers once per frame and folds them into the combined input record D_8010B0E0.
- * State 0 starts a read through the message queue, converts the pads to the four per-player input
- * records (Render_UpdateControllerInput), ORs their button words into the combined record, adds the stick
- * bytes, and rescales the combined sticks by D_800C42F0_de. States 1 and 3 restart or query the
- * controllers, state 2 does nothing. */
-typedef struct PadSummary8026374 {
-    s32 active;
-    s8 type;
-    u8 pad05[0xF];
-    u32 previous;
-    u32 current;
-    u32 pressed;
-    u32 released;
-    u32 doubleTap;
-    u32 repeating;
-    u8 pad2C[0x80];
-    s32 wordAC;
-    u32 words[5];
-    s8 sticks[4];
-    u8 padC8[0x224 - 0xC8];
-} PadSummary8026374;
-extern PadSummary8026374 D_8010B0E0;
-extern ContPad D_8010AEA0[4];
-extern float D_800C42F0_de;
-extern void func_802B7538_de(void *);
-extern void func_802B7740_de(void *, void *);
-void Render_ReadControllerStates(void) {
-    PadSummary8026374 *summary;
-    PadSummary8026374 *states;
-    s32 i;
-    f32 scale;
-
-    summary = &D_8010B0E0;
-    states = (PadSummary8026374 *)D_8010F328;
-    switch (D_8010BBB8) {
-    case 0:
-        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
-        func_802B75F4_de(D_8010AEA0);
-        summary->type = -1;
-        summary->active = 0;
-        summary->sticks[0] = 0;
-        summary->sticks[1] = 0;
-        summary->sticks[2] = 0;
-        summary->sticks[3] = 0;
-        summary->wordAC = 0;
-        summary->words[0] = 0;
-        summary->words[1] = 0;
-        summary->words[2] = 0;
-        summary->words[3] = 0;
-        summary->words[4] = 0;
-        summary->repeating = 0;
-        summary->previous = 0;
-        summary->current = 0;
-        summary->pressed = 0;
-        summary->released = 0;
-        summary->doubleTap = 0;
-        for (i = 0; i < 4; i++) {
-            Render_UpdateControllerInput(&D_8010F328[i], D_8010AEA0[i].stick_x, D_8010AEA0[i].stick_y,
-                             D_8010AEA0[i].button);
-            summary->active |= states[i].active;
-            summary->sticks[0] += states[i].sticks[0];
-            summary->sticks[1] += states[i].sticks[1];
-            summary->sticks[2] += states[i].sticks[2];
-            summary->sticks[3] += states[i].sticks[3];
-            summary->words[0] |= states[i].words[0];
-            summary->words[1] |= states[i].words[1];
-            summary->words[2] |= states[i].words[2];
-            summary->words[3] |= states[i].words[3];
-            summary->words[4] |= states[i].words[4];
-            summary->current |= states[i].current;
-            summary->previous |= states[i].previous;
-            summary->pressed |= states[i].pressed;
-            summary->released |= states[i].released;
-            summary->doubleTap |= states[i].doubleTap;
-            summary->repeating |= states[i].repeating;
-        }
-        scale = D_800C42F0_de;
-        summary->sticks[0] = (s32)(summary->sticks[0] * scale);
-        summary->sticks[1] = (s32)(summary->sticks[1] * scale);
-        summary->sticks[2] = (s32)(summary->sticks[2] * scale);
-        summary->sticks[3] = (s32)(summary->sticks[3] * scale);
-        break;
-    case 1:
-        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
-        func_802B7538_de(D_8010BBE0);
-        for (i = 0; i < 4; i++) {
-            func_80263CF0_de(&states[i]);
-        }
-        break;
-    case 3:
-        func_802B7740_de(&D_8010FC00, D_8010BBE0);
-        break;
-    }
-}
-#endif
