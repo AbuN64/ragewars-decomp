@@ -381,60 +381,67 @@ s32 func_8029D248_de(f32 *out, f32 *input)
 extern f32 D_800C5B04_de;
 extern f32 D_800C5B08_de;
 
+/* 1/228 aligned edits; remaining: equivalent neg.s source register. */
 /* Invert a 4x4 matrix with partial pivoting. Return one for a singular
  * matrix, leaving the destination untouched until elimination succeeds. */
-s32 InvertMatrix(f32 output[4][4], f32 input[4][4])
+s32 InvertMatrix(struct MatrixF *output, struct MatrixF *input)
 {
-    f32 rows[4][8];
-    s32 order[4];
-    s32 i, j, k, pivot, row, other;
-    f32 largest, magnitude, value, factor;
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            rows[i][j] = input[i][j];
-            rows[i][j + 4] = 0.0f;
+    f32 augmented[4][8];
+    s32 rowOrder[4];
+    s32 i, j, elementIndex, pivotRow, otherRow;
+    f32 value, entry, absoluteEntry;
+    for (j = 0; j < 4; j++) {
+        for (elementIndex = 0; elementIndex < 4; elementIndex++) {
+            augmented[j][elementIndex] = input->m[j][elementIndex];
+            augmented[j][elementIndex + 4] = 0.0f;
         }
-        rows[i][i + 4] = D_800C5B04_de;
-        order[i] = i;
+        augmented[j][j + 4] = D_800C5B04_de;
+        rowOrder[j] = j;
     }
     for (i = 0; i < 4; i++) {
-        largest = rows[order[i]][i];
-        if (largest < 0.0f) largest = -largest;
-        pivot = i;
-        for (j = i + 1; j < 4; j++) {
-            magnitude = rows[order[j]][i];
-            if (magnitude < 0.0f) magnitude = -magnitude;
-            if (largest < magnitude) {
-                pivot = j;
-                largest = magnitude;
+        elementIndex = i;
+        if (0.0f <= augmented[rowOrder[elementIndex]][elementIndex]) {
+            value = augmented[rowOrder[elementIndex]][elementIndex];
+        } else {
+            value = -augmented[rowOrder[elementIndex]][elementIndex];
+        }
+        for (j = elementIndex + 1; j < 4; j++) {
+            entry = augmented[rowOrder[j]][i];
+            absoluteEntry = entry;
+            if (!(0.0f <= absoluteEntry)) absoluteEntry = -absoluteEntry;
+            if (value < absoluteEntry) {
+                elementIndex = j;
+                value = entry;
+                if (!(0.0f <= value)) value = -value;
             }
         }
-        row = order[pivot];
-        order[pivot] = order[i];
-        order[i] = row;
-        value = rows[row][i];
+        pivotRow = rowOrder[elementIndex];
+        rowOrder[elementIndex] = rowOrder[i];
+        rowOrder[i] = pivotRow;
+        value = augmented[pivotRow][i];
         if (value == 0.0f) return 1;
-        rows[row][i] = D_800C5B08_de;
-        for (j = i + 1; j < 8; j++) rows[row][j] /= value;
+        augmented[pivotRow][i] = D_800C5B08_de;
+        for (elementIndex = i + 1; elementIndex < 8; elementIndex++) augmented[pivotRow][elementIndex] /= value;
         for (j = i + 1; j < 4; j++) {
-            other = order[j];
-            factor = -rows[other][i];
-            if (factor != 0.0f) {
-                rows[other][i] = 0.0f;
-                for (k = i + 1; k < 8; k++) rows[other][k] += factor * rows[row][k];
+            otherRow = rowOrder[j];
+            value = -augmented[otherRow][i];
+            if (value != 0.0f) {
+                augmented[otherRow][i] = 0.0f;
+                for (elementIndex = i + 1; elementIndex < 8; elementIndex++) augmented[otherRow][elementIndex] += value * augmented[pivotRow][elementIndex];
             }
         }
     }
     for (i = 3; i > 0; i--) {
-        row = order[i];
+        pivotRow = rowOrder[i];
         for (j = i - 1; j >= 0; j--) {
-            other = order[j];
-            factor = rows[other][i];
-            for (k = i; k < 8; k++) rows[other][k] -= factor * rows[row][k];
+            otherRow = rowOrder[j];
+            value = augmented[otherRow][i];
+            for (elementIndex = i; elementIndex < 8; elementIndex++) augmented[otherRow][elementIndex] -= value * augmented[pivotRow][elementIndex];
         }
     }
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) output[i][j] = rows[order[i]][j + 4];
+    for (j = 0; j < 4; j++) {
+        otherRow = rowOrder[j];
+        for (elementIndex = 0; elementIndex < 4; elementIndex++) output->m[j][elementIndex] = augmented[otherRow][elementIndex + 4];
     }
     return 0;
 }
