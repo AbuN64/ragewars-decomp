@@ -69,12 +69,12 @@ extern void func_80271F68_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 
 s32 func_8028E78C_de(struct ObjectRecAt1A4 *arg0, CVector3 *arg1) {
-    CVector3 sp10;
+    CVector3 vector;
     f32 magnitude;
     u16 type;
 
-    func_80271F68_de(&sp10, &arg0->x, arg1);
-    magnitude = (sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z);
+    func_80271F68_de(&vector, &arg0->x, arg1);
+    magnitude = (vector.x * vector.x) + (vector.y * vector.y) + (vector.z * vector.z);
     if (*arg0->kind != 1) {
         return 0;
     }
@@ -103,22 +103,22 @@ extern void func_80271F68_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 
 
-s32 func_8028E860_de(ObjRecAtE4V2 *arg0, CVector3 *arg1) {
+s32 func_8028E860_de(ObjRecAtE4V2 *player, CVector3 *arg1) {
     CVector3 delta;
     u16 type;
 
-    if (arg0->unk0 == 1 && *arg0->unk18 == 7) {
-        func_80271F68_de(&delta, &((Player *)(arg0))->pos, arg1);
+    if (player->unk0 == 1 && *player->unk18 == 7) {
+        func_80271F68_de(&delta, &((Player *)(player))->pos, arg1);
         delta.y = 0;
         if (262144.0f < delta.x * delta.x + delta.z * delta.z) {
             return 0;
         }
         return 0xFF;
     }
-    if (*arg0->unk18 != 1) {
+    if (*player->unk18 != 1) {
         return 0;
     }
-    type = arg0->unkE4;
+    type = player->unkE4;
     if (type == 0x44E || type == 0x453 || type == 0x451 || type == 0x450 ||
         type == 0x454 || type == 0x455 || type == 0x456) {
         return 0xFF;

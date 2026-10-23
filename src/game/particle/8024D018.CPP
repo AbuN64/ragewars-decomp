@@ -51,15 +51,15 @@ extern void func_80253E64_de(int a, int **b, int c);
 
 
 
-void func_8024D108_de(void *arg0, int **arg1) {
-    struct LevelActor *object = arg0;
+void func_8024D108_de(void *levelActor, int **arg1) {
+    struct LevelActor *object = levelActor;
     int *deref1;
     int deref2;
     int ret;
 
     deref1 = *arg1;
     deref2 = *deref1;
-    ret = Actors_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, arg0);
+    ret = Actors_BuildLitModel(deref2, 0, &object->bounds, object->fieldB4, 1, levelActor);
     func_80253E64_de(0, arg1, ret);
 }
 

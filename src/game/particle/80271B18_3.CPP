@@ -181,8 +181,8 @@ void func_80272828_de(f32 *arg0) {
     } while (j < 4);
 }
 
-void func_80272898_de(void *arg0, void *arg1, void *arg2) {
-    Matrix *m = arg0;
+void func_80272898_de(void *matrix, void *arg1, void *arg2) {
+    Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
 
@@ -246,8 +246,8 @@ void func_80272A10_de(void *matrix, void *arg1, CVector3 *localDirection) {
     }
 }
 
-void func_80272B38_de(void *arg0, void *arg1, void *arg2) {
-    Matrix *m = arg0;
+void func_80272B38_de(void *matrix, void *arg1, void *arg2) {
+    Matrix *m = matrix;
     CVector3 *v = arg1;
     CVector3 *out = arg2;
 
@@ -301,8 +301,8 @@ void func_80272C60_de(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
     o->m[1] = zero;
 }
 
-void func_80272CB0_de(void *arg0, f32 arg1, f32 arg2, f32 arg3) {
-    Matrix *o = arg0;
+void func_80272CB0_de(void *matrix, f32 arg1, f32 arg2, f32 arg3) {
+    Matrix *o = matrix;
     f32 val = *(&D_800C48D0_de + 1);
     f32 zero = 0.0f;
 

@@ -303,7 +303,7 @@ s32 func_80253AD4_de(void) {
     return result;
 }
 
-void func_80253BBC_de(s32 arg0, Node80253610 *arg1) {
+void func_80253BBC_de(s32 unused0, Node80253610 *arg1) {
     extern OSMesgQueue D_80101140;
     s32 index;
     s32 mask;

@@ -91,8 +91,8 @@ void func_80250A9C_de(void *owner) {
     func_80250274_de(owner);
 }
 
-void func_80250AD4_de(void *arg0) {
-    struct ResourceBinding *binding = arg0;
+void func_80250AD4_de(void *resourceBinding) {
+    struct ResourceBinding *binding = resourceBinding;
     if (!(binding->status & 0x40) && (binding->colorFrame != (u8)D_800D2978)) {
         func_80253F8C_de(0, binding->registrationFlags | D_800CD3F0);
     }

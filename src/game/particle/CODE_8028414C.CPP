@@ -97,18 +97,18 @@ extern void *func_8025C95C_de(void *, s32, CVector3 *, void *, s32);
 
 
 
-void func_802843B8_de(void *arg0, s32 arg1) {
+void func_802843B8_de(void *soundParticle, s32 arg1) {
     void *node;
 
-    node = ((SoundParticle *)arg0)->sound;
+    node = ((SoundParticle *)soundParticle)->sound;
     if (node != 0) {
         if (((Node80253610 *)node)->flags == arg1 && ((Node80253610 *)node)->references != -1) {
             return;
         }
-        func_80284434_de(arg0);
+        func_80284434_de(soundParticle);
     }
-    ((SoundParticle *)arg0)->sound =
-        func_8025C95C_de(func_8025CC6C_de(), arg1, &((SoundParticle *)arg0)->particle.inst.pos, &((SoundParticle *)arg0)->particle.inst.pos, -1);
+    ((SoundParticle *)soundParticle)->sound =
+        func_8025C95C_de(func_8025CC6C_de(), arg1, &((SoundParticle *)soundParticle)->particle.inst.pos, &((SoundParticle *)soundParticle)->particle.inst.pos, -1);
 }
 
 void func_80284434_de(void *a) {

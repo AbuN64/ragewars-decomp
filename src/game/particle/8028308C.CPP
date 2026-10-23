@@ -531,9 +531,9 @@ void func_80283F60_de(void *particle) {
     }
 }
 
-int func_80284068_de(void *arg0) {
+int func_80284068_de(void *particle) {
     char pad[0x10];
-    return ((u32)((Shared_Particle *)arg0)->flags >> 2) & 1;
+    return ((u32)((Shared_Particle *)particle)->flags >> 2) & 1;
 }
 
 int func_80284080_de(void) {

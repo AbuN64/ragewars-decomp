@@ -228,8 +228,8 @@ void func_80207FC4_de(char *object, unsigned int *flags) {
 
               /* size 0x0 */
 
-s32 func_80207FE4_de(void *arg0) {
-    Player *actor = arg0;
+s32 func_80207FE4_de(void *player) {
+    Player *actor = player;
     s32 temp_v0;
 
     temp_v0 = actor->weaponFlags & ~0x2000;

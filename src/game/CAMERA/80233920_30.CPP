@@ -168,9 +168,9 @@ void func_80239C20_de(int arg0) {
     func_8044A7D0_de(arg0 + 0x570);
 }
 
-void *func_80239C3C_de(void *arg0, struct ScreenMessagePool *arg1) {
-    struct ScreenMessageOwner *owner = arg0;
-    struct ScreenMessagePool *pool = arg1;
+void *func_80239C3C_de(void *screenMessageOwner, struct ScreenMessagePool *screenMessagePool) {
+    struct ScreenMessageOwner *owner = screenMessageOwner;
+    struct ScreenMessagePool *pool = screenMessagePool;
     void *message;
 
     message = owner->activeMessages.head;

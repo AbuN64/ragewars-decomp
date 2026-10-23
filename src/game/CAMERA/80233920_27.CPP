@@ -9,9 +9,9 @@ extern void func_802B72B0_de(float arg0);
 
 
 
-void func_8023946C_de(void *arg0, CVector3 *arg1) {
+void func_8023946C_de(void *gameplayCamera, CVector3 *arg1) {
     CVector3 delta;
-    GameplayCamera *camera = arg0;
+    GameplayCamera *camera = gameplayCamera;
     func_80271F68_de(&delta, &camera->position, arg1);
     func_802B72B0_de((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }

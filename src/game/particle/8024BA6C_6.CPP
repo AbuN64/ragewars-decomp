@@ -178,8 +178,8 @@ void func_8024C874_de(void *arg0, f32 t, void *a, void *b) {
 }
 
 /** Lerp a 4-component vector: out = a + t * (b - a). */
-void func_8024C8C4_de(void *arg0, f32 t, void *a, void *b) {
-    CQuatern *out = arg0;
+void func_8024C8C4_de(void *cQuatern, f32 t, void *a, void *b) {
+    CQuatern *out = cQuatern;
     CQuatern *left = a;
     CQuatern *right = b;
 

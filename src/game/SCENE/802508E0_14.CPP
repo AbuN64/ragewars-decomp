@@ -72,7 +72,7 @@ void *func_80254A28_de(s32 unused0, s32 arg1) {
     return cacheEntry;
 }
 
-void func_80254AD0_de(s32 arg0, s32 arg1) {
+void func_80254AD0_de(s32 unused0, s32 arg1) {
     extern void **D_80100564;
     func_80255ED8_de((void *)&D_80100570, arg1);
     if (((CachedResource *)arg1)->flags & 0x1000) {

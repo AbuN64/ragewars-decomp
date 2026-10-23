@@ -12,8 +12,8 @@
 #include "SCENE/802508E0_4.H"
 
 /** Clear the word at object offset 0x1C4. */
-void func_8024F470_de(void *arg0) {
-    ((StaticObject *)(arg0))->cached = 0;
+void func_8024F470_de(void *staticObject) {
+    ((StaticObject *)(staticObject))->cached = 0;
 }
 
 void func_8024D870_de(f32 *, void *);

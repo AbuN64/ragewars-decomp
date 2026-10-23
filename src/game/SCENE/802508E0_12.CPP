@@ -73,7 +73,7 @@ struct Shape_typemap_165 *func_80254480_de(s32 arg0, void *handle, s32 total) {
     return node;
 }
 
-struct Shape_typemap_165 *func_80254600_de(s32 arg0, s32 arg1, s32 arg2) {
+struct Shape_typemap_165 *func_80254600_de(s32 unused0, s32 unused1, s32 arg2) {
     struct Shape_typemap_165 *node;
     s32 result;
     s32 counter;

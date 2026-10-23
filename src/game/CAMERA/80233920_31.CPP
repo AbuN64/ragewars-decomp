@@ -46,8 +46,8 @@ extern void func_80253908_de(s32 a);
 
 extern void func_80253838_de(void *arg0, void *arg1);
 
-void func_80239EA4_de(void *arg0, CVector3 *out) {
-    GameplayCamera *o = arg0;
+void func_80239EA4_de(void *gameplayCamera, CVector3 *out) {
+    GameplayCamera *o = gameplayCamera;
     f32 value;
     Shared_Surface *entry;
     f32 targetX;
@@ -84,9 +84,9 @@ void func_80239FCC_de(void) {
 void func_80239FD4_de(void) {
 }
 
-void func_80239FDC_de(void *arg0) {
+void func_80239FDC_de(void *gameplayCamera) {
     s32 object;
-    GameplayCamera *camera = arg0;
+    GameplayCamera *camera = gameplayCamera;
     f32 value;
     f32 x;
     f32 y;
@@ -117,8 +117,8 @@ void func_80239FDC_de(void *arg0) {
     }
 }
 
-void func_8023A114_de(void *arg0, s32 count) {
-    MessageBuffer *buffer = arg0;
+void func_8023A114_de(void *messageBuffer, s32 count) {
+    MessageBuffer *buffer = messageBuffer;
     s32 *allocation;
     s32 bytes;
     s32 firstBlock;
@@ -132,8 +132,8 @@ void func_8023A114_de(void *arg0, s32 count) {
     func_802A001C_de(firstBlock, 0, bytes);
 }
 
-void func_8023A190_de(void *arg0, int count) {
-    struct ScreenMessageOwner *owner = arg0;
+void func_8023A190_de(void *screenMessageOwner, int count) {
+    struct ScreenMessageOwner *owner = screenMessageOwner;
     int *allocation;
     int bytes;
     int firstBlock;

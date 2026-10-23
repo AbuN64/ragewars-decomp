@@ -142,24 +142,24 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
 
 
 
-void func_80246184_de(void *arg0) {
+void func_80246184_de(void *levelActor) {
     float k;
 
-    func_8024DD10_de(arg0);
+    func_8024DD10_de(levelActor);
     k = D_800C8914;
-    ((LevelActor *)arg0)->position1.x = 0;
-    ((LevelActor *)arg0)->position1.y = 0;
-    ((LevelActor *)arg0)->position1.z = 0;
-    ((LevelActor *)arg0)->motionAngles.x = 0;
-    ((LevelActor *)arg0)->motionAngles.y = 0;
-    ((LevelActor *)arg0)->motionAngles.z = 0;
-    ((LevelActor *)arg0)->attached = 0;
-    ((LevelActor *)arg0)->motionState = 0;
-    ((LevelActor *)arg0)->motionIndex = -1;
-    ((LevelActor *)arg0)->floorHeight = 0;
-    ((LevelActor *)arg0)->floorDirection.x = 0;
-    ((LevelActor *)arg0)->floorDirection.z = 0;
-    ((LevelActor *)arg0)->floorDirection.y = k;
+    ((LevelActor *)levelActor)->position1.x = 0;
+    ((LevelActor *)levelActor)->position1.y = 0;
+    ((LevelActor *)levelActor)->position1.z = 0;
+    ((LevelActor *)levelActor)->motionAngles.x = 0;
+    ((LevelActor *)levelActor)->motionAngles.y = 0;
+    ((LevelActor *)levelActor)->motionAngles.z = 0;
+    ((LevelActor *)levelActor)->attached = 0;
+    ((LevelActor *)levelActor)->motionState = 0;
+    ((LevelActor *)levelActor)->motionIndex = -1;
+    ((LevelActor *)levelActor)->floorHeight = 0;
+    ((LevelActor *)levelActor)->floorDirection.x = 0;
+    ((LevelActor *)levelActor)->floorDirection.z = 0;
+    ((LevelActor *)levelActor)->floorDirection.y = k;
 }
 
 
