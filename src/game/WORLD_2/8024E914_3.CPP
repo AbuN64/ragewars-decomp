@@ -23,49 +23,86 @@
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
 void *func_8028CF6C_de(void *arg0, s32 arg1);
-void func_8024E990_de(void *arg0, void *arg1, s32 arg2, s32 arg3) {
-    ((s8 *) arg0)[0 / sizeof(s8)] = 3;
-    ((u16 *) arg0)[4 / sizeof(u16)] = (u16) ((u16 *) arg1)[20 / sizeof(u16)];
-    ((s32 *) arg0)[448 / sizeof(s32)] = (s32) ((s32 *) arg1)[0 / sizeof(s32)];
-    ((f32 *) arg0)[8 / sizeof(f32)] = (f32) ((f32 *) arg1)[4 / sizeof(f32)];
-    ((f32 *) arg0)[12 / sizeof(f32)] = (f32) ((f32 *) arg1)[8 / sizeof(f32)];
-    ((f32 *) arg0)[16 / sizeof(f32)] = (f32) ((f32 *) arg1)[12 / sizeof(f32)];
-    ((f32 *) arg0)[12 / sizeof(f32)] = (f32) (((f32 *) arg0)[12 / sizeof(f32)] + D_800C3D80_de);
-    ((s32 *) arg0)[408 / sizeof(s32)] = 0;
-    ((f32 *) arg0)[404 / sizeof(f32)] = (f32) D_800C3D88_de;
-    ((f32 *) arg0)[372 / sizeof(f32)] = (f32) ((f32) ((s8 *) arg1)[30 / sizeof(s8)] * D_800C3D84_de);
-    ((f32 *) arg0)[380 / sizeof(f32)] = (f32) (((f32 *) arg1)[4 / sizeof(f32)] - ((f32 *) arg1)[16 / sizeof(f32)]);
-    ((f32 *) arg0)[384 / sizeof(f32)] = (f32) (((f32 *) arg1)[8 / sizeof(f32)] - ((f32 *) arg1)[16 / sizeof(f32)]);
-    ((f32 *) arg0)[388 / sizeof(f32)] = (f32) (((f32 *) arg1)[12 / sizeof(f32)] - ((f32 *) arg1)[16 / sizeof(f32)]);
-    ((f32 *) arg0)[392 / sizeof(f32)] = (f32) (((f32 *) arg1)[4 / sizeof(f32)] + ((f32 *) arg1)[16 / sizeof(f32)]);
-    ((f32 *) arg0)[396 / sizeof(f32)] = (f32) (((f32 *) arg1)[8 / sizeof(f32)] + ((f32 *) arg1)[16 / sizeof(f32)]);
-    ((s32 *) arg0)[80 / sizeof(s32)] = arg2;
-    ((s32 *) arg0)[84 / sizeof(s32)] = -1;
-    ((f32 *) arg0)[400 / sizeof(f32)] = (f32) (((f32 *) arg1)[12 / sizeof(f32)] + ((f32 *) arg1)[16 / sizeof(f32)]);
-    ((s32 *) arg0)[88 / sizeof(s32)] = 0;
-    ((s32 *) arg0)[92 / sizeof(s32)] = 0;
-    if (((u16 *) arg1)[28 / sizeof(u16)] == 0xFFFF) {
-        ((s8 **) arg0)[24 / sizeof(s8 *)] = &D_8011B388;
+typedef struct SimpleRecordIn {
+    s32 visBits;
+    CVector3 position;
+    f32 maxRadius;
+    u16 type;
+    u16 region;
+    u16 flags;
+    u16 id;
+    u16 variation;
+    s8 rotY;
+    u8 pad;
+} SimpleRecordIn;
+typedef struct SimpleInstanceOut {
+    s8 kind;
+    u8 pad1[3];
+    u16 type;
+    u8 pad6[2];
+    CVector3 position;
+    void *region;
+    void *variation;
+    u8 pad1C[0x50 - 0x1C];
+    s32 owner;
+    s32 f54;
+    s32 f58;
+    s32 f5C;
+    u8 pad60[0x174 - 0x60];
+    f32 rotY;
+    u8 pad178[4];
+    CVector3 boxMin;
+    CVector3 boxMax;
+    f32 f194;
+    s32 f198;
+    u16 flags;
+    u16 id;
+    s32 f1A0;
+    s32 f1A4;
+    Shared_ParticleLighting light;
+    s32 visBits;
+    s32 f1C4;
+} SimpleInstanceOut;
+/* 121/128 words (7 aligned edits); remaining: store scheduling of the box max z and the two zero words at 0x1A0 */
+void func_8024E990_de(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, char *segments) {
+    CVector3 v;
+    inst->kind = 3;
+    inst->type = rec->type;
+    inst->visBits = rec->visBits;
+    inst->position = rec->position;
+    inst->position.y = inst->position.y + D_800C3D80_de;
+    inst->rotY = rec->rotY * D_800C3D84_de;
+    inst->f194 = D_800C3D88_de;
+    inst->f198 = 0;
+    inst->boxMin.x = rec->position.x - rec->maxRadius;
+    inst->boxMin.y = rec->position.y - rec->maxRadius;
+    inst->boxMin.z = rec->position.z - rec->maxRadius;
+    inst->boxMax.x = rec->position.x + rec->maxRadius;
+    inst->boxMax.y = rec->position.y + rec->maxRadius;
+    inst->boxMax.z = rec->position.z + rec->maxRadius;
+    inst->owner = owner;
+    inst->f54 = -1;
+    inst->f58 = 0;
+    inst->f5C = 0;
+    if (rec->variation == 0xFFFF) {
+        inst->variation = &D_8011B388;
     } else {
-        ((s8 **) arg0)[24 / sizeof(s8 *)] = func_8028CF6C_de(&D_8011FE88, (s32) ((u16 *) arg1)[28 / sizeof(u16)]);
+        inst->variation = func_8028CF6C_de(&D_8011FE88, rec->variation);
     }
-    if (((u16 *) arg1)[22 / sizeof(u16)] == 0xFFFF) {
-        ((s32 *) arg0)[20 / sizeof(s32)] = 0;
+    if (rec->region == 0xFFFF) {
+        inst->region = 0;
     } else {
-        ((s32 *) arg0)[20 / sizeof(s32)] = (s32) (arg3 + (((u16 *) arg1)[22 / sizeof(u16)] << 5));
+        inst->region = segments + (rec->region << 5);
     }
-    ((s32 *) arg0)[416 / sizeof(s32)] = 0;
-    ((s32 *) arg0)[420 / sizeof(s32)] = 0;
-    ((s16 *) arg0)[412 / sizeof(s16)] = (s16) (((u16 *) arg1)[24 / sizeof(u16)] | 2);
-    ((u16 *) arg0)[414 / sizeof(u16)] = (u16) ((u16 *) arg1)[26 / sizeof(u16)];
-    Particle_GetActorHeight(arg0);
-    ((s32 *) arg0)[424 / sizeof(s32)] = (s32) ((s32 *) D_800CBC90)[0 / sizeof(s32)];
-    ((s32 *) arg0)[428 / sizeof(s32)] = (s32) ((s32 *) D_800CBC90)[4 / sizeof(s32)];
-    ((s32 *) arg0)[432 / sizeof(s32)] = (s32) ((s32 *) D_800CBC90)[8 / sizeof(s32)];
-    ((s32 *) arg0)[436 / sizeof(s32)] = (s32) ((s32 *) D_800CBC90)[12 / sizeof(s32)];
-    ((s32 *) arg0)[440 / sizeof(s32)] = (s32) ((s32 *) D_800CBC90)[16 / sizeof(s32)];
-    ((s32 *) arg0)[444 / sizeof(s32)] = (s32) ((s32 *) D_800CBC90)[20 / sizeof(s32)];
-    ((s32 *) arg0)[452 / sizeof(s32)] = 0;
+    inst->f1A0 = 0;
+    inst->f1A4 = 0;
+    inst->flags = rec->flags | 2;
+    inst->id = rec->id;
+    v.x = inst->position.x;
+    v.y = inst->position.y + Particle_GetActorHeight(inst) * D_800C3D8C_de;
+    v.z = inst->position.z;
+    inst->light = D_800CBC90[0];
+    inst->f1C4 = 0;
 }
 #else
 INCLUDE_ASM("span_1000", func_8024E990_de);
