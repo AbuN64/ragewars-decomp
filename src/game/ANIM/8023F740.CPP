@@ -175,8 +175,7 @@ void func_8023FD18_de(BoxContactRay *ray, BoxContactActor *actor, CVector3 *orig
     func_8023F750_de(ray, bounds, actor, origin, vertices, 0, -1);
 }
 
-#ifdef NON_MATCHING
-/* 99/182 aligned edits; remaining: register roles of the loop locals (self/state/owner/candidate) */
+/* Collect overlapping actors, sort their contact distances, and dispatch each contact within range. */
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
 typedef struct SortedCandidate { LevelActor *object; f32 distance; } SortedCandidate;
@@ -201,29 +200,38 @@ typedef struct HitSelf {
     f32 range; /* 0x17C */
 } HitSelf;
 extern LevelActor **D_80103FCC;
-extern u8 D_801462C8[];
+#include "COMMON/SHARED_GAMESLOT.H"
 extern char D_002405FC[], D_00240638[];
 extern void func_802852C0_de();
 extern void func_8023F644_de(void *, void *);
 void Anim_ProcessEntityContacts(HitSelf *self) {
     HitState *state = self->state;
-    SortedCandidate list[0x20];
     u8 scratch[0x30];
+    SortedCandidate list[0x20];
+    SortedCandidate *entry;
+    u8 *ownerPosition;
     HitOwner *owner;
+    Shared_World *world;
+    Shared_Game *game;
     LevelActor *candidate;
     s32 total;
-    s32 count = 0;
-    s32 i;
+    s32 count;
+    s32 i, contactIndex;
     s32 kind;
     f32 distance;
     if (state->mode == 0 || !(state->flags & 0x10000)) {
         return;
     }
+    entry = list;
+    count = i = 0;
     owner = self->owner;
-    total = D_8011FE88.moverCount;
-    for (i = 0; i < total && count < 0x20; i++) {
-        candidate = D_8011FE88.movers[i];
-        if (candidate == (LevelActor *)owner) {
+    ownerPosition = (u8 *)owner + 8;
+    world = &D_8011FE88;
+    total = world->moverCount;
+    for (; i < total; i++) {
+        if (count >= 0x20) break;
+        candidate = world->movers[i];
+        if ((LevelActor *)owner == candidate) {
             continue;
         }
         if (state->mode == 7 && *D_80103FCC == candidate) {
@@ -241,38 +249,37 @@ void Anim_ProcessEntityContacts(HitSelf *self) {
                 continue;
             }
         }
-        if (!(candidate->bounds.min.x < self->box.max.x)) continue;
+        if (!(self->box.max.x > candidate->bounds.min.x)) continue;
         if (!(self->box.min.x < candidate->bounds.max.x)) continue;
-        if (!(candidate->bounds.min.z < self->box.max.z)) continue;
+        if (!(self->box.max.z > candidate->bounds.min.z)) continue;
         if (!(self->box.min.z < candidate->bounds.max.z)) continue;
-        if (!(candidate->bounds.min.y < self->box.max.y)) continue;
+        if (!(self->box.max.y > candidate->bounds.min.y)) continue;
         if (!(self->box.min.y < candidate->bounds.max.y)) continue;
         if (func_8023DAA0_de(self, &candidate->bounds, &distance) != 0) {
-            list[count].object = candidate;
-            list[count].distance = distance;
+            entry->object = candidate;
+            entry->distance = distance;
             count++;
+            entry++;
         }
     }
     if (count == 0) {
         return;
     }
     func_802852C0_de(list, count, 8, D_00240638, D_002405FC);
-    for (i = 0; i < count; i++) {
-        if (!(list[i].distance < self->range)) {
+    entry = list;
+    for (contactIndex = 0; contactIndex < count; contactIndex++, entry++) {
+        if (!(entry->distance < self->range)) {
             return;
         }
-        candidate = list[i].object;
-        if ((candidate->flags & 0x300000) && D_801462C8[0x1D] == 0) {
+        candidate = entry->object;
+        if ((candidate->flags & 0x300000) && (game = &D_801462C8)->local == 0) {
             func_8023F644_de(self, scratch);
             Anim_TestEntityContact(self, scratch, candidate);
         } else {
-            func_8023FD18_de(self, candidate, (u8 *)owner + 8, &self->box);
+            func_8023FD18_de(self, candidate, ownerPosition, &self->box);
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Anim_ProcessEntityContacts);
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_800C3654[3] = {
