@@ -6,8 +6,8 @@
 #include "TYPES.H"
 #include "SDK/PRINTF/802C31B0.H"
 
-#ifdef NON_MATCHING
-/* 104/337 words; remaining: draft builds 355 words, the original format-spec switch and register allocation differ */
+#if defined(VERSION_US_REV1)
+/* _Printf core of the SDK: scans the format, parses flags, width, precision and size qualifier, and emits each field through prout. */
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -23,8 +23,8 @@ extern const char D_800D52B0[];
 extern const char D_800D52D4[];
 
 
-/* ~326/337 words; remaining: the ROM loads each va_arg int before advancing the cursor (lw a0,0(v0) then addiu), this expansion advances first */
-#define PRINTF_VA_INT(ap) (*(int *)((ap = (va_list)((((unsigned int)(ap) + 3) & -4) + 4)) - 4))
+/* va_arg(ap, int) as this SDK expands it: load at the aligned cursor, then advance it. */
+#define PRINTF_VA_INT(ap) ({ int _v = *(int *)((((unsigned int)(ap) + 3) & -4)); ap = (va_list)((((unsigned int)(ap) + 3) & -4) + 4); _v; })
 #define PRINTF_PUT(s, n) \
     if (0 < (n)) { \
         arg = (*prout)(arg, (const char *)(s), (n)); \
