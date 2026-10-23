@@ -4,7 +4,7 @@
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
-typedef struct AchieveRecord { u8 pad0[0x78]; u8 active; u8 pad79[0x17]; u8 team; u8 pad92[5]; } AchieveRecord;
+typedef struct AchieveRecord { u8 pad0[0x78]; u8 active; u8 pad79[0x18]; u8 team; u8 pad92[4]; } AchieveRecord;
 typedef struct AchieveCounters { u8 pad0[0x96]; } AchieveCounters;
 extern u8 D_80142369[][0x96];
 extern s32 D_800FEB70[][100];
@@ -13,26 +13,34 @@ extern s8 D_8014222C;
 extern s8 D_8014222D;
 extern AchieveRecord D_80146398[];
 extern s32 D_800FF140_de[];
-extern s8 D_801462C8[];
+typedef struct { s8 pad[0x24]; s8 a; s8 b; } Settings;
+extern Settings D_801462C8;
+/* 86/102 words; remaining: register assignment of the loop temporaries (count, eligible, i<<2) and the base bias of the record pointer */
 void func_80424C50_de(s32 arg0, s32 arg1) {
     s32 count;
     s32 i;
     s32 eligible;
     s32 value;
+    s32 result;
+    AchieveRecord *rec;
+    Settings *cfg;
     if (D_80142369[arg0][0] == 1) {
         return;
     }
-    if (D_800FEB70[arg0][0] + 1 > 99999) {
+    value = D_800FEB70[arg0][0] + 1;
+    if (value > 99999) {
         D_800FEB70[arg0][0] = 99999;
     } else {
-        D_800FEB70[arg0][0] = D_800FEB70[arg0][0] + 1;
+        D_800FEB70[arg0][0] = value;
     }
     eligible = 1;
-    if (D_8014222C > 0 || D_8014222D > 0) {
+    if (D_8014222C <= 0 && D_8014222D <= 0) {
+        result = 0;
+    } else {
         count = 0;
-        for (i = 0; i < 8; i++) {
-            if (D_80146398[i].active == 1) {
-                if (D_80146398[i].team != D_80146398[i].active) {
+        for (i = 0, rec = D_80146398; i < 8; i++, rec++) {
+            if (rec->active == 1) {
+                if (rec->team != rec->active) {
                     if (D_800FF140_de[i] >= 0x4C) {
                         count++;
                     }
@@ -42,11 +50,11 @@ void func_80424C50_de(s32 arg0, s32 arg1) {
         if (count < 2) {
             eligible = 0;
         }
-    } else {
-        eligible = 0;
+        result = eligible;
     }
-    if (eligible == 1) {
-        if (D_801462C8[0x24] >= 10 || D_801462C8[0x25] >= 10) {
+    if (result == 1) {
+        cfg = &D_801462C8;
+        if (cfg->a >= 10 || cfg->b >= 10) {
             value = D_800FEB26[arg1 + arg0 * 400] + 1;
             if (value >= 6) {
                 D_800FEB26[arg1 + arg0 * 400] = 5;
