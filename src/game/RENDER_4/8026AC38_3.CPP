@@ -180,8 +180,8 @@ extern s32 D_800CC364;
 extern u32 D_800CC384;
 extern void func_80253BBC_de(s32, void **);
 
-void func_8026C6D8_de(s32 alpha, s32 resource, void *matrix,
-                     s32 segment, void *textures, s32 arg5, s32 arg6) {
+void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
+                     s32 segment, void *textures, s32 useProvidedTextures, s32 arg6) {
     void *header;
     void *parts;
     void *part;
@@ -201,7 +201,7 @@ void func_8026C6D8_de(s32 alpha, s32 resource, void *matrix,
     } else {
         gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
     }
-    if (textures == 0) {
+    if (useProvidedTextures == 0) {
         textures = func_8028FDB4_de(header, 0);
     }
     gSPSegment(D_80110634++, 2, (u32)textures);
@@ -231,5 +231,5 @@ void func_8026C6D8_de(s32 alpha, s32 resource, void *matrix,
     D_800CC360 = -1;
 }
 #else
-INCLUDE_ASM("span_1000", func_8026C6D8_de);
+INCLUDE_ASM("span_1000", Render_DrawResourceModel);
 #endif

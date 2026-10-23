@@ -10,7 +10,7 @@
 
 /* Draws an actor's attached model: when the actor has one, allocates a matrix from the pool D_8011FFB0,
  * fills it with the given transform multiplied by the camera matrix (func_8026F898_de, func_80272828_de,
- * func_8026FC9C_de), loads it into the display list, draws the model through func_8026C6D8_de with the
+ * func_8026FC9C_de), loads it into the display list, draws the model through Render_DrawResourceModel with the
  * actor's per-frame state for the current frame, then reloads the camera's per-frame matrix. */
 
 
@@ -56,7 +56,7 @@ void func_8024BA7C_de(void *actor, Camera *camera, f32 *transform, u8 layer) {
             func_80272828_de(mf);
             func_8026FC9C_de(mf, mtx);
             gSPMatrix(D_80110634++, mtx, G_MTX_LOAD | G_MTX_PROJECTION);
-            func_8026C6D8_de(layer, camera->style, object->fieldB4, 1,
+            Render_DrawResourceModel(layer, camera->style, object->fieldB4, 1,
                           &object->lighting[D_800D297C], 0, object->field3);
             restore = D_80110634++;
             offset = (D_800D297C << 6) + 0x380;
