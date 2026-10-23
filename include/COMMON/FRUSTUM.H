@@ -5,9 +5,6 @@
 extern f32 func_802969B0_de(f32 *a, f32 *b);
 
 struct Frustum;
-struct Frustum {
-    f32 planes[6][4];
-};
 
 extern f32 func_80296930_de(f32 *arg0, f32 *arg1, f32 *arg2);
 

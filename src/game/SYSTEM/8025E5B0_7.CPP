@@ -1,4 +1,5 @@
 #include "COMMON/STREAM.H"
+#include "SYSTEM/8025E5B0.H"
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"
 #include "RENDER_4/8028FD2C_6.H"

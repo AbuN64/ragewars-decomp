@@ -2,6 +2,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/OSVISCALE.H"
 #include "COMMON/UNUSED.H"
+#include "SYSTEM/802BA5F0.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 #include "COMMON/EXTERNS_3.H"

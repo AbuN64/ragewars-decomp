@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/FRUSTUM.H"
+#include "SYSTEM/80296FF8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"

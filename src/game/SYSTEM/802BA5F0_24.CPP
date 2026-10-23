@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OSVISCALE.H"
+#include "SYSTEM/802BA5F0.H"
 #include "TYPES.H"
 #include "sdk/os.h"
 

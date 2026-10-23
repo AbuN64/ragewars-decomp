@@ -1,4 +1,6 @@
 #include "COMMON/LOCALDECODERANGE.H"
+#include "SYSTEM/802609CC.H"
+#include "SYSTEM/8025E5B0.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"

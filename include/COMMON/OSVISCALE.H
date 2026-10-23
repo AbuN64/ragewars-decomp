@@ -82,13 +82,6 @@ struct OSViFieldRegs;
 typedef struct OSViFieldRegs OSViFieldRegs;
 
 struct RecCode802BA23C;
-struct RecCode802BA23C {
-    char pad0[2];
-    s16 f2;
-    char pad4[0xC];
-    s32 f10;
-    s32 f14;
-};
 
 struct ObjectState28;
 struct ObjectState28 {

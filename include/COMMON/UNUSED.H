@@ -17264,26 +17264,7 @@ struct Shared_Screen {
     s32 lastPick;
 };
 struct Shared_func_80261EB8_S1;
-struct Shared_func_80261EB8_S1 {
-    f32 unk0;
-    char pad4[0x4];
-    s16 unk8;
-    char padA[0x2];
-    s32 unkC;
-    s32 ** unk10;
-};
 struct Shared_func_80261EB8_S2;
-struct Shared_func_80261EB8_S2 {
-    s8 * unk0;
-    s8 * unk4;
-    s8 * unk8;
-    s8 * unkC;
-    s32 unk10;
-    s32 unk14;
-    s32 unk18;
-    s32 unk1C;
-    f32 unk20;
-};
 struct SlotDialog;
 struct SlotDialog {
     s32 root;
@@ -17700,15 +17681,6 @@ struct _Pft {
     unsigned char qual;
 };
 struct __OSViContext;
-struct __OSViContext {
-    u16 state;
-    u16 retraceCount;
-    void *framep;
-    void *modep;
-    u32 control;
-    Opaque_OSMesgQueue *msgq;
-    void * msg;
-};
 union du;
 union du {
     struct {
