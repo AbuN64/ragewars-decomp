@@ -9,7 +9,12 @@
 extern u32 D_8010C070;
 extern u32 D_8010C07C;
 
-extern u16 D_8010C07E;
+typedef union PackedSampleBits {
+    u32 word;
+    u16 halves[2];
+    u8 bytes[4];
+} PackedSampleBits;
+
 static inline void advance_bits(s32 width) {
     u32 previous = D_8010C07C;
     s32 available = D_8010C080_de;
@@ -43,25 +48,34 @@ static inline u32 predictor_bits(void) {
     return bits;
 }
 
-/* Decodes count ADPCM-style samples: 3-bit deltas scaled by a per-group shift and two predictor taps (group of 4 samples
- * per 6-bit descriptor), integrated into a running sample clamped to 16 bits.
- * 63 aligned edits of 148 words; remaining: the ROM keeps the -8 sign-fill constant in a loop-hoisted register (so the
- * s16 extension survives) and allocates s0-s2 for hoisted constants; ours folds the extension and uses no s1/s2. */
+static inline s32 scaled_sample(s32 width, u8 shift) {
+    u32 mask = (1U << width) - 1;
+    u16 encoded = ((PackedSampleBits *)&D_8010C07C)->halves[1];
+    s32 value = encoded & mask;
+    advance_bits(width);
+    if (encoded & ((mask + 1) >> 1)) {
+        return (s16)(value | ~mask) * (1 << shift);
+    }
+    return value * (1 << shift);
+}
+
+/* Decode grouped predictor coefficients and three-bit deltas, integrate each sample,
+ * and clamp the output to signed 16 bits.
+ * 18/148 aligned edits; remaining: shift narrowing, accumulator copies and clamp scheduling. */
 void Render_DecodeThreeBitSamples(s32 destination, s32 count) {
     s16 *out = (s16 *)destination;
     s32 previous = 0;
     s32 older = 0;
     s32 sample;
-    u8 head = D_8010C07F;
+    u8 head = ((PackedSampleBits *)&D_8010C07C)->bytes[3];
     s32 group = 0;
     u8 shift;
     s32 first, second;
     s32 delta, predicted, clamped;
-    u32 raw, descriptor;
+    u32 descriptor;
     advance_bits(8);
     sample = (s8)head * 256;
-    while (count > 0) {
-        count--;
+    while (count-- > 0) {
         if (group-- == 0) {
             group = 3;
             descriptor = predictor_bits();
@@ -69,17 +83,13 @@ void Render_DecodeThreeBitSamples(s32 destination, s32 count) {
             first = D_800CBC30[descriptor >> 4];
             second = D_800CBC40[descriptor >> 4];
         }
-        raw = D_8010C07E & 7;
-        advance_bits(3);
-        delta = raw & 4 ? (s16)(raw | ~7U) : raw;
-        delta *= 1 << shift;
+        delta = scaled_sample(3, shift);
         predicted = (s32)((u32)previous * (u32)first + (u32)older * (u32)second);
         older = previous;
         previous = (s32)((u32)delta + (u32)(predicted >> 16));
         sample = (s32)((u32)sample + (u32)previous);
-        clamped = sample;
-        if (32767 < clamped) clamped = 32767;
-        if (clamped < -32768) clamped = -32768;
+        clamped = sample < 32767 ? sample : 32767;
+        clamped = clamped > -32768 ? clamped : -32768;
         *out++ = clamped;
     }
 }
