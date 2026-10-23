@@ -6081,7 +6081,7 @@ segments:
       - [0xE2268, rodata, data_800C/literals_func_804235E8_de]
       - [0xE2290, rodata, data_800C/literals_Frontend_ApplyModeChoice]
       - [0xE22B0, rodata, data_800C/literals_func_804243E0_de]
-      - [0xE233C, rodata, data_800C/literals_func_80424DE8_de]
+      - [0xE22C8, rodata, data_800C/literals_func_80424DE8_de]
       - [0xE2390, rodata, data_800C/literals_func_80425014_de]
       - [0xE255C, data, data_800C/D_blob_8168f1bc3cd4c4757edb]
       - [0xE2560, rodata, data_800C/literals_func_80425674_de]

@@ -2933,6 +2933,5 @@ D_800C3510_de = 0x800C8600;
 jtbl_800DE708 = 0x800E2738;
 jtbl_800DE728 = 0x800E2758;
 literals_func_80424DE8_de = 0x800E16C8; // rom:0xE22C8
-literals_func_80424DE8_de_2 = 0x800E173C; // rom:0xE233C
 literals_func_802ACE38_de = 0x800CB448; // rom:0xCC048 size:0x28
 literals_func_80204030_us_rev1 = 0x800C6B40; // rom:0xC7740 size:0x1C
