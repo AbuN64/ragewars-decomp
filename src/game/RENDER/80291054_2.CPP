@@ -93,7 +93,7 @@ extern void func_802567D0_de(void);
 extern void func_802BA350_de(s32 pri);
 extern void osViBlack(s32 active);
 extern void func_80405CA8_de(void *record);
-extern s32 func_804058B0_de(void *record);
+extern s32 Ovlgame_AllocateRenderBuffers(void *record);
 extern void func_802B155C_us_rev1(void *segment);
 extern void func_8044A62C_de(void *players);
 extern void func_80449DB0_de(void *menu);
@@ -128,7 +128,7 @@ void func_80291404(void *arg0) {
         }
     }
     func_80405CA8_de(D_auto_801536C8);
-    func_804058B0_de(D_auto_801536C8);
+    Ovlgame_AllocateRenderBuffers(D_auto_801536C8);
     osViSwapBuffer((s32)D_8014D468_de[0]);
     osViBlack(0);
     if (D_80000300 == 0) {
@@ -232,7 +232,7 @@ extern void func_802567D0_de(void);
 extern void func_802BA350_de(s32 pri);
 extern void osViBlack(s32 active);
 extern void func_80405CA8_de(void *record);
-extern s32 func_804058B0_de(void *record);
+extern s32 Ovlgame_AllocateRenderBuffers(void *record);
 extern void func_8044A62C_de(void *players);
 extern void func_80449DB0_de(void *menu);
 extern void func_8023EE00_de(void);
@@ -266,7 +266,7 @@ void func_80291404(void *arg0) {
         }
     }
     func_80405CA8_de(D_8014D438);
-    func_804058B0_de(D_8014D438);
+    Ovlgame_AllocateRenderBuffers(D_8014D438);
     osViSwapBuffer((s32)D_8014D468_de[0]);
     osViBlack(0);
     if (D_80000300 == 0) {

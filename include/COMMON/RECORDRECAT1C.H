@@ -105,5 +105,5 @@ typedef struct Menu_func_80408C4C_de Menu_func_80408C4C_de;
 struct PakRecord;
 typedef struct PakRecord PakRecord;
 
-extern int func_804058B0_de(struct RecordRecAt1C * arg0);
+extern int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C * arg0);
 #endif

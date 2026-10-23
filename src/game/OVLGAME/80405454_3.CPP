@@ -227,33 +227,39 @@ extern s32 D_800DCD4C;
 extern u8 D_800DCD00_de[];
 #include "COMMON/DISPLAY.H"
 
-int func_804058B0_de(struct RecordRecAt1C *record) {
-    void **param_1 = (void **)record;
+/* 54/254 aligned edits; remaining: register allocation and buffer setup scheduling. */
+int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
     void **puVar2;
+    void **clearSlot;
+    s32 clearIndex;
     u32 uVar3;
     s32 *piVar4;
+    s32 *compactHandle;
+    u32 compactCount;
     s32 *piVar5;
     u32 uVar6;
     u32 uVar7;
     s32 iVar8;
     u32 blockSize;
-    s32 count;
-    s32 i;
+    u32 memoryAddress;
+    u32 megabyte = 0x100000;
+    u32 count;
+    u32 i;
 
-    if (param_1[1] != 0) {
-        func_80253838_de(0, param_1[1]);
+    if (((void **)record)[1] != 0) {
+        func_80253838_de(0, ((void **)record)[1]);
     }
-    if (param_1[2] != 0) {
-        func_80253838_de(0, param_1[2]);
+    if (((void **)record)[2] != 0) {
+        func_80253838_de(0, ((void **)record)[2]);
     }
-    if (param_1[6] != 0) {
-        func_80253838_de(0, param_1[6]);
+    if (((void **)record)[6] != 0) {
+        func_80253838_de(0, ((void **)record)[6]);
     }
-    if (param_1[7] != 0) {
-        func_80253838_de(0, param_1[7]);
+    if (((void **)record)[7] != 0) {
+        func_80253838_de(0, ((void **)record)[7]);
     }
     iVar8 = 0;
-    puVar2 = param_1;
+    puVar2 = ((void **)record);
     do {
         if (puVar2[3] != 0) {
             func_80253838_de(0, puVar2[3]);
@@ -262,65 +268,67 @@ int func_804058B0_de(struct RecordRecAt1C *record) {
         puVar2 = puVar2 + 1;
     } while (iVar8 < 3);
 
-    iVar8 = 2;
-    puVar2 = param_1 + 2;
-    *param_1 = 0;
-    param_1[1] = 0;
-    param_1[2] = 0;
-    param_1[6] = 0;
-    param_1[7] = 0;
+    clearIndex = 2;
+    clearSlot = ((void **)record) + 2;
+    *((void **)record) = 0;
+    ((void **)record)[1] = 0;
+    ((void **)record)[2] = 0;
+    ((void **)record)[6] = 0;
+    ((void **)record)[7] = 0;
     do {
-        puVar2[3] = 0;
-        iVar8 = iVar8 - 1;
-        puVar2 = puVar2 - 1;
-    } while (-1 < iVar8);
+        clearSlot[3] = 0;
+        clearIndex = clearIndex - 1;
+        clearSlot = clearSlot - 1;
+    } while (-1 < clearIndex);
 
     uVar3 = func_80265350_de();
-    if (uVar3 < 0x600000) {
-        blockSize = 0x1ecc0;
-        piVar4 = (s32 *)func_80253530_de(0, (s32)(0x80400000U + (D_800DE850 + 1) * -0x1ecc0),
-                                         (D_800DE850 + 1) * 0x1ecc0, D_800DCD1C);
-        count = D_800DE850;
-        param_1[3] = piVar4;
-        for (i = 0; i < count; i++) {
-            D_8014D468_de[i] = (void *)(*piVar4 + i * 0x1ecc0);
-        }
-        D_801536E8 = (void *)(*piVar4 + count * 0x1ecc0);
-    } else {
-        uVar3 = func_80265350_de();
-        D_800DE850 = 3;
-        piVar4 = (s32 *)func_80253530_de(0, (s32)((uVar3 | 0x80000000) - 0x100000), 0x54600,
-                                         D_800DCD00_de);
+    if (uVar3 >= 6 * megabyte) {
         blockSize = 0x54600;
-        piVar5 = (s32 *)func_80253530_de(0, (s32)((uVar3 | 0x80000000) - 0x200000),
-                                         D_800DE850 * 0x54600, D_800DCD0C);
+        uVar3 = func_80265350_de();
+        memoryAddress = uVar3 | 0x80000000;
+        D_800DE850 = 3;
+        piVar4 = (s32 *)func_80253530_de(0, (s32)(memoryAddress - megabyte), 0x54600,
+                                         D_800DCD00_de);
+        piVar5 = (s32 *)func_80253530_de(0, (s32)(memoryAddress - 2 * megabyte),
+                                         D_800DE850 * blockSize, D_800DCD0C);
         func_802A001C_de((void *)*piVar5, 0, 0xfd200);
         func_802A001C_de((void *)*piVar4, 0, 0x54600);
-        param_1[6] = piVar4;
-        param_1[3] = piVar5;
-        count = D_800DE850;
+        ((void **)record)[6] = piVar4;
+        ((void **)record)[3] = piVar5;
         D_801536E8 = (void *)*piVar4;
+        count = D_800DE850;
         for (i = 0; i < count; i++) {
-            D_8014D468_de[i] = (void *)(*piVar5 + i * 0x54600);
+            D_8014D468_de[i] = (void *)(*piVar5 + i * blockSize);
         }
-    }
+        } else {
+        blockSize = 0x1ecc0;
+        memoryAddress = 0x80400000U;
+        compactHandle = (s32 *)func_80253530_de(0, (s32)(memoryAddress - (D_800DE850 + 1) * blockSize),
+                                         (D_800DE850 + 1) * blockSize, D_800DCD1C);
+        compactCount = D_800DE850;
+        ((void **)record)[3] = compactHandle;
+        for (i = 0; i < compactCount; i++) {
+            D_8014D468_de[i] = (void *)(*compactHandle + blockSize * i);
+        }
+        D_801536E8 = (void *)(*compactHandle + blockSize * i);
+        }
 
     for (i = 0; i < D_800DE850; i++) {
         func_802A001C_de(D_8014D468_de[i], 0, blockSize);
     }
     func_802A001C_de(D_801536E8, 0, blockSize);
 
-    param_1[1] = func_8025343C_de(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
-    param_1[2] = func_8025343C_de(0, 0x8000, 0x23, &D_800DCD4C);
-    param_1[7] = func_8025343C_de(0, 0x22000, 0x23, D_800DCD54);
+    ((void **)record)[1] = func_8025343C_de(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
+    ((void **)record)[2] = func_8025343C_de(0, 0x8000, 0x23, &D_800DCD4C);
+    ((void **)record)[7] = func_8025343C_de(0, 0x22000, 0x23, D_800DCD54);
     iVar8 = D_800E28A4;
     D_8014D424 = 0x8000;
     D_8014D45C = 0x22000;
-    D_8014D460 = *(Gfx **)param_1[1];
-    D_8014D420_de = *(s32 *)param_1[7];
+    D_8014D460 = *(Gfx **)((void **)record)[1];
+    D_8014D420_de = *(s32 *)((void **)record)[7];
     D_8014D42C = D_8014D460 + iVar8;
     D_8014D464 = D_8014D42C + D_800DE858;
-    D_8014D428 = *(u64 **)param_1[2];
+    D_8014D428 = *(u64 **)((void **)record)[2];
     D_8014D430_de = D_8014D464 + iVar8;
     if (D_800DE850 != 0) {
         uVar6 = 1;
@@ -329,9 +337,9 @@ int func_804058B0_de(struct RecordRecAt1C *record) {
             uVar6 = uVar6 + 1;
         } while (uVar7);
     }
-    *param_1 = (void *)1;
+    *((void **)record) = (void *)1;
     return 1;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_804058B0_de);
+INCLUDE_ASM("ovl_80400000", Ovlgame_AllocateRenderBuffers);
 #endif
