@@ -8,7 +8,6 @@
 #include "TYPES.H"
 
 #include "COMMON/OBJRECAT5F14.H"
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/EXTERNS_14.H"
@@ -18,109 +17,62 @@
 
 s32 func_80263154_de(BitReader *, s32);
 
-void func_80296020_de(void *storage, s32 first, s32 second,
-                     DraftStreamData *source, CVector3 *position) {
-    ResourceBitGrid *grid = storage;
-    union { s32 word; f32 value; } bounds[6];
-    s32 count, selected, i, row, column, code, skip;
-    grid->originX = first;
-    grid->originY = second;
-    count = source->count;
-    selected = 1;
-    if ((u32)count > 1U) {
-        do {
-            grid->reader.data = func_8028FDB4_de(&source->count, selected);
-            grid->reader.bitPos = 0;
-            for (i = 0; i < 6; i++) bounds[i].word = func_80263154_de(&grid->reader, 32);
-            if (bounds[0].value < position->x && position->x < bounds[3].value &&
-                bounds[1].value < position->y && position->y < bounds[4].value &&
-                bounds[2].value < position->z && position->z < bounds[5].value) break;
-            selected++;
-        } while ((u32)selected < (u32)count);
-    }
-    if (selected == count) {
-        grid->reader.data = func_8028FDB4_de(&source->count, 0);
-        grid->reader.bitPos = 0;
-    }
-    for (row = 0; row < 17; row++) {
-        for (column = 0; column < 17; column++) {
-            code = func_80263154_de(&grid->reader, 2);
-            switch (code) {
-            case 1: grid->cells[row * 17 + column] = -2; break;
-            case 0: grid->cells[row * 17 + column] = -3; break;
-            case 2: grid->cells[row * 17 + column] = 0; break;
-            case 3: grid->cells[row * 17 + column] = 3; break;
-            }
-        }
-    }
-    for (row = 0; row < 17; row++) {
-        for (column = 0; column < 17; column++) {
-            if (grid->cells[row * 17 + column] == 0) {
-                grid->cells[row * 17 + column] = (u16)grid->reader.bitPos;
-                skip = func_80263154_de(&grid->reader, 9);
-                grid->reader.bitPos += skip;
-            }
-        }
-    }
-}
-#if defined(VERSION_US_REV1)
+#ifdef NON_MATCHING
 extern void func_802630E0_de(BitReader *, void *);
-void func_80297024(ResourceBitGrid *grid, s32 first, s32 second,
+/* Decode a 17-by-17 region grid, then replace variable cells with stream offsets.
+ * 5/162 aligned edits remain: the final bounds store precedes the first comparison. */
+void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
                    DraftStreamData *source, CVector3 *position) {
-    union { f32 f[4]; s32 i[4]; } lo, hi;
-    s32 count, selected, row, column, code, index;
-    grid->originX = first;
-    grid->originY = second;
-    count = source->count;
-    selected = 1;
-    while ((u32)selected < (u32)count) {
-        func_802630E0_de(&grid->reader, func_8028FDB4_de(&source->count, selected));
-        lo.i[0] = func_80263154_de(&grid->reader, 32);
-        lo.i[1] = func_80263154_de(&grid->reader, 32);
-        lo.i[2] = func_80263154_de(&grid->reader, 32);
-        hi.i[0] = func_80263154_de(&grid->reader, 32);
-        hi.i[1] = func_80263154_de(&grid->reader, 32);
-        hi.i[2] = func_80263154_de(&grid->reader, 32);
-        if (lo.f[0] < position->x && position->x < hi.f[0] &&
-            lo.f[1] < position->y && position->y < hi.f[1] &&
-            lo.f[2] < position->z && position->z < hi.f[2]) break;
-        selected++;
+    union { CVector3 vector; s32 i[3]; } minimum, maximum;
+    u32 streamCount, streamIndex;
+    s32 row, column, cellCode, index;
+    s32 *streamTable = &source->count;
+    grid->originX = originX;
+    grid->originY = originZ;
+    streamCount = *streamTable;
+    streamIndex = 1;
+    while (streamIndex < streamCount) {
+        func_802630E0_de(&grid->reader, func_8028FDB4_de(streamTable, streamIndex));
+        minimum.i[0] = func_80263154_de(&grid->reader, 32);
+        minimum.i[1] = func_80263154_de(&grid->reader, 32);
+        minimum.i[2] = func_80263154_de(&grid->reader, 32);
+        maximum.i[0] = func_80263154_de(&grid->reader, 32);
+        maximum.i[1] = func_80263154_de(&grid->reader, 32);
+        maximum.i[2] = func_80263154_de(&grid->reader, 32);
+        if (position->x > minimum.vector.x && position->x < maximum.vector.x &&
+            position->y > minimum.vector.y && position->y < maximum.vector.y &&
+            position->z > minimum.vector.z && position->z < maximum.vector.z) break;
+        streamIndex++;
     }
-    if (selected == count) {
-        func_802630E0_de(&grid->reader, func_8028FDB4_de(&source->count, 0));
+    if (streamIndex == streamCount) {
+        func_802630E0_de(&grid->reader, func_8028FDB4_de(streamTable, 0));
     }
-    index = 0;
-    for (row = 0; row < 17; row++) {
-        for (column = 0; column < 17; column++) {
-            code = func_80263154_de(&grid->reader, 2);
-            if (code == 1) grid->cells[index] = -2;
-            else if (code == 0) grid->cells[index] = -3;
-            else if (code == 2) grid->cells[index] = 0;
-            else if (code == 3) grid->cells[index] = code;
-            index++;
+    for (index = row = 0; row < 17; row++) {
+        for (column = 0; column < 17; column++, index++) {
+            cellCode = func_80263154_de(&grid->reader, 2);
+            if (cellCode != 1) {
+                if (cellCode != 0) {
+                    if (cellCode != 2) {
+                        if (cellCode == 3) grid->cells[index] = cellCode;
+                    } else grid->cells[index] = 0;
+                } else grid->cells[index] = -3;
+            } else grid->cells[index] = -2;
         }
     }
-    index = 0;
-    for (row = 0; row < 17; row++) {
-        for (column = 0; column < 17; column++) {
+    for (index = row = 0; row < 17; row++) {
+        for (column = 0; column < 17; column++, index++) {
             if (grid->cells[index] == 0) {
                 grid->cells[index] = (u16)grid->reader.bitPos;
                 grid->reader.bitPos += func_80263154_de(&grid->reader, 9);
             }
-            index++;
         }
     }
 }
-#endif
 #else
-#if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
-INCLUDE_ASM("span_1000", func_80296020_de);
-#endif
 #if defined(VERSION_EU_X)
 INCLUDE_ASM("span_1000", func_80296174);
-#endif
-#if defined(VERSION_US_REV1)
-INCLUDE_ASM("span_1000", func_80297024);
+#else
+INCLUDE_ASM("span_1000", System_DecodeRegionGrid);
 #endif
 #endif
 

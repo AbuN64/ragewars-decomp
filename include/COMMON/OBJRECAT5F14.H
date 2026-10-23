@@ -174,7 +174,7 @@ struct BitReader {
     s32 bitPos;
 };
 
-/* The 0x25C-byte region-grid state (func_80296020_de fills it): the bit reader on the stream, the grid's origin,
+/* The 0x25C-byte region-grid state (System_DecodeRegionGrid fills it): the bit reader on the stream, the grid's origin,
  * the last cell lookup, and one signed code (or stream offset) per cell of the 17x17 grid. */
 struct ResourceBitGrid;
 typedef struct ResourceBitGrid ResourceBitGrid;

@@ -66,7 +66,7 @@ void func_80288470_de(DraftStreamWorld *world)
             world->special = (void *)func_80254408_de(0, world->specialTable, focusX + focusZ * xCount + 1,
                 world->resourceKey, world, D_00285160, D_800C5220_de);
             func_80253670_de(0, (void *)world->special);
-            func_80296020_de(world->specialState, focusX, focusZ, world->special->data, &viewers->position);
+            System_DecodeRegionGrid(world->specialState, focusX, focusZ, world->special->data, &viewers->position);
         }
         }
         z = firstZ;

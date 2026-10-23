@@ -7263,7 +7263,7 @@ func_80295F78_de = 0x80296F7C; // type:func rom:0x97B7C
 func_80295FF4_de = 0x80296FF8; // type:func rom:0x97BF8
 func_80296004_de = 0x80297008; // type:func rom:0x97C08
 D_auto_func_80296168_eu_x_padding_97C18 = 0x80297018; // rom:0x97C18
-func_80296020_de = 0x80297020; // type:func rom:0x97C20
+System_DecodeRegionGrid = 0x80297020; // type:func rom:0x97C20
 func_802962A8_de = 0x802972A8; // type:func rom:0x97EA8
 func_80296390_de = 0x80297390; // type:func rom:0x97F90
 func_80296474_de = 0x80297474; // type:func rom:0x98074
@@ -13029,7 +13029,6 @@ D_src_149875c9 = 0x800E2AA2; // rom:0xE36A2
 D_src_d8a5d8c9 = 0x800E2AAA; // rom:0xE36AA
 rodata_unresolved_psyq_name_suffix_os = 0x800E6490; // rom:0xE7090
 data_unresolved_8020DDD4 = 0x8020DDD4; // rom:0xE9D4
-func_80297024 = 0x80297024; // type:func rom:0x97C24
 func_8040C648 = 0x8040C648; // type:func rom:0x17A648
 func_8042250C_us_rev1_padding_19050C = 0x8042250C; // rom:0x19050C
 

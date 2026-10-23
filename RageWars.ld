@@ -4924,7 +4924,6 @@ SECTIONS
         src/game/TEXTURE/80294C64_16.CPP.o(.text);
         src/game/SYSTEM/80296FF8_6.CPP.o(.text);
         src/game/SYSTEM/80296FF8_7.CPP.o(.data);
-        src/game/SYSTEM/80296FF8_8.CPP.o(.data);
         src/game/SYSTEM/80296FF8_9.CPP.o(.text);
         src/game/SYSTEM/80296FF8_10.CPP.o(.data);
         src/game/MATH/80297CD0.CPP.o(.text);
@@ -10110,7 +10109,6 @@ SECTIONS
         src/game/TEXTURE/80294C64_16.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/80296FF8_6.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/80296FF8_7.CPP.o(.bss .sbss COMMON);
-        src/game/SYSTEM/80296FF8_8.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/80296FF8_9.CPP.o(.bss .sbss COMMON);
         src/game/SYSTEM/80296FF8_10.CPP.o(.bss .sbss COMMON);
         src/game/MATH/80297CD0.CPP.o(.bss .sbss COMMON);
