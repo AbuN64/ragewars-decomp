@@ -9,7 +9,7 @@
 
 
 
-s32 func_80429178_us_rev1(void) {
+s32 Frontend_ClearLoadingHints(void) {
     func_8041B110_de(0x1D9);
     func_8041B110_de(0x1DA);
     return 0;

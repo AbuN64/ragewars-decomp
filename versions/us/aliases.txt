@@ -259,7 +259,6 @@ D_auto_rodata_unresolved_800FF160 = 0x800FF160;
 D_auto_rodata_writable_800FF17C = 0x800FF17C;
 data_unresolved_800FF1A0 = 0x800FF1A0;
 func_8040C638_us = 0x8040C640;
-func_80429178_us_rev1 = 0x80429180;
 func_8043F120_de = 0x8043F290;
 D_80202CA0_C76EC = 0x800C192C;
 D_80202E4C_C7700 = 0x800C1940;
