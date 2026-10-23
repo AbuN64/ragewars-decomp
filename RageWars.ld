@@ -5352,7 +5352,6 @@ SECTIONS
         src/sdk/libultra/audio/802BE370_2.CPP.o(.text);
         src/sdk/libultra/audio/802BE370_3.CPP.o(.text);
         src/sdk/libgcc/802C6A00_18.CPP.o(.data);
-        src/sdk/libgcc/802C6A00_19.CPP.o(.data);
         src/sdk/libultra/audio/802C3EA4.CPP.o(.text);
         src/sdk/libultra/audio/802C3EA4_2.CPP.o(.text);
         src/sdk/libultra/audio/802C3EA4_3.CPP.o(.text);
@@ -10543,7 +10542,6 @@ SECTIONS
         src/sdk/libultra/audio/802BE370_2.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/802BE370_3.CPP.o(.bss .sbss COMMON);
         src/sdk/libgcc/802C6A00_18.CPP.o(.bss .sbss COMMON);
-        src/sdk/libgcc/802C6A00_19.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/802C3EA4.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/802C3EA4_2.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/audio/802C3EA4_3.CPP.o(.bss .sbss COMMON);

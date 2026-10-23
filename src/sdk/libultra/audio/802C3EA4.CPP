@@ -14,7 +14,7 @@ extern u16 D_800D5350[];
 extern u16 D_800D5374[];
 extern u16 D_8014AE00;
 
-u16 func_802BEDB0_de(u16 *arg0, u16 arg1, s32 arg2, s32 arg3, void *arg4) {
+u16 Audio_ReadPackedSamples(u16 *arg0, u16 arg1, s32 arg2, s32 arg3, void *arg4) {
     s16 *temp_a3_2;
     s16 temp_a0_3;
     s16 temp_v0_2;
@@ -87,15 +87,7 @@ block_10:
     return 1U;
 }
 #else
-#if !(defined(VERSION_EU_X) || defined(VERSION_US_REV1))
-INCLUDE_ASM("span_1000", func_802BEDB0_de);
-#endif
-#if defined(VERSION_EU_X)
-INCLUDE_ASM("span_1000", func_802BF094);
-#endif
-#if defined(VERSION_US_REV1)
-INCLUDE_ASM("span_1000", func_802C3EA4);
-#endif
+INCLUDE_ASM("span_1000", Audio_ReadPackedSamples);
 #endif
 
 s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
@@ -142,7 +134,7 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
                         output++;
                     } else if ((s16)value == 0x900) {
                         value = *bits;
-                        if (func_802BEDB0_de(bits, table->width, 1, 0, arg4) == 0) {
+                        if (Audio_ReadPackedSamples(bits, table->width, 1, 0, arg4) == 0) {
                             return -1;
                         }
                         mask = (s16)output;
@@ -184,7 +176,7 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
                     node = mask;
                 }
             } else {
-                if (func_802BEDB0_de(&D_800D54BA, 16, 1, 0, arg4) == 0) {
+                if (Audio_ReadPackedSamples(&D_800D54BA, 16, 1, 0, arg4) == 0) {
                     return -1;
                 }
                 *available += 16;
@@ -195,107 +187,54 @@ s32 func_802BEF84_de(DecodeBlock *arg0, u16 *arg1, s16 arg2,
 }
 
 #ifdef NON_MATCHING
-/* 72/99 words; remaining: ref saves the s16 sign-extended call result in a second register, schedules i = 0 ahead of the header load, and keeps &table[i] in a1 across load and store */
+/* 12/99 aligned word edits remain: early error return and temporary register allocation. */
 #include "TYPES.H"
-typedef struct { char pad[0x18]; u16 header[16]; char gap[0x80]; u16 output[256]; } DraftStream;
 extern DecodeBlock D_800D5564[];
 extern s16 D_800D54BE;
 extern u16 D_8014AE10[16];
-s32 func_802BF388_de(DraftStream *stream) {
+s32 Audio_DecodeFrame(DecodeState *stream) {
     DecodeBlock *block = D_800D5564;
     s16 *flag = &D_800D54BE;
     s16 done[4];
     s16 i;
-    s16 result;
+    s32 result;
     if (*flag == 0) {
         u16 *table;
         *flag = 1;
-        if ((s16)func_802BEDB0_de(stream->header, 6, 16, 0, stream) <= 0) {
+        if ((s16)Audio_ReadPackedSamples(stream->frame, 6, 16, 0, stream) <= 0) {
             return -1;
         }
+        i = 0;
         table = D_8014AE10;
         block->offset += 0x60;
-        for (i = 0; i < 16; i++) {
-            table[i] = stream->header[i];
+        for (; i < 16; i++) {
+            table[i] = stream->frame[i];
         }
         while (block->kind != 0) {
             block++;
         }
     } else {
         u16 *table;
-        result = func_802BEF84_de(D_800D5564, stream->header, 16, done, stream);
+        result = (s16)func_802BEF84_de(block, stream->frame, 16, done, stream);
         if (result != 16) {
             return -1;
         }
-        block = &D_800D5564[done[0]];
+        i = 0;
+        block += done[0];
         table = D_8014AE10;
-        for (i = 0; i < 16; i++) {
-            u16 value = stream->header[i] + table[i];
-            stream->header[i] = value;
-            table[i] = value;
+        for (; i < 16; i++) {
+            u16 *entry = i + table;
+            u16 previous = *entry;
+            stream->frame[i] += previous;
+            *entry = stream->frame[i];
         }
     }
-    result = func_802BEF84_de(block, stream->output, 256, done, stream);
+    result = (s16)func_802BEF84_de(block, stream->frame + 80, 256, done, stream);
     if (result == 256) {
         return 1;
     }
     return -1;
 }
 #else
-INCLUDE_ASM("span_1000", func_802BF388_de);
-#endif
-#if defined(VERSION_US_REV1) && defined(NON_MATCHING)
-/* structure matches; remaining: register allocation (const 16 in s0, table bases in regs) */
-extern u16 D_800D5350[];
-extern u16 D_800D5374[];
-extern u16 D_8014AE00;
-u16 func_802C3EA4(u16 *dst, u16 bits, u16 count, s32 sign, void **stream) {
-    s16 i;
-    s32 sg;
-    u16 *left = &D_800D54B8;
-    u16 *cur = &D_8014AE00;
-    u16 *tab = D_800D5350;
-    u16 *mask = &tab[bits];
-    u16 *sbit = &D_800D5374[bits];
-    u16 *out;
-    s32 rem;
-    u16 v;
-    if (*left == 0) {
-        u16 *p = (u16 *)stream[5];
-        stream[5] = p + 1;
-        *left = 16;
-        *cur = *p;
-    }
-    i = 0;
-    if (count != 0) {
-    sg = (s16)sign;
-    do {
-        out = dst + i;
-        if (*left < bits) {
-            rem = bits - *left;
-            *out = (*cur & tab[*left]) << rem;
-            {
-                u16 *p = (u16 *)stream[5];
-                stream[5] = p + 1;
-                *cur = *p;
-            }
-            v = *out | ((*cur >> (16 - rem)) & tab[rem]);
-            *out = v;
-            if (sg != 0 && ((s16)v & *sbit)) {
-                *out = v | ~*mask;
-            }
-            *left = 16 - rem;
-        } else {
-            v = (*cur >> (*left - bits)) & *mask;
-            *out = v;
-            if (sg != 0 && ((s16)v & *sbit)) {
-                *out = v | ~*mask;
-            }
-            *left -= bits;
-        }
-        i++;
-    } while (i < count);
-    }
-    return 1;
-}
+INCLUDE_ASM("span_1000", Audio_DecodeFrame);
 #endif

@@ -5,9 +5,9 @@
 #include "TYPES.H"
 #include "SDK/AUDIO/802C3EA4_3.H"
 
-s16 func_802BF388_de();
+s16 Audio_DecodeFrame();
 u32 func_802BFE3C_de(void) {
-    return (u32) ~func_802BF388_de() >> 0x1F;
+    return (u32) ~Audio_DecodeFrame() >> 0x1F;
 }
 
 /* Fills the first N words of an index table with 0..N-1, then applies the bit-reversal

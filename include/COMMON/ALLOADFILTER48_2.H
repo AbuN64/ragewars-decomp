@@ -128,7 +128,7 @@ typedef struct DecodeState {
     s32 second;
     s32 count;
     void *cursor;
-    u16 frame[336]; /* +0x18: func_802BF388_de header and coefficients */
+    u16 frame[336]; /* +0x18: Audio_DecodeFrame header and coefficients */
 } DecodeState;
 extern unsigned short D_800D54B8;
 extern unsigned short D_800D54BA;

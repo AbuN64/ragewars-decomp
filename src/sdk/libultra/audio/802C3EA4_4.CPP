@@ -3,7 +3,7 @@
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "SDK/AUDIO/802C3EA4_4.H"
 
-extern void func_802BF388_de(void *arg0);
+extern void Audio_DecodeFrame(void *arg0);
 
 
 extern unsigned short D_800D54C2;
@@ -22,7 +22,7 @@ void *func_802C016C_de(void) {
     if (base->count == 0) {
         return 0;
     }
-    func_802BF388_de(base);
+    Audio_DecodeFrame(base);
     counter = &D_800D54C2;
     temp = *counter + 1;
     *counter = temp;
