@@ -1,6 +1,8 @@
 #include "include_asm.h"
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", D_auto_rodata_func_8040BB40_de_800DD07C);
+const unsigned int D_auto_rodata_func_8040BB40_de_800DD07C[1] = {
+    0x0040DBA0,
+};
 #endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
