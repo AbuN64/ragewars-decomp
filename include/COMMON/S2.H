@@ -1475,9 +1475,4 @@ struct BrainCode8020EAE0;
 typedef struct BrainCode8020EAE0 BrainCode8020EAE0;
 
 struct BrainCode8020EAE0;
-struct BrainCode8020EAE0 {
-    SharedPlayer_func_8020FDB0_de *player;
-    char pad4[0x2E0];
-    s32 switchTimer;
-};
 #endif

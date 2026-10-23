@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/ACTORREC.H"
+#include "GAME_2/8020DC10.H"
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 

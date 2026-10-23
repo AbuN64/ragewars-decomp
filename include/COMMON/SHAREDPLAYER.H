@@ -467,10 +467,6 @@ struct func_8028414C_S1 {
 };
 
 struct ObjRecAt18V4;
-struct ObjRecAt18V4 {
-    char pad0[0x18];
-    s32 unk18;
-};
 
 struct func_80228774_S5;
 typedef struct func_80228774_S5 func_80228774_S5;

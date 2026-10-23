@@ -98,12 +98,6 @@ typedef struct Selection_func_8020D4AC_de Selection_func_8020D4AC_de;
 extern float D_800C1E48_de;
 
 struct WeightSource;
-struct WeightSource {
-    char pad[0x2C];
-    f32 first;
-    f32 second;
-    f32 third;
-};
 
 struct func_8020DCA0_S1;
 typedef struct func_8020DCA0_S1 func_8020DCA0_S1;
@@ -124,11 +118,6 @@ struct Obj_func_8020DB14_de {
 };
 
 struct func_8020DCA0_S1;
-struct func_8020DCA0_S1 {
-    void * unk0;
-    char pad0[0x230 - 0x0 - sizeof(void*)];
-    s32 unk230;
-};
 
 struct Obj_func_8020DB14_de;
 typedef struct Obj_func_8020DB14_de Obj_func_8020DB14_de;
