@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "OVLGAME/8043D54C.H"
 #include "OVLGAME/SHAREDRECAT224.H"
 #include "TYPES.H"
 

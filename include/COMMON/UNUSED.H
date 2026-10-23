@@ -4443,11 +4443,6 @@ struct AttackReleaseState {
 };
 struct BankCode8044E2B8;
 struct EntryRecAt0V3;
-struct BankCode8044E2B8 {
-    s32 unk0;
-    s32 count;
-    struct EntryRecAt0V3 items[1];
-};
 struct Binding;
 struct Binding {
     int pad0;
@@ -5066,21 +5061,6 @@ struct Effect_func_8026851C_de {
     struct Effect_func_8026851C_de *child;
 };
 struct Ent;
-struct Ent {
-    u32 kind;
-    char pad4[0x24];
-    f32 unk28;
-    char pad2C[4];
-    f32 unk30;
-    f32 unk34;
-    char pad38[0x18];
-    f32 unk50;
-    f32 unk54;
-    f32 unk58;
-    char pad5C[0x90];
-    f32 unkEC;
-    f32 unkF0;
-};
 struct EntityCode8028FC98;
 struct EntityCode8028FC98 {
     char p0[8];
@@ -5245,12 +5225,6 @@ struct SlotRecAt0V2 {
     char pad4[0x34];
 };
 struct FrameCode8044E2B8;
-struct FrameCode8044E2B8 {
-    s32 unk0;
-    s32 count;
-    char pad8[0xC];
-    SlotRecAt0V2 slots[1];
-};
 struct Rules84;
 struct Rules84 {
     char pad0[0x14];
@@ -5373,11 +5347,6 @@ struct Piece {
     s32 unk38;
 };
 struct GroupCode8044E2B8;
-struct GroupCode8044E2B8 {
-    s32 unk0;
-    s32 count;
-    Piece pieces[1];
-};
 struct Record_func_8043E2D8_de;
 struct Record_func_8043E2D8_de {
     char pad[0x83];
@@ -6426,16 +6395,6 @@ struct OwnerCode8025A3EC {
 };
 struct Entry_func_8044D794_de;
 struct OwnerCode8044E2B8;
-struct OwnerCode8044E2B8 {
-    char pad0[0x6C];
-    void *unk6C;
-    char pad70[0xC];
-    void *unk7C;
-    char pad80[0x1158];
-    struct Entry_func_8044D794_de *active;
-    char pad11DC[0x10];
-    struct Entry_func_8044D794_de *spare;
-};
 struct PakNotesMenuItem;
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"

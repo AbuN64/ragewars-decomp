@@ -1,5 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RECORDRECAT1C.H"
+#include "OVLGAME/80405454.H"
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/EXTERNS_8.H"

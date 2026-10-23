@@ -23,12 +23,6 @@ struct Item_func_8044D668_de {
 };
 
 struct Level;
-struct Level {
-    char pad0[0x11C0];
-    s32 counts[2];
-    char pad11C8[8];
-    Item_func_8044D668_de *items[2];
-};
 
 struct Level;
 typedef struct Level Level;

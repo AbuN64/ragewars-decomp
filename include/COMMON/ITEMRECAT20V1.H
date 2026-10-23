@@ -719,10 +719,6 @@ struct Block;
 typedef struct Block Block;
 
 struct func_80250BD4_S1;
-struct func_80250BD4_S1 {
-    char pad0[0x20];
-    s32 * unk20;
-};
 
 struct Vec3Words;
 struct Vec3Words {

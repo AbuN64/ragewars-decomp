@@ -333,12 +333,6 @@ struct PoolRecord {
 };
 
 struct CGameDynamicLight_t;
-/* A list of the pool's eight records and a second, empty list. */
-struct CGameDynamicLight_t {
-    IntrusiveList empty;
-    IntrusiveList records;
-    struct PoolRecord entries[8];
-};
 
 extern float D_800CA1F0;
 

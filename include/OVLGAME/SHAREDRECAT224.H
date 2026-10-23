@@ -2,6 +2,7 @@
 #define OVLGAME_SHAREDRECAT224_H
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "OVLGAME/8043D54C.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 struct SharedRecAt224;
 struct SharedRecAt224 {
