@@ -4,7 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
-extern void func_802631B0_de(char * arg0, struct SharedPlayer * arg1);
+extern void Fx_BuildControllerState(char * arg0, struct SharedPlayer * arg1);
 
 
 extern f32 D_800C46B0;

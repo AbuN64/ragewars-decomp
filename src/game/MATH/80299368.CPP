@@ -237,7 +237,7 @@ block_not_found:
             if (temp_s1 == (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unkC)) {
                 func_80297A34_de(0x10, 0, 0, 0);
             } else {
-                func_80296E3C_de(temp_s1, 0x10, 0, 0, 0);
+                DispatchElementEvent(temp_s1, 0x10, 0, 0, 0);
             }
         }
 after_focus10:
@@ -431,7 +431,7 @@ block_78:
         if (temp_s1_2 == (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unkC)) {
             func_80297A34_de(0xF, 0, 0, 0);
         } else {
-            func_80296E3C_de(temp_s1_2, 0xF, 0, 0, 0);
+            DispatchElementEvent(temp_s1_2, 0xF, 0, 0, 0);
         }
     }
 after_focus:

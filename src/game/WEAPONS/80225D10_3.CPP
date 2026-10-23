@@ -33,7 +33,7 @@ void func_80226950_de(PlayerList *list, int count) {
 
 /* Updates every player in a world for one frame unless the game state D_8014687C is 8 or 11: turns
    the world's spin at 0x40 by 5 degrees, then for each player in the list from 0x20 runs its body
-   through func_802631B0_de (restoring the frame time D_800D2988 it may change), its team logic through
+   through Fx_BuildControllerState (restoring the frame time D_800D2988 it may change), its team logic through
    func_8022C490_de when either team rule is set, its controls through func_80220ED4_de unless input is
    frozen by D_80146894, and its camera through func_80220A80_de; a second pass opens the pause menu
    through func_8024570C_de for a paused player or one whose controller at 0x698 asks while a menu is
@@ -60,7 +60,6 @@ extern f32 D_800D2988;
 extern Menu_func_80226A34_de D_8014561C;
 extern Game D_8014687C;
 extern s32 D_80146894;
-extern void func_802631B0_de(char *, SharedPlayer *);
 extern void func_8022C490_de(SharedPlayer *);
 extern void func_80220ED4_de(SharedPlayer *);
 extern void func_80220A80_de(SharedPlayer *, SharedPlayer *);
@@ -90,7 +89,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
         }
         rules = &D_8014687C.rules;
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
-            func_802631B0_de(player->views5E8.view688_33.body, player);
+            Fx_BuildControllerState(player->views5E8.view688_33.body, player);
             D_800D2988 = frameTime;
             if (rules->teams != 0 || rules->teamRule != 0) {
                 func_8022C490_de(player);
@@ -194,6 +193,7 @@ INCLUDE_ASM("span_1000", func_80226C60_de);
 #ifdef NON_MATCHING
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
+#include "FX/EXTERNS.H"
 extern f32 D_800C2B74_de, D_800C2B78_de, D_80115DEC;
 extern void func_80274098_de(void *, void *, void *), func_80274244_de(void *, void *), func_80272C60_de(void *, f32, f32, f32), func_8026F620_de(void *, void *, void *);
 void func_80226DD0_de(SharedPlayer *player, f32 out[4][4])

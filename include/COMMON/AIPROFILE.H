@@ -10,7 +10,7 @@ struct Player;
 struct RangeNode;
 typedef struct AiProfile {
     u8 pad0[0x7A];
-    u8 sensitivity; /* 0x7A: func_802631B0_de */
+    u8 sensitivity; /* 0x7A: Fx_BuildControllerState */
     s8 controlMode; /* 0x7B */
     u8 remap; /* 0x7C */
     u8 pitchMode; /* 0x7D */
@@ -138,7 +138,7 @@ struct Player {
     s32 controllerMode; /* 0x788 */
     f32 controllerTimer; /* 0x78C */
     u8 pad790[0x58];
-    s32 state7E8; /* 0x7E8: func_802631B0_de */
+    s32 state7E8; /* 0x7E8: Fx_BuildControllerState */
     f32 state7EC; /* 0x7EC */
     u8 pad7F0[0x1C];
     s32 controllerEnabled; /* 0x80C */

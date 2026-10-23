@@ -26,8 +26,11 @@ extern f32 D_800C42CC_de;
 extern f32 D_800C42D0_de;
 extern s32 D_800CBB70;
 
-void func_802631B0_de(char *arg0, SharedPlayer *arg1) {
+/* 103/307 aligned edits; remaining: float scheduling and controller pointer live ranges. */
+void Fx_BuildControllerState(char *arg0, SharedPlayer *arg1) {
     void *temp_s1;
+    f32 response;
+    f32 rate;
     f32 temp_fa1;
     f32 temp_ft0;
     f32 temp_ft0f;
@@ -56,7 +59,13 @@ void func_802631B0_de(char *arg0, SharedPlayer *arg1) {
     temp_s1 = arg1->views5D8.view5D8_0.unk5D8;
     temp_ft0 = D_800C4298_de - (arg1->views5E8.view7EC_132.unk7EC * D_800C4290_de);
     temp_a3 = ((void **) arg0)[16 / sizeof(void *)];
-    temp_ft0f = (((((f32) ((u8 *) temp_s1)[0x7A] * D_800C4294_de) - D_800C4298_de) * D_800C42A0_de) + D_800C4298_de) * (D_800D2988 * (temp_ft0 * D_800C429C_de));
+    response = (f32)((u8 *)temp_s1)[0x7A] * D_800C4294_de;
+    response = response - D_800C4298_de;
+    response = response * D_800C42A0_de;
+    response = response + D_800C4298_de;
+    rate = temp_ft0 * D_800C429C_de;
+    rate = D_800D2988 * rate;
+    temp_ft0f = response * rate;
     temp_v1 = ((s8 *) temp_s1)[0x7B];
     var_a2 = NULL;
     if ((temp_v1 < 2) && (temp_v1 >= 0) && (((u8 *) temp_s1)[0x7C] == 1)) {
@@ -200,7 +209,7 @@ block_59:
 /* Warning: struct Character is not defined (only forward-declared) */
 /* Warning: struct TeamInfo is not defined (only forward-declared) */
 #else
-INCLUDE_ASM("span_1000", func_802631B0_de);
+INCLUDE_ASM("span_1000", Fx_BuildControllerState);
 #endif
 
 void func_8026367C_de(void *arg0, s32 arg1) {

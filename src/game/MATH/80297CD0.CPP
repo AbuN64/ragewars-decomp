@@ -83,14 +83,19 @@ extern Element *func_80298170_de(s32);
 extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);
 
-s32 func_80296E3C_de(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
+/* 188/309 aligned edits; remaining: callback and direct-id live ranges, category switch scheduling. */
+s32 DispatchElementEvent(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
 {
     Element *element, *context, *current;
     MenuElementHandler kindHandler, handler;
     s32 result, category, previous;
+    s32 fallbackCategory;
+    s32 direct;
     s32 *handled;
     u32 code;
 
+    direct = 0;
+    element = 0;
     result = 0;
     kindHandler = 0;
     code = event;
@@ -108,24 +113,27 @@ s32 func_80296E3C_de(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
         }
     }
     context = func_80411DCC_de(func_80299958_de());
-    element = context;
-    if (id != -1) {
+    if (id == -1) {
+        direct = 1;
+        element = context;
+    }
+    if (!direct) {
         element = func_80298170_de(id);
         if (!element) return 0;
         kindHandler = func_802997E4_de(element->kind);
         if (!kindHandler) {
-    category = 0;
+    fallbackCategory = 0;
     if (code >= 0xE00) {
-        category = 1;
+        fallbackCategory = 1;
         if (code - 0x1000 >= 0x1000) {
-            category = 2;
+            fallbackCategory = 2;
             if (code - 0xE00 >= 0x200) {
-                category = 0;
-                if (code - 0x4000 < 0x4000) category = 3;
+                fallbackCategory = 0;
+                if (code - 0x4000 < 0x4000) fallbackCategory = 3;
             }
         }
     }
-            if (category != 0) return 0;
+            if (fallbackCategory != 0) return 0;
         switch (code) {
         case 1:
             if ((element->flags & 0x10) && element->linked_id) {
@@ -155,7 +163,7 @@ s32 func_80296E3C_de(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
     *handled = 0;
     if (context->handler) result = context->handler(element, event, arg2, arg3, arg4);
     if (*handled == 1) goto restore;
-    if (id != -1) {
+    if (!direct) {
         if (category != 2) {
             if (context->handler) result = context->handler(context, event, arg2, arg3, arg4);
             if (*handled == 1) goto restore;
@@ -169,18 +177,18 @@ s32 func_80296E3C_de(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
         if (*handled == 1) goto restore;
     }
     result = 0;
-    category = 0;
+    fallbackCategory = 0;
     if (code >= 0xE00) {
-        category = 1;
+        fallbackCategory = 1;
         if (code - 0x1000 >= 0x1000) {
-            category = 2;
+            fallbackCategory = 2;
             if (code - 0xE00 >= 0x200) {
-                category = 0;
-                if (code - 0x4000 < 0x4000) category = 3;
+                fallbackCategory = 0;
+                if (code - 0x4000 < 0x4000) fallbackCategory = 3;
             }
         }
     }
-    if (category == 0) {
+    if (fallbackCategory == 0) {
         switch (code) {
         case 1:
             if ((element->flags & 0x10) && element->linked_id) {
@@ -209,7 +217,7 @@ restore:
     return result;
 }
 #else
-INCLUDE_ASM("span_1000", func_80296E3C_de);
+INCLUDE_ASM("span_1000", DispatchElementEvent);
 #endif
 
 #ifdef NON_MATCHING

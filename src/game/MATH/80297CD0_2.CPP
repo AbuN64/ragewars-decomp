@@ -37,7 +37,7 @@ s32 func_80297A34_de(s32 event,s32 value,s32 amount,s32 context) {
     case 0:
         focus=D_8014D080->screens[D_8014D080->current].focus;
         focusId=focus ? focus->id : -1;
-        result=func_80296E3C_de(focusId,event,value,amount,context);
+        result=DispatchElementEvent(focusId,event,value,amount,context);
         break;
     case 2:
         if(event==0xE08) {

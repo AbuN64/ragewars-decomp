@@ -11,7 +11,7 @@
 INCLUDE_ASM("span_1000", func_80299E84);
 #endif
 #if !(defined(VERSION_DE)) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_80299E80_de);
+INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
 #endif
 
 extern s32 func_80299B4C_de(void);
@@ -26,13 +26,19 @@ extern s32 func_80299958_de(void);
  * press (controls 4..7 send it twice with amount 10000 when the control was not already held); then every control
  * sends event 10 (first press only) and 9 on a press, or 11 on a release. The per-device held-flag bit for the
  * control is set on a press and cleared otherwise. A control of -1 is ignored. */
-void func_80299E80_de(ControllerEvent *event) {
+static inline s32 ControllerButtonIsHeld(s16 device, s32 control) {
+    s32 index = control / 8;
+    s32 remainder = control - index * 8;
+    u8 held = ((u8 *)D_8014D0B0->flags)[device * 4 + index];
+    return held & (1 << remainder);
+}
+
+/* 124/297 aligned edits; remaining: inlined flag-query temporaries and branch scheduling. */
+void DispatchControllerButtonEvent(ControllerEvent *event) {
     s32 manager;
     s32 source;
     s32 control;
     s32 pressed;
-    s32 bit;
-    u8 *held;
 
     manager = func_80299958_de();
     source = ((u16)event->source << 16) | (u16)event->device;
@@ -41,41 +47,57 @@ void func_80299E80_de(ControllerEvent *event) {
     if (control == -1) {
         return;
     }
-    held = &D_8014D0B0->flags[((s16)event->device) * 4 + control / 8];
-    bit = 1 << (control % 8);
     switch (control) {
     case 11:
+        if ((s32)(s16)pressed && !ControllerButtonIsHeld(event->device, control)) func_802995D4_de(manager, 1, source, control, 0);
+        break;
     case 12:
-        if (pressed && !(*held & bit)) {
-            func_802995D4_de(manager, control - 10, source, control, 0);
-        }
+        if ((s32)(s16)pressed && !ControllerButtonIsHeld(event->device, control)) func_802995D4_de(manager, 2, source, control, 0);
         break;
     case 4:
+        if ((s32)(s16)pressed) {
+            if (!ControllerButtonIsHeld(event->device, control)) func_802995D4_de(manager, 5, source, 1, 10000);
+            func_802995D4_de(manager, 5, source, 0, 10000);
+        }
+        break;
     case 5:
+        if ((s32)(s16)pressed) {
+            if (!ControllerButtonIsHeld(event->device, control)) func_802995D4_de(manager, 6, source, 1, 10000);
+            func_802995D4_de(manager, 6, source, 0, 10000);
+        }
+        break;
     case 6:
+        if ((s32)(s16)pressed) {
+            if (!ControllerButtonIsHeld(event->device, control)) func_802995D4_de(manager, 7, source, 1, 10000);
+            func_802995D4_de(manager, 7, source, 0, 10000);
+        }
+        break;
     case 7:
-        if (pressed) {
-            if (!(*held & bit)) {
-                func_802995D4_de(manager, control + 1, source, 1, 10000);
-            }
-            func_802995D4_de(manager, control + 1, source, 0, 10000);
+        if ((s32)(s16)pressed) {
+            if (!ControllerButtonIsHeld(event->device, control)) func_802995D4_de(manager, 8, source, 1, 10000);
+            func_802995D4_de(manager, 8, source, 0, 10000);
         }
         break;
     }
     if (pressed == 1) {
-        if (!(*held & bit)) {
+        if (!ControllerButtonIsHeld(event->device, control)) {
             func_802995D4_de(manager, 10, source, control, 0);
         }
         func_802995D4_de(manager, 9, source, control, 0);
     } else {
         func_802995D4_de(manager, 11, source, control, 0);
     }
+    {
+        s32 index = control / 8;
+        s32 bit = 1 << (control - index * 8);
+        s16 device = event->device;
     if (pressed == 1) {
-        *held |= bit;
+        D_8014D0B0->flags[device * 4 + index] |= bit;
     } else {
-        *held &= ~bit;
+        D_8014D0B0->flags[device * 4 + index] &= ~bit;
     }
 }
+    }
 #endif
 #endif
 
@@ -151,7 +173,7 @@ void func_8029A558_de(ControllerEvent *arg0) {
     case 1:
         if (arg0->source == 4) {
             arg0->source = 3;
-            func_80299E80_de(arg0);
+            DispatchControllerButtonEvent(arg0);
         }
         break;
     case 2:

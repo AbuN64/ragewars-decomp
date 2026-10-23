@@ -174,7 +174,7 @@ extern void func_80293998_de(s32 arg0, s32 arg1);
 
 extern void func_80293DF0_de(struct GameSession *arg0);
 
-extern s32 func_80296E3C_de(s32 id, s32 event, s32, s32, s32);
+extern s32 DispatchElementEvent(s32 id, s32 event, s32, s32, s32);
 
 extern s32 func_80297A34_de(s32 event, s32, s32, s32);
 
