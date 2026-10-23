@@ -14,36 +14,36 @@ void Lists_ClearHeader(ListHeader *list) {
     list->count = 0;
 }
 /** Push a node onto the front of a doubly-linked list. */
-void func_802794C0_de(void *arg0, void *arg1) {
-    if ((((struct ListHeader *) ((s8 *) arg0))->count) == 0) {
-        (((struct ListHeader *) ((s8 *) arg0))->head) = arg1;
-        (((struct ListHeader *) ((s8 *) arg0))->tail) = arg1;
+void func_802794C0_de(void *listHeader, void *arg1) {
+    if ((((struct ListHeader *) ((s8 *) listHeader))->count) == 0) {
+        (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
+        (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
         (((struct Shape_typemap_3 *) ((s8 *) arg1))->field_0) = 0;
         (((struct func_80203E78_S1 *) ((s8 *) arg1))->unk4) = 0;
     } else {
-        (((struct Field_void_4 *) ((s8 *) arg1))->value) = (((struct ListHeader *) ((s8 *) arg0))->head);
+        (((struct Field_void_4 *) ((s8 *) arg1))->value) = (((struct ListHeader *) ((s8 *) listHeader))->head);
         (((struct Shape_typemap_3 *) ((s8 *) arg1))->field_0) = 0;
-        (((struct func_80284AF4_G2 *) ((s8 *) ((struct ListHeader *) ((s8 *) arg0))->head))->unk0) = arg1;
-        (((struct ListHeader *) ((s8 *) arg0))->head) = arg1;
+        (((struct func_80284AF4_G2 *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->head))->unk0) = arg1;
+        (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
     }
-    (((struct ListHeader *) ((s8 *) arg0))->count) = (((struct ListHeader *) ((s8 *) arg0))->count) + 1;
+    (((struct ListHeader *) ((s8 *) listHeader))->count) = (((struct ListHeader *) ((s8 *) listHeader))->count) + 1;
 }
 /** Push a node onto the tail of a doubly-linked list; returns new count. */
-s32 Lists_Append(void *arg0, void *arg1) {
+s32 Lists_Append(void *listHeader, void *arg1) {
     s32 count;
-    if ((((struct ListHeader *) ((s8 *) arg0))->count) == 0) {
-        (((struct ListHeader *) ((s8 *) arg0))->head) = arg1;
-        (((struct ListHeader *) ((s8 *) arg0))->tail) = arg1;
+    if ((((struct ListHeader *) ((s8 *) listHeader))->count) == 0) {
+        (((struct ListHeader *) ((s8 *) listHeader))->head) = arg1;
+        (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
         (((struct Shape_typemap_3 *) ((s8 *) arg1))->field_0) = 0;
         (((struct func_80203E78_S1 *) ((s8 *) arg1))->unk4) = 0;
     } else {
-        (((struct func_80284AF4_G2 *) ((s8 *) arg1))->unk0) = (((struct ListHeader *) ((s8 *) arg0))->tail);
+        (((struct func_80284AF4_G2 *) ((s8 *) arg1))->unk0) = (((struct ListHeader *) ((s8 *) listHeader))->tail);
         (((struct func_80203E78_S1 *) ((s8 *) arg1))->unk4) = 0;
-        (((struct Field_void_4 *) ((s8 *) ((struct ListHeader *) ((s8 *) arg0))->tail))->value) = arg1;
-        (((struct ListHeader *) ((s8 *) arg0))->tail) = arg1;
+        (((struct Field_void_4 *) ((s8 *) ((struct ListHeader *) ((s8 *) listHeader))->tail))->value) = arg1;
+        (((struct ListHeader *) ((s8 *) listHeader))->tail) = arg1;
     }
-    count = (((struct ListHeader *) ((s8 *) arg0))->count) + 1;
-    (((struct ListHeader *) ((s8 *) arg0))->count) = count;
+    count = (((struct ListHeader *) ((s8 *) listHeader))->count) + 1;
+    (((struct ListHeader *) ((s8 *) listHeader))->count) = count;
     return count;
 }
 int Lists_Remove(List802795C0 *arg0, ListLink *listLink) {

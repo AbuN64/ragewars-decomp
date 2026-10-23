@@ -23,7 +23,7 @@ extern void func_80273D6C_de(void *);
 
 extern f32 D_80115DEC;
 
-void func_8024B53C_de(void *arg0) {
+void func_8024B53C_de(void *levelActor) {
     CQuatern trig;
     CQuatern product;
     CQuatern copy;
@@ -34,33 +34,33 @@ void func_8024B53C_de(void *arg0) {
     f32 sine;
     f32 angle;
 
-    copy = ((struct LevelActor *)(arg0))->rotation;
+    copy = ((struct LevelActor *)(levelActor))->rotation;
     copy_ptr = &copy;
     if (func_80245798_de() != 0) {
-        func_8024D728_de(copy_ptr, arg0);
+        func_8024D728_de(copy_ptr, levelActor);
     }
 
-    angle = ((struct LevelActor *)(arg0))->yaw;
+    angle = ((struct LevelActor *)(levelActor))->yaw;
     scale = (0.5f);
     sine = func_802B7130_de(angle * scale);
     trig.x = 0.0f;
     trig.y = sine;
     trig.z = 0.0f;
-    angle = ((struct LevelActor *)(arg0))->yaw * scale;
+    angle = ((struct LevelActor *)(levelActor))->yaw * scale;
     D_80115DEC = sine;
     trig.w = func_802B6560_de(angle);
 
     product_ptr = &product;
     func_80274098_de(product_ptr, &trig, copy_ptr);
-    transform = &((struct LevelActor *)(arg0))->transform[0];
+    transform = &((struct LevelActor *)(levelActor))->transform[0];
     func_80274244_de(product_ptr, transform);
-    func_8027347C_de(transform, ((struct LevelActor *)(arg0))->scale.x,
-                    ((struct LevelActor *)(arg0))->scale.y,
-                    ((struct LevelActor *)(arg0))->scale.z);
-    func_8027254C_de(&((struct LevelActor *)(arg0))->position0.x, 20000.0f);
-    func_80273448_de(transform, ((struct LevelActor *)(arg0))->position0.x,
-                   ((struct LevelActor *)(arg0))->position0.y,
-                   ((struct LevelActor *)(arg0))->position0.z);
+    func_8027347C_de(transform, ((struct LevelActor *)(levelActor))->scale.x,
+                    ((struct LevelActor *)(levelActor))->scale.y,
+                    ((struct LevelActor *)(levelActor))->scale.z);
+    func_8027254C_de(&((struct LevelActor *)(levelActor))->position0.x, 20000.0f);
+    func_80273448_de(transform, ((struct LevelActor *)(levelActor))->position0.x,
+                   ((struct LevelActor *)(levelActor))->position0.y,
+                   ((struct LevelActor *)(levelActor))->position0.z);
     func_80273D6C_de(transform);
 }
 
@@ -98,11 +98,11 @@ s32 func_8024B6A0_de(void *a, s32 c, s32 flag) {
 
 extern void func_8024B65C_de(void *arg0, u32 arg1);
 
-s32 func_8024B6F4_de(void *arg0, s32 arg1, s32 arg2) {
-    if (arg1 < 0 || (arg2 == 0 && (((struct LevelActor *)(arg0))->flags & 0x400))) {
+s32 func_8024B6F4_de(void *levelActor, s32 arg1, s32 arg2) {
+    if (arg1 < 0 || (arg2 == 0 && (((struct LevelActor *)(levelActor))->flags & 0x400))) {
         return 0;
     }
-    func_8024B65C_de(arg0, (u32) arg1);
+    func_8024B65C_de(levelActor, (u32) arg1);
     return 1;
 }
 

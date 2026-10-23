@@ -93,8 +93,8 @@ s32 func_8020D1CC_de(void *arg0, s32 arg1, s32 arg2) {
     return *(index + bytes->entries);
 }
 
-void func_8020D1FC_de(s32 arg0) {
-    CNavData *graph = (CNavData *)arg0;
+void func_8020D1FC_de(s32 cNavData) {
+    CNavData *graph = (CNavData *)cNavData;
     s32 i;
     s32 value = -1;
     for (i = 63; i >= 0; i--) {

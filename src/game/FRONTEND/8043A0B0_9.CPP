@@ -13,7 +13,7 @@
 extern struct Screen42 *D_800E59E0;
 extern void func_8041B7B4_de(struct SlotsRecAt5CV1 *, s32, s32);
 extern void func_8041CE10_de(struct Object49C *, s32);
-s32 func_8043AB40_de(void *arg0, void *arg1, s32 arg2) {
+s32 func_8043AB40_de(void *unused0, void *unused1, s32 arg2) {
     s32 player;
     s32 i;
     s32 delay;

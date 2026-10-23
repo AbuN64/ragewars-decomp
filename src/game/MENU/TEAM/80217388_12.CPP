@@ -14,7 +14,7 @@ extern void func_802727D8_de(Matrix *);
 extern void func_80273C68_de(Matrix *, f32);
 extern void func_802185D0_de(Menu_func_80218F9C_de *, ItemRecAt18V1 *, s32, void *);
 
-void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 arg1, void *player) {
+void func_80218F9C_de(Menu_func_80218F9C_de *menu, s32 unused1, void *player) {
     Matrix matrix;
     CVector3 position;
     ItemRecAt18V1 items[4];

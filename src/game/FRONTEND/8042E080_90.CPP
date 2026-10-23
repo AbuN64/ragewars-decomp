@@ -28,7 +28,7 @@ extern void func_8042DEA0_de(void);
 
 
 
-s32 func_804362A8_de(s32 arg0, s32 arg1, s32 event) {
+s32 func_804362A8_de(s32 unused0, s32 unused1, s32 event) {
     s32 *pause;
     if (event == 1) {
         if (func_8043C308_de(D_800E5558) != 1) {

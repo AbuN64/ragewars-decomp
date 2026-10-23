@@ -167,8 +167,8 @@ void func_802732D0_de(char *object, float *output) {
     output[2] = matrix->m[14];
 }
 
-void func_802732EC_de(void *arg0, f32 *arg1) {
-    Matrix *m = arg0;
+void func_802732EC_de(void *matrix, f32 *arg1) {
+    Matrix *m = matrix;
     CVector3 tmp;
 
     tmp.x = m->m[0];
@@ -204,8 +204,8 @@ void func_80273448_de(char *object, float x, float y, float z) {
 }
 
 /** Scale the first three rows of a matrix's basis columns by sx, sy, sz. */
-void func_8027347C_de(void *arg0, f32 sx, f32 sy, f32 sz) {
-    Matrix *o = arg0;
+void func_8027347C_de(void *matrix, f32 sx, f32 sy, f32 sz) {
+    Matrix *o = matrix;
 
     o->m[0] = o->m[0] * sx;
     o->m[1] = o->m[1] * sx;
@@ -236,8 +236,8 @@ void func_802734F8_de(f32 *arg0, f32 *arg1, f32 sx, f32 sy, f32 sz) {
 }
 
 /** Scale the xyz columns of a 4-row matrix by sx, sy, sz. */
-void func_802735A8_de(void *arg0, f32 sx, f32 sy, f32 sz) {
-    Matrix *o = arg0;
+void func_802735A8_de(void *matrix, f32 sx, f32 sy, f32 sz) {
+    Matrix *o = matrix;
 
     o->m[0] = o->m[0] * sx;
     o->m[4] = o->m[4] * sx;
@@ -718,8 +718,8 @@ void func_80274244_de(f32 *q, f32 *m)
 }
 
 /** Lerp a 4-component vector: out = a + t * (b - a). */
-void func_80274318_de(void *arg0, f32 t, void *a, void *b) {
-    CQuatern *out = arg0;
+void func_80274318_de(void *cQuatern, f32 t, void *a, void *b) {
+    CQuatern *out = cQuatern;
     CQuatern *left = a;
     CQuatern *right = b;
 

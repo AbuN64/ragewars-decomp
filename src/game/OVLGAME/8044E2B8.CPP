@@ -97,7 +97,7 @@ void func_8044D804_de(s32 arg0, void ***arg1) {
     }
 }
 
-void func_8044D934_de(s32 arg0, void ***arg1) {
+void func_8044D934_de(s32 unused0, void ***arg1) {
     f32 scale;
     void *obj;
     Ent *ent;

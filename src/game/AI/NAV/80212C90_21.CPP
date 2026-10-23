@@ -19,7 +19,7 @@ extern void func_80207730_de(u8 *arg0, Source *arg1);
 
 
 
-void func_80213CF8_de(Source *player, void *arg1) {
+void func_80213CF8_de(Source *player, void *unused1) {
     CVector3 saved_velocity;
     CVector3 position;
     CVector3 transformed;

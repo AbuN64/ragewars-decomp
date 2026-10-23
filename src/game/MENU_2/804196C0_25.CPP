@@ -26,7 +26,7 @@ extern void func_8029973C_de(void);
 
 /* Calls func_802547E4_de with the arguments it was given and returns zero. */
 
-s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct Child *child;
 
     func_8029973C_de();
@@ -50,7 +50,7 @@ s32 func_8041BB3C_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kin
     return 0;
 }
 
-s32 func_8041BBD0_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BBD0_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct ChildRecAt2C *child;
 
     func_8029973C_de();
@@ -74,7 +74,7 @@ s32 func_8041BBD0_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kin
     return 0;
 }
 
-s32 func_8041BC64_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BC64_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct ChildRecAt38 *child;
 
     func_8029973C_de();
@@ -98,7 +98,7 @@ s32 func_8041BC64_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kin
     return 0;
 }
 
-s32 func_8041BCF8_de(struct sm_dlmultiuser_t *owner, s32 arg1, s32 slot, s32 kind) {
+s32 func_8041BCF8_de(struct sm_dlmultiuser_t *owner, s32 unused1, s32 slot, s32 kind) {
     struct ChildRecAt30 *child;
 
     func_8029973C_de();

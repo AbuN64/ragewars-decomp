@@ -115,7 +115,7 @@ s32 func_80420C08_de(void) {
 
 /* extern */
 
-s32 func_80420C10_de(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 temp_a0;
     s32 temp_s0;
     s32 temp_s1;

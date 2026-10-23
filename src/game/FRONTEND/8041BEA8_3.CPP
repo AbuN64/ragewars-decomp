@@ -55,7 +55,7 @@ extern f32 D_800DD528_de;
 extern f32 D_800DD52C_de;
 extern s32 D_800E28D0, D_800E28D4;
 extern Gfx *D_80110634;
-s32 func_8041DCC0_de(void *arg0, void *arg1, s32 event) {
+s32 func_8041DCC0_de(void *unused0, void *unused1, s32 event) {
     Gfx *gfx;
     f32 value;
     f32 scale;

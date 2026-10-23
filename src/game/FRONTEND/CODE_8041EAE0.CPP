@@ -194,7 +194,7 @@ s32 func_8041EC84_de(void) {
     return 0;
 }
 
-s32 func_8041ECB4_de(void *arg0, void *arg1, s32 delta) {
+s32 func_8041ECB4_de(void *unused0, void *unused1, s32 delta) {
     MenuWidget *node;
     D_800E39C0->timer += delta;
 #if defined(VERSION_DE)
@@ -222,7 +222,7 @@ s32 func_8041EDC0_de(void) {
     return 0;
 }
 
-s32 func_8041EE08_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 func_8041EE08_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0_2;
     s32 idx;
     MenuWidget *temp_v0;

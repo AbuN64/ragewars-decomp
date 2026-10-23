@@ -295,8 +295,8 @@ s32 func_8020459C_de(LevelActor *actor) {
     return val;
 }
 
-void func_802045CC_de(void *arg0, void *arg1) {
-    ActorMotionState *state = arg1;
+void func_802045CC_de(void *arg0, void *actorMotionState) {
+    ActorMotionState *state = actorMotionState;
     func_80285DB0_de(&D_8011FE88, arg0, 0);
     func_80278D78_de(arg0, 0x200000, arg0);
     state->unk12C = 0;
@@ -343,7 +343,7 @@ void func_80204658_de(void *arg0) {
     }
 }
 
-void func_80204728_de(void *arg0, void *arg1) {
+void func_80204728_de(void *unused0, void *arg1) {
     Dest *state = arg1;
     state->draw = &D_00204808;
 }

@@ -28,7 +28,7 @@ extern s32 D_801462D0;
 
 
 
-void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 arg4, u8 *out) {
+void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 unused4, u8 *out) {
     s32 send;
     s32 first;
     s32 second;

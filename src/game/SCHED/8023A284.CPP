@@ -13,7 +13,7 @@
 extern f32 D_80103220[];
 
 
-f32 func_8023A294_de(s32 arg0, f32 value, f32 target, f32 step) {
+f32 func_8023A294_de(s32 unused0, f32 value, f32 target, f32 step) {
     if (func_80264B6C_de() != 0) {
         value = target;
     }

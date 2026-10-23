@@ -185,7 +185,7 @@ s32 func_8043E1C0_de(void) {
     return result;
 }
 
-s32 func_8043E1F8_de(s32 arg0, MenuRecAt20V2 *menu) {
+s32 func_8043E1F8_de(s32 unused0, MenuRecAt20V2 *menu) {
     PakMenuSlot **slot;
 
     D_80146914 = 0;

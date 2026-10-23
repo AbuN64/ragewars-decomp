@@ -117,8 +117,8 @@ s32 func_8028B21C_de(struct Shared_World *arg0, s32 arg1)
 
 }
 
-int func_8028B25C_de(void *arg0, int arg1) {
-    unsigned short *base = (unsigned short *)((char *)((struct Shared_World *)(arg0))->modelIds + 8);
+int func_8028B25C_de(void *world, int arg1) {
+    unsigned short *base = (unsigned short *)((char *)((struct Shared_World *)(world))->modelIds + 8);
     return base[arg1];
 }
 

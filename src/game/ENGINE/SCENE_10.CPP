@@ -31,24 +31,24 @@ void func_8028BFD8_de(s32 arg0, s32 arg1, Triple position, s32 arg5, f32 arg6) {
     func_8028FFD0_de(arg0 + 0x11778, 0, arg5, zero, position, arg1, arg6);
 }
 
-void *func_8028C050_de(void *arg0, CVector3 *arg1) {
+void *func_8028C050_de(void *triangle, CVector3 *arg1) {
     f32 lower;
     f32 upper;
     f32 value;
 
-    if (arg0 != 0 &&
-        func_80275B10_de(arg0, arg1->x,
+    if (triangle != 0 &&
+        func_80275B10_de(triangle, arg1->x,
                           arg1->z) != 0) {
-        if (!(((Triangle *)arg0)->flags & 0x40)) {
-            return arg0;
+        if (!(((Triangle *)triangle)->flags & 0x40)) {
+            return triangle;
         }
-        lower = func_80275DD4_de(arg0,
+        lower = func_80275DD4_de(triangle,
             arg1->x, arg1->z);
-        upper = func_8027525C_de(arg0,
+        upper = func_8027525C_de(triangle,
             arg1->x, arg1->z);
         value = arg1->y;
         if (lower <= value && value <= upper) {
-            return arg0;
+            return triangle;
         }
     }
     return Scene_FindFloorPolygon(&D_8011FE88, arg1);
@@ -88,7 +88,7 @@ s32 func_8028C198_de(Shared_World *world, s32 type) {
     return 0;
 }
 
-s32 func_8028C1D4_de(char *arg0, u16 *arg1, s32 *arg2, s32 *arg3) {
+s32 func_8028C1D4_de(char *world, u16 *arg1, s32 *arg2, s32 *arg3) {
     s32 sp18;
     s32 sp1C;
     s32 temp_v0_2;
@@ -96,10 +96,10 @@ s32 func_8028C1D4_de(char *arg0, u16 *arg1, s32 *arg2, s32 *arg3) {
     s32 field_c4;
 
     temp_v0_2 = func_80265550_de(field_cc, field_c4, *arg1,
-        (field_cc = (s32)((Shared_World *)arg0)->alternateRecordIndex,
-         field_c4 = ((Shared_World *)arg0)->alternateRecordCount, &sp18), &sp1C);
+        (field_cc = (s32)((Shared_World *)world)->alternateRecordIndex,
+         field_c4 = ((Shared_World *)world)->alternateRecordCount, &sp18), &sp1C);
     if (temp_v0_2 != 0) {
-        *arg2 = (s32)((Shared_World *)arg0)->alternateRecordArray + (sp18 * 0x14);
+        *arg2 = (s32)((Shared_World *)world)->alternateRecordArray + (sp18 * 0x14);
         temp_v0_2 = (sp1C - sp18) + 1;
         *arg3 = temp_v0_2;
     } else {
@@ -109,7 +109,7 @@ s32 func_8028C1D4_de(char *arg0, u16 *arg1, s32 *arg2, s32 *arg3) {
     return temp_v0_2;
 }
 
-void func_8028C26C_de(char *arg0, void *arg1, s32 *arg2, s32 *arg3) {
+void func_8028C26C_de(char *world, void *levelActor, s32 *arg2, s32 *arg3) {
     s32 sp18;
     s32 sp1C;
     s32 index;
@@ -119,14 +119,14 @@ void func_8028C26C_de(char *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     s32 field_c8;
     s32 field_c0;
 
-    if (!(((LevelActor *)arg1)->flags & 0x80000)) {
-        first = (u32)((Shared_World *)arg0)->actors;
+    if (!(((LevelActor *)levelActor)->flags & 0x80000)) {
+        first = (u32)((Shared_World *)world)->actors;
         index = -1;
-        if ((u32)arg1 >= first) {
-            lastOffset = ((Shared_World *)arg0)->actorCount * 0x2E8;
+        if ((u32)levelActor >= first) {
+            lastOffset = ((Shared_World *)world)->actorCount * 0x2E8;
             lastOffset -= 0x2E8;
-            if (first + lastOffset >= (u32)arg1) {
-                index = ((u32)arg1 - first) / 0x2E8;
+            if (first + lastOffset >= (u32)levelActor) {
+                index = ((u32)levelActor - first) / 0x2E8;
             }
         }
     } else {
@@ -137,10 +137,10 @@ void func_8028C26C_de(char *arg0, void *arg1, s32 *arg2, s32 *arg3) {
         return;
     }
     temp_v0 = func_80265550_de(field_c8, field_c0, index,
-        (field_c8 = (s32)((Shared_World *)arg0)->recordIndex,
-         field_c0 = ((Shared_World *)arg0)->recordCount, &sp18), &sp1C);
+        (field_c8 = (s32)((Shared_World *)world)->recordIndex,
+         field_c0 = ((Shared_World *)world)->recordCount, &sp18), &sp1C);
     if (temp_v0 != 0) {
-        *arg2 = (s32)((Shared_World *)arg0)->recordArray + (sp18 * 0x14);
+        *arg2 = (s32)((Shared_World *)world)->recordArray + (sp18 * 0x14);
         *arg3 = (sp1C - sp18) + 1;
     } else {
         *arg2 = 0;

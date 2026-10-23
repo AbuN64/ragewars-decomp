@@ -42,7 +42,7 @@ extern void func_8042DEA0_de(void);
 
 
 
-s32 func_80422960_de(void *item, s32 arg1, s32 event) {
+s32 func_80422960_de(void *item, s32 unused1, s32 event) {
     s32 state;
     s32 humans;
     s32 i;

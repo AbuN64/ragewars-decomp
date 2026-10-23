@@ -22,7 +22,7 @@
 extern PakMenuController *D_800E54A4;
 extern void *func_8041B7FC_de(s32 root, s32 player);
 
-s32 func_80430028_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
     struct Resource_func_80419E54_de *sound;
     struct RowRecAtBA4 *row;
     char *base;
@@ -161,7 +161,7 @@ extern void func_80433BCC_de(s32);
 extern void func_80433D38_de(s32);
 extern void func_80434250_de(s32, s32);
 extern void func_80434E34_de(s32);
-s32 Frontend_HandlePakMenuConfirm(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, s32 arg4) {
     NodeRecAt44 *node;
     s32 player;
 

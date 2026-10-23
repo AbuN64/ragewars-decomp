@@ -93,7 +93,7 @@ extern void Pak_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *
 extern char D_8014561C[];
 extern s32 D_80153778;
 /* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through func_80406178_de; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
-s32 Frontend_OpenPakChannel(s32 arg0, Shared_PakMenu *menu) {
+s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     s32 channel;
 
     if (D_8015375C != 0) {
@@ -134,7 +134,7 @@ s32 func_8040B58C_de(void *arg0, Shared_PakMenu *arg1) {
     return 1;
 }
 
-s32 func_8040B648_de(s32 arg0, ActionRecAt24 *arg1) {
+s32 func_8040B648_de(s32 unused0, ActionRecAt24 *arg1) {
     void *var_a0;
     ObjRecAt5DC *temp_v0;
     D_800E28C0 = 1;

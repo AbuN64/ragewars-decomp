@@ -26,7 +26,7 @@ extern void func_80433BCC_de(s32);
 extern void func_80433D38_de(s32);
 extern void func_804322AC_de(s32);
 
-s32 func_80432158_de(void *arg0, void *arg1, u16 player) {
+s32 func_80432158_de(void *unused0, void *unused1, u16 player) {
     func_8029973C_de();
     if (D_800E54A4->phase == 7) {
         func_8043577C_de(3);

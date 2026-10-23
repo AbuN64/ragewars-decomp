@@ -103,40 +103,40 @@ extern void func_80267198_de(void *arg0, void *arg1, s32 arg2,
 
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
-void func_80204A68_de(void *arg0, ObjectStateCC *arg1) {
+void func_80204A68_de(void *breakableHitContext, ObjectStateCC *arg1) {
     ResourceManagerState local;
     s8 factor;
     f32 scale;
     s32 destroy;
     s8 team;
 
-    factor = ((struct ObjectState1E *) ((BreakableHitContext *) arg0)->unk_18)->unk_1D;
+    factor = ((struct ObjectState1E *) ((BreakableHitContext *) breakableHitContext)->unk_18)->unk_1D;
     if (factor == -1) {
         return;
     }
     scale = factor * D_800C6B74;
-    if (((BreakableHitContext *)(arg0))->unk_E6 == 1) {
+    if (((BreakableHitContext *)(breakableHitContext))->unk_E6 == 1) {
         destroy = 1;
     } else {
         team = arg1->unk_CA;
-        if (((BreakableHitContext *)(arg0))->unk_108 != team || ((BreakableHitContext *)(arg0))->unk_10A != team) {
+        if (((BreakableHitContext *)(breakableHitContext))->unk_108 != team || ((BreakableHitContext *)(breakableHitContext))->unk_10A != team) {
             destroy = 0;
-        } else if (arg1->unk_CB != 0 && !(((BreakableHitContext *)(arg0))->unk_100 & 0x400)) {
+        } else if (arg1->unk_CB != 0 && !(((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
             destroy = 1;
-        } else if (((BreakableHitContext *)(arg0))->unk_10C < 3 && (((BreakableHitContext *)(arg0))->unk_100 & 0x400)) {
-            destroy = ((BreakableHitContext *)(arg0))->unk_12C * scale <= ((BreakableHitContext *)(arg0))->unk_134;
+        } else if (((BreakableHitContext *)(breakableHitContext))->unk_10C < 3 && (((BreakableHitContext *)(breakableHitContext))->unk_100 & 0x400)) {
+            destroy = ((BreakableHitContext *)(breakableHitContext))->unk_12C * scale <= ((BreakableHitContext *)(breakableHitContext))->unk_134;
         } else {
-            destroy = ((BreakableHitContext *)(arg0))->unk_10C * scale <= ((BreakableHitContext *)(arg0))->unk_104;
+            destroy = ((BreakableHitContext *)(breakableHitContext))->unk_10C * scale <= ((BreakableHitContext *)(breakableHitContext))->unk_104;
         }
     }
     if (destroy) {
         local.active = 0;
-        func_80267198_de(arg0, arg0, 7, ((BreakableHitContext *)(arg0))->unk_8, local);
-        func_80285DB0_de(&D_8011FE88, arg0, 0);
+        func_80267198_de(breakableHitContext, breakableHitContext, 7, ((BreakableHitContext *)(breakableHitContext))->unk_8, local);
+        func_80285DB0_de(&D_8011FE88, breakableHitContext, 0);
     }
 }
 
-void func_80204BB4_de(void *arg0, Dest *arg1) {
+void func_80204BB4_de(void *unused0, Dest *arg1) {
     arg1->table = &D_800C8380_de;
     arg1->enter = &D_00204C34;
 }

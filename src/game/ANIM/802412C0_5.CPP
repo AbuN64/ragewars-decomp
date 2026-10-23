@@ -13,9 +13,9 @@ void func_802428D0_de(void *first, void *second) {
     input->flags38 |= 0x10;
 }
 
-void func_802428EC_de(void *arg0, void *arg1) {
+void func_802428EC_de(void *arg0, void *levelActor) {
     Actor_func_80241BAC_de *actor = arg0;
-    LevelActor *target = arg1;
+    LevelActor *target = levelActor;
     CVector3 *position = &target->position1;
     actor->flags |= 8;
     func_80271F34_de(position, position, &actor->movement);

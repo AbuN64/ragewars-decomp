@@ -184,8 +184,8 @@ void func_8023E690_de(struct Range *range, f32 low, s32 count, f32 high, f32 ext
     range->limit = larger + D_800C87B4;
 }
 
-void func_8023E6D0_de(void *arg0, float arg1) {
-    ActorMotion *motion = arg0;
+void func_8023E6D0_de(void *actorMotion, float arg1) {
+    ActorMotion *motion = actorMotion;
     motion->bottom = 0.0f;
     motion->field08 = arg1;
     motion->radius = arg1;

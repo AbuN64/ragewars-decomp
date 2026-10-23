@@ -37,8 +37,8 @@ void Anim_BuildBoxFace5(struct Quad *quad, CVector3 *points) {
     quad_normal(quad);
 }
 
-s32 func_80241260_de(void *arg0, CVector3 *arg1) {
-    Plane *object = arg0;
+s32 func_80241260_de(void *plane, CVector3 *arg1) {
+    Plane *object = plane;
     CVector3 offset;
     s32 outside;
 

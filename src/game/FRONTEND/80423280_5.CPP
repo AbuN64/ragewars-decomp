@@ -74,7 +74,7 @@ extern s32 func_80419F38_de(void *);
 
 extern void func_80419F24_de(void *);
 
-s32 func_80426918_de(void *arg0, void *arg1, s32 delta) {
+s32 func_80426918_de(void *unused0, void *unused1, s32 delta) {
     s32 clock;
 
     if (D_80154020[1] == 1) {

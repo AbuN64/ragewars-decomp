@@ -47,7 +47,7 @@ extern void func_80433BCC_de(s32);
 
 extern s32 func_80405290_de(s32);
 
-s32 func_804306D8_de(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 answer;
     s32 i;
     s32 j;

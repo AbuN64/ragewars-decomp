@@ -368,8 +368,8 @@ s32 func_80274B44_de(f32 *arg0)
 }
 
 /** Copy two 3-vectors, then derive an edge vector, its z-component twice, and a negated x. */
-void func_80274B7C_de(void *arg0, void *arg1, void *arg2) {
-    GeometryEdge *dst = arg0;
+void func_80274B7C_de(void *geometryEdge, void *arg1, void *arg2) {
+    GeometryEdge *dst = geometryEdge;
     CVector3 *a = arg1;
     CVector3 *b = arg2;
     f32 zdiff;
@@ -449,8 +449,8 @@ s32 func_80274D10_de(f32 *arg0, f32 *arg1, f32 *arg2) {
 }
 
 /** Half-plane test: is arg1 on the positive side of arg0's normal (at +0x30)? */
-s32 func_80274D8C_de(void *arg0, void *arg1) {
-    GeometryEdge *edge = arg0;
+s32 func_80274D8C_de(void *geometryEdge, void *arg1) {
+    GeometryEdge *edge = geometryEdge;
     CVector3 *point = arg1;
     CVector3 normal;
     CVector3 delta;

@@ -25,7 +25,7 @@ extern Node_func_8041D134_de *func_8041B7FC_de(void *handle, s32 arg1);
 
 /* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
-s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
     Node_func_8041D134_de *node;
 
     switch (((MenuRecAt108 *) D_800E3590)->state) {

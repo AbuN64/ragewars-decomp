@@ -39,7 +39,7 @@ extern s32 D_0044FB2C;
 
 
 
-s32 func_8043E610_de(void *arg0, Handle8043E788 *arg1) {
+s32 func_8043E610_de(void *unused0, Handle8043E788 *arg1) {
     Obj1C *temp_a2;
 
     temp_a2 = arg1->unk1C;
@@ -60,7 +60,7 @@ extern s32 D_0044FB2C;
 
 
 
-s32 func_8043E658_de(void *arg0, Handle8043E788 *arg1) {
+s32 func_8043E658_de(void *unused0, Handle8043E788 *arg1) {
     Obj1C *temp_a2;
 
     temp_a2 = arg1->unk1C;

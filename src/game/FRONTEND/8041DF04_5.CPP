@@ -32,7 +32,7 @@ extern s32 func_8041EC44_de(s32, s32);
 extern void func_802A025C_de(char *, char *);
 extern void func_8041E408_de(s32);
 
-s32 func_8041E100_de(void *arg0, void *arg1, void *arg2, s32 event) {
+s32 func_8041E100_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 variant;
     s32 model;
     s32 id;
@@ -99,7 +99,7 @@ extern s32 func_8041EC44_de(s32, s32);
 extern void func_802A025C_de(char *, char *);
 extern void func_8041E408_de(s32);
 
-s32 func_8041E280_de(void *arg0, void *arg1, void *arg2, s32 event) {
+s32 func_8041E280_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 variant;
     s32 model;
     s32 id;

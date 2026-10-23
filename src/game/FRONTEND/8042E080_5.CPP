@@ -28,7 +28,7 @@ extern void func_8042CFDC_de();
 extern void func_8042D034_de();
 extern void func_804389F0_de();
 
-s32 func_8042F7A8_de(void *arg0, void *arg1, s32 event) {
+s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
     s32 i;
     u32 option;
 

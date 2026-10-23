@@ -87,7 +87,7 @@ s32 func_8043E830_de(s32 *arg0) {
 }
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_450A20 record. */
-s32 func_8043E91C_de(void *arg0, void *arg1, void *arg2) {
+s32 func_8043E91C_de(void *unused0, void *arg1, void *arg2) {
     func_804427C4_de(arg2, arg1, &D_0044FDF4);
     return 1;
 }
@@ -114,20 +114,20 @@ extern void *Pak_OpenDialog(void *owner, void *list, s32 b, s32 c, s32 d);
 extern char D_8014561C[];
 
 /** Marks arg1's inner record's byte tag via func_80264770_de, then hands the record and arg1's fields to Pak_OpenDialog; ignores arg0. */
-s32 func_8043E9A8_de(void *arg0, Obj8043EB20 *arg1) {
+s32 func_8043E9A8_de(void *unused0, Obj8043EB20 *arg1) {
     func_80264770_de(arg1->unk20->unk4);
     Pak_OpenDialog(D_8014561C, &D_0044EB04, arg1->unk1C, (s32) arg1->unk20, 0);
     return 1;
 }
 
-s32 func_8043EA00_de(void *arg0, Arg1Struct *arg1) {
+s32 func_8043EA00_de(void *unused0, Arg1Struct *arg1) {
     func_804097E8_de();
     Pak_OpenDialog(D_8014561C, &D_0044E4B0, arg1->unk1C, arg1->unk20, 0);
     return 1;
 }
 
 /** Clears the D_8011FAC0 record and D_80154048, then re-registers the target through func_80264788_de. */
-s32 func_8043EA4C_de(void *arg0, Outer8043E56C *arg1) {
+s32 func_8043EA4C_de(void *unused0, Outer8043E56C *arg1) {
     func_80293824_de(&D_8011FAC0, 8);
     D_80154048 = 0;
     func_80264788_de(arg1->unk20->unk4);

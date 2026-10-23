@@ -64,7 +64,7 @@ s32 func_80436C58_de(void) {
     return 0;
 }
 
-s32 func_80436C94_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 func_80436C94_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
     func_8029973C_de();
@@ -84,7 +84,7 @@ s32 func_80436C94_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
-s32 func_80436D4C_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+s32 func_80436D4C_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3) {
     s32 temp_v0;
 
     func_8029973C_de();

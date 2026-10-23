@@ -61,7 +61,7 @@ extern void func_80265688_de(u8 *, s32, s32);
 
 extern s32 func_80265650_de(u8 *, s32);
 
-s32 func_80426CE4_de(void *arg0, void *arg1, s32 event) {
+s32 func_80426CE4_de(void *unused0, void *unused1, s32 event) {
     s32 views;
     s32 i;
     s32 alpha;

@@ -60,7 +60,7 @@ s32 func_8043E3CC_de(void *arg0, Outer8043E458 *arg1) {
 }
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_452834 record. */
-s32 func_8043E418_de(void *arg0, void *arg1, void *arg2) {
+s32 func_8043E418_de(void *unused0, void *arg1, void *arg2) {
     func_804427C4_de(arg2, arg1, &D_004518A4);
     return 1;
 }
@@ -71,7 +71,7 @@ s32 func_8043E444_de(Shared_DebugWidget *widget, Shared_MenuHandle *handle) {
 }
 
 /* Forwards arg1 through and arg2 as the first parameter, adding the D_4505C0 record. */
-s32 func_8043E468_de(void *arg0, void *arg1, void *arg2) {
+s32 func_8043E468_de(void *unused0, void *arg1, void *arg2) {
     func_804427C4_de(arg2, arg1, &D_0044F994_de);
     return 1;
 }
@@ -104,7 +104,7 @@ s32 func_8043E530_de(void) {
     return state->round != 0 || state->elapsed != 0 || state->state != 0;
 }
 
-s32 func_8043E568_de(void *arg0, Arg1Struct *arg1) {
+s32 func_8043E568_de(void *unused0, Arg1Struct *arg1) {
     s32 val1C;
 
     val1C = arg1->unk1C;

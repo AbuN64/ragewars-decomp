@@ -157,7 +157,7 @@ s32 func_80429724_de(void) {
     return 0;
 }
 
-s32 func_8042972C_de(s32 arg0, s32 arg1, u32 arg2, s32 arg3) {
+s32 func_8042972C_de(s32 unused0, s32 unused1, u32 arg2, s32 arg3) {
     u32 kind;
     void *widget;
     s32 value;

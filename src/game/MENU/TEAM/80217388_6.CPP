@@ -30,7 +30,7 @@ extern s32 func_80217B3C_de(void *);
 
 
 
-void func_80217D74_de(s32 *menu, void *player, s32 arg2) {
+void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     s32 held;
     s32 slot;
     s32 category;

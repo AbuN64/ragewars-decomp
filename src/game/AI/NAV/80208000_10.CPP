@@ -34,14 +34,14 @@ void func_8020D220_de(Obj_func_8020D220_de *obj, int id) {
     }
 }
 
-int func_8020D280_de(void *arg0) {
-    NavigationSearchNode *node = arg0;
+int func_8020D280_de(void *navigationSearchNode) {
+    NavigationSearchNode *node = navigationSearchNode;
     node->open = 1;
     return 1;
 }
 
-void *func_8020D28C_de(void *arg0) {
-    CNavData *graph = arg0;
+void *func_8020D28C_de(void *cNavData) {
+    CNavData *graph = cNavData;
     NavigationSearchNode *node;
     NavigationSearchNode *best;
     f32 best_value;
@@ -73,19 +73,19 @@ void func_8020D2FC_de(void *object) {
     node->open = 2;
 }
 
-int func_8020D308_de(void *arg0) {
-    NavigationSearchNode *node = arg0;
+int func_8020D308_de(void *navigationSearchNode) {
+    NavigationSearchNode *node = navigationSearchNode;
     return node->open == 1;
 }
 
 /** Report whether the word at object offset 0x28 equals two. */
-int func_8020D318_de(void *arg0) {
-    NavigationSearchNode *node = arg0;
+int func_8020D318_de(void *navigationSearchNode) {
+    NavigationSearchNode *node = navigationSearchNode;
     return node->open == 2;
 }
 
-s32 func_8020D328_de(CNavData *arg0) {
-    CNavData *graph = arg0;
+s32 func_8020D328_de(CNavData *cNavData) {
+    CNavData *graph = cNavData;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {
         do {

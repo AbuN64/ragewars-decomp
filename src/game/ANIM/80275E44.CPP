@@ -117,8 +117,8 @@ u8 func_80276088_de(s32 modelId) {
     return blend->byte59;
 }
 
-f32 func_802760BC_de(void *arg0, s32 arg1) {
-    Triangle *polygon = arg0;
+f32 func_802760BC_de(void *triangle, s32 arg1) {
+    Triangle *polygon = triangle;
     CVector3 *v0;
     CVector3 *v1;
     f32 dx, dz;
@@ -140,17 +140,17 @@ f32 func_802760BC_de(void *arg0, s32 arg1) {
     return result;
 }
 
-void func_80276184_de(void *arg0) {
-    struct ModelTreeNode *node = arg0;
-    if ((arg0 != 0) && (node->flags & 2)) {
-        func_80276214_de(arg0, node->modelId);
+void func_80276184_de(void *modelTreeNode) {
+    struct ModelTreeNode *node = modelTreeNode;
+    if ((modelTreeNode != 0) && (node->flags & 2)) {
+        func_80276214_de(modelTreeNode, node->modelId);
     }
 }
 
-void func_802761B8_de(void *arg0) {
-    struct ModelTreeNode *node = arg0;
-    if ((arg0 != 0) && (node->flags & 2)) {
-        func_80276298_de(arg0, node->modelId);
+void func_802761B8_de(void *modelTreeNode) {
+    struct ModelTreeNode *node = modelTreeNode;
+    if ((modelTreeNode != 0) && (node->flags & 2)) {
+        func_80276298_de(modelTreeNode, node->modelId);
     }
 }
 

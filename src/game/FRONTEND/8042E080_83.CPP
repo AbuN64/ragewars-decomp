@@ -22,7 +22,7 @@ extern void func_8025476C_de(s32);
 extern void func_80298368_de(void *);
 extern void func_8025E384_de(void);
 
-s32 func_80435F14_de(s32 arg0, s32 arg1, s32 event) {
+s32 func_80435F14_de(s32 unused0, s32 unused1, s32 event) {
     s32 *pause;
     if (event == 1) {
         if (func_8043C308_de(D_800E5554) != 1) {

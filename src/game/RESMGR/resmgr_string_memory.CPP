@@ -567,10 +567,10 @@ void func_802A0960_de(u8 *path, u8 *drive, u8 *directory, u8 *name, u8 *extensio
     *out = 0;
 }
 
-void func_802A0A48_de(void *arg0) {
-    MessageSemaphore *semaphore = arg0;
-    osCreateMesgQueue(arg0, &semaphore->message, 1);
-    func_802BB420_de(arg0, 1, 1);
+void func_802A0A48_de(void *messageSemaphore) {
+    MessageSemaphore *semaphore = messageSemaphore;
+    osCreateMesgQueue(messageSemaphore, &semaphore->message, 1);
+    func_802BB420_de(messageSemaphore, 1, 1);
 }
 
 void func_802A0A84_de(s32 arg0) {

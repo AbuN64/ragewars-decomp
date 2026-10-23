@@ -5,8 +5,8 @@
 #include "AI/NAV/802106E0_14.H"
 
 #if !(defined(VERSION_DE))
-void func_802123FC_eu(void *arg0) {
-    CloseAttackActor *actor = arg0;
+void func_802123FC_eu(void *closeAttackActor) {
+    CloseAttackActor *actor = closeAttackActor;
     CloseAttackActor *level1 = actor->self;
     CloseAttackBrain *inner = level1->brain;
     s32 r1, r2;

@@ -182,7 +182,7 @@ s32 func_804287F8_de(void *first, void *second, u32 event, s32 value) {
     return 0;
 }
 
-s32 func_80428850_de(void *parent, s32 arg1, s32 arg2, s32 event) {
+s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 next;
     s32 set;
     u8 *options;
@@ -220,7 +220,7 @@ s32 func_80428850_de(void *parent, s32 arg1, s32 arg2, s32 event) {
     return 0;
 }
 
-s32 func_804289B4_de(void *parent, s32 arg1, s32 arg2, s32 event) {
+s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 next;
     s32 set;
     u8 *options;
@@ -258,7 +258,7 @@ s32 func_804289B4_de(void *parent, s32 arg1, s32 arg2, s32 event) {
     return 0;
 }
 
-s32 func_80428B18_de(void *parent, s32 arg1, s32 arg2, s32 event) {
+s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 next;
     s32 set;
     u8 *options;
@@ -296,7 +296,7 @@ s32 func_80428B18_de(void *parent, s32 arg1, s32 arg2, s32 event) {
     return 0;
 }
 
-s32 func_80428C7C_de(void *parent, s32 arg1, s32 arg2, s32 event) {
+s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
     s32 next;
     s32 set;
     u8 *options;

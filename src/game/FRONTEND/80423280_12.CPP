@@ -415,7 +415,7 @@ s32 func_8042D4CC_de(void) {
     return 0;
 }
 
-s32 func_8042D4FC_de(void *window, void *arg1, s32 event) {
+s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
     s32 state;
     char *object;
     s32 next;

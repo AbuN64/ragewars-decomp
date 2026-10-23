@@ -54,18 +54,18 @@ void func_80218464_de(void) {
 
 
 
-s32 func_8021846C_de(void *arg0, void *arg1) {
+s32 func_8021846C_de(void *resetTimerStorage, void *resetOwnerStorage) {
     f32 temp_f1;
 
-    temp_f1 = ((ResetTimerStorage *)(arg0))->unk4;
+    temp_f1 = ((ResetTimerStorage *)(resetTimerStorage))->unk4;
     if (temp_f1 > 0.0f) {
-        ((ResetTimerStorage *)(arg0))->unk4 = temp_f1 - D_800D2988;
+        ((ResetTimerStorage *)(resetTimerStorage))->unk4 = temp_f1 - D_800D2988;
         return 0;
     }
-    if (((ResetFlagsStorage *)((((ResetOwnerStorage *)(arg1))->unk698)))->unkB0 & 0x8000) {
+    if (((ResetFlagsStorage *)((((ResetOwnerStorage *)(resetOwnerStorage))->unk698)))->unkB0 & 0x8000) {
         return 0;
     }
-    ((ResetTimerStorage *)(arg0))->unk37C = -1;
+    ((ResetTimerStorage *)(resetTimerStorage))->unk37C = -1;
     return 1;
 }
 

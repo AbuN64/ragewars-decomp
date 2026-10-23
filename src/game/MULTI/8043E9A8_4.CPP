@@ -65,7 +65,7 @@ extern void func_802649FC_de();
 extern char D_0044FFEC[];
 extern Shared_Game D_801462C8;
 
-void Multi_SelectInitialController(void *arg0, struct ObjRecAt20V2 *menu) {
+void Multi_SelectInitialController(void *unused0, struct ObjRecAt20V2 *menu) {
     Shared_Game *globals;
     struct Part *settings;
     struct ControllerProfile *profile;
@@ -94,7 +94,7 @@ void Multi_SelectInitialController(void *arg0, struct ObjRecAt20V2 *menu) {
 }
 
 /** Clears or sets bit 24 of arg1's record's flags depending on how many of func_80264690_de's four slots are active, and demotes arg1->unk0 from state 2 to 1 in the low-count case. */
-s32 func_8043EB70_de(void *arg0, Obj8043ECE8 *arg1) {
+s32 func_8043EB70_de(void *unused0, Obj8043ECE8 *arg1) {
     if (func_80264690_de() < 2) {
         arg1->unkC->unk58 &= 0xFEFFFFFF;
         if (arg1->unk0 == 2) {

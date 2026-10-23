@@ -93,7 +93,7 @@ s32 func_80422278_de(void) {
     return 0;
 }
 
-s32 func_804222A8_de(s32 arg0, s32 arg1, s32 event) {
+s32 func_804222A8_de(s32 unused0, s32 unused1, s32 event) {
     if (event == 1) {
         if (func_8043C308_de(D_800E44A0) != 1) {
             return 0;

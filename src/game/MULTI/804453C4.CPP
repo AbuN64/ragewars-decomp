@@ -60,8 +60,8 @@ typedef struct SpinnerSetupMenu { char pad0[0xC]; char *object; char pad10[0xC];
 extern char D_8014641C_us_rev1[];
 extern char *D_800D3C44;
 /* 157/161 aligned words; remaining: return-count register and tail index scheduling. */
-int Multi_SetupNameSpinner(void *arg0) {
-    SpinnerSetupMenu *menu = arg0;
+int Multi_SetupNameSpinner(void *spinnerSetupMenu) {
+    SpinnerSetupMenu *menu = spinnerSetupMenu;
     s32 index;
     s32 k;
     s32 selected;

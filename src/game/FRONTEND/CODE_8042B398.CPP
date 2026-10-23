@@ -156,7 +156,7 @@ s32 Frontend_BeginSetupConfirmation(s32 a0, s32 a1, s32 a2, s32 a3)
 extern void func_8029973C_de();
 extern void func_80439C80_de(void *, s32);
 #define SCR4D4 ((struct Screen_func_8042B4D4_de *)D_800E4F60)
-s32 func_8042B4D4_de(void *arg0, void *arg1, void *arg2, s32 event) {
+s32 func_8042B4D4_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
 
     func_8029973C_de();
@@ -204,7 +204,7 @@ extern s32 func_8042B154_de(s32 index);
 extern void func_8042B2E4_de(void);
 
 /** Select the next setup item, reversing the displayed order on the second page. */
-s32 Frontend_SelectNextSetupItem(void *arg0, void *arg1, void *arg2, s32 event) {
+s32 Frontend_SelectNextSetupItem(void *unused0, void *unused1, void *unused2, s32 event) {
     SetupScreen *screen;
     s32 changed;
     s32 count;
@@ -260,7 +260,7 @@ moved:
 
 
 #define SCR78C ((struct Screen_func_8042B78C_de *)D_800E4F60)
-s32 func_8042B78C_de(void *arg0, void *arg1, void *arg2, s32 event) {
+s32 func_8042B78C_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
     s32 mirror;
@@ -303,7 +303,7 @@ s32 func_8042B78C_de(void *arg0, void *arg1, void *arg2, s32 event) {
 #undef SCR78C
 
 #define SCR904 ((struct Screen_func_8042B78C_de *)D_800E4F60)
-s32 func_8042B904_de(void *arg0, void *arg1, void *arg2, s32 event) {
+s32 func_8042B904_de(void *unused0, void *unused1, void *unused2, s32 event) {
     s32 changed;
     s32 count;
 

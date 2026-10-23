@@ -150,7 +150,7 @@ void func_80278F84_de(LevelActor *actor) {
     actor->flags = (s32) (actor->flags | 0x2100);
 }
 
-void func_80278FB4_de(s32 arg0, s32 arg1, s32 arg2) {
+void func_80278FB4_de(s32 arg0, s32 unused1, s32 arg2) {
     if (D_8011FE88.mode == 4) {
         func_8028D90C_de();
         func_80402FB4_de(arg0, arg2);
@@ -194,7 +194,7 @@ void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {
     }
 }
 
-void func_80279138_de(int arg0, int arg1, void *arg2) {
+void func_80279138_de(int unused0, int unused1, void *arg2) {
     ObjRecAt6V2 *arg2_record = arg2;
     func_8025DF34_de(arg2_record->unk6);
 }

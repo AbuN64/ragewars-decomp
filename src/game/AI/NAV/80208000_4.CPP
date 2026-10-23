@@ -383,8 +383,8 @@ void func_80209CD8_de(SharedPlayer **brain) {
     }
 }
 
-f32 func_80209DAC_de(void *arg0) {
-    AiController *brain = arg0;
+f32 func_80209DAC_de(void *aiController) {
+    AiController *brain = aiController;
     f32 aim;
     f32 aimLimit;
     u8 difficulty;

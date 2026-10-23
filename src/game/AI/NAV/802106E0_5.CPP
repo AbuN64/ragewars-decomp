@@ -10,7 +10,7 @@ extern Handler *D_800C8DB0_de[];
 
 
 
-void func_80211020_de(void *arg0) {
+void func_80211020_de(void *aiController) {
     s32 origIdx;
     s32 idx;
     s32 idx2;
@@ -18,26 +18,26 @@ void func_80211020_de(void *arg0) {
     Handler fn;
     s32 result;
 
-    origIdx = ((AiController *)arg0)->state;
+    origIdx = ((AiController *)aiController)->state;
     if ((u32)origIdx >= 0xE) {
-        ((AiController *)arg0)->state = 0;
+        ((AiController *)aiController)->state = 0;
     }
-    idx = ((AiController *)arg0)->state;
+    idx = ((AiController *)aiController)->state;
     table = D_800C8DB0_de[idx];
     if (table != 0) {
-        idx2 = ((AiController *)arg0)->handlerIndex;
+        idx2 = ((AiController *)aiController)->handlerIndex;
         fn = table[idx2];
         if (fn == 0) {
-            ((AiController *)arg0)->handlerIndex = 0;
+            ((AiController *)aiController)->handlerIndex = 0;
             fn = table[0];
         }
         if (fn != 0) {
-            result = fn(arg0);
+            result = fn(aiController);
             if (result != 0) {
-                ((AiController *)arg0)->handlerIndex = ((AiController *)arg0)->handlerIndex + 1;
+                ((AiController *)aiController)->handlerIndex = ((AiController *)aiController)->handlerIndex + 1;
             }
-            if (((AiController *)arg0)->state != origIdx) {
-                ((AiController *)arg0)->handlerIndex = 0;
+            if (((AiController *)aiController)->state != origIdx) {
+                ((AiController *)aiController)->handlerIndex = 0;
             }
         }
     }

@@ -135,14 +135,14 @@ void func_8029EDA0_de(s32 arg0, f32 *angles) {
 }
 
 void func_8029EDD8_de(s32 arg0, f32 arg1) {
-    Matrix sp10;
+    Matrix matrix;
     f32 sp50;
     f32 sp54;
     Matrix *p;
 
     if (arg1 != 0.0f) {
         func_8029BBB0_de(arg1, &sp50, &sp54);
-        p = &sp10;
+        p = &matrix;
         func_802A0748_de(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC0_de;
         {
@@ -151,24 +151,24 @@ void func_8029EDD8_de(s32 arg0, f32 arg1) {
             ((Matrix *)(p))->m[5] = D_800C5CC0_de;
             ((Matrix *)(p))->m[10] = D_800C5CC0_de;
             ((Matrix *)(p))->m[15] = D_800C5CC0_de;
-            sp10.m[5] = t54;
-            sp10.m[9] = -t50;
-            sp10.m[6] = t50;
-            sp10.m[10] = t54;
+            matrix.m[5] = t54;
+            matrix.m[9] = -t50;
+            matrix.m[6] = t50;
+            matrix.m[10] = t54;
         }
         func_8029CE3C_de(arg0, (s32) p, arg0);
     }
 }
 
 void func_8029EE78_de(s32 arg0, f32 arg1) {
-    Matrix sp10;
+    Matrix matrix;
     f32 sp50;
     f32 sp54;
     Matrix *p;
 
     if (arg1 != 0.0f) {
         func_8029BBB0_de(arg1, &sp50, &sp54);
-        p = &sp10;
+        p = &matrix;
         func_802A0748_de(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC4_de;
         {
@@ -179,24 +179,24 @@ void func_8029EE78_de(s32 arg0, f32 arg1) {
             ((Matrix *)(p))->m[10] = D_800C5CC4_de;
             ((Matrix *)(p))->m[15] = D_800C5CC4_de;
             t50n = -t50;
-            sp10.m[8] = t50;
-            sp10.m[0] = t54;
-            sp10.m[2] = t50n;
-            sp10.m[10] = t54;
+            matrix.m[8] = t50;
+            matrix.m[0] = t54;
+            matrix.m[2] = t50n;
+            matrix.m[10] = t54;
         }
         func_8029CE3C_de(arg0, (s32) p, arg0);
     }
 }
 
 void func_8029EF18_de(s32 arg0, f32 arg1) {
-    Matrix sp10;
+    Matrix matrix;
     f32 sp50;
     f32 sp54;
     Matrix *p;
 
     if (arg1 != 0.0f) {
         func_8029BBB0_de(arg1, &sp50, &sp54);
-        p = &sp10;
+        p = &matrix;
         func_802A0748_de(p, 0, 0x40);
         ((Matrix *)(p))->m[0] = D_800C5CC8_de;
         {
@@ -207,10 +207,10 @@ void func_8029EF18_de(s32 arg0, f32 arg1) {
             ((Matrix *)(p))->m[10] = D_800C5CC8_de;
             ((Matrix *)(p))->m[15] = D_800C5CC8_de;
             t50n = -t50;
-            sp10.m[0] = t54;
-            sp10.m[4] = t50n;
-            sp10.m[1] = t50;
-            sp10.m[5] = t54;
+            matrix.m[0] = t54;
+            matrix.m[4] = t50n;
+            matrix.m[1] = t50;
+            matrix.m[5] = t54;
         }
         func_8029CE3C_de(arg0, (s32) p, arg0);
     }

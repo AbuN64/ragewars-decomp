@@ -57,8 +57,8 @@ extern void func_8029973C_de();
 
 
 
-void func_80412634_de(GridList *arg0, sm_dldc style) {
-    GridList *list = arg0;
+void func_80412634_de(GridList *gridList, sm_dldc style) {
+    GridList *list = gridList;
     UnitMtx cell;
     u32 column;
     u32 row;

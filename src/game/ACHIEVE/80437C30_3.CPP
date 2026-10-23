@@ -102,7 +102,7 @@ s32 func_80438AD4_de(void) {
     return 0;
 }
 
-s32 func_80438ADC_de(void *window, void *arg1, s32 event) {
+s32 func_80438ADC_de(void *window, void *unused1, s32 event) {
     s32 state;
     char *object;
     s32 next;

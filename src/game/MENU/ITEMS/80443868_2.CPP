@@ -62,7 +62,7 @@ s32 func_804436F8_de(void *unused, struct RootRecAt1C *root) {
     return 1;
 }
 
-s32 func_80443710_de(void *arg0, StateRecAt1C *arg1) {
+s32 func_80443710_de(void *unused0, StateRecAt1C *arg1) {
     func_8044972C_de(arg1->unk1C);
     return 1;
 }

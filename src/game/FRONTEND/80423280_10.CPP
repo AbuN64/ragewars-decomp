@@ -40,7 +40,7 @@ extern s32 func_8042B1B8_de(s32, s32);
 
 extern void func_8040E8D8_de(struct Resource_func_80419E54_de *, s32);
 
-s32 func_80429FF0_de(void *arg0, void *arg1, s32 event) {
+s32 func_80429FF0_de(void *unused0, void *unused1, s32 event) {
     s32 i;
     s32 alpha;
 

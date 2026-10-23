@@ -17,7 +17,7 @@ extern void func_80419F24_de(s32);
 extern void func_80419F58_de(s32,s32);
 
 extern s32 func_80419F38_de(s32);
-s32 func_8042F91C_de(s32 arg0, s32 arg1, s32 arg2) {
+s32 func_8042F91C_de(s32 unused0, s32 unused1, s32 arg2) {
     s32 temp_v0;
     s32 temp_v0_2;
     s32 temp_v0_3;

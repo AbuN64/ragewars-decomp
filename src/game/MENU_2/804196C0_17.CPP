@@ -95,7 +95,7 @@ s32 func_80419F9C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
    to their home stack slots. */
 
 
-void func_8041A02C_de(s32 arg0, struct Triple arg1) {
+void func_8041A02C_de(s32 unused0, struct Triple unused1) {
 }
 
 s32 func_8041A03C_de(void *arg0) {

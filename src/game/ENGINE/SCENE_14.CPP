@@ -240,8 +240,8 @@ void func_8028D67C_de(State_func_8028D67C_de *arg0)
   }
 }
 
-s32 func_8028D74C_de(void *arg0, void *arg1) {
-    Container *scene = arg0;
+s32 func_8028D74C_de(void *container, void *arg1) {
+    Container *scene = container;
     LevelActor *actor = arg1;
     void *base;
 
@@ -256,7 +256,7 @@ s32 func_8028D74C_de(void *arg0, void *arg1) {
     return -1;
 }
 
-void func_8028D7C4_de(char *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
+void func_8028D7C4_de(char *world, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
     s32 sp18;
     s32 sp1C;
     s32 field0;
@@ -264,18 +264,18 @@ void func_8028D7C4_de(char *arg0, s32 arg1, s32 arg2, s32 *arg3, s32 *arg4) {
     s32 offset;
 
     if (arg1 != 0) {
-        field0 = (s32)((Shared_World *)arg0)->alternateRecordIndex;
-        field1 = ((Shared_World *)arg0)->alternateRecordCount;
+        field0 = (s32)((Shared_World *)world)->alternateRecordIndex;
+        field1 = ((Shared_World *)world)->alternateRecordCount;
     } else {
-        field0 = (s32)((Shared_World *)arg0)->recordIndex;
-        field1 = ((Shared_World *)arg0)->recordCount;
+        field0 = (s32)((Shared_World *)world)->recordIndex;
+        field1 = ((Shared_World *)world)->recordCount;
     }
     if (func_80265550_de(field0, field1, arg2, &sp18, &sp1C) != 0) {
         offset = sp18 * 0x14;
         if (arg1 != 0) {
-            *arg3 = (s32)((Shared_World *)arg0)->alternateRecordArray + offset;
+            *arg3 = (s32)((Shared_World *)world)->alternateRecordArray + offset;
         } else {
-            *arg3 = (s32)((Shared_World *)arg0)->recordArray + offset;
+            *arg3 = (s32)((Shared_World *)world)->recordArray + offset;
         }
         *arg4 = (sp1C - sp18) + 1;
     } else {
