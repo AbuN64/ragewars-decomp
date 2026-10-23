@@ -92,8 +92,8 @@ void func_8041E5F8_de(void) {
                 player->slot = slot;
                 slot--;
                 player->character = D_80153F80[i].id;
-                player->pad92[1] = D_80153F80[i].variant;
-                player->pad92[0] = D_80153F80[i].word8;
+                player->team = D_80153F80[i].variant;
+                player->rank = D_80153F80[i].word8;
                 player->variant = D_80153F80[i].variantC;
                 func_802A025C_de(player->name, (u8 *)D_80153F80[i].name);
                 player--;

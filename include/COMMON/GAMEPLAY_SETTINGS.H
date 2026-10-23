@@ -19,7 +19,8 @@ struct Shared_PlayerSettingsRecord {
     char pad82[2];
     u8 name[13]; /* +0x84: localized player label, through +0x90. */
     u8 locked; /* +0x91: results-screen human/bot selector */
-    char pad92[2];
+    u8 rank; /* +0x92: joining request byte 2 (request kind+1, team, rank) */
+    u8 team; /* +0x93: team index 0..2, joinTeamName(team * 17 + ...) */
     u8 controlMode; /* +0x94: set by opponent kind when stage opponents are placed */
     u8 active; /* +0x95: src/func_8021B468.c */
 

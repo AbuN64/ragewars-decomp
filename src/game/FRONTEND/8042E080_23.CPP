@@ -43,15 +43,15 @@ s32 func_8042E460_de(u8 *request) {
         }
         team = request[1];
         if (team == 3) {
-            player->pad92[1] = func_802744D4_de() % 3;
+            player->team = func_802744D4_de() % 3;
         } else {
-            player->pad92[1] = team;
+            player->team = team;
         }
-        if ((u8)player->pad92[1] >= 3) {
-            player->pad92[1] = 2;
+        if ((u8)player->team >= 3) {
+            player->team = 2;
         }
-        player->variant = (u8)player->pad92[1];
-        player->pad92[0] = request[2];
+        player->variant = (u8)player->team;
+        player->rank = request[2];
         switch (player->character) {
         case 15:
             name = joinName15();
@@ -60,7 +60,7 @@ s32 func_8042E460_de(u8 *request) {
             name = joinName16();
             break;
         default:
-            name = joinTeamName((u8)player->pad92[1] * 17 + func_8041F140_de(player->character));
+            name = joinTeamName((u8)player->team * 17 + func_8041F140_de(player->character));
             break;
         }
         func_802A025C_de(player->name, name);
@@ -104,7 +104,7 @@ void func_8042E5EC_de(void) {
     g = &D_801462C8;
     for (i = 0; i < 8; i++) {
         player = &g->playerSettings[i];
-        player->pad92[2] = 0;
+        player->controlMode = 0;
         player->active = 0;
         player->enabled = 0;
         player->locked = 0;
@@ -114,7 +114,7 @@ void func_8042E5EC_de(void) {
         player->enabled = 1;
         player->character = table[i];
         player->locked = 0;
-        player->pad92[1] = 2;
+        player->team = 2;
         player->variant = func_802744D4_de() % 3;
         func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
@@ -123,7 +123,7 @@ void func_8042E5EC_de(void) {
         player->enabled = 1;
         player->character = table[i + first];
         player->locked = 1;
-        player->pad92[1] = 2;
+        player->team = 2;
         player->variant = func_802744D4_de() % 3;
         func_802A025C_de(player->name, joinTeamName((s8)player->variant * 17 + func_8041F140_de(player->character)));
     }
