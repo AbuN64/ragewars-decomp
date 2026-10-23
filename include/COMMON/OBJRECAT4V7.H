@@ -54,11 +54,6 @@ extern float D_800C4700_de;
 extern float D_800C4720_de;
 
 struct ObjRecAt4V7;
-struct ObjRecAt4V7 {
-    u32 unk0;
-    u16 unk4;
-    char pad4[0xE];
-};
 
 extern unsigned char D_800CC3AB;
 
@@ -119,12 +114,6 @@ extern float D_800C47A0_de;
 extern float D_800C4728_de;
 
 struct func_8026E5E0_S1;
-struct func_8026E5E0_S1 {
-    char pad0[0xC];
-    u32 unkC;
-    u16 bone;
-    u16 reserved;
-};
 
 extern float D_800C4750_de;
 
@@ -175,33 +164,12 @@ extern float D_800C4824_de;
 extern float D_800C98C4;
 
 struct AttachmentTable;
-struct AttachmentTable {
-    s32 stride;
-    u8 pad4[0x6A];
-    u8 bytes[1];
-};
 
 extern float D_800C4834_de;
 
 extern float D_800C47B0_de;
 
 struct func_8026E5E0_S3;
-struct func_8026E5E0_S3 {
-    char pad0[0x18];
-    s32 *unk18;
-    char pad18[0x188];
-    s8 unk1A4;
-    char pad1A4[0xB];
-    f32 unk1B0;
-    char pad1B0[0x24];
-    ObjRecAt650 *unk1D8;
-    char pad1D8[0x6C];
-    Triple unk248;
-    Triple unk254;
-    Triple unk260;
-    char pad268[0x74];
-    s32 unk2E0;
-};
 
 extern float D_800C47B8_de;
 

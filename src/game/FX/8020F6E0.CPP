@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/OBJECTLINKS1458.H"
+#include "FX/8020F6E0.H"
 #include "TYPES.H"
 
 #if defined(VERSION_EU)

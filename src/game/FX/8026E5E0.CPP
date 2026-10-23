@@ -5,6 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "FX/ATTACHMENT_EFFECT_ARGS.H"
 #include "COMMON/OBJRECAT4V7.H"
+#include "FX/8026E5E0.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
 #include "TYPES.H"
 #include "particle/80271B18_3.H"
