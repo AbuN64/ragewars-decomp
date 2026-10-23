@@ -18,21 +18,29 @@ extern s32 func_802AB400_de(void *, void *);
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
-/* NON_MATCHING: hand C from us-rev1 8023EEF0..8023F42C.
+/* NON_MATCHING: 2/335 aligned word edits remain: zero load source/order.
+ * Hand C from us-rev1 8023EEF0..8023F42C.
  * The query is read-only (0x30 bytes); contact storage is local (0xDC).
  * Floor/ceiling crossings use opposite signed height tests. Their normal
  * constants are -1/+1 in all five ROMs (us-rev1 ROM 0xC93D0/0xC93D4). */
-void Anim_TestEntityContact(void *motionAddress, struct Query *sweep, u8 *entityAddress) {
-    ActorMotion *motion = motionAddress;
-    LevelActor *entity = (LevelActor *)entityAddress;
+static inline f32 Anim_GetContactRadius(struct Query *sweep, f32 actorRadius) {
+    return sweep->radius + actorRadius;
+}
+
+static inline s8 Anim_GetSurfaceKind(LevelActor *entity) {
+    if (entity->definition->gate & 0x80) return 2;
+    return 7;
+}
+
+void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor *entity) {
     LevelActor *owner;
     MotionSurface *surface;
-    BoxContactPolygon contact;
+    f32 bounds[4];
     CVector3 point;
-    f32 minimumX;
-    f32 maximumX;
-    f32 minimumZ;
-    f32 maximumZ;
+    CVector3 normal;
+    BoxContactPolygon contact;
+    f32 entityX;
+    f32 entityZ;
     f32 radius;
     f32 bottom;
     f32 top;
@@ -41,18 +49,21 @@ void Anim_TestEntityContact(void *motionAddress, struct Query *sweep, u8 *entity
     f32 time;
     f32 deltaX;
     f32 deltaZ;
-    f32 reach;
-    s32 special = 0;
+    f32 planeZero;
+    s32 special;
 
+    entityX = entity->position0.x;
+    entityZ = entity->position0.z;
     radius = func_8024D398_de(entity);
-    minimumX = entity->position0.x - radius;
-    maximumX = entity->position0.x + radius;
-    minimumZ = entity->position0.z - radius;
-    maximumZ = entity->position0.z + radius;
-    if (!(minimumX < sweep->maxX && sweep->minX < maximumX &&
-          minimumZ < sweep->maxZ && sweep->minZ < maximumZ)) {
+    bounds[0] = entityX - radius;
+    bounds[2] = entityX + radius;
+    bounds[1] = entityZ - radius;
+    bounds[3] = entityZ + radius;
+    if (!(bounds[0] < sweep->maxX && sweep->minX < bounds[2] &&
+          bounds[1] < sweep->maxZ && sweep->minZ < bounds[3])) {
         return;
     }
+    special = 0;
     owner = motion->actor;
     surface = motion->surface;
     if (owner->kind == 1 && owner->definition->kind == 2) {
@@ -81,22 +92,27 @@ void Anim_TestEntityContact(void *motionAddress, struct Query *sweep, u8 *entity
     contact.actor = (BoxContactActor *)entity;
     contact.index = -1;
     bottom = entity->position0.y + func_8024E420_de(entity);
-    top = bottom + Particle_GetActorHeight(entity);
+    top = Particle_GetActorHeight(entity) + bottom;
+    if (sweep->flag != 0) {
+        normal.x = normal.z = 0.0f;
+    }
     ownerX = owner->position0.x;
     ownerZ = owner->position0.z;
-    reach = sweep->radius + radius;
-    if (sweep->flag != 0 && motion->velocity.y != 0.0f) {
+    radius = Anim_GetContactRadius(sweep, radius);
+    if (sweep->flag != 0) {
+        planeZero = normal.x;
+        if (motion->velocity.y != planeZero) {
         if (sweep->top1 <= bottom && bottom < sweep->top2) {
             time = (bottom - sweep->top1) / motion->velocity.y;
             if (time < motion->blend) {
                 func_80271FC8_de(&point, time, &owner->position0, &motion->end);
-                deltaX = entity->position0.x - point.x;
-                deltaZ = entity->position0.z - point.z;
-                if (deltaX * deltaX + deltaZ * deltaZ < reach * reach) {
+                deltaX = entityX - point.x;
+                deltaZ = entityZ - point.z;
+                if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
                     contact.kind = 7;
                     contact.point = point;
-                    contact.normal.x = 0.0f;
-                    contact.normal.z = 0.0f;
+                    contact.normal.x = planeZero;
+                    contact.normal.z = planeZero;
                     contact.normal.y = -1.0f;
                     func_8023E8D4_de(motion, &contact, 1);
                 }
@@ -106,13 +122,13 @@ void Anim_TestEntityContact(void *motionAddress, struct Query *sweep, u8 *entity
             time = (top - sweep->bottom1) / motion->velocity.y;
             if (time < motion->blend) {
                 func_80271FC8_de(&point, time, &owner->position0, &motion->end);
-                deltaX = entity->position0.x - point.x;
-                deltaZ = entity->position0.z - point.z;
-                if (deltaX * deltaX + deltaZ * deltaZ < reach * reach) {
+                deltaX = entityX - point.x;
+                deltaZ = entityZ - point.z;
+                if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
                     if (surface->enabled == 1) {
-                        contact.kind = 1;
+                        contact.kind = surface->enabled;
                     } else {
-                        contact.kind = entity->definition->gate & 0x80 ? 2 : 7;
+                        contact.kind = Anim_GetSurfaceKind(entity);
                     }
                     contact.point = point;
                     contact.normal.x = 0.0f;
@@ -123,18 +139,19 @@ void Anim_TestEntityContact(void *motionAddress, struct Query *sweep, u8 *entity
             }
         }
     }
+    }
     contact.kind = special != 0 ? 7 : surface->enabled;
-    func_8023E178_de(motion, &entity->position0, reach,
+    func_8023E178_de(motion, &entity->position0, radius,
                     top - sweep->bottom, bottom - sweep->top, 1, &contact, 1);
     if (special != 0 && *(LevelActor **)((u8 *)motion + 0x104) != entity &&
         sweep->bottom1 <= top && bottom < sweep->top1) {
-        deltaX = entity->position0.x - ownerX;
-        deltaZ = entity->position0.z - ownerZ;
-        if (deltaX * deltaX + deltaZ * deltaZ < reach * reach) {
+        deltaX = entityX - ownerX;
+        deltaZ = entityZ - ownerZ;
+        if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
+            contact.t = 0.0f;
             contact.normal.x = 0.0f;
             contact.normal.y = 0.0f;
             contact.normal.z = 0.0f;
-            contact.t = 0.0f;
             contact.hit = motion->start;
             *(BoxContactPolygon *)&motion->collisionState = contact;
         }
@@ -163,7 +180,7 @@ typedef struct Query Query;
 
 
 extern Shape D_80100170;
-extern void Anim_TestEntityContact(void *, Query *, u8 *);
+extern void Anim_TestEntityContact(ActorMotion *, Query *, LevelActor *);
 
 
 
