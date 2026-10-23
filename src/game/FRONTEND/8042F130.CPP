@@ -122,6 +122,7 @@
 #endif
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/SHARED_GAMESLOT.H"
 
 /* Creates the match setup block D_800E54A4 for screen arg0: allocates and clears it, loads its sprites and centres the two banner rows, links every player slot, shows the header for the game mode, resets each player's menu state, records and name entries, then starts each player in the state the mode needs (team handoff for mode 5, memory-card check for mode 6, the host for mode 7) and starts the menu music. Returns zero. */
 
@@ -193,25 +194,12 @@ typedef struct PakSetupProfile {
     char padF[0x190 - 0xF];
 } PakSetupProfile;
 
-typedef struct PakSetupStatus {
-    char pad0[0x78];
-    u8 active;
-    char pad79[0x91 - 0x79];
-    u8 out;
-    char pad92[0x96 - 0x92];
-} PakSetupStatus;
-
-typedef struct PakSetupGame {
-    char pad0[0xD0];
-    PakSetupStatus status[8];
-} PakSetupGame;
 
 extern PakSetupState *D_800E54A4;
 extern s32 D_800E54A0;
 extern s32 D_800DF4C0;
 extern s32 D_800DF4C4;
 extern PakSetupProfile D_80102B00[];
-extern PakSetupGame D_801462C8;
 
 extern void *func_8025305C_de(s32);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);
@@ -232,7 +220,7 @@ extern void func_802A2418_de(s32);
 
 s32 func_8042F130_us_rev1(void *screen) {
     PakSetupState *block;
-    PakSetupGame *globals;
+    Shared_Game *globals;
     MenuWidget *sprite;
     MenuWidget *row;
     s32 rest;
@@ -367,8 +355,8 @@ s32 func_8042F130_us_rev1(void *screen) {
         }
         for (i = 0; i < 4; i++) {
             globals = &D_801462C8;
-            if (D_80102B00[i].dropped == 0 && D_80102B00[i].owner >= 0 && globals->status[i].active == 1 &&
-                globals->status[i].out == 0) {
+            if (D_80102B00[i].dropped == 0 && D_80102B00[i].owner >= 0 && globals->playerSettings[i].enabled == 1 &&
+                globals->playerSettings[i].locked == 0) {
                 D_800E54A4->players[D_80102B00[i].owner].back = 2;
                 D_800E54A4->players[D_80102B00[i].owner].state = 2;
                 D_800E54A4->players[D_80102B00[i].owner].next = 6;
