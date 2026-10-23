@@ -27,7 +27,7 @@ void func_80419430_de(void *source) {
 
 extern s32 D_800E32F0;
 
-extern s32 func_80413608_de(void);
+extern s32 func_80413608_de(u8 *record);
 
 void func_80419490_de(Image_func_80419490_de *image) {
     s32 *src;
@@ -41,7 +41,7 @@ void func_80419490_de(Image_func_80419490_de *image) {
     if (D_800E32F0 == 0 || image->width == 0 || image->height == 0) {
         return;
     }
-    switch (func_80413608_de()) {
+    switch (func_80413608_de((u8 *)image)) {
         case 4:
             groups = image->width / 16;
             break;
