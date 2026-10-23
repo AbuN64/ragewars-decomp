@@ -209,9 +209,11 @@ extern s32 func_802444A4_de(void *, f32, f32, f32, CVector3, void *);
  * actor), keeps the nearest within D_800C2168_de that passes the range/visibility tests (func_80214624_de and
  * a line-of-sight probe through func_802444A4_de when requested), and remembers the actor's position when
  * nothing qualified. */
+typedef struct Copy50_802149C0 { s32 words[20]; } Copy50_802149C0;
 void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
     void *candidates[3];
-    u8 saved[0x50];
+    u8 spare[0x1F0];
+    Copy50_802149C0 saved;
     CVector3 target;
     void *best = 0;
     void *candidate;
@@ -221,6 +223,7 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
     s32 ok;
     s32 i;
     s32 blocked;
+    spare[0] = 0;
     if (FIELD(void *, state, 0x78) != 0) {
         if (combat != 0) {
             func_80214624_de(actor, state, FIELD(void *, state, 0x78));
@@ -278,9 +281,7 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
                 }
             }
             if (lineOfSight != 0) {
-                for (blocked = 0; blocked < 0x50; blocked += 4) {
-                    FIELD(s32, saved, blocked) = FIELD(s32, actor, blocked);
-                }
+                saved = *(Copy50_802149C0 *)actor;
                 FIELD(f32, actor, 0xC) += Particle_GetActorHeight((Actor_func_80214310_de *)actor);
                 FIELD(f32, actor, 0xC) += FIELD(f32, candidate, 0x70);
                 target.x = FIELD(f32, candidate, 0x8);
@@ -292,12 +293,7 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
                 if (D_801041F0 == candidate) {
                     blocked = 0;
                 }
-                {
-                    s32 k;
-                    for (k = 0; k < 0x50; k += 4) {
-                        FIELD(s32, actor, k) = FIELD(s32, saved, k);
-                    }
-                }
+                *(Copy50_802149C0 *)actor = saved;
                 if (blocked != 0) {
                     continue;
                 }

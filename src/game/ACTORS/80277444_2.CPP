@@ -61,8 +61,9 @@ extern void *func_8028FDB4_de(void *, s32);
 s32 func_80277C54_de(void *bounds, void **outList, s32 *outCount) {
     f32 *box = bounds;
     u8 **out = (u8 **)outList;
-    u8 *items[0x40];
     s32 keys[0x40];
+    u8 *items[0x40];
+    s32 spare[0x40];
     s32 flag = 0;
     s32 matches = 0;
     s32 count = 0;
@@ -76,8 +77,10 @@ s32 func_80277C54_de(void *bounds, void **outList, s32 *outCount) {
     u8 *table;
     u8 *entry;
     f32 *other;
-    for (i = 0; i < AC_FIELD(&D_8011FE88, s32, 0x1500); i++) {
-        item = (u8 *)&D_8011FE88 + 0x1508 + i * 0xC;
+    u8 *world = (u8 *)&D_8011FE88;
+    spare[0] = 0;
+    for (i = 0; i < AC_FIELD(world, s32, 0x1500); i++) {
+        item = world + 0x1508 + i * 0xC;
         other = AC_FIELD(item, f32 *, 4);
         if (box[0] < other[2] && other[0] < box[3] && box[2] < other[3] && other[1] < box[5]) {
             items[matches++] = item;
