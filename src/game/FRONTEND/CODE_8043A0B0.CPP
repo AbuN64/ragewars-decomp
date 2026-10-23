@@ -133,11 +133,14 @@ extern void func_80439BE0_de(void *, ResultsTriple);
 extern void func_80439C30_de(void *, ResultsTriple);
 extern f32 D_800E1FC4, D_800DDF98_de, D_800DDF9C, D_800E1FD0, D_800E1FD4, D_800DDFA8, D_800DDFAC_de;
 extern u16 D_800E19DE[];
+/* Seats the four result cards: scatters four spinning models with random heights, then for each enabled player shows
+ * the player widget and starts the player slot in mode 5 (state 0) or mode 0 (states 1 and 2).
+ * 2 aligned edits of 178 words; remaining: the loop-invariant moves (x = 0 copy and the 0x1370 giv) swap order. */
 s32 func_8043A330_de(void) {
     ResultsTriple scale;
-    ResultsTriple spin;
+    ResultsTriple dirOffset;
     ResultsTriple pos;
-        ResultsTriple dirOffset;
+    ResultsTriple spin;
     f32 offsetY;
     u8 *screen;
     u8 *entry;
@@ -145,7 +148,9 @@ s32 func_8043A330_de(void) {
     s32 i;
     s32 x;
     s32 *slot;
+    u8 *cfg;
     func_802A23C4_de(1);
+    i = 0;
     *(f32 *)&scale.x = D_800E1FC4;
     *(f32 *)&scale.y = D_800E1FC4;
     *(f32 *)&scale.z = D_800E1FC4;
@@ -153,14 +158,13 @@ s32 func_8043A330_de(void) {
     pos.y = 0;
     pos.z = 0;
     spin.x = 0;
-    spin.y = 0;
     spin.z = 0;
     dirOffset.x = 0;
     dirOffset.y = 0;
     *(f32 *)&spin.y = D_800DDF98_de;
     *(f32 *)&dirOffset.z = D_800DDF9C;
-    x = 0;
-    for (i = 0; i < 4; i++) {
+    x = i;
+    for (; i < 4; i++) {
         switch (i) {
         case 0:
             *(f32 *)&dirOffset.y = D_800E1FD0;
@@ -182,17 +186,20 @@ s32 func_8043A330_de(void) {
         func_80439C30_de(((u8 *)D_800E59E0 + 0x1370 + i * 0xC0), spin);
     }
     for (i = 0; i < 4; i++) {
-        if (*((u8 *)&D_80146398[0] + i * 0x96 + 0x78) == 1) {
+        cfg = (u8 *)&D_80146398[i];
+        if (cfg[0x78] == 1) {
             widget = func_8040EC30_de(*(void **)D_800E59E0, D_800E19DE[i * 0x26]);
             func_8040E928_de(widget, 0);
             *((u8 *)widget + 0x10) = 0x23;
             screen = (u8 *)D_800E59E0 + i * 0x4D0;
             switch (*(s32 *)(screen + 0x4D4)) {
             case 0:
-                *(s32 *)(screen + 0x4B4) = 5;
-                func_8043BA5C_de(i, 5);
+                func_8043BA5C_de(i, *(s32 *)(screen + 0x4B4) = 5);
                 break;
             case 1:
+                *(s32 *)(screen + 0x4B4) = 0;
+                func_8043BA5C_de(i, 0);
+                break;
             case 2:
                 *(s32 *)(screen + 0x4B4) = 0;
                 func_8043BA5C_de(i, 0);
