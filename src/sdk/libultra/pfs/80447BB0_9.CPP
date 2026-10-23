@@ -128,11 +128,7 @@ s32 func_80446F60_de(void *queue, OSPfs *pfs, int channel)
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);
 extern s32 func_802B8880_de(void *queue, int channel, u16 address, u8 *buffer, int force);
 extern s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache);
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-extern s32 func_80448A48_eu_x(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
-#else
-extern s32 func_804476B8_de(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
-#endif
+extern s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache);
 
 s32 func_80447130_de(OSPfs *pfs)
 {
@@ -185,11 +181,7 @@ s32 func_80447130_de(OSPfs *pfs)
                 }
 
                 if ((cc = 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-func_80448A48_eu_x
-#else
-func_804476B8_de
-#endif
+Pfs_CountPageReferences
 (pfs, next_page, &cache) - cl) != 0) {
                     break;
                 }
@@ -337,24 +329,21 @@ s32 func_8044756C_de(OSPfs *pfs, __OSInodeCache *cache)
     return 0;
 }
 
-#if defined(VERSION_EU_X) || defined(VERSION_US_REV1) || (defined(NON_MATCHING) && (defined(VERSION_EU)))
-#if defined(VERSION_EU)
-#define func_80448A48_eu_x func_804476B8_de
-#endif
+#if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
 #ifdef NON_MATCHING
-/* 35/88 words; remaining: by-value union param is not sra-extracted and the saved-register allocation differs */
+/* Counts (up to 2) the inode-table slots of every bank holding the page key fpage, reading banks through the cache; returns the count, a read error, or 2 once two slots hold it (the pak checker's duplicate-page test). 6/88 words: the target compares and masks a register copy of the u8 bank variable. */
 extern s32 func_804488A4_de(OSPfs *pfs, __OSInode *inode, u8 backup, u8 bank);
-s32 func_80448A48_eu_x(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
+s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
+    s32 j;
     u8 bank;
-    s32 count = 0;
-    s32 page;
     s32 ret;
-    u32 key = fpage.ipage;
-    u32 keyBank = key >> 8;
-    u32 index = ((key & 0xFF) >> 2) + (keyBank & 7) * 32;
+    s32 start;
+    s32 sum = 0;
+    u32 idx = (fpage.inode_t.page >> 2) + (fpage.inode_t.bank & 7) * 32;
+
     for (bank = 0; bank < pfs->banks; bank++) {
-        page = bank == 0 ? pfs->inode_start_page : 1;
-        if (bank != keyBank && !((cache->map[index] >> (bank & 7)) & 1)) {
+        start = (bank == 0) ? pfs->inode_start_page : 1;
+        if (bank != fpage.inode_t.bank && !((cache->map[idx] >> (bank & 7)) & 1)) {
             continue;
         }
         if (cache->bank != bank) {
@@ -364,18 +353,19 @@ s32 func_80448A48_eu_x(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cache) {
             }
             cache->bank = bank;
         }
-        for (; page < 128 && count < 2; page++) {
-            if (cache->inode.inode_page[page].ipage == key) {
-                count++;
+        for (j = start; sum < 2 && j < 128; j++) {
+            if (cache->inode.inode_page[j].ipage == fpage.ipage) {
+                sum++;
             }
         }
-        if (count >= 2) {
+        if (sum >= 2) {
             return 2;
         }
     }
-    return count;
+    return sum;
 }
+
 #else
-INCLUDE_ASM("ovl_80400000", func_80448A48_eu_x);
+INCLUDE_ASM("ovl_80400000", Pfs_CountPageReferences);
 #endif
 #endif
