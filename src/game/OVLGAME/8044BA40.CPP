@@ -5,18 +5,18 @@
 #include "COMMON/S1.H"
 
 void func_8044ADF0_de(ObjRecAt5F14 *arg0) {
-    SceneEffect *var_s0;
-    s32 var_s1;
+    SceneEffect *sceneEffect;
+    s32 i;
 
     func_80255CA0_de(&arg0->unk5F00, 0x2E8, 0x2EC);
     func_80255CA0_de(&arg0->unk5F14, 0x2E8, 0x2EC);
-    var_s1 = 0;
-    var_s0 = arg0->effects;
+    i = 0;
+    sceneEffect = arg0->effects;
     do {
-        func_80255D14_de(&arg0->unk5F00, var_s0);
-        var_s1 += 1;
-        var_s0 += 1;
-    } while (var_s1 < 0x20);
+        func_80255D14_de(&arg0->unk5F00, sceneEffect);
+        i += 1;
+        sceneEffect += 1;
+    } while (i < 0x20);
 }
 
 #if defined(VERSION_US)

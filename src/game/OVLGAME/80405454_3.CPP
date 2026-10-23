@@ -89,35 +89,35 @@ s32 func_804055D4_de(s32 channel) {
 extern u8 D_800DE80C[];
 
 /* Converts a controller-pak filename through its character table, blanking leading nulls, then trims trailing spaces. */
-void func_80405648_de(u8 *arg0, u8 *arg1, s32 arg2) {
+void func_80405648_de(u8 *arg0, u8 *noteText, s32 arg2) {
     s32 i;
     s32 started;
 
     for (i = 0; i < arg2; i++) {
-        arg1[i] = 0;
+        noteText[i] = 0;
     }
 
     started = 0;
     for (i = started; i < arg2; i++, arg0++) {
         if (*arg0 < 0x42) {
             if (*arg0 == 0 && !started) {
-                arg1[i] = ' ';
+                noteText[i] = ' ';
             } else {
-                arg1[i] = D_800DE80C[*arg0];
+                noteText[i] = D_800DE80C[*arg0];
                 started = 1;
             }
         } else {
-            arg1[i] = '~';
+            noteText[i] = '~';
         }
     }
 
     for (i = arg2 - 1; i >= 0; i--) {
-        if (arg1[i] != ' ' && arg1[i] != 0) {
+        if (noteText[i] != ' ' && noteText[i] != 0) {
             break;
         }
-        arg1[i] = 0;
+        noteText[i] = 0;
     }
-    arg1[arg2 - 1] = 0;
+    noteText[arg2 - 1] = 0;
 }
 
 extern u8 func_802A05A0_de(u8);
@@ -125,32 +125,32 @@ extern u8 D_800DE80C[0x42];
 
 /* Maps input bytes through a lookup table and stores results. */
 void func_8040570C_de(u8 *arg0, s8 *arg1, s32 arg2) {
-    s32 var_s2;
+    s32 i;
     s8 *var_s1;
-    s32 var_a0;
+    s32 j;
     u8 *var_s0;
     int new_var;
 
-    var_s2 = 0;
+    i = 0;
     if (arg2 > 0) {
         new_var = 0x42;
         var_s1 = arg1;
         var_s0 = arg0;
         do {
             *var_s0 = func_802A05A0_de(*var_s0);
-            for (var_a0 = 0; var_a0 < 0x42; var_a0 += 1) {
-                if (*var_s0 == D_800DE80C[var_a0]) {
-                    *var_s1 = (s8)var_a0;
+            for (j = 0; j < 0x42; j += 1) {
+                if (*var_s0 == D_800DE80C[j]) {
+                    *var_s1 = (s8)j;
                     break;
                 }
             }
-            if (var_a0 == new_var) {
+            if (j == new_var) {
                 *var_s1 = 0;
             }
             var_s1 += 1;
-            var_s2 += 1;
+            i += 1;
             var_s0 += 1;
-        } while (var_s2 < arg2);
+        } while (i < arg2);
     }
 }
 

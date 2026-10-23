@@ -27,7 +27,7 @@ void func_80405CDC_de(struct RecordRecAt1C *arg0) {
     s32 temp_a1_3;
     s32 temp_a1_4;
     s32 temp_a1_5;
-    s32 var_s1;
+    s32 i;
     s32 var_v1;
     temp_a1 = arg0->b;
     if (temp_a1 != 0) {
@@ -45,14 +45,14 @@ void func_80405CDC_de(struct RecordRecAt1C *arg0) {
     if (temp_a1_4 != 0) {
         func_80253838_de(0, temp_a1_4);
     }
-    var_s1 = 0;
+    i = 0;
     do {
-        temp_a1_5 = arg0->values[var_s1];
+        temp_a1_5 = arg0->values[i];
         if (temp_a1_5 != 0) {
             func_80253838_de(0, temp_a1_5);
         }
-        var_s1 += 1;
-    } while (var_s1 < 3);
+        i += 1;
+    } while (i < 3);
     var_v1 = 2;
     arg0->a = 0;
     arg0->b = 0;

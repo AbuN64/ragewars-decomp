@@ -247,33 +247,33 @@ void func_80449DB0_de(struct RecordCode80447BB0 *record) {
                          /* extern */
 
 void func_80449E18_de(ObjectPool *pool) {
-    void *temp_a0;
+    void *message;
     s32 temp_v0;
-    struct IntPair *temp_v1;
+    struct IntPair *model;
     struct IntPair *temp_v1_2;
-    Shared_ActorView *var_s0;
+    Shared_ActorView *actor;
     if ((func_802934F8_de() != 0) && (func_80264B6C_de() != 0)) {
         func_80264B8C_de();
         func_80264B7C_de();
     }
-    var_s0 = pool->object_queue.head;
-    if (var_s0 != 0) {
+    actor = pool->object_queue.head;
+    if (actor != 0) {
         do {
-            Ovlgame_InitActorHudState(var_s0);
-            temp_v0 = Scene_FindFloorPolygon(&D_8011FE88, &var_s0->position);
-            var_s0->weapon.model = temp_v0;
-            var_s0->modelId = temp_v0;
-            func_80220A80_de(var_s0, var_s0);
-            temp_a0 = var_s0->message;
-            if (temp_a0 != 0) {
-                func_80245864_de(temp_a0);
+            Ovlgame_InitActorHudState(actor);
+            temp_v0 = Scene_FindFloorPolygon(&D_8011FE88, &actor->position);
+            actor->weapon.model = temp_v0;
+            actor->modelId = temp_v0;
+            func_80220A80_de(actor, actor);
+            message = actor->message;
+            if (message != 0) {
+                func_80245864_de(message);
             }
-            temp_v1 = var_s0->model;
-            temp_v1->field_4 = temp_v1->field_4 & ~4;
-            temp_v1_2 = var_s0->model;
+            model = actor->model;
+            model->field_4 = model->field_4 & ~4;
+            temp_v1_2 = actor->model;
             temp_v1_2->field_4 = temp_v1_2->field_4 & ~4;
-            var_s0 = var_s0->next;
-        } while (var_s0 != 0);
+            actor = actor->next;
+        } while (actor != 0);
     }
 }
 void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {

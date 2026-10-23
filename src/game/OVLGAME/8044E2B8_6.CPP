@@ -17,7 +17,7 @@
 
 
 
-void func_8044DDD4_de(GameSession *arg0) {
+void func_8044DDD4_de(GameSession *gameSession) {
     Shared_Placed spawn;
     s32 var_s0;
 
@@ -29,11 +29,11 @@ void func_8044DDD4_de(GameSession *arg0) {
     D_801462C8.counters.seconds = 0;
     D_801462C8.counters.m_GameTimeMinutes = 0;
     D_801462C8.counters.m_GameTimeHours = 0;
-    arg0->selectionActive = 0;
+    gameSession->selectionActive = 0;
     D_801462C8.counters.first = 0;
-    arg0->phase = 2;
-    arg0->selector = var_s0;
-    arg0->target = 0xC;
+    gameSession->phase = 2;
+    gameSession->selector = var_s0;
+    gameSession->target = 0xC;
 }
 
 #ifdef NON_MATCHING

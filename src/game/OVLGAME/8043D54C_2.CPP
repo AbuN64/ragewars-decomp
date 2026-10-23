@@ -5,8 +5,8 @@
 #include "OVLGAME/SHAREDRECAT224.H"
 
 #if defined(VERSION_EU_X) || defined(VERSION_US)
-s32 func_8043DADC_de(void *arg0, MenuRules *arg1) {
-    func_8044972C_de(arg1->locked);
+s32 func_8043DADC_de(void *arg0, MenuRules *menuRules) {
+    func_8044972C_de(menuRules->locked);
     return 1;
 }
 #endif
