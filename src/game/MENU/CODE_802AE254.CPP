@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/RESPONSE.H"
-#include "MENU/802AE254.H"
+#include "MENU/CODE_802AE254.H"
 
 /** Return the one status used by callers. */
 int func_802AD264_de(void) {

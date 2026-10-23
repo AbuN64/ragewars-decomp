@@ -82,11 +82,11 @@ ASFLAGS := -march=vr4300 -mabi=32 -EB --no-pad-sections -mips3
 define PREPROCESS_gcc_2_7_2_sn64
 $(Q)$(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_7_2_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi
+COMPILE_gcc_2_7_2_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_7_2_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_7_2_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@; fi
 define PREPROCESS_gcc_2_8_1_sn64
 $(Q)$(CPP) $(CPPFLAGS) -MMD -MP -MF $(@:.i.ok=.d) -MT $@ $(DEFINES) $(INCLUDES) $< > $(@:.ok=.new)
 endef
-COMPILE_gcc_2_8_1_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && sed -i -E 's/^([ \t]*\.word[ \t]+\.L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
+COMPILE_gcc_2_8_1_sn64 = if [ -f $(@:.o=.s.prev) ]; then rm -f $(@:.o=.s); elif [ -f $(@:.o=.s) ]; then mv -f $(@:.o=.s) $(@:.o=.s.prev); fi && $(CC_gcc_2_8_1_sn64) -quiet $(CFLAGS) $(@:.o=.i) -o $(@:.o=.s) && test -s $(@:.o=.s) && $(if $(NOALIGN),python3 -I -c "$$STRIP_ALIGN" $(@:.o=.s) $(NOALIGN),true) && sed -i -E 's/^([ \t]*\.word[ \t]+[.$$]L[0-9]+)[ \t]*$$/\1-0x80000000/' $(@:.o=.s) && if [ -z "$(filter-out %.i.ok,$?)$(flags_changed)" ] && [ -f $@ ] && [ -f $(@:.o=.s.prev) ] && [ "x$(file <$@.textsize)" = "x$(TEXTSIZE)" ] && cmp -s $(@:.o=.s) $(@:.o=.s.prev); then rm -f $(@:.o=.s.prev) && touch $@ && : > $@.same; else rm -f $(@:.o=.s.prev) && $(N64LINK) asn64 --as $(AS_gcc_2_8_1_sn64) $(ASFLAGS) $(ASINC) $(@:.o=.s) -o $@ && $(OBJCOPY) --set-section-flags .rdata=alloc,load,readonly,data,contents $@; fi
 # Per-file facts ([file] rows of config.toml): a toolchain and flags for a path or a directory.
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/rnc/%.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/rnc/%.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
@@ -527,7 +527,8 @@ $(VERSIONS:%=build/nm/%/undefined_syms.ld): build/nm/%/undefined_syms.ld: build/
 	$(Q)cp $< $@
 # A draft may define a name that this version's ROM keeps as data, or the other way round: the first definition in link
 # order wins and link.err lists every such name; any other link error stops the build.
-$(VERSIONS:%=build/nm/%/$(NAME).elf): build/nm/%/$(NAME).elf: $$(OBJS_nm_$$*) build/nm/%/link.ld build/nm/%/undefined_syms.ld
+$(VERSIONS:%=build/nm/%/$(NAME).elf): build/nm/%/$(NAME).elf: $$(OBJS_nm_$$*) build/nm/%/link.ld \
+	build/nm/%/undefined_syms.ld
 	$(Q)cd build/nm/$* && { $(LD) -T link.ld -o $(NAME).elf 2> link.err \
 	|| $(LD) -T link.ld --allow-multiple-definition -o $(NAME).elf 2>> link.err; } \
 	|| { cat build/nm/$*/link.err >&2; exit 1; }
