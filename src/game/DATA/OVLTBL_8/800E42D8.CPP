@@ -7,7 +7,7 @@ struct {
         unsigned int kind;
         unsigned short widgets[8][2];
     } rows[3];
-} D_auto_data_unresolved_800E42D8 = {
+} g_selectionLayoutTailUsRevOne = {
     { { 0, 0x007F }, { 0, 0x00C6 }, { 0, 0x00AD }, { 0, 0x00AF }, { 0, 0x00B1 }, { 0, 0x00C4 }, { 0, 0x00C3 }, { 0, 0x00C2 } },
     {
         { 0x00000086, { { 0, 0x007E }, { 0, 0x00A9 }, { 0, 0x0094 }, { 0, 0x0096 }, { 0, 0x0098 }, { 0, 0x00A8 }, { 0, 0x00A7 }, { 0, 0x00A6 } } },

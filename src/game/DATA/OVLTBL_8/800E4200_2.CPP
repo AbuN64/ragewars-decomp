@@ -1,6 +1,6 @@
 
 /* Selection state pointer followed by the first layout row's word-sized kind. */
-unsigned int D_blob_phase2_218b0dbfbe02a4c11f26[] = {
+unsigned int g_selectionStateAndFirstKind[] = {
     0x00000000,
 #if defined(VERSION_DE)
     0x0090,

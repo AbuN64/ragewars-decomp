@@ -355,7 +355,7 @@ extern s32 func_8020CB3C_de(void *, void *);
 /* Places an actor at one of the start positions of a model: asks the loader (func_8044D220_de) for the
  * candidate points of the model (up to 0x20 in multiplayer, one otherwise), in multiplayer picks the point
  * farthest from every other player (distances via func_802726F8_de over the player list at D_80145060),
- * copies its position and height into the actor, finds the floor under it and calls func_804491E8_de; when no
+ * copies its position and height into the actor, finds the floor under it and calls Ovlgame_InitActorHudState; when no
  * point fits it falls back to func_8044D528_de. Finally stores the position's cell in the actor's list head. */
 void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
     void *actor = player;
@@ -400,7 +400,7 @@ void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
             floor = Scene_FindFloorPolygon(&D_8011FE88, (char *)actor + 8);
             FIELD(s32, actor, 0x2FC) = floor;
             FIELD(s32, actor, 0x14) = floor;
-            func_804491E8_de(actor);
+            Ovlgame_InitActorHudState(actor);
         }
     } else {
         if (func_8044D220_de(&D_8011FE88, -1, model, points, 1) == 0 || FIELD(s16, points, 0x10) != D_801371D4) {
@@ -413,7 +413,7 @@ void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
             floor = func_8028B394_de(&D_8011FE88, FIELD(s16, points, 0x12));
             FIELD(s32, actor, 0x2FC) = floor;
             FIELD(s32, actor, 0x14) = floor;
-            func_804491E8_de(actor);
+            Ovlgame_InitActorHudState(actor);
         }
     }
     FIELD(s32, FIELD(void *, actor, 0x1454), 4) = func_8020CB3C_de(D_8013B364, (char *)actor + 8);

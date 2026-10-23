@@ -56,29 +56,29 @@ int func_8022BAC0_de(void) {
     return D_80146894 != 0;
 }
 
-void func_8022BAD0_de(void *arg0) {
-    s32 var_a2;
+void Text_LoadActorModel(void *actor) {
+    s32 modelKind;
     void *result;
 
-    var_a2 = ((Shared_ActorView *)arg0)->state;
-    if (D_801468F4 != 0 && ((Shared_ActorView *)arg0)->controls->transientFlag == 1) {
-        var_a2 = 0x13;
+    modelKind = ((Shared_ActorView *)actor)->state;
+    if (D_801468F4 != 0 && ((Shared_ActorView *)actor)->controls->transientFlag == 1) {
+        modelKind = 0x13;
     }
-    result = func_8028CFA0_de(&D_8011FE88, 0xB, var_a2);
+    result = func_8028CFA0_de(&D_8011FE88, 0xB, modelKind);
     if (result != 0) {
-        ((Shared_ActorView *)arg0)->model = result;
+        ((Shared_ActorView *)actor)->model = result;
     } else {
         result = func_8028CFA0_de(&D_8011FE88, 0xB, -1);
         if (result != 0) {
-            ((Shared_ActorView *)arg0)->model = result;
+            ((Shared_ActorView *)actor)->model = result;
         } else {
             result = func_8028CFA0_de(&D_8011FE88, -1, -1);
-            ((Shared_ActorView *)arg0)->model = result;
+            ((Shared_ActorView *)actor)->model = result;
         }
     }
-    ((LevelActor *)arg0)->scale.x = ((ObjectState108 *)result)->unk_FC;
-    ((LevelActor *)arg0)->scale.y = ((ObjectState108 *)result)->unk_100;
-    ((LevelActor *)arg0)->scale.z = ((ObjectState108 *)result)->unk_104;
+    ((LevelActor *)actor)->scale.x = ((ObjectState108 *)result)->unk_FC;
+    ((LevelActor *)actor)->scale.y = ((ObjectState108 *)result)->unk_100;
+    ((LevelActor *)actor)->scale.z = ((ObjectState108 *)result)->unk_104;
 }
 
 void func_8022BB80_de(void *arg0) {

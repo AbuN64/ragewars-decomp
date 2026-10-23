@@ -52,7 +52,7 @@ void func_80245864_de(void *);
 s32 func_802934F8_de(void);
 
                             /* extern */
-void func_804491E8_de(Shared_ActorView *);
+void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 /* Sets the byte at offset 0x78 of the object at 0x5D8 of an actor, calls func_80448EF4_de with the
    actor, its second argument and one, then func_80214178_de on offsets 0x2E8 and 0x458 with two and
@@ -258,7 +258,7 @@ void func_80449E18_de(ObjectPool *pool) {
     var_s0 = pool->object_queue.head;
     if (var_s0 != 0) {
         do {
-            func_804491E8_de(var_s0);
+            Ovlgame_InitActorHudState(var_s0);
             temp_v0 = Scene_FindFloorPolygon(&D_8011FE88, &var_s0->position);
             var_s0->weapon.model = temp_v0;
             var_s0->modelId = temp_v0;

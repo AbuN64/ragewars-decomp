@@ -4761,7 +4761,7 @@ segments:
       - [0xDF2E0, data, data_800C/D_auto_src_ragewars_character_preview_positions_00_us_rev1]
       - [0xDF30C, data, data_800C/D_blob_871ddb7f200dd0a5f378]
       - [0xDF31C, data, data_800C/data_unresolved_800DE71C]
-      - [0xDFB30, data, data_800C/D_blob_phase2_218b0dbfbe02a4c11f26]
+      - [0xDFB30, data, data_800C/g_selectionStateAndFirstKind]
       - [0xDFB38, data, data_800C/D_auto_data_unresolved_800DEF38]
       - [0xDFC60, data, data_800C/D_blob_phase2_16fe477c7993aecd5f10]
       - [0xDFC64, data, data_800C/D_blob_95bfc4689525ee9d507e]
