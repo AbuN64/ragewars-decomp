@@ -1,4 +1,5 @@
 #include "COMMON/NODERECAT1C.H"
+#include "UTIL/802C09A0.H"
 #include "COMMON/EXTERNS_11.H"
 #include "TYPES.H"
 #include "sdk/libgultra/libasm_802BBC68_19.h"

@@ -106,13 +106,6 @@ typedef struct EntryRecAt18V3 EntryRecAt18V3;
 
 struct Block80255720;
 struct Pool80255720;
-struct Pool80255720 {
-    s32 unk0;
-    s32 unk4;
-    struct Block80255720 *head;
-    struct Block80255720 *tail;
-    struct Block80255720 *anchor;
-};
 
 
 
@@ -131,24 +124,12 @@ struct BlockRecAt14 {
 
 struct BlockRecAt14;
 struct Heap;
-struct Heap {
-    char *start;
-    char *end;
-    struct BlockRecAt14 *free;
-    struct BlockRecAt14 *last;
-    struct BlockRecAt14 *first;
-};
 
 struct HashSlot;
 typedef struct HashSlot HashSlot;
 
 struct BlockRecAt20;
 struct HeapRecAtC;
-struct HeapRecAtC {
-    char pad0[8];
-    struct BlockRecAt20 *head;
-    struct BlockRecAt20 *tail;
-};
 
 struct func_80255110_S2;
 struct func_80255110_S2 {

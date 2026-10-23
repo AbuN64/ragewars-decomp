@@ -6,14 +6,6 @@ struct Node802C07B0;
 typedef struct Node802C07B0 Node802C07B0;
 
 struct NodeRecAt1C;
-struct NodeRecAt1C {
-    void *next;
-    void *prev;
-    u64 field8;
-    u64 field10;
-    s32 field18;
-    s32 field1C;
-};
 
 struct Node802C07B0;
 struct Node802C07B0 {

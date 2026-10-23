@@ -2054,12 +2054,6 @@ struct Access_s32_50;
 typedef struct Access_s32_50 Access_s32_50;
 
 struct ObjRecAtCV3;
-struct ObjRecAtCV3 {
-    char pad0[0x8];
-    s32 unk8;
-    char pad8[0xC - 0x8 - sizeof(s32)];
-    s32 unkC;
-};
 
 struct Target_func_8040AB54_de;
 struct Target_func_8040AB54_de {
