@@ -114,7 +114,7 @@ struct Actor_func_80279B40_de {
     s32 angle;
 };
 
-extern void func_802795B0_de(ListHeader *lists, void *pool, s32 stride, s32 count);
+extern void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 count);
 
 struct ObjectStateC4;
 struct ObjectStateC4 {

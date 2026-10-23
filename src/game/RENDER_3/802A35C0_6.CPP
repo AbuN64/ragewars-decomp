@@ -240,16 +240,16 @@ s32 func_802A5734_de(void *arg0, s32 arg1) {
     s32 temp_s0;
     temp_s0 = (((struct IntegerState6A94 *) ((s8 *) arg0))->unk_6A90);
     if (temp_s0 != 0) {
-        func_80279550_de(arg0 + 0x6A90, (ListLink *)temp_s0);
-        func_80279508_de(arg1 + 0x40, temp_s0);
+        Lists_Remove(arg0 + 0x6A90, (ListLink *)temp_s0);
+        Lists_Append(arg1 + 0x40, temp_s0);
     }
     return temp_s0;
 }
 
 void func_802A5780_de(s32 arg0, void *arg1, void *arg2) {
     (((struct FloatState50 *) ((s8 *) arg1))->unk_4C) = (f32) ((((struct FloatState50 *) ((s8 *) arg1))->unk_4C) - (((struct FloatStateB0 *) ((s8 *) arg2))->unk_AC));
-    func_80279550_de(arg1 + 0x40, arg2);
-    func_80279508_de(arg0 + 0x6A90, arg2);
+    Lists_Remove(arg1 + 0x40, arg2);
+    Lists_Append(arg0 + 0x6A90, arg2);
 }
 
 void func_802A57D8_de(void) {

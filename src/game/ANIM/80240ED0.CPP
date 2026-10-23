@@ -6,7 +6,7 @@
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 3, 2, 6 and 7 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
    corner 0 and corner 2 minus corner 1 through func_80271F68_de, their cross product through
-   func_80272018_de and normalisation through func_8027207C_de. Adapted from func_80240D20_de with the copied points changed. */
+   func_80272018_de and normalisation through func_8027207C_de. Adapted from Anim_BuildBoxFace0 with the copied points changed. */
 
 
 
@@ -26,7 +26,7 @@ static inline void quad_normal(struct Quad *quad) {
     func_8027207C_de(&quad->normal);
 }
 
-void func_80240EE0_de(struct Quad *quad, CVector3 *points) {
+void Anim_BuildBoxFace2(struct Quad *quad, CVector3 *points) {
     quad->kind = 4;
     quad->corner[3] = points[3];
     quad->corner[2] = points[2];

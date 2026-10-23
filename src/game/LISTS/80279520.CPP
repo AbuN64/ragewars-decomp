@@ -8,7 +8,7 @@
 #include "LISTS/80279520.H"
 
 /* Initializes an empty linked-list header by clearing its two links and count. */
-void func_802794B0_de(ListHeader *list) {
+void Lists_ClearHeader(ListHeader *list) {
     list->head = 0;
     list->tail = 0;
     list->count = 0;
@@ -29,7 +29,7 @@ void func_802794C0_de(void *arg0, void *arg1) {
     (((struct ListHeader *) ((s8 *) arg0))->count) = (((struct ListHeader *) ((s8 *) arg0))->count) + 1;
 }
 /** Push a node onto the tail of a doubly-linked list; returns new count. */
-s32 func_80279508_de(void *arg0, void *arg1) {
+s32 Lists_Append(void *arg0, void *arg1) {
     s32 count;
     if ((((struct ListHeader *) ((s8 *) arg0))->count) == 0) {
         (((struct ListHeader *) ((s8 *) arg0))->head) = arg1;
@@ -46,7 +46,7 @@ s32 func_80279508_de(void *arg0, void *arg1) {
     (((struct ListHeader *) ((s8 *) arg0))->count) = count;
     return count;
 }
-int func_80279550_de(List802795C0 *arg0, ListLink *arg1) {
+int Lists_Remove(List802795C0 *arg0, ListLink *arg1) {
     if (arg1->prev != 0) {
         arg1->prev->next = arg1->next;
     }
@@ -87,7 +87,7 @@ static inline s32 append(ListHeader *list, ListLink *node) {
     return count;
 }
 /* Reset the free and active headers and link every fixed-size pool node. */
-void func_802795B0_de(ListHeader *lists, void *pool, s32 stride, s32 count) {
+void Lists_InitFromPool(ListHeader *lists, void *pool, s32 stride, s32 count) {
     s32 remaining;
     clear_list(lists);
     clear_list(lists + 1);

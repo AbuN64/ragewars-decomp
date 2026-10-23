@@ -12,25 +12,25 @@
 
 extern s32 func_8023E8D4_de(void *, s32 *, s32);
 
-extern void func_80240D20_de(s32 *, void *);
+extern void Anim_BuildBoxFace0(s32 *, void *);
 
-extern void func_80240E00_de(s32 *, void *);
+extern void Anim_BuildBoxFace1(s32 *, void *);
 
-extern void func_80240EE0_de(s32 *, void *);
+extern void Anim_BuildBoxFace2(s32 *, void *);
 
-extern void func_80240FC0_de(s32 *, void *);
+extern void Anim_BuildBoxFace3(s32 *, void *);
 
-extern void func_802410A0_de(s32 *, void *);
+extern void Anim_BuildBoxFace4(s32 *, void *);
 
-extern void func_80241180_de(s32 *, void *);
+extern void Anim_BuildBoxFace5(s32 *, void *);
 
 s32 func_8023E178_de(void *, void *, f32, s32, f32, s32, s32 *, s32);
 
 s32 func_8023EA44_de(void *, s32 *, void *, f32, s32);
 
-void func_80240D20_de(s32 *, void *);
+void Anim_BuildBoxFace0(s32 *, void *);
 
-void func_80240E00_de(s32 *, void *);
+void Anim_BuildBoxFace1(s32 *, void *);
 
 /* Gathers the pieces a ray sweeps through: for each entry of the counted table in D_8011CD20 whose
  * rectangle, grown by the ray's radius, overlaps the ray's rectangle and is hit by it, each visible element
@@ -57,23 +57,23 @@ s32 func_80242920_de(void *arg0, void *arg1, void *arg2, s32 *arg3) {
     result = 0;
     if (((struct FloatState68 *) arg0)->unk_60 > 0.0f) {
         *arg3 = 2;
-        func_80240E00_de(arg3, arg2);
+        Anim_BuildBoxFace1(arg3, arg2);
         result = func_8023E8D4_de(arg0, arg3, 1);
     }
     if ((((struct FloatState68 *) arg0)->unk_5C != 0.0f) || (((struct FloatState68 *) arg0)->unk_64 != 0.0f)) {
         *arg3 = 3;
-        func_80240EE0_de(arg3, arg2);
+        Anim_BuildBoxFace2(arg3, arg2);
         result |= func_8023E8D4_de(arg0, arg3, 1);
-        func_80240FC0_de(arg3, arg2);
+        Anim_BuildBoxFace3(arg3, arg2);
         result |= func_8023E8D4_de(arg0, arg3, 1);
-        func_802410A0_de(arg3, arg2);
+        Anim_BuildBoxFace4(arg3, arg2);
         result |= func_8023E8D4_de(arg0, arg3, 1);
-        func_80241180_de(arg3, arg2);
+        Anim_BuildBoxFace5(arg3, arg2);
         result |= func_8023E8D4_de(arg0, arg3, 1);
     }
     if (((struct FloatState68 *) arg0)->unk_60 < 0.0f) {
         *arg3 = 9;
-        func_80240D20_de(arg3, arg2);
+        Anim_BuildBoxFace0(arg3, arg2);
         result |= func_8023E8D4_de(arg0, arg3, 1);
     }
     return result;
@@ -93,12 +93,12 @@ s32 func_80242A94_de(void *arg0, void *arg1, void *arg2, s32 *arg3) {
     }
     if (((struct FloatState68_2 *) arg0)->unk_60 > 0.0f) {
         *arg3 = 2;
-        func_80240E00_de(arg3, arg2);
+        Anim_BuildBoxFace1(arg3, arg2);
         var_s0 |= func_8023EA44_de(arg0, arg3, temp_s3, temp_f20, 1);
     }
     if (((struct FloatState68_2 *) arg0)->unk_60 < 0.0f) {
         *arg3 = 9;
-        func_80240D20_de(arg3, arg2);
+        Anim_BuildBoxFace0(arg3, arg2);
         var_s0 |= func_8023EA44_de(arg0, arg3, temp_s3, temp_f20, 1);
     }
     return var_s0;

@@ -50,7 +50,7 @@ void func_80240CAC_de(void *arg0) {
     func_8027207C_de(temp_s0);
 }
 
-void func_80240D20_de(struct Quad *quad, CVector3 *points) {
+void Anim_BuildBoxFace0(struct Quad *quad, CVector3 *points) {
     quad->kind = 4;
     quad->corner[3] = points[0];
     quad->corner[2] = points[1];

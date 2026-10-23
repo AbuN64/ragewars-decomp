@@ -26,12 +26,12 @@ extern char D_80100338;
 
 extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242288_de *, OwnerRecAt18 *);
 
-extern void func_80241180_de(void *, Bounds *);
-extern void func_802410A0_de(void *, Bounds *);
-extern void func_80240FC0_de(void *, Bounds *);
-extern void func_80240EE0_de(void *, Bounds *);
-extern void func_80240E00_de(void *, Bounds *);
-extern void func_80240D20_de(void *, Bounds *);
+extern void Anim_BuildBoxFace5(void *, Bounds *);
+extern void Anim_BuildBoxFace4(void *, Bounds *);
+extern void Anim_BuildBoxFace3(void *, Bounds *);
+extern void Anim_BuildBoxFace2(void *, Bounds *);
+extern void Anim_BuildBoxFace1(void *, Bounds *);
+extern void Anim_BuildBoxFace0(void *, Bounds *);
 extern s32 func_8023EA44_de(void *, void *, void *, f32, s32);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, void *, f32, f32, f32, s32, void *, s32);
@@ -48,7 +48,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
 
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
-        func_80240D20_de(query, bounds);
+        Anim_BuildBoxFace0(query, bounds);
         if (func_8023E8D4_de(actor, query, 0)) {
             saved_collision = D_80103FCC;
             D_80103FCC = collision;
@@ -82,7 +82,7 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
     if (actor->movement.y < 0.0f) {
         query->word0 = 2;
-        func_80240E00_de(query, bounds);
+        Anim_BuildBoxFace1(query, bounds);
         if (func_8023E8D4_de(actor, query, 1)) {
             actor->flags |= 8;
             input->flags38 |= 0x10;
@@ -90,13 +90,13 @@ void func_80241BAC_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
     if (actor->movement.x != 0.0f || actor->movement.z != 0.0f) {
         query->word0 = 3;
-        func_80240EE0_de(query, bounds);
+        Anim_BuildBoxFace2(query, bounds);
         hit = func_8023E8D4_de(actor, query, 1);
-        func_80240FC0_de(query, bounds);
+        Anim_BuildBoxFace3(query, bounds);
         hit |= func_8023E8D4_de(actor, query, 1);
-        func_802410A0_de(query, bounds);
+        Anim_BuildBoxFace4(query, bounds);
         hit |= func_8023E8D4_de(actor, query, 1);
-        func_80241180_de(query, bounds);
+        Anim_BuildBoxFace5(query, bounds);
         hit |= func_8023E8D4_de(actor, query, 1);
         if (hit) {
             actor->flags |= 8;
@@ -125,7 +125,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     height = ((ShapeRecAt18V1 *)entry)->radius + func_8024D398_de(input);
     if (actor->movement.y > 0.0f) {
         query->word0 = 3;
-        func_80240D20_de(query, bounds);
+        Anim_BuildBoxFace0(query, bounds);
         if (func_8023EA44_de(actor, query, owner_data, height, 0)) {
             saved_collision = D_80103FCC;
             D_80103FCC = collision;
@@ -159,7 +159,7 @@ void func_80241F24_de(Actor_func_80241BAC_de *actor, OwnerRecAt18 *owner, Bounds
     }
     if (actor->movement.y < 0.0f) {
         query->word0 = 2;
-        func_80240E00_de(query, bounds);
+        Anim_BuildBoxFace1(query, bounds);
         if (func_8023EA44_de(actor, query, owner_data, height, 1)) {
             actor->flags |= 8;
             input->flags38 |= 0x10;
@@ -209,12 +209,12 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
             }
             if (actor->field60 > 0.0f) {
                 *word = 2;
-                func_80240E00_de(word, &bounds);
+                Anim_BuildBoxFace1(word, &bounds);
                 func_8023EA44_de(actor, word, owner_data, value, 1);
             }
             if (actor->field60 < 0.0f) {
                 *word = 9;
-                func_80240D20_de(word, &bounds);
+                Anim_BuildBoxFace0(word, &bounds);
                 func_8023EA44_de(actor, word, owner_data, value, 1);
                 return;
             }
@@ -229,23 +229,23 @@ void func_80242288_de(Actor_func_80242288_de *actor, OwnerRecAt18 *owner) {
             zero = *(f32 *)&query.word4;
             if (zero < movement) {
                 *word = 2;
-                func_80240E00_de(word, &bounds);
+                Anim_BuildBoxFace1(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
             }
             if ((actor->field5C != zero) || (actor->field64 != zero)) {
                 *word = 3;
-                func_80240EE0_de(word, &bounds);
+                Anim_BuildBoxFace2(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
-                func_80240FC0_de(word, &bounds);
+                Anim_BuildBoxFace3(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
-                func_802410A0_de(word, &bounds);
+                Anim_BuildBoxFace4(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
-                func_80241180_de(word, &bounds);
+                Anim_BuildBoxFace5(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
             }
             if (actor->field60 < 0.0f) {
                 *word = 9;
-                func_80240D20_de(word, &bounds);
+                Anim_BuildBoxFace0(word, &bounds);
                 func_8023E8D4_de(actor, word, 1);
             }
             break;

@@ -4,5 +4,5 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/LISTHEADER.H"
-extern void func_802794B0_de(ListHeader *list);
+extern void Lists_ClearHeader(ListHeader *list);
 #endif

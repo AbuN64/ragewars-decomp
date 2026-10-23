@@ -240,7 +240,7 @@ typedef struct EffectPool { EffectList free, used; } EffectPool;
 typedef struct EffectWorld { char pad00[0x751C]; EffectPool pool; } EffectWorld;
 typedef struct EffectInstance { char pad00[0xB0]; FxActor *actor; } EffectInstance;
 extern EffectResource *func_8028AFEC_de(void *, s32);
-extern void func_802794B0_de(void *);
+extern void Lists_ClearHeader(void *);
 extern void func_80295E84_de(void *, s32);
 extern void func_80283064_de(void *, void *);
 extern void func_802727D8_de(void *);
@@ -271,7 +271,7 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
         resource = func_8028AFEC_de(&D_8011FE88, resourceId);
         first = ((void **)D_800CDBD0)[resource->first];
         second = ((void **)D_800CDBD0)[resource->second];
-        func_802794B0_de(&node->children);
+        Lists_ClearHeader(&node->children);
         node->flags = 2;
         if (*actor->flags & 0x10000) {
             node->flags = 10;

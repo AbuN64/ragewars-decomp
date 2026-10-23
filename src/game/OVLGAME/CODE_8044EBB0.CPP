@@ -2,9 +2,9 @@
 #include "TYPES.H"
 extern void func_8044E0CC_de(void);
 
-extern void func_802795B0_de(void *lists, void *pool, s32 stride, s32 count);
-extern void func_802794B0_de(void *list);
-extern s32 func_80279508_de(void *list, void *node);
+extern void Lists_InitFromPool(void *lists, void *pool, s32 stride, s32 count);
+extern void Lists_ClearHeader(void *list);
+extern s32 Lists_Append(void *list, void *node);
 extern void func_80255CA0_de(void *list, s32 nextOffset, s32 prevOffset);
 extern void func_80255D14_de(void *list, void *node);
 extern void func_802A5680_de(void *world);
@@ -56,11 +56,11 @@ typedef struct PanelMovers {
 void func_8044DF60_de(ActorWorld *world) {
     s32 i;
 
-    func_802795B0_de(world->shapeLists, world->shapePool, 0x54, 0x20);
-    func_802795B0_de(world->tailLists, world->tailPool, 0x1C, 3);
-    func_802794B0_de(world->actorList);
+    Lists_InitFromPool(world->shapeLists, world->shapePool, 0x54, 0x20);
+    Lists_InitFromPool(world->tailLists, world->tailPool, 0x1C, 3);
+    Lists_ClearHeader(world->actorList);
     for (i = 0; i < 0x60; i++) {
-        func_80279508_de(world->actorList, world->actors[i]);
+        Lists_Append(world->actorList, world->actors[i]);
     }
     func_80255CA0_de(world->recordList, 0, 4);
     for (i = 0; i < 10; i++) {

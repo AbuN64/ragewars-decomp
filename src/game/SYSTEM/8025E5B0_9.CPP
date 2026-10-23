@@ -65,11 +65,11 @@ void func_80260550_de(void *arg0, s32 arg1, void *arg2) {
 }
 
 /** Scale a value by the maximum integer represented by a bit count. */
-float func_80260634_de(float value, int bits) {
+float System_UnpackUnitValue(float value, int bits) {
     return value / (float)((1 << bits) - 1);
 }
 
-f32 func_80260650_de(f32 value, f32 lower, f32 upper) {
+f32 System_ScaleToRange(f32 value, f32 lower, f32 upper) {
     return value * (upper - lower) + lower;
 }
 
