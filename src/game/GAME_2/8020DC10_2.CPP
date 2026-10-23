@@ -3,14 +3,18 @@
 #include "COMMON/ACTORREC.H"
 #include "TYPES.H"
 
-s32 func_8020DD04_de(s32);
-s32 func_80209874_de(void *, s32);
+extern s32 func_8020DD04_de(WeightSource *);
+extern s32 func_80209874_de(void *, s32);
 
-void func_8020DCA0_de(CloseAttackBrain *arg0) {
-    s32 temp_v0;
-    if ((func_802744D4_de() % 4) == 1) {
-        temp_v0 = func_8020DD04_de((s32)((Player *)arg0->player)->definition + 0x14);
-        arg0->combat = temp_v0;
-        func_80209874_de(arg0, temp_v0);
+/* Reconsider an existing attack on one of four signed random remainders. */
+void ReselectCloseAttack(void *brainAddress) {
+    CloseAttackBrain *brain = brainAddress;
+    WeightSource *weights;
+    s32 selectedState;
+    if (func_802744D4_de() % 4 == 1) {
+        weights = (WeightSource *)((u8 *)((Player *)brain->player)->definition + 0x14);
+        selectedState = func_8020DD04_de(weights);
+        brain->combat = selectedState;
+        func_80209874_de(brainAddress, selectedState);
     }
 }

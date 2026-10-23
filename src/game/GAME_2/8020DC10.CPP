@@ -8,20 +8,22 @@
 #include "COMMON/BOX_CONTACT.H"
 #include "GAME_2/8020DC10.H"
 
-extern void func_8020DCA0_de(void);
+extern void ReselectCloseAttack(void *);
 
 
 s32 func_80209874_de(void *, s32);
 
 s32 func_8020DD04_de(s32);
 
-s32 func_8020DC10_de(void *arg0) {
-    if ((s32)((AiController *)arg0)->target != 0) {
-        if ((u32) (((AiController *)arg0)->state - 3) < 3U) {
-            func_8020DCA0_de();
+/* The original MIPS preserves a0 for either close-attack update. */
+s32 UpdateCloseAttack(void *brainAddress) {
+    AiController *brain = brainAddress;
+    if (brain->target != 0) {
+        if ((u32)(brain->state - 3) < 3U) {
+            ReselectCloseAttack(brainAddress);
             return 1;
         }
-        func_8020DC60_de(arg0);
+        func_8020DC60_de(brainAddress);
         return 1;
     }
     return 1;
