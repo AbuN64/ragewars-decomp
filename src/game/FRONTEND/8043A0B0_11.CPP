@@ -328,12 +328,12 @@ void func_8043C080_de(u8 *arg0) {
         b = a;
         switch (D_800E28D8) {
         case 1:
-            a = D_800E2064;
             b = D_800DE038;
+            a = D_800E2064;
             break;
         case 2:
-            a = D_800DE03C_de;
             b = D_800DE040;
+            a = D_800DE03C_de;
             break;
         case 0:
             break;
