@@ -305,20 +305,6 @@ struct func_8023ED54_S2;
 typedef struct func_8023ED54_S2 func_8023ED54_S2;
 
 struct Reusable;
-struct Reusable {
-    s32 unk0;
-    char pad4[0x10];
-    s32 unk14;
-    char pad18[0x70];
-    s32 unk88;
-    char pad8C[0x10];
-    s32 unk9C;
-    char padA0[0x10];
-    s32 unkB0;
-    s32 unkB4;
-    char padB8[0xC];
-    s32 unkC4;
-};
 
 struct func_8023E6C0_S1;
 struct func_8023E6C0_S1 {

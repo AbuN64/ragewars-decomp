@@ -3,6 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OWNERRECAT8V2.H"
+#include "SCHED/8023A284.H"
 #include "TYPES.H"
 #include "SCHED/8023A284_15.H"
 #include "sdk/os.h"

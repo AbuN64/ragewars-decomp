@@ -1,4 +1,5 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
+#include "SCHED/8023A284.H"
 #include "TYPES.H"
 #include "SCHED/8023A284_8.H"
 #include "SYSTEM/80255C40_3.H"

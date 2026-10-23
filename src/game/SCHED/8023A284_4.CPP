@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"
+#include "SCHED/8023A284.H"
 #include "COMMON/RESIDENTSTATE.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"

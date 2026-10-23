@@ -119,13 +119,6 @@ typedef struct func_80295B18_S1 func_80295B18_S1;
 
 
 struct AnimationInfo;
-struct AnimationInfo {
-    s32 unk0;
-    char pad0[0x4 - 0x0 - sizeof(s32)];
-    s32 unk4;
-    char pad4[0x8 - 0x4 - sizeof(s32)];
-    void * unk8;
-};
 
 
 struct RecCode80294C64;

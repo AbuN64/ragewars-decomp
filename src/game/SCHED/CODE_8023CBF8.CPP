@@ -1,6 +1,8 @@
 #include "include_asm.h"
 #include "COMMON/DESCRIPTORRECAT29.H"
 #include "COMMON/OWNERRECAT8V2.H"
+#include "SCHED/CODE_8023CBF8.H"
+#include "SCHED/8023A284.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"

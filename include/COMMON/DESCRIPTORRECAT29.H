@@ -126,47 +126,13 @@ extern float D_800C35F4_de;
 
 struct DescriptorRecAt29;
 struct Rotor;
-struct Rotor {
-    char pad0[0xC];
-    struct DescriptorRecAt29 *descriptor;
-    u16 mask;
-    char pad12[0xA];
-    f32 angleA;
-    f32 angleB;
-    char pad24[0x1E4];
-    f32 throttle;
-    f32 phase;
-    f32 speed;
-    f32 phaseScale;
-    char pad218[4];
-    f32 trim;
-};
 
 struct ObjRecAt210;
-struct ObjRecAt210 {
-    char pad0[0x210];
-    float unk210;
-};
 
 struct ObjectRecAt220;
 struct Scene;
-struct Scene {
-    u8 reserved000[0x8A0];
-    IntrusiveList freeObjects; /* +0x8A0; probe 20261019T012545644265Z */
-    struct ObjectRecAt220 *objects; /* active-list head, +0x8B4 */
-    struct ObjectRecAt220 *lastObject;
-    s32 objectPrevOffset, objectNextOffset;
-    s32 count;
-    u16 effectMask; /* +0x8C8: func_8023AFF0_de */
-    u8 reserved8CA[2];
-};
 
 struct IntegerState8A4;
-struct IntegerState8A4 {
-    unsigned char padding_0[2208];
-    IntrusiveList unk_8A0;
-    IntrusiveList unk_8B4;
-};
 
 extern void func_80295F78_de(s32 **, void *);
 

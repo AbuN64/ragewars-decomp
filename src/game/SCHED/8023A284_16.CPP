@@ -3,6 +3,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OWNERRECAT8V2.H"
+#include "SCHED/8023A284.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"

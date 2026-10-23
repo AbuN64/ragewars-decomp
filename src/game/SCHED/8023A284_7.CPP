@@ -1,4 +1,5 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
+#include "SCHED/8023A284.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"

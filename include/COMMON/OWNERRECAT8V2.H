@@ -9,11 +9,6 @@ struct Block_func_8023C85C_de;
 typedef struct Block_func_8023C85C_de Block_func_8023C85C_de;
 
 struct OwnerRecAt8V2;
-struct OwnerRecAt8V2 {
-    s32 unk0;
-    u32 handle;
-    s32 queue;
-};
 
 struct OwnerRecAt8V2;
 typedef struct OwnerRecAt8V2 OwnerRecAt8V2;
@@ -87,12 +82,6 @@ struct Region {
 
 struct Region;
 struct RegionDesc;
-struct RegionDesc {
-    s32 pad0;
-    s32 size;
-    struct Region *region;
-    void *mapping;
-};
 
 struct RegionDesc;
 typedef struct RegionDesc RegionDesc;
@@ -107,12 +96,6 @@ struct ResourcePageMapping;
 typedef struct ResourcePageMapping ResourcePageMapping;
 
 struct Block_func_8023C85C_de;
-struct Block_func_8023C85C_de {
-    s16 type;
-    s16 pad;
-    s32 value;
-    void *data;
-};
 
 struct Channels;
 struct Channels {
@@ -135,30 +118,6 @@ struct PagerCounters {
     char padC[0x20 - 0xC];
 };
 struct PagerState;
-struct PagerState {
-    struct PagerCounters counters;
-    s16 f20;
-    char pad22[2];
-    OSMesgQueue completion; /* pager completion queue, 0x18 bytes at +0x24 (D_800FF254) */
-    char list0Data[0xC0 - 0x3C];
-    char queue[0x2F0 - 0xC0];
-    char pool[0x4F0 - 0x2F0];
-    char queueData[0x920 - 0x4F0];
-    Slot_func_8023B9C0_eu slots[24];
-    OSMesgQueue jobs;
-    char list1Data[0xAD8 - 0xAB8];
-    OSMesgQueue pending;
-    char list2Data[0xB10 - 0xAF0];
-    Channels channels[8];
-    ResourcePageMapping *head; /* pager LRU list (head, tail), appended by func_8023CB60_de; = D_800FFE20 */
-    union { s32 fBF4; ResourcePageMapping *tail; };
-    u8 lookup[0x100];
-    EntryRecAt3 entries[24];
-    struct Region regions; /* the first page region: ROM pages at source, slot map lookup */
-    s16 fD70;
-    s16 fD72;
-    char padD74[4];
-};
 
 
 union ObjectState1000;
@@ -187,13 +146,6 @@ struct func_8023D148_S2;
 typedef struct func_8023D148_S2 func_8023D148_S2;
 
 struct Block10;
-struct Block10 {
-    s16 f28;
-    s16 pad;
-    s32 f2C;
-    void *f30;
-    void **f34;
-};
 
 struct func_8023D148_S1;
 struct func_8023D148_S1 {
