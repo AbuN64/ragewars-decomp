@@ -503,7 +503,7 @@ case 7:
     }
 }
 
-#ifdef NON_MATCHING
+#if defined(VERSION_US) || defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -520,7 +520,7 @@ extern void func_8022B11C_de(void *, u16);
  * zero and drops through half of the maximum it respawns the weapon (func_8021B1E4_de); lowers the health
  * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
  * reports the kill through func_8021B468_de. */
-/* 285/289 words (27 aligned edits); remaining: health copies for 0x174/0x45C, the 0x80..0xFF clamp shape, knock-back strength float regs */
+/* Exact for us and us-rev1; de/eu/eu-x add extra checks (0x1450, 0x94) and keep their asm. */
 void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
     s32 oldHealth = FIELD(s32, player, 0x5E4);
     s32 health;
@@ -606,8 +606,9 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             }
         }
     }
+    FIELD(s32, player, 0x174) = FIELD(s32, player, 0x5E4);
+    FIELD(s32, player, 0x45C) = FIELD(s32, player, 0x5E4);
     dead = FIELD(s32, player, 0x5E4) == 0;
-    FIELD(s32, player, 0x45C) = FIELD(s32, player, 0x174) = FIELD(s32, player, 0x5E4);
     if (dead != 0) {
         if (wasDead == 0) {
             func_8021B468_de((struct Shared_ActorView *)player, attacker, arg3, kind);
@@ -617,11 +618,7 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
     } else {
         shifted = amount >> 8;
         intensity = shifted * 255 / 20;
-        if (intensity >= 0x100) {
-            intensity = 0xFF;
-        } else if (intensity < 0x80) {
-            intensity = 0x80;
-        }
+        intensity = ((intensity > 0xFF ? 0xFF : intensity) < 0x80) ? 0x80 : (intensity > 0xFF ? 0xFF : intensity);
         delay = 0x1E;
         if (FIELD(void *, player, 0x5DC) != 0) {
             if (oldHealth > 0xF00 && FIELD(s32, player, 0x5E4) <= 0xF00 && D_801462E5 == 0) {
@@ -629,11 +626,9 @@ void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3
             }
         }
         if ((amount >> 8) != 0) {
-            f32 strength = (f32)(amount >> 8) * D_800C22A8_us;
+            f32 strength;
             CVector3 zero;
-            if (D_800C22AC_us < strength) {
-                strength = D_800C22AC_us;
-            }
+            strength = ((f32)(amount >> 8) * D_800C22A8_us > D_800C22AC_us) ? D_800C22AC_us : (f32)(amount >> 8) * D_800C22A8_us;
             zero.x = 0;
             zero.y = 0;
             zero.z = 0;
