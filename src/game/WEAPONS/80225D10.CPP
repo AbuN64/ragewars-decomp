@@ -13,7 +13,7 @@ extern void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, Share
 extern s32 func_80214178_de(void *arg0, void *arg1, s32 arg2);
 extern void func_80272898_de(void *arg0, void *arg1, void *arg2);
 
-#ifdef NON_MATCHING
+#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "TYPES.H"
 #include "WEAPONS/80213ED4.H"
 #include "particle/80271B18_3.H"
@@ -40,17 +40,18 @@ void func_80225D34_de(TravelPlayer *player, void *body) {
             func_80274020_de(&targetYaw);
             if (yaw > targetYaw) {
                 alternate = targetYaw + D_800C2AE0_de;
-                distance = yaw - targetYaw;
-                otherDistance = alternate - yaw;
+                if (alternate - yaw < yaw - targetYaw) targetYaw = alternate;
             } else {
                 alternate = targetYaw - D_800C2AE4_de;
-                distance = targetYaw - yaw;
-                otherDistance = yaw - alternate;
+                if (yaw - alternate < targetYaw - yaw) targetYaw = alternate;
             }
-            if (otherDistance < distance) targetYaw = alternate;
-            if (yaw < targetYaw ?
-                (yaw += (targetYaw - yaw) * D_800C2AE8_de, targetYaw < yaw) :
-                (yaw -= (yaw - targetYaw) * D_800C2AEC_de, yaw < targetYaw)) yaw = targetYaw;
+            if (targetYaw > yaw) {
+                yaw += (targetYaw - yaw) * D_800C2AE8_de;
+                if (targetYaw < yaw) yaw = targetYaw;
+            } else {
+                yaw -= (yaw - targetYaw) * D_800C2AEC_de;
+                if (yaw < targetYaw) yaw = targetYaw;
+            }
             func_80274020_de(&yaw);
         }
         player->bodyYaw = yaw;
