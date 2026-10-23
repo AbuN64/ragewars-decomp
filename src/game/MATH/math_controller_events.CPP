@@ -157,31 +157,31 @@ extern s32 func_80299958_de(void);
 
 
 
-void func_8029A558_de(ControllerEvent *arg0) {
+void func_8029A558_de(ControllerEvent *event) {
 
-    s32 temp_s0;
+    s32 source;
 
     if (D_8014D0B0->callback != 0 && D_8014D0B0->callback() == 1) {
         return;
     }
 
-    switch (arg0->kind) {
+    switch (event->kind) {
     case 0:
-        temp_s0 = ((u16)arg0->source << 16) | (u16)arg0->device;
-        func_802995D4_de(func_80299958_de(), 0x11, temp_s0, arg0->pressed, arg0->control);
+        source = ((u16)event->source << 16) | (u16)event->device;
+        func_802995D4_de(func_80299958_de(), 0x11, source, event->pressed, event->control);
         break;
     case 1:
-        if (arg0->source == 4) {
-            arg0->source = 3;
-            DispatchControllerButtonEvent(arg0);
+        if (event->source == 4) {
+            event->source = 3;
+            DispatchControllerButtonEvent(event);
         }
         break;
     case 2:
     case 3:
     case 4:
-        if (arg0->source == 4) {
-            arg0->source = 3;
-            DispatchControllerAxisEvents(arg0);
+        if (event->source == 4) {
+            event->source = 3;
+            DispatchControllerAxisEvents(event);
         }
         break;
     }

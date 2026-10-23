@@ -60,20 +60,20 @@ extern void *func_8025305C_de(s32 size);
 
 void func_80297DBC_de(void) {
     s32 (*temp_v0)(s32);
-    s32 temp_s0;
+    s32 current;
     s32 value, param;
-    temp_s0 = D_8014D080->current;
+    current = D_8014D080->current;
     temp_v0 = D_8014D080->callback2;
-    param = D_8014D080->screens[temp_s0].owner;
+    param = D_8014D080->screens[current].owner;
     if (temp_v0 != NULL) {
         value = temp_v0(param);
-        ((struct ObjRecAt40V1 *)D_8014D080->screens[temp_s0].primary)->unk40 = value;
+        ((struct ObjRecAt40V1 *)D_8014D080->screens[current].primary)->unk40 = value;
     }
     func_80297310_de(1, 0xE06, 0, 0, 0);
     func_80297310_de(1, 0xE07, 0, 0, 0);
-    D_8014D080->screens[temp_s0].data.readPosition = 0;
-    func_80297310_de(1, 0xE02, &D_8014D080->screens[temp_s0].data, 0, 0);
-    StreamBufferFree(&D_8014D080->screens[temp_s0].data);
+    D_8014D080->screens[current].data.readPosition = 0;
+    func_80297310_de(1, 0xE02, &D_8014D080->screens[current].data, 0, 0);
+    StreamBufferFree(&D_8014D080->screens[current].data);
 }
 
 int func_80297EA4_de(int arg0) {

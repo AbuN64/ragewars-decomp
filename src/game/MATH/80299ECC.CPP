@@ -42,7 +42,7 @@ extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1
 
 
 extern Element *func_80298170_de(s32 id);
-static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+static inline s32 send_event(s32 value, s32 event, s32 arg2, s32 amount, s32 context) {
     ScreenManager *manager;
     s32 locked;
     s32 index;
@@ -65,7 +65,7 @@ static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
     if (D_8014D080->callback != 0) {
         saved = D_8014D080->handled;
         D_8014D080->handled = 0;
-        result = D_8014D080->callback(arg1, arg2, arg3, arg4);
+        result = D_8014D080->callback(event, arg2, amount, context);
         if (D_8014D080->handled == 1) {
             D_8014D080->handled = saved;
             return result;
@@ -73,9 +73,9 @@ static inline s32 send_event(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) 
         D_8014D080->handled = saved;
     }
     if (value == D_8014D080->screens[D_8014D080->current].primary->id) {
-        result = func_80297A34_de(arg1, arg2, arg3, arg4);
+        result = func_80297A34_de(event, arg2, amount, context);
     } else {
-        result = DispatchElementEvent(value, arg1, arg2, arg3, arg4);
+        result = DispatchElementEvent(value, event, arg2, amount, context);
     }
     return result;
 }
@@ -233,7 +233,7 @@ void func_802995C4_de(int arg0) {
     D_80146E14 = arg0;
 }
 
-s32 func_802995D4_de(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_802995D4_de(s32 value, s32 arg1, s32 arg2, s32 control, s32 extra) {
     ScreenManager *manager;
     s32 blockedValue;
     s32 index;
@@ -257,7 +257,7 @@ s32 func_802995D4_de(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     if (D_8014D080->callback != 0) {
         saved = D_8014D080->handled;
         D_8014D080->handled = 0;
-        result = D_8014D080->callback(arg1, arg2, arg3, arg4);
+        result = D_8014D080->callback(arg1, arg2, control, extra);
         if (D_8014D080->handled == 1) {
             D_8014D080->handled = saved;
             return result;
@@ -266,9 +266,9 @@ s32 func_802995D4_de(s32 value, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
     element = D_8014D080->screens[D_8014D080->current].primary;
     if (value == element->id) {
-        result = func_80297A34_de(arg1, arg2, arg3, arg4);
+        result = func_80297A34_de(arg1, arg2, control, extra);
     } else {
-        result = DispatchElementEvent(value, arg1, arg2, arg3, arg4);
+        result = DispatchElementEvent(value, arg1, arg2, control, extra);
     }
     return result;
 }
@@ -358,17 +358,17 @@ s32 func_80299838_de(s32 arg0)
 }
 
 void func_80299874_de(s32 arg0, s32 arg1) {
-    s32 var_a2;
+    s32 i;
     struct MenuHandlerEntry *var_v1;
-    var_a2 = 0;
+    i = 0;
     var_v1 = D_8014D080->handlers;
     do {
         if (var_v1->id == arg0) {
             var_v1->flags = arg1;
         }
-        var_a2 += 1;
+        i += 1;
         var_v1++;
-    } while (var_a2 < 0x40);
+    } while (i < 0x40);
 }
 
 void func_802998A8_de(void) {

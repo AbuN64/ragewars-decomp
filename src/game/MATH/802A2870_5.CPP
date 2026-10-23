@@ -75,13 +75,13 @@ int func_802A1E20_de(struct CommandListController *object) {
     return 0;
 }
 
-s32 func_802A1E5C_de(struct CommandListController *arg0) {
+s32 func_802A1E5C_de(struct CommandListController *commandListController) {
     struct LinkedCommandEntry *p;
 
-    arg0->state = 2;
-    arg0->progress = 0;
+    commandListController->state = 2;
+    commandListController->progress = 0;
     func_8025DF34_de(0xE74);
-    p = arg0->entries;
+    p = commandListController->entries;
     if (p != 0) {
         do {
             if (p->kind != 8) {

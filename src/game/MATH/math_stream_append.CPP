@@ -9,17 +9,17 @@ struct Record;
 extern struct Record *func_8025305C_de(s32 arg0);
 
 
-void StreamBufferAppend(StreamBuffer *arg0, const void *arg1, s32 arg2) {
-    if ((arg0->data) == 0) {
+void StreamBufferAppend(StreamBuffer *streamBuffer, const void *arg1, s32 arg2) {
+    if ((streamBuffer->data) == 0) {
         void *allocation = func_8025305C_de(arg2);
-        arg0->data = allocation;
-        arg0->writePosition = 0;
-        arg0->capacity = arg2;
+        streamBuffer->data = allocation;
+        streamBuffer->writePosition = 0;
+        streamBuffer->capacity = arg2;
     }
     {
-        s32 t_c = arg0->writePosition;
-        u8 *t_0 = arg0->data;
+        s32 t_c = streamBuffer->writePosition;
+        u8 *t_0 = streamBuffer->data;
         Resmgr_CopyBytes(t_0 + t_c, arg1, arg2);
     }
-    arg0->writePosition = (arg0->writePosition) + arg2;
+    streamBuffer->writePosition = (streamBuffer->writePosition) + arg2;
 }

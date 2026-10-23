@@ -5,19 +5,19 @@
 
 void func_8029AA34_de(void) {
     s32 idx;
-    s32 var_a0;
-    s32 var_a1;
+    s32 i;
+    s32 j;
     Callback *context;
 
-    var_a1 = 0;
+    j = 0;
     do {
-        var_a0 = 0;
+        i = 0;
         do {
-            idx = var_a0 + var_a1 * 4;
-            var_a0 += 1;
+            idx = i + j * 4;
+            i += 1;
             context = D_8014D0B0;
             context->flags[idx] = 0;
-        } while (var_a0 < 4);
-        var_a1 += 1;
-    } while (var_a1 < 0x10);
+        } while (i < 4);
+        j += 1;
+    } while (j < 0x10);
 }

@@ -26,25 +26,25 @@ void StreamBufferRead(StreamBuffer *arg0, void *arg1, s32 arg2)
   arg0->readPosition = arg0->readPosition + arg2;
 }
 
-void StreamBufferAllocate(StreamBuffer *arg0, s32 arg1) {
-    if (arg0->data == 0) {
+void StreamBufferAllocate(StreamBuffer *streamBuffer, s32 arg1) {
+    if (streamBuffer->data == 0) {
         void *allocation = func_8025305C_de(arg1);
-        arg0->data = allocation;
-        arg0->writePosition = 0;
-        arg0->capacity = arg1;
+        streamBuffer->data = allocation;
+        streamBuffer->writePosition = 0;
+        streamBuffer->capacity = arg1;
     }
 }
 
-void StreamBufferFree(StreamBuffer *arg0) {
+void StreamBufferFree(StreamBuffer *streamBuffer) {
     void *temp_a0;
-    temp_a0 = arg0->data;
+    temp_a0 = streamBuffer->data;
     if (temp_a0 != 0) {
         func_802547E4_de(temp_a0);
-        arg0->data = 0;
+        streamBuffer->data = 0;
     }
-    arg0->writePosition = 0;
-    arg0->readPosition = 0;
-    arg0->capacity = 0;
+    streamBuffer->writePosition = 0;
+    streamBuffer->readPosition = 0;
+    streamBuffer->capacity = 0;
 }
 
 void func_80299CC4_de(void) {

@@ -103,12 +103,12 @@ f32 func_8029D8E8_de(f32 arg0) {
 }
 
 f32 func_8029D924_de(f32 arg0, f32 arg1) {
-    f32 var_f0;
-    var_f0 = (f32) FloatModulo((f64) arg0, (f64) arg1);
-    if (var_f0 < arg1) {
-        var_f0 += arg1;
+    f32 result;
+    result = (f32) FloatModulo((f64) arg0, (f64) arg1);
+    if (result < arg1) {
+        result += arg1;
     }
-    return var_f0;
+    return result;
 }
 
 f64 func_8029D964_de(f64 arg0) {
@@ -157,7 +157,7 @@ f64 func_8029D9DC_de(f64 arg0) {
     return integral;
 }
 
-f64 func_8029DAA0_de(f64 arg0, f64 *arg2) {
+f64 func_8029DAA0_de(f64 arg0, f64 *whole) {
     f64 temp;
     f64 integral;
     f64 limit;
@@ -179,7 +179,7 @@ f64 func_8029DAA0_de(f64 arg0, f64 *arg2) {
             }
         }
     }
-    *arg2 = integral;
+    *whole = integral;
     return arg0 - integral;
 }
 
@@ -190,15 +190,15 @@ f32 func_8029DB34_de(f32 arg0) {
     return -arg0;
 }
 
-s32 func_8029DB58_de(s32 arg0) {
-    if (arg0 < 0) {
-        if (arg0) {
-            return -arg0;
+s32 func_8029DB58_de(s32 fifth) {
+    if (fifth < 0) {
+        if (fifth) {
+            return -fifth;
         } else {
-            return -arg0;
+            return -fifth;
         }
     }
-    return arg0;
+    return fifth;
 }
 
 f64 func_8029DB74_de(void) {
@@ -266,7 +266,7 @@ f32 func_8029DD3C_de(f32 arg0) {
 f32 func_8029DD78_de(f32 arg0) {
     f32 temp_f2;
     f32 temp_f3;
-    f32 var_f0;
+    f32 result;
     f32 var_f1;
 
     var_f1 = arg0;
@@ -275,11 +275,11 @@ f32 func_8029DD78_de(f32 arg0) {
     }
     temp_f3 = (var_f1 - D_800C5BD8_de) / (var_f1 + D_800C5BD8_de);
     temp_f2 = temp_f3 * temp_f3;
-    var_f0 = (((((((((((((((temp_f2 * D_800C5BDC_de) + D_800C5BE0_de) * temp_f2) - *(&D_800C5BE0_de + 1)) * temp_f2) + D_800C5BE8_de) * temp_f2) - *(&D_800C5BE8_de + 1)) * temp_f2) + D_800C5BF0_de) * temp_f2) - *(&D_800C5BF0_de + 1)) * temp_f2) + D_800C5BF8_de) * temp_f3) + *(&D_800C5BF8_de + 1);
+    result = (((((((((((((((temp_f2 * D_800C5BDC_de) + D_800C5BE0_de) * temp_f2) - *(&D_800C5BE0_de + 1)) * temp_f2) + D_800C5BE8_de) * temp_f2) - *(&D_800C5BE8_de + 1)) * temp_f2) + D_800C5BF0_de) * temp_f2) - *(&D_800C5BF0_de + 1)) * temp_f2) + D_800C5BF8_de) * temp_f3) + *(&D_800C5BF8_de + 1);
     if (arg0 < 0.0f) {
-        var_f0 = -var_f0;
+        result = -result;
     }
-    return var_f0;
+    return result;
 }
 
 f32 func_8029DE48_de(f32 x) {

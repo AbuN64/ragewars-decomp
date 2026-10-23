@@ -31,14 +31,14 @@ void func_80411E18_de(s32);
 
 extern Shared_MenuDefinition *D_80146E10;
 
-void func_80298368_de(s32 arg0) {
+void func_80298368_de(s32 index) {
     s32 (*temp_v0_10)(s32, s32, s32, s32);
     s32 (*temp_v0_11)(s32, s32, s32, s32);
     s32 (*temp_v0_14)(s32, s32, s32, s32);
     s32 (*temp_v0_15)(s32, s32, s32, s32);
     s32 (*temp_v0_16)(s32, s32, s32, s32);
     s32 (*temp_v0_17)(s32, s32, s32, s32);
-    s32 (*temp_v0_4)(s32, s32, s32, s32);
+    s32 (*callback)(s32, s32, s32, s32);
     s32 (*temp_v0_5)(s32, s32, s32, s32);
     s32 (*temp_v0_8)(s32, s32, s32, s32);
     s32 (*temp_v0_9)(s32, s32, s32, s32);
@@ -57,15 +57,15 @@ void func_80298368_de(s32 arg0) {
     s32 temp_s0_10;
     s32 temp_s0_11;
     s32 temp_s0_12;
-    s32 temp_s0_2;
-    s32 temp_s0_3;
+    s32 owner;
+    s32 handled;
     s32 temp_s0_4;
     s32 temp_s0_5;
     s32 temp_s0_6;
     s32 temp_s0_7;
     s32 temp_s0_8;
     s32 temp_s0_9;
-    s32 temp_s2;
+    s32 current;
     s32 load_flag;
     s32 *transition_state;
     s32 temp_s4;
@@ -85,11 +85,11 @@ void func_80298368_de(s32 arg0) {
     ScreenManager *temp_a0;
     ScreenEntry *temp_a0_2;
     ScreenEntry *temp_a0_3;
-    Shared_MenuDefinition *temp_a0_4;
+    Shared_MenuDefinition *focus;
     ScreenEntry *temp_a0_5;
     ScreenEntry *temp_a0_6;
     Shared_MenuDefinition *temp_a0_7;
-    void *temp_s0;
+    void *screens;
     Shared_MenuDefinition *temp_v0;
     Shared_MenuDefinition *temp_v0_13;
     Shared_MenuDefinition *temp_v0_3;
@@ -107,14 +107,14 @@ void func_80298368_de(s32 arg0) {
         func_80299958_de();
     }
     temp_v1 = D_8014D080->current;
-    temp_s0 = D_8014D080->screens;
+    screens = D_8014D080->screens;
     var_a0 = 0;
     if (temp_v1 >= 0) {
         search_bound = temp_v1;
-        var_v1 = (void *)temp_s0;
+        var_v1 = (void *)screens;
 loop_4:
         var_a0 += 1;
-        if (var_v1->owner == arg0) {
+        if (var_v1->owner == index) {
             goto block_found_trampoline;
         }
         var_v1++;
@@ -134,29 +134,29 @@ block_search_check:
         if (temp_a1 >= var_a0_2) {
             search_entries = D_8014D080->screens;
             do {
-                if (search_entries[var_a0_2].owner == arg0) {
+                if (search_entries[var_a0_2].owner == index) {
                     var_s2 = 1;
                 }
                 var_a0_2 += 1;
             } while (temp_a1 >= var_a0_2);
         }
         temp_a0 = D_8014D080;
-        if (((ScreenEntry *)temp_s0)[temp_a0->current].owner != arg0) {
+        if (((ScreenEntry *)screens)[temp_a0->current].owner != index) {
             do {
                 temp_a0->field530 = 1;
                 func_80298ECC_de();
                 
                 temp_a0 = D_8014D080;
-            } while (((ScreenEntry *)temp_s0)[D_8014D080->current].owner != arg0);
+            } while (((ScreenEntry *)screens)[D_8014D080->current].owner != index);
         }
         D_8014D080->cacheCount = 0;
         D_8014D080->focus = temp_s4;
         if (var_s2 == 0) {
-            Frontend_AcquireArchiveEntry(arg0);
-            temp_v0 = func_80411DCC_de(arg0);
+            Frontend_AcquireArchiveEntry(index);
+            temp_v0 = func_80411DCC_de(index);
             temp_a0_2 = ((void *)&D_8014D080->screens[D_8014D080->current]);
             temp_a0_2->primary = temp_v0;
-            temp_a0_2->owner = arg0;
+            temp_a0_2->owner = index;
             temp_a0_2->focus = temp_v0->unk44;
             D_80146E10 = temp_v0->unk44;
             var_s1 = temp_v0;
@@ -164,7 +164,7 @@ block_search_check:
             if (((u16) var_s1->unk12 >> 0xC) & 1) {
                 
                 load_flag = 1;
-                temp_s2 = D_8014D080->current;
+                current = D_8014D080->current;
 loop_18:
                 if ((((u16) var_s1->unk12 >> 0xC) & 1) == load_flag) {
                     temp_v0_2 = --D_8014D080->current;
@@ -172,11 +172,11 @@ loop_18:
                     
                     var_a0 = D_8014D080->current;
                     Frontend_AcquireArchiveEntry(D_8014D080->screens[var_a0].owner);
-                    temp_s0_2 = D_8014D080->screens[D_8014D080->current].owner;
-                    temp_v0_3 = func_80411DCC_de(temp_s0_2);
+                    owner = D_8014D080->screens[D_8014D080->current].owner;
+                    temp_v0_3 = func_80411DCC_de(owner);
                     temp_a0_3 = ((void *)&D_8014D080->screens[D_8014D080->current]);
                     temp_a0_3->primary = temp_v0_3;
-                    temp_a0_3->owner = temp_s0_2;
+                    temp_a0_3->owner = owner;
                     temp_a0_3->focus = temp_v0_3->unk44;
                     D_80146E10 = temp_v0_3->unk44;
                     D_8014D080->cacheCount = 0;
@@ -184,7 +184,7 @@ loop_18:
                     func_80297DBC_de();
                     goto loop_18;
                 }
-                D_8014D080->current = temp_s2;
+                D_8014D080->current = current;
             }
             goto block_78;
 block_found_trampoline:
@@ -194,18 +194,18 @@ block_found_trampoline:
             var_s1 = D_8014D080->screens[D_8014D080->current].primary;
             D_8014D080->cacheCount = 0;
             if (((ScreenManager *)D_8014D080)->current != -1) {
-                temp_v0_4 = D_8014D080->callback;
-                if (temp_v0_4 != 0) {
-                    temp_s0_3 = D_8014D080->handled;
+                callback = D_8014D080->callback;
+                if (callback != 0) {
+                    handled = D_8014D080->handled;
                     D_8014D080->handled = 0;
-                    temp_v0_4(0xE07, 0, 0, 0);
+                    callback(0xE07, 0, 0, 0);
                     callback_status = D_8014D080->handled;
                     if (callback_status == 1) {
                         var_s5 = 0;
-                        D_8014D080->handled = temp_s0_3;
+                        D_8014D080->handled = handled;
                         goto after_found_callback;
                     }
-                    D_8014D080->handled = temp_s0_3;
+                    D_8014D080->handled = handled;
                 }
                 func_80297310_de(1, 0xE07, 0, 0, 0);
                 goto block_27;
@@ -218,10 +218,10 @@ after_found_callback:
         goto block_78;
     }
 block_not_found:
-    Frontend_AcquireArchiveEntry(arg0);
-    if (((u16) (((Shared_MenuDefinition *)(func_80411DCC_de(arg0)))->unk12) >> 0xC) & 1) {
-        temp_a0_4 = D_8014D080->screens[D_8014D080->current].focus;
-        if ((temp_a0_4 != 0) && ((temp_s1 = temp_a0_4->unkC, (func_80411DF0_de((s32) temp_s1) == 0)) || (temp_s1 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index = D_8014D080->current), (temp_s1 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index != temp_a1))) {
+    Frontend_AcquireArchiveEntry(index);
+    if (((u16) (((Shared_MenuDefinition *)(func_80411DCC_de(index)))->unk12) >> 0xC) & 1) {
+        focus = D_8014D080->screens[D_8014D080->current].focus;
+        if ((focus != 0) && ((temp_s1 = focus->unkC, (func_80411DF0_de((s32) temp_s1) == 0)) || (temp_s1 == D_8014D080->screens[D_8014D080->current].owner)) && ((focus_index = D_8014D080->current), (temp_s1 != D_8014D080->focus)) && ((temp_a1 = -1), (focus_index != temp_a1))) {
             temp_v0_5 = D_8014D080->callback;
             if (temp_v0_5 != 0) {
                 temp_s0_4 = D_8014D080->handled;
@@ -243,17 +243,17 @@ block_not_found:
 after_focus10:
         D_8014D080->focus = func_80299958_de();
         D_8014D080->current = (s32) (D_8014D080->current + 1);
-        temp_v0_6 = func_80411DCC_de(arg0);
+        temp_v0_6 = func_80411DCC_de(index);
         temp_a0_5 = ((void *)&D_8014D080->screens[D_8014D080->current]);
         temp_a0_5->primary = temp_v0_6;
-        temp_a0_5->owner = arg0;
+        temp_a0_5->owner = index;
         temp_a0_5->focus = temp_v0_6->unk44;
         var_s1 = temp_v0_6;
         D_80146E10 = var_s1->unk44;
         StreamBufferFree(&D_8014D080->screens[D_8014D080->current].data);
         temp_v0_7 = D_8014D080->callback2;
         if (temp_v0_7 != 0) {
-            (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unk40) = temp_v0_7(arg0);
+            (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unk40) = temp_v0_7(index);
         }
         D_8014D080->cacheCount = 0;
         if (D_8014D080->current != -1) {
@@ -306,13 +306,13 @@ after_e06:
     }
 after_e01:
     func_80299CC4_de();
-    e03_arg_copy = arg0;
+    e03_arg_copy = index;
     if (D_8014D080->current != -1) {
         temp_v0_11 = D_8014D080->callback;
         if (temp_v0_11 != 0) {
             temp_s0_8 = D_8014D080->handled;
             D_8014D080->handled = 0;
-            temp_v0_11(0xE03, arg0, 0, 0);
+            temp_v0_11(0xE03, index, 0, 0);
             callback_status = D_8014D080->handled;
             if (callback_status == 1) {
                 D_8014D080->handled = temp_s0_8;
@@ -351,17 +351,17 @@ after_e03:
     temp_v1_2->lowIndex = temp_v1_2->current;
     D_8014D080->focus = func_80299958_de();
     D_8014D080->current = (s32) (D_8014D080->current + 1);
-    temp_v0_13 = func_80411DCC_de(arg0);
+    temp_v0_13 = func_80411DCC_de(index);
     temp_a0_6 = ((void *)&D_8014D080->screens[D_8014D080->current]);
     temp_a0_6->primary = temp_v0_13;
-    temp_a0_6->owner = arg0;
+    temp_a0_6->owner = index;
     temp_a0_6->focus = temp_v0_13->unk44;
     D_80146E10 = temp_v0_13->unk44;
     D_8014D080->lowIndex = (s32) D_8014D080->current;
     temp_a2 = D_8014D080->callback2;
     var_s1 = temp_v0_13;
     if (temp_a2 != 0) {
-        (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unk40) = temp_a2(arg0);
+        (((Shared_MenuDefinition *)(D_8014D080->screens[D_8014D080->current].primary))->unk40) = temp_a2(index);
     }
     D_8014D080->cacheCount = 0;
     if (D_8014D080->current != -1) {
@@ -396,7 +396,7 @@ after_e06_second:
         func_80297310_de(1, 0xE07, 0, 0, 0);
     }
 after_e07_second:
-    if (func_80299958_de() != arg0) {
+    if (func_80299958_de() != index) {
         D_8014D080->cacheCount = 0;
         return;
     }

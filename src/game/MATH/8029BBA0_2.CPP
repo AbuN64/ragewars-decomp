@@ -219,7 +219,7 @@ void func_8029B868_de(f32 *arg0) {
 
 f32 func_8029B9FC_de(f32 arg0) {
     f32 temp_f2;
-    f32 var_f0;
+    f32 result;
     f32 var_f1;
     f32 var_f20;
     s32 var_s0;
@@ -235,11 +235,11 @@ f32 func_8029B9FC_de(f32 arg0) {
                 var_f1 -= (6.2831859588623047f);
             } while ((6.2831859588623047f) < var_f1);
         }
-        var_f0 = 0.0f;
-        if (var_f1 < var_f0) {
+        result = 0.0f;
+        if (var_f1 < result) {
             do {
                 var_f1 += (6.283185958862305f);
-            } while (var_f1 < var_f0);
+            } while (var_f1 < result);
         }
     }
     if (var_f20 < (-1.5707963705062866f)) {
@@ -257,11 +257,11 @@ f32 func_8029B9FC_de(f32 arg0) {
         var_f20 -= (3.1415927410125732f);
     }
     temp_f2 = var_f20 * var_f20;
-    var_f0 = (((((((temp_f2 * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * temp_f2) + (0.0083333337679505348f)) * temp_f2) - (0.1666666716337204f)) * temp_f2 * var_f20) + var_f20;
+    result = (((((((temp_f2 * (2.7557318844628753e-06f)) - (0.00019841270113829523f)) * temp_f2) + (0.0083333337679505348f)) * temp_f2) - (0.1666666716337204f)) * temp_f2 * var_f20) + var_f20;
     if (var_s0 < 0) {
-        var_f0 = -var_f0;
+        result = -result;
     }
-    return var_f0;
+    return result;
 }
 
 /* Computes the sine and cosine of an angle by reducing it into one turn, folding it into a quadrant, and evaluating one odd polynomial for each output.
