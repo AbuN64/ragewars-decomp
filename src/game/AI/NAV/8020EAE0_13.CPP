@@ -88,36 +88,39 @@ extern f32 func_80209B64_de(AttackBrain *);
 extern f32 func_80216F44_de(AttackActor *, AttackPosition);
 extern s32 func_8020D1CC_de(void *, s32, s32);
 
+/* 54/224 aligned edits; remaining: register roles and float scheduling. */
 s32 Nav_EvaluateAttackTarget(Chaser *self, s32 index) {
     AttackBrain *brain = (AttackBrain *)self;
     AttackActor *target = brain->targets[index]->actor;
     s32 accept = 0;
-    s32 nearLimit, middleLimit, farLimit, band;
+    s32 nearLimit, middleLimit;
+    s32 range; /* Far cutoff until classification, then the selected angle band. */
     f32 speed, angle, scale;
+    f32 persistence;
     if (target->flags & 0x20) return 0;
     speed = func_80209C5C_de(brain);
-    nearLimit = (s32)(speed * D_800C1F50_de);
+    range = (s32)(speed * D_800C1F58_de);
     middleLimit = (s32)(speed * D_800C1F54_de);
-    farLimit = (s32)(speed * D_800C1F58_de);
+    nearLimit = (s32)(speed * D_800C1F50_de);
     if (func_80216F44_de(brain->actor, target->position) < 0.0f)
         angle = -func_80216F44_de(brain->actor, target->position);
     else
         angle = func_80216F44_de(brain->actor, target->position);
     if (angle <= D_800C1F5C_de) {
         if (brain->weights[index] < nearLimit) accept = 1;
-        band = 0;
+        range = 0;
     } else if (D_800C1F5C_de < angle && angle <= D_800C1F60_de) {
-        band = 1;
+        range = 1;
         if (brain->weights[index] < middleLimit) {
             brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F64_de);
             accept = 1;
         }
     } else {
-        band = 2;
-        if (brain->weights[index] < farLimit) {
+        if (brain->weights[index] < range) {
             accept = 1;
             brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F68_de);
         }
+        range = 2;
     }
     if (D_80146938 && brain->actor->state->enabled && brain->actor->state->kind == 12) accept = 1;
     if (accept) {
@@ -129,7 +132,7 @@ s32 Nav_EvaluateAttackTarget(Chaser *self, s32 index) {
     }
     if (brain->last != target || brain->timer < 451) return 0;
     if (brain->weights[index] < (nearLimit << 1)) {
-        switch (band) {
+        switch (range) {
         case 1:
             scale = D_800C1F74_de;
             brain->weights[index] = (s32)((f32)brain->weights[index] * scale);
@@ -139,8 +142,8 @@ s32 Nav_EvaluateAttackTarget(Chaser *self, s32 index) {
             brain->weights[index] = (s32)((f32)brain->weights[index] * scale);
             break;
         }
-        speed = func_80209B64_de(brain);
-        brain->weights[index] = (s32)((f32)brain->weights[index] * ((D_800C1F7C_de - speed) * D_800C1F80_de + D_800C1F80_de));
+        persistence = func_80209B64_de(brain);
+        brain->weights[index] = (s32)((f32)brain->weights[index] * ((D_800C1F7C_de - persistence) * D_800C1F80_de + D_800C1F80_de));
         return 1;
     }
     return 0;
