@@ -3,6 +3,7 @@
 #include "COMMON/OSTHREAD_S.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
 #include "COMMON/STATERECAT34.H"
+#include "AUDIO_2/8025DA30.H"
 #include "TYPES.H"
 #include "SDK/OS/8025DA30.H"
 

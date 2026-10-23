@@ -12,10 +12,6 @@ typedef struct SoundVoicePool {
 } SoundVoicePool;
 
 struct SongHeader;
-struct SongHeader {
-    u32 tempo;
-    u16 volume;
-};
 
 struct func_8025CA44_S2;
 struct func_8025CA44_S2 {
@@ -152,17 +148,6 @@ struct Bank_func_8025CED0_de {
 
 struct Bank_func_8025CED0_de;
 struct PlayerRecAt1E;
-struct PlayerRecAt1E {
-    struct Bank_func_8025CED0_de *bank;
-    s32 request;
-    s32 state;
-    s32 group;
-    s32 song;
-    s32 speed;
-    s32 volume;
-    char pad1C[2];
-    s16 id;
-};
 
 union func_8025CC0C_S1_U14;
 typedef union func_8025CC0C_S1_U14 func_8025CC0C_S1_U14;
@@ -229,20 +214,6 @@ struct Bank {
 
 struct Bank;
 struct PlayerRecAt24;
-struct PlayerRecAt24 {
-    struct Bank *bank;
-    char pad4[4];
-    u32 state;
-    s32 loop;
-    s32 song;
-    s32 speed;
-    char pad18[3];
-    u8 priority;
-    char pad1C[2];
-    s16 id;
-    f32 tempoScale;
-    f32 volume;
-};
 
 extern int D_800CBB10;
 
@@ -390,22 +361,5 @@ struct AudioHeapD844 {
 struct AudioRootD844 {
     char pad0[0x1DA8];
     struct AudioHeapD844 heap;
-};
-struct AudioParamsD844 {
-    s32 count38, count1C;
-    u8 kind;
-    u8 pad9[3];
-    struct AudioHeapD844 *context;
-    s32 value10, value14, value18;
-};
-struct AudioStateD844 {
-    struct AudioRootD844 *root;
-    char pad4[0xC];
-    void *allocation;
-    void *player;
-    s32 mode, flags, unused20, timer, index, unused2C;
-    f32 first, second;
-    s32 counter;
-    f32 third, fourth;
 };
 #endif

@@ -1,0 +1,33 @@
+#ifndef AUDIO_2_8025CCB0_H
+#define AUDIO_2_8025CCB0_H
+#include "TYPES.H"
+struct SongHeader {
+    u32 tempo;
+    u16 volume;
+};
+struct PlayerRecAt1E {
+    struct Bank_func_8025CED0_de *bank;
+    s32 request;
+    s32 state;
+    s32 group;
+    s32 song;
+    s32 speed;
+    s32 volume;
+    char pad1C[2];
+    s16 id;
+};
+struct PlayerRecAt24 {
+    struct Bank *bank;
+    char pad4[4];
+    u32 state;
+    s32 loop;
+    s32 song;
+    s32 speed;
+    char pad18[3];
+    u8 priority;
+    char pad1C[2];
+    s16 id;
+    f32 tempoScale;
+    f32 volume;
+};
+#endif

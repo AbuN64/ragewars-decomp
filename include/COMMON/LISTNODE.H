@@ -445,10 +445,6 @@ struct LinkPair {
 };
 
 struct ObjectLinks2B50;
-struct ObjectLinks2B50 {
-    unsigned char padding_0[11084];
-    void *unk_2B4C;
-};
 
 struct ChannelSet;
 typedef struct ChannelSet ChannelSet;

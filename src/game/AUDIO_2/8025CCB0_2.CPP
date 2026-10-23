@@ -4,6 +4,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SOUNDVOICEPOOL.H"
+#include "AUDIO_2/8025CCB0.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
 #include "AUDIO/ALSNDP.H"
