@@ -176,11 +176,13 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
     s32 action = D_800CE8DC[player->pose * 12];
     AlternateModeInfo *info = (AlternateModeInfo *)D_800D052C[player->selectedAction];
     if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
-        if (((AttackTriggerAction *)attack)->unk13C != 2) goto next_weapon;
+        if (((AttackTriggerAction *)attack)->unk13C != 2) {
+            player->weapon = func_8022F96C_de(player);
+            return;
+        }
         ((AttackTriggerAction *)attack)->unk13C = 1;
         if (info->flags & 0x20) player->state7E8 = 0;
         if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
-next_weapon:
             player->weapon = func_8022F96C_de(player);
             return;
         }

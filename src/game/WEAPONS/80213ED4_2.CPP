@@ -211,7 +211,7 @@ extern s32 func_802444A4_de(void *, f32, f32, f32, CVector3, void *);
  * nothing qualified. */
 typedef struct Copy50_802149C0 { s32 words[20]; } Copy50_802149C0;
 /* 8/261 aligned edits; remaining: the 0x650 != 1 test keeps 1 in $s2 and a second null test after func_8024E7DC_de. */
-void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
+void *Weapons_SelectCombatTarget(void *actor, void *state, s32 lineOfSight, s32 combat) {
     void *candidates[3];
     u8 spare[0x1F0];
     Copy50_802149C0 saved;
@@ -310,5 +310,5 @@ void *func_802149C0_de(void *actor, void *state, s32 lineOfSight, s32 combat) {
     return best;
 }
 #else
-INCLUDE_ASM("span_1000", func_802149C0_de);
+INCLUDE_ASM("span_1000", Weapons_SelectCombatTarget);
 #endif

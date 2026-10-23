@@ -62,7 +62,7 @@ typedef struct Shared_func_80227014_S22 func_80227014_S22;
 
 void func_80218464_de(void *);
 
-void func_80226708_de(void *);
+void Weapons_InitializePlayerHealth(void *);
 
 s32 func_802281F0_de(void *);
 
@@ -272,7 +272,7 @@ void func_80227038_de(s8 *world) {
                                 player->unk11B4 = 0;
                                 func_80214178_de(&player->unk2E8, &player->unk458, 1);
                                 Render_PlacePlayerAtSpawnPoint(player, player->unk5EC, 0, 1);
-                                func_80226708_de(player);
+                                Weapons_InitializePlayerHealth(player);
                                 player->unk5E4 = (s32) D_8014284C;
                             } else {
                                 if ((D_80146938 != 0) && (temp_v1->unk94 != 0)) {
@@ -346,7 +346,7 @@ void func_80227038_de(s8 *world) {
                     temp_v0_6->unk11B4 = 0;
                     func_80214178_de(&temp_v0_6->unk2E8, &temp_v0_6->unk458, 1);
                     Render_PlacePlayerAtSpawnPoint(temp_v0_6, temp_v0_6->unk5EC, 0, 1);
-                    func_80226708_de(temp_v0_6);
+                    Weapons_InitializePlayerHealth(temp_v0_6);
                 }
                 var_s2 = 0;
                 if (temp_v0 >= 0) {
@@ -427,7 +427,7 @@ void func_80227038_de(s8 *world) {
                     temp_v0_8->unk11B4 = 0;
                     func_80214178_de(&temp_v0_8->unk2E8, &temp_v0_8->unk458, 1);
                     Render_PlacePlayerAtSpawnPoint(temp_v0_8, temp_v0_8->unk5EC, 0, 1);
-                    func_80226708_de(temp_v0_8);
+                    Weapons_InitializePlayerHealth(temp_v0_8);
                 }
                 var_s2 = 0;
                 if (temp_v0 >= 0) {
@@ -510,7 +510,7 @@ void func_80227038_de(s8 *world) {
                                 temp_v0_11->unk11B4 = 0;
                                 func_80214178_de(&temp_v0_11->unk2E8, &temp_v0_11->unk458, 1);
                                 Render_PlacePlayerAtSpawnPoint(temp_v0_11, temp_v0_11->unk5EC, 0, 1);
-                                func_80226708_de(temp_v0_11);
+                                Weapons_InitializePlayerHealth(temp_v0_11);
                             } else {
                                 temp_v1_3->unk90 = 0;
                                 temp_v0_11->unk5D8->unk8F = 0U;
@@ -637,7 +637,7 @@ struct WinPlayer { u8 pad0[0x5d4]; s32 kind; WinScore *stats; u8 pad5dc[0x1104];
 typedef struct WinWorld { u8 pad0[0x20]; WinPlayer *players; } WinWorld;
 extern Shared_Game D_801462C8;
 extern s32 func_80245784_de(void),func_80245798_de(void);
-s32 func_80228070_de(WinWorld *world) {
+s32 Weapons_CheckScoreLimit(WinWorld *world) {
     WinPlayer *player;
     u32 team, i;
     CGameStatus *c;
@@ -670,5 +670,5 @@ s32 func_80228070_de(WinWorld *world) {
     return 0;
 }
 #else
-INCLUDE_ASM("span_1000", func_80228070_de);
+INCLUDE_ASM("span_1000", Weapons_CheckScoreLimit);
 #endif

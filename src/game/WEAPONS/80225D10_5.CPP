@@ -33,7 +33,7 @@ extern int func_8022A5A0_de(Root *,ObjRecAt16E0V1 *);
    func_80245798_de), the match is locked at 0x1C of the rules D_801468A0 or the game D_8014561C disallows
    it at 0xCC9: outside a cutscene (func_80442A28_de) the time limit at 0x14 of the rules counts down by
    the frame time while func_8022C650_de says the clock runs and ends the match when it expires (clearing
-   humanWon at 0xA8 of the rules in trial kind 3); outside a cutscene a score limit reached through func_80228070_de
+   humanWon at 0xA8 of the rules in trial kind 3); outside a cutscene a score limit reached through Weapons_CheckScoreLimit
    ends it while the rules' limit at 0x18 is set and 0x54 is clear; and when D_80146938 asks, it counts
    the active players among the first eight and how many of them are out, ending the match once all
    are out, directly or, when a mode 14 player takes part, only after the rules' round count at 0x9C
@@ -62,7 +62,7 @@ extern s32 func_8022C650_de(World_func_802283B8_de *);
 
 extern void func_8022A748_de(World_func_802283B8_de *);
 
-extern s32 func_80228070_de(World_func_802283B8_de *);
+extern s32 Weapons_CheckScoreLimit(World_func_802283B8_de *);
 
 static inline SharedPlayerRecV2 *player_at(World_func_802283B8_de *world, u32 index) {
     SharedPlayerRecV2 *player;
@@ -234,7 +234,7 @@ void func_802283B8_de(World_func_802283B8_de *world) {
             }
         }
         game = &D_8014561C;
-        if (func_80442A28_de(game) == 0 && func_80228070_de(world) != 0) {
+        if (func_80442A28_de(game) == 0 && Weapons_CheckScoreLimit(world) != 0) {
             limits = &game->rules;
             if (limits->locked == 0 && game->paused == 0 && limits->scoreLimit > 0 && limits->sudden == 0) {
                 func_8022A748_de(world);

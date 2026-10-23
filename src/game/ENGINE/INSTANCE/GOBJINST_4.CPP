@@ -64,7 +64,7 @@ extern void func_80270910_de(f32 *, char *);
 extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair);
 
 /* Returns an actor's aiming orientation: a controlled actor turns a quarter turn about the vertical from its
- * weapon's orientation at 0x140, or from the player's own orientation from func_80226C60_de when unarmed; an
+ * weapon's orientation at 0x140, or from the player's own orientation from Weapons_BuildPlayerOrientation when unarmed; an
  * actor of kind 4 composes a pitch from 0x294 with a yaw from its heading 0x6C and applies them to its body
  * orientation from Turret_BuildPlaneRot; any other actor turns its orientation at 0x5C by its heading. Quaternions
  * are composed through func_80274098_de, keeping the latest sine in D_80115DEC. */
@@ -75,7 +75,7 @@ extern f32 D_80115DEC;
 
 extern void func_80274098_de(CQuatern *, CQuatern *, CQuatern *);
 
-extern void func_80226C60_de(void *, CQuatern *);
+extern void Weapons_BuildPlayerOrientation(void *, CQuatern *);
 
 extern void Turret_BuildPlaneRot(CQuatern *, void *, void *);
 
@@ -329,7 +329,7 @@ CQuatern func_8024796C_de(char *actor) {
             func_80274098_de(&result, &yaw, &((SharedRecAt564V1 *)weapon)->orientation);
         } else {
             angle = 1.5707964f;
-            func_80226C60_de(player, &own);
+            Weapons_BuildPlayerOrientation(player, &own);
             D_80115DEC = func_802B7130_de(angle);
             yaw.x = 0.0f;
             yaw.y = D_80115DEC;

@@ -100,7 +100,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
     } while (0);
 }
 
-/* Refreshes an attached actor's placement and returns its position and heading through optional pointers: an actor flagged 0x10000 of one of the bone-mounted types takes its position and heading from its parent's bone matrix (or just the parent's position when the parent has no skeleton) and clears its field 0x14, and an actor flagged 0x400000 places its local offset through its owner's transform (the owner's model matrix for owners flagged 0x300000, built through func_80226DD0_de when missing). */
+/* Refreshes an attached actor's placement and returns its position and heading through optional pointers: an actor flagged 0x10000 of one of the bone-mounted types takes its position and heading from its parent's bone matrix (or just the parent's position when the parent has no skeleton) and clears its field 0x14, and an actor flagged 0x400000 places its local offset through its owner's transform (the owner's model matrix for owners flagged 0x300000, built through Weapons_BuildPlayerViewTransform when missing). */
 
 
 
@@ -112,7 +112,7 @@ void *Particle_ParentTransform(EffectActor *arg0, Shared_ActorView *camera) {
 
 extern void func_80270910_de(f32 *out, void *in);
 extern void func_80272B38_de(void *matrix, CVector3 *in, CVector3 *out);
-extern void func_80226DD0_de(func_80228774_S5 *model, f32 *out);
+extern void Weapons_BuildPlayerViewTransform(func_80228774_S5 *model, f32 *out);
 
 
 
@@ -163,7 +163,7 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
             if (owner->model->unk5DC != 0) {
                 transform = ((SharedRecAt564V1 *)owner->model->unk5DC)->transform;
             } else {
-                func_80226DD0_de(owner->model, built);
+                Weapons_BuildPlayerViewTransform(owner->model, built);
                 transform = built;
             }
         } else {

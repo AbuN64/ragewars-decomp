@@ -16,9 +16,9 @@ extern void func_80272CB0_de(void *, f32, f32, f32);
 
 extern void func_802732D0_de(char *, f32 *);
 
-extern void func_80226DD0_de(char *, Matrix *);
+extern void Weapons_BuildPlayerViewTransform(char *, Matrix *);
 
-extern void func_80226C60_de(char *object, CQuatern *output);
+extern void Weapons_BuildPlayerOrientation(char *object, CQuatern *output);
 
 extern void func_80274244_de(void *, void *);
 
@@ -133,8 +133,8 @@ void func_8022F5E0_de(char *arg0) {
         func_80274244_de((CQuatern *)(((ObjectState630 *)(object))->unk_5DC.v1 + 0x140),
                       &sp20);
     } else {
-        func_80226DD0_de(object, &spC0);
-        func_80226C60_de(object, &sp100);
+        Weapons_BuildPlayerViewTransform(object, &spC0);
+        Weapons_BuildPlayerOrientation(object, &sp100);
         func_802732D0_de((char *)&spC0, &position);
         func_80274244_de(&sp100, &sp20);
     }

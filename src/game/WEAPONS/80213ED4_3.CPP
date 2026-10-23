@@ -8,7 +8,7 @@
 extern s32 D_8011CD20;
 extern s32 D_8013B290;
 extern s32 func_80214624_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, Actor_func_80214DD4_de *target);
-extern Actor_func_80214DD4_de *func_802149C0_de(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
+extern Actor_func_80214DD4_de *Weapons_SelectCombatTarget(Actor_func_80214DD4_de *arg0, Tracker *arg1, s32 arg2, s32 arg3);
 extern f32 Weapons_FindClearAimAngle(Actor_func_80214DD4_de *arg0, CVector3 pos, Actor_func_80214DD4_de *target, f32 arg3);
 extern f32 func_80216F44_de(Actor_func_80214DD4_de *arg0, CVector3 pos);
 struct Cursor;
@@ -69,7 +69,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
                 tracker->flags &= ~0x40000;
             }
         } else {
-            tracker->target = func_802149C0_de(actor, tracker, 0, 1);
+            tracker->target = Weapons_SelectCombatTarget(actor, tracker, 0, 1);
         }
     }
     target = tracker->target;

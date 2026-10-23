@@ -47,7 +47,7 @@ extern const struct D_800C7470_Pair D_800C2D40_de;
 
 
 
-extern void func_80226DD0_de(Player1680 *, Matrix *);
+extern void Weapons_BuildPlayerViewTransform(Player1680 *, Matrix *);
 
 extern void func_802732D0_de(Matrix *, CVector3 *);
 
@@ -63,7 +63,7 @@ static inline void getEye(Player1680 *player, CVector3 *pos) {
     if (player->mount != 0) {
         *pos = player->mount->unk128;
     } else {
-        func_80226DD0_de(player, &frame);
+        Weapons_BuildPlayerViewTransform(player, &frame);
         func_802732D0_de(&frame, pos);
     }
 }
@@ -72,7 +72,7 @@ static inline float getYaw(void) {
     return D_80140FC0 * D_800C2D40_de.first;
 }
 
-extern void func_80226708_de(void *arg0);
+extern void Weapons_InitializePlayerHealth(void *arg0);
 
 void func_8022C060_de(s32 arg0, s32 arg1) {
     func_8022BF04_de(arg0, arg1, 5, 0x1B);
@@ -279,7 +279,7 @@ void func_8022C5DC_de(void *object) {
     if (record != 0) {
         do {
             record->controls->transientFlag = 0;
-            func_80226708_de(record);
+            Weapons_InitializePlayerHealth(record);
             record = record->next;
         } while (record != 0);
     }

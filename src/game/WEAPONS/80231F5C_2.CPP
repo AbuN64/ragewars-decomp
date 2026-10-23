@@ -133,7 +133,7 @@ typedef struct HeldPlayerState {
     s32 handled78C;
 } HeldPlayerState;
 
-void func_802323A4_de(Shared_Actor *actor, WeaponFireState *attack) {
+void Weapons_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
     HeldPlayerState *state;
     s32 finished;
     state = actor->entity;
@@ -178,5 +178,5 @@ void func_802323A4_de(Shared_Actor *actor, WeaponFireState *attack) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_802323A4_de);
+INCLUDE_ASM("span_1000", Weapons_UpdateHeldFire);
 #endif

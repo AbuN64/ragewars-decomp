@@ -157,7 +157,7 @@ extern u8 D_801462D5;
 struct Shared_World;
 extern void *func_8028CFA0_de(struct Shared_World *, s32, s32);
 
-void func_80226708_de(BonusPlayer *player) {
+void Weapons_InitializePlayerHealth(BonusPlayer *player) {
     ActorTemplate *model;
     s32 id, health;
     s8 kind;
@@ -181,9 +181,8 @@ void func_80226708_de(BonusPlayer *player) {
         else if (kind == 0xC) health = 0x19000;
         else if (kind == 0xE) health = 0x12C00;
         else if (kind == 0xD) health = 0x12C00;
-        else goto fallback_first;
+        else health = player->model->health << 8;
     } else {
-fallback_first:
         health = player->model->health << 8;
     }
     if (D_801462D5 == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
@@ -194,9 +193,8 @@ fallback_first:
         else if (kind == 0xC) health = 0x19000;
         else if (kind == 0xE) health = 0x12C00;
         else if (kind == 0xD) health = 0x12C00;
-        else goto fallback_second;
+        else health = player->model->health << 8;
     } else {
-fallback_second:
         health = player->model->health << 8;
     }
     if (D_801462D5 == 1 && player->bot == 0) health += ((PlayerBonus *)D_800FEB10)[player->slot].value;
@@ -204,5 +202,5 @@ fallback_second:
     player->alpha = 0xFF;
 }
 #else
-INCLUDE_ASM("span_1000", func_80226708_de);
+INCLUDE_ASM("span_1000", Weapons_InitializePlayerHealth);
 #endif

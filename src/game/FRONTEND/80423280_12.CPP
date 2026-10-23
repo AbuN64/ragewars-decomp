@@ -48,7 +48,7 @@ extern s32 func_8042ACD8_de();
 
 extern void func_8042DEA0_de();
 
-/* Reports why a match ended: time running out on a timed match, the score limit (func_80228070_de),
+/* Reports why a match ended: time running out on a timed match, the score limit (Weapons_CheckScoreLimit),
    the rule set's own target (func_802282EC_de for rule set 0, the Frag Tag limit func_802281F0_de for
    rule set 1), or otherwise whether the last-player-standing check reached its end. */
 
@@ -56,7 +56,7 @@ extern Game_func_8042D060_de D_8014561C;
 
 
 
-extern s32 func_80228070_de(World *world);
+extern s32 Weapons_CheckScoreLimit(World *world);
 
 extern s32 func_802281F0_de(World *world);
 
@@ -229,7 +229,7 @@ s32 func_8042D060_de(void) {
     if (settings->timeSetting > 0 && D_8014561C.rules.timeLeft == 0.0f) {
         return MATCH_END_TIME_UP;
     }
-    if (func_80228070_de((World *)&D_80145040) != 0) {
+    if (Weapons_CheckScoreLimit((World *)&D_80145040) != 0) {
         return MATCH_END_SCORE_LIMIT;
     }
     switch (D_8014DD98) {

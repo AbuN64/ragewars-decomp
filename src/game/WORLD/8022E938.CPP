@@ -49,7 +49,7 @@ extern void func_80218464_de(void *arg0);
 
 
 
-extern void func_80226708_de(void *arg0);
+extern void Weapons_InitializePlayerHealth(void *arg0);
 
 void func_8022E948_de(Player *player) {
     u8 *ptr;
@@ -335,7 +335,7 @@ void func_8022EDFC_de(void *player) {
     ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
     func_80214178_de(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
     Render_PlacePlayerAtSpawnPoint(player, ((Shared_ActorView *)player)->spawn, 0, 1);
-    func_80226708_de(player);
+    Weapons_InitializePlayerHealth(player);
 }
 
 s32 func_8022EF04_de(s32 arg0, s32 arg1) {

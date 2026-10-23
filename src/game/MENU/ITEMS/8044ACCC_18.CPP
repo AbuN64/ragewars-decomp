@@ -20,11 +20,11 @@ void func_8044A07C_de(struct Object_func_8044A07C_de *object) {
     object->second = 0;
 }
 
-/* Stores the second argument at 0x5E0 of the actor, calls func_80226708_de and Render_ResetPlayerWeapons on it, then starts sound D_8011FE88 for it through func_8028B274_de with 0x66, D_800CE47C or its type's entry of D_800CE430 chosen by the options D_801462E5 and D_801468F4.
+/* Stores the second argument at 0x5E0 of the actor, calls Weapons_InitializePlayerHealth and Render_ResetPlayerWeapons on it, then starts sound D_8011FE88 for it through func_8028B274_de with 0x66, D_800CE47C or its type's entry of D_800CE430 chosen by the options D_801462E5 and D_801468F4.
    Adapted from func_8022BB80_de with a leading field store and two calls added and the D_801462C8 offsets changed to the symbols D_801462E5 and D_801468F4. */
 
 
-extern void func_80226708_de(void *);
+extern void Weapons_InitializePlayerHealth(void *);
 extern void Render_ResetPlayerWeapons(void *);
 extern u8 D_801462E5;
 extern s32 D_801468F4;
@@ -43,7 +43,7 @@ void func_8044A0C4_de(Player *arg0, s32 arg1) {
     s32 var_a2;
 
     arg0->state = arg1;
-    func_80226708_de(arg0);
+    Weapons_InitializePlayerHealth(arg0);
     Render_ResetPlayerWeapons(arg0);
     if (D_801462E5 == 0) {
         var_a2 = 0x66;

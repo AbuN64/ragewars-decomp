@@ -394,7 +394,7 @@ extern unsigned int D_800CD730;
 
 extern void func_8022B510_de(struct RespawnPlayer *);
 extern void func_802647E8_de(void *, int);
-extern void func_80226708_de(struct RespawnPlayer *);
+extern void Weapons_InitializePlayerHealth(struct RespawnPlayer *);
 extern int func_802934F8_de(void);
 
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
@@ -417,7 +417,7 @@ void func_8044952C_de(struct RespawnPlayer *player) {
     player->fade = D_800C2338_de;
     func_802647E8_de(player->anim, 1);
     if (D_801462E5 != 0) {
-        func_80226708_de(player);
+        Weapons_InitializePlayerHealth(player);
     } else {
         if (player->isBot == 0) {
             player->health = D_800FEB10[player->character].value + 0x6400;

@@ -138,7 +138,7 @@ extern float D_800C2B70_de;
 extern f32 D_80115DEC;
 extern void func_80274098_de(void *arg0, void *arg1, void *arg2);
 
-void func_80226C60_de(void *object, CQuatern *output)
+void Weapons_BuildPlayerOrientation(void *object, CQuatern *output)
 {
     CQuatern pitchRotation;
     CQuatern yawRotation;
@@ -187,7 +187,7 @@ void func_80226C60_de(void *object, CQuatern *output)
     func_80274098_de(output, &rollRotation, &oriented);
 }
 #else
-INCLUDE_ASM("span_1000", func_80226C60_de);
+INCLUDE_ASM("span_1000", Weapons_BuildPlayerOrientation);
 #endif
 
 #ifdef NON_MATCHING
@@ -196,7 +196,7 @@ INCLUDE_ASM("span_1000", func_80226C60_de);
 #include "FX/EXTERNS.H"
 extern f32 D_800C2B74_de, D_800C2B78_de, D_80115DEC;
 extern void func_80274098_de(void *, void *, void *), func_80274244_de(void *, void *), func_80272C60_de(void *, f32, f32, f32), func_8026F620_de(void *, void *, void *);
-void func_80226DD0_de(SharedPlayer *player, f32 out[4][4])
+void Weapons_BuildPlayerViewTransform(SharedPlayer *player, f32 out[4][4])
 {
     f32 qx[4], qy[4], qz[4];
     Shared_Quad rotation;
@@ -237,5 +237,5 @@ void func_80226DD0_de(SharedPlayer *player, f32 out[4][4])
     func_8026F620_de(out, m6, m4);
 }
 #else
-INCLUDE_ASM("span_1000", func_80226DD0_de);
+INCLUDE_ASM("span_1000", Weapons_BuildPlayerViewTransform);
 #endif

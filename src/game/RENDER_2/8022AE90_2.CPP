@@ -28,7 +28,7 @@ void func_8022B064_de(void *arg0, CVector3 *arg1)
   func_802227F4_de(new_var, new_var, 0x11);
 }
 
-extern void func_80226DD0_de(void *, MatrixF *);
+extern void Weapons_BuildPlayerViewTransform(void *, MatrixF *);
 void func_8022B09C_de(void *arg0, CVector3 *arg1) {
     CVector3 input;
     MatrixF matrix;
@@ -46,7 +46,7 @@ void func_8022B09C_de(void *arg0, CVector3 *arg1) {
         owner = (void *)matrix_ptr;
         matrix_ptr = &owner->unk160;
     } else {
-        func_80226DD0_de(arg0, &matrix);
+        Weapons_BuildPlayerViewTransform(arg0, &matrix);
         matrix_ptr = &matrix;
     }
     func_80272898_de(matrix_ptr, input_ptr, arg1);
@@ -66,7 +66,7 @@ void func_8022B11C_de(void *arg0, s32 arg1) {
 
 void func_8022B144_de(void *arg0, f32 *origin) {
     MatrixF sp10;
-    func_80226DD0_de(arg0, &sp10);
+    Weapons_BuildPlayerViewTransform(arg0, &sp10);
     func_802732D0_de((char *)&sp10, origin);
 }
 

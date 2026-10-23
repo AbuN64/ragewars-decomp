@@ -33,7 +33,7 @@ extern AimHit *D_80103FCC;
 extern char D_80103FD0, D_801000F0;
 extern void *D_800D052C[];
 void func_8027302C(f32 *, f32 *);
-void func_80226DD0_de(void *, f32 *);
+void Weapons_BuildPlayerViewTransform(void *, f32 *);
 void func_8022B144_de(void *, f32 *);
 s32 func_802444A4_de(char *, CVector3, CVector3, s32);
 void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
@@ -72,7 +72,7 @@ void func_8021D774_de(AimPlayer *player) {
     view = player->view;
     temp_fs1f = D_800C23B4_de;
     temp_fs2 = D_800C23B8_de;
-    if (view) { switch (view->mode) { case 1: func_80226DD0_de(player, matrix); func_8022B144_de(player, &current.x); break; default: func_8027302C(matrix, view->matrix); current = view->origin; break; } } else { func_80226DD0_de(player, matrix); func_8022B144_de(player, &current.x); }
+    if (view) { switch (view->mode) { case 1: Weapons_BuildPlayerViewTransform(player, matrix); func_8022B144_de(player, &current.x); break; default: func_8027302C(matrix, view->matrix); current = view->origin; break; } } else { Weapons_BuildPlayerViewTransform(player, matrix); func_8022B144_de(player, &current.x); }
     sp30.x = 0.0f;
     sp30.y = 0;
     sp30.z = D_800C23BC_de;
