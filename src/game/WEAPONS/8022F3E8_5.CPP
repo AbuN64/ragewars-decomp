@@ -34,7 +34,7 @@ extern s32 D_800D30BC;
 
 
 extern s32 func_8022F55C_de(void *, s16);
-extern void func_80239908_de(void *, void *, s32, s32, f32);
+extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 
 
 
@@ -99,7 +99,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            func_80239908_de(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC, func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC, func_8022A5A0_de(&D_80145040, player),
                           D_800C2EE4_de);
         }
     }
@@ -178,7 +178,7 @@ void func_802303A0_de(void *actor, void *attack) {
                 func_8025DF34_de(0xD4D);
                 if (FIELD(void *, player, 0x5DC) != 0) {
                     func_8022A5A0_de(&D_80145040, player);
-                    func_80239908_de(&D_80145088, FIELD(void *, player, 0x5DC), D_800D30BC, ready, D_800C2EE8_de);
+                    Camera_PostTargetedScreenMessage(&D_80145088, FIELD(void *, player, 0x5DC), D_800D30BC, ready, D_800C2EE8_de);
                 }
             }
         }
@@ -194,7 +194,7 @@ void func_802303A0_de(void *actor, void *attack) {
                     func_8025DF34_de(0xD4D);
                     if (FIELD(void *, player, 0x5DC) != 0) {
                         s32 result = func_8022A5A0_de(&D_80145040, player);
-                        func_80239908_de((char *)&D_80145040 + 0x48, FIELD(void *, player, 0x5DC), D_800D30BC, result, D_800C2EEC_de);
+                        Camera_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, FIELD(void *, player, 0x5DC), D_800D30BC, result, D_800C2EEC_de);
                     }
                     FIELD(s32, attack, 0x13C) = 1;
                 } else if ((FIELD(u32, info, 0x14) & 0x20) != 0) {

@@ -27,7 +27,7 @@ extern s32 D_800D30BC;
 
 extern s16 func_8022F96C_de(void *);
 extern s32 func_8022F55C_de(void *, s16);
-extern void func_80239908_de(void *, void *, s32, s32, f32);
+extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 static inline s32 can_fire(char *player) {
@@ -47,11 +47,11 @@ static inline s32 can_fire(char *player) {
         func_8025DF34_de(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
 #if defined(VERSION_EU)
-            func_80239908_de(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[D_80152789]), func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800E0D44)[D_80152789]), func_8022A5A0_de(&D_80145040, player),
 #elif defined(VERSION_EU_X)
-            func_80239908_de(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[D_80152789]), func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[D_80152789]), func_8022A5A0_de(&D_80145040, player),
 #else
-            func_80239908_de(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), func_8022A5A0_de(&D_80145040, player),
 #endif
                           D_800C2FB8_de);
         }

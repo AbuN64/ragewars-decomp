@@ -3539,7 +3539,7 @@ segments:
       - [0xC414C, data, data_800C/rodata_unresolved_800C354C]
       - [0xC4150, rodata, data_800C/D_80239678_C9240]
       - [0xC4158, rodata, data_800C/literals_func_802394BC_de]
-      - [0xC4160, rodata, data_800C/literals_func_80239908_de]
+      - [0xC4160, rodata, data_800C/literals_Camera_PostTargetedScreenMessage]
       - [0xC4168, rodata, data_800C/D_80239D00_C9258]
       - [0xC416C, rodata, data_800C/D_80239D1C_C925C]
       - [0xC4170, rodata, data_800C/D_80239D90_C9260]

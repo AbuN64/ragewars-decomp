@@ -155,7 +155,7 @@ typedef struct SoundActor {
 } SoundActor;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern char D_80141008;
-extern void func_80239908_de(void *, void *, s32, void *, f32);
+extern void Camera_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 #include "COMMON/OBJECTLINKS14.H"
 /* EU/EU-X: this body is 56/57 words; reorg picks beqz (target beql) for the flags check, so those versions
  * keep their asm. */
@@ -177,7 +177,7 @@ s32 func_80204308_de(struct NavigationPlatform *object, ActorMotionState *guard,
     emitter = parent->emitter;
     fallback = &D_80141008;
     if (emitter != 0) fallback = emitter;
-    func_80239908_de(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
+    Camera_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), object, gameplaySoundWeight());
     index = record->soundIndex;
     callback = gameplaySoundHook(index);
     if (callback != 0) func_8025E11C_de(callback);

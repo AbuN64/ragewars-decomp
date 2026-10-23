@@ -27,7 +27,7 @@ extern s16 func_8022F96C_de(void *);
 extern s32 func_8022F55C_de(void *, s16);
 extern s32 func_8025DE54_de(s32, s32, s32, s32, void *, s32);
 extern s32 func_8022A5A0_de(void *, void *);
-extern void func_80239908_de(void *, void *, s32, s32, f32);
+extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 static inline s32 can_fire(char *player) {
@@ -46,7 +46,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
         if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-            func_80239908_de(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(D_80145040, player),
                           D_800C2FB0_de);
         }
     }
@@ -72,7 +72,7 @@ void func_8023196C_de(Shared_Actor *actor, WeaponFireState *arg1) {
         } else if (((SharedPlayer *)(player))->views5E8.view6B0_46.unk6B0 & 0x4000) {
             func_8025DF34_de(0xD4D);
             if (((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC != 0) {
-                func_80239908_de(D_80145040 + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
+                Camera_PostTargetedScreenMessage(D_80145040 + 0x48, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, (u8)D_80145040[0x1809]),
                               func_8022A5A0_de(D_80145040, player), D_800C2FB4_de);
             }
         }

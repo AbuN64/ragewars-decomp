@@ -1040,7 +1040,6 @@ literals_func_8023660C_de = 0x800C35A0; // rom:0xC41A0 size:0x30
 literals_func_80236F1C_de = 0x800C35D4; // rom:0xC41D4 size:0xF0
 literals_func_80238EB8_de = 0x800C37C8; // rom:0xC43C8 size:0x8
 literals_func_802394BC_de = 0x800C3808; // rom:0xC4408 size:0x8
-literals_func_80239908_de = 0x800C3810; // rom:0xC4410 size:0x8
 literals_func_8023A294_de = 0x800C3854; // rom:0xC4454 size:0x8
 literals_func_8023A4E0_de = 0x800C3860; // rom:0xC4460 size:0x24
 literals_func_8023D380_de = 0x800C3900; // rom:0xC4500 size:0x20

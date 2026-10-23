@@ -27,7 +27,7 @@ extern void *D_800CD730;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern s32 D_801371D4;
 
-extern void func_80239908_de(void *, void *, s32, void *, f32);
+extern void Camera_PostTargetedScreenMessage(void *, void *, s32, void *, f32);
 extern s32 func_804030E0_de(s32);
 void Actors_DispatchTrigger(Trigger *trigger) {
     NavCallbackPair *table;
@@ -45,7 +45,7 @@ void Actors_DispatchTrigger(Trigger *trigger) {
         if (D_8011FE88.mode == 4) {
             index = trigger->sound;
             if (index != 0) {
-                func_80239908_de(&D_80145088, fallback, gameplaySoundValue(index), D_800CD730, triggerSoundWeight());
+                Camera_PostTargetedScreenMessage(&D_80145088, fallback, gameplaySoundValue(index), D_800CD730, triggerSoundWeight());
                 callback = gameplaySoundHook(trigger->sound);
                 if (callback != 0) func_8025E11C_de(callback);
             }

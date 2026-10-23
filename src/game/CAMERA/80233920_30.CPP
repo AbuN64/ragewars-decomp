@@ -22,6 +22,7 @@ extern func_80237E70_G1 D_800D7028;
 extern func_80237E70_G1 D_800D7034;
 
 extern s32 D_800E28D0;
+extern s32 D_800E28D4;
 
 extern void func_80239CE0_de(void *arg0);
 
@@ -68,7 +69,7 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
                     message->pad2C = 0;
                     message->scaleX = 1.0f;
                     message->scaleY = 1.0f;
-                    height = (&D_800E28D0)[1]; /* FAKEMATCH */
+                    height = D_800E28D4;
                     message->x = D_800E28D0 / 2;
                     message->y = height - 80;
                     message->size = size * 15.0f;
@@ -86,7 +87,7 @@ extern void func_8044A7D0_de(int a);
 
 extern u32 func_802337D0_de(s32);
 
-Message *func_80239908_de(void *owner, void *pool, u8 *text, s32 target, f32 size) {
+Message *Camera_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
     Message *pending;
     Message *next;
 
