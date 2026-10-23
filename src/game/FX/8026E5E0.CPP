@@ -17,7 +17,7 @@ extern void func_80271818_de(struct Shape_typemap_165 *, Triple *);
 #include "particle/8027A0F4_8.H"
 extern void func_80265E10_de(void *, void *, s32, s32, Triple, AttachmentEffectArgs);
 
-void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *arg3, AttachmentTable *arg4) {
+void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, func_8026E5E0_S3 *arg3, AttachmentTable *arg4) {
     Triple pos;
     Triple mapped;
     Triple zero;
@@ -25,14 +25,13 @@ void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, fu
     AttachmentEffectArgs params;
     s32 room;
     f32 temp_f0;
-    /* FAKEMATCH: staging the scale and ratio preserves the original float allocation. */
-    f32 scale;
-    f32 ratio;
+    f32 lifetime;
     s32 temp_a0_2;
     s32 temp_s0;
     s32 var_s2;
     u16 temp_a0;
     u32 temp_v1;
+    u8 *node;
     ObjRecAt4V7 *var_s3;
 
     arg1 = arg1 - 1;
@@ -41,12 +40,11 @@ void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, fu
             var_s3 = (void *)&arg0->unkC;
             if (var_s3->unk0 & arg3->unk2E0) {
                 temp_a0 = var_s3->unk4;
-                /* FAKEMATCH: index-first notation preserves the table addition operand order. */
-                temp_s0 = ((temp_a0 * arg4->stride)[arg4->bytes] == 5) * 2;
+                node = arg4->bytes + temp_a0 * arg4->stride;
+                temp_s0 = (*node == 5) * 2;
                 func_80272898_de(&arg2[temp_a0], arg0, &pos);
-                /* FAKEMATCH: reset between helper calls preserves the original call setup order. */
-                var_s2 = 0;
                 func_80271F9C_de(&pos, &pos, 0.000015258789f);
+                var_s2 = 0;
                 temp_v1 = var_s3->unk0;
                 switch (temp_v1) {                  /* irregular */
 #if !defined(VERSION_DE)
@@ -173,30 +171,29 @@ void func_8026E5E0_de(func_8026E5E0_S1 *arg0, s32 arg1, struct MatrixF *arg2, fu
                     params.fields.modifier = 0;
                     params.fields.chance = 0;
 #if defined(VERSION_US)
-                    ratio = D_800C4964_eu;
+                    lifetime = D_800C4964_eu;
 #elif defined(VERSION_EU)
-                    ratio = D_800C4964_eu;
+                    lifetime = D_800C4964_eu;
 #elif defined(VERSION_EU_X)
-                    ratio = D_800C4964_eu;
+                    lifetime = D_800C4964_eu;
 #elif defined(VERSION_DE)
-                    ratio = D_800C46B4;
+                    lifetime = D_800C46B4;
 #else
-                    ratio = D_800C4964_eu;
+                    lifetime = D_800C4964_eu;
 #endif
+                    lifetime /= temp_f0;
 #if defined(VERSION_US)
-                    scale = D_800C4968_eu;
+                    lifetime *= D_800C4968_eu;
 #elif defined(VERSION_EU)
-                    scale = D_800C4968_eu;
+                    lifetime *= D_800C4968_eu;
 #elif defined(VERSION_EU_X)
-                    scale = D_800C4968_eu;
+                    lifetime *= D_800C4968_eu;
 #elif defined(VERSION_DE)
-                    scale = D_800C46B8;
+                    lifetime *= D_800C46B8;
 #else
-                    scale = D_800C4968_eu;
+                    lifetime *= D_800C4968_eu;
 #endif
-                    ratio /= temp_f0;
-                    ratio *= scale;
-                    params.fields.lifeBase = (s16)(s32)ratio;
+                    params.fields.lifeBase = (s16)(s32)lifetime;
                     func_80265E10_de(arg3, arg3, 3, -1, pos, params);
                 }
             }

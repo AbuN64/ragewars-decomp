@@ -19,7 +19,7 @@ extern EffectRecAt154 *func_802830B8_de(void *system);
 
 extern f32 func_8024D398_de(Actor_func_8024A1D0_de *actor);
 
-extern void func_8026E5E0_de(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
+extern void Fx_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
 
 extern char D_800CA8C4_de[];
 
@@ -89,7 +89,7 @@ void func_8024C5D4_de(void *arg0, void *arg1, s32 arg2, s32 arg3)
     if (temp_s1 != 0)
     {
       new_var = &temp_v0->unk8;
-      func_8026E5E0_de(new_var, temp_s1, arg3, arg0, func_8028FDB4_de(arg1, 5));
+      Fx_DispatchAttachmentEffects(new_var, temp_s1, arg3, arg0, func_8028FDB4_de(arg1, 5));
     }
   }
 }

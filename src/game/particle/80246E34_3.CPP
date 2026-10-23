@@ -82,7 +82,7 @@ extern void func_80261670_de(Shared_AnimState *, s32, s32, s32, s32, s32);
 extern void func_80261E98_de();
 extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
-extern void func_8026E5E0_de(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
+extern void Fx_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
 extern void func_8026F620_de(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void func_80270910_de(PoseMatrix, u8 *);
 extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
@@ -553,7 +553,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 arg2) {
                     if (n != 0) {
                         u8 *data = table->data;
 
-                        func_8026E5E0_de(data, n, &mtx[1], actor, func_8028FDB4_de(arg1, 5));
+                        Fx_DispatchAttachmentEffects(data, n, &mtx[1], actor, func_8028FDB4_de(arg1, 5));
                     }
                 }
             }
