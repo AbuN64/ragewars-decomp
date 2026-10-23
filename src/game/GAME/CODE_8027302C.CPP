@@ -104,9 +104,9 @@ void func_80273040_de(f32 *arg0, f32 *arg1) {
     } while (col < 3);
 }
 
-void func_8027310C_de(void *arg0, void *arg1, f32 arg2) {
+void func_8027310C_de(void *projection, void *arg1, f32 plane) {
     CVector3 *direction = arg1;
-    Matrix *o = arg0;
+    Matrix *o = projection;
     f32 zero = 0.0f;
     f32 temp_f0;
     f32 temp_f1;
@@ -130,12 +130,12 @@ void func_8027310C_de(void *arg0, void *arg1, f32 arg2) {
     temp_f3 = temp_f0 / direction->y;
     temp_f2 = direction->x * temp_f3;
     temp_f1 = direction->z * temp_f3;
-    o->m[13] = arg2;
+    o->m[13] = plane;
     o->m[5] = zero;
     o->m[4] = -temp_f2;
     o->m[6] = -temp_f1;
-    o->m[12] = arg2 * temp_f2;
-    o->m[14] = arg2 * temp_f1;
+    o->m[12] = plane * temp_f2;
+    o->m[14] = plane * temp_f1;
 }
 
 void func_80273198_de(Mtx *m, CVector3 *direction) {
@@ -187,12 +187,12 @@ void func_802732EC_de(void *arg0, f32 *arg1) {
     arg1[2] = func_802B72B0_de((tmp.x * tmp.x) + (tmp.y * tmp.y) + (tmp.z * tmp.z));
 }
 
-void func_802733B4_de(void *arg0, f32 arg1, f32 arg2, f32 arg3) {
-    Matrix *o = arg0;
+void func_802733B4_de(void *matrix, f32 tiltX, f32 lift, f32 arg3) {
+    Matrix *o = matrix;
 
-    o->m[12] = o->m[12] + (arg1 * o->m[0] + arg2 * o->m[4] + arg3 * o->m[8]);
-    o->m[13] = o->m[13] + (arg1 * o->m[1] + arg2 * o->m[5] + arg3 * o->m[9]);
-    o->m[14] = o->m[14] + (arg1 * o->m[2] + arg2 * o->m[6] + arg3 * o->m[10]);
+    o->m[12] = o->m[12] + (tiltX * o->m[0] + lift * o->m[4] + arg3 * o->m[8]);
+    o->m[13] = o->m[13] + (tiltX * o->m[1] + lift * o->m[5] + arg3 * o->m[9]);
+    o->m[14] = o->m[14] + (tiltX * o->m[2] + lift * o->m[6] + arg3 * o->m[10]);
 }
 
 /** Add three floating arguments to the vector at offset 0x30. */
@@ -253,8 +253,8 @@ void func_802735A8_de(void *arg0, f32 sx, f32 sy, f32 sz) {
     o->m[14] = o->m[14] * sz;
 }
 
-void func_80273648_de(void *arg0, f32 arg1) {
-    struct Mtx *m = arg0;
+void func_80273648_de(void *rest, f32 arg1) {
+    struct Mtx *m = rest;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
@@ -311,8 +311,8 @@ void func_802736D4_de(void *arg0, f32 arg1)
   m->right.x = cos_v;
 }
 
-void func_80273760_de(void *arg0, f32 arg1) {
-    struct Mtx *m = arg0;
+void func_80273760_de(void *matrix, f32 arg1) {
+    struct Mtx *m = matrix;
     f32 sin_v;
     f32 cos_v;
     f32 zero;
@@ -392,8 +392,8 @@ void func_802738C0_de(void *arg0, f32 arg1) {
     m->m32 = (a * sin_v) + (m->m32 * cos_v);
 }
 
-void func_802739C4_de(void *arg0, f32 arg1) {
-    struct Mtx *m = (char *) arg0;
+void func_802739C4_de(void *matrix, f32 arg1) {
+    struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -416,8 +416,8 @@ void func_802739C4_de(void *arg0, f32 arg1) {
     m->forward.z = (sin_v * a) + (cos_v * m->forward.z);
 }
 
-void func_80273A98_de(void *arg0, f32 arg1) {
-    struct Mtx *m = (char *) arg0;
+void func_80273A98_de(void *matrix, f32 arg1) {
+    struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -444,8 +444,8 @@ void func_80273A98_de(void *arg0, f32 arg1) {
     m->m32 = (a * neg_sin) + (m->m32 * cos_v);
 }
 
-void func_80273B98_de(void *arg0, f32 arg1) {
-    struct Mtx *m = (char *) arg0;
+void func_80273B98_de(void *matrix, f32 arg1) {
+    struct Mtx *m = (char *) matrix;
     f32 sin_v;
     f32 cos_v;
     f32 neg_sin;
@@ -656,17 +656,17 @@ void func_80274098_de(void *arg0, void *arg1, void *arg2) {
              - (b[2] * a[2]) + (b[3] * a[3]);
 }
 
-void func_802741A4_de(f32 *arg0) {
+void func_802741A4_de(f32 *rotation) {
     f32 mag;
     f32 scale;
 
-    mag = func_802B72B0_de((arg0[0] * arg0[0]) + (arg0[1] * arg0[1]) + (arg0[2] * arg0[2]) + (arg0[3] * arg0[3]));
+    mag = func_802B72B0_de((rotation[0] * rotation[0]) + (rotation[1] * rotation[1]) + (rotation[2] * rotation[2]) + (rotation[3] * rotation[3]));
     if (mag != 0.0f) {
         scale = D_800C492C_de / mag;
-        arg0[0] = arg0[0] * scale;
-        arg0[1] = arg0[1] * scale;
-        arg0[2] = arg0[2] * scale;
-        arg0[3] = arg0[3] * scale;
+        rotation[0] = rotation[0] * scale;
+        rotation[1] = rotation[1] * scale;
+        rotation[2] = rotation[2] * scale;
+        rotation[3] = rotation[3] * scale;
     }
 }
 
