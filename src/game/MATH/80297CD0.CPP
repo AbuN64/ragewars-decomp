@@ -303,7 +303,7 @@ void func_80299CF0_de(struct NodeRecAt12 *, s32, s32, s32, s32, s32);
 void func_8029973C_de(void);
 void func_80298368_de(s32);
 
-/* 123/250 aligned edits; remaining: event-loop scheduling and register allocation. */
+/* 113/250 aligned edits; remaining: event-loop scheduling and register allocation. */
 static inline void Screen_DispatchChildren(Element *element, s32 event, s32 value, s32 argument, s32 context) {
     ScreenManager *manager;
     s32 saved;
@@ -386,6 +386,11 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
         manager->handled = saved;
         if (consumed == 1) return result;
     }
+    goto dispatchScreens;
+restoreHandled:
+    *handled = saved;
+    return result;
+dispatchScreens:
     first = D_8014D080->lowIndex;
     last = D_8014D080->current;
     if (first > last) return result;
@@ -402,10 +407,7 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
             saved = *handled;
             *handled = 0;
             result = handler(element, event, value, (s32)argument, context);
-            if (*handled == 1) {
-                *handled = saved;
-                return result;
-            }
+            if (*handled == 1) goto restoreHandled;
             *handled = saved;
         }
         if (recurse != 0) {
@@ -414,10 +416,7 @@ s32 DispatchScreenRangeEvent(s32 recurse, s32 event, s32 value, void *argument, 
             *handled = 0;
             Screen_DispatchChildren(element, event, value, (s32)argument, context);
             D_80146E18 = -1;
-            if (*handled == 1) {
-                *handled = saved;
-                return result;
-            }
+            if (*handled == 1) goto restoreHandled;
             *handled = saved;
         }
         result = Screen_DispatchStandardEvent(element, event, (s32)argument, systemEvents, screenEvents, userEvents);
