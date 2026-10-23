@@ -1,11 +1,20 @@
 #include "include_asm.h"
 
-#if defined(NON_MATCHING) && !defined(__i386__) && !defined(__x86_64__)
-/* 311/317 words with -msplit-addresses (a per-file cflag in config.toml, 278/317 without); remaining: 6 words of hi/lo hazard nops the assembler does not insert */
-/* gcc-2.8.1 libgcc2 __umoddi3 compiled in place; the units name it func_802C1330_de */
-#define __umoddi3 func_802C1330_de
+#if defined(NON_MATCHING) && defined(__GNUC__) && __GNUC__ >= 3
+unsigned long long Libc_UnsignedRemainder(unsigned long long numerator, unsigned long long denominator) {
+    return numerator % denominator;
+}
+#elif defined(NON_MATCHING) || !defined(VERSION_EU)
+/* UnsignedRemainder: libgcc2 remainder with the VR4300 HI/LO hazards. */
+/* gcc-2.8.1 libgcc2 __umoddi3 compiled in place; the units name it Libc_UnsignedRemainder */
+#define __umoddi3 Libc_UnsignedRemainder
 #define L_umoddi3
+#if defined(VERSION_US)
+#define LIBGCC2_EXTERNAL_CLZ D_auto_rodata_unresolved_800C7C18_0C8A20_0C8B20
+#else
+#define LIBGCC2_EXTERNAL_CLZ D_auto_src_rw_u64_remainder_normalization_width_us_rev1
+#endif
 #include "libgcc2.inc.c"
 #else
-INCLUDE_ASM("span_1000", func_802C1330_de);
+INCLUDE_ASM("span_1000", Libc_UnsignedRemainder);
 #endif

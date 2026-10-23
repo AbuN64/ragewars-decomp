@@ -141,6 +141,7 @@ $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): CFLAGS
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): HILO := 1
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
@@ -195,6 +196,7 @@ $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C5320.CPP.o): 
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses
+$(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/libc/802C6420.CPP.o): HILO := 1
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): TC := gcc_2_8_1_sn64
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CPPFLAGS := -P -undef -nostdinc -D_LANGUAGE_C -D__GNUC__=2 -D__STDARG_GCC -DF3DEX_GBI_2 -Isrc/sdk/libgcc
 $(foreach v,$(VERSIONS),build/nmraw/$(v)/src/sdk/libultra/audio/802C5E90.CPP.o): CFLAGS := -G0 -mips3 -O2 -mgas -meb -mcpu=VR4300 -mhard-float -mgp32 -mfp64 -mno-fix4300 -msplit-addresses

@@ -245,7 +245,7 @@ case_default:
 extern u8 D_800D5300[];
 extern u8 D_800D5314[];
 
-extern u64 func_802C1330_de(u64 numerator, u64 divisor);
+extern u64 Libc_UnsignedRemainder(u64 numerator, u64 divisor);
 extern u64 func_802C0DA0_de(u64 numerator, u64 divisor);
 extern s64 func_802C0230_de(s64 numerator, s64 denominator);
 extern s64 func_802C0820_de(s64 numerator, s64 denominator);
@@ -278,7 +278,7 @@ void func_802BDDE0_de(_Pft *px, unsigned char code) {
     }
     if (value != 0 || px->prec != 0) {
         p = &buffer[--i];
-        *p = table[func_802C1330_de(value, base)];
+        *p = table[Libc_UnsignedRemainder(value, base)];
     }
     px->v.ll = func_802C0DA0_de(value, base);
     while (px->v.ll > 0 && i > 0) {

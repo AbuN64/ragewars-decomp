@@ -402,6 +402,10 @@ __udiv_w_sdiv (USItype *rp, USItype a1, USItype a0, USItype d)
 #endif
 
 #ifdef L_udivmoddi4
+#ifdef LIBGCC2_EXTERNAL_CLZ
+extern const UQItype LIBGCC2_EXTERNAL_CLZ[];
+#define __clz_tab LIBGCC2_EXTERNAL_CLZ
+#else
 static const UQItype __clz_tab[] =
 {
   0,1,2,2,3,3,3,3,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,
@@ -413,6 +417,7 @@ static const UQItype __clz_tab[] =
   8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
   8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
 };
+#endif
 
 #if (defined (L_udivdi3) || defined (L_divdi3) || \
      defined (L_umoddi3) || defined (L_moddi3))
