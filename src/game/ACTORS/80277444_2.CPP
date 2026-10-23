@@ -90,7 +90,7 @@ typedef struct HitBoxTable {
 
 #ifdef NON_MATCHING
 extern void *func_8028FDB4_de(void *, s32);
-/* NON_MATCHING: 9 aligned edits / 243 ROM words; remaining: sector address registers and signature-loop base. */
+/* NON_MATCHING: 7 aligned edits / 243 ROM words; remaining: sector address registers. */
 s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
     u32 keys[0x40];
     /* A query may intersect every world sector; accepted volumes are capped at 64. */
@@ -150,9 +150,10 @@ s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
                 if (box->maxX > entry->minX && box->minX < entry->maxX &&
                     box->maxZ > entry->minZ && box->minZ < entry->maxZ &&
                     box->maxY > entry->minY && box->minY < entry->maxY) {
+                    u32 *signatureWords = entry->signature;
                     sum = 0;
                     for (j = 0; j < 16; j++) {
-                        sum += entry->signature[j];
+                        sum += signatureWords[j];
                     }
                     dup = 0;
                     if (i != 0) {
