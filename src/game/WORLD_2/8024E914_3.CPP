@@ -63,7 +63,7 @@ typedef struct SimpleInstanceOut {
     s32 visBits;
     s32 f1C4;
 } SimpleInstanceOut;
-/* 121/128 words (7 aligned edits); remaining: store scheduling of the box max z and the two zero words at 0x1A0 */
+/* 125/128 words (3 aligned edits); remaining: box max z addition/store scheduling */
 void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, char *segments) {
     CVector3 v;
     inst->kind = 3;
@@ -94,9 +94,9 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     } else {
         inst->region = segments + (rec->region << 5);
     }
+    inst->flags = rec->flags | 2;
     inst->f1A0 = 0;
     inst->f1A4 = 0;
-    inst->flags = rec->flags | 2;
     inst->id = rec->id;
     v.x = inst->position.x;
     v.y = inst->position.y + Particle_GetActorHeight(inst) * D_800C3D8C_de;
