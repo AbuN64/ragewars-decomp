@@ -1502,20 +1502,12 @@ struct SharedPlayerCode802661FC {
 };
 
 struct Actor_func_80267958_de;
-struct Actor_func_80267958_de {
-    char pad0[0x1D8];
-    SharedPlayerCode802661FC *player;
-};
 
 struct ResourceManagerState;
 struct Triple;
 typedef void ( *func_80267198_de_Callback)(void *, void *, signed int, CVector3, struct ResourceManagerState);
 
 struct CallbackEntryRecAt4V1;
-struct CallbackEntryRecAt4V1 {
-    func_80267198_de_Callback callback;
-    s32 unused;
-};
 
 extern float D_800C4424_de;
 
@@ -1557,12 +1549,6 @@ typedef struct Actor_func_80267958_de Actor_func_80267958_de;
 
 struct Actor_func_802676EC_de;
 struct Carrier;
-struct Carrier {
-    struct Actor_func_802676EC_de *owner;
-    char pad4[0x10];
-    s32 slot;
-    Shield shield;
-};
 
 struct func_8026745C_S1;
 typedef struct func_8026745C_S1 func_8026745C_S1;
@@ -1577,21 +1563,8 @@ struct Actor_func_802676EC_de;
 typedef struct Actor_func_802676EC_de Actor_func_802676EC_de;
 
 struct ObjectRecAtD0;
-struct ObjectRecAtD0 {
-    u8 type;
-    u8 pad1[0x17];
-    s32 *kind;
-    u8 pad1C[0xB4];
-    s32 value;
-};
 
 struct Vec4s;
-struct Vec4s {
-    s16 x;
-    s16 y;
-    s16 z;
-    s16 w;
-};
 
 extern float D_800C9538;
 
@@ -1613,15 +1586,6 @@ struct func_80267D80_S2 {
 extern float D_800C46E8_eu;
 
 struct SevenBytes;
-struct SevenBytes {
-    u8 a;
-    u8 b;
-    u8 c;
-    u8 d;
-    u8 e;
-    u8 f;
-    u8 g;
-};
 
 
 extern float D_800C4428_de;

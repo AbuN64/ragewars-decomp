@@ -19,15 +19,6 @@ typedef struct Shared_ReactionStatistics Shared_ReactionStatistics;
 typedef struct Shared_ReactionObjectStatistics Shared_ReactionObjectStatistics;
 typedef struct Shared_ReactionPlayerRecord Shared_ReactionPlayerRecord;
 
-/* Damage packet passed by value to the area-hit callbacks. */
-typedef struct Shared_DamageParameters {
-    u16 radius;
-    u16 damage;
-    union {
-        s32 control;
-        struct { s8 impulse; u8 reserved[3]; };
-    };
-} Shared_DamageParameters;
 
 typedef struct CDamageInfo_t {
     Shared_ReactionActor *target;

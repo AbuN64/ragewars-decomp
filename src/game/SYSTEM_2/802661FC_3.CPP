@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/TARGET.H"
+#include "SYSTEM_2/802661FC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
