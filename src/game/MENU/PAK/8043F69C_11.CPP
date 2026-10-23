@@ -337,7 +337,7 @@ void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *defi
     MenuBuildState *menu = (MenuBuildState *)memory;
     MenuBuildEntry *entry;
     s32 i, bank;
-    u8 *rec;
+    u8 *styleRecord;
     menu->x = definition->x;
     menu->y = definition->y;
     menu->kind = definition->kind;
@@ -365,16 +365,16 @@ void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *defi
     menu->owner = owner;
     for (bank = 0; bank < 2; bank++) {
         for (i = 0; i < 8; i++) {
-            rec = (u8 *)menu + bank * 0x80 + i * 0x10;
-            MP_FIELD(rec, u16, 0x48) = MP_FIELD(D_800E1F22, u16, i * 0x18);
-            MP_FIELD(rec, u16, 0x4A) = MP_FIELD(D_800E1F26, u16, i * 0x18);
-            MP_FIELD(rec, u16, 0x4C) = MP_FIELD(D_800E1F2A, u16, i * 0x18);
-            MP_FIELD(rec, u8, 0x54) = D_800E1F2F[i * 0x18];
-            MP_FIELD(rec, u8, 0x55) = D_800E1F33[i * 0x18];
-            MP_FIELD(rec, u8, 0x57) = 0xFF;
-            MP_FIELD(rec, u16, 0x50) = 0;
-            MP_FIELD(rec, u16, 0x52) = 0;
-            MP_FIELD(rec, u8, 0x56) = D_800E1F37[i * 0x18];
+            styleRecord = (u8 *)menu + bank * 0x80 + i * 0x10;
+            MP_FIELD(styleRecord, u16, 0x48) = MP_FIELD(D_800E1F22, u16, i * 0x18);
+            MP_FIELD(styleRecord, u16, 0x4A) = MP_FIELD(D_800E1F26, u16, i * 0x18);
+            MP_FIELD(styleRecord, u16, 0x4C) = MP_FIELD(D_800E1F2A, u16, i * 0x18);
+            MP_FIELD(styleRecord, u8, 0x54) = D_800E1F2F[i * 0x18];
+            MP_FIELD(styleRecord, u8, 0x55) = D_800E1F33[i * 0x18];
+            MP_FIELD(styleRecord, u8, 0x57) = 0xFF;
+            MP_FIELD(styleRecord, u16, 0x50) = 0;
+            MP_FIELD(styleRecord, u16, 0x52) = 0;
+            MP_FIELD(styleRecord, u8, 0x56) = D_800E1F37[i * 0x18];
         }
     }
     MP_FIELD(input, s32, 0xB0) = 0;

@@ -150,7 +150,7 @@ extern void func_8043C2A4_de(void *);
 
 extern void func_8040C428_de(s32);
 
-extern void func_8044A370_de(void *, s32);
+extern void Items_ResetActorPools(void *, s32);
 
 extern void func_804499B0_de(void *, s32, s32);
 
@@ -437,7 +437,7 @@ s32 func_8042D4FC_de(void *window, void *unused1, s32 event) {
             func_8040C428_de(0);
             func_8040E8D8_de(window, 1);
             object = &D_80145088;
-            func_8044A370_de(object, 0);
+            Items_ResetActorPools(object, 0);
             func_804499B0_de(object - 0x48, 0, 0);
             func_80286AA8_de(&D_8011FE88, 0, 0);
             ((MatchMenuObjects *)(object))->transition = 8;

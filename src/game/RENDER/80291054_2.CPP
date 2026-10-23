@@ -36,7 +36,7 @@ void func_80291208_de(RenderState *state) {
     func_802B6B80_de((void *)&D_80142C60);
     if (D_801470B0) {
         func_80264B44_de();
-        func_80445074_eu(&D_801462C8);
+        Items_ResetGameOptions(&D_801462C8);
     }
     i = 0;
     func_80244D70_de();
@@ -99,7 +99,7 @@ extern void func_8044A62C_de(void *players);
 extern void func_80449DB0_de(void *menu);
 extern void func_8023EE00_de(void);
 extern s32 func_80265964_de(s32 size);
-extern void func_8044A370_de(void *players, s32 arg1);
+extern void Items_ResetActorPools(void *players, s32 arg1);
 extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
 extern void func_8044B7C0_de(Shared_World *world, s32 resource);
 extern void func_8044AE70_de(void);
@@ -159,7 +159,7 @@ void func_80291404(void *gameSession) {
     func_80449DB0_de(session->menu);
     func_8023EE00_de();
     session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
-    func_8044A370_de(session->players, 0);
+    Items_ResetActorPools(session->players, 0);
     func_804499B0_de(session->menu, 0, 0);
     func_8044B7C0_de(&D_8011FE88, session->resource);
     if (D_800CBC11[0] == 0) {
@@ -237,7 +237,7 @@ extern void func_8044A62C_de(void *players);
 extern void func_80449DB0_de(void *menu);
 extern void func_8023EE00_de(void);
 extern s32 func_80265964_de(s32 size);
-extern void func_8044A370_de(void *players, s32 arg1);
+extern void Items_ResetActorPools(void *players, s32 arg1);
 extern void func_804499B0_de(void *menu, s32 arg1, s32 arg2);
 extern void func_8044B7C0_de(Shared_World *world, s32 resource);
 extern void func_8044AE70_de(void);
@@ -295,7 +295,7 @@ void func_80291404(void *arg0) {
     func_80449DB0_de(session->menu);
     func_8023EE00_de();
     session->resource = func_80265964_de(0x18) & 0x3FFFFFFF;
-    func_8044A370_de(session->players, 0);
+    Items_ResetActorPools(session->players, 0);
     func_804499B0_de(session->menu, 0, 0);
     func_8044B7C0_de(&D_8011FE88, session->resource);
     if (D_800CBC11[0] == 0) {

@@ -111,7 +111,7 @@ extern void *D_8014D468_de[];
 extern void func_8028F754_de(Panel *, s32, s32, s32, u8);
 #include "SDK/SCHED/8028DF6C_7.H"
 extern void func_802B6B80_de(s32 *);
-extern void func_80445074_eu(void *);
+extern void Items_ResetGameOptions(void *);
 
 typedef Node_func_80442A28_de TimingQueue;
 typedef struct TimingWorld {

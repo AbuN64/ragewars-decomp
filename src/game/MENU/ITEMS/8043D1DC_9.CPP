@@ -59,7 +59,7 @@ typedef struct GameRecord80445074 {
 
 extern f32 D_800E2798;
 
-void func_80445074_eu(GameRecord80445074 *game) {
+void Items_ResetGameOptions(GameRecord80445074 *game) {
     s32 i;
 
     game->colorR = 0x80;
@@ -137,6 +137,6 @@ void func_80445074_eu(GameRecord80445074 *game) {
     game->field0D = 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80445074_eu);
+INCLUDE_ASM("ovl_80400000", Items_ResetGameOptions);
 #endif
 #endif

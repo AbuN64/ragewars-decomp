@@ -11,7 +11,7 @@
 extern PakMenuController *D_800E54A4;
 
 extern s32 Pak_GetStatus(s32);
-extern s32 func_80404BE8_de(void *, s32, s32 *);
+extern s32 Pak_FindNoteByName(void *, s32, s32 *);
 extern s32 func_80434638_de(s32, s32);
 extern s32 func_80435128_de(s32);
 extern s32 func_80435184_de(s32);
@@ -44,9 +44,9 @@ void func_80433610_de(s32 player)
       }
       else
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-        if (func_80404BE8_de(((D_800E25A4)[D_80152789]), player, &result) == one)
+        if (Pak_FindNoteByName(((D_800E25A4)[D_80152789]), player, &result) == one)
 #else
-        if (func_80404BE8_de((D_800D36D4), player, &result) == one)
+        if (Pak_FindNoteByName((D_800D36D4), player, &result) == one)
 #endif
       {
         if (func_80434638_de(player, result) == one)

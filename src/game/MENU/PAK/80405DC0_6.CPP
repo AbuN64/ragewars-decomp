@@ -16,32 +16,32 @@ extern void func_80253838_de(s32, void *);
 extern u32 *func_8025343C_de(s32, void *, s32, void *);
 extern void func_802A001C_de(u32, s32, void *);
 extern void func_802BD3A0_de(void *, void *, void *);
-void func_80405DC0_de(u8 *arg0) {
-    u8 *base = D_8011FECC + 0x610;
-    u8 *region;
-    u32 *entry;
+void Pak_CreateSaveSnapshot(u8 *player) {
+    u8 *snapshotSize = D_8011FECC + 0x610;
+    u8 *allocationSize;
+    u32 *snapshotHandle;
     if (D_800DE860_de != 0) {
         func_80253908_de(0);
         func_80253838_de(0, D_800DE860_de);
     }
-    region = D_8011FECC + 0x610;
-    entry = func_8025343C_de(0, region, 0x33, D_800DCD60);
-    D_800DE860_de = entry;
-    D_800DE868 = (u8 *)*entry;
-    func_802A001C_de(*entry, 0, region);
-    *(Copy70 *)(D_800DE868 + 0x18) = *(Copy70 *)(arg0 + 0x5E0);
+    allocationSize = D_8011FECC + 0x610;
+    snapshotHandle = func_8025343C_de(0, allocationSize, 0x33, D_800DCD60);
+    D_800DE860_de = snapshotHandle;
+    D_800DE868 = (u8 *)*snapshotHandle;
+    func_802A001C_de(*snapshotHandle, 0, allocationSize);
+    *(Copy70 *)(D_800DE868 + 0x18) = *(Copy70 *)(player + 0x5E0);
     *(Copy580 *)(D_800DE868 + 0x88) = *(Copy580 *)D_801462C8;
     *(u32 *)(D_800DE868 + 0x608) = *(u32 *)(D_801462C8 + 0x580);
     *(f32 *)(D_800DE868 + 8) = D_801468A0[0];
     *(f32 *)(D_800DE868 + 0xC) = D_801468A0[1];
     *(f32 *)(D_800DE868 + 0x10) = D_801468A0[2];
-    *(u8 **)D_800DE868 = base;
+    *(u8 **)D_800DE868 = snapshotSize;
     *(f32 *)(D_800DE868 + 0x14) = D_801468A0[3];
     *(u8 **)(D_800DE868 + 4) = D_8011FECC;
     func_802BD3A0_de(D_800DE868 + 0x60C, D_800F91F0, D_8011FECC);
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80405DC0_de);
+INCLUDE_ASM("ovl_80400000", Pak_CreateSaveSnapshot);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

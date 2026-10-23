@@ -9,7 +9,7 @@ int func_80429C50_eu_x(void) { func_8041B110_de(0x1DD); func_8041B110_de(0x1DE);
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
 extern int func_80299A08_de(void), func_802999A0_de(s32);
-extern void func_8029973C_de(void), func_8044A370_de(void *, s32), func_804499B0_de(void *, s32, s32);
+extern void func_8029973C_de(void), Items_ResetActorPools(void *, s32), func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32), func_8025476C_de(s32), func_8042E988_de(s32), func_802998A8_de(void);
 extern int func_8025477C_de(void);
 extern u8 D_80145088[], D_8011FE88[];
@@ -22,7 +22,7 @@ s32 func_80429C78_eu_x(void) {
     switch (func_80299A08_de()) {
     case 0x1DD:
         if (func_802999A0_de(0) == 0x16) {
-            func_8044A370_de(D_80145088, 0);
+            Items_ResetActorPools(D_80145088, 0);
             func_804499B0_de(D_80145088 - 0x48, 0, 0);
             func_80286AA8_de(D_8011FE88, 0, 0);
             if (func_8025477C_de() == 0) {

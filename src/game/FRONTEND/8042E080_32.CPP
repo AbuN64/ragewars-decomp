@@ -58,7 +58,7 @@ void func_80434250_de(s32 player, s32 direction) {
 #ifdef NON_MATCHING
 #include "COMMON/NAME.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
-extern s32 func_80404BE8_de(char *, s32, s32 *);
+#include "MENU/PAK/pak_note_search.H"
 extern s32 Pak_DeleteNote(s32, s32);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_CountFreeNotes(s32, s32 *);
@@ -76,7 +76,7 @@ s32 func_80434428_de(s32 channel)
     char name[16];
     s32 note, bytes, slots, status, required, i;
     s32 success = 0;
-    status = func_80404BE8_de(rw_pak_save_name(), channel, &note);
+    status = Pak_FindNoteByName(rw_pak_save_name(), channel, &note);
     if (status == 1) {
         success = Pak_DeleteNote(channel, note) == 0;
     } else {

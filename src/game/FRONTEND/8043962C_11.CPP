@@ -23,7 +23,7 @@ s32 func_804396C0_us_rev1(MenuWidget *tree) {
 
     D_800E5950 = func_8025305C_de(sizeof(*D_800E5950));
     object = &D_80145040.object;
-    func_8044A370_de(object, 0);
+    Items_ResetActorPools(object, 0);
     func_804499B0_de(&D_80145040, 0, 0);
     func_80286AA8_de(&D_8011FE88, 0, 0);
     if (func_8025477C_de() == 0) {

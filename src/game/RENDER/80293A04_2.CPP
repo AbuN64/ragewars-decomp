@@ -83,7 +83,7 @@ void func_80293EB8_de(void *arg0) {
     func_80293334_de(arg0, 0, 0);
     func_80286AA8_de(&D_8011FE88, 0, 0);
     p2 = ((s8 *)(&D_801468A0)) - 0x1818;
-    func_8044A370_de(p2, 1);
+    Items_ResetActorPools(p2, 1);
     ((IntegerState164 *)(p2))->unk_160 = 0;
     func_80296004_de(0);
 }

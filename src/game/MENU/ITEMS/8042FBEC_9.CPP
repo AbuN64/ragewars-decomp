@@ -9,7 +9,7 @@ extern void func_8022EF30_de(Profile *);
 extern Profile D_80102B00[];
 extern Pulse *D_800E5950;
 extern Shared_MenuData D_80145040;
-extern void func_8044A370_de(void *, s32);
+extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32);
 extern s32 func_8025477C_de(void);
@@ -27,7 +27,7 @@ s32 func_8043A3B0_eu(MenuWidget *tree) {
 
     D_800E5950 = func_8025305C_de(sizeof(*D_800E5950));
     object = &D_80145040.object;
-    func_8044A370_de(object, 0);
+    Items_ResetActorPools(object, 0);
     func_804499B0_de(&D_80145040, 0, 0);
     func_80286AA8_de(&D_8011FE88, 0, 0);
     if (func_8025477C_de() == 0) {

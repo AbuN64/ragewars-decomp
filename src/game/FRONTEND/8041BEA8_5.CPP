@@ -56,7 +56,7 @@ extern void func_802A2360_de(void);
 
 extern s32 func_802A0C08_de(void *, const char *, ...);
 
-extern s32 func_80404BE8_de(s32, s32, s32 *);
+extern s32 Pak_FindNoteByName(s32, s32, s32 *);
 
 extern s32 Pak_GetStatus(s32);
 
@@ -212,9 +212,9 @@ void func_8041BE90_de(void) {
             switch (temp_v0_2) { /* irregular */
             case 0:
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-                if ((func_80404BE8_de(((D_800E25A4)[D_80152789]), D_800DF4C0, &sp10) == 0) && (func_80435384_de(D_800DF4C0, &sp14) == 0)) {
+                if ((Pak_FindNoteByName(((D_800E25A4)[D_80152789]), D_800DF4C0, &sp10) == 0) && (func_80435384_de(D_800DF4C0, &sp14) == 0)) {
 #else
-                if ((func_80404BE8_de((D_800D36D4), D_800DF4C0, &sp10) == 0) && (func_80435384_de(D_800DF4C0, &sp14) == 0)) {
+                if ((Pak_FindNoteByName((D_800D36D4), D_800DF4C0, &sp10) == 0) && (func_80435384_de(D_800DF4C0, &sp14) == 0)) {
 #endif
                     var_s1 = sp14 > 0U;
                 }

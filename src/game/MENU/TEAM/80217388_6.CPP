@@ -13,7 +13,7 @@
 /* Runs a player's weapon menu each frame: the menu button (0x8000 of the controller at 0x698) counts
    only while func_8022C460_de allows and the controller is not paused through D_801468F4, which instead
    closes the menu (state 3), as does holding the button while the value at 0x4 is positive; from a
-   closed state holding it clears the pending weapon at 0xCC0, rebuilds the menu through func_802181FC_de
+   closed state holding it clears the pending weapon at 0xCC0, rebuilds the menu through Team_InitWeaponChoices
    and opens it, while releasing it with a weapon pending outside category 8 rebuilds it and marks it
    open; with no category the slot under the cursor from func_80217B3C_de, when it changes, plays sound
    0xD4D for an unowned weapon, forgets an empty slot, moves the cursor at 0x37C and requests the
@@ -53,13 +53,13 @@ void func_80217D74_de(s32 *menu, void *player, s32 unused2) {
     if (menu[0] == 0 || menu[0] == 3) {
         if (!held) {
             if (((ObjectLinks11B8 *)(player))->unk_CC0 != -1 && menu[0x388 / 4] != 8) {
-                func_802181FC_de(menu, 0, player);
+                Team_InitWeaponChoices(menu, 0, player);
                 menu[0] = 1;
             }
             return;
         }
         ((ObjectLinks11B8 *)(player))->unk_CC0 = -1;
-        func_802181FC_de(menu, held, player);
+        Team_InitWeaponChoices(menu, held, player);
         ((ObjectLinks11B8 *)(player))->unk_11B4 = 1;
         menu[0] = 1;
     }
@@ -192,49 +192,49 @@ extern void *D_800D052C[];
 extern f32 D_800C2248_de, D_800C913C_de;
 extern s32 func_8022EB0C_de(void *);
 
-void func_802181FC_de(void *menuIn, s32 contextIn, void *playerIn) {
-    DraftChoiceMenu *menu = (DraftChoiceMenu *)menuIn;
-    DraftChoicePlayer *player = (DraftChoicePlayer *)playerIn;
-    s32 i;
-    s32 j;
+void Team_InitWeaponChoices(void *menuData, s32 context, void *playerData) {
+    DraftChoiceMenu *menu = (DraftChoiceMenu *)menuData;
+    DraftChoicePlayer *player = (DraftChoicePlayer *)playerData;
+    s32 choiceIndex;
+    s32 weaponIndex;
     s32 filter;
-    s32 accept;
+    s32 accepted;
     menu->active = 0;
-    menu->context = (void *)contextIn;
+    menu->context = (void *)context;
     menu->selected = -1;
-    i = 0;
+    choiceIndex = 0;
     do {
-        for (j = 0; j < 22; j++) {
-            if (i == player->map[j].slot) break;
+        for (weaponIndex = 0; weaponIndex < 22; weaponIndex++) {
+            if (choiceIndex == player->map[weaponIndex].slot) break;
         }
-        if (j < 22) {
+        if (weaponIndex < 22) {
             filter = menu->filter;
-            if (filter == -1) accept = 1;
-            else if (filter == 3 || filter == 7) accept = i == filter;
-            else if (filter == 4) accept = i == 4;
+            if (filter == -1) accepted = 1;
+            else if (filter == 3 || filter == 7) accepted = choiceIndex == filter;
+            else if (filter == 4) accepted = choiceIndex == 4;
             else {
-                accept = 0;
-                if (i == filter || i == filter + 1) accept = 1;
+                accepted = 0;
+                if (choiceIndex == filter || choiceIndex == filter + 1) accepted = 1;
             }
-            if (accept) goto accepted;
+            if (accepted) goto accepted;
         }
-        menu->choices[i].m_Weapon = -1;
-        menu->choices[i].enabled = 0;
+        menu->choices[choiceIndex].m_Weapon = -1;
+        menu->choices[choiceIndex].enabled = 0;
         goto tail;
 accepted:
-        menu->choices[i].m_Weapon = j;
-        if (player->selected == j) menu->selected = i;
-        menu->choices[i].resource = D_800D052C[j];
-        if (func_8022EB0C_de(player) != 0) menu->choices[i].enabled = 1;
-        else menu->choices[i].enabled = 0;
-        menu->choices[i].value = 0.0f;
-        menu->choices[i].scale = D_800C913C_de;
-        menu->choices[i].m_Rot = (f32)i * D_800C2248_de;
+        menu->choices[choiceIndex].m_Weapon = weaponIndex;
+        if (player->selected == weaponIndex) menu->selected = choiceIndex;
+        menu->choices[choiceIndex].resource = D_800D052C[weaponIndex];
+        if (func_8022EB0C_de(player) != 0) menu->choices[choiceIndex].enabled = 1;
+        else menu->choices[choiceIndex].enabled = 0;
+        menu->choices[choiceIndex].value = 0.0f;
+        menu->choices[choiceIndex].scale = D_800C913C_de;
+        menu->choices[choiceIndex].m_Rot = (f32)choiceIndex * D_800C2248_de;
 tail:
-        i++;
-    } while (i < 8);
+        choiceIndex++;
+    } while (choiceIndex < 8);
     menu->ready = 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_802181FC_de);
+INCLUDE_ASM("span_1000", Team_InitWeaponChoices);
 #endif

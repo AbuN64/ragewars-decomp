@@ -11,7 +11,7 @@
 #include "TYPES.H"
 
 
-void func_8044A370_de(void *owner, s32 count);
+void Items_ResetActorPools(void *owner, s32 count);
 
 void func_804499B0_de(void *pool, s32 count, s32 force_active);
 
@@ -69,6 +69,6 @@ void func_80293284_de(GameSession *gameSession, s32 target) {
 
 void func_80293334_de(void *owner, s32 count, s32 force_active) {
     GameSession *session = owner;
-    func_8044A370_de(session->players, count);
+    Items_ResetActorPools(session->players, count);
     func_804499B0_de(session->menu, count, force_active);
 }

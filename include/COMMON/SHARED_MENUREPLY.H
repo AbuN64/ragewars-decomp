@@ -16,7 +16,7 @@ void func_802A2360_de(void);
 void func_80419F58_de(void *, int);
 s32 func_8043C308_de(Shared_OptionsScreen *);
 void func_804499B0_de(void *, s32, s32);
-void func_8044A370_de(void *, s32);
+void Items_ResetActorPools(void *, s32);
 void func_80286AA8_de(void *, s32, s32);
 void func_80298368_de(s32);
 

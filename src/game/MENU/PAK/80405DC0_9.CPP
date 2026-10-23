@@ -175,33 +175,33 @@ extern char *D_800D36E0;
 extern u8 *D_8011FECC;
 extern char D_0044FAFC[];
 extern char *D_800D36D8;
-s32 func_80407578_de(void *unused, u8 *menu) {
+s32 Pak_SaveSnapshotAndClose(void *unused, u8 *menu) {
     s32 showPrompt = 1;
-    s32 event;
+    s32 channel;
     u8 *player;
-    u8 *region;
-    s32 result;
-    s32 count;
-    s32 pending;
-    s32 args[3];
+    u8 *snapshotSize;
+    s32 status;
+    s32 freePages;
+    s32 freeNotes;
+    s32 extension[3];
     if (D_8015375C != 0) {
-        event = D_800E28C8;
+        channel = D_800E28C8;
         player = 0;
     } else {
         player = *(u8 **)(menu + 0x1C);
-        event = *(s8 *)(*(u8 **)(menu + 0x20) + 4);
+        channel = *(s8 *)(*(u8 **)(menu + 0x20) + 4);
     }
-    region = D_8011FECC + 0x610;
+    snapshotSize = D_8011FECC + 0x610;
     if (D_8014D4C0_de != 0) {
-        func_804057EC_de((s32)region);
-        result = Pak_GetFreePages(event, &count);
-        if (result == 0) {
-            if (count >= result) {
-                if (Pak_CountFreeNotes(event, &pending) == 0) {
+        func_804057EC_de((s32)snapshotSize);
+        status = Pak_GetFreePages(channel, &freePages);
+        if (status == 0) {
+            if (freePages >= status) {
+                if (Pak_CountFreeNotes(channel, &freeNotes) == 0) {
                     showPrompt = 0;
-                    if (pending != 0) {
-                        if (func_80405454_de(event, (char *)&args[0]) == 0) {
-                            Pak_SaveNote(event, (s32)region, (void *)D_800DE868, D_800D36D8, (char *)&args[0], D_800D36E0);
+                    if (freeNotes != 0) {
+                        if (func_80405454_de(channel, (char *)&extension[0]) == 0) {
+                            Pak_SaveNote(channel, (s32)snapshotSize, (void *)D_800DE868, D_800D36D8, (char *)&extension[0], D_800D36E0);
                         }
                     }
                 }
@@ -228,5 +228,5 @@ s32 func_80407578_de(void *unused, u8 *menu) {
     return 1;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80407578_de);
+INCLUDE_ASM("ovl_80400000", Pak_SaveSnapshotAndClose);
 #endif

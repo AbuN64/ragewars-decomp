@@ -167,7 +167,7 @@ void func_80422B94_de(void) {
         "addu       $a1, $zero, $zero\n"
         "addiu      $v0, $zero, 0x3\n"
         "sw         $zero, 0x0($s0)\n"
-        "jal        func_8044A370_de\n"
+        "jal        Items_ResetActorPools\n"
         "sw        $v0, 0x30($a2)\n"
         "addiu      $a0, $s0, -0x1854\n"
         "addu       $a1, $zero, $zero\n"

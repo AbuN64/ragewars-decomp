@@ -59,7 +59,7 @@ typedef struct GameRecord80445074 {
 
 extern f32 D_800E2798;
 
-void func_80445074_eu(GameRecord80445074 *game) {
+void Items_ResetGameOptions(GameRecord80445074 *game) {
     s32 i;
 
     game->colorR = 0x80;
@@ -96,40 +96,40 @@ void func_80445074_eu(GameRecord80445074 *game) {
     game->pad36[2] = 0;
     game->pad36[3] = 3;
     for (i = 0; i < 8; i++) {
-        SlotSettings80445074 *s = &game->slots[i + 1];
-        s->f78 = 0;
-        s->f79 = 0x86;
-        s->f7A = 0x84;
-        s->f7C = 0;
-        s->f7B = 0;
-        s->f7D = 1;
-        s->f7E = 0;
-        s->f7F = i;
-        s->f80 = 0;
-        s->f82 = 0;
-        s->f83 = 0;
-        s->f81 = 0;
-        s->f94 = 0;
-        s->f95 = 0;
-        RESET_SLOT_80445074((u8 *)s);
+        SlotSettings80445074 *slot = &game->slots[i + 1];
+        slot->f78 = 0;
+        slot->f79 = 0x86;
+        slot->f7A = 0x84;
+        slot->f7C = 0;
+        slot->f7B = 0;
+        slot->f7D = 1;
+        slot->f7E = 0;
+        slot->f7F = i;
+        slot->f80 = 0;
+        slot->f82 = 0;
+        slot->f83 = 0;
+        slot->f81 = 0;
+        slot->f94 = 0;
+        slot->f95 = 0;
+        RESET_SLOT_80445074((u8 *)slot);
     }
     {
-        SlotSettings80445074 *s = &game->slots[0];
-        s->f79 = 0x86;
-        s->f78 = 0;
-        s->f7A = 0x84;
-        s->f7C = 0;
-        s->f7B = 0;
-        s->f7D = 1;
-        s->f7E = 0;
-        s->f7F = 0;
-        s->f80 = 0;
-        s->f82 = 0;
-        s->f83 = 0;
-        s->f81 = 0;
-        s->f94 = 0;
-        s->f95 = 0;
-        RESET_SLOT_80445074((u8 *)s);
+        SlotSettings80445074 *slot = &game->slots[0];
+        slot->f79 = 0x86;
+        slot->f78 = 0;
+        slot->f7A = 0x84;
+        slot->f7C = 0;
+        slot->f7B = 0;
+        slot->f7D = 1;
+        slot->f7E = 0;
+        slot->f7F = 0;
+        slot->f80 = 0;
+        slot->f82 = 0;
+        slot->f83 = 0;
+        slot->f81 = 0;
+        slot->f94 = 0;
+        slot->f95 = 0;
+        RESET_SLOT_80445074((u8 *)slot);
     }
     game->slots[0].f78 = 1;
     game->field1D = 0;
@@ -137,7 +137,7 @@ void func_80445074_eu(GameRecord80445074 *game) {
     game->field0D = 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80445074_eu);
+INCLUDE_ASM("ovl_80400000", Items_ResetGameOptions);
 #endif
 #endif
 

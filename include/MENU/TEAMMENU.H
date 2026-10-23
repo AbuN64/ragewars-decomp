@@ -1701,7 +1701,7 @@ typedef struct StickPlayer { char pad00[0x698]; StickInput *input; } StickPlayer
 
 extern char D_800C2260_de[];
 
-extern void func_802181FC_de(void *, s32, void *);
+extern void Team_InitWeaponChoices(void *, s32, void *);
 
 extern void func_8025E1C4_de(s32);
 #endif

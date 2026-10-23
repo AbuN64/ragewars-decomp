@@ -97,7 +97,7 @@ extern s32 func_80406178_de(Shared_PakMenu *menu, s32 ch, s32 mode);
 
 extern s32 Pak_SaveControllerRecord(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
-extern void func_80407578_de(s32 arg0, Shared_PakMenu *menu, s32 arg2);
+extern void Pak_SaveSnapshotAndClose(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
 extern void Pak_GetNoteGameName(s32 ch, s32 note, s32 *state);
 
@@ -316,7 +316,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             Pak_OpenDialog(D_8014561C, PAK_D0044EEF4, menu->player, menu->owner, D_0044E4D4);
             return 1;
         }
-        func_80407578_de(arg0, menu, arg2);
+        Pak_SaveSnapshotAndClose(arg0, menu, arg2);
         return 1;
     }
     if (D_8015375C != 0) {

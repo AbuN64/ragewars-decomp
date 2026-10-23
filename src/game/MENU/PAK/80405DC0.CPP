@@ -116,7 +116,7 @@ extern char D_0044ED20[];
 
 extern s32 func_804051D4_de(s32 ch);
 
-extern s32 func_80407578_de(void *owner, MenuRecAt24 *menu, void *arg);
+extern s32 Pak_SaveSnapshotAndClose(void *owner, MenuRecAt24 *menu, void *arg);
 
 s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
 
@@ -262,7 +262,7 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             }
             func_80404E28_de(ch);
             if (Pak_DeleteNote(ch, D_8014D4FC) == 0) {
-                func_80407578_de(owner, menu, arg);
+                Pak_SaveSnapshotAndClose(owner, menu, arg);
                 return 1;
             }
             Pak_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);

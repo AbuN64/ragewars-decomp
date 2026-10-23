@@ -143,12 +143,12 @@ extern char D_800C32D4_de[], D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
 extern void func_80253908_de(s32), func_80253838_de(s32, void *);
 extern void *func_8025343C_de(s32, s32, s32, char *);
-void func_8044A370_de(DraftOwnerA370 *owner, s32 count)
+void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
 {
     s32 i;
-    f32 value;
+    f32 initialValue;
     DraftEntryA370 *entry;
-    if (count > 4) count = 4;
+    if (actorCount > 4) actorCount = 4;
     owner->word34 = 0;
     owner->word38 = 0;
     owner->word48 = 0;
@@ -156,11 +156,11 @@ void func_8044A370_de(DraftOwnerA370 *owner, s32 count)
     owner->word38 = 2;
     func_80255CA0_de(&owner->entryList, 0, 4);
     func_80255CA0_de(&owner->spareList, 0, 4);
-    value = D_800C32EC_de;
+    initialValue = D_800C32EC_de;
     for (i = 0; i < 8; i++) {
         entry = &owner->entries[i];
         entry->a = entry->b = entry->c = 0;
-        entry->value = value;
+        entry->value = initialValue;
         entry->lists[0].tail = 0;
         entry->lists[0].count = entry->lists[0].a = entry->lists[0].b = 0;
         entry->lists[1].tail = 0;
@@ -184,11 +184,11 @@ void func_8044A370_de(DraftOwnerA370 *owner, s32 count)
         func_80253838_de(0, owner->smallHandle);
         owner->smallHandle = 0; owner->small = 0; owner->smallCount = 0;
     }
-    if (count) {
-        owner->count = count;
-        owner->handle = func_8025343C_de(0, count * 0xED8, 0x23, D_800C32D4_de);
+    if (actorCount) {
+        owner->count = actorCount;
+        owner->handle = func_8025343C_de(0, actorCount * 0xED8, 0x23, D_800C32D4_de);
         owner->actors = *owner->handle;
-        func_802A001C_de(owner->actors, 0, count * 0xED8);
+        func_802A001C_de(owner->actors, 0, actorCount * 0xED8);
         for (i = 0; i < owner->count; i++) {
             owner->actors[i].index = i;
             func_80255D14_de(&owner->active, &owner->actors[i]);
@@ -205,5 +205,5 @@ void func_8044A370_de(DraftOwnerA370 *owner, s32 count)
     }
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8044A370_de);
+INCLUDE_ASM("ovl_80400000", Items_ResetActorPools);
 #endif

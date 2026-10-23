@@ -301,7 +301,7 @@ extern void func_80404E28_de(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
-extern void func_80405DC0_de(ObjRecAt5DC *);
+extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
 extern u32 func_804057F8_de(s32 offset, void *data, s32 seed);
 static __inline__ char *pakPrompt(s32 *channel) {
     char *result;
@@ -335,7 +335,7 @@ void func_80406F7C_de(Shared_PakMenu *menu) {
     }
     func_80404E28_de(menu->slot->unk4);
     if (Pak_GetStatus(ch) == 0) {
-        func_80405DC0_de(player);
+        Pak_CreateSaveSnapshot(player);
         *(u32 *)(D_8011FECC + D_800DE868 + 0x60C) = func_804057F8_de(D_800DE868, (void *)(D_8011FECC + 0x60C), 11);
         func_80405F48_de(menu);
         return;

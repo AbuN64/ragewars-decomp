@@ -34,7 +34,7 @@ extern void func_8029973C_de(void);
 extern s32 func_802744D4_de(void);
 
 extern void func_802A230C_de(void);
-extern void func_8044A370_de(void *, s32);
+extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32);
 extern void func_8042DEA0_de(void);
@@ -97,7 +97,7 @@ s32 func_80422960_de(void *item, s32 unused1, s32 event) {
                 func_802A230C_de();
                 return 0;
             }
-            func_8044A370_de((u8 *)pause - 0x180C, 0);
+            Items_ResetActorPools((u8 *)pause - 0x180C, 0);
             func_804499B0_de((u8 *)pause - 0x1854, 0, 0);
             func_80286AA8_de(&D_8011FE88, 0, 0);
             func_8042DEA0_de();

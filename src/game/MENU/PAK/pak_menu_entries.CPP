@@ -99,31 +99,31 @@ struct PakMenu {
     f32 openA; /* 0x30 */
     f32 openB; /* 0x34 */
 };
-s32 func_80441214_de(PakMenu *menu, void *ctx) {
-    s32 hold = 0;
+s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
+    s32 closeRequested = 0;
     PakEntry *entry;
     PakEntry *current;
     s32 i;
-    s32 flags;
+    s32 selectionFlags;
     s32 allowRepeat;
-    s32 pad;
+    s32 buttons;
     s32 state;
     PakEntryCallback callback;
     callback = menu->cls->hold;
     if (callback != 0) {
-        hold = callback();
+        closeRequested = callback();
     }
     entry = menu->entries;
     for (i = menu->count - 1; i != -1; i--) {
         callback = entry->cls->update;
         if (callback != 0) {
-            callback(entry, menu, ctx);
+            callback(entry, menu, context);
         }
         entry++;
     }
     current = menu->entries + menu->selected;
     menu->fade += literals_func_8028D244_de;
-    flags = current->flags & 0x400000;
+    selectionFlags = current->flags & 0x400000;
     func_80442B5C_de(menu);
     switch (menu->state) {
     case 0:
@@ -159,7 +159,7 @@ s32 func_80441214_de(PakMenu *menu, void *ctx) {
     if (state >= 3 || state < 0) {
         return 0;
     }
-    if (hold != 0) {
+    if (closeRequested != 0) {
         menu->state = 4;
     }
     if (current->flags & 8) {
@@ -167,14 +167,14 @@ s32 func_80441214_de(PakMenu *menu, void *ctx) {
     }
     allowRepeat = 1;
     if (current->type == 2) {
-        pad = menu->input->buttons;
-        if (pad & 0x20202) {
+        buttons = menu->input->buttons;
+        if (buttons & 0x20202) {
             allowRepeat = 0;
             current->value -= 2;
             if (current->value < 0) {
                 current->value = 0;
             }
-        } else if (pad & 0x40101) {
+        } else if (buttons & 0x40101) {
             current->value += 2;
             allowRepeat = 0;
             if (current->value >= 0x100) {
@@ -182,7 +182,7 @@ s32 func_80441214_de(PakMenu *menu, void *ctx) {
             }
         }
     }
-    if (flags == 0) {
+    if (selectionFlags == 0) {
         if (func_80264388_de(menu->input) != 0) {
             func_804410AC_de(menu, 0x10);
         }
@@ -204,9 +204,9 @@ s32 func_80441214_de(PakMenu *menu, void *ctx) {
         return 0;
     }
     if (func_8026437C_de(menu->input) != 0 ||
-        ((func_80264388_de(menu->input) != 0 || func_802643A0_de(menu->input) != 0) && flags != 0)) {
+        ((func_80264388_de(menu->input) != 0 || func_802643A0_de(menu->input) != 0) && selectionFlags != 0)) {
         callback = current->cls->confirm;
-        if (callback != 0 && callback(current, menu, ctx) == 0) {
+        if (callback != 0 && callback(current, menu, context) == 0) {
             return 0;
         }
         menu->state = 3;
@@ -214,7 +214,7 @@ s32 func_80441214_de(PakMenu *menu, void *ctx) {
     return 0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_80441214_de);
+INCLUDE_ASM("ovl_80400000", Pak_UpdateMenuEntries);
 #endif
 
 

@@ -268,12 +268,12 @@ void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427
 
 /* Tears down every node of one list: walks it from the head, saving the successor at 0x1D4 first,
    skips nodes of kind 2 while the list is not the global one at D_8014561C and that list's flag at
-   0x10 is set, and for each remaining node asks func_80441214_de whether it may go; when it may, calls
+   0x10 is set, and for each remaining node asks Pak_UpdateMenuEntries whether it may go; when it may, calls
    the node's optional handler at 0xC of its table at 0x14, clears the three words at 0xB0, 0xB4 and
    0xBC of the state it owns at 0x20, unlinks it with func_80255ED8_de and releases its handle at 0x8
    through func_80253838_de. */
 extern MessageList D_8014561C;
-extern s32 func_80441214_de(CMenu *, MessageList *);
+extern s32 Pak_UpdateMenuEntries(CMenu *, MessageList *);
 extern void func_80253838_de(void *arg0, void *arg1);
 
 void func_804428F8_de(MessageList *list) {
@@ -285,7 +285,7 @@ void func_804428F8_de(MessageList *list) {
     while (node != 0) {
         next = node->next;
         if (!((node->kind == 2) && (list != &D_8014561C) && (D_8014561C.flag != 0))) {
-            if (func_80441214_de(node, list) != 0) {
+            if (Pak_UpdateMenuEntries(node, list) != 0) {
                 if (node->table->handler != 0) {
                     node->table->handler(node, list);
                 }
