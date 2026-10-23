@@ -118,7 +118,7 @@ static inline s32 testBit(s32 n, u8 *bits) {
 }
 
 /* 341/355 words; remaining: scheduler/allocator ties: base reload before the arg reload (2 sections), bits copy in the bgez delay slot, volume-loop giv order, volumeList giv in $a1 (ROM $s0) */
-void func_8028798C_de(Shared_World *world, void ***handle) {
+void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumeList[128];
     CVector3 position;
     BlockSet *bitSet;
@@ -267,7 +267,7 @@ void func_8028798C_de(Shared_World *world, void ***handle) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8028798C_de);
+INCLUDE_ASM("span_1000", Engine_BuildPlacedInstances);
 #endif
 
 #include "COMMON/WORLD.H"
