@@ -29,7 +29,7 @@ extern void func_80209E80_de(CloseAttackBrain *);
 extern s32 func_8020D1CC_de(char *, s32, s32);
 
 
-extern void Nav_SteerAlongRoute(CloseAttackBrain *),func_80208AAC_de(CloseAttackBrain *),func_8020FA10_de(CloseAttackBrain *);
+extern void Nav_SteerAlongRoute(CloseAttackBrain *),func_80208AAC_de(CloseAttackBrain *),Nav_SelectPlayerState(CloseAttackBrain *);
 extern struct {char pad[0xC];unsigned short flags;} *func_8020C994_de(char *,int);
 extern float D_800C22D0_eu[];
 
@@ -75,7 +75,7 @@ void func_80211490_eu(CloseAttackActor *actor) {
         route = temp_s0->brain->route;
         if (func_8020C994_de(routes, route)->flags & 0x400) {
             brain->target = 0;
-            func_8020FA10_de(brain);
+            Nav_SelectPlayerState(brain);
             return;
         }
         if (brain->visible != 0) {

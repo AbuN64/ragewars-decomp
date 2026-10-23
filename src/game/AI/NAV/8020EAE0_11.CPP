@@ -1,35 +1,6 @@
 #include "include_asm.h"
 
 #ifdef NON_MATCHING
-/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
-typedef int M2C_UNK;
-typedef signed char M2C_UNK8;
-typedef short M2C_UNK16;
-typedef int M2C_UNK32;
-typedef long long M2C_UNK64;
-#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
-#define M2C_BITWISE(type, expr) ((type)(expr))
-#define M2C_LWL(expr) (expr)
-#define M2C_FIRST3BYTES(expr) (expr)
-#define M2C_UNALIGNED32(expr) (expr)
-#define M2C_ERROR(desc) (0)
-#define M2C_TRAP_IF(cond) (0)
-#define M2C_BREAK(...) (0)
-#define M2C_SYNC(...) (0)
-#define M2C_DCACHE_CLEAN(addr) (0)
-#define M2C_DCACHE_INVALIDATE(addr) (0)
-#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
-#define M2C_ICACHE_INVALIDATE(addr) (0)
-#define M2C_PREFETCH(addr) (0)
-#define M2C_PREFETCH_STORE(addr) (0)
-#define GLUE_F64(a, b) (0.0)
-#define MULT_HI(a, b) (0)
-#define MULTU_HI(a, b) (0)
 #include "COMMON/BALLISTICPARAMS.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/TRIPLE.H"
@@ -46,132 +17,107 @@ s32 func_8022AAD4_de(void *, s16);
 s32 func_8022AB20_de(void *, s16);
 s32 func_8022AC00_de(void *);
 s32 func_8022ACB8_de(void *, s32, s32);
-extern s32 D_801468A0;
+extern CGameStatus D_801468A0;
 
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x30, 0x34], gap at: 0x28. */
-s32 func_8020FA10_de(void *brain) {
-    s32 var_a1;
-    f32 temp_f20;
-    f32 temp_f21;
-    f32 var_f20;
-    s16 temp_s2;
-    s16 temp_s3;
-    s16 temp_s4;
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 temp_v0;
-    s32 temp_v1;
-    s32 temp_v1_2;
-    s32 var_s0;
-    s32 var_v0;
-    s32 var_v0_2;
-    void *temp_a0;
-    void *temp_a0_2;
-    void *temp_a0_3;
-    void *temp_v0_2;
-    void *temp_v0_3;
-    void *temp_v1_3;
+/* 55/232 aligned edits; remaining: branch layout, constant bases and scheduling. */
+/* Choose the next AI state from game objectives, supplies and the current target. */
+s32 Nav_SelectPlayerState(AiController *controller) {
+    s32 nextState;
+    s32 health;
+    s32 count;
+    s32 capacity;
+    s32 ammoType;
+    s32 threshold;
+    s32 state;
+    f32 healthPercent;
+    f32 ammoPercent;
+    s32 ammo0;
+    s32 ammo1;
+    s32 ammo2;
+    Player *carrier;
 
-    temp_a0 = M2C_FIELD(brain, void **, 0);
-    temp_s0 = (s32) M2C_FIELD(temp_a0, s32 *, 0x5E4) >> 8;
-    temp_a0_2 = M2C_FIELD(brain, void **, 0);
-    temp_f20 = 100.0f;
-    temp_f21 = ((f32) temp_s0 / (f32) (func_8022AC00_de(temp_a0) >> 8)) * temp_f20;
-    temp_a0_3 = M2C_FIELD(brain, void **, 0);
-    temp_s0_2 = func_8022AB20_de(temp_a0_2, M2C_FIELD(temp_a0_2, s16 *, 0x62E));
-    temp_v0 = func_8022ACB8_de(M2C_FIELD(brain, void **, 0), func_8022AAD4_de(temp_a0_3, M2C_FIELD(temp_a0_3, s16 *, 0x62E)), 1);
-    if ((temp_v0 != 0) && (temp_s0_2 != -1)) {
-        var_f20 = ((f32) temp_s0_2 / (f32) temp_v0) * temp_f20;
+    health = controller->player->health >> 8;
+    healthPercent = (f32)health / (f32)(func_8022AC00_de(controller->player) >> 8) * 100.0f;
+    count = func_8022AB20_de(controller->player, controller->player->selectedAction);
+    ammoType = func_8022AAD4_de(controller->player, controller->player->selectedAction);
+    capacity = func_8022ACB8_de(controller->player, ammoType, 1);
+    if (capacity != 0 && count != -1) {
+        ammoPercent = (f32)count / (f32)capacity * 100.0f;
     } else {
-        var_f20 = 100.0f;
+        ammoPercent = 100.0f;
     }
-    temp_v0_2 = M2C_FIELD(brain, void **, 0);
-    temp_s2 = M2C_FIELD(temp_v0_2, s16 *, 0x5F4);
-    temp_s3 = M2C_FIELD(temp_v0_2, s16 *, 0x5F6);
-    temp_s4 = M2C_FIELD(temp_v0_2, s16 *, 0x5F8);
-    temp_v0_3 = func_8022A83C_de(&D_80145040);
-    if ((temp_v0_3 != NULL) && (D_80145040.game.counters.m_bCTFOn != 0)) {
-        if (temp_v0_3 == M2C_FIELD(brain, void **, 0)) {
-            var_a1 = 0xA;
-            goto block_48;
+    ammo0 = controller->player->ammo[0];
+    ammo1 = controller->player->ammo[1];
+    ammo2 = controller->player->ammo[2];
+    carrier = func_8022A83C_de((char *)&D_80145040);
+    if (carrier != 0 && D_80145040.game.counters.m_bCTFOn != 0) {
+        if (carrier == controller->player) {
+            nextState = 10;
+            goto changeState;
         }
-        var_a1 = 1;
-        if (M2C_FIELD(brain, s32 *, 0x64) == 0) {
-            goto block_9;
+        if (controller->target != 0) {
+            nextState = 1;
+            goto changeState;
         }
-        goto block_48;
     }
-block_9:
-    if ((M2C_FIELD(&D_801468A0, s32 *, 0x54) != 0) && (M2C_FIELD(M2C_FIELD(M2C_FIELD(brain, void **, 0), void **, 0x5D8), u8 *, 0x8F) != 0)) {
-        if (M2C_FIELD(&D_801468A0, s32 *, 0x68) > 0) {
-            if (M2C_FIELD(brain, s32 *, 0x21C) != 2) {
-                func_80209874_de(brain, 2);
-                M2C_FIELD(brain, s32 *, 0x2F4) = 1;
-                M2C_FIELD(brain, s32 *, 0x2F8) = 1;
-                return 1;
+    if (D_801468A0.m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
+        if (D_801468A0.restrictionActive > 0) {
+            if (controller->state != 2) {
+                func_80209874_de(controller, 2);
+                controller->unk2F4 = 1;
+                controller->unk2F8 = 1;
             }
-            goto block_49;
+            return 1;
         }
-        var_a1 = 0xB;
-        goto block_48;
+        nextState = 11;
+        goto changeState;
     }
-    var_s0 = (s32) ((1.0f - func_80209B64_de(brain)) * 80.0f);
-    if ((D_80146938 != 0) && (M2C_FIELD(M2C_FIELD(M2C_FIELD(brain, void **, 0), void **, 0x5D8), u8 *, 0x94) != 0)) {
-        var_s0 = 0;
+    threshold = (s32)((1.0f - func_80209B64_de(controller)) * 80.0f);
+    if (D_80146938 != 0 && controller->player->profile->enabled != 0) {
+        threshold = 0;
     }
-    if (func_80209AD8_de(brain) == 0) {
-        var_v0 = 1;
-        if (temp_f21 < (f32) var_s0) {
-            goto block_20;
+    if (func_80209AD8_de(controller) == 0 && healthPercent < (f32)threshold) {
+        controller->routeState = 1;
+        nextState = 8;
+        goto changeState;
+    }
+    if (func_80209AD8_de(controller) == 0 && ammoPercent < 10.0f) {
+        controller->routeState = func_8020F5A4_de(controller);
+        nextState = 8;
+        goto changeState;
+    }
+    state = controller->state;
+    if ((state == 3 || state == 4 || state == 13) && ammo0 < 10 && ammo1 < 10 && ammo2 <= 0) {
+        controller->routeState = 4;
+        nextState = 8;
+        goto changeState;
+    }
+    if (func_80209A94_de(controller) != 0 && controller->target == 0) {
+        nextState = 2;
+        goto changeState;
+    }
+    if (func_8020EA10_de(controller) != 0 && (state = controller->state) != 9) {
+        if (state == 1 || state == 2) {
+            nextState = 9;
+            goto changeState;
         }
-    }
-    if ((func_80209AD8_de(brain) == 0) && (var_f20 < 10.0f)) {
-        M2C_FIELD(brain, s32 *, 0xBC) = func_8020F5A4_de(brain);
-        goto block_21;
-    }
-    temp_v1 = M2C_FIELD(brain, s32 *, 0x21C);
-    var_v0_2 = temp_s2 < 0xA;
-    if ((((u32) (temp_v1 - 3) >= 2U) && (var_v0_2 = temp_s2 < 0xA, (temp_v1 != 0xD))) || (var_v0_2 == 0) || (temp_s3 >= 0xA) || (var_v0 = 4, (temp_s4 > 0))) {
-        if ((func_80209A94_de(brain) != 0) && (M2C_FIELD(brain, s32 *, 0x64) == 0)) {
-            goto block_32;
-        }
-        if ((func_8020EA10_de(brain) != 0) && (temp_v1_2 = M2C_FIELD(brain, s32 *, 0x21C), (temp_v1_2 != 9))) {
-            if ((u32) (temp_v1_2 - 1) < 2U) {
-                var_a1 = 9;
-                goto block_48;
-            }
-        } else if ((func_80209AD8_de(brain) == 0) || !((f32) var_s0 < temp_f21) || !(10.0f < var_f20)) {
-            if ((func_80209A94_de(brain) == 0) && (func_80209AD8_de(brain) == 0) && (M2C_FIELD(brain, s32 *, 0x64) != 0)) {
-                temp_v1_3 = M2C_FIELD(M2C_FIELD(brain, void **, 0), void **, 0x5D8);
-                if (M2C_FIELD(temp_v1_3, u8 *, 0x94) != 0) {
-                    if (M2C_FIELD(temp_v1_3, s8 *, 0x80) == 0xC) {
-                        var_a1 = 0xD;
-                    } else {
-                        goto block_47;
-                    }
-                } else {
-block_47:
-                    var_a1 = 1;
-                }
-                goto block_48;
-            }
+    } else if (func_80209AD8_de(controller) != 0 && (f32)threshold < healthPercent && 10.0f < ammoPercent) {
+        nextState = 2;
+        goto changeState;
+    } else if (func_80209A94_de(controller) == 0 && func_80209AD8_de(controller) == 0 && controller->target != 0) {
+        if (controller->player->profile->enabled != 0 && controller->player->profile->character == 12) {
+            nextState = 13;
         } else {
-block_32:
-            var_a1 = 2;
-            goto block_48;
+            nextState = 1;
         }
-    } else {
-block_20:
-        M2C_FIELD(brain, s32 *, 0xBC) = var_v0;
-block_21:
-        var_a1 = 8;
-block_48:
-        func_80209874_de(brain, var_a1);
-block_49:
+        goto changeState;
     }
+    return 1;
+
+changeState:
+    func_80209874_de(controller, nextState);
     return 1;
 }
 #else
-INCLUDE_ASM("span_1000", func_8020FA10_de);
+INCLUDE_ASM("span_1000", Nav_SelectPlayerState);
 #endif

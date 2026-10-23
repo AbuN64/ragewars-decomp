@@ -48,7 +48,7 @@ extern void func_80211020_de(void *arg0);
 
 extern void func_80208AAC_de(void *arg0);
 
-extern void func_8020FA10_de(void *arg0);
+extern void Nav_SelectPlayerState(void *arg0);
 
 
 extern void *func_8022A83C_de(char *);
@@ -197,7 +197,7 @@ void func_80212A7C_de(Shared_Actor *arg0)
     flags = (state->player->movementFlags & 0x3000) != 0;
     if (state->current == state->mode &&
         !flags) {
-        func_8020FA10_de(state);
+        Nav_SelectPlayerState(state);
     }
 }
 
