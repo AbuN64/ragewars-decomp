@@ -715,13 +715,27 @@ extern s32 D_801468F4, D_800CE474[2];
 extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 extern void func_80222BE8_de(void *, s32, s32);
+/* 7 aligned edits of 172 words (branch offsets; the kind store is merged after the 3/7 select); behave same 10/10. */
+static inline void announce(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)
+{
+    u8 **text = pickup->text;
+    s32 sound = pickup->sound;
+    s32 event = pickup->event;
+    if (player->ui) {
+        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) func_80237E80_de(&D_80145088, player->ui, *text);
+    }
+    if (sound) func_8025DE54_de(sound, player->position, 0, -1);
+    if (event) func_8025E11C_de(event);
+}
 s32 func_802AC66C_de(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)
 {
     s32 free3 = 1, free7 = 1, i;
-    u8 **text;
-    s16 sound, event;
-    if (player->choices[pickup->index].kind == -1 ||
-        (player->config->mode && D_801468F4 && player->id != D_800CE474[0] && player->id != D_800CE474[1])) {
+    s32 skip = 0;
+    if (player->choices[pickup->index].kind != -1 &&
+        (!player->config->mode || !D_801468F4 || player->id == D_800CE474[0] || player->id == D_800CE474[1])) {
+        announce(player, pickup);
+    } else {
         for (i = 0; i < 22; i++) {
             if (player->choices[i].kind == 3) free3 = 0;
             else if (player->choices[i].kind == 7) free7 = 0;
@@ -730,29 +744,10 @@ s32 func_802AC66C_de(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)
         if (!free3 && !free7) return 0;
         if (!player->config->mode || !D_801468F4) {
             player->selection = free3 ? 3 : 7;
-            if (free3) player->choices[pickup->index].kind = 3;
-            else player->choices[pickup->index].kind = 7;
+            player->choices[pickup->index].kind = free3 ? 3 : 7;
         }
-        text = pickup->text;
-        sound = pickup->sound;
-        event = pickup->event;
-        if (player->ui) {
-            func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-            if (text) func_80237E80_de(&D_80145088, player->ui, *text);
-        }
-        if (sound) func_8025DE54_de(sound, player->position, 0, -1);
-        if (event) func_8025E11C_de(event);
-        func_80222BE8_de(player, pickup->arg1, pickup->arg2);
-    } else {
-        text = pickup->text;
-        sound = pickup->sound;
-        event = pickup->event;
-        if (player->ui) {
-            func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-            if (text) func_80237E80_de(&D_80145088, player->ui, *text);
-        }
-        if (sound) func_8025DE54_de(sound, player->position, 0, -1);
-        if (event) func_8025E11C_de(event);
+        announce(player, pickup);
+        if (!skip) func_80222BE8_de(player, pickup->arg1, pickup->arg2);
     }
     return 1;
 }
