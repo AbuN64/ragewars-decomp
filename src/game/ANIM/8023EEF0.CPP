@@ -8,7 +8,6 @@
 #include "TYPES.H"
 
 #if !(defined(VERSION_EU))
-#ifdef NON_MATCHING
 extern f32 func_8024D398_de(void *);
 extern f32 func_8024E420_de(void *);
 extern f32 Particle_GetActorHeight(void *);
@@ -18,8 +17,7 @@ extern s32 func_802AB400_de(void *, void *);
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern s32 func_8023E8D4_de(void *, void *, s32);
 extern s32 func_8023E178_de(void *, CVector3 *, f32, f32, f32, s32, void *, s32);
-/* NON_MATCHING: 2/335 aligned word edits remain: zero load source/order.
- * Hand C from us-rev1 8023EEF0..8023F42C.
+/* Hand C from us-rev1 8023EEF0..8023F42C.
  * The query is read-only (0x30 bytes); contact storage is local (0xDC).
  * Floor/ceiling crossings use opposite signed height tests. Their normal
  * constants are -1/+1 in all five ROMs (us-rev1 ROM 0xC93D0/0xC93D4). */
@@ -49,7 +47,6 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
     f32 time;
     f32 deltaX;
     f32 deltaZ;
-    f32 planeZero;
     s32 special;
 
     entityX = entity->position0.x;
@@ -100,45 +97,44 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
     ownerZ = owner->position0.z;
     radius = Anim_GetContactRadius(sweep, radius);
     if (sweep->flag != 0) {
-        planeZero = normal.x;
-        if (motion->velocity.y != planeZero) {
-        if (sweep->top1 <= bottom && bottom < sweep->top2) {
-            time = (bottom - sweep->top1) / motion->velocity.y;
-            if (time < motion->blend) {
-                func_80271FC8_de(&point, time, &owner->position0, &motion->end);
-                deltaX = entityX - point.x;
-                deltaZ = entityZ - point.z;
-                if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
-                    contact.kind = 7;
-                    contact.point = point;
-                    contact.normal.x = planeZero;
-                    contact.normal.z = planeZero;
-                    contact.normal.y = -1.0f;
-                    func_8023E8D4_de(motion, &contact, 1);
-                }
-            }
-        }
-        if (top <= sweep->bottom1 && sweep->bottom2 < top) {
-            time = (top - sweep->bottom1) / motion->velocity.y;
-            if (time < motion->blend) {
-                func_80271FC8_de(&point, time, &owner->position0, &motion->end);
-                deltaX = entityX - point.x;
-                deltaZ = entityZ - point.z;
-                if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
-                    if (surface->enabled == 1) {
-                        contact.kind = surface->enabled;
-                    } else {
-                        contact.kind = Anim_GetSurfaceKind(entity);
+        if (motion->velocity.y != 0.0f) {
+            if (sweep->top1 <= bottom && bottom < sweep->top2) {
+                time = (bottom - sweep->top1) / motion->velocity.y;
+                if (time < motion->blend) {
+                    func_80271FC8_de(&point, time, &owner->position0, &motion->end);
+                    deltaX = entityX - point.x;
+                    deltaZ = entityZ - point.z;
+                    if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
+                        contact.kind = 7;
+                        contact.point = point;
+                        contact.normal.x = 0.0f;
+                        contact.normal.z = 0.0f;
+                        contact.normal.y = -1.0f;
+                        func_8023E8D4_de(motion, &contact, 1);
                     }
-                    contact.point = point;
-                    contact.normal.x = 0.0f;
-                    contact.normal.z = 0.0f;
-                    contact.normal.y = 1.0f;
-                    func_8023E8D4_de(motion, &contact, 1);
+                }
+            }
+            if (top <= sweep->bottom1 && sweep->bottom2 < top) {
+                time = (top - sweep->bottom1) / motion->velocity.y;
+                if (time < motion->blend) {
+                    func_80271FC8_de(&point, time, &owner->position0, &motion->end);
+                    deltaX = entityX - point.x;
+                    deltaZ = entityZ - point.z;
+                    if (deltaX * deltaX + deltaZ * deltaZ < radius * radius) {
+                        if (surface->enabled == 1) {
+                            contact.kind = surface->enabled;
+                        } else {
+                            contact.kind = Anim_GetSurfaceKind(entity);
+                        }
+                        contact.point = point;
+                        contact.normal.x = 0.0f;
+                        contact.normal.z = 0.0f;
+                        contact.normal.y = 1.0f;
+                        func_8023E8D4_de(motion, &contact, 1);
+                    }
                 }
             }
         }
-    }
     }
     contact.kind = special != 0 ? 7 : surface->enabled;
     func_8023E178_de(motion, &entity->position0, radius,
@@ -157,10 +153,6 @@ void Anim_TestEntityContact(ActorMotion *motion, struct Query *sweep, LevelActor
         }
     }
 }
-
-#else
-INCLUDE_ASM("span_1000", Anim_TestEntityContact);
-#endif
 #endif
 #if defined(VERSION_EU)
 INCLUDE_ASM("span_1000", func_8023EF14);

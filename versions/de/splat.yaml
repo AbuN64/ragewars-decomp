@@ -3566,7 +3566,7 @@ segments:
       - [0xC42C8, rodata, data_800C/literals_func_8023E6EC_de]
       - [0xC42D0, rodata, data_800C/D_8023E8D4_C93C0]
       - [0xC42DC, data, data_800C/rodata_unresolved_800C36DC]
-      - [0xC42E0, rodata, data_800C/D_8023EF00_C93D0]
+      - [0xC42E0, rodata, data_800C/literals_Anim_TestEntityContact]
       - [0xC42E8, rodata, data_800C/rodata_unresolved_800C36E8]
       - [0xC42F0, rodata, data_800C/literals_func_8023F750_de]
       - [0xC4308, rodata, data_800C/literals_func_8023FD18_de]

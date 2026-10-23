@@ -3576,7 +3576,7 @@ segments:
       - [0xC45B8, rodata, data_800C/literals_func_8023E6EC_de]
       - [0xC45C0, rodata, data_800C/D_8023E8D4_C93C0]
       - [0xC45CC, data, data_800C/rodata_unresolved_800C39CC]
-      - [0xC45D0, rodata, data_800C/D_8023EF00_C93D0]
+      - [0xC45D0, rodata, data_800C/literals_Anim_TestEntityContact]
       - [0xC45D8, rodata, data_800C/rodata_unresolved_800C39D8]
       - [0xC45E0, rodata, data_800C/literals_func_8023F750_de]
       - [0xC45F8, rodata, data_800C/literals_func_8023FD18_de]
