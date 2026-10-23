@@ -11,7 +11,7 @@
 /* Selects the video mode and applies framebuffer and display configuration; the mode-to-word-array cast preserves configuration-store and mode-load scheduling. */
 s32 func_80265350_de(); /* extern */
                                  /* extern */
-void func_8040C484_de(s32, s32, s32, s32, s32, s32); /* extern */
+void Frontend_SetVideoModeAndViewports(s32, s32, s32, s32, s32, s32); /* extern */
 extern s32 D_80000300;
 extern s32 D_800CC374;
 extern s32 D_800E28D0,D_800E28D4;
@@ -34,7 +34,7 @@ static inline void set_config(int a,int b,int c,int d,int e) {
 static inline void set_mode(s32 *var_s0) {
         D_800E28D0 = (s32) var_s0[0];
         D_800E28D4 = (s32) var_s0[1];
-        func_8040C484_de(var_s0[0], var_s0[1], var_s0[2], var_s0[3], var_s0[4], var_s0[5]);
+        Frontend_SetVideoModeAndViewports(var_s0[0], var_s0[1], var_s0[2], var_s0[3], var_s0[4], var_s0[5]);
 }
 void func_8040BBB0_de(void) {
     char *var_v0;

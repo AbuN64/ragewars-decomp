@@ -137,23 +137,49 @@ extern s32 D_800E28D8;
 s32 func_8040C474_de(void) {
     return D_800E28D8;
 }
-/* FAKEMATCH: retains inherited numeric field accesses because a verified live shared layout for those accesses is not available; the old access widths and evaluation order are preserved. */
-/* Selects the video mode and resets viewport dimensions on the linked objects. */
-extern int D_80000300,D_800CC374;
-extern unsigned short D_800DE9FE[],D_8014D500;
-extern NodeRecAt2A8 D_80141008;
-extern int D_800E28D0,D_800E28D4;
-extern void func_8040BDB8_de(unsigned,int,int,int,int,int);
-void func_8040C484_de(unsigned width,int a1,int a2,int a3,int a4,int a5) {
- int flags=0,region=0; NodeRecAt2A8 *node; float h;
- switch(D_80000300) {case 0:region=1;break;case 1:break;case 2:region=2;break;}
- if(width>320) flags|=4;
- if(D_800CC374) flags|=2;
- if(width>320) flags|=1;
- D_8014D500=*(unsigned short *)((char *)D_800DE9FE+flags*4+region*32);
- func_8040BDB8_de(width,a1,a2,a3,a4,a5);
- node=&D_80141008;
- if(node) {node->width=D_800E28D0;h=D_800E28D4;node->x=0;node->y=0;node->height=h;}
- node=*(NodeRecAt2A8 **)((char *)node-32);
- while(node) {node->x=0;node->y=0;node->width=D_800E28D0;node->height=D_800E28D4;node=node->next;}
+/* Selects the video mode and resets viewport dimensions on the linked views. */
+extern int D_80000300, D_800CC374;
+extern unsigned int VideoModeIds[3][8];
+extern unsigned short D_8014D500;
+struct VideoViewList {
+    NodeRecAt2A8 *head;
+    char reserved[0x1C];
+    NodeRecAt2A8 defaultView;
+};
+extern struct VideoViewList D_80140FE8_de;
+extern int D_800E28D0, D_800E28D4;
+extern void func_8040BDB8_de(unsigned, int, int, int, int, int);
+
+void Frontend_SetVideoModeAndViewports(unsigned width, int a1, int a2, int a3, int a4, int a5) {
+    int flags = 0;
+    int region = 0;
+    NodeRecAt2A8 *node;
+    float height;
+
+    switch (D_80000300) {
+    case 0: region = 1; break;
+    case 1: break;
+    case 2: region = 2; break;
+    }
+    if (width > 320) flags |= 4;
+    if (D_800CC374) flags |= 2;
+    if (width > 320) flags |= 1;
+    D_8014D500 = VideoModeIds[region][flags];
+    func_8040BDB8_de(width, a1, a2, a3, a4, a5);
+    node = &D_80140FE8_de.defaultView;
+    if (node) {
+        node->width = D_800E28D0;
+        height = D_800E28D4;
+        node->x = 0;
+        node->y = 0;
+        node->height = height;
+    }
+    node = D_80140FE8_de.head;
+    while (node) {
+        node->x = 0;
+        node->y = 0;
+        node->width = D_800E28D0;
+        node->height = D_800E28D4;
+        node = node->next;
+    }
 }
