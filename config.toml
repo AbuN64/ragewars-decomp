@@ -5,6 +5,8 @@ toolchain = "gcc-2.8.1-sn64"
 names_from = "us-rev1"
 cppflags = ["-DF3DEX_GBI_2", "-Isrc/sdk/libgcc"]
 readme_map = "us-rev1"
+readme_map_link = "https://itsmo.me/attic/cake-unbake/"
+readme_map_repo = "ragewars-decomp"
 [non_matching]
 
 
