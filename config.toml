@@ -163,3 +163,11 @@ cflags = []
 [file."src/sdk/libsn/802022E0_2.CPP"]
 toolchain = "gcc-2.8.1-sn64"
 cflags = []
+[file."src/sdk/libultra/libc/802C6420.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+[file."src/sdk/libultra/libc/802C5320.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
