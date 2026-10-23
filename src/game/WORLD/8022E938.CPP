@@ -51,7 +51,7 @@ extern void func_80218464_de(void *arg0);
 
 extern void func_80226708_de(void *arg0);
 
-void func_8022E948_de(Player *arg0) {
+void func_8022E948_de(Player *player) {
     u8 *ptr;
 
     ptr = &D_801462E5;
@@ -59,63 +59,63 @@ void func_8022E948_de(Player *arg0) {
         return;
     }
     if (*(s32 *)(ptr - 0x55) != 0) {
-        if (arg0->inputFlags & 0x20) {
+        if (player->inputFlags & 0x20) {
             return;
         }
     }
-    if (!(arg0->actionFlags & 0x800)) {
+    if (!(player->actionFlags & 0x800)) {
         return;
     }
-    if (arg0->toggle != 0) {
-        arg0->toggle = 0;
+    if (player->toggle != 0) {
+        player->toggle = 0;
         return;
     }
-    arg0->toggle = 1;
+    player->toggle = 1;
 }
 
-void func_8022E9A8_de(Player *arg0) {
+void func_8022E9A8_de(Player *player) {
     u8 *ptr;
     WeaponInfo *temp_v0;
-    s16 temp_a1;
+    s16 alternate;
     u16 temp_a1u;
 
     ptr = &D_801462E5;
     if (*ptr != 0) {
         return;
     }
-    if (arg0->weaponLocked != 0) {
-        if (arg0->weaponBusy != 0) {
+    if (player->weaponLocked != 0) {
+        if (player->weaponBusy != 0) {
             return;
         }
     }
     if (*(s32 *)(ptr - 0x55) != 0) {
-        if (arg0->inputFlags & 0x20) {
+        if (player->inputFlags & 0x20) {
             return;
         }
     }
-    if (!(arg0->actionFlags & 0x200)) {
+    if (!(player->actionFlags & 0x200)) {
         return;
     }
-    temp_v0 = D_800D052C[arg0->weapon];
-    temp_a1 = temp_v0->alternate;
+    temp_v0 = D_800D052C[player->weapon];
+    alternate = temp_v0->alternate;
     temp_a1u = (u16)temp_v0->alternate;
-    if (temp_a1 == -1) {
+    if (alternate == -1) {
         return;
     }
-    if (arg0->actions[temp_a1][0] != 0) {
-        arg0->weapon = (s16)temp_a1u;
+    if (player->actions[alternate][0] != 0) {
+        player->weapon = (s16)temp_a1u;
     }
 }
 
-void func_8022EA3C_de(void *arg0, CVector3 *arg1) {
+void func_8022EA3C_de(void *surface, CVector3 *arg1) {
     f32 first;
     f32 amount;
 
-    if (arg0 != 0 && arg1 != 0 &&
-        (((Shared_Func80243A80Collision *)arg0)->flags & 0x40)) {
-        first = func_8027525C_de(arg0,
+    if (surface != 0 && arg1 != 0 &&
+        (((Shared_Func80243A80Collision *)surface)->flags & 0x40)) {
+        first = func_8027525C_de(surface,
             arg1->x, arg1->z);
-        amount = (f32)(s32)(first - func_80275DD4_de(arg0,
+        amount = (f32)(s32)(first - func_80275DD4_de(surface,
             arg1->x, arg1->z));
         if (amount < D_800C2E24_de) {
             func_8025E440_de(D_800C2E2C_de - (amount * D_800C2E28_de));
@@ -130,7 +130,7 @@ void func_8022EB04_de(void) {
 }
 
 /** Test whether an actor satisfies the condition selected by an entry type. */
-s32 func_8022EB0C_de(void *arg0, s32 arg1) {
+s32 func_8022EB0C_de(void *player, s32 arg1) {
     void *entry;
     s16 *condition;
     char *indexed;
@@ -182,15 +182,15 @@ s32 func_8022EB0C_de(void *arg0, s32 arg1) {
     sw_arg1_15:
         condition = ((WeaponInfo *)(entry))->weaponClass;
         offset = condition[0] * 2;
-        indexed = arg0;
+        indexed = player;
         indexed += offset;
-        return ((Shared_ActorView *)arg0)->ammo[condition[0]] >= condition[3];
+        return ((Shared_ActorView *)player)->ammo[condition[0]] >= condition[3];
     sw_arg1_3:
-        return ((Shared_ActorView *)arg0)->ammo[0] >= 3;
+        return ((Shared_ActorView *)player)->ammo[0] >= 3;
     sw_arg1_4:
-        return ((Shared_ActorView *)arg0)->ammo[0] >= 5;
+        return ((Shared_ActorView *)player)->ammo[0] >= 5;
     sw_arg1_12:
-        if (((Shared_ActorView *)arg0)->ammo[2] == 0) {
+        if (((Shared_ActorView *)player)->ammo[2] == 0) {
             goto check_external;
         }
     sw_arg1_0:
@@ -200,7 +200,7 @@ s32 func_8022EB0C_de(void *arg0, s32 arg1) {
     sw_arg1_21:
         return 1;
     check_external:
-        return func_80283228_de(&D_8011D8D0, (s32)arg0);
+        return func_80283228_de(&D_8011D8D0, (s32)player);
     sw_arg1_default:
         return 0;
     
@@ -212,9 +212,9 @@ int func_8022EBC4_de(void) {
     return 0;
 }
 
-s32 func_8022EBD4_de(void *arg0, LevelActor *arg1) {
-    if (arg1->position1.y <= 0.0f && func_8024E62C_de(arg1) != 0) {
-        func_802227F4_de(arg0, arg1, 2);
+s32 func_8022EBD4_de(void *player, LevelActor *actor) {
+    if (actor->position1.y <= 0.0f && func_8024E62C_de(actor) != 0) {
+        func_802227F4_de(player, actor, 2);
         return 1;
     }
     return 0;
@@ -291,17 +291,17 @@ void func_8022ED48_de(ActorRecAt16E0 *arg0)
   arg0->unk_0x086C = 1;
 }
 
-void func_8022EDA4_de(ResourceLoadState *arg0) {
-    s32 temp_a1;
+void func_8022EDA4_de(ResourceLoadState *resourceLoadState) {
+    s32 handle;
 
     func_80264854_de(0);
     func_80253908_de(0);
-    temp_a1 = arg0->handle;
-    if (temp_a1 != 0) {
-        func_80253838_de(0, temp_a1);
-        arg0->handle = 0;
-        arg0->state4 = 0;
-        arg0->state8 = 0;
+    handle = resourceLoadState->handle;
+    if (handle != 0) {
+        func_80253838_de(0, handle);
+        resourceLoadState->handle = 0;
+        resourceLoadState->state4 = 0;
+        resourceLoadState->state8 = 0;
     }
 }
 
@@ -309,52 +309,52 @@ void func_8022EDA4_de(ResourceLoadState *arg0) {
 void func_8022EDF4_de(void) {
 }
 
-void func_8022EDFC_de(void *arg0) {
+void func_8022EDFC_de(void *player) {
     s32 mode;
 
-    ((Shared_ActorView *)arg0)->controls->transientFlag = 1;
+    ((Shared_ActorView *)player)->controls->transientFlag = 1;
     mode = D_80142850;
     switch (mode) {
     case 0:
         func_8025DE54_de(0x18A1,
-                      ((Shared_ActorView *)arg0)->position.vector,
-                      (s32)((char *)arg0 + 8), -1);
+                      ((Shared_ActorView *)player)->position.vector,
+                      (s32)((char *)player + 8), -1);
         break;
     case 1:
         func_8025DE54_de(0x1969,
-                      ((Shared_ActorView *)arg0)->position.vector,
-                      (s32)((char *)arg0 + 8), -1);
+                      ((Shared_ActorView *)player)->position.vector,
+                      (s32)((char *)player + 8), -1);
         break;
     case 2:
         func_8025DE54_de(0x1905,
-                      ((Shared_ActorView *)arg0)->position.vector,
-                      (s32)((char *)arg0 + 8), -1);
+                      ((Shared_ActorView *)player)->position.vector,
+                      (s32)((char *)player + 8), -1);
         break;
     }
-    func_80218464_de((char *)arg0 + 0x938);
-    ((ActorRecAt16E0 *)arg0)->unk_0x11B4 = 0;
-    func_80214178_de(&((Shared_ActorView *)arg0)->weapon, &((Shared_ActorView *)arg0)->weapon.behaviorFlags, 1);
-    func_8021B1E4_de(arg0, ((Shared_ActorView *)arg0)->spawn, 0, 1);
-    func_80226708_de(arg0);
+    func_80218464_de((char *)player + 0x938);
+    ((ActorRecAt16E0 *)player)->unk_0x11B4 = 0;
+    func_80214178_de(&((Shared_ActorView *)player)->weapon, &((Shared_ActorView *)player)->weapon.behaviorFlags, 1);
+    func_8021B1E4_de(player, ((Shared_ActorView *)player)->spawn, 0, 1);
+    func_80226708_de(player);
 }
 
 s32 func_8022EF04_de(s32 arg0, s32 arg1) {
     s32 var_a1;
-    s32 var_v1;
+    s32 result;
     s32 space;
 
-    var_v1 = 0;
+    result = 0;
     space = 0x20;
     var_a1 = arg1;
 loop_1:
     var_a1 -= 1;
     if (*((u8 *)arg0 + var_a1) == space) {
-        var_v1 += 1;
+        result += 1;
         if (var_a1 > 0) {
             goto loop_1;
         }
     }
-    return var_v1;
+    return result;
 }
 
 #if defined(VERSION_US)

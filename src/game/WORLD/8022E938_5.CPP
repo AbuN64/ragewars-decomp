@@ -60,9 +60,9 @@ void func_8022F338_de(void *object, unsigned char value) {
     ((ObjCode8022E938 *)object)->value15 = value;
 }
 
-int func_8022F340_de(void *arg0) {
-    int v = ((ObjCode8022E938 *)arg0)->value15 + 0x32;
-    ((ObjCode8022E938 *)arg0)->value15 = (unsigned char)v;
+int func_8022F340_de(void *player) {
+    int v = ((ObjCode8022E938 *)player)->value15 + 0x32;
+    ((ObjCode8022E938 *)player)->value15 = (unsigned char)v;
     return v;
 }
 
@@ -75,9 +75,9 @@ void func_8022F35C_de(void *object, unsigned char value) {
     ((ObjCode8022E938 *)object)->value16 = value;
 }
 
-int func_8022F364_de(void *arg0) {
-    int v = ((ObjCode8022E938 *)arg0)->value16 + 0x32;
-    ((ObjCode8022E938 *)arg0)->value16 = (unsigned char)v;
+int func_8022F364_de(void *player) {
+    int v = ((ObjCode8022E938 *)player)->value16 + 0x32;
+    ((ObjCode8022E938 *)player)->value16 = (unsigned char)v;
     return v;
 }
 

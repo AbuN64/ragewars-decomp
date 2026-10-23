@@ -22,76 +22,76 @@ extern void func_80285DB0_de(Shared_World *, void *, s32);
 extern void func_8028B670_de(void *a, unsigned short b, unsigned short c, int d);
 
 void func_80207ABC_de(void *object, void *state) {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
-    s32 temp_a2;
+    Player *player = object;
+    ActorMotionState *motionState = state;
+    s32 transitionFlags;
     ActorMotionResource *resource;
-    ActorMotionDefinition *temp_a3;
+    ActorMotionDefinition *motionDefinition;
     s32 var_v1;
     s32 temp_v0;
 
-    resource = arg0->definition;
-    temp_a3 = &resource->motion;
-    temp_a2 = temp_a3->transitionFlags;
+    resource = player->definition;
+    motionDefinition = &resource->motion;
+    transitionFlags = motionDefinition->transitionFlags;
     var_v1 = 1;
-    if (temp_a2 & 0x10) {
-        temp_v0 = arg1->flags & 0x10000;
+    if (transitionFlags & 0x10) {
+        temp_v0 = motionState->flags & 0x10000;
         var_v1 = (u32)0 < (u32)temp_v0;
     }
-    if ((temp_a2 & 0x100) && !(arg0->movementFlags & 0x40)) {
+    if ((transitionFlags & 0x100) && !(player->movementFlags & 0x40)) {
         var_v1 = 0;
     }
-    if ((temp_a3->transitionFlags & 0x400) && (arg0->movementFlags & 0x40)) {
+    if ((motionDefinition->transitionFlags & 0x400) && (player->movementFlags & 0x40)) {
         var_v1 = 0;
     }
     if (var_v1 != 0) {
-        if (arg1->timer >= temp_a3->openThreshold) {
-            func_80214178_de(arg0, arg1, 1);
+        if (motionState->timer >= motionDefinition->openThreshold) {
+            func_80214178_de(player, motionState, 1);
         }
     } else {
-        arg1->timer = 0.0f;
+        motionState->timer = 0.0f;
     }
 }
 
 void func_80207B5C_de(void *object, u32 *arg1) {
-    Player *arg0 = object;
+    Player *player = object;
     ActorMotionResource *resource;
-    ActorMotionDefinition *temp_s0;
+    ActorMotionDefinition *motionDefinition;
 
-    resource = arg0->definition;
-    temp_s0 = &resource->motion;
-    func_80278D78_de(arg0, 0x10000, arg0);
-    if (!(temp_s0->transitionFlags & 0x40)) {
+    resource = player->definition;
+    motionDefinition = &resource->motion;
+    func_80278D78_de(player, 0x10000, player);
+    if (!(motionDefinition->transitionFlags & 0x40)) {
         *arg1 &= 0xFFFEFFFF;
     }
 }
 
 void func_80207BB8_de(void *object, void *state) {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
+    Player *player = object;
+    ActorMotionState *motionState = state;
     ActorMotionResource *resource;
-    ActorMotionDefinition *temp_a3;
-    s32 temp_a2;
+    ActorMotionDefinition *motionDefinition;
+    s32 transitionFlags;
     s32 var_v1;
 
-    resource = arg0->definition;
-    temp_a3 = &resource->motion;
-    temp_a2 = temp_a3->transitionFlags;
+    resource = player->definition;
+    motionDefinition = &resource->motion;
+    transitionFlags = motionDefinition->transitionFlags;
     var_v1 = 1;
-    if (temp_a2 & 0x10000) {
-        var_v1 = (u32)(arg0->movementFlags & 0x40) < (u32)var_v1;
+    if (transitionFlags & 0x10000) {
+        var_v1 = (u32)(player->movementFlags & 0x40) < (u32)var_v1;
     }
-    if ((temp_a2 & 0x4000) && !(arg0->movementFlags & 0x40)) {
+    if ((transitionFlags & 0x4000) && !(player->movementFlags & 0x40)) {
         var_v1 = 0;
     }
-    if (arg0->movementFlags & 8) {
+    if (player->movementFlags & 8) {
         var_v1 = 0;
     }
     if (var_v1 != 0) {
-        arg1->speed = arg1->speed + (D_800D2988 / temp_a3->transitionTime);
+        motionState->speed = motionState->speed + (D_800D2988 / motionDefinition->transitionTime);
     }
-    if (arg1->speed >= D_800C1BA0_de) {
-        func_80214178_de(arg0, arg1, 2);
+    if (motionState->speed >= D_800C1BA0_de) {
+        func_80214178_de(player, motionState, 2);
     }
 }
 
@@ -102,121 +102,121 @@ void func_80207C68_de(void *arg0, s32 *arg1) {
 }
 
 void func_80207C94_de(void *object, void *state) {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
-    s32 temp_a2;
+    Player *player = object;
+    ActorMotionState *motionState = state;
+    s32 transitionFlags;
     ActorMotionResource *resource;
-    ActorMotionDefinition *temp_a3;
+    ActorMotionDefinition *motionDefinition;
     s32 var_v1;
     s32 temp_v0;
 
-    resource = arg0->definition;
-    temp_a3 = &resource->motion;
-    temp_a2 = temp_a3->transitionFlags;
+    resource = player->definition;
+    motionDefinition = &resource->motion;
+    transitionFlags = motionDefinition->transitionFlags;
     var_v1 = 1;
-    if (temp_a2 & 0x20) {
-        temp_v0 = arg1->flags & 0x20000;
+    if (transitionFlags & 0x20) {
+        temp_v0 = motionState->flags & 0x20000;
         var_v1 = (u32)0 < (u32)temp_v0;
     }
-    if ((temp_a2 & 0x200) && !(arg0->movementFlags & 0x40)) {
+    if ((transitionFlags & 0x200) && !(player->movementFlags & 0x40)) {
         var_v1 = 0;
     }
-    if ((temp_a3->transitionFlags & 0x800) && (arg0->movementFlags & 0x40)) {
+    if ((motionDefinition->transitionFlags & 0x800) && (player->movementFlags & 0x40)) {
         var_v1 = 0;
     }
     if (var_v1 != 0) {
-        if (arg1->timer >= temp_a3->closeThreshold) {
-            func_80214178_de(arg0, arg1, 3);
+        if (motionState->timer >= motionDefinition->closeThreshold) {
+            func_80214178_de(player, motionState, 3);
         }
     } else {
-        arg1->timer = 0.0f;
+        motionState->timer = 0.0f;
     }
 }
 
 void func_80207D34_de(void *object, u32 *arg1) {
-    Player *arg0 = object;
+    Player *player = object;
     ActorMotionResource *resource;
-    ActorMotionDefinition *temp_s0;
+    ActorMotionDefinition *motionDefinition;
 
-    resource = arg0->definition;
-    temp_s0 = &resource->motion;
-    func_80278D78_de(arg0, 0x20000, arg0);
-    if (!(temp_s0->transitionFlags & 0x80)) {
+    resource = player->definition;
+    motionDefinition = &resource->motion;
+    func_80278D78_de(player, 0x20000, player);
+    if (!(motionDefinition->transitionFlags & 0x80)) {
         *arg1 &= 0xFFFDFFFF;
     }
 }
 
 void func_80207D90_de(void *object, void *state) {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
+    Player *player = object;
+    ActorMotionState *motionState = state;
     ActorMotionResource *resource;
-    ActorMotionDefinition *temp_a3;
-    s32 temp_a2;
+    ActorMotionDefinition *motionDefinition;
+    s32 transitionFlags;
     s32 var_v1;
 
-    resource = arg0->definition;
-    temp_a3 = &resource->motion;
-    temp_a2 = temp_a3->transitionFlags;
+    resource = player->definition;
+    motionDefinition = &resource->motion;
+    transitionFlags = motionDefinition->transitionFlags;
     var_v1 = 1;
-    if (temp_a2 & 0x20000) {
-        var_v1 = (u32)(arg0->movementFlags & 0x40) < (u32)var_v1;
+    if (transitionFlags & 0x20000) {
+        var_v1 = (u32)(player->movementFlags & 0x40) < (u32)var_v1;
     }
-    if ((temp_a2 & 0x8000) && !(arg0->movementFlags & 0x40)) {
+    if ((transitionFlags & 0x8000) && !(player->movementFlags & 0x40)) {
         var_v1 = 0;
     }
-    if (arg0->movementFlags & 8) {
+    if (player->movementFlags & 8) {
         var_v1 = 0;
     }
     if (var_v1 != 0) {
-        arg1->speed = arg1->speed - (D_800D2988 / temp_a3->transitionTime);
+        motionState->speed = motionState->speed - (D_800D2988 / motionDefinition->transitionTime);
     }
-    if (arg1->speed <= 0.0f) {
-        func_80214178_de(arg0, arg1, 0);
+    if (motionState->speed <= 0.0f) {
+        func_80214178_de(player, motionState, 0);
     }
 }
 
-void func_80207E3C_de(struct Shared_Actor *arg0, int *arg1) {
-    arg0->weaponFlags |= 0x2100;
+void func_80207E3C_de(struct Shared_Actor *actor, int *arg1) {
+    actor->weaponFlags |= 0x2100;
     *arg1 |= 0x10000;
-    func_80214178_de(arg0, arg1, 1);
+    func_80214178_de(actor, arg1, 1);
 }
 
-void func_80207E74_de(struct Shared_Actor *arg0, int *arg1) {
-    arg0->weaponFlags |= 0x2100;
+void func_80207E74_de(struct Shared_Actor *actor, int *arg1) {
+    actor->weaponFlags |= 0x2100;
     *arg1 |= 0x20000;
-    func_80214178_de(arg0, arg1, 3);
+    func_80214178_de(actor, arg1, 3);
 }
 
-void func_80207EAC_de(struct Shared_Actor *arg0) {
-    func_80285DB0_de(&D_8011FE88, arg0, 1);
-    arg0->weaponFlags |= 0x100;
+void func_80207EAC_de(struct Shared_Actor *actor) {
+    func_80285DB0_de(&D_8011FE88, actor, 1);
+    actor->weaponFlags |= 0x100;
 }
 
 void func_80207EEC_de(void *event) {
-    ActorMotionEvent *arg0 = event;
-    func_8028B670_de(&D_8011FE88, arg0->id, arg0->key, 1);
+    ActorMotionEvent *actorMotionEvent = event;
+    func_8028B670_de(&D_8011FE88, actorMotionEvent->id, actorMotionEvent->key, 1);
 }
 
-void func_80207F1C_de(struct Shared_Actor *arg0) {
-    func_80285DB0_de(&D_8011FE88, arg0, 0);
-    arg0->weaponFlags &= ~0x100;
+void func_80207F1C_de(struct Shared_Actor *actor) {
+    func_80285DB0_de(&D_8011FE88, actor, 0);
+    actor->weaponFlags &= ~0x100;
 }
 
 void func_80207F60_de(void *event) {
-    ActorMotionEvent *arg0 = event;
-    func_8028B670_de(&D_8011FE88, arg0->id, arg0->key, 0);
+    ActorMotionEvent *actorMotionEvent = event;
+    func_8028B670_de(&D_8011FE88, actorMotionEvent->id, actorMotionEvent->key, 0);
 }
 
 /** Set flags 0x2100 in the word at offset 0x100. */
 void func_80207F90_de(void *object) {
-    Player *arg0 = object;
-    arg0->weaponFlags |= 0x2100;
+    Player *player = object;
+    player->weaponFlags |= 0x2100;
 }
 
-void func_80207FA0_de(LevelActor *arg0, ActorMotionState *arg1) {
-    arg1->flags = (s32) (arg1->flags | 0x10000);
-    arg0->flags = (s32) (arg0->flags | 0x2100);
-    arg1->unk16C = 0;
+void func_80207FA0_de(LevelActor *actor, ActorMotionState *motionState) {
+    motionState->flags = (s32) (motionState->flags | 0x10000);
+    actor->flags = (s32) (actor->flags | 0x2100);
+    motionState->unk16C = 0;
 }
 
 /** Set the fixed flags on the supplied object and word. */

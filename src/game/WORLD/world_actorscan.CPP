@@ -8,9 +8,9 @@
 #include "SDK/SCHED/world_actorscan.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-s32 func_8028DF90_de(Shared_World *arg0, s32 arg1) {
+s32 func_8028DF90_de(Shared_World *world, s32 arg1) {
     void *temp_v0;
-    temp_v0 = func_8028FDB4_de(arg0->bitSections, 1);
+    temp_v0 = func_8028FDB4_de(world->bitSections, 1);
     func_8028FDB4_de(temp_v0, 0);
     return func_8028FDB4_de(temp_v0, 1) + arg1;
 }
@@ -24,12 +24,12 @@ void func_8028DFE4_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {
 }
 
 s32 func_8028E020_de(WorldSortEntry *arg0, WorldSortEntry *arg1) {
-    s32 var_v0;
-    var_v0 = 1;
+    s32 result;
+    result = 1;
     if ((arg0->distance) < (arg1->distance)) {
-        var_v0 = -1;
+        result = -1;
     }
-    return var_v0;
+    return result;
 }
 
 s32 func_8028E044_de(WorldSortEntry *arg0, WorldSortEntry *arg1)
@@ -45,7 +45,7 @@ s32 func_8028E044_de(WorldSortEntry *arg0, WorldSortEntry *arg1)
   return var_v0;
 }
 
-void func_8028E068_de(Shared_World *arg0) {
+void func_8028E068_de(Shared_World *world) {
     s32 found;
     s32 clear_index;
     LevelActor *record;
@@ -55,32 +55,32 @@ void func_8028E068_de(Shared_World *arg0) {
 
     found = 0;
     clear_index = 15;
-    record = arg0->actors;
-    arg0->specialActorCount = 0;
+    record = world->actors;
+    world->specialActorCount = 0;
     do {
-        arg0->specialActors[clear_index] = 0;
+        world->specialActors[clear_index] = 0;
         clear_index--;
     } while (clear_index >= 0);
 
-    if (arg0->actorCount > 0) {
+    if (world->actorCount > 0) {
         clear_index = 0;
         wanted_type = 14;
         do {
             if (((struct Def *)record->definition)->type == wanted_type) {
-                arg0->specialActors[found] = record;
+                world->specialActors[found] = record;
                 found++;
             }
             if (found >= 16) {
                 break;
             }
             clear_index++;
-            if (clear_index >= arg0->actorCount) {
+            if (clear_index >= world->actorCount) {
                 break;
             }
             record++;
         } while (1);
     }
-    arg0->specialActorCount = found;
+    world->specialActorCount = found;
 }
 
 extern LevelActor *D_800F3CF8[4];
