@@ -485,7 +485,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
         D_800D15F0[1] = D_800C22F0_de;
         if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
         else actor->team = (u8)actor->definition->first;
-        func_8026B6A0_de(context->model, player, actor->fieldB4, 1,
+        Render_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
                        &actor->lighting[D_800D297C], 0, actor->field3);
         D_800D15E0 = 0;
         if (temporaryFlag) player->flags &= ~0x8000;
@@ -509,7 +509,7 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
         else {
             if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
             else actor->team = (u8)actor->definition->first;
-            func_8026B6A0_de(context->model, player, actor->fieldB4, 1,
+            Render_DrawActorModelParts(context->model, player, actor->fieldB4, 1,
                            &actor->lighting[D_800D297C], 0, actor->field3);
             if (0.0f < player->opacity) {
                 func_8026D4F0_de(context->model, player, actor->fieldB4, 1,

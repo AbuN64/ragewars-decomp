@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Optionally runs func_8024AA18_de, then starts the actor's current block through func_8026DD50_de and, when the resulting animation node is flagged, spawns an effect at the actor raised by its height and scales it to the actor's size, always clearing D_800D15E0 at the end. Adapted from func_8024A3B0_de with func_8026B6A0_de changed to func_8026DD50_de and the height and scale constants taken from D_800C8B48[1] and D_800C8B50. */
+/* Optionally runs func_8024AA18_de, then starts the actor's current block through func_8026DD50_de and, when the resulting animation node is flagged, spawns an effect at the actor raised by its height and scales it to the actor's size, always clearing D_800D15E0 at the end. Adapted from func_8024A3B0_de with Render_DrawActorModelParts changed to func_8026DD50_de and the height and scale constants taken from D_800C8B48[1] and D_800C8B50. */
 
 
 

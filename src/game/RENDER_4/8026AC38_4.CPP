@@ -163,7 +163,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     void *base;
     void **parts;
     void *part;
-    u8 *material;
+    MeshMaterial *material;
     s32 count;
     s32 i;
     s32 hide = 0;
@@ -234,7 +234,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
             if (state->character == 0x12 && (FIELD(s32, D_801468F4, 0) == 0 || state->bonus == 0)) {
                 switch (state->variant) {
                 case 0:
-                    if ((material[6] & 0x38) == 0x28) {
+                    if ((material->mode & 0x38) == 0x28) {
                         if (func_80269A80_de(material, pass) != 0) {
                             void *list = func_8028FDB4_de(part, 1);
                             Gfx *cmd = D_80110634++;
@@ -243,7 +243,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     }
                     break;
                 case 1:
-                    if ((material[6] & 0x38) == 0x20) {
+                    if ((material->mode & 0x38) == 0x20) {
                         if (func_80269A80_de(material, pass) != 0) {
                             void *list = func_8028FDB4_de(part, 1);
                             Gfx *cmd = D_80110634++;
@@ -252,7 +252,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     }
                     break;
                 case 2:
-                    if ((material[6] & 0x38) == 0x18) {
+                    if ((material->mode & 0x38) == 0x18) {
                         if (func_80269A80_de(material, pass) != 0) {
                             void *list = func_8028FDB4_de(part, 1);
                             Gfx *cmd = D_80110634++;
@@ -262,7 +262,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     break;
                 }
             } else {
-                bits = material[6] & 0x38;
+                bits = material->mode & 0x38;
                 if (bits == 0x38 && hide == 0) continue;
                 if (bits == 0x30 && bonus == 0) continue;
                 if (bits == 0x10 && glow == 0) continue;
@@ -289,7 +289,7 @@ extern void func_8026B504_de(void *, void *, void *);
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first
  * part's material is registered through func_8026B504_de with the caller's two inputs. */
-void func_8026D280_de(void **resource, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
+void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
     void *header;
     void *base;
     void **parts;
@@ -297,25 +297,25 @@ void func_8026D280_de(void **resource, void *matrix, s32 segment, void *lights, 
     void *material;
     s32 count;
     s32 i;
-    u8 *shared;
+    MeshMaterial *shared;
     u32 flags;
     if (matrix == 0) {
         return;
     }
     func_802A01E8_de();
-    shared = (u8 *)&D_8013B2D8;
-    flags = *(u32 *)shared;
-    shared[0x14] = 0x80;
-    shared[0x15] = 0x5F;
-    shared[0x16] = 0x22;
-    shared[0x17] = 0xF0;
-    shared[0x10] = 0xDB;
-    shared[0x11] = 0xB8;
-    shared[0x12] = 0x77;
-    shared[0x13] = 0x40;
-    *(u32 *)shared = flags | 0x400;
+    shared = (MeshMaterial *)&D_8013B2D8;
+    flags = shared->flags;
+    shared->secondaryColor[0] = 0x80;
+    shared->secondaryColor[1] = 0x5F;
+    shared->secondaryColor[2] = 0x22;
+    shared->secondaryColor[3] = 0xF0;
+    shared->primaryColor[0] = 0xDB;
+    shared->primaryColor[1] = 0xB8;
+    shared->primaryColor[2] = 0x77;
+    shared->primaryColor[3] = 0x40;
+    shared->flags = flags | 0x400;
     D_800D15E0 = 1;
-    *(u32 *)shared = flags | 0x1402;
+    shared->flags = flags | 0x1402;
     D_800D15F0 = D_800C46A8_de;
     if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
         return;
@@ -350,5 +350,5 @@ void func_8026D280_de(void **resource, void *matrix, s32 segment, void *lights, 
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8026D280_de);
+INCLUDE_ASM("span_1000", Render_DrawModelWithSharedMaterial);
 #endif

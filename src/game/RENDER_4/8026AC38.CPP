@@ -347,7 +347,7 @@ extern s32 D_80146918, D_801468F4;
 extern void func_80253BBC_de(s32, void **);
 extern s32 func_80269A80_de(ModelMaterial *, s32);
 
-void func_8026B6A0_de(void **resource, ModelActor *actor, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
+void Render_DrawActorModelParts(void **resource, ModelActor *actor, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
     s32 special = 0, bonus = 0, glow = 0, count, i;
     s32 *parts;
     void *header, *part;
@@ -378,19 +378,21 @@ void func_8026B6A0_de(void **resource, ModelActor *actor, void *matrix, s32 segm
                 if (actor->state->variant == 1) wanted = 0x20;
             }
             mask = material->flags & 0x38;
-            if (mask == wanted || (mask == 0x38 && special) || (mask == 0x30 && bonus)) goto draw;
+            if (!(mask == wanted || (mask == 0x38 && special) || (mask == 0x30 && bonus))) {
+                continue;
+            }
         } else {
             mask = material->flags & 0x38;
-            if ((mask != 0x38 || special) && (mask != 0x30 || bonus) && (mask != 0x10 || glow)) {
-draw:
-                if (func_80269A80_de(material, pass)) {
-                    header = func_8028FDB4_de(part, 1);
-                    gSPDisplayList(D_80110634++, header);
-                }
+            if (!((mask != 0x38 || special) && (mask != 0x30 || bonus) && (mask != 0x10 || glow))) {
+                continue;
             }
+        }
+        if (func_80269A80_de(material, pass)) {
+            header = func_8028FDB4_de(part, 1);
+            gSPDisplayList(D_80110634++, header);
         }
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_8026B6A0_de);
+INCLUDE_ASM("span_1000", Render_DrawActorModelParts);
 #endif

@@ -96,7 +96,7 @@ void func_8024A3B0_de(LevelActor *actor, PlayerCode80225D10 *player, s32 arg2, D
         func_8024AA18_de(actor, arg2, params);
     }
     if (params->drawModel != 0) {
-        func_8026B6A0_de(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
+        Render_DrawActorModelParts(params->model, player, actor->fieldB4, 1, &actor->lighting[D_800D297C], 0, actor->field3);
         if (func_8026E340_de() != 0) {
             node = func_8028FDB4_de(*params->model, 2);
             if ((*node != 0) &&
