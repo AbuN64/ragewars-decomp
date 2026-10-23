@@ -7,7 +7,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [██████████████████░░]  91.98% (~93.93%)  38,580,743 of 41,943,040 bytes</code><br><code>de       [██████████████████▒░]  94.40% (~97.14%)  7,919,142 of 8,388,608 bytes</code><br><code>eu       [█████████████████▒░░]  89.18% (~91.06%)  7,481,202 of 8,388,608 bytes</code><br><code>eu-x     [█████████████████▒░░]  88.27% (~90.31%)  7,405,058 of 8,388,608 bytes</code><br><code>us       [█████████████████▒░░]  89.69% (~91.29%)  7,524,266 of 8,388,608 bytes</code><br><code>us-rev1  [███████████████████░]  98.36% (~99.87%)  8,251,075 of 8,388,608 bytes</code></pre>
+<pre><code>all      [██████████████████░░]  91.98% (~93.94%)  38,581,491 of 41,943,040 bytes</code><br><code>de       [██████████████████▒░]  94.40% (~97.14%)  7,919,142 of 8,388,608 bytes</code><br><code>eu       [█████████████████▒░░]  89.18% (~91.06%)  7,481,202 of 8,388,608 bytes</code><br><code>eu-x     [█████████████████▒░░]  88.27% (~90.31%)  7,405,058 of 8,388,608 bytes</code><br><code>us       [█████████████████▒░░]  89.69% (~91.29%)  7,524,266 of 8,388,608 bytes</code><br><code>us-rev1  [███████████████████░]  98.36% (~99.88%)  8,251,823 of 8,388,608 bytes</code></pre>
 
 <a href="https://itsmo.me/attic/cake-unbake/#ragewars-decomp-us-rev1"><img src="docs/overview-us-rev1.svg" width="720"></a>
 
@@ -29,7 +29,7 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 
 | us-rev1 (NUS-NRWE-1, North America). Revised NTSC release (grey cartridge). SHA256 `5dfbae59e4a3860b740ccbb28f33aad624315e30bfca6d60abd62d12a89e0089` |
 |---|
-| <pre><code>code      [█████████████████▒▒▒]  88.74% (~100.00%)  1,002,424 of 1,129,524</code><br><code>data      [███████████████████░]  95.70%  230,531 of 240,876</code><br><code>functions [███████████████████▒]  96.27% (~100.00%)  4,183 of 4,345</code><br><code>blobs     [███████████████████░]  99.99%  6,997,928 of 6,998,016</code></pre> |
+| <pre><code>code      [█████████████████▒▒▒]  88.74% (~100.00%)  1,002,424 of 1,129,524</code><br><code>data      [███████████████████░]  96.01%  231,279 of 240,880</code><br><code>functions [███████████████████▒]  96.27% (~100.00%)  4,183 of 4,345</code><br><code>blobs     [███████████████████░]  99.99%  6,997,928 of 6,998,012</code></pre> |
 <!-- /progress -->
 
 ## Development & Contributions
