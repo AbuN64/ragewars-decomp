@@ -70,7 +70,7 @@ extern s32 func_8025CA24_de(void *, void *);
 
 
 void func_802172D0_de(void *arg0, void *arg1, s32 arg2) {
-    SoundSourceNode *node;
+    CLoopingSoundData *node;
     void *fallback;
     s32 kind;
 

@@ -281,7 +281,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
     f32 x, y, sub; u8 *resolved;
     BatchRec *batch;
     TextSprite *sprites, *sprite;
-    TextGlyph *glyph;
+    sm_font_char *glyph;
     u32 color; s16 glyphId;
     resolved = widget->text;
     clipped = 0;
@@ -347,7 +347,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
         glyph=&D_8014D560->glyphs[glyphId];
         sprite->color=color;
         sprite->x=x;
-        sprite->y=y+glyph->offsetY*args.scaleY;
+        sprite->y=y+glyph->BaselineOffset*args.scaleY;
         sprite->width=glyph->width*args.scaleX;
         sprite->height=glyph->height*args.scaleY;
         text++;

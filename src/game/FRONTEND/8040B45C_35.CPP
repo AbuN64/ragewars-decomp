@@ -553,13 +553,6 @@ typedef struct _sm_texture_element {
 } _sm_texture_element;
 
 /* One glyph of a font (8 bytes). */
-typedef struct sm_char_info {
-    u32 DataOffset;
-    s8 Width;
-    s8 Height;
-    s8 PhysicalWidth;
-    s8 BaselineOffset;
-} sm_char_info;
 
 /* One cached glyph image (44 bytes). */
 typedef struct t_char {
@@ -572,7 +565,7 @@ typedef struct t_char {
 /* One open font (0x49C bytes): its 96 glyphs, their cached images per clut and its font table entry. */
 typedef struct _sm_font {
     s32 Active;
-    sm_char_info CharInfo[96];
+    sm_font_char CharInfo[96];
     u8 *CharBits[96];
     t_char **Char;
     u8 **Clut;

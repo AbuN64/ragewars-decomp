@@ -19,13 +19,13 @@ struct Vec4s {
     s16 z;
     s16 w;
 };
-struct SevenBytes {
+struct s_CEventValueFormat7a {
     u8 a;
     u8 b;
     u8 c;
-    u8 d;
-    u8 e;
+    u8 m_u8_Value4;
+    u8 m_u8_Value5;
     u8 f;
-    u8 g;
+    u8 m_u8_Value7;
 };
 #endif

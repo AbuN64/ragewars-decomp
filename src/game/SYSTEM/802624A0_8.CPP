@@ -25,13 +25,13 @@ extern void func_802466A0_de(SceneEffect *, s32, s32, s32, s32, s32, s32, f32, C
 extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
-    if (D_8013B290 == 0 && (unsigned int)scene->activeEffects.count >= 3) {
+    if (D_8013B290 == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
-    effect = scene->freeEffects.head;
+    effect = scene->FreeList.head;
     if (effect != 0) {
-        func_80255ED8_de(&scene->freeEffects, effect);
-        func_80255CB8_de(&scene->activeEffects, effect);
+        func_80255ED8_de(&scene->FreeList, effect);
+        func_80255CB8_de(&scene->UsedList, effect);
         effect->ref = ref;
         if (ref != 0) {
             *ref += 1;

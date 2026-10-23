@@ -1535,8 +1535,8 @@ struct func_8026745C_S2 {
 struct func_8026745C_S2;
 typedef struct func_8026745C_S2 func_8026745C_S2;
 
-struct SevenBytes;
-typedef struct SevenBytes SevenBytes;
+struct s_CEventValueFormat7a;
+typedef struct s_CEventValueFormat7a CEventValueFormat7a;
 
 extern float D_800C4420_de;
 
@@ -1585,7 +1585,7 @@ struct func_80267D80_S2 {
 
 extern float D_800C46E8_eu;
 
-struct SevenBytes;
+struct s_CEventValueFormat7a;
 
 
 extern float D_800C4428_de;

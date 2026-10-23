@@ -43,7 +43,7 @@ int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
 
 /** Initialize the two object words at offsets 8 and 12 to negative one. */
 void func_8025C8C0_de(void *arg0) {
-    SoundSourceNode *voice = arg0;
+    CLoopingSoundData *voice = arg0;
     voice->state = -1;
     voice->value = -1;
 }
@@ -51,7 +51,7 @@ void func_8025C8C0_de(void *arg0) {
 void func_8025C8D0_de(void) {
 }
 
-void func_8025C8D8_de(void *arg0, SoundSourceNode *arg1, s32 arg2) {
+void func_8025C8D8_de(void *arg0, CLoopingSoundData *arg1, s32 arg2) {
     s32 i;
 
     func_80255CA0_de(arg0, 0, 4);
@@ -68,7 +68,7 @@ void func_8025C8D8_de(void *arg0, SoundSourceNode *arg1, s32 arg2) {
 }
 
 void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *arg3, s32 arg4) {
-    SoundSourceNode *node;
+    CLoopingSoundData *node;
     s32 result;
 
     node = ((SoundVoicePool *)arg0)->available.head;
@@ -82,8 +82,8 @@ void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *arg3, s32 arg
         node->value = result;
         D_800CBB10 = result;
         node->state = arg1;
-        node->position = *arg2;
-        node->owner = arg3;
+        node->m_vSoundPos = *arg2;
+        node->m_vSoundPosPtr = arg3;
     }
     return node;
 }
@@ -99,13 +99,13 @@ s32 func_8025CA24_de(void *arg0, void *arg1) {
     if (var_s0 != 0) {
         do {
             if (var_s0 == arg1) {
-                func_8025E174_de(((SoundSourceNode *)var_s0)->value);
-                D_800CBB14 = ((SoundSourceNode *)var_s0)->value;
+                func_8025E174_de(((CLoopingSoundData *)var_s0)->value);
+                D_800CBB14 = ((CLoopingSoundData *)var_s0)->value;
                 func_80255ED8_de(&((SoundVoicePool *)arg0)->playing, var_s0);
                 func_80255D14_de(arg0, var_s0);
                 return 1;
             }
-            var_s0 = ((SoundSourceNode *)var_s0)->next;
+            var_s0 = ((CLoopingSoundData *)var_s0)->next;
         } while (var_s0 != 0);
     }
     return 0;
@@ -114,7 +114,7 @@ s32 func_8025CA24_de(void *arg0, void *arg1) {
 void func_8025CAB0_de(void *arg0) {
     s32 temp_v0;
     SoundVoicePool *pool = arg0;
-    SoundSourceNode *var_s0;
+    CLoopingSoundData *var_s0;
 
     var_s0 = pool->playing.head;
     if (var_s0 != 0) {
@@ -130,14 +130,14 @@ void func_8025CAB0_de(void *arg0) {
 
 void func_8025CB0C_de(SoundVoicePool *arg0) {
     s32 temp_v0;
-    SoundSourceNode *var_s0;
+    CLoopingSoundData *var_s0;
 
     var_s0 = arg0->playing.head;
     if (var_s0 != 0) {
         do {
             temp_v0 = func_8025DE54_de((s16)var_s0->state,
-                                     var_s0->position,
-                                     (s32)var_s0->owner,
+                                     var_s0->m_vSoundPos,
+                                     (s32)var_s0->m_vSoundPosPtr,
                                      -1);
             var_s0->value = temp_v0;
             var_s0 = var_s0->next;
@@ -149,7 +149,7 @@ void func_8025CB0C_de(SoundVoicePool *arg0) {
 
 void func_8025CB88_de(void *arg0) {
     SoundVoicePool *pool = arg0;
-    SoundSourceNode *var_s0;
+    CLoopingSoundData *var_s0;
 
     if (pool->state == 0) {
         var_s0 = pool->playing.head;
@@ -166,8 +166,8 @@ void func_8025CB88_de(void *arg0) {
 }
 
 void func_8025CBEC_de(void *arg0) {
-    SoundSourceNode *cur;
-    SoundSourceNode *next;
+    CLoopingSoundData *cur;
+    CLoopingSoundData *next;
     s32 value;
     SoundVoicePool *pool = arg0;
 

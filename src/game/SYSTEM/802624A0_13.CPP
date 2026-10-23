@@ -15,6 +15,6 @@ void func_80263080_de(struct SceneEffectPool *arg0, struct SceneEffect *arg1) {
     if (temp_v1 != 0) {
         *temp_v1 -= 1;
     }
-    func_80255ED8_de(&arg0->activeEffects, arg1);
-    func_80255D14_de(&arg0->freeEffects, arg1);
+    func_80255ED8_de(&arg0->UsedList, arg1);
+    func_80255D14_de(&arg0->FreeList, arg1);
 }

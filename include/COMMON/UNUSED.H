@@ -2907,8 +2907,8 @@ typedef struct EffectActorModel EffectActorModel;
 struct EffectBlock;
 typedef struct EffectBlock EffectBlock;
 
-struct EffectColorParams;
-typedef struct EffectColorParams EffectColorParams;
+struct CROMParticleColor_t;
+typedef struct CROMParticleColor_t CROMParticleColor;
 
 struct EffectEntry;
 typedef struct EffectEntry EffectEntry;
@@ -4765,7 +4765,7 @@ struct Dest {
     u8 padCD[3];
     s32 fieldD0, fieldD4;
     u8 reservedD8[0x24];
-    struct SoundSourceNode *sound; /* 0xFC */
+    struct CLoopingSoundData_t *sound; /* 0xFC */
     u8 pending; /* 0x100 */
     u8 pad101;
     s16 channel; /* 0x102 */
@@ -4839,13 +4839,13 @@ struct EffectActor {
     char pad1D1[7];
     s32 unk1D8;
 };
-struct EffectColorParams;
-struct EffectColorParams {
-    u8 rgb0[3];
-    u8 rgb1[3];
+struct CROMParticleColor_t;
+struct CROMParticleColor_t {
+    u8 m_WhiteColor[3];
+    u8 m_BlackColor[3];
     char pad6[6];
-    s8 hueRange;
-    s8 unkD;
+    s8 m_RandomizeHue;
+    s8 m_RandomizeSaturation;
     s8 unkE;
 };
 struct EffectModel;
@@ -4879,7 +4879,7 @@ struct EffectParams {
     s8 unkD;
     s8 unkE;
 };
-struct EffectColorParams;
+struct CROMParticleColor_t;
 struct EffectEntry;
 struct EffectModel;
 struct EffectMotion;
@@ -4905,7 +4905,7 @@ struct EffectEntry {
     CharacterScreenCell *direction;
     CharacterScreenCell *unk2C;
     struct EffectMotion *motion;
-    struct EffectColorParams *color;
+    struct CROMParticleColor_t *color;
     struct EffectParams *params;
 };
 struct EffectBlock;

@@ -224,14 +224,14 @@ void func_80267CB4_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
   func_80267260_de(arg0, *new_var2, arg4, arg5, new_var);
 }
 
-void func_80267CE4_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, SevenBytes arg6) {
+void func_80267CE4_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, CEventValueFormat7a arg6) {
     Node_func_80267CE4_de *node;
 
     node = D_80140FE8_de;
     while (node != 0) {
         if (func_802393AC_de(node, arg3) != 0) {
-            func_802391AC_de(node, arg6.a, arg6.b, arg6.c, arg6.d,
-                          arg6.e, arg6.f, arg6.g);
+            func_802391AC_de(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
+                          arg6.m_u8_Value5, arg6.f, arg6.m_u8_Value7);
         }
         node = node->next;
     }

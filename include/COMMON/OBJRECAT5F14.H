@@ -206,9 +206,9 @@ typedef struct Six Six;
 
 /* Shared object layout established by effect-pool consumers. */
 struct SceneEffectPool {
-    SceneEffect effects[0x20]; /* 0x0000 */
-    IntrusiveList freeEffects; /* 0x5F00 */
-    IntrusiveList activeEffects; /* 0x5F14 */
+    SceneEffect DynAnims[0x20]; /* 0x0000 */
+    IntrusiveList FreeList; /* 0x5F00 */
+    IntrusiveList UsedList; /* 0x5F14 */
 };
 
 /* Eight-byte easing parameters returned for a motion animation segment. */

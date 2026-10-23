@@ -144,17 +144,17 @@ struct PoolRecAt28V1 {
 
 struct GlyphBuffer;
 /* Font records contain a four-byte header and 147 eight-byte glyph records. */
-typedef struct TextGlyph {
-    u32 texture;
+typedef struct sm_font_char {
+    u32 DataOffset;
     s8 width;
     s8 height;
-    s8 offsetX;
-    s8 offsetY;
-} TextGlyph;
+    s8 PhysicalWidth;
+    s8 BaselineOffset;
+} sm_font_char;
 
 struct GlyphBuffer {
     u32 header;
-    TextGlyph glyphs[147];
+    sm_font_char glyphs[147];
 };
 
 struct func_8029A73C_S1;

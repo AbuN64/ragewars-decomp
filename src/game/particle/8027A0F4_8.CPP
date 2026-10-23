@@ -492,20 +492,20 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     func_80271F34_de(&effect->velocity, &effect->velocity, &arg6);
                 }
                 hue = 0;
-                if (entry->color->hueRange != 0) {
-                    hue = func_802744D4_de() % (entry->color->hueRange * 2) - (u8) entry->color->hueRange;
+                if (entry->color->m_RandomizeHue != 0) {
+                    hue = func_802744D4_de() % (entry->color->m_RandomizeHue * 2) - (u8) entry->color->m_RandomizeHue;
                 }
-                sat = entry->color->unkD != 0 ? func_802744D4_de() % entry->color->unkD : 0;
+                sat = entry->color->m_RandomizeSaturation != 0 ? func_802744D4_de() % entry->color->m_RandomizeSaturation : 0;
                 val = entry->color->unkE != 0 ? func_802744D4_de() % entry->color->unkE : 0;
-                r = entry->color->rgb0[0];
-                g = entry->color->rgb0[1];
-                b = entry->color->rgb0[2];
+                r = entry->color->m_WhiteColor[0];
+                g = entry->color->m_WhiteColor[1];
+                b = entry->color->m_WhiteColor[2];
                 func_802765B0_de(hue, r, g, b, &h, &sv, &v);
                 func_80276968_de(sat, h, sv, v, &r, &g, &b);
                 func_80276B44_de(val, r, g, b, &r0, &g0, &b0);
-                r = entry->color->rgb1[0];
-                g = entry->color->rgb1[1];
-                b = entry->color->rgb1[2];
+                r = entry->color->m_BlackColor[0];
+                g = entry->color->m_BlackColor[1];
+                b = entry->color->m_BlackColor[2];
                 func_802765B0_de(hue, r, g, b, &h, &sv, &v);
                 func_80276968_de(sat, h, sv, v, &r, &g, &b);
                 func_80276B44_de(val, r, g, b, &r1, &g1, &b1);

@@ -35,13 +35,13 @@ extern void func_8024B2D0_de(SceneEffect *);
 static inline SceneEffect *take_effect(struct SceneEffectPool *scene, s32 *ref) {
     SceneEffect *effect;
 
-    if (D_8013B290 == 0 && (unsigned int)scene->activeEffects.count >= 3) {
+    if (D_8013B290 == 0 && (unsigned int)scene->UsedList.count >= 3) {
         return 0;
     }
-    effect = scene->freeEffects.head;
+    effect = scene->FreeList.head;
     if (effect != 0) {
-        func_80255ED8_de(&scene->freeEffects, effect);
-        func_80255CB8_de(&scene->activeEffects, effect);
+        func_80255ED8_de(&scene->FreeList, effect);
+        func_80255CB8_de(&scene->UsedList, effect);
         effect->ref = ref;
         if (ref != 0) {
             *ref += 1;
@@ -99,7 +99,7 @@ void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
     Effect_func_80262E88_de *next;
     f32 *max;
 
-    effect = scene->activeEffects.head;
+    effect = scene->UsedList.head;
     if (effect == 0) {
         return;
     }
@@ -119,8 +119,8 @@ void func_80262E88_de(struct SceneEffectPool *scene, s32 arg1) {
             if (effect->ref != 0) {
                 *effect->ref -= 1;
             }
-            func_80255ED8_de(&scene->activeEffects, effect);
-            func_80255D14_de(&scene->freeEffects, effect);
+            func_80255ED8_de(&scene->UsedList, effect);
+            func_80255D14_de(&scene->FreeList, effect);
         }
         effect = next;
     } while (0);
