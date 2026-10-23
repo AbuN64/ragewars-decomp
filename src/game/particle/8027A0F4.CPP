@@ -137,7 +137,6 @@ block_21:
     }
 }
 
-#ifdef NON_MATCHING
 #ifndef FIELD
 #define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
 #endif
@@ -153,18 +152,18 @@ extern f32 func_802745D0_de(f32);
  * otherwise turns the direction toward the target by a blend rate chosen from the turn angle and age,
  * resets the velocity along the new direction and applies the descriptor's acceleration (clamped to its
  * top speed). */
-void func_8027A4D0_de(void *particle) {
+void Particle_SteerHoming(void *particle) {
     SteeringParticle *arg0 = particle;
-    CQuatern q78;
-    CQuatern q88;
-    CQuatern q98;
-    Matrix mA8;
     CVector3 v18;
     CVector3 v28;
     CVector3 v38;
     CQuatern v48;
     CVector3 v58;
     CVector3 v68;
+    CQuatern q78;
+    CQuatern q88;
+    CQuatern q98;
+    Matrix mA8;
     CVector3 vE8;
     CVector3 vF8;
     CVector3 *direction;
@@ -176,12 +175,17 @@ void func_8027A4D0_de(void *particle) {
     f32 accel;
     f32 limit;
     f32 speed2;
+    s32 id;
+    CVector3 *velocity;
+    SteeringSound *sound;
     func_80271818_de(&q78, &arg0->direction);
     speed = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
                              arg0->velocity.z * arg0->velocity.z);
     owner = FIELD(void *, FIELD(void *, arg0, 0x12C), 0x1D8);
-    if (arg0->sound != 0) {
-        if (arg0->sound->id != 0x8AC || arg0->sound->handle == -1) {
+    id = 0x8AC;
+    sound = arg0->sound;
+    if (sound != 0) {
+        if ((sound->id != id) || (sound->handle == -1)) {
             func_80284434_de(arg0);
             goto create_sound;
         }
@@ -190,7 +194,7 @@ create_sound:
         arg0->sound = func_8025C95C_de(func_8025CC6C_de(), 0x8AC, &arg0->position, &arg0->position, -1);
     }
     if (FIELD(void *, arg0, 0x134) != 0) {
-        if (D_800C4B78_de <= arg0->time) {
+        if (arg0->time >= D_800C4B78_de) {
             FIELD(void *, arg0, 0x134) = 0;
         }
     }
@@ -201,16 +205,15 @@ create_sound:
         func_8022B09C_de(owner, &v58);
         func_80271F68_de(&v68, &v58, &arg0->position);
         distance = func_802B72B0_de(v68.x * v68.x + v68.y * v68.y + v68.z * v68.z);
-        if (distance < D_800C4B80_de && D_800C4B84_de < arg0->time) {
+        if (distance < D_800C4B80_de && arg0->time > D_800C4B84_de) {
             func_80283D50_de(arg0);
             func_80284570_de(D_8011D8D0, arg0);
             func_80284434_de(arg0);
             return;
         }
     } else {
-        void *target = FIELD(void *, arg0, 0x134);
-        v18 = FIELD(CVector3, target, 0x8);
-        v18.y += Particle_GetActorHeight(target) * D_800C4B88_de;
+        v18 = FIELD(CVector3, FIELD(void *, arg0, 0x134), 0x8);
+        v18.y += Particle_GetActorHeight(FIELD(void *, arg0, 0x134)) * D_800C4B88_de;
         func_80271F68_de(&v68, &v18, &arg0->position);
     }
     v28 = v68;
@@ -236,28 +239,30 @@ create_sound:
     v48.y = 0;
     v48.z = D_800C4BA0_de;
     func_80272898_de(&mA8, &v48, direction);
-    func_80271F9C_de(&arg0->velocity, direction, speed);
-    if (D_800C4BA4_de <= arg0->time) {
+    velocity = &arg0->velocity;
+    func_80271F9C_de(velocity, direction, speed);
+    if (arg0->time >= D_800C4BA4_de) {
         FIELD(s8, arg0, 0x1B9) = 0;
         FIELD(s8, arg0, 0x1BA) = 0;
     }
     accel = func_802B2350((s32)arg0->descriptor->motion->acceleration);
     if (accel != 0.0f) {
         vF8 = arg0->direction;
-        func_80271F9C_de(&vE8, &vF8, accel);
-        func_80271F34_de(&arg0->velocity, &arg0->velocity, &vE8);
+        makeImpulse(&vF8, accel, &vE8);
+        addImpulse(velocity, &vE8);
         speed2 = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
                                   arg0->velocity.z * arg0->velocity.z);
         limit = func_802B2350((s32)arg0->descriptor->motion->speed);
-        if (accel > 0.0f ? limit < speed2 : speed2 < limit) {
-            func_80271F9C_de(&arg0->velocity, &vF8, limit);
+        if (accel > 0.0f) {
+            if (!(limit < speed2)) goto after_clamp;
+        } else {
+            if (!(speed2 < limit)) goto after_clamp;
         }
+        func_80271F9C_de(velocity, &vF8, limit);
+    after_clamp:;
     }
     func_80279DD0_de(arg0, 1.0f);
 }
-#else
-INCLUDE_ASM("span_1000", func_8027A4D0_de);
-#endif
 
 #include "COMMON/APPROACHLOCATION.H"
 /* Steers a homing particle toward goal: snaps onto it within 51.2 units, otherwise turns its heading

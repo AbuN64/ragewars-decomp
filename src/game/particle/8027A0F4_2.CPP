@@ -258,7 +258,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
 
   return;
   block_540:
-  func_8027A4D0_de(arg0);
+  Particle_SteerHoming(arg0);
 
   return;
   block_26:
