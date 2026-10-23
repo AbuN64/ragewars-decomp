@@ -17,7 +17,7 @@ extern s32 D_8010EB94[], D_80146894;
 extern void *func_8025305C_de(), *func_8040EC30_de(), *func_80425C70_de(), *Achieve_GetResultText();
 extern s32 func_80265650_de(), func_80425014_de(), func_80425674_de(), func_8041F140_de();
 extern void func_8040E8D8_de(), func_8040E950_de(), func_8043C210_de(), func_8043C278_de(), func_80438A88_de(), func_80425D14_de();
-extern void func_80265688_de(), func_802A001C_de(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), func_8043829C_de(), func_80438614_de();
+extern void func_80265688_de(), func_802A001C_de(), func_804259E0_de(), func_802A0C08_de(), func_802A025C_de(), Achieve_UpdatePlayerPreviewStats(), func_80438614_de();
 extern void func_8041B110_de(), func_8028D380_de(), func_802A2394_de();
 extern char *func_802A0494_de();
 extern u8 D_800F00DC_raw[];
@@ -129,8 +129,8 @@ s32 func_804389B0_eu_x(void *root) {
     func_8040E8D8_de(it, 1);
     SG(it, u8, 0x10) = 0xAF;
     SG(it, u8 *, 0x38) = g + 0x18C;
-    func_8043829C_de();
-    func_8043829C_de();
+    Achieve_UpdatePlayerPreviewStats();
+    Achieve_UpdatePlayerPreviewStats();
     func_80438614_de();
 tail:
     func_8041B110_de(CS(0x272));

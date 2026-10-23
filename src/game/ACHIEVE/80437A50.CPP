@@ -467,7 +467,7 @@ void func_80437A50_de(void) {
         "addiu      $v0, $v0, 0x18C\n"
         "sw         $v0, 0x38($s0)\n"
         ".Lauto_8043811C:\n"
-        "jal        func_8043829C_de\n"
+        "jal        Achieve_UpdatePlayerPreviewStats\n"
         "nop\n"
         "jal        func_80438614_de\n"
         "nop\n"

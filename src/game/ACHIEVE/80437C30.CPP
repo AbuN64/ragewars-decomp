@@ -42,7 +42,7 @@ extern void func_8041B110_de(s32);
 extern void func_8028D380_de(Shared_World *, s32, char *, s32);
 extern char *func_802A0494_de(char *);
 extern void func_802A2394_de(void);
-extern void func_8043829C_de(void);
+extern void Achieve_UpdatePlayerPreviewStats(void);
 extern void func_80438614_de(void);
 /* Opens the level results screen: allocates the preview state, records the finished level for the winning
    player, unlocks the level-end achievements and fills the level name and status lines. */
@@ -192,7 +192,7 @@ done:
         }
         break;
     }
-    func_8043829C_de();
+    Achieve_UpdatePlayerPreviewStats();
     func_80438614_de();
     func_8041B110_de(0x26E + PREVIEW_ID_SHIFT);
     func_8041B110_de(0x26F + PREVIEW_ID_SHIFT);
@@ -224,15 +224,100 @@ done:
 }
 #endif
 
-#ifndef NON_MATCHING
-INCLUDE_ASM("ovl_80400000", func_8043829C_de);
-#endif
 
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 #include "COMMON/OBJECTRECAT28.H"
+extern Profile D_80102B00[];
+extern char D_800E1F48[];
+
+#if !defined(VERSION_US) && !defined(VERSION_US_REV1)
+extern void func_802A0C08_de(char *, char *, ...);
+#endif
+
+#if defined(VERSION_DE)
+extern char rodata_func_8043829C_de_800DDF14[];
+#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800DDF14
+#elif defined(VERSION_US)
+extern char rodata_func_8043829C_de_800DCBC4[];
+#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800DCBC4
+#elif defined(VERSION_US_REV1)
+extern char D_blob_83fae0a1897e2dffd396[];
+#define PREVIEW_NUMBER_FORMAT D_blob_83fae0a1897e2dffd396
+#elif defined(VERSION_EU)
+extern char rodata_func_8043829C_de_800EE594[];
+#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800EE594
+#elif defined(VERSION_EU_X)
+extern char rodata_func_8043829C_de_800E9754[];
+#define PREVIEW_NUMBER_FORMAT rodata_func_8043829C_de_800E9754
+#endif
+
+/* Fill the selected player's preview statistics and optional rank badge. */
+void Achieve_UpdatePlayerPreviewStats(void) {
+    MenuWidget *item, *lastItem;
+    func_8041F2A0_Config *record;
+    s32 denominator;
+    s32 player;
+    s32 statIndex;
+    s32 percent;
+
+    player = D_800E5830->player;
+    statIndex = player;
+    record = &D_80146398[player];
+    item = func_8040EC30_de(D_800E5830->window, (0x275 + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0x96;
+    item->value = D_800E3A58[func_8041F140_de((s32) record->kind)].portrait;
+    item = func_8040EC30_de(D_800E5830->window, (0x276 + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0xAF;
+    item->text = D_80102B00[player].name;
+    item = func_8040EC30_de(D_800E5830->window, (0x277 + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0x73;
+    item->text = func_80424DE8_de(player);
+    item = func_8040EC30_de(D_800E5830->window, (0x278 + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0xAF;
+    func_802A0C08_de(D_800E5830->killsText, PREVIEW_NUMBER_FORMAT, record->kills);
+    item->text = D_800E5830->killsText;
+    item = func_8040EC30_de(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0xAF;
+    func_802A0C08_de(D_800E5830->scoreText, PREVIEW_NUMBER_FORMAT, record->score + record->total);
+    item->text = D_800E5830->scoreText;
+    item = func_8040EC30_de(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0xAF;
+    denominator = D_800FF140_de[statIndex];
+    percent = 0;
+    if (denominator > 0) {
+        percent = (s32) (D_800FEAE0[statIndex] * 0x64) / denominator;
+    }
+    func_802A0C08_de(D_800E5830->ratioText, D_800E1F48, percent);
+    item->text = D_800E5830->ratioText;
+    item = func_8040EC30_de(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
+    func_8040E8D8_de(item, 1);
+    item->alpha = 0xAF;
+    lastItem=item;
+    switch (D_8014DD98) {
+    case 0: func_802A0C08_de(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->other); break;
+    case 1: func_802A0C08_de(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, record->selected); break;
+    default: func_802A0C08_de(D_800E5830->otherText, PREVIEW_NUMBER_FORMAT, 0); break;
+    }
+    lastItem->text = D_800E5830->otherText;
+    if (D_800E5830->badge != -1) {
+        item = func_8040EC30_de(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
+        item->alpha = 0x96;
+        func_8040E8D8_de(item, 1);
+        item->value = D_800E01B0_de[D_800E5830->badge];
+    }
+}
+
+#undef PREVIEW_NUMBER_FORMAT
+
 /* This function's literal pool (retained rodata): 0.3, 0.009, 3.0, -5.0, -100.0, -30.0. */
 extern f32 D_800E1F54;
 extern f32 D_800DDF30_de;
@@ -351,75 +436,3 @@ block_15:
         }
     }
 }
-
-#ifdef NON_MATCHING
-extern Profile D_80102B00[];
-extern char D_800E1F48[];
-
-#if !defined(VERSION_US) && !defined(VERSION_US_REV1)
-extern s32 func_802A0C08_de(void *, s32, ...);
-#endif
-
-/* Fill the selected player's preview statistics and optional rank badge. */
-void func_8043829C_de(void) {
-    MenuWidget *item, *lastItem;
-    func_8041F2A0_Config *record;
-    s32 denominator;
-    s32 player;
-    s32 statIndex;
-    s32 percent;
-
-    player = D_800E5830->player;
-    statIndex = player;
-    record = &D_80146398[player];
-    item = func_8040EC30_de(D_800E5830->window, (0x279 + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0x96;
-    item->value = D_800E3A58[func_8041F140_de((s32) record->kind)].portrait;
-    item = func_8040EC30_de(D_800E5830->window, (0x27a + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0xAF;
-    item->text = D_80102B00[player].name;
-    item = func_8040EC30_de(D_800E5830->window, (0x27b + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0x73;
-    item->text = func_80424DE8_de(player);
-    item = func_8040EC30_de(D_800E5830->window, (0x27c + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0xAF;
-    func_802A0C08_de(D_800E5830->killsText, (s32)previewNumberFormat(), record->kills);
-    item->text = D_800E5830->killsText;
-    item = func_8040EC30_de(D_800E5830->window, (0x27d + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0xAF;
-    func_802A0C08_de(D_800E5830->scoreText, (s32)previewNumberFormat(), record->score + record->total);
-    item->text = D_800E5830->scoreText;
-    item = func_8040EC30_de(D_800E5830->window, (0x27e + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0xAF;
-    denominator = D_800FF140_de[statIndex];
-    percent = 0;
-    if (denominator > 0) {
-        percent = (s32) (D_800FEAE0[statIndex] * 0x64) / denominator;
-    }
-    func_802A0C08_de(D_800E5830->ratioText, (s32)D_800E1F48, percent);
-    item->text = D_800E5830->ratioText;
-    item = func_8040EC30_de(D_800E5830->window, (0x27f + PREVIEW_ID_SHIFT));
-    func_8040E8D8_de(item, 1);
-    item->alpha = 0xAF;
-    lastItem=item;
-    switch (D_8014DD98) {
-    case 0: func_802A0C08_de(D_800E5830->otherText, (s32)previewNumberFormat(), record->other); break;
-    case 1: func_802A0C08_de(D_800E5830->otherText, (s32)previewNumberFormat(), record->selected); break;
-    default: func_802A0C08_de(D_800E5830->otherText, (s32)previewNumberFormat(), 0); break;
-    }
-    lastItem->text = D_800E5830->otherText;
-    if (D_800E5830->badge != -1) {
-        item = func_8040EC30_de(D_800E5830->window, (0x280 + PREVIEW_ID_SHIFT));
-        item->alpha = 0x96;
-        func_8040E8D8_de(item, 1);
-        item->value = D_800E01B0_de[D_800E5830->badge];
-    }
-}
-
-#endif
