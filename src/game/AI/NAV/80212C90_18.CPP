@@ -189,19 +189,8 @@ extern f32 D_800C7218;
 /* the shared initialiser is declared with five parameters above; this caller also passes the source on the stack */
 typedef void (*SetupInitFn)(SetupActor *, SetupDesc *, SetupVec, SetupSource *);
 extern f32 func_80275DD4_de(void *, f32, f32);
-#if defined(VERSION_EU)
-#define ACTOR_SETUP func_80213ACC_eu
-#elif defined(VERSION_EU_X)
-#define ACTOR_SETUP func_80213ACC_eu_x
-#elif defined(VERSION_US)
-#define ACTOR_SETUP func_80213AAC_us
-#elif defined(VERSION_US_REV1)
-#define ACTOR_SETUP func_80213AAC_us_rev1
-#else
-#define ACTOR_SETUP func_80213AAC_de
-#endif
 /* 134/147 words; remaining: target loads actor->flags before the -1 store group (v0 flags, v1 -1), ours loads it after */
-void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbacks) {
+void Nav_InitSpawnedActor(SetupSource *source, SetupActor *actor, SetupCallbacks *callbacks) {
     s32 saved;
     void *model;
     f32 default_;
@@ -275,19 +264,5 @@ void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbac
     }
 }
 #else
-#if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_80213AAC_us);
-#endif
-#if defined(VERSION_EU_X)
-INCLUDE_ASM("span_1000", func_80213ACC_eu_x);
-#endif
-#if defined(VERSION_EU)
-INCLUDE_ASM("span_1000", func_80213ACC_eu);
-#endif
-#if defined(VERSION_DE)
-INCLUDE_ASM("span_1000", func_80213AAC_de);
-#endif
-#if defined(VERSION_US_REV1)
-INCLUDE_ASM("span_1000", func_80213AAC_us_rev1);
-#endif
+INCLUDE_ASM("span_1000", Nav_InitSpawnedActor);
 #endif

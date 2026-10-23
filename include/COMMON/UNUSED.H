@@ -4774,7 +4774,7 @@ struct Dest {
     void *draw; /* 0x10C */
     void *hit; /* 0x110 */
     u8 pad114[8];
-    void *callback11C; /* address stored by func_80213AAC_us_rev1 */
+    void *callback11C; /* address stored by Nav_InitSpawnedActor */
     u8 reserved120[4];
     s32 field124;
     f32 charge; /* 0x128 */

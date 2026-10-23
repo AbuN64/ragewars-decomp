@@ -82,17 +82,7 @@ extern void func_8024B65C_de(char *, s32);
 
 extern void func_802727D8_de(char *);
 
-#if defined(VERSION_EU)
-extern void func_80213ACC_eu(char *, char *, void *);
-#elif defined(VERSION_EU_X)
-extern void func_80213ACC_eu_x(char *, char *, void *);
-#elif defined(VERSION_US)
-extern void func_80213AAC_us(char *, char *, void *);
-#elif defined(VERSION_US_REV1)
-extern void func_80213AAC_us_rev1(char *, char *, void *);
-#else
-extern void func_80213AAC_de(char *, char *, void *);
-#endif
+extern void Nav_InitSpawnedActor(char *, char *, void *);
 
 extern void func_802193C8_de(char *, s32, char *);
 
@@ -251,17 +241,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
     lean = 0;
     delay = 0;
     
-#if defined(VERSION_EU)
-func_80213ACC_eu
-#elif defined(VERSION_EU_X)
-func_80213ACC_eu_x
-#elif defined(VERSION_US)
-func_80213AAC_us
-#elif defined(VERSION_US_REV1)
-func_80213AAC_us_rev1
-#else
-func_80213AAC_de
-#endif
+Nav_InitSpawnedActor
 (obj, obj + 0x170, body_setup(obj));
     if (((LevelActor *)obj)->collisionEnabled != 0) {
         lean = -((LevelActor *)obj)->lean;

@@ -176,7 +176,7 @@ struct Source;
 struct Source {
     u8 pad0[8];
     CVector3 position;
-    void *surface; /* +0x14: func_80213AAC_us_rev1 ground query */
+    void *surface; /* +0x14: Nav_InitSpawnedActor ground query */
     s32 *kind;
     CVector3 velocity;
     u8 pad28[0x10];
