@@ -1,5 +1,4 @@
 D_800E3514 = 0x800E3514;
-func_80212670_de = 0x80212670;
 D_auto_rodata_shared_800C6AB0 = 0x800C6AB0;
 D_auto_src_rw_pool_80202CA0_C76EC_us_rev1 = 0x800C6AEC;
 D_blob_7b17c1522c327939787c = 0x800C6B00;

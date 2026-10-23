@@ -7036,8 +7036,8 @@ struct Shape_func_80210248_eu_2 {
     unsigned char padding_0[4];
     unsigned char unknown_4[4];
 };
-/* Shape_func_80212670_de: partial shape; common base field:field:field:param:func_80212948_de:r4:472:5204:100; size unknown; common-base owner return type is incomplete or conflicting */
-/* Shape_func_80212670_de_2: partial shape; common base field:field:param:func_80212948_de:r4:472:5204; size unknown; common-base owner return type is incomplete or conflicting */
+/* Shape_func_80212670_de: partial shape; common base field:field:field:param:Nav_UpdateRetreatMovement:r4:472:5204:100; size unknown; common-base owner return type is incomplete or conflicting */
+/* Shape_func_80212670_de_2: partial shape; common base field:field:param:Nav_UpdateRetreatMovement:r4:472:5204; size unknown; common-base owner return type is incomplete or conflicting */
 struct Shape_func_80212948_de_3;
 struct Shape_func_80212948_de_3 {
     int field_0;

@@ -26,7 +26,7 @@ extern void Nav_SteerAlongRoute(void *);
 
 extern f32 D_800C20C8_de;
 
-extern void func_80212670_de(void *arg0);
+extern void Nav_SelectFarthestReachableNeighbor(AiController *controller);
 
 extern f32 func_802726BC_de(f32 *arg0, f32 *arg1);
 
@@ -111,40 +111,40 @@ void func_8021290C_de(LevelActor *actor) {
     inner->destination = -1;
 }
 
-void func_80212948_de(void *arg0)
+void Nav_UpdateRetreatMovement(void *actorObject)
 {
-    CloseAttackBrain *state;
-    CloseAttackActor *actor = arg0;
-    s32 old_state;
+    CloseAttackBrain *brain;
+    CloseAttackActor *actor = actorObject;
+    s32 previousDestination;
 
-    state = actor->self->brain;
-    if (state->target == 0) {
-        func_80211020_de(state);
+    brain = actor->self->brain;
+    if (brain->target == 0) {
+        func_80211020_de(brain);
         return;
     }
 
-    old_state = state->destination;
-    if (old_state == -1) {
-        func_80212670_de(state);
-        if (state->destination == old_state ||
-            state->destination == state->route) {
-            func_80209874_de(state, 4);
+    previousDestination = brain->destination;
+    if (previousDestination == -1) {
+        Nav_SelectFarthestReachableNeighbor((AiController *)brain);
+        if (brain->destination == previousDestination ||
+            brain->destination == brain->route) {
+            func_80209874_de(brain, 4);
             return;
         }
     }
 
     if (D_800C20C8_de < func_802726BC_de(
-            &state->target->self->pos.x,
-            &state->player->pos.x)) {
-        func_80209874_de(state, state->combat);
+            &brain->target->self->pos.x,
+            &brain->player->pos.x)) {
+        func_80209874_de(brain, brain->combat);
         return;
     }
 
-    func_80211020_de(state);
-    Nav_SteerAlongRoute(state);
-    func_80208EB0_de(state);
-    if (state->route == state->destination) {
-        state->destination = -1;
+    func_80211020_de(brain);
+    Nav_SteerAlongRoute(brain);
+    func_80208EB0_de(brain);
+    if (brain->route == brain->destination) {
+        brain->destination = -1;
     }
 }
 

@@ -15,7 +15,7 @@ extern f32 func_802726BC_de(f32 *, f32 *);
 
 /* Choose the farthest reachable neighbor linked by kinds 1, 2 or 7
  * from the actor that this state is following. */
-void func_80212674_de(AiController *object)
+void Nav_SelectFarthestReachableNeighbor(AiController *object)
 {
     s32 neighbors[64];
     s32 links[64];
