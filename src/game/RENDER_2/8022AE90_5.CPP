@@ -16,25 +16,25 @@ extern void func_80219A40_de(void *arg0, void *arg1, void *arg2);
 
 
 
-void func_8022B69C_de(void *arg0, f32 arg1, void *arg2) {
-    Slot sp18;
+void func_8022B69C_de(void *actor, f32 arg1, void *arg2) {
+    Slot damage;
     f32 temp_f0;
     f32 temp_f1;
 
-    temp_f0 = ((Shared_ActorView *)arg0)->reserve - arg1;
+    temp_f0 = ((Shared_ActorView *)actor)->reserve - arg1;
     temp_f1 = D_800C9190_de[1];
     if (!(temp_f0 <= temp_f1)) {
-        if (arg0 != 0) {
+        if (actor != 0) {
             temp_f1 = temp_f0;
         } else {
             temp_f1 = temp_f0;
         }
     }
     temp_f0 = D_800C9190_de[1];
-    ((Shared_ActorView *)arg0)->reserve = temp_f1;
+    ((Shared_ActorView *)actor)->reserve = temp_f1;
     if (temp_f1 <= temp_f0) {
-        func_80216488_de(&sp18, arg2, ((LevelActor *)arg0)->active + 0x1900, 25.599998f, 0x80, 0);
-        func_80219A40_de(arg0, &((LevelActor *)arg0)->behaviorFlags, &sp18);
+        func_80216488_de(&damage, arg2, ((LevelActor *)actor)->active + 0x1900, 25.599998f, 0x80, 0);
+        func_80219A40_de(actor, &((LevelActor *)actor)->behaviorFlags, &damage);
     }
 }
 

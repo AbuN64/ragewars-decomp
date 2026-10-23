@@ -138,7 +138,7 @@ static __inline__ s32 containsFire(s16 **entries,s32 effect) {
  if(i<3) goto search;
  return 0;
 }
-void func_8021A9A4_de(AimPlayer *arg0, s32 effect) {
+void func_8021A9A4_de(AimPlayer *aimPlayer, s32 effect) {
 
     AimView *weapon;
     s16 *mode;
@@ -149,92 +149,92 @@ void func_8021A9A4_de(AimPlayer *arg0, s32 effect) {
     s32 value; void *extra; f32 timer;
     f32 amount;
     s16 *ammo;
-    weapon = arg0->view;
-    if (arg0->state < 2 || (s16)arg0->state == 0x10 || (s16)arg0->state == 0x11) return;
-    aim = func_8024796C_de(arg0);
+    weapon = aimPlayer->view;
+    if (aimPlayer->state < 2 || (s16)aimPlayer->state == 0x10 || (s16)aimPlayer->state == 0x11) return;
+    aim = func_8024796C_de(aimPlayer);
     if (effect == 0x439 || effect == 0x4C4 || effect == 0x432 || effect == 0x4E3 ||
-        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) arg0->unk594 = 2;
-    mode = func_8022AA9C_de(arg0, arg0->unk62E);
+        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->unk594 = 2;
+    mode = func_8022AA9C_de(aimPlayer, aimPlayer->unk62E);
     if (effect == 0x439 || effect == 0x4C4 || effect == 0x432 || effect == 0x4E3 ||
-        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) arg0->unk594 = 1;
+        effect == 0x419 || effect == 0x4D3 || effect == 0x425 || effect == 0x4CA) aimPlayer->unk594 = 1;
     if (mode) {
-        WeaponInfo *table = D_800D052C[arg0->unk62E];
-        if (!arg0->controlled && D_80140FF8 == 1) entries=&table->weaponClass;
+        WeaponInfo *table = D_800D052C[aimPlayer->unk62E];
+        if (!aimPlayer->controlled && D_80140FF8 == 1) entries=&table->weaponClass;
         else entries=table->computerClasses;
         if (containsFire(entries,effect)) goto fire;
     }
-    if (arg0->unk62E != 0 && arg0->unk62E != 0x10) goto spawn;
+    if (aimPlayer->unk62E != 0 && aimPlayer->unk62E != 0x10) goto spawn;
 fire:
-    if (weapon) aim = arg0->rotation;
-    if (arg0->unk62E != 0 && arg0->unk62E != 0x10) {
-        ammo = &arg0->ammo[mode[0]];
+    if (weapon) aim = aimPlayer->rotation;
+    if (aimPlayer->unk62E != 0 && aimPlayer->unk62E != 0x10) {
+        ammo = &aimPlayer->ammo[mode[0]];
         *ammo -= (u16)mode[3];
         if (*ammo < 0) *ammo = 0;
         if (*ammo == 0) {
-            if (arg0->weapons[arg0->unk62E][1] == 3 || arg0->weapons[arg0->unk62E][1] == 7) {
-                arg0->weapons[arg0->unk62E][0] = 0;
-                arg0->weapons[arg0->unk62E][1] = -1;
+            if (aimPlayer->weapons[aimPlayer->unk62E][1] == 3 || aimPlayer->weapons[aimPlayer->unk62E][1] == 7) {
+                aimPlayer->weapons[aimPlayer->unk62E][0] = 0;
+                aimPlayer->weapons[aimPlayer->unk62E][1] = -1;
             }
         }
     }
-    if (arg0->equippedKind == 0x11) {
-        if (arg0->animation == 0x1004) {timer=arg0->animationTimer; amount = D_800C2318_de;}
-        else if (arg0->animation == 4000) {timer=arg0->animationTimer; amount = D_800C231C_de;}
+    if (aimPlayer->equippedKind == 0x11) {
+        if (aimPlayer->animation == 0x1004) {timer=aimPlayer->animationTimer; amount = D_800C2318_de;}
+        else if (aimPlayer->animation == 4000) {timer=aimPlayer->animationTimer; amount = D_800C231C_de;}
         else {
-            if (arg0->weaponKind == 8) arg0->animation = 0x1004;
-            else arg0->animation = 4000;
+            if (aimPlayer->weaponKind == 8) aimPlayer->animation = 0x1004;
+            else aimPlayer->animation = 4000;
             goto clear;
         }
         goto consume;
     }
-    if (arg0->animation == 1) arg0->animation = 0x1130;
-    else if (arg0->animation == 0x1130) { timer=arg0->animationTimer; amount = D_800C2320_de; goto consume; }
-    else if (arg0->animation == 0xA28) arg0->animation = 0x1135;
-    else if (arg0->animation == 0x1135) { timer=arg0->animationTimer; amount = D_800C2324_de; goto consume; }
-    else if (arg0->animation == 0x14) arg0->animation = 0x1144;
-    else if (arg0->animation == 0x1144) { timer=arg0->animationTimer; amount = D_800C2328_de; goto consume; }
-    else if (arg0->unk62E == 0 && arg0->weaponKind == 8) arg0->animation = 0x5E5E;
+    if (aimPlayer->animation == 1) aimPlayer->animation = 0x1130;
+    else if (aimPlayer->animation == 0x1130) { timer=aimPlayer->animationTimer; amount = D_800C2320_de; goto consume; }
+    else if (aimPlayer->animation == 0xA28) aimPlayer->animation = 0x1135;
+    else if (aimPlayer->animation == 0x1135) { timer=aimPlayer->animationTimer; amount = D_800C2324_de; goto consume; }
+    else if (aimPlayer->animation == 0x14) aimPlayer->animation = 0x1144;
+    else if (aimPlayer->animation == 0x1144) { timer=aimPlayer->animationTimer; amount = D_800C2328_de; goto consume; }
+    else if (aimPlayer->unk62E == 0 && aimPlayer->weaponKind == 8) aimPlayer->animation = 0x5E5E;
     else {
-            if (arg0->animation == 0x5E5E) { timer=arg0->animationTimer; amount = D_800C232C_de; goto consume; }
-        if ((u32)(arg0->animation - 0x5E24) < 3) arg0->animation = 0x5E56;
-        else if (arg0->animation == 0x5E56) { timer=arg0->animationTimer; amount=D_800C2334_de; goto consume; }
-        else if (arg0->animation == 0x5E29) arg0->animation = 0x5E59;
-        else if (arg0->animation == 0x5E59) { timer=arg0->animationTimer; amount=D_800C2334_de; goto consume; }
-        else if (arg0->animation == 0x5E2A) arg0->animation = 0x5E5A;
-        else if (arg0->animation == 0x5E5A) { timer=arg0->animationTimer; amount = D_800C2330_de; goto consume; }
-        else if (arg0->animation == 0x5E2B) arg0->animation = 0x5E5B;
-        else if (arg0->animation == 0x5E5B) { timer=arg0->animationTimer; amount=D_800C2334_de; goto consume; }
-        else if (arg0->animation == 0x5E2C) arg0->animation = 0x5E5C;
+            if (aimPlayer->animation == 0x5E5E) { timer=aimPlayer->animationTimer; amount = D_800C232C_de; goto consume; }
+        if ((u32)(aimPlayer->animation - 0x5E24) < 3) aimPlayer->animation = 0x5E56;
+        else if (aimPlayer->animation == 0x5E56) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E29) aimPlayer->animation = 0x5E59;
+        else if (aimPlayer->animation == 0x5E59) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E2A) aimPlayer->animation = 0x5E5A;
+        else if (aimPlayer->animation == 0x5E5A) { timer=aimPlayer->animationTimer; amount = D_800C2330_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E2B) aimPlayer->animation = 0x5E5B;
+        else if (aimPlayer->animation == 0x5E5B) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+        else if (aimPlayer->animation == 0x5E2C) aimPlayer->animation = 0x5E5C;
         else {
-                    if (arg0->animation == 0x5E5C) { timer=arg0->animationTimer; amount=D_800C2334_de; goto consume; }
-            if (arg0->animation == 0x5E2D) arg0->animation = 0x5E5D;
-            else if (arg0->animation == 0x5E5D) { timer=arg0->animationTimer; amount=D_800C2334_de; goto consume; }
-            else { arg0->firing = 0; goto spawn; }
+                    if (aimPlayer->animation == 0x5E5C) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+            if (aimPlayer->animation == 0x5E2D) aimPlayer->animation = 0x5E5D;
+            else if (aimPlayer->animation == 0x5E5D) { timer=aimPlayer->animationTimer; amount=D_800C2334_de; goto consume; }
+            else { aimPlayer->firing = 0; goto spawn; }
         }
     }
     goto clear;
 ordinary:
-    timer=arg0->animationTimer; amount = D_800C2334_de;
+    timer=aimPlayer->animationTimer; amount = D_800C2334_de;
 consume:
-    if (!(amount <= timer)) { arg0->firing = 0; goto spawn; }
-    arg0->animationTimer = timer-amount;
+    if (!(amount <= timer)) { aimPlayer->firing = 0; goto spawn; }
+    aimPlayer->animationTimer = timer-amount;
 clear:
-    arg0->firing = 0;
+    aimPlayer->firing = 0;
 spawn:
     if (weapon && weapon->mode != 1) direction = weapon->origin;
-    else func_8022B144_de(arg0, &direction.x);
-    position = arg0->position;
+    else func_8022B144_de(aimPlayer, &direction.x);
+    position = aimPlayer->position;
     extra = 0;
-    if (arg0->unk788 == 2) extra = arg0->unk794;
-    func_802800C0_de(&D_8011D8D0, arg0, arg0, 0, extra, effect, position, aim,
-                     direction, &arg0->aim, -1, (arg0->movementFlags&0x1000)?5:1);
+    if (aimPlayer->unk788 == 2) extra = aimPlayer->unk794;
+    func_802800C0_de(&D_8011D8D0, aimPlayer, aimPlayer, 0, extra, effect, position, aim,
+                     direction, &aimPlayer->aim, -1, (aimPlayer->movementFlags&0x1000)?5:1);
     if (effect == 0x414 || effect == 0x42D) {
-        s32 shots = arg0->shots - 1;
+        s32 shots = aimPlayer->shots - 1;
         if (shots < 0) shots = 0;
-        arg0->shots = shots;
+        aimPlayer->shots = shots;
     }
-    if (arg0->unk62E != 9 && arg0->unk62E != 0x15 && arg0->unk62E != 0x14)
-        D_800FF140_de[arg0->playerIndex]++;
+    if (aimPlayer->unk62E != 9 && aimPlayer->unk62E != 0x15 && aimPlayer->unk62E != 0x14)
+        D_800FF140_de[aimPlayer->playerIndex]++;
 }
 
 /* Resets a player record for a new round: clears the ammo and the 22 action slots, marks every action but the first
@@ -361,7 +361,7 @@ extern s32 func_8020CB3C_de(void *, void *);
  * takes the single point matching D_801371D4; falls back to func_8044D528_de when none fits. 83 aligned edits of 161
  * words; remaining: the ROM keeps the level pointer in s1 and the model argument in fp (ours spills the model). */
 typedef struct SpawnPoint { CVector3 position; f32 heading; s16 ref; s16 floor; } SpawnPoint;
-void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
+void func_8021B1E4_de(struct Player *player, s32 model, s32 scale, s32 reset) {
     void *actor = player;
     void *world = &D_8011FE88;
     SpawnPoint single;
@@ -397,7 +397,7 @@ void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
             }
         }
         if (best == -1) {
-            func_8044D528_de(world, model, arg2);
+            func_8044D528_de(world, model, scale);
         } else {
             FIELD(CVector3, actor, 0x2F0) = points[best].position;
             FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
@@ -410,7 +410,7 @@ void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
         }
     } else {
         if (func_8044D220_de(world, -1, model, &single, 1) == 0 || single.ref != D_801371D4) {
-            func_8044D528_de(world, model, arg2);
+            func_8044D528_de(world, model, scale);
         } else {
             FIELD(CVector3, actor, 0x2F0) = single.position;
             FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);

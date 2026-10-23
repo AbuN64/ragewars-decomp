@@ -34,30 +34,30 @@ extern void func_8021C698_de(void *arg0, void *arg1);
 extern void func_80291BE8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
-void func_8021C9D8_de(void *arg0, void *arg1) {
+void func_8021C9D8_de(void *player, void *camera) {
     CVector3 pos;
     s32 value;
     Gfx *cmd;
 
-    pos = ((LevelActor *)arg0)->position0;
-    pos.y += ((LevelActor *)arg0)->eyeHeight;
-    pos.y += Particle_GetActorHeight(arg0) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
+    pos = ((LevelActor *)player)->position0;
+    pos.y += ((LevelActor *)player)->eyeHeight;
+    pos.y += Particle_GetActorHeight(player) * ((D_800C7470_Pair *)&D_800C22B0_us)->second;
     func_8028C6D4_de(&D_8011FE88, &pos,
-                  &((LevelActor *)arg0)->lighting[D_800D297C]);
+                  &((LevelActor *)player)->lighting[D_800D297C]);
 
     value = 0x66;
     if (D_801462E5 != 0) {
         if ((D_801468F4 != 0) &&
-            (((Shared_ActorView *)arg0)->controls->transientFlag != 0)) {
+            (((Shared_ActorView *)player)->controls->transientFlag != 0)) {
             value = D_800CE47C;
         } else {
-            value = D_800CE430[((MovementDescriptor *)((LevelActor *)arg0)->definition)->body.header.character];
-            ((LevelActor *)arg0)->field3 =
-                ((Shared_ActorView *)arg0)->controls->playerId;
+            value = D_800CE430[((MovementDescriptor *)((LevelActor *)player)->definition)->body.header.character];
+            ((LevelActor *)player)->field3 =
+                ((Shared_ActorView *)player)->controls->playerId;
         }
     }
-    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, value,
-                  ((Actor_func_8022D290_de *)arg0)->unk_0x086C);
+    ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, player, value,
+                  ((Actor_func_8022D290_de *)player)->unk_0x086C);
 
     cmd = D_80110634++;
     gDPPipeSync(cmd);
@@ -74,13 +74,13 @@ void func_8021C9D8_de(void *arg0, void *arg1) {
     cmd = D_80110634++;
     gSPMoveWord(cmd, G_MW_CLIP, 28, 0xFFFE);
 
-    func_80249E28_de(arg0, arg1);
-    if (((Actor_func_8022D290_de *)arg0)->unk_0x1210 != 0) {
-        func_8021C698_de(arg0, arg1);
+    func_80249E28_de(player, camera);
+    if (((Actor_func_8022D290_de *)player)->unk_0x1210 != 0) {
+        func_8021C698_de(player, camera);
     }
 }
 
-void func_8021CBD0_de(void *arg0, WeaponMenuView *arg1) {
+void func_8021CBD0_de(void *arg0, WeaponMenuView *camera) {
     WeaponInfo *entry;
     f32 *rect;
     f32 x;
@@ -97,7 +97,7 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *arg1) {
         func_8026D8F8_de();
 
         entry = D_800D052C[((Shared_ActorView *)arg0)->selectedAction];
-        rect = arg1->viewport;
+        rect = camera->viewport;
         x = rect[0];
         y = rect[1];
         left = entry->scopeBounds[0] * x + rect[2];
@@ -105,7 +105,7 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *arg1) {
         top = entry->scopeBounds[1] * y + rect[3];
         bottom = entry->scopeBounds[3] * y + rect[3];
         func_80291BE8_de(&D_8011FAC0, (s32)left, (s32)right, (s32)top,
-                      (s32)bottom, arg1->clipMode);
+                      (s32)bottom, camera->clipMode);
 
         gSPGeometryMode(D_80110634++, 0, G_FOG);
         gSPMoveWord(D_80110634++, G_MW_CLIP, 4, 1);
@@ -113,7 +113,7 @@ void func_8021CBD0_de(void *arg0, WeaponMenuView *arg1) {
         gSPMoveWord(D_80110634++, G_MW_CLIP, 20, 0xFFFF);
         gSPMoveWord(D_80110634++, G_MW_CLIP, 28, 0xFFFF);
         func_8026D980_de();
-        func_80249E28_de(&((Shared_ActorView *)arg0)->weapon, arg1);
+        func_80249E28_de(&((Shared_ActorView *)arg0)->weapon, camera);
         func_8026D9D0_de();
     }
 }

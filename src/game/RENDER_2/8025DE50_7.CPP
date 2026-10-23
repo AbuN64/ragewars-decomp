@@ -6,9 +6,9 @@
 #include "TEXTURE/80256220_15.H"
 #include "TEXTURE/80256220_16.H"
 
-void func_8025E11C_de(s32 arg0) {
+void func_8025E11C_de(s32 callback) {
     if (D_801427D0 == 0) {
-        func_80258F10_de(&D_8010C080, arg0);
+        func_80258F10_de(&D_8010C080, callback);
     }
 }
 

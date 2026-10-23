@@ -64,15 +64,15 @@ void func_8022B11C_de(void *arg0, s32 arg1) {
     (((struct ObjectState16DA *) ((s8 *) arg0))->unk_16D8) = var_v1;
 }
 
-void func_8022B144_de(void *arg0, f32 *arg1) {
+void func_8022B144_de(void *arg0, f32 *origin) {
     MatrixF sp10;
     func_80226DD0_de(arg0, &sp10);
-    func_802732D0_de((char *)&sp10, arg1);
+    func_802732D0_de((char *)&sp10, origin);
 }
 
 /** Report whether the word at offset 0x5E4 is zero. */
-int func_8022B178_de(struct SharedPlayer *arg0) {
-    return arg0->views5E4.view5E4_0.unk5E4 == 0;
+int func_8022B178_de(struct SharedPlayer *player) {
+    return player->views5E4.view5E4_0.unk5E4 == 0;
 }
 
 /** Return the word at offset 0x1210. */
@@ -80,8 +80,8 @@ int func_8022B184_de(struct SharedPlayer *object) {
     return object->views5E8.view1210_152.unk1210;
 }
 
-void func_8022B190_de(s32 arg0) {
-    Particle_ReleaseOwnerEmitters(&D_8011D8D0, arg0);
+void func_8022B190_de(s32 actor) {
+    Particle_ReleaseOwnerEmitters(&D_8011D8D0, actor);
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_EU_X))

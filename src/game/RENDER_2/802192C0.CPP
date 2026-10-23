@@ -85,8 +85,8 @@ extern void *func_8028D244_de(char *a, unsigned char b, short c);
 
 
 
-void *func_80219408_de(Cursor *arg0) {
-    return func_8028D244_de(&D_8011FE88, arg0->clip, arg0->frame);
+void *func_80219408_de(Cursor *cursor) {
+    return func_8028D244_de(&D_8011FE88, cursor->clip, cursor->frame);
 }
 
 extern void *func_8028D244_de(char *a, unsigned char b, short c);
@@ -95,8 +95,8 @@ extern void *func_8028D244_de(char *a, unsigned char b, short c);
 
 
 
-void func_80219434_de(Cursor *arg0) {
-    func_8028D244_de(&D_8011FE88, arg0->clip, arg0->previous);
+void func_80219434_de(Cursor *cursor) {
+    func_8028D244_de(&D_8011FE88, cursor->clip, cursor->previous);
 }
 
 /** Initialize the compact state record to its default values. */

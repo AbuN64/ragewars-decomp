@@ -28,11 +28,11 @@ void func_8025DE30_de(void) {
     func_80257360_de(&D_8010C080);
 }
 
-s32 func_8025DE54_de(s16 arg0, CVector3 arg1, s32 arg4, s32 arg5) {
+s32 func_8025DE54_de(s16 track, CVector3 arg1, s32 position, s32 arg5) {
     if (D_801427D0 != 0) {
         return -1;
     }
-    return Texture_PlaySoundAtPosition(&D_8010C080, arg0, arg1, arg4, arg5);
+    return Texture_PlaySoundAtPosition(&D_8010C080, track, arg1, position, arg5);
 }
 
 s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
@@ -42,7 +42,7 @@ s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
     return func_80258A7C_de(&D_8010C080, (s16)arg0, arg1, arg4, arg5, arg6);
 }
 
-s32 func_8025DF34_de(s32 arg0) {
+s32 func_8025DF34_de(s32 track) {
     s32 temp_s0;
     s32 temp_s1;
 
@@ -58,20 +58,20 @@ s32 func_8025DF34_de(s32 arg0) {
         vec.x = zero;
         temp_s1 = func_80258D10_de(&D_8010C080);
         func_80258D08_de(&D_8010C080, 1);
-        temp_s0 = Texture_PlaySoundAtPosition(&D_8010C080, (s16)arg0, vec, 0, -1);
+        temp_s0 = Texture_PlaySoundAtPosition(&D_8010C080, (s16)track, vec, 0, -1);
         func_80258D08_de(&D_8010C080, temp_s1);
     }
     return temp_s0;
 }
 
-s32 func_8025DFE8_de(s32 arg0, CVector3 arg1, s32 arg2) {
+s32 func_8025DFE8_de(s32 index, CVector3 position, s32 arg2) {
     if (D_801427D0 != 0) {
         return -1;
     }
-    return func_8025826C_de(&D_8010C080, arg0, arg1, arg2);
+    return func_8025826C_de(&D_8010C080, index, position, arg2);
 }
 
-int func_8025E04C_de(int arg0) {
+int func_8025E04C_de(int index) {
     int temp_s0;
     int temp_s1;
 
@@ -87,7 +87,7 @@ int func_8025E04C_de(int arg0) {
         vec.x = zero;
         temp_s1 = func_80258D10_de(&D_8010C080);
         func_80258D08_de(&D_8010C080, 1);
-        temp_s0 = func_8025826C_de(&D_8010C080, arg0, vec, 0);
+        temp_s0 = func_8025826C_de(&D_8010C080, index, vec, 0);
         func_80258D08_de(&D_8010C080, temp_s1);
     }
     return temp_s0;

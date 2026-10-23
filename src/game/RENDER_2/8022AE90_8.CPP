@@ -14,7 +14,7 @@ extern s32 D_801462C8;
 
 
 void func_8022B8E0_de(void *arg0) {
-    Slot sp18;
+    Slot damage;
     f32 temp_f0;
     f32 temp_f1;
 
@@ -23,11 +23,11 @@ void func_8022B8E0_de(void *arg0) {
         temp_f0 = temp_f1 - D_800D2988;
         ((ObjectState13E4 *)(arg0))->unk_11E4 = temp_f0;
         if ((temp_f0 <= 0.0f) && !(D_801462C8 & 1)) {
-            func_80216488_de(&sp18,
+            func_80216488_de(&damage,
                           ((ObjectState13E4 *)(arg0))->unk_13E0,
                           ((ObjectState13E4 *)(arg0))->unk_174 + 0x1900,
                           25.599998f, 0x4000, 0);
-            func_80219A40_de(arg0, &((ObjectState13E4 *)(arg0))->unk_170, &sp18);
+            func_80219A40_de(arg0, &((ObjectState13E4 *)(arg0))->unk_170, &damage);
         }
     }
 }

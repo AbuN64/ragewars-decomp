@@ -9,20 +9,20 @@ extern void Camera_PostScaledScreenMessage(void *, s32, void *, f32);
 
 
 
-void func_8022B75C_de(void *arg0, u8 *arg1, f32 arg2) {
+void func_8022B75C_de(void *player, u8 *message, f32 size) {
     s32 count;
     s32 temp;
 
-    count = ((Shared_ActorView *)arg0)->messageIndex + 1;
-    ((Shared_ActorView *)arg0)->messageIndex = count;
+    count = ((Shared_ActorView *)player)->messageIndex + 1;
+    ((Shared_ActorView *)player)->messageIndex = count;
     if (count == 5) {
-        ((Shared_ActorView *)arg0)->messageIndex = 0;
+        ((Shared_ActorView *)player)->messageIndex = 0;
     }
-    func_802A025C_de(((Shared_ActorView *)arg0)->messageHistory[((Shared_ActorView *)arg0)->messageIndex], arg1);
-    temp = (s32)((Shared_ActorView *)arg0)->message;
+    func_802A025C_de(((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex], message);
+    temp = (s32)((Shared_ActorView *)player)->message;
     if (temp != 0) {
         Camera_PostScaledScreenMessage(&D_80145088, temp,
-                      ((Shared_ActorView *)arg0)->messageHistory[((Shared_ActorView *)arg0)->messageIndex],
-                      arg2);
+                      ((Shared_ActorView *)player)->messageHistory[((Shared_ActorView *)player)->messageIndex],
+                      size);
     }
 }

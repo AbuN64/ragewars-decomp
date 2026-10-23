@@ -48,8 +48,8 @@ extern f32 D_800C2D1C_de;
 
 
 
-void func_8022B7F8_de(void *arg0, void *arg1) {
-    Shared_ActorView *state = arg0;
+void func_8022B7F8_de(void *actor, void *arg1) {
+    Shared_ActorView *state = actor;
     Shared_ActorView *source = arg1;
     void *owner;
     void *payload;

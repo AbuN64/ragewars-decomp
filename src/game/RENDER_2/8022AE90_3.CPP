@@ -28,14 +28,14 @@ extern s32 func_8028C198_de(void *arg0, s32 arg1);
 
 extern void func_8026DF30_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 
-void *func_8022B304_de(ForcePlayerList *arg0, void *arg1) {
+void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
     CVector3 sp10;
     Shared_ActorView *node;
     void *bestNode;
     f32 bestDist;
     f32 distSq;
 
-    node = (Shared_ActorView *)arg0->head;
+    node = (Shared_ActorView *)forcePlayerList->head;
     bestDist = 0.0f;
     bestNode = 0;
     if (node != 0) {
@@ -89,11 +89,11 @@ void func_8022B484_de(char *arg0) {
     }
 }
 
-void func_8022B510_de(s32 arg0) {
+void func_8022B510_de(s32 player) {
     s32 var_v0;
     void *var_a0;
     var_v0 = 4;
-    var_a0 = arg0 + 0x60;
+    var_a0 = player + 0x60;
     do {
         (((struct IntegerState1250 *) ((s8 *) var_a0))->unk_124C) = 0;
         var_v0 -= 1;

@@ -55,7 +55,7 @@ extern Shared_MatchRules D_801468A0[];
 
 
 
-void func_80219A40_de(struct Shared_ReactionActor *arg0, void *arg1, struct Shared_ReactionInteraction *arg2) {
+void func_80219A40_de(struct Shared_ReactionActor *attacker, void *arg1, struct Shared_ReactionInteraction *packet) {
     f32 temp_f20;
     f32 temp_f3;
     f32 var_f0;
@@ -68,7 +68,7 @@ void func_80219A40_de(struct Shared_ReactionActor *arg0, void *arg1, struct Shar
     s32 temp_v0_5; /* Integer result reused after each score value is stored. */
     s32 temp_v1_2;
     s32 temp_v1_9;
-    s32 var_s3;
+    s32 kind;
     s32 var_v0_2;
     s32 var_v1;
     s32 var_v1_2;
@@ -107,9 +107,9 @@ void func_80219A40_de(struct Shared_ReactionActor *arg0, void *arg1, struct Shar
     struct Shared_ReactionStatistics *temp_v1_7;
 
     var_s2 = 0;
-    var_s3 = -1;
+    kind = -1;
     if ((func_80245798_de() == 0) && (func_80245784_de() == 0) && !(D_801462C8.flags & 1)) {
-        temp_s1 = arg0->unk1D8;
+        temp_s1 = attacker->unk1D8;
         temp_a1 = temp_s1->unk14;
         temp_s6 = temp_s1->unk5E4 > 0;
         if (temp_a1 == 0) {
@@ -133,13 +133,13 @@ flag_clear:
 flag_done:
 
         if (var_v1 != 0) {
-            var_s3 = 0x17;
+            kind = 0x17;
         }
         if (temp_s1->unk650 == 0x20) {
-            var_s3 = 0x20;
+            kind = 0x20;
         }
-        if (arg2 != 0) {
-            temp_a0 = arg2->unk0;
+        if (packet != 0) {
+            temp_a0 = packet->unk0;
             if ((temp_a0 != 0) && (temp_a0->unk0 == 2)) {
                 temp_v1 = temp_a0->unk4;
                 if (temp_v1 == 0x432) {
@@ -190,15 +190,15 @@ block_33:
                     temp_s1->unk11E0 = var_f0 < D_800C22D8_de ? D_800C22D8_de : var_f0;
 
                 }
-                arg2->unk4 = 0x100;
+                packet->unk4 = 0x100;
                 goto block_46;
 block_38:
                 if (temp_s1->unk122C & 0x1000) {
                     temp_v1_2 = temp_s1->unk5E4;
                     if (temp_v1_2 <= 0) {
-                        arg2->unk4 = 0;
+                        packet->unk4 = 0;
                     } else {
-                        temp_s0 = temp_v1_2 + arg2->unk4;
+                        temp_s0 = temp_v1_2 + packet->unk4;
                         var_v1_2 = func_8022AC00_de(temp_s1);
                         if (temp_s0 < var_v1_2) {
                             var_v1_2 = temp_s0;
@@ -209,7 +209,7 @@ block_38:
                 }
                 goto block_47;
 block_45:
-                arg2->unk4 = 0;
+                packet->unk4 = 0;
                 goto block_46;
             } else {
 block_46:
@@ -217,10 +217,10 @@ block_46:
             }
         } else {
 block_47:
-            func_80229FA0_de(temp_s1, arg2);
-            Render_ApplyPlayerDamage(temp_s1, arg0, arg2->unk4, arg2->unkC, var_s3);
+            func_80229FA0_de(temp_s1, packet);
+            Render_ApplyPlayerDamage(temp_s1, attacker, packet->unk4, packet->unkC, kind);
 
-            temp_a0_2 = arg2->unk0;
+            temp_a0_2 = packet->unk0;
             if (temp_a0_2 != 0) {
                 temp_v1_3 = temp_a0_2->unk0;
                 if (temp_v1_3 != 1) {
@@ -240,8 +240,8 @@ block_47:
                                 temp_v1_5 = (void *)var_s2->unk5D8;
                                 temp_v1_5->special_hits = (u16) (temp_v1_5->special_hits + 1);
                             }
-                            temp_f20 = func_802B7130_de(arg0->unk6C);
-                            temp_f3 = ((temp_s1->unk8 - reaction_source->unk8) * -temp_f20) + ((temp_s1->unk10 - reaction_source->unk10) * -func_802B6560_de(arg0->unk6C));
+                            temp_f20 = func_802B7130_de(attacker->unk6C);
+                            temp_f3 = ((temp_s1->unk8 - reaction_source->unk8) * -temp_f20) + ((temp_s1->unk10 - reaction_source->unk10) * -func_802B6560_de(attacker->unk6C));
                             if (temp_f3 < D_800C22DC_de) {
 
                                 temp_s1->unk13C4 = 1;
@@ -264,8 +264,8 @@ block_69:
                 var_s2 = temp_s1;
             }
             if (var_s2 != 0) {
-                if (arg2 != 0) {
-                    temp_a0_3 = arg2->unk0;
+                if (packet != 0) {
+                    temp_a0_3 = packet->unk0;
                     projectile_present = temp_a0_3 != 0;
                     do { 
                       if (!projectile_present) { break; }
@@ -279,7 +279,7 @@ block_69:
                             case 0x427:
                                 goto block_87;
                             default:
-                                if (!(arg2->unkC & 0x100000)) {
+                                if (!(packet->unkC & 0x100000)) {
                                     temp_v1_6 = var_s2->unk5D4;
                                     goto block_86;
                                 }
@@ -289,7 +289,7 @@ block_69:
                     } while (0);
                     if ((temp_a0_3 != 0) && (temp_a0_3->unk0 == 1) && (temp_a0_3->unk100 & 0x300000)) {
                         attributed_actor = temp_a0_3->unk1D8;
-                        if (!(arg2->unkC & 0x100000)) {
+                        if (!(packet->unkC & 0x100000)) {
                             temp_v1_6 = attributed_actor->unk5D4;
 block_86:
                             ++D_800FEAE0[temp_v1_6];
@@ -322,7 +322,7 @@ block_88:
                             } else {
                                 var_s2->unk5D8->deaths_normal[temp_s3]++;
                             }
-                            Render_PostKillMessages(temp_s1, var_s2, arg2);
+                            Render_PostKillMessages(temp_s1, var_s2, packet);
                             if (var_s2 != 0) {
                                 temp_a0_5 = var_s2->unk1338;
                                 temp_v1_9 = temp_a0_5 + 1;
