@@ -224,15 +224,6 @@ struct SlotRecAt4 {
 };
 
 struct Match_func_80420618_de;
-struct Match_func_80420618_de {
-    char pad00[0xD];
-    unsigned char mode;
-    char pad0E[0x16];
-    s8 unk24;
-    s8 unk25;
-    char pad26[0xAA];
-    RosterSlot slots[8];
-};
 
 struct State_func_80420C10_de;
 struct State_func_80420C10_de {

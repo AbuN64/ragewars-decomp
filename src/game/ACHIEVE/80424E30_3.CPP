@@ -9,6 +9,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/STATERECAT91.H"
+#include "ACHIEVE/80424E30.H"
 #include "stddef.h"
 #include "TYPES.H"
 #include "ACHIEVE/80424E30_3.H"
