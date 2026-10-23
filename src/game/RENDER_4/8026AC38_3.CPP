@@ -180,52 +180,57 @@ extern s32 D_800CC364;
 extern u32 D_800CC384;
 extern void func_80253BBC_de(s32, void **);
 
+/* 41/168 aligned words differ: geometry-mode lifetime and scheduling.
+ * The sixth argument overrides the texture segment; the fifth is unused. */
 void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
-                     s32 segment, void *textures, s32 useProvidedTextures, s32 arg6) {
-    void *header;
-    void *parts;
-    void *part;
-    void *list;
-    Gfx *sync;
-    u32 geometry;
-    s32 count;
-    s32 i;
+                     s32 segment, void *unusedLighting, s32 textureAddress, s32 unusedMode) {
+    void *resourceHeader;
+    void *textures;
+    void *partTable;
+    void *partHeader;
+    void *displayList;
+    Gfx *syncCommand;
+    u32 geometryMode;
+    s32 partCount;
+    s32 partIndex;
+    s32 opacity = alpha;
 
     if (D_800E28A4 - (((u32)D_80110634 - (u32)D_8011BDC0->commands) >> 3) < 3000U) {
         return;
     }
-    header = *(void **)resource;
+    resourceHeader = *(void **)resource;
     func_80253BBC_de(0, (void **)resource);
     if (segment != 0) {
         gSPSegment(D_80110634++, 1, matrix);
     } else {
         gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
     }
-    if (useProvidedTextures == 0) {
-        textures = func_8028FDB4_de(header, 0);
+    textures = (void *)textureAddress;
+    if (textures == 0) {
+        textures = func_8028FDB4_de(resourceHeader, 0);
     }
     gSPSegment(D_80110634++, 2, (u32)textures);
-    parts = func_8028FDB4_de(header, 2);
-    geometry = D_800CC384;
+    partTable = func_8028FDB4_de(resourceHeader, 2);
+    geometryMode = D_800CC384;
     D_800CC360 = -1;
     D_800CC364 = -1;
-    sync = D_80110634++;
-    count = *(s32 *)parts;
-    gDPPipeSync(sync);
+    syncCommand = D_80110634++;
+    partCount = *(s32 *)partTable;
+    gDPPipeSync(syncCommand);
     gDPSetTextureLUT(D_80110634++, G_TT_NONE);
     gSPTextureL(D_80110634++, 0x8000, 0x8000, 0, 0xFF, G_TX_RENDERTILE, G_ON);
-    gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, alpha & 0xFF);
+    gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, opacity & 0xFF);
     gDPSetCombineLERP(D_80110634++, 0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE,
                      0, 0, 0, PRIMITIVE, 0, 0, 0, PRIMITIVE);
     gDPSetRenderMode(D_80110634++, (*(u32 *)&D_800CC38C), G_RM_ZB_XLU_DECAL2);
     gSPGeometryMode(D_80110634++, G_SHADE | G_CULL_BACK | G_FOG |
                     G_LIGHTING | G_TEXTURE_GEN | G_SHADING_SMOOTH, 0);
-    gSPGeometryMode(D_80110634++, 0, geometry | G_CULL_BACK);
-    for (i = 0; i < count; i++) {
-        part = func_8028FDB4_de(parts, i);
-        func_8028FDB4_de(part, 0);
-        list = func_8028FDB4_de(part, 1);
-        gSPDisplayList(D_80110634++, (u32)list);
+    gSPGeometryMode(D_80110634++, 0, geometryMode | G_CULL_BACK);
+    for (partIndex = 0; partIndex < partCount; partIndex++) {
+        partHeader = func_8028FDB4_de(partTable, partIndex);
+        func_8028FDB4_de(partHeader, 0);
+        displayList = func_8028FDB4_de(partHeader, 1);
+        gSPDisplayList(D_80110634++, (u32)displayList);
     }
     D_800CC364 = -1;
     D_800CC360 = -1;
