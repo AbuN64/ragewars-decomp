@@ -97,23 +97,23 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
 #include "COMMON/WORLD.H"
 #define PD_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 typedef struct PakVec { f32 x; f32 y; f32 z; } PakVec;
-typedef struct Copy188 { u8 bytes[0x188]; } Copy188;
+typedef struct Copy188 { s32 words[98]; } Copy188;
 extern u32 *D_80110634;
 extern s32 D_800D297C, D_800E28D0, D_800E28D4, D_800E1E20, D_800CD730, D_800CD8D0, D_8014DE50;
 extern f32 D_800DE480_de, D_800DE484, D_800DE488, D_800DE498_de[], D_800DE4A0, literals_func_8028D244_de;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
-extern void func_802A001C_de();
-extern u8 *func_8028CFA0_de();
-extern void func_80272898_de();
-extern void func_802466A0_de();
-extern void func_8024B2D0_de();
-extern s32 func_8025477C_de();
-extern void func_8025476C_de();
-extern void func_8028B274_de();
-extern void func_8024B8C4_de();
-extern void func_80246E44_de();
-extern void func_8026D980_de();
+extern void func_802A001C_de(void *, s32, s32);
+extern u8 *func_8028CFA0_de(void *, s32, s32);
+extern void func_80272898_de(void *, PakVec *, PakVec *);
+extern void func_802466A0_de(u8 *, s32, s32, s32, u8 *, s32, s32, f32, PakVec, s32, PakVec, PakVec, s32);
+extern void func_8024B2D0_de(u8 *);
+extern s32 func_8025477C_de(void);
+extern void func_8025476C_de(s32);
+extern void func_8028B274_de(void *, u8 *, s32, s32);
+extern void func_8024B8C4_de(u8 *);
+extern void func_80246E44_de(u8 *);
+extern void func_8026D980_de(u8 *, u8 *);
 extern void func_80249E28_de();
 extern void func_8026D9D0_de();
 void func_80440838_de(u8 *self, s32 *selected, void *unused, u8 *ctx) {

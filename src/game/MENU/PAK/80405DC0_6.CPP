@@ -2,8 +2,8 @@
 #include "COMMON/PAK_MENU.H"
 
 #ifdef NON_MATCHING
-typedef struct Copy70 { u8 bytes[0x70]; } Copy70;
-typedef struct Copy580 { u8 bytes[0x580]; } Copy580;
+typedef struct Copy70 { s32 words[28]; } Copy70;
+typedef struct Copy580 { s32 words[0x160]; } Copy580;
 extern u8 *D_8011FECC;
 extern void *D_800DE860_de;
 extern u8 *D_800DE868;
