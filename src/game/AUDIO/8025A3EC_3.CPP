@@ -112,47 +112,45 @@ typedef struct ListNode_8025B034 {
     char pad8[0x38];
     s16 priority;
 } ListNode_8025B034;
-s16 func_8025B034_de(char *player, s32 variant, s32 count, s32 priority, s32 unused4) {
+s16 Audio_SelectVoiceSlot(char *player, s32 unusedVariant, s32 unusedCount, s32 priority, s32 unused) {
     ContextCode8025A3EC *context;
     View_func_8025AE1C_de *view;
-    View_func_8025AE1C_de *iter;
-    s32 cur;
+    View_func_8025AE1C_de *voices;
+    s32 slotPriority;
     Slots *slots;
-    ListNode_8025B034 *head;
     ListNode_8025B034 *node;
     char *channel;
-    s32 best;
-    s32 found;
-    s32 limit;
-    s32 i;
-    s32 ret;
+    s32 bestPriority;
+    s32 selectedSlot;
+    s32 priorityLimit;
+    s32 slotIndex;
     context = *(ContextCode8025A3EC **)player;
-    iter = (View_func_8025AE1C_de *)(player + 4);
+    voices = (View_func_8025AE1C_de *)(player + 4);
     slots = &context->slots;
-    best = (s16)priority;
-    found = -1;
-    limit = best;
-    for (i = 0; i < 16; i++) {
-        if (slots->ids[i] == -1) {
-            return i;
+    bestPriority = (s16)priority;
+    selectedSlot = -1;
+    priorityLimit = bestPriority;
+    for (slotIndex = 0; slotIndex < 16; slotIndex++) {
+        if (slots->ids[slotIndex] == -1) {
+            return slotIndex;
         }
-        cur = ((View_func_8025AE1C_de *)((char *)iter + i * 0xCC))->field38;
-        if (cur < limit && best >= cur && cur != 100) {
-            best = cur;
-            found = i;
+        slotPriority = voices[slotIndex].field38;
+        if (slotPriority < priorityLimit && bestPriority >= slotPriority && slotPriority != 100) {
+            bestPriority = slotPriority;
+            selectedSlot = slotIndex;
         }
     }
-    if (found == -1) {
+    if (selectedSlot == -1) {
         return -1;
     }
-    if (slots->ids[found] == -1) {
+    if (slots->ids[selectedSlot] == -1) {
         node = *(ListNode_8025B034 **)((char *)context + 0x140);
         if (node != (ListNode_8025B034 *)((char *)context + 0x13C) && (s16)priority < node->priority) {
             return -1;
         }
-        return found;
+        return selectedSlot;
     }
-    view = (View_func_8025AE1C_de *)((char *)iter + (s16)found * 0xCC);
+    view = &voices[(s16)selectedSlot];
     view->done = 1;
     view->tracked = 0;
     context = view->context;
@@ -170,10 +168,10 @@ s16 func_8025B034_de(char *player, s32 variant, s32 count, s32 priority, s32 unu
     return 0x10;
 }
 #else
-INCLUDE_ASM("span_1000", func_8025B034_de);
+INCLUDE_ASM("span_1000", Audio_SelectVoiceSlot);
 #endif
 
-extern s16 func_8025B034_de(char *, s32, s32, s32, s32);
+extern s16 Audio_SelectVoiceSlot(char *, s32, s32, s32, s32);
 
 typedef struct SoundBankState {
     ALBank_s *bank;
@@ -247,7 +245,7 @@ extern s32 func_8025E524_de(void *);
 extern s32 func_8025E548_de(void *);
 extern s32 func_8025E578_de(void *);
 extern s16 func_802B2510_de(void *, s32);
-/* Starts a note on a free voice: picks the voice with func_8025B034_de, asks the sound set for its sample, and
+/* Starts a note on a free voice: picks the voice with Audio_SelectVoiceSlot, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
  * 0 when the note's set is too small, the chance roll fails, or no voice or sample is available. */
 SoundVoice *Audio_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *note, s32 variant, s32 userData) {
@@ -283,7 +281,7 @@ SoundVoice *Audio_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *no
             goto fail;
         }
     }
-    index = func_8025B034_de((s8 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
+    index = Audio_SelectVoiceSlot((s8 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
     if (index == -1) {
         goto fail;
     }
