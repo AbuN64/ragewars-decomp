@@ -164,35 +164,38 @@ void func_8041C7F4_de(Obj8041CAD8 *self) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
-#define FR_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-#define D_80141008_BYTES ((u8 *)&D_80141008)
+#include "RESMGR/802A0888.H"
 extern s32 D_800D297C, D_800E28D0, D_800E28D4;
 extern s32 D_800CD8D0;
-extern void func_802A001C_de();
 extern void *func_8028CFA0_de(void *, s32, s32, void *);
-extern void func_80272898_de();
 extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de();
+#ifdef NON_MATCHING
+/* 31/182 aligned edits; remaining: register allocation of the setup prologue (s0/s2/s3 roles) */
 void *func_8041CAD8_de(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing,
                        f32 scale, s32 arg8) {
     CVector3 scales;
     CVector3 local60;
     CVector3 local70;
     CVector3 local80;
-    u8 *drawState;
-    u32 *displayList;
+    MenuModelScreen *view;
+    Obj8041CAD8At190 *draw;
+    Gfx *g;
+    char *address;
+    f32 ratio;
     Ret8028CFA0 *source;
-    func_802A001C_de(&local60, 0, 0xC);
-    displayList = (u32 *)D_80110634;
-    D_80110634 = (Gfx *)(displayList + 2);
-    displayList[0] = 0xDA380007;
-    displayList[1] = (u32)(D_80141008_BYTES + 0x380 + D_800D297C * 64);
+    address = (char *)(u32)(D_800D297C << 6);
     self->unk4A0 = arg8;
-    drawState = (u8 *)self + 0x190;
+    func_802A001C_de(&local60, 0, 0xC);
+    g = D_80110634++;
+    draw = &self->sub190;
+    address += 0x380;
+    view = D_80141008;
     self->unk49C = 1;
-    source = (Ret8028CFA0 *)func_8028CFA0_de(&D_8011FE88, id, arg2, displayList);
+    address += (u32)view;
+    gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
+    source = func_8028CFA0_de(&D_8011FE88, id, arg2, g);
     if (source == 0) {
         self->unk478 = 0;
         return 0;
@@ -201,25 +204,26 @@ void *func_8041CAD8_de(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, 
     self->unk478 = 1;
     self->unk498 = scale;
     self->copy4 = *source;
+    self->unk480 = position;
+    self->unk48C = facing;
     self->copy4.unk0 = 0;
     self->copy4.unk4 = 0;
     self->copy4.unk14 = 0;
     self->copy4.unk18 = 0;
     self->copy4.unk1C = 0;
     self->copy4.unk8 = D_800DD490_de;
-    self->unk480 = position;
-    self->unk48C = facing;
-    scales.x = self->unk480.x * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
-    scales.z = self->unk480.z * (FR_FIELD(D_80141008_BYTES, f32, 0x29C) / (f32)D_800E28D0);
-    scales.y = self->unk480.y * (FR_FIELD(D_80141008_BYTES, f32, 0x2A0) / (f32)D_800E28D4);
-    FR_FIELD(drawState, CVector3, 0x50) = scales;
+    ratio = view->width / (f32)D_800E28D0;
+    scales.x = self->unk480.x * ratio;
+    scales.z = self->unk480.z * ratio;
+    scales.y = self->unk480.y * (view->height / (f32) * (&D_800E28D0 + 1));
+    draw->unk50 = scales;
     local70 = self->unk48C;
-    func_80272898_de(D_80141008_BYTES + 0x160, &local70, &local80);
-    func_802466A0_de(drawState, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * (&D_800DD490_de)[1],
-                     local80, 0, self->unk480, local60, 0);
-    func_8024B2D0_de(drawState);
+    func_80272898_de(&view->camera, &local70, &local80);
+    func_802466A0_de(draw, -1, arg3, D_800CD8D0, &self->copy4, -1, 0, self->unk498 * *(&D_800DD490_de + 1), local80, 0,
+                     self->unk480, local60, 0);
+    func_8024B2D0_de(draw);
     if (self->unk0 == 9) {
-        ((void (*)(Obj8041CAD8 *, s32, s32, s32))func_8041CE18_de)(self, arg3, arg4, arg2);
+        func_8041CE18_de(self, arg3, arg4, arg2);
     }
     return &self->copy4;
 }
@@ -263,14 +267,10 @@ void func_8041CE10_de(struct Object49C *object, s32 value) {
     object->value = value;
 }
 
-/* Sets field 0x274 of arg0 to 0xFFFF and then calls func_8041C610_de on it. */
-void func_8041CE18_de(Unk8041CE88 *arg0) {
+/* Sets field 0x274 of arg0 to 0xFFFF and then calls func_8041C610_de on it, passing its other three arguments through. */
+void func_8041CE18_de(Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected) {
     arg0->unk274 = 0xFFFF;
-#ifdef NON_MATCHING
-    func_8041C610_de(arg0, 0, 0, 0);
-#else
-    func_8041C610_de(arg0);
-#endif
+    func_8041C610_de(arg0, id, extra, expected);
 }
 
 #if defined(VERSION_US)

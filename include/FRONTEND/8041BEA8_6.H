@@ -2,13 +2,8 @@
 #define FRONTEND_8041BEA8_6_H
 #include "COMMON/LABEL.H"
 extern void func_8041CDDC_de(ObjRecAt48C *arg0, CVector3 v);
-extern void func_8041CE18_de(Unk8041CE88 *arg0);
-#ifdef NON_MATCHING
-/* The draft body reads three more argument registers than the caller sets. */
-extern void func_8041C610_de();
-#else
-extern void func_8041C610_de(struct Unk8041CE88 * arg0);
-#endif
+extern void func_8041CE18_de(Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected);
+extern void func_8041C610_de(struct Unk8041CE88 *arg0, s32 id, s32 extra, s32 expected);
 extern void func_8041CE08_de(ObjRecAt498 *arg0, s32 arg1);
 extern void func_8041CDB0_de(ObjRecAt480 *arg0, CVector3 v);
 typedef struct Ret8028CFA0 {
@@ -47,9 +42,7 @@ typedef struct Obj8041CAD8At190 {
     s32 unk44;
     f32 unk48;
     s32 unk4C;
-    s32 unk50;
-    s32 unk54;
-    s32 unk58;
+    CVector3 unk50;
     s32 unk5C;
     s32 unk60;
     s32 unk64;
