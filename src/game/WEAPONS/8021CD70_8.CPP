@@ -37,7 +37,7 @@ extern void Team_UpdateDraftPanel(void *, void *, void *);
 extern void func_80218B84_de(void *, void *, void *);
 extern void func_80219480_de(void *, void *);
 extern void func_80219A40_de(void *, void *, void *);
-extern void func_8021E5F8_de(void *, void *);
+extern void Weapons_UpdatePlayerEffectLights(void *, void *);
 extern void func_80220D44_de(void *);
 extern s32 func_802227F4_de(void *, void *, s32);
 extern void func_80222908_de(void *, void *, ObjectState54 *);
@@ -473,7 +473,7 @@ void func_80220ED4_de(SharedPlayer *player)
         player->views5E8.view678_40.unk678 = 0.0f;
       }
     }
-    func_8021E5F8_de(player, actor);
+    Weapons_UpdatePlayerEffectLights(player, actor);
     oldModel = actor->views0.view14_6.model;
     prev = actor->views0.view8_3.pos;
     before = func_8024E7DC_de(actor);

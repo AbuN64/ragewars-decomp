@@ -124,109 +124,127 @@ void func_8021E2A0_de(SharedPlayer *player, void *view) {
     }
 }
 
-#ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
+#include "COMMON/AIPROFILE.H"
+struct PlayerEffectLight {
+    u8 pad0[8];
+    void *pattern;
+    f32 radius;
+    s16 x, y, z;
+    s16 active;
+};
+#if defined(VERSION_US)
+#define PLAYER_SECOND_LIGHT_RADIUS D_auto_800C24E0
+#else
+#define PLAYER_SECOND_LIGHT_RADIUS D_800C76A0
 #endif
-extern f32 D_800C259C_de, D_800C25A0_de, D_800C25A4_de, D_800C25A8_de, D_800C25AC_de, D_800C76A0;
+extern f32 D_800C259C_de, D_800C25A0_de, D_800C25A4_de, D_800C25A8_de, D_800C25AC_de, PLAYER_SECOND_LIGHT_RADIUS;
 extern f32 D_800C25B4_de, D_800C25B8_de, D_800C25BC_de, D_800C25C0_de;
-extern char D_auto_rodata_unresolved_800CE410[], D_800C91C8_de[], D_auto_800CE420[], D_800C91D8_de[];
+#if defined(VERSION_DE)
+#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C91C0
+#define PLAYER_MODE_LIGHT_PATTERN D_auto_800C91D0
+#elif defined(VERSION_EU)
+#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C9DB0
+#define PLAYER_MODE_LIGHT_PATTERN D_auto_800C9DC0
+#elif defined(VERSION_EU_X)
+#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800CA780
+#define PLAYER_MODE_LIGHT_PATTERN D_auto_800CA790
+#elif defined(VERSION_US)
+#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800C90E0
+#define PLAYER_MODE_LIGHT_PATTERN D_auto_800C90F0
+#elif defined(VERSION_US_REV1)
+#define PLAYER_EFFECT_LIGHT_PATTERN D_auto_rodata_unresolved_800CE410
+#define PLAYER_MODE_LIGHT_PATTERN D_auto_800CE420
+#endif
+extern char PLAYER_EFFECT_LIGHT_PATTERN[], D_800C91C8_de[], PLAYER_MODE_LIGHT_PATTERN[], D_800C91D8_de[];
 extern void *func_80268C1C_de(void *, void *);
-extern void func_8024BC94_de(CVector3 *, void *, f32, f32, f32);
+extern void func_8024BC94_de(CVector3 *, void *, CVector3);
 extern s32 func_802744D4_de(void);
-/* Fills in one light record of a player: places it at the player's position (offset by the vector from
- * func_8024BC94_de) with the record's flag at 0x16 set, its position as shorts at 0x10..0x14 and its radius
- * (0xC) from the given constants. */
-static void placePlayerLight(void *player, void *light, f32 offsetY, f32 heightScale, f32 radius) {
+extern f32 Particle_GetActorHeight(void *);
+/* Position one effect light, reading its scale and radius at their use sites. */
+static inline void placePlayerLight(struct Player *player, struct PlayerEffectLight *light,
+                                    f32 offsetZ, const f32 *heightScale, const f32 *radius) {
+    CVector3 offset;
     CVector3 position;
-    func_8024BC94_de(&position, player, 0.0f, 0.0f, offsetY);
-    func_80271F34_de(&position, &position, (char *)player + 8);
-    FIELD(s16, light, 0x16) = 1;
-    FIELD(s16, light, 0x10) = (s16)position.x;
-    FIELD(s16, light, 0x12) = (s16)(position.y + Particle_GetActorHeight(player) * heightScale);
-    FIELD(f32, light, 0xC) = radius;
-    FIELD(s16, light, 0x14) = (s16)position.z;
+    offset.x = 0.0f;
+    offset.y = 0.0f;
+    offset.z = offsetZ;
+    func_8024BC94_de(&position, player, offset);
+    func_80271F34_de(&position, &position, &player->pos);
+    light->active = 1;
+    light->x = (s16)position.x;
+    light->y = (s16)(position.y + Particle_GetActorHeight(player) * *heightScale);
+    light->z = (s16)position.z;
+    light->radius = *radius;
 }
-/* Keeps the three light records of a player's effect (0x67C, 0x680, 0x684) in step with its timer at 0x678:
- * allocates and places the two flickering lights while the timer runs, flickers their flag with a random
- * roll once the timer is low, releases them when it is zero, and handles the third light that follows the
- * 0x4000 game flag and toggles its table with button 0x20. */
-void func_8021E5F8_de(void *player) {
-    void *light;
+/* Keep the timer lights and the special-mode light in step with player state. */
+void Weapons_UpdatePlayerEffectLights(struct Player *player) {
+    struct PlayerEffectLight *light;
     s32 flicker;
-    s32 roll;
-    if (FIELD(u32, &D_801462C8, 0) & 0x4000) {
-        FIELD(f32, player, 0x678) = 0.0f;
-    } else if (FIELD(void *, player, 0x684) != 0) {
-        func_80268C7C_de(&D_8013B1A8, (s32)FIELD(void *, player, 0x684));
-        FIELD(void *, player, 0x684) = 0;
+    if (D_801462C8.flags & 0x4000) {
+        player->rangeTimer = 0.0f;
+    } else if (player->rangeNodes[2] != 0) {
+        func_80268C7C_de(&D_8013B1A8, (s32)player->rangeNodes[2]);
+        player->rangeNodes[2] = 0;
     }
-    if (FIELD(f32, player, 0x678) != 0.0f) {
-        light = FIELD(void *, player, 0x67C);
+    if (player->rangeTimer != 0.0f) {
+        light = (struct PlayerEffectLight *)player->rangeNodes[0];
         if (light == 0) {
-            light = func_80268C1C_de(&D_8013B1A8, D_auto_rodata_unresolved_800CE410);
+            light = func_80268C1C_de(&D_8013B1A8, PLAYER_EFFECT_LIGHT_PATTERN);
         }
         if (light != 0) {
-            FIELD(void *, player, 0x67C) = light;
-            placePlayerLight(player, light, D_800C259C_de, D_800C25A0_de, D_800C25A4_de);
+            player->rangeNodes[0] = (struct RangeNode *)light;
+            placePlayerLight(player, light, D_800C259C_de, &D_800C25A0_de, &D_800C25A4_de);
         }
-        light = FIELD(void *, player, 0x680);
+        light = (struct PlayerEffectLight *)player->rangeNodes[1];
         if (light == 0) {
             light = func_80268C1C_de(&D_8013B1A8, D_800C91C8_de);
         }
         if (light != 0) {
-            FIELD(void *, player, 0x680) = light;
-            placePlayerLight(player, light, D_800C25A8_de, D_800C25AC_de, D_800C76A0);
+            player->rangeNodes[1] = (struct RangeNode *)light;
+            placePlayerLight(player, light, D_800C25A8_de, &D_800C25AC_de, &PLAYER_SECOND_LIGHT_RADIUS);
         }
-        if (FIELD(f32, player, 0x678) < D_800C25B4_de) {
+        if (player->rangeTimer < D_800C25B4_de) {
             flicker = 1;
-            if (FIELD(f32, player, 0x678) < D_800C25B8_de) {
-                roll = func_802744D4_de();
-                flicker = ((roll % 100) < 50) ^ 1;
+            if (player->rangeTimer < D_800C25B8_de) {
+                flicker ^= (func_802744D4_de() % 100) < 50;
             } else {
-                roll = func_802744D4_de();
-                if ((roll % 100) < 15) {
+                if ((func_802744D4_de() % 100) < 15) {
                     flicker = 0;
                 }
             }
-            if (FIELD(void *, player, 0x67C) != 0) {
-                FIELD(s16, FIELD(void *, player, 0x67C), 0x16) = flicker;
+            if (player->rangeNodes[0] != 0) {
+                ((struct PlayerEffectLight *)player->rangeNodes[0])->active = flicker;
             }
-            if (FIELD(void *, player, 0x680) != 0) {
-                FIELD(s16, FIELD(void *, player, 0x680), 0x16) = flicker;
+            if (player->rangeNodes[1] != 0) {
+                ((struct PlayerEffectLight *)player->rangeNodes[1])->active = flicker;
             }
         }
     } else {
-        if (FIELD(void *, player, 0x67C) != 0) {
-            func_80268C7C_de(&D_8013B1A8, (s32)FIELD(void *, player, 0x67C));
-            FIELD(void *, player, 0x67C) = 0;
+        if (player->rangeNodes[0] != 0) {
+            func_80268C7C_de(&D_8013B1A8, (s32)player->rangeNodes[0]);
+            player->rangeNodes[0] = 0;
         }
-        if (FIELD(void *, player, 0x680) != 0) {
-            func_80268C7C_de(&D_8013B1A8, (s32)FIELD(void *, player, 0x680));
-            FIELD(void *, player, 0x680) = 0;
+        if (player->rangeNodes[1] != 0) {
+            func_80268C7C_de(&D_8013B1A8, (s32)player->rangeNodes[1]);
+            player->rangeNodes[1] = 0;
         }
     }
-    if (FIELD(u32, &D_801462C8, 0) & 0x4000) {
-        light = FIELD(void *, player, 0x684);
+    if (D_801462C8.flags & 0x4000) {
+        light = (struct PlayerEffectLight *)player->rangeNodes[2];
         if (light == 0) {
-            light = func_80268C1C_de(&D_8013B1A8, D_auto_800CE420);
-            if (light != 0) {
-                FIELD(void *, player, 0x684) = light;
-            }
+            light = func_80268C1C_de(&D_8013B1A8, PLAYER_MODE_LIGHT_PATTERN);
         }
         if (light != 0) {
-            placePlayerLight(player, light, 0.0f, D_800C25BC_de, D_800C25C0_de);
+            player->rangeNodes[2] = (struct RangeNode *)light;
+            placePlayerLight(player, light, 0.0f, &D_800C25BC_de, &D_800C25C0_de);
         }
-        if ((FIELD(u32, player, 0x6B0) & 0x20) && FIELD(void *, player, 0x684) != 0) {
-            void *entry = FIELD(void *, player, 0x684);
-            if (FIELD(void *, entry, 0x8) == D_auto_800CE420) {
-                FIELD(void *, entry, 0x8) = D_800C91D8_de;
+        if ((player->actionFlags & 0x20) && player->rangeNodes[2] != 0) {
+            struct PlayerEffectLight *entry = (struct PlayerEffectLight *)player->rangeNodes[2];
+            if (entry->pattern == PLAYER_MODE_LIGHT_PATTERN) {
+                entry->pattern = D_800C91D8_de;
             } else {
-                FIELD(void *, entry, 0x8) = D_auto_800CE420;
+                entry->pattern = PLAYER_MODE_LIGHT_PATTERN;
             }
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", func_8021E5F8_de);
-#endif

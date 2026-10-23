@@ -84,7 +84,7 @@ struct Player {
     u8 pad664[0xC];
     f32 damageCooldown; /* 0x670 */
     u8 pad674[4];
-    f32 rangeTimer; /* 0x678: func_8021E5F8_de */
+    f32 rangeTimer; /* 0x678: Weapons_UpdatePlayerEffectLights */
     struct RangeNode *rangeNodes[3]; /* 0x67C: created by func_80268C1C_de */
     u8 tuning[0x10]; /* 0x688 */
     void *weaponAnimation; /* 0x698 */
