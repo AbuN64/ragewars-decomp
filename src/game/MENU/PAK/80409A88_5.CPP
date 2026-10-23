@@ -226,35 +226,32 @@ char *func_8040A09C_de(struct Shared_PakMenu *menu) {
 }
 
  /* extern */
-s32 func_8040A1B0_de(s32 arg0) {
-    s32 var_s0;
-    s32 var_s1;
-    s32 unavailable;
-    var_s0 = 0;
-    if (arg0 != -1) {
-        var_s0 = arg0 + 1;
-        if (var_s0 >= 4) {
-            var_s0 = 0;
+s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
+    s32 channel = 0;
+    s32 attempts;
+
+    if (currentChannel != -1) {
+        channel = currentChannel + 1;
+        if (channel >= 4) {
+            channel = 0;
         }
     }
-    var_s1 = 0;
-    unavailable = -2;
-loop_4:
-    func_80404E28_de(var_s0);
-    if (func_80404F04_de(var_s0) == unavailable) {
-        var_s0 += 1;
-        if (var_s0 >= 4) {
-            var_s0 = 0;
+    attempts = 0;
+    do {
+        func_80404E28_de(channel);
+        if (func_80404F04_de(channel) != -2) {
+            break;
         }
-        var_s1 += 1;
-        if (var_s1 < 4) {
-            goto loop_4;
+        channel++;
+        if (channel >= 4) {
+            channel = 0;
         }
+        attempts++;
+    } while (attempts < 4);
+    if (attempts == 4) {
+        channel = -1;
     }
-    if (var_s1 == 4) {
-        var_s0 = -1;
-    }
-    return var_s0;
+    return channel;
 }
 
 /* FAKEMATCH: version selection preserves distinct original same-start bodies mapped to this live identity; only one original body is compiled for each owning version. */
