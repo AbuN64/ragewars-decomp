@@ -241,17 +241,17 @@ void ACTOR_SETUP(SetupSource *source, SetupActor *actor, SetupCallbacks *callbac
     }
     default_ = D_800C7218;
     actor->fieldCA = -1;
-    actor->field13 = 0x14;
-    actor->field95 = 0xFF;
-    actor->flags &= ~1;
-    actor->fieldC8 = -1;
-    actor->field35 = -1;
-    actor->sentinel14[0] = -1;
-    actor->sentinel14[1] = -1;
-    actor->sentinel14[2] = -1;
     actor->sentinel14[3] = -1;
-    actor->field102 = -1;
+    actor->sentinel14[2] = -1;
+    actor->flags &= ~1;
+    actor->field13 = 0x14;
+    actor->fieldC8 = -1;
     actor->field96 = -1;
+    actor->field102 = -1;
+    actor->sentinel14[0] = -1;
+    actor->field95 = 0xFF;
+    actor->sentinel14[1] = -1;
+    actor->field35 = -1;
     actor->fieldCB = 0;
     actor->fieldD0 = 0;
     actor->fieldD4 = 0;
