@@ -1,5 +1,5 @@
-#ifndef SCHED_CODE_8023CBF8_H
-#define SCHED_CODE_8023CBF8_H
+#ifndef ENGINE_VIRTUAL_VHANDLER_5_H
+#define ENGINE_VIRTUAL_VHANDLER_5_H
 #include "TYPES.H"
 struct OwnerRecAt8V2 {
     s32 unk0;

@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OWNERRECAT8V2.H"
 #include "TYPES.H"
-#include "SCHED/8023A284_17.H"
+#include "ENGINE/VIRTUAL/VHANDLER_4.H"
 
 extern Node_func_8023CBC0_de D_80103F88;
 

@@ -5,7 +5,7 @@
 #include "COMMON/S1.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_14.H"
-#include "MENU/ITEMS/8044ACCC_29.H"
+#include "MENU/ITEMS/SCENE_7.H"
 #include "SCENE/802508E0_4.H"
 #include "SYSTEM_3/80265370.H"
 #include "SYSTEM/80255C40_3.H"

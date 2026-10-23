@@ -10,8 +10,8 @@
 #include "COMMON/OBJECTSTATE96.H"
 #include "COMMON/OBJB.H"
 #include "AI/NAV/80208000_5.H"
-#include "MENU/ITEMS/8044ACCC_24.H"
-#include "MENU/ITEMS/8044ACCC_29.H"
+#include "MENU/ITEMS/SCENE.H"
+#include "MENU/ITEMS/SCENE_7.H"
 #include "MENU/PAK/80403BCC_4.H"
 
 extern void func_80449E18_de(ObjectPool *);

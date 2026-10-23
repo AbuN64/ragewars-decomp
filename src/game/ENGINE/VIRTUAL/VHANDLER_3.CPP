@@ -8,8 +8,8 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_8.H"
-#include "SCHED/8023A284_16.H"
-#include "SCHED/8023A284_15.H"
+#include "ENGINE/VIRTUAL/VHANDLER_3.H"
+#include "ENGINE/VIRTUAL/VHANDLER_2.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 

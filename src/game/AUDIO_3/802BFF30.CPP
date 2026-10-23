@@ -61,7 +61,7 @@
 #include "sdk/libultra/io/pirawread.H"
 #include "AUDIO_3/802BEE60.H"
 #include "AUDIO_3/802BFF30.H"
-#include "SCHED/8023A284_16.H"
+#include "ENGINE/VIRTUAL/VHANDLER_3.H"
 #include "sdk/libgultra/libasm_802BBC68_14.h"
 #include "sdk/libgultra/libasm_802BBC68_21.h"
 #include "sdk/libgultra/libasm_802BBC68_6.h"

@@ -1,5 +1,5 @@
-#ifndef SCHED_8023A284_15_H
-#define SCHED_8023A284_15_H
+#ifndef ENGINE_VIRTUAL_VHANDLER_2_H
+#define ENGINE_VIRTUAL_VHANDLER_2_H
 #include "COMMON/OWNERRECAT8V2.H"
 extern int func_8023BC74_de();
 extern void func_8023C1F0_de(void);

@@ -5,7 +5,7 @@
 #include "COMMON/OWNERRECAT8V2.H"
 #include "SCHED/8023A284.H"
 #include "TYPES.H"
-#include "SCHED/8023A284_15.H"
+#include "ENGINE/VIRTUAL/VHANDLER_2.H"
 #include "sdk/os.h"
 #include "AUDIO_4/802BFE60.H"
 
