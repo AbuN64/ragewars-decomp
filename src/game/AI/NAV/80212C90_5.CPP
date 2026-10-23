@@ -23,7 +23,7 @@ void func_80212D60_de(void *object) {
 #if !(defined(VERSION_EU))
 extern void func_80211020_de(void *);
 extern void Nav_SteerAlongRoute(void *);
-extern void func_80208AAC_de(void *arg0);
+extern void Nav_UpdatePlayerSteering(void *arg0);
 
 
 
@@ -59,7 +59,7 @@ void func_80212D94_de(void *arg0)
     }
     Nav_SteerAlongRoute(state);
     func_80211020_de(state);
-    func_80208AAC_de(state);
+    Nav_UpdatePlayerSteering(state);
 }
 #endif
 

@@ -46,7 +46,7 @@ extern void func_8020D114_de(void *arg0, void *arg1, s32 arg2);
 
 extern void func_80211020_de(void *arg0);
 
-extern void func_80208AAC_de(void *arg0);
+extern void Nav_UpdatePlayerSteering(void *arg0);
 
 extern void Nav_SelectPlayerState(void *arg0);
 
@@ -193,7 +193,7 @@ void func_80212A7C_de(Shared_Actor *arg0)
     }
     func_80211020_de(state);
     Nav_SteerAlongRoute(state);
-    func_80208AAC_de(state);
+    Nav_UpdatePlayerSteering(state);
     flags = (state->player->movementFlags & 0x3000) != 0;
     if (state->current == state->mode &&
         !flags) {

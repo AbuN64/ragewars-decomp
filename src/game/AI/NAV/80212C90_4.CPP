@@ -14,7 +14,7 @@ void func_80212D80_eu(AiTarget *pThis) {
 #if defined(VERSION_EU)
 extern void func_80211020_de(AiController *);
 extern void Nav_SteerAlongRoute(AiController *);
-extern void func_80208AAC_de(AiController *);
+extern void Nav_UpdatePlayerSteering(AiController *);
 
 void func_80212DB4_eu(AiTarget *pThis) {
     AiController *controller = pThis->player->controller;
@@ -28,7 +28,7 @@ void func_80212DB4_eu(AiTarget *pThis) {
         }
         Nav_SteerAlongRoute(controller);
         func_80211020_de(controller);
-        func_80208AAC_de(controller);
+        Nav_UpdatePlayerSteering(controller);
     }
 }
 #endif

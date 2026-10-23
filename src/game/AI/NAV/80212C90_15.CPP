@@ -14,7 +14,7 @@
    flagged at 0x94 in mode 12, otherwise up to ten random nodes of D_8013B364 not flagged 0x400); then
    it counts down the jump timer at 0x320 and on expiry makes its player jump (bit 0x10 at 0x6B0)
    unless the player is in state 0xF, holds input bits 0x3000 or the bot is busy at 0x314, rerolls an
-   expired timer to 15 times 3 to 9 frames, and runs func_80211020_de, Nav_SteerAlongRoute and func_80208AAC_de. */
+   expired timer to 15 times 3 to 9 frames, and runs func_80211020_de, Nav_SteerAlongRoute and Nav_UpdatePlayerSteering. */
 
 extern s32 D_8013B364;
 
@@ -22,7 +22,7 @@ extern s32 D_8013B364;
 extern void *func_8020C994_de(void *, s32);
 extern void func_80211020_de(void *);
 extern void Nav_SteerAlongRoute(void *);
-extern void func_80208AAC_de(void *);
+extern void Nav_UpdatePlayerSteering(void *);
 
 
 
@@ -97,7 +97,7 @@ store_c:
     }
     func_80211020_de(actor);
     Nav_SteerAlongRoute(actor);
-    func_80208AAC_de(actor);
+    Nav_UpdatePlayerSteering(actor);
 }
 
 extern s32 D_8013B364;

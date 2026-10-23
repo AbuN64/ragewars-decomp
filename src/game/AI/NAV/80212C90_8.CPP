@@ -118,7 +118,7 @@ void func_80212E10_de(void) {
         "addu      $a0, $s1, $zero\n"
         "jal        func_80211020_de\n"
         "addu      $a0, $s1, $zero\n"
-        "jal        func_80208AAC_de\n"
+        "jal        Nav_UpdatePlayerSteering\n"
         "addu      $a0, $s1, $zero\n"
         "lw         $ra, 0x1C($sp)\n"
         "lw         $s2, 0x18($sp)\n"

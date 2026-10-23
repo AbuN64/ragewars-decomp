@@ -23,7 +23,7 @@ extern void func_80209874_de(void *arg0, s32 arg1);
 extern void func_80211020_de(void *arg0);
 extern f32 func_80209948_de(void *arg0, s32 arg1);
 extern void Nav_SteerAlongRoute(void *);
-extern void func_80208AAC_de(void *arg0);
+extern void Nav_UpdatePlayerSteering(void *arg0);
 
 
 
@@ -69,5 +69,5 @@ void func_8021321C_de(Root802131E0 *arg0)
         ((Brain_func_80212D78_eu_x *)state)->player->unk_0x06B0 |= 0x10;
     }
     Nav_SteerAlongRoute(state);
-    func_80208AAC_de(state);
+    Nav_UpdatePlayerSteering(state);
 }

@@ -66,7 +66,7 @@ extern void func_80209E80_de(Brain *arg0);
 extern s32 func_8020D1CC_de(char *, s32, s32);
 
 
-extern void Nav_SteerAlongRoute(Brain *arg0), func_80208AAC_de(Brain *arg0);
+extern void Nav_SteerAlongRoute(Brain *arg0), Nav_UpdatePlayerSteering(Brain *arg0);
 void func_8021113C_eu(Actor *actor) {
     s32 mine, theirs, dir, route;
     Actor *player;
@@ -139,7 +139,7 @@ halt:
         } else {
             brain->destination = route;
             Nav_SteerAlongRoute(brain);
-            func_80208AAC_de(brain);
+            Nav_UpdatePlayerSteering(brain);
         }
         if (route != brain->node) {
             brain->node = route;

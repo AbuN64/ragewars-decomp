@@ -10,7 +10,7 @@
    or random roaming (-2) when there are none; once within D_800C23B0_eu_x of its goal node it advances the
    route position at 0x228 (wrapping at the route length) and drops the goal; a dropped goal is then
    taken from the route through func_8028D244_de and func_8020CB3C_de, or a random node of D_8013B364 when
-   roaming; finally runs Nav_SteerAlongRoute, func_80211020_de and func_80208AAC_de. */
+   roaming; finally runs Nav_SteerAlongRoute, func_80211020_de and Nav_UpdatePlayerSteering. */
 
 
 
@@ -36,7 +36,7 @@ extern void *func_8020993C_de(PatrolBot *bot);
 extern f32 func_802726F8_de(void *a, void *b);
 extern void Nav_SteerAlongRoute(PatrolBot *bot);
 extern void func_80211020_de(PatrolBot *bot);
-extern void func_80208AAC_de(PatrolBot *bot);
+extern void Nav_UpdatePlayerSteering(PatrolBot *bot);
 
 void func_80212E30_eu_x(PatrolActor *actor)
 {
@@ -80,6 +80,6 @@ void func_80212E30_eu_x(PatrolActor *actor)
     }
     Nav_SteerAlongRoute(bot);
     func_80211020_de(bot);
-    func_80208AAC_de(bot);
+    Nav_UpdatePlayerSteering(bot);
 }
 #endif
