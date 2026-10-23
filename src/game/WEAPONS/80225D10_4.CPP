@@ -560,51 +560,49 @@ state_end:;
     }
 }
 
-void func_80227E8C_de(Round *arg0) {
-    s32 count;
-    s32 count2;
+static inline void Weapons_CountRelease(u16 *counter) {
+    (*counter)++;
+}
+static inline s32 Weapons_CountPlayersIn(Round *round) {
     ActorNode *node;
-    SubActor *temp;
-    CGameStatus *state;
-    s32 three; /* FAKEMATCH: constant-holding local places the li */
-    s32 found; /* FAKEMATCH: flag local keeps the loop exit from being threaded past the found check */
-
-    if ((D_80146918 != 0) && (func_80245784_de() == 0) && (func_80245798_de() == 0)) {
-        node = arg0->players;
-        count = 0;
-        if (node != 0) {
-            do {
-                if (node->unk5D8->unk90 == 0) {
-                    count += 1;
-                }
-                node = node->unk16E0;
-            } while (node != 0);
+    s32 count = 0;
+    for (node = round->players; node != 0; node = node->unk16E0) {
+        if (node->unk5D8->unk90 == 0) {
+            count += 1;
         }
-        count2 = count;
-        if (count2 > 0) {
-            for (node = arg0->players; node != 0; node = node->unk16E0) {
-                if ((node->unk5D8->unk8F == 1) || (node->unk5D8->unk90 == 1)) {
-                    break;
-                }
-            }
-            three = 3;
-            if (node != 0) {
+    }
+    return count;
+}
+static inline ActorNode *Weapons_FindWaitingPlayer(Round *round) {
+    ActorNode *node;
+    for (node = round->players; node != 0; node = node->unk16E0) {
+        if ((node->unk5D8->unk8F == 1) || (node->unk5D8->unk90 == 1)) {
+            break;
+        }
+    }
+    return node;
+}
+void Weapons_ReleaseWaitingPlayer(Round *round) {
+    s32 count;
+    ActorNode *node;
+    CGameStatus *state;
+    s32 waiting;
+    if ((D_80146918 != 0) && (func_80245784_de() == 0) && (func_80245798_de() == 0)) {
+        count = Weapons_CountPlayersIn(round);
+        if (count > 0) {
+            waiting = Weapons_FindWaitingPlayer(round) != 0;
+            if (waiting) {
                 D_800F7D10 = 0;
             }
             state = &D_801462C8.counters;
             switch (state->unk84) {
             case 0:
             default:
-                if (count2 > 0) {
-                    for (node = arg0->players; node != 0; node = node->unk16E0) {
-                        if ((node->unk5D8->unk8F == 1) || (node->unk5D8->unk90 == 1)) {
-                            break;
-                        }
-                    }
-                    three = 3;
+                if (count > 0) {
+                    node = Weapons_FindWaitingPlayer(round);
                     if (node != 0) {
                         node->unk5D8->unk90 = 0;
-                        D_80146924 = three;
+                        D_80146924 = 3;
                     }
                 } else {
                     state->unk84 = 2;
@@ -612,18 +610,10 @@ void func_80227E8C_de(Round *arg0) {
                 break;
             case 1:
                 state->unk84 = 2;
-                for (node = arg0->players; node != 0; node = node->unk16E0) {
-                    if ((node->unk5D8->unk8F == 1) || (node->unk5D8->unk90 == 1)) {
-                        break;
-                    }
-                }
-                found = node != 0;
-                if (found) {
+                node = Weapons_FindWaitingPlayer(round);
+                if (node != 0) {
                     node->unk5D8->unk90 = 0;
-                    do {
-                        temp = node->unk5D8;
-                        temp->unk4 = (u16) (temp->unk4 + 1);
-                    } while (0);
+                    Weapons_CountRelease(&node->unk5D8->unk4);
                     D_800F7D10 = 0;
                 }
                 break;
@@ -631,8 +621,8 @@ void func_80227E8C_de(Round *arg0) {
             case 3:
                 break;
             }
-            if ((func_802282EC_de(arg0) != 0) && (D_801427FC == 0)) {
-                func_8022A748_de(arg0);
+            if ((func_802282EC_de(round) != 0) && (D_801427FC == 0)) {
+                func_8022A748_de(round);
             }
         }
     }

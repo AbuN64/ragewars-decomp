@@ -39,7 +39,7 @@ void func_80226950_de(PlayerList *list, int count) {
    through func_8024570C_de for a paused player or one whose controller at 0x698 asks while a menu is
    possible, or otherwise starts the in-game menu for a live player with a view not already showing
    one (unless the match forbids it), before the match end check func_802283B8_de and the world updates
-   func_80227038_de and func_80227E8C_de run and the frame time is restored. */
+   func_80227038_de and Weapons_ReleaseWaitingPlayer run and the frame time is restored. */
 
 
 
@@ -74,7 +74,7 @@ extern void func_80218464_de(char *);
 
 extern void func_802283B8_de(World_func_80226A34_de *);
 extern void func_80227038_de(World_func_80226A34_de *);
-extern void func_80227E8C_de(World_func_80226A34_de *);
+extern void Weapons_ReleaseWaitingPlayer(World_func_80226A34_de *);
 
 void func_80226A34_de(World_func_80226A34_de *world) {
     f32 frameTime;
@@ -120,7 +120,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
         }
         func_802283B8_de(world);
         func_80227038_de(world);
-        func_80227E8C_de(world);
+        Weapons_ReleaseWaitingPlayer(world);
         D_800D2988 = frameTime;
     }
 }
