@@ -1,5 +1,1 @@
-#include "include_asm.h"
-
-#if defined(VERSION_US)
-INCLUDE_ASM("span_1000", World_ResetPlayerState);
-#endif
+/* World_ResetPlayerState is one complete function in AI/NAV/80208000.CPP. */

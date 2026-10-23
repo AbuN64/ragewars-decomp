@@ -3248,7 +3248,6 @@ SECTIONS
         src/game/RENDER/80206258_4.CPP.o(.text);
         src/game/WORLD/80207ABC.CPP.o(.text);
         src/game/WORLD/80207ABC_2.CPP.o(.data);
-        src/game/WORLD/80207ABC_4.CPP.o(.text);
         src/game/AI/NAV/80208000.CPP.o(.text);
         src/game/AI/NAV/CODE_80208158.CPP.o(.text);
         src/game/AI/NAV/80208000_3.CPP.o(.text);
@@ -8538,7 +8537,6 @@ SECTIONS
         src/game/RENDER/80206258_4.CPP.o(.bss .sbss COMMON);
         src/game/WORLD/80207ABC.CPP.o(.bss .sbss COMMON);
         src/game/WORLD/80207ABC_2.CPP.o(.bss .sbss COMMON);
-        src/game/WORLD/80207ABC_4.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/80208000.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/CODE_80208158.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/80208000_3.CPP.o(.bss .sbss COMMON);

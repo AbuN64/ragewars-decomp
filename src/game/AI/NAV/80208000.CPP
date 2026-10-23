@@ -3,11 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 
-#if defined(VERSION_US)
-INCLUDE_ASM("span_1000", func_80208004);
-#endif
-
-#if !(defined(VERSION_US))
 /* Resets a player controller: marks the active, requested and committed selections empty, sets the
    request kind to 0xB, clears the four link words at 0x14 to -1, resets the stage counters at 0x1BC
    and 0x1C8 and the target list, installs the default table D_800CE040 through func_8020986C_de and mode
@@ -77,4 +72,3 @@ void World_ResetPlayerState(s32 *state) {
     state[0x2E0 / 4] = 0;
     state[0x32C / 4] = -1;
 }
-#endif

@@ -211,7 +211,6 @@ segments:
       - [0x8BE4, c, span_1000]
       - [0x8BF8, data, span_1000/D_auto_func_80207FF8_us_padding_8BF8]
       - [0x8C00, c, span_1000]
-      - [0x8C04, c, span_1000]
       - [0x8D58, c, span_1000]
       - [0x9010, c, span_1000]
       - [0x96AC, c, span_1000]
