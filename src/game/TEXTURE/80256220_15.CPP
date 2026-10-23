@@ -192,232 +192,144 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
 #include "stddef.h"
 #include "TYPES.H"
 s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
-s32 Texture_PlaySoundAtPosition(void *context, s32 soundId, u32 positionXBits, u32 positionYBits, u32 positionZBits, s32 voiceParameter, s32 ownerId) {
-    union { u32 word; f32 value; } xbits, ybits, zbits;
-    CVector3 position;
-    s32 firstSoundVariant;
-    s32 lastSoundVariant;
-    s32 firstInstrumentVariant;
-    s32 lastInstrumentVariant;
-    MenuRules *lock;
-    MenuRules *unlock;
-    s32 *soundWeightCursor;
-    s32 *soundChoiceCursor;
-    s32 *instrumentWeightCursor;
-    s32 *instrumentChoiceCursor;
-    s32 soundChoice;
-    s32 instrumentChoice;
-    s32 entryOffset;
-    s32 soundWeight;
-    s32 instrumentWeight;
-    s32 lockCount;
-    s32 remainingLocks;
-    s32 i;
-    s32 j;
-    s32 soundWeightIndex;
-    s32 instrumentWeightIndex;
-    s32 soundVariant;
-    s32 k;
-    s32 instrumentVariant;
-    s32 totalSoundWeight;
-    s32 cumulativeSoundWeight;
-    s32 totalInstrumentWeight;
-    s32 cumulativeInstrumentWeight;
-    s32 selectedVariant;
-    s32 playId;
-    s32 result;
-    s32 repeatGuardBits;
-    s32 isSound;
-    s32 blocked;
-    s8 *entries;
-    u16 repeatGuard;
-    u32 mask;
-    u32 entryCount;
-    u32 unlockMask;
-    u32 l;
-    void *voiceCursor;
+/* The definition range is inclusive; weights are signed 32-bit entries. */
+static inline s32 selectSoundVariant(ContextRecAt2BC0 *context, s32 sound, u16 avoidPrevious) {
+    s32 first;
+    s32 last;
+    s32 total = 0;
+    s32 index;
+    s32 threshold;
+    s32 *weights;
 
-    xbits.word = positionXBits; ybits.word = positionYBits; zbits.word = positionZBits;
-    position.x = xbits.value; position.y = ybits.value; position.z = zbits.value;
-
-    if (((ContextRecAt2BC0 *)context)->selectedHandle != -1) {
-        blocked = 1;
-    } else {
-        j = 0;
-        if (soundId < 0x100) {
-            i = 0;
-            voiceCursor = context;
-            do {
-                if (((s32 *) voiceCursor)[7780 / sizeof(s32)] == soundId) {
-                    j += 1;
-                }
-                i += 1;
-                voiceCursor += 0xCC;
-            } while (i < 0x11);
-            blocked = 1;
-            if (j < 6) {
-                goto allowSound;
+    if (context->instrumentCount == 0 ||
+        !func_80265550_de((u32 *)context->instrumentData, context->instrumentCount,
+                         (u32)(s16)sound, &first, &last)) {
+        return -1;
+    }
+    if (first == last) {
+        return first;
+    }
+    if (first <= last) {
+        weights = &context->envelopeData[first];
+        for (index = first; index <= last; index++) total += *weights++ * 10;
+    }
+    threshold = func_802744D4_de() % total;
+    total = 0;
+    index = first;
+    if (index < last) {
+        weights = &context->envelopeData[index];
+        for (; index < last; index++, weights++) {
+            total += *weights * 10;
+            if (total >= threshold) {
+                break;
             }
-        } else {
-allowSound:
-            blocked = 0;
         }
     }
-    result = -1;
-    if (blocked == 0) {
-        if (soundId < 0x100) {
-            repeatGuard = ((u16 *) context)[306 / sizeof(u16)];
-            totalSoundWeight = 0;
-            if ((((ContextRecAt2BC0 *)context)->instrumentCount != 0) && (func_80265550_de((u32 *)((ContextRecAt2BC0 *)context)->instrumentData, ((ContextRecAt2BC0 *)context)->instrumentCount, (u32) (s16) soundId, &firstSoundVariant, &lastSoundVariant) != 0)) {
-                soundVariant = firstSoundVariant;
-                if (soundVariant != lastSoundVariant) {
-                    soundWeightIndex = soundVariant;
-                    if (lastSoundVariant >= soundVariant) {
-                        soundWeightCursor = (soundVariant * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
-                        do {
-                            soundWeight = *soundWeightCursor;
-                            soundWeightCursor += 4;
-                            soundWeightIndex += 1;
-                            totalSoundWeight += soundWeight * 0xA;
-                        } while (lastSoundVariant >= soundWeightIndex);
-                    }
-                    soundChoice = func_802744D4_de() % totalSoundWeight;
-                    k = firstSoundVariant;
-                    cumulativeSoundWeight = 0;
-                    if (k < lastSoundVariant) {
-                        soundChoiceCursor = (k * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
-selectSoundVariant:
-                        cumulativeSoundWeight += *soundChoiceCursor * 0xA;
-                        repeatGuardBits = repeatGuard << 0x10;
-                        if (cumulativeSoundWeight < soundChoice) {
-                            k += 1;
-                            soundChoiceCursor += 4;
-                            if (k >= lastSoundVariant) {
-                                goto finishSoundSelection;
-                            }
-                            goto selectSoundVariant;
-                        }
-                    } else {
-finishSoundSelection:
-                        repeatGuardBits = repeatGuard << 0x10;
-                    }
-                    selectedVariant = k;
-                    if ((repeatGuardBits != 0) && (k == ((s32 *) context)[304 / sizeof(s32)])) {
-                        if (k != lastSoundVariant) {
-                            soundVariant = k + 1;
-                        } else {
-                            soundVariant = k - 1;
-                        }
-                        goto useAdjacentVariant;
-                    }
-                } else {
-useAdjacentVariant:
-                    selectedVariant = soundVariant;
-                }
-            } else {
-                selectedVariant = -1;
-            }
-            ((ContextRecAt2BC0 *)context)->field2B94 = (s8) (s32) func_80274564_de(D_800C3EDC_de);
+    if ((s16)avoidPrevious && index == context->lastInstrument) {
+        if (index != last) {
+            index++;
         } else {
-            totalInstrumentWeight = 0;
-            if (((ContextRecAt2BC0 *)context)->instrumentCount != 0) {
-                selectedVariant = -1;
-                if (func_80265550_de((u32 *)((ContextRecAt2BC0 *)context)->instrumentData, ((ContextRecAt2BC0 *)context)->instrumentCount, (u32) (s16) soundId, &firstInstrumentVariant, &lastInstrumentVariant) != 0) {
-                    instrumentVariant = firstInstrumentVariant;
-                    if (instrumentVariant != lastInstrumentVariant) {
-                        instrumentWeightIndex = instrumentVariant;
-                        if (lastInstrumentVariant >= instrumentVariant) {
-                            instrumentWeightCursor = (instrumentVariant * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
-                            do {
-                                instrumentWeight = *instrumentWeightCursor;
-                                instrumentWeightCursor += 4;
-                                instrumentWeightIndex += 1;
-                                totalInstrumentWeight += instrumentWeight * 0xA;
-                            } while (lastInstrumentVariant >= instrumentWeightIndex);
-                        }
-                        instrumentChoice = func_802744D4_de() % totalInstrumentWeight;
-                        instrumentVariant = firstInstrumentVariant;
-                        cumulativeInstrumentWeight = 0;
-                        if (instrumentVariant < lastInstrumentVariant) {
-                            instrumentChoiceCursor = (instrumentVariant * 4) + (s32)((ContextRecAt2BC0 *)context)->envelopeData;
-selectInstrumentVariant:
-                            cumulativeInstrumentWeight += *instrumentChoiceCursor * 0xA;
-                            selectedVariant = instrumentVariant;
-                            if (cumulativeInstrumentWeight < instrumentChoice) {
-                                instrumentVariant += 1;
-                                instrumentChoiceCursor += 4;
-                                if (instrumentVariant >= lastInstrumentVariant) {
-                                    goto finishInstrumentSelection;
-                                }
-                                goto selectInstrumentVariant;
-                            }
-                        } else {
-                            goto finishInstrumentSelection;
-                        }
-                    } else {
-finishInstrumentSelection:
-                        selectedVariant = instrumentVariant;
-                    }
-                }
-            } else {
-                selectedVariant = -1;
-            }
-        }
-        result = -1;
-        if (selectedVariant != -1) {
-            ((ContextRecAt2BC0 *)context)->field2B88 = func_8028FDB4_de(func_8028FDB4_de(((ContextRecAt2BC0 *)context)->instrumentIndex, (s32) (s16) selectedVariant), 0);
-            ((ContextRecAt2BC0 *)context)->field2B8C = (s16) soundId;
-            ((ContextRecAt2BC0 *)context)->field2B90 = ownerId;
-            entries = func_8028FDB4_de(func_8028FDB4_de(((ContextRecAt2BC0 *)context)->instrumentIndex, (s32) (s16) selectedVariant), 1);
-            entryCount = ((u32 *) entries)[4 / sizeof(u32)];
-            playId = -1;
-            if (entryCount != 0) {
-                lock = &((ContextRecAt2BC0 *)context)->lock;
-                mask = func_802BCF30_de();
-                lockCount = lock->locked + 1;
-                lock->locked = lockCount;
-                if (lockCount != 1) {
-                    __osRestoreInt(mask);
-                    func_802BB2A0_de((OSMesgQueue *)lock, NULL, 1);
-                } else {
-                    __osRestoreInt(mask);
-                }
-                unlock = &((ContextRecAt2BC0 *)context)->lock;
-                playId = ((s32 *) context)[268 / sizeof(s32)] + 1;
-                ((s32 *) context)[268 / sizeof(s32)] = playId;
-                unlockMask = func_802BCF30_de();
-                remainingLocks = unlock->locked - 1;
-                unlock->locked = remainingLocks;
-                if (remainingLocks != 0) {
-                    __osRestoreInt(unlockMask);
-                    func_802BB420_de((OSMesgQueue *)unlock, 0, 1);
-                    isSound = soundId < 0x100;
-                } else {
-                    __osRestoreInt(unlockMask);
-                    isSound = soundId < 0x100;
-                }
-                if (isSound != 0) {
-                    ((s32 *) context)[304 / sizeof(s32)] = selectedVariant;
-                    goto startEntries;
-                }
-                l = 0;
-            } else {
-startEntries:
-                l = 0;
-            }
-            if (entryCount != 0) {
-                do {
-                    entryOffset = l * ((s32 *) entries)[0 / sizeof(s32)];
-                    l += 1;
-                    func_80257BB4_de(context, (void *)(entries + entryOffset + 8), &position, selectedVariant, playId, 0, voiceParameter);
-                } while (l < entryCount);
-            }
-            ((ContextRecAt2BC0 *)context)->field2B90 = -1;
-            result = playId;
+            index--;
         }
     }
-    return result;
+    return index;
 }
+
+static inline s32 soundVoiceLimitReached(ContextRecAt2BC0 *context, s32 sound) {
+    s32 count;
+    s32 i;
+    if (context->selectedHandle != -1) {
+        return 1;
+    }
+    count = 0;
+    if (sound < 0x100) {
+        for (i = 0; i < 17; i++) {
+            if (context->voices[i].soundId == sound) {
+                count++;
+            }
+        }
+        if (count >= 6) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static inline void soundAcquireLock(MenuRules *lock) {
+    u32 mask = func_802BCF30_de();
+    s32 held = lock->locked + 1;
+    lock->locked = held;
+    if (held != 1) {
+        __osRestoreInt(mask);
+        func_802BB2A0_de((OSMesgQueue *)lock, 0, 1);
+    } else {
+        __osRestoreInt(mask);
+    }
+}
+
+static inline void soundReleaseLock(MenuRules *lock) {
+    u32 mask = func_802BCF30_de();
+    s32 held = lock->locked - 1;
+    lock->locked = held;
+    if (held != 0) {
+        __osRestoreInt(mask);
+        func_802BB420_de((OSMesgQueue *)lock, 0, 1);
+    } else {
+        __osRestoreInt(mask);
+    }
+}
+
+typedef struct SoundVoiceGroup {
+    s32 stride;
+    u32 count;
+} SoundVoiceGroup;
+
+/* 91/294 aligned edits remain in register allocation and selection branches. */
+s32 Texture_PlaySoundAtPosition(void *memory, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
+    ContextRecAt2BC0 *context = memory;
+    SoundVoiceGroup *group;
+    u32 count;
+    u32 i;
+    s32 index;
+    s32 playId;
+
+    if (soundVoiceLimitReached(context, sound)) {
+        return -1;
+    }
+    {
+        if (sound < 0x100) {
+            index = selectSoundVariant(context, sound, (u16)context->lastInstrument);
+            context->field2B94 = (s8)(s32)func_80274564_de(D_800C3EDC_de);
+        } else {
+            index = selectSoundVariant(context, sound, 0);
+        }
+        if (index != -1) {
+            context->field2B88 = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 0);
+            context->field2B8C = sound;
+            context->field2B90 = owner;
+            group = func_8028FDB4_de(func_8028FDB4_de(context->instrumentIndex, (s16)index), 1);
+            count = group->count;
+            playId = -1;
+            if (count != 0) {
+                soundAcquireLock(&context->lock);
+                playId = ++context->playIdCounter;
+                soundReleaseLock(&context->lock);
+                if (sound < 0x100) {
+                    context->lastInstrument = index;
+                }
+            }
+            for (i = 0; i < count; i++) {
+                func_80257BB4_de(context, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride),
+                                &position, index, playId, 0, spatialMode);
+            }
+            context->field2B90 = -1;
+            return playId;
+        }
+    }
+    return -1;
+}
+
+
 #else
 INCLUDE_ASM("span_1000", Texture_PlaySoundAtPosition);
 #endif

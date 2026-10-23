@@ -21,9 +21,9 @@ struct ContextRecAt2BC0 {
     s16 selectedHandle; /* +0x102 */
     s32 frame; /* 0x104 */
     s32 soundCounter; /* +0x108 */
-    u8 reserved10C[4];
+    s32 playIdCounter; /* +0x10C: recursive-lock protected playback id */
     MenuRules lock;
-    u8 pad130[4];
+    s32 lastInstrument; /* +0x130: previous randomized variant */
     s32 track; /* 0x134 */
     char view[0x1D64 - 0x138];
     char panel[0x1D6C - 0x1D64];
