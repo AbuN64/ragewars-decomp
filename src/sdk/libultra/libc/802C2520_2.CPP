@@ -5,7 +5,7 @@
 
 void lldiv(LldivResult *result, s64 numerator, s64 denominator) {
     result->quot = func_802C0230_de(numerator, denominator);
-    result->rem = func_802C0820_de(numerator, denominator);
+    result->rem = Libc_SignedRemainder(numerator, denominator);
 }
 
 #if defined(VERSION_US)

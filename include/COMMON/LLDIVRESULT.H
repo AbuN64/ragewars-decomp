@@ -13,7 +13,7 @@ struct LldivResult;
 
 extern s64 func_802C0230_de(s64, s64) __attribute__((const));
 
-extern s64 func_802C0820_de(s64, s64) __attribute__((const));
+extern s64 Libc_SignedRemainder(s64, s64) __attribute__((const));
 
 #include "acmd.h"
 #include "COMMON/AUDIO_CALLBACKS.H"

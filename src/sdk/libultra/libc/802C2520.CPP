@@ -248,12 +248,11 @@ extern u8 D_800D5314[];
 extern u64 Libc_UnsignedRemainder(u64 numerator, u64 divisor);
 extern u64 func_802C0DA0_de(u64 numerator, u64 divisor);
 extern s64 func_802C0230_de(s64 numerator, s64 denominator);
-extern s64 func_802C0820_de(s64 numerator, s64 denominator);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
 static inline void lldivInline(LldivResult *result, s64 numerator, s64 denominator) {
     result->quot = func_802C0230_de(numerator, denominator);
-    result->rem = func_802C0820_de(numerator, denominator);
+    result->rem = Libc_SignedRemainder(numerator, denominator);
 }
 /* Formats px->v.ll into px->s in the radix selected by code (o/x/X/d/i/u), zero-padding to the precision.
  * 145/148 words; remaining: the first digit is looked up through v1 instead of v0 (register choice only). */

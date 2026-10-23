@@ -173,3 +173,9 @@ hilo_nops = true
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-msplit-addresses"]
 omit = []
+
+[file."src/sdk/libultra/libc/802C5914.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-msplit-addresses"]
+omit = []
+hilo_nops = true
