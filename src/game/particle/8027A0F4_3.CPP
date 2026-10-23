@@ -104,22 +104,24 @@ extern s32 func_802757E4_de(s32);
 
 extern s32 func_80276054_de(s32);
 
-void func_8027B720_de(Shared_Particle *particle) {
+/* Per-frame step of one live particle: sizes its culling box, resolves target hit and death, grows and spins it,
+ * applies influence to nearby players, then runs the move and collision passes. */
+void Particle_Update(Shared_Particle *particle) {
     Box bounds;
     Shared_ParticleOwner *owner;
     Shared_ParticleTarget *target;
     SharedPlayer *player;
     f32 savedStep;
     f32 extent;
-    f32 scaled; /* FAKEMATCH: one temporary holds the larger scaled size and then the box height; separate locals let local-alloc tie the constants to the products and pick other FPRs. */
-    f32 half; /* FAKEMATCH: the box half-size temporary is reused for the fade below for the same reason. */
-    f32 step;
-    f32 grow;
-    f32 range;
+    f32 boxSpan; /* the larger scaled size, then the box height */
+    f32 halfExtent; /* the box half-size, then the shake decay */
+    f32 growStep;
+    f32 goalSize;
+    f32 influenceRange;
     s32 die;
     s32 bounce;
     s32 done;
-    s8 fade;
+    s8 newShake;
     owner = particle->owner;
     savedStep = D_800D2988;
     if (particle->time < 0.0f) {
@@ -130,27 +132,27 @@ void func_8027B720_de(Shared_Particle *particle) {
         D_800D2988 = savedStep * 0.25f;
     }
     extent = particle->size.z;
-    scaled = particle->size.y * extent;
-    if (!(particle->size.x * extent <= scaled)) {
-        scaled = particle->size.x * extent;
+    boxSpan = particle->size.y * extent;
+    if (!(particle->size.x * extent <= boxSpan)) {
+        boxSpan = particle->size.x * extent;
     }
-    if (!(scaled <= extent)) {
-        extent = scaled;
+    if (!(boxSpan <= extent)) {
+        extent = boxSpan;
     }
-    scaled = extent * 1.4142135f;
-    half = scaled * 0.5f;
-    bounds.min.x = particle->inst.pos.x - half;
-    bounds.max.x = particle->inst.pos.x + half;
-    bounds.min.y = particle->inst.pos.y - half;
-    bounds.max.y = particle->inst.pos.y + scaled;
-    bounds.min.z = particle->inst.pos.z - half;
-    bounds.max.z = particle->inst.pos.z + half;
+    boxSpan = extent * 1.4142135f;
+    halfExtent = boxSpan * 0.5f;
+    bounds.min.x = particle->inst.pos.x - halfExtent;
+    bounds.max.x = particle->inst.pos.x + halfExtent;
+    bounds.min.y = particle->inst.pos.y - halfExtent;
+    bounds.max.y = particle->inst.pos.y + boxSpan;
+    bounds.min.z = particle->inst.pos.z - halfExtent;
+    bounds.max.z = particle->inst.pos.z + halfExtent;
     if (particle->flags & 0x20000) {
         particle->time = 0.0f;
         particle->life = particle->unk148 * 32.0f;
-        half = particle->shake - D_800D2988 * 6.0f;
-        fade = (half < 0.0f) ? 0 : (s32)half;
-        particle->shake = fade;
+        halfExtent = particle->shake - D_800D2988 * 6.0f;
+        newShake = (halfExtent < 0.0f) ? 0 : (s32)halfExtent;
+        particle->shake = newShake;
     }
     if (particle->flags & 0x10000) {
         target = particle->target;
@@ -273,20 +275,20 @@ void func_8027B720_de(Shared_Particle *particle) {
     particle->prevPos = particle->inst.pos;
     particle->frame += D_800D2988 * particle->unk148 * (D_800CD740_de * 0.06666667f);
     if (particle->desc->flags & 0x1000) {
-        step = D_800D2988 * 10.24f;
-        particle->size.x += step * particle->growth.x;
-        particle->size.y += step * particle->growth.y;
+        growStep = D_800D2988 * 10.24f;
+        particle->size.x += growStep * particle->growth.x;
+        particle->size.y += growStep * particle->growth.y;
         particle->size.z += D_800D2988 * particle->growth.z;
         particle->size.x = (particle->size.x > 4096.0f) ? 4096.0f : particle->size.x;
         particle->size.y = (particle->size.y > 4096.0f) ? 4096.0f : particle->size.y;
         particle->size.z = (particle->size.z > 400.0f) ? 400.0f : particle->size.z;
     } else {
-        grow = RW_MIN(particle->size.x * particle->growth.x, 4096.0f);
-        particle->size.x += (grow - particle->size.x) * D_800D2988;
-        grow = RW_MIN(particle->size.y * particle->growth.y, 4096.0f);
-        particle->size.y += (grow - particle->size.y) * D_800D2988;
-        grow = RW_MIN(particle->size.z * particle->growth.z, 400.0f);
-        particle->size.z += (grow - particle->size.z) * D_800D2988;
+        goalSize = RW_MIN(particle->size.x * particle->growth.x, 4096.0f);
+        particle->size.x += (goalSize - particle->size.x) * D_800D2988;
+        goalSize = RW_MIN(particle->size.y * particle->growth.y, 4096.0f);
+        particle->size.y += (goalSize - particle->size.y) * D_800D2988;
+        goalSize = RW_MIN(particle->size.z * particle->growth.z, 400.0f);
+        particle->size.z += (goalSize - particle->size.z) * D_800D2988;
         if (particle->size.x < 0.0f || particle->size.y < 0.0f || particle->size.z < 0.0f) {
             func_80283F60_de(particle);
             func_80284570_de(&D_8011D8D0, particle);
@@ -300,13 +302,13 @@ void func_8027B720_de(Shared_Particle *particle) {
     particle->rot.z += particle->rotSpeed.z * D_800D2988;
     D_80103FCC->direction = particle->inst.velocity;
     func_80283E58_de(particle);
-    range = particle->desc->unk10;
-    if (!(range <= 0.0f)) {
-        range *= 10.24f;
-        range *= range;
+    influenceRange = particle->desc->unk10;
+    if (!(influenceRange <= 0.0f)) {
+        influenceRange *= 10.24f;
+        influenceRange *= influenceRange;
         for (player = D_80145060; player != NULL;) {
             done = 0;
-            if (func_8027B790_distance(particle, player) < range) {
+            if (func_8027B790_distance(particle, player) < influenceRange) {
                 func_80282E98_de(particle, player);
                 if (particle->inst.type == 0x40F) {
                     done = 1;

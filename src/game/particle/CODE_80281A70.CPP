@@ -131,7 +131,7 @@ typedef struct CParticleSystem_t {
 extern const f32 D_800C4E4C_de,D_800C4E50_de;
 extern s32 D_801371DC;
 extern Box D_801031F0;
-extern void func_8027B720_de(void *),func_80279A00_de(void *),func_80284178_de(void *);
+extern void Particle_Update(void *),func_80279A00_de(void *),func_80284178_de(void *);
 extern void func_802A42F4_de(void *,void *),func_80268C7C_de(void *,s32);
 extern void func_80279B40_de(void *,s32,s32,s32);
 extern void func_8025DE54_de(s16,CVector3,s32,s32);
@@ -211,7 +211,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             if ((D_801031F0.max.x > p->m_vPos.x && D_801031F0.max.y > p->m_vPos.y && D_801031F0.max.z > p->m_vPos.z &&
                  D_801031F0.min.x <= p->m_vPos.x && D_801031F0.min.y <= p->m_vPos.y && D_801031F0.min.z <= p->m_vPos.z) ||
                 p->m_nObjType == 0x41E) {
-                func_8027B720_de(p);
+                Particle_Update(p);
                 light = p->m_pDLight;
                 if (light) {
                     light->m_bEnabled = 1;

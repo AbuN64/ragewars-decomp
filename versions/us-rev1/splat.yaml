@@ -4000,7 +4000,7 @@ segments:
       - [0xCA898, rodata, data_800C/literals_Particle_SteerToward]
       - [0xCA8B8, rodata, data_800C/literals_func_8027ABF4_de]
       - [0xCA8BC, rodata, data_800C/D_auto_src_rw_pool_8027AD4C_CA8BC_us_rev1]
-      - [0xCA8E8, rodata, data_800C/literals_func_8027B720_de]
+      - [0xCA8E8, rodata, data_800C/literals_Particle_Update]
       - [0xCA928, rodata, data_800C/literals_Particle_ParentTransform]
       - [0xCA954, rodata, data_800C/D_blob_e527ce06998f270aa77e]
       - [0xCA958, rodata, data_800C/D_blob_815d4c41f0abd39563d6]
