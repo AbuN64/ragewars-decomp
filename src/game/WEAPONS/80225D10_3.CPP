@@ -154,14 +154,14 @@ void func_80226C60_de(void *object, CQuatern *output)
     float yaw;
     float scale;
 
-    pitch = player->pitchOffset + player->state730;
-    roll = player->lean + player->state738;
-    scale = D_800C2B70_de;
-    roll *= scale;
-    yaw = player->state728 + player->state734;
     heading = player->heading;
-    orientation = player->orientation;
+    roll = player->lean + player->state738;
+    pitch = player->pitchOffset + player->state730;
     pitch -= player->state708;
+    orientation = player->orientation;
+    scale = D_800C2B70_de;
+    yaw = player->state728 + player->state734;
+    roll *= scale;
 
     D_80115DEC = func_802B7130_de(roll);
     pitch *= scale;
