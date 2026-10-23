@@ -12,7 +12,7 @@
 #include "RESMGR/resmgr_stream_io.H"
 #include "MATH/802A2870.H"
 #include "SCENE/802508E0_13.H"
-extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, DrawArgs *);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, WidgetLayout *, DrawArgs *);
 #include "RESMGR/resmgr_string_memory.H"
 
 /* Puts a new node in a tree node's place, taking over its parent and next links and becoming the parent's first child or the successor of the predecessor func_8040ECA8_de's search finds, then makes the old node the new node's only child with its next link and the halfwords at 0x14 and 0x16 cleared.
@@ -50,7 +50,7 @@ extern GlyphBuffer *func_8041200C_de(s32 index);
 
 extern short func_80411C60_de(s32 index);
 
-/* Draws a widget's variant image: when func_8040E0D4_de accepts the widget at the position, picks the
+/* Draws a widget's variant image: when Frontend_ComputeWidgetBounds accepts the widget at the position, picks the
    pressed (flag 0x100), highlighted (flag 0x40) or normal image of the widget, and when present
    moves the position back by the image's offset scaled by the style's scale factors and draws it
    through Frontend_DrawWidget with the same flags and style. */
@@ -69,7 +69,7 @@ extern short func_80411C60_de(s32 index);
 
 extern void Frontend_DrawWidget(struct Pair14 *image, Triple at, Style style);
 
-/* Draws the child at 0x8 of a window with the arguments passed by value after clearing D_800E2AB8 once func_8040E0D4_de resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with D_800E2AB8 cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
+/* Draws the child at 0x8 of a window with the arguments passed by value after clearing D_800E2AB8 once Frontend_ComputeWidgetBounds resolves the window's rectangle, and when flag 0x200 of the halfword at 0x12 is set it saves the four values func_802A1898_de reports, narrows them by the resolved basis through func_8040F488_de, giving up when it fails, and installs them through func_802A1870_de around the draw, restoring the saved values after it. Adapted from func_8041BA00_de with D_800E2AB8 cleared before the rectangle is resolved, the resolved basis declared first, and a failed func_8040F488_de ending the function. */
 
 
 
@@ -336,7 +336,7 @@ void func_8040F230_de(ButtonWidget *widget, Triple at, Style style) {
     Shared_Quad box1;
     struct Pair14 *image;
 
-    if (func_8040E0D4_de((struct Shape_typemap_165 *)&box0, (struct Shape_typemap_165 *)&box1, (WidgetLayout *)widget, (DrawArgs *)&at) != 0) {
+    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&box0, (struct Shape_typemap_165 *)&box1, (WidgetLayout *)widget, (DrawArgs *)&at) != 0) {
         if (at.z & 0x100) {
             image = widget->pressed;
         } else if (at.z & 0x40) {
@@ -362,7 +362,7 @@ void func_8040F350_de(WidgetLayout *arg0, Args args) {
 
     changed = 0;
     D_800E2AB8 = 0;
-    if (func_8040E0D4_de((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, arg0, (DrawArgs *)&args) != 0) {
+    if (Frontend_ComputeWidgetBounds((struct Shape_typemap_165 *)&first, (struct Shape_typemap_165 *)&basis, arg0, (DrawArgs *)&args) != 0) {
         if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;

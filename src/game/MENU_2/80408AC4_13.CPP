@@ -18,7 +18,7 @@ int func_8040C5C0_de(void) {
 
 
 
-extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *, Args *);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *, Args *);
 extern void func_802A1898_de(s32 *, s32 *, s32 *, s32 *);
 extern s32 func_8040F488_de(struct Shape_typemap_165 *rect, struct Shape_typemap_165 *clip);
 extern void func_8040E7FC_de(void *, Args);
@@ -35,7 +35,7 @@ void func_8040C5C8_de(void *widget, Args args) {
     s32 changed;
 
     changed = 0;
-    if (func_8040E0D4_de(&first, &basis, widget, &args) != 0) {
+    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((record->unk12 & 0x200) != 0) {
             func_802A1898_de(&value.field_0, &value.field_8, &value.field_4, &value.field_C);
             transformed = value;

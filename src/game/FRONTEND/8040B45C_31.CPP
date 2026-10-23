@@ -22,7 +22,7 @@
 
 extern BatchRec D_8014D590[];
 extern struct Shape_typemap_165 D_8014D580;
-extern s32 func_8040E0D4_de(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *widget, DrawArgs *);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *, struct Shape_typemap_165 *, void *widget, DrawArgs *);
 /* Flushes the queued text sprite batches: when any are queued it selects render mode 0x53333 if
    not already active, saves the clip rectangle and applies the queue's own, then walks the texture
    pages from the lowest first page to the highest last page among the batches, loading each page
@@ -201,7 +201,7 @@ void func_8040CD50_de(Widget_func_8040CD50_de *widget, DrawArgs args) {
     s32 color;
 
     clipped = 0;
-    if (func_8040E0D4_de(&area, &box, widget, &args) == 0) {
+    if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args) == 0) {
         return;
     }
     if (widget->flags & 0x200) {
@@ -238,7 +238,7 @@ void func_8040CF8C_de(WidgetLayout *widget, DrawArgs args) {
     s32 clipped;
 
     clipped = 0;
-    if (func_8040E0D4_de(&area, &box, widget, &args) == 0) {
+    if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args) == 0) {
         return;
     }
     if (((u8)(widget->colors[0] >> 24) | (u8)(widget->colors[1] >> 24) | (u8)(widget->colors[2] >> 24) |
@@ -290,7 +290,7 @@ void func_8040D2D0_de(TextWidget *widget, DrawArgs args) {
         resolved = (u8 *)func_80411D78_de(widget->stringId);
     }
     text=resolved;
-    if (!func_8040E0D4_de(&area, &box, widget, &args)) return;
+    if (!Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) return;
     if (widget->flags & 0x200) {
         func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
         clip = saved;
@@ -399,7 +399,7 @@ static inline void drawWidgetChoice(DraftWidget *widget, DrawArgs args) {
         struct Shape_typemap_165 area;
         struct Shape_typemap_165 box;
         DraftWidget *child;
-        if (func_8040E0D4_de(&area, &box, widget, &args)) {
+        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (args.flags & 0x100) child = widget->disabled;
             else if (args.flags & 0x40) child = widget->selected;
             else child = widget->normal;
@@ -419,7 +419,7 @@ static inline void drawWidgetResetGroup(DraftWidget *widget, DrawArgs args) {
         s32 clipped;
         clipped = 0;
         D_800E2AB8 = 0;
-        if (func_8040E0D4_de(&area, &box, widget, &args)) {
+        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
                 func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
@@ -439,7 +439,7 @@ static inline void drawWidgetGroup(DraftWidget *widget, DrawArgs args) {
         struct Shape_typemap_165 clip;
         s32 clipped;
         clipped = 0;
-        if (func_8040E0D4_de(&area, &box, widget, &args)) {
+        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &args)) {
             if (widget->flags & 0x200) {
                 func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
@@ -496,170 +496,171 @@ INCLUDE_ASM("ovl_80400000", Frontend_DrawWidget);
 extern s32 D_800DEA60, D_800E2AB4_de;
 
 /* Propagate widget opacity and scale, compute its bounds, then clip the hit box. */
-s32 func_8040E0D4_de(struct Shape_typemap_165 *arg0, struct Shape_typemap_165 *arg1, void *widget, DrawArgs *arg3) {
-    WidgetLayout *arg2 = widget;
-    f32 temp_ft0;
-    f32 temp_ft1f;
-    f32 temp_ft2;
-    f32 temp_fv0f;
-    f32 temp_fv0f_2;
-    f32 temp_fv1f;
-    s16 temp_a0_2;
-    s32 temp_ft2f;
-    s32 temp_ft2f_2;
-    s32 temp_ft2f_3;
-    s32 temp_ft2f_4;
-    s32 temp_t0;
-    s32 temp_t5;
-    s32 temp_t6;
-    s32 temp_t7;
+/* 168/362 aligned words; remaining: scaled bounds scheduling and register allocation. */
+s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *draw, struct Shape_typemap_165 *hit, void *widget, DrawArgs *context) {
+    WidgetLayout *layout = widget;
+    f32 scaledCenterX,scaledCenterY,scaleX,scaleY,scaledHalfWidth,scaledHalfHeight;
+    f32 parentScaleX;
+    f32 parentScaleY;
+    s16 widgetX;
+    s32 centerX;
+    s32 centerY;
+    s32 hitCenterX;
+    s32 hitCenterY;
+    s32 parentFlags;
+    s32 offsetHitBox;
+    s32 centerFlag;
+    s32 unscaledHalfWidth;
+    s32 unscaledHalfHeight;
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v1;
     s32 temp_v1_2;
     s32 temp_v1_3;
     s32 temp_v1_4;
-    s32 var_t2;
-    s32 var_t3;
+    s32 halfWidth;
+    s32 halfHeight;
     s32 var_v0;
     s32 var_v0_2;
     s32 var_v0_3;
     s32 var_v0_4;
-    u16 temp_a0;
-    u16 temp_v0;
+    u16 widgetFlags;
+    u16 widgetHeight;
 
-    temp_a0 = arg2->flags;
-    temp_t0 = arg3->flags;
-    temp_ft1f = arg3->scaleX;
-    temp_ft2 = arg3->scaleY;
-    temp_t5 = temp_a0 & 0x400 & 0xFFFF;
-    temp_t6 = (s32) (((u16)arg2->width) << 0x10) >> 0x11;
-    temp_t7 = (s32) (((u16)arg2->height) << 0x10) >> 0x11;
-    if (!(temp_t0 & 0x4000)) {
-        arg3->flags = (s32) (temp_t0 | (temp_a0 & 0x140));
+    widgetFlags = layout->flags;
+    parentFlags = context->flags;
+    parentScaleX = context->scaleX;
+    parentScaleY = context->scaleY;
+    centerFlag = widgetFlags & 0x800 & 0xFFFF;
+    offsetHitBox = widgetFlags & 0x400 & 0xFFFF;
+    unscaledHalfWidth = (s32) (((u16)layout->width) << 0x10) >> 0x11;
+    unscaledHalfHeight = (s32) (((u16)layout->height) << 0x10) >> 0x11;
+    if (!(parentFlags & 0x4000)) {
+        context->flags = (s32) (parentFlags | (widgetFlags & 0x140));
     }
-    arg3->flags = (s32) (arg3->flags | (arg2->flags & 0x609));
-    if ((u8) arg2->alpha < 0xFFU) {
-        arg3->alpha = (u8) ((arg3->alpha * arg2->alpha) / 255);
+    context->flags = (s32) (context->flags | (layout->flags & 0x609));
+    if ((u8) layout->alpha < 0xFFU) {
+        context->alpha = (u8) ((context->alpha * layout->alpha) / 255);
     }
-    if (arg3->flags & 1) {
-        arg3->alpha = (u8) ((u8) arg3->alpha >> 1);
+    if (context->flags & 1) {
+        context->alpha = (u8) ((u8) context->alpha >> 1);
     }
     var_v0 = 0;
-    if (arg3->alpha != 0) {
-        if (!(arg2->flags & 8)) {
+    if (context->alpha != 0) {
+        if (!(layout->flags & 8)) {
             return 0;
         }
-        if ((arg3->scaleX != 1.0f) || (arg3->scaleY != 1.0f) || (arg2->scaleX != 1.0f) || (arg2->scaleY != 1.0f)) {
-            temp_fv0f = arg3->scaleX;
-            temp_fv0f_2 = temp_fv0f * arg2->scaleX;
-            arg3->scaleX = temp_fv0f_2;
-            temp_ft0 = arg3->scaleY * arg2->scaleY;
-            temp_fv1f = ((f32) (arg2->y + arg2->offsetY) + ((f32) (s16) ((u16)arg2->height) * 0.5f)) * arg3->scaleY;
-            arg3->scaleY = temp_ft0;
-            temp_ft2f = (s32) (((f32) (arg2->x + arg2->offsetX) + ((f32) (s16) ((u16)arg2->width) * 0.5f)) * temp_fv0f);
-            temp_ft2f_2 = (s32) temp_fv1f;
-            var_t2 = (s32) ((f32) (s16) ((u16)arg2->width) * temp_fv0f_2 * 0.5f);
-            arg0->field_0 = (s32) ((temp_ft2f - var_t2) + arg3->x);
-            var_t3 = (s32) ((f32) (s16) ((u16)arg2->height) * temp_ft0 * 0.5f);
-            arg0->field_4 = (s32) (temp_ft2f + var_t2 + arg3->x);
-            arg0->field_8 = (s32) ((temp_ft2f_2 - var_t3) + arg3->y);
-            arg0->field_C = (s32) (temp_ft2f_2 + var_t3 + arg3->y);
+        if ((context->scaleX != 1.0f) || (context->scaleY != 1.0f) || (layout->scaleX != 1.0f) || (layout->scaleY != 1.0f)) {
+            scaledCenterX=(f32)(layout->x+layout->offsetX)+(f32)(s16)layout->width*0.5f;
+            scaledCenterX*=context->scaleX;
+            scaleX=context->scaleX*layout->scaleX;
+            context->scaleX=scaleX;
+            scaleY=context->scaleY*layout->scaleY;
+            scaledCenterY=(f32)(layout->y+layout->offsetY)+(f32)(s16)layout->height*0.5f;
+            scaledCenterY*=context->scaleY;
+            context->scaleY=scaleY;
+            scaledHalfWidth=(f32)(s16)layout->width*scaleX; scaledHalfWidth*=0.5f;
+            scaledHalfHeight=(f32)(s16)layout->height*scaleY; scaledHalfHeight*=0.5f;
+            centerX=(s32)scaledCenterX;
+            centerY=(s32)scaledCenterY;
+            halfWidth=(s32)scaledHalfWidth;
+            halfHeight=(s32)scaledHalfHeight;
+            draw->field_0=centerX-halfWidth+context->x;
+            draw->field_4=centerX+halfWidth+context->x;
+            draw->field_8=centerY-halfHeight+context->y;
+            draw->field_C=centerY+halfHeight+context->y;
         } else {
-            arg0->field_0 = (s32) (arg3->x + arg2->x + arg2->offsetX);
-            arg0->field_8 = (s32) (arg3->y + arg2->y + arg2->offsetY);
-            arg0->field_4 = (s32) ((arg0->field_0 + (s16) ((u16)arg2->width)) - 1);
-            arg0->field_C = (s32) ((arg0->field_8 + (s16) ((u16)arg2->height)) - 1);
-            var_t2 = (s32) (((u16)arg2->width) << 0x10) >> 0x11;
-            var_t3 = (s32) (((u16)arg2->height) << 0x10) >> 0x11;
+            draw->field_0 = (s32) (context->x + layout->x + layout->offsetX);
+            draw->field_8 = (s32) (context->y + layout->y + layout->offsetY);
+            draw->field_4 = (s32) ((draw->field_0 + (s16) ((u16)layout->width)) - 1);
+            draw->field_C = (s32) ((draw->field_8 + (s16) ((u16)layout->height)) - 1);
+            halfWidth = (s32) (((u16)layout->width) << 0x10) >> 0x11;
+            halfHeight = (s32) (((u16)layout->height) << 0x10) >> 0x11;
         }
-        temp_a0_2 = arg2->x;
-        temp_v0 = ((u16)arg2->height);
-        temp_ft2f_3 = (s32) ((f32) (temp_a0_2 + ((s16) ((u16)arg2->width) / 2)) * temp_ft1f);
-        temp_ft2f_4 = (s32) ((f32) (arg2->y + ((s32) ((s16) temp_v0 + ((u32) (temp_v0 << 0x10) >> 0x1F)) >> 1)) * temp_ft2);
-        if (temp_a0 & 0x800 & 0xFFFF) {
-            if (temp_t5 != 0) {
-                arg1->field_0 = (s32) arg0->field_0;
-                arg1->field_4 = (s32) arg0->field_4;
-                arg1->field_8 = (s32) arg0->field_8;
-                arg1->field_C = (s32) arg0->field_C;
+        widgetX = layout->x;
+        widgetHeight = ((u16)layout->height);
+        hitCenterX = (s32) ((f32) (widgetX + ((s16) ((u16)layout->width) / 2)) * parentScaleX);
+        hitCenterY = (s32) ((f32) (layout->y + ((s32) ((s16) widgetHeight + ((u32) (widgetHeight << 0x10) >> 0x1F)) >> 1)) * parentScaleY);
+        if (centerFlag) {
+            if (offsetHitBox != 0) {
+                *hit = *draw;
             } else {
-                arg1->field_0 = (s32) ((temp_ft2f_3 - var_t2) + arg3->x);
-                arg1->field_8 = (s32) ((temp_ft2f_4 - var_t3) + arg3->y);
-                arg1->field_4 = (s32) (temp_ft2f_3 + var_t2 + arg3->x);
-                var_v0_2 = temp_ft2f_4 + var_t3 + arg3->y;
-                goto block_29;
+                hit->field_0 = (s32) ((hitCenterX - halfWidth) + context->x);
+                hit->field_8 = (s32) ((hitCenterY - halfHeight) + context->y);
+                hit->field_4 = (s32) (hitCenterX + halfWidth + context->x);
+                var_v0_2 = hitCenterY + halfHeight + context->y;
+                goto storeHitBottom;
             }
         } else {
-            if (temp_t5 == 0) {
-                if (temp_ft1f != 1.0f) {
-                    var_v0_3 = (s32) ((f32) temp_a0_2 * temp_ft1f) + arg3->x;
+            if (offsetHitBox == 0) {
+                if (parentScaleX != 1.0f) {
+                    var_v0_3 = (s32) ((f32) widgetX * parentScaleX) + context->x;
                 } else {
-                    var_v0_3 = temp_a0_2 + arg3->x;
+                    var_v0_3 = widgetX + context->x;
                 }
-                arg1->field_0 = var_v0_3;
-                arg1->field_4 = (s32) (arg1->field_0 + (s16) ((u16)arg2->width));
-                if (temp_ft2 != 1.0f) {
-                    var_v0_4 = (s32) ((f32) arg2->y * temp_ft2) + arg3->y;
+                hit->field_0 = var_v0_3;
+                hit->field_4 = (s32) (hit->field_0 + (s16) ((u16)layout->width));
+                if (parentScaleY != 1.0f) {
+                    var_v0_4 = (s32) ((f32) layout->y * parentScaleY) + context->y;
                 } else {
-                    var_v0_4 = arg2->y + arg3->y;
+                    var_v0_4 = layout->y + context->y;
                 }
-                arg1->field_8 = var_v0_4;
-                var_v0_2 = arg1->field_8 + (s16) ((u16)arg2->height);
+                hit->field_8 = var_v0_4;
+                var_v0_2 = hit->field_8 + (s16) ((u16)layout->height);
             } else {
-                arg1->field_0 = (s32) ((temp_ft2f_3 - temp_t6) + arg2->offsetX + arg3->x);
-                arg1->field_8 = (s32) ((temp_ft2f_4 - temp_t7) + arg2->offsetY + arg3->y);
-                arg1->field_4 = (s32) (temp_ft2f_3 + temp_t6 + arg2->offsetX + arg3->x);
-                var_v0_2 = temp_ft2f_4 + temp_t7 + arg2->offsetY + arg3->y;
+                hit->field_0 = (s32) ((hitCenterX - unscaledHalfWidth) + layout->offsetX + context->x);
+                hit->field_8 = (s32) ((hitCenterY - unscaledHalfHeight) + layout->offsetY + context->y);
+                hit->field_4 = (s32) (hitCenterX + unscaledHalfWidth + layout->offsetX + context->x);
+                var_v0_2 = hitCenterY + unscaledHalfHeight + layout->offsetY + context->y;
             }
-block_29:
-            arg1->field_C = var_v0_2;
+storeHitBottom:
+            hit->field_C = var_v0_2;
         }
-        temp_v1 = arg1->field_0;
+        temp_v1 = hit->field_0;
         if (temp_v1 < 0) {
-            arg1->field_0 = 0;
-            goto block_34;
+            hit->field_0 = 0;
+            goto clipRight;
         }
         var_v0 = 0;
         if (D_800DEA60 >= temp_v1) {
-block_34:
-            temp_v0_2 = arg1->field_4;
+clipRight:
+            temp_v0_2 = hit->field_4;
             if (temp_v0_2 < 0) {
                 return 0;
             }
             if (D_800DEA60 < temp_v0_2) {
-                arg1->field_4 = (s32) D_800DEA60;
+                hit->field_4 = (s32) D_800DEA60;
             }
-            temp_v1_2 = arg1->field_8;
+            temp_v1_2 = hit->field_8;
             if (temp_v1_2 < 0) {
-                arg1->field_8 = 0;
-                goto block_43;
+                hit->field_8 = 0;
+                goto clipBottom;
             }
             var_v0 = 0;
             if (D_800E2AB4_de >= temp_v1_2) {
-block_43:
-                temp_v0_3 = arg1->field_C;
+clipBottom:
+                temp_v0_3 = hit->field_C;
                 if (temp_v0_3 < 0) {
                     return 0;
                 }
                 if (D_800E2AB4_de < temp_v0_3) {
-                    arg1->field_C = (s32) D_800E2AB4_de;
+                    hit->field_C = (s32) D_800E2AB4_de;
                 }
-                temp_v1_3 = arg1->field_0;
-                if (temp_v1_3 >= arg1->field_4) {
-                    arg1->field_4 = (s32) (temp_v1_3 + 1);
+                temp_v1_3 = hit->field_0;
+                if (temp_v1_3 >= hit->field_4) {
+                    hit->field_4 = (s32) (temp_v1_3 + 1);
                 }
-                temp_v1_4 = arg1->field_8;
-                if (temp_v1_4 >= arg1->field_C) {
-                    arg1->field_C = (s32) (temp_v1_4 + 1);
+                temp_v1_4 = hit->field_8;
+                if (temp_v1_4 >= hit->field_C) {
+                    hit->field_C = (s32) (temp_v1_4 + 1);
                 }
-                arg3->x = (s32) arg0->field_0;
+                context->x = (s32) draw->field_0;
                 var_v0 = 1;
-                arg3->y = (s32) arg0->field_8;
-                arg3->v[0] = (s32) arg0->field_0;
-                arg3->v[1] = (s32) arg0->field_4;
-                arg3->v[2] = (s32) arg0->field_8;
-                arg3->v[3] = (s32) arg0->field_C;
+                context->y = (s32) draw->field_8;
+                context->v[0] = (s32) draw->field_0;
+                context->v[1] = (s32) draw->field_4;
+                context->v[2] = (s32) draw->field_8;
+                context->v[3] = (s32) draw->field_C;
                 return var_v0;
             }
             return var_v0;
@@ -669,5 +670,5 @@ block_43:
     return var_v0;
 }
 #else
-INCLUDE_ASM("ovl_80400000", func_8040E0D4_de);
+INCLUDE_ASM("ovl_80400000", Frontend_ComputeWidgetBounds);
 #endif

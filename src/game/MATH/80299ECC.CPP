@@ -28,7 +28,7 @@ extern void func_80411E18_de(s16 arg0);
 
 extern void func_8040E67C_de(void *, ArgsCode80296014);
 
-extern s32 func_8040E0D4_de(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, ArgsCode80296014 *);
+extern s32 Frontend_ComputeWidgetBounds(Quad_func_802A1BE0_de *, Quad_func_802A1BE0_de *, void *, ArgsCode80296014 *);
 
 /* Moves menu focus and sends leave and enter events through menu and element callbacks. */
 
@@ -162,7 +162,7 @@ void func_80298FE8_de(void) {
             func_8040E67C_de(*(void **)(offset + (s32)D_8014D080->screens), args);
             func_8040E894_de();
             func_802A18FC_de();
-            func_8040E0D4_de(&first, &basis,
+            Frontend_ComputeWidgetBounds(&first, &basis,
                           *(void **)(offset + (s32)D_8014D080->screens), &args);
             offset += 0x1C;
         } while (D_8014D080->current >= index);

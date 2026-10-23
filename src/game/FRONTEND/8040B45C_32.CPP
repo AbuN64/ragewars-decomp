@@ -8,7 +8,7 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "MATH/802A2870.H"
 
-/* Draws a visible widget (flag 8): when func_8040E0D4_de places it, and its draw flags ask for
+/* Draws a visible widget (flag 8): when Frontend_ComputeWidgetBounds places it, and its draw flags ask for
    clipping (0x200), it narrows the current scissor from func_802A1898_de to the widget's box through
    func_8040F488_de (skipping the draw when nothing is left) and applies it with func_802A1870_de; it then
    draws the widget through Frontend_DrawWidget and restores the saved scissor if it was narrowed. */
@@ -19,7 +19,7 @@
 
 
 
-extern s32 func_8040E0D4_de(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgs_func_8040E67C_de *args);
+extern s32 Frontend_ComputeWidgetBounds(struct Shape_typemap_165 *a, struct Shape_typemap_165 *box, Widget *widget, DrawArgs_func_8040E67C_de *args);
 
 extern void func_802A1898_de(s32 *left, s32 *right, s32 *top, s32 *bottom);
 
@@ -46,7 +46,7 @@ void func_8040E67C_de(Widget *widget, DrawArgs_func_8040E67C_de args) {
     clipped = 0;
     if (widget->flags & 8) {
         local = args;
-        if (func_8040E0D4_de(&area, &box, widget, &local) != 0) {
+        if (Frontend_ComputeWidgetBounds(&area, &box, widget, &local) != 0) {
             if (local.flags & 0x200) {
                 func_802A1898_de(&saved.field_0, &saved.field_8, &saved.field_4, &saved.field_C);
                 clip = saved;
