@@ -136,11 +136,11 @@ void func_8022DA04_de(void *arg0) {
     player->locked = 0;
 }
 
-void func_8022DA30_de(void *arg0, void *arg1) {
-    struct SharedPlayer *a0 = arg0;
-    void *a1 = arg1;
+void func_8022DA30_de(void *player, void *body) {
+    struct SharedPlayer *a0 = player;
+    void *a1 = body;
 
-    func_80225F44_de(arg0, arg1);
+    func_80225F44_de(player, body);
     if (a0->views5E8.view6C0_51.unk6C0 != 0.0f) {
         func_802227F4_de(a0, a1, 0x25);
     }
@@ -152,11 +152,11 @@ void func_8022DA84_de(void *arg0) {
     player->locked = 0;
 }
 
-void func_8022DAB0_de(void *arg0, void *arg1) {
-    struct SharedPlayer *a0 = arg0;
-    void *a1 = arg1;
+void func_8022DAB0_de(void *player, void *body) {
+    struct SharedPlayer *a0 = player;
+    void *a1 = body;
 
-    func_80225F44_de(arg0, arg1);
+    func_80225F44_de(player, body);
     if (a0->views5E8.view6C0_51.unk6C0 == 0.0f) {
         func_802227F4_de(a0, a1, 0x24);
     }

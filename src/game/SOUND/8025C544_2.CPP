@@ -67,7 +67,7 @@ void func_8025C8D8_de(void *arg0, CLoopingSoundData *arg1, s32 arg2) {
     ((SoundVoicePool *)arg0)->state = 0;
 }
 
-void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *arg3, s32 arg4) {
+void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *position, s32 fallback) {
     CLoopingSoundData *node;
     s32 result;
 
@@ -78,31 +78,31 @@ void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *arg3, s32 arg
         node->state = -1;
         node->value = -1;
         result = func_8025DE54_de((s16)arg1, *arg2,
-                                (s32)arg3, arg4);
+                                (s32)position, fallback);
         node->value = result;
         D_800CBB10 = result;
         node->state = arg1;
         node->m_vSoundPos = *arg2;
-        node->m_vSoundPosPtr = arg3;
+        node->m_vSoundPosPtr = position;
     }
     return node;
 }
 
-s32 func_8025CA24_de(void *arg0, void *arg1) {
+s32 func_8025CA24_de(void *work, void *arg1) {
     void *var_s0;
 
     if (arg1 == 0) {
         return 0;
     }
 
-    var_s0 = ((SoundVoicePool *)arg0)->playing.head;
+    var_s0 = ((SoundVoicePool *)work)->playing.head;
     if (var_s0 != 0) {
         do {
             if (var_s0 == arg1) {
                 func_8025E174_de(((CLoopingSoundData *)var_s0)->value);
                 D_800CBB14 = ((CLoopingSoundData *)var_s0)->value;
-                func_80255ED8_de(&((SoundVoicePool *)arg0)->playing, var_s0);
-                func_80255D14_de(arg0, var_s0);
+                func_80255ED8_de(&((SoundVoicePool *)work)->playing, var_s0);
+                func_80255D14_de(work, var_s0);
                 return 1;
             }
             var_s0 = ((CLoopingSoundData *)var_s0)->next;
@@ -112,7 +112,7 @@ s32 func_8025CA24_de(void *arg0, void *arg1) {
 }
 
 void func_8025CAB0_de(void *arg0) {
-    s32 temp_v0;
+    s32 value;
     SoundVoicePool *pool = arg0;
     CLoopingSoundData *var_s0;
 
@@ -120,19 +120,19 @@ void func_8025CAB0_de(void *arg0) {
     if (var_s0 != 0) {
         do {
             func_8025E174_de(var_s0->value);
-            temp_v0 = var_s0->value;
+            value = var_s0->value;
             var_s0 = var_s0->next;
-            D_800CBB18 = temp_v0;
+            D_800CBB18 = value;
         } while (var_s0 != 0);
     }
     pool->state = 1;
 }
 
-void func_8025CB0C_de(SoundVoicePool *arg0) {
+void func_8025CB0C_de(SoundVoicePool *soundVoicePool) {
     s32 temp_v0;
     CLoopingSoundData *var_s0;
 
-    var_s0 = arg0->playing.head;
+    var_s0 = soundVoicePool->playing.head;
     if (var_s0 != 0) {
         do {
             temp_v0 = func_8025DE54_de((s16)var_s0->state,
@@ -144,7 +144,7 @@ void func_8025CB0C_de(SoundVoicePool *arg0) {
             D_800CBB1C = temp_v0;
         } while (var_s0 != 0);
     }
-    arg0->state = 0;
+    soundVoicePool->state = 0;
 }
 
 void func_8025CB88_de(void *arg0) {

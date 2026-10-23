@@ -20,11 +20,11 @@
 
 
 /** Return the vertical offset selected by the actor's current state. */
-f32 func_8024E2FC_de(Actor_u1 *arg0) {
+f32 func_8024E2FC_de(Actor_u1 *actor) {
     Resource_u1 *state;
 
     {
-        s32 state_value = arg0->resource->kind;
+        s32 state_value = actor->resource->kind;
         s32 sw_state_value = state_value - 1;
         if ((unsigned int)sw_state_value > 10) {
             goto sw_state_default;
@@ -45,19 +45,19 @@ f32 func_8024E2FC_de(Actor_u1 *arg0) {
     }
     do {
     sw_state_11:
-        return arg0->resource->valueEC;
+        return actor->resource->valueEC;
     sw_state_1:
-        return arg0->resource->value2C;
+        return actor->resource->value2C;
     sw_state_2:
-        state = arg0->resource;
+        state = actor->resource;
         if (((CollisionShapeResource *)state)->mode == 0) {
             return D_800C3D6C_de;
         }
         return ((CollisionShapeResource *)state)->height;
     sw_state_5:
-        return arg0->resource->radius;
+        return actor->resource->radius;
     sw_state_8:
-        state = arg0->resource;
+        state = actor->resource;
         if ((state->flags14 & 1) != 0) {
             return D_800C3D70_de;
         }
@@ -68,16 +68,16 @@ f32 func_8024E2FC_de(Actor_u1 *arg0) {
     } while (0);
 }
 
-f32 func_8024E3C4_de(Actor_u1 *arg0) {
-    Resource_u1 *temp_a0 = arg0->resource;
-    s32 temp_v1 = temp_a0->kind;
+f32 func_8024E3C4_de(Actor_u1 *actor) {
+    Resource_u1 *resource = actor->resource;
+    s32 kind = resource->kind;
 
-    switch (temp_v1) {
+    switch (kind) {
     case 11:
-        return temp_a0->valueF8;
+        return resource->valueF8;
     case 4:
     case 1:
-        return temp_a0->value34;
+        return resource->value34;
     default:
         return 0.0f;
     }

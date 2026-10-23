@@ -33,8 +33,8 @@ void func_8022E260_de(void *arg0, s32 arg1, s32 arg2) {
     func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link), arg0, arg1, arg2);
 }
 
-void func_8022E290_de(void *arg0) {
-    Player *object = arg0;
+void func_8022E290_de(void *player) {
+    Player *object = player;
     void *attributes;
     void *state = object->tuning;
     f32 zero;
@@ -87,7 +87,7 @@ void func_8022E290_de(void *arg0) {
     object->previousTarget = object->pos;
 }
 
-s32 func_8022E3C4_de(Player *arg0, s32 arg1, s32 arg2) {
+s32 func_8022E3C4_de(Player *player, s32 arg1, s32 arg2) {
     s16 **entry;
     s16 **scan;
     WeaponInfo *resource;
@@ -95,7 +95,7 @@ s32 func_8022E3C4_de(Player *arg0, s32 arg1, s32 arg2) {
     s32 i;
 
     resource = D_800D052C[arg1];
-    if (arg0->computer != 0) {
+    if (player->computer != 0) {
         entry = resource->computerClasses;
         goto scan_setup;
     }
@@ -147,51 +147,51 @@ s32 func_8022E43C_de(Instance8020CD74 *arg0, CVector3 *arg1) {
 }
 
 f32 func_8022E588_de(void *arg0, f32 *arg1) {
-    f32 var_f20;
+    f32 result;
     Round *round = arg0;
     Actor_func_8022D290_de *var_s0;
 
     var_s0 = round->players;
-    var_f20 = 0.0f;
+    result = 0.0f;
     if (var_s0 != 0) {
         do {
             if (var_s0->unk_0x05DC != 0) {
-                var_f20 += func_802726F8_de(arg1, &var_s0->posX);
+                result += func_802726F8_de(arg1, &var_s0->posX);
             }
             var_s0 = (Actor_func_8022D290_de *)var_s0->unk_0x16E0;
         } while (var_s0 != 0);
     }
-    return var_f20;
+    return result;
 }
 
 /* Returns whether a record in state 3 carries type 0x5E2A or 0x5E5A, or a type in the range 0x7DF to 0x7E3. */
 
-s32 func_8022E5EC_de(struct SharedPlayer *arg0) {
+s32 func_8022E5EC_de(struct SharedPlayer *player) {
     s32 type;
 
-    if (arg0->views5E8.view650_15.unk650 == 3) {
-        type = arg0->views5E8.view86C_125.unk86C;
+    if (player->views5E8.view650_15.unk650 == 3) {
+        type = player->views5E8.view86C_125.unk86C;
         if (type == 0x5E2A || type == 0x5E5A) {
             return 1;
         }
     }
-    return arg0->views5E8.view650_15.unk650 == 3 && arg0->views5E8.view86C_125.unk86C >= 0x7DF && arg0->views5E8.view86C_125.unk86C < 0x7E4;
+    return player->views5E8.view650_15.unk650 == 3 && player->views5E8.view86C_125.unk86C >= 0x7DF && player->views5E8.view86C_125.unk86C < 0x7E4;
 }
 
 /* Returns whether a record in state 3 carries type 0x5E29 or 0x5E59, or a type in the range 0x7DA to 0x7DE. Adapted from func_8022E5EC_de with the type constants changed. */
 
-s32 func_8022E640_de(struct SharedPlayer *arg0) {
+s32 func_8022E640_de(struct SharedPlayer *player) {
     s32 type;
 
-    if (arg0->views5E8.view650_15.unk650 == 3) {
-        type = arg0->views5E8.view86C_125.unk86C;
+    if (player->views5E8.view650_15.unk650 == 3) {
+        type = player->views5E8.view86C_125.unk86C;
         if (type == 0x5E29 || type == 0x5E59) {
             return 1;
         }
     }
-    return arg0->views5E8.view650_15.unk650 == 3 && arg0->views5E8.view86C_125.unk86C >= 0x7DA && arg0->views5E8.view86C_125.unk86C < 0x7DF;
+    return player->views5E8.view650_15.unk650 == 3 && player->views5E8.view86C_125.unk86C >= 0x7DA && player->views5E8.view86C_125.unk86C < 0x7DF;
 }
 
-int func_8022E694_de(struct SharedPlayer *arg0) {
-    return arg0->views5E8.view650_15.unk650 == 0xF;
+int func_8022E694_de(struct SharedPlayer *player) {
+    return player->views5E8.view650_15.unk650 == 0xF;
 }

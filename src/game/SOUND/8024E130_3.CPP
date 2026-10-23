@@ -33,7 +33,7 @@ float func_8024E570_de(void *object) {
     return 0.0f;
 }
 
-void func_8024E59C_de(void *arg0, void *arg1, void *arg2) {
+void func_8024E59C_de(void *actor, void *arg1, void *arg2) {
     CVector3 *source = arg1;
     CVector3 *output = arg2;
     TripleRecAt8 t;
@@ -42,7 +42,7 @@ void func_8024E59C_de(void *arg0, void *arg1, void *arg2) {
     t.a = source->x;
     t.b = 0;
     t.c = source->z;
-    func_8024E79C_de(arg0, t, arg2, &sp30, 0, 0);
+    func_8024E79C_de(actor, t, arg2, &sp30, 0, 0);
     output->y = func_80275DD4_de((struct Node75 *)sp30, output->x, output->z);
 }
 
@@ -95,18 +95,18 @@ void *func_8024E6A0_de(struct ItemCode8024E130 *item) {
     return 0;
 }
 
-void func_8024E6D8_de(u8 *arg0, void *arg1) {
+void func_8024E6D8_de(u8 *arg0, void *vector) {
     Triple buf;
     char pad[0x30];
 
     if (*arg0 == 1) {
         func_802165F8_de(arg0, arg0 + 0x170, &buf);
-        *(Triple *)arg1 = buf;
+        *(Triple *)vector = buf;
         return;
     }
-    *(s32 *)arg1 = 0;
-    ((Triple *)arg1)->y = 0;
-    ((Triple *)arg1)->z = 0;
+    *(s32 *)vector = 0;
+    ((Triple *)vector)->y = 0;
+    ((Triple *)vector)->z = 0;
 }
 
 f32 func_8024E73C_de(u8 *arg0) {

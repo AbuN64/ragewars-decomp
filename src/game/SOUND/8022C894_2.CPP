@@ -42,27 +42,27 @@ extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_8044A07C_de(s32 arg0);
 
-void func_8022CF38_de(void *arg0, LevelActor *arg1) {
+void func_8022CF38_de(void *arg0, LevelActor *actor) {
     f32 value;
     f32 minimum;
     ((Shared_ActorView *)arg0)->forwardSpeed *= D_800C2D94_de;
     ((Shared_ActorView *)arg0)->lateralSpeed *= D_800C2D94_de;
 
-    value = arg1->position1.y * D_800C2D98_de;
+    value = actor->position1.y * D_800C2D98_de;
     minimum = D_800C2D9C_de;
-    arg1->position1.y = value;
+    actor->position1.y = value;
     if (value < minimum) {
-        arg1->position1.y = minimum;
+        actor->position1.y = minimum;
     }
 
     ((Shared_ActorView *)arg0)->collisionState = 0;
     func_8023913C_de(((Shared_ActorView *)arg0)->message);
     func_80218464_de(((Shared_func_80227014_S2 *)arg0)->unk938);
 
-    if (arg1->motionState & 0x8000) {
-        func_8025DE54_de(0x2DA, arg1->position0, 0, -1);
+    if (actor->motionState & 0x8000) {
+        func_8025DE54_de(0x2DA, actor->position0, 0, -1);
     } else {
-        func_8025DE54_de(0x2DC, arg1->position0, 0, -1);
+        func_8025DE54_de(0x2DC, actor->position0, 0, -1);
     }
 }
 
@@ -83,7 +83,7 @@ void func_8022D010_de(void *arg0, void *arg1) {
     other->position1.y = other->position1.y * (D_800C7E90);
 }
 
-void func_8022D040_de(void *arg0, LevelActor *arg1) {
+void func_8022D040_de(void *arg0, LevelActor *actor) {
     Player *player;
     s32 busy;
     f32 x;
@@ -94,8 +94,8 @@ void func_8022D040_de(void *arg0, LevelActor *arg1) {
     } else {
         player->pose = 0xE;
     }
-    func_802231D4_de(player, arg1, &D_800CE88C);
-    func_802238E0_de(player, arg1, &D_800CE8A4);
+    func_802231D4_de(player, actor, &D_800CE88C);
+    func_802238E0_de(player, actor, &D_800CE8A4);
     busy = 0;
     if (player->animation == 0x1144) {
         busy = player->animationDone == 0;
@@ -112,8 +112,8 @@ void func_8022D040_de(void *arg0, LevelActor *arg1) {
             player->animation = 0x14;
         }
     }
-    if (!(arg1->motionState & 0x20000) && player->poseTimer > D_800C7E9C) {
-        func_802227F4_de(player, arg1, 3);
+    if (!(actor->motionState & 0x20000) && player->poseTimer > D_800C7E9C) {
+        func_802227F4_de(player, actor, 3);
     }
 }
 
@@ -162,14 +162,14 @@ void func_8022D1A8_de(void *arg0) {
 void func_8022D20C_de(void) {
 }
 
-void func_8022D214_de(void *arg0) {
-    LevelActor *actor = arg0;
-    Shared_ActorView *player = arg0;
+void func_8022D214_de(void *widget) {
+    LevelActor *actor = widget;
+    Shared_ActorView *player = widget;
     actor->flags &= 0xFF7FFFFF;
     player->stun = 0;
     player->field11FC = 0.0f;
     actor->flags |= 0x01000000;
-    func_8044A07C_de((s32) arg0);
+    func_8044A07C_de((s32) widget);
 }
 
 void func_8022D254_de(void) {

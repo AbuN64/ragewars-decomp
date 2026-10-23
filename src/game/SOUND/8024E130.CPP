@@ -42,18 +42,18 @@ s32 func_8024E158_de(void *arg0) {
     }
 }
 
-s32 func_8024E1B4_de(void *arg0) {
-    if (*(u8 *)arg0 != 1) {
+s32 func_8024E1B4_de(void *actor) {
+    if (*(u8 *)actor != 1) {
         return 0;
     }
-    if (!(((LevelActor *)arg0)->flags & 0x2000)) {
+    if (!(((LevelActor *)actor)->flags & 0x2000)) {
         return 0;
     }
-    arg0 = ((ActorMotionState *)((Player *)arg0)->motion)->hooks;
-    if (arg0 == 0) {
+    actor = ((ActorMotionState *)((Player *)actor)->motion)->hooks;
+    if (actor == 0) {
         goto ret1;
     }
-    if (((ActorMotionHooks *)arg0)->flags & 0x10000) {
+    if (((ActorMotionHooks *)actor)->flags & 0x10000) {
         return 0;
     }
 ret1:
@@ -98,12 +98,12 @@ unsigned int func_8024E29C_de(char *object) {
 }
 
 /** Report whether the object pointed to at offset 0x18 equals one. */
-int func_8024E2B0_de(LevelActor *arg0) {
-    return arg0->definition->kind == 1;
+int func_8024E2B0_de(LevelActor *actor) {
+    return actor->definition->kind == 1;
 }
 
-int func_8024E2C4_de(LevelActor *arg0) {
-    switch (arg0->definition->kind) {
+int func_8024E2C4_de(LevelActor *source) {
+    switch (source->definition->kind) {
         case 0: case 2: case 3: case 5: case 6: case 7: case 8: case 0xA: case 0xC: case 0xD: case 0xE:
         default:
             return 1;

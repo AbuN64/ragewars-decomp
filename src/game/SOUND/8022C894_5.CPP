@@ -68,19 +68,19 @@ f32 func_8022DBC4_de(f32 arg0) {
     return D_800C2DD4_de - (temp * temp * temp);
 }
 
-void func_8022DBE4_de(Player *arg0) {
-    float temp = arg0->state708;
+void func_8022DBE4_de(Player *player) {
+    float temp = player->state708;
     float k = D_800C7EC8;
-    arg0->state714 = 0;
-    arg0->state70C = temp;
-    arg0->state710 = k;
+    player->state714 = 0;
+    player->state70C = temp;
+    player->state710 = k;
 }
 
-void func_8022DC00_de(Player *arg0) {
-    float temp = arg0->state708;
-    arg0->state710 = 0;
-    arg0->state714 = 0;
-    arg0->state70C = temp;
+void func_8022DC00_de(Player *player) {
+    float temp = player->state708;
+    player->state710 = 0;
+    player->state714 = 0;
+    player->state70C = temp;
 }
 
 /** Perform the no-op hook at VRAM 0x8022DC04. */
@@ -96,8 +96,8 @@ void func_8022DC14_de(void) {
 
 
 
-s32 func_8022DC1C_de(Shared_ActorView *arg0) {
-    f32 field = arg0->speed;
+s32 func_8022DC1C_de(Shared_ActorView *actor) {
+    f32 field = actor->speed;
     f32 konst = D_800C2DDC_de;
     s32 result = 1;
     if (!(konst < field)) {
@@ -106,7 +106,7 @@ s32 func_8022DC1C_de(Shared_ActorView *arg0) {
     return result;
 }
 
-void func_8022DC44_de(Player *arg0, LevelActor *arg1, s32 unused, s32 *flags) {
+void func_8022DC44_de(Player *player, LevelActor *actor, s32 unused, s32 *flags) {
     s32 held;
     s32 crouch;
     f32 target;
@@ -116,22 +116,22 @@ void func_8022DC44_de(Player *arg0, LevelActor *arg1, s32 unused, s32 *flags) {
     f32 moved;
     f32 lo;
 
-    held = arg1->motionState & 0xC0000;
+    held = actor->motionState & 0xC0000;
     crouch = held != 0;
-    if (arg0->forceCrouch != 0) {
+    if (player->forceCrouch != 0) {
         crouch = 1;
-        if (arg0->pose != 4) {
-            func_802227F4_de(arg0, arg1, 4);
+        if (player->pose != 4) {
+            func_802227F4_de(player, actor, 4);
         }
     }
     target = 0.0f;
     if (crouch) {
         target = D_800C7ED0[0];
     }
-    depth = arg0->crouchDepth;
+    depth = player->crouchDepth;
     func_80274870_de(&depth, target, 0.25f);
     do {
-        step = depth - arg0->crouchDepth;
+        step = depth - player->crouchDepth;
         if (step < 0.0f) {
             if (-step < D_800C7ED0[1]) {
                 goto still;
@@ -140,11 +140,11 @@ void func_8022DC44_de(Player *arg0, LevelActor *arg1, s32 unused, s32 *flags) {
         still:
             step = 0.0f;
         }
-        moved = arg0->crouchDepth + step;
+        moved = player->crouchDepth + step;
         clearance = D_800C7ED8[1] - moved;
         lo = D_800C7EE0;
     } while (0);
-    arg0->crouchDepth = moved;
+    player->crouchDepth = moved;
     if (lo <= clearance && clearance <= (&D_800C7EE0)[1]) {
         *flags |= 0x80;
     } else {
@@ -152,18 +152,18 @@ void func_8022DC44_de(Player *arg0, LevelActor *arg1, s32 unused, s32 *flags) {
     }
 }
 
-void func_8022DD94_de(Shared_ActorView *arg0) {
+void func_8022DD94_de(Shared_ActorView *actor) {
     f32 sp10;
     f32 var_f1;
     f32 var_f2;
 
     var_f1 = 0.0f;
-    if ((u32)((u16)arg0->action - 9) < 4U) {
+    if ((u32)((u16)actor->action - 9) < 4U) {
         var_f1 = D_800C2DF8_de[0];
     }
-    sp10 = arg0->transitionBlend;
+    sp10 = actor->transitionBlend;
     func_80274870_de(&sp10, var_f1, 0.25f);
-    var_f2 = sp10 - arg0->transitionBlend;
+    var_f2 = sp10 - actor->transitionBlend;
     if (var_f2 < 0.0f) {
         if (-var_f2 < D_800C2DF8_de[1]) {
             goto clamp;
@@ -172,10 +172,10 @@ void func_8022DD94_de(Shared_ActorView *arg0) {
 clamp:
         var_f2 = 0.0f;
     }
-    arg0->transitionBlend = arg0->transitionBlend + var_f2;
+    actor->transitionBlend = actor->transitionBlend + var_f2;
 }
 
-void func_8022DE58_de(Player *arg0, LevelActor *arg1) {
+void func_8022DE58_de(Player *player, LevelActor *actor) {
     CVector3 next;
     f32 temp_f0;
     f32 temp_f1;
@@ -184,29 +184,29 @@ void func_8022DE58_de(Player *arg0, LevelActor *arg1) {
     f32 temp_f22;
     f32 var_f23;
 
-    var_f23 = (((((ModelBlend *)(arg0->definition))->height -
-                    arg0->cameraOffset) -
-                   arg0->crouchDepth) -
-                  arg0->eyeOffset) -
-                 arg0->heightDelta;
+    var_f23 = (((((ModelBlend *)(player->definition))->height -
+                    player->cameraOffset) -
+                   player->crouchDepth) -
+                  player->eyeOffset) -
+                 player->heightDelta;
     if (var_f23 > 0.0f) {
-        temp_f22 = Sound_GetActorReach(arg1);
-        temp_f21 = func_8024D398_de(arg1);
-        temp_f20 = Particle_GetActorHeight(arg1);
-        temp_f0 = func_8024E420_de(arg1);
-        next.x = arg1->position0.x;
-        next.y = arg1->position0.y + var_f23;
-        next.z = arg1->position0.z;
-        if (func_8024491C_de(arg1, arg1->position0, next,
+        temp_f22 = Sound_GetActorReach(actor);
+        temp_f21 = func_8024D398_de(actor);
+        temp_f20 = Particle_GetActorHeight(actor);
+        temp_f0 = func_8024E420_de(actor);
+        next.x = actor->position0.x;
+        next.y = actor->position0.y + var_f23;
+        next.z = actor->position0.z;
+        if (func_8024491C_de(actor, actor->position0, next,
                            &D_801000F0, temp_f22, temp_f21, temp_f20,
                            temp_f0) != 0) {
             temp_f1 = ((Shared_Floor *)(*(void **)D_80103FCC))->y -
-                      arg1->position0.y;
-            arg0->previousPosition.y -= var_f23 - temp_f1;
+                      actor->position0.y;
+            player->previousPosition.y -= var_f23 - temp_f1;
             var_f23 = temp_f1;
         }
     }
-    arg0->heightDelta += var_f23;
+    player->heightDelta += var_f23;
 }
 
 void func_8022DFA8_de(void *arg0) {
@@ -239,7 +239,7 @@ void func_8022DFA8_de(void *arg0) {
     }
 }
 
-void func_8022E0B0_de(void *arg0, void *arg1) {
+void func_8022E0B0_de(void *matrix, void *arg1) {
     ObjRecAt1AV1 *range;
     ObjRecAt724 *actor;
     s32 value;
@@ -263,7 +263,7 @@ void func_8022E0B0_de(void *arg0, void *arg1) {
     if (actor->unk650 == 0xF) {
         amount += D_800C2E0C_de;
     }
-    func_802738C0_de(arg0, amount / (f32)range->unk1A);
+    func_802738C0_de(matrix, amount / (f32)range->unk1A);
 }
 
 s32 func_8022E130_de(struct func_80204468_S3 *object) {

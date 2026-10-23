@@ -29,11 +29,11 @@ void func_8024E79C_de(void *arg0, Triple t, void *arg4, s32 *arg5, s32 arg6, s32
 
 int func_8024E7DC_de(void *arg0) {
     int temp_a1 = ((LevelActor *)arg0)->model;
-    int var_v0 = 0;
+    int result = 0;
     if (temp_a1 != 0) {
-        var_v0 = (int)func_8028B2F8_de(&D_8011FE88, (void *)temp_a1);
+        result = (int)func_8028B2F8_de(&D_8011FE88, (void *)temp_a1);
     }
-    return var_v0;
+    return result;
 }
 
 f32 func_8024E80C_de(struct Object_func_8024E80C_de *object) {
