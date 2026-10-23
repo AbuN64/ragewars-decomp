@@ -9,11 +9,6 @@ struct Table802AB8DC;
 typedef struct Table802AB8DC Table802AB8DC;
 
 struct ObjectLinksC_2;
-struct ObjectLinksC_2 {
-    unsigned char padding_0[4];
-    s32 *unk_4;
-    s32 unk_8;
-};
 
 struct func_802ABC18_S1;
 struct func_802ABC18_S1 {
@@ -29,12 +24,6 @@ extern f32 func_802AA864_de();
 
 
 struct IntegerState48;
-struct IntegerState48 {
-    unsigned char padding_0[60];
-    s32 unk_3C;
-    s32 unk_40;
-    s32 unk_44;
-};
 
 struct GfxRec;
 struct GfxRec {
@@ -61,12 +50,6 @@ struct GfxRec;
 typedef struct GfxRec GfxRec;
 
 struct IntegerState90;
-struct IntegerState90 {
-    unsigned char padding_0[132];
-    s32 unk_84;
-    s32 unk_88;
-    s32 unk_8C;
-};
 
 struct func_802AB8DC_S1;
 typedef struct func_802AB8DC_S1 func_802AB8DC_S1;
@@ -77,23 +60,6 @@ struct Mover;
 typedef struct Mover Mover;
 
 struct Mover;
-struct Mover {
-    s32 active;
-    s32 *script;
-    s32 state;
-    s32 wait;
-    f32 x;
-    f32 y;
-    f32 targetX;
-    f32 targetY;
-    f32 velX;
-    f32 velY;
-    f32 accelX;
-    f32 accelY;
-    f32 rate;
-    u8 pad34[4];
-    s32 handle; /* 0x38: resource handle initialized by the mover constructor */
-};
 
 extern float D_800C61F0_de;
 
@@ -152,11 +118,6 @@ struct func_802AB8DC_S1 {
 };
 
 struct Table802AB8DC;
-struct Table802AB8DC {
-    s16 count;
-    u8 pad2[6];
-    Entry802AB8DC entries[1];
-};
 
 extern float D_800C6228_de;
 

@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKSC_2.H"
+#include "GFX/802A8A94.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"

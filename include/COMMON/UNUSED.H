@@ -6583,12 +6583,6 @@ struct Plan {
     s32 unkBC;
 };
 struct Player1680;
-struct Player1680 {
-    char pad0[0x5DC];
-    func_8023945C_S1 *mount;
-    char pad5E0[0x1640 - 0x5E0];
-    Mtx views[1];
-};
 struct Players;
 struct Players {
     char pad0[0x1454];
@@ -17781,10 +17775,6 @@ struct WidgetTable {
 };
 struct Slider;
 struct World24;
-struct World24 {
-    char pad0[0x20];
-    SharedPlayer16E4 *players;
-};
 struct ZoomEffectPlayer;
 struct ZoomEffectPlayer {
     char pad0[0x5D0];

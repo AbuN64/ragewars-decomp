@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTLINKSC_2.H"
+#include "GFX/802A8A94.H"
 #include "TYPES.H"
 #include "abi.h"
 #include "gbi.h"

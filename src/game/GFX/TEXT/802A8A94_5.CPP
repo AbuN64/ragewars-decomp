@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/OBJECTLINKSC_2.H"
+#include "GFX/802A8A94.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "gbi.h"

@@ -4,6 +4,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
+#include "GFX/8022BA90.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/ENTRYRECAT8V4.H"
 #include "TYPES.H"
