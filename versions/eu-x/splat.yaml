@@ -4517,7 +4517,7 @@ segments:
       - [0xE9218, rodata, data_800C/D_auto_rodata_func_8040AC68_eu_800E8618]
       - [0xE9254, data, data_800C/rodata_unresolved_800E8654]
       - [0xE9258, rodata, data_800C/literals_func_8040A9A0_de]
-      - [0xE9418, rodata, data_800C/literals_func_8040B4E0_de]
+      - [0xE9418, rodata, data_800C/literals_Frontend_OpenPakChannel]
       - [0xE942C, data, data_800C/rodata_unresolved_800E882C]
       - [0xE9430, rodata, data_800C/literals_func_8040B8E4_de]
       - [0xE9444, data, data_800C/rodata_unresolved_800E8844]

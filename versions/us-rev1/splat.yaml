@@ -5841,7 +5841,7 @@ segments:
       - [0xE1A08, rodata, data_800C/literals_Pak_UpdateStatusText]
       - [0xE1A44, data, data_800C/D_blob_b6299aca4325e59d5c7c]
       - [0xE1A48, rodata, data_800C/literals_func_8040A9A0_de]
-      - [0xE1C08, rodata, data_800C/literals_func_8040B4E0_de]
+      - [0xE1C08, rodata, data_800C/literals_Frontend_OpenPakChannel]
       - [0xE1C1C, data, data_800C/D_blob_bdad146406771ef9f005]
       - [0xE1C20, rodata, data_800C/literals_func_8040B8E4_de]
       - [0xE1C34, data, data_800C/D_blob_45a2b19fad2fcf167777]

@@ -4503,7 +4503,7 @@ segments:
       - [0xEE040, rodata, data_800C/literals_func_80409448_de]
       - [0xEE054, rodata, data_800C/rodata_unresolved_800ED454]
       - [0xEE098, rodata, data_800C/literals_func_8040A9A0_de]
-      - [0xEE258, rodata, data_800C/literals_func_8040B4E0_de]
+      - [0xEE258, rodata, data_800C/literals_Frontend_OpenPakChannel]
       - [0xEE26C, data, data_800C/rodata_unresolved_800ED66C]
       - [0xEE270, rodata, data_800C/literals_func_8040B8E4_de]
       - [0xEE284, data, data_800C/rodata_unresolved_800ED684]

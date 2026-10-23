@@ -93,24 +93,21 @@ extern void func_80442574_de(void *dst, void *text, void *arg2, void *arg3, void
 extern char D_8014561C[];
 extern s32 D_80153778;
 /* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through func_80406178_de; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
-s32 func_8040B4E0_de(s32 arg0, Shared_PakMenu *arg1) {
+s32 Frontend_OpenPakChannel(s32 arg0, Shared_PakMenu *menu) {
     s32 channel;
 
     if (D_8015375C != 0) {
         channel = D_800E28C8;
     } else {
-        channel = arg1->owner->unk4;
+        channel = menu->owner->unk4;
     }
-    if (func_80406178_de(arg1, channel, 1) == 0) {
-        func_80442574_de(D_8014561C, &D_0044EE88, arg1->player, arg1->owner, arg1->unk24);
-    } else {
+    if (func_80406178_de(menu, channel, 1) != 0) {
         D_80153784 = 1;
-        func_80442574_de(D_8014561C, arg1->unk24, arg1->player, arg1->owner, 0);
+        func_80442574_de(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
+        return 1;
     }
+    func_80442574_de(D_8014561C, &D_0044EE88, menu->player, menu->owner, menu->unk24);
     return 1;
-    /* FAKEMATCH: preserve the return-value load before the epilogue register restores. */
-    do {
-    } while (0);
 }
 
 s32 func_8040B58C_de(void *arg0, Shared_PakMenu *arg1) {
