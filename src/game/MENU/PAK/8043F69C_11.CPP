@@ -244,7 +244,8 @@ INCLUDE_ASM("ovl_80400000", Pak_DrawMenuModel);
 
 #ifdef NON_MATCHING
 #define MP_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-extern u8 D_800E1F22[], D_800E1F26[], D_800E1F2A[], D_800E1F2F[], D_800E1F33[], D_800E1F37[];
+extern u16 D_800E1F22[], D_800E1F26[], D_800E1F2A[];
+extern u8 D_800E1F2F[], D_800E1F33[], D_800E1F37[];
 extern void *func_80442A58_de(void *);
 extern void func_80442B34_de(void *);
 extern void func_80442B40_de(void *);
@@ -321,17 +322,21 @@ static inline void initializeMenuEntry(MenuBuildEntry *entry, MenuBuildItem *def
     entry->green = definition->green;
     entry->blue = definition->blue;
     entry->alpha = definition->alpha;
+    entry->resource = definition->resource;
     entry->definition = definition;
     entry->selection = -1;
     entry->menu = menu;
-    entry->resource = definition->resource;
     if (menuItemExtraSize(definition) != 0) {
         entry->extra = *extra;
         if (definition->type == 3) MP_FIELD(*extra, s32, 0x478) = 1;
         *extra += menuItemExtraSize(definition);
     }
 }
-/* 49/195 aligned edits; remaining: style-loop address allocation and scheduling. */
+static inline void prepareMenuEntryStorage(u8 **extra, MenuBuildState *menu, MenuBuildDefinition *definition) {
+    *extra = (u8 *)(menu + 1);
+    *extra += definition->count * sizeof(MenuBuildEntry);
+}
+/* 3/195 aligned edits; remaining: entry-loop index and cursor-address scheduling. */
 void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *definition, s32 value18, s32 value1C, u8 *input, s32 value24, struct func_8025E5B0_S1 *owner) {
     u8 *extra;
     MenuBuildState *menu = (MenuBuildState *)memory;
@@ -344,17 +349,16 @@ void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *defi
     menu->allocation = allocation;
     menu->entries = (MenuBuildEntry *)(menu + 1);
     menu->count = definition->count;
-    extra = (u8 *)(menu + 1);
-    extra += definition->count * sizeof(MenuBuildEntry);
+    prepareMenuEntryStorage(&extra, menu, definition);
     for (i = 0; i < definition->count; i++) {
         initializeMenuEntry(&menu->entries[i], &definition->items[i], i, menu, &extra);
     }
     menu->definition = definition;
     menu->value18 = value18;
-    menu->input = input;
     menu->value1C = value1C;
-    menu->state = 0;
+    menu->input = input;
     menu->value24 = value24;
+    menu->state = 0;
     menu->ownerSlot = owner->unk14;
     menu->value2C = 0;
     menu->value30 = 0;
@@ -365,16 +369,16 @@ void Pak_InitializeMenu(u8 *memory, void **allocation, MenuBuildDefinition *defi
     menu->owner = owner;
     for (bank = 0; bank < 2; bank++) {
         for (i = 0; i < 8; i++) {
-            styleRecord = (u8 *)menu + bank * 0x80 + i * 0x10;
-            MP_FIELD(styleRecord, u16, 0x48) = MP_FIELD(D_800E1F22, u16, i * 0x18);
-            MP_FIELD(styleRecord, u16, 0x4A) = MP_FIELD(D_800E1F26, u16, i * 0x18);
-            MP_FIELD(styleRecord, u16, 0x4C) = MP_FIELD(D_800E1F2A, u16, i * 0x18);
+            styleRecord = (u8 *)menu + (bank * 0x80 + i * 0x10);
+            MP_FIELD(styleRecord, u16, 0x48) = D_800E1F22[i * 12];
+            MP_FIELD(styleRecord, u16, 0x4A) = D_800E1F26[i * 12];
+            MP_FIELD(styleRecord, u16, 0x4C) = D_800E1F2A[i * 12];
             MP_FIELD(styleRecord, u8, 0x54) = D_800E1F2F[i * 0x18];
             MP_FIELD(styleRecord, u8, 0x55) = D_800E1F33[i * 0x18];
+            MP_FIELD(styleRecord, u8, 0x56) = D_800E1F37[i * 0x18];
             MP_FIELD(styleRecord, u8, 0x57) = 0xFF;
             MP_FIELD(styleRecord, u16, 0x50) = 0;
             MP_FIELD(styleRecord, u16, 0x52) = 0;
-            MP_FIELD(styleRecord, u8, 0x56) = D_800E1F37[i * 0x18];
         }
     }
     MP_FIELD(input, s32, 0xB0) = 0;
