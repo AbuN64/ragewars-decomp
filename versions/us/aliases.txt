@@ -2580,3 +2580,4 @@ literals_func_8043D1DC_de = 0x800DCF68; // rom:0xDDB68 size:0x2C
 D_auto_rodata_func_8043D1DC_de_800DCF94 = 0x800DCF94; // rom:0xDDB94
 literals_func_802ACE38_de = 0x800C61E8; // rom:0xC6DE8 size:0x28
 literals_func_80261E98_de = 0x800C4128; // rom:0xC4D28 size:0x60
+literals_func_80230058_de = 0x800C2DC8; // rom:0xC39C8 size:0x48

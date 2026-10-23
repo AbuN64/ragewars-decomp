@@ -50,18 +50,23 @@ TOOLCHAIN_gcc_2_8_1_sn64 ?= tools/gcc-2.8.1-sn64/.stamp
 VMACRO_de := VERSION_DE
 SHA1_de := a6daacbd0e7f77c73208cf494aefc24703060b17
 ROM0_de := 0
+ROM_SECTIONS_de :=
 VMACRO_eu := VERSION_EU
 SHA1_eu := 46b474fac79a4b21535bb6c78ce3039a2c202359
 ROM0_eu := 0
+ROM_SECTIONS_eu :=
 VMACRO_eu-x := VERSION_EU_X
 SHA1_eu-x := 0b54615930a55675955eef8d8a22f1dfc34d2b44
 ROM0_eu-x := 0
+ROM_SECTIONS_eu-x :=
 VMACRO_us := VERSION_US
 SHA1_us := 9f8cb190831945f6f707aa8c2b20e04fa4276795
 ROM0_us := 0
+ROM_SECTIONS_us :=
 VMACRO_us-rev1 := VERSION_US_REV1
 SHA1_us-rev1 := 037fb397cee2669048ed6b762a64698de4a4d88a
 ROM0_us-rev1 := 0
+ROM_SECTIONS_us-rev1 :=
 STAMPS := tools/n64link/.stamp $(TOOLCHAIN_gcc_2_7_2_sn64) $(TOOLCHAIN_gcc_2_8_1_sn64)
 
 # The first path word under build/ is the version: build/<version>/<source path>.o
@@ -454,16 +459,17 @@ build/%/link.ld: $(NAME).ld
 # Every fact of symbol_addrs.txt and aliases.txt and every name splat left undefined, PROVIDEd: what no object defines (data outside
 # the ROM). So is every name splat made up that the extracted assembly spells, at the address the name carries: a .L
 # label the assembler keeps out of the object, or a label inside bytes a C file compiles.
-build/%/undefined_syms.ld: versions/%/symbol_addrs.txt build/%/undefined_syms_auto.txt build/%/undefined_funcs_auto.txt asm/%/.extracted $$(wildcard versions/$$*/aliases.txt)
+# Preprocessed sources retain auto-address references even when a new extraction no longer spells that label.
+build/%/undefined_syms.ld: versions/%/symbol_addrs.txt build/%/undefined_syms_auto.txt build/%/undefined_funcs_auto.txt asm/%/.extracted $$(OBJS_$$*) $$(wildcard versions/$$*/aliases.txt)
 	$(Q)sed -nE 's/^([A-Za-z_.][A-Za-z0-9_.$$]*)[[:space:]]*=[[:space:]]*(0x[0-9A-Fa-f]+);.*/PROVIDE(\1 = \2);/p' $^ > $@
-	$(Q)grep -rhoE --include='*.s' '[A-Za-z_.]*auto_[0-9A-F]{8}\b' asm/$* | sort -u | sed -E 's/^([A-Za-z_.]*auto_(.*))$$/PROVIDE(\1 = 0x\2);/' >> $@
+	$(Q)grep -rhoE --include='*.s' --include='*.i' '[A-Za-z_.]*auto_[0-9A-F]{8}\b' asm/$* build/$* | sort -u | sed -E 's/^([A-Za-z_.]*auto_(.*))$$/PROVIDE(\1 = 0x\2);/' >> $@
 # splat writes these while it extracts the version.
 build/%/undefined_syms_auto.txt build/%/undefined_funcs_auto.txt: | asm/%/.extracted
 	$(Q)test -f $@ || { echo "$@ is missing: run make extract-$*" >&2; exit 1; }
 build/%/$(NAME).elf: $$(OBJS_$$*) build/%/link.ld build/%/undefined_syms.ld
 	$(Q)cd build/$* && $(LD) -T link.ld -o $(NAME).elf
 build/%/$(NAME).bin: build/%/$(NAME).elf
-	$(Q)$(OBJCOPY) -O binary --gap-fill 0 $< $@
+	$(Q)$(OBJCOPY) $(ROM_SECTIONS_$*) -O binary --gap-fill 0 $< $@
 build/%/$(NAME).z64: build/%/$(NAME).bin roms/baserom.%.z64
 	$(Q){ head -c $(ROM0_$*) roms/baserom.$*.z64; cat $<; } > $@
 	$(Q)truncate -s $$(wc -c < roms/baserom.$*.z64) $@
@@ -569,7 +575,7 @@ $(VERSIONS:%=build/nm/%/$(NAME).elf): build/nm/%/$(NAME).elf: $$(OBJS_nm_$$*) bu
 	|| $(LD) -T link.ld --allow-multiple-definition -o $(NAME).elf 2>> link.err; } \
 	|| { cat build/nm/$*/link.err >&2; exit 1; }
 $(VERSIONS:%=build/nm/%/$(NAME).bin): build/nm/%/$(NAME).bin: build/nm/%/$(NAME).elf
-	$(Q)$(OBJCOPY) -O binary --gap-fill 0 $< $@
+	$(Q)$(OBJCOPY) $(ROM_SECTIONS_$*) -O binary --gap-fill 0 $< $@
 $(VERSIONS:%=build/nm/%/$(NAME).z64): build/nm/%/$(NAME).z64: build/nm/%/$(NAME).bin roms/baserom.%.z64
 	$(Q){ head -c $(ROM0_$*) roms/baserom.$*.z64; cat $<; } > $@
 	$(Q)truncate -s $$(wc -c < roms/baserom.$*.z64) $@

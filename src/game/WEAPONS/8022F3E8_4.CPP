@@ -85,68 +85,64 @@ void func_8022FF04_de(void *arg0, WeaponFireState *arg1) {
 }
 #endif
 
-#ifdef NON_MATCHING
-/* The names m2c output assumes (its valid-syntax macros), so a draft compiles on its own. */
-#ifndef NULL
-#define NULL ((void *)0)
-#endif
-typedef int M2C_UNK;
-typedef signed char M2C_UNK8;
-typedef short M2C_UNK16;
-typedef int M2C_UNK32;
-typedef long long M2C_UNK64;
-#define M2C_FIELD(base, type, offset) (*(type)((char *)(base) + (offset)))
-#define M2C_BITWISE(type, expr) ((type)(expr))
-#define M2C_LWL(expr) (expr)
-#define M2C_FIRST3BYTES(expr) (expr)
-#define M2C_UNALIGNED32(expr) (expr)
-#define M2C_ERROR(desc) (0)
-#define M2C_TRAP_IF(cond) (0)
-#define M2C_BREAK(...) (0)
-#define M2C_SYNC(...) (0)
-#define M2C_DCACHE_CLEAN(addr) (0)
-#define M2C_DCACHE_INVALIDATE(addr) (0)
-#define M2C_DCACHE_CLEAN_INVALIDATE(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO(addr) (0)
-#define M2C_DCACHE_BLOCK_SETZERO_LOCKED(addr) (0)
-#define M2C_ICACHE_INVALIDATE(addr) (0)
-#define M2C_PREFETCH(addr) (0)
-#define M2C_PREFETCH_STORE(addr) (0)
-#define GLUE_F64(a, b) (0.0)
-#define MULT_HI(a, b) (0)
-#define MULTU_HI(a, b) (0)
-#include "COMMON/EXTERNS_6.H"
-#include "COMMON/OBJECTLINKS14C.H"
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X))
 #include "TYPES.H"
+typedef struct WeaponRecord8F { u8 pad0[0x8F]; u8 flag8F; } WeaponRecord8F;
+typedef struct WeaponPlayer {
+    u8 pad0[0x5D8];
+    WeaponRecord8F *record;
+    u8 pad5DC[0x5F6 - 0x5DC];
+    s16 ammo;
+    u8 pad5F8[0x62E - 0x5F8];
+    s16 mode;
+    u8 pad630[0x6AC - 0x630];
+    s32 flags6AC;
+    u8 pad6B0[0x788 - 0x6B0];
+    s32 state788;
+    u8 pad78C[0x11B4 - 0x78C];
+    s32 busy;
+    u8 pad11B8[0x11D8 - 0x11B8];
+    f32 recoil;
+} WeaponPlayer;
+typedef struct WeaponOwner { u8 pad0[0x1D8]; WeaponPlayer *player; } WeaponOwner;
+typedef struct WeaponSlot {
+    u8 pad0[0x130];
+    f32 delay;
+    u8 pad134[0x13C - 0x134];
+    s32 mode13C;
+    u8 pad140[0x144 - 0x140];
+    s32 flag144;
+    f32 timer148;
+} WeaponSlot;
 s32 func_80283228_de(s32 *, void *);
 extern s32 D_8011D8D0;
-
-/* ~71/103 words; remaining: the five switch arms compile to set-on-condition (sltiu/xori) where the ROM branches to a shared epilogue */
-s32 func_80230058_de(void *arg0, void *arg1) {
-    void *temp_s0;
-    temp_s0 = M2C_FIELD(arg0, void **, 0x1D8);
-    if (M2C_FIELD(arg1, f32 *, 0x130) > 0.0f || Weapons_HasAmmoForMode(temp_s0, (s32) M2C_FIELD(temp_s0, s16 *, 0x62E)) == 0 || (M2C_FIELD(M2C_FIELD(temp_s0, u8 **, 0x5D8), u8 *, 0x8F) == 1 && D_801468F4 != 0) || M2C_FIELD(temp_s0, f32 *, 0x11D8) > 0.0f || M2C_FIELD(temp_s0, s32 *, 0x11B4) != 0) return 0;
-    switch ((s16)((u16) M2C_FIELD(temp_s0, s16 *, 0x62E) - 1)) {
+extern s32 D_801468F4;
+s32 func_80230058_de(void *owner, void *slot) {
+    WeaponOwner *arg0 = (WeaponOwner *)owner;
+    WeaponSlot *arg1 = (WeaponSlot *)slot;
+    WeaponPlayer *player = arg0->player;
+    if (arg1->delay > 0.0f || !Weapons_HasAmmoForMode(player, player->mode)) return 0;
+    if ((player->record->flag8F == 1 && D_801468F4 != 0) || player->recoil > 0.0f || player->busy != 0) return 0;
+    switch ((s16)(player->mode - 1)) {
     case 10:
-        if (M2C_FIELD(temp_s0, s32 *, 0x6AC) & 0x4000) return 0;
-        return 1;
+        if (player->flags6AC & 0x4000) return 0;
+        break;
     case 17:
-        if (M2C_FIELD(temp_s0, s32 *, 0x788) != 2) return 0;
-        return 1;
+        if (player->state788 != 2) return 0;
+        break;
     case 8:
-        if (M2C_FIELD(arg1, f32 *, 0x148) > 0.0f && M2C_FIELD(arg1, s32 *, 0x13C) == 2) return 0;
-        if (M2C_FIELD(temp_s0, s16 *, 0x5F6) < 0x32 && M2C_FIELD(arg1, s32 *, 0x13C) == 2) return 0;
-        if (M2C_FIELD(temp_s0, s16 *, 0x5F6) < 0xA) {
-            if (M2C_FIELD(arg1, s32 *, 0x13C) == 1) return 0;
-            return 1;
+        if (arg1->timer148 > 0.0f && arg1->mode13C == 2) return 0;
+        if (player->ammo < 0x32 && arg1->mode13C == 2) return 0;
+        if (player->ammo < 10) {
+            if (arg1->mode13C == 1) return 0;
         }
-        return 1;
+        break;
     case 11:
-        if (func_80283228_de(&D_8011D8D0, temp_s0) >= 3) return 0;
-        return 1;
+        if (func_80283228_de(&D_8011D8D0, player) >= 3) return 0;
+        break;
     case 0:
-        if (M2C_FIELD(arg1, s32 *, 0x144) == 0) return 0;
-        return 1;
+        if (arg1->flag144 == 0) return 0;
+        break;
     }
     return 1;
 }
