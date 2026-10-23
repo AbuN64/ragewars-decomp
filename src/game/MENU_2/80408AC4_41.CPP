@@ -19,12 +19,12 @@ extern s32 D_80154030;
 
 extern s32 func_802BD400_de(u8 *);
 
-s32 func_8043CDF8_de(void)
+s32 Menu_ApplyCheatCode(void)
 {
     u32 i;
     s32 j;
     s32 match;
-    s32 hasSound; /* FAKEMATCH: flag local orders the sound load before the D_80154030 store */
+    s32 hasSound; /* the code's sound is read before the match index is stored */
     struct IntPair *settings;
     u8 *code;
 
