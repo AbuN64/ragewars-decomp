@@ -34,10 +34,6 @@ extern int D_800CBC14;
 
 
 struct StatePair;
-struct StatePair {
-    f32 value;
-    s32 state;
-};
 
 struct func_802A2EC0_S1;
 typedef struct func_802A2EC0_S1 func_802A2EC0_S1;

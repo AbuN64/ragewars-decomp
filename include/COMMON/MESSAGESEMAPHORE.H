@@ -3,11 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 
-/* Single-message queue used by the acquire/release helpers. */
-typedef struct MessageSemaphore {
-    OSMesgQueue queue;
-    s32 message;
-} MessageSemaphore;
 
 struct func_802A1A48_S1;
 typedef struct func_802A1A48_S1 func_802A1A48_S1;

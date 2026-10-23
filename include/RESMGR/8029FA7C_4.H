@@ -1,6 +1,7 @@
 #ifndef RESMGR_8029FA7C_4_H
 #define RESMGR_8029FA7C_4_H
 #include "COMMON/MATRIXRECORD.H"
+#include "RESMGR/8029FA7C.H"
 extern void func_8029EFE4_de(char *object, float *output);
 extern void func_8029ED54_de(Mtx3x4_8029FD54 *arg0);
 extern void func_8029EBC8_de(Matrix *arg0, CVector3 *arg1);

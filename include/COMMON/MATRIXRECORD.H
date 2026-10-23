@@ -3,11 +3,6 @@
 #include "TYPES.H"
 #include "COMMON/SHAREDPLAYER.H"
 
-/* Matrix constructor record: four header words precede the 4x4 matrix. */
-typedef struct MatrixRecord {
-    u32 header[4];
-    Matrix matrix;
-} MatrixRecord;
 extern float D_800C5CC0_de;
 
 struct FloatState18;
@@ -36,9 +31,6 @@ struct func_8029FFB8_S1 {
 extern double D_800C5D00_de;
 
 struct Mtx3x4_8029FD54;
-struct Mtx3x4_8029FD54 {
-    f32 m[3][4];
-};
 
 
 

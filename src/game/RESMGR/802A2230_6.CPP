@@ -1,6 +1,7 @@
 #include "COMMON/INTEGERSTATE530.H"
 #include "COMMON/RECORD.H"
 #include "COMMON/STATEPAIR.H"
+#include "RESMGR/802A2230.H"
 #include "COMMON/SLOTRECATCV1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"

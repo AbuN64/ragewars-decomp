@@ -1,6 +1,11 @@
 #ifndef RESMGR_802A0888_4_H
 #define RESMGR_802A0888_4_H
 #include "COMMON/MESSAGESEMAPHORE.H"
+/* Single-message queue used by the acquire/release helpers. */
+typedef struct MessageSemaphore {
+    OSMesgQueue queue;
+    s32 message;
+} MessageSemaphore;
 extern s32 func_802A03F4_de(u8 *arg0, u8 *arg1);
 extern u8 *func_802A0294_de(u8 *arg0, u8 *arg1, s32 arg2);
 extern void func_802A01D8_de(int arg0);
