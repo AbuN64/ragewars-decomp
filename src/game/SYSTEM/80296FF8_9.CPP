@@ -17,13 +17,12 @@
 
 s32 func_80263154_de(BitReader *, s32);
 
-#ifdef NON_MATCHING
+#if defined(NON_MATCHING) || !defined(VERSION_EU_X)
 extern void func_802630E0_de(BitReader *, void *);
-/* Decode a 17-by-17 region grid, then replace variable cells with stream offsets.
- * 5/162 aligned edits remain: the final bounds store precedes the first comparison. */
+/* Decode a 17-by-17 region grid, then replace variable cells with stream offsets. */
 void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
                    DraftStreamData *source, CVector3 *position) {
-    union { CVector3 vector; s32 i[3]; } minimum, maximum;
+    CVector3 minimum, maximum;
     u32 streamCount, streamIndex;
     s32 row, column, cellCode, index;
     s32 *streamTable = &source->count;
@@ -33,15 +32,15 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
     streamIndex = 1;
     while (streamIndex < streamCount) {
         func_802630E0_de(&grid->reader, func_8028FDB4_de(streamTable, streamIndex));
-        minimum.i[0] = func_80263154_de(&grid->reader, 32);
-        minimum.i[1] = func_80263154_de(&grid->reader, 32);
-        minimum.i[2] = func_80263154_de(&grid->reader, 32);
-        maximum.i[0] = func_80263154_de(&grid->reader, 32);
-        maximum.i[1] = func_80263154_de(&grid->reader, 32);
-        maximum.i[2] = func_80263154_de(&grid->reader, 32);
-        if (position->x > minimum.vector.x && position->x < maximum.vector.x &&
-            position->y > minimum.vector.y && position->y < maximum.vector.y &&
-            position->z > minimum.vector.z && position->z < maximum.vector.z) break;
+        *(s32 *)&minimum.x = func_80263154_de(&grid->reader, 32);
+        *(s32 *)&minimum.y = func_80263154_de(&grid->reader, 32);
+        *(s32 *)&minimum.z = func_80263154_de(&grid->reader, 32);
+        *(s32 *)&maximum.x = func_80263154_de(&grid->reader, 32);
+        *(s32 *)&maximum.y = func_80263154_de(&grid->reader, 32);
+        *(s32 *)&maximum.z = func_80263154_de(&grid->reader, 32);
+        if (position->x > minimum.x && position->x < maximum.x &&
+            position->y > minimum.y && position->y < maximum.y &&
+            position->z > minimum.z && position->z < maximum.z) break;
         streamIndex++;
     }
     if (streamIndex == streamCount) {
@@ -69,11 +68,7 @@ void System_DecodeRegionGrid(ResourceBitGrid *grid, s32 originX, s32 originZ,
     }
 }
 #else
-#if defined(VERSION_EU_X)
 INCLUDE_ASM("span_1000", func_80296174);
-#else
-INCLUDE_ASM("span_1000", System_DecodeRegionGrid);
-#endif
 #endif
 
 /* Tests a centered grid cell and interprets its sentinel value. */
