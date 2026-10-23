@@ -21,20 +21,26 @@
 #include "RENDER_4/8028B64C_6.H"
 
 
+static inline f32 distanceToNode(CVector3 from, func_80285880_S1 *node) {
+    f32 x = from.x - node->position.x;
+    f32 y = from.y - node->position.y;
+    f32 z = from.z - node->position.z;
+    return func_802B72B0_de(x * x + y * y + z * z);
+}
+/* Sums the strength of every source in the pool at the given position (inverse-distance falloff scaled by each
+ * source's two curves), clamped to 0..D_800C4EC8_de; the pool is read with interrupts disabled.
+ * 33 aligned edits of 116 words; remaining: the ROM keeps the 1.0f falloff constant hoisted in f24 and tests the clamp through f0. */
 f32 func_802856E0_de(func_80285D00_S1 *pool, CVector3 position) {
     f32 value = pool->baseLevel;
     s32 mask = func_802BCF30_de();
     func_80285880_S1 *node;
-    f32 x, y, z, distance, amount, first, second;
+    f32 x, y, z, distance, amount, first, second, limit, result;
     if (D_8014288C == 1 || func_80245798_de() != 0) {
         value = 0.0f;
     } else {
         node = pool->unk14.head;
         while (node != 0) {
-            x = position.x - node->position.x;
-            y = position.y - node->position.y;
-            z = position.z - node->position.z;
-            distance = func_802B72B0_de(x * x + y * y + z * z);
+            distance = distanceToNode(position, node);
             if (distance == 0.0f || node->unk18 == 0.0f) {
                 amount = D_800C4EC4_de;
             } else if (distance < node->unk18) {
@@ -50,9 +56,9 @@ f32 func_802856E0_de(func_80285D00_S1 *pool, CVector3 position) {
         }
     }
     __osRestoreInt(mask);
-    if (value < 0.0f) return 0.0f;
-    if (D_800C4EC8_de < value) return D_800C4EC8_de;
-    return value;
+    limit = D_800C4EC8_de;
+    result = (limit < value) ? value : ((value < 0.0f) ? 0.0f : value);
+    return (limit < result) ? limit : result;
 }
 #else
 #if !(defined(VERSION_US))
