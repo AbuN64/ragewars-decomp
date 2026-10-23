@@ -1,5 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/INTEGERSTATE1250.H"
+#include "RENDER_2/8022AE90.H"
 #include "TYPES.H"
 
 extern void func_80216488_de(void *arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5);

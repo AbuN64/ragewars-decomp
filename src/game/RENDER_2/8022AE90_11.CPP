@@ -1,4 +1,5 @@
 #include "COMMON/INTEGERSTATE1250.H"
+#include "RENDER_2/8022AE90.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 extern s32 func_802227F4_de(SharedPlayer *player, void *target, s32 state);

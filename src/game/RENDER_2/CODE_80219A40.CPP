@@ -12,6 +12,8 @@
 /* Actor, interaction and score views used to select reactions and record statistics. */
 
 #include "COMMON/GAMEPLAY_REACTIONS.H"
+#include "RENDER_2/CODE_80219A40.H"
+#include "RENDER_2/802192C0.H"
 
 #include "COMMON/GAMEPLAY_REACTION_RULES.H"
 #include "TYPES.H"

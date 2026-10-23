@@ -3,6 +3,7 @@
 #include "COMMON/TRIPLE.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/INTEGERSTATE1250.H"
+#include "RENDER_2/8022AE90.H"
 #include "TYPES.H"
 
 f32 func_80274808_de(f32, f32, s32);
@@ -14,6 +15,7 @@ void func_8022B5C0_de(void *arg0) {
 }
 
 #include "COMMON/GAMEPLAY_REACTIONS.H"
+#include "RENDER_2/802192C0.H"
 extern void func_80216488_de(Shared_ReactionInteraction *, s32, s32, f32, s32, s32);
 
 void func_8022B60C_de(Shared_ReactionPlayer *actor, f32 amount, s32 source) {

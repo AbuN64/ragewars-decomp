@@ -33,10 +33,6 @@ struct RecordCode8022AE90;
 typedef struct RecordCode8022AE90 RecordCode8022AE90;
 
 struct ObjectState16DA;
-struct ObjectState16DA {
-    unsigned char padding_0[5848];
-    u16 unk_16D8;
-};
 
 extern int func_8022BA90_de(void);
 
@@ -79,12 +75,6 @@ struct RecordCode8022AE90 {
 };
 
 struct ObjectState12C4;
-struct ObjectState12C4 {
-    unsigned char padding_0[1508];
-    s32 unk_5E4;
-    unsigned char padding_5E8[3288];
-    f32 unk_12C0;
-};
 
 struct ObjRecAt120C;
 typedef struct ObjRecAt120C ObjRecAt120C;
@@ -100,10 +90,6 @@ struct Timer {
 };
 
 struct Obj_func_8022B550_de;
-struct Obj_func_8022B550_de {
-    char pad[0x1248];
-    Timer timers[5];
-};
 
 struct func_8022AE90_S1;
 struct func_8022AE90_S1 {
@@ -116,13 +102,6 @@ struct func_8022AE90_S1 {
 };
 
 struct IntegerState1218;
-struct IntegerState1218 {
-    unsigned char padding_0[1508];
-    s32 unk_5E4;
-    unsigned char padding_5E8[3112];
-    s32 unk_1210;
-    s32 unk_1214;
-};
 
 struct func_8022B3C0_S1;
 struct func_8022B3C0_S1 {
@@ -131,16 +110,6 @@ struct func_8022B3C0_S1 {
 };
 
 struct ObjectState13E4;
-struct ObjectState13E4 {
-    char pad0[0x170];
-    char unk_170;
-    char pad170[0x174 - 0x170 - sizeof(char)];
-    s32 unk_174;
-    char pad174[0x11E4 - 0x174 - sizeof(s32)];
-    f32 unk_11E4;
-    char pad11E4[0x13E0 - 0x11E4 - sizeof(f32)];
-    s32 unk_13E0;
-};
 
 struct func_8022B2F4_S2;
 typedef struct func_8022B2F4_S2 func_8022B2F4_S2;
@@ -149,10 +118,6 @@ struct func_8022B054_S1;
 typedef struct func_8022B054_S1 func_8022B054_S1;
 
 struct ObjRecAt120C;
-struct ObjRecAt120C {
-    char pad0[0x120C];
-    s32 unk120C;
-};
 
 struct func_8022AF64_S1;
 typedef struct func_8022AF64_S1 func_8022AF64_S1;
@@ -166,10 +131,6 @@ struct Obj_func_8022B550_de;
 typedef struct Obj_func_8022B550_de Obj_func_8022B550_de;
 
 struct IntegerState16D4;
-struct IntegerState16D4 {
-    unsigned char padding_0[5840];
-    s32 unk_16D0;
-};
 
 struct func_8022AF64_S1;
 struct func_8022AF64_S1 {
@@ -183,16 +144,8 @@ struct func_8022AF64_S1 {
 
 
 struct func_8022B08C_S2;
-struct func_8022B08C_S2 {
-    char pad0[0x160];
-    MatrixF unk160;
-};
 
 struct func_8022B08C_S1;
-struct func_8022B08C_S1 {
-    char pad0[0x5DC];
-    MatrixF * unk5DC;
-};
 
 struct Context;
 struct RecordCode8022AE90;
@@ -212,10 +165,6 @@ typedef struct func_8022B08C_S1 func_8022B08C_S1;
 extern float D_800C7E08;
 
 struct IntegerState11C0;
-struct IntegerState11C0 {
-    unsigned char padding_0[4540];
-    s32 unk_11BC;
-};
 
 struct ObjectState13E4;
 typedef struct ObjectState13E4 ObjectState13E4;
@@ -259,10 +208,6 @@ struct func_8022AE90_S1;
 typedef struct func_8022AE90_S1 func_8022AE90_S1;
 
 struct IntegerState1250;
-struct IntegerState1250 {
-    unsigned char padding_0[4684];
-    s32 unk_124C;
-};
 
 struct func_8022B720_S1;
 typedef struct func_8022B720_S1 func_8022B720_S1;

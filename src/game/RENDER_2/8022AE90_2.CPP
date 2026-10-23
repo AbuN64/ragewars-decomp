@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/INTEGERSTATE1250.H"
+#include "RENDER_2/8022AE90.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"

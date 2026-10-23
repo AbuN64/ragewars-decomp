@@ -196,6 +196,7 @@ void func_80219490_de(char *object, char *camera) {
 }
 
 #include "COMMON/GAMEPLAY_REACTIONS.H"
+#include "RENDER_2/802192C0.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/GAMEPLAY_REACTIONS.H"
 #include "COMMON/MENU_MATCH_GLOBALS.H"
