@@ -31,20 +31,20 @@ void Render_UpdateTriggeredMotion(Player *mover, ActorMotionState *rider);
 void func_80206DD4_de(Actor_func_80206DD4_de *, RiderCode80206258 *);
 
 void func_80207910_de(void *object, void *state) {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
+    Player *player = object;
+    ActorMotionState *motionState = state;
     f32 sp10[16];
-    f32 *temp_s1;
+    f32 *matrix;
 
-    func_80273760_de(sp10, arg1->pitch);
-    func_802738C0_de(sp10, arg1->yaw);
-    func_80273A98_de(sp10, arg0->heading);
-    temp_s1 = arg0->matrix;
-    func_8027302C(temp_s1, sp10);
-    func_8027347C_de(temp_s1, arg0->scale.x, arg0->scale.y, arg0->scale.z);
-    func_8027254C_de(&arg0->pos.x, 20000.0f);
-    func_80273448_de(temp_s1, arg0->pos.x, arg0->pos.y, arg0->pos.z);
-    func_80273D6C_de(temp_s1);
+    func_80273760_de(sp10, motionState->pitch);
+    func_802738C0_de(sp10, motionState->yaw);
+    func_80273A98_de(sp10, player->heading);
+    matrix = player->matrix;
+    func_8027302C(matrix, sp10);
+    func_8027347C_de(matrix, player->scale.x, player->scale.y, player->scale.z);
+    func_8027254C_de(&player->pos.x, 20000.0f);
+    func_80273448_de(matrix, player->pos.x, player->pos.y, player->pos.z);
+    func_80273D6C_de(matrix);
 }
 
 void func_802079B0_de(Player *mover, ActorMotionState *rider) {

@@ -216,7 +216,7 @@ NodeCode8028469C *func_80285B64_de(PoolRecAt28V1 *pool, Clip *key, CVector3 posi
     return node;
 }
 
-void func_80285C78_de(void *arg0) {
+void func_80285C78_de(void *pool) {
 
     NodeCode8028469C *node;
     NodeCode8028469C *next;
@@ -225,7 +225,7 @@ void func_80285C78_de(void *arg0) {
     NodeCode8028469C **inner;
 
     saved = func_802BCF30_de();
-    for (node = (*active_list(arg0)).head; node != 0; node = next) {
+    for (node = (*active_list(pool)).head; node != 0; node = next) {
         next = node->next;
         flag = 0;
         if (func_80264DF0_de(&node->amplitudeHandle) != 0 || func_80264DF0_de(&node->lifetimeHandle) != 0) {
@@ -238,8 +238,8 @@ void func_80285C78_de(void *arg0) {
         if (inner != 0) {
             *inner = 0;
         }
-        func_80255ED8_de(&(*active_list(arg0)), node);
-        func_80255D14_de(arg0, node);
+        func_80255ED8_de(&(*active_list(pool)), node);
+        func_80255D14_de(pool, node);
     }
     __osRestoreInt(saved);
 }

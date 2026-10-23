@@ -125,14 +125,14 @@ int func_8026435C_de(Shared_Effect *object) {
     return flags != 0;
 }
 
-int func_8026436C_de(Shared_Effect *arg0) {
-    int flag = arg0->state & 0x1000;
+int func_8026436C_de(Shared_Effect *effect) {
+    int flag = effect->state & 0x1000;
     return flag != 0;
 }
 
 /** Return the high bit of the byte at object offset 0xB6. */
-unsigned int func_8026437C_de(struct ControllerProfile *arg0) {
-    return ((u8)(arg0->pressedButtons >> 8)) >> 7;
+unsigned int func_8026437C_de(struct ControllerProfile *profile) {
+    return ((u8)(profile->pressedButtons >> 8)) >> 7;
 }
 
 /** Report whether any of the selected object flag bytes are set. */
@@ -157,13 +157,13 @@ int func_802643D0_de(void *arg0) {
     return flag != 0;
 }
 
-int func_802643E8_de(Shared_Effect *arg0) {
-    int flag = arg0->state & 0x4000;
+int func_802643E8_de(Shared_Effect *effect) {
+    int flag = effect->state & 0x4000;
     return flag != 0;
 }
 
-int func_802643F8_de(struct ControllerProfile *arg0) {
-    return ((u8)(arg0->pressedButtons >> 8)) >> 7;
+int func_802643F8_de(struct ControllerProfile *controllerProfile) {
+    return ((u8)(controllerProfile->pressedButtons >> 8)) >> 7;
 }
 
 void func_80264404_de(void) {

@@ -22,7 +22,7 @@ extern void func_80282E98_de(void *arg0, void *arg1);
 
 
 
-void func_80284B20_de(Shared_Particle *arg0) {
+void func_80284B20_de(Shared_Particle *particle) {
     CVector3 point;
     void *node;
     void *point_ptr;
@@ -32,7 +32,7 @@ void func_80284B20_de(Shared_Particle *arg0) {
     f32 radius_sq;
     f32 height_scale;
 
-    amount = arg0->desc->unk10;
+    amount = particle->desc->unk10;
     radius_sq = (f32)amount;
     if (radius_sq <= 0.0f) {
         return;
@@ -50,12 +50,12 @@ void func_80284B20_de(Shared_Particle *arg0) {
     do {
         point = ((Shared_ActorView *)node)->position.vector;
         stop = 0;
-        if (arg0->inst.type != actor_id) {
+        if (particle->inst.type != actor_id) {
             point.y += Particle_GetActorHeight(node) * height_scale;
         }
-        if (func_802726BC_de(&arg0->inst.pos.x, point_ptr) < radius_sq) {
-            func_80282E98_de(arg0, node);
-            if (arg0->inst.type == actor_id) {
+        if (func_802726BC_de(&particle->inst.pos.x, point_ptr) < radius_sq) {
+            func_80282E98_de(particle, node);
+            if (particle->inst.type == actor_id) {
                 stop = 1;
             }
         }
@@ -140,7 +140,7 @@ void func_80284E9C_de(int context,Obj_func_80284DC4_de **objects,int count) {
  }
 }
 
-void func_80284FF4_de(EffectSystem *arg0, s32 arg1, CVector3 *arg2) {
+void func_80284FF4_de(EffectSystem *effectSystem, s32 arg1, CVector3 *arg2) {
     f32 temp_f2;
     s32 count;
     u16 v;
@@ -149,7 +149,7 @@ void func_80284FF4_de(EffectSystem *arg0, s32 arg1, CVector3 *arg2) {
     arg2->x = 0.0f;
     arg2->y = 0.0f;
     arg2->z = 0.0f;
-    record = arg0->lists[1].head;
+    record = effectSystem->lists[1].head;
     count = 0;
     if (record != 0) {
         do {
@@ -183,7 +183,7 @@ extern f32 func_802726BC_de(f32 *a, f32 *b);
 
 
 
-void func_802850C8_de(EffectSystem *arg0, LevelActor *arg1, f32 *arg2) {
+void func_802850C8_de(EffectSystem *arg0, LevelActor *actor, f32 *arg2) {
     f32 temp;
     void *node;
 
@@ -191,8 +191,8 @@ void func_802850C8_de(EffectSystem *arg0, LevelActor *arg1, f32 *arg2) {
     node = arg0->groups.head;
     if (node != 0) {
         do {
-            if (((ParticleEffect *)node)->owner != arg1 && (((ParticleEffect *)node)->flags & 0x100)) {
-                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &arg1->position0.x);
+            if (((ParticleEffect *)node)->owner != actor && (((ParticleEffect *)node)->flags & 0x100)) {
+                temp = func_802726BC_de(&((ParticleEffect *)node)->pos.x, &actor->position0.x);
                 if (temp < *arg2) {
                     *arg2 = temp;
                 }

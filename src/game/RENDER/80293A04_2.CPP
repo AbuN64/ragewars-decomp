@@ -43,7 +43,7 @@ extern Gfx *D_80110634;
 void func_80293DE8_de(s32 session) {
 }
 
-void func_80293DF0_de(GameSession *arg0) {
+void func_80293DF0_de(GameSession *gameSession) {
     D_800E28C8 = -1;
     D_80146D70 = 0;
     func_8040C428_de(0);
@@ -51,7 +51,7 @@ void func_80293DF0_de(GameSession *arg0) {
     D_80146D60 = 1;
     D_800E28CC = 1;
     D_8014AD94 = 0;
-    arg0->timer = D_800C54C0_de;
+    gameSession->timer = D_800C54C0_de;
     func_80298368_de(0x1D);
 }
 
@@ -90,7 +90,7 @@ void func_80293EB8_de(void *arg0) {
 
 struct ObjRecV2;
 
-void func_80293F44_de(GameSession *arg0) {
+void func_80293F44_de(GameSession *session) {
     s32 var_a2;
     s32 call_result;
     u32 result;
@@ -100,13 +100,13 @@ void func_80293F44_de(GameSession *arg0) {
     if ((result > 0x400000U) && (D_800D29C8 != 0)) {
         var_a2 = 3;
     }
-    if (arg0->transitionTime > D_800C54C4_de) {
+    if (session->transitionTime > D_800C54C4_de) {
         D_800CD77C = 0;
     }
     if (D_800CD77C != 0) {
-        call_result = func_80293904_de(arg0, 12.0f, var_a2, -1);
+        call_result = func_80293904_de(session, 12.0f, var_a2, -1);
     } else {
-        call_result = func_80293904_de(arg0, 12.0f, var_a2, var_a2);
+        call_result = func_80293904_de(session, 12.0f, var_a2, var_a2);
     }
     if (call_result != 0) {
         D_800CD77C = 0;

@@ -38,14 +38,14 @@ extern s32 D_801462C8;
 void func_802947C8_de(void *arg0, s32 arg1) {
     GameSession *object = arg0;
     Shared_Placed spawn;
-    s32 var_s0;
+    s32 selectionValues;
 
-    var_s0 = arg1;
-    if (func_8044D220_de(&D_8011FE88, -1, var_s0, &spawn, 1) == 0) {
-        var_s0 = 0;
+    selectionValues = arg1;
+    if (func_8044D220_de(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
+        selectionValues = 0;
     }
     object->phase = 2;
-    object->selector = var_s0;
+    object->selector = selectionValues;
     object->target = 0xE;
 }
 
@@ -61,11 +61,11 @@ void func_80294848_de(s32 arg0) {
     func_80293998_de(arg0, 0x82);
 }
 
-void func_802948C0_de(s32 arg0) {
+void func_802948C0_de(s32 session) {
     s32 *p;
 
     if (D_800CD780 != 0) {
-        func_80293A20_de(arg0, 1, 1);
+        func_80293A20_de(session, 1, 1);
         return;
     }
     p = &D_8010B194_de;
@@ -76,10 +76,10 @@ void func_802948C0_de(s32 arg0) {
     }
 }
 
-void func_80294938_de(s32 arg0) {
-    func_80293B28_de((void *)arg0);
-    func_80290E6C_de(arg0);
-    func_80291074_de(arg0);
+void func_80294938_de(s32 session) {
+    func_80293B28_de((void *)session);
+    func_80290E6C_de(session);
+    func_80291074_de(session);
 }
 
 /* Initializes the game state for a new game phase with arg0 and updates the game state flag. */
@@ -99,9 +99,9 @@ void func_8029496C_de(s32 arg0) {
     D_800CD784_de = 0;
 }
 
-void func_802949FC_de(s32 arg0) {
+void func_802949FC_de(s32 session) {
     if (D_800CD780 != 0) {
-        func_80293A20_de(arg0, 1, 1);
+        func_80293A20_de(session, 1, 1);
         return;
     }
     if ((D_8010B194_de & 0x1000) && (D_80142898 == 0)) {
@@ -111,10 +111,10 @@ void func_802949FC_de(s32 arg0) {
     }
 }
 
-void func_80294A74_de(s32 arg0) {
-    func_80293B28_de((void *)arg0);
-    func_80290E6C_de(arg0);
-    func_80291074_de(arg0);
+void func_80294A74_de(s32 session) {
+    func_80293B28_de((void *)session);
+    func_80290E6C_de(session);
+    func_80291074_de(session);
 }
 
 #if defined(VERSION_US)

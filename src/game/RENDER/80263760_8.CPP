@@ -66,40 +66,40 @@ extern s32 func_8028B350_de(Shared_World *table, s32 id);
 
 
 
-void func_802647E8_de(ControllerProfile *arg0, s32 arg1) {
-    arg0->mode = arg1;
+void func_802647E8_de(ControllerProfile *slot, s32 arg1) {
+    slot->mode = arg1;
     if (arg1 == 0) {
-        func_80264248_de(arg0);
+        func_80264248_de(slot);
     }
 }
 
 void func_8026480C_de(void) {
-    ControllerProfile *var_s0;
-    s32 var_s1;
+    ControllerProfile *slot;
+    s32 i;
 
-    var_s1 = 0;
-    var_s0 = D_8010F328;
+    i = 0;
+    slot = D_8010F328;
     do {
-        func_80264248_de(var_s0);
-        var_s1 += 1;
-        var_s0 += 1;
-    } while (var_s1 < 4);
+        func_80264248_de(slot);
+        i += 1;
+        slot += 1;
+    } while (i < 4);
 }
 
 void func_80264854_de(s32 a) {
-    ControllerProfile *var_s0;
-    s32 var_s1;
+    ControllerProfile *slot;
+    s32 i;
 
-    var_s1 = 0;
-    var_s0 = D_8010F328;
+    i = 0;
+    slot = D_8010F328;
     do {
-        var_s0->mode = a;
+        slot->mode = a;
         if (a == 0) {
-            func_80264248_de(var_s0);
+            func_80264248_de(slot);
         }
-        var_s1 += 1;
-        var_s0 += 1;
-    } while (var_s1 < 4);
+        i += 1;
+        slot += 1;
+    } while (i < 4);
     if (a == 0) {
         func_80285D30_de(&D_8010EC90);
     }
@@ -135,28 +135,28 @@ void func_802648C8_de(void)
 }
 
 void func_8026495C_de(void) {
-    ControllerProfile *var_s0;
-    s32 var_s1;
-    s32 var_v1;
+    ControllerProfile *slot;
+    s32 i;
+    s32 j;
     s32 var_a0;
     s32 temp_v0;
 
     if (D_800CBC18 != 0) {
-        var_s1 = 0;
-        var_s0 = D_8010F328;
+        i = 0;
+        slot = D_8010F328;
         do {
-            func_80264248_de(var_s0);
-            var_s1 += 1;
-            var_s0 += 1;
-        } while (var_s1 < 4);
-        var_v1 = 0;
+            func_80264248_de(slot);
+            i += 1;
+            slot += 1;
+        } while (i < 4);
+        j = 0;
         var_a0 = 0;
         do {
-            temp_v0 = D_8010BC18[var_v1];
-            var_v1 += 1;
+            temp_v0 = D_8010BC18[j];
+            j += 1;
             *(s32 *)(&D_8010B3F4 + var_a0) = temp_v0;
             var_a0 += 0x224;
-        } while (var_v1 < 4);
+        } while (j < 4);
         func_80285D30_de(&D_8010EC90);
         D_800CBC18 = 0;
     }
@@ -301,23 +301,23 @@ s32 func_80264DF0_de(void *arg0) {
     PlayerRecAt8 *player = arg0;
     f32 temp_f1;
     f32 temp_f1_2;
-    s32 temp_v1;
-    SampledCurve *temp_a0;
+    s32 type;
+    SampledCurve *curve;
 
-    temp_a0 = player->curve;
-    temp_v1 = temp_a0->type;
-    switch (temp_v1) {
+    curve = player->curve;
+    type = curve->type;
+    switch (type) {
     case 0: {
         f32 divisor = D_80142C38[1];
         temp_f1 = player->time + (D_800C4310_de.unk0 / divisor);
         player->time = temp_f1;
-        if (temp_a0->length <= temp_f1) {
+        if (curve->length <= temp_f1) {
             return 1;
         }
         goto block_7;
     }
     case 1: {
-        RandomCurve *random = (void *)temp_a0;
+        RandomCurve *random = (void *)curve;
         f32 divisor = D_80142C38[1];
         temp_f1_2 = player->time - (D_800C4314_de.unk0 / divisor);
         player->time = temp_f1_2;

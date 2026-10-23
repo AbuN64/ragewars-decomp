@@ -19,15 +19,15 @@ extern s32 D_80142868;
 
 s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
     s32 var_v0;
-    Prompt *temp_a0;
+    Prompt *prompt;
 
     if ((func_80442A28_de(&D_8014561C) == 0) && (func_80245798_de() != 0)) {
         if (func_80245B0C_de() == 0x78) {
-            temp_a0 = &D_8014561C.unk1284;
-            if (temp_a0->unk88 == 0) {
+            prompt = &D_8014561C.unk1284;
+            if (prompt->unk88 == 0) {
                 if (arg0->unk26DD4 == 0) {
-                    temp_a0->unk88 = 1;
-                    func_804037D4_de(temp_a0);
+                    prompt->unk88 = 1;
+                    func_804037D4_de(prompt);
                 }
                 goto block_6;
             }

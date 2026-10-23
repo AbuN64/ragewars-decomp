@@ -66,11 +66,11 @@ extern void func_80293394_de(struct GameSession *arg0);
 
 
 
-void func_80293B28_de(void *arg0) {
+void func_80293B28_de(void *session) {
     GameSession *state;
     f32 value;
 
-    state = arg0;
+    state = session;
     if (D_8014288C == 1) {
         value = state->transitionTime;
         if (D_800C54A4_de < value) {
@@ -130,12 +130,12 @@ func_802A2224_de
 
 
 
-void func_80293C34_de(GameSession *arg0) {
+void func_80293C34_de(GameSession *world) {
     f32 t1;
     f32 t2;
     f32 t3;
 
-    if (arg0->clockPaused == 0) {
+    if (world->clockPaused == 0) {
         t1 = D_801462C8.counters.ticks + D_800D2988;
         D_801462C8.counters.ticks = t1;
         if (D_800C54AC_de <= t1) {

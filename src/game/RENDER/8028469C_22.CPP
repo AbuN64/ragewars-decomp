@@ -11,11 +11,11 @@
 
 extern void func_8028FDF8_de(s32 arg0, s32 arg1);
 
-void func_80285DB0_de(Shared_World *arg0, void *arg1, s32 arg2) {
+void func_80285DB0_de(Shared_World *world, void *actor, s32 arg2) {
     LevelActor *entry;
     struct Def *cond;
     void *field80;
-    void *temp_v0;
+    void *table;
     u8 *base1;
     u8 *base2;
     s32 field1B40C;
@@ -26,14 +26,14 @@ void func_80285DB0_de(Shared_World *arg0, void *arg1, s32 arg2) {
     s32 lastOffset;
     u32 first;
 
-    if (!(((LevelActor *)arg1)->flags & 0x80000)) {
-        first = (u32)arg0->actors;
+    if (!(((LevelActor *)actor)->flags & 0x80000)) {
+        first = (u32)world->actors;
         index = -1;
-        if ((u32) arg1 >= first) {
-            lastOffset = arg0->actorCount * 0x2E8;
+        if ((u32) actor >= first) {
+            lastOffset = world->actorCount * 0x2E8;
             lastOffset -= 0x2E8;
-            if (first + lastOffset >= (u32) arg1) {
-                index = ((u32) arg1 - first) / 0x2E8;
+            if (first + lastOffset >= (u32) actor) {
+                index = ((u32) actor - first) / 0x2E8;
             }
         }
     } else {
@@ -42,22 +42,22 @@ void func_80285DB0_de(Shared_World *arg0, void *arg1, s32 arg2) {
     if (index == -1) {
         return;
     }
-    field1B40C = arg0->level;
-    if (arg0->mode == 2) {
+    field1B40C = world->level;
+    if (world->mode == 2) {
         return;
     }
-    entry = &arg0->actors[index];
+    entry = &world->actors[index];
     cond = (struct Def *)entry->definition;
     if ((u32) (cond->type - 9) < 2) {
         if (cond->flags & 0x200) {
             return;
         }
     }
-    field80 = arg0->bitSections;
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 0);
-    func_8028FDB4_de(temp_v0, 0);
-    func_8028FDF8_de((s32) temp_v0, 1);
-    base1 = (u8 *) func_8028FDB4_de(temp_v0, 1);
+    field80 = world->bitSections;
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 0);
+    func_8028FDB4_de(table, 0);
+    func_8028FDF8_de((s32) table, 1);
+    base1 = (u8 *) func_8028FDB4_de(table, 1);
     base2 = base1;
     mask = 1 << (index & 7);
     if (arg2 != 0) {
@@ -79,7 +79,7 @@ s32 func_80285F58_de(void *arg0, void *arg1) {
     Shared_World *world = arg0;
     LevelActor *actor = arg1;
     void *field80;
-    void *temp_v0;
+    void *table;
     u8 *base;
     s32 field1B40C;
     s32 mask;
@@ -106,10 +106,10 @@ s32 func_80285F58_de(void *arg0, void *arg1) {
     }
     field80 = world->bitSections;
     field1B40C = world->level;
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 0);
-    func_8028FDB4_de(temp_v0, 0);
-    func_8028FDF8_de((s32) temp_v0, 1);
-    base = (u8 *) func_8028FDB4_de(temp_v0, 1);
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(field80, 0), field1B40C), 0);
+    func_8028FDB4_de(table, 0);
+    func_8028FDF8_de((s32) table, 1);
+    base = (u8 *) func_8028FDB4_de(table, 1);
     mask = 1 << (index & 7);
     i = index;
     if (i < 0) {

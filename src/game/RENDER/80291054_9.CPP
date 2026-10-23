@@ -28,7 +28,7 @@ extern void func_802BD160_de(s32 arg0);
 
 
 
-void func_80293394_de(struct GameSession *arg0) {
+void func_80293394_de(struct GameSession *session) {
     s8 color[4];
     f32 value;
     s32 alpha;
@@ -36,7 +36,7 @@ void func_80293394_de(struct GameSession *arg0) {
     color[0] = 0;
     color[1] = 0;
     color[2] = 0;
-    value = arg0->timer;
+    value = session->timer;
     alpha = 0xFF;
     if (!(value < 0)) {
         alpha = 0;
@@ -48,7 +48,7 @@ void func_80293394_de(struct GameSession *arg0) {
         }
     }
     color[3] = alpha;
-    func_8029311C_de(arg0, color, 0, 0, SCREEN_WD, SCREEN_HT);
+    func_8029311C_de(session, color, 0, 0, SCREEN_WD, SCREEN_HT);
 }
 
 /* Compares two byte strings lexicographically, returning -1 for either null pointer. */

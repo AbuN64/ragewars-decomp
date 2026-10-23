@@ -72,16 +72,16 @@ extern func_80206604_G1 D_801462E5;
 
 extern s32 func_80285F58_de(void *, void *);
 
-void func_80206258_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 1);
+void func_80206258_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
 void func_80206288_de(void *arg0) {
     func_80285DB0_de(&D_8011FE88, arg0, 0);
 }
 
-void func_802062B0_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 0);
+void func_802062B0_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
 }
 
 void func_802062E0_de(LevelActor *actor, ActorMotionState *owner, Params params, s32 kind) {
@@ -156,38 +156,38 @@ void func_802065C0_de(void *a, ActorMotionState *b, s32 c) {
     func_802472F0_de(a);
 }
 
-void func_80206604_de(LevelActor *arg0, ActorMotionState *arg1) {
+void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
     s32 flags;
     s32 flags2;
 
-    arg1->table = &D_800C85F0_de;
-    arg1->update = &D_00206724;
-    flags = arg0->flags;
+    motionState->table = &D_800C85F0_de;
+    motionState->update = &D_00206724;
+    flags = actor->flags;
     flags |= 0x01000000;
     flags |= 0x02000000;
     flags2 = flags | 0x20000;
-    arg0->flags = flags2;
+    actor->flags = flags2;
     if (D_801462E5.unk0 == 0) {
-        arg0->flags = flags2 | 0x10000000;
+        actor->flags = flags2 | 0x10000000;
     }
-    if ((arg0->type == 0x453) && (func_80245B0C_de() == 0x6F)) {
-        arg1->secondaryUpdate = &D_0020694C;
+    if ((actor->type == 0x453) && (func_80245B0C_de() == 0x6F)) {
+        motionState->secondaryUpdate = &D_0020694C;
     }
 }
 
-void func_802066A4_de(LevelActor *arg0, Dest *arg1) {
-    arg1->field124 = ((ActorHealthDefinition *)arg0->definition)->health;
-    func_80214178_de(arg0, arg1, 0);
+void func_802066A4_de(LevelActor *actor, Dest *arg1) {
+    arg1->field124 = ((ActorHealthDefinition *)actor->definition)->health;
+    func_80214178_de(actor, arg1, 0);
     arg1->charge = D_800C1AE0_de;
     arg1->field12C = D_800C1AE0_de;
-    if (func_80285F58_de(&D_8011FE88, arg0) == 1) {
-        arg0->flags &= ~0x2000;
-        arg0->flags &= ~0x100;
+    if (func_80285F58_de(&D_8011FE88, actor) == 1) {
+        actor->flags &= ~0x2000;
+        actor->flags &= ~0x100;
     }
 }
 
-void func_80206724_de(void *arg0, Shared_CallbackOwner *arg1) {
-    Shared_CallbackHook *obj = arg1->hook;
+void func_80206724_de(void *arg0, Shared_CallbackOwner *callbackOwner) {
+    Shared_CallbackHook *obj = callbackOwner->hook;
     if (obj != 0) {
         Shared_VoidCallback fn = obj->callback;
         if (fn != 0) {

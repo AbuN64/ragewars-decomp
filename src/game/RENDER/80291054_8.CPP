@@ -48,23 +48,23 @@ void func_80293268_de(void *unused) {
     func_80264404_de();
 }
 
-void func_80293284_de(GameSession *arg0, s32 arg1) {
+void func_80293284_de(GameSession *gameSession, s32 target) {
     Shared_Placed spawn;
-    s32 var_s0;
+    s32 selectionValues;
 
-    var_s0 = arg1;
-    if (func_8044D220_de(&D_8011FE88, -1, var_s0, &spawn, 1) == 0) {
-        var_s0 = 0;
+    selectionValues = target;
+    if (func_8044D220_de(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
+        selectionValues = 0;
     }
     D_801462C8.counters.ticks = 0;
     D_801462C8.counters.seconds = 0;
     D_801462C8.counters.m_GameTimeMinutes = 0;
     D_801462C8.counters.m_GameTimeHours = 0;
     D_801462C8.counters.first = 0;
-    arg0->phase = 2;
-    arg0->selector = var_s0;
-    arg0->selectionActive = 1;
-    arg0->target = 0xD;
+    gameSession->phase = 2;
+    gameSession->selector = selectionValues;
+    gameSession->selectionActive = 1;
+    gameSession->target = 0xD;
 }
 
 void func_80293334_de(void *owner, s32 count, s32 force_active) {

@@ -175,7 +175,7 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
     f32 temp_f2_7;
     f32 var_f1;
     f32 var_f3;
-    u16 temp_v1;
+    u16 half;
     func_802070D0_S2 *temp_s2;
     void *temp_s3;
     func_802070D0_S2 *temp_v0;
@@ -247,9 +247,9 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
     arg1->unk150 = vec1.x;
     arg1->unk154 = vec1.y;
     arg1->unk158 = vec1.z;
-    temp_v1 = temp_s2->unk14.half;
-    if (temp_v1 & 1) {
-        if (arg1->unk168 > 0.0f && !(temp_v1 & 0x8000)) {
+    half = temp_s2->unk14.half;
+    if (half & 1) {
+        if (arg1->unk168 > 0.0f && !(half & 0x8000)) {
             var_f3 = arg1->unk168 + (func_802B6560_de((1.0f - temp_s2->unk30) * 3.1415927f) + 1.0f) * (-arg1->unk168 * 0.5f);
             if (var_f3 <= 0.3f) {
                 arg1->unk16C = (f32) (temp_s2->unk34 * 15.0f);
@@ -386,15 +386,15 @@ void func_802077F4_de(void *object, void *state)
 }
 
 void func_80207890_de(void *object, void *state) {
-    Player *arg0 = object;
-    ActorMotionState *arg1 = state;
-    arg1->state = 0;
-    func_80214178_de(arg0, arg1, 0);
-    if (arg1->routeMode == 1) {
-        arg1->destination = arg1->start;
-        func_80214178_de(arg0, arg1, 4);
+    Player *player = object;
+    ActorMotionState *motionState = state;
+    motionState->state = 0;
+    func_80214178_de(player, motionState, 0);
+    if (motionState->routeMode == 1) {
+        motionState->destination = motionState->start;
+        func_80214178_de(player, motionState, 4);
     }
-    if (func_80285F58_de(&D_8011FE88, arg0) == 0) {
-        arg0->weaponFlags &= ~0x100;
+    if (func_80285F58_de(&D_8011FE88, player) == 0) {
+        player->weaponFlags &= ~0x100;
     }
 }

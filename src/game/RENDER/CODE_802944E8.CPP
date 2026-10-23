@@ -39,8 +39,8 @@ extern s32 func_80264B6C_de(void);
 extern void func_80264B8C_de(void);
 extern void func_80293334_de(void *session, s32 count, s32 force_active);
 
-void func_802944F4_de(s32 arg0) {
-    func_80293A20_de(arg0, 0xC, 0xC);
+void func_802944F4_de(s32 session) {
+    func_80293A20_de(session, 0xC, 0xC);
 }
 
 void Render_DrawMode11Session(void *session) { func_80293B28_de(session); }
@@ -50,8 +50,8 @@ void func_80294530_de(s32 arg0) {
     ((s32 (*)(s32, s32))func_80293998_de)(arg0, 0x6F);
 }
 
-void func_80294560_de(s32 arg0) {
-    func_80293A20_de(arg0, 0xD, 8);
+void func_80294560_de(s32 session) {
+    func_80293A20_de(session, 0xD, 8);
 }
 
 void Render_DrawMode10Session(void *session) { func_80293B28_de(session); }
@@ -61,8 +61,8 @@ void func_8029459C_de(int arg0) {
     func_80293998_de(arg0, ((ObjRecAt26DD8 *)arg0)->unk26DD8 + 0x259);
 }
 
-void func_802945D8_de(s32 arg0) {
-    func_80293A20_de(arg0, 0xD, 0xD);
+void func_802945D8_de(s32 session) {
+    func_80293A20_de(session, 0xD, 0xD);
 }
 
 void Render_DrawMode12Session(void *session) { func_80293B28_de(session); }

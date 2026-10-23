@@ -26,46 +26,46 @@ extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 extern void func_802472F0_de(void *);
 extern void func_80402FB4_de(s32, void *);
 
-void func_8020676C_de(void *arg0, void *arg1, Trigger *arg2) {
+void func_8020676C_de(void *arg0, void *arg1, Trigger *trigger) {
     extern void func_80285DB0_de(Shared_World *a, void *b, int c);
-    func_802065C0_de(arg0, arg1, arg2->unk6);
+    func_802065C0_de(arg0, arg1, trigger->unk6);
     ((LevelActor *)arg0)->flags = ((LevelActor *)arg0)->flags | 0x2100;
     func_802472F0_de(arg0);
     func_80285DB0_de(&D_8011FE88, arg0, 0);
 }
 
-void func_802067BC_de(Shared_Actor *arg0) {
+void func_802067BC_de(Shared_Actor *actor) {
     extern void func_80285DB0_de(Shared_World *, void *, s32);
-    s32 v = arg0->weaponFlags;
+    s32 v = actor->weaponFlags;
     v &= ~0x2000;
     v &= ~0x100;
-    arg0->weaponFlags = v;
-    func_80285DB0_de(&D_8011FE88, arg0, 1);
+    actor->weaponFlags = v;
+    func_80285DB0_de(&D_8011FE88, actor, 1);
 }
 
-void func_802067FC_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 1);
+void func_802067FC_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 1);
 }
 
-void func_8020682C_de(Shared_Actor *arg0, s32 *arg1) {
+void func_8020682C_de(Shared_Actor *actor, s32 *arg1) {
     extern void func_80285DB0_de(Shared_World *, void *, s32);
-    arg0->weaponFlags |= 0x2100;
+    actor->weaponFlags |= 0x2100;
     if (func_80245798_de() != 0) {
         *arg1 |= 0x200;
     }
-    func_802472F0_de(arg0);
-    func_80285DB0_de(&D_8011FE88, arg0, 0);
+    func_802472F0_de(actor);
+    func_80285DB0_de(&D_8011FE88, actor, 0);
 }
 
-void func_80206898_de(Trigger *arg0) {
-    func_8028B670_de(&D_8011FE88, arg0->owner, arg0->actor, 0);
+void func_80206898_de(Trigger *trigger) {
+    func_8028B670_de(&D_8011FE88, trigger->owner, trigger->actor, 0);
 }
 
-void func_802068C8_de(struct Shared_Actor *arg0, s32 arg1, s32 arg2) {
+void func_802068C8_de(struct Shared_Actor *actor, s32 arg1, s32 arg2) {
     extern void func_80285DB0_de(Shared_World *, void *, s32);
-    func_80402FB4_de((s32)arg0, (void *)arg2);
-    arg0->weaponFlags |= 0x2100;
-    func_80285DB0_de(&D_8011FE88, arg0, 0);
+    func_80402FB4_de((s32)actor, (void *)arg2);
+    actor->weaponFlags |= 0x2100;
+    func_80285DB0_de(&D_8011FE88, actor, 0);
 }
 
 void func_80206910_de(s32 arg0) {
@@ -73,14 +73,14 @@ void func_80206910_de(s32 arg0) {
 }
 
 /** Copy the source byte at offset 7 into two fields under object offset 0x18. */
-void func_80206930_de(LevelActor *arg0, int arg1, Trigger *arg2) {
-    void *inner = arg0->definition;
+void func_80206930_de(LevelActor *actor, int arg1, Trigger *arg2) {
+    void *inner = actor->definition;
     ((ActorDefinitionHeader *)inner)->first = (s8)arg2->unk6;
-    inner = arg0->definition;
+    inner = actor->definition;
     ((ActorDefinitionHeader *)inner)->second = (s8)arg2->unk6;
 }
 
-void func_8020694C_de(char *arg0, void *arg1, Rec *arg2) {
+void func_8020694C_de(char *arg0, void *arg1, Rec *info) {
     int i;
     int n;
     void *child;
@@ -89,9 +89,9 @@ void func_8020694C_de(char *arg0, void *arg1, Rec *arg2) {
     for (i = 0; i < n; i++) {
         child = func_8024BFD4_de(arg0, i);
         if (child != 0) {
-            arg2->a = child;
-            arg2->b = child;
-            func_8024AA18_de(arg0, arg1, arg2);
+            info->a = child;
+            info->b = child;
+            func_8024AA18_de(arg0, arg1, info);
             func_8026DA4C_de(child, ((LevelActor *)arg0)->fieldB4, 1, &((LevelActor *)arg0)->lighting[D_800D297C], 0, ((LevelActor *)arg0)->field3);
         }
     }

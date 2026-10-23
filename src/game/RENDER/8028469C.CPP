@@ -9,15 +9,15 @@
 #include "RENDER/8028469C.H"
 #include "SYSTEM/80255C40_3.H"
 
-void *func_802846C8_de(EffectSystem *arg0, s32 arg1, EffectEntry *arg2) {
+void *func_802846C8_de(EffectSystem *effectSystem, s32 arg1, EffectEntry *effectEntry) {
     void *record;
 
-    record = arg2->params->listIndex[arg0->lists].head;
-    if (arg2 != 0) {
+    record = effectEntry->params->listIndex[effectSystem->lists].head;
+    if (effectEntry != 0) {
         if (record != 0) {
             do {
                 if (((ParticleEffect *)record)->ownerId == arg1) {
-                    if (((ParticleEffect *)record)->entry == arg2) {
+                    if (((ParticleEffect *)record)->entry == effectEntry) {
                         return record;
                     }
                 }
@@ -81,29 +81,29 @@ void func_80284870_de(f32 arg0) {
 }
 
 /** Return offset 0x180 only when the nested state word is zero. */
-float func_8028489C_de(ParticleEffect *arg0) {
-    void *inner = arg0->entry;
+float func_8028489C_de(ParticleEffect *effect) {
+    void *inner = effect->entry;
     if (((EffectEntry *)inner)->unk14 != 0) {
         return 0.0f;
     }
-    return arg0->unk180[0];
+    return effect->unk180[0];
 }
 
-f32 func_802848BC_de(ParticleEffect *arg0) {
-    f32 var_f0;
-    var_f0 = 0.0f;
-    if ((arg0->entry->unk14) == 0) {
-        var_f0 = (arg0->unk180[1]);
+f32 func_802848BC_de(ParticleEffect *effect) {
+    f32 result;
+    result = 0.0f;
+    if ((effect->entry->unk14) == 0) {
+        result = (effect->unk180[1]);
     }
-    return var_f0;
+    return result;
 }
 
-s32 func_802848DC_de(ParticleEffect *arg0) {
-    u16 temp_v1;
+s32 func_802848DC_de(ParticleEffect *effect) {
+    u16 kind;
     s32 val;
 
-    temp_v1 = arg0->kind;
-    val = temp_v1;
+    kind = effect->kind;
+    val = kind;
     if (val == 0x56) {
         goto ret1;
     }
@@ -127,12 +127,12 @@ ret0:
     return 0;
 }
 
-s32 func_80284928_de(ParticleEffect *arg0) {
-    u16 temp_v1;
+s32 func_80284928_de(ParticleEffect *effect) {
+    u16 kind;
     s32 val;
 
-    temp_v1 = arg0->kind;
-    val = temp_v1;
+    kind = effect->kind;
+    val = kind;
     if (val == 0x11) {
         goto ret1;
     }
@@ -173,12 +173,12 @@ ret0:
     return 0;
 }
 
-s32 func_802849AC_de(ParticleEffect *arg0) {
-    u16 temp_v1;
+s32 func_802849AC_de(ParticleEffect *effect) {
+    u16 kind;
     s32 val;
 
-    temp_v1 = arg0->kind;
-    val = temp_v1;
+    kind = effect->kind;
+    val = kind;
     if (val == 0xD) {
         goto ret1;
     }

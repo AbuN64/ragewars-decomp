@@ -9,17 +9,17 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
 
-void func_80293790_de(GameSession *arg0, s32 arg1) {
+void func_80293790_de(GameSession *session, s32 arg1) {
     s32 saved;
 
-    saved = arg0->mode;
-    arg0->phase = 1;
-    arg0->timer = 0;
-    arg0->mode = 0x14;
-    arg0->target = arg1;
-    arg0->previousMode = saved;
+    saved = session->mode;
+    session->phase = 1;
+    session->timer = 0;
+    session->mode = 0x14;
+    session->target = arg1;
+    session->previousMode = saved;
     if (func_80264B6C_de() != 0) {
-        arg0->timer = D_800C5494.unk4;
+        session->timer = D_800C5494.unk4;
     }
 }
 
@@ -39,7 +39,7 @@ extern void Render_UpdateFrameTiming(void *arg0);
 
 
 
-void func_80293848_de(void *arg0) {
+void func_80293848_de(void *session) {
     s32 field;
     Handler8029382C fn;
 
@@ -47,20 +47,20 @@ void func_80293848_de(void *arg0) {
         D_800CD724 = 0;
     }
     func_80264CB8_de();
-    field = ((GameSession *)arg0)->mode;
+    field = ((GameSession *)session)->mode;
     fn = ((SessionHandlerRow *)D_800CD78C)[field].update;
     if (fn != 0) {
-        fn(arg0);
-        field = ((GameSession *)arg0)->mode;
+        fn(session);
+        field = ((GameSession *)session)->mode;
     }
     if (field != 0x14 && D_80142CA8 != 0) {
         D_80142CA8 -= 1;
-        Render_UpdateFrameTiming(arg0);
+        Render_UpdateFrameTiming(session);
     }
     D_800CD734 += 1;
 }
 
-s32 func_80293904_de(ObjRecAt26DC1 *arg0, f32 arg1, s32 arg2, s32 arg3) {
+s32 func_80293904_de(ObjRecAt26DC1 *arg0, f32 arg1, s32 eight, s32 arg3) {
     s32 *flag = &D_8010B194_de;
 
     if ((*flag != 0) && (arg3 != -1)) {
@@ -71,7 +71,7 @@ s32 func_80293904_de(ObjRecAt26DC1 *arg0, f32 arg1, s32 arg2, s32 arg3) {
     }
     if ((arg1 * D_800C549C) < arg0->unk26DB0) {
         arg0->unk26DC1 = 2;
-        arg0->unk26DBC = arg2;
+        arg0->unk26DBC = eight;
         return 1;
     }
     return 0;
