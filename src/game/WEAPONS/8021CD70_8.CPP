@@ -75,7 +75,7 @@ extern void func_80278D78_de(void *, s32, void *);
 extern void func_80278E04_de(struct Shared_Model *, s32, void *);
 
 
-extern void func_802A65E0_de(void *, void *);
+extern void System_UpdateToggleMenu(void *, void *);
 extern void func_802ACA54_de(void *, void *);
 #include "COMMON/LEVEL_TRACK.H"
 void func_80220ED4_de(SharedPlayer *player)
@@ -727,7 +727,7 @@ void func_80220ED4_de(SharedPlayer *player)
   {
     player->views13B4.view13B4_5.states = D_800C9684;
   }
-  func_802A65E0_de(&player->views5E8.viewD40_165.unkD40, player);
+  System_UpdateToggleMenu(&player->views5E8.viewD40_165.unkD40, player);
   if (player->views5E8.view11D8_147.unk11D8 > 0.0f)
   {
     player->views5E8.view11D8_147.unk11D8 -= D_800D2988;
