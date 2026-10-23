@@ -8,7 +8,13 @@
 #include "TYPES.H"
 #include "SYSTEM/8025E5B0_9.H"
 
-#ifdef NON_MATCHING
+static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
+    f64 result=(f64)(s32)value;
+    if((s32)value<0) result+=*bias;
+    return (f32)result;
+}
+
+#if defined(NON_MATCHING) || defined(VERSION_US_REV1)
 #include "TYPES.H"
 #include "SYSTEM/802609CC_3.H"
 #include "RENDER_4/8028FD2C_6.H"
@@ -17,7 +23,10 @@ extern f32 D_800C4090_de;
 
 /* Fills a three-float sample for an animation track: either the stored constant vector or a linear blend
  * of the two keys around the time. */
-void func_8025E5B0_de(AnimRef *anim, s32 index, f32 time, f32 *out) {
+extern f64 D_800C4040_de, D_800C4048_de, D_800C4050_de, D_800C4058_de, D_800C4060_de, D_800C4068_de, D_800C4070_de, D_800C4078_de, D_800C4080_de, D_800C4088_de;
+
+
+void System_SampleVectorTrack(AnimRef *anim, s32 index, f32 time, CVector3 *out) {
     void *root;
     void *tracks;
     AnimTrack *track;
@@ -26,6 +35,7 @@ void func_8025E5B0_de(AnimRef *anim, s32 index, f32 time, f32 *out) {
     f32 position;
     f32 frac;
     f32 *frames;
+    f32 *dest;
     s32 key;
     s32 first;
     s32 second;
@@ -35,44 +45,56 @@ void func_8025E5B0_de(AnimRef *anim, s32 index, f32 time, f32 *out) {
     root = *anim->data;
     tracks = func_8028FDB4_de(root, 5);
     track = func_8028FDB4_de(tracks, 0);
-    key = ((KeyIndex *)((u8 *)func_8028FDB4_de(root, 1) + index * 4))->position;
+    { AnimKeyTable *keys=func_8028FDB4_de(root,1); key=keys->entries[index].position; }
     rate = track->rate;
     length = track->length;
     position = time * rate;
     if (key == -1) {
         u8 *table = func_8028FDB4_de(root, 2);
 
-        s32 *vec = (s32 *)(table + index * *(s32 *)table + 8);
+        s32 offset = index * *(s32 *)table + 8;
+        void *sample=table+offset;
+        CVector3 *vec=sample;
 
-        ((s32 *)out)[0] = vec[0];
-        ((s32 *)out)[1] = vec[1];
-        ((s32 *)out)[2] = vec[2];
+        *out=*vec;
     } else {
         frames = func_8028FDB4_de(func_8028FDB4_de(tracks, 1), key);
-        frac = position - (position >= 0.0f ? (s32)position : (s32)position - ((f32)(s32)position != position));
+        frac = (position >= 0.0f) ? position-(s32)position : (f32)(s32)position==position ? position-(s32)position : position-((s32)position-1);
+        dest=&out->x;
         span = anim->span;
         if (span == 0xFFFF) {
             span = 0;
         }
         first = position >= 0.0f ? (s32)position : (s32)position - ((f32)(s32)position != position);
-        second = first + 1;
         if (length <= (f32)first) {
-            first = (f32)span * rate <= 0.0f ? (s32)((f32)span * rate)
-                                             : (s32)((f32)span * rate) + ((f32)(s32)((f32)span * rate) != (f32)span * rate);
-            second = first + 1;
+            if (unsignedFloat(span,&D_800C4040_de)*rate <= 0.0f) {
+            first = (s32)(unsignedFloat(span,&D_800C4048_de)*rate);
+        } else {
+            f32 integer = (f32)(s32)(unsignedFloat(span,&D_800C4050_de)*rate);
+            f32 value = unsignedFloat(span,&D_800C4058_de)*rate;
+            first = (integer != value);
+            first += (s32)(unsignedFloat(span,&D_800C4060_de)*rate);
         }
+            }
+        second=first+1;
         if (length <= (f32)second) {
-            second = (f32)span * rate <= 0.0f ? (s32)((f32)span * rate)
-                                              : (s32)((f32)span * rate) + ((f32)(s32)((f32)span * rate) != (f32)span * rate);
+            if (unsignedFloat(span,&D_800C4068_de)*rate <= 0.0f) {
+            second = (s32)(unsignedFloat(span,&D_800C4070_de)*rate);
+        } else {
+            f32 integer = (f32)(s32)(unsignedFloat(span,&D_800C4078_de)*rate);
+            f32 value = unsignedFloat(span,&D_800C4080_de)*rate;
+            second = (integer != value);
+            second += (s32)(unsignedFloat(span,&D_800C4088_de)*rate);
+        }
         }
         for (i = 0; i < 3; i++) {
-            out[i] = (D_800C4090_de - frac) * frames[first * 4 + i] + frac * frames[second * 4 + i];
+            dest[i] = (D_800C4090_de - frac) * frames[first * 4 + i] + frac * frames[second * 4 + i];
         }
     }
 }
 #else
 #if !(defined(VERSION_EU))
-INCLUDE_ASM("span_1000", func_8025E5B0_de);
+INCLUDE_ASM("span_1000", System_SampleVectorTrack);
 #endif
 #if defined(VERSION_EU)
 INCLUDE_ASM("span_1000", func_8025E574);
@@ -81,11 +103,7 @@ INCLUDE_ASM("span_1000", func_8025E574);
 
 extern void func_80270AAC_de(CQuatern *out, f32 t, CQuatern *from, CQuatern *to);
 
-static __inline__ f32 unsignedFloat(u32 value,const f64 *bias) {
-    f64 result=(f64)(s32)value;
-    if((s32)value<0) result+=*bias;
-    return (f32)result;
-}
+
 
 extern s32 D_8010AC78;
 

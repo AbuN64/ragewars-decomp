@@ -60,6 +60,14 @@ typedef struct AnimRef {
     /* 0x0C */ u32 span;
     /* 0x10 */ void **data;
 } AnimRef;
+typedef struct AnimKeyEntry {
+    s16 position, rotation;
+} AnimKeyEntry;
+typedef struct AnimKeyTable {
+    s32 reserved0, reserved4;
+    AnimKeyEntry entries[1];
+} AnimKeyTable;
+
 typedef struct KeyIndex {
     /* 0x00 */ char pad0[8];
     /* 0x08 */ s16 position;

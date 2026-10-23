@@ -49,7 +49,7 @@ static inline s32 load(Anim *anim, s32 table, s32 key, s32 id) {
     return 1;
 }
 
-extern void func_8025E5B0_de(void *,s32,f32,CVector3 *);
+extern void System_SampleVectorTrack(void *,s32,f32,CVector3 *);
 
 extern f32 D_800C41BC_de;
 
@@ -167,7 +167,7 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
     }
     temp_s2 = func_8028FDB4_de(header,3);
     temp_s2 = func_8028FDB4_de(temp_s2,0);
-    func_8025E5B0_de(arg0, 0, arg0->time, &sp10);
+    System_SampleVectorTrack(arg0, 0, arg0->time, &sp10);
     temp_fs0 = arg0->time;
     temp_a2 = ((AngleKeys *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->keys;
     var_v1 = arg0->frames - 1;
@@ -186,7 +186,7 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
     temp_s5 = arg0->frames - 1;
     temp_fs0f = (f32) temp_s5;
     if (temp_fs0f < arg0->time) {
-        func_8025E5B0_de(arg0, 0, temp_fs0f, &sp20);
+        System_SampleVectorTrack(arg0, 0, temp_fs0f, &sp20);
         temp_a2_2 = ((AngleKeys *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->keys;
         temp_fv1f_2 = (s32) temp_fs0f;
         temp_a0_2 = temp_fv1f_2 + 1;
@@ -216,11 +216,11 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
         var_fv0f_2 = unsignedDouble(var_s0, &D_800C41D8_de);
         func_802476C8_de((char *)arg3, arg0, (f32) var_fv0f_2, arg0->time);
         var_fv0f_3 = unsignedDouble(var_s0, &D_800C41E0_de);
-        func_8025E5B0_de(arg0, 0, (f32) var_fv0f_3, &sp10);
+        System_SampleVectorTrack(arg0, 0, (f32) var_fv0f_3, &sp10);
         var_fs1f = wrapAngle(arg0,(f32)unsignedDouble(var_s0,&D_800C41E8_de));
         arg0->active = 1;
     }
-    func_8025E5B0_de(arg0, 0, arg0->time, &sp20);
+    System_SampleVectorTrack(arg0, 0, arg0->time, &sp20);
     temp_fs0 = arg0->time;
     temp_a2_4 = ((AngleKeys *)func_8028FDB4_de(func_8026049C_de(arg0), 0))->keys;
     var_v1_4 = arg0->frames - 1;

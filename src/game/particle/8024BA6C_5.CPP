@@ -29,7 +29,7 @@ extern void func_80265E10_de(char *, char *, u16, s32, CVector3, struct IntPair)
 
 
 extern void func_80253754_de(s32 arg0, s32 arg1);
-extern void func_8025E5B0_de(AnimChannel *, s32, f32, f32 *);
+extern void System_SampleVectorTrack(AnimChannel *, s32, f32, f32 *);
 
 void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *arg2) {
     char *o1 = (char *) arg1;
@@ -38,7 +38,7 @@ void *func_8024C104_de(Triple *arg0, void *arg1, AnimChannel *arg2) {
     f32 inVec[3];
     f32 outVec[3];
 
-    func_8025E5B0_de(arg2, 0, arg2->time, spVec);
+    System_SampleVectorTrack(arg2, 0, arg2->time, spVec);
     inVec[0] = spVec[0];
     inVec[1] = spVec[2];
     inVec[2] = spVec[1];
@@ -96,8 +96,8 @@ void func_8024C34C_de(LevelActor *arg0, AnimChannel *arg1) {
     f32 zero;
 
     zero = 0.0f;
-    func_8025E5B0_de(arg1, 0, zero, scratch.first);
-    func_8025E5B0_de(arg1, 0, arg1->time, scratch.second);
+    System_SampleVectorTrack(arg1, 0, zero, scratch.first);
+    System_SampleVectorTrack(arg1, 0, arg1->time, scratch.second);
     scratch.in[0] = scratch.second[0] - scratch.first[0];
     scratch.in[1] = zero;
     scratch.in[2] = scratch.second[1] - scratch.first[1];
