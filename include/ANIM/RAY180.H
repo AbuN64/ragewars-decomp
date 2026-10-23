@@ -491,8 +491,9 @@ struct func_802428DC_S2 {
 };
 
 typedef struct CollisionVertex {
-    f32 x, y;
-    char pad8[0x14];
+    f32 x, y, z;
+    char padC[0xC];
+    u32 clipFlags; /* 0x18 */
     s16 *position; /* 0x1C */
 } CollisionVertex;
 
