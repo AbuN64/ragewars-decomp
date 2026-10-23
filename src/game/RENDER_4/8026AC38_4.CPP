@@ -1,3 +1,4 @@
+#include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
 #include "COMMON/SHAREDPLAYER.H"
@@ -283,9 +284,10 @@ INCLUDE_ASM("span_1000", Render_DrawCharacterEffectParts);
 #endif
 
 #ifdef NON_MATCHING
-extern f32 D_800C46A8_de, D_800D15F0;
+extern const f32 D_800C46A8_de;
+extern f32 D_800D15F0;
 extern void func_8026B504_de(void *, void *, void *);
-/* 15/157 aligned edits; remaining: target hoists the flags load and the D_800C46A8_de load above the colour byte stores */
+/* 11/157 aligned edits; remaining: material flag stores and frame/display-list load scheduling. */
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first
  * part's material is registered through func_8026B504_de with the caller's two inputs. */
