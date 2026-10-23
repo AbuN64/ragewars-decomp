@@ -55,120 +55,161 @@ void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
 }
 
 #ifdef NON_MATCHING
-#define PK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
+/* 84/248 aligned edits; remaining: register roles of the entry loop (menu/entry/index) */
 extern f32 literals_func_8028D244_de;
 extern f32 D_800E24D4, D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
-typedef s32 (*MenuCallback)();
-s32 func_80441214_de(u8 *menu, u8 *ctx) {
+typedef struct PakMenu PakMenu;
+typedef struct PakEntry PakEntry;
+typedef s32 (*PakEntryCallback)();
+typedef struct PakEntryClass {
+    u8 pad0[0x18];
+    PakEntryCallback update; /* 0x18 */
+    PakEntryCallback confirm; /* 0x1C */
+} PakEntryClass;
+struct PakEntry {
+    u8 pad0[4];
+    s16 type; /* 4 */
+    u8 pad6[2];
+    s32 flags; /* 8 */
+    u8 padC[0xC];
+    PakEntryClass *cls; /* 0x18 */
+    s32 value; /* 0x1C */
+    u8 pad20[8];
+};
+typedef struct PakMenuClass {
+    u8 pad0[0x14];
+    PakEntryCallback hold; /* 0x14 */
+} PakMenuClass;
+typedef struct PakInput {
+    u8 pad0[0xB0];
+    s32 buttons; /* 0xB0 */
+} PakInput;
+struct PakMenu {
+    s16 selected; /* 0 */
+    u8 pad2[10];
+    PakEntry *entries; /* 0xC */
+    s32 count; /* 0x10 */
+    PakMenuClass *cls; /* 0x14 */
+    u8 pad18[8];
+    PakInput *input; /* 0x20 */
+    u8 pad24[4];
+    s16 state; /* 0x28 */
+    u8 pad2A[2];
+    f32 fade; /* 0x2C */
+    f32 openA; /* 0x30 */
+    f32 openB; /* 0x34 */
+};
+s32 func_80441214_de(PakMenu *menu, void *ctx) {
     s32 hold = 0;
-    u8 *entry;
-    u8 *current;
+    PakEntry *entry;
+    PakEntry *current;
     s32 i;
     s32 flags;
     s32 allowRepeat;
     s32 pad;
     s32 state;
-    MenuCallback callback;
-    callback = PK_FIELD(PK_FIELD(menu, u8 *, 0x14), MenuCallback, 0x14);
+    PakEntryCallback callback;
+    callback = menu->cls->hold;
     if (callback != 0) {
         hold = callback();
     }
-    entry = PK_FIELD(menu, u8 *, 0xC);
-    for (i = PK_FIELD(menu, s32, 0x10) - 1; i != -1; i--, entry += 0x28) {
-        callback = PK_FIELD(PK_FIELD(entry, u8 *, 0x18), MenuCallback, 0x18);
+    entry = menu->entries;
+    for (i = menu->count - 1; i != -1; i--) {
+        callback = entry->cls->update;
         if (callback != 0) {
             callback(entry, menu, ctx);
         }
+        entry++;
     }
-    current = PK_FIELD(menu, u8 *, 0xC) + PK_FIELD(menu, s16, 0) * 0x28;
-    PK_FIELD(menu, f32, 0x2C) += literals_func_8028D244_de;
-    flags = PK_FIELD(current, s32, 8) & 0x400000;
+    current = menu->entries + menu->selected;
+    menu->fade += literals_func_8028D244_de;
+    flags = current->flags & 0x400000;
     func_80442B5C_de(menu);
-    switch (PK_FIELD(menu, s16, 0x28)) {
+    switch (menu->state) {
     case 0:
-        PK_FIELD(menu, f32, 0x30) += literals_func_8028D244_de;
-        if (PK_FIELD(menu, f32, 0x30) >= D_800E24D4) {
-            PK_FIELD(menu, f32, 0x30) = D_800E24D4;
-            PK_FIELD(menu, s16, 0x28) = 1;
+        menu->openA += literals_func_8028D244_de;
+        if (menu->openA >= D_800E24D4) {
+            menu->openA = D_800E24D4;
+            menu->state = 1;
         }
         break;
     case 1:
-        PK_FIELD(menu, f32, 0x34) += literals_func_8028D244_de * D_800DE4A8;
-        if (PK_FIELD(menu, f32, 0x34) >= D_800DE4AC) {
-            PK_FIELD(menu, f32, 0x34) = D_800DE4AC;
-            PK_FIELD(menu, s16, 0x28) = 2;
+        menu->openB += literals_func_8028D244_de * D_800DE4A8;
+        if (menu->openB >= D_800DE4AC) {
+            menu->openB = D_800DE4AC;
+            menu->state = 2;
         }
         break;
     case 3:
-        PK_FIELD(menu, f32, 0x34) -= literals_func_8028D244_de * D_800DE4B0_de;
-        if (PK_FIELD(menu, f32, 0x34) <= 0.0f) {
-            PK_FIELD(menu, f32, 0x34) = 0.0f;
-            PK_FIELD(menu, s16, 0x28) = 4;
+        menu->openB -= literals_func_8028D244_de * D_800DE4B0_de;
+        if (menu->openB <= 0.0f) {
+            menu->openB = 0.0f;
+            menu->state = 4;
         }
         break;
     case 4:
-        PK_FIELD(menu, f32, 0x30) -= literals_func_8028D244_de;
-        if (PK_FIELD(menu, f32, 0x30) <= 0.0f) {
-            PK_FIELD(menu, f32, 0x30) = 0.0f;
+        menu->openA -= literals_func_8028D244_de;
+        if (menu->openA <= 0.0f) {
+            menu->openA = 0.0f;
             return 1;
         }
         break;
     }
-    state = PK_FIELD(menu, s16, 0x28);
+    state = menu->state;
     if (state >= 3 || state < 0) {
         return 0;
     }
     if (hold != 0) {
-        PK_FIELD(menu, s16, 0x28) = 4;
+        menu->state = 4;
     }
-    if (PK_FIELD(current, s32, 8) & 8) {
+    if (current->flags & 8) {
         return 0;
     }
     allowRepeat = 1;
-    if (PK_FIELD(current, s16, 4) == 2) {
-        pad = PK_FIELD(PK_FIELD(menu, u8 *, 0x20), s32, 0xB0);
+    if (current->type == 2) {
+        pad = menu->input->buttons;
         if (pad & 0x20202) {
             allowRepeat = 0;
-            PK_FIELD(current, s32, 0x1C) -= 2;
-            if (PK_FIELD(current, s32, 0x1C) < 0) {
-                PK_FIELD(current, s32, 0x1C) = 0;
+            current->value -= 2;
+            if (current->value < 0) {
+                current->value = 0;
             }
         } else if (pad & 0x40101) {
-            PK_FIELD(current, s32, 0x1C) += 2;
+            current->value += 2;
             allowRepeat = 0;
-            if (PK_FIELD(current, s32, 0x1C) >= 0x100) {
-                PK_FIELD(current, s32, 0x1C) = 0xFF;
+            if (current->value >= 0x100) {
+                current->value = 0xFF;
             }
         }
     }
     if (flags == 0) {
-        if (func_80264388_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+        if (func_80264388_de(menu->input) != 0) {
             func_804410AC_de(menu, 0x10);
         }
-        if (func_802643A0_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+        if (func_802643A0_de(menu->input) != 0) {
             func_804410AC_de(menu, 0x11);
         }
-    } else if (PK_FIELD(PK_FIELD(menu, u8 *, 0x20), s32, 0xB0) & 0x60303) {
+    } else if (menu->input->buttons & 0x60303) {
         allowRepeat = 0;
     }
     if (allowRepeat != 0) {
-        if (func_802643B8_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+        if (func_802643B8_de(menu->input) != 0) {
             func_804410AC_de(menu, 0x12);
         }
-        if (func_802643D0_de(PK_FIELD(menu, u8 *, 0x20)) != 0) {
+        if (func_802643D0_de(menu->input) != 0) {
             func_804410AC_de(menu, 0x13);
         }
     }
-    if (PK_FIELD(menu, s16, 0x28) != 2) {
+    if (menu->state != 2) {
         return 0;
     }
-    if (func_8026437C_de(PK_FIELD(menu, u8 *, 0x20)) != 0 ||
-        ((func_80264388_de(PK_FIELD(menu, u8 *, 0x20)) != 0 || func_802643A0_de(PK_FIELD(menu, u8 *, 0x20)) != 0) && flags != 0)) {
-        callback = PK_FIELD(PK_FIELD(current, u8 *, 0x18), MenuCallback, 0x1C);
+    if (func_8026437C_de(menu->input) != 0 ||
+        ((func_80264388_de(menu->input) != 0 || func_802643A0_de(menu->input) != 0) && flags != 0)) {
+        callback = current->cls->confirm;
         if (callback != 0 && callback(current, menu, ctx) == 0) {
             return 0;
         }
-        PK_FIELD(menu, s16, 0x28) = 3;
+        menu->state = 3;
     }
     return 0;
 }
