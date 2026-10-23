@@ -2558,5 +2558,5 @@ D_800C3510_de = 0x800C37C0;
 literals_func_80424DE8_de = 0x800EDD18; // rom:0xEE918 size:0xC8
 literals_func_8043D1DC_de = 0x800EE938; // rom:0xEF538 size:0x2C
 D_auto_rodata_func_8043D1DC_de_800EE964 = 0x800EE964; // rom:0xEF564
-literals_func_80261E98_de = 0x800C44A8; // rom:0xC50A8 size:0x60
+literals_System_PrepareAnimationFrames = 0x800C44A8; // rom:0xC50A8 size:0x60
 literals_func_8042FBF0_eu = 0x800EE1E0; // rom:0xEEDE0 size:0x20

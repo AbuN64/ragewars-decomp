@@ -79,7 +79,7 @@ extern void func_80247F18_de(Shared_PoseActor *, Shared_PosePart *, PoseMatrix, 
 extern void func_802480F0_de(Shared_PoseActor *, s32, PoseMatrix);
 extern f32 Particle_GetActorHeight(Shared_PoseActor *);
 extern void func_80261670_de(Shared_AnimState *, s32, s32, s32, s32, s32);
-extern void func_80261E98_de();
+extern void System_PrepareAnimationFrames();
 extern void func_802624A8_de(Shared_AnimState *);
 extern s32 func_802624D8_de(Shared_AnimState *);
 extern void Fx_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseActor *, void *);
@@ -326,8 +326,8 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 arg2) {
             ctx.animA = animA;
             ctx.animB = animB;
             f.frame = (!isRoot || isKind9) && !skip;
-            func_80261E98_de(&actor->animA, &tracks[0], f.frame);
-            func_80261E98_de(&actor->animB, &tracks[1]);
+            System_PrepareAnimationFrames(&actor->animA, &tracks[0], f.frame);
+            System_PrepareAnimationFrames(&actor->animB, &tracks[1]);
             kind = actor->model->kind;
             scaled = 0;
             scale.x = 1.0f;

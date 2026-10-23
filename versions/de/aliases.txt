@@ -2490,6 +2490,6 @@ D_auto_rodata_func_8040BB40_de_800DD07C = 0x800DD07C; // rom:0xDDC7C
 literals_func_8043D1DC_de = 0x800DE2B8; // rom:0xDEEB8 size:0x2C
 D_auto_rodata_func_8043D1DC_de_800DE2E4 = 0x800DE2E4; // rom:0xDEEE4
 literals_func_802ACE38_de = 0x800C62B8; // rom:0xC6EB8 size:0x28
-literals_func_80261E98_de = 0x800C41F8; // rom:0xC4DF8 size:0x60
+literals_System_PrepareAnimationFrames = 0x800C41F8; // rom:0xC4DF8 size:0x60
 literals_func_8042EF50_de = 0x800DDB60; // rom:0xDE760 size:0x20
 literals_func_80230058_de = 0x800C2E98; // rom:0xC3A98 size:0x48

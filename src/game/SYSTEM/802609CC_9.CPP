@@ -10,23 +10,16 @@ typedef struct Shared_func_80261EB8_S1 SharedRecAt10V1;
 typedef struct Shared_func_80261EB8_S2 SharedRecAt20;
 typedef StridedTable ObjRecV1;
 
-/* Warning: Gap in callee-saved word stack region.
- * Saved: [0x10, 0x14, 0x18, 0x1c, 0x20, 0x24, 0x30, 0x34, 0x38, 0x3c], gap at: 0x28. */
-/* FAKEMATCH: these existing scale identities also supply the two-word shared
- * ROM pool prefix. Their definitions preserve the resident data layout. */
-const f32 D_800C41F8_de = 1.0f;
-const f32 D_800C41FC_de = 1.0f;
-void func_80261E98_de(SharedRecAt10V1 *arg0, SharedRecAt20 *arg1) {
-    extern const f32 D_800C41FC_de;
-    f32 unit;
+void System_PrepareAnimationFrames(SharedRecAt10V1 *state, SharedRecAt20 *frames) {
+    f32 frameScale;
     f32 temp_f1;
     f32 temp_f1_2;
-    f32 temp_f20;
-    f32 temp_f22;
+    f32 framePosition;
+    f32 frameCount;
     f32 var_f0;
     s32 **temp_a0;
-    s32 *temp_s0;
-    s32 *temp_v0;
+    s32 *resource;
+    s32 *channels;
     s32 temp_a0_2;
     s32 temp_f3;
     s32 temp_f3_2;
@@ -35,136 +28,128 @@ void func_80261E98_de(SharedRecAt10V1 *arg0, SharedRecAt20 *arg1) {
     s32 temp_f3_5;
     s32 temp_f3_6;
     s32 temp_v1;
-    s32 var_a1;
-    s32 var_s0;
+    s32 currentFrame;
+    s32 loopStart;
     s32 var_v0;
     s32 var_v0_2;
-    s32 var_v1;
-    ObjRecV1 *temp_s1;
+    s32 nextFrame;
+    ObjRecV1 *positions;
     StridedTable *section;
 
-    temp_a0 = arg0->unk10;
+    temp_a0 = state->unk10;
     if (temp_a0 == 0) {
         var_v0 = 0;
     } else {
         var_v0 = func_802532F4_de(temp_a0) != 0;
     }
     if (var_v0 != 0) {
-        temp_s0 = *arg0->unk10;
-        temp_s1 = func_8028FDB4_de(temp_s0, 1);
-        temp_v0 = func_8028FDB4_de(temp_s0, 5);
-        func_8028FDB4_de(temp_v0, 0);
-        var_s0 = arg0->unkC;
-        temp_f20 = arg0->unk0;
-        temp_f22 = (f32) arg0->unk8;
-        arg1->unk0 = temp_s1->data;
-        section = func_8028FDB4_de(temp_s0, 2);
-        arg1->unk4 = section->data;
-        arg1->unk8 = func_8028FDB4_de(temp_v0, 1);
-        
-        {
-            extern const f32 D_800C41F8_de;
-            /* FAKEMATCH: SN64 const-call metadata lets the scheduler delay the
-             * scale load past this lookup. The callee reads an offset table, so
-             * the attribute is stronger than the actual C contract. */
-            extern void *func_8028FDB4_de(void *table, s32 index) __attribute__((const));
-            unit = D_800C41F8_de;
-            arg1->unkC = func_8028FDB4_de(temp_v0, 2);
-        }
-        if (temp_f20 >= 0.0f) {
-            var_v0_2 = (s32) temp_f20;
+        resource = *state->unk10;
+        positions = func_8028FDB4_de(resource, 1);
+        channels = func_8028FDB4_de(resource, 5);
+        func_8028FDB4_de(channels, 0);
+        loopStart = state->unkC;
+        framePosition = state->unk0;
+        frameCount = (f32) state->unk8;
+        frames->unk0 = positions->data;
+        section = func_8028FDB4_de(resource, 2);
+        frames->unk4 = section->data;
+        frames->unk8 = func_8028FDB4_de(channels, 1);
+        frameScale = 1.0f;
+        frames->unkC = func_8028FDB4_de(channels, 2);
+        if (framePosition >= 0.0f) {
+            var_v0_2 = (s32) framePosition;
             goto block_8;
         }
-        temp_f3 = (s32) temp_f20;
+        temp_f3 = (s32) framePosition;
         var_f0 = (f32) temp_f3;
-        if (var_f0 != temp_f20) {
+        if (var_f0 != framePosition) {
             var_v0_2 = temp_f3 - 1;
 block_8:
             var_f0 = (f32) var_v0_2;
         }
-        arg1->unk20 = (f32) (temp_f20 - var_f0);
-        if (var_s0 == 0xFFFF) {
-            var_s0 = 0;
-            if (temp_f20 >= 0.0f) {
-                var_a1 = (s32) temp_f20;
+        frames->unk20 = (f32) (framePosition - var_f0);
+        if (loopStart == 0xFFFF) {
+            loopStart = 0;
+            if (framePosition >= 0.0f) {
+                currentFrame = (s32) framePosition;
             } else {
-                temp_f3_2 = (s32) temp_f20;
-                var_a1 = ((f32) temp_f3_2 == temp_f20) ? 0 : 1;
-                var_a1 = temp_f3_2 - var_a1;
+                temp_f3_2 = (s32) framePosition;
+                currentFrame = ((f32) temp_f3_2 == framePosition) ? 0 : 1;
+                currentFrame = temp_f3_2 - currentFrame;
             }
-            if (temp_f22 <= (f32) var_a1) {
-                var_a1 = 0;
+            if (frameCount <= (f32) currentFrame) {
+                currentFrame = 0;
             }
-            var_v1 = var_a1 + 1;
-            if (temp_f22 <= (f32) var_v1) {
-                var_v1 = 0;
+            nextFrame = currentFrame + 1;
+            if (frameCount <= (f32) nextFrame) {
+                nextFrame = 0;
             }
         } else {
-            if (temp_f20 >= 0.0f) {
-                var_a1 = (s32) temp_f20;
+            if (framePosition >= 0.0f) {
+                currentFrame = (s32) framePosition;
             } else {
-                temp_f3_3 = (s32) temp_f20;
-                var_a1 = ((f32) temp_f3_3 == temp_f20) ? 0 : 1;
-                var_a1 = temp_f3_3 - var_a1;
+                temp_f3_3 = (s32) framePosition;
+                currentFrame = ((f32) temp_f3_3 == framePosition) ? 0 : 1;
+                currentFrame = temp_f3_3 - currentFrame;
             }
-            if ((temp_f22 - D_800C41FC_de) <= (f32) var_a1) {
-                temp_v1 = arg0->unkC;
-                if (((f32) (u32) temp_v1 * unit) <= 0.0f) {
-                    var_a1 = (s32) ((f32) (u32) temp_v1 * unit);
+            if ((frameCount - 1.0f) <= (f32) currentFrame) {
+                temp_v1 = state->unkC;
+                if (((f32) (u32) temp_v1 * frameScale) <= 0.0f) {
+                    currentFrame = (s32) ((f32) (u32) temp_v1 * frameScale);
                 } else {
-                    var_a1 = ((f32) (s32) ((f32) (u32) temp_v1 * unit) == ((f32) (u32) temp_v1 * unit)) ? 0 : 1;
-                    var_a1 = var_a1 + (s32) ((f32) (u32) temp_v1 * unit);
+                    currentFrame = ((f32) (s32) ((f32) (u32) temp_v1 * frameScale) == ((f32) (u32) temp_v1 * frameScale)) ? 0 : 1;
+                    currentFrame = currentFrame + (s32) ((f32) (u32) temp_v1 * frameScale);
                 }
             }
-            var_v1 = var_a1 + 1;
-            if ((temp_f22 - 1.0f) <= (f32) var_v1) {
-                temp_a0_2 = arg0->unkC;
-                if (((f32) (u32) temp_a0_2 * unit) <= 0.0f) {
-                    var_v1 = (s32) ((f32) (u32) temp_a0_2 * unit);
+            nextFrame = currentFrame + 1;
+            if ((frameCount - 1.0f) <= (f32) nextFrame) {
+                temp_a0_2 = state->unkC;
+                if (((f32) (u32) temp_a0_2 * frameScale) <= 0.0f) {
+                    nextFrame = (s32) ((f32) (u32) temp_a0_2 * frameScale);
                 } else {
-                    var_v1 = ((f32) (s32) ((f32) (u32) temp_a0_2 * unit) == ((f32) (u32) temp_a0_2 * unit)) ? 0 : 1;
-                    var_v1 = var_v1 + (s32) ((f32) (u32) temp_a0_2 * unit);
+                    nextFrame = ((f32) (s32) ((f32) (u32) temp_a0_2 * frameScale) == ((f32) (u32) temp_a0_2 * frameScale)) ? 0 : 1;
+                    nextFrame = nextFrame + (s32) ((f32) (u32) temp_a0_2 * frameScale);
                 }
             }
         }
-        arg1->unk10 = (s32) (var_a1 * 4);
-        arg1->unk14 = (s32) (var_v1 * 4);
-        if (temp_f20 >= 0.0f) {
-            var_a1 = (s32) temp_f20;
+        frames->unk10 = (s32) (currentFrame * 4);
+        frames->unk14 = (s32) (nextFrame * 4);
+        if (framePosition >= 0.0f) {
+            currentFrame = (s32) framePosition;
         } else {
-            temp_f3_4 = (s32) temp_f20;
-            var_a1 = ((f32) temp_f3_4 == temp_f20) ? 0 : 1;
-            var_a1 = temp_f3_4 - var_a1;
+            temp_f3_4 = (s32) framePosition;
+            currentFrame = ((f32) temp_f3_4 == framePosition) ? 0 : 1;
+            currentFrame = temp_f3_4 - currentFrame;
         }
-        if (temp_f22 <= (f32) var_a1) {
-            temp_f1 = (f32) var_s0 * unit;
+        if (frameCount <= (f32) currentFrame) {
+            temp_f1 = (f32) loopStart * frameScale;
             if (temp_f1 <= 0.0f) {
-                var_a1 = (s32) temp_f1;
-                var_v1 = var_a1 + 1;
+                currentFrame = (s32) temp_f1;
+                nextFrame = currentFrame + 1;
             } else {
                 temp_f3_5 = (s32) temp_f1;
-                var_a1 = ((f32) temp_f3_5 == temp_f1) ? 0 : 1;
-                var_a1 = var_a1 + temp_f3_5;
-                var_v1 = var_a1 + 1;
+                currentFrame = ((f32) temp_f3_5 == temp_f1) ? 0 : 1;
+                currentFrame = currentFrame + temp_f3_5;
+                nextFrame = currentFrame + 1;
             }
         } else {
-            var_v1 = var_a1 + 1;
+            nextFrame = currentFrame + 1;
         }
-        if (temp_f22 <= (f32) var_v1) {
-            temp_f1_2 = (f32) var_s0 * unit;
+        if (frameCount <= (f32) nextFrame) {
+            temp_f1_2 = (f32) loopStart * frameScale;
             if (temp_f1_2 <= 0.0f) {
-                var_v1 = (s32) temp_f1_2;
-                arg1->unk18 = var_a1 * 4;
+                nextFrame = (s32) temp_f1_2;
+                frames->unk18 = currentFrame * 4;
             } else {
                 temp_f3_6 = (s32) temp_f1_2;
-                var_v1 = ((f32) temp_f3_6 == temp_f1_2) ? 0 : 1;
-                var_v1 = var_v1 + temp_f3_6;
+                nextFrame = ((f32) temp_f3_6 == temp_f1_2) ? 0 : 1;
+                nextFrame = nextFrame + temp_f3_6;
                         goto block_75;
             }
         } else {
 block_75:
-            arg1->unk18 = var_a1 * 4;
+            frames->unk18 = currentFrame * 4;
         }
-        arg1->unk1C = (s32) (var_v1 * 4);
+        frames->unk1C = (s32) (nextFrame * 4);
     }
 }

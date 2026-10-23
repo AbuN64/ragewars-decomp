@@ -3743,7 +3743,7 @@ segments:
       - [0xC4CEC, rodata, data_800C/D_8026193C_C9EAC]
       - [0xC4CF4, data, data_800C/rodata_unresolved_800C40F4]
       - [0xC4CF8, rodata, data_800C/D_8026193C_C9EB8]
-      - [0xC4D28, rodata, data_800C/literals_func_80261E98_de]
+      - [0xC4D28, rodata, data_800C/literals_System_PrepareAnimationFrames]
       - [0xC4D88, rodata, data_800C/D_802625F0_C9F48]
       - [0xC4D8C, data, data_800C/rodata_unresolved_800C418C]
       - [0xC4D90, rodata, data_800C/D_802627A0_C9F50]

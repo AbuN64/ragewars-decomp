@@ -3752,7 +3752,7 @@ segments:
       - [0xC506C, rodata, data_800C/D_8026193C_C9EAC]
       - [0xC5074, data, data_800C/rodata_unresolved_800C4474]
       - [0xC5078, rodata, data_800C/D_8026193C_C9EB8]
-      - [0xC50A8, rodata, data_800C/literals_func_80261E98_de]
+      - [0xC50A8, rodata, data_800C/literals_System_PrepareAnimationFrames]
       - [0xC5108, rodata, data_800C/D_802625F0_C9F48]
       - [0xC510C, data, data_800C/rodata_unresolved_800C450C]
       - [0xC5110, rodata, data_800C/D_802627A0_C9F50]
