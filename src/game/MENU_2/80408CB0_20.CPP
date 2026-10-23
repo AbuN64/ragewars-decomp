@@ -1,8 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-#ifdef NON_MATCHING
-#define func_80419F4C_eu_x func_80419F50_eu
 #include "COMMON/ANIMATION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/INTEGERSTATE530.H"
@@ -16,33 +14,38 @@
 #include "RESMGR/resmgr_string_memory.H"
 extern s32 func_802744D4_de(void);
 extern void func_80419C84_de(func_80419D04_S1 *, s32);
-s32 func_80419F4C_eu_x(func_80419D04_S1 *state) {
- s32 index,delay;
- if(state->unk84!=1) return 0;
- if(state->unk44==0) {
-  delay=state->unk7C-1;
-  if(delay<0) delay=0; else if(delay>=51) delay=50;
-  state->unk7C=delay;
-  if(delay>0) return 0;
-  if(func_802744D4_de()%100>1) return 0;
-  index=state->unk74; state->unk44=1;
- } else {
-  state->unk78->value=state->unk80;
-  state->unk60[state->unk74]--;
-  index=state->unk74;
-  if(state->unk60[index]>0 && index+1<state->unk48) return 0;
-  index++; state->unk74=index;
-  if(state->unk48<=index) {
-   func_80419C84_de(state,-1);
-   state->unk78->value=state->unk80;
-   state->unk7C=50; return 0;
+/* Per-frame step of a menu widget flicker: while the effect is armed (state 1) the timer counts down to 0 (capped at 50); at 0 a roll below 2 in 100
+   starts the flicker (flag set, current entry shown on the widget, sound 0xE75). While flickering each frame spends one hold count of the current
+   entry and moves on to the next entry; after the last one the effect is re-rolled and the timer rewinds to 50. Returns 0. */
+s32 Menu_UpdateFlicker(func_80419D04_S1 *flicker) {
+ s32 entry,timer,next;
+ func_80419D04_S1 *widgetOwner = flicker;
+ if(flicker->unk84==1) {
+  if(flicker->unk44==0) {
+   timer=flicker->unk7C-1<0?0:flicker->unk7C-1>50?50:flicker->unk7C-1;
+   widgetOwner->unk7C=timer;
+   if(timer<=0 && func_802744D4_de()%100<2) {
+    widgetOwner->unk44=1;
+    widgetOwner->unk78->value=widgetOwner->unk4C[widgetOwner->unk74];
+    func_8025DF34_de(0xe75);
+   }
+  } else {
+   flicker->unk78->value=flicker->unk80;
+   flicker->unk60[flicker->unk74]--;
+   entry=flicker->unk74;
+   if(flicker->unk60[entry]<=0 || entry+1>=flicker->unk48) {
+    next=entry+1; flicker->unk74=next;
+    if(flicker->unk48<=next) {
+     func_80419C84_de(flicker,-1);
+     flicker->unk78->value=flicker->unk80;
+     flicker->unk7C=50;
+    } else {
+     widgetOwner->unk78->value=widgetOwner->unk4C[next];
+     func_8025DF34_de(0xe75);
+    }
+   }
   }
  }
- state->unk78->value=state->unk4C[index];
- func_8025DF34_de(0xe75);
  return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80419F50_eu);
-#endif
 #endif
