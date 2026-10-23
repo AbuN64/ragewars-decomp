@@ -85,8 +85,8 @@ extern int D_800CB6E0;
 extern int D_8010515C;
 extern Manager D_801047E0;
 
-void func_80250E70_de(s32 arg0, s32 count) {
-#define mgr ((struct ResMgr *)&D_80100560)
+void Scene_InitializeResourceCache(s32 unused, s32 count) {
+#define RESOURCE_MANAGER ((struct ResMgr *)&D_80100560)
     u32 mask;
     u32 i;
     void *thread;
@@ -103,36 +103,36 @@ void func_80250E70_de(s32 arg0, s32 count) {
     if (func_80265350_de() > 0x400000) {
         D_800CB6E0 *= 2;
     }
-    mgr->nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));
-    mgr->slots = (struct ResourceCacheEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
-    mgr->links = (struct ResLink *)func_80255920_de(&D_801051A0, D_800CB6E0 * 0x2C);
-    osCreateMesgQueue(&mgr->lock, mgr->lockSlot, 1);
-    mgr->unk40 = 0;
-    mgr->unk44 = 0;
-    func_80255CA0_de(&mgr->entries, 0x18, 0x1C);
-    func_80255CA0_de(&mgr->recent, 0x20, 0x24);
-    mgr->count = 0;
+    RESOURCE_MANAGER->nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));
+    RESOURCE_MANAGER->slots = (struct ResourceCacheEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
+    RESOURCE_MANAGER->links = (struct ResLink *)func_80255920_de(&D_801051A0, D_800CB6E0 * 0x2C);
+    osCreateMesgQueue(&RESOURCE_MANAGER->lock, RESOURCE_MANAGER->lockSlot, 1);
+    RESOURCE_MANAGER->unk40 = 0;
+    RESOURCE_MANAGER->unk44 = 0;
+    func_80255CA0_de(&RESOURCE_MANAGER->entries, 0x18, 0x1C);
+    func_80255CA0_de(&RESOURCE_MANAGER->recent, 0x20, 0x24);
+    RESOURCE_MANAGER->count = 0;
     for (i = 0; i < D_800CB6E0; i++) {
-        struct ResourceCacheEntry *node = &mgr->nodes[i];
+        struct ResourceCacheEntry *node = &RESOURCE_MANAGER->nodes[i];
         node->flags = 0;
-        mgr->slots[i] = node;
-        mgr->count += 1;
+        RESOURCE_MANAGER->slots[i] = node;
+        RESOURCE_MANAGER->count += 1;
     }
-    mgr->enabled1 = 1;
-    mgr->enabled0 = 1;
-    mgr->selected = -1;
-    mgr->unkBD4 = 0;
-    mgr->unkBD8 = 0;
-    mgr->unk8 = 0;
-    mgr->unkC1C = 1;
-    mgr->stamp = 0;
-    func_80255CA0_de(&mgr->freeLinks, 0x28, 0x24);
-    func_80255CA0_de(&mgr->listBAC, 0x28, 0x24);
-    func_80255CA0_de(&mgr->listBC0, 0x28, 0x24);
+    RESOURCE_MANAGER->enabled1 = 1;
+    RESOURCE_MANAGER->enabled0 = 1;
+    RESOURCE_MANAGER->selected = -1;
+    RESOURCE_MANAGER->unkBD4 = 0;
+    RESOURCE_MANAGER->unkBD8 = 0;
+    RESOURCE_MANAGER->unk8 = 0;
+    RESOURCE_MANAGER->unkC1C = 1;
+    RESOURCE_MANAGER->stamp = 0;
+    func_80255CA0_de(&RESOURCE_MANAGER->freeLinks, 0x28, 0x24);
+    func_80255CA0_de(&RESOURCE_MANAGER->listBAC, 0x28, 0x24);
+    func_80255CA0_de(&RESOURCE_MANAGER->listBC0, 0x28, 0x24);
     for (i = 0; i < D_800CB6E0; i++) {
-        struct ResLink *link = &mgr->links[i];
+        struct ResLink *link = &RESOURCE_MANAGER->links[i];
         link->owner = 0;
-        func_80255D14_de(&mgr->freeLinks, link);
+        func_80255D14_de(&RESOURCE_MANAGER->freeLinks, link);
     }
     func_802552E0_de(D_800CB6E0);
     osCreateMesgQueue((OSMesgQueue *)D_801047E0.queue, (OSMesg *)(D_801047E0.queue + 0x18), 0x40);
@@ -149,10 +149,10 @@ void func_80250E70_de(s32 arg0, s32 count) {
     func_802A001C_de(&D_801008F8, count, 0x800);
     func_802BAC90_de(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
     func_802BB750_de(thread);
-#undef mgr
+#undef RESOURCE_MANAGER
 }
 #else
-INCLUDE_ASM("span_1000", func_80250E70_de);
+INCLUDE_ASM("span_1000", Scene_InitializeResourceCache);
 #endif
 
 extern s32 D_80101134[];

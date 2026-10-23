@@ -27,7 +27,7 @@ extern void func_8023B9F0_eu_x(s32, s32);
 #else
 extern void func_8023B9B0_de(s32, s32);
 #endif
-extern void func_80250E70_de(s32, s32);
+extern void Scene_InitializeResourceCache(s32, s32);
 
 void func_802567D0_de(void) {
     u8 *heapStart;
@@ -54,7 +54,7 @@ func_8023B9F0_eu_x
 func_8023B9B0_de
 #endif
 (0, 0);
-    func_80250E70_de(0, 5);
+    Scene_InitializeResourceCache(0, 5);
 }
 
 #ifdef NON_MATCHING

@@ -120,7 +120,7 @@ extern struct BlockRecAt20 *D_801011B0;
 
 /* Draws the heap usage bar: a bordered box with one coloured band per tracked allocation, scaled to the
  * total heap size. */
-void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
+void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     struct BlockRecAt20 *span;
     Node80254C10 *node;
     u32 total;
@@ -225,5 +225,5 @@ void func_80252A44_de(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     __osRestoreInt(lock);
 }
 #else
-INCLUDE_ASM("span_1000", func_80252A44_de);
+INCLUDE_ASM("span_1000", Scene_DrawMemoryUsage);
 #endif
