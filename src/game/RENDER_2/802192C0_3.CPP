@@ -240,7 +240,7 @@ spawn:
 /* Resets a player record for a new round: clears the ammo and the 22 action slots, marks every action but the first
    unavailable when the match is local and the player has a definition and no bonus, calls the setup for the current mode,
    sets the starting ammo by whether the player has a definition, and chooses the starting weapon (fixed for states 17 and
-   18, none for a bonus profile, the fourth loadout item of the definition when the player is a computer, else the first
+   18, none for a bonus profile, the low half of the second loadout word of the definition when the player is a computer, else the first
    action marked 1) before loading the weapon's animation table and count. */
 extern s32 D_801468F4;
 extern void *D_800D052C[];
@@ -310,7 +310,7 @@ void Render_ResetPlayerWeapons(struct Player *player) {
         if (player->computer != 0) {
             definition = player->definition;
             if (definition != 0 && definition->loadout != 0) {
-                player->weapon = definition->loadout[3] - 0x4C3;
+                player->weapon = (u16)definition->loadout[1] - 0x4C3;
                 player->selectedAction = player->weapon;
             } else {
                 player->weapon = 0;

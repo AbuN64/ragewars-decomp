@@ -77,7 +77,7 @@ s32 func_8041F2A0_us(void *screen)
   func_8040E8D8_de(D_800E42D0->pulse, 0);
   D_800E42D0->pulse->alpha = 0;
   D_800E42D0->pulseStep = 0x32;
-  func_8041FF2C_de();
+  Menu_RefreshCharacterUnlocks();
   config = D_80146398;
   for (i = 0; i < 4; i++)
   {

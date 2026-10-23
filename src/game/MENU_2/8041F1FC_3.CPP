@@ -42,7 +42,6 @@ extern u8 D_800FEB54[];
 
 extern s32 D_800E3A54[][28];
 
-extern u16 D_800DFA02[][56];
 
 extern s32 func_8022F5C4_de(void *profile, s32 character);
 
@@ -198,7 +197,7 @@ s32 func_8041FC50_de(void *arg0, void *arg1, s32 event)
     return 0;
 }
 
-void func_8041FF2C_de(void) {
+void Menu_RefreshCharacterUnlocks(void) {
     u8 bits[4];
     s32 i;
     s32 j;
@@ -230,7 +229,7 @@ void func_8041FF2C_de(void) {
         func_80265688_de(bits, 1, 1);
     }
     for (i = 0; i < 17; i++) {
-        widget = func_8040EC30_de(D_800E42D0->screen, D_800DFA02[i][0]);
+        widget = func_8040EC30_de(D_800E42D0->screen, (u16)D_800E3A50[i].id);
         func_8040E950_de(widget, 0);
         if (!func_80265650_de(bits, i)) {
             if (widget) {

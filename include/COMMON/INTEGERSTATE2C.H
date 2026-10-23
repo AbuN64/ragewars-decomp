@@ -439,7 +439,7 @@ typedef struct AiCharacterDefinition {
     f32 unk30; /* 0x30 */
     f32 unk34; /* 0x34 */
     u8 pad38[0x14];
-    u16 loadout[8]; /* 0x4C: item ids, a weapon as its id plus 0x4C3; [3] is a computer player starting weapon */
+    u32 loadout[4]; /* 0x4C: word-sized item IDs; low half of [1] is the starting weapon ID. */
 } AiCharacterDefinition;
 typedef struct AiConfig {
     s32 unk0; /* 0x0 */
