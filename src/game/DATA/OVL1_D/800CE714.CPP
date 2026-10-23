@@ -1,8 +1,19 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800CE410_unclaimed_CF230_unclaimed_CF29C_unclaimed_CF2D8_unclaimed_CF314[17] = {
-    0x00000000, 0x41800000, 0x00000000, 0x3E23D70A, 0x3E23D70A, 0x3E23D70A, 0x40000000, 0x4123D70A,
-    0x41F5C28F, 0x41570A3D, 0x4123D70A, 0x420F5C29, 0x41570A3D, 0x00000000, 0x00000000, 0x00000000,
-    0x409374BC,
+struct {
+    unsigned int w0[3];
+    unsigned char b1[16];
+    unsigned int w2[10];
+} D_auto_rodata_unresolved_800CE410_unclaimed_CF230_unclaimed_CF29C_unclaimed_CF2D8_unclaimed_CF314 = {
+    {
+        0x00000000, 0x41800000, 0x00000000,
+    },
+    {
+        0x3E, 0x23, 0xD7, 0x0A, 0x3E, 0x23, 0xD7, 0x0A, 0x3E, 0x23, 0xD7, 0x0A, 0x40, 0x00, 0x00, 0x00,
+    },
+    {
+        0x4123D70A, 0x41F5C28F, 0x41570A3D, 0x4123D70A, 0x420F5C29, 0x41570A3D, 0x00000000, 0x00000000,
+        0x00000000, 0x409374BC,
+    },
 };
 #endif

@@ -26,7 +26,7 @@ INCLUDE_DATA("data_800C", rodata_unresolved_800ED412);
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/rw_text_80408118_E19A8_us_rev1.c */
-const unsigned int D_blob_4fb6fb10cdfd8ef7403a[1] = {
-    0x20202000,
+const unsigned char D_blob_4fb6fb10cdfd8ef7403a[4] = {
+    0x20, 0x20, 0x20, 0x00,
 };
 #endif

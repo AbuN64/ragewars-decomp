@@ -1,6 +1,14 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_rodata_unresolved_800E5E74_unclaimed_E6E54[6] = {
-    0x800E6240, 0x616D6220, 0x72656420, 0x20203030, 0x30000000, 0x800E6258,
+struct {
+    unsigned int w0;
+    unsigned char b1[16];
+    unsigned int w2;
+} D_auto_rodata_unresolved_800E5E74_unclaimed_E6E54 = {
+    0x800E6240,
+    {
+        0x61, 0x6D, 0x62, 0x20, 0x72, 0x65, 0x64, 0x20, 0x20, 0x20, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00,
+    },
+    0x800E6258,
 };
 #endif
