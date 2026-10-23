@@ -371,7 +371,7 @@ extern void func_80226708_de(struct RespawnPlayer *);
 extern int func_802934F8_de(void);
 
 extern void Render_ResetPlayerWeapons(struct RespawnPlayer *);
-extern void func_80208000_de(void *);
+extern void World_ResetPlayerState(void *);
 extern void func_80217388_de(LevelActor *, s32 *);
 extern void func_80262C88_de(LevelActor *);
 static inline void releaseState(LevelActor *carried, s32 *state) {
@@ -421,7 +421,7 @@ void func_8044952C_de(struct RespawnPlayer *player) {
     player->field11B8 = 0;
     player->field13C8 = 0;
     if (player->isBot != 0) {
-        func_80208000_de(player->brain);
+        World_ResetPlayerState(player->brain);
     }
     for (i = 1; i < 22; i++) {
         if (player->effects[i].state == 3 || player->effects[i].state == 7) {

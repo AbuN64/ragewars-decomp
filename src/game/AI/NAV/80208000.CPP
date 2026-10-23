@@ -20,61 +20,61 @@ extern void func_802110C4_de(void *);
 
 extern void func_8020999C_de(void *);
 
-void func_80208000_de(s32 *arg0) {
+void World_ResetPlayerState(s32 *state) {
     s32 i;
     s32 none;
 
-    arg0[1] = -1;
-    arg0[2] = -1;
-    arg0[3] = 0xB;
-    arg0[4] = -1;
-    arg0[11] = 0;
-    arg0[12] = 0;
-    arg0[13] = 0;
+    state[1] = -1;
+    state[2] = -1;
+    state[3] = 0xB;
+    state[4] = -1;
+    state[11] = 0;
+    state[12] = 0;
+    state[13] = 0;
     none = -1;
     for (i = 3; i >= 0; i--) {
-        arg0[5 + i] = none;
+        state[5 + i] = none;
     }
-    arg0[10] = -1;
-    arg0[0x1BC / 4] = 0xFFFF;
-    arg0[0x220 / 4] = 0;
-    arg0[0x1C8 / 4] = 0;
-    arg0[14] = 1;
-    arg0[15] = 0;
-    arg0[25] = 0;
-    arg0[0x28C / 4] = 0;
-    arg0[26] = 0;
-    arg0[0xBC / 4] = -1;
-    arg0[0x224 / 4] = -1;
-    arg0[0x228 / 4] = 0;
+    state[10] = -1;
+    state[0x1BC / 4] = 0xFFFF;
+    state[0x220 / 4] = 0;
+    state[0x1C8 / 4] = 0;
+    state[14] = 1;
+    state[15] = 0;
+    state[25] = 0;
+    state[0x28C / 4] = 0;
+    state[26] = 0;
+    state[0xBC / 4] = -1;
+    state[0x224 / 4] = -1;
+    state[0x228 / 4] = 0;
     for (i = 0; i < 10; i++) {
-        arg0[15 + i] = 0;
-        arg0[27 + i] = 0;
-        arg0[37 + i] = 0;
+        state[15 + i] = 0;
+        state[27 + i] = 0;
+        state[37 + i] = 0;
     }
-    arg0[0x238 / 4] = 0;
-    func_8020986C_de(arg0, &D_800CE040, none);
-    func_80209874_de(arg0, 2);
-    ((f32 *) arg0)[0x244 / 4] = 0.0f;
-    arg0[0x23C / 4] = 0;
-    arg0[0x240 / 4] = 0;
-    ((f32 *) arg0)[0x250 / 4] = ((f32 *) arg0)[0x254 / 4] = ((f32 *) arg0)[0x248 / 4] =
-        ((f32 *) arg0)[0x24C / 4] = ((f32 *) arg0)[0x258 / 4] = ((f32 *) arg0)[0x25C / 4] =
-        ((f32 *) arg0)[0x260 / 4] = ((f32 *) arg0)[0x244 / 4];
-    func_802110C4_de(arg0);
-    func_80209988_de(arg0);
-    func_8020999C_de(arg0);
-    arg0[0x318 / 4] = 0;
-    arg0[0x31C / 4] = 0;
-    arg0[0x320 / 4] = -1;
-    arg0[0x324 / 4] = 0;
-    arg0[0x328 / 4] = 0;
-    arg0[0x2D8 / 4] = 0;
-    arg0[0x2E4 / 4] = 0;
-    arg0[0x2EC / 4] = 0;
-    arg0[0x2E8 / 4] = 0;
-    arg0[0x2DC / 4] = 0;
-    arg0[0x2E0 / 4] = 0;
-    arg0[0x32C / 4] = -1;
+    state[0x238 / 4] = 0;
+    func_8020986C_de(state, &D_800CE040, none);
+    func_80209874_de(state, 2);
+    ((f32 *) state)[0x244 / 4] = 0.0f;
+    state[0x23C / 4] = 0;
+    state[0x240 / 4] = 0;
+    ((f32 *) state)[0x250 / 4] = ((f32 *) state)[0x254 / 4] = ((f32 *) state)[0x248 / 4] =
+        ((f32 *) state)[0x24C / 4] = ((f32 *) state)[0x258 / 4] = ((f32 *) state)[0x25C / 4] =
+        ((f32 *) state)[0x260 / 4] = ((f32 *) state)[0x244 / 4];
+    func_802110C4_de(state);
+    func_80209988_de(state);
+    func_8020999C_de(state);
+    state[0x318 / 4] = 0;
+    state[0x31C / 4] = 0;
+    state[0x320 / 4] = -1;
+    state[0x324 / 4] = 0;
+    state[0x328 / 4] = 0;
+    state[0x2D8 / 4] = 0;
+    state[0x2E4 / 4] = 0;
+    state[0x2EC / 4] = 0;
+    state[0x2E8 / 4] = 0;
+    state[0x2DC / 4] = 0;
+    state[0x2E0 / 4] = 0;
+    state[0x32C / 4] = -1;
 }
 #endif

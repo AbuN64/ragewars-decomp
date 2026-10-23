@@ -14,7 +14,7 @@
 
 extern void func_8022B144_de(void *, f32 *);
 
-extern void func_80208000_de(void);
+extern void World_ResetPlayerState(s32 *state);
 
 f32 func_802726F8_de(f32 *, f32 *);
 
@@ -79,9 +79,10 @@ void func_802095F8_de(Brain *object) {
     brain->previousAngle = brain->angle;
 }
 
-void func_802097E8_de(int *arg0, int arg1) {
-    *arg0 = arg1;
-    func_80208000_de();
+/* Stores the player, then resets its AI state using the same pointer. */
+void Nav_InitPlayerState(int *state, int player) {
+    *state = player;
+    World_ResetPlayerState(state);
 }
 
 void func_80209804_de(AiController *arg0)

@@ -49,7 +49,7 @@
 
 /* Unknown data types are explicit unresolved contracts, never guessed s32. */
 
-extern void func_80208000_de();
+extern void World_ResetPlayerState();
 extern void func_8020ABF0_de();
 extern s32 func_8020CB3C_de();
 extern void * func_8022A5F4_de();
@@ -289,7 +289,7 @@ void func_80286AA8_de(void *arg0, s32 arg1, s32 arg2) {
         if (var_s1_4 != 0) {
             temp_v1 = var_s1_4->unk5D8;
             if ((((struct SharedRecAt91 *)temp_v1)->unk78 == 1) && (((struct SharedRecAt91 *)temp_v1)->unk91 == 1)) {
-                func_80208000_de(var_s1_4->unk1454);
+                World_ResetPlayerState(var_s1_4->unk1454);
             }
             if ((((struct SharedRecAt98 *)(&D_801468A0))->unk98) != 0) {
                 temp_a2 = var_s1_4->unk5D8;

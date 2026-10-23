@@ -1,11 +1,19 @@
 
 #if defined(VERSION_US_REV1)
-unsigned int D_auto_data_unresolved_800E42D8[35] = {
-    0x0000007F, 0x000000C6, 0x000000AD, 0x000000AF, 0x000000B1, 0x000000C4, 0x000000C3, 0x000000C2,
-    0x00000086, 0x0000007E, 0x000000A9, 0x00000094, 0x00000096, 0x00000098, 0x000000A8, 0x000000A7,
-    0x000000A6, 0x0000008D, 0x0000007C, 0x000000C7, 0x000000B3, 0x000000B5, 0x000000B7, 0x000000B9,
-    0x000000BA, 0x000000BB, 0x0000008C, 0x0000007D, 0x000000AA, 0x0000009C, 0x0000009B, 0x0000009A,
-    0x0000009E, 0x0000009F, 0x0000009D,
+/* Widget IDs occupy the second halfword; kind and event fields remain words. */
+struct {
+    unsigned short firstRowWidgets[8][2];
+    struct {
+        unsigned int kind;
+        unsigned short widgets[8][2];
+    } rows[3];
+} D_auto_data_unresolved_800E42D8 = {
+    { { 0, 0x007F }, { 0, 0x00C6 }, { 0, 0x00AD }, { 0, 0x00AF }, { 0, 0x00B1 }, { 0, 0x00C4 }, { 0, 0x00C3 }, { 0, 0x00C2 } },
+    {
+        { 0x00000086, { { 0, 0x007E }, { 0, 0x00A9 }, { 0, 0x0094 }, { 0, 0x0096 }, { 0, 0x0098 }, { 0, 0x00A8 }, { 0, 0x00A7 }, { 0, 0x00A6 } } },
+        { 0x0000008D, { { 0, 0x007C }, { 0, 0x00C7 }, { 0, 0x00B3 }, { 0, 0x00B5 }, { 0, 0x00B7 }, { 0, 0x00B9 }, { 0, 0x00BA }, { 0, 0x00BB } } },
+        { 0x0000008C, { { 0, 0x007D }, { 0, 0x00AA }, { 0, 0x009C }, { 0, 0x009B }, { 0, 0x009A }, { 0, 0x009E }, { 0, 0x009F }, { 0, 0x009D } } },
+    },
 };
 
 extern char D_0041F2A0[];

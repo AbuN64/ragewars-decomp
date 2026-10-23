@@ -12,16 +12,35 @@ extern char D_004210B0[];
 extern char D_004210B8[];
 extern char D_004210C0[];
 extern char D_0042118C[];
-unsigned int D_auto_data_unresolved_800EBAB8[74] = {
-    0x00000083, 0x000000CA, 0x000000B1, 0x000000B3, 0x000000B5, 0x000000C8, 0x000000C7, 0x000000C6,
-    0x0000008A, 0x00000082, 0x000000AD, 0x00000098, 0x0000009A, 0x0000009C, 0x000000AC, 0x000000AB,
-    0x000000AA, 0x00000091, 0x00000080, 0x000000CB, 0x000000B7, 0x000000B9, 0x000000BB, 0x000000BD,
-    0x000000BE, 0x000000BF, 0x00000090, 0x00000081, 0x000000AE, 0x000000A0, 0x0000009F, 0x0000009E,
-    0x000000A2, 0x000000A3, 0x000000A1, 0x00000E07, 0x00000007, (unsigned int)D_00421000, 0x00000E08, 0x00000007,
-    (unsigned int)D_0041FB78, 0x0000000A, 0x00000007, (unsigned int)D_00421028, 0x00000E0A, 0x00000007, (unsigned int)D_00420100, 0x00000E06,
-    0x00000007, (unsigned int)D_0041F6E0, 0x00000E03, 0x00000007, (unsigned int)D_00420FC0, 0x00000002, 0x00000007, (unsigned int)D_004210C0,
-    0x00000001, 0x00000007, (unsigned int)D_0042118C, 0x00000008, 0x00000007, (unsigned int)D_004210A0, 0x00000007, 0x00000007,
-    (unsigned int)D_004210A8, 0x00000005, 0x00000007, (unsigned int)D_004210B0, 0x00000006, 0x00000007, (unsigned int)D_004210B8, 0x00000000,
-    0x00000000, 0x00000000,
+/* Widget IDs occupy the second halfword; kind and event fields remain words. */
+struct {
+    unsigned short firstRowWidgets[8][2];
+    struct {
+        unsigned int kind;
+        unsigned short widgets[8][2];
+    } rows[3];
+    unsigned int events[39];
+} D_auto_data_unresolved_800EBAB8 = {
+    { { 0, 0x0083 }, { 0, 0x00CA }, { 0, 0x00B1 }, { 0, 0x00B3 }, { 0, 0x00B5 }, { 0, 0x00C8 }, { 0, 0x00C7 }, { 0, 0x00C6 } },
+    {
+        { 0x0000008A, { { 0, 0x0082 }, { 0, 0x00AD }, { 0, 0x0098 }, { 0, 0x009A }, { 0, 0x009C }, { 0, 0x00AC }, { 0, 0x00AB }, { 0, 0x00AA } } },
+        { 0x00000091, { { 0, 0x0080 }, { 0, 0x00CB }, { 0, 0x00B7 }, { 0, 0x00B9 }, { 0, 0x00BB }, { 0, 0x00BD }, { 0, 0x00BE }, { 0, 0x00BF } } },
+        { 0x00000090, { { 0, 0x0081 }, { 0, 0x00AE }, { 0, 0x00A0 }, { 0, 0x009F }, { 0, 0x009E }, { 0, 0x00A2 }, { 0, 0x00A3 }, { 0, 0x00A1 } } },
+    },
+    {
+        0x00000E07, 0x00000007, (unsigned int)D_00421000,
+        0x00000E08, 0x00000007, (unsigned int)D_0041FB78,
+        0x0000000A, 0x00000007, (unsigned int)D_00421028,
+        0x00000E0A, 0x00000007, (unsigned int)D_00420100,
+        0x00000E06, 0x00000007, (unsigned int)D_0041F6E0,
+        0x00000E03, 0x00000007, (unsigned int)D_00420FC0,
+        0x00000002, 0x00000007, (unsigned int)D_004210C0,
+        0x00000001, 0x00000007, (unsigned int)D_0042118C,
+        0x00000008, 0x00000007, (unsigned int)D_004210A0,
+        0x00000007, 0x00000007, (unsigned int)D_004210A8,
+        0x00000005, 0x00000007, (unsigned int)D_004210B0,
+        0x00000006, 0x00000007, (unsigned int)D_004210B8,
+        0x00000000, 0x00000000, 0x00000000,
+    },
 };
 #endif

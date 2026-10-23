@@ -142,7 +142,7 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field868 = 0;
             ((struct Shared_ActorView *)(object))->self = object;
             ((struct Shared_ActorView *)(object))->id = object_id;
-            func_802097E8_de(owner, object);
+            Nav_InitPlayerState(owner, object);
             ((struct Shared_ActorView *)(object))->special = 0;
             ((struct Shared_ActorView *)(object))->projectileBase = player_index;
             ((struct Shared_ActorView *)(object))->projectileIndex = 0;
@@ -198,7 +198,7 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field868 = 0;
         ((struct Shared_ActorView *)(object))->self = object;
         ((struct Shared_ActorView *)(object))->id = object_id;
-        func_802097E8_de(owner, object);
+        Nav_InitPlayerState(owner, object);
         ((struct Shared_ActorView *)(object))->special = 0;
         ((struct Shared_ActorView *)(object))->projectileBase = roster_index * 2;
         ((struct Shared_ActorView *)(object))->projectileIndex = 0;
@@ -301,7 +301,7 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
     ((Shared_ActorView *)player)->field868 = 0;
     ((Shared_ActorView *)player)->self = player;
     player[3] = team;
-    func_802097E8_de((s32)((Shared_ActorView *)player)->owner, player);
+    Nav_InitPlayerState((s32)((Shared_ActorView *)player)->owner, player);
     ((Shared_ActorView *)player)->special = 0;
     ((Shared_ActorView *)player)->projectileBase = slot * 2;
     ((Shared_ActorView *)player)->projectileIndex = 0;
