@@ -219,7 +219,7 @@ loop_4:
     }
 }
 
-#ifdef NON_MATCHING
+#if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 #include "TYPES.H"
 
 typedef struct EffectResource {
@@ -245,21 +245,29 @@ extern void func_80295E84_de(void *, s32);
 extern void func_80283064_de(void *, void *);
 extern void func_802727D8_de(void *);
 
+static inline EffectNode *FX_FIND_NODE(EffectWorld *world, FxActor *actor) {
+    EffectNode *it;
+    void *owner = actor->owner;
+    s32 kind = actor->kind;
+    for (it = world->pool.used.head; it; it = it->next) {
+        if (it->owner == owner && it->kind == kind) return it;
+    }
+    return 0;
+}
 void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
     EffectNode *node;
     EffectResource *resource;
     void *first, *second;
     f32 matrix[4][4];
     EffectInstance *instance;
-    node = 0;
     if (*actor->flags & 0x10000) {
-        for (node = world->pool.used.head; node; node = node->next) {
-            if (node->owner == actor->owner && node->kind == actor->kind) break;
-        }
+        node = FX_FIND_NODE(world, actor);
+    } else {
+        node = 0;
     }
     if (!node) {
         node = func_8027963C_de(&world->pool);
-        if (!node) return;
+        if (node) {
         resource = func_8028AFEC_de(&D_8011FE88, resourceId);
         first = ((void **)D_800CDBD0)[resource->first];
         second = ((void **)D_800CDBD0)[resource->second];
@@ -276,24 +284,27 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
         node->resource = resource;
         node->first = first;
         node->second = second;
-        node->field28 = 0;
         node->value = resource->value;
+        node->field28 = 0;
+        node->attachment = resource->attachment;
         node->field4C = 0;
         node->field50 = 0;
         node->field2C = 0;
         node->field30 = 0;
-        node->attachment = resource->attachment;
         node->handle = -1;
         if (node->attachment != -1) {
             func_80295E84_de(node->coordinates, node->attachment);
             if (actor) func_80283064_de(actor, node->coordinates);
         }
+        }
     }
+    if (node) {
     ++actor->references;
     if (*actor->flags & 0x10000) {
         func_802727D8_de(matrix);
         instance = ((EffectInstance *(*)(void *, void *, void *))func_802A25D0_de)(world, node, matrix);
         if (instance) instance->actor = actor;
+    }
     }
 }
 #else
