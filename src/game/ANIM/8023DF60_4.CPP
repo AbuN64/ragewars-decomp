@@ -100,12 +100,12 @@ void func_8023EBFC_de(ActorMotion *motion, MotionContactResult *contact) {
 void func_8023EC54_de(ActorMotion *motion, MotionContactResult *contact) {
     s32 material;
     s32 temp_v0;
-    s32 temp_v1;
+    s32 flags;
     s32 temp_v1_2;
 
-    temp_v1 = motion->flags;
-    if (temp_v1 & 0x1000) {
-        motion->flags = temp_v1 & ~0x2000;
+    flags = motion->flags;
+    if (flags & 0x1000) {
+        motion->flags = flags & ~0x2000;
     }
     temp_v0 = motion->flags;
     temp_v1_2 = temp_v0 & 0xFFFC7FFF;

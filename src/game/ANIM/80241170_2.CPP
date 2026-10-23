@@ -15,29 +15,29 @@ s32 func_80271FC8_de(CVector3 *, u32, void *, void *);
  /* extern */
 void func_80272018_de(f32 *, void *, f32 *);
 
-s32 func_802412D0_de(void *arg0, void *arg1, void *arg2, f32 *arg3) {
+s32 func_802412D0_de(void *poly, void *start, void *arg2, f32 *arg3) {
     extern void func_80271F68_de(f32 *, void *, void *);
     f32 sp10[3];
     f32 sp20[3];
     f32 temp_f20;
     f32 var_f0;
-    s32 var_v0;
+    s32 result;
 
-    if (((struct MeasuredRecAt8V3 *)(arg0))->value == 0) {
+    if (((struct MeasuredRecAt8V3 *)(poly))->value == 0) {
         return 0;
     }
-    func_80271F68_de(sp10, arg2, arg1);
-    temp_f20 = (((struct MeasuredRecAt48V1 *)(arg0))->value * sp10[0]) + (((struct Measured *)(arg0))->value * sp10[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(arg0))->value * sp10[2]);
-    var_v0 = 0;
+    func_80271F68_de(sp10, arg2, start);
+    temp_f20 = (((struct MeasuredRecAt48V1 *)(poly))->value * sp10[0]) + (((struct Measured *)(poly))->value * sp10[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * sp10[2]);
+    result = 0;
     if (!(temp_f20 >= (f32)0)) {
-        func_80271F68_de(sp20, arg1, arg0 + 0x18);
-        var_v0 = 1;
-        var_f0 = -((((struct MeasuredRecAt48V1 *)(arg0))->value * sp20[0]) + (((struct Measured *)(arg0))->value * sp20[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(arg0))->value * sp20[2])) / temp_f20;
+        func_80271F68_de(sp20, start, poly + 0x18);
+        result = 1;
+        var_f0 = -((((struct MeasuredRecAt48V1 *)(poly))->value * sp20[0]) + (((struct Measured *)(poly))->value * sp20[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * sp20[2])) / temp_f20;
     } else {
         var_f0 = D_800C3740_de;
     }
     *arg3 = var_f0;
-    return var_v0;
+    return result;
 }
 
 s32 func_802413C8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
@@ -70,7 +70,7 @@ s32 func_802413C8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
 }
 
 /* extern */
-s32 func_802414F4_de(func_80204468_S3 *arg0, void *arg1) {
+s32 func_802414F4_de(func_80204468_S3 *poly, void *arg1) {
     void func_80271F68_de(f32 *, void *, void *);
     f32 sp10[3];
     f32 sp20[3];
@@ -79,17 +79,17 @@ s32 func_802414F4_de(func_80204468_S3 *arg0, void *arg1) {
     void *var_s1;
     s32 var_s0;
     void *var_s2;
-    temp_v1 = ((Polygon_func_8023E8D4_de *)arg0)->vertexCount;
+    temp_v1 = ((Polygon_func_8023E8D4_de *)poly)->vertexCount;
     if (temp_v1 == 1) {
         return 1;
     }
-    var_s2 = (char *)arg0 + ((temp_v1 * 0xC) + 0xC);
-    var_s1 = ((Polygon_func_8023E8D4_de *)arg0)->vertices;
+    var_s2 = (char *)poly + ((temp_v1 * 0xC) + 0xC);
+    var_s1 = ((Polygon_func_8023E8D4_de *)poly)->vertices;
     var_s0 = temp_v1;
     var_s0 = var_s0 - 1;
     for (; var_s0 != -1; var_s1 += 0xC, var_s0--) {
         func_80271F68_de(sp20, var_s1, var_s2);
-        func_80272018_de(sp10, &((Polygon_func_8023E8D4_de *)arg0)->normal, sp20);
+        func_80272018_de(sp10, &((Polygon_func_8023E8D4_de *)poly)->normal, sp20);
         func_80271F68_de(sp30, arg1, var_s2);
         var_s2 = var_s1;
         if (sp10[0]*sp30[0]+sp10[1]*sp30[1]+sp10[2]*sp30[2] > 0.0f) return 0;
@@ -97,8 +97,8 @@ s32 func_802414F4_de(func_80204468_S3 *arg0, void *arg1) {
     return 1;
 }
 
-s32 func_80241614_de(void *arg0, void *arg1, f32 radius, void *arg3) {
-    CVector3 *first = arg1;
+s32 func_80241614_de(void *poly, void *point, f32 radius, void *arg3) {
+    CVector3 *first = point;
     CVector3 *second = arg3;
     f32 dx = first->x - second->x;
     f32 dz = first->z - second->z;
@@ -138,14 +138,14 @@ s32 func_80241668_de(Footprint *fp, CVector3 *p)
     return 1;
 }
 
-f32 func_80241728_de(void *arg0, f32 x, f32 z) {
+f32 func_80241728_de(void *query, f32 x, f32 z) {
     CVector3 normal;
     CVector3 point;
 
-    normal = ((SurfaceHit *)arg0)->normal;
+    normal = ((SurfaceHit *)query)->normal;
     if (normal.y == 0.0f) {
-        return ((SurfaceHit *)arg0)->point.y;
+        return ((SurfaceHit *)query)->point.y;
     }
-    point = ((SurfaceHit *)arg0)->point;
+    point = ((SurfaceHit *)query)->point;
     return (((point.z - z) * normal.z) + ((point.x - x) * normal.x) + (point.y * normal.y)) / normal.y;
 }

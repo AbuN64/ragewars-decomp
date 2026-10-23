@@ -39,28 +39,28 @@ s32 func_80243850_de(Hit8 *a, Hit8 *b) {
     return order;
 }
 
-void func_80243874_de(void *arg0) {
+void func_80243874_de(void *contextAddress) {
     void *temp_a1;
     void **temp_s0;
     void *temp_s0_2;
     s32 *temp_v0;
     s32 temp_s1;
-    s32 var_s0;
+    s32 index;
 
-    temp_a1 = ((ContextB0 *)arg0)->element;
+    temp_a1 = ((ContextB0 *)contextAddress)->element;
     temp_s0 = ((ElementE8 *)temp_a1)->resource;
     if (temp_s0 != 0) {
-        func_8026F620_de(&((ContextB0 *)arg0)->transform, &((ElementE8 *)temp_a1)->transform, (char *) arg0 + 0xC);
+        func_8026F620_de(&((ContextB0 *)contextAddress)->transform, &((ElementE8 *)temp_a1)->transform, (char *) contextAddress + 0xC);
         temp_s0_2 = *temp_s0;
-        ((ContextB0 *)arg0)->vertices = func_8028FDB4_de(temp_s0_2, 0);
+        ((ContextB0 *)contextAddress)->vertices = func_8028FDB4_de(temp_s0_2, 0);
         temp_v0 = func_8028FDB4_de(temp_s0_2, 2);
         temp_s1 = *temp_v0;
-        var_s0 = 0;
+        index = 0;
         if (temp_s1 > 0) {
             do {
-                Anim_TraceMeshDisplayList(arg0, func_8028FDB4_de((void *) temp_v0, var_s0));
-                var_s0 += 1;
-            } while (var_s0 < temp_s1);
+                Anim_TraceMeshDisplayList(contextAddress, func_8028FDB4_de((void *) temp_v0, index));
+                index += 1;
+            } while (index < temp_s1);
         }
     }
 }

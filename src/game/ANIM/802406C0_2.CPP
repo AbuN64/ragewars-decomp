@@ -35,8 +35,8 @@ static inline void quad_normal(struct Quad *quad) {
     func_8027207C_de(&quad->normal);
 }
 
-void func_80240CAC_de(void *arg0) {
-    QueryE0 *object = arg0;
+void func_80240CAC_de(void *query) {
+    QueryE0 *object = query;
     CVector3 sp10;
     CVector3 sp20;
     CVector3 *temp_s1;

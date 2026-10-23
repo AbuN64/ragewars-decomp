@@ -51,55 +51,55 @@ extern void func_80243874_de(ContextB0 *);
 
 extern void func_802852C0_de(char *, u32, u32, void *, void *);
 
-s32 func_80242920_de(void *arg0, void *arg1, void *arg2, s32 *arg3) {
+s32 func_80242920_de(void *arg0, void *arg1, void *arg2, s32 *quad) {
     s32 result;
 
     result = 0;
     if (((struct FloatState68 *) arg0)->unk_60 > 0.0f) {
-        *arg3 = 2;
-        Anim_BuildBoxFace1(arg3, arg2);
-        result = func_8023E8D4_de(arg0, arg3, 1);
+        *quad = 2;
+        Anim_BuildBoxFace1(quad, arg2);
+        result = func_8023E8D4_de(arg0, quad, 1);
     }
     if ((((struct FloatState68 *) arg0)->unk_5C != 0.0f) || (((struct FloatState68 *) arg0)->unk_64 != 0.0f)) {
-        *arg3 = 3;
-        Anim_BuildBoxFace2(arg3, arg2);
-        result |= func_8023E8D4_de(arg0, arg3, 1);
-        Anim_BuildBoxFace3(arg3, arg2);
-        result |= func_8023E8D4_de(arg0, arg3, 1);
-        Anim_BuildBoxFace4(arg3, arg2);
-        result |= func_8023E8D4_de(arg0, arg3, 1);
-        Anim_BuildBoxFace5(arg3, arg2);
-        result |= func_8023E8D4_de(arg0, arg3, 1);
+        *quad = 3;
+        Anim_BuildBoxFace2(quad, arg2);
+        result |= func_8023E8D4_de(arg0, quad, 1);
+        Anim_BuildBoxFace3(quad, arg2);
+        result |= func_8023E8D4_de(arg0, quad, 1);
+        Anim_BuildBoxFace4(quad, arg2);
+        result |= func_8023E8D4_de(arg0, quad, 1);
+        Anim_BuildBoxFace5(quad, arg2);
+        result |= func_8023E8D4_de(arg0, quad, 1);
     }
     if (((struct FloatState68 *) arg0)->unk_60 < 0.0f) {
-        *arg3 = 9;
-        Anim_BuildBoxFace0(arg3, arg2);
-        result |= func_8023E8D4_de(arg0, arg3, 1);
+        *quad = 9;
+        Anim_BuildBoxFace0(quad, arg2);
+        result |= func_8023E8D4_de(arg0, quad, 1);
     }
     return result;
 }
 
 s32 func_80242A94_de(void *arg0, void *arg1, void *arg2, s32 *arg3) {
-    f32 temp_f20;
+    f32 radius;
     s32 var_s0;
-    void *temp_s3;
+    void *point;
 
     var_s0 = 0;
-    temp_s3 = arg1 + 8;
-    temp_f20 = ((struct FloatState20 *) ((struct ObjRecAt18V5 *) arg1)->unk18)->unk_1C + ((struct FloatState68_2 *) arg0)->unk_C;
+    point = arg1 + 8;
+    radius = ((struct FloatState20 *) ((struct ObjRecAt18V5 *) arg1)->unk18)->unk_1C + ((struct FloatState68_2 *) arg0)->unk_C;
     if ((((struct FloatState68_2 *) arg0)->unk_5C != 0.0f) || (((struct FloatState68_2 *) arg0)->unk_64 != 0.0f)) {
         *arg3 = 3;
-        var_s0 = func_8023E178_de(arg0, temp_s3, temp_f20, ((struct ObjRecAt34 *) arg2)->unk4, ((struct ObjRecAt34 *) arg2)->unk34, 1, arg3, 1);
+        var_s0 = func_8023E178_de(arg0, point, radius, ((struct ObjRecAt34 *) arg2)->unk4, ((struct ObjRecAt34 *) arg2)->unk34, 1, arg3, 1);
     }
     if (((struct FloatState68_2 *) arg0)->unk_60 > 0.0f) {
         *arg3 = 2;
         Anim_BuildBoxFace1(arg3, arg2);
-        var_s0 |= func_8023EA44_de(arg0, arg3, temp_s3, temp_f20, 1);
+        var_s0 |= func_8023EA44_de(arg0, arg3, point, radius, 1);
     }
     if (((struct FloatState68_2 *) arg0)->unk_60 < 0.0f) {
         *arg3 = 9;
         Anim_BuildBoxFace0(arg3, arg2);
-        var_s0 |= func_8023EA44_de(arg0, arg3, temp_s3, temp_f20, 1);
+        var_s0 |= func_8023EA44_de(arg0, arg3, point, radius, 1);
     }
     return var_s0;
 }
