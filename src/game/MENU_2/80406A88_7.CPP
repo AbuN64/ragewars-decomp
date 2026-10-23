@@ -15,7 +15,7 @@ s32 func_804235A8_eu(void) {
     s32 temp_v0_2;
     s32 temp_v0_3;
     s32 temp_v0_4;
-    s32 temp_v1;
+    s32 pages;
     s32 var_v0;
     MenuWidget *temp_a0;
     MenuWidget *temp_a0_2;
@@ -98,10 +98,10 @@ block_11:
             break;
         case 4:
             timer = (Shared_OptionsScreen *)D_800E4518;
-            temp_v1 = timer->pages;
-            temp_v0_4 = temp_v1 - 1;
+            pages = timer->pages;
+            temp_v0_4 = pages - 1;
             if (temp_v0_4 >= 0) {
-                var_v0 = temp_v1 - (temp_v1 >= temp_v0_4);
+                var_v0 = pages - (pages >= temp_v0_4);
             } else {
                 var_v0 = 0;
             }

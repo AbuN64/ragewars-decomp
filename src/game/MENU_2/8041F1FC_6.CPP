@@ -146,17 +146,17 @@ s32 func_80420C10_de(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 func_80420CDC_de(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s0;
-    s32 temp_s1;
+    s32 choice;
     s32 var_a1;
-    CharacterSelectionRoot *temp_a0;
+    CharacterSelectionRoot *characterSelectionRoot;
 
     temp_s0 = arg2 & 0xFFFF;
-    temp_s1 = func_8041B810_de(D_800E42D0->unk4, temp_s0);
+    choice = func_8041B810_de(D_800E42D0->unk4, temp_s0);
     func_8029973C_de();
-    temp_a0 = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
-    if (temp_a0->phase == 1) {
-        if (temp_s1 == SPECIAL_CHAR) func_80420618_de(temp_s0,temp_a0->choice);
-        else if (func_8040EBD0_de(func_8041B7FC_de(D_800E42D0->unk4,temp_s0)) == 0) func_80420618_de(temp_s0,temp_s1);
+    characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
+    if (characterSelectionRoot->phase == 1) {
+        if (choice == SPECIAL_CHAR) func_80420618_de(temp_s0,characterSelectionRoot->choice);
+        else if (func_8040EBD0_de(func_8041B7FC_de(D_800E42D0->unk4,temp_s0)) == 0) func_80420618_de(temp_s0,choice);
     }
     return 0;
 }

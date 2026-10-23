@@ -234,16 +234,16 @@ s32 func_8041A724_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-void func_8041A7B4_de(void *arg0, Args args) {
+void func_8041A7B4_de(void *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
     Quad_func_802A1BE0_de transformed;
     s32 changed;
-    UiWidget *window = arg0;
+    UiWidget *window = widget;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, arg0, &args) != 0) {
+    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
         if ((window->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;

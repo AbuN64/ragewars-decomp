@@ -70,22 +70,22 @@ extern void func_80419C84_de(func_80419D04_S1 *arg0, s32 arg1);
 extern void func_80419F18_de(MenuResourceWidget *);
 
 /* Initializes a flicker effect and randomizes each element's intensity. */
-void func_80419C84_de(func_80419D04_S1 *arg0, s32 arg1) {
-    s32 var_s1;
+void func_80419C84_de(func_80419D04_S1 *flicker, s32 arg1) {
+    s32 i;
     s32 var_v1;
     s32 offset;
     int temp;
-    arg0->unk44 = 0;
-    arg0->unk74 = 0;
+    flicker->unk44 = 0;
+    flicker->unk74 = 0;
     if (arg1 > 0) {
-        arg0->unk48 = arg1;
+        flicker->unk48 = arg1;
     } else {
-        arg0->unk48 = (s32) (func_802744D4_de() % 5 + 1);
+        flicker->unk48 = (s32) (func_802744D4_de() % 5 + 1);
     }
-    for (var_s1 = 0; var_s1 < arg0->unk48; var_s1++) {
-        arg0->unk60[var_s1] = (s32) (func_802744D4_de() % 3 + 1);
-        var_v1 = (offset = func_802744D4_de() % 40 + 30, arg0->unk80 - offset) < 0 ? 0 : ((offset = func_802744D4_de() % 40 + 30, arg0->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = func_802744D4_de() % 40 + 30, arg0->unk80 - offset));
-        arg0->unk4C[var_s1] = var_v1;
+    for (i = 0; i < flicker->unk48; i++) {
+        flicker->unk60[i] = (s32) (func_802744D4_de() % 3 + 1);
+        var_v1 = (offset = func_802744D4_de() % 40 + 30, flicker->unk80 - offset) < 0 ? 0 : ((offset = func_802744D4_de() % 40 + 30, flicker->unk80 - offset) >= 0x100 ? 0xFF : (offset = temp = func_802744D4_de() % 40 + 30, flicker->unk80 - offset));
+        flicker->unk4C[i] = var_v1;
     }
 }
 

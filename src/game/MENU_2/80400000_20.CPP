@@ -19,29 +19,29 @@ extern f32 func_802725FC_de(CVector3 *),func_80271AA8_de(CVector3 *);
 static inline CVector3 TrackStart(void) {
     CVector3 sp10;
     CVector3 sp20;
-    StridedTable *temp_v0;
+    StridedTable *table;
     if (D_800E2830->active == 0) {
         sp20.x = 0;
         sp20.y = 0;
         sp20.z = 0;
         return sp20;
     }
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
-    func_80400E50_de(&sp10, temp_v0->data, temp_v0->count, 0);
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
+    func_80400E50_de(&sp10, table->data, table->count, 0);
     return sp10;
 }
 static inline CVector3 TrackEnd(void) {
     CVector3 sp10;
     CVector3 sp20;
-    StridedTable *temp_v0;
+    StridedTable *table;
     if (D_800E2830->active == 0) {
         sp20.y = 0;
         sp20.z = 0;
         sp20.x = D_800DCC78;
         return sp20;
     }
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
-    func_80400E50_de(&sp10, temp_v0->data, temp_v0->count, 0);
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
+    func_80400E50_de(&sp10, table->data, table->count, 0);
     return sp10;
 }
 /* 6/93 aligned edits (4 real + the 2 pre-prologue words the preceding padding blob holds); remaining: target keeps the second lookup's frame base in s0 */
@@ -152,51 +152,51 @@ void func_804037E8_de(int event) {
 CVector3 func_8040385C_de(void) {
     CVector3 sp10;
     CVector3 sp20;
-    StridedTable *temp_v0;
+    StridedTable *table;
     if (D_800E2830->active == 0) {
         sp20.x = 0;
         sp20.y = 0;
         sp20.z = 0;
         return sp20;
     }
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
-    func_80400E50_de(&sp10, temp_v0->data, temp_v0->count, 0);
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
+    func_80400E50_de(&sp10, table->data, table->count, 0);
     return sp10;
 }
 
 CVector3 func_8040390C_de(void) {
     CVector3 sp10;
     CVector3 sp20;
-    StridedTable *temp_v0;
+    StridedTable *table;
     if (D_800E2830->active == 0) {
         sp20.y = 0;
         sp20.z = 0;
         sp20.x = D_800DCC7C_de;
         return sp20;
     }
-    temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
-    func_80400E50_de(&sp10, temp_v0->data, temp_v0->count, 0);
+    table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
+    func_80400E50_de(&sp10, table->data, table->count, 0);
     return sp10;
 }
 
 f32 func_804039C4_de(void) {
     f32 temp_f0;
-    f32 var_f20;
+    f32 result;
     s32 *temp_v0;
-    s32 var_s0;
+    s32 index;
 
-    var_f20 = 0.0f;
-    var_s0 = 0;
+    result = 0.0f;
+    index = 0;
 loop_1:
-    if (var_s0 < *((s32 *)func_8028FDB4_de(D_800E2830->resource, 0))) {
-        temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), var_s0), 0);
+    if (index < *((s32 *)func_8028FDB4_de(D_800E2830->resource, 0))) {
+        temp_v0 = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), index), 0);
         temp_v0 = (s32 *)((char *)temp_v0 + temp_v0[1] * 0x24);
         temp_f0 = *(f32 *)temp_v0;
-        var_s0 += 1;
-        var_f20 += temp_f0;
+        index += 1;
+        result += temp_f0;
         goto loop_1;
     }
-    return var_f20;
+    return result;
 }
 
 s32 func_80403A64_de(void) {

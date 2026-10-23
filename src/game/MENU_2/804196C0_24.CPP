@@ -261,7 +261,7 @@ D_800E34A8
     return 0;
 }
 
-void func_8041BA00_de(Shared_Item *arg0, Args args) {
+void func_8041BA00_de(Shared_Item *widget, Args args) {
     Quad_func_802A1BE0_de first;
     Quad_func_802A1BE0_de basis;
     Quad_func_802A1BE0_de value;
@@ -269,8 +269,8 @@ void func_8041BA00_de(Shared_Item *arg0, Args args) {
     s32 changed;
 
     changed = 0;
-    if (Frontend_ComputeWidgetBounds(&first, &basis, arg0, &args) != 0) {
-        if ((arg0->flags & 0x200) != 0) {
+    if (Frontend_ComputeWidgetBounds(&first, &basis, widget, &args) != 0) {
+        if ((widget->flags & 0x200) != 0) {
             func_802A1898_de(&value.x, &value.z, &value.y, &value.w);
             transformed = value;
             func_8040F488_de(&transformed, &basis);
@@ -278,7 +278,7 @@ void func_8041BA00_de(Shared_Item *arg0, Args args) {
                           transformed.y, transformed.w);
             changed = 1;
         }
-        func_8040E7FC_de(arg0->label, args);
+        func_8040E7FC_de(widget->label, args);
         if (changed != 0) {
             func_802A1870_de(value.x, value.z, value.y, value.w);
         }

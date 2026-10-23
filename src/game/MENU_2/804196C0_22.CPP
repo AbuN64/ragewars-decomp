@@ -36,12 +36,12 @@ extern void func_8041A910_de(struct func_8022FD9C_Record *menu);
 
 /* Calls func_802547E4_de with the arguments it was given and returns zero. */
 
-s32 func_8041A9B0_de(struct CommandListMenu *arg0) {
+s32 func_8041A9B0_de(struct CommandListMenu *commandListMenu) {
     struct LinkedCommandEntry *p;
 
-    arg0->state = 2;
+    commandListMenu->state = 2;
     func_8025DF34_de(0xE74);
-    p = arg0->entries;
+    p = commandListMenu->entries;
     if (p != 0) {
         do {
             if (p->kind != 8) {

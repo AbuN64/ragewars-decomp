@@ -48,7 +48,7 @@ s32 func_802BD400_de(u8 *);
 extern u8 D_800E5CAC[0x64];
 
 /* Draws the D_800E5CA0 spinner: during the first part of its blink period it fills a two-pixel white bar below the item under the digit its value selects, placed from the item's x by the character width func_80442DDC_de reports scaled to the screen, with the style's alpha, through func_802AA9F4_de and func_802A7DE4_de; then draws the item through func_8044208C_de. */
-void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *arg2, MenuStyle *style) {
+void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *third, MenuStyle *style) {
     f32 width;
     f32 alpha;
     s32 x;
@@ -63,7 +63,7 @@ void func_8043C9AC_de(void *menu, ItemRecAt20V1 *item, void *arg2, MenuStyle *st
         func_802A7DE4_de(x, item->y, (f32)x + width, item->y + 2, 0, 0, 0xFF, 0xFF, 0xFF,
                       (u8)(bits = !((2147483648.0f) <= alpha) ? (s32)alpha : (bits = (s32)(alpha - (2147483648.0f))) | 0x80000000));
     }
-    func_8044208C_de(menu, item, arg2, style);
+    func_8044208C_de(menu, item, third, style);
 }
 
 s32 func_8043CB30_de(void *unused, MenuRecAt20V4 *menu) {

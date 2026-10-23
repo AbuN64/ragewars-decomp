@@ -25,18 +25,18 @@
 
 /* The pool and style helpers take a word, while this unit and the window lookups carry the menu
  * tree as a pointer; the cast carries that pointer through unchanged. */
-s32 func_8041CEB0_us_rev1(void *arg0) {
+s32 func_8041CEB0_us_rev1(void *owner) {
     func_8041F2A0_Item *item;
     s32 shift;
     s32 adjust;
 
     D_800E3590 = (func_8041F2A0_MenuBlock *) func_8025305C_de(528);
-    D_800E3590->root = arg0;
-    D_800E3590->list = func_8041B610_de((s32) arg0, 4);
-    func_8041B6E8_de((s32) arg0, 0, 513);
-    func_8041B6E8_de((s32) arg0, 1, 513);
-    func_8041B6E8_de((s32) arg0, 2, 513);
-    func_8041B6E8_de((s32) arg0, 3, 513);
+    D_800E3590->root = owner;
+    D_800E3590->list = func_8041B610_de((s32) owner, 4);
+    func_8041B6E8_de((s32) owner, 0, 513);
+    func_8041B6E8_de((s32) owner, 1, 513);
+    func_8041B6E8_de((s32) owner, 2, 513);
+    func_8041B6E8_de((s32) owner, 3, 513);
     /* func_8041B610_de is published to this unit as handing back a word while func_8041B968_de is
      * published as taking the pool object that word names; the cast puts that object view back on
      * the pool stored at +0x004 and carries it through unchanged. */
@@ -44,7 +44,7 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
 
     D_800E3590->unk216 = 1;
     D_800E3590->unk220 = 4;
-    D_800E3590->item492 = func_8040EC30_de(arg0, 492);
+    D_800E3590->item492 = func_8040EC30_de(owner, 492);
     D_800E3590->item492->x = D_800E3590->item492->x - D_800E3590->item492->w;
     shift = D_800E3590->item492->w;
     if (shift < 0) {
@@ -54,7 +54,7 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
     adjust = D_800E3590->item492->w - ((shift >> 2) << 2);
     D_800E3590->item492->x = D_800E3590->item492->x + adjust;
 
-    D_800E3590->item491 = func_8040EC30_de(arg0, 491);
+    D_800E3590->item491 = func_8040EC30_de(owner, 491);
     D_800E3590->item491->x = D_800E3590->item491->x + D_800E3590->item491->w;
     shift = D_800E3590->item491->w;
     if (shift < 0) {
@@ -64,33 +64,33 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
     adjust = D_800E3590->item491->w - ((shift >> 2) << 2);
     D_800E3590->item491->x = D_800E3590->item491->x - adjust;
 
-    func_8040EC30_de(arg0, 488)->alpha = 110;
+    func_8040EC30_de(owner, 488)->alpha = 110;
     D_800E3590->lookup486 = func_80419E54_de(486, 255);
 
-    item = func_8040EC30_de(arg0, 486);
+    item = func_8040EC30_de(owner, 486);
     D_800E3590->item486 = item;
     func_8040E8D8_de(item, 0);
 
-    item = func_8040EC30_de(arg0, 563);
+    item = func_8040EC30_de(owner, 563);
     D_800E3590->item563 = item;
     func_8040E8D8_de(item, 0);
 
-    func_8040EC30_de(arg0, 496)->alpha = 110;
-    func_8040EC30_de(arg0, 497)->alpha = 120;
+    func_8040EC30_de(owner, 496)->alpha = 110;
+    func_8040EC30_de(owner, 497)->alpha = 120;
 
-    item = func_8040EC30_de(arg0, 512);
+    item = func_8040EC30_de(owner, 512);
     D_800E3590->item512 = item;
     func_8040E8D8_de(item, 0);
 
     D_800E3590->style = 0;
     D_800E3590->unk248 = 27;
-    item = func_8040EC30_de(arg0, 511);
+    item = func_8040EC30_de(owner, 511);
     D_800E3590->item511 = item;
     func_8040E8D8_de(item, 0);
 
     D_800E3590->item511->alpha = 0;
     D_800E3590->unk260 = 25;
-    item = func_8040EC30_de(arg0, 510);
+    item = func_8040EC30_de(owner, 510);
     D_800E3590->item510 = item;
 
     D_800E3590->player = 0;
@@ -98,7 +98,7 @@ s32 func_8041CEB0_us_rev1(void *arg0) {
     func_8041DB30_de(&D_800E3590->unk268);
     func_8041D6A8_de();
     Frontend_ShowUnlockedEntries(D_800E3590->style);
-    func_8040EC30_de(arg0, 493)->alpha = 110;
+    func_8040EC30_de(owner, 493)->alpha = 110;
     D_800E3590->focus = 0;
     return 0;
 }

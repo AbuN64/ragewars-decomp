@@ -88,8 +88,8 @@ extern void func_8041A6EC_de(s32, s32);
 extern SelectionScreenState *D_800E4514;
 
 s32 func_80422C58_eu(void) {
-    MenuWidget *temp_v0_2;
-    void *temp_v0_3;
+    MenuWidget *widget;
+    void *scroll;
     void *temp_v0;
 
     D_800E4514 = func_8025305C_de(0x10);
@@ -101,17 +101,17 @@ s32 func_80422C58_eu(void) {
     func_8041AD34_de(D_800E4514->unk4);
     func_8041AD34_de(D_800E4514->unk4);
     func_8041AD10_de(D_800E4514->unk4, (s32) D_801462C8.firstListMode);
-    temp_v0_2 = func_8041ABC0_de(0x1BE, 0x1BF);
-    D_800E4514->players[0].highlight = temp_v0_2;
-    func_8041AD34_de(temp_v0_2);
+    widget = func_8041ABC0_de(0x1BE, 0x1BF);
+    D_800E4514->players[0].highlight = widget;
+    func_8041AD34_de(widget);
     if (func_80265350_de() != 0x400000) {
         func_8041AD34_de(D_800E4514->players[0].highlight);
         func_8041AD34_de(D_800E4514->players[0].highlight);
     }
     func_8041AD10_de(D_800E4514->players[0].highlight, (s32) D_801462C8.slots[7].secondListMode);
-    temp_v0_3 = func_8041A580_de(0x1C0, 0x1C1, 0x80);
-    D_800E4514->screen = temp_v0_3;
-    func_8041A6EC_de(temp_v0_3, D_801462C8.buttons);
+    scroll = func_8041A580_de(0x1C0, 0x1C1, 0x80);
+    D_800E4514->screen = scroll;
+    func_8041A6EC_de(scroll, D_801462C8.buttons);
     func_8041B110_de(0x1C3);
     func_8041B110_de(0x1C4);
     D_800E4514->players[0].unk4 = 0;
