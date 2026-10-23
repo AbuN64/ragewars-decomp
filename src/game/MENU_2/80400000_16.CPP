@@ -43,35 +43,35 @@ f32 func_8040184C_de(f32 t) {
 #define CM_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 #include "COMMON/WORLD.H"
 typedef struct CamVec { f32 x; f32 y; f32 z; } CamVec;
-typedef struct CamCopy50 { u8 bytes[0x50]; } CamCopy50;
+typedef struct CamCopy50 { s32 words[20]; } CamCopy50;
 extern u8 *D_80145060;
 extern f32 D_800DCB40[];
 extern u8 D_80100030[];
-extern s32 func_80245798_de();
-extern void func_802453D4_de();
-extern void func_80401214_de();
-extern void func_804013BC_de();
-extern void func_80271F9C_de();
-extern void func_80271F68_de();
-extern void func_80271F34_de();
-extern void func_802727D8_de();
-extern void func_80272E3C_de();
-extern void func_80272898_de();
-extern void func_80288470_de();
-extern s32 func_80243A90_de();
-extern s32 func_8028D888_de();
-extern f32 func_80271AA8_de();
-extern f32 func_802725FC_de();
+extern s32 func_80245798_de(void);
+extern void func_802453D4_de(void);
+extern void func_80401214_de(CamVec *, f32);
+extern void func_804013BC_de(CamVec *, f32);
+extern void func_80271F9C_de(CamVec *, CamVec *, f32);
+extern void func_80271F68_de(CamVec *, CamVec *, CamVec *);
+extern void func_80271F34_de(CamVec *, CamVec *, void *);
+extern void func_802727D8_de(void *);
+extern void func_80272E3C_de(void *, f32, f32, f32);
+extern void func_80272898_de(void *, CamVec *, CamVec *);
+extern void func_80288470_de(void *);
+extern s32 func_80243A90_de(void *, f32, f32, f32, void *);
+extern s32 func_8028D888_de(void *);
+extern f32 func_80271AA8_de(CamVec *);
+extern f32 func_802725FC_de(CamVec *);
 void func_80401980_de(u8 *out) {
     CamVec eye;
     CamVec target;
     CamVec delta;
-    CamVec rotated;
-    CamVec scratch;
-    u8 matrix[0x40];
     CamCopy50 saved;
+    u8 matrix[0x40];
+    CamVec rotated;
     u8 *camera = ((u8 *)D_800E2830);
     u8 *object;
+    s32 hit;
     f32 yaw;
     f32 pitch;
     if (CM_FIELD(camera, s32, 0x38) == 0) {
@@ -89,8 +89,8 @@ void func_80401980_de(u8 *out) {
     }
     func_80401214_de(&eye, CM_FIELD(((u8 *)D_800E2830), f32, 0x1C));
     func_804013BC_de(&target, CM_FIELD(((u8 *)D_800E2830), f32, 0x1C));
-    func_80271F9C_de(&eye, &eye, D_800DCB40[0]);
-    func_80271F9C_de(&target, &target, D_800DCB40[0]);
+    func_80271F9C_de(&eye, &eye, 10.24f);
+    func_80271F9C_de(&target, &target, 10.24f);
     CM_FIELD(out, s32, 0x28) = 0;
     func_80271F68_de(&delta, &target, &eye);
     camera = ((u8 *)D_800E2830);
@@ -99,7 +99,7 @@ void func_80401980_de(u8 *out) {
         object = D_80145060;
         if ((CM_FIELD(camera, u32, 0x74) & 1) && CM_FIELD(camera, u8 *, 0x18) != 0) {
             CM_FIELD(camera, CamVec, 0xF0) = CM_FIELD(CM_FIELD(camera, u8 *, 0x18), CamVec, 8);
-            CM_FIELD(camera, f32, 0xFC) = CM_FIELD(CM_FIELD(camera, u8 *, 0x18), f32, 0x6C) + D_800DCB40[1];
+            CM_FIELD(camera, f32, 0xFC) = CM_FIELD(CM_FIELD(camera, u8 *, 0x18), f32, 0x6C) + 1.5707964f;
         }
         if (CM_FIELD(((u8 *)D_800E2830), u32, 0x74) & 2) {
             camera = ((u8 *)D_800E2830);
@@ -127,11 +127,10 @@ void func_80401980_de(u8 *out) {
             CM_FIELD(object, CamVec, 8) = target;
             func_80288470_de(&D_8011FE88);
             func_80243A90_de(object, eye.x, eye.y, eye.z, D_80100030);
-            if (func_8028D888_de(&D_8011FE88) != 0) {
-                *(CamCopy50 *)object = saved;
+            hit = func_8028D888_de(&D_8011FE88);
+            *(CamCopy50 *)object = saved;
+            if (hit != 0) {
                 eye = *(CamVec *)&D_801001F8;
-            } else {
-                *(CamCopy50 *)object = saved;
             }
         }
     }
