@@ -27,5 +27,7 @@ int func_8024E968_de(void *record) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8024E964);
+unsigned int rodata_unresolved_8024E964[3] = {
+    0x46540200, 0x00009410, 0x000B0000,
+};
 #endif

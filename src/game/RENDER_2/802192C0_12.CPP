@@ -9,13 +9,19 @@ const float D_800C22A0_us = 512.0f;
 const float D_800C22A4_us = 5.119999886f;
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_func_8021BFC4_de_800C2658);
+const unsigned int rodata_func_8021BFC4_de_800C2658[3] = {
+    0x3D888889, 0x3F800000, 0x424CCCCC,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_8021BFC4_de_800C2618);
+const unsigned int rodata_func_8021BFC4_de_800C2618[3] = {
+    0x3D888889, 0x3F800000, 0x424CCCCC,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_func_8021BFC4_de_800C2378);
+const unsigned int rodata_func_8021BFC4_de_800C2378[3] = {
+    0x3D888889, 0x3F800000, 0x424CCCCC,
+};
 #endif

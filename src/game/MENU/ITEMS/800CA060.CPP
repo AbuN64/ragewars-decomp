@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CAC60);
+const char D_8044B7C0_CAC60[19] =
+    "texture sets index\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4EB3);
+unsigned char rodata_unresolved_800C4EB3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5273);
+unsigned char rodata_unresolved_800C5273[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5233);
+unsigned char rodata_unresolved_800C5233[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F83);
+unsigned char rodata_unresolved_800C4F83[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_8044B7C0_CAC60_us_rev1[19] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA073);
+unsigned char rodata_unresolved_800CA073[1] = {
+    0x00,
+};
 #endif

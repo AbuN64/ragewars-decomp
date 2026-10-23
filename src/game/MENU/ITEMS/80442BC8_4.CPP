@@ -21,17 +21,25 @@ void func_80443128_de(Object_func_80443128_de *object, void *context, void *look
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD3AC);
+unsigned int rodata_unresolved_800DD3AC[1] = {
+    0x71755200,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9F3C);
+unsigned int rodata_unresolved_800E9F3C[1] = {
+    0x0041D280,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EED7C);
+unsigned int rodata_unresolved_800EED7C[1] = {
+    0x4BBE0F47,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE6FC);
+unsigned int rodata_unresolved_800DE6FC[1] = {
+    0x00443518,
+};
 #endif

@@ -40,5 +40,6 @@ void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B3468);
+char rodata_unresolved_802B3468[8] =
+    "e_t\022CROM";
 #endif

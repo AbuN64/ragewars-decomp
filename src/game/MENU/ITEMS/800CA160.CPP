@@ -1,19 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CAD60);
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X)
+const char D_8044B7C0_CAD60[37] =
+    "CScene__Construct: BLLevelData Index\000";
+#endif
+#if defined(VERSION_US)
+const char D_8044B7C0_CAD60[40] =
+    "CScene__Construct: BLLevelData Index\000\000\000\000";
+#endif
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5385);
+unsigned char rodata_unresolved_800C5385[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5345);
+unsigned char rodata_unresolved_800C5345[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5095);
+unsigned char rodata_unresolved_800C5095[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -25,5 +38,7 @@ const unsigned char D_auto_src_rw_text_8044B7C0_CAD60_us_rev1[37] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA185);
+unsigned char rodata_unresolved_800CA185[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

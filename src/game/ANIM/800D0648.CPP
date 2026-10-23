@@ -6,17 +6,25 @@ const unsigned int D_blob_phase2_261792c552ab891181a5[1] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CB31C);
+unsigned int rodata_unresolved_800CB31C[1] = {
+    0x0000000F,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CC9BC);
+unsigned int rodata_unresolved_800CC9BC[1] = {
+    0x3FC78F78,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CBFEC);
+unsigned int rodata_unresolved_800CBFEC[1] = {
+    0x44415649,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CB40C);
+unsigned int rodata_unresolved_800CB40C[1] = {
+    0x00000000,
+};
 #endif

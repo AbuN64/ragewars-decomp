@@ -85,17 +85,25 @@ s32 func_8042F91C_de(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DC85C);
+unsigned int rodata_unresolved_800DC85C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E93EC);
+unsigned int rodata_unresolved_800E93EC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE22C);
+unsigned int rodata_unresolved_800EE22C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDBAC);
+unsigned int rodata_unresolved_800DDBAC[1] = {
+    0x00000000,
+};
 #endif

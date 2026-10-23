@@ -4,9 +4,13 @@
 #include "libgcc2.inc.c"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802C1254);
+unsigned int rodata_unresolved_802C1254[3] = {
+    0x00660000, 0x00040000, 0x00000009,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", rodata_unresolved_802C1604);
+unsigned int rodata_unresolved_802C1604[3] = {
+    0x40400000, 0x40400000, 0x41B80000,
+};
 #endif

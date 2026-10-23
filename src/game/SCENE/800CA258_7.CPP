@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C5464);
+const char rodata_unresolved_800C5464[12] =
+    "level info\000\000";
 #endif

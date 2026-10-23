@@ -7,9 +7,11 @@ unsigned int D_auto_src_ragewars_movement_tuning_CF450_us_rev1[8] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CE75C_unclaimed_CF470);
+unsigned int rodata_unresolved_800CE75C_unclaimed_CF470[1] = {
+    0x00000001,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_78c34e96);
+/* bytes live in the preceding array */
 #endif

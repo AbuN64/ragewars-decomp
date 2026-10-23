@@ -20,5 +20,6 @@ s32 func_802B0340_de(s32 a, s32 b, void *c, s32 d, s32 e) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B02B8);
+char rodata_unresolved_802B02B8[8] =
+    "OMPartic";
 #endif

@@ -44,17 +44,24 @@ __floatdisf (DItype u)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8058);
+char rodata_unresolved_800C8058[12] =
+    "\024SFX_RAI\000\000\000\000";
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C96F8);
+unsigned int rodata_unresolved_800C96F8[3] = {
+    0x43020000, 0x3E800000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8D28);
+unsigned int rodata_unresolved_800C8D28[3] = {
+    0x3DCCCCCD, 0x44000000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8138);
+unsigned int rodata_unresolved_800C8138[3] = {
+    0x00000000, 0x00006000, 0x00000000,
+};
 #endif

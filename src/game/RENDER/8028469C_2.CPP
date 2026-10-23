@@ -202,5 +202,7 @@ void func_802850C8_de(EffectSystem *arg0, LevelActor *arg1, f32 *arg2) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_8028515C_de_padding_85D5C);
+unsigned int func_8028515C_de_padding_85D5C[1] = {
+    0x0C0A145C,
+};
 #endif

@@ -8,5 +8,6 @@ unsigned int func_802BA190_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA0D4);
+char rodata_unresolved_802BA0D4[12] =
+    "\000\014m_SwimOffs";
 #endif

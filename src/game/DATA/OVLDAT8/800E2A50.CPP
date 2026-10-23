@@ -2,11 +2,14 @@
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: rodata/unresolved/800E28F0_unclaimed_E34F8_unclaimed_E3510_unclaimed_E352C_unclaimed_E3548_unclaimed_E359C_unclaimed_E35B8_unclaimed_E35D4_unclaimed_E364C_unclaimed_E3650 */
-unsigned short D_blob_ff836bdcbb913926843d[3] = {
+unsigned short D_blob_ff836bdcbb913926843d[] = {
     0x0000, 0x0001, 0x0000,
+#if defined(VERSION_US_REV1)
+    0x0002,
+#endif
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_6b2060eb);
+/* bytes live in the preceding array */
 #endif

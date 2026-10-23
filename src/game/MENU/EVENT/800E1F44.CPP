@@ -8,5 +8,7 @@ const unsigned char D_blob_83fae0a1897e2dffd396[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E1F47);
+unsigned char rodata_unresolved_800E1F47[1] = {
+    0x00,
+};
 #endif

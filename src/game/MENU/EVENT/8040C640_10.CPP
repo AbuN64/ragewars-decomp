@@ -23,5 +23,7 @@ s32 func_80436640_us(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_804364E4_de_padding_19A6C4);
+unsigned int func_804364E4_de_padding_19A6C4[3] = {
+    0x64655400, 0x000A0000, 0x00080032,
+};
 #endif

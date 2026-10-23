@@ -48,17 +48,25 @@ void func_802AFE80_de(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802AFDDC);
+unsigned int rodata_unresolved_802AFDDC[1] = {
+    0x5F745400,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C89FC);
+unsigned int rodata_unresolved_800C89FC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C802C);
+unsigned int rodata_unresolved_800C802C[1] = {
+    0x43999999,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C743C);
+unsigned int rodata_unresolved_800C743C[1] = {
+    0x71706C61,
+};
 #endif

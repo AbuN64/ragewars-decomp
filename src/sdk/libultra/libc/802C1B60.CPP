@@ -27,5 +27,7 @@ double func_802C6970_us_rev1(s64 value) {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", rodata_unresolved_802C1B58_0C27E8);
+unsigned int rodata_unresolved_802C1B58_0C27E8[2] = {
+    0x41800000, 0x3C8EFA36,
+};
 #endif

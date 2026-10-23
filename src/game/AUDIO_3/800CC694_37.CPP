@@ -5,5 +5,7 @@
 const char D_blob_77a11cb8b47384a12741[16] = "io/epirawread.c";
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7884);
+unsigned int rodata_unresolved_800C7884[3] = {
+    0x66000000, 0x04000000, 0x0000082E,
+};
 #endif

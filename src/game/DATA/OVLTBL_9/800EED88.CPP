@@ -16,21 +16,30 @@ const unsigned int D_d2_dbb2b4d9ceef[7] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9F64);
+unsigned int rodata_unresolved_800E9F64[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800EED85);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800EED88);
+const unsigned int rodata_unresolved_800EED88[15] = {
+    0x004444A4, 0x004444CC, 0x004444F4, 0x0044451C, 0x00444544, 0x0044456C, 0x00444594, 0x00000000,
+    0x004445E8, 0x00444608, 0x00444628, 0x00444648, 0x00444668, 0x00444688, 0x004446A8,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_80443734_de_800EEDC4);
+const unsigned int rodata_func_80443734_de_800EEDC4[1] = {
+    0x3F000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EEDC8);
+unsigned int rodata_unresolved_800EEDC8[2] = {
+    0x4BFF05AA, 0x4B0A6F45,
+};
 #endif

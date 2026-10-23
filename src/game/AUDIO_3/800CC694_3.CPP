@@ -3,21 +3,31 @@
 const char D_auto_rodata_shared_800CC694[18] = "audio/seqplayer.c";
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7376);
+unsigned short rodata_unresolved_800C7376[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8A16);
+unsigned short rodata_unresolved_800C8A16[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8046);
+unsigned short rodata_unresolved_800C8046[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7456);
+unsigned short rodata_unresolved_800C7456[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CC6A6);
+unsigned short rodata_unresolved_800CC6A6[1] = {
+    0x0000,
+};
 #endif

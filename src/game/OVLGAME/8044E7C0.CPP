@@ -42,5 +42,7 @@ void Ovlgame_InitEffectPool(WorldRecAt3C08 *world) {
 
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8044F05C);
+unsigned int rodata_unresolved_8044F05C[1] = {
+    0x0044309C,
+};
 #endif

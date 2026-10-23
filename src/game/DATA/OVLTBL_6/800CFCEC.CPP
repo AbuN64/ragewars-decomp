@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CF5C0_unclaimed_D08EA);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -12,5 +12,7 @@ unsigned int D_blob_788d0a494c86726b95d9[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_2c85611a);
+unsigned int D_src_2c85611a[1] = {
+    0x0000FFFF,
+};
 #endif

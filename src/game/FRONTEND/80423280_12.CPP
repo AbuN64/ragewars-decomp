@@ -501,17 +501,27 @@ s32 func_8042D690_de(s32 context) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DC7DC);
+unsigned int rodata_unresolved_800DC7DC[1] = {
+    0x10000B00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E936C);
+unsigned int rodata_unresolved_800E936C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE1AC);
+unsigned int rodata_unresolved_800EE1AC[1] = {
+    0x00CC00CD,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDB2C);
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800DDB2C[1] = {
+    (unsigned int)&D_800CBB1C + 0x4,
+};
+#endif
 #endif

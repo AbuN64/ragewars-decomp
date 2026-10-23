@@ -2,19 +2,27 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80298FE8_CB410);
+const unsigned int D_80298FE8_CB410[2] = {
+    0x408F4000, 0x00000000,
+};
 #endif
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80299B60_CB418);
+const unsigned int D_80299B60_CB418[1] = {
+    0xBF800000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C596C);
+unsigned int rodata_unresolved_800C596C[1] = {
+    0x20455854,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C568C);
+unsigned int rodata_unresolved_800C568C[1] = {
+    0x0029A164,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

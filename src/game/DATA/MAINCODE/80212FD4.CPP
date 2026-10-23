@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80212FBC_de_padding_13BD4);
+char func_80212FBC_de_padding_13BD4[12] =
+    "\000\000\000\000\000\027SFX_CE";
 #endif
 
 #if defined(VERSION_US_REV1)

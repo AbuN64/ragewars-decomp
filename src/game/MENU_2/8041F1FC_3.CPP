@@ -410,17 +410,25 @@ s32 func_80420AD4_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DC23C);
+unsigned int rodata_unresolved_800DC23C[1] = {
+    0x595F3165,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E8DCC);
+unsigned int rodata_unresolved_800E8DCC[1] = {
+    0x0044333C,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EDC0C);
+unsigned int rodata_unresolved_800EDC0C[1] = {
+    0x01770178,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD58C);
+unsigned int rodata_unresolved_800DD58C[1] = {
+    0x0042148C,
+};
 #endif

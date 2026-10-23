@@ -14,5 +14,7 @@ void func_802A124C_de(int first, int second) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802A11A4);
+unsigned int rodata_unresolved_802A11A4[3] = {
+    0x43000000, 0x10000B00, 0x00000000,
+};
 #endif

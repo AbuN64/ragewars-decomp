@@ -11,5 +11,7 @@ f64 func_804143B0_de(void) {
 }
 #endif
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8041447C);
+unsigned int rodata_unresolved_8041447C[1] = {
+    0x5F47524F,
+};
 #endif

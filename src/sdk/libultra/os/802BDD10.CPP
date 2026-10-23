@@ -61,5 +61,6 @@ u8 func_802B8C88_de(u8 *data)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B8C18);
+char rodata_unresolved_802B8C18[8] =
+    "MODER\000\000\024";
 #endif

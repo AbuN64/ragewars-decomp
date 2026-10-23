@@ -64,5 +64,7 @@ void func_802A2480_de(Widget *widget, Widget *parent) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802A24FC);
+unsigned int rodata_unresolved_802A24FC[1] = {
+    0x41445F52,
+};
 #endif

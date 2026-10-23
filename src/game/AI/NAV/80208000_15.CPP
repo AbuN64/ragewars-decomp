@@ -78,5 +78,7 @@ int func_8020DB14_de(Obj_func_8020DB14_de *obj) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", rodata_unresolved_8020DC04);
+unsigned int rodata_unresolved_8020DC04[3] = {
+    0x12F214AC, 0x4A120003, 0x9629070C,
+};
 #endif

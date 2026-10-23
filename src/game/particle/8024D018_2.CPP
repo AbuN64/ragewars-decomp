@@ -36,5 +36,7 @@ f32 func_8024D398_de(Actor_u1 *actor)
 }
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C3C7C);
+const unsigned int rodata_unresolved_800C3C7C[2] = {
+    0x42F5C28F, 0x3FB5C28F,
+};
 #endif

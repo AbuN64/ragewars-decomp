@@ -51,17 +51,25 @@ done:
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DBCE4);
+unsigned int rodata_unresolved_800DBCE4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E8874);
+unsigned int rodata_unresolved_800E8874[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800ED6B4);
+unsigned int rodata_unresolved_800ED6B4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD034);
+unsigned int rodata_unresolved_800DD034[1] = {
+    0x00000000,
+};
 #endif

@@ -6,17 +6,26 @@ unsigned int D_blob_9d5d011354eb91de81f2[1] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800D3044);
+char data_unresolved_800D3044[28] =
+    "REBORN_PLANT\000\000\000\000LAGequR\000\000\365\024\000";
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800DFBD4);
+#if defined(VERSION_EU_X)
+unsigned short data_unresolved_800DFBD4[14] = {
+    0x8000, 0x0000, 0x0004, 0x0008, 0x000C, 0x0012, 0x0000, 0x0000, 0x002C, 0x0035, 0x003F, 0x004B,
+    0x0059, 0x0069,
+};
+#endif
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800E4A14);
+char data_unresolved_800E4A14[28] =
+    "mantids\000warp\000\000\000\000rimagen's li";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800D4394);
+unsigned int data_unresolved_800D4394[7] = {
+    0x3F7FFFEF, 0xBF7FFFEF, 0x3F800000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+};
 #endif

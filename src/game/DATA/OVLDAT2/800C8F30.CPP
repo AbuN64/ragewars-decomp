@@ -5,21 +5,31 @@ const unsigned char D_d0_0ba355c47669e01e[13] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3D7D);
+unsigned char rodata_unresolved_800C3D7D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C413D);
+unsigned char rodata_unresolved_800C413D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C40FD);
+unsigned char rodata_unresolved_800C40FD[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3E4D);
+unsigned char rodata_unresolved_800C3E4D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8F3D);
+unsigned char rodata_unresolved_800C8F3D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

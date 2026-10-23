@@ -43,7 +43,9 @@ s32 func_80445964_de(void *unused, MenuRecAt20V1 *menu) {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_RODATA("data_800C", rodata_func_80445964_de_800E2810);
+const unsigned int rodata_func_80445964_de_800E2810[1] = {
+    0x41700000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

@@ -380,5 +380,6 @@ s32 func_80296C30_de(f32 *arg0, f32 *arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80296C08);
+char rodata_unresolved_80296C08[8] =
+    "\000\000\000\003s16R";
 #endif

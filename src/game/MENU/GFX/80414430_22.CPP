@@ -98,5 +98,6 @@ void func_80419278_de(s32 left, s32 top, s32 right, s32 bottom, f32 u0, f32 v0, 
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_804194A8);
+char rodata_unresolved_804194A8[8] =
+    "_SLOW5_T";
 #endif

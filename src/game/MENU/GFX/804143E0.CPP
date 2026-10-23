@@ -42,5 +42,6 @@ func_8029D7E8_auto
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_80414428);
+char rodata_unresolved_80414428[8] =
+    "OUNDequ\202";
 #endif

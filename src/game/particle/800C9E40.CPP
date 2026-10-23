@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8027EB2C_CAA40);
+const char D_8027EB2C_CAA40[23] =
+    "simp part models index\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4C97);
+unsigned char rodata_unresolved_800C4C97[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5057);
+unsigned char rodata_unresolved_800C5057[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5017);
+unsigned char rodata_unresolved_800C5017[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4D67);
+unsigned char rodata_unresolved_800C4D67[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_8027EB2C_CAA40_us_rev1[23] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C9E57);
+unsigned char rodata_unresolved_800C9E57[1] = {
+    0x00,
+};
 #endif

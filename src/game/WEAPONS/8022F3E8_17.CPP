@@ -12,5 +12,7 @@ u32 data_writable_800FD1B0[30] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FD228);
+unsigned int rodata_unresolved_800FD228[2] = {
+    0x60620402, 0xB3010A62,
+};
 #endif

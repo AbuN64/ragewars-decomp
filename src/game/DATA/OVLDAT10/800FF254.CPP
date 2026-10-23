@@ -156,9 +156,18 @@ unsigned int D_auto_rodata_unresolved_800FF254[575] = {
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800FFB50);
+#if defined(VERSION_DE)
+unsigned int rodata_writable_800FFB50[1] = {
+    0x3E300DCC,
+};
+#endif
+#if defined(VERSION_US)
+unsigned int rodata_writable_800FFB50[1] = {
+    0x03000004,
+};
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FDB51);
+/* bytes live in the preceding array */
 #endif

@@ -78,5 +78,7 @@ float func_802B7130_de(float x)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B71DC);
+unsigned int rodata_unresolved_802B71DC[1] = {
+    0x5F426F73,
+};
 #endif

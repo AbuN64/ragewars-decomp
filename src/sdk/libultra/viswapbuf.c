@@ -17,5 +17,6 @@ void osViSwapBuffer(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA834);
+char rodata_unresolved_802BA834[12] =
+    "_CharAnimR\000\000";
 #endif

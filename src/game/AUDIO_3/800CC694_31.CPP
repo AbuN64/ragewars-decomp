@@ -2,19 +2,27 @@
 #include "COMMON/EXTERNS_2.H"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B6900_CD6C8);
+const unsigned int D_802B6900_CD6C8[7] = {
+    0xBF800000, 0x3F800000, 0x3F800000, 0x47800000, 0x3F800000, 0x47800000, 0x37800000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8E54);
+unsigned int rodata_unresolved_800C8E54[3] = {
+    0x00000000, 0x00000000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8484);
+unsigned int rodata_unresolved_800C8484[3] = {
+    0x00000000, 0x41F00000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7894);
+unsigned int rodata_unresolved_800C7894[3] = {
+    0x3F000000, 0xBF800000, 0x40000000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

@@ -2,5 +2,6 @@
 
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BD078);
+char rodata_unresolved_802BD078[8] =
+    "ModelR\000\000";
 #endif

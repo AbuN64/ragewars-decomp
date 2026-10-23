@@ -256,13 +256,19 @@ Acmd *func_802B57F0_de(struct ALFx *filter, s16 *outp, s32 outCount, s32 sampleO
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7694);
+unsigned int rodata_unresolved_800C7694[3] = {
+    0x540000A0, 0x6E020066, 0x000000A0,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8D34);
+unsigned int rodata_unresolved_800C8D34[3] = {
+    0x00000000, 0x00000000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8364);
+unsigned int rodata_unresolved_800C8364[3] = {
+    0x00000000, 0x41F00000, 0x00000000,
+};
 #endif

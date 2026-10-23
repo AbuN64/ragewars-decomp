@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80429178_us_rev1_padding_197178);
+char func_80429178_us_rev1_padding_197178[8] =
+    "R_EVADE_";
 #endif
 
 #if defined(VERSION_US_REV1)

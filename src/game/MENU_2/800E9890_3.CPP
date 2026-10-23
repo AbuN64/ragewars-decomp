@@ -8,5 +8,7 @@ const unsigned int D_auto_rodata_func_8043D55C_eu_x_800E99C8[11] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E99F4);
+unsigned int rodata_unresolved_800E99F4[1] = {
+    0x00000000,
+};
 #endif

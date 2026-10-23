@@ -385,13 +385,19 @@ void func_80426090_de(Arg *arg0) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E91BC);
+unsigned int rodata_unresolved_800E91BC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EDFFC);
+unsigned int rodata_unresolved_800EDFFC[1] = {
+    0x00600061,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD97C);
+unsigned int rodata_unresolved_800DD97C[1] = {
+    0x00426AB0,
+};
 #endif

@@ -14,17 +14,25 @@ const unsigned int D_blob_1a249f1d90e237f6ffb5[2] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C74B8);
+unsigned int rodata_unresolved_800C74B8[2] = {
+    0x08000600, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8B58);
+unsigned int rodata_unresolved_800C8B58[2] = {
+    0x00000000, 0x000052DA,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8188);
+unsigned int rodata_unresolved_800C8188[2] = {
+    0x00230180, 0x002300D4,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7598);
+unsigned int rodata_unresolved_800C7598[2] = {
+    0x002B3FBC, 0x002B3FCC,
+};
 #endif

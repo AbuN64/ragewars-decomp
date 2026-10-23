@@ -434,9 +434,13 @@ int func_8041B5BC_de(void *object)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8041B65C);
+unsigned int rodata_unresolved_8041B65C[1] = {
+    0x4D4F5645,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", func_8041B5BC_de_padding_1815DC);
+unsigned int func_8041B5BC_de_padding_1815DC[1] = {
+    0x00000000,
+};
 #endif

@@ -126,17 +126,27 @@ void func_8044B400_de(SlotPool *pool, s32 owner) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", D_auto_rodata_unresolved_8044B5F4);
+unsigned int D_auto_rodata_unresolved_8044B5F4[3] = {
+    0x14A20003, 0x00000000, 0x08112DD8,
+};
 #endif
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", D_auto_rodata_unresolved_8044B764);
+unsigned int D_auto_rodata_unresolved_8044B764[3] = {
+    0x616D6552, 0x00000400, 0x00000800,
+};
 #endif
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", D_auto_rodata_unresolved_8044C8C4);
+unsigned int D_auto_rodata_unresolved_8044C8C4[3] = {
+    0x14400048, 0x00000000, 0x93B10127,
+};
 #endif
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", D_auto_rodata_unresolved_8044C9F4);
+unsigned int D_auto_rodata_unresolved_8044C9F4[3] = {
+    0x3C010002, 0x01010821, 0x8C30B40C,
+};
 #endif
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("ovl_80400000", D_auto_rodata_unresolved_8044C244);
+unsigned int D_auto_rodata_unresolved_8044C244[3] = {
+    0x3C010002, 0x01010821, 0x8C30B40C,
+};
 #endif

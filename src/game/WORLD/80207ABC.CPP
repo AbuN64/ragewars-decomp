@@ -238,9 +238,13 @@ s32 func_80207FE4_de(void *arg0) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_80207FE4_de_padding_8C18);
+unsigned int func_80207FE4_de_padding_8C18[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", rodata_unresolved_80207FF8);
+unsigned int rodata_unresolved_80207FF8[2] = {
+    0x428DA56D, 0x4312CABA,
+};
 #endif

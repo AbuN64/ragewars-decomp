@@ -1,11 +1,24 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_DATA("data_800C", D_src_f0222606);
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X)
+unsigned int D_src_f0222606[2] = {
+    0x00000000, 0xFFFFFFFF,
+};
+#endif
+#if defined(VERSION_US)
+unsigned int D_src_f0222606[3] = {
+    0x00000000, 0xFFFFFFFF, (unsigned int)D_src_f0222606,
+};
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800D3F1C);
+#if defined(VERSION_US)
+unsigned int rodata_writable_800D3F1C[1] = {
+    (unsigned int)D_src_f0222606,
+};
+#endif
 #endif
 
 #if defined(VERSION_US_REV1)

@@ -130,7 +130,8 @@ s32 func_802651B0_de(s32 destinations, void *encoded, s32 channel_count) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802652E4);
+char rodata_unresolved_802652E4[12] =
+    "Pair_t\014m_YDi";
 #endif
 
 #if defined(VERSION_DE)

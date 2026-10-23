@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_8043F284_us_rev1);
+char func_8043F284_us_rev1[12] =
+    "\000\000\000\017GADGET_P";
 #endif
 
 #if defined(VERSION_US_REV1)

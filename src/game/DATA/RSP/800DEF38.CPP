@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-INCLUDE_DATA("data_800C", rodata_unresolved_800E42D6);
+/* bytes live in the preceding array */
 
 #if defined(VERSION_US)
 extern char D_0041F2A0[];

@@ -50,5 +50,7 @@ INCLUDE_ASM("span_1000", func_80276598_us);
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8027659C);
+unsigned int rodata_unresolved_8027659C[1] = {
+    0x0000000A,
+};
 #endif

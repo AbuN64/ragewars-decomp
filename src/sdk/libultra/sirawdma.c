@@ -38,5 +38,7 @@ s32 __osSiRawStartDma(s32 direction, void *dramAddr) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B9C98);
+unsigned int rodata_unresolved_802B9C98[2] = {
+    0x6D655200, 0x00580600,
+};
 #endif

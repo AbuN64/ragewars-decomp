@@ -29,5 +29,7 @@ s32 func_802BA0D0_de(u32 pc) {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA02C);
+unsigned int rodata_unresolved_802BA02C[1] = {
+    0x5F4A756D,
+};
 #endif

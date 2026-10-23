@@ -9,5 +9,7 @@ void func_802BCF10_de(void) {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BCE4C);
+unsigned int rodata_unresolved_802BCE4C[1] = {
+    0x0000000A,
+};
 #endif

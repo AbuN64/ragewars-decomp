@@ -7,5 +7,7 @@ unsigned int D_auto_src_ragewars_movement_tuning_CF39C_us_rev1[8] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C942C_0CA08C);
+unsigned int rodata_unresolved_800C942C_0CA08C[1] = {
+    0x00000000,
+};
 #endif

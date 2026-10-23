@@ -1,19 +1,33 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80286AA8_CAE50);
+#if defined(VERSION_DE) || defined(VERSION_EU_X) || defined(VERSION_US)
+const unsigned short D_80286AA8_CAE50[3] = {
+    0x6C69, 0x6E6B, 0x7300,
+};
+#endif
+#if defined(VERSION_EU)
+const char D_80286AA8_CAE50[8] =
+    "links\000\000\000";
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5096);
+unsigned short rodata_unresolved_800C5096[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5456);
+unsigned short rodata_unresolved_800C5456[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5166);
+unsigned short rodata_unresolved_800C5166[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -22,5 +36,7 @@ const char D_blob_7b20c7c5cce5d400fe67[6] = "links";
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA256);
+unsigned short rodata_unresolved_800CA256[1] = {
+    0x0000,
+};
 #endif

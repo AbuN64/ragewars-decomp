@@ -32,17 +32,25 @@ void func_8044B0E0_de(struct CGameDynamicLight_t *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C43CC);
+unsigned int rodata_unresolved_800C43CC[1] = {
+    0x4E657874,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C478C);
+unsigned int rodata_unresolved_800C478C[1] = {
+    0x3F800000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C474C);
+unsigned int rodata_unresolved_800C474C[1] = {
+    0x00031C00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C449C);
+unsigned int rodata_unresolved_800C449C[1] = {
+    0x00268D74,
+};
 #endif

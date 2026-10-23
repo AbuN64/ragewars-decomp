@@ -10,5 +10,6 @@ s32 func_802B2620_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B2574);
+char rodata_unresolved_802B2574[12] =
+    "ry_t\004.eosT\000\000";
 #endif

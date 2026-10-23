@@ -1,15 +1,26 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80286AA8_CAEA4);
+#if defined(VERSION_DE) || defined(VERSION_EU)
+const char D_80286AA8_CAEA4[12] =
+    "sky layers\000\000";
+#endif
+#if defined(VERSION_EU_X) || defined(VERSION_US)
+const char D_80286AA8_CAEA4[11] =
+    "sky layers\000";
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C50EF);
+unsigned char rodata_unresolved_800C50EF[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C54AF);
+unsigned char rodata_unresolved_800C54AF[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -20,5 +31,7 @@ const unsigned char D_blob_32ba39b5006aef489261[11] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA2AF);
+unsigned char rodata_unresolved_800CA2AF[1] = {
+    0x00,
+};
 #endif

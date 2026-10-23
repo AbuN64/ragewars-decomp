@@ -1,31 +1,37 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B9FD0_CD804);
+const char D_802B9FD0_CD804[14] =
+    "io/sprawdma.c\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C78E2);
+char rodata_unresolved_800C78E2[14] =
+    "MHUD_EXPANDHR\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800C78E4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C85B2);
+unsigned short rodata_unresolved_800C85B2[7] = {
+    0x0000, 0x41F0, 0x0000, 0x4180, 0x0000, 0x41F0, 0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800C85B4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C79C2);
+unsigned short rodata_unresolved_800C79C2[7] = {
+    0x0000, 0x0000, 0x0000, 0x4F00, 0x0000, 0x8E02, 0x0024,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800C79C4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

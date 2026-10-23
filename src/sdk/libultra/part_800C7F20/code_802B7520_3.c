@@ -17,5 +17,6 @@ void func_802B25D0_de(void *a, s16 b) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B2544);
+char rodata_unresolved_802B2544[12] =
+    "CLoaderEntry";
 #endif

@@ -48,5 +48,6 @@ s32 func_80446C60_de(OSPfs *pfs, s32 *bytes_not_used)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_80446EE8);
+char rodata_unresolved_80446EE8[8] =
+    "pingSoun";
 #endif

@@ -130,5 +130,7 @@ block_11:
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EDCB4);
+unsigned int rodata_unresolved_800EDCB4[1] = {
+    0x00000000,
+};
 #endif

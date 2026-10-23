@@ -162,5 +162,7 @@ int func_802BB0F0_de(u32 arg0, u32 arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BB08C);
+unsigned int rodata_unresolved_802BB08C[1] = {
+    0x7265656E,
+};
 #endif

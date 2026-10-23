@@ -2,9 +2,13 @@
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCFEC);
+unsigned int rodata_unresolved_800DCFEC[1] = {
+    0x00000000,
+};
 #endif
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DCFEC);
+const unsigned int rodata_unresolved_800DCFEC[1] = {
+    0x00000000,
+};
 #endif
 #endif

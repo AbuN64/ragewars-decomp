@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802591F8);
+char rodata_unresolved_802591F8[8] =
+    "tyMin\001\000\000";
 #endif

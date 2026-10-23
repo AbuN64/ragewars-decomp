@@ -2,7 +2,9 @@
 #include "COMMON/EXTERNS_2.H"
 
 #if !(defined(VERSION_US) || defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B6DEC_CD6F0);
+const unsigned int D_802B6DEC_CD6F0[5] = {
+    0x3C8EFA35, 0x3F000000, 0xBF800000, 0x40000000, 0x48000000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

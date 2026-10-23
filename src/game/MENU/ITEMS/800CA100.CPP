@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CAD00);
+const char D_8044B7C0_CAD00[21] =
+    "rumbles\000rumble types\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F55);
+unsigned char rodata_unresolved_800C4F55[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5315);
+unsigned char rodata_unresolved_800C5315[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52D5);
+unsigned char rodata_unresolved_800C52D5[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5025);
+unsigned char rodata_unresolved_800C5025[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_formats_8044B7C0_CAD00_us_rev1[21] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA115);
+unsigned char rodata_unresolved_800CA115[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

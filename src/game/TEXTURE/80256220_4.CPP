@@ -47,13 +47,19 @@ void func_80256688_de(s32 arg0, CartridgeReadRequest *arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80256688_de_padding_57288);
+unsigned int func_80256688_de_padding_57288[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802566E8_de_padding_572D8);
+unsigned int func_802566E8_de_padding_572D8[2] = {
+    0x24050001, 0x8E442B48,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802566E8_de_padding_572A8);
+unsigned int func_802566E8_de_padding_572A8[2] = {
+    0x12A00005, 0x00000000,
+};
 #endif

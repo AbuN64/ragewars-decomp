@@ -50,5 +50,6 @@ state_done:
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BB794);
+char rodata_unresolved_802BB794[12] =
+    "eamTriangleM";
 #endif

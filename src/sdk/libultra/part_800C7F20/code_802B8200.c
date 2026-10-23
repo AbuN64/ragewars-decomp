@@ -41,5 +41,7 @@ s32 func_802B3130_de(void *arg0, void **arg1, s16 arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B3118);
+unsigned int rodata_unresolved_802B3118[2] = {
+    0x00000066, 0x00000004,
+};
 #endif

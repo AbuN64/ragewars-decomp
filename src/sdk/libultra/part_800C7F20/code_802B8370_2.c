@@ -9,5 +9,6 @@ void func_802B3470_de(void *unused, void *object, unsigned short value) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B33A8);
+char rodata_unresolved_802B33A8[8] =
+    "\020m_nCurr";
 #endif

@@ -9,5 +9,7 @@ const unsigned int D_blob_phase2_65373cfd01a52ee32139[2] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8BB8);
+unsigned int rodata_unresolved_800C8BB8[2] = {
+    0x00000000, 0x00000000,
+};
 #endif

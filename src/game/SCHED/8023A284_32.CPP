@@ -38,9 +38,13 @@ void func_8023EE60_de(CCollisionSetup_t *arg0)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8023EEDC);
+unsigned int rodata_unresolved_8023EEDC[1] = {
+    0x0000000B,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_8023EE60_de_padding_3FB3C);
+unsigned int func_8023EE60_de_padding_3FB3C[1] = {
+    0x00000000,
+};
 #endif

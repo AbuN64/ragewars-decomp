@@ -11,10 +11,14 @@ const unsigned int D_blob_phase2_b8084b071a881bbaccb0[15] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_func_80443734_de_800DD3F4);
+const unsigned int rodata_func_80443734_de_800DD3F4[1] = {
+    0x3F000000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD3F8);
+unsigned int rodata_unresolved_800DD3F8[2] = {
+    0x000A0004, 0x00000014,
+};
 #endif
 

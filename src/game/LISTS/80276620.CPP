@@ -116,17 +116,25 @@ void func_80276B44_de(unsigned char percent, unsigned char r, unsigned char g, u
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4988);
+unsigned int rodata_unresolved_800C4988[2] = {
+    0x00005400, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4D48);
+unsigned int rodata_unresolved_800C4D48[2] = {
+    0xBC3F5FAF, 0x3CFD10F8,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4D08);
+unsigned int rodata_unresolved_800C4D08[2] = {
+    0x00621821, 0x0105102A,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4A58);
+unsigned int rodata_unresolved_800C4A58[2] = {
+    0xBF800000, 0x32200000,
+};
 #endif

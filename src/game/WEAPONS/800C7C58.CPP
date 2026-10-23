@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80226950_C8858);
+const char D_80226950_C8858[8] =
+    "Players\000";
 #endif
 
 #if defined(VERSION_US_REV1)

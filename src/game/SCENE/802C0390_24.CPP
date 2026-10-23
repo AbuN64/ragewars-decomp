@@ -52,5 +52,6 @@ void func_802BB5F0_de(OSThread_s *t, s32 pri)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BB5E4);
+char rodata_unresolved_802BB5E4[12] =
+    "stBot_t\005m_Bo";
 #endif

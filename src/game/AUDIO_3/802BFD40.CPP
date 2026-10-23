@@ -7,5 +7,6 @@ void func_802BAC50_de(const char *arg0, const char *arg1, s32 arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BAB88);
+char rodata_unresolved_802BAB88[8] =
+    "rlay_t\022m";
 #endif

@@ -31,5 +31,7 @@ unsigned int D_auto_rodata_unresolved_800D4070[195] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_DATA("data_800C", rodata_writable_800D437C);
+unsigned int rodata_writable_800D437C[1] = {
+    0x00000000,
+};
 #endif

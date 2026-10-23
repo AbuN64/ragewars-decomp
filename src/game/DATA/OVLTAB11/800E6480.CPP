@@ -8,5 +8,7 @@ unsigned int D_blob_89aadff9666b8b4b5368[4] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_psyq_name_suffix_os);
+unsigned short rodata_unresolved_psyq_name_suffix_os[1] = {
+    0x6F73,
+};
 #endif

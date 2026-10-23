@@ -22,5 +22,7 @@ void func_802100E0_de(void *arg0) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_80210198_eu_padding_10D98);
+unsigned int func_80210198_eu_padding_10D98[2] = {
+    0xAE020318, 0x8E020064,
+};
 #endif

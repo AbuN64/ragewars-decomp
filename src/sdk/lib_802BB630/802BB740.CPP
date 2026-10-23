@@ -90,5 +90,6 @@ void func_802B6900_de(f32 matrix[4][4], f32 eyeX, f32 eyeY, f32 eyeZ,
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B6AA8);
+char rodata_unresolved_802B6AA8[8] =
+    "ODER\000\000\001\000";
 #endif

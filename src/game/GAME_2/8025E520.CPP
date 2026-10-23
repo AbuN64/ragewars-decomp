@@ -75,9 +75,13 @@ int func_8025E59C_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_8025E59C_de_padding_5F148);
+unsigned int func_8025E59C_de_padding_5F148[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8025E54C);
+unsigned int rodata_unresolved_8025E54C[1] = {
+    0x00115041,
+};
 #endif

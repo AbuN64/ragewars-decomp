@@ -1,19 +1,31 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800C8F4C[18] = "stat object index";
+const char D_auto_rodata_shared_800C8F4C[] = "stat object index"
+#if defined(VERSION_EU_X)
+    "\000\000"
+#endif
+;
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3D9E);
+unsigned short rodata_unresolved_800C3D9E[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C411E);
+unsigned short rodata_unresolved_800C411E[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3E6E);
+unsigned short rodata_unresolved_800C3E6E[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8F5E);
+unsigned short rodata_unresolved_800C8F5E[1] = {
+    0x0000,
+};
 #endif

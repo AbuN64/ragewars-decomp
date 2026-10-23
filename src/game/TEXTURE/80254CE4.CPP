@@ -168,9 +168,12 @@ EntryRecAt18V3 *func_80255048_de(s32 unused, EntryList *list, EntryRecAt18V3 **r
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80255048_de_padding_55C84);
+unsigned int func_80255048_de_padding_55C84[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80255088);
+char rodata_unresolved_80255088[8] =
+    "\000\015OSMesg";
 #endif

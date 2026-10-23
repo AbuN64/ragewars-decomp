@@ -48,5 +48,6 @@ s32 func_802636E8_de(s32 arg0)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802636D4);
+char rodata_unresolved_802636D4[12] =
+    "LE_IMPACTS_A";
 #endif

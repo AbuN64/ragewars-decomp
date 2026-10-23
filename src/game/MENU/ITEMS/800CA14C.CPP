@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CAD4C);
+const char D_8044B7C0_CAD4C[17] =
+    "link group types\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F9D);
+unsigned char rodata_unresolved_800C4F9D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C535D);
+unsigned char rodata_unresolved_800C535D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C531D);
+unsigned char rodata_unresolved_800C531D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C506D);
+unsigned char rodata_unresolved_800C506D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_8044B7C0_CAD4C_us_rev1[17] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA15D);
+unsigned char rodata_unresolved_800CA15D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

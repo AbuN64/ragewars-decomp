@@ -1,7 +1,9 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_80210248_eu_padding_10E48);
+unsigned int func_80210248_eu_padding_10E48[2] = {
+    0x04620001, 0x24620003,
+};
 #endif
 
 #if defined(VERSION_EU)

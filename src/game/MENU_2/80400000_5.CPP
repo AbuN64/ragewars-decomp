@@ -68,17 +68,25 @@ CVector3 func_80401564_de(f32 t) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_func_8040170C_de_800DB7DC);
+const unsigned int rodata_func_8040170C_de_800DB7DC[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_func_8040170C_de_800E836C);
+const unsigned int rodata_func_8040170C_de_800E836C[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_8040170C_de_800ED1AC);
+const unsigned int rodata_func_8040170C_de_800ED1AC[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_func_8040170C_de_800DCB2C);
+const unsigned int rodata_func_8040170C_de_800DCB2C[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif

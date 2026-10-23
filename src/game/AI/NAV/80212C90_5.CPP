@@ -64,9 +64,13 @@ void func_80212D94_de(void *arg0)
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_80212E24_eu_x_padding_13A24);
+unsigned int func_80212E24_eu_x_padding_13A24[3] = {
+    0x0C09CA69, 0x24070001, 0x02202021,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_80212E04_de_padding_13A04);
+unsigned int func_80212E04_de_padding_13A04[3] = {
+    0x3C02800D, 0x8C428130, 0x27BDFFB8,
+};
 #endif

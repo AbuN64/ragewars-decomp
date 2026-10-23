@@ -6,7 +6,9 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_8043F52C_de_800E2460);
+const unsigned int rodata_func_8043F52C_de_800E2460[6] = {
+    0x00440434, 0x00440818, 0x00440924, 0x00440B48, 0x004406D8, 0x00440434,
+};
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

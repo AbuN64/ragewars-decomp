@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8024BFD4_C9818);
+const char D_8024BFD4_C9818[17] =
+    "anim model index\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3A69);
+unsigned char rodata_unresolved_800C3A69[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3E29);
+unsigned char rodata_unresolved_800C3E29[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3DE9);
+unsigned char rodata_unresolved_800C3DE9[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3B39);
+unsigned char rodata_unresolved_800C3B39[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_8024BFD4_C9818_us_rev1[17] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8C29);
+unsigned char rodata_unresolved_800C8C29[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

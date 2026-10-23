@@ -15,5 +15,7 @@ void func_80265DD0_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80265DA8);
+unsigned int rodata_unresolved_80265DA8[2] = {
+    0x63740000, 0x0000940A,
+};
 #endif

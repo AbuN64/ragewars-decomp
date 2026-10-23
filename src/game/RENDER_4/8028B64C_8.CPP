@@ -349,33 +349,49 @@ void func_8028D964_de(void *arg0, s32 arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CD64C);
+unsigned int rodata_unresolved_800CD64C[3] = {
+    0x3F800000, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CD658);
+unsigned int rodata_unresolved_800CD658[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CECEC);
+unsigned int rodata_unresolved_800CECEC[3] = {
+    0x3F800000, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CECF8);
+unsigned int rodata_unresolved_800CECF8[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CE31C);
+unsigned int rodata_unresolved_800CE31C[3] = {
+    0x3F800000, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CE328);
+unsigned int rodata_unresolved_800CE328[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CD73C);
+unsigned int rodata_unresolved_800CD73C[3] = {
+    0x3F800000, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CD748);
+unsigned int rodata_unresolved_800CD748[1] = {
+    0x00000000,
+};
 #endif

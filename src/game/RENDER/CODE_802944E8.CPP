@@ -130,5 +130,7 @@ void Render_StartRound(GameSession *session) {
 }
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", rodata_func_802946A4_de_800C54D8);
+const unsigned int rodata_func_802946A4_de_800C54D8[1] = {
+    0x3F800000,
+};
 #endif

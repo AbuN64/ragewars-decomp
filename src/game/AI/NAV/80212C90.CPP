@@ -45,13 +45,19 @@ void func_80212CC4_de(AiTarget *arg0) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_80212D78_eu_x_padding_13978);
+unsigned int func_80212D78_eu_x_padding_13978[2] = {
+    0xAFAA0030, 0x0C0939C6,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_80212D78_eu_padding_13978);
+unsigned int func_80212D78_eu_padding_13978[2] = {
+    0x00448021, 0x12000017,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_80212D58_de_padding_13958);
+unsigned int func_80212D58_de_padding_13958[2] = {
+    0x26520001, 0x2610FFFF,
+};
 #endif

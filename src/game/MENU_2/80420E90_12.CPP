@@ -41,9 +41,15 @@ s32 func_80421A58_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_80421AE8_de_padding_111FE8);
+#if defined(VERSION_EU_X)
+unsigned short func_80421AE8_de_padding_111FE8[4] = {
+    0xA050, 0x0010, 0x0240, 0x2021,
+};
+#endif
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", func_80421AE8_de_padding_187AE8);
+unsigned int func_80421AE8_de_padding_187AE8[2] = {
+    0x8C6303F0, 0x00402021,
+};
 #endif

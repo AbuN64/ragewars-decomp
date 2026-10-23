@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_804264E4_us_rev1_padding_1944E4);
+char func_804264E4_us_rev1_padding_1944E4[12] =
+    "\025AI_ANIM_DEA";
 #endif
 
 #if defined(VERSION_US_REV1)

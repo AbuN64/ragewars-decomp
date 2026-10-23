@@ -28,9 +28,13 @@ const unsigned int D_blob_phase2_c84bcd6fd8b288cdc90d[2] = {
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7EEC);
+unsigned int rodata_unresolved_800C7EEC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C72FC);
+unsigned int rodata_unresolved_800C72FC[1] = {
+    0x00000000,
+};
 #endif

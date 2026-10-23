@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80250624_C9B60);
+const char D_80250624_C9B60[14] =
+    "static events\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3DAE);
+unsigned short rodata_unresolved_800C3DAE[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C416E);
+unsigned short rodata_unresolved_800C416E[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C412E);
+unsigned short rodata_unresolved_800C412E[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3E7E);
+unsigned short rodata_unresolved_800C3E7E[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -26,5 +35,7 @@ const char D_blob_c06563bbfef28be84e19[14] = "static events";
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8F6E);
+unsigned short rodata_unresolved_800C8F6E[1] = {
+    0x0000,
+};
 #endif

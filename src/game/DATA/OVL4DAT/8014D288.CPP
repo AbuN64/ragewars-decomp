@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8044E0C4);
+char rodata_unresolved_8044E0C4[12] =
+    "NDLIFEequR\000\000";
 #endif

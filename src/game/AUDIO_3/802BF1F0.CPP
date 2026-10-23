@@ -8,5 +8,6 @@ void func_802BA100_de(unsigned int arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA044);
+char rodata_unresolved_802BA044[12] =
+    "\000\020m_StartJum";
 #endif

@@ -4,21 +4,31 @@
 const char D_blob_phase2_657588bf56f559525478[10] = "animation";
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C40EA);
+unsigned short rodata_unresolved_800C40EA[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C44AA);
+unsigned short rodata_unresolved_800C44AA[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C446A);
+unsigned short rodata_unresolved_800C446A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C41BA);
+unsigned short rodata_unresolved_800C41BA[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C92AA);
+unsigned short rodata_unresolved_800C92AA[1] = {
+    0x0000,
+};
 #endif

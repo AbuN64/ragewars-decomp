@@ -65,5 +65,6 @@ unsigned int D_auto_src_ragewars_pixel_formats_us_rev1[468] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD730_0DEAD0);
+char rodata_unresolved_800DD730_0DEAD0[16] =
+    "\000A\\\240\000\000\000\000L_BOWT\000\000";
 #endif

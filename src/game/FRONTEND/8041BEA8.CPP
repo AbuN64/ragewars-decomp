@@ -105,8 +105,12 @@ s32 func_8041D134_de(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
-INCLUDE_DATA("data_800C", rodata_unresolved_800E14FC);
+unsigned int rodata_unresolved_800E14FC[1] = {
+    0x00000000,
+};
 #endif
 #if defined(VERSION_EU) || defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800E14FC);
+const unsigned int rodata_unresolved_800E14FC[1] = {
+    0x00000000,
+};
 #endif

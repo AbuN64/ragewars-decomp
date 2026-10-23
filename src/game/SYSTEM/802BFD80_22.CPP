@@ -43,5 +43,6 @@ void func_802BAC90_de(OSThread_s *t, s32 id, void (*entry)(void *), void *arg, v
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BAC98);
+char rodata_unresolved_802BAC98[8] =
+    "onFiring";
 #endif

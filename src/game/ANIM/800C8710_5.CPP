@@ -1,19 +1,27 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8023DF70_C9380);
+const unsigned int D_8023DF70_C9380[3] = {
+    0x4123D70A, 0x3F800000, 0x4123D70A,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C35CC);
+unsigned int rodata_unresolved_800C35CC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C394C);
+unsigned int rodata_unresolved_800C394C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C369C);
+unsigned int rodata_unresolved_800C369C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

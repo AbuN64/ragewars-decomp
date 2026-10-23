@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80246E44_C95E4);
+const char D_80246E44_C95E4[47] =
+    "CGameObjectInstance__Advance: anim object info\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3853);
+unsigned char rodata_unresolved_800C3853[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3C13);
+unsigned char rodata_unresolved_800C3C13[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3BD3);
+unsigned char rodata_unresolved_800C3BD3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3923);
+unsigned char rodata_unresolved_800C3923[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -29,5 +38,7 @@ const unsigned char D_auto_src_rw_text_80246E44_C95E4_us_rev1[47] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8A13);
+unsigned char rodata_unresolved_800C8A13[1] = {
+    0x00,
+};
 #endif

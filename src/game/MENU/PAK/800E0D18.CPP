@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80404958_E1918);
+const char D_80404958_E1918[23] =
+    "Mempak write temp data\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DB9AF);
+unsigned char rodata_unresolved_800DB9AF[1] = {
+    0x53,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E853F);
+unsigned char rodata_unresolved_800E853F[1] = {
+    0x7C,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800ED37F);
+unsigned char rodata_unresolved_800ED37F[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCCFF);
+unsigned char rodata_unresolved_800DCCFF[1] = {
+    0x70,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_80404958_E1918_us_rev1[23] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E0D2F);
+unsigned char rodata_unresolved_800E0D2F[1] = {
+    0x6C,
+};
 #endif

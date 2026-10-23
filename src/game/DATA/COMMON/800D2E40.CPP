@@ -1,7 +1,34 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_DATA("data_800C", rodata_unresolved_800D2E40);
+#if defined(VERSION_DE)
+extern char D_800CDA34_de[];
+unsigned int rodata_unresolved_800D2E40[6] = {
+    (unsigned int)D_800CDA34_de + 0xC, (unsigned int)D_800CDA34_de + 0x34, (unsigned int)D_800CDA34_de + 0x5C, (unsigned int)D_800CDA34_de + 0xD4, (unsigned int)D_800CDA34_de + 0x14C, (unsigned int)D_800CDA34_de + 0x174,
+};
+#endif
+#if defined(VERSION_EU)
+extern char D_800CDA34_de[];
+unsigned int rodata_unresolved_800D2E40[6] = {
+    (unsigned int)D_800CDA34_de + 0xC, (unsigned int)D_800CDA34_de + 0x34, (unsigned int)D_800CDA34_de + 0x5C, (unsigned int)D_800CDA34_de + 0xD4, (unsigned int)D_800CDA34_de + 0x14C, (unsigned int)D_800CDA34_de + 0x174,
+};
+#endif
+#if defined(VERSION_EU_X)
+extern char D_800CDA34_de[];
+unsigned int rodata_unresolved_800D2E40[6] = {
+    (unsigned int)D_800CDA34_de + 0xC, (unsigned int)D_800CDA34_de + 0x34, (unsigned int)D_800CDA34_de + 0x5C, (unsigned int)D_800CDA34_de + 0xD4, (unsigned int)D_800CDA34_de + 0x14C, (unsigned int)D_800CDA34_de + 0x174,
+};
+#endif
+#if defined(VERSION_US)
+extern char D_800CD978_us[];
+extern char D_800CD9A0_us[];
+extern char D_800CD9B8_us[];
+extern char D_800CDA2C_us[];
+extern char D_800CDA34_de[];
+unsigned int rodata_unresolved_800D2E40[6] = {
+    (unsigned int)D_800CDA34_de + 0xC, (unsigned int)D_800CD978_us, (unsigned int)D_800CD9A0_us, (unsigned int)D_800CD9B8_us + 0x60, (unsigned int)D_800CDA2C_us + 0x64, (unsigned int)D_800CDA2C_us + 0x8C,
+};
+#endif
 #endif
 
 #if defined(VERSION_US_REV1)

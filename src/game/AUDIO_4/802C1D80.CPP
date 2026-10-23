@@ -61,5 +61,7 @@ void func_802BCD64_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BCD4C);
+unsigned int rodata_unresolved_802BCD4C[1] = {
+    0x42697473,
+};
 #endif

@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B4A08_eu_x_padding_BA3F8);
+char func_802B4A08_eu_x_padding_BA3F8[8] =
+    "sionType";
 #endif
 
 #if defined(VERSION_US_REV1)

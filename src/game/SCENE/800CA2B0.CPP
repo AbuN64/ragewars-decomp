@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80286AA8_CAEB0);
+const char D_80286AA8_CAEB0[19] =
+    "animated instances\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5103);
+unsigned char rodata_unresolved_800C5103[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C54C3);
+unsigned char rodata_unresolved_800C54C3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5483);
+unsigned char rodata_unresolved_800C5483[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C51D3);
+unsigned char rodata_unresolved_800C51D3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_80286AA8_CAEB0_us_rev1[19] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA2C3);
+unsigned char rodata_unresolved_800CA2C3[1] = {
+    0x00,
+};
 #endif

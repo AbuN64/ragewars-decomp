@@ -31,5 +31,6 @@ void func_802B0258_de(void *arg0, s16 arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B0238);
+char rodata_unresolved_802B0238[8] =
+    "izeBrigh";
 #endif

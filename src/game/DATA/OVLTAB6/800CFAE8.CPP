@@ -10,21 +10,27 @@ unsigned int D_blob_ee70fe71189255380488[9] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_d93769ac);
+unsigned int D_src_d93769ac[1] = {
+    0x00010064,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CF5C0_unclaimed_D070E);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_c80e5b77);
+unsigned int D_src_c80e5b77[1] = {
+    0x0414000A,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CF5C0_unclaimed_D0712);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_2fb4c3ac);
+unsigned int D_src_2fb4c3ac[1] = {
+    0x00010064,
+};
 #endif

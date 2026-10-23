@@ -3,33 +3,45 @@
 const char D_auto_src_ragewars_resident_strings_CAD18_us_rev1[16] = "graphicset type";
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C4F68);
+const char rodata_unresolved_800C4F68[17] =
+    "graphicset index\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F79);
+unsigned char rodata_unresolved_800C4F79[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C5328);
+const char rodata_unresolved_800C5328[17] =
+    "graphicset index\000";
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5339);
+unsigned char rodata_unresolved_800C5339[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C52E8);
+const char rodata_unresolved_800C52E8[17] =
+    "graphicset index\000";
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52F9);
+unsigned char rodata_unresolved_800C52F9[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C5038);
+const char rodata_unresolved_800C5038[17] =
+    "graphicset index\000";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5049);
+unsigned char rodata_unresolved_800C5049[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

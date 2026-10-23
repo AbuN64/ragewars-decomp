@@ -38,13 +38,19 @@ s32 func_8020DD04_de(WeightSource *arg0) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", data_unresolved_8020DDF4);
+unsigned int data_unresolved_8020DDF4[3] = {
+    0x3C128014, 0x265212A4, 0xAFBF001C,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_8020DDF4_eu_padding_E9F4);
+unsigned int func_8020DDF4_eu_padding_E9F4[3] = {
+    0x8E220304, 0x10400012, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("span_1000", data_unresolved_8020DDD4);
+unsigned int data_unresolved_8020DDD4[3] = {
+    0x3C128014, 0x2652B364, 0xAFBF001C,
+};
 #endif

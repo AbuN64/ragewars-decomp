@@ -10,5 +10,7 @@ const unsigned int D_blob_c8d42251da213ab141b0[1] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C1A54);
+unsigned int rodata_unresolved_800C1A54[1] = {
+    0x00000000,
+};
 #endif

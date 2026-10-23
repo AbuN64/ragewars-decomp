@@ -32,5 +32,6 @@ void func_80290950_de(void *container, ListNode80290528 *node) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802908F4);
+char rodata_unresolved_802908F4[12] =
+    "EENS\\PAUSESC";
 #endif

@@ -81,13 +81,18 @@ s32 func_8028FA0C_de(void *arg0, void *arg1) {
 
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52B4);
+unsigned int rodata_unresolved_800C52B4[3] = {
+    0x63616C65, 0x52000088, 0x00000008,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5674);
+char rodata_unresolved_800C5674[12] =
+    "LILLY\000\000\000JIM ";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5384);
+unsigned int rodata_unresolved_800C5384[3] = {
+    0x4123D70A, 0x3F800000, 0x42A3D70A,
+};
 #endif

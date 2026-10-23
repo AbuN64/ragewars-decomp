@@ -70,5 +70,13 @@ unsigned char D_auto_func_80447818_de_padding_1BEA78[8] = { 0x8C, 0x82, 0x01, 0x
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80447818_de_padding_1AD818);
+#if defined(VERSION_DE)
+unsigned int func_80447818_de_padding_1AD818[2] = {
+    0xAFB1002C, 0x3C138015,
+};
+#endif
+#if defined(VERSION_US)
+char func_80447818_de_padding_1AD818[8] =
+    "veDeathA";
+#endif
 #endif

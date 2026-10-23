@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80422228_de_padding_190258);
+char func_80422228_de_padding_190258[8] =
+    "ATTACK_W";
 #endif
 
 #if defined(VERSION_US_REV1)

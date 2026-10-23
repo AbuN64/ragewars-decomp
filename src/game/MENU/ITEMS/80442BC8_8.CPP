@@ -1,9 +1,19 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_shared_800EED80);
+#if defined(VERSION_EU)
+const char rodata_shared_800EED80[8] =
+    "%04d\000\000\000\000";
+#endif
+#if defined(VERSION_EU_X)
+const unsigned char rodata_shared_800EED80[5] = {
+    0x25, 0x30, 0x34, 0x64, 0x00,
+};
+#endif
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9F45);
+unsigned char rodata_unresolved_800E9F45[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

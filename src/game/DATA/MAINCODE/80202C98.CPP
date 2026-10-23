@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80202C98);
+char rodata_unresolved_80202C98[8] =
+    "yObjectT";
 #endif
 
 #if defined(VERSION_DE)

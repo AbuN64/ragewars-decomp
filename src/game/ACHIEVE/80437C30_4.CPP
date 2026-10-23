@@ -56,9 +56,13 @@ s32 func_80438E7C_de(ActorDefinitionHeader *arg0, s32 arg1, s32 arg2, s32 arg3, 
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80438F0C_de_padding_19D0EC);
+unsigned int func_80438F0C_de_padding_19D0EC[1] = {
+    0x6E746572,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", func_80438F0C_de_padding_19EF0C);
+unsigned int func_80438F0C_de_padding_19EF0C[1] = {
+    0x0C106960,
+};
 #endif

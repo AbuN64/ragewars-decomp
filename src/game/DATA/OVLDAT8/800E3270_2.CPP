@@ -1,23 +1,26 @@
 #include "include_asm.h"
 
-unsigned char D_auto_rodata_writable_800E3280[33] = {
+unsigned char D_auto_rodata_writable_800E3280[] = {
     0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0x20,
     0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30, 0x30,
     0x00,
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
+    0x00, 0x00, 0x00,
+#endif
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDF01);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EAA81);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EF8C1);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DF251);
+/* bytes live in the preceding array */
 #endif

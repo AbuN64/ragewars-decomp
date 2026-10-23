@@ -1,19 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B600_CABD0);
+#if defined(VERSION_DE) || defined(VERSION_EU) || defined(VERSION_US)
+const char D_8044B600_CABD0[35] =
+    "CScene__ConstructMap: object index\000";
+#endif
+#if defined(VERSION_EU_X)
+const char D_8044B600_CABD0[36] =
+    "CScene__ConstructMap: object index\000\000";
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4E33);
+unsigned char rodata_unresolved_800C4E33[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C51B3);
+unsigned char rodata_unresolved_800C51B3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F03);
+unsigned char rodata_unresolved_800C4F03[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -25,5 +38,7 @@ const unsigned char D_auto_src_rw_text_8044B600_CABD0_us_rev1[35] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C9FF3);
+unsigned char rodata_unresolved_800C9FF3[1] = {
+    0x00,
+};
 #endif

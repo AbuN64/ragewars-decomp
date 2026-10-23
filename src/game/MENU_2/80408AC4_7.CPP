@@ -165,17 +165,25 @@ s32 func_8043CD64_de(u8 *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_func_8043CB30_de_800DCF04);
+const unsigned int rodata_func_8043CB30_de_800DCF04[1] = {
+    0x41700000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_func_8043CB30_de_800E9A94);
+const unsigned int rodata_func_8043CB30_de_800E9A94[1] = {
+    0x41700000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_8043CB30_de_800EE8D4);
+const unsigned int rodata_func_8043CB30_de_800EE8D4[1] = {
+    0x41700000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_func_8043CB30_de_800DE254);
+const unsigned int rodata_func_8043CB30_de_800DE254[1] = {
+    0x41700000,
+};
 #endif

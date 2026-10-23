@@ -9,17 +9,25 @@ const unsigned char D_blob_3e9a18b4da19e6114370[3] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8DB3);
+unsigned char rodata_unresolved_800C8DB3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C83E3);
+unsigned char rodata_unresolved_800C83E3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C77F3);
+unsigned char rodata_unresolved_800C77F3[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CCA43);
+unsigned char rodata_unresolved_800CCA43[1] = {
+    0x00,
+};
 #endif

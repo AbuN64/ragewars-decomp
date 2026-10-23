@@ -135,17 +135,29 @@ void func_804097E8_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DBA84);
+const unsigned int rodata_unresolved_800DBA84[17] = {
+    0x00000000, 0x0040A988, 0x0040A988, 0x0040A9B8, 0x0040A9A8, 0x0040A988, 0x0040A998, 0x0040A988,
+    0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A988, 0x0040A9C8,
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E8614);
+unsigned int rodata_unresolved_800E8614[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800ED454);
+const unsigned int rodata_unresolved_800ED454[17] = {
+    0x00000000, 0x0040ACC8, 0x0040ACC8, 0x0040AD28, 0x0040AD08, 0x0040ACC8, 0x0040ACE8, 0x0040ACC8,
+    0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040ACC8, 0x0040AD48,
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCDD4);
+unsigned int rodata_unresolved_800DCDD4[1] = {
+    0x00000000,
+};
 #endif

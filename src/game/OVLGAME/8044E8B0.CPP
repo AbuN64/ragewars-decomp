@@ -21,13 +21,18 @@ void func_8044DC60_de(RenderSettings *state) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8044DE24);
+char rodata_unresolved_8044DE24[12] =
+    "LESHequR\000\000\005\000";
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_8044DC60_de_padding_13F0B4);
+unsigned int func_8044DC60_de_padding_13F0B4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8044F0B8);
+unsigned int rodata_unresolved_8044F0B8[2] = {
+    0x00010041, 0x00000014,
+};
 #endif

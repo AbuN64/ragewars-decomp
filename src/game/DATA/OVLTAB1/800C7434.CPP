@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7434);
+char rodata_unresolved_800C7434[12] =
+    "\015CCameraPool";
 #endif
 
 #if defined(VERSION_US_REV1)

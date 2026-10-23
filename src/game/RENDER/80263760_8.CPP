@@ -354,9 +354,13 @@ float func_80264EE0_de(PlayerRecAt8 *p) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80264EFC);
+unsigned int rodata_unresolved_80264EFC[1] = {
+    0x00009666,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_80264EE0_de_padding_65B1C);
+unsigned int func_80264EE0_de_padding_65B1C[1] = {
+    0x00000000,
+};
 #endif

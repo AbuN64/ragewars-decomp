@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80419B18_eu_x_padding_187758);
+char func_80419B18_eu_x_padding_187758[8] =
+    "\000\000\037AI_AN";
 #endif
 
 #if defined(VERSION_US_REV1)

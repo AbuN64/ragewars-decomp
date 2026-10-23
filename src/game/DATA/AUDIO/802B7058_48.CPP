@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802C1908_de_padding_C2508);
+char func_802C1908_de_padding_C2508[8] =
+    "OMHotPoi";
 #endif
 
 #if defined(VERSION_DE)

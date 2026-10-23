@@ -10,11 +10,16 @@ INCLUDE_ASM("span_1000", func_80229814_de);
 #endif
 
 #if (defined(VERSION_DE) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)
-INCLUDE_RODATA("data_800C", rodata_func_80229814_de_800C7D48);
+const unsigned int rodata_func_80229814_de_800C7D48[10] = {
+    0x42960000, 0x41700000, 0x42960000, 0x40F00000, 0x4F000000, 0x3D888889, 0x3FC00000, 0x41700000,
+    0x4F000000, 0x4F000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C2F64);
+unsigned int rodata_unresolved_800C2F64[1] = {
+    0x00000000,
+};
 #endif
 
 #if !(defined(VERSION_DE) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
@@ -65,5 +70,7 @@ void func_80229814_de(SharedPlayer *player, f32 amount) {
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C2F24);
+unsigned int rodata_unresolved_800C2F24[1] = {
+    0x00000000,
+};
 #endif

@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80212D78_eu_x_padding_13958);
+char func_80212D78_eu_x_padding_13958[8] =
+    "SHOTGUN_";
 #endif
 
 #if defined(VERSION_US_REV1)

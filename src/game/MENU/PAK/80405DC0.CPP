@@ -296,17 +296,25 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DBA6C);
+const unsigned int rodata_unresolved_800DBA6C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E85FC);
+unsigned int rodata_unresolved_800E85FC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800ED43C);
+const unsigned int rodata_unresolved_800ED43C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCDBC);
+unsigned int rodata_unresolved_800DCDBC[1] = {
+    0x00000000,
+};
 #endif

@@ -10,7 +10,16 @@ INCLUDE_ASM("span_1000", func_80210198_eu);
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C2224);
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C2224[3] = {
+    0x00804021, 0x00854821, 0x0109082B,
+};
+#endif
+#if defined(VERSION_EU_X)
+unsigned int rodata_unresolved_800C2224[3] = {
+    0x3FE52EDF, 0x3F800000, 0x3FE52EDF,
+};
+#endif
 #endif
 
 #if !(defined(VERSION_EU)) || (defined(NON_MATCHING) && (defined(VERSION_EU)))

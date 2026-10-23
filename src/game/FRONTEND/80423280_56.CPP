@@ -178,5 +178,7 @@ s32 func_8042D958_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", func_8042D9E8_de_padding_1939E8);
+unsigned int func_8042D9E8_de_padding_1939E8[2] = {
+    0x8C6313D0, 0x00402021,
+};
 #endif

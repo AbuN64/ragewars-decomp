@@ -30,7 +30,9 @@ s32 func_802B7400_de(void *bufPtr, u32 size) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B73BC);
+unsigned int rodata_unresolved_802B73BC[1] = {
+    0x72616374,
+};
 #endif
 
 #if defined(VERSION_EU)

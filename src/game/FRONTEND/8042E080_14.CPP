@@ -176,13 +176,19 @@ D_800DDEB0_de,
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCB6D);
+unsigned char rodata_unresolved_800DCB6D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDEBD);
+unsigned char rodata_unresolved_800DDEBD[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E1EED);
+unsigned char rodata_unresolved_800E1EED[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

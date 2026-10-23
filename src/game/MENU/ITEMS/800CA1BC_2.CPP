@@ -1,19 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044D0F0_CADBC);
+#if defined(VERSION_DE)
+const char D_8044D0F0_CADBC[24] =
+    "game persistent data\000\000\000\000";
+#endif
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
+const char D_8044D0F0_CADBC[21] =
+    "game persistent data\000";
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5011);
+unsigned char rodata_unresolved_800C5011[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C53D1);
+unsigned char rodata_unresolved_800C53D1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5391);
+unsigned char rodata_unresolved_800C5391[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -24,5 +37,7 @@ const unsigned char D_auto_src_rw_text_8044D0F0_CADBC_us_rev1[21] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA1D1);
+unsigned char rodata_unresolved_800CA1D1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

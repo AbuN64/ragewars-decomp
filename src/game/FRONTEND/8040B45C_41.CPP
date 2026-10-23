@@ -1,7 +1,9 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80412CDC_de_padding_180D5C);
+unsigned int func_80412CDC_de_padding_180D5C[1] = {
+    0x49525F49,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

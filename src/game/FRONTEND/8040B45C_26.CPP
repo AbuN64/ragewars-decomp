@@ -65,5 +65,7 @@ void func_8040C648(MenuWidget *widget, DrawArgs args) {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_8040CB3C_eu_x_padding_FCB3C);
+unsigned int func_8040CB3C_eu_x_padding_FCB3C[1] = {
+    0x4601A501,
+};
 #endif

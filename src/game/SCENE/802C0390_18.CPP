@@ -6,5 +6,7 @@ unsigned int func_802BB6A8_eu_x[1] = { 0x445BF800U };
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802BB6A8_eu_x_padding_BC2AC);
+unsigned int func_802BB6A8_eu_x_padding_BC2AC[1] = {
+    0x00000000,
+};
 #endif

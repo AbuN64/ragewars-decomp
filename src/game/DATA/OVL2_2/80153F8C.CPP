@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_8014", rodata_unresolved_80153F8B);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

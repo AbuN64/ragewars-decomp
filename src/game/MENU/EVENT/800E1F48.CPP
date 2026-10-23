@@ -1,23 +1,33 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8043829C_E2B48);
+const unsigned char D_8043829C_E2B48[5] = {
+    0x25, 0x64, 0x25, 0x25, 0x00,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCBCD);
+unsigned char rodata_unresolved_800DCBCD[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E975D);
+unsigned char rodata_unresolved_800E975D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE59D);
+unsigned char rodata_unresolved_800EE59D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDF1D);
+unsigned char rodata_unresolved_800DDF1D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +38,7 @@ const unsigned char D_blob_bf6d36a4ef6a7f69696e[5] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E1F4D);
+unsigned char rodata_unresolved_800E1F4D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

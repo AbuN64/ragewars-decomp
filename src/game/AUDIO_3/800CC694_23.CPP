@@ -2,39 +2,48 @@
 #include "COMMON/EXTERNS_2.H"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B57F0_CD5D4);
+const char D_802B57F0_CD5D4[15] =
+    "audio/reverb.c\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C76B3);
+unsigned char rodata_unresolved_800C76B3[5] = {
+    0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800C76B4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8D53);
+unsigned char rodata_unresolved_800C8D53[5] = {
+    0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800C8D54);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8383);
+unsigned char rodata_unresolved_800C8383[5] = {
+    0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800C8384);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7793);
+unsigned char rodata_unresolved_800C7793[5] = {
+    0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800C7794);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

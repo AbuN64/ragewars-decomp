@@ -6,17 +6,25 @@ unsigned int D_blob_9f91dd6eba30639cb782[1] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800DD540);
+unsigned int data_unresolved_800DD540[4] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800EA0C0);
+unsigned int data_unresolved_800EA0C0[4] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800EEF00);
+unsigned int data_unresolved_800EEF00[4] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800DE890);
+unsigned int data_unresolved_800DE890[4] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+};
 #endif

@@ -30,17 +30,25 @@ void func_8043577C_de(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCB9C);
+unsigned int rodata_unresolved_800DCB9C[1] = {
+    0x5F444541,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E972C);
+unsigned int rodata_unresolved_800E972C[1] = {
+    0x0000003E,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE56C);
+unsigned int rodata_unresolved_800EE56C[1] = {
+    0x8C180FE8,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDEEC);
+unsigned int rodata_unresolved_800DDEEC[1] = {
+    0x004360AC,
+};
 #endif

@@ -7,5 +7,7 @@ unsigned int D_auto_rodata_unresolved_800FF140[7] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800FF15C);
+unsigned int rodata_writable_800FF15C[1] = {
+    0x05348005,
+};
 #endif

@@ -11,5 +11,14 @@ const f32 data_func_802631B0_de_800C4290[23] = {
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C42EC);
+#if defined(VERSION_DE)
+unsigned int rodata_unresolved_800C42EC[1] = {
+    0xC2FE0000,
+};
+#endif
+#if defined(VERSION_EU)
+unsigned int rodata_unresolved_800C42EC[1] = {
+    0x00542821,
+};
+#endif
 #endif

@@ -10,5 +10,7 @@ const unsigned int D_auto_rodata_func_802B7130_de_800C77F8[17] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C783C);
+unsigned int rodata_unresolved_800C783C[1] = {
+    0x42415252,
+};
 #endif

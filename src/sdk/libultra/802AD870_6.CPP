@@ -2,5 +2,6 @@
 
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802ADF58);
+char rodata_unresolved_802ADF58[8] =
+    "\000\027PARTIC";
 #endif

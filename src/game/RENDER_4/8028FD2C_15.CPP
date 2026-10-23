@@ -7,5 +7,7 @@ void func_802909F0_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80290908);
+unsigned int rodata_unresolved_80290908[2] = {
+    0x1C180134, 0x433A5C50,
+};
 #endif

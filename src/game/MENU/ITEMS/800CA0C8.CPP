@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CACC8);
+const char D_8044B7C0_CACC8[18] =
+    "particle swooshes\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F1A);
+unsigned short rodata_unresolved_800C4F1A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52DA);
+unsigned short rodata_unresolved_800C52DA[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C529A);
+unsigned short rodata_unresolved_800C529A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4FEA);
+unsigned short rodata_unresolved_800C4FEA[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -25,5 +34,7 @@ const char D_auto_src_rw_text_8044B7C0_CACC8_us_rev1[18] = "particle swooshes";
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA0DA);
+unsigned short rodata_unresolved_800CA0DA[1] = {
+    0x0000,
+};
 #endif

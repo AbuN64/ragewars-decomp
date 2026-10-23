@@ -8,9 +8,13 @@ const unsigned int D_blob_8953d58d3c35985f217c[1] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_func_8043829C_de_800DDF14);
+const unsigned char rodata_func_8043829C_de_800DDF14[3] = {
+    0x25, 0x64, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDF17);
+unsigned char rodata_unresolved_800DDF17[1] = {
+    0x00,
+};
 #endif

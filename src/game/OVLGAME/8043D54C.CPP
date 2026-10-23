@@ -439,21 +439,31 @@ s32 func_8043DA70_de(struct StateRecAt14 *item) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", func_8043DADC_de_padding_1A3ADC);
+unsigned int func_8043DADC_de_padding_1A3ADC[1] = {
+    0x3C048012,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("ovl_80400000", func_8043DADC_de_padding_1ABCBC);
+unsigned int func_8043DADC_de_padding_1ABCBC[1] = {
+    0x8FBF0024,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_8043DADC_de_padding_1A1CBC);
+unsigned int func_8043DADC_de_padding_1A1CBC[1] = {
+    0x6153697A,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_8043DADC_de_padding_12EAFC);
+unsigned int func_8043DADC_de_padding_12EAFC[1] = {
+    0x2A020004,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_8043E9CC_eu_padding_1B49CC);
+unsigned int func_8043E9CC_eu_padding_1B49CC[1] = {
+    0x1622005B,
+};
 #endif

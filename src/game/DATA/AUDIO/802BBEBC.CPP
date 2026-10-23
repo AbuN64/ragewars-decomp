@@ -1,7 +1,9 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B6DEC_de_padding_BCABC);
+unsigned int func_802B6DEC_de_padding_BCABC[1] = {
+    0x73520000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

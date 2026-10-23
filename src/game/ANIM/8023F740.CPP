@@ -254,13 +254,19 @@ INCLUDE_ASM("span_1000", func_80240260_de);
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3654);
+unsigned int rodata_unresolved_800C3654[3] = {
+    0x0000000A, 0x00080084, 0x0500000A,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C39D4);
+unsigned int rodata_unresolved_800C39D4[3] = {
+    0x8E430038, 0x02601021, 0x00761821,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3724);
+unsigned int rodata_unresolved_800C3724[3] = {
+    0x3F800000, 0xBF800000, 0x3F800000,
+};
 #endif

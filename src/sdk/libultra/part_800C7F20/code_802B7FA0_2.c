@@ -28,5 +28,7 @@ void func_802B2F10_de(ALSndPlayer *arg0, s16 arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B2F10_de_padding_B3A8C);
+unsigned int func_802B2F10_de_padding_B3A8C[1] = {
+    0x00000000,
+};
 #endif

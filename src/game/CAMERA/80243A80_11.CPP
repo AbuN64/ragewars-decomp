@@ -54,5 +54,7 @@ int func_80245D14_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80245D08);
+unsigned int rodata_unresolved_80245D08[2] = {
+    0x00940A00, 0x08001800,
+};
 #endif

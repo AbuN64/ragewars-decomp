@@ -128,9 +128,13 @@ s32 func_80419AEC_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80419B8C_us_padding_17DB8C);
+unsigned int func_80419B8C_us_padding_17DB8C[1] = {
+    0x554E445F,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_80419F4C_eu_padding_18FF4C);
+unsigned int func_80419F4C_eu_padding_18FF4C[1] = {
+    0x02221023,
+};
 #endif

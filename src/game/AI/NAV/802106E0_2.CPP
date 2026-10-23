@@ -78,5 +78,6 @@ int func_80211000_de(int arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80211014);
+char rodata_unresolved_80211014[12] =
+    "SFX_MAG_60_R";
 #endif

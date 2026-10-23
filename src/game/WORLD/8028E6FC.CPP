@@ -125,13 +125,19 @@ s32 func_8028E860_de(ObjRecAtE4V2 *arg0, CVector3 *arg1) {
     return 0;
 }
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_8028E860_de_padding_8F66C);
+unsigned int func_8028E860_de_padding_8F66C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C55F4);
+unsigned int rodata_unresolved_800C55F4[3] = {
+    0x24E7FFFF, 0x0065102B, 0x50400004,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5344);
+unsigned int rodata_unresolved_800C5344[3] = {
+    0x358637BD, 0x358637BD, 0x358637BD,
+};
 #endif

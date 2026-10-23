@@ -661,5 +661,6 @@ s32 func_80244B68_de(char *arg0, char *arg1, CVector3 first, CVector3 second,
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80244D44);
+char rodata_unresolved_80244D44[12] =
+    "CTER_JUGGERN";
 #endif

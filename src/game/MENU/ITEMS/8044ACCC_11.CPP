@@ -7,5 +7,7 @@ const unsigned char D_d0_5a2c6f41918d67e9[13] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA05D);
+unsigned char rodata_unresolved_800CA05D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

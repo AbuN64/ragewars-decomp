@@ -5,21 +5,29 @@ unsigned int D_auto_rodata_writable_800E28B0[8] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800DD530);
+unsigned int data_unresolved_800DD530[3] = {
+    0x00000140, 0x000000F0, 0xFFFFFFFF,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800EA0B0);
+unsigned int data_unresolved_800EA0B0[3] = {
+    0x00000140, 0x000000F0, 0xFFFFFFFF,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800EEEF0);
+unsigned int data_unresolved_800EEEF0[3] = {
+    0x00000140, 0x000000F0, 0xFFFFFFFF,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800DE880);
+unsigned int data_unresolved_800DE880[3] = {
+    0x00000140, 0x000000F0, 0xFFFFFFFF,
+};
 #endif
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE88B);
+/* bytes live in the preceding array */
 #endif

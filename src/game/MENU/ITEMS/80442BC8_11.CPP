@@ -92,5 +92,7 @@ void func_8044334C_de(void *list, struct ItemRecAt20V2 *item) {
 }
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_8044334C_de_padding_1BA304);
+unsigned int func_8044334C_de_padding_1BA304[1] = {
+    0x00000000,
+};
 #endif

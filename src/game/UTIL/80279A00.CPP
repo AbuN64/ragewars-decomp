@@ -28,5 +28,6 @@ s32 func_802799C0_de(void *arg0, s32 arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802799E4);
+char rodata_unresolved_802799E4[12] =
+    "s_t\004.eos\000\000\000\000";
 #endif

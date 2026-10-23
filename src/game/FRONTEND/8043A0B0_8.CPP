@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80439EC4_de_padding_1A80A4);
+char func_80439EC4_de_padding_1A80A4[12] =
+    "\000\000\000\005startR\000\000";
 #endif
 
 #if defined(VERSION_US_REV1)

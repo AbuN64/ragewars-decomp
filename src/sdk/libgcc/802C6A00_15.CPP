@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802C1878_de_padding_C2478);
+char func_802C1878_de_padding_C2478[8] =
+    "\000\007CList_";
 #endif
 
 #if defined(VERSION_DE)

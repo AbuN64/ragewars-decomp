@@ -27,5 +27,6 @@ void func_802AFEE0_de(s32 arg0, s32 arg1, s8 arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802AFE54);
+char rodata_unresolved_802AFE54[12] =
+    "FPair_t\010m_XP";
 #endif

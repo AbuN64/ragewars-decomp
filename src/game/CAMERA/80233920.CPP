@@ -174,17 +174,25 @@ void func_80233C88_de(View *entity) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C2FE4);
+unsigned int rodata_unresolved_800C2FE4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C33A4);
+unsigned int rodata_unresolved_800C33A4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3364);
+unsigned int rodata_unresolved_800C3364[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C30B4);
+unsigned int rodata_unresolved_800C30B4[1] = {
+    0x00000000,
+};
 #endif

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E400A);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
@@ -1839,5 +1839,7 @@ unsigned int D_auto_data_unresolved_800E400C[14109] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_writable_800F1C80);
+unsigned int rodata_writable_800F1C80[1] = {
+    0x00000000,
+};
 #endif

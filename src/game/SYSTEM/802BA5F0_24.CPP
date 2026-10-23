@@ -26,5 +26,6 @@ void func_802BA650_de(s32 arg0, s32 arg1, s16 arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA5D8);
+char rodata_unresolved_802BA5D8[8] =
+    "m_OnEnem";
 #endif

@@ -45,5 +45,7 @@ s32 func_802B93B0_de(OSPiHandle_s *pihandle, s32 direction, u32 devAddr, void *d
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B94B4);
+unsigned int rodata_unresolved_802B94B4[3] = {
+    0x00080018, 0x001C0000, 0x0000000E,
+};
 #endif

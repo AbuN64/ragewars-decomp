@@ -27,5 +27,7 @@ INCLUDE_ASM("ovl_80400000", func_80435CE4_us);
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_80435CEC);
+unsigned int rodata_unresolved_80435CEC[1] = {
+    0x0000000A,
+};
 #endif

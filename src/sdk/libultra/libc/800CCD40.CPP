@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802BD430_CD940);
+const char D_802BD430_CD940[8] =
+    " +-#0\000\000\000";
 #endif
 
 #if defined(VERSION_US_REV1)

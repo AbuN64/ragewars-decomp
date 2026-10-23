@@ -69,9 +69,12 @@ void func_80212610_eu(CloseAttackActor *arg0) {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80212610_eu_padding_13264);
+unsigned int func_80212610_eu_padding_13264[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80212668);
+char rodata_unresolved_80212668[8] =
+    "!SFX_PLA";
 #endif

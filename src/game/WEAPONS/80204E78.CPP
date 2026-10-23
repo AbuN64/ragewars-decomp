@@ -72,9 +72,13 @@ int func_80204FC4_de(ActorRecAt134 *actor, Cell *cell, float scale) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802050B4_eu_x_padding_5CB4);
+unsigned int func_802050B4_eu_x_padding_5CB4[3] = {
+    0xC44C000C, 0xC44E0010, 0x0C09D2BC,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_80205094_de_padding_5C94);
+unsigned int func_80205094_de_padding_5C94[3] = {
+    0x39000000, 0x04000000, 0x10000000,
+};
 #endif

@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_804160C4_eu_x);
+char func_804160C4_eu_x[12] =
+    "_ANIM_AIR_MO";
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)

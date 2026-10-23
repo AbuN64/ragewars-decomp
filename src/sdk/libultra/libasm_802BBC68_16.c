@@ -2,5 +2,6 @@
 
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BCF38);
+char rodata_unresolved_802BCF38[8] =
+    "cInstanc";
 #endif

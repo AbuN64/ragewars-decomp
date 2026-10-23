@@ -72,5 +72,7 @@ s32 func_8026269C_de(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80262734);
+unsigned int rodata_unresolved_80262734[3] = {
+    0x5F4D3230, 0x01000096, 0x08000800,
+};
 #endif

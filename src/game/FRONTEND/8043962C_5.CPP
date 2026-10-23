@@ -1,5 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE604);
+unsigned int rodata_unresolved_800EE604[3] = {
+    0x8C4B0024, 0x01695824, 0x11700056,
+};
 #endif

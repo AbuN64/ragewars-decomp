@@ -394,5 +394,7 @@ s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", rodata_unresolved_8020EA04);
+unsigned int rodata_unresolved_8020EA04[3] = {
+    0x6F857BAC, 0x71EB24F7, 0xCE54520A,
+};
 #endif

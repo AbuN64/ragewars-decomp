@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802BDDE0_D9F30);
+const char D_802BDDE0_D9F30[17] =
+    "0123456789abcdef\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800D3FC1);
+unsigned char rodata_unresolved_800D3FC1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E0B51);
+unsigned char rodata_unresolved_800E0B51[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E5991);
+unsigned char rodata_unresolved_800E5991[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800D5311);
+unsigned char rodata_unresolved_800D5311[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_auto_src_rw_text_802BDDE0_D9F30_us_rev1[17] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800D9341);
+unsigned char rodata_unresolved_800D9341[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

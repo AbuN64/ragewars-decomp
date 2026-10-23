@@ -66,13 +66,19 @@ float func_802B6560_de(float x)
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802B6664_de_padding_B7544);
+unsigned int func_802B6664_de_padding_B7544[3] = {
+    0xA0820000, 0x24630001, 0x24C60008,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802B6664_de_padding_B7504);
+unsigned int func_802B6664_de_padding_B7504[3] = {
+    0x02201021, 0x8FBF001C, 0x8FB20018,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802B6664_de_padding_B7264);
+unsigned int func_802B6664_de_padding_B7264[3] = {
+    0xF7BD00B0, 0x4485E800, 0x4486F800,
+};
 #endif

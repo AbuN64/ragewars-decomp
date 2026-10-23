@@ -18,5 +18,7 @@ s32 func_80429CA0_eu(MenuWidget *pThis, s32 event, s32 arg2, s32 arg3, s32 arg4)
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_804291D0_de_padding_19FD2C);
+unsigned int func_804291D0_de_padding_19FD2C[1] = {
+    0x46000802,
+};
 #endif

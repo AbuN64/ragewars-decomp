@@ -22,5 +22,7 @@ s32 func_802B64C0_de(ALSynth *arg0, s16 arg1, s32 arg2, s32 arg3) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B6484);
+unsigned int rodata_unresolved_802B6484[3] = {
+    0x03000000, 0x0000116D, 0x5F416D6D,
+};
 #endif

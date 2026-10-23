@@ -49,5 +49,7 @@ converted:
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B7328);
+unsigned int rodata_unresolved_802B7328[2] = {
+    0x00B80000, 0x00080006,
+};
 #endif

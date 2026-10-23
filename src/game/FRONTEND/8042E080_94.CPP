@@ -48,9 +48,13 @@ s32 func_80436454_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_804364E4_de_padding_12734C);
+unsigned int func_804364E4_de_padding_12734C[1] = {
+    0x27BDFFE8,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_804364E4_de_padding_1AD214);
+unsigned int func_804364E4_de_padding_1AD214[3] = {
+    0x000210C0, 0x00521021, 0x00021880,
+};
 #endif

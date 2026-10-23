@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80212E24_eu_x_padding_13A04);
+char func_80212E24_eu_x_padding_13A04[12] =
+    "FIRE_POD_REA";
 #endif
 
 #if defined(VERSION_US_REV1)

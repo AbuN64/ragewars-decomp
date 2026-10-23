@@ -21,5 +21,6 @@ void alSndpStop(ObjRecAt40V2 *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B2ED8);
+char rodata_unresolved_802B2ED8[8] =
+    "rientT\000\000";
 #endif

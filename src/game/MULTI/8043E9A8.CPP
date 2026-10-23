@@ -135,5 +135,7 @@ s32 func_8043EA4C_de(void *arg0, Outer8043E56C *arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DD010);
+const unsigned int rodata_unresolved_800DD010[8] = {
+    0x42F00000, 0x04000000, 0x16524158, 0x5F50555F, 0x437F0000, 0x437F0000, 0x437F0000, 0x65717552,
+};
 #endif

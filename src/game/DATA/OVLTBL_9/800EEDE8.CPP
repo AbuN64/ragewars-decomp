@@ -14,9 +14,11 @@ const unsigned int D_auto_rodata_unresolved_800EEDE8[8] = {
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800EEDE6);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800EEDE8);
+const unsigned int rodata_unresolved_800EEDE8[8] = {
+    0x00444F54, 0x00444F9C, 0x00444FE4, 0x0044502C, 0x0044506C, 0x0044506C, 0x0044506C, 0x0044506C,
+};
 #endif

@@ -41,5 +41,7 @@ f32 func_80241840_de(CVector3 *a, CVector3 *b, CVector3 *p) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8024192C);
+unsigned int rodata_unresolved_8024192C[1] = {
+    0x49546172,
+};
 #endif

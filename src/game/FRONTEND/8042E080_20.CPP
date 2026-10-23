@@ -1,13 +1,19 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_80438878_eu_800EE590);
+const unsigned int rodata_func_80438878_eu_800EE590[1] = {
+    0x3D888889,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_func_8043829C_de_800EE594);
+const unsigned char rodata_func_8043829C_de_800EE594[3] = {
+    0x25, 0x64, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE597);
+unsigned char rodata_unresolved_800EE597[1] = {
+    0x00,
+};
 #endif

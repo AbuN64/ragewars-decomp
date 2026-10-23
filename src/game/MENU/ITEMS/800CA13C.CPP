@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CAD3C);
+const char D_8044B7C0_CAD3C[14] =
+    "Cinemas index\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F8A);
+unsigned short rodata_unresolved_800C4F8A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C534A);
+unsigned short rodata_unresolved_800C534A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C530A);
+unsigned short rodata_unresolved_800C530A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C505A);
+unsigned short rodata_unresolved_800C505A[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -25,5 +34,7 @@ const char D_d1_1fe71b6b9055290c[14] = "Cinemas index";
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA14A);
+unsigned short rodata_unresolved_800CA14A[1] = {
+    0x0000,
+};
 #endif

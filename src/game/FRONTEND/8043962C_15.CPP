@@ -53,9 +53,13 @@ void func_80439D00_de(struct ObjectRecAt10 *object, struct Triple vector) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_80439F0C_us_padding_19DF0C);
+unsigned int func_80439F0C_us_padding_19DF0C[1] = {
+    0x0D000800,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", func_80439D00_de_padding_19FD2C);
+unsigned int func_80439D00_de_padding_19FD2C[1] = {
+    0x00000000,
+};
 #endif

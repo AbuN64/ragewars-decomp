@@ -27,5 +27,7 @@ int func_80240638_de(RenderSortRecord *left, RenderSortRecord *right) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80240638_de_padding_4123C);
+unsigned int func_80240638_de_padding_4123C[1] = {
+    0x00000000,
+};
 #endif

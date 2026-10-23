@@ -7,21 +7,31 @@ const unsigned char D_auto_rodata_shared_800CA3AC[37] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5211);
+unsigned char rodata_unresolved_800C5211[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C55D1);
+unsigned char rodata_unresolved_800C55D1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5591);
+unsigned char rodata_unresolved_800C5591[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52E1);
+unsigned char rodata_unresolved_800C52E1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA3D1);
+unsigned char rodata_unresolved_800CA3D1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

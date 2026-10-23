@@ -5,5 +5,7 @@ void func_80290B90_eu(void) {}
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_80290B98_eu_padding_91798);
+unsigned int func_80290B98_eu_padding_91798[2] = {
+    0x02002021, 0x0C0A3FC2,
+};
 #endif

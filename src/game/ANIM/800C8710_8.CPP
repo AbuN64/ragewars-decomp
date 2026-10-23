@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8023EF00_C93D0);
+const unsigned int D_8023EF00_C93D0[2] = {
+    0xBF800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C3618);
+const char rodata_unresolved_800C3618[8] =
+    "_t\004.eosT";
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C39D8);
+const unsigned int rodata_unresolved_800C39D8[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3998);
+unsigned int rodata_unresolved_800C3998[2] = {
+    0x3463FFFF, 0x02A61021,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C36E8);
+const unsigned int rodata_unresolved_800C36E8[2] = {
+    0x0023F858, 0x0023F880,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned int D_blob_682bbc0322c5a074ded0[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C87D8);
+const unsigned int rodata_unresolved_800C87D8[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif

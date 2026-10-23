@@ -35,9 +35,13 @@ void func_802B468C_de(AudioLowPassFilter *lp)
 }
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802B49C8_eu_padding_B55C8);
+unsigned int func_802B49C8_eu_padding_B55C8[2] = {
+    0x02803021, 0x00408821,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802B4728_de_padding_B5328);
+unsigned int func_802B4728_de_padding_B5328[2] = {
+    0x8FB30058, 0xAFB60038,
+};
 #endif

@@ -8,5 +8,7 @@ const unsigned char D_auto_rodata_func_8044B7C0_de_800CA118_unclaimed_CAD28[17] 
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA139);
+unsigned char rodata_unresolved_800CA139[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

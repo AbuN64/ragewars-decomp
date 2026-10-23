@@ -19,9 +19,15 @@ void alHeapInit(void *arg0, s32 arg1, s32 arg2) {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802B03C4_de_padding_B12A4);
+#if defined(VERSION_EU_X)
+unsigned short func_802B03C4_de_padding_B12A4[6] = {
+    0x0043, 0x1021, 0xA050, 0x000A, 0x8E51, 0x0064,
+};
+#endif
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802B03C4_de_padding_B0FC4);
+unsigned int func_802B03C4_de_padding_B0FC4[3] = {
+    0xAFB00018, 0x00808021, 0xAFB1001C,
+};
 #endif

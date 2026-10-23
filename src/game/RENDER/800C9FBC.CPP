@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802859D0_CABBC);
+const unsigned int D_802859D0_CABBC[2] = {
+    0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4E04);
+unsigned int rodata_unresolved_800C4E04[3] = {
+    0x000B0000, 0x00000012, 0x43414D45,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C51C4);
+unsigned int rodata_unresolved_800C51C4[3] = {
+    0x3F000000, 0x3B088889, 0x4F000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5184);
+unsigned int rodata_unresolved_800C5184[3] = {
+    0xAC450000, 0x01201821, 0x28620002,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4ED4);
+char rodata_unresolved_800C4ED4[12] =
+    "ne__Construc";
 #endif
 
 #if defined(VERSION_US_REV1)

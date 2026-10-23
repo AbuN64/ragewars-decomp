@@ -234,17 +234,25 @@ void *func_80442DDC_de(ObjRecAt8V4 *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD344);
+unsigned int rodata_unresolved_800DD344[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9ED4);
+unsigned int rodata_unresolved_800E9ED4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EED14);
+unsigned int rodata_unresolved_800EED14[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE694);
+unsigned int rodata_unresolved_800DE694[1] = {
+    0x00000000,
+};
 #endif

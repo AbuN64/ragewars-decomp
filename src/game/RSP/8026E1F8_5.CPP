@@ -693,7 +693,9 @@ general:
 #endif
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", rodata_func_8026EE20_de_800C97C0);
+const unsigned int rodata_func_8026EE20_de_800C97C0[7] = {
+    0x3A83126F, 0xBF800000, 0x3F800000, 0x3A83126F, 0x3F800000, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

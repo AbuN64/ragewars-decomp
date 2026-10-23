@@ -1,39 +1,47 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B9B20_CD7C4);
+const char D_802B9B20_CD7C4[15] =
+    "io/pirawread.c\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C78A3);
+unsigned char rodata_unresolved_800C78A3[13] = {
+    0x0F, 0x00, 0x0A, 0x00, 0x04, 0x00, 0x00, 0x00, 0x08, 0x2E, 0x31, 0x37, 0x35,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800C78A4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8F43);
+unsigned char rodata_unresolved_800C8F43[13] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800C8F44);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8573);
+unsigned char rodata_unresolved_800C8573[13] = {
+    0x00, 0x4F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800C8574);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7983);
+char rodata_unresolved_800C7983[13] =
+    "\000io/sirawdma.";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800C7984);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

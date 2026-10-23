@@ -404,5 +404,7 @@ Acmd *func_802BEC34_de(Acmd *ptr, ALLoadFilter48_2 *f, s32 tsam, s32 nbytes, s16
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BECDC);
+unsigned int rodata_unresolved_802BECDC[1] = {
+    0x72696453,
+};
 #endif

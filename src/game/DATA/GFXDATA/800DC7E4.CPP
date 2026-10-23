@@ -1,11 +1,12 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DC7E3);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DC7E4);
+const char rodata_unresolved_800DC7E4[12] =
+    "\021RAX_VICTORY";
 #endif
 
 #if defined(NON_MATCHING) && defined(VERSION_US)

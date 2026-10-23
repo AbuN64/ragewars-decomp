@@ -145,7 +145,9 @@ INCLUDE_ASM("span_1000", func_8021035C_de);
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802106DC);
+unsigned int rodata_unresolved_802106DC[1] = {
+    0x4F506571,
+};
 #endif
 
 #if defined(VERSION_DE)

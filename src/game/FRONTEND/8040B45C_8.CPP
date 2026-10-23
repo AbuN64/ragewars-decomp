@@ -44,9 +44,13 @@ done:
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8040BC2C);
+unsigned int rodata_unresolved_8040BC2C[1] = {
+    0x00009608,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E88BC);
+unsigned int rodata_unresolved_800E88BC[1] = {
+    0x0043D414,
+};
 #endif

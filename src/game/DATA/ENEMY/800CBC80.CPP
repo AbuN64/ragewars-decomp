@@ -58,17 +58,25 @@ struct {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CBBB4);
+unsigned int rodata_unresolved_800CBBB4[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CD254);
+unsigned int rodata_unresolved_800CD254[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CC884);
+unsigned int rodata_unresolved_800CC884[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CBCA4);
+unsigned int rodata_unresolved_800CBCA4[1] = {
+    0x00000000,
+};
 #endif

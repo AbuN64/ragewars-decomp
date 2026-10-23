@@ -9,5 +9,7 @@ void func_802BE030_de(LldivResult *result, s64 numerator, s64 denominator) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BDFE8);
+unsigned int rodata_unresolved_802BDFE8[2] = {
+    0x494F5200, 0x00010000,
+};
 #endif

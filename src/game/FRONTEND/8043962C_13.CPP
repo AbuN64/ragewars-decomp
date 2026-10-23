@@ -86,21 +86,30 @@ void func_804399D0(MenuModelItem *item) {
 }
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DDF58);
+const unsigned int rodata_unresolved_800DDF58[4] = {
+    0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36, 0x3C8EFA36,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCC18);
+char rodata_unresolved_800DCC18[8] =
+    "equR\000\000I\001";
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E97A8);
+unsigned int rodata_unresolved_800E97A8[2] = {
+    0xFFFFFFF8, 0x00000017,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE5E8);
+unsigned int rodata_unresolved_800EE5E8[2] = {
+    0x02098024, 0x2251FFFA,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DDF68);
+unsigned int rodata_unresolved_800DDF68[2] = {
+    0x00439D80, 0x00439D88,
+};
 #endif

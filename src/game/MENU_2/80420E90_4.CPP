@@ -48,17 +48,25 @@ void func_804220A8_de(int key) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DC2C4);
+const unsigned int rodata_unresolved_800DC2C4[1] = {
+    0x3FAAAAA8,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800E8E54);
+const unsigned int rodata_unresolved_800E8E54[1] = {
+    0x3FAAAAA8,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800EDC94);
+const unsigned int rodata_unresolved_800EDC94[1] = {
+    0x3FAAAAA8,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800DD614);
+const unsigned int rodata_unresolved_800DD614[1] = {
+    0x3FAAAAA8,
+};
 #endif

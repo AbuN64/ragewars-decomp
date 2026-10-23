@@ -14,5 +14,7 @@ unsigned int D_auto_src_ragewars_tlb_snapshot_us_rev1[62] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800D2C20_0D3918);
+unsigned int rodata_writable_800D2C20_0D3918[2] = {
+    0x00000000, 0x00000000,
+};
 #endif

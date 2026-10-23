@@ -100,5 +100,6 @@ s32 func_8044B008_de(ControllerProfile *profile, s32 port) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8044B248);
+char rodata_unresolved_8044B248[8] =
+    "CMiscVar";
 #endif

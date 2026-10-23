@@ -70,9 +70,13 @@ s32 func_80436044_de(void) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9744);
+unsigned int rodata_unresolved_800E9744[3] = {
+    0x00000015, 0x00000001, 0x00000004,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE584);
+unsigned int rodata_unresolved_800EE584[3] = {
+    0x01785822, 0x19600002, 0x01735822,
+};
 #endif

@@ -49,13 +49,19 @@ s32 func_8041DEB4_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", func_8041DFB4_us_padding_181FB4);
+unsigned int func_8041DFB4_us_padding_181FB4[3] = {
+    0x65717568, 0x10000094, 0x10000B00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_8041E394_eu_x_padding_10E394);
+unsigned int func_8041E394_eu_x_padding_10E394[3] = {
+    0xAFB00010, 0x0C0A6623, 0x241000FF,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_8041E394_eu_padding_194394);
+unsigned int func_8041E394_eu_padding_194394[3] = {
+    0xAFA20014, 0x8FA2005C, 0x4600A306,
+};
 #endif

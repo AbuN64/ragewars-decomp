@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CACB8);
+const char D_8044B7C0_CACB8[15] =
+    "binaries index\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F07);
+unsigned char rodata_unresolved_800C4F07[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52C7);
+unsigned char rodata_unresolved_800C52C7[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5287);
+unsigned char rodata_unresolved_800C5287[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4FD7);
+unsigned char rodata_unresolved_800C4FD7[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -27,5 +36,7 @@ const unsigned char D_d1_020cabc903f155ab[15] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA0C7);
+unsigned char rodata_unresolved_800CA0C7[1] = {
+    0x00,
+};
 #endif

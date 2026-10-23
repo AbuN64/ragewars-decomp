@@ -383,9 +383,19 @@ void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input,
 }
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_80204808_de_padding_548C);
+unsigned int func_80204808_de_padding_548C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_80204868_de_padding_5468);
+#if defined(VERSION_DE)
+unsigned int func_80204868_de_padding_5468[2] = {
+    0xF041C0A8, 0xC1C218FD,
+};
+#endif
+#if defined(VERSION_US)
+char func_80204868_de_padding_5468[8] =
+    "ES\004.eosR";
+#endif
 #endif

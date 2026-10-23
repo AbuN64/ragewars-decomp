@@ -196,5 +196,6 @@ void func_8025D3E4_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8025D3E8);
+char rodata_unresolved_8025D3E8[8] =
+    "EHAVIOR_";
 #endif

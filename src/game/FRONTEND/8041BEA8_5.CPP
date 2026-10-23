@@ -511,5 +511,7 @@ s32 func_8041C574_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8041C67C);
+unsigned int rodata_unresolved_8041C67C[1] = {
+    0x00941000,
+};
 #endif

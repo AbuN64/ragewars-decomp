@@ -68,5 +68,7 @@ void func_802050C0_eu_x(Damageable *obj, Health *health, Hit *hit)
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C1D78);
+unsigned int rodata_unresolved_800C1D78[2] = {
+    0x43C00000, 0x3FC90FDC,
+};
 #endif

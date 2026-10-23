@@ -1,7 +1,9 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FE540);
+unsigned int rodata_unresolved_800FE540[2] = {
+    0x8FC30000, 0x00602021,
+};
 #endif
 
 #if defined(VERSION_US)
@@ -11,9 +13,13 @@ unsigned int D_auto_rodata_writable_800FE548[7] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FE564);
+unsigned int rodata_unresolved_800FE564[1] = {
+    0x00431021,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800FE568);
+unsigned int rodata_writable_800FE568[2] = {
+    0x8C430058, 0x10600024,
+};
 #endif

@@ -213,5 +213,7 @@ s32 func_80437274_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_80437304_de_padding_12826C);
+unsigned int func_80437304_de_padding_12826C[1] = {
+    0xAC6201C0,
+};
 #endif

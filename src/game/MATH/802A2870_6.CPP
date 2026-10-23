@@ -38,9 +38,13 @@ s32 func_802A206C_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802A206C_de_padding_A2BCC);
+unsigned int func_802A206C_de_padding_A2BCC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802A206C_de_padding_A2DDC);
+unsigned int func_802A206C_de_padding_A2DDC[1] = {
+    0x00000000,
+};
 #endif

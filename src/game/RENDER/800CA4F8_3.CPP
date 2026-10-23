@@ -1,23 +1,46 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80293534_CB0F8);
+#if defined(VERSION_DE)
+const char D_80293534_CB0F8[21] =
+    "Oct 19 1999\00010:19:36\000";
+#endif
+#if defined(VERSION_EU)
+const char D_80293534_CB0F8[21] =
+    "Oct 13 1999\00015:24:28\000";
+#endif
+#if defined(VERSION_EU_X)
+const char D_80293534_CB0F8[21] =
+    "Oct 15 1999\00010:56:04\000";
+#endif
+#if defined(VERSION_US)
+const char D_80293534_CB0F8[21] =
+    "Oct  8 1999\00015:39:01\000";
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C534D);
+unsigned char rodata_unresolved_800C534D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C570D);
+unsigned char rodata_unresolved_800C570D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C56CD);
+unsigned char rodata_unresolved_800C56CD[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C541D);
+unsigned char rodata_unresolved_800C541D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -26,5 +49,7 @@ const char D_blob_0bf5bb915a923121e978[21] = "Oct 13 1999\0" "14:57:39";
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA50D);
+unsigned char rodata_unresolved_800CA50D[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

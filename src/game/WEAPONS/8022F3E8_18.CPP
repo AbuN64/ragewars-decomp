@@ -12,29 +12,53 @@ u32 data_writable_800FF1B0[30] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FF228);
+unsigned int rodata_unresolved_800FF228[2] = {
+    0xB2E01EF1, 0xE1CDFFF3,
+};
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800FF230);
+#if defined(VERSION_DE)
+unsigned int rodata_writable_800FF230[1] = {
+    0xB1B31D31,
+};
+#endif
+#if defined(VERSION_US)
+unsigned int rodata_writable_800FF230[1] = {
+    0x6A0402B3,
+};
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FD231);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800FD234);
+unsigned int data_unresolved_800FD234[1] = {
+    0x010A5C6C,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800FF231);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800FF234);
+unsigned int data_unresolved_800FF234[1] = {
+    0xFFDEDA0B,
+};
 #endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800FF238);
+#if defined(VERSION_DE)
+unsigned int rodata_writable_800FF238[1] = {
+    0x2EA1EC3D,
+};
+#endif
+#if defined(VERSION_US)
+unsigned int rodata_writable_800FF238[1] = {
+    0x0402AB01,
+};
+#endif
 #endif

@@ -65,5 +65,7 @@ void func_802B8DC8_de(s32 pri, OSMesgQueue *cmdQ, void **cmdBuf, s32 cmdMsgCnt)
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802B8F48_de_padding_B9DE8);
+unsigned int func_802B8F48_de_padding_B9DE8[2] = {
+    0xAFB1001C, 0xAFB00018,
+};
 #endif

@@ -8,9 +8,13 @@ const unsigned char D_blob_phase2_549979ed41c81b2253c7[5] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE7AD);
+unsigned char rodata_unresolved_800DE7AD[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E27ED);
+unsigned char rodata_unresolved_800E27ED[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

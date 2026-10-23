@@ -23,5 +23,6 @@ s32 func_8041F120_us(ActorDefinitionHeader *actor, s32 event, s32 arg2, s32 arg3
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8041F1A8);
+char rodata_unresolved_8041F1A8[8] =
+    "I_ANIM_G";
 #endif

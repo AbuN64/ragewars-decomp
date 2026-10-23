@@ -20,5 +20,7 @@ s32 func_8025E4D4_de(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8025E49C);
+unsigned int rodata_unresolved_8025E49C[1] = {
+    0x74685F74,
+};
 #endif

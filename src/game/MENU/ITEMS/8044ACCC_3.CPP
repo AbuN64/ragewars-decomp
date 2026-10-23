@@ -7,5 +7,7 @@ const char data_func_8044B600_de_800C4F04[75] =
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4F4F);
+unsigned char rodata_unresolved_800C4F4F[1] = {
+    0x00,
+};
 #endif

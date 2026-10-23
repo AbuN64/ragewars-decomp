@@ -103,9 +103,13 @@ s32 func_802B2CF0_de(s32 val, f32 div) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B2CA8);
+unsigned int rodata_unresolved_802B2CA8[2] = {
+    0x73540000, 0x02000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802B2CF0_de_padding_B3C58);
+unsigned int func_802B2CF0_de_padding_B3C58[1] = {
+    0x00000000,
+};
 #endif

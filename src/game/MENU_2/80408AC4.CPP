@@ -1,7 +1,9 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800DDA24);
+unsigned int data_unresolved_800DDA24[3] = {
+    0x004297A8, 0x00429754, 0x004297A8,
+};
 #endif
 
 #if defined(VERSION_DE)

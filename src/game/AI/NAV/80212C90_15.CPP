@@ -207,5 +207,6 @@ store_c:
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802138E8);
+char rodata_unresolved_802138E8[8] =
+    "\000\033SFX_WA";
 #endif

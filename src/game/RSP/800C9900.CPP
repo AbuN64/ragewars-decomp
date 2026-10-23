@@ -1,7 +1,9 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_80271624_CA500);
+const unsigned int D_80271624_CA500[4] = {
+    0x461C4000, 0x38D1B717, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

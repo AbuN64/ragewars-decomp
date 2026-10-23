@@ -430,13 +430,18 @@ void func_802659E0_de(char *view) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C42E4);
+char rodata_unresolved_800C42E4[12] =
+    "\000\000\000\000\010m_bFlag";
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4664);
+unsigned int rodata_unresolved_800C4664[3] = {
+    0x24020001, 0xA4620000, 0x0C0AFC14,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C43B4);
+unsigned int rodata_unresolved_800C43B4[3] = {
+    0x41A00000, 0x3F800000, 0x41200000,
+};
 #endif

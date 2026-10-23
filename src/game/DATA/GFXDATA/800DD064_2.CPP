@@ -23,9 +23,13 @@ const unsigned int D_blob_phase2_909a18e76a085edf187f[8] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_func_8040E0D4_de_800E88E0);
+const unsigned int rodata_func_8040E0D4_de_800E88E0[4] = {
+    0x3F800000, 0x3F000000, 0x3F800000, 0x3F800000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_func_8040E0D4_de_800DD0A0);
+const unsigned int rodata_func_8040E0D4_de_800DD0A0[4] = {
+    0x3F800000, 0x3F000000, 0x3F800000, 0x3F800000,
+};
 #endif

@@ -1,20 +1,25 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CF5C0_unclaimed_D07AE);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)
 /* ROM-grounded data: src/ragewars_weapon_requirement_item_id_D07AC_us_rev1.c */
-unsigned short D_blob_8d01dd8926aa2a503724[1] = {
+unsigned short D_blob_8d01dd8926aa2a503724[] = {
     0x03EF,
+#if defined(VERSION_US_REV1)
+    0x0001,
+#endif
 };
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CF5C0_unclaimed_D07B2);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_bab145e3);
+unsigned int D_src_bab145e3[1] = {
+    0x00010064,
+};
 #endif

@@ -6,21 +6,31 @@ const unsigned char D_blob_phase2_7f8705674e42ed0499e7[7] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD40F);
+unsigned char rodata_unresolved_800DD40F[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9F9F);
+unsigned char rodata_unresolved_800E9F9F[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EEDDF);
+unsigned char rodata_unresolved_800EEDDF[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE75F);
+unsigned char rodata_unresolved_800DE75F[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E278F);
+unsigned char rodata_unresolved_800E278F[1] = {
+    0x00,
+};
 #endif

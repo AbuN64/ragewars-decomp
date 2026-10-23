@@ -275,13 +275,19 @@ f32 func_802B6300_de(ALDelay28 *d, s32 count)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B6300_de_padding_B6EA8);
+unsigned int func_802B6300_de_padding_B6EA8[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802B6300_de_padding_B7218);
+unsigned int func_802B6300_de_padding_B7218[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802B6378_de_padding_B6F78);
+unsigned int func_802B6378_de_padding_B6F78[2] = {
+    0x0080A821, 0xAFB30024,
+};
 #endif

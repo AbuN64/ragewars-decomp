@@ -25,21 +25,31 @@ const unsigned char D_blob_b453b23abee7d0469414[13] = {
 };
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C39A1);
+unsigned char rodata_unresolved_800C39A1[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3D61);
+unsigned char rodata_unresolved_800C3D61[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3D21);
+unsigned char rodata_unresolved_800C3D21[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3A71);
+unsigned char rodata_unresolved_800C3A71[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8B61);
+unsigned char rodata_unresolved_800C8B61[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

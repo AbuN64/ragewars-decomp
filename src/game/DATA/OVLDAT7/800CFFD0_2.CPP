@@ -8,5 +8,7 @@ unsigned int D_blob_bcbd6895eba00e5a2a67[2] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", D_src_32b8c39b);
+unsigned int D_src_32b8c39b[1] = {
+    0x0000FFFF,
+};
 #endif

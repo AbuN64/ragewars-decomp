@@ -293,13 +293,19 @@ s32 func_80444CF8_de(void) {
 }
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_shared_800EEE10);
+const unsigned short rodata_shared_800EEE10[3] = {
+    0x2020, 0x2532, 0x6400,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E9FD6);
+unsigned short rodata_unresolved_800E9FD6[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EEE16);
+unsigned short rodata_unresolved_800EEE16[1] = {
+    0x0000,
+};
 #endif

@@ -44,9 +44,13 @@ void func_802BA210_de(void)
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802BA210_de_padding_BB1EC);
+unsigned int func_802BA210_de_padding_BB1EC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802BA210_de_padding_BB1AC);
+unsigned int func_802BA210_de_padding_BB1AC[1] = {
+    0x00000000,
+};
 #endif

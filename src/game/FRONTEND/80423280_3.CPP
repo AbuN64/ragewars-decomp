@@ -318,5 +318,7 @@ s32 func_804239B0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD658);
+unsigned int rodata_unresolved_800DD658[2] = {
+    0x00424034, 0x0042405C,
+};
 #endif

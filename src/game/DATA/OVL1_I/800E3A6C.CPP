@@ -1,31 +1,46 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_src_1fb9cba3);
+#if defined(VERSION_DE)
+const unsigned int D_src_1fb9cba3[1] = {
+    0x43200000,
+};
+#endif
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
+const unsigned char D_src_1fb9cba3[3] = {
+    0x43, 0x20, 0x00,
+};
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE6CF);
+unsigned char rodata_unresolved_800DE6CF[13] = {
+    0x00, 0x43, 0x48, 0x00, 0x00, 0x43, 0x20, 0x00, 0x00, 0x43, 0x48, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800DE6D0);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EB24F);
+unsigned char rodata_unresolved_800EB24F[13] = {
+    0x00, 0x43, 0x48, 0x00, 0x00, 0x43, 0x20, 0x00, 0x00, 0x43, 0x48, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800EB250);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800F008F);
+unsigned char rodata_unresolved_800F008F[13] = {
+    0x00, 0x43, 0x48, 0x00, 0x00, 0x43, 0x20, 0x00, 0x00, 0x43, 0x48, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800F0090);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

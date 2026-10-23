@@ -1,23 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8023C78C_C92F0);
+const char D_8023C78C_C92F0[15] =
+    "Virtual Region\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C353F);
+unsigned char rodata_unresolved_800C353F[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C38FF);
+unsigned char rodata_unresolved_800C38FF[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C38BF);
+unsigned char rodata_unresolved_800C38BF[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C360F);
+unsigned char rodata_unresolved_800C360F[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -28,5 +37,7 @@ const unsigned char D_blob_9fb19b7b663031f2d772[15] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C86FF);
+unsigned char rodata_unresolved_800C86FF[1] = {
+    0x00,
+};
 #endif

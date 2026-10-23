@@ -1,39 +1,47 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802BB060_CD834);
+const char D_802BB060_CD834[15] =
+    "io/sirawread.c\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C7913);
+unsigned char rodata_unresolved_800C7913[13] = {
+    0x00, 0x10, 0x00, 0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x11, 0x53, 0x4D, 0x48,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800C7914);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8FB3);
+unsigned char rodata_unresolved_800C8FB3[13] = {
+    0x00, 0x00, 0x21, 0x02, 0x50, 0x00, 0x20, 0xF6, 0xE0, 0x00, 0x20, 0xFA, 0x30,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800C8FB4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C85E3);
+unsigned char rodata_unresolved_800C85E3[13] = {
+    0x00, 0x40, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00, 0x4F, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800C85E4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C79F3);
+char rodata_unresolved_800C79F3[13] =
+    "\000io/sirawwrit";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800C79F4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -44,5 +52,7 @@ const unsigned char D_blob_67e00fc028c9bce84a89[15] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CCC43);
+unsigned char rodata_unresolved_800CCC43[1] = {
+    0xE0,
+};
 #endif

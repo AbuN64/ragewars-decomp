@@ -55,5 +55,7 @@ s32 func_802BD400_de(u8 *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BD354);
+unsigned int rodata_unresolved_802BD354[3] = {
+    0x0C000000, 0x0000086D, 0x5F546578,
+};
 #endif

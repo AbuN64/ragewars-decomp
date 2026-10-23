@@ -90,9 +90,13 @@ void func_802BA910_de(void)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BAB7C);
+unsigned int rodata_unresolved_802BAB7C[1] = {
+    0x003C0000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802BA910_de_padding_BB84C);
+unsigned int func_802BA910_de_padding_BB84C[1] = {
+    0x00000000,
+};
 #endif

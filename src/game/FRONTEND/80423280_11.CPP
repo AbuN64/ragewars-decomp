@@ -203,9 +203,12 @@ block_7:
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DC794);
+char rodata_unresolved_800DC794[12] =
+    "\000\000\000\000\023RAX_INT";
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE164);
+unsigned int rodata_unresolved_800EE164[3] = {
+    0x00BA00C9, 0x00BB00C2, 0x00BC00BF,
+};
 #endif

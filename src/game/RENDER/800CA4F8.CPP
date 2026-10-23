@@ -1,5 +1,7 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_func_80291334_us_800C5350);
+const unsigned int rodata_func_80291334_us_800C5350[2] = {
+    0x42480000, 0x42700000,
+};
 #endif

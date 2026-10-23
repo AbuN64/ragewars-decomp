@@ -40,5 +40,7 @@ s32 func_80438918_eu_x(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("ovl_80400000", func_804389A8_eu_x_padding_1289A8);
+unsigned int func_804389A8_eu_x_padding_1289A8[2] = {
+    0xACA20188, 0x8FBF0020,
+};
 #endif

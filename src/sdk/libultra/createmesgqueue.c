@@ -15,5 +15,6 @@ void osCreateMesgQueue(OSMesgQueue *mq, OSMesg *msg, s32 msgCount) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BABB4);
+char rodata_unresolved_802BABB4[12] =
+    "GameRumble_t";
 #endif

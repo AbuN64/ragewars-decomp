@@ -62,5 +62,6 @@ void func_8028E880_us(OSSched *sc) {
 }
 #endif
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5274);
+char rodata_unresolved_800C5274[12] =
+    "bAdvanceCame";
 #endif

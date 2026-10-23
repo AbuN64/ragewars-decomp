@@ -20,5 +20,7 @@ void func_8044ADF0_de(ObjRecAt5F14 *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8044AFD4);
+unsigned int rodata_unresolved_8044AFD4[3] = {
+    0x61775200, 0x00100100, 0x00080091,
+};
 #endif

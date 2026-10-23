@@ -113,13 +113,19 @@ void func_80243920_de(ActorB0 *actor) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C36B4);
+unsigned int rodata_unresolved_800C36B4[3] = {
+    0x08000F00, 0x00000000, 0x0C6D5F44,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3A74);
+unsigned int rodata_unresolved_800C3A74[3] = {
+    0x4F000000, 0x47800000, 0x4F000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C3784);
+unsigned int rodata_unresolved_800C3784[3] = {
+    0xBF350481, 0x434CCCCC, 0x3F800000,
+};
 #endif

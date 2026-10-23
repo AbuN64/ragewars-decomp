@@ -25,5 +25,7 @@ void osViBlack(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA13C);
+unsigned int rodata_unresolved_802BA13C[1] = {
+    0x4F666673,
+};
 #endif

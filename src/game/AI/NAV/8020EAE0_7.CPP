@@ -222,5 +222,7 @@ s32 func_8020F614_de(void) {
 }
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_8020F6B8_de_padding_102B8);
+unsigned int func_8020F6B8_de_padding_102B8[2] = {
+    0x0ED090B3, 0x68328E00,
+};
 #endif

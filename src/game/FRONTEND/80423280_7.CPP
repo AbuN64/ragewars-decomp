@@ -70,17 +70,25 @@ int func_8042863C_de(int id) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DC69C);
+unsigned int rodata_unresolved_800DC69C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E922C);
+unsigned int rodata_unresolved_800E922C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE06C);
+unsigned int rodata_unresolved_800EE06C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD9EC);
+unsigned int rodata_unresolved_800DD9EC[1] = {
+    0x00000000,
+};
 #endif

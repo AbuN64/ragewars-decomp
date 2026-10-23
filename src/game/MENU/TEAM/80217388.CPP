@@ -121,5 +121,7 @@ void func_80217594_de(Player *arg0, s32 unused1, s32 arg2, s32 *entry) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8021762C);
+unsigned int rodata_unresolved_8021762C[1] = {
+    0x43524541,
+};
 #endif

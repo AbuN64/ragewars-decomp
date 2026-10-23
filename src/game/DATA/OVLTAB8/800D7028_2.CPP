@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_src_3e6e0646);
+const char D_src_3e6e0646[36] =
+    "<use this to fade out cinema text>\000\000";
 #endif
 
 #if defined(VERSION_US_REV1)

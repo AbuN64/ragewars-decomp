@@ -32,5 +32,6 @@ s32 func_802B2378(s32 arg0) {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802AD298);
+char rodata_unresolved_802AD298[8] =
+    "MRegionS";
 #endif

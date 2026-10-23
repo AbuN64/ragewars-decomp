@@ -6,7 +6,10 @@
 #include "COMMON/SCREEN.H"
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_func_80421568_de_800E15E8);
+const unsigned int rodata_func_80421568_de_800E15E8[10] = {
+    0x00421B24, 0x00421B38, 0x00421B4C, 0x00421B60, 0x00421B74, 0x00421B88, 0x00421B9C, 0x00421BB0,
+    0x00421BC4, 0x00421BD8,
+};
 #endif
 
 #if (defined(VERSION_EU) || defined(VERSION_EU_X)) && !defined(NON_MATCHING)

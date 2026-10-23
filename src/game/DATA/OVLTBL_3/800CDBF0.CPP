@@ -15,37 +15,46 @@ unsigned int D_auto_rodata_unresolved_800CDBF0[72] = {
 #endif
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_DATA("data_800C", rodata_writable_800CDD10);
+char rodata_writable_800CDD10[12] =
+    "sexysteve\000\000\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CDC2A);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800CDC2C);
+unsigned int data_unresolved_800CDC2C[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CF2CA);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800CF2CC);
+unsigned int data_unresolved_800CF2CC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CE8FA);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800CE8FC);
+unsigned int data_unresolved_800CE8FC[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CDD1A);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800CDD1C);
+unsigned int data_unresolved_800CDD1C[1] = {
+    0x00000000,
+};
 #endif

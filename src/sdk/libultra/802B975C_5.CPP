@@ -12,9 +12,13 @@ void func_802B53E0_de(void *arg0, void *arg1, void *arg2, int arg3) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802B56DC_eu_x_padding_B62DC);
+unsigned int func_802B56DC_eu_x_padding_B62DC[1] = {
+    0x02002821,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802B569C_eu_padding_B629C);
+unsigned int func_802B569C_eu_padding_B629C[1] = {
+    0xA6020030,
+};
 #endif

@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802BE3A8_eu_x_padding_C3DB8);
+char func_802BE3A8_eu_x_padding_C3DB8[8] =
+    "\000\007GT_COO";
 #endif
 
 #if defined(VERSION_US_REV1)

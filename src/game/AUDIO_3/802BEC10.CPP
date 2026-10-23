@@ -23,5 +23,6 @@ s32 func_802B9B20_de(s32 arg0, s32 *arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B9AE4);
+char rodata_unresolved_802B9AE4[12] =
+    "ModeInfo_t\004.";
 #endif

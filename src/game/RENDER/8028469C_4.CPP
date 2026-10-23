@@ -71,5 +71,6 @@ done:
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80285208);
+char rodata_unresolved_80285208[8] =
+    "Channels";
 #endif

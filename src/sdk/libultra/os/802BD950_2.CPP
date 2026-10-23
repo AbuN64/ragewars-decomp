@@ -46,9 +46,13 @@ void func_802B8AA0_de(s32 arg0, s32 arg1, u8 *arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B8AA0_de_padding_B9768);
+unsigned int func_802B8AA0_de_padding_B9768[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B8B6C);
+unsigned int rodata_unresolved_802B8B6C[1] = {
+    0x0011504C,
+};
 #endif

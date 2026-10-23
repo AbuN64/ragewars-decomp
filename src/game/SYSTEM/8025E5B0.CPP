@@ -5,5 +5,7 @@ unsigned char D_auto_func_8025E568_eu_padding_5F168[8] = { 0x02, 0x02, 0x80, 0x2
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", data_unresolved_8025E570);
+unsigned int data_unresolved_8025E570[1] = {
+    0x27BDFFB8,
+};
 #endif

@@ -11,5 +11,7 @@ const f32 data_func_802ABBDC_de_800C6540[21] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C6594);
+unsigned int rodata_unresolved_800C6594[1] = {
+    0x00000000,
+};
 #endif

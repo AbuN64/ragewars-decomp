@@ -235,5 +235,7 @@ void func_8026E540_de(TreeNode **root, TreeNode **empty_root, TreeNode *node, Tr
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_8026E55C);
+unsigned int rodata_unresolved_8026E55C[1] = {
+    0x41594552,
+};
 #endif

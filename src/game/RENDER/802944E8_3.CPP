@@ -118,9 +118,13 @@ void func_80294A74_de(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_RODATA("data_800C", rodata_func_8029499C_us_800C5410);
+const unsigned int rodata_func_8029499C_us_800C5410[1] = {
+    0x3F800000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C54E4);
+unsigned int rodata_unresolved_800C54E4[3] = {
+    0x75726500, 0x0029523C, 0x002954A0,
+};
 #endif

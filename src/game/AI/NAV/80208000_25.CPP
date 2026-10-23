@@ -1,5 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C1CD4);
+char rodata_unresolved_800C1CD4[12] =
+    "oshEdge_t\013CS";
 #endif

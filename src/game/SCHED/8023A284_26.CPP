@@ -308,9 +308,13 @@ s32 func_8023DDC4_de(Ray *ray, CQuatern *rect, f32 *t) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C3960);
+const unsigned int rodata_unresolved_800C3960[8] = {
+    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_RODATA("data_800C", rodata_unresolved_800C3670);
+const unsigned int rodata_unresolved_800C3670[8] = {
+    0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x3F800000, 0x4123D70A,
+};
 #endif

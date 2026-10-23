@@ -32,9 +32,12 @@ void func_8040C950_de(Slider *slider) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8040CB24);
+char rodata_unresolved_8040CB24[12] =
+    "MULTI_WEAPON";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", rodata_unresolved_8040CAA4);
+unsigned int rodata_unresolved_8040CAA4[3] = {
+    0x05DF0113, 0x2D04EFEF, 0xC10DD311,
+};
 #endif

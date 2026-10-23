@@ -413,5 +413,7 @@ f32 func_80209DAC_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C870C);
+unsigned int rodata_unresolved_800C870C[1] = {
+    0x0B000000,
+};
 #endif

@@ -5,5 +5,7 @@ unsigned char D_auto_func_8041C604_de_padding_182604[12] = { 0x8F, 0xBF, 0x00, 0
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("ovl_80400000", data_unresolved_8041C610);
+unsigned int data_unresolved_8041C610[1] = {
+    0x27BDFFA8,
+};
 #endif

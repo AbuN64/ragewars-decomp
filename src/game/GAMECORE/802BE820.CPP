@@ -91,5 +91,6 @@ OSPiHandle_s *func_802B9870_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B9874);
+char rodata_unresolved_802B9874[12] =
+    "ponT\000\000P\000\000\000\010\000";
 #endif

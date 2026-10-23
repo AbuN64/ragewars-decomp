@@ -33,5 +33,6 @@ INCLUDE_ASM("span_1000", func_802C5914);
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802C0CC8);
+char rodata_unresolved_802C0CC8[8] =
+    "\000\000\000\016CMen";
 #endif

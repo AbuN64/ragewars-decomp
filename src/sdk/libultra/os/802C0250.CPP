@@ -40,5 +40,7 @@ s32 func_802BB160_de(OSMesgQueue *arg0, void *arg1, s32 arg2) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BB1C4);
+unsigned int rodata_unresolved_802BB1C4[3] = {
+    0x00010008, 0x00000009, 0x43506C61,
+};
 #endif

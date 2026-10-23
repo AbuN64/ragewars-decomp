@@ -28,9 +28,13 @@ unsigned int D_auto_rodata_unresolved_801002EC[61] = {
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_writable_800FE3E0);
+unsigned int rodata_writable_800FE3E0[1] = {
+    0x1440001C,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_writable_801003E0);
+unsigned int rodata_writable_801003E0[1] = {
+    0xD3EFE631,
+};
 #endif

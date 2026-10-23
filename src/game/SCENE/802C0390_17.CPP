@@ -35,9 +35,13 @@ s32 func_802BB2A0_de(OSMesgQueue *queue, OSMesg *message, s32 block)
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BB2F4);
+unsigned int rodata_unresolved_802BB2F4[3] = {
+    0x0800F200, 0x69000000, 0x02000500,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802BB2A0_de_padding_BC2A4);
+unsigned int func_802BB2A0_de_padding_BC2A4[1] = {
+    0x00000000,
+};
 #endif

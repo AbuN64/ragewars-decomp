@@ -30,5 +30,7 @@ u32 func_80261614_de(s32 arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_80261608);
+unsigned int rodata_unresolved_80261608[2] = {
+    0x04000000, 0x01000400,
+};
 #endif

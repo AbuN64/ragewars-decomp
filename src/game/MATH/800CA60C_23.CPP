@@ -2,7 +2,9 @@
 #include "COMMON/OBJRECAT3CV2.H"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802A1270_CBB00);
+const unsigned int D_802A1270_CBB00[2] = {
+    0xCCBEBC20, 0x4CBEBC20,
+};
 #endif
 
 #if defined(VERSION_US_REV1)

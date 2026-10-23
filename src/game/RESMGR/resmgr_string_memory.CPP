@@ -582,9 +582,13 @@ void func_802A0AA4_de(s32 *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802A0AA4_de_padding_A1604);
+unsigned int func_802A0AA4_de_padding_A1604[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802A0AA4_de_padding_A17E4);
+unsigned int func_802A0AA4_de_padding_A17E4[1] = {
+    0x00000000,
+};
 #endif

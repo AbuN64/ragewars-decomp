@@ -1,19 +1,32 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_8044B7C0_CACA4);
+#if defined(VERSION_DE)
+const char D_8044B7C0_CACA4[20] =
+    "particle effects\000\000\000\000";
+#endif
+#if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US)
+const char D_8044B7C0_CACA4[17] =
+    "particle effects\000";
+#endif
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C4EF5);
+unsigned char rodata_unresolved_800C4EF5[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C52B5);
+unsigned char rodata_unresolved_800C52B5[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C5275);
+unsigned char rodata_unresolved_800C5275[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -24,5 +37,7 @@ const unsigned char D_auto_src_rw_text_8044B7C0_CACA4_us_rev1[17] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CA0B5);
+unsigned char rodata_unresolved_800CA0B5[3] = {
+    0x00, 0x00, 0x00,
+};
 #endif

@@ -435,9 +435,12 @@ f64 func_802B53B4_de(f64 arg0, s32 arg1) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B53B4_de_padding_B5F04);
+unsigned int func_802B53B4_de_padding_B5F04[1] = {
+    0x00000000,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B5308);
+char rodata_unresolved_802B5308[8] =
+    "\000\013Target";
 #endif

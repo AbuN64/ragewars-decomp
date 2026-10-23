@@ -2,5 +2,7 @@
 
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802BD150_de_padding_BDD5C);
+unsigned int func_802BD150_de_padding_BDD5C[1] = {
+    0x00000000,
+};
 #endif

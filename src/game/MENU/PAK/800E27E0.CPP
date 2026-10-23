@@ -8,9 +8,13 @@ const unsigned short D_blob_phase2_ceab36489678f9aeb2a6[3] = {
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DE7A6);
+unsigned short rodata_unresolved_800DE7A6[1] = {
+    0x0000,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E27E6);
+unsigned short rodata_unresolved_800E27E6[1] = {
+    0x0000,
+};
 #endif

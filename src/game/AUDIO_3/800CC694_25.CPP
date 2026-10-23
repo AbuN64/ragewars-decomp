@@ -2,11 +2,15 @@
 #include "COMMON/EXTERNS_2.H"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B5B94_CD610);
+const unsigned int D_802B5B94_CD610[9] = {
+    0x41F00000, 0x00000000, 0x36C1D168, 0x47000000, 0x38000000, 0x3F800000, 0x40000000, 0x40800000,
+    0x3F800000,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C77E4);
+char rodata_unresolved_800C77E4[12] =
+    "audio/save.c";
 #endif
 
 #if defined(VERSION_US_REV1)

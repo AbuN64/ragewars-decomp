@@ -29,5 +29,7 @@ int func_802AEAA0_de(void *object) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802AE9DC);
+unsigned int rodata_unresolved_802AE9DC[1] = {
+    0x4576656E,
+};
 #endif

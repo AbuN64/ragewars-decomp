@@ -304,17 +304,25 @@ void func_80421FEC_de(struct Rec_func_8024C92C_de *record, s32 value) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DC2A8);
+unsigned int rodata_unresolved_800DC2A8[2] = {
+    0x000F000A, 0x00040000,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800E8E38);
+unsigned int rodata_unresolved_800E8E38[2] = {
+    0x0044333C, 0x0044333C,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EDC78);
+unsigned int rodata_unresolved_800EDC78[2] = {
+    0x0800FFB6, 0x0800FFB7,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DD5F8);
+unsigned int rodata_unresolved_800DD5F8[2] = {
+    0x3E828F5D, 0x4F000000,
+};
 #endif

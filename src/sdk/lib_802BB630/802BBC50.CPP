@@ -182,13 +182,19 @@ void func_802B6D54_de(f32 *arg0, s32 *arg1) {
 }
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("span_1000", func_802B6DEC_de_padding_B7CCC);
+unsigned int func_802B6DEC_de_padding_B7CCC[1] = {
+    0x54430001,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("span_1000", func_802B6DEC_de_padding_B7C8C);
+unsigned int func_802B6DEC_de_padding_B7C8C[1] = {
+    0x27BDFFD8,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802B6DEC_de_padding_B79EC);
+unsigned int func_802B6DEC_de_padding_B79EC[1] = {
+    0xF7B50068,
+};
 #endif

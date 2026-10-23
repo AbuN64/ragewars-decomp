@@ -8,5 +8,6 @@ unsigned int func_802B72C0_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B7204);
+char rodata_unresolved_802B7204[12] =
+    "_t\015m_pmeTiny";
 #endif

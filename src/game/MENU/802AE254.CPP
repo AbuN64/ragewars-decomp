@@ -8,9 +8,13 @@ int func_802AD264_de(void) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802AD19C);
+unsigned int rodata_unresolved_802AD19C[1] = {
+    0x5F437572,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("span_1000", func_802AD264_de_padding_ADE6C);
+unsigned int func_802AD264_de_padding_ADE6C[1] = {
+    0x00000000,
+};
 #endif

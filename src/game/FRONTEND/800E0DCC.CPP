@@ -1,23 +1,29 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE) || defined(VERSION_US)
-INCLUDE_RODATA("data_800C", D_8040B444_E19CC);
+const unsigned char D_8040B444_E19CC[5] = {
+    0x25, 0x31, 0x64, 0x2E, 0x00,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DBA51);
+unsigned char rodata_unresolved_800DBA51[7] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800DBA54);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800DCDA1);
+unsigned char rodata_unresolved_800DCDA1[7] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800DCDA4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

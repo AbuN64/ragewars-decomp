@@ -2,23 +2,33 @@
 #include "COMMON/EXTERNS_2.H"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B2780_CD394);
+const unsigned char D_802B2780_CD394[7] = {
+    0x38, 0xD1, 0xB7, 0x17, 0x45, 0x58, 0x00,
+};
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C746B);
+unsigned char rodata_unresolved_800C746B[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8B0B);
+unsigned char rodata_unresolved_800C8B0B[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C813B);
+unsigned char rodata_unresolved_800C813B[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C754B);
+unsigned char rodata_unresolved_800C754B[1] = {
+    0x00,
+};
 #endif
 
 #if defined(VERSION_US_REV1)
@@ -34,5 +44,7 @@ const unsigned char D_blob_ce162ddee47edc10f46e[3] = {
 #endif
 
 #if defined(VERSION_US_REV1)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CC79B);
+unsigned char rodata_unresolved_800CC79B[1] = {
+    0x00,
+};
 #endif

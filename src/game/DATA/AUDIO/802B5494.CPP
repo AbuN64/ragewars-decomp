@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_802B03C4_de_padding_B6094);
+char func_802B03C4_de_padding_B6094[12] =
+    "m_nFramesRnd";
 #endif
 
 #if defined(VERSION_US_REV1)

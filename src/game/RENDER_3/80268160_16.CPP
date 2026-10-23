@@ -11,5 +11,9 @@ u32 data_writable_800CD910[20] = {
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800CD960);
+#if defined(VERSION_EU_X)
+unsigned short rodata_unresolved_800CD960[8] = {
+    0xA000, 0x0000, 0xA000, 0x0000, 0x00FF, 0x0000, 0x00FF, 0x0000,
+};
+#endif
 #endif

@@ -46,5 +46,6 @@ int func_802B23F4_de(void *arg0) {
 }
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802B2374);
+char rodata_unresolved_802B2374[12] =
+    "MemEndT\000\000\010\000\000";
 #endif

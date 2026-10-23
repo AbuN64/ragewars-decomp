@@ -1,7 +1,8 @@
 #include "include_asm.h"
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", func_8020F6D8_eu_x_padding_102B8);
+char func_8020F6D8_eu_x_padding_102B8[8] =
+    "MBIENCEe";
 #endif
 
 #if defined(VERSION_US_REV1)

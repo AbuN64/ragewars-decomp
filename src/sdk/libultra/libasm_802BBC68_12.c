@@ -2,5 +2,7 @@
 
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BCE3C);
+unsigned int rodata_unresolved_802BCE3C[1] = {
+    0x4D61785A,
+};
 #endif

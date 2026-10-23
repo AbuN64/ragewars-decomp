@@ -47,5 +47,7 @@ s32 func_802BA140_de(void *arg0)
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("span_1000", rodata_unresolved_802BA0BC);
+unsigned int rodata_unresolved_802BA0BC[1] = {
+    0x5F624475,
+};
 #endif

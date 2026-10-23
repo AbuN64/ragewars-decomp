@@ -1,39 +1,45 @@
 #include "include_asm.h"
 
 #if !(defined(VERSION_US_REV1))
-INCLUDE_RODATA("data_800C", D_802B9CB0_CD7E4);
+const char D_802B9CB0_CD7E4[14] =
+    "io/sirawdma.c\000";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C78C2);
+char rodata_unresolved_800C78C2[14] =
+    "\000\015SMHUD_EXPAND";
 #endif
 
 #if defined(VERSION_US)
-INCLUDE_DATA("data_800C", data_unresolved_800C78C4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8F62);
+unsigned short rodata_unresolved_800C8F62[7] = {
+    0xED70, 0x0020, 0xEB00, 0x0021, 0x0250, 0x0020, 0xF6E0,
+};
 #endif
 
 #if defined(VERSION_EU_X)
-INCLUDE_DATA("data_800C", data_unresolved_800C8F64);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C8592);
+char rodata_unresolved_800C8592[14] =
+    " Texts\000\000\000\000\077\200\000\000";
 #endif
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", data_unresolved_800C8594);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", rodata_unresolved_800C79A2);
+char rodata_unresolved_800C79A2[14] =
+    "\000\000io/sprawdma.";
 #endif
 
 #if defined(VERSION_DE)
-INCLUDE_DATA("data_800C", data_unresolved_800C79A4);
+/* bytes live in the preceding array */
 #endif
 
 #if defined(VERSION_US_REV1)

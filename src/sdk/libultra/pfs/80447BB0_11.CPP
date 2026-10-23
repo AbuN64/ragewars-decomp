@@ -116,5 +116,7 @@ void func_80447A38_de(u8 *valid, EntryRecAt3 *data) {
 }
 
 #if defined(VERSION_EU)
-INCLUDE_DATA("ovl_80400000", func_80447A38_de_padding_1BED4C);
+unsigned int func_80447A38_de_padding_1BED4C[1] = {
+    0x00000000,
+};
 #endif
