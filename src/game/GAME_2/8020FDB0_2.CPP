@@ -6,8 +6,8 @@
 #include "COMMON/OBJECTLINKS1458.H"
 #include "COMMON/SELF.H"
 
-void func_802100E0_de(void *arg0) {
-    AiController *controller = arg0;
+void func_802100E0_de(void *brain) {
+    AiController *controller = brain;
     s32 temp_v0;
 
     if ((func_802744D4_de() % 100) < 0x15) {

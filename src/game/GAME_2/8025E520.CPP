@@ -14,8 +14,8 @@ short func_8025E500_de(void *arg0) {
     return ((ControllerCode802591C0 *)arg0)->group;
 }
 
-short func_8025E50C_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->sample;
+short func_8025E50C_de(void *desc) {
+    return ((ControllerCode802591C0 *)desc)->sample;
 }
 
 /** Return the signed byte at offset four in the supplied object. */
@@ -24,8 +24,8 @@ int func_8025E518_de(void *object) {
 }
 
 /** Return the signed byte at offset five. */
-int func_8025E524_de(ControllerCode802591C0 *arg0) {
-    return arg0->mode;
+int func_8025E524_de(ControllerCode802591C0 *note) {
+    return note->mode;
 }
 
 /** Return the signed halfword at offset eight. */
@@ -42,8 +42,8 @@ unsigned int func_8025E548_de(void *arg0) {
     return ((ControllerCode802591C0 *)arg0)->flags >> 14;
 }
 
-signed char func_8025E554_de(void *arg0) {
-    return ((ControllerCode802591C0 *)arg0)->pitch;
+signed char func_8025E554_de(void *desc) {
+    return ((ControllerCode802591C0 *)desc)->pitch;
 }
 
 /** Read the signed object byte at offset 0xF. */
@@ -60,8 +60,8 @@ unsigned short func_8025E578_de(void *arg0) {
     return ((ControllerCode802591C0 *)arg0)->flags & 0x3FFF;
 }
 
-short func_8025E584_de(ControllerCode802591C0 *arg0) {
-    return arg0->x;
+short func_8025E584_de(ControllerCode802591C0 *controller) {
+    return controller->x;
 }
 
 /** Return the signed halfword at offset 0x14 in the supplied object. */

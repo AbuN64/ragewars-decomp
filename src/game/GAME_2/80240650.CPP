@@ -7,7 +7,7 @@
 #include "COMMON/RENDERSORTRECORD.H"
 #include "GAME_2/80240650.H"
 
-s32 func_80240660_de(void *arg0, Triple t, s32 arg4, s32 arg5, void *arg6) {
+s32 func_80240660_de(void *arg0, Triple t, s32 room, s32 arg5, void *arg6) {
     char unused[0xB60];
     *(Triple *)arg6 = t;
     return 1;

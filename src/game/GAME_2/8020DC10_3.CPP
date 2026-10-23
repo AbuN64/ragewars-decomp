@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "COMMON/SELF.H"
 
-s32 func_8020DD04_de(WeightSource *arg0) {
+s32 func_8020DD04_de(WeightSource *weights) {
     s32 first;
     s32 second;
     s32 third;
@@ -13,9 +13,9 @@ s32 func_8020DD04_de(WeightSource *arg0) {
     s32 total;
     s32 value;
 
-    first = (s32)arg0->first;
-    second = (s32)arg0->second;
-    third = (s32)arg0->third;
+    first = (s32)weights->first;
+    second = (s32)weights->second;
+    third = (s32)weights->third;
     first_end = 0;
     if (first > 0) {
         first_end = first;
