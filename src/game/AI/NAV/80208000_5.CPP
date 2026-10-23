@@ -37,7 +37,7 @@ extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 struct LevelActor;
 extern void func_802850C8_de(struct EffectSystem *arg0, struct LevelActor *arg1, f32 *arg2);
 
-extern f32 func_8020AA0C_de(void *arg0);
+extern f32 Nav_GetEngagementDistance(void *arg0);
 
 
 extern f32 func_80216F44_de(Player *arg0, CVector3 point);
@@ -281,7 +281,7 @@ void func_8020A458_de(void *object, void *settings) {
         record = arg0->target->player;
         distance = func_80216F44_de(arg0->player,
                                  record->pos);
-        if (func_8020AA0C_de(arg0) < distance) {
+        if (Nav_GetEngagementDistance(arg0) < distance) {
             return;
         }
         arg0->unk23C = 1;
@@ -344,7 +344,7 @@ void func_8020A6D8_de(void *arg0, void *arg1) {
     } else {
         record = ((AiController *)arg0)->target->player;
         distance = func_80216F44_de(((AiController *)arg0)->player, record->pos);
-        if (func_8020AA0C_de(arg0) < distance) {
+        if (Nav_GetEngagementDistance(arg0) < distance) {
             return;
         }
         ((AiController *)arg0)->unk23C = 1;
@@ -381,7 +381,7 @@ void func_8020A7B0_de(void *arg0, void *arg1) {
     brain->unk2E4 = -1;
     record = brain->target->player;
     distance = func_80216F44_de(brain->player, record->pos);
-    if (func_8020AA0C_de(arg0) < distance) {
+    if (Nav_GetEngagementDistance(arg0) < distance) {
         brain->unk23C = 1;
         return;
     }

@@ -11,7 +11,7 @@
 
 /** Returns the difference between the constant after D_800C6E20 and func_80209AE8_de's result, scaled by D_800C6E28. */
 
-extern f32 func_80209AE8_de(void);
+extern f32 func_80209AE8_de(AiController *controller);
 
 extern f32 D_800C1D34_de;
 
@@ -23,8 +23,9 @@ s32 func_8028B25C_de(void *arg0, s16 arg1);
 
 
 
-f32 func_8020AA0C_de(void) {
-    return (D_800C1D34_de - func_80209AE8_de()) * (D_800C6E28);
+/* Preserve the owning controller passed in a0 by the original MIPS. */
+f32 Nav_GetEngagementDistance(AiController *controller) {
+    return (D_800C1D34_de - func_80209AE8_de(controller)) * D_800C6E28;
 }
 
 void func_8020AA40_de(Shared_Arg0 *arg0)
