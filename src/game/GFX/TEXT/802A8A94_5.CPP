@@ -113,7 +113,7 @@ s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
         || (temp_v0 = Render_StartWorldEffect(&D_8011FE88, arg0, 0, 1), temp_v0 == 0)) {
         return 0;
     }
-    func_802AA1AC_de(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
+    Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
     func_80253754_de(0, temp_v0);
     return 1;
 }
@@ -133,7 +133,7 @@ INCLUDE_ASM("span_1000", func_802AAC28_de);
 
 
 
-extern void func_802AA1AC_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
+extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
 void func_802AA950_de(s32 arg0, s32 arg1, s32 *arg2, s32 *arg3)
 {
@@ -205,7 +205,7 @@ s32 func_802AAC28_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5,
         || (temp_v0 = Render_StartWorldEffect(&D_8011FE88, arg0, 0, 1), temp_v0 == 0)) {
         return 0;
     }
-    func_802AA1AC_de(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
+    Text_DrawTileGrid(temp_v0, arg1, arg2, arg3, arg4, arg5, arg6);
     func_80253754_de(0, temp_v0);
     return 1;
 }

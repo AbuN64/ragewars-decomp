@@ -19,13 +19,13 @@ static inline void rectangle(s32 x0,s32 y0,s32 x1,s32 y1,s32 r,s32 g,s32 b,s32 a
     gDPFillRectangle(D_80110634++, x0>0?x0:0,y0>0?y0:0,x1>0?x1:0,y1>0?y1:0);
 }
 
-/* Draws a signed integer of up to four digits with the font sprite set from Render_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through func_802AA1AC_de, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
+/* Draws a signed integer of up to four digits with the font sprite set from Render_StartWorldEffect: splits the magnitude into thousands, hundreds, tens and ones, draws a leading minus sign through func_802AAC28_de when negative, then draws at least minDigits digits through Text_DrawTileGrid, advancing 13 units per digit (0.7 of that for a one) scaled by the size, laid out right to left when rightAlign is set, and releases the sprite set. */
 
 
 
 extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 
-extern void func_802AA1AC_de(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
+extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, f32 arg5, s32 arg6);
 
 
 extern Gfx *D_80110634;
@@ -228,7 +228,7 @@ void func_802A822C_de(s32 value, f32 x, f32 y, f32 size, f32 arg4, s32 arg5, s32
             x -= width;
         }
         if ((u32)digit < 10) {
-            func_802AA1AC_de(sprites, digit, x, y, size, arg4, arg5);
+            Text_DrawTileGrid(sprites, digit, x, y, size, arg4, arg5);
         }
         if (!rightAlign) {
             x += width;

@@ -12,7 +12,7 @@
 #include "MENU/PAK/8043F69C_6.H"
 
 extern Node80253610 *Render_StartWorldEffect(Shared_World *, s32, s32, s32);
-extern void func_802AA1AC_de(Node80253610 *, s32, s16, s16, f32, f32, s32);
+extern void Text_DrawTileGrid(Node80253610 *, s32, s16, s16, f32, f32, s32);
 extern void func_80253754_de(void *, Node80253610 *);
 
 /* The advance and kerning scale follow the currently selected font. */
@@ -102,7 +102,7 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
                 sy = D_800E28D4 * (1.0f / 222.0f);
             }
             if (glyph != 255) {
-                func_802AA1AC_de(font, glyph, (s16)x, (s16)y, sx, sy, 1);
+                Text_DrawTileGrid(font, glyph, (s16)x, (s16)y, sx, sy, 1);
             }
             x += advance * sx;
             text++;
