@@ -15,7 +15,7 @@
 
 extern Gfx *D_80110634;
 extern void func_80253908_de(s32 heap);
-extern void func_80288938_de(Scene_func_80288EA8_de *scene);
+extern void Scene_BuildCachedGeometry(Scene_func_80288EA8_de *scene);
 
 
 extern void func_802504B0_de(Object_func_80288EA8_de *object, void *camera);
@@ -28,7 +28,7 @@ void func_80288EA8_de(Scene_func_80288EA8_de *scene, void *camera) {
 
     if (scene->loaded == 0) {
         func_80253908_de(0);
-        func_80288938_de(scene);
+        Scene_BuildCachedGeometry(scene);
         if (scene->loaded == 0) {
             return;
         }

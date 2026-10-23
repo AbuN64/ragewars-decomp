@@ -132,61 +132,54 @@ extern SceneHandle *func_802507AC_de(SceneProp *,s32);
 extern void func_80270910_de(f32 *,u32 *);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 static inline u32 *sceneMatrix(SceneProp *prop) { return prop->matrix; }
-void func_80288938_de(SceneWorld *arg0) {
-    f32 sp28[16];
+/* 106 aligned edits from the 348-word target; remaining: loop scheduling and register allocation. */
+void Scene_BuildCachedGeometry(SceneWorld *world) {
+    f32 matrix[16];
     CVector3 position;
     CVector3 transformed;
-    SceneHandle *sp88[3000];
-    SceneProp *sp2F68[512];
-    s32 sp3768;
-    s32 sp376C;
-    s32 sp3770;
-    s32 sp3774;
-    s32 sp3778;
-    SceneCell *sp377C;
-    s32 sp3780;
-    SceneProp **sp3784;
-    Gfx *sp3788;
-    s32 sp378C;
-    Gfx *temp_a1;
-    Gfx *temp_a1_2;
-    Gfx *temp_a1_3;
-    Gfx *temp_a2;
-    Gfx *temp_a2_2;
-    Gfx *temp_a3;
-    Gfx *temp_v0;
-    SceneHandle *temp_v0_3;
-    SceneHandle *temp_v0_5;
-    f32 temp_fv0f;
-    f32 var_fv0;
-    SceneHandle **var_fp;
-    s32 temp_a2_3;
-    s32 temp_lo;
-    s32 temp_s0;
-    s32 temp_s0_2;
-    s32 *temp_s0_3;
-    s32 temp_s0_4;
-    s32 temp_s0_5;
-    s32 temp_s1;
-    s32 temp_s3;
-    s32 temp_s5;
-    s32 temp_s6;
-    s32 temp_t5;
-    s32 temp_t5_2;
-    s32 temp_v0_2;
-    s32 *temp_v1;
-    s32 var_s0;
-    s32 var_s5;
-    s32 var_s7;
-    SceneBuffer *temp_s2;
-    s8 *temp_v0_4;
-    SceneProp *var_s1;
-    SceneHandle *temp_v0_6;
+    SceneHandle *resources[3000];
+    SceneProp *props[512];
+    s32 resourceSize;
+    s32 xCount;
+    s32 z;
+    s32 lastX;
+    s32 lastZ;
+    SceneCell *cells;
+    s32 propCount;
+    SceneProp **nextProp;
+    Gfx *firstGfx;
+    s32 row;
+    SceneHandle **nextResource;
+    SceneHandle *resource;
+    SceneHandle *cache;
+    SceneHandle *geometry;
+    SceneBuffer *propRecords;
+    s32 *resourceData;
+    SceneBuffer *points;
+    SceneProp *prop;
+    SceneProp *propBase;
+    ScenePoint *point;
+    s32 zCount;
+    s32 x;
+    s32 cell;
+    s32 key;
+    s32 p;
+    s32 pointIndex;
+    s32 pointCount;
+    s32 model;
+    s32 resourceBytes;
+    s32 propBytes;
+    s32 gfxBytes;
+    s32 propOffset;
+    s32 gfxOffset;
+    s32 *packed;
+    f32 height;
+    f32 maximum;
 
-    var_fp = sp88;
-    sp3784 = sp2F68;
-    sp3770 = 0;
-    sp3788 = D_80110634;
+    nextResource = resources;
+    nextProp = props;
+    z = 0;
+    firstGfx = D_80110634;
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
     gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNX, FRUSTRATIO_2);
@@ -194,114 +187,86 @@ void func_80288938_de(SceneWorld *arg0) {
     gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_2);
     gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_2);
     func_8026D980_de();
-    sp376C = ((SceneBuffer *)func_8028FDB4_de(arg0->grid, 0))->count;
-    temp_s0 = ((SceneBuffer *)func_8028FDB4_de(arg0->grid, 2))->count;
-    temp_s0_2 = temp_s0 - 1;
-    sp377C = (void *)((u8 *)func_8028FDB4_de(arg0->grid, 4) + 8);
-    sp3778 = temp_s0_2;
-    sp3774 = sp376C - 1;
-    if (temp_s0_2 >= 0) {
-        sp378C = 0;
-        do {
-            var_s7 = 0;
-            if (sp3774 >= 0) {
-                do {
-                    temp_a2_3 = var_s7 + sp378C;
-                    if (sp377C[temp_a2_3].loaded == 0) {
-                        temp_v0_2 = func_8028FE3C_de(arg0->catalog, arg0->id, temp_a2_3, &sp3768);
-                        temp_v0_3 = func_8025193C_de(0, temp_v0_2, temp_v0_2, sp3768, 4, arg0, D_0028798C, D_800C5210_de, 1);
-                        if (temp_v0_3 != 0) {
-                            temp_s0_3 = temp_v0_3->data;
-                            if (*temp_s0_3 != 0) {
-                                func_80253670_de(0, temp_v0_3);
-                                *var_fp = temp_v0_3;
-                                var_fp++;
-                                temp_v0_4 = func_8028FDB4_de(temp_s0_3, 0);
-                                var_s5 = 0;
-                                temp_t5_2 = ((SceneBuffer *)(void *)temp_v0_4)->count;
-                                sp3780 = temp_t5_2;
-                                if (temp_t5_2 > 0) {
-                                    var_s1 = (void *)(temp_v0_4 + 8);
-                                    do {
-                                        if (!(var_s1->flags & 0x40)) {
-                                            var_s1->resource = temp_v0_3;
-                                            if ((var_s1->flags & 4) || (func_80250A64_de(var_s1) < 0)) {
-                                                *sp3784 = var_s1;
-                                                sp3784++;
-                                            } else {
-                                                temp_s0_4 = func_80250A64_de(var_s1);
-                                                var_fp = func_80250B24_de(var_s1, temp_s0_4, func_80250A8C_de(var_s1), var_fp);
-                                                func_802504B0_de(var_s1,0);
-                                            }
-                                            temp_v0_5 = func_802507AC_de(var_s1, func_80250A8C_de(var_s1));
-                                            if (temp_v0_5 != 0) {
-                                                var_s0 = 0;
-                                                temp_s2 = func_8028FDB4_de(temp_v0_5->data, 0);
-                                                temp_s6 = temp_s2->count;
-                                                func_80270910_de(sp28, sceneMatrix(var_s1));
-                                                if (temp_s6 > 0) {
-                                                    do {
-                                                        temp_lo = var_s0 * temp_s2->stride;
-                                                        position.x = (f32) ((ScenePoint *)(void *)((u8 *)temp_s2 + (temp_lo + 8)))->x;
-                                                        position.y = (f32) ((ScenePoint *)(void *)((u8 *)temp_s2 + (temp_lo + 8)))->y;
-                                                        position.z = (f32) ((ScenePoint *)(void *)((u8 *)temp_s2 + (temp_lo + 8)))->z;
-                                                        func_80272898_de(sp28, &position, &transformed);
-                                                        var_fv0 = transformed.y;
-                                                        temp_fv0f = arg0->maximumHeight;
-                                                        if (!(var_fv0 <= temp_fv0f)) {
-                                                            var_fv0 = temp_fv0f;
-                                                        }
-                                                        var_s0 += 1;
-                                                        arg0->maximumHeight = var_fv0;
-                                                    } while (var_s0 < temp_s6);
-                                                }
-                                                func_80253754_de(0, temp_v0_5);
-                                            }
-                                        }
-                                        var_s5 += 1;
-                                        var_s1++;
-                                    } while (var_s5 < sp3780);
+    xCount = ((SceneBuffer *)func_8028FDB4_de(world->grid, 0))->count;
+    zCount = ((SceneBuffer *)func_8028FDB4_de(world->grid, 2))->count;
+    cells = (SceneCell *)((SceneBuffer *)func_8028FDB4_de(world->grid, 4) + 1);
+    lastZ = zCount - 1;
+    lastX = xCount - 1;
+    for (row = 0; z <= lastZ; z++, row += xCount) {
+        for (x = 0; x <= lastX; x++) {
+            cell = x + row;
+            if (cells[cell].loaded == 0) {
+                key = func_8028FE3C_de(world->catalog, world->id, cell, &resourceSize);
+                resource = func_8025193C_de(0, key, key, resourceSize, 4, world, D_0028798C, D_800C5210_de, 1);
+                if (resource != 0) {
+                    resourceData = resource->data;
+                    if (*resourceData != 0) {
+                        func_80253670_de(0, resource);
+                        *nextResource++ = resource;
+                        propRecords = func_8028FDB4_de(resourceData, 0);
+                        propCount = propRecords->count;
+                        propBase = (SceneProp *)(propRecords + 1);
+                        for (p = 0; p < propCount; p++) {
+                            prop = &propBase[p];
+                            if (!(prop->flags & 0x40)) {
+                                prop->resource = resource;
+                                if ((prop->flags & 4) || func_80250A64_de(prop) < 0) {
+                                    *nextProp++ = prop;
+                                } else {
+                                    model = func_80250A64_de(prop);
+                                    nextResource = func_80250B24_de(prop, model, func_80250A8C_de(prop), nextResource);
+                                    func_802504B0_de(prop, 0);
+                                }
+                                geometry = func_802507AC_de(prop, func_80250A8C_de(prop));
+                                if (geometry != 0) {
+                                    points = func_8028FDB4_de(geometry->data, 0);
+                                    pointCount = points->count;
+                                    func_80270910_de(matrix, sceneMatrix(prop));
+                                    for (pointIndex = 0; pointIndex < pointCount; pointIndex++) {
+                                        point = (ScenePoint *)(points->data + pointIndex * points->stride);
+                                        position.x = (f32)point->x;
+                                        position.y = (f32)point->y;
+                                        position.z = (f32)point->z;
+                                        func_80272898_de(matrix, &position, &transformed);
+                                        height = transformed.y;
+                                        maximum = world->maximumHeight;
+                                        if (!(height <= maximum)) height = maximum;
+                                        world->maximumHeight = height;
+                                    }
+                                    func_80253754_de(0, geometry);
                                 }
                             }
-                            func_80253754_de(0, temp_v0_3);
                         }
                     }
-                    var_s7 += 1;
-                } while (sp3774 >= var_s7);
+                    func_80253754_de(0, resource);
+                }
             }
-            sp378C += sp376C;
-            temp_t5 = sp3770 + 1;
-            sp3770 = temp_t5;
-        } while (sp3778 >= temp_t5);
+        }
     }
-    *var_fp = 0;
-    *sp3784 = 0;
-    sp3784++;
+    *nextResource = 0;
+    *nextProp++ = 0;
     func_8026D9D0_de();
-    var_fp++;
-    temp_s3 = (u8 *)var_fp - (u8 *)sp88;
-    temp_s0_5 = ((temp_s3 + 7) & ~7) + 0x18;
-    temp_s5 = (u8 *)sp3784 - (u8 *)sp2F68;
-    temp_s6 = temp_s0_5;
-    temp_s0_5 += ((temp_s5 + 7) & ~7);
-    temp_a1_3 = D_80110634;
-    D_80110634++;
-    gSPEndDisplayList(temp_a1_3);
-    
-    temp_s1 = (u8 *)D_80110634 - (u8 *)sp3788;
-    temp_v0_6 = func_8025343C_de(0, temp_s0_5 + ((temp_s1 + 7) & ~7), 3U, D_800C522C_de);
-    arg0->handle = temp_v0_6;
-    temp_v1 = temp_v0_6->data;
-    arg0->packed = temp_v1;
-    *temp_v1 = 3;
-    arg0->packed[1] = 0x18;
-    arg0->packed[2] = temp_s6;
-    arg0->packed[3] = temp_s0_5;
-    func_802BD3A0_de(func_8028FDB4_de(arg0->packed, 0), sp88, temp_s3);
-    func_802BD3A0_de(func_8028FDB4_de(arg0->packed, 1), sp2F68, temp_s5);
-    func_802BD3A0_de(func_8028FDB4_de(arg0->packed, 2), sp3788, temp_s1);
-    D_80110634 = sp3788;
+    nextResource++;
+    resourceBytes = (u8 *)nextResource - (u8 *)resources;
+    gfxOffset = ((resourceBytes + 7) & ~7) + 0x18;
+    propBytes = (u8 *)nextProp - (u8 *)props;
+    propOffset = gfxOffset;
+    gfxOffset += ((propBytes + 7) & ~7);
+    gSPEndDisplayList(D_80110634++);
+    gfxBytes = (u8 *)D_80110634 - (u8 *)firstGfx;
+    cache = func_8025343C_de(0, gfxOffset + ((gfxBytes + 7) & ~7), 3U, D_800C522C_de);
+    world->handle = cache;
+    packed = cache->data;
+    world->packed = packed;
+    *packed = 3;
+    world->packed[1] = 0x18;
+    world->packed[2] = propOffset;
+    world->packed[3] = gfxOffset;
+    func_802BD3A0_de(func_8028FDB4_de(world->packed, 0), resources, resourceBytes);
+    func_802BD3A0_de(func_8028FDB4_de(world->packed, 1), props, propBytes);
+    func_802BD3A0_de(func_8028FDB4_de(world->packed, 2), firstGfx, gfxBytes);
+    D_80110634 = firstGfx;
 }
 #else
-INCLUDE_ASM("span_1000", func_80288938_de);
+INCLUDE_ASM("span_1000", Scene_BuildCachedGeometry);
 #endif
