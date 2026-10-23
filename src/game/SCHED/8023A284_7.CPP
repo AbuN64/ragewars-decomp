@@ -159,12 +159,12 @@ s32 func_8023B718_de(Rotor *rotor, s32 mask, f32 fallback, s32 boosting, f32 boo
 }
 
 void *func_8023B8AC_de(struct IntegerState8A4 *arg0) {
-    void *temp_s0;
+    void *head;
 
-    temp_s0 = arg0->unk_8A0.head;
-    if (temp_s0 != 0) {
-        func_80255ED8_de(&arg0->unk_8A0, temp_s0);
-        func_80255D14_de(&arg0->unk_8B4, temp_s0);
+    head = arg0->unk_8A0.head;
+    if (head != 0) {
+        func_80255ED8_de(&arg0->unk_8A0, head);
+        func_80255D14_de(&arg0->unk_8B4, head);
     }
-    return temp_s0;
+    return head;
 }
