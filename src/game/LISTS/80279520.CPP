@@ -46,18 +46,18 @@ s32 Lists_Append(void *arg0, void *arg1) {
     (((struct ListHeader *) ((s8 *) arg0))->count) = count;
     return count;
 }
-int Lists_Remove(List802795C0 *arg0, ListLink *arg1) {
-    if (arg1->prev != 0) {
-        arg1->prev->next = arg1->next;
+int Lists_Remove(List802795C0 *arg0, ListLink *listLink) {
+    if (listLink->prev != 0) {
+        listLink->prev->next = listLink->next;
     }
-    if (arg1->next != 0) {
-        arg1->next->prev = arg1->prev;
+    if (listLink->next != 0) {
+        listLink->next->prev = listLink->prev;
     }
-    if (arg0->head == arg1) {
-        arg0->head = arg1->prev;
+    if (arg0->head == listLink) {
+        arg0->head = listLink->prev;
     }
-    if (arg0->tail == arg1) {
-        arg0->tail = arg1->next;
+    if (arg0->tail == listLink) {
+        arg0->tail = listLink->next;
     }
     arg0->count -= 1;
     return arg0->count;
@@ -208,17 +208,17 @@ s32 func_80279864_de(WeightedTable *arg0, s16 arg1, s16 arg2)
   arg0->count = ((u16) arg0->count) + 1;
   return 1;
 }
-s16 func_802798A8_de(WeightedTable *arg0) {
+s16 func_802798A8_de(WeightedTable *weightedTable) {
     s16 *entry;
     s16 *start;
     s32 random;
     s32 total;
     s32 value;
-    if (arg0->count == 0) {
+    if (weightedTable->count == 0) {
         return -1;
     }
-    arg0->entries[arg0->count][0] = -1;
-    entry = &arg0->entries[0][0];
+    weightedTable->entries[weightedTable->count][0] = -1;
+    entry = &weightedTable->entries[0][0];
     total = 0;
     start = entry;
     if (*entry != -1) {
