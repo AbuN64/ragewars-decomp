@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "TYPES.H"
+#include "COMMON/WORLD.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/EFFECTRENDER.H"
@@ -55,114 +56,6 @@ void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *o
     }
 }
 
-#ifdef NON_MATCHING
-#define AC_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
-extern void *func_8028FDB4_de(void *, s32);
-s32 func_80277C54_de(void *bounds, void **outList, s32 *outCount) {
-    f32 *box = bounds;
-    u8 **out = (u8 **)outList;
-    s32 keys[0x40];
-    u8 *items[0x40];
-    s32 spare[0x40];
-    s32 flag = 0;
-    s32 matches = 0;
-    s32 count = 0;
-    s32 i;
-    s32 k;
-    s32 n;
-    s32 j;
-    s32 sum;
-    s32 dup;
-    u8 *item;
-    u8 *table;
-    u8 *entry;
-    f32 *other;
-    u8 *world = (u8 *)&D_8011FE88;
-    spare[0] = 0;
-    for (i = 0; i < AC_FIELD(world, s32, 0x1500); i++) {
-        item = world + 0x1508 + i * 0xC;
-        other = AC_FIELD(item, f32 *, 4);
-        if (box[0] < other[2] && other[0] < box[3] && box[2] < other[3] && other[1] < box[5]) {
-            items[matches++] = item;
-        }
-    }
-    if (matches == 1) {
-        table = func_8028FDB4_de(**(void ***)items[0], 2);
-        entry = table + 8;
-        for (n = AC_FIELD(table, s32, 4) - 1; n != -1; n--, entry += 0xC0) {
-            if (AC_FIELD(entry, f32, 0xA0) < box[3] && box[0] < AC_FIELD(entry, f32, 0xAC) &&
-                AC_FIELD(entry, f32, 0xA8) < box[5] && box[2] < AC_FIELD(entry, f32, 0xB4) &&
-                AC_FIELD(entry, f32, 0xA4) < box[4] && box[1] < AC_FIELD(entry, f32, 0xB0)) {
-                out[count++] = entry;
-                if (AC_FIELD(entry, u8, 0xBA) != 0) {
-                    flag = 1;
-                }
-                if (count == 0x40) {
-                    break;
-                }
-            }
-        }
-    } else if (matches == 0) {
-        *outCount = count;
-        return flag;
-    } else {
-        for (k = 0; k < matches; k++) {
-            table = func_8028FDB4_de(**(void ***)items[k], 2);
-            entry = table + 8;
-            for (n = AC_FIELD(table, s32, 4) - 1; n != -1; n--, entry += 0xC0) {
-                if (AC_FIELD(entry, f32, 0xA0) < box[3] && box[0] < AC_FIELD(entry, f32, 0xAC) &&
-                    AC_FIELD(entry, f32, 0xA8) < box[5] && box[2] < AC_FIELD(entry, f32, 0xB4) &&
-                    AC_FIELD(entry, f32, 0xA4) < box[4] && box[1] < AC_FIELD(entry, f32, 0xB0)) {
-                    sum = 0;
-                    for (j = 0; j < 16; j++) {
-                        sum += AC_FIELD(entry, s32, 0x60 + j * 4);
-                    }
-                    dup = 0;
-                    if (k != 0) {
-                        for (j = 0; j < count; j++) {
-                            if (keys[j] == sum) {
-                                dup = 1;
-                                break;
-                            }
-                        }
-                    }
-                    if (dup == 0) {
-                        out[count] = entry;
-                        keys[count] = sum;
-                        count++;
-                        if (AC_FIELD(entry, u8, 0xBA) != 0) {
-                            flag = 1;
-                        }
-                        if (count == 0x40) {
-                            *outCount = count;
-                            return flag;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    *outCount = count;
-    return flag;
-}
-#else
-INCLUDE_ASM("span_1000", func_80277C54_de);
-#endif
-
-#include "TYPES.H"
-#include "stddef.h"
-
-/* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box
-   (six floats at record offset 0xA0) intersects the given bounds, and which either have no
-   byte set at record offset 0xBD, are paired with arg4, or list the key that
-   func_80250938_de(arg4, arg1) finds inside the id list at slot arg1-table index of the list
-   table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
-   reports their number through arg3, and returns 1 when any accepted record has its byte at
-   record offset 0xBA set. With no table (arg1 null) it defers to func_80277C54_de. */
-
-extern s32 func_80277C54_de(void *bounds, void **out, s32 *countOut);
-extern s32 func_80250938_de(void *wanted, void *table);
-
 typedef struct Bounds {
     f32 minX;
     f32 minY;
@@ -173,7 +66,8 @@ typedef struct Bounds {
 } Bounds;
 
 typedef struct HitBox {
-    u8 pad0[0xA0];
+    u8 pad0[0x60];
+    u32 signature[16];
     f32 minX;
     f32 minY;
     f32 minZ;
@@ -192,6 +86,119 @@ typedef struct HitBoxTable {
     s32 count;
     HitBox boxes[1];
 } HitBoxTable;
+
+#ifdef NON_MATCHING
+extern void *func_8028FDB4_de(void *, s32);
+/* NON_MATCHING: 9 aligned edits / 243 ROM words; remaining: sector address registers and signature-loop base. */
+s32 Actors_QueryWorldLightVolumes(Bounds *box, void **out, s32 *outCount) {
+    u32 keys[0x40];
+    /* A query may intersect every world sector; accepted volumes are capped at 64. */
+    WorldSector *items[128];
+    s32 flag;
+    s32 matches;
+    s32 count;
+    s32 i;
+    s32 n;
+    s32 j;
+    u32 sum;
+    s32 dup;
+    WorldSector *item;
+    HitBoxTable *table;
+    HitBox *entry;
+    f32 *other;
+    Shared_World *world = &D_8011FE88;
+    count = 0;
+    matches = 0;
+    flag = 0;
+    for (i = 0; i < world->sectorEntryCount; i++) {
+        item = &world->sectors[i];
+        other = item->bounds;
+        if (other[2] > box->minX && other[0] < box->maxX && other[3] > box->minZ && other[1] < box->maxZ) {
+            items[matches++] = item;
+        }
+    }
+    if (matches == 1) {
+        table = func_8028FDB4_de(*(void **)items[0]->resource, 2);
+        n = table->count;
+        n--;
+        entry = table->boxes;
+        for (; n != -1; n--) {
+            if (box->maxX > entry->minX && box->minX < entry->maxX &&
+                box->maxZ > entry->minZ && box->minZ < entry->maxZ &&
+                box->maxY > entry->minY && box->minY < entry->maxY) {
+                out[count++] = entry;
+                if (entry->flagBA != 0) {
+                    flag = 1;
+                }
+                if (count == 0x40) {
+                    break;
+                }
+            }
+            entry++;
+        }
+    } else if (matches < 2) {
+        *outCount = count;
+        return flag;
+    } else {
+        for (i = 0; i < matches; i++) {
+            table = func_8028FDB4_de(*(void **)items[i]->resource, 2);
+            n = table->count;
+            n--;
+            entry = table->boxes;
+            for (; n != -1; n--) {
+                if (box->maxX > entry->minX && box->minX < entry->maxX &&
+                    box->maxZ > entry->minZ && box->minZ < entry->maxZ &&
+                    box->maxY > entry->minY && box->minY < entry->maxY) {
+                    sum = 0;
+                    for (j = 0; j < 16; j++) {
+                        sum += entry->signature[j];
+                    }
+                    dup = 0;
+                    if (i != 0) {
+                        for (j = 0; j < count; j++) {
+                            if (keys[j] == sum) {
+                                dup = 1;
+                                break;
+                            }
+                        }
+                    }
+                    if (dup == 0) {
+                        out[count] = entry;
+                        keys[count] = sum;
+                        count++;
+                        if (entry->flagBA != 0) {
+                            flag = 1;
+                        }
+                        if (count == 0x40) {
+                            *outCount = count;
+                            return flag;
+                        }
+                    }
+                }
+                entry++;
+            }
+        }
+    }
+    *outCount = count;
+    return flag;
+}
+#else
+INCLUDE_ASM("span_1000", Actors_QueryWorldLightVolumes);
+#endif
+
+#include "TYPES.H"
+#include "stddef.h"
+
+/* Filters the 0xC0-byte hit records held in table slot 2 of arg1: keeps those whose box
+   (six floats at record offset 0xA0) intersects the given bounds, and which either have no
+   byte set at record offset 0xBD, are paired with arg4, or list the key that
+   func_80250938_de(arg4, arg1) finds inside the id list at slot arg1-table index of the list
+   table in slot 3. Writes the accepted record pointers into arg2 (at most 0x40 of them),
+   reports their number through arg3, and returns 1 when any accepted record has its byte at
+   record offset 0xBA set. With no table (arg1 null) it defers to Actors_QueryWorldLightVolumes. */
+
+extern s32 Actors_QueryWorldLightVolumes(Bounds *bounds, void **out, s32 *countOut);
+extern s32 func_80250938_de(void *wanted, void *table);
 
 typedef struct IdList {
     u16 count;
@@ -216,7 +223,7 @@ s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 
     foundCount = 0;
     result = 0;
     if (table == NULL) {
-        return func_80277C54_de(bounds, out, countOut);
+        return Actors_QueryWorldLightVolumes(bounds, out, countOut);
     }
     boxTable = func_8028FDB4_de(table, 2);
     idx = boxTable->count;
