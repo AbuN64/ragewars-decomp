@@ -6,12 +6,8 @@
 #include "COMMON/UNUSED.H"
 #include "FX_2/80271B18.H"
 
-#ifdef NON_MATCHING
 #define SK_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
 typedef struct SkelVec { f32 x; f32 y; f32 z; } SkelVec;
-extern f32 D_800C4A60_de, D_800C4A64_de, D_800C4A68_de, D_800C4A6C_de, D_800C4A70_de, D_800C4A74_de;
-extern f32 D_800C4A78_de, D_800C4A7C_de, D_800C4A80_de, D_800C4A84_de, D_800C4A88_de, D_800C4A8C_de;
-extern f32 D_800C4A98_de, D_800C4AB0_de, D_800C4AB4_de, D_800C4AB8_de, D_800C4ABC_de;
 extern s32 D_801462C8;
 extern void func_802727D8_de(void *);
 extern void func_80273C68_de(void *, f32);
@@ -22,7 +18,6 @@ extern void func_802738C0_de(void *, f32);
 extern void func_80273448_de(void *, f32, f32, f32);
 extern void func_8026EF58_de(void *, void *);
 extern void func_80275954_de(void *, s32, void *);
-/* 276/286 words (20 aligned edits); remaining: jump.c cross-jumps the three |rotation| checks into one tail (ROM keeps each likely-set) */
 void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     SkelVec translation;
     SkelVec rotation;
@@ -62,25 +57,13 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
         rotation.z = 0;
     }
     inside = 1;
-    if (rotation.x < 0) {
-        if (-rotation.x > 0.00999999978f) {
-            inside = 0;
-        }
-    } else if (rotation.x > 0.00999999978f) {
+    if (((rotation.x < 0) ? -rotation.x : rotation.x) > 0.00999999978f) {
         inside = 0;
     }
-    if (rotation.y < 0) {
-        if (-rotation.y > 0.00999999978f) {
-            inside = 0;
-        }
-    } else if (rotation.y > 0.00999999978f) {
+    if (((rotation.y < 0) ? -rotation.y : rotation.y) > 0.00999999978f) {
         inside = 0;
     }
-    if (rotation.z < 0) {
-        if (-rotation.z > 0.00999999978f) {
-            inside = 0;
-        }
-    } else if (rotation.z > 0.00999999978f) {
+    if (((rotation.z < 0) ? -rotation.z : rotation.z) > 0.00999999978f) {
         inside = 0;
     }
     SK_FIELD(self, u8, 0xB9) = 0;
@@ -132,9 +115,6 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
     }
     func_80275954_de(self + 0xA0, 8, corners);
 }
-#else
-INCLUDE_ASM("span_1000", Anim_DecodeBoxTransform);
-#endif
 
 
 

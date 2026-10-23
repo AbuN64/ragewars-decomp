@@ -2577,3 +2577,4 @@ literals_func_802ACE38_de = 0x800C61E8; // rom:0xC6DE8 size:0x28
 literals_System_PrepareAnimationFrames = 0x800C4128; // rom:0xC4D28 size:0x60
 literals_func_80230058_de = 0x800C2DC8; // rom:0xC39C8 size:0x48
 literals_Anim_TestEntityContact = 0x800C3610; // rom:0xC4210 size:0x8
+literals_Anim_DecodeBoxTransform = 0x800C4990; // rom:0xC5590 size:0x60

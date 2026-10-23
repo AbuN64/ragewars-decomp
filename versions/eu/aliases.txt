@@ -2558,3 +2558,4 @@ literals_func_8043D1DC_de = 0x800EE938; // rom:0xEF538 size:0x2C
 D_auto_rodata_func_8043D1DC_de_800EE964 = 0x800EE964; // rom:0xEF564
 literals_System_PrepareAnimationFrames = 0x800C44A8; // rom:0xC50A8 size:0x60
 literals_func_8042FBF0_eu = 0x800EE1E0; // rom:0xEEDE0 size:0x20
+literals_Anim_DecodeBoxTransform = 0x800C4D10; // rom:0xC5910 size:0x60
