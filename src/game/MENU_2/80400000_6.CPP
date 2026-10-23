@@ -40,28 +40,34 @@ void func_80401D74_de(s32 inset) {
     gDPFillRectangle(D_80110634++, ((left + width) - (1.0f)), top, (left + width), ((top + height) - (1.0f)));
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/GFX.H"
 #include "gbi.h"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
-void func_8040293C_de(void) {
+#define MENU_CLAMP_PIXEL(value) \
+    ({ s32 edge = (value); if (edge < 0) edge = 0; edge; })
+#define MENU_CLAMP_HEIGHT(value) \
+    ({ f32 edge = (value); if (!(edge >= 0.0f)) edge = 0.0f; edge; })
+
+/* Fade letterbox bands around the active track and draw the viewport border. */
+void Menu_DrawLetterboxBands(void) {
     f32 fade = 1.0f;
-    f32 height, lower, span;
-    s32 width, screenHeight, top;
-    height = ((f32)D_800E28D4 - (f32)D_800E28D0 / D_800E2830->spec.aspectRatio) * D_800DCC10_de;
-    span = D_800DCC14_de;
+    f32 height, span;
+    height = ((f32)D_800E28D4 - (f32)D_800E28D0 / D_800E2830->spec.aspectRatio) * 0.5f;
+    span = 0.3f;
     if (D_800E2830->time < D_800E2830->start) {
-        fade = (D_800E2830->start - D_800E2830->time) / span;
-        if (D_800DCC18_de < fade) fade = D_800DCC18_de;
-        fade = D_800DCC18_de - fade;
+        fade = D_800E2830->start - D_800E2830->time;
+        fade /= span;
+        if (1.0f < fade) fade = 1.0f;
+        fade = 1.0f - fade;
     }
-    if (D_800E2830->end < D_800E2830->time) {
-        fade = (D_800E2830->time - D_800E2830->end) / span;
-        if (D_800DCC1C < fade) fade = D_800DCC1C;
-        fade = D_800DCC1C - fade;
+    if (D_800E2830->time > D_800E2830->end) {
+        fade = D_800E2830->time - D_800E2830->end;
+        fade /= span;
+        if (1.0f < fade) fade = 1.0f;
+        fade = 1.0f - fade;
     }
     height = height * fade;
     gDPPipeSync(D_80110634++);
@@ -69,20 +75,10 @@ void func_8040293C_de(void) {
     func_8026925C_de(0x13);
     func_80268CE0_de(0x19);
     gDPSetPrimColor(D_80110634++, 255, 255, 0, 0, 0, 255);
-    width = D_800E28D0;
-    if (width < 0) width = 0;
-    top = (s32)height;
-    if (top < 0) top = 0;
-    gDPFillRectangle(D_80110634++, 0, 0, width, top);
-    width = D_800E28D0;
-    if (width < 0) width = 0;
-    screenHeight = D_800E28D4;
-    if (screenHeight < 0) screenHeight = 0;
-    lower = (f32)D_800E28D4 - height;
-    if (!(lower >= 0.0f)) lower = 0.0f;
-    gDPFillRectangle(D_80110634++, 0, (u32)lower, width, screenHeight);
+    gDPFillRectangle(D_80110634++, 0, 0, MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL((s32)height));
+    gDPFillRectangle(D_80110634++, 0, (u32)MENU_CLAMP_HEIGHT((f32)D_800E28D4 - height), MENU_CLAMP_PIXEL(D_800E28D0), MENU_CLAMP_PIXEL(D_800E28D4));
     func_80401D74_de((s32)height);
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8040293C_de);
-#endif
+
+#undef MENU_CLAMP_PIXEL
+#undef MENU_CLAMP_HEIGHT

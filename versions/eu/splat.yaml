@@ -4452,7 +4452,6 @@ segments:
       - [0xEDDB4, rodata, data_800C/D_8040184C_E1764]
       - [0xEDDC0, rodata, data_800C/D_80401980_E1770]
       - [0xEDDC8, rodata, data_800C/literals_func_80401D74_de]
-      - [0xEDE8C, rodata, data_800C/D_auto_rodata_func_8040293C_de_800ED28C]
       - [0xEDEA4, rodata, data_800C/rodata_func_80402BA0_de_800ED2A4]
       - [0xEDEAC, data, data_800C/rodata_unresolved_800ED2AC]
       - [0xEDEB0, rodata, data_800C/D_80402BA0_E1860]

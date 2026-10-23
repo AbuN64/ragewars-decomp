@@ -26977,7 +26977,6 @@ SECTIONS
         src/game/MENU_2/800E0B70.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/MENU_2/80400000_6.CPP.o */;
         src/game/MENU_2/80400000_6.CPP.o(.rodata .rdata);
-        src/game/MENU_2/800E0C3C.CPP.o(.rodata .rdata);
         src/game/MENU_2/800E0C54.CPP.o(.rodata .rdata);
         src/game/DATA/RSP/800E0C5C.CPP.o(.data);
         src/game/MENU_2/800E0C60.CPP.o(.rodata .rdata);
@@ -27636,7 +27635,6 @@ SECTIONS
         src/game/MENU_2/800E0B64.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/800E0B70.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/80400000_6.CPP.o(.bss .sbss COMMON);
-        src/game/MENU_2/800E0C3C.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/800E0C54.CPP.o(.bss .sbss COMMON);
         src/game/DATA/RSP/800E0C5C.CPP.o(.bss .sbss COMMON);
         src/game/MENU_2/800E0C60.CPP.o(.bss .sbss COMMON);

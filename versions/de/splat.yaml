@@ -4458,7 +4458,6 @@ segments:
       - [0xDD734, rodata, data_800C/D_8040184C_E1764]
       - [0xDD740, rodata, data_800C/D_80401980_E1770]
       - [0xDD748, rodata, data_800C/literals_func_80401D74_de]
-      - [0xDD80C, rodata, data_800C/D_auto_rodata_func_8040293C_de_800DCC0C]
       - [0xDD824, rodata, data_800C/rodata_func_80402BA0_de_800DCC24]
       - [0xDD82C, data, data_800C/rodata_unresolved_800DCC2C]
       - [0xDD830, rodata, data_800C/D_80402BA0_E1860]

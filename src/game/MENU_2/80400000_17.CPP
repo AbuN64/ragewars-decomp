@@ -64,5 +64,5 @@ void func_80402BA0_de(ScreenRectangle *rectangle) {
         value=0.0f;
         func_8029311C_de(&D_8011FAC0,rgba,width,height,right,bottom);
     }
-    if(D_800DE7F4_de)func_8040293C_de();
+    if(D_800DE7F4_de)Menu_DrawLetterboxBands();
 }
