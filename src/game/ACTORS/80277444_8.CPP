@@ -88,49 +88,49 @@ extern void func_80262C88_de(struct Shared_Actor *arg0);
 
 
 
-void func_80278D78_de(struct Shared_Actor *arg0, s32 arg1, void *arg2) {
+void func_80278D78_de(struct Shared_Actor *actor, s32 arg1, void *arg2) {
     s32 sp20;
     s32 sp24;
 
-    if (!(arg0->weaponFlags & 0x80000)) {
-        func_8028C26C_de(&D_8011FE88, arg0, &sp20, &sp24);
+    if (!(actor->weaponFlags & 0x80000)) {
+        func_8028C26C_de(&D_8011FE88, actor, &sp20, &sp24);
         if (sp24 != 0) {
             func_80279204_de(sp20, sp24, 0, arg1 & 0x3FC1FF, arg1 & 0x400000, 0x400000, arg2);
         }
     }
 }
 
-void func_80278E04_de(s32 arg0, s32 arg1, void *arg2) {
+void func_80278E04_de(s32 arg0, s32 arg1, void *actor) {
     s32 sp20;
     s32 sp24;
 
     if (arg0 != 0) {
         func_8028C1D4_de(&D_8011FE88, arg0, &sp20, &sp24);
         if (sp24 != 0) {
-            func_80279204_de(sp20, sp24, 0, arg1 & 0x7FF, arg1 & 0x3800, 0x3800, arg2);
+            func_80279204_de(sp20, sp24, 0, arg1 & 0x7FF, arg1 & 0x3800, 0x3800, actor);
         }
     }
 }
 
-void func_80278E7C_de(void *arg0) {
-    func_80278EEC_S1 *object = arg0;
+void func_80278E7C_de(void *trigger) {
+    func_80278EEC_S1 *object = trigger;
 
     object->unkE |= 0x10;
-    func_8028BB1C_de(&D_8011FE88, arg0, 1);
+    func_8028BB1C_de(&D_8011FE88, trigger, 1);
     if ((D_8011FE88.mode == 4) && (object->unkE & 2)) {
-        func_8028C568_de(&D_8011FE88, arg0);
+        func_8028C568_de(&D_8011FE88, trigger);
         return;
     }
-    Actors_DispatchTrigger(arg0);
+    Actors_DispatchTrigger(trigger);
 }
 
-void func_80278F00_de(Record14 *arg0) {
+void func_80278F00_de(Record14 *trigger) {
     Record14 copy;
-    u8 *bytes = (u8 *)arg0;
+    u8 *bytes = (u8 *)trigger;
 
     bytes[0xE] |= 0x20;
     if (bytes[0x11] == 1) {
-        copy = *arg0;
+        copy = *trigger;
         ((u8 *)&copy)[0x12] = 2;
         ((u8 *)&copy)[0x10] = 0;
         Actors_DispatchTrigger(&copy);
@@ -145,9 +145,9 @@ void func_80278F68_de(struct LevelActor *object) {
     object->flags &= ~0x100;
 }
 
-void func_80278F84_de(LevelActor *arg0) {
-    func_802472F0_de(arg0);
-    arg0->flags = (s32) (arg0->flags | 0x2100);
+void func_80278F84_de(LevelActor *actor) {
+    func_802472F0_de(actor);
+    actor->flags = (s32) (actor->flags | 0x2100);
 }
 
 void func_80278FB4_de(s32 arg0, s32 arg1, s32 arg2) {
@@ -172,12 +172,12 @@ void func_80279048_de(void *arg0, void *arg1) {
     (((struct FloatState64 *) ((s8 *) arg1))->unk_60) = (f32) (((struct ObjectState104 *) ((s8 *) arg0))->unk_6C);
 }
 
-void func_8027907C_de(s32 arg0, s32 arg1, Trigger *arg2) {
-    if (arg2->unk6 >= 0x100) {
-        func_8025E11C_de(arg2->unk6);
+void func_8027907C_de(s32 arg0, s32 arg1, Trigger *trigger) {
+    if (trigger->unk6 >= 0x100) {
+        func_8025E11C_de(trigger->unk6);
         return;
     }
-    func_8025E2D4_de(arg2->unk6);
+    func_8025E2D4_de(trigger->unk6);
 }
 
 void func_802790C0_de(struct Shared_Actor *actor, s32 *stateFlags) {

@@ -350,7 +350,7 @@ extern void Actors_AccumulateVertexLighting();
 /* NON_MATCHING: 180 aligned edits / 244 ROM words; remaining: register allocation and scheduling.
  * The query return selects the color trailer; the output count selects the light list.
  * The allocator takes the byte count before the flags. */
-s32 Actors_BuildLitModel(s32 arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, void *arg5) {
+s32 Actors_BuildLitModel(s32 deref2, s32 arg1, void *bounds, void *matrices, s32 arg4, void *wanted) {
     u8 buffer[0x100];
     s32 hasOwner;
     s32 needsColors;
@@ -365,8 +365,8 @@ s32 Actors_BuildLitModel(s32 arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, v
     s32 sum;
     s32 word;
     u8 *header;
-    needsColors = func_80278020_de((void *)arg2, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)arg5);
-    model = func_8028FDC8_de(arg0, 0, &size);
+    needsColors = func_80278020_de((void *)bounds, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)wanted);
+    model = func_8028FDC8_de(deref2, 0, &size);
     count = *(s32 *)(model + 4);
     for (clearIndex = 0; clearIndex < count; clearIndex++) {
         D_80111D70[clearIndex * 3] = 0;
@@ -394,7 +394,7 @@ s32 Actors_BuildLitModel(s32 arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, v
         data = *memory + 8;
     }
     func_802BD3A0_de(data, model, size);
-    table = func_8028FDB4_de(arg0, 1);
+    table = func_8028FDB4_de(deref2, 1);
     if (*(s32 *)(table + 4) != 0) {
         for (colorIndex = 0; colorIndex < count; colorIndex++) {
             word = *(s32 *)(table + 8 + colorIndex * 4);
@@ -404,16 +404,16 @@ s32 Actors_BuildLitModel(s32 arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, v
         }
     }
     if (D_800D2850 == 0) {
-        func_80277A98_de((void *)data, (void *)arg3, (void *)D_80111D70, arg4);
+        func_80277A98_de((void *)data, (void *)matrices, (void *)D_80111D70, arg4);
     } else if (hasOwner != 0) {
-        Actors_AccumulateVertexLighting(buffer, hasOwner, data, arg3, D_80111D70, arg4);
+        Actors_AccumulateVertexLighting(buffer, hasOwner, data, matrices, D_80111D70, arg4);
     } else {
         sum = 0;
         for (sectorIndex = 0; sectorIndex < *(s32 *)((u8 *)&D_8011FE88 + 0x1500); sectorIndex++) {
             sum += *(s32 *)((u8 *)func_8028FDB4_de(**(void ***)((u8 *)&D_8011FE88 + 0x1508 + sectorIndex * 0xC), 2) + 4);
         }
         if (sum == 0) {
-            func_80277A98_de((void *)data, (void *)arg3, (void *)D_80111D70, arg4);
+            func_80277A98_de((void *)data, (void *)matrices, (void *)D_80111D70, arg4);
         }
     }
     func_80278274_de((void *)data, (void *)D_80111D70);
