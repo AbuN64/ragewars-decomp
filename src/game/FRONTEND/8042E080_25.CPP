@@ -2,6 +2,7 @@
 #include "COMMON/WORLD.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ACTIVE.H"
+#include "COMMON/GAMEPLAY_SETTINGS.H"
 #include "TYPES.H"
 #include "FRONTEND/8042E080_25.H"
 #include "RESMGR/802A0888.H"
@@ -20,33 +21,32 @@ s32 func_8042EE34_de(void) {
     return (D_801462D5 == 1 ? func_8028D474_de(&D_8011FE88, D_8015402C)->flags : D_8015402C) * 10 + 0xBC2;
 }
 
-extern struct Status D_80146398[];
+extern Shared_PlayerSettingsRecord D_80146398[];
 
 extern s32 func_802744D4_de(void);
 
-/* Draws a random item type from 0 to 10, redrawing types 0 and 5 while any of the eight active players already holds that type, and returns it. */
-s32 func_8042EE94_de(void) {
-    s32 type;
-    s32 free;
+/* Characters 0 and 5 may appear only once among the eight enabled players. */
+static inline s32 characterAvailable(s32 character, s32 firstUniqueCharacter, s32 secondUniqueCharacter) {
+    s32 available;
     s32 i;
-    s32 excl; /* FAKEMATCH: constant-holding local places the li of 5 */
-    struct Status *players; /* FAKEMATCH: copy-only local, set inside the draw loop, steers the base register */
-
-    do {
-        type = func_802744D4_de() % 11;
-        excl = 5;
-        players = D_80146398;
-        do {
-            free = 1;
-        } while (0);
-        if (type == 0 || type == excl) {
-            for (i = 0; i < 8; i++) {
-                if (players[i].active != 0 && players[i].kind == type) {
-                    free = 0;
-                }
+    Shared_PlayerSettingsRecord *players = D_80146398;
+    if (character == firstUniqueCharacter || character == secondUniqueCharacter) {
+        for (available = 1, i = 0; i < 8; i++) {
+            if (players[i].enabled && players[i].character == character) {
+                available = 0;
             }
         }
-    } while (free == 0);
-    return type;
+    } else {
+        available = 1;
+    }
+    return available;
+}
+
+s32 Frontend_ChooseRandomCharacter(void) {
+    s32 character;
+    do {
+        character = func_802744D4_de() % 11;
+    } while (!characterAvailable(character, 0, 5));
+    return character;
 }
 

@@ -37,7 +37,7 @@ s32 func_8042E460_de(u8 *request) {
         player->slot = i;
         kind = request[0] - 1;
         if (kind == 19) {
-            player->character = func_8042EE94_de();
+            player->character = Frontend_ChooseRandomCharacter();
         } else {
             player->character = kind;
         }
