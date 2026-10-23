@@ -5,10 +5,10 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "ANIM/COLLISION_TRACE.H"
 
-/* 248/253 aligned words; remaining: setup scheduling, clip reload and shift.
+/* 5/253 aligned edits remain: second-word setup, clip-mask reload and sign shift.
  * Commands are logical words on both the ROM and native resource paths. */
 void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
-    ContextB0 *context = contextAddress;
+    ContextB0 *context;
     CollisionVertex vertices[32];
     CollisionVertex *triangle[3];
     CVector3 point;
@@ -24,6 +24,7 @@ void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
     Ray180 *ray;
 
     flags = func_8028FDB4_de(commands, 0);
+    context = contextAddress;
     ray = context->ray;
     context->flags = *flags;
     reverse = *flags & 4;
