@@ -63,16 +63,16 @@ u32 func_80265350_de(void) {
     return D_80000318;
 }
 
-void func_80265378_de(u8 *arg0, u8 *arg1, s32 arg2) {
+void func_80265378_de(u8 *split, u8 *arg1, s32 arg2) {
     u8 *var_a3;
     u8 *var_a3_2;
     s32 temp_v0;
 
     if (arg2 != 0) {
-        var_a3 = arg0;
-        if (((u32)arg1 | (u32)arg0 | arg2) & 3) {
+        var_a3 = split;
+        if (((u32)arg1 | (u32)split | arg2) & 3) {
             var_a3_2 = arg1;
-            if (arg0 < arg1) {
+            if (split < arg1) {
                 do {
                     *var_a3 = *var_a3_2;
                     var_a3_2++;
@@ -81,7 +81,7 @@ void func_80265378_de(u8 *arg0, u8 *arg1, s32 arg2) {
                 } while (arg2 != 0);
             } else {
                 temp_v0 = arg2 - 1;
-                var_a3 = arg0 + temp_v0;
+                var_a3 = split + temp_v0;
                 var_a3_2 = arg1 + temp_v0;
                 do {
                     *var_a3 = *var_a3_2;
@@ -91,23 +91,23 @@ void func_80265378_de(u8 *arg0, u8 *arg1, s32 arg2) {
                 } while (arg2 != 0);
             }
         } else {
-            if (arg0 < arg1) {
+            if (split < arg1) {
                 arg2 >>= 2;
                 do {
-                    *(u32 *)arg0 = *(u32 *)arg1;
+                    *(u32 *)split = *(u32 *)arg1;
                     arg1 += 4;
                     arg2--;
-                    arg0 += 4;
+                    split += 4;
                 } while (arg2 != 0);
             } else {
                 arg2 >>= 2;
-                arg0 += (arg2 * 4) - 4;
+                split += (arg2 * 4) - 4;
                 arg1 += (arg2 * 4) - 4;
                 do {
-                    *(u32 *)arg0 = *(u32 *)arg1;
+                    *(u32 *)split = *(u32 *)arg1;
                     arg1 -= 4;
                     arg2--;
-                    arg0 -= 4;
+                    split -= 4;
                 } while (arg2 != 0);
             }
         }
@@ -159,7 +159,7 @@ byte_loop:
     return 0;
 }
 
-s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2) {
+s32 func_802654E8_de(void *entries, s32 arg1, s32 arg2) {
     u32 temp_v1;
     u32 var_a3;
 
@@ -169,14 +169,14 @@ s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2) {
         if (arg1 != 0) {
             do {
                 temp_v1 = (u32)(var_a3 + arg1) >> 1;
-                if ((u32)*((s32 *)arg0 + temp_v1) < (u32)arg2) {
+                if ((u32)*((s32 *)entries + temp_v1) < (u32)arg2) {
                     var_a3 = temp_v1 + 1;
                 } else {
                     arg1 = temp_v1;
                 }
             } while (var_a3 < (u32)arg1);
         }
-        if (*((s32 *)arg0 + var_a3) == arg2) {
+        if (*((s32 *)entries + var_a3) == arg2) {
             return (s32)var_a3;
         }
         return -1;
@@ -184,7 +184,7 @@ s32 func_802654E8_de(void *arg0, s32 arg1, s32 arg2) {
     return -1;
 }
 
-s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4) {
+s32 func_80265550_de(u32 *arg0, s32 arg1, u32 group, s32 *arg3, s32 *last) {
     u32 temp_v1;
     u32 var_a3;
     s32 var_t0;
@@ -196,14 +196,14 @@ s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4) {
         if (var_t0 != 0) {
             do {
                 temp_v1 = (u32)(var_a3 + var_t0) >> 1;
-                if (arg0[temp_v1] < arg2) {
+                if (arg0[temp_v1] < group) {
                     var_a3 = temp_v1 + 1;
                 } else {
                     var_t0 = temp_v1;
                 }
             } while (var_a3 < (u32)var_t0);
         }
-        if (arg0[var_a3] == arg2) {
+        if (arg0[var_a3] == group) {
             found = var_a3;
         } else {
             found = -1;
@@ -217,16 +217,16 @@ s32 func_80265550_de(u32 *arg0, s32 arg1, u32 arg2, s32 *arg3, s32 *arg4) {
     }
 
     var_t0 = found - 1;
-    while ((var_t0 != -1) && (arg0[var_t0] == arg2)) {
+    while ((var_t0 != -1) && (arg0[var_t0] == group)) {
         var_t0--;
     }
     *arg3 = var_t0 + 1;
 
     found++;
-    while ((found < arg1) && (arg0[found] == arg2)) {
+    while ((found < arg1) && (arg0[found] == group)) {
         found++;
     }
-    *arg4 = found - 1;
+    *last = found - 1;
     return 1;
 }
 
@@ -257,13 +257,13 @@ s32 func_80265650_de(void *arg0, s32 arg1)
   return (*temp_a1_2 & new_var) != 0;
 }
 
-void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2) {
+void func_80265688_de(u8 *arg0, s32 arg1, s32 found) {
     s32 byteIdx;
     s32 mask;
 
     byteIdx = arg1 / 8;
     mask = 1 << (arg1 % 8);
-    if (arg2 != 0) {
+    if (found != 0) {
         arg0[byteIdx] |= mask;
         return;
     }
@@ -311,17 +311,17 @@ f32 func_80265714_de(f32 arg0)
 }
 
 /** Return whether an address lies within one of three recognized ranges. */
-int func_80265784_de(u32 arg0) {
-    if (arg0 >= (u32)&D_800C8140_de &&
-        arg0 < (u32)&D_800C8140_de + (u32)&D_1087D) {
+int func_80265784_de(u32 callback) {
+    if (callback >= (u32)&D_800C8140_de &&
+        callback < (u32)&D_800C8140_de + (u32)&D_1087D) {
         return 1;
     }
-    if (arg0 >= (u32)&jtbl_800C19C0 &&
-        arg0 < (u32)&jtbl_800C19C0 + (u32)&D_63F8) {
+    if (callback >= (u32)&jtbl_800C19C0 &&
+        callback < (u32)&jtbl_800C19C0 + (u32)&D_63F8) {
         return 1;
     }
-    if (arg0 >= (u32)&D_800E2830 &&
-        arg0 < (u32)&D_800E2830 + (u32)&D_389E) {
+    if (callback >= (u32)&D_800E2830 &&
+        callback < (u32)&D_800E2830 + (u32)&D_389E) {
         return 1;
     }
     return 0;
@@ -333,13 +333,13 @@ int func_8026581C_de(u32 address) {
     return 0;
 }
 
-int func_80265878_de(u32 arg0) {
-    if (arg0 >= (u32)&D_00200500 &&
-        arg0 < (u32)&D_00200500 + (u32)&D_C0DA8) {
+int func_80265878_de(u32 callback) {
+    if (callback >= (u32)&D_00200500 &&
+        callback < (u32)&D_00200500 + (u32)&D_C0DA8) {
         return 1;
     }
-    if (arg0 >= (u32)&D_00400000 &&
-        arg0 < (u32)&D_00400000 + (u32)&D_48B38) {
+    if (callback >= (u32)&D_00400000 &&
+        callback < (u32)&D_00400000 + (u32)&D_48B38) {
         return 1;
     }
     return 0;

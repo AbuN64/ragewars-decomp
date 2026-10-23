@@ -273,20 +273,20 @@ void func_802A62BC_de(void *arg0) {
     }
 }
 
-void func_802A6304_de(s32 arg0, void *arg1, s32 arg2) {
+void func_802A6304_de(s32 pool, void *arg1, s32 camera) {
     State802A6DF8 *state = arg1;
     if (state->flags & 8) {
         func_802A354C_de(arg1);
     }
     if (state->flags & 4) {
-        func_802A339C_de(arg1, arg2);
+        func_802A339C_de(arg1, camera);
     }
     if (state->vertexCount >= 2) {
         if (state->renderMode >= 0) {
-            func_802A3718_de(arg0, arg1, arg2);
+            func_802A3718_de(pool, arg1, camera);
             return;
         }
-        func_802A3DD4_de(arg0, arg1, arg2);
+        func_802A3DD4_de(pool, arg1, camera);
     }
 }
 
@@ -326,43 +326,43 @@ void *func_802A6450_de(Owner802A6DF8 *arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-void func_802A6490_de(void *arg0, void *arg1) {
+void func_802A6490_de(void *pool, void *camera) {
     State802A6DF8 *node;
 
-    node = ((Owner802A6DF8 *)arg0)->lists.inactive.head;
+    node = ((Owner802A6DF8 *)pool)->lists.inactive.head;
     while (node != 0) {
         if (node->renderMode < 0) {
             if (node->flags & 8) {
                 func_802A354C_de(node);
             }
             if (node->flags & 4) {
-                func_802A339C_de(node, arg1);
+                func_802A339C_de(node, camera);
             }
             if (node->vertexCount >= 2) {
                 if (node->renderMode >= 0) {
-                    func_802A3718_de(arg0, node, arg1);
+                    func_802A3718_de(pool, node, camera);
                 } else {
-                    func_802A3DD4_de(arg0, node, arg1);
+                    func_802A3DD4_de(pool, node, camera);
                 }
             }
         }
         node = node->next;
     }
 
-    node = ((Owner802A6DF8 *)arg0)->lists.inactive.head;
+    node = ((Owner802A6DF8 *)pool)->lists.inactive.head;
     while (node != 0) {
         if (node->renderMode > 0) {
             if (node->flags & 8) {
                 func_802A354C_de(node);
             }
             if (node->flags & 4) {
-                func_802A339C_de(node, arg1);
+                func_802A339C_de(node, camera);
             }
             if (node->vertexCount >= 2) {
                 if (node->renderMode >= 0) {
-                    func_802A3718_de(arg0, node, arg1);
+                    func_802A3718_de(pool, node, camera);
                 } else {
-                    func_802A3DD4_de(arg0, node, arg1);
+                    func_802A3DD4_de(pool, node, camera);
                 }
             }
         }
