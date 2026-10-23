@@ -34214,6 +34214,15 @@ stored_size = 108
 rom."de" = [[0x1c8a24, 0x1c8a90]]
 evidence = [{ artifact = "stale-menus-referenced.json", sha256 = "720fa631fc30daa30ab0618ad28c81729febac880b788c3ca3499e06cb1f3ef5", pointer = "/rows/7" }, { artifact = "stale-menus-references.json", sha256 = "108226aff5617b251d4e3f7ffeb7648a7406e3f452f4f5eed2ae2f157962981a", pointer = "" }]
 
+[blob."stale-data.eu-x.language-addresses.168154"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 11948
+rom."eu-x" = [[0x168154, 0x16b000]]
+evidence = [{ artifact = "stale-language-addresses.json", sha256 = "1e386fbd0cda286e454dcff5725c6025faf20a2dd425c751b602a9d16765cf2e", pointer = "/rows/1" }]
+
 [blob."stale-data.eu-x.menu-definition.1bca68"]
 type = "stale-data"
 format = "CMenuDef"
@@ -34537,6 +34546,15 @@ state = "decoded"
 stored_size = 2
 rom."eu-x" = [[0x1bdc72, 0x1bdc74]]
 evidence = [{ artifact = "stale-menus-referenced.json", sha256 = "720fa631fc30daa30ab0618ad28c81729febac880b788c3ca3499e06cb1f3ef5", pointer = "/rows/27" }, { artifact = "stale-menus-references.json", sha256 = "108226aff5617b251d4e3f7ffeb7648a7406e3f452f4f5eed2ae2f157962981a", pointer = "" }]
+
+[blob."stale-data.eu.language-addresses.173154"]
+type = "stale-data"
+format = "graph"
+codec = "none"
+state = "decoded"
+stored_size = 11948
+rom."eu" = [[0x173154, 0x176000]]
+evidence = [{ artifact = "stale-language-addresses.json", sha256 = "1e386fbd0cda286e454dcff5725c6025faf20a2dd425c751b602a9d16765cf2e", pointer = "/rows/0" }]
 
 [blob."stale-data.eu.menu-definition.149a68"]
 type = "stale-data"
@@ -34906,6 +34924,15 @@ state = "decoded"
 stored_size = 2
 rom."eu" = [[0x14ad4a, 0x14ad4c]]
 evidence = [{ artifact = "stale-menus-referenced.json", sha256 = "720fa631fc30daa30ab0618ad28c81729febac880b788c3ca3499e06cb1f3ef5", pointer = "/rows/20" }, { artifact = "stale-menus-references.json", sha256 = "108226aff5617b251d4e3f7ffeb7648a7406e3f452f4f5eed2ae2f157962981a", pointer = "" }]
+
+[blob."stale-data.us.motion-types-definition"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."us" = [[0x1b5a50, 0x1b5a67]]
+evidence = [{ artifact = "stale-motion-enum.json", sha256 = "4d1cde634cccc6c65a21041b7e08ac6932c197b5d11006f45cdff33499036a30", pointer = "/rows/0" }]
 
 [blob."stale-text.eu-x.cstring.142d48"]
 type = "stale-data"
