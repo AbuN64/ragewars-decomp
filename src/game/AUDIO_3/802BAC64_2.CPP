@@ -238,9 +238,9 @@ Acmd *func_802B60EC_de(ALFx *r, s16 *curr_ptr, s32 buff, s32 count, Acmd *p)
     return ptr;
 }
 
-void *func_802B625C_de(void *arg0, s32 arg1, s32 arg2, void *arg3) {
-    AudioLowPassFilter *o = arg0;
-    Awords *d = arg3;
+void *func_802B625C_de(void *audioLowPassFilter, s32 arg1, s32 arg2, void *awords) {
+    AudioLowPassFilter *o = audioLowPassFilter;
+    Awords *d = awords;
     void *ret;
     s32 a1;
 

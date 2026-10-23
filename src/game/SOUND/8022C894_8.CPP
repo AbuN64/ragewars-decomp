@@ -34,7 +34,7 @@ extern f32 Particle_GetActorHeight(void *);
 
 extern func_80204468_S3 *D_800D052C[];
 
-u8 func_8022E758_de(s32 arg0, s32 arg1) {
+u8 func_8022E758_de(s32 unused0, s32 arg1) {
     u8 *ptr;
 
     if (arg1 == 0x2DA) {

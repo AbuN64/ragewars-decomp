@@ -196,8 +196,8 @@ f32 func_80260B80_de(u32 *stream, Func802608ECResult range) {
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260C6C_de(void *arg0, int arg1, Func802608ECResult t, int arg5) {
-    DecodeArray *array = arg0;
+void func_80260C6C_de(void *decodeArray, int arg1, Func802608ECResult t, int arg5) {
+    DecodeArray *array = decodeArray;
     array->base = arg1;
     array->range = t;
     array->count = arg5;
@@ -208,8 +208,8 @@ f32 func_80260C9C_de(DecodeArray *arg0, s32 arg1) {
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260D78_de(void *arg0, int arg1, Func802608ECResult t, int arg5) {
-    DecodeArray *array = arg0;
+void func_80260D78_de(void *decodeArray, int arg1, Func802608ECResult t, int arg5) {
+    DecodeArray *array = decodeArray;
     array->base = arg1;
     array->range = t;
     array->count = arg5;
@@ -242,8 +242,8 @@ int func_80260DA8_de(BitFieldSource *arg0, int arg1) {
 }
 
 /** Initialize a packed array and its decoding range. */
-void func_80260E1C_de(void *arg0, int arg1, Func802608ECResult t, int arg5) {
-    DecodeArray *array = arg0;
+void func_80260E1C_de(void *decodeArray, int arg1, Func802608ECResult t, int arg5) {
+    DecodeArray *array = decodeArray;
     array->base = arg1;
     array->range = t;
     array->count = arg5;

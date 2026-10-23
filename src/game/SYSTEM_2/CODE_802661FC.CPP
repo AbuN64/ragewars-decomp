@@ -607,7 +607,7 @@ void func_8026730C_de(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3,
     func_8025DEC0_de(arg6.frames, arg3, 0, selected, scale);
 }
 
-void func_802673EC_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void func_802673EC_de(s32 unused0, s32 unused1, s32 unused2, s32 arg3, s32 unused4, s32 unused5, s32 unused6) {
     s32 *p = &arg3;
     func_8025E11C_de(p[3]);
 }
@@ -616,10 +616,10 @@ void func_8026740C_de(void *actor,int unused1,int unused2,Triple input,int event
  func_80216288_de(actor,event,input,0);
 }
 
-s32 func_80267444_de(void *arg0, CVector3 *arg1) {
+s32 func_80267444_de(void *levelActor, CVector3 *arg1) {
     CVector3 first;
     CVector3 second;
-    LevelActor *object = arg0;
+    LevelActor *object = levelActor;
     Shared_ActorView *actor;
     s16 state;
     s32 result;
@@ -628,7 +628,7 @@ s32 func_80267444_de(void *arg0, CVector3 *arg1) {
     if ((object->kind == 1) &&
         ((object->flags & 0x300000) != 0)) {
         actor = object->controller;
-        if (arg0 == &actor->weapon) {
+        if (levelActor == &actor->weapon) {
             state = actor->selectedAction;
             if ((state == 0) || (state == 0x11) || (state == 0x10)) {
                 first = *arg1;

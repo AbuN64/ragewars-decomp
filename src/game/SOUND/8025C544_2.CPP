@@ -42,8 +42,8 @@ int func_8025C824_de(RecordRecAt4V4 *pool, short index) {
 }
 
 /** Initialize the two object words at offsets 8 and 12 to negative one. */
-void func_8025C8C0_de(void *arg0) {
-    CLoopingSoundData *voice = arg0;
+void func_8025C8C0_de(void *cLoopingSoundData) {
+    CLoopingSoundData *voice = cLoopingSoundData;
     voice->state = -1;
     voice->value = -1;
 }
@@ -51,20 +51,20 @@ void func_8025C8C0_de(void *arg0) {
 void func_8025C8D0_de(void) {
 }
 
-void func_8025C8D8_de(void *arg0, CLoopingSoundData *arg1, s32 arg2) {
+void func_8025C8D8_de(void *soundVoicePool, CLoopingSoundData *arg1, s32 arg2) {
     s32 i;
 
-    func_80255CA0_de(arg0, 0, 4);
-    func_80255CA0_de(&((SoundVoicePool *)arg0)->playing, 0, 4);
+    func_80255CA0_de(soundVoicePool, 0, 4);
+    func_80255CA0_de(&((SoundVoicePool *)soundVoicePool)->playing, 0, 4);
     i = 0;
     if (arg2 > 0) {
         do {
-            func_80255D14_de(arg0, arg1);
+            func_80255D14_de(soundVoicePool, arg1);
             i += 1;
             arg1 = arg1 + 1;
         } while (i < arg2);
     }
-    ((SoundVoicePool *)arg0)->state = 0;
+    ((SoundVoicePool *)soundVoicePool)->state = 0;
 }
 
 void *func_8025C95C_de(void *arg0, s32 arg1, CVector3 *arg2, void *position, s32 fallback) {
@@ -147,8 +147,8 @@ void func_8025CB0C_de(SoundVoicePool *soundVoicePool) {
     soundVoicePool->state = 0;
 }
 
-void func_8025CB88_de(void *arg0) {
-    SoundVoicePool *pool = arg0;
+void func_8025CB88_de(void *soundVoicePool) {
+    SoundVoicePool *pool = soundVoicePool;
     CLoopingSoundData *var_s0;
 
     if (pool->state == 0) {
@@ -165,11 +165,11 @@ void func_8025CB88_de(void *arg0) {
     }
 }
 
-void func_8025CBEC_de(void *arg0) {
+void func_8025CBEC_de(void *soundVoicePool) {
     CLoopingSoundData *cur;
     CLoopingSoundData *next;
     s32 value;
-    SoundVoicePool *pool = arg0;
+    SoundVoicePool *pool = soundVoicePool;
 
     cur = pool->playing.head;
     if (cur != 0) {

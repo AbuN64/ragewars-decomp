@@ -205,7 +205,7 @@ void __freeParam(void *arg0) {
     head->drvr.paramList = arg0;
 }
 
-void _freePVoice(s32 arg0, s32 arg1) {
-    func_802B2450_de((ListLink *)arg1);
-    func_802B2480_de(arg1, arg0 + 0x14);
+void _freePVoice(s32 arg0, s32 listLink) {
+    func_802B2450_de((ListLink *)listLink);
+    func_802B2480_de(listLink, arg0 + 0x14);
 }

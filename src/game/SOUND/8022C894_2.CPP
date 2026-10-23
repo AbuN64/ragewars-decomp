@@ -75,9 +75,9 @@ void func_8022CF38_de(void *arg0, LevelActor *actor) {
 
 
 
-void func_8022D010_de(void *arg0, void *arg1) {
+void func_8022D010_de(void *arg0, void *levelActor) {
     Actor_func_8022D290_de *actor = arg0;
-    LevelActor *other = arg1;
+    LevelActor *other = levelActor;
     actor->unk_0x06C0 = actor->unk_0x06C0 * (D_800C7E90);
     actor->unk_0x06C4 = actor->unk_0x06C4 * (D_800C7E90);
     other->position1.y = other->position1.y * (D_800C7E90);
@@ -149,14 +149,14 @@ void func_8022D1A0_de(void) {
 }
 
 void func_8022D1A8_de(void *arg0) {
-    CVector3 sp10;
+    CVector3 vector;
     CVector3 *temp_s1;
 
     temp_s1 = &((Shared_ActorView *)arg0)->weapon.aimPosition;
-    func_80271F68_de(&sp10, &((Shared_ActorView *)arg0)->resetPosition, temp_s1);
-    func_8027207C_de(&sp10);
-    func_80271F9C_de(&sp10, &sp10, 30.0f);
-    func_80271F34_de(&((Player *)arg0)->previousPosition, temp_s1, &sp10);
+    func_80271F68_de(&vector, &((Shared_ActorView *)arg0)->resetPosition, temp_s1);
+    func_8027207C_de(&vector);
+    func_80271F9C_de(&vector, &vector, 30.0f);
+    func_80271F34_de(&((Player *)arg0)->previousPosition, temp_s1, &vector);
 }
 
 void func_8022D20C_de(void) {

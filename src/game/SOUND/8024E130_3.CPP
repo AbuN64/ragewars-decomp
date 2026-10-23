@@ -56,8 +56,8 @@ int func_8024E610_de(void *arg0) {
 }
 
 /** Return the low three mode bits when the record type is one. */
-int func_8024E62C_de(void *arg0) {
-    LevelActor *actor = arg0;
+int func_8024E62C_de(void *levelActor) {
+    LevelActor *actor = levelActor;
     if (actor->kind == 1) {
         return actor->motionState & 7;
     }
@@ -119,8 +119,8 @@ f32 func_8024E73C_de(u8 *arg0) {
 }
 
 /** Return the low three mode bits when the record type is one. */
-int func_8024E778_de(void *arg0) {
-    LevelActor *actor = arg0;
+int func_8024E778_de(void *levelActor) {
+    LevelActor *actor = levelActor;
     if (actor->kind == 1) {
         return actor->motionState & 7;
     }

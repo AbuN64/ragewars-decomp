@@ -72,7 +72,7 @@ static inline void restart(PlayerRecAt1E *player) {
 
 extern s16 func_802B2510_de(void *, void *);
 
-s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale, int arg3) {
+s32 func_8025CED0_de(PlayerRecAt1E *player, s32 group, f32 scale, int unused3) {
     s32 song;
     s32 request;
 

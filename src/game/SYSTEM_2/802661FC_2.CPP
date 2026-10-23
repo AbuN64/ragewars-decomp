@@ -201,7 +201,7 @@ void func_80267C20_de(s32 source, s32 target, s32 kind, Triple position, struct 
     func_80266810_de((void *)source, target, kind, position, arg6, 1, 1, 0x80);
 }
 
-void func_80267C78_de(int arg0, int arg1, int arg2, int arg3) {
+void func_80267C78_de(int unused0, int unused1, int unused2, int arg3) {
     int *p = &arg3;
     *p = arg3;
 }
@@ -224,7 +224,7 @@ void func_80267CB4_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5
   func_80267260_de(arg0, *new_var2, arg4, arg5, new_var);
 }
 
-void func_80267CE4_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, CEventValueFormat7a arg6) {
+void func_80267CE4_de(s32 unused0, s32 unused1, s32 unused2, Triple arg3, CEventValueFormat7a arg6) {
     Node_func_80267CE4_de *node;
 
     node = D_80140FE8_de;
@@ -237,7 +237,7 @@ void func_80267CE4_de(s32 arg0, s32 arg1, s32 arg2, Triple arg3, CEventValueForm
     }
 }
 
-void func_80267D68_de(int arg0, int arg1, int arg2, int arg3) {
+void func_80267D68_de(int unused0, int unused1, int unused2, int arg3) {
     int *p = &arg3;
     *p = arg3;
 }

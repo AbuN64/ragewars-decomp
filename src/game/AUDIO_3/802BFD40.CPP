@@ -3,7 +3,7 @@
 #include "COMMON/OSTHREAD_S.H"
 #include "AUDIO_3/802BFD40.H"
 
-void func_802BAC50_de(const char *arg0, const char *arg1, s32 arg2) {
+void func_802BAC50_de(const char *unused0, const char *unused1, s32 unused2) {
 }
 
 #if defined(VERSION_US)

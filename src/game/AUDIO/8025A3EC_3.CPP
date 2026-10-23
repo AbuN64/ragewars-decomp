@@ -112,7 +112,7 @@ typedef struct ListNode_8025B034 {
     char pad8[0x38];
     s16 priority;
 } ListNode_8025B034;
-s16 func_8025B034_de(char *player, s32 variant, s32 count, s32 priority, s32 arg4) {
+s16 func_8025B034_de(char *player, s32 variant, s32 count, s32 priority, s32 unused4) {
     ContextCode8025A3EC *context;
     View_func_8025AE1C_de *view;
     View_func_8025AE1C_de *iter;

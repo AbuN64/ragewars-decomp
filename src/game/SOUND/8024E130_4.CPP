@@ -20,11 +20,11 @@ extern struct func_8022CA04_S3 *func_8028B2F8_de(Shared_World *, void *);
 
 
 
-void func_8024E79C_de(void *arg0, Triple t, void *arg4, s32 *arg5, s32 arg6, s32 arg7) {
+void func_8024E79C_de(void *levelActor, Triple t, void *arg4, s32 *arg5, s32 unused6, s32 unused7) {
     char unused[0x150];
     Triple *output = arg4;
     *output = t;
-    *arg5 = ((LevelActor *)arg0)->model;
+    *arg5 = ((LevelActor *)levelActor)->model;
 }
 
 int func_8024E7DC_de(void *arg0) {

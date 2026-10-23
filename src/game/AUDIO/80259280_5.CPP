@@ -171,7 +171,7 @@ void func_80259988_de(void *arg0, s32 arg1)
     }
 }
 
-void func_802599EC_de(OwnerRecAtD8 *arg0, s32 arg1) {
+void func_802599EC_de(OwnerRecAtD8 *listNode, s32 arg1) {
     ListNode *node;
     ListNode *next;
     ListNode *sentinel;
@@ -179,9 +179,9 @@ void func_802599EC_de(OwnerRecAtD8 *arg0, s32 arg1) {
     ListNode *append_sentinel;
     ListNode *tail;
 
-    node = (ListNode *)arg0->activeNext;
-    sentinel = (ListNode *)&arg0->activePrev;
-    append_sentinel = (ListNode *)&arg0->otherPrev;
+    node = (ListNode *)listNode->activeNext;
+    sentinel = (ListNode *)&listNode->activePrev;
+    append_sentinel = (ListNode *)&listNode->otherPrev;
     if (node != sentinel) {
         loop_sentinel = sentinel;
         do {
@@ -189,11 +189,11 @@ void func_802599EC_de(OwnerRecAtD8 *arg0, s32 arg1) {
             if (node->valueBC == arg1) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
-                tail = (ListNode *)arg0->otherPrev;
+                tail = (ListNode *)listNode->otherPrev;
                 node->next = append_sentinel;
                 node->prev = tail;
-                ((ListNode *)arg0->otherPrev)->next = node;
-                arg0->otherPrev = (Node_func_80259918_de *)node;
+                ((ListNode *)listNode->otherPrev)->next = node;
+                listNode->otherPrev = (Node_func_80259918_de *)node;
             }
             node = next;
         } while (node != loop_sentinel);

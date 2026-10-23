@@ -39,9 +39,9 @@ void func_802604AC_de(void *arg0, s32 arg1, void *arg2) {
                   (char *)base + (o->unk_1C) * 4);
 }
 
-void func_80260550_de(void *arg0, s32 arg1, void *arg2) {
+void func_80260550_de(void *arg0, s32 arg1, void *cQuatern) {
     ObjectLinks24_2 *o = arg0;
-    CQuatern *out = arg2;
+    CQuatern *out = cQuatern;
     ObjRecAt2V1 *indices = (void *)o->unk_0;
     s16 idx;
     CROMInitialOrientation_t *rec;
@@ -59,7 +59,7 @@ void func_80260550_de(void *arg0, s32 arg1, void *arg2) {
         return;
     }
     base = func_8028FDB4_de(o->unk_C, (s32) idx);
-    func_80270AAC_de(arg2, o->unk_20,
+    func_80270AAC_de(cQuatern, o->unk_20,
                   (char *)base + (o->unk_10) * 4,
                   (char *)base + (o->unk_14) * 4);
 }

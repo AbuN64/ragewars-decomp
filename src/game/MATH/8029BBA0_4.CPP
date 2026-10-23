@@ -186,9 +186,9 @@ void func_8029CC70_de(InputRecAt28 *arg0, CVector3 *arg1) {
     arg1->z = out2;
 }
 
-void func_8029CE3C_de(s32 arg0, s32 arg1, s32 arg2) {
+void func_8029CE3C_de(s32 matrix, s32 arg1, s32 arg2) {
     Matrix temporary;
-    Matrix *out = (Matrix *)arg0;
+    Matrix *out = (Matrix *)matrix;
     Matrix *a = (Matrix *)arg1;
     Matrix *b = (Matrix *)arg2;
     s32 row;

@@ -237,7 +237,7 @@ extern s32 D_8010AC88, D_8010AC84;
 extern f32 D_800C91F8;
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
-void func_8025F074_us(s32 arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void func_8025F074_us(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];
@@ -329,7 +329,7 @@ extern s32 D_8010AC88, D_8010AC84;
 extern f32 D_800C91F8;
 extern char D_00261180_de[], D_0025EF34_de[], D_00261238_de[];
 /* Builds the table arg1 of arg2 rows (a count word, a byte size word and DEADBEEF-marked slots carved from the free list) and fills each row with arg3 channels of values from the generator picked by arg5 (0, 1 or 2 selects the callback); with 4 channels and a radius arg4 the columns are smoothed over a wrap-around window, and 4-channel rows are finished through func_802741A4_de. */
-void func_8025F0D4_de(s32 arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void func_8025F0D4_de(s32 unused0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     void (*callback)(void *, void *, s32) = 0;
     s32 i, j, k, a, slot;
     s32 state[2];

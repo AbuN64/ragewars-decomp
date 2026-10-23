@@ -249,15 +249,15 @@ void func_802965B0_de(PlaneEquation *planes, CVector3 *eye, CVector3 *c0, CVecto
     planes[5].distance = planes[5].normal.x * eye->x + planes[5].normal.y * eye->y + planes[5].normal.z * eye->z;
 }
 
-void func_80296878_de(void *arg0, void *arg1, void *arg2, void *arg3) {
-    PlaneEquation *plane = arg0;
+void func_80296878_de(void *planeEquation, void *arg1, void *arg2, void *arg3) {
+    PlaneEquation *plane = planeEquation;
     CVector3 *point = arg1;
     CVector3 sp10;
     CVector3 sp20;
     func_80271F68_de(&sp10, arg2, arg1);
     func_80271F68_de(&sp20, arg3, arg2);
-    func_80272018_de(arg0, &sp20, &sp10);
-    func_8027207C_de(arg0);
+    func_80272018_de(planeEquation, &sp20, &sp10);
+    func_8027207C_de(planeEquation);
     plane->distance = (plane->normal.x * point->x)
                                   + (plane->normal.y * point->y)
                                   + (plane->normal.z * point->z);

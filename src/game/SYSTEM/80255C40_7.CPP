@@ -210,19 +210,19 @@ extern s32 func_802744D4_de(void);
 
 
 
-void *func_80256190_de(void *arg0) {
+void *func_80256190_de(void *intrusiveList) {
     s32 index;
     s32 offset;
     void *node;
 
-    node = ((IntrusiveList *)arg0)->head;
+    node = ((IntrusiveList *)intrusiveList)->head;
     if (node == 0) {
         return 0;
     }
-    index = func_802744D4_de() % (u32)((IntrusiveList *)arg0)->count;
+    index = func_802744D4_de() % (u32)((IntrusiveList *)intrusiveList)->count;
     index--;
     if (index != -1) {
-        offset = ((IntrusiveList *)arg0)->nextOffset;
+        offset = ((IntrusiveList *)intrusiveList)->nextOffset;
         do {
             { u8 *cursor = (u8 *)node; cursor += offset; node = *(void **)cursor; }
             index--;
