@@ -225,7 +225,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
     }
 }
 
-void func_8044CD8C_de(Level_func_8044CD8C_de *level) {
+void Items_LoadGridCells(Level_func_8044CD8C_de *level) {
     s32 size;
     s32 width;
     s32 row;
@@ -235,7 +235,7 @@ void func_8044CD8C_de(Level_func_8044CD8C_de *level) {
     DraftStreamCell *cells;
     DraftStreamCell *cell;
     s32 col;
-    s32 first;
+    s32 firstCol;
     s32 key;
     void **block;
     void *node;
@@ -255,10 +255,10 @@ void func_8044CD8C_de(Level_func_8044CD8C_de *level) {
     cells = (DraftStreamCell *) ((ResourceManagerState *) func_8028FDB4_de(level->grid, 4) + 1);
     lastRow = rows - 1;
     lastCol = width - 1;
-    /* FAKEMATCH: constant-holding local first keeps the column loop's entry test as slt */
-    first = 0;
+    /* scan every cell: columns firstCol..lastCol of each row */
+    firstCol = 0;
     for (; row <= lastRow; row++) {
-        for (col = first; col <= lastCol; col++) {
+        for (col = firstCol; col <= lastCol; col++) {
             cell = &cells[col + row * width];
             if (cell->occupied != 0) {
                 continue;
