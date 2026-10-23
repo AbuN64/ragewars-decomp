@@ -357,98 +357,113 @@ INCLUDE_ASM("span_1000", Actors_ApplyVertexColors);
 
 #ifdef NON_MATCHING
 extern u8 D_800C4B1C_de[];
-extern f32 D_80111D70[];
+extern f32 D_80111D70[], D_80111D74[], D_80111D78[];
 extern s32 D_800D2850;
 extern u8 *func_8028FDC8_de();
 extern u8 **func_8025343C_de();
 extern void func_802BD3A0_de();
 extern void Actors_AccumulateVertexLighting();
-/* NON_MATCHING: 180 aligned edits / 244 ROM words; remaining: register allocation and scheduling.
+typedef struct LitModelAllocation {
+    s32 hasColors, modelOffset, colorsOffset;
+    u32 guard;
+} LitModelAllocation;
+
+static inline u8 clampLitChannel(u8 value) {
+    return (u8)(value < 0xE1 ? value : 0xE1) > 0x1E
+        ? (value < 0xE1 ? value : 0xE1) : 0x1E;
+}
+
+/* NON_MATCHING: 111 aligned edits / 244 ROM words; remaining: model/count and RGB registers, allocator scheduling.
  * The query return selects the color trailer; the output count selects the light list.
  * The allocator takes the byte count before the flags. */
-s32 Actors_BuildLitModel(s32 deref2, s32 arg1, void *bounds, void *matrices, s32 arg4, void *wanted) {
-    u8 buffer[0x100];
-    s32 hasOwner;
+s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, void *matrices, s32 skinned, void *wanted) {
+    void *lights[0x40];
+    s32 lightCount;
     s32 needsColors;
-    s32 size;
-    u8 *model;
-    u8 **memory;
-    u8 *data;
+    s32 modelBytes;
+    Vertices38 *model;
+    u8 **allocation;
+    u8 *copiedModel;
     u8 *colors = 0;
     u8 *table;
-    s32 count;
+    s32 modelVertexCount;
     s32 clearIndex, colorIndex, sectorIndex, trailerIndex;
-    s32 sum;
-    s32 word;
-    u8 *header;
-    needsColors = func_80278020_de((void *)bounds, (void *)arg1, (void **)buffer, &hasOwner, (u8 *)wanted);
-    model = func_8028FDC8_de(deref2, 0, &size);
-    count = *(s32 *)(model + 4);
-    for (clearIndex = 0; clearIndex < count; clearIndex++) {
+    s32 worldLightCount;
+    s32 packedColor;
+    LitModelAllocation *header;
+    needsColors = func_80278020_de((void *)bounds, (void *)lightResource, (void **)lights, &lightCount, (u8 *)wanted);
+    model = (Vertices38 *)func_8028FDC8_de(modelResource, 0, &modelBytes);
+    modelVertexCount = model->count;
+    for (clearIndex = 0; clearIndex < modelVertexCount; clearIndex++) {
         D_80111D70[clearIndex * 3] = 0;
-        D_80111D70[clearIndex * 3 + 1] = 0;
-        D_80111D70[clearIndex * 3 + 2] = 0;
+        D_80111D74[clearIndex * 3] = 0;
+        D_80111D78[clearIndex * 3] = 0;
     }
     if (needsColors != 0) {
-        memory = func_8025343C_de(0, size + (*(s32 *)(model + 4) * 4 + 0x10), 0, D_800C4B1C_de);
-        if (memory == 0) {
+        allocation = func_8025343C_de(0, modelBytes + (model->count + 4) * 4, 0, D_800C4B1C_de);
+        if (allocation == 0) {
             return 0;
         }
-        header = *memory;
-        *(s32 *)header = 1;
-        *(s32 *)(header + 4) = 0x10;
-        *(s32 *)(header + 0xC) = 0xDEADBEEF;
-        *(s32 *)(header + 8) = size + 0x10;
-        data = *memory + *(s32 *)(header + 4);
-        colors = *memory + *(s32 *)(header + 8);
+        header = (LitModelAllocation *)*allocation;
+        header->hasColors = 1;
+        header->modelOffset = 0x10;
+        header->guard = 0xDEADBEEF;
+        header->colorsOffset = modelBytes + 0x10;
+        copiedModel = *allocation + header->modelOffset;
+        colors = *allocation + header->colorsOffset;
     } else {
-        memory = func_8025343C_de(0, size + 8, 0, D_800C4B1C_de);
-        if (memory == 0) {
+        allocation = func_8025343C_de(0, modelBytes + 8, 0, D_800C4B1C_de);
+        if (allocation == 0) {
             return 0;
         }
-        *(s32 *)*memory = 0;
-        data = *memory + 8;
+        *(s32 *)*allocation = 0;
+        copiedModel = *allocation + 8;
     }
-    func_802BD3A0_de(data, model, size);
-    table = func_8028FDB4_de(deref2, 1);
+    func_802BD3A0_de(copiedModel, model, modelBytes);
+    table = func_8028FDB4_de(modelResource, 1);
     if (*(s32 *)(table + 4) != 0) {
-        for (colorIndex = 0; colorIndex < count; colorIndex++) {
-            word = *(s32 *)(table + 8 + colorIndex * 4);
-            D_80111D70[colorIndex * 3] += (s8)(word >> 16) * 2;
-            D_80111D70[colorIndex * 3 + 1] += (s8)(word >> 8) * 2;
-            D_80111D70[colorIndex * 3 + 2] += (s8)word * 2;
+        for (colorIndex = 0; colorIndex < modelVertexCount; colorIndex++) {
+            CVector3 *light = &((CVector3 *)D_80111D70)[colorIndex];
+            f32 red = light->x;
+            f32 green = light->y;
+            f32 blue = light->z;
+            packedColor = *(s32 *)(table + 8 + colorIndex * 4);
+            red += ((s32)((u32)(packedColor & 0xFF0000) << 8)) >> 23;
+            green += (s8)(packedColor >> 8) * 2;
+            blue += ((s32)((u32)packedColor << 24)) >> 23;
+            light->x = red;
+            light->y = green;
+            light->z = blue;
         }
     }
     if (D_800D2850 == 0) {
-        func_80277A98_de((void *)data, (void *)matrices, (void *)D_80111D70, arg4);
-    } else if (hasOwner != 0) {
-        Actors_AccumulateVertexLighting(buffer, hasOwner, data, matrices, D_80111D70, arg4);
+        func_80277A98_de((void *)copiedModel, (void *)matrices, (void *)D_80111D70, skinned);
+    } else if (lightCount == 0) {
+        Shared_World *world = &D_8011FE88;
+        worldLightCount = 0;
+        for (sectorIndex = 0; sectorIndex < world->sectorEntryCount; sectorIndex++) {
+            worldLightCount += ((HitBoxTable *)func_8028FDB4_de(*(void **)world->sectors[sectorIndex].resource, 2))->count;
+        }
+        if (worldLightCount == 0) {
+            func_80277A98_de((void *)copiedModel, (void *)matrices, (void *)D_80111D70, skinned);
+        }
     } else {
-        sum = 0;
-        for (sectorIndex = 0; sectorIndex < *(s32 *)((u8 *)&D_8011FE88 + 0x1500); sectorIndex++) {
-            sum += *(s32 *)((u8 *)func_8028FDB4_de(**(void ***)((u8 *)&D_8011FE88 + 0x1508 + sectorIndex * 0xC), 2) + 4);
-        }
-        if (sum == 0) {
-            func_80277A98_de((void *)data, (void *)matrices, (void *)D_80111D70, arg4);
-        }
+        Actors_AccumulateVertexLighting(lights, lightCount, copiedModel, matrices, D_80111D70, skinned);
     }
-    Actors_ApplyVertexColors((void *)data, (void *)D_80111D70);
+    Actors_ApplyVertexColors((void *)copiedModel, (void *)D_80111D70);
     if (needsColors != 0) {
-        for (trailerIndex = 0; trailerIndex < *(s32 *)(data + 4); trailerIndex++) {
-            u8 *vertex = data + 8 + trailerIndex * 0x10;
-            s32 channel;
-            for (channel = 0; channel < 3; channel++) {
-                u8 value = vertex[0xC + channel];
-                if (value > 0xE1) {
-                    value = 0xE1;
-                } else if (value < 0x1E) {
-                    value = 0x1E;
-                }
-                colors[trailerIndex * 4 + channel] = value;
-            }
+        s32 vertexCount = *(s32 *)(copiedModel + 4);
+        u8 *color = colors;
+        u8 *vertex = copiedModel + 8;
+        for (trailerIndex = 0; trailerIndex < vertexCount; trailerIndex++, vertex += 0x10) {
+            u8 *dest = color;
+            color += 4;
+            dest[0] = clampLitChannel(vertex[0xC]);
+            dest[1] = clampLitChannel(vertex[0xD]);
+            dest[2] = clampLitChannel(vertex[0xE]);
         }
     }
-    return (s32)memory;
+    return (s32)allocation;
 }
 #else
 INCLUDE_ASM("span_1000", Actors_BuildLitModel);
