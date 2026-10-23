@@ -1,5 +1,6 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESOURCELOADSTATE.H"
+#include "WORLD/8022E938.H"
 #include "TYPES.H"
 #include "WORLD/8022E938_5.H"
 

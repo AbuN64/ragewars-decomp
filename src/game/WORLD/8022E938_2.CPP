@@ -1,4 +1,5 @@
 #include "COMMON/RESOURCELOADSTATE.H"
+#include "WORLD/8022E938.H"
 #include "TYPES.H"
 #include "RESMGR/802A0888.H"
 

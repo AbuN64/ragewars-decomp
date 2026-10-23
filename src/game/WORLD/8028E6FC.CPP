@@ -5,6 +5,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/WORLDSORTENTRY.H"
+#include "WORLD/8028E6FC.H"
 #include "TYPES.H"
 #include "SDK/SCHED/8028DF6C_2.H"
 #include "sdk/os.h"
