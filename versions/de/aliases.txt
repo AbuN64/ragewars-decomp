@@ -2493,3 +2493,4 @@ literals_func_80230058_de = 0x800C2E98; // rom:0xC3A98 size:0x48
 literals_Anim_TestEntityContact = 0x800C36E0; // rom:0xC42E0 size:0x8
 literals_Anim_DecodeBoxTransform = 0x800C4A60; // rom:0xC5660 size:0x60
 literals_Audio_StartNoteVoice = 0x800C3F6C; // rom:0xC4B6C size:0xC
+literals_Texture_InitializeAudioWorker = 0x800C3EB0; // rom:0xC4AB0 size:0x18

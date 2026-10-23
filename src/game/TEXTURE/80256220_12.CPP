@@ -57,10 +57,9 @@ func_8023B9B0_de
     Scene_InitializeResourceCache(0, 5);
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/AUDIO_INITIALIZE.H"
 #include "COMMON/ALAUXBUS_S.H"
-extern u8 D_80107DF0;
+extern ObjectLinksC D_80107DF0;
 extern u32 D_80107E98, D_80107E9C;
 extern s32 D_80107DFC;
 extern ALHeap *D_80107EA0;
@@ -71,7 +70,6 @@ extern u32 D_801076D0[10], D_801076A8[10], D_80107EA8[60];
 extern u8 D_801076F8[], D_800E5400[0x2800];
 extern u8 D_800D8C10[0xD0], D_800DB200[0x1000], D_800DC830_de[0x800];
 extern u8 D_800D8CE0[];
-extern f32 D_800C3EB8_de;
 extern char D_00256E6C, D_00256C90;
 s32 *func_80256E6C_de(s32 **);
 void func_80256C90_de(void);
@@ -82,16 +80,16 @@ void func_802BB550_de(s32, void *, s32);
 void func_802BAC90_de(void *, s32, void (*)(void), void *, void *, s32);
 void func_802BB750_de(void *);
 
-/* 4/260 aligned edits; remaining: callback store and frequency-load scheduling. */
+/* Reset the DMA cache, allocate sample/task buffers, then start the audio worker. */
 void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
     u32 i;
-    f32 samples;
-    D_80107DF0 = 0;
+    f32 samplesPerFrame;
+    D_80107DF0.unk_0 = 0;
     config->dmaproc = (void *)&D_00256E6C;
     config->outputRate = func_802B72E0_de(timing->frequency);
-    samples = (f32)timing->frameTime * config->outputRate * D_800C3EB8_de;
-    D_80107E98 = (s32)samples;
-    if ((f32)D_80107E98 < samples) D_80107E98++;
+    samplesPerFrame = (f32)timing->frameTime * config->outputRate * (1.0f / 60.0f);
+    D_80107E98 = (s32)samplesPerFrame;
+    if ((f32)D_80107E98 < samplesPerFrame) D_80107E98++;
     if (D_80107E98 & 15) D_80107E98 = (D_80107E98 & ~15U) + 16;
     func_802B24A0_de(&D_80107E34, config);
     D_80107928[0].prev = 0;
@@ -128,6 +126,3 @@ void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioIniti
     func_802BB750_de(D_801076F8);
     func_802BB420_de(&D_80107E00, (OSMesg)7, 0);
 }
-#else
-INCLUDE_ASM("span_1000", Texture_InitializeAudioWorker);
-#endif
