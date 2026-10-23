@@ -2555,3 +2555,4 @@ literals_System_PrepareAnimationFrames = 0x800C44E8; // rom:0xC50E8 size:0x60
 literals_func_8042FD40_eu_x = 0x800E93A0; // rom:0xE9FA0 size:0x20
 literals_Anim_TestEntityContact = 0x800C39D0; // rom:0xC45D0 size:0x8
 literals_Anim_DecodeBoxTransform = 0x800C4D50; // rom:0xC5950 size:0x60
+literals_Audio_StartNoteVoice = 0x800C425C; // rom:0xC4E5C size:0xC

@@ -3692,7 +3692,7 @@ segments:
       - [0xC4A80, rodata, data_800C/D_8025AA2C_C9C40]
       - [0xC4A90, rodata, data_800C/D_8025AB94_C9C50]
       - [0xC4A98, rodata, data_800C/D_8025AE1C_C9C58]
-      - [0xC4A9C, rodata, data_800C/D_8025B1C8_C9C5C]
+      - [0xC4A9C, rodata, data_800C/literals_Audio_StartNoteVoice]
       - [0xC4AA8, rodata, data_800C/D_8025B6F8_C9C68]
       - [0xC4AAC, rodata, data_800C/D_8025B758_C9C6C]
       - [0xC4AB8, rodata, data_800C/D_8025C10C_C9C78]

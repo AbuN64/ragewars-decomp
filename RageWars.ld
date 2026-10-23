@@ -11104,7 +11104,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9050.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9058.CPP.o(.rodata .rdata);
-        src/game/AUDIO/800C905C.CPP.o(.rodata .rdata);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9068.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C906C.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9078.CPP.o(.rodata .rdata);
@@ -12856,7 +12856,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9050.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9058.CPP.o(.rodata .rdata);
-        src/game/AUDIO/800C905C.CPP.o(.rodata .rdata);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9068.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C906C.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9078.CPP.o(.rodata .rdata);
@@ -14560,7 +14560,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9050.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9058.CPP.o(.rodata .rdata);
-        src/game/AUDIO/800C905C.CPP.o(.rodata .rdata);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9068.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C906C.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9078.CPP.o(.rodata .rdata);
@@ -16273,7 +16273,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9050.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9058.CPP.o(.rodata .rdata);
-        src/game/AUDIO/800C905C.CPP.o(.rodata .rdata);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9068.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C906C.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9078.CPP.o(.rodata .rdata);
@@ -18018,7 +18018,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9050.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9058.CPP.o(.rodata .rdata);
-        src/game/AUDIO/800C905C.CPP.o(.rodata .rdata);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9068.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C906C.CPP.o(.rodata .rdata);
         src/game/AUDIO/800C9078.CPP.o(.rodata .rdata);
@@ -20203,7 +20203,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9050.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9058.CPP.o(.bss .sbss COMMON);
-        src/game/AUDIO/800C905C.CPP.o(.bss .sbss COMMON);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9068.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C906C.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9078.CPP.o(.bss .sbss COMMON);
@@ -21469,7 +21469,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9050.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9058.CPP.o(.bss .sbss COMMON);
-        src/game/AUDIO/800C905C.CPP.o(.bss .sbss COMMON);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9068.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C906C.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9078.CPP.o(.bss .sbss COMMON);
@@ -22699,7 +22699,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9050.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9058.CPP.o(.bss .sbss COMMON);
-        src/game/AUDIO/800C905C.CPP.o(.bss .sbss COMMON);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9068.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C906C.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9078.CPP.o(.bss .sbss COMMON);
@@ -23939,7 +23939,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9050.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9058.CPP.o(.bss .sbss COMMON);
-        src/game/AUDIO/800C905C.CPP.o(.bss .sbss COMMON);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9068.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C906C.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9078.CPP.o(.bss .sbss COMMON);
@@ -25269,7 +25269,7 @@ SECTIONS
         src/game/AUDIO/800C9040.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9050.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9058.CPP.o(.bss .sbss COMMON);
-        src/game/AUDIO/800C905C.CPP.o(.bss .sbss COMMON);
+        src/game/AUDIO/8025A3EC_3.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9068.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C906C.CPP.o(.bss .sbss COMMON);
         src/game/AUDIO/800C9078.CPP.o(.bss .sbss COMMON);

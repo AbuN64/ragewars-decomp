@@ -103,7 +103,7 @@ extern f32 func_8025C10C_de(CVector3 *, void *);
 extern s32 func_8025BDAC_de(void *, s32, s32);
 extern s32 func_80259260_de(void *, Item57BD4 *, CVector3 *, s32, s32);
 
-extern void *func_8025B1C8_de(void *, Item57BD4 *, s32, s32);
+extern void *Audio_StartNoteVoice(void *, Item57BD4 *, s32, s32);
 extern void func_8025BB5C_de(void *, CVector3 *, s32);
 
 extern void func_8025BB84_de(void *, Item57BD4 *, s32);
@@ -142,7 +142,7 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
     if (arg1->flags & 0x40) {
         func_8025B920_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->field2B8C, arg1->field0);
     }
-    node = func_8025B1C8_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1, arg3, arg4);
+    node = Audio_StartNoteVoice(&((ContextRecAt2BC0 *)(arg0))->menu[0], arg1, arg3, arg4);
     if (node == 0) {
         return -1;
     }

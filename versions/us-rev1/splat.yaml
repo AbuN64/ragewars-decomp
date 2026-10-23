@@ -3806,7 +3806,7 @@ segments:
       - [0xC9C40, rodata, data_800C/D_auto_src_rw_pool_8025AA2C_C9C40_us_rev1]
       - [0xC9C50, rodata, data_800C/D_blob_f0b04359f628443d471e]
       - [0xC9C58, rodata, data_800C/D_blob_205da2927ffd532cdeb3]
-      - [0xC9C5C, rodata, data_800C/D_blob_44edb4118119894b4947]
+      - [0xC9C5C, rodata, data_800C/literals_Audio_StartNoteVoice]
       - [0xC9C68, rodata, data_800C/D_blob_c47a1224be0864d16b8f]
       - [0xC9C6C, rodata, data_800C/D_blob_2f4433e4bee06427c8ee]
       - [0xC9C78, rodata, data_800C/D_blob_d58ac873383264ce9118]

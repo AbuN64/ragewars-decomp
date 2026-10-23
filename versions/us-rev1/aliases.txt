@@ -2934,3 +2934,4 @@ literals_Pak_UpdateStatusText = 0x800E0E08; // rom:0xE1A08 size:0x3C
 D_blob_93abb19b3a58a8d2b351 = 0x800E2A4C;
 literals_Anim_TestEntityContact = 0x800C87D0; // rom:0xC93D0 size:0x8
 literals_Anim_DecodeBoxTransform = 0x800C9B50; // rom:0xCA750 size:0x60
+literals_Audio_StartNoteVoice = 0x800C905C; // rom:0xC9C5C size:0xC

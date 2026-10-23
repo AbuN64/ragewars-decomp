@@ -173,16 +173,20 @@ s16 func_8025B034_de(char *player, s32 variant, s32 count, s32 priority, s32 arg
 INCLUDE_ASM("span_1000", func_8025B034_de);
 #endif
 
-#ifdef NON_MATCHING
-typedef struct SoundEngine {
-    char pad0[0x7C];
+extern s16 func_8025B034_de(char *, s32, s32, s32, s32);
+
+typedef struct SoundBankState {
     ALBank_s *bank;
-    char pad80[4];
-    char pool[0xDC - 0x84];
+    char pad4[4];
+    char pool[0x58];
     s16 slots[16];
     u16 allocated;
-    char padFE[4];
+    char pad82[4];
     s16 current;
+} SoundBankState;
+typedef struct SoundEngine {
+    char pad0[0x7C];
+    SoundBankState state;
     s32 effect;
     s32 serial;
     char pad10C[0x2B8C - 0x10C];
@@ -194,31 +198,33 @@ typedef struct SoundEngine {
     char pad2BB0[0x2BBC - 0x2BB0];
     f32 f2BBC;
 } SoundEngine;
+typedef struct SoundVoiceParameters {
+    s32 effect;
+    char pad4[4];
+    s32 reach;
+    s32 reachCopy;
+    s16 pitchOffset;
+    char pad12[2];
+    s32 zero24;
+    s16 pan;
+    char pad1A[0xA];
+    f32 gain;
+    s16 priority;
+    s16 note;
+    s16 variant;
+    char pad2E[0x12];
+    s32 zero50;
+    u8 mode;
+} SoundVoiceParameters;
 typedef struct SoundVoice {
     char pad0[4];
     s32 userData;
     s32 slot;
     s32 serial;
-    s32 effect;
-    char pad14[4];
-    s32 reach;
-    s32 reachCopy;
-    s16 pitchOffset;
-    char pad22[2];
-    s32 zero24;
-    s16 pan;
-    char pad2A[0xA];
-    f32 gain;
-    s16 priority;
-    s16 note;
-    s16 variant;
-    char pad3E[0x12];
-    s32 zero50;
-    u8 mode;
-    char pad55[0x47];
+    SoundVoiceParameters parameters;
+    char pad58[0x48];
     s32 noteLength;
     s32 noteWord;
-    s32 f_A4;
     s32 f_A8;
     s32 zeroAC;
     char padB0[4];
@@ -244,68 +250,74 @@ extern s16 func_802B2510_de(void *, s32);
 /* Starts a note on a free voice: picks the voice with func_8025B034_de, asks the sound set for its sample, and
  * fills in the voice record (volume, pan, pitch, which categories its effect belongs to). Returns the voice, or
  * 0 when the note's set is too small, the chance roll fails, or no voice or sample is available. */
-SoundVoice *func_8025B1C8_de(SoundPlayer *player, ControllerCode802591C0 *note, s16 variant, s32 userData) {
+SoundVoice *Audio_StartNoteVoice(SoundPlayer *player, ControllerCode802591C0 *note, s32 variant, s32 userData) {
     SoundEngine *engine;
     SoundVoice *voice;
     s16 *slots;
     s16 index;
     s16 slot;
     s16 priority;
-    s16 count;
+    s32 count;
     s32 roll;
     s32 i;
     f32 pitch;
     u32 pitchByte;
+    s8 notePitch;
+    SoundBankState *state;
+    SoundVoiceParameters *parameters;
+    char *pool;
 
     count = func_8025E500_de(note);
     priority = (s8)func_8025E518_de(note);
     engine = player->engine;
-    slots = engine->slots;
-    if (engine->bank->instArray[0]->soundCount < count) {
+    slots = engine->state.slots;
+    if (player->engine->state.bank->instArray[0]->soundCount < count) {
         return 0;
     }
     func_80258740_de((s32 *)engine);
     if ((s8)func_8025E524_de(note) != 100) {
-        roll = func_8027451C_de() % 100;
-        if (!(roll < (s8)func_8025E524_de(note))) {
+        roll = func_8027451C_de();
+        roll %= 100;
+        roll = roll < (s8)func_8025E524_de(note);
+        if (!roll) {
             goto fail;
         }
     }
-    index = func_8025B034_de((s8 *)player, variant, count, priority, (s16)func_8025E578_de(note));
+    index = func_8025B034_de((s8 *)player, (s16)variant, count, priority, (s16)func_8025E578_de(note));
     if (index == -1) {
         goto fail;
     }
     voice = &player->voices[index];
     if (index == 0x10) {
         voice->userData = userData;
-        voice->serial = engine->serial++;
+        voice->serial = player->engine->serial++;
         voice->slot = 99;
     } else {
-        engine->current = index;
-        slot = func_802B2510_de(engine->pool, (s32)engine->bank->instArray[0]->soundArray[count]);
+        player->engine->state.current = index;
+        state = &player->engine->state;
+        pool = state->pool;
+        slot = func_802B2510_de(pool, (s32)state->bank->instArray[0]->soundArray[count]);
         slots[index] = slot;
         if (slot == -1) {
             voice->serial = -1;
             voice->slot = -1;
-            voice->priority = 0;
-            engine->current = -1;
-            goto fail;
+            voice->parameters.priority = 0;
+            player->engine->state.current = -1;
+fail:
+            func_802587A4_de((s32 *)player->engine);
+            return 0;
         }
-        pitch = (f32)priority * D_800C3F6C_de;
-        engine->allocated++;
+        pitch = (f32)priority * 1.27f;
+        state->allocated++;
         voice->userData = userData;
-        voice->serial = engine->serial++;
+        voice->serial = player->engine->serial++;
         voice->slot = slots[index];
         voice->noteLength = note->sample;
-        if (D_800C3F70_de <= pitch) {
-            pitchByte = (u32)(pitch - D_800C3F70_de) | 0x80000000;
-        } else {
-            pitchByte = (u32)pitch;
-        }
-        func_802B2ED0_de(engine->pool, slots[index], pitchByte & 0xFF);
+        pitchByte = (u32)pitch;
+        func_802B2ED0_de(pool, slots[index], pitchByte & 0xFF);
     }
-    voice->f_A8 = engine->priorityTable;
-    voice->f_C0 = engine->f2BAC;
+    voice->f_A8 = player->engine->priorityTable;
+    voice->f_C0 = player->engine->f2BAC;
     voice->flagBC = 0;
     for (i = 0; i < 4; i++) {
         if (voice->f_A8 == D_800CBAD4[i]) {
@@ -320,28 +332,24 @@ SoundVoice *func_8025B1C8_de(SoundPlayer *player, ControllerCode802591C0 *note, 
             break;
         }
     }
-    voice->f_B4 = engine->f2B90;
+    voice->f_B4 = player->engine->f2B90;
     voice->zeroAC = 0;
-    voice->f_B8 = engine->f2BBC;
-    voice->pitchOffset = note->pitch;
-    voice->priority = priority;
-    voice->reachCopy = 0x7D00;
-    voice->reach = 0x7D00;
-    voice->zero24 = 0;
-    voice->pan = 0x40;
-    voice->note = count;
-    voice->variant = variant;
-    voice->effect = engine->effect;
-    voice->gain = D_800C3F74_de;
-    voice->mode = func_8025E548_de(note);
+    voice->f_B8 = player->engine->f2BBC;
+    parameters = &voice->parameters;
+    parameters->priority = priority;
+    parameters->reachCopy = 0x7D00;
+    parameters->reach = 0x7D00;
+    parameters->zero24 = 0;
+    notePitch = note->pitch;
+    parameters->pan = 0x40;
+    parameters->note = count;
+    parameters->variant = variant;
+    parameters->pitchOffset = notePitch;
+    voice->parameters.effect = player->engine->effect;
+    parameters->gain = 1.0f;
+    parameters->mode = func_8025E548_de(note);
     voice->noteWord = (s16)func_8025E578_de(note);
-    voice->zero50 = 0;
-    func_802587A4_de((s32 *)engine);
+    parameters->zero50 = 0;
+    func_802587A4_de((s32 *)player->engine);
     return voice;
-fail:
-    func_802587A4_de((s32 *)engine);
-    return 0;
 }
-#else
-INCLUDE_ASM("span_1000", func_8025B1C8_de);
-#endif
