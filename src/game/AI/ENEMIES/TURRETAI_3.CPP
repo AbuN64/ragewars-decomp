@@ -15,7 +15,7 @@
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
 #include "TYPES.H"
-#include "AI/ENEMIES/TURRETAI_3.H"
+#include "AI/ENEMIES/TURRETAI.H"
 #include "WEAPONS/80213ED4_11.H"
 #include "WEAPONS/80213ED4_17.H"
 #include "WEAPONS/80213ED4.H"

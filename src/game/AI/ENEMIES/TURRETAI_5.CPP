@@ -8,7 +8,7 @@
 #include "COMMON/EXTERNS_15.H"
 #include "COMMON/OBJ.H"
 #include "COMMON/OBJRECAT30.H"
-#include "AI/ENEMIES/TURRETAI_5.H"
+#include "AI/ENEMIES/TURRETAI.H"
 #include "WEAPONS/80213ED4.H"
 
 extern s32 func_80285F58_de(void *arg0, void *arg1);
