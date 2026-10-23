@@ -1001,7 +1001,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_10.CPP.o(.data);
         src/sdk/libultra/os/802C0CB0.CPP.o(.text);
         src/sdk/libultra/os/func_802BBC68.s.o(.text);
-        src/game/AUDIO_4/802C1358.CPP.o(.text);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.text);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.text);
         src/sdk/libultra/os/__osPopThread.s.o(.text);
@@ -2061,7 +2060,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_11.CPP.o(.data);
         src/sdk/libultra/os/802C0CB0.CPP.o(.text);
         src/sdk/libultra/os/func_802BBC68.s.o(.text);
-        src/game/AUDIO_4/802C1358.CPP.o(.text);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.text);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.text);
         src/sdk/libultra/os/__osPopThread.s.o(.text);
@@ -3135,7 +3133,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_16.CPP.o(.data);
         src/sdk/libultra/os/802C0CB0.CPP.o(.text);
         src/sdk/libultra/os/func_802BBC68.s.o(.text);
-        src/game/AUDIO_4/802C1358.CPP.o(.text);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.text);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.text);
         src/sdk/libultra/os/__osPopThread.s.o(.text);
@@ -4205,7 +4202,7 @@ SECTIONS
         src/sdk/libultra/os/802C0840_6.CPP.o(.data);
         src/sdk/libultra/os/802C0CB0.CPP.o(.text);
         src/game/DATA/AUDIO/DATA_802BBB98.CPP.o(.data);
-        src/game/AUDIO_4/802C1358.CPP.o(.text);
+        src/sdk/libultra/os/func_802BBC68.s.o(.text);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.text);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.text);
         src/sdk/libultra/os/__osPopThread.s.o(.text);
@@ -5306,7 +5303,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_16.CPP.o(.data);
         src/sdk/libultra/os/802C0CB0.CPP.o(.text);
         src/sdk/libultra/os/func_802BBC68.s.o(.text);
-        src/game/AUDIO_4/802C1358.CPP.o(.text);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.text);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.text);
         src/sdk/libultra/os/__osPopThread.s.o(.text);
@@ -6341,7 +6337,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_10.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/802C0CB0.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BBC68.s.o(.bss .sbss COMMON);
-        src/game/AUDIO_4/802C1358.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osPopThread.s.o(.bss .sbss COMMON);
@@ -7379,7 +7374,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_11.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/802C0CB0.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BBC68.s.o(.bss .sbss COMMON);
-        src/game/AUDIO_4/802C1358.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osPopThread.s.o(.bss .sbss COMMON);
@@ -8428,7 +8422,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_16.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/802C0CB0.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BBC68.s.o(.bss .sbss COMMON);
-        src/game/AUDIO_4/802C1358.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osPopThread.s.o(.bss .sbss COMMON);
@@ -9403,7 +9396,7 @@ SECTIONS
         src/sdk/libultra/os/802C0840_6.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/802C0CB0.CPP.o(.bss .sbss COMMON);
         src/game/DATA/AUDIO/DATA_802BBB98.CPP.o(.bss .sbss COMMON);
-        src/game/AUDIO_4/802C1358.CPP.o(.bss .sbss COMMON);
+        src/sdk/libultra/os/func_802BBC68.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osPopThread.s.o(.bss .sbss COMMON);
@@ -10496,7 +10489,6 @@ SECTIONS
         src/sdk/libultra/os/802C0840_16.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/802C0CB0.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BBC68.s.o(.bss .sbss COMMON);
-        src/game/AUDIO_4/802C1358.CPP.o(.bss .sbss COMMON);
         src/sdk/libultra/os/func_802BC36C_de.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osEnqueueThread.s.o(.bss .sbss COMMON);
         src/sdk/libultra/os/__osPopThread.s.o(.bss .sbss COMMON);

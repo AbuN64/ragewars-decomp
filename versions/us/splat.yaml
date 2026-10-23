@@ -3116,6 +3116,7 @@ segments:
       - [0xBC6F0, c, span_1000]
       - [0xBC750, c, span_1000]
       - [0xBC798, data, span_1000/D_auto_rodata_unresolved_802BBB98]
+      - [0xBC7A0, c, span_1000]
       - [0xBCD98, c, span_1000]
       - [0xBCE9C, c, span_1000]
       - [0xBD038, c, span_1000]
