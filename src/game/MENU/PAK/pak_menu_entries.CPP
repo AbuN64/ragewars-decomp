@@ -54,10 +54,10 @@ void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
     } while ((entry->flags & 0x1800000) != 0x1800000 || entry->target->locked == 0);
 }
 
-#ifdef NON_MATCHING
-/* 84/248 aligned edits; remaining: register roles of the entry loop (menu/entry/index) */
+/* Update entry callbacks, animate opening/closing, and handle the selected entry. */
 extern f32 literals_func_8028D244_de;
-extern f32 D_800E24D4, D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
+extern const f32 g_pakMenuAnimationLimits[4];
+extern f32 D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
 typedef struct PakMenu PakMenu;
 typedef struct PakEntry PakEntry;
 typedef s32 (*PakEntryCallback)();
@@ -102,7 +102,6 @@ struct PakMenu {
 s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     s32 closeRequested = 0;
     PakEntry *entry;
-    PakEntry *current;
     s32 i;
     s32 selectionFlags;
     s32 allowRepeat;
@@ -113,23 +112,24 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     if (callback != 0) {
         closeRequested = callback();
     }
+    i = menu->count;
     entry = menu->entries;
-    for (i = menu->count - 1; i != -1; i--) {
+    while (--i != -1) {
         callback = entry->cls->update;
         if (callback != 0) {
             callback(entry, menu, context);
         }
         entry++;
     }
-    current = menu->entries + menu->selected;
+    entry = menu->entries + menu->selected;
     menu->fade += literals_func_8028D244_de;
-    selectionFlags = current->flags & 0x400000;
+    selectionFlags = entry->flags & 0x400000;
     func_80442B5C_de(menu);
     switch (menu->state) {
     case 0:
         menu->openA += literals_func_8028D244_de;
-        if (menu->openA >= D_800E24D4) {
-            menu->openA = D_800E24D4;
+        if (menu->openA >= g_pakMenuAnimationLimits[0]) {
+            menu->openA = g_pakMenuAnimationLimits[0];
             menu->state = 1;
         }
         break;
@@ -156,29 +156,32 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         break;
     }
     state = menu->state;
-    if (state >= 3 || state < 0) {
+    if (state >= 3) {
+        return 0;
+    }
+    if (state < 0) {
         return 0;
     }
     if (closeRequested != 0) {
         menu->state = 4;
     }
-    if (current->flags & 8) {
+    if (entry->flags & 8) {
         return 0;
     }
     allowRepeat = 1;
-    if (current->type == 2) {
+    if (entry->type == 2) {
         buttons = menu->input->buttons;
         if (buttons & 0x20202) {
             allowRepeat = 0;
-            current->value -= 2;
-            if (current->value < 0) {
-                current->value = 0;
+            entry->value -= 2;
+            if (entry->value < 0) {
+                entry->value = 0;
             }
         } else if (buttons & 0x40101) {
-            current->value += 2;
+            entry->value += 2;
             allowRepeat = 0;
-            if (current->value >= 0x100) {
-                current->value = 0xFF;
+            if (entry->value >= 0x100) {
+                entry->value = 0xFF;
             }
         }
     }
@@ -204,18 +207,16 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         return 0;
     }
     if (func_8026437C_de(menu->input) != 0 ||
-        ((func_80264388_de(menu->input) != 0 || func_802643A0_de(menu->input) != 0) && selectionFlags != 0)) {
-        callback = current->cls->confirm;
-        if (callback != 0 && callback(current, menu, context) == 0) {
+        (func_80264388_de(menu->input) != 0 && selectionFlags != 0) ||
+        (func_802643A0_de(menu->input) != 0 && selectionFlags != 0)) {
+        callback = entry->cls->confirm;
+        if (callback != 0 && callback(entry, menu, context) == 0) {
             return 0;
         }
         menu->state = 3;
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_UpdateMenuEntries);
-#endif
 
 
 extern void *func_80442A58_de(s8 *);

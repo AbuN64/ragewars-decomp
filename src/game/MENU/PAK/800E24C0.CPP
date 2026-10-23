@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "TYPES.H"
 
 #if !(defined(VERSION_US_REV1))
 const unsigned int D_80440838_E30C0[5] = {
@@ -7,26 +8,26 @@ const unsigned int D_80440838_E30C0[5] = {
 #endif
 
 #if defined(VERSION_US)
-const unsigned int rodata_func_80441214_de_800DD154[4] = {
-    0x3F800000, 0x3ECCCCCD, 0x3F800000, 0x3ECCCCCD,
+const f32 g_pakMenuAnimationLimits[4] = {
+    1.0f, 0.4f, 1.0f, 0.4f,
 };
 #endif
 
 #if defined(VERSION_EU_X)
-const unsigned int rodata_func_80441214_de_800E9CE4[4] = {
-    0x3F800000, 0x3ECCCCCD, 0x3F800000, 0x3ECCCCCD,
+const f32 g_pakMenuAnimationLimits[4] = {
+    1.0f, 0.4f, 1.0f, 0.4f,
 };
 #endif
 
 #if defined(VERSION_EU)
-const unsigned int rodata_func_80441214_de_800EEB24[4] = {
-    0x3F800000, 0x3ECCCCCD, 0x3F800000, 0x3ECCCCCD,
+const f32 g_pakMenuAnimationLimits[4] = {
+    1.0f, 0.4f, 1.0f, 0.4f,
 };
 #endif
 
 #if defined(VERSION_DE)
-const unsigned int rodata_func_80441214_de_800DE4A4[4] = {
-    0x3F800000, 0x3ECCCCCD, 0x3F800000, 0x3ECCCCCD,
+const f32 g_pakMenuAnimationLimits[4] = {
+    1.0f, 0.4f, 1.0f, 0.4f,
 };
 #endif
 
