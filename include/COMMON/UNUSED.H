@@ -4484,9 +4484,6 @@ struct Buffers {
     func_80284AF4_G2 *zwork;
 };
 struct Bytes12;
-struct Bytes12 {
-    char bytes[12];
-};
 struct Shape_typemap_13;
 struct Triple;
 typedef void ( *SharedCallback14)(void *, void *, signed int, struct Triple, struct Shape_typemap_13);
@@ -17589,55 +17586,10 @@ struct UnlockImageOptionPos {
     s16 y;
 };
 struct ViewRecAtB0;
-struct ViewRecAtB0 {
-    char pad0[0x10];
-    Motion motion;
-    Angles angles;
-    char pad68[4];
-    f32 pitch;
-    f32 pitchStep;
-    char pad74[0xB0 - 0x74];
-    s32 presets;
-};
 struct ContextRecAt104;
 struct View_func_8025AB94_de;
-struct View_func_8025AB94_de {
-    s32 slot;
-    char pad4[0xC];
-    MotionRecAt24 motion;
-    char pad38[0x60 - 0x38];
-    AnglesRecAt8 angles;
-    f32 pitch;
-    f32 pitchStep;
-    char pad74[0xA4 - 0x74];
-    s32 flags;
-    char padA8[0xB0 - 0xA8];
-    struct ContextRecAt104 *context;
-    char padB4[4];
-    f32 scale;
-};
 struct OwnerCode8025A3EC;
 struct Voice_func_8025A844_de;
-struct Voice_func_8025A844_de {
-    s32 index;
-    char pad4[0xC];
-    ParamsRecAt18 params;
-    char position[0x44];
-    s32 sweeping;
-    char pad8C[4];
-    u16 target;
-    char pad92[2];
-    s16 delay;
-    char pad96[2];
-    f32 value;
-    f32 step;
-    char padA0[4];
-    s32 flags;
-    char padA8[8];
-    struct OwnerCode8025A3EC *owner;
-    char padB4[0xC];
-    s32 fixed;
-};
 struct Vtx_t;
 struct Vtx_t {
     s16 ob[3];

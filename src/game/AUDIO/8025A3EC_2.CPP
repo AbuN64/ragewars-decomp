@@ -1,6 +1,7 @@
 #include "COMMON/OBJRECAT4V6.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
+#include "AUDIO/8025A3EC.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON.H"
 

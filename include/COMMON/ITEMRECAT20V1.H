@@ -2275,10 +2275,6 @@ struct func_802A68A0_S3 {
 };
 
 struct ObjRecAtDC;
-struct ObjRecAtDC {
-    char pad0[0xDC];
-    s16 unkDC;
-};
 
 struct ModelDef;
 struct ModelDef {
@@ -2428,10 +2424,6 @@ typedef struct Shared_GameMode Shared_GameMode;
 extern int D_800E63AC;
 
 struct func_80245A10_S1;
-struct func_80245A10_S1 {
-    char pad0[0x104];
-    int unk104;
-};
 
 struct Args;
 struct Args {

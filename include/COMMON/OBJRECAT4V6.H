@@ -53,10 +53,6 @@ typedef struct PoolCode8025A3EC {
 } PoolCode8025A3EC;
 
 struct ObjRecAt4V6;
-struct ObjRecAt4V6 {
-    char pad0[0x4];
-    RecordCode8025A3EC unk4;
-};
 
 struct RecCode8025A3EC;
 struct RecCode8025A3EC {
@@ -93,10 +89,6 @@ struct HeaderRecAt102 {
 };
 
 struct RecordRecAt4V3;
-struct RecordRecAt4V3 {
-    HeaderRecAt102 *header;
-    SlotRecAtA8 slots[17];
-};
 
 struct func_8025C4D4_S1;
 typedef struct func_8025C4D4_S1 func_8025C4D4_S1;
@@ -140,17 +132,6 @@ struct SlotRecAtB0 {
 extern int D_800CBB00;
 
 struct IntegerStateB4;
-struct IntegerStateB4 {
-    s32 unk_0;
-    s32 unk_4;
-    unsigned char padding_8[8];
-    s32 unk_10;
-    unsigned char padding_14[60];
-    s32 unk_50;
-    unsigned char padding_54[88];
-    s32 unk_AC;
-    s32 unk_B0;
-};
 
 struct SlotRecAtB8;
 struct SlotRecAtB8 {
@@ -187,11 +168,6 @@ struct SlotCode8025A3EC;
 typedef struct SlotCode8025A3EC SlotCode8025A3EC;
 
 struct ObjRecAtCV4;
-struct ObjRecAtCV4 {
-    HeaderRecAt102 *owner;
-    char pad4[8];
-    SlotCode8025A3EC slots[16];
-};
 
 
 extern float D_800C9044;
@@ -287,47 +263,7 @@ struct ContextCode8025A3EC {
 
 struct ContextCode8025A3EC;
 struct View_func_8025AE1C_de;
-typedef struct SoundEnvelope {
-    u16 flags;
-    u16 initial;
-    u16 target;
-    s16 frames;
-    u32 reserved8;
-} __attribute__((packed)) SoundEnvelope;
 
-struct View_func_8025AE1C_de {
-    s32 slot;
-    s32 handle;
-    s32 field8;
-    s32 fieldC;
-    s32 frame;
-    char pad14[4];
-    s32 finished;
-    u8 pad1C[0xC];
-    s16 priority; /* 0x28 */
-    u8 pad2A[2];
-    f32 time;
-    char pad30[0x38 - 0x30];
-    s16 field38;
-    s16 field3A;
-    char pad3C[0x44 - 0x3C];
-    Triple position;
-    Triple *tracked;
-    u8 pad54[0x88 - 0x54];
-    s32 sweeping; /* 0x88 */
-    SoundEnvelope envelope; /* 0x8C */
-    f32 value; /* 0x98 */
-    f32 step; /* 0x9C */
-    s32 hold;
-    s32 flags;
-    s32 trackId;
-    s32 done;
-    struct ContextCode8025A3EC *context;
-    s32 fieldB4;
-    char padB8[4];
-    s32 followTrack;
-    s32 fixed; /* 0xC0 */
-};
 
 struct func_8025C388_S1;
 typedef struct func_8025C388_S1 func_8025C388_S1;
@@ -395,16 +331,8 @@ struct func_8025BB9C_S1 {
 
 struct HeaderRecAt102;
 struct RecordRecAt4V6;
-struct RecordRecAt4V6 {
-    struct HeaderRecAt102 *header;
-    SlotRecAtB0 slots[17];
-};
 
 struct RecordRecAt4V5;
-struct RecordRecAt4V5 {
-    HeaderRecAt102 *header;
-    SlotRecAtB4V1 slots[17];
-};
 
 extern float D_800C3F50_de;
 
@@ -433,23 +361,6 @@ struct func_8025AA4C_S1 {
 };
 
 struct Emitter;
-struct Emitter {
-    char pad0[0x34];
-    f32 level;
-    char pad38[0xC];
-    f32 x;
-    f32 y;
-    f32 z;
-    char pad50[8];
-    f32 distance;
-    f32 lastDistance;
-    char pad60[0x48];
-    s32 id;
-    char padAC[4];
-    void *scene;
-    char padB4[0xC];
-    s32 reset;
-};
 
 extern float D_800C3F84_de;
 
@@ -495,11 +406,4 @@ struct func_8025C388_S1 {
 struct ObjRecAtCV4;
 typedef struct ObjRecAtCV4 ObjRecAtCV4;
 
-/* Position and attenuation curve of a spatial sound source. */
-typedef struct SoundSpatialSource {
-    u8 reserved0[0x34];
-    CVector3 position;
-    u8 reserved40[4];
-    s8 curve;
-} SoundSpatialSource;
 #endif

@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/UNUSED.H"
+#include "AUDIO/8025A3EC.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON.H"

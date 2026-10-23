@@ -2,6 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJRECAT4V6.H"
+#include "AUDIO/8025A3EC.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
 #include "AUDIO/EXTERNS.H"

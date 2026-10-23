@@ -36,12 +36,6 @@ struct NodeRecAtAC {
 };
 
 struct Lists;
-struct Lists {
-    char pad0[4];
-    NodeRecAtAC first;
-    char padB4[0x24];
-    NodeRecAtAC second;
-};
 
 struct func_80259AD8_S1;
 typedef struct func_80259AD8_S1 func_80259AD8_S1;
@@ -109,12 +103,6 @@ struct SceneCode802591C0 {
 };
 struct ManagerRecAtD8V2;
 struct SceneCode802591C0;
-struct ManagerRecAtD8V2 {
-    struct SceneCode802591C0 *scene;
-    Link_func_80259784_de active;
-    char padC[0xCC];
-    Link_func_80259784_de free;
-};
 
 struct func_802597A4_S2;
 struct func_802597A4_S2 {
@@ -129,10 +117,6 @@ struct func_802597A4_S2 {
 };
 
 struct ObjectLinks8;
-struct ObjectLinks8 {
-    void *unk_0;
-    void *unk_4;
-};
 
 union func_80259A0C_S1_UD8;
 typedef union func_80259A0C_S1_UD8 func_80259A0C_S1_UD8;
@@ -222,15 +206,6 @@ struct ObjectLinks2B50;
 typedef struct ObjectLinks2B50 ObjectLinks2B50;
 
 struct CellCode802591C0;
-struct CellCode802591C0 {
-    s32 index;
-    s32 pad4;
-    s32 texture;
-    s32 sequence;
-    s32 frame;
-    char pad14[0x44 - 0x14];
-    char data[1];
-};
 
 struct Node_func_802598B4_de;
 typedef struct Node_func_802598B4_de Node_func_802598B4_de;
@@ -331,12 +306,6 @@ struct Link_func_80259260_de;
 typedef struct Link_func_80259260_de Link_func_80259260_de;
 
 struct ManagerRecAtD8V1;
-struct ManagerRecAtD8V1 {
-    s32 *scene;
-    Link_func_80259260_de active;
-    char padC[0xCC];
-    Link_func_80259260_de free;
-};
 
 struct Node_func_80259918_de;
 typedef struct Node_func_80259918_de Node_func_80259918_de;
@@ -439,10 +408,6 @@ typedef struct ContextCode802591C0 ContextCode802591C0;
 
 
 struct LinkPair;
-struct LinkPair {
-    void **first;
-    void **second;
-};
 
 struct ObjectLinks2B50;
 

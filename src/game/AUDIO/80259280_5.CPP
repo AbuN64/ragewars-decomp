@@ -1,4 +1,5 @@
 #include "COMMON/LISTNODE.H"
+#include "AUDIO/80259280.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
