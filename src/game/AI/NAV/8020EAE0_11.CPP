@@ -76,7 +76,7 @@ s32 func_8020FA10_de(void *arg0) {
     temp_a0 = M2C_FIELD(arg0, void **, 0);
     temp_s0 = (s32) M2C_FIELD(temp_a0, s32 *, 0x5E4) >> 8;
     temp_a0_2 = M2C_FIELD(arg0, void **, 0);
-    temp_f20 = D_800C1F20_de;
+    temp_f20 = 100.0f;
     temp_f21 = ((f32) temp_s0 / (f32) (func_8022AC00_de(temp_a0) >> 8)) * temp_f20;
     temp_a0_3 = M2C_FIELD(arg0, void **, 0);
     temp_s0_2 = func_8022AB20_de(temp_a0_2, M2C_FIELD(temp_a0_2, s16 *, 0x62E));
@@ -84,7 +84,7 @@ s32 func_8020FA10_de(void *arg0) {
     if ((temp_v0 != 0) && (temp_s0_2 != -1)) {
         var_f20 = ((f32) temp_s0_2 / (f32) temp_v0) * temp_f20;
     } else {
-        var_f20 = D_800C1F24_de;
+        var_f20 = 100.0f;
     }
     temp_v0_2 = M2C_FIELD(arg0, void **, 0);
     temp_s2 = M2C_FIELD(temp_v0_2, s16 *, 0x5F4);
@@ -116,7 +116,7 @@ block_9:
         var_a1 = 0xB;
         goto block_48;
     }
-    var_s0 = (s32) ((D_800C1F28_de - func_80209B64_de(arg0)) * D_800C1F2C_de);
+    var_s0 = (s32) ((1.0f - func_80209B64_de(arg0)) * 80.0f);
     if ((D_80146938 != 0) && (M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0), void **, 0x5D8), u8 *, 0x94) != 0)) {
         var_s0 = 0;
     }
@@ -126,7 +126,7 @@ block_9:
             goto block_20;
         }
     }
-    if ((func_80209AD8_de(arg0) == 0) && (var_f20 < D_800C1F30_de)) {
+    if ((func_80209AD8_de(arg0) == 0) && (var_f20 < 10.0f)) {
         M2C_FIELD(arg0, s32 *, 0xBC) = func_8020F5A4_de(arg0);
         goto block_21;
     }
@@ -141,7 +141,7 @@ block_9:
                 var_a1 = 9;
                 goto block_48;
             }
-        } else if ((func_80209AD8_de(arg0) == 0) || !((f32) var_s0 < temp_f21) || !(D_800C1F34_de < var_f20)) {
+        } else if ((func_80209AD8_de(arg0) == 0) || !((f32) var_s0 < temp_f21) || !(10.0f < var_f20)) {
             if ((func_80209A94_de(arg0) == 0) && (func_80209AD8_de(arg0) == 0) && (M2C_FIELD(arg0, s32 *, 0x64) != 0)) {
                 temp_v1_3 = M2C_FIELD(M2C_FIELD(arg0, void **, 0), void **, 0x5D8);
                 if (M2C_FIELD(temp_v1_3, u8 *, 0x94) != 0) {

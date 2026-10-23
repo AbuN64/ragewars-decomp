@@ -649,18 +649,10 @@ extern Shared_Game D_801462C8;
 extern s32 func_80245784_de(void),func_80245798_de(void);
 s32 func_80228070_de(WinWorld *world) {
     WinPlayer *player;
-    u32 team,i;
-    if (func_80245784_de() || func_80245798_de() || D_801462C8.counters.mode == 0) return 0;
-    if (D_801462C8.counters.teams == 0) {
-        for (player = world->players; player != 0; player = player->next) {
-            if (D_801462C8.counters.mode <= player->stats->score) {
-                if (D_801462C8.controllerMode == 0) return 1;
-                if (player->kind < 4) { D_801462C8.counters.humanWon = 1; return 1; }
-                D_801462C8.counters.humanWon = 0;
-                if (D_801462C8.controllerMode != 1) return 1;
-            }
-        }
-    } else {
+    u32 team, i;
+    CGameStatus *c;
+    if (func_80245784_de() || func_80245798_de() || (c = &D_801462C8.counters)->mode == 0) return 0;
+    if (c->teams != 0) {
         team = 0xff;
         if (D_801462C8.controllerMode != 0) {
             i = 0;
@@ -668,10 +660,19 @@ s32 func_80228070_de(WinWorld *world) {
             team = D_801462C8.slots[i].slot;
         }
         for (i = 0; (s32)i < 5; i++) {
-            if (D_801462C8.counters.mode <= D_801462C8.counters.scores[i]) {
+            if (c->mode <= c->scores[i]) {
                 if (D_801462C8.controllerMode == 0) return 1;
-                if (i == team) { D_801462C8.counters.humanWon = 1; return 1; }
-                D_801462C8.counters.humanWon = 0;
+                if (i == team) { c->humanWon = 1; return 1; }
+                c->humanWon = 0;
+                if (D_801462C8.controllerMode != 1) return 1;
+            }
+        }
+    } else {
+        for (player = world->players; player != 0; player = player->next) {
+            if (c->mode <= player->stats->score) {
+                if (D_801462C8.controllerMode == 0) return 1;
+                if (player->kind < 4) { c->humanWon = 1; return 1; }
+                c->humanWon = 0;
                 if (D_801462C8.controllerMode != 1) return 1;
             }
         }

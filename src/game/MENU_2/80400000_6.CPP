@@ -49,19 +49,21 @@ void func_80401D74_de(s32 inset) {
 
 void func_8040293C_de(void) {
     f32 fade = 1.0f;
-    f32 amount, height, lower;
+    f32 height, lower, span;
     s32 width, screenHeight, top;
+    height = ((f32)D_800E28D4 - (f32)D_800E28D0 / D_800E2830->spec.aspectRatio) * D_800DCC10_de;
+    span = D_800DCC14_de;
     if (D_800E2830->time < D_800E2830->start) {
-        amount = (D_800E2830->start - D_800E2830->time) / D_800DCC14_de;
-        if (D_800DCC18_de < amount) amount = D_800DCC18_de;
-        fade = D_800DCC18_de - amount;
+        fade = (D_800E2830->start - D_800E2830->time) / span;
+        if (D_800DCC18_de < fade) fade = D_800DCC18_de;
+        fade = D_800DCC18_de - fade;
     }
     if (D_800E2830->end < D_800E2830->time) {
-        amount = (D_800E2830->time - D_800E2830->end) / D_800DCC14_de;
-        if (D_800DCC1C < amount) amount = D_800DCC1C;
-        fade = D_800DCC1C - amount;
+        fade = (D_800E2830->time - D_800E2830->end) / span;
+        if (D_800DCC1C < fade) fade = D_800DCC1C;
+        fade = D_800DCC1C - fade;
     }
-    height = ((f32)D_800E28D4 - (f32)D_800E28D0 / D_800E2830->spec.aspectRatio) * D_800DCC10_de * fade;
+    height = height * fade;
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
     func_8026925C_de(0x13);
