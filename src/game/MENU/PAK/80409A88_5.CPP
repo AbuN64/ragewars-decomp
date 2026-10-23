@@ -262,7 +262,7 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
     return channel;
 }
 
-/* FAKEMATCH: version selection preserves distinct original same-start bodies mapped to this live identity; only one original body is compiled for each owning version. */
+/* The EU builds compile a different original body for func_8040A244_de; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length func_80441FE8_de reports, returning zero.
    Adapted from func_8044488C_de with the three flag tests, the texts, the format, the offset and the incremented value changed. */
