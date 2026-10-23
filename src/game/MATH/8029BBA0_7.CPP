@@ -87,11 +87,11 @@ static inline f32 safe_sqrt(f32 x) {
 f32 func_8029E1D4_de(f32 a, f32 b) { return centered(a - b); }
 
 /** Clear a three-component floating-point vector. */
-void func_8029E2A8_de(float *vector) {
+void Vector3Zero(float *vector) {
     vector[0] = vector[1] = vector[2] = 0.0f;
 }
 
-void func_8029E2BC_de(void *arg0, float arg1, float arg2, float arg3) {
+void Vector3Set(void *arg0, float arg1, float arg2, float arg3) {
     CVector3 *vector = arg0;
     vector->x = arg1;
     vector->y = arg2;
@@ -99,30 +99,30 @@ void func_8029E2BC_de(void *arg0, float arg1, float arg2, float arg3) {
 }
 
 /** Split a three-float vector into three destinations. */
-void func_8029E2CC_de(float *arg0, float *arg1, float *arg2, float *arg3) {
+void Vector3Unpack(float *arg0, float *arg1, float *arg2, float *arg3) {
     *arg1 = arg0[0];
     *arg2 = arg0[1];
     *arg3 = arg0[2];
 }
 
-void func_8029E2E8_de(Triple *arg0, Triple *arg1) {
+void Vector3Copy(Triple *arg0, Triple *arg1) {
     *arg0 = *arg1;
 }
 
-void func_8029E304_de(void *arg0, void *arg1, void *arg2) {
+void Vector3Add(void *arg0, void *arg1, void *arg2) {
     (((struct CVector3_t *) ((s8 *) arg0))->x) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->x) + (((struct CVector3_t *) ((s8 *) arg2))->x));
     (((struct CVector3_t *) ((s8 *) arg0))->y) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->y) + (((struct CVector3_t *) ((s8 *) arg2))->y));
     (((struct CVector3_t *) ((s8 *) arg0))->z) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->z) + (((struct CVector3_t *) ((s8 *) arg2))->z));
 }
 
-void func_8029E338_de(void *arg0, void *arg1, void *arg2) {
+void Vector3Subtract(void *arg0, void *arg1, void *arg2) {
     (((struct CVector3_t *) ((s8 *) arg0))->x) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->x) - (((struct CVector3_t *) ((s8 *) arg2))->x));
     (((struct CVector3_t *) ((s8 *) arg0))->y) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->y) - (((struct CVector3_t *) ((s8 *) arg2))->y));
     (((struct CVector3_t *) ((s8 *) arg0))->z) = (f32) ((((struct CVector3_t *) ((s8 *) arg1))->z) - (((struct CVector3_t *) ((s8 *) arg2))->z));
 }
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
-void func_8029E36C_de(void *arg0, void *arg1, f32 arg2) {
+void Vector3Scale(void *arg0, void *arg1, f32 arg2) {
     CVector3 *arg1_record = arg1;
     CVector3 *arg0_record = arg0;
     arg0_record->x = arg1_record->x * arg2;
@@ -130,13 +130,13 @@ void func_8029E36C_de(void *arg0, void *arg1, f32 arg2) {
     arg0_record->z = arg1_record->z * arg2;
 }
 
-void func_8029E398_de(void *arg0, void *arg1) {
+void Vector3Negate(void *arg0, void *arg1) {
     (((struct CVector3_t *) ((s8 *) arg0))->x) = (f32) -(((struct CVector3_t *) ((s8 *) arg1))->x);
     (((struct CVector3_t *) ((s8 *) arg0))->y) = (f32) -(((struct CVector3_t *) ((s8 *) arg1))->y);
     (((struct CVector3_t *) ((s8 *) arg0))->z) = (f32) -(((struct CVector3_t *) ((s8 *) arg1))->z);
 }
 
-void func_8029E3C0_de(f32 *a, f32 *b) {
+void Vector3Distance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];
@@ -149,12 +149,12 @@ void func_8029E3C0_de(f32 *a, f32 *b) {
     }
 }
 
-f32 func_8029E428_de(f32 *a, f32 *b) {
+f32 Vector3Dot(f32 *a, f32 *b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 }
 
 /** Cross product of two vectors, written through a local temp to allow aliasing with out. */
-void func_8029E458_de(CVector3 *out, CVector3 *a, CVector3 *b) {
+void Vector3Cross(CVector3 *out, CVector3 *a, CVector3 *b) {
     CVector3 tmp;
 
     tmp.x = (a->y * b->z) - (a->z * b->y);
@@ -174,7 +174,7 @@ void func_8029E4DC_de(CVector3 *arg0)
   }
 }
 
-void func_8029E52C_de(f32 *arg0) {
+void Vector3Normalize(f32 *arg0) {
     f32 mag;
     f32 scale;
 
@@ -185,7 +185,7 @@ void func_8029E52C_de(f32 *arg0) {
     arg0[2] = arg0[2] * scale;
 }
 
-void func_8029E5C0_de(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
+void Vector3RotatePitch(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
@@ -197,7 +197,7 @@ void func_8029E5C0_de(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     *arg0 = tmp;
 }
 
-void func_8029E654_de(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
+void Vector3RotateYaw(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
@@ -209,7 +209,7 @@ void func_8029E654_de(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     *arg0 = tmp;
 }
 
-void func_8029E6E8_de(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
+void Vector3RotateRoll(CVector3 *arg0, CVector3 *arg1, f32 arg2) {
     CVector3 tmp;
     f32 sp20;
     f32 sp24;
@@ -268,7 +268,7 @@ void func_8029E810_de(f32 *arg0, f32 *arg1, f32 *arg2) {
 
 
 
-void func_8029E8AC_de(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32 oy, f32 sy) {
+void Vector3ProjectArray(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32 oy, f32 sy) {
     s32 i;
 
     for (i = 0; i < n; i++) {
@@ -284,7 +284,7 @@ void func_8029E8AC_de(CVector3 *out, CVector3 *in, s32 n, f32 ox, f32 sx, f32 oy
     }
 }
 
-void func_8029E93C_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
+void Vector3IntersectPlane(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6) {
     CVector3 delta;
     f32 numerator;
     f32 denominator;
