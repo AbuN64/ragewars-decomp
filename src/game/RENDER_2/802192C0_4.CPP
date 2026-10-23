@@ -520,7 +520,8 @@ extern void func_8022B11C_de(void *, u16);
  * zero and drops through half of the maximum it respawns the weapon (func_8021B1E4_de); lowers the health
  * (with a flash sound at random), starts the knock-back and the hit effect scaled by the damage, and on death
  * reports the kill through func_8021B468_de. */
-s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
+/* 285/289 words (27 aligned edits); remaining: health copies for 0x174/0x45C, the 0x80..0xFF clamp shape, knock-back strength float regs */
+void Render_ApplyPlayerDamage(void *player, void *attacker, s32 amount, s32 arg3, s32 kind) {
     s32 oldHealth = FIELD(s32, player, 0x5E4);
     s32 health;
     s32 threshold;
@@ -532,20 +533,22 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
     s32 delay;
     s32 roll;
     s32 shifted;
+    char *state;
+    s32 remaining;
     if (func_80245784_de() != 0 || func_8022C460_de(player) != 0 || D_801371DC != 0) {
-        return 0;
+        return;
     }
     if ((FIELD(u32, &D_801462C8, 0) & 1) && kind != 0x20) {
-        return 0;
+        return;
     }
     if (FIELD(u16, player, 0x650) < 2) {
-        return 0;
+        return;
     }
     if (FIELD(s32, player, 0x80C) != 0) {
         amount = amount / 5;
     }
     if (0.0f < FIELD(f32, player, 0x670) && kind != 0x20) {
-        return 0;
+        return;
     }
     wasDead = FIELD(s32, player, 0x5E4) == 0;
     if (FIELD(u32, player, 0x122C) & 0x100) {
@@ -555,9 +558,8 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
         }
         step = func_8022AC00_de(player);
         found = 0;
-        for (threshold = 2; threshold < 5;) {
+        for (threshold = 2; threshold < 5; threshold++) {
             step = step - step / 2;
-            threshold++;
             if (step < FIELD(s32, player, 0x5E4) && health < step && health > 0) {
                 found = 1;
                 break;
@@ -567,17 +569,20 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
             func_8021B1E4_de(player, FIELD(s32, player, 0x5EC), 0, 1);
         }
     }
-    if (FIELD(s32, D_801468A0, 0x98) != 0 && FIELD(s8, FIELD(void *, player, 0x5D8), 0x80) == 0xB && FIELD(s32, D_801468A0, 0xA0) > 0) {
-        FIELD(s32, D_801468A0, 0xA0) -= amount >> 8;
-        if (FIELD(s32, D_801468A0, 0xA0) <= 0) {
-            FIELD(s32, D_801468A0, 0xA0) = 0;
+    state = D_801468A0;
+    if (FIELD(s32, state, 0x98) != 0 && FIELD(s8, FIELD(void *, player, 0x5D8), 0x80) == 0xB && FIELD(s32, state, 0xA0) > 0) {
+        FIELD(s32, state, 0xA0) -= amount >> 8;
+        if (FIELD(s32, state, 0xA0) <= 0) {
+            FIELD(s32, state, 0xA0) = 0;
             switch (FIELD(u8, FIELD(void *, player, 0x5D8), 0x93)) {
             case 0:
-                FIELD(s32, D_801468A0, 0xA4) = 0x4B;
+                FIELD(s32, state, 0xA4) = 0x4B;
                 break;
             case 1:
+                FIELD(s32, state, 0xA4) = 0x3C;
+                break;
             case 2:
-                FIELD(s32, D_801468A0, 0xA4) = 0x3C;
+                FIELD(s32, state, 0xA4) = 0x3C;
                 break;
             }
             func_802227F4_de(player, player, 0x2D);
@@ -587,11 +592,11 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
     if (FIELD(s32, player, 0x5E4) != 0) {
         FIELD(s32, player, 0x13C8) = FIELD(s32, player, 0x5E4) - amount < -0x1DFF;
     }
-    health = FIELD(s32, player, 0x5E4) - amount;
-    if (health < 0) {
-        health = 0;
+    remaining = FIELD(s32, player, 0x5E4) - amount;
+    if (remaining < 0) {
+        remaining = 0;
     }
-    FIELD(s32, player, 0x5E4) = health;
+    FIELD(s32, player, 0x5E4) = remaining;
     roll = func_802744D4_de();
     if ((roll % 2) == 1) {
         if (FIELD(s32, player, 0x5E4) > 0) {
@@ -602,8 +607,7 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
         }
     }
     dead = FIELD(s32, player, 0x5E4) == 0;
-    FIELD(s32, player, 0x174) = FIELD(s32, player, 0x5E4);
-    FIELD(s32, player, 0x45C) = FIELD(s32, player, 0x5E4);
+    FIELD(s32, player, 0x45C) = FIELD(s32, player, 0x174) = FIELD(s32, player, 0x5E4);
     if (dead != 0) {
         if (wasDead == 0) {
             func_8021B468_de((struct Shared_ActorView *)player, attacker, arg3, kind);
@@ -647,10 +651,10 @@ s32 func_8021BFC4_de(void *player, void *attacker, s32 amount, s32 arg3, s32 kin
         }
         func_8022B11C_de(player, (u16)hit);
     }
-    return 0;
+    return;
 }
 #else
-INCLUDE_ASM("span_1000", func_8021BFC4_de);
+INCLUDE_ASM("span_1000", Render_ApplyPlayerDamage);
 #endif
 
 #include "COMMON/FIELD_VEC_B0.H"

@@ -218,7 +218,7 @@ block_46:
         } else {
 block_47:
             func_80229FA0_de(temp_s1, arg2);
-            func_8021BFC4_de(temp_s1, arg0, arg2->unk4, arg2->unkC, var_s3);
+            Render_ApplyPlayerDamage(temp_s1, arg0, arg2->unk4, arg2->unkC, var_s3);
 
             temp_a0_2 = arg2->unk0;
             if (temp_a0_2 != 0) {

@@ -178,7 +178,7 @@ struct Player {
     u8 pad1344[0x70];
     void *animationTable; /* 0x13B4 */
     u8 pad13B8[0x10];
-    s32 overkill; /* 0x13C8: func_8021BFC4_de, Render_DrawPlayerBodyAndWeapon */
+    s32 overkill; /* 0x13C8: Render_ApplyPlayerDamage, Render_DrawPlayerBodyAndWeapon */
     u8 pad13CC[8];
     s32 toggle; /* 0x13D4 */
     void *reactionOwner; /* 0x13D8 */

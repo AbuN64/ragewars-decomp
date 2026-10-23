@@ -371,7 +371,7 @@ typedef struct AnimationSprite {
 } AnimationSprite;
 
 void Particle_RetireOwnedActors(void *, s32);
-s32 func_8021BFC4_de();
+void Render_ApplyPlayerDamage();
 extern s32 D_8014280C[];
 
 struct Shared_ActorView;
