@@ -271,18 +271,24 @@ void func_80438614_de(void) {
  }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "ACHIEVE/MODELPREVIEWSCREEN.H"
 #include "COMMON/OBJECTRECAT28.H"
 #include "TYPES.H"
+#if defined(VERSION_DE)
+#define func_804399D0 func_804397F0_auto
+#else
 void func_804399D0(MenuModelItem *item);
+#endif
 void func_80438614_de(void);
 extern s32 D_800D15E0;
-extern f32 D_800D15F0;
+extern f32 D_800D15F0[];
 extern f32 D_800DDF3C_de;
 
+/* Advances the selected row's model preview animation one step: the preview scale (unk8) ramps up by 2
+   toward 0x96 in state 0, holds in state 2 while the countdown (unkC) runs, and ramps back down to 10 in
+   state 1, then moves the selection on. */
 void func_80438828_de(void) {
     s32 temp_s1;
     s32 temp_v0;
@@ -293,12 +299,12 @@ void func_80438828_de(void) {
     s32 var_v0;
 
     temp_s1 = D_800E5830->selected;
-    /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
+    /* The word at +0x1C0 of the screen state has no shared field name yet. */
     if ((D_800E5830->rows[temp_s1].unk0 >= 0) && (*((s32 *) ((u8 *) (D_800E5830) + 448)) != 0)) {
         D_800D15E0 = 1;
-        D_800D15F0 = (f32) D_800E5830->rows[temp_s1].unk8;
+        D_800D15F0[0] = (f32) D_800E5830->rows[temp_s1].unk8;
         func_804399D0((void *)&D_800E5830->modelWorkspace);
-        D_800D15F0 = D_800DDF3C_de;
+        D_800D15F0[0] = D_800DDF3C_de;
         temp_v1 = D_800E5830->rows[temp_s1].unk4;
         D_800D15E0 = 0;
         switch (temp_v1) {                          /* irregular */
@@ -324,8 +330,8 @@ block_15:
             break;
         case 2:
             temp_v1_2 = D_800E5830->rows[temp_s1].unkC;
-            temp_v0_2 = temp_v1_2 - 1;
             if (temp_v1_2 != 0x38F) {
+                temp_v0_2 = temp_v1_2 - 1;
                 D_800E5830->rows[temp_s1].unkC = temp_v0_2;
                 if (temp_v0_2 <= 0) {
                     D_800E5830->rows[temp_s1].unk4 = 1;
@@ -345,9 +351,6 @@ block_15:
         }
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80438828_de);
-#endif
 
 #ifdef NON_MATCHING
 extern Profile D_80102B00[];
