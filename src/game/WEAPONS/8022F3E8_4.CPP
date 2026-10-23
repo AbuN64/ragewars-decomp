@@ -121,64 +121,34 @@ typedef long long M2C_UNK64;
 s32 func_80283228_de(s32 *, void *);
 extern s32 D_8011D8D0;
 
+/* ~71/103 words; remaining: the five switch arms compile to set-on-condition (sltiu/xori) where the ROM branches to a shared epilogue */
 s32 func_80230058_de(void *arg0, void *arg1) {
-    s16 temp_v0;
-    s32 var_v0;
     void *temp_s0;
-
     temp_s0 = M2C_FIELD(arg0, void **, 0x1D8);
-    var_v0 = 0;
-    if (!(M2C_FIELD(arg1, f32 *, 0x130) > 0.0f) && (var_v0 = 0, (Weapons_HasAmmoForMode(temp_s0, (s32) M2C_FIELD(temp_s0, s16 *, 0x62E)) != 0)) && ((M2C_FIELD(M2C_FIELD(temp_s0, void **, 0x5D8), u8 *, 0x8F) != 1) || (var_v0 = 0, (D_801468F4 == 0))) && (var_v0 = 0, !(M2C_FIELD(temp_s0, f32 *, 0x11D8) > 0.0f)) && (var_v0 = 0, (M2C_FIELD(temp_s0, s32 *, 0x11B4) == 0))) {
-        temp_v0 = (u16) M2C_FIELD(temp_s0, s16 *, 0x62E) - 1;
-        switch (temp_v0) {
-        case 10:
-            var_v0 = 1;
-            if (M2C_FIELD(temp_s0, s32 *, 0x6AC) & 0x4000) {
-                return 0;
-            }
-            /* Duplicate return node #23. Try simplifying control flow for better match */
-            return var_v0;
-        case 17:
-            if (M2C_FIELD(temp_s0, s32 *, 0x788) != 2) {
-                return 0;
-            }
-        default:
-block_22:
-            var_v0 = 1;
-            /* Duplicate return node #23. Try simplifying control flow for better match */
-            return var_v0;
-        case 8:
-            if ((!(M2C_FIELD(arg1, f32 *, 0x148) > 0.0f) || (var_v0 = 0, (M2C_FIELD(arg1, s32 *, 0x13C) != 2))) && ((M2C_FIELD(temp_s0, s16 *, 0x5F6) >= 0x32) || (var_v0 = 0, (M2C_FIELD(arg1, s32 *, 0x13C) != 2)))) {
-                var_v0 = 1;
-                if (M2C_FIELD(temp_s0, s16 *, 0x5F6) < 0xA) {
-                    if (M2C_FIELD(arg1, s32 *, 0x13C) == 1) {
-                        return 0;
-                    }
-                    /* Duplicate return node #23. Try simplifying control flow for better match */
-                    return var_v0;
-                }
-                goto block_22;
-            }
-            /* Duplicate return node #23. Try simplifying control flow for better match */
-            return var_v0;
-        case 11:
-            var_v0 = 1;
-            if (func_80283228_de(&D_8011D8D0, temp_s0) >= 3) {
-                return 0;
-            }
-            /* Duplicate return node #23. Try simplifying control flow for better match */
-            return var_v0;
-        case 0:
-            var_v0 = 0;
-            if (M2C_FIELD(arg1, s32 *, 0x144) != 0) {
-                goto block_22;
-            }
-            /* Duplicate return node #23. Try simplifying control flow for better match */
-            return var_v0;
+    if (M2C_FIELD(arg1, f32 *, 0x130) > 0.0f || Weapons_HasAmmoForMode(temp_s0, (s32) M2C_FIELD(temp_s0, s16 *, 0x62E)) == 0 || (M2C_FIELD(M2C_FIELD(temp_s0, u8 **, 0x5D8), u8 *, 0x8F) == 1 && D_801468F4 != 0) || M2C_FIELD(temp_s0, f32 *, 0x11D8) > 0.0f || M2C_FIELD(temp_s0, s32 *, 0x11B4) != 0) return 0;
+    switch ((s16)((u16) M2C_FIELD(temp_s0, s16 *, 0x62E) - 1)) {
+    case 10:
+        if (M2C_FIELD(temp_s0, s32 *, 0x6AC) & 0x4000) return 0;
+        return 1;
+    case 17:
+        if (M2C_FIELD(temp_s0, s32 *, 0x788) != 2) return 0;
+        return 1;
+    case 8:
+        if (M2C_FIELD(arg1, f32 *, 0x148) > 0.0f && M2C_FIELD(arg1, s32 *, 0x13C) == 2) return 0;
+        if (M2C_FIELD(temp_s0, s16 *, 0x5F6) < 0x32 && M2C_FIELD(arg1, s32 *, 0x13C) == 2) return 0;
+        if (M2C_FIELD(temp_s0, s16 *, 0x5F6) < 0xA) {
+            if (M2C_FIELD(arg1, s32 *, 0x13C) == 1) return 0;
+            return 1;
         }
-    } else {
-        return var_v0;
+        return 1;
+    case 11:
+        if (func_80283228_de(&D_8011D8D0, temp_s0) >= 3) return 0;
+        return 1;
+    case 0:
+        if (M2C_FIELD(arg1, s32 *, 0x144) == 0) return 0;
+        return 1;
     }
+    return 1;
 }
 #else
 INCLUDE_ASM("span_1000", func_80230058_de);
