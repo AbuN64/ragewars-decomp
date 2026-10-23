@@ -357,9 +357,15 @@ extern s32 func_8020CB3C_de(void *, void *);
  * farthest from every other player (distances via func_802726F8_de over the player list at D_80145060),
  * copies its position and height into the actor, finds the floor under it and calls Ovlgame_InitActorHudState; when no
  * point fits it falls back to func_8044D528_de. Finally stores the position's cell in the actor's list head. */
+/* Puts a player at a spawn point of the level: in multiplayer picks the point farthest from the other players, else
+ * takes the single point matching D_801371D4; falls back to func_8044D528_de when none fits. 83 aligned edits of 161
+ * words; remaining: the ROM keeps the level pointer in s1 and the model argument in fp (ours spills the model). */
+typedef struct SpawnPoint { CVector3 position; f32 heading; s16 ref; s16 floor; } SpawnPoint;
 void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
     void *actor = player;
-    u8 points[0x20 * 0x14];
+    void *world = &D_8011FE88;
+    SpawnPoint single;
+    SpawnPoint points[0x20];
     s32 count;
     s32 best;
     s32 i;
@@ -374,13 +380,13 @@ void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
         FIELD(s32, actor, 0x868) = 0;
     }
     if (D_801462E5 != 0) {
-        count = func_8044D220_de(&D_8011FE88, -1, model, points, 0x20);
+        count = func_8044D220_de(world, -1, model, points, 0x20);
         best = -1;
         bestDistance = 0.0f;
         for (i = 0; i < count; i++) {
             distance = D_800C2340_de;
             for (other = FIELD(void *, &D_80145060, 0); other != 0; other = FIELD(void *, other, 0x16E0)) {
-                f32 d = func_802726F8_de(points + i * 0x14, (char *)other + 8);
+                f32 d = func_802726F8_de(&points[i], (char *)other + 8);
                 if (d < distance) {
                     distance = d;
                 }
@@ -391,26 +397,26 @@ void func_8021B1E4_de(struct Player *player, s32 model, s32 arg2, s32 reset) {
             }
         }
         if (best == -1) {
-            func_8044D528_de(&D_8011FE88, model, arg2);
+            func_8044D528_de(world, model, arg2);
         } else {
-            FIELD(CVector3, actor, 0x2F0) = FIELD(CVector3, points, best * 0x14);
+            FIELD(CVector3, actor, 0x2F0) = points[best].position;
             FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
-            FIELD(f32, actor, 0x354) = FIELD(f32, points, best * 0x14 + 0xC);
-            FIELD(f32, actor, 0x6C) = FIELD(f32, points, best * 0x14 + 0xC);
-            floor = Scene_FindFloorPolygon(&D_8011FE88, (char *)actor + 8);
+            FIELD(f32, actor, 0x354) = points[best].heading;
+            FIELD(f32, actor, 0x6C) = points[best].heading;
+            floor = Scene_FindFloorPolygon(world, (char *)actor + 8);
             FIELD(s32, actor, 0x2FC) = floor;
             FIELD(s32, actor, 0x14) = floor;
             Ovlgame_InitActorHudState(actor);
         }
     } else {
-        if (func_8044D220_de(&D_8011FE88, -1, model, points, 1) == 0 || FIELD(s16, points, 0x10) != D_801371D4) {
-            func_8044D528_de(&D_8011FE88, model, arg2);
+        if (func_8044D220_de(world, -1, model, &single, 1) == 0 || single.ref != D_801371D4) {
+            func_8044D528_de(world, model, arg2);
         } else {
-            FIELD(CVector3, actor, 0x2F0) = FIELD(CVector3, points, 0);
+            FIELD(CVector3, actor, 0x2F0) = single.position;
             FIELD(CVector3, actor, 0x8) = FIELD(CVector3, actor, 0x2F0);
-            FIELD(f32, actor, 0x354) = FIELD(f32, points, 0xC);
-            FIELD(f32, actor, 0x6C) = FIELD(f32, points, 0xC);
-            floor = func_8028B394_de(&D_8011FE88, FIELD(s16, points, 0x12));
+            FIELD(f32, actor, 0x354) = single.heading;
+            FIELD(f32, actor, 0x6C) = single.heading;
+            floor = func_8028B394_de(world, single.floor);
             FIELD(s32, actor, 0x2FC) = floor;
             FIELD(s32, actor, 0x14) = floor;
             Ovlgame_InitActorHudState(actor);
