@@ -1,20 +1,12 @@
 #include "include_asm.h"
 
 #if defined(VERSION_EU)
-const unsigned int D_auto_rodata_unresolved_800EE934[15] = {
-    0x00000000, 0x0043E0F4, 0x0043E0FC, 0x0043E104, 0x0043E10C, 0x0043E114, 0x0043E11C, 0x0043E124,
-    0x0043E12C, 0x0043E134, 0x0043E13C, 0x0043E144, 0xAE6A0154, 0xCA7C382A, 0xC97B0805,
+const unsigned int D_auto_rodata_unresolved_800EE934[1] = {
+    0x00000000,
 };
-#endif
-
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-INCLUDE_RODATA("data_800C", rodata_func_8043E2D8_de_800EE970);
 #endif
 
 #if defined(VERSION_EU_X)
 INCLUDE_DATA("data_800C", rodata_unresolved_800E9B35);
 #endif
 
-#if defined(VERSION_EU)
-INCLUDE_DATA("data_800C", rodata_unresolved_800EE975);
-#endif

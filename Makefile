@@ -452,7 +452,7 @@ def read(path):
     skip = (".pdr", ".comment", ".mdebug", ".reginfo", ".gnu.attributes")
     sizes = {name(r): r[5] for r in rows if r[1] in (1, 8) and name(r) not in skip}
     data = {name(r): d[r[4]:r[4] + r[5]] for r in rows if r[1] == 1 and name(r) not in skip}
-    syms, table = set(), {}
+    syms, table, undef = set(), {}, set()
     for k, r in enumerate(rows):
         if r[1] == 2:
             strs = d[rows[r[6]][4]:rows[r[6]][4] + rows[r[6]][5]]
@@ -460,6 +460,8 @@ def read(path):
                 n, v, z, i, _, sh = struct.unpack_from(">IIIBBH", d, r[4] + 16 * j)
                 s = strs[n:].split(b"\0")[0].decode()
                 table[(k, j)] = s
+                if sh == 0 and s and j and i >> 4:
+                    undef.add(s)
                 if 0 < sh < 0xFF00 and i & 15 not in (3, 4) and s and not s.startswith(".L"):
                     syms.add((s, name(rows[sh]), v))
     relocs = set()
@@ -468,21 +470,24 @@ def read(path):
             for j in range(r[5] // 8):
                 off, info = struct.unpack_from(">II", d, r[4] + 8 * j)
                 relocs.add((name(rows[r[7]]), off, info & 255, table.get((r[6], info >> 8), "")))
-    return sizes, syms, data, relocs
-raw, matching, out, objcopy = sys.argv[1:5]
+    return sizes, syms, data, relocs, undef
+raw, matching, out, objcopy, ld = sys.argv[1:6]
 a, b = read(raw), read(matching)
 rest = lambda sizes: {k: v for k, v in sizes.items() if k != ".text"}
-if a == b:
+missing = sorted(a[4] - b[4] - {x[0] for x in b[1]})
+if missing:
+    # a draft naming a symbol the unit does not (a fuzzy draft's own data name) cannot link to this ROM
+    verdict, pick = "left-out undefined " + " ".join(missing[:3]), matching
+elif a == b:
     verdict, pick = "same", matching
 elif a[:2] == b[:2]:
     verdict, pick = "draft", raw
 elif rest(a[0]) == rest(b[0]) and a[0].get(".text", 0) <= b[0].get(".text", 0):
     # a shorter text keeps the unit's size when zeros fill the rest: the next unit starts where it did
-    subprocess.run([objcopy, "-O", "binary", "-j", ".text", raw, out + ".text"], check=True)
-    text = open(out + ".text", "rb").read()
-    open(out + ".text", "wb").write(text + bytes(b[0][".text"] - len(text)))
-    subprocess.run([objcopy, "--update-section", ".text=" + out + ".text", raw, out], check=True)
-    os.remove(out + ".text")
+    # ld -r keeps the relocations, which objcopy --update-section drops from a section it replaces
+    open(out + ".lds", "w").write("SECTIONS { .text : { *(.text) . = %d; } }\n" % b[0][".text"])
+    subprocess.run([ld, "-r", "-T", out + ".lds", "-o", out, raw], check=True)
+    os.remove(out + ".lds")
     moved = len({sym[0] for sym in a[1] ^ b[1]})
     verdict, pick = "draft-padded %d bytes, %d symbols move" % (b[0][".text"] - a[0][".text"], moved), None
 else:
@@ -505,7 +510,7 @@ $(shell cat $(VERSIONS:%=versions/%/text_sizes.mk) | sed -E 's@^build/@build/nmr
 -include build/text_sizes_nmraw.mk
 build/nm/%.o: build/nmraw/%.o build/%.o
 	$(Q)mkdir -p $(@D)
-	$(Q)python3 -I -c "$$NM_PICK" $^ $@ $(OBJCOPY)
+	$(Q)python3 -I -c "$$NM_PICK" $^ $@ $(OBJCOPY) $(LD)
 # An assembly or binary piece is the matching build's.
 build/nm/%.s.o: build/%.s.o
 	$(Q)mkdir -p $(@D)

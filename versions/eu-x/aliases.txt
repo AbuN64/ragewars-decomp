@@ -2556,3 +2556,6 @@ D_800C3504_de = 0x800C37F4;
 D_800C3508_de = 0x800C37F8;
 D_800C350C_de = 0x800C37FC;
 D_800C3510_de = 0x800C3800;
+literals_func_80424DE8_de = 0x800E8ED8; // rom:0xE9AD8
+literals_func_8043D1DC_de = 0x800E9AF8; // rom:0xEA6F8 size:0x2C
+D_auto_rodata_func_8043D1DC_de_800E9B24 = 0x800E9B24; // rom:0xEA724

@@ -50,7 +50,7 @@ INCLUDE_ASM("ovl_80400000", func_8040A810_de);
 extern s32 D_80153774;
 extern char D_800D37D0[];
 extern char D_auto_800D37D8[];
-extern char D_auto_800D39F8[], D_auto_800D39FC[], D_auto_800D3A10[], D_auto_800D3A18[], D_auto_800D3A1C[];
+extern char *D_auto_800D39F8, *D_auto_800D39FC, *D_auto_800D3A10, *D_auto_800D3A18, *D_auto_800D3A1C;
 extern s8 D_8014D490;
 typedef struct { char pad0[0x14]; char **text; } Func_8040A8D0_Obj;
 /* Copies the 14-byte label chosen by D_8014D490 (default D_auto_800D39F8) into the text 6 bytes in, or points the text at D_800D37D0 when D_80153774 is set; returns zero. */
@@ -63,20 +63,31 @@ s32 func_8040A8D0_de(Func_8040A8D0_Obj *arg0) {
     } else {
         arg0->text = (char **)D_auto_800D37D8;
         switch (D_8014D490) {
-        case 2:
-            src = D_auto_800D3A18;
-            break;
-        case 3:
-            src = D_auto_800D3A10;
+        case 0:
+        case 1:
+        case 4:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13:
+        default:
+            src = D_auto_800D39F8;
             break;
         case 5:
             src = D_auto_800D39FC;
             break;
+        case 3:
+            src = D_auto_800D3A10;
+            break;
+        case 2:
+            src = D_auto_800D3A18;
+            break;
         case 14:
             src = D_auto_800D3A1C;
-            break;
-        default:
-            src = D_auto_800D39F8;
             break;
         }
         dst = *arg0->text + 6;

@@ -1,8 +1,6 @@
 #include "include_asm.h"
 
 #if defined(VERSION_DE)
-#ifdef NON_MATCHING
-/* 27/27 words; remaining: the switch jump table lives in 800DD064.CPP rodata, not this unit */
 extern u32 D_80153778;
 extern char D_800D7A0C[];
 extern char D_800DE7BC[];
@@ -26,9 +24,6 @@ s32 func_8040BB40_de(Func_8040BB40_Obj *arg0) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8040BB40_de);
-#endif
 #endif
 
 #if defined(VERSION_DE)

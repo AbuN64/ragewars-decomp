@@ -1,8 +1,8 @@
+#include "include_asm.h"
 
 #if defined(VERSION_EU_X)
 extern char D_00419F50[];
-const unsigned int D_auto_rodata_unresolved_800E9AF4[15] = {
-    0x00000000, 0x0043E224, 0x0043E22C, 0x0043E234, 0x0043E23C, 0x0043E244, 0x0043E24C, 0x0043E254,
-    0x0043E25C, 0x0043E264, 0x0043E26C, 0x0043E274, (unsigned int)D_00419F50, 0x00000000, 0x00000000,
+const unsigned int D_auto_rodata_unresolved_800E9AF4[1] = {
+    0x00000000,
 };
 #endif

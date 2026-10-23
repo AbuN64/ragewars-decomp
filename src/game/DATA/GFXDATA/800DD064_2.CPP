@@ -1,4 +1,7 @@
 #include "include_asm.h"
+#if defined(VERSION_DE)
+INCLUDE_RODATA("data_800C", D_auto_rodata_func_8040BB40_de_800DD07C);
+#endif
 
 #if !(defined(VERSION_EU) || defined(VERSION_US))
 /* ROM-grounded data: rodata/func_8040DB04_de/800E10B0 */

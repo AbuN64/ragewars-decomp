@@ -1,4 +1,10 @@
 #include "include_asm.h"
+#if defined(VERSION_US)
+INCLUDE_RODATA("data_800C", D_auto_rodata_func_8043D1DC_de_800DCF94);
+#endif
+#if defined(VERSION_DE)
+INCLUDE_RODATA("data_800C", D_auto_rodata_func_8043D1DC_de_800DE2E4);
+#endif
 
 #if defined(VERSION_DE) || defined(VERSION_US)
 INCLUDE_RODATA("data_800C", D_8043E2D8_E2F20);
