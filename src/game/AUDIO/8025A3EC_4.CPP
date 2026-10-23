@@ -103,7 +103,7 @@ void func_8025B5F0_de(RecordRecAt4V6 *record, s32 value)
 
 
 
-void func_8025B6F8_de(void *arg0, int arg1, int arg2) {
+void func_8025B6F8_de(void *arg0, int owner, int arg2) {
     RecordCode8025A3EC *slot = arg0;
     float k = D_800C9068;
 
@@ -112,7 +112,7 @@ void func_8025B6F8_de(void *arg0, int arg1, int arg2) {
     slot->f3A = -1;
     slot->f40 = -1;
     slot->fB4 = -1;
-    slot->owner = arg1;
+    slot->owner = owner;
     slot->index = arg2;
     slot->f38 = 0;
     slot->f14 = 0;
@@ -285,16 +285,16 @@ void func_8025BB7C_de(void *arg0, int arg1) {
     ((struct View_func_8025AE1C_de *)(arg0))->trackId = arg1;
 }
 
-void func_8025BB84_de(void *arg0, void *arg1, s32 arg2) {
+void func_8025BB84_de(void *arg0, void *desc, s32 extra) {
     f32 first;
     s16 index;
     s16 value;
     void *record;
 
-    func_80259C5C_de(arg0, arg1, arg2);
-    func_80259F68_de(arg0, arg1, arg2);
+    func_80259C5C_de(arg0, desc, extra);
+    func_80259F68_de(arg0, desc, extra);
     ((struct View_func_8025AE1C_de *)(arg0))->priority = 0x40;
-    index = ((struct Shared_Body *)(arg1))->kind;
+    index = ((struct Shared_Body *)(desc))->kind;
     if (index != -1) {
         record = func_80258BF4_de(((struct View_func_8025AE1C_de *)(arg0))->context, index);
         ((struct View_func_8025AE1C_de *)(arg0))->envelope = *(SoundEnvelope *)record;
@@ -327,21 +327,21 @@ store_value:
 }
 
 void func_8025BD00_de(void **arg0) {
-    s32 var_s0;
+    s32 i;
     s32 var_s2;
-    char *var_s1;
+    char *view;
 
     var_s2 = 0;
-    var_s1 = (char *)((RecordD90 *)arg0)->slots;
-    var_s0 = 0;
+    view = (char *)((RecordD90 *)arg0)->slots;
+    i = 0;
     do {
-        if (((SlotCC *)var_s1)->used != -1 && ((HeaderRecAt102 *)(*arg0))->local != var_s0) {
-            func_8025AE1C_de(var_s1);
+        if (((SlotCC *)view)->used != -1 && ((HeaderRecAt102 *)(*arg0))->local != i) {
+            func_8025AE1C_de(view);
             var_s2 += 1;
         }
-        var_s0 += 1;
-        var_s1 += 0xCC;
-    } while (var_s0 < 0x10);
+        i += 1;
+        view += 0xCC;
+    } while (i < 0x10);
     D_800CBAFC = var_s2;
     if (D_800CBB00 < var_s2) {
         D_800CBB00 = var_s2;
@@ -555,27 +555,27 @@ void func_8025C438_de(void *arg0, s32 arg1) {
     RecordCode8025A3EC *slot = arg0;
     OwnerCode8025A3EC8025B5F0 *owner;
     s32 temp_s0;
-    void *temp_s0_2;
+    void *sound;
 
     temp_s0 = slot->owner;
     owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
-    temp_s0_2 = owner->sound;
-    func_802B2F00_de(temp_s0_2, owner->samples[slot->index]);
-    func_802B2F10_de(temp_s0_2, (s16)(s32)((f32) arg1 * (slot->fC8)));
+    sound = owner->sound;
+    func_802B2F00_de(sound, owner->samples[slot->index]);
+    func_802B2F10_de(sound, (s16)(s32)((f32) arg1 * (slot->fC8)));
 }
 
 void func_8025C4B4_de(void *arg0, f32 arg1) {
     RecordCode8025A3EC *slot = arg0;
     OwnerCode8025A3EC8025B5F0 *owner;
     s32 temp_s0;
-    void *temp_s0_2;
+    void *sound;
     f32 scaled;
 
     temp_s0 = slot->owner;
     owner = (OwnerCode8025A3EC8025B5F0 *)temp_s0;
-    temp_s0_2 = owner->sound;
-    func_802B2F00_de(temp_s0_2, owner->samples[slot->index]);
+    sound = owner->sound;
+    func_802B2F00_de(sound, owner->samples[slot->index]);
     scaled = arg1 * (slot->f34);
     scaled = scaled * (slot->fB8);
-    alSndpSetPitch(temp_s0_2, scaled);
+    alSndpSetPitch(sound, scaled);
 }

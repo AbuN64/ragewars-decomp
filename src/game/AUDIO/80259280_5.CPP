@@ -99,16 +99,16 @@ void func_80259784_de(ManagerRecAtD8V2 *manager, s32 index, s32 owner, CVector3 
     manager->scene->selection = -1;
 }
 
-void func_802598B4_de(ChannelSet *arg0, s32 arg1) {
+void func_802598B4_de(ChannelSet *channelSet, s32 arg1) {
     Node_func_802598B4_de *node;
     Node_func_802598B4_de *next;
     Node_func_802598B4_de *end;
     Node_func_802598B4_de *initial_end;
     Node_func_802598B4_de *tail_end;
 
-    node = (Node_func_802598B4_de *)arg0->free.prev;
-    tail_end = (Node_func_802598B4_de *)&arg0->active;
-    initial_end = (Node_func_802598B4_de *)&arg0->free;
+    node = (Node_func_802598B4_de *)channelSet->free.prev;
+    tail_end = (Node_func_802598B4_de *)&channelSet->active;
+    initial_end = (Node_func_802598B4_de *)&channelSet->free;
     if (node != initial_end) {
         end = initial_end;
         do {
@@ -116,10 +116,10 @@ void func_802598B4_de(ChannelSet *arg0, s32 arg1) {
             if (node->value == arg1) {
                 node->prev->next = next;
                 node->next->prev = node->prev;
-                node->prev = (Node_func_802598B4_de *)arg0->active.next;
+                node->prev = (Node_func_802598B4_de *)channelSet->active.next;
                 node->next = tail_end;
-                ((Node_func_802598B4_de *)arg0->active.next)->next = node;
-                arg0->active.next = (ListLink *)node;
+                ((Node_func_802598B4_de *)channelSet->active.next)->next = node;
+                channelSet->active.next = (ListLink *)node;
             }
             node = next;
         } while (node != end);
@@ -200,32 +200,32 @@ void func_802599EC_de(OwnerRecAtD8 *arg0, s32 arg1) {
     }
 }
 
-void func_80259A50_de(Lists *arg0, s32 arg1) {
+void func_80259A50_de(Lists *lists, s32 arg1) {
     NodeRecAtAC *var_a2;
-    NodeRecAtAC *temp_a3;
+    NodeRecAtAC *next;
     NodeRecAtAC *temp_v0;
     NodeRecAtAC *temp_t0;
     NodeRecAtAC *temp_t1;
 
-    var_a2 = arg0->first.next;
-    temp_v0 = &arg0->first;
+    var_a2 = lists->first.next;
+    temp_v0 = &lists->first;
     if (var_a2 != temp_v0) {
-        temp_t1 = &arg0->second;
+        temp_t1 = &lists->second;
         temp_t0 = temp_v0;
         do {
-            temp_a3 = var_a2->next;
+            next = var_a2->next;
             if ((var_a2->flags & arg1) != 0) {
-                NodeRecAtAC *temp_tail;
+                NodeRecAtAC *prev;
 
-                var_a2->prev->next = temp_a3;
+                var_a2->prev->next = next;
                 var_a2->next->prev = var_a2->prev;
-                temp_tail = arg0->second.prev;
+                prev = lists->second.prev;
                 var_a2->next = temp_t1;
-                var_a2->prev = temp_tail;
-                arg0->second.prev->next = var_a2;
-                arg0->second.prev = var_a2;
+                var_a2->prev = prev;
+                lists->second.prev->next = var_a2;
+                lists->second.prev = var_a2;
             }
-            var_a2 = temp_a3;
+            var_a2 = next;
         } while (var_a2 != temp_t0);
     }
 }

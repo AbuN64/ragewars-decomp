@@ -178,10 +178,10 @@ void func_80259440_de(Cache *cache) {
     func_802587A4_de(cache->context);
 }
 
-void func_8025966C_de(void *arg0, s32 arg1) {
+void func_8025966C_de(void *arg0, s32 owner) {
     (((struct ObjectLinks8 *) ((s8 *) arg0))->unk_4) = arg0;
     (((struct ObjectLinks8 *) ((s8 *) arg0))->unk_0) = arg0;
-    func_8025B6F8_de(arg0 + 8, arg1, -1);
+    func_8025B6F8_de(arg0 + 8, owner, -1);
 }
 
 void *func_80259694_de(LinkPair *arg0) {
