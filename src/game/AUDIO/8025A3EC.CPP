@@ -65,100 +65,146 @@ typedef struct AudioVolumeVoice {
     f32 volumeScale;
 } AudioVolumeVoice;
 
-/* 62/286 aligned edits; remaining: float registers and mix/envelope lifetimes. */
+/* 12/286 aligned edits; remaining: radius registers, curve branch and final multiply scheduling. */
 /* Updates spatial attenuation and the volume envelope, then applies the scaled level. */
 void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     AudioVolumeMix *mix;
     u16 *envelope;
     ContextRecAt2BC0 *context;
-    ALSndPlayer *sound;
     GameplayCamera *listener;
     CVector3 *position;
     CVector3 *ear;
     f32 distance, radius, limit, squared;
     f32 dx, dy, dz;
-    f32 gain, falloff, level;
+    f32 masterGain, falloff, level;
     f32 result;
-    s32 rising;
+    s32 increasing;
     s32 value;
     s32 volume;
-    listener=voice->context->field2B98;
-    radius=listener->unk528;
-    limit=D_800C3F38_de;
-    squared=radius < limit ? limit : radius;
+
+    listener = voice->context->field2B98;
+    radius = listener->unk528;
+    limit = D_800C3F38_de;
+    squared = radius < limit ? limit : radius;
     squared *= radius < limit ? limit : radius;
-    D_800D0D10=squared;
-    switch(voice->mix.curve) {
-    case 0: break;
-    case 2: D_800D0D10=squared+squared*D_800C3F3C_de;break;
-    case 1: D_800D0D10=squared+squared*D_800C3F40_de;break;
+    D_800D0D10 = squared;
+    switch (voice->mix.curve) {
+    case 0:
+        break;
+    case 2:
+        D_800D0D10 = squared + squared * D_800C3F3C_de;
+        break;
+    case 1:
+        D_800D0D10 = squared + squared * D_800C3F40_de;
+        break;
     }
-    mix=&voice->mix;
-    envelope=voice->control.levels;
-    context=voice->context;
-    if(voice->flags & 0x200) gain=context->blue;
-    else {
-        gain=context->red;
-        if(voice->fieldC4 && context->field2BB8) gain*=D_800C3F44_de;
-    }
-    if((voice->flags & 0x400) && voice->fieldC0==0 && !(voice->flags & 0x800)) {
-        listener=voice->context->field2B98;
-        position=&mix->position;
-        ear=&listener->position;
-        dx=position->x-ear->x;dy=position->y-ear->y;dz=position->z-ear->z;
-        distance=dx*dx+dy*dy+dz*dz;
-        if(D_800D0D10 <= distance) falloff=0.0f;
-        else falloff=D_800C3F48_de-distance/D_800D0D10;
-        switch(mix->curve) {
-        case 0: falloff*=falloff;falloff*=falloff;
-        case 1: falloff*=falloff;level=falloff;break;
-        case 2: level=falloff;break;
-        default: level=0.0f;break;
+    mix = &voice->mix;
+    envelope = voice->control.levels;
+    context = voice->context;
+    if (voice->flags & 0x200) {
+        masterGain = context->blue;
+    } else {
+        masterGain = context->red;
+        if (voice->fieldC4 && context->field2BB8) {
+            masterGain *= D_800C3F44_de;
         }
-        if(func_80245784_de()==0) mix->attenuation=level;
-        else mix->attenuation=func_80274808_de(mix->attenuation,level,0.017f);
-    } else mix->attenuation=D_800C3F4C_de;
-    if(voice->flags & 4) {
-        if(voice->control.delay>0) voice->control.delay--;
-        else {
-            rising=0;
-            if(voice->envelopeStep<0.0f) rising=1;
-            if(rising) {
-                if(!(voice->envelopeValue < func_802B2350(envelope[2]))) goto ramp_done;
-            } else {
-                if(!(func_802B2350(envelope[2]) < voice->envelopeValue)) goto ramp_done;
+    }
+    if ((voice->flags & 0x400) && voice->fieldC0 == 0 && !(voice->flags & 0x800)) {
+        listener = voice->context->field2B98;
+        position = &mix->position;
+        ear = &listener->position;
+        dx = position->x - ear->x;
+        dy = position->y - ear->y;
+        dz = position->z - ear->z;
+        distance = dx * dx + dy * dy + dz * dz;
+        if (D_800D0D10 <= distance) {
+            falloff = 0.0f;
+        } else {
+            falloff = D_800C3F48_de - distance / D_800D0D10;
+        }
+        switch (mix->curve) {
+        case 0:
+            falloff *= falloff;
+            falloff *= falloff;
+            /* Fall through to the final square. */
+        case 1:
+            falloff *= falloff;
+            level = falloff;
+            break;
+        case 2:
+            level = falloff;
+            break;
+        default:
+            level = 0.0f;
+            break;
+        }
+        if (func_80245784_de() != 0) {
+            mix->attenuation = func_80274808_de(mix->attenuation, level, 0.017f);
+        } else {
+            mix->attenuation = level;
+        }
+    } else {
+        mix->attenuation = D_800C3F4C_de;
+    }
+    if (voice->flags & 4) {
+        if (voice->control.delay > 0) {
+            voice->control.delay--;
+        } else {
+            increasing = 0;
+            if (voice->envelopeStep < 0.0f) {
+                increasing = 1;
             }
-            voice->envelopeValue-=voice->envelopeStep;
-            if(rising) {
-                if(func_802B2350(envelope[2])<voice->envelopeValue)
-                    voice->envelopeValue=func_802B2350(envelope[2]);
-            } else if(voice->envelopeValue < func_802B2350(envelope[2])) {
-                voice->envelopeValue=func_802B2350(envelope[2]);
-                if(voice->envelopeValue==0.0f) {
-                    context=voice->context;
-                    voice->fieldAC=1;voice->mix.tracked=0;
-                    sound=context->list;
-                    if(voice->mix.frame != context->frame) {
-                        func_802B2F00_de(sound,context->handles[voice->unk0]);
-                        if(func_802B2620_de(sound)) alSndpStop(sound);
-                        voice->sound=-1;
+            if (increasing ? voice->envelopeValue < func_802B2350(envelope[2]) :
+                             func_802B2350(envelope[2]) < voice->envelopeValue) {
+                voice->envelopeValue -= voice->envelopeStep;
+                if (increasing) {
+                    if (func_802B2350(envelope[2]) < voice->envelopeValue) {
+                        voice->envelopeValue = func_802B2350(envelope[2]);
+                    }
+                } else if (voice->envelopeValue < func_802B2350(envelope[2])) {
+                    voice->envelopeValue = func_802B2350(envelope[2]);
+                    if (voice->envelopeValue == 0.0f) {
+                        ALSndPlayer *stoppedSound;
+                        ContextRecAt2BC0 *stopContext;
+
+                        stopContext = voice->context;
+                        voice->fieldAC = 1;
+                        voice->mix.tracked = 0;
+                        stoppedSound = stopContext->list;
+                        if (voice->mix.frame != stopContext->frame) {
+                            func_802B2F00_de(stoppedSound, stopContext->handles[voice->unk0]);
+                            if (func_802B2620_de(stoppedSound)) {
+                                alSndpStop(stoppedSound);
+                            }
+                            voice->sound = -1;
+                        }
                     }
                 }
             }
         }
-ramp_done:
-        value=(s32)(func_802B2350(voice->control.levels[0])*voice->envelopeValue);
-        result=(f32)value*mix->attenuation;
-        mix->left=value;
+        value = (s32)(func_802B2350(voice->control.levels[0]) * voice->envelopeValue);
+        result = (f32)value * mix->attenuation;
+        mix->left = value;
     } else {
-        if(voice->flags & 0x400) falloff=mix->attenuation;
-        else falloff=mix->baseAttenuation;
-        result=(f32)mix->left*falloff;
+        f32 attenuation;
+
+        if (voice->flags & 0x400) {
+            attenuation = mix->attenuation;
+        } else {
+            attenuation = mix->baseAttenuation;
+        }
+        result = (f32)mix->left * attenuation;
     }
-    context=voice->context;sound=context->list;
-    volume=(s32)(result*gain);
-    func_802B2F00_de(sound,context->handles[voice->unk0]);
-    func_802B2F10_de(sound,(s16)(s32)((f32)volume*voice->volumeScale));
+    {
+        ContextRecAt2BC0 *outputContext;
+        ALSndPlayer *outputSound;
+
+        outputContext = voice->context;
+        outputSound = outputContext->list;
+        volume = (s32)(result * masterGain);
+        func_802B2F00_de(outputSound, outputContext->handles[voice->unk0]);
+        func_802B2F10_de(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
+    }
 }
 #else
 INCLUDE_ASM("span_1000", Audio_UpdateVoiceVolume);
