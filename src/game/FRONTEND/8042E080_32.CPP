@@ -74,22 +74,25 @@ s32 Frontend_SavePlayerRecords(s32 channel)
 {
     char extension[8];
     char name[16];
-    s32 note, freePages, freeNotes, status, requiredPages, i;
+    struct { s32 note, fits, freePages, freeNotes; } space;
+    s32 status, requiredPages, i;
     s32 success = 0;
-    status = Pak_FindNoteByName(rw_pak_save_name(), channel, &note);
+    status = Pak_FindNoteByName(rw_pak_save_name(), channel, &space.note);
     if (status == 1) {
-        success = Pak_DeleteNote(channel, note) == 0;
+        success = Pak_DeleteNote(channel, space.note) == 0;
     } else {
-        status = Pak_GetFreePages(channel, &freePages);
+        space.fits = 0;
+        status = Pak_GetFreePages(channel, &space.freePages);
         if (status == 0) {
-            status = Pak_CountFreeNotes(channel, &freeNotes);
+            status = Pak_CountFreeNotes(channel, &space.freeNotes);
             if (status == 0) {
                 requiredPages = func_804057EC_de(func_80435424_de());
-                success = freeNotes != 0 && freePages >= requiredPages;
+                if (space.freeNotes != 0 && space.freePages >= requiredPages) space.fits = 1;
             }
         }
+        if (status == 0 && space.fits == 1) success = 1;
     }
-    if (success) {
+    if (success == 1) {
         success = 0;
         if (func_80405454_de(channel, extension) == 0) {
             Resmgr_CopyBytes((*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved, (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].records, 0x640);
