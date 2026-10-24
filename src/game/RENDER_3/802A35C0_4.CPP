@@ -18,7 +18,7 @@
 /* Detaches an entity from linked effects while preserving their transforms and lifetimes; the unsigned offset-to-pointer cast preserves matrix-address scheduling and addition operand order. */
 extern void func_8027027C_de(void *,void *),func_80270910_de(void *,void *),func_80272828_de(void *),func_802732D0_de(void *,void *),func_802732EC_de(void *,void *),func_8027347C_de(void *,f32,f32,f32),func_802A25D0_de(void *,Node44 *,void *);
 
-void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor) {
+void func_802A3DD4_de(VertexArena *pool, RibbonActor *actor, GameplayCamera *camera) {
     Morph storage;
     Morph *morph = &storage;
     ObjRecAt28V1 *clock, *next;
@@ -311,67 +311,63 @@ void func_802A4598_de(EffectWorld *world, FxActor *actor, s32 resourceId) {
 INCLUDE_ASM("span_1000", func_802A4598_de);
 #endif
 
-#ifdef NON_MATCHING
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
-#ifndef PUSH_GFX
-#define PUSH_GFX(w0, w1) do { u32 *cmd_ = (u32 *)D_80110634; cmd_[0] = (w0); cmd_[1] = (u32)(w1); D_80110634 = (void *)(cmd_ + 2); } while (0)
-#endif
 extern void func_8026D8F8_de(void);
 extern void func_80295FF4_de(void);
-extern void func_802A339C_de(void *, void *);
-extern void func_802A3718_de(void *, void *, void *);
-/* Builds a world's ribbon display list once and replays it afterwards: the first call opens a branch list
- * (patched at the end to jump over the body), sets the fixed render state, then updates and draws every ribbon
- * of the world's list at 0x7528 -- those with a negative layer at 0x34 first, positive layers second. */
-void Render_DrawLinkedGeometry(void *world, void *camera) {
-    void *node;
-    s32 pass;
-    u32 *start;
-    func_8026D8F8_de();
-    func_80295FF4_de();
-    if (FIELD(void *, world, 0) != 0) {
-        PUSH_GFX(0xDE000000, FIELD(void *, world, 0));
-        return;
+extern void Render_UpdateLinkedNodeTransforms(RibbonActor *ribbon);
+extern void func_802A339C_de(RibbonActor *ribbon, GameplayCamera *camera);
+extern void func_802A3718_de(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera);
+/* The ribbon arena keeps its built display list at 0 and its ribbon list at 0x7528 (Owner802A697C/Root752C
+ * view the same list). */
+struct VertexArena {
+    Gfx *displayList; /* 0x0 */
+    u8 pad4[0x7528 - 0x4];
+    RibbonActor *ribbons; /* 0x7528 */
+};
+/* Updates one ribbon's linked transforms and points, then draws it once it has at least two points. */
+static inline void Render_DrawLinkedRibbon(VertexArena *pool, RibbonActor *ribbon, GameplayCamera *camera) {
+    if (ribbon->flags & 8) {
+        Render_UpdateLinkedNodeTransforms(ribbon);
     }
-    FIELD(void *, world, 0) = D_80110634;
-    PUSH_GFX(0xDE010000, 0);
-    PUSH_GFX(0xE7000000, 0);
-    func_8026925C_de(0xE);
-    func_80268CE0_de(0x1C);
-    PUSH_GFX(0xD9F8FB7F, 0);
-    PUSH_GFX(0xD9FFFFFF, 0x200004);
-    PUSH_GFX(0xE3000A01, 0);
-    PUSH_GFX(0xE3000C00, 0x80000);
-    PUSH_GFX(0xD7000000, 0);
-    for (pass = 0; pass < 2; pass++) {
-        for (node = FIELD(void *, world, 0x7528); node != 0; node = FIELD(void *, node, 4)) {
-            s32 layer = FIELD(s32, node, 0x34);
-            if (pass == 0 ? layer < 0 : layer > 0) {
-                if (FIELD(u32, node, 0x3C) & 8) {
-                    Render_UpdateLinkedNodeTransforms(node);
-                }
-                if (FIELD(u32, node, 0x3C) & 4) {
-                    func_802A339C_de(node, camera);
-                }
-                if (FIELD(s32, node, 0x48) >= 2) {
-                    if (FIELD(s32, node, 0x34) >= 0) {
-                        func_802A3718_de(world, node, camera);
-                    } else {
-                        ((void (*)(void *, void *, void *))func_802A3DD4_de)(world, node, camera);
-                    }
-                }
-            }
+    if (ribbon->flags & 4) {
+        func_802A339C_de(ribbon, camera);
+    }
+    if (ribbon->pointCount >= 2) {
+        if (ribbon->layer >= 0) {
+            func_802A3718_de(pool, ribbon, camera);
+        } else {
+            func_802A3DD4_de(pool, ribbon, camera);
         }
     }
-    PUSH_GFX(0xDF000000, 0);
-    start = FIELD(u32 *, world, 0);
-    FIELD(u32 *, world, 0) = start + 2;
-    start[0] = 0xDE010000;
-    start[1] = (u32)D_80110634;
-    PUSH_GFX(0xDE000000, FIELD(void *, world, 0));
 }
-#else
-INCLUDE_ASM("span_1000", Render_DrawLinkedGeometry);
-#endif
+/* Builds the arena's ribbon display list once and replays it afterwards: the first call opens a branch list
+ * (patched at the end to jump over the body), sets the fixed render state, then updates and draws every ribbon,
+ * those with a negative layer first and positive layers second. */
+void Render_DrawLinkedGeometry(VertexArena *pool, GameplayCamera *camera) {
+    RibbonActor *ribbon;
+    func_8026D8F8_de();
+    func_80295FF4_de();
+    if (pool->displayList != 0) {
+        gSPDisplayList(D_80110634++, pool->displayList);
+        return;
+    }
+    pool->displayList = D_80110634;
+    gSPBranchList(D_80110634++, 0);
+    gDPPipeSync(D_80110634++);
+    func_8026925C_de(0xE);
+    func_80268CE0_de(0x1C);
+    /* 0x80 has no F3DEX2 geometry-mode name. */
+    gSPGeometryMode(D_80110634++, G_CULL_BACK | G_FOG | G_LIGHTING | G_TEXTURE_GEN | 0x80, 0);
+    gSPGeometryMode(D_80110634++, 0, G_SHADE | G_SHADING_SMOOTH);
+    gDPSetCycleType(D_80110634++, G_CYC_1CYCLE);
+    gDPSetTexturePersp(D_80110634++, G_TP_PERSP);
+    gSPTexture(D_80110634++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+    for (ribbon = pool->ribbons; ribbon != 0; ribbon = ribbon->next) {
+        if (ribbon->layer < 0) Render_DrawLinkedRibbon(pool, ribbon, camera);
+    }
+    for (ribbon = pool->ribbons; ribbon != 0; ribbon = ribbon->next) {
+        if (ribbon->layer > 0) Render_DrawLinkedRibbon(pool, ribbon, camera);
+    }
+    gSPEndDisplayList(D_80110634++);
+    gSPBranchList(pool->displayList++, D_80110634);
+    gSPDisplayList(D_80110634++, pool->displayList);
+}

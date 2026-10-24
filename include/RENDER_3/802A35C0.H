@@ -49,7 +49,8 @@ struct func_802A6A54_S3 {
     f32 unk4;
 };
 struct RibbonActor {
-    char pad0[8];
+    char pad0[4];
+    struct RibbonActor *next; /* 0x4 */
     struct CROMSwoosh_t *track;
     struct Key *first;
     struct Key *second;
@@ -57,11 +58,13 @@ struct RibbonActor {
     char pad18[0x24 - 0x18];
     f32 time;
     f32 phase;
-    char pad2C[0x3C - 0x2C];
+    char pad2C[0x34 - 0x2C];
+    s32 layer; /* 0x34: negative layers draw first, positive second */
+    char pad38[0x3C - 0x38];
     u32 flags;
     ObjRecAt28V1 *tail;
     ObjRecAt28V1 *clock;
-    char pad48[0x4C - 0x48];
+    s32 pointCount; /* 0x48: drawn once it has two points */
     f32 length;
 };
 struct Morph {
