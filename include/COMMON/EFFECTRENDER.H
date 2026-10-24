@@ -179,7 +179,6 @@ extern int D_801011B0;
 extern struct Work56EC8 * D_80107E28[];
 extern int D_80107E98;
 extern int D_80107E9C;
-extern int D_8010B3D8;
 extern int D_8010C074;
 extern void * D_8010C078;
 extern unsigned char D_8010C07F;

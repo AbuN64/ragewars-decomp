@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/PAKQUEUESTATE.H"
 #include "TEXTURE/80294C64.H"
 
 #if defined(VERSION_US_REV1)
@@ -181,7 +182,7 @@ void func_80294F1C_us_rev1(void) {
 
 
     if (D_800D2AE0 != 0) {
-        if (D_8010B3D8 & 0x10) {
+        if (D_8010F328[0].buttons & 0x10) {
             if (D_auto_800D2AFC == 0) {
                 if (D_8014AEB0.alternateTitle == 0) {
                     Camera_PostScreenMessage(&D_80145088, (u8 *)&D_80145088 + 0x40, D_800CA60C);
@@ -195,8 +196,8 @@ void func_80294F1C_us_rev1(void) {
         } else {
             D_auto_800D2AFC = 0;
         }
-        if (D_8010B3D8 & 0x2000) {
-            if (D_8010B3D8 & 0x200) {
+        if (D_8010F328[0].buttons & 0x2000) {
+            if (D_8010F328[0].buttons & 0x200) {
                 count_0 = D_800D2AEC;
                 temp_v1 = count_0; 
                 count_0 += 1;
@@ -207,7 +208,7 @@ void func_80294F1C_us_rev1(void) {
                     D_8014AEC0 -= 1;
                 }
             }
-            if (D_8010B3D8 & 0x100) {
+            if (D_8010F328[0].buttons & 0x100) {
                 count_1 = D_800D2AF0;
                 temp_v1_2 = count_1; 
                 count_1 += 1;
@@ -219,7 +220,7 @@ void func_80294F1C_us_rev1(void) {
                 }
             }
         } else {
-            if (D_8010B3D8 & 0x200) {
+            if (D_8010F328[0].buttons & 0x200) {
                 count_2 = D_auto_800D2AE4;
                 temp_v1_3 = count_2; 
                 count_2 += 1;
@@ -239,7 +240,7 @@ void func_80294F1C_us_rev1(void) {
                     D_auto_800D2AE4 = 0;
                 }
             }
-            if (D_8010B3D8 & 0x100) {
+            if (D_8010F328[0].buttons & 0x100) {
                 count_3 = D_auto_800D2AE8;
                 temp_v1_4 = count_3; 
                 count_3 += 1;
@@ -253,7 +254,7 @@ void func_80294F1C_us_rev1(void) {
                     D_8014AEBC = temp_a0;
                 }
             }
-            if (D_8010B3D8 & 0x400) {
+            if (D_8010F328[0].buttons & 0x400) {
                 count_4 = D_auto_800D2AF4;
                 temp_v1_7 = count_4; 
                 count_4 += 1;
@@ -273,7 +274,7 @@ void func_80294F1C_us_rev1(void) {
                     D_auto_800D2AF4 = 0;
                 }
             }
-            if (D_8010B3D8 & 0x800) {
+            if (D_8010F328[0].buttons & 0x800) {
                 count_5 = D_auto_800D2AF8;
                 temp_v1_8 = count_5; 
                 count_5 += 1;
