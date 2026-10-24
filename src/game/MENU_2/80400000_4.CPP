@@ -241,9 +241,10 @@ s32 func_804009F4_de(s32 index) {
 
 
 #ifdef NON_MATCHING
-#define func_80400E50_de func_80400E50_de_value
+/* host build: the by-value body is the symbol Menu_EvaluateCameraSpline_value; the entry that takes the result pointer keeps the name the callers use. */
+extern CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w) __asm__("Menu_EvaluateCameraSpline_value");
 #endif
-CVector3 func_80400E50_de(SplineNode *nodes, s32 count, f32 w) {
+CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w) {
     CVector3 out;
     SplineNode *a;
     SplineNode *b;
@@ -339,8 +340,8 @@ CVector3 func_80400E50_de(SplineNode *nodes, s32 count, f32 w) {
     return out;
 }
 #ifdef NON_MATCHING
-#undef func_80400E50_de
-void func_80400E50_de(CVector3 *out, SplineNode *nodes, s32 count, f32 w) {
-    *out = func_80400E50_de_value(nodes, count, w);
+void Menu_EvaluateCameraSplineOut(CVector3 *out, SplineNode *nodes, s32 count, f32 w) __asm__("Menu_EvaluateCameraSpline");
+void Menu_EvaluateCameraSplineOut(CVector3 *out, SplineNode *nodes, s32 count, f32 w) {
+    *out = Menu_EvaluateCameraSpline(nodes, count, w);
 }
 #endif

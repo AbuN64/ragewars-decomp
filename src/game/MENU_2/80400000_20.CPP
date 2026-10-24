@@ -13,7 +13,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 extern f32 D_800DCC78;
-extern void func_80400E50_de(CVector3 *,void *,s32,s32);
+extern void Menu_EvaluateCameraSpline(CVector3 *,void *,s32,s32);
 extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
 extern f32 func_802725FC_de(CVector3 *),Particle_GetHorizontalAngle(CVector3 *);
 static inline CVector3 TrackStart(void) {
@@ -27,7 +27,7 @@ static inline CVector3 TrackStart(void) {
         return sp20;
     }
     table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
-    func_80400E50_de(&sp10, table->data, table->count, 0);
+    Menu_EvaluateCameraSpline(&sp10, table->data, table->count, 0);
     return sp10;
 }
 static inline CVector3 TrackEnd(void) {
@@ -41,7 +41,7 @@ static inline CVector3 TrackEnd(void) {
         return sp20;
     }
     table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
-    func_80400E50_de(&sp10, table->data, table->count, 0);
+    Menu_EvaluateCameraSpline(&sp10, table->data, table->count, 0);
     return sp10;
 }
 /* 6/93 aligned edits (4 real + the 2 pre-prologue words the preceding padding blob holds); remaining: target keeps the second lookup's frame base in s0 */
@@ -99,7 +99,7 @@ static inline void set_bit(unsigned char *bits, int index) {
 
 
  /* extern */
-void func_80400E50_de(CVector3 *, void *, s32, s32);
+void Menu_EvaluateCameraSpline(CVector3 *, void *, s32, s32);
 
  /* extern */
 
@@ -160,7 +160,7 @@ CVector3 func_8040385C_de(void) {
         return sp20;
     }
     table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 0);
-    func_80400E50_de(&sp10, table->data, table->count, 0);
+    Menu_EvaluateCameraSpline(&sp10, table->data, table->count, 0);
     return sp10;
 }
 
@@ -175,7 +175,7 @@ CVector3 func_8040390C_de(void) {
         return sp20;
     }
     table = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(D_800E2830->resource, 0), 0), 1);
-    func_80400E50_de(&sp10, table->data, table->count, 0);
+    Menu_EvaluateCameraSpline(&sp10, table->data, table->count, 0);
     return sp10;
 }
 

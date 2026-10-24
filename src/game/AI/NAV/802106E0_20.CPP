@@ -53,7 +53,7 @@ extern void Nav_SelectPlayerState(void *arg0);
 
 extern void *func_8022A83C_de(char *);
 
-extern void func_80209948_de(s32 *, s32);
+extern void Nav_DistanceToNode(s32 *, s32);
 
 
 void func_802127F4_de(void *actor) {
@@ -227,7 +227,7 @@ void func_80212C04_de(void *arg0) {
         return;
     }
     func_80211020_de(rec);
-    func_80209948_de(rec, rec[3]);
+    Nav_DistanceToNode(rec, rec[3]);
     Nav_SteerAlongRoute(rec);
     func_80208EB0_de(rec);
 }

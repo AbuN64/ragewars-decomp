@@ -156,7 +156,7 @@ CVector3 *func_8020993C_de(AiController *controller) {
     return &controller->player->pos;
 }
 
-f32 func_80209948_de(AiController *controller, s32 arg1) {
+f32 Nav_DistanceToNode(AiController *controller, s32 arg1) {
     return func_802726F8_de(&controller->player->pos.x, func_8020C994_de(&D_8013B364, arg1));
 }
 

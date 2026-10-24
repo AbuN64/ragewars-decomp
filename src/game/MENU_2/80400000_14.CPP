@@ -6,8 +6,8 @@
 
 /* Samples the current record's clip sequence at time t: walks clip list 0 accumulating each
    clip's end time (the time of its last 0x24-byte key) until the clip spanning t is found or the
-   ends are passed, then evaluates that clip's keys through func_80400E50_de at the time into the
-   clip, frozen at the clip start when the clip's second flag word is set; the track-1 counterpart of func_80401214_de, matched the same way. */
+   ends are passed, then evaluates that clip's keys through Menu_EvaluateCameraSpline at the time into the
+   clip, frozen at the clip start when the clip's second flag word is set; the track-1 counterpart of Menu_GetTrackEyePosition, matched the same way. */
 
 
 
@@ -18,14 +18,16 @@
 extern func_80203E78_S1 *D_800E2830;
 
 #ifdef NON_MATCHING
-#define func_80400E50_de func_80400E50_de_value
+extern CVector3 Menu_EvaluateCameraSpline(KeyRecAt1C *keys, s32 count, f32 t) __asm__("Menu_EvaluateCameraSpline_value");
+#else
+extern CVector3 Menu_EvaluateCameraSpline(KeyRecAt1C *keys, s32 count, f32 t);
 #endif
-extern CVector3 func_80400E50_de(KeyRecAt1C *keys, s32 count, f32 t);
 
 #ifdef NON_MATCHING
-#define func_804013BC_de func_804013BC_de_value
+/* host build: the by-value body is the symbol Menu_GetTrackTargetPosition_value; the entry that takes the result pointer keeps the name the callers use. */
+extern CVector3 Menu_GetTrackTargetPosition(f32 t) __asm__("Menu_GetTrackTargetPosition_value");
 #endif
-CVector3 func_804013BC_de(f32 t) {
+CVector3 Menu_GetTrackTargetPosition(f32 t) {
     s32 i;
     s32 idx;
     s32 count;
@@ -61,11 +63,11 @@ CVector3 func_804013BC_de(f32 t) {
     if (((s32 *)func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de((s32 *)D_800E2830->unk4, 0), idx), 2))[1] != 0) {
         t = start;
     }
-    return func_80400E50_de(keys, count, t - start);
+    return Menu_EvaluateCameraSpline(keys, count, t - start);
 }
 #ifdef NON_MATCHING
-#undef func_804013BC_de
-void func_804013BC_de(CVector3 *out, f32 t) {
-    *out = func_804013BC_de_value(t);
+void Menu_GetTrackTargetPositionOut(CVector3 *out, f32 t) __asm__("Menu_GetTrackTargetPosition");
+void Menu_GetTrackTargetPositionOut(CVector3 *out, f32 t) {
+    *out = Menu_GetTrackTargetPosition(t);
 }
 #endif

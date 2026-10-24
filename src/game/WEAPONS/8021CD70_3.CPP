@@ -42,7 +42,7 @@ void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 f32 func_802B72B0_de(f32);
 typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
 void func_8021D408_de(struct SharedPlayer_func_8021D408_de *, CVector3 *, CVector3 *);
-void func_8021CF28_de(void *, void *, AimActor **, void *);
+void Weapons_ComputeAimRotation(void *, void *, AimActor **, void *);
 #ifdef NON_MATCHING
 #define func_8024796C_de func_8024796C_de_value
 #endif
@@ -149,7 +149,7 @@ block_15:
         break;
     case 1:
     case 0x12:
-        func_8021CF28_de(&spB0, player, &spF0, &sp20.words);
+        Weapons_ComputeAimRotation(&spB0, player, &spF0, &sp20.words);
         var_s0 = 0;
         break;
     default:
@@ -173,7 +173,7 @@ block_15:
     if (spF0 == NULL) {
         sp20.xyz = desired;
         if ((player->unk5D8->active != 0) && (var_s0 != 0)) {
-            func_8021CF28_de(&spD0.words, player, &spF4, &spC0.words);
+            Weapons_ComputeAimRotation(&spD0.words, player, &spF4, &spC0.words);
             if (spF4 != NULL) {
                 player->rotation = spD0.full;
             }

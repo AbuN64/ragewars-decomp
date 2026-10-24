@@ -45,8 +45,8 @@ extern f32 D_800DCB40[];
 extern u8 D_80100030[];
 extern s32 func_80245798_de(void);
 extern void func_802453D4_de(void);
-extern void func_80401214_de(CVector3 *, f32);
-extern void func_804013BC_de(CVector3 *, f32);
+extern void Menu_GetTrackEyePosition(CVector3 *, f32);
+extern void Menu_GetTrackTargetPosition(CVector3 *, f32);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 extern void func_802727D8_de(void *);
 extern void func_80272E3C_de(void *, f32, f32, f32);
@@ -82,8 +82,8 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     if (D_800E2830->messageCount > 0) {
         func_802453D4_de();
     }
-    func_80401214_de(&eye, D_800E2830->time);
-    func_804013BC_de(&target, D_800E2830->time);
+    Menu_GetTrackEyePosition(&eye, D_800E2830->time);
+    Menu_GetTrackTargetPosition(&target, D_800E2830->time);
     scale = D_800DCB40[0];
     func_80271F9C_de(&eye, &eye, scale);
     func_80271F9C_de(&target, &target, scale);

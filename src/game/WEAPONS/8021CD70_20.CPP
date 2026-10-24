@@ -34,7 +34,7 @@ extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
 extern SharedPlayer *func_8022A5F4_de(char *, s32);
 extern void func_8044972C_de(SharedPlayer *);
 
-void func_80225940_de(SharedPlayer *player, BodyRecAt1C *body) {
+void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
     SharedPlayer *other;
     SharedPlayer *leader;
     s32 i;
