@@ -237,48 +237,35 @@ search_done:
     return obj->selected = obj->result;
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/OBJECTLINKS14.H"
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 extern f32 D_800C1D70_de;
-#include "TYPES.H"
-f32 func_802726BC_de(void *a, void *b);
 s32 Nav_SearchPortalRoute(CNavData *, s32, s32, u8, s32, f32 *, f32);
-
-/* 18/127 aligned edits; remaining: neighbor-scan registers and setup. */
+/* Collects the nodes linked to key, with the link index of each, into out/edges; returns how many. */
 static __inline__ s32 navigationNeighbors(CNavData *graph, s32 key, s32 *out, s32 *edges) {
-    s32 i = 0;
+    s32 i;
     s32 count = 0;
-    if (graph->m_nNavLinks > 0) {
-        do {
-            NavigationPortal *portal = navigationRecord(graph->m_pusNavLinks, i);
-            if (portal->first == key) {
-                count++;
-                *out = portal->second;
-                *edges = i;
-                edges++;
-                out++;
-            }
-            if (portal->second == key) {
-                count++;
-                *out = portal->first;
-                *edges = i;
-                edges++;
-                out++;
-            }
-            i++;
-        } while (i < graph->m_nNavLinks);
+    for (i = 0; i < graph->m_nNavLinks; i++) {
+        NavigationPortal *portal = navigationRecord(graph->m_pusNavLinks, i);
+        if (portal->first == key) {
+            out[count] = portal->second;
+            edges[count] = i;
+            count++;
+        }
+        if (portal->second == key) {
+            out[count] = portal->first;
+            edges[count] = i;
+            count++;
+        }
     }
     return count;
 }
-
+/* Returns startNode when one of its own links has portalKind, else the portal node the nearest
+ * neighbor route reaches within maxDepth links (-1 when none). */
 s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDepth) {
     s32 neighborNodes[64];
     s32 neighborLinks[64];
-    struct { f32 distance; f32 *origin; } route;
+    f32 distance;
+    f32 *origin;
     f32 bestDistance;
-    NavigationBuffer *points;
     s32 foundNode;
     s32 result;
     s32 index;
@@ -286,29 +273,23 @@ s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDe
     NavigationPortal *portal;
 
     result = -1;
-    index = 0;
     bestDistance = D_800C1D70_de;
     for (index = 0; index < graph->m_nNavLinks; index++) {
         portal = navigationRecord(graph->m_pusNavLinks, index);
         if (portal->first == startNode && portal->kind == portalKind) return startNode;
     }
-    points = graph->points;
-    route.origin = navigationRecord(points, startNode);
+    origin = navigationRecord(graph->points, startNode);
     neighborCount = navigationNeighbors(graph, startNode, neighborNodes, neighborLinks);
     for (index = 0; index < neighborCount; index++) {
-        NavigationBuffer *table = graph->points;
-        route.distance = func_802726BC_de(route.origin, navigationRecord(table, neighborNodes[index]));
-        foundNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], (u8)portalKind, maxDepth - 1, &route.distance, bestDistance);
+        distance = func_802726BC_de(origin, navigationRecord(graph->points, neighborNodes[index]));
+        foundNode = Nav_SearchPortalRoute(graph, startNode, neighborNodes[index], portalKind, maxDepth - 1, &distance, bestDistance);
         if (foundNode != -1) {
-            bestDistance = route.distance;
+            bestDistance = distance;
             result = foundNode;
         }
     }
     return result;
 }
-#else
-INCLUDE_ASM("span_1000", Nav_FindPortalRoute);
-#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/OBJECTLINKS14.H"
