@@ -89,7 +89,8 @@ extern f32 func_80209B64_de(AttackBrain *);
 extern f32 func_80216F44_de(AttackActor *, AttackPosition);
 extern s32 func_8020D1CC_de(void *, s32, s32);
 
-/* 37/224 aligned edits; remaining: accept/brain s1/s2 priority and the near/middle/range conversion order. */
+/* 17/224 aligned edits; remaining: range/middle conversions in s3/s6 swapped, case compare register. The do-while(0)
+ * around each accept = 1 weights its refs by loop depth so accept outranks brain for s1 like the ROM (an accept macro?). */
 s32 Nav_EvaluateAttackTarget(AttackBrain *brain, s32 index) {
     AttackActor *target = brain->targets[index]->actor;
     s32 accept = 0;
@@ -99,30 +100,30 @@ s32 Nav_EvaluateAttackTarget(AttackBrain *brain, s32 index) {
     f32 persistence;
     if (target->flags & 0x20) return 0;
     speed = func_80209C5C_de(brain);
-    range = (s32)(speed * D_800C1F58_de);
     middleLimit = (s32)(speed * D_800C1F54_de);
+    range = (s32)(speed * D_800C1F58_de);
     nearLimit = (s32)(speed * D_800C1F50_de);
     if (func_80216F44_de(brain->actor, target->position) < 0.0f)
         angle = -func_80216F44_de(brain->actor, target->position);
     else
         angle = func_80216F44_de(brain->actor, target->position);
     if (angle <= D_800C1F5C_de) {
-        if (brain->weights[index] < nearLimit) accept = 1;
+        if (brain->weights[index] < nearLimit) do { accept = 1; } while (0);
         range = 0;
     } else if (D_800C1F5C_de < angle && angle <= D_800C1F60_de) {
         range = 1;
         if (brain->weights[index] < middleLimit) {
             brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F64_de);
-            accept = 1;
+            do { accept = 1; } while (0);
         }
     } else {
         if (brain->weights[index] < range) {
-            accept = 1;
+            do { accept = 1; } while (0);
             brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F68_de);
         }
         range = 2;
     }
-    if (D_80146938 && brain->actor->state->enabled && brain->actor->state->kind == 12) accept = 1;
+    if (D_80146938 && brain->actor->state->enabled && brain->actor->state->kind == 12) do { accept = 1; } while (0);
     if (accept) {
         if (D_801468F4 && target->state->bonus)
             brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F6C_de);
