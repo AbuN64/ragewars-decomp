@@ -63,7 +63,7 @@ void func_8042AFC0_de(s32 value) {
 }
 
 void func_8042AFD0_de(s32 value) {
-    D_80154014 = value;
+    D_80154010.stages = value;
 }
 
 void func_8042AFE0_de(void) {

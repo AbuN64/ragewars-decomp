@@ -1096,7 +1096,6 @@ extern void *jtbl_800E88A8[];
 
 extern char D_800D3830[];
 
-extern s32 D_80154014;
 
 extern char D_800D7838[];
 

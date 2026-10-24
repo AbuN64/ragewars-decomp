@@ -125,7 +125,6 @@ s32 func_8042AF28_de(void) {
     return D_80154010.index != -1;
 }
 
-extern s32 D_80154014;
 
 s32 func_8042AF3C_de(void) {
     s32 complete = 1;
