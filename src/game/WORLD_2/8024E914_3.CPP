@@ -14,7 +14,6 @@
 #include "GAME/CODE_8027302C.H"
 #include "SYSTEM/80296FF8_6.H"
 
-#ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
@@ -63,16 +62,15 @@ typedef struct SimpleInstanceOut {
     s32 visBits;
     s32 f1C4;
 } SimpleInstanceOut;
-/* 125/128 words (3 aligned edits); remaining: box max z addition/store scheduling */
 void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 owner, char *segments) {
     CVector3 v;
     inst->kind = 3;
     inst->type = rec->type;
     inst->visBits = rec->visBits;
     inst->position = rec->position;
-    inst->position.y = inst->position.y + D_800C3D80_de;
-    inst->rotY = rec->rotY * D_800C3D84_de;
-    inst->f194 = D_800C3D88_de;
+    inst->position.y = inst->position.y + 10.24f;
+    inst->rotY = rec->rotY * (3.1415927f / 127.0f);
+    inst->f194 = 0.35f;
     inst->f198 = 0;
     inst->boxMin.x = rec->position.x - rec->maxRadius;
     inst->boxMin.y = rec->position.y - rec->maxRadius;
@@ -99,14 +97,11 @@ void World_InitSimpleInstance(SimpleInstanceOut *inst, SimpleRecordIn *rec, s32 
     inst->f1A4 = 0;
     inst->id = rec->id;
     v.x = inst->position.x;
-    v.y = inst->position.y + Particle_GetActorHeight(inst) * D_800C3D8C_de;
+    v.y = inst->position.y + Particle_GetActorHeight(inst) * 0.5f;
     v.z = inst->position.z;
     inst->light = D_800CBC90[0];
     inst->f1C4 = 0;
 }
-#else
-INCLUDE_ASM("span_1000", World_InitSimpleInstance);
-#endif
 
 /* Draws a static object through its cached display list, building the cache on first use: emits a branch placeholder, loads the object's model, builds its rotation (the shared D_8013B190 angle for type 8), scale and position raised by its height offset into the current matrix slot, draws the model with its material through func_8026DA4C_de and func_8024ED90_de unless the type is 12, ends the list, patches the placeholder to skip past it and calls the cached list. The display list writes match only as block-scoped initialisers taking D_80110634++. */
 
