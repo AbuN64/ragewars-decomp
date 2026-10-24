@@ -90,38 +90,20 @@ void func_8042B080_de(void) {
     func_8042A7B4_de(0);
 }
 
-#ifdef NON_MATCHING
-/* The catalogue stores word-valued widget identifiers. Cast the value to
- * its 16-bit widget key; an address at word+2 is only its low half on MIPS. */
-void Frontend_HideArenaCatalogueWidgets(void) {
-    s32 index;
-    struct Icon *entry;
-
-    for (index = 0; index < 40; index++) {
-        entry = &D_800E4F64[index];
-        func_8040E8D8_de(func_8040EC30_de((void *)D_800E4F60->field0,
-                                         (u16)entry->key), 0);
-        if (entry->other != -1) {
-            func_8040E8D8_de(func_8040EC30_de((void *)D_800E4F60->field0,
-                                             (u16)entry->other), 0);
-        }
-    }
-}
-#else
+/* The catalogue stores word-valued widget identifiers; only the low 16 bits name a widget. */
 void Frontend_HideArenaCatalogueWidgets(void) {
     s32 offset;
     s32 index;
     index = 0;
     do {
         offset = index * 0x10;
-        func_8040E8D8_de((void *)func_8040EC30_de((void*)D_800E4F60->field0, *(u16 *)(&D_800E0F16 + offset)), 0);
+        func_8040E8D8_de((void *)func_8040EC30_de((void*)D_800E4F60->field0, (u16)*(s32 *)(&D_800E0F16 - 2 + offset)), 0);
         if (*(s32 *)(&D_800E0F18 + offset) != -1) {
-            func_8040E8D8_de((void *)func_8040EC30_de((void*)D_800E4F60->field0, *(u16 *)(&D_800E0F1A + offset)), 0);
+            func_8040E8D8_de((void *)func_8040EC30_de((void*)D_800E4F60->field0, (u16)*(s32 *)(&D_800E0F1A - 2 + offset)), 0);
         }
             index += 1;
     } while (index < 0x28);
 }
-#endif
 
 /* Maps a selection index to its code: 0 gives 5, 1 gives 7, 2 gives 17, 3 gives 11 and anything else
    0. */

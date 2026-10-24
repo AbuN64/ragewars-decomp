@@ -74,28 +74,6 @@
         ]
       }
     ],
-    "src/game/FRONTEND/80423280_38.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Frontend_HideTrialCatalogueWidgets [9ea576bcf6dca7c06e70fb393c3853cd598c184053c3ab313719e2561e6515af]",
-        "lines": [
-          71
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Frontend_RefreshTrialCatalogueWidgets [4a76e357306e4d760d3bbe9fbfa5a5319e22fc27ae957b56251cedb9519cc197]",
-        "lines": [
-          118
-        ]
-      }
-    ],
-    "src/game/FRONTEND/80423280_52.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Frontend_HideArenaCatalogueWidgets [b064517a974b81ae15becd285df0d57c9c7ea38b46ef48d09a9c7a856ace4995]",
-        "lines": [
-          93
-        ]
-      }
-    ],
     "src/game/FRONTEND/80423280_8.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: func_80428850_de [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",
