@@ -98,7 +98,7 @@ s32 Frontend_CreateResultsOptionsScreen(MenuWidget *arg0) {
     }
     func_80427008_de();
     func_80427F10_de();
-    D_800E4690->window = func_8040EC30_de(arg0, D_800E0646_de[D_800E4690->selection * 14]);
+    D_800E4690->window = func_8040EC30_de(arg0, (u16)D_800E4694[D_800E4690->selection].id);
     func_804280BC_de();
     D_80154020.ready = 0;
     D_80154020.value = -1;
