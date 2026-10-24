@@ -24,7 +24,7 @@ extern f32 func_80209BE0_de(CloseAttackBrain *);
 extern f32 func_80209DAC_de(CloseAttackBrain *);
 extern f32 func_80209308_de(CloseAttackBrain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
-extern void func_80210964_de(CloseAttackActor *, s32);
+extern void Nav_MeasureWheelClearance(CloseAttackActor *, s32);
 extern void func_80209E80_de(CloseAttackBrain *);
 extern s32 func_8020D1CC_de(char *, s32, s32);
 
@@ -104,7 +104,7 @@ block_19:
                 dir = func_80210EFC_de(brain->player->yaw - 3.1415927f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
-                    func_80210964_de(player, dir);
+                    Nav_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->walk[dir] < 100.0f)) {
                     brain->player->forward = 1.0f;
@@ -126,7 +126,7 @@ block_27:
                     dir = func_80210EFC_de(brain->player->yaw);
                     player = brain->player;
                     if ((player->slot % 2) == D_800D297C) {
-                        func_80210964_de(player, dir);
+                        Nav_MeasureWheelClearance(player, dir);
                     }
                     if (!(brain->walk[dir] < 100.0f)) {
                         brain->player->forward = -1.0f;
@@ -143,7 +143,7 @@ block_31:
                 dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
-                    func_80210964_de(player, dir);
+                    Nav_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->walk[dir] < 100.0f)) {
                     brain->player->strafe = -temp_f20;
@@ -154,7 +154,7 @@ block_31:
                 dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) + 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
-                    func_80210964_de(player, dir);
+                    Nav_MeasureWheelClearance(player, dir);
                 }
                 if (brain->walk[dir] < 100.0f) {
 block_41:

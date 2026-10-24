@@ -61,7 +61,7 @@ extern s32 func_802744D4_de(void);
 extern f32 func_80209DAC_de(Brain *arg0);
 extern f32 func_80209308_de(Brain *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
-extern void func_80210964_de(Actor *, s32);
+extern void Nav_MeasureWheelClearance(Actor *, s32);
 extern void func_80209E80_de(Brain *arg0);
 extern s32 func_8020D1CC_de(char *, s32, s32);
 
@@ -111,7 +111,7 @@ void func_8021113C_eu(Actor *actor) {
                 dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) - 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
-                    func_80210964_de(player, dir);
+                    Nav_MeasureWheelClearance(player, dir);
                 }
                 if (!(brain->walk[dir] < 100.0f)) {
                     brain->player->strafe = -speed;
@@ -122,7 +122,7 @@ void func_8021113C_eu(Actor *actor) {
                 dir = func_80210EFC_de((brain->player->yaw - 3.1415927f) + 1.5707964f);
                 player = brain->player;
                 if ((player->slot % 2) == D_800D297C) {
-                    func_80210964_de(player, dir);
+                    Nav_MeasureWheelClearance(player, dir);
                 }
                 if (brain->walk[dir] < 100.0f) {
 halt:

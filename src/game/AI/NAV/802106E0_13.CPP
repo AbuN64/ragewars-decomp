@@ -4,7 +4,7 @@
 #include "AI/NAV/802106E0_13.H"
 
 #if !(defined(VERSION_DE))
-/* Runs a computer player's chase state: refreshes its view through func_80211020_de and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while func_80210964_de reports room to walk, stopping otherwise, then drives through func_80209E80_de; losing sight of the target or failing to re-route to the target's new node through func_8020D1CC_de also returns it to roaming. */
+/* Runs a computer player's chase state: refreshes its view through func_80211020_de and, without a target, returns to roaming (state 2); otherwise re-checks the target's visibility every fourth frame through func_802099B4_de, backs off (state 12) when only it is on the upper layer, switches to close combat (state 7, sub-state 13) within 600 units, re-rolls its strafe pattern through func_802744D4_de when its timer runs out, steers at the target through func_80209308_de and strafes left or right at 0.4 of its speed while Nav_MeasureWheelClearance reports room to walk, stopping otherwise, then drives through func_80209E80_de; losing sight of the target or failing to re-route to the target's new node through func_8020D1CC_de also returns it to roaming. */
 
 
 
@@ -24,7 +24,7 @@ extern f32 func_80209BE0_de(Brain_func_802120A8_eu *);
 extern f32 func_80209DAC_de(Brain_func_802120A8_eu *);
 extern f32 func_80209308_de(Brain_func_802120A8_eu *, CVector3 *, f32, f32);
 extern s32 func_80210EFC_de(f32);
-extern void func_80210964_de(Self *, s32);
+extern void Nav_MeasureWheelClearance(Self *, s32);
 extern void func_80209E80_de(Brain_func_802120A8_eu *);
 extern s32 func_8020D1CC_de(char *, s32, s32);
 
@@ -76,7 +76,7 @@ void func_802120A8_eu(Self *actor) {
         if (brain->pattern == 0) {
             dir = func_80210EFC_de(brain->player->yaw - 3.1415927f - 1.5707964f);
             if (brain->player->slot % 2 == D_800D297C) {
-                func_80210964_de(brain->player, dir);
+                Nav_MeasureWheelClearance(brain->player, dir);
             }
             if (brain->walk[dir] < 100.0f) {
                 goto stop;
@@ -85,7 +85,7 @@ void func_802120A8_eu(Self *actor) {
         } else if (brain->pattern == 1) {
             dir = func_80210EFC_de(brain->player->yaw - 3.1415927f + 1.5707964f);
             if (brain->player->slot % 2 == D_800D297C) {
-                func_80210964_de(brain->player, dir);
+                Nav_MeasureWheelClearance(brain->player, dir);
             }
             if (brain->walk[dir] < 100.0f) {
             stop:

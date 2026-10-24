@@ -171,6 +171,8 @@ struct Hit_func_802106E0_de;
 struct Hit_func_802106E0_de {
     char pad0[0xE4];
     CVector3 pos;
+    char padF0[0xC];
+    s32 kind;
 };
 
 
@@ -271,7 +273,7 @@ struct Wheels;
 struct Wheels {
     char pad0[0x1D0];
     f32 reach[8];
-    char pad1F0[0x20];
+    f32 clearance[8];
     f32 length;
 };
 struct Vehicle;
