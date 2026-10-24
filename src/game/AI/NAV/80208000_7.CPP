@@ -291,88 +291,40 @@ s32 Nav_FindPortalRoute(CNavData *graph, s32 startNode, u8 portalKind, s32 maxDe
     return result;
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/OBJECTLINKS14.H"
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/RESIDENT_EVENT_HANDLER.H"
 extern f32 D_800C1D74_de;
-#include "TYPES.H"
-f32 func_802726BC_de(void *a, void *b);
+/* Depth-limited search from currentNode (entered from previousNode): returns currentNode when one of its links
+ * has portalKind, else the portal node of the shortest route under distanceLimit (-1 when none); stores that
+ * route's length in *routeDistance. */
 s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8 portalKind, s32 remainingDepth, f32 *routeDistance, f32 distanceLimit) {
     s32 neighborNodes[64];
     s32 neighborLinks[64];
     f32 candidateDistance;
     f32 *previousPosition;
     f32 bestDistance;
-    NavigationBuffer *portals;
-    NavigationBuffer *points;
-    NavigationBuffer *linkTable;
-    s32 *neighborNodeOut;
-    s32 *neighborLinkOut;
-    s32 portalCount;
-    s32 portalOffset;
     s32 result;
     s32 index;
-    s32 i;
     s32 neighborCount;
     s32 portalNode;
     NavigationPortal *portal;
-    NavigationPortal *link;
 
     bestDistance = D_800C1D74_de;
     result = -1;
-    index = 0;
-    portalCount = graph->m_nNavLinks;
-    if (portalCount > 0) {
-        s32 stride;
-        portals = graph->m_pusNavLinks;
-        stride = portals->stride;
-        portalOffset = 8;
-        do {
-            portal = (void *)(portals->data + (portalOffset - 8));
-            index++;
-            if (portal->first == currentNode && portal->kind == (u8)portalKind) return currentNode;
-            portalOffset += stride;
-        } while (index < portalCount);
+    for (index = 0; index < graph->m_nNavLinks; index++) {
+        portal = navigationRecord(graph->m_pusNavLinks, index);
+        if (portal->first == currentNode && portal->kind == portalKind) return currentNode;
     }
-    i = 0;
-    if (remainingDepth == 0) {
-        return -1;
-    }
-    points = graph->points;
-    neighborCount = 0;
-    neighborNodeOut = neighborNodes;
-    previousPosition = navigationRecord(points, previousNode);
-    if (graph->m_nNavLinks > 0) {
-        neighborLinkOut = neighborLinks;
-        do {
-            linkTable = graph->m_pusNavLinks;
-            link = navigationRecord(linkTable, i);
-            if (link->first == previousNode) {
-                neighborCount += 1;
-                *neighborNodeOut = (s32) link->second;
-                *neighborLinkOut = i;
-                neighborLinkOut += 1;
-                neighborNodeOut += 1;
-            }
-            if (link->second == previousNode) {
-                neighborCount += 1;
-                *neighborNodeOut = (s32) link->first;
-                *neighborLinkOut = i;
-                neighborLinkOut += 1;
-                neighborNodeOut += 1;
-            }
-            i += 1;
-        } while (i < graph->m_nNavLinks);
-    }
+    if (remainingDepth == 0) return -1;
+    previousPosition = navigationRecord(graph->points, previousNode);
+    neighborCount = navigationNeighbors(graph, previousNode, neighborNodes, neighborLinks);
     for (index = 0; index < neighborCount; index++) {
-        NavigationBuffer *table = graph->points;
-        void *point = navigationRecord(table, neighborNodes[index]);
+        f32 *point = navigationRecord(graph->points, neighborNodes[index]);
         if (point != previousPosition) {
             candidateDistance = *routeDistance + func_802726BC_de(previousPosition, point);
             if (candidateDistance < distanceLimit) {
-                portalNode = Nav_SearchPortalRoute(graph, currentNode, neighborNodes[index], (u8)portalKind, remainingDepth - 1, &candidateDistance, distanceLimit);
-            } else portalNode = -1;
+                portalNode = Nav_SearchPortalRoute(graph, currentNode, neighborNodes[index], portalKind, remainingDepth - 1, &candidateDistance, distanceLimit);
+            } else {
+                portalNode = -1;
+            }
             if (portalNode != -1 && candidateDistance < bestDistance) {
                 bestDistance = candidateDistance;
                 result = portalNode;
@@ -384,9 +336,6 @@ s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8
     }
     return result;
 }
-#else
-INCLUDE_ASM("span_1000", Nav_SearchPortalRoute);
-#endif
 
 extern f32 D_800C1D78_de;
 extern const f32 D_800C1D7C_de;
