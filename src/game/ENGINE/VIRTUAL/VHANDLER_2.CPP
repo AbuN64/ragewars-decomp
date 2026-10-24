@@ -445,7 +445,6 @@ void func_8023C084_de(ResourcePageMapping *mapping) {
     mapping->slot = 0xFF;
 }
 
-#ifdef NON_MATCHING
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
 extern s32 D_800CB3F8_de;
 extern f32 D_800C3610_de, D_800C3614_de, D_800C3618_de, D_800C361C_de;
@@ -467,7 +466,6 @@ static __inline__ void detachPage(ResourcePageMapping *mapping) {
         readLink(&mapping->prev)->next = 0;
     }
 }
-/* 9/307 aligned edits remain: region/counter registers and job-source scheduling. */
 /* The pager uses the same two-pointer list operations as its worker. */
 /* The LRU list as the pager helpers see it: head D_800FFE20, tail D_800FFE24, reached through a list pointer. */
 typedef struct PageList { ResourcePageMapping *head, *tail; } PageList;
@@ -482,6 +480,13 @@ static __inline__ void appendPage(Field_void_4 *list, void *node) {
     if (tail) *(void **)tail = node;
     list->value = node;
     if (!*(void **)list) *(void **)list = node;
+}
+static __inline__ Region *findPageRegion(u32 page) {
+    Region *region;
+    for (region = &D_800FF230.regions; region != 0; region = region->next) {
+        if (page >= region->start && page < region->start + region->pages) break;
+    }
+    return region;
 }
 void Virtual_HandleResourcePageRequest(void) {
     ResourcePageThread *thread;
@@ -499,11 +504,7 @@ void Virtual_HandleResourcePageRequest(void) {
     if (kind == 4 || kind == 8) {
         D_800FF230.counters.requests++;
         page = thread->address >> 12;
-        region = &D_800FF230.regions;
-        while (region) {
-            if (page >= region->start && page < region->start + region->pages) break;
-            region = region->next;
-        }
+        region = findPageRegion(page);
         if (region) {
             D_800FF230.counters.lastAddress = thread->address;
             slot = &region->map[page - region->start];
@@ -520,8 +521,8 @@ void Virtual_HandleResourcePageRequest(void) {
             }
             func_802BB2A0_de(&D_800FF230.jobs, (void **)&job, 1);
             D_800FF230.counters.misses++;
-            job->size = 4096;
             job->source = region->source[page - region->start];
+            job->size = 4096;
             mapping = oldestPage((PageList *)&D_800FFE20);
             detachPage(mapping);
             func_8023C084_de(mapping);
@@ -561,6 +562,3 @@ void Virtual_HandleResourcePageRequest(void) {
     thread->state = 2;
     func_802BB750_de(thread);
 }
-#else
-INCLUDE_ASM("span_1000", Virtual_HandleResourcePageRequest);
-#endif
