@@ -185,8 +185,8 @@ extern s32 D_800CD8D0;
 extern void *func_8028CFA0_de(void *, s32, s32, void *);
 extern void func_802466A0_de(void *, s32, s32, s32, void *, s32, s32, f32, CVector3, s32, CVector3, CVector3, s32);
 extern void func_8024B2D0_de();
-#ifdef NON_MATCHING
-/* 31/182 aligned edits; remaining: register allocation of the setup prologue (s0/s2/s3 roles) */
+/* Starts a menu model preview: loads the projection, spawns the model through func_8028CFA0_de, keeps a copy
+ * of its record, places it scaled to the screen and runs its first update. Returns the copy, or 0 when no model. */
 void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s32 arg4, CVector3 position, CVector3 facing,
                        f32 scale, s32 arg8) {
     CVector3 scales;
@@ -196,27 +196,23 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     MenuModelScreen *view;
     Obj8041CAD8At190 *draw;
     Gfx *g;
-    char *address;
     f32 ratio;
     Ret8028CFA0 *source;
-    address = (char *)(u32)(D_800D297C << 6);
-    self->unk4A0 = arg8;
-    func_802A001C_de(&local60, 0, 0xC);
+    func_802A001C_de(&local60, 0, sizeof(local60));
     g = D_80110634++;
-    draw = &self->sub190;
-    address += 0x380;
     view = D_80141008;
+    gSPMatrix(g, &view->matrices[D_800D297C], G_MTX_LOAD | G_MTX_PROJECTION);
     self->unk49C = 1;
-    address += (u32)view;
-    gSPMatrix(g, (u32)address, G_MTX_LOAD | G_MTX_PROJECTION);
+    self->unk4A0 = arg8;
+    draw = &self->sub190;
     source = func_8028CFA0_de(&D_8011FE88, id, arg2, g);
     if (source == 0) {
         self->unk478 = 0;
         return 0;
     }
+    self->unk498 = scale;
     self->unk0 = id;
     self->unk478 = 1;
-    self->unk498 = scale;
     self->copy4 = *source;
     self->unk480 = position;
     self->unk48C = facing;
@@ -229,7 +225,7 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     ratio = view->width / (f32)D_800E28D0;
     scales.x = self->unk480.x * ratio;
     scales.z = self->unk480.z * ratio;
-    scales.y = self->unk480.y * (view->height / (f32) * (&D_800E28D0 + 1));
+    scales.y = self->unk480.y * (view->height / (f32)D_800E28D4);
     draw->unk50 = scales;
     local70 = self->unk48C;
     func_80272898_de(&view->camera, &local70, &local80);
@@ -241,9 +237,6 @@ void *Frontend_InitModelPreview(Obj8041CAD8 *self, s32 id, s32 arg2, s32 arg3, s
     }
     return &self->copy4;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_InitModelPreview);
-#endif
 
 /* Copies the three-word vector passed by value into the object's vector at 0x480. */
 
