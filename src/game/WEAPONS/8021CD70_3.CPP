@@ -43,6 +43,9 @@ f32 func_802B72B0_de(f32);
 typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
 void func_8021D408_de(struct SharedPlayer_func_8021D408_de *, CVector3 *, CVector3 *);
 void func_8021CF28_de(void *, void *, AimActor **, void *);
+#ifdef NON_MATCHING
+#define func_8024796C_de func_8024796C_de_value
+#endif
 CQuatern func_8024796C_de(char *);
 typedef struct func_8021CD70_S1 func_8021CD70_S1;
 typedef struct func_8021CD70_S2 func_8021CD70_S2;

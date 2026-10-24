@@ -22,6 +22,9 @@ extern char D_80145040;
 
 extern f32 D_80115DEC;
 
+#ifdef NON_MATCHING
+#define func_8024796C_de func_8024796C_de_value
+#endif
 extern CQuatern func_8024796C_de(char *);
 
 extern void func_80274244_de(CQuatern *, f32 *);
@@ -41,6 +44,9 @@ extern void func_80274098_de(CQuatern *, CQuatern *, CQuatern *);
 extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
+#ifdef NON_MATCHING
+#define func_8024D4AC_de func_8024D4AC_de_value
+#endif
 CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     CVector3 origin;
     CVector3 dir;
@@ -102,6 +108,12 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     }
     return result;
 }
+#ifdef NON_MATCHING
+#undef func_8024D4AC_de
+void func_8024D4AC_de(CQuatern *out, char *actor, CVector3 point) {
+    *out = func_8024D4AC_de_value(actor, point);
+}
+#endif
 
 CQuatern *func_8024D728_de(CQuatern *out, InputRecAt44 *input) {
     CVector3 source;

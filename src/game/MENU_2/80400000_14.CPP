@@ -17,8 +17,14 @@
 
 extern func_80203E78_S1 *D_800E2830;
 
+#ifdef NON_MATCHING
+#define func_80400E50_de func_80400E50_de_value
+#endif
 extern CVector3 func_80400E50_de(KeyRecAt1C *keys, s32 count, f32 t);
 
+#ifdef NON_MATCHING
+#define func_804013BC_de func_804013BC_de_value
+#endif
 CVector3 func_804013BC_de(f32 t) {
     s32 i;
     s32 idx;
@@ -57,3 +63,9 @@ CVector3 func_804013BC_de(f32 t) {
     }
     return func_80400E50_de(keys, count, t - start);
 }
+#ifdef NON_MATCHING
+#undef func_804013BC_de
+void func_804013BC_de(CVector3 *out, f32 t) {
+    *out = func_804013BC_de_value(t);
+}
+#endif

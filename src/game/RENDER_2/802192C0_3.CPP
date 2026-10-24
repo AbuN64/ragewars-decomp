@@ -124,6 +124,9 @@ void func_8021A78C_de(void *arg0) {
 
 extern s32 D_80140FF8;
 extern s32 D_8011D8D0;
+#ifdef NON_MATCHING
+#define func_8024796C_de func_8024796C_de_value
+#endif
 CQuatern func_8024796C_de(void *actor);
 s16 *func_8022AA9C_de(AimPlayer *arg0, s32 arg1);
 void func_8022B144_de(void *arg0, f32 *arg1);
