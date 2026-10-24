@@ -29,10 +29,3 @@ other paths in `local.mk`.
 ## Pull requests
 
 Run `make` before opening a pull request; every version must still match.
-
-## How the work is organised
-
-The decompilation and its native port are worked in four phases: map every byte and finish the engine foundations,
-start the port shell and the reference, drive one version to full coverage by play, then release in stages gated by
-coverage. The playbooks in [docs/playbooks](docs/playbooks/README.md) describe each phase, the measurement that ends it
-and the source rules that hold throughout.
