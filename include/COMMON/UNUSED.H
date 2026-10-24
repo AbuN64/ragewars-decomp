@@ -1623,7 +1623,6 @@ extern struct RowRecAt54 D_800E3A58[];
 
 extern char D_800D3B84[];
 
-extern s32 D_800D2BC0;
 
 extern const f64 D_800C76E0_de;
 
