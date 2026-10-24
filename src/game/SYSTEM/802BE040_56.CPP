@@ -52,9 +52,6 @@ INCLUDE_ASM("span_1000", func_802B9010_de);
 #endif
 
 #if defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-#ifdef NON_MATCHING
-/* 228/232 aligned words; remaining: two equivalent base-register accesses
- * and two unreachable ROM instructions after the unconditional loop-back. */
 typedef struct PiRequest {
     u16 type;
     u8 priority, status;
@@ -95,6 +92,7 @@ extern s32 func_802B9730_de(OSPiHandle_s *, u32, u32);
 extern s32 func_802B9590_de(OSPiHandle_s *, u32, u32 *);
 extern void func_802BBC20_de(void);
 
+/* The PI manager thread: serves DMA and 64DD disk requests from the command queue for ever. */
 void System_RunPiManager(void *argument) {
     PiManager *manager = argument;
     PiRequest *request = 0;
@@ -109,10 +107,9 @@ void System_RunPiManager(void *argument) {
         func_802BB2A0_de(manager->commandQueue, (OSMesg *)&request, 1);
         handle = (PiDiskHandle *)request->handle;
         if (handle != 0 && handle->type == 2 &&
-            handle->transfer.command <= 1) {
-            transfer = &handle->transfer;
-            transfer->sectorNumber = -1;
-            block = &transfer->blocks[transfer->blockNumber];
+            (transfer = &handle->transfer)->command <= 1) {
+            block = &transfer->blocks[handle->transfer.blockNumber];
+            handle->transfer.sectorNumber = -1;
             if (handle->transfer.mode != 3) {
                 block->dramAddress -= block->sectorSize;
             }
@@ -184,8 +181,15 @@ void System_RunPiManager(void *argument) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", System_RunPiManager);
+#if defined(VERSION_EU_X)
+unsigned int System_RunPiManager_padding_BA288[2] = {
+    0x02202821, 0x3C068015,
+};
+#endif
+#if defined(VERSION_US_REV1)
+unsigned int System_RunPiManager_padding_BF098[2] = {
+    0x02202821, 0x3C068015,
+};
 #endif
 
 #endif

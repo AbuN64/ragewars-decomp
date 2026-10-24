@@ -7409,6 +7409,7 @@ func_802B8DC8_de = 0x802B90B0; // type:func rom:0xB9CB0
 D_auto_func_802B8F48_de_padding_B9E28 = 0x802B9228; // rom:0xB9E28
 func_802B8F48_de = 0x802B9230; // type:func rom:0xB9E30
 System_RunPiManager = 0x802B92F0; // type:func rom:0xB9EF0
+System_RunPiManager_padding_BA288 = 0x802B9688; // rom:0xBA288
 func_802B93B0_de = 0x802B9690; // type:func rom:0xBA290
 D_auto_func_802B9864_eu_x_padding_BA464 = 0x802B9864; // rom:0xBA464
 func_802B9590_de = 0x802B9870; // type:func rom:0xBA470

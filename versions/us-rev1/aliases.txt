@@ -2939,3 +2939,4 @@ literals_Level_UpdateBreakableHit = 0x800C6B70; // rom:0xC7770 size:0x4
 literals_Nav_SelectPlayerState = 0x800C7010; // rom:0xC7C10 size:0x18
 literals_Pak_DrawMenuModel = 0x800E24B0; // rom:0xE30B0 size:0x24
 literals_Audio_UpdateVoiceVolume = 0x800C9028; // rom:0xC9C28 size:0x18
+literals_System_RunPiManager = 0x800CCB80; // rom:0xCD780 size:0x1C
