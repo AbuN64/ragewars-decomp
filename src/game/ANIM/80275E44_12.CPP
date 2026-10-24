@@ -192,7 +192,14 @@ shared:
         if (arg0->shape == 1) {
             *arg4 = arg0->axis;
         } else {
+#ifdef NON_MATCHING
+            /* The three coordinates arrive in separate argument slots; only the MIPS spill puts them side by side. */
+            arg4->x = *(f32 *)&arg1;
+            arg4->y = *(f32 *)&arg2;
+            arg4->z = *(f32 *)&arg3;
+#else
             *arg4 = *(CVector3 *)&arg1;
+#endif
         }
         func_8027207C_de(arg4);
         *arg5 = var_f20;
