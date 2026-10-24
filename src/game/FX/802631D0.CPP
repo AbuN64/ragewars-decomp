@@ -17,17 +17,9 @@ extern void func_802636B0_de(void *object);
 #include "COMMON/AIPROFILE.H"
 
 
-extern f32 D_800C42A4_de;
-extern f32 D_800C42A8_de;
-extern f32 D_800C42B0_de;
-extern f32 D_800C42B4_de;
-extern f32 D_800C42C0_de;
-extern f32 D_800C42C4_de;
-extern f32 D_800C42CC_de;
-extern f32 D_800C42D0_de;
 extern s32 D_800CBB70;
 
-/* 40/307 aligned edits; remaining: the original keeps profile in a saved register (live across
+/* 33/307 aligned edits (TU-local float pool written as literals); remaining: the original keeps profile in a saved register (live across
  * func_802747A0_de) and the pitch step in $f5. */
 void Fx_BuildControllerState(char *stateBytes, SharedPlayer *player) {
     AiProfile *profile;
@@ -56,11 +48,11 @@ void Fx_BuildControllerState(char *stateBytes, SharedPlayer *player) {
     struct ControllerProfile *controller;
 
     profile = player->views5D8.view5D8_0.unk5D8;
-    sensitivityFactor = D_800C4298_de - (player->views5E8.view7EC_132.unk7EC * D_800C4290_de);
+    sensitivityFactor = 1.0f - (player->views5E8.view7EC_132.unk7EC * 0.99f);
     controller = ((void **) stateBytes)[16 / sizeof(void *)];
-    pitchStep = (f32)profile->sensitivity * D_800C4294_de - D_800C4298_de;
-    rate = D_800D2988 * (sensitivityFactor * D_800C429C_de);
-    pitchStep = pitchStep * D_800C42A0_de + D_800C4298_de;
+    pitchStep = (f32)profile->sensitivity * 0.0078125f - 1.0f;
+    rate = D_800D2988 * (sensitivityFactor * 0.1f);
+    pitchStep = pitchStep * 0.75f + 1.0f;
     pitchStep *= rate;
     buttonMapping = NULL;
     if (profile->controlMode < 2) {
@@ -108,63 +100,63 @@ void Fx_BuildControllerState(char *stateBytes, SharedPlayer *player) {
     case 0:
         moveButtons = ((s32 *) stateBytes)[36 / sizeof(s32)];
         if (moveButtons & 1) {
-            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) D_800C42A4_de;
+            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) 1.0f;
         } else if (moveButtons & 2) {
-            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) D_800C42A8_de;
+            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) -1.0f;
         } else {
             ((f32 *) stateBytes)[8 / sizeof(f32)] = 0.0f;
         }
         strafeButtons = ((s32 *) stateBytes)[36 / sizeof(s32)];
-        ((f32 *) stateBytes)[0 / sizeof(f32)] = (f32) ((f32) controller->previousStickX * D_800C42AC_de);
+        ((f32 *) stateBytes)[0 / sizeof(f32)] = (f32) ((f32) controller->previousStickX * 0.0125f);
         if (strafeButtons & 8) {
-            ((f32 *) stateBytes)[12 / sizeof(f32)] = (f32) D_800C42B0_de;
+            ((f32 *) stateBytes)[12 / sizeof(f32)] = (f32) 1.0f;
         } else if (strafeButtons & 4) {
-            ((f32 *) stateBytes)[12 / sizeof(f32)] = (f32) D_800C42B4_de;
+            ((f32 *) stateBytes)[12 / sizeof(f32)] = (f32) -1.0f;
         } else {
             ((f32 *) stateBytes)[12 / sizeof(f32)] = 0.0f;
         }
         if (profile->pitchMode != 0) {
-            ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) ((f32) controller->previousStickY * D_800C42B8_de);
+            ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) ((f32) controller->previousStickY * 0.0125f);
         } else if (player->views5E8.view11B4_135.unk11B4 == 0) {
             stickY = controller->previousStickY;
             if (stickY != 0) {
-                ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) (((f32 *) stateBytes)[4 / sizeof(f32)] + (pitchStep * D_800C42BC_de * (f32) stickY));
+                ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) (((f32 *) stateBytes)[4 / sizeof(f32)] + (pitchStep * 0.0125f * (f32) stickY));
             }
             pitch = ((f32 *) stateBytes)[4 / sizeof(f32)];
-            if (D_800C42C0_de < pitch) {
-                ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) D_800C42C0_de;
-            } else if (pitch < D_800C42C4_de) {
-                ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) D_800C42C4_de;
+            if (1.0f < pitch) {
+                ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) 1.0f;
+            } else if (pitch < -1.0f) {
+                ((f32 *) stateBytes)[4 / sizeof(f32)] = (f32) -1.0f;
             }
         }
         break;
     case 1:
         alternateMoveButtons = ((s32 *) stateBytes)[36 / sizeof(s32)];
-        ((f32 *) stateBytes)[0 / sizeof(f32)] = (f32) ((f32) controller->previousStickX * D_800C42C8_de);
+        ((f32 *) stateBytes)[0 / sizeof(f32)] = (f32) ((f32) controller->previousStickX * 0.0125f);
         if (alternateMoveButtons & 1) {
-            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) D_800C42CC_de;
+            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) 1.0f;
         } else if (alternateMoveButtons & 2) {
-            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) D_800C42D0_de;
+            ((f32 *) stateBytes)[8 / sizeof(f32)] = (f32) -1.0f;
         } else {
             ((f32 *) stateBytes)[8 / sizeof(f32)] = 0.0f;
         }
         if (player->views5E8.view11B4_135.unk11B4 == 0) {
-            ((f32 *) stateBytes)[12 / sizeof(f32)] = (f32) ((f32) controller->previousStickY * D_800C42D4_de);
+            ((f32 *) stateBytes)[12 / sizeof(f32)] = (f32) ((f32) controller->previousStickY * 0.0125f);
         } else {
             ((f32 *) stateBytes)[12 / sizeof(f32)] = 0.0f;
         }
         pitchButtons = ((s32 *) stateBytes)[36 / sizeof(s32)];
         if (!(pitchButtons & 0x10)) {
             if (pitchButtons & 8) {
-                nextPitch = ((f32 *) stateBytes)[4 / sizeof(f32)] + (pitchStep * D_800C42D8_de);
-                pitchLimit = D_800C42DC_de;
+                nextPitch = ((f32 *) stateBytes)[4 / sizeof(f32)] + (pitchStep * 0.75f);
+                pitchLimit = 1.0f;
                 if (pitchLimit < nextPitch) {
                     nextPitch = pitchLimit;
                 }
                 ((f32 *) stateBytes)[4 / sizeof(f32)] = nextPitch;
             } else if (pitchButtons & 4) {
-                nextPitch = ((f32 *) stateBytes)[4 / sizeof(f32)] - (pitchStep * D_800C42E0_de);
-                pitchLimit = D_800C42E4_de;
+                nextPitch = ((f32 *) stateBytes)[4 / sizeof(f32)] - (pitchStep * 0.75f);
+                pitchLimit = -1.0f;
                 if (nextPitch < pitchLimit) {
                     nextPitch = pitchLimit;
                 }
@@ -172,7 +164,7 @@ void Fx_BuildControllerState(char *stateBytes, SharedPlayer *player) {
             } else if (profile->pitchMode != 0) {
                 strafe = ((f32 *) stateBytes)[12 / sizeof(f32)];
                 if ((strafe != 0.0f) && (player->views5E8.view7E8_105.unk7E8 == 0)) {
-                    recenterStep = strafe * (sensitivityFactor * D_800C42E8_de);
+                    recenterStep = strafe * (sensitivityFactor * 0.1f);
                     if (recenterStep < 0.0f) {
                         recenterStep = -recenterStep;
                     }
