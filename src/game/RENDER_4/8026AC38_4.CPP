@@ -278,11 +278,10 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     D_800D15E0 = 0;
 }
 
-#ifdef NON_MATCHING
+#include "COMMON/GAME_SESSION.H"
 extern const f32 D_800C46A8_de;
-extern f32 D_800D15F0;
+extern f32 D_800D15E4[4];
 extern void func_8026B504_de(void *, void *, void *);
-/* 11/157 aligned edits; remaining: material flag stores and frame/display-list load scheduling. */
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first
  * part's material is registered through func_8026B504_de with the caller's two inputs. */
@@ -311,10 +310,10 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
     shared->primaryColor[2] = 0x77;
     shared->primaryColor[3] = 0x40;
     shared->flags = flags | 0x400;
-    D_800D15E0 = 1;
+    D_800D15E4[3] = D_800C46A8_de;
     shared->flags = flags | 0x1402;
-    D_800D15F0 = D_800C46A8_de;
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    D_800D15E0 = 1;
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (func_80269A80_de(shared, pass) == 0) {
@@ -346,6 +345,3 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Render_DrawModelWithSharedMaterial);
-#endif
