@@ -2132,7 +2132,6 @@ extern char *D_800D3764[];
 struct UnitVtx;
 extern struct UnitVtx D_800FE9F8[];
 
-extern char D_8014BA38_de;
 
 extern u8 D_800D0EEA[];
 

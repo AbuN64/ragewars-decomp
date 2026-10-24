@@ -130,6 +130,7 @@ typedef struct DecodeState {
     void *cursor;
     u16 frame[336]; /* +0x18: Audio_DecodeFrame header and coefficients */
 } DecodeState;
+extern DecodeState D_8014BA38_de;
 extern unsigned short D_800D54B8;
 extern unsigned short D_800D54BA;
 extern unsigned short D_800D54BC;
