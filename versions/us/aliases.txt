@@ -2581,3 +2581,4 @@ literals_Texture_InitializeAudioWorker = 0x800C3DE0; // rom:0xC49E0 size:0x18
 
 literals_Level_UpdateBreakableHit = 0x800C19B0; // rom:0xC25B0 size:0x4
 literals_Nav_SelectPlayerState = 0x800C1E50; // rom:0xC2A50 size:0x18
+literals_Pak_DrawMenuModel = 0x800DD130; // rom:0xDDD30 size:0x24

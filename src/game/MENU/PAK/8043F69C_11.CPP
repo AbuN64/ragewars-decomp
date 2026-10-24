@@ -93,10 +93,10 @@ void func_804404A8_de(LayeredText *source, MenuOptionBox *position, MenuOptionBo
 }
 #endif
 
-#ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJECTRECAT28.H"
 #include "gbi.h"
+#include "COMMON/MATH_HELPERS.H"
 typedef struct PakModelDefinition {
     s32 kind, model, variant;
     CVector3 offset, scale;
@@ -120,7 +120,7 @@ typedef struct PakModelContext {
 } PakModelContext;
 extern Gfx *D_80110634;
 extern s32 D_800D297C, D_800E28D0, D_800E28D4, D_800E1E20, D_800CD730, D_800CD8D0, D_8014DE50;
-extern f32 D_800DE480_de, D_800DE484, D_800DE488, D_800DE498_de[], D_800DE4A0, literals_func_8028D244_de;
+extern f32 literals_func_8028D244_de;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
 extern void func_802A001C_de(void *, s32, s32);
@@ -133,9 +133,9 @@ extern void func_8025476C_de(s32);
 extern void func_8028B274_de(void *, u8 *, s32, s32);
 extern void func_8024B8C4_de(u8 *);
 extern void func_80246E44_de(u8 *);
-extern void func_8026D980_de(u8 *, u8 *);
-extern void func_80249E28_de();
-extern void func_8026D9D0_de();
+extern void func_8026D980_de(void);
+extern void func_80249E28_de(void *object, void *camera);
+extern void func_8026D9D0_de(void);
 static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 variant) {
     StateRecAt47C *owner = entry->state;
     PreviewWidget *source = (PreviewWidget *)func_8028CFA0_de(&D_8011FE88, id, variant);
@@ -151,12 +151,15 @@ static inline PreviewWidget *pakLoadModel(PakModelEntry *entry, s32 id, s32 vari
     owner->model.dx = 0.0f;
     owner->model.dy = 0.0f;
     owner->model.dz = 0.0f;
-    owner->model.depth = D_800DE480_de;
+    owner->model.depth = 10240.0f;
     owner->size = owner->model.size;
     return &owner->model;
 }
-/* 18/346 aligned edits; remaining: opacity float registers and final screen-load scheduling. */
-void Pak_DrawMenuModel(PakModelEntry *entry, s32 *selected, void *unused, PakModelContext *context) {
+/* Draws a menu entrys 3D preview model: scales it to the menu screen, loads and places the model once,n GAPS-TRIAGE.md HANDOFF.md PLAN-100.md STATUS.md TOOL-GAPS.md TOOLING-INTERIM-HANDOFF.md TYPES-PLAN.md __pycache__ archive attic attic-local backups batch-run-2.log batch-run-3.log batch-run-4.log batch-run-5.log batch-run-6.log batch1-run.log batch_cycle.sh check-batch1.log cmp cmp_acluster-34.out cmp_acluster-5C.out cmp_acluster-60.out cmp_acluster-A8.out cmp_acluster-c494-v2.out cmp_acluster-c494-v3.out cmp_acluster-c494.out cmp_acluster-d1342.out cmp_acluster-da5c2.out cmp_ceb0_reconcile.err cmp_ceb0_reconcile.json cmp_ceb0_reconcile2.out corpus cycle2.log cycle3.log cycle6.log dashboard exp gate gen_data_candidates.py gh-cred.sh gh-out gh-work ghidra-proj ghidra_12.1.4_PUBLIC_20260921.zip ghscripts handoff-archive-2026-10-12-0315.md handoff-archive-2026-10-12-1015.md handoff-archive-2026-10-12-1240.md handoff-archive-2026-10-12-1415.md handoff-archive-2026-10-12-1735.md handoff-archive-2026-10-12-1850.md handoff-archive-2026-10-12-2155.md harvest-ledger.tsv harvest_loop.py landings.tsv lanes logs makecheck-0013.log makecheck-gate2.log next.json night.log night.sh noc-free.json orch parked.txt plan_gen.py queue ref snapshots span_map.py state structs sub_acluster-D134.out sub_acluster-c494.out sub_acluster-c494b.out sub_acluster-c494c.out sub_acluster1.out t_1FD8.s t_8020.s types-census view-debt.txt work pulses the global opacity, picks the selected or idle update for the cursors row, then draws it. */
+typedef struct PakMenuCursor {
+    s32 selection;
+} PakMenuCursor;
+void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused, PakModelContext *context) {
     CVector3 zero;
     CVector3 offset;
     CVector3 placed;
@@ -191,22 +194,19 @@ void Pak_DrawMenuModel(PakModelEntry *entry, s32 *selected, void *unused, PakMod
         link = pakLoadModel(entry, def->model, def->variant);
     }
     offset = def->offset;
-    offset.y = offset.y - widget->size * scaled.y * D_800DE484;
+    offset.y = offset.y - widget->size * scaled.y * 0.8f;
     func_80272898_de(&context->screen->camera, &offset, &placed);
     if (link != 0 && !(entry->flags & 0x2000000)) {
         func_802466A0_de(draw, -1, def->kind, D_800CD8D0, link, -1, 0,
-                         context->screen->heading + D_800DE488, placed, 0,
+                         context->screen->heading + RW_PI_F6, placed, 0,
                          def->scale, zero, 0);
         func_8024B2D0_de(draw);
         entry->flags |= 0x2000000;
     }
-    wobble = func_802B7130_de((f32)(u32)((u32)D_800CD730 * 10U) * D_800DE498_de[0]);
-    wobble += 1.0f;
-    opacity = context->fade;
-    opacity *= context->alpha;
-    wobble = wobble * D_800DE4A0 + D_800DE4A0;
-    D_8014DE50 = (s32)(opacity * wobble);
-    if (context->selection == selected[0]) {
+    wobble = func_802B7130_de((f32)(u32)((u32)D_800CD730 * 10U) * (RW_PI_F6 / 180.0f)) + 1.0f;
+    opacity = context->fade * context->alpha;
+    D_8014DE50 = (s32)(opacity * (wobble * 50.0f + 50.0f));
+    if (context->selection == cursor->selection) {
         draw->update = D_00443128;
     } else {
         draw->update = D_00443104;
@@ -234,13 +234,10 @@ void Pak_DrawMenuModel(PakModelEntry *entry, s32 *selected, void *unused, PakMod
     draw->yaw = draw->yaw + def->rotationSpeed * literals_func_8028D244_de;
     draw->position0 = placed;
     draw->referencePosition = placed;
-    func_8026D980_de(draw, context->screen);
-    func_80249E28_de(draw);
+    func_8026D980_de();
+    func_80249E28_de(draw, context->screen);
     func_8026D9D0_de();
 }
-#else
-INCLUDE_ASM("ovl_80400000", Pak_DrawMenuModel);
-#endif
 
 #ifdef NON_MATCHING
 #define MP_FIELD(base, type, offset) (*(type *)((u8 *)(base) + (offset)))
