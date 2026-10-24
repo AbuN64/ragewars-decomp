@@ -5,7 +5,7 @@
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/UNUSED.H"
-#include "SDK/OS_2/802B83EC_2.H"
+#include "sdk/OS_2/802B83EC_2.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 

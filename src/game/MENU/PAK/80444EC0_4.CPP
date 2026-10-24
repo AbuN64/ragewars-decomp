@@ -4,7 +4,7 @@
 #include "TYPES.H"
 #include "stddef.h"
 #include "COMMON/UNUSED.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 #include "RENDER_4/8028FD2C_6.H"
 
 #if defined(VERSION_US_REV1)

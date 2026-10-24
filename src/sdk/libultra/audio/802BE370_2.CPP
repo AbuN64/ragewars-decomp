@@ -2,7 +2,7 @@
 #include "abi.h"
 #include "acmd.h"
 #include "COMMON/MATH_HELPERS.H"
-#include "SDK/ACMD.H"
+#include "sdk/ACMD.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
 

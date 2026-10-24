@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "SDK/EXTERNS.H"
+#include "sdk/EXTERNS.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
 

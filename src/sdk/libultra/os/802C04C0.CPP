@@ -4,7 +4,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
-#include "SDK/OS/802C04C0.H"
+#include "sdk/OS/802C04C0.H"
 #include "sdk/os.h"
 
 

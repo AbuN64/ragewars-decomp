@@ -2,7 +2,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "COMMON/DEVICE_IO.H"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 
 /* osEPiRawStartDma, drafted from ultralib src/io/epirawdma.c with the 2.0I EPI_SYNC of PRinternal/piint.h. */
 extern OSPiHandle_s *D_800D4380[2];

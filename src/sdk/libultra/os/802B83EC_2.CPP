@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
-#include "SDK/OS_2/802B83EC_2.H"
+#include "sdk/OS_2/802B83EC_2.H"
 #include "sdk/os_pif.h"
 
 /* Packs one controller-pak read command for a given address into the PIF RAM block D_80154110 after skipping one zero byte per preceding channel, with its data bytes set to 0xFF and the end marker after it (libultra __osPackRamReadData). Adapted from func_802B8AA0_de with the command bytes changed to a read and the data bytes filled with 0xFF instead of copied. */

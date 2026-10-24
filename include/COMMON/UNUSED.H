@@ -1423,7 +1423,7 @@ extern f32 D_800C5D78_de;
 
 extern Handler802A2B50 D_800DE108;
 
-#include "SDK/SCHED/8028DF6C_7.H"
+#include "sdk/SCHED/8028DF6C_7.H"
 
 extern ListNode80290528 *D_80131140;
 

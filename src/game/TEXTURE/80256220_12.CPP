@@ -6,7 +6,7 @@
 #include "TEXTURE/80256220_13.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
 /* Clears and sizes the 0x8016E000 heap region against the detected RAM size, then initialises the
    five dependent subsystems over it. */

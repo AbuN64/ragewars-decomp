@@ -11,7 +11,7 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/LEVEL_INPUT.H"
 #include "COMMON/UNUSED.H"
-#include "SDK/PFS/8044BAC0.H"
+#include "sdk/PFS/8044BAC0.H"
 #include "sdk/os.h"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "AUDIO_4/802BFE60.H"

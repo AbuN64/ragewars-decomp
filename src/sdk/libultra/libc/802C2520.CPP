@@ -1,10 +1,10 @@
 #include "include_asm.h"
-#include "SDK/EXTERNS.H"
+#include "sdk/EXTERNS.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/LLDIVRESULT.H"
 #include <stdarg.h>
 #include "TYPES.H"
-#include "SDK/PRINTF/802C31B0.H"
+#include "sdk/PRINTF/802C31B0.H"
 
 #if defined(VERSION_US_REV1)
 /* _Printf core of the SDK: scans the format, parses flags, width, precision and size qualifier, and emits each field through prout. */

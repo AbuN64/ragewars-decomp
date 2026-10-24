@@ -11,7 +11,7 @@
 #include "TYPES.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "stddef.h"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
 /* Draws a player's HUD for one frame unless the game state is 8 or 11: ticks the HUD animations,

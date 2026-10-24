@@ -18,7 +18,7 @@
 #include "RENDER/80291054_2.H"
 #include "RENDER/80291054_7.H"
 #include "RENDER/80291054_9.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 #include "sdk/os.h"
 #include "RESMGR/802A0888.H"
 

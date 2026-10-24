@@ -1,8 +1,8 @@
 #include "include_asm.h"
-#include "SDK/EXTERNS.H"
+#include "sdk/EXTERNS.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
-#include "SDK/PRINTF/802C31B0.H"
+#include "sdk/PRINTF/802C31B0.H"
 
 /* This hook intentionally ignores both supplied words. */
 void func_802BE0C0_de(void *unused_state, unsigned char unused_code)

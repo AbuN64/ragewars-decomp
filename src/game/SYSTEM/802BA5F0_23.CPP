@@ -6,8 +6,8 @@
 #include "TYPES.H"
 #include "sdk/os.h"
 #include "COMMON/EXTERNS_3.H"
-#include "SDK/AUDIO_2/802BF300.H"
-#include "SDK/AUDIO_2/802BFA00.H"
+#include "sdk/AUDIO_2/802BF300.H"
+#include "sdk/AUDIO_2/802BFA00.H"
 
 #if defined(VERSION_EU)
 #include "COMMON/ITEMRECAT20V1.H"

@@ -1,7 +1,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ALLOADFILTER48_2.H"
-#include "SDK/AUDIO/802C3EA4_4.H"
+#include "sdk/AUDIO/802C3EA4_4.H"
 
 extern void Audio_DecodeFrame(void *arg0);
 

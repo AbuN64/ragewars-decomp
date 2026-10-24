@@ -1,6 +1,6 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "abi.h"
-#include "SDK/ACMD.H"
+#include "sdk/ACMD.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 
 #if defined(VERSION_DE)

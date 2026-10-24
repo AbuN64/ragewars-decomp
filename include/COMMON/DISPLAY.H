@@ -3,7 +3,7 @@
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/GFX.H"
-#include "SDK/SCHED/SCHED.H"
+#include "sdk/SCHED/SCHED.H"
 /* One frame of the three-frame display ring, 0x140 bytes: its RSP task (and a second one when dual), the message
    the scheduler sends back when the frame is done, its color image and its display lists. */
 typedef struct Frame Frame;

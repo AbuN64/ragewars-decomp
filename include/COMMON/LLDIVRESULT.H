@@ -30,5 +30,5 @@ extern Acmd *func_802BE514_de(void *filter, s16 *outp, s32 outCount, s32 sampleO
 extern char D_002BE514;
 extern char D_002BE898;
 
-#include "SDK/AUDIO/802C3EA4_2.H"
+#include "sdk/AUDIO/802C3EA4_2.H"
 #endif

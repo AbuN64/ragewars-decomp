@@ -1,11 +1,11 @@
 #include "COMMON/CONTREADFORMAT.H"
 
 /* Points the RDP command DMA at a new display-list buffer, returning -1 if the RDP is busy, otherwise clearing the XBUS flag, waiting for it to drop and writing the physical start and end addresses (libultra osDpSetNextBuffer). */
-#include "SDK/RDP_DMA_IO.H"
+#include "sdk/RDP_DMA_IO.H"
 #include "TYPES.H"
 #include "COMMON/OSTHREAD_S.H"
 #include "sdk/libgultra.h"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 
 
 

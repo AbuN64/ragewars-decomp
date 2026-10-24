@@ -3,7 +3,7 @@
 #include "COMMON/RESPONSE.H"
 #include "COMMON/S1_4.H"
 #include "TYPES.H"
-#include "SDK/OSINT/802BDEA0_2.H"
+#include "sdk/OSINT/802BDEA0_2.H"
 
 #if defined(VERSION_US_REV1)
 /* Reads count bytes from the cartridge-domain port D_B2000021 into a buffer, waiting for bit 0x40 of D_B2000015 before each byte with D_800D3650 retries, accumulating a rotate-and-add checksum stored through the third argument and returning 1 on success. Adapted from func_802AE380_us_rev1 with the single-byte read changed to a counted loop with a checksum and the strobe registers D_B2000004 and D_B2000008 raised and lowered around it. */

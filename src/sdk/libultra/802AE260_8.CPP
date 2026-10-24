@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "sdk/libgultra.h"
 #include "TYPES.H"
-#include "SDK/OSINT/802BDEA0_2.H"
+#include "sdk/OSINT/802BDEA0_2.H"
 #include "sdk/libgultra/libasm_802BBC68_20.h"
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
 #include "sdk/libgultra_inferred/802AE260_8.H"

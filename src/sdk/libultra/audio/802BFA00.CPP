@@ -3,8 +3,8 @@
 #include "COMMON/DEVICE_IO.H"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "SDK/AUDIO_2/802BFA00.H"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/AUDIO_2/802BFA00.H"
+#include "sdk/OSINT/802C0CB0.H"
 
 /* __osViSwapContext, drafted from ultralib src/io/viswapcontext.c (2.0I: vStart straight from the
    field registers). The unsigned-to-float and float-to-unsigned conversions of the y scale use the

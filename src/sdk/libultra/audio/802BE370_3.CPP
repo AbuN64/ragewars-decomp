@@ -10,7 +10,7 @@
 #include "COMMON/ALLOADFILTER48_2.H"
 
 #if defined(VERSION_EU)
-#include "SDK/ACMD.H"
+#include "sdk/ACMD.H"
 
 Acmd *func_802BE370_eu(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p) 
 {

@@ -2,7 +2,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "SDK/OSINT/802BEA40_2.H"
+#include "sdk/OSINT/802BEA40_2.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 

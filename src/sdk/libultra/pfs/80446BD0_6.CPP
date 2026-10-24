@@ -1,9 +1,9 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "TYPES.H"
-#include "SDK/PFS/80447BB0_19.H"
-#include "SDK/PFS/80447BB0_20.H"
-#include "SDK/PFS/80447BB0_21.H"
+#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/80447BB0_21.H"
 
 /* osPfsFileState, drafted from ultralib src/io/pfsfilestate.c (2.0I branch): read a controller pak
    file's directory entry, count the pages of its chain across banks, and report its size, codes and

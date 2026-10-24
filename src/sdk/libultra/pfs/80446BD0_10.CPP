@@ -1,9 +1,9 @@
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SDK/PFS/80446BD0_10.H"
+#include "sdk/PFS/80446BD0_10.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 

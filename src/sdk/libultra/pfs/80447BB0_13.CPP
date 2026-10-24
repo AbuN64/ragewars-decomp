@@ -1,10 +1,10 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
-#include "SDK/PFS/80447BB0_19.H"
-#include "SDK/PFS/80447BB0_20.H"
-#include "SDK/PFS/80447BB0_21.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/80447BB0_21.H"
 
 /* Reads or writes Controller Pak file blocks while validating and following its inode chain, based on the 2.0I public reference. */
 extern s32 func_802B84C0_de(void *queue, int channel, u16 address, u8 *buffer);

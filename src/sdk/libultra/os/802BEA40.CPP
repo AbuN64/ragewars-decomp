@@ -3,7 +3,7 @@
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "TYPES.H"
-#include "SDK/OSINT/802BEA40.H"
+#include "sdk/OSINT/802BEA40.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 

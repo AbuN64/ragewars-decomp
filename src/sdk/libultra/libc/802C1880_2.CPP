@@ -6,7 +6,7 @@
    unchanged reference section is byte-identical. The 2^32 and 2^16 coefficients are the cartridge's
    own constants (already covered as data at 0x800CD350/0x800CD358/0x800CD360), so the code loads
    them by reference instead of emitting a constant pool. */
-#include "SDK/EXTERNS.H"
+#include "sdk/EXTERNS.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/SITYPE.H"
 

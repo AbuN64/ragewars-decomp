@@ -4,7 +4,7 @@
 #include "COMMON/OBJECTSTATE10_2.H"
 #include "COMMON/ALBANK_S.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
 
 extern void __CSPRepostEvent(void *arg0, Node_func_802AFD6C_de *arg1);

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "sdk/libultra/io/sprawdma.H"
 #include "sdk/libgultra/sp.h"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
 
 

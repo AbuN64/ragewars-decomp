@@ -6,7 +6,7 @@
 #include "stddef.h"
 #include "COMMON/EXTERNS_3.H"
 #include "FRONTEND/8040B45C_21.H"
-#include "SDK/AUDIO_2/802BF7F0.H"
+#include "sdk/AUDIO_2/802BF7F0.H"
 
 /* Selects the video mode and applies framebuffer and display configuration; the mode-to-word-array cast preserves configuration-store and mode-load scheduling. */
 s32 func_80265350_de(); /* extern */

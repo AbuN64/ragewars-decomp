@@ -5,7 +5,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_18.H"
-#include "SDK/OS_2/802BECB0.H"
+#include "sdk/OS_2/802BECB0.H"
 #include "sdk/os.h"
 
 void func_802B9BC0_de(void) {

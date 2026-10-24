@@ -7,7 +7,7 @@
 #include "AUDIO_3/802B8840.H"
 #include "TYPES.H"
 #include "sdk/libgultra_inferred/802B8DE0_2.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 #include "sdk/al_globals.h"
 
 extern void *func_802B0340_de(u8 *, s32, ALHeap *, s32, s32);

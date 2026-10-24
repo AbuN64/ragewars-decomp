@@ -10,7 +10,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "sdk/al_globals.h"
 

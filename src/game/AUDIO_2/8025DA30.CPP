@@ -5,7 +5,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "AUDIO_2/8025DA30.H"
 #include "TYPES.H"
-#include "SDK/OS/8025DA30.H"
+#include "sdk/OS/8025DA30.H"
 
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECAT18V3.H"

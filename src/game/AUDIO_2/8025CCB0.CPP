@@ -7,7 +7,7 @@
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SDK/AUDIO/802C3EA4_4.H"
+#include "sdk/AUDIO/802C3EA4_4.H"
 #include "TEXTURE/80256220_16.H"
 #include "AUDIO_2/802591C0.H"
 #include "RENDER_4/8028FD2C_6.H"

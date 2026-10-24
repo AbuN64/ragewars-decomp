@@ -4,7 +4,7 @@
 #include "COMMON/STATERECAT34.H"
 #include "COMMON/ALAUXBUS_S.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
 
 

@@ -2,7 +2,7 @@
 #include "sdk/libgultra.h"
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
 
 

@@ -10,7 +10,7 @@
 #include "COMMON/TRIPLE.H"
 #include "AUDIO_4/802BF230.H"
 #include "SCENE/802508E0_10.H"
-#include "SDK/SCHED/8028DF6C_7.H"
+#include "sdk/SCHED/8028DF6C_7.H"
 #include "sdk/os.h"
 
 #include "COMMON/GAME_SESSION.H"

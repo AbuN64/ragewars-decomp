@@ -4,8 +4,8 @@
 #include "COMMON/HARDWARE_IO.H"
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
-#include "SDK/AUDIO_2/802BF300.H"
-#include "SDK/AUDIO_2/802BFA00.H"
+#include "sdk/AUDIO_2/802BF300.H"
+#include "sdk/AUDIO_2/802BFA00.H"
 #include "RESMGR/802A0888.H"
 
 extern __OSViContext_func_802BA910_de D_800D43B0[2];

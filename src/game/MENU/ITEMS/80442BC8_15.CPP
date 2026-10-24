@@ -5,7 +5,7 @@
 #include "COMMON/S1_2.H"
 #include "COMMON/ACTORRECAT5E0.H"
 #include "SYSTEM_2/8025E280.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 
 /* Returns zero. Nothing in the cartridge image calls it or stores its address as a word, so it is
    either reached through a pointer built at run time or never used. */

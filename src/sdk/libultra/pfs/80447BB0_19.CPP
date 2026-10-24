@@ -1,9 +1,9 @@
 #include "COMMON/OBJECTSTATE96.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
-#include "SDK/PFS/80447BB0_19.H"
-#include "SDK/PFS/80447BB0_21.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/80447BB0_21.H"
 
 /* __osGetId, drafted from ultralib src/io/contpfs.c (2.0I branch): reread a controller pak's id block
    from bank zero, restore or rebuild it when damaged, and refresh the file system layout and label

@@ -6,8 +6,8 @@
 #include "COMMON/ARG.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
-#include "SDK/OS_2/802BC630_3.H"
-#include "SDK/OS_2/802BECB0.H"
+#include "sdk/OS_2/802BC630_3.H"
+#include "sdk/OS_2/802BECB0.H"
 #include "sdk/os.h"
 #include "sdk/os_pif.h"
 

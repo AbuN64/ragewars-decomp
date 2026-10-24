@@ -4,7 +4,7 @@
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SDK/AUDIO/802C3EA4_2.H"
+#include "sdk/AUDIO/802C3EA4_2.H"
 
 /* Builds the decoder's trigonometric tables: for 128 steps it stores the sine and cosine of
    (i * D_800CCF10 + D_800CCF14) * D_800CCF18 in D_801510C0 and D_801512C0 and clears D_801518C0,

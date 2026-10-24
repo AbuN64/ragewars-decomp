@@ -1,13 +1,13 @@
 #include "COMMON/ITEMRECAT20V1.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
-#include "SDK/PFS/80446BD0_4.H"
-#include "SDK/PFS/80446BD0_8.H"
-#include "SDK/PFS/80447BB0_15.H"
-#include "SDK/PFS/80447BB0_19.H"
-#include "SDK/PFS/80447BB0_20.H"
-#include "SDK/PFS/80447BB0_21.H"
+#include "sdk/PFS/80446BD0_4.H"
+#include "sdk/PFS/80446BD0_8.H"
+#include "sdk/PFS/80447BB0_15.H"
+#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/80447BB0_21.H"
 
 /* osPfsAllocateFile, drafted from ultralib src/io/pfsallocatefile.c (2.0I branch): create a
    controller pak file by finding a free directory entry, chaining enough free pages across the

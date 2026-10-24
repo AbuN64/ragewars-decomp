@@ -2,7 +2,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/LLDIVRESULT.H"
 #include "TYPES.H"
-#include "SDK/EXTERNS.H"
+#include "sdk/EXTERNS.H"
 
 /* sprintf: formats into a buffer through Libc_FormatToCallback with the copying output routine, terminates the text when the length is not negative, and returns the length. */
 s32 func_802BD320_de(char *buffer, const char *format, ...) {

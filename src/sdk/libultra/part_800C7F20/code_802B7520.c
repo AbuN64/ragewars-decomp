@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V1.H"
 #include "TYPES.H"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 #include "sdk/al_globals.h"
 
 void func_802B2450_de(ListLink *arg0) {

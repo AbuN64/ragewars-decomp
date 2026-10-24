@@ -4,7 +4,7 @@
 #include "COMMON/ALDELAY28.H"
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/seqplayer_802B6BE4.h"
-#include "sdk/libgultra/part_800C7F20/code_802B7520.H"
+#include "sdk/libgultra/part_800C7F20/code_802B7520.h"
 
 
 

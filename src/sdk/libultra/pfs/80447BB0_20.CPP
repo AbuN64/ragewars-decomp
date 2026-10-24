@@ -2,9 +2,9 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJECTSTATE96.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
-#include "SDK/PFS/80447BB0_20.H"
-#include "SDK/PFS/80447BB0_21.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/80447BB0_21.H"
 
 #if defined(VERSION_DE)
 #ifdef NON_MATCHING

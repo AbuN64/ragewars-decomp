@@ -2,7 +2,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 #include "sdk/os.h"
 
 extern s32 func_802BD080_de(void);

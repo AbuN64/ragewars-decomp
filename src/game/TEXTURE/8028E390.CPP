@@ -6,7 +6,7 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "TYPES.H"
-#include "SDK/SCHED/8028DF6C_2.H"
+#include "sdk/SCHED/8028DF6C_2.H"
 #include "sdk/os.h"
 #include "RENDER_4/8028FD2C_6.H"
 

@@ -5,7 +5,7 @@
 #include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/LEVEL_ACTOR.H"
 #include "TYPES.H"
-#include "SDK/SCHED/world_actorscan.H"
+#include "sdk/SCHED/world_actorscan.H"
 #include "RENDER_4/8028FD2C_6.H"
 
 s32 func_8028DF90_de(Shared_World *world, s32 arg1) {

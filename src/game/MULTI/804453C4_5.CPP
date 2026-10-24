@@ -1,7 +1,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/MENURECAT20V1.H"
 #include "TYPES.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 
 #if defined(VERSION_US_REV1)
 /* Points a field's text at D_800E62DC when the option D_800E63AC is set and at D_800E62F0 otherwise, and returns

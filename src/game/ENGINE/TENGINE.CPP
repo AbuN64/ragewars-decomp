@@ -39,7 +39,7 @@ typedef long long M2C_UNK64;
 #include "RENDER_4/8028FD2C_6.H"
 #include "SCENE/802508E0_4.H"
 #include "SCENE/802508E0_9.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 #include "TYPES.H"
 #include "stddef.h"
 u32 func_8028FE3C_de(s32, s32, s32, u32 *);

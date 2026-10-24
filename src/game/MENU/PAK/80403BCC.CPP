@@ -7,7 +7,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/PAK/80403BCC.H"
-#include "SDK/PFS/80447BB0_9.H"
+#include "sdk/PFS/80447BB0_9.H"
 
 /* Refreshes the cached directory of the Controller Pak on channel ch: when the directory buffer
    exists it reads the state of each of the 16 notes through osPfsFileState (func_80446A20_de),

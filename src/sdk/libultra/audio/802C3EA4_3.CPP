@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
-#include "SDK/AUDIO/802C3EA4_3.H"
+#include "sdk/AUDIO/802C3EA4_3.H"
 
 s16 Audio_DecodeFrame();
 u32 func_802BFE3C_de(void) {

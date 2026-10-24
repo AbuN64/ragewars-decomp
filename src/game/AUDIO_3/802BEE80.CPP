@@ -8,7 +8,7 @@
 #include "AUDIO_3/802BF1C0.H"
 #include "AUDIO_3/802BF1F0.H"
 #include "sdk/libgultra/sp.h"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 
 /* _VirtualToPhysicalTask, drafted from ultralib src/io/sptask.c; this library's bcopy is the
    destination-first copy func_802BD3A0_de. */

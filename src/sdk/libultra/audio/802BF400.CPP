@@ -3,7 +3,7 @@
 #include "COMMON/OSVISCALE.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
-#include "SDK/AUDIO_2/802BF400.H"
+#include "sdk/AUDIO_2/802BF400.H"
 #include "sdk/os.h"
 
 

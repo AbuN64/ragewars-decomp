@@ -18,7 +18,7 @@
 #include "sdk/lib_802BB630/802BC390.H"
 #include "sdk/libgultra/libasm_802BD1A8_3.h"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 #include "sdk/os.h"
 
 extern u32 D_800CB700_de;

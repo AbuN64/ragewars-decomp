@@ -2,8 +2,8 @@
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
 #include "COMMON/EXTERNS_11.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
-#include "SDK/PFS/80447BB0_21.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/PFS/80447BB0_21.H"
 
 /* __osRepairPackId, drafted from ultralib src/io/contpfs.c (2.0I branch): probe how many banks the
    controller pak really has, build a fresh id from the damaged one, write it to all four id areas and

@@ -3,7 +3,7 @@
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
-#include "SDK/OS_2/802BD950_2.H"
+#include "sdk/OS_2/802BD950_2.H"
 #include "sdk/os_pif.h"
 
 extern u32 func_802B8C40_de(u32 arg0);

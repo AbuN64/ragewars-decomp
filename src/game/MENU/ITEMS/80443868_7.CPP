@@ -3,7 +3,7 @@
 #include "stddef.h"
 #include "TYPES.H"
 #include "COMMON/RECORDRECATCV1.H"
-#include "SDK/PFS/80443868_7.H"
+#include "sdk/PFS/80443868_7.H"
 
 /* Updates display flags and activates the selected resource. */
 s32 func_8022A5A0_de(s32 *, s32);

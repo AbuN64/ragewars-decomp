@@ -4,11 +4,11 @@
 #include "COMMON/ARG.H"
 #include "COMMON/OBJECTSTATE96.H"
 #include "TYPES.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
-#include "SDK/PFS/80447BB0_19.H"
-#include "SDK/PFS/80447BB0_20.H"
-#include "SDK/PFS/80447BB0_21.H"
-#include "SDK/PFS/80447BB0_9.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/80447BB0_20.H"
+#include "sdk/PFS/80447BB0_21.H"
+#include "sdk/PFS/80447BB0_9.H"
 
 /* osPfsInitPak, drafted from ultralib src/io/pfsinitpak.c (2.0I branch): confirm a controller pak is
    present, read and if needed repair its id block, derive the file system layout from it, read the

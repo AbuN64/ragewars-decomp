@@ -1,7 +1,7 @@
 #include "COMMON/OSPIHANDLE_S.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 
 /* osPiRawStartDma, drafted from ultralib src/io/pirawdma.c (2.0I, where __osPiRawStartDma is osPiRawStartDma). */
 

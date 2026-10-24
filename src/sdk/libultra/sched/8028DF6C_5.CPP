@@ -4,7 +4,7 @@
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/WORLDSORTENTRY.H"
 #include "TYPES.H"
-#include "SDK/SCHED/8028DF6C_7.H"
+#include "sdk/SCHED/8028DF6C_7.H"
 #include "sdk/os.h"
 
 #if defined(VERSION_EU)

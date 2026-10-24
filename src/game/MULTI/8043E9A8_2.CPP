@@ -3,7 +3,7 @@
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "COMMON/SHARED_DEBUGFIELD.H"
 #include "COMMON/SHARED_MENUSELECTION.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 
 
 /* Read the descriptor's runtime value type and format the scaled value. */

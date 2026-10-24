@@ -6,7 +6,7 @@
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
-#include "SDK/PFS/80443868_2.H"
+#include "sdk/PFS/80443868_2.H"
 #include "GFX/TEXT/802A8A94_5.H"
 
 extern void func_8044972C_de(void *player);

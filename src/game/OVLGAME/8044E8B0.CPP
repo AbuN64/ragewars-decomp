@@ -2,7 +2,7 @@
 
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
-#include "SDK/PFS/8044E8B0.H"
+#include "sdk/PFS/8044E8B0.H"
 
 
 extern const f32 D_800C53B0_de;

@@ -2,7 +2,7 @@
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
-#include "SDK/AUDIO/802C3EA4.H"
+#include "sdk/AUDIO/802C3EA4.H"
 
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"

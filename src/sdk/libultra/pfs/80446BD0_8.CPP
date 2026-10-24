@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "COMMON/ITEMRECAT20V1.H"
-#include "SDK/OSCONTREQUESFORMATSHORT.H"
+#include "sdk/OSCONTREQUESFORMATSHORT.H"
 #include "TYPES.H"
-#include "SDK/PFS/80446BD0_8.H"
-#include "SDK/PFS/80447BB0_19.H"
-#include "SDK/PFS/80447BB0_20.H"
+#include "sdk/PFS/80446BD0_8.H"
+#include "sdk/PFS/80447BB0_19.H"
+#include "sdk/PFS/80447BB0_20.H"
 
 /* osPfsFreeBlocks, drafted from ultralib src/io/pfsfreeblocks.c (2.0I branch): count the unused pages
    in every bank's inode table and report them as bytes. */

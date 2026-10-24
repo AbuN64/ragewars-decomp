@@ -7,7 +7,7 @@
 #include "sdk/libgultra.h"
 #include "AUDIO_3/802BEE60.H"
 #include "sdk/os.h"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
 
 extern int func_802B9D70_de(void);

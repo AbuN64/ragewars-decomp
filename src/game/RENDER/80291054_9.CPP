@@ -7,7 +7,7 @@
 #include "COMMON/VIDEO_DIMENSIONS.H"
 #include "RENDER/80291054_2.H"
 #include "RENDER/80291054_9.H"
-#include "SDK/AUDIO/802BD1A8_19.H"
+#include "sdk/AUDIO/802BD1A8_19.H"
 
 extern void func_8029311C_de(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);

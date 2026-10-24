@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/libgultra/ai.h"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 
 /* Queues an audio buffer for the AI DMA, backing the address up 0x2000 bytes after a buffer that ended on an 8 KiB boundary, returning -1 when __osAiDeviceBusy reports the interface busy and zero after writing the physical address from func_802BBBC0_de and the length to the AI registers (libultra osAiSetNextBuffer). Adapted from func_802BB060_de with the argument checks replaced by the boundary flag byte D_800D8360 read through its array declaration, the busy test by __osAiDeviceBusy, and the uncached read by two AI register writes. */
 

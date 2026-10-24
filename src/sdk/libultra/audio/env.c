@@ -4,7 +4,7 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
-#include "SDK/OSINT/802C0CB0.H"
+#include "sdk/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
 
 #ifdef NON_MATCHING
