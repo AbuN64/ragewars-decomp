@@ -100,60 +100,6 @@
         ]
       }
     ],
-    "src/game/MENU_2/80400000_13.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_GetTrackEyePosition [2c9a608a706e9081f2e47ff8d6f84f426d3786125afb639b98fc5cd93d6ffb18]",
-        "lines": [
-          27
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_GetTrackEyePosition [a19c087effc4fcc963dd26aab9fa8a04fe6e23ef8053732f0c39e0cd8156ef59]",
-        "lines": [
-          70
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_GetTrackEyePosition [f28e985b33c52e9545ce6e66567f7a0fce4f414eecedc2e4ac1a113f8ff1b62f]",
-        "lines": [
-          20
-        ]
-      }
-    ],
-    "src/game/MENU_2/80400000_14.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_GetTrackTargetPosition [4864ef87e826c2e511bba61f418ba0f0008be243bb13786a73c62295155e7aa8]",
-        "lines": [
-          27
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_GetTrackTargetPosition [5c23d4c705495767e79646dad141f6a8fbd24eb2f657d91dcb1799e0270f81c6]",
-        "lines": [
-          70
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_GetTrackTargetPosition [f28e985b33c52e9545ce6e66567f7a0fce4f414eecedc2e4ac1a113f8ff1b62f]",
-        "lines": [
-          20
-        ]
-      }
-    ],
-    "src/game/MENU_2/80400000_4.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_EvaluateCameraSpline [c987cd01f512c042ec4fb20d24b6805c97f12d05cebdeaafe1837ea33abb4b4d]",
-        "lines": [
-          343
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Menu_EvaluateCameraSpline [e7e0063a7382654221bcf11d61220da17d9bb0eab5721a23c416c0b3f3f94912]",
-        "lines": [
-          243
-        ]
-      }
-    ],
     "src/game/RENDER/render_controller_input.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: Render_ReadControllerStates [471cfeca1740c1bb88e8345e551331d28aa2fdc7006cb53c1f38e22f8f7a29a0]",
@@ -195,18 +141,6 @@
       }
     ],
     "src/game/WEAPONS/8021CD70.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Weapons_ComputeAimRotation [0b4a540e8eaeeac59f7d282036a8be47965781b383b61ff14d8caea167e41bdf]",
-        "lines": [
-          211
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Weapons_ComputeAimRotation [a0b6e9d54180bb06e40444caae3296457ca23f61ec0a231c4d3c4c3c396b7eeb]",
-        "lines": [
-          93
-        ]
-      },
       {
         "reason": "NON_MATCHING changes ROM-side C: Weapons_ComputeAimRotation [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
         "lines": [

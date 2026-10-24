@@ -240,11 +240,6 @@ s32 func_804009F4_de(s32 index) {
 
 
 
-#ifdef NON_MATCHING
-/* host build: the by-value body is the symbol Menu_EvaluateCameraSpline_value; the entry that takes the result pointer keeps the name the callers use. */
-#define Menu_EvaluateCameraSpline Menu_EvaluateCameraSpline_value
-extern CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
-#endif
 CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w) {
     CVector3 out;
     SplineNode *a;
@@ -340,9 +335,3 @@ CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w) {
     }
     return out;
 }
-#ifdef NON_MATCHING
-#undef Menu_EvaluateCameraSpline
-void Menu_EvaluateCameraSpline(CVector3 *out, SplineNode *nodes, s32 count, f32 w) {
-    *out = Menu_EvaluateCameraSpline_value(nodes, count, w);
-}
-#endif

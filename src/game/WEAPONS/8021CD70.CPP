@@ -90,11 +90,6 @@ extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
 extern CQuatern func_8024796C_de(char *);
 extern void func_80274098_de(void *, void *, void *);
 
-#ifdef NON_MATCHING
-/* host build: the by-value body is the symbol Weapons_ComputeAimRotation_value; the entry that takes the result pointer keeps the name the callers use. */
-#define Weapons_ComputeAimRotation Weapons_ComputeAimRotation_value
-extern CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target, CVector3 *targetPosition);
-#endif
 CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **target,
                             CVector3 *targetPosition)
 {
@@ -208,9 +203,3 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
     }
     return result;
 }
-#ifdef NON_MATCHING
-#undef Weapons_ComputeAimRotation
-void Weapons_ComputeAimRotation(CQuatern *out, DraftAimPlayer *player, DraftAimPlayer **target, CVector3 *targetPosition) {
-    *out = Weapons_ComputeAimRotation_value(player, target, targetPosition);
-}
-#endif

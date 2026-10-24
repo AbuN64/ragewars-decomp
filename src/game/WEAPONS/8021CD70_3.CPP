@@ -42,7 +42,7 @@ void func_80271F9C_de(CVector3 *, CVector3 *, f32);
 f32 func_802B72B0_de(f32);
 typedef struct SharedPlayer_func_8021D408_de SharedPlayer_func_8021D408_de;
 void func_8021D408_de(struct SharedPlayer_func_8021D408_de *, CVector3 *, CVector3 *);
-void Weapons_ComputeAimRotation(void *, void *, AimActor **, void *);
+CQuatern Weapons_ComputeAimRotation(void *, AimActor **, void *);
 #ifdef NON_MATCHING
 #define func_8024796C_de func_8024796C_de_value
 #endif
@@ -61,7 +61,7 @@ void func_8021D774_de(AimPlayer *player) {
     CQuatern spB0;
     AimWeapon *weapon;
     AimOutput spC0;
-    AimOutput spD0;
+    CQuatern spD0;
     CVector3 spE0;
     AimActor *spF0, *spF4;
     CVector3 *var_a0, *temp_s2, *temp_s2_2, *var_a1, *temp_s0_2, *temp_s1;
@@ -101,9 +101,9 @@ void func_8021D774_de(AimPlayer *player) {
                     spE0 = sp30;
                     func_8027207C_de(&spE0);
                     func_80271F9C_de(&spC0.xyz, &spE0, temp_fv0);
-                    func_80272898_de(matrix, &spC0.xyz, &spD0.xyz);
-                    player->aim2 = spD0.xyz;
-                    func_8021D408_de((void *)player, &spD0.xyz, &D_80103FCC->normal);
+                    func_80272898_de(matrix, &spC0.xyz, (CVector3 *)&spD0);
+                    player->aim2 = (*(CVector3 *)&spD0);
+                    func_8021D408_de((void *)player, (CVector3 *)&spD0, &D_80103FCC->normal);
                 } else {
                     goto block_14;
                 }
@@ -149,7 +149,7 @@ block_15:
         break;
     case 1:
     case 0x12:
-        Weapons_ComputeAimRotation(&spB0, player, &spF0, &sp20.words);
+        spB0 = Weapons_ComputeAimRotation(player, &spF0, &sp20.words);
         var_s0 = 0;
         break;
     default:
@@ -160,22 +160,22 @@ block_15:
     player->rotation = spB0;
     spC0.xyz = player->aim;
     spC0.xyz.x -= D_800C23C8_de;
-    spD0.xyz = player->aim;
-    spD0.xyz.x += D_800C23C8_de;
+    (*(CVector3 *)&spD0) = player->aim;
+    (*(CVector3 *)&spD0).x += D_800C23C8_de;
     spC0.xyz = player->aim;
     spC0.xyz.z -= D_800C23C8_de;
-    spD0.xyz = player->aim;
-    spD0.xyz.z += D_800C23C8_de;
+    (*(CVector3 *)&spD0) = player->aim;
+    (*(CVector3 *)&spD0).z += D_800C23C8_de;
     spC0.xyz = player->aim;
     spC0.xyz.y -= D_800C23C8_de;
-    spD0.xyz = player->aim;
-    spD0.xyz.y += D_800C23C8_de;
+    (*(CVector3 *)&spD0) = player->aim;
+    (*(CVector3 *)&spD0).y += D_800C23C8_de;
     if (spF0 == NULL) {
         sp20.xyz = desired;
         if ((player->unk5D8->active != 0) && (var_s0 != 0)) {
-            Weapons_ComputeAimRotation(&spD0.words, player, &spF4, &spC0.words);
+            spD0 = Weapons_ComputeAimRotation(player, &spF4, &spC0.words);
             if (spF4 != NULL) {
-                player->rotation = spD0.full;
+                player->rotation = spD0;
             }
         }
         if (spF0 == NULL) {
