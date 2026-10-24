@@ -84,8 +84,8 @@ evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d
 type = "stale-code"
 format = "accounting observations: stale-code; per-range readers and limits in evidence"
 state = "observed"
-stored_size = 511
-rom."de" = [[0x1b8b4c, 0x1b8b60], [0x1bb68c, 0x1bb690], [0x1bbe74, 0x1bbe80], [0x1bcee3, 0x1bceec], [0x1bcf0e, 0x1bcf18], [0x1bcf3a, 0x1bcf3c], [0x1bd52c, 0x1bd530], [0x1be9dc, 0x1be9e0], [0x1bec1c, 0x1bec20], [0x1bed38, 0x1bed40], [0x1bf7d8, 0x1bf7e0], [0x1bfaac, 0x1bfab0], [0x1bfee4, 0x1bfef0], [0x1c0214, 0x1c0220], [0x1c0cd8, 0x1c0ce0], [0x1c1124, 0x1c1148], [0x1c2808, 0x1c2810], [0x1c2e24, 0x1c2e30], [0x1c3138, 0x1c3140], [0x1c35b4, 0x1c35c0], [0x1c38c4, 0x1c38c8], [0x1c392c, 0x1c3944], [0x1c3966, 0x1c3968], [0x1c3cb0, 0x1c3cb4], [0x1c4e34, 0x1c4e38], [0x1c503c, 0x1c5040], [0x1c50d0, 0x1c50d4], [0x1c5f14, 0x1c5f20], [0x1c6ed0, 0x1c6fd0]]
+stored_size = 352
+rom."de" = [[0x1bec1c, 0x1bec20], [0x1bf7d8, 0x1bf7e0], [0x1bfee4, 0x1bfef0], [0x1c0214, 0x1c0220], [0x1c0cd8, 0x1c0ce0], [0x1c2808, 0x1c2810], [0x1c2e24, 0x1c2e30], [0x1c3138, 0x1c3140], [0x1c35b4, 0x1c35c0], [0x1c5f14, 0x1c5f20], [0x1c6ed0, 0x1c6fd0]]
 evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.stale-code.de" }]
 
 [blob."accounting.stale-code.eu"]
@@ -104,20 +104,12 @@ stored_size = 18281
 rom."eu-x" = [[0x14f6c8, 0x14f6d0], [0x14f70c, 0x14f710], [0x14fd67, 0x14fd9c], [0x14fdf7, 0x14fe14], [0x152edd, 0x152ee0], [0x15425d, 0x154260], [0x1544de, 0x154520], [0x155520, 0x155550], [0x15561c, 0x155620], [0x156018, 0x156020], [0x15ab20, 0x15ab3f], [0x15aec4, 0x15aed3], [0x15e720, 0x15e72a], [0x167d20, 0x16b000], [0x195d2c, 0x195d30], [0x1baf2c, 0x1baf30], [0x1bb224, 0x1bb228], [0x1bb434, 0x1bb498], [0x1bb720, 0x1bb728], [0x1bb820, 0x1bb944], [0x1bb9d0, 0x1bbad0], [0x1bbb80, 0x1bbc5c], [0x1bbf04, 0x1bbfe0], [0x1bc06c, 0x1bc148], [0x1bc20c, 0x1bc420], [0x1bc720, 0x1bc764], [0x1bc7cc, 0x1bcb18], [0x1bcc20, 0x1bcc30], [0x1bcc74, 0x1bcd08], [0x1bcdc4, 0x1bcdc8], [0x1bce54, 0x1bcea0], [0x1bcf48, 0x1bd020], [0x1bd120, 0x1bd144], [0x1bd1ac, 0x1bd21c], [0x1bd2f0, 0x1bd420], [0x1bd5ef, 0x1bd5f0], [0x1bd70f, 0x1bd710], [0x1bd82f, 0x1bd830], [0x1bd94f, 0x1bd950], [0x1bdc72, 0x1bdc74], [0x1bdcdf, 0x1bdce0], [0x1bdd4b, 0x1bdd4c], [0x1bdf67, 0x1be120], [0x1be220, 0x1be264], [0x1be2cf, 0x1be320], [0x1be420, 0x1be58c], [0x1be605, 0x1be620], [0x1bef2c, 0x1bef30], [0x1bf224, 0x1bf228], [0x1c020c, 0x1c0210], [0x1c0a8c, 0x1c0a90], [0x1c13a4, 0x1c13e0], [0x1c2568, 0x1c2570], [0x1c5828, 0x1c5830], [0x1ceab8, 0x1ceac0], [0x1d3324, 0x1d3330], [0x1d705c, 0x1d7060], [0x1d7974, 0x1d7980], [0x1d99b8, 0x1d99c0], [0x1ebe44, 0x1ebe50], [0x1edc1c, 0x1edc20], [0x1ede08, 0x1ede49], [0x1ee588, 0x1ee5c9], [0x1eea78, 0x1eea80], [0x1f254c, 0x1f2550], [0x1f4f18, 0x1f4f20]]
 evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.stale-code.eu-x" }]
 
-[blob."accounting.stale-code.us"]
-type = "stale-code"
-format = "accounting observations: stale-code; per-range readers and limits in evidence"
-state = "observed"
-stored_size = 382
-rom."us" = [[0x101308, 0x101334], [0x101356, 0x101358], [0x10137c, 0x101383], [0x1013ac, 0x1013bc], [0x101428, 0x101434], [0x101460, 0x101477], [0x1014a0, 0x1014ac], [0x1014d8, 0x101513], [0x10153c, 0x101548], [0x101574, 0x10157c], [0x1015a8, 0x1015d4], [0x1015f6, 0x1015f8], [0x10161c, 0x101623], [0x10164c, 0x10165c], [0x1016c8, 0x1016d4], [0x101700, 0x101717], [0x101740, 0x10174c], [0x101778, 0x1017b3], [0x1017dc, 0x1017e8]]
-evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.stale-code.us" }]
-
 [blob."accounting.stale-data.de"]
 type = "stale-data"
 format = "accounting observations: stale-data; per-range readers and limits in evidence"
 state = "observed"
-stored_size = 734
-rom."de" = [[0x1bce88, 0x1bce8a], [0x1c7a94, 0x1c7a97], [0x1c7c3c, 0x1c7c3f], [0x1e4d46, 0x1e4d55], [0x5fe55d, 0x5fe5cc], [0x5fe794, 0x5fe804], [0x65261c, 0x6526dc], [0x675a29, 0x675a74], [0x6f7abc, 0x6f7b5c], [0x72916f, 0x7291ac]]
+stored_size = 732
+rom."de" = [[0x1c7a94, 0x1c7a97], [0x1c7c3c, 0x1c7c3f], [0x1e4d46, 0x1e4d55], [0x5fe55d, 0x5fe5cc], [0x5fe794, 0x5fe804], [0x65261c, 0x6526dc], [0x675a29, 0x675a74], [0x6f7abc, 0x6f7b5c], [0x72916f, 0x7291ac]]
 evidence = [{ artifact = "accounting-regions.json", sha256 = "165115fdd2e78a248d600fbf2952e7deee77163e6cf36fad3853a75838b392d0", pointer = "/groups/accounting.stale-data.de" }]
 
 [blob."accounting.stale-data.eu"]
@@ -12544,6 +12536,186 @@ state = "decoded"
 stored_size = 96
 rom."de" = [[0x1c7bdc, 0x1c7c3c]]
 evidence = [{ artifact = "stale-de.json", sha256 = "7a11421552004dd4cefb37fdac7c9441963efa89b1e6325248dd830e7e54376e", pointer = "/rows/35" }]
+
+[blob."leftover.de.mips-stream.1b8b4c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 20
+rom."de" = [[0x1b8b4c, 0x1b8b60]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/0" }]
+
+[blob."leftover.de.mips-stream.1bb68c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1bb68c, 0x1bb690]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/1" }]
+
+[blob."leftover.de.mips-stream.1bbe74"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."de" = [[0x1bbe74, 0x1bbe80]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/2" }]
+
+[blob."leftover.de.mips-stream.1bce88"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."de" = [[0x1bce88, 0x1bce94]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/3" }]
+
+[blob."leftover.de.mips-stream.1bceb6"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 10
+rom."de" = [[0x1bceb6, 0x1bcec0]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/4" }]
+
+[blob."leftover.de.mips-stream.1bcee3"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 9
+rom."de" = [[0x1bcee3, 0x1bceec]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/5" }]
+
+[blob."leftover.de.mips-stream.1bcf0e"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 10
+rom."de" = [[0x1bcf0e, 0x1bcf18]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/6" }]
+
+[blob."leftover.de.mips-stream.1bcf3a"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 2
+rom."de" = [[0x1bcf3a, 0x1bcf3c]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/7" }]
+
+[blob."leftover.de.mips-stream.1bd52c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1bd52c, 0x1bd530]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/8" }]
+
+[blob."leftover.de.mips-stream.1be9dc"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1be9dc, 0x1be9e0]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/9" }]
+
+[blob."leftover.de.mips-stream.1bed38"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 8
+rom."de" = [[0x1bed38, 0x1bed40]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/10" }]
+
+[blob."leftover.de.mips-stream.1bfaac"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1bfaac, 0x1bfab0]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/11" }]
+
+[blob."leftover.de.mips-stream.1c1124"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 36
+rom."de" = [[0x1c1124, 0x1c1148]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/12" }]
+
+[blob."leftover.de.mips-stream.1c38c4"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1c38c4, 0x1c38c8]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/13" }]
+
+[blob."leftover.de.mips-stream.1c392c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 24
+rom."de" = [[0x1c392c, 0x1c3944]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/14" }]
+
+[blob."leftover.de.mips-stream.1c3966"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 2
+rom."de" = [[0x1c3966, 0x1c3968]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/15" }]
+
+[blob."leftover.de.mips-stream.1c3cb0"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1c3cb0, 0x1c3cb4]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/16" }]
+
+[blob."leftover.de.mips-stream.1c4e34"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1c4e34, 0x1c4e38]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/17" }]
+
+[blob."leftover.de.mips-stream.1c503c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1c503c, 0x1c5040]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/18" }]
+
+[blob."leftover.de.mips-stream.1c50d0"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."de" = [[0x1c50d0, 0x1c50d4]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/19" }]
 
 [blob."leftover.de.model.136"]
 type = "model"
@@ -44035,6 +44207,249 @@ state = "decoded"
 stored_size = 104
 rom."us" = [[0x50f768, 0x50f7d0]]
 evidence = [{ artifact = "stale-us.json", sha256 = "ad34c25989d073496d848f9ab3e5a45d2d5c626773d85eaee6278c302cf884b4", pointer = "/rows/6" }]
+
+[blob."leftover.us.mips-stream.101000"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 32
+rom."us" = [[0x101000, 0x101020]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/20" }]
+
+[blob."leftover.us.mips-stream.101080"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."us" = [[0x101080, 0x101084]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/21" }]
+
+[blob."leftover.us.mips-stream.1010b8"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 24
+rom."us" = [[0x1010b8, 0x1010d0]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/22" }]
+
+[blob."leftover.us.mips-stream.101100"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x101100, 0x10110c]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/23" }]
+
+[blob."leftover.us.mips-stream.10114c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 40
+rom."us" = [[0x10114c, 0x101174]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/24" }]
+
+[blob."leftover.us.mips-stream.1011e0"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 4
+rom."us" = [[0x1011e0, 0x1011e4]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/25" }]
+
+[blob."leftover.us.mips-stream.1012d0"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 5
+rom."us" = [[0x1012d0, 0x1012d5]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/26" }]
+
+[blob."leftover.us.mips-stream.101308"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 44
+rom."us" = [[0x101308, 0x101334]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/27" }]
+
+[blob."leftover.us.mips-stream.101356"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 2
+rom."us" = [[0x101356, 0x101358]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/28" }]
+
+[blob."leftover.us.mips-stream.10137c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 7
+rom."us" = [[0x10137c, 0x101383]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/29" }]
+
+[blob."leftover.us.mips-stream.1013ac"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."us" = [[0x1013ac, 0x1013bc]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/30" }]
+
+[blob."leftover.us.mips-stream.101428"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x101428, 0x101434]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/31" }]
+
+[blob."leftover.us.mips-stream.101460"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."us" = [[0x101460, 0x101477]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/32" }]
+
+[blob."leftover.us.mips-stream.1014a0"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x1014a0, 0x1014ac]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/33" }]
+
+[blob."leftover.us.mips-stream.1014d8"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 59
+rom."us" = [[0x1014d8, 0x101513]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/34" }]
+
+[blob."leftover.us.mips-stream.10153c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x10153c, 0x101548]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/35" }]
+
+[blob."leftover.us.mips-stream.101574"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 8
+rom."us" = [[0x101574, 0x10157c]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/36" }]
+
+[blob."leftover.us.mips-stream.1015a8"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 44
+rom."us" = [[0x1015a8, 0x1015d4]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/37" }]
+
+[blob."leftover.us.mips-stream.1015f6"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 2
+rom."us" = [[0x1015f6, 0x1015f8]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/38" }]
+
+[blob."leftover.us.mips-stream.10161c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 7
+rom."us" = [[0x10161c, 0x101623]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/39" }]
+
+[blob."leftover.us.mips-stream.10164c"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 16
+rom."us" = [[0x10164c, 0x10165c]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/40" }]
+
+[blob."leftover.us.mips-stream.1016c8"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x1016c8, 0x1016d4]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/41" }]
+
+[blob."leftover.us.mips-stream.101700"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 23
+rom."us" = [[0x101700, 0x101717]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/42" }]
+
+[blob."leftover.us.mips-stream.101740"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x101740, 0x10174c]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/43" }]
+
+[blob."leftover.us.mips-stream.101778"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 59
+rom."us" = [[0x101778, 0x1017b3]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/44" }]
+
+[blob."leftover.us.mips-stream.1017dc"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 12
+rom."us" = [[0x1017dc, 0x1017e8]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/45" }]
+
+[blob."leftover.us.mips-stream.101814"]
+type = "leftover"
+format = "mips-stream"
+codec = "none"
+state = "decoded"
+stored_size = 32
+rom."us" = [[0x101814, 0x101834]]
+evidence = [{ artifact = "stale-code-de-us.json", sha256 = "99627e3a360fb4c61ded54943f9621a965a2e6a10ccf8a3d8bfc959aa12225e8", pointer = "/rows/46" }]
 
 [blob."leftover.us.sn-debug.1028f4"]
 type = "leftover"
