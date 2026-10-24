@@ -3,7 +3,6 @@
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
 
-#ifdef NON_MATCHING
 #include "COMMON/MENURECAT24.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
@@ -13,29 +12,33 @@
    channel: with D_80153780 set it loads the block D_800E28BC points to onto the player found at
    D_80145040 - the 0x18 Block70 into the player's 0x5E0 block, the 352 words at 0x88 into the option
    block D_801462C8 plus the word at its 0x580 (keeping the byte D_80146848 there), the four floats at
-   0x8 into D_801468A0, D_801427E4, D_801427E8 and D_801427EC, the word at D_8011FE88+0x44 as a byte
+   0x8 (the game clock) into D_801468A0, D_801427E4, D_801427E8 and D_801427EC, the word at D_8011FE88+0x44 as a byte
    count for the block at 0x60C copied into D_800F91F0 - then shows the D_0044EAE0 prompt through
    Pak_OpenDialog; otherwise it retries Pak_DeleteNote on note D_8014D4FC and shows the
    D_0044EB70/D_0044EBDC result. func_80409144_de's state 4 flow with the load path added; returns 1. */
 
-struct PakLoadBlock_func_80408870_de {
+/* The persistent options block: the first 0x584 bytes of Shared_Game (D_801462C8). */
+typedef struct PakSavedOptions {
+    s32 words[353];
+} PakSavedOptions;
+
+struct PakSaveBlock {
     char pad0[0x8];
-    f32 view8;
-    f32 viewC;
-    f32 view10;
-    f32 view14;
+    f32 ticks; /* the saved game clock, restored into D_801462C8.counters */
+    f32 seconds;
+    f32 minutes;
+    f32 hours;
     Block70 block18;
-    s32 gameWords[353];
+    PakSavedOptions options;
     u8 notes[0x1000];
 };
 
-struct PakLoadOwner_func_80408870_de {
+struct PakSaveOwner {
     char pad0[0x5E0];
     Block70 block;
     char pad650[0x698 - 0x650];
     void *slot698;
 };
-
 
 extern s32 D_8015375C;
 extern s32 D_80153780;
@@ -45,40 +48,28 @@ extern char D_8014561C[];
 extern s32 D_80140FB4[];
 extern s32 D_801462CC;
 extern s32 D_8013B2D4;
-extern u8 D_80146848;
-extern f32 D_801427E4;
-extern f32 D_801427E8;
-extern f32 D_801427EC;
-extern char D_800F91F0[];
-extern struct PakLoadBlock_func_80408870_de *D_800E28BC;
+extern u8 D_80146848[]; /* D_801462C8+0x580, kept across the options reload */
+/* The ROM stores the clock's seconds/minutes/hours through three separate objects (no shared base
+   register, each store ordered after the block load), not through D_801462C8.counters. */
+extern f32 D_801427E4[];
+extern f32 D_801427E8[];
+extern f32 D_801427EC[];
+extern u8 D_800F91F0[];
+extern struct PakSaveBlock *D_800E28BC;
 
 extern s32 func_80406178_de(MenuRecAt24 *menu, s32 ch, s32 quiet);
 extern s32 Pak_DeleteNote(s32 ch, s32 index);
-extern struct PakLoadOwner_func_80408870_de *func_8022A5C0_de(char *profiles, PakMenuSlot *slot);
+extern struct PakSaveOwner *func_8022A5C0_de(char *profiles, PakMenuSlot *slot);
 extern void Pak_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
 
-s32 func_80408870_de(void *unused, MenuRecAt24 *menu) {
-    struct PakLoadOwner_func_80408870_de *owner;
-    Shared_World *world;
+s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
+    struct PakSaveOwner *owner;
     s32 channel;
-    s32 indexWord;
-    u8 keepByte;
-    s32 *src;
-    s32 *stop;
-    s32 *dst;
-    s32 w0;
-    s32 w1;
-    s32 w2;
-    s32 w3;
-    u8 *noteSrc;
-    u8 *noteDst;
-    u8 noteByte;
-    s32 copied;
-    void *callOwner;
-    char *message;
-    void *callPlayer;
-    void *callSlot;
-    char *callTitle;
+    Shared_World *world;
+    u8 kept;
+    u8 *src;
+    u8 *dst;
+    s32 i;
 
     if (D_8015375C != 0) {
         channel = D_800E28C8;
@@ -92,81 +83,30 @@ s32 func_80408870_de(void *unused, MenuRecAt24 *menu) {
     if (D_80153780 != 0) {
         owner = func_8022A5C0_de(D_80145040, menu->slot);
         world = &D_8011FE88;
-        keepByte = D_80146848;
-        src = D_800E28BC->block18.w;
-        stop = &D_800E28BC->block18.w[28];
-        dst = owner->block.w;
-        while (src != stop) {
-            w0 = src[0];
-            w1 = src[1];
-            w2 = src[2];
-            w3 = src[3];
-            dst[0] = w0;
-            dst[1] = w1;
-            dst[2] = w2;
-            dst[3] = w3;
-            src = src + 4;
-            dst = dst + 4;
-        }
-        src = D_800E28BC->gameWords;
-        stop = &D_800E28BC->gameWords[352];
-        dst = (s32 *)&D_801462C8;
-        while (src != stop) {
-            w0 = src[0];
-            w1 = src[1];
-            w2 = src[2];
-            w3 = src[3];
-            dst[0] = w0;
-            dst[1] = w1;
-            dst[2] = w2;
-            dst[3] = w3;
-            src = src + 4;
-            dst = dst + 4;
-        }
-        *dst = *src;
-        D_801462C8.counters.ticks = D_800E28BC->view8;
-        D_801427E4 = D_800E28BC->viewC;
-        indexWord = D_801462CC;
-        D_801427E8 = D_800E28BC->view10;
-        copied = 0;
-        D_801427EC = D_800E28BC->view14;
-        D_8013B2D4 = indexWord;
-        D_80146848 = keepByte;
-        if (world->noteCount > 0) {
-            noteSrc = &D_800E28BC->notes[0];
-            noteDst = D_800F91F0;
-            do {
-                noteByte = *noteSrc;
-                noteSrc = noteSrc + 1;
-                copied = copied + 1;
-                *noteDst = noteByte;
-                noteDst = noteDst + 1;
-            } while (copied < world->noteCount);
+        kept = D_80146848[0];
+        owner->block = D_800E28BC->block18;
+        *(PakSavedOptions *)&D_801462C8 = D_800E28BC->options;
+        D_801462C8.counters.ticks = D_800E28BC->ticks;
+        D_801427E4[0] = D_800E28BC->seconds;
+        D_801427E8[0] = D_800E28BC->minutes;
+        D_801427EC[0] = D_800E28BC->hours;
+        D_8013B2D4 = D_801462CC;
+        D_80146848[0] = kept;
+        src = D_800E28BC->notes;
+        dst = D_800F91F0;
+        for (i = 0; i < world->noteCount; i++) {
+            *dst++ = *src++;
         }
         D_80140FB4[0] = 0;
         D_80140FB4[1] = 0;
-        callOwner = D_80140FB4 + 0x16A;
-        message = D_0044EAE0;
-        callPlayer = owner;
-        callSlot = owner->slot698;
-        callTitle = 0;
+        Pak_OpenDialog(&D_80140FB4[0x16A], D_0044EAE0, owner, owner->slot698, 0);
+    } else if (Pak_DeleteNote(channel, D_8014D4FC) == 0) {
+        Pak_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
     } else {
-        if (Pak_DeleteNote(channel, D_8014D4FC) == 0) {
-            message = D_0044EB70;
-        } else {
-            message = D_0044EBDC;
-        }
-        callOwner = D_8014561C;
-        callPlayer = menu->player;
-        callSlot = menu->slot;
-        callTitle = menu->prompt;
+        Pak_OpenDialog(D_8014561C, D_0044EBDC, menu->player, menu->slot, menu->prompt);
     }
-    Pak_OpenDialog(callOwner, message, callPlayer, callSlot, callTitle);
     return 1;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80408870_de);
-#endif
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
 /* Writes the 11-character rank title for the score D_8014D48C into the end of the item's text:
