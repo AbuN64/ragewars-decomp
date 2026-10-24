@@ -218,7 +218,6 @@ extern int D_8014D970;
 extern int D_80154034;
 extern struct Triple D_80150008;
 extern struct ResourceManagerState D_8015000C;
-extern int D_80150010;
 extern void * D_80150018;
 extern signed char D_801500E6;
 extern int D_80150100;
