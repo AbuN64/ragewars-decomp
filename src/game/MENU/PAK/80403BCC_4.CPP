@@ -17,7 +17,7 @@ extern s32 *D_8011FEFC;
 
 
 
-extern int D_800E0B2C;
+extern char D_800E0B2C[];
 
 extern void *func_8028FE3C_de(int, int, int, int *);
 
@@ -46,7 +46,7 @@ int func_80403BE0_de(void) {
     if (res == 0) {
         return 0;
     }
-    return func_8025193C_de(0, res, res, size, 0x33, 0, 0, &D_800E0B2C, 1);
+    return func_8025193C_de(0, res, res, size, 0x33, 0, 0, D_800E0B2C, 1);
 }
 
 f32 func_80403C58_de(f32 from, f32 to, f32 t) {

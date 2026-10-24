@@ -28,11 +28,11 @@ void func_8024F294_de(struct ObjB *object, s32 unused) {
     s32 index;
     index = obj->type;
     if (index != obj->loadedType) {
-        resource = func_8025193C_de(0, obj->model, obj->model, 0x18, 0, 0, 0, &D_800C3DAC_de, 1);
+        resource = func_8025193C_de(0, obj->model, obj->model, 0x18, 0, 0, 0, D_800C3DAC_de, 1);
         if (resource != 0) {
             key = func_8028FE28_de(*resource, obj->model, 1);
             func_80253838_de(0, resource);
-            found = func_802540F4_de(0, &header, key, &D_800C3DC0_de, 1);
+            found = func_802540F4_de(0, &header, key, D_800C3DC0_de, 1);
             if (found != 0) {
                 table = header;
                 obj->resourceName = func_8028FE3C_de(table, key, index % table[0], &obj->resourceSize);
@@ -42,7 +42,7 @@ void func_8024F294_de(struct ObjB *object, s32 unused) {
         }
     }
     if (obj->resourceName != 0) {
-        resource = func_8025193C_de(0, obj->resourceName, obj->resourceName, obj->resourceSize, 0, 0, &D_0026D7F4, &D_800C3DD4_de, 0);
+        resource = func_8025193C_de(0, obj->resourceName, obj->resourceName, obj->resourceSize, 0, 0, &D_0026D7F4, D_800C3DD4_de, 0);
     } else {
         resource = 0;
     }

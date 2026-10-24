@@ -24,7 +24,7 @@ extern s32 D_800CD3F0;
 
 extern char D_00250C2C;
 
-extern char D_800C3E40_de;
+extern char D_800C3E40_de[];
 
 void func_80250274_de(void *);
 
@@ -60,7 +60,7 @@ void func_802509A8_de(void *owner) {
         temp_v0 = func_802507AC_de(owner, o->variant);
         if (temp_v0 != 0) {
             func_8026E158_de((void **) temp_v0);
-            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, owner, &D_00250C2C, &D_800C3E40_de, 0);
+            ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, owner, &D_00250C2C, D_800C3E40_de, 0);
             if (ret2 != 0) {
                 func_80253754_de(0, (s32)ret2);
             }
@@ -110,7 +110,7 @@ s32 *func_80250B24_de(void *prop, s32 model, s32 arg2, s32 *nextResource) {
         o->loadedResource = temp_v0;
         *var_s1 = (s32) temp_v0;
         var_s1 = func_8026E27C_de(temp_v0, model, var_s1 + 1);
-        ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, prop, &D_00250C2C, &D_800C3E40_de, 1);
+        ret2 = func_80251F6C_de(0, o->registrationFlags | D_800CD3F0, temp_v0, (CachedResource *)o->resource, 8, prop, &D_00250C2C, D_800C3E40_de, 1);
         if (ret2 != 0) {
             *var_s1 = (s32)ret2;
             var_s1 += 1;
@@ -150,7 +150,7 @@ void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 remaining, 
         return;
     }
     resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
-                             &D_800C3E40_de, 0);
+                             D_800C3E40_de, 0);
     if (resource != 0) {
         func_80253BBC_de(0, (s32)resource);
         header = (s32 *)resource->data;

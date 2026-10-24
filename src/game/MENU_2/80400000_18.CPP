@@ -27,7 +27,7 @@ extern s32 *D_8011FEFC;
 
 extern s32 D_8011BDFC;
 
-extern char D_800E0B2C;
+extern char D_800E0B2C[];
 
 extern s32 func_8028FE3C_de(s32 *, s32, s32, s32 *);
 
@@ -68,7 +68,7 @@ void func_80402FB4_de(struct SharedTrackObject *owner, func_8020478C_S1 *obj) {
         if (key == 0) {
             table = 0;
         } else {
-            table = func_8025193C_de(0, key, key, size, 0x33, 0, 0, &D_800E0B2C, 1);
+            table = func_8025193C_de(0, key, key, size, 0x33, 0, 0, D_800E0B2C, 1);
         }
         n = *D_8011FEFC - 1;
         entry = (EntryRecAt4V2 *)(*table + 2);
@@ -102,7 +102,7 @@ s32 func_804030E0_de(s32 key) {
     if (loaded == 0) {
         table = 0;
     } else {
-        table = func_8025193C_de(0, loaded, loaded, size, 0x33, 0, 0, &D_800E0B2C, 1);
+        table = func_8025193C_de(0, loaded, loaded, size, 0x33, 0, 0, D_800E0B2C, 1);
     }
     i = 0;
     entries = (EntryRecAt48 *)(*table + 2);
@@ -137,7 +137,7 @@ void func_80403200_de(char *name) {
         if (loaded == 0) {
             table = 0;
         } else {
-            table = func_8025193C_de(0, loaded, loaded, size, 0x33, 0, 0, &D_800E0B2C, 1);
+            table = func_8025193C_de(0, loaded, loaded, size, 0x33, 0, 0, D_800E0B2C, 1);
         }
         i = 0;
         entries = (EntryRecAt18V5 *)(*table + 2);

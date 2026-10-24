@@ -412,7 +412,7 @@ scene_size_done:
     (((struct SharedRecAt1B92C *)(table))->unkE8) = (void *)temp_v0_4;
     Items_InitEntryBatch(&((struct SharedRecAt1B92C *)table)->address128, temp_v0_4->field_0, count);
     resourceKey = func_8028FE28_de((((struct SharedRecAt1B92C *)(table))->unk4C), (((struct SharedRecAt1B92C *)(table))->unk1C), var_s6);
-    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk60, resourceKey, &D_800C5110_de);
+    (((struct SharedRecAt1B92C *)(table))->unkB8) = func_80254284_de(0, &((struct SharedRecAt1B92C *)table)->unk60, resourceKey, D_800C5110_de);
     temp_v0_6 = func_80254408_de(0, (((struct SharedRecAt1B92C *)(table))->unk60), 1, resourceKey, table, &D_0044C3D4, &D_800C511C_de);
     (((struct SharedRecAt1B92C *)(table))->unkBC) = temp_v0_6;
     (((struct SharedRecAt1B92C *)(table))->unk6C) = (void *) *temp_v0_6;

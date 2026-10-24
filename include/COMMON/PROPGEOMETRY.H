@@ -334,7 +334,7 @@ struct func_8024EF18_S1;
 typedef struct func_8024EF18_S1 func_8024EF18_S1;
 
 extern char D_0024F8DC;
-extern char D_800C3DAC_de;
+extern char D_800C3DAC_de[];
 extern char D_800C8ED0;
 
 typedef struct ResourceOwner { u8 pad0[0x1c]; s32 key; u8 pad20[0x88]; s32 index; s32 selected; s32 size; void *resource; } ResourceOwner;

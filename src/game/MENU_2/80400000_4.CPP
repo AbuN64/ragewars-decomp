@@ -29,7 +29,7 @@ static inline char *packAppend(Pack *pack,void *prepare,s32 size) { return func_
 
 static inline s32 splineRecordSize(s32 left,s32 right) { s32 a=left*9,b=right*9; return (b+a)*4+48; }
 
-extern char D_800E0B2C;
+extern char D_800E0B2C[];
 
 extern s32 func_8028FE3C_de(void *,s32,s32,s32 *);
 
@@ -178,7 +178,7 @@ s32 func_804009F4_de(s32 index) {
         previous=D_800E2830->spec.id8;
         loaded=func_8028FE3C_de(D_8011FEFC,D_8011BDFC,0,&size2);
         if(loaded==0)table=0;
-        else table=func_8025193C_de(0,loaded,loaded,size2,0x33,0,0,&D_800E0B2C,1);
+        else table=func_8025193C_de(0,loaded,loaded,size2,0x33,0,0,D_800E0B2C,1);
          {
             Shared_TrackTable *entries=*table;
             EntryRecAt48 *base=entries->entries;

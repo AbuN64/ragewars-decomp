@@ -54,6 +54,7 @@
 #include "COMMON/OBJB.H"
 extern char D_800C93D8_de;
 
+extern char D_800CDD10;
 extern char D_00450884[];
 
 extern char *D_800D3554;
@@ -192,7 +193,7 @@ extern char D_800D3B7C[];
 
 extern char D_800D39B4[];
 
-extern char D_800C3E40_de;
+extern char D_800C3E40_de[];
 
 extern Entry802AB8DC D_800CC134[];
 
@@ -276,7 +277,7 @@ extern FieldRow D_800E5714[];
 
 extern char D_0044E4D4[];
 
-extern char D_800C52BC;
+extern char D_800C52BC[];
 
 extern const f64 D_800C7700_de;
 
@@ -781,7 +782,7 @@ extern struct Shape_typemap_165 *D_800DE864_de;
 
 extern char D_800E62DC[];
 
-extern s32 D_800C5110_de;
+extern char D_800C5110_de[];
 
 extern void func_804397F0_auto(char *);
 
@@ -874,7 +875,7 @@ extern char D_00450F74[];
 
 extern Texture *D_800DF254;
 
-extern char D_800C3DC0_de;
+extern char D_800C3DC0_de[];
 
 extern char D_800D76C8;
 
@@ -1163,7 +1164,7 @@ extern FieldRow D_800E53C8[];
 
 extern s32 D_800E3334;
 
-extern char D_800C2BC0_de;
+extern char D_800C2BC0_de[];
 
 extern func_8020CA10_G1 D_800C2C48_de;
 
@@ -1215,7 +1216,6 @@ extern char D_00450B3C;
 
 extern s32 D_0022ED24;
 
-extern char D_800CDD10;
 
 extern struct 
 {
@@ -1299,7 +1299,7 @@ extern s32 D_800D5260;
 
 extern char D_0044ED20[];
 
-extern char D_800C5290_de;
+extern char D_800C5290_de[];
 
 extern char D_800CE7E4;
 
@@ -1612,7 +1612,7 @@ extern char *D_800E1DE4[];
 
 extern FieldRow D_800E4568[];
 
-extern char D_800C3DD4_de;
+extern char D_800C3DD4_de[];
 
 extern void D_002BA4C0(void *arg);
 

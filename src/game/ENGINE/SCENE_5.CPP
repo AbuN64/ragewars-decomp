@@ -578,7 +578,7 @@ static inline void copyLevelName(Shared_World *world, s32 level, char *out, s32 
     s32 length;
 
     entry = func_8028FE28_de(world->resourceDirectory, world->resourceBank, level);
-    bank = func_80254284_de(0, &handle, entry, &D_800C5110_de);
+    bank = func_80254284_de(0, &handle, entry, D_800C5110_de);
     name = func_80254408_de(0, handle, 8, entry, world, 0, D_800C5284_de);
     length = name->length;
     if (limit < length) {
@@ -603,12 +603,12 @@ static inline LevelChallenge *findLevelChallenge(Shared_World *world, s32 level)
             mode = 0x10;
             direct = 1;
             index = func_8025193C_de(0, world->challengeFile, world->challengeFile, world->challengeFileSize, mode,
-                                     0, 0, &D_800C5290_de, direct);
+                                     0, 0, D_800C5290_de, direct);
             if (index != 0) {
                 file = func_8028FE3C_de((s32)*index, world->challengeFile, level, &size);
                 func_80253838_de(0, index);
                 if ((world->resourceHandle =
-                         func_8025193C_de(0, file, file, size, mode, 0, D_00285160, &D_800C52BC, direct)) == 0) {
+                         func_8025193C_de(0, file, file, size, mode, 0, D_00285160, D_800C52BC, direct)) == 0) {
                     goto missing;
                 }
                 world->resourceKey = level;

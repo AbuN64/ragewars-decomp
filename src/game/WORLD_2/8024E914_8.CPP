@@ -130,8 +130,8 @@ extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
 
 extern char D_0026D7F4;
 extern char D_800C3DA8_de;
-extern char D_800C3DC0_de;
-extern char D_800C3DD4_de;
+extern char D_800C3DC0_de[];
+extern char D_800C3DD4_de[];
 
 void **func_8024F6EC_de(void *arg0, s32 arg1) {
     void *sp28;
@@ -146,7 +146,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
         if (resource != 0) {
             key = func_8028FE28_de(*resource, ((Access_s32_50 *)(arg0))->field, 1);
             func_80253838_de(0, resource);
-            found = func_802540F4_de(0, &sp28, key, &D_800C3DC0_de, 1);
+            found = func_802540F4_de(0, &sp28, key, D_800C3DC0_de, 1);
             if (found != 0) {
                 ((StaticObject *)(arg0))->resource = func_8028FE3C_de((s32)sp28, key,
                                                     arg1 % *(s32 *)sp28,
@@ -159,7 +159,7 @@ void **func_8024F6EC_de(void *arg0, s32 arg1) {
     if (((StaticObject *)(arg0))->resource != 0) {
         return func_8025193C_de(0, ((StaticObject *)(arg0))->resource,
                              ((StaticObject *)(arg0))->resource, ((Access_s32_5C *)(arg0))->field,
-                             0, 0, &D_0026D7F4, &D_800C3DD4_de, 0);
+                             0, 0, &D_0026D7F4, D_800C3DD4_de, 0);
     }
     return 0;
 }

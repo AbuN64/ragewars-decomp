@@ -114,7 +114,7 @@ void func_8028D380_de(Shared_World *world, s32 type, void *levelName, s32 arg3) 
     s32 count;
 
     tempv0 = func_8028FE28_de(world->resourceDirectory, world->resourceBank, type);
-    temps2 = func_80254284_de(0, &specialTable, tempv0, &D_800C5110_de);
+    temps2 = func_80254284_de(0, &specialTable, tempv0, D_800C5110_de);
     node = func_80254408_de(0, specialTable, 8, tempv0, (s32)world, 0, &D_800C5280_de + 4);
     count = node->unk04;
     if (arg3 < count) {
@@ -142,14 +142,14 @@ void *func_8028D474_de(void *world, s32 record) {
             resource = func_8025193C_de(0, ((struct MeasuredRecAtCV4 *)(world))->value,
                                      ((struct MeasuredRecAtCV4 *)(world))->value,
                                      ((struct MeasuredRecAt10V1 *)(world))->value, size, 0, 0,
-                                     &D_800C5290_de, one);
+                                     D_800C5290_de, one);
             if (resource != 0) {
                 key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV4 *)(world))->value,
                                     record, &sp28);
                 func_80253838_de(0, resource);
                 if ((((struct MeasuredRecAt14V1 *)(world))->value =
                      func_8025193C_de(0, key, key, sp28, size, 0,
-                                   &D_00285160, &D_800C52BC, one)) != 0) {
+                                   &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = record;
                 } else {
                     return 0;
@@ -334,14 +334,14 @@ void func_8028D964_de(void *world, s32 arg1) {
             resource = func_8025193C_de(0, ((struct MeasuredRecAtCV3 *)(world))->value,
                                      ((struct MeasuredRecAtCV3 *)(world))->value,
                                      ((struct MeasuredRecAt10V2 *)(world))->value, size, 0, 0,
-                                     &D_800C5290_de, one);
+                                     D_800C5290_de, one);
             if (resource != 0) {
                 key = func_8028FE3C_de((s32)*resource, ((struct MeasuredRecAtCV3 *)(world))->value,
                                     arg1, &sp28);
                 func_80253838_de(0, resource);
                 if ((((struct MeasuredRecAt14V6 *)(world))->value =
                      func_8025193C_de(0, key, key, sp28, size, 0,
-                                   &D_00285160, &D_800C52BC, one)) != 0) {
+                                   &D_00285160, D_800C52BC, one)) != 0) {
                     ((struct MeasuredCode8028B64C *)(world))->value = arg1;
                 }
             }

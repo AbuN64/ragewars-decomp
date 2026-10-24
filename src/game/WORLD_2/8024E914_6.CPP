@@ -63,9 +63,9 @@ extern char D_0026D7F4;
 
 extern char D_800C3DA8_de;
 
-extern char D_800C3DC0_de;
+extern char D_800C3DC0_de[];
 
-extern char D_800C3DD4_de;
+extern char D_800C3DD4_de[];
 
 void func_8024ED90_de(Actor_func_8024ED90_de *actor, void **resource) {
     CVector3 position;
@@ -135,7 +135,7 @@ void func_8024F108_de(StaticObject *staticObject) {
         if (resource != 0) {
             key = func_8028FE28_de(*resource, staticObject->animationKey, 1);
             func_80253838_de(0, resource);
-            found = func_802540F4_de(0, &sp28, key, &D_800C3DC0_de, 1);
+            found = func_802540F4_de(0, &sp28, key, D_800C3DC0_de, 1);
             if (found != 0) {
                 staticObject->resource = func_8028FE3C_de((s32)sp28, key,
                                                     index % *(s32 *)sp28,
@@ -148,7 +148,7 @@ void func_8024F108_de(StaticObject *staticObject) {
     if (staticObject->resource != 0) {
         resource = func_8025193C_de(0, staticObject->resource,
                                 staticObject->resource, staticObject->resourceSize,
-                                0, 0, &D_0026D7F4, &D_800C3DD4_de, 0);
+                                0, 0, &D_0026D7F4, D_800C3DD4_de, 0);
     } else {
         resource = 0;
     }

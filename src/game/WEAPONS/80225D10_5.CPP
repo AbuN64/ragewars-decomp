@@ -352,7 +352,7 @@ void func_80228798_de(void *arg0, void *view) {
                                 0, ((ObjRecAt1D8V3 *)(actor))->unkC4,
                                 ((ObjRecAt1D8V3 *)(actor))->unkC4,
                                 ((ObjRecAt1D8V3 *)(actor))->unkD0,
-                                4, 0, 0, &D_800C2BC0_de, 1);
+                                4, 0, 0, D_800C2BC0_de, 1);
                             if (resource != 0) {
                                 void *linked;
                                 void *temp;
@@ -385,7 +385,7 @@ generic:
                             0, ((ObjRecAt16E0V2 *)(node))->unkC4,
                             ((ObjRecAt16E0V2 *)(node))->unkC4,
                             ((ObjRecAt16E0V2 *)(node))->unkD0,
-                            4, 0, 0, &D_800C2BC0_de, 1);
+                            4, 0, 0, D_800C2BC0_de, 1);
                         if (resource != 0) {
                             func_8024B4F4_de(node, (s32)func_8028FDB4_de(*(void **)resource, 0));
                             func_80253754_de(0, (s32)resource);

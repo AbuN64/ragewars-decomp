@@ -176,7 +176,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
     instance = func_802507AC_de(owner, key);
     if (instance != 0) {
         resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
-                                 &D_800C3E40_de, 0);
+                                 D_800C3E40_de, 0);
         if (resource != 0) {
             func_80253BBC_de(0, resource);
             header = (s32 *)resource->data;
@@ -221,7 +221,7 @@ void func_802504B0_de(ModelOwner *owner) {
         return;
     }
     resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
-                             &D_800C3E40_de, 0);
+                             D_800C3E40_de, 0);
     if (resource != 0) {
         func_80253BBC_de(0, resource);
         header = (s32 *)resource->data;
