@@ -27,7 +27,7 @@ s32 func_802BD170_de(s32);
 extern s32 func_802B3130_de(ALSynth_func_802B3000_de *, PVoice_s_func_802B3000_de **, s16);
 
  /* _allocatePVoice */
-extern ALParam_s_func_802B3000_de *__allocParam(void);
+extern ALParam_s_func_802B3000_de *Audio_AllocParam(void);
 
 void alSynAddPlayer(void *arg0, void *arg1) {
     s32 temp_v0;
@@ -63,14 +63,14 @@ s32 func_802B3000_de(ALSynth_func_802B3000_de *drvr, ALVoice_s_func_802B3000_de 
             pvoice->offset = 512;
             pvoice->vvoice->pvoice = 0;
 
-            update = __allocParam();
+            update = Audio_AllocParam();
             update->delta = drvr->paramSamples;
             update->type = 11; /* AL_FILTER_SET_VOLUME */
             update->data.i = 0;
             update->moredata.i = pvoice->offset - 64;
             (*f->setParam)(f, 3, update); /* AL_FILTER_ADD_UPDATE */
 
-            update = __allocParam();
+            update = Audio_AllocParam();
             if (update) {
                 update->delta = drvr->paramSamples + pvoice->offset;
                 update->type = 15; /* AL_FILTER_STOP_VOICE */

@@ -556,7 +556,7 @@ typedef struct _sm_texture_element {
 
 /* One cached glyph image (44 bytes). */
 typedef struct t_char {
-    s32 __Unused;
+    s32 unusedGlyphWord;
     s32 CharTimer;
     u16 SMFlags;
     struct OwnedImage Vram;

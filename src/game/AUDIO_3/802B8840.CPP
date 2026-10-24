@@ -184,7 +184,7 @@ Acmd *func_802B3A44_de(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen)
     return cmdlEnd;
 }
 
-void *__allocParam(void) {
+void *Audio_AllocParam(void) {
     void *head;
     void *param;
 
@@ -198,7 +198,7 @@ void *__allocParam(void) {
     return param;
 }
 
-void __freeParam(void *arg0) {
+void Audio_FreeParam(void *arg0) {
     struct ALParam_s1C *parameter = arg0;
     ALGlobals *head = D_800D4070;
     parameter->next = head->drvr.paramList;

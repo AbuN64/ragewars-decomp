@@ -23,7 +23,7 @@
 
 
 
-extern Node_func_80239AF4_de *__allocParam(void);          /* __allocParam */
+extern Node_func_80239AF4_de *Audio_AllocParam(void);          /* __allocParam */
 extern s32 func_802B3CD0_de(ALSynth_func_802B3000_de *, s32);     /* _timeToSamples */
 
 void func_802B35E0_de(ALSynth_func_802B3000_de *s, ALVoice_s_func_802B3000_de *v, void *w, f32 pitch, s16 vol, u8 pan, s8 fxmix, s32 t)
@@ -32,7 +32,7 @@ void func_802B35E0_de(ALSynth_func_802B3000_de *s, ALVoice_s_func_802B3000_de *v
     ALFilter_s_func_802B3000_de *f;
 
     if (v->pvoice) {
-        update = (ALStartParamAlt *)__allocParam();
+        update = (ALStartParamAlt *)Audio_AllocParam();
         if (update == 0) { return; };
 
         if (fxmix < 0) {

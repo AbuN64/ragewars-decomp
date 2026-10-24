@@ -230,8 +230,8 @@ struct Shared_GlobalPlayers {
 };
 typedef char Shared_GlobalPlayers_size_check[(sizeof(Shared_GlobalPlayers) == 0x24) ? 1 : -1];
 
-typedef struct Shared__struct_D_800D34C0_0x18 Shared__struct_D_800D34C0_0x18;
-struct Shared__struct_D_800D34C0_0x18 {
+typedef struct Shared_struct_D_800D34C0_0x18 Shared_struct_D_800D34C0_0x18;
+struct Shared_struct_D_800D34C0_0x18 {
     char pad0[4];
     s16 id; /* 0x04, lookup key */
     char pad6[6];
@@ -240,7 +240,7 @@ struct Shared__struct_D_800D34C0_0x18 {
     s16 unk10; /* +0x10: src/func_8021B468.c */
     char pad12[0x6];
 };
-typedef char Shared__struct_D_800D34C0_0x18_size_check[(sizeof(Shared__struct_D_800D34C0_0x18) == 0x18) ? 1 : -1];
+typedef char Shared_struct_D_800D34C0_0x18_size_check[(sizeof(Shared_struct_D_800D34C0_0x18) == 0x18) ? 1 : -1];
 
 typedef struct Shared_HeightBonuses Shared_HeightBonuses;
 struct Shared_HeightBonuses {

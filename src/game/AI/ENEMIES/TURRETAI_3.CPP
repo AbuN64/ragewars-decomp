@@ -35,10 +35,10 @@ f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2);
 typedef union NavRider { RiderRecAt130V1 target; Rider rider; struct { char pad0[0x9C]; f32 heading; char padA0[0x124-0xA0]; f32 speed; char pad128[8]; CVector3 aim; } nav; } NavRider;
 
 /* Callers reserve a 136-byte result workspace shared by both target searches. */
-extern CQuatern CVector3__GetDirectionRotation2(CVector3 *dir);
+extern CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 extern f32 D_800C6B30;
 static inline void navRotation(CQuatern *q,CVector3 *aim) {
-    ((void (*)(CQuatern *,CVector3 *))CVector3__GetDirectionRotation2)(q,aim); }
+    ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
 static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { func_80271F68_de(local,to,from); func_80272BCC_de(matrix,local,out); }
@@ -175,7 +175,7 @@ s32 Turret_BuildPlaneRot(s32 out, s32 actor, struct RotationObject *rotation) {
     angles[0] = rotation->angleX;
     angles[1] = rotation->angleY;
     angles[2] = rotation->angleZ;
-    ((void (*)(s32, f32 *))CVector3__GetDirectionRotation2)(out, angles);
+    ((void (*)(s32, f32 *))CVector3_GetDirectionRotation2)(out, angles);
     return out;
 }
 void Turret_Construct(struct OwnerRecAtE4 *owner, struct RecordRecAt13C *record)

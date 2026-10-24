@@ -11,11 +11,11 @@
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
 
 #ifdef NON_MATCHING
-#define CVector3__GetDirectionRotation2 CVector3__GetDirectionRotation2_value
+#define CVector3_GetDirectionRotation2 CVector3_GetDirectionRotation2_value
 #endif
-extern CQuatern CVector3__GetDirectionRotation2(CVector3 *dir);
+extern CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
-CQuatern CVector3__GetDirectionRotation2(CVector3 *dir);
+CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
 void func_80274098_de(void *, void *, void *);
 
@@ -35,12 +35,12 @@ static inline void alignment_from_rider(f32 *matrix, RiderRecAt130V1 *rider) {
     aim.x = rider->aim.x;
     aim.y = rider->aim.y;
     aim.z = rider->aim.z;
-    q = CVector3__GetDirectionRotation2(&aim);
+    q = CVector3_GetDirectionRotation2(&aim);
     func_80274244_de(&q, matrix);
 }
 
 
-CQuatern CVector3__GetDirectionRotation2(CVector3 *dir) {
+CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
     CQuatern q;
     CVector3 up;
     CVector3 axis;
@@ -109,8 +109,8 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     func_80273D6C_de(&owner->transform);
 }
 #ifdef NON_MATCHING
-#undef CVector3__GetDirectionRotation2
-void CVector3__GetDirectionRotation2(CQuatern *out, CVector3 *dir) {
-    *out = CVector3__GetDirectionRotation2_value(dir);
+#undef CVector3_GetDirectionRotation2
+void CVector3_GetDirectionRotation2(CQuatern *out, CVector3 *dir) {
+    *out = CVector3_GetDirectionRotation2_value(dir);
 }
 #endif

@@ -4,7 +4,7 @@
 #include "sdk/OBJECTSTATE10_5.H"
 #include "TYPES.H"
 
-extern void *__allocParam(void);
+extern void *Audio_AllocParam(void);
 extern s32 func_802B3CD0_de(void *arg0, s32 arg3);
 
 
@@ -24,7 +24,7 @@ void func_802B3480_de(void *arg0, void *arg1, s16 arg2, s32 arg3) {
     SharedRecV10 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B3480_de_v0 = __allocParam();
+        Shared_func_802B3480_de_v0 = Audio_AllocParam();
         if (Shared_func_802B3480_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);
             ((ObjectState14_2 *)(Shared_func_802B3480_de_v0))->unk_8 = 0xB;

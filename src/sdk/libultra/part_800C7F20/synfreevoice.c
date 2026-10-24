@@ -3,7 +3,7 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern void *__allocParam(void);
+extern void *Audio_AllocParam(void);
 extern void _freePVoice(s32 arg0, void *arg1);
 
 
@@ -24,7 +24,7 @@ void alSynFreeVoice(void *arg0, void *arg1) {
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
         if ((((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state) != 0) {
-            Shared_func_802B3200_de_v0 = __allocParam();
+            Shared_func_802B3200_de_v0 = Audio_AllocParam();
             if (Shared_func_802B3200_de_v0 != 0) {
                 new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);
                 ((ObjectLinks10_2 *)(Shared_func_802B3200_de_v0))->unk_8 = 0;

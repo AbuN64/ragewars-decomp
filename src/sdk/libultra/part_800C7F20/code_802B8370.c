@@ -3,7 +3,7 @@
 #include "COMMON/SHAREDRECV4.H"
 #include "TYPES.H"
 
-extern void *__allocParam(void);
+extern void *Audio_AllocParam(void);
 
 
 
@@ -23,7 +23,7 @@ void func_802B32A0_de(void *arg0, void *arg1, s8 arg2) {
     SharedRecV4 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B32A0_de_v0 = __allocParam();
+        Shared_func_802B32A0_de_v0 = Audio_AllocParam();
         if (Shared_func_802B32A0_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);
             ((ObjectState10_3 *)(Shared_func_802B32A0_de_v0))->unk_8 = 0x10;
@@ -42,7 +42,7 @@ void func_802B32A0_de(void *arg0, void *arg1, s8 arg2) {
     }
 }
 
-extern void *__allocParam(void);
+extern void *Audio_AllocParam(void);
 
 
 
@@ -61,7 +61,7 @@ void func_802B3350_de(void *arg0, void *arg1, u8 arg2) {
     SharedRecV5 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B3350_de_v0 = __allocParam();
+        Shared_func_802B3350_de_v0 = Audio_AllocParam();
         if (Shared_func_802B3350_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);
             ((ObjectState10_3 *)(Shared_func_802B3350_de_v0))->unk_8 = 0xC;
@@ -75,7 +75,7 @@ void func_802B3350_de(void *arg0, void *arg1, u8 arg2) {
     }
 }
 
-extern void *__allocParam(void);
+extern void *Audio_AllocParam(void);
 
 
 
@@ -94,7 +94,7 @@ void func_802B33E0_de(void *arg0, void *arg1, f32 arg2) {
     SharedRecV7 fn;
 
     if ((((ObjectStateC_2 *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B33E0_de_v0 = __allocParam();
+        Shared_func_802B33E0_de_v0 = Audio_AllocParam();
         if (Shared_func_802B33E0_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectStateC_2 *) arg1)->unk_8.v1)->state);
             ((ObjectState10_4 *)(Shared_func_802B33E0_de_v0))->unk_8 = 7;

@@ -5,7 +5,7 @@
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/code_802B8370_4.h"
 
-extern void *__allocParam(void);
+extern void *Audio_AllocParam(void);
 
 
 
@@ -24,7 +24,7 @@ void func_802B3540_de(void *arg0, void *arg1, s32 arg2) {
     SharedRecV3 fn;
 
     if ((((ObjectState1C *)(arg1))->unk_8.v0) != 0) {
-        Shared_func_802B3540_de_v0 = __allocParam();
+        Shared_func_802B3540_de_v0 = Audio_AllocParam();
         if (Shared_func_802B3540_de_v0 != 0) {
             new_var = (((struct Shape_typemap_71 *)(arg0))->field_1C) + (((struct IntegerStateDC_2 *) ((ObjectState1C *) arg1)->unk_8.v1)->state);
             ((ObjectState10_5 *)(Shared_func_802B3540_de_v0))->unk_8 = 0xE;

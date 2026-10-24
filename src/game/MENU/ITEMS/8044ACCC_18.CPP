@@ -50,7 +50,7 @@ void func_8044A0C4_de(Player *arg0, s32 arg1) {
     } else if (D_801468F4 != 0 && ((Shared_ControlView *)arg0->profile)->transientFlag != 0) {
         var_a2 = D_800CE47C;
     } else {
-        var_a2 = D_800CE430[((Shared__struct_D_800D34C0_0x18 *)arg0->definition)->unkC];
+        var_a2 = D_800CE430[((Shared_struct_D_800D34C0_0x18 *)arg0->definition)->unkC];
         arg0->playerId = ((Shared_ControlView *)arg0->profile)->playerId;
     }
     ((void (*)(void *, void *, s32, s32))func_8028B274_de)(&D_8011FE88, arg0, var_a2, arg0->animation);

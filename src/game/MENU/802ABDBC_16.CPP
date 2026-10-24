@@ -58,12 +58,12 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
 void *func_802AD0B0_de(s32 arg0) {
     char *v1;
     s32 i;
-    Shared__struct_D_800D34C0_0x18 *record;
+    Shared_struct_D_800D34C0_0x18 *record;
 
     v1 = &D_800D34C0;
     i = 0xF;
     do {
-        record = (Shared__struct_D_800D34C0_0x18 *)v1;
+        record = (Shared_struct_D_800D34C0_0x18 *)v1;
         i -= 1;
         if (record->id != arg0) {
             v1 += 0x18;

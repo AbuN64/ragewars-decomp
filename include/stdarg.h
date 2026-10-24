@@ -3,18 +3,18 @@
 #define STDARG_H
 #include "COMMON/UNUSED.H"
 #if defined(__STDARG_GCC)
-typedef char __stdarg_target[
+typedef char StdargTargetLayout[
     sizeof(int) == 4 && sizeof(long) == 4 && sizeof(long long) == 8 &&
     sizeof(double) == 8 && sizeof(void *) == 4 && sizeof(va_list) == 4 ? 1 : -1];
 extern void *__builtin_next_arg();
 #define va_start(ap, last) ((ap) = (va_list)__builtin_next_arg(last))
-#define __va_alignment(type) (sizeof(struct { char pad; type item; }) - sizeof(type))
+#define STDARG_ALIGNMENT(type) (sizeof(struct { char pad; type item; }) - sizeof(type))
 #ifdef __STRICT_ANSI__
-#define __stdarg_inline
+#define STDARG_INLINE
 #else
-#define __stdarg_inline inline
+#define STDARG_INLINE inline
 #endif
-static __stdarg_inline char *__stdarg_take(va_list *ap, unsigned int size,
+static STDARG_INLINE char *StdargTake(va_list *ap, unsigned int size,
                                                      unsigned int alignment)
 {
     char *slot = (char *)(((unsigned int)*ap + alignment - 1) & -alignment);
@@ -24,29 +24,29 @@ static __stdarg_inline char *__stdarg_take(va_list *ap, unsigned int size,
 /* Keep the expression sequencing boundary of historical GNU va_arg expansion.
  * Inlining a C helper is ABI-equivalent but can reorder an enclosing assignment. */
 #ifdef __STRICT_ANSI__
-#define va_arg(ap, type) (*(type *)__stdarg_take(&(ap), sizeof(type), \
-                         __va_alignment(type) > 4 ? 8 : 4))
+#define va_arg(ap, type) (*(type *)StdargTake(&(ap), sizeof(type), \
+                         STDARG_ALIGNMENT(type) > 4 ? 8 : 4))
 #else
 #define va_arg(ap, type) ({ \
-    va_list *__va_cursor = &(ap); \
-    char *__va_slot = (char *)(((unsigned int)*__va_cursor + \
-        (__va_alignment(type) > 4 ? 8 : 4) - 1) & \
-        -(__va_alignment(type) > 4 ? 8 : 4)); \
-    *__va_cursor = __va_slot + ((sizeof(type) + 3) & -4); \
-    *(type *)__va_slot; })
+    va_list *stdargCursor = &(ap); \
+    char *stdargSlot = (char *)(((unsigned int)*stdargCursor + \
+        (STDARG_ALIGNMENT(type) > 4 ? 8 : 4) - 1) & \
+        -(STDARG_ALIGNMENT(type) > 4 ? 8 : 4)); \
+    *stdargCursor = stdargSlot + ((sizeof(type) + 3) & -4); \
+    *(type *)stdargSlot; })
 #endif
 #define va_end(ap) ((void)(ap))
 #define va_copy(dst, src) ((dst) = (src))
 
 #elif defined(__STDARG_IDO)
-typedef char __stdarg_target[
+typedef char StdargTargetLayout[
     sizeof(int) == 4 && sizeof(long) == 4 && sizeof(long long) == 8 &&
     sizeof(double) == 8 && sizeof(void *) == 4 && sizeof(va_list) == 4 ? 1 : -1];
 #define va_start(ap, last) ((ap) = (va_list)((char *)&(last) + sizeof(last)))
 /* The native compiler tags saved FP argument cursors. */
-#define __va_align(type) __builtin_alignof(*(type *)0)
-#define __va_fp(type) (__builtin_classof(*(type *)0) == 1)
-static char *__stdarg_take(va_list *ap, unsigned int size,
+#define STDARG_ALIGN(type) __builtin_alignof(*(type *)0)
+#define STDARG_FP(type) (__builtin_classof(*(type *)0) == 1)
+static char *StdargTake(va_list *ap, unsigned int size,
                                  unsigned int alignment, int floating)
 {
     unsigned int cursor = (unsigned int)*ap;
@@ -66,8 +66,8 @@ static char *__stdarg_take(va_list *ap, unsigned int size,
     *ap = (char *)next;
     return slot;
 }
-#define va_arg(ap, type) (*(type *)__stdarg_take(&(ap), sizeof(type), \
-                         __va_align(type), __va_fp(type)))
+#define va_arg(ap, type) (*(type *)StdargTake(&(ap), sizeof(type), \
+                         STDARG_ALIGN(type), STDARG_FP(type)))
 #define va_end(ap) ((void)(ap))
 #define va_copy(dst, src) ((dst) = (src))
 

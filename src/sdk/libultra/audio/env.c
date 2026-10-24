@@ -45,7 +45,7 @@ Acmd *Libultra_PullEnvelope(EnvelopeFilter *env, s16 *unused, s32 count, s32 sam
 extern s16 D_800D4210[128];
 extern char D_800CC850[], D_800C7604[];
 extern void _freePVoice(void *, EnvelopeVoice *);
-extern void __freeParam(void *);
+extern void Audio_FreeParam(void *);
 extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);
 extern f32 func_802B5288_de(f32, s32, s32, s32);
 
@@ -149,7 +149,7 @@ Acmd *Libultra_PullEnvelope(EnvelopeFilter *env, s16 *unused, s32 count, s32 sam
         output += elapsed << 1;
         env->ctrlList = event->next;
         if (!env->ctrlList) env->ctrlTail = 0;
-        __freeParam(event);
+        Audio_FreeParam(event);
     }
     commands = func_802B4C7C_de(env, &input, &output, count, sampleOffset, commands);
     delta = env->delta;
