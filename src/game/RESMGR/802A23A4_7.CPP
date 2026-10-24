@@ -15,9 +15,9 @@ void func_802A17F8_de(void) {
 
 /** Propagate each array's boundary sample into its two wrap-around slots. */
 void func_802A182C_de(void) {
-    float *p0 = &D_800CD970_de;
-    float *p1 = &D_800CD97C;
-    float *p2 = &D_800CD988;
+    float *p0 = &D_800CD96C[1];
+    float *p1 = &D_800CD978[1];
+    float *p2 = &D_800CD984[1];
     float a = p0[-1];
     float b = p1[-1];
     float c = p2[-1];

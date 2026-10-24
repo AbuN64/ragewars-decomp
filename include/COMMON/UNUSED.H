@@ -1384,7 +1384,6 @@ extern char D_800D4530;
 
 extern f32 D_800C5C58_de[2];
 
-extern float D_800CD988;
 
 extern s32 D_800D0EBC;
 
@@ -1703,7 +1702,6 @@ extern u8 D_B2000021;
 
 extern char D_002BE0D0;
 
-extern float D_800CD97C;
 
 extern char D_800D38D0[];
 
@@ -2021,7 +2019,6 @@ extern char *D_800D34E4;
 
 extern s32 D_800E3464;
 
-extern float D_800CD970_de;
 
 extern f32 D_800C41A8_de[2];
 
