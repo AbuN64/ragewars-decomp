@@ -2498,3 +2498,4 @@ literals_Nav_SelectPlayerState = 0x800C1F20; // rom:0xC2B20 size:0x18
 literals_Pak_DrawMenuModel = 0x800DE480; // rom:0xDF080 size:0x24
 literals_Audio_UpdateVoiceVolume = 0x800C3F38; // rom:0xC4B38 size:0x18
 literals_World_InitSimpleInstance = 0x800C3D80; // rom:0xC4980 size:0x10
+literals_Frontend_DrawMenuImage = 0x800DE030; // rom:0xDEC30 size:0x1C

@@ -303,47 +303,50 @@ s32 func_8043BFF0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 0;
 }
 
-#ifdef NON_MATCHING
-/* 9 aligned edits left: a sits in f1, not f0, so the a-scale multiply schedules late */
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
 #include "GFX/TEXT/802A8A94_5.H"
-extern float D_800E2064;
 extern float D_80141008[];
-void Frontend_DrawMenuImage(u8 *arg0) {
-    s32 arg14;
+/* A menu's title image: image id, RGB tint words, animation frame and a shown flag. */
+typedef struct MenuImage {
+    s32 image;
+    s32 red;
+    s32 green;
+    s32 blue;
+    s32 unk10;
+    s32 frame;
+    s32 shown;
+} MenuImage;
+void Frontend_DrawMenuImage(MenuImage *menu) {
+    s32 frame;
     float b, a;
     float *screen;
-    if (*(s32 *)(arg0 + 0x18) == 1) {
-        arg14 = *(s32 *)(arg0 + 0x14);
+    if (menu->shown == 1) {
+        frame = menu->frame;
         screen = D_80141008;
         func_802A84F8_de();
         func_8026925C_de(0x15);
-        b = D_800DE030_de;
+        b = 1.0f;
         a = b;
         switch (D_800E28D8) {
         case 0:
             a = b;
             break;
         case 1:
-            a = D_800E2064;
-            b = D_800DE038;
+            a = 1.6901408f;
+            b = 1.6216216f;
             break;
         case 2:
-            a = D_800DE03C_de;
-            b = D_800DE040;
+            a = 1.6901408f;
+            b = 1.0810812f;
             break;
         }
-        a *= (&D_800DE040)[1];
-        gDPSetEnvColor(D_80110634++, arg0[7], arg0[0xB], arg0[0xF], 0xFF);
+        gDPSetEnvColor(D_80110634++, (u8)menu->red, (u8)menu->green, (u8)menu->blue, 0xFF);
         gDPSetPrimColor(D_80110634++, 0, 0, 0xE0, 0, 0, 0xFF);
-        func_802AAC28_de(*(s32 *)arg0, arg14, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
-                         a, b * D_800DE048_de, 1);
+        func_802AAC28_de(menu->image, frame, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
+                         a * 9.0f, b * 4.0f, 1);
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_DrawMenuImage);
-#endif

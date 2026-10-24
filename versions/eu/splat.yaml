@@ -4648,7 +4648,7 @@ segments:
       - [0xEF24C, rodata, data_800C/literals_Frontend_DrawFourPlayerResults]
       - [0xEF260, rodata, data_800C/literals_func_8043ACF0_de]
       - [0xEF290, rodata, data_800C/g_equipmentSelectionRetainedData]
-      - [0xEF2B0, rodata, data_800C/D_8043C080_E2C60]
+      - [0xEF2B0, rodata, data_800C/literals_Frontend_DrawMenuImage]
       - [0xEF2CC, data, data_800C/D_auto_rodata_unresolved_800EE6CC]
       - [0xEF438, rodata, data_800C/literals_func_8043C688_de]
       - [0xEF4C4, rodata, data_800C/literals_func_8043C9AC_de]
