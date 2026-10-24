@@ -340,13 +340,12 @@ s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cac
     s32 start;
     s32 sum = 0;
     u32 idx = (fpage.inode_t.page >> 2) + (fpage.inode_t.bank & 7) * 32;
-
     for (bank = 0; bank < pfs->banks; bank++) {
         start = (bank == 0) ? pfs->inode_start_page : 1;
         if (bank != fpage.inode_t.bank && !((cache->map[idx] >> (bank & 7)) & 1)) {
             continue;
         }
-        if (cache->bank != bank) {
+        if (bank != cache->bank) {
             ret = func_804488A4_de(pfs, &cache->inode, 0, bank);
             if (ret != 0 && ret != 3) {
                 return ret;
@@ -364,7 +363,6 @@ s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cac
     }
     return sum;
 }
-
 #else
 INCLUDE_ASM("ovl_80400000", Pfs_CountPageReferences);
 #endif

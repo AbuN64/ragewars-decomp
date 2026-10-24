@@ -20,7 +20,7 @@ s32 Pfs_CountPageReferences(OSPfs *pfs, __OSInodeUnit fpage, __OSInodeCache *cac
         if (bank != fpage.inode_t.bank && !((cache->map[idx] >> (bank & 7)) & 1)) {
             continue;
         }
-        if (cache->bank != bank) {
+        if (bank != cache->bank) {
             ret = func_804488A4_de(pfs, &cache->inode, 0, bank);
             if (ret != 0 && ret != 3) {
                 return ret;
