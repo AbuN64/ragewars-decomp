@@ -363,9 +363,9 @@ static __inline__ void navigationTurnRight(CVector3 *v) {
     v->z = -v->y;
     v->y = 0.0f;
 }
-/* 44/257 aligned edits; remaining: value/angle in $f21/$f20 (ROM $f20/$f21), the graph pointer kept in $s5 by the ROM, jumping in $s5 (ROM $s6). */
+/* 11/257 aligned edits; remaining: zero stores of the turn helpers reuse the 0.0 call-argument register (ROM: sw $zero), so value takes $f21 (ROM $f20); position from the player copy. */
 void Nav_UpdatePlayerSteering(AiController *controller) {
-    CNavData *graph = &D_8013B364;
+    CNavData *graph;
     CVector3 delta;
     CVector3 desired;
     CVector3 facing;
@@ -374,6 +374,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
     CVector3 *position;
     Player *player;
     f32 value;
+    f32 angle;
     f32 distance;
     f32 projection;
     s32 jumping;
@@ -387,12 +388,11 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         falling = player->movementFlags & 0x1000;
         func_80271F68_de(&delta, destination, position);
         distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+        graph = &D_8013B364;
         if (falling) {
             if (D_800C1BDC_de < distance) {
-                f32 angle;
-                value = 0.0f;
-                angle = func_80209308_de(controller, destination, 2.0f, value);
-                if (angle < value ? -angle < D_800C1BE0_de : angle < D_800C1BE4_de) {
+                angle = func_80209308_de(controller, destination, 2.0f, 0.0f);
+                if (angle < 0.0f ? -angle < D_800C1BE0_de : angle < D_800C1BE4_de) {
                     player->forward = D_800C1BE8_de;
                 }
                 if ((jumping || falling) && controller->unk304) {
@@ -402,19 +402,19 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
                 }
             }
         } else {
-            f32 angle;
-            value = 0.0f;
-            func_80209308_de(controller, destination, 2.0f, value);
+            func_80209308_de(controller, destination, 2.0f, 0.0f);
             angle = controller->player->heading + D_800C1BF0_de;
             facing.x = func_802B7130_de(angle);
-            facing.y = value;
+            facing.y = 0.0f;
             facing.z = func_802B6560_de(angle);
             angle = func_8029C044_de(controller->destination.z - position->z, controller->destination.x - position->x);
             desired.x = func_802B6560_de(angle);
-            desired.y = value;
+            desired.y = 0.0f;
             desired.z = func_802B7130_de(angle);
             player->forward = desired.x * facing.x + desired.y * facing.y + desired.z * facing.z;
-            tangent = func_8020C994_de(graph, controller->current)->position;
+            do {
+                tangent = func_8020C994_de(graph, controller->current)->position;
+            } while (0);
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
@@ -434,7 +434,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             player->forward = D_800C1BF4_de;
         }
         if (controller->player->pose == 0xF) {
-            if (controller->destination.y < position->y) {
+            if (position->y > controller->destination.y) {
                 player->forward = D_800C1BF8_de;
             } else {
                 player->forward = D_800C1BFC;
