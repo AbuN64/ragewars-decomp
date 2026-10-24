@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-#if defined(NON_MATCHING) || !defined(VERSION_US)
+#if !defined(VERSION_US)
 /* SignedDivide: libgcc2 division with the VR4300 HI/LO hazards. */
 #if defined(VERSION_US)
 #define __divdi3 func_802C0164
