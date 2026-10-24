@@ -122,11 +122,14 @@ typedef struct FadeState {
     char pad26DC2[2];
     f32 timer;     /* 0x26DC4 */
 } FadeState;
-/* Steps the fade timer of a screen state by a step that depends on the direction flag: mode 1 raises it until
+/* 90.5%: mode switch (2 before 1) and fresh locals match the ROM layout; remaining: step is copied to f3 for mode 2 in the ROM.
+ * Steps the fade timer of a screen state by a step that depends on the direction flag: mode 1 raises it until
  * it reaches the limit, mode 2 lowers it to zero (or below) and then switches to the next screen. */
 void Render_UpdateFadeTransition(FadeState *state) {
     f32 step;
     f32 timer;
+    f32 next;
+    f32 limit;
     if (state->mode == 0) {
         return;
     }
@@ -134,25 +137,13 @@ void Render_UpdateFadeTransition(FadeState *state) {
     if (state->reverse != 0) {
         step = D_800C5484_de;
     }
-    if (state->mode == 1) {
-        timer = state->timer;
-        if (literals_func_8028D244_de < D_800C5490_de) {
-            timer = timer + step * D_800C5490_de;
-        } else {
-            timer = timer + step * literals_func_8028D244_de;
-        }
-        state->timer = timer;
-        if (*(f32 *)&D_800C5494 <= timer) {
-            state->mode = 0;
-            state->timer = *(f32 *)&D_800C5494;
-            state->reverse = 0;
-        }
-    } else if (state->mode == 2) {
+    switch (state->mode) {
+    case 2:
         timer = state->timer;
         if (timer > 0.0f) {
-            timer = timer - step * literals_func_8028D244_de;
-            state->timer = timer;
-            if (timer < 0.0f) {
+            next = timer - step * literals_func_8028D244_de;
+            state->timer = next;
+            if (next < 0.0f) {
                 state->timer = 0.0f;
             }
         } else {
@@ -165,6 +156,22 @@ void Render_UpdateFadeTransition(FadeState *state) {
             state->mode = 1;
             state->previous = old;
         }
+        break;
+    case 1:
+        timer = state->timer;
+        if (literals_func_8028D244_de < D_800C5490_de) {
+            next = timer + step * D_800C5490_de;
+        } else {
+            next = timer + step * literals_func_8028D244_de;
+        }
+        state->timer = next;
+        limit = *(f32 *)&D_800C5494;
+        if (limit <= next) {
+            state->mode = 0;
+            state->timer = limit;
+            state->reverse = 0;
+        }
+        break;
     }
 }
 #else
