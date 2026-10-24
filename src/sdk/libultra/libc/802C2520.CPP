@@ -118,7 +118,7 @@ INCLUDE_ASM("span_1000", Libc_FormatToCallback);
 #endif
 
 extern size_t func_802BD400_de(const unsigned char *s);
-extern void func_802BDDE0_de(_Pft *px, unsigned char code);
+extern void Libc_FormatInteger(_Pft *px, unsigned char code);
 
 
 void func_802BD974_de(_Pft *px, va_list *pap, int code, unsigned char *ac)
@@ -166,7 +166,7 @@ case_d:
 
     px->s = (unsigned char *)&ac[px->n0];
 
-    func_802BDDE0_de(px, (unsigned char)code);
+    Libc_FormatInteger(px, (unsigned char)code);
     return;
 case_x:
     if (px->qual == 'l') {
@@ -192,7 +192,7 @@ case_x:
     }
 
     px->s = (unsigned char *)&ac[px->n0];
-    func_802BDDE0_de(px, (unsigned char)code);
+    Libc_FormatInteger(px, (unsigned char)code);
     return;
 case_e:
     px->v.ld = px->qual == 'L' ? va_arg(*pap, double) : va_arg(*pap, double);
@@ -221,7 +221,7 @@ case_n:
 case_p:
     px->v.ll = (long)va_arg(*pap, void *);
     px->s = (unsigned char *)&ac[px->n0];
-    func_802BDDE0_de(px, 'x');
+    Libc_FormatInteger(px, 'x');
     return;
 case_s:
     px->s = va_arg(*pap, unsigned char *);
@@ -238,15 +238,14 @@ case_default:
     ac[px->n0++] = code;
 }
 
-#ifdef NON_MATCHING
+/* EU enters __umoddi3 one word before its symbol (data_unresolved_802C15D0), so EU keeps the ROM body. */
+#if !defined(VERSION_EU)
 #include "TYPES.H"
 
 
 extern u8 D_800D5300[];
 extern u8 D_800D5314[];
 
-extern u64 Libc_UnsignedRemainder(u64 numerator, u64 divisor);
-extern u64 func_802C0DA0_de(u64 numerator, u64 divisor);
 extern s64 Libc_SignedDivide(s64 numerator, s64 denominator);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 
@@ -254,17 +253,15 @@ static inline void lldivInline(LldivResult *result, s64 numerator, s64 denominat
     result->quot = Libc_SignedDivide(numerator, denominator);
     result->rem = Libc_SignedRemainder(numerator, denominator);
 }
-/* Formats px->v.ll into px->s in the radix selected by code (o/x/X/d/i/u), zero-padding to the precision.
- * 145/148 words; remaining: the first digit is looked up through v1 instead of v0 (register choice only). */
-void func_802BDDE0_de(_Pft *px, unsigned char code) {
+/* Formats px->v.ll into px->s in the radix selected by code (o/x/X/d/i/u), zero-padding to the precision
+ * (libc _Litob). The first digit and quotient use the u64 '%' and '/' operators (__umoddi3/__udivdi3 libcalls). */
+void Libc_FormatInteger(_Pft *px, unsigned char code) {
     char buffer[0x18];
     const u8 *table;
      LldivResult qr;
     s32 base;
     s32 i;
     u64 value;
-    s64 num, den;
-    char *p;
     table = D_800D5300;
     if (code == 0x58) {
         table = D_800D5314;
@@ -276,14 +273,11 @@ void func_802BDDE0_de(_Pft *px, unsigned char code) {
         value = -value;
     }
     if (value != 0 || px->prec != 0) {
-        p = &buffer[--i];
-        *p = table[Libc_UnsignedRemainder(value, base)];
+        buffer[--i] = table[value % base];
     }
-    px->v.ll = func_802C0DA0_de(value, base);
+    px->v.ll = value / base;
     while (px->v.ll > 0 && i > 0) {
-        num = px->v.ll;
-        den = base;
-        lldivInline(&qr, num, den);
+        lldivInline(&qr, px->v.ll, base);
         px->v.ll = qr.quot;
         buffer[--i] = table[qr.rem];
     }
@@ -300,5 +294,5 @@ void func_802BDDE0_de(_Pft *px, unsigned char code) {
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_802BDDE0_de);
+INCLUDE_ASM("span_1000", Libc_FormatInteger);
 #endif
