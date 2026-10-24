@@ -732,7 +732,7 @@ extern const float D_800C49B0_de;
 
 extern s32 D_8014D480;
 
-extern s32 D_801518C0[];
+extern f32 D_801518C0[];
 
 extern char D_800D79A8[];
 

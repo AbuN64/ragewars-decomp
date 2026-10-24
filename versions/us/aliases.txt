@@ -2587,3 +2587,4 @@ literals_World_InitSimpleInstance = 0x800C3CB0; // rom:0xC48B0 size:0x10
 literals_Frontend_DrawMenuImage = 0x800DCCE0; // rom:0xDD8E0 size:0x1C
 literals_Nav_SetPickupGoalWeights = 0x800C1D90; // rom:0xC2990 size:0x7C
 literals_Weapons_UpdateAlternateFire = 0x800C2E18; // rom:0xC3A18 size:0x8
+literals_Audio_DecodeTransformBlock = 0x800C7BF8; // rom:0xC87F8 size:0x10

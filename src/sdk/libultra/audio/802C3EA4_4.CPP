@@ -30,7 +30,7 @@ void *func_802C016C_de(void) {
         *counter = 0;
     }
     slots = &D_8014BCF0_de;
-    func_802BFAAC_de(slots + (*counter << 9), base);
+    Audio_DecodeTransformBlock(slots + (*counter << 9), base);
     base->count = base->count - 1;
     return slots + (*counter << 9);
 }

@@ -4290,7 +4290,7 @@ segments:
       - [0xC94B0, rodata, data_800C/D_802BF514_CDB10]
       - [0xC94C0, rodata, data_800C/D_802BF67C_CDB20]
       - [0xC94C4, rodata, data_800C/D_802BF804_CDB24]
-      - [0xC94C8, rodata, data_800C/D_802BFAAC_CDB28]
+      - [0xC94C8, rodata, data_800C/literals_Audio_DecodeTransformBlock]
       - [0xC94D8, rodata, data_800C/D_802C0044_CDB38]
       - [0xC94E8, data, data_800C/D_auto_rodata_unresolved_800C88E8]
       - [0xC95F0, data, data_800C/D_auto_src_ragewars_u64_quotient_bitwidth_us_rev1]

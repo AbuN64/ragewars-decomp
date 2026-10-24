@@ -134,7 +134,7 @@ extern unsigned short D_800D54B8;
 extern unsigned short D_800D54BA;
 extern unsigned short D_800D54BC;
 extern s16 D_800D54BE;
-extern unsigned short D_800D54C0_de;
+extern s16 D_800D54C0_de;
 
 /* Dictionary decoder records, shared by the block and phrase streams. */
 typedef struct DecodeNode {

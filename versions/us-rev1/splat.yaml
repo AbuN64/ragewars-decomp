@@ -4458,7 +4458,7 @@ segments:
       - [0xCDB10, rodata, data_800C/D_blob_a2a46cb3e7d34be4a37c]
       - [0xCDB20, rodata, data_800C/D_blob_72e6665cf44898287caa]
       - [0xCDB24, rodata, data_800C/D_blob_4c909746abca65c9a28a]
-      - [0xCDB28, rodata, data_800C/D_d1_44ab9cecde214f7d]
+      - [0xCDB28, rodata, data_800C/literals_Audio_DecodeTransformBlock]
       - [0xCDB38, rodata, data_800C/D_blob_dc2a18ce4ba9881b8b1a]
       - [0xCDB48, data, data_800C/D_blob_6e7f6cba0444f5a1584b]
       - [0xCDB50, data, data_800C/D_auto_src_ragewars_u64_combined_bitwidth_us_rev1]

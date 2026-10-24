@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "COMMON/LLDIVRESULT.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/EFFECTRENDER.H"
 #include "COMMON/ALLOADFILTER48_2.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -22,7 +23,7 @@ void func_802BF514_de(void) {
     f32 scale;
     f32 *sines;
     f32 *cosines;
-    s32 *zeros;
+    f32 *zeros;
     f32 *sums;
     f32 *differences;
     step = D_800CCF10;
@@ -36,7 +37,7 @@ void func_802BF514_de(void) {
         angle = (i * step + offset) * scale;
         sines[i] = func_802B6560_de(angle);
         cosines[i] = func_802B7130_de(angle);
-        zeros[i] = 0;
+        zeros[i] = 0.0f;
     }
     i = 0;
     scale = (*(&D_800CCF18 + 1));
@@ -173,77 +174,79 @@ void Audio_ComplexFft(f32 *data, s32 count, s32 sign, f32 *cosines, f32 *sines, 
     }
 }
 
-#ifdef NON_MATCHING
-/* 49/228 words; remaining: draft builds 254 words, loop shape and register allocation differ from the original */
-#include "COMMON/ALLOADFILTER48_2.H"
-#include "COMMON/TRIPLE.H"
-#include "COMMON/UNUSED.H"
-#include "COMMON/LLDIVRESULT.H"
-extern void *func_802BD3A0_de(void *destination, const void *source, int count);
-
-/* Decode a 256-sample transform block, rotate around the FFT, then combine
- * it with the preceding block and round/saturate to signed PCM samples. */
-void func_802BFAAC_de(s16 *out, s16 *input) {
+/* Decoder stage helpers. Their out-of-line copies are func_802BFF30_de, func_802BFF90_de,
+   Audio_TransformFft and func_802C0044_de in the next unit (each with its own literal pool). */
+static inline void interleaveMirrored(f32 *dst, f32 *src) {
+    s16 i = 0;
+    do {
+        dst[i * 2] = src[i * 2];
+        dst[i * 2 + 1] = src[255 - i * 2];
+        i++;
+    } while (i < 128);
+}
+static inline void rotatePairs(f32 *data, f32 *a, f32 *b) {
+    s16 i = 0;
+    do {
+        f32 re = data[i * 2];
+        f32 im = data[i * 2 + 1];
+        f32 ca = a[i];
+        f32 cb = b[i];
+        data[i * 2] = re * ca - im * cb;
+        data[i * 2 + 1] = re * cb + im * ca;
+        i++;
+    } while (i < 128);
+}
+static inline void transformFft(f32 *data, FftTables *tables, s32 sign) {
+    Audio_ComplexFft(data, tables->size, sign, tables->sines, tables->cosines, tables->order);
+}
+static inline s16 roundToSample(f32 value) {
+    f32 rounded;
+    if (value >= 0.0f) {
+        rounded = value + 0.5f;
+        if (32767.0f < rounded) {
+            rounded = 32767.0f;
+        }
+    } else {
+        rounded = value - 0.5f;
+        if (rounded < -32768.0f) {
+            rounded = -32768.0f;
+        }
+    }
+    return (s16)(s32)rounded;
+}
+/* Decode a 256-sample transform block: unpack it, pre-rotate, inverse FFT, post-rotate, then
+   overlap it with the previous block's history (D_801518C0) and round/saturate to PCM. */
+void Audio_DecodeTransformBlock(s16 *out, s16 *input) {
     f32 data[256];
     f32 unpacked[256];
-    f32 scale, real, imag, co, si, previous, value, rounded;
+    f32 scale;
     s16 i;
-    if ((s16)D_800D54C0_de == 0) {
+    s16 *initialized = &D_800D54C0_de;
+    if (*initialized == 0) {
         func_802BF514_de();
         D_8014B830 = func_802BF67C_de(128);
-        D_800D54C0_de = 1;
+        *initialized = 1;
     }
-    scale = D_800C7CD8_de;
+    scale = 23170.474609375f; /* 32768 / sqrt(2) */
     func_802BF804_de(unpacked, input + 12);
-    for (i = 0; i < 128; i++) {
-        data[i * 2] = unpacked[i * 2];
-        data[i * 2 + 1] = unpacked[255 - i * 2];
-    }
-    for (i = 0; i < 128; i++) {
-        real = data[i * 2];
-        imag = data[i * 2 + 1];
-        co = D_801510C0[i];
-        si = D_801512C0[i];
-        data[i * 2] = real * co - imag * si;
-        data[i * 2 + 1] = real * si + imag * co;
-    }
-    Audio_ComplexFft(data, D_8014B830->size, -1,
-                      D_8014B830->sines, D_8014B830->cosines, D_8014B830->order);
-    for (i = 0; i < 128; i++) {
-        real = data[i * 2];
-        imag = data[i * 2 + 1];
-        co = D_801514C0[i];
-        si = D_801516C0[i];
-        data[i * 2] = real * co - imag * si;
-        data[i * 2 + 1] = real * si + imag * co;
-    }
-    for (i = 0; i < 128; i++) {
-        /* The shared history buffer is declared as raw 32-bit words. */
-        func_802BD3A0_de(&previous, &D_801518C0[i], sizeof(previous));
-        imag = data[i * 2 + 1];
-        co = D_801510C0[i];
-        si = D_801512C0[i];
-        value = scale * (previous * co + imag * si);
-        func_802BD3A0_de(&D_801518C0[i], &data[i * 2], sizeof(f32));
-        if (value >= 0.0f) {
-            rounded = value + D_800C7CDC_de;
-            if (D_800C7CE0_de < rounded) rounded = D_800C7CE0_de;
-        } else {
-            rounded = value - D_800C7CDC_de;
-            if (rounded < D_800C7CE4_de) rounded = D_800C7CE4_de;
-        }
-        out[i * 2] = (s16)(s32)rounded;
-        value = scale * (previous * si - imag * co);
-        if (value >= 0.0f) {
-            rounded = value + D_800C7CDC_de;
-            if (D_800C7CE0_de < rounded) rounded = D_800C7CE0_de;
-        } else {
-            rounded = value - D_800C7CDC_de;
-            if (rounded < D_800C7CE4_de) rounded = D_800C7CE4_de;
-        }
-        out[255 - i * 2] = (s16)(s32)rounded;
-    }
+    interleaveMirrored(data, unpacked);
+    rotatePairs(data, D_801510C0, D_801512C0);
+    transformFft(data, D_8014B830, -1);
+    rotatePairs(data, D_801514C0, D_801516C0);
+    i = 0;
+    do {
+        f32 *history = D_801518C0;
+        f32 *sines = D_801510C0;
+        f32 previous = history[i];
+        f32 s = sines[i];
+        f32 im = data[i * 2 | 1];
+        f32 *cosines = D_801512C0;
+        f32 c = cosines[i];
+        f32 first = previous * s + im * c;
+        f32 second = previous * c - im * s;
+        history[i] = data[i * 2];
+        out[i * 2] = roundToSample(scale * first);
+        out[255 - i * 2] = roundToSample(scale * second);
+        i++;
+    } while (i < 128);
 }
-#else
-INCLUDE_ASM("span_1000", func_802BFAAC_de);
-#endif
