@@ -144,21 +144,16 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
-#ifndef FIELD
-#define FIELD(type, base, off) (*(type *)((char *)(base) + (off)))
-#endif
 extern f32 D_800C46A0_de, D_800C46A4_de;
 extern f32 D_800D15E4[4];
 extern CGameStatus D_801468A0;
-extern char D_80146918[], D_801468F4[];
 /* Draws a character model's parts with the shared material D_8013B2D8, choosing each part by the 0x38 bits of
  * its material byte 6: on the special state 0x12 the part must equal the bits for the variant at 0x81, otherwise
  * the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) was computed first. */
-/* 4/281 aligned edits; remaining: material-store scheduling. */
 void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
     void *header;
     void *base;
@@ -168,11 +163,12 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     s32 count;
     s32 i;
     s32 hide = 0;
-    s32 bonus, glow;
+    s32 bonus = 0;
+    s32 glow = 0;
     s32 flags;
     MeshMaterial *shared;
     CGameStatus *settings;
-    bonus=0;glow=0;
+
     if (matrix == 0) {
         return;
     }
@@ -189,7 +185,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     if (0.0f < owner->glow) {
         glow = 1;
     }
-    if (FIELD(s32, D_80146918, 0) != 0 && owner->profile->bonus == 1) {
+    if (D_801468A0.m_bCTFOn != 0 && owner->profile->bonus == 1) {
         bonus = 1;
     }
     shared = (MeshMaterial *)&D_8013B2D8;
@@ -199,13 +195,17 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     D_800D15E4[3] = D_800C46A4_de;
     shared->flags = flags | 0x1402;
     D_800D15E0 = 3;
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (func_80269A80_de(shared, pass) != 0) {
         gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
         func_80268CE0_de(1);
-        if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
+        if (segment != 0) {
+            gSPSegment(D_80110634++, 1, matrix);
+        } else {
+            gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
+        }
         if (lights != 0) {
             Gfx *cmd = D_80110634++;
             gSPMoveWord(cmd, G_MW_NUMLIGHT, 0, 0x18);
@@ -232,7 +232,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 func_8026B504_de(matrix, lights, material);
             }
             state = owner->profile;
-            if (state->character == 0x12 && (FIELD(s32, D_801468F4, 0) == 0 || state->bonus == 0)) {
+            if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
                 switch (state->variant) {
                 case 0:
                     if ((material->mode & 0x38) == 0x28) {
@@ -267,21 +267,16 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 if (bits == 0x38 && hide == 0) continue;
                 if (bits == 0x30 && bonus == 0) continue;
                 if (bits == 0x10 && glow == 0) continue;
-                {
-                        if (func_80269A80_de(material, pass) != 0) {
-                            void *list = func_8028FDB4_de(part, 1);
-                            Gfx *cmd = D_80110634++;
-                            gSPDisplayList(cmd, (unsigned int)list);
-                        }
-                    }
+                if (func_80269A80_de(material, pass) != 0) {
+                    void *list = func_8028FDB4_de(part, 1);
+                    Gfx *cmd = D_80110634++;
+                    gSPDisplayList(cmd, (unsigned int)list);
+                }
             }
         }
     }
     D_800D15E0 = 0;
 }
-#else
-INCLUDE_ASM("span_1000", Render_DrawCharacterEffectParts);
-#endif
 
 #ifdef NON_MATCHING
 extern const f32 D_800C46A8_de;
