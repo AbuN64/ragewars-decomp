@@ -6,30 +6,19 @@
 #include "COMMON/VECTOR4F.H"
 #include "COMMON.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
-
-#ifdef NON_MATCHING
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
-#include "COMMON.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
 #include "AUDIO/EXTERNS.H"
 #include "COMMON/AUDIO_CONTEXT.H"
 #include "COMMON/CARTRIDGEREADWORKER.H"
-#include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/SHAREDRECV4.H"
 #include "COMMON/TRIPLE.H"
 #include "stddef.h"
-#include "TYPES.H"
 int func_80245784_de(void);
 f32 func_80274808_de(f32 arg0, f32 arg1, f32 arg2);
 void func_802B2F10_de(void *arg0, s16 arg1);
-
-
-
-
-extern f32 D_800C3F4C_de;
-
 /* Spatial mix and runtime envelope controls embedded in a sound voice. */
 typedef struct AudioVolumeMix {
     s32 frame, reserved4;
@@ -65,7 +54,19 @@ typedef struct AudioVolumeVoice {
     f32 volumeScale;
 } AudioVolumeVoice;
 
-/* 12/286 aligned edits; remaining: radius registers, curve branch and final multiply scheduling. */
+/* Converts the attenuated level to a volume and applies it, scaled, to the voice sound. */
+static inline void apply_volume(AudioVolumeVoice *voice, f32 level) {
+    ContextRecAt2BC0 *outputContext;
+    ALSndPlayer *outputSound;
+    s32 volume;
+
+    outputContext = voice->context;
+    outputSound = outputContext->list;
+    volume = (s32)level;
+    func_802B2F00_de(outputSound, outputContext->handles[voice->unk0]);
+    func_802B2F10_de(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
+}
+
 /* Updates spatial attenuation and the volume envelope, then applies the scaled level. */
 void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     AudioVolumeMix *mix;
@@ -74,28 +75,25 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     GameplayCamera *listener;
     CVector3 *position;
     CVector3 *ear;
-    f32 distance, radius, limit, squared;
+    f32 distance, radius, squared;
     f32 dx, dy, dz;
     f32 masterGain, falloff, level;
-    f32 result;
     s32 increasing;
     s32 value;
-    s32 volume;
 
     listener = voice->context->field2B98;
     radius = listener->unk528;
-    limit = D_800C3F38_de;
-    squared = radius < limit ? limit : radius;
-    squared *= radius < limit ? limit : radius;
+    squared = radius < 3072.0f ? 3072.0f : radius;
+    squared *= radius < 3072.0f ? 3072.0f : radius;
     D_800D0D10 = squared;
     switch (voice->mix.curve) {
     case 0:
         break;
     case 2:
-        D_800D0D10 = squared + squared * D_800C3F3C_de;
+        D_800D0D10 = squared + squared * 0.5f;
         break;
     case 1:
-        D_800D0D10 = squared + squared * D_800C3F40_de;
+        D_800D0D10 = squared + squared * 0.25f;
         break;
     }
     mix = &voice->mix;
@@ -106,7 +104,7 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
     } else {
         masterGain = context->red;
         if (voice->fieldC4 && context->field2BB8) {
-            masterGain *= D_800C3F44_de;
+            masterGain *= 0.5f;
         }
     }
     if ((voice->flags & 0x400) && voice->fieldC0 == 0 && !(voice->flags & 0x800)) {
@@ -120,18 +118,18 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
         if (D_800D0D10 <= distance) {
             falloff = 0.0f;
         } else {
-            falloff = D_800C3F48_de - distance / D_800D0D10;
+            falloff = 1.0f - distance / D_800D0D10;
         }
         switch (mix->curve) {
+        case 2:
+            level = falloff;
+            break;
         case 0:
             falloff *= falloff;
             falloff *= falloff;
             /* Fall through to the final square. */
         case 1:
             falloff *= falloff;
-            level = falloff;
-            break;
-        case 2:
             level = falloff;
             break;
         default:
@@ -144,7 +142,7 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
             mix->attenuation = level;
         }
     } else {
-        mix->attenuation = D_800C3F4C_de;
+        mix->attenuation = 1.0f;
     }
     if (voice->flags & 4) {
         if (voice->control.delay > 0) {
@@ -183,8 +181,8 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
             }
         }
         value = (s32)(func_802B2350(voice->control.levels[0]) * voice->envelopeValue);
-        result = (f32)value * mix->attenuation;
         mix->left = value;
+        apply_volume(voice, (f32)value * mix->attenuation * masterGain);
     } else {
         f32 attenuation;
 
@@ -193,22 +191,9 @@ void Audio_UpdateVoiceVolume(AudioVolumeVoice *voice) {
         } else {
             attenuation = mix->baseAttenuation;
         }
-        result = (f32)mix->left * attenuation;
-    }
-    {
-        ContextRecAt2BC0 *outputContext;
-        ALSndPlayer *outputSound;
-
-        outputContext = voice->context;
-        outputSound = outputContext->list;
-        volume = (s32)(result * masterGain);
-        func_802B2F00_de(outputSound, outputContext->handles[voice->unk0]);
-        func_802B2F10_de(outputSound, (s16)(s32)((f32)volume * voice->volumeScale));
+        apply_volume(voice, (f32)mix->left * attenuation * masterGain);
     }
 }
-#else
-INCLUDE_ASM("span_1000", Audio_UpdateVoiceVolume);
-#endif
 
 /* Updates a voice pan from its sweep, position or centered fallback and applies it to the owner sound. */
 
