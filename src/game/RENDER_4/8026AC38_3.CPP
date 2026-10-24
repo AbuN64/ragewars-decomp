@@ -177,10 +177,10 @@ extern Gfx *D_80110634;
 extern u32 D_800E28A4;
 
 extern s32 D_800CC364;
-extern u32 D_800CC384;
+extern u32 D_800CC384[]; /* read as an aggregate element: the ROM keeps its load ahead of the display-list stores */
 extern void func_80253BBC_de(s32, void **);
 
-/* 41/168 aligned words differ: geometry-mode lifetime and scheduling.
+/* 19/168 aligned words differ: geometry-mode register (a2/a3) and display-list store scheduling.
  * The sixth argument overrides the texture segment; the fifth is unused. */
 void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
                      s32 segment, void *unusedLighting, s32 textureAddress, s32 unusedMode) {
@@ -211,7 +211,7 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     }
     gSPSegment(D_80110634++, 2, (u32)textures);
     partTable = func_8028FDB4_de(resourceHeader, 2);
-    geometryMode = D_800CC384;
+    geometryMode = D_800CC384[0];
     D_800CC360 = -1;
     D_800CC364 = -1;
     syncCommand = D_80110634++;
