@@ -27,7 +27,6 @@ extern char D_80100570;
 extern ResourceCacheEntry *D_80100568;
 extern u32 func_802BCF30_de(void);
 
-#ifdef NON_MATCHING
 #include "COMMON/ENTRYRECAT18V3.H"
 /* The resource manager record at D_80100560: node array, free-slot stack, link records, lists and its lock queue.
  * count (0xBDC) and stamp (0xC20) are the Pool fields used by func_80254A28_de. */
@@ -84,10 +83,11 @@ extern s32 D_801008F8;
 extern int D_800CB6E0;
 extern int D_8010515C;
 extern Manager D_801047E0;
+extern struct ResMgr D_80100560;
 
 void Scene_InitializeResourceCache(s32 unused, s32 count) {
-#define RESOURCE_MANAGER ((struct ResMgr *)&D_80100560)
     u32 mask;
+    u32 unlockMask;
     u32 i;
     void *thread;
     func_802567A4_de(&D_80101140);
@@ -103,57 +103,56 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
     if (func_80265350_de() > 0x400000) {
         D_800CB6E0 *= 2;
     }
-    RESOURCE_MANAGER->nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));
-    RESOURCE_MANAGER->slots = (struct ResourceCacheEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
-    RESOURCE_MANAGER->links = (struct ResLink *)func_80255920_de(&D_801051A0, D_800CB6E0 * 0x2C);
-    osCreateMesgQueue(&RESOURCE_MANAGER->lock, RESOURCE_MANAGER->lockSlot, 1);
-    RESOURCE_MANAGER->unk40 = 0;
-    RESOURCE_MANAGER->unk44 = 0;
-    func_80255CA0_de(&RESOURCE_MANAGER->entries, 0x18, 0x1C);
-    func_80255CA0_de(&RESOURCE_MANAGER->recent, 0x20, 0x24);
-    RESOURCE_MANAGER->count = 0;
+    D_80100560.nodes = (struct ResourceCacheEntry *)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(struct ResourceCacheEntry));
+    D_80100560.slots = (struct ResourceCacheEntry **)func_80255920_de(&D_801051A0, D_800CB6E0 * sizeof(void *));
+    D_80100560.links = (struct ResLink *)func_80255920_de(&D_801051A0, D_800CB6E0 * 0x2C);
+    osCreateMesgQueue(&D_80100560.lock, D_80100560.lockSlot, 1);
+    D_80100560.unk44 = 0;
+    D_80100560.unk40 = 0;
+    func_80255CA0_de(&D_80100560.entries, 0x18, 0x1C);
+    func_80255CA0_de(&D_80100560.recent, 0x20, 0x24);
+    D_80100560.count = 0;
     for (i = 0; i < D_800CB6E0; i++) {
-        struct ResourceCacheEntry *node = &RESOURCE_MANAGER->nodes[i];
+        struct ResourceCacheEntry *node = &D_80100560.nodes[i];
         node->flags = 0;
-        RESOURCE_MANAGER->slots[i] = node;
-        RESOURCE_MANAGER->count += 1;
+        D_80100560.slots[i] = node;
+        D_80100560.count += 1;
     }
-    RESOURCE_MANAGER->enabled1 = 1;
-    RESOURCE_MANAGER->enabled0 = 1;
-    RESOURCE_MANAGER->selected = -1;
-    RESOURCE_MANAGER->unkBD4 = 0;
-    RESOURCE_MANAGER->unkBD8 = 0;
-    RESOURCE_MANAGER->unk8 = 0;
-    RESOURCE_MANAGER->unkC1C = 1;
-    RESOURCE_MANAGER->stamp = 0;
-    func_80255CA0_de(&RESOURCE_MANAGER->freeLinks, 0x28, 0x24);
-    func_80255CA0_de(&RESOURCE_MANAGER->listBAC, 0x28, 0x24);
-    func_80255CA0_de(&RESOURCE_MANAGER->listBC0, 0x28, 0x24);
+    D_80100560.enabled0 = D_80100560.enabled1 = 1;
+    D_80100560.selected = -1;
+    D_80100560.unkBD4 = 0;
+    D_80100560.unkBD8 = 0;
+    D_80100560.unk8 = 0;
+#if defined(VERSION_US)
+    D_80100560.unkC1C = 0;
+#else
+    D_80100560.unkC1C = 1;
+#endif
+    D_80100560.stamp = 0;
+    func_80255CA0_de(&D_80100560.freeLinks, 0x28, 0x24);
+    func_80255CA0_de(&D_80100560.listBAC, 0x28, 0x24);
+    func_80255CA0_de(&D_80100560.listBC0, 0x28, 0x24);
     for (i = 0; i < D_800CB6E0; i++) {
-        struct ResLink *link = &RESOURCE_MANAGER->links[i];
+        struct ResLink *link = &D_80100560.links[i];
         link->owner = 0;
-        func_80255D14_de(&RESOURCE_MANAGER->freeLinks, link);
+        func_80255D14_de(&D_80100560.freeLinks, link);
     }
     func_802552E0_de(D_800CB6E0);
     osCreateMesgQueue((OSMesgQueue *)D_801047E0.queue, (OSMesg *)(D_801047E0.queue + 0x18), 0x40);
-    mask = func_802BCF30_de();
+    unlockMask = func_802BCF30_de();
     D_8010515C -= 1;
     if (D_8010515C != 0) {
-        __osRestoreInt(mask);
+        __osRestoreInt(unlockMask);
         func_802BB420_de((OSMesgQueue *)D_801047E0.lock, 0, 1);
     } else {
-        __osRestoreInt(mask);
+        __osRestoreInt(unlockMask);
     }
     /* thread block D_801008F8 - 0x348 followed by its 0x800-byte stack at D_801008F8 */
-    thread = (char *)&D_801008F8 - 0x348;
     func_802A001C_de(&D_801008F8, count, 0x800);
+    thread = (char *)&D_801008F8 - 0x348;
     func_802BAC90_de(thread, count, &D_002524B0, 0, (char *)&D_801008F8 + 0x800, D_800CD8BC);
     func_802BB750_de(thread);
-#undef RESOURCE_MANAGER
 }
-#else
-INCLUDE_ASM("span_1000", Scene_InitializeResourceCache);
-#endif
 
 extern s32 D_80101134[];
 

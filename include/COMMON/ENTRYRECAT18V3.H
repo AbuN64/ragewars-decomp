@@ -168,7 +168,6 @@ struct func_802551C8_S1 {
     s32 unk238;
 };
 
-extern s32 D_80100560;
 
 
 
