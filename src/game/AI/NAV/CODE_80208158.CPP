@@ -363,7 +363,7 @@ static __inline__ void navigationTurnRight(CVector3 *v) {
     v->z = -v->y;
     v->y = 0.0f;
 }
-/* 76/257 aligned edits; remaining: saved-register allocation and float scheduling. */
+/* 44/257 aligned edits; remaining: value/angle in $f21/$f20 (ROM $f20/$f21), the graph pointer kept in $s5 by the ROM, jumping in $s5 (ROM $s6). */
 void Nav_UpdatePlayerSteering(AiController *controller) {
     CNavData *graph = &D_8013B364;
     CVector3 delta;
@@ -381,8 +381,8 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
 
     if (controller->unk300 == 0) {
         destination = &controller->destination;
-        player = controller->player;
         position = &controller->player->pos;
+        player = controller->player;
         jumping = player->movementFlags & 0x2000;
         falling = player->movementFlags & 0x1000;
         func_80271F68_de(&delta, destination, position);
