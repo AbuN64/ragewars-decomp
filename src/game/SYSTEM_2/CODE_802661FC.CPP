@@ -20,7 +20,6 @@ typedef struct DamageActor {
     char pad130[0xA8]; struct ReactionPlayer *player;
 } DamageActor;
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
@@ -29,31 +28,34 @@ extern u8 D_801462E5;
 extern s32 D_8013B290;
 extern s32 func_8024D160_de(void *);
 
-/* Whether source may hurt target: false against itself, against a target whose hit is refused, against a stand-in
- * (category 2) whose owner is an unattackable player or is the attacker with the 0x40 property, and so on; players
- * (category 1) are checked by canDamage. 101 aligned edits of 144 words; remaining: the ROM keeps source in s1 and
- * target in s0 (ours is swapped), and copies target to a1 for the owner tests. */
+/* Whether source may hurt target: never itself, nor when source is a player whose hit func_8024D160_de refuses;
+ * a stand-in (category 2) is safe when its owner is a player canDamage protects, when source owns it and it has
+ * property 0x40, or for source kind 1 on team 0xCA against kind 0x14; players (category 1) go through canDamage. */
 static inline s32 canDamage(DamageActor *source, DamageActor *actor) {
-    s32 allowed = 1;
-    s32 kind;
-    if (!D_801462E5) {
-        allowed = 0;
-        if (actor->team != source->team && (source->flags & 0x310000) &&
-            (!D_8013B290 || (actor->flags & 0x300000) || (source->flags & 0x300000))) {
-            switch (source->definition->kind) {
-            case 1:
-            case 4:
-            case 7:
-            case 11:
-                allowed = 1;
-                break;
-            }
-        }
+    if (D_801462E5) {
+        return 1;
     }
-    return allowed;
+    if (actor->team == source->team) {
+        return 0;
+    }
+    if (!(source->flags & 0x310000)) {
+        return 0;
+    }
+    if (D_8013B290 && !(actor->flags & 0x300000) && !(source->flags & 0x300000)) {
+        return 0;
+    }
+    switch (source->definition->kind) {
+    case 1:
+    case 4:
+    case 7:
+    case 11:
+        return 1;
+    }
+    return 0;
 }
 s32 System_CanDamageActor(DamageActor *source, DamageActor *target) {
     DamageActor *owner;
+    DamageActor *standIn;
     if (source == target) {
         return 0;
     }
@@ -61,31 +63,26 @@ s32 System_CanDamageActor(DamageActor *source, DamageActor *target) {
         return 0;
     }
     if (target->category != 1) {
-        if (target->category != 2) {
-            return 1;
-        }
-        owner = target->owner;
-        if (owner) {
-            if (owner->category == 1 && !canDamage(source, owner)) {
+        if (target->category == 2) {
+            standIn = target;
+            owner = standIn->owner;
+            if (owner) {
+                if (owner->category == 1 && !canDamage(source, owner)) {
+                    return 0;
+                }
+                if (source == standIn->owner && (*standIn->properties & 0x40)) {
+                    return 0;
+                }
+            }
+            if (standIn->kind == 0x14 && source->definition->kind == 1 && source->team == 0xCA) {
                 return 0;
             }
-            if (source == target->owner && (*target->properties & 0x40)) {
-                return 0;
-            }
         }
-        if (target->kind != 0x14) {
-            return 1;
-        }
-        if (source->definition->kind == 1 && source->team == 0xCA) {
-            return 0;
-        }
-        return 1;
+    } else if (!canDamage(source, target)) {
+        return 0;
     }
-    return canDamage(source, target);
+    return 1;
 }
-#else
-INCLUDE_ASM("span_1000", System_CanDamageActor);
-#endif
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
