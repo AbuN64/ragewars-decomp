@@ -363,6 +363,12 @@ extern u8 *func_8028FDC8_de();
 extern u8 **func_8025343C_de();
 extern void func_802BD3A0_de();
 extern void Actors_AccumulateVertexLighting();
+typedef struct LitVertex {
+    s16 position[3];
+    s16 flags;
+    s16 texture[2];
+    u8 color[4];
+} LitVertex;
 typedef struct LitModelAllocation {
     s32 hasColors, modelOffset, colorsOffset;
     u32 guard;
@@ -373,7 +379,8 @@ static inline u8 clampLitChannel(u8 value) {
         ? (value < 0xE1 ? value : 0xE1) : 0x1E;
 }
 
-/* NON_MATCHING: 111 aligned edits / 244 ROM words; remaining: model/count and RGB registers, allocator scheduling.
+/* NON_MATCHING: 72 aligned edits / 244 ROM words; remaining: model/count (s0/s1) and copiedModel/world (s3/s4) priorities,
+ * header offsets re-read after the header stores in the ROM.
  * The query return selects the color trailer; the output count selects the light list.
  * The allocator takes the byte count before the flags. */
 s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, void *matrices, s32 skinned, void *wanted) {
@@ -400,7 +407,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         D_80111D78[clearIndex * 3] = 0;
     }
     if (needsColors != 0) {
-        allocation = func_8025343C_de(0, modelBytes + (model->count + 4) * 4, 0, D_800C4B1C_de);
+        allocation = func_8025343C_de(0, modelBytes + sizeof(LitModelAllocation) + model->count * 4, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
@@ -422,18 +429,17 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
     func_802BD3A0_de(copiedModel, model, modelBytes);
     table = func_8028FDB4_de(modelResource, 1);
     if (*(s32 *)(table + 4) != 0) {
+        s32 *packed = (s32 *)(table + 8);
         for (colorIndex = 0; colorIndex < modelVertexCount; colorIndex++) {
             CVector3 *light = &((CVector3 *)D_80111D70)[colorIndex];
-            f32 red = light->x;
-            f32 green = light->y;
-            f32 blue = light->z;
-            packedColor = *(s32 *)(table + 8 + colorIndex * 4);
-            red += ((s32)((u32)(packedColor & 0xFF0000) << 8)) >> 23;
-            green += (s8)(packedColor >> 8) * 2;
-            blue += ((s32)((u32)packedColor << 24)) >> 23;
-            light->x = red;
-            light->y = green;
-            light->z = blue;
+            s32 red, green, blue;
+            packedColor = packed[colorIndex];
+            red = ((s32)((u32)(packedColor & 0xFF0000) << 8)) >> 23;
+            green = (s8)(packedColor >> 8) * 2;
+            blue = ((s32)((u32)packedColor << 24)) >> 23;
+            light->x += red;
+            light->y += green;
+            light->z += blue;
         }
     }
     if (D_800D2850 == 0) {
@@ -454,13 +460,13 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
     if (needsColors != 0) {
         s32 vertexCount = *(s32 *)(copiedModel + 4);
         u8 *color = colors;
-        u8 *vertex = copiedModel + 8;
-        for (trailerIndex = 0; trailerIndex < vertexCount; trailerIndex++, vertex += 0x10) {
+        LitVertex *vertices = (LitVertex *)(copiedModel + 8);
+        for (trailerIndex = 0; trailerIndex < vertexCount; trailerIndex++) {
             u8 *dest = color;
             color += 4;
-            dest[0] = clampLitChannel(vertex[0xC]);
-            dest[1] = clampLitChannel(vertex[0xD]);
-            dest[2] = clampLitChannel(vertex[0xE]);
+            dest[0] = clampLitChannel(vertices[trailerIndex].color[0]);
+            dest[1] = clampLitChannel(vertices[trailerIndex].color[1]);
+            dest[2] = clampLitChannel(vertices[trailerIndex].color[2]);
         }
     }
     return (s32)allocation;
