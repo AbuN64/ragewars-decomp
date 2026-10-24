@@ -17,7 +17,7 @@ void func_80212C90_de(AiTarget *aiTarget) {
 
 extern s32 func_80209874_de(void *, s32);
 extern void func_80211020_de(void *);
-extern void Nav_DistanceToNode(s32 *, s32);
+extern f32 Nav_DistanceToNode(s32 *, s32);
 extern void Nav_SteerAlongRoute(void *);
 extern void func_80208EB0_de(s32 *);
 extern char D_80145040;
