@@ -7,13 +7,13 @@ A matching decompilation of *Turok: Rage Wars* for the Nintendo 64.
 ## Progress
 
 <!-- progress -->
-<pre><code>all      [███████████████████░]  98.21% (~99.76%)  41,194,424 of 41,943,040 bytes</code><br><code>de       [███████████████████░]  97.49% (~99.83%)  8,178,646 of 8,388,608 bytes</code><br><code>eu       [███████████████████░]  97.97% (~99.50%)  8,218,423 of 8,388,608 bytes</code><br><code>eu-x     [███████████████████░]  97.87% (~99.53%)  8,209,970 of 8,388,608 bytes</code><br><code>us       [███████████████████░]  98.74% (~99.97%)  8,283,401 of 8,388,608 bytes</code><br><code>us-rev1  [███████████████████▒]  98.99% (~100.00%)  8,303,984 of 8,388,608 bytes</code></pre>
+<pre><code>all      [███████████████████░]  98.10% (~99.66%)  41,148,835 of 41,943,040 bytes</code><br><code>de       [███████████████████░]  96.95% (~99.29%)  8,133,057 of 8,388,608 bytes</code><br><code>eu       [███████████████████░]  97.97% (~99.50%)  8,218,423 of 8,388,608 bytes</code><br><code>eu-x     [███████████████████░]  97.87% (~99.53%)  8,209,970 of 8,388,608 bytes</code><br><code>us       [███████████████████░]  98.74% (~99.97%)  8,283,401 of 8,388,608 bytes</code><br><code>us-rev1  [███████████████████▒]  98.99% (~100.00%)  8,303,984 of 8,388,608 bytes</code></pre>
 
 <a href="https://itsmo.me/attic/cake-unbake/#ragewars-decomp-us-rev1"><img src="docs/overview-us-rev1.svg" width="720"></a>
 
 | de (NUS-NRWD-0, Germany). Censored German release. SHA256 `9dc401252bacb2ad7412ef003f97f28cb225d76b3cc76f430fbc27fa05067ca8` |
 |---|
-| <pre><code>code      [█████████████████▒▒░]  89.09% (~99.87%)  985,392 of 1,105,968</code><br><code>data      [████████████████████]  100.00%  244,444 of 244,444</code><br><code>functions [███████████████████░]  96.22% (~99.97%)  4,081 of 4,241</code><br><code>blobs     [███████████████████░]  98.68% (~99.78%)  6,912,522 of 7,004,340</code></pre> |
+| <pre><code>code      [█████████████████▒▒░]  89.09% (~99.87%)  985,392 of 1,105,968</code><br><code>data      [████████████████████]  100.00%  244,444 of 244,444</code><br><code>functions [███████████████████░]  96.22% (~99.97%)  4,081 of 4,241</code><br><code>blobs     [███████████████████░]  98.03% (~99.13%)  6,866,933 of 7,004,340</code></pre> |
 
 | eu (NUS-NRWP-0, Europe). PAL release. SHA256 `d763cbbe485a5f9e1b7be97d5ac16735087e23d0bb62c05dc844e01b7e1156d1` |
 |---|
