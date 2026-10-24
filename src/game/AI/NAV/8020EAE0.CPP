@@ -77,13 +77,14 @@ s32 func_8020EAE0_de(void *arg0) {
     return 1;
 }
 
-#ifdef NON_MATCHING
 extern u8 D_8011D8D0[];
 extern s32 func_8020CB3C_de(s32 *, void *);
 extern u8 *func_8020CFE0_de(s32 *, s32);
+/* Finds the nav node of obj and stores weight as its goal weight (+0x18). */
+#define navigationNodeOf(graph, obj, out) do { (out) = func_8020CFE0_de((graph), func_8020CB3C_de((graph), (obj))); } while (0)
+#define navigationSetGoalWeight(graph, obj, weight) do { u8 *node_; navigationNodeOf(graph, obj, node_); *(f32 *)(node_ + 0x18) = (weight); } while (0)
 void Nav_SetPickupGoalWeights(void *arg) {
     s32 *ctrl = &D_8013B364;
-    u8 *entry;
     u8 *node;
     u8 *link;
     s32 i;
@@ -103,8 +104,7 @@ void Nav_SetPickupGoalWeights(void *arg) {
             case 0x404:
             case 0x40B:
             case 0x40F:
-                entry = func_8020CFE0_de(ctrl, func_8020CB3C_de(ctrl, node + 8));
-                *(f32 *)(entry + 0x18) = 51200.0f;
+                navigationSetGoalWeight(ctrl, node + 8, 51200.0f);
                 break;
             default:
                 break;
@@ -112,6 +112,3 @@ void Nav_SetPickupGoalWeights(void *arg) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_SetPickupGoalWeights);
-#endif

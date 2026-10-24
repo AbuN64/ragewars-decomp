@@ -2942,3 +2942,4 @@ literals_Audio_UpdateVoiceVolume = 0x800C9028; // rom:0xC9C28 size:0x18
 literals_System_RunPiManager = 0x800CCB80; // rom:0xCD780 size:0x1C
 literals_World_InitSimpleInstance = 0x800C8E70; // rom:0xC9A70 size:0x10
 literals_Frontend_DrawMenuImage = 0x800E2060; // rom:0xE2C60 size:0x1C
+literals_Nav_SetPickupGoalWeights = 0x800C6F50; // rom:0xC7B50 size:0x7C
