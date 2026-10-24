@@ -26,10 +26,12 @@ s16 func_802171C8_de(Cursor802171C8 *arg0) {
     return (s16) value;
 }
 
-void func_802171FC_de(void *unused0, struct CallbackState114 *arg1) {
+/* Runs the hook with the arguments this function was called with: its callers pass the actor, its hook state
+ * and the damage record, and the hook reads them from the same argument registers. */
+void func_802171FC_de(void *actor, struct CallbackState114 *arg1, void *damage) {
     FuncPtr fn = arg1->callback;
     if (fn != 0) {
-        fn();
+        ((void (*)(void *, void *, void *))fn)(actor, arg1, damage);
     }
 }
 
