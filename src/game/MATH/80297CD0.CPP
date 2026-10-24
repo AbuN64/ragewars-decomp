@@ -83,35 +83,70 @@ extern Element *func_80298170_de(s32);
 extern void func_8029973C_de(void);
 extern void func_80298368_de(s32);
 
-/* 188/309 aligned edits; remaining: callback and direct-id live ranges, category switch scheduling. */
+static inline s32 eventCategory(u32 event) {
+    if (event < 0xE00) return 0;
+    if (event - 0x1000 < 0x1000) return 1;
+    if (event - 0xE00 < 0x200) return 2;
+    if (event - 0x4000 < 0x4000) return 3;
+    return 0;
+}
+
+/* Unhandled default events return zero, regardless of earlier callback results. */
+static inline s32 defaultElementEvent(Element *element, s32 event, s32 arg3) {
+    s32 result;
+    s32 fallbackCategory;
+    result = 0;
+    fallbackCategory = eventCategory(event);
+    switch (fallbackCategory) {
+    case 0:
+        switch (event) {
+        case 5: case 6: case 7: case 8:
+            if (arg3 == 1) func_80296CD0_de(event);
+            break;
+        case 1:
+            if ((element->flags & 0x10) && element->linked_id) {
+                func_8029973C_de();
+                func_80298368_de(element->linked_id);
+            }
+            break;
+        case 2:
+            if (D_8014D080->current > 0) func_802998A8_de();
+            break;
+        case 15:
+            result = 0;
+            func_8040E928_de(element, 1);
+            break;
+        case 16:
+            result = 0;
+            func_8040E928_de(element, 0);
+            break;
+        default:
+            result = 0;
+            break;
+        }
+        break;
+    case 1: result = 0; break;
+    case 2: result = 0; break;
+    case 3: result = 0; break;
+    }    return result;
+}
+
+/* 18/309 aligned edits; remaining: gcc cross-jumps the first default site's case 15/16 calls into one (the ROM keeps two arms), which shifts the later branch targets. */
 s32 DispatchElementEvent(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
 {
     Element *element, *context, *current;
     MenuElementHandler kindHandler, handler;
     s32 result, category, previous;
-    s32 fallbackCategory;
     s32 direct;
     s32 *handled;
-    u32 code;
 
-    direct = 0;
-    element = 0;
     result = 0;
+    element = 0;
     kindHandler = 0;
-    code = event;
-    if (code != 0xE09) D_80146E04++;
+    direct = 0;
+    if (event != 0xE09) D_80146E04++;
     handled = &D_8014D080->handled;
-    category = 0;
-    if (code >= 0xE00) {
-        category = 1;
-        if (code - 0x1000 >= 0x1000) {
-            category = 2;
-            if (code - 0xE00 >= 0x200) {
-                category = 0;
-                if (code - 0x4000 < 0x4000) category = 3;
-            }
-        }
-    }
+    category = eventCategory(event);
     context = func_80411DCC_de(func_80299958_de());
     if (id == -1) {
         direct = 1;
@@ -122,97 +157,30 @@ s32 DispatchElementEvent(s32 id, s32 event, s32 arg2, s32 arg3, s32 arg4)
         if (!element) return 0;
         kindHandler = func_802997E4_de(element->kind);
         if (!kindHandler) {
-    fallbackCategory = 0;
-    if (code >= 0xE00) {
-        fallbackCategory = 1;
-        if (code - 0x1000 >= 0x1000) {
-            fallbackCategory = 2;
-            if (code - 0xE00 >= 0x200) {
-                fallbackCategory = 0;
-                if (code - 0x4000 < 0x4000) fallbackCategory = 3;
-            }
-        }
-    }
-            if (fallbackCategory != 0) return 0;
-        switch (code) {
-        case 1:
-            if ((element->flags & 0x10) && element->linked_id) {
-                func_8029973C_de();
-                func_80298368_de(element->linked_id);
-            }
-            break;
-        case 2:
-            if (D_8014D080->current > 0) func_802998A8_de();
-            break;
-        case 5: case 6: case 7: case 8:
-            if (arg3 == 1) func_80296CD0_de(event);
-            break;
-        case 15:
-            func_8040E928_de(element, 1);
-            break;
-        case 16:
-            func_8040E928_de(element, 0);
-            break;
-        default:
-            break;
-        }
+            defaultElementEvent(element, event, arg3);
             return 0;
         }
     }
+
     previous = *handled;
     *handled = 0;
     if (context->handler) result = context->handler(element, event, arg2, arg3, arg4);
-    if (*handled == 1) goto restore;
+    if (*handled == 1) { *handled = previous; return result; }
     if (!direct) {
         if (category != 2) {
             if (context->handler) result = context->handler(context, event, arg2, arg3, arg4);
-            if (*handled == 1) goto restore;
+            if (*handled == 1) { *handled = previous; return result; }
         }
         current = func_80298170_de(id);
         handler = 0;
         if (current) handler = current->handler;
         if (handler) result = handler(element, event, arg2, arg3, arg4);
-        if (*handled == 1) goto restore;
+        if (*handled == 1) { *handled = previous; return result; }
         if (kindHandler) result = kindHandler(element, event, arg2, arg3, arg4);
-        if (*handled == 1) goto restore;
+        if (*handled == 1) { *handled = previous; return result; }
     }
-    result = 0;
-    fallbackCategory = 0;
-    if (code >= 0xE00) {
-        fallbackCategory = 1;
-        if (code - 0x1000 >= 0x1000) {
-            fallbackCategory = 2;
-            if (code - 0xE00 >= 0x200) {
-                fallbackCategory = 0;
-                if (code - 0x4000 < 0x4000) fallbackCategory = 3;
-            }
-        }
-    }
-    if (fallbackCategory == 0) {
-        switch (code) {
-        case 1:
-            if ((element->flags & 0x10) && element->linked_id) {
-                func_8029973C_de();
-                func_80298368_de(element->linked_id);
-            }
-            break;
-        case 2:
-            if (D_8014D080->current > 0) func_802998A8_de();
-            break;
-        case 5: case 6: case 7: case 8:
-            if (arg3 == 1) func_80296CD0_de(event);
-            break;
-        case 15:
-            func_8040E928_de(element, 1);
-            break;
-        case 16:
-            func_8040E928_de(element, 0);
-            break;
-        default:
-            break;
-        }
-    }
-restore:
+    result = defaultElementEvent(element, event, arg3);
+
     *handled = previous;
     return result;
 }
