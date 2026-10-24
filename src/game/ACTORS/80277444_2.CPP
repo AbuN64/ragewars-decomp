@@ -292,6 +292,17 @@ typedef struct { s32 tag, count; ColorVertex vertices[1]; } ColorMesh;
 typedef struct { f32 x, y, z; } VertexColor;
 extern u32 D_80142218;
 
+/* 34/147 aligned edits left (was 64): the u8 clamp ladder (the ROM re-tests value < 256 after the < 0 test, the shape
+ * of a distributed MAX(MIN(v, 255), 0)), the z channel's extra clamp copy, and a zeroed a3 in the prologue. */
+static inline f32 clampIntensity(f32 c) {
+    if (!(c <= 255.0f)) {
+        c = 255.0f;
+    }
+    if (!(5.0f <= c)) {
+        c = 5.0f;
+    }
+    return c;
+}
 void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
     f32 whiteBlend, channelIntensity;
     VertexColor color;
@@ -305,48 +316,27 @@ void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
     vertex = mesh->vertices;
     count = mesh->count;
     if (D_801462C8.flags & 0x4000) {
-        for (i = 0; i < count; i++, vertex++) {
-            vertex->r = 0;
-            vertex->g = 0;
-            vertex->b = 0;
+        for (i = 0; i < count; i++) {
+            vertex[i].r = 0;
+            vertex[i].g = 0;
+            vertex[i].b = 0;
         }
     } else {
-        for (i = 0; i < count; i++, vertex++) {
+        for (i = 0; i < count; i++) {
             color = *colors++;
-            channelIntensity = color.x;
-            if (!(channelIntensity <= 255.0f)) {
-                channelIntensity = 255.0f;
-            }
-            if (!(5.0f <= channelIntensity)) {
-                channelIntensity = 5.0f;
-            }
-            color.x = channelIntensity * (1.0f - whiteBlend) + whiteBlend * 255.0f;
-            channelIntensity = color.y;
-            if (!(channelIntensity <= 255.0f)) {
-                channelIntensity = 255.0f;
-            }
-            if (!(5.0f <= channelIntensity)) {
-                channelIntensity = 5.0f;
-            }
-            color.y = channelIntensity * (1.0f - whiteBlend) + whiteBlend * 255.0f;
-            channelIntensity = color.z;
-            if (!(channelIntensity <= 255.0f)) {
-                channelIntensity = 255.0f;
-            }
-            if (!(5.0f <= channelIntensity)) {
-                channelIntensity = 5.0f;
-            }
-            color.z = channelIntensity * (1.0f - whiteBlend) + whiteBlend * 255.0f;
-            if (!(vertex->flags & 0x80)) {
+            color.x = clampIntensity(color.x) * (1.0f - whiteBlend) + whiteBlend * 255.0f;
+            color.y = clampIntensity(color.y) * (1.0f - whiteBlend) + whiteBlend * 255.0f;
+            color.z = clampIntensity(color.z) * (1.0f - whiteBlend) + whiteBlend * 255.0f;
+            if (!(vertex[i].flags & 0x80)) {
                 channelValue = (s32)color.x;
                 channelValue = (channelValue < 256) ? ((channelValue < 0) ? 0 : channelValue) : 255;
-                vertex->r = channelValue;
+                vertex[i].r = channelValue;
                 channelValue = (s32)color.y;
                 channelValue = (channelValue < 256) ? ((channelValue < 0) ? 0 : channelValue) : 255;
-                vertex->g = channelValue;
+                vertex[i].g = channelValue;
                 channelValue = (s32)color.z;
                 channelValue = (channelValue < 256) ? ((channelValue < 0) ? 0 : channelValue) : 255;
-                vertex->b = channelValue;
+                vertex[i].b = channelValue;
             }
         }
     }
