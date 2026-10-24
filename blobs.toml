@@ -12995,6 +12995,213 @@ stored_size = 1562
 rom."de" = [[0x1ef294, 0x1ef8ae]]
 evidence = [{ artifact = "rnc-copy-de.json", sha256 = "454289a554801f0db2c2cf60899d44c73bfa7d41d70e348a5bc6327cdb28a0c8", pointer = "/rows/12" }]
 
+[blob."leftover.de.rnc-stale.1cebbc"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 6527
+rom."de" = [[0x1cebbc, 0x1d053b]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/0" }]
+
+[blob."leftover.de.rnc-stale.1d0561"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 1723
+rom."de" = [[0x1d0561, 0x1d0c1c]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/1" }]
+
+[blob."leftover.de.rnc-stale.1d3917"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 4293
+rom."de" = [[0x1d3917, 0x1d49dc]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/2" }]
+
+[blob."leftover.de.rnc-stale.1d4a10"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 1863
+rom."de" = [[0x1d4a10, 0x1d5157]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/3" }]
+
+[blob."leftover.de.rnc-stale.1d519f"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 1075
+rom."de" = [[0x1d519f, 0x1d55d2]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/4" }]
+
+[blob."leftover.de.rnc-stale.1d6b82"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 7319
+rom."de" = [[0x1d6b82, 0x1d8819]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/5" }]
+
+[blob."leftover.de.rnc-stale.1d8839"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 1034
+rom."de" = [[0x1d8839, 0x1d8c43]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/6" }]
+
+[blob."leftover.de.rnc-stale.1d8c67"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 2017
+rom."de" = [[0x1d8c67, 0x1d9448]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/7" }]
+
+[blob."leftover.de.rnc-stale.1dc275"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 5858
+rom."de" = [[0x1dc275, 0x1dd957]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/8" }]
+
+[blob."leftover.de.rnc-stale.1f7f42"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 4549
+rom."de" = [[0x1f7f42, 0x1f9107]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/9" }]
+
+[blob."leftover.de.rnc-stale.1f9178"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 2360
+rom."de" = [[0x1f9178, 0x1f9ab0]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/10" }]
+
+[blob."leftover.de.rnc-stale.1f9f14"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 324
+rom."de" = [[0x1f9f14, 0x1fa058]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/11" }]
+
+[blob."leftover.de.rnc-stale.1fbd85"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 3723
+rom."de" = [[0x1fbd85, 0x1fcc10]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/12" }]
+
+[blob."leftover.de.rnc-stale.1fcc48"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 74
+rom."de" = [[0x1fcc48, 0x1fcc92]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/13" }]
+
+[blob."leftover.de.rnc-stale.1fcd3c"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 30
+rom."de" = [[0x1fcd3c, 0x1fcd5a]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/14" }]
+
+[blob."leftover.de.rnc-stale.1fcd9e"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 5
+rom."de" = [[0x1fcd9e, 0x1fcda3]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/15" }]
+
+[blob."leftover.de.rnc-stale.1fcdc4"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 20
+rom."de" = [[0x1fcdc4, 0x1fcdd8]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/16" }]
+
+[blob."leftover.de.rnc-stale.1fcdf8"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 287
+rom."de" = [[0x1fcdf8, 0x1fcf17]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/17" }]
+
+[blob."leftover.de.rnc-stale.1fcf3f"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 855
+rom."de" = [[0x1fcf3f, 0x1fd296]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/18" }]
+
+[blob."leftover.de.rnc-stale.1fd33b"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 583
+rom."de" = [[0x1fd33b, 0x1fd582]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/19" }]
+
+[blob."leftover.de.rnc-stale.1fd5be"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 3
+rom."de" = [[0x1fd5be, 0x1fd5c1]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/20" }]
+
+[blob."leftover.de.rnc-stale.1fd5e5"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 302
+rom."de" = [[0x1fd5e5, 0x1fd713]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/21" }]
+
+[blob."leftover.de.rnc-stale.1fd745"]
+type = "leftover"
+format = "rnc-stale"
+codec = "none"
+state = "decoded"
+stored_size = 765
+rom."de" = [[0x1fd745, 0x1fda42]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/22" }]
+
 [blob."leftover.de.text-copy.1deb04"]
 type = "leftover"
 format = "copy"
@@ -43891,6 +44098,15 @@ state = "decoded"
 stored_size = 37497
 rom."us" = [[0x1f6d86, 0x1fffff]]
 evidence = [{ artifact = "sn-debug-us.json", sha256 = "947537677470eb6ac06ef278b04835f5db90cde8abe2f9f9db34a498754a5ae5", pointer = "/rows/5" }]
+
+[blob."leftover.us.sn-head.158000"]
+type = "leftover"
+format = "sn-debug"
+codec = "none"
+state = "decoded"
+stored_size = 3
+rom."us" = [[0x158000, 0x158003]]
+evidence = [{ artifact = "rnc-stale.json", sha256 = "e4014be6449ea88b4553c8dbbac8475dbd2d282ea389e1447542dce52f3adcd0", pointer = "/rows/23" }]
 
 [blob."leftover.us.sn-head.160000"]
 type = "leftover"
