@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "MENU/PAK_LOAD.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -170,7 +171,7 @@ s32 func_8040A9A0_de(LayeredText *field) {
 
     func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800ED414, value);
 #else
-    s32 value = D_8014D48C;
+    s32 value = D_8014D488.values[2];
     char *text = (char *)*field->text;
 
     func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DCD94_de, value);

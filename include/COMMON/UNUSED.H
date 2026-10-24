@@ -769,7 +769,6 @@ extern const f64 D_800C7730_de;
 
 extern s32 D_800C87F0;
 
-extern u16 D_8014D48C;
 
 extern char D_800D38FC[];
 
