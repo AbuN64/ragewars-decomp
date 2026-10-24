@@ -18,14 +18,16 @@
 extern func_80203E78_S1 *D_800E2830;
 
 #ifdef NON_MATCHING
-extern CVector3 Menu_EvaluateCameraSpline(KeyRecAt1C *keys, s32 count, f32 t) __asm__("Menu_EvaluateCameraSpline_value");
+#define Menu_EvaluateCameraSpline Menu_EvaluateCameraSpline_value
+extern CVector3 Menu_EvaluateCameraSpline(KeyRecAt1C *keys, s32 count, f32 t);
 #else
 extern CVector3 Menu_EvaluateCameraSpline(KeyRecAt1C *keys, s32 count, f32 t);
 #endif
 
 #ifdef NON_MATCHING
 /* host build: the by-value body is the symbol Menu_GetTrackTargetPosition_value; the entry that takes the result pointer keeps the name the callers use. */
-extern CVector3 Menu_GetTrackTargetPosition(f32 t) __asm__("Menu_GetTrackTargetPosition_value");
+#define Menu_GetTrackTargetPosition Menu_GetTrackTargetPosition_value
+extern CVector3 Menu_GetTrackTargetPosition(f32 t);
 #endif
 CVector3 Menu_GetTrackTargetPosition(f32 t) {
     s32 i;
@@ -66,8 +68,8 @@ CVector3 Menu_GetTrackTargetPosition(f32 t) {
     return Menu_EvaluateCameraSpline(keys, count, t - start);
 }
 #ifdef NON_MATCHING
-void Menu_GetTrackTargetPositionOut(CVector3 *out, f32 t) __asm__("Menu_GetTrackTargetPosition");
-void Menu_GetTrackTargetPositionOut(CVector3 *out, f32 t) {
-    *out = Menu_GetTrackTargetPosition(t);
+#undef Menu_GetTrackTargetPosition
+void Menu_GetTrackTargetPosition(CVector3 *out, f32 t) {
+    *out = Menu_GetTrackTargetPosition_value(t);
 }
 #endif
