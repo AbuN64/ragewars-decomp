@@ -25,7 +25,7 @@ extern u8 *D_800E0D44[], *D_800DCC68[];
 extern WeaponActionRecord D_800CE8DC[];
 extern MatchRewardsRecord D_80102B00[];
 
-extern u8 *D_800D30BC;
+extern u8 *D_800D30BC[];
 
 
 extern s32 func_8022F96C_de(void *);
@@ -60,7 +60,7 @@ static inline s32 can_fire(char *player, f32 *scale) {
 #elif defined(VERSION_EU_X)
             Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, ((D_800DCC68)[D_80152789]), func_8022A5A0_de(&D_80145040, player),
 #else
-            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, (D_800D30BC), func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((SharedPlayer *)(player))->views5DC.view5DC_0.unk5DC, D_800D30BC[0], func_8022A5A0_de(&D_80145040, player),
 #endif
                           *scale);
         }
@@ -107,14 +107,7 @@ void func_802321C8_de(Shared_Actor *actor, WeaponFireState *attack) {
         func_80214178_de(actor, attack, action);
     }
 }
-
-
-/* D_800C2FCC_de is resident shared data supplied by its retained ROM slice. */
-
-#ifdef NON_MATCHING
-/* 141/143 words; remaining: sched1 loads D_800C2FD0_de before D_800D30BC in the can_fire call: the
-   func_8025DE54_de(0x460, state->position, ...) call sets a3 a second time, so the a3 = v0 copy is not a
-   birthing insn here (the sibling func_802321C8_de sets a3 once and matches). */
+/* D_800C2FCC_de and D_800C2FD0_de are the two message-duration floats of this unit's literal pool. */
 typedef struct HeldPlayerState {
     u8 pad0[8];
     CVector3 position;
@@ -177,6 +170,3 @@ void Weapons_UpdateHeldFire(Shared_Actor *actor, WeaponFireState *attack) {
         state->handled78C = 0;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Weapons_UpdateHeldFire);
-#endif
