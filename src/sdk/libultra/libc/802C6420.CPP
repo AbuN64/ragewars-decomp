@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-#if defined(NON_MATCHING) || !defined(VERSION_EU)
+#if !defined(VERSION_EU)
 /* UnsignedRemainder: libgcc2 remainder with the VR4300 HI/LO hazards. */
 /* gcc-2.8.1 libgcc2 __umoddi3 compiled in place; the units name it Libc_UnsignedRemainder */
 #define __umoddi3 Libc_UnsignedRemainder
