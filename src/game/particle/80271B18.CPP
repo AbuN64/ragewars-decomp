@@ -17,15 +17,13 @@ extern f32 D_800C4838_de;
 extern f32 D_800C483C_de;
 extern f32 D_800C4840_de;
 extern f32 D_800C4844_de;
-
-
-static inline f32 clampf(f32 v, f32 lo, f32 hi) { return v < lo ? lo : (v > hi ? hi : v); }
 f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
     f32 z = direction->z;
     f32 length = x * x + z * z;
     f32 angle;
     f32 a;
+    f32 t;
     if (length == 0.0f) {
         return 0.0f;
     }
@@ -35,14 +33,33 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     }
     if (RW_ABS(x) < RW_ABS(z)) {
         x /= length;
-        x = clampf(x, D_800C483C_de, D_800C4838_de);
-        a = func_802745D0_de(x);
-        angle = (z < 0.0f ? a : -a) - D_800C4840_de;
+        if (!(x > D_800C4838_de) && x < D_800C483C_de) {
+            t = D_800C483C_de;
+        } else if (x > D_800C4838_de) {
+            t = D_800C4838_de;
+        } else {
+            t = x;
+        }
+        a = func_802745D0_de(t);
+        angle = -a;
+        if (z < 0.0f) {
+            angle = a;
+        }
+        angle -= D_800C4840_de;
     } else {
         z /= length;
-        z = clampf(z, D_800C4848_de, D_800C4844_de);
-        a = func_802745D0_de(-z);
-        angle = x < 0.0f ? a : -a;
+        if (!(z > D_800C4844_de) && z < D_800C4848_de) {
+            t = D_800C4848_de;
+        } else if (z > D_800C4844_de) {
+            t = D_800C4844_de;
+        } else {
+            t = z;
+        }
+        a = func_802745D0_de(-t);
+        angle = -a;
+        if (x < 0.0f) {
+            angle = a;
+        }
     }
     return angle;
 }
