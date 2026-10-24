@@ -19,7 +19,6 @@ void func_80442544_de(void *);                    /* extern */
 
 
 extern s32 D_800E28D0, D_800E28D4;
-extern struct IntPair D_80103220;
 
 
 
@@ -116,7 +115,7 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     arg0->unk120 = 0;
     arg0->unk124 = 0x32;
     arg0->unk126 = 0;
-    D_80103220.field_4 = 0;
+    D_800FF224_de = 0;
     func_80255CA0_de(&((GameplayCamera *)arg0)->objects, 0, 4);
     func_80239C20_de(arg0);
 }

@@ -5,12 +5,12 @@
 #include "TYPES.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/UNUSED.H"
+#include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
 #include "SCHED/8023A284.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern f32 D_80103220[];
 
 
 f32 func_8023A294_de(s32 unused0, f32 value, f32 target, f32 step) {
@@ -19,13 +19,13 @@ f32 func_8023A294_de(s32 unused0, f32 value, f32 target, f32 step) {
     }
     if (value < target) {
         value += step;
-        D_80103220[1] = D_800C359C_de;
+        D_800FF224_de = D_800C359C_de;
         if (target < value) {
             value = target;
         }
     } else if (target < value) {
         value -= step;
-        D_80103220[1] = D_800C35A0_de;
+        D_800FF224_de = D_800C35A0_de;
         if (value < target) {
             value = target;
         }

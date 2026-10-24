@@ -6,6 +6,8 @@
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/RESIDENT_EVENT_HANDLER.H"
+/* The camera view fade timer, the word after the view flags D_80103220 (its own global: read with its own lui). */
+extern f32 D_800FF224_de;
 struct Triple;
 struct ObjRecAt260;
 

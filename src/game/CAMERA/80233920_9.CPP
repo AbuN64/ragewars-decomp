@@ -22,7 +22,6 @@ extern s32 D_800E28D4;
 extern s32 D_800E28D4;
 extern s32 D_800D297C;
 extern s32 D_80146894;
-extern f32 D_800FF224_de;
 extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;

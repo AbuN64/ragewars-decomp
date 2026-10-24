@@ -179,7 +179,6 @@ extern func_8020CA10_G1 D_800C48E8_de;
 
 extern char D_800C25FC_de[];
 
-extern f32 D_800FF224_de;
 
 extern u8 D_8010B3F4;
 
