@@ -51338,6 +51338,15 @@ rom."us" = [[0x769a48, 0x769ac8]]
 rom."us-rev1" = [[0x769a48, 0x769ac8]]
 evidence = [{ artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us-rev1/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/us/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/eu-x/children/7" }, { artifact = "resource-children.json", sha256 = "3e740aedf2923b6dc68734c60bc5927b2df88b59e6a8b17894e38a4aa079f260", pointer = "/versions/de/children/7" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/11" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/12" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/13" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/14" }, { artifact = "proof-receipt.json", sha256 = "b3bf2a99e6ea2260d01a28950590f4286ee7c51c7d5b5e6798d442c42f749550", pointer = "/rows/15" }, { artifact = "native-proof.json", sha256 = "a2b27b7d9bc47946c5f3961cbee1b0b21d64856f3bf45a454ff83d84266bb436", pointer = "/proofs" }]
 
+[blob."resource.empty-directory.us"]
+type = "world"
+format = "directory-header"
+codec = "none"
+state = "decoded"
+stored_size = 8
+rom."us" = [[0x79cc70, 0x79cc78]]
+evidence = [{ artifact = "empty-directory-us.json", sha256 = "6d24524a3d3a93f5512e09d922dd38e1255a2466e2228fa02e491043ecac95ef", pointer = "/rows/0" }]
+
 [blob."resource.empty-directory.us-rev1"]
 type = "world"
 format = "directory-header"
