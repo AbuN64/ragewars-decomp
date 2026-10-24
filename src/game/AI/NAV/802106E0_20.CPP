@@ -13,7 +13,7 @@
 
 extern f32 D_800C20C0_de[];
 extern s32 func_80209874_de(void *, s32);
-extern void func_80208EB0_de(void *);
+extern void Nav_UpdateTargetSteering(void *);
 extern CNavData D_8013B364;
 
 extern void func_80211020_de(void *);
@@ -93,7 +93,7 @@ void func_80212828_de(CloseAttackActor *arg0)
 
     func_80211020_de(state);
     Nav_SteerAlongRoute(state);
-    func_80208EB0_de(state);
+    Nav_UpdateTargetSteering(state);
     if (func_802726BC_de(&peer_actor->pos.x,
                        &state->player->pos.x) < D_800C20C0_de[1] ||
         state->route == state->destination) {
@@ -142,7 +142,7 @@ void Nav_UpdateRetreatMovement(void *actorObject)
 
     func_80211020_de(brain);
     Nav_SteerAlongRoute(brain);
-    func_80208EB0_de(brain);
+    Nav_UpdateTargetSteering(brain);
     if (brain->route == brain->destination) {
         brain->destination = -1;
     }
@@ -229,5 +229,5 @@ void func_80212C04_de(void *arg0) {
     func_80211020_de(rec);
     Nav_DistanceToNode(rec, rec[3]);
     Nav_SteerAlongRoute(rec);
-    func_80208EB0_de(rec);
+    Nav_UpdateTargetSteering(rec);
 }

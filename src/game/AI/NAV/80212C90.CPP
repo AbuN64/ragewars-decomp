@@ -19,7 +19,7 @@ extern s32 func_80209874_de(void *, s32);
 extern void func_80211020_de(void *);
 extern f32 Nav_DistanceToNode(s32 *, s32);
 extern void Nav_SteerAlongRoute(void *);
-extern void func_80208EB0_de(s32 *);
+extern void Nav_UpdateTargetSteering(s32 *);
 extern char D_80145040;
 
 
@@ -41,7 +41,7 @@ void func_80212CC4_de(AiTarget *aiTarget) {
     func_80211020_de(controller);
     Nav_DistanceToNode(controller, controller->mode);
     Nav_SteerAlongRoute(controller);
-    func_80208EB0_de(controller);
+    Nav_UpdateTargetSteering(controller);
 }
 
 #if defined(VERSION_EU_X)

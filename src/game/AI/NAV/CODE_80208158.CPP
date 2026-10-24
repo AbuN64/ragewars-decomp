@@ -477,122 +477,99 @@ extern f32 D_800C1C18;
 extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
-void func_80208EB0_de(AiController *controller) {
+/* 8/278 aligned edits; remaining: position from the player copy (ROM addiu s5,s1,8), turn-helper store order. */
+void Nav_UpdateTargetSteering(AiController *controller) {
     CNavData *graph;
-    CVector3 *playerPosition;
-    CVector3 sp10;
-    CVector3 v20;
-    CVector3 v30;
-    CVector3 v40;
-    CVector3 extra;
-    AiTarget *temp_v1;
-    NavigationPoint *temp_v0_3;
-    Player *temp_v0;
-    CVector3 *temp_s2;
-    f32 temp_fa0;
-    f32 temp_fa1;
-    f32 temp_fs0f;
-    f32 temp_ft0;
+    AiTarget *target;
+    CVector3 delta;
+    CVector3 desired;
+    CVector3 facing;
+    CVector3 tangent;
+    CVector3 steer;
+    CVector3 *destination;
+    CVector3 *position;
+    Player *player;
     f32 value;
-    f32 temp_fv0_2;
-    f32 temp_fv0_4;
-    f32 temp_fv0_5;
-    f32 temp_fv0f;
-    f32 temp_fv0f_2;
-    f32 temp_fv1;
-    f32 temp_fv1_2;
-    f32 temp_fv1f;
-    s32 temp_s4;
-    s32 temp_s6;
-    s32 temp_v0_2;
+    f32 angle;
+    f32 distance;
+    f32 projection;
+    s32 jumping;
+    s32 falling;
 
-    temp_v1 = controller->target;
-    if (temp_v1 == 0) {
-        goto block_6;
-    }
-    if ((controller->unk308 != 0) || (controller->unk30C != 0) || (controller->unk314 != 0)) {
-block_6:
+    target = controller->target;
+    if (target == 0 || controller->unk308 != 0 || controller->unk30C != 0 || controller->unk314 != 0) {
         func_80209308_de(controller, &controller->destination, 2.0f, 0.0f);
     } else {
-        func_80209308_de(controller, &temp_v1->player->pos, 2.0f, 0.0f);
+        func_80209308_de(controller, &target->player->pos, 2.0f, 0.0f);
         func_80209E80_de(controller);
     }
     if (controller->unk300 == 0) {
-        temp_s2 = &controller->destination;
-        temp_v0 = controller->player;
-        playerPosition = &temp_v0->pos;
-        temp_v0_2 = temp_v0->movementFlags;
-        temp_s6 = temp_v0_2 & 0x2000;
-        temp_s4 = temp_v0_2 & 0x1000;
-        func_80271F68_de(&sp10, temp_s2, playerPosition);
-        temp_fv0f = func_802B72B0_de((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
+        destination = &controller->destination;
+        position = &controller->player->pos;
+        player = controller->player;
+        jumping = player->movementFlags & 0x2000;
+        falling = player->movementFlags & 0x1000;
+        func_80271F68_de(&delta, destination, position);
+        distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
-        if (temp_s4 != 0) {
-            if (D_800C1C00 < temp_fv0f) {
-                value = 0.0f;
-                temp_fs0f = func_80209308_de(controller, temp_s2, 2.0f, value);
-                if (temp_fs0f < value) {
-                    if (-temp_fs0f < D_800C1C04) {
-                        goto block_15;
-                    }
-                } else if (temp_fs0f < D_800C1C08) {
-block_15:
-                    temp_v0->forward = D_800C1C0C;
+        if (falling) {
+            if (D_800C1C00 < distance) {
+                angle = func_80209308_de(controller, destination, 2.0f, 0.0f);
+                if (angle < 0.0f ? -angle < D_800C1C04 : angle < D_800C1C08) {
+                    player->forward = D_800C1C0C;
                 }
-                if (((temp_s6 != 0) || (temp_s4 != 0)) && (controller->unk304 != 0)) {
-                    value = sp10.y;
-                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
-                    temp_v0->forward = D_800C1C10;
+                if ((jumping || falling) && controller->unk304) {
+                    value = delta.y;
+                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de(delta.x * delta.x + delta.z * delta.z)), 1);
+                    player->forward = D_800C1C10;
                 }
             }
         } else {
-            temp_fs0f = controller->player->heading + D_800C1C14;
-            v30.x = func_802B7130_de(temp_fs0f);
-            v30.y = 0.0f;
-            v30.z = func_802B6560_de(temp_fs0f);
-            v20.x = controller->destination.x - playerPosition->x;
-            v20.y = 0.0f;
-            v20.z = controller->destination.z - playerPosition->z;
-            temp_v0_3 = func_8020C994_de(graph, controller->current);
-            v40 = temp_v0_3->position;
-            v40.x -= controller->destination.x;
-            v40.z -= controller->destination.z;
-            navigationTurnLeft(&v40);
-            value = func_8029C044_de(v40.z, v40.x);
-            v40.x = func_802B6560_de(value);
-            temp_fv0_4 = func_802B7130_de(value);
-            temp_fv1 = (v20.x * v40.x) + (v20.y * v40.y) + (v20.z * temp_fv0_4);
-            temp_ft0 = v40.x * temp_fv1;
-            temp_fv1_2 = temp_fv0_4 * temp_fv1;
-            v40.z = temp_fv0_4;
-            extra.y = 0.0f;
-            v40.x = temp_ft0;
-            v40.z = temp_fv1_2;
-            extra.x = v20.x + temp_ft0;
-            extra.z = v20.z + temp_fv1_2;
-            func_8027207C_de(&extra);
-            temp_v0->forward = (extra.x * v30.x) + (extra.y * v30.y) + (extra.z * v30.z);
-            navigationTurnRight(&v30);
-            temp_v0->strafe = extra.x * v30.x + extra.z * v30.z;
+            angle = controller->player->heading + D_800C1C14;
+            facing.x = func_802B7130_de(angle);
+            facing.y = 0.0f;
+            facing.z = func_802B6560_de(angle);
+            desired.x = controller->destination.x - position->x;
+            desired.z = controller->destination.z - position->z;
+            desired.y = 0.0f;
+            do {
+                tangent = func_8020C994_de(graph, controller->current)->position;
+            } while (0);
+            tangent.x -= controller->destination.x;
+            tangent.z -= controller->destination.z;
+            navigationTurnLeft(&tangent);
+            value = func_8029C044_de(tangent.z, tangent.x);
+            tangent.x = func_802B6560_de(value);
+            tangent.z = func_802B7130_de(value);
+            projection = desired.x * tangent.x + desired.y * tangent.y + desired.z * tangent.z;
+            tangent.x *= projection;
+            tangent.z *= projection;
+            steer.x = desired.x + tangent.x;
+            steer.y = 0.0f;
+            steer.z = desired.z + tangent.z;
+            func_8027207C_de(&steer);
+            player->forward = steer.x * facing.x + steer.y * facing.y + steer.z * facing.z;
+            navigationTurnRight(&facing);
+            player->strafe = steer.x * facing.x + steer.z * facing.z;
         }
-        if (((temp_s6 != 0) || (temp_s4 != 0)) && (controller->unk304 != 0)) {
-            value = sp10.y;
-                    func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de((sp10.x * sp10.x) + (sp10.z * sp10.z))), 1);
-            temp_v0->forward = D_800C1C18;
+        if ((jumping || falling) && controller->unk304) {
+            value = delta.y;
+            func_80209910_de(controller, func_8029C044_de(value, func_802B72B0_de(delta.x * delta.x + delta.z * delta.z)), 1);
+            player->forward = D_800C1C18;
         }
         if (controller->player->pose == 0xF) {
-            if (controller->destination.y < playerPosition->y) {
-                temp_v0->forward = D_800C1C1C;
+            if (position->y > controller->destination.y) {
+                player->forward = D_800C1C1C;
             } else {
-                temp_v0->forward = D_800C1C20;
+                player->forward = D_800C1C20;
             }
         }
-        if (controller->unk310 != 0) {
-            temp_v0->strafe = 0.0f;
-            temp_v0->forward = 0.0f;
+        if (controller->unk310) {
+            player->strafe = 0.0f;
+            player->forward = 0.0f;
         }
     }
 }
 #else
-INCLUDE_ASM("span_1000", func_80208EB0_de);
+INCLUDE_ASM("span_1000", Nav_UpdateTargetSteering);
 #endif
