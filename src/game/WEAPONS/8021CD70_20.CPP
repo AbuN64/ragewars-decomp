@@ -29,7 +29,7 @@ extern char D_80145040;
 extern u8 D_801462E5;
 extern s32 D_80146938;
 
-extern void func_8044A07C_de(void);
+extern void func_8044A07C_de(void *);
 extern void Pak_OpenDialog(char *, char *, SharedPlayer *, void *, s32);
 extern SharedPlayer *func_8022A5F4_de(char *, s32);
 extern void func_8044972C_de(SharedPlayer *);
@@ -44,7 +44,7 @@ void func_80225940_de(SharedPlayer *player, BodyRecAt1C *body) {
     body->motion[0] = 0;
     body->motion[1] = 0;
     body->motion[2] = 0;
-    func_8044A07C_de();
+    func_8044A07C_de(player);
     if (D_801462E5 != 0) {
         if (player->views1450.view1450_2.infinite == 0) {
             switch (player->views1C.view5D4_46.slot) {
