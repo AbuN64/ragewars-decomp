@@ -2,7 +2,7 @@
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
-#define func_804264F0_us_rev1 func_80426E50_eu
+#define Frontend_CreateResultsOptionsScreen func_80426E50_eu
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/REQUESTRECAT10.H"
@@ -36,7 +36,7 @@ void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth)
 
 
 
-s32 func_804264F0_us_rev1(MenuWidget *owner) {
+s32 Frontend_CreateResultsOptionsScreen(MenuWidget *owner) {
     MenuWidget *temp_a2;
     MenuWidget *temp_a2_2;
     MenuWidget *temp_v0_2;

@@ -66,14 +66,6 @@
         ]
       }
     ],
-    "src/game/FRONTEND/80423280_37.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_80426788_de [655fd76dd6a075133640f21fc043c8297bc42b1042d2eead3a7fba23851425eb]",
-        "lines": [
-          15
-        ]
-      }
-    ],
     "src/game/FRONTEND/80423280_8.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: func_80428850_de [3b73c422100d3df012b4ac81ad70973f8701283fd68f633cadaa75ee98ac2206]",

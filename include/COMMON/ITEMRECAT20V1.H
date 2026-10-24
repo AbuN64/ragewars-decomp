@@ -3136,7 +3136,9 @@ struct Status {
     u8 active;
     char pad79[0x80 - 0x79];
     s8 kind;
-    char pad81[150 - 0x81];
+    char pad81[0x91 - 0x81];
+    u8 pendingClear;
+    char pad92[150 - 0x92];
 };
 
 struct Model;
