@@ -4188,7 +4188,7 @@ segments:
       - [0xCB410, rodata, data_800C/D_blob_d32df2e67fa061c0c007]
       - [0xCB418, rodata, data_800C/D_blob_e981e0a9122de2ed8afc]
       - [0xCB41C, data, data_800C/D_blob_8ec42d3e6f341af57ff2]
-      - [0xCB420, rodata, data_800C/D_auto_rodata_func_80299E80_de_800CA820]
+      - [0xCB420, rodata, data_800C/literals_DispatchControllerButtonEvent]
       - [0xCB444, data, data_800C/D_d1_6c6f109212661f1f]
       - [0xCB450, rodata, data_800C/D_auto_src_rw_constants_8029ABA0_CB450_us_rev1]
       - [0xCB468, rodata, data_800C/D_auto_src_rw_constants_8029AD38_CB468_us_rev1]

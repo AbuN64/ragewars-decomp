@@ -14953,7 +14953,8 @@ SECTIONS
         src/game/MATH/800CA60C_7.CPP.o(.data);
         src/game/MATH/800CA60C_8.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_8.CPP.o(.data);
-        src/game/RESMGR/8029AA48_14.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/MATH/math_controller_events.CPP.o */;
+        src/game/MATH/math_controller_events.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_A/DATA_800C5994.CPP.o(.data);
         src/game/MATH/800CA60C_9.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_11.CPP.o(.rodata .rdata);
@@ -18444,7 +18445,8 @@ SECTIONS
         src/game/DATA/OVLTAB2/800CA80C.CPP.o(.data);
         src/game/MATH/800CA60C_8.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB2/800CA81C.CPP.o(.data);
-        src/game/RESMGR/8029AA48_14.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/MATH/math_controller_events.CPP.o */;
+        src/game/MATH/math_controller_events.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB2/800CA844.CPP.o(.data);
         src/game/MATH/800CA60C_9.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_10.CPP.o(.rodata .rdata);
@@ -23002,7 +23004,7 @@ SECTIONS
         src/game/MATH/80299368.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_7.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_8.CPP.o(.bss .sbss COMMON);
-        src/game/RESMGR/8029AA48_14.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_A/DATA_800C5994.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_9.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_11.CPP.o(.bss .sbss COMMON);
@@ -25601,7 +25603,7 @@ SECTIONS
         src/game/DATA/OVLTAB2/800CA80C.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB2/800CA81C.CPP.o(.bss .sbss COMMON);
-        src/game/RESMGR/8029AA48_14.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/math_controller_events.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB2/800CA844.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_9.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_10.CPP.o(.bss .sbss COMMON);

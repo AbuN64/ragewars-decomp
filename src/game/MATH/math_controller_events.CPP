@@ -10,39 +10,36 @@
 #if defined(VERSION_DE)
 INCLUDE_ASM("span_1000", func_80299E84);
 #endif
-#if !(defined(VERSION_DE)) && !defined(NON_MATCHING)
+#if (defined(VERSION_US) || defined(VERSION_EU)) && !defined(NON_MATCHING)
+/* US and EU keep their asm: their jump table sits inside D_auto_rodata_unresolved_800C55BC / _800C592C, which
+ * have no unit split yet. */
 INCLUDE_ASM("span_1000", DispatchControllerButtonEvent);
 #endif
 
 extern s32 func_80299B4C_de(void);
 extern s32 func_80299958_de(void);
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-
-
-#if !defined(VERSION_DE)
+#if !defined(VERSION_DE) && (!(defined(VERSION_US) || defined(VERSION_EU)) || defined(NON_MATCHING))
 /* Turns one control event into manager events. Controls 4..7 and 11..12 first send their own event on a
  * press (controls 4..7 send it twice with amount 10000 when the control was not already held); then every control
  * sends event 10 (first press only) and 9 on a press, or 11 on a release. The per-device held-flag bit for the
  * control is set on a press and cleared otherwise. A control of -1 is ignored. */
 static inline s32 ControllerButtonIsHeld(s16 device, s16 control) {
     s32 index = control / 8;
-    s32 shift = control - index * 8;
-    return ((s8 *)D_8014D0B0->flags)[device * 4 + index] & (1 << shift);
+    s32 bit = 1 << (control - index * 8);
+    return (s8)D_8014D0B0->flags[index + device * 4] & bit;
 }
 
 static inline void ControllerButtonSetHeld(s16 device, s16 control, s16 pressed) {
     s32 index = control / 8;
     s32 bit = 1 << (control - index * 8);
     if (pressed == 1) {
-        D_8014D0B0->flags[device * 4 + index] |= bit;
+        D_8014D0B0->flags[index + device * 4] |= bit;
     } else {
-        D_8014D0B0->flags[device * 4 + index] &= ~bit;
+        D_8014D0B0->flags[index + device * 4] &= ~bit;
     }
 }
 
-/* 88/297 aligned edits; remaining: local-alloc order of the held-flag index/shift/bit temporaries (a0/a2/a1 in the ROM). */
 void DispatchControllerButtonEvent(ControllerEvent *event) {
     s32 manager;
     s32 source;
@@ -98,7 +95,6 @@ void DispatchControllerButtonEvent(ControllerEvent *event) {
     }
     ControllerButtonSetHeld((u16)event->device, control, pressed);
 }
-#endif
 #endif
 
 static inline ControllerAxisState *Controller_FindAxisState(s32 device, s16 control) {

@@ -4076,7 +4076,7 @@ segments:
       - [0xC6560, rodata, data_800C/D_80298FE8_CB410]
       - [0xC6568, rodata, data_800C/D_80299B60_CB418]
       - [0xC656C, data, data_800C/rodata_unresolved_800C596C]
-      - [0xC6570, rodata, data_800C/D_auto_rodata_func_80299E80_de_800CA820]
+      - [0xC6570, rodata, data_800C/literals_DispatchControllerButtonEvent]
       - [0xC6594, data, data_800C/D_d1_471163f96c5e8590]
       - [0xC65A0, rodata, data_800C/D_8029ABA0_CB450]
       - [0xC65B8, rodata, data_800C/data_func_8029AD38_de_800C59B8]

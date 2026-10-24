@@ -10,16 +10,6 @@ const unsigned int D_auto_rodata_func_80299E80_de_800CA820[9] = {
     0x00299FD8, 0x0029A05C, 0x0029A0E0, 0x0029A164, 0x0029A1F4, 0x0029A1F4, 0x0029A1F4, 0x00299EF8,
     0x00299F68,
 };
-#elif defined(VERSION_EU_X)
-const unsigned int D_auto_rodata_func_80299E80_de_800CA820[9] = {
-    0x0029A128, 0x0029A1AC, 0x0029A230, 0x0029A2B4, 0x0029A344, 0x0029A344, 0x0029A344, 0x0029A048,
-    0x0029A0B8,
-};
-#elif defined(VERSION_US_REV1)
-const unsigned int D_auto_rodata_func_80299E80_de_800CA820[9] = {
-    0x0029AFD8, 0x0029B05C, 0x0029B0E0, 0x0029B164, 0x0029B1F4, 0x0029B1F4, 0x0029B1F4, 0x0029AEF8,
-    0x0029AF68,
-};
 #endif
 #endif
 
