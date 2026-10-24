@@ -1,44 +1,58 @@
 #include "include_asm.h"
 #include "COMMON/PAK_MENU.H"
+#include "COMMON/WORLD.H"
 
-#ifdef NON_MATCHING
 typedef struct Copy70 { s32 words[28]; } Copy70;
-typedef struct Copy580 { s32 words[0x160]; } Copy580;
-extern u8 *D_8011FECC;
+typedef struct Copy584 { s32 words[0x161]; } Copy584;
+typedef struct SaveSnapshot {
+    s32 size;
+    s32 dataSize;
+    f32 view[4];
+    Copy70 player;
+    Copy584 world;
+    u8 name[4];
+} SaveSnapshot;
+/* D_8011FECC is D_8011FE88.noteCount (world + 0x44). The tail reads it as that member, which keeps cse from
+ * folding its loads across the snapshot header stores; the two head reads stay plain scalar loads (MIXED). */
+extern s32 D_8011FECC;
 extern void *D_800DE860_de;
-extern u8 *D_800DE868;
+extern SaveSnapshot *D_800DE868;
 extern u8 D_800DCD60[];
-extern u8 D_801462C8[];
+extern Copy584 D_801462C8;
 extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
 extern void func_80253908_de(s32);
 extern void func_80253838_de(s32, void *);
-extern u32 *func_8025343C_de(s32, void *, s32, void *);
-extern void func_802A001C_de(u32, s32, void *);
-extern void func_802BD3A0_de(void *, void *, void *);
+extern SaveSnapshot **func_8025343C_de(s32, s32, s32, void *);
+extern void func_802A001C_de(void *, s32, s32);
+extern void func_802BD3A0_de(void *, void *, s32);
+/* eu-x splits this function one word late (its leading lui sits in the
+ * preceding data blob), so that version keeps the split asm. */
+#ifndef VERSION_EU_X
 void Pak_CreateSaveSnapshot(u8 *player) {
-    u8 *snapshotSize = D_8011FECC + 0x610;
-    u8 *allocationSize;
-    u32 *snapshotHandle;
+    s32 snapshotSize = D_8011FECC + 0x610;
+    s32 allocationSize;
+    SaveSnapshot **snapshotHandle;
+    SaveSnapshot *snapshot;
     if (D_800DE860_de != 0) {
         func_80253908_de(0);
         func_80253838_de(0, D_800DE860_de);
     }
     allocationSize = D_8011FECC + 0x610;
     snapshotHandle = func_8025343C_de(0, allocationSize, 0x33, D_800DCD60);
+    D_800DE868 = *snapshotHandle;
     D_800DE860_de = snapshotHandle;
-    D_800DE868 = (u8 *)*snapshotHandle;
-    func_802A001C_de(*snapshotHandle, 0, allocationSize);
-    *(Copy70 *)(D_800DE868 + 0x18) = *(Copy70 *)(player + 0x5E0);
-    *(Copy580 *)(D_800DE868 + 0x88) = *(Copy580 *)D_801462C8;
-    *(u32 *)(D_800DE868 + 0x608) = *(u32 *)(D_801462C8 + 0x580);
-    *(f32 *)(D_800DE868 + 8) = D_801468A0[0];
-    *(f32 *)(D_800DE868 + 0xC) = D_801468A0[1];
-    *(f32 *)(D_800DE868 + 0x10) = D_801468A0[2];
-    *(u8 **)D_800DE868 = snapshotSize;
-    *(f32 *)(D_800DE868 + 0x14) = D_801468A0[3];
-    *(u8 **)(D_800DE868 + 4) = D_8011FECC;
-    func_802BD3A0_de(D_800DE868 + 0x60C, D_800F91F0, D_8011FECC);
+    func_802A001C_de(D_800DE868, 0, allocationSize);
+    D_800DE868->player = *(Copy70 *)(player + 0x5E0);
+    D_800DE868->world = D_801462C8;
+    snapshot = D_800DE868;
+    snapshot->view[0] = D_801468A0[0];
+    snapshot->view[1] = D_801468A0[1];
+    snapshot->view[2] = D_801468A0[2];
+    snapshot->view[3] = D_801468A0[3];
+    snapshot->size = snapshotSize;
+    snapshot->dataSize = D_8011FE88.noteCount;
+    func_802BD3A0_de(snapshot->name, D_800F91F0, D_8011FE88.noteCount);
 }
 #else
 INCLUDE_ASM("ovl_80400000", Pak_CreateSaveSnapshot);
