@@ -15,9 +15,9 @@ extern s32 func_804057F8_de(void *, s32, s32);
 
 void func_8043542C_de(s32 index) {
     s32 offset = index * 2920;
-    char *template = D_800E54A4 + 0x2E28;
+    char *recordTemplate = D_800E54A4 + 0x2E28;
 
-    Resmgr_CopyBytes(template, (void *)(offset + (s32)D_800E54A4 + 0x70), 0x640);
+    Resmgr_CopyBytes(recordTemplate, (void *)(offset + (s32)D_800E54A4 + 0x70), 0x640);
     ((IntegerState3470 *)(D_800E54A4))->unk_3468 = ((struct IntegerStateBC0 *) (D_800E54A4 + offset))->unk_BBC;
-    ((IntegerState3470 *)(D_800E54A4))->unk_346C = func_804057F8_de(template, 0x640, 7);
+    ((IntegerState3470 *)(D_800E54A4))->unk_346C = func_804057F8_de(recordTemplate, 0x640, 7);
 }

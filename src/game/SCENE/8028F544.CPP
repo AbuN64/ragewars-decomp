@@ -26,7 +26,7 @@ extern void func_802BB550_de(s32 slot, char *row, s32 text);
 
 extern void func_802BA650_de(char *row, s32 text, s32 style);
 
-extern void func_802BAC90_de(char *list, s32 count, void *template, Panel *owner, s32 arg4, s32 arg5);
+extern void func_802BAC90_de(char *list, s32 count, void *entryTemplate, Panel *owner, s32 arg4, s32 arg5);
 
 extern void func_802BB750_de(char *list);
 
