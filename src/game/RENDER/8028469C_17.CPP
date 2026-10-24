@@ -29,7 +29,7 @@ static inline f32 distanceToNode(CVector3 from, func_80285880_S1 *node) {
 }
 /* Sums the strength of every source in the pool at the given position (inverse-distance falloff scaled by each
  * source's two curves), clamped to 0..D_800C4EC8_de; the pool is read with interrupts disabled.
- * 33 aligned edits of 116 words; remaining: the ROM keeps the 1.0f falloff constant hoisted in f24 and tests the clamp through f0. */
+ * literal 1.0f consts hoist like the ROM (87.9%); remaining: position copy sits at sp+0x10 not +0x14, clamp tail reg order. */
 f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     f32 value = pool->baseLevel;
     s32 mask = func_802BCF30_de();
@@ -42,9 +42,9 @@ f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
         while (node != 0) {
             distance = distanceToNode(position, node);
             if (distance == 0.0f || node->unk18 == 0.0f) {
-                amount = D_800C4EC4_de;
+                amount = 1.0f;
             } else if (distance < node->unk18) {
-                amount = D_800C4EC0_de - distance / node->unk18;
+                amount = 1.0f - distance / node->unk18;
             } else {
                 amount = 0.0f;
             }
@@ -56,9 +56,8 @@ f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
         }
     }
     __osRestoreInt(mask);
-    limit = D_800C4EC8_de;
-    result = (limit < value) ? value : ((value < 0.0f) ? 0.0f : value);
-    return (limit < result) ? limit : result;
+    limit = 1.0f;
+    return (limit < value) ? limit : ((value < 0.0f) ? 0.0f : value);
 }
 #else
 #if !(defined(VERSION_US))
