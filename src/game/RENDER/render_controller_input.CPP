@@ -21,6 +21,15 @@ extern ContPad D_8010AEA0[4];
 extern float D_800C42F0_de;
 extern void func_802B7538_de(void *);
 extern void func_802B7740_de(void *, void *);
+/* The reply to the last controller request arrives by serial-interface interrupt. A host build completes every
+ * request when it is started and runs the game work in no time, so a frame can end in a state whose reply a
+ * controller-pak exchange already took, a wait the slower frames of the console never meet; the retrace thread
+ * waiting here would stop the whole game. The host build takes the reply if it is there and goes on. */
+#ifdef NON_MATCHING
+#define SI_REPLY_WAIT 0 /* OS_MESG_NOBLOCK */
+#else
+#define SI_REPLY_WAIT 1 /* OS_MESG_BLOCK */
+#endif
 void Render_ReadControllerStates(void) {
     ControllerProfile *summary;
     s32 i;
@@ -28,7 +37,7 @@ void Render_ReadControllerStates(void) {
 
     switch (D_8010BBB8) {
     case 0:
-        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
+        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, SI_REPLY_WAIT);
         func_802B75F4_de(D_8010AEA0);
         D_8010B0E0.port = -1;
         D_8010B0E0.connected = 0;
@@ -76,7 +85,7 @@ void Render_ReadControllerStates(void) {
         D_8010B0E0.previousStickY = (s32)(D_8010B0E0.previousStickY * scale);
         break;
     case 1:
-        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, 1);
+        func_802BB2A0_de((OSMesgQueue *)&D_8010FC00, (OSMesg *)D_8010BBD8, SI_REPLY_WAIT);
         func_802B7538_de(D_8010BBE0);
         for (i = 0; i < 4; i++) {
             func_80263CF0_de(&D_8010F328[i]);
