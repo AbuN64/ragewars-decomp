@@ -343,7 +343,7 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
     u32 *entry;
     u32 count;
     u32 i;
-    s32 playId = -1;
+    s32 playId;
     if (index >= self->instrumentCount) {
         return -1;
     }
@@ -352,40 +352,14 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
     self->field2B90 = -1;
     entry = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 1);
     count = entry[1];
+    playId = -1;
     if (count != 0) {
-        {
-            char *queue = &self->lock;
-            u32 token = func_802BCF30_de();
-            s32 held = ((MenuRules *)(queue))->locked + 1;
-            ((MenuRules *)(queue))->locked = held;
-            if (held != 1) {
-                __osRestoreInt(token);
-                func_802BB2A0_de(queue, 0, 1);
-            } else {
-                __osRestoreInt(token);
-            }
-        }
-        playId = *(s32 *)((char *)self + 0x10C) + 1;
-        {
-            char *queue = &self->lock;
-            u32 token;
-            s32 held;
-            *(s32 *)((char *)self + 0x10C) = playId;
-            token = func_802BCF30_de();
-            held = ((MenuRules *)(queue))->locked - 1;
-            ((MenuRules *)(queue))->locked = held;
-            if (held != 0) {
-                __osRestoreInt(token);
-                func_802BB420_de(queue, 0, 1);
-            } else {
-                __osRestoreInt(token);
-            }
-        }
+        soundAcquireLock(&self->lock);
+        playId = ++*(s32 *)((char *)self + 0x10C);
+        soundReleaseLock(&self->lock);
     }
-    if (count != 0) {
-        for (i = 0; i < count; i++) {
-            func_80257BB4_de(self, (Item57BD4 *)((char *)entry + 8 + i * entry[0]), &position, index, playId, 0, voiceParameter);
-        }
+    for (i = 0; i < count; i++) {
+        func_80257BB4_de(self, (Item57BD4 *)((char *)entry + 8 + i * entry[0]), &position, index, playId, 0, voiceParameter);
     }
     return playId;
 }
