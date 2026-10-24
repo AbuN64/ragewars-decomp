@@ -304,7 +304,7 @@ s32 func_8043BFF0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #ifdef NON_MATCHING
-/* 96/100 words; remaining: three-case switch tree on D_800E28D8 lays out its branches differently */
+/* 9 aligned edits left: a sits in f1, not f0, so the a-scale multiply schedules late */
 #include "gbi.h"
 #include "COMMON/GFX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -317,31 +317,31 @@ void Frontend_DrawMenuImage(u8 *arg0) {
     s32 arg14;
     float b, a;
     float *screen;
-    Gfx *cmd;
-    Gfx *next;
     if (*(s32 *)(arg0 + 0x18) == 1) {
         arg14 = *(s32 *)(arg0 + 0x14);
         screen = D_80141008;
         func_802A84F8_de();
         func_8026925C_de(0x15);
-        a = D_800DE030_de;
-        b = a;
+        b = D_800DE030_de;
+        a = b;
         switch (D_800E28D8) {
+        case 0:
+            a = b;
+            break;
         case 1:
-            b = D_800DE038;
             a = D_800E2064;
+            b = D_800DE038;
             break;
         case 2:
-            b = D_800DE040;
             a = D_800DE03C_de;
-            break;
-        case 0:
+            b = D_800DE040;
             break;
         }
+        a *= (&D_800DE040)[1];
         gDPSetEnvColor(D_80110634++, arg0[7], arg0[0xB], arg0[0xF], 0xFF);
         gDPSetPrimColor(D_80110634++, 0, 0, 0xE0, 0, 0, 0xFF);
         func_802AAC28_de(*(s32 *)arg0, arg14, (s16)(s32)screen[0xA9], (s16)(s32)screen[0xAA],
-                         a * (&D_800DE040)[1], b * D_800DE048_de, 1);
+                         a, b * D_800DE048_de, 1);
     }
 }
 #else
