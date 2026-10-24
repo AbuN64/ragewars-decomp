@@ -120,6 +120,13 @@ extern s32 func_80265650_de(u8 *, s32);
 
 
 extern struct EntryRecAt8V3 D_800E4694[];
+/* The window table stores word-valued resource identifiers: the key is the word cast to 16 bits. The halfword at
+   word+2 (the table symbol D_800E0646_de) is only its low half on big-endian MIPS. */
+#ifdef NON_MATCHING
+#define entryWindowKey(index) ((u16)D_800E4694[index].id)
+#else
+#define entryWindowKey(index) D_800E0646_de[(index) * 14]
+#endif
 
 extern void func_8042E9A0_de(s32, s32);
 
@@ -206,7 +213,7 @@ s32 func_80428850_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, D_800E0646_de[next * 14]);
+    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -244,7 +251,7 @@ s32 func_804289B4_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, D_800E0646_de[next * 14]);
+    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -282,7 +289,7 @@ s32 func_80428B18_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, D_800E0646_de[next * 14]);
+    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {
@@ -320,7 +327,7 @@ s32 func_80428C7C_de(void *parent, s32 unused1, s32 unused2, s32 event) {
         D_800E4690->window->alpha = 0xAA;
     }
     D_800E4690->selection = next;
-    D_800E4690->window = func_8040EC30_de(parent, D_800E0646_de[next * 14]);
+    D_800E4690->window = func_8040EC30_de(parent, entryWindowKey(next));
     func_804280BC_de();
     options = D_801462C8;
     if (options[0xD] != 2) {

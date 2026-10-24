@@ -28,6 +28,7 @@
 extern struct Screen_func_80426788_de *D_800E4690;
 extern struct Status D_80146398[];
 extern MenuWidget *func_8040EC30_de(void *, s32);
+extern struct EntryRecAt8V3 D_800E4694[];
 void func_80265688_de(u8 *arg0, s32 arg1, s32 arg2);
 void func_80427F10_de(void);
 void func_8043C210_de(s32 *record, s32 first, s32 second, s32 third, s32 fourth);
@@ -145,7 +146,7 @@ loop_7:
     func_80427008_de();
     func_80427F10_de();
     /* FAKEMATCH: Fuzzy draft preserves native scalar offsets absent from shared fields. */
-    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = func_8040EC30_de(arg0, (s32) *(D_800E0646_de + ((*(ResultsOptionsScreen **)&D_800E4690)->selection * 0x1C)));
+    (*((MenuWidget * *) ((u8 *) (*(ResultsOptionsScreen **)&D_800E4690) + 2632))) = func_8040EC30_de(arg0, (u16)D_800E4694[(*(ResultsOptionsScreen **)&D_800E4690)->selection].id);
     func_804280BC_de();
     D_80154024 = 0;
     D_80154020.value = -1;
