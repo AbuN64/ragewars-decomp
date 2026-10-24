@@ -39,7 +39,8 @@ typedef struct Chaser {
 
 Racer *func_8022A5F4_de(World *arg0, u32 arg1);
 f32 func_802726F8_de(void *arg0, void *arg1);
-s32 Nav_EvaluateAttackTarget(Chaser *arg0, s32 arg1);
+struct AttackBrain;
+s32 Nav_EvaluateAttackTarget(struct AttackBrain *brain, s32 index);
 
 s32 func_80210248_eu(Chaser *self) {
     s32 i;
@@ -64,7 +65,7 @@ s32 func_80210248_eu(Chaser *self) {
             && (other->stateBits >> 8) > 0) {
             self->target[count] = other;
             self->dist[count] = func_802726F8_de(&self->self->pos, &other->pos);
-            self->cost[count] = Nav_EvaluateAttackTarget(self, count);
+            self->cost[count] = Nav_EvaluateAttackTarget((struct AttackBrain *)self, count);
             count++;
         }
     }
@@ -79,7 +80,7 @@ typedef struct { f32 x, y, z; } AttackPosition;
 typedef struct { char pad0[0x80]; s8 kind; char pad81[0xE]; u8 bonus; char pad90[4]; u8 enabled; } AttackState;
 typedef struct { s32 unk0; s32 route; } AttackRoute;
 typedef struct AttackActor { char pad0[8]; AttackPosition position; char pad14[0x1C4]; struct AttackActor *actor; char pad1DC[0x3FC]; AttackState *state; char pad5DC[0xC50]; u32 flags; char pad1230[0x220]; s32 active; AttackRoute *route; } AttackActor;
-typedef struct { AttackActor *actor; s32 route; char pad8[0x34]; AttackActor *targets[22]; s32 weights[22]; char padEC[0x238]; s32 timer; AttackActor *last; } AttackBrain;
+typedef struct AttackBrain { AttackActor *actor; s32 route; char pad8[0x34]; AttackActor *targets[22]; s32 weights[22]; char padEC[0x238]; s32 timer; AttackActor *last; } AttackBrain;
 extern f32 D_800C1F50_de, D_800C1F54_de, D_800C1F58_de, D_800C1F5C_de, D_800C1F60_de, D_800C1F64_de, D_800C1F68_de, D_800C1F6C_de, D_800C1F70_de, D_800C1F74_de, D_800C1F78_de, D_800C1F7C_de, D_800C1F80_de;
 extern s32 D_80146938, D_801468F4;
 extern char D_8013B364[];
@@ -88,9 +89,8 @@ extern f32 func_80209B64_de(AttackBrain *);
 extern f32 func_80216F44_de(AttackActor *, AttackPosition);
 extern s32 func_8020D1CC_de(void *, s32, s32);
 
-/* 54/224 aligned edits; remaining: register roles and float scheduling. */
-s32 Nav_EvaluateAttackTarget(Chaser *self, s32 index) {
-    AttackBrain *brain = (AttackBrain *)self;
+/* 37/224 aligned edits; remaining: accept/brain s1/s2 priority and the near/middle/range conversion order. */
+s32 Nav_EvaluateAttackTarget(AttackBrain *brain, s32 index) {
     AttackActor *target = brain->targets[index]->actor;
     s32 accept = 0;
     s32 nearLimit, middleLimit;
