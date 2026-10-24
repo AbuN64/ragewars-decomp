@@ -477,7 +477,7 @@ extern f32 D_800C1C18;
 extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
-/* 8/278 aligned edits; remaining: position from the player copy (ROM addiu s5,s1,8), turn-helper store order. */
+/* 6/278 aligned edits; remaining: sched2 order of the tangent.z store and the neg.s in the turn helper. */
 void Nav_UpdateTargetSteering(AiController *controller) {
     CNavData *graph;
     AiTarget *target;
@@ -505,9 +505,9 @@ void Nav_UpdateTargetSteering(AiController *controller) {
     }
     if (controller->unk300 == 0) {
         destination = &controller->destination;
-        position = &controller->player->pos;
+        jumping = controller->player->movementFlags & 0x2000;
         player = controller->player;
-        jumping = player->movementFlags & 0x2000;
+        position = &player->pos;
         falling = player->movementFlags & 0x1000;
         func_80271F68_de(&delta, destination, position);
         distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
