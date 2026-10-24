@@ -157,7 +157,7 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
         localImpulse.x -= player->display->origin.x;
         localImpulse.y -= player->display->origin.y;
         localImpulse.z -= player->display->origin.z;
-        func_80271818_de(&rotation, &localImpulse.x);
+        rotation = func_80271818_de(&localImpulse.x);
         func_8024E79C_de((Actor_func_80214624_de *)target, position,
                          &effectPosition, hit, 0, 1);
         effectPosition = position;

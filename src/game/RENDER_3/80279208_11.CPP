@@ -79,7 +79,7 @@ reset_state:
 extern char D_8011D8D0;
 extern void *D_80103FCC;
 extern char D_801041F0;
-extern void func_80271818_de(CQuatern *, CVector3 *);
+extern CQuatern func_80271818_de(CVector3 *);
 extern void func_80273760_de(f32 *matrix, s32 angle);
 extern void func_80271F34_de(CVector3 *out, CVector3 *a, CVector3 *b);
 #include "particle/8027A0F4_8.H"
@@ -115,7 +115,7 @@ void func_80279B40_de(Actor_func_80279B40_de *actor, s32 model, s32 arg2, s32 fl
     } else {
         direction = actor->facing;
     }
-    func_80271818_de(&rotation, &direction);
+    rotation = func_80271818_de(&direction);
     if (offset_x(actor) == 0.0f && offset_y(actor) == 0.0f) {
         point = actor->position;
     } else {

@@ -11,7 +11,7 @@
 #include "LISTS/80279520.H"
 
 extern s32 func_80245798_de(void);
-extern void func_8024D728_de(CQuatern *arg0, void *arg1);
+extern CQuatern func_8024D728_de(void *arg1);
 
 
 extern void func_80274098_de(CQuatern *arg0, CQuatern *arg1, CQuatern *arg2);
@@ -37,7 +37,7 @@ void func_8024B53C_de(void *levelActor) {
     copy = ((struct LevelActor *)(levelActor))->rotation;
     copy_ptr = &copy;
     if (func_80245798_de() != 0) {
-        func_8024D728_de(copy_ptr, levelActor);
+        copy = func_8024D728_de(levelActor);
     }
 
     angle = ((struct LevelActor *)(levelActor))->yaw;

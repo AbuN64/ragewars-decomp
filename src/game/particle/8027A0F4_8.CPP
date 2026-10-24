@@ -29,7 +29,7 @@ extern f32 D_800CD6B0;
 
 extern void func_80272B38_de(MatrixF *, CVector3 *, CVector3 *);
 extern void func_802727D8_de(MatrixF *);
-extern void func_8024D4AC_de(CQuatern *, EffectActor *, CVector3);
+extern CQuatern func_8024D4AC_de(EffectActor *, CVector3);
 extern void func_80273198_de(MatrixF *, CVector3 *);
 extern void func_80270910_de(MatrixF *, MatrixF *);
 extern void func_8027347C_de(MatrixF *, f32, f32, f32);
@@ -338,7 +338,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 func_802727D8_de(&mtx);
             } else {
                 if (entry->flags & 0x40000) {
-                    func_8024D4AC_de(&quat, owner, pos);
+                    quat = func_8024D4AC_de(owner, pos);
                 } else {
                     quat = rotation;
                 }

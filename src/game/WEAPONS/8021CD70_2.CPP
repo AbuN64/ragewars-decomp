@@ -31,7 +31,7 @@ extern void func_80273448_de(Matrix *, CVector3);
 extern void func_8027347C_de(Matrix *, f32, f32, f32);
 extern f32 func_802726F8_de(CVector3 *, CVector3 *);
 extern void func_8027027C_de(Matrix *, Matrix *);
-extern void func_80271818_de(CQuatern *, CVector3 *);
+extern CQuatern func_80271818_de(CVector3 *);
 extern void func_80274244_de(CQuatern *, Matrix *);
 extern void func_802737F0_de(Matrix *, f32);
 extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
@@ -90,7 +90,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
 
     if (normal != 0) {
         lift = *normal;
-        func_80271818_de(&turn, &lift);
+        turn = func_80271818_de(&lift);
         func_80274244_de(&turn, &matrix);
         func_802737F0_de(&matrix, 1.57079649f);
         func_8027207C_de(&lift);

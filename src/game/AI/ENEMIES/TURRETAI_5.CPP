@@ -15,7 +15,7 @@ extern s32 func_80285F58_de(void *arg0, void *arg1);
 
 extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 
-extern void CVector3_GetDirectionRotation2(f32 *, f32 *);
+extern CQuatern CVector3_GetDirectionRotation2(f32 *);
 extern void func_80274244_de(f32 *, f32 *);
 
 extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
@@ -25,14 +25,14 @@ extern void func_80272BCC_de(f32 *, CVector3 *, CVector3 *);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
 static inline void build_rotation(struct RotationObject *object, f32 *matrix) {
-    f32 rotation[4];
+    CQuatern rotation;
     f32 angles[3];
 
     angles[0] = object->angleX;
     angles[1] = object->angleY;
     angles[2] = object->angleZ;
-    CVector3_GetDirectionRotation2(rotation, angles);
-    func_80274244_de(rotation, matrix);
+    rotation = CVector3_GetDirectionRotation2(angles);
+    func_80274244_de(&rotation.x, matrix);
 }
 
 extern void func_80273C68_de(void *arg0, f32 arg1);
@@ -72,14 +72,14 @@ void Turret_LinkEffect_Activate(void *actor, WeaponFireState *state, s32 unusedA
 }
 
 void Turret_BuildPlaneOrient(void *unused0, struct RotationObject *object, f32 *out) {
-    f32 orientation[4];
+    CQuatern orientation;
     f32 angles[3];
 
     angles[0] = object->angleX;
     angles[1] = object->angleY;
     angles[2] = object->angleZ;
-    CVector3_GetDirectionRotation2(orientation, angles);
-    func_80274244_de(orientation, out);
+    orientation = CVector3_GetDirectionRotation2(angles);
+    func_80274244_de(&orientation.x, out);
 }
 
 void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *object, CVector3 *pivot, CVector3 *point) {

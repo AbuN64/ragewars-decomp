@@ -62,7 +62,7 @@ extern char D_8011D8D0;
 
 extern void func_8022B09C_de(SharedPlayerCode802661FC *, CVector3 *);
 
-extern void func_80271818_de(struct Shape_typemap_165 *, CVector3 *);
+extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
 
 extern void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32);
 
@@ -173,7 +173,7 @@ void func_80267958_de(SharedPlayerCode802661FC *target, Actor_func_80267958_de *
     v.x -= player->views5DC.view5DC_5.rider->unk128.x;
     v.y -= player->views5DC.view5DC_5.rider->unk128.y;
     v.z -= player->views5DC.view5DC_5.rider->unk128.z;
-    func_80271818_de(&rotation, &v);
+    rotation = func_80271818_de(&v);
     func_8024E79C_de(actor, position, &point, &unused, 0, 1);
     point = position;
     ((CVector3 *)&point)->y += D_800C9538;

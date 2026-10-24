@@ -27,20 +27,7 @@ extern void func_80275C94_de(CVector3 *, s32);
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
 
 
-/* func_8024D728_de is defined with the result pointer as its first parameter. The MIPS hidden result pointer
- * of a struct-returning function sits in the same register, so the original called it by value; a native 32-bit
- * host pops that hidden pointer in the callee and would misread the argument list. */
-#ifdef NON_MATCHING
-extern CQuatern *func_8024D728_de(CQuatern *, char *);
-static CQuatern bodyTilt(char *obj) {
-    CQuatern result;
-    func_8024D728_de(&result, obj);
-    return result;
-}
-#else
 extern CQuatern func_8024D728_de(char *);
-#define bodyTilt func_8024D728_de
-#endif
 
 extern f32 func_80240A98_de(Probe *, f32, f32, f32, f32);
 
@@ -79,9 +66,6 @@ extern u8 D_801462E5;
 
 /* Callers write the lean through a pointer (the MIPS hidden result pointer); a native host cannot call a
  * struct-returning function that way, so the host entry takes the pointer and the body stays by value. */
-#ifdef NON_MATCHING
-#define func_8024D870_de func_8024D870_de_value
-#endif
 CQuatern func_8024D870_de(char *obj) {
     CVector3 normal;
     CVector3 up;
@@ -119,7 +103,7 @@ CQuatern func_8024D870_de(char *obj) {
                 tilt.y = axis.y * D_80115DEC;
                 tilt.z = axis.z * D_80115DEC;
                 tilt.w = func_802B6560_de(RW_MIN(slope, 0.43633235f) * 0.375f);
-                tilt = bodyTilt(obj);
+                tilt = func_8024D728_de(obj);
                 sine = func_802B7130_de(((LevelActor *)(self))->yaw);
                 cosine = func_802B6560_de(((LevelActor *)(self))->yaw);
                 probe.dir = ((LevelActor *)(self))->floorDirection;
@@ -140,7 +124,7 @@ CQuatern func_8024D870_de(char *obj) {
                 return result;
             }
         }
-        return bodyTilt(obj);
+        return func_8024D728_de(obj);
     }
 identity:
     tilt.x = tilt.y = tilt.z = 0.0f;
@@ -148,12 +132,6 @@ identity:
     return tilt;
 }
 
-#ifdef NON_MATCHING
-#undef func_8024D870_de
-void func_8024D870_de(CQuatern *out, char *obj) {
-    *out = func_8024D870_de_value(obj);
-}
-#endif
 void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
     CVector3 up;
     CVector3 dir;

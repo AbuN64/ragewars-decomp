@@ -84,9 +84,6 @@ struct func_8021CD70_S1;
 struct func_8021CD70_S2;
 extern s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
-#ifdef NON_MATCHING
-#define func_8024796C_de func_8024796C_de_value
-#endif
 extern CQuatern func_8024796C_de(char *);
 extern void func_80274098_de(void *, void *, void *);
 

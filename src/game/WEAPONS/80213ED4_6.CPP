@@ -12,9 +12,9 @@ extern char D_8011D8D0;
 
 extern void func_8024E79C_de(void *actor, Triple input, Triple *output,
                           s32 *actorField, s32 unused0, s32 unused1);
-extern void func_8024796C_de(CQuatern *result, CActor_t *actor);
+extern CQuatern func_8024796C_de(CActor_t *actor);
 extern s32 func_8024BE80_de(CActor_t *actor);
-extern void func_8024F478_de(CQuatern *result, CActor_t *actor);
+extern CQuatern func_8024F478_de(CActor_t *actor);
 #include "particle/8027A0F4_8.H"
 
 void func_80216288_de(void *actor, s32 kind, Triple input, s32 unused0) {
@@ -43,7 +43,7 @@ void func_80216288_de(void *actor, s32 kind, Triple input, s32 unused0) {
     case 1:
         typedActor = actor;
         position = typedActor->position;
-        func_8024796C_de(&rotation, typedActor);
+        rotation = func_8024796C_de(typedActor);
         eventValue = typedActor->eventValue;
         if (func_8024BE80_de(typedActor) == 5) {
             mode = 3;
@@ -52,7 +52,7 @@ void func_80216288_de(void *actor, s32 kind, Triple input, s32 unused0) {
 
     case 3:
         position = ((CActor_t *)actor)->position;
-        func_8024F478_de(&rotation, actor);
+        rotation = func_8024F478_de(actor);
         break;
     }
 

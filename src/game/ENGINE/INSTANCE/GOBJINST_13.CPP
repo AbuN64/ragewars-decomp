@@ -9,7 +9,7 @@
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_8024796C_de(void *out, void *actor);
+extern CQuatern func_8024796C_de(void *actor);
 
 extern void func_80274244_de(void *arg0, void *arg1);
 
@@ -23,12 +23,12 @@ extern void **func_8024BFD4_de(void *arg0, s32 arg1);
 extern void func_80253754_de(void *arg0, void *arg1);
 
 void *func_8024BC94_de(void *arg0, void *actor, struct IntPair arg2) {
-    s32 sp10[4];
+    CQuatern sp10;
     s32 sp20[16];
     Triple sp60;
 
-    func_8024796C_de(sp10, actor);
-    func_80274244_de(sp10, sp20);
+    sp10 = func_8024796C_de(actor);
+    func_80274244_de(&sp10, sp20);
     func_80272898_de(sp20, &arg2, &sp60);
     *(Triple *)arg0 = sp60;
     return arg0;

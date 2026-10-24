@@ -82,7 +82,7 @@ extern CVector3 D_801042C8;
 extern s32 func_80276088_de(s32);
 
 extern void func_80265E10_de(void *, void *, u16, s32, CVector3, struct IntPair);
-extern void func_80271818_de(struct Shape_typemap_165 *, CVector3 *);
+extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
 
 #include "particle/8027A0F4_8.H"
 
@@ -440,7 +440,7 @@ void func_8027C274_de(Shared_Particle *particle) {
             } else {
                 position = particle->inst.velocity;
             }
-            func_80271818_de(&rotation, &position);
+            rotation = func_80271818_de(&position);
             func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                           (struct EffectActor *)particle->owner,
                           (s32 *)particle->ownerId,
@@ -505,7 +505,7 @@ void func_8027C4F0_de(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        func_80271818_de(&rotation, &position);
+        rotation = func_80271818_de(&position);
         func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
@@ -562,7 +562,7 @@ void func_8027C758_de(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        func_80271818_de(&rotation, &position);
+        rotation = func_80271818_de(&position);
         func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,
@@ -617,7 +617,7 @@ void func_8027C9CC_de(Shared_Particle *particle) {
         } else {
             position = particle->inst.velocity;
         }
-        func_80271818_de(&rotation, &position);
+        rotation = func_80271818_de(&position);
         func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)particle,
                       (struct EffectActor *)particle->owner,
                       (s32 *)particle->ownerId,

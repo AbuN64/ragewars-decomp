@@ -10,9 +10,6 @@
 
 extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
 
-#ifdef NON_MATCHING
-#define CVector3_GetDirectionRotation2 CVector3_GetDirectionRotation2_value
-#endif
 extern CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
 CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
@@ -108,9 +105,3 @@ void Turret_CalcOrientMtx(struct Owner *owner, RiderRecAt130V1 *rider) {
     func_8026F620_de(&owner->transform.right.x, alignment, model);
     func_80273D6C_de(&owner->transform);
 }
-#ifdef NON_MATCHING
-#undef CVector3_GetDirectionRotation2
-void CVector3_GetDirectionRotation2(CQuatern *out, CVector3 *dir) {
-    *out = CVector3_GetDirectionRotation2_value(dir);
-}
-#endif

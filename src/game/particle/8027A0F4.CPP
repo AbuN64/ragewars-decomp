@@ -68,7 +68,7 @@ block_7:
         target = arg0->target;
         if ((target != 0) && (arg0->time > D_800C4B4C_de)) {
             temp_s2 = &arg0->direction;
-            func_80271818_de(&sp48, temp_s2);
+            sp48 = func_80271818_de(temp_s2);
             temp_fv0f = arg0->velocity.x;
             temp_fv0 = arg0->velocity.y;
             temp_fa0 = arg0->velocity.z;
@@ -78,7 +78,7 @@ block_7:
             func_80271F68_de(&sp28, &sp18, &arg0->position);
             amount = func_802B72B0_de((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             if (amount < D_800C4B50_de) {
-                func_80271818_de(&sp68, &sp28);
+                sp68 = func_80271818_de(&sp28);
                 func_80274244_de(&sp68.x, sp78.m);
                 sp38.x = 0;
                 sp38.y = 0;
@@ -93,7 +93,7 @@ block_7:
                 amount = func_802B72B0_de((sp28.x * sp28.x) + (sp28.y * sp28.y) + (sp28.z * sp28.z));
             }
             func_8027207C_de(&sp28.x);
-            func_80271818_de(&sp58, &sp28);
+            sp58 = func_80271818_de(&sp28);
             if (amount < D_800C4B5C_de) {
                 temp_fv0f_2 = amount - D_800C4B60_de;
                 if (temp_fv0f_2 < 0.0f) {
@@ -178,7 +178,7 @@ void Particle_SteerHoming(void *particle) {
     s32 id;
     CVector3 *velocity;
     SteeringSound *sound;
-    func_80271818_de(&q78, &arg0->direction);
+    q78 = func_80271818_de(&arg0->direction);
     speed = func_802B72B0_de(arg0->velocity.x * arg0->velocity.x + arg0->velocity.y * arg0->velocity.y +
                              arg0->velocity.z * arg0->velocity.z);
     owner = FIELD(void *, FIELD(void *, arg0, 0x12C), 0x1D8);
@@ -218,7 +218,7 @@ create_sound:
     }
     v28 = v68;
     func_8027207C_de(&v28);
-    func_80271818_de(&q88, &v28);
+    q88 = func_80271818_de(&v28);
     func_802741A4_de(&q88);
     func_802741A4_de(&q78);
     func_8027207C_de(&v28);
@@ -292,8 +292,8 @@ void Particle_SteerToward(AccelSteeringObj *particle, AccelSteeringVec *goal) {
         return;
     }
     func_8027207C_de(&offset.x);
-    func_80271818_de(&wanted, &offset.x);
-    func_80271818_de(&current, &particle->direction.x);
+    wanted = func_80271818_de(&offset.x);
+    current = func_80271818_de(&particle->direction.x);
     speed = func_802B72B0_de((particle->velocity.x * particle->velocity.x) + (particle->velocity.y * particle->velocity.y) + (particle->velocity.z * particle->velocity.z));
     if (distance < 1024.0f) {
         blend = distance - 204.79999f;

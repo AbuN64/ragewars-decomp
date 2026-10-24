@@ -68,7 +68,7 @@ Particle *func_802A5BE4_de(SceneRecAt95A8 *scene, CVector3 position, CVector3 no
     Particle *node;
     IntrusiveList *list;
 
-    func_80271818_de(&rotation, &normal.x);
+    rotation = func_80271818_de(&normal.x);
     if (D_800CDBE8 != 0) return 0;
     D_800CDBE8 = 1;
     list = &scene->lists[surface];

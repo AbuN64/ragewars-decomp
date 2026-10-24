@@ -92,9 +92,6 @@ extern void Turret_BuildPlaneRot(CQuatern *, void *, void *);
 
 extern char *D_8011CA18[];
 
-#ifdef NON_MATCHING
-#define func_8024796C_de func_8024796C_de_value
-#endif
 extern CQuatern func_8024796C_de(char *);
 
 extern void func_80274244_de(CQuatern *, f32 *);
@@ -556,9 +553,3 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     func_80271F9C_de(&origin, &origin, flip);
     func_80273448_de(matrix, origin.x, origin.y, origin.z);
 }
-#ifdef NON_MATCHING
-#undef func_8024796C_de
-void func_8024796C_de(CQuatern *out, char *actor) {
-    *out = func_8024796C_de_value(actor);
-}
-#endif

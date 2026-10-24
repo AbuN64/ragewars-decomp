@@ -2,59 +2,11 @@
   "schema": 1,
   "revision": "b321da793d3a963de347814a4e2778444ef71176",
   "files": {
-    "src/game/AI/ENEMIES/TURRETAI.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: CVector3_GetDirectionRotation2 [515fb16b4f492b17cbc0430da6baf2228b93d342030a540f9eb50f4d80af1ca9]",
-        "lines": [
-          13
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: CVector3_GetDirectionRotation2 [59626c7f466205ccf9145c70de117a6aa5d82f5670924e0c137b0117c42af6f1]",
-        "lines": [
-          111
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: alignment_from_rider [515fb16b4f492b17cbc0430da6baf2228b93d342030a540f9eb50f4d80af1ca9]",
-        "lines": [
-          13
-        ]
-      }
-    ],
     "src/game/ANIM/80275E44_12.CPP": [
       {
         "reason": "NON_MATCHING changes ROM-side C: func_80277128_de [736d81acb9876655a49278dd821b55bbb182cb1a893987a8e091408a88dae1f5]",
         "lines": [
           195
-        ]
-      }
-    ],
-    "src/game/ENGINE/INSTANCE/GOBJINST.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_802466A0_de [4070874a23af57dfe83dc4e9bb12ce065b3bda649c9ee320d90a078c2f221587]",
-        "lines": [
-          224
-        ]
-      }
-    ],
-    "src/game/ENGINE/INSTANCE/GOBJINST_4.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024796C_de [495340b1c0387c04d26e3a7403b13cc6b839a0f7cdda60b45919acfcf4f0ded8]",
-        "lines": [
-          559
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024796C_de [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          95
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_80247BB4_de [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          95
         ]
       }
     ],
@@ -97,94 +49,6 @@
         "reason": "NON_MATCHING changes ROM-side C: Render_ReadControllerStates [471cfeca1740c1bb88e8345e551331d28aa2fdc7006cb53c1f38e22f8f7a29a0]",
         "lines": [
           28
-        ]
-      }
-    ],
-    "src/game/RENDER_2/802192C0_3.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8021A9A4_de [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          127
-        ]
-      }
-    ],
-    "src/game/RENDER_2/802192C0_4.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8021B468_de [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          49
-        ]
-      }
-    ],
-    "src/game/RSP/8026E1F8_5.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_80271818_de [17b29209bba1857f17f19870919b11517f065c6e60f46325770f7e62b9c0c6ba]",
-        "lines": [
-          607,
-          1365
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_80271818_de [62967ab4a561d602106207f5b1d4b8f00a34fb0fda57e3b810c4016f538a7df9]",
-        "lines": [
-          696,
-          1454
-        ]
-      }
-    ],
-    "src/game/WEAPONS/8021CD70.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: Weapons_ComputeAimRotation [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          87
-        ]
-      }
-    ],
-    "src/game/WEAPONS/8021CD70_3.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8021D774_de [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          46
-        ]
-      }
-    ],
-    "src/game/particle/8024D018_3.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024D4AC_de [4550f522c7e027a019b25c5408d9e1344aba1f04d92b88fb41a72e44c0f1e596]",
-        "lines": [
-          47
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024D4AC_de [5537a1468a445bb3944cf93ca0fed9be2240c362b7c6472f69aab894e9ee84e7]",
-        "lines": [
-          111
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024D4AC_de [cde2dcf9019eee564daa5c845069d72f0ad35692a4e48c52c484e112e9a8d3fc]",
-        "lines": [
-          25
-        ]
-      }
-    ],
-    "src/game/particle/8024D018_4.CPP": [
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024D870_de [a075063bf4b77f7fd531c0bbbe1e8222552633fd09f9f583b728e7978785ebc6]",
-        "lines": [
-          82
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024D870_de [c5e695c9005ec278f56dd9b1792b764e58f90884d82a9b4ac46d7468e4e99188]",
-        "lines": [
-          33
-        ]
-      },
-      {
-        "reason": "NON_MATCHING changes ROM-side C: func_8024D870_de [e7bc3f1ef8dba6f3289ea84be462df7606b5e8a1efd33dd357e69b6ae06b8de5]",
-        "lines": [
-          151
         ]
       }
     ],

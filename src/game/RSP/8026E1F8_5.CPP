@@ -604,9 +604,6 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
     *out = result;
     return out;
 }
-#ifdef NON_MATCHING
-#define func_80271818_de func_80271818_de_value
-#endif
 CQuatern func_80271818_de(CVector3 *input) {
     CQuatern result;
     CVector3 normalized;
@@ -693,12 +690,6 @@ general:
     }
     return result;
 }
-#ifdef NON_MATCHING
-#undef func_80271818_de
-void func_80271818_de(CQuatern *out, CVector3 *input) {
-    *out = func_80271818_de_value(input);
-}
-#endif
 #endif
 
 #if !(defined(VERSION_US_REV1))
@@ -1362,9 +1353,6 @@ extern f32 func_802B72B0_de(f32);
 
 
 
-#ifdef NON_MATCHING
-#define func_80271818_de func_80271818_de_value
-#endif
 CQuatern func_80271818_de(CVector3 *input) {
     CQuatern result;
     CVector3 normalized;
@@ -1451,10 +1439,4 @@ general:
     }
     return result;
 }
-#ifdef NON_MATCHING
-#undef func_80271818_de
-void func_80271818_de(CQuatern *out, CVector3 *input) {
-    *out = func_80271818_de_value(input);
-}
-#endif
 #endif

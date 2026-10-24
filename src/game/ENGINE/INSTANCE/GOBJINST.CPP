@@ -74,11 +74,7 @@ extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
 extern void func_80246184_de(char *);
 
-#ifdef NON_MATCHING
-extern void func_8024D870_de(CQuatern *, char *);
-#else
 extern CQuatern func_8024D870_de(char *);
-#endif
 
 extern void func_80262480_de(char *);
 
@@ -221,11 +217,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
     ((LevelActor *)obj)->scale = extent;
     ((LevelActor *)obj)->position1 = offset;
     ((LevelActor *)obj)->type = kind;
-#ifdef NON_MATCHING
-    func_8024D870_de((CQuatern *)&((LevelActor *)obj)->rotation, obj);
-#else
     ((LevelActor *)obj)->rotation = func_8024D870_de(obj);
-#endif
     ((LevelActor *)obj)->eyeHeight = 0;
     ((LevelActor *)obj)->stateE6 = 0;
     ((LevelActor *)obj)->stateE7 = 0;

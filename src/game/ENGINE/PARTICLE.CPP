@@ -23,7 +23,7 @@ extern Gfx *D_80110634;
 
 extern s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
 
-extern void func_80271818_de(CQuatern *, CVector3 *);
+extern CQuatern func_80271818_de(CVector3 *);
 
 extern void func_80274098_de(CQuatern *out, CQuatern *a, CQuatern *b);
 
@@ -103,7 +103,7 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
         return;
     }
     angle = 0.78539824f;
-    func_80271818_de(&tilt, &ground->normal);
+    tilt = func_80271818_de(&ground->normal);
     roll.x = D_80115DEC = func_802B7130_de(angle);
     roll.y = 0.0f;
     roll.z = 0.0f;

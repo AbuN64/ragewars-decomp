@@ -20,7 +20,7 @@ extern void func_80247004_de(Obj_func_80247004_de *);
 extern void func_80253754_de(void *, Node80253610 *);
 
 /* Update or blend object rotation when the movement state permits it. */
-void func_8024D870_de(f32 *, void *);
+CQuatern func_8024D870_de(void *);
 
  /* extern */
 s32 func_8024E29C_de(void *);
@@ -80,7 +80,7 @@ void func_80246E44_de(Actor36 *actor) {
 }
 
 void func_80247004_de(Obj_func_80247004_de *actor) {
-    f32 vec[4];
+    CQuatern vec;
     f32 var_f0;
     f32 var_f1;
     s32 temp_s1;
@@ -91,14 +91,14 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
     void *var_a0;
     temp_v0 = actor->unk100;
     flags = temp_v0 & 0x300000;
-    if (!(temp_v0 & 1) && (temp_s2 = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (func_8024D870_de(vec, actor), temp_s1 = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
+    if (!(temp_v0 & 1) && (temp_s2 = func_8024E62C_de(actor), (actor->unk14 != NULL)) && (vec = func_8024D870_de(actor), temp_s1 = actor->unk14->unk2 & 1, (func_8024E29C_de(actor) != 0))) {
         if (temp_s1 != 0) {
-            vec[0] = vec[1] = vec[2] = 0.0f;
-            vec[3] = D_800C3924_de;
+            vec.x = vec.y = vec.z = 0.0f;
+            vec.w = D_800C3924_de;
         }
         if (flags) {
             if ((!(actor->unk100 & 0x1000) && (var_a0 = actor->rotation, (temp_s2 != 0))) || (var_a0 = actor->rotation, (temp_s1 != 0))) {
-                func_80274380_de(var_a0, vec);
+                func_80274380_de(var_a0, &vec);
             }
         } else {
             if ((temp_s2 != 0) && !(actor->unk100 & 0x1000)) {
@@ -111,7 +111,7 @@ void func_80247004_de(Obj_func_80247004_de *actor) {
             if (var_f0 > D_800C3930_de[0]) {
                 var_f0 = D_800C3930_de[0];
             }
-            func_80270CD0_de(rotation, var_f0, rotation, vec);
+            func_80270CD0_de(rotation, var_f0, rotation, &vec);
         }
     }
 }

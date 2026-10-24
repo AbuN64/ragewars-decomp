@@ -55,7 +55,7 @@ void func_80284178_de(void *particle) {
 
 extern char D_8011D8D0;
 
-extern void func_80271818_de(struct Shape_typemap_165 *, Triple *);
+extern struct Shape_typemap_165 func_80271818_de(Triple *);
 extern void func_80271F68_de(Triple *, Triple *, Triple *);
 extern void func_80271F9C_de(Triple *, Triple *, f32);
 extern void func_80271F34_de(Triple *, Triple *, Triple *);
@@ -74,7 +74,7 @@ void func_8028422C_de(TrailActor *actor) {
         count = actor->node->state->count;
         if (count > 0) {
                 position = actor->position;
-                func_80271818_de(&rotation, &position);
+                rotation = func_80271818_de(&position);
                 func_80271F68_de(&delta, &actor->origin, &actor->end);
                 system = &D_8011D8D0;
                 i = 1;

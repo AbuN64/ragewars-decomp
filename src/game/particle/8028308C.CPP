@@ -228,7 +228,7 @@ void func_80283448_de(void *object) {
 }
 
 #include "particle/8027A0F4_8.H"
-extern void func_80271818_de(CQuatern *, CVector3 *);
+extern CQuatern func_80271818_de(CVector3 *);
 extern Triple D_801002A8;
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
@@ -240,7 +240,7 @@ void func_80283480_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         pos = source->rotation;
     }
-    func_80271818_de(&q, &pos);
+    q = func_80271818_de(&pos);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -258,7 +258,7 @@ void func_802835A8_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         position = source->rotation;
     }
-    func_80271818_de(&rotation, &position);
+    rotation = func_80271818_de(&position);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -276,7 +276,7 @@ void func_802836D0_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         position = source->rotation;
     }
-    func_80271818_de(&rotation, &position);
+    rotation = func_80271818_de(&position);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,
@@ -294,7 +294,7 @@ void func_802837F8_de(Obj_func_80283920_de *source, s32 kind) {
     } else {
         position = source->rotation;
     }
-    func_80271818_de(&rotation, &position);
+    rotation = func_80271818_de(&position);
     func_802800C0_de((struct EffectSystem *)&D_8011D8D0, (struct EffectActor *)source,
                   (struct EffectActor *)source->effectResource,
                   (s32 *)source->effectIndex,

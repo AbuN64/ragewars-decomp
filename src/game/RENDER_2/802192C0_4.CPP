@@ -45,11 +45,7 @@ s32 func_802227F4_de(void *, void *, s32);
 #ifndef NON_MATCHING
 void *Camera_PostScreenMessage(void *, void *, u8 *);
 #endif
-void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); /* extern */
-#ifdef NON_MATCHING
-#define func_8024796C_de func_8024796C_de_value
-#endif
-CQuatern func_8024796C_de(char *);
+void *Camera_PostScaledScreenMessage(void *, void *, void *, f32); CQuatern func_8024796C_de(char *);
 s32 func_8024BE80_de(void *);
 void func_8024E79C_de(void *, Triple, void *, s32 *, s32, s32); /* extern */
 s32 func_8025DE54_de(s16, CVector3, s32, s32); /* extern */
