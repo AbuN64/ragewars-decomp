@@ -112,8 +112,9 @@ typedef struct ListNode_8025B034 {
     char pad8[0x38];
     s16 priority;
 } ListNode_8025B034;
-s16 Audio_SelectVoiceSlot(char *player, s32 unusedVariant, s32 unusedCount, s32 priority, s32 unused) {
+s16 Audio_SelectVoiceSlot(char *arg0, s32 unusedVariant, s32 unusedCount, s16 priority, s32 unused) {
     ContextCode8025A3EC *context;
+    ContextCode8025A3EC *viewContext;
     View_func_8025AE1C_de *view;
     View_func_8025AE1C_de *voices;
     s32 slotPriority;
@@ -124,10 +125,10 @@ s16 Audio_SelectVoiceSlot(char *player, s32 unusedVariant, s32 unusedCount, s32 
     s32 selectedSlot;
     s32 priorityLimit;
     s32 slotIndex;
-    context = *(ContextCode8025A3EC **)player;
-    voices = (View_func_8025AE1C_de *)(player + 4);
+    voices = (View_func_8025AE1C_de *)(arg0 + 4);
+    context = *(ContextCode8025A3EC **)arg0;
     slots = &context->slots;
-    bestPriority = (s16)priority;
+    bestPriority = priority;
     selectedSlot = -1;
     priorityLimit = bestPriority;
     for (slotIndex = 0; slotIndex < 16; slotIndex++) {
@@ -145,24 +146,24 @@ s16 Audio_SelectVoiceSlot(char *player, s32 unusedVariant, s32 unusedCount, s32 
     }
     if (slots->ids[selectedSlot] == -1) {
         node = *(ListNode_8025B034 **)((char *)context + 0x140);
-        if (node != (ListNode_8025B034 *)((char *)context + 0x13C) && (s16)priority < node->priority) {
+        if (node != (ListNode_8025B034 *)((char *)context + 0x13C) && node->priority > priority) {
             return -1;
         }
         return selectedSlot;
     }
-    view = &voices[(s16)selectedSlot];
+    view = &((View_func_8025AE1C_de *)(arg0 + 4))[(s16)selectedSlot];
     view->done = 1;
     view->tracked = 0;
-    context = view->context;
-    channel = ((OwnerCode8025A3EC *)context)->sound;
-    if (view->frame != context->frame) {
-        func_802B2F00_de(channel, context->slots.ids[view->slot]);
+    viewContext = view->context;
+    channel = ((OwnerCode8025A3EC *)viewContext)->sound;
+    if (view->frame != viewContext->frame) {
+        func_802B2F00_de(channel, viewContext->slots.ids[view->slot]);
         if (func_802B2620_de(channel) != 0) {
             alSndpStop(channel);
         }
         view->handle = -1;
     }
-    if (*(s32 *)(player + 0xCD0) != -1) {
+    if (*(s32 *)(arg0 + 0xCD0) != -1) {
         return -1;
     }
     return 0x10;
@@ -171,7 +172,7 @@ s16 Audio_SelectVoiceSlot(char *player, s32 unusedVariant, s32 unusedCount, s32 
 INCLUDE_ASM("span_1000", Audio_SelectVoiceSlot);
 #endif
 
-extern s16 Audio_SelectVoiceSlot(char *, s32, s32, s32, s32);
+extern s16 Audio_SelectVoiceSlot(char *, s32, s32, s16, s32);
 
 typedef struct SoundBankState {
     ALBank_s *bank;
