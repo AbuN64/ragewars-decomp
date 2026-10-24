@@ -28,7 +28,7 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
 extern Profile D_80102B00[];
 
 
-extern s32 D_800D30BC;
+extern s32 D_800D30BC[];
 
 
 
@@ -99,7 +99,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC, func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], func_8022A5A0_de(&D_80145040, player),
                           D_800C2EE4_de);
         }
     }
@@ -135,18 +135,21 @@ s32 func_802301F4_de(void *actor, void *attack) {
 }
 #endif
 
-#ifdef NON_MATCHING
+#if !(defined(VERSION_EU) || defined(VERSION_EU_X)) || defined(NON_MATCHING)
 extern s16 D_800CE8DC[];
 extern void *D_800D052C[];
 /* Updates alternate fire, falling back to another weapon when neither mode has
  * ammunition. Reports unavailable modes, preserves the selected action captured
- * on entry, then processes the attack trigger. 8/164 aligned edits remain:
- * scheduling of the two message-duration literal loads. */
+ * on entry, then processes the attack trigger. */
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/VECTOR4F.H"
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 typedef struct AlternateModeInfo { u8 pad0[0x14]; u32 flags; } AlternateModeInfo;
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#if defined(VERSION_EU)
 extern s32 D_800E0D44[];
+extern u8 D_80152789;
+#elif defined(VERSION_EU_X)
+extern s32 D_800DCC68[];
 extern u8 D_80152789;
 #endif
 /* The adjacent exact can_fire supplies the same readiness check; this call site
@@ -160,13 +163,8 @@ static inline s32 can_toggle_mode(Player *player) {
     if (allowed == 0) {
         func_8025DF34_de(0xD4D);
         if (player->owner) {
-            s32 label = func_8022A5A0_de(&D_80145040, player);
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-            s32 text = D_800E0D44[D_80152789];
-#else
-            s32 text = D_800D30BC;
-#endif
-            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, text, label, 1.0f);
+            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789),
+                                             func_8022A5A0_de(&D_80145040, player), 1.0f);
         }
     }
     return allowed;
@@ -193,14 +191,9 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
             if (!Weapons_HasAmmoForMode(player, player->selectedAction)) {
                 func_8025DF34_de(0xD4D);
                 if (player->owner) {
-                    Shared_MenuData *menu = &D_80145040;
-                    s32 label = func_8022A5A0_de(menu, player);
-#if defined(VERSION_EU) || defined(VERSION_EU_X)
-                    s32 text = D_800E0D44[menu->game.language];
-#else
-                    s32 text = D_800D30BC;
-#endif
-                    Camera_PostTargetedScreenMessage((char *)menu + 0x48, player->owner, text, label, 1.0f);
+                    Camera_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->owner,
+                                                     RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),
+                                                     func_8022A5A0_de(&D_80145040, player), 1.0f);
                 }
                 ((AttackTriggerAction *)attack)->unk13C = 1;
             } else if (info->flags & 0x20) {

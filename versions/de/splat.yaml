@@ -3469,7 +3469,7 @@ segments:
       - [0xC3A94, data, data_800C/rodata_unresolved_800C2E94]
       - [0xC3A98, rodata, data_800C/literals_func_80230058_de]
       - [0xC3AE0, rodata, data_800C/D_802301F4_C8BD0]
-      - [0xC3AE8, rodata, data_800C/D_802303A0_C8BD8]
+      - [0xC3AE8, rodata, data_800C/literals_Weapons_UpdateAlternateFire]
       - [0xC3AF0, rodata, data_800C/literals_func_802307FC_de]
       - [0xC3B14, rodata, data_800C/D_80230B04_C8C04]
       - [0xC3B18, rodata, data_800C/D_80230BC8_C8C08]
