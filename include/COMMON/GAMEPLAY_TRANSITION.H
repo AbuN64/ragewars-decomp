@@ -241,6 +241,7 @@ struct Shared_struct_D_800D34C0_0x18 {
     char pad12[0x6];
 };
 typedef char Shared_struct_D_800D34C0_0x18_size_check[(sizeof(Shared_struct_D_800D34C0_0x18) == 0x18) ? 1 : -1];
+extern Shared_struct_D_800D34C0_0x18 D_800D34C0[15]; /* item records, looked up by id */
 
 typedef struct Shared_HeightBonuses Shared_HeightBonuses;
 struct Shared_HeightBonuses {

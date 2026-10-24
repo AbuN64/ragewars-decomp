@@ -869,7 +869,6 @@ extern s32 D_800FF24C[];
 
 extern char *D_800E1FD4_eu[];
 
-extern char D_800D34C0;
 
 extern char D_00450F74[];
 

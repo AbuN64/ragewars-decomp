@@ -278,7 +278,7 @@ case 7:
                         }
                         if (var_a0 != 0) {
                             var_s3_2 = 1;
-                            temp_v0_4 = &((struct Shared_struct_D_800D34C0_0x18 *)&D_800D34C0)[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
+                            temp_v0_4 = &D_800D34C0[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
                             temp_v0_4->unkC = (s16) var_a0;
                             temp_v0_4->unkE = 0;
                             temp_v0_4->unk10 = 0;
@@ -300,7 +300,7 @@ case 7:
                         }
                         if (var_a0_2 != 0) {
                             var_s3_2 = 1;
-                            temp_v0_7 = &((struct Shared_struct_D_800D34C0_0x18 *)&D_800D34C0)[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
+                            temp_v0_7 = &D_800D34C0[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
                             temp_v0_7->unkE = (s16) var_a0_2;
                             temp_v0_7->unkC = 0;
                             temp_v0_7->unk10 = 0;
@@ -322,7 +322,7 @@ case 7:
                         }
                         if (var_a0_3 != 0) {
                             var_s3_2 = 1;
-                            temp_v0_10 = &((struct Shared_struct_D_800D34C0_0x18 *)&D_800D34C0)[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
+                            temp_v0_10 = &D_800D34C0[((struct Shared_ActorView *)player)->projectileBase + ((struct Shared_ActorView *)player)->projectileIndex];
                             temp_v0_10->unk10 = (s16) var_a0_3;
                             temp_v0_10->unkC = 0;
                             temp_v0_10->unkE = 0;

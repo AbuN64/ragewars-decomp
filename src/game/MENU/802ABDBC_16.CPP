@@ -60,7 +60,7 @@ void *func_802AD0B0_de(s32 arg0) {
     s32 i;
     Shared_struct_D_800D34C0_0x18 *record;
 
-    v1 = &D_800D34C0;
+    v1 = (char *)D_800D34C0;
     i = 0xF;
     do {
         record = (Shared_struct_D_800D34C0_0x18 *)v1;

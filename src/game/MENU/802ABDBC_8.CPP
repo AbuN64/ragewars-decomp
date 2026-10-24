@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/ENTRYRECATE.H"
 #include "TYPES.H"
@@ -74,7 +75,7 @@ s32 func_802AB400_de(s32 arg0, Actor_func_802AB400_de *actor) {
         if (item != 0) {
             return player->count < func_8022AC00_de(player, id);
         }
-        bonus = find_entry(&D_800D34C0, 15, 0x18, id);
+        bonus = find_entry((char *)D_800D34C0, 15, 0x18, id);
         if (bonus != 0) {
             return 1;
         }
@@ -140,7 +141,7 @@ s32 func_802AB6EC_de(Other *actor, s32 target, s32 id) {
         if (result != 0) {
             return result;
         }
-        entry = find_handler(&D_800D34C0, 15, 0x18, id);
+        entry = find_handler((char *)D_800D34C0, 15, 0x18, id);
         if (entry != 0) {
             result = entry->handle14(actor, entry);
         }
