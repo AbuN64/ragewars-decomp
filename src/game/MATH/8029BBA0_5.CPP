@@ -54,7 +54,7 @@ extern f64 NaturalLogDouble(void);
 
 
 
-extern f64 func_8029ABA0_de(f64 value, s32 exponent);
+extern f64 ScaleDoubleExponent(f64 value, s32 exponent);
 
 /* Returns the arcsine of a value clamped to [-1, 1] using the polynomial approximation pi/2 - sqrt(1 - x) * p(x) on its magnitude and restoring the sign afterwards. */
 
@@ -228,7 +228,7 @@ f64 func_8029DB9C_de(f64 x) {
     t = r * r;
     p = ((t * D_800C5BA0_de + D_800C5BA8_de) * t + D_800C5BC0_de) * r;
     q = (t * D_800C5BB0_de + D_800C5BB8_de) * t + D_800C5B88_de;
-    return func_8029ABA0_de(p / (q - p) + D_800C5B88_de, k + 1);
+    return ScaleDoubleExponent(p / (q - p) + D_800C5B88_de, k + 1);
 }
 
 f64 func_8029DCB0_de(f64 arg0, s32 *arg1) {

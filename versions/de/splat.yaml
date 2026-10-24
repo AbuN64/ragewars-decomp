@@ -4072,7 +4072,7 @@ segments:
       - [0xC62B4, data, data_800C/rodata_unresolved_800C56B4]
       - [0xC62C0, rodata, data_800C/D_8029ABA0_CB450]
       - [0xC62D8, rodata, data_800C/data_func_8029AD38_de_800C56D8]
-      - [0xC6340, rodata, data_800C/literals_func_8029ABA0_de]
+      - [0xC6340, rodata, data_800C/literals_ScaleDoubleExponent]
       - [0xC6448, rodata, data_800C/literals_FloatModulo]
       - [0xC6478, rodata, data_800C/literals_func_8029B3C0_de]
       - [0xC6658, rodata, data_800C/D_8029C288_CB7E8]

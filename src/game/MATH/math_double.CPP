@@ -4,20 +4,22 @@
 #include "MATH/math_double.H"
 #include "MATH/8029BBA0_5.H"
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/OBJRECAT3CV2.H"
 #include "MATH/DOUBLEBITS.H"
 
 extern const f64 D_800C56C0_de;
 extern const f64 D_800C56C8_de;
 extern const f64 D_800C56D0_de;
 
-f64 func_8029ABA0_de(f64 value, s32 shift) {
+/* Scales a double by 2^shift (ldexp): adds shift to the biased exponent in place, returns zeros and infinities unchanged, saturates to the
+   D_800C56C0_de constant on overflow, flushes to zero below 2^-53 and builds denormal results through a recursive multiply. */
+f64 ScaleDoubleExponent(f64 value, s32 shift) {
     DoubleBits_8029ECB0 *bits = (DoubleBits_8029ECB0 *)&value;
     u32 high = bits->w.hi;
-    s32 exponent = (high >> 20) & 0x7FF;
+    s32 exponent;
+    u32 current;
     u32 sign;
+    exponent = high >> 20;
+    exponent &= 0x7FF;
     if (exponent != 0) {
         if ((u32)exponent < 0x7FF) {
             exponent = (s32)((u32)exponent + (u32)shift);
@@ -27,32 +29,29 @@ f64 func_8029ABA0_de(f64 value, s32 shift) {
                     return value;
                 }
                 if (shift >= 0) {
-                    high = bits->w.hi;
-                    sign = high >> 31;
+overflow:
+                    current = bits->w.hi;
+                    sign = current;
                     value = D_800C56C0_de;
-                    bits->w.hi = (high & 0x7FFFFFFF) | (sign << 31);
-                    return value;
+                    current &= 0x7FFFFFFF;
+                    current |= (sign >> 31) << 31;
+                    bits->w.hi = current;
+                    return D_800C56C0_de;
                 }
                 if ((u32)exponent < (u32)-53) {
-                    sign = high >> 31;
                     value = 0.0;
-                    bits->w.hi = (bits->w.hi & 0x7FFFFFFF) | (sign << 31);
+                    bits->w.hi = (bits->w.hi & 0x7FFFFFFF) | ((high >> 31) << 31);
                     return value;
                 }
             }
             bits->w.hi = (bits->w.hi & 0x800FFFFF) | 0x100000;
-            value *= func_8029ABA0_de(D_800C56C8_de, exponent - 1);
+            value *= ScaleDoubleExponent(D_800C56C8_de, exponent - 1);
             return value;
         }
-        if ((high & 0xFFFFF) != 0 || bits->w.lo != 0) {
-            return value;
-        }
-        if (shift >= 0) {
-            high = bits->w.hi;
-            sign = high >> 31;
-            value = D_800C56C0_de;
-            bits->w.hi = (high & 0x7FFFFFFF) | (sign << 31);
-        } else {
+        if ((high & 0xFFFFF) == 0 && bits->w.lo == 0) {
+            if (shift >= 0) {
+                goto overflow;
+            }
             bits->w.hi = (high & 0x7FFFFFFF) | ((high >> 31) << 31);
         }
         return value;
@@ -60,11 +59,8 @@ f64 func_8029ABA0_de(f64 value, s32 shift) {
     if ((high & 0xFFFFF) == 0 && bits->w.lo == 0) {
         return value;
     }
-    return func_8029ABA0_de(value * func_8029ABA0_de(D_800C56D0_de, 53), shift - 53);
+    return ScaleDoubleExponent(value * ScaleDoubleExponent(D_800C56D0_de, 53), shift - 53);
 }
-#else
-INCLUDE_ASM("span_1000", func_8029ABA0_de);
-#endif
 
 #ifdef NON_MATCHING
 #include "TYPES.H"
@@ -158,7 +154,7 @@ static inline f64 exp_inline(f64 x) {
     r = x - k * 0.693359375 + k * 2.1219444170128557e-4;
     t = r * r;
     p = ((t * 1.652032915444579e-5 + 6.943599786609411e-3) * t + 0.25) * r;
-    return func_8029ABA0_de(p / ((t * 4.9586285604164e-4 + 5.55538684129715e-2) * t + 0.5 - p) + 0.5, k + 1);
+    return ScaleDoubleExponent(p / ((t * 4.9586285604164e-4 + 5.55538684129715e-2) * t + 0.5 - p) + 0.5, k + 1);
 }
 
 f64 func_8029AEA4_de(f64 x, f64 y) {

@@ -4081,7 +4081,7 @@ segments:
       - [0xC6594, data, data_800C/D_d1_471163f96c5e8590]
       - [0xC65A0, rodata, data_800C/D_8029ABA0_CB450]
       - [0xC65B8, rodata, data_800C/data_func_8029AD38_de_800C59B8]
-      - [0xC6620, rodata, data_800C/literals_func_8029ABA0_de]
+      - [0xC6620, rodata, data_800C/literals_ScaleDoubleExponent]
       - [0xC6728, rodata, data_800C/literals_FloatModulo]
       - [0xC6758, rodata, data_800C/literals_func_8029B3C0_de]
       - [0xC6938, rodata, data_800C/D_8029C288_CB7E8]
