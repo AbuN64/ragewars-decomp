@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_6.H"
@@ -115,7 +116,7 @@ block_10:
     }
 #endif
     func_80253344_de(0);
-    D_80146CD8 = D_8011BDC0;
+    D_80146CD8 = D_8011FAC0.ring.current;
     func_80292308_de(world);
     world->unk26DB0 = world->unk26DB0 + D_800D2988;
     func_80293C34_de(world);

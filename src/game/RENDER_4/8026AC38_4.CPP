@@ -1,6 +1,7 @@
 #include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "RENDER_4/8026AC38.H"
@@ -30,7 +31,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (func_80269A80_de(&D_8013B2D8, pass) == 0) {
@@ -100,7 +101,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     u32 used;
 
     func_802A01E8_de();
-    start = &D_8011BDC0->commands;
+    start = &D_8011FAC0.ring.current->commands;
     shared = &D_80137288;
     *shared |= 0x20;
     used = (u32)D_80110634 - (u32)*start;

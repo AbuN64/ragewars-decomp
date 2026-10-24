@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/OBJECTSTATE18.H"
@@ -143,7 +144,7 @@ void func_8026DA4C_de(void **resource, void *matrix, s32 segment, void *lights, 
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;
@@ -221,7 +222,7 @@ void func_8026DD50_de(void **resource, s32 unused, s32 matrix, s32 segment, s32 
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;
@@ -267,7 +268,7 @@ void func_8026DF7C_de(void *shared, s32 mode, void **resource, s32 matrix, s32 s
     s32 count;
     s32 i;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (func_80269A80_de(shared, pass) == 0) {

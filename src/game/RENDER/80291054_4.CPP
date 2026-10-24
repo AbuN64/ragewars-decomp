@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/GFX.H"
 #include "gbi.h"
 
@@ -59,7 +60,7 @@ void func_80292308_de(TimingWorld *world) {
     start = func_802BADC0_de();
     previousMode = (u32) start;
     startTime = start;
-    D_80146CD8 = D_8011BDC0;
+    D_80146CD8 = D_8011FAC0.ring.current;
     func_802539EC_de(0, D_800D297C);
     func_80295FF4_de();
     func_8026D844_de();

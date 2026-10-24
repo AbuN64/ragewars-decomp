@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GAME_SESSION.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "abi.h"
@@ -27,7 +28,7 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
     s32 i;
     s32 visible;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     header = *resource;

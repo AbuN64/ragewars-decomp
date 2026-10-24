@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/GFX.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -57,7 +58,7 @@ void func_80291BE8_de(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32 inte
             }
         }
     }
-    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_8011BDC0->colorImage)));
+    gDPSetColorImage(D_80110634++, G_IM_FMT_RGBA, G_IM_SIZ_16b, D_800E28D0, (u32)((D_8011FAC0.ring.current->colorImage)));
     gDPPipeSync(D_80110634++);
     gDPSetCycleType(D_80110634++, G_CYC_2CYCLE);
 }
@@ -69,7 +70,7 @@ extern s32 D_801377B8[2];
 
 /* Draw a null-terminated list of scaled strings, with an optional full-screen backdrop. */
 void Render_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s32 y, s32 lineStep, f32 scaleX, f32 scaleY) {
-    Frame *frame = D_8011BDC0;
+    Frame *frame = D_8011FAC0.ring.current;
     s32 i;
     char *text;
 

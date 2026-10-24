@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "abi.h"
 #include "COMMON/UNUSED.H"
@@ -195,7 +196,7 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
     s32 partIndex;
     s32 opacity = alpha;
 
-    if (D_800E28A4 - (((u32)D_80110634 - (u32)D_8011BDC0->commands) >> 3) < 3000U) {
+    if (D_800E28A4 - (((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) >> 3) < 3000U) {
         return;
     }
     resourceHeader = *(void **)resource;

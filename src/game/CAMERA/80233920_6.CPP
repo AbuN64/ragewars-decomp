@@ -413,7 +413,7 @@ void Camera_SetupViewportAndFog(Racer *view) {
     if ((s16)ulx<0) ulx=0;
     if ((s16)uly<0) uly=0;
     if ((s16)lry > D_800E28D4-1) lry=maxy;
-    buffer=D_8011BDC0; frame=D_800D297C;
+    buffer=D_8011FAC0.ring.current; frame=D_800D297C;
     { Gfx *packet=(*setup); gSPMatrix(packet, view->projectionMatrices[frame], G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH); (*setup)++; }
     gSPMoveWord((*setup)++, G_MW_PERSPNORM, 0, view->perspectiveNorm);
     viewport=&view->viewports[frame];

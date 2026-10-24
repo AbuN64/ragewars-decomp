@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
 #include "COMMON/SESSIONHANDLERROW.H"
@@ -376,7 +377,7 @@ f32 Render_BeginFrameDisplayList(void *world) {
     f32 right;
     f32 bottom;
 
-    D_80110634 = D_8011BDC0->commands;
+    D_80110634 = D_8011FAC0.ring.current->commands;
     gSPSegment(D_80110634++, 0, 0);
     gSPDisplayList(D_80110634++, &D_800CBCC0);
     gSPDisplayList(D_80110634++, &D_800CBCF0_de);

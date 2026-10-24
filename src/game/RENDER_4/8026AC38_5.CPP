@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/OBJECTSTATE18.H"
 #include "RENDER_4/8026AC38.H"
 #include "gbi.h"
@@ -57,15 +58,15 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
     shared->fog[3] = a;
     pass = (pass + 1) % 18;
 #if defined(VERSION_DE)
-    if (D_800DE854 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800DE854 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_EU)
-    if (D_800EEEC4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800EEEC4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_EU_X)
-    if (D_800EA084 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800EA084 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_US)
-    if (D_800DD504 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800DD504 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #elif defined(VERSION_US_REV1)
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
 #endif
         return;
     }

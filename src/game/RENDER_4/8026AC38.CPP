@@ -359,7 +359,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     s32 glow = 0;
     CGameStatus *settings;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     settings = &D_801468A0;

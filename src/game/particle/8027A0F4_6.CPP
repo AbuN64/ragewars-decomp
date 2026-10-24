@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE18.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHARED_PARTICLEINSTANCE.H"
 #include "gbi.h"
@@ -121,7 +122,7 @@ void Particle_DrawSprite(Shared_Particle *particle, struct Shared_ParticleView *
     u8 *envFrom;
     u8 *primFrom;
 
-    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
     if (particle->time < 0.0f) {

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "RENDER_4/8026AC38.H"
 #include "COMMON/GFX.H"
 #include "abi.h"
@@ -106,7 +107,7 @@ extern void func_80291BE8_de(void *arg0, s32 ulx, s32 lrx, s32 uly, s32 lry, s32
 
 extern void func_802A9234_de(s32 alpha);
 void func_80290C24_de(void *arg0) {
-    Frame *frame = D_8011BDC0;
+    Frame *frame = D_8011FAC0.ring.current;
     s32 width;
     s32 height;
     func_80291BE8_de(arg0, 0, SCREEN_WD, 0, SCREEN_HT, 0);

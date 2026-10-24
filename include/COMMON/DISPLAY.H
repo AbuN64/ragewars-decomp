@@ -30,7 +30,9 @@ struct Display {
     Frame frames[3];
     Frame *current; /* 0x3C0 */
 };
-/* D_8011BDC0 is the session's ring.current (D_8011FAC0 + 0x3C0 in every version). */
+/* D_8011BDC0 is the session's ring.current (D_8011FAC0 + 0x3C0 in every version). Code reads it as
+ * D_8011FAC0.ring.current; this scalar name stays only where the ROM schedules the load as a plain scalar
+ * (MIXED: func_80236F1C_de, func_80293FF0_de, func_80294200_de move it across Gfx stores). */
 extern Frame *D_8011BDC0;
 extern Frame *D_80146CD8; /* the frame being built */
 extern Gfx *D_8014D460, *D_8014D464; /* command buffers, alternating per frame */
