@@ -408,6 +408,7 @@ INCLUDE_ASM("span_1000", Render_BeginFrameDisplayList);
 
 extern u64 D_800D8C10[], D_800D8CE0[], D_800DC020_de[], D_800DA070[], D_800DC440[], D_800E4000[];
 extern u32 D_800D2978, D_800CD730;
+extern s32 D_800D297C;
 extern void osWritebackDCacheAll(void);
 extern void func_8028FD4C_de(void *, OSScTask_s *);
 /* Fills the frame's graphics task (and the second one when the frame is dual), hands them to the scheduler,
@@ -416,9 +417,11 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
 {
     OSScTask_s *task;
     s32 size;
+    s32 bytes;
     u64 *base;
     task = &frame->task;
     task->list.data_ptr = (u64 *)frame->commands;
+    bytes = frame->commandBytes;
     size = D_8014D424;
     task->list.type = 1;
     task->list.ucode_boot = D_800D8C10;
@@ -435,8 +438,8 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
     task->list.dram_stack_size = 0;
     task->list.output_buff = base;
     task->list.output_buff_size = (u64 *)((u8 *)base + size);
-    task->list.data_size = frame->commandBytes;
-    task->next = 0;
+    task->list.data_size = bytes;
+    frame->task.next = 0;
     task->msgQ = &D_801428C0;
     task->msg = &frame->done;
     task->framebuffer = frame->colorImage;
@@ -444,6 +447,7 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
     if (frame->dual) {
         task = &frame->secondTask;
         task->list.data_ptr = (u64 *)frame->secondCommands;
+        bytes = frame->secondCommandBytes;
         size = D_8014D424;
         task->list.type = 1;
         task->list.ucode_boot = D_800D8C10;
@@ -460,8 +464,8 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
         task->list.dram_stack_size = 0;
         task->list.output_buff = base;
         task->list.output_buff_size = (u64 *)((u8 *)base + size);
-        task->list.data_size = frame->secondCommandBytes;
-        task->next = 0;
+        task->list.data_size = bytes;
+        frame->secondTask.next = 0;
         task->flags = 0x23;
         task->msgQ = &D_801428C0;
         task->msg = &frame->done;
@@ -474,10 +478,8 @@ void Render_SubmitFrameTasks(Display *display, Frame *frame)
     D_800CD730++;
     D_800D297C ^= 1;
     display->current = &display->frames[D_800D2978 % D_800DE850];
-    if (D_800D297C == 0) display->current->commands = D_8014D460;
-    else display->current->commands = D_8014D464;
-    if (D_800D297C == 0) display->current->secondCommands = D_8014D430_de;
-    else display->current->secondCommands = D_8014D42C;
+    display->current->commands = D_800D297C ? D_8014D464 : D_8014D460;
+    display->current->secondCommands = D_800D297C ? D_8014D42C : D_8014D430_de;
 }
 #else
 INCLUDE_ASM("span_1000", Render_SubmitFrameTasks);
