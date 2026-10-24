@@ -81,27 +81,32 @@ static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
     }
     return channel;
 }
+static inline s32 Pak_HasNamedNote(s32 name, s32 channel) {
+    u8 text[16];
+    s8 *note;
+    s32 index;
+    for (index = 0; index < 16; index++) {
+        Pak_GetNoteGameName(channel, index, &note);
+        func_80405648_de((u8 *)note, text, 16);
+        if (func_802A037C_de(text, name) == 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
 void Pak_CheckControllerPak(Shared_PakMenu *menu) {
-    u8 noteText[16];
     s32 firstChannel;
     s32 freeChannel;
-    s8 *note1;
-    s8 *note2;
     s32 freeBytes;
     s32 freeNotes;
-    s32 channelArg1;
-    s32 channelArg2;
-    s32 channel1;
-    s32 channel2;
-    s32 firstNoteName;
-    s32 noteIndex;
-    s32 noteIndex2; /* second note cursor, then the Pak error status */
-    s32 retries; /* channel retries, then the second note name */
-    s32 hasNote2; /* second note found */
+    s32 error;
+    s32 retries;
     s32 status;
     s32 hasNote1;
+    s32 hasNote2;
     u32 minBytes;
     u32 maxBytes;
+
     D_8014D4C0_de = 0;
     D_8014D4DC = 1;
     D_80153760 = 0;
@@ -140,7 +145,8 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             return;
         }
     }
-    if (func_80405598_de(D_800E28C8) == 0) {
+    error = func_80405598_de(D_800E28C8);
+    if (error == 0) {
         func_80293268_de((s32) &D_8011FAC0);
         if ((menu->slot->unkB0 & 0x1000) && (D_800E28CC == 0)) {
             D_80146D60 = 1;
@@ -163,7 +169,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
                 D_800E28CC = 1;
                 return;
             }
-            goto block_60;
+            goto finish;
         }
         status = 0;
         retries = 0;
@@ -182,109 +188,74 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             D_800E28C8 = firstChannel;
             func_80404E28_de(firstChannel);
             if (Pak_GetStatus(D_800E28C8) == -2) {
-                        D_80153784 = 1;
-                        D_8014AD9C = 0;
+                D_80153784 = 1;
+                D_8014AD9C = 0;
 #if defined(VERSION_DE)
-                        Pak_OpenDialog(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
+                Pak_OpenDialog(&D_8014561C, &D_0044EA74, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        Pak_OpenDialog(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
+                Pak_OpenDialog(&D_8014561C, &D_0044F6C4, (s32)menu->player, (s32) menu->slot, 0);
 #elif defined(VERSION_US)
-                        Pak_OpenDialog(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
+                Pak_OpenDialog(&D_8014561C, &D_0044EBE4, (s32)menu->player, (s32) menu->slot, 0);
 #endif
-                        D_8014AD94 = 0;
-                        D_800E28CC = 1;
-                        return;
+                D_8014AD94 = 0;
+                D_800E28CC = 1;
+                return;
             }
         }
-        goto block_39;
-/* FAKEMATCH: place found-note exits before the loops to preserve branch layout. */
-first_note_found:
-        hasNote1 = 1;
-        goto second_note_search;
-second_note_found:
-        hasNote2 = 1;
-        goto notes_checked;
-block_39:
-        noteIndex = 0;
-        firstNoteName = D_800D36D4;
-        channel1 = D_800E28C8;
-        channelArg1 = channel1;
-loop_40:
-        Pak_GetNoteGameName(channelArg1, noteIndex, &note1);
-        func_80405648_de((u8 *) note1, noteText, 0x10);
-        if (func_802A037C_de(noteText, firstNoteName) == 0) {
-            goto first_note_found;
-        }
-        noteIndex += 1;
-        if (noteIndex < 0x10) {
-            goto loop_40;
-        }
-        hasNote1 = 0;
-second_note_search:
-        noteIndex2 = 0;
-        retries = D_800D36D8;
-        channel2 = D_800E28C8;
-        channelArg2 = channel2;
-loop_44:
-        Pak_GetNoteGameName(channelArg2, noteIndex2, &note2);
-        func_80405648_de((u8 *) note2, noteText, 0x10);
-        if (func_802A037C_de(noteText, retries) == 0) {
-            goto second_note_found;
-        }
-        noteIndex2 += 1;
-        if (noteIndex2 < 0x10) {
-            goto loop_44;
-        }
-        hasNote2 = 0;
-notes_checked:
+        hasNote1 = Pak_HasNamedNote(D_800D36D4, D_800E28C8);
+        hasNote2 = Pak_HasNamedNote(D_800D36D8, D_800E28C8);
         if ((hasNote1 == 0) && (hasNote2 == 0)) {
-            if ((Pak_GetFreePages(D_800E28C8, &freeBytes) == 0) && (noteIndex2 = Pak_CountFreeNotes(D_800E28C8, &freeNotes), (noteIndex2 == 0))) {
-                maxBytes = func_804057EC_de(D_8011FECC + 0x610);
-                minBytes = func_804057EC_de(0x18U);
-                if ((freeNotes != 0) && (freeBytes >= (s32) minBytes)) {
-                    if (freeBytes < (s32) maxBytes) {
+            error = Pak_GetFreePages(D_800E28C8, &freeBytes);
+            if (error == 0) {
+                error = Pak_CountFreeNotes(D_800E28C8, &freeNotes);
+                if (error == 0) {
+                    maxBytes = func_804057EC_de(D_8011FECC + 0x610);
+                    minBytes = func_804057EC_de(0x18U);
+                    if (freeNotes != 0) {
+                        if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
+                            D_80153784 = 1;
+                            D_80146D60 = 1;
+#if defined(VERSION_DE)
+                            Pak_OpenDialog(&D_8014561C, &D_0044EED0, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+                            Pak_OpenDialog(&D_8014561C, &D_0044FB20, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+#elif defined(VERSION_US)
+                            Pak_OpenDialog(&D_8014561C, &D_0044F040, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+#endif
+                        } else if (freeBytes < (s32)minBytes) {
+                            D_80153784 = 1;
+                            D_80146D60 = 1;
+#if defined(VERSION_DE)
+                            Pak_OpenDialog(&D_8014561C, &D_0044EEAC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
+                            Pak_OpenDialog(&D_8014561C, &D_0044FAFC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+#elif defined(VERSION_US)
+                            Pak_OpenDialog(&D_8014561C, &D_0044F01C, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+#endif
+                        }
+                    } else {
                         D_80153784 = 1;
                         D_80146D60 = 1;
 #if defined(VERSION_DE)
-                        Pak_OpenDialog(&D_8014561C, &D_0044EED0, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+                        Pak_OpenDialog(&D_8014561C, &D_0044EEAC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                        Pak_OpenDialog(&D_8014561C, &D_0044FB20, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+                        Pak_OpenDialog(&D_8014561C, &D_0044FAFC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #elif defined(VERSION_US)
-                        Pak_OpenDialog(&D_8014561C, &D_0044F040, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+                        Pak_OpenDialog(&D_8014561C, &D_0044F01C, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
 #endif
-                        goto prompt_checked;
                     }
-                    /* FAKEMATCH: retain the repeated minimum-size test and its target branch. */
-                    if (freeBytes < (s32) minBytes) {
-                        goto block_56;
-                    }
-                } else {
-block_56:
-                    D_80153784 = 1;
-                    D_80146D60 = 1;
-#if defined(VERSION_DE)
-                    Pak_OpenDialog(&D_8014561C, &D_0044EEAC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US_REV1)
-                    Pak_OpenDialog(&D_8014561C, &D_0044FAFC, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#elif defined(VERSION_US)
-                    Pak_OpenDialog(&D_8014561C, &D_0044F01C, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-#endif
                 }
-prompt_checked:
-                if (noteIndex2 != 0) {
-                    goto block_59;
-                }
-            } else {
-                goto block_59;
             }
+        } else {
+            goto finish;
         }
-        goto block_60;
     }
-block_59:
-    D_80153784 = 1;
-    D_80146D60 = 1;
-    Pak_OpenDialog(&D_8014561C, &D_0044ED44, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
-block_60:
+    if (error != 0) {
+        D_80153784 = 1;
+        D_80146D60 = 1;
+        Pak_OpenDialog(&D_8014561C, &D_0044ED44, (s32)menu->player, (s32) menu->slot, (s32) &D_0044E4F8);
+    }
+finish:
     if (D_80153784 == 0) {
         func_80405F48_de(menu);
     }
