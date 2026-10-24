@@ -5,9 +5,6 @@
 #include "COMMON/TEXTURE_REQUEST.H"
 
 #if defined(VERSION_US_REV1)
-extern s32 D_8014AEC8;
-extern s32 D_8014AED0;
-extern s32 D_8014AED4;
 
 
 
@@ -36,16 +33,16 @@ s32 func_802953FC_us_rev1(s32 arg0) {
     }
     do {
     sw_outer_0x101:
-        return D_8014AED4;
+        return (s32)D_8014AEB0.textureOverride;
     sw_outer_0x102:
-        return D_8014AED8;
+        return (s32)D_8014AEB0.paletteOverride;
     sw_outer_0x103:
-        return 1 << ((FrontendInputSelector *)D_8014AED0)->primaryButton;
+        return 1 << D_8014AEB0.selector->primaryButton;
     sw_outer_0x104:
-        return 1 << ((FrontendInputSelector *)D_8014AED0)->secondaryButton;
+        return 1 << D_8014AEB0.selector->secondaryButton;
     sw_outer_0x105:
         {
-        s32 sw_inner_value = ((FrontendInputSelector *)D_8014AED0)->mode;
+        s32 sw_inner_value = D_8014AEB0.selector->mode;
         if ((unsigned int)sw_inner_value > 5) {
             goto zero;
         }
@@ -71,7 +68,7 @@ s32 func_802953FC_us_rev1(s32 arg0) {
             return 0x10;
     } while (0);
     sw_outer_0x106:
-        D_8014AEC8 = 1;
+        D_8014AEB0.overridesOff = 1;
 zero:
         return 0;
     sw_outer_default:

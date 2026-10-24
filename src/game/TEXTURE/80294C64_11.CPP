@@ -3,15 +3,13 @@
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "TEXTURE/80294C64_11.H"
-extern FrontendInputSelector *D_8014AED0;
 
 #if defined(VERSION_US_REV1)
-/** Return the global word at D_8014AED4. */
-extern int D_8014AED4;
+/** Return the texture override pointer of the menu state. */
 
 
 /* Handles one held press of the menu "next page" key: D_auto_800D2AF8 counts the held presses, and on the
- * fourth one the selection index D_8014AEBC is stepped up by five modulo the menu item count; the
+ * fourth one the selection index D_8014AEB0.selectionIndex is stepped up by five modulo the menu item count; the
  * pre-modulo index store is retained as the original emitted it, and the change flag word at +8 from
  * the index is set. Ported verbatim from the legacy branch source (byte-exact in that build). */
 
@@ -25,7 +23,7 @@ void func_80295A60_us_rev1(void) {
 
     old = D_auto_800D2AF8++;
     if (old >= 3) {
-        p = &D_8014AEBC;
+        p = &D_8014AEB0.selectionIndex;
         temp_a0 = p[0] + 5;
         temp_v0 = p[-1];
         var_v1 = temp_a0 % temp_v0;
@@ -37,27 +35,27 @@ void func_80295A60_us_rev1(void) {
 }
 
 int func_80295AE0_us_rev1(void) {
-    return D_8014AED4;
+    return (int)D_8014AEB0.textureOverride;
 }
 
 int func_80295AF0_us_rev1(void) {
-    return D_8014AED8;
+    return (int)D_8014AEB0.paletteOverride;
 }
 
 /** Compute a bit mask from the byte at offset 2 of the global record. */
 int func_80295B00_us_rev1(void) {
-    return 1 << D_8014AED0->primaryButton;
+    return 1 << D_8014AEB0.selector->primaryButton;
 }
 
 int func_80295B18_us_rev1(void) {
-    unsigned char shift = D_8014AED0->secondaryButton;
+    unsigned char shift = D_8014AEB0.selector->secondaryButton;
     return 1 << shift;
 }
 
 /** Return the mode mask selected by the global record's leading byte. */
 int func_80295B30_us_rev1(void) {
     {
-        int sw_mode_value = D_8014AED0->mode;
+        int sw_mode_value = D_8014AEB0.selector->mode;
         if ((unsigned int)sw_mode_value > 5) {
             goto sw_mode_default;
         }

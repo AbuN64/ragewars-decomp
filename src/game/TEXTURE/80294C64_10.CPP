@@ -8,12 +8,9 @@ struct Node80253610;
 extern void func_80253754_de(void *heap, struct Node80253610 *resource);
 
 #if defined(VERSION_US_REV1)
-extern s32 D_8014AECC;
-
-extern char D_8014AEB0;
 
 
-extern ResourceManagerState D_8014AEC0;
+
 
 
 void func_802957EC_us_rev1(void) {
@@ -25,7 +22,7 @@ void func_802957EC_us_rev1(void) {
 
     old = D_auto_800D2AE4++;
     if (old >= 3) {
-        p = &D_8014AEBC;
+        p = &D_8014AEB0.selectionIndex;
         temp_a0 = p[0] - 1;
         temp_v0 = temp_a0 + p[-1];
         var_v1 = temp_v0 % p[-1];
@@ -41,34 +38,34 @@ void func_802957EC_us_rev1(void) {
 }
 
 void func_80295890_us_rev1(void) {
-    if (((ResidentState *)&D_8014AECC)->unk0 != 0) {
-        func_80253754_de(0, ((ResidentState *)&D_8014AECC)->unk0);
+    if (D_8014AEB0.resource != 0) {
+        func_80253754_de(0, D_8014AEB0.resource);
     }
-    ((ResidentState *)&D_8014AECC)->unk0 = 0;
-    ((ResidentState *)&D_8014AECC)->unk8 = 0;
-    ((ResidentState *)&D_8014AECC)->unkC = 0;
-    ((ResidentState *)&D_8014AECC)->unk4 = 0;
+    D_8014AEB0.resource = 0;
+    D_8014AEB0.textureOverride = 0;
+    D_8014AEB0.paletteOverride = 0;
+    D_8014AEB0.selector = 0;
 }
 
 /** Reset the record's fields, marking slot 1 active. */
 void func_802958D8_us_rev1(void) {
-    char *object = &D_8014AEB0;
+    struct MenuGlobalRecAt21B8 *object = &D_8014AEB0;
 
-    ((struct MenuGlobalRecAt21B8 *)object)->alternateTitle = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->state = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->selectionIndex = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->selectionValue = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->active = 1;
-    ((struct MenuGlobalRecAt21B8 *)object)->field4 = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->titleWasShown = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field1C = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field24 = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field28 = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field20 = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field212C = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field2130 = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->field2134 = 0;
-    ((struct MenuGlobalRecAt21B8 *)object)->frameCount = 0;
+    object->alternateTitle = 0;
+    object->state = 0;
+    object->selectionIndex = 0;
+    object->selectionValue = 0;
+    object->active = 1;
+    object->field4 = 0;
+    object->titleWasShown = 0;
+    object->resource = 0;
+    object->textureOverride = 0;
+    object->paletteOverride = 0;
+    object->selector = 0;
+    object->entryTable = 0;
+    object->textureTable = 0;
+    object->paletteTable = 0;
+    object->frameCount = 0;
 }
 
 void func_80295924_us_rev1(void) {
@@ -79,10 +76,10 @@ void func_80295924_us_rev1(void) {
     ptr = &D_800D2AEC;
     old = (*ptr)++;
     if (old >= 3) {
-        count = D_8014AEC0.active;
-        D_8014AEC0.count = 1;
+        count = D_8014AEB0.selectionValue;
+        D_8014AEB0.titleWasShown = 1;
         D_800D2AEC = 0;
-        D_8014AEC0.active = count - 1;
+        D_8014AEB0.selectionValue = count - 1;
     }
 }
 
@@ -94,10 +91,10 @@ void func_80295970_us_rev1(void) {
     ptr = &D_800D2AF0;
     old = (*ptr)++;
     if (old >= 3) {
-        count = D_8014AEC0.active;
-        D_8014AEC0.count = 1;
+        count = D_8014AEB0.selectionValue;
+        D_8014AEB0.titleWasShown = 1;
         D_800D2AF0 = 0;
-        D_8014AEC0.active = count + 1;
+        D_8014AEB0.selectionValue = count + 1;
     }
 }
 
@@ -110,7 +107,7 @@ void func_802959BC_us_rev1(void) {
 
     old = D_auto_800D2AF4++;
     if (old >= 3) {
-        p = &D_8014AEBC;
+        p = &D_8014AEB0.selectionIndex;
         temp_a0 = p[0] - 5;
         temp_v0 = temp_a0 + p[-1];
         var_v1 = temp_v0 % p[-1];

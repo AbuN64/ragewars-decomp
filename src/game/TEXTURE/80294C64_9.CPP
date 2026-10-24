@@ -7,10 +7,8 @@
 #include "COMMON/TEXTURE_REQUEST.H"
 
 #if defined(VERSION_US_REV1)
-extern u8 D_8014AEB0;
 extern ResidentSlot D_8014AEC8;
 extern ResidentEntry D_8014AECC;
-extern s32 D_8014AED8;
 
 void func_802956AC_us_rev1(s32 resource, s32 **palette) {
     s32 var_v1;
@@ -21,7 +19,7 @@ void func_802956AC_us_rev1(s32 resource, s32 **palette) {
             return;
         }
         var_v1 = 0;
-        if (D_8014AEB0 != 0) {
+        if (D_8014AEB0.alternateTitle != 0) {
             var_v1 = (u32)D_800D2AE0 > 0U;
         }
         if (var_v1 != 0) {
@@ -34,7 +32,7 @@ void func_802956AC_us_rev1(s32 resource, s32 **palette) {
                 *palette = &D_8014AECC.unk2010;
                 return;
             }
-            *palette = (s32 *)D_8014AED8;
+            *palette = D_8014AEB0.paletteOverride;
         }
     }
 }

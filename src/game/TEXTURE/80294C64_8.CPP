@@ -5,11 +5,9 @@
 #include "COMMON/TEXTURE_REQUEST.H"
 
 #if defined(VERSION_US_REV1)
-extern u8 D_8014AEB0;
 extern char D_8014AEC8[];
 
 extern Selection_func_802955EC_us_rev1 D_8014AECC;
-extern s32 *D_8014AED4;
 
 
 
@@ -20,7 +18,7 @@ void func_802955EC_us_rev1(s32 resource, s32 **texture) {
 
     if ((D_800D2AE0 != 0) && (*texture != 0) && (*(s32 *)&D_8014AEC8[0] == 0)) {
         enabled = 0;
-        if (D_8014AEB0 != 0) {
+        if (D_8014AEB0.alternateTitle != 0) {
             enabled = (u32)D_800D2AE0 > 0U;
         }
         if (enabled != 0) {
@@ -33,7 +31,7 @@ void func_802955EC_us_rev1(s32 resource, s32 **texture) {
                 *texture = &D_8014AECC.alternative;
                 return;
             }
-            *texture = D_8014AED4;
+            *texture = D_8014AEB0.textureOverride;
         }
     }
 }

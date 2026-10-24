@@ -1,11 +1,11 @@
 #include "COMMON/RESIDENTSTATE.H"
+#include "TEXTURE/80294C64.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "TEXTURE/80294C64_5.H"
 #include "RESMGR/802A0888.H"
 
 #if defined(VERSION_US_REV1)
-extern u8 D_8014AEB0;
 
 extern s32 D_8014AEC0;
 extern s32 D_8014AECC;
@@ -16,7 +16,7 @@ extern s32 D_8014AED4;
 void func_802954E0_us_rev1(void) {
     s32 *base = &D_8014AEB8;
 
-    D_8014AEB0 = 0;
+    D_8014AEB0.alternateTitle = 0;
     D_8014AEB1 = 0;
     D_8014AEBC = 0;
     D_8014AEC0 = 0;
