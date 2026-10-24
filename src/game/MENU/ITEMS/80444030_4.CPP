@@ -58,7 +58,7 @@ typedef struct GameRecord80445074 {
     u8 flag580;
 } GameRecord80445074;
 
-extern f32 D_800E2798;
+extern f32 D_800E2798[];
 
 static __inline__ void resetPlayerSlot(SlotSettings80445074 *slot, u8 index) {
         slot->f78 = 0;
@@ -78,7 +78,9 @@ static __inline__ void resetPlayerSlot(SlotSettings80445074 *slot, u8 index) {
         RESET_SLOT_80445074((u8 *)slot);
 }
 
-/* 17/117 aligned edits; remaining: enabled-loop induction and header word stores. */
+/* 4/117 aligned edits; remaining: sched1 ties place the options-byte read and the copy of the constant 1
+   later than the ROM. Read as a table element, the default speed D_800E2798 stays ahead of the header stores;
+   the flag17 store between the 0x04000000 and -1 stores of next keeps both of them live. */
 void Items_ResetGameOptions(GameRecord80445074 *game) {
     s32 i;
     u8 initialHudByte;
@@ -89,14 +91,14 @@ void Items_ResetGameOptions(GameRecord80445074 *game) {
     game->colorB = 0xFF;
     game->options = 0x80;
     initialHudByte = (u8)game->options;
-    speed = D_800E2798;
+    speed = D_800E2798[0];
     game->mode = 0x10;
     game->flags = 0;
     game->next = 0;
     game->flags = 0x04000000;
     game->next = 0x04000000;
-    game->next = -1;
     game->flag17 = 1;
+    game->next = -1;
     game->buttons = 0;
     game->flag1B = 1;
     game->flag1C = 0;
@@ -112,7 +114,7 @@ void Items_ResetGameOptions(GameRecord80445074 *game) {
     game->flag2B = 1;
     game->hudCopy = initialHudByte;
     game->speedFactor = speed;
-    for (i = 9; i >= 0; i--) {
+    for (i = 0; i < 10; i++) {
         game->enabled[i] = 1;
     }
     game->pad36[0] = 0;
