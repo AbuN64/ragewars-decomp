@@ -2099,7 +2099,6 @@ extern float D_800C87E4;
 extern float D_800C87E8;
 extern float D_800C913C_de;
 extern float D_800C917C;
-extern float D_800C9194;
 extern int D_800C9228_de;
 extern Triple D_800C94DC_de;
 extern float D_800C9514_de;
