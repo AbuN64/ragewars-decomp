@@ -103,8 +103,15 @@ void func_8020694C_de(char *arg0, void *arg1, Rec *info) {
 extern f32 D_800D2988;
 extern f32 D_800C1B04_de, D_800C1B08_de, D_800C1B0C_de;
 
-/* 223/237 aligned words; remaining: release flag loads and register allocation. */
+/* 2/237 aligned edits; remaining: the ROM threads the hold test's not-held path straight to the toggle test. */
 /* Advance triggered shaking and vertical motion, invalidating animation on a state change. */
+/* A hold segment keeps the motion until the input is held. */
+static inline s32 holdReleased(SegmentRecAt5C *segment, Actor_func_80206DD4_de *actor) {
+    if (segment->flags & 0x08000000) {
+        return actor->inputFlags & 0x40;
+    }
+    return 1;
+}
 void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode80206258 *motion) {
     SegmentRecAt5C *segment;
     s32 oldState;
@@ -162,11 +169,12 @@ void Render_UpdateTriggeredMotion(Actor_func_80206DD4_de *actor, RiderCode802062
             actor->flags &= ~0x2000;
         } else {
             motion->timer = segment->duration;
-            release = 0;
-            if (!(segment->flags & 0x08000000) || (actor->inputFlags & 0x40)) {
+            if (!holdReleased(segment, actor)) {
+                release = 0;
+            } else {
                 release = 1;
                 if (segment->flags & 0x10000000) {
-                    release = (u32)(actor->inputFlags & 0x40) < 1U;
+                    release = (u32)(actor->inputFlags & 0x40) < (u32)release;
                 }
             }
             if (release) {
