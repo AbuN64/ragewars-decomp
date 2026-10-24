@@ -1485,6 +1485,11 @@
     _GBI_CMD(pkt, _SHIFTL(G_SETFILLCOLOR, 24, 8), (unsigned int)(data))
 #define gsDPSetFillColor(data) \
     { { _SHIFTL(G_SETFILLCOLOR, 24, 8), (unsigned int)(data) } }
+#define GPACK_RGBA5551(r, g, b, a) \
+    ((((r) << 8) & 0xF800) | (((g) << 3) & 0x7C0) | (((b) >> 2) & 0x3E) | ((a) & 0x1))
+#define gSPFogPosition(pkt, min, max) \
+    gSPMoveWord(pkt, G_MW_FOG, G_MWO_FOG, \
+                (_SHIFTL((128000 / ((max) - (min))), 16, 16) | _SHIFTL(((500 - (min)) * 256 / ((max) - (min))), 0, 16)))
 #define gDPSetDepthImage(pkt, data) \
     _GBI_CMD(pkt, _SHIFTL(G_SETZIMG, 24, 8), (unsigned int)(data))
 #define gsDPSetDepthImage(data) \
