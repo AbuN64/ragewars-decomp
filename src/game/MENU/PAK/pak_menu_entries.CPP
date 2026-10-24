@@ -348,8 +348,28 @@ void Pak_DrawMenuEntries(struct MenuStyle *menu, s8 *member) {
 #include "COMMON/VIDEO_DIMENSIONS.H"
 extern f32 D_800E2504;
 extern void func_802AA9F4_de();
-/* 35/180 aligned edits; remaining: dead entry-flag load, float scheduling and alpha call setup. */
+extern TextBoundsFont D_800E1E24_de[];
+static __inline__ TextBoundsFont *textBoundsFont(TextBoundsText *text) {
+    s32 style = 0;
+    switch ((u32)text->flags & 0x3FE0) {
+    case 0x20: style = 0; break;
+    case 0x40: style = 1; break;
+    case 0x80: style = 2; break;
+    case 0x100: style = 3; break;
+    case 0x200: style = 4; break;
+    case 0x400: style = 5; break;
+    case 0x800: style = 6; break;
+    case 0x1000: style = 7; break;
+    case 0x2000: style = 8; break;
+    default: style = 0; break;
+    }
+    return &D_800E1E24_de[style];
+}
+/* 20/180 aligned edits; remaining: parameter copy order, the gap/margin join and the relative-top float loads;
+ * the (u32) alpha conversion uses its own 2^31 literal, while D_800DE4E8 (that literal in the ROM) is also read
+ * at +4 as a string by other functions, so the pool cannot be placed yet. */
 void Pak_DrawMenuPanel(u8 *self, void *unused, s32 relative) {
+    TextBoundsFont *font = textBoundsFont((TextBoundsText *)unused);
     u8 *view = *(u8 **)(self + 0x40);
     CItemInfo box;
     CItemInfo bounds;
@@ -358,8 +378,6 @@ void Pak_DrawMenuPanel(u8 *self, void *unused, s32 relative) {
     f32 margin;
     f32 gap;
     f32 top;
-    f32 fade;
-    s32 alpha;
     box.left = 0x400;
     box.right = -0x400;
     box.m_Top = 0x400;
@@ -398,13 +416,7 @@ void Pak_DrawMenuPanel(u8 *self, void *unused, s32 relative) {
     box.m_Bottom = (s32)(box.m_Top + margin);
     box.height = box.m_Bottom - box.m_Top;
     func_802AA9F4_de();
-    fade = *(f32 *)(self + 0x30) * D_800DE4E4;
-    if (fade >= *(f32 *)D_800DE4E8) {
-        alpha = (s32)(fade - *(f32 *)D_800DE4E8) | 0x80000000;
-    } else {
-        alpha = (s32)fade;
-    }
-    func_802A7DE4_de(box.left, box.m_Top, box.right, box.m_Bottom, 1, 0, 0, 0, 0, alpha & 0xFF);
+    func_802A7DE4_de(box.left, box.m_Top, box.right, box.m_Bottom, 1, 0, 0, 0, 0, (u8)(u32)(*(f32 *)(self + 0x30) * D_800DE4E4));
 }
 #else
 INCLUDE_ASM("ovl_80400000", Pak_DrawMenuPanel);
