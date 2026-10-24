@@ -173,11 +173,13 @@ static inline void applyShieldReaction(ReactionActor *target, ReactionPlayer *pl
     }
 }
 
-/* 6/253 aligned instruction edits; remaining: prologue and shield-kind load ordering. */
+/* 2/253 aligned instruction edits; remaining: the ROM loads the shield kind for the reaction before the
+ * position/impulse argument copies, here the inline body loads it after them. */
 void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 absorbImpulse, CVector3 position, CVector3 impulse,
                       s32 applyTurn, void *shield, u32 hitFlags) {
-    ReactionActor *target = (ReactionActor *)targetObject;
     ReactionActor *source = (ReactionActor *)sourceObject;
+    ReactionActor *target = (ReactionActor *)targetObject;
+    s32 absorb = absorbImpulse;
     ReactionShield *reaction = (ReactionShield *)shield;
     f32 angle;
     if (target->category == 1) {
@@ -192,7 +194,7 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
                                  50.0f, D_800C43CC_de, D_800C43C8_de, 1, position);
             }
         }
-        if (absorbImpulse) {
+        if (absorb) {
             if (reaction && (victim->flags & 0x300000) &&
                 (u32)(reaction->effectKind - 4) < 2) {
                 applyShieldReaction(target, victim->player, position, impulse, reaction);
