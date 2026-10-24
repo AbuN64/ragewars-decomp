@@ -245,6 +245,8 @@ s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
     s8 *clearChar;
     u8 *trailingChar;
     u8 *decodedChar;
+    u8 blank;
+    u8 *buf;
     u8 *encodedChar;
     u8 trailingValue;
     u8 encodedValue;
@@ -255,23 +257,25 @@ s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
         if (D_801534F0[channel] == 3) {
             encodedName = (u8 *)D_800E2854 + channel * 0x204 + noteOffset + 0xE;
         }
+        buf = decodedName;
         clearIndex = 15;
-        clearChar = (s8 *)&decodedName[15];
+        clearChar = (s8 *)&buf[15];
         do {
             *clearChar = 0;
             clearIndex--;
             clearChar--;
         } while (clearIndex >= 0);
         nameStarted = 0;
+        blank = ' ';
         decodeIndex = 0;
-        decodedChar = decodedName;
+        decodedChar = buf;
         encodedChar = encodedName;
         do {
             encodedValue = *encodedChar;
             if (encodedValue >= 0x42U) {
                 *decodedChar = '~';
             } else if (encodedValue == 0 && nameStarted == 0) {
-                *decodedChar = ' ';
+                *decodedChar = blank;
             } else {
                 nameStarted = 1;
                 *decodedChar = D_800DE80C[*encodedChar];
@@ -280,17 +284,14 @@ s32 Pak_FindNoteByName(void *name, s32 channel, s32 *noteIndex) {
             decodeIndex++;
             encodedChar++;
         } while (decodeIndex < 16);
-        trimIndex = 15;
-        do {
-            trailingChar = &decodedName[trimIndex];
-            trailingValue = *trailingChar;
-            trimIndex--;
-            if (trailingValue != ' ' && trailingValue != 0) {
+        for (trimIndex = 15; trimIndex >= 0; trimIndex--) {
+            trailingChar = &buf[trimIndex];
+            if (*trailingChar != ' ' && *trailingChar != 0) {
                 break;
             }
             *trailingChar = 0;
-        } while (trimIndex >= 0);
-        decodedName[15] = 0;
+        }
+        buf[15] = 0;
         if (func_802A037C_de(decodedName, name) == 0) {
             if (noteIndex != NULL) {
                 *noteIndex = note;
