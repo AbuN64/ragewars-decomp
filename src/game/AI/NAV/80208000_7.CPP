@@ -456,11 +456,10 @@ f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
     return best;
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/OBJECTLINKS14.H"
-extern f32 D_800C1D80_de,D_800C1D84_de,D_800C1D88_de;
+extern const f32 D_800C1D80_de;
+extern f32 D_800C1D84_de, D_800C1D88_de;
 extern f32 func_8020C2E8_de(CNavData *, NavigationSearchNode *);
-extern f32 func_802726F8_de(f32 *,f32 *);
+extern f32 func_802726F8_de(f32 *, f32 *);
 
 static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
     NavigationSearchNode *node = graph->nodes;
@@ -478,79 +477,38 @@ static inline NavigationSearchNode *navFindNode(CNavData *graph, s32 key) {
     }
     return 0;
 }
-static inline s32 navCollectNeighbors(CNavData *graph, NavigationSearchNode *node,s32 *out,s32 *ids) {
-    s32 key = node->key, index = 0, count = 0;
-    s32 *portalOut = ids, *neighborOut = out;
-    NavigationBuffer *links;
-    NavigationPortal *portal;
-        if (graph->m_nNavLinks > 0) {
-
-            do {
-                links = graph->m_pusNavLinks;
-                portal=navigationRecord(links,index);
-                if (portal->first == key) {
-                    count += 1;
-                    *neighborOut = portal->second;
-                    *portalOut = index;
-                    portalOut++;
-                    neighborOut++;
-                }
-                if (portal->second == key) {
-                    count += 1;
-                    *neighborOut = portal->first;
-                    *portalOut = index;
-                    portalOut++;
-                    neighborOut++;
-                }
-                index += 1;
-            } while (index < graph->m_nNavLinks);
-        }
-    return count;
-}
-/* 29/253 aligned edits; remaining: floating zero lifetime, invalid-index fill and neighbor-collection setup. */
+/* A* search from start over the link graph: repeatedly closes the open node with the lowest total, stores its
+ * key in graph->result once it is a goal, otherwise relaxes the cost of every node it links to. */
 void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
     s32 neighbors[64];
     s32 portals[64];
-    s32 *neighborBase;
     NavigationPoint *origin;
     NavigationPoint *destination;
-    f32 sentinel;
     f32 initialEstimate;
     f32 estimate;
     f32 cost;
     f32 distance;
     f32 edgeCost;
-    NavigationBuffer *pointTable;
-    NavigationBuffer *linkTable;
-    NavigationBuffer *neighborTable;
-    s32 *portalOut;
-    s32 *neighborOut;
     s32 neighborKey;
-    s32 currentKey;
     s32 state;
     s32 index;
-    s32 byteOffset;
     s32 count;
     const s32 open = 1;
     s32 reversible;
     u8 edgeKind;
-    s32 kind;
     NavigationPortal *portal;
     NavigationSearchNode *current;
     NavigationSearchNode *node;
     NavigationSearchNode *best;
     f32 minimum;
-    NavigationSearchNode *nodeList;
     NavigationSearchNode *next;
 
     start->cost = 0.0f;
-    initialEstimate = func_8020C2E8_de(graph,start);
-    sentinel = D_800C1D80_de;
-    neighborBase=neighbors;
+    initialEstimate = func_8020C2E8_de(graph, start);
     start->estimate = initialEstimate;
     start->parent = 0;
-    start->open=open;
-    start->total = (start->cost + initialEstimate);
+    start->open = open;
+    start->total = start->cost + initialEstimate;
     while (navHasOpenNode(graph, open)) {
         node = graph->nodes;
         best = 0;
@@ -560,7 +518,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
                 if (node->total < minimum) {
                     best = node;
                     minimum = node->total;
-                } else if (minimum == sentinel) {
+                } else if (minimum == D_800C1D80_de) {
                     best = node;
                     minimum = node->total;
                 }
@@ -569,34 +527,23 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
         }
         if (best) best->open = 0;
         current = best;
-        pointTable = graph->points;
-        currentKey = current->key;
-        origin=navigationRecord(pointTable,currentKey);
+        origin = navigationRecord(graph->points, current->key);
         if (current->goal != 0) {
-            graph->result = currentKey;
+            graph->result = current->key;
             return;
         }
-        index = 0;
-        portalOut=portals;
-        neighborOut=neighborBase;
-        do {
-            *neighborOut = -1;
-            *portalOut = -1;
-            portalOut++;
-            index += 1;
-            neighborOut++;
-        } while (index < 0x40);
-count=navCollectNeighbors(graph,current,neighbors,portals);
-        for (index = 0, byteOffset = 0; index < count; index++, byteOffset += 4) {
-            neighborTable = graph->points;
-            neighborKey = *(s32 *)((u8 *)neighborBase + byteOffset);
-            nodeList = graph->nodes;
-            destination=navigationRecord(neighborTable,neighborKey);
-            next=navFindNode(graph,neighborKey);
-            linkTable = graph->m_pusNavLinks;
-            portal=navigationRecord(linkTable,*(s32 *)((u8 *)portals + byteOffset));
-            kind = portal->kind;
-            switch (kind) {
+        for (index = 0; index < 0x40; index++) {
+            neighbors[index] = -1;
+            portals[index] = -1;
+        }
+        count = navigationNeighbors(graph, current->key, neighbors, portals);
+        for (index = 0; index < count; index++) {
+            f32 minimumCost = 0.0f;
+            neighborKey = neighbors[index];
+            destination = navigationRecord(graph->points, neighborKey);
+            next = navFindNode(graph, neighborKey);
+            portal = navigationRecord(graph->m_pusNavLinks, portals[index]);
+            switch (portal->kind) {
                 case 1:
                 case 4:
                 case 7:
@@ -613,14 +560,14 @@ count=navCollectNeighbors(graph,current,neighbors,portals);
             if (edgeKind == 9) {
                 distance = 0.0f;
             } else {
-                distance = func_802726F8_de(&destination->position.x,&origin->position.x);
+                distance = func_802726F8_de(&destination->position.x, &origin->position.x);
             }
             edgeCost = distance + next->extra;
             if (navigation_point_flags(destination) & 0x400) {
                 edgeCost += D_800C1D88_de;
             }
-            if (edgeCost < 0.0f) {
-                edgeCost = 0.0f;
+            if (edgeCost < minimumCost) {
+                edgeCost = minimumCost;
             }
             state = next->open;
             cost = current->cost + edgeCost;
@@ -634,18 +581,15 @@ update_neighbor:
                 next->cost = cost;
                 estimate = func_8020C2E8_de(graph, next);
                 next->estimate = estimate;
-                next->total = (next->cost + estimate);
+                next->total = next->cost + estimate;
                 if ((next->open ^ 2) == 0) {
                     next->open = 0;
                 }
                 if ((next->open ^ open) != 0) {
-                    next->open=open;
+                    next->open = open;
                 }
             }
         }
         current->open = 2;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_SearchPath);
-#endif
