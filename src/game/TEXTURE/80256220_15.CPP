@@ -178,6 +178,35 @@ s32 func_80257BB4_de(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 arg3,
     return 0;
 }
 
+static inline void soundAcquireLock(MenuRules *lock) {
+    u32 mask = func_802BCF30_de();
+    s32 held = lock->locked + 1;
+    lock->locked = held;
+    if (held != 1) {
+        __osRestoreInt(mask);
+        func_802BB2A0_de((OSMesgQueue *)lock, 0, 1);
+    } else {
+        __osRestoreInt(mask);
+    }
+}
+
+static inline void soundReleaseLock(MenuRules *lock) {
+    u32 mask = func_802BCF30_de();
+    s32 held = lock->locked - 1;
+    lock->locked = held;
+    if (held != 0) {
+        __osRestoreInt(mask);
+        func_802BB420_de((OSMesgQueue *)lock, 0, 1);
+    } else {
+        __osRestoreInt(mask);
+    }
+}
+
+typedef struct SoundVoiceGroup {
+    s32 stride;
+    u32 count;
+} SoundVoiceGroup;
+
 #ifdef NON_MATCHING
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -255,35 +284,6 @@ static inline s32 soundVoiceLimitReached(ContextRecAt2BC0 *context, s32 sound) {
     return 0;
 }
 
-static inline void soundAcquireLock(MenuRules *lock) {
-    u32 mask = func_802BCF30_de();
-    s32 held = lock->locked + 1;
-    lock->locked = held;
-    if (held != 1) {
-        __osRestoreInt(mask);
-        func_802BB2A0_de((OSMesgQueue *)lock, 0, 1);
-    } else {
-        __osRestoreInt(mask);
-    }
-}
-
-static inline void soundReleaseLock(MenuRules *lock) {
-    u32 mask = func_802BCF30_de();
-    s32 held = lock->locked - 1;
-    lock->locked = held;
-    if (held != 0) {
-        __osRestoreInt(mask);
-        func_802BB420_de((OSMesgQueue *)lock, 0, 1);
-    } else {
-        __osRestoreInt(mask);
-    }
-}
-
-typedef struct SoundVoiceGroup {
-    s32 stride;
-    u32 count;
-} SoundVoiceGroup;
-
 /* 91/294 aligned edits remain in register allocation and selection branches. */
 s32 Texture_PlaySoundAtPosition(void *memory, s32 sound, CVector3 position, s32 spatialMode, s32 owner) {
     ContextRecAt2BC0 *context = memory;
@@ -334,13 +334,12 @@ s32 Texture_PlaySoundAtPosition(void *memory, s32 sound, CVector3 position, s32 
 INCLUDE_ASM("span_1000", Texture_PlaySoundAtPosition);
 #endif
 
-#ifdef NON_MATCHING
 /* Starts a sound-bank entry: looks up the entry's record in the bank table at 0x2B4C, resets the current
  * selection (0x2B88/0x2B8C/0x2B90), takes the recursive lock at 0x110 to hand out a new play id (counter
  * at 0x10C), then starts every voice record of the entry through func_80257BB4_de at the given position;
  * returns the play id, or -1 for an out-of-range index or an empty entry. */
 s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3 position, s32 voiceParameter) {
-    u32 *entry;
+    SoundVoiceGroup *group;
     u32 count;
     u32 i;
     s32 playId;
@@ -350,19 +349,17 @@ s32 Texture_PlayInstrumentAtPosition(ContextRecAt2BC0 *self, s32 index, CVector3
     self->field2B88 = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 0);
     self->field2B8C = 0x100;
     self->field2B90 = -1;
-    entry = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 1);
-    count = entry[1];
-    playId = -1;
+    group = func_8028FDB4_de(func_8028FDB4_de(self->instrumentIndex, (s16)index), 1);
+    count = group->count;
     if (count != 0) {
         soundAcquireLock(&self->lock);
-        playId = ++*(s32 *)((char *)self + 0x10C);
+        playId = ++self->playIdCounter;
         soundReleaseLock(&self->lock);
+    } else {
+        playId = -1;
     }
     for (i = 0; i < count; i++) {
-        func_80257BB4_de(self, (Item57BD4 *)((char *)entry + 8 + i * entry[0]), &position, index, playId, 0, voiceParameter);
+        func_80257BB4_de(self, (Item57BD4 *)((u8 *)(group + 1) + i * group->stride), &position, index, playId, 0, voiceParameter);
     }
     return playId;
 }
-#else
-INCLUDE_ASM("span_1000", Texture_PlayInstrumentAtPosition);
-#endif
