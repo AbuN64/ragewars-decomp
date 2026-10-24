@@ -1,4 +1,5 @@
 #include "COMMON/VECTOR4F.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/OBJRECAT18V6.H"
 #include "TYPES.H"
@@ -11,17 +12,15 @@
 #include "SYSTEM/80255C40_7.H"
 #include "LISTS/80279520.H"
 
-extern func_802A6AC0_S2 D_800D15E0;
-extern func_802077F4_S2 D_800D15F0;
 
 void func_802A5AD0_de(ObjRecAt3CV1 *arg0) {
     if (arg0->unk24 != 0.0f) {
-        D_800D15E0.unk4 += arg0->unk34;
-        D_800D15E0.unk8 += arg0->unk38;
-        D_800D15E0.unkC += arg0->unk3C;
-        D_800D15E0.unk10 += arg0->unk24;
+        D_800D15E4[0] += arg0->unk34;
+        D_800D15E4[1] += arg0->unk38;
+        D_800D15E4[2] += arg0->unk3C;
+        D_800D15E4[3] += arg0->unk24;
     }
-    D_800D15F0.unk4 += arg0->unk14;
+    D_800D15E4[4] += arg0->unk14;
 }
 
 extern f32 D_800C5EA0_de[2];

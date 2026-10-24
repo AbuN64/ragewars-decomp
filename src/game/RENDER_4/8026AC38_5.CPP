@@ -27,8 +27,6 @@ extern u32 D_800DD504;
 extern u32 D_800E28A4;
 #endif
 extern ObjectState18 D_8013B2D8;
-extern s32 D_800D15E0;
-extern f32 D_800D15E4[4];
 extern void func_80253BBC_de(s32 heap, void **resource);
 extern s32 func_8026B504_de(void *matrix, void *lights, void *material);
 extern s32 func_80269A80_de(void *material, s32 pass);

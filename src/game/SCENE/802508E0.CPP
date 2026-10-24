@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
@@ -35,7 +36,6 @@ extern void func_80253F8C_de(s32 arg0, s32 arg1);
 
 extern s32 *func_8026E27C_de(void **arg0, s32 arg1, s32 *arg2);
 
-extern s32 D_800D15E0;
 
 extern void func_80253BBC_de(s32, s32);
 

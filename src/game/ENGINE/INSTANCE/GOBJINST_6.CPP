@@ -1,4 +1,5 @@
 #include "COMMON/LEVEL_ACTOR.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/OBJECTLINKS180_2.H"
@@ -26,7 +27,6 @@ extern char D_8011D8D0;
 
 extern s32 D_800D297C;
 
-extern s32 D_800D15E0;
 
 extern void func_8024AA18_de(char *obj, s32 unused, char *info);
 

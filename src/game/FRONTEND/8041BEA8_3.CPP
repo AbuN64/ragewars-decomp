@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/SELECTIONSCREENSTATE.H"
 #include "COMMON/LABEL.H"
@@ -48,8 +49,6 @@ s32 func_8041DBCC_de(void) {
 #include "gbi.h"
 extern s32 func_804399D0(void *);
 extern s32 func_80439CC8_de(void *, Gfx **, Gfx *);
-extern s32 D_800D15E0;
-extern f32 D_800D15E4[4];
 extern f32 D_800DD524_de;
 extern f32 D_800DD528_de;
 extern f32 D_800DD52C_de;

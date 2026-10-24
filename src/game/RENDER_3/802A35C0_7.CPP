@@ -1,13 +1,12 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
+#include "RENDER_4/8026AC38.H"
 #include "RENDER_3/802A35C0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "TYPES.H"
 #include "RENDER_3/802A35C0_7.H"
 
-extern func_802A6A54_S2 D_800D15E0;
 
-extern func_802A6A54_S3 D_800D15F0;
 
 void func_802A5A54_de(void *animator, int arg1) {
     Animator *animation = animator;
@@ -18,14 +17,14 @@ void func_802A5A54_de(void *animator, int arg1) {
 
 void func_802A5A64_de(EffectContribution *effectContribution) {
     if (effectContribution->weight != 0.0f) {
-        D_800D15E0.unk4 = effectContribution->x;
-        D_800D15E0.unk8 = effectContribution->y;
-        D_800D15E0.unkC = effectContribution->z;
+        D_800D15E4[0] = effectContribution->x;
+        D_800D15E4[1] = effectContribution->y;
+        D_800D15E4[2] = effectContribution->z;
     } else {
-        D_800D15E0.unk4 = 0.0f;
-        D_800D15E0.unk8 = 0.0f;
-        D_800D15E0.unkC = 0.0f;
+        D_800D15E4[0] = 0.0f;
+        D_800D15E4[1] = 0.0f;
+        D_800D15E4[2] = 0.0f;
     }
-    D_800D15F0.unk0 = effectContribution->weight;
-    D_800D15F0.unk4 = effectContribution->scale;
+    D_800D15E4[3] = effectContribution->weight;
+    D_800D15E4[4] = effectContribution->scale;
 }

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/CHARACTERSELECTIONROOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -9,9 +10,7 @@
 #include "FRONTEND/8040B45C_32.H"
 #include "FRONTEND/8041BEA8_6.H"
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15E4[5];
 
 extern struct Shape_typemap_165 D_800E41C0[];
 

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/EFFECTCONTRIBUTION.H"
 #include "COMMON/UNUSED.H"
 #include "RENDER_3/802A35C0.H"
@@ -129,29 +130,25 @@ void func_802A4A60_de(Animator *a) {
 #ifdef NON_MATCHING
 #include "TYPES.H"
 
-extern s32 D_800D15E0;
 extern f32 D_800C5E64_de, D_800C5E68_de, D_800C5E6C_de, D_800C5E70_de, D_800C5E74_de;
 extern f32 D_800C5E78_de, D_800C5E7C_de, D_800C5E80_de, D_800C5E84_de;
-extern f32 D_800D15E4;
-extern f32 D_800CC398, D_800CC39C;
 typedef struct { f32 current, target; } FadeAlpha;
-extern f32 D_800D15F0, D_800D15F4;
 
 void func_802A4DE8_de(void) {
     FadeAlpha *p;
     f32 tgt, cur, c;
     s32 equal;
-    c = D_800D15E4;
-    if (c < 0.0f) D_800D15E4 = 0.0f; else if (D_800C5E64_de < c) D_800D15E4 = D_800C5E64_de;
-    c = D_800CC398;
-    if (c < 0.0f) D_800CC398 = 0.0f; else if (D_800C5E68_de < c) D_800CC398 = D_800C5E68_de;
-    c = D_800CC39C;
-    if (c < 0.0f) D_800CC39C = 0.0f; else if (D_800C5E6C_de < c) D_800CC39C = D_800C5E6C_de;
-    c = D_800D15F0;
-    if (c < 0.0f) D_800D15F0 = 0.0f; else if (D_800C5E70_de < c) D_800D15F0 = D_800C5E70_de;
-    c = D_800D15F4;
-    if (c < 0.0f) D_800D15F4 = 0.0f; else if (D_800C5E74_de < c) D_800D15F4 = D_800C5E74_de;
-    p = (FadeAlpha *)&D_800D15F0;
+    c = D_800D15E4[0];
+    if (c < 0.0f) D_800D15E4[0] = 0.0f; else if (D_800C5E64_de < c) D_800D15E4[0] = D_800C5E64_de;
+    c = D_800D15E4[1];
+    if (c < 0.0f) D_800D15E4[1] = 0.0f; else if (D_800C5E68_de < c) D_800D15E4[1] = D_800C5E68_de;
+    c = D_800D15E4[2];
+    if (c < 0.0f) D_800D15E4[2] = 0.0f; else if (D_800C5E6C_de < c) D_800D15E4[2] = D_800C5E6C_de;
+    c = D_800D15E4[3];
+    if (c < 0.0f) D_800D15E4[3] = 0.0f; else if (D_800C5E70_de < c) D_800D15E4[3] = D_800C5E70_de;
+    c = D_800D15E4[4];
+    if (c < 0.0f) D_800D15E4[4] = 0.0f; else if (D_800C5E74_de < c) D_800D15E4[4] = D_800C5E74_de;
+    p = (FadeAlpha *)&D_800D15E4[3];
     tgt = p->target;
     cur = p->current;
     if (tgt == D_800C5E78_de) {
@@ -160,7 +157,7 @@ void func_802A4DE8_de(void) {
     }
     if (cur == 0.0f) {
         D_800D15E0 = 1;
-        ((FadeAlpha *)&D_800D15F0)->current = ((FadeAlpha *)&D_800D15F0)->target;
+        D_800D15E4[3] = D_800D15E4[4];
         return;
     }
 n1:

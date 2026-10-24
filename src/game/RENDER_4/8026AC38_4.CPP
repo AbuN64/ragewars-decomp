@@ -78,7 +78,6 @@ extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 
-extern s32 D_800D15E0;
 extern void func_802A01E8_de(void);
 extern void func_80253BBC_de(s32 heap, void **resource);
 extern s32 func_80269A80_de(void *material, s32 pass);
@@ -149,7 +148,6 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
 #include "COMMON/RENDERCOUNTERS.H"
 #include "COMMON/PACKEDMESHMATERIAL.H"
 extern f32 D_800C46A0_de, D_800C46A4_de;
-extern f32 D_800D15E4[4];
 extern CGameStatus D_801468A0;
 /* Draws a character model's parts with the shared material D_8013B2D8, choosing each part by the 0x38 bits of
  * its material byte 6: on the special state 0x12 the part must equal the bits for the variant at 0x81, otherwise
@@ -280,7 +278,6 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
 
 #include "COMMON/GAME_SESSION.H"
 extern const f32 D_800C46A8_de;
-extern f32 D_800D15E4[4];
 extern void func_8026B504_de(void *, void *, void *);
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first

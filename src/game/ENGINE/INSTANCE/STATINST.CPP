@@ -1,4 +1,5 @@
 #include "COMMON/MODEL_RENDER.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/PROPGEOMETRY.H"
 #include "WORLD_2/8024E914.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -22,9 +23,7 @@ extern f32 D_800C3E50_de[];
 
 
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15F0;
 
 
 
@@ -162,7 +161,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
             return;
         }
         D_800D15E0 = 1;
-        D_800D15F0 = owner->fade << 5;
+        D_800D15E4[3] = owner->fade << 5;
         { DescriptorRecAt24 **slot = &owner->descriptor; key = (*slot)->key; }
     } else {
         if (owner->fade < 8) {
@@ -172,7 +171,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
             alpha = D_800C3E50_de[1];
             D_800D15E0 = 0;
         }
-        D_800D15F0 = alpha;
+        D_800D15E4[3] = alpha;
     }
     instance = func_802507AC_de(owner, key);
     if (instance != 0) {
@@ -203,7 +202,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
         owner->colorFrame = (u8)D_800D2978;
     }
     D_800D15E0 = 0;
-    D_800D15F0 = D_800C3E58_de;
+    D_800D15E4[3] = D_800C3E58_de;
 }
 
 void func_802504B0_de(ModelOwner *owner) {

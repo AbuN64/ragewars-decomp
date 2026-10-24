@@ -1,4 +1,5 @@
 #include "COMMON/LEVEL_ACTOR.H"
+#include "RENDER_4/8026AC38.H"
 #include "include_asm.h"
 #include "COMMON/EXTERNS_9.H"
 #include "COMMON/WORLD.H"
@@ -453,8 +454,7 @@ reaction_statistics_done:
 #include "COMMON/GAMEPLAY_REACTION_RULES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 extern Shared_MatchRules D_801468A0[];
-extern s32 D_800CE47C, D_800C9228_de, D_800D297C, D_800D15E0;
-extern f32 D_800D15E4[3], D_800D15F0[2];
+extern s32 D_800CE47C, D_800C9228_de, D_800D297C;
 extern const f32 D_800C22E4_de, D_800C22E8_de, D_800C22EC_de, D_800C22F0_de;
 extern WeaponInfo *D_800D052C[];
 extern void func_80228FB8_de(LevelActor *, s32, Draw *);
@@ -480,9 +480,9 @@ void Render_DrawPlayerBodyAndWeapon(LevelActor *actor, s32 arg1, Draw *context)
             D_800D15E4[1] = 0.0f;
             D_800D15E4[2] = D_800C22E8_de;
         }
-        if (player->fixedAlpha) D_800D15F0[0] = D_800C22EC_de;
-        else D_800D15F0[0] = (u8)player->camera->fadeState;
-        D_800D15F0[1] = D_800C22F0_de;
+        if (player->fixedAlpha) D_800D15E4[3] = D_800C22EC_de;
+        else D_800D15E4[3] = (u8)player->camera->fadeState;
+        D_800D15E4[4] = D_800C22F0_de;
         if (D_801468A0->countRule && player->controls->unk8F) actor->team = D_801468A0->teamColour;
         else actor->team = (u8)actor->definition->first;
         Render_DrawActorModelParts(context->model, player, actor->fieldB4, 1,

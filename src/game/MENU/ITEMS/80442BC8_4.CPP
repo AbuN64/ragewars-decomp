@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
 #include "MENU/OBJECT1C8.H"
 #include "TYPES.H"
@@ -6,8 +7,6 @@
 #include "MENU/80442BC8.H"
 #include "COMMON/OBJECTLINKS14C.H"
 
-extern int D_800D15E0;
-extern f32 D_800D15E4[5];
 extern void func_8024A1D0_de(Object_func_80443128_de *, void *, void *);
 void func_80443128_de(Object_func_80443128_de *object, void *context, void *lookup) {
  D_800D15E0=3;

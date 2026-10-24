@@ -1,4 +1,5 @@
 #include "COMMON/LEVEL_ACTOR.H"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/MODEL_RENDER.H"
 #include "COMMON/GFX.H"
 #include "COMMON/OBJRECV5.H"
@@ -24,8 +25,6 @@
    time; the override is switched off afterwards. */
 extern Gfx *D_80110634;
 extern Rules_func_80228FB8_de D_801468A0[];
-extern s32 D_800D15E0;
-extern CQuatern D_800D15E4;
 extern s32 D_800D297C;
 extern void func_80268CE0_de(s32);
 extern void func_8024A3B0_de(LevelActor *, PlayerCode80225D10 *, s32, Draw *);
@@ -48,7 +47,7 @@ void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
                 CQuatern *colour;
 
                 D_800D15E0 = 1;
-                colour = &D_800D15E4;
+                colour = (CQuatern *)D_800D15E4;
                 colour->x = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->y = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->z = 0.0f;
@@ -61,7 +60,7 @@ void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
                 CQuatern *colour;
 
                 D_800D15E0 = 1;
-                colour = &D_800D15E4;
+                colour = (CQuatern *)D_800D15E4;
                 colour->x = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->y = ((255.0f - player->tintTime * 17.0f) < 0.0f ? 0.0f : (255.0f - player->tintTime * 17.0f));
                 colour->z = 0.0f;
@@ -70,7 +69,7 @@ void func_80228FB8_de(LevelActor *actor, s32 arg1, Draw *draw) {
                               &actor->lighting[D_800D297C], 0, -1);
             } else if (player->tintMode == 3) {
                 D_800D15E0 = 1;
-                D_800D15E4.w = ((player->tintTime * 0.425f) < 0.0f ? 0.0f : (player->tintTime * 0.425f));
+                D_800D15E4[3] = ((player->tintTime * 0.425f) < 0.0f ? 0.0f : (player->tintTime * 0.425f));
                 func_8024A3B0_de(actor, player, arg1, draw);
             }
             D_800D15E0 = 0;

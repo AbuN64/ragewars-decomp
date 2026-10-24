@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -21,9 +22,7 @@
 
 extern struct VersusResultsScreen *D_800E4F60;
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15E4[4];
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X) || defined(VERSION_US) || defined(VERSION_US_REV1)
 extern void func_804399D0(char *);
@@ -45,6 +44,7 @@ s32 func_80429FF0_de(void *unused0, void *unused1, s32 event) {
     s32 alpha;
 
     if (event == 1 && (D_800E4F60->state == 3 || D_800E4F60->state == 8 || D_800E4F60->state == 9)) {
+        /* MIXED: the ROM keeps both stores, so the first is an in-struct store of the same word (data typing open). */
         ((struct MenuRenderFill *)&D_800D15E0)->mode = 0;
         D_800D15E0 = 1;
         D_800D15E4[0] = 255.0f;

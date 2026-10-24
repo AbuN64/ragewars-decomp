@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/OBJRECAT30.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -212,9 +213,7 @@ struct InputRecAt40 {
 
 
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15F0;
 
 extern void func_8024A1D0_de(Actor_func_8024A1D0_de *, void *, Lookup *);
 
@@ -378,7 +377,7 @@ void func_80204808_de(Actor_func_8024A1D0_de *actor, struct InputRecAt40 *input,
     if (remaining < 0.0f) {
         remaining = 0.0f;
     }
-    D_800D15F0 = remaining;
+    D_800D15E4[3] = remaining;
     func_8024A1D0_de(actor, input, lookup);
 }
 

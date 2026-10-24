@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
@@ -28,9 +29,7 @@ extern ResultsOptionsScreen *D_800E4690;
 
 
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15E4[4];
 
 extern struct Shape_typemap_6 D_800E41C0[];
 

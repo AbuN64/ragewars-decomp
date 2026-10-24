@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
@@ -18,8 +19,6 @@
 extern char D_8011FFB0;
 extern char D_8013B1A8;
 extern s32 D_800D297C;
-extern s32 D_800D15E0;
-extern f32 D_800D15F0;
 extern s32 func_8024E158_de(void);
 extern f32 func_8024E650_de(char *, s32);
 extern void *func_802799C0_de(void *, s32);
@@ -74,7 +73,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
             }
             alpha = strength * 56.0f + 128.0f;
             if (D_800D15E0 == 1) {
-                alpha = alpha * D_800D15F0 * 0.003921569f;
+                alpha = alpha * D_800D15E4[3] * 0.003921569f;
             }
             ((struct LevelActor *)(obj))->shadowAlpha = alpha;
             dir.y = 1.0f;

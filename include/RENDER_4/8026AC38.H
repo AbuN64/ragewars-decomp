@@ -21,4 +21,9 @@ struct ObjRecAtCV2 {
     void *unk8;
     s32 unkC;
 };
+/* The fill/tint override the material and menu drawers apply: D_800D15E0 is its mode (0 = off, 1..6 colour/fade
+ * modes) and D_800D15E4 its colour, RGBA 0..255 plus the fade target alpha [4]. The ROM reaches the two through
+ * separate addresses (a shared struct base breaks 18 exact fns), so they are two objects. */
+extern s32 D_800D15E0;
+extern f32 D_800D15E4[5];
 #endif

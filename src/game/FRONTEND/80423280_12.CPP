@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/RECRECAT4.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -90,9 +91,7 @@ extern void func_804243E0_de(s32 player, s32 *awarded);
 
 
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15F0;
 
 
 
@@ -300,7 +299,7 @@ void func_8042D28C_de(void) {
     f32 *level;
 
     if (state->selection != -1 && state->dirty != 0) {
-        level = &D_800D15F0;
+        level = &D_800D15E4[3];
         D_800D15E0 = 1;
         *level = D_800DDB08_de[1];
 #if defined(VERSION_DE)

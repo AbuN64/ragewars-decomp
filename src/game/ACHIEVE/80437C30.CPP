@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "ACHIEVE/80424E30_3.H"
 #include "ACHIEVE/80424E30_2.H"
 
@@ -367,8 +368,6 @@ void func_80438614_de(void) {
 void func_804399D0(MenuModelItem *item);
 #endif
 void func_80438614_de(void);
-extern s32 D_800D15E0;
-extern f32 D_800D15F0[];
 extern f32 D_800DDF3C_de;
 
 /* Advances the selected row's model preview animation one step: the preview scale (unk8) ramps up by 2
@@ -387,9 +386,9 @@ void func_80438828_de(void) {
     /* The word at +0x1C0 of the screen state has no shared field name yet. */
     if ((D_800E5830->rows[selected].unk0 >= 0) && (*((s32 *) ((u8 *) (D_800E5830) + 448)) != 0)) {
         D_800D15E0 = 1;
-        D_800D15F0[0] = (f32) D_800E5830->rows[selected].unk8;
+        D_800D15E4[3] = (f32) D_800E5830->rows[selected].unk8;
         func_804399D0((void *)&D_800E5830->modelWorkspace);
-        D_800D15F0[0] = D_800DDF3C_de;
+        D_800D15E4[3] = D_800DDF3C_de;
         temp_v1 = D_800E5830->rows[selected].unk4;
         D_800D15E0 = 0;
         switch (temp_v1) {                          /* irregular */

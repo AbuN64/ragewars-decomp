@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "RENDER_4/8026AC38.H"
 #include "COMMON/GFX.H"
 #include "abi.h"
 #include "COMMON/AIPROFILE.H"
@@ -34,8 +35,7 @@ INCLUDE_ASM("span_1000", func_80290BA0_eu);
  * look-at matrix from the state's field at 0x26DB0 scaled by D_800CA4B4, links it to the active view and
  * draws the backdrop through Render_DrawTextLines with half the video height. */
 #include "RENDER/80291054_3.H"
-extern s32 D_800D15E0, D_800D297C;
-extern f32 D_800D15E4[4];
+extern s32 D_800D297C;
 extern f32 D_800CA4B0, D_800CA4B4, D_800CA4B8;
 extern char D_80141008;
 #if defined(VERSION_DE)

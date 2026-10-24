@@ -1,4 +1,5 @@
 #include "COMMON/RESULTS.H"
+#include "RENDER_4/8026AC38.H"
 #include "RENDER_4/8028FD2C.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -14,9 +15,7 @@ extern ListNode80290528 *D_80131144;
 
 extern ListNode80290528 *D_80131148;
 
-extern s32 D_800D15E0;
 
-extern f32 D_800D15F0;
 
 extern f32 D_800C53AC_de;
 
@@ -87,7 +86,7 @@ void func_802905F4_de(char *arg0, char *view) {
                 D_800D15E0 = 0;
                 if ((value > zero) && (value <= upper)) {
                     D_800D15E0 = 1;
-                    D_800D15F0 = value * scale;
+                    D_800D15E4[3] = value * scale;
                 }
                 func_8024EB90_de(entry);
                 D_800D15E0 = 0;
