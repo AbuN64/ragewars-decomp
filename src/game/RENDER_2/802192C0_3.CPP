@@ -358,7 +358,6 @@ extern s32 func_8020CB3C_de(void *, void *);
  * point is available, then update the controller's current cell.
  * 43/161 aligned edits remain: actor/point-offset registers and fallback layout. */
 void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale, s32 reset) {
-    Shared_ActorView *actor = (Shared_ActorView *)player;
     Shared_World *world;
     Shared_Placed single;
     Shared_Placed points[32];
@@ -370,12 +369,12 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
     Shared_ActorView *other;
     s32 floor;
     s32 cell;
-    func_8044A07C_de(actor);
-    func_802647E8_de(actor->controller, 0);
+    func_8044A07C_de(player);
+    func_802647E8_de(((Shared_ActorView *)player)->controller, 0);
     world = &D_8011FE88;
     if (reset) {
-        actor->field864 = 0;
-        actor->field868 = 0;
+        ((Shared_ActorView *)player)->field864 = 0;
+        ((Shared_ActorView *)player)->field868 = 0;
     }
     if (D_801462E5) {
         count = func_8044D220_de(world, -1, model, points, 32);
@@ -393,29 +392,29 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
             }
         }
         if (best == -1) goto fallback;
-        actor->weapon.position0 = points[best].pos;
-        actor->position.vector = actor->weapon.position0;
-        ((LevelActor *)actor)->yaw = actor->weapon.yaw = points[best].unkC;
-        floor = Scene_FindFloorPolygon(&D_8011FE88, &actor->position.vector);
+        ((Shared_ActorView *)player)->weapon.position0 = points[best].pos;
+        ((Shared_ActorView *)player)->position.vector = ((Shared_ActorView *)player)->weapon.position0;
+        ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = points[best].unkC;
+        floor = Scene_FindFloorPolygon(&D_8011FE88, &((Shared_ActorView *)player)->position.vector);
     } else {
         if (func_8044D220_de(world, -1, model, &single, 1) == 0 || single.kind != D_801371D4) {
             func_8044D528_de(world, model, scale);
             goto done;
         }
-        actor->weapon.position0 = single.pos;
-        actor->position.vector = actor->weapon.position0;
-        ((LevelActor *)actor)->yaw = actor->weapon.yaw = single.unkC;
+        ((Shared_ActorView *)player)->weapon.position0 = single.pos;
+        ((Shared_ActorView *)player)->position.vector = ((Shared_ActorView *)player)->weapon.position0;
+        ((LevelActor *)player)->yaw = ((Shared_ActorView *)player)->weapon.yaw = single.unkC;
         floor = func_8028B394_de(world, single.pad12);
     }
-    actor->weapon.model = floor;
-    actor->modelId = floor;
-    Ovlgame_InitActorHudState(actor);
+    ((Shared_ActorView *)player)->weapon.model = floor;
+    ((Shared_ActorView *)player)->modelId = floor;
+    Ovlgame_InitActorHudState(player);
     goto done;
 fallback:
     func_8044D528_de(&D_8011FE88, model, scale);
 done:
-    cell = func_8020CB3C_de(D_8013B364, &actor->position.vector);
-    ((AiController *)actor->owner)->current = cell;
+    cell = func_8020CB3C_de(D_8013B364, &((Shared_ActorView *)player)->position.vector);
+    ((AiController *)((Shared_ActorView *)player)->owner)->current = cell;
 }
 #else
 INCLUDE_ASM("span_1000", Render_PlacePlayerAtSpawnPoint);
