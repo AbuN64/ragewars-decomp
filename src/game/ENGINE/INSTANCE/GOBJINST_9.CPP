@@ -19,7 +19,7 @@
 extern char D_8011FFB0;
 extern char D_8013B1A8;
 extern s32 D_800D297C;
-extern s32 func_8024E158_de(void);
+extern s32 func_8024E158_de(void *);
 extern f32 func_8024E650_de(char *, s32);
 extern void *func_802799C0_de(void *, s32);
 extern f32 func_802B72B0_de(f32);
@@ -45,7 +45,7 @@ void func_8024AA18_de(char *obj, s32 unused, char *info) {
     f32 diff;
     char *light;
     s32 alpha;
-    if (((struct LevelActor *)(obj))->model == 0 || func_8024E158_de() == 0 || (((struct LevelActor *)(obj))->flags & 0x200000)) {
+    if (((struct LevelActor *)(obj))->model == 0 || func_8024E158_de(obj) == 0 || (((struct LevelActor *)(obj))->flags & 0x200000)) {
         return;
     }
     if (((struct LevelActor *)(obj))->flags & 0x10000000) {
