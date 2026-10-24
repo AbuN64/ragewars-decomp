@@ -156,8 +156,8 @@ CVector3 *func_8020993C_de(AiController *controller) {
     return &controller->player->pos;
 }
 
-void func_80209948_de(AiController *controller, s32 arg1) {
-    func_802726F8_de(&controller->player->pos.x, func_8020C994_de(&D_8013B364, arg1));
+f32 func_80209948_de(AiController *controller, s32 arg1) {
+    return func_802726F8_de(&controller->player->pos.x, func_8020C994_de(&D_8013B364, arg1));
 }
 
 /** Reset three state words and set the final state to one. */

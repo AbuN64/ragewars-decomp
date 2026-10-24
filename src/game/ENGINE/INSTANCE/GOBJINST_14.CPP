@@ -18,11 +18,11 @@ extern s32 func_8028FE3C_de(s32, s32, s32, s32 *);
 
 
 
-void func_8024BEDC_de(void *target) {
+f32 func_8024BEDC_de(void *target) {
     float temp_f12 = ((LevelActor *)target)->scale.x;
     float temp_f1 = ((LevelActor *)target)->scale.y;
     float temp_f0 = ((LevelActor *)target)->scale.z;
-    func_802B72B0_de(((temp_f12 * temp_f12) + (temp_f1 * temp_f1) + (temp_f0 * temp_f0)) * (0.3333333432674408f));
+    return func_802B72B0_de(((temp_f12 * temp_f12) + (temp_f1 * temp_f1) + (temp_f0 * temp_f0)) * (0.3333333432674408f));
 }
 
 f32 func_8024BF24_de(void *arg0) {
