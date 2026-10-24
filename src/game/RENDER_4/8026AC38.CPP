@@ -334,62 +334,95 @@ s32 func_8026B504_de(void *model, void *lights, ModelMaterial *material) {
 }
 
 #ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/GFX.H"
-#include "gbi.h"
-
-typedef struct { char pad0[0x80]; s8 kind; u8 variant; char pad82[13]; u8 bonus; char pad90[4]; u8 enabled; } ModelState;
-typedef struct { char pad0[0x5D8]; ModelState *state; char pad5DC[0xC10]; f32 glow; char pad11F0[0x3C]; u32 flags; } ModelActor;
-extern Gfx *D_80110634;
+/* 56/211 aligned edits; remaining: callee-saved register order (segment/i, hide, count/parts) and the 0xDE000000 constant kept in fp. */
+#include "COMMON/GAME_SESSION.H"
+#include "COMMON/AIPROFILE.H"
+#include "COMMON/PACKEDMESHMATERIAL.H"
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
-extern s32 D_80146918, D_801468F4;
-extern void func_80253BBC_de(s32, void **);
-extern s32 func_80269A80_de(ModelMaterial *, s32);
+extern CGameStatus D_801468A0;
+extern void func_80253BBC_de(s32 heap, void **resource);
+extern s32 func_80269A80_de(void *material, s32 pass);
+/* Draws an actor model's parts, choosing each part by the 0x38 bits of its material byte 6: on the special
+ * character 0x12 the part must equal the bits for its variant (or be a fade/bonus part whose flag is set),
+ * otherwise the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) is set. */
+void Render_DrawActorModelParts(void **resource, struct Player *owner, void *matrix, s32 segment, Shared_ParticleLighting *lights, void *textures, s32 pass) {
+    void *header;
+    void *base;
+    void **parts;
+    void *part;
+    MeshMaterial *material;
+    s32 count;
+    s32 i;
+    s32 hide = 0;
+    s32 bonus = 0;
+    s32 glow = 0;
+    CGameStatus *settings;
 
-void Render_DrawActorModelParts(void **resource, ModelActor *actor, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
-    s32 special = 0, bonus = 0, glow = 0, count, i;
-    s32 *parts;
-    void *header, *part;
-    ModelMaterial *material;
-    u8 mask, wanted;
-    if (D_800E28A4 - (((u32)D_80110634 - (u32)D_8011BDC0->commands) >> 3) < 3000) return;
-    if (D_801462C8.counters.enabled && actor->state->kind == 11 && actor->state->enabled)
-        special = D_801462C8.counters.timer > 0;
-    if (actor->flags & 0x8000) special = 1;
-    if (actor->glow > 0.0f) glow = 1;
-    if (D_80146918 && actor->state->bonus == 1) bonus = 1;
+    if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011BDC0->commands) / sizeof(Gfx) < 3000) {
+        return;
+    }
+    settings = &D_801468A0;
+    if (settings->enabled != 0) {
+        AiProfile *state = owner->profile;
+        if (state->character == 0xB && state->enabled != 0) {
+            hide = 0 < settings->timer;
+        }
+    }
+    if (owner->reactionFlags & 0x8000) {
+        hide = 1;
+    }
+    if (0.0f < owner->glow) {
+        glow = 1;
+    }
+    if (D_801468A0.m_bCTFOn != 0 && owner->profile->bonus == 1) {
+        bonus = 1;
+    }
     header = *resource;
     func_80253BBC_de(0, resource);
-    if (segment) { gSPSegment(D_80110634++, 1, matrix); }
-    else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
-    if (textures == 0) textures = func_8028FDB4_de(header, 0);
-    gSPSegment(D_80110634++, 2, textures);
+    if (segment != 0) {
+        gSPSegment(D_80110634++, 1, matrix);
+    } else {
+        gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
+    }
+    base = textures;
+    if (base == 0) {
+        base = func_8028FDB4_de(header, 0);
+    }
+    gSPSegment(D_80110634++, 2, (unsigned int)base);
     parts = func_8028FDB4_de(header, 2);
-    count = *parts;
+    count = *(s32 *)parts;
     for (i = 0; i < count; i++) {
+        AiProfile *state;
+        u32 bits;
         part = func_8028FDB4_de(parts, i);
         material = func_8028FDB4_de(part, 0);
-        if (i == 0) func_8026B504_de(matrix, lights, material);
-        if (actor->state->kind == 18 && (!D_801468F4 || actor->state->bonus == 0)) {
-            wanted = 0x28;
-            if (actor->state->variant != 0) {
+        if (i == 0) {
+            func_8026B504_de(matrix, lights, material);
+        }
+        state = owner->profile;
+        if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
+            u32 wanted = 0x28;
+            if (state->variant != 0) {
                 wanted = 0x18;
-                if (actor->state->variant == 1) wanted = 0x20;
+                if (state->variant == 1) {
+                    wanted = 0x20;
+                }
             }
-            mask = material->flags & 0x38;
-            if (!(mask == wanted || (mask == 0x38 && special) || (mask == 0x30 && bonus))) {
+            bits = material->mode & 0x38;
+            if (bits != wanted && !(bits == 0x38 && hide != 0) && !(bits == 0x30 && bonus != 0)) {
                 continue;
             }
         } else {
-            mask = material->flags & 0x38;
-            if (!((mask != 0x38 || special) && (mask != 0x30 || bonus) && (mask != 0x10 || glow))) {
-                continue;
-            }
+            bits = material->mode & 0x38;
+            if (bits == 0x38 && hide == 0) continue;
+            if (bits == 0x30 && bonus == 0) continue;
+            if (bits == 0x10 && glow == 0) continue;
         }
-        if (func_80269A80_de(material, pass)) {
-            header = func_8028FDB4_de(part, 1);
-            gSPDisplayList(D_80110634++, header);
+        if (func_80269A80_de(material, pass) != 0) {
+            void *list = func_8028FDB4_de(part, 1);
+            Gfx *cmd = D_80110634++;
+            gSPDisplayList(cmd, (unsigned int)list);
         }
     }
 }
