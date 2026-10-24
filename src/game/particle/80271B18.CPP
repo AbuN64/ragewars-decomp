@@ -19,11 +19,13 @@ extern f32 D_800C4840_de;
 extern f32 D_800C4844_de;
 
 
+static inline f32 clampf(f32 v, f32 lo, f32 hi) { return v < lo ? lo : (v > hi ? hi : v); }
 f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
     f32 z = direction->z;
     f32 length = x * x + z * z;
     f32 angle;
+    f32 a;
     if (length == 0.0f) {
         return 0.0f;
     }
@@ -33,14 +35,14 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     }
     if (RW_ABS(x) < RW_ABS(z)) {
         x /= length;
-        x = RW_MAX_GT(D_800C483C_de, RW_MIN(x, D_800C4838_de));
-        angle = func_802745D0_de(x);
-        angle = (z < 0.0f ? angle : -angle) - D_800C4840_de;
+        x = clampf(x, D_800C483C_de, D_800C4838_de);
+        a = func_802745D0_de(x);
+        angle = (z < 0.0f ? a : -a) - D_800C4840_de;
     } else {
         z /= length;
-        z = RW_MAX_GT(D_800C4848_de, RW_MIN(z, D_800C4844_de));
-        angle = func_802745D0_de(-z);
-        angle = x < 0.0f ? angle : -angle;
+        z = clampf(z, D_800C4848_de, D_800C4844_de);
+        a = func_802745D0_de(-z);
+        angle = x < 0.0f ? a : -a;
     }
     return angle;
 }
