@@ -1,16 +1,6 @@
 #include "include_asm.h"
 
-#if defined(NON_MATCHING) && defined(__GNUC__) && __GNUC__ >= 3
-#if defined(VERSION_US)
-long long func_802C0164(long long numerator, long long denominator) {
-    return numerator / denominator;
-}
-#else
-long long Libc_SignedDivide(long long numerator, long long denominator) {
-    return numerator / denominator;
-}
-#endif
-#elif defined(NON_MATCHING) || !defined(VERSION_US)
+#if defined(NON_MATCHING) || !defined(VERSION_US)
 /* SignedDivide: libgcc2 division with the VR4300 HI/LO hazards. */
 #if defined(VERSION_US)
 #define __divdi3 func_802C0164

@@ -120,7 +120,7 @@ void Anim_DecodeBoxTransform(u8 *self, u8 *src) {
 
 
 
-s32 func_80277128_de(ObjectRecAtBC *arg0, u32 arg1, u32 arg2, u32 arg3,
+s32 func_80277128_de(ObjectRecAtBC *arg0, CVector3 arg1,
                   CVector3 *arg4, f32 *arg5) {
     f32 temp_f0;
     f32 var_f0;
@@ -129,16 +129,16 @@ s32 func_80277128_de(ObjectRecAtBC *arg0, u32 arg1, u32 arg2, u32 arg3,
     f32 var_f3;
     u8 temp_v1;
 
-    var_f3 = *(f32 *)&arg1;
+    var_f3 = arg1.x;
     var_f20 = 0.0f;
     if (!(D_800C4AC0_de <= var_f3) && !(var_f3 <= D_800C4AC4_de) &&
-        !(D_800C4AC0_de <= *(f32 *)&arg2) && !(*(f32 *)&arg2 <= D_800C4AC4_de) &&
-        !(D_800C4AC0_de <= *(f32 *)&arg3) && !(*(f32 *)&arg3 <= D_800C4AC4_de)) {
+        !(D_800C4AC0_de <= arg1.y) && !(arg1.y <= D_800C4AC4_de) &&
+        !(D_800C4AC0_de <= arg1.z) && !(arg1.z <= D_800C4AC4_de)) {
         temp_v1 = arg0->shape;
         switch (temp_v1) {
         case 0:
-            var_f20 = (var_f3 * var_f3) + (*(f32 *)&arg2 * *(f32 *)&arg2) +
-                      (*(f32 *)&arg3 * *(f32 *)&arg3);
+            var_f20 = (var_f3 * var_f3) + (arg1.y * arg1.y) +
+                      (arg1.z * arg1.z);
             if (!(D_800C4AC0_de < var_f20)) {
                 var_f20 = D_800CD3F8[(s32)(var_f20 * D_800C4AC8_de)];
                 goto shared;
@@ -146,8 +146,8 @@ s32 func_80277128_de(ObjectRecAtBC *arg0, u32 arg1, u32 arg2, u32 arg3,
             goto fail;
         case 2:
             if (!(var_f3 <= 0.0f)) {
-                var_f20 = (*(f32 *)&arg2 * *(f32 *)&arg2) +
-                          (*(f32 *)&arg3 * *(f32 *)&arg3);
+                var_f20 = (arg1.y * arg1.y) +
+                          (arg1.z * arg1.z);
                 if (!((var_f3 * var_f3) < var_f20)) {
                     var_f20 = D_800CD4FC[(s32)(var_f20 * D_800C4ACC_de)];
                     var_f20 /= var_f3;
@@ -159,17 +159,17 @@ s32 func_80277128_de(ObjectRecAtBC *arg0, u32 arg1, u32 arg2, u32 arg3,
             if (var_f3 < 0.0f) {
                 var_f3 = -var_f3;
             }
-            var_f0 = *(f32 *)&arg2;
-            *(f32 *)&arg1 = var_f3;
+            var_f0 = arg1.y;
+            arg1.x = var_f3;
             if (var_f0 < 0.0f) {
                 var_f0 = -var_f0;
             }
-            var_f1 = *(f32 *)&arg3;
-            *(f32 *)&arg2 = var_f0;
+            var_f1 = arg1.z;
+            arg1.y = var_f0;
             if (var_f1 < 0.0f) {
                 var_f1 = -var_f1;
             }
-            *(f32 *)&arg3 = var_f1;
+            arg1.z = var_f1;
             var_f20 = var_f1;
             if (!(var_f0 <= var_f20)) {
                 var_f20 = var_f0;
@@ -192,14 +192,7 @@ shared:
         if (arg0->shape == 1) {
             *arg4 = arg0->axis;
         } else {
-#ifdef NON_MATCHING
-            /* The three coordinates arrive in separate argument slots; only the MIPS spill puts them side by side. */
-            arg4->x = *(f32 *)&arg1;
-            arg4->y = *(f32 *)&arg2;
-            arg4->z = *(f32 *)&arg3;
-#else
-            *arg4 = *(CVector3 *)&arg1;
-#endif
+            *arg4 = arg1;
         }
         func_8027207C_de(arg4);
         *arg5 = var_f20;
