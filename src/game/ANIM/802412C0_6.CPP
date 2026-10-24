@@ -5,7 +5,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "ANIM/COLLISION_TRACE.H"
 
-/* 5/253 aligned edits remain: second-word setup, clip-mask reload and sign shift.
+/* 4/253 aligned edits remain: second-word setup (the ROM's commands+1 is a loop giv) and the z clip-mask reload.
  * Commands are logical words on both the ROM and native resource paths. */
 void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
     ContextB0 *context;
@@ -77,12 +77,10 @@ void Anim_TraceMeshDisplayList(void *contextAddress, void *resource) {
                 {
                     u32 coordinate = *(u32 *)&vertex->z;
                     u32 mask = vertex->clipFlags;
-                    mask |=
+                    vertex->clipFlags = mask |=
                         (~(coordinate >> 31) & ((*(u32 *)&ray->radius - coordinate) >> 31)) << 4;
-                    vertex->clipFlags = mask;
-                    mask |=
-                        ((((s32)coordinate >> 31) & 1) & ((*(u32 *)&context->reach - (coordinate & 0x7FFFFFFF)) >> 31)) << 5;
-                    vertex->clipFlags = mask;
+                    vertex->clipFlags = mask |=
+                        (-((s32)coordinate >> 31) & ((*(u32 *)&context->reach - (coordinate & 0x7FFFFFFF)) >> 31)) << 5;
                 }
                 source += 8;
                 vertex++;
