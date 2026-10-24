@@ -12,7 +12,6 @@ extern int func_8025E56C_de(void *object);
 extern signed char func_8025E560_de(void *object);
 
 
-extern int D_801081B4;
 
 
 
