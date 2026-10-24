@@ -121,7 +121,6 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     func_80239C20_de(arg0);
 }
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 typedef struct DraftListA370 { void *head, *tail; s32 count, a, b; } DraftListA370;
 typedef struct DraftEntryA370 { void *next, *prev; s32 a, b, c; f32 value; DraftListA370 lists[3]; } DraftEntryA370;
@@ -143,11 +142,25 @@ extern char D_800C32D4_de[], D_800C32DC_de[];
 extern void func_8025E3F0_de(void *);
 extern void func_80253908_de(s32), func_80253838_de(s32, void *);
 extern void *func_8025343C_de(s32, s32, s32, char *);
+static inline void resetDraftList(DraftListA370 *list) {
+    list->tail = 0;
+    list->count = 0;
+    list->a = 0;
+    list->b = 0;
+}
+static inline void resetDraftEntry(DraftEntryA370 *entry, f32 value) {
+    entry->a = 0;
+    entry->b = 0;
+    entry->c = 0;
+    entry->value = value;
+    resetDraftList(&entry->lists[0]);
+    resetDraftList(&entry->lists[1]);
+    resetDraftList(&entry->lists[2]);
+}
 void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
 {
     s32 i;
     f32 initialValue;
-    DraftEntryA370 *entry;
     if (actorCount > 4) actorCount = 4;
     owner->word34 = 0;
     owner->word38 = 0;
@@ -158,16 +171,8 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
     func_80255CA0_de(&owner->spareList, 0, 4);
     initialValue = D_800C32EC_de;
     for (i = 0; i < 8; i++) {
-        entry = &owner->entries[i];
-        entry->a = entry->b = entry->c = 0;
-        entry->value = initialValue;
-        entry->lists[0].tail = 0;
-        entry->lists[0].count = entry->lists[0].a = entry->lists[0].b = 0;
-        entry->lists[1].tail = 0;
-        entry->lists[1].count = entry->lists[1].a = entry->lists[1].b = 0;
-        entry->lists[2].tail = 0;
-        entry->lists[2].count = entry->lists[2].a = entry->lists[2].b = 0;
-        func_80255D14_de(&owner->entryList, entry);
+        resetDraftEntry(&owner->entries[i], initialValue);
+        func_80255D14_de(&owner->entryList, &owner->entries[i]);
     }
     func_80255CA0_de(&owner->active, 0, 4);
     func_80255CA0_de(&owner->free, 0, 4);
@@ -204,6 +209,3 @@ void Items_ResetActorPools(DraftOwnerA370 *owner, s32 actorCount)
         func_80255D14_de(&owner->smallList, &owner->small[i]);
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", Items_ResetActorPools);
-#endif
