@@ -61,7 +61,7 @@ extern void func_8023942C_de(void *arg0);
 extern void func_8021EEFC_de(void *arg0, void *arg1);
 
 
-extern void func_80228AF4_de(void);
+extern void func_80228AF4_de(void *, void *);
 
 /* Returns the leading team: for each player in the list from 0x20 it adds the player's kills of the
    seven other players (the shorts at 0x3C of its stats at 0x5D8) to the total of its team byte at
@@ -503,7 +503,7 @@ void func_8022A398_de(void *arg0, void *entity) {
 #endif
 }
 
-void func_8022A3F8_de(void) { func_80228AF4_de(); }
+void func_8022A3F8_de(void *arg0, void *viewState) { func_80228AF4_de(arg0, viewState); }
 
 int func_8022A414_de(void *arg0) {
     Context *context = arg0;
