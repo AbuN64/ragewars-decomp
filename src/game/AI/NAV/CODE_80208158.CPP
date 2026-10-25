@@ -430,7 +430,6 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
@@ -457,7 +456,6 @@ extern f32 D_800C1C18;
 extern f32 D_800C1C1C;
 extern f32 D_800C1C20;
 
-/* 6/278 aligned edits; remaining: sched2 order of the tangent.z store and the neg.s in the turn helper. */
 void Nav_UpdateTargetSteering(AiController *controller) {
     CNavData *graph;
     AiTarget *target;
@@ -512,9 +510,10 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             desired.x = controller->destination.x - position->x;
             desired.z = controller->destination.z - position->z;
             desired.y = 0.0f;
-            do {
-                tangent = Nav_GetGraphPoint(graph, controller->current)->position;
-            } while (0);
+            if (graph != 0 && controller->current != -1) {
+                angle = 0.0f;
+            }
+            tangent = Nav_GetGraphPoint(graph, controller->current)->position;
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
@@ -550,6 +549,3 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_UpdateTargetSteering);
-#endif
