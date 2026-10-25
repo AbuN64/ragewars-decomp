@@ -124,7 +124,7 @@ extern CharacterScreenCell D_800E029E[][9];
 
 extern unsigned char D_800FEB0F[];
 
-extern void func_8041B7B4_de(void *, int, int);
+extern void Menu_SetSlotValue(void *, int, int);
 
 extern void func_8041CE10_de(void *, int);
 
@@ -315,7 +315,7 @@ void func_80420618_de(int player, int choice) {
     int kind;
 
     D_800E42D0->players[player].unkC = 3;
-    func_8041B7B4_de(D_800E42D0->unk4, player, 1);
+    Menu_SetSlotValue(D_800E42D0->unk4, player, 1);
     D_800E42D0->players[player].unk4C0 = 1;
     for (i = 0; i < 3; i++) {
         func_8040E8D8_de(func_8040EC30_de(D_800E42D0->screen, D_800E029E[player][i].id), 1);

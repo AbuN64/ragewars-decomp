@@ -26,7 +26,7 @@ extern u8 D_800FEC8C[];
 extern u8 D_800FEC8D[];
 
 
-extern void func_8041AD10_de(void *, s32);
+extern void Menu_SelectListEntry(void *, s32);
 
 extern void func_8041A6EC_de(void *, s32);
 
@@ -63,11 +63,11 @@ void func_804368F8_de(s32 arg0) {
     u8 *slot = &D_801462C8.playerSettings[arg0].slot;
 
     *slot = arg0;
-    func_8041AD10_de(D_800E5694->a, D_80102C89[arg0 * 0x190]);
-    func_8041AD10_de(D_800E5694->b, D_800FEC8A[arg0 * 0x190]);
+    Menu_SelectListEntry(D_800E5694->a, D_80102C89[arg0 * 0x190]);
+    Menu_SelectListEntry(D_800E5694->b, D_800FEC8A[arg0 * 0x190]);
     func_8041A6EC_de(D_800E5694->c, D_800FEC8B[arg0 * 0x190]);
     func_8041A6EC_de(D_800E5694->d, D_800FEC8C[arg0 * 0x190]);
-    func_8041AD10_de(D_800E5694->e, D_800FEC8D[arg0 * 0x190]);
+    Menu_SelectListEntry(D_800E5694->e, D_800FEC8D[arg0 * 0x190]);
 }
 
 void func_804369E8_de(s32 arg0) {

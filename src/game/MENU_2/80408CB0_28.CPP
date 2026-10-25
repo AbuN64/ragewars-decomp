@@ -11,8 +11,6 @@
 #define func_8041A280_de fz_func_8041A280_de
 #define func_8041B110_de fz_func_8041B110_de
 #define func_8041ABC0_de fz_func_8041ABC0_de
-#define func_8041AD34_de fz_func_8041AD34_de
-#define func_8041AD10_de fz_func_8041AD10_de
 #define System_GetMemorySize fz_System_GetMemorySize
 #define func_8041A580_de fz_func_8041A580_de
 #define func_8041A6EC_de fz_func_8041A6EC_de
@@ -22,7 +20,7 @@ typedef struct EuOptsPage_eu { void *title; void *list; void *bar; void *rowC; v
 extern EuOptsPage_eu *g_optionsPage;
 extern char *D_800E1C14[], *D_800E1C34[], *D_800E1C44[], *D_auto_800E1C54[], *D_auto_800E1C64[], *D_800D2134[], *D_800D2138[], *D_800D213C[];
 extern void *Scene_AllocateMemory(); extern void *func_8041A280_de(); extern void func_8041B110_de(); extern void *func_8041ABC0_de();
-extern void func_8041AD34_de(); extern void func_8041AD10_de(); extern u32 System_GetMemorySize(); extern void *func_8041A580_de();
+extern void Menu_AppendListText(); extern void Menu_SelectListEntry(); extern u32 System_GetMemorySize(); extern void *func_8041A580_de();
 extern void func_8041A6EC_de(); extern void *func_80419E54_de(); extern void *func_8040EC30_de();
 extern char *D_auto_800DDB08[];
 /* Builds the options page (0x28-byte state g_optionsPage): title, the three toggle rows (ids 0x59/0x55/0x51) labelled in the
@@ -34,20 +32,20 @@ s32 func_804229E0_eu(void) {
     func_8041B110_de(0x57);
     func_8041B110_de(0x58);
     g_optionsPage->rowC = func_8041ABC0_de(0x59, 0x5A);
-    func_8041AD34_de(g_optionsPage->rowC, D_800E1C14[lang]);
-    func_8041AD34_de(g_optionsPage->rowC, D_800E1C34[lang]);
-    func_8041AD34_de(g_optionsPage->rowC, D_800E1C44[lang]);
-    func_8041AD10_de(g_optionsPage->rowC, *((u8 *)&D_801462C8 + 0x1B));
+    Menu_AppendListText(g_optionsPage->rowC, D_800E1C14[lang]);
+    Menu_AppendListText(g_optionsPage->rowC, D_800E1C34[lang]);
+    Menu_AppendListText(g_optionsPage->rowC, D_800E1C44[lang]);
+    Menu_SelectListEntry(g_optionsPage->rowC, *((u8 *)&D_801462C8 + 0x1B));
     g_optionsPage->row10 = func_8041ABC0_de(0x55, 0x56);
-    func_8041AD34_de(g_optionsPage->row10, D_auto_800E1C54[lang]);
-    func_8041AD34_de(g_optionsPage->row10, D_auto_800E1C64[lang]);
-    func_8041AD10_de(g_optionsPage->row10, *((u8 *)&D_801462C8 + 0x1F));
+    Menu_AppendListText(g_optionsPage->row10, D_auto_800E1C54[lang]);
+    Menu_AppendListText(g_optionsPage->row10, D_auto_800E1C64[lang]);
+    Menu_SelectListEntry(g_optionsPage->row10, *((u8 *)&D_801462C8 + 0x1F));
     g_optionsPage->row14 = func_8041ABC0_de(0x51, 0x52);
-    func_8041AD34_de(g_optionsPage->row14, D_800D2134[lang]);
+    Menu_AppendListText(g_optionsPage->row14, D_800D2134[lang]);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(g_optionsPage->row14, D_800D2138[lang]);
-        func_8041AD34_de(g_optionsPage->row14, D_800D213C[lang]);
-        func_8041AD10_de(g_optionsPage->row14, *((u8 *)&D_801462C8 + 0x580));
+        Menu_AppendListText(g_optionsPage->row14, D_800D2138[lang]);
+        Menu_AppendListText(g_optionsPage->row14, D_800D213C[lang]);
+        Menu_SelectListEntry(g_optionsPage->row14, *((u8 *)&D_801462C8 + 0x580));
     }
     g_optionsPage->bar = func_8041A580_de(0x53, 0x54, 0x80);
     func_8041A6EC_de(g_optionsPage->bar, *(s32 *)((u8 *)&D_801462C8 + 0x10));
@@ -61,8 +59,6 @@ s32 func_804229E0_eu(void) {
 #undef func_8041A280_de
 #undef func_8041B110_de
 #undef func_8041ABC0_de
-#undef func_8041AD34_de
-#undef func_8041AD10_de
 #undef System_GetMemorySize
 #undef func_8041A580_de
 #undef func_8041A6EC_de
@@ -82,8 +78,8 @@ INCLUDE_ASM("ovl_80400000", func_804229E0_eu);
 #include "COMMON/OWNERRECAT8V1.H"
 #include "TYPES.H"
 extern MenuListWidget *func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(); /* draft callers pass the list, and the second draft also a text */
-extern void func_8041AD10_de(MenuListWidget *, s32);
+extern void Menu_AppendListText(); /* draft callers pass the list, and the second draft also a text */
+extern void Menu_SelectListEntry(MenuListWidget *, s32);
 extern s32 System_GetMemorySize(void);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
@@ -99,18 +95,18 @@ s32 func_80422C58_eu(void) {
     func_8041B110_de(0x1C2);
     temp_v0 = func_8041ABC0_de(0x1BB, 0x1BC);
     D_800E4514->unk4 = temp_v0;
-    func_8041AD34_de(temp_v0);
-    func_8041AD34_de(D_800E4514->unk4);
-    func_8041AD34_de(D_800E4514->unk4);
-    func_8041AD10_de(D_800E4514->unk4, (s32) D_801462C8.firstListMode);
+    Menu_AppendListText(temp_v0);
+    Menu_AppendListText(D_800E4514->unk4);
+    Menu_AppendListText(D_800E4514->unk4);
+    Menu_SelectListEntry(D_800E4514->unk4, (s32) D_801462C8.firstListMode);
     widget = func_8041ABC0_de(0x1BE, 0x1BF);
     D_800E4514->players[0].highlight = widget;
-    func_8041AD34_de(widget);
+    Menu_AppendListText(widget);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(D_800E4514->players[0].highlight);
-        func_8041AD34_de(D_800E4514->players[0].highlight);
+        Menu_AppendListText(D_800E4514->players[0].highlight);
+        Menu_AppendListText(D_800E4514->players[0].highlight);
     }
-    func_8041AD10_de(D_800E4514->players[0].highlight, (s32) D_801462C8.slots[7].secondListMode);
+    Menu_SelectListEntry(D_800E4514->players[0].highlight, (s32) D_801462C8.slots[7].secondListMode);
     scroll = func_8041A580_de(0x1C0, 0x1C1, 0x80);
     D_800E4514->screen = scroll;
     func_8041A6EC_de(scroll, D_801462C8.buttons);
@@ -251,19 +247,19 @@ s32 func_80422E34_eu(void *node) {
     func_8041B110_de(0x37C);
     firstListHandle = func_8041ABC0_de(0x375, 0x376);
     D_800E4518->firstList = firstListHandle;
-    func_8041AD34_de(firstListHandle, D_800E1C14[D_80152789]);
-    func_8041AD34_de(D_800E4518->firstList, D_800E1C34[D_80152789]);
-    func_8041AD34_de(D_800E4518->firstList, D_800E1C44[D_80152789]);
+    Menu_AppendListText(firstListHandle, D_800E1C14[D_80152789]);
+    Menu_AppendListText(D_800E4518->firstList, D_800E1C34[D_80152789]);
+    Menu_AppendListText(D_800E4518->firstList, D_800E1C44[D_80152789]);
     settings = &D_801462C8;
-    func_8041AD10_de(D_800E4518->firstList, settings->firstListMode);
+    Menu_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
     secondListHandle = func_8041ABC0_de(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
-    func_8041AD34_de(secondListHandle, D_800D2134[D_80152789]);
+    Menu_AppendListText(secondListHandle, D_800D2134[D_80152789]);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(D_800E4518->secondList, D_800D2138[D_80152789]);
-        func_8041AD34_de(D_800E4518->secondList, D_800D213C[D_80152789]);
+        Menu_AppendListText(D_800E4518->secondList, D_800D2138[D_80152789]);
+        Menu_AppendListText(D_800E4518->secondList, D_800D213C[D_80152789]);
     }
-    func_8041AD10_de(D_800E4518->secondList, settings->slots[7].secondListMode);
+    Menu_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
     slider = func_8041A580_de(0x37A, 0x37B, 0x80);
     D_800E4518->slider = slider;
 

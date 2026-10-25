@@ -69,8 +69,8 @@ extern SliderSettings D_801462C8;
 extern struct SliderScreen *Scene_AllocateMemory(s32);
 extern void func_8041B110_de(s32);
 extern s32 func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(s32, char *);
-extern void func_8041AD10_de(s32, s32);
+extern void Menu_AppendListText(s32, char *);
+extern void Menu_SelectListEntry(s32, s32);
 extern s32 System_GetMemorySize(void);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
@@ -94,21 +94,21 @@ s32 func_804234CC_de(void) {
     if (OPTIONS_HAS_FIRST_LIST) {
     list = func_8041ABC0_de(0x1BB, 0x1BC);
     {s32 *handle = &D_800E4514->first_list; *handle = list;}
-    func_8041AD34_de(D_800E4514->first_list, gameOptionsLabel(0));
-    func_8041AD34_de(D_800E4514->first_list, gameOptionsLabel(1));
-    func_8041AD34_de(D_800E4514->first_list, gameOptionsLabel(2));
+    Menu_AppendListText(D_800E4514->first_list, gameOptionsLabel(0));
+    Menu_AppendListText(D_800E4514->first_list, gameOptionsLabel(1));
+    Menu_AppendListText(D_800E4514->first_list, gameOptionsLabel(2));
     settings = &D_801462C8;
-    func_8041AD10_de(D_800E4514->first_list, settings->first);
+    Menu_SelectListEntry(D_800E4514->first_list, settings->first);
     }
     list = func_8041ABC0_de((0x1BE - OPTIONS_RESOURCE_SHIFT), (0x1BF - OPTIONS_RESOURCE_SHIFT));
     {s32 *handle = &D_800E4514->second_list; *handle = list;}
-    func_8041AD34_de(D_800E4514->second_list, gameOptionsLabel(3));
+    Menu_AppendListText(D_800E4514->second_list, gameOptionsLabel(3));
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(D_800E4514->second_list, gameOptionsLabel(4));
-        func_8041AD34_de(D_800E4514->second_list, gameOptionsLabel(5));
+        Menu_AppendListText(D_800E4514->second_list, gameOptionsLabel(4));
+        Menu_AppendListText(D_800E4514->second_list, gameOptionsLabel(5));
     }
     if (!OPTIONS_HAS_FIRST_LIST) settings = &D_801462C8;
-    func_8041AD10_de(D_800E4514->second_list, settings->second);
+    Menu_SelectListEntry(D_800E4514->second_list, settings->second);
     slider = func_8041A580_de((0x1C0 - OPTIONS_RESOURCE_SHIFT), (0x1C1 - OPTIONS_RESOURCE_SHIFT), 0x80);
     D_800E4514->slider = slider;
 

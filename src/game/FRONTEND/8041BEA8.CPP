@@ -21,7 +21,7 @@ extern void func_802998A8_de(void);
 extern void func_80419F24_de(s32 fade);
 extern s32 func_80419F38_de(s32 fade);
 extern void func_80419F58_de(s32 fade, s32 speed);
-extern Node_func_8041D134_de *func_8041B7FC_de(void *handle, s32 arg1);
+extern Node_func_8041D134_de *Menu_GetSlotValue(void *handle, s32 arg1);
 
 /* Frontend_ShowUnlockedEntries is declared by span code_8041BEA8.h; no local extern needed. */
 
@@ -87,7 +87,7 @@ s32 func_8041D134_de(s32 unused0, s32 unused1, s32 arg2) {
     if (((MenuRecAt108 *) D_800E3590)->state == 3) {
         ((MenuRecAt108 *) D_800E3590)->clock += arg2;
         ((MenuRecAt108 *) D_800E3590)->cursor->style = Math_Cosf((f32) ((MenuRecAt108 *) D_800E3590)->clock * 0.0033333334f) * 30.0f + 220.0f;
-        node = func_8041B7FC_de(((MenuRecAt108 *) D_800E3590)->handle, 0);
+        node = Menu_GetSlotValue(((MenuRecAt108 *) D_800E3590)->handle, 0);
         if (node != ((MenuRecAt108 *) D_800E3590)->focus) {
             Render_PlayFlatSound(0xE7E);
             if (((MenuRecAt108 *) D_800E3590)->focus != 0) {

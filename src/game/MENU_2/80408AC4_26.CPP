@@ -9,8 +9,8 @@ extern void *Scene_AllocateMemory(s32);
 extern void *func_8041A280_de(s32, s32);
 extern void func_8041B110_de(s32);
 extern void *func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(void *, s32);
-extern void func_8041AD10_de(void *, s32);
+extern void Menu_AppendListText(void *, s32);
+extern void Menu_SelectListEntry(void *, s32);
 extern s32 System_GetMemorySize(void);
 extern void *func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(void *, s32);
@@ -22,16 +22,16 @@ s32 func_804230E0_de(void) {
     func_8041B110_de(0x57);
     func_8041B110_de(0x58);
     g_optionsPage[4] = (s32)func_8041ABC0_de(0x51, 0x52);
-    func_8041AD34_de((void *)g_optionsPage[4], D_auto_800D3480);
-    func_8041AD34_de((void *)g_optionsPage[4], D_auto_800D3484);
-    func_8041AD10_de((void *)g_optionsPage[4], D_801462C8[0x1F]);
+    Menu_AppendListText((void *)g_optionsPage[4], D_auto_800D3480);
+    Menu_AppendListText((void *)g_optionsPage[4], D_auto_800D3484);
+    Menu_SelectListEntry((void *)g_optionsPage[4], D_801462C8[0x1F]);
     g_optionsPage[5] = (s32)func_8041ABC0_de(0x53, 0x54);
-    func_8041AD34_de((void *)g_optionsPage[5], D_auto_800D3488);
+    Menu_AppendListText((void *)g_optionsPage[5], D_auto_800D3488);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de((void *)g_optionsPage[5], D_auto_800D348C);
-        func_8041AD34_de((void *)g_optionsPage[5], D_auto_800D3490);
+        Menu_AppendListText((void *)g_optionsPage[5], D_auto_800D348C);
+        Menu_AppendListText((void *)g_optionsPage[5], D_auto_800D3490);
     }
-    func_8041AD10_de((void *)g_optionsPage[5], D_801462C8[0x580]);
+    Menu_SelectListEntry((void *)g_optionsPage[5], D_801462C8[0x580]);
     g_optionsPage[2] = (s32)func_8041A580_de(0x55, 0x56, 0x80);
     func_8041A6EC_de((void *)g_optionsPage[2], *(s32 *)(D_801462C8 + 0x10));
     func_8041B110_de(0x50);

@@ -42,7 +42,7 @@ extern void *func_8040EC30_de(void *root, s32 identifier);
 extern void func_8040E950_de(void *record, s32 enable);
 extern void *func_802A1990_de(s32, s32, s32, s32, s32);
 extern void *func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(void *, char *);
+extern void Menu_AppendListText(void *, char *);
 extern void func_8041B110_de(s32);
 
 s32 Frontend_CreateMatchOptions(void *root) {
@@ -82,16 +82,16 @@ s32 Frontend_CreateMatchOptions(void *root) {
     widget = func_8041ABC0_de(OPTIONS_TEXT + 8, OPTIONS_TEXT + 9);
     slot = &D_800E4EF0->selectWidget;
     *slot = widget;
-    func_8041AD34_de(widget, MO_TEXT(0, D_800D3494, D_auto_800E1CA4));
-    func_8041AD34_de(D_800E4EF0->selectWidget, MO_TEXT(1, D_800D3498, D_auto_800E1CB4));
+    Menu_AppendListText(widget, MO_TEXT(0, D_800D3494, D_auto_800E1CA4));
+    Menu_AppendListText(D_800E4EF0->selectWidget, MO_TEXT(1, D_800D3498, D_auto_800E1CB4));
     widget = func_8041ABC0_de(OPTIONS_TEXT + 15, OPTIONS_TEXT + 16);
     slot = &D_800E4EF0->cursorWidget;
     *slot = widget;
-    func_8041AD34_de(widget, MO_TEXT(2, D_800D349C, D_auto_800E1CC4));
-    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(3, D_800D34A0, D_auto_800E1CD4));
-    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(4, D_800D34A4, D_800E1CE4));
-    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(5, D_800D34A8, D_auto_800E1CF4));
-    func_8041AD34_de(D_800E4EF0->cursorWidget, MO_TEXT(6, D_800D34AC, D_auto_800E1D04));
+    Menu_AppendListText(widget, MO_TEXT(2, D_800D349C, D_auto_800E1CC4));
+    Menu_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(3, D_800D34A0, D_auto_800E1CD4));
+    Menu_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(4, D_800D34A4, D_800E1CE4));
+    Menu_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(5, D_800D34A8, D_auto_800E1CF4));
+    Menu_AppendListText(D_800E4EF0->cursorWidget, MO_TEXT(6, D_800D34AC, D_auto_800E1D04));
     func_8041B110_de(OPTIONS_TEXT + 10);
     func_8041B110_de(OPTIONS_TEXT + 11);
     func_8041B110_de(OPTIONS_TEXT + 12);

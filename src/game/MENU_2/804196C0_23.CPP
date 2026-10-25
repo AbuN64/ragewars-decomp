@@ -143,12 +143,12 @@ s32 func_8041AD04_de(s32 *record) {
 
 
 
-void func_8041AD10_de(struct MenuListWidget *menu, s32 index) {
+void Menu_SelectListEntry(struct MenuListWidget *menu, s32 index) {
     menu->index = index;
     menu->owner->selected = &menu->entries[index];
 }
 
-void func_8041AD34_de(struct MenuListWidget *menu, u8 *text) {
+void Menu_AppendListText(struct MenuListWidget *menu, u8 *text) {
     Resmgr_CopyString(menu->entries[menu->count].text, text);
     menu->count++;
 }

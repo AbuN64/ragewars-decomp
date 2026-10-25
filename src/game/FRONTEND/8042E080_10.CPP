@@ -26,7 +26,7 @@ extern u8 D_80146398[];
 
 extern void MarkMenuEventHandled(void);
 extern s32 func_8041B810_de(s32, s32);
-extern void func_8041B7B4_de(s32, s32, s32);
+extern void Menu_SetSlotValue(s32, s32, s32);
 extern void Frontend_RefreshPlayerPanel(s32);
 extern void func_80434D70_de(s32);
 extern s32 func_80435384_de(s32, s32 *);
@@ -800,7 +800,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
             break;
         }
         if (i != p) {
-            func_8041B7B4_de(D_800E54A4->root, p, 1);
+            Menu_SetSlotValue(D_800E54A4->root, p, 1);
             D_800E54A4->players[i].back = 2;
             D_800E54A4->players[i].state = 2;
             D_800E54A4->players[i].next = 9;

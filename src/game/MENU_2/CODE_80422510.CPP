@@ -51,8 +51,8 @@ extern struct MenuFadeWidget *func_8041A280_de(s32, s32);
 
 extern s32 System_GetMemorySize(void);
 extern MenuListWidget *func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(struct MenuListWidget *, u8 *);
-extern void func_8041AD10_de(struct MenuListWidget *, s32);
+extern void Menu_AppendListText(struct MenuListWidget *, u8 *);
+extern void Menu_SelectListEntry(struct MenuListWidget *, s32);
 extern MenuSliderWidget *func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(Scroll *, s32);
 
@@ -70,24 +70,24 @@ s32 Menu_CreateOptionsPage(void) {
     func_8041B110_de(0x58);
     firstList = func_8041ABC0_de(0x59, 0x5A);
     g_optionsPage->unk_C = firstList;
-    func_8041AD34_de(firstList, D_800D3470_de[0]);
-    func_8041AD34_de(g_optionsPage->unk_C, D_800D2124);
-    func_8041AD34_de(g_optionsPage->unk_C, D_800D2128);
+    Menu_AppendListText(firstList, D_800D3470_de[0]);
+    Menu_AppendListText(g_optionsPage->unk_C, D_800D2124);
+    Menu_AppendListText(g_optionsPage->unk_C, D_800D2128);
     settings = &D_801462C8;
-    func_8041AD10_de(g_optionsPage->unk_C, settings->firstListMode);
+    Menu_SelectListEntry(g_optionsPage->unk_C, settings->firstListMode);
     secondList = func_8041ABC0_de(0x55, 0x56);
     g_optionsPage->unk_10 = secondList;
-    func_8041AD34_de(secondList, D_auto_800D74AC[0]);
-    func_8041AD34_de(g_optionsPage->unk_10, D_auto_800D74B0);
-    func_8041AD10_de(g_optionsPage->unk_10, settings->unknown1F);
+    Menu_AppendListText(secondList, D_auto_800D74AC[0]);
+    Menu_AppendListText(g_optionsPage->unk_10, D_auto_800D74B0);
+    Menu_SelectListEntry(g_optionsPage->unk_10, settings->unknown1F);
     thirdList = func_8041ABC0_de(0x51, 0x52);
     g_optionsPage->unk_14 = thirdList;
-    func_8041AD34_de(thirdList, D_800D2134[0]);
+    Menu_AppendListText(thirdList, D_800D2134[0]);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(g_optionsPage->unk_14, D_800D2138);
-        func_8041AD34_de(g_optionsPage->unk_14, D_800D213C);
+        Menu_AppendListText(g_optionsPage->unk_14, D_800D2138);
+        Menu_AppendListText(g_optionsPage->unk_14, D_800D213C);
     }
-    func_8041AD10_de(g_optionsPage->unk_14, settings->reserved580);
+    Menu_SelectListEntry(g_optionsPage->unk_14, settings->reserved580);
     slider = func_8041A580_de(0x53, 0x54, 0x80);
     g_optionsPage->unk_8 = slider;
     func_8041A6EC_de(slider, settings->buttons);
@@ -166,19 +166,19 @@ s32 Menu_OpenOptionsScreen(void *node) {
     func_8041B110_de(0x37C);
     firstListHandle = func_8041ABC0_de(0x375, 0x376);
     D_800E4518->firstList = firstListHandle;
-    func_8041AD34_de(firstListHandle, D_800D3470_de[0]);
-    func_8041AD34_de(D_800E4518->firstList, D_800D2124);
-    func_8041AD34_de(D_800E4518->firstList, D_800D2128);
+    Menu_AppendListText(firstListHandle, D_800D3470_de[0]);
+    Menu_AppendListText(D_800E4518->firstList, D_800D2124);
+    Menu_AppendListText(D_800E4518->firstList, D_800D2128);
     settings = &D_801462C8;
-    func_8041AD10_de(D_800E4518->firstList, settings->firstListMode);
+    Menu_SelectListEntry(D_800E4518->firstList, settings->firstListMode);
     secondListHandle = func_8041ABC0_de(0x378, 0x379);
     D_800E4518->secondList = secondListHandle;
-    func_8041AD34_de(secondListHandle, D_800D2134[0]);
+    Menu_AppendListText(secondListHandle, D_800D2134[0]);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(D_800E4518->secondList, D_800D2138);
-        func_8041AD34_de(D_800E4518->secondList, D_800D213C);
+        Menu_AppendListText(D_800E4518->secondList, D_800D2138);
+        Menu_AppendListText(D_800E4518->secondList, D_800D213C);
     }
-    func_8041AD10_de(D_800E4518->secondList, settings->slots[7].secondListMode);
+    Menu_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
     slider = func_8041A580_de(0x37A, 0x37B, 0x80);
     D_800E4518->slider = slider;
 

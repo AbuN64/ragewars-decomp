@@ -73,8 +73,8 @@ extern void func_8025E384_de(void);
 extern void func_8040E950_de(MenuWidget *, s32);
 extern void func_8041B110_de(s32);
 extern MenuListWidget *func_8041ABC0_de(s32, s32);
-extern void func_8041AD34_de(MenuListWidget *, char *);
-extern void func_8041AD10_de(MenuListWidget *, s32);
+extern void Menu_AppendListText(MenuListWidget *, char *);
+extern void Menu_SelectListEntry(MenuListWidget *, s32);
 extern s32 System_GetMemorySize(void);
 extern s32 func_8041A580_de(s32, s32, s32);
 extern void func_8041A6EC_de(s32, s32);
@@ -134,12 +134,12 @@ s32 func_804224E0_de(void *node) {
     settings = &D_801462C8;
     secondListHandle = func_8041ABC0_de(0x377, 0x378);
     D_800E4518->secondList = secondListHandle;
-    func_8041AD34_de(secondListHandle, D_auto_800D3488);
+    Menu_AppendListText(secondListHandle, D_auto_800D3488);
     if (System_GetMemorySize() != 0x400000) {
-        func_8041AD34_de(D_800E4518->secondList, D_auto_800D348C);
-        func_8041AD34_de(D_800E4518->secondList, D_auto_800D3490);
+        Menu_AppendListText(D_800E4518->secondList, D_auto_800D348C);
+        Menu_AppendListText(D_800E4518->secondList, D_auto_800D3490);
     }
-    func_8041AD10_de(D_800E4518->secondList, settings->slots[7].secondListMode);
+    Menu_SelectListEntry(D_800E4518->secondList, settings->slots[7].secondListMode);
     slider = func_8041A580_de(0x371, 0x372, 0x80);
     D_800E4518->slider = slider;
 

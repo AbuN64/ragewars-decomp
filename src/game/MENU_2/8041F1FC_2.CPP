@@ -13,7 +13,7 @@
 #include "FRONTEND/8041BEA8_6.H"
 
 extern s32 func_8040EBD0_de(struct WidgetNode *);
-extern struct WidgetNode *func_8041B7FC_de(struct SlotsCode804196C0 *, s32);
+extern struct WidgetNode *Menu_GetSlotValue(struct SlotsCode804196C0 *, s32);
 
 /* Advances the selection panels, cursor highlight and character previews. */
 s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
@@ -111,7 +111,7 @@ s32 func_8041F6C8_de(s32 arg0,s32 arg1,s32 arg2) {
                         highlight = D_800E42D0->players[i].highlight;
                         highlight->alpha=(unsigned int)temp_f0;
                     }
-                    widgetNode = func_8041B7FC_de(D_800E42D0->unk4, i);
+                    widgetNode = Menu_GetSlotValue(D_800E42D0->unk4, i);
                     temp_a0_3 = D_800E42D0->players[i].highlight;
                     if ((temp_a0_3->x != (widgetNode->x - 2)) || (temp_a0_3->y != (widgetNode->y - 2))) {
                         Render_PlayFlatSound(0xE7F);

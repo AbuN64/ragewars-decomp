@@ -7,7 +7,7 @@
 /* Updates the four player control rows, their visibility, and the selected player label. */
 extern s32 func_80264614_de(s32);
 extern void func_8040E950_de(MenuWidget *record, int enable);
-extern struct Shared_Item *func_8041B7FC_de(void *, s32);
+extern struct Shared_Item *Menu_GetSlotValue(void *, s32);
 void func_80433D38_de(s32 player) {
     struct Shared_Item *item;
     struct func_8028469C_S2 *label;
@@ -70,7 +70,7 @@ void func_80433D38_de(s32 player) {
             func_8040E950_de(item, 1);
         }
         label = item->label;
-        if (player != -1 && item == func_8041B7FC_de(D_800E54A4->list, player)) {
+        if (player != -1 && item == Menu_GetSlotValue(D_800E54A4->list, player)) {
             label->unk38 = D_800E54A4->players[player].slots[D_800E54A4->players[player].chosen];
         } else {
             label->unk38 = 0;

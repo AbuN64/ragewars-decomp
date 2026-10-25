@@ -127,7 +127,7 @@ void func_8041B6E8_de(OwnerRecAt8V1 *owner, s32 index, s32 id) {
    the parallel array at offset 0x4C. */
 
 
-void func_8041B7B4_de(struct SlotsRecAt5CV1 *object, s32 index, s32 value) {
+void Menu_SetSlotValue(struct SlotsRecAt5CV1 *object, s32 index, s32 value) {
     object->values[index] = value;
 }
 
@@ -151,7 +151,7 @@ s32 func_8041B7C4_de(struct SlotsRecAt5CV2 *object) {
    parallel array at offset 0x5C. */
 
 
-struct WidgetNode *func_8041B7FC_de(struct SlotsCode804196C0 *object, s32 index) {
+struct WidgetNode *Menu_GetSlotValue(struct SlotsCode804196C0 *object, s32 index) {
     return object->values[index];
 }
 
@@ -185,7 +185,7 @@ void func_8041B828_de(sm_dlmultiuser *context, s32 index, s32 id) {
     }
 }
 
-void func_8041B8DC_de(sm_dlmultiuser *context, s32 index, Node_func_8041B6E8_de *node) {
+void Menu_ShowSlotNode(sm_dlmultiuser *context, s32 index, Node_func_8041B6E8_de *node) {
     s32 i;
 
     if (context->locked[index] == 0) {

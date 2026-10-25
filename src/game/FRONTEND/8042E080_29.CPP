@@ -77,8 +77,8 @@ enum { PAK_SLOT_RESOURCE_688 = 688, PAK_SLOT_RESOURCE_689 = 689, PAK_SLOT_RESOUR
 
 #endif
 extern void func_8040E950_de(MenuWidget *record, int enable);
-extern void func_8041B8DC_de(s32,s32,MenuWidget *);
-extern MenuWidget *func_8041B7FC_de(s32,s32);
+extern void Menu_ShowSlotNode(s32,s32,MenuWidget *);
+extern MenuWidget *Menu_GetSlotValue(s32,s32);
 extern s32 func_8040EBD0_de(MenuWidget *);
 void func_80433914_de(s32 player) {
  s32 i;
@@ -114,7 +114,7 @@ void func_80433914_de(s32 player) {
   } else {value->text=(D_800D3250[0]);func_8040E8D8_de((func_8041F2A0_Item *)label,0);}
 #endif
  }
- label=func_8041B7FC_de(D_800E54A4->root,player);
+ label=Menu_GetSlotValue(D_800E54A4->root,player);
  while(func_8040EBD0_de(label))label=label->next;
- func_8041B8DC_de(D_800E54A4->root,player,label);
+ Menu_ShowSlotNode(D_800E54A4->root,player,label);
 }

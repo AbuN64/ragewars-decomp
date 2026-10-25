@@ -20,7 +20,7 @@
 
 
 
-extern void *func_8041B7FC_de(s32 root, s32 player);
+extern void *Menu_GetSlotValue(s32 root, s32 player);
 
 s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
     struct Resource_func_80419E54_de *sound;
@@ -42,7 +42,7 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
         return 0;
     }
     if (state == 0xC && arg3 == 1) {
-        sound = func_8041B7FC_de(D_800E54A4->root, index);
+        sound = Menu_GetSlotValue(D_800E54A4->root, index);
         row = (struct RowRecAtBA4 *)(index * 0xB68 + (char *)D_800E54A4);
         row->phase = 2;
         count = row->count;
@@ -66,7 +66,7 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
 #include "COMMON/NAME.H"
 s32 func_80299B4C_de();                                /* extern */
 s32 func_8040EBD0_de(void *);                          /* extern */
-void func_8041B8DC_de(s32, s32, void *);                  /* extern */
+void Menu_ShowSlotNode(s32, s32, void *);                  /* extern */
 void func_80433BCC_de(s32);                               /* extern */
 void func_80433D38_de(s32);                               /* extern */
 void func_80434250_de(s32, s32);                            /* extern */
@@ -110,38 +110,38 @@ s32 func_80430118_de(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     case 13:
         if ((D_800E54A4->players[temp_s1].sub == 6) && (arg3 == 1)) {
             MarkMenuEventHandled();
-            var_s0 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
+            var_s0 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
 loop_11:
             if (func_8040EBD0_de(var_s0) != 0) {
                 var_s0 = var_s0->next;
                 goto loop_11;
             }
-            func_8041B8DC_de((D_800E54A4->root), temp_s1, var_s0);
+            Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0);
             Render_PlayFlatSound(0xE74);
             return 0;
         }
         return 0;
     case 22:
         if (arg3 == 1) {
-            var_s0_2 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
+            var_s0_2 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
 loop_16:
             if (func_8040EBD0_de(var_s0_2) != 0) {
                 var_s0_2 = var_s0_2->next;
                 goto loop_16;
             }
-            func_8041B8DC_de((D_800E54A4->root), temp_s1, var_s0_2);
+            Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0_2);
             func_80433BCC_de(temp_s1);
         }
         goto block_24;
     case 27:
         if (arg3 == 1) {
-            var_s0_3 = ((MenuWidget *)func_8041B7FC_de(D_800E54A4->root, temp_s1))->next;
+            var_s0_3 = ((MenuWidget *)Menu_GetSlotValue(D_800E54A4->root, temp_s1))->next;
 loop_21:
             if (func_8040EBD0_de(var_s0_3) != 0) {
                 var_s0_3 = var_s0_3->next;
                 goto loop_21;
             }
-            func_8041B8DC_de((D_800E54A4->root), temp_s1, var_s0_3);
+            Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0_3);
             func_80433D38_de(temp_s1);
         }
 block_24:
@@ -156,7 +156,7 @@ extern s32 func_80299B4C_de(void);
 extern s32 func_8029DB58_de(s32);
 extern void MarkMenuEventHandled(void);
 extern s32 func_8040EBD0_de(void *);
-extern void func_8041B8DC_de(s32, s32, void *);
+extern void Menu_ShowSlotNode(s32, s32, void *);
 extern void func_80433BCC_de(s32);
 extern void func_80433D38_de(s32);
 extern void func_80434250_de(s32, s32);
@@ -190,35 +190,35 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
     case 13:
         if (D_800E54A4->players[player].sub == 6 && arg3 == 1) {
             MarkMenuEventHandled();
-            node = func_8041B7FC_de(D_800E54A4->root, player);
+            node = Menu_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (func_8040EBD0_de(node) != 0) {
                 node = node->ref2C;
             }
-            func_8041B8DC_de(D_800E54A4->root, player, node);
+            Menu_ShowSlotNode(D_800E54A4->root, player, node);
             Render_PlayFlatSound(0xE74);
         }
         return 0;
     case 22:
         if (arg3 == 1) {
-            node = func_8041B7FC_de(D_800E54A4->root, player);
+            node = Menu_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (func_8040EBD0_de(node) != 0) {
                 node = node->ref2C;
             }
-            func_8041B8DC_de(D_800E54A4->root, player, node);
+            Menu_ShowSlotNode(D_800E54A4->root, player, node);
             func_80433BCC_de(player);
         }
         MarkMenuEventHandled();
         break;
     case 27:
         if (arg3 == 1) {
-            node = func_8041B7FC_de(D_800E54A4->root, player);
+            node = Menu_GetSlotValue(D_800E54A4->root, player);
             node = node->ref2C;
             while (func_8040EBD0_de(node) != 0) {
                 node = node->ref2C;
             }
-            func_8041B8DC_de(D_800E54A4->root, player, node);
+            Menu_ShowSlotNode(D_800E54A4->root, player, node);
             func_80433D38_de(player);
         }
         MarkMenuEventHandled();

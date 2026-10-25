@@ -43,7 +43,7 @@ extern s32 func_8043C308_de(void *);
 
 extern void func_802A1B24_de(void *arg0, s32 arg1);
 
-extern void func_8041AD10_de(void *arg0, s32 arg1);
+extern void Menu_SelectListEntry(void *arg0, s32 arg1);
 
 
 /* Refreshes the entry list of screen D_800E4EF0: reads the selection of its cursor at 0x20 through
@@ -125,8 +125,8 @@ void func_80429560_de(void) {
         count = D_800E4EF0->countDefault;
     }
     func_802A1B24_de(D_800E4EF0->widget34, count);
-    func_8041AD10_de(D_800E4EF0->selectWidget, opts->unknown28[0]);
-    func_8041AD10_de(D_800E4EF0->cursorWidget, func_8041E720_de());
+    Menu_SelectListEntry(D_800E4EF0->selectWidget, opts->unknown28[0]);
+    Menu_SelectListEntry(D_800E4EF0->cursorWidget, func_8041E720_de());
 }
 
 void func_80429654_de(s32 force) {

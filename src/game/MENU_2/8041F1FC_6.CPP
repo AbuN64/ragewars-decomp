@@ -27,7 +27,7 @@ extern void func_804201A4_de(int, EntryRecAt14V1 *);
 void MarkMenuEventHandled(void);
 
                            /* extern */
-void func_8041B7B4_de(s32, s32, s32, State_func_80420C10_de *);
+void Menu_SetSlotValue(s32, s32, s32, State_func_80420C10_de *);
 
          /* extern */
 void func_8041CE10_de(void *, s32);
@@ -43,7 +43,7 @@ void MarkMenuEventHandled();
 s32 func_8040EBD0_de(s32);
 
                              /* extern */
-s32 func_8041B7FC_de(s32, s32);
+s32 Menu_GetSlotValue(s32, s32);
 
                         /* extern */
 s32 func_8041B810_de(s32, s32);
@@ -136,7 +136,7 @@ s32 func_80420C10_de(s32 unused0, s32 unused1, s32 arg2) {
         break;
     case 3:
         temp_a3->unk14 = 1;
-        func_8041B7B4_de(D_800E42D0->unk4, temp_s0, 0, temp_a3);
+        Menu_SetSlotValue(D_800E42D0->unk4, temp_s0, 0, temp_a3);
         func_8041CE10_de(&((PanelRecord *)(temp_s1 + (s32)D_800E42D0))->target, 1);
         func_80420438_de(temp_s0);
         break;
@@ -156,7 +156,7 @@ s32 func_80420CDC_de(s32 arg0, s32 arg1, s32 arg2) {
     characterSelectionRoot = (CharacterSelectionRoot *)((char *)D_800E42D0 + (temp_s0 * 0x4C8));
     if (characterSelectionRoot->phase == 1) {
         if (choice == SPECIAL_CHAR) func_80420618_de(temp_s0,characterSelectionRoot->choice);
-        else if (func_8040EBD0_de(func_8041B7FC_de(D_800E42D0->unk4,temp_s0)) == 0) func_80420618_de(temp_s0,choice);
+        else if (func_8040EBD0_de(Menu_GetSlotValue(D_800E42D0->unk4,temp_s0)) == 0) func_80420618_de(temp_s0,choice);
     }
     return 0;
 }
