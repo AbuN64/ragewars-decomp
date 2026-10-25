@@ -127,7 +127,7 @@ void Items_StartMenuPulse(struct Object1C8 *object) {
    the counter reaches 0x30. */
 
 
-void func_80442B5C_de(struct Object1C8 *object) {
+void Items_StepSpriteFrame(struct Object1C8 *object) {
     object->first += object->second;
     if (object->first >= 0x30) {
         object->first = 0;

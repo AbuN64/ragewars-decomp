@@ -126,7 +126,7 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
     entry = menu->entries + menu->selected;
     menu->fade += literals_Engine_GetPlatformRoutePoint;
     selectionFlags = entry->flags & 0x400000;
-    func_80442B5C_de(menu);
+    Items_StepSpriteFrame(menu);
     switch (menu->state) {
     case 0:
         menu->openA += literals_Engine_GetPlatformRoutePoint;

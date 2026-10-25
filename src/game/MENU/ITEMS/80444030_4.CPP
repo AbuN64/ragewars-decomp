@@ -7,7 +7,7 @@
 #ifdef NON_MATCHING
 /* Resets the game record D_801462C8 to its defaults: colors, option bytes, the ten enabled flags,
    and nine 0x96-byte settings records, each re-seeded by the per-record reset. */
-typedef struct SlotSettings80445074 {
+typedef struct CPlayerOptions_t {
     u8 pad00[0x78];
     u8 f78;
     u8 f79;
@@ -24,7 +24,7 @@ typedef struct SlotSettings80445074 {
     u8 pad84[0x10];
     u8 f94;
     u8 f95;
-} SlotSettings80445074;
+} CPlayerOptions;
 
 typedef struct GameRecord80445074 {
     u32 flags;
@@ -53,14 +53,14 @@ typedef struct GameRecord80445074 {
     u8 flag2B;
     u8 enabled[10];
     u8 pad36[4];
-    SlotSettings80445074 defaultSlot;
-    SlotSettings80445074 slots[8];
+    CPlayerOptions defaultSlot;
+    CPlayerOptions slots[8];
     u8 flag580;
 } GameRecord80445074;
 
 extern f32 D_800E2798[];
 
-static __inline__ void resetPlayerSlot(SlotSettings80445074 *slot, u8 index) {
+static __inline__ void resetPlayerSlot(CPlayerOptions *slot, u8 index) {
         slot->f78 = 0;
         slot->f79 = 0x86;
         slot->f7A = 0x84;
@@ -125,7 +125,7 @@ void Items_ResetGameOptions(GameRecord80445074 *game) {
         resetPlayerSlot(&game->slots[i], i);
     }
     {
-        SlotSettings80445074 *slot = &game->defaultSlot;
+        CPlayerOptions *slot = &game->defaultSlot;
         slot->f79 = 0x86;
         slot->f78 = 0;
         slot->f7A = 0x84;
