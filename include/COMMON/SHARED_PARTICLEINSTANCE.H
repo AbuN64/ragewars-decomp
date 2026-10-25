@@ -270,6 +270,31 @@ struct Shared_Particle {
     u8 drawWhenHidden;
     u8 reserved1DA[2];
 };
+/* Shared_Particle flags (CParticle_t m_dwFlags). */
+#define PARTICLE_FLAG_RIDING 0x10000 /* follows a skeleton node of its target */
+#define PARTICLE_FLAG_STUCK 0x20000 /* stuck in a surface; quivers */
+#define PARTICLE_FLAG_MATRIX_BUILT 0x100000 /* its display matrix is built for this frame */
+#define PARTICLE_FLAG_CARRIED 0x400000 /* placed through its owner's orientation */
+#define PARTICLE_FLAG_ON_GROUND 0x800000 /* a settling particle lies on the floor */
+/* Shared_ParticleDesc flags (CROMParticleEffect_t m_dwFlags). */
+#define PARTICLE_EFFECT_STANDING 0x8 /* a sprite turns about its base, not its centre */
+#define PARTICLE_EFFECT_SETTLES 0x400 /* a floor-aligned particle lands on the floor */
+#define PARTICLE_EFFECT_OPACITY_SIZE 0x80000 /* with playback 1 its size follows its opacity */
+/* Shared_Particle space: the frame a particle is drawn in (CParticle_t m_Alignment); Particle_ParentTransform
+ * returns the matrix for each, Particle_BuildMatrix keeps the surface ones off their surface. */
+enum ParticleAlignment {
+    PARTICLE_ALIGN_TRAVEL = -8, /* along its travel direction */
+    PARTICLE_ALIGN_WORLD = -7, /* world axes; a model turns to its direction */
+    PARTICLE_ALIGN_BILLBOARD_UPRIGHT = -6, /* faces the camera, Y kept up */
+    PARTICLE_ALIGN_FLAT = -5, /* lies flat, above the floor */
+    PARTICLE_ALIGN_BILLBOARD = -4, /* faces the screen */
+    PARTICLE_ALIGN_FLOOR = -3, /* lies on the floor, tilted to it */
+    PARTICLE_ALIGN_CEILING = -2, /* tilted to the cached surface, below the ceiling */
+    PARTICLE_ALIGN_BILLBOARD_ALT = -1, /* as PARTICLE_ALIGN_BILLBOARD */
+    PARTICLE_ALIGN_EDGE_0 = 0, /* turned to edge 0..2 of a floor triangle */
+    PARTICLE_ALIGN_EDGE_1 = 1,
+    PARTICLE_ALIGN_EDGE_2 = 2
+};
 
 
 

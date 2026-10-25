@@ -115,7 +115,7 @@ CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon) {
     return out;
 }
 
-CQuatern *Nav_GetCachedUpQuat(CQuatern *out) {
+CQuatern *Nav_GetCachedUpQuat(CQuatern *out, Triangle *polygon) {
     CVector3 a;
     CVector3 up;
     CVector3 axis;

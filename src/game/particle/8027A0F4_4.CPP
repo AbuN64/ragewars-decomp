@@ -13,13 +13,13 @@
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "COMMON/AIPROFILE.H"
 
-extern void BuildDirectionMatrix(void *arg0, void *arg1);
+extern void BuildDirectionMatrix(void *matrix, CVector3 *direction);
 extern f32 Anim_GetPolygonHeight(Node75 *node, f32 x, f32 z);
-extern void Nav_GetPolygonUpQuat(void *arg0, s32 arg1);
-extern void Nav_GetCachedUpQuat(void *arg0, s32 arg1);
-extern void MatrixFromQuaternion(void *arg0, void *arg1);
-extern void Rsp_MultiplyAffineMatrices(void *arg0, void *arg1, void *arg2);
-extern f32 Anim_GetTriangleEdgeAngle(s32 arg0, s32 arg1);
+extern CQuatern *Nav_GetPolygonUpQuat(CQuatern *out, Triangle *polygon);
+extern CQuatern *Nav_GetCachedUpQuat(CQuatern *out, Triangle *polygon);
+extern void MatrixFromQuaternion(void *quaternion, f32 *matrix);
+extern void Rsp_MultiplyAffineMatrices(f32 *out, f32 *left, f32 *right);
+extern f32 Anim_GetTriangleEdgeAngle(void *triangle, s32 edge);
 
 
 
@@ -28,79 +28,57 @@ extern f32 Anim_GetTriangleEdgeAngle(s32 arg0, s32 arg1);
 
 
 
-/* Returns the matrix a particle's alignment places it in, or null for world space: the travel direction (-8),
- * the camera's billboards (-6 upright, -4 and -1 facing the screen), the ground basis D_8011AF38 (-5, and -3 when
- * off the ground) or the ground basis tilted to the floor (-3 on the ground, -2 cached), or turned to a floor
- * triangle edge (0..2). Built matrices go to the scratch matrix D_8011AD70. */
+/* Returns the matrix a particle's alignment places it in, or null for world space. Matrices built here go to the
+ * scratch matrix D_8011AD70; D_8011AF38 is the lying-flat basis (a quarter turn about X), tilted to the floor's
+ * slope for a floor particle on the floor and to the cached slope for a ceiling one. */
 f32 *Particle_ParentTransform(Shared_Particle *particle, GameplayCamera *camera) {
-    char output[0x40];
-    char state[0x10];
-    void *shared;
+    f32 tilt[16];
+    CQuatern up;
+    f32 *matrix;
     f32 value;
 
-    {
-        s32 sw_state_value = (s8)(particle->space + 8);
-        if ((unsigned int)sw_state_value > 10) {
-            goto sw_state_default;
-        }
-        switch (sw_state_value) {
-        case 0: goto sw_state_neg_8;
-        case 1: goto sw_state_default;
-        case 2: goto sw_state_neg_6;
-        case 3: goto sw_state_neg_5;
-        case 4: goto sw_state_neg_4;
-        case 5: goto sw_state_neg_3;
-        case 6: goto sw_state_neg_2;
-        case 7: goto sw_state_neg_4;
-        case 8: goto sw_state_0;
-        case 9: goto sw_state_0;
-        case 10: goto sw_state_0;
-        }
-    }
-    do {
-    sw_state_neg_8:
-        shared = D_8011AD70;
-        BuildDirectionMatrix(shared, &particle->direction);
-        return shared;
-    sw_state_neg_6:
+    switch (particle->space) {
+    case PARTICLE_ALIGN_TRAVEL:
+        matrix = D_8011AD70;
+        BuildDirectionMatrix(matrix, &particle->direction);
+        return matrix;
+    case PARTICLE_ALIGN_BILLBOARD_UPRIGHT:
         if (camera == 0) {
             return 0;
         }
         return camera->faceScreenUpright;
-    sw_state_neg_4:
-    sw_state_neg_1:
+    case PARTICLE_ALIGN_BILLBOARD:
+    case PARTICLE_ALIGN_BILLBOARD_ALT:
         if (camera == 0) {
             return 0;
         }
         return camera->faceScreen;
-    sw_state_neg_3:
-        value = Anim_GetPolygonHeight(0, particle->inst.pos.x,
-            particle->inst.pos.z);
+    case PARTICLE_ALIGN_FLOOR:
+        value = Anim_GetPolygonHeight(0, particle->inst.pos.x, particle->inst.pos.z);
         if (particle->inst.pos.y - value <= 0.01f) {
-            Nav_GetPolygonUpQuat(state, 0);
-            MatrixFromQuaternion(state, output);
-            shared = D_8011AD70;
-            Rsp_MultiplyAffineMatrices(shared, D_8011AF38, output);
-            return shared;
+            Nav_GetPolygonUpQuat(&up, 0);
+            MatrixFromQuaternion(&up, tilt);
+            matrix = D_8011AD70;
+            Rsp_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+            return matrix;
         }
-    sw_state_neg_5:
+        /* off the floor it lies flat */
+    case PARTICLE_ALIGN_FLAT:
         return D_8011AF38;
-    sw_state_neg_2:
-        Nav_GetCachedUpQuat(state, 0);
-        MatrixFromQuaternion(state, output);
-        shared = D_8011AD70;
-        Rsp_MultiplyAffineMatrices(shared, D_8011AF38, output);
-        return shared;
-    sw_state_0:
-    sw_state_1:
-    sw_state_2:
+    case PARTICLE_ALIGN_CEILING:
+        Nav_GetCachedUpQuat(&up, 0);
+        MatrixFromQuaternion(&up, tilt);
+        matrix = D_8011AD70;
+        Rsp_MultiplyAffineMatrices(matrix, D_8011AF38, tilt);
+        return matrix;
+    case PARTICLE_ALIGN_EDGE_0:
+    case PARTICLE_ALIGN_EDGE_1:
+    case PARTICLE_ALIGN_EDGE_2:
         value = Anim_GetTriangleEdgeAngle(0, particle->space);
         BuildYawMatrix(D_8011AD70, value);
         return D_8011AD70;
-    sw_state_default:
-        return 0;
-    
-    } while (0);
+    }
+    return 0;
 }
 
 /* Refreshes a particle that rides something and returns its position and direction through optional pointers: a
@@ -204,40 +182,55 @@ void Rsp_ConvertMatrixToFixed(f32 *src, PackedMatrixWords *dst);
 
 
 
-/* Builds a particle's display matrix: its size scaled for camera depth and field of view, its wobble, its
- * orientation (model particles) or roll (sprites), its placement for the space it lives in, and an optional
- * decaying shake, then packs the result into the fixed-point matrix the display list loads. */
+/* Gap kept between a particle and the floor or ceiling it is clamped to, and how far a travel-aligned one is drawn
+ * ahead of its position. */
+#define PARTICLE_SURFACE_GAP 5.12f
+/* A settling particle closer to the floor than this lands on it. */
+#define PARTICLE_LANDING_HEIGHT 1.024f
+/* Particles are drawn this many times deeper than their size. */
+#define PARTICLE_DEPTH_STRETCH 10.24f
+/* Model units per particle size unit. */
+#define PARTICLE_MODEL_SCALE (35.0f / 1024.0f)
+/* Particles further than this from the origin are pulled back to it before drawing. */
+#define PARTICLE_MAX_DISTANCE 20000.0f
+/* A stuck particle quivers about a point this far behind it, by up to 5 degrees at full strength. */
+#define PARTICLE_QUIVER_PIVOT 66.56f
+#define PARTICLE_QUIVER_STRENGTH_MAX 127.0f
+#define PARTICLE_QUIVER_SWING (RW_PI_F6 * 5 / 180)
+
+/* Builds a particle's display matrix: its size scaled for camera depth and field of view, the drawn-only part of its
+ * sine wobble, its orientation (model particles) or roll and tilt (sprites), its placement for its alignment, and the
+ * quiver of a stuck particle, then packs the result into the fixed-point matrix the display list loads. */
 void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, GameplayCamera *camera, f32 depth) {
-    f32 rotation[16], basis[16], local[16], world[16], shakeMtx[16];
+    f32 orientation[16], basis[16], local[16], world[16], quivering[16];
     CVector3 position;
     CVector3 up;
-    CVector3 heading;
+    CVector3 attachedDirection;
     CVector3 axisX;
     CVector3 axisY;
     CVector3 axisZ;
     CVector3 across;
     CVector3 side;
-    CVector3 direction;
+    CVector3 travel;
     CVector3 offset;
     struct Shared_ParticleDesc *desc;
     f32 *parent;
     f32 *final;
     f32 scale;
     f32 lift;
-    f32 ramp;
-    f32 fade;
-    f32 ground;
-    f32 rest;
-    f32 extent;
-    f32 size;
-    f32 jolt;
-    f32 joltSq;
-    f32 angle;
-    f32 wobble;
+    f32 frame;
+    f32 wobbleFade;
+    f32 floorHeight;
+    f32 resting;
+    f32 unit;
+    f32 strength;
+    f32 strengthSq;
+    f32 swing;
+    f32 yawWave;
     f32 tiltX;
     f32 tiltY;
-    s32 rampTime;
-    s32 shake;
+    s32 fadeInFrames;
+    s32 quiver;
     s32 model;
     u16 type;
 
@@ -247,50 +240,55 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     } else {
         scale = 1.0f;
     }
-    if (desc->flags & 8) {
+    /* A standing sprite pivots about its base: it is lifted by its height before it turns. */
+    if (desc->flags & PARTICLE_EFFECT_STANDING) {
         lift = particle->size.y * particle->size.z * scale;
     } else {
         lift = 0.0f;
     }
-    Particle_Attach(particle, &position, &heading);
-    if (!(particle->flags & 0x30000)) {
-        ramp = particle->time;
-        if (ramp > 0.0f) {
-            rampTime = desc->sineWave->fadeInFrames;
-            fade = 1.0f;
-            if (rampTime != 0) {
-                f32 rampLength = (f32)rampTime;
-                if (ramp < rampLength) {
-                    fade = ramp / rampLength;
+    Particle_Attach(particle, &position, &attachedDirection);
+    /* Negative sine amplitudes only offset where the particle is drawn (the particle update moves it for positive ones),
+     * fading in over the descriptor's first frames: X across the travel direction, Y up from it. */
+    if (!(particle->flags & (PARTICLE_FLAG_RIDING | PARTICLE_FLAG_STUCK))) {
+        frame = particle->time;
+        if (frame > 0.0f) {
+            fadeInFrames = desc->sineWave->fadeInFrames;
+            wobbleFade = 1.0f;
+            if (fadeInFrames != 0) {
+                f32 fadeInLength = (f32)fadeInFrames;
+                if (frame < fadeInLength) {
+                    wobbleFade = frame / fadeInLength;
                 }
             }
-            direction = particle->direction;
+            travel = particle->direction;
             if (particle->sineAmplitudeX < 0.0f) {
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                Particle_CrossVectors(&side, &up, &direction);
-                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * fade);
+                Particle_CrossVectors(&side, &up, &travel);
+                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleX) * -particle->sineAmplitudeX * wobbleFade);
                 Particle_AddVec3(&position, &position, &offset);
             }
             if (particle->sineAmplitudeY < 0.0f) {
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                Particle_CrossVectors(&across, &up, &direction);
-                Particle_CrossVectors(&side, &across, &direction);
-                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * fade);
+                Particle_CrossVectors(&across, &up, &travel);
+                Particle_CrossVectors(&side, &across, &travel);
+                Particle_ScaleVector(&offset, &side, Math_Sinf(particle->sineAngleY) * -particle->sineAmplitudeY * wobbleFade);
                 Particle_AddVec3(&position, &position, &offset);
             }
         }
     }
     if (particle->desc->renderModel != 0) {
-        if (particle->space == -7) {
-            Particle_MatrixFromEulerXYZ(rotation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
-            if ((heading.x == 0.0f) && (heading.y == 0.0f) && (heading.z == 0.0f)) {
+        if (particle->space == PARTICLE_ALIGN_WORLD) {
+            /* A free model points its Z axis along the direction it was attached with (else its travel), its X axis
+             * level, and turns by its rotation on top, a quarter turn pitched up. */
+            Particle_MatrixFromEulerXYZ(orientation, particle->rot.x + RW_PI_F6 / 2, particle->rot.y, particle->rot.z);
+            if ((attachedDirection.x == 0.0f) && (attachedDirection.y == 0.0f) && (attachedDirection.z == 0.0f)) {
                 axisZ = particle->direction;
             } else {
-                axisZ = heading;
+                axisZ = attachedDirection;
             }
             Particle_NormalizeVec3(&axisZ.x);
             up.x = 0;
@@ -311,7 +309,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             basis[8] = axisZ.x;
             basis[9] = axisZ.y;
             basis[10] = axisZ.z;
-            Rsp_MultiplyAffineMatrices(local, rotation, basis);
+            Rsp_MultiplyAffineMatrices(local, orientation, basis);
         } else {
             Particle_MatrixFromEulerXYZ(local, particle->rot.x, particle->rot.y + RW_PI_F6, particle->rot.z);
         }
@@ -319,6 +317,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     } else if ((particle->rot.x == 0.0f) && (particle->rot.y == 0.0f)) {
         BuildRollMatrix(local, particle->rot.z);
     } else {
+        /* A sprite rolls by rot.z and slides by -rot.x, -rot.y in its own plane (the ROM reads the model again here,
+         * though only sprites get this far). */
         BuildRollMatrix(local, particle->rot.z);
         model = particle->desc->renderModel;
         tiltX = 0.0f;
@@ -336,61 +336,62 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         TranslateMatrixLocal(local, 0.0f, lift, 0.0f);
         TranslateMatrix(local, 0.0f, -lift, 0.0f);
     }
-    particle->flags &= ~0x800000;
+    particle->flags &= ~PARTICLE_FLAG_ON_GROUND;
     switch (particle->space) {
-    case -8:
-        position.x += particle->direction.x * 5.12f;
-        position.y += particle->direction.y * 5.12f;
-        position.z += particle->direction.z * 5.12f;
+    case PARTICLE_ALIGN_TRAVEL:
+        position.x += particle->direction.x * PARTICLE_SURFACE_GAP;
+        position.y += particle->direction.y * PARTICLE_SURFACE_GAP;
+        position.z += particle->direction.z * PARTICLE_SURFACE_GAP;
         break;
-    case -5:
+    case PARTICLE_ALIGN_FLAT:
         if (desc->wallBehavior != 0) {
-            position.y = RW_MAX_GT(position.y, Anim_GetPolygonHeight(0, position.x, position.z) + 5.12f);
+            position.y = RW_MAX_GT(position.y, Anim_GetPolygonHeight(0, position.x, position.z) + PARTICLE_SURFACE_GAP);
         }
         break;
-    case -3:
-        ground = Anim_GetPolygonHeight(0, position.x, position.z);
-        if (desc->flags & 0x400) {
-            if (position.y < ground + 1.024f) {
-                position.y = ground;
-                particle->flags |= 0x800000;
+    case PARTICLE_ALIGN_FLOOR:
+        floorHeight = Anim_GetPolygonHeight(0, position.x, position.z);
+        if (desc->flags & PARTICLE_EFFECT_SETTLES) {
+            if (position.y < floorHeight + PARTICLE_LANDING_HEIGHT) {
+                position.y = floorHeight;
+                particle->flags |= PARTICLE_FLAG_ON_GROUND;
             }
         } else {
-            rest = ground + 5.12f;
-            position.y = (position.y <= rest) ? rest : position.y;
+            resting = floorHeight + PARTICLE_SURFACE_GAP;
+            position.y = (position.y <= resting) ? resting : position.y;
         }
         break;
-    case -2:
+    case PARTICLE_ALIGN_CEILING:
         if (desc->wallBehavior != 0) {
-            position.y = RW_MIN_LT(position.y, Nav_GetTrianglePlaneHeight(0, position.x, position.z) - 5.12f);
+            position.y = RW_MIN_LT(position.y, Nav_GetTrianglePlaneHeight(0, position.x, position.z) - PARTICLE_SURFACE_GAP);
         }
         break;
-    case -6:
-    case -4:
-    case -1:
+    case PARTICLE_ALIGN_BILLBOARD_UPRIGHT:
+    case PARTICLE_ALIGN_BILLBOARD:
+    case PARTICLE_ALIGN_BILLBOARD_ALT:
         position.y += lift;
         break;
-    case -7:
-    case 0:
-    case 1:
-    case 2:
+    case PARTICLE_ALIGN_WORLD:
+    case PARTICLE_ALIGN_EDGE_0:
+    case PARTICLE_ALIGN_EDGE_1:
+    case PARTICLE_ALIGN_EDGE_2:
         break;
     }
-    Particle_LimitVectorLength(&position.x, 20000.0f);
-    if ((desc->flags & 0x80000) && (desc->playback == 1)) {
+    Particle_LimitVectorLength(&position.x, PARTICLE_MAX_DISTANCE);
+    if ((desc->flags & PARTICLE_EFFECT_OPACITY_SIZE) && (desc->playback == 1)) {
         scale = scale * ((f32)particle->opacity / 255.0f);
     }
     if (particle->desc->renderModel != 0) {
         type = particle->inst.type;
-        extent = scale * particle->size.z * (35.0f / 1024.0f);
+        unit = scale * particle->size.z * PARTICLE_MODEL_SCALE;
+        /* These models are built inside out (0x40B is tested twice in the ROM). */
         if ((type == 0x40B) || (type == 0x40F) || (type == 0x41E) || (type == 0x40B) || (type == 0x436)) {
             ScaleMatrixLocal(local, -1.0f, -1.0f, -1.0f);
         }
-        ScaleMatrixLocal(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
+        ScaleMatrixLocal(local, particle->size.x * unit, particle->size.y * unit, unit * PARTICLE_DEPTH_STRETCH);
         SwapMatrixUpForward(local);
     } else {
-        extent = scale * particle->size.z;
-        ScaleMatrixLocal(local, particle->size.x * extent, particle->size.y * extent, extent * 10.24f);
+        unit = scale * particle->size.z;
+        ScaleMatrixLocal(local, particle->size.x * unit, particle->size.y * unit, unit * PARTICLE_DEPTH_STRETCH);
     }
     parent = Particle_ParentTransform(particle, camera);
     if (parent != 0) {
@@ -399,18 +400,20 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         CopyMatrix(world, local);
     }
     TranslateMatrix(world, position.x, position.y, position.z);
-    if ((particle->flags & 0x20000) && (shake = particle->quiver) != 0) {
-        jolt = (f32)shake * (1.0f / 127.0f);
-        joltSq = jolt * jolt;
-        angle = joltSq * (RW_PI_F6 * 5 / 180);
-        Particle_BuildTranslationMatrix(shakeMtx, 0.0f, 0.0f, -66.56f);
-        wobble = Math_Sinf(joltSq * (6 * RW_PI_F6)) * 0.25f;
-        YawMatrix(shakeMtx, angle * wobble);
-        PitchMatrix(shakeMtx, angle * Math_Sinf(joltSq * (14 * RW_PI_F6)));
-        TranslateMatrix(shakeMtx, 0.0f, 0.0f, 66.56f);
-        Rsp_MultiplyAffineMatrices(rotation, shakeMtx, world);
-        Particle_ClampMatrixToFixedRange(rotation);
-        final = rotation;
+    /* A stuck particle quivers about a pivot behind it: a swing about Y three times and about X seven times over the
+     * decay of its strength, both shrinking with its square. */
+    if ((particle->flags & PARTICLE_FLAG_STUCK) && (quiver = particle->quiver) != 0) {
+        strength = (f32)quiver * (1.0f / PARTICLE_QUIVER_STRENGTH_MAX);
+        strengthSq = strength * strength;
+        swing = strengthSq * PARTICLE_QUIVER_SWING;
+        Particle_BuildTranslationMatrix(quivering, 0.0f, 0.0f, -PARTICLE_QUIVER_PIVOT);
+        yawWave = Math_Sinf(strengthSq * (6 * RW_PI_F6)) * 0.25f;
+        YawMatrix(quivering, swing * yawWave);
+        PitchMatrix(quivering, swing * Math_Sinf(strengthSq * (14 * RW_PI_F6)));
+        TranslateMatrix(quivering, 0.0f, 0.0f, PARTICLE_QUIVER_PIVOT);
+        Rsp_MultiplyAffineMatrices(orientation, quivering, world);
+        Particle_ClampMatrixToFixedRange(orientation);
+        final = orientation;
     } else {
         Particle_ClampMatrixToFixedRange(world);
         final = world;
