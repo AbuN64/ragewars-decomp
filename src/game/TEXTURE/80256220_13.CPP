@@ -29,7 +29,6 @@ extern s32 D_002571F0;
 
 extern s32 D_80107928;
 
-extern s32 D_80107DF0;
 
 extern void *D_80107E20[];
 
@@ -85,12 +84,12 @@ void func_80256C90_de(void) {
 }
 
 s32 *func_80256E6C_de(s32 **arg0) {
-    if ((((struct ObjectLinksC *) ((s8 *) (&D_80107DF0)))->unk_0) == 0) {
-        (((struct ObjectLinksC *) ((s8 *) (&D_80107DF0)))->unk_8) = &D_80107928;
-        (((struct ObjectLinksC *) ((s8 *) (&D_80107DF0)))->unk_4) = 0;
-        (((struct ObjectLinksC *) ((s8 *) (&D_80107DF0)))->unk_0) = 1U;
+    if (D_80107DF0.initialized == 0) {
+        D_80107DF0.firstFree = (struct Window *)&D_80107928;
+        D_80107DF0.firstUsed = 0;
+        D_80107DF0.initialized = 1U;
     }
-    *arg0 = &D_80107DF0;
+    *arg0 = (s32 *)&D_80107DF0;
     return &D_002571F0;
 }
 

@@ -423,7 +423,6 @@ extern char D_800CBCC0;
 
 extern s32 D_800FEB6C[][100];
 
-extern s32 D_80107DF0;
 
 extern char D_800D39D4[];
 
@@ -2470,7 +2469,6 @@ extern const f64 D_800C76F0_de;
 
 extern char D_800D3868[];
 
-extern Window *D_80107DF8;
 
 extern char D_800D3984[];
 

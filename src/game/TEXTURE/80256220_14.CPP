@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "COMMON/CARTRIDGEREADWORKER.H"
+#include "TEXTURE/80256220.H"
 #include "COMMON/EXTERNS_18.H"
 #include "TYPES.H"
 #include "sdk/libgultra/part_800C7F20/code_802B7520.h"
@@ -35,7 +36,6 @@ extern s32 func_802B0340_de(s32, s32, void *, s32, s32);
 
 
 
-extern Window *D_80107DF8;
 
 extern char D_801011B8;
 
@@ -122,7 +122,7 @@ u32 func_802571F0_de(s32 offset, s32 length) {
     after = 0;
     address = offset + D_801076A0;
     end = address + length;
-    for (window = D_80107DF4[0]; window != 0; window = window->next) {
+    for (window = D_80107DF0.firstUsed; window != 0; window = window->next) {
         top = window->base + 0x300;
         word = window->base;
         if (address < word) {
@@ -134,7 +134,7 @@ u32 func_802571F0_de(s32 offset, s32 length) {
             return func_802BBBC0_de(window->buffer + address - window->base);
         }
     }
-    pool = &D_80107DF8;
+    pool = &D_80107DF0.firstFree;
     window = *pool;
     *pool = window->next;
     func_802B2450_de((ListLink *)window);

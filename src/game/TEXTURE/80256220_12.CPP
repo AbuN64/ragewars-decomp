@@ -59,7 +59,6 @@ func_8023B9B0_de
 
 #include "COMMON/AUDIO_INITIALIZE.H"
 #include "COMMON/ALAUXBUS_S.H"
-extern ObjectLinksC D_80107DF0;
 extern u32 D_80107E98, D_80107E9C;
 extern s32 D_80107DFC;
 extern ALHeap *D_80107EA0;
@@ -84,7 +83,7 @@ void func_802BB750_de(void *);
 void Texture_InitializeAudioWorker(ALSynConfig *config, s32 priority, AudioInitializeTiming *timing) {
     u32 i;
     f32 samplesPerFrame;
-    D_80107DF0.unk_0 = 0;
+    D_80107DF0.initialized = 0;
     config->dmaproc = (void *)&D_00256E6C;
     config->outputRate = func_802B72E0_de(timing->frequency);
     samplesPerFrame = (f32)timing->frameTime * config->outputRate * (1.0f / 60.0f);
