@@ -364,15 +364,15 @@ typedef struct LitModelAllocation {
     u32 guard;
 } LitModelAllocation;
 
-static inline u8 clampLitChannel(u8 value) {
-    return (u8)(value < 0xE1 ? value : 0xE1) > 0x1E
-        ? (value < 0xE1 ? value : 0xE1) : 0x1E;
+#define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
+#define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
+static inline void clampLitColor(u8 *dest, LitVertex *vertex) {
+    dest[0] = MAX((u8)MIN(vertex->color[0], 0xE1), 0x1E);
+    dest[1] = MAX((u8)MIN(vertex->color[1], 0xE1), 0x1E);
+    dest[2] = MAX((u8)MIN(vertex->color[2], 0xE1), 0x1E);
 }
 
-/* NON_MATCHING: 72 aligned edits / 244 ROM words; remaining: model/count (s0/s1) and copiedModel/world (s3/s4) priorities,
- * header offsets re-read after the header stores in the ROM.
- * The query return selects the color trailer; the output count selects the light list.
- * The allocator takes the byte count before the flags. */
+/* NON_MATCHING: 11 aligned edits / 244 ROM words; remaining: the ROM re-reads header->modelOffset/colorsOffset after the header stores (not forwarded), and the trailer copies colors into its loop pointer after the count test. */
 s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, void *matrices, s32 skinned, void *wanted) {
     void *lights[0x40];
     s32 lightCount;
@@ -408,6 +408,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         header->colorsOffset = modelBytes + 0x10;
         copiedModel = *allocation + header->modelOffset;
         colors = *allocation + header->colorsOffset;
+        func_802BD3A0_de(copiedModel, model, modelBytes);
     } else {
         allocation = Scene_AllocateResource(0, modelBytes + 8, 0, D_800C4B1C_de);
         if (allocation == 0) {
@@ -415,8 +416,8 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         }
         *(s32 *)*allocation = 0;
         copiedModel = *allocation + 8;
+        func_802BD3A0_de(copiedModel, model, modelBytes);
     }
-    func_802BD3A0_de(copiedModel, model, modelBytes);
     table = Render_GetPackSection(modelResource, 1);
     if (*(s32 *)(table + 4) != 0) {
         s32 *packed = (s32 *)(table + 8);
@@ -454,9 +455,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         for (trailerIndex = 0; trailerIndex < vertexCount; trailerIndex++) {
             u8 *dest = color;
             color += 4;
-            dest[0] = clampLitChannel(vertices[trailerIndex].color[0]);
-            dest[1] = clampLitChannel(vertices[trailerIndex].color[1]);
-            dest[2] = clampLitChannel(vertices[trailerIndex].color[2]);
+            clampLitColor(dest, &vertices[trailerIndex]);
         }
     }
     return (s32)allocation;
