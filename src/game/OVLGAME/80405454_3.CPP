@@ -206,142 +206,109 @@ s32 func_804058A0_de(void) {
     return D_800E2850;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
+#include "stddef.h"
 #include "COMMON/EFFECTRENDER.H"
-#include "COMMON/UNUSED.H"
 #include "COMMON/EXTERNS_12.H"
 #include "COMMON/SESSIONHANDLERROW.H"
-#include "COMMON/WORLDSORTENTRY.H"
 #include "COMMON/TRIPLE.H"
-
-void func_80253838_de(s32, void *);
-u32 func_80265350_de(void);
-void *func_80253530_de(s32, s32, u32, void *);
-
-extern u8 D_800DCD1C[];
-extern u8 D_800DCD0C[];
-extern u8 D_800DCD3C[];
-extern u8 D_800DCD54[];
-extern s32 D_800DCD4C;
-extern u8 D_800DCD00_de[];
 #include "COMMON/DISPLAY.H"
-
-/* 32/254 aligned edits; remaining: command-buffer setup register allocation and empty-loop scheduling. */
+#include "COMMON/SHAREDPLAYER.H"
+typedef struct Shape_typemap_165 Handle;
+extern void func_80253838_de(void *heap, Handle *handle);
+extern u32 func_80265350_de(void);
+extern Handle *func_80253530_de(void *heap, u32 address, u32 size, char *name);
+extern char D_800DCD00_de[9];  /* "Z-Buffer" */
+extern char D_800DCD0C[15];    /* "Display Buffer" */
+extern char D_800DCD1C[31];    /* "color frame buffers + z buffer" */
+extern char D_800DCD3C[14];    /* "display lists" */
+extern char D_800DCD4C[5];     /* "fifo" */
+extern char D_800DCD54[11];    /* "audio heap" */
+/* Rebuilds the render buffers held by the record: releases every handle it holds and clears it, then
+   claims the frame buffers at the top of RDRAM (three 0x54600-byte buffers below the 1 MB z-buffer when
+   the expansion pak gives 6 MB or more; otherwise the count in D_800DE850 plus one 0x1ECC0-byte buffer,
+   the extra one holding the z-buffer, below 4 MB), clears them, allocates the display lists, the RSP fifo
+   and the audio heap, publishes their addresses in the render globals and marks the record ready. */
 int Ovlgame_AllocateRenderBuffers(struct RecordRecAt1C *record) {
-    void **handleSlot;
-    void **clearSlot;
-    s32 clearIndex;
-    u32 ramSize;
-    s32 *depthHandle;
-    s32 *combinedHandle;
-    u32 colorCount;
-    s32 *colorHandle;
-    s32 releasedCount;
-    u32 graphicsCount;
-    s32 overlayCount;
-    u32 finalCount;
-    Gfx *commands;
-    s32 vertexMemory;
+    u32 megabyte = 0x100000;
     u32 bufferBytes;
     u32 memoryEnd;
-    u32 megabyte = 0x100000;
-    u32 frameCount;
+    Handle *zBuffer;
+    Handle *frameBuffers;
+    Handle *buffers;
     u32 i;
+    s32 j;
+    s32 k;
 
-    if (((void **)record)[1] != 0) {
-        func_80253838_de(0, ((void **)record)[1]);
+    if (record->displayLists != NULL) {
+        func_80253838_de(NULL, record->displayLists);
     }
-    if (((void **)record)[2] != 0) {
-        func_80253838_de(0, ((void **)record)[2]);
+    if (record->fifo != NULL) {
+        func_80253838_de(NULL, record->fifo);
     }
-    if (((void **)record)[6] != 0) {
-        func_80253838_de(0, ((void **)record)[6]);
+    if (record->zBuffer != NULL) {
+        func_80253838_de(NULL, record->zBuffer);
     }
-    if (((void **)record)[7] != 0) {
-        func_80253838_de(0, ((void **)record)[7]);
+    if (record->audioHeap != NULL) {
+        func_80253838_de(NULL, record->audioHeap);
     }
-    releasedCount = 0;
-    handleSlot = ((void **)record);
-    do {
-        if (handleSlot[3] != 0) {
-            func_80253838_de(0, handleSlot[3]);
+    for (j = 0; j < 3; j++) {
+        if (record->frameBuffers[j] != NULL) {
+            func_80253838_de(NULL, record->frameBuffers[j]);
         }
-        releasedCount = releasedCount + 1;
-        handleSlot = handleSlot + 1;
-    } while (releasedCount < 3);
+    }
+    record->ready = 0;
+    record->displayLists = NULL;
+    record->fifo = NULL;
+    record->zBuffer = NULL;
+    record->audioHeap = NULL;
+    for (k = 2; k >= 0; k--) {
+        record->frameBuffers[k] = NULL;
+    }
 
-    clearIndex = 2;
-    clearSlot = ((void **)record) + 2;
-    *((void **)record) = 0;
-    ((void **)record)[1] = 0;
-    ((void **)record)[2] = 0;
-    ((void **)record)[6] = 0;
-    ((void **)record)[7] = 0;
-    do {
-        clearSlot[3] = 0;
-        clearIndex = clearIndex - 1;
-        clearSlot = clearSlot - 1;
-    } while (-1 < clearIndex);
-
-    ramSize = func_80265350_de();
-    if (ramSize >= 6 * megabyte) {
+    if (func_80265350_de() >= 6 * megabyte) {
         bufferBytes = 0x54600;
-        ramSize = func_80265350_de();
-        memoryEnd = ramSize | 0x80000000;
+        memoryEnd = func_80265350_de() | 0x80000000;
         D_800DE850 = 3;
-        depthHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - megabyte), 0x54600,
-                                         D_800DCD00_de);
-        colorHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - 2 * megabyte),
-                                         D_800DE850 * bufferBytes, D_800DCD0C);
-        Resmgr_FillMemory((void *)*colorHandle, 0, 0xfd200);
-        Resmgr_FillMemory((void *)*depthHandle, 0, 0x54600);
-        ((void **)record)[6] = depthHandle;
-        ((void **)record)[3] = colorHandle;
-        D_801536E8 = *(void **)((void **)record)[6];
-        frameCount = D_800DE850;
-        for (i = 0; i < frameCount; i++) {
-            D_8014D468_de[i] = (void *)(*colorHandle + i * bufferBytes);
+        zBuffer = func_80253530_de(NULL, memoryEnd - megabyte, 0x54600, D_800DCD00_de);
+        frameBuffers = func_80253530_de(NULL, memoryEnd - 2 * megabyte, D_800DE850 * bufferBytes,
+                                                D_800DCD0C);
+        Resmgr_FillMemory(frameBuffers->data, 0, 0xFD200);
+        Resmgr_FillMemory(zBuffer->data, 0, 0x54600);
+        record->zBuffer = zBuffer;
+        record->frameBuffers[0] = frameBuffers;
+        D_801536E8 = record->zBuffer->data;
+        for (i = 0; i < D_800DE850; i++) {
+            D_8014D468_de[i] = (u8 *)frameBuffers->data + i * bufferBytes;
         }
     } else {
-        bufferBytes = 0x1ecc0;
-        memoryEnd = 0x80400000U;
-        combinedHandle = (s32 *)func_80253530_de(0, (s32)(memoryEnd - (D_800DE850 + 1) * bufferBytes),
-                                         (D_800DE850 + 1) * bufferBytes, D_800DCD1C);
-        colorCount = D_800DE850;
-        ((void **)record)[3] = combinedHandle;
-        for (i = 0; i < colorCount; i++) {
-            D_8014D468_de[i] = (void *)(*combinedHandle + bufferBytes * i);
+        bufferBytes = 0x1ECC0;
+        memoryEnd = 0x80400000;
+        buffers = func_80253530_de(NULL, memoryEnd - (D_800DE850 + 1) * bufferBytes,
+                                           (D_800DE850 + 1) * bufferBytes, D_800DCD1C);
+        record->frameBuffers[0] = buffers;
+        for (i = 0; i < D_800DE850; i++) {
+            D_8014D468_de[i] = (u8 *)buffers->data + bufferBytes * i;
         }
-        D_801536E8 = (void *)(*combinedHandle + bufferBytes * i);
+        D_801536E8 = (u8 *)buffers->data + bufferBytes * i;
     }
-
     for (i = 0; i < D_800DE850; i++) {
         Resmgr_FillMemory(D_8014D468_de[i], 0, bufferBytes);
     }
     Resmgr_FillMemory(D_801536E8, 0, bufferBytes);
 
-    ((void **)record)[1] = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 0x10, 0x23, D_800DCD3C);
-    ((void **)record)[2] = Scene_AllocateResource(0, 0x8000, 0x23, &D_800DCD4C);
-    ((void **)record)[7] = Scene_AllocateResource(0, 0x22000, 0x23, D_800DCD54);
-    graphicsCount = D_800E28A4;
-    overlayCount = D_800DE858;
-    finalCount = D_800DE850;
-    commands = *(Gfx **)((void **)record)[1];
-    vertexMemory = *(s32 *)((void **)record)[7];
+    record->displayLists = Scene_AllocateResource(0, (D_800E28A4 + D_800DE858) * 2 * sizeof(Gfx), 0x23, D_800DCD3C);
+    record->fifo = Scene_AllocateResource(0, 0x8000, 0x23, D_800DCD4C);
+    record->audioHeap = Scene_AllocateResource(0, 0x22000, 0x23, D_800DCD54);
     D_8014D424 = 0x8000;
     D_8014D45C = 0x22000;
-    D_8014D460 = commands;
-    D_8014D42C = commands + graphicsCount;
-    D_8014D464 = commands + graphicsCount + overlayCount;
-    D_8014D430_de = commands + graphicsCount + overlayCount + graphicsCount;
-    D_8014D420_de = vertexMemory;
-    D_8014D428 = *(u64 **)((void **)record)[2];
-    for (i = 0; i < finalCount; i++) {
+    D_8014D460 = record->displayLists->data;
+    D_8014D42C = D_8014D460 + D_800E28A4;
+    D_8014D464 = D_8014D42C + D_800DE858;
+    D_8014D430_de = D_8014D464 + D_800E28A4;
+    D_8014D428 = record->fifo->data;
+    D_8014D420_de = (s32)record->audioHeap->data;
+    for (i = 0; i < D_800DE850; i++) {
     }
-    *((void **)record) = (void *)1;
+    record->ready = 1;
     return 1;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Ovlgame_AllocateRenderBuffers);
-#endif

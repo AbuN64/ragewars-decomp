@@ -10,57 +10,43 @@
    from its last entry down. */
 void Ovlgame_ClearRenderRecord(struct RecordRecAt1C *record) {
     s32 i;
-    record->a = 0;
-    record->b = 0;
-    record->c = 0;
-    record->d = 0;
-    record->e = 0;
+    record->ready = 0;
+    record->displayLists = 0;
+    record->fifo = 0;
+    record->zBuffer = 0;
+    record->audioHeap = 0;
     for (i = 2; i >= 0; i--) {
-        record->values[i] = 0;
+        record->frameBuffers[i] = 0;
     }
 }
-/* Releases object resources and clears their handles. */
-/* extern */
-void func_80405CDC_de(struct RecordRecAt1C *arg0) {
-    s32 temp_a1;
-    s32 temp_a1_2;
-    s32 temp_a1_3;
-    s32 temp_a1_4;
-    s32 temp_a1_5;
-    s32 i;
-    s32 var_v1;
-    temp_a1 = arg0->b;
-    if (temp_a1 != 0) {
-        func_80253838_de(0, temp_a1);
+/* Releases every resource handle the render buffer record holds and clears the record. */
+void func_80405CDC_de(struct RecordRecAt1C *record) {
+    s32 j;
+    s32 k;
+
+    if (record->displayLists != NULL) {
+        func_80253838_de(NULL, record->displayLists);
     }
-    temp_a1_2 = arg0->c;
-    if (temp_a1_2 != 0) {
-        func_80253838_de(0, temp_a1_2);
+    if (record->fifo != NULL) {
+        func_80253838_de(NULL, record->fifo);
     }
-    temp_a1_3 = arg0->d;
-    if (temp_a1_3 != 0) {
-        func_80253838_de(0, temp_a1_3);
+    if (record->zBuffer != NULL) {
+        func_80253838_de(NULL, record->zBuffer);
     }
-    temp_a1_4 = arg0->e;
-    if (temp_a1_4 != 0) {
-        func_80253838_de(0, temp_a1_4);
+    if (record->audioHeap != NULL) {
+        func_80253838_de(NULL, record->audioHeap);
     }
-    i = 0;
-    do {
-        temp_a1_5 = arg0->values[i];
-        if (temp_a1_5 != 0) {
-            func_80253838_de(0, temp_a1_5);
+    for (j = 0; j < 3; j++) {
+        if (record->frameBuffers[j] != NULL) {
+            func_80253838_de(NULL, record->frameBuffers[j]);
         }
-        i += 1;
-    } while (i < 3);
-    var_v1 = 2;
-    arg0->a = 0;
-    arg0->b = 0;
-    arg0->c = 0;
-    arg0->d = 0;
-    arg0->e = 0;
-    do {
-        arg0->values[var_v1] = 0;
-        var_v1 -= 1;
-    } while (var_v1 >= 0);
+    }
+    record->ready = 0;
+    record->displayLists = NULL;
+    record->fifo = NULL;
+    record->zBuffer = NULL;
+    record->audioHeap = NULL;
+    for (k = 2; k >= 0; k--) {
+        record->frameBuffers[k] = NULL;
+    }
 }
