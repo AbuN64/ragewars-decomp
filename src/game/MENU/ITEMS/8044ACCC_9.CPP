@@ -40,8 +40,8 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
     Floats *temp_v0_5;
 
     func_80238EB8_de(((void *)&((GameplayCamera *)arg0)->unk24));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unk160));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unk1E0));
+    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->viewMatrix));
+    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->viewProjection));
     zero = 0.0f;
     temp_f21 = 1.0f;
     temp_v0 = ((void *)&((GameplayCamera *)arg0)->orientation);
@@ -110,8 +110,8 @@ void func_8044A170_de(State_func_8044A170_de *arg0) {
         ((Racer *)arg0)->viewports[var_a1].vtrans[3] = 0;
     }
     func_80442544_de(((void *)&((GameplayCamera *)arg0)->messageList));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unkE54));
-    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->unkE94));
+    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->orientationMatrix));
+    func_802727D8_de(((void *)&((GameplayCamera *)arg0)->rollMatrix));
     arg0->unk544 = 0;
     arg0->unk120 = 0;
     arg0->unk124 = 0x32;

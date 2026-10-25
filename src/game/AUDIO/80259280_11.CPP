@@ -37,7 +37,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }
-    func_80272BCC_de(&listener->unk160, &offset, &local);
+    func_80272BCC_de(&listener->viewMatrix, &offset, &local);
     local.y = 0.0f;
     forward.x = forward.y = local.y;
     forward.z = (&D_800C3F00_de)[1];

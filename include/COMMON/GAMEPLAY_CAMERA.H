@@ -14,29 +14,29 @@ typedef char Shared_func_80234FDC_S5_size_check[(sizeof(Shared_func_80234FDC_S5)
 
 typedef struct Lights Lights;
 struct Lights {
-    s8 unk0; /* +0x0: src/func_80234FDC.c */
-    s8 unk1; /* +0x1: src/func_80234FDC.c */
-    s8 unk2; /* +0x2: src/func_80234FDC.c */
-    s8 unk3; /* +0x3: src/func_80234FDC.c */
-    s8 unk4; /* +0x4: src/func_80234FDC.c */
-    s8 unk5; /* +0x5: src/func_80234FDC.c */
-    s8 unk6; /* +0x6: src/func_80234FDC.c */
-    s8 unk7; /* +0x7: src/func_80234FDC.c */
-    s8 unk8; /* +0x8: src/func_80234FDC.c */
-    s8 unk9; /* +0x9: src/func_80234FDC.c */
-    s8 unkA; /* +0xA: src/func_80234FDC.c */
+    s8 light0R; /* +0x0: src/func_80234FDC.c */
+    s8 light0G; /* +0x1: src/func_80234FDC.c */
+    s8 light0B; /* +0x2: src/func_80234FDC.c */
+    s8 light0PadA; /* +0x3: src/func_80234FDC.c */
+    s8 light0CopyR; /* +0x4: src/func_80234FDC.c */
+    s8 light0CopyG; /* +0x5: src/func_80234FDC.c */
+    s8 light0CopyB; /* +0x6: src/func_80234FDC.c */
+    s8 light0PadB; /* +0x7: src/func_80234FDC.c */
+    s8 light0DirX; /* +0x8: src/func_80234FDC.c */
+    s8 light0DirY; /* +0x9: src/func_80234FDC.c */
+    s8 light0DirZ; /* +0xA: src/func_80234FDC.c */
     char padB[0x5];
-    s8 unk10; /* +0x10: src/func_80234FDC.c */
-    u8 unk11; /* +0x11: src/func_80234FDC.c */
-    s8 unk12; /* +0x12: src/func_80234FDC.c */
-    s8 unk13; /* +0x13: src/func_80234FDC.c */
-    s8 unk14; /* +0x14: src/func_80234FDC.c */
-    u8 unk15; /* +0x15: src/func_80234FDC.c */
-    s8 unk16; /* +0x16: src/func_80234FDC.c */
-    s8 unk17; /* +0x17: src/func_80234FDC.c */
-    s8 unk18; /* +0x18: src/func_80234FDC.c */
-    s8 unk19; /* +0x19: src/func_80234FDC.c */
-    s8 unk1A; /* +0x1A: src/func_80234FDC.c */
+    s8 light1R; /* +0x10: src/func_80234FDC.c */
+    u8 light1G; /* +0x11: src/func_80234FDC.c */
+    s8 light1B; /* +0x12: src/func_80234FDC.c */
+    s8 light1PadA; /* +0x13: src/func_80234FDC.c */
+    s8 light1CopyR; /* +0x14: src/func_80234FDC.c */
+    u8 light1CopyG; /* +0x15: src/func_80234FDC.c */
+    s8 light1CopyB; /* +0x16: src/func_80234FDC.c */
+    s8 light1PadB; /* +0x17: src/func_80234FDC.c */
+    s8 light1DirX; /* +0x18: src/func_80234FDC.c */
+    s8 light1DirY; /* +0x19: src/func_80234FDC.c */
+    s8 light1DirZ; /* +0x1A: src/func_80234FDC.c */
     char pad1B[0x5];
 };
 typedef char Shared_func_80234FDC_S6_size_check[(sizeof(Lights) == 0x20) ? 1 : -1];
@@ -81,7 +81,7 @@ struct GameplayCamera {
     f32 zoomBlend; /* +0x5C: src/func_80234FDC.c */
     f32 zoomFov; /* +0x60: src/func_80234FDC.c */
     s32 floorSurface; /* +0x64: src/func_80234FDC.c */
-    u16 unk68; /* +0x68: src/func_80234FDC.c */
+    u16 perspNorm; /* +0x68: src/func_80234FDC.c */
     char pad6A[0x2];
     f32 fovY; /* +0x6C: vertical field of view in degrees, the angle the projection is built with */
     f32 aspect; /* +0x70: projection aspect ratio (width over height) */
@@ -113,11 +113,11 @@ struct GameplayCamera {
     CQuatern orientation;
     f32 unk150; /* +0x150: src/func_80234FDC.c */
     char pad154[0xC];
-    s8 unk160; /* +0x160: src/func_80234FDC.c */
+    s8 viewMatrix; /* +0x160: src/func_80234FDC.c */
     char pad161[0x3F];
     f32 unk1A0; /* +0x1A0: src/func_80234FDC.c */
     char pad1A4[0x3C];
-    s8 unk1E0; /* +0x1E0: src/func_80234FDC.c */
+    s8 viewProjection; /* +0x1E0: src/func_80234FDC.c */
     char pad1E1[0x3F];
     f32 unk220; /* +0x220: src/func_80234FDC.c */
     char pad224[0x3C];
@@ -130,11 +130,11 @@ struct GameplayCamera {
     CQuatern clipPlanes[6];
     CVector3 clipBounds[2];
     CVector3 volumeBounds[2];
-    char unk380[2][64]; /* +0x380: double-buffered projection matrices */
+    char projection[2][64]; /* +0x380: double-buffered projection matrices */
     Lights lights[2]; /* +0x400: double-buffered lights */
-    u16 unk440; /* +0x440: src/func_80234FDC.c */
+    u16 hudPerspNorm; /* +0x440: src/func_80234FDC.c */
     char pad442[0x6];
-    char unk448[3][64]; /* +0x448: src/func_80234FDC.c */
+    char hudProjection[3][64]; /* +0x448: src/func_80234FDC.c */
     char pad508[0x20];
     f32 farPlane; /* +0x528: src/func_80234FDC.c */
     f32 unk52C;
@@ -150,12 +150,12 @@ struct GameplayCamera {
     u8 pad552[2];
     MessageList messageList; /* 0x554 */
     u8 pad56C[4];
-    s8 unk570; /* +0x570: src/func_80234FDC.c */
+    s8 sceneEffects; /* +0x570: src/func_80234FDC.c */
     char pad571[0xE40 - 0x571];
     IntrusiveList objects;
-    f32 unkE54; /* +0xE54: src/func_80234FDC.c */
+    f32 orientationMatrix; /* +0xE54: src/func_80234FDC.c */
     char padE58[0x3C];
-    s8 unkE94; /* +0xE94: src/func_80234FDC.c */
+    s8 rollMatrix; /* +0xE94: src/func_80234FDC.c */
     char padE95[0x3];
 };
 typedef char Shared_func_80234FDC_S2_size_check[(sizeof(GameplayCamera) == 0xE98) ? 1 : -1];

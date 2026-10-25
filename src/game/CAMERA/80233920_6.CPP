@@ -157,7 +157,7 @@ actor_found:
         func_802337D0_de(camera->unkCC);
         func_802337D0_de(camera->unkE0);
     }
-    var_s1 = &camera->unk160;
+    var_s1 = &camera->viewMatrix;
     func_802732D0_de(var_s1, &camera->position.x);
     func_8026EF58_de(&camera->unk1A0, (f32 *) var_s1);
     func_802736D4_de(spA8, 3.1415927f);
@@ -249,13 +249,13 @@ actor_found:
             camera->farPlane = (f32) temp_f5;
         }
     }
-    func_802B6F9C_de(right, &camera->unk68, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (temp_f24 * 0.95f));
+    func_802B6F9C_de(right, &camera->perspNorm, fovy, aspect, 16.0f, camera->farPlane, 1.0f - (temp_f24 * 0.95f));
     func_80272CB0_de(sp1A8, -1.0f, 1.0f, 1.0f);
     func_8026F898_de(sp68, sp128, (f32 *) right);
-    temp_s0 = &camera->unk1E0;
+    temp_s0 = &camera->viewProjection;
     func_8026F898_de((f32 *) temp_s0, sp68, sp1A8);
     func_80272828_de((f32 *) temp_s0);
-    func_8026FC9C_de((f32 *) temp_s0, camera->unk380[D_800D297C]);
+    func_8026FC9C_de((f32 *) temp_s0, camera->projection[D_800D297C]);
     func_8027302C(matrix, sp128);
     state = &D_80140FF8.state;
     if (state->unk0 == 4) {
@@ -267,61 +267,61 @@ actor_found:
     if (!(var_f0_2 <= 127.0f)) {
         var_f0_2 = 127.0f;
     }
-    temp_s4->unk8 = (s8) (s32) var_f0_2;
+    temp_s4->light0DirX = (s8) (s32) var_f0_2;
     var_f0_3 = matrix[4] * 128.0f;
     if (!(var_f0_3 <= 127.0f)) {
         var_f0_3 = 127.0f;
     }
-    temp_s4->unk9 = (s8) (s32) var_f0_3;
+    temp_s4->light0DirY = (s8) (s32) var_f0_3;
     var_f0_4 = matrix[8] * 128.0f;
     if (!(var_f0_4 <= 127.0f)) {
         var_f0_4 = 127.0f;
     }
-    temp_s4->unkA = (s8) (s32) var_f0_4;
+    temp_s4->light0DirZ = (s8) (s32) var_f0_4;
     var_f0_5 = matrix[1] * 128.0f;
     if (!(var_f0_5 <= 127.0f)) {
         var_f0_5 = 127.0f;
     }
-    temp_s4->unk18 = (s8) (s32) var_f0_5;
+    temp_s4->light1DirX = (s8) (s32) var_f0_5;
     var_f0_6 = matrix[5] * 128.0f;
     if (!(var_f0_6 <= 127.0f)) {
         var_f0_6 = 127.0f;
     }
-    temp_s4->unk19 = (s8) (s32) var_f0_6;
+    temp_s4->light1DirY = (s8) (s32) var_f0_6;
     var_f0_7 = matrix[9] * 128.0f;
     if (!(var_f0_7 <= 127.0f)) {
         var_f0_7 = 127.0f;
     }
-    temp_s4->unk1A = (s8) (s32) var_f0_7;
-    temp_s4->unk0 = 0;
-    temp_s4->unk1 = 0;
-    temp_s4->unk2 = 0;
-    temp_s4->unk3 = 0;
-    temp_s4->unk4 = 0;
-    temp_s4->unk5 = 0;
-    temp_s4->unk6 = 0;
-    temp_s4->unk7 = 0;
-    temp_s4->unk10 = 0;
-    temp_s4->unk11 = 0x80;
-    temp_s4->unk12 = 0;
-    temp_s4->unk13 = 0;
-    temp_s4->unk14 = 0;
-    temp_s4->unk15 = 0x80;
-    temp_s4->unk16 = 0;
-    temp_s4->unk17 = 0;
+    temp_s4->light1DirZ = (s8) (s32) var_f0_7;
+    temp_s4->light0R = 0;
+    temp_s4->light0G = 0;
+    temp_s4->light0B = 0;
+    temp_s4->light0PadA = 0;
+    temp_s4->light0CopyR = 0;
+    temp_s4->light0CopyG = 0;
+    temp_s4->light0CopyB = 0;
+    temp_s4->light0PadB = 0;
+    temp_s4->light1R = 0;
+    temp_s4->light1G = 0x80;
+    temp_s4->light1B = 0;
+    temp_s4->light1PadA = 0;
+    temp_s4->light1CopyR = 0;
+    temp_s4->light1CopyG = 0x80;
+    temp_s4->light1CopyB = 0;
+    temp_s4->light1PadB = 0;
     func_80234DE0_de(camera);
-    MatrixFromQuaternion(&camera->unk150, &camera->unkE54);
-    func_802736D4_de(&camera->unkE94, camera->roll);
+    MatrixFromQuaternion(&camera->unk150, &camera->orientationMatrix);
+    func_802736D4_de(&camera->rollMatrix, camera->roll);
     if (D_80140FF8.unk8 != 0) {
-        func_802B6F9C_de(right, &camera->unk440, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
+        func_802B6F9C_de(right, &camera->hudPerspNorm, 47.5f, (f32) ((s32) D_800E28D0 / D_800E28D4), 16.0f, 7168.0f, 1.0f);
         func_802727D8_de(sp128);
         func_8026F898_de(sp68, sp128, (f32 *) right);
         func_80272CB0_de(sp1A8, -1.0f, 1.0f, 1.0f);
         func_8026F898_de(sp228, sp68, sp1A8);
         func_80272828_de(sp228);
-        func_8026FC9C_de(sp228, camera->unk448[D_800D297C]);
+        func_8026FC9C_de(sp228, camera->hudProjection[D_800D297C]);
     }
-    Sched_UpdateSceneEffects(&camera->unk570, camera);
+    Sched_UpdateSceneEffects(&camera->sceneEffects, camera);
     Pak_UpdateDialogList(&camera->messageList);
     if (Camera_IsSequenceInWindow() != 0) {
         camera->floorPoly = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);
