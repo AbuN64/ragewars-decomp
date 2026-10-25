@@ -21,13 +21,10 @@
 #include "sdk/OSINT/802C0CB0.H"
 #include "sdk/os.h"
 
-extern u32 D_800CB700_de;
 
 extern u32 D_800CB710;
 
-extern s32 D_002571F0;
 
-extern s32 D_80107928;
 
 
 extern void *D_80107E20[];

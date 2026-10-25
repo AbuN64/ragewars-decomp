@@ -24,7 +24,6 @@ extern Gfx *g_displayListCursor;
 
 extern void *D_800E32D8;
 
-extern s32 D_800E32E4;
 
 static inline void sync(void) {
     Gfx *cmd;

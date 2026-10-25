@@ -169,7 +169,6 @@ void func_8023C924_de(void) {
 
 #include "SCHED/RESOURCE_PAGE_WORKER.H"
 extern char D_801011B8;
-extern char D_8014E000;
 extern void func_8025637C_de(void *worker, u8 *source, s32 size, void *buffer);
 extern void func_802BCF70_de(void *addr, s32 size);
 extern void func_802BD010_de(void *addr, s32 size);

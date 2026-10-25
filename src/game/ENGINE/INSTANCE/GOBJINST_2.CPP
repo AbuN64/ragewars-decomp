@@ -13,9 +13,6 @@ extern s32 Render_LocatePackSection(s32, s32, s32, s32 *);
 extern void func_8026EE20_de(void *, s32, void *);
 extern void func_80262480_de(void *);
 extern s32 func_80246A08_de(void *, s32, s32);
-extern char D_800C389C_de;
-extern char D_800C38B0_de;
-extern char D_800C38C4_de;
 
 
 

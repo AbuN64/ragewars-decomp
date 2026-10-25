@@ -49,7 +49,6 @@ static inline s32 is_held(char *obj) {
 
 
 
-extern char D_80131600;
 
 extern char D_8013B364;
 

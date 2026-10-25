@@ -11,7 +11,6 @@
 
 
 
-extern s32 D_800DF280;
 
 extern s32 D_800E32E4;
 

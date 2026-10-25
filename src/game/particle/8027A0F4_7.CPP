@@ -7,8 +7,6 @@
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
 
-extern char D_801379C0;
-extern char D_8013B1A8;
 
 extern void func_80279A00_de(void *arg0);
 extern void Particle_UpdateMatrix(void *);

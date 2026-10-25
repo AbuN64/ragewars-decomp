@@ -39,7 +39,6 @@ extern f32 Menu_EvaluateTrackScalar(f32 arg0);
 /** Clear the word at offset 0x100 in the active object. */
 
 
-extern s32 D_800E28D0;
 
 
 extern void Resmgr_CopyString(void *arg0, int arg1);

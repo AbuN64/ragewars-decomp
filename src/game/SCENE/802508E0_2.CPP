@@ -81,7 +81,6 @@ extern s32 D_002524B0;
 extern s32 D_800CD8BC;
 extern s32 D_801008F8;
 extern int D_800CB6E0;
-extern int D_8010515C;
 extern Manager D_801047E0;
 extern struct ResMgr D_80100560;
 
@@ -156,7 +155,6 @@ void Scene_InitializeResourceCache(s32 unused, s32 count) {
 
 extern s32 D_80101134[];
 
-extern s32 D_80101160;
 
 extern u32 __osDisableInt(void);
 

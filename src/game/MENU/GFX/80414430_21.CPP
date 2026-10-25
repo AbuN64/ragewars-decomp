@@ -8,13 +8,10 @@
 
 extern Gfx *g_displayListCursor;
 
-extern s32 D_800DF290;
 
 extern s32 D_800E32E4;
 
-extern s32 D_800DF274;
 
-extern s32 D_800DF280;
 
 
 
@@ -43,9 +40,9 @@ static inline void emit(unsigned int w0, unsigned int w1) {
     _GBI_CMD(cmd, w0, w1);
 }
 
-extern int D_800DF250, D_800DF270, D_800DF274, D_800DF278, D_800E32CC;
+extern int D_800DF250, D_800DF270, D_800DF278, D_800E32CC;
 
-extern int D_800DF280, D_800DF284, D_800E32D8, D_800DF28C, D_800DF290;
+extern int D_800DF284, D_800E32D8, D_800DF28C;
 
 static inline void beginFrame(void) {
     Gfx *g;

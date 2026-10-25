@@ -13,7 +13,6 @@
 s32 System_GetMemorySize(); /* extern */
                                  /* extern */
 void Frontend_SetVideoModeAndViewports(s32, s32, s32, s32, s32, s32); /* extern */
-extern s32 D_80000300;
 extern s32 D_800CC374;
 extern s32 D_800E28D0;
 extern s32 D_800E28D8;

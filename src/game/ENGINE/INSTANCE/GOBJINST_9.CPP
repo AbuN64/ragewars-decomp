@@ -16,8 +16,6 @@
  * is projected along it onto a plane just below the object (0.9 of its height up to 512), grown by 0.003
  * per unit of height, turned by the object's orientation and placed on the ground; the shadow is then
  * submitted through func_8024BA7C_de. */
-extern char D_8011FFB0;
-extern char D_8013B1A8;
 extern s32 D_800D297C;
 extern s32 func_8024E158_de(void *);
 extern f32 func_8024E650_de(char *, s32);

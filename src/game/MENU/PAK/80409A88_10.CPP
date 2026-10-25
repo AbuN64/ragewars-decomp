@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/ITEMRECAT24.H"
 #include "stddef.h"
@@ -60,7 +61,6 @@ s32 func_8040A83C_us(struct Field *arg0) {
 #if defined(VERSION_US_REV1) || defined(NON_MATCHING)
 /* D_8014D490 is read through a struct view so the compiler keeps the load behind the preceding store. */
 typedef struct { s8 value; } PakModeByte;
-extern s32 D_80153774;
 extern char *D_800D2484, *D_800D37D0;
 extern char *D_800D26A4, *D_800D26A8, *D_800D26BC, *D_800D26C4, *D_800D26C8;
 /* Select the pak status label and right-align its eleven characters. */

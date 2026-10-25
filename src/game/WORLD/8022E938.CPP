@@ -27,15 +27,12 @@ extern s32 func_8024E62C_de(void *arg0);
 
 extern void Weapons_SetPlayerState(void *, void *, s32);
 
-extern s32 D_800C9FE4;
 
-extern s32 D_800CD6E0_de;
 
 extern func_8022ECBC_S1 *D_800FE9F0;
 
 extern void Ovlgame_UpdateRunEndPlayer(void *);
 
-extern s32 D_80102A48;
 
 extern s32 D_800CED30;
 

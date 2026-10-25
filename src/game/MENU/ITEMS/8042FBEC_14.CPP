@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/ITEMRECAT20V1.H"
 
 #if defined(VERSION_EU)
 #include "TYPES.H"
@@ -13,7 +14,6 @@ s32 func_8043E9D0_eu(void *unused, MenuRules *rules) {
 
 #if defined(VERSION_EU)
 #ifdef NON_MATCHING
-extern int D_80145070;
 extern char D_8011FAC0[];
 extern void func_8044DD50_de(void *);
 /* Pak/option page handler: while D_80145070 is 1 it runs func_8044DD50_de on the session, otherwise it clears the

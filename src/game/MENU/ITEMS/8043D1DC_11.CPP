@@ -4,8 +4,6 @@
 
 extern s32 D_801462C8;
 extern s32 D_801462CC;
-extern s32 D_800D3B0C;
-extern s32 D_800D3B10;
 
 /* Updates the option item's flag bit and selects its associated text pointer. */
 s32 Items_UpdateOptionBit0Item(TextBoundsText *arg0) {

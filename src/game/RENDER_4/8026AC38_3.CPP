@@ -169,7 +169,6 @@ void func_8026C484_de(s32 arg0, void *arg1, void *arg2, s32 arg3, s32 arg4, s32 
 #include "COMMON/GFX.H"
 
 #include "COMMON/DISPLAY.H"
-extern u32 D_800E28A4;
 
 extern s32 D_800CC364;
 #include "COMMON/LONE/D_800CC384.H"

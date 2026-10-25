@@ -32,14 +32,12 @@ extern void Render_SetActorStateBit(Shared_World *a, void *b, int c);
 
 
 
-extern char D_80131600;
 
 
 
 
 extern SpawnDispatchActor *func_8028FFD0_de(char *, void *, s32, CVector3, Triple, s32, f32);
 
-extern char D_80131150;
 
 extern s32 func_80262CE0_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                          s32 arg4, Triple arg5, f32 arg6, CVector3 arg7,
@@ -60,11 +58,8 @@ extern void func_802472F0_de(void *arg0);
 
 extern s32 Camera_GetSequenceRequest(void);
 
-extern s32 D_00206724;
 
-extern s32 D_0020694C;
 
-extern s32 D_800C85F0_de;
 
 extern func_80206604_G1 D_801462E5;
 

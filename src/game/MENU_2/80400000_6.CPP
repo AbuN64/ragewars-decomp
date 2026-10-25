@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "TYPES.H"
 #include "COMMON/GFX.H"
@@ -8,7 +9,6 @@
 /* Draw the inset viewport border with black bands and a one-pixel outline. */
 void func_8026D8F8_de(void);
 extern Gfx *g_displayListCursor;
-extern s32 D_800E28D0;
 
 void func_80401D74_de(s32 inset) {
     f32 left;

@@ -741,7 +741,6 @@ void func_8026EE20_de(f32 m[4][4], BoxRecAtC *box, BoxRecAtC *out) {
     out->max[2] = newMax[2];
 }
 
-extern f32 D_800C46C0_de;
 
 /**
  * Invert a row-major affine 4x4 transform, copying singular inputs unchanged.
@@ -1346,7 +1345,6 @@ CVector3 *func_80271624_de(CVector3 *out, CVector3 *in, f32 amount) {
     return out;
 }
 
-extern f32 D_80115DEC;
 
 extern f32 Math_Sqrtf(f32);
 

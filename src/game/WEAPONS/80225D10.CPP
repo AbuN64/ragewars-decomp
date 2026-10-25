@@ -21,7 +21,6 @@ extern void Particle_TransformPoint(void *arg0, void *arg1, void *arg2);
 typedef struct { f32 x, y, z; } Position;
 typedef struct { u8 pad0[0x34]; Position pos; f32 height; u8 pad44[0x1A]; u8 duration; } TravelTarget;
 typedef struct { u8 pad0[0x6C]; f32 yaw; u8 pad70[0x2E4]; f32 bodyYaw; u8 pad358[0x390]; Position pos; u8 pad6F4[0x100]; f32 elapsed, targetYaw; TravelTarget *target; Position start; } TravelPlayer;
-extern f32 D_800D2988;
 extern f32 D_800C2AE0_de, D_800C2AE4_de, D_800C2AE8_de, D_800C2AEC_de, D_800C2AF0_de;
 
 extern void Weapons_UpdateViewAngles(void *, void *, void *);

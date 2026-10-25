@@ -8,7 +8,6 @@
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 #include "COMMON/PAK_MENU.H"
-extern s32 D_800E63B8;
 
 s32 func_804453F0_de(s32 arg0, Shared_PakMenu *pThis) {
     s32 selection = D_800E63B8;

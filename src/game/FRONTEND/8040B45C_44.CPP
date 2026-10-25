@@ -153,7 +153,6 @@ extern u8 *D_80153C7C;
 /* Stores the byte (u8)D_80153C8C at the offset D_80153C84 within the buffer D_80153C88 points to. */
 extern u8 *D_80153C88;
 
-extern int D_80153C8C;
 
 u32 func_804137F8_de(s32 x, s32 y) {
     extern ShapeCode802B54A0 *D_80153D54;

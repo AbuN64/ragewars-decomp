@@ -19,16 +19,13 @@ extern void func_80272CB0_de(void *, float, float, float);
 
 extern void func_8026FC9C_de(void *, void *);
 
-extern float D_800C46AC_de;
 
-extern char D_8010C520;
 
 extern s32 D_800CC380;
 
 extern s32 D_80110620;
 
 
-extern int D_800CC364;
 
 extern Gfx *g_displayListCursor;
 
@@ -36,33 +33,27 @@ extern s32 D_8010C568;
 
 extern s32 D_8010C56C;
 
-extern s32 D_8010C570;
 
-extern s32 D_8010C578;
 
 extern s32 D_8010C57C;
 
-extern s32 D_80110640;
 
 extern s32 D_8010C584;
 
 extern s32 D_8011064C;
 
-extern s32 D_80111310;
 
 
 extern s32 D_80111318[];
 
 #include "COMMON/DISPLAY.H"
 
-extern u32 D_800E28A4;
 
 
 extern s32 Render_ApplyMaterialLighting(void *matrix, void *lights, void *material);
 
 extern s32 Render_SetupMaterial(void *material, s32 pass);
 
-extern s32 D_8010C564;
 
 extern ObjRecAtCV2 D_801157D8[];
 

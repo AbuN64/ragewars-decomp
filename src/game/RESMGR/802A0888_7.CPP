@@ -15,7 +15,6 @@ INCLUDE_ASM("span_1000", func_802A0BE8_eu);
 
 #if defined(VERSION_DE) || (defined(NON_MATCHING) && defined(VERSION_EU))
 #include "stdarg.h"
-extern int D_800CD918;
 
 #if defined(VERSION_EU)
 int *func_802A0BE8_eu(int format, ...) {

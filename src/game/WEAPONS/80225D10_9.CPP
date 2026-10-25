@@ -53,7 +53,6 @@ extern s32 func_80245908_de(void);
 
 
 #if defined(VERSION_US_REV1)
-extern s32 D_800D0EBC;
 #endif
 
 extern void Camera_LoadProjectionMatrix(void *arg0);

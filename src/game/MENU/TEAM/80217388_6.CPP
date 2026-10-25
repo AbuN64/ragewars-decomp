@@ -118,7 +118,6 @@ typedef struct DraftState17F4C {
     s32 state; f32 value, timer; u8 padC[8]; f32 angle;
     u8 pad18[0x380 - 0x18]; s32 mode; u8 pad384[4]; s32 selection;
 } DraftState17F4C;
-extern f32 D_800D2988;
 
 s32 func_8021846C_de(void *, void *);
 s16 Weapons_NextAvailableWeapon(void *);

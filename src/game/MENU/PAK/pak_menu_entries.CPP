@@ -224,7 +224,6 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
 extern void *Items_GetListContext(s8 *);
 extern void Pak_MeasureMenuText(TextBoundsText *, CItemInfo *);
 extern u32 D_800CD730;
-extern s32 D_800E1E20;
 extern const f32 g_menuCenterFraction;
 
 /* Lay out visible menu entries and draw their callbacks with a pulsing selection highlight. */

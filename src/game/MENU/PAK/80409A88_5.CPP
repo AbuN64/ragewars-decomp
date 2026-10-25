@@ -296,13 +296,10 @@ s32 func_8040A244_de(struct Field *field) {
 
 
 
-extern s32 D_8014D4EC_de;
-extern s32 D_8014D4C0_de;
 extern s32 D_8015375C;
 extern char *D_800D3728[];
 extern char *D_800D372C[];
 extern char *D_800E27E4[];
-extern s32 D_800E28C8;
 extern char D_800ED3FC[];
 extern s32 Pak_CountLineChars(struct Field *);
 

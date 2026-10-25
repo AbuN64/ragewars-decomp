@@ -128,7 +128,6 @@ s16 func_8024B738_de(void *arg0, s16 *callback, s32 arg2) {
     return func_802798A8_de(&sp10);
 }
 
-extern char D_800C39E0_de;
 extern s32 *func_8024BFD4_de(void *arg0, s8 arg1);
 extern s32 func_802484B0_de(void *arg0, s32 arg1, void *arg2);
 extern void Scene_UnlockResource(s32 arg0, s32 arg1);
