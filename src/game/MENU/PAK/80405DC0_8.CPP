@@ -274,24 +274,36 @@ extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
-extern u32 func_804057F8_de(s32 offset, void *data, s32 seed);
-static __inline__ char *pakPrompt(s32 *channel) {
-    char *result;
-    switch (*channel) {
+extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
+/* Pak_SaveControllerRecord's channel label (80405DC0_9.CPP). */
+static __inline__ char *pakRecordChannelLabel(s32 channel) {
+    switch (channel) {
     case 0:
-    default: result = D_00450BF0_de; break;
-    case 1: result = D_00450C14_de; break;
-    case 2: result = D_00450C38_de; break;
-    case 3: result = D_00450C5C_de; break;
+    default: return D_00450BF0_de;
+    case 1: return D_00450C14_de;
+    case 2: return D_00450C38_de;
+    case 3: return D_00450C5C_de;
     }
-    return result;
 }
-/* us-rev1: 11/94 aligned edits remain: the dead pakPrompt switch keeps ch in a register, checksum address load order. */
+/* Pak_SaveControllerRecord's helper (80405DC0_9.CPP). */
+static __inline__ ObjRecAt5DC *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
+    if (D_8015375C != 0) {
+        *channel = D_800E28C8;
+        return 0;
+    }
+    *channel = menu->owner->unk4;
+    return menu->player;
+}
+/* func_804098A4_de's body: store the snapshot checksum after the note data. */
+static __inline__ void pakSetChecksum(s32 offset, s32 value) {
+    *(s32 *)((u8 *)(D_8011FECC + offset) + 0x60C) = value;
+}
+/* us-rev1: 7/94 aligned edits remain: the dead channel-label switch keeps ch in a register (ROM v0, ours v1)
+ * and cse2 folds the player copy (ROM loads the player into v0 and copies it to s0 in the beqz slot). */
 void func_80406F7C_de(Shared_PakMenu *menu) {
     s32 ch;
     ObjRecAt5DC *player;
     char *prompt;
-
     D_8014D4C0_de = 1;
     D_8014D4DC = 1;
     D_80153760 = 0;
@@ -299,17 +311,16 @@ void func_80406F7C_de(Shared_PakMenu *menu) {
     D_800DE874 = 0;
     D_80153784 = 0;
     D_8015375C = 0;
-    ch = menu->slot->unk4;
-    player = menu->player;
+    player = pakRecordChannel(menu, &ch);
     if (D_800E28C0 != 0) {
         D_80153784 = 1;
         return;
     }
-    prompt = pakPrompt(&ch);
+    prompt = pakRecordChannelLabel(ch);
     func_80404E28_de(menu->slot->unk4);
     if (Pak_GetStatus(ch) == 0) {
         Pak_CreateSaveSnapshot(player);
-        *(u32 *)((u8 *)D_800DE868 + D_8011FECC + 0x60C) = func_804057F8_de((s32)D_800DE868, (void *)(D_8011FECC + 0x60C), 11);
+        pakSetChecksum((s32)D_800DE868, func_804057F8_de(D_800DE868, D_8011FECC + 0x60C, 11));
         func_80405F48_de(menu);
         return;
     }
