@@ -24,7 +24,7 @@ typedef struct MotionHeader {
 
 extern s32 func_80285180_de(void **, s32);
 
-extern s32 func_8028FDC8_de(s32, s32, s32 *);
+extern s32 Render_GetSizedPackSection(s32, s32, s32 *);
 
 
 extern void *func_80254480_de(s32, void *, s32);
@@ -117,16 +117,16 @@ void func_8025F56C_de(s32 unused, ResourceHandle **handle) {
     if (func_80285180_de((void **)handle, 1)) {
         source = (*handle)->block;
         sourceBytes = (*handle)->bytes;
-        section0 = (void *)func_8028FDC8_de((s32)source, 0, &bytes0);
-        section1 = (void *)func_8028FDC8_de((s32)source, 1, &bytes1);
-        section2 = (void *)func_8028FDC8_de((s32)source, 2, &bytes2);
-        section3 = (void *)func_8028FDC8_de((s32)source, 3, &bytes3);
-        section4 = (void *)func_8028FDC8_de((s32)source, 4, &bytes4);
-        motion = (ResourceBlock *)func_8028FDC8_de((s32)source, 5, &bytes5);
+        section0 = (void *)Render_GetSizedPackSection((s32)source, 0, &bytes0);
+        section1 = (void *)Render_GetSizedPackSection((s32)source, 1, &bytes1);
+        section2 = (void *)Render_GetSizedPackSection((s32)source, 2, &bytes2);
+        section3 = (void *)Render_GetSizedPackSection((s32)source, 3, &bytes3);
+        section4 = (void *)Render_GetSizedPackSection((s32)source, 4, &bytes4);
+        motion = (ResourceBlock *)Render_GetSizedPackSection((s32)source, 5, &bytes5);
         header = (MotionHeader *)Render_GetPackSection((s32 *)motion, 0);
-        func_8028FDC8_de((s32)motion, 1, &fetchedRotationBytes);
-        func_8028FDC8_de((s32)motion, 2, &fetchedTranslationBytes);
-        section6 = (void *)func_8028FDC8_de((s32)source, 6, &bytes6);
+        Render_GetSizedPackSection((s32)motion, 1, &fetchedRotationBytes);
+        Render_GetSizedPackSection((s32)motion, 2, &fetchedTranslationBytes);
+        section6 = (void *)Render_GetSizedPackSection((s32)source, 6, &bytes6);
         Render_GetPackSection(section3, 0);
         sourceFrames = header->frames;
         D_8010AC84 = sourceFrames;

@@ -29,7 +29,7 @@ extern void func_80253D10_de(s32 unused, struct Shape_typemap_165 **arg1, struct
 
 
 
-extern s32 func_8028FDC8_de(s32 node, s32 index, s32 *size);
+extern s32 Render_GetSizedPackSection(s32 node, s32 index, s32 *size);
 extern s32 func_8028FDF8_de(s32 *node, s32 arg1);
 
 static inline s32 testBit(s32 n, u8 *bits) {
@@ -72,11 +72,11 @@ void func_8044C3D4_de(CollisionBuildWorld *world, CollisionBuildMeshHandle **han
 
     if (func_80285180_de((void*)handle, 1) != 0) {
         node = (*handle)->payload.data;
-        first = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 0, &size0);
-        vlist = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 1, &size1);
+        first = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 0, &size0);
+        vlist = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 1, &size1);
         flist = (void*)Render_GetPackSection(node, 2);
         ntris = flist->count;
-        chunk = ((void *(*)(int *,s32,s32 *))func_8028FDC8_de)(node, 3, &size3);
+        chunk = ((void *(*)(int *,s32,s32 *))Render_GetSizedPackSection)(node, 3, &size3);
         tableSize = (ntris << 5) | 8;
         block = (void*)func_80254480_de(0, handle, size0 + 0x18 + size1 + tableSize + size3);
         if (block != 0) {

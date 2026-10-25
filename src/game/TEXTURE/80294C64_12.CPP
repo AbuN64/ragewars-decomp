@@ -5,7 +5,7 @@
 extern s32 D_800CD894_de;
 
 extern s32 func_80285180_de(void *, s32);
-extern u16 *func_8028FDC8_de(void *, s32, u32 *);
+extern u16 *Render_GetSizedPackSection(void *, s32, u32 *);
 extern s32 func_8028FDF8_de(void *, s32);
 extern s32 **func_80254480_de(s32, void *, s32);
 extern void func_80253D10_de(s32, void *, s32 **);
@@ -66,7 +66,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
         kind = *(u8 *)Render_GetPackSection(obj, 0);
         if (kind < 2) if (kind >= 0) {
             for (i = 0; i < count; i++) {
-                u16 *data = func_8028FDC8_de(list2, i, &size);
+                u16 *data = Render_GetSizedPackSection(list2, i, &size);
                 n = size >> 1;
                 for (j = 0; j < n; j++) {
                     u32 r = (data[j] >> 8) & 0xF8;

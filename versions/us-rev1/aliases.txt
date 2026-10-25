@@ -1365,7 +1365,6 @@ literals_func_80268CE0_de = 0x800C9590; // rom:0xCA190 size:0x1C8
 literals_func_8026EE20_de = 0x800C97C0; // rom:0xCA3C0 size:0x1C
 literals_func_80275410_de = 0x800C9ABC; // rom:0xCA6BC size:0x10
 literals_func_802765B0_de = 0x800C9B0C; // rom:0xCA70C size:0x3C
-literals_func_80277A98_de = 0x800C9BDC; // rom:0xCA7DC size:0xC
 literals_func_8027ABF4_de = 0x800C9CB8; // rom:0xCA8B8 size:0x4
 literals_Particle_ParentTransform = 0x800C9D28; // rom:0xCA928 size:0xD8
 literals_func_8027E784_de = 0x800C9E00; // rom:0xCAA00 size:0x28

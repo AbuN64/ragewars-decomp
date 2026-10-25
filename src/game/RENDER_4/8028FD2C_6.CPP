@@ -11,7 +11,7 @@ void *Render_GetPackSection(void *table, s32 index) {
     return (char *)table + entry[1];
 }
 
-s32 func_8028FDC8_de(s32 arg0, s32 arg1, s32 *arg2) {
+s32 Render_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2) {
     
     s32 *next = (s32 *)(arg0 + ((arg1 + 1) * 4));
     s32 *entry = (s32 *)(arg0 + (arg1 * 4));

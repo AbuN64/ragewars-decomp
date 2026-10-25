@@ -14,7 +14,7 @@
 
 extern void Rsp_ConvertMatrixToFloat(f32 *, PackedMatrixWords *);
 extern void func_80272B38_de(void *, void *, void *);
-void func_80277A98_de(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
+void Actors_AccumulateDirectionalLighting(Vertices38 *data, PackedMatrixWords *matrices, CVector3 *output, s32 skin) {
     CVector3 light;
     f32 matrix[16];
     CVector3 normal, transformed;
@@ -207,7 +207,7 @@ typedef struct IdList {
     s16 ids[1];
 } IdList;
 
-s32 func_80278020_de(Bounds *bounds, void *table, void **out, s32 *countOut, u8 *wanted) {
+s32 Actors_QueryLightVolumes(Bounds *bounds, void *table, void **out, s32 *countOut, u8 *wanted) {
     s32 foundCount;
     s32 result;
     s32 idx;
@@ -348,7 +348,7 @@ INCLUDE_ASM("span_1000", Actors_ApplyVertexColors);
 extern char D_800C4B1C_de[13]; /* "Lit Vertices": allocation tag */
 extern CVector3 D_80111D70[];
 extern s32 D_800D2850;
-extern s32 func_8028FDC8_de(s32 pack, s32 index, s32 *size);
+extern s32 Render_GetSizedPackSection(s32 pack, s32 index, s32 *size);
 extern u8 **Scene_AllocateResource(s32, s32, u32, void *);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
 extern void Actors_AccumulateVertexLighting(void **lights, s32 lightCount, Vertices38 *mesh,
@@ -392,8 +392,8 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
     s32 worldLightCount;
     s32 packedColor;
     s32 *pack;
-    needsColors = func_80278020_de(bounds, lightResource, lights, &lightCount, wanted);
-    model = (Vertices38 *)func_8028FDC8_de(modelResource, 0, &modelBytes);
+    needsColors = Actors_QueryLightVolumes(bounds, lightResource, lights, &lightCount, wanted);
+    model = (Vertices38 *)Render_GetSizedPackSection(modelResource, 0, &modelBytes);
     modelVertexCount = model->count;
     for (clearIndex = 0; clearIndex < modelVertexCount; clearIndex++) {
         D_80111D70[clearIndex].x = 0;
@@ -439,7 +439,7 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
         }
     }
     if (D_800D2850 == 0) {
-        func_80277A98_de(copiedModel, matrices, D_80111D70, skinned);
+        Actors_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
     } else if (lightCount == 0) {
         Shared_World *world = &D_8011FE88;
         worldLightCount = 0;
@@ -447,7 +447,7 @@ s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds,
             worldLightCount += ((HitBoxTable *)Render_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;
         }
         if (worldLightCount == 0) {
-            func_80277A98_de(copiedModel, matrices, D_80111D70, skinned);
+            Actors_AccumulateDirectionalLighting(copiedModel, matrices, D_80111D70, skinned);
         }
     } else {
         Actors_AccumulateVertexLighting(lights, lightCount, copiedModel, matrices, D_80111D70, skinned);

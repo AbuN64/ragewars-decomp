@@ -1080,7 +1080,6 @@ literals_func_8044B0E0_de = 0x800C4748; // rom:0xC5348 size:0x4
 literals_func_80268CE0_de = 0x800C4750; // rom:0xC5350 size:0x1C8
 literals_func_80275410_de = 0x800C4C7C; // rom:0xC587C size:0x10
 literals_func_802765B0_de = 0x800C4CCC; // rom:0xC58CC size:0x3C
-literals_func_80277A98_de = 0x800C4D9C; // rom:0xC599C size:0xC
 literals_func_8027ABF4_de = 0x800C4E78; // rom:0xC5A78 size:0x4
 literals_Particle_ParentTransform = 0x800C4EE8; // rom:0xC5AE8 size:0xD8
 literals_func_8027E784_de = 0x800C4FC0; // rom:0xC5BC0 size:0x28

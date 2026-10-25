@@ -24,7 +24,7 @@ extern u32 D_800CC384;
 
 extern s32 Render_SetModePreset(s32);
 
-s32 func_8028FDC8_de(s32 arg0, s32 arg1, s32 *arg2);
+s32 Render_GetSizedPackSection(s32 arg0, s32 arg1, s32 *arg2);
 
 extern struct Shape_typemap_165 *func_80254480_de(s32, void *, s32);
 
@@ -110,9 +110,9 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
         }
         size = (parts * 4 + 15) & ~7;
         old = (*res)->pack;
-        func_8028FDC8_de(old, 0, &len0);
+        Render_GetSizedPackSection(old, 0, &len0);
         size += len0;
-        func_8028FDC8_de(old, 1, &len1);
+        Render_GetSizedPackSection(old, 1, &len1);
         size += len1;
         oldList = Render_GetPackSection(old, 2);
         count = oldList->count;
@@ -146,11 +146,11 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             i++;
         } while (i < count);
         if (extra != 0) {
-            func_8028FDC8_de(old, 3, &len3);
+            Render_GetSizedPackSection(old, 3, &len3);
             size += len3;
-            func_8028FDC8_de(old, 4, &len4);
+            Render_GetSizedPackSection(old, 4, &len4);
             size += len4;
-            func_8028FDC8_de(old, 5, &len5);
+            Render_GetSizedPackSection(old, 5, &len5);
             size += len5;
         }
         if (sentinel != 0) size += 8;
@@ -161,13 +161,13 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             dst = allocation->pack;
             dst->count = parts;
             dst->offsets[0] = offset;
-            copySource0 = func_8028FDC8_de(old, 0, &len0);
+            copySource0 = Render_GetSizedPackSection(old, 0, &len0);
             vertexCount = 0;
             vertices = Render_GetPackSection(dst, 0);
             func_802BD3A0_de(vertices, copySource0, len0);
             offset += len0;
             dst->offsets[1] = offset;
-            copySource1 = func_8028FDC8_de(old, 1, &len1);
+            copySource1 = Render_GetSizedPackSection(old, 1, &len1);
             dstData = Render_GetPackSection(dst, 1);
             func_802BD3A0_de(dstData, copySource1, len1);
             offset += len1;
@@ -270,17 +270,17 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
             offset += total;
             dst->offsets[3] = offset;
             if (extra != 0) {
-                copySource3 = func_8028FDC8_de(old, 3, &len3);
+                copySource3 = Render_GetSizedPackSection(old, 3, &len3);
                 dstData = Render_GetPackSection(dst, 3);
                 func_802BD3A0_de(dstData, copySource3, len3);
                 offset += len3;
                 dst->offsets[4] = offset;
-                copySource4 = func_8028FDC8_de(old, 4, &len4);
+                copySource4 = Render_GetSizedPackSection(old, 4, &len4);
                 dstData = Render_GetPackSection(dst, 4);
                 func_802BD3A0_de(dstData, copySource4, len4);
                 offset += len4;
                 dst->offsets[5] = offset;
-                copySource5 = func_8028FDC8_de(old, 5, &len5);
+                copySource5 = Render_GetSizedPackSection(old, 5, &len5);
                 dstData = Render_GetPackSection(dst, 5);
                 func_802BD3A0_de(dstData, copySource5, len5);
                 offset += len5;
