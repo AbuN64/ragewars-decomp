@@ -5,7 +5,7 @@
 #include "COMMON/UNUSED.H"
 #include "RENDER_4/8028FD2C_6.H"
 struct Node80253610;
-extern void func_80253BBC_de(s32 heap, struct Node80253610 *resource);
+extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 
 extern char D_0024D108;
 extern char D_800C3A64_de;
@@ -51,7 +51,7 @@ void func_8024A7A0_de(LevelActor *actor, s32 arg1, Lookup *params) {
     if (resource == 0) {
         return;
     }
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     header = *(s32 **)resource;
     if (header[0] == 1) {
         char *object = (char *)header + header[1];

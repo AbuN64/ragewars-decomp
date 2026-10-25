@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws every part of a model resource with the shared material D_8013B2D8 when the frame's command buffer still has 3000 commands free and func_80269A80_de accepts the material: sets the render mode, selects blend 2 through func_80268CE0_de, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from func_8026DF7C_de with the render mode, blend and light commands added and the per-part lighting call removed. */
+/* Draws every part of a model resource with the shared material D_8013B2D8 when the frame's command buffer still has 3000 commands free and Render_SetupMaterial accepts the material: sets the render mode, selects blend 2 through func_80268CE0_de, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list. Adapted from func_8026DF7C_de with the render mode, blend and light commands added and the per-part lighting call removed. */
 
 
 
@@ -19,8 +19,8 @@ extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 extern char D_8013B2D8;
-extern void func_80253BBC_de(s32 heap, void **resource);
-extern s32 func_80269A80_de(void *material, s32 pass);
+extern void Scene_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Render_SetupMaterial(void *material, s32 pass);
 extern void func_80268CE0_de(s32 mode);
 
 void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
@@ -34,7 +34,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
-    if (func_80269A80_de(&D_8013B2D8, pass) == 0) {
+    if (Render_SetupMaterial(&D_8013B2D8, pass) == 0) {
         return;
     }
     gDPSetRenderMode(D_80110634++, 0x0C184F50, 0);
@@ -48,7 +48,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
         cmd = D_80110634++;
         gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
     }
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     header = *resource;
     base = textures;
     if (base == 0) {
@@ -70,7 +70,7 @@ void func_8026C978_de(void **resource, s32 matrix, s32 segment, s32 lights, void
     }
 }
 
-/* Draws every part of a model resource with the shared material D_80137288 when the frame's command buffer still has 3000 commands free and func_80269A80_de accepts the material: prepares through func_802A01E8_de, flags the material 0x20 and sets D_800D15E0, sets the render mode, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list, skipping parts whose material blend bits are all set unless the owner's 0x122C flag 0x400 is set. Adapted from func_8026C978_de with the preparation and flag stores added, the blend call removed and the per-part owner test added. */
+/* Draws every part of a model resource with the shared material D_80137288 when the frame's command buffer still has 3000 commands free and Render_SetupMaterial accepts the material: prepares through func_802A01E8_de, flags the material 0x20 and sets D_800D15E0, sets the render mode, loads the model matrix (or sets it as segment 1), loads an optional two-light block, registers the resource, sets segment 2 to the given texture base or the model's own and emits each part's display list, skipping parts whose material blend bits are all set unless the owner's 0x122C flag 0x400 is set. Adapted from func_8026C978_de with the preparation and flag stores added, the blend call removed and the per-part owner test added. */
 
 
 
@@ -80,8 +80,8 @@ extern Gfx *D_80110634;
 extern u32 D_800E28A4;
 
 extern void func_802A01E8_de(void);
-extern void func_80253BBC_de(s32 heap, void **resource);
-extern s32 func_80269A80_de(void *material, s32 pass);
+extern void Scene_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Render_SetupMaterial(void *material, s32 pass);
 
 
 
@@ -109,7 +109,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
     if (D_800E28A4 - used / sizeof(Gfx) < 3000) {
         return;
     }
-    if (func_80269A80_de(shared, pass) == 0) {
+    if (Render_SetupMaterial(shared, pass) == 0) {
         return;
     }
     gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
@@ -122,7 +122,7 @@ void func_8026CBA4_de(void **resource, void *owner, void *matrix, s32 segment, S
         cmd = D_80110634++;
         gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
     }
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     header = *resource;
     base = textures;
     if (base == 0) {
@@ -197,7 +197,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
     if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
-    if (func_80269A80_de(shared, pass) != 0) {
+    if (Render_SetupMaterial(shared, pass) != 0) {
         gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
         func_80268CE0_de(1);
         if (segment != 0) {
@@ -213,7 +213,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
             cmd = D_80110634++;
             gSPMoveMem(cmd, G_MV_LIGHT, 72, 16, lights);
         }
-        func_80253BBC_de(0, resource);
+        Scene_MarkResourceInUse(0, resource);
         header = *resource;
         base = textures;
         if (base == 0) {
@@ -228,14 +228,14 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
             part = Render_GetPackSection(parts, i);
             material = Render_GetPackSection(part, 0);
             if (i == 0) {
-                func_8026B504_de(matrix, lights, material);
+                Render_ApplyMaterialLighting(matrix, lights, material);
             }
             state = owner->profile;
             if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
                 switch (state->variant) {
                 case 0:
                     if ((material->mode & 0x38) == 0x28) {
-                        if (func_80269A80_de(material, pass) != 0) {
+                        if (Render_SetupMaterial(material, pass) != 0) {
                             void *list = Render_GetPackSection(part, 1);
                             Gfx *cmd = D_80110634++;
                             gSPDisplayList(cmd, (unsigned int)list);
@@ -244,7 +244,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     break;
                 case 1:
                     if ((material->mode & 0x38) == 0x20) {
-                        if (func_80269A80_de(material, pass) != 0) {
+                        if (Render_SetupMaterial(material, pass) != 0) {
                             void *list = Render_GetPackSection(part, 1);
                             Gfx *cmd = D_80110634++;
                             gSPDisplayList(cmd, (unsigned int)list);
@@ -253,7 +253,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                     break;
                 case 2:
                     if ((material->mode & 0x38) == 0x18) {
-                        if (func_80269A80_de(material, pass) != 0) {
+                        if (Render_SetupMaterial(material, pass) != 0) {
                             void *list = Render_GetPackSection(part, 1);
                             Gfx *cmd = D_80110634++;
                             gSPDisplayList(cmd, (unsigned int)list);
@@ -266,7 +266,7 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
                 if (bits == 0x38 && hide == 0) continue;
                 if (bits == 0x30 && bonus == 0) continue;
                 if (bits == 0x10 && glow == 0) continue;
-                if (func_80269A80_de(material, pass) != 0) {
+                if (Render_SetupMaterial(material, pass) != 0) {
                     void *list = Render_GetPackSection(part, 1);
                     Gfx *cmd = D_80110634++;
                     gSPDisplayList(cmd, (unsigned int)list);
@@ -279,10 +279,10 @@ void Render_DrawCharacterEffectParts(void **resource, struct Player *owner, void
 
 #include "COMMON/GAME_SESSION.H"
 extern const f32 D_800C46A8_de;
-extern void func_8026B504_de(void *, void *, void *);
+extern void Render_ApplyMaterialLighting(void *, void *, void *);
 /* Draws every part of a model resource with the shared material D_8013B2D8 after setting its fixed colour
  * bytes (0x10..0x17) and flags 0x1402, when the frame's command buffer still has 3000 commands free; the first
- * part's material is registered through func_8026B504_de with the caller's two inputs. */
+ * part's material is registered through Render_ApplyMaterialLighting with the caller's two inputs. */
 void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segment, void *lights, void *textures, s32 pass) {
     void *header;
     void *base;
@@ -314,13 +314,13 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
     if (D_800E28A4 - ((u32)D_80110634 - (u32)D_8011FAC0.ring.current->commands) / sizeof(Gfx) < 3000) {
         return;
     }
-    if (func_80269A80_de(shared, pass) == 0) {
+    if (Render_SetupMaterial(shared, pass) == 0) {
         return;
     }
     gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
     func_80268CE0_de(1);
     if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); } else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     header = *resource;
     base = textures;
     if (base == 0) {
@@ -333,7 +333,7 @@ void Render_DrawModelWithSharedMaterial(void **resource, void *matrix, s32 segme
         part = Render_GetPackSection(parts, i);
         material = Render_GetPackSection(part, 0);
         if (i == 0) {
-            func_8026B504_de(matrix, lights, material);
+            Render_ApplyMaterialLighting(matrix, lights, material);
         }
         {
             Gfx *cmd;

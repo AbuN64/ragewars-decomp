@@ -148,7 +148,7 @@ extern Gfx *D_80110634;
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
 extern Shared_func_80234FDC_S1 *func_802392EC_de(GameplayCamera *camera);
-extern void func_80253BBC_de(s32 heap, struct Node80253610 *resource);
+extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
 extern void func_80253838_de(void *arg0, void *arg1);
 extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
@@ -233,7 +233,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
               sector->m_pBoundsRect->m_MaxZ > camera->clipBounds[0].z && sector->m_pBoundsRect->m_MinZ < camera->clipBounds[1].z)) {
             continue;
         }
-        func_80253BBC_de(0, sector->m_pmeGridSection);
+        Scene_MarkResourceInUse(0, sector->m_pmeGridSection);
         model = sector->m_pmeGridSection->field0;
         propSection = Render_GetPackSection(model, 0);
         propCount = propSection->count;

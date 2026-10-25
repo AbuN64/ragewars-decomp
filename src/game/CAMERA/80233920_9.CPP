@@ -24,7 +24,7 @@ extern s32 D_80146894;
 extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
-extern void func_80253BBC_de(s32, s32);
+extern void Scene_MarkResourceInUse(s32, s32);
 extern void Camera_SetupViewportAndFog(Racer *);
 extern void func_802362E8_de(Racer *, s32);
 extern void func_80239FD4_de(Racer *, s32);
@@ -35,7 +35,7 @@ extern void func_802372D4_de(Racer *);
 extern s32 func_80245784_de(void);
 extern s32 func_80245798_de(void);
 extern void func_8022A3F8_de(World_func_80236F1C_de *, Racer *);
-/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to func_80253BBC_de, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or func_80245784_de or func_80245798_de reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
+/* Per-frame race update: clears three per-frame flags of the race's own racer, passes the race's first word to Scene_MarkResourceInUse, runs the 30-frame flash timer (restarted while D_80146894 is set or in mode 3) and while it runs clears the screen with a full-screen viewport, scissor and fill before func_8026D8F8_de, then updates every racer in the list until it ends or func_80245784_de or func_80245798_de reports, updates the race's own racer, hands the list to func_8022A3F8_de when the replay flag of D_80145040 is set, and passes the own racer's block at 0x554 to func_804429D4_de. */
 void func_80236F1C_de(Race *race, s32 arg1)
 {
     Racer *racer;
@@ -43,7 +43,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
     race->self.boost = 0;
     race->self.spin = 0;
     if (race->header.music != 0) {
-        func_80253BBC_de(0, race->header.music);
+        Scene_MarkResourceInUse(0, race->header.music);
     }
     if (D_80146894 != 0 || race->header.views.count == 3) {
         D_800FF224_de = 30.0f;

@@ -6,7 +6,7 @@
 
 #if defined(VERSION_US_REV1)
 struct Node80253610;
-extern void func_80253BBC_de(s32 heap, struct Node80253610 *resource);
+extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern Gfx *D_80110634;
 
 void func_802AA8EC_de(Table802AB8DC **handle, s32 index, void **out, u8 *tag);
@@ -144,7 +144,7 @@ void Text_DrawTileGrid(void *handle, s32 index, s32 initialX, s16 initialY, f32 
                     }
                 }
             }
-            func_80253BBC_de(0,handle);
+            Scene_MarkResourceInUse(0,handle);
         }
     }
 }

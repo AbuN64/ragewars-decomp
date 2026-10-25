@@ -15,9 +15,9 @@ extern Group18 *D_8010C56C,*D_8010C584;
 
 extern Gfx *D_80110634;
 
-extern s32 func_80269A80_de(Material18 *,s8);
+extern s32 Render_SetupMaterial(Material18 *,s8);
 
-extern void func_8026B504_de(u32,u32,Material18 *),func_8026AC38_de(void);
+extern void Render_ApplyMaterialLighting(u32,u32,Material18 *),func_8026AC38_de(void);
 
 void Scene_LockResource(void *, void *);
 
@@ -52,10 +52,10 @@ void func_8026C020_de(void) {
  Mesh *mesh;u16 scaleS,scaleT;u32 cmd;
  if(group)do {
   mesh=group->meshes;
-  if(mesh && func_80269A80_de(group->material,group->mode)) {
+  if(mesh && Render_SetupMaterial(group->material,group->mode)) {
    scaleT=0;scaleS=0;
    do {
-    func_8026B504_de(mesh->matrix,mesh->aux,group->material);
+    Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
     if(mesh->segmented){gSPSegment(D_80110634++, 1, ((mesh->matrix)));}else{gSPMatrix(D_80110634++, ((mesh->matrix)), G_MTX_LOAD);}
     gSPSegment(D_80110634++, 2, ((mesh->vertices)));
     if(mesh->scaleS) {
@@ -80,7 +80,7 @@ void func_8026C020_de(void) {
    if(mesh) {
     gDPSetPrimColor(D_80110634++, 0, 0, 0, 0, 0, group->material->alpha);
     do {
-     func_8026B504_de(mesh->matrix,mesh->aux,group->material);
+     Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
      if(mesh->segmented){gSPSegment(D_80110634++, 1, ((mesh->matrix)));}else{gSPMatrix(D_80110634++, ((mesh->matrix)), G_MTX_LOAD);}
      gSPSegment(D_80110634++, 2, ((mesh->vertices)));
      gSPDisplayList(D_80110634++, ((mesh->list)));
@@ -93,10 +93,10 @@ void func_8026C020_de(void) {
  group=D_8010C584;
  if(group)do {
   mesh=group->meshes;
-  if(mesh && func_80269A80_de(group->material,group->mode)) {
+  if(mesh && Render_SetupMaterial(group->material,group->mode)) {
    scaleT=0;scaleS=0;
    do {
-    func_8026B504_de(mesh->matrix,mesh->aux,group->material);
+    Render_ApplyMaterialLighting(mesh->matrix,mesh->aux,group->material);
     if(mesh->segmented){gSPSegment(D_80110634++, 1, ((mesh->matrix)));}else{gSPMatrix(D_80110634++, ((mesh->matrix)), G_MTX_LOAD);}
     gSPSegment(D_80110634++, 2, ((mesh->vertices)));
     if(mesh->scaleS) {
@@ -179,7 +179,7 @@ extern u32 D_800E28A4;
 
 extern s32 D_800CC364;
 extern u32 D_800CC384[]; /* read as an aggregate element: the ROM keeps its load ahead of the display-list stores */
-extern void func_80253BBC_de(s32, void **);
+extern void Scene_MarkResourceInUse(s32, void **);
 
 /* 19/168 aligned words differ: geometry-mode register (a2/a3) and display-list store scheduling.
  * The sixth argument overrides the texture segment; the fifth is unused. */
@@ -200,7 +200,7 @@ void Render_DrawResourceModel(s32 alpha, s32 resource, void *matrix,
         return;
     }
     resourceHeader = *(void **)resource;
-    func_80253BBC_de(0, (void **)resource);
+    Scene_MarkResourceInUse(0, (void **)resource);
     if (segment != 0) {
         gSPSegment(D_80110634++, 1, matrix);
     } else {

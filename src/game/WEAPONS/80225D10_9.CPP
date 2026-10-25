@@ -40,7 +40,7 @@ extern void func_80268CE0_de(s32);
 extern f32 D_800C2CC4_de, D_800C7DB8, D_800C2CCC_de, D_800C7DC0, D_800C2CD4_de, D_800C7DC8, D_800C2CDC_de, D_800C2CE0_de;
 
 
-extern void func_80253BBC_de(s32 arg0, void *arg1);
+extern void Scene_MarkResourceInUse(s32 arg0, void *arg1);
 
 extern void func_8024B8C4_de(void *arg0);
 
@@ -364,7 +364,7 @@ void func_8022A170_de(struct ObjectPool *arg0) {
     void *node;
 
     if (*(void **)arg0 != 0) {
-        func_80253BBC_de(0, *(void **)arg0);
+        Scene_MarkResourceInUse(0, *(void **)arg0);
     }
 
     node = arg0->object_queue.head;

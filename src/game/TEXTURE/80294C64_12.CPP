@@ -134,7 +134,7 @@ void func_80294C8C_de(s32 arg0, Resource *handle) {
 #ifdef NON_MATCHING
 extern s32 D_800CD890, D_80146DF0, D_80146DF4, D_80146DF8, D_80146DFC;
 extern u32 *D_80110634;
-extern void func_80253BBC_de(s32);
+extern void Scene_MarkResourceInUse(s32);
 extern void *Render_GetPackSection(void *, s32);
 extern u8 D_800CBE50[], D_800CBEE8[], D_800CBD50_de[], D_800CBDD0[], D_auto_800CCB60[];
 #define DLW(a, b) do { D_80110634[0] = (u32)(a); D_80110634[1] = (u32)(b); D_80110634 += 2; } while (0)
@@ -153,7 +153,7 @@ void func_802950B4_de(s32 unused, void **obj, s32 frame, s32 tile, u32 wrap, u32
     s32 words;
     u32 t3 = 0, t0 = 0;
 
-    func_80253BBC_de(0);
+    Scene_MarkResourceInUse(0);
     hdr = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(obj[0], 0), 1), frame);
     bits = Render_GetPackSection(obj[0], 2);
     palette = 0;

@@ -37,7 +37,7 @@ extern void func_80253F8C_de(s32 arg0, s32 arg1);
 extern s32 *func_8026E27C_de(void **arg0, s32 arg1, s32 *arg2);
 
 
-extern void func_80253BBC_de(s32, s32);
+extern void Scene_MarkResourceInUse(s32, s32);
 
 extern void func_8027892C_de(void *object, void *colors);
 
@@ -152,7 +152,7 @@ void func_80250C84_de(Owner_func_80250C84_de *owner, s32 unused, s32 remaining, 
     resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                              D_800C3E40_de, 0);
     if (resource != 0) {
-        func_80253BBC_de(0, (s32)resource);
+        Scene_MarkResourceInUse(0, (s32)resource);
         header = (s32 *)resource->data;
         if (header[0] == 1) {
             char *object = (char *)header + header[1];

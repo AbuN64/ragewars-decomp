@@ -9,14 +9,14 @@
 #include "RENDER_4/8026AC38_2.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before func_80269A80_de accepts the material and its display list is emitted. Adapted from func_8026DA4C_de with the owner argument and the per-material flag switch added. */
+/* Draws the parts of a model resource that the owner has enabled, when the frame command buffer still has 3000 commands free: each part material's low two bits of byte 6 pick an owner flag at 0x102 (0x100, 0x8 or 0x2, 0x80 or 0x20 by bit 4) that must be set before Render_SetupMaterial accepts the material and its display list is emitted. Adapted from func_8026DA4C_de with the owner argument and the per-material flag switch added. */
 
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
-extern void func_80253BBC_de(s32 heap, void **resource);
-extern s32 func_8026B504_de(s32 matrix, s32 lights, void *material);
-extern s32 func_80269A80_de(void *material, s32 pass);
+extern void Scene_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Render_ApplyMaterialLighting(s32 matrix, s32 lights, void *material);
+extern s32 Render_SetupMaterial(void *material, s32 pass);
 
 void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 segment, s32 lights, void *textures, s32 pass) {
     void *header;
@@ -32,7 +32,7 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
         return;
     }
     header = *resource;
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     if (segment != 0) { gSPSegment(D_80110634++, 1, matrix); }
     else { gSPMatrix(D_80110634++, matrix, G_MTX_LOAD); }
     base = textures;
@@ -46,7 +46,7 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
         part = Render_GetPackSection(parts, i);
         material = Render_GetPackSection(part, 0);
         if (i == 0) {
-            func_8026B504_de(matrix, lights, material);
+            Render_ApplyMaterialLighting(matrix, lights, material);
         }
         visible = 1;
         switch (((struct Material *)material)->flags & 3) {
@@ -78,7 +78,7 @@ void func_8026B9EC_de(void **resource, struct Owner104 *owner, s32 matrix, s32 s
             }
             break;
         }
-        if (visible && func_80269A80_de(material, pass) != 0) {
+        if (visible && Render_SetupMaterial(material, pass) != 0) {
             Gfx *cmd;
             void *list = Render_GetPackSection(part, 1);
 

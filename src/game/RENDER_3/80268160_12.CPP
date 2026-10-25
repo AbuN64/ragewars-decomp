@@ -340,7 +340,7 @@ s32 Render_SetModePreset(s32);
 void Scene_UnlockResource(s32, void *);
 s32 func_802744D4_de(void);
 
-s32 func_80269A80_de(struct Shared_GfxMaterial *mat, s32 pass) {
+s32 Render_SetupMaterial(struct Shared_GfxMaterial *mat, s32 pass) {
     struct Shared_AnimInfo info;
     void *node;
     u32 flags;

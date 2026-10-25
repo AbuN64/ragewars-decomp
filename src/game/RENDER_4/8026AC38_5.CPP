@@ -7,7 +7,7 @@
 #include "RENDER_4/8026AC38_5.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-/* Draws the parts of a model resource tinted by an RGBA colour through the shared material D_8013B2D8: sets the tint mode D_800D15E0 to 3, clears the material's fog colour and sets its flags, records the colour as floats and its alpha on the material, advances the pass modulo 18, and when the frame's command buffer still has 3000 commands free and func_80269A80_de accepts the material sets the render mode, selects blend 1, registers the resource, loads the matrix (or sets it as segment 1), sets segment 2 to the given texture base or the model's own, sets the lighting on the first part and emits each part whose material blend bits are all set and accepted for the pass, clearing the tint mode afterwards. Adapted from func_8026DD50_de with the tint setup, the render mode and blend commands and the trailing clear added. */
+/* Draws the parts of a model resource tinted by an RGBA colour through the shared material D_8013B2D8: sets the tint mode D_800D15E0 to 3, clears the material's fog colour and sets its flags, records the colour as floats and its alpha on the material, advances the pass modulo 18, and when the frame's command buffer still has 3000 commands free and Render_SetupMaterial accepts the material sets the render mode, selects blend 1, registers the resource, loads the matrix (or sets it as segment 1), sets segment 2 to the given texture base or the model's own, sets the lighting on the first part and emits each part whose material blend bits are all set and accepted for the pass, clearing the tint mode afterwards. Adapted from func_8026DD50_de with the tint setup, the render mode and blend commands and the trailing clear added. */
 
 
 
@@ -28,9 +28,9 @@ extern u32 D_800DD504;
 extern u32 D_800E28A4;
 #endif
 extern ObjectState18 D_8013B2D8;
-extern void func_80253BBC_de(s32 heap, void **resource);
-extern s32 func_8026B504_de(void *matrix, void *lights, void *material);
-extern s32 func_80269A80_de(void *material, s32 pass);
+extern void Scene_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Render_ApplyMaterialLighting(void *matrix, void *lights, void *material);
+extern s32 Render_SetupMaterial(void *material, s32 pass);
 extern void func_80268CE0_de(s32 mode);
 
 void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, void *lights, void *textures, s32 pass, u8 r, u8 g, u8 b, u8 a) {
@@ -70,11 +70,11 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
 #endif
         return;
     }
-    if (func_80269A80_de(shared, pass) != 0) {
+    if (Render_SetupMaterial(shared, pass) != 0) {
         gDPSetRenderMode(D_80110634++, 0x0C184DD8, 0);
         func_80268CE0_de(1);
         header = *resource;
-        func_80253BBC_de(0, resource);
+        Scene_MarkResourceInUse(0, resource);
         if (segment != 0) gSPSegment(D_80110634++, 1, matrix) else gSPMatrix(D_80110634++, matrix, G_MTX_LOAD);
         base = textures;
         if (base == 0) {
@@ -87,9 +87,9 @@ void func_8026D4F0_de(void **resource, void *unused, void *matrix, s32 segment, 
             part = Render_GetPackSection(parts, i);
             material = Render_GetPackSection(part, 0);
             if (i == 0) {
-                func_8026B504_de(matrix, lights, material);
+                Render_ApplyMaterialLighting(matrix, lights, material);
             }
-            if ((((unsigned char *)material)[6] & 0x38) == 0x38 && func_80269A80_de(material, pass) != 0) {
+            if ((((unsigned char *)material)[6] & 0x38) == 0x38 && Render_SetupMaterial(material, pass) != 0) {
                 Gfx *cmd;
                 void *list = Render_GetPackSection(part, 1);
 

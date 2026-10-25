@@ -178,7 +178,7 @@ void func_80250274_de(Owner_func_80250274_de *owner) {
         resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                                  D_800C3E40_de, 0);
         if (resource != 0) {
-            func_80253BBC_de(0, resource);
+            Scene_MarkResourceInUse(0, resource);
             header = (s32 *)resource->data;
             if (header[0] == 1) {
                 char *object = (char *)header + header[1];
@@ -223,7 +223,7 @@ void Instance_DrawModel(ModelOwner *owner) {
     resource = func_80251F6C_de(0, owner->flagsD0 | D_800CD3F0, instance, (CachedResource *)owner->field20, 8, owner, &D_00250C2C,
                              D_800C3E40_de, 0);
     if (resource != 0) {
-        func_80253BBC_de(0, resource);
+        Scene_MarkResourceInUse(0, resource);
         header = (s32 *)resource->data;
         if (header[0] == 1) {
             char *object = (char *)header + header[1];

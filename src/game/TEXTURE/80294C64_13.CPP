@@ -10,7 +10,7 @@
 #include "COMMON/RESIDENTSTATE.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_80253BBC_de(s32 heap, void **resource);
+extern void Scene_MarkResourceInUse(s32 heap, void **resource);
 extern Gfx D_800D0FA0[], D_800D1020[], D_800D10A0[], D_800D1138[], D_800D11D0[];
 
 
@@ -28,7 +28,7 @@ void func_80295FB4_us_rev1(s32 *output, void **resource, s32 frame, s32 secondar
     s32 tile;
     Gfx *list;
 
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     header = *resource;
     info = Render_GetPackSection(header, 0);
     texture = Render_GetPackSection(Render_GetPackSection(header, 1), frame);

@@ -300,7 +300,7 @@ void func_8026AD8C_de(s32 unused, struct Shape_typemap_165 **res, s32 extra, s32
 
 typedef struct { s32 flagWord; char pad4[2]; u8 flags; } ModelMaterial;
 
-s32 func_8026B504_de(void *model, void *lights, ModelMaterial *material) {
+s32 Render_ApplyMaterialLighting(void *model, void *lights, ModelMaterial *material) {
     CVector3 direction;
     CVector3 position;
     f32 matrix[4][4];
@@ -339,8 +339,8 @@ s32 func_8026B504_de(void *model, void *lights, ModelMaterial *material) {
 #include "COMMON/DISPLAY.H"
 extern u32 D_800E28A4;
 extern CGameStatus D_801468A0;
-extern void func_80253BBC_de(s32 heap, void **resource);
-extern s32 func_80269A80_de(void *material, s32 pass);
+extern void Scene_MarkResourceInUse(s32 heap, void **resource);
+extern s32 Render_SetupMaterial(void *material, s32 pass);
 /* Draws an actor model's parts, choosing each part by the 0x38 bits of its material byte 6: on the special
  * character 0x12 the part must equal the bits for its variant (or be a fade/bonus part whose flag is set),
  * otherwise the 0x38/0x30/0x10 groups are drawn only when the matching flag (fade, bonus, glow) is set. */
@@ -377,7 +377,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
         bonus = 1;
     }
     header = *resource;
-    func_80253BBC_de(0, resource);
+    Scene_MarkResourceInUse(0, resource);
     if (segment != 0) {
         gSPSegment(D_80110634++, 1, matrix);
     } else {
@@ -395,7 +395,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
         part = Render_GetPackSection(parts, i);
         material = Render_GetPackSection(part, 0);
         if (i == 0) {
-            func_8026B504_de(matrix, lights, material);
+            Render_ApplyMaterialLighting(matrix, lights, material);
         }
         state = owner->profile;
         if (state->character == 0x12 && (D_801468A0.m_bFragTagOn == 0 || state->bonus == 0)) {
@@ -410,7 +410,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             }
             bits = material->mode & 0x38;
             if (bits == wanted || (bits == 0x38 && hide != 0) || (bits == 0x30 && bonus != 0)) {
-                if (func_80269A80_de(material, pass) != 0) {
+                if (Render_SetupMaterial(material, pass) != 0) {
                     void *list = Render_GetPackSection(part, 1);
                     gSPDisplayList(D_80110634++, list);
                 }
@@ -420,7 +420,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
             if (bits == 0x38 && hide == 0) continue;
             if (bits == 0x30 && bonus == 0) continue;
             if (bits == 0x10 && glow == 0) continue;
-            if (func_80269A80_de(material, pass) != 0) {
+            if (Render_SetupMaterial(material, pass) != 0) {
                 void *list = Render_GetPackSection(part, 1);
                 gSPDisplayList(D_80110634++, list);
             }

@@ -29,7 +29,7 @@ extern void Scene_UpdateSelectionTransition(struct Shared_World *);
 extern void func_8028D64C_de(void *);
 
 struct Node80253610;
-extern void func_80253BBC_de(s32, struct Node80253610 *);
+extern void Scene_MarkResourceInUse(s32, struct Node80253610 *);
 extern void func_802A56FC_de(void *);
 struct ObjectPool;
 extern void func_8022A170_de(struct ObjectPool *);

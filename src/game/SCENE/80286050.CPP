@@ -47,7 +47,7 @@ void func_80286080_de(void *arg0) {
     state->counter120 = 0;
     state->counter124 = 0;
     func_80279990_de(state->system128);
-    func_80253BBC_de(0, state->resource);
+    Scene_MarkResourceInUse(0, state->resource);
     {
         void *manager;
 
