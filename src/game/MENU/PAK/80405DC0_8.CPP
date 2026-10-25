@@ -265,45 +265,37 @@ finish:
 }
 #endif
 
-#ifdef NON_MATCHING
 #include "TYPES.H"
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0;
-extern char D_0044EA08[], D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
+extern s32 D_8014561C, D_0044ED44, D_8011FECC;
+extern char D_0044EA08[];
 extern void func_80404E28_de(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
 extern void Pak_CreateSaveSnapshot(ObjRecAt5DC *);
 extern u32 func_804057F8_de(void *data, u32 size, u32 seed);
-/* Pak_SaveControllerRecord's channel label (80405DC0_9.CPP). */
-static __inline__ char *pakRecordChannelLabel(s32 channel) {
-    switch (channel) {
-    case 0:
-    default: return D_00450BF0_de;
-    case 1: return D_00450C14_de;
-    case 2: return D_00450C38_de;
-    case 3: return D_00450C5C_de;
-    }
-}
-/* Pak_SaveControllerRecord's helper (80405DC0_9.CPP). */
-static __inline__ ObjRecAt5DC *pakRecordChannel(Shared_PakMenu *menu, s32 *channel) {
+void *Pak_OpenDialog(void *, void *, s32, s32, s32);
+/* The channel the pak menu works on: the scanned channel D_800E28C8 while D_8015375C is set, else the slot's. */
+static __inline__ void pakGetChannel(Shared_PakMenu *menu, s32 *channel) {
     if (D_8015375C != 0) {
         *channel = D_800E28C8;
-        return 0;
+    } else {
+        *channel = menu->owner->unk4;
     }
-    *channel = menu->owner->unk4;
-    return menu->player;
 }
-/* func_804098A4_de's body: store the snapshot checksum after the note data. */
+/* func_804098A4_de's body: store the snapshot checksum after the D_8011FECC bytes of note data. */
 static __inline__ void pakSetChecksum(s32 offset, s32 value) {
     *(s32 *)((u8 *)(D_8011FECC + offset) + 0x60C) = value;
 }
-/* us-rev1: 7/94 aligned edits remain: the dead channel-label switch keeps ch in a register (ROM v0, ours v1)
- * and cse2 folds the player copy (ROM loads the player into v0 and copies it to s0 in the beqz slot). */
+/* Opens the pak menu for a snapshot save: unless a message is pending (D_800E28C0), probes the channel's
+   Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (func_80405F48_de),
+   otherwise the damaged-pak (D_0044EA08) or D_0044ED44 prompt opens. Twin of Pak_BeginProfileSave. */
 void func_80406F7C_de(Shared_PakMenu *menu) {
-    s32 ch;
+    ObjRecAt5DC *owner = menu->player;
     ObjRecAt5DC *player;
-    char *prompt;
+    s32 channel;
+
     D_8014D4C0_de = 1;
     D_8014D4DC = 1;
     D_80153760 = 0;
@@ -311,26 +303,27 @@ void func_80406F7C_de(Shared_PakMenu *menu) {
     D_800DE874 = 0;
     D_80153784 = 0;
     D_8015375C = 0;
-    player = pakRecordChannel(menu, &ch);
-    if (D_800E28C0 != 0) {
+    pakGetChannel(menu, &channel);
+    player = owner;
+    if (D_800E28C0) {
         D_80153784 = 1;
         return;
     }
-    prompt = pakRecordChannelLabel(ch);
-    func_80404E28_de(menu->slot->unk4);
-    if (Pak_GetStatus(ch) == 0) {
+    if (D_8015375C) {
+        func_80404E28_de(D_800E28C8);
+    } else {
+        func_80404E28_de(menu->slot->unk4);
+    }
+    if (!Pak_GetStatus(channel)) {
         Pak_CreateSaveSnapshot(player);
         pakSetChecksum((s32)D_800DE868, func_804057F8_de(D_800DE868, D_8011FECC + 0x60C, 11));
         func_80405F48_de(menu);
         return;
     }
     D_80153784 = 1;
-    if (func_80404F3C_de(ch) != 0) {
+    if (func_80404F3C_de(channel)) {
         Pak_OpenDialog(player->unk5DC + 0x554, D_0044EA08, (s32)player, (s32)player->controller, 1);
-    } else if (func_80405598_de(ch) != 0) {
+    } else if (func_80405598_de(channel)) {
         Pak_OpenDialog(&D_8014561C, &D_0044ED44, (s32)player, (s32)player->controller, (s32)D_0044E4D4);
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_80406F7C_de);
-#endif
