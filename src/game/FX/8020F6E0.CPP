@@ -4,27 +4,6 @@
 #include "FX/8020F6E0.H"
 #include "TYPES.H"
 
-#if defined(VERSION_EU)
-#ifdef NON_MATCHING
-/* Drafted from the other version's body in its unit. */
-#else
-INCLUDE_ASM("span_1000", func_8020F6E0_eu);
-#endif
-#endif
-
-#if defined(VERSION_DE) && !defined(NON_MATCHING)
-INCLUDE_ASM("span_1000", func_8020F6C0_de);
-#endif
-
-#if !(defined(VERSION_DE) || defined(VERSION_EU)) || ((defined(VERSION_DE) || defined(VERSION_EU)) && defined(NON_MATCHING))
-/* Fuzzy draft for de and eu: the other versions' body under the de/eu name. */
-#if defined(VERSION_DE)
-#define Fx_UpdateTargetSelection func_8020F6C0_de
-#elif defined(VERSION_EU)
-#define Fx_UpdateTargetSelection func_8020F6E0_eu
-
-#endif
-#ifdef NON_MATCHING
 typedef struct TrackingTarget {
     u8 pad0[8];
     CVector3 position;
@@ -68,7 +47,6 @@ static inline TrackingTarget *setSelectedTarget(TargetSelection *self, TrackingT
     return target;
 }
 
-/* NON_MATCHING: 7 aligned edits / 140 ROM words; remaining: first alternate-copy scheduling and indexed-target tail sharing. */
 s32 Fx_UpdateTargetSelection(void *object) {
     TargetSelection *self = object;
     CVector3 *position;
@@ -78,7 +56,6 @@ s32 Fx_UpdateTargetSelection(void *object) {
     f32 alternateDistance;
     s32 index;
     TrackingTarget *target;
-
     position = func_8020993C_de(self);
     if (self->target != 0) {
         linked = self->target->player;
@@ -112,7 +89,6 @@ s32 Fx_UpdateTargetSelection(void *object) {
         alternate = 0;
         alternateDistance = 0.0f;
     }
-    /* The range limit is the first float; unk4 is the adjacent -1 sentinel. */
     if (func_80209A94_de(self) == 0 || linked == 0) {
         if (func_8020F93C_de(self) == 0) {
             self->target = 0;
@@ -122,37 +98,32 @@ s32 Fx_UpdateTargetSelection(void *object) {
             self->target = (TrackingTarget *)alternate;
             self->targetPosition.x = alternate->pos.x;
             target = (TrackingTarget *)alternate;
-            goto copyRest;
         } else {
             index = func_8020F984_de(self);
             target = setSelectedTarget(self, self->targets[index]);
+            self->targetPosition.x = target->position.x;
         }
     } else if (alternate != 0 && alternateDistance <= linkedDistance) {
         self->target = (TrackingTarget *)alternate;
         self->targetPosition.x = alternate->pos.x;
         target = (TrackingTarget *)alternate;
-        goto copyRest;
     } else {
         index = func_8020F984_de(self);
         if (index != -1 && (f32)self->distances[index] < linkedDistance) {
             target = setSelectedTarget(self, self->targets[index]);
+            self->targetPosition.x = target->position.x;
         } else if (self->state == 1 && *(f32 *)&D_800C21F0_eu_x < linkedDistance) {
             self->target = 0;
             return 1;
         } else {
             target = self->target;
+            self->targetPosition.x = target->position.x;
         }
     }
-    self->targetPosition.x = target->position.x;
-copyRest:
     self->targetPosition.y = target->position.y;
     self->targetPosition.z = target->position.z;
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", Fx_UpdateTargetSelection);
-#endif
-#endif
 
 /* Returns 1 when one of the object's ten entries at 0x3C matches its current value at 0x28C and the
    paired flag at 0x6C is set, and 0 otherwise or when the current value is zero. */
