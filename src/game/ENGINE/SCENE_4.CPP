@@ -148,7 +148,7 @@ typedef struct CScene_t {
 extern Gfx *D_80110634;
 extern s32 D_800D2AE0;
 extern s32 D_800CD730;
-extern Shared_func_80234FDC_S1 *func_802392EC_de(GameplayCamera *camera);
+extern Shared_func_80234FDC_S1 *Camera_FindScreenMessage(GameplayCamera *camera);
 extern void Scene_MarkResourceInUse(s32 heap, struct Node80253610 *resource);
 extern void Scene_UnlockResource(void *heap, struct Node80253610 *resource);
 extern s32 func_80296390_de(void *grid, s32 x, s32 z, s32 index);
@@ -203,7 +203,7 @@ void func_80289084_de(CScene_t *world, GameplayCamera *camera) {
         func_80288EA8_de(world, camera);
         return;
     }
-    player = func_802392EC_de(camera);
+    player = Camera_FindScreenMessage(camera);
     shipModel = SceneFindShip(world->m_pusObjectTypes);
     showShip = 0;
     if (player != NULL && shipModel != -1) {

@@ -9,7 +9,7 @@ extern f32 Math_Sqrtf(float arg0);
 
 
 
-f32 func_8023946C_de(void *gameplayCamera, CVector3 *arg1) {
+f32 Camera_GetDistanceTo(void *gameplayCamera, CVector3 *arg1) {
     CVector3 delta;
     GameplayCamera *camera = gameplayCamera;
     Particle_SubtractVectors(&delta, &camera->position, arg1);

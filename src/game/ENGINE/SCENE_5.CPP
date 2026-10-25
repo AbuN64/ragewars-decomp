@@ -530,7 +530,7 @@ extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_
     *D_800D3354, *D_800D3358, *D_800D335C, *D_800D3360, *D_800D3364, *D_800D3368_de, *D_800D336C,
     *D_800D3370, *D_800D3374, *D_800D3378, *D_800D337C, *D_800D3380, *D_800D3384, *D_800D3388,
     *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
-extern void func_80245AC8_de(void);
+extern void Camera_ClearMessageCount(void);
 extern void func_80245A78_de(char *);
 extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);
@@ -606,7 +606,7 @@ void Scene_ShowResultsGoal(void) {
     LevelChallenge *challenge;
     ResultsHeadingCharacter *character;
 
-    func_80245AC8_de();
+    Camera_ClearMessageCount();
     copyLevelName(&D_8011FE88, D_8015402C, name, 63);
     func_80245A78_de(name);
     if (currentGame()->controllerMode == 0) {

@@ -43,7 +43,7 @@ extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 void Weapons_UpdatePlayerCamera(Shared_ActorView *, Shared_ActorView *);
 
                  /* extern */
-void func_80245864_de(void *);
+void Camera_UpdateSequenceTrack(void *);
 
                             /* extern */
 
@@ -267,7 +267,7 @@ void func_80449E18_de(CPlayerPool *pool) {
             Weapons_UpdatePlayerCamera(actor, actor);
             message = actor->message;
             if (message != 0) {
-                func_80245864_de(message);
+                Camera_UpdateSequenceTrack(message);
             }
             model = actor->model;
             model->field_4 = model->field_4 & ~4;

@@ -56,7 +56,7 @@ extern s32 func_80245908_de(void);
 extern s32 D_800D0EBC;
 #endif
 
-extern void func_8023942C_de(void *arg0);
+extern void Camera_LoadProjectionMatrix(void *arg0);
 
 extern void func_8021EEFC_de(void *arg0, void *arg1);
 
@@ -488,7 +488,7 @@ void func_8022A398_de(void *arg0, void *entity) {
 #if defined(VERSION_US_REV1)
     if (D_800D0EBC != 0) {
 #endif
-        func_8023942C_de(entity);
+        Camera_LoadProjectionMatrix(entity);
         var_s0 = round->players;
         if (var_s0 != 0) {
             do {

@@ -189,10 +189,10 @@ void System_ApplyDamageReaction(void *sourceObject, char *targetObject, s32 abso
         target->eventFlags |= 0x8000;
         if ((source->flags & 0x300000) && source->player->display) {
             if (target->effectFlags & 0x4000) {
-                func_80239324_de((char *)source->player->display, D_800C43C4_de,
+                Camera_StartScaledShake((char *)source->player->display, D_800C43C4_de,
                                  100.0f, D_800C43C4_de, D_800C43C0_de, 1, position);
             } else if (target->effectFlags & 0x2000) {
-                func_80239324_de((char *)source->player->display, D_800C43CC_de,
+                Camera_StartScaledShake((char *)source->player->display, D_800C43CC_de,
                                  50.0f, D_800C43CC_de, D_800C43C8_de, 1, position);
             }
         }

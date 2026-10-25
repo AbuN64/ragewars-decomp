@@ -189,7 +189,7 @@ void func_8042A990_de(void) {
         Resmgr_CopyString(D_800E4F60->text, func_802A0494_de(buffer));
     }
     D_800E4F60->label->text = D_800E4F60->text;
-    func_80245B28_de();
+    Camera_ReleaseSequenceContext();
 }
 
 void func_8042AAD0_de(void) {

@@ -168,7 +168,7 @@ s32 func_804287B8_de(void) {
     Scene_FreeMemory(D_800E4690);
     func_802A2360_de();
     D_800E4690 = 0;
-    func_80245B28_de();
+    Camera_ReleaseSequenceContext();
     return 0;
 }
 

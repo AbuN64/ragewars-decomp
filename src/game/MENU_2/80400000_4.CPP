@@ -139,7 +139,7 @@ s32 func_804009F4_de(s32 index) {
         return 0;
     }
     else {
-        if(D_800E2830->active!=0)func_80245B28_de();
+        if(D_800E2830->active!=0)Camera_ReleaseSequenceContext();
         loaded=Render_LocatePackSection(resources->trackBundle,resources->trackLookup,index+1,&size);
         owner=Scene_RequestResource(0,loaded,loaded,size,0x33,0,D_0040067C,D_800DCB10,1);
         if(owner==0)goto failed;

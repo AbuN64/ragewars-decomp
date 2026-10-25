@@ -28,7 +28,7 @@ static inline u32 averageFour(void) {
  { s32 adjusted=maximum-2; return ((u32)sum-(u32)adjusted)/3; }
 }
 static inline s32 idlePause(TimingWorld *world) {
- if(Pak_CountLiveNodes(&D_8014561C)==0 && Camera_IsSequenceInWindow()!=0 && func_80245B0C_de()==120) {
+ if(Pak_CountLiveNodes(&D_8014561C)==0 && Camera_IsSequenceInWindow()!=0 && Camera_GetSequenceRequest()==120) {
  if(D_801462C8.counters.first==0) {
  if(world->unk26DD4==0) { D_801462C8.counters.first=1;func_804037D4_de(); }
  goto checkFlag;

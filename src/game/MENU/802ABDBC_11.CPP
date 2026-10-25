@@ -187,7 +187,7 @@ s32 func_802ACB18_de(void *arg0, void *arg1) {
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-        func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
+        Camera_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -242,7 +242,7 @@ s32 func_802ACC04_de(void *arg0, void *arg1) {
         sound = ((struct TimedItemEffect *)(arg1))->sound;
         callback = ((struct TimedItemEffect *)(arg1))->callback;
         if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-            func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
+            Camera_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
                           0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (resource != 0) {
                 Camera_PostScreenMessage(&D_80145088,
@@ -294,7 +294,7 @@ s32 func_802ACD28_de(void *arg0, void *arg1) {
     sound = ((struct EntryRecAtE *)(arg1))->sound;
     callback = ((struct EntryRecAtE *)(arg1))->callback;
     if (((struct Actor_func_802AB400_de *)(arg0))->owner != 0) {
-        func_802391AC_de(((struct Actor_func_802AB400_de *)(arg0))->owner,
+        Camera_StartFade(((struct Actor_func_802AB400_de *)(arg0))->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -324,7 +324,7 @@ extern void D_002AD264(void);
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void func_802A6FB8_de(void *arg0, s32 arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5, s32 arg6, void (*arg7)(void), void (*arg8)(void));
-extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
+extern void Camera_StartFade(void *, s32, s32, s32, s32, s32, s32, s32);
 
 typedef struct func_802ADE28_S1 func_802ADE28_S1;
 typedef struct func_802ADE28_S2 func_802ADE28_S2;
@@ -401,7 +401,7 @@ s32 func_802ACE38_de(ActivationActor *arg0, ActivationSlot *arg1, func_802ADE28_
     sound = arg1->unk6;
     callback = arg1->unk8;
     if (arg0->unk5DC != 0) {
-        func_802391AC_de(arg0->unk5DC,
+        Camera_StartFade(arg0->unk5DC,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,

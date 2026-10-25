@@ -7,7 +7,7 @@
    before it through Items_ResetActorPools and func_804499B0_de, releases resource 0x24 of D_8011FE88 through
    func_80286AA8_de, calls func_8025476C_de with one when func_8025477C_de reports nothing, then calls
    func_80245A10_de, func_80245A20_de with zero and func_80245A30_de. */
-extern void func_80245B28_de();
+extern void Camera_ReleaseSequenceContext();
 extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32);
@@ -19,7 +19,7 @@ extern void func_80245A30_de();
 void func_80422020_de(void) {
     char *object;
 
-    func_80245B28_de();
+    Camera_ReleaseSequenceContext();
     object = &D_80145088;
     Items_ResetActorPools(object, 0);
     func_804499B0_de(object - 0x48, 0, 0);

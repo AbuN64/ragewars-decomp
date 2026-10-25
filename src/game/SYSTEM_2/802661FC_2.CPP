@@ -230,7 +230,7 @@ void func_80267CE4_de(s32 unused0, s32 unused1, s32 unused2, Triple arg3, CEvent
     node = D_80140FE8_de;
     while (node != 0) {
         if (func_802393AC_de(node, arg3) != 0) {
-            func_802391AC_de(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
+            Camera_StartFade(node, arg6.a, arg6.b, arg6.c, arg6.m_u8_Value4,
                           arg6.m_u8_Value5, arg6.f, arg6.m_u8_Value7);
         }
         node = node->next;

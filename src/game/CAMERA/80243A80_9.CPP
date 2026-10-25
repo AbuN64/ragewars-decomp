@@ -67,7 +67,7 @@ unsigned int func_80245850_de(void) {
     return D_800E2830->state3C;
 }
 
-void func_80245864_de(void *camera) {
+void Camera_UpdateSequenceTrack(void *camera) {
     Shared_MenuContext *record = D_800E2830;
     if (record->active != 0) {
         Menu_UpdateTrackCamera(camera);
@@ -195,7 +195,7 @@ void func_80245A78_de(int goal) {
     record->messageCount = record->messageCount + 1;
 }
 
-void func_80245AC8_de(void) {
+void Camera_ClearMessageCount(void) {
     D_800E2830->messageCount = 0;
 }
 
@@ -209,7 +209,7 @@ unsigned int func_80245AF8_de(void) {
     return D_800E2830->spec.unknown48;
 }
 
-s32 func_80245B0C_de(void) {
+s32 Camera_GetSequenceRequest(void) {
     return D_800E2830->requestE0;
 }
 
@@ -220,7 +220,7 @@ struct UnresolvedRec;
 static void func_80245B20_de(void) {
 }
 
-void func_80245B28_de(void) {
+void Camera_ReleaseSequenceContext(void) {
     int owner = (s32)D_800E2830->owner;
     Shared_MenuContext *record;
     if (owner != 0) {

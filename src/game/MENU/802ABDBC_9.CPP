@@ -683,7 +683,7 @@ command_done:
         temp_s1 = arg1->unk6;
         temp_s3 = arg1->unk8;
         if (arg0->unk5DC != 0) {
-            func_802391AC_de(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+            Camera_StartFade(arg0->unk5DC, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
             if (temp_s0_2 != 0) {
                 Camera_PostScreenMessage(&D_80145088, arg0->unk5DC, *temp_s0_2);
             }
@@ -723,7 +723,7 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
     s32 sound = entry->sound;
     s32 event = entry->event;
     if (player->owner) {
-        func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->owner, text[MENU_LANGUAGE]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
@@ -782,7 +782,7 @@ s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);
@@ -815,7 +815,7 @@ s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Camera_StartFade(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->pos, 0, -1);

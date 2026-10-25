@@ -242,7 +242,7 @@ struct func_802457D0_S1 {
 
 extern int func_80245764_de();
 
-extern void func_802456A0_de();
+extern void Camera_EndSequence();
 
 
 struct func_802458F8_S1;

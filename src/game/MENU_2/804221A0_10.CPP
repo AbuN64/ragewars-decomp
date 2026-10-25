@@ -58,7 +58,7 @@ extern void func_802A2360_de();
 
 extern void func_802A2394_de();
 
-extern void func_80245B28_de();
+extern void Camera_ReleaseSequenceContext();
 
 extern void func_8042B2E4_de();
 
@@ -132,7 +132,7 @@ s32 func_80422340_de(void) {
     }
     func_802A2394_de();
     if (D_801462C8.controllerMode == 0) {
-        func_80245B28_de();
+        Camera_ReleaseSequenceContext();
         func_8042B2E4_de();
     }
     func_8043C278_de(D_800E44A0);

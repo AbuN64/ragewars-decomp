@@ -6,7 +6,7 @@
 extern Gfx *D_80110634;
 extern s32 D_800D297C;
 
-void func_8023942C_de(u32 arg0) {
+void Camera_LoadProjectionMatrix(u32 arg0) {
     Gfx *cmd;
     u32 offset;
 

@@ -33,7 +33,7 @@ s32 func_802ACFB0_de(Actor_func_802AB400_de *arg0, MultiChannelItemEffect *arg1)
     sound = arg1->effect.sound;
     callback = arg1->effect.callback;
     if (arg0->owner != 0) {
-        func_802391AC_de(arg0->owner,
+        Camera_StartFade(arg0->owner,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -77,7 +77,7 @@ void *func_802AD0B0_de(s32 arg0) {
 /** Apply optional resource, sound, and callback effects for an actor. */
 void func_802AD0E4_de(void *arg0, void *resource, s32 sound, s32 callback) {
     if (((Shared_ActorView *)arg0)->message != 0) {
-        func_802391AC_de(((Shared_ActorView *)arg0)->message,
+        Camera_StartFade(((Shared_ActorView *)arg0)->message,
                       0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (resource != 0) {
             Camera_PostScreenMessage(&D_80145088,
@@ -116,7 +116,7 @@ s32 func_802AD1B4_de(Shared_ActorView *arg0) {
         } else {
             converted = (s32)(value - threshold) | 0x80000000;
         }
-        func_802391AC_de(arg0->message, 0xFF, 0xFF, 0xFF,
+        Camera_StartFade(arg0->message, 0xFF, 0xFF, 0xFF,
                       0xFF, (u8)converted, 1, 0);
     }
     return 1;

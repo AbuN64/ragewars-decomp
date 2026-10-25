@@ -127,7 +127,7 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
         if(forward<0.0f)force=-forward*D_800C2B18_de;
         else force=forward*D_800C2B1C_de;
         if(D_800C2B20_de<force)force=D_800C2B20_de;
-        if(player->views5DC.view5DC_6.storage)func_80239324_de(player->views5DC.view5DC_6.storage,0.0f,force,0.0f,D_800C2B24_de,1,body->unk8);
+        if(player->views5DC.view5DC_6.storage)Camera_StartScaledShake(player->views5DC.view5DC_6.storage,0.0f,force,0.0f,D_800C2B24_de,1,body->unk8);
     }
     if(0.0f<player->views5E8.view6C0_51.unk6C0)func_802233F0_de(player,body,&D_800C9510_de[0]);
     else func_802233F0_de(player,body,&D_800C9510_de[1]);

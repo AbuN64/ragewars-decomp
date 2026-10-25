@@ -10,7 +10,7 @@
 
 s32 Camera_IsSequenceInWindow();                                /* extern */
 s32 func_80245850_de();                                /* extern */
-s32 func_80245B0C_de();                                /* extern */
+s32 Camera_GetSequenceRequest();                                /* extern */
 void func_804037D4_de(void *);                            /* extern */
 s32 Pak_CountLiveNodes(void *);                             
 
@@ -22,7 +22,7 @@ s32 func_80294B9C_de(ObjRecAt26DD4 *arg0) {
     Prompt *prompt;
 
     if ((Pak_CountLiveNodes(&D_8014561C) == 0) && (Camera_IsSequenceInWindow() != 0)) {
-        if (func_80245B0C_de() == 0x78) {
+        if (Camera_GetSequenceRequest() == 0x78) {
             prompt = &D_8014561C.unk1284;
             if (prompt->unk88 == 0) {
                 if (arg0->unk26DD4 == 0) {

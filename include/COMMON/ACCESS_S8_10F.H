@@ -73,7 +73,7 @@ typedef struct Access_s32_C4 Access_s32_C4;
 struct Access_s16_108;
 typedef struct Access_s16_108 Access_s16_108;
 
-extern void func_80245AC8_de();
+extern void Camera_ClearMessageCount();
 
 struct CollisionInfoCode80243A80;
 
@@ -137,7 +137,7 @@ struct func_80245A68_S1 {
 
 extern float D_800C37D4_de;
 
-extern void func_80245B28_de();
+extern void Camera_ReleaseSequenceContext();
 
 struct Record108;
 

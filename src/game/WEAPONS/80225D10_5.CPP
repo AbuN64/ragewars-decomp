@@ -114,7 +114,7 @@ extern void Scene_UnlockResource(s32 arg0, s32 arg1);
 
 
 
-extern void *func_802392EC_de(s32);
+extern void *Camera_FindScreenMessage(s32);
 
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
@@ -409,7 +409,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
     match = D_801468A0;
     team = -1;
     if (match->teams != 0 || match->teamRule != 0) {
-        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) func_802392EC_de(view))->settings)->team;
+        team = ((struct Record *) ((struct OwnerRecAt5D8V2 *) Camera_FindScreenMessage(view))->settings)->team;
     }
     Render_BeginModelBatch();
     for (player = game->unk20; player != 0; player = ((ObjectLinks16E4 *)(player))->unk_16E0) {
@@ -431,7 +431,7 @@ void func_80228958_de(ObjRecAt20V2 *game, s32 view) {
             func_8022F770_de(player + 0x2E8, (char *)player + 0x458);
         }
         if ((D_801468A0->teams != 0 || D_801468A0->teamRule != 0)
-            && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && func_802392EC_de(view) != player) {
+            && ((struct Record *) ((ObjectLinks16E4 *) player)->unk_5D8)->team == team && Camera_FindScreenMessage(view) != player) {
             func_80229D28_de(player);
         }
     }

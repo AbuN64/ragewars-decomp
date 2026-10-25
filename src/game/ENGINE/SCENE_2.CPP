@@ -283,7 +283,7 @@ extern void func_8022A1FC_de(void *pool, void *world);
 extern s32 func_8024D160_de(void *actor);
 extern s32 func_8024E1B4_de(void *actor);
 extern void func_8024B8C4_de(void *actor);
-extern f32 func_8023946C_de(void *camera, CVector3 *position);
+extern f32 Camera_GetDistanceTo(void *camera, CVector3 *position);
 extern s32 func_80296B74_de(void *planes, void *bounds);
 extern void func_80262E88_de(struct SceneEffectPool *scene, void *world);
 
@@ -364,7 +364,7 @@ void Engine_UpdateActorVisibility(Shared_World *world) {
             }
             if (definition->kind == 14) {
             distance_visible:
-                if (func_8023946C_de(camera, &actor->position0) < D_800C520C) {
+                if (Camera_GetDistanceTo(camera, &actor->position0) < D_800C520C) {
                     visible = 1;
                 }
             } else {

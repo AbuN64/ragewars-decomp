@@ -119,7 +119,7 @@ s32 func_804030E0_de(s32 key) {
         }
     }
     Scene_UnlockResource(0, table);
-    func_80245AC8_de();
+    Camera_ClearMessageCount();
     return D_800E2830->targetD8;
 }
 

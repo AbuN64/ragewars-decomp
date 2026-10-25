@@ -350,7 +350,7 @@ struct func_802393C8_S1 {
 
 extern float D_800C3524_de;
 
-extern void func_802391AC_de(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
+extern void Camera_StartFade(void *view, s32 red, s32 green, s32 blue, s32 mode, s32 alpha, s32 duration, s32 delay);
 
 
 typedef char AxisWave_size_check[(sizeof(AxisWave) == 0x14) ? 1 : -1];

@@ -6537,7 +6537,7 @@ typedef struct ThrowPosition {
 } ThrowPosition;
 extern f32 D_800C2870_de;
 extern f32 D_800C2878_de;
-extern void func_80239324_de(char *, f32, f32, f32, f32, s32, CVector3);
+extern void Camera_StartScaledShake(char *, f32, f32, f32, f32, s32, CVector3);
 
 typedef struct PowerHudAnimation {
     void *object; s32 pad4, state; f32 padC, x, y;

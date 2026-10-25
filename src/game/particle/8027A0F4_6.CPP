@@ -46,7 +46,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #else
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
-Shared_ParticleInstance *func_802392EC_de(struct Shared_ParticleView *);
+Shared_ParticleInstance *Camera_FindScreenMessage(struct Shared_ParticleView *);
 s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
 void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
@@ -59,7 +59,7 @@ static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, struct Sh
     Shared_ParticleInstance *inst;
     s32 hit;
 
-    inst = func_802392EC_de(view);
+    inst = Camera_FindScreenMessage(view);
     if (inst != 0 && view->unk24 == 0) {
         Shared_ParticleInstance saved;
         saved = *inst;

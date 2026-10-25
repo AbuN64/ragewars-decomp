@@ -58,7 +58,7 @@ extern void func_8024B6A0_de(void *a, s32 c, s32 flag);
 
 extern void func_802472F0_de(void *arg0);
 
-extern s32 func_80245B0C_de(void);
+extern s32 Camera_GetSequenceRequest(void);
 
 extern s32 D_00206724;
 
@@ -169,7 +169,7 @@ void func_80206604_de(LevelActor *actor, ActorMotionState *motionState) {
     if (D_801462E5.unk0 == 0) {
         actor->flags = flags2 | 0x10000000;
     }
-    if ((actor->type == 0x453) && (func_80245B0C_de() == 0x6F)) {
+    if ((actor->type == 0x453) && (Camera_GetSequenceRequest() == 0x6F)) {
         motionState->secondaryUpdate = &D_0020694C;
     }
 }

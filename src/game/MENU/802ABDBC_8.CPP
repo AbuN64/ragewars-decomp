@@ -188,7 +188,7 @@ extern DraftWeaponAB97C *D_800D052C[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 extern void *Camera_PostScreenMessage(void *, void *, u8 *);
 extern s32 Weapons_AddAmmo(void *, s32, s32), Render_PlaySoundAtPosition(s16, CVector3, s32, s32);
-extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
+extern void Camera_StartFade(void *, s32, s32, s32, s32, s32, s32, s32);
 
 s32 Menu_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
 {
@@ -216,7 +216,7 @@ s32 Menu_ApplyWeaponPickup(DraftPlayerAB97C *player, DraftPickupAB97C *pickup)
     }
     label = pickup->label; sound = pickup->sound; event = pickup->event;
     if (player->ui) {
-        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        Camera_StartFade(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
         if (label != 0) Camera_PostScreenMessage(&D_80145088, player->ui, label[MENU_LANGUAGE]);
     }
     if (sound) Render_PlaySoundAtPosition(sound, player->position, 0, -1);

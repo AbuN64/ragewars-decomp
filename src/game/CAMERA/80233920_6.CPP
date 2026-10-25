@@ -10,7 +10,7 @@ extern u32 func_802337D0_de(struct CShakeAxis_t *state);
 
 void func_80234DE0_de(char *);
 int Camera_IsSequenceInWindow(void);
-void func_80245864_de(void *);
+void Camera_UpdateSequenceTrack(void *);
 f32 func_802459A0_de(void *);
 float func_80245AD8_de(void);
 void func_8026EF58_de(f32 *, f32 *);
@@ -147,7 +147,7 @@ actor_found:
     temp_s4 = &camera->lights[D_800D297C];
     func_802B6900_de(sp28, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f);
     if ((Camera_IsSequenceInWindow() != 0) && (camera != &D_80141008)) {
-        func_80245864_de(camera);
+        Camera_UpdateSequenceTrack(camera);
     }
     temp_f24 = camera->unk5C;
     initial_zoom = camera->unk60;

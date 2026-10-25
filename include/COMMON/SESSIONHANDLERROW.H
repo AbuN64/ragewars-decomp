@@ -131,7 +131,7 @@ typedef struct FrameCallback {
 } FrameCallback;
 extern FrameCallback D_800CD790[];
 extern u64 func_802BADC0_de(void);
-extern s32 func_80245B0C_de(void);
+extern s32 Camera_GetSequenceRequest(void);
 extern u32 func_80245850_de(void);
 extern s32 Pak_CountLiveNodes(Node_Pak_CountLiveNodes **);
 struct GameSession;

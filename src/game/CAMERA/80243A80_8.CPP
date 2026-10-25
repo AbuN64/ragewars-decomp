@@ -19,7 +19,7 @@ extern f32 D_800C37D0_de;
    value at 0x1C lies between the bounds at 0x30 and 0x34. */
 
 
-void func_802456A0_de(void) {
+void Camera_EndSequence(void) {
     if (Camera_IsSequenceActive() != 0) {
         s32 owner;
         Shared_MenuContext *record;
