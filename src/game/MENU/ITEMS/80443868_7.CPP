@@ -64,7 +64,7 @@ void func_80443CD4_de(ArgRecAt1C *arg0) {
         var_s0 = Weapons_GetPlayerIndex((s32 *)&D_80145040, temp_a1);
     }
     func_80264770_de(var_s0);
-    func_80404E28_de(var_s0);
+    Pak_ProbeStatus(var_s0);
 }
 
                           /* const */

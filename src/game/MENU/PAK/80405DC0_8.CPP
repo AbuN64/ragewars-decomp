@@ -19,7 +19,7 @@
 /* Selects a usable Controller Pak, checks its notes and free space, and opens the appropriate prompt. */
 s32 func_8026464C_de(void);
 void func_80293268_de(s32);
-void func_80404E28_de(s32);
+void Pak_ProbeStatus(s32);
 s32 Pak_GetStatus(s32);
 s32 Pak_CountFreeNotes(s32, s32 *);
 int Pak_GetFreePages(int, int *);
@@ -27,7 +27,7 @@ s32 Pak_GetNoteGameName(s32, s32, char **);
 s32 func_80405598_de(s32);
 void func_80405648_de(u8 *, u8 *, s32);
 u32 Ovlgame_BytesToPakPages(u32);
-s32 func_80406858_de(void *, s32, s32 *, s32 *);
+s32 Pak_EvaluateSaveChannel(void *, s32, s32 *, s32 *);
 void * Pak_OpenDialog(void *, void *, s32, s32, s32);
 extern s32 D_0044E4F8;
 #if defined(VERSION_DE)
@@ -67,7 +67,7 @@ static inline s32 Pak_ScanNextChannel(s32 currentChannel) {
     }
     attempts = 0;
     do {
-        func_80404E28_de(channel);
+        Pak_ProbeStatus(channel);
         if (Pak_GetStatus(channel) != -2) {
             break;
         }
@@ -155,7 +155,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
         }
         D_800E28CC = 1;
         if ((D_80142CAC != 0) || (D_80146D60 != 0)) {
-            func_80404E28_de(D_800E28C8);
+            Pak_ProbeStatus(D_800E28C8);
             if (Pak_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
@@ -178,7 +178,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
         firstChannel = D_800E28C8;
         do {
             if (D_800E28C8 != -1) {
-                status = func_80406858_de(menu, D_800E28C8, &firstChannel, &freeChannel);
+                status = Pak_EvaluateSaveChannel(menu, D_800E28C8, &firstChannel, &freeChannel);
                 if (status != 0) {
                     break;
                 }
@@ -187,7 +187,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
         } while (++retries < 4);
         if (status == 0) {
             D_800E28C8 = firstChannel;
-            func_80404E28_de(firstChannel);
+            Pak_ProbeStatus(firstChannel);
             if (Pak_GetStatus(D_800E28C8) == -2) {
                 D_80153784 = 1;
                 D_8014AD9C = 0;
@@ -258,7 +258,7 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
     }
 finish:
     if (D_80153784 == 0) {
-        func_80405F48_de(menu);
+        Pak_MarkSaveNotes(menu);
     }
     D_8014AD94 = 0;
     D_800E28CC = 1;
@@ -269,7 +269,7 @@ finish:
 extern s32 D_8014D4C0_de, D_8014D4DC, D_80153760, D_8014D4EC_de, D_800DE874, D_80153784, D_8015375C, D_800E28C0;
 extern s32 D_8014561C, D_0044ED44, D_8011FECC;
 extern char D_0044EA08[];
-extern void func_80404E28_de(s32 ch);
+extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
@@ -289,7 +289,7 @@ static __inline__ void pakSetChecksum(s32 offset, s32 value) {
     *(s32 *)((u8 *)(D_8011FECC + offset) + 0x60C) = value;
 }
 /* Opens the pak menu for a snapshot save: unless a message is pending (D_800E28C0), probes the channel's
-   Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (func_80405F48_de),
+   Controller Pak; a ready pak gets the save snapshot with its checksum and the note list (Pak_MarkSaveNotes),
    otherwise the damaged-pak (D_0044EA08) or D_0044ED44 prompt opens. Twin of Pak_BeginProfileSave. */
 void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
     ObjRecAt5DC *owner = menu->player;
@@ -310,14 +310,14 @@ void Pak_BeginSnapshotSave(Shared_PakMenu *menu) {
         return;
     }
     if (D_8015375C) {
-        func_80404E28_de(D_800E28C8);
+        Pak_ProbeStatus(D_800E28C8);
     } else {
-        func_80404E28_de(menu->slot->unk4);
+        Pak_ProbeStatus(menu->slot->unk4);
     }
     if (!Pak_GetStatus(channel)) {
         Pak_CreateSaveSnapshot(player);
         pakSetChecksum((s32)D_800DE868, Ovlgame_Crc32(D_800DE868, D_8011FECC + 0x60C, 11));
-        func_80405F48_de(menu);
+        Pak_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;

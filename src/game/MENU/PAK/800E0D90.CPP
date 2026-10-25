@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800E0D90[18] = "Single Save Block";
+const char g_pakSingleSaveBlockName[18] = "Single Save Block";
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800DBA22[1] = {

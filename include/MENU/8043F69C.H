@@ -24,7 +24,7 @@ struct TextLayerMetrics {
     int height;
     int rest[7];
 };
-struct Params_func_804427C4_de {
+struct ParamsPakAllocateMenu {
     char pad[0x14];
     s32 a;
     s32 pad18;

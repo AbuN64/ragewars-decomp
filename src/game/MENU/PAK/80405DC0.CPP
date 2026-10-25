@@ -10,11 +10,11 @@
 #include "MENU/PAK/80405DC0.H"
 #include "MENU/PAK/8043F69C_6.H"
 
-/* Confirms the selected pak menu entry: marks the menu busy and returns when func_80406178_de takes
+/* Confirms the selected pak menu entry: marks the menu busy and returns when Pak_CheckStatusPrompt takes
    over the selected channel; with a profile loaded (D_80153730) it creates the player through
    func_8022A5C0_de, copies the loaded profile (flags, four words and eight name bytes) into the
    player's profile, applies the loaded team through func_8044A0C4_de and shows the player's message
-   through func_804427C4_de; otherwise it deletes the chosen note through Pak_DeleteNote and shows the
+   through Pak_AllocateMenu; otherwise it deletes the chosen note through Pak_DeleteNote and shows the
    D_44F7C0 or D_44F82C result prompt. Returns 1. */
 
 
@@ -53,7 +53,7 @@ extern SharedPlayer *Weapons_FindPlayerByController(char *pool, PakMenuSlot *slo
 
 extern void Items_StartPlayerAnimation(SharedPlayer *player, s32 team);
 
-extern void func_804427C4_de(char *text, Menu_func_80408C4C_de *menu, char *format);
+extern void Pak_AllocateMenu(char *text, Menu_func_80408C4C_de *menu, char *format);
 
 extern s32 Pak_DeleteNote(s32 ch, s32 index);
 
@@ -99,7 +99,7 @@ extern void Items_SetSelection(char *, s32, s32);
 struct GameSession;
 extern void func_8044DDD4_de(struct GameSession *);
 
-extern void func_80404E28_de(s32 ch);
+extern void Pak_ProbeStatus(s32 ch);
 
 extern s32 Pak_GetStatus(s32 ch);
 
@@ -129,7 +129,7 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
     } else {
         ch = menu->slot->unk4;
     }
-    if (func_80406178_de(menu, ch, 0) != 0) {
+    if (Pak_CheckStatusPrompt(menu, ch, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
@@ -146,7 +146,7 @@ s32 func_80408C4C_de(void *unused, Menu_func_80408C4C_de *menu) {
             profile->name[i] = D_8014D4B4[i];
         }
         Items_StartPlayerAnimation(player, D_8014D490);
-        func_804427C4_de(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
+        Pak_AllocateMenu(player->views5DC.view5DC_7.messages + 0x554, menu, D_0044FA6C);
         return 1;
     }
     if (Pak_DeleteNote(ch, D_8014D4FC) == 0) {
@@ -197,7 +197,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
         D_8014ADA0 = 1;
     }
     if (D_80153788 == 4 && D_80153760 != 0 && D_8014D4EC_de == 0) {
-        func_80404E28_de(ch);
+        Pak_ProbeStatus(ch);
         status = Pak_GetStatus(ch);
         connected = func_80264580_de(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
@@ -206,7 +206,7 @@ s32 func_80408DF0_de(void *owner, MenuRecAt24 *menu) {
             Pak_OpenDialog(D_8014561C, D_0044FFA4, menu->player, menu->slot, 0);
         }
     } else if (D_80153788 == 3 && D_8014D4D4 != 0) {
-        func_80404E28_de(ch);
+        Pak_ProbeStatus(ch);
         status = Pak_GetStatus(ch);
         connected = func_80264580_de(ch);
         if ((status == 0 || connected != 0) && status != -2 && menu->prompt == (char *)1) {
@@ -236,12 +236,12 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             } else {
                 ch = menu->slot->unk4;
             }
-            if (func_80406178_de(menu, ch, 1) != 0) {
+            if (Pak_CheckStatusPrompt(menu, ch, 1) != 0) {
                 D_80153784 = 1;
                 Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
-            func_80404E28_de(ch);
+            Pak_ProbeStatus(ch);
             if (Pak_DeleteNote(ch, D_8014D4C4) == 0) {
                 Pak_OpenDialog(D_8014561C, D_0044EB70, menu->player, menu->slot, menu->prompt);
             } else {
@@ -254,12 +254,12 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             } else {
                 ch = menu->slot->unk4;
             }
-            if (func_80406178_de(menu, ch, 1) != 0) {
+            if (Pak_CheckStatusPrompt(menu, ch, 1) != 0) {
                 D_80153784 = 1;
                 Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
-            func_80404E28_de(ch);
+            Pak_ProbeStatus(ch);
             if (Pak_DeleteNote(ch, D_8014D4FC) == 0) {
                 Pak_SaveSnapshotAndClose(owner, menu, arg);
                 return 1;
@@ -272,12 +272,12 @@ s32 func_80409144_de(void *owner, MenuRecAt24 *menu, void *arg) {
             } else {
                 ch = menu->slot->unk4;
             }
-            if (func_80406178_de(menu, ch, 1) != 0) {
+            if (Pak_CheckStatusPrompt(menu, ch, 1) != 0) {
                 D_80153784 = 1;
                 Pak_OpenDialog(D_8014561C, menu->prompt, menu->player, menu->slot, 0);
                 break;
             }
-            func_80404E28_de(ch);
+            Pak_ProbeStatus(ch);
             if (func_804051D4_de(ch) == 0) {
                 Pak_OpenDialog(D_8014561C, D_0044EB94, menu->player, menu->slot, menu->prompt);
             } else {

@@ -49,13 +49,13 @@ s32 func_8040A300_de(struct LayeredText *field, struct Shared_PakMenu *holder);
 
 extern s32 func_802645D0_de(s32);
 
-extern void func_80404E28_de(s32);
-void func_80404E28_de(s32);
+extern void Pak_ProbeStatus(s32);
+void Pak_ProbeStatus(s32);
 s32 Pak_GetStatus(s32);
 
 extern char D_800DCD80[];
 
-extern char D_800DCD84[];
+extern char g_pakFormatDottedTriple[];
 
-extern char D_800DCD94_de[];
+extern char g_pakFormatInt04[];
 #endif

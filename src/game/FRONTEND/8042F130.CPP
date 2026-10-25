@@ -153,7 +153,7 @@ extern void Frontend_RelabelSlotRows(s32);
 extern void Frontend_RefreshPlayerPanel(s32);
 extern void func_80264770_de(s32);
 extern void func_8022EF30_de(Profile *);
-extern void func_80404E28_de(s32);
+extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32);
 extern void Frontend_RequestScreenMode(s32);
 extern void func_802A2394_de(void);
@@ -310,7 +310,7 @@ s32 func_8042F130_us_rev1(void *screen) {
     case 6:
         if (D_800DF4C4 == 0) {
             for (i = 0; i < 4; i++) {
-                func_80404E28_de(i);
+                Pak_ProbeStatus(i);
                 switch (Pak_GetStatus(i)) {
                 case -4:
                 case -3:
@@ -324,7 +324,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                 }
             }
         } else {
-            func_80404E28_de(D_800DF4C0);
+            Pak_ProbeStatus(D_800DF4C0);
             switch (Pak_GetStatus(D_800DF4C0)) {
             case -4:
             case -3:

@@ -6,7 +6,7 @@
 #include "TYPES.H"
 typedef struct { u8 pad0[0x14]; char **text; } PakTextEu;
 extern s32 D_80153774;
-extern s32 func_80441FE8_de(void *);
+extern s32 Pak_CountLineChars(void *);
 extern char D_800E2984_eu[], D_8014B49B[], D_800D2478[], D_8014B494[];
 /* Select the status text and right-align its nonblank characters (the us body with eu addresses; the eu symbol of the
    pointer table is D_8014B49B, of the last status character D_800D2478, of the status characters D_8014B494). */
@@ -24,7 +24,7 @@ s32 func_8040AB70_eu(PakTextEu *entry) {
     scan = (u8 *)D_800D2478;
     while (*scan-- == 0x20 && count != 0) count--;
     dst = entry->text[D_80152789];
-    dst += func_80441FE8_de(entry) - 8;
+    dst += Pak_CountLineChars(entry) - 8;
     for (i = 7; i >= 0; i--) dst[i] = 0x20;
     dst += 8 - count;
     for (i = 0; i < count; i++) *dst++ = D_8014B494[i];
@@ -63,7 +63,7 @@ s32 func_8040AC68_eu(PakTextEu *entry) {
     }
     src = table[D_80152789];
     dst = entry->text[D_80152789];
-    dst += func_80441FE8_de(entry) - 11;
+    dst += Pak_CountLineChars(entry) - 11;
     for (i = 0; i < 11; i++) {
         *dst++ = *src++;
     }

@@ -53,7 +53,7 @@ extern char *D_800D3758;
 
 extern char *D_800D375C;
 
-extern s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size,
+extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
 extern s32 func_804057BC_de(u8 *name, s32 size);
@@ -94,7 +94,7 @@ extern char D_8014561C[];
 
 extern char D_0044EEF4[];
 
-extern s32 func_80406178_de(Shared_PakMenu *menu, s32 ch, s32 mode);
+extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *menu, s32 ch, s32 mode);
 
 extern s32 Pak_SaveControllerRecord(s32 arg0, Shared_PakMenu *menu, s32 arg2);
 
@@ -107,7 +107,7 @@ extern void func_80405648_de(s32 state, char *name, s32 size);
 
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
 
-extern void func_80404E28_de(s32 ch);
+extern void Pak_ProbeStatus(s32 ch);
 
 extern s32 Pak_GetStatus(s32 ch);
 
@@ -171,7 +171,7 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
     } else {
         ch = menu->owner->unk4;
     }
-    result = func_8040458C_de(ch, index, &exists, name, ext, &size, companyCode, gameCode);
+    result = Pak_ReadNoteInfo(ch, index, &exists, name, ext, &size, companyCode, gameCode);
     if (exists != 0 && result == 0) {
         if (func_804057BC_de(name, 16) != 0) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -217,7 +217,7 @@ s32 func_80407F6C_de(PakNoteTextEntry *entry, PakNotesMenu *menu) {
         *dst++ = c;
     }
     *dst += 2;
-    func_802658E4_de(dst, D_800E0DA4, size);
+    func_802658E4_de(dst, g_pakFormatInt3, size);
     return 0;
 }
 
@@ -244,12 +244,12 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         if (Pak_GetFreePages(ch, &freeSpace) == 0) {
             if (D_8014D4EC_de) need=Ovlgame_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
             text = ENTRY_TEXT(entry);
-            func_802658E4_de(digits.c, D_800E0DA4, freeSpace);
+            func_802658E4_de(digits.c, g_pakFormatInt3, freeSpace);
             text += 14;
             *text++ = digits.c[0];
             *text++ = digits.c[1];
             *text = digits.c[2];
-            func_802658E4_de(digits.c, D_800E0DA4, need);
+            func_802658E4_de(digits.c, g_pakFormatInt3, need);
             text += 15;
             *text++ = digits.c[0];
             *text = digits.c[1];
@@ -267,7 +267,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
         text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;
-            format = D_800E0DA4;
+            format = g_pakFormatInt3;
             func_802658E4_de(buffer->c, format, freeSpace);
             *text++ = digits.c[0];
             *text++ = digits.c[1];
@@ -301,7 +301,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
     } else {
         use = ch;
     }
-    if (func_80406178_de(menu, use, 0) != 0) {
+    if (Pak_CheckStatusPrompt(menu, use, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
@@ -328,7 +328,7 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             }
         }
         for (tries = 0; tries < 4; tries++) {
-            func_80404E28_de(next);
+            Pak_ProbeStatus(next);
             if (Pak_GetStatus(next) != -2) {
                 break;
             }
@@ -351,11 +351,11 @@ s32 func_804082FC_de(s32 arg0, Shared_PakMenu *menu, s32 arg2)
             c = menu->owner->unk4;
         }
         ch = c;
-        if (func_80406178_de(menu, c, 0) != 0) {
+        if (Pak_CheckStatusPrompt(menu, c, 0) != 0) {
             D_80153784 = 1;
             return 1;
         }
-        func_80405F48_de(menu);
+        Pak_MarkSaveNotes(menu);
     }
     return 0;
 }

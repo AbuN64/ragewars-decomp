@@ -12,7 +12,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
    buffer D_8011FECC points to. */
 extern char *D_8011FECC;
 
-extern char D_800DCD60[];
+extern char g_pakSingleSaveBlockName[];
 
 extern void func_80253908_de(s32 a);
 
@@ -74,7 +74,7 @@ void func_804098CC_de(void ***handle, void **data, s32 units) {
     } else {
         units = (s32)(D_8011FECC + 0x610);
     }
-    block = Scene_AllocateResource(0, units, 0x33, D_800DCD60);
+    block = Scene_AllocateResource(0, units, 0x33, g_pakSingleSaveBlockName);
     *handle = block;
     first = *block;
     *data = first;

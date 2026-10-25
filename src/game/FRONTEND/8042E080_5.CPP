@@ -6,7 +6,7 @@
 
 /* Runs the block D_800E54A4 points to on event 1: in phase 3 at 0x4C it counts each player's timer
    at 0x14 of its 2920-byte record at 0x58 down and, when one expires, marks it -1 and resets that
-   player through func_80404E28_de and func_80433610_de between func_802A2394_de and func_802A2360_de; then it
+   player through Pak_ProbeStatus and func_80433610_de between func_802A2394_de and func_802A2360_de; then it
    advances the menu at 0x8 with Frontend_DrawMenuImage and func_8043C2A4_de while func_8043C308_de reports 1, and
    once it reports 2 in phase 5 at 0x54 calls MarkMenuEventHandled and moves on through func_8042CFDC_de,
    func_8042D034_de or func_804389F0_de as the cartridge's jump table jtbl_800E1BB0 chooses for option
@@ -18,7 +18,7 @@
 
 extern void func_802A2394_de();
 extern void func_802A2360_de();
-extern void func_80404E28_de(s32);
+extern void Pak_ProbeStatus(s32);
 extern void func_80433610_de(s32);
 extern s32 func_8043C308_de(void *);
 extern void Frontend_DrawMenuImage(void *);
@@ -40,7 +40,7 @@ s32 func_8042F7A8_de(void *unused0, void *unused1, s32 event) {
             if (D_800E54A4->players[i].back > 0 && --D_800E54A4->players[i].back == 0) {
                 D_800E54A4->players[i].back = -1;
                 func_802A2394_de();
-                func_80404E28_de(i);
+                Pak_ProbeStatus(i);
                 func_80433610_de(i);
                 func_802A2360_de();
             }

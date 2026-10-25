@@ -28,7 +28,7 @@ extern char D_800ED404_eu[];
 #endif
 
 
-extern s32 func_80441FE8_de(struct Field *);
+extern s32 Pak_CountLineChars(struct Field *);
 
 
 /* Points a field's text at D_800D7810 when the option D_80153780 is set and at D_800D7814 otherwise, and returns
@@ -63,7 +63,7 @@ func_802AD2A8
 
 /* Formats the three floats at offsets 0xC, 0x10 and 0x14 of the structure D_800E28BC points to,
    truncated to integers, into a field's text with the format D_800DCD84, nine bytes before the
-   length func_80441FE8_de reports. Returns zero. */
+   length Pak_CountLineChars reports. Returns zero. */
 
 s32 func_8040A614_de(struct Field *field) {
     s32 x = D_800E28BC->x;
@@ -78,9 +78,9 @@ s32 func_8040A614_de(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_8026591C_de(text + (func_80441FE8_de(field) - 9), D_800ED404_eu, z, y, x);
+    func_8026591C_de(text + (Pak_CountLineChars(field) - 9), D_800ED404_eu, z, y, x);
 #else
-    func_8026591C_de(text + (func_80441FE8_de(field) - 9), D_800DCD84, z, y, x);
+    func_8026591C_de(text + (Pak_CountLineChars(field) - 9), g_pakFormatDottedTriple, z, y, x);
 #endif
     return 0;
 }

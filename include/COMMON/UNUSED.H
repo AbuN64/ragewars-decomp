@@ -589,7 +589,7 @@ extern void D_002BC76C(void);
 
 extern s32 D_800E3300;
 
-extern char D_800DCD7C[];
+extern char g_pakFormatInt1[];
 
 extern char D_0044E9C0[];
 
@@ -1143,7 +1143,7 @@ extern TextEntry D_800DF544[];
 
 extern s32 D_800C3EA8_de;
 
-extern char D_800E0DA4[];
+extern char g_pakFormatInt3[];
 
 extern char *D_800E1E24_eu[];
 
@@ -1265,7 +1265,7 @@ extern s32 D_0044F6C4;
 
 extern const double D_800C72F0_de;
 
-extern char D_800DCCE8_de[];
+extern char g_pakWriteScratchNoteName[];
 
 extern u8 D_8014D4B0;
 
@@ -1636,7 +1636,7 @@ extern s32 D_800CBC1C;
 
 extern ResourceCacheEntry *D_80104574;
 
-extern char D_800DCD60[];
+extern char g_pakSingleSaveBlockName[];
 
 extern f32 D_800C621C_de;
 
@@ -1933,7 +1933,7 @@ extern struct D_800C7470_Pair D_800C27C0_de;
 
 extern s32 D_8011B9F0;
 
-extern char D_800DCCD0[];
+extern char g_pakReadScratchNoteName[];
 
 extern char D_800D7638[];
 
@@ -2136,7 +2136,7 @@ extern u32 D_800DE854;
 
 extern Handler802A2B50 D_800E3368;
 
-extern char D_800E27D0;
+extern char g_pakFormatInt06;
 
 extern float D_800C61BC_de;
 
@@ -18080,8 +18080,8 @@ struct State802A697C;
 typedef struct State802A697C State802A697C;
 struct StateInfo;
 typedef struct StateInfo StateInfo;
-struct Table_func_804428F8_de;
-typedef struct Table_func_804428F8_de Table_func_804428F8_de;
+struct TablePakUpdateDialogList;
+typedef struct TablePakUpdateDialogList TablePakUpdateDialogList;
 struct TargetPosition;
 typedef struct TargetPosition TargetPosition;
 struct CROMSwoosh_t;

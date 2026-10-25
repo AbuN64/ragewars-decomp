@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-const char D_auto_rodata_shared_800E0D00[22] = "Mempak read temp data";
+const char g_pakReadScratchNoteName[22] = "Mempak read temp data";
 
 #if defined(VERSION_US)
 unsigned short rodata_unresolved_800DB996[1] = {

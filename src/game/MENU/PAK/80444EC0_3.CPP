@@ -24,7 +24,7 @@ s32 func_80444D9C_de(LayeredText *item) {
     else {
         item->text = D_800E22F4;
         text = item->text[game->language];
-        length = func_80441FE8_de(item);
+        length = Pak_CountLineChars(item);
         func_802658E4_de((char *)text + (length - 4), D_800DE758_de, code);
     }
     return 0;
@@ -40,7 +40,7 @@ extern u8 *D_800D3628;
 #endif
 extern s32 func_8025477C_de(void);
 extern void func_8025476C_de(u32);
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 s32 func_80444D9C_de(LayeredText *item) {
     u32 code;
@@ -63,7 +63,7 @@ s32 func_80444D9C_de(LayeredText *item) {
         item->text = &D_800D3628;
         text = *item->text;
 #endif
-        length = func_80441FE8_de(item);
+        length = Pak_CountLineChars(item);
         func_802658E4_de((char *)text + (length - 4), D_800DE758_de, code);
     }
     return 0;

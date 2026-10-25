@@ -22,7 +22,7 @@ extern char D_800ED414[];
 #else
 #endif
 
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 
 /* Draws an item's label at its position into the text layer D_8014561C through Pak_OpenDialog, using
@@ -147,7 +147,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 
 
-/* Latches D_80153768 to one when the record's team value is not -1 and both func_802645D0_de and func_80406178_de accept it, then returns D_80153768. Adapted from func_80409C0C_de with the latch D_80153784 changed to D_80153768. */
+/* Latches D_80153768 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153768. Adapted from func_80409C0C_de with the latch D_80153784 changed to D_80153768. */
 
 
 
@@ -155,7 +155,7 @@ extern void Pak_OpenDialog(char *, char *, int, int, int);
 
 extern s32 D_8015375C;
 
-extern s32 func_80406178_de(struct Shared_PakMenu *, s32, s32);
+extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
 static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
@@ -169,12 +169,12 @@ s32 func_8040A9A0_de(LayeredText *field) {
     s32 value = D_8015D48C;
     char *text = (char *)field->text[D_80152789];
 
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800ED414, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800ED414, value);
 #else
     s32 value = D_8014D488.values[2];
     char *text = (char *)*field->text;
 
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800DCD94_de, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_pakFormatInt04, value);
 #endif
     return 0;
 }
@@ -722,7 +722,7 @@ s32 func_8040B2C8_de(struct Shared_PakMenu *record) {
     if (D_80153768 == 0) {
         if (func_80409BDC_de(record) != -1) {
             if (func_802645D0_de(func_80409BDC_de(record)) != 0) {
-                if (func_80406178_de(record, func_80409BDC_de(record), 0) != 0) {
+                if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153768 = 1;
                 }
             }

@@ -13,7 +13,7 @@
 
 extern s32 D_8015375C;
 
-extern s32 func_80406178_de(Menu_func_804066BC_de *, s32, s32);
+extern s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *, s32, s32);
 
 extern void *Pak_OpenDialog(struct func_8025E5B0_S1 *, struct Dialog *, s32, s32, s32);
 
@@ -21,7 +21,7 @@ static __inline__ void pakShow(Menu_func_804066BC_de *menu) {
     s32 channel;
     if (D_8015375C) channel = D_800E28C8;
     else channel = menu->slot->unk4;
-    if (func_80406178_de(menu, channel, 1)) {
+    if (Pak_CheckStatusPrompt(menu, channel, 1)) {
         D_80153784 = 1;
         Pak_OpenDialog(&D_80145040.dialogOwner, menu->prompt, (s32)menu->player, (s32)menu->slot, 0);
     } else {
@@ -58,7 +58,7 @@ static __inline__ void *menuPrompt(Menu_func_804066BC_de *menu) {
 }
 
 /* Finds the first available controller slot and caches its index. */
-void func_80404E28_de(s32);
+void Pak_ProbeStatus(s32);
 
  /* extern */
 s32 Pak_GetStatus(s32);
@@ -108,7 +108,7 @@ void func_80409744_de(void) {
         var_s1 = 0;
     unavailable = -2;
 loop_2:
-        func_80404E28_de(var_s0);
+        Pak_ProbeStatus(var_s0);
         if (Pak_GetStatus(var_s0) == unavailable) {
             var_s0 += 1;
             if (var_s0 >= 4) {

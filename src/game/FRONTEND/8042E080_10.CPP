@@ -40,7 +40,7 @@ extern void Frontend_SetWidgetFlag08(void *, s32);
 extern s32 Pak_DeleteNote(s32, s32);
 
 extern void func_8022EF30_de(void *);
-extern void func_80404E28_de(s32);
+extern void Pak_ProbeStatus(s32);
 extern void func_80433610_de(s32);
 extern void Frontend_RelabelSlotRows(s32);
 
@@ -425,7 +425,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
                 D_800E54A4->players[p].state = 4;
                 Frontend_RefreshPlayerPanel(p);
             } else {
-                func_80404E28_de(p);
+                Pak_ProbeStatus(p);
                 func_80433610_de(p);
             }
             break;

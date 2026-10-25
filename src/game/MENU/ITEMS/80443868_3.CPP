@@ -20,7 +20,7 @@ s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
     s32 player = Weapons_GetPlayerIndex(players, holder->locked);
     s32 value = D_801522DE[player * 75];
     char *text = (char *)field->text[players->game.language];
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
     return 0;
 }
 #endif
@@ -33,7 +33,7 @@ extern char D_800EED80[];
 #endif
 /* Formats the halfword D_801422DE holds for the player func_8022A5A0_de identifies from the owner at offset
    0x1C of the second argument, player records being 150 bytes apart, into a field's text with the
-   format D_800DE700 four bytes before the length func_80441FE8_de reports. Returns zero. */
+   format D_800DE700 four bytes before the length Pak_CountLineChars reports. Returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern struct LocalizedInputState D_80145040;
@@ -43,7 +43,7 @@ extern char D_80145040[];
 
 extern char g_fmtDec4Pad[];
 extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
@@ -65,9 +65,9 @@ s32 func_80443998_de(LayeredText *field, struct MenuRules *holder) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
 #else
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtDec4Pad, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

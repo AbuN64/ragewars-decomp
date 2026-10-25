@@ -23,7 +23,7 @@ char *func_80442214_de(struct ObjRecAt20V2 *object) {
 }
 
 /* Computes a glyph advance using character widths and special spacing before T. */
-f32 func_8044222C_de(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
+f32 Pak_GetGlyphAdvance(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
     f32 factor;
     s32 cur;
     s32 next_a;
@@ -67,7 +67,7 @@ f32 func_8044222C_de(s32 ch, u8 next_ch, f32 scale, f32 special_advance) {
     return factor * scale;
 }
 
-/* Sums the glyph advances that func_8044222C_de returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
+/* Sums the glyph advances that Pak_GetGlyphAdvance returns for each character pair of a string at the given scales, stopping at a newline, the end of the string or a null pointer. */
 
 f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
     f32 total;
@@ -76,7 +76,7 @@ f32 Pak_MeasureLine(u8 *p, f32 sx, f32 sy) {
     total = 0.0f;
     while (p != 0 && (c = *p) != 0 && c != '\n') {
         p++;
-        total += func_8044222C_de(c, *p, sx, sy);
+        total += Pak_GetGlyphAdvance(c, *p, sx, sy);
     }
     return total;
 }
@@ -121,7 +121,7 @@ s32 Pak_AdjustValue(func_8022A404_S1 *menu,s32 value,s32 step,s32 minimum,s32 ma
  /* extern */
  /* extern */
 
-s32 func_80442488_de(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
+s32 Pak_StepValue(func_8022A404_S1 *menu, s32 value, s32 step, s32 minimum, s32 maximum, s32 wrap) {
     s32 stepped;
     s32 current;
     s32 result;
@@ -157,7 +157,7 @@ void func_80442544_de(void *object) {
     ((MessageList *)object)->rotation = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and three values passed as arguments and a zero as the first value changed. */
+/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from a zero and three arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and three values passed as arguments and a zero as the first value changed. */
 
 extern char D_800DE4EC_de[];
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
@@ -234,7 +234,7 @@ void *func_80442690_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V2 *p
 extern char D_800DE4EC_de[];
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
-void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427C4_de *params, struct Dialog *list) {
+void *Pak_AllocateMenu(struct func_8025E5B0_S1 *owner, struct ParamsPakAllocateMenu *params, struct Dialog *list) {
     s32 a = params->a;
     s32 b = params->b;
     s32 c = params->c;
@@ -276,7 +276,7 @@ void *func_804427C4_de(struct func_8025E5B0_S1 *owner, struct Params_func_804427
 extern MessageList D_8014561C;
 extern s32 Pak_UpdateMenuEntries(CMenu *, MessageList *);
 
-void func_804428F8_de(MessageList *list) {
+void Pak_UpdateDialogList(MessageList *list) {
     CMenu *node;
     CMenu *next;
     StateRecAtBCV1 *state;

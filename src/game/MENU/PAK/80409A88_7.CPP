@@ -41,7 +41,7 @@ extern char *D_800D7E14[];
 #endif
 
 /* Formats the word at offset 0x1C of the structure D_800E28BC points to, shifted down eight bits,
-   into a field's text with the format D_800E0DA4, three bytes before the length func_80441FE8_de
+   into a field's text with the format D_800E0DA4, three bytes before the length Pak_CountLineChars
    reports, and returns zero. */
 
 
@@ -50,7 +50,7 @@ extern char *D_800D7E14[];
 
 
 
-extern s32 func_80441FE8_de(struct Field *);
+extern s32 Pak_CountLineChars(struct Field *);
 
 
 /* Selects a menu field's label table from the connection mode and the option index. */
@@ -138,6 +138,6 @@ s32 func_8040A530_de(struct Field *field) {
         *field->text;
 #endif
 
-    func_802658E4_de(text + (func_80441FE8_de(field) - 3), D_800E0DA4, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 3), g_pakFormatInt3, value);
     return 0;
 }

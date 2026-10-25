@@ -63,8 +63,8 @@ extern u8 *D_800E4094[];
 extern u8 *D_800E40A4[];
 extern char D_800EEE10[];
 extern char D_800EEE18[];
-extern char D_800E27E0[];
-extern char D_800E27E8[];
+extern char g_pakFormatSpacedInt2[];
+extern char g_pakFormatSpacedInt3[];
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern char *D_800D7DC8[];

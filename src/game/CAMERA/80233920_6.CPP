@@ -35,7 +35,7 @@ int func_802A23F0_de(void);
 void func_802B6F9C_de(float *, u16 *, float, float, float, float, float);
 
 f32 Math_Sqrtf(f32);
-void func_804428F8_de(void *);
+void Pak_UpdateDialogList(void *);
 s32 func_802343C8_de();                        /* extern */
 void func_802349C0_de(void *);                        /* extern */
 void Sched_UpdateSceneEffects(void *scene, void *host);                  /* extern */
@@ -322,7 +322,7 @@ actor_found:
         func_8026FC9C_de(sp228, camera->unk448[D_800D297C]);
     }
     Sched_UpdateSceneEffects(&camera->unk570, camera);
-    func_804428F8_de(&camera->messageList);
+    Pak_UpdateDialogList(&camera->messageList);
     if (Camera_IsSequenceInWindow() != 0) {
         camera->unk58 = ((void *(*)())Scene_FindFloorPolygon)(&D_8011FE88, &camera->unk38);
     }

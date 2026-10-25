@@ -11,7 +11,7 @@
 /* Edits a byte, integer, or float option and propagates it to the active resource records. */
  /* extern */
 s32 func_8028B2F8_de(Shared_World *, s32); /* extern */
-s32 func_80441FE8_de(void *); /* extern */
+s32 Pak_CountLineChars(void *); /* extern */
 s32 func_80442384_de(void *, void *, s32); /* extern */
 s32 Pak_AdjustValue(void *, s32, s32, s32, s32, s32); /* extern */
 
@@ -57,9 +57,9 @@ s32 func_80444FA0_us_rev1(OptionEditState *arg0, OptionEditState *arg1, s32 arg2
                     break;
                 }
                 temp_s0_2 = *arg0->unk_14;
-                length=func_80441FE8_de(arg0);
+                length=Pak_CountLineChars(arg0);
                 length-=6;
-                func_802BD320_de(temp_s0_2 + length, &D_800E27D0, (s32) ((f32) var_s1 / arg7));
+                func_802BD320_de(temp_s0_2 + length, &g_pakFormatInt06, (s32) ((f32) var_s1 / arg7));
                 if (D_800E63AC != 0) {
                     temp_v0_2 = Render_GetPackSection(D_8011FEF4, 0);
                     var_v1 = 0;

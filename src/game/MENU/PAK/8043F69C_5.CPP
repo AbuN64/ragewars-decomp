@@ -7,7 +7,7 @@
 #include "SYSTEM/80255C40_3.H"
 #include "MENU/PAK/8043F69C_11.H"
 
-/* Allocates a block sized for the entries of the list the parameters point at through Scene_AllocateResource, builds it with Pak_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
+/* Allocates a block sized for the entries of the list the parameters point at through Scene_AllocateResource, builds it with Pak_InitializeMenu from the list's own value and three parameters, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list read from the parameters at 0x18, a null list returning zero, and the first value read from the list at 0x20 instead of the parameters at 0x14 changed. */
 
 
 
@@ -98,7 +98,7 @@ void *func_80441EB0_de(struct func_8025E5B0_S1 *owner, struct ParamsRecAt24V1 *p
 
 extern u8 *func_8043F290(LayeredText *item);
 extern void func_8043FE3C_de(void *item, s32 second, s32 third, s32 fourth, void *text, s32 mode);
-int func_80441FE8_de(LayeredText *item) {
+int Pak_CountLineChars(LayeredText *item) {
     u8 *p;
     int len;
 
@@ -163,7 +163,7 @@ func_8043F114_de
 #endif
 }
 
-PreviewWidget *func_8044214C_de(WidgetRecAt20 *widget,int selection,int kind) {
+PreviewWidget *Pak_SelectPreviewModel(WidgetRecAt20 *widget,int selection,int kind) {
  StateRecAt47C *state=widget->state;
  PreviewWidget *model=func_8028CFA0_de(&D_8011FE88,selection,kind);
  if(!model){state->active=0;return 0;}

@@ -37,7 +37,7 @@ s32 func_80403BCC_de(void) {
     return *D_8011FEFC - 1;
 }
 
-int func_80403BE0_de(void) {
+int Pak_RequestTrackBundle(void) {
     int size;
     void *res;
     Shared_World *menu = &D_8011FE88;

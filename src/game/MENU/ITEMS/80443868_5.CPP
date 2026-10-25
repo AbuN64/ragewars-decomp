@@ -15,7 +15,7 @@ extern char D_800EED80[];
 #endif
 /* Formats the halfword D_801422DA holds for the player func_8022A5A0_de identifies from the owner at offset
    0x1C of the second argument, player records being 150 bytes apart, into a field's text with the
-   format D_800DE700 four bytes before the length func_80441FE8_de reports. Returns zero. */
+   format D_800DE700 four bytes before the length Pak_CountLineChars reports. Returns zero. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 extern struct LocalizedInputState D_80145040;
@@ -25,7 +25,7 @@ extern char D_80145040[];
 
 extern char g_fmtDec4Pad[];
 extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
 
@@ -46,9 +46,9 @@ s32 func_80443AB0_de(LayeredText *field, struct MenuRules *holder) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
 #else
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtDec4Pad, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

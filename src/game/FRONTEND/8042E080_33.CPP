@@ -3,7 +3,7 @@
 #include "COMMON/NAME.H"
 #include "TYPES.H"
 
-/* Receives player p's 0x648-byte packet through func_80404F58_de into the buffer at 0x2E28 of the
+/* Receives player p's 0x648-byte packet through Pak_ReadNoteData into the buffer at 0x2E28 of the
    records D_800E54A4 points to and, when func_804057F8_de checksums its first 0x640 bytes to the
    word stored after them, copies those bytes to the data at 0x18 of the player's 2920-byte record
    at 0x58 and the trailing word at 0x640 to the record's last word, returning 1; otherwise it reports the failure through
@@ -17,7 +17,7 @@
 
 
 
-extern s32 func_80404F58_de(s32, s32, PakSavePacket *, s32);
+extern s32 Pak_ReadNoteData(s32, s32, PakSavePacket *, s32);
 extern s32 Ovlgame_Crc32(PakSavePacket *, s32, s32);
 extern void Pak_DeleteNote(s32, s32);
 
@@ -27,7 +27,7 @@ s32 func_80434638_de(s32 player, s32 channel) {
 
     received = 0;
     packet = &D_800E54A4->packet;
-    if (func_80404F58_de(player, channel, packet, 0x648) == 0) {
+    if (Pak_ReadNoteData(player, channel, packet, 0x648) == 0) {
         if (Ovlgame_Crc32(packet, 0x640, 7) == packet->checksum) {
             Resmgr_CopyBytes(D_800E54A4->players[player].slots, &D_800E54A4->packet, 0x640);
             received = 1;

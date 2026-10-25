@@ -10,7 +10,7 @@
  * folding its loads across the snapshot header stores; the two head reads stay plain scalar loads (MIXED). */
 extern s32 D_8011FECC;
 extern void *D_800DE860_de;
-extern u8 D_800DCD60[];
+extern u8 g_pakSingleSaveBlockName[];
 extern Copy584 D_801462C8;
 extern f32 D_801468A0[];
 extern u8 D_800F91F0[];
@@ -31,7 +31,7 @@ void Pak_CreateSaveSnapshot(u8 *player) {
         Scene_ReleaseResource(0, D_800DE860_de);
     }
     allocationSize = D_8011FECC + 0x610;
-    snapshotHandle = Scene_AllocateResource(0, allocationSize, 0x33, D_800DCD60);
+    snapshotHandle = Scene_AllocateResource(0, allocationSize, 0x33, g_pakSingleSaveBlockName);
     D_800DE868 = *snapshotHandle;
     D_800DE860_de = snapshotHandle;
     Resmgr_FillMemory(D_800DE868, 0, allocationSize);
@@ -54,7 +54,7 @@ INCLUDE_ASM("ovl_80400000", Pak_CreateSaveSnapshot);
 #ifdef NON_MATCHING
 /* Drafted below with the other versions' body. */
 #else
-INCLUDE_ASM("ovl_80400000", func_80405F48_de);
+INCLUDE_ASM("ovl_80400000", Pak_MarkSaveNotes);
 #endif
 #endif
 
@@ -81,11 +81,11 @@ extern s32 D_8015375C;
 
 extern char *D_800D36E0;
 
-extern s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
+extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *name, char *ext, s32 *size,
                          char *company, char *code);
 extern s32 func_802A0238_de(char *);
 
-void func_80405F48_de(Shared_PakMenu *menu) {
+void Pak_MarkSaveNotes(Shared_PakMenu *menu) {
     s32 ch;
     s32 i;
     s32 other;
@@ -105,7 +105,7 @@ void func_80405F48_de(Shared_PakMenu *menu) {
         ch = menu->owner->unk4;
     }
     for (i = 0; i < 16; i++) {
-        result = func_8040458C_de(ch, i, &exists, name, ext, &size, company, code);
+        result = Pak_ReadNoteInfo(ch, i, &exists, name, ext, &size, company, code);
         other = 1;
         if (result == 0 && exists != 0) {
             switch (D_800DE874) {
@@ -166,15 +166,15 @@ extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_8
 extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
-extern void func_80404E28_de(s32);
+extern void Pak_ProbeStatus(s32);
 extern s32 Pak_GetStatus(s32), func_80404F3C_de(s32), func_80405598_de(s32), func_80264580_de(s32);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
-s32 func_80406178_de(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
+s32 Pak_CheckStatusPrompt(Menu_func_804066BC_de *menu, s32 channel, s32 quiet)
 {
     s32 result, busy, slot;
     char *prompt, *sel;
     char *message;
-    func_80404E28_de(channel);
+    Pak_ProbeStatus(channel);
     result = Pak_GetStatus(channel);
     sel = 0;
     if (D_8014D4C0_de) {
@@ -224,7 +224,7 @@ extern u8 D_8014D4B4[];
 extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
 extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
-extern void func_80404E28_de(s32 ch);
+extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
@@ -233,7 +233,7 @@ extern u32 Ovlgame_Crc32(void *data, u32 size, u32 seed);
 
 /* Enters pak menu mode 1 on the selected channel: shows the pending message (D_800E28C0) with the channel's
    prompt, else probes the Controller Pak; with no pak data it saves the player's profile (flags, four words
-   and eight name bytes) with its checksum and opens the note list through func_80405F48_de, otherwise it
+   and eight name bytes) with its checksum and opens the note list through Pak_MarkSaveNotes, otherwise it
    shows the D_0044EA08, D_0044ED44 or D_0044E9C0 prompt. */
 void Pak_BeginProfileSave(Shared_PakMenu *menu) {
     ObjRecAt5DC *owner = menu->player;
@@ -259,9 +259,9 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
         return;
     }
     if (D_8015375C) {
-        func_80404E28_de(D_800E28C8);
+        Pak_ProbeStatus(D_800E28C8);
     } else {
-        func_80404E28_de(menu->slot->unk4);
+        Pak_ProbeStatus(menu->slot->unk4);
     }
     if (!Pak_GetStatus(channel)) {
         profile = player->profile;
@@ -277,7 +277,7 @@ void Pak_BeginProfileSave(Shared_PakMenu *menu) {
             D_8014D4B4[i] = profile->name[i];
         }
         D_80153738.checksum = Ovlgame_Crc32(&D_80153738, 0x14, 4);
-        func_80405F48_de(menu);
+        Pak_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;

@@ -14,10 +14,10 @@ extern s32 D_800E28C8;
 
 extern char D_0044EE88;
 
-extern s32 func_80406178_de(Shared_PakMenu *action, s32 channel, s32 arg2);
+extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *action, s32 channel, s32 arg2);
 
-/* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks D_80153784, and if func_80406178_de accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
-extern s32 func_80406178_de(Shared_PakMenu *, s32, s32);
+/* Confirms the pak menu's channel: picks the team/channel override or the record's own channel byte, marks D_80153784, and if Pak_CheckStatusPrompt accepts it opens the pak prompt keyed by the player's storage buffer (or the default buffer if there is no player), otherwise opens the prompt on the default buffer. */
+extern s32 Pak_CheckStatusPrompt(Shared_PakMenu *, s32, s32);
 
 /* Starts the configured action using the actor resource or the shared fallback. */
 
@@ -39,7 +39,7 @@ extern char D_800D7990[];
 
 extern char D_800D7994[];
 
-/* Latches D_80153770 to one when the record's team value is not -1 and both func_802645D0_de and func_80406178_de accept it, then returns D_80153770. Adapted from func_80409C0C_de with the latch D_80153784 changed to D_80153770. */
+/* Latches D_80153770 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153770. Adapted from func_80409C0C_de with the latch D_80153784 changed to D_80153770. */
 
 
 
@@ -49,7 +49,7 @@ extern s32 D_80153770;
 
 extern s32 func_802645D0_de(s32);
 
-extern s32 func_80406178_de(struct Shared_PakMenu *, s32, s32);
+extern s32 Pak_CheckStatusPrompt(struct Shared_PakMenu *, s32, s32);
 
 static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
     if (D_8015375C != 0) {
@@ -92,7 +92,7 @@ extern char D_800D39BC[];
 extern void Pak_OpenDialog(void *dst, void *text, void *arg2, void *arg3, void *arg4);
 extern char D_8014561C[];
 extern s32 D_80153778;
-/* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through func_80406178_de; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
+/* Starts the action's channel (D_800E28C8 in demo mode, else the record's inner value) through Pak_CheckStatusPrompt; on success loads the record's actor resource into D_8014561C and latches D_80153784, otherwise loads the shared fallback text with the actor as extra argument. Returns 1. */
 s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     s32 channel;
 
@@ -101,7 +101,7 @@ s32 Frontend_OpenPakChannel(s32 unused0, Shared_PakMenu *menu) {
     } else {
         channel = menu->owner->unk4;
     }
-    if (func_80406178_de(menu, channel, 1) != 0) {
+    if (Pak_CheckStatusPrompt(menu, channel, 1) != 0) {
         D_80153784 = 1;
         Pak_OpenDialog(D_8014561C, menu->unk24, menu->player, menu->owner, 0);
         return 1;
@@ -120,7 +120,7 @@ s32 func_8040B58C_de(void *arg0, Shared_PakMenu *arg1) {
         channel = arg1->owner->unk4;
     }
     D_80153784 = 1;
-    if (func_80406178_de(arg1, channel, 1) != 0) {
+    if (Pak_CheckStatusPrompt(arg1, channel, 1) != 0) {
         player = arg1->player;
         if (player != NULL) {
             buffer = player->unk5DC + 0x554;
@@ -166,7 +166,7 @@ s32 func_8040B700_de(struct Shared_PakMenu *record) {
     if (D_80153770 == 0) {
         if (func_80409BDC_de(record) != -1) {
             if (func_802645D0_de(func_80409BDC_de(record)) != 0) {
-                if (func_80406178_de(record, func_80409BDC_de(record), 0) != 0) {
+                if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153770 = 1;
                 }
             }

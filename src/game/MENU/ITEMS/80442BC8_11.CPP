@@ -29,7 +29,7 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
     state->c = 0;
 }
 
-/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from func_804427C4_de with the list and all four values passed as arguments instead of read from a parameter block changed. */
+/* Allocates a block sized for the entries of a list through Scene_AllocateResource, builds it with Pak_InitializeMenu from four arguments, registers it with func_80255CB8_de and advances the owner's rotating counter below four, returning the block or zero. Adapted from Pak_AllocateMenu with the list and all four values passed as arguments instead of read from a parameter block changed. */
 
 
 

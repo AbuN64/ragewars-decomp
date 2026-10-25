@@ -117,7 +117,7 @@ s32 func_8043E6A4_de(void *arg0, struct Shape_typemap_114 *obj)
 extern f32 D_800DE338;
 extern char *D_800D3DD8[], *D_800D3DDC[];
 extern char D_800DE2F8[];
-extern s32 func_80441FE8_de(void *);
+extern s32 Pak_CountLineChars(void *);
 
 s32 func_8043E7AC_de(Shared_DebugWidget *widget) {
     char *text;
@@ -137,7 +137,7 @@ s32 func_8043E7AC_de(Shared_DebugWidget *widget) {
 #else
         text = *widget->text;
 #endif
-        func_802658E4_de(text + (func_80441FE8_de(widget) - 3), D_800DE2F8, D_800E1DF8_de - 5);
+        func_802658E4_de(text + (Pak_CountLineChars(widget) - 3), D_800DE2F8, D_800E1DF8_de - 5);
     }
     return 0;
 }

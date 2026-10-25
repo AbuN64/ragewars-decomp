@@ -10,7 +10,7 @@
 /* Select the status text and right-align its nonblank characters. */
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
-s32 func_80441FE8_de(void *); /* extern */
+s32 Pak_CountLineChars(void *); /* extern */
  /* const */
  /* const */
 s32 func_8040A83C_us(struct Field *arg0) {
@@ -32,7 +32,7 @@ s32 func_8040A83C_us(struct Field *arg0) {
         var_a1 = &D_8014B49B;
         while (*var_a1-- == 0x20 && var_s1 != 0) var_s1--;
         temp_s0 = *arg0->text;
-        temp_s0 = temp_s0 + (func_80441FE8_de(arg0) - 8);
+        temp_s0 = temp_s0 + (Pak_CountLineChars(arg0) - 8);
         space = 0x20;
         var_v1 = 7;
         var_v0 = temp_s0 + 7;
@@ -94,7 +94,7 @@ s32 Pak_UpdateStatusText(struct Field *arg0) {
             break;
         }
         dst = *arg0->text;
-        dst += func_80441FE8_de(arg0) - 11;
+        dst += Pak_CountLineChars(arg0) - 11;
         for (i = 0; i < 11; i++) {
             *dst++ = *src++;
         }

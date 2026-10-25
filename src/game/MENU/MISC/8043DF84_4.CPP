@@ -58,7 +58,7 @@ extern char D_800EE970[];
 #else
 extern char D_800DE2F0[];
 #endif
-extern s32 func_80441FE8_de(struct Field *);
+extern s32 Pak_CountLineChars(struct Field *);
 
 s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
     s32 value = holder->owner->views5D8.view5D8_9.profile->quantity;
@@ -90,10 +90,10 @@ s32 func_8043E2D8_de(struct Field *field, Shared_MenuHandle *holder) {
         }
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         text = field->text[D_80152789];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 2), D_800EE970, value);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800EE970, value);
 #else
         text = *field->text;
-        func_802658E4_de(text + (func_80441FE8_de(field) - 2), D_800DE2F0, value);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 2), D_800DE2F0, value);
 #endif
     }
     return 0;

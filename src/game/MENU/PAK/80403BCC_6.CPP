@@ -80,9 +80,9 @@ static inline void Pak_DecodeNoteName(u8 *src, u8 *dst, s32 n) {
 extern u8 *D_800E25C4[], *D_800E25C4[];
 #endif
 
-extern char D_800DCCD0[];
+extern char g_pakReadScratchNoteName[];
 
-extern char D_800DCCE8_de[];
+extern char g_pakWriteScratchNoteName[];
 
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 
@@ -113,7 +113,7 @@ static inline s32 func_80404958_read(s32 ch, s32 file_no, void *dst, s32 size) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    handle = Scene_AllocateResource(0, blocks, 0x23, D_800DCCD0);
+    handle = Scene_AllocateResource(0, blocks, 0x23, g_pakReadScratchNoteName);
     buf = *handle;
     ((void (*)(s32))func_802644FC_de)(1);
     Render_ReadControllerStates();
@@ -141,7 +141,7 @@ extern s32 func_804042F0_de(s32 ch, s32 size, void *data, u8 *game_name, s32 *fi
    unless the pak is ready, clears the exists flag for an empty slot, and otherwise returns its size
    in 256-byte blocks, its company and game codes as terminated byte strings, and its game name and
    extension decoded from pak font codes with trailing blanks trimmed. */
-s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size, u8 *company,
+s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, u8 *name, u8 *ext, s32 *size, u8 *company,
                   u8 *code) {
     if (D_801534F0[ch] != 3) {
         return -2;
@@ -199,7 +199,7 @@ s32 Pak_SaveNote(s32 ch, s32 size, void *data, u8 *name, u8 *ext, u8 *code) {
     if (D_801534F0[ch] != 3) {
         return -2;
     }
-    handle = Scene_AllocateResource(0, blocks, 0x23, D_800DCCE8_de);
+    handle = Scene_AllocateResource(0, blocks, 0x23, g_pakWriteScratchNoteName);
     buf = *handle;
     for (tries = 0; tries < 4; tries++) {
         result = func_804042F0_de(ch, size, data, name, &file_no, ext, RW_LOCALIZED_TEXT(D_800D36DC, D_800E25C4, D_800E25C4, D_80152789), code);

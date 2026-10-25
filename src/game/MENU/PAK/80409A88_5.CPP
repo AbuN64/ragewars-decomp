@@ -15,7 +15,7 @@
 #include "MENU/PAK/80409A88_5.H"
 #include "SYSTEM_3/80265370.H"
 
-/* Latches D_80153784 to one when the record's team value is not -1 and both func_802645D0_de and func_80406178_de accept it, then returns D_80153784. Adapted from func_80409C0C_de with nothing changed (identical code). */
+/* Latches D_80153784 to one when the record's team value is not -1 and both func_802645D0_de and Pak_CheckStatusPrompt accept it, then returns D_80153784. Adapted from func_80409C0C_de with nothing changed (identical code). */
 
 
 
@@ -32,7 +32,7 @@ static inline s32 func_80409BDC_de(struct Shared_PakMenu *record) {
     }
     return record->owner->unk4;
 }
-extern s32 func_80406178_de(void *menu, s32 channel, s32 quiet);
+extern s32 Pak_CheckStatusPrompt(void *menu, s32 channel, s32 quiet);
 
 /* Latches D_80146D60 and D_800E28CC to one the first time bit 12 of the word at offset 0xB0 of the
    object at 0x20 of a record is seen set, and returns D_80146D60. */
@@ -86,7 +86,7 @@ s32 func_80409CEC_de(struct Shared_PakMenu *record) {
     if (D_80153784 == 0) {
         if (func_80409BDC_de(record) != -1) {
             if (func_802645D0_de(func_80409BDC_de(record)) != 0) {
-                if (func_80406178_de(record, func_80409BDC_de(record), 0) != 0) {
+                if (Pak_CheckStatusPrompt(record, func_80409BDC_de(record), 0) != 0) {
                     D_80153784 = 1;
                 }
             }
@@ -116,7 +116,7 @@ s32 func_80409E10_de(void *menu) {
         }
     }
     if (D_80153784 == 0) {
-        if ((D_800E28C8 != -1) && (func_802645D0_de(D_800E28C8) != 0) && (func_80406178_de(menu, D_800E28C8, 0) != 0)) {
+        if ((D_800E28C8 != -1) && (func_802645D0_de(D_800E28C8) != 0) && (Pak_CheckStatusPrompt(menu, D_800E28C8, 0) != 0)) {
             D_8014AD94 = 0;
             D_80153784 = 1;
         }
@@ -147,7 +147,7 @@ void func_80409F2C_de(struct Shared_PakMenu *record) {
     } else {
         value = record->owner->unk4;
     }
-    func_80404E28_de(value);
+    Pak_ProbeStatus(value);
 }
 
 void func_80409F6C_de(void *unused, void *object) {
@@ -247,7 +247,7 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
     }
     attempts = 0;
     do {
-        func_80404E28_de(channel);
+        Pak_ProbeStatus(channel);
         if (Pak_GetStatus(channel) != -2) {
             break;
         }
@@ -265,12 +265,12 @@ s32 Pak_FindNextAvailableChannel(s32 currentChannel) {
 
 /* The EU builds compile a different original body for func_8040A244_de; each version keeps its own. */
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
-/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length func_80441FE8_de reports, returning zero.
+/* Shows D_800D3728 in a field when both D_8014D4EC_de and D_8014D4C0_de are set, D_800D372C when only D_8014D4C0_de is, and otherwise, when D_8015375C is set, points the field at D_800D3764 and formats D_800E28C8 plus one into it with D_800DCD7C one byte before the length Pak_CountLineChars reports, returning zero.
    Adapted from func_8044488C_de with the three flag tests, the texts, the format, the offset and the incremented value changed. */
 
 
 extern s32 D_8015375C;
-extern s32 func_80441FE8_de(struct Field *);
+extern s32 Pak_CountLineChars(struct Field *);
 
 s32 func_8040A244_de(struct Field *field) {
     char *text;
@@ -284,7 +284,7 @@ s32 func_8040A244_de(struct Field *field) {
         value = D_800E28C8;
         field->text = D_800D3764;
         text = D_800D3764[0];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 1), D_800DCD7C, value + 1);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 1), g_pakFormatInt1, value + 1);
     }
     return 0;
 }
@@ -292,7 +292,7 @@ s32 func_8040A244_de(struct Field *field) {
 #endif
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when D_8015375C is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with D_800ED3FC and D_800E28C8 plus one from one byte before the length func_80441FE8_de reports; returns zero. */
+/* Points an option field at its text: when D_8014D4C0_de is set, D_800D3728 if D_8014D4EC_de is set and D_800D372C if not; otherwise, when D_8015375C is set, the table D_800E27E4, formatting its entry for the byte D_80152789 with D_800ED3FC and D_800E28C8 plus one from one byte before the length Pak_CountLineChars reports; returns zero. */
 
 
 
@@ -304,7 +304,7 @@ extern char *D_800D372C[];
 extern char *D_800E27E4[];
 extern s32 D_800E28C8;
 extern char D_800ED3FC[];
-extern s32 func_80441FE8_de(struct Field *);
+extern s32 Pak_CountLineChars(struct Field *);
 
 s32 func_8040A244_de(struct Field *field) {
     char **table;
@@ -327,7 +327,7 @@ s32 func_8040A244_de(struct Field *field) {
         field->text = table;
         value = D_800E28C8;
         text = table[D_80152789];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 1), D_800ED3FC, value + 1);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
     }
 done:
     return 0;

@@ -94,7 +94,7 @@ void Items_LoadSceneResources(LevelCode8044ACCC *arg0, s32 arg1) {
     temp_v0_7 = Render_GetDirectoryEntry(sp20, arg1, 0x12);
     arg0->unk34 = temp_v0_7;
     func_80254284_de(0, (void **)arg0->pad74, temp_v0_7, &D_800C504C_de);
-    func_80403BE0_de();
+    Pak_RequestTrackBundle();
     temp_v0_8 = (s32) *func_80254408_de(0, (s32)sp20, 0x13, arg1, (s32)arg0, (s32)&D_00285160, &g_linkGroupTypes);
     arg0->unkC = 0;
     arg0->unk10 = 0;

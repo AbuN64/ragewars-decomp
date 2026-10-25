@@ -28,10 +28,10 @@ s32 func_80443B3C_de(Shared_DebugWidget *field, Shared_MenuHandle *holder) {
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
     text = field->inner->text[D_80145040.object.language];
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EED80, value);
 #else
     text = *field->inner->text;
-    func_802658E4_de(text + (func_80441FE8_de(field) - 4), g_fmtDec4Pad, value);
+    func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_fmtDec4Pad, value);
 #endif
     return 0;
 }

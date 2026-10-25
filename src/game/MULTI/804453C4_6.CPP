@@ -42,19 +42,19 @@ s32 func_8044610C_us_rev1(struct FieldRecAt14 *field) {
     return 0;
 }
 
-/* Calls func_804427C4_de with the third argument, the second argument and the resource D_451D18,
+/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451D18,
    and returns one. */
 
 s32 func_80446140_us_rev1(void *first, void *second, void *third) {
-    func_804427C4_de(third, second, D_00451D18);
+    Pak_AllocateMenu(third, second, D_00451D18);
     return 1;
 }
 
-/* Calls func_804427C4_de with the third argument, the second argument and the resource D_451E38,
+/* Calls Pak_AllocateMenu with the third argument, the second argument and the resource D_451E38,
    and returns one. */
 
 s32 func_8044616C_us_rev1(void *first, void *second, void *third) {
-    func_804427C4_de(third, second, D_00451E38);
+    Pak_AllocateMenu(third, second, D_00451E38);
     return 1;
 }
 #endif

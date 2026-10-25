@@ -35,7 +35,7 @@ void Pak_AllocateScratchBuffer(void) {
     struct Shape_typemap_165 *temp_v0;
     s32 temp_a0;
 
-    temp_v0 = Scene_AllocateResource(0, 0x810, 0x23, &D_800DCCC0);
+    temp_v0 = Scene_AllocateResource(0, 0x810, 0x23, &g_pakPakStateNoteName);
     temp_a0 = temp_v0->field_0;
     D_800DE808 = (s32 *)temp_v0;
     D_800E2854 = temp_a0;
@@ -54,7 +54,7 @@ void func_80404DDC_de(void) {
 }
 
 /* Probes the Controller Pak slot for kind and records its state: 2 when the probe succeeds, otherwise 3 or 1 depending on Pak_UpdateStatus. */
-void func_80404E28_de(s32 kind)
+void Pak_ProbeStatus(s32 kind)
 {
     u8 *cur;
     s32 ready;

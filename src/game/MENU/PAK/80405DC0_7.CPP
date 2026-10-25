@@ -11,7 +11,7 @@
 
 /* Enters pak menu mode 1: sets the mode flags, clears the owner's 0x01000000 flag and, when a
    message is pending (D_800E28C0), shows the player's message at 0x554 through Pak_OpenDialog;
-   otherwise probes the Controller Pak on the selected channel, falls back to func_80405F48_de when
+   otherwise probes the Controller Pak on the selected channel, falls back to Pak_MarkSaveNotes when
    Pak_GetStatus reports none, and shows the D_44F67C, D_44F994 or D_44F610 prompt according to
    func_80404F3C_de and func_80405598_de. */
 
@@ -33,7 +33,7 @@ extern s32 D_8015375C;
 extern s32 D_800E28C0;
 extern char D_8014561C[];
 
-extern void func_80404E28_de(s32 ch);
+extern void Pak_ProbeStatus(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);
 extern s32 func_80405598_de(s32 ch);
@@ -56,9 +56,9 @@ void func_804066BC_de(Shared_PakMenu *menu) {
         Pak_OpenDialog(menu->player->unk5DC + 0x554, D_0044FB50, menu->player, menu->slot, 0);
         return;
     }
-    func_80404E28_de(ch);
+    Pak_ProbeStatus(ch);
     if (Pak_GetStatus(ch) == 0) {
-        func_80405F48_de(menu);
+        Pak_MarkSaveNotes(menu);
         return;
     }
     D_80153784 = 1;
@@ -100,7 +100,7 @@ extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 extern s32 Pak_CountFreeNotes(s32 ch, s32 *noteCount);
 extern u32 Ovlgame_BytesToPakPages(u32 size);
 
-s32 func_80406858_de(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
+s32 Pak_EvaluateSaveChannel(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     u8 name[16];
     u8 *state0;
     u8 *state1;

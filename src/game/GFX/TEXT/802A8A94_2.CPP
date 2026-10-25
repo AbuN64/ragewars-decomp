@@ -65,7 +65,7 @@ void func_802A88F0_de(u8 *text, f32 x, f32 y, f32 width, f32 height, s32 shadow,
                 glyph = D_801378C0[ch];
                 a = fontGlyphWidth();
                 b = fontGlyphWidth();
-                advance = func_8044222C_de(ch, next, a, b);
+                advance = Pak_GetGlyphAdvance(ch, next, a, b);
                 break;
             case 1:
                 glyph = D_801377C0[ch];

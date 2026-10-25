@@ -16,7 +16,7 @@ extern char D_800EE534[], D_800EE540[];
 extern char D_800DDEB0_de[];
 
 #endif
-extern s32 func_8040458C_de(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
+extern s32 Pak_ReadNoteInfo(s32, s32, s32 *, char *, u8 *, s32 *, char *, char *);
 extern s32 func_804057BC_de(char *, s32);
 extern void Resmgr_CopyString(char *, char *);
 extern void func_802A0C08_de(char *, char *, ...);
@@ -70,7 +70,7 @@ void func_80433EA0_de(s32 player)
 #endif
     failed = 0;
     for (i = 0; i < 16 && failed == 0; i++) {
-        note_status = func_8040458C_de(player, i, &status, name, ext, &size, extra1, extra2);
+        note_status = Pak_ReadNoteInfo(player, i, &status, name, ext, &size, extra1, extra2);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         settings = (GameLocalizationState *)D_801462C8;

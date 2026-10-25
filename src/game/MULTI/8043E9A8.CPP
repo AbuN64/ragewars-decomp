@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "MULTI/8043E9A8.H"
 
-extern void func_804427C4_de(void *arg0, void *arg1, void *arg2);
+extern void Pak_AllocateMenu(void *arg0, void *arg1, void *arg2);
 
 extern s32 D_0044FDF4;
 
@@ -18,7 +18,7 @@ extern s32 D_0044FDF4;
 
 extern void func_80264770_de(s32 kind);
 
-extern void func_80404E28_de(s32 kind);
+extern void Pak_ProbeStatus(s32 kind);
 
 /* Marks the selected record's byte tag and clears the active menu state. */
 extern void func_80264770_de(int);
@@ -88,7 +88,7 @@ s32 func_8043E830_de(s32 *arg0) {
 
 /** Forwards arg1 through and arg2 as the first parameter, adding the D_450A20 record. */
 s32 func_8043E91C_de(void *unused0, void *arg1, void *arg2) {
-    func_804427C4_de(arg2, arg1, &D_0044FDF4);
+    Pak_AllocateMenu(arg2, arg1, &D_0044FDF4);
     return 1;
 }
 
@@ -97,7 +97,7 @@ void func_8043E948_de(struct Shared_PakMenu *arg0)
     s32 kind = arg0->owner->unk4;
 
     func_80264770_de(kind);
-    func_80404E28_de(kind);
+    Pak_ProbeStatus(kind);
 }
 
 void func_8043E97C_de(void *arg0) {

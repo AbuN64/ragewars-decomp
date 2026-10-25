@@ -28,7 +28,7 @@ extern char D_800EEE10[], D_800EEE18[];
 
 
 
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 s32 func_80445AB8(LayeredText *field) {
     s32 step = (VOLUME_BYTE - 0x80) / 8;
@@ -56,21 +56,21 @@ s32 func_80445AB8(LayeredText *field) {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text = D_800E40B4;
         text = (char *)field->text[D_80152789];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EEE10, step);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EEE10, step);
 #else
         field->text = (u8 **)&D_800D7DE4;
         text = (char *)*field->text;
-        func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800E27E0, step);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_pakFormatSpacedInt2, step);
 #endif
     } else {
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
         field->text = D_800E40B4;
         text = (char *)field->text[D_80152789];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EEE18, step);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), D_800EEE18, step);
 #else
         field->text = (u8 **)&D_800D7DE4;
         text = (char *)*field->text;
-        func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800E27E8, step);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 4), g_pakFormatSpacedInt3, step);
 #endif
     }
     return 0;

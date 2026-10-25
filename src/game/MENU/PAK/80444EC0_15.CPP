@@ -10,7 +10,7 @@
  * formats its current value into the alternate text (the current menu
  * language's line in the EU builds), two bytes before the line length
  * reported by the text item helper. */
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
 /* The menu language byte; read as an array element, which keeps the read after the text store. */
@@ -34,7 +34,7 @@ s32 func_80445ECC(LayeredText *field) {
 #else
         text = (char *)*VALUE_TEXT;
 #endif
-        func_802658E4_de(text + (func_80441FE8_de(field) - 2),
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 2),
                         VALUE_FORMAT, D_800E63B8);
     }
     return 0;

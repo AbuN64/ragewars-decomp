@@ -63,7 +63,7 @@ extern s32 Pak_GetStatus(s32);
 
 extern s32 func_80435384_de(s32,u32 *);
 
-extern void func_80404E28_de(s32);
+extern void Pak_ProbeStatus(s32);
 
 extern void func_8041C244_de(void);
 
@@ -102,13 +102,13 @@ extern void func_802A2394_de();
 
 extern void MarkMenuEventHandled();
 
-/* Refreshes each of the four ports through func_80404E28_de and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */
+/* Refreshes each of the four ports through Pak_ProbeStatus and sets field 0x1C of D_800E3518 as soon as one reports status 0, -1, -3 or -4 through Pak_GetStatus, clearing it otherwise. */
 
 
 
 
 
-extern void func_80404E28_de(s32 port);
+extern void Pak_ProbeStatus(s32 port);
 
 extern s32 Pak_GetStatus(s32 port);
 
@@ -208,7 +208,7 @@ void func_8041BE90_de(void) {
     if (temp_v0 == 1) {
         func_8041C19C_de();
         if (D_800E3518->ready == 1) {
-            func_80404E28_de(D_800DF4C0);
+            Pak_ProbeStatus(D_800DF4C0);
             temp_v0_2 = Pak_GetStatus(D_800DF4C0);
             switch (temp_v0_2) { /* irregular */
             case 0:
@@ -312,7 +312,7 @@ void func_8041C19C_de(void) {
 
     D_800E3518->ready = 0;
     for (port = 0; port < 4; port++) {
-        func_80404E28_de(port);
+        Pak_ProbeStatus(port);
         switch (Pak_GetStatus(port)) {
         case 0:
             D_800E3518->ready = 1;

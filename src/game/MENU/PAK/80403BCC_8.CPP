@@ -15,7 +15,7 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 extern s8 D_8010BBB8;
 
-extern char D_800DCCD0[];
+extern char g_pakReadScratchNoteName[];
 
 extern s32 *Scene_AllocateResource(s32, s32, s32, void *);
 
@@ -88,7 +88,7 @@ extern PakDirectory *D_800E2854;
 
 extern Device D_8014D280[];
 
-s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
+s32 Pak_ReadNoteData(s32 slot, s32 arg1, s32 arg2, s32 length)
 {
   s32 size;
   s32 *buf;
@@ -107,7 +107,7 @@ s32 func_80404F58_de(s32 slot, s32 arg1, s32 arg2, s32 length)
   {
     func_8025476C_de(one);
   }
-  buf = Scene_AllocateResource(0, size, 0x23, D_800DCCD0);
+  buf = Scene_AllocateResource(0, size, 0x23, g_pakReadScratchNoteName);
   addr = *buf;
   ((void (*)(s32))func_802644FC_de)(1);
   Render_ReadControllerStates();

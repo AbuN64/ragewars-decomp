@@ -72,12 +72,12 @@ typedef struct MessageList MessageList;
 struct MessageList;
 struct CMenu_t;
 struct StateRecAtBCV1;
-struct Table_func_804428F8_de;
+struct TablePakUpdateDialogList;
 struct CMenu_t {
     char pad00[0x8];
     s32 handle;
     char pad0C[0x14 - 0xC];
-    struct Table_func_804428F8_de *table;
+    struct TablePakUpdateDialogList *table;
     char pad18[0x20 - 0x18];
     struct StateRecAtBCV1 *state;
     char pad24[0x28 - 0x24];
@@ -93,12 +93,12 @@ struct MessageList {
     s16 rotation; /* 0x14 */
 };
 
-struct Table_func_804428F8_de {
+struct TablePakUpdateDialogList {
     char pad00[0xC];
     void (*handler)(CMenu *, MessageList *);
 };
 
-struct Params_func_804427C4_de;
+struct ParamsPakAllocateMenu;
 
 struct StateRecAtBCV1;
 typedef struct StateRecAtBCV1 StateRecAtBCV1;

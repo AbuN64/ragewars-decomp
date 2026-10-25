@@ -9,8 +9,8 @@ struct EntryRecAt0V3 {
     char data[32];
 };
 
-struct Menu_func_80403BE0_de;
-struct Menu_func_80403BE0_de {
+struct MenuPakRequestTrackBundle;
+struct MenuPakRequestTrackBundle {
     char pad[0x34];
     int group;
     char pad38[0x3C];
@@ -49,11 +49,11 @@ struct NoteState {
 extern unsigned char * D_800D36DC;
 
 
-struct NoteState_func_8040458C_de;
-typedef struct NoteState_func_8040458C_de NoteState_func_8040458C_de;
+struct NoteStatePakReadNoteInfo;
+typedef struct NoteStatePakReadNoteInfo NoteStatePakReadNoteInfo;
 
-struct NoteState_func_8040458C_de;
-struct NoteState_func_8040458C_de {
+struct NoteStatePakReadNoteInfo;
+struct NoteStatePakReadNoteInfo {
     u32 file_size;
     u32 game_code;
     u16 company_code;
@@ -65,7 +65,7 @@ struct NoteState_func_8040458C_de {
 struct PakDirectoryRecAt4;
 struct PakDirectoryRecAt4 {
     s32 free;
-    NoteState_func_8040458C_de notes[16];
+    NoteStatePakReadNoteInfo notes[16];
 };
 
 struct EntryRecAt0V3;
@@ -92,8 +92,8 @@ struct PakDirectory;
 
 
 
-struct Menu_func_80403BE0_de;
-typedef struct Menu_func_80403BE0_de Menu_func_80403BE0_de;
+struct MenuPakRequestTrackBundle;
+typedef struct MenuPakRequestTrackBundle MenuPakRequestTrackBundle;
 
 struct PakDirectoryRecAt4;
 typedef struct PakDirectoryRecAt4 PakDirectoryRecAt4;

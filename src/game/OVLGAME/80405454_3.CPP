@@ -8,13 +8,13 @@
 #include "RESMGR/802A0888.H"
 
 /* Chooses a free extension letter for a new note on the Controller Pak on channel ch: refuses with
-   -2 unless the pak is ready, queries each of the 16 notes through func_8040458C_de (failing with -1
+   -2 unless the pak is ready, queries each of the 16 notes through Pak_ReadNoteInfo (failing with -1
    on error) and marks the letter of every existing note, then writes the first unused letter from
    'A' as the extension, returning 0, or -1 when all 16 letters are taken. */
 
 
 
-extern s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, char *gameName, u8 *ext, s32 *size,
+extern s32 Pak_ReadNoteInfo(s32 ch, s32 index, s32 *exists, char *gameName, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
 s32 Ovlgame_FindFreeNoteExtension(s32 ch, u8 *ext) {
@@ -31,7 +31,7 @@ s32 Ovlgame_FindFreeNoteExtension(s32 ch, u8 *ext) {
         return -2;
     }
     for (i = 0; i < 16; i++) {
-        if (func_8040458C_de(ch, i, &exists, gameName, ext, &size, companyCode, gameCode) != 0) {
+        if (Pak_ReadNoteInfo(ch, i, &exists, gameName, ext, &size, companyCode, gameCode) != 0) {
             return -1;
         }
         if (exists != 0) {

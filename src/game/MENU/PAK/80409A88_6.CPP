@@ -15,7 +15,7 @@ extern s32 D_8015375C;
 extern char *D_800D7E14[];
 extern char *D_800E25E4[];
 extern char D_800ED3FC[];
-extern s32 func_80441FE8_de(struct Field *);
+extern s32 Pak_CountLineChars(struct Field *);
 
 s32 func_8040A300_de(struct Field *field, Shared_PakMenu *pThis) {
     char *text;
@@ -28,7 +28,7 @@ s32 func_8040A300_de(struct Field *field, Shared_PakMenu *pThis) {
         strings = D_800E25E4;
         field->text = strings;
         text = strings[D_801462C8.language];
-        func_802658E4_de(text + (func_80441FE8_de(field) - 1), D_800ED3FC, value + 1);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 1), D_800ED3FC, value + 1);
     }
     return 0;
 }
@@ -40,7 +40,7 @@ s32 func_8040A300_de(struct Field *field, Shared_PakMenu *pThis) {
  * one byte before the length returned by the item text helper. */
 extern s32 D_8015375C;
 extern u8 *D_800D7E14[];
-extern s32 func_80441FE8_de(LayeredText *);
+extern s32 Pak_CountLineChars(LayeredText *);
 
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 s32 func_8040A300_de(LayeredText *field, struct Shared_PakMenu *holder) {
@@ -52,8 +52,8 @@ s32 func_8040A300_de(LayeredText *field, struct Shared_PakMenu *holder) {
         value = holder->owner->unk4;
         field->text = (u8 **)&D_800D36E4;
         text = (char *)*(u8 **)&D_800D36E4;
-        func_802658E4_de(text + (func_80441FE8_de(field) - 1),
-                        D_800DCD7C, value + 1);
+        func_802658E4_de(text + (Pak_CountLineChars(field) - 1),
+                        g_pakFormatInt1, value + 1);
     }
     return 0;
 }

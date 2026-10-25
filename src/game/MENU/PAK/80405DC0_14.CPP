@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 
-/* Reloads a saved controller-pak block when func_80406178_de reports no problem for the selected
+/* Reloads a saved controller-pak block when Pak_CheckStatusPrompt reports no problem for the selected
    channel: with D_80153780 set it loads the block D_800E28BC points to onto the player found at
    D_80145040 - the 0x18 Block70 into the player's 0x5E0 block, the 352 words at 0x88 into the option
    block D_801462C8 plus the word at its 0x580 (keeping the byte D_80146848 there), the four floats at
@@ -56,7 +56,7 @@ extern f32 D_801427EC[];
 extern u8 D_800F91F0[];
 extern struct PakSaveBlock *D_800E28BC;
 
-extern s32 func_80406178_de(MenuRecAt24 *menu, s32 ch, s32 quiet);
+extern s32 Pak_CheckStatusPrompt(MenuRecAt24 *menu, s32 ch, s32 quiet);
 extern s32 Pak_DeleteNote(s32 ch, s32 index);
 extern struct PakSaveOwner *Weapons_FindPlayerByController(char *profiles, PakMenuSlot *slot);
 extern void Pak_OpenDialog(void *owner, char *message, void *player, void *slot, char *title);
@@ -76,7 +76,7 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
     } else {
         channel = menu->slot->unk4;
     }
-    if (func_80406178_de(menu, channel, 0) != 0) {
+    if (Pak_CheckStatusPrompt(menu, channel, 0) != 0) {
         D_80153784 = 1;
         return 1;
     }
@@ -112,7 +112,7 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
 /* Writes the 11-character rank title for the score D_8014D48C into the end of the item's text:
    the title comes from the band the score falls in (below 50, 150, 300, 500, 800, 1300, 2000,
    3000, 4500, 6500 and 9999 and above), and the text position is the text length from
-   func_80441FE8_de minus 11; returns 0. */
+   Pak_CountLineChars minus 11; returns 0. */
 #include "TYPES.H"
 
 
@@ -143,7 +143,7 @@ extern u16 D_8014D48C;
 
 
 
-extern s32 func_80441FE8_de(void);
+extern s32 Pak_CountLineChars(void);
 
 s32 func_80408AC4_us(PakNoteTextEntry *item) {
     char *title;
@@ -179,7 +179,7 @@ s32 func_80408AC4_us(PakNoteTextEntry *item) {
         title = D_800D2448;
     }
     dest = *item->text;
-    dest += func_80441FE8_de() - 11;
+    dest += Pak_CountLineChars() - 11;
     if (title != 0) {
         for (i = 0; i < 11; i++) {
             *dest++ = *title++;
