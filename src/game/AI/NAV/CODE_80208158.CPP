@@ -324,23 +324,6 @@ void Nav_SteerAlongRoute(AiController *controller) {
     }
 }
 
-#ifdef NON_MATCHING
-#include "COMMON/SHAREDCALLBACK5.H"
-#include "COMMON/OBJECTLINKS14.H"
-#include "COMMON/REC.H"
-extern CNavData D_8013B364;
-float Particle_GetPointDistance(void *, void *);
-void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
-float func_80209308_de(AiController *, CVector3 *,float,float);
-void func_80209910_de(AiController *,float,s32);
-void func_80209E80_de(AiController *);
-float func_802B72B0_de(float);
-NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
-NavigationPortal *func_8020C9B0_de(CNavData *,s32);
-NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
-s32 Nav_FindLinkIndex(CNavData *,s32,s32);
-s32 func_80209828_de(AiController *);
-
 extern f32 D_800C1BDC_de;
 extern f32 D_800C1BE0_de;
 extern f32 D_800C1BE4_de;
@@ -363,7 +346,6 @@ static __inline__ void navigationTurnRight(CVector3 *v) {
     v->z = -v->y;
     v->y = 0.0f;
 }
-/* 11/257 aligned edits; remaining: zero stores of the turn helpers reuse the 0.0 call-argument register (ROM: sw $zero), so value takes $f21 (ROM $f20); position from the player copy. */
 void Nav_UpdatePlayerSteering(AiController *controller) {
     CNavData *graph;
     CVector3 delta;
@@ -382,9 +364,9 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
 
     if (controller->unk300 == 0) {
         destination = &controller->destination;
-        position = &controller->player->pos;
+        jumping = controller->player->movementFlags & 0x2000;
         player = controller->player;
-        jumping = player->movementFlags & 0x2000;
+        position = &player->pos;
         falling = player->movementFlags & 0x1000;
         Particle_SubtractVectors(&delta, destination, position);
         distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
@@ -412,9 +394,10 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             desired.y = 0.0f;
             desired.z = func_802B7130_de(angle);
             player->forward = desired.x * facing.x + desired.y * facing.y + desired.z * facing.z;
-            do {
-                tangent = Nav_GetGraphPoint(graph, controller->current)->position;
-            } while (0);
+            if (graph != 0 && controller->current != -1) {
+                angle = 0.0f;
+            }
+            tangent = Nav_GetGraphPoint(graph, controller->current)->position;
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
             navigationTurnLeft(&tangent);
@@ -446,9 +429,6 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         }
     }
 }
-#else
-INCLUDE_ASM("span_1000", Nav_UpdatePlayerSteering);
-#endif
 
 #ifdef NON_MATCHING
 #include "COMMON/SHAREDCALLBACK5.H"
