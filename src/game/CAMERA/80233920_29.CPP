@@ -19,10 +19,10 @@ extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern f32 D_800C8630[];
 
 
-static inline void set_emitter(Effect33920 *node, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
+static inline void set_emitter(CShake *node, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
 {
-    node->origin = pos;
-    node->radius = scale;
+    node->m_vPos = pos;
+    node->m_Radius = scale;
     node->x.mode = value;
     node->x.value = a;
     node->y.mode = value;
@@ -111,7 +111,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
 void func_802394BC_de(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
 {
     RaceViewportState *state = (void *)obj;
-    Effect33920 *node = state->freeEffects.head;
+    CShake *node = state->freeEffects.head;
     f32 k;
 
     if (node != 0) {

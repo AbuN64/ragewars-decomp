@@ -5,8 +5,8 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/GAMEPLAY_CAMERA.H"
 #include "GAME/CODE_8027302C.H"
-struct StateRecAt10;
-extern u32 func_802337D0_de(struct StateRecAt10 *state);
+struct CShakeAxis_t;
+extern u32 func_802337D0_de(struct CShakeAxis_t *state);
 
 void func_80234DE0_de(char *);
 int Camera_IsSequenceInWindow(void);

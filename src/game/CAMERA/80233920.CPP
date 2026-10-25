@@ -12,25 +12,25 @@ extern f32 Math_Sqrtf(f32);
 
 
 
-void func_80233930_de(Effect33920 *arg0, CVector3 position, CVector3 *out) {
+void func_80233930_de(CShake *arg0, CVector3 position, CVector3 *out) {
     f32 distance;
     f32 value;
     AxisWave *wave;
 
-    Particle_SubtractVectors(&position, &position, &arg0->origin);
+    Particle_SubtractVectors(&position, &position, &arg0->m_vPos);
     distance = Math_Sqrtf((position.x * position.x) +
                              (position.y * position.y) +
                              (position.z * position.z));
-    if (distance < arg0->radius) {
-        distance = System_CosineEase(D_800C3090_de - (distance / arg0->radius));
+    if (distance < arg0->m_Radius) {
+        distance = System_CosineEase(D_800C3090_de - (distance / arg0->m_Radius));
 
         wave = &arg0->x;
         if (wave->mode == 0) goto x_sine;
         if (wave->mode != 1) goto x_zero;
-        value = Math_Sinf(wave->accumulator * D_800C3094_de) * wave->rate;
+        value = Math_Sinf(wave->m_Angle * D_800C3094_de) * wave->m_Amp;
         goto x_done;
 x_sine:
-        value = Nav_RandomBetween(-wave->rate, wave->rate);
+        value = Nav_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto x_done;
 x_zero:
         value = 0.0f;
@@ -40,10 +40,10 @@ x_done:
         wave = &arg0->y;
         if (wave->mode == 0) goto y_sine;
         if (wave->mode != 1) goto y_zero;
-        value = Math_Sinf(wave->accumulator * D_800C3098_de) * wave->rate;
+        value = Math_Sinf(wave->m_Angle * D_800C3098_de) * wave->m_Amp;
         goto y_done;
 y_sine:
-        value = Nav_RandomBetween(-wave->rate, wave->rate);
+        value = Nav_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto y_done;
 y_zero:
         value = 0.0f;
@@ -53,10 +53,10 @@ y_done:
         wave = &arg0->z;
         if (wave->mode == 0) goto z_sine;
         if (wave->mode != 1) goto z_zero;
-        value = Math_Sinf(wave->accumulator * D_800C309C_de) * wave->rate;
+        value = Math_Sinf(wave->m_Angle * D_800C309C_de) * wave->m_Amp;
         goto z_done;
 z_sine:
-        value = Nav_RandomBetween(-wave->rate, wave->rate);
+        value = Nav_RandomBetween(-wave->m_Amp, wave->m_Amp);
         goto z_done;
 z_zero:
         value = 0.0f;

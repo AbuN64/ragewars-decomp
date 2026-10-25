@@ -20,7 +20,7 @@
 #include "SYSTEM/80255C40_7.H"
 
 extern ViewFlags D_80103220;
-extern u32 func_802337D0_de(StateRecAt10 *);
+extern u32 func_802337D0_de(CShakeAxis *);
 extern void func_80234FEC_de(GameplayCamera *camera);
 /* Update split-screen rectangles, advance transient effects, and merge visible bounds. */
 void func_80236874_de(RaceViewportState *state) {
@@ -46,9 +46,9 @@ void func_80236874_de(RaceViewportState *state) {
     f32 right;
     f32 splitX;
     f32 bottom;
-    Effect33920 *nextEffect;
+    CShake *nextEffect;
     s32 timer;
-    Effect33920 *effect;
+    CShake *effect;
     s32 finished;
     u32 xDone;
     u32 yDone;

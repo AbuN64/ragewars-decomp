@@ -75,5 +75,5 @@ struct ThreeChannels {
 typedef union Rotation { f32 f[4]; u32 word[4]; } Rotation;
 typedef union TransformVector { CVector3 value; u32 word[3]; } TransformVector;
 extern void func_80233B14_de(Overlay *overlay);
-extern void func_80233930_de(Effect33920 *arg0, CVector3 position, CVector3 *out);
+extern void func_80233930_de(CShake *arg0, CVector3 position, CVector3 *out);
 #endif

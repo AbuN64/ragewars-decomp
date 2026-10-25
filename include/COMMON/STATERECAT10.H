@@ -1,8 +1,8 @@
 #ifndef COMMON_STATERECAT10_H
 #define COMMON_STATERECAT10_H
 #include "TYPES.H"
-struct StateRecAt10;
-typedef struct StateRecAt10 StateRecAt10;
+struct CShakeAxis_t;
+typedef struct CShakeAxis_t CShakeAxis;
 
 
 struct func_80233588_S2;
@@ -29,13 +29,13 @@ extern float D_800C3050_de;
 struct ObjectLinks11DC;
 typedef struct ObjectLinks11DC ObjectLinks11DC;
 
-struct StateRecAt10;
-struct StateRecAt10 {
+struct CShakeAxis_t;
+struct CShakeAxis_t {
     s32 mode;
     f32 value;
-    f32 limit;
-    f32 rate;
-    f32 accumulator;
+    f32 m_LastShake;
+    f32 m_Amp;
+    f32 m_Angle;
 };
 
 extern float D_800C3074_de;

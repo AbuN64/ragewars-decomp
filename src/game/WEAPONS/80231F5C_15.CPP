@@ -2,38 +2,38 @@
 #include "TYPES.H"
 #include "COMMON/EXTERNS_6.H"
 
-u32 func_802337D0_de(StateRecAt10 *state) {
+u32 func_802337D0_de(CShakeAxis *state) {
     f32 scale;
     f32 step;
 
-    if (state->value > state->limit) {
-        state->limit = state->value;
+    if (state->value > state->m_LastShake) {
+        state->m_LastShake = state->value;
     }
-    if (state->rate == 0.0f) {
-        state->accumulator = D_800C3080_de;
+    if (state->m_Amp == 0.0f) {
+        state->m_Angle = D_800C3080_de;
     }
-    if (state->rate < state->limit + state->limit) {
-        state->rate = state->limit + state->limit;
+    if (state->m_Amp < state->m_LastShake + state->m_LastShake) {
+        state->m_Amp = state->m_LastShake + state->m_LastShake;
     }
 
     step = D_800D2988;
     scale = D_800C3084_de;
     state->value = Nav_DecayToZero(state->value, step * scale);
-    state->limit = Nav_DecayToZero(state->limit, D_800D2988 * scale);
+    state->m_LastShake = Nav_DecayToZero(state->m_LastShake, D_800D2988 * scale);
 
     switch (state->mode) {
     case 1:
-        if (state->rate > 0.0f) {
-            state->accumulator += (state->rate + state->rate) * (D_800D2988 * scale);
-            state->rate = Nav_DecayToZero(state->rate, D_800C3088_de);
+        if (state->m_Amp > 0.0f) {
+            state->m_Angle += (state->m_Amp + state->m_Amp) * (D_800D2988 * scale);
+            state->m_Amp = Nav_DecayToZero(state->m_Amp, D_800C3088_de);
         }
         break;
     case 0:
-        if (state->rate > 0.0f) {
-            state->rate = Nav_DecayToZero(state->rate, D_800C308C_de);
+        if (state->m_Amp > 0.0f) {
+            state->m_Amp = Nav_DecayToZero(state->m_Amp, D_800C308C_de);
         }
         break;
     }
 
-    return state->rate == 0.0f;
+    return state->m_Amp == 0.0f;
 }

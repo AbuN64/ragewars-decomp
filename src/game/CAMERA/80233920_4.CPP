@@ -14,7 +14,7 @@
 extern s32 D_80141008;
 extern void MultiplyQuaternions(void*,void*,void*);
 extern void Particle_BuildTranslationMatrix(void *, f32, f32, f32);
-extern u32 func_802337D0_de(StateRecAt10*);
+extern u32 func_802337D0_de(CShakeAxis*);
 extern void Rsp_MultiplyAffineMatrices(f32*,f32*,f32*);
 /* The camera position is passed as a three-word CVector3 value. */
 
@@ -28,7 +28,7 @@ typedef struct TransformActor {
     char pad58[0x7C-0x58];
     s32 enabled;
     char pad80[0xA0-0x80];
-    Effect33920 effect;
+    CShake effect;
     char padF4[0x134-0xF4];
     CVector3 cached;
     Rotation rotation,combined;
@@ -37,7 +37,7 @@ typedef struct TransformActor {
 typedef struct TransformWorld {
     s32 identifier;
     char pad4[0x11AC-4];
-    Effect33920 *effects;
+    CShake *effects;
 } TransformWorld;
 
 void func_802349C0_de(void *arg0) {
@@ -46,7 +46,7 @@ void func_802349C0_de(void *arg0) {
     f32 m68[16],mA8[16],mE8[16],m128[16],m168[16],m1A8[16];
     CVector3 sp1E8,result,transformed;
     f32 zero,cosineInput;
-    Effect33920 *effect;
+    CShake *effect;
     f32 *temp_s3;
     f32 *matrix;
     f32 temp_fs0;
@@ -105,7 +105,7 @@ void func_802349C0_de(void *arg0) {
             result.x = zero;
             result.y = zero;
             result.z = zero;
-            func_80233930_de(&actor->effect, actor->effect.origin, &result);
+            func_80233930_de(&actor->effect, actor->effect.m_vPos, &result);
             func_802337D0_de(&actor->effect.x);
             func_802337D0_de(&actor->effect.y);
             func_802337D0_de(&actor->effect.z);

@@ -99,7 +99,7 @@ struct GameplayCamera {
     char padA0[0x18];
     char unkB8[20]; /* +0xB8: src/func_80234FDC.c */
     char unkCC[20]; /* +0xCC: src/func_80234FDC.c */
-    char unkE0[20]; /* 0xE0: third StateRecAt10 */
+    char unkE0[20]; /* 0xE0: third CShakeAxis */
     f32 shakeHorizontal; /* 0xF4 */
     f32 shakeVertical; /* 0xF8 */
     char padFC[0x120 - 0xFC];

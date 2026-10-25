@@ -18,7 +18,7 @@ typedef struct Racer Racer;
 struct Overlay;
 typedef struct Overlay Overlay;
 
-typedef StateRecAt10 AxisWave;
+typedef CShakeAxis AxisWave;
 
 struct func_8023919C_S1;
 typedef struct func_8023919C_S1 func_8023919C_S1;
@@ -60,15 +60,15 @@ struct Overlay;
 
 struct ObjRecAtE4V1;
 
-struct Effect33920;
-typedef struct Effect33920 Effect33920;
+struct CShake_t;
+typedef struct CShake_t CShake;
 
-struct Effect33920;
-struct Effect33920 {
-    s32 unk00;
-    Effect33920 *next;
-    CVector3 origin;
-    f32 radius;
+struct CShake_t;
+struct CShake_t {
+    s32 m_pLast;
+    CShake *next;
+    CVector3 m_vPos;
+    f32 m_Radius;
     AxisWave x;
     AxisWave y;
     AxisWave z;
@@ -354,7 +354,7 @@ extern void func_802391AC_de(void *view, s32 red, s32 green, s32 blue, s32 mode,
 
 
 typedef char AxisWave_size_check[(sizeof(AxisWave) == 0x14) ? 1 : -1];
-typedef char Effect33920_size_check[(sizeof(Effect33920) == 0x54) ? 1 : -1];
+typedef char CShake_size_check[(sizeof(CShake) == 0x54) ? 1 : -1];
 typedef char Racer_size_check[(sizeof(Racer) == 0xE54) ? 1 : -1];
 typedef char Race_size_check[(sizeof(Race) == 0xF38) ? 1 : -1];
 extern f32 D_800D05D0;
