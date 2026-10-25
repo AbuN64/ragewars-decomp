@@ -63,8 +63,8 @@ extern s32 Pak_DeleteNote(s32, s32);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_CountFreeNotes(s32, s32 *);
 extern s32 func_80435424_de(void);
-extern s32 func_804057EC_de(s32);
-extern s32 func_80405454_de(s32, char *);
+extern s32 Ovlgame_BytesToPakPages(s32);
+extern s32 Ovlgame_FindFreeNoteExtension(s32, char *);
 extern u32 func_804057F8_de(void *, u32, u32);
 extern char *func_802A025C_de(char *, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
@@ -86,7 +86,7 @@ s32 Frontend_SavePlayerRecords(s32 channel)
         if (status == 0) {
             status = Pak_CountFreeNotes(channel, &space.freeNotes);
             if (status == 0) {
-                requiredPages = func_804057EC_de(func_80435424_de());
+                requiredPages = Ovlgame_BytesToPakPages(func_80435424_de());
                 if (space.freeNotes != 0 && space.freePages >= requiredPages) space.fits = 1;
             }
         }
@@ -94,7 +94,7 @@ s32 Frontend_SavePlayerRecords(s32 channel)
     }
     if (success == 1) {
         success = 0;
-        if (func_80405454_de(channel, extension) == 0) {
+        if (Ovlgame_FindFreeNoteExtension(channel, extension) == 0) {
             Resmgr_CopyBytes((*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved, (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].records, 0x640);
             (*(struct Block_func_804347CC_de * *)&D_800E54A4)->savedProfile = (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].profile;
             (*(struct Block_func_804347CC_de * *)&D_800E54A4)->checksum = func_804057F8_de((*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved, 0x640, 7);

@@ -24,7 +24,7 @@ int Pak_GetFreePages(int, int *);
 s32 Pak_GetNoteGameName(s32, s32, char **);
 s32 func_80405598_de(s32);
 void func_80405648_de(u8 *, u8 *, s32);
-u32 func_804057EC_de(u32);
+u32 Ovlgame_BytesToPakPages(u32);
 s32 func_80406858_de(void *, s32, s32 *, s32 *);
 void * Pak_OpenDialog(void *, void *, s32, s32, s32);
 s32 func_802A037C_de(); /* extern */
@@ -209,8 +209,8 @@ void Pak_CheckControllerPak(Shared_PakMenu *menu) {
             if (error == 0) {
                 error = Pak_CountFreeNotes(D_800E28C8, &freeNotes);
                 if (error == 0) {
-                    maxBytes = func_804057EC_de(D_8011FECC + 0x610);
-                    minBytes = func_804057EC_de(0x18U);
+                    maxBytes = Ovlgame_BytesToPakPages(D_8011FECC + 0x610);
+                    minBytes = Ovlgame_BytesToPakPages(0x18U);
                     if (freeNotes != 0) {
                         if (freeBytes >= (s32)minBytes && freeBytes < (s32)maxBytes) {
                             D_80153784 = 1;

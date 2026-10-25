@@ -80,9 +80,9 @@ extern u8 *D_800D7E14;
 
 extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 
-extern s32 func_804057EC_de(s32 size);
+extern s32 Ovlgame_BytesToPakPages(s32 size);
 
-static inline int space_required(int size) {size += 0x610; return func_804057EC_de(size);}
+static inline int space_required(int size) {size += 0x610; return Ovlgame_BytesToPakPages(size);}
 
 extern char D_8014561C[];
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
@@ -242,7 +242,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     if (D_8014D4C0_de != 0) {
         entry->text = &D_800D3754;
         if (Pak_GetFreePages(ch, &freeSpace) == 0) {
-            if (D_8014D4EC_de) need=func_804057EC_de(0x18); else need=space_required(D_8011FECC);
+            if (D_8014D4EC_de) need=Ovlgame_BytesToPakPages(0x18); else need=space_required(D_8011FECC);
             text = ENTRY_TEXT(entry);
             func_802658E4_de(digits.c, D_800E0DA4, freeSpace);
             text += 14;
@@ -263,7 +263,7 @@ s32 func_80408118_de(PakNoteTextEntry *entry, PakStatusPakSaveMenu *menu) {
     fill:
         entry->text = header;
         result = Pak_GetFreePages(ch, &freeSpace);
-        need = func_804057EC_de(D_8011FECC + 0x610);
+        need = Ovlgame_BytesToPakPages(D_8011FECC + 0x610);
         text = ENTRY_TEXT(entry);
         if (result == 0) {
             text += 14;

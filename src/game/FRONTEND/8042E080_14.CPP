@@ -22,7 +22,7 @@ extern void func_802A025C_de(char *, char *);
 extern void func_802A0C08_de(char *, char *, ...);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 func_80435424_de(void);
-extern s32 func_804057EC_de(s32);
+extern s32 Ovlgame_BytesToPakPages(s32);
 extern void func_804322AC_de(s32, s32);
 extern void func_80434250_de(s32, s32);
 
@@ -156,7 +156,7 @@ D_800DDEC0,
 #else
 D_800DDEB0_de,
 #endif
- func_804057EC_de(size));
+ Ovlgame_BytesToPakPages(size));
             item->text = D_800E54A4->slots[player].used;
         } else {
             failed = 1;

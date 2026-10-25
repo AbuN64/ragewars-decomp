@@ -98,7 +98,7 @@ extern void func_80405648_de(u8 *state, u8 *name, s32 size);
 extern s32 func_802A037C_de(const void *a, const void *b);
 extern s32 Pak_GetFreePages(s32 ch, s32 *freeSpace);
 extern s32 Pak_CountFreeNotes(s32 ch, s32 *noteCount);
-extern u32 func_804057EC_de(u32 size);
+extern u32 Ovlgame_BytesToPakPages(u32 size);
 
 s32 func_80406858_de(void *unused, s32 ch, s32 *bestCh, s32 *bestScore) {
     u8 name[16];
@@ -152,7 +152,7 @@ check:
     if (result == 0) {
         result = Pak_CountFreeNotes(D_800E28C8, &noteCount);
         if (result == 0) {
-            need = func_804057EC_de(D_8011FECC + 0x610);
+            need = Ovlgame_BytesToPakPages(D_8011FECC + 0x610);
             if (noteCount == 0 || freeSpace < need) {
                 if (*bestScore < need) {
                     *bestScore = need;

@@ -17,7 +17,7 @@
 extern s32 func_8040458C_de(s32 ch, s32 index, s32 *exists, char *gameName, u8 *ext, s32 *size,
                          char *companyCode, char *gameCode);
 
-s32 func_80405454_de(s32 ch, u8 *ext) {
+s32 Ovlgame_FindFreeNoteExtension(s32 ch, u8 *ext) {
     char companyCode[8];
     char gameCode[8];
     char gameName[16];
@@ -166,7 +166,7 @@ s32 func_804057BC_de(u8 *text, s32 count) {
 
 /* Rounds a byte count up to whole 256-byte units; func_80435384_de passes it the 0x648-byte size
    that func_80435424_de returns. */
-u32 func_804057EC_de(u32 bytes) {
+u32 Ovlgame_BytesToPakPages(u32 bytes) {
     return (bytes + 0xFF) >> 8;
 }
 

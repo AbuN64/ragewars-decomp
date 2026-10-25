@@ -88,10 +88,10 @@ extern struct Shape_typemap_165 *D_800DE864_de;
 extern s32 D_800DE868, D_800E28BC;
 extern char D_80153738[], D_8014561C[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
-extern s32 func_804057EC_de(s32);
+extern s32 Ovlgame_BytesToPakPages(s32);
 extern s32 Pak_GetFreePages(s32, s32 *);
 extern s32 Pak_CountFreeNotes(s32, s32 *);
-extern s32 func_80405454_de(s32, char *);
+extern s32 Ovlgame_FindFreeNoteExtension(s32, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void func_80253908_de(s32);
 /* Save the small controller-pak record when capacity allows, release the
@@ -125,14 +125,14 @@ s32 Pak_SaveControllerRecord(s32 unused, struct Shared_PakMenu *menu, s32 unused
     selectedPlayer = pakRecordChannel(menu, &channel);
     player = selectedPlayer;
     if (D_8014D4C0_de != 0) {
-        required = func_804057EC_de(0x18);
+        required = Ovlgame_BytesToPakPages(0x18);
         status = Pak_GetFreePages(channel, &freeBytes);
         if (status == 0) {
             if (required <= freeBytes) {
                 status = Pak_CountFreeNotes(channel, &slots);
                 if (status == 0 && slots != 0) {
                     insufficient = 0;
-                    status = func_80405454_de(channel, extension);
+                    status = Ovlgame_FindFreeNoteExtension(channel, extension);
                     if (status == 0) {
                         attempted = 1;
                         status = Pak_SaveNote(channel, 0x18, D_80153738,
@@ -194,13 +194,13 @@ s32 Pak_SaveSnapshotAndClose(void *unused, Shared_PakMenu *menu) {
     player = selectedPlayer;
     snapshotBytes = D_8011FECC + 0x610;
     if (D_8014D4C0_de != 0) {
-        required = func_804057EC_de(snapshotBytes);
+        required = Ovlgame_BytesToPakPages(snapshotBytes);
         status = Pak_GetFreePages(channel, &freePages);
         if (status == 0) {
             if (required <= freePages) {
                 if (Pak_CountFreeNotes(channel, &freeNotes) == 0 && freeNotes != 0) {
                     showPrompt = 0;
-                    if (func_80405454_de(channel, extension) == 0) {
+                    if (Ovlgame_FindFreeNoteExtension(channel, extension) == 0) {
                         Pak_SaveNote(channel, snapshotBytes, (void *)D_800DE868,
                                      RW_PAK_SNAPSHOT_TITLE, extension, RW_PAK_GAME_CODE);
                     }
