@@ -13,7 +13,7 @@
 extern struct ResourceRecAt6 *D_8014D988;
 extern EntryRecAt18V1 *D_80153C10;
 extern FileState D_801539B0;
-extern void func_802A0EB0_de(s32 file);
+extern void Resmgr_CloseStream(s32 file);
 extern void *func_8025305C_de(s32 size);
 extern void func_80413720_de(s32 id, s32 format, s16 width, s16 height, s32 stride, s32 rows, s32 a6, s32 size, void *pixels, s32 a9, s32 paletteBytes, void *palette, s32 colors);
 
@@ -143,7 +143,7 @@ void func_804101BC_de(void) {
     }
     func_8040F580_de();
     state = &D_801539B0;
-    if (state->unk0) func_802A0EB0_de(state->unk0);
+    if (state->unk0) Resmgr_CloseStream(state->unk0);
     func_804118E4_de(1);
     func_80410E1C_de(1);
     if (state->entries) func_802547E4_de(state->entries);
@@ -308,7 +308,7 @@ s32 func_80410674_de(s32 index, s32 mode) {
                   palette, entry->unkE);
     func_80419640_de(texture, id);
     D_80153C10[index].unk4 |= 1;
-    func_802A0EB0_de(D_801539B0.unk0);
+    Resmgr_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;
     func_802A18CC_de();
     touch(index, mode);
@@ -386,6 +386,6 @@ void func_80410B14_de(s32 index, s32 output) {
     }
     func_80413720_de(output, format, entry->unkA, entry->unkC, stride, entry->unkC, 1, size, pixels, 1, paletteBytes,
                   palette, entry->unkE);
-    func_802A0EB0_de(D_801539B0.unk0);
+    Resmgr_CloseStream(D_801539B0.unk0);
     D_801539B0.unk0 = 0;
 }

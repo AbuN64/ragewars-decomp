@@ -93,7 +93,7 @@ typedef struct {
 extern File D_801539B0;
 extern s32 D_800DD0B0;
 extern s32 func_8025305C_de(s32 size);
-extern void func_802A0EB0_de(s32 handle);
+extern void Resmgr_CloseStream(s32 handle);
 extern s32 func_802A1934_de(void);
 extern void func_804133E4_de(Texture *texture);
 extern void func_80413404_de(Texture *texture);
@@ -201,7 +201,7 @@ void *Frontend_GetBankTileTexture(u8 which, s32 group, s32 pass) {
             }
             i += 1;
         } while (i < 0x60);
-        func_802A0EB0_de(D_801539B0.handle);
+        Resmgr_CloseStream(D_801539B0.handle);
         D_801539B0.handle = 0;
         bank->loaded = 1;
     }

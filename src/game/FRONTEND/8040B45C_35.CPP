@@ -532,7 +532,7 @@ void func_8040F6DC_de(UiWidget *widget, s32 base, s32 old) {
 #include "FRONTEND/LAYOUT.H"
 void *func_8025305C_de(s32 size);
 u8 *func_802A025C_de(u8 *dst, u8 *src);
-void func_802A0EB0_de(s32 handle);
+void Resmgr_CloseStream(s32 handle);
 void Frontend_LoadLanguageStrings(s32 index);
 extern char D_800DD0B0;
 extern s32 D_800E2AC4;
@@ -576,7 +576,7 @@ void Frontend_LoadLanguageStrings(s32 languageIndex) {
     Resmgr_SeekStream(D_801539B0.In, D_801539B0.LangTable[languageIndex].start + D_801539B0.Header.StringTable, 0);
     Resmgr_ReadStream(D_801539B0.StringBuffer, bufferSize, 1, D_801539B0.In);
     if (closeArchive) {
-        func_802A0EB0_de(D_801539B0.In);
+        Resmgr_CloseStream(D_801539B0.In);
         D_801539B0.In = 0;
     }
     D_801539B0.StringTable = (char **)func_8025305C_de(stringCount << 2);
@@ -697,6 +697,6 @@ void Frontend_OpenResourceArchive(u8 *name) {
     D_801539B0.Init = 1;
     func_802A025C_de(D_801539B0.Name, name);
     D_801539B0.NeverFreeResources = 0;
-    func_802A0EB0_de(D_801539B0.In);
+    Resmgr_CloseStream(D_801539B0.In);
     D_801539B0.In = 0;
 }

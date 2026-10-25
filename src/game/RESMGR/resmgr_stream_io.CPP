@@ -160,7 +160,7 @@ s32 Resmgr_OpenStream(const void *name, const void *mode) {
     return D_800CD924_de(name, mode);
 }
 
-void func_802A0EB0_de(void) {
+void Resmgr_CloseStream(void) {
     D_800CD928_de();
 }
 

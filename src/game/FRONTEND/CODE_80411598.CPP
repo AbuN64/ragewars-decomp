@@ -54,7 +54,7 @@ extern char D_800DD0B0;
 extern void *func_8025305C_de(s32);
 
 extern void func_8040F6DC_de(void *, void *, s32);
-extern void func_802A0EB0_de(s32);
+extern void Resmgr_CloseStream(s32);
 
 /* Loads entry index of the menu archive into memory and counts the use: in cache mode 1 an entry
    already loaded is restored from its saved copy and rebased; otherwise an entry not yet loaded is
@@ -80,7 +80,7 @@ load:
         D_801539B0.ScreenOriginal[index].data = func_8025305C_de(D_801539B0.Screen[index].size);
         Resmgr_CopyBytes(D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].data, D_801539B0.Screen[index].size);
     }
-    func_802A0EB0_de(D_801539B0.In);
+    Resmgr_CloseStream(D_801539B0.In);
     D_801539B0.In = 0;
     data = D_801539B0.Screen[index].data;
     func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
