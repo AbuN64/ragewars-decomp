@@ -4,31 +4,15 @@
 #include "AI/SOURCE.H"
 #include "AI/ACTOR_SETUP_VERSIONS.H"
 #include "TYPES.H"
+#include "stddef.h"
 #include "RESMGR/802A0888.H"
 
-/* Sets up a sound voice from its definition: clears the voice's handle at 0xC and state at 0x100 and
-   0x102, takes the definition's three bytes at 0x12, 0xE and 0x10 for the output parameters, and the
-   pitch from its word at 0x18 read unsigned for kinds 1 and 4 (with the two level bytes at 0x41 and 0x40
-   for kind 1, D_800C2100_de otherwise) or signed short for kind 7; for kinds 1 and 4 the audio mode
-   D_801462D0 8 scales the pitch by D_800C2118_de with a floor of (&D_800C2118_de)[1] and no second level,
-   and mode 0x20 scales it by D_800C2120_de with second level D_800C2124_de; the pitch is stored shifted up 8
-   bits at 0x4 and 0x8 and the levels at 0x10 and 0xCC. */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 unused4, u8 *out) {
+/* Seeds an actor record from its definition: clears the sound handle, pending flag and channel, copies the
+   definition's first, second and send bytes into the source object, and takes the health from the
+   definition (unsigned for kinds 1 and 4, with kind 1's two levels; signed short for kind 7). For kinds 1
+   and 4 the scene mask scales it: 8 by D_800C2118_de with a floor and no second level, 0x20 by
+   D_800C2120_de with second level D_800C2124_de. The health is kept as 24.8 fixed point. */
+void Nav_ApplyActorDefinition(Dest *actor, void *def, CVector3 position, Source *source) {
     s32 send;
     s32 first;
     s32 second;
@@ -44,9 +28,9 @@ void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 u
     level2 = (&D_800C2100_de)[1];
     first = 0;
     second = 0;
-    voice->handle = -1;
-    voice->pending = 0;
-    voice->channel = -1;
+    actor->handle = -1;
+    actor->pending = 0;
+    actor->channel = -1;
     pitch = level;
     if (def != 0) {
         send = ((ActorDefinitionHeader *)def)->send;
@@ -92,179 +76,103 @@ void func_802138F0_de(Dest *voice, void *def, ResourceManagerState unused, s32 u
             }
         }
     }
-    out[3] = send;
-    out[1] = first;
-    out[2] = second;
-    voice->health = pitch;
-    voice->level = (s32) level;
-    voice->secondaryLevel = (s32) level2;
-    voice->health <<= 8;
-    voice->maxHealth = voice->health;
+    source->send = send;
+    source->first = first;
+    source->second = second;
+    actor->health = pitch;
+    actor->level = (s32) level;
+    actor->secondaryLevel = (s32) level2;
+    actor->health <<= 8;
+    actor->maxHealth = actor->health;
 }
 
-/* Builds an actor record from its source object: clears the 0x170-byte record (keeping the field at
- * 0x68), calls the shared initialiser, installs the two behaviour tables for this version, seeds the
- * position and scale copies, the sentinel indices and the default colour factors, runs the optional first
- * callback, and flags the record when the source asks for it (bit 27 of its word at 0x100). */
-typedef struct SetupVec {
-    f32 x, y, z;
-} SetupVec;
-typedef struct SetupDesc {
-    u32 pad00;
-    u32 flags;
-} SetupDesc;
-typedef struct SetupSource {
-    u8 pad00[8];
-    SetupVec pos;
-    void *model;
-    SetupDesc *desc;
-    u8 pad1C[0x50];
-    f32 scale;
-    u8 pad70[0x90];
-    u32 flags;
-} SetupSource;
-typedef struct SetupActor {
-    u32 flags;
-    u8 pad04[0xE];
-    u8 field12;
-    u8 field13;
-    s8 sentinel14[4];
-    f32 field18;
-    s32 words1C[4];
-    u8 pad2C[4];
-    s32 field30;
-    s8 field34;
-    s8 field35;
-    u8 pad36[0xE];
-    s32 field44;
-    SetupVec pos48;
-    SetupVec pos54;
-    f32 field60;
-    s32 field64;
-    s32 field68;
-    s32 words6C[3];
-    s32 words78[5];
-    f32 field8C;
-    f32 field90;
-    u8 field94;
-    u8 field95;
-    s16 field96;
-    u8 pad98[4];
-    f32 field9C;
-    SetupVec posA0;
-    s32 fieldAC;
-    SetupVec posB0;
-    void *modelBC;
-    f32 fieldC0;
-    f32 fieldC4;
-    s16 fieldC8;
-    s8 fieldCA;
-    u8 fieldCB;
-    u8 padCC[4];
-    s32 fieldD0;
-    s32 fieldD4;
-    u8 padD8[0x24];
-    s32 fieldFC;
-    u8 field100;
-    u8 pad101;
-    s16 field102;
-    u8 pad104[8];
-    void *table10C;
-    u8 pad110[0xC];
-    void *table11C;
-    u8 pad120[0x50];
-} SetupActor;
-typedef struct SetupCallbacks {
-    void (*first)(SetupSource *, SetupActor *);
-} SetupCallbacks;
-typedef char SetupActor_size_check[(sizeof(SetupActor) == 0x170) ? 1 : -1];
-typedef char SetupActor_model_check[(((u32)&((SetupActor *)0)->modelBC) == 0xBC) ? 1 : -1];
-typedef char SetupActor_field9C_check[(((u32)&((SetupActor *)0)->field9C) == 0x9C) ? 1 : -1];
-typedef char SetupActor_fieldFC_check[(((u32)&((SetupActor *)0)->fieldFC) == 0xFC) ? 1 : -1];
-typedef char SetupSource_flags_check[(((u32)&((SetupSource *)0)->flags) == 0x100) ? 1 : -1];
+/* Builds an actor record from its source object: clears the record (keeping field68), applies the
+ * definition, installs this version's two behaviour tables, seeds the position, height and scale copies,
+ * the sentinel indices (-1) and the unit scales, clears the attach count and its flag bit, runs the
+ * optional spawn callback, and sets the attach count when the source has bit 27 of its flags. */
+typedef struct ActorSpawnCallbacks {
+    void (*onSpawn)(Source *, Dest *);
+} ActorSpawnCallbacks;
 extern char ACTOR_TABLE_A;
 extern char ACTOR_TABLE_B;
-extern f32 D_800C7218;
-/* the shared initialiser is declared with five parameters above; this caller also passes the source on the stack */
-typedef void (*SetupInitFn)(SetupActor *, SetupDesc *, SetupVec, SetupSource *);
 extern f32 func_80275DD4_de(void *, f32, f32);
-void Nav_InitSpawnedActor(SetupSource *source, SetupActor *actor, SetupCallbacks *callbacks) {
-    s32 saved;
-    void *model;
+void Nav_InitSpawnedActor(Source *source, Dest *actor, ActorSpawnCallbacks *callbacks) {
+    void *saved;
+    void *surface;
     f32 scale;
     s32 value;
     u32 bits;
 
     saved = actor->field68;
-    Resmgr_FillMemory(actor, 0, 0x170);
+    Resmgr_FillMemory(actor, 0, sizeof(Dest));
     actor->flags = 0x40;
     actor->field68 = saved;
-    ((SetupInitFn)func_802138F0_de)(actor, source->desc, source->pos, source);
-    actor->table11C = &ACTOR_TABLE_A;
-    actor->table10C = &ACTOR_TABLE_B;
-    actor->field34 = -1;
-    actor->field35 = -1;
-    actor->field30 = 0;
-    actor->pos48 = source->pos;
-    actor->pos54 = source->pos;
-    actor->words6C[0] = 0;
-    actor->words6C[1] = 0;
-    actor->words6C[2] = 0;
-    actor->field60 = source->scale;
-    actor->field64 = 0;
-    actor->words78[0] = 0;
-    actor->words78[1] = 0;
-    actor->words78[2] = 0;
-    actor->words78[3] = 0;
-    actor->words78[4] = 0;
-    actor->field8C = source->scale;
-    actor->field90 = source->pos.y;
-    actor->field9C = source->scale;
-    actor->posA0 = source->pos;
-    actor->fieldAC = (s32)source->model;
-    actor->posB0 = source->pos;
-    model = source->model;
-    actor->modelBC = model;
-    if ((source->desc->flags & 4) && model != 0) {
-        actor->posB0.y = func_80275DD4_de(model, actor->posB0.x, actor->posB0.z);
+    Nav_ApplyActorDefinition(actor, source->definition, source->position, source);
+    actor->callback11C = &ACTOR_TABLE_A;
+    actor->draw = &ACTOR_TABLE_B;
+    actor->state = -1;
+    actor->old_state = -1;
+    actor->entry = NULL;
+    actor->initialPosition = source->position;
+    actor->previousPosition = source->position;
+    actor->field6C[0] = 0;
+    actor->field6C[1] = 0;
+    actor->field6C[2] = 0;
+    actor->initialHeight = source->height;
+    actor->cueTimer = 0;
+    actor->field78[0] = 0;
+    actor->field78[1] = 0;
+    actor->field78[2] = 0;
+    actor->field78[3] = 0;
+    actor->field78[4] = 0;
+    actor->height8C = source->height;
+    actor->height90 = source->position.y;
+    actor->height9C = source->height;
+    actor->positionA0 = source->position;
+    actor->surfaceAC = source->surface;
+    actor->positionB0 = source->position;
+    surface = source->surface;
+    actor->surfaceBC = surface;
+    if ((source->definition->gate & 4) && surface != NULL) {
+        actor->positionB0.y = func_80275DD4_de(surface, actor->positionB0.x, actor->positionB0.z);
     }
-    scale = D_800C7218;
+    scale = 1.0f;
     value = -1;
-    actor->fieldCA = value;
+    actor->state_result = value;
     value = 0x14;
-    actor->field13 = value;
+    actor->state13 = value;
     value = 0xFF;
-    actor->field95 = value;
+    actor->state95 = value;
     bits = -1;
-    actor->fieldC8 = bits;
-    actor->field35 = bits;
-    actor->sentinel14[0] = bits;
-    actor->sentinel14[1] = bits;
-    actor->sentinel14[2] = bits;
-    actor->sentinel14[3] = bits;
-    actor->field102 = bits;
-    actor->field96 = bits;
-    actor->fieldCB = 0;
+    actor->result = bits;
+    actor->old_state = bits;
+    actor->state14[0] = bits;
+    actor->state14[1] = bits;
+    actor->state14[2] = bits;
+    actor->state14[3] = bits;
+    actor->channel = bits;
+    actor->state96 = bits;
+    actor->count = 0;
     actor->fieldD0 = 0;
     actor->fieldD4 = 0;
     actor->field44 = 0;
-    actor->field12 = 0;
-    actor->words1C[0] = 0;
-    actor->words1C[1] = 0;
-    actor->words1C[2] = 0;
-    actor->words1C[3] = 0;
-    actor->field100 = 0;
-    actor->field94 = 0;
-    actor->fieldFC = 0;
-    actor->fieldC0 = scale;
-    actor->fieldC4 = scale;
+    actor->state12 = 0;
+    actor->field1C[0] = 0;
+    actor->field1C[1] = 0;
+    actor->field1C[2] = 0;
+    actor->field1C[3] = 0;
+    actor->pending = 0;
+    actor->state94 = 0;
+    actor->sound = NULL;
+    actor->scale = scale;
+    actor->entry_scale = scale;
     actor->flags &= ~1;
-    actor->field18 = scale;
-    if (callbacks != 0 && callbacks->first != 0) {
-        callbacks->first(source, actor);
+    actor->initialScale = scale;
+    if (callbacks != NULL && callbacks->onSpawn != NULL) {
+        callbacks->onSpawn(source, actor);
     }
     bits = 0x8000000;
     if (source->flags & bits) {
-        actor->fieldCB = 1;
+        actor->count = 1;
     }
 }

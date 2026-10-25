@@ -4705,7 +4705,7 @@ struct Dest {
     u8 state12, state13;
     s8 state14[4];
     f32 initialScale; /* +0x18 */
-    u8 pad1C[0x10];
+    s32 field1C[4];
     void *table; /* 0x2C */
     StateEntry *entry;
     s8 state;
@@ -4715,14 +4715,14 @@ struct Dest {
     u32 old_entry_flags;
     u32 entry_flags;
     s32 stateTimer; /* 0x40 */
-    u8 pad44[4];
+    s32 field44;
     CVector3 initialPosition; /* +0x48 */
     CVector3 previousPosition; /* +0x54 */
     f32 initialHeight; /* +0x60 */
     f32 cueTimer; /* 0x64 */
     void *field68; /* saved across the 0x170-byte clear; pointee unresolved */
-    u8 reserved6C[0x18];
-    u8 reserved84[8];
+    s32 field6C[3];
+    s32 field78[5];
     f32 height8C;
     f32 height90;
     u8 state94, state95;

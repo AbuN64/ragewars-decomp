@@ -4,6 +4,7 @@
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/ACTOR_DEFINITION.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ARGB_COLOR.H"
@@ -174,10 +175,14 @@ struct func_802138F0_S2 {
 
 struct Source;
 struct Source {
-    u8 pad0[8];
+    u8 pad0;
+    s8 first; /* +0x1..0x3: copied from the definition by Nav_ApplyActorDefinition */
+    s8 second;
+    s8 send;
+    u8 pad4[4];
     CVector3 position;
     void *surface; /* +0x14: Nav_InitSpawnedActor ground query */
-    s32 *kind;
+    ActorDefinitionHeader *definition;
     CVector3 velocity;
     u8 pad28[0x10];
     s32 flags38;

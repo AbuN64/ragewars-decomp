@@ -10681,6 +10681,8 @@ SECTIONS
         src/game/AI/NAV/800C6E84_21.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_21.CPP.o(.data);
         src/game/AI/NAV/800C6E84_22.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/80212C90_18.CPP.o */;
+        src/game/AI/NAV/80212C90_18.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_3.CPP.o(.data);
         src/game/AI/NAV/800C6E84_23.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/WEAPONS/80213ED4_2.CPP.o */;
@@ -12433,7 +12435,9 @@ SECTIONS
         src/game/AI/NAV/800C6E84_21.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_21.CPP.o(.data);
         src/game/AI/NAV/800C6E84_22.CPP.o(.rodata .rdata);
-        src/game/AI/NAV/800C6E84_22.CPP.o(.data);
+        . = ALIGN(8) /* src/game/AI/NAV/80212C90_18.CPP.o */;
+        src/game/AI/NAV/80212C90_18.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/800C6E84_10.CPP.o(.data);
         src/game/AI/NAV/800C6E84_23.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/WEAPONS/80213ED4_2.CPP.o */;
         src/game/WEAPONS/80213ED4_2.CPP.o(.rodata .rdata);
@@ -14129,7 +14133,9 @@ SECTIONS
         src/game/AI/NAV/800C6E84_21.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84_21.CPP.o(.data);
         src/game/AI/NAV/800C6E84_22.CPP.o(.rodata .rdata);
-        src/game/AI/NAV/800C6E84_22.CPP.o(.data);
+        . = ALIGN(8) /* src/game/AI/NAV/80212C90_18.CPP.o */;
+        src/game/AI/NAV/80212C90_18.CPP.o(.rodata .rdata);
+        src/game/AI/NAV/800C6E84_10.CPP.o(.data);
         src/game/AI/NAV/800C6E84_23.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/WEAPONS/80213ED4_2.CPP.o */;
         src/game/WEAPONS/80213ED4_2.CPP.o(.rodata .rdata);
@@ -15842,6 +15848,8 @@ SECTIONS
         src/game/AI/NAV/800C6E84_18.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT1/800C2000.CPP.o(.data);
         src/game/AI/NAV/800C6E84_22.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/80212C90_18.CPP.o */;
+        src/game/AI/NAV/80212C90_18.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6E84.CPP.o(.data);
         src/game/AI/NAV/800C6E84_23.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/WEAPONS/80213ED4_2.CPP.o */;
@@ -17579,6 +17587,8 @@ SECTIONS
         src/game/AI/NAV/800C6E84_21.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB1/800C71E4.CPP.o(.data);
         src/game/AI/NAV/800C6E84_22.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/AI/NAV/80212C90_18.CPP.o */;
+        src/game/AI/NAV/80212C90_18.CPP.o(.rodata .rdata);
         src/game/DATA/OVLTAB1/800C721C.CPP.o(.data);
         src/game/AI/NAV/800C6E84_23.CPP.o(.rodata .rdata);
         . = ALIGN(8) /* src/game/WEAPONS/80213ED4_2.CPP.o */;
@@ -19864,6 +19874,7 @@ SECTIONS
         src/game/AI/NAV/800C6E84_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_21.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_22.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/80212C90_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_3.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_23.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/80213ED4_2.CPP.o(.bss .sbss COMMON);
@@ -21117,6 +21128,8 @@ SECTIONS
         src/game/AI/NAV/800C6E84_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_21.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_22.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/80212C90_18.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/800C6E84_10.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_23.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/80213ED4_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_24.CPP.o(.bss .sbss COMMON);
@@ -22334,6 +22347,8 @@ SECTIONS
         src/game/AI/NAV/800C6E84_20.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_21.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_22.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/80212C90_18.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/800C6E84_10.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_23.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/80213ED4_2.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_24.CPP.o(.bss .sbss COMMON);
@@ -23558,6 +23573,7 @@ SECTIONS
         src/game/AI/NAV/800C6E84_18.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT1/800C2000.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_22.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/80212C90_18.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_23.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/80213ED4_2.CPP.o(.bss .sbss COMMON);
@@ -24843,6 +24859,7 @@ SECTIONS
         src/game/AI/NAV/800C6E84_21.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/800C71E4.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_22.CPP.o(.bss .sbss COMMON);
+        src/game/AI/NAV/80212C90_18.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLTAB1/800C721C.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6E84_23.CPP.o(.bss .sbss COMMON);
         src/game/WEAPONS/80213ED4_2.CPP.o(.bss .sbss COMMON);

@@ -2974,3 +2974,4 @@ literals_func_8041C7F4_de = 0x800E14B8; // rom:0xE20B8 size:0x8
 literals_Frontend_InitModelPreview = 0x800E14C0; // rom:0xE20C0 size:0x8
 literals_Actors_ApplyVertexColors = 0x800C9BE8; // rom:0xCA7E8 size:0x24
 literals_Render_UpdateFadeTransition = 0x800CA56C; // rom:0xCB16C size:0x18
+literals_Nav_InitSpawnedActor = 0x800C7218; // rom:0xC7E18 size:0x4

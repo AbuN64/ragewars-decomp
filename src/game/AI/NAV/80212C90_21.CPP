@@ -28,7 +28,7 @@ void func_80213CF8_de(Source *player, void *unused1) {
     f32 amount;
 
     object = func_8024E6A0_de(player);
-    if ((object != 0) && (*((Source *)object)->kind == 2)) {
+    if ((object != 0) && (((Source *)object)->definition->kind == 2)) {
         position = player->position;
         func_8024E6D8_de(object, &saved_velocity);
         if (!(player->flags38 & 0x1000) || (saved_velocity.y > 0.0f)) {
@@ -48,7 +48,7 @@ void func_80213CF8_de(Source *player, void *unused1) {
         Particle_AddVec3(&position, &position, &transformed);
         func_80243A90_de(player, position, &D_80100338);
         player->velocity = saved_velocity;
-        if ((object[0] == 1) && (*((Source *)object)->kind == 2)) {
+        if ((object[0] == 1) && (((Source *)object)->definition->kind == 2)) {
             func_80207730_de(object, player);
         }
     }

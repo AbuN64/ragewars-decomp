@@ -3320,6 +3320,7 @@ segments:
       - [0xC2F90, rodata, data_800C/D_8021321C_C7DE0]
       - [0xC2F94, data, data_800C/rodata_unresolved_800C2394]
       - [0xC2FA0, rodata, data_800C/D_802138F0_C7DF0]
+      - [0xC2FC8, rodata, data_800C/literals_Nav_InitSpawnedActor]
       - [0xC2FCC, data, data_800C/rodata_unresolved_800C23CC]
       - [0xC2FD0, rodata, data_800C/D_80213ED4_C7E20]
       - [0xC2FD8, rodata, data_800C/literals_func_80214310_de]
