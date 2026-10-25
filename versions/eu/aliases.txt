@@ -2601,3 +2601,4 @@ literals_Weapons_BuildPlayerOrientation = 0x800C2E10; // rom:0xC3A10 size:0x4
 literals_Frontend_InitGameStatus = 0x800EE1D4; // rom:0xEEDD4 size:0xC
 literals_Math_ResetFrameHeap = 0x800C6010; // rom:0xC6C10 size:0x8
 literals_Team_UpdateDraftPanel = 0x800C24D4; // rom:0xC30D4 size:0x14
+literals_Menu_GetTrackStartAngles = 0x800ED2F8; // rom:0xEDEF8 size:0x4

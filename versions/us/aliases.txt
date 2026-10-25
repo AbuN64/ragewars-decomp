@@ -2623,3 +2623,4 @@ literals_Frontend_InitGameStatus = 0x800DC804; // rom:0xDD404 size:0xC
 literals_Render_ToggleForceMarker = 0x800C2C3C; // rom:0xC383C size:0x4
 literals_Math_ResetFrameHeap = 0x800C5CA0; // rom:0xC68A0 size:0x8
 literals_Team_UpdateDraftPanel = 0x800C2164; // rom:0xC2D64 size:0x14
+literals_Menu_GetTrackStartAngles = 0x800DB928; // rom:0xDC528 size:0x4

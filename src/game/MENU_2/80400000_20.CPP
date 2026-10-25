@@ -6,65 +6,62 @@
 #include "stddef.h"
 #include "TYPES.H"
 
-#ifdef NON_MATCHING
-#include "COMMON/ITEMRECAT20V1.H"
-#include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/ENTRYRECAT8V4.H"
-#include "TYPES.H"
 #include "RENDER_4/8028FD2C_6.H"
-extern f32 D_800DCC78;
-extern CVector3 Menu_EvaluateCameraSpline(void *,s32,s32);
-extern void Particle_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
-extern f32 func_802725FC_de(CVector3 *),Particle_GetHorizontalAngle(CVector3 *);
-static inline CVector3 TrackStart(void) {
-    CVector3 sp10;
-    CVector3 sp20;
-    StridedTable *table;
+extern CVector3 Menu_EvaluateCameraSpline(SplineNode *nodes, s32 count, f32 w);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern f32 func_802725FC_de(CVector3 *direction);
+extern f32 Particle_GetHorizontalAngle(CVector3 *direction);
+
+/* First point of the current track's camera path (pack section 0 of section 0 of the resource), or the origin with no track. */
+static inline CVector3 TrackStartPoint(void) {
+    CVector3 point;
+    CVector3 origin;
+    StridedTable *path;
     if (D_800E2830->active == 0) {
-        sp20.x = 0;
-        sp20.y = 0;
-        sp20.z = 0;
-        return sp20;
+        origin.x = 0.0f;
+        origin.y = 0.0f;
+        origin.z = 0.0f;
+        return origin;
     }
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 0);
-    sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
-    return sp10;
+    path = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 0);
+    point = Menu_EvaluateCameraSpline((SplineNode *)path->data, path->count, 0.0f);
+    return point;
 }
-static inline CVector3 TrackEnd(void) {
-    CVector3 sp10;
-    CVector3 sp20;
-    StridedTable *table;
+
+/* First point of the current track's target path (pack section 1), or 10 units along x with no track. */
+static inline CVector3 TrackEndPoint(void) {
+    CVector3 point;
+    CVector3 fallback;
+    StridedTable *path;
     if (D_800E2830->active == 0) {
-        sp20.y = 0;
-        sp20.z = 0;
-        sp20.x = D_800DCC78;
-        return sp20;
+        fallback.y = 0.0f;
+        fallback.z = 0.0f;
+        fallback.x = 10.0f;
+        return fallback;
     }
-    table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 1);
-    sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
-    return sp10;
+    path = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 1);
+    point = Menu_EvaluateCameraSpline((SplineNode *)path->data, path->count, 0.0f);
+    return point;
 }
-/* 6/93 aligned edits (4 real + the 2 pre-prologue words the preceding padding blob holds); remaining: target keeps the second lookup's frame base in s0 */
+
+/* Pitch and heading from the track's start point toward its end point (roll 0); all zero with no active track. */
 CVector3 Menu_GetTrackStartAngles(void) {
-    CVector3 eye,target,direction,angles;
+    CVector3 eye, target, direction, angles;
     if (D_800E2830->active == 0) {
-        angles.x = 0;
-        angles.y = 0;
-        angles.z = 0;
+        angles.x = 0.0f;
+        angles.y = 0.0f;
+        angles.z = 0.0f;
         return angles;
     } else {
-        eye = TrackStart();
-        target = TrackEnd();
-        Particle_SubtractVectors(&direction,&target,&eye);
+        eye = TrackStartPoint();
+        target = TrackEndPoint();
+        Particle_SubtractVectors(&direction, &target, &eye);
         angles.x = -func_802725FC_de(&direction);
         angles.y = Particle_GetHorizontalAngle(&direction);
-        angles.z = 0;
+        angles.z = 0.0f;
         return angles;
     }
 }
-#else
-INCLUDE_ASM("ovl_80400000", Menu_GetTrackStartAngles);
-#endif
 
 /* Sets the word at offset 0xB4 of the object D_800E2830 points to. */
 
@@ -99,7 +96,6 @@ static inline void set_bit(unsigned char *bits, int index) {
 
 
  /* extern */
-CVector3 Menu_EvaluateCameraSpline(void *, s32, s32);
 
  /* extern */
 
@@ -160,7 +156,7 @@ CVector3 func_8040385C_de(void) {
         return sp20;
     }
     table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 0);
-    sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
+    sp10 = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
     return sp10;
 }
 
@@ -175,7 +171,7 @@ CVector3 func_8040390C_de(void) {
         return sp20;
     }
     table = Render_GetPackSection(Render_GetPackSection(Render_GetPackSection(D_800E2830->resource, 0), 0), 1);
-    sp10 = Menu_EvaluateCameraSpline(table->data, table->count, 0);
+    sp10 = Menu_EvaluateCameraSpline((SplineNode *)table->data, table->count, 0.0f);
     return sp10;
 }
 
