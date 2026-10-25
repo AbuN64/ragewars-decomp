@@ -1628,7 +1628,11 @@ extern f32 D_800C1C80_de;
 
 #include "COMMON/AIPROFILE.H"
 typedef struct AiTarget {
-    u8 pad0[0x1D8];
+    u8 pad0[0x8];
+    CVector3 position; /* 0x8 */
+    u8 pad14[0xEC];
+    u32 flags; /* 0x100: 0x300000 = may be targeted */
+    u8 pad104[0xD4];
     Player * player; /* 0x1D8 */
 } AiTarget;
 typedef struct AiBehaviourEntry { s32 id; void (*enter)(Player *,s32); void (*update)(Player *,s32); u8 reserved[0x14]; } AiBehaviourEntry;
@@ -1664,7 +1668,9 @@ typedef struct AiController {
     f32 speed[4]; /* 0x248 */
     CVector3 targetPosition; /* 0x258 */
     f32 distance; /* 0x264 */
-    u8 pad268[0x7C];
+    u8 pad268[0x24];
+    AiTarget * preferred; /* 0x28C */
+    u8 pad290[0x54];
     s32 unk2E4; /* 0x2E4 */
     s32 unk2E8; /* 0x2E8 */
     s32 unk2EC; /* 0x2EC */

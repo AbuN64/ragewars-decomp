@@ -1,201 +1,159 @@
 #include "include_asm.h"
-#include "COMMON/VECTOR4F.H"
-#include "COMMON/OBJECTLINKS1458.H"
+#include "COMMON/SHAREDCALLBACK5.H"
 #include "FX/8020F6E0.H"
 #include "TYPES.H"
-
-typedef struct TrackingTarget {
-    u8 pad0[8];
-    CVector3 position;
-    u8 pad14[0xEC];
-    u32 flags;
-    u8 pad104[0xD4];
-    Player *player;
-} TrackingTarget;
-
-typedef struct TargetSelection {
-    Player *player;
-    u8 pad04[0x34];
-    s32 count;
-    TrackingTarget *targets[10];
-    TrackingTarget *target;
-    void *routeObject;
-    s32 enabled[10];
-    s32 distances[10];
-    u8 padBC[0x160];
-    s32 state;
-    u8 pad220[0x38];
-    CVector3 targetPosition;
-    u8 pad264[0x28];
-    TrackingTarget *preferred;
-} TargetSelection;
-
-typedef struct TargetTeamProfile {
-    u8 pad0[0x92];
-    u8 team;
-} TargetTeamProfile;
+#include "stddef.h"
 
 extern s32 D_801468C4;
-extern void *func_8020993C_de(void *);
-extern f32 func_802726F8_de(void *, void *);
-extern s32 func_80209A94_de(void *);
-extern s32 func_8020F93C_de(void *);
-extern s32 func_8020F984_de(void *);
+extern CVector3 *func_8020993C_de(AiController *controller);
+extern s32 func_80209A94_de(AiController *controller);
+extern f32 func_802726F8_de(f32 *a, f32 *b);
 
-static inline TrackingTarget *setSelectedTarget(TargetSelection *self, TrackingTarget *target) {
-    self->target = target;
+static inline AiTarget *setSelectedTarget(AiController *controller, AiTarget *target) {
+    controller->target = target;
     return target;
 }
 
+/* Drops the current target when its player is dead, stunned or (in team play) on our team, then picks the
+   preferred candidate, the nearest candidate or keeps the current one, and copies its position. */
 s32 Fx_UpdateTargetSelection(void *object) {
-    TargetSelection *self = object;
+    AiController *controller = object;
     CVector3 *position;
     Player *linked;
     Player *alternate;
     f32 linkedDistance;
     f32 alternateDistance;
     s32 index;
-    TrackingTarget *target;
-    position = func_8020993C_de(self);
-    if (self->target != 0) {
-        linked = self->target->player;
+    AiTarget *target;
+
+    position = func_8020993C_de(controller);
+    if (controller->target != NULL) {
+        linked = controller->target->player;
         if (linked->health == 0) {
-            self->target = 0;
+            controller->target = NULL;
         }
         if (linked->reactionFlags & 0x20) {
-            self->target = 0;
+            controller->target = NULL;
         }
         if (D_801468C4 != 0) {
-            if (((TargetTeamProfile *)self->player->profile)->team ==
-                ((TargetTeamProfile *)linked->profile)->team) {
-                self->target = 0;
+            if (controller->player->profile->team == linked->profile->team) {
+                controller->target = NULL;
             }
         }
-        if (self->target != 0) {
-            linked = self->target->player;
-            linkedDistance = func_802726F8_de(position, &linked->pos);
+        if (controller->target != NULL) {
+            linked = controller->target->player;
+            linkedDistance = func_802726F8_de(&position->x, &linked->pos.x);
         } else {
-            linked = 0;
+            linked = NULL;
             linkedDistance = 0.0f;
         }
     } else {
-        linked = 0;
+        linked = NULL;
         linkedDistance = 0.0f;
     }
-    if (self->preferred != 0 && (self->preferred->flags & 0x300000)) {
-        alternate = self->preferred->player;
-        alternateDistance = func_802726F8_de(position, &alternate->pos);
+    if (controller->preferred != NULL && (controller->preferred->flags & 0x300000)) {
+        alternate = controller->preferred->player;
+        alternateDistance = func_802726F8_de(&position->x, &alternate->pos.x);
     } else {
-        alternate = 0;
+        alternate = NULL;
         alternateDistance = 0.0f;
     }
-    if (func_80209A94_de(self) == 0 || linked == 0) {
-        if (func_8020F93C_de(self) == 0) {
-            self->target = 0;
+    if (func_80209A94_de(controller) == 0 || linked == NULL) {
+        if (func_8020F93C_de(controller) == 0) {
+            controller->target = NULL;
             return 1;
         }
-        if (alternate != 0 && func_8020F8F0_de((ObjRecAt28C *)self) != 0) {
-            self->target = (TrackingTarget *)alternate;
-            self->targetPosition.x = alternate->pos.x;
-            target = (TrackingTarget *)alternate;
+        if (alternate != NULL && func_8020F8F0_de(controller) != 0) {
+            controller->target = (AiTarget *)alternate;
+            controller->targetPosition.x = alternate->pos.x;
+            target = (AiTarget *)alternate;
         } else {
-            index = func_8020F984_de(self);
-            target = setSelectedTarget(self, self->targets[index]);
-            self->targetPosition.x = target->position.x;
+            index = func_8020F984_de(controller);
+            target = setSelectedTarget(controller, controller->candidates[index]);
+            controller->targetPosition.x = target->position.x;
         }
-    } else if (alternate != 0 && alternateDistance <= linkedDistance) {
-        self->target = (TrackingTarget *)alternate;
-        self->targetPosition.x = alternate->pos.x;
-        target = (TrackingTarget *)alternate;
+    } else if (alternate != NULL && alternateDistance <= linkedDistance) {
+        controller->target = (AiTarget *)alternate;
+        controller->targetPosition.x = alternate->pos.x;
+        target = (AiTarget *)alternate;
     } else {
-        index = func_8020F984_de(self);
-        if (index != -1 && (f32)self->distances[index] < linkedDistance) {
-            target = setSelectedTarget(self, self->targets[index]);
-            self->targetPosition.x = target->position.x;
-        } else if (self->state == 1 && *(f32 *)&D_800C21F0_eu_x < linkedDistance) {
-            self->target = 0;
+        index = func_8020F984_de(controller);
+        if (index != -1 && (f32)controller->candidateDistances[index] < linkedDistance) {
+            target = setSelectedTarget(controller, controller->candidates[index]);
+            controller->targetPosition.x = target->position.x;
+        } else if (controller->state == 1 && 3072.0f < linkedDistance) {
+            controller->target = NULL;
             return 1;
         } else {
-            target = self->target;
-            self->targetPosition.x = target->position.x;
+            target = controller->target;
+            controller->targetPosition.x = target->position.x;
         }
     }
-    self->targetPosition.y = target->position.y;
-    self->targetPosition.z = target->position.z;
+    controller->targetPosition.y = target->position.y;
+    controller->targetPosition.z = target->position.z;
     return 1;
 }
 
-/* Returns 1 when one of the object's ten entries at 0x3C matches its current value at 0x28C and the
-   paired flag at 0x6C is set, and 0 otherwise or when the current value is zero. */
+/* Returns 1 when the preferred target is one of the accepted candidates. */
+s32 func_8020F8F0_de(AiController *controller) {
+    s32 i;
 
-int func_8020F8F0_de(ObjRecAt28C *obj) {
-    int i;
-
-    if (obj->current == 0) {
+    if (controller->preferred == NULL) {
         return 0;
     }
     for (i = 0; i < 10; i++) {
-        if (obj->keys[i] == obj->current && obj->flags[i] != 0) {
+        if (controller->candidates[i] == controller->preferred && controller->candidateAccepted[i] != 0) {
             return 1;
         }
     }
     return 0;
 }
 
-s32 func_8020F93C_de(void *arg0)
-{
-  s32 var_a1;
-  s32 var_v1;
-  ObjRecAt28C *var_a0;
-  var_a0 = arg0;
-  var_a1 = 0;
-  if ((var_a0->count) == 0)
-  {
-    return 0;
-  }
-  var_v1 = 0;
-  do
-  {
-    if (((var_a0->keys[var_v1]) != 0) && ((var_a0->flags[var_v1]) != 0))
-    {
-      var_a1 += 1;
+/* Counts the candidate slots that hold a target and are accepted. */
+s32 func_8020F93C_de(AiController *controller) {
+    s32 count;
+    s32 i;
+
+    count = 0;
+    if (controller->candidateCount == 0) {
+        return 0;
     }
-    var_v1 += 1;
-  }
-  while (var_v1 < 0xA);
-  return var_a1;
+    i = 0;
+    do {
+        if (controller->candidates[i] != NULL && controller->candidateAccepted[i] != 0) {
+            count += 1;
+        }
+        i += 1;
+    } while (i < 10);
+    return count;
 }
 
-
-s32 func_8020F984_de(void *self) {
-    f32 temp_f0;
-    f32 temp_f2;
-    f32 var_f1;
+/* Returns the index of the nearest accepted candidate whose flags allow targeting, or -1. */
+s32 func_8020F984_de(AiController *controller) {
+    f32 distance;
+    f32 unset;
+    f32 nearest;
     s32 count;
     s32 mask;
-    s32 var_a1;
+    s32 found;
     s32 i;
-    ObjRecAt28C *var_a0;
 
-    var_a0 = self;
-    var_a1 = -1;
-    var_f1 = D_800C21F0_eu_x.unk4;
+    found = -1;
+    nearest = -1.0f;
     i = 0;
-    if (var_a0->count > 0) {
+    if (controller->candidateCount > 0) {
         mask = 0x300000;
-        temp_f2 = var_f1;
-        count = var_a0->count;
+        unset = nearest;
+        count = controller->candidateCount;
         do {
-            struct Actor_func_80214DD4_de *actor = (struct Actor_func_80214DD4_de *)var_a0->keys[i];
-            if ((actor->flags100 & mask) &&
-                ((temp_f0 = (f32)var_a0->distances[i], temp_f0 < var_f1) ||
-                 (var_f1 == temp_f2)) &&
-                (var_a0->flags[i] != 0)) {
-                var_f1 = temp_f0;
-                var_a1 = i;
+            if ((controller->candidates[i]->flags & mask) &&
+                ((distance = (f32)controller->candidateDistances[i], distance < nearest) || (nearest == unset)) &&
+                (controller->candidateAccepted[i] != 0)) {
+                nearest = distance;
+                found = i;
             }
             i += 1;
         } while (i < count);
     }
-    return var_a1;
+    return found;
 }

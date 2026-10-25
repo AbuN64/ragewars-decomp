@@ -20,7 +20,8 @@ typedef struct AiProfile {
     u8 pad82[0xD];
     u8 bonus; /* 0x8F: Render_DrawCharacterEffectParts, Ovlgame_UpdateRunEndPlayer */
     s8 state90; /* 0x90 */
-    u8 pad91[2];
+    u8 pad91[1];
+    u8 team; /* 0x92: Fx_UpdateTargetSelection (team play) */
     u8 difficulty; /* 0x93 */
     u8 enabled; /* 0x94: Render_DrawCharacterEffectParts */
 } AiProfile;

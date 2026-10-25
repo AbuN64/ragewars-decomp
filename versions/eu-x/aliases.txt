@@ -2582,3 +2582,5 @@ literals_Render_GetSpatialEffectLevel = 0x800C51B0; // rom:0xC5DB0 size:0xC
 literals_DispatchScreenRangeEvent = 0x800C58C0; // rom:0xC64C0 size:0x3C
 literals_Nav_InsertPickupRouteNode = 0x800C2094; // rom:0xC2C94 size:0x4
 literals_Weapons_BuildPlayerViewTransform = 0x800C2E54; // rom:0xC3A54 size:0x8
+literals_Fx_UpdateTargetSelection = 0x800C21F0; // rom:0xC2DF0 size:0x4
+literals_func_8020F984_de = 0x800C21F4; // rom:0xC2DF4 size:0x4
