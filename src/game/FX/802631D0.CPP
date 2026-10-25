@@ -7,7 +7,7 @@
 #include "FX/EXTERNS.H"
 #include "FX/CONTROLLER_INPUT.H"
 #include "stddef.h"
-extern void func_802636B0_de(void *object);
+extern void Fx_ClearControllerInput(void *object);
 
 
 /* Builds the player's analog input from its controller: remaps the buttons through D_800CBB70 when the
@@ -202,7 +202,7 @@ void Fx_BuildControllerState(ControllerInput *input, Player *player) {
     }
 }
 
-void func_8026367C_de(void *arg0, s32 attributes) {
-    func_802636B0_de(arg0);
-    (((struct func_8022BC04_S3 *) ((s8 *) arg0))->unk10) = attributes;
+void Fx_InitControllerInput(void *input, s32 attributes) {
+    Fx_ClearControllerInput(input);
+    (((struct func_8022BC04_S3 *) ((s8 *) input))->unk10) = attributes;
 }

@@ -28,7 +28,7 @@ extern void Weapons_UpdateViewAngles(s32, s32, void *);
 
 
 
-extern void func_802636B0_de(void *arg0);
+extern void Fx_ClearControllerInput(void *arg0);
 
 s32 func_80245618_de(s32, s32, s32 *);
 
@@ -143,7 +143,7 @@ void func_8022D4BC_de(void *arg0)
     ((ObjectLinks1458_2 *)(arg0))->unk_58 = D_800C2DC0_de;
     return;
   }
-  func_802636B0_de(((Shared_ActorView *)arg0)->profile);
+  Fx_ClearControllerInput(((Shared_ActorView *)arg0)->profile);
   ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) arg0)->unk_1454))->unk_23C = 0;
   ((struct IntegerState244 *) ((char *) ((ObjectLinks1458_2 *) arg0)->unk_1454))->unk_240 = 0;
 }

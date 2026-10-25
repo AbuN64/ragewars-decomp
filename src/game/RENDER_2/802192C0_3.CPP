@@ -38,7 +38,7 @@ void func_8021A78C_de(void *arg0) {
         attributes = (void *)((s32)attributes << 2);
         attributes = D_8010F328 + (s32)attributes;
     }
-    func_8026367C_de(state, attributes);
+    Fx_InitControllerInput(state, attributes);
     ((ObjectLinks16D8 *)(object))->unk_6C0 = 0;
     ((ObjectLinks16D8 *)(object))->unk_6C4 = 0;
     ((ObjectLinks16D8 *)(object))->unk_6C8 = 0;

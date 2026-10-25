@@ -5,7 +5,7 @@
 #include "FX/802631D0_2.H"
 
 /** Clear the object's fields, preserving the field at offset 0x10. */
-void func_802636B0_de(void *object) {
+void Fx_ClearControllerInput(void *object) {
     Shared_Input *input = object;
     input->word0 = 0;
     input->word4 = 0;

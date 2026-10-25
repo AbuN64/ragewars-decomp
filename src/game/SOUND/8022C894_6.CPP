@@ -50,7 +50,7 @@ void func_8022E290_de(void *player) {
         attributes = (void *)((s32)attributes << 2);
         attributes = D_8010F328 + (s32)attributes;
     }
-    func_8026367C_de(state, attributes);
+    Fx_InitControllerInput(state, attributes);
 
     object->stick = 0;
     object->state6C4 = 0;

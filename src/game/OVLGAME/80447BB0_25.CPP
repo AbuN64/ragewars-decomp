@@ -127,10 +127,10 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->unk_91;
             ((struct Shared_ActorView *)(object))->actorState = 0;
             if (((struct Shared_ActorView *)(object))->remote != 0) {
-                func_8026367C_de(object + 0x688, D_8010EEB8);
+                Fx_InitControllerInput(object + 0x688, D_8010EEB8);
                 ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->unk_7F;
             } else {
-                func_8026367C_de(object + 0x688, D_8010F328 + attribute_offset);
+                Fx_InitControllerInput(object + 0x688, D_8010F328 + attribute_offset);
                 ((struct Shared_ActorView *)(object))->mode = i;
             }
             owner = ((struct Shared_ActorView *)(object))->owner;
@@ -183,10 +183,10 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->unk_91;
         ((struct Shared_ActorView *)(object))->actorState = 0;
         if (((struct Shared_ActorView *)(object))->remote != 0) {
-            func_8026367C_de(object + 0x688, D_8010EEB8);
+            Fx_InitControllerInput(object + 0x688, D_8010EEB8);
             ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->unk_7F;
         } else {
-            func_8026367C_de(object + 0x688, D_8010F328 + roster_index * 0x224);
+            Fx_InitControllerInput(object + 0x688, D_8010F328 + roster_index * 0x224);
             ((struct Shared_ActorView *)(object))->mode = roster_index;
         }
         owner = ((struct Shared_ActorView *)(object))->owner;
@@ -287,10 +287,10 @@ void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record
     ((Shared_ActorView *)player)->actorState = 0;
     ((Shared_ActorView *)player)->remote = computer;
     if (computer != 0) {
-        func_8026367C_de(player + 0x688, D_8010EEB8);
+        Fx_InitControllerInput(player + 0x688, D_8010EEB8);
         ((Shared_ActorView *)player)->mode = record->slot;
     } else {
-        func_8026367C_de(player + 0x688, D_8010F328 + slot * 0x224);
+        Fx_InitControllerInput(player + 0x688, D_8010F328 + slot * 0x224);
         ((Shared_ActorView *)player)->mode = slot;
     }
     ((Shared_ActorView *)player)->controls = (void *)record;
