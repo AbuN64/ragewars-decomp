@@ -123,6 +123,14 @@ omit = []
 toolchain = "gcc-2.8.1-sn64"
 cflags = ["-fno-thread-jumps", "-fno-rerun-cse-after-loop"]
 omit = []
+[file."src/game/particle/8027A0F4_4.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
+[file."src/game/particle/8028308C.CPP"]
+toolchain = "gcc-2.8.1-sn64"
+cflags = ["-ffast-math"]
+omit = []
 
 [file."src/sdk/libultra/audio/802C3EA4.CPP"]
 toolchain = "gcc-2.8.1-sn64"

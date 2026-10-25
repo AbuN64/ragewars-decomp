@@ -544,12 +544,8 @@ int func_80284080_de(void) {
     return 0;
 }
 
-/* Size scale for a particle seen through a camera: the depth scale (particleDepthScale), corrected for the camera's
- * vertical field of view against the 47.5 degree default. Particle_BuildMatrix inlines the same body. */
+/* Size scale for a particle seen through a camera: the out-of-line copy of the inline particleCameraScale
+ * (particle/DEPTH_SCALE.H), which Particle_BuildMatrix inlines. */
 f32 Particle_CameraScale(Shared_Particle *particle, f32 depth, GameplayCamera *camera) {
-    f32 depthScale;
-    f32 fov;
-    depthScale = particleDepthScale(particle->desc, depth);
-    fov = camera->fovY;
-    return depthScale * (1.0f / 47.5f) * (fov + (47.5f - fov) * 0.25f);
+    return particleCameraScale(particle, depth, camera);
 }

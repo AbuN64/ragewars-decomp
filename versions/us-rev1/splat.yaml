@@ -7827,6 +7827,9 @@ segments:
       - [0x1BCF4C, data, data_8014/D_auto_rodata_unresolved_80154104]
       - [0x1BCF94, data, data_8014/D_auto_src_resident_menu_pak_options]
       - [0x1BEE48, data, data_8014/D_auto_src_resident_menu_inventory_settings]
+      - [0x1BF550, data, data_8014/gPakSlotPromptItems]
+      - [0x1BF700, data, data_8014/gPakSlotPrompts]
+      - [0x1BF8B0, data, data_8014/D_auto_src_resident_menu_inventory_settings_2]
   - name: retained_1C0860
     type: bin
     start: 0x1C0860

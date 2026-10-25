@@ -224,7 +224,6 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     f32 *final;
     f32 scale;
     f32 lift;
-    f32 depthScale;
     f32 ramp;
     f32 fade;
     f32 ground;
@@ -234,9 +233,9 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     f32 jolt;
     f32 joltSq;
     f32 angle;
+    f32 wobble;
     f32 tiltX;
     f32 tiltY;
-    f32 fov;
     s32 rampTime;
     s32 shake;
     s32 model;
@@ -244,9 +243,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
 
     desc = particle->desc;
     if (camera != 0) {
-        depthScale = particleDepthScale(particle->desc, depth);
-        fov = camera->fovY;
-        scale = depthScale * (1.0f / 47.5f) * (fov + (47.5f - fov) * 0.25f);
+        scale = particleCameraScale(particle, depth, camera);
     } else {
         scale = 1.0f;
     }
@@ -381,7 +378,7 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
     }
     Particle_LimitVectorLength(&position.x, 20000.0f);
     if ((desc->flags & 0x80000) && (desc->playback == 1)) {
-        scale = scale * (1.0f / 255.0f) * (f32)particle->opacity;
+        scale = scale * ((f32)particle->opacity / 255.0f);
     }
     if (particle->desc->renderModel != 0) {
         type = particle->inst.type;
@@ -407,7 +404,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
         joltSq = jolt * jolt;
         angle = joltSq * (RW_PI_F6 * 5 / 180);
         Particle_BuildTranslationMatrix(shakeMtx, 0.0f, 0.0f, -66.56f);
-        YawMatrix(shakeMtx, angle * (Math_Sinf(joltSq * (6 * RW_PI_F6)) * 0.25f));
+        wobble = Math_Sinf(joltSq * (6 * RW_PI_F6)) * 0.25f;
+        YawMatrix(shakeMtx, angle * wobble);
         PitchMatrix(shakeMtx, angle * Math_Sinf(joltSq * (14 * RW_PI_F6)));
         TranslateMatrix(shakeMtx, 0.0f, 0.0f, 66.56f);
         Rsp_MultiplyAffineMatrices(rotation, shakeMtx, world);
