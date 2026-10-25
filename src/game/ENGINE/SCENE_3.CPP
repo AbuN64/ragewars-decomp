@@ -110,7 +110,6 @@ finished:
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/GFX.H"
 #include "gbi.h"
 /* One geometry vertex of a prop's collision mesh (stride from its section header). */
@@ -126,7 +125,6 @@ extern void func_802504B0_de(Object_func_80288EA8_de *object, void *camera);
 extern DraftStreamHandle *func_802507AC_de(Object_func_80288EA8_de *object, s32 index);
 extern void func_80270910_de(f32 *dst, PackedMatrixWords *src);
 extern void *func_802BD3A0_de(void *destination, const void *source, int count);
-/* 1 aligned edit from the 348-word target: sched1 places the props address after the count copy. */
 void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     f32 matrix[16];
     CVector3 position;
@@ -170,6 +168,7 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     f32 height;
     f32 maximum;
     s32 firstX;
+    s32 size;
 
     nextResource = resources;
     nextProp = props;
@@ -252,8 +251,10 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     resourceBytes = (u8 *)nextResource - (u8 *)resources;
     offset = ((resourceBytes + 7) & ~7) + 0x18;
     propBytes = (u8 *)nextProp - (u8 *)props;
+    size = propBytes + 7;
+    size &= ~7;
     count = offset;
-    offset += (propBytes + 7) & ~7;
+    offset += size;
     gSPEndDisplayList(D_80110634++);
     gfxBytes = (u8 *)D_80110634 - (u8 *)firstGfx;
     handle = func_8025343C_de(0, offset + ((gfxBytes + 7) & ~7), 3, D_800C522C_de);
@@ -269,6 +270,3 @@ void Scene_BuildCachedGeometry(DraftStreamWorld *world) {
     func_802BD3A0_de(func_8028FDB4_de(world->cache, 2), firstGfx, gfxBytes);
     D_80110634 = firstGfx;
 }
-#else
-INCLUDE_ASM("span_1000", Scene_BuildCachedGeometry);
-#endif
