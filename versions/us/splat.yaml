@@ -3269,7 +3269,7 @@ segments:
       - [0xC2864, rodata, data_800C/D_8020AA0C_C7A24]
       - [0xC286C, data, data_800C/rodata_unresolved_800C1C6C]
       - [0xC2870, rodata, data_800C/D_8020AA40_C7A30]
-      - [0xC287C, rodata, data_800C/D_8020ABF0_C7A3C]
+      - [0xC287C, rodata, data_800C/literals_Nav_AssignPlatformEndpoints]
       - [0xC2884, rodata, data_800C/literals_func_8020AF9C_de]
       - [0xC2898, rodata, data_800C/D_8020BC50_C7A58]
       - [0xC28A0, rodata, data_800C/D_8020BE7C_C7A60]

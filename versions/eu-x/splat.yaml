@@ -3275,7 +3275,7 @@ segments:
       - [0xC2C14, rodata, data_800C/D_8020AA0C_C7A24]
       - [0xC2C1C, data, data_800C/rodata_unresolved_800C201C]
       - [0xC2C20, rodata, data_800C/D_8020AA40_C7A30]
-      - [0xC2C2C, rodata, data_800C/D_8020ABF0_C7A3C]
+      - [0xC2C2C, rodata, data_800C/literals_Nav_AssignPlatformEndpoints]
       - [0xC2C34, rodata, data_800C/literals_func_8020AF9C_de]
       - [0xC2C48, rodata, data_800C/D_8020BC50_C7A58]
       - [0xC2C50, rodata, data_800C/D_8020BE7C_C7A60]
