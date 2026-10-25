@@ -102,7 +102,7 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
         result.w = one;
     } else {
         Particle_ScaleVector(&axis, &axis, one / len);
-        angle = func_802745D0_de(up.x * normal.x + up.y * normal.y + up.z * normal.z);
+        angle = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
         scale = func_802B7130_de(angle);
         result.x = axis.x * scale;
@@ -139,7 +139,7 @@ CQuatern *func_80275688_de(CQuatern *out) {
         result.w = one;
     } else {
         Particle_ScaleVector(&axis, &axis, one / len);
-        angle = func_802745D0_de(up.x * a.x + up.y * a.y + up.z * a.z);
+        angle = Nav_ArcCos(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
         scale = func_802B7130_de(angle);
         result.x = axis.x * scale;

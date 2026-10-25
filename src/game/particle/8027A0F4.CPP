@@ -146,7 +146,7 @@ extern char D_8011D8D0[];
 extern void func_8022B09C_de(void *, CVector3 *);
 extern void func_80283D50_de(void *);
 extern void func_80284570_de(void *, void *);
-extern f32 func_802745D0_de(f32);
+extern f32 Nav_ArcCos(f32);
 /* Steers a homing particle (sound 0x8AC) at its target, or straight ahead when it has none: keeps its loop
  * sound alive, drops the target after D_800C4B78_de seconds, ends the particle when it gets close enough,
  * otherwise turns the direction toward the target by a blend rate chosen from the turn angle and age,
@@ -224,7 +224,7 @@ create_sound:
     func_8027207C_de(&v28);
     v38 = arg0->direction;
     func_8027207C_de(&v38);
-    angle = func_802745D0_de(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
+    angle = Nav_ArcCos(v28.x * v38.x + v28.y * v38.y + v28.z * v38.z);
     rate = 0.0f;
     if (!(arg0->time < D_800C4B8C_de)) {
         rate = D_800C4B94_de;

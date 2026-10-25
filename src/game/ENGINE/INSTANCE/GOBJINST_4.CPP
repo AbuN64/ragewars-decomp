@@ -424,7 +424,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
     if (target != 0) {
         Particle_CrossVectors(&axis, &aim, &best);
         func_8027207C_de(&axis);
-        angle = func_802745D0_de(bestDot);
+        angle = Nav_ArcCos(bestDot);
         angle *= func_802B72B0_de(func_802B72B0_de(1.0f - angle / (cone * 0.008726647f)));
         angle *= 0.5f;
         D_80115DEC = func_802B7130_de(angle);

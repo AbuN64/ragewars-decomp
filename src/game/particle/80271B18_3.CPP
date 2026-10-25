@@ -92,7 +92,7 @@ f32 func_802725FC_de(f32 *delta) {
     if (D_800C48B8_de < ratio) {
         goto return_zero;
     }
-    return func_802745D0_de(ratio) - *(&D_800C48B8_de + 1);
+    return Nav_ArcCos(ratio) - *(&D_800C48B8_de + 1);
 
 return_zero:
     return zero;

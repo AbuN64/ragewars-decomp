@@ -235,7 +235,7 @@ actor_found:
     temp_f21_3 = temp_f21_3 / camera->unk84;
     temp_f20_3 = temp_f20_2 / camera->unk80;
     temp_f1 = 1.0f; 
-    fovy = func_802745D0_de(func_802B72B0_de(temp_f1 / ((temp_f21_3 * temp_f21_3) + 1.0f)));
+    fovy = Nav_ArcCos(func_802B72B0_de(temp_f1 / ((temp_f21_3 * temp_f21_3) + 1.0f)));
     fovy = fovy * 57.295776f; 
     temp_f0 = camera->unk528;
     aspect = temp_f20_3 / temp_f21_3;

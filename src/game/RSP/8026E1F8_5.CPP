@@ -355,7 +355,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         other = &negative;
     }
 
-    angle = func_802745D0_de(dot);
+    angle = Nav_ArcCos(dot);
     sine = func_802B7130_de(angle);
     if (sine == 0.0f) {
         *out = *a;
@@ -418,7 +418,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
             out->w *= scale;
         }
     } else {
-        angle = func_802745D0_de(dot);
+        angle = Nav_ArcCos(dot);
         sine = func_802B7130_de(angle);
         if (sine == 0.0f) {
             *out = *a;
@@ -659,7 +659,7 @@ general:
             f32 halfAngle;
             f32 scale;
 
-            angle = func_802745D0_de((normalized.x * basis.x) +
+            angle = Nav_ArcCos((normalized.x * basis.x) +
                                   (normalized.y * basis.y) +
                                   (normalized.z * basis.z));
             axis.x = (basis.y * normalized.z) - (basis.z * normalized.y);
@@ -1077,7 +1077,7 @@ void func_80270AAC_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
         other = &negative;
     }
 
-    angle = func_802745D0_de(dot);
+    angle = Nav_ArcCos(dot);
     sine = func_802B7130_de(angle);
     if (sine == 0.0f) {
         *out = *a;
@@ -1145,7 +1145,7 @@ void func_80270CD0_de(CQuatern *out, f32 amount, CQuatern *a, CQuatern *b) {
             out->w *= scale;
         }
     } else {
-        angle = func_802745D0_de(dot);
+        angle = Nav_ArcCos(dot);
         sine = func_802B7130_de(angle);
         if (sine == 0.0f) {
             *out = *a;
@@ -1408,7 +1408,7 @@ general:
             f32 halfAngle;
             f32 scale;
 
-            angle = func_802745D0_de((normalized.x * basis.x) +
+            angle = Nav_ArcCos((normalized.x * basis.x) +
                                   (normalized.y * basis.y) +
                                   (normalized.z * basis.z));
             axis.x = (basis.y * normalized.z) - (basis.z * normalized.y);

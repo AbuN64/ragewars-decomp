@@ -132,7 +132,7 @@ f32 func_802760BC_de(void *triangle, s32 arg1) {
     if (mag == 0.0f) {
         return 0.0f;
     }
-    result = func_802745D0_de(dx / mag);
+    result = Nav_ArcCos(dx / mag);
     if (!(dz < 0.0f)) {
         result = -result;
     }

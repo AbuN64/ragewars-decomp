@@ -88,7 +88,7 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     func_8027207C_de(&dir);
     Particle_CrossVectors(&axis, &forward, &dir);
     func_8027207C_de(&axis);
-    angle = func_802745D0_de(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
+    angle = Nav_ArcCos(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = func_802B7130_de(angle);
     turn.x = axis.x * scale;
     turn.y = axis.y * scale;
@@ -137,7 +137,7 @@ source_ready:
     Particle_CrossVectors(&axis, &up, &source);
     func_8027207C_de(&axis);
 
-    angle = func_802745D0_de((up.x * source.x) +
+    angle = Nav_ArcCos((up.x * source.x) +
                           (up.y * source.y) +
                           (up.z * source.z));
     angle *= D_800C3CA0_de;

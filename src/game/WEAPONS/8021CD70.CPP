@@ -185,7 +185,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
         Particle_CrossVectors(&axis, &forward, &bestDirection);
         func_8027207C_de(&axis.x);
         scale = D_800C239C_de;
-        threshold = func_802745D0_de(threshold);
+        threshold = Nav_ArcCos(threshold);
         amount = func_802B72B0_de(D_800C23A0_de - threshold / (angle * scale));
         amount = func_802B72B0_de(amount);
         threshold *= amount;

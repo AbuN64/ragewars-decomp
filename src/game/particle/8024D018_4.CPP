@@ -97,7 +97,7 @@ CQuatern func_8024D870_de(char *obj) {
                 up.z = 0.0f;
                 Particle_CrossVectors(&axis, &up, &normal);
                 func_8027207C_de(&axis);
-                slope = func_802745D0_de(up.x * normal.x + up.y * normal.y + up.z * normal.z);
+                slope = Nav_ArcCos(up.x * normal.x + up.y * normal.y + up.z * normal.z);
                 D_80115DEC = func_802B7130_de(RW_MIN(slope, 0.43633235f) * 0.375f);
                 tilt.x = axis.x * D_80115DEC;
                 tilt.y = axis.y * D_80115DEC;

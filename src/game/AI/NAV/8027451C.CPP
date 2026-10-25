@@ -125,7 +125,7 @@ f32 func_80274564_de(f32 range) {
     return (f32)value * range * D_800C9A38;
 }
 
-f32 func_802745D0_de(f32 arg0) {
+f32 Nav_ArcCos(f32 arg0) {
     f32 temp_f1;
     f32 temp_f2;
     f32 temp_f2_2;

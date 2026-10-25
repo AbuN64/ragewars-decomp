@@ -11232,7 +11232,7 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.rodata .rdata);
         src/game/RSP/800C9900.CPP.o(.rodata .rdata);
         src/game/RSP/800C9910.CPP.o(.rodata .rdata);
-        src/game/particle/800C9928.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/particle/80271B18.CPP.o */;
         src/game/particle/80271B18.CPP.o(.rodata .rdata);
         src/game/particle/800C999C.CPP.o(.rodata .rdata);
         src/game/particle/800C99A0.CPP.o(.rodata .rdata);
@@ -12993,7 +12993,7 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.rodata .rdata);
         src/game/RSP/800C9900.CPP.o(.rodata .rdata);
         src/game/RSP/800C9910.CPP.o(.rodata .rdata);
-        src/game/particle/800C9928.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/particle/80271B18.CPP.o */;
         src/game/particle/80271B18.CPP.o(.rodata .rdata);
         src/game/particle/800C999C.CPP.o(.rodata .rdata);
         src/game/particle/800C99A0.CPP.o(.rodata .rdata);
@@ -14702,7 +14702,7 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.rodata .rdata);
         src/game/RSP/800C9900.CPP.o(.rodata .rdata);
         src/game/RSP/800C9910.CPP.o(.rodata .rdata);
-        src/game/particle/800C9928.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/particle/80271B18.CPP.o */;
         src/game/particle/80271B18.CPP.o(.rodata .rdata);
         src/game/particle/800C999C.CPP.o(.rodata .rdata);
         src/game/particle/800C99A0.CPP.o(.rodata .rdata);
@@ -16427,7 +16427,7 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.rodata .rdata);
         src/game/RSP/800C9900.CPP.o(.rodata .rdata);
         src/game/RSP/800C9910.CPP.o(.rodata .rdata);
-        src/game/particle/800C9928.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/particle/80271B18.CPP.o */;
         src/game/particle/80271B18.CPP.o(.rodata .rdata);
         src/game/particle/800C999C.CPP.o(.rodata .rdata);
         src/game/particle/800C99A0.CPP.o(.rodata .rdata);
@@ -18178,7 +18178,7 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.rodata .rdata);
         src/game/RSP/800C9900.CPP.o(.rodata .rdata);
         src/game/RSP/800C9910.CPP.o(.rodata .rdata);
-        src/game/particle/800C9928.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/game/particle/80271B18.CPP.o */;
         src/game/particle/80271B18.CPP.o(.rodata .rdata);
         src/game/particle/800C999C.CPP.o(.rodata .rdata);
         src/game/particle/800C99A0.CPP.o(.rodata .rdata);
@@ -20330,7 +20330,6 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9900.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9910.CPP.o(.bss .sbss COMMON);
-        src/game/particle/800C9928.CPP.o(.bss .sbss COMMON);
         src/game/particle/80271B18.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C999C.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C99A0.CPP.o(.bss .sbss COMMON);
@@ -21594,7 +21593,6 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9900.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9910.CPP.o(.bss .sbss COMMON);
-        src/game/particle/800C9928.CPP.o(.bss .sbss COMMON);
         src/game/particle/80271B18.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C999C.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C99A0.CPP.o(.bss .sbss COMMON);
@@ -22819,7 +22817,6 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9900.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9910.CPP.o(.bss .sbss COMMON);
-        src/game/particle/800C9928.CPP.o(.bss .sbss COMMON);
         src/game/particle/80271B18.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C999C.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C99A0.CPP.o(.bss .sbss COMMON);
@@ -24058,7 +24055,6 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9900.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9910.CPP.o(.bss .sbss COMMON);
-        src/game/particle/800C9928.CPP.o(.bss .sbss COMMON);
         src/game/particle/80271B18.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C999C.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C99A0.CPP.o(.bss .sbss COMMON);
@@ -25383,7 +25379,6 @@ SECTIONS
         src/game/RSP/800C98E8.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9900.CPP.o(.bss .sbss COMMON);
         src/game/RSP/800C9910.CPP.o(.bss .sbss COMMON);
-        src/game/particle/800C9928.CPP.o(.bss .sbss COMMON);
         src/game/particle/80271B18.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C999C.CPP.o(.bss .sbss COMMON);
         src/game/particle/800C99A0.CPP.o(.bss .sbss COMMON);

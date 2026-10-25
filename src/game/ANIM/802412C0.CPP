@@ -19,7 +19,7 @@ f32 func_802417C4_de(f32 *arg0) {
     if (magnitude == zero) {
         return zero;
     }
-    result = func_802745D0_de(arg0[20] / magnitude);
+    result = Nav_ArcCos(arg0[20] / magnitude);
     if (!(zero < arg0[18])) {
         result = -result;
     }

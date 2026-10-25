@@ -3828,7 +3828,7 @@ segments:
       - [0xC56F0, rodata, data_800C/D_80271430_CA4F0]
       - [0xC5700, rodata, data_800C/D_80271624_CA500]
       - [0xC5710, rodata, data_800C/D_80271818_CA510]
-      - [0xC5728, rodata, data_800C/D_80271AA8_CA528]
+      - [0xC5728, rodata, data_800C/literals_Particle_GetHorizontalAngle]
       - [0xC573C, rodata, data_800C/literals_Particle_GetAngleDistance]
       - [0xC579C, rodata, data_800C/D_8027207C_CA59C]
       - [0xC57A0, rodata, data_800C/D_8027229C_CA5A0]

@@ -95,7 +95,7 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
         result.w = one;
     } else {
         Particle_ScaleVector(&cross, &cross, one / magnitude);
-        angle = func_802745D0_de((axis.x * *(f32 *)&bx) +
+        angle = Nav_ArcCos((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));
         angle *= ((struct func_802077F4_S2 *) ((f32 *) (&D_800C5E88_de)))->unk4;

@@ -735,7 +735,7 @@ void func_80274380_de(CQuatern *rotation, CQuatern *target) {
     f32 blend;
     f32 t;
 
-    angle = func_802745D0_de((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
+    angle = Nav_ArcCos((rotation->x * target->x) + (rotation->y * target->y) + (rotation->z * target->z) + (rotation->w * target->w));
     if (angle != 0.0f) {
         t = 1.0f - ((angle - (((angle * 0.1388889f) + 1.7453293e-4f) * D_800D2988)) / angle);
         if ((1.0f < t) || !(t < 0.0f)) {

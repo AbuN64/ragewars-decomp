@@ -326,7 +326,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     temp_f0_7 = arg0->inst.velocity.y;
     temp_f12_2 = arg0->inst.velocity.z;
     temp_f20_3 = func_802B72B0_de(((temp_f1_3 * temp_f1_3) + (temp_f0_7 * temp_f0_7)) + (temp_f12_2 * temp_f12_2));
-    temp_f0_8 = func_802745D0_de(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
+    temp_f0_8 = Nav_ArcCos(((sp30.x * sp40.x) + (sp30.y * sp40.y)) + (sp30.z * sp40.z));
     temp_f1_4 = ((f32) ((BallisticParamsHolder *)arg0->desc)->unkE) * D_800C4BEC_de;
     var_f2 = D_800C4BF0_de;
     if (temp_f1_4 < temp_f0_8)

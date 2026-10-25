@@ -132,7 +132,7 @@ extern void func_802741A4_de(f32 *arg0);
 
 extern f32 func_80274564_de(f32 arg0);
 
-extern f32 func_802745D0_de(f32 arg0);
+extern f32 Nav_ArcCos(f32 arg0);
 
 extern f32 func_802746A0_de(f32 arg0, f32 arg1, f32 arg2);
 

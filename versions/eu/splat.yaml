@@ -3819,7 +3819,7 @@ segments:
       - [0xC56B0, rodata, data_800C/D_80271430_CA4F0]
       - [0xC56C0, rodata, data_800C/D_80271624_CA500]
       - [0xC56D0, rodata, data_800C/D_80271818_CA510]
-      - [0xC56E8, rodata, data_800C/D_80271AA8_CA528]
+      - [0xC56E8, rodata, data_800C/literals_Particle_GetHorizontalAngle]
       - [0xC56FC, rodata, data_800C/literals_Particle_GetAngleDistance]
       - [0xC575C, rodata, data_800C/D_8027207C_CA59C]
       - [0xC5760, rodata, data_800C/D_8027229C_CA5A0]

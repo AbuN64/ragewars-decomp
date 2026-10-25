@@ -86,7 +86,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
     flatForward.x /= forwardLength;
     flatForward.z /= forwardLength;
   }
-  angle = func_802745D0_de(((flatDir.x * flatForward.x) + (flatDir.y * flatForward.y)) + (flatDir.z * flatForward.z));
+  angle = Nav_ArcCos(((flatDir.x * flatForward.x) + (flatDir.y * flatForward.y)) + (flatDir.z * flatForward.z));
   if (angle < zero)
   {
     angle = -angle;
@@ -103,7 +103,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   pitchForward.z = forwardLength;
   pitchForward.y = forward.y;
   func_8027207C_de(&pitchForward);
-  angle = func_802745D0_de(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
+  angle = Nav_ArcCos(((pitchDir.x * pitchForward.x) + (pitchDir.y * pitchForward.y)) + (pitchDir.z * pitchForward.z));
   if (up < ((angle < 0.0f) ? (-angle) : (angle)))
   {
     return 0;

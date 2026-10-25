@@ -128,7 +128,7 @@ static inline f32 Weapons_ProbeHeading(Actor_u1 *actor, CVector3 point) {
     c = -func_802B6560_de(actor->yaw);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < (-1.0f) ? (-1.0f) : (RW_MIN(dot, 1.0f)));
-    angle = func_802745D0_de(dot);
+    angle = Nav_ArcCos(dot);
     if (!(dx * c + dz * s > 0.0f)) {
         angle = -angle;
     }
@@ -197,7 +197,7 @@ static inline f32 angleTo(Actor_func_80214DD4_de *actor, CVector3 point) {
     c = -func_802B6560_de(actor->heading);
     dot = (dx * -s + dz * c) / dist;
     dot = ((RW_MIN(dot, 1.0f)) < ((-1.0f)) ? ((-1.0f)) : (RW_MIN(dot, 1.0f)));
-    angle = func_802745D0_de(dot);
+    angle = Nav_ArcCos(dot);
     if (!(dx * c + dz * s > 0.0f)) {
         angle = -angle;
     }
@@ -273,7 +273,7 @@ s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func
     forward.y = 0.0f;
     forward.z = 1.0f;
     func_8024BC94_de(&facing, target, forward);
-    if (func_802745D0_de(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
+    if (Nav_ArcCos(dir.x * facing.x + dir.y * facing.y + dir.z * facing.z) < cone * 0.5f) {
         if (dir.x * -facing.z + dir.z * facing.x < 0.0f) {
             return -1;
         }

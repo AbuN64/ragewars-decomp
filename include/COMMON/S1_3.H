@@ -115,7 +115,6 @@ struct func_80272CD0_S1;
 typedef struct func_80272CD0_S1 func_80272CD0_S1;
 
 
-extern float D_800C4848_de;
 
 
 #endif

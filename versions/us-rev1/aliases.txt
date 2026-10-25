@@ -2965,3 +2965,4 @@ literals_Frontend_DrawMenuBlockModel = 0x800E1554; // rom:0xE2154 size:0xC
 literals_Texture_UpdateSoundSlot = 0x800C8FC8; // rom:0xC9BC8 size:0x4
 literals_Particle_GetAngleDistance = 0x800C993C; // rom:0xCA53C size:0x60
 literals_Nav_AssignPlatformEndpoints = 0x800C6E3C; // rom:0xC7A3C size:0x8
+literals_Particle_GetHorizontalAngle = 0x800C9928; // rom:0xCA528 size:0x14

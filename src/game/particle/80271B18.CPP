@@ -5,25 +5,16 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
-#include "COMMON/S1_3.H"
 #include "COMMON/MATH_HELPERS.H"
-
 extern f32 func_802B72B0_de(f32);
-extern f32 func_802745D0_de(f32);
-extern f32 D_800C4838_de;
-extern f32 D_800C483C_de;
-extern f32 D_800C4840_de;
-extern f32 D_800C4844_de;
+extern f32 Nav_ArcCos(f32);
+/** Heading of a direction in the XZ plane: acos of the dominant axis, clamped to [-1, 1]. */
 f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     f32 x = direction->x;
     f32 z = direction->z;
     f32 length = x * x + z * z;
     f32 angle;
     f32 a;
-    f32 t;
     if (length == 0.0f) {
         return 0.0f;
     }
@@ -33,29 +24,17 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     }
     if (RW_ABS(x) < RW_ABS(z)) {
         x /= length;
-        if (!(x > D_800C4838_de) && x < D_800C483C_de) {
-            t = D_800C483C_de;
-        } else if (x > D_800C4838_de) {
-            t = D_800C4838_de;
-        } else {
-            t = x;
-        }
-        a = func_802745D0_de(t);
+        x = RW_MAX_GT(-1.0f, RW_MIN(x, 1.0f));
+        a = Nav_ArcCos(x);
         angle = -a;
         if (z < 0.0f) {
             angle = a;
         }
-        angle -= D_800C4840_de;
+        angle -= 1.5707964f;
     } else {
         z /= length;
-        if (!(z > D_800C4844_de) && z < D_800C4848_de) {
-            t = D_800C4848_de;
-        } else if (z > D_800C4844_de) {
-            t = D_800C4844_de;
-        } else {
-            t = z;
-        }
-        a = func_802745D0_de(-t);
+        z = RW_MAX_GT(-1.0f, RW_MIN(z, 1.0f));
+        a = Nav_ArcCos(-z);
         angle = -a;
         if (x < 0.0f) {
             angle = a;
@@ -63,9 +42,6 @@ f32 Particle_GetHorizontalAngle(CVector3 *direction) {
     }
     return angle;
 }
-#else
-INCLUDE_ASM("span_1000", Particle_GetHorizontalAngle);
-#endif
 
 extern f32 func_802B72B0_de(f32);
 

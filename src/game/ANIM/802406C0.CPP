@@ -20,6 +20,6 @@ f32 func_80240A98_de(Plane *p,f32 x0,f32 z0,f32 x1,f32 z1) {
  dx=x1-x0;dz=z1-z0;dy=y1-y0;
  h=dx*dx+dz*dz;v=h+dy*dy;
  r=0.0f;
- if(v!=0){r=func_802B72B0_de(h/v);r=func_802745D0_de(RW_MAX_GT(-1.0f,RW_MIN_LT(1.0f,r)));if(!(y0<y1))r=-r;}
+ if(v!=0){r=func_802B72B0_de(h/v);r=Nav_ArcCos(RW_MAX_GT(-1.0f,RW_MIN_LT(1.0f,r)));if(!(y0<y1))r=-r;}
  return r;
 }
