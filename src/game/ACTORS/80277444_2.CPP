@@ -345,25 +345,26 @@ void Actors_ApplyVertexColors(ColorMesh *mesh, VertexColor *colors) {
 INCLUDE_ASM("span_1000", Actors_ApplyVertexColors);
 #endif
 
-#ifdef NON_MATCHING
-extern u8 D_800C4B1C_de[];
-extern f32 D_80111D70[], D_80111D74[], D_80111D78[];
+extern char D_800C4B1C_de[13]; /* "Lit Vertices": allocation tag */
+extern CVector3 D_80111D70[];
 extern s32 D_800D2850;
-extern u8 *func_8028FDC8_de();
-extern u8 **Scene_AllocateResource();
-extern void func_802BD3A0_de();
-extern void Actors_AccumulateVertexLighting();
+extern s32 func_8028FDC8_de(s32 pack, s32 index, s32 *size);
+extern u8 **Scene_AllocateResource(s32, s32, u32, void *);
+extern void *func_802BD3A0_de(void *destination, const void *source, int count);
+extern void Actors_AccumulateVertexLighting(void **lights, s32 lightCount, Vertices38 *mesh,
+                                            PackedMatrixWords *matrices, CVector3 *output, s32 multiple);
+/* A lit model vertex: the Vtx_t layout, colour bytes at 0xC. */
 typedef struct LitVertex {
     s16 position[3];
     s16 flags;
     s16 texture[2];
     u8 color[4];
 } LitVertex;
-typedef struct LitModelAllocation {
-    s32 hasColors, modelOffset, colorsOffset;
-    u32 guard;
-} LitModelAllocation;
-
+/* Section 1 of a model pack: per-vertex packed RGB lighting, present when count is non-zero. */
+typedef struct LitColorTable {
+    s32 stride, count;
+    s32 packed[1];
+} LitColorTable;
 #define MIN(X,Y) ((X) < (Y) ? (X) : (Y))
 #define MAX(X,Y) ((X) > (Y) ? (X) : (Y))
 static inline void clampLitColor(u8 *dest, LitVertex *vertex) {
@@ -371,58 +372,62 @@ static inline void clampLitColor(u8 *dest, LitVertex *vertex) {
     dest[1] = MAX((u8)MIN(vertex->color[1], 0xE1), 0x1E);
     dest[2] = MAX((u8)MIN(vertex->color[2], 0xE1), 0x1E);
 }
-
-/* NON_MATCHING: 11 aligned edits / 244 ROM words; remaining: the ROM re-reads header->modelOffset/colorsOffset after the header stores (not forwarded), and the trailer copies colors into its loop pointer after the count test. */
-s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, void *matrices, s32 skinned, void *wanted) {
+/* Builds a lit copy of a model pack section 0: clears the per-vertex light accumulators, copies the model into a new
+ * allocation (with a colour trailer section when the bounds query found light volumes that need it), adds the model's
+ * packed RGB lighting, then directional or volume lighting, applies it to the vertex colours and, for the trailer,
+ * stores each vertex colour clamped to 30..225. Returns the allocation handle, or 0 when allocation fails. */
+s32 Actors_BuildLitModel(s32 modelResource, void *lightResource, Bounds *bounds, PackedMatrixWords *matrices, s32 skinned,
+                         u8 *wanted) {
     void *lights[0x40];
     s32 lightCount;
     s32 needsColors;
     s32 modelBytes;
     Vertices38 *model;
     u8 **allocation;
-    u8 *copiedModel;
+    Vertices38 *copiedModel;
     u8 *colors = 0;
-    u8 *table;
+    LitColorTable *table;
     s32 modelVertexCount;
     s32 clearIndex, colorIndex, sectorIndex, trailerIndex;
     s32 worldLightCount;
     s32 packedColor;
-    LitModelAllocation *header;
-    needsColors = func_80278020_de((void *)bounds, (void *)lightResource, (void **)lights, &lightCount, (u8 *)wanted);
+    s32 *pack;
+    needsColors = func_80278020_de(bounds, lightResource, lights, &lightCount, wanted);
     model = (Vertices38 *)func_8028FDC8_de(modelResource, 0, &modelBytes);
     modelVertexCount = model->count;
     for (clearIndex = 0; clearIndex < modelVertexCount; clearIndex++) {
-        D_80111D70[clearIndex * 3] = 0;
-        D_80111D74[clearIndex * 3] = 0;
-        D_80111D78[clearIndex * 3] = 0;
+        D_80111D70[clearIndex].x = 0;
+        D_80111D70[clearIndex].y = 0;
+        D_80111D70[clearIndex].z = 0;
     }
     if (needsColors != 0) {
-        allocation = Scene_AllocateResource(0, modelBytes + sizeof(LitModelAllocation) + model->count * 4, 0, D_800C4B1C_de);
+        allocation = Scene_AllocateResource(0, modelBytes + 4 * sizeof(s32) + model->count * 4, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
-        header = (LitModelAllocation *)*allocation;
-        header->hasColors = 1;
-        header->modelOffset = 0x10;
-        header->guard = 0xDEADBEEF;
-        header->colorsOffset = modelBytes + 0x10;
-        copiedModel = *allocation + header->modelOffset;
-        colors = *allocation + header->colorsOffset;
+        /* section pack: last section index, section offsets, 0xDEADBEEF end marker */
+        pack = (s32 *)*allocation;
+        pack[0] = 1;
+        pack[1] = 0x10;
+        pack[2] = modelBytes + 0x10;
+        pack[3] = 0xDEADBEEF;
+        copiedModel = (Vertices38 *)(*allocation + pack[1]);
+        colors = *allocation + pack[2];
         func_802BD3A0_de(copiedModel, model, modelBytes);
     } else {
         allocation = Scene_AllocateResource(0, modelBytes + 8, 0, D_800C4B1C_de);
         if (allocation == 0) {
             return 0;
         }
-        *(s32 *)*allocation = 0;
-        copiedModel = *allocation + 8;
+        ((s32 *)*allocation)[0] = 0;
+        copiedModel = (Vertices38 *)(*allocation + 8);
         func_802BD3A0_de(copiedModel, model, modelBytes);
     }
-    table = Render_GetPackSection(modelResource, 1);
-    if (*(s32 *)(table + 4) != 0) {
-        s32 *packed = (s32 *)(table + 8);
+    table = Render_GetPackSection((void *)modelResource, 1);
+    if (table->count != 0) {
+        s32 *packed = table->packed;
         for (colorIndex = 0; colorIndex < modelVertexCount; colorIndex++) {
-            CVector3 *light = &((CVector3 *)D_80111D70)[colorIndex];
+            CVector3 *light = &D_80111D70[colorIndex];
             s32 red, green, blue;
             packedColor = packed[colorIndex];
             red = ((s32)((u32)(packedColor & 0xFF0000) << 8)) >> 23;
@@ -434,7 +439,7 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
         }
     }
     if (D_800D2850 == 0) {
-        func_80277A98_de((void *)copiedModel, (void *)matrices, (void *)D_80111D70, skinned);
+        func_80277A98_de(copiedModel, matrices, D_80111D70, skinned);
     } else if (lightCount == 0) {
         Shared_World *world = &D_8011FE88;
         worldLightCount = 0;
@@ -442,24 +447,21 @@ s32 Actors_BuildLitModel(s32 modelResource, s32 lightResource, void *bounds, voi
             worldLightCount += ((HitBoxTable *)Render_GetPackSection(*(void **)world->sectors[sectorIndex].resource, 2))->count;
         }
         if (worldLightCount == 0) {
-            func_80277A98_de((void *)copiedModel, (void *)matrices, (void *)D_80111D70, skinned);
+            func_80277A98_de(copiedModel, matrices, D_80111D70, skinned);
         }
     } else {
         Actors_AccumulateVertexLighting(lights, lightCount, copiedModel, matrices, D_80111D70, skinned);
     }
     Actors_ApplyVertexColors((void *)copiedModel, (void *)D_80111D70);
     if (needsColors != 0) {
-        s32 vertexCount = *(s32 *)(copiedModel + 4);
-        u8 *color = colors;
-        LitVertex *vertices = (LitVertex *)(copiedModel + 8);
+        s32 vertexCount = copiedModel->count;
+        s32 colorSlot = 0;
+        LitVertex *vertices = (LitVertex *)copiedModel->vertices;
         for (trailerIndex = 0; trailerIndex < vertexCount; trailerIndex++) {
-            u8 *dest = color;
-            color += 4;
+            u8 *dest = &colors[colorSlot * 4];
+            colorSlot++;
             clampLitColor(dest, &vertices[trailerIndex]);
         }
     }
     return (s32)allocation;
 }
-#else
-INCLUDE_ASM("span_1000", Actors_BuildLitModel);
-#endif
