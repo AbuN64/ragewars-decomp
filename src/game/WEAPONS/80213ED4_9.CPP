@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
-extern void func_80271F68_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 extern f32 func_802B72B0_de(f32);
 
 
@@ -15,7 +15,7 @@ extern f32 func_802B72B0_de(f32);
 
 
 void func_802165F8_de(Player *player, ActorMotionState *motionState, OffsetResult *result) {
-    func_80271F68_de(&result->first, &player->pos,
+    Particle_SubtractVectors(&result->first, &player->pos,
                   &motionState->position);
     result->first_normalized = result->first;
     func_8027207C_de(&result->first_normalized.x);

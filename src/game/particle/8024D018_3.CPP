@@ -31,14 +31,14 @@ extern char *func_8022A480_de(void *, CVector3);
 
 extern f32 Particle_GetActorHeight(char *);
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_80274098_de(CQuatern *, CQuatern *, CQuatern *);
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
@@ -84,9 +84,9 @@ CQuatern func_8024D4AC_de(char *actor, CVector3 point) {
     origin = ((Actor_func_80214310_de *)(target))->position;
     origin.y += ((Actor_func_80214310_de *)(target))->eye;
     origin.y += Particle_GetActorHeight(target) * 0.75f;
-    func_80271F68_de(&dir, &origin, &point);
+    Particle_SubtractVectors(&dir, &origin, &point);
     func_8027207C_de(&dir);
-    func_80272018_de(&axis, &forward, &dir);
+    Particle_CrossVectors(&axis, &forward, &dir);
     func_8027207C_de(&axis);
     angle = func_802745D0_de(forward.x * dir.x + forward.y * dir.y + forward.z * dir.z) * 0.5f;
     scale = func_802B7130_de(angle);
@@ -134,7 +134,7 @@ source_ready:
     up.x = 0.0f;
     up.y = D_800C3C9C_de;
     up.z = 0.0f;
-    func_80272018_de(&axis, &up, &source);
+    Particle_CrossVectors(&axis, &up, &source);
     func_8027207C_de(&axis);
 
     angle = func_802745D0_de((up.x * source.x) +

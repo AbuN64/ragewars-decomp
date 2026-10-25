@@ -11,7 +11,7 @@ extern float D_800D2988[];
 
 
 extern s32 func_80245784_de(void);
-extern void func_8025DE54_de(s16,CVector3,s32,s32),func_80271F34_de(CVector3 *,CVector3 *,CVector3 *),func_80271F9C_de(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
+extern void func_8025DE54_de(s16,CVector3,s32,s32),func_80271F34_de(CVector3 *,CVector3 *,CVector3 *),Particle_ScaleVector(CVector3 *,CVector3 *,f32),func_80272748_de(CVector3 *,f32);
 
 void func_802233F0_de(SharedPlayer *player, func_802165F8_S1 *body, SharedMovement *arg2) {
     CVector3 motion;
@@ -119,7 +119,7 @@ block_42:
             }
             motion.x += player->views5E8.view6D8_59.unk6D8 * func_802B7130_de(body->unk6C - 1.5707964f);
             motion.z += player->views5E8.view6D8_59.unk6D8 * func_802B6560_de(body->unk6C - 1.5707964f);
-            func_80271F9C_de(&motion, &motion, player->views5E8.view66C_29.unk66C);
+            Particle_ScaleVector(&motion, &motion, player->views5E8.view66C_29.unk66C);
             temp_a0 = &player->views5E8.view6E8_63.unk6E8;
             func_80271F34_de(temp_a0, temp_a0, &motion);
             if (var_s3 != 0) {

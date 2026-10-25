@@ -140,6 +140,6 @@ void func_80225F44_de(SharedPlayer *player,func_802165F8_S1 *body) {
     if(offset) {
         func_802736D4_de(&rotation,body->unk6C);
         Particle_TransformPoint(&rotation,offset,&player->views5E8.view73C_82.weapon);
-        func_80271F9C_de(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
+        Particle_ScaleVector(&player->views5E8.view73C_82.weapon,&player->views5E8.view73C_82.weapon,10.24f);
     }
 }

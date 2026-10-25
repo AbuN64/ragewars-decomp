@@ -15,7 +15,7 @@ extern s32 func_8024E62C_de(Actor_func_80245D30_de *);
 
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
  extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 
@@ -72,7 +72,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
         strength = (f32) arg1->strength;
         speed=strength * 3.0f;
         var_f20 = (strength + 1.0f) * 0.00872664712369442f;
-        func_80271F9C_de(&v10,&v10,speed);
+        Particle_ScaleVector(&v10,&v10,speed);
         flags = arg1->flags;
         if (flags & 0x600) {
             if (flags & 0x400) {

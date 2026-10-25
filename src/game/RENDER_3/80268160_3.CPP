@@ -48,7 +48,7 @@ void func_802688AC_de(void *unused, u8 *object, s32 third, struct IntPair pair) 
 
 
 extern f32 D_800C9570[];
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void func_8022B11C_de(OwnerRecAt16D4 *, s32);
 
 void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast blast) {
@@ -61,7 +61,7 @@ void func_802688E4_de(ActorRecAt1D8V3 *arg0, Player *player, s32 arg2, Blast bla
         owner = arg0->owner;
         if (owner->alive != 0) {
             range = (f32)blast.radius * D_800C9570[1];
-            func_80271F68_de(&delta, &owner->pos, &player->pos);
+            Particle_SubtractVectors(&delta, &owner->pos, &player->pos);
             dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
             range = range * range;
             if (range < dist) {

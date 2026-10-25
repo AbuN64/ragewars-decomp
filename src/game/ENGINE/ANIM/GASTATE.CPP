@@ -196,7 +196,7 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
         }
         temp_fs0 = func_80273EE4_de(temp_fs0f - (f32) temp_fv1f_2, (f32) temp_a2_2[temp_fv1f_2] * temp_fs1, (f32) temp_a2_2[var_v1_2] * temp_fs1);
         func_80271F34_de(arg1, arg1, &sp20);
-        func_80271F68_de(arg1, arg1, &sp10);
+        Particle_SubtractVectors(arg1, arg1, &sp10);
         *arg2 += func_80273F94_de(temp_fs0, var_fs1f);
         temp_v1 = temp_s2->loopStart;
         var_s0 = 0;
@@ -231,6 +231,6 @@ void func_8026193C_de(AnimChannel *arg0, CVector3 *arg1, f32 *arg2, RootActor *a
     }
     temp_fs0 = func_80273EE4_de(temp_fs0 - (f32) temp_fv1f_4, (f32) temp_a2_4[temp_fv1f_4] * D_800C41F4_de, (f32) temp_a2_4[var_v1_4] * D_800C41F4_de);
     func_80271F34_de(arg1, arg1, &sp20);
-    func_80271F68_de(arg1, arg1, &sp10);
+    Particle_SubtractVectors(arg1, arg1, &sp10);
     *arg2 += func_80273F94_de(temp_fs0, var_fs1f);
 }

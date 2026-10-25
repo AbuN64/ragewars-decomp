@@ -44,7 +44,7 @@ extern int D_800CD3E0;
 
 extern int D_800CD3E4;
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
@@ -76,7 +76,7 @@ static inline CVector3 *cross_edges(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        func_80272018_de(&D_80111D30, &b, &a);
+        Particle_CrossVectors(&D_80111D30, &b, &a);
     }
     D_800CD3E0 = (int)node;
     *out = D_80111D30;
@@ -567,7 +567,7 @@ f32 func_8027525C_de(Node75 *node, f32 x, f32 z) {
         p = node->next;
         q = node->cur;
         b.z = ((CollisionBuildVertex *)p)->z - ((CollisionBuildVertex *)q)->z;
-        func_80272018_de(&D_80111D30, &b, &a);
+        Particle_CrossVectors(&D_80111D30, &b, &a);
     }
     normal = D_80111D30;
     D_800CD3E0 = (int)node;

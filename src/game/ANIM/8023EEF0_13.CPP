@@ -2,7 +2,7 @@
 #include "COMMON/OUTPUT.H"
 #include "COMMON/APPROACHLOCATION.H"
 #include "COMMON/BALLISTICPARAMS.H"
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 /* Is `point` inside the polygon prism, or within `radius` of its edges?
  * Each edge's outward normal (normal x edge) splits off the outside half-space; a point outside an edge
  * passes only when its distance to that edge is at most `radius`. Types 3 and 4 measure the distance
@@ -31,9 +31,9 @@ s32 Anim_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
     remaining = polygon->vertexCount;
     if (polygon->type == 3 || polygon->type == 4) {
         for (; --remaining != -1; previousVertex = vertex++) {
-            func_80271F68_de(&edge, vertex, previousVertex);
-            func_80272018_de(&outward, &polygon->normal, &edge);
-            func_80271F68_de(&delta, point, previousVertex);
+            Particle_SubtractVectors(&edge, vertex, previousVertex);
+            Particle_CrossVectors(&outward, &polygon->normal, &edge);
+            Particle_SubtractVectors(&delta, point, previousVertex);
             side = outward.x * delta.x + outward.y * delta.y + outward.z * delta.z;
             if (side > 0.0f) {
                 if (radius > 0.0f) {
@@ -41,10 +41,10 @@ s32 Anim_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
                     if (projection > 0.0f) {
                         lengthSquared = edge.x * edge.x + edge.y * edge.y + edge.z * edge.z;
                         if (lengthSquared <= projection) {
-                            func_80271F68_de(&delta, &delta, &edge);
+                            Particle_SubtractVectors(&delta, &delta, &edge);
                         } else {
-                            func_80271F9C_de(&edge, &edge, projection / lengthSquared);
-                            func_80271F68_de(&delta, &delta, &edge);
+                            Particle_ScaleVector(&edge, &edge, projection / lengthSquared);
+                            Particle_SubtractVectors(&delta, &delta, &edge);
                         }
                     }
                     if (!(radiusSquared < delta.x * delta.x + delta.y * delta.y + delta.z * delta.z)) {
@@ -56,9 +56,9 @@ s32 Anim_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
         }
     } else {
         for (; --remaining != -1; previousVertex = vertex++) {
-            func_80271F68_de(&edge, vertex, previousVertex);
-            func_80272018_de(&outward, &polygon->normal, &edge);
-            func_80271F68_de(&delta, point, previousVertex);
+            Particle_SubtractVectors(&edge, vertex, previousVertex);
+            Particle_CrossVectors(&outward, &polygon->normal, &edge);
+            Particle_SubtractVectors(&delta, point, previousVertex);
             side = outward.x * delta.x + outward.y * delta.y + outward.z * delta.z;
             if (side > 0.0f) {
                 if (radius > 0.0f) {
@@ -76,8 +76,8 @@ s32 Anim_TestPointNearPolygon(Polygon *polygon, CVector3 *point, f32 radius)
                             return 0;
                         }
                     }
-                    func_80271F9C_de(&edge, &edge, projection);
-                    func_80271F68_de(&delta, &delta, &edge);
+                    Particle_ScaleVector(&edge, &edge, projection);
+                    Particle_SubtractVectors(&delta, &delta, &edge);
                     if (!(radiusSquared < delta.x * delta.x + delta.y * delta.y + delta.z * delta.z)) {
                         continue;
                     }

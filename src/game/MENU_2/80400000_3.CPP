@@ -8,7 +8,7 @@
 extern f32 *func_8025305C_de(s32 size);
 
 
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern f32 func_802B72B0_de(f32 value);
 
@@ -101,7 +101,7 @@ void func_804002D8_de(s32 count, CVector3 *points, f32 *weights, Spline *spline)
         if (i == count - 1) {
             break;
         }
-        func_80271F68_de(&delta, &nodes[i].p, &nodes[i + 1].p);
+        Particle_SubtractVectors(&delta, &nodes[i].p, &nodes[i + 1].p);
         length += func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     }
     for (i = 0; i < count; i++) {

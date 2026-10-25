@@ -18,7 +18,7 @@
 #include "SYSTEM_3/80265370.H"
 #include "RENDER_4/8028FD2C_6.H"
 
-extern void func_80271F68_de(CVector3 *out, void *arg1, void *arg2);
+extern void Particle_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
 
 extern s32 func_8028FE28_de(s32 *arg0, s32 arg1, s32 arg2);
 
@@ -91,7 +91,7 @@ s32 func_8028D28C_de(void *arg0, s32 arg1, void *arg2) {
     item = list->frames;
     if (count > 0) {
         do {
-            func_80271F68_de(&position, arg2, item);
+            Particle_SubtractVectors(&position, arg2, item);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);

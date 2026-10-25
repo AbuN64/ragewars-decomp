@@ -242,7 +242,7 @@ s32 func_8024DEE0_de(Player *);
 s32 func_8024DF5C_de(Player *);
 s32 func_8024DFA0_de(Player *);
 s32 func_80243A90_de(Player *, CVector3, NavigationCollisionQuery *);
-void func_80271F68_de(CVector3 *, void *, CVector3 *);
+void Particle_SubtractVectors(CVector3 *, void *, CVector3 *);
 
 /* Collisions the actor would meet moving to a point (61.44 above it), without committing the move: the actor's 0x50-byte header is saved and
  * restored around the trial move. */
@@ -311,7 +311,7 @@ void func_8020AF9C_de(CNavData *graph, Player *actor) {
     found = 0;
     climbing = actor->movementFlags & 0x2000;
     swimming = actor->movementFlags & 0x1000;
-    func_80271F68_de(&delta, navigationRecord(graph->points, actor->controller->current), &actor->pos);
+    Particle_SubtractVectors(&delta, navigationRecord(graph->points, actor->controller->current), &actor->pos);
     if (climbing || swimming) {
         dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
     } else {
@@ -334,7 +334,7 @@ void func_8020AF9C_de(CNavData *graph, Player *actor) {
                     target = actor->controller->mode;
                 }
                 point = navigationRecord(graph->points, target);
-                func_80271F68_de(&delta, &point->position, &actor->pos);
+                Particle_SubtractVectors(&delta, &point->position, &actor->pos);
                 if (climbing || swimming || (navigation_point_flags(point) & 0x200)) {
                     dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
                 } else {
@@ -358,7 +358,7 @@ void func_8020AF9C_de(CNavData *graph, Player *actor) {
         point = navigationRecord(graph->points, target);
         portal = navigationRecord(graph->m_pusNavLinks, portalIds[i]);
         if (!(navigation_attributes(point) & 0x300000) || swimming || climbing) {
-            func_80271F68_de(&delta, &point->position, &actor->pos);
+            Particle_SubtractVectors(&delta, &point->position, &actor->pos);
             if (climbing || swimming) {
                 dist = delta.x * delta.x + delta.y * delta.y + delta.z * delta.z;
             } else {

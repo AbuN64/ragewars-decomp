@@ -84,7 +84,7 @@ extern void *func_8024BC94_de(void *arg0, s32 unused1, struct IntPair arg2);
 struct func_8021CD70_S1;
 struct func_8021CD70_S2;
 extern s32 Weapons_CanLockTarget(func_8021CD70_S1 *, func_8021CD70_S2 *);
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 extern CQuatern func_8024796C_de(char *);
 extern void func_80274098_de(void *, void *, void *);
 
@@ -137,7 +137,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                         candidate.y += other->height;
                         candidate.y += Particle_GetActorHeight(other) * scale;
                     }
-                    func_80271F68_de(&direction, &candidate, &origin);
+                    Particle_SubtractVectors(&direction, &candidate, &origin);
                     func_8027207C_de(&direction.x);
                     dot = forward.x * direction.x + forward.y * direction.y +
                           forward.z * direction.z;
@@ -164,7 +164,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
                     candidate.y += other->height;
                     candidate.y += Particle_GetActorHeight(other) * scale;
                 }
-                func_80271F68_de(&direction, &candidate, &origin);
+                Particle_SubtractVectors(&direction, &candidate, &origin);
                 func_8027207C_de(&direction.x);
                 dot = forward.x * direction.x + forward.y * direction.y +
                       forward.z * direction.z;
@@ -182,7 +182,7 @@ CQuatern Weapons_ComputeAimRotation(DraftAimPlayer *player, DraftAimPlayer **tar
     *target = best;
     *targetPosition = bestPosition;
     if (best) {
-        func_80272018_de(&axis, &forward, &bestDirection);
+        Particle_CrossVectors(&axis, &forward, &bestDirection);
         func_8027207C_de(&axis.x);
         scale = D_800C239C_de;
         threshold = func_802745D0_de(threshold);

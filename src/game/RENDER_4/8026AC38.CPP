@@ -44,7 +44,7 @@ extern void func_802732D0_de(f32 *matrix, CVector3 *position);
 
 extern char *func_8022A414_de(void *players);
 
-extern void func_80271F68_de(CVector3 *out, void *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, void *a, CVector3 *b);
 
 
 void func_8026AC38_de(void) {
@@ -308,7 +308,7 @@ s32 func_8026B504_de(void *model, void *lights, ModelMaterial *material) {
     if (D_80110620 != 0 && (material->flagWord & 0x8000)) {
         func_80270700_de((f32 *)matrix, model);
         func_802732D0_de((f32 *)matrix, &position);
-        func_80271F68_de(&direction, func_8022A414_de(&D_80145040) + 0x6E8, &position);
+        Particle_SubtractVectors(&direction, func_8022A414_de(&D_80145040) + 0x6E8, &position);
         func_8027207C_de(&direction);
         {
             Gfx *cmd;

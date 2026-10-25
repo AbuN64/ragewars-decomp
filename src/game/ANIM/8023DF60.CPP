@@ -19,7 +19,7 @@ extern f32 D_800C3690_de;
 
 extern s32 func_802412D0_de(Polygon *, CVector3 *, CVector3 *, f32 *);
 extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 extern s32 Anim_TestPointNearPolygon(Polygon *, CVector3 *, f32);
 
@@ -48,7 +48,7 @@ s32 func_8023DF70_de(CapsuleSweep *ray, CVector3 *offset, f32 radius, Polygon *p
     CVector3 hit;
 
     if (offset != 0) {
-        func_80271F9C_de(&shift, &poly->normal, -radius);
+        Particle_ScaleVector(&shift, &poly->normal, -radius);
         func_80271F34_de(&shift, &shift, offset);
     } else {
         shift.x = 0.0f;

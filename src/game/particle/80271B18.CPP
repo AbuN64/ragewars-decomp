@@ -166,14 +166,14 @@ void func_80271F34_de(CVector3 *result, CVector3 *left, CVector3 *right) {
 }
 
 /** Subtract the right vector from the left vector. */
-void func_80271F68_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2) {
+void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2) {
     arg0->x = arg1->x - arg2->x;
     arg0->y = arg1->y - arg2->y;
     arg0->z = arg1->z - arg2->z;
 }
 
 /** Scale a 3-vector (arg1) by a scalar (arg2), store into arg0. */
-void func_80271F9C_de(void *arg0, void *arg1, f32 arg2) {
+void Particle_ScaleVector(void *arg0, void *arg1, f32 arg2) {
     ((CVector3 *)(arg0))->x = ((CVector3 *)(arg1))->x * arg2;
     ((CVector3 *)(arg0))->y = ((CVector3 *)(arg1))->y * arg2;
     ((CVector3 *)(arg0))->z = ((CVector3 *)(arg1))->z * arg2;
@@ -189,7 +189,7 @@ void func_80271FC8_de(CVector3 *arg0, f32 t, void *a, void *b) {
 struct CVector3_t;
 
 /** Cross product of two vectors, written directly to the output (no aliasing guard). */
-void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b) {
+void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b) {
     out->x = (a->y * b->z) - (a->z * b->y);
     out->y = (a->z * b->x) - (a->x * b->z);
     out->z = (a->x * b->y) - (a->y * b->x);

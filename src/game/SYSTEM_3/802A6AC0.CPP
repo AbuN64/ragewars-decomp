@@ -85,7 +85,7 @@ Particle *func_802A5BE4_de(SceneRecAt95A8 *scene, CVector3 position, CVector3 no
         func_80274244_de(&rotation.x, matrix);
         func_802737F0_de(matrix, 1.5707965f);
         func_8027207C_de(&normal);
-        func_80271F9C_de(&normal, &normal, 2.048f);
+        Particle_ScaleVector(&normal, &normal, 2.048f);
         func_80271F34_de(&position, &position, &normal);
         func_80273448_de((char *)matrix, position.x, position.y, position.z);
         func_8027347C_de(matrix, D_800C5EA8_de, 1.0f, D_800C5EA8_de);

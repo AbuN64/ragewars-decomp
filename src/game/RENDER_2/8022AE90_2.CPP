@@ -94,7 +94,7 @@ extern void *D_800D311C,*D_800D3120,*D_800D3124;
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "COMMON/CHANNEL.H"
 extern void func_80273198_de(f32 *,CVector3 *);
-extern void func_80271F9C_de(CVector3 *,CVector3 *,f32);
+extern void Particle_ScaleVector(CVector3 *,CVector3 *,f32);
 extern void func_80271F34_de(CVector3 *,CVector3 *,CVector3 *);
 extern void func_80273448_de(f32 *,f32,f32,f32);
 extern void func_80273D6C_de(f32 *);
@@ -115,7 +115,7 @@ void func_8022B1A8(TogglePlayer *player,s32 mode) {
             player->mode = mode;
             player->timer = D_800C2D0C_de;
             func_80273198_de(matrix,&player->direction);
-            func_80271F9C_de(&position,&player->direction,5.12f);
+            Particle_ScaleVector(&position,&player->direction,5.12f);
             func_80271F34_de(&position,&position,&player->position);
             func_80273448_de(matrix,position.x,position.y,position.z);
             func_80273D6C_de(matrix);

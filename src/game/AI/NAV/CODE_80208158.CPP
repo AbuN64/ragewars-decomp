@@ -109,7 +109,7 @@ void func_80208158_de(Brain *brain) {
 
 extern CNavData D_8013B364;
 float func_802726F8_de(void *, void *);
-void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
@@ -183,7 +183,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                         if (controller->unk314 == 0) {
                             start = func_8020C994_de(graph, controller->current);
-                            func_80271F68_de(&delta, pos, &start->position);
+                            Particle_SubtractVectors(&delta, pos, &start->position);
                             if (!(func_802B72B0_de(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
                                 controller->destination = start->position;
                                 return;
@@ -258,7 +258,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
-                            func_80271F68_de(&delta, pos, &func_8020CFE0_de(graph, controller->current)->platform->pos);
+                            Particle_SubtractVectors(&delta, pos, &func_8020CFE0_de(graph, controller->current)->platform->pos);
                             gap = func_802B72B0_de(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
                                 controller->unk314 = 3;
@@ -330,7 +330,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
 #include "COMMON/REC.H"
 extern CNavData D_8013B364;
 float func_802726F8_de(void *, void *);
-void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
@@ -386,7 +386,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
         player = controller->player;
         jumping = player->movementFlags & 0x2000;
         falling = player->movementFlags & 0x1000;
-        func_80271F68_de(&delta, destination, position);
+        Particle_SubtractVectors(&delta, destination, position);
         distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {
@@ -456,7 +456,7 @@ INCLUDE_ASM("span_1000", Nav_UpdatePlayerSteering);
 #include "COMMON/REC.H"
 extern CNavData D_8013B364;
 float func_802726F8_de(void *, void *);
-void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
@@ -509,7 +509,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
         player = controller->player;
         position = &player->pos;
         falling = player->movementFlags & 0x1000;
-        func_80271F68_de(&delta, destination, position);
+        Particle_SubtractVectors(&delta, destination, position);
         distance = func_802B72B0_de(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
         graph = &D_8013B364;
         if (falling) {

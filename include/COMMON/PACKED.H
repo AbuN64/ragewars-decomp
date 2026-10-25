@@ -14,7 +14,7 @@ struct Packed {
 
 struct Packed;
 typedef struct Packed Packed;
-/* Cached path-node plane normals (func_80272018_de edge cross products). */
+/* Cached path-node plane normals (Particle_CrossVectors edge cross products). */
 extern CVector3 D_80115E10;
 extern CVector3 D_80115E20;
 
@@ -29,7 +29,7 @@ struct CGameRegion_t {
 
 struct CGameRegion_t;
 typedef struct CGameRegion_t CGameRegion;
-/* Cached path-node plane normal (func_80272018_de edge cross product). */
+/* Cached path-node plane normal (Particle_CrossVectors edge cross product). */
 extern CVector3 D_80111D30;
 
 extern void func_80275AA4_de(CGameRegion *dst, Packed *src, char *base, int unused, char *extra);

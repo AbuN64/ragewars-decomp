@@ -57,7 +57,7 @@ void * func_80219408_de(struct Cursor *);
 
 void *func_80219434_de(struct Cursor *);
 
-void func_80271F68_de(void *, void *, void *);
+void Particle_SubtractVectors(void *, void *, void *);
 
 
 f32 func_802B72B0_de(f32);
@@ -182,7 +182,7 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
     temp_s3 = (void *) &arg1->unk94;
     temp_v0 = func_80219408_de(temp_s3);
     initial = temp_v0->pos;
-    func_80271F68_de(&vec0, &initial, &arg0->unk8);
+    Particle_SubtractVectors(&vec0, &initial, &arg0->unk8);
     temp_s2 = func_80219434_de(temp_s3);
     temp_f2 = func_802B72B0_de(vec0.x * vec0.x + vec0.y * vec0.y + vec0.z * vec0.z);
     var_f1 = temp_v0->unk1C;
@@ -215,9 +215,9 @@ void func_802070D0_de(func_802070D0_S3 *arg0, func_802070D0_S1 *arg1) {
             }
         }
         if (temp_s2 == temp_v0) {
-            func_80271F68_de(&vec1, temp_s2, &arg0->unk8);
+            Particle_SubtractVectors(&vec1, temp_s2, &arg0->unk8);
         } else {
-            func_80271F68_de(&vec1, temp_v0, temp_s2);
+            Particle_SubtractVectors(&vec1, temp_v0, temp_s2);
         }
         func_8027207C_de(&vec1);
         ;

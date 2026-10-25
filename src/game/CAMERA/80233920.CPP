@@ -6,7 +6,7 @@
 #include "TYPES.H"
 #include "CAMERA/80233920.H"
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 func_802B72B0_de(f32);
 
 
@@ -17,7 +17,7 @@ void func_80233930_de(Effect33920 *arg0, CVector3 position, CVector3 *out) {
     f32 value;
     AxisWave *wave;
 
-    func_80271F68_de(&position, &position, &arg0->origin);
+    Particle_SubtractVectors(&position, &position, &arg0->origin);
     distance = func_802B72B0_de((position.x * position.x) +
                              (position.y * position.y) +
                              (position.z * position.z));

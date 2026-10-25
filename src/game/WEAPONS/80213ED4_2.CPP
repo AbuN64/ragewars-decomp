@@ -45,7 +45,7 @@ s32 func_80214310_de(Actor_func_80214310_de *viewer, Actor_func_80214310_de *tar
   to = target->position;
   to.y += target->eye;
   to.y += Particle_GetActorHeight(target) * 0.9f;
-  func_80271F68_de(&dir, &to, &from);
+  Particle_SubtractVectors(&dir, &to, &from);
   distance = func_802B72B0_de(((dir.x * dir.x) + (dir.y * dir.y)) + (dir.z * dir.z));
   if (range < distance)
   {
@@ -175,7 +175,7 @@ s32 func_80214624_de(Actor_func_80214624_de *actor, Plan *tracker, Actor_func_80
         } else {
             tracker->unk90 = (f32) (hit.y + D_800C2160_de[0]);
         }
-        func_80271F68_de(&hit, &hit, &actor->pos);
+        Particle_SubtractVectors(&hit, &hit, &actor->pos);
         tracker->unk8C = (f32) (Particle_GetHorizontalAngle(&hit) + D_800C2160_de[1]);
         return 1;
     }

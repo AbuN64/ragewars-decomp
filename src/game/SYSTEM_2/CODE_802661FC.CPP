@@ -299,11 +299,11 @@ static inline void hitImpulse(Shared_ReactionActor *source, Shared_ReactionActor
         source->unk174 != 0 &&
 #endif
         target->category == 2) {
-        func_80271F68_de(&direction, &source->position, &target->position);
+        Particle_SubtractVectors(&direction, &source->position, &target->position);
         distance = func_802B72B0_de(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
         func_8027207C_de(&direction);
         if (!(radius <= distance)) {
-            func_80271F9C_de(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
+            Particle_ScaleVector(out, &direction, (f32)copied.impulse * (((radius - distance) / radius) * D_800C43E0_de[7]));
         }
     }
 }
@@ -668,7 +668,7 @@ s32 func_80267528_de(char *actor, char *target)
 #include "COMMON/AIPROFILE.H"
 extern f32 func_802B72B0_de(f32);
 extern f32 D_800C46E8_eu;
-extern void func_80271F68_de(void *, void *, void *);
+extern void Particle_SubtractVectors(void *, void *, void *);
 typedef struct PushStrength { u16 value; u16 pad; } PushStrength;
 typedef struct PushScale { s8 value; u8 pad[3]; } PushScale;
 extern f32 D_800C4434_de;
@@ -686,11 +686,11 @@ void func_802675C8_de(struct Player *actor, u8 *other, PushStrength strength, Pu
 #else
     if (*other == 2) {
 #endif
-        func_80271F68_de(&offset, &actor->pos, &((struct Player *)other)->pos);
+        Particle_SubtractVectors(&offset, &actor->pos, &((struct Player *)other)->pos);
         distance = func_802B72B0_de(offset.x * offset.x + offset.y * offset.y + offset.z * offset.z);
         func_8027207C_de(&offset.x);
         if (!(radius <= distance)) {
-            func_80271F9C_de(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
+            Particle_ScaleVector(out, &offset, (f32)scale.value * (((radius - distance) / radius) * D_800C46E8_eu));
         }
     }
 }

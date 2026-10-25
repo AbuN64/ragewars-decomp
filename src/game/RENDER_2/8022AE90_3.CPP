@@ -8,11 +8,11 @@
 #include "COMMON/OBJRECV5.H"
 #include "TYPES.H"
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_80273198_de(Matrix *, CVector3 *);
 
-extern void func_80271F9C_de(CVector3 *out, CVector3 *in, f32 scale);
+extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern void func_80271F34_de(CVector3 *result, CVector3 *left, CVector3 *right);
 
@@ -42,7 +42,7 @@ void *func_8022B304_de(ForcePlayerList *forcePlayerList, void *arg1) {
         do {
             if (node->actorState != 0 &&
                 node->field11FC != 0.0f) {
-                func_80271F68_de(&sp10, arg1, &node->targetPosition);
+                Particle_SubtractVectors(&sp10, arg1, &node->targetPosition);
                 distSq = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
                 if (bestNode == 0 || distSq < bestDist) {
                     bestNode = node;
@@ -61,7 +61,7 @@ void func_8022B3D0_de(char *actorView, s32 unused1, CVector3 *arg2) {
     CVector3 offset;
 
     func_80273198_de(&matrix, arg2);
-    func_80271F9C_de(&offset, arg2, 5.12f);
+    Particle_ScaleVector(&offset, arg2, 5.12f);
     func_80271F34_de(&offset, &offset, &actor->targetPosition);
     func_80273448_de(&matrix, offset.x, offset.y, offset.z);
     func_80273D6C_de(&matrix);

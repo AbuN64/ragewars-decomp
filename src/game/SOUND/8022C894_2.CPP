@@ -33,10 +33,10 @@ extern s32 func_802227F4_de(void *, void *, s32);
 
 extern f32 D_800C2DB0_de;
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
@@ -153,9 +153,9 @@ void func_8022D1A8_de(void *arg0) {
     CVector3 *temp_s1;
 
     temp_s1 = &((Shared_ActorView *)arg0)->weapon.aimPosition;
-    func_80271F68_de(&vector, &((Shared_ActorView *)arg0)->resetPosition, temp_s1);
+    Particle_SubtractVectors(&vector, &((Shared_ActorView *)arg0)->resetPosition, temp_s1);
     func_8027207C_de(&vector);
-    func_80271F9C_de(&vector, &vector, 30.0f);
+    Particle_ScaleVector(&vector, &vector, 30.0f);
     func_80271F34_de(&((Player *)arg0)->previousPosition, temp_s1, &vector);
 }
 

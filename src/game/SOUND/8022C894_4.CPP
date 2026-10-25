@@ -14,7 +14,7 @@ extern void func_8022D57C_de(void *);
 
 extern s32 func_8024E7DC_de(void *);
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern f32 Particle_GetHorizontalAngle(CVector3 *arg0);
 
@@ -124,7 +124,7 @@ void func_8022D970_de(void *arg0, void *arg1) {
         sp10.x = ((ModelBlend *)temp_v0)->effectOffset.x;
         sp10.y = ((ModelBlend *)temp_v0)->effectOffset.y;
         sp10.z = ((ModelBlend *)temp_v0)->effectOffset.z;
-        func_80271F68_de(&sp20, &sp10, &((Shared_ActorView *)o)->effectPosition);
+        Particle_SubtractVectors(&sp20, &sp10, &((Shared_ActorView *)o)->effectPosition);
         sp20.y = 0.0f;
         ((Shared_ActorView *)o)->modelDistance = Particle_GetHorizontalAngle(&sp20);
     }

@@ -7,9 +7,9 @@
 #include "ANIM/8023EEF0_16.H"
 #include "ANIM/8023F740.H"
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 func_802B72B0_de(f32);
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 extern void func_8023F43C_de(void *arg0);
 extern void func_80242BF0_de(void *arg0);
 extern void func_80243920_de(void *arg0);
@@ -33,7 +33,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     f32 var_f0_3;
 
     func_80240C8C_de(&object->collisionState);
-    func_80271F68_de(&object->velocity,
+    Particle_SubtractVectors(&object->velocity,
                   &object->end,
                   &object->start);
     magnitude = func_802B72B0_de(
@@ -46,7 +46,7 @@ s32 func_8023D158_de(ActorMotion *object) {
     }
 
     if (object->distance != 0.0f) {
-        func_80271F9C_de(&object->direction,
+        Particle_ScaleVector(&object->direction,
                       &object->velocity,
                       D_800C3630_de / object->distance);
     } else {

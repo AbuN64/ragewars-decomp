@@ -10,7 +10,7 @@
 extern void func_80272B38_de(void *arg0, void *arg1, void *arg2);
 extern s32 func_80277128_de(ObjectRecAtBC *arg0, f32 arg1, f32 arg2, f32 arg3,
                         f32 *arg4, f32 *arg5);
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 
 
 
@@ -64,7 +64,7 @@ s32 Actors_EvaluateLightVolume(ObjectRecAtBC *arg0, CVector3 arg1, CVector3 arg4
         if (arg9 != 0) {
             *arg9 = amount;
         }
-        func_80271F9C_de(arg8, &arg0->direction, amount);
+        Particle_ScaleVector(arg8, &arg0->direction, amount);
     }
     return 1;
 }

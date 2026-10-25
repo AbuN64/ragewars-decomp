@@ -528,7 +528,7 @@ void func_80228E60_eu(u8 *player, s32 flag) {
         EUF(player, s32, 0x120C) = flag;
         EUF(player, f32, 0x11FC) = D_800C2EB4_eu;
         func_80273198_de(mtx, player + 0x1470);
-        func_80271F9C_de((void *)vec, (void *)(player + 0x1470), 5.12f);
+        Particle_ScaleVector((void *)vec, (void *)(player + 0x1470), 5.12f);
         func_80271F34_de(vec, vec, player + 0x1200);
         func_80273448_de(mtx, vec[0], vec[1], vec[2]);
         func_80273D6C_de(mtx);

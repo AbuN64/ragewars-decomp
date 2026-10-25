@@ -32,31 +32,31 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         case 0:
             corners[0] = &vertices[7]; corners[1] = &vertices[6];
             corners[2] = &vertices[5]; corners[3] = &vertices[4];
-            func_80271F68_de(&normal, &vertices[4], &vertices[0]); break;
+            Particle_SubtractVectors(&normal, &vertices[4], &vertices[0]); break;
         case 1:
             corners[0] = &vertices[4]; corners[1] = &vertices[5];
             corners[2] = &vertices[1]; corners[3] = &vertices[0];
-            func_80271F68_de(&normal, &vertices[0], &vertices[3]); break;
+            Particle_SubtractVectors(&normal, &vertices[0], &vertices[3]); break;
         case 2:
             corners[0] = &vertices[7]; corners[1] = &vertices[4];
             corners[2] = &vertices[0]; corners[3] = &vertices[3];
-            func_80271F68_de(&normal, &vertices[3], &vertices[2]); break;
+            Particle_SubtractVectors(&normal, &vertices[3], &vertices[2]); break;
         case 3:
             corners[0] = &vertices[6]; corners[1] = &vertices[7];
             corners[2] = &vertices[3]; corners[3] = &vertices[2];
-            func_80271F68_de(&normal, &vertices[2], &vertices[1]); break;
+            Particle_SubtractVectors(&normal, &vertices[2], &vertices[1]); break;
         case 4:
             corners[0] = &vertices[5]; corners[1] = &vertices[6];
             corners[2] = &vertices[2]; corners[3] = &vertices[1];
-            func_80271F68_de(&normal, &vertices[1], &vertices[0]); break;
+            Particle_SubtractVectors(&normal, &vertices[1], &vertices[0]); break;
         case 5:
             corners[0] = &vertices[0]; corners[1] = &vertices[1];
             corners[2] = &vertices[2]; corners[3] = &vertices[3];
-            func_80271F68_de(&normal, &vertices[3], &vertices[7]); break;
+            Particle_SubtractVectors(&normal, &vertices[3], &vertices[7]); break;
         }
         denominator = (normal.x * ray->direction.x + normal.y * ray->direction.y + normal.z * ray->direction.z);
         if (denominator == 0.0f) continue;
-        func_80271F68_de(&delta, origin, corners[0]);
+        Particle_SubtractVectors(&delta, origin, corners[0]);
         distance = (delta.x * normal.x + delta.y * normal.y + delta.z * normal.z);
         if (distance == 0.0f) continue;
         fraction = -distance / denominator;
@@ -68,8 +68,8 @@ s32 func_8023F750_de(BoxContactRay *ray, void *unused, BoxContactActor *actor, C
         for (i = 0; i < 4; i++) {
             next = i == 3 ? 0 : i + 1;
             current = corners[i];
-            func_80271F68_de(&edge, corners[next], current);
-            func_80271F68_de(&offset, &hit, current);
+            Particle_SubtractVectors(&edge, corners[next], current);
+            Particle_SubtractVectors(&offset, &hit, current);
             if ((edge.x * offset.x + edge.y * offset.y + edge.z * offset.z) < 0.0f) { inside = 0; break; }
         }
         if (!inside) continue;

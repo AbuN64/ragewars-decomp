@@ -33,7 +33,7 @@ s16 func_80259B10_de(CVector3 *position, GameplayCamera *listener) {
     if (listener == 0) {
         return 0x40;
     }
-    func_80271F68_de(&offset, &listener->position, position);
+    Particle_SubtractVectors(&offset, &listener->position, position);
     if (offset.x * offset.x + offset.z * offset.z < D_800C3F00_de) {
         return 0x40;
     }

@@ -30,7 +30,7 @@ s32 func_80243A90_de(Shared_Particle *particle, CVector3 pos, s32 *flags);
 
 f32 Particle_GetActorHeight(SharedPlayer *player);
 
-void func_80271F68_de(CVector3 *normal, CVector3 *pos, void *surface);
+void Particle_SubtractVectors(CVector3 *normal, CVector3 *pos, void *surface);
 
 
 f32 func_802726BC_de(CVector3 *a, CVector3 *b);
@@ -89,9 +89,9 @@ extern struct Shape_typemap_165 func_80271818_de(CVector3 *);
 
 extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80284570_de(void *, void *);
-/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from func_8027C9CC_de, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped func_80271F9C_de call, and the final test changed. */
+/* Picks an animation slot from a global mode, then plays the slot's effect, spawns its object at the owner or a fixed position, plays its sound, and flags the owner. Adapted from func_8027C9CC_de, with the slot chosen by a switch on D_801042C4 (the extra case below 7 that shares the default body is needed for the decision tree; its value is not recoverable), the constant triple, one argument, the dropped Particle_ScaleVector call, and the final test changed. */
 
 
 
@@ -342,18 +342,18 @@ void Particle_Update(Shared_Particle *particle) {
         }
         if (die) {
             if (D_801041F0.current != NULL) {
-                func_80271F68_de(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
+                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.origin);
             } else if (D_801041F0.unk88 != 0) {
-                func_80271F68_de(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
+                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unk90);
             } else if (D_801041F0.unk9C != 0) {
-                func_80271F68_de(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
+                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkA0);
             } else if (D_801041F0.unkB4 != 0) {
-                func_80271F68_de(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
+                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkB8);
                 if (particle->space == -7) {
                     particle->space = -3;
                 }
             } else if (D_801041F0.unkC4 != 0) {
-                func_80271F68_de(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
+                Particle_SubtractVectors(&particle->direction, &particle->inst.pos, &D_801041F0.unkC8);
             }
             func_8027207C_de(&particle->direction);
         }
@@ -455,7 +455,7 @@ void func_8027C274_de(Shared_Particle *particle) {
         }
     }
 skip_effects:
-    func_80271F9C_de(&particle->rotSpeed, &particle->rotSpeed,
+    Particle_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x400;
     if (particle->unk1B9 == 1) {
@@ -575,7 +575,7 @@ void func_8027C758_de(Shared_Particle *particle) {
     if (sound != 0xFFFF) {
         func_8025DE54_de((s16)sound, D_801002A8, 0, -1);
     }
-    func_80271F9C_de(&particle->rotSpeed, &particle->rotSpeed,
+    Particle_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
@@ -630,7 +630,7 @@ void func_8027C9CC_de(Shared_Particle *particle) {
     if (sound != 0xFFFF) {
         func_8025DE54_de((s16)sound, D_801002A8, 0, -1);
     }
-    func_80271F9C_de(&particle->rotSpeed, &particle->rotSpeed,
+    Particle_ScaleVector(&particle->rotSpeed, &particle->rotSpeed,
                   particle->rotationScale);
     particle->flags |= 0x200;
     if (particle->unk1BA == 1) {
@@ -1484,7 +1484,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         }
         normal = D_801001F8.normal;
         func_8027207C_de(&normal.x);
-        func_80271F9C_de(&normal, &normal, 1.024f);
+        Particle_ScaleVector(&normal, &normal, 1.024f);
         func_80271F34_de(&particle->inst.pos, &particle->inst.pos, &normal);
         model = desc->events->particles[hit];
         effect = desc->events->effects[hit];

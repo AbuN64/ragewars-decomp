@@ -41,7 +41,7 @@ extern void *D_800CB440_de[];
 
 extern void func_8027302C(f32 *, Body_func_8024C6E8_de *);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void func_80273448_de(void *, f32, f32, f32);
 
@@ -156,11 +156,11 @@ void func_8024C6E8_de(s32 unused, SourceRecAt18 *source, Body_func_8024C6E8_de *
     }
     func_8027302C(transform, body);
     reverse = -1.0f;
-    func_80271F9C_de(&velocity, &velocity, reverse);
+    Particle_ScaleVector(&velocity, &velocity, reverse);
     func_80273448_de(transform, velocity.x, velocity.y, velocity.z);
     func_80272D00_de(impulse, strength, position.x, position.y, position.z);
     func_8026F620_de(body, transform, impulse);
-    func_80271F9C_de(&velocity, &velocity, reverse);
+    Particle_ScaleVector(&velocity, &velocity, reverse);
     func_80273448_de(body, velocity.x, velocity.y, velocity.z);
     if (source->owner == owner) {
         source->charges--;

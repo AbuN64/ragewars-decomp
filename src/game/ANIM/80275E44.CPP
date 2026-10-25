@@ -10,7 +10,7 @@
 #include "COMMON/UNUSED.H"
 
 /* Returns the height of a path node's triangle plane at (x, z) from the cached edge cross product in D_80115E10, or the mean vertex height when the plane is vertical.
-   Adapted from func_8027525C_de with the edge vectors computed through the func_80271F68_de subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
+   Adapted from func_8027525C_de with the edge vectors computed through the Particle_SubtractVectors subtract helper inside a static inline helper, the vertex read as a whole vector with y at offset 4, the null result a rodata constant, and the cache globals changed. */
 
 
 
@@ -21,17 +21,17 @@
 extern int D_800CD3E8;
 
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 static inline void cross_edges(Node75 *node) {
     CVector3 a;
     CVector3 b;
 
-    func_80271F68_de(&a, node->cur, node->prev);
-    func_80271F68_de(&b, node->next, node->cur);
-    func_80272018_de(&D_80115E10, &a, &b);
+    Particle_SubtractVectors(&a, node->cur, node->prev);
+    Particle_SubtractVectors(&b, node->next, node->cur);
+    Particle_CrossVectors(&D_80115E10, &a, &b);
 }
 
 
@@ -93,7 +93,7 @@ CVector3 *func_80275F28_de(CVector3 *out, Node75 *node) {
         p = node->next;
         q = node->cur;
         b.z = p->z - q->z;
-        func_80272018_de(&D_80111D30, &b, &a);
+        Particle_CrossVectors(&D_80111D30, &b, &a);
     }
     *out = D_80111D30;
     D_800CD3E0 = (int)node;

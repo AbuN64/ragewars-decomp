@@ -2,7 +2,7 @@
 #include "COMMON/SHAREDPLAYER.H"
 #include "ANIM/RAY180.H"
 
-extern void func_80271F68_de(Triple *, Triple *, Triple *);
+extern void Particle_SubtractVectors(Triple *, Triple *, Triple *);
 
 extern void func_80241950_de(OwnerRecAt18 *, Bounds *, Actor_func_80242550_de *, Source_func_802164A8_de *);
 
@@ -40,7 +40,7 @@ void func_80242550_de(Actor_func_80242550_de *actor, Source_func_802164A8_de *in
         saved_previous = actor->previous;
         saved_position = actor->position;
         actor->previous = input->position;
-        func_80271F68_de(&actor->position, &input->position, &actor->delta);
+        Particle_SubtractVectors(&actor->position, &input->position, &actor->delta);
         query.word4 = 0;
         query.word8 = 1;
         query.wordC = 0;

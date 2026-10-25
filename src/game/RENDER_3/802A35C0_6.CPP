@@ -19,11 +19,11 @@
 
 extern f32 D_80115DEC;
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 extern f32 func_802B72B0_de(f32);
 
-extern void func_80271F9C_de(CVector3 *out, CVector3 *in, f32 scale);
+extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 /* Draws the scene's ten particle lists unless the free list holds exactly 100 particles: sets the render state and the shared particle texture D_800D14B0 (a 16x16 texture drawn in grey at alpha 200 through D_800D2E60), then for every particle inside the view box ending at D_801031F8 + 4 loads its matrix and draws the shared quad D_801469A0, while particles outside it are unlinked (func_80255ED8_de) and returned to the free list (func_80255D14_de); finally restores the render state through func_8026D8F8_de and System_ResetTextureCache. */
 
@@ -83,7 +83,7 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
     axis.x = 0.0f;
     axis.y = one;
     axis.z = 0.0f;
-    func_80272018_de(&cross, &axis, (CVector3 *)&bx);
+    Particle_CrossVectors(&cross, &axis, (CVector3 *)&bx);
 
     magnitude = func_802B72B0_de((cross.x * cross.x) +
                               (cross.y * cross.y) +
@@ -94,7 +94,7 @@ CQuatern *func_802A5020_de(CQuatern *out, u32 bx, u32 by, u32 bz) {
         result.x = 0.0f;
         result.w = one;
     } else {
-        func_80271F9C_de(&cross, &cross, one / magnitude);
+        Particle_ScaleVector(&cross, &cross, one / magnitude);
         angle = func_802745D0_de((axis.x * *(f32 *)&bx) +
                               (axis.y * *(f32 *)&by) +
                               (axis.z * *(f32 *)&bz));

@@ -10,7 +10,7 @@
 #include "TYPES.H"
 #include "SYSTEM/80255C40_3.H"
 #include "SYSTEM/80255C40_7.H"
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 /* Spawns an emitter record: takes the head of the free list at 0x11D8 into the active list at 0x11EC (or reuses the record at 0x11F0 when none is free) and fills its position, scale, shared value and three rates converted by D_800C8630. */
 
@@ -140,7 +140,7 @@ void *func_802395A4_de(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
     bestNode = 0;
     if (node != 0) {
         do {
-            func_80271F68_de(&position, zero, &node->position);
+            Particle_SubtractVectors(&position, zero, &node->position);
             distSq = (position.x * position.x) +
                      (position.y * position.y) +
                      (position.z * position.z);
@@ -171,7 +171,7 @@ f32 func_80239678_de(Race *arg0, void *arg1) {
     sum = 0.0f;
     if (node != 0) {
         do {
-            func_80271F68_de(&position, &((GameplayCamera *)node)->position, arg1);
+            Particle_SubtractVectors(&position, &((GameplayCamera *)node)->position, arg1);
             sum += func_802B72B0_de(
                 (position.x * position.x) +
                 (position.y * position.y) +

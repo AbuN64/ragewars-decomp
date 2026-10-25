@@ -8,7 +8,7 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern CQuatern CVector3_GetDirectionRotation2(CVector3 *dir);
 
@@ -57,7 +57,7 @@ CQuatern CVector3_GetDirectionRotation2(CVector3 *dir) {
         q.w = func_802B6560_de(angle);
     } else {
         turn = func_802745D0_de(dir->x * up.x + dir->y * up.y + dir->z * up.z);
-        func_80272018_de(&axis, &up, dir);
+        Particle_CrossVectors(&axis, &up, dir);
         func_8027207C_de(&axis);
         angle = turn * D_800C1A0C;
         D_80115DEC = func_802B7130_de(angle);

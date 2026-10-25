@@ -5,7 +5,7 @@
 #include "FX_2/80271B18.H"
 
 
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
@@ -56,7 +56,7 @@ void func_80268A40_de(RangeNode **arg0, u32 arg1, u32 arg2, u32 arg3,
                     temp_f20 = D_800C4490_de - (var_f2_3 / temp_f3);
                     func_8027207C_de(&delta);
                     temp_f20_2 = temp_f20 * D_800C4494_de;
-                    func_80271F9C_de(&delta, &delta, temp_f20_2);
+                    Particle_ScaleVector(&delta, &delta, temp_f20_2);
                     func_80271F34_de(arg4, arg4, &delta);
                     *arg5 -= temp_f20_2;
                 }

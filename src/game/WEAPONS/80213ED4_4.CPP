@@ -11,7 +11,7 @@
 /* Picks an actor's target (the tracked enemy when the aim point is chosen, else the nearest permitted target from Weapons_SelectCombatTarget), classifies it into one of eight kinds, and fills the target record with the kind, target, height difference, position, direction and distance, both in full and flattened to the horizontal plane. */
 extern void *Weapons_SelectCombatTarget(void *,void *,s32,s32), *func_80219408_de(void *);
 extern f32 func_80216F44_de(void *,f32,f32,f32),func_802B72B0_de(f32);
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx, Actor_func_80214DD4_de *target) {
     if (ctx->active == 0) {
         return 6;
@@ -85,7 +85,7 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
         }
     }
     func_80274020_de(&height);
-    func_80271F68_de(&delta, &pos, &arg0->pos);
+    Particle_SubtractVectors(&delta, &pos, &arg0->pos);
     arg3->range = height;
     arg3->kind = kind;
     arg3->target = target;
@@ -267,7 +267,7 @@ s32 Weapons_GetFacingSide(Actor_func_80214DD4_de *self, void *unused, Actor_func
     if (angle > 70.0f * RW_PI_F6 / 180.0f && angle < 110.0f * RW_PI_F6 / 180.0f) {
         return 0;
     }
-    func_80271F68_de(&dir, &from, &to);
+    Particle_SubtractVectors(&dir, &from, &to);
     func_8027207C_de(&dir);
     forward.x = 0.0f;
     forward.y = 0.0f;

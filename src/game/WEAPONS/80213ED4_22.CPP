@@ -35,16 +35,16 @@ void func_802171FC_de(void *actor, struct CallbackState114 *arg1, void *damage) 
     }
 }
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 
 
-/** Subtract obj->y from arg2 in-place via func_80271F68_de, then return the squared length of (arg1, arg2', arg3). */
+/** Subtract obj->y from arg2 in-place via Particle_SubtractVectors, then return the squared length of (arg1, arg2', arg3). */
 f32 func_80217224_de(void *candidate, CVector3 v) {
     f32 temp_f1;
 
-    func_80271F68_de(&v, &v, &((Actor_func_80214310_de *)(candidate))->position);
+    Particle_SubtractVectors(&v, &v, &((Actor_func_80214310_de *)(candidate))->position);
     temp_f1 = v.y - ((Actor_func_80214310_de *)(candidate))->eye;
     v.y = temp_f1;
     return (v.x * v.x) + (temp_f1 * temp_f1) + (v.z * v.z);

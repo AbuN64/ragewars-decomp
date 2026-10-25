@@ -14,7 +14,7 @@ extern char D_800C2950_de;
 
 extern void func_80274870_de(f32 *value, f32 target, f32 rate);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
@@ -140,7 +140,7 @@ void func_8022409C_de(void *player, void *arg1) {
     direction.z += ((func_80224078_Arg0 *)player)->unk6C4 *
                    func_802B6560_de(((func_80224078_Arg1 *)arg1)->unk6C - held);
 
-    func_80271F9C_de(&direction, &direction, D_800D2988);
+    Particle_ScaleVector(&direction, &direction, D_800D2988);
     func_80271F34_de(&((func_80224078_Arg0 *)(player))->unk6E8,
                   &((func_80224078_Arg0 *)(player))->unk6E8, &direction);
     result = Scene_FindFloorPolygon(&D_8011FE88, &((func_80224078_Arg1 *)arg1)->unk8);

@@ -56,8 +56,8 @@ void func_80284178_de(void *particle) {
 extern char D_8011D8D0;
 
 extern struct Shape_typemap_165 func_80271818_de(Triple *);
-extern void func_80271F68_de(Triple *, Triple *, Triple *);
-extern void func_80271F9C_de(Triple *, Triple *, f32);
+extern void Particle_SubtractVectors(Triple *, Triple *, Triple *);
+extern void Particle_ScaleVector(Triple *, Triple *, f32);
 extern void func_80271F34_de(Triple *, Triple *, Triple *);
 #include "particle/8027A0F4_8.H"
 void func_8028422C_de(TrailActor *actor) {
@@ -75,14 +75,14 @@ void func_8028422C_de(TrailActor *actor) {
         if (count > 0) {
                 position = actor->position;
                 rotation = func_80271818_de(&position);
-                func_80271F68_de(&delta, &actor->origin, &actor->end);
+                Particle_SubtractVectors(&delta, &actor->origin, &actor->end);
                 system = &D_8011D8D0;
                 i = 1;
                 temp = i <= count;
                 if (temp) {
                         divisor = (f32) count + (&D_800C4E88_de)[1];
                         do {
-    do { func_80271F9C_de(&step, &delta, (f32) i / divisor); func_80271F34_de(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
+    do { Particle_ScaleVector(&step, &delta, (f32) i / divisor); func_80271F34_de(&step, &step, &actor->end); actor_2 = actor->model; func_802800C0_de((struct EffectSystem *)system, (struct EffectActor *)actor, (struct EffectActor *)actor->owner, (s32 *)actor->property, actor->type, actor_2, *(CVector3 *)&position, *(CQuatern *)&rotation, *(CVector3 *)&step, 0, -1, 0x20E001); i++; } while (0);
                         } while (count >= i);
                 }
         }

@@ -30,17 +30,17 @@ extern s32 D_80111D68;
 
 extern f32 D_80115DEC;
 
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern void func_80271F9C_de(CVector3 *out, CVector3 *in, f32 scale);
+extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 extern f32 func_802B72B0_de(f32);
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
-    func_80271F68_de(out, a, b);
+    Particle_SubtractVectors(out, a, b);
 }
 
 static inline void normalize_copy(CVector3 *out, CVector3 *in) {
@@ -54,9 +54,9 @@ extern float D_80115DEC;
 
 extern void func_802750B0_de(CVector3 *);
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, float);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, float);
 
 CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
     CVector3 normal;
@@ -82,7 +82,7 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
         } else if (polygon != D_800CD3E8) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            func_80272018_de(&D_80115E10, &edge0, &edge1);
+            Particle_CrossVectors(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;
         normalize_copy(&D_80115E20, &D_80115E10);
@@ -93,7 +93,7 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
     up.x = 0.0f;
     up.y = one;
     up.z = 0.0f;
-    func_80272018_de(&axis, &up, &normal);
+    Particle_CrossVectors(&axis, &up, &normal);
     len = func_802B72B0_de(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0.0f) {
         result.z = 0.0f;
@@ -101,7 +101,7 @@ CQuatern *func_80275410_de(CQuatern *out, Triangle *polygon) {
         result.x = 0.0f;
         result.w = one;
     } else {
-        func_80271F9C_de(&axis, &axis, one / len);
+        Particle_ScaleVector(&axis, &axis, one / len);
         angle = func_802745D0_de(up.x * normal.x + up.y * normal.y + up.z * normal.z);
         angle *= 0.5f;
         scale = func_802B7130_de(angle);
@@ -130,7 +130,7 @@ CQuatern *func_80275688_de(CQuatern *out) {
     up.x = 0;
     up.y = one;
     up.z = 0;
-    func_80272018_de(&axis, &up, &a);
+    Particle_CrossVectors(&axis, &up, &a);
     len = func_802B72B0_de(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
     if (len == 0) {
         result.z = 0;
@@ -138,7 +138,7 @@ CQuatern *func_80275688_de(CQuatern *out) {
         result.x = 0;
         result.w = one;
     } else {
-        func_80271F9C_de(&axis, &axis, one / len);
+        Particle_ScaleVector(&axis, &axis, one / len);
         angle = func_802745D0_de(up.x * a.x + up.y * a.y + up.z * a.z);
         angle *= D_800C49E0_de;
         scale = func_802B7130_de(angle);

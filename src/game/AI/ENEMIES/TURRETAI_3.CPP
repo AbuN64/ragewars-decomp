@@ -41,7 +41,7 @@ static inline void navRotation(CQuatern *q,CVector3 *aim) {
     ((void (*)(CQuatern *,CVector3 *))CVector3_GetDirectionRotation2)(q,aim); }
 typedef union NavResult { Result result; Output80216D3C output; struct { s32 kind; void *target; f32 projection; char padC[0x88-0xC]; } workspace; } NavResult;
 
-static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { func_80271F68_de(local,to,from); func_80272BCC_de(matrix,local,out); }
+static inline void navProject(f32 *matrix,CVector3 *local,CVector3 *out,CVector3 *to,CVector3 *from) { Particle_SubtractVectors(local,to,from); func_80272BCC_de(matrix,local,out); }
 
 
 typedef struct NavWork {
@@ -119,7 +119,7 @@ s32 Turret_TrackTarget(NavActor *actor,NavRider *riderState) {
         func_80274244_de(&work.rotation.x,work.matrix);
         navProject(work.matrix,&work.local.v,&work.destination.v,&work.destination.v,&work.origin.v);
         func_80271F34_de(&work.destination.v, &work.destination.v, &work.origin.v);
-        func_80271F68_de(&work.relative.v, &work.destination.v, &work.origin.v);
+        Particle_SubtractVectors(&work.relative.v, &work.destination.v, &work.origin.v);
         desiredSpeed = func_802725FC_de(&work.relative.v.x);
         aimError = func_80216F44_de(&actor->actor,work.destination.v);
         work.result.workspace.projection = aimError;

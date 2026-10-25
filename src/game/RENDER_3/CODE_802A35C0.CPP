@@ -23,7 +23,7 @@ extern void func_802732D0_de(char *object, f32 *output);
 
 extern void func_802732EC_de(void *arg0, f32 *arg1);
 
-extern void func_80271F68_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
 extern f32 func_802B72B0_de(f32);
 
@@ -83,19 +83,19 @@ extern void func_802A5780_de(s32, State_func_802A2FA4_de *, Nodes *);
 
 extern void func_802A5FF0_de(State_func_802A2FA4_de *);
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern void func_80272B38_de(void *, void *, void *);
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_802727D8_de(void *);
 
 extern void func_80272CB0_de(void *, f32, f32, f32);
 
 extern void func_802A31E8_de(Node438C *, Node438C *, struct GameplayCamera *, void *);
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 extern void func_8027027C_de(void *, f32 *);
 
 void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
@@ -124,7 +124,7 @@ void *func_802A25D0_de(void *arg0, void *arg1, void *local) {
         ((ObjectLinksB4 *)(var_s0))->unk_AC.v0 = 0;
         ((ObjectLinksB4 *)(var_s0))->unk_A8 = 0.0f;
         if (temp_s1 != 0) {
-            func_80271F68_de(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
+            Particle_SubtractVectors(&sp10, &((ObjectLinksB4 *)(var_s0))->unk_10.v1, &((ObjectStateB0 *)(temp_s1))->unk_10);
             temp_f0 = func_802B72B0_de((sp10.x * sp10.x) + (sp10.y * sp10.y) + (sp10.z * sp10.z));
             ((ObjectStateB0 *)(temp_s1))->unk_AC = temp_f0;
             ((ObjectLinks54 *)(arg1))->unk_4C += temp_f0;
@@ -175,8 +175,8 @@ void func_802A274C_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, Morph *
     t = 1.0f - weight;
     while (--count != -1) {
         key = &morph->second[blend->second];
-        func_80271F9C_de(a, &morph->first[blend->first], morph->firstFrame);
-        func_80271F9C_de(b, key, morph->secondFrame);
+        Particle_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
+        Particle_ScaleVector(b, key, morph->secondFrame);
         out->x = (s16) (a[0] + t * (b[0] - a[0]));
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
@@ -227,8 +227,8 @@ void func_802A2B58_de(RibbonActor *actor, ObjRecAt28V1 *clock, Vtx *out, f32 sca
     t = 1.0f - weight;
     while (--count != -1) {
         key = &morph->second[blend->second];
-        func_80271F9C_de(a, &morph->first[blend->first], morph->firstFrame);
-        func_80271F9C_de(b, key, morph->secondFrame);
+        Particle_ScaleVector(a, &morph->first[blend->first], morph->firstFrame);
+        Particle_ScaleVector(b, key, morph->secondFrame);
         out->x = (s16) (a[0] + t * (b[0] - a[0]));
         out->y = (s16) (a[1] + t * (b[1] - a[1]));
         out->z = (s16) (a[2] + t * (b[2] - a[2]));
@@ -346,7 +346,7 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     f32 neg_y;
     f32 neg_z;
 
-    func_80271F68_de(&first, &arg0->position,
+    Particle_SubtractVectors(&first, &arg0->position,
                   &arg1->position);
     func_8027207C_de(&first);
     setup[0] = 0;
@@ -357,15 +357,15 @@ void func_802A31E8_de(Node438C *arg0, Node438C *arg1, GameplayCamera *camera, vo
     neg_z = -basis.z;
     basis.y = neg_y;
     basis.z = neg_z;
-    func_80271F9C_de(&cross, &basis,
+    Particle_ScaleVector(&cross, &basis,
                   basis.x * first.x + neg_y * first.y + neg_z * first.z);
-    func_80271F68_de(&cross, &first, &cross);
+    Particle_SubtractVectors(&cross, &first, &cross);
     func_8027207C_de(&cross);
-    func_80272018_de(&result, &basis, &cross);
+    Particle_CrossVectors(&result, &basis, &cross);
     func_8027207C_de(&result);
-    func_80271F9C_de(&result, &result, arg0->a);
-    func_80271F9C_de(&cross, &cross, arg0->b);
-    func_80271F9C_de(&basis, &basis, arg0->c);
+    Particle_ScaleVector(&result, &result, arg0->a);
+    Particle_ScaleVector(&cross, &cross, arg0->b);
+    Particle_ScaleVector(&basis, &basis, arg0->c);
     func_802727D8_de(matrix);
     ((Matrix *)matrix)->m[0] = result.x;
     ((Matrix *)matrix)->m[1] = result.y;
@@ -518,7 +518,7 @@ void Render_UpdateLinkedNodeTransforms(LinkOwner802A *owner) {
         parent = node->parent;
         if (parent != 0) {
             f32 length;
-            func_80271F68_de((CVector3 *)delta, &node->pos, &parent->pos);
+            Particle_SubtractVectors((CVector3 *)delta, &node->pos, &parent->pos);
             length = func_802B72B0_de(delta[0] * delta[0] + delta[1] * delta[1] + delta[2] * delta[2]);
             parent->length = length;
             owner->totalLength += length;

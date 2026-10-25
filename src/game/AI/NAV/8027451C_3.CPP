@@ -23,13 +23,13 @@ extern s32 D_80111D58;
 
 extern CVector3 D_80115E20;
 
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 static inline void edge(CVector3 *out, CVector3 *a, CVector3 *b) {
-    func_80271F68_de(out, a, b);
+    Particle_SubtractVectors(out, a, b);
 }
 
 static inline void normalize_copy(CVector3 *out, CVector3 *in) {
@@ -60,7 +60,7 @@ s32 func_802757E4_de(Triangle *polygon) {
         } else if (polygon != D_800CD3E8) {
             edge(&edge0, polygon->vertices[1], polygon->vertices[0]);
             edge(&edge1, polygon->vertices[2], polygon->vertices[1]);
-            func_80272018_de(&D_80115E10, &edge0, &edge1);
+            Particle_CrossVectors(&D_80115E10, &edge0, &edge1);
         }
         D_800CD3E8 = polygon;
         normalize_copy(&D_80115E20, &D_80115E10);

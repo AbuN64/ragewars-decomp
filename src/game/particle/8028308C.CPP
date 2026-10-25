@@ -61,7 +61,7 @@ void func_802A4598_de(void *, void *, s8);
 
 f32 func_802B72B0_de(f32);
 
-void func_80271F9C_de(CVector3 *,CVector3 *,f32);
+void Particle_ScaleVector(CVector3 *,CVector3 *,f32);
 
  void func_80271F34_de(CVector3 *,CVector3 *,CVector3 *);
 
@@ -350,12 +350,12 @@ void func_80283A80_de(ObjRecAt174 *arg0) {
  if(accel != 0.0f) {
  dir=&direction;
  direction=arg0->direction;
- func_80271F9C_de(&delta,dir,accel);
+ Particle_ScaleVector(&delta,dir,accel);
  velocity=&arg0->velocity;
  func_80271F34_de(velocity,velocity,&delta);
  length=func_802B72B0_de(arg0->velocity.x*arg0->velocity.x+arg0->velocity.y*arg0->velocity.y+arg0->velocity.z*arg0->velocity.z);
  limit=RW_BITS_TO_FLOAT(arg0->link->params->limit);
- if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } func_80271F9C_de(velocity,dir,limit); done:;
+ if(accel>0.0f) { if(!(limit<length)) goto done; } else { if(!(length<limit)) goto done; } Particle_ScaleVector(velocity,dir,limit); done:;
  }
 }
 

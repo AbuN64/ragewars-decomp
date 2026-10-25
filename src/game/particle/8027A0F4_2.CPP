@@ -72,7 +72,7 @@ void func_8027ABF4_de(AccelSteeringObj *particle) {
     if (accel != 0.0f) {
         do {
             direction = particle->direction;
-            func_80271F9C_de(&delta, &direction, accel);
+            Particle_ScaleVector(&delta, &direction, accel);
             velocity = &particle->velocity;
             func_80271F34_de(velocity, velocity, &delta);
         } while (0);
@@ -83,7 +83,7 @@ void func_8027ABF4_de(AccelSteeringObj *particle) {
         } else {
             if (!(length < limit)) goto done;
         }
-        func_80271F9C_de(velocity, &direction, limit);
+        Particle_ScaleVector(velocity, &direction, limit);
 done:;
     }
     func_80279DD0_de(particle, 1.0f);
@@ -220,7 +220,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       sp20 = var_s0->pos;
       sp20.y += nearby_height;
       sp20.y += Particle_GetActorHeight(var_a0) * nearby_scale;
-      func_80271F68_de(&sp10, nearby_position, &arg0->inst.pos);
+      Particle_SubtractVectors(&sp10, nearby_position, &arg0->inst.pos);
       temp_f20 = func_802B72B0_de(((sp10.x * sp10.x) + (sp10.y * sp10.y)) + (sp10.z * sp10.z));
       if (temp_f20 < D_800C4BD4_de)
       {
@@ -228,7 +228,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
         sp10.x *= temp_f20 * func_80274A90_de(nearby_scale, nearby_random_max);
         sp10.y *= temp_f20 * func_80274A90_de(nearby_scale, nearby_random_max);
         sp10.z *= temp_f20 * func_80274A90_de(nearby_scale, nearby_random_max);
-        func_80271F68_de(temp_s2, temp_s2, &sp10);
+        Particle_SubtractVectors(temp_s2, temp_s2, &sp10);
       }
       var_a0 = var_s0->unk16E0;
       var_s0 = var_a0;
@@ -239,7 +239,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   temp_f0_2 = func_8024E420_de(temp_s0);
   sp20 = temp_s0->pos;
   sp20.y += temp_f0_2;
-  func_80271F68_de(&sp10, &sp20, &arg0->inst.pos);
+  Particle_SubtractVectors(&sp10, &sp20, &arg0->inst.pos);
   tracking_min = D_800C4BE0_de;
   tracking_max = D_800C4BE4_de;
   sp10.x *= func_80274A90_de(tracking_min, tracking_max);
@@ -273,7 +273,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
   {
     temp_s0_2 = &spD0; 
     spE0 = arg0->direction;
-    func_80271F9C_de(temp_s0_2, &spE0, temp_f0_3);
+    Particle_ScaleVector(temp_s0_2, &spE0, temp_f0_3);
     temp_s0_2 = (void *) (&arg0->inst.velocity.x);
     func_80271F34_de(temp_s0_2, temp_s0_2, &spD0);
     temp_f1 = arg0->inst.velocity.x;
@@ -297,7 +297,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     {
       goto after_special_clamp;
     }
-    func_80271F9C_de(temp_s0_2, &spE0, temp_f0_5);
+    Particle_ScaleVector(temp_s0_2, &spE0, temp_f0_5);
     after_special_clamp:
     ;
 
@@ -315,7 +315,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     sp20 = temp_s0_4->pos;
     sp20.y += temp_f0_6;
     sp20.y += Particle_GetActorHeight(temp_s0_4) * D_800C4BE8_de;
-    func_80271F68_de(&sp40, &sp20, &arg0->inst.pos);
+    Particle_SubtractVectors(&sp40, &sp20, &arg0->inst.pos);
     func_8027207C_de(&sp40);
     sp70 = func_80271818_de(&sp40);
     temp_s2_2 = &arg0->direction;
@@ -340,7 +340,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     sp50.z = D_800C4BF4_de;
     new_var = temp_s2_2;
     Particle_TransformPoint(&sp90, &sp50, new_var);
-    func_80271F9C_de(&arg0->inst.velocity.x, new_var, temp_f20_3);
+    Particle_ScaleVector(&arg0->inst.velocity.x, new_var, temp_f20_3);
   }
   if (!(arg0->flags & 0x70000))
   {
@@ -353,7 +353,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
     {
       temp_s0_2 = &spD0; 
     spE0 = arg0->direction;
-      func_80271F9C_de(temp_s0_2, &spE0, temp_f0_9);
+      Particle_ScaleVector(temp_s0_2, &spE0, temp_f0_9);
       temp_s0_2 = (void *) (&arg0->inst.velocity.x);
       func_80271F34_de(temp_s0_2, temp_s0_2, &spD0);
       temp_f1_5 = arg0->inst.velocity.x;
@@ -377,7 +377,7 @@ void func_8027AD4C_de(Shared_Particle *arg0)
       {
         goto after_normal_clamp;
       }
-      func_80271F9C_de(temp_s0_2, &spE0, temp_f0_11);
+      Particle_ScaleVector(temp_s0_2, &spE0, temp_f0_11);
       after_normal_clamp:
       ;
 

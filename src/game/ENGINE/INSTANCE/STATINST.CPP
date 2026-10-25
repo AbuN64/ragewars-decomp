@@ -13,7 +13,7 @@
 #include "particle/80271B18_3.H"
 extern s32 D_800D2978;
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 D_800C3E50_de[];
 
 /* Draws an owner model with timed descriptor selection and fade setup/reset; a named descriptor-slot reference preserves reload scheduling. */
@@ -84,7 +84,7 @@ s32 func_802500FC_de(void *prop, s32 arg1) {
     u8 next_timer;
     DescriptorRecAt24 *descriptor;
 
-    func_80271F68_de(&sp10, &camera->position,
+    Particle_SubtractVectors(&sp10, &camera->position,
                   &owner->position);
     temp_f0 = sp10.x * sp10.x + sp10.y * sp10.y + sp10.z * sp10.z;
     threshold = D_800C3E50_de[0];

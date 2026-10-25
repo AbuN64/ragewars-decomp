@@ -13,10 +13,10 @@ s32 func_80271FC8_de(CVector3 *, u32, void *, void *);
 
 
  /* extern */
-void func_80272018_de(f32 *, void *, f32 *);
+void Particle_CrossVectors(f32 *, void *, f32 *);
 
 s32 func_802412D0_de(void *poly, void *start, void *arg2, f32 *arg3) {
-    extern void func_80271F68_de(f32 *, void *, void *);
+    extern void Particle_SubtractVectors(f32 *, void *, void *);
     f32 sp10[3];
     f32 sp20[3];
     f32 temp_f20;
@@ -26,11 +26,11 @@ s32 func_802412D0_de(void *poly, void *start, void *arg2, f32 *arg3) {
     if (((struct MeasuredRecAt8V3 *)(poly))->value == 0) {
         return 0;
     }
-    func_80271F68_de(sp10, arg2, start);
+    Particle_SubtractVectors(sp10, arg2, start);
     temp_f20 = (((struct MeasuredRecAt48V1 *)(poly))->value * sp10[0]) + (((struct Measured *)(poly))->value * sp10[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * sp10[2]);
     result = 0;
     if (!(temp_f20 >= (f32)0)) {
-        func_80271F68_de(sp20, start, poly + 0x18);
+        Particle_SubtractVectors(sp20, start, poly + 0x18);
         result = 1;
         var_f0 = -((((struct MeasuredRecAt48V1 *)(poly))->value * sp20[0]) + (((struct Measured *)(poly))->value * sp20[1]) + (((struct Measured_func_802412D0_de_48a8d17d95e2 *)(poly))->value * sp20[2])) / temp_f20;
     } else {
@@ -41,7 +41,7 @@ s32 func_802412D0_de(void *poly, void *start, void *arg2, f32 *arg3) {
 }
 
 s32 func_802413C8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
-    extern void func_80271F68_de(f32 *, void *, void *);
+    extern void Particle_SubtractVectors(f32 *, void *, void *);
     f32 sp10[3];
     f32 sp20[3];
     f32 sp30;
@@ -51,13 +51,13 @@ s32 func_802413C8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
     if (((struct MeasuredRecAt8V4 *)(arg0))->value == 0) {
         var_v0 = 0;
     } else {
-        func_80271F68_de(sp10, arg2, arg1);
+        Particle_SubtractVectors(sp10, arg2, arg1);
         temp_f20 = (((struct MeasuredRecAt48V2 *)(arg0))->value * sp10[0]) + (((struct Measured *)(arg0))->value * sp10[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(arg0))->value * sp10[2]);
         var_v0 = 0;
         if (temp_f20 >= (f32)0) {
             sp30 = D_800C3744_de;
         } else {
-            func_80271F68_de(sp20, arg1, arg0 + 0x18);
+            Particle_SubtractVectors(sp20, arg1, arg0 + 0x18);
             var_v0 = 1;
             sp30 = -((((struct MeasuredRecAt48V2 *)(arg0))->value * sp20[0]) + (((struct Measured *)(arg0))->value * sp20[1]) + (((struct Measured_func_802413C8_de_48a8d17d95e2 *)(arg0))->value * sp20[2])) / temp_f20;
         }
@@ -71,7 +71,7 @@ s32 func_802413C8_de(void *arg0, void *arg1, void *arg2, void *arg3) {
 
 /* extern */
 s32 func_802414F4_de(func_80204468_S3 *poly, void *arg1) {
-    void func_80271F68_de(f32 *, void *, void *);
+    void Particle_SubtractVectors(f32 *, void *, void *);
     f32 sp10[3];
     f32 sp20[3];
     f32 sp30[3];
@@ -88,9 +88,9 @@ s32 func_802414F4_de(func_80204468_S3 *poly, void *arg1) {
     var_s0 = temp_v1;
     var_s0 = var_s0 - 1;
     for (; var_s0 != -1; var_s1 += 0xC, var_s0--) {
-        func_80271F68_de(sp20, var_s1, var_s2);
-        func_80272018_de(sp10, &((Polygon_func_8023E8D4_de *)poly)->normal, sp20);
-        func_80271F68_de(sp30, arg1, var_s2);
+        Particle_SubtractVectors(sp20, var_s1, var_s2);
+        Particle_CrossVectors(sp10, &((Polygon_func_8023E8D4_de *)poly)->normal, sp20);
+        Particle_SubtractVectors(sp30, arg1, var_s2);
         var_s2 = var_s1;
         if (sp10[0]*sp30[0]+sp10[1]*sp30[1]+sp10[2]*sp30[2] > 0.0f) return 0;
     }

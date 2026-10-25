@@ -188,7 +188,7 @@ void Particle_Attach(Actor_func_8027DAD0_de *actor, CVector3 *outPosition, CVect
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/MATH_HELPERS.H"
 
-void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 void func_80272E3C_de(f32 *m, f32 x, f32 y, f32 z);
 void func_802727D8_de(void *matrix);
 void func_8028C6D4_de(Shared_World *world, CVector3 *pos, struct Shared_ParticleLighting *out);
@@ -307,17 +307,17 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                func_80272018_de(&side, &up, &direction);
-                func_80271F9C_de(&offset, &side, func_802B7130_de(particle->phaseA) * -particle->amplitudeA * fade);
+                Particle_CrossVectors(&side, &up, &direction);
+                Particle_ScaleVector(&offset, &side, func_802B7130_de(particle->phaseA) * -particle->amplitudeA * fade);
                 func_80271F34_de(&position, &position, &offset);
             }
             if (particle->amplitudeB < 0.0f) {
                 up.x = 0;
                 up.z = 0;
                 up.y = 1.0f;
-                func_80272018_de(&across, &up, &direction);
-                func_80272018_de(&side, &across, &direction);
-                func_80271F9C_de(&offset, &side, func_802B7130_de(particle->phaseB) * -particle->amplitudeB * fade);
+                Particle_CrossVectors(&across, &up, &direction);
+                Particle_CrossVectors(&side, &across, &direction);
+                Particle_ScaleVector(&offset, &side, func_802B7130_de(particle->phaseB) * -particle->amplitudeB * fade);
                 func_80271F34_de(&position, &position, &offset);
             }
         }
@@ -334,8 +334,8 @@ void Particle_BuildMatrix(Shared_Particle *particle, PackedMatrixWords *out, Gam
             up.x = 0;
             up.z = 0;
             up.y = 1.0f;
-            func_80272018_de(&axisX, &up, &axisZ);
-            func_80272018_de(&axisY, &axisX, &axisZ);
+            Particle_CrossVectors(&axisX, &up, &axisZ);
+            Particle_CrossVectors(&axisY, &axisX, &axisZ);
             func_802727D8_de(basis);
             func_8027207C_de(&axisX.x);
             func_8027207C_de(&axisY.x);

@@ -226,7 +226,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
             }
             if (anchor != 0) {
-                func_80271F68_de(&delta, &pos, &anchor->pos);
+                Particle_SubtractVectors(&delta, &pos, &anchor->pos);
             } else {
                 delta.x = delta.y = delta.z = 0.0f;
             }
@@ -467,7 +467,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     effect->pos = offsetOut;
                 }
                 if (aim != 0) {
-                    func_80271F68_de(&aimDelta, aim, &effect->pos);
+                    Particle_SubtractVectors(&aimDelta, aim, &effect->pos);
                     func_8027207C_de(&aimDelta.x);
                     func_80273198_de(&mtx, &aimDelta);
                     if (mode == -8) {
@@ -488,7 +488,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 effect->unk168 = effect->pos;
                 effect->unk50 = effect->pos;
-                func_80271F9C_de(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
+                Particle_ScaleVector(&effect->velocity, &dirOut, func_80285630_de(entry->motion->speed));
                 if (entry->flags & 0x20) {
                     func_80271F34_de(&effect->velocity, &effect->velocity, &arg6);
                 }
@@ -571,7 +571,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     render->flags |= 0x20000;
                 }
                 vel = &effect->velocity;
-                func_80271F9C_de(vel, vel, D_800CD6B0);
+                Particle_ScaleVector(vel, vel, D_800CD6B0);
                 if ((kind == 0x2D || kind == 0x4F) && (sourceType = source->type) == 2) {
                     aimTarget = &D_801041F0;
                     if (aimTarget->actor != 0) {

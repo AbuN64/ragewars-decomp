@@ -14,7 +14,7 @@
 extern struct {s32 *unk0;} D_8013B364;
 
 
-extern void func_80271F68_de(CVector3 *out, void *arg1, void *arg2);
+extern void Particle_SubtractVectors(CVector3 *out, void *arg1, void *arg2);
 
 /** Return the index of the link joining two nodes, accepting reversed links of two-way types, or -1. */
 
@@ -144,7 +144,7 @@ s32 func_8020CB3C_de(struct Obj8020BC50 *pointSet, void *point) {
         do {
             items = pointSet->records;
             stride = *(s32 *)items;
-            func_80271F68_de(&offset, point, (char *)items + (index * stride + 8));
+            Particle_SubtractVectors(&offset, point, (char *)items + (index * stride + 8));
             distanceSq = (offset.x * offset.x) + (offset.y * offset.y) + (offset.z * offset.z);
             if ((bestIndex < 0) || (distanceSq < bestDistanceSq)) {
                 bestIndex = index;

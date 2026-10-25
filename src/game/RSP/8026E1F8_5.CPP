@@ -125,7 +125,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     CVector3 right;
     f32 length;
 
-    func_80271F68_de(&forward, target, eye);
+    Particle_SubtractVectors(&forward, target, eye);
     length = func_802B72B0_de(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
@@ -138,7 +138,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         forward.z = 0.0f;
     }
 
-    func_80272018_de(&right, up, &forward);
+    Particle_CrossVectors(&right, up, &forward);
     length = func_802B72B0_de(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
@@ -151,7 +151,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         right.z = 0.0f;
     }
 
-    func_80272018_de(&upward, &forward, &right);
+    Particle_CrossVectors(&upward, &forward, &right);
     length = 1.0f / func_802B72B0_de(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;
@@ -835,8 +835,8 @@ void func_8026EF58_de(f32 *out, f32 *m) {
 
 /* Builds a look-at view matrix from an eye position, a target and an up vector: the forward axis is the normalised direction from the target back to the eye, the right axis the normalised cross product of up and forward, the true up axis their normalised cross product, each written as a matrix column with the negated eye projections as the translation row, falling back to the x axis when forward or right degenerate. */
 
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 extern f32 func_802B72B0_de(f32);
 
 void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *up) {
@@ -845,7 +845,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
     CVector3 right;
     f32 length;
 
-    func_80271F68_de(&forward, target, eye);
+    Particle_SubtractVectors(&forward, target, eye);
     length = func_802B72B0_de(forward.x * forward.x + forward.y * forward.y + forward.z * forward.z);
     if (0.001f < length) {
         length = -1.0f / length;
@@ -858,7 +858,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         forward.z = 0.0f;
     }
 
-    func_80272018_de(&right, up, &forward);
+    Particle_CrossVectors(&right, up, &forward);
     length = func_802B72B0_de(right.x * right.x + right.y * right.y + right.z * right.z);
     if (0.001f < length) {
         length = 1.0f / length;
@@ -871,7 +871,7 @@ void func_8026F368_de(MatrixF *mtx, CVector3 *eye, CVector3 *target, CVector3 *u
         right.z = 0.0f;
     }
 
-    func_80272018_de(&upward, &forward, &right);
+    Particle_CrossVectors(&upward, &forward, &right);
     length = 1.0f / func_802B72B0_de(upward.x * upward.x + upward.y * upward.y + upward.z * upward.z);
     upward.x *= length;
     upward.y *= length;

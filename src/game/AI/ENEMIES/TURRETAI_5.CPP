@@ -18,7 +18,7 @@ extern void Turret_LinkEffect_MakeVisible(void *arg0, void *arg1, s32 arg2);
 extern CQuatern CVector3_GetDirectionRotation2(f32 *);
 extern void func_80274244_de(f32 *, f32 *);
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern void func_80272BCC_de(f32 *, CVector3 *, CVector3 *);
 
@@ -87,7 +87,7 @@ void Turret_MoveTargetIntoTurretSpace(void *unused, struct RotationObject *objec
     CVector3 offset;
 
     build_rotation(object, matrix);
-    func_80271F68_de(&offset, point, pivot);
+    Particle_SubtractVectors(&offset, point, pivot);
     func_80272BCC_de(matrix, &offset, point);
     func_80271F34_de(point, point, pivot);
 }
@@ -140,7 +140,7 @@ s32 AI_DynTurretCanSeePlayer(Player *player, RiderRecAt130V2 *rider, Player *oth
     f32 lift;
     s32 blocked;
 
-    func_80271F68_de(&to, &other->pos, &player->pos);
+    Particle_SubtractVectors(&to, &other->pos, &player->pos);
     lift = 0.5f;
     from.x = rider->aim.x;
     from.y = rider->aim.y;

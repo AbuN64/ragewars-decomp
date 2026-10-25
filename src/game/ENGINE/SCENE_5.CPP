@@ -136,7 +136,7 @@ void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Sh
             if (func_80277128_de(volume, transformed.x, transformed.y, transformed.z, &localDirection, &weights[sampleIndex]) != 0) {
                 func_80271F34_de(&translatedDirection, &localDirection, &transformed);
                 func_80272A10_de(volume->transform, &translatedDirection, &localDirection);
-                func_80271F68_de(sampleDirection, position, &localDirection);
+                Particle_SubtractVectors(sampleDirection, position, &localDirection);
                 func_8027207C_de(sampleDirection);
                 color = volume->direction;
                 if (volume->animatedLight != 0) {
@@ -144,26 +144,26 @@ void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Sh
                     animationColor.x = level;
                     animationColor.y = level;
                     animationColor.z = level;
-                    func_80271F9C_de(&contribution, &animationColor, weights[sampleIndex] * volume->value);
+                    Particle_ScaleVector(&contribution, &animationColor, weights[sampleIndex] * volume->value);
                     animatedVolume = volume;
                     if (volume->flagB8 != 0) {
-                        func_80271F9C_de(&contribution, &contribution, -1.0f);
+                        Particle_ScaleVector(&contribution, &contribution, -1.0f);
                     }
                     func_80271F34_de(&ambient, &ambient, &contribution);
                 }
                 amount = volume->value * 0.5f;
                 scale = 1.0f - amount;
-                func_80271F9C_de(&contribution, &color, weights[sampleIndex] * amount);
+                Particle_ScaleVector(&contribution, &color, weights[sampleIndex] * amount);
                 if (volume->flagB8 != 0) {
-                    func_80271F9C_de(&contribution, &contribution, -1.0f);
+                    Particle_ScaleVector(&contribution, &contribution, -1.0f);
                 }
                 func_80271F34_de(&ambient, &ambient, &contribution);
                 weights[sampleIndex] *= scale;
                 amount = color.x; if (amount < 0.0f) amount = -amount;
                 if (color.y < 0.0f) amount = amount - color.y; else amount = amount + color.y;
                 if (color.z < 0.0f) scale = amount - color.z; else scale = amount + color.z;
-                func_80271F9C_de(&contribution, sampleDirection, weights[sampleIndex]);
-                func_80271F9C_de(&contribution, &contribution, scale);
+                Particle_ScaleVector(&contribution, sampleDirection, weights[sampleIndex]);
+                Particle_ScaleVector(&contribution, &contribution, scale);
                 func_80271F34_de(&combinedDirection, &combinedDirection, &contribution);
                 if (volume->flagB8 != 0) {
                     weights[sampleIndex] = -weights[sampleIndex];
@@ -197,21 +197,21 @@ void func_80289970_de(ObjectRecAtBC **volumes, s32 count, CVector3 *position, Sh
                 animationColor.x = pulse;
                 animationColor.y = pulse;
                 animationColor.z = pulse;
-                func_80271F9C_de(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
+                Particle_ScaleVector(&animatedContribution, &animationColor, scale * samples[sampleIndex]);
                 func_80271F34_de(&diffuse, &diffuse, &animatedContribution);
-                func_80271F9C_de(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
+                Particle_ScaleVector(&animatedContribution, &animationColor, backScale * samples[sampleIndex]);
                 func_80271F34_de(&backLight, &backLight, &animatedContribution);
             }
-            func_80271F9C_de(&contribution, &color, scale * samples[sampleIndex]);
+            Particle_ScaleVector(&contribution, &color, scale * samples[sampleIndex]);
             func_80271F34_de(&diffuse, &diffuse, &contribution);
 
 
-            func_80271F9C_de(&contribution, &color, backScale * samples[sampleIndex]);
+            Particle_ScaleVector(&contribution, &color, backScale * samples[sampleIndex]);
             func_80271F34_de(&backLight, &backLight, &contribution);
             sampleIndex++;
         } while (sampleIndex < count);
     }
-    func_80271F9C_de(&backLight, &backLight, 0.5f);
+    Particle_ScaleVector(&backLight, &backLight, 0.5f);
     func_80271F34_de(&ambient, &ambient, &backLight);
     if (ambient.x < 0.0f) {
         diffuse.x += ambient.x;

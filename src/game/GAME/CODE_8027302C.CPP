@@ -20,7 +20,7 @@ extern CVector3 D_800C46C0_de[2];
 
 extern func_8020CA10_G1 D_800C48E8_de;
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 extern f32 func_802B72B0_de(f32);
@@ -148,9 +148,9 @@ void func_80273198_de(Mtx *m, CVector3 *direction) {
         m->right.z = 0;
         m->right.x = D_800C48EC_de;
     } else {
-        func_80272018_de(&m->right, &up, direction);
+        Particle_CrossVectors(&m->right, &up, direction);
     }
-    func_80272018_de(&m->up, &m->right, direction);
+    Particle_CrossVectors(&m->up, &m->right, direction);
     m->forward = *direction;
     func_8027207C_de(&m->right);
     func_8027207C_de(&m->up);

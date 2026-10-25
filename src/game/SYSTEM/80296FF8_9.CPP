@@ -87,15 +87,15 @@ static inline int offset(int v){return v+9;}
 
 
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 static inline void make_plane(PlaneEquation *plane, CVector3 *from, CVector3 *through, CVector3 *to, CVector3 *point) {
     CVector3 a;
     CVector3 b;
 
-    func_80271F68_de(&a, through, from);
-    func_80271F68_de(&b, to, through);
-    func_80272018_de(&plane->normal, &b, &a);
+    Particle_SubtractVectors(&a, through, from);
+    Particle_SubtractVectors(&b, to, through);
+    Particle_CrossVectors(&plane->normal, &b, &a);
     func_8027207C_de(&plane->normal);
     plane->distance = plane->normal.x * point->x + plane->normal.y * point->y + plane->normal.z * point->z;
 }
@@ -201,9 +201,9 @@ void func_80296878_de(void *planeEquation, void *arg1, void *arg2, void *arg3) {
     CVector3 *point = arg1;
     CVector3 sp10;
     CVector3 sp20;
-    func_80271F68_de(&sp10, arg2, arg1);
-    func_80271F68_de(&sp20, arg3, arg2);
-    func_80272018_de(planeEquation, &sp20, &sp10);
+    Particle_SubtractVectors(&sp10, arg2, arg1);
+    Particle_SubtractVectors(&sp20, arg3, arg2);
+    Particle_CrossVectors(planeEquation, &sp20, &sp10);
     func_8027207C_de(planeEquation);
     plane->distance = (plane->normal.x * point->x)
                                   + (plane->normal.y * point->y)

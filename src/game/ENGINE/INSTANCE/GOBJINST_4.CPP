@@ -98,21 +98,21 @@ extern void func_80274244_de(CQuatern *, f32 *);
 
 extern f32 Particle_GetActorHeight(char *);
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern f32 func_802B72B0_de(f32);
 
 extern s32 *func_8024BFD4_de(char *arg0, s8 arg1);
 
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
-extern void func_80271F9C_de(CVector3 *out, CVector3 *in, f32 scale);
+extern void Particle_ScaleVector(CVector3 *out, CVector3 *in, f32 scale);
 
 /* Sways a model part: from the frame count D_800D2978, a per-part phase ((flags & 0x38) * 50, plus 40
  * unless flag 4 is set) and the part's time divided by 113, it reads a 120-step sine table at D_800D0720 to
@@ -130,7 +130,7 @@ extern s32 D_800D2978;
 
 extern void func_8027302C(f32 *, f32 *);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void func_80273448_de(f32 *, f32, f32, f32);
 
@@ -412,7 +412,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         center = ((LevelActor *)(entity))->position0;
         center.y += ((LevelActor *)(entity))->eyeHeight;
         center.y += Particle_GetActorHeight(entity) * 0.5f;
-        func_80271F68_de(&dir, &center, &point);
+        Particle_SubtractVectors(&dir, &center, &point);
         func_8027207C_de(&dir);
         dot = aim.x * dir.x + aim.y * dir.y + aim.z * dir.z;
         if (bestDot < dot) {
@@ -422,7 +422,7 @@ CQuatern func_80247BB4_de(char *actor, CVector3 point, CQuatern *assist, f32 con
         }
     }
     if (target != 0) {
-        func_80272018_de(&axis, &aim, &best);
+        Particle_CrossVectors(&axis, &aim, &best);
         func_8027207C_de(&axis);
         angle = func_802745D0_de(bestDot);
         angle *= func_802B72B0_de(func_802B72B0_de(1.0f - angle / (cone * 0.008726647f)));
@@ -481,13 +481,13 @@ void func_80247F18_de(char *arg0, char *arg1, char *arg2, CVector3 arg3,
         sp20.x = ((Matrix *)arg2)->m[12];
         sp20.y = ((Matrix *)arg2)->m[13];
         sp20.z = ((Matrix *)arg2)->m[14];
-        func_80271F68_de(&arg3, &arg3, &sp20);
-        func_80272018_de(&sp10, &arg3, &arg6);
+        Particle_SubtractVectors(&arg3, &arg3, &sp20);
+        Particle_CrossVectors(&sp10, &arg3, &arg6);
         func_8027207C_de(&sp10);
         func_8027207C_de(&arg3);
         func_8027207C_de(&arg6);
-        func_80272018_de(&sp30, &sp10, &arg3);
-        func_80271F9C_de(&sp10, &sp10,
+        Particle_CrossVectors(&sp30, &sp10, &arg3);
+        Particle_ScaleVector(&sp10, &sp10,
                       (sp30.x * arg6.x) + (sp30.y * arg6.y) +
                           (sp30.z * arg6.z));
         func_8027207C_de(&sp10);
@@ -546,10 +546,10 @@ void func_802480F0_de(s32 time, s32 flags, f32 *matrix) {
     origin.z = matrix[14];
     func_8027302C(inverse, matrix);
     flip = -1.0f;
-    func_80271F9C_de(&origin, &origin, flip);
+    Particle_ScaleVector(&origin, &origin, flip);
     func_80273448_de(inverse, origin.x, origin.y, origin.z);
     func_80272D00_de(rotation, angle, axis.x, axis.y, axis.z);
     func_8026F620_de(matrix, inverse, rotation);
-    func_80271F9C_de(&origin, &origin, flip);
+    Particle_ScaleVector(&origin, &origin, flip);
     func_80273448_de(matrix, origin.x, origin.y, origin.z);
 }

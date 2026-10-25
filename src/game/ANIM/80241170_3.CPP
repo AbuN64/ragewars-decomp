@@ -17,24 +17,24 @@ extern f32 func_802B72B0_de(f32);
 
 
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
 f32 func_80241840_de(CVector3 *a, CVector3 *b, CVector3 *p) {
-    extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+    extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
     CVector3 offset;
     CVector3 dir;
     f32 value;
     f32 len;
 
-    func_80271F68_de(&offset, p, a);
-    func_80271F68_de(&dir, b, a);
+    Particle_SubtractVectors(&offset, p, a);
+    Particle_SubtractVectors(&dir, b, a);
     value = dir.x * offset.x + dir.y * offset.y + dir.z * offset.z;
     if (!(value < 0.0f)) {
         len = dir.x * dir.x + dir.y * dir.y + dir.z * dir.z;
         if (!(len <= value)) {
-            func_80271F9C_de(&dir, &dir, value / len);
+            Particle_ScaleVector(&dir, &dir, value / len);
         }
-        func_80271F68_de(&offset, &offset, &dir);
+        Particle_SubtractVectors(&offset, &offset, &dir);
     }
     value = offset.x * offset.x + offset.y * offset.y + offset.z * offset.z;
     return func_802B72B0_de(value);

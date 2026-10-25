@@ -215,7 +215,7 @@ void func_802849F0_de(ParticleEffect *effect)
     acceleration = func_802B2350(effect->entry->motion->acceleration);
     if (acceleration != 0.0f) {
         direction = effect->direction;
-        func_80271F9C_de(&delta, &direction, acceleration);
+        Particle_ScaleVector(&delta, &direction, acceleration);
         func_80271F34_de(&effect->velocity, &effect->velocity, &delta);
         velocity = &effect->velocity;
         x = effect->velocity.x;
@@ -228,7 +228,7 @@ void func_802849F0_de(ParticleEffect *effect)
         } else {
             if (!(speed < limit)) goto finished;
         }
-        func_80271F9C_de(velocity, &direction, limit);
+        Particle_ScaleVector(velocity, &direction, limit);
 finished:
         ;
     }

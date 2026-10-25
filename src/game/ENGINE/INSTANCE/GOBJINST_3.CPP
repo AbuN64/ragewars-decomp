@@ -62,7 +62,7 @@ void func_80246E44_de(Actor36 *actor) {
     after = actor->position;
     actor->position = before;
     if (mode == 0 && *actor->kind != 0) {
-        func_80271F68_de(&after, &after, &before);
+        Particle_SubtractVectors(&after, &after, &before);
         func_80271F34_de(&after, &after, &actor->displacement);
         func_8024715C_de((void *)actor, &after);
         if (*actor->kind == 1) {

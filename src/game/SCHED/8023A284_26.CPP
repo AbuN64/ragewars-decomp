@@ -97,16 +97,16 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             func_80272180_de(&rotation,&a->orientation,&a->normal,settings->response);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            func_80271F9C_de(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
+            Particle_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3670_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3674_de;
         remainingFraction=scale-remainingFraction;
-        func_80271F9C_de(&remaining,&a->velocity,remainingFraction);
+        Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
         delta=&slide;
         func_80272180_de(delta,&remaining,&a->normal,settings->response);
-        func_80271F9C_de(delta,delta,scale-a->damping);
+        Particle_ScaleVector(delta,delta,scale-a->damping);
         func_80271F34_de(&a->position,&a->interpolated,delta);
         return 1;
     }
@@ -116,17 +116,17 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             func_80272214_de(&rotation,&a->orientation,&a->normal);
             a->projectedOrientation=rotation;
             damping=a->damping;
-            func_80271F9C_de(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
+            Particle_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3678_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C367C_de;
         remainingFraction=scale-remainingFraction;
-        func_80271F9C_de(&remaining,&a->velocity,remainingFraction);
+        Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
         func_80272214_de(&bounce,&remaining,&a->normal);
-        func_80271F9C_de(&bounce,&bounce,scale-a->damping);
+        Particle_ScaleVector(&bounce,&bounce,scale-a->damping);
     func_80271F34_de(&a->position,&a->interpolated,&bounce);
-    func_80271F9C_de(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
     func_80271F34_de(&a->position,&a->position,&gravity);
     return 1;
 
@@ -135,10 +135,10 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
         if(a->orientationActive!=0) {rotation=func_802723FC_de(&a->orientation,&a->normal);a->projectedOrientation=rotation;}
         if(active==0)return 1;
         fraction=a->blend;
-        func_80271F9C_de(&remaining,&a->velocity,D_800C3680_de-fraction);
+        Particle_ScaleVector(&remaining,&a->velocity,D_800C3680_de-fraction);
         bounce=func_802723FC_de(&remaining,&a->normal);
         func_80271F34_de(&a->position,&a->interpolated,&bounce);
-    func_80271F9C_de(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
     func_80271F34_de(&a->position,&a->position,&gravity);
     return 1;
 
@@ -149,19 +149,19 @@ if(a->horizontalTicks==0){a->velocity.x=a->velocity.z=0.0f;} timer=a->horizontal
             projected=func_802723FC_de(&a->orientation,&a->normal);
             func_80271FC8_de(&a->projectedOrientation,0.25f,&reflection,&projected);
             damping=a->damping;
-            func_80271F9C_de(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
+            Particle_ScaleVector(&a->projectedOrientation,&a->projectedOrientation,D_800C3684_de-damping);
         }
         if(active==0)return 1;
         remainingFraction=a->blend;
         scale=D_800C3688_de;
         remainingFraction=scale-remainingFraction;
-        func_80271F9C_de(&remaining,&a->velocity,remainingFraction);
+        Particle_ScaleVector(&remaining,&a->velocity,remainingFraction);
         func_80272214_de(&reflection,&remaining,&a->normal);
         projected=func_802723FC_de(&remaining,&a->normal);
         func_80271FC8_de(&bounce,0.25f,&reflection,&projected);
-        func_80271F9C_de(&bounce,&bounce,scale-a->damping);
+        Particle_ScaleVector(&bounce,&bounce,scale-a->damping);
     func_80271F34_de(&a->position,&a->interpolated,&bounce);
-    func_80271F9C_de(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
+    Particle_ScaleVector(&gravity,&a->normal,D_800D0640[0]*D_800C368C_de);
     func_80271F34_de(&a->position,&a->position,&gravity);
     return 1;
 

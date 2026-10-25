@@ -9,7 +9,7 @@
 
 
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 void func_80279DD0_de(void *particle, f32 arg1) {
@@ -43,13 +43,13 @@ void func_80279DD0_de(void *particle, f32 arg1) {
         sp10.x = 0.0f;
         sp10.z = 0.0f;
         sp10.y = D_800C4B44_de;
-        func_80272018_de(&sp20, &sp10, (CVector3 *)&sp30);
-        func_80271F9C_de(&sp40, &sp20, func_802B7130_de(((Shared_Particle *)particle)->phaseA) * ((Shared_Particle *)particle)->amplitudeA * var_f20);
+        Particle_CrossVectors(&sp20, &sp10, (CVector3 *)&sp30);
+        Particle_ScaleVector(&sp40, &sp20, func_802B7130_de(((Shared_Particle *)particle)->phaseA) * ((Shared_Particle *)particle)->amplitudeA * var_f20);
         temp_f12 = ((Shared_Particle *)particle)->phaseA + (((Shared_Particle *)particle)->phaseSpeedA * var_f20 * D_800D2988);
         ((Shared_Particle *)particle)->phaseA = temp_f12;
-        func_80271F9C_de(&sp50, &sp20, func_802B7130_de(temp_f12) * ((Shared_Particle *)particle)->amplitudeA * var_f20);
+        Particle_ScaleVector(&sp50, &sp20, func_802B7130_de(temp_f12) * ((Shared_Particle *)particle)->amplitudeA * var_f20);
         temp_s0 = &((Shared_Particle *)particle)->inst.velocity;
-        func_80271F68_de(temp_s0, temp_s0, &sp40);
+        Particle_SubtractVectors(temp_s0, temp_s0, &sp40);
         func_80271F34_de((CVector3 *) temp_s0, (CVector3 *) temp_s0, (CVector3 *) &sp50);
     } else {
         ((Shared_Particle *)particle)->phaseA = (f32) (((Shared_Particle *)particle)->phaseA + (((Shared_Particle *)particle)->phaseSpeedA * var_f20 * D_800D2988));
@@ -58,13 +58,13 @@ void func_80279DD0_de(void *particle, f32 arg1) {
         sp10.x = 0.0f;
         sp10.z = 0.0f;
         sp10.y = D_800C4B48_de;
-        func_80272018_de(&sp60, &sp10, (CVector3 *)&sp30);
-        func_80272018_de(&sp20, &sp60, (CVector3 *)&sp30);
-        func_80271F9C_de(&sp40, &sp20, func_802B7130_de(((Shared_Particle *)particle)->phaseB) * ((Shared_Particle *)particle)->amplitudeB * var_f20);
+        Particle_CrossVectors(&sp60, &sp10, (CVector3 *)&sp30);
+        Particle_CrossVectors(&sp20, &sp60, (CVector3 *)&sp30);
+        Particle_ScaleVector(&sp40, &sp20, func_802B7130_de(((Shared_Particle *)particle)->phaseB) * ((Shared_Particle *)particle)->amplitudeB * var_f20);
         temp_f12_2 = ((Shared_Particle *)particle)->phaseB + (((Shared_Particle *)particle)->phaseSpeedB * var_f20 * D_800D2988);
         ((Shared_Particle *)particle)->phaseB = temp_f12_2;
-        func_80271F9C_de(&sp50, &sp20, func_802B7130_de(temp_f12_2) * ((Shared_Particle *)particle)->amplitudeB * var_f20);
-        func_80271F68_de(&((Shared_Particle *)particle)->inst.velocity, &((Shared_Particle *)particle)->inst.velocity, &sp40);
+        Particle_ScaleVector(&sp50, &sp20, func_802B7130_de(temp_f12_2) * ((Shared_Particle *)particle)->amplitudeB * var_f20);
+        Particle_SubtractVectors(&((Shared_Particle *)particle)->inst.velocity, &((Shared_Particle *)particle)->inst.velocity, &sp40);
         func_80271F34_de(&((Shared_Particle *)particle)->inst.velocity, &((Shared_Particle *)particle)->inst.velocity, &sp50);
         return;
     }

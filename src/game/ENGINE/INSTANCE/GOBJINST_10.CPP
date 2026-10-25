@@ -29,12 +29,12 @@ extern s32 *func_8024BFD4_de(char *, s8);
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 
 extern void Rsp_ConvertMatrixToFloat(f32 *, char *);
 
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
 extern char D_800CA8C4_de[];
 
@@ -88,10 +88,10 @@ s32 func_8024B06C_de(char *obj, CVector3 point, Box70 *out) {
             for (j = 1; j < 8; j++) {
                 func_80271F34_de(&center, &center, &box->corners[j]);
             }
-            func_80271F9C_de(&center, &center, 0.125f);
+            Particle_ScaleVector(&center, &center, 0.125f);
             Rsp_ConvertMatrixToFloat(matrix, bones + i * 0x40);
             Particle_TransformPoint(matrix, &center, &diff);
-            func_80271F68_de(&diff, &diff, &point);
+            Particle_SubtractVectors(&diff, &diff, &point);
             dist = diff.x * diff.x + diff.y * diff.y + diff.z * diff.z;
             if (dist < bestDist) {
                 best = box;

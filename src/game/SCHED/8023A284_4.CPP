@@ -17,7 +17,7 @@
 #include "COMMON/WORLD.H"
 
 extern void Scene_UnlockResource(void *, Node80253610 *);
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 /* Clip and draw a textured translucent fan at the object's depth. */
 void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
@@ -122,9 +122,9 @@ void func_8023A4E0_de(ObjectRecAt220 *object, ClipView *view) {
                 triangle[0] = points[first];
                 triangle[1] = points[second];
                 triangle[2] = points[third];
-                func_80271F68_de(&edge0, &triangle[1], &triangle[0]);
-                func_80271F68_de(&edge1, &triangle[2], &triangle[1]);
-                func_80272018_de(&normal, &edge0, &edge1);
+                Particle_SubtractVectors(&edge0, &triangle[1], &triangle[0]);
+                Particle_SubtractVectors(&edge1, &triangle[2], &triangle[1]);
+                Particle_CrossVectors(&normal, &edge0, &edge1);
                 if (normal.y <= 0.0f) {
                     if (below != 1) goto draw_face;
                 } else {

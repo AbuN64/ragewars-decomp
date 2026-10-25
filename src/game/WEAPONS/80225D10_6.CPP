@@ -22,7 +22,7 @@ void func_80228DC4_de(void *listObject, void *bodyObject) {
         one = D_800C2C14_de;
     do {
         if (player->active != 0 && playerHasForce(player, zero)) {
-            func_80271F68_de(&delta, &player->origin, &body->position);
+            Particle_SubtractVectors(&delta, &player->origin, &body->position);
             distance = (delta.x * delta.x + delta.y * delta.y) + delta.z * delta.z;
             func_8027207C_de(&delta);
             changed = 1;
@@ -38,7 +38,7 @@ void func_80228DC4_de(void *listObject, void *bodyObject) {
                 dot += one;
                 dot *= D_800C2C20_de;
                 force *= dot;
-                func_80271F9C_de(&delta, &delta, force);
+                Particle_ScaleVector(&delta, &delta, force);
             }
             func_80271F34_de(&body->velocity, &body->velocity, &delta);
         }

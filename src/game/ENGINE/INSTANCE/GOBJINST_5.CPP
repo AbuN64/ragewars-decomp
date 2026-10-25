@@ -86,7 +86,7 @@ extern void Fx_DispatchAttachmentEffects(u8 *, s32, PoseMatrix *, Shared_PoseAct
 extern void func_8026F620_de(PoseMatrix, PoseMatrix, PoseMatrix);
 extern void Rsp_ConvertMatrixToFloat(PoseMatrix, u8 *);
 extern void func_80270AAC_de(CQuatern *, f32, CQuatern *, CQuatern *);
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80272D00_de(PoseMatrix, f32, f32, f32, f32);
 extern void func_8027302C(PoseMatrix, PoseMatrix);
 extern void func_80273448_de(PoseMatrix, f32, f32, f32);
@@ -123,11 +123,11 @@ static inline void twistPart(Shared_PosePart *part, PoseMatrix cur, s32 n, s32 i
         angle *= 0.3f;
         angle *= (n == 5 ? -2.0f : (f32)n);
         func_8027302C(inv, cur);
-        func_80271F9C_de(&turn, &turn, -1.0f);
+        Particle_ScaleVector(&turn, &turn, -1.0f);
         func_80273448_de(inv, turn.x, turn.y, turn.z);
         func_80272D00_de(rotm, angle, axis.x, axis.y, axis.z);
         func_8026F620_de(cur, inv, rotm);
-        func_80271F9C_de(&turn, &turn, -1.0f);
+        Particle_ScaleVector(&turn, &turn, -1.0f);
         func_80273448_de(cur, turn.x, turn.y, turn.z);
         if (part->unk_14[0] == i) {
             part->unk_12--;
@@ -379,7 +379,7 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
                 }
                 if (D_801462C8 & 0x80) {
                     scaled = 1;
-                    func_80271F9C_de(&scale, &scale, 0.5f);
+                    Particle_ScaleVector(&scale, &scale, 0.5f);
                 }
             } else {
                 id0 = -1;

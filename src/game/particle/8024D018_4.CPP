@@ -24,7 +24,7 @@ extern s32 func_802757E4_de(s32);
 
 extern void func_80275C94_de(CVector3 *, s32);
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 extern CQuatern func_8024D728_de(char *);
@@ -58,7 +58,7 @@ extern s32 func_8020CB3C_de(void *, void *);
 
 extern CVector3 *func_8020C994_de(void *, s32);
 
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 
 extern s32 func_8028FFD0_de(s32, s32, s32, CVector3, CVector3, s32, f32);
 
@@ -95,7 +95,7 @@ CQuatern func_8024D870_de(char *obj) {
                 up.x = 0.0f;
                 up.y = 1.0f;
                 up.z = 0.0f;
-                func_80272018_de(&axis, &up, &normal);
+                Particle_CrossVectors(&axis, &up, &normal);
                 func_8027207C_de(&axis);
                 slope = func_802745D0_de(up.x * normal.x + up.y * normal.y + up.z * normal.z);
                 D_80115DEC = func_802B7130_de(RW_MIN(slope, 0.43633235f) * 0.375f);
@@ -153,7 +153,7 @@ void func_8024DBC0_de(void *actor, CVector3 pos, s32 sound, f32 volume) {
     dir.x = dir.y = dir.z = up.x;
     func_8027207C_de(&dir);
     if (sound != 0xBD7) {
-        func_80271F9C_de(&velocity, &dir, 409.59998f);
+        Particle_ScaleVector(&velocity, &dir, 409.59998f);
     }
     func_8028FFD0_de((s32)&D_80131600, 0, sound, velocity, at, request.owner, volume);
 }

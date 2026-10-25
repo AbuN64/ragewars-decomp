@@ -11,7 +11,7 @@
 #include "particle/80271B18_3.H"
 
 extern char D_8011D8D0;
-extern void func_80271F9C_de(void *, void *, f32);
+extern void Particle_ScaleVector(void *, void *, f32);
 extern void func_8024E79C_de(void *, Triple, Triple *, s32 *, s32, s32);
 extern struct Shape_typemap_165 func_80271818_de(Triple *);
 #include "particle/8027A0F4_8.H"
@@ -43,7 +43,7 @@ void Fx_DispatchAttachmentEffects(func_8026E5E0_S1 *arg0, s32 arg1, struct Matri
                 node = arg4->bytes + temp_a0 * arg4->stride;
                 temp_s0 = (*node == 5) * 2;
                 Particle_TransformPoint(&arg2[temp_a0], arg0, &pos);
-                func_80271F9C_de(&pos, &pos, 0.000015258789f);
+                Particle_ScaleVector(&pos, &pos, 0.000015258789f);
                 var_s2 = 0;
                 temp_v1 = var_s3->unk0;
                 switch (temp_v1) {                  /* irregular */

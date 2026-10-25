@@ -47,7 +47,7 @@ extern s32 func_80245798_de(void);
 extern void func_802453D4_de(void);
 extern CVector3 Menu_GetTrackEyePosition(f32);
 extern CVector3 Menu_GetTrackTargetPosition(f32);
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_802727D8_de(void *);
 extern void func_80272E3C_de(void *, f32, f32, f32);
 extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
@@ -85,10 +85,10 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
     eye = Menu_GetTrackEyePosition(D_800E2830->time);
     target = Menu_GetTrackTargetPosition(D_800E2830->time);
     scale = D_800DCB40[0];
-    func_80271F9C_de(&eye, &eye, scale);
-    func_80271F9C_de(&target, &target, scale);
+    Particle_ScaleVector(&eye, &eye, scale);
+    Particle_ScaleVector(&target, &target, scale);
     camera->distance = 0.0f;
-    func_80271F68_de(&delta, &target, &eye);
+    Particle_SubtractVectors(&delta, &target, &eye);
     if (((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) || (D_800E2830->spec.flags & 2)) {
         actor = D_80145060.actorList;
         if ((D_800E2830->spec.flags & 1) && D_800E2830->target != 0) {
@@ -114,7 +114,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
         eye = rotated;
         func_80271F34_de(&target, &target, &D_800E2830->position);
         func_80271F34_de(&eye, &eye, &D_800E2830->position);
-        func_80271F68_de(&delta, &target, &eye);
+        Particle_SubtractVectors(&delta, &target, &eye);
         if (actor != 0) {
             saved = actor->prefix;
             actor->prefix.position = target;

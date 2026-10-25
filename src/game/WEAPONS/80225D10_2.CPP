@@ -80,7 +80,7 @@ extern void Weapons_UpdateViewAngles(void *, void *, void *);
 extern Shared_Quad Weapons_ComputeAimRotation(void *, void **, Shared_Quad *);
 extern f32 func_802726F8_de(f32 *, f32 *);
 extern s32 func_802444A4_de(void *, CVector3, CVector3, void *);
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
 
 
@@ -112,7 +112,7 @@ void func_80226548_de(void *arg0, void *body) {
                                      ((Shared_ActorView *)sp50)->position.vector,
                                      &D_80103FD0) == 0 ||
                     *D_80103FCC == sp50) {
-                    func_80271F68_de(&sp40, &((Shared_ActorView *)sp50)->position.vector, (CVector3 *)position);
+                    Particle_SubtractVectors(&sp40, &((Shared_ActorView *)sp50)->position.vector, (CVector3 *)position);
                     sp54 = Particle_GetHorizontalAngle(&sp40);
                     func_80274020_de(&sp54);
                     func_80274020_de(&((LevelActor *)body)->yaw);

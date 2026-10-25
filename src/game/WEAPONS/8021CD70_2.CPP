@@ -23,7 +23,7 @@ static inline f32 aimAbs(f32 value) { return value < 0.0f ? -value : value; }
 extern f32 D_800C9F70_de;
 extern s32 D_800D297C;
 extern void func_8022B144_de(SharedPlayer_func_8021D408_de *, CVector3 *);
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern void func_802727D8_de(Matrix *);
 extern void func_80272E3C_de(Matrix *, f32, f32, f32);
 extern void func_80273198_de(Matrix *, CVector3 *);
@@ -34,7 +34,7 @@ extern void func_8027027C_de(Matrix *, Matrix *);
 extern CQuatern func_80271818_de(CVector3 *);
 extern void func_80274244_de(CQuatern *, Matrix *);
 extern void func_802737F0_de(Matrix *, f32);
-extern void func_80271F9C_de(CVector3 *, CVector3 *, f32);
+extern void Particle_ScaleVector(CVector3 *, CVector3 *, f32);
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
 void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, CVector3 *normal) {
@@ -57,7 +57,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
     }
     eye = origin;
     to = *target;
-    func_80271F68_de(&direction, &to, &eye);
+    Particle_SubtractVectors(&direction, &to, &eye);
     func_8027207C_de(&direction);
     func_802727D8_de(&matrix);
     if (0.99999899f <= direction.y) {
@@ -79,7 +79,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
         height = height < 0.0f ? aimHeight + height : aimHeight - height;
         aim.y = height;
     }
-    func_80271F68_de(&direction, &aim, &player->views1C.view260_26.muzzle);
+    Particle_SubtractVectors(&direction, &aim, &player->views1C.view260_26.muzzle);
     func_8027207C_de(&direction);
     func_802727D8_de(&matrix);
     func_80273198_de(&matrix, &direction);
@@ -94,7 +94,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
         func_80274244_de(&turn, &matrix);
         func_802737F0_de(&matrix, 1.57079649f);
         func_8027207C_de(&lift);
-        func_80271F9C_de(&lift, &lift, 2.048f);
+        Particle_ScaleVector(&lift, &lift, 2.048f);
         func_80271F34_de(&eye, &eye, &lift);
         func_80273448_de(&matrix, to);
         func_8027347C_de(&matrix, 1.536f, scale, 1.536f);

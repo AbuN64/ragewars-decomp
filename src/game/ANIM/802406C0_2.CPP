@@ -5,22 +5,22 @@
 #include "TYPES.H"
 #include "FX_2/80271B18.H"
 
-extern void func_80271F68_de(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
+extern void Particle_SubtractVectors(CVector3 *arg0, CVector3 *arg1, CVector3 *arg2);
 
-extern void func_80272018_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 
 /* Sets up one face of a box as a four-corner quad of kind 4, copying points 0, 1, 2 and 3 of the
    input into corners 3, 2, 1 and 0 and deriving its normal at 0x48 from the edges corner 1 minus
-   corner 0 and corner 2 minus corner 1 through func_80271F68_de, their cross product through
-   func_80272018_de and normalisation through func_8027207C_de. */
+   corner 0 and corner 2 minus corner 1 through Particle_SubtractVectors, their cross product through
+   Particle_CrossVectors and normalisation through func_8027207C_de. */
 
 
 
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern void func_80272018_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_CrossVectors(CVector3 *, CVector3 *, CVector3 *);
 
 
 /* The edge vectors belong to this helper; declared in the face function itself, GCC 2.8.1 keeps
@@ -29,9 +29,9 @@ static inline void quad_normal(struct Quad *quad) {
     CVector3 first;
     CVector3 second;
 
-    func_80271F68_de(&first, &quad->corner[1], &quad->corner[0]);
-    func_80271F68_de(&second, &quad->corner[2], &quad->corner[1]);
-    func_80272018_de(&quad->normal, &second, &first);
+    Particle_SubtractVectors(&first, &quad->corner[1], &quad->corner[0]);
+    Particle_SubtractVectors(&second, &quad->corner[2], &quad->corner[1]);
+    Particle_CrossVectors(&quad->normal, &second, &first);
     func_8027207C_de(&quad->normal);
 }
 
@@ -43,10 +43,10 @@ void func_80240CAC_de(void *query) {
     CVector3 *temp_s0;
 
     temp_s1 = &object->vectors[1];
-    func_80271F68_de(&sp10, temp_s1, &object->vectors[0]);
-    func_80271F68_de(&sp20, &object->vectors[2], temp_s1);
+    Particle_SubtractVectors(&sp10, temp_s1, &object->vectors[0]);
+    Particle_SubtractVectors(&sp20, &object->vectors[2], temp_s1);
     temp_s0 = &object->result;
-    func_80272018_de(temp_s0, &sp20, &sp10);
+    Particle_CrossVectors(temp_s0, &sp20, &sp10);
     func_8027207C_de(temp_s0);
 }
 

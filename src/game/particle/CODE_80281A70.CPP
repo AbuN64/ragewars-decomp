@@ -22,7 +22,7 @@ extern char D_801379C0, D_8013B1A8;
 
 
 extern SharedPlayer *D_80145060;
-extern void func_80271F68_de(CVector3 *out, CVector3 *a, CVector3 *b);
+extern void Particle_SubtractVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 
 void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_80281A9C_de **others, s32 count) {
     CVector3 delta;
@@ -35,7 +35,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     objectCount = world->kind1Count;
     for (i = 0; i < objectCount; i++) {
         if (world->kind1[i]->active > 0) {
-            func_80271F68_de(&delta, &world->kind1[i]->position0, &actor->position);
+            Particle_SubtractVectors(&delta, &world->kind1[i]->position0, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
                 actor->crowded = 1;
                 return;
@@ -44,7 +44,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     }
     for (player = D_80145060; player != 0; player = player->views16E0.view16E0_1.next) {
         if (actor->owner != player && player->views5E4.view5E4_2.health > 0) {
-            func_80271F68_de(&delta, &player->views0.view8_4.position, &actor->position);
+            Particle_SubtractVectors(&delta, &player->views0.view8_4.position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 65536.0f) {
                 actor->crowded = 1;
                 return;
@@ -53,7 +53,7 @@ void func_80281A9C_de(s32 unused, Actor_func_80281A9C_de *actor, Actor_func_8028
     }
     for (i = 0; i < count; i++) {
         if (others[i] != actor && (others[i]->type == 0xC || others[i]->type == 0x22)) {
-            func_80271F68_de(&delta, &others[i]->position, &actor->position);
+            Particle_SubtractVectors(&delta, &others[i]->position, &actor->position);
             if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= 262144.0f) {
                 actor->crowded = 1;
                 return;
@@ -125,7 +125,7 @@ extern void Particle_Update(void *),func_80279A00_de(void *),func_80284178_de(vo
 extern void func_802A42F4_de(void *,void *),func_80268C7C_de(void *,s32);
 extern void func_80279B40_de(void *,s32,s32,s32);
 extern void func_8025DE54_de(s16,CVector3,s32,s32);
-extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 /* Frees a particle: runs its end hook (and its swoosh teardown when it has swooshes), hands its dynamic light back to
  * D_8013B1A8, drops one owner count, unlinks it from its active list onto the free list and, when flagged, from the
  * draw list. */
@@ -264,7 +264,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
                 for (j = 0; j < pairCount; j++) {
                     p = begin[j];
                     if (p->m_nObjType != 87) {
-                        func_80271F68_de(&delta, &p->m_vPos, &focus->m_vPos);
+                        Particle_SubtractVectors(&delta, &p->m_vPos, &focus->m_vPos);
                         if (delta.x * delta.x + delta.y * delta.y + delta.z * delta.z <= D_800C4E50_de) {
                             p->m_nFrames = 1;
                         }

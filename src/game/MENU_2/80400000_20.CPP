@@ -14,7 +14,7 @@
 #include "RENDER_4/8028FD2C_6.H"
 extern f32 D_800DCC78;
 extern CVector3 Menu_EvaluateCameraSpline(void *,s32,s32);
-extern void func_80271F68_de(CVector3 *,CVector3 *,CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *,CVector3 *,CVector3 *);
 extern f32 func_802725FC_de(CVector3 *),Particle_GetHorizontalAngle(CVector3 *);
 static inline CVector3 TrackStart(void) {
     CVector3 sp10;
@@ -55,7 +55,7 @@ CVector3 Menu_GetTrackStartAngles(void) {
     } else {
         eye = TrackStart();
         target = TrackEnd();
-        func_80271F68_de(&direction,&target,&eye);
+        Particle_SubtractVectors(&direction,&target,&eye);
         angles.x = -func_802725FC_de(&direction);
         angles.y = Particle_GetHorizontalAngle(&direction);
         angles.z = 0;

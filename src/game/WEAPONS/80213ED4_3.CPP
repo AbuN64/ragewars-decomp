@@ -19,8 +19,8 @@ extern void func_8024E79C_de(Actor_func_80214DD4_de *arg0, CVector3 pos, CVector
 extern f32 func_8024E80C_de(Actor_func_80214DD4_de *arg0);
 extern f32 Particle_GetHorizontalAngle(CVector3 *arg0);
 extern void func_80271F34_de(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void func_80271F68_de(CVector3 *result, CVector3 *left, CVector3 *right);
-extern void func_80271F9C_de(CVector3 *result, CVector3 *vec, f32 scale);
+extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
+extern void Particle_ScaleVector(CVector3 *result, CVector3 *vec, f32 scale);
 
 
 extern f32 func_802B72B0_de(f32 value);
@@ -29,7 +29,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
     CVector3 dir;
     CVector3 goal;
     if (anchor != 0) {
-        func_80271F68_de(&dir, &target->pos, &anchor->pos);
+        Particle_SubtractVectors(&dir, &target->pos, &anchor->pos);
         dir.y = 0.0f;
         func_8027207C_de(&dir);
     } else {
@@ -37,7 +37,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
         dir.y = 0.0f;
         dir.z = 0.0f;
     }
-    func_80271F9C_de(&dir, &dir, func_8024D398_de(target) + func_8024D398_de(actor) + D_800C216C_de);
+    Particle_ScaleVector(&dir, &dir, func_8024D398_de(target) + func_8024D398_de(actor) + D_800C216C_de);
     func_80271F34_de(&goal, &target->pos, &dir);
     func_8024E79C_de(target, goal, outPos, outRoom, 0, 0);
 }
@@ -146,7 +146,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     }
     func_80271F34_de(&pos, &pos, &tracker->offset);
     if (gap > 0.0f) {
-        func_80271F68_de(&away, &actor->pos, &pos);
+        Particle_SubtractVectors(&away, &actor->pos, &pos);
         angle = Particle_GetHorizontalAngle(&away);
         pos.x -= gap * func_802B7130_de(angle);
         pos.z -= gap * func_802B6560_de(angle);
@@ -164,7 +164,7 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     } else {
         range = func_80216F44_de(actor, pos);
     }
-    func_80271F68_de(&delta, &pos, &actor->pos);
+    Particle_SubtractVectors(&delta, &pos, &actor->pos);
     out->kind = kind;
     out->target = target;
     out->range = range;

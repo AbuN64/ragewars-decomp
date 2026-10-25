@@ -45,7 +45,7 @@ extern f32 Particle_GetActorHeight(SharedPlayer *);
 
 extern s32 func_802444A4_de(SharedPlayer *, CVector3, CVector3, char *);
 
-extern void func_80271F68_de(CVector3 *, CVector3 *, CVector3 *);
+extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     Segment *segment;
     f32 throttle;
@@ -87,7 +87,7 @@ void Turret_Move(Owner *owner, Rider *rider, s32 mode, SharedPlayer *target) {
     case 2:
         if (target != 0) {
             if (segment->angle != 0.0f) {
-                func_80271F68_de(&offset, &target->views0.view8_3.pos, &rider->base);
+                Particle_SubtractVectors(&offset, &target->views0.view8_3.pos, &rider->base);
                 func_802736D4_de(matrix, -segment->angle);
                 Particle_TransformPoint(matrix, &offset, &local);
                 goal = local.z / segment->radius;
@@ -148,7 +148,7 @@ void AI_DynTurretGetTargetInfo(SharedPlayer *player, RiderRecAt130V1 *rider, Res
                     }
                 }
                 if (enemy) {
-                    func_80271F68_de(&to, &other->views0.view8_3.pos, &player->views0.view8_3.pos);
+                    Particle_SubtractVectors(&to, &other->views0.view8_3.pos, &player->views0.view8_3.pos);
                     from.x = rider->aim.x;
                     from.y = rider->aim.y;
                     from.z = rider->aim.z;

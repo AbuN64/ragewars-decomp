@@ -16,7 +16,7 @@
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
 
-extern void func_80272018_de(CVector3*,CVector3*,CVector3*);
+extern void Particle_CrossVectors(CVector3*,CVector3*,CVector3*);
 
 void func_802433DC_de(ContextB0 *mesh,CollisionVertex **points) {
     extern s32 func_8023E8D4_de(CapsuleSweep*,Polygon_func_8023E8D4_de*,s32);
@@ -54,9 +54,9 @@ void func_802433DC_de(ContextB0 *mesh,CollisionVertex **points) {
         cursor++;
         i++;
     } while(i<3);
-    func_80271F68_de(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
-    func_80271F68_de(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
-    func_80272018_de(&polygon.normal,&edgeB,&edgeA);
+    Particle_SubtractVectors(&edgeA,&polygon.vertices[1],&polygon.vertices[0]);
+    Particle_SubtractVectors(&edgeB,&polygon.vertices[2],&polygon.vertices[1]);
+    Particle_CrossVectors(&polygon.normal,&edgeB,&edgeA);
     func_8027207C_de(&polygon.normal);
     surface=ray->surface;
     polygon.input=mesh->element;
