@@ -2522,3 +2522,4 @@ literals_Weapons_BuildPlayerViewTransform = 0x800C2B74; // rom:0xC3774 size:0x8
 literals_Fx_UpdateTargetSelection = 0x800C1F10; // rom:0xC2B10 size:0x4
 literals_func_8020F984_de = 0x800C1F14; // rom:0xC2B14 size:0x4
 literals_Frontend_DrawMenuBlockModel = 0x800DD524; // rom:0xDE124 size:0xC
+literals_Texture_UpdateSoundSlot = 0x800C3ED8; // rom:0xC4AD8 size:0x4

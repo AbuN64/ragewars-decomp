@@ -3676,7 +3676,7 @@ segments:
       - [0xC49E0, rodata, data_800C/literals_Texture_InitializeAudioWorker]
       - [0xC49F8, data, data_800C/rodata_unresolved_800C3DF8]
       - [0xC4A00, rodata, data_800C/D_80257360_C9BC0]
-      - [0xC4A08, rodata, data_800C/D_802577F4_C9BC8]
+      - [0xC4A08, rodata, data_800C/literals_Texture_UpdateSoundSlot]
       - [0xC4A0C, rodata, data_800C/literals_Texture_PlaySoundAtPosition]
       - [0xC4A10, rodata, data_800C/D_8025842C_C9BD0]
       - [0xC4A14, rodata, data_800C/D_80258A7C_C9BD4]

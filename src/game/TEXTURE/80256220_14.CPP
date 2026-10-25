@@ -350,7 +350,6 @@ typedef struct VoiceMix {
     u8 reserved1A[2];
     f32 attenuation;
 } VoiceMix;
-extern f32 D_800C3ED8_de;
 extern void alSndpSetPitch(void *, s32);
 extern void func_802B2DE0_de(void *, u8);
 extern void alSndpSetPan(void *, u8);
@@ -400,7 +399,7 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
         } else {
             gain = context->red;
             if (context->voices[index].fieldC4 && context->field2BB8) {
-                gain *= D_800C3ED8_de;
+                gain *= 0.5f;
             }
         }
         func_802B2F10_de(player, (s16)(s32)((f32)mix->left * gain * mix->attenuation));
