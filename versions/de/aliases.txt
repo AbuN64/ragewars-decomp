@@ -2539,3 +2539,4 @@ literals_Team_UpdateDraftPanel = 0x800C2234; // rom:0xC2E34 size:0x14
 literals_Menu_GetTrackStartAngles = 0x800DCC78; // rom:0xDD878 size:0x4
 literals_NaturalLogDouble = 0x800C56D8; // rom:0xC62D8 size:0x68
 literals_Text_ApplyDamageOverTime = 0x800C2D20; // rom:0xC3920 size:0x8
+literals_Items_ResetGameOptions = 0x800DE768; // rom:0xDF368 size:0x4

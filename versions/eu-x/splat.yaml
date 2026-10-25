@@ -4730,7 +4730,7 @@ segments:
       - [0xEAB9F, data, data_800C/rodata_unresolved_800E9F9F]
       - [0xEABA0, rodata, data_800C/rodata_shared_800EEDE0]
       - [0xEABA8, rodata, data_800C/D_auto_rodata_unresolved_800EEDE8]
-      - [0xEABC8, rodata, data_800C/D_blob_c5d93977abc56847c570]
+      - [0xEABC8, rodata, data_800C/literals_Items_ResetGameOptions]
       - [0xEABCC, rodata, data_800C/literals_func_80444920_de]
       - [0xEABD0, rodata, data_800C/rodata_shared_800EEE10]
       - [0xEABD6, data, data_800C/rodata_unresolved_800E9FD6]
