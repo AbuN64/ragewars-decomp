@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "SYSTEM_2/8025E280.H"
 
@@ -188,7 +189,6 @@ extern char *D_800E1C34[];
 extern char *D_800E1C44[];
 extern char *D_800D2138[];
 extern char *D_800D213C[];
-extern s32 D_80146894;
 extern s32 D_80154020[2];
 
 
@@ -301,7 +301,7 @@ s32 func_80422E34_eu(void *node) {
     D_800E4518->cursor = 0;
     D_800E4518->selection = -1;
     func_8040E8D8_de(node, 0);
-    D_80146894 = 1;
+    D_8011FAC0.clockPaused = 1;
     D_80154020[1] = 0;
     D_80154020[0] = -1;
     func_804221E8_de();

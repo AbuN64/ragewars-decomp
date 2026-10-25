@@ -1,4 +1,5 @@
 #include "COMMON/EFFECTCONTRIBUTION.H"
+#include "COMMON/GAME_SESSION.H"
 #include "RENDER_3/802A35C0.H"
 #include "abi.h"
 #include "RENDER_3/DRAW_MATRIX_SCRATCH.H"
@@ -54,7 +55,6 @@ s32 func_802A5EE0_de(s32);
 
 extern s32 D_800CDBE8;
 
-extern s32 D_80146894;
 
 extern u32 D_800D297C;
 
@@ -205,7 +205,7 @@ void func_802A5498_de(u32 arg0) {
 
 void func_802A5680_de(s32 owner) {
     D_800CDBE8 = 0;
-    if (D_80146894 == 0) {
+    if (D_8011FAC0.clockPaused == 0) {
         func_802A5E08_de((void *)owner);
         func_802A5EE0_de(owner);
     }

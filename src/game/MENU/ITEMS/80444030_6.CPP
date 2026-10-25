@@ -1,4 +1,5 @@
 #include "MENU/HOLDERRECAT1CV2.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "stddef.h"
@@ -176,7 +177,7 @@ s32 func_8044421C_de(void) {
 
 /* Sets bit 24 of the item's flags when D_80146878 is 8 (clears it otherwise) and points the item at the text table for the configuration D_801462D0 (8, 0x10 or 0x20); returns 0. */
 s32 func_80444314_de(MenuItemRecAt14 *item) {
-    if (D_80146878 == 8) {
+    if (D_8011FAC0.mode == 8) {
         item->flags |= 0x01000000;
     } else {
         item->flags &= ~0x01000000;

@@ -1,4 +1,5 @@
 #include "COMMON/S1_2.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
@@ -47,7 +48,7 @@ int func_8025E2C4_de(void) {
 }
 
 void func_8025E2D4_de(s32 a) {
-    if (D_801427D0 == 0) {
+    if (D_8011FAC0.transitionBlocked == 0) {
         s32 *p = &D_80109E0C;
         if (*p != a) {
             *p = a;

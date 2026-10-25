@@ -218,7 +218,7 @@ done:
     item->text = D_800E5830->nameText;
     D_800E5830->item24 = func_8040EC30_de(menu, 0x274 + PREVIEW_ID_SHIFT);
     D_800E5830->ready = 1;
-    D_80146894 = 1;
+    D_80145088.status[7] = 1;
     D_800E5830->started = 0;
     func_802A2394_de();
     return 0;

@@ -289,7 +289,7 @@ void func_802285E8_de(char *arg0) {
             work = func_8025CC6C_de();
             func_8025CA24_de(work, ((ObjRecV5 *)(actor))->unk11C0.v0);
             ((ObjRecV5 *)(actor))->unk11C0.v1 = 0;
-        } else if (D_80146894 == 0) {
+        } else if (D_80145088.status[7] == 0) {
             void *owner = ((ObjRecV5 *)(actor))->unk5DC;
             s32 blocked;
 

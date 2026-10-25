@@ -1,4 +1,5 @@
 #include "COMMON/STATERECAT34.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
@@ -29,14 +30,14 @@ void func_8025DE30_de(void) {
 }
 
 s32 Render_PlaySoundAtPosition(s16 track, CVector3 arg1, s32 position, s32 arg5) {
-    if (D_801427D0 != 0) {
+    if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
     return Texture_PlaySoundAtPosition(&D_8010C080, track, arg1, position, arg5);
 }
 
 s32 func_8025DEC0_de(s32 arg0, CVector3 arg1, s32 arg4, s32 arg5, f32 arg6) {
-    if (D_801427D0 != 0) {
+    if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
     return func_80258A7C_de(&D_8010C080, (s16)arg0, arg1, arg4, arg5, arg6);
@@ -46,7 +47,7 @@ s32 func_8025DF34_de(s32 track) {
     s32 temp_s0;
     s32 temp_s1;
 
-    if (D_801427D0 != 0) {
+    if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
     {
@@ -65,7 +66,7 @@ s32 func_8025DF34_de(s32 track) {
 }
 
 s32 func_8025DFE8_de(s32 index, CVector3 position, s32 arg2) {
-    if (D_801427D0 != 0) {
+    if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
     return Texture_PlayInstrumentAtPosition(&D_8010C080, index, position, arg2);
@@ -75,7 +76,7 @@ int func_8025E04C_de(int index) {
     int temp_s0;
     int temp_s1;
 
-    if (D_801427D0 != 0) {
+    if (D_8011FAC0.transitionBlocked != 0) {
         return -1;
     }
     {

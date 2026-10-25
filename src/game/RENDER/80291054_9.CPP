@@ -12,7 +12,6 @@
 extern void func_8029311C_de(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
-extern int D_80146878;
 extern f32 D_800D2988; /* frame time scale (Particle code saves and rescales it) */
 
 s32 func_80292FC0_de(s32 *, s32);
@@ -89,7 +88,7 @@ u8 *func_802934C0_de(u8 *arg0, u8 *arg1)
 }
 
 int func_802934F8_de(void) {
-    return D_80146878 == 0xD;
+    return D_8011FAC0.mode == 0xD;
 }
 
 void func_8029350C_de(s32 arg0) {

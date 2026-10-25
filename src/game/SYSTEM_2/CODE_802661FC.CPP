@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/TARGET.H"
@@ -516,7 +517,6 @@ void func_80266810_de(Shared_ReactionActor *source, Shared_ReactionActor *target
 
 extern f32 func_8024BEDC_de(void *arg0);
 
-extern s32 D_80146894;
 
 
 /* Forwards the actor, event value and three-component input with a zero final flag. */
@@ -564,7 +564,7 @@ f32 func_802672D0_de(u8 *other) {
 
 void func_8026730C_de(s32 arg0, ObjectRecAtD0 *arg1, s32 arg2, CVector3 arg3,
                    Clip arg6) {
-    s32 *global = &D_80146894;
+    s32 *global = &D_8011FAC0.clockPaused;
     s32 selected;
     f32 scale;
 

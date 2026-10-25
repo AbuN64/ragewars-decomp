@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/D_800E28D4.H"
 #include "COMMON/CHANNEL.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
@@ -20,7 +21,6 @@ extern Gfx *D_80110634;
 extern void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool);
 extern s32 D_800E28D0;
 extern s32 D_800D297C;
-extern s32 D_80146894;
 extern f32 D_800D2988;
 extern char D_800CBCC0;
 extern char D_800CBCF0_de;
@@ -45,7 +45,7 @@ void func_80236F1C_de(Race *race, s32 arg1)
     if (race->header.music != 0) {
         Scene_MarkResourceInUse(0, race->header.music);
     }
-    if (D_80146894 != 0 || race->header.views.count == 3) {
+    if (D_8011FAC0.clockPaused != 0 || race->header.views.count == 3) {
         D_800FF224_de = 30.0f;
     }
     if (D_800FF224_de != 0.0f) {

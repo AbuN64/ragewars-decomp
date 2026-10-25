@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/OBJRECV5.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -59,7 +60,6 @@ void func_80226950_de(PlayerList *list, int count) {
 extern f32 D_800D2988;
 extern Menu_func_80226A34_de D_8014561C;
 extern Game D_8014687C;
-extern s32 D_80146894;
 extern void func_8022C490_de(SharedPlayer *);
 extern void func_80220ED4_de(SharedPlayer *);
 extern void func_80220A80_de(SharedPlayer *, SharedPlayer *);
@@ -94,7 +94,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
             if (rules->teams != 0 || rules->teamRule != 0) {
                 func_8022C490_de(player);
             }
-            if (D_80146894 == 0) {
+            if (D_8011FAC0.clockPaused == 0) {
                 func_80220ED4_de(player);
             }
             func_80220A80_de(player, player);

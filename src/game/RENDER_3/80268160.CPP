@@ -1,4 +1,5 @@
 #include "RENDER_3/RANGENODE.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/D_8010EC90.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
@@ -29,7 +30,6 @@ extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
 
 
 
-extern s32 D_80146894;
 
 
 
@@ -81,7 +81,7 @@ void func_80268264_de(int arg0, int arg1, int arg2, int arg3, ...)
 
 void func_8026826C_de(ObjectRecAt17C *arg0, ObjectRecAt17C *arg1, s32 arg2, CVector3 arg3,
                    ParamsRecAt4 arg6) {
-    s32 *global = &D_80146894;
+    s32 *global = &D_8011FAC0.clockPaused;
     s32 selected;
     f32 scale;
 

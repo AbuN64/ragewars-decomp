@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/SHARED_GAMESLOT.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
@@ -7,7 +8,6 @@
 
 /* Allocates menu state, selects the language-dependent title and enables the appropriate menu item. */
 extern s32 *D_800E5550;
-extern s32 D_80146894;
 extern s32 *Scene_AllocateMemory(s32);
 extern void func_802648C8_de(void); extern void func_802A2360_de(void); extern void func_8040E950_de(s32, s32);
 extern s32 func_8040C474_de(void),func_8042AF28_de(void);
@@ -33,6 +33,6 @@ s32 func_80435B34_de(MenuWidget *arg0) {
     if ((D_801462C8.controllerMode != 0) || (func_8042AF28_de() == 0)) {
         func_8040E950_de((s32)func_8040EC30_de(arg0, MENU_80435D14_62), 1);
     }
-    D_80146894 = 1;
+    D_8011FAC0.clockPaused = 1;
     return 0;
 }

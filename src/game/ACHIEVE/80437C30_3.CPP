@@ -218,7 +218,7 @@ extern void func_8043C278_de(void *);
 s32 func_80438D94_de(void) {
     MarkMenuEventHandled();
     if (func_8043C308_de((Shared_OptionsScreen *)&D_800E5830->rules) != 1) {
-        D_80146894 = 0;
+        D_80145088.status[7] = 0;
         switch (func_80299A08_de()) {
         case MSG_HIDE:
             func_8043C278_de(D_800E5830);

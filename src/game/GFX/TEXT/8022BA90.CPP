@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/OBJECTSTATE90.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -21,7 +22,6 @@
 #include "RENDER_4/8028FD2C_6.H"
 #include "GFX/TEXT/8022BA90_2.H"
 
-extern unsigned int D_80146894;
 
 extern void *func_8028CFA0_de(Shared_World *arg0, s32 arg1, s32 arg2);
 
@@ -53,7 +53,7 @@ int func_8022BAA0_de(void *object) {
 
 /** Report whether the global state word is nonzero. */
 int func_8022BAC0_de(void) {
-    return D_80146894 != 0;
+    return D_8011FAC0.clockPaused != 0;
 }
 
 void Text_LoadActorModel(void *actor) {

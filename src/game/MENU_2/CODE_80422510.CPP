@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "SYSTEM_2/8025E280.H"
 
 #if defined(VERSION_US) || defined(VERSION_US_REV1)
@@ -105,7 +106,6 @@ s32 Menu_CreateOptionsPage(void) {
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 extern Shared_OptionsScreen *D_800E4518;
 extern Shared_MenuReply D_80154020;
-extern s32 D_80146894;
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void func_8040E8D8_de(void *, s32);
 extern void func_8040E950_de(void *, s32);
@@ -216,7 +216,7 @@ s32 Menu_OpenOptionsScreen(void *node) {
     D_800E4518->cursor = 0;
     D_800E4518->selection = -1;
     func_8040E8D8_de(node, 0);
-    D_80146894 = 1;
+    D_8011FAC0.clockPaused = 1;
     D_80154020.ready = 0;
     D_80154020.value = -1;
     func_804221E8_de();

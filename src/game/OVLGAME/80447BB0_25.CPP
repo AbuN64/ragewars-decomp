@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTSTATE96.H"
+#include "COMMON/GAME_SESSION.H"
 #include "OVLGAME/80447BB0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
@@ -329,5 +330,5 @@ void func_8044A020_de(struct ActorCode80447BB0 *actor, s32 character) {
     actor->part->active = 1;
     Ovlgame_ResetPlayerForRound(actor, character, 1);
     Weapons_RequestActorState(&actor->firstEffect, &actor->secondEffect, 2);
-    Render_PlacePlayerAtSpawnPoint(actor, D_80146898, 0, 1);
+    Render_PlacePlayerAtSpawnPoint(actor, D_8011FAC0.selector, 0, 1);
 }

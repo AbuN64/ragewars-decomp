@@ -191,7 +191,7 @@ void func_804402DC_de(MenuOption *arg0, MenuOptionBox *arg1, s32 arg2, MenuOptio
         right = (f32)arg1->left;
         right += width;
         bottom += height;
-        active = &D_80146894;
+        active = &D_80145088.status[7];
         if (*active != 0) {
             if (D_80145088.settings.local == 0) {
                 var_v1 = 0x80;

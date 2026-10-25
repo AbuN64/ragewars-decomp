@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/UNSIGNED_QUOTIENT.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -580,7 +581,6 @@ s32 func_802484B0_de(Shared_PoseActor *actor, void *arg1, s32 model) {
 #include "COMMON/VIEWFLAGS.H"
 #include "gbi.h"
 extern char D_800C3A20_de[];
-extern s32 D_80146894;
 extern Gfx *D_80110634;
 typedef struct SceneModelRef {
     u8 pad0[0x1C];
@@ -650,7 +650,7 @@ void func_80249E28_de(SceneObject *object, struct Racer *camera) {
         return;
     }
     model = Render_GetPackSection(*mem, 0);
-    if (D_80146894 != 0) {
+    if (D_8011FAC0.clockPaused != 0) {
         object->update(object, &object->behaviorFlags);
         func_8026EE20_de(object->transform, (s32)model, &object->bounds);
     }

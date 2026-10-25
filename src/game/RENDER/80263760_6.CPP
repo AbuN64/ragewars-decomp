@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/LONE/D_8010EC90.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
@@ -6,7 +7,6 @@
 #include "TYPES.H"
 
 
-extern s32 D_80146894;
 
 extern void func_80285D30_de(s32 *);
 
@@ -42,7 +42,7 @@ void func_80264104_de(Obj80264124 *arg0) {
         if (arg0->state == 0) {
             goto reset;
         }
-        global = &D_80146894;
+        global = &D_8011FAC0.clockPaused;
         if ((*global != 0) || (D_8011FE88.frozen != 0) || (global[-6] != 13)) {
 reset:
             arg0->amount = 0.0f;

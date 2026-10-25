@@ -182,7 +182,7 @@ void Particle_UpdateSystem(CParticleSystem_t *world) {
             stepped[count++] = node;
         }
     }
-    if (D_80146894 != 0 || D_8011FE88.frozen != 0) {
+    if (D_80145088.status[7] != 0 || D_8011FE88.frozen != 0) {
         return;
     }
     D_800D2988 = savedStep;

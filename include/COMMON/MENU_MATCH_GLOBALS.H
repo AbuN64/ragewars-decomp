@@ -29,5 +29,4 @@ typedef struct MenuMatchGlobals {
     MatchModes modes; /* 0x1818 */
 } MenuMatchGlobals;
 extern MenuMatchGlobals D_80145088;
-#define D_80146894 D_80145088.status[7]
 #endif

@@ -58,7 +58,7 @@ void func_80286080_de(void *arg0) {
         func_80288470_de(state);
         func_8028D61C_de(state);
 
-        if ((state->frozen == 0) && (D_80146894 == 0)) {
+        if ((state->frozen == 0) && (D_80145088.status[7] == 0)) {
             func_802A5680_de(manager);
             func_80286284_de(state);
             func_80290238_de(&state->system11778);

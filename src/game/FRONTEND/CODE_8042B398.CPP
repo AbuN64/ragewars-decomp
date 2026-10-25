@@ -534,7 +534,7 @@ s32 Frontend_OpenResultsScreen(void *root) {
     item->text = D_800E53C0->name;
     D_800E53C0->buttonAddress = (s32)func_8040EC30_de(root, 0x23D + RESULTS_MENU_SHIFT);
     D_800E53C0->dirty = 1;
-    D_80146894 = 1;
+    D_80145088.status[7] = 1;
     D_800E53C0->phase = 0;
     func_802A2394_de();
     return 0;

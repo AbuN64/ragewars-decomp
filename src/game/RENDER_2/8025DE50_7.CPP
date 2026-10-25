@@ -1,4 +1,5 @@
 #include "COMMON/STATERECAT34.H"
+#include "COMMON/GAME_SESSION.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "TYPES.H"
 #include "COMMON/AUDIO_CONTEXT.H"
@@ -7,7 +8,7 @@
 #include "TEXTURE/80256220_16.H"
 
 void func_8025E11C_de(s32 callback) {
-    if (D_801427D0 == 0) {
+    if (D_8011FAC0.transitionBlocked == 0) {
         func_80258F10_de(&D_8010C080, callback);
     }
 }
