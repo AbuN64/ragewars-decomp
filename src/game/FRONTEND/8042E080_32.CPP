@@ -55,7 +55,6 @@ void func_80434250_de(s32 player, s32 direction) {
         D_800E54A4->players[player].displayNames[cursor].code;
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/NAME.H"
 #include "COMMON/PAK_SAVE_TEXT.H"
 #include "MENU/PAK/pak_note_search.H"
@@ -69,16 +68,31 @@ extern u32 func_804057F8_de(void *, u32, u32);
 extern char *func_802A025C_de(char *, char *);
 extern s32 Pak_SaveNote(s32, s32, void *, char *, char *, char *);
 extern void func_804322AC_de(s32);
-/* Replace or create the selected port's four-profile Controller Pak note. */
+/* The save view of the menu block: the four player records staged at 0x2E28, then the profile and
+ * checksum stored behind them, written to the pak as one 0x648-byte note. */
+static __inline__ struct Block_func_804347CC_de *pakRecordSave(void) {
+    return (struct Block_func_804347CC_de *)D_800E54A4;
+}
+/* The note's game code is read through the settings view in the PAL releases. */
+#if defined(VERSION_EU) || defined(VERSION_EU_X)
+#define RECORDS_NOTE_CODE (D_800E25D4[rw_pak_settings()->language])
+#else
+#define RECORDS_NOTE_CODE RW_PAK_GAME_CODE
+#endif
+/* Replace or create the selected port's four-profile Controller Pak note: delete the old note if
+ * there is one, else check that a free note and enough pages exist; then stage the port's records,
+ * profile and CRC and save them. On failure the port's panel goes back to state 2. */
 s32 Frontend_SavePlayerRecords(s32 channel)
 {
     char extension[8];
     char name[16];
     struct { s32 note, fits, freePages, freeNotes; } space;
-    s32 status, requiredPages, i;
+    s32 status, required;
+    struct Record_func_804347CC_de *staged, *data;
+    s32 i;
+    u32 checksum;
     s32 success = 0;
-    status = Pak_FindNoteByName(rw_pak_save_name(), channel, &space.note);
-    if (status == 1) {
+    if (Pak_FindNoteByName(rw_pak_save_name(), channel, &space.note) == 1) {
         success = Pak_DeleteNote(channel, space.note) == 0;
     } else {
         space.fits = 0;
@@ -86,31 +100,34 @@ s32 Frontend_SavePlayerRecords(s32 channel)
         if (status == 0) {
             status = Pak_CountFreeNotes(channel, &space.freeNotes);
             if (status == 0) {
-                requiredPages = Ovlgame_BytesToPakPages(func_80435424_de());
-                if (space.freeNotes != 0 && space.freePages >= requiredPages) space.fits = 1;
+                required = Ovlgame_BytesToPakPages(func_80435424_de());
+                if (space.freeNotes == 0 || space.freePages < required) space.fits = 0;
+                else space.fits = 1;
             }
         }
+        /* Dead store kept from the original: flow deletes it, but it stops jump threading of
+         * the two status tests above into the one below (ROM keeps both branches). */
+        required = 0;
         if (status == 0 && space.fits == 1) success = 1;
     }
     if (success == 1) {
         success = 0;
         if (Ovlgame_FindFreeNoteExtension(channel, extension) == 0) {
-            Resmgr_CopyBytes((*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved, (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].records, 0x640);
-            (*(struct Block_func_804347CC_de * *)&D_800E54A4)->savedProfile = (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].profile;
-            (*(struct Block_func_804347CC_de * *)&D_800E54A4)->checksum = func_804057F8_de((*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved, 0x640, 7);
-            for (i = 15; i >= 0; i--) name[i] = 0;
-            func_802A025C_de(name, rw_pak_save_name());
-            success = Pak_SaveNote(channel, 0x648, (*(struct Block_func_804347CC_de * *)&D_800E54A4)->saved,
-                                       name, extension, rw_pak_save_code()) == 0;
+            staged = pakRecordSave()->saved;
+            Resmgr_CopyBytes(staged, pakRecordSave()->players[channel].records, 0x640);
+            pakRecordSave()->savedProfile = pakRecordSave()->players[channel].profile;
+            checksum = func_804057F8_de(staged, 0x640, 7);
+            pakRecordSave()->checksum = checksum;
+            data = pakRecordSave()->saved;
+            for (i = 0; i < 16; i++) name[i] = 0;
+            func_802A025C_de(name, RW_PAK_RECORD_TITLE);
+            if (Pak_SaveNote(channel, 0x648, data, name, extension, RECORDS_NOTE_CODE) == 0) success = 1;
         }
     }
     if (!success) {
-        (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].back = 2;
-        (*(struct Block_func_804347CC_de * *)&D_800E54A4)->players[channel].state = 2;
+        pakRecordSave()->players[channel].back = 2;
+        pakRecordSave()->players[channel].state = 2;
         func_804322AC_de(channel);
     }
     return success;
 }
-#else
-INCLUDE_ASM("ovl_80400000", Frontend_SavePlayerRecords);
-#endif
