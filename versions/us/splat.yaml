@@ -4062,7 +4062,7 @@ segments:
       - [0xC6270, rodata, data_800C/literals_ScaleDoubleExponent]
       - [0xC6378, rodata, data_800C/literals_FloatModulo]
       - [0xC63A8, rodata, data_800C/literals_func_8029B3C0_de]
-      - [0xC6588, rodata, data_800C/D_8029C288_CB7E8]
+      - [0xC6588, rodata, data_800C/literals_VectorAngle]
       - [0xC65B4, rodata, data_800C/literals_func_8029C4A0_de]
       - [0xC65C0, rodata, data_800C/D_8029C6A8_CB820]
       - [0xC65D4, rodata, data_800C/D_8029C984_CB834]
