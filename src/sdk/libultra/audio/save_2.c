@@ -31,7 +31,7 @@ void func_802B6380_de(void) {
         "addiu      $a0, $a0, %lo(D_800C8DB0_eu_x)\n"
         "lui        $a1, %hi(D_800C8DB4_eu_x)\n"
         "addiu      $a1, $a1, %lo(D_800C8DB4_eu_x)\n"
-        "jal        func_802BAC50_de\n"
+        "jal        Audio_Assert\n"
         "addiu     $a2, $zero, 0x22\n"
         ".Lauto_802B63D4:\n"
         "addu       $a0, $s1, $zero\n"

@@ -166,7 +166,7 @@ ALMicroTime func_802B0554_de(void *node)
             break;
         case 13: /* AL_SEQP_SEQ_EVT */
             if (seqp->base.state == 1)
-                func_802BAC50_de(D_800C7440, D_800C7444, 296);
+                Audio_Assert(D_800C7440, D_800C7444, 296);
             seqp->base.target = seqp->base.nextEvent.msg.spseq.unk0;
             func_802B1E50_de(&seqp->base, 500000.0f);
             if (seqp->base.bank)
@@ -174,14 +174,14 @@ ALMicroTime func_802B0554_de(void *node)
             break;
         case 14: /* AL_SEQP_BANK_EVT */
             if (seqp->base.state != 0)
-                func_802BAC50_de(D_800C7440, D_800C7444, 305);
+                Audio_Assert(D_800C7440, D_800C7444, 305);
             seqp->base.bank = seqp->base.nextEvent.msg.spbank.unk0;
             func_802B18E4_de(&seqp->base, seqp->base.bank);
             break;
         case 4: /* AL_SEQ_END_EVT */
         case 3: /* AL_TEMPO_EVT */
         case 1: /* AL_SEQ_MIDI_EVT */
-            func_802BAC50_de(D_800C7440, D_800C7444, 315);
+            Audio_Assert(D_800C7440, D_800C7444, 315);
             break;
         }
         seqp->base.nextDelta = func_802B003C_de(&seqp->base.evtq, &seqp->base.nextEvent);

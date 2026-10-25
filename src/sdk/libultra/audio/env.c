@@ -6,172 +6,196 @@
 #include "TYPES.H"
 #include "sdk/OSINT/802C0CB0.H"
 #include "AUDIO_3/802BFD40.H"
-
-#ifdef NON_MATCHING
-/* 20/339 aligned edits remain: event-pointer allocation and instruction scheduling. */
-#include "TYPES.H"
 #include "acmd.h"
 #include "sdk/al_globals.h"
+#include "sdk/OBJECTSTATE10_5.H"
+#include "COMMON/ALAUXBUS_S.H"
+#include "AUDIO_3/802B8840.H"
 
-typedef struct EnvelopeVoice { char pad0[0xD8]; s32 offset; } EnvelopeVoice;
-typedef struct EnvelopeEvent {
-    struct EnvelopeEvent *next;
-    s32 delta;
-    s16 type, flag;
-    union {
-        s32 word;
-        EnvelopeVoice *voice;
-        struct { s16 unused, pan; } panChange;
-        struct { s32 pitch; s16 volume; u8 pan, fx; s32 duration; s32 sound; } start;
-        struct { s32 value, duration; } volume;
-    } data;
-} EnvelopeEvent;
-typedef struct EnvelopeFilter {
-    struct EnvelopeFilter *source;
-    void *handler;
-    s32 (*setParam)(void *, s32, s32);
-    s16 inp, outp;
-    s32 type;
-    void *state;
-    s16 pan, volume, cvolL, cvolR, dryamt, wetamt;
-    u16 lratl;
-    s16 lratm, ltgt;
-    u16 rratl;
-    s16 rratm, rtgt;
-    s32 delta, segEnd, first;
-    EnvelopeEvent *ctrlList, *ctrlTail;
-} EnvelopeFilter;
-Acmd *Libultra_PullEnvelope(EnvelopeFilter *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands);
-extern s16 D_800D4210[128];
-extern char D_800CC850[], D_800C7604[];
-extern void _freePVoice(void *, EnvelopeVoice *);
-extern void Audio_FreeParam(void *);
-extern Acmd *func_802B4C7C_de(void *, s16 *, s16 *, s32, s32, Acmd *);
-extern f32 func_802B5288_de(f32, s32, s32, s32);
+/* libultra audio/env.c, built with -fforce-addr (config.toml): the eqpower base stays in a register. */
+extern s16 D_800D4210[128]; /* eqpower */
+extern char D_800CC850[]; /* Resident "EX" assertion expression. */
+extern char D_800C7604[]; /* "audio/env.c" */
+#define eqpower D_800D4210
+#define EQPOWER_LENGTH 128
+#define AL_RESAMPLER_OUT 0
+#define AL_MAX_RSP_SAMPLES 160
 
-Acmd *Libultra_PullEnvelope(EnvelopeFilter *env, s16 *unused, s32 count, s32 sampleOffset, Acmd *commands) {
-    s16 input, output;
-    s16 *equalPower;
-    EnvelopeEvent *startEvent;
-    EnvelopeEvent *changeEvent;
-    EnvelopeEvent *waveEvent;
-    EnvelopeEvent *freeEvent;
-    EnvelopeEvent *event;
-    EnvelopeFilter *parent;
-    EnvelopeFilter *source;
-    s32 nextOffset, elapsed, previous, delta, end;
-    output = 0;
-    input = 0;
-    nextOffset = sampleOffset;
-    while (env->ctrlList) {
-        equalPower = D_800D4210;
-        previous = nextOffset;
-        nextOffset = env->ctrlList->delta;
-        elapsed = nextOffset - previous;
-        if (count < elapsed) break;
-        if (elapsed < 0) func_802BAC50_de(D_800CC850, D_800C7604, 0x67);
-        if (elapsed > 160) func_802BAC50_de(D_800CC850, D_800C7604, 0x68);
-        switch (env->ctrlList->type) {
-        case 13:
-            startEvent = env->ctrlList;
-            parent = env;
-            if (startEvent->flag) env->setParam(env, 8, 0);
-            env->setParam(env, 5, startEvent->data.start.sound);
-            env->setParam(env, 9, 0);
-            env->first = 1;
-            env->delta = 0;
-            env->segEnd = startEvent->data.start.duration;
-            env->volume = (startEvent->data.start.volume * startEvent->data.start.volume) >> 15;
-            env->pan = startEvent->data.start.pan;
-            env->dryamt = equalPower[startEvent->data.start.fx];
-            env->wetamt = equalPower[128 - startEvent->data.start.fx - 1];
-            if (startEvent->data.start.duration != 0) {
-                env->cvolL = 1;
-                env->cvolR = 1;
+/* The SDK's traditional-cpp assert: the expression string is the literal "EX". */
+#define assert_at(EX, line) ((EX) ? ((void)0) : Audio_Assert(D_800CC850, D_800C7604, line))
+
+extern void _freePVoice(ALSynth4C *drvr, PVoice_s *pvoice);
+extern void Audio_FreeParam(void *param);
+Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p);
+
+/* alEnvmixerPull: walk the envelope mixer's control list up to outCount samples, pulling the
+   source for the span before each update, applying it (voice start/stop/free, volume, pan, fx
+   mix, or passing it down the chain), freeing it, then pulling the remainder of the frame. */
+Acmd *Libultra_PullEnvelope(void *filter, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+{
+    Acmd *ptr = p;
+    ALEnvMixer *e = (ALEnvMixer *)filter;
+    s16 inp;
+    s32 lastOffset;
+    s32 thisOffset = sampleOffset;
+    s32 samples;
+    s16 loutp = 0;
+    s32 fVol;
+    ALParam_s *thisParam;
+
+    inp = AL_RESAMPLER_OUT;
+
+    while (e->ctrlList != 0) {
+        lastOffset = thisOffset;
+        thisOffset = e->ctrlList->delta;
+        samples = thisOffset - lastOffset;
+        if (samples > outCount)
+            break;
+
+        assert_at(samples >= 0, 103);
+        assert_at(samples <= AL_MAX_RSP_SAMPLES, 104);
+
+        switch (e->ctrlList->type) {
+        case AL_FILTER_START_VOICE_ALT: {
+            ALStartParamAlt *param = (ALStartParamAlt *)e->ctrlList;
+            ALFilter_s *f = (ALFilter_s *)e;
+            s32 tmp;
+
+            if (param->unity) {
+                (*e->filter.setParam)(&e->filter, AL_FILTER_SET_UNITY_PITCH, 0);
+            }
+            (*e->filter.setParam)(&e->filter, AL_FILTER_SET_WAVETABLE, param->wave);
+            (*e->filter.setParam)(&e->filter, AL_FILTER_START, 0);
+
+            e->first = 1;
+            e->delta = 0;
+            e->segEnd = param->samples;
+
+            tmp = ((s32)param->volume * (s32)param->volume) >> 15;
+            e->volume = (s16)tmp;
+            e->pan = param->pan;
+            e->dryamt = eqpower[param->fxMix];
+            e->wetamt = eqpower[EQPOWER_LENGTH - param->fxMix - 1];
+
+            if (param->samples) {
+                e->cvolL = 1;
+                e->cvolR = 1;
             } else {
-                env->cvolL = (env->volume * equalPower[env->pan]) >> 15;
-                env->cvolR = (env->volume * equalPower[128 - env->pan - 1]) >> 15;
+                /* No ramp: the current volume is the target volume. */
+                e->cvolL = (e->volume * eqpower[e->pan]) >> 15;
+                e->cvolR = (e->volume * eqpower[EQPOWER_LENGTH - e->pan - 1]) >> 15;
             }
-            source = parent->source;
-            if (source) source->setParam(source, 7, startEvent->data.start.pitch);
-            break;
-        case 11:
-        case 12:
-        case 16:
-            commands = func_802B4C7C_de(env, &input, &output, elapsed, sampleOffset, commands);
-            if (env->delta >= env->segEnd) {
-                env->ltgt = (env->volume * equalPower[env->pan]) >> 15;
-                env->rtgt = (env->volume * equalPower[128 - env->pan - 1]) >> 15;
-                env->cvolL = env->ltgt;
-                env->delta = env->segEnd;
-                env->cvolR = env->rtgt;
+
+            if (f->source) {
+                union {
+                    f32 f;
+                    s32 i;
+                } data;
+                data.f = param->pitch;
+                (*f->source->setParam)(f->source, AL_FILTER_SET_PITCH, (void *)data.i);
+            }
+        } break;
+
+        case AL_FILTER_SET_FXAMT:
+        case AL_FILTER_SET_PAN:
+        case AL_FILTER_SET_VOLUME:
+            ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
+
+            if (e->delta >= e->segEnd) {
+                /* Target reached (or segEnd was 0): settle on it. */
+                e->ltgt = (e->volume * eqpower[e->pan]) >> 15;
+                e->rtgt = (e->volume * eqpower[EQPOWER_LENGTH - e->pan - 1]) >> 15;
+                e->delta = e->segEnd; /* prevent overflow */
+                e->cvolL = e->ltgt;
+                e->cvolR = e->rtgt;
             } else {
-                env->cvolL = (s32)func_802B5288_de(env->cvolL, env->delta, env->lratm, env->lratl);
-                env->cvolR = (s32)func_802B5288_de(env->cvolR, env->delta, env->rratm, env->rratl);
+                /* Estimate the current volume along the ramp. */
+                e->cvolL = Audio_GetEnvelopeVolume(e->cvolL, e->delta, e->lratm, e->lratl);
+                e->cvolR = Audio_GetEnvelopeVolume(e->cvolR, e->delta, e->rratm, e->rratl);
             }
-            if (env->cvolL == 0) env->cvolL = 1;
-            if (env->cvolR == 0) env->cvolR = 1;
-            if (env->ctrlList->type == 12) env->pan = env->ctrlList->data.panChange.pan;
-            if (env->ctrlList->type == 11) {
-                env->delta = 0;
-                env->volume = (env->ctrlList->data.volume.value * env->ctrlList->data.volume.value) >> 15;
-                env->segEnd = env->ctrlList->data.volume.duration;
+
+            /* A zero volume would never ramp anywhere. */
+            if (e->cvolL == 0) e->cvolL = 1;
+            if (e->cvolR == 0) e->cvolR = 1;
+
+            if (e->ctrlList->type == AL_FILTER_SET_PAN)
+                e->pan = (s16)e->ctrlList->data.i;
+
+            if (e->ctrlList->type == AL_FILTER_SET_VOLUME) {
+                /* A new segment; volume maps non-linearly to loudness. */
+                e->delta = 0;
+                fVol = (e->ctrlList->data.i);
+                fVol = (fVol * fVol) >> 15;
+                e->volume = (s16)fVol;
+                e->segEnd = e->ctrlList->moredata.i;
             }
-            changeEvent = env->ctrlList;
-            if (changeEvent->type == 16) {
-                env->dryamt = equalPower[changeEvent->data.word];
-                env->wetamt = equalPower[128 - changeEvent->data.word - 1];
+
+            if (e->ctrlList->type == AL_FILTER_SET_FXAMT) {
+                e->dryamt = eqpower[e->ctrlList->data.i];
+                e->wetamt = eqpower[EQPOWER_LENGTH - e->ctrlList->data.i - 1];
             }
-            env->first = 1;
+
+            e->first = 1; /* force a volume update */
             break;
-        case 14:
-            waveEvent = env->ctrlList;
-            if (waveEvent->flag) env->setParam(env, 8, 0);
-            env->setParam(env, 5, waveEvent->data.word);
-            env->setParam(env, 9, 0);
-            break;
-        case 15:
-            commands = func_802B4C7C_de(env, &input, &output, elapsed, sampleOffset, commands);
-            env->setParam(env, 4, 0);
-            break;
-        case 0:
-            freeEvent = env->ctrlList;
-            freeEvent->data.voice->offset = 0;
-            _freePVoice(D_800D4070, freeEvent->data.voice);
-            break;
+
+        case AL_FILTER_START_VOICE: {
+            ALStartParam *p = (ALStartParam *)e->ctrlList;
+
+            if (p->unity) {
+                (*e->filter.setParam)(&e->filter, AL_FILTER_SET_UNITY_PITCH, 0);
+            }
+            (*e->filter.setParam)(&e->filter, AL_FILTER_SET_WAVETABLE, p->wave);
+            (*e->filter.setParam)(&e->filter, AL_FILTER_START, 0);
+        } break;
+
+        case AL_FILTER_STOP_VOICE: {
+            ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
+            (*e->filter.setParam)(&e->filter, AL_FILTER_RESET, 0);
+        } break;
+
+        case AL_FILTER_FREE_VOICE: {
+            ALSynth4C *drvr = &D_800D4070->drvr;
+            ALFreeParam *param = (ALFreeParam *)e->ctrlList;
+            param->pvoice->offset = 0;
+            _freePVoice(drvr, param->pvoice);
+        } break;
+
         default:
-            commands = func_802B4C7C_de(env, &input, &output, elapsed, sampleOffset, commands);
-            env->setParam(env, env->ctrlList->type, env->ctrlList->data.word);
+            /* Pull up to the update, then pass it down the chain. */
+            ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, samples, sampleOffset, ptr);
+            (*e->filter.setParam)(&e->filter, e->ctrlList->type, (void *)e->ctrlList->data.i);
             break;
         }
-        count -= elapsed;
-        event = env->ctrlList;
-        output += elapsed << 1;
-        env->ctrlList = event->next;
-        if (!env->ctrlList) env->ctrlTail = 0;
-        Audio_FreeParam(event);
+        loutp += (samples << 1);
+        outCount -= samples;
+
+        /* Return the update to the free list. */
+        thisParam = e->ctrlList;
+        e->ctrlList = e->ctrlList->next;
+        if (e->ctrlList == 0)
+            e->ctrlTail = 0;
+
+        Audio_FreeParam(thisParam);
     }
-    commands = func_802B4C7C_de(env, &input, &output, count, sampleOffset, commands);
-    delta = env->delta;
-    end = env->segEnd;
-    if (end < delta) env->delta = end;
-    return commands;
+
+    ptr = Audio_PullEnvelopeSubFrame(e, &inp, &loutp, outCount, sampleOffset, ptr);
+
+    /* Prevent overflow in e->delta. */
+    if (e->delta > e->segEnd)
+        e->delta = e->segEnd;
+
+    return ptr;
 }
-#else
-INCLUDE_ASM("span_1000", Libultra_PullEnvelope);
-#endif
+
 
 /* _pullSubFrame, drafted from ultralib src/audio/env.c: when the envelope mixer is playing, pull
    its source and append the buffer, volume and envelope-mixer commands for one subframe,
-   recomputing the ramp targets and rates on the first pull after a change. */
-extern s16 D_800D4210[128]; /* eqpower */
-extern char D_800CC850[]; /* Resident "EX" assertion expression. */
 extern char D_800C7604[]; /* "audio/env.c" */
 
  /* __assert */
   /* _getRate */
 
-Acmd *func_802B4C7C_de(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
+Acmd *Audio_PullEnvelopeSubFrame(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 sampleOffset, Acmd *p)
 {
     Acmd *ptr = p;
     struct ALEnvMixer_s *e = (struct ALEnvMixer_s *)filter;
@@ -180,7 +204,7 @@ Acmd *func_802B4C7C_de(void *filter, s16 *inp, s16 *outp, s32 outCount, s32 samp
     if (e->motion != 1 || !outCount)
         return ptr;
 
-    ((source) ? ((void)0) : func_802BAC50_de(D_800CC850, D_800C7604, 366));
+    ((source) ? ((void)0) : Audio_Assert(D_800CC850, D_800C7604, 366));
 
     ptr = (*source->handler)(source, inp, outCount, sampleOffset, p);
 
@@ -362,7 +386,7 @@ s32 func_802B51B8_de(void *filter, s32 paramID, void *param)
     return 0;
 }
 
-f32 func_802B5288_de(f32 arg0, s32 arg1, s32 arg2, s32 arg3)
+f32 Audio_GetEnvelopeVolume(f32 arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     f32 base;
     f32 result;

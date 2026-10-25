@@ -36,16 +36,61 @@ struct ALFilter_s {
     s32 type;
 };
 
+/* Filter parameter / control-update types (libultra AL_FILTER_*). */
+enum {
+    AL_FILTER_FREE_VOICE,
+    AL_FILTER_SET_SOURCE,
+    AL_FILTER_ADD_SOURCE,
+    AL_FILTER_ADD_UPDATE,
+    AL_FILTER_RESET,
+    AL_FILTER_SET_WAVETABLE,
+    AL_FILTER_SET_DRAM,
+    AL_FILTER_SET_PITCH,
+    AL_FILTER_SET_UNITY_PITCH,
+    AL_FILTER_START,
+    AL_FILTER_SET_STATE,
+    AL_FILTER_SET_VOLUME,
+    AL_FILTER_SET_PAN,
+    AL_FILTER_START_VOICE_ALT,
+    AL_FILTER_START_VOICE,
+    AL_FILTER_STOP_VOICE,
+    AL_FILTER_SET_FXAMT
+};
 struct ALParam_s;
 struct ALParam_s {
     struct ALParam_s *next;
     s32 delta;
-    s32 type;
+    s16 type;
     union {
         s32 i;
         f32 f;
         void *p;
     } data;
+    union {
+        s32 i;
+        f32 f;
+        void *p;
+    } moredata;
+};
+/* AL_FILTER_START_VOICE update: optional unity pitch, then the wavetable to start. */
+struct ALStartParam;
+typedef struct ALStartParam ALStartParam;
+struct ALStartParam {
+    struct ALParam_s *next;
+    s32 delta;
+    s16 type;
+    s16 unity;
+    void *wave;
+};
+/* AL_FILTER_FREE_VOICE update: the physical voice to return to the synth driver. */
+struct PVoice_s;
+struct ALFreeParam;
+typedef struct ALFreeParam ALFreeParam;
+struct ALFreeParam {
+    struct ALParam_s *next;
+    s32 delta;
+    s16 type;
+    struct PVoice_s *pvoice;
 };
 
 struct ALEnvMixer;
@@ -138,7 +183,7 @@ struct func_802B95DC_S1 {
 struct func_802BA4B0_S1;
 typedef struct func_802BA4B0_S1 func_802BA4B0_S1;
 
-extern f32 func_802B5288_de(f32 arg0, s32 arg1, s32 arg2, s32 arg3);
+extern f32 Audio_GetEnvelopeVolume(f32 arg0, s32 arg1, s32 arg2, s32 arg3);
 
 extern void func_802B4A08_eu_x(void);
 #endif

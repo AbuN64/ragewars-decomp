@@ -11,13 +11,13 @@
 
 s32 func_802B9FD0_de(s32 direction, s32 deviceAddress, s32 dramAddress, s32 size) {
     if (deviceAddress & 7) {
-        func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3A);
+        Audio_Assert(&D_800C79B0_de, &D_800C79B4_de, 0x3A);
     }
     if (dramAddress & 7) {
-        func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3B);
+        Audio_Assert(&D_800C79B0_de, &D_800C79B4_de, 0x3B);
     }
     if (size & 7) {
-        func_802BAC50_de(&D_800C79B0_de, &D_800C79B4_de, 0x3C);
+        Audio_Assert(&D_800C79B0_de, &D_800C79B4_de, 0x3C);
     }
     if (__osSpDeviceBusy() != 0) {
         return -1;

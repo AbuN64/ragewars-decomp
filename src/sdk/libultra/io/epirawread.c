@@ -14,7 +14,7 @@ s32 func_802B9590_de(OSPiHandle_s *arg0, u32 arg1, u32 *arg2) {
     s32 index;
 
     if (arg2 == 0) {
-        func_802BAC50_de(&D_800C7950_de, &D_800C7954_de, 0x2B);
+        Audio_Assert(&D_800C7950_de, &D_800C7954_de, 0x2B);
     }
     while (IO_READ_WORD(PI_STATUS_REG) & 3) {
     }

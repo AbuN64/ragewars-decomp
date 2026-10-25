@@ -131,7 +131,7 @@ send_value:
             }
             break;
         sw_message_default:
-            func_802BAC50_de(D_800C7350_de, D_800C7354_de, 0x190);
+            Audio_Assert(D_800C7350_de, D_800C7354_de, 0x190);
             break;
         
     } while (0);
@@ -345,7 +345,7 @@ void func_802AF2E0_de(void *object, ALEvent *message)
         break;
     case 0xC0: /* AL_MIDI_ProgramChange */
         if (seqp->bank == 0)
-            func_802BAC50_de(D_800C7350_de, D_800C7354_de, 711);
+            Audio_Assert(D_800C7350_de, D_800C7354_de, 711);
         if (key < seqp->bank->instCount) {
             ALInstrument *inst = seqp->bank->instArray[key];
             __setInstChanState(seqp, inst, chan);

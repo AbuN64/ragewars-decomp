@@ -12,7 +12,7 @@ s32 func_802B9B20_de(s32 arg0, s32 *arg1) {
     u32 status;
 
     if (arg1 == 0) {
-        func_802BAC50_de(&D_800C7970_de, &D_800C7974_de, 0x3D);
+        Audio_Assert(&D_800C7970_de, &D_800C7974_de, 0x3D);
     }
     status = *(volatile u32 *)0xA4600010;
     while (status & 3) {
