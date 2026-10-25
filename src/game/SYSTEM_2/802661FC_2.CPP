@@ -41,7 +41,7 @@ extern f32 Particle_GetActorHeight(Actor_func_802676EC_de *);
 
 extern f32 func_8024D398_de(Actor_func_802676EC_de *);
 
-extern f32 func_802726F8_de(CVector3 *, CVector3 *);
+extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 
 /* Spawns a hit effect when the target has a rider: turns the negated hit direction into the victim's frame through func_8022B09C_de, makes it relative to the victim rider's centre and converts it to a rotation, resolves the hit position on the attacker through func_8024E79C_de, spawns effect 0xE9 there raised by D_800C9538 (size 3 for kind 5, otherwise 1), and starts effect 3 on the victim's emitter. */
 
@@ -142,7 +142,7 @@ have:
                 body.y = position.y;
             }
             reach = radius + func_8024D398_de(self);
-            distance = func_802726F8_de(&position, &body);
+            distance = Particle_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
             }

@@ -61,7 +61,7 @@ extern void Scene_UnlockResource(s32, s32);
 
 
 
-void *func_8028D244_de(void *a, s32 b, s32 c) {
+void *Engine_GetPlatformRoutePoint(void *a, s32 b, s32 c) {
     void *r1;
     ResidentDataChunk *r2;
     s32 field;

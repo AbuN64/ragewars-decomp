@@ -21,14 +21,14 @@
 
 
 
-extern Clip *func_8028D218_de(char *, s32);
+extern Clip *Engine_GetPlatformRoute(char *, s32);
 
 void func_802192C0_de(Cursor *cursor) {
     Clip *clip;
     s32 frames;
     s32 state;
 
-    clip = func_8028D218_de(&D_8011FE88, cursor->clip);
+    clip = Engine_GetPlatformRoute(&D_8011FE88, cursor->clip);
     frames = clip->frames;
     state = cursor->state;
     cursor->previous = cursor->frame;
@@ -79,24 +79,24 @@ void func_802193C8_de(Struct802193C8 *arg0, s8 arg1) {
     arg0->field4 = 0;
 }
 
-extern void *func_8028D244_de(char *a, unsigned char b, short c);
+extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 
 
 
 void *func_80219408_de(Cursor *cursor) {
-    return func_8028D244_de(&D_8011FE88, cursor->clip, cursor->frame);
+    return Engine_GetPlatformRoutePoint(&D_8011FE88, cursor->clip, cursor->frame);
 }
 
-extern void *func_8028D244_de(char *a, unsigned char b, short c);
+extern void *Engine_GetPlatformRoutePoint(char *a, unsigned char b, short c);
 
 
 
 
 
 void func_80219434_de(Cursor *cursor) {
-    func_8028D244_de(&D_8011FE88, cursor->clip, cursor->previous);
+    Engine_GetPlatformRoutePoint(&D_8011FE88, cursor->clip, cursor->previous);
 }
 
 /** Initialize the compact state record to its default values. */

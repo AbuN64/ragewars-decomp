@@ -224,7 +224,7 @@ extern void func_80271FC8_de(CVector3 *, f32, CVector3 *, CVector3 *);
 extern f32 func_8024BEDC_de(void *);
 extern f32 Particle_GetActorHeight(void *);
 extern s32 func_8024B06C_de(void *, CVector3, Shield *);
-extern f32 func_802726F8_de(CVector3 *, CVector3 *);
+extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 extern f32 func_802672D0_de(u8 *);
 extern f32 func_802B72B0_de(f32);
 extern void func_80216488_de(CDamageInfo *, void *, s32, f32, s32, Shield *);
@@ -362,7 +362,7 @@ have:
                 body.y = position.y;
             }
             reach = radius + func_8024D398_de(self);
-            distance = func_802726F8_de(&position, &body);
+            distance = Particle_GetPointDistance(&position, &body);
             if (reach < distance) {
                 return 0.0f;
             }

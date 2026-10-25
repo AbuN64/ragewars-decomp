@@ -17,7 +17,7 @@ extern void func_8022B144_de(void *, f32 *);
 
 extern void World_ResetPlayerState(s32 *state);
 
-f32 func_802726F8_de(f32 *, f32 *);
+f32 Particle_GetPointDistance(f32 *, f32 *);
 
 extern void *Nav_GetGraphPoint(void *, s32);
 
@@ -157,7 +157,7 @@ CVector3 *func_8020993C_de(AiController *controller) {
 }
 
 f32 Nav_DistanceToNode(AiController *controller, s32 arg1) {
-    return func_802726F8_de(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, arg1));
+    return Particle_GetPointDistance(&controller->player->pos.x, Nav_GetGraphPoint(&D_8013B364, arg1));
 }
 
 /** Reset three state words and set the final state to one. */

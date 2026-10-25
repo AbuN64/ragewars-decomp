@@ -17,7 +17,7 @@ extern f32 D_800C1D34_de;
 
 /* Find the nearest world object matching each active target ID, clearing its active flag when no object is close enough. */
 
-f32 func_802726F8_de(void *arg0, void *arg1);
+f32 Particle_GetPointDistance(void *arg0, void *arg1);
 
 s32 func_8028B25C_de(void *arg0, s16 arg1);
 
@@ -80,7 +80,7 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
               compare:
               if (var_v0 == compare_id)
               {
-                temp_f0 = func_802726F8_de(temp_s1, &temp_s0->unk8);
+                temp_f0 = Particle_GetPointDistance(temp_s1, &temp_s0->unk8);
                 if ((temp_f0 < var_f20) || (var_f20 == var_f21))
                 {
                   if (temp_s1)
@@ -125,9 +125,9 @@ void func_8020AA40_de(Shared_Arg0 *arg0)
 #include "COMMON/LISTHEADER.H"
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/WORLD.H"
-extern PlatformRoute *func_8028D218_de(void *, s32);
-extern CVector3 *func_8028D244_de(void *, s32, s32);
-extern f32 func_802726F8_de(void *, void *);
+extern PlatformRoute *Engine_GetPlatformRoute(void *, s32);
+extern CVector3 *Engine_GetPlatformRoutePoint(void *, s32, s32);
+extern f32 Particle_GetPointDistance(void *, void *);
 /* Give every platform-flagged (0x200) search node the nearest moving platform (object 0x642) and the
  * nearest point on it: a route platform (mode 4) offers each of its route points, any other platform
  * its base and its top (base + height, pushed out by radius along heading when radial). A node with
@@ -168,11 +168,11 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                 motion = &actor->motion;
                 definition = &actor->resource->motion;
                 if (motion->mode == 4) {
-                    route = func_8028D218_de(&D_8011FE88, motion->route);
+                    route = Engine_GetPlatformRoute(&D_8011FE88, motion->route);
                     if (route != 0) {
                         for (j = 0; j < route->count; j++) {
-                            position = func_8028D244_de(&D_8011FE88, motion->route, j);
-                            distance = func_802726F8_de(point, position);
+                            position = Engine_GetPlatformRoutePoint(&D_8011FE88, motion->route, j);
+                            distance = Particle_GetPointDistance(point, position);
                             if (distance < best || best == -1.0f) {
                                 chosen = platforms[i];
                                 best = distance;
@@ -188,13 +188,13 @@ void Nav_AssignPlatformEndpoints(CNavData *graph) {
                         end.x += definition->radius * func_802B7130_de(definition->heading);
                         end.z += definition->radius * func_802B6560_de(definition->heading);
                     }
-                    distance = func_802726F8_de(point, &start);
+                    distance = Particle_GetPointDistance(point, &start);
                     if (distance < best || best == -1.0f) {
                         chosen = platforms[i];
                         best = distance;
                         chosenPosition = start;
                     }
-                    distance = func_802726F8_de(point, &end);
+                    distance = Particle_GetPointDistance(point, &end);
                     if (distance < best || best == -1.0f) {
                         chosen = platforms[i];
                         best = distance;

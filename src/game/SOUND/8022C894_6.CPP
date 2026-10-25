@@ -27,7 +27,7 @@ extern f32 Particle_GetActorHeight(Instance8020CD74 *);
 
 extern s32 func_80243A90_de(Instance8020CD74 *, CVector3, CollisionInfo *);
 
-extern f32 func_802726F8_de(f32 *a, f32 *b);
+extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
 
 void func_8022E260_de(void *arg0, s32 arg1, s32 arg2) {
     func_8021C45C_de((((struct ActorRecAt1D8V1 *) ((s8 *) arg0))->link), arg0, arg1, arg2);
@@ -156,7 +156,7 @@ f32 func_8022E588_de(void *arg0, f32 *arg1) {
     if (var_s0 != 0) {
         do {
             if (var_s0->unk_0x05DC != 0) {
-                result += func_802726F8_de(arg1, &var_s0->posX);
+                result += Particle_GetPointDistance(arg1, &var_s0->posX);
             }
             var_s0 = (Actor_func_8022D290_de *)var_s0->unk_0x16E0;
         } while (var_s0 != 0);

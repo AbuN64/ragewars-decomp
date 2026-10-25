@@ -5555,7 +5555,7 @@ segments:
       - [0xD3574, data, data_800C/D_blob_phase2_1134fedb73172490582c]
       - [0xD357B, data, data_800C/D_blob_07e11a21ce62c6e71031]
       - [0xD357C, data, data_800C/D_blob_phase2_a152ea6fb8cb1e82503c]
-      - [0xD3588, rodata, data_800C/literals_func_8028D244_de]
+      - [0xD3588, rodata, data_800C/literals_Engine_GetPlatformRoutePoint]
       - [0xD358C, data, data_800C/D_d1_96ea828e9bf4fd7d]
       - [0xD3598, data, data_800C/D_blob_401a03753195279bfba1]
       - [0xD359C, data, data_800C/D_blob_phase2_6d7b285986a0b2aeb81a]

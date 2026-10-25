@@ -111,7 +111,7 @@ void func_80293590_de(void *gameSession) {
 
 #ifdef NON_MATCHING
 extern f32 D_800C5480_de, D_800C5484_de, D_800C5488_de, D_800C5490_de;
-extern f32 D_800C548C, literals_func_8028D244_de;
+extern f32 D_800C548C, literals_Engine_GetPlatformRoutePoint;
 typedef struct FadeState {
     char pad0[0x26DB4];
     s32 previous;  /* 0x26DB4 */
@@ -141,7 +141,7 @@ void Render_UpdateFadeTransition(FadeState *state) {
     case 2:
         timer = state->timer;
         if (timer > 0.0f) {
-            next = timer - step * literals_func_8028D244_de;
+            next = timer - step * literals_Engine_GetPlatformRoutePoint;
             state->timer = next;
             if (next < 0.0f) {
                 state->timer = 0.0f;
@@ -159,10 +159,10 @@ void Render_UpdateFadeTransition(FadeState *state) {
         break;
     case 1:
         timer = state->timer;
-        if (literals_func_8028D244_de < D_800C5490_de) {
+        if (literals_Engine_GetPlatformRoutePoint < D_800C5490_de) {
             next = timer + step * D_800C5490_de;
         } else {
-            next = timer + step * literals_func_8028D244_de;
+            next = timer + step * literals_Engine_GetPlatformRoutePoint;
         }
         state->timer = next;
         limit = *(f32 *)&D_800C5494;

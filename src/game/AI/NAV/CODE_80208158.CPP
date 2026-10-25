@@ -108,7 +108,7 @@ void func_80208158_de(Brain *brain) {
 }
 
 extern CNavData D_8013B364;
-float func_802726F8_de(void *, void *);
+float Particle_GetPointDistance(void *, void *);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
@@ -161,7 +161,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
         if (controller->queue[0] != -1) {
                 point = Nav_GetGraphPoint(graph, controller->queue[0]);
                 pos = &controller->player->pos;
-                distance = func_802726F8_de(pos, point);
+                distance = Particle_GetPointDistance(pos, point);
                 controller->unk304 = (navigation_attributes(point) & 0x300000) != 0;
                 if (controller->queue[0] == controller->current) {
                     link = Nav_FindLinkIndex(graph, controller->previous, controller->queue[0]);
@@ -174,7 +174,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         controller->unk30C = 1;
                     }
                     if (portal->kind == 8) {
-                        func_802726F8_de(pos, Nav_GetGraphPoint(graph, controller->current));
+                        Particle_GetPointDistance(pos, Nav_GetGraphPoint(graph, controller->current));
                         goal = Nav_GetGraphPoint(graph, controller->queue[0]);
                         controller->unk308 = 1;
                         if (link != controller->unk32C) {
@@ -235,7 +235,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                     } else if (portal->kind == 5) {
                         if (controller->unk314 == 0) {
                             entry = Nav_GetGraphPoint(graph, controller->current);
-                            if (!(func_802726F8_de(pos, entry) < D_800C1BC4_de)) {
+                            if (!(Particle_GetPointDistance(pos, entry) < D_800C1BC4_de)) {
                                 controller->destination = entry->position;
                                 return;
                             }
@@ -243,7 +243,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                         if (controller->unk314 == 1) {
                             node = Nav_FindSearchNode(graph, controller->current);
-                            if (func_802726F8_de(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
+                            if (Particle_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
                                 controller->destination = node->platform->pos;
                                 player->actionFlags |= 0x10;
                                 controller->unk314 = 2;
@@ -278,7 +278,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             }
                             point = Nav_GetGraphPoint(graph, controller->queue[0]);
                             node = Nav_FindSearchNode(graph, controller->queue[0]);
-                            if (func_802726F8_de(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
+                            if (Particle_GetPointDistance(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
                                 controller->destination = point->position;
                                 player->actionFlags |= 0x10;
                             } else {
@@ -329,7 +329,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
 extern CNavData D_8013B364;
-float func_802726F8_de(void *, void *);
+float Particle_GetPointDistance(void *, void *);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
@@ -455,7 +455,7 @@ INCLUDE_ASM("span_1000", Nav_UpdatePlayerSteering);
 #include "COMMON/OBJECTLINKS14.H"
 #include "COMMON/REC.H"
 extern CNavData D_8013B364;
-float func_802726F8_de(void *, void *);
+float Particle_GetPointDistance(void *, void *);
 void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);

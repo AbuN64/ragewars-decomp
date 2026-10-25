@@ -339,7 +339,7 @@ s32 Nav_SearchPortalRoute(CNavData *graph, s32 previousNode, s32 currentNode, u8
 
 extern f32 D_800C1D78_de;
 extern const f32 D_800C1D7C_de;
-extern f32 func_802726F8_de(f32 *, f32 *);
+extern f32 Particle_GetPointDistance(f32 *, f32 *);
 
 f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
 {
@@ -372,7 +372,7 @@ f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
             continue;
         }
         goalPoints = graph->points;
-        distance = func_802726F8_de(&origin->position.x, navigationRecord(goalPoints, goal));
+        distance = Particle_GetPointDistance(&origin->position.x, navigationRecord(goalPoints, goal));
         if ((distance < best) || (best == empty))
         {
             best = distance;
@@ -442,7 +442,7 @@ f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
                         continue;
                     }
                     exitGoalPoints = graph->points;
-                    exitDistance = func_802726F8_de(&exitPoint->position.x, navigationRecord(exitGoalPoints, exitGoal));
+                    exitDistance = Particle_GetPointDistance(&exitPoint->position.x, navigationRecord(exitGoalPoints, exitGoal));
                     if ((exitDistance < best) || (best == D_800C1D7C_de))
                     {
                         best = exitDistance;
@@ -459,7 +459,7 @@ f32 func_8020C2E8_de(CNavData *graph, NavigationSearchNode *node)
 extern const f32 D_800C1D80_de;
 extern f32 D_800C1D84_de, D_800C1D88_de;
 extern f32 func_8020C2E8_de(CNavData *, NavigationSearchNode *);
-extern f32 func_802726F8_de(f32 *, f32 *);
+extern f32 Particle_GetPointDistance(f32 *, f32 *);
 
 static inline s32 navHasOpenNode(CNavData *graph, s32 status) {
     NavigationSearchNode *node = graph->nodes;
@@ -560,7 +560,7 @@ void Nav_SearchPath(CNavData *graph, NavigationSearchNode *start) {
             if (edgeKind == 9) {
                 distance = 0.0f;
             } else {
-                distance = func_802726F8_de(&destination->position.x, &origin->position.x);
+                distance = Particle_GetPointDistance(&destination->position.x, &origin->position.x);
             }
             edgeCost = distance + next->extra;
             if (navigation_point_flags(destination) & 0x400) {

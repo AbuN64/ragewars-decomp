@@ -123,7 +123,7 @@ typedef struct PakModelContext {
 } PakModelContext;
 extern Gfx *D_80110634;
 extern s32 D_800D297C, D_800E28D0, D_800E1E20, D_800CD730;
-extern f32 literals_func_8028D244_de;
+extern f32 literals_Engine_GetPlatformRoutePoint;
 extern s32 D_800CE430[];
 extern u8 D_00443128[], D_00443104[];
 extern void Resmgr_FillMemory(void *, s32, s32);
@@ -234,7 +234,7 @@ void Pak_DrawMenuModel(PakModelEntry *entry, PakMenuCursor *cursor, void *unused
     draw->position0 = placed;
     draw->referencePosition = placed;
     func_80246E44_de(draw);
-    draw->yaw = draw->yaw + def->rotationSpeed * literals_func_8028D244_de;
+    draw->yaw = draw->yaw + def->rotationSpeed * literals_Engine_GetPlatformRoutePoint;
     draw->position0 = placed;
     draw->referencePosition = placed;
     Render_BeginModelBatch();

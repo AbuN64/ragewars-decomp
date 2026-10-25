@@ -29,7 +29,7 @@ extern void func_80272E3C_de(Matrix *, f32, f32, f32);
 extern void func_80273198_de(Matrix *, CVector3 *);
 extern void func_80273448_de(Matrix *, CVector3);
 extern void func_8027347C_de(Matrix *, f32, f32, f32);
-extern f32 func_802726F8_de(CVector3 *, CVector3 *);
+extern f32 Particle_GetPointDistance(CVector3 *, CVector3 *);
 extern void func_8027027C_de(Matrix *, Matrix *);
 extern CQuatern func_80271818_de(CVector3 *);
 extern void MatrixFromQuaternion(CQuatern *, Matrix *);
@@ -69,7 +69,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
     }
     func_80273448_de(&matrix, eye);
     func_802733B4_de(&matrix, 0.0f, 0.0f, D_800C9F70_de);
-    func_8027347C_de(&matrix, 0.05f, 1.0f, D_800C9F70_de - func_802726F8_de(&eye, &to));
+    func_8027347C_de(&matrix, 0.05f, 1.0f, D_800C9F70_de - Particle_GetPointDistance(&eye, &to));
     func_8027027C_de(&matrix, &player->views1480.view1480_1.beams[D_800D297C]);
 
     aim = player->views1464.view1464_1.aim;
@@ -85,7 +85,7 @@ void func_8021D408_de(SharedPlayer_func_8021D408_de *player, CVector3 *target, C
     func_80273198_de(&matrix, &direction);
     func_80273448_de(&matrix, player->views1C.view260_26.muzzle);
     scale = 1.0f;
-    func_8027347C_de(&matrix, scale, scale, -func_802726F8_de(&origin, &player->views1464.view1464_1.aim));
+    func_8027347C_de(&matrix, scale, scale, -Particle_GetPointDistance(&origin, &player->views1464.view1464_1.aim));
     func_8027027C_de(&matrix, &player->views1500.view1500_1.lasers[D_800D297C]);
 
     if (normal != 0) {

@@ -142,7 +142,7 @@ typedef struct SearchOwner {
 } SearchOwner;
 
 extern f32 D_800C52FC_de;
-extern f32 func_802726F8_de(void *a, void *b);
+extern f32 Particle_GetPointDistance(void *a, void *b);
 
 /* NON_MATCHING: 80/80 words; only the tail differs (the target jumps over the return-0 block to load results[best]). */
 s32 func_8044D3E8_de(SearchOwner *owner, void *position, s32 type, SearchPoint *out) {
@@ -165,7 +165,7 @@ s32 func_8044D3E8_de(SearchOwner *owner, void *position, s32 type, SearchPoint *
     best = 0;
     for (i = 0; i < count; i++) {
         if (points[i].type == type) {
-            distance = func_802726F8_de(&points[i], position);
+            distance = Particle_GetPointDistance(&points[i], position);
             if (distance < minimum) {
                 minimum = distance;
                 best = i;

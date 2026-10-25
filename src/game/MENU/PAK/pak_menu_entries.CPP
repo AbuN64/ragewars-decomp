@@ -57,7 +57,7 @@ void func_804410AC_de(struct MenuRecAt10 *menu, u8 dir) {
 }
 
 /* Update entry callbacks, animate opening/closing, and handle the selected entry. */
-extern f32 literals_func_8028D244_de;
+extern f32 literals_Engine_GetPlatformRoutePoint;
 extern const f32 g_pakMenuAnimationLimits[4];
 extern f32 D_800DE4A8, D_800DE4AC, D_800DE4B0_de;
 typedef struct PakMenu PakMenu;
@@ -124,33 +124,33 @@ s32 Pak_UpdateMenuEntries(PakMenu *menu, void *context) {
         entry++;
     }
     entry = menu->entries + menu->selected;
-    menu->fade += literals_func_8028D244_de;
+    menu->fade += literals_Engine_GetPlatformRoutePoint;
     selectionFlags = entry->flags & 0x400000;
     func_80442B5C_de(menu);
     switch (menu->state) {
     case 0:
-        menu->openA += literals_func_8028D244_de;
+        menu->openA += literals_Engine_GetPlatformRoutePoint;
         if (menu->openA >= g_pakMenuAnimationLimits[0]) {
             menu->openA = g_pakMenuAnimationLimits[0];
             menu->state = 1;
         }
         break;
     case 1:
-        menu->openB += literals_func_8028D244_de * D_800DE4A8;
+        menu->openB += literals_Engine_GetPlatformRoutePoint * D_800DE4A8;
         if (menu->openB >= D_800DE4AC) {
             menu->openB = D_800DE4AC;
             menu->state = 2;
         }
         break;
     case 3:
-        menu->openB -= literals_func_8028D244_de * D_800DE4B0_de;
+        menu->openB -= literals_Engine_GetPlatformRoutePoint * D_800DE4B0_de;
         if (menu->openB <= 0.0f) {
             menu->openB = 0.0f;
             menu->state = 4;
         }
         break;
     case 4:
-        menu->openA -= literals_func_8028D244_de;
+        menu->openA -= literals_Engine_GetPlatformRoutePoint;
         if (menu->openA <= 0.0f) {
             menu->openA = 0.0f;
             return 1;

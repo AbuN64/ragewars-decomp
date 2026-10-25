@@ -105,7 +105,7 @@ f32 func_802726BC_de(f32 *a, f32 *b) {
     return (dx * dx) + (dy * dy) + (dz * dz);
 }
 
-f32 func_802726F8_de(f32 *a, f32 *b) {
+f32 Particle_GetPointDistance(f32 *a, f32 *b) {
     f32 dx = a[0] - b[0];
     f32 dy = a[1] - b[1];
     f32 dz = a[2] - b[2];

@@ -78,7 +78,7 @@ extern void **D_80103FCC;
 
 extern void Weapons_UpdateViewAngles(void *, void *, void *);
 extern Shared_Quad Weapons_ComputeAimRotation(void *, void **, Shared_Quad *);
-extern f32 func_802726F8_de(f32 *, f32 *);
+extern f32 Particle_GetPointDistance(f32 *, f32 *);
 extern s32 func_802444A4_de(void *, CVector3, CVector3, void *);
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
@@ -107,7 +107,7 @@ void func_80226548_de(void *arg0, void *body) {
         sp20 = Weapons_ComputeAimRotation(arg0, &sp50, &sp30);
         if (sp50 != 0) {
             position = &((Shared_ActorView *)arg0)->position.vector.x;
-            if (!(D_800C2B48_de[1] < func_802726F8_de(position, &((Shared_ActorView *)sp50)->position.vector.x))) {
+            if (!(D_800C2B48_de[1] < Particle_GetPointDistance(position, &((Shared_ActorView *)sp50)->position.vector.x))) {
                 if (func_802444A4_de(arg0, ((Shared_ActorView *)arg0)->position.vector,
                                      ((Shared_ActorView *)sp50)->position.vector,
                                      &D_80103FD0) == 0 ||

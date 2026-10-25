@@ -30,7 +30,7 @@ void func_80212E10_de(void) {
         "addiu     $v0, $zero, -0x2\n"
         "sw         $zero, 0x224($s1)\n"
         "lw         $a1, 0x224($s1)\n"
-        "jal        func_8028D218_de\n"
+        "jal        Engine_GetPlatformRoute\n"
         "sw        $zero, 0x228($s1)\n"
         "j          .Lauto_80212E80\n"
         "addiu     $v0, $zero, -0x1\n"
@@ -52,7 +52,7 @@ void func_80212E10_de(void) {
         "jal        Nav_GetGraphPoint\n"
         "addu      $s0, $v0, $zero\n"
         "addu       $a0, $s0, $zero\n"
-        "jal        func_802726F8_de\n"
+        "jal        Particle_GetPointDistance\n"
         "addu      $a1, $v0, $zero\n"
         "lui        $at, %hi(D_800C23B0_eu_x)\n"
         "lwc1       $f1, %lo(D_800C23B0_eu_x)($at)\n"
@@ -65,7 +65,7 @@ void func_80212E10_de(void) {
         "addiu     $v0, $zero, -0x1\n"
         "lui        $a0, %hi(D_8011FE88)\n"
         "addiu      $a0, $a0, %lo(D_8011FE88)\n"
-        "jal        func_8028D218_de\n"
+        "jal        Engine_GetPlatformRoute\n"
         "nop\n"
         "lw         $v1, 0x228($s1)\n"
         "addiu      $v1, $v1, 0x1\n"
@@ -107,7 +107,7 @@ void func_80212E10_de(void) {
         "lw         $a2, 0x228($s1)\n"
         "lui        $a0, %hi(D_8011FE88)\n"
         "addiu      $a0, $a0, %lo(D_8011FE88)\n"
-        "jal        func_8028D244_de\n"
+        "jal        Engine_GetPlatformRoutePoint\n"
         "nop\n"
         "addu       $a0, $s2, $zero\n"
         "jal        func_8020CB3C_de\n"
@@ -169,7 +169,7 @@ extern void func_80211020_de(RouteChaseBot *bot);
 extern f32 Nav_DistanceToNode(RouteChaseBot *bot, s32 node);
 extern void Nav_SteerAlongRoute(RouteChaseBot *bot);
 extern void Nav_UpdateTargetSteering(RouteChaseBot *bot);
-extern f32 func_802726F8_de(CVector3 *a, CVector3 *b);
+extern f32 Particle_GetPointDistance(CVector3 *a, CVector3 *b);
 extern s32 func_8020B95C_de(RouteChaseGraph *graph, s32 from, s32 to, s32 *path, s32 flags);
 extern void func_80209804_de(RouteChaseBot *bot);
 
@@ -203,7 +203,7 @@ void func_80212FBC_de(RouteChaseActor *actor)
     func_80211020_de(bot);
     if (bot->target != 0) {
         Nav_UpdateTargetSteering(bot);
-        if (func_802726F8_de(&bot->self->pos, &bot->target->pos) < D_800C2384_eu && bot->arrived == 0) {
+        if (Particle_GetPointDistance(&bot->self->pos, &bot->target->pos) < D_800C2384_eu && bot->arrived == 0) {
             bot->arrived = 1;
             none = -1;
             for (i = 63; i >= 0; i--) {

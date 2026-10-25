@@ -350,7 +350,7 @@ extern s32 D_801371D4;
 extern char D_8013B364[];
 extern void func_8044A07C_de(void *);
 extern void func_8044D528_de(void *, s32, s32);
-extern f32 func_802726F8_de(void *, void *);
+extern f32 Particle_GetPointDistance(void *, void *);
 extern s32 func_8020CB3C_de(void *, void *);
 extern void func_802647E8_de(void *, s32);
 extern void Ovlgame_InitActorHudState(void *);
@@ -385,7 +385,7 @@ void Render_PlacePlayerAtSpawnPoint(struct Player *player, s32 model, s32 scale,
         for (i = 0; i < count; i++) {
             distance = D_800C2340_de;
             for (other = D_80145060.actorList; other; other = other->next) {
-                f32 d = func_802726F8_de(&points[i].pos, &other->position.vector);
+                f32 d = Particle_GetPointDistance(&points[i].pos, &other->position.vector);
                 if (d < distance) distance = d;
             }
             if (bestDistance <= distance) {

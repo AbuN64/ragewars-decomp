@@ -4383,7 +4383,7 @@ segments:
       - [0xCE318, data, data_800C/data_unresolved_800CD718]
       - [0xCE32B, data, data_800C/D_blob_07e11a21ce62c6e71031]
       - [0xCE32C, data, data_800C/D_blob_phase2_a152ea6fb8cb1e82503c]
-      - [0xCE338, rodata, data_800C/literals_func_8028D244_de]
+      - [0xCE338, rodata, data_800C/literals_Engine_GetPlatformRoutePoint]
       - [0xCE33C, data, data_800C/rodata_unresolved_800CD73C]
       - [0xCE348, data, data_800C/rodata_unresolved_800CD748]
       - [0xCE34C, data, data_800C/D_blob_phase2_6d7b285986a0b2aeb81a]
