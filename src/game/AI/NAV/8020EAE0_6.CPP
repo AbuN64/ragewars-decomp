@@ -13,7 +13,7 @@
 
 
 extern s32 D_8013B364;
-extern void *func_8020C994_de(s32 *, s32);
+extern void *Nav_GetGraphPoint(s32 *, s32);
 extern void func_8020D220_de(s32 *, s32);
 
 
@@ -32,7 +32,7 @@ s32 func_8020F150_de(s32 *ids) {
     base = &D_8013B364;
     count = 0;
     for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
-        record = func_8020C994_de(base, node->key);
+        record = Nav_GetGraphPoint(base, node->key);
         if (navigation_point_flags((NavigationPoint *)record) & 1) {
             for (i = 0; i < 30; i++) {
                 if (navigation_point_object_id((NavigationPoint *)record) == ids[i] && node->owner != 0
@@ -45,7 +45,7 @@ s32 func_8020F150_de(s32 *ids) {
     }
     if (count == 0) {
         for (node = (Node8020BC50 *)((Obj8020BC50 *)base)->nodes; node != 0; node = node->next) {
-            record = func_8020C994_de(base, node->key);
+            record = Nav_GetGraphPoint(base, node->key);
             if (navigation_point_flags((NavigationPoint *)record) & 1) {
                 for (i = 0; i < 30; i++) {
                     if (navigation_point_object_id((NavigationPoint *)record) == ids[i]) {

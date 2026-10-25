@@ -77,7 +77,7 @@ int func_8020EF80_eu(void *self) {
 
             sel = base->selected;
             if (sel != -1U) {
-                record = func_8020CFE0_de(base, sel);
+                record = Nav_FindSearchNode(base, sel);
                 arg0->unk_C = base->selected;
                 arg0->unk_68 = record->goal;
                 func_8020D114_de(base, arg0->history, 4);

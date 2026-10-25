@@ -7,9 +7,9 @@
 #include "COMMON/NAVIGATION_GRAPH.H"
 #include "TYPES.H"
 
-extern void *func_8020CFE0_de(char *, s32);
+extern void *Nav_FindSearchNode(char *, s32);
 
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 
 /** Find the first of an object's four nodes that starts a type-6 link, record it and return 0; return 1 when none does. */
 
@@ -45,11 +45,11 @@ s32 func_8020D9C0_de(Obj_func_8020D9C0_de *obj) {
     sum.x *= scale;
     sum.y *= scale;
     sum.z *= scale;
-    info = func_8020CFE0_de(global, obj->infoIndex);
+    info = Nav_FindSearchNode(global, obj->infoIndex);
     sum.x *= info->scale;
     sum.y *= info->scale;
     sum.z *= info->scale;
-    base = func_8020C994_de(global, obj->infoIndex);
+    base = Nav_GetGraphPoint(global, obj->infoIndex);
     obj->result.x = base->x + sum.x;
     obj->result.y = base->y + sum.y;
     obj->result.z = base->z + sum.z;

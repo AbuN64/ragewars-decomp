@@ -19,7 +19,7 @@
 extern s32 D_8013B364;
 
 
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 extern void func_80211020_de(void *);
 extern void Nav_SteerAlongRoute(void *);
 extern void Nav_UpdatePlayerSteering(void *);
@@ -62,7 +62,7 @@ void func_80213500_de(Shared_Actor *arg0) {
 loop:
                 if (tries < 10) {
                     candidate = func_802744D4_de() % table[1];
-                    if (navigation_point_flags((NavigationPoint *)(func_8020C994_de(table, candidate))) & 0x400) {
+                    if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
@@ -104,7 +104,7 @@ extern s32 D_8013B364;
 
 
 
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
@@ -140,7 +140,7 @@ void func_802136EC_de(Shared_Actor *arg0)
 loop:
                 if (tries < 10) {
                     candidate = func_802744D4_de() % table[1];
-                    if (navigation_point_flags((NavigationPoint *)(func_8020C994_de(table, candidate))) & 0x400) {
+                    if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
                         candidate = ((Brain_func_80212D78_eu_x *)(actor))->goal;
                     }
                     tries++;
@@ -167,7 +167,7 @@ store_c:
 
 extern s32 D_8013B364;
 
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
@@ -185,7 +185,7 @@ void func_80213810_de(void *arg0)
 loop:
         if (tries < 10) {
             candidate = func_802744D4_de() % table[1];
-            if (navigation_point_flags((NavigationPoint *)(func_8020C994_de(table, candidate))) & 0x400) {
+            if (navigation_point_flags((NavigationPoint *)(Nav_GetGraphPoint(table, candidate))) & 0x400) {
                 candidate = ((Brain_func_80212D78_eu_x *)(arg0))->goal;
             }
             tries++;

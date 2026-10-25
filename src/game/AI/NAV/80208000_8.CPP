@@ -50,7 +50,7 @@ extern s32 func_8024DFA0_de(void *);
 extern s32 func_80243A90_de(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
 
 /** Return an indexed record from the table referenced by the input. */
-void *func_8020C994_de(void *table, int index) {
+void *Nav_GetGraphPoint(void *table, int index) {
     char *base = *(char **)table;
     int stride = *(int *)base;
     return base + (index * stride + 8);
@@ -156,7 +156,7 @@ s32 func_8020CB3C_de(struct Obj8020BC50 *pointSet, void *point) {
     return bestIndex;
 }
 
-int func_8020CC0C_de(Graph *graph, int from, int to) {
+int Nav_FindLinkIndex(Graph *graph, int from, int to) {
     int i;
     Link *link;
 
@@ -248,7 +248,7 @@ s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     return result == 0;
 }
 
-void *func_8020CFE0_de(char *object, s32 current) {
+void *Nav_FindSearchNode(char *object, s32 current) {
     CNavData *graph = (CNavData *)object;
     NavigationSearchNode *record = graph->nodes;
     if (record != 0) {

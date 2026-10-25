@@ -3278,7 +3278,7 @@ segments:
       - [0xC28B0, rodata, data_800C/D_8020C5A0_C7A70]
       - [0xC28BC, rodata, data_800C/D_8020CA10_C7A7C]
       - [0xC28C4, rodata, data_800C/D_8020CD74_C7A84]
-      - [0xC28C8, rodata, data_800C/literals_func_8020C994_de]
+      - [0xC28C8, rodata, data_800C/literals_Nav_GetGraphPoint]
       - [0xC28D0, rodata, data_800C/literals_func_8020D220_de]
       - [0xC28D4, data, data_800C/rodata_unresolved_800C1CD4]
       - [0xC28E0, rodata, data_800C/literals_func_8020D4AC_de]

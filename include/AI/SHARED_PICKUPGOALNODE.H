@@ -22,7 +22,7 @@ extern void func_8020D014_de(struct Obj8020BC50 *arg0);
 extern void func_8020D1FC_de(PickupGoalNodeList *list);
 extern s32 func_8020F150_de(s32 *ids);
 extern void func_8020D0CC_de(PickupGoalNodeList *list, s32 key);
-extern Shared_PickupGoalNode *func_8020CFE0_de(PickupGoalNodeList *list, u32 key);
+extern Shared_PickupGoalNode *Nav_FindSearchNode(PickupGoalNodeList *list, u32 key);
 extern void func_8020D114_de(PickupGoalNodeList *list, s32 *output, s32 count);
 
 

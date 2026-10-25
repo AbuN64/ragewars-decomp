@@ -23,11 +23,11 @@ extern s32 func_8020F150_de(void *arg0);
 
 extern void func_8020D0CC_de(void *arg0, s32 arg1);
 
-extern void *func_8020CFE0_de(char *, s32);
+extern void *Nav_FindSearchNode(char *, s32);
 
 extern void func_8020D114_de(void *arg0, void *arg1, s32 arg2);
 
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 
 extern void func_8020D220_de(void *, s32);
 
@@ -63,7 +63,7 @@ s32 func_8020F2A8_de(CloseAttackBrain *closeAttackBrain) {
     func_8020D0CC_de(global, closeAttackBrain->route);
     current = global->result;
     if (current != value) {
-        entry = func_8020CFE0_de(global, current);
+        entry = Nav_FindSearchNode(global, current);
         closeAttackBrain->destination = global->result;
         closeAttackBrain->routeObject = entry->object;
         func_8020D114_de(global, &closeAttackBrain->routeNodes[0], 4);
@@ -128,7 +128,7 @@ s32 func_8020F444_de(AiController *controller) {
     if (node != 0) {
         type = 0x64E;
         do {
-            result = func_8020C994_de(scanbase, node->key);
+            result = Nav_GetGraphPoint(scanbase, node->key);
             if ((navigation_point_flags(result) & 1) &&
                 navigation_point_object_id(result) == type &&
                 ((ActorMotionState *)node->object->motion)->mode == 0) {
@@ -208,7 +208,7 @@ s32 func_8020F614_de(void) {
     count = 0;
     if (node != 0) {
         do {
-            result = func_8020C994_de(base, node->key);
+            result = Nav_GetGraphPoint(base, node->key);
             if ((navigation_point_flags((NavigationPoint *)result) & 1) &&
                 navigation_point_object_id((NavigationPoint *)result) == 0x64E &&
                 (s8)((LevelActor *)node->object)->pad1A4 == 0) {

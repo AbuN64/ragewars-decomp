@@ -49,7 +49,7 @@ void func_80212E10_de(void) {
         "addu      $a0, $s1, $zero\n"
         "addu       $a0, $s2, $zero\n"
         "lw         $a1, 0xC($s1)\n"
-        "jal        func_8020C994_de\n"
+        "jal        Nav_GetGraphPoint\n"
         "addu      $s0, $v0, $zero\n"
         "addu       $a0, $s0, $zero\n"
         "jal        func_802726F8_de\n"

@@ -31,7 +31,7 @@ extern s32 Nav_GetRouteRelation(char *, s32, s32);
 
 
 extern void Nav_SteerAlongRoute(CloseAttackBrain *),Nav_UpdatePlayerSteering(CloseAttackBrain *),Nav_SelectPlayerState(CloseAttackBrain *);
-extern struct {char pad[0xC];unsigned short flags;} *func_8020C994_de(char *,int);
+extern struct {char pad[0xC];unsigned short flags;} *Nav_GetGraphPoint(char *,int);
 void func_80211A9C_eu(CloseAttackActor *actor) {
     char *routes;
     s32 mine, theirs, dir, route;
@@ -59,7 +59,7 @@ void func_80211A9C_eu(CloseAttackActor *actor) {
             return;
         }
         route = target->brain->route;
-        if (func_8020C994_de(routes, route)->flags & 0x400) {
+        if (Nav_GetGraphPoint(routes, route)->flags & 0x400) {
             brain->target = 0;
             Nav_SelectPlayerState(brain);
             return;

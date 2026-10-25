@@ -31,7 +31,7 @@ extern RoutePatrolNodes D_8013B364;
 extern Clip *func_8028D218_de(PatrolRouteSet *set, s32 route);
 extern s32 func_8028D244_de(PatrolRouteSet *set, s32 route, s32 pos);
 extern s32 func_8020CB3C_de(RoutePatrolNodes *list, s32 id);
-extern void *func_8020C994_de(RoutePatrolNodes *list, s32 index);
+extern void *Nav_GetGraphPoint(RoutePatrolNodes *list, s32 index);
 extern void *func_8020993C_de(PatrolBot *bot);
 extern f32 func_802726F8_de(void *a, void *b);
 extern void Nav_SteerAlongRoute(PatrolBot *bot);
@@ -60,7 +60,7 @@ void func_80212E30_eu_x(PatrolActor *actor)
     }
     if (bot->node == bot->goal) {
         pos = func_8020993C_de(bot);
-        if (func_802726F8_de(pos, func_8020C994_de(nodes, bot->goal)) < D_800C23B0_eu_x) {
+        if (func_802726F8_de(pos, Nav_GetGraphPoint(nodes, bot->goal)) < D_800C23B0_eu_x) {
             if (bot->route >= 0) {
                 route = func_8028D218_de(&D_8011FE88, bot->route);
                 bot->routePos++;

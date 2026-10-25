@@ -22,7 +22,7 @@
 
 
 extern Link *func_8020C9B0_de(PickupGoalNodeList *, s32);
-extern CVector3 *func_8020C994_de(PickupGoalNodeList *, s32);
+extern CVector3 *Nav_GetGraphPoint(PickupGoalNodeList *, s32);
 extern f32 func_802726BC_de(CVector3 *, CVector3 *);
 
 s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
@@ -42,7 +42,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
     for (; i < route->count; i++) {
         link = func_8020C9B0_de(route, i);
         if (link->from == sel->id && link->type == 6) {
-            node = func_8020C994_de(route, link->to);
+            node = Nav_GetGraphPoint(route, link->to);
             sel->stages[stage].from = link->from;
             sel->stages[stage].to = link->to;
             if (stage + 1 == sel->stageCount) {
@@ -51,7 +51,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
             stage++;
         }
     }
-    distance = func_802726BC_de(node, func_8020C994_de(route, sel->node));
+    distance = func_802726BC_de(node, Nav_GetGraphPoint(route, sel->node));
     facing.x = facing.y = facing.z = 1.0f;
     for (i = 0; i < sel->objectCount; i++) {
         if (sel->objects[i] == 0) {
@@ -74,7 +74,7 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
     return 0;
 }
 
-extern s32 func_8020CC0C_de(PickupGoalNodeList *list, s32 from, s32 to);
+extern s32 Nav_FindLinkIndex(PickupGoalNodeList *list, s32 from, s32 to);
 s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
     CVector3 avg;
     Shared_PickupGoalNode *info;
@@ -112,8 +112,8 @@ s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
             break;
         }
     }
-    if (next == -1 || func_8020CC0C_de(list, sel->id, sel->stages[best].to) == -1 ||
-        func_8020CC0C_de(list, next, sel->stages[best].to) == -1) {
+    if (next == -1 || Nav_FindLinkIndex(list, sel->id, sel->stages[best].to) == -1 ||
+        Nav_FindLinkIndex(list, next, sel->stages[best].to) == -1) {
         sel->failed = 0;
         sel->stageCount += 0x14;
         return 1;
@@ -136,11 +136,11 @@ s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
     avg.x = avg.x * inv;
     avg.y = avg.y * inv;
     avg.z = avg.z * inv;
-    info = func_8020CFE0_de(list, sel->stages[best].to);
+    info = Nav_FindSearchNode(list, sel->stages[best].to);
     avg.x = avg.x * info->radius;
     avg.y = avg.y * info->radius;
     avg.z = avg.z * info->radius;
-    node = func_8020C994_de(list, sel->stages[best].to);
+    node = Nav_GetGraphPoint(list, sel->stages[best].to);
     sel->result.x = node->x + avg.x;
     sel->result.y = node->y + avg.y;
     sel->result.z = node->z + avg.z;

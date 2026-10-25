@@ -7,7 +7,7 @@
 extern s32 D_8013B364;
 
 
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 
 
 
@@ -38,7 +38,7 @@ void func_80213340_de(void *arg0)
         index = 0;
         if (table[1] > 0) {
             do {
-                if (navigation_point_flags((NavigationPoint *)func_8020C994_de(table, index)) & 0x800) {
+                if (navigation_point_flags((NavigationPoint *)Nav_GetGraphPoint(table, index)) & 0x800) {
                     choices[count] = index;
                     count++;
                 }
@@ -58,7 +58,7 @@ void func_80213340_de(void *arg0)
 loop:
             if (tries < 10) {
                 candidate = func_802744D4_de() % table[1];
-                if (navigation_point_flags((NavigationPoint *)func_8020C994_de(table, candidate)) & 0x400) {
+                if (navigation_point_flags((NavigationPoint *)Nav_GetGraphPoint(table, candidate)) & 0x400) {
                     candidate = ((Brain_func_80212D78_eu_x *)arg0)->goal;
                 }
                 tries++;

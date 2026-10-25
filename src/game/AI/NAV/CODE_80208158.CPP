@@ -114,10 +114,10 @@ float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
 float func_802B72B0_de(float);
-NavigationPoint *func_8020C994_de(CNavData *,s32);
+NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
 NavigationPortal *func_8020C9B0_de(CNavData *,s32);
-NavigationSearchNode *func_8020CFE0_de(CNavData *,s32);
-s32 func_8020CC0C_de(CNavData *,s32,s32);
+NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
+s32 Nav_FindLinkIndex(CNavData *,s32,s32);
 s32 func_80209828_de(AiController *);
 typedef struct GroundObject { char pad[0x18]; ActorMotionResource *resource; } GroundObject;
 GroundObject *func_8024E6A0_de(Player *);
@@ -159,14 +159,14 @@ void Nav_SteerAlongRoute(AiController *controller) {
         controller->unk308 = 0;
         controller->unk30C = 0;
         if (controller->queue[0] != -1) {
-                point = func_8020C994_de(graph, controller->queue[0]);
+                point = Nav_GetGraphPoint(graph, controller->queue[0]);
                 pos = &controller->player->pos;
                 distance = func_802726F8_de(pos, point);
                 controller->unk304 = (navigation_attributes(point) & 0x300000) != 0;
                 if (controller->queue[0] == controller->current) {
-                    link = func_8020CC0C_de(graph, controller->previous, controller->queue[0]);
+                    link = Nav_FindLinkIndex(graph, controller->previous, controller->queue[0]);
                 } else {
-                    link = func_8020CC0C_de(graph, controller->current, controller->queue[0]);
+                    link = Nav_FindLinkIndex(graph, controller->current, controller->queue[0]);
                 }
                 if (link > 0) {
                     portal = func_8020C9B0_de(graph, link);
@@ -174,15 +174,15 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         controller->unk30C = 1;
                     }
                     if (portal->kind == 8) {
-                        func_802726F8_de(pos, func_8020C994_de(graph, controller->current));
-                        goal = func_8020C994_de(graph, controller->queue[0]);
+                        func_802726F8_de(pos, Nav_GetGraphPoint(graph, controller->current));
+                        goal = Nav_GetGraphPoint(graph, controller->queue[0]);
                         controller->unk308 = 1;
                         if (link != controller->unk32C) {
                             controller->unk314 = 0;
                             controller->unk32C = link;
                         }
                         if (controller->unk314 == 0) {
-                            start = func_8020C994_de(graph, controller->current);
+                            start = Nav_GetGraphPoint(graph, controller->current);
                             Particle_SubtractVectors(&delta, pos, &start->position);
                             if (!(func_802B72B0_de(delta.x * delta.x + delta.z * delta.z) < D_800C1BB8_de)) {
                                 controller->destination = start->position;
@@ -234,7 +234,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                         }
                     } else if (portal->kind == 5) {
                         if (controller->unk314 == 0) {
-                            entry = func_8020C994_de(graph, controller->current);
+                            entry = Nav_GetGraphPoint(graph, controller->current);
                             if (!(func_802726F8_de(pos, entry) < D_800C1BC4_de)) {
                                 controller->destination = entry->position;
                                 return;
@@ -242,7 +242,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             controller->unk314 = 1;
                         }
                         if (controller->unk314 == 1) {
-                            node = func_8020CFE0_de(graph, controller->current);
+                            node = Nav_FindSearchNode(graph, controller->current);
                             if (func_802726F8_de(&node->platform->pos, &node->endpoint) < D_800C1BC8_de) {
                                 controller->destination = node->platform->pos;
                                 player->actionFlags |= 0x10;
@@ -258,12 +258,12 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (ground != 0) {
                                 riding = ground->resource->kind == 2;
                             }
-                            Particle_SubtractVectors(&delta, pos, &func_8020CFE0_de(graph, controller->current)->platform->pos);
+                            Particle_SubtractVectors(&delta, pos, &Nav_FindSearchNode(graph, controller->current)->platform->pos);
                             gap = func_802B72B0_de(delta.x * delta.x + delta.z * delta.z);
                             if (riding != 0 && gap < D_800C1BCC_de) {
                                 controller->unk314 = 3;
                             } else {
-                                controller->destination = func_8020CFE0_de(graph, controller->current)->platform->pos;
+                                controller->destination = Nav_FindSearchNode(graph, controller->current)->platform->pos;
                                 return;
                             }
                         }
@@ -276,8 +276,8 @@ void Nav_SteerAlongRoute(AiController *controller) {
                             if (riding == 0) {
                                 controller->unk314 = 0;
                             }
-                            point = func_8020C994_de(graph, controller->queue[0]);
-                            node = func_8020CFE0_de(graph, controller->queue[0]);
+                            point = Nav_GetGraphPoint(graph, controller->queue[0]);
+                            node = Nav_FindSearchNode(graph, controller->queue[0]);
                             if (func_802726F8_de(&node->platform->pos, &node->endpoint) < D_800C1BD0_de) {
                                 controller->destination = point->position;
                                 player->actionFlags |= 0x10;
@@ -315,7 +315,7 @@ void Nav_SteerAlongRoute(AiController *controller) {
         return;
     }
     if (controller->queue[0] != -1) {
-        point = func_8020C994_de(graph, controller->queue[0]);
+        point = Nav_GetGraphPoint(graph, controller->queue[0]);
         if (navigation_point_flags(point) & 2) {
             controller->destination = controller->home;
             return;
@@ -335,10 +335,10 @@ float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
 float func_802B72B0_de(float);
-NavigationPoint *func_8020C994_de(CNavData *,s32);
+NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
 NavigationPortal *func_8020C9B0_de(CNavData *,s32);
-NavigationSearchNode *func_8020CFE0_de(CNavData *,s32);
-s32 func_8020CC0C_de(CNavData *,s32,s32);
+NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
+s32 Nav_FindLinkIndex(CNavData *,s32,s32);
 s32 func_80209828_de(AiController *);
 
 extern f32 D_800C1BDC_de;
@@ -413,7 +413,7 @@ void Nav_UpdatePlayerSteering(AiController *controller) {
             desired.z = func_802B7130_de(angle);
             player->forward = desired.x * facing.x + desired.y * facing.y + desired.z * facing.z;
             do {
-                tangent = func_8020C994_de(graph, controller->current)->position;
+                tangent = Nav_GetGraphPoint(graph, controller->current)->position;
             } while (0);
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;
@@ -461,10 +461,10 @@ float func_80209308_de(AiController *, CVector3 *,float,float);
 void func_80209910_de(AiController *,float,s32);
 void func_80209E80_de(AiController *);
 float func_802B72B0_de(float);
-NavigationPoint *func_8020C994_de(CNavData *,s32);
+NavigationPoint *Nav_GetGraphPoint(CNavData *,s32);
 NavigationPortal *func_8020C9B0_de(CNavData *,s32);
-NavigationSearchNode *func_8020CFE0_de(CNavData *,s32);
-s32 func_8020CC0C_de(CNavData *,s32,s32);
+NavigationSearchNode *Nav_FindSearchNode(CNavData *,s32);
+s32 Nav_FindLinkIndex(CNavData *,s32,s32);
 s32 func_80209828_de(AiController *);
 
 extern f32 D_800C1C00;
@@ -533,7 +533,7 @@ void Nav_UpdateTargetSteering(AiController *controller) {
             desired.z = controller->destination.z - position->z;
             desired.y = 0.0f;
             do {
-                tangent = func_8020C994_de(graph, controller->current)->position;
+                tangent = Nav_GetGraphPoint(graph, controller->current)->position;
             } while (0);
             tangent.x -= controller->destination.x;
             tangent.z -= controller->destination.z;

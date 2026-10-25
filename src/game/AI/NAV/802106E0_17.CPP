@@ -9,7 +9,7 @@
 #include "AI/SHARED_PICKUPGOALNODE.H"
 
 void *func_8020C9B0_de(struct EntryList8020CCE8 *object, int index);
-extern void *func_8020C994_de(void *, s32);
+extern void *Nav_GetGraphPoint(void *, s32);
 #include "AI/ROUTE_RELATION_GRID.H"
 extern f32 func_802726BC_de(f32 *, f32 *);
 
@@ -46,7 +46,7 @@ void Nav_SelectFarthestReachableNeighbor(AiController *object)
     for (i = 0; i < count; i++) {
         link = func_8020C9B0_de(graph, links[i]);
         if ((link->type >= 1 && link->type <= 2) || link->type == 7) {
-            point = func_8020C994_de(graph, neighbors[i]);
+            point = Nav_GetGraphPoint(graph, neighbors[i]);
             if (Nav_GetRouteRelation(graph, actor_node, neighbors[i])) {
                 distance = func_802726BC_de(&position.x, point);
                 if (farthest < distance) {

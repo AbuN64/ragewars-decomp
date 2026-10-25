@@ -39,7 +39,7 @@ extern s32 D_800C9228_de[2];
 
 
 
-void *func_8020C994_de(void *, s32);
+void *Nav_GetGraphPoint(void *, s32);
 s32 func_8020CB3C_de(void *, void *);
 s32 func_802227F4_de(void *, void *, s32);
 #ifndef NON_MATCHING
@@ -331,7 +331,7 @@ case 7:
                     }
                 }
                 if (var_s3_2 != 0) {
-                    temp_s0_5 = func_8020C994_de(&D_8013B364, func_8020CB3C_de(&D_8013B364, &player->position.vector));
+                    temp_s0_5 = Nav_GetGraphPoint(&D_8013B364, func_8020CB3C_de(&D_8013B364, &player->position.vector));
                     func_8024E79C_de(player, player->position.words, &spawnPosition, &sp90, 0, 0);
                     if (temp_s0_5 != 0) {
                         spawnPosition = *(CVector3 *)temp_s0_5;

@@ -36,7 +36,7 @@ extern void func_8020D014_de(void *arg0);
 
 extern void func_8020D1FC_de(s32);
 
-extern void *func_8020C994_de(void *arg0, s32 arg1);
+extern void *Nav_GetGraphPoint(void *arg0, s32 arg1);
 
 extern void func_8020D220_de(void *, s32);
 
@@ -177,7 +177,7 @@ void func_80212A7C_de(Shared_Actor *arg0)
         index = 0;
         if (table->m_nNavNodes > 0) {
             do {
-                entry = func_8020C994_de(table, index);
+                entry = Nav_GetGraphPoint(table, index);
                 if (func_802726BC_de(&state->player->pos.x, entry) < threshold &&
                     !(navigation_attributes(entry) & 0x04300000)) {
                     func_8020D220_de(table, index);

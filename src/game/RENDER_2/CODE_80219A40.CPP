@@ -23,7 +23,7 @@
 /* Selects and records a player's reaction to an interaction. */
 
 /* Reaction thresholds are loaded from the cartridge's shared float table. */
-void * func_8020CFE0_de(char *, s32);
+void * Nav_FindSearchNode(char *, s32);
 void func_80229814_de(void *, f32);
 void func_80229FA0_de(void *, void *);
 s32 func_8022A5A0_de(void *, unsigned int);
@@ -367,9 +367,9 @@ block_88:
                             } else {
                                 temp_v1_13 = (void *)temp_s1->unk5D8;
                                 temp_v1_13->deaths_other = (u16) (temp_v1_13->deaths_other + 1);
-                                temp_v0_6 = func_8020CFE0_de(&D_8013B364, temp_s1->unk1454->unk4);
+                                temp_v0_6 = Nav_FindSearchNode(&D_8013B364, temp_s1->unk1454->unk4);
                                 temp_v0_6->unk38 = (s32) (temp_v0_6->unk38 + 1);
-                                temp_v0_6 = func_8020CFE0_de(&D_8013B364, var_s2->unk1454->unk4);
+                                temp_v0_6 = Nav_FindSearchNode(&D_8013B364, var_s2->unk1454->unk4);
                                 temp_v0_6->unk3C = (s32) (temp_v0_6->unk3C + 1);
                                 if (temp_s1->unk5D8->unk8F == 1) {
                                     if (D_801468A0->countRule != 0) {
