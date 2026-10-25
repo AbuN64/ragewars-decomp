@@ -3386,7 +3386,7 @@ segments:
       - [0xC3448, rodata, data_800C/D_80222908_C8538]
       - [0xC345C, rodata, data_800C/D_80222EA4_C854C]
       - [0xC3460, rodata, data_800C/D_80222FE0_C8550]
-      - [0xC347C, rodata, data_800C/D_802231D4_C856C]
+      - [0xC347C, rodata, data_800C/literals_Weapons_UpdateViewAngles]
       - [0xC34B4, rodata, data_800C/literals_func_802233F0_de]
       - [0xC34E0, rodata, data_800C/literals_func_802238E0_de]
       - [0xC3514, rodata, data_800C/literals_func_80223E34_de]

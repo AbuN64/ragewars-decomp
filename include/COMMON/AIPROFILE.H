@@ -9,7 +9,8 @@ struct GameplayCamera;
 struct Player;
 struct RangeNode;
 typedef struct AiProfile {
-    u8 pad0[0x7A];
+    u8 pad0[0x79];
+    u8 yawSensitivity; /* 0x79: Weapons_UpdateViewAngles */
     u8 sensitivity; /* 0x7A: Fx_BuildControllerState */
     s8 controlMode; /* 0x7B */
     u8 remap; /* 0x7C */

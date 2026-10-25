@@ -248,66 +248,63 @@ invalid:
     return 0;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-
-typedef struct { u8 pad0[0x79]; u8 yaw, pitch; s8 pitchMode; u8 pad7C; u8 freePitch; } ControlSettings;
-typedef struct { u8 pad0[0x50]; u32 flags; } Surface;
-typedef struct { f32 enableYaw, yawRate, pitchRate, pitchScale, downScale, upScale; } ControlTuning;
+/* A turn-rate table (D_800CE7E4 and its siblings): yawScale gates and scales stick yaw, yawRate and
+   pitchRate are the base smoothing rates, pitchScale scales pitchRate, downScale/upScale scale the
+   look-down and look-up stick. */
+typedef struct ViewTuning {
+    f32 yawScale;
+    f32 yawRate;
+    f32 pitchRate;
+    f32 pitchScale;
+    f32 downScale;
+    f32 upScale;
+} ViewTuning;
+/* The ground model's surface word: bits 0x6000 == 0x2000 mark ground that stops the view turning. */
+typedef struct SurfaceView {
+    u8 pad0[0x50];
+    u32 flags; /* 0x50 */
+} SurfaceView;
 extern void *Sound_FindActorModelEntry(void *);
 extern void func_80274870_de(f32 *, f32, f32);
-extern f32 D_800C287C_de;
-extern f32 D_800C2880_de;
-extern f32 D_800C2884_de;
-extern f32 D_800C2888_de;
-extern f32 D_800C288C_de;
-extern f32 D_800C2890_de;
-extern f32 D_800C2894_de;
-extern f32 D_800C2898_de;
-extern f32 D_800C289C_de;
-extern f32 D_800C28A0_de;
-extern f32 D_800C28A4_de;
-extern f32 D_800C28A8_de;
-extern f32 D_800C28AC_de;
-extern f32 D_800C28B0_de;
-
-/* Smooths player yaw and pitch using profile sensitivities and damping.
- * Surface flags can suppress yaw; the profile can lock pitch to a fixed rate.
- * 32/135 aligned edits remain in float allocation and scheduling. */
-void Weapons_UpdateViewAngles(Player *player, Player *body, ControlTuning *tuning) {
-    f32 damp, yawRate, pitchRate, input, value, yawSensitivity, pitchSensitivity, yawDelta;
-    ControlSettings *settings;
-    Surface *surface;
+/* Smooths a player's view: the turn and look rates are the tuning table's rates damped by the state
+   at 0x7EC and scaled by the profile's yaw and pitch sensitivities (128 = centre); control mode 1
+   locks the look rate at 0.5 and mode 0 without the pitch option at 0.8. Unless the body stands on
+   a surface that stops turning, the heading eases toward the stick yaw, then the pitch offset eases
+   toward the stick pitch (degrees to radians). */
+void Weapons_UpdateViewAngles(Player *player, Player *body, ViewTuning *tuning) {
+    f32 sens, decay, damp, yawSens, yawValue, yawRate, pitchSens, pitchValue, pitchRate, input, value, yawDelta;
+    AiProfile *profile;
+    SurfaceView *surface;
     if (player->locked != 0 || 0.0f < player->cooldown) return;
-    damp = player->state7EC * D_800C287C_de;
-    settings = (ControlSettings *)player->profile;
-    yawSensitivity = ((f32)settings->yaw * D_800C2880_de - D_800C2884_de) * D_800C2888_de;
-    damp = D_800C2884_de - damp;
-    value = damp * tuning->yawRate;
-    yawRate = (yawSensitivity + D_800C288C_de) * value;
-    pitchSensitivity = ((f32)settings->pitch * D_800C2880_de - D_800C2884_de) * D_800C2890_de;
-    value = damp * tuning->pitchRate;
-    value *= tuning->pitchScale;
-    pitchRate = (pitchSensitivity + D_800C2894_de) * value;
-    if (settings->pitchMode != 0) {
-        if (settings->pitchMode == 1) pitchRate = D_800C2888_de;
-    } else if (settings->freePitch == 0) pitchRate = D_800C2898_de;
+    decay = player->state7EC * 0.99f;
+    profile = player->profile;
+    sens = (f32)profile->yawSensitivity * 0.0078125f - 1.0f;
+    yawSens = sens * 0.5f;
+    damp = 1.0f - decay;
+    yawValue = damp * tuning->yawRate;
+    yawRate = yawSens + 0.875f;
+    yawRate *= yawValue;
+    sens = (f32)profile->sensitivity * 0.0078125f - 1.0f;
+    pitchSens = sens * 0.4f;
+    pitchValue = damp * tuning->pitchRate * tuning->pitchScale;
+    pitchRate = pitchSens + 0.6f;
+    pitchRate *= pitchValue;
+    if (profile->controlMode != 0) {
+        if (profile->controlMode == 1) pitchRate = 0.5f;
+    } else if (profile->pitchMode == 0) pitchRate = 0.8f;
     surface = Sound_FindActorModelEntry(body);
     if (surface == 0 || (surface->flags & 0x6000) != 0x2000) {
-        if (tuning->enableYaw != 0.0f) {
+        if (tuning->yawScale != 0.0f) {
             yawDelta = player->steer;
-            yawDelta *= D_800C289C_de;
-            yawDelta = yawDelta * tuning->enableYaw;
-            yawDelta = yawDelta * D_800C28A0_de;
+            yawDelta *= 80.0f;
+            yawDelta = yawDelta * tuning->yawScale;
+            yawDelta = yawDelta * 0.017453294f;
             func_80274870_de(&body->heading, body->heading + yawDelta, yawRate);
         }
     }
-    input = -player->pitch * D_800C28A4_de;
-    if (input < 0.0f) value = input * D_800C28A8_de * tuning->downScale;
-    else value = input * D_800C28AC_de * tuning->upScale;
-    value = value * D_800C28B0_de;
+    input = -player->pitch * 80.0f;
+    if (input < 0.0f) value = input * -0.71619713f * tuning->downScale;
+    else value = input * 0.71619713f * tuning->upScale;
+    value = value * 0.017453294f;
     func_80274870_de(&player->pitchOffset, value, pitchRate);
 }
-#else
-INCLUDE_ASM("span_1000", Weapons_UpdateViewAngles);
-#endif

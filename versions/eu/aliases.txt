@@ -2590,3 +2590,4 @@ literals_Texture_UpdateSoundSlot = 0x800C4188; // rom:0xC4D88 size:0x4
 literals_Particle_GetAngleDistance = 0x800C4AFC; // rom:0xC56FC size:0x60
 literals_Nav_AssignPlatformEndpoints = 0x800C1FEC; // rom:0xC2BEC size:0x8
 literals_Particle_GetHorizontalAngle = 0x800C4AE8; // rom:0xC56E8 size:0x14
+literals_Weapons_UpdateViewAngles = 0x800C2B1C; // rom:0xC371C size:0x38
