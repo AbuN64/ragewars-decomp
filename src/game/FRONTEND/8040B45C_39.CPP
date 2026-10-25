@@ -16,7 +16,6 @@
 extern BufferPool D_80153C40;
 extern Manager_func_80411D18_de D_80153C20;
 extern EntryRecAt18V1 *D_80153C10;
-extern char *D_80153C28;
 /* Releases the buffers of the pool at D_80153C40: every entry holding a buffer that is not locked
    (flag 1) unless force is set has its reference count forced to one and dropped, and when it
    reaches zero the buffer is freed through func_802547E4_de, along with the entry's secondary buffer
@@ -31,13 +30,13 @@ extern char *D_80153C28;
 extern s32 D_800E2AC4;
 
 
-/* Returns the halfword held in D_80153C40. */
+/* Returns the screen count D_801539B0.NScreens. */
 
 
-/* Returns the halfword held in D_80153C0C. */
+/* Returns the texture count D_801539B0.NTextures. */
 extern s16 D_80153C0C;
 
-/* Returns the halfword held in D_80153C20. */
+/* Returns the font count D_801539B0.NFonts. */
 
 
 /* Returns the halfword at offset 0xA of entry i in the 28-byte record table D_80153C10 points
@@ -52,8 +51,7 @@ extern s16 D_80153C0C;
 
 
 
-/* Returns entry i of the word array D_80153C14 points to. */
-extern s32 *D_80153C14;
+/* Returns entry i of the chroma key table D_801539B0.ChromaKey. */
 
 /* Releases UI resource slot i once its retain count reaches zero, closing its open entry and clearing the slot id. */
 
@@ -66,15 +64,15 @@ extern struct ResourceRecAt6 *D_8014D988;
 
 
 /* Returns the signed byte at offset 0x9 of entry j in the 8-byte entries that begin record i of
-   the 1180-byte record table D_80153C28 points to. */
+   the font table D_801539B0.Font (1180-byte records). */
 
 
 /* Returns the signed byte at offset 0xA of entry j in the 8-byte entries that begin record i of
-   the 1180-byte record table D_80153C28 points to. */
+   the font table D_801539B0.Font (1180-byte records). */
 
 
 /* Returns the halfword at offset 0xE of the object held at offset 0x48C of record i in the
-   1180-byte record table D_80153C28 points to; func_80411C60_de reads offset 0x10 of the same
+   font table D_801539B0.Font (1180-byte records); func_80411C60_de reads offset 0x10 of the same
    object. */
 
 
@@ -87,9 +85,8 @@ extern struct ResourceRecAt6 *D_8014D988;
    so it is a pointer variable and not an array base. The returned words were 0x8069A52F and
    0x8069A673, which are guest addresses that are not word aligned, so the element type is a
    pointer to bytes. */
-extern char **D_8014D9AC;
 
-/* Calls Frontend_LoadLanguageStrings when the halfword D_80153C2C is non-zero. */
+/* Calls Frontend_LoadLanguageStrings when the language count D_801539B0.NLanguages is non-zero. */
 
 extern void Frontend_LoadLanguageStrings(s32);
 
@@ -97,7 +94,6 @@ extern void Frontend_LoadLanguageStrings(s32);
    0x80697F80 and the results being 0, 0x8067E570, 0x8067F870 and 0x80697E00, so the third word is
    a pointer that may be absent. The largest index seen was 0x1D, which is inside the bound of 36
    that func_80411DF0_de checks against D_80153C40, so this is an accessor over the same table. */
-extern ArchiveMapEntry *D_8014D9B4;
 
 /* Returns whether an index lies inside the table bound D_80153C40, from zero up to but not
    including it. */
@@ -113,7 +109,6 @@ extern ArchiveMapEntry *D_8014D9B4;
 
 /* Clears the 0x2A8-byte block D_801539B0 through func_802A0748_de, sets D_800E2AC0 and clears
    D_800E2AC4. */
-extern char D_801539B0[];
 
 extern s32 D_800E2AC0;
 
@@ -181,34 +176,34 @@ void func_80411A3C_de(void) {
 }
 
 s16 func_80411A44_de(void) {
-    return D_80153C40.count;
+    return D_801539B0.NScreens;
 }
 
 s16 func_80411A54_de(void) {
-    return D_80153C0C;
+    return D_801539B0.NTextures;
 }
 
 s16 func_80411A64_de(void) {
-    return D_80153C20.count;
+    return D_801539B0.NFonts;
 }
 
 /* Returns the word held in D_80153C08. */
 
 
 s32 func_80411A74_de(void) {
-    return D_80153C08;
+    return D_801539B0.Header.FirstScreen;
 }
 
 s16 func_80411A84_de(s32 index) {
-    return D_80153C10[index].unkA;
+    return D_801539B0.Texture[index].Width;
 }
 
 s16 func_80411AA8_de(s32 index) {
-    return D_80153C10[index].unkC;
+    return D_801539B0.Texture[index].Height;
 }
 
 s32 func_80411ACC_de(s32 index) {
-    return D_80153C14[index];
+    return D_801539B0.ChromaKey[index];
 }
 
 /** Report success. */
@@ -234,33 +229,27 @@ void func_80411AF0_de(s32 i) {
 }
 
 signed char func_80411BA8_de(int entry, int index) {
-    char *record = D_80153C28 + index * 1180;
-    int size;
-
-    return ((struct ObjectStateA *) ((D_80153C28 + (index * 1180)) + (((unsigned char) entry) * (size = 8))))->unk_9;
+    return D_801539B0.Font[index].CharInfo[(unsigned char)entry].height;
 }
 
 signed char func_80411BE8_de(int entry, int index) {
-    char *record = D_80153C28 + index * 1180;
-    int size;
-
-    return ((struct ObjectStateB *) ((D_80153C28 + (index * 1180)) + (((unsigned char) entry) * (size = 8))))->unk_A;
+    return D_801539B0.Font[index].CharInfo[(unsigned char)entry].PhysicalWidth;
 }
 
 short func_80411C28_de(int index) {
-    return ((struct ObjRecAtE *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkE;
+    return D_801539B0.Font[index].TableEntry->bitmapCount;
 }
 
 short func_80411C60_de(int index) {
-    return ((struct OSThread_s *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->state;
+    return D_801539B0.Font[index].TableEntry->field_10;
 }
 
 short func_80411C98_de(int index) {
-    return ((struct ObjRecAtA *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkA;
+    return D_801539B0.Font[index].TableEntry->field_A;
 }
 
 short func_80411CD0_de(int index) {
-    return ((struct ObjRecAtCV1 *) ((struct ObjectLinks490 *) (D_80153C28 + (index * 1180)))->unk_48C)->unkC;
+    return D_801539B0.Font[index].TableEntry->field_C;
 }
 
 /** Report success. */
@@ -284,28 +273,28 @@ void func_80411D18_de(void) {
 }
 
 char *func_80411D78_de(s32 index) {
-    return D_8014D9AC[index];
+    return D_801539B0.StringTable[index];
 }
 
 /* Returns the halfword held in D_80153C2C. */
 
 
 s16 func_80411D94_de(void) {
-    return D_80153C2C;
+    return D_801539B0.NLanguages;
 }
 
 void func_80411DA4_de(s32 arg0) {
-    if (D_80153C2C != 0) {
+    if (D_801539B0.NLanguages != 0) {
         Frontend_LoadLanguageStrings(arg0);
     }
 }
 
 void *func_80411DCC_de(s32 index) {
-    return D_8014D9B4[index].data;
+    return D_801539B0.Screen[index].data;
 }
 
 s32 func_80411DF0_de(s32 index) {
-    if (index >= 0 && index < D_80153C40.count) {
+    if (index >= 0 && index < D_801539B0.NScreens) {
         return 1;
     }
     return 0;
@@ -324,7 +313,7 @@ void func_80411E18_de(s32 i) {
 }
 
 void func_80411EEC_de(void) {
-    func_802A0748_de(D_801539B0, 0, 0x2A8);
+    func_802A0748_de(&D_801539B0, 0, sizeof(D_801539B0));
     D_800E2AC0 = 1;
     D_800E2AC4 = 0;
 }
@@ -353,7 +342,7 @@ void func_80411F48_de(void) {
 }
 
 GlyphBuffer *func_8041200C_de(s32 index) {
-    return (GlyphBuffer *)(D_80153C28 + index * 1180);
+    return (GlyphBuffer *)&D_801539B0.Font[index];
 }
 
 void func_80412038_de(void) {

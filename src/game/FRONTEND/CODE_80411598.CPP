@@ -49,7 +49,6 @@ void func_80411518_de(s32 index) {
     D_80153C20.entries[index].active = 0;
 }
 
-extern ArchiveFile D_801539B0;
 extern s32 D_800E2AC4;
 extern char D_800DD0B0;
 extern void *func_8025305C_de(s32);
@@ -63,27 +62,27 @@ extern void func_802A0EB0_de(s32);
    kept) and rebased. */
 void Frontend_AcquireArchiveEntry(s32 index) {
     void *data;
-    D_801539B0.useCounts[index]++;
-    if (D_801539B0.mode == 1) {
-        if (D_801539B0.map[index].data == 0) goto load;
-        Resmgr_CopyBytes(D_801539B0.map[index].data, D_801539B0.copies[index].data, D_801539B0.map[index].size);
-        data = D_801539B0.map[index].data;
-        func_8040F6DC_de(data, data, D_801539B0.map[index].offset - D_801539B0.map[0].offset);
+    D_801539B0.RefCount[index]++;
+    if (D_801539B0.NeverFreeResources == 1) {
+        if (D_801539B0.Screen[index].data == 0) goto load;
+        Resmgr_CopyBytes(D_801539B0.Screen[index].data, D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].size);
+        data = D_801539B0.Screen[index].data;
+        func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
     }
-    if (D_801539B0.map[index].data != 0) return;
+    if (D_801539B0.Screen[index].data != 0) return;
 load:
     func_802A18CC_de();
-    D_801539B0.map[index].data = func_8025305C_de(D_801539B0.map[index].size);
-    D_801539B0.handle = Resmgr_OpenStream(&D_801539B0.header, &D_800DD0B0);
-    Resmgr_SeekStream(D_801539B0.handle, D_801539B0.header.dataOffset + D_801539B0.map[index].offset, 0);
-    Resmgr_ReadStream(D_801539B0.map[index].data, D_801539B0.map[index].size, 1, D_801539B0.handle);
+    D_801539B0.Screen[index].data = func_8025305C_de(D_801539B0.Screen[index].size);
+    D_801539B0.In = Resmgr_OpenStream(D_801539B0.Name, &D_800DD0B0);
+    Resmgr_SeekStream(D_801539B0.In, D_801539B0.Header.ScreenData + D_801539B0.Screen[index].offset, 0);
+    Resmgr_ReadStream(D_801539B0.Screen[index].data, D_801539B0.Screen[index].size, 1, D_801539B0.In);
     if (D_800E2AC4 != 0) {
-        D_801539B0.copies[index].data = func_8025305C_de(D_801539B0.map[index].size);
-        Resmgr_CopyBytes(D_801539B0.copies[index].data, D_801539B0.map[index].data, D_801539B0.map[index].size);
+        D_801539B0.ScreenOriginal[index].data = func_8025305C_de(D_801539B0.Screen[index].size);
+        Resmgr_CopyBytes(D_801539B0.ScreenOriginal[index].data, D_801539B0.Screen[index].data, D_801539B0.Screen[index].size);
     }
-    func_802A0EB0_de(D_801539B0.handle);
-    D_801539B0.handle = 0;
-    data = D_801539B0.map[index].data;
-    func_8040F6DC_de(data, data, D_801539B0.map[index].offset - D_801539B0.map[0].offset);
+    func_802A0EB0_de(D_801539B0.In);
+    D_801539B0.In = 0;
+    data = D_801539B0.Screen[index].data;
+    func_8040F6DC_de(data, data, D_801539B0.Screen[index].offset - D_801539B0.Screen[0].offset);
     func_802A18CC_de();
 }
