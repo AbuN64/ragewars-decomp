@@ -8,7 +8,7 @@ extern s32 Scene_AllocateMemory(s32 arg0);
 
 
 void func_802A16F8_de(s32 arg0) {
-    extern void func_802A1270_de(void);
+    extern void Math_ResetFrameHeap(void);
     s32 size;
 
     size = (arg0 + 7) & ~7;
@@ -16,7 +16,7 @@ void func_802A16F8_de(s32 arg0) {
     D_800CD964[1] = Scene_AllocateMemory(size);
     D_80147054 = size;
     D_80147050_de = 0;
-    func_802A1270_de();
+    Math_ResetFrameHeap();
     D_800CD960_de = 1;
 }
 

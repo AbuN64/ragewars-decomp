@@ -4093,7 +4093,7 @@ segments:
       - [0xC67DC, rodata, data_800C/D_8029E93C_CBA3C]
       - [0xC6800, rodata, data_800C/data_func_8029F5E0_de_800C5C00]
       - [0xC6888, data, data_800C/D_auto_rodata_unresolved_800C5C88]
-      - [0xC68A0, rodata, data_800C/D_802A1270_CBB00]
+      - [0xC68A0, rodata, data_800C/literals_Math_ResetFrameHeap]
       - [0xC68A8, rodata, data_800C/D_802A13A4_CBB08]
       - [0xC68B0, rodata, data_800C/D_802A14B8_CBB10]
       - [0xC68B8, rodata, data_800C/D_802A15E4_CBB18]
