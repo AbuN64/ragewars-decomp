@@ -1,4 +1,5 @@
 #include "COMMON/VECTOR4F.H"
+#include "COMMON/LONE/D_80103FCC.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/LISTHEADER.H"
 #include "TYPES.H"
@@ -77,7 +78,6 @@ reset_state:
 
 
 extern char D_8011D8D0;
-extern void *D_80103FCC;
 extern char D_801041F0;
 extern CQuatern func_80271818_de(CVector3 *);
 extern void func_80273760_de(f32 *matrix, s32 angle);

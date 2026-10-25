@@ -1,4 +1,5 @@
 #include "COMMON/DESCRIPTORRECAT29.H"
+#include "COMMON/LONE/D_80103FCC.H"
 #include "COMMON/OUTPUT.H"
 #include "SCHED/8023A284.H"
 #include "TYPES.H"
@@ -11,7 +12,6 @@
 
 extern u8 D_801041F0[];
 
-extern void *D_80103FCC;
 
 
 extern CCollisionSetup_t D_0044A850[];

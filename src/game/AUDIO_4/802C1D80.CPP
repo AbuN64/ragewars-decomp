@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800D5268_de.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CTX.H"
@@ -33,7 +34,6 @@ void func_802BCC90_de(void) {
     }
 }
 
-extern s32 D_800D5268_de;
 extern void *__osPopThread(OSMesgQueue *arg0, OSMesgQueue *arg1, Ctx *arg2);
 extern void __osEnqueueThread(void *arg0, void *arg1);
 

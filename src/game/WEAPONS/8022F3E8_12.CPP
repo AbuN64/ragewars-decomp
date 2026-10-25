@@ -1,4 +1,6 @@
 #include "COMMON/OBJECTLINKS14C.H"
+#include "COMMON/LONE/D_800E0D44.H"
+#include "COMMON/LONE/D_800DCC68.H"
 #include "COMMON/NAME.H"
 #include "COMMON/TRIPLE.H"
 #include "TYPES.H"
@@ -15,7 +17,6 @@
  * flagged 0x400. */
 
 #if defined(VERSION_EU) || defined(VERSION_EU_X)
-extern s32 D_800E0D44[], D_800DCC68[];
 
 #else
 #endif

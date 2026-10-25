@@ -1,10 +1,10 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/LONE/D_8010EC90.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/AIPROFILE.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "TYPES.H"
 
-extern s32 D_8010EC90;
 
 extern s32 D_80146894;
 

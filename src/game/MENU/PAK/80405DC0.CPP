@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_0044E4B0.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -83,7 +84,6 @@ extern s32 D_8014ADA0;
 
 extern char D_0044E48C[];
 
-extern char D_0044E4B0[];
 
 extern char D_0044E4D4[];
 

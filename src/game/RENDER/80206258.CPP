@@ -1,4 +1,5 @@
 #include "COMMON/REC.H"
+#include "COMMON/LONE/D_800E4680.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -36,7 +37,6 @@ extern char D_80131600;
 
 extern u8 D_801462D5;
 
-extern u8 *D_800E4680;
 
 extern SpawnDispatchActor *func_8028FFD0_de(char *, void *, s32, CVector3, Triple, s32, f32);
 

@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "MENU/80409A88.H"
@@ -71,7 +72,6 @@ extern s32 func_802A037C_de(void *,void *);
 
 
 
-extern char D_0044E4F8[];
 
 
 

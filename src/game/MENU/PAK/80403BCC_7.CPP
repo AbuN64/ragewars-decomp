@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT0V3.H"
+#include "COMMON/LONE/D_8010FC00.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/EXTERNS_12.H"
 #include "TYPES.H"
@@ -23,7 +24,6 @@ extern u8 D_8010FBE3[];
 
 extern u8 D_80153330[];
 
-extern u8 D_8010FC00[];
 
 extern s32 func_802B7FD8_de(u8 *a0, u8 *a1, s32 a2);
 

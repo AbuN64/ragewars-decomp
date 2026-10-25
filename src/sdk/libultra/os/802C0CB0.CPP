@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_18.H"
+#include "COMMON/LONE/D_800D5268_de.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/NODERECAT1C.H"
 #include "TYPES.H"
@@ -18,7 +19,6 @@ s32 func_802BBBC0_de(s32 arg0) {
 }
 
 s32 func_802BC36C_de(s32 *, s32);
-extern s32 D_800D5268_de;
 extern void *D_800D5270;
 
 

@@ -1,4 +1,6 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_0044E4B0.H"
+#include "COMMON/LONE/D_0044E468.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "MENU/PAK_LOAD.H"
 #include "COMMON/UNUSED.H"
@@ -9,8 +11,6 @@
 #include "RESMGR/802A0888.H"
 
 extern u8 *D_800E28BC;
-extern char D_0044E468[];
-extern char D_0044E4B0[];
 extern s32 D_8011FECC;
 extern s32 D_8015375C;
 s32 func_8040458C_de(s32, s32, s32 *, u8 *, u8 *, s32 *, u8 *, u8 *);

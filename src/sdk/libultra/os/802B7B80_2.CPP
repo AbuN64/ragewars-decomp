@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_8014D6E0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "COMMON/ARG.H"
@@ -12,7 +13,6 @@ extern u8 D_8014D4B0;
 
 extern u8 D_8014D5E0[];
 
-extern u8 D_8014D6E0;
 
 
 

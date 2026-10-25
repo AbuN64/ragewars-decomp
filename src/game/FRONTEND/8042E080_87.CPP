@@ -1,4 +1,5 @@
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/LONE/D_800E5558.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
 
@@ -7,7 +8,6 @@
    func_8040C474_de, or at x 0x69 in mode 2. Returns zero. */
 
 
-extern void *D_800E5558;
 extern void *Scene_AllocateMemory(s32);
 extern void func_802A2360_de(void);
 extern void func_8043C210_de(void *, s32, s32, s32, s32);

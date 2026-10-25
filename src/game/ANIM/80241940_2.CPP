@@ -1,4 +1,5 @@
 #include "ANIM/RAY180.H"
+#include "COMMON/LONE/D_80103FCC.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
@@ -19,7 +20,6 @@ extern s32 func_8024491C_de(CollisionProbe *, CVector3, CVector3, struct MotionS
 
 extern void func_80271F34_de(CVector3 *, CVector3 *, CVector3 *);
 
-extern void *D_80103FCC;
 
 
 extern char D_80100338;

@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_800D83D0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/CONTREADFORMAT.H"
 #include "TYPES.H"
@@ -18,7 +19,6 @@
 static inline void create_access_queue(void) {
     extern Slot D_8014EA78;
     extern OSMesg D_8014EA70;
-    extern s32 D_800D83D0[];
     D_800D83D0[0] = 1;
     osCreateMesgQueue(&D_8014EA78, &D_8014EA70, 1);
     func_802BB420_de(&D_8014EA78, 0, 0);
@@ -26,7 +26,6 @@ static inline void create_access_queue(void) {
 
 void func_802B9C14_de(void) {
     extern Slot D_8014EA78;
-    extern s32 D_800D83D0[];
     OSMesg token;
 
     if (!D_800D83D0[0]) {

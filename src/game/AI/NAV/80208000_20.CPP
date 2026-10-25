@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80103FD0.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -16,7 +17,6 @@ f32 func_80285630_de(s32 arg0);
 
 s32 func_8020E674_de(ActorRec *actor, f32 scale, f32 lateral);
 
-extern char D_80103FD0;
 
 extern World *D_80103FCC;
 

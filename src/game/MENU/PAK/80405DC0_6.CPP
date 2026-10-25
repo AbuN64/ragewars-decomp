@@ -1,4 +1,6 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_0044E4F8.H"
+#include "COMMON/LONE/D_0044ED44.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/WORLD.H"
@@ -172,9 +174,9 @@ static __inline__ char *pakPrompt(s32 *channel) {
 #include "COMMON/RECORDRECAT1C.H"
 #include "MENU/80405DC0.H"
 extern s32 D_8014D4C0_de, D_8014D4EC_de, D_8015375C, D_80153760, D_80153784, D_800E28C8;
-extern char D_8014561C[], D_0044E4F8[], D_0044FFA4[], D_0044FB50[];
+extern char D_8014561C[], D_0044FFA4[], D_0044FB50[];
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
-extern char D_0044EA98[], D_0044E9C0[], D_0044ED44[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
+extern char D_0044EA98[], D_0044E9C0[], D_0044EA2C[], D_0044EA08[], D_0044E9E4[];
 extern void func_80404E28_de(s32);
 extern s32 Pak_GetStatus(s32), func_80404F3C_de(s32), func_80405598_de(s32), func_80264580_de(s32);
 extern void Pak_OpenDialog(char *, char *, ObjRecAt5DC *, PakMenuSlot *, char *);
@@ -232,7 +234,7 @@ extern u8 D_8014D4B1, D_8014D4B2, D_8014D4B3;
 extern u8 D_8014D4B4[];
 extern struct { u16 value; } D_8014D4AA, D_8014D4AC_de, D_8014D4AE;
 extern char D_00450BF0_de[], D_00450C14_de[], D_00450C38_de[], D_00450C5C_de[];
-extern char D_0044EA08[], D_0044ED44[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
+extern char D_0044EA08[], D_0044E48C[], D_0044E9C0[], D_8014561C[];
 extern void func_80404E28_de(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);
 extern s32 func_80404F3C_de(s32 ch);

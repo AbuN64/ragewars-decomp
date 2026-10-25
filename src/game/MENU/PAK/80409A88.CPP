@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/LONE/D_0044E468.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "MENU/PAK_LOAD.H"
 #include "TYPES.H"
@@ -30,7 +31,6 @@ extern s32 func_80441FE8_de(LayeredText *);
 
 extern char D_8014561C[];
 
-extern char D_0044E468[];
 
 extern void Pak_OpenDialog(char *, char *, int, int, int);
 

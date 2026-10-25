@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/LONE/D_80103FD0.H"
 #include "COMMON/GROUP.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -42,7 +43,6 @@ extern s32 func_8024DFA0_de(Instance8020CD74 *);
 
 typedef struct CollisionInfo CollisionInfo;
 
-extern char D_80103FD0;
 
 extern f32 Particle_GetActorHeight(Instance8020CD74 *);
 

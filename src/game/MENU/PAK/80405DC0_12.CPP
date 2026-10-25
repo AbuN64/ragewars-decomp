@@ -1,4 +1,5 @@
 #include "COMMON/SHAREDPLAYER.H"
+#include "COMMON/LONE/D_0044E4F8.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/MENURECAT24.H"
 #include "MENU/80405DC0.H"
@@ -14,7 +15,6 @@ extern void Scene_ReleaseResource(void *arg0, void *arg1);
 
 
 
-extern char D_0044E4F8[];
 extern char D_0044FB2C[];
 extern char D_0044FFA4[];
 extern char D_00450BF0_de[];

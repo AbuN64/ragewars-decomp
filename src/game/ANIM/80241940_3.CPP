@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_80103FCC.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "ANIM/RAY180.H"
 
@@ -22,7 +23,6 @@ extern f32 func_80241728_de(SurfaceHit *, f32, f32);
 
 extern s32 func_8024491C_de(Input_func_802426CC_de *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 
-extern void *D_80103FCC;
 
 extern char D_801000F0;
 

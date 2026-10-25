@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E4680.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "TYPES.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -24,7 +25,6 @@ extern s32 func_8022F454_de(Profile *, s32);
 
 
 
-extern u8 *D_800E4680;
 
 extern s32 func_80265650_de(u8 *, s32);
 

@@ -1,4 +1,5 @@
 #include "COMMON/ACTORRESOURCEHEADER.H"
+#include "COMMON/LONE/D_800CA8C4_de.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
@@ -21,7 +22,6 @@ extern f32 func_8024D398_de(Actor_func_8024A1D0_de *actor);
 
 extern void Fx_DispatchAttachmentEffects(void *arg0, s32 arg1, s32 arg2, void *arg3, void *arg4);
 
-extern char D_800CA8C4_de[];
 
 extern void *D_800CB440_de[];
 

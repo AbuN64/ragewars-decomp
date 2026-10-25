@@ -1,4 +1,5 @@
 #include "COMMON/ENTRYRECAT0V3.H"
+#include "COMMON/LONE/D_8010FC00.H"
 #include "MENU/80403BCC.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
@@ -102,7 +103,6 @@ s32 Pak_RefreshNotes(s32 ch) {
 }
 
 s32 Pak_UpdateStatus(s32 ch) {
-    extern u8 D_8010FC00[];
     s32 tries;
     s32 result;
     void *pfs;
@@ -143,7 +143,6 @@ finish:
 }
 
 void func_804041F0_de(void) {
-    extern u8 D_8010FC00[];
     s32 channel;
     s32 present;
     PakRecord *record;

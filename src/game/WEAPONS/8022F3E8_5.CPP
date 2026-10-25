@@ -1,4 +1,7 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800E0D44.H"
+#include "COMMON/LONE/D_800DCC68.H"
+#include "COMMON/LONE/D_800D30BC.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
@@ -29,7 +32,6 @@ INCLUDE_ASM("span_1000", func_802301F4_de);
 
 
 
-extern s32 D_800D30BC[];
 
 
 
@@ -147,9 +149,7 @@ extern void *D_800D052C[];
 #include "COMMON/SHARED_OPTIONSSCREEN.H"
 typedef struct AlternateModeInfo { u8 pad0[0x14]; u32 flags; } AlternateModeInfo;
 #if defined(VERSION_EU)
-extern s32 D_800E0D44[];
 #elif defined(VERSION_EU_X)
-extern s32 D_800DCC68[];
 #endif
 /* The adjacent exact can_fire supplies the same readiness check; this call site
  * owns its distinct message-duration literal and localized European strings. */

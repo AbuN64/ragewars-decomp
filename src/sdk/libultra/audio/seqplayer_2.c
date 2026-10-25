@@ -1,4 +1,6 @@
 #include "COMMON/TRIPLE.H"
+#include "COMMON/LONE/D_800C7444.H"
+#include "COMMON/LONE/D_800C7440.H"
 #include "COMMON/ALBANK_S.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -21,8 +23,6 @@ struct ALSequenceLoopEvent {
 };
 
  /* 2147483648.0f */
-extern char D_800C7440[];      /* "EX" */
-extern char D_800C7444[];      /* "audio/seqplayer.c" */
 
 extern void func_802B0A90_de(ALSeqPlayer *);                        /* __handleNextSeqEvent */
 extern void func_802B0C94_de(ALSeqPlayer *, ALEvent *);             /* __handleMIDIMsg */

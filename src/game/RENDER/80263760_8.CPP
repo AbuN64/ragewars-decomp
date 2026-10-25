@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_8010EC90.H"
 #include "COMMON/PAKQUEUESTATE.H"
 #include "COMMON/SHARED_WORLDFUNC.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -15,7 +16,6 @@
 
 extern void func_80285D30_de(s32 *);
 
-extern s32 D_8010EC90;
 
 
 

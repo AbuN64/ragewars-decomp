@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_0044ED44.H"
 #include "COMMON/PAK_MENU.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/RECORDRECAT1C.H"
@@ -23,7 +24,6 @@ extern char D_8014561C[];
 extern char D_0044FFA4[];
 extern unsigned char D_0044E4B0[];
 extern char D_0044EA2C[];
-extern char D_0044ED44[];
 extern char D_0044E9C0[];
 extern void func_80404E28_de(s32 ch);
 extern s32 Pak_GetStatus(s32 ch);

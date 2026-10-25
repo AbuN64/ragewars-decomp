@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_8014D0D0.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "COMMON/INTEGERSTATE14_2.H"
 #include "TYPES.H"
@@ -14,7 +15,6 @@ INCLUDE_ASM("span_1000", func_802A0BE8_eu);
 
 #if defined(VERSION_DE) || (defined(NON_MATCHING) && defined(VERSION_EU))
 #include "stdarg.h"
-extern int D_8014D0D0;
 extern int D_800CD918;
 
 #if defined(VERSION_EU)
@@ -32,7 +32,6 @@ int *func_802A0AD0_de(int format, ...) {
 
 #if !(defined(VERSION_US))
 
-extern s32 D_8014D0D0;
 
 s32 func_802A0B20_de(s32 arg0, ...) {
     char *args;

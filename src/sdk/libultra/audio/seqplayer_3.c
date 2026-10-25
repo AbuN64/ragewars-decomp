@@ -1,4 +1,6 @@
 #include "COMMON/ALPARAM_S.H"
+#include "COMMON/LONE/D_800C7444.H"
+#include "COMMON/LONE/D_800C7440.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/ALSEQUENCEPLAYER.H"
@@ -20,10 +22,8 @@ extern const float D_800C74C0_de;
 extern const float D_800C74C8_de;
 
  /* 1.0f */
-extern char D_800C7440[];
 
  /* "EX" */
-extern char D_800C7444[];
 
  /* "audio/seqplayer.c" */
 extern ALSound_s *func_802B16E0_de(ALSeqPlayer *, u8, u8, u8);

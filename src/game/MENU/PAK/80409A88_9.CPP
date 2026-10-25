@@ -1,4 +1,5 @@
 #include "COMMON/RECORDRECATCV1.H"
+#include "COMMON/LONE/D_0044E4B0.H"
 #include "MENU/80409A88.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/UNUSED.H"
@@ -39,7 +40,6 @@ extern s32 func_80441FE8_de(struct Field *);
 
 extern char D_8014561C[];
 
-extern char D_0044E4B0[];
 
 extern void Pak_OpenDialog(void *, void *, s32, s32, s32);
 

@@ -1,4 +1,7 @@
 #include "COMMON/VECTOR4F.H"
+#include "COMMON/LONE/D_800E0D44.H"
+#include "COMMON/LONE/D_800DCC68.H"
+#include "COMMON/LONE/D_800D30BC.H"
 #include "COMMON/LONE/D_80152789.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/OBJECTLINKS14C.H"
@@ -19,7 +22,6 @@
    mode from D_800CE8DC. */
 extern WeaponActionRecord D_800CE8DC[];
 extern char D_80102B00[];
-extern s32 D_800D30BC[];
 extern char D_80145040[];
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 
@@ -30,9 +32,7 @@ extern void Camera_PostTargetedScreenMessage(void *, void *, s32, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 #if defined(VERSION_DE) || defined(VERSION_US) || defined(VERSION_US_REV1)
 #elif defined(VERSION_EU)
-extern s32 D_800E0D44[];
 #elif defined(VERSION_EU_X)
-extern s32 D_800DCC68[];
 #endif
 static inline s32 can_fire(char *player) {
     s32 ammo;

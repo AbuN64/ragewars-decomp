@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_8011AF38.H"
 #include "COMMON/GAMEPLAY_ROUND_RULES.H"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/UNUSED.H"
@@ -11,7 +12,6 @@
 #include "particle/8027A0F4_4.H"
 
 extern char D_8011AD70;
-extern char D_8011AF38;
 extern void func_80273198_de(void *arg0, void *arg1);
 extern f32 func_80275DD4_de(Node75 *node, f32 x, f32 z);
 extern void func_80275410_de(void *arg0, s32 arg1);

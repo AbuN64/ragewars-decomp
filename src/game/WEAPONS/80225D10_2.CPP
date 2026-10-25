@@ -1,4 +1,5 @@
 #include "COMMON/WORLD.H"
+#include "COMMON/LONE/D_80103FD0.H"
 #include "include_asm.h"
 #include "COMMON/GAMEPLAY_TRANSITION.H"
 #include "COMMON/UNUSED.H"
@@ -73,7 +74,6 @@ void func_80226340_de(SharedPlayer *player) {
 
 
 extern void **D_80103FCC;
-extern char D_80103FD0;
 
 
 extern void Weapons_UpdateViewAngles(void *, void *, void *);

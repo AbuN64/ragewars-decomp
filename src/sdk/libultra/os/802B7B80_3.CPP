@@ -1,4 +1,5 @@
 #include "COMMON/EXTERNS_18.H"
+#include "COMMON/LONE/D_8014D5C0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "TYPES.H"
 #include "TYPES.H"
@@ -9,7 +10,6 @@
 #if defined(VERSION_US)
 extern u8 D_8014D4B0;
 extern u8 D_8014D4C0[];
-extern u8 D_8014D5C0;
 
 
 extern u32 func_802B8C88_de(void *arg0);

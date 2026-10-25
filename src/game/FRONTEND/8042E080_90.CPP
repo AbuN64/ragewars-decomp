@@ -1,4 +1,5 @@
 #include "COMMON/MENU_MATCH_GLOBALS.H"
+#include "COMMON/LONE/D_800E5558.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/S1_6.H"
 #include "TYPES.H"
@@ -10,7 +11,6 @@
    of D_8011FE88, restarts func_8025476C_de when func_8025477C_de reports it idle, and calls
    func_8025E384_de and func_8042DEA0_de. Returns zero. */
 
-extern void *D_800E5558;
 
 
 extern s32 func_8043C308_de(void *);

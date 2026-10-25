@@ -1,4 +1,5 @@
 #include "COMMON/SCENERECAT10C0.H"
+#include "COMMON/LONE/D_800E4680.H"
 #include "SCENE/80286050.H"
 #include "TYPES.H"
 
@@ -10,7 +11,6 @@
 
 
 
-extern unsigned char *D_800E4680;
 
 void func_80286950_de(WorldRecAt1B660 *world) {
     ObjectRecAt18 *object;

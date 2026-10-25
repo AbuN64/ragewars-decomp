@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_80103FD0.H"
 #include "COMMON/SHAREDCALLBACK5.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -22,7 +23,6 @@ extern void *Nav_GetGraphPoint(void *, s32);
 
 extern CNavData D_8013B364;
 
-extern char D_80103FD0;
 
 extern void **D_80103FCC;
 

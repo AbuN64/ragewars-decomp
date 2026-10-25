@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_8014D6E0.H"
 #include "COMMON/EXTERNS_18.H"
 #include "COMMON/OBJRECAT4V6.H"
 #include "COMMON/UNUSED.H"
@@ -9,7 +10,6 @@
 
 #if defined(VERSION_EU)
 extern u8 D_8014D5E0[];
-extern u8 D_8014D6E0;
 u32 func_802B7EF0_eu(void *arg0) {
     Block40 saved;
     u8 *source;

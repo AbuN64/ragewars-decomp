@@ -1,4 +1,5 @@
 #include "COMMON/VIEWFLAGS.H"
+#include "COMMON/LONE/D_800C32DC_de.H"
 #include "COMMON/LONE/D_800CD8D0.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
@@ -39,7 +40,6 @@ extern int D_800C32D0_de;
 
 void *Scene_AllocateResource(int a, int b, int c, void *d);
 
-extern int D_800C32DC_de;
 
 extern void func_8025E3F0_de(s32 arg0);
 

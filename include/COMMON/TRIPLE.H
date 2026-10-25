@@ -1,6 +1,7 @@
 #ifndef COMMON_TRIPLE_H
 #define COMMON_TRIPLE_H
 #include "COMMON/ITEMRECAT20V1.H"
+#include "COMMON/LONE/D_800D37D0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/EFFECTRENDER.H"
 #include "COMMON/LENS_FLARE.H"
@@ -2166,7 +2167,6 @@ extern int D_800D34DC;
 extern int D_800D35F4;
 extern int D_800D3628;
 extern int D_800D36E4;
-extern u8 *D_800D37D0;
 extern int D_800D3958;
 extern int D_800D3A58;
 #if defined(VERSION_EU) || defined(VERSION_EU_X)

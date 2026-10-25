@@ -1,4 +1,5 @@
 #include "COMMON/CARTRIDGEREADWORKER.H"
+#include "COMMON/LONE/D_8014D0D0.H"
 #include "COMMON/MANAGER.H"
 #include "COMMON/MESSAGESEMAPHORE.H"
 #include "COMMON/INTEGERSTATE14_2.H"
@@ -18,7 +19,6 @@ extern FuncPtr D_800CD93C_de;
 
 
 
-extern s32 D_8014D0D0;
 
 extern ResourceOpenCallback D_800CD924_de;
 

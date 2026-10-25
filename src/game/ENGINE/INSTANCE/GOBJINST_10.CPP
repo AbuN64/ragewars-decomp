@@ -1,4 +1,5 @@
 #include "COMMON/OBJECTLINKS180_2.H"
+#include "COMMON/LONE/D_800CA8C4_de.H"
 #include "COMMON/ITEMRECAT20V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/UNUSED.H"
@@ -36,7 +37,6 @@ extern void Rsp_ConvertMatrixToFloat(f32 *, char *);
 
 extern void Particle_SubtractVectors(CVector3 *, CVector3 *, CVector3 *);
 
-extern char D_800CA8C4_de[];
 
 extern TypeEntry *D_800CB440_de[];
 

@@ -1,5 +1,7 @@
 #ifndef COMMON_ALSEQUENCEPLAYER_H
 #define COMMON_ALSEQUENCEPLAYER_H
+#include "COMMON/LONE/D_800C7440.H"
+#include "COMMON/LONE/D_800C7444.H"
 struct ALSeq_s;
 #ifndef FUNC_802B0A90_DE_CLOSED_H
 #define FUNC_802B0A90_DE_CLOSED_H
@@ -19,8 +21,6 @@ struct ALSequenceLoopEvent {
     s32 count;
 };
 
-extern char D_800C7440[];   /* "EX" */
-extern char D_800C7444[];   /* "audio/seqplayer.c" */
 
 extern void func_802B1E80_de(struct ALSeq_s *, ALEvent *);                 /* alSeqNextEvent */
 extern void func_802B0C94_de(ALSeqPlayer *, ALEvent *);           /* __handleMIDIMsg */

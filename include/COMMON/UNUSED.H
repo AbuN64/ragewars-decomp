@@ -1,6 +1,8 @@
 #ifndef COMMON_UNUSED_H
 #define COMMON_UNUSED_H
 #include "COMMON/LONE/D_8011B1D8.H"
+#include "COMMON/LONE/D_8011AF38.H"
+#include "COMMON/LONE/D_800C32DC_de.H"
 #include "COMMON/LONE/D_800DEA60.H"
 #include "COMMON/LONE/D_800D5250.H"
 #include "COMMON/PARTICLE_LIGHTING.H"
@@ -132,7 +134,6 @@ extern char D_800CAEF0;
 
 extern char *D_800D3530;
 
-extern int D_800C32DC_de;
 
 extern int D_800E1264[];
 
@@ -1658,7 +1659,6 @@ extern s32 D_0044FB20;
 
 extern u8 D_B2000011;
 
-extern char D_8011AF38;
 
 extern const float D_800CCB10;
 

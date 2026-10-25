@@ -1,4 +1,5 @@
 #include "RENDER_3/RANGENODE.H"
+#include "COMMON/LONE/D_8010EC90.H"
 #include "TYPES.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -14,7 +15,6 @@
 extern f32 D_800C4460_de;
 extern void func_80266810_de(void *, s32, s32, Triple, struct IntPair, s32, s32, s32);
 
-extern s32 D_8010EC90;
 
 extern void func_8028CE94_de(void *, void *, s32, Triple, f32, f32);
 

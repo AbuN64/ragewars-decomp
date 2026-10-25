@@ -1,4 +1,5 @@
 #include "TYPES.H"
+#include "COMMON/LONE/D_80103FD0.H"
 #include "COMMON/VECTOR4F.H"
 #include "stddef.h"
 #include "FX_2/80271B18.H"
@@ -30,7 +31,7 @@ extern const f32 D_800C23B4_de, D_800C23B8_de, D_800C23BC_de, D_800C23C0_de;
 extern const f32 D_800C23C4_de, D_800C23C8_de, D_800C23CC_de, D_800C23D0_de;
 extern f32 D_800D2988;
 extern AimHit *D_80103FCC;
-extern char D_80103FD0, D_801000F0;
+extern char D_801000F0;
 extern void *D_800D052C[];
 void func_8027302C(f32 *, f32 *);
 void Weapons_BuildPlayerViewTransform(void *, f32 *);

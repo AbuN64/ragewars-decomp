@@ -1,4 +1,5 @@
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
+#include "COMMON/LONE/D_800E4680.H"
 #include "COMMON/AUDIO_CALLBACKS.H"
 #include "COMMON/VECTOR4F.H"
 #include "COMMON/ITEMRECAT20V1.H"
@@ -44,7 +45,6 @@ extern void *func_8028FFD0_de(char *arg0, s32 *arg1, s32 arg2, CVector3 rotation
 extern char D_8011D8D0[];
 
 
-extern u8 *D_800E4680;
 
 
 static __inline__ SpawnChoice *spawnTable0(void) {

@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/LONE/D_800D5268_de.H"
 #include "COMMON/NODERECAT1C.H"
 #include "COMMON/CTX.H"
 #include "TYPES.H"
@@ -6,7 +7,6 @@
 #include "COMMON/EXTERNS_5.H"
 #include "sdk/os.h"
 
-extern s32 D_800D5268_de;
 extern ThreadNode *D_800D5270;
 extern void __osEnqueueThread(ThreadNode **queue, ThreadNode *node);
 extern ThreadNode *__osPopThread(ThreadNode **queue);
