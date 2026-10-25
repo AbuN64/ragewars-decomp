@@ -10569,7 +10569,8 @@ SECTIONS
 #endif
     {
 #if defined(VERSION_DE)
-        src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/sdk/libsn/802013D8.CPP.o */;
+        src/sdk/libsn/802013D8.CPP.o(.rodata .rdata);
         src/game/DATA/OVLDAT1/800C19E8.CPP.o(.data);
         src/game/GAME/800C6AEC.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B00.CPP.o(.rodata .rdata);
@@ -12321,6 +12322,8 @@ SECTIONS
         src/game/DATA/OVLDAT10/801003E4.CPP.o(.data);
 #endif
 #if defined(VERSION_EU)
+        . = ALIGN(8) /* src/sdk/libsn/802013D8.CPP.o */;
+        src/sdk/libsn/802013D8.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.rodata .rdata);
         src/game/GAME/800C6AEC.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B00.CPP.o(.rodata .rdata);
@@ -14017,7 +14020,8 @@ SECTIONS
         src/game/MULTI/804453C4_3.CPP.o(.data);
 #endif
 #if defined(VERSION_EU_X)
-        src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/sdk/libsn/802013D8.CPP.o */;
+        src/sdk/libsn/802013D8.CPP.o(.rodata .rdata);
         src/game/AI/NAV/800C6DB0.CPP.o(.data);
         src/game/GAME/800C6AEC.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B00.CPP.o(.rodata .rdata);
@@ -15743,6 +15747,8 @@ SECTIONS
         src/game/DATA/OVLTBL_9/800EDC70.CPP.o(.data);
 #endif
 #if defined(VERSION_US)
+        . = ALIGN(8) /* src/sdk/libsn/802013D8.CPP.o */;
+        src/sdk/libsn/802013D8.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.rodata .rdata);
         src/game/GAME/800C6AEC.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B00.CPP.o(.rodata .rdata);
@@ -17477,7 +17483,8 @@ SECTIONS
         src/game/DATA/OVLDAT10/800FF1A0.CPP.o(.data);
 #endif
 #if defined(VERSION_US_REV1)
-        src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.rodata .rdata);
+        . = ALIGN(8) /* src/sdk/libsn/802013D8.CPP.o */;
+        src/sdk/libsn/802013D8.CPP.o(.rodata .rdata);
         src/game/DATA/OVL1_A/DATA_800C6AD8.CPP.o(.data);
         src/game/GAME/800C6AEC.CPP.o(.rodata .rdata);
         src/game/GAME/800C6B00.CPP.o(.rodata .rdata);
@@ -19806,7 +19813,7 @@ SECTIONS
     .data_800C.bss (NOLOAD) :
     {
 #if defined(VERSION_DE)
-        src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libsn/802013D8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVLDAT1/800C19E8.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6AEC.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B00.CPP.o(.bss .sbss COMMON);
@@ -21067,6 +21074,7 @@ SECTIONS
         src/game/DATA/OVLDAT10/801003E4.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_EU)
+        src/sdk/libsn/802013D8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6AEC.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B00.CPP.o(.bss .sbss COMMON);
@@ -22297,7 +22305,7 @@ SECTIONS
         src/game/MULTI/804453C4_3.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_EU_X)
-        src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libsn/802013D8.CPP.o(.bss .sbss COMMON);
         src/game/AI/NAV/800C6DB0.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6AEC.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B00.CPP.o(.bss .sbss COMMON);
@@ -23530,6 +23538,7 @@ SECTIONS
         src/game/DATA/OVLTBL_9/800EDC70.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US)
+        src/sdk/libsn/802013D8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6AEC.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B00.CPP.o(.bss .sbss COMMON);
@@ -24811,7 +24820,7 @@ SECTIONS
         src/game/DATA/OVLDAT10/800FF1A0.CPP.o(.bss .sbss COMMON);
 #endif
 #if defined(VERSION_US_REV1)
-        src/game/DATA/OVL1_A/DATA_800C6AB0.CPP.o(.bss .sbss COMMON);
+        src/sdk/libsn/802013D8.CPP.o(.bss .sbss COMMON);
         src/game/DATA/OVL1_A/DATA_800C6AD8.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6AEC.CPP.o(.bss .sbss COMMON);
         src/game/GAME/800C6B00.CPP.o(.bss .sbss COMMON);

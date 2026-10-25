@@ -3218,7 +3218,7 @@ segments:
     start: 0xC28A0
     vram: 0x800C1CA0
     subsegments:
-      - [0xC28A0, rodata, data_800C/D_auto_rodata_shared_800C6AB0]
+      - [0xC28A0, rodata, data_800C/literals_Libsn_ServiceHostCommands]
       - [0xC28C8, data, data_800C/rodata_unresolved_800C1CC8]
       - [0xC28DC, rodata, data_800C/D_80202CA0_C76EC]
       - [0xC28F0, rodata, data_800C/D_80202E4C_C7700]

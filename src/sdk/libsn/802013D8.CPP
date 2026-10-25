@@ -29,19 +29,16 @@ void func_802013E0_de(void) {
     func_80200538_de(saved);
 }
 
-#ifdef NON_MATCHING
 extern int Libgultra_TrwGetSr(void);
 extern void Libgultra_TrwSetSr(int);
 extern s32 func_802005A0_de(s32);
 extern void func_802005DC_de(s32);
 extern void func_802010D8_de(u32);
 extern void Io_CopyHostBlockToCart(void);
-/* The u32 at D_800F3450 - 0x1A8 has no symbol of its own yet. */
-#define D_800F32A8 (*(u32 *)((u8 *)&D_800F3450 - 0x1A8))
+extern u32 D_800F32A8;
 
-/* 129/142 words; remaining: ROM keeps three separate hi registers for D_800F3450, D_800F3452 and the word at D_800F3450 - 0x1A8 (no symbol yet), the draft shares one.
- * Host-command service loop: poll the command word at 0xB1FFFFF0, acknowledge it and run it. */
-void func_802014A4_de(void) {
+/* Host-command service loop: poll the command word at 0xB1FFFFF0, acknowledge it and run it. */
+void Libsn_ServiceHostCommands(void) {
     s32 keepRunning;
     s32 command;
     do {
@@ -63,13 +60,15 @@ void func_802014A4_de(void) {
             continue;
         }
         switch (command) {
+        case 0x10:
+            break;
         case 0x11:
             keepRunning = 0;
             break;
         case 0x12:
+            D_800F32A8 &= ~1U;
             D_800F3450 = 0;
             D_800F3452 = 0;
-            D_800F32A8 &= ~1U;
             Libgultra_TrwSetSr(Libgultra_TrwGetSr() & ~1);
             break;
         case 0x13:
@@ -83,7 +82,7 @@ void func_802014A4_de(void) {
             D_800F3452 = 0;
             break;
         case 0x16:
-            func_80200568_de(0xB1FE0000, (D_800F3452 << 24) | (D_800F3450 << 16));
+            func_80200568_de(0xB1FE0000, (D_800F3452 << 24) | ((u8)D_800F3450 << 16));
             break;
         case 0x17:
             func_802010D8_de(2);
@@ -102,6 +101,3 @@ void func_802014A4_de(void) {
     } while (keepRunning != 0 || D_800F3452 == 0);
     func_80200568_de(0xB1FFFFF0, 0);
 }
-#else
-INCLUDE_ASM("span_1000", func_802014A4_de);
-#endif

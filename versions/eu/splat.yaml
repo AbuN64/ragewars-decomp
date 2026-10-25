@@ -3212,7 +3212,7 @@ segments:
     start: 0xC2860
     vram: 0x800C1C60
     subsegments:
-      - [0xC2860, rodata, data_800C/D_auto_rodata_shared_800C6AB0]
+      - [0xC2860, rodata, data_800C/literals_Libsn_ServiceHostCommands]
       - [0xC2888, rodata, data_800C/rodata_unresolved_800C1C88]
       - [0xC289C, rodata, data_800C/D_80202CA0_C76EC]
       - [0xC28B0, rodata, data_800C/D_80202E4C_C7700]

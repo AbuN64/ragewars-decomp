@@ -144,7 +144,7 @@ Libgultra_TrwExceptionHandler:
     nop
     lui $sp, %hi(D_800F3CB0)
     addiu $sp, $sp, %lo(D_800F3CB0)
-    jal func_802014A4_de
+    jal Libsn_ServiceHostCommands
     nop
     jal Libgultra_TrwCacheFlush0
     nop
