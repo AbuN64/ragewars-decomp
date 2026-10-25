@@ -287,7 +287,7 @@ s32 Frontend_UpdateFourPlayerResults(void) {
 extern Gfx *D_80110634;
 extern s32 D_800E28D0;
 extern void func_8041C7F4_de(struct ResultsPlayerPanel *);
-extern s32 func_80439CC8_de(char *);
+extern s32 Frontend_GetModelRecordCount(char *);
 #if defined(VERSION_DE)
 extern void func_804397F0_auto(char *);
 #else
@@ -314,7 +314,7 @@ s32 Frontend_DrawFourPlayerResults(void *window, void *item, s32 event) {
         }
         gDPSetScissorFrac(D_80110634++, 0, 0, 0, (s32)((f32)(D_800E28D0 - 1) * 4.0f), (s32)((f32)(D_800E28D4 - 1) * 4.0f));
         for (i = 0; i < 4; i++) {
-            if (D_800E59E0->panels[i].state == 1 && func_80439CC8_de(D_800E59E0->badges[i]) != 0) {
+            if (D_800E59E0->panels[i].state == 1 && Frontend_GetModelRecordCount(D_800E59E0->badges[i]) != 0) {
                 D_800D15E0 = 1;
                 D_800D15E4[3] = 150.0f;
 #if defined(VERSION_DE)

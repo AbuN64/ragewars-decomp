@@ -4549,7 +4549,7 @@ segments:
       - [0xDE108, rodata, data_800C/D_8041D6A8_E2138]
       - [0xDE10F, data, data_800C/rodata_unresolved_800DD50F]
       - [0xDE110, rodata, data_800C/literals_func_8041DBCC_de]
-      - [0xDE124, rodata, data_800C/D_8041DCC0_E2154]
+      - [0xDE124, rodata, data_800C/literals_Frontend_DrawMenuBlockModel]
       - [0xDE130, rodata, data_800C/literals_func_8041EA70_de]
       - [0xDE140, rodata, data_800C/rodata_func_8041F228_de_800DD540]
       - [0xDE144, data, data_800C/rodata_unresolved_800DD544]

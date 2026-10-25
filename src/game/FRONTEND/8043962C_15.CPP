@@ -23,7 +23,7 @@ s32 func_80439C80_de(struct Record_func_80439C80_de *record, s32 count) {
 }
 
 /* Returns the word at offset 0x0 of a record. */
-s32 func_80439CC8_de(s32 *record) {
+s32 Frontend_GetModelRecordCount(s32 *record) {
     return record[0x0 / 4];
 }
 

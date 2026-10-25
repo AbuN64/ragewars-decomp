@@ -4556,7 +4556,7 @@ segments:
       - [0xE9948, rodata, data_800C/D_8041D6A8_E2138]
       - [0xE994F, data, data_800C/rodata_unresolved_800E8D4F]
       - [0xE9950, rodata, data_800C/literals_func_8041DBCC_de]
-      - [0xE9964, rodata, data_800C/D_8041DCC0_E2154]
+      - [0xE9964, rodata, data_800C/literals_Frontend_DrawMenuBlockModel]
       - [0xE9970, rodata, data_800C/literals_func_8041EA70_de]
       - [0xE9980, rodata, data_800C/rodata_func_8041F6D8_eu_x_800E8D80]
       - [0xE9984, data, data_800C/rodata_unresolved_800E8D84]
