@@ -89,7 +89,7 @@ void func_80226A34_de(World_func_80226A34_de *world) {
         }
         rules = &D_8014687C.rules;
         for (player = world->players; player != 0; player = player->views16E0.view16E0_2.next) {
-            Fx_BuildControllerState(player->views5E8.view688_33.body, player);
+            Fx_BuildControllerState((struct ControllerInput *)player->views5E8.view688_33.body, (Player *)player);
             D_800D2988 = frameTime;
             if (rules->teams != 0 || rules->teamRule != 0) {
                 func_8022C490_de(player);

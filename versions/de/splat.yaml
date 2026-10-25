@@ -3752,7 +3752,7 @@ segments:
       - [0xC4E72, data, data_800C/rodata_unresolved_800C4272]
       - [0xC4E74, rodata, data_800C/D_802627A0_C9F64]
       - [0xC4E85, data, data_800C/rodata_unresolved_800C4285]
-      - [0xC4E90, rodata, data_800C/data_func_802631B0_de_800C4290]
+      - [0xC4E90, rodata, data_800C/literals_Fx_BuildControllerState]
       - [0xC4EEC, data, data_800C/rodata_unresolved_800C42EC]
       - [0xC4EF0, rodata, data_800C/D_80263740_C9FE0]
       - [0xC4EF4, rodata, data_800C/literals_Render_UpdateControllerInput]

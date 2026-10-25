@@ -2954,3 +2954,4 @@ literals_Engine_BuildPlacedInstances = 0x800CA2F8; // rom:0xCAEF8 size:0x4
 literals_Texture_PlaySoundAtPosition = 0x800C8FCC; // rom:0xC9BCC size:0x4
 literals_DispatchElementEvent = 0x800CA6B0; // rom:0xCB2B0 size:0x80
 literals_DispatchCurrentScreenEvent = 0x800CA730; // rom:0xCB330 size:0x40
+literals_Fx_BuildControllerState = 0x800C9380; // rom:0xC9F80 size:0x5C
