@@ -101,7 +101,6 @@ ResourceLoadRequest *func_80252774_de(s32 unused, ResourceLoadRequest *request, 
     return 0;
 }
 
-#ifdef NON_MATCHING
 #include "gbi.h"
 #include "UTIL/802555D0.H"
 #include "SCENE/802508E0.H"
@@ -112,6 +111,11 @@ extern Manager D_801047E0;
 extern u32 func_802BCF30_de(void);
 extern void func_80268CE0_de(s32);
 extern void func_8026925C_de(s32);
+
+/* The main heap (its other users declare D_801051A0 as a plain byte); its block list is read through this view. */
+static inline struct Heap *mainHeap(void) {
+    return (struct Heap *)&D_801051A0;
+}
 
 /* Band edge shades: half (darker) and one and a half (brighter) of a colour channel, clamped to 255. */
 #define DARKEN(c) ((s32)((u32)(c) >> 1) < 0x100 ? (s32)((u32)(c) >> 1) : 0xFF)
@@ -143,14 +147,15 @@ static inline void unlock(void) {
     }
 }
 
-/* Debug heap map: a grey frame, then one band per cache entry from the bottom of the bar upward (height scaled
- * to the heap's total span size), unlocked entries in the first pass and locked ones in the second, each with a
- * darker bottom edge; entries unused for 5+ frames get a white inset band. */
+/* Debug heap map inside a grey frame: the bar is scaled to the heap's extent (bytes from 0x80000000 to its first
+ * block plus every block's used and free size); the part below the first block is olive, then each cache entry is a
+ * band (yellow, red, blue or green by its flags) with a darker bottom edge, entries outside the locked set in the
+ * first pass and locked ones in the second; an entry that is not locked or loading and was unused for 5+ frames
+ * also gets a white inset band. Runs under the resource lock. */
 void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom) {
     struct BlockRecAt20 *span;
     Node80254C10 *node;
     u32 total;
-    s32 height;
     s32 pass;
     s32 select;
     s32 lo;
@@ -173,15 +178,14 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
     lock();
 
     base = 0x80000000;
-    span = (struct BlockRecAt20 *)((struct Heap *)&D_801051A0)->first;
+    span = (struct BlockRecAt20 *)mainHeap()->first;
     total = (u32)span - base;
     for (; span != 0; span = span->next) {
         total += span->size + span->free;
     }
 
     gDPSetPrimColor(D_80110634++, 0, 0, 0x64, 0x64, 0x00, 0xFF);
-    height = bottom - top;
-    hi = bottom - ((u32)(((u32)((struct Heap *)&D_801051A0)->first - base) * height) / total) - 1;
+    hi = bottom - ((u32)(((u32)mainHeap()->first - base) * (bottom - top)) / total) - 1;
     gDPFillRectangle(D_80110634++, left, hi, right, bottom + 1);
 
     for (pass = 0; pass < 2; pass++) {
@@ -201,28 +205,27 @@ void Scene_DrawMemoryUsage(s32 unused, s32 left, s32 top, s32 right, s32 bottom)
             else { r = 0; g = 255; b = 0; }
 
             gDPSetPrimColor(D_80110634++, 0, 0, r, g, b, 0xFF);
-            hi = bottom - ((u32)(((node->start + node->end) - base) * height) / total) - 1;
-            lo = bottom - ((u32)(((node->start - base) - 0x20) * height) / total) - 1;
+            hi = bottom - ((u32)(((node->start + node->end) - base) * (bottom - top)) / total) - 1;
+            lo = bottom - ((u32)(((node->start - base) - 0x20) * (bottom - top)) / total) - 1;
             if (hi < lo) {
                 gDPFillRectangle(D_80110634++, left, hi, right, lo);
             }
             gDPSetPrimColor(D_80110634++, 0, 0, DARKEN(r), DARKEN(g), DARKEN(b), 0xFF);
             gDPFillRectangle(D_80110634++, left, lo - 1, right, lo);
 
-            if (!(node->flags & 0x702) && (u32)(D_80105180.field_0 - node->stamp) >= 5U) {
+            if (!(node->flags & 0x702)) {
                 r = g = b = 0xFF;
+                if ((u32)(D_80105180.field_0 - node->stamp) >= 5U) {
                 gDPSetPrimColor(D_80110634++, 0, 0, r, g, b, 255);
                 if (hi < lo) {
                     gDPFillRectangle(D_80110634++, left + 8, hi, right, lo);
                 }
                 gDPSetPrimColor(D_80110634++, 0, 0, BRIGHTEN(r), BRIGHTEN(g), BRIGHTEN(b), 255);
                 gDPFillRectangle(D_80110634++, left + 8, lo - 1, right, lo);
+                }
             }
         }
     }
 
     unlock();
 }
-#else
-INCLUDE_ASM("span_1000", Scene_DrawMemoryUsage);
-#endif
