@@ -67,8 +67,8 @@ s32 func_80430028_de(s32 unused0, s32 unused1, s32 arg2, s32 arg3) {
 s32 func_80299B4C_de();                                /* extern */
 s32 Frontend_ListHasFlag100(void *);                          /* extern */
 void Menu_ShowSlotNode(s32, s32, void *);                  /* extern */
-void func_80433BCC_de(s32);                               /* extern */
-void func_80433D38_de(s32);                               /* extern */
+void Frontend_RelabelSlotRows(s32);                               /* extern */
+void Frontend_UpdatePlayerControlRows(s32);                               /* extern */
 void func_80434250_de(s32, s32);                            /* extern */
 void func_80434EF4_de(s32);                               /* extern */
 extern PakMenuController *D_800E54A4;                    
@@ -130,7 +130,7 @@ loop_16:
                 goto loop_16;
             }
             Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0_2);
-            func_80433BCC_de(temp_s1);
+            Frontend_RelabelSlotRows(temp_s1);
         }
         goto block_24;
     case 27:
@@ -142,7 +142,7 @@ loop_21:
                 goto loop_21;
             }
             Menu_ShowSlotNode((D_800E54A4->root), temp_s1, var_s0_3);
-            func_80433D38_de(temp_s1);
+            Frontend_UpdatePlayerControlRows(temp_s1);
         }
 block_24:
         MarkMenuEventHandled();
@@ -157,8 +157,8 @@ extern s32 func_8029DB58_de(s32);
 extern void MarkMenuEventHandled(void);
 extern s32 Frontend_ListHasFlag100(void *);
 extern void Menu_ShowSlotNode(s32, s32, void *);
-extern void func_80433BCC_de(s32);
-extern void func_80433D38_de(s32);
+extern void Frontend_RelabelSlotRows(s32);
+extern void Frontend_UpdatePlayerControlRows(s32);
 extern void func_80434250_de(s32, s32);
 extern void func_80434E34_de(s32);
 s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, s32 arg4) {
@@ -207,7 +207,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
                 node = node->ref2C;
             }
             Menu_ShowSlotNode(D_800E54A4->root, player, node);
-            func_80433BCC_de(player);
+            Frontend_RelabelSlotRows(player);
         }
         MarkMenuEventHandled();
         break;
@@ -219,7 +219,7 @@ s32 Frontend_HandlePakMenuConfirm(s32 unused0, s32 unused1, s32 arg2, s32 arg3, 
                 node = node->ref2C;
             }
             Menu_ShowSlotNode(D_800E54A4->root, player, node);
-            func_80433D38_de(player);
+            Frontend_UpdatePlayerControlRows(player);
         }
         MarkMenuEventHandled();
         break;

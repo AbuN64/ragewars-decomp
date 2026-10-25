@@ -210,9 +210,9 @@ struct Block_func_80430028_de {
 };
 
 
-struct Item_func_80433BCC_de;
+struct ItemFrontendRelabelSlotRows;
 struct func_8028469C_S2;
-struct Item_func_80433BCC_de {
+struct ItemFrontendRelabelSlotRows {
     char pad[0x8];
     struct func_8028469C_S2 *label;
 };

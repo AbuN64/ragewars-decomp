@@ -23,7 +23,7 @@
 
 extern struct Record_func_804347CC_de D_80102B00[];
 extern s32 func_804351E4_de();
-extern void func_80433BCC_de(s32);
+extern void Frontend_RelabelSlotRows(s32);
 
 s32 func_8043497C_de(s32 player) {
     struct Record_func_804347CC_de *record;
@@ -56,7 +56,7 @@ s32 func_8043497C_de(s32 player) {
             record->owner = player;
             D_800E54A4->players[player].sub = 0;
             place = -1;
-            func_80433BCC_de(place);
+            Frontend_RelabelSlotRows(place);
             result = 1;
         }
     }

@@ -13,11 +13,11 @@
    own bytes show; us, us-rev1 and eu share 0x28B. */
 extern char D_80102B00[];
 extern s8 D_80102B0D[];
-extern struct Item_func_80433BCC_de *func_8040EC30_de(void *, s32);
+extern struct ItemFrontendRelabelSlotRows *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
-extern struct Item_func_80433BCC_de *Menu_GetSlotValue(void *, s32);
-void func_80433BCC_de(s32 player) {
-    struct Item_func_80433BCC_de *item;
+extern struct ItemFrontendRelabelSlotRows *Menu_GetSlotValue(void *, s32);
+void Frontend_RelabelSlotRows(s32 player) {
+    struct ItemFrontendRelabelSlotRows *item;
     struct func_8028469C_S2 *label;
     s32 id;
     s32 i;

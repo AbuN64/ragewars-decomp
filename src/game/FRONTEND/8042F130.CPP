@@ -149,7 +149,7 @@ extern void func_8041B6E8_de(void *, s32, s32);
 extern MenuWidget *func_8040EC30_de(void *, s32);
 extern void Frontend_SetWidgetFlag08(MenuWidget *, s32);
 extern void *func_80419E54_de(s32, s32);
-extern void func_80433BCC_de(s32);
+extern void Frontend_RelabelSlotRows(s32);
 extern void Frontend_RefreshPlayerPanel(s32);
 extern void func_80264770_de(s32);
 extern void func_8022EF30_de(Profile *);
@@ -249,7 +249,7 @@ s32 func_8042F130_us_rev1(void *screen) {
                 }
             }
         }
-        func_80433BCC_de(-1);
+        Frontend_RelabelSlotRows(-1);
         break;
     case 7:
         break;

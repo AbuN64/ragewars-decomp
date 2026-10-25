@@ -80,13 +80,13 @@ s32 Menu_GetSlotValue(void *, s32);
 void Menu_ShowSlotNode(void *, s32, void *);
 void func_8042E9B4_de(char *, char *, char *);
 void func_80433914_de(s32);
-void func_80433BCC_de(s32);
+void Frontend_RelabelSlotRows(s32);
 void func_80433EA0_de(s32);
 void func_80434C2C_de(s32);
 s32 func_80435528_de(void);
 void func_8043577C_de(s32);
 void func_8043C278_de(s32 *);
-void func_80433D38_de(s32);                    /* extern */
+void Frontend_UpdatePlayerControlRows(s32);                    /* extern */
 
 
 /* The slot-error scalar is real external storage in every ROM version. */
@@ -308,7 +308,7 @@ case22_three:
         var_s0 = SLOT_3_ID;
 case22_selected:
         func_8041B6E8_de((s32) D_800E54A4->field0, arg0, var_s0);
-        func_80433BCC_de(arg0);
+        Frontend_RelabelSlotRows(arg0);
         var_v0 = arg0 * 8;
         break;
     case 6:                                         /* switch 1 */
@@ -553,7 +553,7 @@ case27_selected:
         }
         } while (temp_s2 < 4);
 case27_done:
-        func_80433D38_de(arg0);
+        Frontend_UpdatePlayerControlRows(arg0);
         var_v0 = arg0 * 8;
         break;
     case 28:                                        /* switch 1 */

@@ -8,7 +8,7 @@
 
 extern void Menu_SetSlotValue(s32, s32, s32);
 extern void Frontend_RefreshPlayerPanel(s32);
-extern void func_80433D38_de(s32);
+extern void Frontend_UpdatePlayerControlRows(s32);
 void func_80434D70_de(s32 player)
 {
   s32 selected = D_800E54A4->links[0].player;
@@ -25,5 +25,5 @@ void func_80434D70_de(s32 player)
   slot->next = 13;
   slot->step = 3;
   Frontend_RefreshPlayerPanel(selected);
-  func_80433D38_de(-1);
+  Frontend_UpdatePlayerControlRows(-1);
 }

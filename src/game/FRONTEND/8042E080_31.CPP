@@ -8,7 +8,7 @@
 extern s32 func_80264614_de(s32);
 extern void Frontend_SetWidgetFlag100(MenuWidget *record, int enable);
 extern struct Shared_Item *Menu_GetSlotValue(void *, s32);
-void func_80433D38_de(s32 player) {
+void Frontend_UpdatePlayerControlRows(s32 player) {
     struct Shared_Item *item;
     struct func_8028469C_S2 *label;
     u16 id;

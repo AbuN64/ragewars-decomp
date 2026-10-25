@@ -42,7 +42,7 @@ extern s32 Pak_DeleteNote(s32, s32);
 extern void func_8022EF30_de(void *);
 extern void func_80404E28_de(s32);
 extern void func_80433610_de(s32);
-extern void func_80433BCC_de(s32);
+extern void Frontend_RelabelSlotRows(s32);
 
 
 extern s32 func_80405290_de(s32);
@@ -747,7 +747,7 @@ s32 func_804306D8_de(s32 unused0, s32 unused1, s32 arg2) {
         D_800E54A4->players[p].used[D_800E54A4->players[p].choice] = 0;
         D_800E54A4->links[i].state = 0;
         D_800E54A4->players[p].port = i;
-        func_80433BCC_de(p);
+        Frontend_RelabelSlotRows(p);
         D_800E54A4->players[p].state = 0xD;
         Frontend_RefreshPlayerPanel(p);
         break;
