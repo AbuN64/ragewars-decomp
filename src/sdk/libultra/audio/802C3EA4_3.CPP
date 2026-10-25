@@ -116,7 +116,7 @@ u32 func_802C00B0_de(s32 *source, u32 divisor, s32 *first)
     state->cursor = (s32 *)state->cursor + 1;
     D_800D54BE = 0;
     D_800D54C0_de = 0;
-    D_800D54B8 = 0;
+    gPackedBitsLeft = 0;
     D_800D54BA = 0;
     D_800D54BC = 0;
     *first = state->first;

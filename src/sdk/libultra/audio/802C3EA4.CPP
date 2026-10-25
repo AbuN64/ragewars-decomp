@@ -4,54 +4,51 @@
 #include "TYPES.H"
 #include "sdk/AUDIO/802C3EA4.H"
 
-extern u16 D_800D5350[17];
-extern u16 D_800D5374[17];
-extern u16 D_8014AE00;
 
 static inline void Audio_SignExtend(u16 *value, u16 width, s16 signExtend) {
-    if (signExtend && ((s16)*value & D_800D5374[width])) {
-        *value |= ~D_800D5350[width];
+    if (signExtend && ((s16)*value & gPackedSignBits[width])) {
+        *value |= ~gPackedBitMasks[width];
     }
 }
 
 /* Reads count packed width-bit samples from the 16-bit word stream into out (the bit reader keeps the
-   current word in D_8014AE00 and its unread bit count in D_800D54B8); signExtend widens negative samples. */
+   current word in gPackedWord and its unread bit count in gPackedBitsLeft); signExtend widens negative samples. */
 u16 Audio_ReadPackedSamples(u16 *out, u16 width, u16 count, s16 signExtend, DecodeState *stream) {
     s16 i;
     u16 need;
 
-    if (D_800D54B8 == 0) {
+    if (gPackedBitsLeft == 0) {
         u16 *cursor = stream->cursor;
-        *(volatile u16 *)&D_8014AE00 = *cursor;
+        *(volatile u16 *)&gPackedWord = *cursor;
         stream->cursor = cursor + 1;
-        D_800D54B8 = 16;
+        gPackedBitsLeft = 16;
     }
     for (i = 0; i < count; i++) {
-        if (D_800D54B8 >> 16) D_8014AE00 = 0;
-        if (D_800D54B8 < width) {
-            need = width - D_800D54B8;
+        if (gPackedBitsLeft >> 16) gPackedWord = 0;
+        if (gPackedBitsLeft < width) {
+            need = width - gPackedBitsLeft;
             {
-                u16 high = D_8014AE00 & D_800D5350[D_800D54B8];
+                u16 high = gPackedWord & gPackedBitMasks[gPackedBitsLeft];
                 out[i] = high << need;
             }
             {
                 u16 *cursor = stream->cursor;
-                D_8014AE00 = *cursor;
+                gPackedWord = *cursor;
                 stream->cursor = cursor + 1;
             }
             {
-                s32 low = (D_8014AE00 >> (16 - need)) & D_800D5350[need];
+                s32 low = (gPackedWord >> (16 - need)) & gPackedBitMasks[need];
                 out[i] |= low;
             }
             Audio_SignExtend(&out[i], width, signExtend);
-            D_800D54B8 = 16 - need;
+            gPackedBitsLeft = 16 - need;
         } else {
             {
-                s32 low = (D_8014AE00 >> (D_800D54B8 - width)) & D_800D5350[width];
+                s32 low = (gPackedWord >> (gPackedBitsLeft - width)) & gPackedBitMasks[width];
                 out[i] = low;
             }
             Audio_SignExtend(&out[i], width, signExtend);
-            D_800D54B8 -= width;
+            gPackedBitsLeft -= width;
         }
     }
     return 1;
