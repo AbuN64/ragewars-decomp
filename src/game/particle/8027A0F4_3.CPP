@@ -117,6 +117,8 @@ void Particle_Update(Shared_Particle *particle) {
     f32 extent;
     f32 boxSpan; /* the larger scaled size, then the box height */
     f32 halfExtent; /* the box half-size, then the shake decay */
+    f32 advance;
+    f32 speed;
     f32 growStep;
     f32 goalSize;
     f32 influenceRange;
@@ -275,7 +277,10 @@ void Particle_Update(Shared_Particle *particle) {
         }
     }
     particle->prevPos = particle->inst.pos;
-    particle->frame += D_800D2988 * particle->unk148 * (D_800CD740_de * 0.06666667f);
+    /* frames advanced this step at the particle frame rate, scaled by the game speed (15 = normal) */
+    advance = D_800D2988 * particle->unk148;
+    speed = D_800CD740_de * 0.06666667f;
+    particle->frame += advance * speed;
     if (particle->desc->flags & 0x1000) {
         growStep = D_800D2988 * 10.24f;
         particle->size.x += growStep * particle->growth.x;
