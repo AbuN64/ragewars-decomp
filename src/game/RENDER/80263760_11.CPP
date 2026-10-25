@@ -9,12 +9,7 @@
 extern u32 D_8010C070;
 extern u32 D_8010C07C;
 
-typedef union PackedSampleBits {
-    u32 word;
-    u16 halves[2];
-    u8 bytes[4];
-} PackedSampleBits;
-
+/* Drops width bits from the sample bit stream and refills it a byte at a time. */
 static inline void advance_bits(s32 width) {
     u32 previous = D_8010C07C;
     s32 available = D_8010C080_de;
@@ -30,6 +25,7 @@ static inline void advance_bits(s32 width) {
         D_8010C07C = shifted | (next << remaining);
     }
 }
+/* Takes the next 6-bit predictor descriptor (2-bit coefficient index, 4-bit shift) from the control stream. */
 static inline u32 predictor_bits(void) {
     u32 previous = D_8010C070;
     u32 bits = previous & 63;
@@ -48,9 +44,10 @@ static inline u32 predictor_bits(void) {
     return bits;
 }
 
+/* Takes a signed width-bit delta from the sample stream and scales it by 1 << shift. */
 static inline s32 scaled_sample(s32 width, u8 shift) {
     u32 mask = (1U << width) - 1;
-    u16 encoded = ((PackedSampleBits *)&D_8010C07C)->halves[1];
+    u16 encoded = (u16)D_8010C07C;
     s32 value = encoded & mask;
     advance_bits(width);
     if (encoded & ((mask + 1) >> 1)) {
@@ -59,19 +56,20 @@ static inline s32 scaled_sample(s32 width, u8 shift) {
     return value * (1 << shift);
 }
 
-/* Decode grouped predictor coefficients and three-bit deltas, integrate each sample,
- * and clamp the output to signed 16 bits.
- * 18/148 aligned edits; remaining: shift narrowing, accumulator copies and clamp scheduling. */
-void Render_DecodeThreeBitSamples(s32 destination, s32 count) {
-    s16 *out = (s16 *)destination;
-    s32 previous = 0;
+
+/* Decodes count samples: each group of 4 takes a predictor descriptor, each sample a 3-bit delta.
+ * The delta plus the two-tap prediction is integrated into a running sample clamped to 16 bits.
+ * 7 of 148 words differ: the ROM keeps an extra andi 0xFF on the descriptor shift (one more
+ * insn in the group block), and previous/older initialise in the other order. */
+void Render_DecodeThreeBitSamples(s16 *out, s32 count) {
     s32 older = 0;
+    s32 previous = 0;
     s32 sample;
-    u8 head = ((PackedSampleBits *)&D_8010C07C)->bytes[3];
+    u8 head = (u8)D_8010C07C;
     s32 group = 0;
     u8 shift;
     s32 first, second;
-    s32 delta, predicted, clamped;
+    s32 delta, predicted, clamped, total;
     u32 descriptor;
     advance_bits(8);
     sample = (s8)head * 256;
@@ -84,12 +82,16 @@ void Render_DecodeThreeBitSamples(s32 destination, s32 count) {
             second = D_800CBC40[descriptor >> 4];
         }
         delta = scaled_sample(3, shift);
-        predicted = (s32)((u32)previous * (u32)first + (u32)older * (u32)second);
+        predicted = previous * first + older * second;
         older = previous;
-        previous = (s32)((u32)delta + (u32)(predicted >> 16));
-        sample = (s32)((u32)sample + (u32)previous);
-        clamped = sample < 32767 ? sample : 32767;
-        clamped = clamped > -32768 ? clamped : -32768;
+        delta += predicted >> 16;
+        previous = delta;
+        total = sample + delta;
+        sample = total;
+        if (total <= 32767) clamped = total; else clamped = 32767;
+        total = clamped;
+        clamped = -32768;
+        if (total >= -32768) clamped = total;
         *out++ = clamped;
     }
 }
@@ -103,7 +105,7 @@ INCLUDE_ASM("span_1000", Render_DecodeThreeBitSamples);
 
 extern u32 D_8010C070;
 extern u32 D_8010C07C;
-extern void Render_DecodeThreeBitSamples(s32 samples, s32 count);
+extern void Render_DecodeThreeBitSamples(s16 *out, s32 count);
 
 /* Initializes the packed control and sample bit streams, then decodes each output channel. */
 s32 func_802651B0_de(s32 destinations, void *encoded, s32 channel_count) {
@@ -142,7 +144,7 @@ s32 func_802651B0_de(s32 destinations, void *encoded, s32 channel_count) {
         D_8010C078 = cursor;
         tail <<= 24;
         D_8010C070 |= tail;
-        Render_DecodeThreeBitSamples(channels[i], sample_count);
+        Render_DecodeThreeBitSamples((s16 *)channels[i], sample_count);
     }
     return sample_count;
 }
