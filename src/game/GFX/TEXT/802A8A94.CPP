@@ -30,7 +30,6 @@ extern void Text_DrawTileGrid(s32 arg0, s32 arg1, s16 arg2, s16 arg3, f32 arg4, 
 
 extern Gfx *D_80110634;
 
-extern s32 D_801377B8[2];
 
 #include "GFX/TEXT/802A8A94_6.H"
 
@@ -288,8 +287,8 @@ void func_802A84F8_de(void) {
 
         func_802AAB3C_de(0x8C, 0x8C, 0x8C, 0x8C, 0x8C, 0x8C);
         func_802AAB68_de(D_800C5FB0_de, D_800C5FB0_de);
-        D_801377B8[0] = 2;
-        D_801377B8[1] = 2;
+        D_801376F8.shadowX = 2;
+        D_801376F8.shadowY = 2;
     }
 }
 

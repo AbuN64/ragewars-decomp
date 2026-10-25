@@ -23,7 +23,6 @@
 extern Gfx *D_80110634;
 
 extern char D_8011D8D0;
-extern f32 D_801377B0;
 extern s32 D_80140FF8;
 void func_802183E8_de(void *, Shared_HudView *, Shared_HudPlayer *);
 void func_80218F08_de(void *, Shared_HudView *, Shared_HudPlayer *);
@@ -317,7 +316,7 @@ void func_8021EEFC_de(Shared_HudPlayer *player, Shared_HudView *view) {
                                 scaleX *= nameZoom;
                                 func_802BD320_de(text, D_800C25FC_de, player->names[i]->owner->name);
                                 func_802AAB3C_de(0, 0, 0, 1, 1, 1);
-                                textScale = D_801377B0 * 0.5f * scaleX * func_802AA864_de();
+                                textScale = D_801376F8.width * 0.5f * scaleX * func_802AA864_de();
                                 scaleY *= nameZoom;
                                 w = Pak_MeasureLine(text, textScale, func_802AA864_de());
                                 player->nameWidths[i] = w;

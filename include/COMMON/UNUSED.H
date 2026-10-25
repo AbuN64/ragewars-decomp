@@ -249,7 +249,6 @@ extern char D_800D7A08[];
 
 extern char D_8011FFB0;
 
-extern int D_80137798[6];
 
 extern u32 D_8014DA00;
 

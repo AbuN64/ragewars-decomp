@@ -162,8 +162,8 @@ block_5:
     func_802AAB3C_de(var_a0_2, var_a1, var_a2, var_a3,
         (s32)((f32)temp_s1->unk19 * var_f1) > 0xFF ? 0xFF : (s32)((f32)temp_s1->unk19 * var_f1),
         (s32)((f32)temp_s1->unk1A * var_f1) > 0xFF ? 0xFF : (s32)((f32)temp_s1->unk1A * var_f1));
-    D_801377B8[0] = (s32) temp_s1->unk14;
-    D_801377B8[1] = (s32) temp_s1->unk14;
+    D_801376F8.shadowX = (s32) temp_s1->unk14;
+    D_801376F8.shadowY = (s32) temp_s1->unk14;
     func_802AAB68_de(temp_s1->unkC * (f32) (D_800E28D0) * 0.0035211267f, temp_s1->unk10 * (f32) (D_800E28D4) * 0.0045045046f);
     if (var_s5 != 0) {
         var_s5 = temp_s1->unk14;

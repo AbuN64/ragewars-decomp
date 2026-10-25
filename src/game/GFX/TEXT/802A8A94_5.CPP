@@ -16,8 +16,6 @@ extern s32 D_800CD764_de;
 extern Gfx *D_80110634;
 #include "COMMON/DISPLAY.H"
 
-extern int D_80137798[6];
-extern float D_801377B0[2];
 extern s32 Render_StartWorldEffect(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 extern void func_802AA8EC_de(s32 arg0, s32 arg1, void **arg2, s32 *arg3);
 extern void func_80253754_de(s32 arg0, s32 arg1);
@@ -71,26 +69,24 @@ void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
 #if defined(VERSION_EU_X)
 #include "COMMON/AIPROFILE.H"
-extern s32 D_80137798[6];
-extern f32 D_801377B0[2];
 extern s32 Render_StartWorldEffect(void *,s32,s32,s32);
 extern void func_802AA8EC_de(s32,s32,void **,s32 *);
 extern void func_80253754_de(s32,s32);
 
 void func_802AAB3C_de(int arg0, int arg1, int arg2, int alpha, int arg4, int arg5) {
-    D_80137798[0] = arg0;
-    D_80137798[1] = arg1;
-    D_80137798[2] = arg2;
-    D_80137798[3] = alpha;
-    D_80137798[4] = arg4;
-    D_80137798[5] = arg5;
+    D_801376F8.envR = arg0;
+    D_801376F8.envG = arg1;
+    D_801376F8.envB = arg2;
+    D_801376F8.primR = alpha;
+    D_801376F8.primG = arg4;
+    D_801376F8.primB = arg5;
 }
 #endif
 
 #if defined(VERSION_EU_X)
 void func_802AAB68_de(float arg0, float arg1) {
-    D_801377B0[0] = arg0;
-    D_801377B0[1] = arg1;
+    D_801376F8.width = arg0;
+    D_801376F8.height = arg1;
 }
 #endif
 
@@ -177,17 +173,17 @@ void func_802AAA54_de(s32 x0,s32 y0,s32 x1,s32 y1,u8 r,u8 g,u8 b,u8 a) {
 
 /** Store six words into the global record. */
 void func_802AAB3C_de(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5) {
-    D_80137798[0] = arg0;
-    D_80137798[1] = arg1;
-    D_80137798[2] = arg2;
-    D_80137798[3] = arg3;
-    D_80137798[4] = arg4;
-    D_80137798[5] = arg5;
+    D_801376F8.envR = arg0;
+    D_801376F8.envG = arg1;
+    D_801376F8.envB = arg2;
+    D_801376F8.primR = arg3;
+    D_801376F8.primG = arg4;
+    D_801376F8.primB = arg5;
 }
 
 void func_802AAB68_de(float arg0, float arg1) {
-    D_801377B0[0] = arg0;
-    D_801377B0[1] = arg1;
+    D_801376F8.width = arg0;
+    D_801376F8.height = arg1;
 }
 
 void func_802AAB7C_de(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7) {

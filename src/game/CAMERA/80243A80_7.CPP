@@ -1,4 +1,5 @@
 #include "COMMON/GROUP.H"
+#include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/SHAREDTRACKOBJECTPREFIX.H"
 #include "COMMON/EXTERNS_7.H"
@@ -46,8 +47,8 @@ void func_802453D4_de(void)
     new_var = 0;
     func_802AAB68_de(var_f12, var_f20);
     temp_a0 = D_800E2830;
-    D_801377B8[0] = 1;
-    D_801377B8[1] = 1;
+    D_801376F8.shadowX = 1;
+    D_801376F8.shadowY = 1;
     var_s0 = new_var;
     if ((((Shared_MenuContext *)(temp_a0))->messageCount) > new_var)
     {

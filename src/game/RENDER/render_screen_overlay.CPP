@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "COMMON/OBJECTLINKSC_2.H"
 #include "COMMON/GAME_SESSION.H"
 #include "COMMON/GFX.H"
 #include "COMMON/AIPROFILE.H"
@@ -66,7 +67,6 @@ void Render_ClearDepthRect(void *unused, s32 ulx, s32 lrx, s32 uly, s32 lry, s32
 extern void func_802A84F8_de(void);
 extern void func_802AAB3C_de(s32, s32, s32, s32, s32, s32);
 extern void func_802AAB68_de(f32, f32);
-extern s32 D_801377B8[2];
 
 /* Draw a null-terminated list of scaled strings, with an optional full-screen backdrop. */
 void Render_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s32 y, s32 lineStep, f32 scaleX, f32 scaleY) {
@@ -92,8 +92,8 @@ void Render_DrawTextLines(void *state, s32 drawBackdrop, char **lines, s32 x, s3
     scaleX *= (D_800E28D4 >= 0xDF) ? 0.8f : 0.85f;
     scaleY *= 0.5f;
     func_802AAB68_de(scaleX, scaleY);
-    D_801377B8[0] = 1;
-    D_801377B8[1] = 1;
+    D_801376F8.shadowX = 1;
+    D_801376F8.shadowY = 1;
     for (i = 0; lines[i] != 0; i++) {
         text = lines[i];
         func_802A8F28_de(text, x, y, 0xFF, 1, 1, 1.0f, 1.0f);

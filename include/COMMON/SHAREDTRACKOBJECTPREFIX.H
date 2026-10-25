@@ -44,7 +44,6 @@ extern s32 D_800E28D0;
 extern s32 D_800DE7E8;
 
 extern s32 D_800E28D4;
-extern s32 D_801377B8[2];
 void func_802A84F8_de(void);
 
 void func_802A8F28_de(void * arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, f32 arg6, f32 arg7);
