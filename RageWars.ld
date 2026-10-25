@@ -11506,6 +11506,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_3.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_13.CPP.o(.rodata .rdata);
+        src/game/MATH/8029BBA0_4.CPP.o(.rodata .rdata);
+        src/game/MATH/800CA60C_24.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_15.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_5.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_16.CPP.o(.rodata .rdata);
@@ -13262,6 +13264,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_3.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_13.CPP.o(.rodata .rdata);
+        src/game/MATH/8029BBA0_4.CPP.o(.rodata .rdata);
+        src/game/MATH/800CA60C_24.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_15.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_5.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_16.CPP.o(.rodata .rdata);
@@ -14973,6 +14977,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_3.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_13.CPP.o(.rodata .rdata);
+        src/game/MATH/8029BBA0_4.CPP.o(.rodata .rdata);
+        src/game/MATH/800CA60C_24.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_15.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_5.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_16.CPP.o(.rodata .rdata);
@@ -16691,6 +16697,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_3.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_13.CPP.o(.rodata .rdata);
+        src/game/MATH/8029BBA0_4.CPP.o(.rodata .rdata);
+        src/game/MATH/800CA60C_24.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_15.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_5.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_16.CPP.o(.rodata .rdata);
@@ -18467,6 +18475,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_3.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_13.CPP.o(.rodata .rdata);
+        src/game/MATH/8029BBA0_4.CPP.o(.rodata .rdata);
+        src/game/MATH/800CA60C_24.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_14.CPP.o(.rodata .rdata);
         src/game/MATH/800CA60C_15.CPP.o(.rodata .rdata);
         src/game/MATH/8029BBA0_5.CPP.o(.rodata .rdata);
@@ -20520,6 +20530,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_3.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_13.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/8029BBA0_4.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/800CA60C_24.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_15.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_5.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_16.CPP.o(.bss .sbss COMMON);
@@ -21786,6 +21798,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_3.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_13.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/8029BBA0_4.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/800CA60C_24.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_15.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_5.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_16.CPP.o(.bss .sbss COMMON);
@@ -23012,6 +23026,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_3.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_13.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/8029BBA0_4.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/800CA60C_24.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_15.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_5.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_16.CPP.o(.bss .sbss COMMON);
@@ -24250,6 +24266,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_3.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_13.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/8029BBA0_4.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/800CA60C_24.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_15.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_5.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_16.CPP.o(.bss .sbss COMMON);
@@ -25601,6 +25619,8 @@ SECTIONS
         src/game/MATH/800CA60C_12.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_3.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_13.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/8029BBA0_4.CPP.o(.bss .sbss COMMON);
+        src/game/MATH/800CA60C_24.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_14.CPP.o(.bss .sbss COMMON);
         src/game/MATH/800CA60C_15.CPP.o(.bss .sbss COMMON);
         src/game/MATH/8029BBA0_5.CPP.o(.bss .sbss COMMON);

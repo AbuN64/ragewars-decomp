@@ -389,7 +389,7 @@ s32 InvertMatrix(struct MatrixF *output, struct MatrixF *input)
             augmented[j][elementIndex] = input->m[j][elementIndex];
             augmented[j][elementIndex + 4] = 0.0f;
         }
-        augmented[j][j + 4] = D_800C5B04_de;
+        augmented[j][j + 4] = 1.0f;
         rowOrder[j] = j;
     }
     for (i = 0; i < 4; i++) {
@@ -421,7 +421,7 @@ s32 InvertMatrix(struct MatrixF *output, struct MatrixF *input)
         rowOrder[i] = pivotRow;
         value = augmented[pivotRow][i];
         if (value == 0.0f) return 1;
-        augmented[pivotRow][i] = D_800C5B08_de;
+        augmented[pivotRow][i] = 1.0f;
         for (elementIndex = i + 1; elementIndex < 8; elementIndex++) augmented[pivotRow][elementIndex] /= value;
         for (j = i + 1; j < 4; j++) {
             otherRow = rowOrder[j];

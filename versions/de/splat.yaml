@@ -4076,7 +4076,7 @@ segments:
       - [0xC66D0, rodata, data_800C/D_8029CC70_CB860]
       - [0xC66F4, rodata, data_800C/D_8029D000_CB884]
       - [0xC66FC, rodata, data_800C/D_8029D248_CB88C]
-      - [0xC6704, rodata, data_800C/D_8029D510_CB894]
+      - [0xC6704, rodata, data_800C/literals_InvertMatrix]
       - [0xC670C, rodata, data_800C/D_8029D8E8_CB89C]
       - [0xC6710, rodata, data_800C/D_8029D964_CB8A0]
       - [0xC6728, rodata, data_800C/D_8029D9DC_CB8B8]

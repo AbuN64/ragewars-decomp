@@ -2576,3 +2576,4 @@ literals_Render_RunGameLoop = 0x800C56D0; // rom:0xC62D0 size:0x8
 literals_Anim_TestPointNearPolygon = 0x800C39E0; // rom:0xC45E0 size:0x4
 literals_Scene_BuildCachedGeometry = 0x800C54C0; // rom:0xC60C0 size:0x20
 literals_Render_UpdateTriggeredMotion = 0x800C1D90; // rom:0xC2990 size:0x20
+literals_InvertMatrix = 0x800C5DA4; // rom:0xC69A4 size:0x8
