@@ -12,3 +12,5 @@ vram	name	basis
 0x802BA950	osViSetMode	machine code
 0x802BD618	proutSprintf	machine code
 0x802BE2D0	lldiv	machine code
+0x802BB540	osRecvMesg	machine code
+0x802BB6C0	osSendMesg	machine code
