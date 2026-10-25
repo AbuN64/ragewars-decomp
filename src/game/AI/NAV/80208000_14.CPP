@@ -75,7 +75,6 @@ s32 func_8020D4AC_de(Selection_func_8020D4AC_de *sel) {
 }
 
 extern s32 func_8020CC0C_de(PickupGoalNodeList *list, s32 from, s32 to);
-#ifdef NON_MATCHING
 s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
     CVector3 avg;
     Shared_PickupGoalNode *info;
@@ -84,20 +83,20 @@ s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
     s32 next;
     s32 best;
     s32 i;
-    s32 max;
+    s32 count;
     f32 inv;
 
     next = -1;
-    i = 0;
-    max = i;
+    count = 0;
     best = sel->objectCount;
     list = &D_8013B364;
-    for (; i < sel->objectCount; i++) {
-        if (sel->stages[i].distance > max) {
+    for (i = 0; i < sel->objectCount; i++) {
+        if (sel->stages[i].distance > count) {
             best = i;
         }
     }
-    if (best == sel->objectCount) {
+    count = sel->objectCount;
+    if (best == count) {
         sel->failed = 0;
         sel->stageCount += 0x14;
         return 1;
@@ -132,7 +131,8 @@ s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
         avg.y += sel->dirs[i].y;
         avg.z += sel->dirs[i].z;
     }
-    inv = D_800C1DB4_de / (f32)sel->objectCount;
+    count = sel->objectCount;
+    inv = D_800C1DB4_de / (f32)count;
     avg.x = avg.x * inv;
     avg.y = avg.y * inv;
     avg.z = avg.z * inv;
@@ -148,6 +148,3 @@ s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
     sel->stageCount++;
     return 0;
 }
-#else
-INCLUDE_ASM("span_1000", Nav_InsertPickupRouteNode);
-#endif
