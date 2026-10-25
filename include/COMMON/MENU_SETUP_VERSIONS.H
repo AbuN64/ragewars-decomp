@@ -5,19 +5,14 @@
 
 /* Versioned setup strings and control identifiers from the native menu tables. */
 #if defined(VERSION_US)
-extern int jtbl_800DDDD0;
 extern s8 g_modeToken[8];
 #elif defined(VERSION_EU)
-extern int jtbl_800DDDD0;
 extern s8 g_modeToken[8];
 #elif defined(VERSION_EU_X)
-extern int jtbl_800DDDD0;
 extern s8 g_modeToken[8];
 #elif defined(VERSION_DE)
-extern int jtbl_800DDDD0;
 extern s8 g_modeToken[8];
 #else
-extern int jtbl_800DDDD0;
 extern s8 g_modeToken[8];
 #endif
 #if defined(VERSION_DE)

@@ -52,14 +52,6 @@ struct Obj8043ECE8;
 typedef struct Obj8043ECE8 Obj8043ECE8;
 
 
-struct Player_func_8043EBE4_de;
-struct Player_func_8043EBE4_de {
-    u8 flag;
-    u8 data[149];
-};
-
-struct Player_func_8043EBE4_de;
-
 struct Shared_PakMenu;
 
 

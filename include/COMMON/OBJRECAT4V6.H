@@ -46,12 +46,6 @@ struct RecordCode8025A3EC {
     f32 fC8; /* per-slot volume scale, 0xC8 */
 };
 
-/* A pool header followed by its seventeen complete slot records. */
-typedef struct PoolCode8025A3EC {
-    struct ContextRecAt2BC0 *owner;
-    RecordCode8025A3EC slots[17];
-} PoolCode8025A3EC;
-
 struct ObjRecAt4V6;
 
 

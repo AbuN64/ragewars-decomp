@@ -23,11 +23,6 @@ return D_800CA5C4;
 return D_800C54D8_de;
 #endif
 }
-static inline void updateRoundExtra(void) {
-#if defined(VERSION_US_REV1)
-func_80294F1C_us_rev1();
-#endif
-}
 /* Round transitions share the platform's player gate and localized messages. */
 #if defined(VERSION_DE)
 static inline void stopRoundPlatform(void) { func_802A2224_de(); }

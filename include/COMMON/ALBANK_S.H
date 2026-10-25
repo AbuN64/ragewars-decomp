@@ -300,5 +300,4 @@ struct ALSeqPlayer {
 extern float D_800C74CC_de;
 
 
-extern int func_802B0630_eu(void * arg0, int arg1, int arg2);
 #endif

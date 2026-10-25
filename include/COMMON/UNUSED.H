@@ -209,8 +209,6 @@ extern u8 D_800CBC9C[];
 
 extern const f64 D_800C7810_de[5];
 
-extern void *jtbl_800DDF70[];
-
 extern char *D_800D354C;
 
 extern f32 D_800C3D6C_de;
@@ -1472,8 +1470,6 @@ extern char D_800D760C[];
 
 extern char D_800D781C[];
 
-extern void *jtbl_800DDEF0[];
-
 extern char g_longAndIntFormats[];
 
 extern char D_800D39A0[];
@@ -2131,8 +2127,6 @@ extern char D_8010EEB8[];
 
 extern CVector3 D_800C88A0_de[8];
 
-extern void *jtbl_800DD848[];
-
 extern FieldRow D_800E4EF8[];
 
 extern u8 D_800CBC11[];
@@ -2345,8 +2339,6 @@ extern s32 D_002B5400;
 extern char D_800D38D8[];
 
 extern Shared_ParticleLighting D_800CBC90[];
-
-extern void *jtbl_800DD9F0[];
 
 extern const f64 D_800C7718_de;
 
@@ -3371,9 +3363,6 @@ typedef union fu fu;
 struct ObjRecAtCV2;
 typedef struct ObjRecAtCV2 ObjRecAtCV2;
 
-
-struct func_8028C544_S2;
-typedef struct func_8028C544_S2 func_8028C544_S2;
 
 
 
@@ -4563,381 +4552,6 @@ struct Selection {
     s32 selection;
     u8 pad1C4[4];
     s32 matches;
-};
-/* Shape_func_80206A20_de: partial shape; common base param:func_802079B0_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_80206DD4_de: partial shape; common base field:param:func_802079B0_de:r4:24; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_802079B0_de_2;
-struct Shape_func_802079B0_de_2 {
-    unsigned char padding_0[8];
-    int field_8;
-    int field_C;
-    int field_10;
-    unsigned char padding_14[88];
-    float field_6C;
-    unsigned char padding_70[1292];
-    unsigned char unknown_57C[4];
-    unsigned char unknown_580[4];
-    unsigned char padding_584[12];
-    unsigned char unknown_590[4];
-};
-/* Shape_func_80209C5C_de: partial shape; common base field:field:param:func_80210248_eu:r4:0:1496; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_80209C5C_de_2: partial shape; common base field:param:func_80210248_eu:r4:0; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_80209C5C_de_3: partial shape; common base param:func_80210248_eu:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-struct ShapeCode80208000;
-struct ShapeCode80208000 {
-    void * field_0;
-    int field_4;
-    void * field_8;
-    int field_C;
-    void * field_10;
-    unsigned char padding_14[4];
-    int field_18;
-    float field_1C;
-    unsigned char unknown_20[4];
-    void * field_24;
-};
-/* Shape_func_8020D370_de: partial shape; common base param:func_8020D370_de:r4; size unknown; common-base owner parameter types are incomplete or conflicting */
-/* Shape_func_8020DC10_de: partial shape; common base param:func_80210198_eu:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8020DC60_de: partial shape; common base field:param:func_80210198_eu:r4:0; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8020DDF4_eu: partial shape; common base field:param:func_8020DDF4_eu:r4:0; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_80210198_eu_2;
-struct Shape_func_80210198_eu_2 {
-    int field_0;
-    unsigned char padding_4[964];
-    unsigned char unknown_3C8[4];
-    int field_3CC;
-    unsigned char unknown_3D0[4];
-    int field_3D4;
-    unsigned char unknown_3D8[4];
-    int field_3DC;
-    unsigned char unknown_3E0[4];
-    unsigned char unknown_3E4[4];
-    unsigned char unknown_3E8[4];
-    int field_3EC;
-    int field_3F0;
-    unsigned char padding_3F4[64];
-    int field_434;
-    int field_438;
-    int field_43C;
-    int field_440;
-    int field_444;
-    int field_448;
-    int field_44C;
-    int field_450;
-    int field_454;
-    unsigned char unknown_458[4];
-    int field_45C;
-    unsigned char unknown_460[4];
-    int field_464;
-    int field_468;
-    int field_46C;
-};
-/* Shape_func_80212670_de: partial shape; common base field:field:field:param:Nav_UpdateRetreatMovement:r4:472:5204:100; size unknown; common-base owner return type is incomplete or conflicting */
-/* Shape_func_80212670_de_2: partial shape; common base field:field:param:Nav_UpdateRetreatMovement:r4:472:5204; size unknown; common-base owner return type is incomplete or conflicting */
-struct Shape_func_80212948_de_3;
-struct Shape_func_80212948_de_3 {
-    int field_0;
-    int field_4;
-    unsigned char padding_8[28];
-    unsigned char unknown_24[4];
-    unsigned char unknown_28[4];
-    unsigned char padding_2C[16];
-    int field_3C;
-    unsigned char unknown_40[4];
-    int field_44;
-    unsigned char unknown_48[4];
-    int field_4C;
-    unsigned char unknown_50[4];
-    int field_54;
-    unsigned char unknown_58[4];
-    unsigned char unknown_5C[4];
-    unsigned char unknown_60[4];
-    unsigned char padding_64[4];
-    unsigned char unknown_68[4];
-    unsigned char unknown_6C[4];
-    unsigned char padding_70[2912];
-    unsigned char unknown_BD0[4];
-    unsigned char padding_BD4[2916];
-    unsigned char unknown_1738[4];
-    unsigned char padding_173C[2916];
-    unsigned char unknown_22A0[4];
-    unsigned char padding_22A4[2900];
-    int field_2DF8;
-    unsigned char padding_2DFC[1644];
-    int field_3468;
-    int field_346C;
-    unsigned char unknown_3470[4];
-};
-/* Shape_func_8021A2D4_de: partial shape; common base field:field:param:Render_DrawPlayerBodyAndWeapon:r4:472:1496; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8021A2D4_de_11;
-struct Shape_func_8021A2D4_de_11 {
-    unsigned char padding_0[4];
-    int field_4;
-};
-/* Shape_func_8021A2D4_de_3: partial shape; common base field:param:Render_DrawPlayerBodyAndWeapon:r4:472; size unknown; common-base owner ABI is incomplete or conflicting */
-struct ShapeCode80200610;
-struct ShapeCode80200610 {
-    int field_0;
-    unsigned char padding_4[16];
-    unsigned char unknown_14[4];
-    unsigned char padding_18[112];
-    unsigned char unknown_88[4];
-    unsigned char padding_8C[16];
-    unsigned char unknown_9C[4];
-    unsigned char padding_A0[16];
-    unsigned char unknown_B0[4];
-    unsigned char unknown_B4[4];
-    unsigned char padding_B8[12];
-    unsigned char unknown_C4[4];
-    unsigned char padding_C8[16];
-    unsigned char unknown_D8[4];
-    unsigned char unknown_DC[4];
-    unsigned char unknown_E0[4];
-    int field_E4;
-    unsigned char unknown_E8[4];
-    int field_EC;
-    unsigned char unknown_F0[4];
-    unsigned char unknown_F4[4];
-    unsigned char unknown_F8[4];
-    int field_FC;
-    unsigned char unknown_100[4];
-};
-/* Shape_func_8021A2D4_de_5: partial shape; common base param:Render_DrawPlayerBodyAndWeapon:r6; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8021A2D4_de_6;
-struct Shape_func_8021A2D4_de_6 {
-    int field_0;
-};
-/* Shape_func_8021C45C_de: partial shape; common base field:param:func_8022E260_de:r4:472; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8021D774_de;
-struct Shape_func_8021D774_de {
-    unsigned char field_0;
-    unsigned char padding_1[23];
-    void * field_18;
-    unsigned char padding_1C[228];
-    int field_100;
-};
-/* Shape_func_80223E34_de: partial shape; common base param:func_80224408_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_80223E34_de_2: partial shape; common base param:func_80224408_de:r5; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_80224408_de_2;
-struct Shape_func_80224408_de_2 {
-    void * field_0;
-    void * field_4;
-    unsigned char unknown_8[4];
-    unsigned char unknown_C[4];
-    unsigned char unknown_10[4];
-    unsigned char unknown_14[4];
-    unsigned char unknown_18[4];
-    unsigned char unknown_1C[4];
-};
-/* Shape_func_80228E60_eu: partial shape; common base field:param:func_802321C8_de:r4:472; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8022B184_de: partial shape; common base field:param:func_8023334C_de:r4:472; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8022BC14_de: partial shape; common base field:param:func_8022FC20_de:r4:472; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8022CB5C_de: partial shape; common base param:func_8022CB5C_de:r4; size unknown; common-base owner parameter types are incomplete or conflicting */
-struct Shape_func_8022CB5C_de_2;
-struct Shape_func_8022CB5C_de_2 {
-    unsigned char padding_0[28];
-    int field_1C;
-    int field_20;
-    unsigned char unknown_24[4];
-    int field_28;
-    unsigned char unknown_2C[4];
-    int field_30;
-    unsigned char unknown_34[4];
-    unsigned char unknown_38[4];
-    unsigned char unknown_3C[4];
-    int field_40;
-    int field_44;
-    int field_48;
-    int field_4C;
-    int field_50;
-    int field_54;
-    int field_58;
-    int field_5C;
-    int field_60;
-    int field_64;
-    int field_68;
-};
-/* Shape_func_8022CDBC_de: partial shape; common base param:func_8022CDBC_de:r5; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8022CDBC_de_2;
-struct Shape_func_8022CDBC_de_2 {
-    unsigned char padding_0[4];
-    short field_4;
-    short field_6;
-    unsigned char unknown_8[2];
-    short field_A;
-    unsigned char padding_C[8];
-    int field_14;
-    int field_18;
-};
-/* Shape_func_80232744_de: partial shape; common base param:func_80267D70_de:r5; size unknown; common-base owner parameter types are incomplete or conflicting */
-struct Shape_func_8023334C_de_2;
-struct Shape_func_8023334C_de_2 {
-    int field_0;
-    unsigned char unknown_4[4];
-    int field_8;
-    int field_C;
-    unsigned char padding_10[4];
-    int field_14;
-    int field_18;
-};
-/* Shape_func_8024A3B0_de: partial shape; common base field:param:Render_DrawPlayerBodyAndWeapon:r6:12; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8024A5A8_de: partial shape; common base field:param:func_8024A5A8_de:r7:12; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8024BD08_de: partial shape; common base field:param:func_8024BD08_de:r4:20; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8024BD08_de_2;
-struct Shape_func_8024BD08_de_2 {
-    unsigned char padding_0[16];
-    unsigned char unknown_10[1];
-};
-/* Shape_func_8024D264_de: partial shape; common base param:func_80299E74_de:r16; size unknown; common-base owner ABI is incomplete or conflicting */
-struct ShapeCode80254CE4;
-struct ShapeCode80254CE4 {
-    unsigned char padding_0[16];
-    unsigned char unknown_10[4];
-};
-/* Shape_func_802764D4_de: partial shape; common base param:func_802764D4_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8027A948_de: partial shape; common base field:field:param:func_8027ABF4_de:r4:280:48; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8027A948_de_2: partial shape; common base field:param:func_8027ABF4_de:r4:280; size unknown; common-base owner ABI is incomplete or conflicting */
-/* Shape_func_8027A948_de_3: partial shape; common base param:func_8027ABF4_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_8027ABF4_de_4;
-struct Shape_func_8027ABF4_de_4 {
-    unsigned char padding_0[8];
-    int field_8;
-    int field_C;
-    int field_10;
-    unsigned char padding_14[88];
-    float field_6C;
-};
-/* Shape_func_802AFB6C_de: partial shape; common base param:func_802AFB6C_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_802AFB6C_de_2;
-struct Shape_func_802AFB6C_de_2 {
-    unsigned char padding_0[16];
-    unsigned char field_10;
-};
-/* Shape_func_802B0A90_de: partial shape; common base param:func_802B0A90_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_802B0A90_de_2;
-struct Shape_func_802B0A90_de_2 {
-    unsigned char padding_0[8];
-    short field_8;
-};
-/* Shape_func_802B18E4_de: partial shape; common base param:func_802B18E4_de:r4; size unknown; common-base owner parameter types are incomplete or conflicting */
-struct Shape_func_802B18E4_de_2;
-struct Shape_func_802B18E4_de_2 {
-    int field_0;
-    unsigned char padding_4[24];
-    int field_1C;
-    int field_20;
-    unsigned char padding_24[8];
-    int field_2C;
-    unsigned char padding_30[8];
-    void * field_38;
-    unsigned char padding_3C[12];
-    int field_48;
-};
-/* Shape_func_802B1FE8_de: partial shape; common base param:func_802B1FE8_de:r4; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_802B1FE8_de_2;
-struct Shape_func_802B1FE8_de_2 {
-    unsigned char padding_0[20];
-    unsigned char unknown_14[2];
-};
-/* Shape_func_802B23C4_de: partial shape; common base field:param:func_802B1FE8_de:r4:8; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_802B2FB0_de;
-struct Shape_func_802B2FB0_de {
-    int field_0;
-    unsigned char padding_4[16];
-    int field_14;
-    unsigned char padding_18[4];
-    int field_1C;
-    int field_20;
-    unsigned char padding_24[8];
-    int field_2C;
-    unsigned char padding_30[8];
-    void * field_38;
-    unsigned char padding_3C[8];
-    float field_44;
-    int field_48;
-};
-/* Shape_func_802B93B0_de: partial shape; common base global:D_801487B4; size unknown; overlapping, negative or inconsistent observed storage intervals */
-struct Shape_func_802B9A04_eu_x;
-struct Shape_func_802B9A04_eu_x {
-    unsigned short field_0;
-    unsigned char unknown_2[2];
-    int field_4;
-    int field_8;
-    int field_C;
-    unsigned char unknown_10[4];
-    unsigned char unknown_14[4];
-    unsigned char padding_18[8];
-    int field_20;
-    float field_24;
-    unsigned short field_28;
-    unsigned char padding_2A[2];
-    int field_2C;
-};
-/* Shape_func_80407290_de: partial shape; common base field:param:func_804082FC_de:r5:32; size unknown; common-base owner parameter types are incomplete or conflicting */
-/* Shape_func_80407290_de_2: partial shape; common base param:func_804082FC_de:r5; size unknown; common-base owner parameter types are incomplete or conflicting */
-struct Shape_func_80407748_de;
-struct Shape_func_80407748_de {
-    int field_0;
-    int field_4;
-    float field_8;
-    float field_C;
-    float field_10;
-    float field_14;
-    unsigned char padding_18[4];
-    int field_1C;
-    unsigned char padding_20[2];
-    short field_22;
-    int field_24;
-    unsigned char padding_28[104];
-    int field_90;
-};
-/* Shape_func_804122CC_de: partial shape; common base param:func_80412634_de:r4; size unknown; common-base owner parameter types are incomplete or conflicting */
-struct Shape_func_80412634_de_2;
-struct Shape_func_80412634_de_2 {
-    unsigned char padding_0[16];
-    unsigned char unknown_10[1];
-};
-/* Shape_func_804402DC_de: partial shape; common base param:func_804404A8_de:r5; size unknown; common-base owner ABI is incomplete or conflicting */
-struct Shape_func_804404A8_de_2;
-struct Shape_func_804404A8_de_2 {
-    unsigned char padding_0[28];
-    int field_1C;
-    int field_20;
-    unsigned char unknown_24[4];
-    int field_28;
-    unsigned char unknown_2C[4];
-    int field_30;
-    unsigned char unknown_34[4];
-    unsigned char unknown_38[4];
-    unsigned char unknown_3C[4];
-    int field_40;
-    int field_44;
-    int field_48;
-    int field_4C;
-    int field_50;
-    unsigned char padding_54[4];
-    int field_58;
-    int field_5C;
-    int field_60;
-    int field_64;
-    int field_68;
-};
-/* Shape_func_80443EC0_de: partial shape; common base address:D_801462C8; size unknown; overlapping, negative or inconsistent observed storage intervals */
-struct Shape_typemap;
-struct Shape_typemap {
-    unsigned short field_0;
-    unsigned char unknown_2[2];
-    int field_4;
-    int field_8;
-    int field_C;
-    unsigned char unknown_10[4];
-    unsigned char unknown_14[4];
-    unsigned char padding_18[8];
-    int field_20;
-    float field_24;
-    unsigned short field_28;
-    unsigned char padding_2A[2];
-    int field_2C;
 };
 struct Opaque_Body;
 struct Opaque_Character;
@@ -8159,13 +7773,6 @@ union fu {
     float f;
 };
 struct ObjRecAtCV2;
-struct func_8028C544_S2;
-struct func_8028C544_S2 {
-    char pad0[0x8];
-    void * unk8;
-    char pad8[0xC - 0x8 - sizeof(void*)];
-    f32 unkC;
-};
 struct Screen_func_80422960_de;
 struct LevelActor;
 struct func_8043D2D0_S;

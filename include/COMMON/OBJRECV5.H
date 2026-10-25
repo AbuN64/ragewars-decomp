@@ -1735,9 +1735,6 @@ struct ObjectLinks148;
 typedef struct ObjectLinks148 ObjectLinks148;
 
 
-struct State;
-typedef struct State State;
-
 struct ObjectLinks16E4;
 struct ObjectLinks16E4 {
     char pad0[0x5D8];
@@ -1808,14 +1805,6 @@ struct Damage_func_80229FA0_de {
 
 struct WorldWeaponsUpdateWorldPlayers;
 typedef struct WorldWeaponsUpdateWorldPlayers WorldWeaponsUpdateWorldPlayers;
-
-struct State;
-struct State {
-    char pad[0x58];
-    int unk58;
-    char pad5c[0x4c];
-    int humanWon;
-};
 
 struct Stats;
 struct Stats {

@@ -18,5 +18,4 @@ static inline f32 recordValue(s32 id) {
 #endif
 }
 
-struct func_8028C544_S2;
 #endif

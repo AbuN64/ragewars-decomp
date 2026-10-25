@@ -4,14 +4,6 @@
 #include "COMMON/OWNERRECAT8V1.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-/* Remaining func_8041F2A0_* types are unresolved canonical identities. */
-/* Builds the four-player selection screen state, its preview models and sliding panels, then marks active players. */
-struct func_8041F2A0_Vec3 {
-    f32 x;
-    f32 y;
-    f32 z;
-};
-typedef struct func_8041F2A0_Vec3 func_8041F2A0_Vec3;
 
 /* Selection items are menu widgets; w is the legacy width spelling. */
 typedef MenuWidget func_8041F2A0_Item;

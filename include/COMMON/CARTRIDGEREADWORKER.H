@@ -23,9 +23,6 @@ struct CartridgeReadWorker {
 
 
 
-struct Handles;
-typedef struct Handles Handles;
-
 struct Item57BD4;
 typedef struct Item57BD4 Item57BD4;
 
@@ -50,12 +47,6 @@ extern u32 func_802571F0_de(s32 offset, s32 length);
 
 struct Window;
 typedef struct Window Window;
-
-struct Handles;
-struct Handles {
-    char pad0[0x60];
-    s16 handles[17];
-};
 
 
 extern int D_801076A0;
