@@ -22,7 +22,7 @@ extern f32 D_80115DEC;
 
 extern Gfx *D_80110634;
 
-extern s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
+extern s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 
 extern CQuatern func_80271818_de(CVector3 *);
 
@@ -97,7 +97,7 @@ void func_8027E784_de(Shared_Particle *actor, struct Shared_ParticleView *view) 
     point.x = probe.pos.x;
     point.y = probe.pos.y - 102400.0f;
     point.z = probe.pos.z;
-    func_80243A90_de(&probe, point, &D_80100030);
+    Camera_MoveActorWithCollision(&probe, point, &D_80100030);
     ground = &D_801041F0;
     if (ground->found == 0) {
         return;

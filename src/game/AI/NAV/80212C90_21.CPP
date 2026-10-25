@@ -13,7 +13,7 @@ extern void func_8024E6D8_de(u8 *arg0, CVector3 *arg1);
 extern void Particle_AddVec3(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void Particle_SubtractVectors(CVector3 *result, CVector3 *left, CVector3 *right);
 extern void func_80272944_de(MatrixF *arg0, CVector3 *arg1, CVector3 *arg2, s32 count);
-extern void func_80243A90_de(Source *arg0, CVector3 arg1, CollisionInfo *arg2);
+extern void Camera_MoveActorWithCollision(Source *arg0, CVector3 arg1, CollisionInfo *arg2);
 extern void func_80207730_de(u8 *arg0, Source *arg1);
 
 
@@ -46,7 +46,7 @@ void func_80213CF8_de(Source *player, void *unused1) {
         Particle_SubtractVectors(&transformed, &transformed, &position);
         player->height += amount;
         Particle_AddVec3(&position, &position, &transformed);
-        func_80243A90_de(player, position, &D_80100338);
+        Camera_MoveActorWithCollision(player, position, &D_80100338);
         player->velocity = saved_velocity;
         if ((object[0] == 1) && (((Source *)object)->definition->kind == 2)) {
             func_80207730_de(object, player);

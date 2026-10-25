@@ -37,6 +37,6 @@ void func_80422170_de(void) {
 
 void func_804221E8_de(void) {
     func_80245A20_de(1);
-    func_80245A00_de((45.0f));
+    Camera_SetResponse((45.0f));
     func_80245A5C_de(0x43, 0x4F, 0x12, 0x80);
 }

@@ -155,11 +155,11 @@ f32 func_802459A0_de(void) {
     return response;
 }
 
-void func_80245A00_de(float arg0) {
+void Camera_SetResponse(float arg0) {
     D_800E2830->response = arg0;
 }
 
-void func_80245A10_de(void) {
+void Camera_ClearResponse(void) {
     D_800E2830->response = 0.0f;
 }
 
@@ -187,7 +187,7 @@ void func_80245A5C_de(int arg0, int arg1, int arg2, int arg3) {
     record->unknown104[4] = arg3;
 }
 
-void func_80245A78_de(int goal) {
+void Camera_AddMessage(int goal) {
     Shared_MenuContext *record = D_800E2830;
     int idx = record->messageCount;
     Resmgr_CopyString(record->messages[idx], goal);

@@ -531,7 +531,7 @@ extern char *D_800D3304, *D_800D3334, *D_800D3338, *D_800D333C, *D_800D3340, *D_
     *D_800D3370, *D_800D3374, *D_800D3378, *D_800D337C, *D_800D3380, *D_800D3384, *D_800D3388,
     *D_800D338C, *D_800D3390_de, *D_800D3394, *D_800D3398;
 extern void Camera_ClearMessageCount(void);
-extern void func_80245A78_de(char *);
+extern void Camera_AddMessage(char *);
 extern s32 Render_GetDirectoryEntry(s32 *, s32, s32);
 extern void *func_80254284_de(s32, void **, s32, void *);
 extern ResultsText *func_80254408_de(s32, void *, s32, s32, void *, s32, void *);
@@ -608,7 +608,7 @@ void Scene_ShowResultsGoal(void) {
 
     Camera_ClearMessageCount();
     copyLevelName(&D_8011FE88, D_8015402C, name, 63);
-    func_80245A78_de(name);
+    Camera_AddMessage(name);
     if (currentGame()->controllerMode == 0) {
         return;
     }
@@ -669,17 +669,17 @@ void Scene_ShowResultsGoal(void) {
     mode = currentGame()->controllerMode;
     switch (mode) {
     case 1:
-        func_80245A78_de(goal);
+        Camera_AddMessage(goal);
         players = (Weapons_GetLevelProgress(D_80102B00, D_80102B00[0].slot) >> 1) + 1;
         if (players < 2) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), players);
         } else {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D338C, D_800E1884), players);
         }
-        func_80245A78_de(name);
+        Camera_AddMessage(name);
         break;
     case 3:
-        func_80245A78_de(goal);
+        Camera_AddMessage(goal);
         if (D_800E4680->timeLimit <= 60) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3374, D_800E1824), D_800E4680->timeLimit);
         } else {
@@ -700,31 +700,31 @@ void Scene_ShowResultsGoal(void) {
                 }
             }
         }
-        func_80245A78_de(name);
+        Camera_AddMessage(name);
         break;
     case 4:
         challenge = findLevelChallenge(&D_8011FE88, D_8015402C);
         character = &RESULTS_CHARACTERS[Frontend_FindKeyIndex(challenge->character)];
         func_802A0C08_de(name, RESULTS_NAME_FORMAT, character->name[RESULTS_LANGUAGE].text);
-        func_80245A78_de(name);
-        func_80245A78_de(goal);
+        Camera_AddMessage(name);
+        Camera_AddMessage(goal);
         if (D_800E4680->lives < 2) {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D3388, D_800E1874), D_800E4680->lives);
         } else {
             func_802A0C08_de(name, RESULTS_TEXT(D_800D338C, D_800E1884), D_800E4680->lives);
         }
-        func_80245A78_de(name);
+        Camera_AddMessage(name);
         break;
     case 2:
-        func_80245A78_de(goal);
+        Camera_AddMessage(goal);
         switch (D_8014DD98.kind) {
         case 0:
             break;
         case 1:
-            func_80245A78_de(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
+            Camera_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
             break;
         case 2:
-            func_80245A78_de(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
+            Camera_AddMessage(RESULTS_TEXT(D_800D3398, D_800E18B4_eu));
             break;
         }
         break;

@@ -26,7 +26,7 @@ extern void func_8025CC90_de(void *arg0);
 
 extern void func_8025D450_de(void *arg0);
 extern s32 func_802934F8_de(void);
-extern void *func_802395A4_de(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Camera_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 
 
@@ -91,7 +91,7 @@ s32 func_8025842C_de(void *arg0) {
         zero.z = 0.0f;
         zero.y = 0.0f;
         zero.x = 0.0f;
-        result = func_802395A4_de(&D_80145088, &zero);
+        result = Camera_FindNearestCamera(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((((struct ContextRecAt2BC0 *)(object))->frame & 3) == 0) {
             Texture_PlaySoundAtPosition(object, ((struct ContextRecAt2BC0 *)(object))->track, *vec, 0, -1);

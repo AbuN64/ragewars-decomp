@@ -27,7 +27,7 @@ extern char D_8011D8D0;
 
 extern SharedPlayer *D_80145060;
 
-s32 func_80243A90_de(Shared_Particle *particle, CVector3 pos, s32 *flags);
+s32 Camera_MoveActorWithCollision(Shared_Particle *particle, CVector3 pos, s32 *flags);
 
 f32 Particle_GetActorHeight(SharedPlayer *player);
 
@@ -265,7 +265,7 @@ void Particle_Update(Shared_Particle *particle) {
         }
     }
     if (particle->flags & 0x40000) {
-        if (func_80243A90_de(particle, particle->inst.pos, &particle->unk1B4) && D_801041F0.unkB4 != 0) {
+        if (Camera_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4) && D_801041F0.unkB4 != 0) {
             particle->space = -3;
         }
         if (particle->inst.unk38 & 0x1000) {
@@ -332,7 +332,7 @@ void Particle_Update(Shared_Particle *particle) {
         return;
     }
     if (!(particle->flags & 0x72000)) {
-        die = func_80243A90_de(particle, particle->inst.pos, &particle->unk1B4);
+        die = Camera_MoveActorWithCollision(particle, particle->inst.pos, &particle->unk1B4);
         if (particle->inst.unk38 & 0x1000) {
             particle->flags |= 4;
         } else {

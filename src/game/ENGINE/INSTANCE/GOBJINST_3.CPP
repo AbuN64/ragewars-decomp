@@ -42,7 +42,7 @@ extern CollisionInfo D_801003D8;
 
 extern func_80237E70_G1 D_801041F0;
 
-extern s32 func_80243A90_de(void *arg0, CVector3 arg1, CollisionInfo *arg2);
+extern s32 Camera_MoveActorWithCollision(void *arg0, CVector3 arg1, CollisionInfo *arg2);
 
 extern void func_80278E04_de(s32 arg0, s32 arg1, void *arg2);
 
@@ -133,7 +133,7 @@ void func_8024715C_de(char *actor, CVector3 *arg1) {
             ((ObjectStateC *)(collision))->unk_8.v1 = 0;
         }
         old_contact = ((ObjectLinks23C *)(actor))->unk_14;
-        collided = func_80243A90_de(actor, *arg1, collision);
+        collided = Camera_MoveActorWithCollision(actor, *arg1, collision);
         if (old_contact != ((ObjectLinks23C *)(actor))->unk_14) {
             ((ObjectLinks23C *)(actor))->unk_1F4 = old_contact;
         }

@@ -221,7 +221,7 @@ s32 func_8024E62C_de(Player *);
 s32 func_8024DEE0_de(Player *);
 s32 func_8024DF5C_de(Player *);
 s32 func_8024DFA0_de(Player *);
-s32 func_80243A90_de(Player *, CVector3, NavigationCollisionQuery *);
+s32 Camera_MoveActorWithCollision(Player *, CVector3, NavigationCollisionQuery *);
 void Particle_SubtractVectors(CVector3 *, void *, CVector3 *);
 
 /* Collisions the actor would meet moving to a point (61.44 above it), without committing the move: the actor's 0x50-byte header is saved and
@@ -245,7 +245,7 @@ static __inline__ s32 navigationBlocked(Player *actor, CNavData *graph, s32 inde
     }
     query.flags = 0x4000;
     __builtin_memcpy(saved, actor, sizeof(saved));
-    result = func_80243A90_de(actor, position, &query);
+    result = Camera_MoveActorWithCollision(actor, position, &query);
     __builtin_memcpy(actor, saved, sizeof(saved));
     return result;
 }

@@ -53,7 +53,7 @@ extern void func_8022BD94_de(void *, void *, void *);
 extern void func_8022C080_de(void *, void *);
 extern void func_8022C6E4_de(void *, void *);
 extern s32 func_8022C760_de(void *, void *);
-extern s32 func_80243A90_de(void *, CVector3, s32 *);
+extern s32 Camera_MoveActorWithCollision(void *, CVector3, s32 *);
 struct MotionSurface;
 extern s32 Camera_SweepActorMotion(void *, CVector3, CVector3, struct MotionSurface *, f32, f32, f32, f32);
 extern void func_80245D30_de(void *, void *, void *, s32);
@@ -486,7 +486,7 @@ void func_80220ED4_de(SharedPlayer *player)
       {
         player->views5E8.view6E8_79.unk6E8 = player->views0.view8_3.pos;
       }
-      hit = func_80243A90_de(actor, player->views5E8.view6E8_79.unk6E8, stateFlags);
+      hit = Camera_MoveActorWithCollision(actor, player->views5E8.view6E8_79.unk6E8, stateFlags);
       actor->views1C.view100_8.unk100 &= ~0x10000;
     }
     else

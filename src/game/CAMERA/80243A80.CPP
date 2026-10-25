@@ -75,7 +75,7 @@ extern void func_8023E838_de(void *arg0);
 
 extern void func_8023E45C_de(void *arg0);
 
-s32 func_80243A90_de(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *arg4) {
+s32 Camera_MoveActorWithCollision(Func80243A80Actor *actor, Func80243A80Vec3 pos, u32 *arg4) {
     s32 func_8023D380_de();
     Func80243A80Frame frame;
     f32 temp_f0;

@@ -12,7 +12,7 @@ extern void Items_ResetActorPools(void *, s32);
 extern void func_804499B0_de(void *, s32, s32);
 extern void func_80286AA8_de(void *, s32, s32);
 extern s32 func_8025477C_de();
-extern void func_80245A10_de();
+extern void Camera_ClearResponse();
 
 extern void func_80245A30_de();
 
@@ -27,7 +27,7 @@ void func_80422020_de(void) {
     if (func_8025477C_de() == 0) {
         func_8025476C_de(1);
     }
-    func_80245A10_de();
+    Camera_ClearResponse();
     func_80245A20_de(0);
     func_80245A30_de();
 }

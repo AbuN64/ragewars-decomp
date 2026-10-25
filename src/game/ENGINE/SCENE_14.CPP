@@ -308,7 +308,7 @@ void func_8028D90C_de(void) {
     s32 var_a1;
 
     func_80245A20_de(0);
-    func_80245A00_de(D_800C5338_de);
+    Camera_SetResponse(D_800C5338_de);
     var_a0 = 0x1E0;
     if (D_800E28D8 == 0) {
         var_a0 = 0x17C;

@@ -37,7 +37,7 @@ extern f32 D_800C3EE0_de[];
 
 extern s32 func_802934F8_de(void);
 
-extern void *func_802395A4_de(MenuMatchGlobals *arg0, CVector3 *arg1);
+extern void *Camera_FindNearestCamera(MenuMatchGlobals *arg0, CVector3 *arg1);
 
 extern void func_8025B5F0_de(void *arg0, s32 arg1);
 
@@ -187,7 +187,7 @@ void func_80258AE0_de(ContextRecAt2BC0 *arg0) {
             zero.y = value;
             zero.x = value;
         }
-        result = func_802395A4_de(&D_80145088, &zero);
+        result = Camera_FindNearestCamera(&D_80145088, &zero);
         vec = &((struct SharedRecAt564V1 *)(result))->position;
         if ((arg0->frame & 3) == 0) {
             Texture_PlaySoundAtPosition(arg0, arg0->track, *vec, 0, -1);

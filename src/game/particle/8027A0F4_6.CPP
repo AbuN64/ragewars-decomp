@@ -47,7 +47,7 @@ void func_80295FB4_us_rev1(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 void func_802950B4_de(s32 *, void *, s32, s32, s32, s32, s32, s32, s32);
 #endif
 Shared_ParticleInstance *Camera_FindScreenMessage(struct Shared_ParticleView *);
-s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, void *);
+s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, void *);
 void Particle_BuildMatrix(Shared_Particle *, void *, void *, f32);
 void *func_802799C0_de(void *, s32);
 void Render_SetCombineMode(s32);
@@ -64,13 +64,13 @@ static inline s32 func_8027ED6C_de_occluded(Shared_Particle *particle, struct Sh
         Shared_ParticleInstance saved;
         saved = *inst;
         inst->pos = view->unk128;
-        hit = func_80243A90_de(inst, particle->inst.pos, &D_80100030);
+        hit = Camera_MoveActorWithCollision(inst, particle->inst.pos, &D_80100030);
         *inst = saved;
     } else {
         Shared_ParticleInstance probe;
         probe = particle->inst;
         probe.pos = view->unk128;
-        hit = func_80243A90_de(&probe, particle->inst.pos, &D_80100030);
+        hit = Camera_MoveActorWithCollision(&probe, particle->inst.pos, &D_80100030);
     }
     return hit;
 }

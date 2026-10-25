@@ -52,7 +52,7 @@ extern void func_802727D8_de(void *);
 extern void func_80272E3C_de(void *, f32, f32, f32);
 extern void Particle_TransformPoint(void *, CVector3 *, CVector3 *);
 extern void func_80288470_de(void *);
-extern s32 func_80243A90_de(SharedTrackObject *, f32, f32, f32, void *);
+extern s32 Camera_MoveActorWithCollision(SharedTrackObject *, f32, f32, f32, void *);
 extern void func_8028D888_de(void *);
 extern f32 Particle_GetHorizontalAngle(CVector3 *);
 extern f32 Particle_GetVerticalAngle(CVector3 *);
@@ -119,7 +119,7 @@ void Menu_UpdateTrackCamera(SharedTrackCamera *camera) {
             saved = actor->prefix;
             actor->prefix.position = target;
             func_80288470_de(&D_8011FE88);
-            collisionHit = func_80243A90_de(actor, eye.x, eye.y, eye.z, D_80100030);
+            collisionHit = Camera_MoveActorWithCollision(actor, eye.x, eye.y, eye.z, D_80100030);
             func_8028D888_de(&D_8011FE88);
             actor->prefix = saved;
             if (collisionHit != 0) {

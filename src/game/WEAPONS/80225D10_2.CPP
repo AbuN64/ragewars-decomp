@@ -31,7 +31,7 @@
 #include "COMMON/INTEGERSTATE244.H"
 #include "DATA/OVLDAT6/800CF230.H"
 
-extern void func_802394BC_de(char *, f32, f32, f32, f32, s32, Triple);
+extern void Camera_StartEmitter(char *, f32, f32, f32, f32, s32, Triple);
 extern void Weapons_SetPlayerState(SharedPlayer *, SharedPlayer *, s32);
 extern void Weapons_FillDamagePacket(Slot *, Held *, s32, f32, s32, s32);
 extern void func_80219A40_de(SharedPlayer *, char *, Slot *);
@@ -48,7 +48,7 @@ void func_80226340_de(SharedPlayer *player) {
         alpha = Nav_RandomFloat(7.5f);
         level = (u32) alpha;
         Camera_StartFade(view, 0xFF, 0xFF, 0, 0, (u8) level, 3, 7);
-        func_802394BC_de(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
+        Camera_StartEmitter(&D_80145088, 0.0f, 204.79999f, 0.0f, 512.0f, 0, view->position);
     }
     player->views1C.view1D4_21.holdTime -= D_800D2988;
     if (player->views1C.view1D4_21.holdTime <= 0.0f || player->views5E4.view5E4_4.holding == 0) {

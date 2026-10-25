@@ -26,7 +26,7 @@ extern void func_802587A4_de(s32 *arg0);
 extern short func_8025E500_de(void *arg0);
 
 
-extern s32 func_802395A4_de(MenuMatchGlobals *, Triple *);
+extern s32 Camera_FindNearestCamera(MenuMatchGlobals *, Triple *);
 extern void func_802B2D80_de(char *);
 extern void func_802B25D0_de(char *, s32);
 extern void Audio_UpdateVoiceVolume(View_func_8025AE1C_de *);
@@ -47,7 +47,7 @@ void func_8025AE1C_de(View_func_8025AE1C_de *view) {
     Slots *slots;
     s32 playing;
 
-    view->context->result = func_802395A4_de(&D_80145088, &view->position);
+    view->context->result = Camera_FindNearestCamera(&D_80145088, &view->position);
     playing = func_802B2620_de(selectChannel(view->context, view->slot));
     if (view->time <= D_800C3F68_de || ((view->flags & 4) && view->finished == 0)) {
         view->done = 1;

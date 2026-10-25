@@ -41,7 +41,7 @@ extern s32 Nav_NextRandom(void);
 extern void Particle_Release(EffectSystem *, ParticleEffect *);
 extern void func_80255D70_de(IntrusiveList *, ParticleEffect *, ParticleEffect *);
 extern void func_80295E84_de(u32 *, s32);
-extern void func_80246184_de(ParticleEffect *);
+extern void Camera_ResetActorMotion(ParticleEffect *);
 extern f32 func_80285630_de(CharacterScreenCell);
 
 #if defined(VERSION_EU)
@@ -358,7 +358,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                 }
                 count++;
                 func_80295E84_de(&effect->unk11C, entry->unk4);
-                func_80246184_de(effect);
+                Camera_ResetActorMotion(effect);
                 effect->unk110 = 0;
                 effect->unk114 = 0;
                 effect->kind = kind;

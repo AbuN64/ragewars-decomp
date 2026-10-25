@@ -205,7 +205,7 @@ extern s32 D_801370CC;
 extern f32 D_800D2988;
 extern Shared_ReactionFlags *func_8028B2F8_de(void *, void *);
 extern f32 Anim_GetPolygonHeight(void *, s32, s32);
-extern void func_802390D0_de(CVector3 *, void *);
+extern void Camera_GetObjectPositionAt260(CVector3 *, void *);
 extern void func_80295E84_de(s32 *, s32);
 extern void func_80255ED8_de(void *, void *);
 extern void func_80255D14_de(void *, void *);
@@ -293,16 +293,16 @@ void Sched_UpdateSceneEffects(Scene *scene, HostView8023AFF0 *host) {
     limit = Anim_GetPolygonHeight(resource, host->field38, host->field40);
     below = 0;
     if (entry->flags & 1) {
-        func_802390D0_de(&anchor, host);
+        Camera_GetObjectPositionAt260(&anchor, host);
         fadeLimit = 0.5f;
         value = (entry->height - anchor.y) * fadeLimit;
         if (20.48f < value) {
             fadeLimit = 20.48f;
         } else {
-            func_802390D0_de(&probe, host);
+            Camera_GetObjectPositionAt260(&probe, host);
             fadeLimit = (entry->height - probe.y) * fadeLimit;
         }
-        func_802390D0_de(&anchor, host);
+        Camera_GetObjectPositionAt260(&anchor, host);
         if (!(anchor.y < entry->height)) {
             below = 0;
         } else {

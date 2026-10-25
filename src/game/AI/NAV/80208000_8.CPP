@@ -47,7 +47,7 @@ extern s32 func_8024DF5C_de(void *);
 
 extern s32 func_8024DFA0_de(void *);
 
-extern s32 func_80243A90_de(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
+extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo8020CD74 *);
 
 /** Return an indexed record from the table referenced by the input. */
 void *Nav_GetGraphPoint(void *table, int index) {
@@ -243,7 +243,7 @@ s32 func_8020CD74_de(s32 **arg0, Instance8020CD74 *arg1, s32 arg2) {
     }
     collision.w[0] = 0x4000;
     saved = *arg1;
-    result = func_80243A90_de(arg1, position, &collision);
+    result = Camera_MoveActorWithCollision(arg1, position, &collision);
     *arg1 = saved;
     return result == 0;
 }

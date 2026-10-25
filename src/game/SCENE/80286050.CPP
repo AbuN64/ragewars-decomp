@@ -199,7 +199,7 @@ first_pass_done:
 extern Gfx *D_80110634;
 extern char D_0028DFE4[], D_0028E044[];
 typedef struct SortEntry { void *object; f32 distance; } SortEntry;
-extern void func_802390D0_de(void *, void *);
+extern void Camera_GetObjectPositionAt260(void *, void *);
 extern void func_802852C0_de(void *, s32, s32, void *, void *);
 extern void func_80250A9C_de(void *, void *);
 extern void func_8024EB90_de(void *);
@@ -235,11 +235,11 @@ void Scene_DrawTransparentObjects(Shared_World *world, void *camera) {
     gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RNY, FRUSTRATIO_1);
     gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPX, (u16)-FRUSTRATIO_1);
     gSPMoveWord(D_80110634++, G_MW_CLIP, G_MWO_CLIP_RPY, (u16)-FRUSTRATIO_1);
-    func_802390D0_de(&jitter, camera);
+    Camera_GetObjectPositionAt260(&jitter, camera);
     ox = jitter.x * -2.0f;
-    func_802390D0_de(&jitter, camera);
+    Camera_GetObjectPositionAt260(&jitter, camera);
     oy = jitter.y * -2.0f;
-    func_802390D0_de(&jitter, camera);
+    Camera_GetObjectPositionAt260(&jitter, camera);
     oz = jitter.z * -2.0f;
     for (i = 0; i < count; i++) {
         f32 x;

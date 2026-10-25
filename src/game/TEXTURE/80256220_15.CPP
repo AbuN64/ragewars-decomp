@@ -97,7 +97,7 @@ s32 func_80257A14_de(void *arg0, s32 id) {
 #include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "AUDIO/80259280_5.H"
 
-extern void *func_802395A4_de(MenuMatchGlobals *, CVector3 *);
+extern void *Camera_FindNearestCamera(MenuMatchGlobals *, CVector3 *);
 extern s32 func_8025BA4C_de(void *, s32);
 extern f32 func_8025C10C_de(CVector3 *, void *);
 extern s32 func_8025BDAC_de(void *, s32, s32);
@@ -121,7 +121,7 @@ s32 Texture_StartSoundRecord(void *arg0, Item57BD4 *arg1, CVector3 *arg2, s32 ar
                   s32 arg4, s32 arg5, s32 arg6) {
     void *node;
 
-    ((ContextRecAt2BC0 *)(arg0))->field2B98 = func_802395A4_de(&D_80145088, arg2);
+    ((ContextRecAt2BC0 *)(arg0))->field2B98 = Camera_FindNearestCamera(&D_80145088, arg2);
     if (arg1->flags & 1) {
         if (func_8025BA4C_de(&((ContextRecAt2BC0 *)(arg0))->menu[0], ((ContextRecAt2BC0 *)(arg0))->selectedSound) != 0) {
             return -1;

@@ -128,7 +128,7 @@ void func_80294418_de(GameSession *session) {
 void func_80294434_de(s32 arg0) {
     D_800CD770 += 1;
     func_8028D90C_de();
-    func_80245A00_de(0.5f);
+    Camera_SetResponse(0.5f);
     func_80293998_de(arg0, 0x6F);
 }
 

@@ -72,7 +72,7 @@ extern void D_0024A7A0();
 struct Shared_World;
 extern s32 func_8028B21C_de(struct Shared_World *, s32);
 
-extern void func_80246184_de(char *);
+extern void Camera_ResetActorMotion(char *);
 
 extern CQuatern func_8024D870_de(char *);
 
@@ -149,7 +149,7 @@ s32 func_802462E8_de(Instance8020CD74 *arg0, CVector3 position, char **out) {
         *out = set;
     }
     saved = *arg0;
-    collisions = func_80243A90_de(arg0, position, set);
+    collisions = Camera_MoveActorWithCollision(arg0, position, set);
     *arg0 = saved;
     return collisions;
 }
@@ -166,7 +166,7 @@ s32 func_8024643C_de(Instance8020CD74 *from, Instance8020CD74 *to) {
     ((struct Actor_func_80214DD4_de *)from)->pos.y += Particle_GetActorHeight(from) * scale;
     desired = ((struct Actor_func_80214DD4_de *)to)->pos;
     desired.y += Particle_GetActorHeight(to) * scale;
-    collisions = func_80243A90_de(from, desired, &D_80103FD0);
+    collisions = Camera_MoveActorWithCollision(from, desired, &D_80103FD0);
     *from = savedFrom;
 
     return collisions == 0;
@@ -181,7 +181,7 @@ s32 func_80246558_de(Instance8020CD74 *arg0, CVector3 position, CollisionInfoCod
     collision_info = *arg2;
     collision_info.ground_behavior = 0;
     collision_info.instance_behavior = 1;
-    func_80243A90_de(arg0, position, &collision_info);
+    Camera_MoveActorWithCollision(arg0, position, &collision_info);
     *arg0 = saved;
 
     collisions = D_801041F0.active0 || D_801041F0.active9c;
@@ -206,7 +206,7 @@ void func_802466A0_de(char *obj, s32 model, s32 kind, s32 unused, void *info, s3
             return;
         }
     }
-    func_80246184_de(obj);
+    Camera_ResetActorMotion(obj);
     *(u8 *)obj = 1;
     ((LevelActor *)obj)->modelIndex = model;
     ((LevelActor *)obj)->definition = info;

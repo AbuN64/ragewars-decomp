@@ -108,7 +108,7 @@ static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kin
     return message;
 }
 
-void func_802394BC_de(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
+void Camera_StartEmitter(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVector3 pos)
 {
     RaceViewportState *state = (void *)obj;
     CShake *node = state->freeEffects.head;
@@ -124,7 +124,7 @@ void func_802394BC_de(char *obj, f32 a, f32 b, f32 c, f32 scale, s32 value, CVec
     set_emitter(node, a * k, b * k, c * k, scale, value, pos);
 }
 
-void *func_802395A4_de(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
+void *Camera_FindNearestCamera(MenuMatchGlobals *menuMatchGlobals, CVector3 *zero) {
     CVector3 position;
     GameplayCamera *node;
     void *bestNode;

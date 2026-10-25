@@ -79,7 +79,7 @@ typedef struct CollisionInfo CollisionInfo;
 
 extern CollisionInfo D_80100030;
 extern Instance8020CD74 *Camera_FindScreenMessage(Arg1 *arg0);
-extern s32 func_80243A90_de(Instance8020CD74 *, CVector3, CollisionInfo *);
+extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
 s32 func_80284C48_de(Instance8020CD74 *arg0, Arg1 *arg1) {
     Instance8020CD74 saved;
@@ -90,12 +90,12 @@ s32 func_80284C48_de(Instance8020CD74 *arg0, Arg1 *arg1) {
     if (instance != 0 && arg1->field24 == 0) {
         saved = *instance;
         instance->position = arg1->position128;
-        collisions = func_80243A90_de(instance, arg0->position, &D_80100030);
+        collisions = Camera_MoveActorWithCollision(instance, arg0->position, &D_80100030);
         *instance = saved;
     } else {
         saved = *arg0;
         saved.position = arg1->position128;
-        collisions = func_80243A90_de(&saved, arg0->position, &D_80100030);
+        collisions = Camera_MoveActorWithCollision(&saved, arg0->position, &D_80100030);
     }
     return collisions == 0;
 }

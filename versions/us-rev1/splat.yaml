@@ -3625,7 +3625,7 @@ segments:
       - [0xC9238, rodata, data_800C/D_blob_a9d06c804c6cffd443f4]
       - [0xC923C, data, data_800C/D_blob_ce8a9b682d3fb1e3d114]
       - [0xC9240, rodata, data_800C/D_blob_a7e1cd74c116e45a72ba]
-      - [0xC9248, rodata, data_800C/literals_func_802394BC_de]
+      - [0xC9248, rodata, data_800C/literals_Camera_StartEmitter]
       - [0xC9250, rodata, data_800C/literals_Camera_PostTargetedScreenMessage]
       - [0xC9258, rodata, data_800C/D_blob_d4c8bae5150d2e45a76d]
       - [0xC925C, rodata, data_800C/D_blob_942402804f6c87b30532]

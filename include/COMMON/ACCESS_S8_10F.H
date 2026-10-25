@@ -65,7 +65,7 @@ struct func_80246174_S1 {
 struct func_80245AE8_S1;
 typedef struct func_80245AE8_S1 func_80245AE8_S1;
 
-extern void func_80245A10_de(void);
+extern void Camera_ClearResponse(void);
 
 struct Access_s32_C4;
 typedef struct Access_s32_C4 Access_s32_C4;

@@ -142,7 +142,7 @@ void func_80245D30_de(Actor_func_80245D30_de *actor, Material_func_80245D30_de *
 
 
 
-void func_80246184_de(void *levelActor) {
+void Camera_ResetActorMotion(void *levelActor) {
     float k;
 
     func_8024DD10_de(levelActor);
@@ -165,7 +165,7 @@ void func_80246184_de(void *levelActor) {
 
 extern CollisionInfo8020CD74 D_801040D0;
 extern f32 Anim_GetPolygonHeight(s32, f32, f32);
-extern s32 func_80243A90_de(Shared_ParticleInstance *, CVector3, s32 *);
+extern s32 Camera_MoveActorWithCollision(Shared_ParticleInstance *, CVector3, s32 *);
 
 void Camera_MoveToXZKeepHeight(Shared_ParticleInstance *actor, f32 x, f32 z) {
     CVector3 saved;
@@ -180,7 +180,7 @@ void Camera_MoveToXZKeepHeight(Shared_ParticleInstance *actor, f32 x, f32 z) {
     position.y = actor->pos.y;
     position.z = z;
     keep = D_801040D0.w[0];
-    func_80243A90_de(actor, position, D_801040D0.w);
+    Camera_MoveActorWithCollision(actor, position, D_801040D0.w);
     D_801040D0.w[0] = keep;
     actor->velocity = saved;
     actor->pos.y = Anim_GetPolygonHeight(actor->unk14, actor->pos.x, actor->pos.z) + height;

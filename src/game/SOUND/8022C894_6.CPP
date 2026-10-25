@@ -25,7 +25,7 @@ extern CollisionInfo D_80100030;
 
 extern f32 Particle_GetActorHeight(Instance8020CD74 *);
 
-extern s32 func_80243A90_de(Instance8020CD74 *, CVector3, CollisionInfo *);
+extern s32 Camera_MoveActorWithCollision(Instance8020CD74 *, CVector3, CollisionInfo *);
 
 extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
 
@@ -135,7 +135,7 @@ s32 func_8022E43C_de(Instance8020CD74 *arg0, CVector3 *arg1) {
     saved = *arg0;
     ((struct Actor_func_80214DD4_de *)arg0)->pos.y += Particle_GetActorHeight(arg0) * (&D_800C2E10_de)[1];
     ((struct Actor_func_80214DD4_de *)arg0)->pos.y += ((struct Actor_func_80214DD4_de *)arg0)->height;
-    func_80243A90_de(arg0, *arg1, &D_80100030);
+    Camera_MoveActorWithCollision(arg0, *arg1, &D_80100030);
 
     moved = (arg1->x != ((struct Actor_func_80214DD4_de *)arg0)->pos.x) ||
             (arg1->y != ((struct Actor_func_80214DD4_de *)arg0)->pos.y) ||

@@ -82,7 +82,7 @@ extern void func_8022D188_de(void *unused, void *object);
 
 extern void func_8022F204_de(s32 arg0);
 
-extern void func_80245A00_de(float arg0);
+extern void Camera_SetResponse(float arg0);
 
 extern void func_80245A20_de(int arg0);
 
