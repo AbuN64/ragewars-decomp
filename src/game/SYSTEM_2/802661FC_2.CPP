@@ -242,12 +242,10 @@ void func_80267D68_de(int unused0, int unused1, int unused2, int arg3) {
     *p = arg3;
 }
 
-void func_80267D70_de(s32 arg0, void *arg1, s32 arg2, CVector3 arg3, s32 arg6)
-{
-  s32 t6 = arg6;
-  void *temp = ((LevelActor *)arg1)->controller;
-  ((Player *)temp)->requestedPosition = arg3;
- /* FAKEMATCH: preserve instruction scheduling between the copied triple and the following call. */
- do { } while (0);
-  func_80232744_de(arg1, (s32) (&((struct LevelActor *)arg1)->behaviorFlags), t6);
+/* Moves the target actor's linked player to the requested position, then raises the event on the actor. */
+void func_80267D70_de(s32 source, void *target, s32 kind, CVector3 position, struct IntPair arg6) {
+    s32 mode = arg6.field_0;
+    LevelActor *actor = (LevelActor *)target;
+    ((Player *)actor->controller)->requestedPosition = position;
+    func_80232744_de(actor, (s32) &actor->behaviorFlags, mode);
 }
