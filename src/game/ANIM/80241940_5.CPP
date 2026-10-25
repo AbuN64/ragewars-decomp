@@ -18,7 +18,7 @@
 
 extern void Particle_CrossVectors(CVector3*,CVector3*,CVector3*);
 
-void func_802433DC_de(ContextB0 *mesh,CollisionVertex **points) {
+void Anim_TraceMeshTriangle(ContextB0 *mesh,CollisionVertex **points) {
     extern s32 func_8023E8D4_de(CapsuleSweep*,Polygon_func_8023E8D4_de*,s32);
     CVector3 vertex;
     CVector3 edgeA;
