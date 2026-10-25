@@ -733,7 +733,7 @@ static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
    player not on one of the D_800CE474 teams, only gives the pickup feedback. Otherwise the powerup takes weapon key
    3 or 7, whichever no action slot uses yet (none free: refused, returns 0); outside tag matches it becomes the
    pending weapon. Then the feedback plays and the entry's ammunition is added. Returns 1 when taken. */
-s32 func_802AC66C_de(struct Player *player, PowerupEntry *entry)
+s32 Menu_HandlePowerWeaponPickup(struct Player *player, PowerupEntry *entry)
 {
     s32 key3Free = 1, key7Free = 1, i;
     s32 skipAmmo = 0;

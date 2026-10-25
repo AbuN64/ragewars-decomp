@@ -149,7 +149,7 @@ struct Player {
     u8 pad93C[0x37C];
     s32 weaponLocked; /* 0xCB8 */
     u8 padCBC[4];
-    s32 pendingWeapon; /* 0xCC0: weapon to switch to (func_80222BE8_de, func_802AC66C_de) */
+    s32 pendingWeapon; /* 0xCC0: weapon to switch to (func_80222BE8_de, Menu_HandlePowerWeaponPickup) */
     u8 padCC4[0x4F0];
     s32 locked; /* 0x11B4 */
     s32 lockState; /* 0x11B8 */
