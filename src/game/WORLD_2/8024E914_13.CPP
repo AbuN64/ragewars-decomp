@@ -33,7 +33,7 @@ static inline s32 advancePropKey(void) {
     return D_800D0910;
 }
 
-void func_8024FD6C_eu(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments) {
+void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments) {
     f32 rotation[4];
     char matrix[0x40];
     PropGeometry *model;

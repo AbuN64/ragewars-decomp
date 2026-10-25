@@ -44,7 +44,6 @@ void func_8028787C_de(World_func_8028787C_de *world, Entity *entity) {
     }
 }
 
-#ifdef NON_MATCHING
 #include "COMMON/WORLD.H"
 #include "COMMON/OBJB.H"
 #include "COMMON/PROPGEOMETRY.H"
@@ -104,20 +103,37 @@ extern void func_80253D10_de(s32 pool, void *handle, void *block);
 extern void func_8028FF0C_de(void *src, void *dst, s32 arg2);
 extern void func_802BD3A0_de(void *dst, void *src, s32 size);
 extern void func_8024F960_eu(PlacedProp *prop, RecordRecAt1A *record, s32 owner, char *segments, f32 spacing);
-extern void func_8024FD6C_eu(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
+extern void World_InitPlacedProp(PlacedProp *prop, PlacedPropRecord *record, s32 owner, char *segments);
 extern void World_InitSimpleInstance(SimpleInstance *instance, SimpleInstanceRecord *record, s32 owner, char *segments);
 extern void Anim_DecodeBoxTransform(ObjectRecAtBC *volume, LightVolumeRecord *record);
 extern f32 Particle_GetActorHeight(void *);
 
 #define ALIGN8(size) (((size) + 7) & ~7)
 
-static inline s32 testBit(s32 n, u8 *bits) {
-    s32 mask = 1 << (n & 7);
+/* Whether the instance's bit is set in the current level's instance mask (section 1 of the level's bit sections).
+ * The same body as func_8028B988_de; the ROM inlines it here. */
+static inline s32 Engine_TestInstanceBit(Shared_World *world, SimpleInstance *instance) {
+    s32 index;
+    void *sections;
+    s32 level;
+    void *mask;
+    u8 *bits;
+    s32 bit;
 
-    return bits[n / 8] & mask;
+    index = instance->id;
+    sections = world->bitSections;
+    level = world->level;
+    mask = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(sections, 0), level), 1);
+    func_8028FDB4_de(mask, 0);
+    func_8028FDF8_de(mask, 1);
+    bits = func_8028FDB4_de(mask, 1);
+    bit = 1 << (index & 7);
+    return (bits[index / 8] & bit) != 0;
 }
 
-/* 341/355 words; remaining: scheduler/allocator ties: base reload before the arg reload (2 sections), bits copy in the bgez delay slot, volume-loop giv order, volumeList giv in $a1 (ROM $s0) */
+/* Builds a level's placed instances into one pool block of five sections: props (efficient then static records),
+ * simple instances (flagged when the level's instance mask has their bit), light volumes, and a copy of the bit set.
+ * Each simple instance then takes its lighting from the volumes at half its actor height. */
 void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
     ObjectRecAtBC *volumeList[128];
     CVector3 position;
@@ -152,12 +168,7 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
     SimpleInstanceRecord *simpleRecords;
     LightVolumeRecord *volumeRecords;
     ObjectRecAtBC *volumes;
-    s32 id;
     void *objects;
-    s32 bit;
-    s32 level;
-    void *mask;
-    u8 *bits;
 
     if (func_80285180_de(handle, 1) != 0) {
         source = **handle;
@@ -193,55 +204,43 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
             base = (char *)blocks;
             segments = (char *)objects + 8;
             for (i = 0; i < efficientCount; i++) {
-
                 func_8024F960_eu(&props[i], &efficient[i],
                                  func_8028FE28_de(world->indexedDirectory, world->indexedBank, efficient[i].id),
                                  segments, world->levelInfo->m_GridDistance);
             }
             for (j = 0; j < staticCount; j++) {
-                func_8024FD6C_eu(&props[j + efficientCount], &statics[j],
+                World_InitPlacedProp(&props[j + efficientCount], &statics[j],
                                  func_8028FE28_de(world->indexedDirectory, world->indexedBank, statics[j].id),
                                  segments);
             }
 
             offset += staticSize;
             blocks->count = n++;
-            dst = base + offset;
             blocks->offsets[blocks->count] = offset;
-            func_8028FF0C_de(simpleSet, dst, 1);
-            ((RecordSet *)dst)->size = sizeof(SimpleInstance);
-            ((RecordSet *)dst)->count = simpleCount;
+            func_8028FF0C_de(simpleSet, base + offset, 1);
+            ((RecordSet *)(base + offset))->size = sizeof(SimpleInstance);
+            ((RecordSet *)(base + offset))->count = simpleCount;
             simpleRecords = (SimpleInstanceRecord *)(simpleSet + 1);
-            simples = (SimpleInstance *)(dst + 8);
+            simples = (SimpleInstance *)(base + offset + 8);
             for (k = 0; k < simpleCount; k++) {
                 World_InitSimpleInstance(&simples[k], &simpleRecords[k],
                                  func_8028FE28_de(world->indexedDirectory, world->indexedBank, simpleRecords[k].type),
                                  segments);
-                id = simples[k].id;
-                level = world->level;
-                mask = func_8028FDB4_de(func_8028FDB4_de(func_8028FDB4_de(world->bitSections, 0), level), 1);
-                func_8028FDB4_de(mask, 0);
-                func_8028FDF8_de(mask, 1);
-                bits = func_8028FDB4_de(mask, 1);
-                bit = 1 << (id & 7);
-                if (bits[id / 8] & bit) {
+                if (Engine_TestInstanceBit(world, &simples[k])) {
                     simples[k].flags |= 1;
                 }
             }
 
             offset += simpleSize;
             blocks->count = n++;
-            dst = base + offset;
             blocks->offsets[blocks->count] = offset;
-            func_8028FF0C_de(volumeSet, dst, 1);
-            ((RecordSet *)dst)->size = sizeof(ObjectRecAtBC);
-            ((RecordSet *)dst)->count = volumeCount;
+            func_8028FF0C_de(volumeSet, base + offset, 1);
+            ((RecordSet *)(base + offset))->size = sizeof(ObjectRecAtBC);
+            ((RecordSet *)(base + offset))->count = volumeCount;
             volumeRecords = (LightVolumeRecord *)(volumeSet + 1);
-            volumes = (ObjectRecAtBC *)(dst + 8);
+            volumes = (ObjectRecAtBC *)(base + offset + 8);
             for (i = 0; i < volumeCount; i++) {
-                LightVolumeRecord *record = &volumeRecords[i];
-
-                Anim_DecodeBoxTransform(&volumes[i], record);
+                Anim_DecodeBoxTransform(&volumes[i], &volumeRecords[i]);
             }
 
             offset += volumeSize;
@@ -266,9 +265,6 @@ void Engine_BuildPlacedInstances(Shared_World *world, void ***handle) {
         func_80253D10_de(0, handle, block);
     }
 }
-#else
-INCLUDE_ASM("span_1000", Engine_BuildPlacedInstances);
-#endif
 
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
