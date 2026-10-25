@@ -9,6 +9,7 @@
 #include "TYPES.H"
 #include "COMMON/UNUSED.H"
 #include "COMMON/TRIPLE.H"
+extern f32 D_800C5498_de;
 
 void Render_BeginModeTransition(GameSession *session, s32 arg1) {
     s32 saved;
@@ -20,7 +21,7 @@ void Render_BeginModeTransition(GameSession *session, s32 arg1) {
     session->target = arg1;
     session->previousMode = saved;
     if (func_80264B6C_de() != 0) {
-        session->timer = D_800C5494.unk4;
+        session->timer = D_800C5498_de;
     }
 }
 

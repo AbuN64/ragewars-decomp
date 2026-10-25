@@ -224,7 +224,7 @@ void Render_RunGameLoop(GameSession *session) {
             D_800CDD10 = 0;
             Render_ResetControllerProfiles();
             Render_SetControllerMode(0);
-            session->pad26DC0 = 1;
+            session->fastFade = 1;
             session->transitionBlocked = 1;
             Render_SetTransitionTarget(session, 0x14);
             break;

@@ -13,6 +13,7 @@ extern void func_8029311C_de(void *arg0, s8 *arg1, s32 arg2, s32 arg3,
                           s32 arg4, s32 arg5);
 
 extern int D_80146878;
+extern f32 D_800D2988; /* frame time scale (Particle code saves and rescales it) */
 
 s32 func_80292FC0_de(s32 *, s32);
 
@@ -106,74 +107,60 @@ void func_80293590_de(void *gameSession) {
     struct GameSession *session = gameSession;
     session->phase = 1;
     session->timer = 0;
-    session->pad26DC0 = 0;
+    session->fastFade = 0;
 }
 
-#ifdef NON_MATCHING
-extern f32 D_800C5480_de, D_800C5484_de, D_800C5488_de, D_800C5490_de;
-extern f32 D_800C548C, literals_Engine_GetPlatformRoutePoint;
-typedef struct FadeState {
-    char pad0[0x26DB4];
-    s32 previous;  /* 0x26DB4 */
-    s32 current;   /* 0x26DB8 */
-    char pad26DBC[4];
-    u8 reverse;    /* 0x26DC0 */
-    u8 mode;       /* 0x26DC1: 0 idle, 1 fading up, 2 fading down */
-    char pad26DC2[2];
-    f32 timer;     /* 0x26DC4 */
-} FadeState;
-/* 90.5%: mode switch (2 before 1) and fresh locals match the ROM layout; remaining: step is copied to f3 for mode 2 in the ROM.
- * Steps the fade timer of a screen state by a step that depends on the direction flag: mode 1 raises it until
- * it reaches the limit, mode 2 lowers it to zero (or below) and then switches to the next screen. */
-void Render_UpdateFadeTransition(FadeState *state) {
+/* Steps the session's screen fade by the frame time D_800D2988 (fastFade picks the fast rate). Phase 2 fades out: the
+ * timer falls to zero, then keeps counting below it until -4 before the session switches to mode 0x14 and fades back
+ * in. Phase 1 fades in, at least half the rate per frame, until the timer reaches one. */
+void Render_UpdateFadeTransition(GameSession *session) {
     f32 step;
+    f32 rate;
     f32 timer;
     f32 next;
-    f32 limit;
-    if (state->mode == 0) {
+
+    if (session->phase == 0) {
         return;
     }
-    step = D_800C5480_de;
-    if (state->reverse != 0) {
-        step = D_800C5484_de;
+    step = 0.1f;
+    if (session->fastFade != 0) {
+        step = 0.5f;
     }
-    switch (state->mode) {
+    rate = step;
+    switch (session->phase) {
     case 2:
-        timer = state->timer;
+        timer = session->timer;
         if (timer > 0.0f) {
-            next = timer - step * literals_Engine_GetPlatformRoutePoint;
-            state->timer = next;
+            step = D_800D2988;
+            next = timer - rate * step;
+            session->timer = next;
             if (next < 0.0f) {
-                state->timer = 0.0f;
+                session->timer = 0.0f;
             }
         } else {
-            state->timer = timer - D_800C5488_de;
+            session->timer = timer - 1.0f;
         }
-        if (state->timer < D_800C548C) {
-            s32 old = state->current;
-            state->current = 0x14;
-            state->timer = 0.0f;
-            state->mode = 1;
-            state->previous = old;
+        if (session->timer < -4.0f) {
+            s32 saved = session->mode;
+            session->mode = 0x14;
+            session->timer = 0.0f;
+            session->phase = 1;
+            session->previousMode = saved;
         }
         break;
     case 1:
-        timer = state->timer;
-        if (literals_Engine_GetPlatformRoutePoint < D_800C5490_de) {
-            next = timer + step * D_800C5490_de;
+        timer = session->timer;
+        if (D_800D2988 < 0.5f) {
+            next = timer + step * 0.5f;
         } else {
-            next = timer + step * literals_Engine_GetPlatformRoutePoint;
+            next = timer + step * D_800D2988;
         }
-        state->timer = next;
-        limit = *(f32 *)&D_800C5494;
-        if (limit <= next) {
-            state->mode = 0;
-            state->timer = limit;
-            state->reverse = 0;
+        session->timer = next;
+        if (next >= 1.0f) {
+            session->phase = 0;
+            session->timer = 1.0f;
+            session->fastFade = 0;
         }
         break;
     }
 }
-#else
-INCLUDE_ASM("span_1000", Render_UpdateFadeTransition);
-#endif

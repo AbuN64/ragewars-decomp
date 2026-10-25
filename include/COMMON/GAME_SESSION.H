@@ -26,8 +26,8 @@ struct GameSession {
     s32 previousMode;
     s32 mode;
     s32 target;
-    u8 pad26DC0;
-    s8 phase;
+    u8 fastFade; /* +0x26DC0: Render_UpdateFadeTransition steps the fade by 0.5 instead of 0.1 */
+    u8 phase; /* +0x26DC1: fade phase: 0 idle, 1 fading in, 2 fading out */
     u8 reserved26DC2[2];
     f32 timer;
     s32 enabled;

@@ -2085,8 +2085,6 @@ extern char D_0029350C[];
 
 extern char *D_800D353C;
 
-extern func_802077F4_S2 D_800C5494;
-
 extern s32 D_801470B0;
 
 extern func_8020CA10_G1 D_800C4318_de;

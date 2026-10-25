@@ -4033,7 +4033,7 @@ segments:
       - [0xC62F8, rodata, data_800C/D_80292308_CB138]
       - [0xC631C, rodata, data_800C/D_80292900_CB15C]
       - [0xC6324, rodata, data_800C/D_80293394_CB164]
-      - [0xC632C, rodata, data_800C/D_802935C0_CB16C]
+      - [0xC632C, rodata, data_800C/literals_Render_UpdateFadeTransition]
       - [0xC6344, rodata, data_800C/D_80293790_CB184]
       - [0xC6348, rodata, data_800C/D_80293904_CB188]
       - [0xC634C, rodata, data_800C/literals_func_80293A20_de]
