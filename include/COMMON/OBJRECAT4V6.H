@@ -309,13 +309,13 @@ struct RecordRecAt4V4 {
 struct SlotRecAtB8;
 typedef struct SlotRecAtB8 SlotRecAtB8;
 
-extern void func_8025B8BC_de(SlotRecAtB8 *base, s16 index);
+extern void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index);
 
 struct func_8025BB9C_S1;
 typedef struct func_8025BB9C_S1 func_8025BB9C_S1;
 
 
-extern s32 func_8025B854_de(SlotRecAtB8 *arg0, s16 arg1);
+extern s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1);
 
 
 

@@ -381,7 +381,7 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
         return -1;
     }
     if (index == 16) {
-        func_80259784_de((ManagerRecAtD8V2 *)context->view, index, id, position);
+        Audio_StartSpatialVoice((ManagerRecAtD8V2 *)context->view, index, id, position);
         return -1;
     }
     mix = (VoiceMix *)context->voices[index].reserved10;
@@ -391,7 +391,7 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
         context->selectedHandle = -1;
         return 0;
     }
-    if (!func_8025B854_de((SlotRecAtB8 *)context->menu, index)) {
+    if (!Audio_GetVoiceSoundState((SlotRecAtB8 *)context->menu, index)) {
         alSndpSetPitch(player, mix->pitch);
         func_802B2DE0_de(player, (mix->volume + context->field2B9C < 128) ? (u8)mix->volume + (u8)context->field2B9C : 127);
         alSndpSetPan(player, mix->pan);
@@ -405,7 +405,7 @@ s32 Texture_UpdateSoundSlot(ContextRecAt2BC0 *context, s32 id, s32 unused, CVect
         }
         func_802B2F10_de(player, (s16)(s32)((f32)mix->left * gain * mix->attenuation));
         if (!context->voices[index].pending) {
-            func_8025B8BC_de((SlotRecAtB8 *)context->menu, index);
+            Audio_PlayVoiceSound((SlotRecAtB8 *)context->menu, index);
         }
     }
     context->selectedHandle = -1;

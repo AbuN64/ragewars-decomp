@@ -185,7 +185,7 @@ void func_8025B758_de(s32 *arg0, s32 arg1) {
     } while (i < 0x11);
 }
 
-s32 func_8025B854_de(SlotRecAtB8 *arg0, s16 arg1)
+s32 Audio_GetVoiceSoundState(SlotRecAtB8 *arg0, s16 arg1)
 {
   s32 temp_v0;
   s32 temp_v1;
@@ -202,7 +202,7 @@ s32 func_8025B854_de(SlotRecAtB8 *arg0, s16 arg1)
   return func_802B2620_de(temp_s0);
 }
 
-void func_8025B8BC_de(SlotRecAtB8 *base, s16 index)
+void Audio_PlayVoiceSound(SlotRecAtB8 *base, s16 index)
 {
   unsigned int offset = index * (sizeof(SlotRecAtB8));
   char *entry = (char *) offset;

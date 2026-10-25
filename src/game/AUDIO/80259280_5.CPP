@@ -58,7 +58,7 @@ void func_802596B4_de(ChannelSet *set, s32 owner) {
     }
 }
 
-void func_80259784_de(ManagerRecAtD8V2 *manager, s32 index, s32 owner, CVector3 *position) {
+void Audio_StartSpatialVoice(ManagerRecAtD8V2 *manager, s32 index, s32 owner, CVector3 *position) {
     Entry_func_80259784_de *entry;
     NodeRecAt4C *node;
     NodeRecAt4C *at;
