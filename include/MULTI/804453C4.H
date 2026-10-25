@@ -2,9 +2,21 @@
 #define MULTI_804453C4_H
 #include "COMMON/MENURECAT20V1.H"
 #include "COMMON/AIPROFILE.H"
+/* Name-slot model a spinner menu points at: four 0x28-byte part records from +0x30, each with
+   display flags at +0 (0x1800000 marks the highlighted slot). */
+typedef struct NameSlotPart {
+    u32 flags;
+    char pad4[0x24];
+} NameSlotPart;
+typedef struct NameSlotModel {
+    char pad0[0x30];
+    NameSlotPart part[4];
+} NameSlotModel;
 struct MenuRecAt20V1 {
     s16 state;
-    char pad2[0x1A];
+    char pad2[0xA];
+    NameSlotModel *model;
+    char pad10[0xC];
     s32 id;
     s32 input;
 };
@@ -34,7 +46,7 @@ struct Spinner {
     s32 value;
     f32 timer;
     s32 max;
-    char padC[0xC];
+    char name[12];
 };
 struct TextEntryRecAtC {
     s32 length;
@@ -42,5 +54,5 @@ struct TextEntryRecAtC {
     s32 count;
     char text[12];
 };
-extern int Multi_SetupNameSpinner(void * arg0);
+extern void Multi_SetupNameSpinner(MenuRecAt20V1 *menu);
 #endif
