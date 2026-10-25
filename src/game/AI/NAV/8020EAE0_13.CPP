@@ -73,8 +73,6 @@ s32 func_80210248_eu(Chaser *self) {
     return 1;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
 
 typedef struct { f32 x, y, z; } AttackPosition;
 typedef struct { char pad0[0x80]; s8 kind; char pad81[0xE]; u8 bonus; char pad90[4]; u8 enabled; } AttackState;
@@ -89,69 +87,63 @@ extern f32 func_80209B64_de(AttackBrain *);
 extern f32 func_80216F44_de(AttackActor *, AttackPosition);
 extern s32 func_8020D1CC_de(void *, s32, s32);
 
-/* 17/224 aligned edits; remaining: range/middle conversions in s3/s6 swapped, case compare register. The do-while(0)
- * around each accept = 1 weights its refs by loop depth so accept outranks brain for s1 like the ROM (an accept macro?). */
 s32 Nav_EvaluateAttackTarget(AttackBrain *brain, s32 index) {
     AttackActor *target = brain->targets[index]->actor;
     s32 accept = 0;
-    s32 nearLimit, middleLimit;
-    s32 range; /* Far cutoff until classification, then the selected angle band. */
+    s32 nearLimit, middleLimit, farLimit;
+    s32 range;
     f32 speed, angle, scale;
-    f32 persistence;
+
     if (target->flags & 0x20) return 0;
     speed = func_80209C5C_de(brain);
-    middleLimit = (s32)(speed * D_800C1F54_de);
-    range = (s32)(speed * D_800C1F58_de);
-    nearLimit = (s32)(speed * D_800C1F50_de);
-    if (func_80216F44_de(brain->actor, target->position) < 0.0f)
-        angle = -func_80216F44_de(brain->actor, target->position);
-    else
-        angle = func_80216F44_de(brain->actor, target->position);
+    nearLimit = speed * D_800C1F50_de;
+    middleLimit = speed * D_800C1F54_de;
+    farLimit = speed * D_800C1F58_de;
+    angle = (func_80216F44_de(brain->actor, target->position) < 0.0f) ? -func_80216F44_de(brain->actor, target->position) : func_80216F44_de(brain->actor, target->position);
     if (angle <= D_800C1F5C_de) {
-        if (brain->weights[index] < nearLimit) do { accept = 1; } while (0);
+        if (brain->weights[index] < nearLimit) accept = 1;
         range = 0;
     } else if (D_800C1F5C_de < angle && angle <= D_800C1F60_de) {
-        range = 1;
         if (brain->weights[index] < middleLimit) {
-            brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F64_de);
-            do { accept = 1; } while (0);
+            brain->weights[index] = brain->weights[index] * D_800C1F64_de;
+            accept = 1;
         }
+        range = 1;
     } else {
-        if (brain->weights[index] < range) {
-            do { accept = 1; } while (0);
-            brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F68_de);
+        if (brain->weights[index] < farLimit) {
+            brain->weights[index] = brain->weights[index] * D_800C1F68_de;
+            accept = 1;
         }
         range = 2;
     }
-    if (D_80146938 && brain->actor->state->enabled && brain->actor->state->kind == 12) do { accept = 1; } while (0);
+    if (D_80146938 && brain->actor->state->enabled && brain->actor->state->kind == 12) accept = 1;
     if (accept) {
         if (D_801468F4 && target->state->bonus)
-            brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F6C_de);
+            brain->weights[index] = brain->weights[index] * D_800C1F6C_de;
         if (target->active == 0)
-            brain->weights[index] = (s32)((f32)brain->weights[index] * D_800C1F70_de);
+            brain->weights[index] = brain->weights[index] * D_800C1F70_de;
         if (func_8020D1CC_de(D_8013B364, brain->route, target->route->route)) return 1;
     }
     if (brain->last != target || brain->timer < 451) return 0;
-    if (brain->weights[index] < (nearLimit << 1)) {
+    if (brain->weights[index] < nearLimit * 2) {
+        accept = 1;
         switch (range) {
+        case 0:
+            break;
         case 1:
             scale = D_800C1F74_de;
-            brain->weights[index] = (s32)((f32)brain->weights[index] * scale);
+            brain->weights[index] = brain->weights[index] * scale;
             break;
         case 2:
             scale = D_800C1F78_de;
-            brain->weights[index] = (s32)((f32)brain->weights[index] * scale);
+            brain->weights[index] = brain->weights[index] * scale;
             break;
         }
-        persistence = func_80209B64_de(brain);
-        brain->weights[index] = (s32)((f32)brain->weights[index] * ((D_800C1F7C_de - persistence) * D_800C1F80_de + D_800C1F80_de));
+        brain->weights[index] = brain->weights[index] * ((D_800C1F7C_de - func_80209B64_de(brain)) * D_800C1F80_de + D_800C1F80_de);
         return 1;
     }
     return 0;
 }
-#else
-INCLUDE_ASM("span_1000", Nav_EvaluateAttackTarget);
-#endif
 
 #if defined(VERSION_US)
 unsigned int rodata_unresolved_802106DC[1] = {
