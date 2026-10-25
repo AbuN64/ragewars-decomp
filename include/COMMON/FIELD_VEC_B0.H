@@ -25,8 +25,8 @@ typedef struct Field_s32_788 Field_s32_788;
 struct func_802169AC_S3;
 typedef struct func_802169AC_S3 func_802169AC_S3;
 
-struct TrackResult;
-typedef struct TrackResult TrackResult;
+struct s_CTargetInfo;
+typedef struct s_CTargetInfo CTargetInfo;
 
 struct func_80216F44_S1;
 struct func_80216F44_S1 {
@@ -86,17 +86,17 @@ struct CActor_t;
 typedef struct CActor_t CActor_t;
 
 struct Actor_func_80214DD4_de;
-struct TrackResult;
-struct TrackResult {
+struct s_CTargetInfo;
+struct s_CTargetInfo {
     s32 kind;
     struct Actor_func_80214DD4_de *target;
-    f32 range;
-    CVector3 pos;
-    CVector3 delta;
-    f32 dist;
-    CVector3 flatPos;
-    CVector3 flatDelta;
-    f32 flatDist;
+    f32 m_DeltaAngle;
+    CVector3 m_vTargetPos;
+    CVector3 m_vDeltaTargetPos;
+    f32 m_DistFrom;
+    CVector3 m_vXZTargetPos;
+    CVector3 m_vXZDeltaTargetPos;
+    f32 m_XZDistFrom;
 };
 
 struct Field_Vec_34;

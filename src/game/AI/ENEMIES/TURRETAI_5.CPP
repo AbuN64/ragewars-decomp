@@ -116,7 +116,7 @@ void Turret_SpecialEffects(void *actor, ObjRecAt8V1 *event) {
 void Turret_DecreaseHealth(void *actor, Dest *state, CDamageInfo *damage) {
     s32 health;
 
-    health = state->health - damage->damage;
+    health = state->health - damage->m_Hits;
     if (health < 0) {
         health = 0;
     }

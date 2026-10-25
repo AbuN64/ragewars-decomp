@@ -382,8 +382,8 @@ extern float D_800C5EC4_de;
 
 extern float D_800C5EBC_de;
 
-struct RecordRecAtE8;
-typedef struct RecordRecAtE8 RecordRecAtE8;
+struct CItemMenu_t;
+typedef struct CItemMenu_t CItemMenu;
 
 struct State802A6FE0;
 
@@ -403,15 +403,15 @@ typedef struct func_802A72AC_S1 func_802A72AC_S1;
 struct CallbackState1C;
 
 
-struct RecordRecAtE8;
-struct RecordRecAtE8 {
+struct CItemMenu_t;
+struct CItemMenu_t {
     unsigned char unk0;
-    unsigned char unk1;
+    unsigned char m_ModePos;
     char pad2[2];
     EntryRecAt34 entries[4];
-    short unkE4;
-    short unkE6;
-    int unkE8;
+    short m_LastItemPos;
+    short m_ItemAlphaFade;
+    int m_FrameCount;
 };
 
 struct func_802A7164_S1;

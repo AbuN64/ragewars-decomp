@@ -3,17 +3,17 @@
 #include "TYPES.H"
 struct ObjectState96 {
     char pad0[0x78];
-    u8 unk_78;
+    u8 m_Active;
     char pad78[0x7F - 0x78 - sizeof(u8)];
-    s8 unk_7F;
+    s8 m_nController;
     char pad7F[0x80 - 0x7F - sizeof(s8)];
-    s8 unk_80;
+    s8 m_nCharacter;
     char pad80[0x81 - 0x80 - sizeof(s8)];
-    u8 unk_81;
+    u8 m_nCharacterSkin;
     char pad81[0x91 - 0x81 - sizeof(u8)];
-    u8 unk_91;
+    u8 m_IsBot;
     char pad91[0x95 - 0x91 - sizeof(u8)];
-    u8 unk_95;
+    u8 m_TalsetPosse;
 };
 struct IntegerState88 {
     char pad0[0x74];
@@ -29,14 +29,14 @@ struct ActorCode80447BB0 {
 };
 /* A 0x44-byte record: three leading words, two lists of 0x16DC/0x16E0-linked nodes, four trailing words. */
 struct RecordCode80447BB0 {
-    s32 word0;
-    s32 word4;
+    s32 m_pmePlayers;
+    s32 m_Players;
     s32 word8;
-    IntrusiveList listC;
-    IntrusiveList list20;
-    s32 word34;
-    s32 word38;
-    s32 word3C;
-    s32 word40;
+    IntrusiveList m_FreeList;
+    IntrusiveList m_ActiveList;
+    s32 m_bEnteredAdonSaveLocation;
+    s32 m_bAdonSaveLocationMenuEnabled;
+    s32 m_TeamTriangleTimer;
+    s32 m_TriangleSpin;
 };
 #endif

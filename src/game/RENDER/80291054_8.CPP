@@ -56,8 +56,8 @@ void func_80293284_de(GameSession *gameSession, s32 target) {
     if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, selectionValues, &spawn, 1) == 0) {
         selectionValues = 0;
     }
-    D_801462C8.counters.ticks = 0;
-    D_801462C8.counters.seconds = 0;
+    D_801462C8.counters.m_GameTimeFifteenth = 0;
+    D_801462C8.counters.m_GameTimeSeconds = 0;
     D_801462C8.counters.m_GameTimeMinutes = 0;
     D_801462C8.counters.m_GameTimeHours = 0;
     D_801462C8.counters.first = 0;

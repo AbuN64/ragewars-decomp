@@ -236,30 +236,30 @@ struct ObjRecAtCV1 {
 union func_80234DD0_S1_U260;
 typedef union func_80234DD0_S1_U260 func_80234DD0_S1_U260;
 
-struct Message;
-struct Message {
-    struct Message *prev; /* 0x00 */
-    struct Message *next; /* 0x04: traversal from the message pool head */
-    f32 hold; /* 0x08 */
-    f32 size;
+struct CCameraText_t;
+struct CCameraText_t {
+    struct CCameraText_t *prev; /* 0x00 */
+    struct CCameraText_t *next; /* 0x04: traversal from the message pool head */
+    f32 m_Time; /* 0x08 */
+    f32 m_DisplayTime;
     f32 alpha;
     s32 kind;
-    s32 timer;
+    s32 m_nAlpha;
     s32 target;
     s32 pad20;
     u8 *text;
-    f32 progress;
+    f32 m_ModeTime;
     s32 pad2C;
     f32 x;
     f32 y;
-    f32 scaleX;
-    f32 scaleY;
+    f32 m_XScale;
+    f32 m_YScale;
 };
 
-struct Message;
+struct CCameraText_t;
 union func_80237E70_S1_UF24;
 union func_80237E70_S1_UF24 {
-    struct Message * v0;
+    struct CCameraText_t * v0;
     char v1;
 };
 
@@ -314,8 +314,8 @@ struct func_80229A54_S2 {
     char * unk16E0;
 };
 
-struct Message;
-typedef struct Message Message;
+struct CCameraText_t;
+typedef struct CCameraText_t CCameraText;
 
 union func_80234DD0_S1_U260;
 union func_80234DD0_S1_U260 {
@@ -323,11 +323,11 @@ union func_80234DD0_S1_U260 {
     f32 v1;
 };
 
-struct Message;
+struct CCameraText_t;
 union func_80237E70_S2_UE40;
 union func_80237E70_S2_UE40 {
     char v0;
-    struct Message * v1;
+    struct CCameraText_t * v1;
 };
 
 union func_80237E70_S2_UE40;
@@ -407,11 +407,11 @@ struct func_8021C9B4_S2 {
     u8 unk8F;
 };
 
-struct Message;
+struct CCameraText_t;
 struct func_80237E70_S4;
 struct func_80237E70_S4 {
     char pad0[0x4];
-    struct Message * unk4;
+    struct CCameraText_t * unk4;
 };
 
 struct func_8020D1FC_S1;

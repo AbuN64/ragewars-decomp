@@ -212,12 +212,12 @@ void func_80227038_de(s8 *world) {
 
                         }
                         var_v1 = temp_v0_2 % temp_v0;
-                        select_rules->unk74 = temp_s1;
-                        select_rules->unk60 = var_v1;
-                        select_rules->unk5C = var_v1;
+                        select_rules->m_FragTagMode = temp_s1;
+                        select_rules->m_FragTagPlayerChosen = var_v1;
+                        select_rules->m_FragTagPlayerPos = var_v1;
                         return;
                     } else {
-                        temp_v0_4 = select_rules->unk60 + 1;
+                        temp_v0_4 = select_rules->m_FragTagPlayerChosen + 1;
                         if (temp_v0 == 0) {
 
                         }
@@ -225,18 +225,18 @@ void func_80227038_de(s8 *world) {
 
                         }
                         var_v1 = temp_v0_4 % temp_v0;
-                        select_rules->unk74 = 4;
-                        select_rules->unk60 = var_v1;
-                        select_rules->unk5C = var_v1;
+                        select_rules->m_FragTagMode = 4;
+                        select_rules->m_FragTagPlayerChosen = var_v1;
+                        select_rules->m_FragTagPlayerPos = var_v1;
                         return;
                     }
                 }
                 goto state_end;
             case 2:
                 if (temp_v0 > 0) {
-                    (case2_rules = &D_801462C8.counters)->unk74 = 5;
-                    case2_rules->restrictionActive = 0xE1;
-                    case2_rules->unk5C = (s32) case2_rules->unk60;
+                    (case2_rules = &D_801462C8.counters)->m_FragTagMode = 5;
+                    case2_rules->m_FragTagFlipTimer = 0xE1;
+                    case2_rules->m_FragTagPlayerPos = (s32) case2_rules->m_FragTagPlayerChosen;
                 }
                 func_8022C5DC_de(world);
                 return;
@@ -314,11 +314,11 @@ void func_80227038_de(s8 *world) {
                 if (temp_v0 == 0) {
 
                 }
-                if ((temp_v0 == -1) && (((s32) case3_entry->unk5C / temp_v0) == 0x80000000)) {
+                if ((temp_v0 == -1) && (((s32) case3_entry->m_FragTagPlayerPos / temp_v0) == 0x80000000)) {
 
                 }
-                case3_entry->restrictionActive = 0;
-                temp_v0_6 = func_8022C55C_de(world, (u32) ((s32) case3_entry->unk5C % temp_v0));
+                case3_entry->m_FragTagFlipTimer = 0;
+                temp_v0_6 = func_8022C55C_de(world, (u32) ((s32) case3_entry->m_FragTagPlayerPos % temp_v0));
                 temp_s1_3 = temp_v0_6->unk5DC;
                 if ((temp_s1_3 != 0) && (temp_s1_3->unk564 == 0)) {
                     Text_SetupSpriteMode((s32) D_801462DE);
@@ -330,11 +330,11 @@ void func_80227038_de(s8 *world) {
                     func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_3->unk2A4 + scaled_x) - ((temp_f3_3 / (f32) D_800E28D0) * D_800C2BAC_de)), (s16) (s32) ((temp_s1_3->unk2A8 + scaled_y) - (temp_f2_4 * D_800C2BAC_de)), (temp_f3_3 / (f32) D_800E28D0), temp_f2_4, 1);
                 }
                 rules = &D_801462C8.counters;
-                temp_a0 = rules->unk5C + 1;
-                rules->unk5C = temp_a0;
-                if (temp_a0 >= (((5 - temp_v0) * 0x14) - rules->unk60)) {
+                temp_a0 = rules->m_FragTagPlayerPos + 1;
+                rules->m_FragTagPlayerPos = temp_a0;
+                if (temp_a0 >= (((5 - temp_v0) * 0x14) - rules->m_FragTagPlayerChosen)) {
                     func_8022C5AC_de(world);
-                    rules->unk74 = 7;
+                    rules->m_FragTagMode = 7;
                     temp_v0_6->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
@@ -395,11 +395,11 @@ void func_80227038_de(s8 *world) {
                 if (temp_v0 == 0) {
 
                 }
-                if ((temp_v0 == -1) && (((s32) case4_entry->unk5C / temp_v0) == 0x80000000)) {
+                if ((temp_v0 == -1) && (((s32) case4_entry->m_FragTagPlayerPos / temp_v0) == 0x80000000)) {
 
                 }
-                case4_entry->restrictionActive = 0;
-                temp_v0_8 = func_8022C55C_de(world, (u32) ((s32) case4_entry->unk5C % temp_v0));
+                case4_entry->m_FragTagFlipTimer = 0;
+                temp_v0_8 = func_8022C55C_de(world, (u32) ((s32) case4_entry->m_FragTagPlayerPos % temp_v0));
                 temp_s1_4 = temp_v0_8->unk5DC;
                 if ((temp_s1_4 != 0) && (temp_s1_4->unk564 == 0)) {
                     Text_SetupSpriteMode((s32) D_801462DE);
@@ -411,11 +411,11 @@ void func_80227038_de(s8 *world) {
                     func_802AAC28_de(0x1FB, 0, (s16) (s32) ((temp_s1_4->unk2A4 + scaled_x4) - ((temp_f3_4 / (f32) D_800E28D0) * D_800C2BB4_de)), (s16) (s32) ((temp_s1_4->unk2A8 + scaled_y4) - (temp_f2_6 * D_800C2BB4_de)), (temp_f3_4 / (f32) D_800E28D0), temp_f2_6, 1);
                 }
                 rules = &D_801462C8.counters;
-                temp_a0_2 = rules->unk5C + 1;
-                rules->unk5C = temp_a0_2;
-                if (temp_a0_2 >= (((5 - temp_v0) * 0x14) - rules->unk60)) {
+                temp_a0_2 = rules->m_FragTagPlayerPos + 1;
+                rules->m_FragTagPlayerPos = temp_a0_2;
+                if (temp_a0_2 >= (((5 - temp_v0) * 0x14) - rules->m_FragTagPlayerChosen)) {
                     func_8022C5AC_de(world);
-                    rules->unk74 = 7;
+                    rules->m_FragTagMode = 7;
                     temp_v0_8->unk5D8->unk8F = 1U;
                     switch (D_80142850) {
                     case 0:
@@ -473,10 +473,10 @@ void func_80227038_de(s8 *world) {
                 goto state_end;
             case 6:
                 case6_entry = &D_801462C8.counters;
-                temp_v0_10 = case6_entry->restrictionActive - 1;
-                case6_entry->restrictionActive = temp_v0_10;
+                temp_v0_10 = case6_entry->m_FragTagFlipTimer - 1;
+                case6_entry->m_FragTagFlipTimer = temp_v0_10;
                 if (temp_v0_10 <= 0) {
-                    case6_entry->restrictionActive = 0;
+                    case6_entry->m_FragTagFlipTimer = 0;
                     if (D_800C91B8_de != 0) {
                         func_8025E2D4_de(D_800C91B8_de);
                     }
@@ -600,21 +600,21 @@ void Weapons_ReleaseWaitingPlayer(Round *round) {
                 D_800F7D10 = 0;
             }
             state = &D_801462C8.counters;
-            switch (state->unk84) {
+            switch (state->m_CTFMode) {
             case 0:
             default:
                 if (count > 0) {
                     node = Weapons_FindWaitingPlayer(round);
                     if (node != 0) {
                         node->scores->unk90 = 0;
-                        D_801462C8.counters.unk84 = 3;
+                        D_801462C8.counters.m_CTFMode = 3;
                     }
                 } else {
-                    state->unk84 = 2;
+                    state->m_CTFMode = 2;
                 }
                 break;
             case 1:
-                state->unk84 = 2;
+                state->m_CTFMode = 2;
                 node = Weapons_FindWaitingPlayer(round);
                 if (node != 0) {
                     node->scores->unk90 = 0;

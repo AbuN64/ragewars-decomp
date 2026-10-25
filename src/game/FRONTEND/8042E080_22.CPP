@@ -70,7 +70,7 @@ void func_8042DEA0_de(void) {
     }
     match = &D_801462C8.counters;
     match->enabled = 0;
-    match->kills = 0;
+    match->m_bPhoenixRoomActive = 0;
     D_800E4680 = 0;
     if (settings[0xD] != 0) {
         first = 0;
@@ -175,8 +175,8 @@ void Frontend_PlaceStageOpponents(void) {
             match->enabled = on;
             slot = func_8042E460_de(D_800E4680->opponents[i]);
             (game->playerSettings + slot)->controlMode = 2;
-            match->timer = 100;
-            match->cooldown = -1;
+            match->m_nBastilleShield = 100;
+            match->m_nBastilleTimer = -1;
             break;
         case 13:
             match->enabled = on;
@@ -200,7 +200,7 @@ void Frontend_PlaceStageOpponents(void) {
         case 15:
             escorted = 1;
             match->enabled = on;
-            match->unk9C = 0;
+            match->m_nTalsetLives = 0;
             slot = func_8042E460_de(D_800E4680->opponents[i]);
             (game->playerSettings + slot)->controlMode = on;
             break;

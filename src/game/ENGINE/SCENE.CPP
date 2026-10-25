@@ -645,7 +645,7 @@ loop_114:
         }
     } else {
 block_122:
-        D_801462C8.counters.teamColour = func_802A01E8_de(var_a0_3) % 3;
+        D_801462C8.counters.m_nFragTagSkin = func_802A01E8_de(var_a0_3) % 3;
     }
     (((struct SharedRecAt1B92C *)(table))->unk0) = 2;
     Items_UpdatePendingObjects(table);

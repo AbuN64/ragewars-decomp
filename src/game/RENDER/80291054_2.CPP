@@ -54,7 +54,7 @@ void Render_InitFrameRing(RenderState *state) {
     state->field26DD4 = 0;
     counters = &D_801462C8.counters;
     counters->first = 0;
-    counters->second = 0;
+    counters->m_bCreditsSeenOnce = 0;
     view = state->ring.views;
     if (count) do {
         previous = count - 1;

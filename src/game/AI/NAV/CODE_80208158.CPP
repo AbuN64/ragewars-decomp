@@ -68,10 +68,10 @@ void func_80208158_de(Brain *brain) {
         meter = (f32)health / (f32)maximum * 100.0f;
         if (brain->player->views5D8.view5D8_1.record->kind == 14) {
             if (meter == 0.0f) {
-                meter = (3 - D_801462C8.counters.unk9C) * 33;
+                meter = (3 - D_801462C8.counters.m_nTalsetLives) * 33;
             } else {
                 meter *= 0.33333334f;
-                meter += (2 - D_801462C8.counters.unk9C) * 33;
+                meter += (2 - D_801462C8.counters.m_nTalsetLives) * 33;
             }
             if (meter < 0.0f) {
                 meter = 0.0f;
@@ -80,16 +80,16 @@ void func_80208158_de(Brain *brain) {
         tutorial = &D_801462C8.counters;
         if (tutorial->enabled != 0) {
             if (brain->player->views5D8.view5D8_1.record->kind == 11) {
-                func_802AA794_de(D_801376F8, (f32)tutorial->timer);
-                if (tutorial->cooldown > 0) {
-                    tutorial->cooldown--;
+                func_802AA794_de(D_801376F8, (f32)tutorial->m_nBastilleShield);
+                if (tutorial->m_nBastilleTimer > 0) {
+                    tutorial->m_nBastilleTimer--;
                     Fx_ClearControllerInput((char *)brain->player + 0x688);
                     brain->w23C = 0;
                     brain->w240 = 0;
                 }
-                if (tutorial->cooldown == 0 && brain->player->views5E4.view5E4_2.health > 0) {
-                    tutorial->timer = 100;
-                    tutorial->cooldown = -1;
+                if (tutorial->m_nBastilleTimer == 0 && brain->player->views5E4.view5E4_2.health > 0) {
+                    tutorial->m_nBastilleShield = 100;
+                    tutorial->m_nBastilleTimer = -1;
                     Weapons_SetPlayerState(brain->player, brain->player, 2);
                 }
             }

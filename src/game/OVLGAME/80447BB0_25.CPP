@@ -26,7 +26,7 @@ extern char D_801468A0[];
 extern void func_80253908_de(s32);
 
 
-extern void func_80226950_de(ObjectPool *, s32);
+extern void func_80226950_de(CPlayerPool *, s32);
 extern s32 D_800C9684[];
 extern void Ovlgame_ResetPlayerForRound(void *actor, s32 character, s32 active);
 
@@ -66,8 +66,8 @@ void Ovlgame_InitActorHudState(Shared_ActorView *);
 
 
 
-void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
-    extern void func_802A6F68_de(RecordRecAtE8 *);
+void func_804499B0_de(CPlayerPool *pool, s32 count, s32 force_active) {
+    extern void func_802A6F68_de(CItemMenu *);
     s32 i;
     s32 j;
     s32 entry_offset;
@@ -82,16 +82,16 @@ void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
     char *global;
     char *state;
 
-    func_80255CA0_de(&pool->active_queue, 0x16DC, 0x16E0);
-    func_80255CA0_de(&pool->object_queue, 0x16DC, 0x16E0);
+    func_80255CA0_de(&pool->m_FreeList, 0x16DC, 0x16E0);
+    func_80255CA0_de(&pool->m_ActiveList, 0x16DC, 0x16E0);
     Render_SetControllerMode(0);
     func_80253908_de(0);
     global = D_801462C8;
 
-    if (pool->allocation != 0) {
-        Scene_ReleaseResource(0, pool->allocation);
-        pool->allocation = 0;
-        pool->objects = 0;
+    if (pool->m_pmePlayers != 0) {
+        Scene_ReleaseResource(0, pool->m_pmePlayers);
+        pool->m_pmePlayers = 0;
+        pool->m_Players = 0;
         pool->count = 0;
     }
 
@@ -101,13 +101,13 @@ void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
 
     func_80226950_de(pool, count);
     for (i = 0; i < pool->count; i++) {
-        func_80255D14_de(&pool->active_queue, pool->objects + i * 0x16E8);
+        func_80255D14_de(&pool->m_FreeList, pool->m_Players + i * 0x16E8);
     }
 
     for (i = 0; i < pool->count; i++) {
         entry = global + 0xD0 + i * 0x96;
-        if (((ObjectState96 *)(entry))->unk_95 != 0) {
-            ((ObjectState96 *)(entry))->unk_78 = 0;
+        if (((ObjectState96 *)(entry))->m_TalsetPosse != 0) {
+            ((ObjectState96 *)(entry))->m_Active = 0;
         }
     }
 
@@ -123,19 +123,19 @@ void func_804499B0_de(ObjectPool *pool, s32 count, s32 force_active) {
         object_offset = i;
 initialize_object:
             entry = global + entry_offset;
-            object = pool->objects + object_offset;
-            ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->unk_91;
+            object = pool->m_Players + object_offset;
+            ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->m_IsBot;
             ((struct Shared_ActorView *)(object))->actorState = 0;
             if (((struct Shared_ActorView *)(object))->remote != 0) {
                 Fx_InitControllerInput(object + 0x688, D_8010EEB8);
-                ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->unk_7F;
+                ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->m_nController;
             } else {
                 Fx_InitControllerInput(object + 0x688, D_8010F328 + attribute_offset);
                 ((struct Shared_ActorView *)(object))->mode = i;
             }
             owner = ((struct Shared_ActorView *)(object))->owner;
             ((struct Shared_ActorView *)(object))->controls = (Shared_ControlView *)entry;
-            object_id = ((ObjectState96 *)(entry))->unk_81;
+            object_id = ((ObjectState96 *)(entry))->m_nCharacterSkin;
             ((struct Shared_ActorView *)(object))->field11BC = 0;
             ((struct Shared_ActorView *)(object))->field11C0 = 0;
             ((struct Shared_ActorView *)(object))->spawn = 0;
@@ -165,10 +165,10 @@ initialize_object:
             ((struct Shared_ActorView *)(object))->field16D4 = 0;
             ((struct Shared_ActorView *)(object))->field16D8 = 0;
             func_802A6F68_de(&((Shared_ActorView *)object)->record);
-            if (((ObjectState96 *)(entry))->unk_78 != 0) {
-                Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->unk_80, 1);
-                func_80255ED8_de(&pool->active_queue, object);
-                func_80255CB8_de(&pool->object_queue, object);
+            if (((ObjectState96 *)(entry))->m_Active != 0) {
+                Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->m_nCharacter, 1);
+                func_80255ED8_de(&pool->m_FreeList, object);
+                func_80255CB8_de(&pool->m_ActiveList, object);
             }
             player_index += 2;
             attribute_offset += 0x224;
@@ -178,20 +178,20 @@ initialize_object:
                 goto initialize_object;
             }
     } else {
-        object = pool->objects;
-        roster_index = ((ObjectState96 *)(entry))->unk_7F;
-        ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->unk_91;
+        object = pool->m_Players;
+        roster_index = ((ObjectState96 *)(entry))->m_nController;
+        ((struct Shared_ActorView *)(object))->remote = ((ObjectState96 *)(entry))->m_IsBot;
         ((struct Shared_ActorView *)(object))->actorState = 0;
         if (((struct Shared_ActorView *)(object))->remote != 0) {
             Fx_InitControllerInput(object + 0x688, D_8010EEB8);
-            ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->unk_7F;
+            ((struct Shared_ActorView *)(object))->mode = ((ObjectState96 *)(entry))->m_nController;
         } else {
             Fx_InitControllerInput(object + 0x688, D_8010F328 + roster_index * 0x224);
             ((struct Shared_ActorView *)(object))->mode = roster_index;
         }
         owner = ((struct Shared_ActorView *)(object))->owner;
         ((struct Shared_ActorView *)(object))->controls = (Shared_ControlView *)entry;
-        object_id = ((ObjectState96 *)(entry))->unk_81;
+        object_id = ((ObjectState96 *)(entry))->m_nCharacterSkin;
         ((struct Shared_ActorView *)(object))->field11BC = 0;
         ((struct Shared_ActorView *)(object))->field11C0 = 0;
         ((struct Shared_ActorView *)(object))->spawn = 0;
@@ -221,9 +221,9 @@ initialize_object:
         ((struct Shared_ActorView *)(object))->field16D4 = 0;
         ((struct Shared_ActorView *)(object))->field16D8 = 0;
         func_802A6F68_de(&((Shared_ActorView *)object)->record);
-        Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->unk_80, force_active);
-        func_80255ED8_de(&pool->active_queue, object);
-        func_80255CB8_de(&pool->object_queue, object);
+        Ovlgame_ResetPlayerForRound(object, ((ObjectState96 *)(entry))->m_nCharacter, force_active);
+        func_80255ED8_de(&pool->m_FreeList, object);
+        func_80255CB8_de(&pool->m_ActiveList, object);
     }
 
 initialized:
@@ -234,20 +234,20 @@ initialized:
 
 void Ovlgame_ResetMenuPool(struct RecordCode80447BB0 *record) {
     Resmgr_FillMemory(record, 0, 0x44);
-    func_80255CA0_de(&record->listC, 0x16DC, 0x16E0);
-    func_80255CA0_de(&record->list20, 0x16DC, 0x16E0);
-    record->word0 = 0;
-    record->word4 = 0;
+    func_80255CA0_de(&record->m_FreeList, 0x16DC, 0x16E0);
+    func_80255CA0_de(&record->m_ActiveList, 0x16DC, 0x16E0);
+    record->m_pmePlayers = 0;
+    record->m_Players = 0;
     record->word8 = 0;
-    record->word34 = 0;
-    record->word38 = 0;
-    record->word3C = 0;
-    record->word40 = 0;
+    record->m_bEnteredAdonSaveLocation = 0;
+    record->m_bAdonSaveLocationMenuEnabled = 0;
+    record->m_TeamTriangleTimer = 0;
+    record->m_TriangleSpin = 0;
 }
 
                          /* extern */
 
-void func_80449E18_de(ObjectPool *pool) {
+void func_80449E18_de(CPlayerPool *pool) {
     void *message;
     s32 temp_v0;
     struct IntPair *model;
@@ -257,7 +257,7 @@ void func_80449E18_de(ObjectPool *pool) {
         func_80264B8C_de();
         func_80264B7C_de();
     }
-    actor = pool->object_queue.head;
+    actor = pool->m_ActiveList.head;
     if (actor != 0) {
         do {
             Ovlgame_InitActorHudState(actor);
@@ -278,7 +278,7 @@ void func_80449E18_de(ObjectPool *pool) {
     }
 }
 void func_80449EE4_de(char *player, s32 slot, RecordCode80447BB080449EE4 *record) {
-    extern void func_802A6F68_de(RecordRecAtE8 *);
+    extern void func_802A6F68_de(CItemMenu *);
     s32 i;
     s32 computer;
     u8 team;

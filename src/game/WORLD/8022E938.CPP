@@ -313,7 +313,7 @@ void func_8022EDFC_de(void *player) {
     s32 mode;
 
     ((Shared_ActorView *)player)->controls->transientFlag = 1;
-    mode = D_801462C8.counters.teamColour;
+    mode = D_801462C8.counters.m_nFragTagSkin;
     switch (mode) {
     case 0:
         Render_PlaySoundAtPosition(0x18A1,

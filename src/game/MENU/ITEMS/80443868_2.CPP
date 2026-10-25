@@ -99,7 +99,7 @@ int func_80443844_de(int unused, PlayerRecAt1C *player) {
     if (sync->m_bFragTagOn != 0) {
         team = player->actor->info->unk8F;
         if (team == 1) {
-            sync->unk74 = team;
+            sync->m_FragTagMode = team;
         }
     }
     if (D_80145070 == 1) {

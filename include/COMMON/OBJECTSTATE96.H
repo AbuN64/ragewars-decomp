@@ -15,15 +15,15 @@ struct __OSInodeCache {
     u8 map[256];
 };
 
-typedef struct ObjectPool ObjectPool;
+typedef struct CPlayerPool_t CPlayerPool;
 /* func_80449DB0_de clears0x44 and initializes lists+C,+20. */
-struct ObjectPool {
-    void *allocation;
-    char *objects;
+struct CPlayerPool_t {
+    void *m_pmePlayers;
+    char *m_Players;
     s32 count;
-    IntrusiveList active_queue;
-    IntrusiveList object_queue;
-    s32 field34, field38, field3C, field40;
+    IntrusiveList m_FreeList;
+    IntrusiveList m_ActiveList;
+    s32 m_bEnteredAdonSaveLocation, m_bAdonSaveLocationMenuEnabled, m_TeamTriangleTimer, m_TriangleSpin;
 };
 
 
@@ -3051,7 +3051,7 @@ struct func_8044AB34_S1 {
 
 struct IntegerState88;
 
-struct ObjectPool;
+struct CPlayerPool_t;
 
 
 struct Node_func_80449E18_de;

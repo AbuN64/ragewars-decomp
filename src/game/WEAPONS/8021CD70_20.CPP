@@ -80,7 +80,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                 }
             }
             if (out == active) {
-                if (D_801462C8.counters.unk9C == 2 && leader->views5E4.view5E4_3.alive == 0) {
+                if (D_801462C8.counters.m_nTalsetLives == 2 && leader->views5E4.view5E4_3.alive == 0) {
                     for (i = 0; i < 8; i++) {
                         other = func_8022A5F4_de(&D_80145040, i);
                         if (other != 0 && other->views5D8.view5D8_2.controls->active != 0) {
@@ -88,7 +88,7 @@ void Weapons_ResetPlayerAfterDeath(SharedPlayer *player, BodyRecAt1C *body) {
                         }
                     }
                 }
-                if (D_801462C8.counters.unk9C < 3) {
+                if (D_801462C8.counters.m_nTalsetLives < 3) {
                     func_8044972C_de(leader);
                 }
             }

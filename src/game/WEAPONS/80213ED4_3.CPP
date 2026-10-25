@@ -44,7 +44,7 @@ static inline void Weapons_PlaceGoalBeside(Actor_func_80214DD4_de *actor, Actor_
 /** Picks what the tracker aims at (its target, itself, a slot or home point, or the actor) and
     fills out with the kind, target, reach, goal position and its offset from the actor, both in 3D
     and flattened to the ground plane. The third parameter is overwritten: it serves as the boost flag. */
-void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, TrackResult *out) {
+void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s32 boost, CTargetInfo *out) {
     CVector3 pos;
     CVector3 probe;
     CVector3 away;
@@ -167,13 +167,13 @@ void Weapons_ResolveTrackGoal(Actor_func_80214DD4_de *actor, Tracker *tracker, s
     Particle_SubtractVectors(&delta, &pos, &actor->pos);
     out->kind = kind;
     out->target = target;
-    out->range = range;
-    out->pos = pos;
-    out->delta = delta;
-    out->dist = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+    out->m_DeltaAngle = range;
+    out->m_vTargetPos = pos;
+    out->m_vDeltaTargetPos = delta;
+    out->m_DistFrom = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
     delta.y = 0.0f;
     pos.y = 0.0f;
-    out->flatPos = pos;
-    out->flatDelta = delta;
-    out->flatDist = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
+    out->m_vXZTargetPos = pos;
+    out->m_vXZDeltaTargetPos = delta;
+    out->m_XZDistFrom = Math_Sqrtf(delta.x * delta.x + delta.y * delta.y + delta.z * delta.z);
 }

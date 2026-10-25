@@ -181,18 +181,18 @@ struct func_80226524_S1 {
 
 extern float D_800C2C08_de;
 
-struct ObjectLinks18_3;
-struct ObjectLinks18_3 {
+struct CPlayerDamageOverTime_t;
+struct CPlayerDamageOverTime_t {
     char pad0[0x4];
-    f32 unk_4;
+    f32 m_FramesRemaining;
     char pad4[0x8 - 0x4 - sizeof(f32)];
-    void * unk_8;
+    void * m_pDamageSource;
     char pad8[0xC - 0x8 - sizeof(void*)];
-    f32 unk_C;
+    f32 m_TotalDamage;
     char padC[0x10 - 0xC - sizeof(f32)];
-    f32 unk_10;
+    f32 m_DamageIssued;
     char pad10[0x14 - 0x10 - sizeof(f32)];
-    s32 unk_14;
+    s32 m_bIsInflator;
 };
 
 struct SubActor;
@@ -1679,8 +1679,8 @@ struct IntegerStateB4C {
     s32 unk_B48;
 };
 
-struct ObjectLinks18_3;
-typedef struct ObjectLinks18_3 ObjectLinks18_3;
+struct CPlayerDamageOverTime_t;
+typedef struct CPlayerDamageOverTime_t CPlayerDamageOverTime;
 
 struct Game;
 struct Game {
@@ -3361,8 +3361,8 @@ typedef struct Rules_func_80228FB8_de Rules_func_80228FB8_de;
 struct Obj_func_80229FA0_de;
 typedef struct Obj_func_80229FA0_de Obj_func_80229FA0_de;
 
-struct ObjectPool;
-extern s32 func_80229A80_de(struct ObjectPool *game);
+struct CPlayerPool_t;
+extern s32 func_80229A80_de(struct CPlayerPool_t *game);
 
 extern float D_800C2BE0_de;
 

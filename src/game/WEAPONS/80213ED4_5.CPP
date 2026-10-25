@@ -46,7 +46,7 @@ s32 Weapons_GetImpactSlot(void *arg0)
                 audio = &D_801462C8.counters;
                 if (audio->enabled != 0 &&
                     ((struct ObjRecAt80 *) ((ObjectLinks1230 *) actor)->unk_5D8)->unk80 == 0xB &&
-                    audio->timer > 0) {
+                    audio->m_nBastilleShield > 0) {
                     return 9;
                 }
             }

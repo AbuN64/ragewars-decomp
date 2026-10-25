@@ -26,8 +26,8 @@ extern s32 D_800E28D0;
 
 extern void func_80239CE0_de(void *arg0);
 
-static inline Message *recycle(void *owner, void *pool) {
-    Message *oldest;
+static inline CCameraText *recycle(void *owner, void *pool) {
+    CCameraText *oldest;
 
     oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
@@ -38,8 +38,8 @@ static inline Message *recycle(void *owner, void *pool) {
     return oldest;
 }
 
-static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
-    Message *message;
+static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
+    CCameraText *message;
     s32 height;
     u8 *line;
     u8 *p;
@@ -61,18 +61,18 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
                 if (message != 0) {
                     message->kind = kind;
                     message->text = line;
-                    message->timer = 0;
+                    message->m_nAlpha = 0;
                     message->alpha = 1.0f;
                     message->target = target;
                     message->pad20 = 0;
-                    message->progress = 0;
+                    message->m_ModeTime = 0;
                     message->pad2C = 0;
-                    message->scaleX = 1.0f;
-                    message->scaleY = 1.0f;
+                    message->m_XScale = 1.0f;
+                    message->m_YScale = 1.0f;
                     height = D_800E28D4;
                     message->x = D_800E28D0 / 2;
                     message->y = height - 80;
-                    message->size = size * 15.0f;
+                    message->m_DisplayTime = size * 15.0f;
                 }
                 line = p + 1;
             }
@@ -87,9 +87,9 @@ extern void Items_InitEntryPool(int a);
 
 extern u32 func_802337D0_de(s32);
 
-Message *Camera_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
-    Message *pending;
-    Message *next;
+CCameraText *Camera_PostTargetedScreenMessage(void *owner, void *pool, u8 *text, s32 target, f32 size) {
+    CCameraText *pending;
+    CCameraText *next;
 
     if (pool == 0) {
         return 0;
@@ -188,7 +188,7 @@ void func_80239C9C_de(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void func_80239CE0_de(void *arg0) {
-    struct Message *message = arg0;
+    struct CCameraText_t *message = arg0;
     message->kind = 0;
     message->target = 0;
 }

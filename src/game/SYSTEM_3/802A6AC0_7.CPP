@@ -217,16 +217,16 @@ void func_802A6900_de(ToggleMenu *panel, Input_func_802A65E0_de *player) {
     }
 }
 
-void func_802A6F68_de(RecordRecAtE8 *rec) {
+void func_802A6F68_de(CItemMenu *rec) {
     int i;
     for (i = 0; i < 4; i++) {
         clear_entry(&rec->entries[i]);
     }
     rec->unk0 = 0;
-    rec->unk1 = 0;
-    rec->unkE4 = 0;
-    rec->unkE6 = -5;
-    rec->unkE8 = 0;
+    rec->m_ModePos = 0;
+    rec->m_LastItemPos = 0;
+    rec->m_ItemAlphaFade = -5;
+    rec->m_FrameCount = 0;
 }
 
 /* Finds or allocates one of four records and updates its parameters. */
@@ -239,14 +239,14 @@ s32 func_802A6FB8_de(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg
     var_a1 = 0;
     key = arg2 & 0xFFFF;
     for (var_a1 = 0; var_a1 < 4; var_a1++) {
-        if (((RecordRecAtE8 *)arg0)->entries[var_a1].unk0 != 0 &&
-            ((RecordRecAtE8 *)arg0)->entries[var_a1].unkC == key) {
+        if (((CItemMenu *)arg0)->entries[var_a1].unk0 != 0 &&
+            ((CItemMenu *)arg0)->entries[var_a1].unkC == key) {
             break;
         }
     }
     if (var_a1 == 4) {
         for (var_a1 = 0; var_a1 < 4; var_a1++) {
-            if (((RecordRecAtE8 *)arg0)->entries[var_a1].unk0 == 0) {
+            if (((CItemMenu *)arg0)->entries[var_a1].unk0 == 0) {
                 break;
             }
         }
@@ -255,7 +255,7 @@ s32 func_802A6FB8_de(char *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, f32 arg
         }
     }
     temp_v1 = arg0 + ((var_a1 * 0x38) + 4);
-    ((RecordRecAtE8 *)arg0)->unkE4 = var_a1;
+    ((CItemMenu *)arg0)->m_LastItemPos = var_a1;
     ((EntryRecAt34 *)(temp_v1))->unk0 = 1;
     ((EntryRecAt34 *)(temp_v1))->unk8 = arg1;
     ((EntryRecAt34 *)(temp_v1))->unkC = arg2;

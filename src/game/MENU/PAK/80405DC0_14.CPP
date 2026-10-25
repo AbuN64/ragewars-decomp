@@ -86,7 +86,7 @@ s32 Pak_RestoreSaveBlock(void *unused, MenuRecAt24 *menu) {
         kept = D_80146848[0];
         owner->block = D_800E28BC->block18;
         *(PakSavedOptions *)&D_801462C8 = D_800E28BC->options;
-        D_801462C8.counters.ticks = D_800E28BC->ticks;
+        D_801462C8.counters.m_GameTimeFifteenth = D_800E28BC->ticks;
         D_801427E4[0] = D_800E28BC->seconds;
         D_801427E8[0] = D_800E28BC->minutes;
         D_801427EC[0] = D_800E28BC->hours;

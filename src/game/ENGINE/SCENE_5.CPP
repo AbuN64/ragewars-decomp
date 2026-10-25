@@ -450,7 +450,7 @@ extern u8 *D_800D3A9C;
 extern void func_804037D4_de(void), func_804030E0_de(s32);
 extern s32 func_802934F8_de(void);
 extern void func_80286AA8_de(void *, s32, s32);
-extern struct Message *Camera_PostScaledScreenMessage(void *, void *, u8 *, f32);
+extern struct CCameraText_t *Camera_PostScaledScreenMessage(void *, void *, u8 *, f32);
 static inline s32 transitionId(Shared_World *scene) {
     if (scene->selectionFlags != 0) return scene->selectionSpawn.kind;
     return scene->selectionValues[1];

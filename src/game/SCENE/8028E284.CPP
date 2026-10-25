@@ -30,5 +30,5 @@ void func_8028E284_de(SceneRecAt140 *scene) {
   actor++;
 
  }while(++i<scene->count);
- D_801462C8.counters.teamColour=func_802A01E8_de()%3;
+ D_801462C8.counters.m_nFragTagSkin=func_802A01E8_de()%3;
 }

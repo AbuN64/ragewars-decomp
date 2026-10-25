@@ -52,8 +52,8 @@ extern s32 D_800E28D0;
 
 extern void func_80239CE0_de(void *arg0);
 
-static inline Message *recycle(void *owner, void *pool) {
-    Message *oldest;
+static inline CCameraText *recycle(void *owner, void *pool) {
+    CCameraText *oldest;
 
     oldest = ((struct ScreenMessageOwner *)owner)->activeMessages.head;
     if (oldest != 0) {
@@ -64,8 +64,8 @@ static inline Message *recycle(void *owner, void *pool) {
     return oldest;
 }
 
-static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
-    Message *message;
+static inline CCameraText *post_lines(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
+    CCameraText *message;
     s32 height;
     u8 *line;
     u8 *p;
@@ -88,18 +88,18 @@ static inline Message *post_lines(void *owner, void *pool, u8 *text, s32 kind, f
                     s32 half = D_800E28D0 / 2;
                     message->kind = kind;
                     message->text = line;
-                    message->timer = 0;
+                    message->m_nAlpha = 0;
                     message->alpha = 1.0f;
                     message->target = target;
                     message->pad20 = 0;
-                    message->progress = 0;
+                    message->m_ModeTime = 0;
                     message->pad2C = 0;
-                    message->scaleX = 1.0f;
-                    message->scaleY = 1.0f;
+                    message->m_XScale = 1.0f;
+                    message->m_YScale = 1.0f;
                     height = D_800E28D4;
                     message->x = half;
                     message->y = height - 80;
-                    message->size = size * 15.0f;
+                    message->m_DisplayTime = size * 15.0f;
                 }
                 line = p + 1;
             }
@@ -188,13 +188,13 @@ f32 func_80239678_de(Race *arg0, void *arg1) {
 }
 
 void *func_80239740_de(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
-    struct Message *message = Camera_PostScreenMessage(owner, pool, text);
+    struct CCameraText_t *message = Camera_PostScreenMessage(owner, pool, text);
     if (message != 0) {
         message->pad20 = 1;
     }
     return message;
 }
 
-Message *Camera_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
+CCameraText *Camera_PostScaledScreenMessage(void *owner, void *pool, u8 *text, f32 size) {
     return post_lines(owner, pool, text, 2, size, -1);
 }

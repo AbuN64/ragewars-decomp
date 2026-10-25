@@ -125,7 +125,7 @@ void func_8022CA14_de(Player *player, void *arg1) {
     if (state == 1) {
         audio = &D_801462C8.counters;
         if (audio->m_bFragTagOn != 0) {
-            mode = audio->teamColour;
+            mode = audio->m_nFragTagSkin;
             switch (mode) {
         case 0:
             Render_PlaySoundAtPosition(0x18A1,

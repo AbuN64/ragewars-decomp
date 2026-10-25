@@ -55,7 +55,7 @@ void func_80230630_de(LevelActor *arg0, void *arg1) {
     if ((audio->m_bFragTagOn != 0) &&
         (((Shared_ActorView *)actor)->controls->transientFlag != 0)) {
         if (((Actor_func_8022D290_de *)actor)->unk_0x06B0 & 0x2000) {
-            mode = audio->teamColour;
+            mode = audio->m_nFragTagSkin;
             switch (mode) {
             case 0:
                 Render_PlaySoundAtPosition(0x18A1,

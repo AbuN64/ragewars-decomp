@@ -203,7 +203,7 @@ block_13:
                 if (i < loopLimit) goto settings_loop;
             } while (0);
         }
-        if (D_801462C8.counters.unk9C < 3) {
+        if (D_801462C8.counters.m_nTalsetLives < 3) {
             ((struct Shared_ActorView *)player)->special = 0;
             Weapons_SetPlayerState(player, attacker, 0x2E);
             return;
@@ -685,7 +685,7 @@ void func_8021C45C_de(void *arg0, void *unused1, s32 unused2, void *arg3) {
         actor->profile->enabled != 0 &&
 #endif
         actor->profile->character == 0xB &&
-        audio->timer > 0) {
+        audio->m_nBastilleShield > 0) {
         return;
     }
     if (actor->reactionFlags & 0x8000) {

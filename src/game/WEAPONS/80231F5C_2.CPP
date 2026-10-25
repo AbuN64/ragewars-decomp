@@ -32,7 +32,7 @@ extern u8 *D_800D30BC[];
 extern s32 func_8022F96C_de(void *);
 extern s32 func_8022F55C_de(void *, s32);
 extern s32 Weapons_GetPlayerIndex(void *, void *);
-extern Message *Camera_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
+extern CCameraText *Camera_PostTargetedScreenMessage(void *, void *, u8 *, s32, f32);
 extern s32 func_802301F4_de(void *, void *);
 
 #if defined(VERSION_EU_X)

@@ -104,34 +104,34 @@ void func_802292B8_de(void *actor) {
     var_s2 = 0x1248;
     do {
         temp_s0 = (char *)actor + var_s2;
-        temp_f2 = ((ObjectLinks18_3 *)(temp_s0))->unk_4;
+        temp_f2 = ((CPlayerDamageOverTime *)(temp_s0))->m_FramesRemaining;
         if (temp_f2 > zero) {
             temp_f1 = D_800D2988.unk0;
             var_f20 = *(f32 *)temp_s0 * temp_f1;
             temp_f1 = temp_f2 - temp_f1;
             var_f20 *= temp_f21;
-            ((ObjectLinks18_3 *)(temp_s0))->unk_4 = temp_f1;
-            temp_f1 = ((ObjectLinks18_3 *)(temp_s0))->unk_10 + (f32)(s32)var_f20;
-            ((ObjectLinks18_3 *)(temp_s0))->unk_10 = temp_f1;
-            if (((ObjectLinks18_3 *)(temp_s0))->unk_4 <= zero) {
-                temp_f0 = ((ObjectLinks18_3 *)(temp_s0))->unk_C * temp_f21;
+            ((CPlayerDamageOverTime *)(temp_s0))->m_FramesRemaining = temp_f1;
+            temp_f1 = ((CPlayerDamageOverTime *)(temp_s0))->m_DamageIssued + (f32)(s32)var_f20;
+            ((CPlayerDamageOverTime *)(temp_s0))->m_DamageIssued = temp_f1;
+            if (((CPlayerDamageOverTime *)(temp_s0))->m_FramesRemaining <= zero) {
+                temp_f0 = ((CPlayerDamageOverTime *)(temp_s0))->m_TotalDamage * temp_f21;
                 if (temp_f1 < temp_f0) {
                     var_f20 += temp_f0 - temp_f1;
                 }
             }
-            temp_a0 = ((ObjectLinks18_3 *)(temp_s0))->unk_8;
+            temp_a0 = ((CPlayerDamageOverTime *)(temp_s0))->m_pDamageSource;
             if (temp_a0 != 0 && *(u8 *)temp_a0 == 1 &&
                 (((IntegerState1230 *)(temp_a0))->unk_100 & 0x300000) &&
                 (((IntegerState1230 *)(temp_a0))->unk_122C & 0x200)) {
                 var_f20 *= D_800C2C48_de.unk0;
             }
-            if (((ObjectLinks18_3 *)(temp_s0))->unk_14 != 0) {
-                func_8022B60C_de(actor, 0.0933333337f, ((ObjectLinks18_3 *)(temp_s0))->unk_8);
+            if (((CPlayerDamageOverTime *)(temp_s0))->m_bIsInflator != 0) {
+                func_8022B60C_de(actor, 0.0933333337f, ((CPlayerDamageOverTime *)(temp_s0))->m_pDamageSource);
                 if ((f32)((ObjectState5E8 *)(actor))->unk_5E4 <= var_f20) {
                     var_f20 = D_800C2C4C_de.unk0;
                 }
             }
-            func_80216488_de((void *)&damage, (s32)((ObjectLinks18_3 *)(temp_s0))->unk_8,
+            func_80216488_de((void *)&damage, (s32)((CPlayerDamageOverTime *)(temp_s0))->m_pDamageSource,
                           (s32)var_f20, 25.599998f, 0x100080, 0);
             func_80219A40_de(actor, &((ObjectState5E8 *)(actor))->unk_170, (void *)&damage);
         }

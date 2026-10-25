@@ -25,8 +25,8 @@ void func_8044DDD4_de(GameSession *gameSession) {
     if (Items_FindPlacedObjectsByKey(&D_8011FE88, var_s0, var_s0, &spawn, 1) == 0) {
         var_s0 = 0;
     }
-    D_801462C8.counters.ticks = 0;
-    D_801462C8.counters.seconds = 0;
+    D_801462C8.counters.m_GameTimeFifteenth = 0;
+    D_801462C8.counters.m_GameTimeSeconds = 0;
     D_801462C8.counters.m_GameTimeMinutes = 0;
     D_801462C8.counters.m_GameTimeHours = 0;
     gameSession->selectionActive = 0;
@@ -44,8 +44,8 @@ void Ovlgame_StartMatchTransition(GameSession *session, s32 key) {
     if (Items_FindPlacedObjectsByKey(&D_8011FE88, -1, key, &spawn, 1) == 0) {
         key = 0;
     }
-    D_801462C8.counters.ticks = 0;
-    D_801462C8.counters.seconds = 0;
+    D_801462C8.counters.m_GameTimeFifteenth = 0;
+    D_801462C8.counters.m_GameTimeSeconds = 0;
     D_801462C8.counters.m_GameTimeMinutes = 0;
     D_801462C8.counters.m_GameTimeHours = 0;
     D_801462C8.counters.first = 0;

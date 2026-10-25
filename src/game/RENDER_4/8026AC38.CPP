@@ -364,7 +364,7 @@ void Render_DrawActorModelParts(void **resource, struct Player *owner, void *mat
     if (settings->enabled != 0) {
         AiProfile *state = owner->profile;
         if (state->character == 0xB && state->enabled != 0) {
-            hide = 0 < settings->timer;
+            hide = 0 < settings->m_nBastilleShield;
         }
     }
     if (owner->reactionFlags & 0x8000) {

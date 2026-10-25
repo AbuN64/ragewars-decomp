@@ -11,7 +11,7 @@
 extern void func_8044DD50_de(void *);
 
 s32 func_8043EDDC_de(void) {
-    if (D_801462C8.counters.countdown <= 0.0f) {
+    if (D_801462C8.counters.m_GameOverTimer <= 0.0f) {
         func_8044DD50_de(&D_8011FAC0);
         return 1;
     }
@@ -26,11 +26,11 @@ extern f32 D_800D2988;
 
 s32 func_8043EE24_de(void) {
     CGameStatus *state = &D_801462C8.counters;
-    f32 timer = state->countdown - D_800D2988;
+    f32 timer = state->m_GameOverTimer - D_800D2988;
 
-    state->countdown = timer;
+    state->m_GameOverTimer = timer;
     if (timer < 0.0f) {
-        state->countdown = 0.0f;
+        state->m_GameOverTimer = 0.0f;
     }
     return 0;
 }

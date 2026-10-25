@@ -67,7 +67,7 @@ extern void func_80228AF4_de(void *, void *);
    seven other players (the shorts at 0x3C of its stats at 0x5D8) to the total of its team byte at
    0x92, returning 0 at once for a player without a team (0xFF), then returns the first team 0 to 4
    with the highest total. */
-s32 func_80229A80_de(struct ObjectPool *game) {
+s32 func_80229A80_de(struct CPlayerPool_t *game) {
     s32 total0;
     s32 total1;
     s32 total2;
@@ -85,8 +85,8 @@ s32 func_80229A80_de(struct ObjectPool *game) {
     total2 = 0;
     total1 = 0;
     total0 = 0;
-    for (player = game->object_queue.head; player != 0; player = (char *)((struct Shared_ActorView *)(player))->next) {
-        self = (u32) (player - game->objects) / 0x16E8;
+    for (player = game->m_ActiveList.head; player != 0; player = (char *)((struct Shared_ActorView *)(player))->next) {
+        self = (u32) (player - game->m_Players) / 0x16E8;
         for (other = 0; other < 8; other++) {
             if (other == self) {
                 continue;
@@ -147,7 +147,7 @@ s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
     s32 offset;
 
     if (type == types[0]) {
-        switch (D_801462C8.counters.teamColour) {
+        switch (D_801462C8.counters.m_nFragTagSkin) {
         case 0:
             offset = 0x514;
             break;
@@ -158,7 +158,7 @@ s32 func_80229C0C_de(struct Shared_ActorView *player, s32 arg1) {
             offset = 0x578;
             break;
         default:
-            D_801462C8.counters.teamColour = 0;
+            D_801462C8.counters.m_nFragTagSkin = 0;
             offset = 0x514;
             break;
         }
@@ -360,14 +360,14 @@ void func_80229FA0_de(Obj_func_80229FA0_de *arg0, Damage_func_80229FA0_de *arg1)
     }
 }
 
-void func_8022A170_de(struct ObjectPool *arg0) {
+void func_8022A170_de(struct CPlayerPool_t *arg0) {
     void *node;
 
     if (*(void **)arg0 != 0) {
         Scene_MarkResourceInUse(0, *(void **)arg0);
     }
 
-    node = arg0->object_queue.head;
+    node = arg0->m_ActiveList.head;
     if (node != 0) {
         u8 *base = (u8 *)&D_801462C8;
 
@@ -383,14 +383,14 @@ void func_8022A170_de(struct ObjectPool *arg0) {
     }
 }
 
-void func_8022A1FC_de(struct ObjectPool *arg0, void *world) {
+void func_8022A1FC_de(struct CPlayerPool_t *arg0, void *world) {
     void *node;
     int scale;
     s32 count1;
     s32 count2;
     char *entry;
 
-    node = arg0->object_queue.head;
+    node = arg0->m_ActiveList.head;
     if (node != 0) {
         do {
             ((ObjectLinks16E4_2 *)(node))->unk_70 = 0;
@@ -514,7 +514,7 @@ void *func_8022A420_de(struct Context *context) {
     CGameStatus *base = (&D_801462C8.counters);
     Shared_ActorView *record;
 
-    if (base->m_bFragTagOn != 0 && base->restrictionActive != 0) {
+    if (base->m_bFragTagOn != 0 && base->m_FragTagFlipTimer != 0) {
         return 0;
     }
     record = (void *)context->head;

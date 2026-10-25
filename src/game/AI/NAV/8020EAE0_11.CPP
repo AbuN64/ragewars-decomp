@@ -66,7 +66,7 @@ s32 Nav_SelectPlayerState(AiController *controller) {
     }
     gameStatus = &D_801468A0;
     if (gameStatus->m_bFragTagOn != 0 && controller->player->profile->bonus != 0) {
-        if (gameStatus->restrictionActive > 0) {
+        if (gameStatus->m_FragTagFlipTimer > 0) {
             if (controller->state != 2) {
                 func_80209874_de(controller, 2);
                 return controller->unk2F8 = controller->unk2F4 = 1;

@@ -15,7 +15,7 @@
 #include "MENU/ITEMS/SCENE_7.H"
 #include "MENU/PAK/80403BCC_4.H"
 
-extern void func_80449E18_de(ObjectPool *);
+extern void func_80449E18_de(CPlayerPool *);
 extern void func_80253908_de(s32 unusedHeap);
 extern s32 func_80254284_de(s32,void **,s32,void *);
 extern void **func_80254408_de(s32,s32,s32,s32,s32,s32,void *);

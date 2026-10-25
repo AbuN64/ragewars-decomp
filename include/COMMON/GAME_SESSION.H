@@ -15,7 +15,7 @@ struct GameSession {
     u8 reservedWorld[0x1BCF8 - 0x3C8 - sizeof(Shared_World)];
     Hud hud; /* +0x1BCF8; probe 20261019T014445806769Z call boundary */
     u8 reservedHud[0x25580 - 0x1BCF8 - sizeof(Hud)];
-    ObjectPool menu[1]; /* +0x25580, func_80449DB0_de */
+    CPlayerPool menu[1]; /* +0x25580, func_80449DB0_de */
     u8 reserved255C4[4];
     struct ScreenMessageOwner players[1]; /* +0x255C8, func_8044A62C_de */
     u8 reservedPlayers[0x26825 - 0x255C8 - sizeof(struct ScreenMessageOwner)];

@@ -172,8 +172,8 @@ extern s32 Camera_IsSequenceActive(void);
 
 
 
-static inline Message *recycle(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
-    Message *oldest;
+static inline CCameraText *recycle(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
+    CCameraText *oldest;
 
     oldest = owner->activeMessages.head;
     if (oldest != 0) {
@@ -184,8 +184,8 @@ static inline Message *recycle(struct ScreenMessageOwner *owner, struct ScreenMe
     return oldest;
 }
 
-static inline Message *post_lines(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text, s32 kind, f32 size, s32 target) {
-    Message *message;
+static inline CCameraText *post_lines(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text, s32 kind, f32 size, s32 target) {
+    CCameraText *message;
     s32 height;
     u8 *line;
     u8 *p;
@@ -207,15 +207,15 @@ static inline Message *post_lines(struct ScreenMessageOwner *owner, struct Scree
                 if (message != 0) {
                     message->kind = kind;
                     message->text = line;
-                    message->timer = 0;
+                    message->m_nAlpha = 0;
                     message->alpha = 1.0f;
-                    message->size = size * 15.0f;
+                    message->m_DisplayTime = size * 15.0f;
                     message->target = target;
                     message->pad20 = 0;
-                    message->progress = 0;
+                    message->m_ModeTime = 0;
                     message->pad2C = 0;
-                    message->scaleX = 1.0f;
-                    message->scaleY = 1.0f;
+                    message->m_XScale = 1.0f;
+                    message->m_YScale = 1.0f;
                     height = D_800E28D4;
                     message->x = D_800E28D0 / 2;
                     message->y = height - 80;
@@ -227,8 +227,8 @@ static inline Message *post_lines(struct ScreenMessageOwner *owner, struct Scree
     return message;
 }
 
-Message *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
-    Message *pending;
+CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text) {
+    CCameraText *pending;
     s32 kind;
 
     kind = 2;
@@ -254,9 +254,9 @@ extern void func_802A8F28_de(void *text, s32 x, s32 y, s32 alpha, s32 arg4, s32 
 void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool) {
     f32 spacing;
     f32 fade;
-    Message *node;
-    Message *msg;
-    Message *waiting;
+    CCameraText *node;
+    CCameraText *msg;
+    CCameraText *waiting;
 
     spacing = 9.0f;
     if (pool != 0) {
@@ -271,42 +271,42 @@ void Camera_UpdateScreenMessages(struct ScreenMessageOwner *owner, struct Screen
             }
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
-            func_802A8F28_de(msg->text, (s32)msg->x, (s32)msg->y, msg->timer, 1, 1, 1.0f, 1.0f);
+            func_802A8F28_de(msg->text, (s32)msg->x, (s32)msg->y, msg->m_nAlpha, 1, 1, 1.0f, 1.0f);
         }
         for (msg = pool->freeMessages.tail; msg != 0; msg = msg->prev) {
             fade = D_800D2988 * 0.06666667f;
             node = msg;
             switch (msg->kind) {
             case 2:
-                msg->timer = (s32)(Math_Sinf(msg->progress * 1.5707964f) * 255.0f);
-                msg->progress += fade;
-                if (msg->progress > 1.0f) {
+                msg->m_nAlpha = (s32)(Math_Sinf(msg->m_ModeTime * 1.5707964f) * 255.0f);
+                msg->m_ModeTime += fade;
+                if (msg->m_ModeTime > 1.0f) {
                     msg->kind = 3;
-                    msg->progress = 0.0f;
+                    msg->m_ModeTime = 0.0f;
                 }
                 break;
             case 1:
-                msg->timer = 0;
+                msg->m_nAlpha = 0;
                 break;
             case 3:
-                msg->timer = 255;
+                msg->m_nAlpha = 255;
                 break;
             case 4:
-                msg->timer = (s32)(Math_Cosf(msg->progress * 1.5707964f) * 255.0f);
-                msg->progress += fade;
-                if (msg->progress > 1.0f) {
+                msg->m_nAlpha = (s32)(Math_Cosf(msg->m_ModeTime * 1.5707964f) * 255.0f);
+                msg->m_ModeTime += fade;
+                if (msg->m_ModeTime > 1.0f) {
                     for (waiting = pool->freeMessages.head; waiting != 0; waiting = waiting->next) {
                         if (waiting->kind == 1) {
                             waiting->kind = 2;
-                            waiting->progress = 0.0f;
+                            waiting->m_ModeTime = 0.0f;
                         }
                     }
                     node->kind = 0;
-                    node->progress = 0.0f;
+                    node->m_ModeTime = 0.0f;
                 }
                 break;
             default:
-                node->timer = 0;
+                node->m_nAlpha = 0;
                 node->kind = 0;
                 break;
             }
@@ -338,8 +338,8 @@ void func_80238314_de(Race *race, Racer *racer) {
     f32 scaleX;
     f32 offsetY;
     s32 small;
-    Message *message;
-    Message *prev;
+    CCameraText *message;
+    CCameraText *prev;
     f32 drop;
     f32 offsetXf;
     f32 left;
@@ -380,36 +380,36 @@ void func_80238314_de(Race *race, Racer *racer) {
                 scale = D_800C3430_de;
                 centered = 1;
             }
-            func_802A8F28_de(message->text, (s32)offsetXf, (s32)offsetY, message->timer, centered, centered,
+            func_802A8F28_de(message->text, (s32)offsetXf, (s32)offsetY, message->m_nAlpha, centered, centered,
                              message->alpha * scaleX * scale, message->alpha * scaleY * scale);
             switch (message->kind) {
             case 2:
-                message->timer += 31;
-                if (message->timer >= 255) {
-                    message->timer = 255;
+                message->m_nAlpha += 31;
+                if (message->m_nAlpha >= 255) {
+                    message->m_nAlpha = 255;
                     message->kind = 3;
-                    message->hold = message->size;
+                    message->m_Time = message->m_DisplayTime;
                 }
-                message->alpha = Math_Sinf((f32)message->timer * D_800C3434_de);
+                message->alpha = Math_Sinf((f32)message->m_nAlpha * D_800C3434_de);
                 break;
             case 3:
-                message->hold -= D_800D2988;
-                left = message->hold;
-                message->timer = 255;
+                message->m_Time -= D_800D2988;
+                left = message->m_Time;
+                message->m_nAlpha = 255;
                 message->alpha = D_800C3438_de;
                 if (left < 0.0f) {
                     message->kind = 4;
-                    message->timer = 128;
+                    message->m_nAlpha = 128;
                 }
                 break;
             case 4:
-                message->alpha -= Math_Sinf(D_800C3440_de - (f32)message->timer * D_800C343C_de) * D_800C3444_de;
+                message->alpha -= Math_Sinf(D_800C3440_de - (f32)message->m_nAlpha * D_800C343C_de) * D_800C3444_de;
                 if (message->alpha < 0.0f) {
                     message->alpha = 0.0f;
                 }
-                message->timer -= 12;
-                if (message->timer < 0) {
-                    message->timer = 0;
+                message->m_nAlpha -= 12;
+                if (message->m_nAlpha < 0) {
+                    message->m_nAlpha = 0;
                     message->kind = 0;
                 }
                 break;

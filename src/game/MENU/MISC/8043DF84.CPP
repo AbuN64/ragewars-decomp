@@ -187,7 +187,7 @@ s32 func_8043E1C0_de(void) {
 s32 func_8043E1F8_de(s32 unused0, MenuRecAt20V2 *menu) {
     PakMenuSlot **slot;
 
-    D_801462C8.counters.unk74 = 0;
+    D_801462C8.counters.m_FragTagMode = 0;
     slot = &menu->widget;
     func_80264788_de((*slot)->unk4);
     func_80264248_de(*slot);

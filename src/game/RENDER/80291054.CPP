@@ -32,7 +32,7 @@ void func_80291074_de(void *object) {
             if (D_800CD780 != 0) {
 advance:
                 Render_SetTransitionTarget(object, 1);
-                D_801462C8.counters.second = 1;
+                D_801462C8.counters.m_bCreditsSeenOnce = 1;
             }
         }
     } else {
@@ -83,7 +83,7 @@ void func_80291074_de(void *arg0) {
             if (D_800CD780 != 0) {
 block_6:
                 Render_SetTransitionTarget(arg0, 1);
-                D_801462C8.counters.second = 1;
+                D_801462C8.counters.m_bCreditsSeenOnce = 1;
             }
         }
     } else {

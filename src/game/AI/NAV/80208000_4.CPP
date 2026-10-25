@@ -368,7 +368,7 @@ void func_80209CD8_de(SharedPlayer **brain) {
         if (session->enabled != 0) {
             controls = (*brain)->views5D8.view5D8_2.controls;
             if (controls->team == 0) {
-                if (controls->active == 0 || session->unk9C == 3) {
+                if (controls->active == 0 || session->m_nTalsetLives == 3) {
                     func_8044972C_de(*brain);
                 }
             } else {

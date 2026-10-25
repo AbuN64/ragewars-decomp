@@ -345,8 +345,8 @@ struct ScreenMessagePool {
     IntrusiveList freeMessages; /* 0xE40 */
 };
 
-struct Message;
-extern Message *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
+struct CCameraText_t;
+extern CCameraText *Camera_PostScreenMessage(struct ScreenMessageOwner *owner, struct ScreenMessagePool *pool, u8 *text);
 
 #endif
 #endif

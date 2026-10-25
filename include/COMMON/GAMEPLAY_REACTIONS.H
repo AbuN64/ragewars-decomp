@@ -22,10 +22,10 @@ typedef struct Shared_ReactionPlayerRecord Shared_ReactionPlayerRecord;
 
 typedef struct CDamageInfo_t {
     Shared_ReactionActor *target;
-    s32 damage;
-    f32 radius;
+    s32 m_Hits;
+    f32 m_Radius;
     s32 flags;
-    Shield *shield;
+    Shield *m_pNode;
 } CDamageInfo;
 
 struct Shared_ReactionObjectKind {

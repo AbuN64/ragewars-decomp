@@ -55,10 +55,10 @@ extern u8 *D_800D7034;
 
 
 
-static inline Message *recycle(void *owner, void *pool) {
+static inline CCameraText *recycle(void *owner, void *pool) {
     struct ScreenMessageOwner *messageOwner = owner;
     struct ScreenMessagePool *messagePool = pool;
-    Message *oldest;
+    CCameraText *oldest;
 
     oldest = messageOwner->activeMessages.head;
     if (oldest != 0) {
@@ -69,8 +69,8 @@ static inline Message *recycle(void *owner, void *pool) {
     return oldest;
 }
 
-Message *Sched_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
-    Message *message;
+CCameraText *Sched_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f32 size, s32 target) {
+    CCameraText *message;
     u8 *line;
     u8 *p;
     s32 height;
@@ -92,18 +92,18 @@ Message *Sched_PostScreenMessage(void *owner, void *pool, u8 *text, s32 kind, f3
                 if (message != 0) {
                     message->kind = kind;
                     message->text = line;
-                    message->timer = 0;
+                    message->m_nAlpha = 0;
                     message->alpha = 1.0f;
                     message->target = target;
                     message->pad20 = 0;
-                    message->progress = 0;
+                    message->m_ModeTime = 0;
                     message->pad2C = 0;
-                    message->scaleX = 1.0f;
-                    message->scaleY = 1.0f;
+                    message->m_XScale = 1.0f;
+                    message->m_YScale = 1.0f;
                     height = D_800E28D4;
                     message->x = D_800E28D0 / 2;
                     message->y = height - 80;
-                    message->size = size * 15.0f;
+                    message->m_DisplayTime = size * 15.0f;
                 }
                 line = p + 1;
             }

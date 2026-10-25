@@ -42,7 +42,7 @@ static inline s32 func_80215410_kind(Actor_func_80214DD4_de *self, Tracker *ctx,
     }
     return 0;
 }
-void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused, TrackResult *arg3) {
+void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused, CTargetInfo *arg3) {
     CVector3 pos;
     CVector3 delta;
     f32 height;
@@ -86,17 +86,17 @@ void func_80215410_de(Actor_func_80214DD4_de *arg0, Tracker *tracker, s32 unused
     }
     func_80274020_de(&height);
     Particle_SubtractVectors(&delta, &pos, &arg0->pos);
-    arg3->range = height;
+    arg3->m_DeltaAngle = height;
     arg3->kind = kind;
     arg3->target = target;
-    arg3->pos = pos;
-    arg3->delta = delta;
-    arg3->dist = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    arg3->m_vTargetPos = pos;
+    arg3->m_vDeltaTargetPos = delta;
+    arg3->m_DistFrom = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
     delta.y = 0.0f;
     pos.y = 0;
-    arg3->flatPos = pos;
-    arg3->flatDelta = delta;
-    arg3->flatDist = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
+    arg3->m_vXZTargetPos = pos;
+    arg3->m_vXZDeltaTargetPos = delta;
+    arg3->m_XZDistFrom = Math_Sqrtf((delta.x * delta.x) + (delta.y * delta.y) + (delta.z * delta.z));
 }
 
 #include "COMMON/PROBE.H"

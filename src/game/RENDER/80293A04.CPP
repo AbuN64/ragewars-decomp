@@ -137,15 +137,15 @@ void func_80293C34_de(GameSession *world) {
     f32 t3;
 
     if (world->clockPaused == 0) {
-        t1 = D_801462C8.counters.ticks + D_800D2988;
-        D_801462C8.counters.ticks = t1;
+        t1 = D_801462C8.counters.m_GameTimeFifteenth + D_800D2988;
+        D_801462C8.counters.m_GameTimeFifteenth = t1;
         if (D_800C54AC_de <= t1) {
-            t2 = D_801462C8.counters.seconds + D_800C54B0_de;
-            D_801462C8.counters.ticks = t1 - D_800C54AC_de;
-            D_801462C8.counters.seconds = t2;
+            t2 = D_801462C8.counters.m_GameTimeSeconds + D_800C54B0_de;
+            D_801462C8.counters.m_GameTimeFifteenth = t1 - D_800C54AC_de;
+            D_801462C8.counters.m_GameTimeSeconds = t2;
             if (D_800C54B4_de <= t2) {
                 t3 = D_801462C8.counters.m_GameTimeMinutes + D_800C54B0_de;
-                D_801462C8.counters.seconds = t2 - D_800C54B4_de;
+                D_801462C8.counters.m_GameTimeSeconds = t2 - D_800C54B4_de;
                 D_801462C8.counters.m_GameTimeMinutes = t3;
                 if (D_800C54B4_de <= t3) {
                     D_801462C8.counters.m_GameTimeMinutes = t3 - D_800C54B4_de;

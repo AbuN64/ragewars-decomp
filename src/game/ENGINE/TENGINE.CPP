@@ -101,7 +101,7 @@ struct MenuGlobalRecAt21B8;
 
 struct SelectionRecAt8;
 
-struct Message;
+struct CCameraText_t;
 extern struct MenuGlobalRecAt21B8 D_8014AEB0;
 extern s32 D_8014AEC0;
 

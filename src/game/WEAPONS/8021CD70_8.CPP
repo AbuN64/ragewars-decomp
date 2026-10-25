@@ -227,7 +227,7 @@ void func_80220ED4_de(SharedPlayer *player)
     func_80213CF8_de(actor, &actor->views1C.view170_23.unk170);
   }
   net = &D_801462C8.counters;
-  if (((net->m_bFragTagOn != 0) && (net->restrictionActive == 0)) && (player->views5D8.view5D8_9.profile->remote == 1))
+  if (((net->m_bFragTagOn != 0) && (net->m_FragTagFlipTimer == 0)) && (player->views5D8.view5D8_9.profile->remote == 1))
   {
     linkFlags |= 0x2000;
     soundFlags |= 0x400000;
