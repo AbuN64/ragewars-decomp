@@ -4001,7 +4001,7 @@ segments:
       - [0xC6198, rodata, data_800C/D_8028C568_CAFD8]
       - [0xC619C, rodata, data_800C/literals_func_8028C4B4_de]
       - [0xC61A4, rodata, data_800C/D_8028D108_CAFE4]
-      - [0xC61AC, rodata, data_800C/D_8044D3E8_CAFEC]
+      - [0xC61AC, rodata, data_800C/literals_Items_FindNearestPlacedObject]
       - [0xC61B0, rodata, data_800C/D_8028D28C_CAFF0]
       - [0xC61B4, rodata, data_800C/D_8044D934_CAFF4]
       - [0xC61B8, rodata, data_800C/literals_func_8044D668_de]

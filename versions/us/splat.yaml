@@ -3996,7 +3996,7 @@ segments:
       - [0xC5E18, rodata, data_800C/D_8028C568_CAFD8]
       - [0xC5E1C, rodata, data_800C/literals_func_8028C4B4_de]
       - [0xC5E24, rodata, data_800C/D_8028D108_CAFE4]
-      - [0xC5E2C, rodata, data_800C/D_8044D3E8_CAFEC]
+      - [0xC5E2C, rodata, data_800C/literals_Items_FindNearestPlacedObject]
       - [0xC5E30, rodata, data_800C/D_8028D28C_CAFF0]
       - [0xC5E34, rodata, data_800C/D_8044D934_CAFF4]
       - [0xC5E38, rodata, data_800C/literals_func_8044D668_de]

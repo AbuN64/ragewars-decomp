@@ -50,7 +50,7 @@ extern void func_80239B64_de(void *);
 
 extern void func_80285D30_de(void *);
 
-extern s32 func_8044D3E8_de(void *, Vec3Words *, s32, void *);
+extern s32 Items_FindNearestPlacedObject(void *, Vec3Words *, s32, void *);
 
 extern void func_80286AA8_de(void *, s32, s32);
 
@@ -111,7 +111,7 @@ void func_80244E58_de(void) {
             origin.w[0] = 0;
             origin.w[1] = 0;
             origin.w[2] = 0;
-            found = func_8044D3E8_de(table, &origin, target, &D_801371E8);
+            found = Items_FindNearestPlacedObject(table, &origin, target, &D_801371E8);
             D_8013B2BC.field_0 = found;
             D_801371E4.field_0 = found != 0;
             func_80286AA8_de(table, target, found != 0);

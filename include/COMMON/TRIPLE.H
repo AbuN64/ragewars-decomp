@@ -1657,7 +1657,6 @@ extern float D_800C527C;
 extern float D_800C52E8_de;
 extern float D_800C52EC_de;
 extern float D_800C52F4;
-extern float D_800C52FC_de;
 extern float D_800C5304_de;
 extern float D_800C5340;
 extern float D_800C5354_de;

@@ -4107,7 +4107,7 @@ segments:
       - [0xCAFD8, rodata, data_800C/D_blob_d7300c91fd3e822516d8]
       - [0xCAFDC, rodata, data_800C/literals_func_8028C4B4_de]
       - [0xCAFE4, rodata, data_800C/D_blob_1e469c0e4d0cbe60ac7b]
-      - [0xCAFEC, rodata, data_800C/D_blob_f59b280a88a717196373]
+      - [0xCAFEC, rodata, data_800C/literals_Items_FindNearestPlacedObject]
       - [0xCAFF0, rodata, data_800C/D_blob_ad682bde1098985f10f1]
       - [0xCAFF4, rodata, data_800C/D_blob_77963e13064c8e978272]
       - [0xCAFF8, rodata, data_800C/literals_func_8044D668_de]

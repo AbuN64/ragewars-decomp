@@ -24,7 +24,7 @@ extern struct Shape_typemap_165 *Scene_AllocResourceBlock(s32 arg0, void *handle
 extern void *Engine_GetActorDefinition(void *world, s32 id);
 
 
-extern s32 func_8044D3E8_de(World *world, void *data, s32 group, void *buf);
+extern s32 Items_FindNearestPlacedObject(World *world, void *data, s32 group, void *buf);
 
 /* Loads every still-empty cell of the level's tile grid: for each row and column whose cell
    record has no resource, fetches the cell's block through Render_LocatePackSection and Scene_RequestResource,
@@ -113,7 +113,7 @@ void func_8044C7B8_de(World *world, struct Shape_typemap_165 **handle) {
             records = node->records;
             objects = hdr->objects;
             if (world->unk1B41C == 0) {
-                world->unk1B434 = func_8044D3E8_de(world, node->records[0].vec4, world->unk1B40C, world->pad1B420);
+                world->unk1B434 = Items_FindNearestPlacedObject(world, node->records[0].vec4, world->unk1B40C, world->pad1B420);
                 if (world->unk1B434 != 0) {
                     world->unk1B41C = 1;
                 }

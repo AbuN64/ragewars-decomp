@@ -112,72 +112,52 @@ s32 func_8044D220_de(void *world, s32 kind, s32 key, Shared_Placed *out, s32 max
     return found;
 }
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
-extern void Scene_ReleaseResource(void *arg0, void *arg1);
-
-typedef struct SearchPoint {
-    f32 position[3];
-    u32 fieldC;
-    s16 type;
-    s16 field12;
-} SearchPoint;
-
-typedef struct SearchValues {
-    s32 field0;
+/* Render_GetPackSection sections of Shared_World.placedObjectTable: 0 holds one key per placed object,
+   1 the placed objects in the same order. */
+typedef struct PlacedObjectKeys {
+    s32 tag;
     s32 count;
-    s32 values[0];
-} SearchValues;
-
-typedef struct SearchPoints {
-    s32 field0;
-    s32 field4;
-    SearchPoint points[0];
-} SearchPoints;
-
-typedef struct SearchOwner {
-    u8 pad[0x90];
-    void *resource;
-} SearchOwner;
-
-extern f32 D_800C52FC_de;
-extern f32 Particle_GetPointDistance(void *a, void *b);
-
-/* NON_MATCHING: 80/80 words; only the tail differs (the target jumps over the return-0 block to load results[best]). */
-s32 func_8044D3E8_de(SearchOwner *owner, void *position, s32 type, SearchPoint *out) {
+    s32 keys[1];
+} PlacedObjectKeys;
+typedef struct PlacedObjectList {
+    s32 tag;
+    s32 count;
+    Shared_Placed objects[1];
+} PlacedObjectList;
+extern f32 Particle_GetPointDistance(f32 *a, f32 *b);
+/* Finds the placed object of the given kind nearest to position, copies it to out and returns its key; returns 0
+   when none is found or the nearest is object 0 (index 0 doubles as "none"). */
+s32 Items_FindNearestPlacedObject(Shared_World *world, f32 *position, s32 kind, Shared_Placed *out) {
     s32 i;
-    s32 best;
-    SearchValues *values;
-    SearchPoints *list;
-    s32 *results;
-    SearchPoint *points;
+    s32 nearest;
+    PlacedObjectKeys *keys;
+    PlacedObjectList *list;
+    s32 *key;
+    Shared_Placed *objects;
     s32 count;
     f32 distance;
-    f32 minimum;
-
-    values = Render_GetPackSection(owner->resource, 0);
-    count = values->count;
-    results = values->values;
-    list = Render_GetPackSection(owner->resource, 1);
-    minimum = D_800C52FC_de;
-    points = list->points;
-    best = 0;
+    f32 nearestDistance;
+    keys = Render_GetPackSection(world->placedObjectTable, 0);
+    count = keys->count;
+    key = keys->keys;
+    list = Render_GetPackSection(world->placedObjectTable, 1);
+    nearestDistance = 3.4028235e+38f;
+    objects = list->objects;
+    nearest = 0;
     for (i = 0; i < count; i++) {
-        if (points[i].type == type) {
-            distance = Particle_GetPointDistance(&points[i], position);
-            if (distance < minimum) {
-                minimum = distance;
-                best = i;
+        if (objects[i].kind == kind) {
+            distance = Particle_GetPointDistance(&objects[i].pos.x, position);
+            if (distance < nearestDistance) {
+                nearestDistance = distance;
+                nearest = i;
             }
         }
     }
-    if (best == 0) {
-        return 0;
+    if (nearest != 0) {
+        *out = objects[nearest];
     }
-    *out = points[best];
-    return results[best];
+    if (nearest != 0) {
+        return key[nearest];
+    }
+    return 0;
 }
-#else
-INCLUDE_ASM("ovl_80400000", func_8044D3E8_de);
-#endif
