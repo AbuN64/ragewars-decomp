@@ -3,6 +3,7 @@
 #include "COMMON/VIEWFLAGS.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/AIPROFILE.H"
+#include "COMMON/MENU_MATCH_GLOBALS.H"
 #include "TYPES.H"
 #include "COMMON/MENU_ABBDC_VERSIONS.H"
 #include "COMMON/ANIMATIONTRIGGERDEFINITION.H"
@@ -260,7 +261,6 @@ extern MenuAmountColumn D_800FEB10[];
 extern MenuBonusColumn D_80102B14[];
 extern Shared_FullPlayerMenuGlobals D_80140F84;
 
-#include "COMMON/MENU_MATCH_GLOBALS.H"
 
 
 
@@ -699,62 +699,67 @@ command_done:
 }
 #endif
 
-#ifdef NON_MATCHING
-#include "TYPES.H"
-#include "COMMON/SHAREDPLAYER.H"
-typedef struct DraftConfigAC66C { u8 pad[0x8F]; u8 mode; } DraftConfigAC66C;
-typedef struct DraftChoiceAC66C { u8 enabled; s8 kind; } DraftChoiceAC66C;
-typedef struct DraftPlayerAC66C {
-    u8 pad[8]; CVector3 position; u8 pad14[0xE4-0x14]; u16 id;
-    u8 padE6[0x5D8-0xE6]; DraftConfigAC66C *config; void *ui;
-    u8 pad5E0[0x602-0x5E0]; DraftChoiceAC66C choices[22];
-    u8 pad62E[0xCC0-0x62E]; s32 selection;
-} DraftPlayerAC66C;
-typedef struct DraftPickupAC66C { u8 **text; s16 pad4, sound, event, padA, index, arg1, arg2; } DraftPickupAC66C;
-extern s32 D_801468F4, D_800CE474[2];
-#include "COMMON/MENU_MATCH_GLOBALS.H"
-extern void func_802391AC_de(void *, s32, s32, s32, s32, s32, s32, s32);
-extern s32 func_8025DE54_de(s16, CVector3, s32, s32);
-extern void func_80222BE8_de(void *, s32, s32);
-/* 7 aligned edits of 172 words (branch offsets; the kind store is merged after the 3/7 select); behave same 10/10. */
-static inline void announce(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)
+/* A D_800D31D0 powerup row (0x18 bytes, three rows): the item entry head shared with the other item tables,
+   the action slot the powerup fills, the ammunition it grants and its pickup handler. */
+typedef struct PowerupEntry {
+    u8 **text; /* 0x0: pickup message, one per language */
+    s16 id; /* 0x4: item id looked up by func_802AB6EC_de */
+    s16 sound; /* 0x6 */
+    s16 event; /* 0x8 */
+    s16 reservedA; /* 0xA */
+    s16 slot; /* 0xC: row in Player.actions */
+    s16 ammoSlot; /* 0xE: Player.ammo index for func_80222BE8_de */
+    s16 ammoCount; /* 0x10 */
+    s32 (*handle)(struct Player *player, struct PowerupEntry *entry); /* 0x14 */
+} PowerupEntry;
+/* Team ids that may always pick up items (func_802AB400_de reads the same pair). */
+extern s32 D_800CE474[2];
+extern void func_80222BE8_de(void *, s16, s16);
+/* Pickup feedback: flash the player's view, post the entry's message in the current language,
+   play its sound at the player and raise its event. */
+static inline void announcePowerup(struct Player *player, PowerupEntry *entry)
 {
-    u8 **text = pickup->text;
-    s32 sound = pickup->sound;
-    s32 event = pickup->event;
-    if (player->ui) {
-        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->ui, *text);
+    u8 **text = entry->text;
+    s32 sound = entry->sound;
+    s32 event = entry->event;
+    if (player->owner) {
+        func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, text[MENU_LANGUAGE]);
     }
-    if (sound) func_8025DE54_de(sound, player->position, 0, -1);
+    if (sound) func_8025DE54_de(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
 }
-s32 func_802AC66C_de(DraftPlayerAC66C *player, DraftPickupAC66C *pickup)
+/* Powerup pickup handler (D_800D31D0 rows). A powerup the player already holds, or any pickup in a tag match by a
+   player not on one of the D_800CE474 teams, only gives the pickup feedback. Otherwise the powerup takes weapon key
+   3 or 7, whichever no action slot uses yet (none free: refused, returns 0); outside tag matches it becomes the
+   pending weapon. Then the feedback plays and the entry's ammunition is added. Returns 1 when taken. */
+s32 func_802AC66C_de(struct Player *player, PowerupEntry *entry)
 {
-    s32 free3 = 1, free7 = 1, i;
-    s32 skip = 0;
-    if (player->choices[pickup->index].kind != -1 &&
-        (!player->config->mode || !D_801468F4 || player->id == D_800CE474[0] || player->id == D_800CE474[1])) {
-        announce(player, pickup);
+    s32 key3Free = 1, key7Free = 1, i;
+    s32 skipAmmo = 0;
+    if (player->actions[entry->slot][1] != -1 &&
+        (!player->profile->bonus || !D_80145088.modes.tag || player->objectId == D_800CE474[0] ||
+         player->objectId == D_800CE474[1])) {
+        announcePowerup(player, entry);
     } else {
         for (i = 0; i < 22; i++) {
-            if (player->choices[i].kind == 3) free3 = 0;
-            else if (player->choices[i].kind == 7) free7 = 0;
+            if (player->actions[i][1] == 3) key3Free = 0;
+            else if (player->actions[i][1] == 7) key7Free = 0;
         }
-        player->choices[pickup->index].enabled = 1;
-        if (!free3 && !free7) return 0;
-        if (!player->config->mode || !D_801468F4) {
-            player->selection = free3 ? 3 : 7;
-            player->choices[pickup->index].kind = free3 ? 3 : 7;
+        player->actions[entry->slot][0] = 1;
+        if (key3Free || key7Free) {
+            if (!player->profile->bonus || !D_80145088.modes.tag) {
+                player->pendingWeapon = key3Free ? 3 : 7;
+                player->actions[entry->slot][1] = key3Free ? 3 : 7;
+            }
+        } else {
+            return 0;
         }
-        announce(player, pickup);
-        if (!skip) func_80222BE8_de(player, pickup->arg1, pickup->arg2);
+        announcePowerup(player, entry);
+        if (!skipAmmo) func_80222BE8_de(player, entry->ammoSlot, entry->ammoCount);
     }
     return 1;
 }
-#else
-INCLUDE_ASM("span_1000", func_802AC66C_de);
-#endif
 
 #if defined(VERSION_EU_X)
 #ifdef NON_MATCHING
@@ -764,23 +769,23 @@ INCLUDE_ASM("span_1000", func_802AC66C_de);
 extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
 extern char D_002AD44C_eu[], D_002AD4FC_eu[];
 extern void func_802A6FB8_de();
-s32 func_802ACB98_eu_x(DraftPlayerAC66C *player, DraftPickupAC66C *pickup, void *obj) {
+s32 func_802ACB98_eu_x(struct Player *player, PowerupEntry *pickup, void *obj) {
     u8 **text = pickup->text;
     s16 sound = pickup->sound;
     s16 event = pickup->event;
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
-    switch ((s16)(pickup->pad4 - 0x708)) {
+    switch ((s16)(pickup->id - 0x708)) {
     case 0: *(f32 *)((u8 *)player + 0x670) = rodata_func_802ACB58_eu_800C6578; break;
     case 1: *(f32 *)((u8 *)player + 0x674) = D_auto_800C657C; break;
     case 2: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->ui, ((char **)text)[D_80152789]);
+        func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
     }
-    if (sound) func_8025DE54_de(sound, player->position, 0, -1);
+    if (sound) func_8025DE54_de(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
     return 1;
 }
@@ -797,23 +802,23 @@ INCLUDE_ASM("span_1000", func_802ACB98_eu_x);
 extern f32 rodata_func_802ACB58_eu_800C6578, D_auto_800C657C;
 extern char D_002AD44C_eu[], D_002AD4FC_eu[];
 extern void func_802A6FB8_de();
-s32 func_802ACB58_eu(DraftPlayerAC66C *player, DraftPickupAC66C *pickup, void *obj) {
+s32 func_802ACB58_eu(struct Player *player, PowerupEntry *pickup, void *obj) {
     u8 **text = pickup->text;
     s16 sound = pickup->sound;
     s16 event = pickup->event;
     f32 *data = (f32 *)(*(u8 **)((u8 *)obj + 0x18) + 0x14);
 
-    switch ((s16)(pickup->pad4 - 0x708)) {
+    switch ((s16)(pickup->id - 0x708)) {
     case 0: *(f32 *)((u8 *)player + 0x670) = rodata_func_802ACB58_eu_800C6578; break;
     case 1: *(f32 *)((u8 *)player + 0x674) = D_auto_800C657C; break;
     case 2: *(f32 *)((u8 *)player + 0x678) += data[3]; break;
     case 3: func_802A6FB8_de((u8 *)player + 0xD40, 1, 0, 0x7FD, 0, 0, 0, D_002AD44C_eu, D_002AD4FC_eu); break;
     }
     if (*(void **)((u8 *)player + 0x5DC) != 0) {
-        func_802391AC_de(player->ui, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
-        if (text) Camera_PostScreenMessage(&D_80145088, player->ui, ((char **)text)[D_80152789]);
+        func_802391AC_de(player->owner, 0x80, 0x32, 0x32, 0x4B, 0, 0, 2);
+        if (text) Camera_PostScreenMessage(&D_80145088, player->owner, ((char **)text)[D_80152789]);
     }
-    if (sound) func_8025DE54_de(sound, player->position, 0, -1);
+    if (sound) func_8025DE54_de(sound, player->pos, 0, -1);
     if (event) func_8025E11C_de(event);
     return 1;
 }
