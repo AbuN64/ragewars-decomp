@@ -4,7 +4,6 @@
 #include "COMMON/ACTORRECAT5E0.H"
 #include "COMMON/SHAREDPLAYER.H"
 #include "COMMON/ITEMRECAT20V1.H"
-extern float D_800C4EC8_de;
 
 struct func_80285C48_S2;
 typedef struct func_80285C48_S2 func_80285C48_S2;

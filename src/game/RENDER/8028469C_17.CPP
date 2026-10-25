@@ -11,8 +11,6 @@
 #include "COMMON/BALLISTICPARAMS.H"
 #include "RENDER/8028469C_17.H"
 
-#ifdef NON_MATCHING
-#include "RENDER/POOLRECAT28V1.H"
 #include "COMMON/TRIPLE.H"
 #include "COMMON/UNUSED.H"
 #include "sdk/os.h"
@@ -21,26 +19,26 @@
 #include "ENGINE/SCENE_12.H"
 
 
-static inline f32 distanceToNode(CVector3 from, func_80285880_S1 *node) {
+#if !defined(VERSION_US)
+static inline f32 distanceToNode(func_80285880_S1 *node, CVector3 from) {
     f32 x = from.x - node->position.x;
     f32 y = from.y - node->position.y;
     f32 z = from.z - node->position.z;
     return func_802B72B0_de(x * x + y * y + z * z);
 }
 /* Sums the strength of every source in the pool at the given position (inverse-distance falloff scaled by each
- * source's two curves), clamped to 0..D_800C4EC8_de; the pool is read with interrupts disabled.
- * literal 1.0f consts hoist like the ROM (87.9%); remaining: position copy sits at sp+0x10 not +0x14, clamp tail reg order. */
+ * source's two curves), clamped to 0..1; the pool is read with interrupts disabled. */
 f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     f32 value = pool->baseLevel;
     s32 mask = func_802BCF30_de();
     func_80285880_S1 *node;
-    f32 x, y, z, distance, amount, first, second, limit, result;
+    f32 distance, amount, first, second, limit;
     if (D_8014288C == 1 || func_80245798_de() != 0) {
         value = 0.0f;
     } else {
         node = pool->unk14.head;
         while (node != 0) {
-            distance = distanceToNode(position, node);
+            distance = distanceToNode(node, position);
             if (distance == 0.0f || node->unk18 == 0.0f) {
                 amount = 1.0f;
             } else if (distance < node->unk18) {
@@ -57,15 +55,13 @@ f32 Render_GetSpatialEffectLevel(func_80285D00_S1 *pool, CVector3 position) {
     }
     __osRestoreInt(mask);
     limit = 1.0f;
-    return (limit < value) ? limit : ((value < 0.0f) ? 0.0f : value);
+    if (!(limit < value) && value < 0.0f) {
+        return 0.0f;
+    }
+    return limit < value ? limit : value;
 }
 #else
-#if !(defined(VERSION_US))
-INCLUDE_ASM("span_1000", Render_GetSpatialEffectLevel);
-#endif
-#if defined(VERSION_US)
 INCLUDE_ASM("span_1000", func_80285634);
-#endif
 #endif
 
 #include "sdk/os.h"

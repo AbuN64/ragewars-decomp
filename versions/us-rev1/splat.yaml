@@ -4012,7 +4012,7 @@ segments:
       - [0xCAB94, data, data_800C/D_blob_b1d2fc088137f44cf321]
       - [0xCABA0, rodata, data_800C/D_blob_069ab1292059e03559c0]
       - [0xCABAC, data, data_800C/D_blob_2dcaa653845d51211766]
-      - [0xCABB0, rodata, data_800C/D_blob_dbff403f762e84a95fc2]
+      - [0xCABB0, rodata, data_800C/literals_Render_GetSpatialEffectLevel]
       - [0xCABBC, rodata, data_800C/D_blob_4faf23a8416908d6583f]
       - [0xCABC4, data, data_800C/D_blob_9d915f563af8a1ec04bd]
       - [0xCABD0, rodata, data_800C/D_auto_src_rw_text_8044B600_CABD0_us_rev1]

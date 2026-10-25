@@ -2515,3 +2515,4 @@ literals_Render_UpdateTriggeredMotion = 0x800C1AF0; // rom:0xC26F0 size:0x20
 literals_InvertMatrix = 0x800C5B04; // rom:0xC6704 size:0x8
 literals_Nav_EvaluateAttackTarget = 0x800C1F50; // rom:0xC2B50 size:0x34
 literals_Pak_DrawMenuPanel = 0x800DE4D4; // rom:0xDF0D4 size:0x18
+literals_Render_GetSpatialEffectLevel = 0x800C4EC0; // rom:0xC5AC0 size:0xC

@@ -3907,7 +3907,7 @@ segments:
       - [0xC5AA4, data, data_800C/rodata_unresolved_800C4EA4]
       - [0xC5AB0, rodata, data_800C/D_80285630_CABA0]
       - [0xC5ABC, data, data_800C/rodata_unresolved_800C4EBC]
-      - [0xC5AC0, rodata, data_800C/D_802856E0_CABB0]
+      - [0xC5AC0, rodata, data_800C/literals_Render_GetSpatialEffectLevel]
       - [0xC5ACC, rodata, data_800C/D_802859D0_CABBC]
       - [0xC5AD4, data, data_800C/rodata_unresolved_800C4ED4]
       - [0xC5AE0, rodata, data_800C/D_8044B600_CABD0]
