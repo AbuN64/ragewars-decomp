@@ -4,14 +4,12 @@
 #include "COMMON/BOX_CONTACT.H"
 #include "COMMON/WORLD.H"
 #include "COMMON/LEVEL_ACTOR.H"
-typedef void (*ContactEffectHandler)(void *, void *, s32, CVector3, ContactEffectStyle);
-typedef struct ContactEffectEntry { ContactEffectHandler handler; u32 flags; } ContactEffectEntry;
+#include "SYSTEM_3/CONTACT_EFFECT.H"
 typedef struct ContactNode ContactNode;
 struct ContactNode {
     u8 pad0[0x16E0];
     ContactNode *next; /* 0x16E0 */
 };
-extern ContactEffectEntry D_800CC130[];
 extern ContactNode *D_80145060;
 static inline void dispatchEffect(void *object, void *source, s32 effect, CVector3 position, ContactEffectStyle style) {
     if (D_800CC130[effect].handler != 0) {

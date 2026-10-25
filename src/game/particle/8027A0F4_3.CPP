@@ -8,6 +8,7 @@
 #include "FX_2/80271B18.H"
 #include "particle/80271B18_3.H"
 #include "FX_2/PARTICLE_ATTACHMENT.H"
+#include "SYSTEM_3/CONTACT_EFFECT.H"
 
 /* Updates a particle for one frame: halves the frame step for particles owned by a slowed object, measures its bounding
  * box, kills it or bounces it off its target when its type's rule says so (the German cartridge has a gentler rule
@@ -1241,9 +1242,7 @@ INCLUDE_ASM("span_1000", func_8027CC20_de);
 #endif
 
 typedef struct ImpactContext { CVector3 position; char padC[0xE8 - 0xC]; CVector3 normal; } ImpactContext;
-typedef struct ImpactKind { u32 flags; s32 unused; } ImpactKind;
 extern ImpactContext D_801001F8;
-extern ImpactKind D_800CC134[];
 extern u8 D_801462E5;
 extern char D_801379C0, D_8013B1A8;
 extern s32 func_80216108_de(void *);
@@ -1352,11 +1351,11 @@ void Particle_HitTarget(void *particle) {
         if (owner->unk170&2) enabled=0;
     }
     if (effect!=0xffff) {
-        if (D_800CC134[effect].flags&4) {
+        if (D_800CC130[effect].flags&4) {
             if (actor->particle.inst.type==0x56) primary.control.lower=primary.control.lower*actor->scale;
         }
         other=source;
-        if (D_800CC134[effect].flags&2) other=actor;
+        if (D_800CC130[effect].flags&2) other=actor;
         func_80265E10_de(other, actor, effect, -1, D_801001F8.position, primary.words);
     }
     if (action!=4) {
@@ -1370,9 +1369,9 @@ void Particle_HitTarget(void *particle) {
             extraEffect=extraActions->effects[4];
             if (extraEffect!=0xffff) {
                 secondary.words=extraActions->parameters[4];
-                if (D_800CC134[extraEffect].flags&4) {
+                if (D_800CC130[extraEffect].flags&4) {
                     other=source;
-                    if (D_800CC134[extraEffect].flags&2) other=actor;
+                    if (D_800CC130[extraEffect].flags&2) other=actor;
                     func_80265E10_de(other, actor, extraEffect, -1, D_801001F8.position, secondary.words);
                 }
             }
@@ -1393,7 +1392,7 @@ void Particle_HitTarget(void *particle) {
                 }
             }
         }
-        if (mode==1 || (effect!=0xffff && D_800CC134[effect].flags&1)) {
+        if (mode==1 || (effect!=0xffff && D_800CC130[effect].flags&1)) {
             func_80284570_de(&D_8011D8D0, actor);
             func_80284434_de(actor);
         }
@@ -1493,7 +1492,7 @@ void Particle_ApplyImpactResponse(Shared_Particle *particle) {
         sound = desc->events->sounds[hit];
         if (effect != 0xFFFF) {
             eventSource = target;
-            if (D_800CC134[effect].flags & 2) {
+            if (D_800CC130[effect].flags & 2) {
                 eventSource = particle;
             }
             func_80265E10_de(eventSource, particle, effect, -1, D_801001F8.position, params);

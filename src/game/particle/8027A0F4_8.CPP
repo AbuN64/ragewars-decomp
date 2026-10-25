@@ -10,6 +10,7 @@
 #include "SYSTEM/80255C40_7.H"
 #include "particle/80271B18_3.H"
 #include "RENDER_4/8028FD2C_6.H"
+#include "SYSTEM_3/CONTACT_EFFECT.H"
 #include "particle/8027A0F4_4.H"
 
 /* Spawns the effects that template block 2 of the system lists for a kind: for each template in the kind's range it filters by player mask, existing owner effects, anchor distance, mode, team flags and a percent chance, builds a spawn matrix (source matrix, mirror, translation or rotation), then for a random count allocates effects, fills their timing, spread, colour, render and direction fields from the template's packed floats, links them into their group, aims shots at the held target for kinds 0x2D and 0x4F, and plays their sound. Returns the number spawned. */
@@ -566,7 +567,7 @@ s32 func_802800C0_de(EffectSystem *sys, EffectActor *source, EffectActor *owner,
                     }
                     effect->flags |= 0x1000000;
                 }
-                if ((D_800CC134[entry->model->unk94].offset & 1) || kind == 0x68) {
+                if ((D_800CC130[entry->model->unk94].flags & 1) || kind == 0x68) {
                     render->flags |= 0x20000;
                 }
                 vel = &effect->velocity;
