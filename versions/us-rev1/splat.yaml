@@ -3361,7 +3361,7 @@ segments:
       - [0xC7A90, rodata, data_800C/literals_func_8020D220_de]
       - [0xC7A94, data, data_800C/D_d1_4e5bebc5f87cc15c]
       - [0xC7AA0, rodata, data_800C/literals_func_8020D4AC_de]
-      - [0xC7AA4, rodata, data_800C/D_blob_d6926af3944f8f0280f7]
+      - [0xC7AA4, rodata, data_800C/literals_Nav_InsertPickupRouteNode]
       - [0xC7AA8, rodata, data_800C/D_blob_db0a814bd02b424ea5bd]
       - [0xC7AAC, data, data_800C/D_blob_f4ee60b89a1daf3219e9]
       - [0xC7AB0, rodata, data_800C/literals_func_8020DDF4_eu]

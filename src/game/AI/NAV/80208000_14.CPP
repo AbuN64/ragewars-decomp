@@ -132,7 +132,7 @@ s32 Nav_InsertPickupRouteNode(Selection_func_8020D4AC_de *sel) {
         avg.z += sel->dirs[i].z;
     }
     count = sel->objectCount;
-    inv = D_800C1DB4_de / (f32)count;
+    inv = 1.0f / (f32)count;
     avg.x = avg.x * inv;
     avg.y = avg.y * inv;
     avg.z = avg.z * inv;

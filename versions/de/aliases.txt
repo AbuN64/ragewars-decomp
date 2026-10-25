@@ -2517,3 +2517,4 @@ literals_Nav_EvaluateAttackTarget = 0x800C1F50; // rom:0xC2B50 size:0x34
 literals_Pak_DrawMenuPanel = 0x800DE4D4; // rom:0xDF0D4 size:0x18
 literals_Render_GetSpatialEffectLevel = 0x800C4EC0; // rom:0xC5AC0 size:0xC
 literals_DispatchScreenRangeEvent = 0x800C55E0; // rom:0xC61E0 size:0x40
+literals_Nav_InsertPickupRouteNode = 0x800C1DB4; // rom:0xC29B4 size:0x4
