@@ -6,7 +6,7 @@
 #include "sdk/PFS/80443868_7.H"
 
 /* Updates display flags and activates the selected resource. */
-s32 func_8022A5A0_de(s32 *, s32);
+s32 Weapons_GetPlayerIndex(s32 *, s32);
 
  /* extern */
 
@@ -22,7 +22,7 @@ extern s32 D_8015375C[];
 /* Updates object display flags and selects the requested resource. */
 
 
-s32 func_8022A5A0_de(int *, s32);
+s32 Weapons_GetPlayerIndex(int *, s32);
 
                                /* extern */
 
@@ -61,7 +61,7 @@ void func_80443CD4_de(ArgRecAt1C *arg0) {
     }
     temp_a1 = arg0->unk1C;
     if (temp_a1 != 0) {
-        var_s0 = func_8022A5A0_de((s32 *)&D_80145040, temp_a1);
+        var_s0 = Weapons_GetPlayerIndex((s32 *)&D_80145040, temp_a1);
     }
     func_80264770_de(var_s0);
     func_80404E28_de(var_s0);
@@ -84,7 +84,7 @@ void func_80443DD0_de(ArgRecAt1C *arg0) {
     D_800E28C0[0] = 0;
     var_v0 = 0;
     if (temp_a1 != 0) {
-        var_v0 = func_8022A5A0_de((s32 *)&D_80145040, temp_a1);
+        var_v0 = Weapons_GetPlayerIndex((s32 *)&D_80145040, temp_a1);
     }
     func_80264770_de(var_v0);
     temp_v1 = arg0->unkC;

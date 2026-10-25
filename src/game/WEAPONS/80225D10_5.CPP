@@ -23,7 +23,7 @@
 
 
 
-extern int func_8022A5A0_de(Root *,ObjRecAt16E0V1 *);
+extern int Weapons_GetPlayerIndex(Root *,ObjRecAt16E0V1 *);
 
 /* Reports whether a team's points reached the point target (none when it is 0); in a trial it records
    in humanWon whether that team is the human side's and, when it is not, keeps looking. */
@@ -147,7 +147,7 @@ s32 func_802281F0_de(Root *root) {
  node=root->unk20; state=initial;
  if(node) { settings=(unsigned char *)state-0x5D8; }
  for(;node;node=node->unk16E0) {
-  skip=func_8022A5A0_de(root,node);
+  skip=Weapons_GetPlayerIndex(root,node);
   sum=0;
   for(i=0;i<8;i++) {
    if(i!=skip) {

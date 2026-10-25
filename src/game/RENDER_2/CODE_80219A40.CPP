@@ -26,7 +26,7 @@
 void * Nav_FindSearchNode(char *, s32);
 void func_80229814_de(void *, f32);
 void func_80229FA0_de(void *, void *);
-s32 func_8022A5A0_de(void *, unsigned int);
+s32 Weapons_GetPlayerIndex(void *, unsigned int);
 s32 func_8022AC00_de(void *);
 int func_8022B178_de(void *);
 int func_80245784_de(void);
@@ -310,14 +310,14 @@ block_88:
                         temp_v1_7 = (void *)temp_s1->unk5D8;
                         if (temp_v1_7->counted == 0) {
                             temp_v1_7->counted = 1U;
-                            temp_s5 = func_8022A5A0_de(&D_80145040, (u32) var_s2);
+                            temp_s5 = Weapons_GetPlayerIndex(&D_80145040, (u32) var_s2);
                             temp_a0_4 = (void *)temp_s1->unk5D8;
                             if ((temp_a0_4->unk8F == 1) && ((((struct Shared_ReactionMatchState *)(&D_80145040))->unk18B4) != 0)) {
                                 temp_a0_4->kills_special[temp_s5]++;
                             } else {
                                 temp_s1->unk5D8->kills_normal[temp_s5]++;
                             }
-                            temp_s3 = func_8022A5A0_de(&D_80145040, (u32) temp_s1);
+                            temp_s3 = Weapons_GetPlayerIndex(&D_80145040, (u32) temp_s1);
                             if ((temp_s1->unk5D8->unk8F == 1) && ((((struct Shared_ReactionMatchState *)(&D_80145040))->unk18B4) != 0)) {
                                 var_s2->unk5D8->deaths_special[temp_s3]++;
                             } else {

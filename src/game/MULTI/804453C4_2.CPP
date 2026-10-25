@@ -20,7 +20,7 @@ extern Spinner D_800E63C0[];
 
 
 
-extern s32 func_8022A5A0_de(char *, s32);
+extern s32 Weapons_GetPlayerIndex(char *, s32);
 extern func_802077F4_S2 *func_80442DDC_de(void *, s32);
 
 extern void func_8044208C_de(void *, ItemRecAt20V1 *, void *, Style_func_80445BC0_de *);
@@ -32,7 +32,7 @@ void func_80445BC0_de(void *menu, ItemRecAt20V1 *item, void *third, Style_func_8
     s32 x;
     unsigned int bits;
 
-    i = func_8022A5A0_de(&D_80145040, style->id);
+    i = Weapons_GetPlayerIndex(&D_80145040, style->id);
     if (D_800E63C0[i].timer <= *(&D_800E2810 + 1)) {
         width = func_80442DDC_de(menu, 0)->unk4 * (f32)D_800E28D0 * D_800DE7C8_de;
         x = (f32)item->x + (f32)D_800E63C0[i].value * width;

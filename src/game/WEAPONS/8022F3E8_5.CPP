@@ -102,7 +102,7 @@ static inline s32 can_fire(char *player) {
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
         if (((AttackTriggerPlayer *)(player))->unk5DC != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, ((AttackTriggerPlayer *)(player))->unk5DC, D_800D30BC[0], Weapons_GetPlayerIndex(&D_80145040, player),
                           D_800C2EE4_de);
         }
     }
@@ -163,7 +163,7 @@ static inline s32 can_toggle_mode(Player *player) {
         func_8025DF34_de(0xD4D);
         if (player->owner) {
             Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789),
-                                             func_8022A5A0_de(&D_80145040, player), 1.0f);
+                                             Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
         }
     }
     return allowed;
@@ -192,7 +192,7 @@ void Weapons_UpdateAlternateFire(void *actor, void *attack) {
                 if (player->owner) {
                     Camera_PostTargetedScreenMessage((char *)&D_80145040 + 0x48, player->owner,
                                                      RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.game.language),
-                                                     func_8022A5A0_de(&D_80145040, player), 1.0f);
+                                                     Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
                 ((AttackTriggerAction *)attack)->unk13C = 1;
             } else if (info->flags & 0x20) {

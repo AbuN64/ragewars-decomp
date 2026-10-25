@@ -185,7 +185,7 @@ static inline s32 can_fire(Player *player) {
     if (ammo == 0) {
         func_8025DF34_de(0xD4D);
         if (player->owner != 0) {
-            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), func_8022A5A0_de(&D_80145040, player),
+            Camera_PostTargetedScreenMessage(&D_80145088, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80152789), Weapons_GetPlayerIndex(&D_80145040, player),
                           1.0f);
         }
     }
@@ -216,7 +216,7 @@ void func_80231664_de(Shared_Actor *actor, WeaponFireState *fireState) {
                 func_8025DF34_de(0xD4D);
                 if (player->owner != 0) {
                     Camera_PostTargetedScreenMessage(&D_80145040.object, player->owner, RW_LOCALIZED_TEXT(D_800D30BC[0], D_800E0D44, D_800DCC68, D_80145040.object.language),
-                                  func_8022A5A0_de(&D_80145040, player), 1.0f);
+                                  Weapons_GetPlayerIndex(&D_80145040, player), 1.0f);
                 }
                 fireState->mode = single;
                 goto spin;

@@ -78,7 +78,7 @@ extern Shared_MenuData D_80145040;
 extern char *D_800E0D44[];
 extern char *D_800DCC68[];
 extern s32 func_8022F55C_de(Profile *, s32);
-extern s32 func_8022A5A0_de(Shared_MenuData *, PlayerRecAt1450V1 *);
+extern s32 Weapons_GetPlayerIndex(Shared_MenuData *, PlayerRecAt1450V1 *);
 extern void Camera_PostTargetedScreenMessage(Shared_MenuObject *, void *, char *, s32, f32);
 
 s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
@@ -98,7 +98,7 @@ s32 func_80232790_eu(PlayerRecAt1450V1 *pThis) {
     if (result == 0) {
         func_8025DF34_de(0xD4D);
         if (pThis->hud != 0) {
-            s32 player = func_8022A5A0_de(&D_80145040, pThis);
+            s32 player = Weapons_GetPlayerIndex(&D_80145040, pThis);
             Camera_PostTargetedScreenMessage(&D_80145040.object, pThis->hud,
 
 #if defined(VERSION_EU_X)

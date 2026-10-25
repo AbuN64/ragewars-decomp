@@ -32,6 +32,6 @@ extern char D_800EED80[];
 #else
 extern char D_800DE700[];
 #endif
-extern s32 func_8022A5A0_de(void *, void *);
+extern s32 Weapons_GetPlayerIndex(void *, void *);
 extern s32 func_80441FE8_de(Shared_DebugWidget *);
 #endif

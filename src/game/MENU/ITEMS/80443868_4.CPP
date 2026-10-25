@@ -16,7 +16,7 @@ extern char D_800EED80[];
 
 s32 func_80443A24_de(LayeredText *field, struct MenuRules *holder) {
     Shared_MenuData *players = &D_80145040;
-    s32 player = func_8022A5A0_de(players, holder->locked);
+    s32 player = Weapons_GetPlayerIndex(players, holder->locked);
     s32 value = D_801522DC[player * 75];
     char *text = (char *)field->text[players->game.language];
     func_802658E4_de(text + (func_80441FE8_de(field) - 4), D_800EED80, value);
@@ -31,11 +31,11 @@ s32 func_80443A24_de(LayeredText *field, struct MenuRules *holder) {
 
 extern char D_80145040[];
 extern char D_800DE700[];
-extern s32 func_8022A5A0_de(void *, unsigned int);
+extern s32 Weapons_GetPlayerIndex(void *, unsigned int);
 extern s32 func_80441FE8_de(LayeredText *);
 
 s32 func_80443A24_de(LayeredText *field, struct Holder *holder) {
-    s32 player = func_8022A5A0_de(D_80145040, (u32)holder->owner);
+    s32 player = Weapons_GetPlayerIndex(D_80145040, (u32)holder->owner);
     s32 value = D_801422DC[player * 75];
     char *text = (char *)*field->text;
 

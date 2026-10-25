@@ -13,13 +13,13 @@
 
 
 extern char D_80145040[];
-extern void func_8022A5A0_de(void *, struct OwnerRecAt698 *);
+extern void Weapons_GetPlayerIndex(void *, struct OwnerRecAt698 *);
 extern void Pak_OpenDialog(void *, void *, struct OwnerRecAt698 *, s32, s32);
 
 s32 func_80443694_de(void *unused, struct HolderRecAt1CV1 *holder) {
     struct OwnerRecAt698 *owner = holder->owner;
 
-    func_8022A5A0_de(D_80145040, owner);
+    Weapons_GetPlayerIndex(D_80145040, owner);
     func_804097E8_de();
     Pak_OpenDialog(D_80145040 + 0x5DC, D_0044E48C, owner, owner->value, 0);
     return 1;

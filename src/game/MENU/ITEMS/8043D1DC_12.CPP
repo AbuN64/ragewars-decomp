@@ -14,7 +14,7 @@ void func_804456E0_de(void) {
         "lw         $a1, 0x1C($s0)\n"
         "lui        $a0, %hi(D_80145040)\n"
         "addiu      $a0, $a0, %lo(D_80145040)\n"
-        "jal        func_8022A5A0_de\n"
+        "jal        Weapons_GetPlayerIndex\n"
         "nop\n"
         "addu       $t3, $v0, $zero\n"
         "addiu      $v0, $zero, 0x1\n"
