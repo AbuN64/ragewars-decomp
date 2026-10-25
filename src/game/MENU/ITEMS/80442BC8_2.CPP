@@ -3,7 +3,7 @@
 #include "COMMON/UNUSED.H"
 #include "MENU/80442BC8.H"
 
-f32 func_80442EC0_de(ItemRecAt14 *arg0) {
+f32 Items_ReadBoundValue(ItemRecAt14 *arg0) {
  Binding *v = arg0->binding;
  void *p = v->storage();
  switch(v->type) {

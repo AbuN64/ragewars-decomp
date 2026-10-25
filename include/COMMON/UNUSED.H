@@ -3249,8 +3249,8 @@ typedef struct ObjCode8027A0F4 ObjCode8027A0F4;
 struct ObjRecAt174;
 typedef struct ObjRecAt174 ObjRecAt174;
 
-struct Obj_func_80442EC0_de;
-typedef struct Obj_func_80442EC0_de Obj_func_80442EC0_de;
+struct ObjItemsReadBoundValue;
+typedef struct ObjItemsReadBoundValue ObjItemsReadBoundValue;
 
 struct ObjectLinks134;
 typedef struct ObjectLinks134 ObjectLinks134;
@@ -5903,9 +5903,9 @@ struct Value {
     char gap[16];
     void *(*get)(void);
 };
-struct Obj_func_80442EC0_de;
+struct ObjItemsReadBoundValue;
 struct Value;
-struct Obj_func_80442EC0_de {
+struct ObjItemsReadBoundValue {
     char pad[20];
     struct Value *value;
 };

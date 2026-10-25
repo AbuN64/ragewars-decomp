@@ -39,7 +39,7 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
 extern void **Scene_AllocateResource(s32, s32, s32, char *);
 extern char D_800DE4EC_de[];
 
-void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
+void *Items_CreateMenu(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 a, s32 b, s32 c, s32 d) {
     s32 size = list->count * 40 + 0x1D8;
     s32 i;
     void **block;
@@ -78,7 +78,7 @@ void *func_8044322C_de(struct func_8025E5B0_S1 *owner, struct Dialog *list, s32 
 
 
 
-void func_8044334C_de(void *list, struct ItemRecAt20V2 *item) {
+void Items_DestroyMenu(void *list, struct ItemRecAt20V2 *item) {
     struct StateRecAtBCV2 *state;
 
     if (item->handlers->callback != 0) {

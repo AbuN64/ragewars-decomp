@@ -6,7 +6,7 @@
 
 /* Writes a numeric menu value through its bound storage callback using the selected scalar type. */
 
-void func_80442FB0_de(ItemRecAt14 *item,float value) {
+void Items_WriteBoundValue(ItemRecAt14 *item,float value) {
  float *storage;
  struct Binding *binding;
  unsigned int *word;
