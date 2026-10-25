@@ -21,7 +21,7 @@ void func_804431E4_de(struct ObjectRecAt20 *object) {
     struct StateRecAtBCV2 *state;
 
     if (object->handlers->callback != 0) {
-        object->handlers->callback();
+        ((void (*)(struct ObjectRecAt20 *))object->handlers->callback)(object);
     }
     state = object->state;
     state->a = 0;

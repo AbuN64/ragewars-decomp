@@ -18,6 +18,6 @@ void func_802390F4_de(void *gameplayCamera, s16 arg1) {
     ((GameplayCamera *)gameplayCamera)->stateCounter = 0;
     fn = D_800CB380_de[((GameplayCamera *)gameplayCamera)->mode][0];
     if (fn != 0) {
-        fn();
+        ((void (*)(void *))fn)(gameplayCamera);
     }
 }
