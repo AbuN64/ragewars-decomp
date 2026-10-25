@@ -162,11 +162,11 @@ void Particle_Attach(Shared_Particle *particle, CVector3 *outPosition, CVector3 
 #include "COMMON/OBJECTLINKS14C.H"
 #include "COMMON/MATH_HELPERS.H"
 #include "particle/DEPTH_SCALE.H"
+#include "ENGINE/SCENE_11.H"
 
 void Particle_CrossVectors(CVector3 *out, CVector3 *a, CVector3 *b);
 void Particle_MatrixFromEulerXYZ(f32 *m, f32 x, f32 y, f32 z);
 void Particle_IdentityMatrix(void *matrix);
-void Engine_SampleWorldLighting(Shared_World *world, CVector3 *pos, struct Shared_ParticleLighting *out);
 void BuildRollMatrix(void *matrix, f32 angle);
 void TranslateMatrix(void *matrix, f32 x, f32 y, f32 z);
 f32 Nav_GetTrianglePlaneHeight(void *node, f32 x, f32 z);
